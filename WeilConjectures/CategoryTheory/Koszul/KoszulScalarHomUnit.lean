@@ -71,7 +71,6 @@ import all WeilConjectures.Algebra.Homology.Monoidal.Dual
 /-! # KoszulScalarHomUnit for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-scalar-hom-unit).
 -/
 
 @[expose] public noncomputable section
@@ -191,8 +190,7 @@ private theorem homUnitScalar (φ : R ⟶ B) (N : ringedSiteComplex B) :
     ← Functor.map_comp, Iso.inv_hom_id, Functor.map_id, Iso.inv_hom_id]
 
 /-- Compose a projection compatibility square with a normalized Hom-unit square.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-hom-unit). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem homUnitCompositionCore
     {D : Type*} [Category D] {D' : Type*} [Category D'] (F : D ⥤ D')
     {X U V W Z : D} {T Y : D'}
@@ -269,8 +267,7 @@ on sections the scalar-extension unit generator is exactly multiplication. Inver
 to obtain compatibility of inverse Hom-unit evaluations.
 Proof step 3: Naturality of theta with the Koszul projection and the assumed projection
 compatibility give the Hom diagram unit identity. Cancel the R Koszul evaluation isomorphism and
-substitute steps 1 and 2 to get the tensor diagram coaugmentation identity.
-(blueprint: lem-f5-koszul-scalar-hom-unit). -/
+substitute steps 1 and 2 to get the tensor diagram coaugmentation identity. -/
 private theorem tensorDiagramComparison_unit (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (e : ringedKoszulDiagram R r a ⋙

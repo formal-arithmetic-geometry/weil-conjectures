@@ -14,7 +14,6 @@ public import WeilConjectures.CategoryTheory.Sites.CechComplex
 
 Source: Stacks Project, Cohomology on Sites, Tag 03AT, and the cofree-presheaf
 contraction in `WeilConjectures.CategoryTheory.Sites.CechComplex`.
-(blueprint: lem-weil-pbc-site-cech-cofree-exact)
 -/
 
 @[expose] public section
@@ -57,7 +56,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The cofree presheaf has an exact positive-degree Čech complex.
 Source: Stacks 03AT (insertion contraction), as implemented for categorical products
 by `CategoryTheory.Presheaf.exactAt_cechComplex_cofree`.
-(blueprint: lem-weil-pbc-site-cech-cofree-exact)
 
 Proof: evaluate a cochain at an object Z and a map to a chosen fibre product.
 Group these evaluations by their common composite Z -> U. For each composite admitting

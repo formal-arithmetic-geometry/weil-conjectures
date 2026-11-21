@@ -267,7 +267,6 @@ private theorem localizationSheafMap_zeroAux
 /-- The localization of the regular module is its multiplication colimit, with
 zeroth leg the localization unit.
 Source: Stacks Project, Algebra, Tag 00CM, and Modules on Sites, Tag 03CY.
-(blueprint: lem-weil-pbc-scalar-localization-fraction-colimit-of-universes).
 
 Proof: the nth fraction map sends r to r/t^n. The module-localization colimit
 comparison proves the universal property sectionwise. Evaluation jointly reflects
@@ -458,7 +457,6 @@ set_option linter.style.whitespace false in
 -- The sectionwise tensor normalization has a large elaborated type.
 /-- The fraction legs exhibit restricted scalar extension as the module-sheaf colimit.
 Source: Stacks Project, algebra.tex Tag 00CM; sites-modules.tex Tags 03CY and 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-fraction-colimit-of-universes).
 
 Proof: the sectionwise fraction maps from R into R[1/t] give a colimit: a
 compatible family sends r/t^n to the stage-n image of r. The fraction equality
@@ -644,7 +642,6 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C]
 set_option linter.style.whitespace false in
 /-- The ordinary sequential colimit of a scalar sequence of complexes.
 Source: Stacks Project, algebra.tex, Tag 00CM; sites-modules.tex, Tags 03CY and 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-fraction-colimit-of-universes).
 
 Proof: on each object V and degree i, send the stage-n element x to t^(-n) tensor x.
 For any compatible family, send a fraction x/t^n to the stage-n image of x.

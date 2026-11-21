@@ -17,8 +17,7 @@ namespace CategoryTheory
 
 /-- Ring-operation part of an inverse-image lift.
 
-Source: Stacks Project, `sites.tex`, Tag 00YV
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, `sites.tex`, Tag 00YV. -/
 structure RingInverseImage
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
@@ -335,8 +334,7 @@ private theorem comparison_binary
 /-- The underlying comparison with a single constant ring preserves its four operations.
 
 Source: Stacks Project, Sites, Tag 00YV (rings as algebraic objects), and Tag 0H7J
-(constant sheaves); original constant-comparison node, proof step 3.
-(auxiliary; not a blueprint node).
+(constant sheaves).
 
 Proof: write the underlying sheaf of the constant ring as the constant set sheaf,
 using `constantCommuteCompose`. The constant sheaf of `A × A` maps isomorphically

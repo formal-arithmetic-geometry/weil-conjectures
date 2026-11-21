@@ -17,9 +17,6 @@ import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 
 /-!
 # Distinguished triangle for canonical truncations
-
-Source: literature/stacks-project/derived.tex, Remark 08J5 (line 4076)
-(blueprint: theorem-pbc-injective-acyclicity).
 -/
 
 @[expose] public section
@@ -118,14 +115,12 @@ exists and is unique; the triangle is functorial for every morphism of D(A), the
 three truncation functors acting on D(A) through their descent along Q (the
 localization lift; theorem-pbc-injective-acyclicity); and the three terms are
 bounded below when K is (strictly, or in cohomology).
-Source: Stacks Project, Remark 08J5; BBD, Proposition 1.1.9 and Corollaire 1.1.10 (ii)
-(blueprint: theorem-pbc-injective-acyclicity).
+Source: Stacks Project, Remark 08J5.
 
 Proof:
 1. The short exact sequence 0 -> tau_{<=q-1}K -> tau_{<=q}K -> M_q(K) -> 0, with
-   j_q factoring through a quasi-isomorphism M_q(K) -> H^q(K)[-q]
-   (theorem-pbc-injective-acyclicity).
-2. Its distinguished triangle in D(A) (lem-weil-pbc-complex-ses-triangle).
+   j_q factoring through a quasi-isomorphism M_q(K) -> H^q(K)[-q].
+2. Its distinguished triangle in D(A).
 3. Transport along the quasi-isomorphism gives k_q (TR1).
 4. Hom((tau_{<=q-1}K)[1], H^q(L)[-q]) = 0 (standard t-structure).
 5. Uniqueness of k_q and 6. functoriality by lem-weil-pbc-triangle-morphism-extension.

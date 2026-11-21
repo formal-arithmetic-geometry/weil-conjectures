@@ -98,9 +98,7 @@ theorem isPullback_of_isPullback (hsq : IsPullback h u p t) (c : Compactificatio
     IsPullback h i c.i (pullback.fst c.g t) :=
   .of_bot (by rw [hsnd, ← c.comm]; exact hsq) hfst.symm (.of_hasPullback c.g t)
 
-/-- **Base change construction for a compactification** (blueprint:
-`def:nagata-compactification-base-change`,
-`lemma:nagata-compactification-base-change`). -/
+/-- **Base change construction for a compactification**. -/
 @[simps]
 noncomputable def ofIsPullback (hsq : IsPullback h u p t) (c : Compactification p) :
     Compactification u where
@@ -166,9 +164,7 @@ theorem isPullback_g_ofIsPullback (hsq : IsPullback h u p t) (c : Compactificati
 
 /-- **Base change of a compactification** along a morphism `t : T ⟶ S` of bases: if `c` is a
 compactification of `f : X ⟶ S`, then `c.Z ×_S T ⟶ T` together with `X ×_S T ⟶ c.Z ×_S T`
-is a compactification of the base change `pullback.snd f t`.
-(blueprint: `def:nagata-compactification-base-change`,
-`lemma:nagata-compactification-base-change`) -/
+is a compactification of the base change `pullback.snd f t`. -/
 noncomputable def baseChange {f : X ⟶ S} (c : Compactification f) (t : T ⟶ S) :
     Compactification (pullback.snd f t) :=
   ofIsPullback (.of_hasPullback f t) c
@@ -223,8 +219,7 @@ end Compactification
 
 /-- **Compactifiability is stable under base change**: if `p : Y ⟶ T` admits a
 compactification and `IsPullback h u p t`, then the base change `u : X ⟶ S` of `p` along
-`t` admits one too.
-(blueprint: `lemma:nagata-compactification-base-change`) -/
+`t` admits one too. -/
 theorem HasCompactification.of_isPullback (hsq : IsPullback h u p t) [HasCompactification p] :
     HasCompactification u :=
   (Compactification.ofIsPullback hsq (HasCompactification.compactification p)).hasCompactification

@@ -22,9 +22,8 @@ which is the identity on summand i and zero on every other summand. Composing th
 of a finitely supported family with p_i recovers its i-th coordinate, as direct-sum induction
 shows. Equal comparison images therefore have equal coordinates and are equal. This argument
 works for any source in a preadditive category, including the empty family and the zero ring.
-Source: the coproduct universal property; Stacks Project, Tag 0F5X, first paragraph, for the
+Source: Stacks Project, Tag 0F5X, first paragraph, for the
 rank-one compactness application.
-(auxiliary; not a blueprint node)
 -/
 theorem derivedModule_rankOne_comparison_injective
     {S : Type w} [Ring S]

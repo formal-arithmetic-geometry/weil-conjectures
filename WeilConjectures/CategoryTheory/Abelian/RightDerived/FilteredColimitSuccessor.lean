@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 # The successor step for filtered colimits of right derived functors
 
 Source: Stacks Project, Cohomology on Sites, Tag 0739, the induction diagram.
-(blueprint: lem-weil-pbc-right-derived-filtered-colimit-successor).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace CategoryTheory.Functor
 /-- Preservation in degree `n` implies preservation in degree `n + 1` when filtered
 colimits of injective diagrams are acyclic in that next degree.
 Source: Stacks Project, Tag 0739, second paragraph and the comparison diagram.
-(blueprint: lem-weil-pbc-right-derived-filtered-colimit-successor).
 
 Proof:
 1. Choose functorial injective embeddings in the Grothendieck abelian category `A`.

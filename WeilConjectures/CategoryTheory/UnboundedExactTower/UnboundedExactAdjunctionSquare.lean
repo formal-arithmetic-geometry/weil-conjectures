@@ -25,9 +25,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-!
 # Exact unbounded adjunctions, strict towers, and square mates
 
-Source: Stacks Project, Derived Categories, Tags 0DVC, 0FND, 08BJ and 070I;
-Cohomology on Sites, Tag 07A7; the constant/evaluation application is agent supplied
-(blueprint: lem-sbc-unbounded-exact-adjunction-square).
+Source: Stacks Project, Derived Categories, Tags 0DVC, 0FND, 08BJ and 070I; Cohomology on Sites, Tag 07A7.
 
 The index `op n` denotes positive level `n + 1`. All comparisons below are constructed
 from the specified ordinary adjunction and exact-localization comparisons. In particular,
@@ -47,8 +45,7 @@ namespace CategoryTheory.UnboundedExactTower
 
 
 /-- The existing Grothendieck-category K-injective resolution construction for module
-sheaves. Source: Stacks 079P, 07A5
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+sheaves. Source: Stacks 079P, 07A5. -/
 instance moduleResolutions
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) : Abelian.HasKInjectiveResolutions (ringedSiteModules.{u} R) :=
@@ -185,8 +182,7 @@ variable {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
   (F : B ⥤ A) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
 
 /-- The descended constant/inverse-image identity, using the ordinary identity-component
-comparison `compConstIso`. Source: Stacks 015F, 0DVC
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+comparison `compConstIso`. Source: Stacks 015F, 0DVC. -/
 def constantInterchange :
     (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⋙
         ((Functor.whiskeringRight ℕᵒᵖ B A).obj F).mapDerivedCategory ≅
@@ -202,8 +198,7 @@ variable {F} {G : A ⥤ B} [G.Additive]
 
 /-- The constant comparison is the mate of the canonical descended inverse-image
 comparison. Its invertibility and representative normalization are conclusions below.
-Source: Stacks 07A7, 0DVC
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+Source: Stacks 07A7, 0DVC. -/
 def constantComparison (a : F ⊣ G) :
     G.rightDerivedFunctor ⋙ (Functor.const ℕᵒᵖ : B ⥤ _).mapDerivedCategory ⟶
       (Functor.const ℕᵒᵖ : A ⥤ _).mapDerivedCategory ⋙
@@ -213,8 +208,7 @@ def constantComparison (a : F ⊣ G) :
     (TwoSquare.mk _ _ _ _ (constantInterchange F).hom))
 
 /-- The evaluation comparison is the mate of the inverse of the canonical descended
-termwise/evaluation identity. Source: Stacks 07A7, 0DVC
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+termwise/evaluation identity. Source: Stacks 07A7, 0DVC. -/
 def evaluationComparison (a : F ⊣ G) (n : ℕᵒᵖ) :
     ((Functor.whiskeringRight ℕᵒᵖ A B).obj G).rightDerivedFunctor ⋙
         ((evaluation ℕᵒᵖ B).obj n).mapDerivedCategory ⟶
@@ -225,7 +219,7 @@ def evaluationComparison (a : F ⊣ G) (n : ℕᵒᵖ) :
 
 /-- The canonical cochain-level unit of the existing total right derived functor.
 It is obtained from its homotopy-level unit using the quotient factorization isomorphisms.
-Source: Stacks 070K (blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+Source: Stacks 070K. -/
 def cochainUnit (G : A ⥤ B) [G.Additive] (I : CochainComplex A ℤ) :
     DerivedCategory.Q.obj ((G.mapHomologicalComplex (.up ℤ)).obj I) ⟶
       G.rightDerivedFunctor.obj (DerivedCategory.Q.obj I) :=
@@ -291,8 +285,7 @@ variable {A : Type uA} {B : Type uB} {A' : Type uA'} {B' : Type uB'}
   [PreservesFiniteLimits h] [PreservesFiniteColimits h]
 
 /-- Localize the given inverse-image composition comparison with the specified
-composition isomorphisms. Source: Stacks 015F and 07A7
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+composition isomorphisms. Source: Stacks 015F and 07A7. -/
 def localizedSquare (θ : g ⋙ F' ≅ F ⋙ h) :
     g.mapDerivedCategory ⋙ F'.mapDerivedCategory ≅
       F.mapDerivedCategory ⋙ h.mapDerivedCategory :=
@@ -326,8 +319,7 @@ private theorem localizedSquare_fac (θ : g ⋙ F' ≅ F ⋙ h)
   simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
 
 /-- The termwise inverse-image comparison, with component θ at each level.
-Source: Stacks 07A7, termwise diagram application
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+Source: Stacks 07A7, termwise diagram application. -/
 def towerSquare (θ : g ⋙ F' ≅ F ⋙ h) :
     (Functor.whiskeringRight ℕᵒᵖ B B').obj g ⋙
         (Functor.whiskeringRight ℕᵒᵖ B' A').obj F' ≅
@@ -418,8 +410,7 @@ omit [HasDerivedCategory (ℕᵒᵖ ⥤ A)] [HasDerivedCategory (ℕᵒᵖ ⥤ B
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A)]
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ A')] in
 /-- The canonical derived square mate is represented by the ordinary mate on complexes.
-Source: Stacks 070I, 08BJ and 07A7
-(blueprint: lem-sbc-unbounded-exact-adjunction-square).
+Source: Stacks 070I, 08BJ and 07A7.
 
 Transpose by the derived adjunction, apply its counit normalization, and use the
 localization factorization of the inverse-image square. The ordinary mate counit
@@ -440,8 +431,7 @@ theorem localized_mate_cochain_normalization (a : F ⊣ G) (a' : F' ⊣ G')
 
 /-- Equality of the actual ordinary and tower square mates after constants and evaluation.
 Neither equality requires the mate to be invertible or derived evaluation to be faithful.
-Source: Stacks 07A7 and the explicit counit-transpose calculation
-(blueprint: lem-sbc-unbounded-exact-adjunction-square). -/
+Source: Stacks 07A7 and the explicit counit-transpose calculation. -/
 def SquareCompatible (a : F ⊣ G) (a' : F' ⊣ G') (θ : g ⋙ F' ≅ F ⋙ h) : Prop :=
   (∀ K : DerivedCategory A,
     (constantInterchange g).inv.app (G.rightDerivedFunctor.obj K) ≫

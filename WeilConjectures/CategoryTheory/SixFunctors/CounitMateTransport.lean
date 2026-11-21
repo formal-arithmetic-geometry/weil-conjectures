@@ -9,9 +9,6 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Transport of counit mates
-
-Source: the adjunction calculation in the finite dualizing proof, paragraph 3
-(blueprint: counit-mate-transport).
 -/
 
 @[expose] public noncomputable section
@@ -20,9 +17,6 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- Counit mates commute with compatible changes of left adjoints.
-
-Source: the adjunction transposition in the finite dualizing proof, paragraph 3
-(blueprint: counit-mate-transport).
 
 Proof: right-adjoint uniqueness identifies the composite counits. Invert the square
 of left-adjoint coefficient isomorphisms. Transpose the desired equality under the
@@ -125,8 +119,7 @@ private theorem transpose_counit
   change (a.homEquiv X Y).symm ((a.homEquiv X Y) x) = x
   exact (a.homEquiv X Y).symm_apply_apply x
 
-/-- The adjunction transpose, with its argument kept abstract for large adjunctions.
-Source: the counit construction (blueprint: counit-mate-transport). -/
+/-- The adjunction transpose, with its argument kept abstract for large adjunctions. -/
 @[irreducible] def counitTranspose
     {C D : Type*} [Category C] [Category D] {F : C ⥤ D} {G : D ⥤ C}
     (a : F ⊣ G) {X : C} {Y : D} (x : F.obj X ⟶ Y) : X ⟶ G.obj Y :=

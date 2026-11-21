@@ -15,10 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.ProEtaleCoefficients.Deriv
 /-!
 # Closed derived tensor structure and integer-shift comparisons
 
-Source: latest Weil blueprint, `sec-smooth-purity/sk-lem-sp-tower`,
-`lem-weil-finite-duality-site-comparison.proof.md`, second proof paragraph
-(blueprint: lem-sf-native-derived-closed-tensor-shifts).
-
 The statement packages the derived closed structure, the canonical two-variable shift
 comparisons, and their normalization by the lax-monoidal comparison of the localization.
 The chain comparisons are Mathlib's `mapBifunctorShift₁Iso` and `mapBifunctorShift₂Iso`:
@@ -290,10 +286,6 @@ private theorem nativeDerivedClosedTensorShift_right_normalization :
 end NativeTensorCoherence
 
 /-- Closedness and the normalized integer-shift equations for the derived tensor.
-
-Source: latest Weil blueprint, `sec-smooth-purity/sk-lem-sp-tower`,
-`lem-weil-finite-duality-site-comparison.proof.md`, second proof paragraph
-(blueprint: lem-sf-native-derived-closed-tensor-shifts).
 
 Clause (i) is the first conjunct.  Clause (ii) is the instance
 `DerivedCategory.commShift₂CurriedTensor : (curriedTensor (DerivedCategory C)).CommShift₂Int`:

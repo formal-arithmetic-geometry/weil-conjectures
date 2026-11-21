@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 /-! # Differential of retained representatives in the cone filtration
 
 Source: Stacks Project, Homology, Tags 012X and 0133, column filtration and
-canonical augmentation; retained-summand calculation of the parent node.
+canonical augmentation.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The graded differential of a lifted resolution summand is its resolution differential.
 Source: Stacks Project, Homology, Tag 012X (second filtration), with the cone
-inclusion from Tag 0133; parent normalized-differential proof, I-term calculation.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-resolution-representative).
+inclusion from Tag 0133.
 
 Proof: the quotient projection is a chain map. Cancel the monic inclusion of
 step p to compute the differential of l in the ambient cone. The cone right

@@ -159,7 +159,6 @@ private theorem raw_colimit_comparison_iso
 
 /-- Source: Stacks Project, Sites, Tag 0A35, presentation construction and
 adjunction identification; abelian groups as in Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-finite-section-eventual-zero).
 
 Proof: For each limit object Y, consider presentations (t,W,p), where t is in Under i,
 W belongs to F(t.right), and p identifies V(t.right)(W) with Y. Move two presentations

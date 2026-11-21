@@ -13,8 +13,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # The augmented Cartan--Eilenberg total complex
 
-Source: blueprint thm-sp-if-e1, proof paragraph 2; Stacks Tags 0133 and 015J.
-(blueprint: lem-sp-cartan-eilenberg-total-resolution).
+Source: Stacks Tags 0133 and 015J.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace CategoryTheory.Functor
 set_option backward.isDefEq.respectTransparency false in
 /-- The total of bounded-below injective rows is a K-injective resolution, with the
 augmentation specified on its degree-zero summands.
-Source: blueprint thm-sp-if-e1, proof paragraph 2; Stacks Tags 0133 and 015J.
-(blueprint: lem-sp-cartan-eilenberg-total-resolution).
+Source: Stacks Tags 0133 and 015J.
 
 Proof.
 1. Extend each nonnegative resolution by zero and flip. The maps from K into

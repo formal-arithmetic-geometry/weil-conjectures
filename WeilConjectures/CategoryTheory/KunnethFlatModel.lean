@@ -10,7 +10,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # The canonical tensor model on a K-flat left representative
 Source: Stacks Project, Tags 064L and 06Y0.
-(blueprint: lem-pur-kunneth-flat-model)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,7 +19,7 @@ namespace CategoryTheory
 variable (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]
 
 /-- The lax tensor comparison is invertible on a K-flat left representative.
-Source: Stacks Project, Tags 064L and 06Y0. (blueprint: lem-pur-kunneth-flat-model)
+Source: Stacks Project, Tags 064L and 06Y0.
 Proof: on the homotopy category this is the fixed-left K-flat comparison counit. The
 comparison for Q is transported through quotientCompQhIso; the quotient is strong monoidal.
 Thus it is a composite of invertible maps. -/
@@ -44,7 +43,7 @@ theorem laxDerivedTensorMap_isIso_of_kFlat
   infer_instance
 
 /-- Every derived module complex admits a K-flat representative.
-Source: Stacks Project, Tag 06Y0. (blueprint: lem-pur-kunneth-flat-model)
+Source: Stacks Project, Tag 06Y0.
 Proof: choose an ordinary representative using essential surjectivity of Q, take its
 K-flat resolution, and invert the resulting quasi-isomorphism in the derived category. -/
 theorem exists_kFlat_model (K : DerivedCategory.{w} (ModuleCat.{u} R)) :

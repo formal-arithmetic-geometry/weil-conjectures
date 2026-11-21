@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 
 /-! # Reduction of a specified morphism of principal Milnor triangles
 
-Source: Stacks Project, algebraization.tex, principal derived-completion argument;
-proetale.tex, Tag 099M, lemma-naive-completion.
+Source: Stacks Project, algebraization.tex, principal derived-completion argument; proetale.tex, Tag 099M.
 -/
 
 @[expose] public section
@@ -124,9 +123,7 @@ private theorem isIso_map_of_milnor
 becomes invertible after reduction by the principal generator, provided both squares
 for the map are specified, including the shifted boundary square.
 
-Source: Stacks Project, algebraization.tex, principal derived-completion Koszul proof;
-proetale.tex, Tag 099M, lemma-naive-completion
-(blueprint: lem-sfb-principal-milnor-augmentation-reduction).
+Source: Stacks Project, algebraization.tex, principal derived-completion Koszul proof; proetale.tex, Tag 099M.
 Proof: tensor both limiting product fans by the first quotient, using the source
 principal product comparison. Product extensionality identifies both shifted tower
 endomorphisms and the product map with their images under this tensor functor. Its

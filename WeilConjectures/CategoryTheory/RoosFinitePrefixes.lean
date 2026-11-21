@@ -16,7 +16,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 # Finite-prefix towers
 
 The explicit towers and maps in Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
-(blueprint: lem-pc-roos-finite-prefix-construction).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ universe u
 namespace CategoryTheory
 
 /-- The tower whose level `n` is the product of the first `n + s` levels of `A`. 
-(blueprint: lem-pc-roos-finite-prefix-construction)
 -/
 def roosPrefixTower (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     ℕᵒᵖ ⥤ AddCommGrpCat.{u} where
@@ -40,7 +38,6 @@ def roosPrefixTower (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
   map_comp _ _ := rfl
 
 /-- Coordinatewise maps on finite-prefix towers. 
-(blueprint: lem-pc-roos-finite-prefix-construction)
 -/
 def roosPrefixFunctor (s : ℕ) :
     (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) where
@@ -55,7 +52,6 @@ def roosPrefixFunctor (s : ℕ) :
   map_comp _ _ := rfl
 
 /-- The augmentation sending a tower element to all its earlier images. 
-(blueprint: lem-pc-roos-finite-prefix-construction)
 -/
 def roosPrefixInclusion :
     𝟭 (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⟶ roosPrefixFunctor 1 where
@@ -79,7 +75,6 @@ def roosPrefixInclusion :
       (homOfLE (Nat.le_of_lt_succ i.isLt)).op).symm x
 
 /-- The finite-prefix difference map, with coordinate `xᵢ - fᵢ xᵢ₊₁`. 
-(blueprint: lem-pc-roos-finite-prefix-construction)
 -/
 def roosPrefixProjection : roosPrefixFunctor 1 ⟶ roosPrefixFunctor 0 where
   app A :=
@@ -100,7 +95,6 @@ def roosPrefixProjection : roosPrefixFunctor 1 ⟶ roosPrefixFunctor 0 where
       (homOfLE (Nat.le_succ i.val)).op) _
 
 /-- The finite-prefix difference vanishes on compatible tuples. 
-(blueprint: lem-pc-roos-finite-prefix-construction)
 -/
 theorem roosPrefixInclusion_projection (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     roosPrefixInclusion.app A ≫ roosPrefixProjection.app A = 0 := by
@@ -166,7 +160,6 @@ private theorem prefixExact (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (n : ℕ) :
 /-- The finite-prefix augmentation and difference form a short exact sequence.
 
 Source: Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
-(blueprint: lem-pc-roos-finite-prefix-construction).
 
 The augmentation is injective in its last coordinate. Downward induction identifies
 its image with the kernel of the difference. Starting with last coordinate zero and
@@ -195,7 +188,6 @@ theorem roosPrefix_shortExact (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
 /-- Restriction of a finite prefix is surjective, including the empty prefix.
 
 Source: Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
-(blueprint: lem-pc-roos-finite-prefix-construction).
 
 Extend the tuple by zero in every new coordinate. Restriction recovers the tuple. -/
 theorem roosPrefix_transition_surjective (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})

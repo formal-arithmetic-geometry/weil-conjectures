@@ -10,7 +10,6 @@ public import Mathlib.CategoryTheory.Whiskering
 /-! # The functorial word underlying ordinary proper/open alpha
 
 Source: the intrinsic composition of Stacks Project, Tag 0F7B, written in functor categories.
-(blueprint: lem-cbc-proper-open-word-components)
 -/
 
 @[expose] public section
@@ -19,8 +18,7 @@ set_option autoImplicit false
 namespace CategoryTheory.Functor
 
 /-- Package the specified beta, projector and comparison maps before specialization.
-Source: Stacks Project, Tag 0F7B, intrinsic ordinary construction.
-(blueprint: lem-cbc-proper-open-word-components). -/
+Source: Stacks Project, Tag 0F7B, intrinsic ordinary construction. -/
 @[irreducible] def properOpenCompositeTransformation
     (A C D E T : Type*) [Category A] [Category C] [Category D]
     [Category E] [Category T]
@@ -34,8 +32,6 @@ Source: Stacks Project, Tag 0F7B, intrinsic ordinary construction.
     whiskerLeft (Q ⋙ L) t ≫ whiskerRight c K
 
 /-- Evaluate the comparison word at an object.
-Source: component formulas for whiskering and functor associators in Mathlib.
-(blueprint: lem-cbc-proper-open-word-components).
 Proof: evaluate each natural transformation in the defining composite. Both
 associator components are identities, and functors preserve identities. Remove
 these identities and reassociate the four remaining morphisms. -/

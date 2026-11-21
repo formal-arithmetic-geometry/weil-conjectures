@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # Bottom edge factorization for a first-quadrant spectral object
 
-Source: Stacks Project, Tags 012K, 015J and 015N; image filtration of the abutment.
-(blueprint: lem-sc-spectral-object-bottom-filtration)
+Source: Stacks Project, Tags 012K, 015J and 015N.
 -/
 
 @[expose] public section
@@ -140,7 +139,6 @@ and its bounds are constructed separately; this theorem supplies only the
 graded comparisons and their compatibility with the iterated bottom projection.
 
 Source: Stacks Project, Tags 012K, 015J and 015N.
-(blueprint: lem-sc-spectral-object-bottom-filtration)
 
 Proof: The existing spectral-object abutment identifies raw consecutive image
 quotients with the stable page. Transport these cokernel isomorphisms by h and

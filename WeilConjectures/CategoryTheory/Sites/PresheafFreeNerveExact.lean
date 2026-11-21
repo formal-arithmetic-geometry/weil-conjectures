@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicTopology.SetCechNerveFreeResolution
 /-!
 # Exactness of the free module presheaf nerve
 
-Source: Stacks Project, Cohomology on Sites, Tags 03F5, 03AT; Hypercoverings, 01GC.
+Source: Stacks Project, Cohomology on Sites, Tags 03F5, 03AT.
 -/
 
 @[expose] public section
@@ -30,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The alternating chain complex of free module presheaves on the Čech nerve.
-Source: Stacks Project, Tags 03AS and 01GC.
-(blueprint: lem-sc-presheaf-free-nerve-exact) -/
+Source: Stacks Project, Tags 03AS and 01GC. -/
 noncomputable def presheafFreeNerveComplex
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
     (f : Arrow (Cᵒᵖ ⥤ Type v)) : ChainComplex (PresheafOfModules.{v} R) ℕ :=
@@ -39,8 +38,6 @@ noncomputable def presheafFreeNerveComplex
     (f.cechNerve ⋙ PresheafOfModules.free R)
 
 /-- Objectwise exactness of a complex of presheaf modules implies exactness.
-Source: Mathlib categorical exactness of jointly conservative evaluations.
-(blueprint: lem-sc-presheaf-free-nerve-exact-eval-glue)
 Proof: kernels and cokernels in presheaf module categories are computed objectwise,
 so the family of evaluation functors jointly reflects the zero homology condition. -/
 theorem exactAt_of_presheaf_evaluations
@@ -201,7 +198,6 @@ private theorem evaluatedNerveLinearEquiv_d
 /-- Objectwise exactness of the evaluated free nerve.
 Source: Stacks Project, Tags 03F5 and 03AT.
 The evaluated complex is identified with the set Cech free resolution.
-(blueprint: lem-sc-presheaf-free-nerve-exact-eval)
 -/
 theorem presheafFreeNerveComplex_exactAt_eval
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
@@ -222,7 +218,7 @@ theorem presheafFreeNerveComplex_exactAt_eval
     (by simpa only [LinearMap.exact_iff, eq_comm] using
       setNerve_positive_exact (R.obj X) (f.hom.app X) n)
 
-/-- (blueprint: lem-sc-presheaf-free-nerve-exact) -/
+/--  -/
 theorem presheafFreeNerveComplex_exactAt
     {C : Type u} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{v})
     (f : Arrow (Cᵒᵖ ⥤ Type v)) (n : ℕ) :

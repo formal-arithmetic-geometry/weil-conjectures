@@ -45,9 +45,7 @@ attribute [local irreducible] homComplexFunctor ringedComplexTensorEvaluation
 
 /-- Finite-free evaluation, including transition, coefficient and unit compatibility.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
-lemma-colim-and-lim-of-duals; more-algebra.tex, Tag 0913.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; more-algebra.tex, Tag 0913.
 
 Proof: each positive two-term factor is bounded with dualizable unit terms.
 The bounded-complex duality theorem and induction on the actual tensor diagram

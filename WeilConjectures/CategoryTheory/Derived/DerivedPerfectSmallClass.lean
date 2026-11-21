@@ -17,9 +17,7 @@ import WeilConjectures.CategoryTheory.Derived.DerivedPerfectSmallClassProperties
 
 /-! # Small perfect classes in Grothendieck derived categories
 
-Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2;
-Krause, Localization theory for triangulated categories, Sections 6.2-6.3.
-(blueprint: lem-sfb-derived-perfect-small-class)
+Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2.
 -/
 
 @[expose] public section
@@ -35,10 +33,7 @@ attribute [local instance] derived_hasCoproducts
 /-- Every small family in D(A) lies in an essentially small replete triangulated
 perfect class, with bounded-subcoproduct factorization for its own objects.
 
-Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2;
-Krause, *Localization theory for triangulated categories*, Sections 6.2-6.3 and
-Proposition 6.8.1.
-(blueprint: lem-sfb-derived-perfect-small-class)
+Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2.
 
 Proof: choose v-small representatives P₀ of P. Neeman's Theorem 0.2 makes D(A)
 well generated. Its proof presents D(A) as D(R)/Loc(L) for a set of complexes L,

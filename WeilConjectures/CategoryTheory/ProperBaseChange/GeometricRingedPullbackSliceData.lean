@@ -266,8 +266,7 @@ private noncomputable def pullbackSliceRingData {C D : Type u} [SmallCategory C]
 
 /-- Construct the sliced ringed morphism with its prescribed comparison.
 
-Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tag 04IF
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice-data).
+Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tag 04IF.
 
 Proof: Apply `Over.postAdjunctionLeft` to `f.adj` at A, then compose its adjunction
 with the two fibre equivalences to obtain an adjunction whose left adjoint is

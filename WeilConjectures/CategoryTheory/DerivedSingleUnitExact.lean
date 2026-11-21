@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedSingleUnit
 /-!
 # Exact adjunctions and single-object derived units
 
-Source: Stacks 0A45 (auxiliary; not a blueprint node).
+Source: Stacks 0A45.
 -/
 
 @[expose] public noncomputable section
@@ -177,8 +177,7 @@ private theorem exact_unit_single_map (adj : f ⊣ g) (X : C) (Y : D)
   rw [Adjunction.homEquiv_apply, Functor.map_comp]
 /-- For an exact adjoint pair, the derived unit on a single object becomes the
 single of the underived adjunct under the canonical single comparisons.
-Source: Stacks 0A45, derived support-Hom normalization
-(auxiliary; not a blueprint node).
+Source: Stacks 0A45, derived support-Hom normalization.
 
 Proof: compute the homotopy adjunction unit on a single complex degreewise.
 The quotient factorization identifies it with the termwise underived unit.

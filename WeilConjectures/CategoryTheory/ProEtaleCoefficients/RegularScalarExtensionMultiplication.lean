@@ -25,10 +25,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 
 /-!
 # Regular scalar extension and multiplication
-
-Source: blueprint `sec-proetale-coefficients/sk-def-sfb-change-of-scalars/`,
-`def-sfb-modobj-extension.md` and its proof, regular-module specialization
-(blueprint: lem-sfb-regular-scalar-extension-multiplication).
 -/
 
 @[expose] public section
@@ -46,8 +42,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)
 
 /-- Abelian sheafification on the essentially small site.
-Source: Stacks 00WH and the sheafification in `sk-def-sfb-sheaf-tensor`
-(blueprint: lem-sfb-regular-scalar-extension-multiplication).
+Source: Stacks 00WH and the sheafification in.
 Proof: replace the site by its small model in the coefficient universe, apply
 `GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian`, and transport back. -/
 instance sfbRegularAb_hasSheafify : HasSheafify J AddCommGrpCat.{w} := by
@@ -56,43 +51,31 @@ instance sfbRegularAb_hasSheafify : HasSheafify J AddCommGrpCat.{w} := by
     GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ _
   exact hasSheafifyEssentiallySmallSite J AddCommGrpCat.{w}
 
-/-- The specified sheafified tensor, specialized to abelian sheaves.
-Source: blueprint `sk-def-sfb-sheaf-tensor`, as used in the regular-module specialization
-(blueprint: lem-sfb-regular-scalar-extension-multiplication). -/
+/-- The specified sheafified tensor, specialized to abelian sheaves. -/
 noncomputable instance sfbRegularAbMonoidal : MonoidalCategory (Sheaf J Ab.{w}) :=
   (sfbSheafTensorStructure (A := Ab.{w}) J).monoidal
 
-/-- The symmetry of the specified tensor on abelian sheaves.
-Source: blueprint `sk-def-sfb-sheaf-tensor`, regular-module specialization
-(blueprint: lem-sfb-regular-scalar-extension-multiplication). -/
+/-- The symmetry of the specified tensor on abelian sheaves. -/
 noncomputable instance sfbRegularAbSymmetric : SymmetricCategory (Sheaf J Ab.{w}) :=
   (sfbSheafTensorStructure (A := Ab.{w}) J).symmetric
 
-/-- Left tensor preserves the small colimits used for balancing.
-Source: blueprint `sk-def-sfb-sheaf-tensor`, clause 2
-(blueprint: lem-sfb-regular-scalar-extension-multiplication). -/
+/-- Left tensor preserves the small colimits used for balancing. -/
 noncomputable instance sfbRegularAbTensorLeft (F : Sheaf J Ab.{w}) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft F) :=
   ((sfbSheafTensor_properties (A := Ab.{w}) J).2.2 F).1
 
-/-- Right tensor preserves the small colimits used for balancing.
-Source: blueprint `sk-def-sfb-sheaf-tensor`, clause 2
-(blueprint: lem-sfb-regular-scalar-extension-multiplication). -/
+/-- Right tensor preserves the small colimits used for balancing. -/
 noncomputable instance sfbRegularAbTensorRight (F : Sheaf J Ab.{w}) :
     PreservesColimitsOfSize.{0, 0} (tensorRight F) :=
   ((sfbSheafTensor_properties (A := Ab.{w}) J).2.2 F).2.1
 
-/-- The canonical presheaf-to-sheaf tensor generator map.
-Source: blueprint `def-sfb-modobj-extension`, local generator interpretation
-(blueprint: lem-sfb-regular-scalar-extension-multiplication). -/
+/-- The canonical presheaf-to-sheaf tensor generator map. -/
 noncomputable def sfbRegularTensorGenerators (F G : Sheaf J Ab.{w}) :
     F.obj ⊗ G.obj ⟶ (F ⊗ G).obj :=
   toSheafify J (F.obj ⊗ G.obj) ≫ (sfbSheafTensor_comparison J F G).inv.hom
 
 /-- Evaluate a map from the tensor unit as a compatible family of sections.
-The integer 1 first enters the sheafified constant integer sheaf by its actual unit map.
-Source: blueprint `def-sfb-modobj-extension`, global-section interpretation
-(blueprint: lem-sfb-regular-scalar-extension-multiplication). -/
+The integer 1 first enters the sheafified constant integer sheaf by its actual unit map. -/
 noncomputable def sfbRegularSection (F : Sheaf J Ab.{w})
     (t : 𝟙_ (Sheaf J Ab.{w}) ⟶ F) (U : Cᵒᵖ) : F.obj.obj U :=
   t.hom.app U
@@ -201,14 +184,12 @@ private theorem right_section (F G : Sheaf J Ab.{w})
     exact congrArg (fun f ↦ f.app U a) h
 
 /-- Normalization of extension on regular modules, including multiplication by every
-compatible global section. Source: blueprint `def-sfb-modobj-extension.md` and its proof,
-regular-module specialization (blueprint: lem-sfb-regular-scalar-extension-multiplication).
+compatible global section.
 
 Proof, following the node:
 1. Abelian sheaf coequalizers are sheafifications of the objectwise cokernels of the
 parallel difference. Their projections are epimorphisms; so are their tensors, since
-both tensor functors preserve colimits (`sk-def-sfb-sheaf-tensor`,
-`def-weil-pbc-sheafification`, `def-weil-pbc-category-colimit`).
+both tensor functors preserve colimits.
 2. The right R-action on S is S tensor phi followed by multiplication. Its unit,
 associativity and compatibility with the left S-action follow from the ring-object
 axioms. The balancing pair is exactly that of `def-sfb-modobj-extension` on regular R.

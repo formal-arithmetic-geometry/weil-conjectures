@@ -7,8 +7,6 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Composition of the inverse factorization comparisons of exact functors
-
-Source: functoriality of ordinary unbounded localization.
 -/
 
 @[expose] public noncomputable section
@@ -25,16 +23,12 @@ variable {A B C : Type*} [Category A] [Category B] [Category C]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
   [PreservesFiniteLimits U] [PreservesFiniteColimits U]
 
-/-- The comparison of successive exact restrictions with an isomorphic exact restriction.
-Source: localization functoriality
-(auxiliary; not a blueprint node). -/
+/-- The comparison of successive exact restrictions with an isomorphic exact restriction. -/
 def exactDerivedRestrictionComposition (η : S ⋙ R ≅ U) :
     S.mapDerivedCategory ⋙ R.mapDerivedCategory ≅ U.mapDerivedCategory :=
   mapDerivedCategoryCompIso S R ≪≫ mapDerivedCategoryNatIso η
 
 /-- Inverse localization comparisons respect composition of exact restrictions.
-Source: localization functoriality
-(auxiliary; not a blueprint node).
 Proof: cancel the factorization for U. The defining factorization equations for the
 composition isomorphism and the image of η reduce the result to cancellation of the
 two inverse factorization isomorphisms. -/
@@ -65,8 +59,6 @@ theorem exactDerivedRestrictionComposition_inv_factors (η : S ⋙ R ≅ U)
   rfl
 
 /-- The forward composition comparison commutes with localization factorizations.
-Source: localization functoriality
-(auxiliary; not a blueprint node).
 Proof: expand the comparison, use natural-isomorphism factorization, and cancel the
 exact-functor compositor against its inverse. -/
 theorem exactDerivedRestrictionComposition_hom_factors (η : S ⋙ R ≅ U)

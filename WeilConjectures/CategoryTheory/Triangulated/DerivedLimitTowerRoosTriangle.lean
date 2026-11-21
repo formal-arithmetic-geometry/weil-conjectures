@@ -109,7 +109,6 @@ triangle along these isomorphisms. Its third map supplies delta.
 This step neither proves that Q(P.pt) is a derived-category product nor uses
 chosen products in the derived category; the caller proves and applies that
 separate fact.
-(blueprint: lem-weil-derived-limit-tower-roos-triangle)
 -/
 theorem derivedCategory_tower_roos_triangle
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]

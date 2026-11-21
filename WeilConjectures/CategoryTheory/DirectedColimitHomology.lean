@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Abelian.FunctorCategory
 /-! # Homology commutes with directed colimits of abelian-group complexes.
 
 Source: Stacks Project, Tag 00DB.
-(blueprint: lem-weil-pbc-directed-colimit-homology)
 -/
 
 @[expose] public section
@@ -80,8 +79,7 @@ of a complex preserves colimits, since all three evaluations do. Compose this
 preservation with short-complex homology, and use the natural isomorphism identifying
 complex homology with its adjacent short-complex homology. If the preorder is empty,
 homology preserves zero morphisms and hence the initial object. Transport preservation
-of the empty colimit along the equivalence of the index category with the empty category.
-(blueprint: lem-weil-pbc-directed-colimit-homology) -/
+of the empty colimit along the equivalence of the index category with the empty category. -/
 theorem directed_colimit_homology
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (c : ComplexShape (ℤ × ℤ)) (pq : ℤ × ℤ) :

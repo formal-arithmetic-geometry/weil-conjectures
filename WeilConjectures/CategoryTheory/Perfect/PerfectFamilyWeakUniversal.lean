@@ -15,9 +15,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 
 /-! # Weakly universal elements from a perfect family
-
-Source: Krause, Derived categories, resolutions, and Brown representability, Section 4.5.
-(blueprint: lem-sfb-perfect-family-weak-universal)
 -/
 
 @[expose] public section
@@ -175,10 +172,6 @@ end PerfectFamily
 
 /-- A shift-closed perfect family detecting zero objects gives a single weakly
 universal pair for every cohomological functor that sends coproducts to products.
-
-Source: Krause, *Derived categories, resolutions, and Brown representability*,
-Section 4.5, the cellular proof of Brown representability.
-(blueprint: lem-sfb-perfect-family-weak-universal)
 
 Proof: for each initial pair (W,w), adjoin the coproduct of all pairs (S_j,z).
 At every subsequent stage take the cone of the evaluation coproduct of generator

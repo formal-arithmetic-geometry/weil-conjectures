@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace SheafOfModules
 
 /-- Module sheaves are Grothendieck abelian whenever the site is essentially small in
-the coefficient universe. Source: Stacks 03DA, 03DB and 079Q
-(auxiliary; not a blueprint node).
+the coefficient universe. Source: Stacks 03DA, 03DB and 079Q.
 Proof: restrict underlying presheaves to a small model of the site to obtain small Hom
 sets. Free sheaves on the shrink-Yoneda presheaves of the chosen representative objects
 form a small separating family: the free/sheafification adjunction identifies a map

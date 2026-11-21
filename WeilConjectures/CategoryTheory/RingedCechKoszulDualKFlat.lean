@@ -12,8 +12,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! K-flatness of the finite dual Koszul tower terms.
 Source: Stacks Project, More on Algebra, Tag 0913.
-(auxiliary; not a blueprint node).
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -182,7 +180,6 @@ private theorem koszulDual_flat (m : ℕ) (n : ℤ) :
 set_option synthInstance.maxSize 2048 in
 /-- Every finite dual Koszul complex is K-flat.  The proof uses its bounded finite
 filtration with finite free graded pieces and the bounded-above flat K-flat criterion.
-(auxiliary; not a blueprint node).
 Proof: use the bounded finite filtration by finite free graded pieces and apply the
 bounded-above flat K-flat criterion. -/
 theorem ringed_cech_koszul_dual_tower_isKFlat :

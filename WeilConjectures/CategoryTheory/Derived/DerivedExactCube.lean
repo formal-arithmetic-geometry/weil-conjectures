@@ -9,8 +9,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 
 /-! # Localization preserves a cube of exact functors
 
-Source: Stacks Project, Tags 05S7 and 014F, universal property of localization
-(blueprint: lem-fix-site-open-exchange-localization).
+Source: Stacks Project, Tags 05S7 and 014F, universal property of localization.
 -/
 
 @[expose] public noncomputable section
@@ -121,7 +120,6 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 
 /-- Exact-functor localization preserves an ordinary commutative cube.
 Source: Stacks Project, Tags 05S7 and 014F.
-(blueprint: lem-fix-site-open-exchange-localization).
 
 Proof: Apply localization extensionality for the quasi-isomorphism localization Q.
 Postcompose both sides with the three invertible factorization comparisons of h,

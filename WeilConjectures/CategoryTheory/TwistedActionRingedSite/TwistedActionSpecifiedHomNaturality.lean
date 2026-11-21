@@ -66,8 +66,7 @@ private theorem homComparison_hom_app (P : Presentation J s R a) :
 omit [s.functor.IsContinuous J J] in
 /-- The presentation's internal-Hom identifications assemble into a natural isomorphism.
 
-Source: Stacks Project, Tag 03EO; the specified presentation's Hom naturality equation.
-(blueprint: lem-sf-twisted-action-hom-comparison).
+Source: Stacks Project, Tag 03EO.
 
 Proof: the uncurried Hom functor maps a pair of arrows by first precomposing and then
 postcomposing. The internal-Hom composition formula identifies this with homObjMap of

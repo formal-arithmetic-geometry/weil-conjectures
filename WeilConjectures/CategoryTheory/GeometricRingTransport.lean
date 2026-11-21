@@ -16,7 +16,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.BinaryProducts.ProdComparison
 # Transporting a sheaf of rings through a geometric inverse image
 
 Source: Stacks Project, Modules on Sites, Tags 03D1--03D3 and 03D7.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -110,8 +109,7 @@ private theorem binaryOperation_sections
   rw [hi, hi]
 
 /-- Inverse image transports the ring operations through product comparisons.
-Source: Stacks Project, Tag 03D2, `lemma-pullback-module`.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03D2.
 
 Proof: put U equal to the set sheaf underlying R. Define addition and multiplication
 on L(U) by applying L to the corresponding operations on U and precomposing by

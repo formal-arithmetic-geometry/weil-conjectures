@@ -29,22 +29,18 @@ valuative squares whose generic point factors through `h`.
 
 - `AlgebraicGeometry.ValuativeCommSqWithPt` and
   `AlgebraicGeometry.ValuativeCommSqWithPt.ofIsDominant`: the **valuation probe through a
-  dense source** (Stacks Project Tag 02JQ; blueprint: `def:nagata-dense-valuation-probe`,
-  `lemma:nagata-dense-valuation-probe`).
+  dense source** (Stacks Project Tag 02JQ).
 - `AlgebraicGeometry.ValuativeCriterion.RelativeTo`: the dense-source lifting hypothesis.
 - `AlgebraicGeometry.ValuativeCriterion.RelativeTo.existence_of_isDominant`: the
-  **dense-source valuative criterion** (Stacks Project Tag 0894; blueprint:
-  `lemma:nagata-dense-source-valuative`), in the form of the existence part
+  **dense-source valuative criterion** (Stacks Project Tag 0894), in the form of the existence part
   `AlgebraicGeometry.ValuativeCriterion.Existence`.
 - `AlgebraicGeometry.UniversallyClosed.of_valuativeCriterion_of_isDominant` and
   `AlgebraicGeometry.IsSeparated.of_valuativeCriterion_of_isDominant`: the two consequences
   of the criterion.
 
 The valuation-theoretic inputs live in the Mathlib helper files: the composite of two
-valuation rings `ValuationSubring.comapResidue` (blueprint:
-`lemma:nagata-composite-valuation-ring`), the intersection with a dominating valuation
-ring `ValuationSubring.comap_eq_of_toLocalSubring_le` (Stacks Tag 052K; blueprint:
-`lemma:nagata-valuation-intersection`) and the extension of a valuation ring along a field
+valuation rings `ValuationSubring.comapResidue`, the intersection with a dominating valuation
+ring `ValuationSubring.comap_eq_of_toLocalSubring_le` (Stacks Tag 052K) and the extension of a valuation ring along a field
 extension `ValuationSubring.exists_comap_eq` (Stacks Tag 00IA).
 
 ## Implementation notes
@@ -80,8 +76,7 @@ namespace AlgebraicGeometry
 
 /-- A **valuative commutative square centred at a point** `z ∈ P` of a morphism
 `h : T ⟶ P`: a valuative commutative square for `h` whose valuation-ring leg takes the
-closed point of `Spec R` to `z`. It is the *valuation probe* of Stacks Project Tag 02JQ.
-(Blueprint: `def:nagata-dense-valuation-probe`.) -/
+closed point of `Spec R` to `z`. It is the *valuation probe* of Stacks Project Tag 02JQ. -/
 structure ValuativeCommSqWithPt {T P : Scheme.{u}} (h : T ⟶ P) (z : P) extends
     ValuativeCommSq h where
   /-- The valuation-ring leg of the square is centred at `z`. -/
@@ -118,8 +113,7 @@ def ValuativeCommSqWithPt.ofSpecializes {T P : Scheme.{u}} (h : T ⟶ P) {t : T}
 
 /-- **A valuative commutative square through a dense source** (Stacks Project Tag 02JQ):
 every point of the target of a quasi-compact dominant morphism is the centre of a valuative
-commutative square.
-(Blueprint: `lemma:nagata-dense-valuation-probe`.) -/
+commutative square. -/
 @[stacks 02JQ]
 def ValuativeCommSqWithPt.ofIsDominant {T P : Scheme.{u}} (h : T ⟶ P)
     [QuasiCompact h] [IsDominant h] (z : P) : ValuativeCommSqWithPt h z := by
@@ -136,7 +130,7 @@ variable {U X S : Scheme.{u}}
 /-- `f : X ⟶ S` satisfies the **valuative criterion relative to `h : U ⟶ X`** if every
 valuative commutative square for `f` whose generic point factors through `h` has a unique
 lift. This is the hypothesis of the dense-source valuative criterion (Stacks Project
-Tag 0894; blueprint: `lemma:nagata-dense-source-valuative`). -/
+Tag 0894). -/
 def RelativeTo (f : X ⟶ S) (h : U ⟶ X) : Prop :=
   ∀ (sq : ValuativeCommSq f) (ηU : Spec (CommRingCat.of sq.K) ⟶ U),
     ηU ≫ h = sq.i₁ → Nonempty (Unique sq.commSq.LiftStruct)
@@ -573,8 +567,7 @@ theorem RelativeTo.existence_of_isSchemeTheoreticallyDominant {f : X ⟶ S} {h :
 /-- **The dense-source valuative criterion** (Stacks Project Tag 0894): if `h : U ⟶ X` is
 quasi-compact and dominant and every valuative square for `f : X ⟶ S` whose generic point
 factors through `h` has a unique lift, then `f` satisfies the existence part of the
-valuative criterion.
-(Blueprint: `lemma:nagata-dense-source-valuative`.) -/
+valuative criterion. -/
 @[stacks 0894]
 theorem RelativeTo.existence_of_isDominant {f : X ⟶ S} {h : U ⟶ X} [QuasiCompact h]
     [IsDominant h] (H : RelativeTo f h) : Existence f :=
@@ -584,16 +577,14 @@ end ValuativeCriterion
 
 /-- **The dense-source valuative criterion, universal closedness** (Stacks Project
 Tag 0894): a quasi-compact morphism satisfying the valuative criterion relative to a
-quasi-compact dominant `h : U ⟶ X` is universally closed.
-(Blueprint: `lemma:nagata-dense-source-valuative`.) -/
+quasi-compact dominant `h : U ⟶ X` is universally closed. -/
 @[stacks 0894]
 theorem UniversallyClosed.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f : X ⟶ S)
     [QuasiCompact f] (h : U ⟶ X) [QuasiCompact h] [IsDominant h]
     (H : ValuativeCriterion.RelativeTo f h) : UniversallyClosed f :=
   UniversallyClosed.of_valuativeCriterion _ H.existence_of_isDominant
 
-/-- **The dense-source valuative criterion, separatedness** (Stacks Project Tag 0894;
-blueprint: `lemma:nagata-dense-source-valuative`).
+/-- **The dense-source valuative criterion, separatedness** (Stacks Project Tag 0894).
 
 The uniqueness half of the hypothesis makes the diagonal satisfy the dense-source criterion
 for universal closedness, and a universally closed immersion is a closed immersion. -/
@@ -638,8 +629,7 @@ theorem IsSeparated.of_valuativeCriterion_of_isDominant {U X S : Scheme.{u}} (f 
   exact IsClosedImmersion.of_isPreimmersion _
     (pullback.diagonal f).isClosedMap.isClosed_range
 
-/-- **The dense-source valuative criterion, properness** (Stacks Project Tag 0894;
-blueprint: `proposition-compactifying-union-two-opens--1`):
+/-- **The dense-source valuative criterion, properness** (Stacks Project Tag 0894):
 a quasi-compact, quasi-separated morphism locally of finite type satisfying the valuative
 criterion relative to a quasi-compact dominant `h : U ⟶ X` is proper. -/
 @[stacks 0894]

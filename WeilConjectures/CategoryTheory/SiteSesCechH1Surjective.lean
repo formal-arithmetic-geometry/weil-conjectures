@@ -15,8 +15,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Surjectivity of sections from vanishing Čech H¹
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F8 (lemma-ses-cech-h1)
-(blueprint: lem-weil-pbc-site-ses-cech-h1-surjective).
+Source: Stacks Project, Cohomology on Sites, Lemma 03F8.
 
 Covering indices and coefficient groups live in universes containing the site's object
 and morphism universes. This includes all presieve-indexed coverings and permits larger
@@ -77,9 +76,7 @@ private lemma type_toSheafify_injective {C : Type u} [Category.{v} C]
   infer_instance
 
 /-- Local lifts exist for epimorphisms of abelian sheaves on a site.
-Source: Stacks Project, Lemma 03CN(5); this is the general-site local-surjectivity
-part of the proof of the present theorem.
-(blueprint: lem-weil-pbc-site-ses-cech-h1-surjective) -/
+Source: Stacks Project, Lemma 03CN(5). -/
 private theorem site_ses_local_lifts
     (C : Type u) [Category.{v} C] (J : Precoverage C)
     [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]
@@ -229,8 +226,7 @@ private lemma site_compatible {C : Type u} [Category.{v} C]
 set_option linter.unusedVariables false in
 /-- A short exact sequence of abelian sheaves on a site is surjective on sections over `U`
 if the kernel has vanishing Čech H¹ on a cofinal system of coverings.
-Source: Stacks Project, Cohomology on Sites, Lemma 03F8
-(blueprint: lem-weil-pbc-site-ses-cech-h1-surjective).
+Source: Stacks Project, Cohomology on Sites, Lemma 03F8.
 
 Proof:
 1. Short exactness gives a sectionwise injective kernel map, with image the kernel of

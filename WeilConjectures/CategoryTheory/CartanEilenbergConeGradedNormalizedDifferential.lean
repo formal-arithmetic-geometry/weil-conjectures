@@ -27,8 +27,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Normalized retained-column maps commute with one adjacent differential.
-Source: Stacks Project, Tags 012X and 0133; parent comparison, step 3.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-normalized-differential).
+Source: Stacks Project, Tags 012X and 0133.
 
 Proof: precompose the asserted equality with the two inclusions of the column
 cone. In negative resolution degrees both sources are zero, except for K in

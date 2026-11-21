@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-! # The unit-compatible Cech--Koszul comparison on one ringed site
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -87,9 +86,7 @@ variable [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.{u}
 Koszul tensor tower, including the degree-zero unit. No restriction or uniqueness
 assertion is part of this calculation.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941;
-more-algebra.tex, Tag 0913; derived.tex, Tag 0949.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941; more-algebra.tex, Tag 0913; derived.tex, Tag 0949.
 
 Proof: evaluate the transposed strict tensor tower at each index to identify its
 map with tensor by the finite dual Koszul complex. K-flatness of those finite duals,

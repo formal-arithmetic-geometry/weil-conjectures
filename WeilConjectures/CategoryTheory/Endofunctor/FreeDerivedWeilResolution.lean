@@ -23,10 +23,6 @@ import Mathlib.Tactic.Abel
 
 /-! # The ordinary derived free Weil resolution
 
-Source: blueprint main-20261015, `cor-coef-verdier-weil-equivariance.proof.md`, final
-exceptional-adjunction assertion, and the explicit ordinary-derived expansion in
-`lem-sf-free-derived-weil-resolution` (blueprint: lem-sf-free-derived-weil-resolution).
-
 The integer powers, free pair, and adjunction are the existing `IsoAlgebra.Free`
 constructions. The isomorphisms `θ` below are their iterated structure maps. In particular,
 `θ n ≪≫ (θ (n - 1)).symm` is exactly the coherent map `P^(n-1)(φ)` in the node.
@@ -49,9 +45,7 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
   (F : C ⥤ C) [F.Additive] [F.IsEquivalence]
 
-/-- Structural assertions for the free and forgetful functors. Source: blueprint
-ordinary-derived expansion, steps 1--4
-(blueprint: lem-sf-free-derived-weil-resolution).
+/-- Structural assertions for the free and forgetful functors.
 
 Proof: step 1 applies the heart paragraph of
 `lem-sf-fixed-pair-derived-forget-comparison` to the autoequivalence F. Kernels and
@@ -60,7 +54,7 @@ of all integer translates, with successor structure, and its degree-zero summand
 gives the adjunction. Exact sums make this left adjoint exact. Its value on a
 separator is a separator, and filtered colimits are exact after forgetting, so the
 heart is Grothendieck. Step 2 constructs coproducts with the component structure
-isomorphisms; the equivalence preserves sums (`lem-galois-equivalence-preserves-limits`),
+isomorphisms; the equivalence preserves sums,
 and the intertwining equation is tested on every summand, including the empty family. -/
 theorem freeWeil_heart_properties :
     IsGrothendieckAbelian.{w} (IsoAlgebra F) ∧
@@ -82,26 +76,20 @@ theorem freeWeil_heart_properties :
     fun J ↦ inferInstance, inferInstance, inferInstance, ⟨Free.adjunction F⟩,
     fun M ↦ rfl, fun M n ↦ Free.map_ι_comp_str F M n⟩
 
-/-- Expose the exactness assertion of the heart theorem to the derived-functor API.
-Source: ordinary-derived expansion, steps 1 and 3
-(blueprint: lem-sf-free-derived-weil-resolution). -/
+/-- Expose the exactness assertion of the heart theorem to the derived-functor API. -/
 instance freeWeil_preservesFiniteLimits : PreservesFiniteLimits (Free.functor F) :=
   (freeWeil_heart_properties F).2.2.2.2.2.1
 
 variable [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} (IsoAlgebra F)]
 
 /-- The specified localization of the existing free adjunction, with its original
-termwise unit and counit. Source: ordinary-derived expansion, step 3, and
-`def-weil-exact-derived-adjunction`
-(blueprint: lem-sf-free-derived-weil-resolution). -/
+termwise unit and counit. -/
 def freeWeilDerivedAdjunction :
     (Free.functor F).mapDerivedCategory ⊣ (forget F).mapDerivedCategory :=
   (Free.adjunction F).mapExactDerivedCategory
 
 /-- Standard comparison between the composite derived free-forgetful functor on a
-representative and the localization of its termwise composite. Source: ordinary
-derived expansion, steps 3 and 9; the two exact-functor factorizations
-(blueprint: lem-sf-free-derived-weil-resolution). -/
+representative and the localization of its termwise composite. -/
 def freeWeilLocalizationComponent (K : CochainComplex (IsoAlgebra F) ℤ) :
     ((forget F).mapDerivedCategory ⋙ (Free.functor F).mapDerivedCategory).obj
         (DerivedCategory.Q.obj K) ≅
@@ -115,8 +103,6 @@ def freeWeilLocalizationComponent (K : CochainComplex (IsoAlgebra F) ℤ) :
 /-- Exact induction and forgetting on the ordinary unbounded derived categories.
 The adjunction used in the resolution is the specified localization
 `(Free.adjunction F).mapExactDerivedCategory`.
-Source: ordinary-derived expansion, steps 3--4
-(blueprint: lem-sf-free-derived-weil-resolution).
 
 Proof: step 3 uses `situation-conventions` and
 `def-weil-exact-derived-adjunction`. Apply the heart unit and counit termwise and
@@ -539,8 +525,6 @@ private def freeWeilConnecting : DerivedCategory.Q ⟶
 
 /-- The natural cyclic short exact sequence and its ordinary derived triangle, with
 the actual counit and the explicit difference on all integer summands.
-Source: ordinary-derived expansion, steps 5--9
-(blueprint: lem-sf-free-derived-weil-resolution).
 
 Proof: step 5 iterates the chain structure in both directions. Its maps are
 `Free.hom K (𝟙 _) n`; they are invertible, and their zero member is the identity.
@@ -665,13 +649,11 @@ theorem exists_freeDerivedWeilResolution :
     · exact (δ.naturality a.inv).symm
 
 /-- Underlying membership implies membership in the localizing hull of free images.
-Source: ordinary-derived expansion, step 10
-(blueprint: lem-sf-free-derived-weil-resolution).
 
 Proof: apply `exists_freeDerivedWeilResolution`. If U K lies in L, then I U K lies
 in I(L), hence in its localizing closure. Both initial vertices of the distinguished
 cyclic triangle are I U K. Closure under distinguished cones and isomorphisms puts
-K in that closure (`def-weil-triangulated-subcategory`). No invariance of L under
+K in that closure. No invariance of L under
 the autoequivalence, boundedness, or extra hypothesis on K is needed. -/
 theorem freeWeil_mem_localizingClosure
     (L : ObjectProperty (DerivedCategory C)) [L.IsLocalizing]

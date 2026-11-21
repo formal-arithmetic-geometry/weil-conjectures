@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 /-!
 # Embedding towers into injective split towers
 
-Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1 proof footnote
-(blueprint: lem-pc-tower-injective-embedding).
+Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1 proof footnote.
 -/
 
 @[expose] public section
@@ -49,8 +48,7 @@ with the first projection as transition map and `i_{n+1}(a) = (i_n (f_n a), j_{n
 Finite direct sums preserve injectivity, the projections are split by the summand inclusions,
 and the defining formula makes the `i_n` a morphism of towers.
 Proof (node step 3): each `i_n` is injective by its two coordinates, and a tower morphism with
-injective components is a monomorphism of towers since composition is componentwise.
-(blueprint: lem-pc-tower-injective-embedding) -/
+injective components is a monomorphism of towers since composition is componentwise. -/
 theorem tower_injective_embedding (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     ∃ (I : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (i : A ⟶ I),
       Mono i ∧

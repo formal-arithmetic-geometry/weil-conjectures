@@ -61,8 +61,7 @@ variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory.{q} C]
   (φm : DerivedCategory.Q ⋙ mD ≅ m.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
 
 /-- Localization preserves a cube with all six faces fixed on complex representatives.
-Source: Stacks 05S7 and 014F; Zheng Construction 4.1
-(blueprint: lem-sf-independent-localized-exact-cube).
+Source: Stacks 05S7 and 014F.
 
 Proof: precompose with Q, a fully faithful operation on functor categories. Cancel
 three terminal factorization isomorphisms. Substitute the six representative

@@ -25,8 +25,7 @@ import Mathlib.Tactic.IrreducibleDef
 /-!
 # Injective module sheaves on a ringed-site hypercover
 
-Source: Stacks Project, Hypercoverings, Tags 01GE and 01GW, ringed-module analogue
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Hypercoverings, Tags 01GE and 01GW, ringed-module analogue.
 
 The conclusion is the explicit exact-sequence formulation of the augmentation
 quasi-isomorphism. The matching hypothesis is expressed by local lifting of every
@@ -671,8 +670,7 @@ private theorem exact_of_dual_shortComplex
 /-- The canonical augmented alternating section sequence of an injective module sheaf
 on a representable hypercover is exact, without affineness or weak contractibility.
 
-Source: Stacks Project, Hypercoverings, Tags 01GE and 01GW, ringed-module analogue
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Hypercoverings, Tags 01GE and 01GW, ringed-module analogue.
 
 The matching condition says that each tuple of lower simplices over `w : T ⟶ W`
 lifts on a covering sieve. For `n = 0` there are no lower simplices. For `n = 1`

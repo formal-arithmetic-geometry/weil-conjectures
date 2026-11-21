@@ -27,9 +27,6 @@ attribute [local instance] derived_hasCoproducts
 
 /-- Alpha-compactness supplies the perfectness and bounded-subcoproduct clauses.
 
-Source: Krause, Localization theory, Sections 6.2--6.3 and Proposition 6.8.1.
-(blueprint: new-sfb-derived-perfect-small-class-properties)
-
 Proof: the canonical alpha-compact class satisfies Krause's (G4). Factor a map
 into a coproduct through a coproduct of objects Z_i in that class. The componentwise
 surjectivity hypothesis lifts each map Z_i to X_i, and their coproduct gives the

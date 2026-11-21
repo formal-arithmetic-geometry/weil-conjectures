@@ -30,7 +30,6 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 /-! # A normalized cochain derived adjunction from resolving models
 
 Source: Stacks Project, Derived Categories, Tags 0FND and 09T5.
-(blueprint: lem-cbc-cochain-derived-adjunction).
 -/
 
 @[expose] public section
@@ -143,8 +142,7 @@ private theorem inverted_indDiagram
 /-- An ordinary adjunction and a universal cochain left derived pair computed on resolutions
 induce a derived adjunction, with the original unit and the specified cochain counit.
 
-Source: Stacks Project, Derived Categories, Tags 0FND and 09T5
-(blueprint: lem-cbc-cochain-derived-adjunction).
+Source: Stacks Project, Derived Categories, Tags 0FND and 09T5.
 
 Proof: Transfer the universal counit along the full homotopy quotient and its localization
 comparison. The resolving class makes incoming denominator diagrams essentially constant;

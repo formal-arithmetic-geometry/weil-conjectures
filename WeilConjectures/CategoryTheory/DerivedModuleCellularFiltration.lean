@@ -24,7 +24,6 @@ namespace CategoryTheory
 /-- A derived module object has an exhaustive cellular filtration of a representative.
 Source: Stacks Project, More on Algebra, Remark 15.60.11 (Tag 09PB), and
 Differential Graded Algebra, Lemma 22.20.4 (Tag 09KP).
-(blueprint: lem-pc-derived-module-cellular-filtration).
 
 Proof: choose a cochain representative of `K` using essential surjectivity of `Q`.
 Apply the filtered free resolution theorem, with the zero initial term reindexed as

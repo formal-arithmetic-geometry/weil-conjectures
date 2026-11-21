@@ -49,9 +49,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Constant strict towers and ringed direct image
 
-Source: Stacks Project, Cohomology on Sites, Tag 0A07, lemma-Rf-commutes-with-Rlim,
-diagram-topos proof, specialized to constant towers
-(blueprint: lem-weil-pbc-constant-tower-pushforward-normalization).
+Source: Stacks Project, Cohomology on Sites, Tag 0A07,
+diagram-topos proof, specialized to constant towers.
 
 The natural number n denotes positive tower level n+1. The comparisons supplied as
 parameters below are characterized by their ordinary localization equations; they are
@@ -68,16 +67,14 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Additivity of the exact constant tower functor, obtained from its preserved products.
-Source: Stacks Project, Tag 0A07, constant diagram specialization
-(blueprint: lem-weil-pbc-constant-tower-pushforward-normalization). -/
+Source: Stacks Project, Tag 0A07, constant diagram specialization. -/
 instance ringedConstantTowerAdditive
     (A : Type uA) [Category.{vA} A] [Abelian A] :
     (Functor.const ℕᵒᵖ : A ⥤ (ℕᵒᵖ ⥤ A)).Additive :=
   Functor.additive_of_preserves_binary_products _
 
 /-- Canonical evaluation of an exact constant strict tower, using the ordinary identity.
-Source: Stacks Project, Tag 0A07, constant diagram specialization
-(blueprint: lem-weil-pbc-constant-tower-pushforward-normalization). -/
+Source: Stacks Project, Tag 0A07, constant diagram specialization. -/
 def ringedConstantTowerEvaluation
     (A : Type uA) [Category.{vA} A] [Abelian A]
     [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)] (n : ℕᵒᵖ) :
@@ -89,8 +86,7 @@ def ringedConstantTowerEvaluation
 
 /-- The canonical constant-tower/exact-pullback interchange. Its ordinary components
 are identities, as specified by compConstIso.
-Source: Stacks Project, Tag 0A07, constant diagram specialization
-(blueprint: lem-weil-pbc-constant-tower-pushforward-normalization). -/
+Source: Stacks Project, Tag 0A07, constant diagram specialization. -/
 def ringedConstantTowerPullback
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B]

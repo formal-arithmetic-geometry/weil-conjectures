@@ -142,7 +142,7 @@ Put these maps into the algebraic direct sum. Naturality of the identification w
 shows that their image under the canonical comparison is the given map. This proves
 surjectivity. The empty sum has zero H^0, so its only map has the zero preimage; for the zero
 ring all modules are zero. No commutativity is used. Source: Stacks Project, Tag 0F5X,
-first paragraph. (auxiliary; not a blueprint node)
+first paragraph.
 -/
 theorem derivedModule_rankOne_comparison_surjective
     {S : Type w} [Ring S]

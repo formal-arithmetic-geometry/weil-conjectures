@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 # The epimorphic projection from Roos cohomology to the inverse limit
 
 Source: Stacks Project, Tag 07KY, the kernel extraction in the proof of the Milnor
-sequence (blueprint: lem-weil-pbc-roos-cohomology-projection).
+sequence.
 -/
 
 @[expose] public noncomputable section

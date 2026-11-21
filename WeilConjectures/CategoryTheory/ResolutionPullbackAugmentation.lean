@@ -13,7 +13,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 /-! # Exact pullback and resolution augmentations
 
 Source: Stacks Project, Tags 01F8 and 05TH.
-(blueprint: lem-weil-pbc-resolution-pullback-augmentation).
 -/
 
 @[expose] public section
@@ -24,9 +23,8 @@ namespace CategoryTheory.Functor
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- An exact functor carries the resolution augmentation square to its derived image.
-Source: Stacks Project, Tag 01F8 (cohomology.tex, lemma-functoriality), and
-Tag 05TH (derived.tex, lemma-injective-acyclic).
-(blueprint: lem-weil-pbc-resolution-pullback-augmentation).
+Source: Stacks Project, Tag 01F8 (cohomology.tex), and
+Tag 05TH (derived.tex).
 
 Proof: Apply the fully faithful inclusion from D+ to D. Its image of a and a'
 is the single-complex comparison followed by Q of the respective augmentation

@@ -10,9 +10,6 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 
 /-! # Internal modules with an action of a profinite condensed group
 
-Source: blueprint, direct-image stability, paragraph (3), internal-action categorical input
-(auxiliary; not a blueprint node).
-
 The underlying object is the recorded internal module object. Its section module is read
 through the existing section-module equivalence. Actions use all continuous maps from a
 profinite test object and commute with restriction; they are not abstract group actions.
@@ -30,8 +27,7 @@ namespace Profinite.CondensedAction
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The existing internal-module category on the coherent profinite site.
-Source: blueprint paragraph (3) (auxiliary; not a blueprint node). -/
+/-- The existing internal-module category on the coherent profinite site. -/
 abbrev Modules := Mod (Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1}) R.X
 
 variable (P : Type u) [TopologicalSpace P] [Group P] [IsTopologicalGroup P]

@@ -18,9 +18,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Sheaf.Torsor
 
 /-- Invariant natural maps factor uniquely through the actual sheafified orbit quotient.
-Source: Stacks Project, Tags 03AH and 03AJ, contracted-product quotient construction;
-the set quotient universal property and the sheafification adjunction.
-(blueprint: lem-sc-etale-contracted-product-exists-universal)
+Source: Stacks Project, Tags 03AH and 03AJ, contracted-product quotient construction.
 
 Proof: Invariance makes the function on pairs constant on every generating relation,
 so Quot.lift defines its map on orbit sections. Naturality on representatives gives a

@@ -32,7 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Localization preserves termwise coproducts in the presence of K-injective resolutions.
-Source: Stacks 07D9 and 070I (blueprint: lem-pur-exact-derived-coproducts).
+Source: Stacks 07D9 and 070I.
 Proof: compute maps into a K-injective resolution of the target. Both chain maps and
 homotopies out of a termwise coproduct are families of maps and homotopies. Thus the
 localized termwise coproduct cofan has the coproduct universal property. -/
@@ -53,7 +53,7 @@ theorem derived_Q_preservesCoproducts
   exact preservesColimitsOfShape_of_discrete Q
 
 /-- An exact functor preserving coproducts also preserves them on unbounded derived categories.
-Source: Stacks 07D9 and 015F (blueprint: lem-pur-exact-derived-coproducts).
+Source: Stacks 07D9 and 015F.
 Proof: represent every derived summand by a complex. The source coproduct is the
 localization of the termwise coproduct. Exactness identifies its image with the
 localization of the image complex; ordinary coproduct preservation makes that complex

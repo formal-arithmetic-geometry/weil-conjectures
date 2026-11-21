@@ -118,7 +118,7 @@ lemma localizingClosure_eq_self [P.IsLocalizing] : P.localizingClosure = P :=
   le_antisymm (localizingClosure_le le_rfl) (le_localizingClosure P)
 
 
-/-- Blueprint `proposition-proper-direct-image-extension-zero`: a triangulated functor `F : C ⥤ D`
+/-- a triangulated functor `F : C ⥤ D`
 preserving coproducts indexed by `Type v` which maps the objects of `P` into `Loc(P')` maps
 `Loc(P)` into `Loc(P')`: the objects `X` with `F X ∈ Loc(P')` form a localizing property. -/
 lemma localizingClosure_le_inverseImage {D : Type*} [Category.{v} D] [HasZeroObject D]

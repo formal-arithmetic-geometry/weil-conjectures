@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresAbelian
 # Underlying sets of abelian inverse image
 
 Source: Stacks Project, Sites, Section 00YR and Proposition 00YV (2), and
-Modules on Sites, proof of Lemma 04JC
-(auxiliary; not a blueprint node).
+Modules on Sites, proof of Lemma 04JC.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 /-- Source: Stacks Project, Sites, Section 00YR and Proposition 00YV (2), and
-Modules on Sites, first paragraph of the proof of Lemma 04JC
-(auxiliary; not a blueprint node).
+Modules on Sites, first paragraph of the proof of Lemma 04JC.
 
 The site object and morphism universes may differ. Sheafification and left Kan
 extension existence are explicit hypotheses; coefficients live in `max u v w`.

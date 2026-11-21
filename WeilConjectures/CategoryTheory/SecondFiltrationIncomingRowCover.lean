@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 /-! # Incoming graded differential of an extended row
 
 Source: Stacks Project, Homology, Tag 0130, clause 2.
-(blueprint: lem-sp-second-filtration-incoming-row-cover).
 -/
 
 @[expose] public section
@@ -149,7 +148,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- In positive resolution degree, the incoming graded differential is covered
 by the incoming row term.
 Source: Stacks Project, Tag 0130, clause 2, the second-filtration differential.
-(blueprint: lem-sp-second-filtration-incoming-row-cover).
 
 Proof. Put n = s+r and project the diagonal coproduct in degree n-1 onto
 its summand with second coordinate s. This projection kills the next filtration

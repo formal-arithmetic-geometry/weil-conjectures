@@ -24,7 +24,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, derived.tex, Tag 015J.
-(blueprint: lem-pc-hypercohomology-left-edge-single-aux)
 
 Proof: For the single complex, the cycle inclusion identifies its degree-n cycles
 with the sole term. The canonical lift of the mapped inclusion is characterized by

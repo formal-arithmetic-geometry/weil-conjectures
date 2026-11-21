@@ -69,10 +69,7 @@ set_option backward.isDefEq.respectTransparency true in
 of the strict dual tensor tower, naturally in the coefficient complex and compatibly
 with the actual degree-zero units. This is a statement before localization.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
-lemma-colim-and-lim-of-duals, finite evaluation and Hom of a colimit;
-more-algebra.tex, Tag 0913.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A, finite evaluation and Hom of a colimit; more-algebra.tex, Tag 0913.
 
 Proof: for each positive Koszul complex P_m, finite evaluation gives
 Hom(P_m,N) = N tensor Hom(P_m,O[0]). Its component on the summand of source degree p

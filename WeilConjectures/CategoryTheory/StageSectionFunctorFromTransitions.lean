@@ -22,7 +22,6 @@ namespace CategoryTheory
 
 /-- Construct the section diagram from transition maps satisfying the unit equation.
 Source: Stacks Project, Sites, Tag 0A35, section formula and adjunction paragraph.
-(blueprint: lem-weil-pbc-stage-section-functor-from-transitions).
 
 Proof: Write S_t for inverse image along f_t = F(t.hom), R_t for restriction,
 and eta_t for its unit. For each b : t to t', the hypothesis at every X is the

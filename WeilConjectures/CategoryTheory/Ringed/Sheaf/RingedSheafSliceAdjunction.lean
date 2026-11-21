@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 # Slice-site localization for ringed sheaves
 
 Source: Stacks Project, sites.tex, Tags 0791 and 04J4, and sites-modules.tex,
-Tag 04IE (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction).
+Tag 04IE.
 -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ namespace CategoryTheory
 /-- Data of the ringed slice presentation and its exact module adjunction.
 
 Source: Stacks Project, sites.tex, Tags 0791 and 04J4, and sites-modules.tex,
-Tag 04IE (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction). -/
+Tag 04IE. -/
 structure RingedSheafSliceAdjunctionData
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) (A : Sheaf J (Type u)) where
@@ -95,7 +95,7 @@ structure RingedSheafSliceAdjunctionData
 exact extension-by-zero/module-restriction adjunction, including relocalization.
 
 Source: Stacks Project, sites.tex, Tags 0791 and 04J4, and sites-modules.tex,
-Tag 04IE (blueprint: lem-weil-pbc-ringed-sheaf-slice-adjunction).
+Tag 04IE.
 
 Proof.
 1. The element category is small; covering families are those whose underlying families cover,

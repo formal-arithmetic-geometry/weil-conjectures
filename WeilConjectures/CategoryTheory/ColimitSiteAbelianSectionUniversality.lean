@@ -46,7 +46,6 @@ private theorem arrow_kernel_iff
 
 /-- Source: Stacks Project, Sites, Tag 0A35, the presentation, sheaf equalizer,
 and adjunction paragraphs; abelian-group extension via Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-abelian-section-universality).
 
 Proof: Construct sections at a limit object from all its presentations above i.
 Object and arrow colimit representatives put finitely many presentations and

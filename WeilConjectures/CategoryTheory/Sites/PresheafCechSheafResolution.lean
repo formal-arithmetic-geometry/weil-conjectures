@@ -28,8 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Sheaf
 
 /-- The free abelian sheaf functor on presheaves of sets.
-Source: Stacks Project, Tag 079Z.
-(blueprint: lem-sc-presheaf-cech-sheaf-resolution) -/
+Source: Stacks Project, Tag 079Z. -/
 noncomputable abbrev presheafCechFreeSheafFunctor
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{v}] :
@@ -38,8 +37,7 @@ noncomputable abbrev presheafCechFreeSheafFunctor
     presheafToSheaf J AddCommGrpCat
 
 /-- The chain complex of sheafified free abelian presheaves on the Čech nerve.
-Source: Stacks Project, Tags 01GC and 079Z.
-(blueprint: lem-sc-presheaf-cech-sheaf-resolution) -/
+Source: Stacks Project, Tags 01GC and 079Z. -/
 noncomputable abbrev presheafCechSheafComplex
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{v}] (f : Arrow (Cᵒᵖ ⥤ Type v)) :
@@ -50,8 +48,7 @@ noncomputable abbrev presheafCechSheafComplex
 /-- An exact syzygy ladder for the actual sheafified free Čech chain complex.
 The maps factor its differentials; the initial augmentation is the original map,
 under the degree-zero identification. All data and proofs are explicit fields.
-Source: Stacks Project, Tag 079Z, augmented free nerve argument.
-(blueprint: lem-sc-presheaf-cech-sheaf-resolution) -/
+Source: Stacks Project, Tag 079Z, augmented free nerve argument. -/
 structure PresheafCechSheafResolution
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}] (f : Arrow (Cᵒᵖ ⥤ Type v)) where
@@ -69,7 +66,6 @@ structure PresheafCechSheafResolution
 
 /-- A locally surjective presheaf map has an exact augmented sheafified free nerve.
 Source: Stacks Project, Hypercoverings, Tag 01GC, and Cohomology on Sites, Tag 079Z.
-(blueprint: lem-sc-presheaf-cech-sheaf-resolution)
 
 Proof: evaluate the free presheaf chain complex objectwise. Replace the target
 set by the image of the evaluated map; this does not change the nerve. Choose

@@ -72,7 +72,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 This is the nonfinite-coefficient compactness input needed by the corrected Brown theorem.
 The adopted source currently records the corresponding compactness declarations over finite
 or separably closed fields; this theorem isolates the finite-cd extension.
-(blueprint: lem-sfb-brown-finite-cd-integral-ext)
 -/
 
 @[expose] public section
@@ -476,10 +475,6 @@ attribute [local instance 20000] AlgebraicGeometry.ProEtale.sheafBraidedCategory
 -- The derived coefficient equivalence compares large canonical single-functor constructions.
 /-- Uniform Ext bounds for valuation-ring coefficients over a field of finite
 ℓ-cohomological dimension.
-
-Source: blueprint latest, `sk-lem-int-ext.proof.md`, bound paragraph, and
-`sk-lem-brown-hypotheses.proof.md`, integral compactness.
-(blueprint: lem-sfb-brown-finite-cd-integral-ext).
 
 Proof: filter the first constructible sheaf by degree-zero extensions from finitely
 many locally closed strata. On a stratum use a finite presentation of its coefficient

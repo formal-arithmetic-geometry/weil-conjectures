@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 # Lifting a product preserving adjunction to group and ring objects
 
 Source: Stacks Project, Sites and Sheaves, Proposition 00YV, proof of (2) and the
-paragraph on rings as sextuples (blueprint: lem-weil-pbc-adjunction-lifts-group-ring-objects).
+paragraph on rings as sextuples.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ open CategoryTheory.CartesianMonoidalCategory
 
 namespace CategoryTheory.Adjunction
 
-/-- Source: Stacks Project, Proposition 00YV, proof of (2) and rings as sextuples
-(blueprint: lem-weil-pbc-adjunction-lifts-group-ring-objects).
+/-- Source: Stacks Project, Proposition 00YV, proof of (2) and rings as sextuples.
 
 The Cartesian monoidal structures specify the chosen finite products. `CommGrp` is
 written multiplicatively, with its multiplication, unit and inverse representing
@@ -37,12 +36,9 @@ underlying functors; the associated `eqToIso`s only express these equalities in
 well-typed equations of structure maps.
 
 Proof: (1) The right adjoint preserves limits. Apply `Adjunction.mapCommGrp` for the
-group clauses, using the canonical braided structures on product preserving functors
-(situation-conventions,
-situation-conventions).
+group clauses, using the canonical braided structures on product preserving functors.
 (2) The product comparisons commute with projections, pairings and product maps;
-the terminal comparison commutes with the unique maps to the terminal object
-(def-weil-category-product). These identities also hold for the right adjoint.
+the terminal comparison commutes with the unique maps to the terminal object. These identities also hold for the right adjoint.
 (3) Transport the ring operations by the inverse comparisons. Induction on terms
 built from coordinates, operations and constants shows that transported terms,
 precomposed with the comparison for their product of variables, equal the image
@@ -53,8 +49,8 @@ ring morphisms preserve every operation, giving functors commuting with forgetti
 that they preserve multiplication and one; their additive compatibility is (1).
 (6) A morphism and its adjunct preserve the operations simultaneously: one direction
 composes its right image with the unit; the other composes its left image with the
-counit (situation-conventions). Restrict the natural adjunction
-bijection to obtain the lifted adjunction (lem-weil-pbc-adjunction-of-natural-bijection).
+counit. Restrict the natural adjunction
+bijection to obtain the lifted adjunction.
 Its unit and counit are the original components. -/
 theorem liftsGroupRingObjects
     {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]

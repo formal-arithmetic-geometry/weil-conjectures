@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-! # Lifting a commuting cube to bounded below right derived functors
 
 Source: Stacks Project, Tag 0736, uniqueness of right derived transformations.
-(blueprint: lem-weil-pbc-right-derived-plus-cube)
 -/
 
 @[expose] public section
@@ -126,7 +125,6 @@ variable {B C B' C' B₀ C₀ B₀' C₀' : Type*}
 /-- A commuting cube with exact transverse edges remains commuting after right derivation.
 
 Source: Stacks Project, Tag 0736, construction and uniqueness of derived transformations.
-(blueprint: lem-weil-pbc-right-derived-plus-cube)
 
 Proof: Compare the two natural transformations from RG followed by DQ and DV'.
 Precompose with the unit of RG, whiskered by DQ and DV'. The factorization

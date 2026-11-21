@@ -23,8 +23,7 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-! # Compatible sectionwise bases of constant coefficient extensions
 
-Source: Stacks 03EK and the finite-basis calculation in step 6 of
-`lem-pur-compact-support-roos-cofinality`.
+Source: Stacks 03EK and calculation in step 6 of.
 -/
 
 @[expose] public section
@@ -241,9 +240,8 @@ end BasisConstruction
 /-- A finite basis of a coefficient extension induces a basis on every object of
 its constant ring sheaves, with coordinates commuting with restriction.
 
-Source: Stacks 03EK, associated module sheaves, and the finite-basis argument of
-step 6 of `lem-pur-compact-support-roos-cofinality`.
-(blueprint: lem-pur-constant-finite-free-section-basis)
+Source: Stacks 03EK, associated module sheaves, and argument of
+step 6 of.
 
 Proof: Choose a finite A-basis of B. Its coordinate maps give an A-linear
 isomorphism B with A to a finite power. Regard these as maps of constant

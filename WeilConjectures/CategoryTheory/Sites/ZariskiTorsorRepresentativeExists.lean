@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Sites.ZariskiTorsorFreeExtension
 # A representative extension of a Zariski torsor
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 02FQ, first construction.
-(blueprint: lem-sc-zariski-torsor-representative-exists)
 -/
 
 @[expose] public section
@@ -119,8 +118,7 @@ in the lifting torsor of the global section one. Applying the pushout relation t
 `Torsor.Iso.ofHom` turns any equivariant map between torsors into an isomorphism:
 simple transitivity gives injectivity, and local nonemptiness gives local
 surjectivity; the sheaf property then gives the isomorphism. All constructions
-have coefficient universe `u`, with no choice of an unproved existence witness.
-(blueprint: lem-sc-zariski-torsor-representative-exists) -/
+have coefficient universe `u`, with no choice of an unproved existence witness. -/
 theorem zariski_torsor_representative_exists (X : Scheme.{u})
     (G : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) (T : G.Torsor) :
     ∃ (E : Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})

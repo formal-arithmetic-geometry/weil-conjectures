@@ -45,7 +45,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
   [HasDerivedCategory.{v} A]
 
 /-- **Brown representability for the derived category of a Grothendieck abelian category**
-(Stacks Proposition 19.15.2, Tag 0F5Y; blueprint `theorem-existence-exceptional-inverse-image--1`):
+(Stacks Proposition 19.15.2, Tag 0F5Y):
 a triangulated functor `F : D(A) ⥤ T` which preserves coproducts is a left adjoint. -/
 theorem isLeftAdjoint_of_preservesCoproducts {T : Type u'} [Category.{v} T] [Preadditive T]
     [HasZeroObject T] [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T]

@@ -9,10 +9,6 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Algebra for transporting scalar adjunction mates
-
-Source: the adjunction algebra in Step 2 of lem-finite-realization-scalar-mate,
-expanding Mathlib's unit and iterated-mate identities.
-(blueprint: lem-finite-realization-mate-algebra).
 -/
 
 @[expose] public section
@@ -28,9 +24,7 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
   (a : S ⊣ U) (b : T ⊣ V)
   (k : U ⋙ EA.inverse ≅ EB.inverse ⋙ V)
 
-/-- The forward realization/restriction square conjugate to its inverse square.
-Source: conjugation by equivalences, Step 2 of lem-finite-realization-scalar-mate.
-(blueprint: lem-finite-realization-mate-algebra). -/
+/-- The forward realization/restriction square conjugate to its inverse square. -/
 def realizationRestrictionFromInverse : EB.functor ⋙ U ≅ V ⋙ EA.functor :=
   Functor.isoWhiskerLeft (EB.functor ⋙ U) EA.counitIso.symm ≪≫
     Functor.isoWhiskerLeft EB.functor (Functor.isoWhiskerRight k EA.functor) ≪≫
@@ -52,9 +46,6 @@ private theorem scalar_conjugate :
   simp only [Iso.hom_inv_id_app, Category.comp_id]
 
 /-- The left-adjoint uniqueness comparison preserves the coefficient units.
-Source: Mathlib's unit_leftAdjointUniq_hom_app and iterated-mates identity;
-Step 2 of lem-finite-realization-scalar-mate.
-(blueprint: lem-finite-realization-mate-algebra).
 Proof: the conjugate of the uniqueness map is k.inv by its unit equation.
 Taking mates back identifies the scalar mate with the inverse forward square.
 The unit_mateEquiv equation followed by the forward square gives the result. -/
@@ -101,8 +92,6 @@ end CategoryTheory
 namespace CategoryTheory
 
 /-- Transporting a scalar transpose through a commuting restriction cube.
-Source: Step 2 of lem-finite-realization-scalar-mate, scalar transposition.
-(blueprint: lem-finite-realization-mate-algebra).
 Proof: apply the scalar Hom-equivalence at Y and postcompose with cY. Replace
 its transpose followed by the unit by its defining map. Naturality of h moves
 rZ past it, so the restriction cube applies. The unit equation nZ and naturality
@@ -174,9 +163,6 @@ namespace CategoryTheory
 
 /-- The scalar transpose of the inverse restriction mate is the geometric mate
 of the inverse scalar mate.
-Source: Mathlib's iterated_mateEquiv_conjugateEquiv and conjugateIsoEquiv;
-Step 2 of lem-finite-realization-scalar-mate.
-(blueprint: lem-finite-realization-mate-algebra).
 Proof: iterated mates send e.hom to t.inv. Conjugate isomorphisms preserve
 inverses, so iterated mates send e.inv to t.hom. The unit_mateEquiv equation
 then gives the scalar Hom-equivalence equation defining the transpose. -/

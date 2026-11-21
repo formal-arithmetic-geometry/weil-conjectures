@@ -57,9 +57,8 @@ private theorem exists_unit_transition
   rw [A.homEquiv_unit] at he
   exact congrArg (fun k ↦ Arrow.mk (k.hom.app (op X))) he
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 its section formula and final paragraph.
-(blueprint: lem-weil-pbc-colimit-site-set-inverse-image).
 
 Proof: For a stage sheaf G, transpose the unit at a later stage through the
 original inverse-image adjunction. Cocone naturality identifies the two composite

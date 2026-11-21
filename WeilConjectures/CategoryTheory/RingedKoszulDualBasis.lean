@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.SignedKoszulBasisCoproduct
 /-! # Finite subset coordinates for the actual dual Koszul tower
 
 Source: Stacks Project, More on Algebra, Tag 0664; Algebraization, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -229,9 +228,7 @@ private theorem negative_basis_step
 This statement concerns only the ringed-site complexes: it has no additive
 realization functor or exterior algebra comparison.
 
-Source: Stacks Project, More on Algebra, Tag 0664; Algebraization, Tag 0A0E,
-lemma-derived-completion-koszul, finite free duality and its transition maps.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, More on Algebra, Tag 0664; Algebraization, Tag 0A0E, finite free duality and its transition maps.
 
 Proof: use the supported-subset coproduct of the canonical negative tensor
 basis for positive length. For the empty tensor, its sole basis in degree zero

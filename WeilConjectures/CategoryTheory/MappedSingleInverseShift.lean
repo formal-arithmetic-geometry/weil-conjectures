@@ -11,9 +11,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 
 /-!
 # Single-object quotient comparisons and shifts
-
-Source: Mathlib single functors and their canonical quotient comparisons.
-(blueprint: lem-pc-mapped-single-inverse-shift).
 -/
 
 @[expose] public section
@@ -54,11 +51,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The mapped-single comparison intertwines inverse single shifts.
-
-Source: Mathlib `HomologicalComplex.singleMapHomologicalComplex`,
-`SingleFunctors.postcomp`, the quotient shift comparisons, and the upstream
-`Functor.mapHomologicalComplex_map_singleFunctors_shiftIso_hom_app`.
-(blueprint: lem-pc-mapped-single-inverse-shift)
 
 Proof: Apply the faithful inclusion into the unbounded derived category.
 Expand mapHomotopyCategoryPlusSingleFunctorQhObjIso as Q applied to the

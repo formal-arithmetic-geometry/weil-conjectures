@@ -12,7 +12,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 /-! # Restriction of the augmented extended Cech complex
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JB.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -224,7 +223,6 @@ variable [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u}
 Cech complex of the restricted list, including further restrictions between slices.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JB; algebraization.tex, Tag 099E.
-(auxiliary; not a blueprint node).
 
 Proof: restriction of the localization presheaf is the localization presheaf of the
 restricted section: both maps on fractions are the same universal localization lift.

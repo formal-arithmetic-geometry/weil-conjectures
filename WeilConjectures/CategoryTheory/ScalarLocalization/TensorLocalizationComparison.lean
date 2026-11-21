@@ -10,10 +10,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Rationaliz
 
 /-! # The tensor Hom localization has the localization universal property
 
-Source: current blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e.proof.md`,
-final sentence; comparison with categorical localization of scalar torsion cones.
-(blueprint: lem-sfb-tensor-localization-comparison)
-
 The proof reuses the generic tensor comparison argument, independently of any
 coefficient model or tower category.
 -/
@@ -25,8 +21,6 @@ open TensorProduct CategoryTheory.Limits
 namespace CategoryTheory.ScalarLocalization
 
 /-- Compare tensor Hom modules with the Hom modules of the torsion localization.
-Source: the universal property of module localization
-(blueprint: lem-sfb-tensor-localization-comparison).
 Proof: the tensor-Hom equivalence sends a tensor f to a times Q(f). Its pure-tensor
 formula preserves identities and composition; tensor induction gives all arrows. -/
 noncomputable def tensorRationalComparison
@@ -63,8 +57,6 @@ noncomputable def tensorRationalComparison
       exact (Preadditive.add_comp _ _ _ _ _ _).symm
 
 /-- The raw tensor category is a localization at scalar-torsion cones.
-Source: the module-localization Hom formula
-(blueprint: lem-sfb-tensor-localization-comparison).
 Proof: the preceding comparison is fully faithful by its tensor-Hom bijections and
 essentially surjective because every localized object comes from the source.
 It commutes with the two localization functors, so transport the localization

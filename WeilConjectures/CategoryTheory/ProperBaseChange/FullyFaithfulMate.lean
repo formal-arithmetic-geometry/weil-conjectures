@@ -20,8 +20,6 @@ namespace CategoryTheory
 open Category
 
 /-- A mate between fully faithful embeddings is invertible when its target stays in the image.
-Source: the Hom-set proof of restriction of adjunctions, Mathlib
-`Adjunction.restrictFullyFaithful` (blueprint: lem-weil-pbc-fully-faithful-mate-image).
 
 Proof. Fix an object d and write the mate's target as G(t). By full faithfulness of G,
 the mate is G(f) for a morphism f : R₁(d) ⟶ t. Postcomposition with f on Hom(X, R₁(d))

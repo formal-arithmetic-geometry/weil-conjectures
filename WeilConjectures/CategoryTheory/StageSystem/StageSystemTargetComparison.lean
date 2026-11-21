@@ -124,8 +124,6 @@ private theorem morphism_transition_with_inclusions
   exact morphism_transition F hij K
 
 /-- Assemble a target comparison from the two inclusion cones and the finite scalar square.
-Source: the common-stage coefficient-descent step of the exceptional-adjunction argument
-(blueprint: lem-sf-stage-system-target-comparison).
 
 Proof: compose the inverse first cone, inclusion of the finite comparison, the pullback
 inclusion comparison, and the second cone whiskered by the descended functor. The

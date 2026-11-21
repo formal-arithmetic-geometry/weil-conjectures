@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 /-!
 # Upper bounds for right derived functors of finite cohomological dimension
 
-Source: Stacks Project, Tag 07K7, lemma-unbounded-right-derived, part (4)(c).
+Source: Stacks Project, Tag 07K7, part (4)(c).
 -/
 
 @[expose] public section
@@ -74,8 +74,7 @@ variable [HasDerivedCategory C] [HasDerivedCategory D]
 /-- A uniform classical cohomological-dimension bound gives the same upper amplitude
 on the unbounded derived category.
 
-Source: Stacks Project, Tag 07K7, lemma-unbounded-right-derived, part (4)(c).
-(blueprint: lem-etale-derived-functor-upper-amplitude)
+Source: Stacks Project, Tag 07K7, part (4)(c).
 
 Proof: represent L by a K-injective complex I with injective components. Its cycles in
 degrees n above b satisfy the short exact sequences of cycles. Repeatedly inject

@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionTenso
 
 /-! # Tensor coherence of specified action-site comparisons
 
-Source: the normalized tensor and evaluation formulas of the twisted action-site
-presentation; Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
+Source: Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
 -/
 
 @[expose] public noncomputable section
@@ -160,8 +159,7 @@ private theorem comparison_right_unit (P : Presentation J s R a) :
 omit [s.functor.IsContinuous J J] in
 /-- The specified tensor comparisons are natural and coherent.
 
-Source: Stacks 03EK, 03EL and 03EO; the tensor portion of the specified action-site
-presentation (blueprint: lem-sf-twisted-action-tensor-coherence).
+Source: Stacks 03EK, 03EL and 03EO.
 
 Proof: assemble the given components with tensor naturality. Cancel inverse comparison
 maps in associativity and use the sheafification adjunction to reduce equality to pure

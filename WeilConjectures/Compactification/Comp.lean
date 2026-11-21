@@ -162,8 +162,7 @@ instance (c : Compactification (f ≫ g)) (d : Compactification g) :
 `X` in `c.Z ×_S d.Z` (embedded by `c.i` and `f ≫ d.i`) is a compactification of `f ≫ d.i`.
 Together with `Compactification.comp` and `Compactification.restrict` this produces, out of
 compactifications of `g` and of `f ≫ g`, the compactifications of `f` and `f ≫ g` used in the
-composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` (blueprint
-`proposition-composition-base-change-rf-shriek--1`). -/
+composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`. -/
 noncomputable def ofComp [QuasiCompact (f ≫ g)] (c : Compactification (f ≫ g))
     (d : Compactification g) : Compactification (f ≫ d.i) :=
   have : QuasiCompact (c.ofCompLift d) :=

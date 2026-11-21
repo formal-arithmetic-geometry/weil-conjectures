@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.RingedSliceExtensionTensorHomData
 /-!
 # Tensor projection formula for a ringed-site slice
 
-Source: Stacks Project, Modules on Sites, Tag 0E8I, lemma-j-shriek-and-tensor
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 0E8I.
 
 Both sheaf tensors are written as sheafified presheaf tensors, exactly as in
 `SheafOfModules.tensorObjIsoSheafification`. This permits a site object universe independent
@@ -66,8 +65,7 @@ module variables. The domain of both functors is the product of the slice module
 and the original module category, in that order. Extension is the direct-sum presheaf
 extension followed by module sheafification; each tensor is also sheafified sectionwise.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8I, lemma-j-shriek-and-tensor
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 0E8I.
 
 Proof:
 1. Relocalization identifies internal Hom of restricted modules with restricted internal
@@ -75,9 +73,7 @@ Proof:
    precomposition and postcomposition commute with this identification
    (`def-pur-sheaf-hom`, `def-pur-localized-ringed-site`, Stacks 0E8H).
 2. For a test module H, extension adjunction and tensor-Hom adjunction give
-   Hom(j_!(G tensor F|U), H) = Hom(G, Hom(F|U,H|U)), naturally in all variables
-   (`lem-pur-site-restriction-module-adjunction-exact`,
-   `lem-pc-sheaf-modules-tensor-closed`).
+   Hom(j_!(G tensor F|U), H) = Hom(G, Hom(F|U,H|U)), naturally in all variables.
 3. Apply step 1, then the inverse extension adjunction and inverse tensor-Hom adjunction,
    obtaining Hom(j_!G tensor F,H), still naturally in G,F,H.
 4. If E is this Hom equivalence from A to B, set u = E(id_A) : B -> A and

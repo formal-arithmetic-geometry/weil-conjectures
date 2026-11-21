@@ -17,9 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
 
 /-- Canonical lift case of the hypercohomology left-edge cocycle equation.
-Source: Stacks Project, derived.tex, Tag 015J; this is the representative
-calculation for the canonical cycle lift.
-(blueprint: lem-pc-hypercohomology-edge-cocycle-canonical)
+Source: Stacks Project, derived.tex, Tag 015J.
 
 The canonical lift is the map on cycles induced by left exactness.  The proof
 uses a Cartan--Eilenberg resolution and computes the degree-zero representative

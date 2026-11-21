@@ -37,7 +37,6 @@ This generalizes the pro-étale base change of
 `WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat`.
 
 Source: Stacks Project, Tags 00YV, 03D2, 05VD.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -969,7 +968,6 @@ inverse image `Mod.mapModComap ρ`, transported through the section-module equiv
 module part of an algebraic inverse image along the set-valued sheaf pullback `U^*`.
 
 Source: Stacks Project, Tags 00YV and 03D2.
-(auxiliary; not a blueprint node)
 
 Proof. Both the set-valued and the abelian sheaf pullbacks are left Kan extension along `U.op`
 followed by sheafification. The comma categories `CostructuredArrow U.op W` are filtered since
@@ -1133,8 +1131,7 @@ theorem exists_sectionModuleAlgebraicInverseImage
 `ρ : S ⟶ U^* R` an isomorphism of commutative ring objects in abelian sheaves. Then the
 internal inverse image `Mod.mapModComap ρ` preserves flat module objects.
 
-Source: Stacks Project, Tag 05VD, lemma-pullback-flat.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 05VD.
 
 Proof. The explicit balanced tensor comparison transports internal flatness to site-flatness
 of section modules. The set-valued sheaf pullback `U^*` is left Kan extension along `U.op`

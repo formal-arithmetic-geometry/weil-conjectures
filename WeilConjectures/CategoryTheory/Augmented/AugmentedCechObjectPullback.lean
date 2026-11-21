@@ -17,9 +17,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 
 /-! # Pullback of augmented extended Cech objects
 
-Source: Stacks Project, algebraization.tex, Tags 099E, 099F and 0A0G;
-sites-cohomology.tex, Tags 07A4 and 0G7E.
-(blueprint: lem-weil-pbc-augmented-cech-object-pullback).
+Source: Stacks Project, algebraization.tex, Tags 099E, 099F and 0A0G; sites-cohomology.tex, Tags 07A4 and 0G7E.
 -/
 
 @[expose] public section
@@ -31,9 +29,7 @@ namespace CategoryTheory
 /-- Derived inverse image transports the augmented Cech object and the coefficient ring.
 This statement concerns objects and augmentation arrows; it has no tensor action variable.
 
-Source: Stacks Project, algebraization.tex, Tags 099E, 099F and 0A0G;
-sites-cohomology.tex, Tags 07A4 and 0G7E.
-(blueprint: lem-weil-pbc-augmented-cech-object-pullback).
+Source: Stacks Project, algebraization.tex, Tags 099E, 099F and 0A0G; sites-cohomology.tex, Tags 07A4 and 0G7E.
 
 Proof: construct the ordinary module pullback as algebraic inverse image followed by
 extension of scalars. Its K-flat derived functor is left adjoint to Rf; uniqueness

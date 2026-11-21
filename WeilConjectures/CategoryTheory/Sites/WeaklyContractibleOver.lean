@@ -21,7 +21,6 @@ namespace CategoryTheory.GrothendieckTopology
 
 /-- The final object of the site localized at a weakly contractible object is weakly
 contractible. Source: Stacks Tag 090M and the slice-topos equivalence, Tag 00Y1.
-(blueprint: lem-pe-weakly-contractible-over).
 
 Proof: identify localized sheaves with sheaves over the sheafified representable.
 An epimorphism in the latter category is an epimorphism on underlying sheaves.

@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 
 Source: Mathlib, HomologicalComplex.HomologySequence.δ_naturality and
 InjectiveResolution.isoRightDerivedObj_hom_naturality, following Stacks 01EB.
-(blueprint: lem-sc-injectively-exact-square-boundary-naturality).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ morphisms of the underived square.
 Source: Mathlib, Algebra/Homology/HomologySequenceLemmas.lean,
 `HomologicalComplex.HomologySequence.δ_naturality`; CategoryTheory/Abelian/RightDerived.lean,
 `InjectiveResolution.isoRightDerivedObj_hom_naturality` and `NatTrans.rightDerived_app_eq`.
-(blueprint: lem-sc-injectively-exact-square-boundary-naturality).
 
 Proof: For a morphism F -> G lift it to a cochain map between the chosen injective
 resolutions, extending the morphism on their augmentations. Applying the four additive
@@ -59,8 +57,7 @@ private noncomputable def resolutionSequenceMap (S : InjectivelyExactSquare.{u, 
   comm₁₂ := NatTrans.mapHomologicalComplex_naturality S.diagonal lift
   comm₂₃ := NatTrans.mapHomologicalComplex_naturality S.difference lift
 
-/-- The explicit transported boundary is natural in the object being resolved.
-(blueprint: lem-sc-injectively-exact-square-boundary-naturality) -/
+/-- The explicit transported boundary is natural in the object being resolved. -/
 theorem boundary_naturality (S : InjectivelyExactSquare.{u, v, w} C) (n : ℕ) {F G : C}
     (f : F ⟶ G) :
     (S.X₄.rightDerived n).map f ≫ S.boundary G n =
@@ -89,8 +86,7 @@ theorem boundary_naturality (S : InjectivelyExactSquare.{u, v, w} C) (n : ℕ) {
 
 Source: Mathlib `HomologicalComplex.HomologySequence.δ_naturality` and
 `InjectiveResolution.rightDerived_app_eq`; apply these to the morphism of short exact
-resolution sequences induced termwise by the four components of `φ`.
-(blueprint: lem-sc-injectively-exact-square-boundary-square-naturality). -/
+resolution sequences induced termwise by the four components of `φ`. -/
 theorem boundary_square_naturality (S : InjectivelyExactSquare.{u, v, w} C) (n : ℕ)
     (T : InjectivelyExactSquare.{u, v, w} C) (φ : S.toSquare ⟶ T.toSquare) (F : C) :
     S.boundary F n ≫ (NatTrans.rightDerived φ.τ₁ (n + 1)).app F =

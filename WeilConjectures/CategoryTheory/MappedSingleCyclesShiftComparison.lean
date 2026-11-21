@@ -34,7 +34,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 Source: Stacks Project, derived.tex, Tag 015J, proof remark (1), and the
 canonical single-functor, quotient and homology shift comparisons.
-(blueprint: lem-pc-mapped-single-cycles-shift-comparison)
 
 Proof: Expand mapHomotopyCategoryPlusSingleFunctorQhObjIso and use naturality
 of homologyFunctorObjQIso to replace its homology map by homologyMap of the

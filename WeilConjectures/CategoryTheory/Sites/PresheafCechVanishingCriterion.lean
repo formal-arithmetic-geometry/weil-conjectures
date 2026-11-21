@@ -16,7 +16,6 @@ public import Mathlib.Algebra.Category.Grp.Zero
 # A vanishing criterion using Čech nerves of presheaf maps
 
 Source: Stacks Project, Cohomology on Sites, Tags 03F9 and 079Z.
-(blueprint: lem-sc-presheaf-cech-vanishing-criterion)
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ it permits use of presheaf fibre products even when the site has no pullbacks.
 Source: Stacks Project, Cohomology on Sites, Tag 03F9, with Čech complexes
 formed in presheaves; Tag 079Z supplies their cohomological descent spectral
 sequence, and Hypercoverings, Tag 01GC supplies the augmented free nerve resolution.
-(blueprint: lem-sc-presheaf-cech-vanishing-criterion)
 
 Proof: write `Z[P]` for the sheafification of the free abelian presheaf on a
 small-valued presheaf of sets `P`. Prove by induction on `q > 0`, simultaneously

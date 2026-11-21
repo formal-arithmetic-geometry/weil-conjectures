@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 /-! # The free cyclic differential in adjunction coordinates
 
 Source: Stacks Tags 0149, 0152, and the normalized cyclic free resolution.
-(blueprint: lem-sf-cyclic-free-defect-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -332,8 +331,7 @@ For the second equation move the source shift to the target using shiftEquiv and
 apply the same calculation with target N[-1]; the shift comparison is precisely
 the one in cyclicDerivedHomAction. There is no rotation sign in precomposition
 by d[1], so the result is again T(u)-u. No boundedness is used.
-Source: parent calculus step 2, free-resolution summand calculation, Stacks 0149, 0152
-(blueprint: lem-sf-cyclic-free-defect-coordinates). -/
+Source: parent calculus step 2, free-resolution summand calculation, Stacks 0149, 0152. -/
 theorem cyclicDerivedFreeDefect_coordinates (R : CyclicDerivedFreeResolution F)
     (M N : DerivedCategory (IsoAlgebra F)) :
     (∀ u : CyclicDerivedHom F M N 0,

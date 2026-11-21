@@ -8,7 +8,6 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-! # Testing maps on inverse-image units
 Source: Stacks Project, Tags 00YV, 03D2 and 03D3.
-(blueprint: lem-pur-signed-line-pullback-unit-presentation).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -25,8 +24,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
   {F : C ⥤ D} [F.IsContinuous J K]
 /-- A specified unit presents a sheaf as the set inverse image.
-Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: def-pur-signed-line-pullback-unit-presentation). -/
+Source: Stacks Project, Tags 00YV and 03D2. -/
 structure SheafPullbackUnitPresentation (S : Sheaf J (Type (max u v w))) (T : Sheaf K (Type
   (max u v w))) where
   unit : S ⟶ (F.sheafPushforwardContinuous (Type (max u v w)) J K).obj T
@@ -37,8 +35,7 @@ structure SheafPullbackUnitPresentation (S : Sheaf J (Type (max u v w))) (T : Sh
 namespace SheafPullbackUnitPresentation
 variable {S S' S'' : Sheaf J (Type (max u v w))} {T T' T'' : Sheaf K (Type (max u v w))}
 /-- Test equality after the unit, using the adjunction hom equivalence.
-Source: Stacks Project, Tag 03D3.
-(blueprint: lem-pur-signed-line-pullback-unit-presentation). -/
+Source: Stacks Project, Tag 03D3. -/
 theorem hom_ext (p : SheafPullbackUnitPresentation (F := F) S T)
     {Z : Sheaf K (Type (max u v w))} (a b : T ⟶ Z)
     (h : ∀ U x, a.hom.app (F.op.obj U) (p.unit.hom.app U x) =
@@ -58,7 +55,6 @@ theorem hom_ext (p : SheafPullbackUnitPresentation (F := F) S T)
     ((h U x).trans (congrArg (fun y ↦ b.hom.app (F.op.obj U) y) (hi x).symm))
 /-- Product presentations use the inverse binary-product comparison.
 Source: Stacks Project, Tags 00YV and 03D2.
-(blueprint: lem-pur-signed-line-pullback-unit-presentation).
 Proof: finite-limit preservation makes the product comparison an isomorphism.
 The two projections of its unit equation are exactly naturality of the unit at
 both source projections, followed by the two given unit equations. -/
@@ -104,14 +100,12 @@ noncomputable def tensor [PreservesFiniteLimits (sheafPullback F (Type (max u v 
         q.iso.hom.hom.app (F.op.obj U) (q.unit.hom.app U x.2)))
     exact hei.trans ((congrArg₂ Prod.mk (p.equation U x.1) (q.equation U x.2)).trans he.symm)
 /-- Transport an operation through presentations.
-Source: Stacks Project, Tag 03D2.
-(blueprint: lem-pur-signed-line-pullback-unit-presentation). -/
+Source: Stacks Project, Tag 03D2. -/
 noncomputable def map (p : SheafPullbackUnitPresentation (F := F) S T)
     (q : SheafPullbackUnitPresentation (F := F) S' T') (a : S ⟶ S') : T ⟶ T' :=
   p.iso.hom ≫ (sheafPullback F (Type (max u v w)) J K).map a ≫ q.iso.inv
 /-- Transported operations agree with their source on unit sections.
-Source: Stacks Project, Tag 03D2.
-(blueprint: lem-pur-signed-line-pullback-unit-presentation). -/
+Source: Stacks Project, Tag 03D2. -/
 theorem map_unit (p : SheafPullbackUnitPresentation (F := F) S T)
     (q : SheafPullbackUnitPresentation (F := F) S' T') (a : S ⟶ S')
     (U : Cᵒᵖ) (x : S.obj.obj U) :
@@ -131,9 +125,7 @@ theorem map_unit (p : SheafPullbackUnitPresentation (F := F) S T)
   exact (congrArg (fun y ↦ q.iso.inv.hom.app (F.op.obj U) y) hn'.symm).trans
     ((congrArg (fun y ↦ q.iso.inv.hom.app (F.op.obj U) y)
       (q.equation U (a.hom.app U x)).symm).trans hi)
-/-- The constructed inverse image with its adjunction unit is a presentation.
-Source: Mathlib's sheaf inverse-image adjunction.
-(blueprint: def-pur-signed-line-pullback-unit-presentation). -/
+/-- The constructed inverse image with its adjunction unit is a presentation. -/
 noncomputable def canonical (T : Sheaf J (Type (max u v w))) :
     SheafPullbackUnitPresentation (F := F) T
       ((sheafPullback F (Type (max u v w)) J K).obj T) where
@@ -143,7 +135,6 @@ noncomputable def canonical (T : Sheaf J (Type (max u v w))) :
 
 /-- Unit-compatible binary operations are preserved on every generalized graph.
 Source: Stacks Project, Tag 03D2.
-(blueprint: lem-pur-signed-line-unit-presentation-graphs)
 Proof: test the two maps from the inverse image of the test sheaf on its unit.
 Naturality of that unit and the presentation equations identify all three operands
 with their source-unit images. The assumed compatibility reduces the equality to
@@ -175,7 +166,6 @@ theorem binary_graph
 
 /-- Unit-compatible constants are preserved on every generalized graph.
 Source: Stacks Project, Tag 03D2.
-(blueprint: lem-pur-signed-line-unit-presentation-graphs)
 Proof: use the same unit test as for binary operations; the target constant
 has the prescribed value on all source-unit sections. -/
 theorem constant_graph

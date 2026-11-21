@@ -10,7 +10,7 @@ public import Mathlib.Topology.Category.Profinite.Extend
 /-!
 # Comparing functors by finite profinite tests
 
-Source: Bhatt--Scholze, proof of Lemma 2.2.8, passage to finite-quotient limits.
+Source: Bhatt--Scholze, proof of Lemma 2.2.8, passage to limits.
 -/
 
 @[expose] public section
@@ -27,8 +27,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- An isomorphism on finite profinite spaces extends uniquely to functors that
 preserve the canonical finite-quotient presentations.
 
-Source: Bhatt--Scholze, proof of Lemma 2.2.8
-(blueprint: new-lem-zl-profinite-functor-extension).
+Source: Bhatt--Scholze, proof of Lemma 2.2.8.
 
 Proof: each canonical finite-quotient cone is initial among all finite tests of its
 apex. Thus each image apex is a limit over all its finite tests. The given finite

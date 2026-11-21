@@ -19,8 +19,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 /-!
 # Derived tensor with a fixed complex in the second factor
 
-Source: Stacks Project, More on Algebra, Tags 064L and 06Y6 and Section 06Y5
-(blueprint: lem-pc-derived-tensor-second-factor-functor).
+Source: Stacks Project, More on Algebra, Tags 064L and 06Y6 and Section 06Y5.
 
 The tensor bifunctor is the landed mixed module tensor, totalized in the order `(E, N)`.
 Thus the differential is `d_E ⊗ 1 + (-1)^p 1 ⊗ d_N`, and the `A`-action comes from `N`.
@@ -49,8 +48,7 @@ set_option quotPrecheck false in
 local notation "W" => HomologicalComplex.quasiIso (ModuleCat R) (.up ℤ)
 
 /-- The fixed-second-factor derived tensor satisfies all three clauses of the node.
-Source: Stacks Project, Tags 064L and 06Y6, construction in Section 06Y5
-(blueprint: lem-pc-derived-tensor-second-factor-functor).
+Source: Stacks Project, Tags 064L and 06Y6, construction in Section 06Y5.
 
 Proof outline (the DAG's four steps):
 1. Apply `lem-pc-kflat-tensor-quasi-iso` on the one-point site, with `N` restricted to
@@ -58,7 +56,7 @@ Proof outline (the DAG's four steps):
 2. Tensoring homotopies gives homotopies. Reindexing the cone and shifted total complexes
    identifies tensoring a cone with the cone of the tensor map, with the same signs.
    Thus the induced functor on the homotopy category is exact. The same computation works
-   in the second variable (`def-pc-tensor-complex-sheaves`, `def-weil-abstract-derived-category`).
+   in the second variable.
 3. Apply `lem-pur-left-derived-from-kflat-class`: resolutions exist by
    `lem-pc-kflat-resolution`, and clause (1) inverts quasi-isomorphisms between K-flat models.
    The derived comparison `ε` is an isomorphism on K-flat complexes. For `s : F → E`, the

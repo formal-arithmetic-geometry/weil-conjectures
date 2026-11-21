@@ -39,9 +39,8 @@ private theorem quasiIso_pullback_snd_of_epi
   exact isIso_of_mono_of_epi _
 
 /-- Comparisons fixed on every resolving quasi-isomorphism are natural.
-Source: the common-resolution argument for flat tensor representatives,
+Source: argument for flat tensor representatives,
 Stacks 07A4 and ProjectionFormulaArrows.
-(blueprint: new-lem-weil-pbc-projection-resolution-naturality).
 Proof: choose an epimorphic resolving quasi-isomorphism q to the target of f, and resolve
 its pullback along f. The composite v to the source is a quasi-isomorphism, since pulling
 back an epimorphic quasi-isomorphism preserves its acyclic kernel. Both comparison squares

@@ -21,7 +21,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawSectionAmalgamation
 /-! # ColimitSiteRawSectionSheaf
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-sheaf).
 -/
 
 @[expose] public section
@@ -57,9 +56,8 @@ private theorem isSheaf_of_finite_cover_conditions
   rw [← Sieve.pullbackArrows_comm, ← Presieve.isSheafFor_iff_generate]
   exact h Y (R.pullbackArrows g) (finite_pullback_cover P hfinite R hR g)
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 presentation construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-sheaf).
 
 Proof: Evaluate the raw Kan-extension colimit at Y. A Kan representative consists
 of a stage section and an arrow from Y to its stage object's image. Lift each

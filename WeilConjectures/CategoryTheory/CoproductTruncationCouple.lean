@@ -16,9 +16,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 
 /-! # A coproduct comparison of truncation exact couples
 
-Source: Stacks Project, Tags 015J, 05TC and 08DZ; the exact-couple construction and
-coproduct glue of lem-pc-bounded-below-coproduct-filtration, Steps 1 and 2
-(blueprint: lem-pc-coproduct-truncation-couple).
+Source: Stacks Project, Tags 015J, 05TC and 08DZ.
 -/
 
 @[expose] public section
@@ -77,8 +75,7 @@ on both the initial E terms and D at first index zero. This asserts construction
 naturality only; no initial-page or abutment isomorphism hypothesis is imposed.
 
 Source: Stacks Project, Tag 015J (the natural hypercohomology second page and abutment),
-Tag 05TC (derived lower bounds and truncation comparison), and Tag 08DZ (the direct-sum reduction).
-(blueprint: lem-pc-coproduct-truncation-couple).
+Tag 05TC (derived lower bounds and truncation comparison), and Tag 08DZ ( reduction).
 
 Proof:
 1. Use canonical lower truncation and K-injective representatives for K_i and S,

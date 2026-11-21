@@ -27,7 +27,6 @@ set_option linter.style.haveILetI false
 /-- The Gabriel--Popescu abelian presentation and the compact triangulated source use
 one and the same module category, linked by a triangulated equivalence.
 Source: Stacks Project, Tags 0F5V and 0F5X (first paragraph), with Baer criterion 05NU.
-(auxiliary; not a blueprint node)
 
 Proof in words: choose a separator G of A. Shrink End(G) to universe w using local
 smallness, and take its opposite ring S for left modules. Hom(G,-) gives U. Construct

@@ -19,7 +19,7 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 # Tensor pullback for a supplied ringed-topos module direct image
 
 Source: Stacks Project, Modules on Sites, Tag 03D7, and Cohomology on Sites,
-Tags 0G7E and 06YY (auxiliary; not a blueprint node).
+Tags 0G7E and 06YY.
 -/
 
 @[expose] public section
@@ -693,7 +693,7 @@ namespace CategoryTheory
 K-flat complexes with flat terms, and preserves quasi-isomorphisms between them.
 
 Source: Stacks Project, Modules on Sites, Tag 03D7, and Cohomology on Sites,
-Tags 0G7E and 06YY (auxiliary; not a blueprint node).
+Tags 0G7E and 06YY.
 
 Proof: Transport the commutative ring and its modules through the finite-limit-preserving
 inverse image of sheaves of sets. The structural map of the ringed-topos morphism gives a

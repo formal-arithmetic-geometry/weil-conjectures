@@ -20,7 +20,6 @@ open Limits
 
 /-- The degree-zero explicit free rank-one module is compact in the derived module
 category. Source: Stacks Project, Tag 0F5X, first paragraph.
-(auxiliary; not a blueprint node)
 
 Proof in words: evaluation at the lifted unit identifies linear maps from
 `ULift S` with elements of the target, with inverse x ↦ (s ↦ s • x). Thus this

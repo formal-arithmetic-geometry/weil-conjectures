@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.MLSetsTowerLimitNonempty
 /-!
 # Mittag-Leffler quotients and exact inverse limits
 
-Source: Stacks Project, Homology, Lemma Tag 02N1, parts (2) and (3)
-(blueprint: lem-weil-pbc-mittag-leffler-limit-exact).
+Source: Stacks Project, Homology, Lemma Tag 02N1, parts (2) and (3).
 -/
 
 @[expose] public section
@@ -32,14 +31,12 @@ namespace CategoryTheory.ShortComplex
 /-- A termwise short exact sequence of towers of abelian groups has ML quotient when its
 middle system is ML, and its inverse limit is short exact when its kernel is ML.
 Source: Stacks Project, Homology, Tag 02N1 (2), (3); Algebra, Tags 0598 and 03CA.
-(blueprint: lem-weil-pbc-mittag-leffler-limit-exact)
 
 The index `n : ℕ` denotes the positive index `n + 1`. Towers and their morphisms are
-functors `ℕᵒᵖ ⥤ AddCommGrpCat` and natural transformations (`def-weil-inverse-system`), and
+functors `ℕᵒᵖ ⥤ AddCommGrpCat` and natural transformations, and
 the sequence `0 → A → B → C → 0` is the short complex `S` of towers, short exact at every
 index (`hS`), as in `isMittagLeffler_iff_of_isEssentiallyConstant` (Tag 070D). ML is
-Mathlib's `IsMittagLeffler` of the underlying-set system
-(`def-weil-pbc-mittag-leffler-system`); the images decrease, so it is stabilization of
+Mathlib's `IsMittagLeffler` of the underlying-set system; the images decrease, so it is stabilization of
 images as subgroups. The inverse limit is Mathlib's `lim`, which in `AddCommGrpCat` is the
 group of compatible sequences, and `S.map lim` is `0 → lim A → lim B → lim C → 0` with the
 induced maps; its short exactness is injectivity of `lim u`, exactness at `lim B` and
@@ -52,16 +49,16 @@ Termwise exactness means u is injective, v is surjective, and ker v = im u.
 Compatibility of a sequence with adjacent transitions implies compatibility with composites.
 2. If B is ML at i with witness c, then surjectivity of v at k and naturality give
 im(t_{k,i}) = v_i(im(b_{k,i})). Stabilization for B therefore implies stabilization
-for C with the same witness c (`def-weil-pbc-mittag-leffler-system`).
+for C with the same witness c.
 3. Assume A is ML and fix a compatible c in the limit of C. The fibres E_i = v_i⁻¹(c_i)
 are nonempty by surjectivity. Naturality and compatibility restrict b to a tower of
-nonempty sets (`def-weil-inverse-system`).
+nonempty sets.
 4. Choose j witnessing ML for A at i. For k ≥ j, the image of E_k in E_i is contained
 in that of E_j. For the reverse inclusion take e_j in E_j and any e'_k in E_k.
 Put e'_j = b_{k,j}(e'_k). Exactness writes e_j - e'_j = u_j(α).
 Stabilization supplies β in A_k with a_{k,i}(β) = a_{j,i}(α).
 Then x_k = e'_k + u_k(β) is in E_k and b_{k,i}(x_k) = b_{j,i}(e_j).
-Thus E is ML (`def-weil-pbc-mittag-leffler-system`).
+Thus E is ML.
 5. Apply `lem-weil-pbc-ml-sets-tower-limit-nonempty` to obtain compatible e_i in E_i.
 This gives a preimage of c, proving surjectivity of the map on limits.
 6. A limit map is injective if all its components are. A compatible family in the

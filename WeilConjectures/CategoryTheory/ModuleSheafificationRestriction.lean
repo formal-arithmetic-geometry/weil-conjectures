@@ -10,9 +10,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 
 /-! # Module sheafification and restriction along a morphism of sites
 
-Source: Stacks Project, Sites, Tag 04B8, lemma-almost-cocontinuous-sheafification;
-Modules on Sites, Tag 04IY, lemma-relocalize; used in Tag 099E.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 04B8; Modules on Sites, Tag 04IY; used in Tag 099E.
 -/
 
 @[expose] public noncomputable section
@@ -28,9 +26,7 @@ variable {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 variable (F : C ⥤ D) [F.IsContinuous J K] [F.IsCocontinuous J K]
 variable (R : Sheaf K RingCat.{u})
 
-/-- Restriction of module sheaves adds maps sectionwise.
-Source: the definition of restriction.
-(auxiliary; not a blueprint node). -/
+/-- Restriction of module sheaves adds maps sectionwise. -/
 instance moduleRestriction_additive :
     (SheafOfModules.pushforward (F := F)
       (𝟙 ((F.sheafPushforwardContinuous RingCat.{u} J K).obj R))).Additive :=
@@ -80,9 +76,8 @@ private theorem restrictionComparison_isIso (M : PresheafOfModules.{u} R.obj) :
 
 /-- Module sheafification commutes with restriction along a continuous and cocontinuous
 functor of small sites, with the canonical unit-compatible comparison.
-Source: Stacks Project, Sites, Tag 04B8, lemma-almost-cocontinuous-sheafification,
-and Modules on Sites, Tag 04IY, lemma-relocalize, as used in Tag 099E.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 04B8,
+and Modules on Sites, Tag 04IY, as used in Tag 099E.
 
 Proof: restrict the sheafification unit and transpose it under sheafification on the source
 site. Cocontinuity preserves local bijectivity of the unit. Its transpose is an isomorphism:
@@ -126,8 +121,7 @@ theorem exists_moduleSheafificationRestrictionIso :
 
 /-- Maps from a restricted module sheafification are determined by original presheaf
 unit sections on any covering locus of the source site.
-Source: Stacks Project, Tag 04B8, lemma-almost-cocontinuous-sheafification, and Tag 099E.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 04B8, and Tag 099E.
 
 Proof: precompose with the canonical unit-compatible restriction comparison. Use the
 covering-locus hom-ext theorem for the source-site sheafification and its unit formula. -/

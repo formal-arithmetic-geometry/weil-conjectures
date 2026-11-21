@@ -11,9 +11,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Shift identification for bounded below right derived functors
 
-Source: Weil conjectures blueprint, chap-Proper-base-change,
-theorem-proper-base-change-classical-pro, lemma lem-sp-shift-identification; Stacks Project, Tags
-05SU, 015A and 05TC (blueprint: lem-sp-shift-identification).
+Source: Stacks Project, Tags
+05SU, 015A and 05TC.
 
 The three statements specify the shift comparison, its composition with the ordinary
 right-derived-functor comparison in nonnegative degrees, and vanishing in negative degrees.
@@ -37,8 +36,8 @@ variable {C : Type u₁} [Category.{v₁} C] [Abelian C]
 
 /-- The composite of the shift comparison for `RF` and cohomology of a shift is an
 isomorphism natural in the bounded below complex `K`.
-Source: blueprint lem-sp-shift-identification, part 1; Stacks Tag 05SU and Homology,
-Definitions 011G and 011H (blueprint: lem-sp-shift-identification).
+Source: Stacks Tag 05SU and Homology,
+Definitions 011G and 011H.
 
 Proof: (1) Put `X = H^q(K)`. The complex `X[0][-q]` is `X` in degree `q`, with zero
 elsewhere and zero differential, and is bounded below. (2) By
@@ -74,8 +73,8 @@ theorem exists_rightDerived_shift_identification [PreservesFiniteLimits F] (p q 
 
 /-- In nonnegative degree, the same composite followed by the canonical comparison with
 ordinary right derived functors is an isomorphism natural in `K`.
-Source: blueprint lem-sp-shift-identification, part 2; Stacks Definition 015A,
-Lemmas 05TH, 05TI and Proposition 05TA (blueprint: lem-sp-shift-identification).
+Source: Stacks Definition 015A,
+Lemmas 05TH, 05TI and Proposition 05TA.
 
 Proof: carry out steps (1)--(4) of part 1 with `p = n`. (5) By
 lem-sp-derived-functor-single-identification, an injective resolution of `X` is also a
@@ -113,8 +112,7 @@ theorem exists_rightDerived_shift_identification_nonneg [PreservesFiniteLimits F
 spells out the convention `R^p F = 0` for negative `p`, since `Functor.rightDerived` takes
 a natural-number index. A zero object is expressed by `IsZero`, rather than equality of
 chosen objects.
-Source: blueprint lem-sp-shift-identification, part 3; Stacks Tag 05TC (1)
-(blueprint: lem-sp-shift-identification).
+Source: Stacks Tag 05TC (1).
 
 Proof: (6) The single complex `X[0]`, where `X = H^q(K)`, has no negative cohomology.
 By lem-weil-pbc-derived-functor-negative-vanishing with lower bound zero, `H^p(RF(X[0]))`

@@ -34,8 +34,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 /-- The underlying integer-labelled site and its coefficient sheaf.
 
 Source: original steps 1, 2, and the coefficient part of step 4 of the agent-formulated
-argument motivated by Stacks 00W0, `sites.tex`, proposition-sheaves-on-group
-(blueprint: lem-sf-twisted-action-site-core).
+argument motivated by Stacks 00W0, `sites.tex`.
 
 Proof: apply the proved integer tensor-power coherence construction to the
 endofunctor of s and its chosen inverse. Transport its integer family to the exact

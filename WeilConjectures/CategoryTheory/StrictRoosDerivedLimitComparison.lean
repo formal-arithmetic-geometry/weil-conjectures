@@ -21,8 +21,7 @@ set_option linter.privateModule false
 # The strict Roos comparison and its evaluation maps
 
 Source: Stacks Project, Derived Categories, Tags 07KC and 08TC, and Cohomology on Sites,
-Tags 0940 and 0941; the explicit comparison and evaluation square in the blueprint proof
-(auxiliary; not a blueprint node).
+Tags 0940 and 0941.
 
 The helper definitions spell out the products, transition endomorphism and signed cone
 already introduced by this statement. The comparison maps are uniquely specified by

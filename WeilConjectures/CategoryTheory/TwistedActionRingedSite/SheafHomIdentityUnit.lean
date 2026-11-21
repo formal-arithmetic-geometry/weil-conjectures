@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Recognizing the unit by internal Hom
 
-Source: the sheaf tensor-Hom adjunction and uniqueness of left adjoints; Stacks 03EO.
+Source: Stacks 03EO.
 -/
 
 @[expose] public noncomputable section
@@ -20,7 +20,6 @@ namespace CategoryTheory.TwistedActionRingedSite
 
 /-- A sheaf whose internal-Hom functor is the identity is the tensor unit.
 Source: Stacks 03EO and the sheaf tensor-Hom adjunction.
-(blueprint: lem-sf-sheaf-hom-identity-unit).
 
 Proof: curry the given uncurried Hom comparison. Tensoring on the left by M
 is left adjoint to this Hom functor, hence to the identity. Uniqueness of

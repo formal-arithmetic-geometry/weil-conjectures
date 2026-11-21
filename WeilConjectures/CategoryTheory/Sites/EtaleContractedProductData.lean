@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.Sites.SheafifySimplyTransitive
 
 /-! # The explicit orbit presheaf for coefficient change of torsors
 
-Source: Stacks Project, Tags 03AH and 03AJ; contracted-product quotient construction.
-(blueprint: lem-sc-etale-contracted-product-exists-data).
+Source: Stacks Project, Tags 03AH and 03AJ.
 -/
 
 @[expose] public section
@@ -30,14 +29,12 @@ variable (S : Scheme.{u})
     (φ : G ⟶ G') (T : Torsor G)
 
 /-- The generators of the antidiagonal orbit relation. 
-(blueprint: lem-sc-etale-contracted-product-exists-data)
 -/
 def contractedOrbitRel (U : S.Etaleᵒᵖ)
     (a b : T.sheaf.obj.obj U × G'.obj.obj U) : Prop :=
   ∃ g : G.obj.obj U, b = (T.vadd U g a.1, a.2 - φ.hom.app U g)
 
 /-- Sectionwise orbits, with restriction induced from the two factors. 
-(blueprint: lem-sc-etale-contracted-product-exists-data)
 -/
 def contractedOrbitPresheaf : S.Etaleᵒᵖ ⥤ Type (u + 1) where
   obj U := Quot (contractedOrbitRel S φ T U)
@@ -72,14 +69,12 @@ def contractedOrbitPresheaf : S.Etaleᵒᵖ ⥤ Type (u + 1) where
       rfl
 
 /-- The actual sheafification of the orbit presheaf; no witness is chosen. 
-(blueprint: lem-sc-etale-contracted-product-exists-data)
 -/
 noncomputable def contractedOrbitSheaf : Sheaf S.smallEtaleTopology (Type (u + 1)) :=
   (presheafToSheaf S.smallEtaleTopology (Type (u + 1))).obj
     (contractedOrbitPresheaf S φ T)
 
 /-- The canonical map from pairs to the sheafified orbit presheaf. 
-(blueprint: lem-sc-etale-contracted-product-exists-data)
 -/
 noncomputable def contractedOrbitQuotient (U : S.Etaleᵒᵖ)
     (t : T.sheaf.obj.obj U) (h : G'.obj.obj U) :
@@ -87,7 +82,7 @@ noncomputable def contractedOrbitQuotient (U : S.Etaleᵒᵖ)
   (toSheafify S.smallEtaleTopology (contractedOrbitPresheaf S φ T)).app U
     (Quot.mk _ (t, h))
 
-/-- (blueprint: lem-sc-etale-contracted-product-exists-data) -/
+/--  -/
 lemma contractedOrbitQuotient_natural {U V : S.Etaleᵒᵖ} (f : U ⟶ V)
     (t : T.sheaf.obj.obj U) (h : G'.obj.obj U) :
     (contractedOrbitSheaf S φ T).obj.map f (contractedOrbitQuotient S φ T U t h) =
@@ -95,7 +90,7 @@ lemma contractedOrbitQuotient_natural {U V : S.Etaleᵒᵖ} (f : U ⟶ V)
   exact (ConcreteCategory.congr_hom ((toSheafify S.smallEtaleTopology
     (contractedOrbitPresheaf S φ T)).naturality f) (Quot.mk _ (t, h))).symm
 
-/-- (blueprint: lem-sc-etale-contracted-product-exists-data) -/
+/--  -/
 lemma contractedOrbitQuotient_invariant (U : S.Etaleᵒᵖ) (g : G.obj.obj U)
     (t : T.sheaf.obj.obj U) (h : G'.obj.obj U) :
     contractedOrbitQuotient S φ T U (T.vadd U g t) (h - φ.hom.app U g) =
@@ -105,7 +100,6 @@ lemma contractedOrbitQuotient_invariant (U : S.Etaleᵒᵖ) (g : G.obj.obj U)
   exact (Quot.sound ⟨g, rfl⟩).symm
 
 /-- Local nonemptiness passes from the original torsor to its orbit sheaf. 
-(blueprint: lem-sc-etale-contracted-product-exists-data)
 -/
 lemma contractedOrbitSheaf_nonemptySieve_mem (U : S.Etale) :
     nonemptySieve (contractedOrbitSheaf S φ T).obj U ∈ S.smallEtaleTopology U := by
@@ -116,7 +110,6 @@ lemma contractedOrbitSheaf_nonemptySieve_mem (U : S.Etale) :
 
 /-- A section trivializes the sectionwise orbit quotient, with the expected second coordinate.
 This is the explicit local coordinate used in the local torsor argument. 
-(blueprint: lem-sc-etale-contracted-product-exists-data)
 -/
 noncomputable def contractedOrbitEquiv (U : S.Etaleᵒᵖ) (t₀ : T.sheaf.obj.obj U) :
     Quot (contractedOrbitRel S φ T U) ≃ G'.obj.obj U := by
@@ -155,8 +148,7 @@ noncomputable def contractedOrbitEquiv (U : S.Etaleᵒᵖ) (t₀ : T.sheaf.obj.o
     rw [hzero, map_zero, add_zero]
 
 /-- Translation on the sheafified orbit quotient makes it a torsor.
-Source: Stacks Project, Tags 03AH and 03AJ; the local orbit-trivialization argument.
-(blueprint: lem-sc-etale-contracted-product-exists-data)
+Source: Stacks Project, Tags 03AH and 03AJ.
 
 Proof: On the orbit presheaf, addition of h in the second coordinate commutes with every
 antidiagonal generator. It therefore defines an action morphism. Sheafification preserves

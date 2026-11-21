@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 Source: the indexed base-change axiom in Mathlib's `Precoverage.IsStableUnderBaseChange`,
 applied to the construction of Stacks Project, Categories, Tag 004A.
-(blueprint: lem-weil-pbc-site-system-strictification-obstruction).
 -/
 
 @[expose] public section
@@ -56,7 +55,6 @@ private theorem finite_of_injective_iso_family
 
 /-- Source: Mathlib `Precoverage.IsStableUnderBaseChange`, together with the strict
 coefficient equalities in Stacks Project, Categories, Tag 004A, applied fibrewise.
-(blueprint: lem-weil-pbc-site-system-strictification-obstruction).
 
 Proof: put every transition image of the one source object in the category at the
 largest index. Its image under the coefficient functor is its original index, by

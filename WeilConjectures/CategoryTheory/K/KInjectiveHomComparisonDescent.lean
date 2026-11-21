@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Localization.Opposite
 
 Source: Stacks Project, Tags 0A95 and 08J7. Localization of the category of K-injective
 complexes gives the comparison and its equation on every representative, simultaneously.
-(blueprint: lem-sf-kinjective-hom-comparison-descent).
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +54,7 @@ variable {B : Type b} [Category.{vb} B] [Abelian B] [HasDerivedCategory.{wb} B]
 include nB nA
 
 /-- A natural chain comparison descends, with its exact representative equation.
-Source: Stacks Project, Tags 0A95 and 08J7; step 5 of the ringed-forgetting argument
-(blueprint: lem-sf-kinjective-hom-comparison-descent).
+Source: Stacks Project, Tags 0A95 and 08J7.
 Proof: restrict both variables to K-injective complexes. The representative isomorphisms,
 the localization factor for U, and the chain comparison give a natural isomorphism after
 precomposition with Qᵒᵖ × Q on that subcategory. The restricted Q is a localization at

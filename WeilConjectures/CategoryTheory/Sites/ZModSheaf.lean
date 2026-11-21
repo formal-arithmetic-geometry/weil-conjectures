@@ -27,7 +27,7 @@ the same holds for sheaves on any site: the functor from sheaves of `ℤ/n`-modu
 sheaves is fully faithful, and its essential image consists of the abelian sheaves `F` with
 `n • 𝟙 F = 0`.
 
-In the blueprint (`lem-weil-pbc-sheaves-killed-by-n-zmod-modules`) a sheaf of `ℤ/n`-modules is
+In the blueprint a sheaf of `ℤ/n`-modules is
 a module over the constant sheaf of rings `(ℤ/n)_T`, and the comparison with sectionwise
 `ℤ/n`-modules goes through the sheafification of the constant presheaf of rings
 (`lem-weil-pbc-ring-sheafification-underlying-sets`, which is Mathlib's
@@ -126,8 +126,7 @@ lemma mem_essImage_sheafCompose_forget₂_zmod_iff (F : Sheaf J AddCommGrpCat.{w
 functor from sheaves of `ℤ/n`-modules to abelian sheaves forgetting the module structure is full
 and faithful — a morphism of abelian sheaves between sheaves of `ℤ/n`-modules is `ℤ/n`-linear,
 so that a sheaf killed by `n` carries exactly one structure of sheaf of `ℤ/n`-modules up to
-unique isomorphism — and its essential image consists of the abelian sheaves killed by `n`.
-(blueprint: `lem-weil-pbc-sheaves-killed-by-n-zmod-modules`) -/
+unique isomorphism — and its essential image consists of the abelian sheaves killed by `n`. -/
 theorem sheafCompose_forget₂_zmod_full_faithful_essImage :
     (sheafCompose J (forget₂ (ModuleCat.{w} (ZMod n)) AddCommGrpCat.{w})).Full ∧
       (sheafCompose J (forget₂ (ModuleCat.{w} (ZMod n)) AddCommGrpCat.{w})).Faithful ∧

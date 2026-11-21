@@ -37,9 +37,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectionFormulaArrows
 
 /-!
 # Projection-formula arrows and their specified finite-total inverse
-
-Source: Weil conjectures blueprint, proper base change, definition 1264
-(blueprint: def-weil-pbc-projection-formula-arrows).
 -/
 
 @[expose] public section
@@ -60,8 +57,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [MonoidalCategory A]
   (L : A ⥤ B) (V : B ⥤ A) [L.Additive] [V.Additive] (adj : L ⊣ V)
   (e : ∀ X Y : A, L.obj (X ⊗ Y) ≅ L.obj X ⊗ L.obj Y)
 
-/-- The ordinary counit mate t_{M,P}.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
+/-- The ordinary counit mate t_{M,P}. -/
 noncomputable def tensorAdjunctionMate (M : B) (P : A) :
     V.obj M ⊗ P ⟶ V.obj (M ⊗ L.obj P) :=
   adj.homEquiv _ _ ((e (V.obj M) P).hom ≫ (adj.counit.app M ⊗ₘ 𝟙 (L.obj P)))
@@ -86,7 +82,6 @@ private lemma tensorAdjunctionMate_naturality
 set_option linter.unusedSectionVars false in
 set_option backward.isDefEq.respectTransparency false in
 /-- For finite free coefficients the ordinary mate is the finite-product comparison.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows).
 Proof: the unit equation reduces the mate in rank one to the identity by the
 adjunction triangle identity. Naturality and additivity identify rank N with the
 N-fold finite-sum map. Finite sums are products and the right adjoint preserves
@@ -146,8 +141,7 @@ theorem tensorAdjunctionMate_free_isIso
   change IsIso (t.app _)
   exact IsIso.of_isIso_comp_right _ (piComparison U (fun _ : Fin N ↦ 𝟙_ A))
 
-/-- The specified free inverse q_{M,N}, the inverse of t and not an arbitrary map.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
+/-- The specified free inverse q_{M,N}, the inverse of t and not an arbitrary map. -/
 noncomputable def tensorAdjunctionFreeInverse
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
@@ -158,8 +152,7 @@ noncomputable def tensorAdjunctionFreeInverse
   @inv _ _ _ _ (tensorAdjunctionMate L V adj e M (∏ᶜ fun _ : Fin N ↦ 𝟙_ A))
     (tensorAdjunctionMate_free_isIso L V adj e he j hj M N)
 
-/-- The displayed splitting formula for s_{a,r}, equally for any single retract.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
+/-- The displayed splitting formula for s_{a,r}, equally for any single retract. -/
 noncomputable def tensorAdjunctionRetractInverse
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
@@ -307,7 +300,6 @@ private lemma tensorAdjunctionTotal_summand
 attribute [local irreducible] tensorAdjunctionTotal
 
 /-- Bounded split-free coefficients make the total mate an isomorphism of complexes.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows).
 Proof: in bidegree (a,r) the splitting formula is inverse to t. The two identities
 follow by naturality of t at i_r,p_r, their splitting relation, and the inverse
 identities of q. Multiplying naturality by these inverses proves compatibility
@@ -379,8 +371,7 @@ theorem tensorAdjunctionTotal_isIso
     exact tensorAdjunctionTotal_summand L V adj e he I F x.val.1 x.val.2 n x.property
   exact HomologicalComplex.Hom.isIso_of_components t
 
-/-- The finite-total chain inverse, determined uniquely by the forward chain map.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows). -/
+/-- The finite-total chain inverse, determined uniquely by the forward chain map. -/
 noncomputable def tensorAdjunctionTotalInverse
     (he : ∀ {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y'),
       L.map (f ⊗ₘ g) ≫ (e X' Y').hom = (e X Y).hom ≫ (L.map f ⊗ₘ L.map g))
@@ -399,14 +390,12 @@ attribute [local irreducible] tensorAdjunctionTotalInverse
 
 set_option linter.unusedSectionVars false in
 /-- The target tensor total is K-injective for the specified bounded split-free package.
-Source: definition 1264 (blueprint: def-weil-pbc-projection-formula-arrows).
 Proof: additivity transports the bounded support and each splitting through L.
 The unit isomorphism j and finite-sum preservation identify L of a finite free
 object with a finite free object. Hence L(F) is bounded split-free. Dualize its
 finite free retracts termwise: evaluation identifies tensoring with L(F) with
 Hom from its bounded dual, with the usual signed differential. That dual is
-K-flat. Hom from a K-flat complex into K is K-injective, yielding the claim
-(lem-weil-pbc-split-perfect-tensor-kinjective). -/
+K-flat. Hom from a K-flat complex into K is K-injective, yielding the claim. -/
 theorem tensorAdjunctionTotal_target_isKInjective
     (j : L.obj (𝟙_ A) ≅ 𝟙_ B)
     (K : CochainComplex B ℤ) (hK : K.IsKInjective) (F : CochainComplex A ℤ)

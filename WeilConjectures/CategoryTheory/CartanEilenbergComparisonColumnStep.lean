@@ -51,8 +51,7 @@ private theorem shortExact_cycles_image
 The conclusion concerns just the column in degree `p` and its outgoing boundary;
 no maps in other original-object columns are chosen.
 
-Source: Stacks Project, Tags 015H, 015I and 015K, comparison construction;
-(blueprint: lem-weil-pbc-ce-comparison-column-step).
+Source: Stacks Project, Tags 015H, 015I and 015K, comparison construction
 
 Proof: Write the two short exact sequences of resolution complexes
 0 → Bᵖ → Zᵖ → Hᵖ → 0 and 0 → Zᵖ → Iᵖ → Bᵠ → 0, where q = p + 1,

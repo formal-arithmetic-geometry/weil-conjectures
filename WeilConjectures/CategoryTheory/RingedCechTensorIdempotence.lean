@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-! # Acyclicity of the extended Cech tensor-augmentation cone
 
 Source: Stacks Project, algebraization.tex, Tag 099B.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -239,8 +238,7 @@ private theorem cech_tensor_quasiIso (O : Sheaf J CommRingCat.{u}) (r : ℕ)
 
 /-- The extended Cech complex annihilates the cone of its augmentation under total tensor.
 
-Source: Stacks Project, algebraization.tex, Tag 099B, proof of lemma-derived-completion.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099B.
 
 Proof: write K as the ordered tensor of [O -> O[1/b_i]]. Its terms are finite sums
 of flat localizations S_I. For nonempty I choose j in I. In K tensor S_I the

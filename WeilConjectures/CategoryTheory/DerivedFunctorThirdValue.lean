@@ -19,8 +19,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory.Functor
 
 /-- The third vertex has a left-derived value when the first two do.
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause
-(blueprint: lem-pur-derived-functor-triangles-05sc-third-value).
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause.
 
 Proof (dual of the source's construction): choose values A and B with their
 essential-constancy cones, and form LF(f) by 05SA. Choose retraction stages for

@@ -20,9 +20,7 @@ import WeilConjectures.CategoryTheory.ColimitSiteFiniteSectionComparisonBijectiv
 
 /-! # A section-colimit presentation with finite covering axioms
 
-Source: Stacks Project, Sites, Tag 0A35, the section formula and adjunction proof;
-Modules on Sites, Tag 03CO, abelian extension.
-(blueprint: lem-weil-pbc-colimit-site-finite-section-colimit-presentation).
+Source: Stacks Project, Sites, Tag 0A35, the section formula and adjunction proof; Modules on Sites, Tag 03CO, abelian extension.
 -/
 
 @[expose] public section
@@ -42,7 +40,6 @@ private theorem arrow_precomp
 /-- Source: Stacks Project, Sites, Tag 0A35, equation-compute-pullback-to-limit
 and the presentation, sheaf-condition and adjunction paragraphs; abelian extension
 by Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-finite-section-colimit-presentation).
 
 Proof: For each arrow a : j to k take the group of sections of a inverse image
 of H at F(a)(X). The transition for a refinement b is the unit for F(b), followed

@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 /-!
 # Vanishing of the first derived limit of an eventually constant tower
 
-Source: Stacks Project, More on Algebra, Tag 07KW, and Tag 08D4, proof of (2)
-(blueprint: lem-pc-derived-limit-eventually-iso).
+Source: Stacks Project, More on Algebra, Tag 07KW, and Tag 08D4, proof of (2).
 -/
 
 @[expose] public section
@@ -28,9 +27,8 @@ attribute [local instance] roosTowerEnoughInjectives roosLimitAdditive
 /-- A tower of abelian groups with eventually invertible successor transitions has
 zero first right derived inverse limit.
 
-Source: Stacks Project, Tag 07KW (lemma-Rlim), part (3), specialized to eventually
-constant systems; Tag 08D4 (lemma-application-nice-K-injective), proof of (2)
-(blueprint: lem-pc-derived-limit-eventually-iso).
+Source: Stacks Project, Tag 07KW, part (3), specialized to eventually
+constant systems; Tag 08D4, proof of (2).
 
 Proof:
 1. The Roos computation `lem-pc-derived-limit-roos-abelian-groups` identifies the

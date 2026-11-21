@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.SiteCechVanishingStep
 /-!
 # The Čech vanishing criterion for a general site
 
-Source: Stacks Project, Cohomology on Sites, Lemma 03F9
-(blueprint: lem-weil-pbc-site-cech-vanishing-criterion).
+Source: Stacks Project, Cohomology on Sites, Lemma 03F9.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace CategoryTheory.Sheaf
 /-- Higher Čech vanishing on a cofinal collection of coverings implies higher cohomology
 vanishing over the specified objects. `S` supplies the chosen products of each covering
 in `Cov`; no finite products of the whole category or of its slices are required.
-Source: Stacks Project, Cohomology on Sites, Lemma 03F9
-(blueprint: lem-weil-pbc-site-cech-vanishing-criterion).
+Source: Stacks Project, Cohomology on Sites, Lemma 03F9.
 
 Proof, following the node's seven steps and Stacks 03F9:
 1. Induct on positive degree, quantifying over every sheaf Čech-acyclic on `Cov`.

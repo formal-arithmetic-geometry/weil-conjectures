@@ -23,8 +23,7 @@ import WeilConjectures.CategoryTheory.FinitePresieveFilteredColimit
 /-!
 # Sections of filtered colimits on sites with finite coverings
 
-Source: Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO
-(blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings).
+Source: Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO.
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ private theorem isSheaf_filteredColimit_types
 
 /-- On a site with finite covering presieves, the canonical map from the filtered
 colimit of sections to the sections of a given sheaf colimit is bijective.
-Source: Stacks Project, Sites, Lemma 0738(4)
-(blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings).
+Source: Stacks Project, Sites, Lemma 0738(4).
 
 Proof:
 1. Evaluation preserves presheaf colimits. For each finite covering presieve R,
@@ -67,10 +65,8 @@ section cocone of c is a colimit cocone.
 3. The canonical colimit descent to a colimit cocone is an isomorphism. Its inverse
 has the left- and right-inverse equations, and the existing bijectivity theorem
 applies Function.bijective_iff_has_inverse. 
-(blueprint: aux-site-filtered-colimit-sections-inverse)
 -/
-/- The sectionwise map admits a two-sided inverse.
-(blueprint: aux-site-filtered-colimit-sections-inverse) -/
+/- The sectionwise map admits a two-sided inverse. -/
 theorem siteFilteredColimit_sections_inverse
     {C : Type u} [SmallCategory C] (J : Precoverage C)
     [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]
@@ -100,7 +96,7 @@ theorem siteFilteredColimit_sections_inverse
   let e := asIso (colimit.desc (D ⋙ F) (F.mapCocone c))
   exact ⟨e.inv, fun x ↦ e.hom_inv_id_apply x, fun x ↦ e.inv_hom_id_apply x⟩
 
-/-- (blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings) -/
+/--  -/
 theorem siteFilteredColimit_sections_bijective
     {C : Type u} [SmallCategory C] (J : Precoverage C)
     [J.HasIsos] [J.IsStableUnderComposition] [J.IsStableUnderBaseChange] [J.HasPullbacks]
@@ -117,8 +113,7 @@ theorem siteFilteredColimit_sections_bijective
 
 /-- For abelian sheaves on a site with finite coverings, the canonical map from the
 filtered colimit of section groups to the sections of a given sheaf colimit is an isomorphism.
-Source: Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO
-(blueprint: lem-weil-pbc-site-filtered-colimit-sections-finite-coverings).
+Source: Stacks Project, Sites, Lemma 0738(4), and Modules on Sites, Lemma 03CO.
 
 Proof:
 1. The forgetful functor from abelian groups to sets preserves filtered colimits,

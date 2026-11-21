@@ -35,15 +35,13 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 
 /-! # Constant modules, derived adjunctions and projection maps
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6;
-Modules on Sites, Tag 03EL
-(blueprint: def-sfb-constant-module-geometric-comparison-data).
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6; Modules on Sites, Tag 03EL.
 
 The ordinary data below specify geometric inverse image and scalar extension on generalized
 sections. Derived comparisons retain their localization squares, Hom bijections and counits.
 The site object and morphism universes remain independent, including for small etale sites.
 The ringed datum uses the landed independent-universe interface
-`RingedToposMorphismOfUniverses` (blueprint: def-pur-ringed-topos-morphism-of-universes).
+`RingedToposMorphismOfUniverses`.
 The two fixed-scalar OfUniverses helpers extend the imported constant-scalar interface
 here; its landed declarations and DAG binding remain intact.
 -/
@@ -73,8 +71,7 @@ namespace CategoryTheory
 comparison and generalized-element equation specify the transported addition and every
 scalar endomorphism. The inverse image is its specified left adjoint; hence uniqueness
 of left adjoints identifies it with the induced geometric inverse image.
-Source: Stacks Project, Sites, Tag 00YV (6), proof by scalar endomorphisms
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Project, Sites, Tag 00YV (6), proof by scalar endomorphisms. -/
 structure FixedScalarGeometricAdjunctionOfUniverses
     {C D : Type u} [Category.{v} C] [Category.{v} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)
@@ -208,8 +205,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The geometric morphism and its two ordinary module adjunctions.
 The Hom equations normalize the adjunctions on the underlying sheaves; the fixed-ring
 action is the induced one, as specified by the scalar equation for its direct image.
-Source: Stacks Tags 03EL, 07A4 and 07A6
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tags 03EL, 07A4 and 07A6. -/
 structure GeometricData where
   inverse : Sheaf J (Type (max u v)) ⥤ Sheaf K (Type (max u v))
   direct : Sheaf K (Type (max u v)) ⥤ Sheaf J (Type (max u v))
@@ -269,30 +265,25 @@ attribute [instance] GeometricData.leftExact GeometricData.pullR_additive
   GeometricData.pushR_additive
 
 /-- Projection of the recorded fixed-scalar geometric adjunction.
-Source: Stacks Tag 00YV
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tag 00YV. -/
 abbrev GeometricData.pullA (d : GeometricData J K A) := d.fixed.inverse
 
 /-- Projection of the recorded fixed-scalar geometric adjunction.
-Source: Stacks Tag 00YV
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tag 00YV. -/
 abbrev GeometricData.pushA (d : GeometricData J K A) := d.fixed.direct
 
 /-- Projection of the recorded fixed-scalar geometric adjunction.
-Source: Stacks Tag 00YV
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tag 00YV. -/
 abbrev GeometricData.fixedAdj (d : GeometricData J K A) := d.fixed.adj
 
 /-- Projection of the recorded fixed-scalar geometric adjunction.
-Source: Stacks Tag 00YV
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tag 00YV. -/
 abbrev GeometricData.fixedPushUnderlying (d : GeometricData J K A) := d.fixed.underlying
 
 variable {J K A}
 /-- The exactness consequences needed to form the localized termwise pullbacks.
 They are conclusions of the main theorem, rather than extra exactness hypotheses.
-Source: Stacks Tags 03EL, 07A4 and 07A6
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tags 03EL, 07A4 and 07A6. -/
 class ExactData (d : GeometricData J K A) where
   [pullA_additive : d.pullA.Additive]
   [pushA_additive : d.pushA.Additive]
@@ -312,20 +303,17 @@ variable [HasDerivedCategory.{w} (Modules J A)] [HasDerivedCategory.{w} (Modules
   [HasDerivedCategory.{w} (Fixed J A)] [HasDerivedCategory.{w} (Fixed K A)]
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Cache the recorded K-flat monoidal structure on the ringed derived category.
-Source: Stacks Tag 07A4
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tag 07A4. -/
 instance ringDerivedMonoidal : MonoidalCategory (DerivedCategory (Modules J A)) :=
   inferInstance
 
 /-- Cache the recorded K-flat monoidal structure on the fixed-scalar derived category.
-Source: Stacks Tag 07A4
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tag 07A4. -/
 instance fixedDerivedMonoidal : MonoidalCategory (DerivedCategory (Fixed J A)) :=
   inferInstance
 
 /-- The normalized ordinary comparison, including its full Hom equation.
-Source: Stacks Tags 03EL, 07A4 and 07A6
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tags 03EL, 07A4 and 07A6. -/
 structure OrdinaryIdentification (d : GeometricData J K A) where
   left : d.pullR ⋙ restriction K A ≅ restriction J A ⋙ d.pullA
   right : d.pushR ⋙ restriction J A ≅ restriction K A ⋙ d.pushA
@@ -340,8 +328,7 @@ structure OrdinaryIdentification (d : GeometricData J K A) where
 /-- The canonical ordinary tensor comparison on the fixed-scalar side.
 Its underlying inverse image, Hom equation and generalized pure-tensor equation fix
 the comparison, including its normalization on sites with no points.
-Source: Stacks Tags 03EL, 07A4 and 07A6
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tags 03EL, 07A4 and 07A6. -/
 structure FixedTensorData (d : GeometricData J K A) where
   underlying : d.pullA ⋙ sheafCompose K (CategoryTheory.forget (ModuleCat.{max u v} A)) ≅
     sheafCompose J (CategoryTheory.forget (ModuleCat.{max u v} A)) ⋙ d.inverse
@@ -371,8 +358,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option maxHeartbeats 60000 in
 -- Elaborate the dependent tensor and projection comparison squares.
 /-- The tensor part of the scalar comparison, on representatives and all derived inputs.
-Source: Stacks Tag 07A4
-(blueprint: def-sfb-constant-module-geometric-comparison-data). -/
+Source: Stacks Tag 07A4. -/
 def DerivedTensorIdentification (d : GeometricData J K A) (x : ExactData d)
     (t : FixedTensorData d) :=
   { choices : d.pullR.mapDerivedCategory.Monoidal × d.pullR.Monoidal ×

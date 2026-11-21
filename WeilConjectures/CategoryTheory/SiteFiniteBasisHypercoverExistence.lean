@@ -13,9 +13,8 @@ import WeilConjectures.CategoryTheory.SiteFiniteBasisHypercoverStep
 /-!
 # Hypercovers finite in each degree from a finite covering basis
 
-Source: Stacks Project, Hypercoverings, Tag 094K (lemma-w-contractible), using the
+Source: Stacks Project, Hypercoverings, Tag 094K, using the
 split-skeleton construction of Tag 0DAV and the hypercover definition of Tag 01G5.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -202,7 +201,6 @@ private theorem exists_zero_truncation
 
 /-- A finite covering basis gives a hypercover finite in every degree.
 Source: Stacks Project, Hypercoverings, Tags 094K, 0DAV and 01G5.
-(auxiliary; not a blueprint node)
 
 Proof: Work in the slice over `T`, whose terminal object is `id_T`, whose pullbacks
 are those of `C`, and whose covers are the underlying covers. Choose a finite basis

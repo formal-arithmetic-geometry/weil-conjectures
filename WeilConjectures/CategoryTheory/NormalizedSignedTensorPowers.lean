@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
 /-!
 # Normalized signed powers of an invertible line
 
-Source: Stacks Project, Modules on Sites, Sections 03EK and 04TT; the integer-power
-construction in `WeilConjectures.CategoryTheory.Monoidal.TensorInverse`.
+Source: Stacks Project, Modules on Sites, Sections 03EK and 04TT.
 -/
 
 @[expose] public section
@@ -166,7 +165,6 @@ lemma signedFamily_positive_one
 
 /-- Pairing a positive power with its normalized negative power is evaluation.
 Source: Stacks Project, Modules on Sites, Tags 03EK and 04TT.
-(auxiliary; not a blueprint node).
 Proof: precompose by the two signedPowerIso maps. Transported multiplication then
 reduces to the integer-power pairing. The negative map is its transpose, so the
 uncurry-curry identity gives evaluation, and the two positive comparison maps cancel. -/

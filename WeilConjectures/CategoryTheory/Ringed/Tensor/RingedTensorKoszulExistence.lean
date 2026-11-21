@@ -75,7 +75,7 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Koszul exchange for any normalized tensor presentation
 
-Source: Stacks Project, Tags 06YU and 0FPQ; descent of signed total-tensor exchange.
+Source: Stacks Project, Tags 06YU and 0FPQ.
 -/
 
 @[expose] public noncomputable section
@@ -116,8 +116,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
 /-- The signed exchange descends to every specified K-flat tensor presentation.
-Source: Stacks Project, Tags 06YU and 0FPQ
-(blueprint: lem-weil-pbc-ringed-tensor-koszul-existence).
+Source: Stacks Project, Tags 06YU and 0FPQ.
 
 Proof: the full subcategory of K-flat complexes presents the derived category.
 Compare the specified natural tensor model with the native localized tensor model,

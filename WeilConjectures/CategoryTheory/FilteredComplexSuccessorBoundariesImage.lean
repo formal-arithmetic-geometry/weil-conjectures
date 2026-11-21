@@ -21,7 +21,6 @@ import WeilConjectures.CategoryTheory.CanonicalFiltration
 # Successor boundaries are the inverse image of page boundaries
 
 Source: Stacks Project, Homology, Tag 012K, displayed boundary and differential formulas.
-(blueprint: lem-sp-filtered-complex-successor-boundaries-image).
 -/
 
 @[expose] public section
@@ -36,9 +35,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The inverse image of the incoming page boundary subobject under the successor-cycle
 projection is the successor boundary subobject inside successor cycles.
-Source: Stacks Project, Homology, Tag 012K, the boundary and differential formulas preceding
-lemma-spectral-sequence-filtered-complex.
-(blueprint: lem-sp-filtered-complex-successor-boundaries-image).
+Source: Stacks Project, Homology, Tag 012K, the boundary and differential formulas preceding.
 
 Proof. Write n = p+q. The image of the incoming page differential consists of
 classes of dx with x in F^(p-r)K^(n-1) and dx in F^pK^n. These are exactly the

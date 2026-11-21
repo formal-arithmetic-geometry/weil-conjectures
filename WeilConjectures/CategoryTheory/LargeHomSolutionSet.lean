@@ -25,8 +25,6 @@ Source: Stacks Project Lemma 19.14.1 (Tag 0F5S), first proof, using images
 of sums of the defining object. The quotient parametrization below is an
 explicit refinement of its cardinal-bound argument; it works for any G.
 
-(auxiliary; not a blueprint node)
-
 Proof in words: fix a module M in Type max(w,vH). Form P, the coproduct of
 copies of G indexed by the underlying set of M, with injections i_m.
 In an abelian category, well-poweredness also gives co-well-poweredness:

@@ -102,7 +102,6 @@ private theorem triple_rep
 
 /-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph,
 and Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-fiber-laws).
 
 Proof: An arbitrary element of a Hom fiber has a stage arrow representative.
 For the identity laws choose such a representative and identify its endpoints with

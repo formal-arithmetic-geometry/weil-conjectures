@@ -79,8 +79,7 @@ instance isOpenImmersion_toProjectiveSpaceInt : IsOpenImmersion (toProjectiveSpa
   infer_instance
 
 /-- **The standard affine chart of the relative projective space**: the open immersion
-`𝔸(n; S) ⟶ ℙ(Option n; S)` over `S` identifying `𝔸(n; S)` with the standard open `D₊(T₀)`.
-(blueprint: `lemma:nagata-relative-affine-space-open-immersion`) -/
+`𝔸(n; S) ⟶ ℙ(Option n; S)` over `S` identifying `𝔸(n; S)` with the standard open `D₊(T₀)`. -/
 noncomputable def toRelativeProjectiveSpace : 𝔸(n; S) ⟶ ℙ(Option n; S) :=
   pullback.lift (𝔸(n; S) ↘ S) (toSpecMvPoly n S ≫ toProjectiveSpaceInt n)
     (Subsingleton.elim _ _)

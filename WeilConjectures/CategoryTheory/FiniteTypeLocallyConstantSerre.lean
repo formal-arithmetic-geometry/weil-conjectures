@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.LocalModuleIso
 /-!
 # Finite type locally constant module sheaves form a weak Serre subcategory
 
-Source: Stacks Project, Modules on Sites, Tag 093U (3)
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 093U (3).
 -/
 
 @[expose] public section
@@ -76,7 +75,6 @@ private theorem finite_cokernel {M N : ModuleCat.{u} B}
 
 /-- Kernel and cokernel closure, proved by refining simultaneous trivializations.
 Source: Stacks Project, Modules on Sites, Tag 093U (3).
-(auxiliary; not a blueprint node).
 
 Proof: Intersect trivializing covers for the source and target. Transport the morphism
 through these trivializations. Local linearity supplies a further covering where it is
@@ -203,8 +201,7 @@ private theorem finiteTypeLocallyConstant_extension [IsNoetherianRing B]
   exact ⟨cokernel g, finite_cokernel g, ⟨e'⟩⟩
 
 /-- Finite type locally constant module sheaves are closed under kernels, cokernels and
-extensions. Source: Stacks Project, Modules on Sites, Tag 093U (3)
-(auxiliary; not a blueprint node).
+extensions. Source: Stacks Project, Modules on Sites, Tag 093U (3).
 
 Proof plan:
 1. On each object pass to its slice and successively trivialize both sheaves. Compose covers

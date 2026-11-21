@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 
 /-! # Finite filtered comparison from a bounded-below second-page coproduct comparison
 
-Source: Stacks Project, Tags 015J and 08DZ, the bounded-below spectral-sequence reduction
-(blueprint: lem-pc-bounded-below-coproduct-filtration).
+Source: Stacks Project, Tags 015J and 08DZ, the bounded-below spectral-sequence reduction.
 -/
 
 @[expose] public section
@@ -190,8 +189,7 @@ private theorem oneStep_graded_isIso
 associated graded maps. This is the spectral-sequence part of the coproduct argument;
 it does not assert that the underlying comparison is an isomorphism or an epimorphism.
 Source: Stacks Project, Tag 015J, finite convergence, and Tag 08DZ, spectral-sequence
-reduction; exact-couple naturality is Stacks Tags 011R, 011T and 012F
-(blueprint: lem-pc-bounded-below-coproduct-filtration).
+reduction; exact-couple naturality is Stacks Tags 011R, 011T and 012F.
 
 Proof: Represent each K_i and S by a bounded-below complex using the common cohomological
 bound a and canonical lower truncation. Apply `exists_truncationHypercohomology` to

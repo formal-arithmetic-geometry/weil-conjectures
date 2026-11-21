@@ -94,9 +94,8 @@ private theorem finite_map
   exact ⟨⟨⟨_, _⟩, hf⟩, rfl⟩
 
 /-- A matching family of generated sections admits a matching lift on a stage cover.
-Source: Stacks Project, Sites, Tag 0A35, the general-object presentation and finite-cover
+Source: Stacks Project, Sites, Tag 0A35, the general-object presentation and
 paragraphs; Modules on Sites, Tag 03CO, for abelian coefficients.
-(blueprint: lem-weil-pbc-colimit-site-abelian-stage-matching-lift).
 
 Proof: Finite base change and composition, together with the finiteness of stage covers,
 show that a covering sieve contains the image of a finite stage cover: sieves containing

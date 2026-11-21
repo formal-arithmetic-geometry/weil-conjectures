@@ -39,7 +39,7 @@ import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Normalized unit comparison for ringed tensor functors
-Source: Stacks 0FPT (blueprint: lem-sf-ringed-forget-tensor-unit-representatives).
+Source: Stacks 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -442,7 +442,6 @@ set_option linter.unusedSectionVars false in
 /--
 The representative unit calculation for the right unitor is reduced to the
 componentwise model equation for the normalized tensor comparison.
-(blueprint: lem-sf-ringed-forget-tensor-right-representatives)
 Proof in words: apply the representative model equation to the unit complex and
 `P`. Naturality of the tensor-model comparisons, together with the exact-functor
 localization factor, reduces the assertion to the unit square on total complexes.

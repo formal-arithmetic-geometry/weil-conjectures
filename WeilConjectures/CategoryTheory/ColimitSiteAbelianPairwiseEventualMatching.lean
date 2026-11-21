@@ -108,9 +108,8 @@ private theorem unit_kernel_mono
   exact hez.symm
 
 /-- One pair of restrictions with matching colimit images agrees at a later stage.
-Source: Stacks Project, Sites, Tag 0A35, section formula and finite-cover equalizer
+Source: Stacks Project, Sites, Tag 0A35, section formula and equalizer
 and adjunction paragraphs; Modules on Sites, Tag 03CO, abelian interpretation.
-(blueprint: lem-weil-pbc-colimit-site-abelian-pairwise-eventual-matching)
 
 Proof: Put A = F(t.hom) inverse image of G and let x and z be the two restrictions
 along gs and gr. Compatibility hy and naturality of alpha imply alpha_t(x) =

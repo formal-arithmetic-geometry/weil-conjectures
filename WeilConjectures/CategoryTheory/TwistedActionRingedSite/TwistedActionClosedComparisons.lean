@@ -281,8 +281,7 @@ private theorem hom_action_of_evaluation (P : RestrictionPresentation J s R a)
               (H.sigmaHom (U.obj M) (U.obj N)).hom)).symm
 
 /-- Restriction of tensor and internal Hom along a displayed action-site presentation.
-Source: steps 9--13 of the twisted action-site argument, Stacks 03EK and 04TT
-(blueprint: lem-sf-twisted-action-closed-comparisons).
+Source: steps 9--13 of the twisted action-site argument, Stacks 03EK and 04TT.
 
 Proof: sheafification commutes with translation, since the site equivalence identifies
 maps into translated sheaves before and after sheafification. Its universal property

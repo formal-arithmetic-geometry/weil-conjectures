@@ -79,8 +79,7 @@ import all Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Unsigned ordinary evaluation and its derived localization
 
-Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A98 and Section 0A8X
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization).
+Source: Stacks Project, sites-cohomology.tex, Tags 08JD, 08JE, 0A98 and Section 0A8X.
 
 The formulas use the recorded sheafified tensor generators, Hom-product projections,
 coefficient-unit identifications, and fixed K-injective augmentation. The ordinary map
@@ -107,8 +106,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v u})
 
 /-- Evaluate the actual Hom-product projection at the identity of the localized site.
-Source: Stacks Section 0A8X, Tag 08JE
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Section 0A8X, Tag 08JE. -/
 def ringedOrdinaryHomValue
     (E F : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
     (n a b : ℤ) (h : a + n = b) (U : Cᵒᵖ)
@@ -119,8 +117,7 @@ def ringedOrdinaryHomValue
 
 /-- Extract the coefficient from the supported component of the ordinary dual.
 Both transports are the actual degree-zero coefficient-unit identifications.
-Source: Stacks Section 0A8X, Tag 08JE
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Section 0A8X, Tag 08JE. -/
 def ringedOrdinaryDualValue
     (E : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
     (q a : ℤ) (h : a + q = 0) (U : Cᵒᵖ)
@@ -135,8 +132,7 @@ def ringedOrdinaryDualValue
 /-- The unsigned formula on every sheafified tensor generator and Hom projection.
 Supported components act by the actual coefficient scalar; all other components vanish.
 The equality `hp` only transports between equal integer degrees.
-Source: Stacks Tag 08JE, Section 0A8X
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Tag 08JE, Section 0A8X. -/
 def RingedOrdinaryEvaluationFormula
     (E F : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ)
     (aEF : (coefficientTotalTensor.{u, c, v} J R).obj
@@ -160,8 +156,7 @@ def RingedOrdinaryEvaluationFormula
           p q n hn U y φ)) x = 0)
 
 /-- Apply ordinary Hom to the fixed augmentation already used to define derived Hom.
-Source: Stacks Tags 0A95 and 08J9
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Tags 0A95 and 08J9. -/
 def ringedHomAugmentationMap
     (E G : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     homComplex (R := R) E G ⟶
@@ -174,8 +169,7 @@ section DerivedDefinitions
 variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 
 /-- The comparison induced by the fixed augmentation and localization factorization.
-Source: Stacks Tags 0A95 and 08J9
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Tags 0A95 and 08J9. -/
 def ringedOrdinaryHomComparison
     (E G : CochainComplex (RingedTensorModules.{c, v, u} J R) ℤ) :
     DerivedCategory.Q.obj (homComplex (R := R) E G) ⟶
@@ -186,8 +180,7 @@ def ringedOrdinaryHomComparison
 
 /-- The transpose of reassociation, coefficient evaluation and the right unit action.
 The coefficient object is identified with the monoidal unit by the recorded coherence.
-Source: Stacks Tags 08JD, 08JE and 0A98
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization). -/
+Source: Stacks Tags 08JD, 08JE and 0A98. -/
 def ringedDualTensorHom
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (unitIso : S.monoidal.tensorUnit ≅
@@ -1153,8 +1146,7 @@ variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, u} J R)]
 /-- The ordinary unsigned evaluation exists uniquely and represents derived evaluation
 through precisely the two fixed augmentation comparisons.
 
-Source: Stacks Tags 08JD/08JE, 0A98, 08J9 and Section 0A8X
-(blueprint: lem-sfb-ringed-ordinary-evaluation-localization).
+Source: Stacks Tags 08JD/08JE, 0A98, 08J9 and Section 0A8X.
 
 Proof:
 1. Curry ordinary reassociation, tensor with evaluation into the coefficient unit, and

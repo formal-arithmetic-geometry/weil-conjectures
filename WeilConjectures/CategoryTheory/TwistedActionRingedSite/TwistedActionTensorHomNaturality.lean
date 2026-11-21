@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Naturality of the transpose of a tensor comparison
 
-Source: Stacks, sites-modules.tex, lemma-internal-hom-adjoint-tensor.
-(blueprint: lem-sf-tensor-hom-comparison-precomposition).
+Source: Stacks, sites-modules.tex.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ private theorem untranspose_evaluation
 
 /-- A functor with a tensor comparison sends untransposes to the corresponding
 untransposes composed with its canonical Hom comparison.
-Source: Stacks, sites-modules.tex, lemma-internal-hom-adjoint-tensor.
-(blueprint: lem-sf-tensor-hom-comparison-precomposition).
+Source: Stacks, sites-modules.tex.
 
 Proof: express an untranspose as tensoring the given map with the identity and
 then evaluating. Move the tensor comparison past that map by its naturality.

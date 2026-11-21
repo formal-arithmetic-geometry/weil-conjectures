@@ -57,8 +57,7 @@ localized evaluations of the strict tower. The coefficient category is any Groth
 abelian category, and the complexes are unbounded. Exact products are not required.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0940 and 0941,
-the strict-tower construction and lemma-derived-limit-is-ok
-(blueprint: lem-sfb-strict-derived-limit-milnor).
+the strict-tower construction and.
 
 Proof: the tower category is Grothendieck. Resolve its complexes by functorial K-injective
 complexes with injective terms. An injective tower has split epimorphic transitions;

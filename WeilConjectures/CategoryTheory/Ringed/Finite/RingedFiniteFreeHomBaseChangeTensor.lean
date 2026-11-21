@@ -36,8 +36,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # Descent of the scalar tensor comparison from K-flat representatives.
 
-Source: Stacks Project, Tags 06YS, 07A4 and Categories 04VK.
-(blueprint: lem-sf-ringed-finite-free-tensor-data). -/
+Source: Stacks Project, Tags 06YS, 07A4 and Categories 04VK. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -58,7 +57,6 @@ variable {C : Type c} [Category.{v} C]
 The universal scalar pair and both normalized closed models are already supplied;
 this assertion constructs only the chain comparison and its derived localization.
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 08J9.
-(blueprint: lem-sf-ringed-finite-free-tensor-data).
 
 Proof: use the actual chain scalar tensor comparison and preservation of K-flatness.
 K-flat resolutions make restriction of two-variable functors to K-flat representatives

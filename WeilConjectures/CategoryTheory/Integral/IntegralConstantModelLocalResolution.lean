@@ -109,9 +109,6 @@ private theorem localModelResolution (l : ℕ) [Fact l.Prime] (E : Type u) [Fiel
 
 /-- Finite constant integral models admit local two-term resolutions by dualizable
 module sheaves.
-Source: blueprint sk-lem-int-integral-heart-dualizable.proof.md, first paragraph,
-and the recorded integral locally finite free resolution theorem.
-(blueprint: lem-integral-constant-model-local-resolution).
 
 Proof: the finite constant local models give a locally finite presentation. Equip E
 with its coefficient-extension spectral norm, replace it by its small equivalent field,

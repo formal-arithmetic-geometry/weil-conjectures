@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 /-! # Exact restriction of module sheaves to a slice
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3), localization step.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace SheafOfModules
 
 /-- Restricting modules on a small ringed site to a slice is exact.
 Source: Stacks Project, Modules on Sites, Tag 093U (3), localization step.
-(auxiliary; not a blueprint node).
 
 Proof: The underlying abelian sheaf of a restricted module is its restricted underlying
 abelian sheaf. Restriction of abelian sheaves preserves finite limits sectionwise and

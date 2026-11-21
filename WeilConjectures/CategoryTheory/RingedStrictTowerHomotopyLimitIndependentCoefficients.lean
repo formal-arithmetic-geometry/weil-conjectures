@@ -18,7 +18,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 # Total derived inverse limits with independent site and coefficient universes
 
 Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941; More on Algebra,
-Tag 0H9L (auxiliary; not a blueprint node).
+Tag 0H9L.
 
 This companion retains the original interface through its public import. Its generalized
 statement applies to the small pro-etale site and the actual completed coefficient sheaf.
@@ -830,7 +830,7 @@ and `r = max u (t + 1)` for coefficient-field universe `u`. These sizes stay ind
 This is the same statement as `ringedStrictTowerHomotopyLimit`, with all its conclusions.
 
 Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941; More on Algebra,
-Tag 0H9L (auxiliary; not a blueprint node).
+Tag 0H9L.
 
 The coefficient sheaf is represented in `RingCat` with sectionwise commutativity `_hcomm`,
 which is precisely a sheaf of commutative rings after forgetting to rings.
@@ -871,7 +871,7 @@ Proof plan:
 5. A strict chain map has its mapping cone in the tower category, with cones evaluated
    levelwise. Exactness sends its cone triangle to a distinguished triangle. A pro-zero
    cone tower has zero derived limit by step 4, so its first arrow is invertible by
-   lem-weil-pbc-hom-into-triangle-exact and rotation (def-weil-triangulated-category). -/
+   lem-weil-pbc-hom-into-triangle-exact and rotation. -/
 theorem ringedStrictTowerHomotopyLimitIndependentCoefficients
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{r}]

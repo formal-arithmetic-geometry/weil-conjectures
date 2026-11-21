@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-! # Unary full faithfulness from product precomposition
 
-Source: the diagonal argument for natural transformations; Stacks Categories 001C.
-(blueprint: lem-sf-unary-whiskering-from-product).
+Source: Stacks Categories 001C.
 -/
 
 @[expose] public section
@@ -22,8 +21,7 @@ open CategoryTheory
 namespace CategoryTheory.Functor
 
 /-- Full faithfulness of product precomposition implies unary full faithfulness.
-Source: Stacks Categories 001C, applied to projection and diagonal functors
-(blueprint: lem-sf-unary-whiskering-from-product).
+Source: Stacks Categories 001C, applied to projection and diagonal functors.
 Proof: extend a transformation of unary restrictions to the product by the first
 projection, lift it using ff, and restrict the lift to the diagonal. The
 map-preimage equation follows by evaluating ff.map_preimage on diagonal objects.

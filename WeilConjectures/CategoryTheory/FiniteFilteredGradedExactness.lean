@@ -11,9 +11,8 @@ import Mathlib.CategoryTheory.Abelian.Refinements
 
 /-! # Finite filtered graded exactness
 
-Source: Stacks Project, Homology, Tag 05QH, lemma-filtered-acyclic,
-parts (1)--(5), with the finite filtrations of Tag 0121
-(blueprint: lem-trf-finite-filtered-graded-exactness).
+Source: Stacks Project, Homology, Tag 05QH,
+parts (1)--(5), with the finite filtrations of Tag 0121.
 
 The filtered objects, filtration-preserving maps, filtration steps, graded pieces and the
 canonical step and graded maps are the recorded ones of `def-sp-filtration`
@@ -45,8 +44,7 @@ namespace WeilFilteredObject
 
 /-- A filtered map `f : M → N` is strict when `f(FᵖM) = im(f) ∩ FᵖN` for every
 integer `p`, as subobjects of `N`.
-Source: Stacks Project, Homology, Tag 05QH, part (4)
-(blueprint: lem-trf-finite-filtered-graded-exactness). -/
+Source: Stacks Project, Homology, Tag 05QH, part (4). -/
 def IsStrict {A B : WeilFilteredObject C} (f : A ⟶ B) : Prop :=
   ∀ p : ℤ,
     imageSubobject (restrictionSteps f p ≫ (B.filtration.step p).arrow) =

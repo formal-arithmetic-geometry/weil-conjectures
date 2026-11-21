@@ -24,7 +24,6 @@ namespace CategoryTheory.InjectiveResolution
 set_option backward.isDefEq.respectTransparency false in
 /-- An exact functor sends the roof of a single cocycle to the roof of its image.
 Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-ext-exact-functor-cocycle)
 
 Proof: Express the Ext class of the cocycle as the derived-category roof with
 right arrow the augmentation, using extEquivCohomologyClass_symm_mk_hom.

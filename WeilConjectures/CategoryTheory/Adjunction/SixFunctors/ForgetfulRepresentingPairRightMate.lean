@@ -8,11 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Representing lifts and the right mate under forgetting
-
-Source: blueprint, sec-six-functors/sk-thm-sf-package,
-cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence;
-the DAG's native-derived expansion, Old proof Steps 7–8.
-(blueprint: lem-sf-forgetful-representing-pair-right-mate)
 -/
 
 @[expose] public section
@@ -31,10 +26,7 @@ variable {WX : Type uWX} {WY : Type uWY} {CX : Type uCX} {CY : Type uCY}
 
 /-- The fixed right mate of the inverse left-adjoint comparison, using Mathlib's
 `mateEquiv` from def-weil-pbc-adjunction-mate. Its data depend only on the two
-specified adjunctions and `c`, not on representing triples.
-Source: cor-coef-verdier-weil-equivariance.proof.md, final sentence, expanded
-as Step 2 of the node (Old proof Steps 7–8).
-(blueprint: lem-sf-forgetful-representing-pair-right-mate) -/
+specified adjunctions and `c`, not on representing triples. -/
 def forgetfulRightMate (adjW : FW ⊣ GW) (adj : F ⊣ G)
     (c : FW ⋙ UY ≅ UX ⋙ F) : GW ⋙ UX ⟶ UY ⋙ G :=
   (mateEquiv adjW adj (TwoSquare.mk UX FW F UY c.inv))
@@ -42,10 +34,6 @@ def forgetfulRightMate (adjW : FW ⊣ GW) (adj : F ⊣ G)
 /-- Objectwise representing lifts identify the fixed right mate with the forgotten
 representing isomorphisms; it is invertible, independent of the lifts, and identifies
 both adjunctions' units and counits. No functor structure on `H` is assumed.
-
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction
-sentence; the DAG's native-derived expansion of Old proof Steps 7–8.
-(blueprint: lem-sf-forgetful-representing-pair-right-mate)
 
 Proof plan from the node:
 1. For fixed `L`, put `A = GW.obj L`. The adjunction bijections `P` and the

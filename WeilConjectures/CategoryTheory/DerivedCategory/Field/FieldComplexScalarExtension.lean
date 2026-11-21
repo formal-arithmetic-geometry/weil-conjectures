@@ -14,9 +14,6 @@ import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Scalar extension on finite-dimensional coefficient complexes
 
-Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
-(blueprint: def-weil-finite-dimensional-complex-scalar-extension).
-
 ## Main definitions
 
 * `fieldDerivedScalarExtension`: exact termwise scalar extension descended to D(K).
@@ -33,35 +30,30 @@ namespace DerivedCategory
 
 variable {K L : Type u} [Field K] [Field L]
 
-/-- The existing scalar-extension adjunction gives additivity.
-Source: blueprint order 1509 (blueprint: def-weil-finite-dimensional-complex-scalar-extension). -/
+/-- The existing scalar-extension adjunction gives additivity. -/
 noncomputable instance fieldExtendScalarsAdditive (f : K →+* L) :
     (ModuleCat.extendScalars.{u, u, u} f).Additive :=
   (ModuleCat.extendRestrictScalarsAdj f).left_adjoint_additive
 
-/-- A vector space is free and hence flat, so scalar extension preserves finite limits.
-Source: blueprint order 1509 (blueprint: def-weil-finite-dimensional-complex-scalar-extension). -/
+/-- A vector space is free and hence flat, so scalar extension preserves finite limits. -/
 noncomputable instance fieldExtendScalarsLimits (f : K →+* L) :
     PreservesFiniteLimits (ModuleCat.extendScalars.{u, u, u} f) :=
   ModuleCat.preservesFiniteLimits_extendScalars_of_flat
     (letI := f.toAlgebra; inferInstanceAs (Module.Flat K L))
 
-/-- Scalar extension preserves colimits by its existing adjunction.
-Source: blueprint order 1509 (blueprint: def-weil-finite-dimensional-complex-scalar-extension). -/
+/-- Scalar extension preserves colimits by its existing adjunction. -/
 noncomputable instance fieldExtendScalarsColimits (f : K →+* L) :
     PreservesColimits (ModuleCat.extendScalars.{u, u, u} f) :=
   (ModuleCat.extendRestrictScalarsAdj f).leftAdjoint_preservesColimits
 
 /-- Termwise scalar extension descended through localization at quasi-isomorphisms.
 Its comparison on complexes is `Functor.mapDerivedCategoryFactors` and its shift and
-triangulated structures are the existing exact-functor structures.
-Source: blueprint order 1509 (blueprint: def-weil-finite-dimensional-complex-scalar-extension). -/
+triangulated structures are the existing exact-functor structures. -/
 noncomputable abbrev fieldDerivedScalarExtension (f : K →+* L) :
     DerivedCategory (ModuleCat.{u} K) ⥤ DerivedCategory (ModuleCat.{u} L) :=
   (ModuleCat.extendScalars f).mapDerivedCategory
 
 /-- Restriction is possible because exact scalar extension commutes with cohomology.
-Source: blueprint order 1509 (blueprint: def-weil-finite-dimensional-complex-scalar-extension).
 Proof: compute on a representing complex. Flatness preserves its kernels and images,
 so its cohomology is the scalar extension of the original cohomology. Tensoring a
 finite-dimensional space preserves finite dimensionality, and tensoring zero gives zero;
@@ -84,8 +76,7 @@ theorem fieldDerivedScalarExtension_preserves (f : K →+* L)
     exact (Module.Finite.equiv_iff (e i).toLinearEquiv).mp hfin
 
 /-- The transition functor on the specified full subcategories, with actual derived
-scalar extension as its underlying functor.
-Source: blueprint order 1509 (blueprint: def-weil-finite-dimensional-complex-scalar-extension). -/
+scalar extension as its underlying functor. -/
 noncomputable def pointFdScalarExtension (f : K →+* L) :
     (pointFiniteDimensional K).FullSubcategory ⥤ (pointFiniteDimensional L).FullSubcategory :=
   (pointFiniteDimensional L).lift

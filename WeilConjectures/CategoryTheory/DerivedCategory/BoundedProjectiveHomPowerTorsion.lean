@@ -20,7 +20,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 /-! # Power torsion of Hom from a bounded finite-projective complex
 
 Source: Stacks Project, Tag 08EJ, affine paragraph.
-(blueprint: lem-sc-bounded-projective-hom-power-torsion).
 -/
 
 @[expose] public section
@@ -70,7 +69,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Derived Hom from a projective module in degree t embeds linearly into module
 Hom to cohomology in degree t. No finiteness or torsion assumption is used.
 Source: Stacks Project, Tag 08EJ, affine single-term case.
-(blueprint: lem-sc-bounded-projective-hom-power-torsion).
 
 Proof: Maps from F[t] to objects concentrated below t vanish by projectivity.
 Apply this to the first term of the canonical truncation triangle of M at t.
@@ -116,7 +114,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A complex supported in [a,b] is an extension of its stupid truncation below b
 by its top term. The shorter complex's terms are old terms or zero objects.
 Source: Stacks Project, Tag 08EJ, affine stupid-truncation triangle.
-(blueprint: lem-sc-bounded-projective-hom-power-torsion).
 
 Proof: The complex S consisting of P^b in degree b maps into P because P is
 zero above b. Its map is an isomorphism in degree b and has zero source in other
@@ -259,7 +256,6 @@ private theorem interval_projective_power_torsion
 /-- Elementwise power torsion of all cohomology modules implies power torsion of
 morphisms from a bounded complex of finite projective modules.
 Source: Stacks Project, Tag 08EJ, affine paragraph.
-(blueprint: lem-sc-bounded-projective-hom-power-torsion).
 
 Proof: Induct on the length of a finite interval supporting P, simultaneously for
 all targets with the displayed cohomological torsion property. The zero complex

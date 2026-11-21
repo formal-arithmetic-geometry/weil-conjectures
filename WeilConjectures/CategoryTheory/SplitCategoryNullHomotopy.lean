@@ -9,9 +9,6 @@ module
 public import Mathlib.Algebra.Homology.Homotopy
 
 /-! # Null homotopies in a split abelian category
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, proof step 4, vector-space
-splitting argument. (blueprint: lem-pc-split-category-null-homotopy).
 -/
 
 @[expose] public section
@@ -22,10 +19,6 @@ open CategoryTheory Limits
 namespace CochainComplex
 
 /-- A map inducing zero on homology in a split abelian category is null homotopic.
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--3, step 4, the boundary/complement
-contraction in new-field-complex-single-cohomology, steps 1 and 2.
-(blueprint: lem-pc-split-category-null-homotopy).
 
 Proof: Choose a retraction r_i of the cycles inclusion Z_K^i → K^i,
 using injectivity of Z_K^i. Since f induces zero on homology, its map

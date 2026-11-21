@@ -14,7 +14,6 @@ import Mathlib.Tactic
 
 Source: Stacks, Tag 0164, the category of finite nonempty ordered sets. The range
 and intersection arguments below are agent-written consequences of this definition.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -24,10 +23,9 @@ open CategoryTheory CategoryTheory.Limits Simplicial
 namespace SimplexCategory
 
 /-- A simplex map factors through an injective map whenever its vertex range does.
-Source: Stacks, Tag 0164 (finite ordered sets); agent-written proof. Take the unique
+Source: Stacks, Tag 0164 (finite ordered sets). Take the unique
 vertex preimages; injectivity reflects their order, so they form a monotone map.
-The pointwise preimage equations give the result.
-(auxiliary; not a blueprint node) -/
+The pointwise preimage equations give the result. -/
 theorem factor_of_range_subset {a b c : SimplexCategory} (f : a ⟶ c) (e : b ⟶ c)
     [Mono e] (h : Set.range f.toOrderHom ⊆ Set.range e.toOrderHom) :
     ∃ g : a ⟶ b, g ≫ e = f := by
@@ -45,12 +43,11 @@ theorem factor_of_range_subset {a b c : SimplexCategory} (f : a ⟶ c) (e : b �
     exact congrArg Fin.val (hg x)
 
 /-- Two injective simplex maps with a common vertex admit a pullback ordinal.
-Source: Stacks, Tag 0164 (finite ordered sets); agent-written proof. Sort the vertices
+Source: Stacks, Tag 0164 (finite ordered sets). Sort the vertices
 of the first domain whose images lie in that of the second; this nonempty finite
 ordered set is an ordinal. Its embedding
 and the unique second preimages give the two projections. A compatible pair factors
-through this sorted subset, and injectivity proves the second projection equation.
-(auxiliary; not a blueprint node) -/
+through this sorted subset, and injectivity proves the second projection equation. -/
 theorem exists_face_pullback {a b c : SimplexCategory} (e : a ⟶ c) (f : b ⟶ c)
     [Mono e] [Mono f]
     (hne : ∃ x y, e.toOrderHom x = f.toOrderHom y) :

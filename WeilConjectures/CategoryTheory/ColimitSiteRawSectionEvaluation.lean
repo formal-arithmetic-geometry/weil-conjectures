@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawSectionPresentation
 /-! # ColimitSiteRawSectionEvaluation
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-evaluation).
 -/
 
 @[expose] public section
@@ -29,9 +28,8 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 presentation construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-evaluation).
 
 Proof: The pointwise left Kan extension formula presents B(t)(V(i)U) by sections
 of the stage inverse image at W, paired with an arrow V(i)U to V(t)W.

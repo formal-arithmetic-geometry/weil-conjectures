@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 /-! # Differential of retained representatives in the cone filtration
 
 Source: Stacks Project, Homology, Tags 012X and 0133, column filtration and
-canonical augmentation; retained-summand calculation of the parent node.
+canonical augmentation.
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ namespace CategoryTheory.Functor
 set_option backward.isDefEq.respectTransparency false in
 /-- The graded differential of the lifted K summand is the column augmentation.
 Source: Stacks Project, Homology, Tags 0133 and 012X, canonical augmentation and
-second filtration; parent normalized-differential proof, K-term calculation.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-augmentation-representative).
+second filtration.
 
 Proof: hm and hmm' identify m=p-1 and m'=p. Use chain compatibility of the
 quotient projection and cancel the monic filtration inclusion to compute the

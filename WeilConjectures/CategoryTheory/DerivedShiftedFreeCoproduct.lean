@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 /-! # Coproduct generators of shifted free quotient complexes
 
 Source: Stacks Project, Remark 15.60.11 (Tag 09PB).
-(blueprint: lem-pc-derived-shifted-free-coproduct).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace CategoryTheory
 /-- A direct sum of complexes supported in single degrees becomes a coproduct of
 shifts of the rank-one module after localization and shift by `-1`.
 Source: Stacks Project, Remark 15.60.11 (Tag 09PB).
-(blueprint: lem-pc-derived-shifted-free-coproduct).
 
 Proof: apply `derivedModuleDirectSums` to the family of single complexes. Transport
 that coproduct along the image of the given quotient isomorphism under `Q`. The shift

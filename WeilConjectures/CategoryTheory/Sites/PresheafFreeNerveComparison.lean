@@ -79,7 +79,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The free module and free abelian adjunctions identify nerve Hom groups
 additively, compatibly with the alternating boundaries. No injectivity is used.
 Source: Stacks Project, Cohomology on Sites, Tags 03AS and 03FC.
-(blueprint: lem-sc-presheaf-free-nerve-comparison)
 
 Proof: in each degree the free module adjunction identifies a module morphism
 from the free module presheaf on the nerve with a natural map from that nerve

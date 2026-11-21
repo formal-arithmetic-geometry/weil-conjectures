@@ -54,7 +54,6 @@ private theorem retraction_homColimit_bijective
 /-- A triangle retraction on the first two vertices induces a third Hom-colimit bijection.
 Source: Stacks Project, Derived Categories, Lemma 05SC, the five-term Hom diagram,
 dualized to LF; Categories, Tag 05PZ and the initial colimit comparison Tag 0A1T.
-(blueprint: lem-pur-triangle-retraction-hom-colimit).
 
 Proof: Take I to be the cofiltered category of incoming distinguished denominator
 triangles over T from Tag 05R9. Its three vertex projections p1, p2, p3 are initial.

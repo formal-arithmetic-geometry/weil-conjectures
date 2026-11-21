@@ -18,7 +18,6 @@ namespace CategoryTheory.RingedSiteGlobalRHom
 /-- A natural isomorphism descends along a full essentially surjective functor.
 
 Source: the representative-to-derived-object descent in Stacks Project, Tag 08JA.
-(blueprint: lem-sfb-global-rhom-full-essentially-surjective-descent).
 
 Proof: choose an object preimage and its comparison isomorphism for each target
 object. Conjugate the given comparison by those isomorphisms. Lift the conjugate

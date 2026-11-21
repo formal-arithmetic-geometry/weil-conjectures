@@ -13,9 +13,6 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 
 /-!
 # Adjunction for extension by zero on a localized site
-
-Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Lemma 03DI
-(blueprint: lem-weil-pbc-site-extension-by-zero-presheaf-adjoint).
 -/
 
 @[expose] public section
@@ -134,9 +131,6 @@ private noncomputable def sumAdjunction {C : Type u} [SmallCategory C] (W : C) :
       simp [sumHomEquiv, sumRestrict, sliceRestrict, Category.assoc] }
 
 /-- The sheafified direct-sum presheaf is left adjoint to restriction.
-
-Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Lemma 03DI
-(blueprint: lem-weil-pbc-site-extension-by-zero-presheaf-adjoint).
 
 Given a morphism `α : F ⟶ G|_W`, the first proof step defines a presheaf map by
 sending the section in the `φ`-summand to `α.app (Over.mk φ)`. Naturality in the

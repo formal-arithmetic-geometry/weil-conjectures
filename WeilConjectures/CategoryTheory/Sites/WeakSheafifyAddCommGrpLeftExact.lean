@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Sites.Limits
 
 /-! # Left exactness of existing abelian sheafification
 
-Source: Stacks Project, Tag 00WJ and Tag 03CN.
-(blueprint: lem-sc-weak-sheafify-addcommgrp-left-exact). -/
+Source: Stacks Project, Tag 00WJ and Tag 03CN. -/
 
 @[expose] public section
 
@@ -29,7 +28,6 @@ bijective maps is left exact, independently of the size of the site.
 
 Source: Stacks Project, Tag 00WJ (left exactness of sheafification), applied to
 abelian presheaves as in Tag 03CN, proof of the first assertion.
-(blueprint: lem-sc-weak-sheafify-addcommgrp-left-exact)
 
 Proof: finite limits of abelian presheaves are computed sectionwise. For a finite
 category K and a diagram D, form the map from the limit of D to the limit of the

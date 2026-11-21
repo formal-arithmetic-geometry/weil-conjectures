@@ -46,8 +46,7 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Scalar-unit coherence of normalized slice tensor comparison
 
-Source: Stacks Project, Tags 07A4 and 0FPT
-(blueprint: lem-sfb-ringed-slice-scalar-unit).
+Source: Stacks Project, Tags 07A4 and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -416,8 +415,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Scalar action is preserved by the normalized slice tensor comparison, using the
 coefficient identification furnished by termwise restriction and localization.
-Source: Stacks Tags 03DJ, 07A4 and 0FPT
-(blueprint: lem-sfb-ringed-slice-scalar-unit).
+Source: Stacks Tags 03DJ, 07A4 and 0FPT.
 
 Proof: restriction of the coefficient complex is the coefficient complex on the slice.
 Use this identification and the localization comparison for the coefficient isomorphism.

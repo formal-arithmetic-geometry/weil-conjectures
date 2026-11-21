@@ -25,8 +25,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 
 /-- Restriction identifies constant scalars and the explicit sheafified site tensor
 with the fixed-coefficient unit and tensor, preserving their local generators.
-Source: Stacks 03CY and 03EK
-(blueprint: lem-amb-constant-scalar-explicit-tensor).
+Source: Stacks 03CY and 03EK.
 
 Proof: take the inverse unit comparison of `ordinary J B` and identify its source
 with the constant module sheaf. Its scalar equation is `Ordinary.unit_hom`, followed

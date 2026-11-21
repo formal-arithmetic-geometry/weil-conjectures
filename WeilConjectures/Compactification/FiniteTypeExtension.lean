@@ -23,8 +23,7 @@ public import WeilConjectures.Mathlib.RingTheory.Localization.Finiteness
 This file proves the ideal-sheaf form of Stacks Project Tag 01PF: on a quasi-compact
 quasi-separated scheme, a finite-type ideal sheaf on a quasi-compact open `W` extends to a
 finite-type ideal sheaf on the whole scheme, and the extension can be taken inside any
-prescribed ambient ideal sheaf restricting to it
-(blueprint: `lemma:nagata-extend-finite-type-ideal`).
+prescribed ambient ideal sheaf restricting to it.
 
 The proof enlarges the open on which the ideal sheaf is of finite type one affine open at a
 time (`Scheme.IdealSheafData.exists_le_ofFiniteTypeOn_sup`), and a finite induction over an
@@ -63,15 +62,13 @@ and `Scheme.IdealSheafData.ofFiniteType_top`).
   a quasi-compact open;
 - `Scheme.IdealSheafData.exists_finiteType_le_comap_eq_disjoint_support`: the form used to
   transport a blow-up centre along a closed immersion, which additionally keeps the support
-  away from a prescribed quasi-compact open
-  (blueprint: `lemma:nagata-finite-type-ideal-extension-closed`).
+  away from a prescribed quasi-compact open.
 
 The affine-morphism variant is proved by covering `X` by finitely many affine opens `W`,
 choosing on each of them finitely many sections of the ambient ideal sheaf which already
 generate its pullback over the affine open `j ⁻¹ᵁ W` of the source, extending the ideal
 sheaf they span to a finite-type ideal sheaf inside the ambient one by Tag 01PF, and
 summing over the cover.
-
 -/
 
 @[expose] public section
@@ -343,8 +340,7 @@ theorem exists_le_ofFiniteTypeOn_sup {H₀ I₀ : X.IdealSheafData} {O : X.Opens
     exact Ideal.FG.map hN'fg _
 
 /-- **Existence of a finite-type ideal sheaf with prescribed restriction** (Stacks
-Project Tag 01PF, relative order-theoretic form; blueprint:
-`lemma:nagata-extend-finite-type-ideal`). -/
+Project Tag 01PF). -/
 theorem exists_finiteType_le_comap_eq_of_le [CompactSpace X] {H₀ I₀ : X.IdealSheafData}
     (hle : I₀ ≤ H₀) (W : X.Opens) (hW : IsCompact (W : Set X)) (hJ : I₀.ofFiniteTypeOn W) :
     ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteType ∧ I.comap W.ι = I₀.comap W.ι := by
@@ -390,8 +386,7 @@ theorem exists_finiteType_le_comap_eq_of_le [CompactSpace X] {H₀ I₀ : X.Idea
 /-- Existence of a finite-type ideal sheaf with prescribed restriction (Stacks Project
 Tag 01PF, order-theoretic form): on a quasi-compact quasi-separated scheme, every ideal
 sheaf `H₀` whose restriction to a quasi-compact open `W` is of finite type contains a
-finite-type ideal sheaf with the same restriction to `W`.
-(Blueprint: `lemma:nagata-extend-finite-type-ideal`.) -/
+finite-type ideal sheaf with the same restriction to `W`. -/
 theorem exists_finiteType_le_comap_eq [CompactSpace X] (H₀ : X.IdealSheafData) (W : X.Opens)
     (hW : IsCompact (W : Set X)) (hJ : H₀.ofFiniteTypeOn W) :
     ∃ I : X.IdealSheafData, I ≤ H₀ ∧ I.ofFiniteType ∧ I.comap W.ι = H₀.comap W.ι :=
@@ -399,8 +394,7 @@ theorem exists_finiteType_le_comap_eq [CompactSpace X] (H₀ : X.IdealSheafData)
 
 /-- Extension of a finite-type ideal sheaf from a quasi-compact open (Stacks Project
 Tag 01PF): on a quasi-compact quasi-separated scheme, every finite-type ideal sheaf on a
-quasi-compact open extends to a finite-type ideal sheaf on the whole scheme.
-(Blueprint: `lemma:nagata-extend-finite-type-ideal`.) -/
+quasi-compact open extends to a finite-type ideal sheaf on the whole scheme. -/
 theorem exists_finiteType_comap_eq [CompactSpace X] (W : X.Opens)
     (hW : IsCompact (W : Set X)) (J : W.toScheme.IdealSheafData) (hJ : J.ofFiniteType) :
     ∃ I : X.IdealSheafData, I.ofFiniteType ∧ I.comap W.ι = J := by
@@ -505,8 +499,7 @@ theorem exists_finiteType_le_comap_eq_of_isAffineHom [CompactSpace X] {Z : Schem
       ideal_comap_appLE I j (W : X.affineOpens) _ le_rfl]
     exact hI _ W.2
 
-/-- **Transport of a blow-up centre along an affine morphism** (Stacks Project Tag 080E,
-ideal-sheaf input; blueprint: `lemma:nagata-finite-type-ideal-extension-closed`).
+/-- **Transport of a blow-up centre along an affine morphism** (Stacks Project Tag 080E).
 
 In the application `j` is a closed immersion: applied to the preimage of a finite-type
 ideal sheaf `I` on `Z` under `𝒪_X ↠ 𝒪_Z`, this produces the finite-type ideal sheaf `J`
@@ -539,8 +532,7 @@ quasi-compact opens of a quasi-separated scheme `X`, and let `I_U ⊆ 𝒪_U`, `
 quasi-coherent ideal sheaves of finite type which agree on the overlap `U ∩ W = U ×_X W`. Then
 there is a quasi-coherent ideal sheaf on `X`, of finite type on `U ∪ W`, restricting to `I_U` on
 `U` and to `I_W` on `W`. It is the intersection of the maximal quasi-coherent extensions of
-`I_U` and `I_W`, whose restrictions are computed by flat base change of scheme-theoretic images.
-(blueprint: `lemma-products-composites-u-admissible-blow--3`) -/
+`I_U` and `I_W`, whose restrictions are computed by flat base change of scheme-theoretic images. -/
 theorem exists_ofFiniteTypeOn_sup_comap_eq {U W : X.Opens} (hU : IsCompact (U : Set X))
     (hW : IsCompact (W : Set X)) {IU : U.toScheme.IdealSheafData}
     {IW : W.toScheme.IdealSheafData} (hIU : IU.ofFiniteType) (hIW : IW.ofFiniteType)

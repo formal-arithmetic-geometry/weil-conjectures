@@ -18,9 +18,8 @@ import WeilConjectures.CategoryTheory.ColimitSiteFiniteRestrictionFamilyLift
 
 /-! # Equality of Kan units at one stage
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 independence of presentations in the section construction.
-(blueprint: lem-weil-pbc-colimit-site-abelian-kan-unit-relations).
 -/
 
 @[expose] public section
@@ -31,9 +30,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section construction, independence of the presentation and restriction arrows.
-(blueprint: lem-weil-pbc-colimit-site-abelian-kan-unit-relations).
 
 Proof: Compute K at V_t(U) by the pointwise abelian left Kan colimit over
 costructured arrows. Its presentation is the direct sum of the stage groups,

@@ -17,7 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Canonical product transitions satisfying their cocycle law once their projections
-are known. (blueprint: lem-weil-pbc-arrow-product-transitions-cocycle-law)
+are known.
 Source: Stacks Project, Sites, Tag 0EXZ. Proof by testing both sides after every product
 projection, using naturality of the composition comparison and associativity. -/
 theorem arrow_product_transitions_cocycle_of_projections

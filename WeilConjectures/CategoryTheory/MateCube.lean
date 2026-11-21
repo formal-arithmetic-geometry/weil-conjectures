@@ -15,9 +15,6 @@ open CategoryTheory CategoryTheory.Functor
 namespace CategoryTheory
 
 /-- Four inverse mate comparisons transport a commutative cube.
-Source: Mathlib's adjunction mate formulas and the final tensor-compatibility
-paragraph of the latest blueprint's lemma-sp-reduction--1.
-(blueprint: lem-sp-scalar-mate-cube)
 Proof: transpose both composites by the last adjunction. Use its unit naturality
 and the four unit_mateEquiv_symm equations. Naturality of qI moves the first
 inverse mate, and naturality of c moves the initial unit. Substitute hc. On the

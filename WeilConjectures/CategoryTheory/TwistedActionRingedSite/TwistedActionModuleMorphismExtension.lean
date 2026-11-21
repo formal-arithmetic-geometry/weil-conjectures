@@ -267,8 +267,7 @@ set_option linter.unusedSectionVars false in
 /-- An intertwining map on the base extends to the integer-action site.
 
 Source: the map part of step 4 of the agent-formulated twisted variant of Stacks 00W0,
-`sites.tex`, proposition-sheaves-on-group; module linearity as in Stacks 03CV
-(blueprint: lem-sf-twisted-action-module-morphism-extension).
+`sites.tex`; module linearity as in Stacks 03CV.
 
 Proof: at an object of the form inclusion X, take the given component of h.
 The equality inclusion_obj identifies every object with such an object. The

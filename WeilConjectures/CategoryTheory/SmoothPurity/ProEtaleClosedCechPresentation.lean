@@ -8,9 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Closed.ProEtaleClosedCechDegreeCorepresenter
 
 /-! # Ambient corepresenters for closed Čech cochains
-
-Source: the free-module construction in the affine matching-relations step of
-`lem-sp-proetale-closed-injective-affine-cech`.
 -/
 
 @[expose] public section
@@ -98,10 +95,6 @@ namespace AlgebraicGeometry.Scheme
 attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteWidePullbacks
 
 /-- The degreewise universal properties determine both adjacent boundary maps.
-
-Source: the free-module construction in Step 3 of
-`lem-sp-proetale-closed-injective-affine-cech`.
-(blueprint: lem-sp-proetale-closed-cech-presentation).
 
 Proof: choose the three degreewise corepresenters. Transpose each differential
 by evaluating it at the identity of the preceding corepresenter. Naturality of

@@ -16,7 +16,7 @@ public import Mathlib.Basic.Finite.Sigma
 
 /-! # Finite matching equations at a common transition
 
-Source: Stacks Project, Sites, Tag 0A35, finite-cover equalizer paragraph.
+Source: Stacks Project, Sites, Tag 0A35 equalizer paragraph.
 -/
 
 @[expose] public section
@@ -118,9 +118,8 @@ private theorem finite_refinement
   exact ⟨s, b, fun l ↦ hb l (Finset.mem_univ l)⟩
 
 /-- A finite indexed family becomes matching under the prescribed stage comparison.
-Source: Stacks Project, Sites, Tag 0A35, finite-cover matching equalizer paragraph
+Source: Stacks Project, Sites, Tag 0A35 matching equalizer paragraph
 and the unit-compatible adjunction paragraph; Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-abelian-finite-indexed-matching)
 
 Proof: For each ordered pair of arrows in the finite set T.uncurry take its
 covering pullback at t.right. Apply the named pairwise eventual matching theorem

@@ -177,9 +177,8 @@ import all Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-! # Descent of the normalized Roos realization from good cochain representatives
 
-Source: Stacks Project, Tags 06YS, 06YU and 0941 (lemma-derived-limit-is-ok),
+Source: Stacks Project, Tags 06YS, 06YU and 0941,
 with the localization argument extracted in the DAG.
-(blueprint: lem-pur-flat-roos-functor-descent).
 -/
 
 @[expose] public noncomputable section

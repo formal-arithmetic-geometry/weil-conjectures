@@ -250,7 +250,6 @@ private theorem localizationSheafMap_zero
 /-- The localization of the regular module is its multiplication colimit, with
 zeroth leg the localization unit.
 Source: Stacks Project, Algebra, Tag 00CM, and Modules on Sites, Tag 03CY.
-(auxiliary; not a blueprint node).
 
 Proof: the nth fraction map sends r to r/t^n. The module-localization colimit
 comparison proves the universal property sectionwise. Evaluation jointly reflects

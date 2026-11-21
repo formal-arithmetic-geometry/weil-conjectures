@@ -13,9 +13,8 @@ import Mathlib.CategoryTheory.Localization.Predicate
 /-!
 # Normalized cohomology comparisons for exact derived functors
 
-Source: Stacks Project, Tag 015F, `lemma-right-derived-exact-functor`, with the
-kernel/quotient and localization coherence argument in the DAG node
-(blueprint: lem-pur-exact-derived-cohomology-coherence).
+Source: Stacks Project, Tag 015F, with the
+kernel/quotient and localization coherence argument in the DAG node.
 
 The comparisons are the existing `Functor.mapDerivedCategoryHomologyFunctorIso`, not
 arbitrary isomorphisms. Their normalization on representatives is
@@ -43,8 +42,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The normalized cohomology comparisons for exact functors respect the termwise
 compositor and every natural isomorphism from the composite to another exact functor.
-Source: Stacks Project, Tag 015F, `lemma-right-derived-exact-functor`; the canonical
-coherence strengthening (blueprint: lem-pur-exact-derived-cohomology-coherence).
+Source: Stacks Project, Tag 015F.
 
 Here theta is `mapDerivedCategoryHomologyFunctorIso`, c is `mapDerivedCategoryCompIso`,
 and d is c inverse followed by `mapDerivedCategoryNatIso eta`. These existing constructions

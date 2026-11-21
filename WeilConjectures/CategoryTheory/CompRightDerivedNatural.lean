@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerived.ResolutionNaturality
 
 Source: Stacks Project, Derived Categories, Tag 015E, applied to the image of an
 injective resolution under an exact functor.
-(blueprint: new-finite-cover-derived-comparison-natural)
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +38,7 @@ Source: Stacks Project, Tag 015E. Lift a morphism to injective resolutions.
 The image of this lift under `E` is compatible with the mapped augmentations.
 Naturality of the acyclic-resolution comparison identifies its homology map with
 `R^q F` of the image morphism. Naturality for the original injective resolutions,
-and for the reassociation of termwise functors, gives the claimed square.
-(blueprint: new-finite-cover-derived-comparison-natural) -/
+and for the reassociation of termwise functors, gives the claimed square. -/
 theorem compRightDerivedObjIso_hom_naturality {X Y : C} (g : X ⟶ Y) (q : ℕ) :
     ((E ⋙ F).rightDerived q).map g ≫ (compRightDerivedObjIso E F hE q Y).hom =
       (compRightDerivedObjIso E F hE q X).hom ≫ (F.rightDerived q).map (E.map g) := by

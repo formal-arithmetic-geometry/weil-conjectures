@@ -20,8 +20,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- Natural transformations descend from scalar generators to their retracts.
-Source: the retract and scalar-naturality argument of Weil II (1.1.1) d).
-(blueprint: lem-pod-lisse-coefficient-retract-descent).
+Source: the retract and argument of Weil II (1.1.1) d).
 Proof: naturality on image morphisms extends to their scalar span by linearity.
 Choose each object as a retract of an image object and sandwich the given component
 between the inclusion and projection. Naturality for the sandwich of any morphism

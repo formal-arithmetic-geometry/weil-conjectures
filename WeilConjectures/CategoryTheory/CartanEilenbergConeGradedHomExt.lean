@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # Retained summands detect morphisms from the column-tail quotient
 
-Source: Stacks Project, Homology, Tag 012X; column filtration and its graded pieces
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-hom-ext).
+Source: Stacks Project, Homology, Tag 012X.
 -/
 
 @[expose] public section
@@ -55,8 +54,7 @@ private theorem lift_next_quotient_zero
   rw [he, Category.assoc, hq, comp_zero]
 
 /-- Maps out of the graded piece agree if they agree on every retained summand lift.
-Source: Stacks Project, Homology, Tag 012X; quotient of the column-tail sum.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-hom-ext).
+Source: Stacks Project, Homology, Tag 012X.
 
 Proof: cancel the epic evaluated cokernel projection from step p. Its two
 composites agree on the K generator and on every diagonal generator of the

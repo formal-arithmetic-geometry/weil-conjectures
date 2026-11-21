@@ -9,9 +9,7 @@ public import WeilConjectures.CategoryTheory.SignedKoszulCompletionModel
 /-!
 # Transport of one signed Koszul summand
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free tensor calculation.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free tensor calculation.
 
 This isolates the scalar-action and equality-transport calculation for one erased
 index. It is strictly smaller than the finite sum differential theorem.
@@ -296,7 +294,6 @@ is the total-tensor sign times the earlier-index sign and the power of `a i`.
 The two degree equalities identify the equality transports by proof
 irrelevance. This statement is one summand of the finite sum and does not
 assert the differential formula for the full subset.
-(auxiliary; not a blueprint node).
 -/
 theorem ringedNegativeKoszulSummand_D₂_term
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}

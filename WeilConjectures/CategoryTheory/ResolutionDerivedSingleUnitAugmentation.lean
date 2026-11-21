@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyCompa
 /-! # The derived unit and an augmented resolution comparison
 
 Source: Stacks Project, Derived Categories, Tag 015M.
-(blueprint: lem-sc-resolution-derived-single-unit-augmentation)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency false in
 /-- The derived unit, transported to a prescribed resolution, is the augmented comparison.
 Source: Stacks Project, Derived Categories, Tag 015M, resolution computation and naturality.
-(blueprint: lem-sc-resolution-derived-single-unit-augmentation).
 
 Proof: Naturality of the derived unit along the augmentation of I cancels its inverse
 on I in resolutionDerivedIso. The remaining map is F applied to the augmentation,

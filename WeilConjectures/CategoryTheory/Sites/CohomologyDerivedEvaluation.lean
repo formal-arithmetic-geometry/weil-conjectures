@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSi
 # Ext sheaf cohomology and right-derived evaluation
 
 Source: Stacks Project, Cohomology on Sites, Section 21.2 (Definition of cohomology).
-(blueprint: new-sheaf-cohomology-derived-evaluation)
 -/
 
 @[expose] public section
@@ -81,9 +80,7 @@ private noncomputable def complexEvaluationIso
 
 /-- Ext from the constant integer sheaf computes right-derived evaluation at a
 terminal object of the site, in positive degrees.
-Source: Stacks Project, Cohomology on Sites, Section 21.2, definition of cohomology;
-Mathlib's definition of Sheaf.H and computation of Ext by an injective resolution.
-(blueprint: new-sheaf-cohomology-derived-evaluation)
+Source: Stacks Project, Cohomology on Sites, Section 21.2, definition of cohomology.
 
 Proof: Let Z be the constant sheaf associated to the lifted integers. The
 constant-sheaf adjunction at the terminal object T, followed by evaluation at 1,

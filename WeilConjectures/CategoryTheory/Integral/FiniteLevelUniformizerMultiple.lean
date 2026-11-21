@@ -19,9 +19,6 @@ import Mathlib.Topology.Algebra.Valued.LocallyCompact
 import WeilConjectures.Mathlib.RingTheory.OrderOfVanishing.Noetherian
 
 /-! # A uniformizer power divisible by a specified prime power
-
-Source: Serre, Local Fields, Chapter II, Section 2; blueprint integral finite-level
-dual classicality, scalar reduction step.
 -/
 
 @[expose] public section
@@ -31,9 +28,6 @@ namespace Padic
 
 /-- A positive power of the chosen uniformizer is a multiple of a prescribed positive
 power of the residual prime.
-
-Source: Serre, Local Fields, Chapter II, Section 2
-(blueprint: lem-sfb-finite-level-uniformizer-multiple).
 
 Proof: the prime has absolute value less than one, and so is a nonunit in the
 valuation ring. It is nonzero since its image in the coefficient field is nonzero.

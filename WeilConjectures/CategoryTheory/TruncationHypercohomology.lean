@@ -19,10 +19,7 @@ import WeilConjectures.CategoryTheory.TruncationCanonicalAbutment
 /-!
 # The truncation hypercohomology spectral sequence
 
-Source: Weil conjectures blueprint, chap-Proper-base-change,
-theorem-proper-base-change-classical-pro, node lemma-uniform-bound-proper-direct-image--1, order
-1212; Stacks Project, Tags 015J, 05TC, 011Q, 011R, 011T, 0BDU, 0BDV and 012U (blueprint:
-lemma-uniform-bound-proper-direct-image--1).
+Source: Stacks Project, Tags 015J, 05TC, 011Q, 011R, 011T, 0BDU, 0BDV and 012U.
 
 The integer `a` is a cohomological lower bound, not a bound on the terms of `K`.
 The natural index of `pageCouple` and of the cycle/boundary tower is the page minus two.
@@ -52,8 +49,8 @@ private noncomputable def singleComparison
 /-- The six assertions of the truncation hypercohomology theorem, including the
 canonical maps to the abutment, the natural second-page comparison, and the map
 on graded pieces induced by the iterated couple.
-Source: blueprint lemma-uniform-bound-proper-direct-image--1, order 1212; Stacks Tags 015J, 05TC,
-011Q, 011R, 011T, 0BDU, 0BDV, 012U (blueprint: lemma-uniform-bound-proper-direct-image--1).
+Source: Stacks Tags 015J, 05TC,
+011Q, 011R, 011T, 0BDU, 0BDV, 012U.
 
 Proof, following the seven steps of the node:
 1. `lem-sp-truncation-couple-exact` gives exactness of the three structure maps
@@ -78,10 +75,10 @@ Proof, following the seven steps of the node:
    identifies F^p with D_r^{u,v} and F^{p+1} with the image of alpha_r there.
    The outgoing f_r is zero by the lower bound, so exactness identifies the
    quotient with E_r. Its commuting equation below specifies the map psi.
-7. Functoriality (`lem-weil-pbc-derived-direct-image-triangulated`) identifies
+7. Functoriality identifies
    the alpha composites with the truncation inclusions. By
    `lem-weil-pbc-derived-functor-truncation-iso`, c_n is an isomorphism. Its
-   image filtration (`def-sp-image-filtration`) is exactly the displayed
+   image filtration is exactly the displayed
    filtration on H^n. It is finite, exhaustive, separated, and its quotient
    tower is eventually constant, hence has H^n as inverse limit. Transporting
    psi by the induced graded isomorphism gives Theta and unconditional convergence.

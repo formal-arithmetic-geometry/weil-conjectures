@@ -10,9 +10,6 @@ public import Mathlib.CategoryTheory.Preadditive.Biproducts
 public import Mathlib.CategoryTheory.Pi.Basic
 
 /-! # Joint essential surjectivity from individual lifts and idempotent splitting
-
-Source: the retract argument for finite product decompositions of module categories.
-(blueprint: lem-dl-a1-joint-essential-surjectivity).
 -/
 
 @[expose] public noncomputable section
@@ -51,8 +48,6 @@ private theorem essImage_of_retract_of_fullyFaithful
       _ = 𝟙 X := by simp
 
 /-- A jointly fully faithful finite family with individual object lifts lifts every tuple.
-Source: finite product decomposition of module categories, the retract argument.
-(blueprint: lem-dl-a1-joint-essential-surjectivity).
 
 Proof: lift the ith prescribed object through L_i, and form the finite biproduct
 of those lifts. In each target category the prescribed object is a retract of

@@ -48,7 +48,6 @@ comparison, and the shifted target single comparison. Associativity and map_comp
 identify this with equality of the Ext representatives; Ext.homEquiv is injective.
 The argument covers q = 0 and zero objects and needs neither Hom-bijectivity
 nor acyclicity.
-(blueprint: lem-sbc-derived-source-comparison-ext-compatibility)
 -/
 theorem derivedSourceComparison_ext_compatibility
     {C : Type u₁} {D : Type u₂} [Category.{v} C] [Category.{v} D]

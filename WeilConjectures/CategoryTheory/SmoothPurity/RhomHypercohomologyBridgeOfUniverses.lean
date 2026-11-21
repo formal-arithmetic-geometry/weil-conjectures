@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.SmoothPurity.HomComplexGlobalHomotopyOfUni
 # Hypercohomology of the sheaf Hom complex and the homotopy category
 
 Source: Stacks Project, Tags 0A8Z and 08JA.
-(blueprint: lem-pur-hom-complex-hypercohomology)
 
 This is the independent-universe comparison used by the global-sections theorem.  Its
 proof applies zeroth homology to the recorded full derived-sections comparison and
@@ -43,8 +42,7 @@ Apply zeroth derived homology and homologyFunctorFactors, then compose with the 
 global Hom-complex calculation. Whiskering retains naturality in both variables.
 No K-flatness of the source is required; zero complexes and the empty site are included.
 
-Source: Stacks Project, Equation 0A8Z and Lemma 08JA.
-(blueprint: lem-pur-hom-complex-hypercohomology). -/
+Source: Stacks Project, Equation 0A8Z and Lemma 08JA. -/
 theorem rhom_hypercohomology_bridgeOfUniverses
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{max c v r})

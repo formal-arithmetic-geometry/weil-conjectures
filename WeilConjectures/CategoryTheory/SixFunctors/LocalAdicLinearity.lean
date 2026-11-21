@@ -8,9 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.SixFunctors.CompletedCoefficientLocalIntegers
 
 /-! # The local integer approximation criterion for linearity
-
-Source: the action-defect argument for completed coefficients.
-(blueprint: lem-sfb-local-adic-linearity).
 -/
 
 @[expose] public noncomputable section
@@ -22,10 +19,6 @@ namespace CategoryTheory
 
 /-- An additive sheaf map is linear when coefficients are locally integers modulo
 all powers and the target is separated for local divisibility by those powers.
-
-Source: the integer-modulo-powers criterion in
-WeilConjectures/SixFunctors/ProEtale/Adic/PadicIntSheafLinear.lean.
-(blueprint: lem-sfb-local-adic-linearity).
 
 Proof: subtract the two sides. On a covering sieve write r=a+l^(n+1)b.
 Naturality and additivity identify the restricted defect with l^(n+1) times

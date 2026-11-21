@@ -30,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A counit computed on complexes has the usual single-object normalization.
 Source: Stacks Project, Tag 07A6.
-(blueprint: lem-kun-right-derived-single-counit).
 
 Proof: precompose the complex counit formula by the image of the canonical
 single-complex comparison for R. Move that comparison across the localization
@@ -107,7 +106,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical derived counit is the ordinary counit on the augmentation of a
 single complex. Source: Stacks Project, Tag 07A6.
-(blueprint: lem-kun-right-derived-single-counit).
 
 Proof: the defining counit factorization of the derived adjunction, followed by
 the exact-left-functor identification, gives the ordinary complex counit after

@@ -37,8 +37,8 @@ termwise coprojections. The actual termwise construction is
 component families and its differential is induced by the component differentials.
 No nonemptiness or boundedness assumption is made.
 
-Source: Stacks Project, Injectives, Tag 07D9, Lemma `lemma-derived-products`,
-assertions (1)-(2) (blueprint: lem-kun-grothendieck-derived-coproducts).
+Source: Stacks Project, Injectives, Tag 07D9, Lemma,
+assertions (1)-(2).
 
 Proof plan:
 1. By `def-sp-grothendieck-abelian`, form coproducts in each degree. Induce the

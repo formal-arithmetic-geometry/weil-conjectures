@@ -178,7 +178,6 @@ private def cylRowMap (t : A ⟶ B) (t' : A' ⟶ B') (α : A ⟶ A') (β : B ⟶
 presentations, with the prescribed first and cone components after localization.
 Source: Stacks Project, Derived Categories, Tags 013N, 014G and 013O (the cylinder
 factorization and its homotopy equivalence), applied functorially to a square.
-(blueprint: lem-pc-cone-diagram-ses-presentation).
 
 Proof: For t : A → B put T = B ⊕ Cone(id A), let i : A → T be the column
 (t, 0, id), and let p : T → B be projection onto B. The cone differential makes

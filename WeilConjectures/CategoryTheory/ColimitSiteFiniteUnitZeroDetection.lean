@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Filtered
 
 Source: Stacks Project, Sites, Tag 0A35, the section formula and its adjunction
 paragraph; Modules on Sites, Tag 03CO, abelian extension.
-(blueprint: lem-weil-pbc-colimit-site-finite-unit-zero-detection).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ namespace CategoryTheory
 /-- Source: Stacks Project, Sites, Tag 0A35, equation-compute-pullback-to-limit
 and the presentation, sheaf-condition and adjunction paragraphs; abelian extension
 by Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-finite-unit-zero-detection).
 
 Proof: Fix a source-stage sheaf H and source object X. For a limit object Y,
 use presentations by stage objects above j. The object and arrow set colimit

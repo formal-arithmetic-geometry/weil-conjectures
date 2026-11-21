@@ -19,8 +19,7 @@ Let `C` be an abelian category and `s` an object of its derived category. We say
 bijective. This is blueprint `lemma-continuity-ext-out-constructible-complex--1` for targets in
 degree `0`.
 
-* The class of such `s` contains zero, is closed under isomorphisms, shifts and extensions
-  (blueprint `lemma-continuity-ext-out-constructible-complex--1`, five lemma).
+* The class of such `s` contains zero, is closed under isomorphisms, shifts and extensions.
 * For `s` bounded above, the comparison is then bijective for every filtered diagram `Yᵢ` in
   `D(C)` of uniformly bounded below objects with a cocone `Y` inducing colimits on cohomology
   (`DerivedCategory.HomCommutesWithFilteredColimits.diagram`), by induction on the amplitude
@@ -431,7 +430,7 @@ lemma shift {s : DerivedCategory C} (hs : HomCommutesWithFilteredColimits.{w} s)
       (IsCoyonedaColimit.mapCocone_of_iso c
         ((singleFunctors C).shiftIso (-a) (n + a) n (by lia)).symm (hs I F c hc (n + a)))
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1`: the class is closed under
+/-- the class is closed under
 extensions (five lemma on the long exact `Hom` sequences, filtered colimits of abelian groups
 being exact). -/
 lemma ext₂ (T : Triangle (DerivedCategory C)) (hT : T ∈ distTriang _)

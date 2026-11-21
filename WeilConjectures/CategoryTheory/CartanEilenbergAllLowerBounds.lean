@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 /-! # Cartan--Eilenberg resolutions preserving all lower support bounds
 
 Source: Stacks Project, Derived Categories, Tags 015H and 015I.
-(blueprint: lem-weil-pbc-ce-resolution-all-lower-bounds).
 -/
 
 @[expose] public section
@@ -232,9 +231,7 @@ private theorem supported_rows
 
 
 /-- Resolve a bounded-below complex without introducing rows below its support.
-Source: Stacks Project, Tag 015I, with the shift refinement in step 1 of
-lem-weil-pbc-ce-supported-first-page-lifts.
-(blueprint: lem-weil-pbc-ce-resolution-all-lower-bounds).
+Source: Stacks Project, Tag 015I, with the shift refinement in step 1 of.
 
 Proof. For each degree p choose an injective resolution of B^p and H^p,
 using the single-degree-zero resolution when the respective object is zero.

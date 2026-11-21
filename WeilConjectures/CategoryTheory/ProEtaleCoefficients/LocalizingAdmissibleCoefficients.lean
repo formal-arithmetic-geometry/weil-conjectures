@@ -11,13 +11,9 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 /-!
 # Admissible condensed coefficients for localizing closures
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-coefficient convention (blueprint: definition-localizing-subcategory).
-
 This supplies the coefficient convention omitted from the recorded localizing-closure
 interface. The localizing closure itself is the imported `localizingClosureProEtale`.
-The algebraic-closure clause is the finite-subextension-valued ring `padicAlgClRingObj`
-(blueprint: sk-def-sfb-qlbar-condensed). The ring of all continuous maps to the algebraic
+The algebraic-closure clause is the finite-subextension-valued ring `padicAlgClRingObj`. The ring of all continuous maps to the algebraic
 closure is not an admissible coefficient (removed 2026-10-25).
 
 It also supplies `IsLocalizingSubcategoryOfSize` and `localizingClosureOfSize`, the
@@ -66,13 +62,11 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- The admissible coefficients are the finite discrete rings killed by a power of `ℓ`,
 `ℤ_ℓ`, `ℚ_ℓ`, finite subextensions of `ℚ_ℓ` in its fixed algebraic closure, their valuation
-rings, and the finite-subextension-valued algebraic closure `padicAlgClRingObj`
-(sk-def-sfb-qlbar-condensed); the ring of all continuous maps to the algebraic closure is
+rings, and the finite-subextension-valued algebraic closure `padicAlgClRingObj`; the ring of all continuous maps to the algebraic closure is
 not admissible. Isomorphisms are in monoid objects of condensed abelian groups,
 hence preserve both the additive and ring
 structures. Finite rings can be represented in `Type 0` without restricting their
-isomorphism classes. Source: blueprint definition-localizing-subcategory, coefficient convention
-(blueprint: definition-localizing-subcategory). -/
+isomorphism classes. -/
 def IsLocalizingAdmissibleCoefficient (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : Prop :=
   (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A)

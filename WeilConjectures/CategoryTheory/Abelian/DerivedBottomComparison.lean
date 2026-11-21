@@ -12,7 +12,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 /-! # A specified bottom-cohomology comparison
 
 Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-def-pc-derived-bottom-comparison).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace CategoryTheory.Functor
 This construction retains the maps used in the proved existence theorem,
 rather than choosing an arbitrary witness of its `Nonempty` conclusion.
 Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-def-pc-derived-bottom-comparison).
 
 Proof: Lift the lower truncation to the bounded below category. Upper truncation
 at n has invertible H^n after deriving a left exact functor. Double truncation

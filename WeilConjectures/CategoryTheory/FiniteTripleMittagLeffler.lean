@@ -9,7 +9,6 @@ public import Mathlib.CategoryTheory.CofilteredSystem
 /-! # Transfer of stable images using finite comparisons
 
 Source: Stacks Project, Tag 09C5, second proof paragraph; Tag 0594.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -20,8 +19,7 @@ namespace CategoryTheory.Functor
 
 /-- For each composable pair, there are bijections identifying its single-step and
 composite images, with a common bijection at the target. They may vary with the pair.
-Source: Stacks Tag 09C5, second proof paragraph.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Tag 09C5, second proof paragraph. -/
 def FiniteTripleRangeComparison {J : Type u} [Category J]
     (T : J ⥤ Type v) (U : J ⥤ Type w) : Prop :=
   ∀ ⦃n m t : J⦄ (f : m ⟶ n) (g : t ⟶ m),
@@ -33,7 +31,6 @@ def FiniteTripleRangeComparison {J : Type u} [Category J]
 
 /-- A finite-triple comparison with a Mittag–Leffler system suffices for stable images.
 Source: Stacks Tags 09C5 and 0594.
-(auxiliary; not a blueprint node).
 
 Proof: choose a stabilizing arrow for U at n. For each further arrow, compare its
 composite and the chosen arrow using one finite-triple marking. Transport the first

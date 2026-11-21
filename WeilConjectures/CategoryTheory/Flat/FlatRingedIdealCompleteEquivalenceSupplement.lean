@@ -253,8 +253,7 @@ public import WeilConjectures.AlgebraicGeometry.FlatRingedIdealCompleteEquivalen
 /-!
 # Flat ringed-site equivalence on locally derived complete objects
 
-Source: Stacks Project, Algebraization, Tags 099I and 0999
-(blueprint: lem-weil-pbc-flat-ringed-ideal-complete-equivalence).
+Source: Stacks Project, Algebraization, Tags 099I and 0999.
 -/
 
 @[expose] public section
@@ -272,8 +271,7 @@ attribute [local instance 20000] ringedCompletionHasSheafCompose
 attribute [local irreducible] homComplexFunctor ringedHomUnitEvaluationIso
 
 /-- Restriction of scalars preserves small limits, in particular the products in Hom complexes.
-Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime
-(blueprint: lem-weil-pbc-flat-ringed-ideal-complete-equivalence).
+Source: Stacks Project, Algebraization, Tag 099I, the construction of E prime.
 Proof: compose with the faithful forgetful functor to additive presheaves. Both
 forgetful functors preserve small limits, and this composite is the same over B.
 The forgetful composite reflects isomorphisms and therefore reflects limits.

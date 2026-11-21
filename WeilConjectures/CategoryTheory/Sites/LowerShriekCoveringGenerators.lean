@@ -10,8 +10,7 @@ import WeilConjectures.CategoryTheory.Sites.LowerShriekCorepresentability
 /-!
 # A left adjoint from corepresentable evaluations on covering generators
 
-Source: Stacks Project, Sites, Tag 09YX, lemma-existence-lower-shriek.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Sites, Tag 09YX.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace CategoryTheory
 /-- A geometric inverse image has a left adjoint if its evaluations on a covering set
 of site objects are corepresentable.
 
-Source: Stacks Project, Sites, Tag 09YX, lemma-existence-lower-shriek.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Sites, Tag 09YX.
 
 Proof:
 1. Yoneda and the sheafification adjunction identify evaluation on V with maps from

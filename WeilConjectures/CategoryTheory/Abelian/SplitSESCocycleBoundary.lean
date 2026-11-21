@@ -14,7 +14,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 # The split-row boundary on cocycles
 
 Source: Stacks Project, Derived Categories, Tags 0152 and 06XR.
-(blueprint: lem-sc-p1-split-ses-cocycle-boundary).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A lift followed by its differential computes composition with the split boundary.
 Source: Stacks Project, Derived Categories, Tags 0152 and 06XR, the canonical
 boundary and its computation by homotopy classes of maps into resolutions.
-(blueprint: lem-sc-p1-split-ses-cocycle-boundary).
 
 Proof: The split boundary has component sⁿ d₂ rⁿ⁺¹. Put t = b rⁿ. The splitting
 identity gives b = t fⁿ + c sⁿ. Multiply by d₂ and use f d₂ = d₁ f. Since

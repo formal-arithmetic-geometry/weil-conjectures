@@ -22,7 +22,6 @@ open Limits
 
 /-- A nonzero homology class yields a nonzero rank-one derived morphism.
 Source: Stacks Project, Tag 064B, applied to the projective rank-one single complex.
-(auxiliary; not a blueprint node)
 
 Proof in words: choose a complex C and an isomorphism Q(C) ≅ K, and transport x
 through the homology isomorphism. Choose a cycle z representing that class.

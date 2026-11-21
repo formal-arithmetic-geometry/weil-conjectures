@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-!
 # Composition of morphisms of sites
 
-Source: Stacks Project, Lemma 03CB and Definition 03CC
-(blueprint: lem-weil-pbc-site-morphism-composition).
+Source: Stacks Project, Lemma 03CB and Definition 03CC.
 -/
 
 @[expose] public section
@@ -43,8 +42,7 @@ private theorem leftAdjointUniq_existsUnique
 
 -- The original existential continuity binder is used only through instance synthesis.
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Lemma 03CB and Definition 03CC
-(blueprint: lem-weil-pbc-site-morphism-composition).
+/-- Source: Stacks Project, Lemma 03CB and Definition 03CC.
 
 The precoverages encode the sites of 00VH, and the covering and pullback hypotheses
 are the two conditions of 00WV. The `IsContinuous` instances are their consequences
@@ -56,13 +54,12 @@ Proof:
 1. Apply each covering condition successively. Compose the two pullback comparison
    isomorphisms. This proves Stacks continuity of the composite. Precomposition
    agrees objectwise and on restriction maps, hence agrees as a functor, for sets
-   and abelian groups (lem-weil-pbc-site-continuous-pushforward-sheaf and
-   situation-conventions).
+   and abelian groups.
 2. Compose the adjunctions of
    lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction using
    def-weil-pbc-composite-adjunction. The composite right adjoint is the functor in
    step 1. Uniqueness of left adjoints gives the unique isomorphism compatible with
-   units (situation-conventions). Its component equation below
+   units. Its component equation below
    is exactly the composite unit: eta_v followed by v^s applied to eta_u at v_s F.
 3. Finite limits and colimits are preserved by successive application of the two
    preservation hypotheses. Transport along the isomorphism of step 2. This is

@@ -14,9 +14,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
 
 /-! # Natural evaluation of a sheaf cohomology class on an injective resolution
 
-Source: Stacks Project, Cohomology on Sites, Section 21.2; Mathlib's computation
-of Ext using injective resolutions.
-(blueprint: lem-sc-cohomology-resolution-evaluation-natural)
+Source: Stacks Project, Cohomology on Sites, Section 21.2.
 -/
 
 @[expose] public section
@@ -80,9 +78,7 @@ private theorem exists_resolution_evaluation_iso
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation on a terminal object computes cohomology, naturally for resolution maps.
-Source: Stacks Project, Cohomology on Sites, Section 21.2; Mathlib
-`InjectiveResolution.extMk_comp_mk₀`.
-(blueprint: lem-sc-cohomology-resolution-evaluation-natural)
+Source: Stacks Project, Cohomology on Sites, Section 21.2.
 
 Proof: Let Z be the constant sheaf of lifted integers. The constant-sheaf
 adjunction and evaluation at 1 identify Hom(Z,G) additively with G(T), naturally

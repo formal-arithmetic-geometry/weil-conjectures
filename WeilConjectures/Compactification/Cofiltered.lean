@@ -49,7 +49,7 @@ namespace AlgebraicGeometry.Compactification
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Blueprint `proposition-dense-compactifications-form-cofiltered-category`: The compactification
+/-- The compactification
 category and common refinements.
 
 For a quasi-compact `f : X ⟶ Y`, the category of compactifications of `f` is cofiltered or
@@ -73,7 +73,7 @@ instance isCofilteredOrEmpty [QuasiCompact f] :
     have := he
     exact ⟨e, h, Subsingleton.elim (α := e.Refinement d) _ _⟩
 
-/-- Blueprint `proposition-dense-compactifications-form-cofiltered-category`: The compactification
+/-- The compactification
 category is cofiltered.
 
 For a quasi-compact `f : X ⟶ Y` admitting a compactification, the category of

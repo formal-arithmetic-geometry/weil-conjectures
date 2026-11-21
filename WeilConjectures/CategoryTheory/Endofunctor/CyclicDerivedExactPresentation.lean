@@ -11,9 +11,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 
 /-! # Exact transport of strict cyclic presentations
 
-Source: Stacks Project, Derived Categories, Tag 0152; the exact-functor part of
-steps 5--6 of `lem-sf-cyclic-derived-hom-exact-sequence`.
-(blueprint: lem-sf-cyclic-derived-exact-presentation).
+Source: Stacks Project, Derived Categories, Tag 0152.
 -/
 
 @[expose] public noncomputable section
@@ -229,8 +227,7 @@ DerivedCategory.map_triangleOfSESδ identifies the transported native morphism w
 the image SES boundary, including its sign. No injective representative or bound is
 needed, since L is exact on all short exact sequences.
 
-Source: Stacks Tag 0152; exact case of parent steps 5--6.
-(blueprint: lem-sf-cyclic-derived-exact-presentation). -/
+Source: Stacks Tag 0152. -/
 theorem cyclicDerivedOffDiagonalPresentation_mapExact
     {M N : DerivedCategory (IsoAlgebra F)} {u : CyclicDerivedHom F M N (-1)}
     {f : M ⟶ N} (hp : CyclicDerivedOffDiagonalPresentation F u f) :

@@ -17,8 +17,7 @@ compare the left adjoints along functors `S` and `T` (a change of coefficients).
 gives comparisons `G ⋙ S ⟶ T ⋙ G'` and `J ⋙ S ⟶ T ⋙ J'` of the right adjoints. They are
 conjugate under the canonical isomorphisms `G ≅ J` and `G' ≅ J'` of
 `Adjunction.rightAdjointUniq`. So invertibility and composition identities transfer from one
-choice of right adjoints to the other (blueprint `proposition-sp-unique-adjoint`, part of
-`proposition-sp-unique-adjoint`).
+choice of right adjoints to the other.
 
 ## Main results
 
@@ -36,8 +35,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- The coefficient comparison obtained by transposing a counit through a
-coefficient comparison of left adjoints.
-(blueprint `proposition-sp-unique-adjoint`). -/
+coefficient comparison of left adjoints. -/
 noncomputable def coefficientAdjointComparison
     {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} C'] [Category.{v₄} D']
@@ -48,8 +46,7 @@ noncomputable def coefficientAdjointComparison
   (mateEquiv a a' (TwoSquare.mk S F F' T b.inv))
 
 /-- The composition identity for coefficient comparisons, with explicit
-composition isomorphisms for source and target scalar extension.
-(blueprint `proposition-sp-unique-adjoint`). -/
+composition isomorphisms for source and target scalar extension. -/
 def CoefficientComparisonComposition
     {C₀ : Type u₁} {C₁ : Type u₂} {C₂ : Type u₃}
     {D₀ : Type u₄} {D₁ : Type u₅} {D₂ : Type u₆}
@@ -67,8 +64,7 @@ def CoefficientComparisonComposition
       (Functor.isoWhiskerRight t J₂).hom
 
 /-- Conjugation of a coefficient comparison by isomorphisms of right adjoints:
-the right-hand side `γ'(K_{Λ'}) ∘ c(K) ∘ (γ(K)⁻¹)_{Λ'}` of the displayed formula.
-(blueprint `proposition-sp-unique-adjoint`). -/
+the right-hand side `γ'(K_{Λ'}) ∘ c(K) ∘ (γ(K)⁻¹)_{Λ'}` of the displayed formula. -/
 def conjugateCoefficientComparison
     {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} C'] [Category.{v₄} D']
@@ -81,7 +77,6 @@ def conjugateCoefficientComparison
 specified by the `J'`-transpose of the transported counit, and is conjugate to
 the analogous comparison `c_f` for any other pair of right adjoints.  It
 therefore preserves invertibility and composition identities.
-(blueprint `proposition-sp-unique-adjoint`).
 Proof (the node's steps).
 1. By `proposition-sp-unique-adjoint--1` (`Adjunction.rightAdjointUniq`), `γ(K)` is the
    `J`-transpose of `ε_G(K)` and `γ'(L)` the `J'`-transpose of `ε_{G'}(L)`, so
@@ -134,7 +129,6 @@ theorem coefficientAdjointComparison_eq_conjugate
 /-- Conjugation by the unique right-adjoint isomorphisms preserves invertibility
 of every component of a coefficient comparison: `c_J` is an isomorphism whenever
 `c_f` is.
-(blueprint `proposition-sp-unique-adjoint`).
 Proof: by `coefficientAdjointComparison_eq_conjugate`, `c_J(K)` is the composite
 of `S(γ(K)⁻¹)`, `c_f(K)` and `γ'(T K)`, isomorphisms by `proposition-sp-unique-adjoint--1`
 and functoriality of `S`. -/
@@ -156,7 +150,6 @@ theorem coefficientAdjointComparison_isIso
 /-- The composition identity for right-adjoint coefficient comparisons is
 obtained by conjugating the identity for the original right adjoints, the same
 `γ₁` serving the extensions out of and into the middle coefficients.
-(blueprint `proposition-sp-unique-adjoint`).
 Proof: substitute the conjugation formulas; the adjacent `γ₁.hom` and `γ₁.inv`
 cancel by functoriality of `S₁₂`, and naturality of `s` and `t` moves `γ₀.inv`
 and `γ₂.hom` past the scalar-composition isomorphisms. -/

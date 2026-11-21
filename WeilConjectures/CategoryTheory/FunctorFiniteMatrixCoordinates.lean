@@ -10,7 +10,6 @@ public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 
 /-! # Finite matrix coordinates under additive functors
-Source: blueprint Compatible isomorphisms, finite matrices and ordinary scalar extension.
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +25,6 @@ variable {C : Type u} {D : Type v} {E : Type w}
 
 omit [HasFiniteBiproducts D] [HasFiniteBiproducts E] in
 /-- The biproduct comparison for a composite is the composite of the comparisons.
-Source: finite matrix coordinates in Compatible isomorphisms.
-(blueprint: lem-pe-functor-finite-matrix-coordinates).
 Proof: postcompose both morphisms with each biproduct projection. Both become the
 composite functor applied to that projection. -/
 theorem mapBiproduct_composite (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
@@ -43,8 +40,6 @@ theorem mapBiproduct_composite (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Addit
 
 omit [HasFiniteBiproducts D] in
 /-- Biproduct comparisons are natural in each member of the finite family.
-Source: finite matrix coordinates in Compatible isomorphisms.
-(blueprint: lem-pe-functor-finite-matrix-coordinates).
 Proof: postcompose with a projection, use the defining comparison formula and
 naturality of biproduct.map, and combine the functor's two maps. -/
 theorem mapBiproduct_map (F : C ⥤ D) [F.Additive]
@@ -59,8 +54,6 @@ theorem mapBiproduct_map (F : C ⥤ D) [F.Additive]
   exact F.map_comp _ _
 
 /-- An additive functor maps a finite matrix entry by entry in its biproduct coordinates.
-Source: finite matrix coordinates in Compatible isomorphisms.
-(blueprint: lem-pe-functor-finite-matrix-coordinates).
 Proof: precompose by the inverse source comparison, then test every inclusion and
 projection. The comparison formulas reduce both sides to F applied to one entry. -/
 theorem mapBiproduct_matrix (F : C ⥤ D) [F.Additive]
@@ -87,8 +80,6 @@ theorem mapBiproduct_matrix (F : C ⥤ D) [F.Additive]
 
 omit [HasFiniteBiproducts D] in
 /-- Biproduct comparison is natural in an additive functor transformation.
-Source: blueprint Compatible isomorphisms, comparing two scalar extensions.
-(blueprint: lem-pe-functor-finite-matrix-coordinates).
 Proof: after each target projection the identity is exactly naturality at the
 corresponding source projection. -/
 theorem mapBiproduct_natTrans (F G : C ⥤ D) [F.Additive] [G.Additive]
@@ -102,8 +93,6 @@ theorem mapBiproduct_natTrans (F G : C ⥤ D) [F.Additive] [G.Additive]
   exact (η.naturality (biproduct.π f i)).symm
 
 /-- Finite diagonal maps respect composition.
-Source: blueprint Compatible isomorphisms, composition of finite free comparisons.
-(blueprint: lem-pe-functor-finite-matrix-coordinates).
 Proof: after each target projection both sides are that projection followed by
 the two corresponding component maps. -/
 theorem biproduct_map_comp {I : Type} [Finite I] {f g h : I → C}

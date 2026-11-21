@@ -73,7 +73,6 @@ private theorem derivedCoproductCofan
 /-- A derived category with K-injective resolutions has coproducts at every size
 at which the underlying abelian category has coproducts.
 Source: Stacks Project, Tag 07D9, Lemma 19.13.4, coproduct clauses (1)-(2).
-(auxiliary; not a blueprint node)
 
 Proof in words: choose a complex representative of each derived object and form
 its termwise coproduct. Resolve any target by a K-injective complex. Derived maps

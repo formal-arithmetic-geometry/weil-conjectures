@@ -26,7 +26,6 @@ namespace CategoryTheory.Abelian.Ext
 
 /-- A positive Ext class becomes zero after pullback along some epimorphism.
 Source: Stacks Project, Derived Categories, Tag 06XU.
-(blueprint: lem-sc-ext-epi-effacement)
 
 Proof: follow the fraction construction in the first paragraph of Tag 06XU.
 Write the derived morphism representing x as s inverse followed by f, where

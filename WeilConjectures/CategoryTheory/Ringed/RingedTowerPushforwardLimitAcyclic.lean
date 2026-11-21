@@ -137,7 +137,6 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 # Inverse-limit acyclicity of levelwise ringed-topos direct images
 
 Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0D6E.
-(blueprint: lem-weil-ringed-tower-pushforward-limit-acyclic).
 
 The localization argument uses the shared resolving-adjunction API in
 `Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition`.
@@ -268,8 +267,7 @@ private theorem towerMapsInverts
 remains a quasi-isomorphism after inverse limit. The three localization choices are
 the derived categories already used by the comparison theorem.
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0D6E
-(blueprint: lem-weil-ringed-tower-pushforward-limit-acyclic).
+Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0D6E.
 
 Proof: Use K-flat resolutions with flat terms in the target module category and in
 its strict tower category. The module pullback adjunction applied levelwise inverts

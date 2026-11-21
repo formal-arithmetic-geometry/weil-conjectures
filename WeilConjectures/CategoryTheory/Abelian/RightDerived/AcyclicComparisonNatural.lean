@@ -13,8 +13,7 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 /-!
 # Naturality of acyclic-resolution comparisons
 
-Source: literature/stacks-project/derived.tex, Tag 015E (blueprint:
-`lem-sc-acyclic-comparison-natural`).
+Source: literature/stacks-project/derived.tex, Tag 015E.
 -/
 
 @[expose] public section
@@ -51,7 +50,7 @@ variable {C : Type u} {D : Type u'} [Category.{v} C] [Category.{v'} D] [Abelian 
 
 /-- Naturality of the comparison from an acyclic resolution to a right derived functor.
 
-(blueprint: lem-sc-acyclic-comparison-natural).
+.
 
 Source: Stacks Project, Tag 015E, canonical acyclic-resolution comparison.
 The comparison maps are the inverses of `F.rightDerivedObjIsoOfResolution`.
@@ -70,7 +69,6 @@ Proof (the four steps of the node):
 4. Identify the homology map of the lift of `h` with `(F.rightDerived n).map h` using
    `lem-weil-pbc-derived-functor-map-via-lift`. Substitute the comparison maps in the equality
    from Step 3 to obtain the displayed square.
-(blueprint: lem-sc-acyclic-comparison-natural).
 -/
 theorem acyclicComparison_naturality
     (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]

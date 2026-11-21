@@ -12,8 +12,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 /-!
 # Perfect ring complexes are closed under triangle extensions
 
-Source: Stacks Project, More on Algebra, Tag 066R, lemma-two-out-of-three-perfect,
-the first-and-third-imply-second case (blueprint: lem-sf-perfect-ring-triangle-closure).
+Source: Stacks Project, More on Algebra, Tag 066R,
+the first-and-third-imply-second case.
 -/
 
 @[expose] public section
@@ -81,8 +81,7 @@ private lemma perfectRing_Q_obj_mappingCone {R : Type u} [CommRing R]
 
 /-- In a distinguished triangle over a commutative ring, perfect first and third objects
 imply a perfect second object, in any chosen localization universe.
-Source: Stacks Project, More on Algebra, Tag 066R, lemma-two-out-of-three-perfect
-(blueprint: lem-sf-perfect-ring-triangle-closure).
+Source: Stacks Project, More on Algebra, Tag 066R.
 
 Proof plan (the node's direct bounded-projective cone argument):
 1. By def-pc-perfect-ring-complex choose bounded finite-projective models P₁ and P₃,
@@ -98,7 +97,7 @@ Proof plan (the node's direct bounded-projective cone argument):
    differential (y,x) ↦ (-d₁ y + f x,-d₃ x). It vanishes outside [L,U], where
    L = min(a₁-1,a₃-1) and U = max(b₁-1,b₃-1). Finite generators of the two
    summands generate their sum; projectivity follows by lifting the two restrictions
-   along a surjection and adding the lifts (def-weil-pbc-projective-module).
+   along a surjection and adding the lifts.
    The cone triangle Q(P₃) ⟶ Q(P₁[1]) ⟶ Q(F) ⟶ Q(P₃)[1] is distinguished by
    def-weil-abstract-derived-category.
 4. Twice rotate T using TR2 of def-weil-triangulated-category. Its vertices become

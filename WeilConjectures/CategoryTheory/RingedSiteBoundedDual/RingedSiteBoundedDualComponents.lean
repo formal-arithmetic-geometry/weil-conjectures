@@ -15,8 +15,7 @@ public import WeilConjectures.Algebra.Homology.RingedSiteBoundedDualComponents
 
 /-! # Components of the bounded ordinary sheaf dual
 
-Source: Stacks Project, sites-cohomology.tex, Tags 08JJ and 0A8X
-(blueprint: lem-sfb-ringed-site-bounded-dual-components).
+Source: Stacks Project, sites-cohomology.tex, Tags 08JJ and 0A8X.
 
 The abbreviations below only expand the recorded Hom constructions and the
 coefficient sheaf in degree zero. The component is the actual product projection.
@@ -204,7 +203,7 @@ Thus, for homogeneous phi of degree -i, beta(x)(phi) = (-1)^(i*(-i)) phi(x);
 all remaining Hom factors have zero coefficient target.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JJ, second proof paragraph,
-and Section 0A8X (blueprint: lem-sfb-ringed-site-bounded-dual-components).
+and Section 0A8X.
 
 Proof:
 1. By def-pur-hom-complex and def-pur-sheaf-hom, project the degree-q

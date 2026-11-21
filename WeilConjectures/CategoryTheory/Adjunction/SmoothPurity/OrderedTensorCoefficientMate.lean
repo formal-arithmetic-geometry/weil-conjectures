@@ -19,8 +19,6 @@ open CategoryTheory
 namespace CategoryTheory.Adjunction
 
 /-- The projection and evaluation square at the objects used by the tensor transpose.
-Source: blueprint smooth-purity reduction compatibility (3).
-(blueprint: lem-pur-ordered-tensor-coefficient-mate).
 Proof: precompose by the scalar projection isomorphism and compact-support
 comparison. The projection square, projection naturality and evaluation square
 reduce both sides to tensor naturality followed by the scalar right-unit law. -/

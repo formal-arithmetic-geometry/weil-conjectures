@@ -10,8 +10,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyP
 /-!
 # Cohomology in a weak Serre class
 
-Source: Stacks Project, Tag 06UQ, label `lemma-cohomology-in-serre-subcategory`,
-`derived.tex:5935-5960` (blueprint: lem-sbc-cohomology-in-weak-serre-subcategory).
+Source: Stacks Project, Tag 06UQ, label,
+`derived.tex:5935-5960`.
 -/
 
 @[expose] public section
@@ -24,9 +24,9 @@ namespace CategoryTheory
 
 /-- If `P` is a weak Serre class in an abelian category, the derived objects whose
 cohomology lies in `P`, together with their bounded-below and bounded intersections,
-form full triangulated subcategories. (blueprint: lem-sbc-cohomology-in-weak-serre-subcategory)
+form full triangulated subcategories.
 
-Source: Stacks Project, Tag 06UQ, `lemma-cohomology-in-serre-subcategory`, with the
+Source: Stacks Project, Tag 06UQ, with the
 weak Serre hypotheses expanded by Homology, Tag 0754.
 -/
 lemma cohomology_in_weak_serre_subcategory

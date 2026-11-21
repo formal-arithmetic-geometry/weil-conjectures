@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.RightDerivedBaseChangeSingleUnitHomology
 # The degree-zero unit equation for derived base change
 
 Source: Stacks Project, Derived Categories, Tag 05TD, part (3), and the unit
-characterization of derived base change (blueprint: lem-sbc-right-derived-base-change-zero-unit).
+characterization of derived base change.
 -/
 
 @[expose] public section
@@ -39,7 +39,6 @@ underived functors.
 
 Source: Stacks Project, Derived Categories, Tag 05TD, part (3), applied to the defining
 unit equation of `rightDerivedFunctorPlusBaseChange`.
-(blueprint: lem-sbc-right-derived-base-change-zero-unit).
 
 Proof:
 1. Represent `Y[0]` by a nonnegative injective resolution `Y → I`. The defining equation

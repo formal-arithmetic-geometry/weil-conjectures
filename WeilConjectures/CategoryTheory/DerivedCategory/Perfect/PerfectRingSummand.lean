@@ -19,8 +19,7 @@ import Mathlib.RingTheory.Flat.Basic
 /-!
 # Direct summands of perfect complexes over a ring
 
-Source: Stacks Project, More on Algebra, Tag 066S, `lemma-summands-perfect`
-(blueprint: lem-sf-perfect-ring-summand).
+Source: Stacks Project, More on Algebra, Tag 066S.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace DerivedCategory
 
 /-- If the binary direct sum of two objects of `D(A)` is perfect, both objects are perfect.
-Source: Stacks Project, More on Algebra, Tag 066S, `lemma-summands-perfect`
-(blueprint: lem-sf-perfect-ring-summand).
+Source: Stacks Project, More on Algebra, Tag 066S.
 
 Proof:
 1. Choose a bounded finite-projective model P for K ⊞ L. Replace P by a bounded-above

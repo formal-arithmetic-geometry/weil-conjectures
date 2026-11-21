@@ -84,8 +84,7 @@ private def constantRestrictionIso {X Y : D} (f : X ⟶ Y) (M : ModuleCat.{w} R)
 
 /-- A finite module local system stays such under inverse image along a continuous
 finite-limit-preserving functor of small sites.
-Source: Stacks Project, Sites, Tags 00YV and 00XZ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tags 00YV and 00XZ.
 
 Proof: Apply the local-system hypothesis to the terminal object. Send its trivializing
 sieve along the site functor; continuity makes the generated sieve covering. Pull it back

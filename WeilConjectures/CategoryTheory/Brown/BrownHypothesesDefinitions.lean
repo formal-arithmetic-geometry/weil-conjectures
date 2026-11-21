@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Triangulated.Generators
 /-!
 # The Brown-hypotheses bundle
 
-Source: blueprint latest, sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md.
 The definition and canonical instance abbreviations are shared by the unresolved
 arbitrary-field assertion and the proved criteria. This module contains no compactness
 assertion and imports no coefficient-specific compactness proof.
@@ -101,10 +100,7 @@ triangulation witness installs the canonical shift inherited from the ambient de
 category; no independently chosen shift is allowed. The coproduct witness also precedes
 compactness and generation, so these clauses cannot be vacuous for lack of coproducts.
 This is only a bundle of the lemma's conclusions, not an assertion for arbitrary rings.
-
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-lem-brown-hypotheses/_section.md, conclusion
-(blueprint: def-sfb-brown-hypotheses-for). -/
+-/
 def BrownHypothesesFor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) : Prop :=

@@ -122,7 +122,6 @@ private theorem reconstructedRingObjects_eq
 
 
 /-- Surjectivity component of internal ring-object reconstruction.
-(blueprint: lem-weil-pbc-sheaf-ring-objects-surjective)
 Proof in words: Evaluate the internal operations on each section set. The
 internal ring diagrams give commutative ring structures, and naturality gives
 ring-homomorphic restrictions. The underlying set sheaf therefore carries a

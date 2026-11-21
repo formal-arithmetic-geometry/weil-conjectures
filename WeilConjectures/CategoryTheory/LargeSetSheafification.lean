@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Sites.LocallyBijective
 /-!
 # Local bijections and set sheafification in a larger universe
 
-Source: Stacks Project, Sites, Tags 00WK and 00WM
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tags 00WK and 00WM.
 -/
 
 @[expose] public section
@@ -74,8 +73,7 @@ private theorem largeSetUnit_locallySurjective
   exact e ▸ (l.app U s).property
 
 /-- Set sheafification detects local bijections when the value universe is larger than the site.
-Source: Stacks Project, Sites, Tags 00WK and 00WM
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tags 00WK and 00WM.
 Proof: equality in one plus construction is witnessed on a common covering refinement.
 Thus its unit is locally injective; applying plus twice and comparing the resulting
 adjunction with the chosen sheafification gives local injectivity of that unit.

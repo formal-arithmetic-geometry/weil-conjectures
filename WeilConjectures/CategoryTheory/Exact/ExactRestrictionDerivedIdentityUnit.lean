@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryM
 
 /-! # The left unit law for exact restriction on derived categories
 Source: Stacks Project, Cohomology on Sites, Tag 0D6E.
-(blueprint: lem-pbc-exact-restriction-derived-identity-unit).
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +31,7 @@ private theorem invertNormalizedSquare {C D E : Type*}
   exact hh.symm
 
 /-- An ordinary left unit comparison induces the corresponding derived left unit comparison.
-Source: Stacks 0D6E; the exact-derived composition and unit laws.
-(blueprint: lem-pbc-exact-restriction-derived-identity-unit).
+Source: Stacks 0D6E.
 
 Proof: the componentwise hypothesis identifies the comparison with the whiskering of
 `e` followed by the left unitor. Functoriality on natural isomorphisms, compatibility

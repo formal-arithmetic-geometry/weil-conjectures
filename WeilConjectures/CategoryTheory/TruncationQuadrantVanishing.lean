@@ -22,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The lower-half-plane vanishing of the raw truncation terms.
-Source: Stacks Tags 05TC (1), 0118; blueprint step 3 of lemma-uniform-bound-proper-direct-image--1
-(blueprint: lem-sp-truncation-quadrant-vanishing).
+Source: Stacks Tags 05TC (1), 0118.
 
 Proof: For q<a the truncation has zero homology in every degree: below and at q
 use the homology isomorphism of its inclusion and the hypothesis on K; above q

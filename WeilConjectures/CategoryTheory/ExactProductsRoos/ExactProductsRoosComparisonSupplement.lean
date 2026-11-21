@@ -105,7 +105,6 @@ public import WeilConjectures.Algebra.Homology.ExactProductsRoosComparison
 /-! # The Roos fibre computes total derived inverse limit when products are exact
 
 Source: Stacks Project, Tags 0940 and 0941.
-(blueprint: lem-weil-pbc-exact-products-roos-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -235,8 +234,7 @@ variable [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
 inverse limit whose comparison is invertible on K-injective towers. The isomorphism
 carries the actual zero-second-coordinate ordinary-limit inclusion to that comparison.
 
-Source: Stacks Project, Tags 0940 and 0941
-(blueprint: lem-weil-pbc-exact-products-roos-comparison).
+Source: Stacks Project, Tags 0940 and 0941.
 Proof: resolve strict tower complexes functorially by K-injective complexes with injective
 terms. Their transitions split, so the Roos short complex is short exact, and its kernel
 inclusion into the fibre is a quasi-isomorphism. Exact products and the cone triangle

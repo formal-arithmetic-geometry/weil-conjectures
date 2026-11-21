@@ -17,9 +17,8 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawSectionRelations
 
 /-! # Compatibility of the raw section colimit presentation
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-compatibility).
 -/
 
 @[expose] public section
@@ -28,9 +27,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-compatibility).
 
 Proof: Cocone naturality gives V_t(F(t.hom)(U)) = V_i(U). Compose E_t,
 beta_t, the raw presheaf colimit coprojection and this object transport to

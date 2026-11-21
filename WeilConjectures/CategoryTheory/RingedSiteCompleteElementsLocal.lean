@@ -11,7 +11,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-! # Restriction of complete local sections
 
 Source: Stacks Project, Tags 0997 and 0998.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -230,9 +229,7 @@ private theorem completeElementHom_comparison
 /-- The vanishing-localization criterion is preserved by restrictions and descends
 through every covering sieve.
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998;
-sites-cohomology.tex, Tag 08JB.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998; sites-cohomology.tex, Tag 08JB.
 
 Proof: Exact slice restriction preserves the defining sequential colimit: its
 unit module and multiplication maps restrict to the unit and restricted section.

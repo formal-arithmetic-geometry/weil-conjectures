@@ -16,7 +16,7 @@ namespace CategoryTheory
 
 /-- Pasting scalar restriction with a left mate gives the left mate of the
 transported tensor comparison. Source: the unit form of the mates correspondence,
-Stacks Tag 0GL6 (blueprint: lem-pur-restricted-open-mate-tensor).
+Stacks Tag 0GL6.
 
 Proof: transpose the composite under the first adjunction. Naturality moves the
 unit past the scalar/tensor comparison. The unit equations for the two mates

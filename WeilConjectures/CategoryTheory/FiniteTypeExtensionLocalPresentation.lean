@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.LocalModuleIso
 # Local constant presentations of extensions
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3), extension paragraph.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -33,7 +32,6 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 /-- Locally split finite-free presentations give constant finite-module presentations
 of the middle term of an extension.
 Source: Stacks Project, Modules on Sites, Tag 093U (3).
-(auxiliary; not a blueprint node).
 
 Proof: Choose a finite free surjection onto the constant quotient module. Its kernel is
 finite by Noetherianity. Constant-module exactness and exact restriction give the

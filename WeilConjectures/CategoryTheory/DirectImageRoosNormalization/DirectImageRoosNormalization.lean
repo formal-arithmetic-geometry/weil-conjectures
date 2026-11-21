@@ -47,8 +47,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-! # Normalized direct image of canonical Roos triangles
 
 Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0941; Derived Categories,
-Tag 0BK6, with the explicit strict cone normalization in the DAG
-(blueprint: lem-weil-pbc-direct-image-roos-normalization).
+Tag 0BK6, with the explicit strict cone normalization in the DAG.
 
 The structures below only package the choices of total derived functors, units and
 canonical comparisons already appearing in the statement. The conclusion constructs
@@ -79,8 +78,7 @@ variable (A : Type uA) [Category.{vA} A] [Abelian A]
   [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
 
 /-- Total derived inverse limit and evaluation of strict towers, with their units.
-Source: Stacks Tags 0940 and 0941
-(blueprint: lem-weil-pbc-direct-image-roos-normalization).
+Source: Stacks Tags 0940 and 0941.
 This packages the interface of `ringedStrictTowerHomotopyLimitIndependentCoefficients`.
 It introduces no new inverse-limit or evaluation construction. -/
 structure LimitData where
@@ -102,8 +100,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B]
   [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ B)]
 
 /-- The normalized derived direct-image comparison of strict inverse limits.
-Source: Stacks Tag 0A07 and the common-underived-composite normalization
-(blueprint: lem-weil-pbc-direct-image-roos-normalization).
+Source: Stacks Tag 0A07 and normalization.
 The fields are precisely choices in `ringedTowerPushforwardLimitComparison`.
 `ordinary_components` fixes the underived comparison; `comparison_unit` fixes `a`.
 The evaluation comparison is fixed on K-injectives, including all transitions. -/
@@ -148,8 +145,7 @@ structure DirectImageData (G : A ⥤ B) [G.Additive] where
 variable [HasCountableProducts A] [HasCountableProducts (DerivedCategory.{w} A)]
 
 /-- The ordinary-limit inclusion into the existing strict Roos cone, with coordinates
-`(0, (λ_n)_n)`. Source: Stacks Tag 0941
-(blueprint: lem-weil-pbc-direct-image-roos-normalization).
+`(0, (λ_n)_n)`. Source: Stacks Tag 0941.
 The domain is termwise ordinary limit, as in the total-derived-functor unit. -/
 def ordinaryInclusion (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     (ExactProductsRoos.ordinary (B := A)).obj X ⟶ roosF.obj X :=
@@ -374,8 +370,7 @@ private def derivedProducts :
 end PrivateComparisons
 
 /-- The canonical Roos triangle, specified on every representing complex.
-Source: Stacks Tags 0941 and 0A07, with the DAG's explicit cone convention
-(blueprint: lem-weil-pbc-direct-image-roos-normalization).
+Source: Stacks Tags 0941 and 0A07, with the DAG's explicit cone convention.
 `normalization` characterizes the comparison with total derived limit by its unit.
 It is equivalently the exact-products fibre comparison followed by `(y,x) ↦ (-y,x)`:
 both carry the ordinary-limit inclusion to that unit. The last two fields transport
@@ -436,13 +431,13 @@ end PrivateTriangles
 variable [HasCountableProducts (DerivedCategory.{w} B)]
 
 /-- The product comparison whose components are the images of product projections.
-Source: Stacks Tag 0A07 (blueprint: lem-weil-pbc-direct-image-roos-normalization). -/
+Source: Stacks Tag 0A07. -/
 def alpha {G : A ⥤ B} [G.Additive] (d : DirectImageData G)
     (M : DerivedCategory.{w} (ℕᵒᵖ ⥤ A)) :=
   piComparison d.direct (fun n : ℕ ↦ (d.source.evaluation.obj M).obj (op n))
 
 /-- The same product comparison with its target identified by derived strict evaluation.
-Source: Stacks Tag 0A07 (blueprint: lem-weil-pbc-direct-image-roos-normalization). -/
+Source: Stacks Tag 0A07. -/
 def productMap {G : A ⥤ B} [G.Additive] (d : DirectImageData G)
     (M : DerivedCategory.{w} (ℕᵒᵖ ⥤ A)) :
     d.direct.obj (∏ᶜ (fun n : ℕ ↦ (d.source.evaluation.obj M).obj (op n))) ⟶

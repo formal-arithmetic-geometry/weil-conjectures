@@ -25,7 +25,6 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 
 Source: Mathlib's indexed `Precoverage.IsStableUnderBaseChange` axiom and the
 strictification interface sourced from Stacks Project, Categories, Tag 004A.
-(blueprint: lem-weil-pbc-site-system-strictification-refuted).
 -/
 
 @[expose] public section
@@ -81,9 +80,8 @@ private theorem strictification_preserves_pullback
 
 set_option linter.style.haveILetI false in
 set_option linter.unusedVariables false in
-/-- Source: Mathlib `Precoverage.IsStableUnderBaseChange`, applied to the finite-site
+/-- Source: Mathlib `Precoverage.IsStableUnderBaseChange`, applied to
 strictification interface sourced from Stacks Project, Categories, Tag 004A.
-(blueprint: lem-weil-pbc-site-system-strictification-refuted).
 
 Proof: specialize the interface to I = WithTop Nat and the constant one-object
 category, with the top precoverage. Every presieve there has at most one arrow,

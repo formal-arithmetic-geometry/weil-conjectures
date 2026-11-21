@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.DeltaFunctor
 # Comparing effacing short exact sequences
 
 Source: Stacks Project, Homology, Lemma 010T and the parent node's comparison arguments.
-(blueprint: lem-weil-pbc-effacing-sequence-comparison).
 -/
 
 @[expose] public section
@@ -25,13 +24,11 @@ open Category Limits
 
 /-- Comparison span for effacing sequences.
 
-Source: Stacks Project, Homology, Lemma 010T, omitted naturality verification;
-the direct-sum argument is step 5 of the parent node. Form the embedding
+Source: Stacks Project, Homology, Lemma 010T, omitted naturality verification. Form the embedding
 w = (S.f, a ≫ T.f) into the biproduct. Projection onto the first factor proves
 monicity. Additivity and the two effacement equations show F(w) = 0. The
 projections followed by the quotient maps kill w, so they descend through its
-cokernel and define the two morphisms of short exact sequences.
-(blueprint: lem-weil-pbc-effacing-sequence-comparison) -/
+cokernel and define the two morphisms of short exact sequences. -/
 theorem effacingSequence_comparison
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B] (F : CohomologicalDeltaFunctor A B) (n : ℕ)

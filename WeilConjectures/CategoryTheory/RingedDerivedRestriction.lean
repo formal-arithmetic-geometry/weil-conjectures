@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Derived restriction to the slice of a ringed site
 
-Source: Stacks Project, Modules on Sites, Tag 03DJ, and Cohomology on Sites, Tag 08JB
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 03DJ, and Cohomology on Sites, Tag 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ variable (O : Sheaf J CommRingCat.{u})
 
 /-- The ringed-site derived category, using the recorded module-sheaf and derived-category
 notions verbatim.
-Source: Stacks Project, Cohomology on Sites, Tag 08JB
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Cohomology on Sites, Tag 08JB. -/
 abbrev ringedSiteDerived
     [HasDerivedCategory.{w} (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] :=
@@ -39,8 +37,7 @@ abbrev ringedSiteDerived
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
 
 /-- Slice restriction is additive.
-Source: Stacks Project, Modules on Sites, Tag 03DJ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 03DJ.
 Proof: addition of maps is sectionwise, and slice restriction only precomposes their
 components with the forgetful functor from the slice category. -/
 theorem ringedOverFunctor_additive (U : C) :
@@ -52,8 +49,7 @@ theorem ringedOverFunctor_additive (U : C) :
   rfl
 
 /-- Slice restriction preserves finite limits.
-Source: Stacks Project, Modules on Sites, Tag 03DJ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 03DJ.
 Proof: finite limits of module sheaves are computed sectionwise, so precomposition
 with the forgetful functor from the slice commutes with them. -/
 theorem ringedOverFunctor_preservesFiniteLimits (U : C) :
@@ -69,8 +65,7 @@ theorem ringedOverFunctor_preservesFiniteLimits (U : C) :
     (SheafOfModules.toSheaf (R.over U))
 
 /-- Slice restriction preserves finite colimits.
-Source: Stacks Project, Modules on Sites, Tag 03DJ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 03DJ.
 Proof: finite colimits are the sheafifications of sectionwise colimits. Covering sieves
 on a slice are exactly those induced from the original site, so sheafification commutes
 with slice restriction. Sectionwise colimits commute with precomposition. -/
@@ -95,8 +90,7 @@ attribute [instance] ringedOverFunctor_additive ringedOverFunctor_preservesFinit
   ringedOverFunctor_preservesFiniteColimits
 
 /-- Restriction on unbounded derived categories, induced by exact module restriction.
-Source: Stacks Project, Cohomology on Sites, Tag 08JB
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Cohomology on Sites, Tag 08JB. -/
 def ringedDerivedRestriction (U : C)
     [HasDerivedCategory.{w} (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
@@ -109,8 +103,7 @@ def ringedDerivedRestriction (U : C)
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).mapDerivedCategory
 
 /-- Restriction of the rank-one ring module is the rank-one ring module on the slice.
-Source: Stacks Project, Modules on Sites, Tag 03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03DJ. -/
 def ringedOverRingIso (U : C) :
     (SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).obj
@@ -120,8 +113,7 @@ def ringedOverRingIso (U : C) :
   Iso.refl _
 
 /-- Restriction of the ring complex is canonically the ring complex on the slice.
-Source: Stacks Project, Cohomology on Sites, Tag 08JB
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Cohomology on Sites, Tag 08JB. -/
 def ringedRestrictionRingComplexIso (U : C) :
     ((SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).mapHomologicalComplex
@@ -139,8 +131,7 @@ def ringedRestrictionRingComplexIso (U : C) :
 set_option backward.isDefEq.respectTransparency false in
 /-- The canonical comparison between restriction of the ring in degree zero and the ring
 of the slice in degree zero.
-Source: Stacks Project, Cohomology on Sites, Tag 08JB
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Cohomology on Sites, Tag 08JB. -/
 def ringedDerivedRingRestrictionIso (U : C)
     [HasDerivedCategory.{w} (ringedSiteModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]

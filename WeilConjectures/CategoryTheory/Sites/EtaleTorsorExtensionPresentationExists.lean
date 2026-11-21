@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.Sites.TorsorExtensionPresentation
 /-!
 # The free extension presentation of an etale torsor
 
-Source: Stacks Project, Tag 03AJ, the free abelian sheaf construction
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 03AJ, the free abelian sheaf construction.
 -/
 
 @[expose] public section
@@ -282,8 +281,7 @@ differences and sends each generator to one. Naturality follows from sheafificat
 the pair relation gives translation equivariance. For the universal property, extend
 the prescribed generator map by the free abelian group adjunction and sheafification.
 Equivariance says exactly that pair differences agree with displacement followed by
-the coefficient map, so the pushout gives the unique required morphism.
-(auxiliary; not a blueprint node) -/
+the coefficient map, so the pushout gives the unique required morphism. -/
 theorem nonempty_extensionPresentation (X : Scheme.{u})
     {G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} (T : Torsor G) :
     Nonempty (ExtensionPresentation.{u, u} X T) := by

@@ -80,8 +80,7 @@ Proof: the composite from the target unit through v inverse, F of the inverse un
 the tensor comparison, v tensor v and the target unitor is a unit automorphism q.
 Postcompose the tensor comparison by the natural action of q inverse on its target.
 The action at the unit is q inverse, so naturality and cancellation give the normalized
-unit equation. The action is defined by conjugating q inverse tensor identity by unitors.
-(blueprint: lem-weil-pbc-cech-pullback-normalized-coherence) -/
+unit equation. The action is defined by conjugating q inverse tensor identity by unitors. -/
 theorem cech_pullback_normalized_coherence
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

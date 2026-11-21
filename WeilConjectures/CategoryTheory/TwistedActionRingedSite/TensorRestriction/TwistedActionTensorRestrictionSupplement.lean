@@ -16,7 +16,7 @@ public import WeilConjectures.CategoryTheory.TwistedActionTensorRestriction
 The comparison is constructed by transposing the restricted sheafification unit.
 For a continuous cocontinuous functor and an isomorphism of coefficient rings,
 it is invertible and carries sheafified pure tensors to pure tensors.
-Source: Stacks 03CY and 03EK; the module-sheafification adjunction.
+Source: Stacks 03CY and 03EK.
 -/
 
 @[expose] public section
@@ -345,8 +345,7 @@ theorem tensorPushMap_pure (M N : Modules R) (X : Cᵒᵖ)
     (presheaf_tensorator_pure F R S c M N X x y))
 
 /-- The explicit tensorator is invertible when restriction commutes with sheafification.
-Source: Stacks 03CY and 03EK; the sectionwise tensor and sheafification adjunction.
-(blueprint: lem-sf-cocontinuous-ringed-tensor-restriction).
+Source: Stacks 03CY and 03EK.
 
 Proof: the coefficient isomorphism makes the sectionwise scalar-restriction tensorator
 invertible, by tensoring the two semilinear identity equivalences. Sheafification preserves

@@ -49,9 +49,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 /-!
 # Compatible slice section models from one injective complex
 
-Source: Stacks Project, `sites-cohomology.tex`, Tag 03F3 and restriction-mapping equation;
-`derived.tex`, Tags 05TI, 05TH, 05SA.
-(blueprint: lem-pe-injective-complex-slice-section-model)
+Source: Stacks Project, `sites-cohomology.tex`, Tag 03F3 and restriction-mapping equation; `derived.tex`, Tags 05TI, 05TH, 05SA.
 -/
 
 @[expose] public noncomputable section
@@ -67,8 +65,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
 /-- The actual presheaf of left coefficient modules obtained by restricting scalars
 along a map from a constant presheaf of rings. Objects, arrows and maps of sheaves are
-unchanged as abelian groups. Source: Stacks, 03F3, sectionwise evaluation.
-(blueprint: lem-pe-injective-complex-slice-section-model) -/
+unchanged as abelian groups. Source: Stacks, 03F3, sectionwise evaluation. -/
 def coefficientSectionPresheaf (Λ : Type u) [Ring Λ] (R : Sheaf J RingCat.{u})
     (c : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj) :
     SheafOfModules.{u} R ⥤ Cᵒᵖ ⥤ ModuleCat.{u} Λ where
@@ -96,15 +93,14 @@ def coefficientSectionPresheaf (Λ : Type u) [Ring Λ] (R : Sheaf J RingCat.{u})
         exact PresheafOfModules.naturality_apply f.val a x }
 
 /-- Evaluation with the specified constant scalar action.
-Source: Stacks, 03F3 (blueprint: lem-pe-injective-complex-slice-section-model). -/
+Source: Stacks, 03F3. -/
 def coefficientSectionEvaluation (Λ : Type u) [Ring Λ] (R : Sheaf J RingCat.{u})
     (c : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj) (W : Cᵒᵖ) :
     SheafOfModules.{u} R ⥤ ModuleCat.{u} Λ :=
   coefficientSectionPresheaf Λ R c ⋙ (evaluation Cᵒᵖ (ModuleCat Λ)).obj W
 
 /-- The canonical coefficient map is the unit of ring sheafification.
-Source: Stacks, constant sheaves and 03F3
-(blueprint: lem-pe-injective-complex-slice-section-model). -/
+Source: Stacks, constant sheaves and 03F3. -/
 abbrev constantCoefficientMap (J : GrothendieckTopology C) (Λ : Type u) [Ring Λ]
     [HasWeakSheafify J RingCat.{u}] :=
   toSheafify J ((Functor.const Cᵒᵖ).obj (RingCat.of Λ))
@@ -113,12 +109,12 @@ variable (J : GrothendieckTopology C) (Λ : Type u) [Ring Λ]
   [HasWeakSheafify J RingCat.{u}]
 
 /-- The existing module-sheaf category for the constant ring sheaf; a transparent alias.
-Source: Stacks, 03F3 (blueprint: lem-pe-injective-complex-slice-section-model). -/
+Source: Stacks, 03F3. -/
 abbrev constantModuleSheaves :=
   SheafOfModules.{u} ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))
 
 /-- Evaluation of constant-ring module sheaves, as a diagram of additive functors.
-Source: Stacks, 03F3 (blueprint: lem-pe-injective-complex-slice-section-model). -/
+Source: Stacks, 03F3. -/
 def constantModuleEvaluation (W : Cᵒᵖ) : (constantModuleSheaves J Λ) ⥤ (ModuleCat.{u} Λ) :=
   coefficientSectionEvaluation Λ ((constantSheaf J RingCat.{u}).obj (RingCat.of Λ))
     (constantCoefficientMap J Λ) W

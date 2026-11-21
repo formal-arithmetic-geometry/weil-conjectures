@@ -32,8 +32,7 @@ set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The local-Hom isomorphisms, normalized solely by preservation of evaluation.
 This record asserts neither conjugate action nor naturality.
-Source: steps 11--12 and the evaluation part of step 13 of the twisted Stacks 00W0 argument
-(blueprint: lem-sf-twisted-action-hom-evaluation-comparisons). -/
+Source: steps 11--12 and the evaluation part of step 13 of the twisted Stacks 00W0 argument. -/
 structure HomEvaluationComparisons (P : RestrictionPresentation J s R a)
     (T : TensorComparisons J s R a P) where
   /-- The internal Hom restricts as an isomorphism of sheaves of modules. -/
@@ -144,7 +143,6 @@ private theorem translationHomComparison_isIso (P : RestrictionPresentation J s 
 /-- The normalized tensor comparisons admit evaluation-preserving local-Hom comparisons.
 Source: steps 11--12 and the evaluation part of step 13 of the twisted Stacks 00W0
 argument; Stacks 04TT for local Hom.
-(blueprint: lem-sf-twisted-action-hom-evaluation-comparisons).
 
 Proof: on the action-site slice over an object V, normalize a degree-n arrow by
 inverse n-th translation. The slice relation forces the degree of every slice morphism,

@@ -14,8 +14,7 @@ import Mathlib.Tactic.Abel
 # Correction of horseshoe comparison defects
 
 Source: the classical horseshoe naturality argument of Weibel, Theorem 2.4.6,
-using Stacks Project, Tags 0136, 013R, 013P and 013T
-(blueprint: lem-weil-pbc-horseshoe-homotopy-correction).
+using Stacks Project, Tags 0136, 013R, 013P and 013T.
 -/
 
 @[expose] public section
@@ -83,9 +82,7 @@ show that kₙ₊₁ dA'ₙ₊₁ - Eₙ₊₁ vanishes on dCₙ. Exactness of I
 JA let it descend along dCₙ₊₁, defining kₙ₊₂. This is the inductive null-homotopy
 argument of Tag 013R specialized to the augmented resolution, with its signs undone.
 The resulting identities cancel both defects of t - βkα'.
-Source: Stacks Project, derived.tex, Tag 013R, proof by successive injective extensions;
-classical horseshoe naturality Steps 2--3.
-(blueprint: lem-weil-pbc-horseshoe-homotopy-correction) -/
+Source: Stacks Project, derived.tex, Tag 013R, proof by successive injective extensions. -/
 theorem horseshoe_homotopy_correction
     {C : Type u} [Category.{v} C] [Abelian C]
     (S T : ShortComplex C) (hS : S.ShortExact) (hT : T.ShortExact) (F : S ⟶ T)

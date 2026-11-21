@@ -123,9 +123,8 @@ private lemma telescope_kernel (R : Type u) [CommRing R]
   simp [hq, hz]
 
 /-- The algebraic short exact sequence underlying the filtration telescope.
-Source: Stacks Project, More on Algebra, Remark 09PB (remark-P-resolution),
+Source: Stacks Project, More on Algebra, Remark 09PB,
 displayed telescope triangle.
-(blueprint: lem-pc-derived-module-filtration-telescope).
 
 Proof: coproducts of complexes are computed degreewise. In each degree write a
 coproduct element as a finitely supported tuple. The map `a` sends the element `x`
@@ -255,7 +254,6 @@ private lemma filtration_telescope_shortExact (R : Type u) [CommRing R]
 
 /-- An exhaustive filtration by subcomplexes gives the mapping telescope triangle.
 Source: Stacks Project, More on Algebra, Remark 15.60.11 (Tag 09PB), displayed triangle.
-(blueprint: lem-pc-derived-module-filtration-telescope).
 
 Proof: form the termwise direct sum `S₀` of the `F n`. Let `s` send summand `n` to
 summand `n+1` via `step n`, and let `p : S₀ ⟶ L` be induced by the compatible `ι n`.

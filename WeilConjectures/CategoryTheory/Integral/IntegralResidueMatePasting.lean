@@ -8,8 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Composition of inverse mates
-
-Source: the mates correspondence, Mathlib CategoryTheory/Adjunction/Mates.
 -/
 
 @[expose] public section
@@ -34,8 +32,6 @@ variable {A₀ : Type u₀} {A₁ : Type u₁} {A₂ : Type u₂}
   (qh : R₀ ⋙ H ⟶ H' ⋙ R₂) (c : H ⟶ F ⋙ G) (c' : H' ⟶ F' ⋙ G')
 
 /-- Inverse mates preserve a pasted square, including the two comparison maps.
-Source: Mathlib `unit_mateEquiv_symm` and naturality of the unit.
-(blueprint: new-integral-residue-mate-pasting)
 
 Proof. Transpose the desired equation under the last adjunction. Expand the three
 transposes with `unit_mateEquiv_symm`. Move units through the comparison maps by

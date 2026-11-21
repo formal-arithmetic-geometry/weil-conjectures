@@ -10,8 +10,7 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
 /-! # Cancelling an equivalence after exact localization
 
-Source: Stacks 015F; finite coefficient realization in prop-sf-pf-coherence.proof.md.
-(blueprint: lem-sf-derived-equivalence-cancellation).
+Source: Stacks 015F.
 -/
 
 @[expose] public noncomputable section
@@ -103,8 +102,7 @@ variable {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
 /-- Exact localization commutes with cancelling the unit of an equivalence.
 
 Source: Stacks 015F and the equivalence cancellation in the finite coefficient
-realization of prop-sf-pf-coherence.proof.md.
-(blueprint: lem-sf-derived-equivalence-cancellation).
+realization of.
 
 Proof: the counit of the derived equivalence is the localized ordinary counit
 with its composition factors. Apply the faithful forward equivalence and its

@@ -10,8 +10,7 @@ import WeilConjectures.CategoryTheory.SixFunctors.SignedDerivedInternalHomExact
 
 /-! Independent-universe exactness interface for derived internal Hom.
 
-Source: Stacks Project, Tag 08JC (lemma-RHom-triangulated); blueprint
-lem-weil-pbc-ringed-internal-hom-exact-restriction.
+Source: Stacks Project, Tag 08JC.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ variable {C : Type c} [Category.{v} C]
 
 /-- Internal derived Hom is exact in both variables at independent universes.
 
-Source: Stacks Project, Tag 08JC; blueprint
-lem-weil-pbc-ringed-internal-hom-exact-restriction.
+Source: Stacks Project, Tag 08JC.
 
 Proof: For the covariant variable, represent a distinguished triangle by a cone
 of K-injective complexes. The cone remains K-injective, and Hom into it is the
@@ -38,8 +36,7 @@ contravariant variable, reverse the cone triangle and use the signed source shif
 The finite biproduct calculations descend through localization and TR3 transfers
 the result to arbitrary distinguished triangles. The argument uses only finite
 splittings, so the site object, morphism, coefficient, and derived universes are
-independent and no boundedness or finite-generation assumption is needed.
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-universes) -/
+independent and no boundedness or finite-generation assumption is needed. -/
 theorem ringedInternalHom_exact
     (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v r}]

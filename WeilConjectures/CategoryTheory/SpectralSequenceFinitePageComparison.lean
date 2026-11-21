@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.DirectedColimitHomology
 /-!
 # Filtered-colimit comparison on finite spectral-sequence pages
 
-Source: Stacks Project, Tag 0EZM, the finite-term comparison in the proof,
+Source: Stacks Project, Tag 0EZM comparison in the proof,
 and Tag 00DB, homology commuting with directed colimits.
 -/
 
@@ -29,8 +29,7 @@ open Limits
 
 /-- Page-one comparison propagates to each finite page, without convergence hypotheses.
 
-Source: Stacks Project, Tag 0EZM, the spectral-sequence comparison in the proof;
-Tag 00DB, homology commuting with directed colimits.
+Source: Stacks Project, Tag 0EZM, the spectral-sequence comparison in the proof; Tag 00DB, homology commuting with directed colimits.
 
 Proof: induct on the natural number `r - 1`. The initial case is `hpage`.
 For the induction step, form the diagram of page-r complexes. Evaluation of its
@@ -44,8 +43,7 @@ all transition and comparison maps. Thus the canonical map on page r+1 is an
 isomorphism. Any map satisfying the displayed cocone equations equals the canonical
 one by the colimit universal property. If I is empty, all source colimits are zero;
 the initial hypothesis then forces every target page-one term to be zero, and all
-later pages are zero as well, so this case also satisfies the conclusion.
-(blueprint: lem-weil-pbc-spectral-sequence-finite-page-comparison) -/
+later pages are zero as well, so this case also satisfies the conclusion. -/
 theorem spectral_sequence_finite_page_comparison
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (E : I ⥤ SpectralSequence AddCommGrpCat.{u}

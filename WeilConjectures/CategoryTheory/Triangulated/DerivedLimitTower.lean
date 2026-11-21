@@ -23,8 +23,7 @@ namespace CategoryTheory
 
 /-- The inverse limit of a K-injective tower represents its triangulated derived limit.
 Source: Stacks Project, Derived Categories, Tags 0BK6, 0BK7 and 070M, together with
-clause (3) of the blueprint lemma-reduction-derived-nakayama
-(blueprint: lem-weil-derived-limit-tower-core).
+clause (3) of the blueprint.
 
 Proof: Evaluation at n has the exact left adjoint which is X through level n and zero
 above n. Therefore evaluation preserves K-injectivity. The termwise product P of the

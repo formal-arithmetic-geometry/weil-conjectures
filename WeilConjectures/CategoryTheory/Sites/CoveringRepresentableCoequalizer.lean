@@ -11,8 +11,7 @@ import Mathlib.CategoryTheory.Sites.RegularEpi
 /-!
 # A coequalizer presentation using covering representables
 
-Source: Stacks Project, Sites, Tag 00WS, lemma-sheaf-coequalizer-representable.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Sites, Tag 00WS.
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ coproduct of sheafified representables indexed by that family.
 
 Source: Stacks Project, Sites, Tag 00WS, first paragraph (the construction of the
 coproduct and its locally surjective map).
-(auxiliary; not a blueprint node)
 
 Take the coproduct of sheafified representables indexed by pairs `(V,t)` with
 `V ∈ E` and `t ∈ H(V)`. The sheafification adjunction and Yoneda give its map to
@@ -95,8 +93,7 @@ property: for each sheaf `K`, composition with `q` bijects maps `H ⟶ K` with m
 The `uliftYoneda` is just the representable presheaf with its Hom sets raised to the
 universe of the sheaf values, with restriction by precomposition.
 
-Source: Stacks Project, Sites, Tag 00WS, lemma-sheaf-coequalizer-representable.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Sites, Tag 00WS.
 
 Proof:
 1. Sheafification and Yoneda identify maps from the sheafification of `h_V` to a sheaf

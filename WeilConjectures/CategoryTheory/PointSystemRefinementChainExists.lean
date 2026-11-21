@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.PointSystemSchedule
 /-!
 # Scheduling one-step inverse-system refinements
 
-Source: Stacks Project, Sites, Tag 00YP, transfinite recursion on the set of requests
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP, transfinite recursion on the set of requests.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace CategoryTheory
 /-- A set of lifting requests can be scheduled in a nested chain of refinements.
 
 Source: Stacks Project, Sites, Tag 00YP, the paragraph beginning "In order to circumvent
-this we choose a well ordering on E"
-(auxiliary; not a blueprint node).
+this we choose a well ordering on E".
 
 Proof: Consider the category of strict refinements of V which preserve the two
 classes. Directed unions exist in this category: form the filtered colimit of the

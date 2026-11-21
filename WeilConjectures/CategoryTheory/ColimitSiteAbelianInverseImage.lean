@@ -59,10 +59,9 @@ private theorem sheaf_triangle_unit
   have eq' := congrArg (fun k ↦ k.hom.app (op X)) eq
   exact congrArg Arrow.mk eq'
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 the presentation construction and adjunction argument; the abelian extension uses
-Sites, Modules, Tag 03CO (lemma-limits-colimits-abelian-sheaves).
-(blueprint: lem-weil-pbc-colimit-site-abelian-inverse-image).
+Sites, Modules, Tag 03CO.
 
 Proof: Transpose the later-stage inverse-image unit through the original abelian
 sheaf adjunction. The unit characterization and uniqueness of adjuncts give the

@@ -15,7 +15,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 # Modules under restriction to a dense subsite
 
 Source: Bhatt--Scholze, Example 4.2.11, transport of coefficient structures.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -190,8 +189,7 @@ private noncomputable def liftedModuleIso (M : SheafOfModules.{max u₁ v₁ u�
 /-- Dense restriction equivalences on sets and abelian groups lift to arbitrary
 ring-sheaf modules.
 
-Source: Bhatt--Scholze, Example 4.2.11, transport of coefficient structures
-(auxiliary; not a blueprint node).
+Source: Bhatt--Scholze, Example 4.2.11, transport of coefficient structures.
 
 Proof: Lift the underlying abelian sheaf through the restriction equivalence.
 Conjugate the scalar action by its counit isomorphism on the smaller site and lift

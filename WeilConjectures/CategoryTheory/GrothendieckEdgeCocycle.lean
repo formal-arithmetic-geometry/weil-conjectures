@@ -17,7 +17,7 @@ import WeilConjectures.CategoryTheory.GrothendieckCocycleComparison
 # Cocycle description of the Grothendieck left edge
 
 Source: Stacks Project, Derived Categories, Lemma 015N and the second spectral sequence
-of Lemma 015J (blueprint: lem-pc-grothendieck-edge-cocycle).
+of Lemma 015J.
 -/
 
 @[expose] public section
@@ -68,8 +68,7 @@ private theorem spectral_left_edge_isIso
 /-- The left edge is induced by applying `G` to the cocycle quotient, and is an
 isomorphism when the positive columns vanish. The equation is written after precomposition
 with `G` of the cycles, identified with the cycles of the mapped complex by left exactness.
-Source: Stacks Project, Derived Categories, Tags 015N and 015J
-(blueprint: lem-pc-grothendieck-edge-cocycle).
+Source: Stacks Project, Derived Categories, Tags 015N and 015J.
 
 Proof:
 1. The image under G of the cycle inclusion is killed by the next differential,

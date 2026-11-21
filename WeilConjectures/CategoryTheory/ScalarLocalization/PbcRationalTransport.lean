@@ -20,8 +20,6 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocaliz
 
 /-! # Functorial transport to finite rational coefficients
 
-Source: Weil blueprint, proper base change, order 1306
-(blueprint: prop-weil-pbc-rational-transport).
 The scalar-first tensor convention is identified with the source's Hom-first convention
 by TensorProduct.comm. All functors and comparisons below use actual tensor maps.
 
@@ -54,17 +52,13 @@ variable {C : Type u₁} [Category.{v₁} C] [Preadditive C] [Linear R C]
 variable {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear R D]
 variable (F : C ⥤ D) [F.Additive] [F.Linear R]
 
-/-- The Hom map is extension of scalars of the supplied linear map.
-Source: blueprint order 1306, proof step 1
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- The Hom map is extension of scalars of the supplied linear map. -/
 def transportHom (K L : C) :
     (Localization.Away p ⊗[R] (K ⟶ L)) →ₗ[Localization.Away p]
       (Localization.Away p ⊗[R] (F.obj K ⟶ F.obj L)) :=
   (F.mapLinearMap R).baseChange (Localization.Away p)
 
 /-- The tensor Hom maps preserve identities and composition.
-Source: blueprint order 1306, proof steps 1--2
-(blueprint: prop-weil-pbc-rational-transport).
 Proof: the pure-tensor formula for baseChange sends a tensor a ⊗ f to a ⊗ F(f).
 The composition formula reduces preservation of composition on pure tensors to that
 of F and multiplication of scalars. Bilinearity extends it to finite sums. Identities
@@ -88,28 +82,22 @@ theorem transport_laws :
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']
 
-/-- The extension agrees on objects and sends a ⊗ f to a ⊗ F(f).
-Source: blueprint order 1306, proof steps 1--2
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- The extension agrees on objects and sends a ⊗ f to a ⊗ F(f). -/
 def transport : ScalarLocalization R C p ⥤ ScalarLocalization R D p where
   obj K := ⟨F.obj K.obj⟩
   map {K L} f := transportHom R p F K.obj L.obj f
   map_id K := (transport_laws R p F).1 K.obj
   map_comp {K L M} f g := (transport_laws R p F).2 K.obj L.obj M.obj f g
 
-/-- Additivity of the scalar extension. Source: blueprint order 1306
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- Additivity of the scalar extension. -/
 instance transportAdditive : (transport R p F).Additive where
   map_add {K L} {f g} := (transportHom R p F K.obj L.obj).map_add f g
 
-/-- Localized-ring linearity of the scalar extension. Source: blueprint order 1306
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- Localized-ring linearity of the scalar extension. -/
 instance transportLinear : (transport R p F).Linear (Localization.Away p) where
   map_smul {K L} f a := (transportHom R p F K.obj L.obj).map_smul a f
 
 /-- Uniqueness among linear functors agreeing on integral objects and morphisms.
-Source: blueprint order 1306, proof step 2
-(blueprint: prop-weil-pbc-rational-transport).
 Proof: a pure tensor is a times the integral tensor with one. Linearity forces its
 image; additivity forces the image of every finite sum. The object equalities and
 these Hom equalities give equality of functors by functor extensionality. -/
@@ -155,8 +143,6 @@ theorem transport_unique (H : ScalarLocalization R C p ⥤ ScalarLocalization R 
 variable {F} {G : C ⥤ D} [G.Additive] [G.Linear R]
 
 /-- Naturality after scalar extension, for the prescribed components.
-Source: blueprint order 1306, proof step 3
-(blueprint: prop-weil-pbc-rational-transport).
 Proof: on a pure tensor, both sides are the integral naturality equation tensored
 with its scalar. Additivity proves the equation for a sum of pure tensors. -/
 theorem transportNat_naturality (η : F ⟶ G) (K L : ScalarLocalization R C p)
@@ -171,9 +157,7 @@ theorem transportNat_naturality (η : F ⟶ G) (K L : ScalarLocalization R C p)
   | tmul a f => simp [transportHom, composition_tmul, η.naturality]
   | add f g hf hg => simp [map_add, hf, hg]
 
-/-- The unique extension of a natural transformation, with its integral components.
-Source: blueprint order 1306, proof step 3
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- The unique extension of a natural transformation, with its integral components. -/
 def transportNat (η : F ⟶ G) : transport R p F ⟶ transport R p G where
   app K := (1 : Localization.Away p) ⊗ₜ[R] η.app K.obj
   naturality K L f := transportNat_naturality R p η K L f
@@ -196,8 +180,7 @@ end CategoryTheory.ScalarLocalization
 namespace AlgebraicGeometry.Scheme
 
 set_option linter.defProp false in
-/-- Inherited integral triangulation. Source: blueprint order 1305
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- Inherited integral triangulation. -/
 abbrev pbcIntegralTriangulated (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (T : Scheme.{u}) [IsNoetherian T]
@@ -213,34 +196,29 @@ variable (l : ℕ) [Fact l.Prime]
   (hDim : ∃ d : ℕ, topologicalKrullDim T ≤ d)
   (hInv : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
 
-/-- The inherited integral zero object. Source: blueprint order 1305
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- The inherited integral zero object. -/
 instance pbcIntegralZero : HasZeroObject (PbcIntegralCategory l E T hDim hInv) :=
   letI := pbcIntegralTriangulated l E T hDim hInv
   inferInstance
 
-/-- The inherited integral integer shifts. Source: blueprint order 1305
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- The inherited integral integer shifts. -/
 instance pbcIntegralShift : HasShift (PbcIntegralCategory l E T hDim hInv) ℤ :=
   letI := pbcIntegralTriangulated l E T hDim hInv
   inferInstance
 
-/-- Additivity of the inherited integral shifts. Source: blueprint order 1305
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- Additivity of the inherited integral shifts. -/
 instance pbcIntegralShiftAdditive (n : ℤ) :
     (shiftFunctor (PbcIntegralCategory l E T hDim hInv) n).Additive :=
   letI := pbcIntegralTriangulated l E T hDim hInv
   inferInstance
 
-/-- The inherited integral distinguished triangles. Source: blueprint order 1305
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- The inherited integral distinguished triangles. -/
 instance pbcIntegralPretriangulated :
     Pretriangulated (PbcIntegralCategory l E T hDim hInv) :=
   letI := pbcIntegralTriangulated l E T hDim hInv
   inferInstance
 
-/-- Integral octahedra are inherited from the ambient derived category.
-Source: blueprint order 1305 (blueprint: prop-weil-pbc-rational-transport). -/
+/-- Integral octahedra are inherited from the ambient derived category. -/
 instance pbcIntegralIsTriangulated :
     IsTriangulated (PbcIntegralCategory l E T hDim hInv) :=
   letI := pbcIntegralTriangulated l E T hDim hInv
@@ -248,8 +226,7 @@ instance pbcIntegralIsTriangulated :
 
 set_option linter.defProp false in
 /-- The existing scalar-localization theorem, with its tensor-induced shift and precisely
-its isomorphic image triangles. Source: blueprint order 1305
-(blueprint: prop-weil-pbc-rational-transport). -/
+its isomorphic image triangles. -/
 abbrev pbcRationalTriangulationData :=
   letI := pbcIntegralTriangulated l E T hDim hInv
   ScalarLocalization.exists_triangulated_scalarLocalization
@@ -262,8 +239,7 @@ variable (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 
 /-- The lifted integer ring has the same uniformizer localization. This is the canonical
 fraction map, transported through ULift.ringEquiv, followed by the recorded fraction map
-for the original integer ring. Source: blueprint order 1306, proof step 1
-(blueprint: prop-weil-pbc-rational-transport). -/
+for the original integer ring. -/
 def pbcRationalCoefficientEquiv : Localization.Away (pbcUniformizer l E) ≃+* E :=
   (IsLocalization.ringEquivOfRingEquiv
     (R := PbcIntegralRing l E) (P := Padic.coefficientExtensionIntegers l E)
@@ -279,9 +255,7 @@ variable (T : Scheme.{u}) [IsNoetherian T]
 variable (hDim : ∃ d : ℕ, topologicalKrullDim T ≤ d)
 variable (hInv : ∀ t : T, IsUnit (l : T.presheaf.stalk t))
 
-/-- The rational Hom modules carry the actual E-action by the canonical fraction map.
-Source: blueprint order 1306, proof step 1
-(blueprint: prop-weil-pbc-rational-transport). -/
+/-- The rational Hom modules carry the actual E-action by the canonical fraction map. -/
 instance pbcRationalLinear : Linear E (PbcRationalDerivedCategory l E T hDim hInv) where
   homModule K L := Module.compHom (K ⟶ L) (pbcRationalCoefficientEquiv l E).symm.toRingHom
   smul_comp K L M a f g :=

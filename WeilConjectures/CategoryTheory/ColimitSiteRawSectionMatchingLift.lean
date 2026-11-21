@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawFiniteMatchingRefinement
 /-! # Matching lifts of raw sections
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-matching-lift).
 -/
 
 @[expose] public section
@@ -51,9 +50,7 @@ private theorem image_cover_eq
     exact Presieve.ofArrows.mk (⟨⟨_, L.map _⟩, .of hf⟩ : (R.map L).uncurry)
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-the finite-cover equalizer calculation, before applying the stage sheaf condition.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-matching-lift).
+/-- Source: Stacks Project, Sites, Tag 0A35 equalizer calculation, before applying the stage sheaf condition.
 
 Proof: Compute each left Kan extension pointwise. Its generators are sections of a
 stage inverse image together with an arrow from the evaluation object to a stage image.

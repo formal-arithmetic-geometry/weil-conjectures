@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Images
 
 /-! # Injective resolutions of the alternating exact rows
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4
-(blueprint: lem-sp-cartan-eilenberg-rows-exists).
+Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ universe u v
 compatible resolutions. This constructs rows, not their horizontal complex.
 
 Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4,
-using the prescribed-end version of the horseshoe lemma, Tag 013T
-(blueprint: lem-sp-cartan-eilenberg-rows-exists).
+using the prescribed-end version of the horseshoe lemma, Tag 013T.
 
 Proof:
 1. Write the two short exact sequences Z^p(K) -> K^p -> B^(p+1)(K) and

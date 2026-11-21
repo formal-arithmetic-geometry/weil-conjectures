@@ -10,9 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectiv
 
 /-! # Normalized derived constant-module comparison data
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6;
-Derived Categories, Tags 013K and 070J
-(blueprint: def-sfb-constant-module-derived-comparison-data).
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 07A6; Derived Categories, Tags 013K and 070J.
 
 The localization, Hom, tensor and inclusion equations retain all the canonical normalizations.
 -/
@@ -35,8 +33,7 @@ open CategoryTheory.ConstantScalarRestriction
 open CategoryTheory.Abelian
 namespace CategoryTheory.ConstantModuleDerivedProjection
 /-- The left localization equation with its ordinary functors kept abstract.
-Source: Stacks Tags 07A4 and 07A6
-(blueprint: def-sfb-constant-module-derived-comparison-data). -/
+Source: Stacks Tags 07A4 and 07A6. -/
 def LeftLocalizationCondition
     {B E F H : Type*} [Category* B] [Category* E] [Category* F] [Category* H]
     [Abelian B] [Abelian E] [Abelian F] [Abelian H]
@@ -60,8 +57,7 @@ def LeftLocalizationCondition
       DerivedCategory.Q.map ((NatIso.mapHomologicalComplex oL (.up ℤ)).hom.app P)
 
 /-- The right localization equation, with the four ordinary functors kept as parameters.
-Source: Stacks Tag 07A6
-(blueprint: def-sfb-constant-module-derived-comparison-data).
+Source: Stacks Tag 07A6.
 This shared equation keeps scalar-restriction functors abstract during specialization. -/
 def RightLocalizationCondition
     {B E F H : Type*} [Category* B] [Category* E] [Category* F] [Category* H]
@@ -100,8 +96,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   [HasDerivedCategory.{w} (Fixed J A)] [HasDerivedCategory.{w} (Fixed K A)]
 
 /-- Localization normalization of the inverse-image comparison.
-Source: Stacks Tags 07A4 and 07A6
-(blueprint: def-sfb-constant-module-derived-comparison-data). -/
+Source: Stacks Tags 07A4 and 07A6. -/
 def LeftLocalizationSquare (d : GeometricData J K A) (x : ExactData d)
     (o : OrdinaryIdentification d)
     (left : d.pullR.mapDerivedCategory ⋙ onDerived K A ≅
@@ -110,8 +105,7 @@ def LeftLocalizationSquare (d : GeometricData J K A) (x : ExactData d)
     o.left left
 
 /-- Localization normalization of the right-derived comparison.
-Source: Stacks Tag 07A6
-(blueprint: def-sfb-constant-module-derived-comparison-data). -/
+Source: Stacks Tag 07A6. -/
 def RightLocalizationSquare (d : GeometricData J K A) (x : ExactData d)
     (o : OrdinaryIdentification d)
     (right : d.pushR.rightDerivedFunctor ⋙ onDerived J A ≅
@@ -120,8 +114,7 @@ def RightLocalizationSquare (d : GeometricData J K A) (x : ExactData d)
     o.right right
 
 /-- The derived Hom, unit, counit, tensor and projection comparison package.
-Source: Stacks Tags 03EL, 07A4 and 07A6
-(blueprint: def-sfb-constant-module-derived-comparison-data). -/
+Source: Stacks Tags 03EL, 07A4 and 07A6. -/
 def DerivedIdentification (d : GeometricData J K A) (x : ExactData d)
     (o : OrdinaryIdentification d) (t : FixedTensorData d)
     (cJ : DerivedComparison.{u, v, w, w} J A)
@@ -137,24 +130,21 @@ def DerivedIdentification (d : GeometricData J K A) (x : ExactData d)
     (fun _ tensor ↦ tensor.val.1) (fun _ tensor ↦ tensor.val.2.2)
 
 /-- The normalized inverse-image comparison.
-Source: Stacks Tag 07A6
-(blueprint: def-sfb-constant-module-derived-comparison-data). -/
+Source: Stacks Tag 07A6. -/
 abbrev DerivedIdentification.left {d : GeometricData J K A} {x : ExactData d}
     {o : OrdinaryIdentification d} {t : FixedTensorData d}
     {cJ : DerivedComparison.{u, v, w, w} J A} {cK : DerivedComparison.{u, v, w, w} K A}
     (e : DerivedIdentification d x o t cJ cK) := NormalizedComparison.left e
 
 /-- The normalized direct-image comparison.
-Source: Stacks Tag 07A6
-(blueprint: def-sfb-constant-module-derived-comparison-data). -/
+Source: Stacks Tag 07A6. -/
 abbrev DerivedIdentification.right {d : GeometricData J K A} {x : ExactData d}
     {o : OrdinaryIdentification d} {t : FixedTensorData d}
     {cJ : DerivedComparison.{u, v, w, w} J A} {cK : DerivedComparison.{u, v, w, w} K A}
     (e : DerivedIdentification d x o t cJ cK) := NormalizedComparison.right e
 
 /-- The normalized tensor comparison.
-Source: Stacks Tag 07A4
-(blueprint: def-sfb-constant-module-derived-comparison-data). -/
+Source: Stacks Tag 07A4. -/
 abbrev DerivedIdentification.tensor {d : GeometricData J K A} {x : ExactData d}
     {o : OrdinaryIdentification d} {t : FixedTensorData d}
     {cJ : DerivedComparison.{u, v, w, w} J A} {cK : DerivedComparison.{u, v, w, w} K A}

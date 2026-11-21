@@ -11,7 +11,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 /-! # Collapse of a first-quadrant spectral sequence supported in row zero
 
 Source: Stacks Project, Tags 011O and 0132.
-(blueprint: lem-sc-spectral-sequence-nat-row-zero)
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ open Limits
 its abutment from the bottom row of page two.
 
 Source: Stacks Project, Tags 011O and 0132.
-(blueprint: lem-sc-spectral-sequence-nat-row-zero)
 
 Proof: Vanishing of the positive rows propagates by taking homology. Every
 bottom-row differential is zero: the outgoing differential has no target in the

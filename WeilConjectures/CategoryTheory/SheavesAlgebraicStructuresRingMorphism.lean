@@ -19,7 +19,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
 /-- Strict inverse functors over the underlying sheaf functor give the morphism criterion.
-(blueprint: lem-weil-pbc-sheaf-algebraic-structures-ring-morphism)
 Source: Stacks Project Section 00YR and Proposition 00YV, structure-preserving morphisms.
 
 Proof in words: the identity G ⋙ F makes G faithful; the identity F ⋙ G then

@@ -18,7 +18,6 @@ import Mathlib.Algebra.Category.Grp.Zero
 /-! # Surjectivity of a derived Hom comparison by effacement
 
 Source: Stacks Project, Tag 03FD, acyclic-resolution argument.
-(blueprint: lem-sbc-derived-hom-comparison-surjective).
 -/
 
 @[expose] public section
@@ -68,8 +67,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- An exact functor gives a surjective fixed-source derived Hom comparison if the
 ordinary Hom comparison is surjective and images of injectives are acyclic for Hom
 from the fixed target source.
-Source: Stacks Project, Tag 03FD, lemma-cohomology-modules-abelian-agree.
-(blueprint: lem-sbc-derived-hom-comparison-surjective).
+Source: Stacks Project, Tag 03FD.
 
 Proof: In degree zero use the fully faithful single functor and hzero. For degree
 n+1 embed the coefficient N into an injective I and form its cokernel Q. Exactness

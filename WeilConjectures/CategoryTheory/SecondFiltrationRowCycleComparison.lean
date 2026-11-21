@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 /-! # The normalized row-cycle comparison with the first quotient page
 
 Source: Stacks Project, Homology, Tag 0130, clauses 2 and 4, and Tag 012K.
-(blueprint: lem-sp-second-filtration-row-cycle-comparison).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace CategoryTheory.Functor
 /-- The diagonal inclusion of a mapped row term, using the canonical extension
 isomorphism before its total coprojection. This is a concrete map, independent
 of page differentials or choices of quotient comparisons.
-Source: Stacks Project, Tag 0130, the second-filtration graded identification.
-(blueprint: lem-sp-second-filtration-row-cycle-comparison). -/
+Source: Stacks Project, Tag 0130, the second-filtration graded identification. -/
 noncomputable def secondFiltrationRowι
     {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB} B]
@@ -144,7 +142,6 @@ quotient is row homology, normalized by the row homology projection. No page
 *differential* occurs in this statement.
 Source: Stacks Project, Tag 0130, clauses 2 and 4; Tag 012K, the first-page
 cycle/boundary formulas.
-(blueprint: lem-sp-second-filtration-row-cycle-comparison).
 
 Proof. Write J for the flipped mapped extended bicomplex. Lift its diagonal
 inclusion through L^s in degree s+r. The equality of subobjects hL and membership

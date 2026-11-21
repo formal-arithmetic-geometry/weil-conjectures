@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.Perfect.PerfectFamilyLocalizingHull
 
 /-! # Perfect families in set-generated derived subcategories
 
-Source: Neeman, Theorem 0.2; Krause, Localization theory, Theorem 7.2.1.
-(blueprint: lem-sfb-derived-localizing-perfect-family)
+Source: Neeman, Theorem 0.2.
 -/
 
 @[expose] public section
@@ -35,10 +34,7 @@ attribute [local instance] derived_hasCoproducts
 /-- A set-generated localizing subcategory of a Grothendieck derived category admits
 small, shift-closed perfect generators.
 
-Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2;
-Krause, *Localization theory for triangulated categories*, Theorem 7.2.1 and
-Section 5.1, conditions (PG1) and (PG2).
-(blueprint: lem-sfb-derived-localizing-perfect-family)
+Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2.
 
 Proof: choose an ambient essentially small replete triangulated perfect class S
 containing P, with bounded-subcoproduct factorization. Put B = S intersect Q.

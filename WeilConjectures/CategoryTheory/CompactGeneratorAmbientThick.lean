@@ -17,7 +17,6 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 /-! # Compact objects lie in the ambient thick envelope of a compact generator
 
 Source: Stacks Project, Tags 09SN, 09SP and 094A.
-(blueprint: lem-sc-compact-generator-ambient-thick).
 -/
 
 @[expose] public section
@@ -173,9 +172,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- A compact object presented by a generator telescope lies in its ambient thick envelope.
-Source: Stacks Project, Tags 09SP (lemma-factor-through) and 094A
-(lemma-commutes-with-countable-direct-sums), applied to the tower of 09SN.
-(blueprint: lem-sc-compact-generator-ambient-thick).
+Source: Stacks Project, Tags 09SP and 094A, applied to the tower of 09SN.
 
 Proof: Lift the supplied tower to A.FullSubcategory. Each attaching coproduct belongs to A by
 the triangle and the two adjacent tower terms; the final sum belongs to A by closure under

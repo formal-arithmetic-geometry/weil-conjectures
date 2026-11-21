@@ -12,9 +12,8 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # The augmented derived tower unit
 
-Source: Stacks Project, Tag 099M (`proetale.tex`, lemma-naive-completion),
-agent-written categorical refinement of the canonical completion-map construction
-(blueprint: lem-weil-pbc-augmented-derived-tower-unit).
+Source: Stacks Project, Tag 099M (`proetale.tex`),
+agent-written categorical refinement of the canonical completion-map construction.
 
 ## Main statements
 
@@ -35,8 +34,7 @@ namespace CategoryTheory
 
 /-- The universal right Kan lift and the localization lift give a normalized completion map.
 
-Source: Stacks Project, Tag 099M, canonical completion-map context; agent-written
-categorical refinement (blueprint: lem-weil-pbc-augmented-derived-tower-unit).
+Source: Stacks Project, Tag 099M, canonical completion-map context.
 Here `v ≫ whiskerRight t RF` is the natural transformation called `c` in the node.
 
 Proof:

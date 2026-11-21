@@ -11,8 +11,7 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 /-!
 # Sheafified sectionwise localization on a ringed site
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
 -/
 
 @[expose] public noncomputable section
@@ -27,15 +26,13 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
 
 /-- Sectionwise carrier of the localization, using Mathlib's actual ring localization.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 abbrev ringedSectionLocalizationCarrier
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) :=
   Localization.Away (M := O.obj.obj X) (s.val X)
 
 /-- The image of a global section is invertible after localization on the target object.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: naturality identifies the restricted section with the target section, whose image
 in its localization is a unit by `IsLocalization.Away.algebraMap_isUnit`. -/
 theorem ringedSectionLocalization_isUnit
@@ -48,8 +45,7 @@ theorem ringedSectionLocalization_isUnit
     (S := ringedSectionLocalizationCarrier O s Y) (s.val Y)
 
 /-- Restriction on sectionwise localizations, given by the localization universal property.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 def ringedSectionLocalizationMap
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (a : X ⟶ Y) :
     ringedSectionLocalizationCarrier O s X →+* ringedSectionLocalizationCarrier O s Y :=
@@ -59,8 +55,7 @@ def ringedSectionLocalizationMap
     (ringedSectionLocalization_isUnit O s a)
 
 /-- Localization restriction is semilinear over restriction of coefficients.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: the localization lift extends the restriction ring homomorphism; apply
 multiplicativity to the scalar action defined by the algebra map. -/
 theorem ringedSectionLocalizationMap_smul
@@ -72,8 +67,7 @@ theorem ringedSectionLocalizationMap_smul
     IsLocalization.Away.lift_eq, RingHom.comp_apply]
 
 /-- The linear form of localization restriction.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 def ringedSectionLocalizationLinearMap
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (a : X ⟶ Y) :
     ModuleCat.of (O.obj.obj X) (ringedSectionLocalizationCarrier O s X) ⟶
@@ -88,8 +82,7 @@ def ringedSectionLocalizationLinearMap
       map_smul' := ringedSectionLocalizationMap_smul O s a }
 
 /-- Identity compatibility of sectionwise localization restriction.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: both sides extend the identity ring map, so localization uniqueness identifies them. -/
 theorem ringedSectionLocalizationLinearMap_id
     (s : (O.obj ⋙ forget CommRingCat).sections) (X : Cᵒᵖ) :
@@ -107,8 +100,7 @@ theorem ringedSectionLocalizationLinearMap_id
   exact DFunLike.congr_fun h x
 
 /-- Composition compatibility of sectionwise localization restriction.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: both maps extend the composite restriction on the coefficient ring; uniqueness
 of localization lifts identifies them, including the restriction-of-scalars comparison. -/
 theorem ringedSectionLocalizationLinearMap_comp
@@ -134,8 +126,7 @@ theorem ringedSectionLocalizationLinearMap_comp
 
 /-- The presheaf of modules `V ↦ O(V)[1/s(V)]`, with the actual localization lifts
 as its restriction maps.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0996 and 099E. -/
 def ringedSectionLocalizationPresheaf
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     PresheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj where
@@ -146,8 +137,7 @@ def ringedSectionLocalizationPresheaf
 
 /-- Localization of the ring sheaf as a module sheaf, obtained by sheafifying the
 sectionwise localization presheaf.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0996 and 099E. -/
 def ringedSectionLocalization
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) :=
@@ -156,8 +146,7 @@ def ringedSectionLocalization
       (ringedSectionLocalizationPresheaf O s)
 
 /-- The sectionwise units form a section of the localization presheaf.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: the restriction maps are ring homomorphisms and therefore preserve one. -/
 theorem ringedSectionLocalizationPresheaf_one_natural
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (a : X ⟶ Y) :
@@ -167,8 +156,7 @@ theorem ringedSectionLocalizationPresheaf_one_natural
   exact (ringedSectionLocalizationMap O s a).map_one
 
 /-- The canonical map from the ring sheaf to its localization as a module sheaf.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 def ringedSectionLocalizationUnit
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) ⟶
@@ -183,8 +171,7 @@ def ringedSectionLocalizationUnit
           (ringedSectionLocalizationPresheaf O s))
 
 /-- Restricting a section on U gives a natural family on its slice.
-Source: Stacks Project, algebraization.tex, Tag 099E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099E.
 Proof: the commuting triangle defining a morphism in the slice and functoriality of the
 ring presheaf identify both composite restrictions. -/
 theorem ringedSliceSection_natural (U : C) (f : O.obj.obj (op U))
@@ -195,8 +182,7 @@ theorem ringedSliceSection_natural (U : C) (f : O.obj.obj (op U))
   rw [← O.obj.map_comp, ← op_comp, Over.w a.unop]
 
 /-- A section over U, viewed as a global section on the slice site.
-Source: Stacks Project, algebraization.tex, Tag 099E
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 099E. -/
 def ringedSliceSection (U : C) (f : O.obj.obj (op U)) :
     ((O.over U).obj ⋙ forget CommRingCat).sections where
   val X := O.obj.map (unop X).hom.op f

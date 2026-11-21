@@ -14,7 +14,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 # Fixed-ring module sheaves and modules over the constant ring sheaf
 
 Source: Stacks Project, Modules on Sites, Tag 03CY, and its constant-ring specialization
-on arbitrary covering-sieve topologies (auxiliary; not a blueprint node).
+on arbitrary covering-sieve topologies.
 -/
 
 @[expose] public noncomputable section
@@ -32,8 +32,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restrict scalars along the constant-ring sheafification unit, retaining the underlying
-abelian presheaf. Source: Stacks Tag 03CY, constant-ring specialization
-(auxiliary; not a blueprint node). -/
+abelian presheaf. Source: Stacks Tag 03CY, constant-ring specialization. -/
 def constantRingModuleRestrictionPresheaf
     (M : ringedSiteModules.{max u v}
       ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ))) :
@@ -50,7 +49,7 @@ def constantRingModuleRestrictionPresheaf
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction along the unit, as a functor into fixed-ring module-valued sheaves.
 The sheaf condition is reflected by forgetting module structure to abelian groups.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 def constantRingModuleRestriction :
     ringedSiteModules.{max u v}
       ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)) ⥤
@@ -68,7 +67,7 @@ def constantRingModuleRestriction :
 
 /-- The two requirements on an action on the original sections: semilinear restrictions
 and extension of the given fixed-ring action along the sheafification unit.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 def IsConstantRingModuleActionExtension (N : Sheaf J (ModuleCat.{max u v} Λ))
     (m : ∀ X : Cᵒᵖ,
       Module (((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)).obj.obj X)
@@ -86,7 +85,7 @@ def IsConstantRingModuleActionExtension (N : Sheaf J (ModuleCat.{max u v} Λ))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Regard a fixed-ring module sheaf as a module presheaf over the constant ring presheaf.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private def constantModulePresheaf (N : Sheaf J (ModuleCat.{max u v} Λ)) :
     PresheafOfModules.{max u v} ((Functor.const Cᵒᵖ).obj (RingCat.of Λ)) :=
   { obj := N.obj.obj
@@ -98,7 +97,7 @@ private def constantModulePresheaf (N : Sheaf J (ModuleCat.{max u v} Λ)) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Apply module sheafification to the identity of the underlying abelian sheaf.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private def constantModuleExtensionObj (N : Sheaf J (ModuleCat.{max u v} Λ)) :
     ringedSiteModules.{max u v}
       ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)) :=
@@ -109,7 +108,7 @@ private def constantModuleExtensionObj (N : Sheaf J (ModuleCat.{max u v} Λ)) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The sheafified action is semilinear and extends the original scalar action.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private theorem constantModuleExtensionObj_property
     (N : Sheaf J (ModuleCat.{max u v} Λ)) :
     IsConstantRingModuleActionExtension J Λ N
@@ -126,7 +125,7 @@ private theorem constantModuleExtensionObj_property
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Bundle any compatible extended action on the original abelian sheaf.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private def constantActionObj (N : Sheaf J (ModuleCat.{max u v} Λ))
     (m : ∀ X : Cᵒᵖ,
       Module (((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)).obj.obj X)
@@ -142,7 +141,7 @@ private def constantActionObj (N : Sheaf J (ModuleCat.{max u v} Λ))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Local surjectivity of ring sheafification upgrades fixed-ring linearity to linearity.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private theorem constantAction_map_smul
     (N M : Sheaf J (ModuleCat.{max u v} Λ)) (f : N ⟶ M)
     (m : ∀ X : Cᵒᵖ,
@@ -176,7 +175,7 @@ private theorem constantAction_map_smul
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The identity map is linear between any two extended actions, so they agree.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private theorem constantAction_unique
     (N : Sheaf J (ModuleCat.{max u v} Λ))
     (m n : ∀ X : Cᵒᵖ,
@@ -190,7 +189,7 @@ private theorem constantAction_unique
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Extend scalars on sections and retain the same underlying natural maps.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private def constantModuleExtension :
     Sheaf J (ModuleCat.{max u v} Λ) ⥤
       ringedSiteModules.{max u v}
@@ -206,20 +205,20 @@ private def constantModuleExtension :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Extension retains component maps and hence their addition.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private theorem constantModuleExtension_additive : (constantModuleExtension J Λ).Additive where
   map_add := by intros; ext X x; rfl
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction retains component maps and hence their addition.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private theorem constantModuleRestriction_additive :
     (constantRingModuleRestriction J Λ).Additive where
   map_add := by intros; ext X x; rfl
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The identity on sections identifies restriction after extension with the original sheaf.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private def constantModuleCounit :
     constantModuleExtension J Λ ⋙ constantRingModuleRestriction J Λ ≅ 𝟭 _ :=
   NatIso.ofComponents (fun N ↦
@@ -247,7 +246,7 @@ private def constantModuleCounit :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The original ring-sheaf action extends its own restriction of scalars.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private theorem constantModuleRestriction_property
     (M : ringedSiteModules.{max u v}
       ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ))) :
@@ -261,7 +260,7 @@ private theorem constantModuleRestriction_property
     rfl
 
 /-- Identity maps identify extension after restriction with the original module sheaf.
-Source: Stacks Tag 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks Tag 03CY. -/
 private def constantModuleUnit :
     𝟭 _ ≅ constantRingModuleRestriction J Λ ⋙ constantModuleExtension J Λ :=
   NatIso.ofComponents (fun M ↦
@@ -292,8 +291,7 @@ private def constantModuleUnit :
 sheaf and its maps. There is a unique extended action on the original sections, and every
 fixed-ring linear natural map is linear for any such extended actions.
 
-Source: Stacks Tag 03CY, constant-ring extension to arbitrary sieve sites
-(auxiliary; not a blueprint node).
+Source: Stacks Tag 03CY, constant-ring extension to arbitrary sieve sites.
 
 Proof:
 1. Fixed-ring module presheaves are modules over the constant ring presheaf. Matching tuples

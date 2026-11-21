@@ -9,10 +9,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.CategoryTheory.Presentable.Finite
 /-!
 # Realizing ind-objects of a finitely presentable full subcategory
-
-Source: blueprint main-20261015, proposition-ind-constructible-sheaves,
-`sk-prop-ind-heart-full-faithfulness.proof.md`, paragraphs (2) and the statement's image clause.
-(blueprint: det-ind-heart-full-faithfulness-realization)
 -/
 
 @[expose] public noncomputable section
@@ -348,10 +344,7 @@ namespace CategoryTheory
 /-- The ind-category of a full subcategory of finitely presentable objects realizes
 fully faithfully in the ambient category with filtered colimits.
 
-Source: blueprint main-20261015, proposition-ind-constructible-sheaves,
-`sk-prop-ind-heart-full-faithfulness.proof.md`, paragraph (2), and the essential-image
-clause of its statement; Stacks 05PW and 002F.
-(blueprint: det-ind-heart-full-faithfulness-realization)
+Source: Stacks 05PW and 002F.
 
 Proof: work directly with Mathlib ind-objects and their chosen small filtered
 presentations; the essential-smallness assumption is retained to match the source

@@ -73,27 +73,23 @@ lemma exists_fpEnvelope :
   exact f.exists_isClosedImmersion_isSeparated_locallyOfFinitePresentation
 
 /-- **The finite-presentation envelope** of a separated, quasi-compact morphism `f : X ⟶ Y`
-locally of finite type over a quasi-compact quasi-separated base (blueprint:
-`theorem-nagata-s-compactification-theorem--1`): a chosen scheme `X'` together with a closed
+locally of finite type over a quasi-compact quasi-separated base: a chosen scheme `X'` together with a closed
 immersion `f.toFpEnvelope : X ⟶ X'` and a separated, quasi-compact morphism
 `f.fpEnvelopeHom : X' ⟶ Y` of finite presentation through which `f` factors (Stacks Tag 01ZJ). -/
 noncomputable def fpEnvelope : Scheme.{u} :=
   (exists_fpEnvelope f).choose
 
 /-- The closed immersion of `X` into its finite-presentation envelope
-`AlgebraicGeometry.Scheme.Hom.fpEnvelope` (blueprint:
-`theorem-nagata-s-compactification-theorem--1`). -/
+`AlgebraicGeometry.Scheme.Hom.fpEnvelope`. -/
 noncomputable def toFpEnvelope : X ⟶ f.fpEnvelope :=
   (exists_fpEnvelope f).choose_spec.choose
 
 /-- The structure morphism of the finite-presentation envelope
-`AlgebraicGeometry.Scheme.Hom.fpEnvelope` (blueprint:
-`theorem-nagata-s-compactification-theorem--1`). -/
+`AlgebraicGeometry.Scheme.Hom.fpEnvelope`. -/
 noncomputable def fpEnvelopeHom : f.fpEnvelope ⟶ Y :=
   (exists_fpEnvelope f).choose_spec.choose_spec.choose
 
-/-- **Properties of the finite-presentation envelope** (blueprint:
-`theorem-nagata-s-compactification-theorem--1`): `X ⟶ f.fpEnvelope` is a closed immersion over `Y`,
+/-- **Properties of the finite-presentation envelope**: `X ⟶ f.fpEnvelope` is a closed immersion over `Y`,
 and `f.fpEnvelope ⟶ Y` is separated, quasi-compact and locally of finite presentation. These are
 the properties of the envelope of Stacks Tag 01ZJ. -/
 theorem fpEnvelope_spec :
@@ -123,14 +119,12 @@ variable [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [CompactSpace 
 
 /-- The compactification of the finite-presentation envelope `f.fpEnvelope ⟶ Y` used in the
 final assembly: a chosen compactification provided by
-`AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation`
-(blueprint: `theorem-nagata-s-compactification-theorem--1`). -/
+`AlgebraicGeometry.nagataCompactification_of_locallyOfFinitePresentation`. -/
 noncomputable def fpEnvelopeCompactification : Compactification f.fpEnvelopeHom :=
   have := nagataCompactification_of_locallyOfFinitePresentation f.fpEnvelopeHom
   HasCompactification.compactification f.fpEnvelopeHom
 
-/-- **The constructed Nagata compactification** (blueprint:
-`theorem-nagata-s-compactification-theorem--1`): the closed-subscheme compactification
+/-- **The constructed Nagata compactification**: the closed-subscheme compactification
 `AlgebraicGeometry.Compactification.ofIsClosedImmersion` of the closed immersion
 `X ⟶ f.fpEnvelope` inside the compactification `AlgebraicGeometry.fpEnvelopeCompactification`
 of the finite-presentation envelope. -/
@@ -138,8 +132,7 @@ noncomputable def constructedCompactification : Compactification f :=
   (Compactification.ofIsClosedImmersion f.toFpEnvelope (fpEnvelopeCompactification f)).copy
     (f.toFpEnvelope_fpEnvelopeHom).symm
 
-/-- **Components of the constructed compactification** (blueprint:
-`theorem-nagata-s-compactification-theorem--1`): the ambient scheme is the scheme-theoretic image
+/-- **Components of the constructed compactification**: the ambient scheme is the scheme-theoretic image
 of `X ⟶ f.fpEnvelope ⟶ Z`, where `Z` is the ambient scheme of the compactification of the
 envelope; the open immersion is the canonical image factor and the structure morphism is the
 restriction of the ambient structure morphism `Z ⟶ Y`. -/
@@ -153,8 +146,7 @@ theorem constructedCompactification_spec :
           (fpEnvelopeCompactification f).g :=
   ⟨rfl, rfl, rfl⟩
 
-/-- **The ambient morphism of the constructed compactification is proper** (blueprint:
-`theorem-nagata-s-compactification-theorem--1`): it is the composite of the closed immersion of a
+/-- **The ambient morphism of the constructed compactification is proper**: it is the composite of the closed immersion of a
 scheme-theoretic image with the proper structure morphism of the compactification of the
 finite-presentation envelope. -/
 theorem isProper_constructedCompactification_g : IsProper (constructedCompactification f).g := by
@@ -162,7 +154,7 @@ theorem isProper_constructedCompactification_g : IsProper (constructedCompactifi
   infer_instance
 
 /-- **The source map of the constructed compactification is a quasi-compact open immersion**
-(blueprint: `theorem-nagata-s-compactification-theorem--1`): `X ⟶ f.fpEnvelope ⟶ Z` is a
+: `X ⟶ f.fpEnvelope ⟶ Z` is a
 quasi-compact immersion, so its image factor is a quasi-compact open immersion. -/
 theorem isOpenImmersion_constructedCompactification_i :
     IsOpenImmersion (constructedCompactification f).i ∧
@@ -172,8 +164,7 @@ theorem isOpenImmersion_constructedCompactification_i :
   rw [(constructedCompactification_spec f).2.1]
   exact ⟨inferInstance, inferInstance⟩
 
-/-- **Factorization equality for the constructed compactification** (blueprint:
-`theorem-nagata-s-compactification-theorem--1`): `X ⟶ f.fpEnvelope ⟶ Z` followed by the image
+/-- **Factorization equality for the constructed compactification**: `X ⟶ f.fpEnvelope ⟶ Z` followed by the image
 inclusion is the original composite, and the structure morphism of the envelope composed with
 `X ⟶ f.fpEnvelope` is `f`. -/
 theorem constructedCompactification_i_g :
@@ -182,8 +173,7 @@ theorem constructedCompactification_i_g :
     Scheme.Hom.toImage_imageι_assoc, Category.assoc, ← (fpEnvelopeCompactification f).comm,
     f.toFpEnvelope_fpEnvelopeHom]
 
-/-- **Nagata compactification** (blueprint: `theorem-nagata-s-compactification-theorem--1`,
-`theorem-nagata-s-compactification-theorem--1`).
+/-- **Nagata compactification**.
 
 A chosen compactification of a separated, quasi-compact morphism `f` locally of finite type over
 a quasi-compact quasi-separated base. It exists since `f` has the constructed compactification

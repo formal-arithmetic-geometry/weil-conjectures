@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 /-! # Exact-functor transport of a resolution cocycle
 
 Source: Stacks Project, Derived Categories, Tag 013P; Cohomology, Tag 01FB.
-(blueprint: lem-weil-pbc-exact-functor-resolution-cocycle)
 -/
 
 @[expose] public section
@@ -68,7 +67,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The derived-category morphism equality underlying exact-functor cocycle transport.
 
 Source: Stacks Project, Derived Categories, Tag 013P; Cohomology, Tag 01FB.
-(blueprint: lem-weil-pbc-exact-functor-resolution-cocycle-hom)
 The proof extends the supplied comparison to integer complexes, applies the
 exact-functor formula for `Ext.mapExactFunctor_hom`, and simplifies the
 single-complex and shift isomorphisms. -/
@@ -199,9 +197,7 @@ theorem exactFunctor_resolution_cocycle_hom
 /-- An augmented chain comparison computes exact-functor transport of Ext,
 followed by the coefficient morphism lifted by that comparison.
 
-Source: Stacks Project, Derived Categories, Tag 013P, lemma-morphisms-lift;
-Cohomology, Tag 01FB, remark-explain-arrow.
-(blueprint: lem-weil-pbc-exact-functor-resolution-cocycle)
+Source: Stacks Project, Derived Categories, Tag 013P; Cohomology, Tag 01FB.
 
 Proof: Extend the natural-number resolutions by zero to integer cochain complexes.
 The augmentation of R is a quasi-isomorphism; exactness of L preserves it.

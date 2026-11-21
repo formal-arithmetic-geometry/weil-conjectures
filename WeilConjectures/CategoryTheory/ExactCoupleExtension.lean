@@ -18,7 +18,7 @@ import WeilConjectures.CategoryTheory.DerivedCoupleMapExactness
 
 Source: Stacks Project, Homological Algebra, Definitions 12.21.1 and 12.21.3,
 Lemma 12.21.2 and Remark 12.21.5 (Tags 011Q, 011S, 011R, 0AMJ), in the
-bigraded convention of the blueprint (blueprint: def-sp-exact-couple).
+bigraded convention of the blueprint.
 -/
 
 @[expose] public section

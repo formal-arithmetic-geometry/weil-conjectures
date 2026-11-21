@@ -11,9 +11,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Exact transport of the cyclic conjugation action
 
-Source: Stacks Project, Derived Categories, Tag 0152; the exact-functor part of
-steps 5--6 of `lem-sf-cyclic-derived-hom-exact-sequence`.
-(blueprint: lem-sf-cyclic-derived-exact-action).
+Source: Stacks Project, Derived Categories, Tag 0152.
 -/
 
 @[expose] public noncomputable section
@@ -212,11 +210,8 @@ Shift this last equality by r. Associativity and the inverse-isomorphism equatio
 now identify all four factors of the two expressions. No boundedness or resolution
 hypothesis enters this calculation.
 
-Source: the action calculation in step 7 of the parent node; the termwise structure
-equation of def-weil-endofunctor-fixed-pair-category, localized by
-situation-conventions. This algebraic expansion is agent-written;
-Stacks derived.tex, Tag 0152 supplies the surrounding canonical-boundary construction.
-(blueprint: lem-sf-cyclic-derived-exact-action). -/
+This algebraic expansion is agent-written;
+Stacks derived.tex, Tag 0152 supplies the surrounding canonical-boundary construction. -/
 theorem cyclicDerivedHomTransport_exact_action
     (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ)
     (u : CyclicDerivedHom F M N r) :

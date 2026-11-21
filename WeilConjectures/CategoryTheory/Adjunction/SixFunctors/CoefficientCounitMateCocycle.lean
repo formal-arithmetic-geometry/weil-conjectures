@@ -8,10 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Basic
 
 /-! # Objectwise coefficient counit mates
-
-Source: blueprint main-20261015, lem-coef-finite-dualizing.proof.md,
-paragraph 3, the sentence beginning “The same adjoint calculation”.
-(blueprint: lem-coef-dualizing-quotient-mates)
 -/
 
 @[expose] public section
@@ -25,10 +21,6 @@ namespace CategoryTheory.Adjunction
 /-- Counit mates satisfy the coefficient cocycle using only the four specified
 invertible comparison components. The associators and the identifications of the
 three target objects are displayed explicitly. No mate is assumed invertible.
-
-Source: blueprint main-20261015, lem-coef-finite-dualizing.proof.md,
-paragraph 3, the sentence beginning “The same adjoint calculation”.
-(blueprint: lem-coef-dualizing-quotient-mates)
 
 Proof: (1) By lem-weil-pbc-adjunction-of-natural-bijection, the inverse Hom
 bijection for aC sends w to FC(w) followed by its counit; it detects equality in
@@ -112,10 +104,6 @@ theorem coefficientCounitMate_cocycle
 /-- The identity coefficient mate is the unit identification on the right-adjoint
 object, hence is the identity after that identification. The invertibility needed
 to take the comparison inverse is transported from its prescribed unit value.
-
-Source: blueprint main-20261015, lem-coef-finite-dualizing.proof.md,
-paragraph 3, the sentence beginning “The same adjoint calculation”.
-(blueprint: lem-coef-dualizing-quotient-mates)
 
 Proof: Step 4 of the node. Transpose the unit identification uC at G(N) under a.
 The inverse Hom bijection is F of that map followed by the counit, by

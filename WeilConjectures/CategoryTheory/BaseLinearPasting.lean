@@ -11,8 +11,6 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Shift.CommShiftTwo
 
 /-! # Formal tensor pasting for base linearity
-
-Source: prop-base-linear.proof.md, paragraphs 1--4 (blueprint: lem-fd-base-linear-pasting).
 -/
 
 @[expose] public noncomputable section
@@ -70,8 +68,6 @@ private def baseLinearKernelPreparation (pc : U ⋙ P ≅ V ⋙ Q) :
 is natural in the base variable as well as in the transformed object, on exactly
 those full subcategories where the specified projection map is invertible.
 
-Source: prop-base-linear.proof.md, paragraphs 1--4
-(blueprint: lem-fd-base-linear-pasting).
 Proof: use the inverse tensorator of P, then the square compositor pc on the
 second factor. Move this factor past H by associator, braiding and inverse
 associator. Restrict the projection transformation to J and V, and invert it
@@ -103,8 +99,6 @@ theorem kernel_base_linear_of_projection
 
 /-- A shift after a base-linear functor is still base-linear when right tensor
 commutes with the shift naturally in the tensor factor.
-Source: prop-base-linear.proof.md, paragraph 4
-(blueprint: lem-fd-base-linear-shift).
 Proof: whisker the given two-variable comparison with the shift. The remaining
 comparison is the shift constraint of right tensor. Its naturality in the base
 variable is the shift compatibility of the tensor map. -/

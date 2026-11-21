@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Sites.CoveringRepresentableCoequalizer
 
 This is the representability part of the covering-generator criterion.  It is
 the intermediate step used to construct the left adjoint in the main theorem.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ coequalizer presentation with stability of corepresentability under coproducts
 and coequalizers.
 
 Source: Stacks Project, Sites, Tag 09YX, together with Tag 00WS.
-(auxiliary; not a blueprint node)
 -/
 theorem leftAdjointObjIsDefined_of_covering_corepresentable_evaluations
     {C : Type u} [SmallCategory C] {D : Type v} [SmallCategory D]

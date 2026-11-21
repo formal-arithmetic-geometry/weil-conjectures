@@ -21,9 +21,8 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 
 /-! # Raw abelian section generators
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 section presentation; Modules on Sites, Tag 03CO (abelian colimits).
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-generators).
 -/
 
 @[expose] public section
@@ -57,9 +56,8 @@ private theorem colimit_mem_subgroup {I : Type u} [SmallCategory I]
   change ((hc.desc c' x : S) : c.pt) = x at hx
   exact hx ▸ (hc.desc c' x).property
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section presentation; Modules on Sites, Tag 03CO (abelian colimits).
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-generators).
 
 Proof: First lift one pointwise Kan generator (W, s, f : Y → V_t(W)), where
 Y = V_i(U). The object and arrow set-colimit hypotheses lift f with its prescribed

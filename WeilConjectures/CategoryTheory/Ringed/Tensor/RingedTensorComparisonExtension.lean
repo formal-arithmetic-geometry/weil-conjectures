@@ -38,8 +38,7 @@ import all Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import all Mathlib.RingTheory.Flat.CategoryTheory
 /-! # Extending tensor comparisons to one K-flat representative
 
-Source: Stacks Project, Tags 06YS, 06YT and 0FPT
-(blueprint: lem-sfb-ringed-tensor-comparison-extension).
+Source: Stacks Project, Tags 06YS, 06YT and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -263,8 +262,7 @@ private theorem flatResolutionFamily :
 /-- A simultaneous K-flat comparison extends to a natural comparison whenever either factor
 is K-flat, retaining its prescribed value when both factors are K-flat.
 
-Source: Stacks Project, Tags 06YS, 06YT and 0FPT
-(blueprint: lem-sfb-ringed-tensor-comparison-extension).
+Source: Stacks Project, Tags 06YS, 06YT and 0FPT.
 
 Proof: take the reduced functorial flat resolution and its augmentation. Its complexes
 are K-flat. Tensoring the two augmentations is a quasi-isomorphism whenever either

@@ -18,7 +18,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 # Coefficient actions for scalar localization
 
 Source: Bhatt–Scholze, Proposition 6.8.14(2).
-(blueprint: def-weil-pbc-scalar-localization-coefficient-actions)
 
 These are the canonical section actions, shared by the scalar-localization telescope
 and its derived-Hom comparison.
@@ -37,8 +36,7 @@ namespace CategoryTheory
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
 /-- Image of a compatible coefficient family is again compatible.
-Source: Bhatt–Scholze, Proposition 6.8.14(2)
-(blueprint: def-weil-pbc-scalar-localization-coefficient-actions).
+Source: Bhatt–Scholze, Proposition 6.8.14(2).
 Proof: commute each restriction with the ring-sheaf morphism, and then use the
 restriction compatibility of the original family. -/
 theorem scalarLocalizationSectionsMap_mem {R S : Sheaf J CommRingCat.{u}}
@@ -54,8 +52,7 @@ theorem scalarLocalizationSectionsMap_mem {R S : Sheaf J CommRingCat.{u}}
   exact congrArg (f.hom.app V) (a.property g)
 
 /-- The map of global coefficient rings induced by a ring-sheaf morphism.
-Source: Bhatt–Scholze, Proposition 6.8.14(2)
-(blueprint: def-weil-pbc-scalar-localization-coefficient-actions). -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
 def scalarLocalizationSectionsMap {R S : Sheaf J CommRingCat.{u}} (f : R ⟶ S) :
     RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat) →+*
       RingCat.sectionsSubring (S.obj ⋙ forget₂ CommRingCat RingCat) :=
@@ -66,8 +63,7 @@ def scalarLocalizationSectionsMap {R S : Sheaf J CommRingCat.{u}} (f : R ⟶ S) 
     (scalarLocalizationSectionsMap_mem f)
 
 /-- The usual coefficient action on module-sheaf Homs, by restriction from global sections.
-Source: Bhatt–Scholze, Proposition 6.8.14(2)
-(blueprint: def-weil-pbc-scalar-localization-coefficient-actions). -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
 @[instance_reducible]
 def scalarLocalizationCoefficientLinear (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})
@@ -82,8 +78,7 @@ def scalarLocalizationCoefficientLinear (A : Type v) [CommRing A]
     comp_smul := fun M N P f r g ↦ Linear.comp_smul M N P f (a r) g }
 
 /-- The localized coefficient is a unit in the ring of sections of R[1/t].
-Source: Bhatt–Scholze, Proposition 6.8.14(2)
-(blueprint: def-weil-pbc-scalar-localization-coefficient-actions).
+Source: Bhatt–Scholze, Proposition 6.8.14(2).
 Proof: the sectionwise image of t is a unit by localization. Its inverses commute
 with restriction by uniqueness of inverses. Apply sheafification to this section
 and its inverse; their products remain one, also for the zero ring and empty site. -/
@@ -118,8 +113,7 @@ theorem scalarLocalizationSections_isUnit (A : Type v) [CommRing A]
   exact IsUnit.of_mul_eq_one d (by ext U; exact hc U)
 
 /-- The canonical A[1/t]-algebra structure of the localized ring sheaf.
-Source: Bhatt–Scholze, Proposition 6.8.14(2)
-(blueprint: def-weil-pbc-scalar-localization-coefficient-actions). -/
+Source: Bhatt–Scholze, Proposition 6.8.14(2). -/
 def scalarLocalizationCoefficientMap (A : Type v) [CommRing A]
     (R : Sheaf J CommRingCat.{u})
     (a : A →+* RingCat.sectionsSubring (R.obj ⋙ forget₂ CommRingCat RingCat)) (t : A) :

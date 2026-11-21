@@ -13,9 +13,8 @@ import Mathlib.CategoryTheory.Shift.Adjunction
 
 /-! # Rotating, mapping and prepending zero to a generator tower
 
-Source: Stacks Project, derived.tex, lemma-write-as-colimit (Tag 09SN), and
-duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G.
-(blueprint: lem-sc-generator-tower-normalize).
+Source: Stacks Project, derived.tex (Tag 09SN), and
+duality.tex, proof of (3), Section Tag 0E4G.
 -/
 
 @[expose] public section
@@ -61,9 +60,8 @@ private noncomputable def mapped_sum_cofan
 
 /-- Normalize an already constructed telescope under an exact coproduct-preserving
 functor. This assertion uses no compactness or generation assumption.
-Source: Stacks Project, derived.tex, lemma-write-as-colimit (Tag 09SN), and
-duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G.
-(blueprint: lem-sc-generator-tower-normalize).
+Source: Stacks Project, derived.tex (Tag 09SN), and
+duality.tex, proof of (3), Section Tag 0E4G.
 
 Proof: Rotate Z_n -> A_n -> A_(n+1) -> Z_n[1] once. Shifts preserve coproducts,
 so Z_n[1] is a coproduct of the shifts e[m+1]. Prepend the zero object: set

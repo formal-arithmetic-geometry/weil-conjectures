@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 /-!
 # Exact restriction and extension by zero on a localized ringed site
 
-Source: Stacks Project, Modules on Sites, Section 03DH and Lemmas 03DI, 03DJ
-(blueprint: lem-pur-site-restriction-module-adjunction-exact).
+Source: Stacks Project, Modules on Sites, Section 03DH and Lemmas 03DI, 03DJ.
 -/
 
 @[expose] public section
@@ -241,8 +240,7 @@ set_option backward.isDefEq.respectTransparency false in
 extension-by-zero presheaf is exact and left adjoint to restriction. The adjunction
 contains the Hom equivalence, natural in both module sheaves.
 
-Source: Stacks Project, Modules on Sites, Section 03DH and Lemmas 03DI, 03DJ
-(blueprint: lem-pur-site-restriction-module-adjunction-exact).
+Source: Stacks Project, Modules on Sites, Section 03DH and Lemmas 03DI, 03DJ.
 
 Proof:
 1. Restriction keeps the section modules and their restriction maps, by

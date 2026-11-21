@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.EverywhereDefinedDerivedFu
 /-!
 # Everywhere defined derived functors of an adjoint pair
 
-Source: Stacks Project, Derived Categories, Lemma 09T5, Lemma 0DVC and Definition 05S9
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Derived Categories, Lemma 09T5, Lemma 0DVC and Definition 05S9.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Adjunction
 
-/-- Stacks Project, Lemma 09T5, with "defined at" in the sense of Definition 05S9
-(auxiliary; not a blueprint node).
+/-- Stacks Project, Lemma 09T5, with "defined at" in the sense of Definition 05S9.
 
 The hypotheses state that the quasi-isomorphism denominator ind-diagram and pro-diagram
 are essentially constant with some value (def-pc-essentially-constant-ind-diagram,

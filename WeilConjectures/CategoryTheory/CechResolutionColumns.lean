@@ -12,8 +12,6 @@ import WeilConjectures.CategoryTheory.InjectiveResolutionCohomologyPresheaf
 
 /-!
 # Column cohomology of the Čech resolution double complex
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2.
 -/
 
 @[expose] public section
@@ -33,8 +31,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 /-- The column cohomology, including its horizontal differential, is the Čech
 complex of the cohomology presheaf.
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2, and
-lem-sc-cech-spectral, Step 1. Proof: in horizontal degree p the vertical complex is the product,
+Proof: in horizontal degree p the vertical complex is the product,
 over tuples of p+1 covering indices, of the complexes I(V). The sheafification/free-abelian
 Yoneda adjunction identifies Hom from the free abelian sheaf on V with evaluation
 at V. Computing Ext by the injective resolution therefore identifies H^q(I(V))
@@ -44,8 +41,7 @@ by choice. Thus cohomology commutes with this product. Apply these natural
 isomorphisms at every p. Their naturality for the projections omitting an index
 makes them commute with every coface map, hence with the alternating Čech
 differential. They form the claimed isomorphism of complexes. No covering
-hypothesis is needed for this column calculation.
-(blueprint: lem-sc-cech-resolution-columns) -/
+hypothesis is needed for this column calculation. -/
 theorem Sheaf.cechResolutionDoubleComplex_columns
     {F : Sheaf J AddCommGrpCat.{v}} (I : InjectiveResolution F) (X : C)
     {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (q : ℕ) :

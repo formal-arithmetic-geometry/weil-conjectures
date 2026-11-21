@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-! # Lax tensor comparison on matching cyclic cokernels
 
 Source: Stacks 03EK (balanced tensor products) and 099N(5) (finite reductions).
-(blueprint: lem-sfb-lax-tensor-cyclic-cokernel).
 -/
 
 @[expose] public section
@@ -25,9 +24,7 @@ namespace CategoryTheory
 /-- A lax additive functor's tensor comparison is invertible on a cyclic quotient
 when both coefficient units present that quotient by the same scalar on every image.
 
-Source: Stacks 03EK and 099N(5); finite-reduction argument of
-`det-lem-int-tensor-pullback.proof.md`.
-(blueprint: lem-sfb-lax-tensor-cyclic-cokernel).
+Source: Stacks 03EK and 099N(5).
 
 Proof: tensor the source cokernel presentation by M. Since tensor preserves finite
 colimits, after identifying M tensor the unit with M this is the cokernel of its

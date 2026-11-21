@@ -18,7 +18,6 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 # Acyclicity of finite-prefix towers
 
 Source: Stacks Project, Tag 07KW, Lemma 15.88.1 (3).
-(blueprint: lem-pc-roos-prefix-acyclic).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ open Limits
 /-- A finite-prefix tower is acyclic for inverse limits.
 
 Source: Stacks Project, Tag 07KW, Lemma 15.88.1 (3).
-(blueprint: lem-pc-roos-prefix-acyclic).
 
 Proof: `roosPrefix_transition_surjective` proves that the transition from prefix
 n+1+s to n+s is restriction and is surjective by extension by zero. Embed the tower

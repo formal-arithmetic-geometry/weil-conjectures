@@ -8,9 +8,6 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Composition comparisons determined by smooth counits
-
-Source: the composite-adjunction argument in the current blueprint proof of
-proposition-compatibility-purity-composition (blueprint: lem-pur-composition-counit-comparison).
 -/
 
 @[expose] public section
@@ -22,9 +19,6 @@ namespace CategoryTheory.Adjunction
 
 /-- A transitivity equation for the explicit counits implies composition of their
 counit-preserving comparisons with any specified right adjoints.
-
-Source: sk-prop-sp-composition.proof.md, tensor maps and the composite adjunction
-(blueprint: lem-pur-composition-counit-comparison).
 
 Proof. Transpose into the specified composite right adjoint. Naturality of the
 first explicit counit moves the second comparison through it. The defining counit

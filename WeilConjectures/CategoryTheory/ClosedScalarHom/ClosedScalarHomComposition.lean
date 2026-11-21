@@ -28,7 +28,7 @@ variable {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B]
 
 include hμ in
 /-- The five-Hom comparison for a composite tensor functor is the composite comparison.
-Source: Stacks 07A6 and 0D6D (blueprint: lem-sfb-closed-scalar-hom-composition).
+Source: Stacks 07A6 and 0D6D.
 Proof: test with the source identity and expand the five bijections. The hom equivalence
 of a composite adjunction is the composite hom equivalence. Naturality moves the first
 scalar counit through the second tensor comparison; the two middle closed transposes

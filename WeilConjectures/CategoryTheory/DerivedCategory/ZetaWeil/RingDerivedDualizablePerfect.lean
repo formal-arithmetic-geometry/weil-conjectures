@@ -24,8 +24,7 @@ set_option linter.privateModule false
 /-!
 # Dualizable derived modules over an arbitrary commutative ring
 
-Source: Stacks Project, More on Algebra, Tag 0FNS, `lemma-have-dual-derived`
-(blueprint: lem-zl-ring-derived-dualizable-perfect).
+Source: Stacks Project, More on Algebra, Tag 0FNS.
 
 The tensor is the existing K-flat derived monoidal tensor, obtained by deriving the
 signed direct-sum total tensor `CochainComplex.mapBifunctor` of

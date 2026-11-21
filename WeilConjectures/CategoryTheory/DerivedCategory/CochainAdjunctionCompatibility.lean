@@ -25,8 +25,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
 
 /-- A normalized Hom formula on homotopy representatives gives the corresponding formula
-on complexes, with the prescribed cochain comparison. Source: Stacks 0FND
-(auxiliary; not a blueprint node).
+on complexes, with the prescribed cochain comparison. Source: Stacks 0FND.
 Proof: apply the homotopy formula to the images of the two complexes and the chain map.
 The homotopy adjunction unit on a complex is the quotient of the termwise adjunction unit,
 so the strict transposes agree after quotienting. The comparison between Qh and Q has

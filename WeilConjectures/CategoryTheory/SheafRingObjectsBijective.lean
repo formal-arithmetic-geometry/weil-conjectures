@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.SheafRingObjectsInjective
 /-!
 # Recovering ring sheaves from internal ring objects
 
-Source: Stacks Project, Section 00YR and Proposition 00YV,
-`proposition-functoriality-algebraic-structures-topoi`.
+Source: Stacks Project, Section 00YR and Proposition 00YV.
 -/
 
 @[expose] public section
@@ -26,7 +25,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
-/-- (blueprint: lem-weil-pbc-sheaf-ring-objects-bijective) -/
+/--  -/
 theorem sheafRingObjects_bijective
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (F : Sheaf J CommRingCat.{max u v w} ⥤

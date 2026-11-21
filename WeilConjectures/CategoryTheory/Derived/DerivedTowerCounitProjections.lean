@@ -21,8 +21,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Localization.DerivabilityStructure
 /-!
 # Derived constant towers and the actual inverse-limit counit
 
-Source: Stacks Project, Derived Categories, Tags 09T5 and 0FND;
-Cohomology on Sites, Tag 0941 (blueprint: lem-coef-derived-tower-counit-projections).
+Source: Stacks Project, Derived Categories, Tags 09T5 and 0FND; Cohomology on Sites, Tag 0941.
 -/
 
 @[expose] public noncomputable section
@@ -79,14 +78,14 @@ private theorem monicKInjectiveResolutions
 variable (A : Type u) [Category.{v} A] [Abelian A]
 
 /-- Additivity of constant strict towers, with level zero denoting level one.
-Source: Stacks 0941 (blueprint: lem-coef-derived-tower-counit-projections). -/
+Source: Stacks 0941. -/
 instance strictTowerConstantAdditive : (Functor.const ℕᵒᵖ : A ⥤ ℕᵒᵖ ⥤ A).Additive where
   map_add := rfl
 
 variable [HasLimitsOfShape ℕᵒᵖ A]
 
 /-- Inverse limit is additive because it preserves binary products and zero morphisms.
-Source: Stacks 0941 (blueprint: lem-coef-derived-tower-counit-projections). -/
+Source: Stacks 0941. -/
 instance strictTowerLimitAdditive : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive :=
   Functor.additive_of_preserves_binary_products _
 
@@ -94,7 +93,7 @@ variable [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wT} (ℕᵒᵖ ⥤ A)]
 
 /-- The derived constant/limit adjunction, normalized by its actual tower projections.
 Source: Stacks Project, Derived Categories, Tags 09T5 and 0FND; Cohomology on Sites,
-Tag 0941 (blueprint: lem-coef-derived-tower-counit-projections).
+Tag 0941.
 
 Here `n : ℕ` denotes the paper's level `n + 1`. The transformation `κ` is the total
 right-derived comparison on complexes. Its universal property is `hRL`, and `hκ`
@@ -109,13 +108,12 @@ naturality in the derived tower and independence of the resolution.
 Proof plan:
 1. The limit universal property gives `constLimAdj`, whose counit is the family
    of limit projections. Constants and evaluations are exact by levelwise
-   abelianity (lem-weil-tower-category-levelwise-abelian). Apply the exact-functor
-   factorization (situation-conventions) and the termwise
-   homotopy adjunction (lem-weil-pbc-termwise-adjunction-homotopy).
+   abelianity. Apply the exact-functor
+   factorization and the termwise
+   homotopy adjunction.
 2. The exact constant left adjoint shows that the termwise limit of a K-injective
-   tower is K-injective (lem-weil-pbc-right-adjoint-preserves-kinjective). The
-   total-derived comparison is invertible on those towers
-   (lem-weil-pbc-kinjective-total-derived). For q : M → I the comparison is
+   tower is K-injective. The
+   total-derived comparison is invertible on those towers. For q : M → I the comparison is
    rho_q = RL(Qq) followed by the inverse of κ_I.
 3. Compute Hom into I and LI in the homotopy categories by
    lem-weil-pbc-kinjective-hom-derived. The ordinary adjunction then gives the

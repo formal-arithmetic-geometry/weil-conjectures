@@ -206,10 +206,6 @@ end SingleHomotopyAux
 
 /-- Homotopy maps out of degree-zero single objects are homology of the degreewise
 Hom presheaf.
-Source: Mathlib HomComplexCohomology.lean, `CohomologyClass.homAddEquiv` and
-`leftHomologyData`; HomComplexSingle.lean, `Cochain.fromSingleEquiv`; and
-ShortComplex/PreservesHomology.lean, `homologyMap_mapNatTrans`.
-(blueprint: lem-weil-pbc-single-homotopy-presheaf-homology)
 
 Proof: At U, cochains from A(U)[0] to L are precisely maps A(U) -> L^n.
 The equivalence `Cochain.fromSingleEquiv` commutes with the differentials:

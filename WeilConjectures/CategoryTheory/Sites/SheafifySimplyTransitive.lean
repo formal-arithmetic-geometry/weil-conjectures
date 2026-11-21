@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Category.Grp.Basic
 
 /-! # Simple transitivity after sheafification
 
-Source: Stacks Project, Tags 03AH and 00WH; local representations and sheaf gluing.
-(blueprint: lem-sc-sheafify-simply-transitive).
+Source: Stacks Project, Tags 03AH and 00WH.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [Presheaf.IsLocallySurjective J (toSheafify J P)]
 
 /-- Simple transitivity passes to sheafification.
-Source: Stacks Project, Tags 03AH and 00WH; local bijectivity and sheaf gluing.
-(blueprint: lem-sc-sheafify-simply-transitive)
+Source: Stacks Project, Tags 03AH and 00WH.
 
 Proof: Represent a section of the associated sheaf locally in P. Equality of two
 translations of this section becomes equality in P on a refinement, by local

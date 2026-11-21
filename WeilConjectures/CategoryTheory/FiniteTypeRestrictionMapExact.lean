@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-! # Exact further restriction of module sheaves between slices
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3), localization step.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace SheafOfModules
 
 /-- Further restriction between slices of a small ringed site is exact.
 Source: Stacks Project, Modules on Sites, Tag 093U (3), relocalization step.
-(auxiliary; not a blueprint node).
 
 Proof: On underlying abelian sheaves this is precomposition by the functor between the
 slice categories. This functor is both continuous and cocontinuous for the slice

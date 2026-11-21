@@ -24,7 +24,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
 /-- Source: Stacks Project Section 00YR, abelian sheaves as quadruples before Proposition 00YV.
-(blueprint: lem-weil-pbc-sheaf-abelian-forward)
 Proof: retain the underlying set-valued sheaf and use pointwise addition, zero, and
 negation as the internal multiplication, unit, and inverse. Restriction maps preserve
 these operations, hence they are natural transformations. The group identities and

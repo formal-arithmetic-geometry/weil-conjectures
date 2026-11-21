@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.PointSystemRefinementChainExists
 /-!
 # Simultaneous refinement of an inverse system on a site
 
-Source: Stacks Project, Sites, Tag 00YP, Lemma `lemma-refine-all-at-once`
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP, Lemma.
 
 An inverse system is encoded covariantly in the opposite category. An order embedding
 identifies the old index set with a subset carrying the induced order; equality of the
@@ -30,8 +29,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 00YP, Lemma `lemma-refine-all-at-once`
-(auxiliary; not a blueprint node).
+/-- Source: Stacks Project, Sites, Tag 00YP, Lemma.
 For a sheaf and two distinct germs in a directed inverse system, there is a refinement
 preserving distinctness and lifting every original germ of a representable functor through
 some member of every finite covering. `uliftYoneda` only places Hom sets in the common set

@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.SecondFiltrationSignedFirstPage
 
 /-! # Signed row identifications for the second-filtration spectral sequence
 
-Source: Stacks Project, Tag 0130; blueprint thm-sp-if-e1, proof paragraph 1.
-(blueprint: lem-sp-second-filtration-row-cohomology).
+Source: Stacks Project, Tag 0130.
 -/
 
 @[expose] public section
@@ -48,8 +47,7 @@ private theorem gradedPiece_isZero_of_complexStep_eq_bot
 /-- Row cohomology, including the differential, for the second-degree filtration.
 The differential retains the totalization sign. No injectivity or augmentation
 is assumed, and no convergence is claimed.
-Source: Stacks Project, Tag 0130; blueprint thm-sp-if-e1, proof paragraph 1.
-(blueprint: lem-sp-second-filtration-row-cohomology).
+Source: Stacks Project, Tag 0130.
 
 Proof.
 Build the spectral sequence of the filtration by the differential-object self-map

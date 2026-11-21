@@ -75,7 +75,7 @@ theorem map_curry_comp_unitDualComparison {X Y : C} {X' Y' : D} (b : X ⊗ Y ⟶
     whisker_exchange_assoc, μ_natural_right_assoc, ← G.map_comp_assoc, ← uncurry_eq,
     uncurry_curry]
 
-/-- Blueprint `theorem-poincare-duality--9`: Finite reduction of the Poincaré pairing, formal form.
+/-- Finite reduction of the Poincaré pairing, formal form.
 
 In the situation of `CategoryTheory.MonoidalClosed.map_curry_comp_unitDualComparison`, if both
 pairings are perfect, the square of the inverses of their adjoints commutes:

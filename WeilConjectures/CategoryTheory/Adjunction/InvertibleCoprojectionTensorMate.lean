@@ -106,8 +106,6 @@ private theorem tensorCoprojection_inverse
 
 /-- The inverse of the invertible-factor right-adjoint comparison is the canonical
 tensor mate. The projection formula is assumed natural, associative, and right unital.
-Source: current blueprint sk-lem-coprojection, displayed Hom calculation
-(blueprint: lem-pur-invertible-coprojection-tensor-mate).
 Proof: transpose the comparison under the composite tensor adjunction. Its counit is
 evaluation followed by the right unitor. Naturality of the projection formula moves
 the transpose across projection at the inverse factor. Associativity, naturality at

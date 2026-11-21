@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Boundary projections with integer indexing
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4
-(blueprint: def-sp-cartan-eilenberg-boundary-projection).
+Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4.
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ namespace CategoryTheory
 universe u v
 
 /-- The image factor of the differential, indexed by its target degree.
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4
-(blueprint: def-sp-cartan-eilenberg-boundary-projection). -/
+Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4. -/
 noncomputable def cartanEilenbergBoundaryProjection
     {B : Type u} [Category.{v} B] [Abelian B] (K : CochainComplex B ℤ) (p : ℤ) :
     K.X p ⟶ image (K.d ((p + 1) - 1) (p + 1)) :=
@@ -33,8 +31,7 @@ noncomputable def cartanEilenbergBoundaryProjection
     factorThruImage (K.d ((p + 1) - 1) (p + 1))
 
 /-- The boundary projection factors the differential.
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4
-(blueprint: def-sp-cartan-eilenberg-boundary-projection). -/
+Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4. -/
 @[reassoc (attr := simp)]
 theorem cartanEilenbergBoundaryProjection_fac
     {B : Type u} [Category.{v} B] [Abelian B] (K : CochainComplex B ℤ) (p : ℤ) :
@@ -43,8 +40,7 @@ theorem cartanEilenbergBoundaryProjection_fac
   simp [cartanEilenbergBoundaryProjection]
 
 /-- The boundary inclusion factors through cycles.
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4
-(blueprint: def-sp-cartan-eilenberg-boundary-projection). -/
+Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4. -/
 noncomputable def cartanEilenbergBoundaryInclusion
     {B : Type u} [Category.{v} B] [Abelian B] (K : CochainComplex B ℤ) (p : ℤ) :
     image (K.d (p - 1) p) ⟶ K.cycles p :=
@@ -53,8 +49,7 @@ noncomputable def cartanEilenbergBoundaryInclusion
     simp)
 
 /-- The boundary-to-cycle map gives the image inclusion after including cycles.
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4
-(blueprint: def-sp-cartan-eilenberg-boundary-projection). -/
+Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--4. -/
 @[reassoc (attr := simp)]
 theorem cartanEilenbergBoundaryInclusion_fac
     {B : Type u} [Category.{v} B] [Abelian B] (K : CochainComplex B ℤ) (p : ℤ) :

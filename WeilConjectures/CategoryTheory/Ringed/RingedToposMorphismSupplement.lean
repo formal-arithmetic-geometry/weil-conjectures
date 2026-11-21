@@ -14,8 +14,7 @@ public import WeilConjectures.CategoryTheory.RingedToposMorphism
 /-!
 # Ringed-topos morphisms with their induced module direct images
 
-Source: Stacks Project, Sites, Definition 00XA; Modules on Sites, morphisms of ringed
-topoi and pushforward of modules (blueprint: def-weil-pbc-ringed-topos-morphism).
+Source: Stacks Project, Sites, Definition 00XA.
 
 The structural map is written on inverse-image underlying sheaves. Ring operations and
 module actions are specified using generalized elements. This avoids requiring a morphism
@@ -48,8 +47,7 @@ namespace CategoryTheory
 
 /-- A geometric morphism with a structural ring map and the induced direct image on modules.
 
-Source: Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules
-(blueprint: def-weil-pbc-ringed-topos-morphism).
+Source: Stacks Project, Sites, Definition 00XA, and Modules on Sites, pushforward of modules.
 
 The ring identities test every generalized element of the target topos. Left exactness
 identifies the inverse image of products and the terminal object, so these are precisely

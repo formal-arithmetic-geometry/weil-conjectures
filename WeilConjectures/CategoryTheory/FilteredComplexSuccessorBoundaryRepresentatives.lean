@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Abelian.Refinements
 # Representative covers of successor filtered boundaries
 
 Source: Stacks Project, Homology, Tag 012K, displayed boundary and differential formulas.
-(blueprint: lem-sp-filtered-complex-successor-boundary-representatives).
 -/
 
 @[expose] public section
@@ -81,7 +80,6 @@ private theorem graded_boundary_image (K : CochainComplex C ℤ)
 
 /-- Successor boundaries admit an epimorphic cover by actual incoming cycle representatives.
 Source: Stacks Project, Homology, Tag 012K, displayed boundary and differential formulas.
-(blueprint: lem-sp-filtered-complex-successor-boundary-representatives).
 
 Proof. Write j = (p,q), n = p+q. The relation gives i = (p-r,q+r-1), of total
 degree n-1. Put U = F^p K^n intersect d(F^(p-r) K^(n-1)). Pull U back to F^p K^n.

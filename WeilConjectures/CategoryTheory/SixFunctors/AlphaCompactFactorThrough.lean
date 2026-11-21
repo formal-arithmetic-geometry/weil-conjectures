@@ -12,9 +12,6 @@ import WeilConjectures.CategoryTheory.IsAlphaCompact.AlphaCompactObjectPropertie
 import WeilConjectures.CategoryTheory.IsAlphaCompact.AlphaCompactExtensions
 
 /-! # Factoring alpha-compact objects through a bounded localizing hull
-
-Source: Krause (2001), Lemma 5, page 125.
-(blueprint: lem-sfb-alpha-compact-factor-through)
 -/
 
 @[expose] public section
@@ -35,8 +32,6 @@ private def ReceivesThrough (S H : ObjectProperty C) (Y : C) : Prop :=
 
 /-- Alpha-compact objects are retracts of objects of any triangulated bounded-sum
 hull contained in the canonical class and containing localizing generators.
-Source: Krause (2001), Lemma 5, page 125, the factor-through subcategory.
-(blueprint: lem-sfb-alpha-compact-factor-through)
 
 Proof: let R be the objects receiving only maps from alpha-compact objects which
 factor through H. It contains H and is invariant under isomorphism and shifts.

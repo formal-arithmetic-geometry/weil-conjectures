@@ -11,9 +11,7 @@ import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 
 /-! # Equivalence transport for invertible endofunctor fixed pairs
 
-Source: blueprint main-20261015, `sec-fourier-transform/sk-def-trace/def-fd-trace-function.md`,
-coefficient-category transport; Stacks Project, Categories, Tag 02C3.
-(blueprint: lem-fd-fixed-pair-equivalence-transport)
+Source: Stacks Project, Categories, Tag 02C3.
 -/
 
 @[expose] public section
@@ -31,9 +29,7 @@ The Hom bijection is the underlying equivalence's map restricted to intertwining
 Every prescribed carrier isomorphism lifts after uniquely transporting the structure
 and its inverse. No equivalence hypothesis is imposed on either endofunctor.
 
-Source: blueprint main-20261015, `sec-fourier-transform/sk-def-trace/def-fd-trace-function.md`,
-final coefficient-category sentence, auxiliary transport argument; Stacks Tag 02C3.
-(blueprint: lem-fd-fixed-pair-equivalence-transport)
+Source: Stacks Tag 02C3.
 
 Proof plan:
 1. Apply lem-sf-quasi-inverse-hom-bijection (`J.fullyFaithfulFunctor.map_bijective`).

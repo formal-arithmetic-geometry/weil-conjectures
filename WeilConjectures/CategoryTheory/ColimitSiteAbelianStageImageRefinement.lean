@@ -64,7 +64,6 @@ private theorem exists_transition
 /-- Finite additive expressions in stage images refine to a single forward stage.
 Source: Stacks Project, Sites, Tag 0A35, independence of presentations and the
 restriction construction, together with Tag 04AX on filtered category colimits.
-(blueprint: lem-weil-pbc-colimit-site-abelian-stage-image-refinement).
 
 Proof: First consider a generator: a section at W of the pullback along i to j,
 restricted by r : V i U to V j W. Represent r in the arrow colimit. Move its

@@ -25,7 +25,7 @@ variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
   {G : A ⥤ C} {H : B ⥤ D}
 
 /-- The mate is precisely the map intertwining the two adjunction transposes.
-Source: Stacks 0FND (auxiliary; not a blueprint node).
+Source: Stacks 0FND.
 Proof: expand both Hom transposes using the units. The unit-mate identity identifies
 the initial two factors; naturality of the right square moves f past it. Functoriality
 then combines the remaining unit and restricted f into the other Hom transpose. -/

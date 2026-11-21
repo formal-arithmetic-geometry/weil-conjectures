@@ -24,7 +24,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictSc
 /-! # Constant realization preserves universal coefficient normalization
 
 Source: Stacks Project, Tags 06YY, 07A4 and 0G7E.
-(blueprint: lem-weil-pbc-constant-derived-normalization-universal).
 -/
 
 @[expose] public noncomputable section
@@ -440,7 +439,6 @@ This is a scalar-extension property of constants on a site, independently of cov
 local systems, Isom sheaves or their evaluations.
 
 Source: Stacks Project, Tags 06YY, 07A4 and 0G7E.
-(blueprint: lem-weil-pbc-constant-derived-normalization-universal).
 
 Proof: compare fixed-ring module sheaves with modules over the constant ring sheaf.
 Restriction along the canonical ring isomorphism and the constant-ring module

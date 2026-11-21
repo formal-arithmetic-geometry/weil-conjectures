@@ -16,10 +16,7 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 
 /-! # Unit-normalized reflection of coefficient squares
 
-Source: literature/blueprint/main-20261015/blueprint/sec-proper-base-change/
-sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md, coherent comparisons;
-Stacks Tags 0037, 07A7, 0DV0, 0E46 and 0E47.
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares).
+Source: Stacks Tags 0037, 07A7, 0DV0, 0E46 and 0E47.
 
 The structures below only package the specified reflective subcategories,
 adjunctions and coefficient squares. All constructions use Mathlib's full
@@ -43,9 +40,7 @@ universe u₀ v₀ u₁ v₁ u₂ v₂ u₃ v₃ u₄ v₄ u₅ v₅
 
 /-- The specified full reflective, isomorphism-closed subcategory of local objects.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 structure Context (C : Type u₀) [Category.{v₀} C] where
   /-- The local objects. -/
   localObjects : ObjectProperty C
@@ -71,17 +66,13 @@ private theorem mate_formula {L : C₀ ⥤ C₁} {R : C₁ ⥤ C₀}
 
 /-- The specified reflector followed by the inclusion, denoted Λ in the node.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Context.completion (A : Context C₀) : C₀ ⥤ C₀ :=
   reflector A.localObjects.ι ⋙ A.localObjects.ι
 
 /-- The unit η of the specified reflection.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Context.unit (A : Context C₀) : 𝟭 C₀ ⟶ A.completion :=
   (reflectorAdjunction A.localObjects.ι).unit
 
@@ -95,9 +86,7 @@ private theorem cancel_unit (A : Context C₀) (X : C₀)
 
 /-- An adjunction with a local-object-preserving right adjoint and normalized γ.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 structure Arrow (A : Context C₀) (B : Context C₁) where
   /-- The specified left adjoint. -/
   F : C₀ ⥤ C₁
@@ -114,9 +103,7 @@ structure Arrow (A : Context C₀) (B : Context C₁) where
 
 /-- Coefficient change with its specified unit-normalized comparison κ.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 structure Change (A : Context C₀) (B : Context C₁) where
   /-- The ambient coefficient functor. -/
   F : C₀ ⥤ C₁
@@ -130,9 +117,7 @@ structure Change (A : Context C₀) (B : Context C₁) where
 Proof: step 1. Locality is equivalent to invertibility of the unit. The
 normalized κ expresses the target unit as a composite of isomorphisms.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Change.preserves {A : Context C₀} {B : Context C₁} (c : Change A B)
     (X : C₀) (hX : A.localObjects X) : B.localObjects (c.F.obj X) := by
   have hη : IsIso (A.unit.app X) :=
@@ -145,27 +130,21 @@ theorem Change.preserves {A : Context C₀} {B : Context C₁} (c : Change A B)
 
 /-- The restriction of a coefficient change, using its proved locality clause.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Change.restrict {A : Context C₀} {B : Context C₁} (c : Change A B) :
     A.localObjects.FullSubcategory ⥤ B.localObjects.FullSubcategory :=
   B.localObjects.lift (A.localObjects.ι ⋙ c.F) (fun X ↦ c.preserves X.obj X.property)
 
 /-- The left adjoint on local inputs, followed by reflection in the target.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 abbrev Arrow.left {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
     A.localObjects.FullSubcategory ⥤ B.localObjects.FullSubcategory :=
   A.localObjects.ι ⋙ a.F ⋙ reflector B.localObjects.ι
 
 /-- The restriction of the right adjoint to the full local subcategories.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 abbrev Arrow.right {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
     B.localObjects.FullSubcategory ⥤ A.localObjects.FullSubcategory :=
   A.localObjects.lift (B.localObjects.ι ⋙ a.G)
@@ -179,9 +158,7 @@ into a local target makes the middle operation bijective. Naturality follows
 from naturality of the unit and the original Hom bijection. Apply
 Adjunction.mkOfHomEquiv (the natural-bijection dependency).
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.adjunction_exists {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
     ∃ h : a.left ⊣ a.right, ∀ (X : A.localObjects.FullSubcategory)
       (Y : B.localObjects.FullSubcategory) (t : a.left.obj X ⟶ Y),
@@ -202,9 +179,7 @@ theorem Arrow.adjunction_exists {A : Context C₀} {B : Context C₁} (a : Arrow
 The postponed existence theorem determines the entire adjunction, rather than
 choosing arbitrary data from a mere existence assertion.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Arrow.reflectedAdjunction {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
     a.left ⊣ a.right :=
   Classical.choose a.adjunction_exists
@@ -253,9 +228,7 @@ private theorem kappa_unit_inv {A : Context C₀} {B : Context C₁} (c : Change
 
 /-- A coefficient square of the two specified left adjoints.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 structure Square {A₀ : Context C₀} {B₀ : Context C₁}
     {A₁ : Context C₂} {B₁ : Context C₃}
     (a₀ : Arrow A₀ B₀) (a₁ : Arrow A₁ B₁)
@@ -270,17 +243,13 @@ variable {A₀ : Context C₀} {B₀ : Context C₁}
 
 /-- The ambient right mate β, using the dependency CategoryTheory.mateEquiv.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Square.beta (s : Square a₀ a₁ cA cB) : a₀.G ⋙ cA.F ⟶ cB.F ⋙ a₁.G :=
   mateEquiv a₀.adj a₁.adj s.delta.hom
 
 /-- The ambient formula κ_B⁻¹ Λ_B(δ) whose restriction is the reflected square.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Square.comparison (s : Square a₀ a₁ cA cB) :
     cA.F ⋙ a₁.F ⋙ B₁.completion ≅ a₀.F ⋙ B₀.completion ⋙ cB.F :=
   isoWhiskerRight s.delta B₁.completion ≪≫ isoWhiskerLeft a₀.F cB.kappa.symm
@@ -298,9 +267,7 @@ private theorem comparison_unit (s : Square a₀ a₁ cA cB) (X : C₀) :
 Proof: step 3. Both components are lifted by the full inclusion; apply
 faithfulness to the ambient comparison naturality equation.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.comparison_naturality (s : Square a₀ a₁ cA cB)
     (X Y : A₀.localObjects.FullSubcategory) (f : X ⟶ Y) :
     (cA.restrict ⋙ a₁.left).map f ≫
@@ -312,9 +279,7 @@ theorem Square.comparison_naturality (s : Square a₀ a₁ cA cB)
 
 /-- The canonical comparison on local objects, with actual isomorphism data.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Square.localComparison (s : Square a₀ a₁ cA cB) :
     cA.restrict ⋙ a₁.left ≅ a₀.left ⋙ cB.restrict :=
   NatIso.ofComponents (fun X ↦ B₁.localObjects.isoMk (s.comparison.app X.obj))
@@ -329,9 +294,7 @@ precomposition by k₁, is C_B(e₀)δ, whose ordinary adjunct is β. The Hom
 bijection defining the reflected adjunction proves the claimed equality;
 no invertibility of β is used.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.mate (s : Square a₀ a₁ cA cB)
     (Y : B₀.localObjects.FullSubcategory) :
     A₁.localObjects.ι.map
@@ -360,9 +323,7 @@ precomposition, γ₀ normalization and β naturality give G₁C_B(η₀)β
 on the left. On the right use κ_A normalization, η₁ naturality, γ₁
 normalization, then κ_B normalization to obtain the same map.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.normalization (s : Square a₀ a₁ cA cB) (M : C₁) :
     cA.F.map (a₀.gamma.hom.app M) ≫ s.beta.app (B₀.completion.obj M) =
       cA.kappa.hom.app (a₀.G.obj M) ≫ A₁.completion.map (s.beta.app M) ≫
@@ -392,9 +353,7 @@ variable {A₂ : Context C₄} {B₂ : Context C₅}
 Proof: step 6. Apply D to the normalization for C, and then use the
 normalization for D at C X. Functoriality gives the stated equation.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Change.comp_kappa_unit
     {A : Context C₀} {B : Context C₁} {D : Context C₂}
     (c : Change A B) (d : Change B D) (X : C₀) :
@@ -405,9 +364,7 @@ theorem Change.comp_kappa_unit
 
 /-- The specified composite coefficient data: κ_DC=κ_D D(κ_C).
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Change.comp {A : Context C₀} {B : Context C₁} {D : Context C₂}
     (c : Change A B) (d : Change B D) : Change A D where
   F := c.F ⋙ d.F
@@ -416,9 +373,7 @@ def Change.comp {A : Context C₀} {B : Context C₁} {D : Context C₂}
 
 /-- The specified coefficient squares paste by whiskering their δ isomorphisms.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Square.coefficientComp (s : Square a₀ a₁ cA cB)
     (t : Square a₁ a₂ dA dB) : Square a₀ a₂ (cA.comp dA) (cB.comp dB) where
   delta := isoWhiskerLeft cA.F t.delta ≪≫ isoWhiskerRight s.delta dB.F
@@ -428,9 +383,7 @@ def Square.coefficientComp (s : Square a₀ a₁ cA cB)
 Proof: step 9. Substitute γ_G η_A=G(η_B), then naturality and
 γ_J η_B=J(η_D). Functoriality gives GJ(η_D).
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.comp_gamma_unit {A : Context C₀} {B : Context C₁} {D : Context C₂}
     (a : Arrow A B) (h : Arrow B D) (M : C₂) :
     A.unit.app (a.G.obj (h.G.obj M)) ≫
@@ -440,9 +393,7 @@ theorem Arrow.comp_gamma_unit {A : Context C₀} {B : Context C₁} {D : Context
 
 /-- The specified composite adjunction and normalized completion comparison.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Arrow.comp {A : Context C₀} {B : Context C₁} {D : Context C₂}
     (a : Arrow A B) (h : Arrow B D) : Arrow A D where
   F := a.F ⋙ h.F
@@ -455,9 +406,7 @@ def Arrow.comp {A : Context C₀} {B : Context C₁} {D : Context C₂}
 /-- The comparison q=Λ_D H(η_B F) between reflecting before and after
 composition. This is actual canonical morphism data, not an arbitrary iso.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Arrow.compositionComparison {A : Context C₀} {B : Context C₁} {D : Context C₂}
     (a : Arrow A B) (h : Arrow B D) :
     a.F ⋙ h.F ⋙ D.completion ⟶ a.F ⋙ B.completion ⋙ h.F ⋙ D.completion :=
@@ -468,9 +417,7 @@ def Arrow.compositionComparison {A : Context C₀} {B : Context C₁} {D : Conte
 Proof: step 9. Expand the composite κ formula. Functoriality and
 associativity of morphism composition give the same iterated product.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Change.associativity
     {A : Context C₀} {B : Context C₁} {D : Context C₂} {E : Context C₃}
     (c : Change A B) (d : Change B D) (e : Change D E) (X : C₀) :
@@ -487,9 +434,7 @@ equality. Adjunction.comp has Hom bijection the composite of functions,
 which is associative. These normalizations together with the two binary
 pasting theorems give the asserted iterated square coherence.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.associativity
     {A : Context C₀} {B : Context C₁} {D : Context C₂} {E : Context C₃}
     (a : Arrow A B) (h : Arrow B D) (k : Arrow D E)
@@ -514,9 +459,7 @@ theorem Arrow.associativity
 
 /-- The identity coefficient data, with literal identity functor.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Change.id (A : Context C₀) : Change A A where
   F := 𝟭 C₀
   kappa := Iso.refl A.completion
@@ -524,9 +467,7 @@ def Change.id (A : Context C₀) : Change A A where
 
 /-- The identity coefficient square of a specified adjunction.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Square.id {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
     Square a a (Change.id A) (Change.id B) where
   delta := Iso.refl a.F
@@ -537,9 +478,7 @@ Proof: step 9. The comparison precomposed with k is k, so reflection
 uniqueness gives the identity. The identity clause of mate-pasting gives
 the identity right mate. The same unit test proves iterated identity laws.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.identity {A : Context C₀} {B : Context C₁} (a : Arrow A B)
     (X : A.localObjects.FullSubcategory) (Y : C₁) :
     (Square.id a).comparison.hom.app X.obj = 𝟙 _ ∧
@@ -550,9 +489,7 @@ theorem Square.identity {A : Context C₀} {B : Context C₁} (a : Arrow A B)
 
 /-- The identity adjunction with its literal functors and normalized γ.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 def Arrow.id (A : Context C₀) : Arrow A A where
   F := 𝟭 C₀
   G := 𝟭 C₀
@@ -567,9 +504,7 @@ Proof: step 9. Locality makes η_X invertible. The reflected identity
 Hom bijection is precomposition by η_X, so its unit is η_X and its
 counit is its inverse; this gives the normalized identity comparison.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.identity {A : Context C₀} (X : A.localObjects.FullSubcategory) :
     IsIso (A.unit.app X.obj) ∧
     A.localObjects.ι.map ((Arrow.id A).reflectedAdjunction.unit.app X) =
@@ -587,9 +522,7 @@ Proof: step 10. The shift comparison of Λ and compatibility of η
 identify η_(X[a]) with the shifted invertible unit η_X. Thus X[a] is
 local by the locality criterion from step 1.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Context.stableUnderShift (A : Context C₀) [HasShift C₀ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ] :
     A.localObjects.IsStableUnderShift ℤ := by
@@ -612,9 +545,7 @@ attribute [instance] Context.stableUnderShift
 
 /-- The reflector commutes with shifts by fully faithful transport from Λ.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 instance Context.reflectorCommShift (A : Context C₀) [HasShift C₀ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ] :
     (reflector A.localObjects.ι).CommShift ℤ :=
@@ -622,9 +553,7 @@ instance Context.reflectorCommShift (A : Context C₀) [HasShift C₀ ℤ]
 
 /-- The reflected left functor has the composite specified shift comparison.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 instance Arrow.leftCommShift {A : Context C₀} {B : Context C₁} (a : Arrow A B)
     [HasShift C₀ ℤ] [HasShift C₁ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ]
@@ -634,9 +563,7 @@ instance Arrow.leftCommShift {A : Context C₀} {B : Context C₁} (a : Arrow A 
 
 /-- The restricted right functor carries the shift comparison induced by G.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 instance Arrow.rightCommShift {A : Context C₀} {B : Context C₁} (a : Arrow A B)
     [HasShift C₀ ℤ] [HasShift C₁ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ]
@@ -647,9 +574,7 @@ instance Arrow.rightCommShift {A : Context C₀} {B : Context C₁} (a : Arrow A
 
 /-- Restricted coefficient changes carry the specified composite shift comparison.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 instance Change.restrictCommShift {A : Context C₀} {B : Context C₁} (c : Change A B)
     [HasShift C₀ ℤ] [HasShift C₁ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ]
@@ -726,9 +651,7 @@ Proof: step 10. Its unit is G(k)u, which commutes with shifts by the
 closure dependency. The adjunction-shift dependency, clause (i), gives
 compatibility of the counit from that of the unit.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.reflectedAdjunction_commShift {A : Context C₀} {B : Context C₁}
     (a : Arrow A B) [HasShift C₀ ℤ] [HasShift C₁ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ]
@@ -787,9 +710,7 @@ and to the unit-square-counit formula defining β. Fully faithful
 restriction gives the same conclusion for the local comparison and its
 mate, since the reflected adjunctions commute with shifts.
 
-Source: scalar-extension blueprint, coherent pullback/direct-image comparisons;
-Stacks Tags 0037, 07A7 and 0DV0
-(blueprint: lem-weil-pbc-reflected-adjunction-coefficient-squares). -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.commShift (s : Square a₀ a₁ cA cB)
     [HasShift C₀ ℤ] [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ]
     [A₀.completion.CommShift ℤ] [NatTrans.CommShift A₀.unit ℤ]

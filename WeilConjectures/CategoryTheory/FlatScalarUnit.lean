@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfShape
 /-! # Flat ordinary scalar units compute derived scalar units
 
 Source: Stacks Project, sites-cohomology, K-flat resolutions and derived change of rings.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -250,9 +249,7 @@ private theorem universal_of_flat_adjoint [E.PreservesKFlatQuasiIso] (a : E ⊣ 
 end FlatAdjunction
 
 /-- A flat source lets an ordinary scalar-extension unit compute the unbounded derived unit.
-Source: Stacks Project, sites-cohomology, lemma-bounded-flat-K-flat,
-lemma-derived-base-change, and lemma-adjoint, applied to a change of constant rings.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology, and, applied to a change of constant rings.
 
 Proof: Let E be sheafified sectionwise extension of scalars along φ, left adjoint to
 restriction. Restriction is exact and conservative. Its composite with E is tensoring

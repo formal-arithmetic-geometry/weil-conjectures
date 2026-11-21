@@ -49,7 +49,6 @@ private theorem finiteHypercover_isSheaf_comp
 
 /-- Colimits commuting with finite limits are computed pointwise on a site generated
 by finite one-hypercovers. Source: Stacks Project, Tag 0738, finite sheaf-condition limits.
-(blueprint: stage3-finite-hypercover-colimits).
 
 Proof: Combine the diagram of sheaf presheaves into a presheaf valued in the functor
 category. Evaluation jointly reflects limits, so it is a sheaf. Each finite hypercover

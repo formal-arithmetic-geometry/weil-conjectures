@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-! # The normalized stationary quotient presentation
 
 Source: Stacks Project, Tag 012Q, proof of the stationary-page formula.
-(blueprint: lem-sp-filtered-normalized-quotient-presentation).
 -/
 
 @[expose] public section
@@ -214,7 +213,6 @@ private theorem filtered_preimage {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The quotient of normalized cycle and boundary subobjects has the cycle presentation.
 Source: Stacks Project, Tag 012Q, final quotient calculation, Equation 12.24.5.2.
-(blueprint: lem-sp-filtered-normalized-quotient-presentation).
 
 Proof. Set A=L^pK^n, A'=L^(p+1)K^n, Z=ker(d^n), B=im(d^(n-1)).
 The degree-n projection q from L^pK to gr^pK is an epimorphism whose kernel

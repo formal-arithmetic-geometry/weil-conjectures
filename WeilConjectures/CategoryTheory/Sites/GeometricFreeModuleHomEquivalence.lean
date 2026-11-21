@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-!
 # The normalized Hom chain for a transported free module sheaf
 
-Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 04BL and 08TQ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03D2, 03D3, 04BL and 08TQ.
 
 The free object, its generator, and its algebraic inverse-image presentation are the
 published constructions. The right module is specified by its underlying direct image
@@ -44,8 +43,7 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
 /-- Restrict a linear map to the transported canonical generator, retaining the
-underlying-sheaf identification. Source: Stacks 08TQ, free-module identifications
-(auxiliary; not a blueprint node). -/
+underlying-sheaf identification. Source: Stacks 08TQ, free-module identifications. -/
 def inverseFreeRestriction
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -58,8 +56,7 @@ def inverseFreeRestriction
     (moduleSets BI).map h
 
 /-- Transpose a generalized section of a module's underlying direct image.
-Source: Stacks 03D3, underlying sheaf adjunction
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03D3, underlying sheaf adjunction. -/
 def directModuleTranspose
     (f : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -567,8 +564,7 @@ private theorem normalized_hom_naturality
 /-- The module adjunction, free-module bijection, and inverse set adjunction form the
 claimed natural chain, whose composite is restriction to the inverse-image generator.
 The existential right functor carries the prescribed direct-image operations, not an
-unspecified adjoint. Source: Stacks 03D2, 03D3, 04BL and 08TQ
-(auxiliary; not a blueprint node).
+unspecified adjoint. Source: Stacks 03D2, 03D3, 04BL and 08TQ.
 
 Proof: (1) apply geometric_module_construction with R = B, A = S = BI and c = id.
 Its comparisons transport exactly the operations of F, so uniqueness of transported

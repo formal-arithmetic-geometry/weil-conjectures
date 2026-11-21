@@ -35,7 +35,6 @@ postcomposition on the target. Compatibility applied to the conjugate of a
 morphism `X ⟶ Y` proves naturality. Applied to the model isomorphism of `QJ`,
 it identifies the extension with the original comparison on every injective
 complex `J`; the inverse isomorphisms cancel on both sides.
-(blueprint: lem-sc-p1-rhom-natural-cocycle-map-extension)
 -/
 theorem extend_rhom_injective_cocycle_family
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]

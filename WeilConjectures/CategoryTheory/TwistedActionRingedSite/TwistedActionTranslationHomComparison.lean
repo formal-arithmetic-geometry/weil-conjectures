@@ -9,10 +9,8 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActi
 
 /-! # Canonical Hom comparison for translation
 
-Source: Stacks, sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction
-and lemma-internal-hom-adjoint-tensor; the formal conjugate-action argument
-for steps 11--12 of the twisted action-site construction.
-(blueprint: lem-sf-twisted-action-translation-hom-comparison).
+Source: Stacks, sites-modules.tex, section-internal-hom
+and.
 -/
 
 @[expose] public section
@@ -109,9 +107,7 @@ private theorem translationHomComparison_isIso (P : RestrictionPresentation J s 
 
 omit [s.functor.IsContinuous J J] in
 /-- The transpose of inverse tensor comparison followed by translated evaluation is invertible.
-Source: Stacks, sites-modules.tex, lemma-internal-hom-adjoint-tensor;
-formal tensor-Hom argument for a tensor autoequivalence.
-(blueprint: lem-sf-twisted-action-translation-hom-comparison).
+Source: Stacks, sites-modules.tex.
 
 Proof: on test objects FQ, full faithfulness identifies maps into F Hom(M,N)
 with maps Q to Hom(M,N). Untranspose, apply F, precompose with the inverse

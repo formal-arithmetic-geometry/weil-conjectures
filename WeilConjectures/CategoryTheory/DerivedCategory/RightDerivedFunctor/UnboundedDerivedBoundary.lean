@@ -26,7 +26,6 @@ namespace CategoryTheory.ShortComplex
 /-- A short complex of additive functors exact on injectives has a unique natural
 boundary on the unbounded derived category normalized by short exact complexes.
 Source: Stacks Project, Tags 079P and 0152.
-(blueprint: lem-pur-unbounded-derived-boundary).
 
 Proof: Model each derived object by a termwise injective K-injective complex. Conjugate
 the canonical boundary of the resulting short exact complex by the computation

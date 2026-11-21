@@ -193,10 +193,7 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Definitions and normalized representatives for two-injective Hom
 
-Source: Stacks Project, Tags 0A95 and 08J7; the internal-Hom paragraph of
-blueprint/sec-six-functors/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.proof.md;
-the native signed model in WeilConjectures.WeilSheaf.DerivedHom
-(blueprint: def-sf-ringed-two-injective-models).
+Source: Stacks Project, Tags 0A95 and 08J7.
 
 The comparison data specify product projections, not global Hom groups. The native
 normalization retains the row sign of bifunctorHomObj and its degree/source-index correction.
@@ -223,8 +220,7 @@ section Representatives
 variable {B : Type b} [Category.{vb} B] [Abelian B] [HasDerivedCategory.{wb} B]
 
 /-- The representative isomorphisms, including both variable squares and quasi-isomorphism
-invariance. Source: Stacks 0A95 and 08J7
-(blueprint: def-sf-ringed-two-injective-models). -/
+invariance. Source: Stacks 0A95 and 08J7. -/
 structure Representatives
     (H : (CochainComplex B ℤ)ᵒᵖ × CochainComplex B ℤ ⥤ CochainComplex B ℤ)
     (DH : (DerivedCategory B)ᵒᵖ × DerivedCategory B ⥤ DerivedCategory B) where
@@ -246,8 +242,7 @@ structure Representatives
     IsIso (DerivedCategory.Q.map (H.map (X := (op K, I)) (Y := (op K', I')) (f.op, g)))
 
 /-- The representative square for a derived comparison, with all localization factors
-included. Source: Stacks 0A95 and 08J7
-(blueprint: def-sf-ringed-two-injective-models). -/
+included. Source: Stacks 0A95 and 08J7. -/
 def DerivedCompatibility
     {A : Type a} [Category.{va} A] [Abelian A] [HasDerivedCategory.{wa} A]
     (U : B ⥤ A) [U.Additive] [PreservesFiniteLimits U] [PreservesFiniteColimits U]
@@ -287,7 +282,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
 
 /-- The actual augmentation used in the recorded Hom replacement.
-Source: Stacks 079P and 0A95 (blueprint: def-sf-ringed-two-injective-models). -/
+Source: Stacks 079P and 0A95. -/
 def augmentation : 𝟭 (CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ) ⟶
     coefficientHomResolution.{r, c, v} J R :=
   letI :=
@@ -296,8 +291,7 @@ def augmentation : 𝟭 (CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
   CochainComplex.toKInjectiveResolution.{max c v r} _
 
 /-- The representative maps are normalized by the actual localization factorization and
-augmentation of the recorded internal Hom. Source: Stacks 0A95 and 08J7
-(blueprint: def-sf-ringed-two-injective-models). -/
+augmentation of the recorded internal Hom. Source: Stacks 0A95 and 08J7. -/
 structure RingedRepresentatives extends Representatives
     (Functor.uncurry.obj (homComplexFunctor (R := R)))
     (derivedInternalHomOfUniverses.{c, v, r, wb} J R) where
@@ -310,14 +304,13 @@ structure RingedRepresentatives extends Representatives
       (coefficientHomResolutionIso.{r, c, v, wb} J R K I).hom
 
 /-- All K-injective representative choices give the same, natural internal-Hom model.
-Source: Stacks 0A95 and 08J7
-(blueprint: def-sf-ringed-two-injective-models).
+Source: Stacks 0A95 and 08J7.
 Proof: factor RHom through its fixed functorial K-injective replacement. For a K-injective
 I the augmentation I → I(I) is a quasi-isomorphism between K-injectives, so the Hom complex
-inverts it (lem-pur-rhom-well-defined). Invert this map after Q to obtain the normalized iso.
+inverts it. Invert this map after Q to obtain the normalized iso.
 Naturality of the augmentation gives both squares. Source quasi-isomorphisms and target
 quasi-isomorphisms between K-injectives are inverted by the same lemma. Derived arrows are
-unique homotopy classes between K-injectives (lem-weil-pbc-kinjective-hom-derived), hence these
+unique homotopy classes between K-injectives, hence these
 squares give independence, the cocycle identity, and naturality for all derived arrows.
 In particular take a K-injective source J representing K and any K-injective I representing L;
 transport along their specified derived identifications. Precomposition by K° → J gives
@@ -410,8 +403,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     (U.op.prod U) ⋙ Functor.uncurry.obj (SheafOfModules.homFunctor (R := R')))
 
 /-- The specified sheaf-Hom comparison on product-total complexes and on derived objects.
-Source: Stacks 0A95 and 08J7, componentwise forgetting calculation in the blueprint
-(blueprint: def-sf-ringed-two-injective-models). -/
+Source: Stacks 0A95 and 08J7, componentwise forgetting calculation in the blueprint. -/
 structure Comparison where
   /-- The normalized representative model on the source site. -/
   source : RingedRepresentatives.{wb, c, v, r} J R
@@ -458,7 +450,7 @@ variable {B : Type b} [Category.{vb} B] [Preadditive B]
 
 /-- A product-total internal Hom with the standard cohomological differential. This is
 representative data, not a new choice of internal sheaf Hom.
-Source: Stacks 0A8X (blueprint: def-sf-ringed-two-injective-models). -/
+Source: Stacks 0A8X. -/
 structure StandardModel (H : Bᵒᵖ ⥤ B ⥤ B) where
   /-- The complex-valued bifunctor. -/
   complex : (CochainComplex B ℤ)ᵒᵖ × CochainComplex B ℤ ⥤ CochainComplex B ℤ
@@ -494,8 +486,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ}
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The existing internal Hom of the underlying continuous-coefficient modules, as a
-bifunctor. The morphism laws are the existing laws of Mod.ihomMap.
-Source: native Adic/Hom.lean (blueprint: def-sf-ringed-two-injective-models). -/
+bifunctor. The morphism laws are the existing laws of Mod.ihomMap. -/
 def underlyingHomBifunctor :
     (ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)ᵒᵖ ⥤
       ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⥤
@@ -506,9 +497,7 @@ def underlyingHomBifunctor :
   map_comp f g := Mod.ihomMap_comp g.unop f.unop
 
 /-- The existing exact orbit-induction criterion, with the countable index universe
-specified explicitly. This is the existing preservation proof, not an extra hypothesis.
-Source: IsoAlgebra.preservesKInjectiveComplexes_forget and the twisted action site
-(blueprint: def-sf-ringed-two-injective-models). -/
+specified explicitly. This is the existing preservation proof, not an extra hypothesis. -/
 abbrev forgetKInjective : (Endofunctor.IsoAlgebra.forget
     (WeilSheaf.frobeniusPullback k₀ l X)).PreservesKInjectiveComplexes :=
   let A := ProEtale.AdicSheaf l (X ↘ Spec (CommRingCat.of k₀)).geometricFiber
@@ -526,8 +515,7 @@ abbrev forgetKInjective : (Endofunctor.IsoAlgebra.forget
 /-- The full native specialization, keeping the equivariant product-total complex and its
 specified row-sign normalization. All projections and sign maps are morphisms of Weil
 sheaves, hence preserve the contragredient action, not merely the underlying modules.
-Source: native DerivedHom.lean, BifunctorHomComplex.lean and TateTwistCohomology.lean;
-Stacks 0A95 and 08J7 (blueprint: def-sf-ringed-two-injective-models). -/
+Source: Stacks 0A95 and 08J7. -/
 structure TwoInjectiveHomModel where
   /-- The finite-span native coefficient interpretation is the finite-subextension one,
   locally on every object, so the pointwise rings and precomposition restrictions agree. -/

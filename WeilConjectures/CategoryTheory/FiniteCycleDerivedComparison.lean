@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 /-!
 # The original-g comparison with a finite derived couple
 
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2;
-Stacks Project, Tags 011R and 0AMJ.
+Source: Stacks Project, Tags 011R and 0AMJ.
 -/
 
 @[expose] public section
@@ -196,10 +195,8 @@ maps; associativity and eqToHom composition identify the resulting target with (
 Finally cancel I_n to replace the recursive image epimorphism by the supplied e.
 No vanishing, positivity or colimit hypothesis is needed. At n=0 this is the initial
 projection identity; the zero category satisfies the same equations.
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2, original-g
-projection through successive images; Stacks Tags 011R and 0AMJ. The induction is
-an explicit expansion of these sources' induced-g construction.
-(blueprint: lem-sp-finite-cycle-derived-comparison) -/
+Source: Stacks Tags 011R and 0AMJ. The induction is
+an explicit expansion of these sources' induced-g construction. -/
 theorem finiteCycle_derived_comparison (X : BigradedExactCouple C 0)
     (I : ∀ (n : ℕ) (p q : ℤ), (X.pageCouple n).D p q ⟶ X.D p q)
     (hI0 : ∀ p q : ℤ, I 0 p q = 𝟙 _)

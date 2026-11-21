@@ -84,10 +84,8 @@ public import Mathlib.Combinatorics.Quiver.ReflQuiver
 
 /-! # Exact induction and conservative forgetting of a commuting profinite action
 
-Source: blueprint, direct-image stability proof, paragraph (3), agent-extracted
-relative cyclic calculation; Stacks Tags 03DI, 03EV, 0GMW, 015Z, 015F and 05RT.
+Source: Stacks Tags 03DI, 03EV, 0GMW, 015Z, 015F and 05RT.
 The combined external reference is WANTED in the extracted DAG source.
-(blueprint: lem-sfb-product-action-exact-forgetting).
 
 The specification keeps the existing internal action categories and free-module adjunction.
 The free object, its generators, the tensor product and extension by zero are actual

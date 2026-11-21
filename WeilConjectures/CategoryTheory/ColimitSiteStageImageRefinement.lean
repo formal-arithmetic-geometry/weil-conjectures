@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 /-! # ColimitSiteStageImageRefinement
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-stage-image-refinement).
 -/
 
 @[expose] public section
@@ -161,8 +160,7 @@ private theorem restrict_heq {C : Type u} [SmallCategory C] (H : Cᵒᵖ ⥤ Typ
   cases hy
   rfl
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-stage-image-refinement).
+/-- Source: Stacks Project, Sites, Tag 0A35.
 
 Proof: Unpack membership as a stage t, an object W, a presenting arrow
 f : V i U to V t W, and a section z at W. Lift this finite diagram to a

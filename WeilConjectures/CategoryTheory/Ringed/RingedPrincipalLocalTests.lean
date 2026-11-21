@@ -72,8 +72,7 @@ public import WeilConjectures.Algebra.Homology.Site.SitePerfectModelRestrictionS
 
 /-! # Principal local tests with independent site and coefficient universes
 
-Source: Stacks 0999.
-(blueprint: def-pur-ringed-principal-local-tests). -/
+Source: Stacks 0999. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -83,8 +82,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- Restrict one section to all objects of its slice.
-Source: Stacks 0999.
-(blueprint: def-pur-ringed-principal-local-tests). -/
+Source: Stacks 0999. -/
 def principalSliceSection {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{max c v r})
     (U : C) (x : R.obj.obj (op U)) :
@@ -97,7 +95,6 @@ def principalSliceSection {C : Type c} [Category.{v} C]
 
 /-- A section on a slice is determined by its value on the terminal object.
 Source: Stacks 0999.
-(blueprint: def-pur-ringed-principal-local-tests).
 Proof: naturality for the unique arrow from an object to the identity arrow. -/
 theorem principalSliceSection_eta {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{max c v r})
@@ -109,8 +106,7 @@ theorem principalSliceSection_eta {C : Type c} [Category.{v} C]
   exact h.symm
 
 /-- Local divisibility by the principal generator, expressed by a covering sieve.
-Source: Stacks 0999.
-(blueprint: def-pur-ringed-principal-local-tests). -/
+Source: Stacks 0999. -/
 def principalLocallyDivisible {C : Type c} [Category.{v} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{max c v r})
     (a : (R.obj ⋙ forget CommRingCat).sections) (U : C)
@@ -135,8 +131,7 @@ variable [HasDerivedCategory.{w} (SheafOfModules.{max c v r} Rg)]
   [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{max c v r} ((Rg).over U))]
 
 /-- The localization test using exact derived restriction.
-Source: Stacks 0999.
-(blueprint: def-pur-ringed-principal-local-tests). -/
+Source: Stacks 0999. -/
 def principalLocalTest (N : DerivedCategory (SheafOfModules.{max c v r} Rg))
     (U : C) (s : ((R.over U).obj ⋙ forget CommRingCat).sections) :
     DerivedCategory (SheafOfModules.{max c v r} ((Rg).over U)) :=
@@ -153,8 +148,7 @@ def principalLocalTest (N : DerivedCategory (SheafOfModules.{max c v r} Rg))
         (SheafOfModules.overFunctor.{max c v r} Rg U).mapDerivedCategory.obj N)
 
 /-- Vanishing for sections locally divisible by the specified compatible section.
-Source: Stacks 0999.
-(blueprint: def-pur-ringed-principal-local-tests). -/
+Source: Stacks 0999. -/
 def principalLocallyComplete (a : (R.obj ⋙ forget CommRingCat).sections)
     (N : DerivedCategory (SheafOfModules.{max c v r} Rg)) : Prop :=
   ∀ (U : C) (s : ((R.over U).obj ⋙ forget CommRingCat).sections),
@@ -163,7 +157,6 @@ def principalLocallyComplete (a : (R.obj ⋙ forget CommRingCat).sections)
 
 /-- Principal local completeness is invariant under isomorphism of derived objects.
 Source: Stacks 0999.
-(blueprint: def-pur-ringed-principal-local-tests).
 Proof: exact derived restriction and internal Hom carry an isomorphism in the
 second argument to an isomorphism of each localization test; zero objects are
 invariant under this isomorphism. Apply the construction in both directions. -/

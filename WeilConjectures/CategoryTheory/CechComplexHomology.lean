@@ -12,9 +12,6 @@ import WeilConjectures.CategoryTheory.FormalCoproductEvaluationHomology
 
 /-!
 # Homology and the Čech complex of a complex of presheaves
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2, product cohomology
-calculation.
 -/
 
 @[expose] public section
@@ -48,7 +45,6 @@ private noncomputable def evalHomologyIso
 set_option backward.isDefEq.respectTransparency false in
 /-- Taking vertical homology of the Čech bicomplex commutes with the Čech construction.
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2.
 Proof: in Čech degree p, evaluate K on each product indexed by a tuple of p+1
 covering indices. The resulting vertical complex is the product of those evaluation
 complexes. The kernel of a product of homomorphisms is the product of the kernels.
@@ -59,8 +55,7 @@ with projections and with restriction maps, since the maps on homology are induc
 by the same maps on cycles. In particular they commute with each Čech coface and
 its alternating sum. Assemble them and their inverses into an isomorphism of
 complexes. The empty indexing family gives zero products, and the same argument
-applies in degree zero, where the incoming differential is zero.
-(blueprint: lem-sc-cech-complex-homology) -/
+applies in degree zero, where the incoming differential is zero. -/
 theorem cechComplexFunctor_homology
     {C : Type u} [Category.{v} C] [HasFiniteProducts C]
     {ι : Type v} (U : ι → C) (K : CochainComplex (Cᵒᵖ ⥤ AddCommGrpCat.{v}) ℕ)

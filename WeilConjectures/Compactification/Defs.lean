@@ -60,7 +60,7 @@ namespace AlgebraicGeometry
 morphism `g : Z ⟶ Y` and an open immersion `i : X ⟶ Z` such that `f = i ≫ g`.
 
 The open immersion `i` is not required to be quasi-compact, unlike in the blueprint
-(`definition-compactification-refinement--1`) and in Stacks/Conrad, where `j` is a quasi-compact
+and in Stacks/Conrad, where `j` is a quasi-compact
 open immersion. When `f` is quasi-compact, which is the case in all uses of Nagata's theorem, the
 two notions agree: `i` is then automatically quasi-compact
 (`AlgebraicGeometry.Compactification.quasiCompact_openImmersion_iff`). The weaker

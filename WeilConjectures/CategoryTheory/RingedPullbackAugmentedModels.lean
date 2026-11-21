@@ -58,7 +58,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Pullback transports augmented models on flat K-flat representatives
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YY, 0G7E, 06XN.
-(blueprint: lem-weil-pbc-ringed-pullback-augmented-models).
 -/
 
 @[expose] public section
@@ -88,7 +87,6 @@ flat-term K-flat complexes to the corresponding ordinary pulled-back complexes.
 The target of the augmentation need not be K-flat.
 
 Source: Stacks Project, Cohomology on Sites, Tags 06YY, 0G7E, 06XN.
-(blueprint: lem-weil-pbc-ringed-pullback-augmented-models).
 
 Proof: compare the given left adjoint with the supplied tensor pullback by uniqueness
 of left adjoints. Tensor pullback preserves quasi-isomorphisms between flat-term K-flat

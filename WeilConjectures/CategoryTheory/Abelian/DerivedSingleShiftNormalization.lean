@@ -18,7 +18,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 /-! # Shifted single-object normalization
 
 Source: Stacks Project, Tags 05TC (2) and 05TD (3).
-(blueprint: new-lem-pc-derived-single-shift-normalization).
 -/
 
 @[expose] public section
@@ -333,8 +332,7 @@ private theorem rightDerivedPlusSingleUnit_shift_transport_int (X : C) (n : ℤ)
 
 
 /-- The actual bounded-below derived unit on an object in degree n.
-Source: Stacks Project, Tag 05TD (3).
-(blueprint: new-lem-pc-derived-single-shift-normalization). -/
+Source: Stacks Project, Tag 05TD (3). -/
 noncomputable def rightDerivedPlusSingleUnitAt (n : ℤ) (Y : C) :
     (DerivedCategory.Plus.singleFunctor D n).obj (S.obj Y) ⟶
       S.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C n).obj Y) :=
@@ -348,8 +346,7 @@ noncomputable def rightDerivedPlusSingleUnitAt (n : ℤ) (Y : C) :
           (DerivedCategory.quotientCompQhIso C).symm.app _)).inv
 
 /-- Homology of the actual unit on a single object in degree n.
-Source: Stacks Project, Tag 05TD (3).
-(blueprint: new-lem-pc-derived-single-shift-normalization). -/
+Source: Stacks Project, Tag 05TD (3). -/
 noncomputable def rightDerivedPlusSingleUnitHomologyAt (n : ℤ) (Y : C) :
     S.obj Y ⟶ (DerivedCategory.Plus.homologyFunctor D n).obj
       (S.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor C n).obj Y)) :=
@@ -357,8 +354,7 @@ noncomputable def rightDerivedPlusSingleUnitHomologyAt (n : ℤ) (Y : C) :
     (DerivedCategory.Plus.homologyFunctor D n).map (S.rightDerivedPlusSingleUnitAt n Y)
 
 /-- The shifted single-object isomorphism used in the specified bottom comparison.
-Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-single-shift-normalization). -/
+Source: Stacks Project, Tag 05TC (2). -/
 noncomputable def rightDerivedPlusSingleShiftIso (n : ℤ) :
     DerivedCategory.Plus.singleFunctor C n ⋙ S.rightDerivedFunctorPlus ⋙
       DerivedCategory.Plus.homologyFunctor D n ≅ S := by
@@ -380,7 +376,6 @@ noncomputable def rightDerivedPlusSingleShiftIso (n : ℤ) :
 
 Source: Stacks Project, Tag 05TC (2), using the degree-zero identification
 in Tag 05TD (3).
-(blueprint: new-lem-pc-derived-single-shift-normalization).
 
 Proof: Shift the single object in degree n by -n to the single object in
 degree zero. The quotient/single comparison and the actual derived unit

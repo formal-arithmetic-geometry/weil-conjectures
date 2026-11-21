@@ -131,8 +131,7 @@ variable {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A]
 
 /-- Resolve the left source, derive the adjunction against an exact right adjoint,
 and retain the cochain representative-transpose equation.
-Source: Stacks 06XN, 0FND, 09T5
-(auxiliary; not a blueprint node).
+Source: Stacks 06XN, 0FND, 09T5.
 Proof: use the resolving class to form the everywhere-defined left derived functor
 on homotopy categories. Exactness of the right adjoint makes its denominator systems
 constant. The canonical derived-adjunction theorem gives the Hom bijection and its

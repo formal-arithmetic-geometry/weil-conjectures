@@ -18,7 +18,6 @@ import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 /-! # Resolution comparisons and the composite derived unit
 
 Source: Stacks Project, derived.tex, Tags 015M and 015N.
-(blueprint: lem-pc-grothendieck-resolution-unit-comparison).
 -/
 
 @[expose] public section
@@ -173,7 +172,6 @@ private lemma canonicalResolutionDerivedIso_comp
 set_option backward.isDefEq.respectTransparency false in
 /-- Homology of the canonical resolution comparison transports the composite derived unit.
 Source: Stacks Project, Tags 015M and 015N, composition unit and abutment identification.
-(blueprint: lem-pc-canonical-resolution-composite-unit-comparison).
 
 Proof: Expand grothendieckSpectralObjectHBotTopIso as the inverse composition comparison
 followed by the single-object homology comparison. Apply the ordinary canonical

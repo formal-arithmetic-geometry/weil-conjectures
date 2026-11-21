@@ -71,8 +71,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import WeilConjectures.AlgebraicGeometry.PrincipalIdealLocalTestCriterion
 /-! # The principal image ideal and the covering-sieve local tests
 
-Source: Stacks 0999, 099B and 03DA.
-(blueprint: lem-pur-principal-ideal-local-test-criterion). -/
+Source: Stacks 0999, 099B and 03DA. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -181,8 +180,7 @@ is determined by its terminal value; substitute this value in both formulations.
 localization and exact derived-restriction tests then agree. This includes the zero and unit
 ideals.
 
-Source: Stacks 0999, 099B and 03DA.
-(blueprint: lem-pur-principal-ideal-local-test-criterion). -/
+Source: Stacks 0999, 099B and 03DA. -/
 theorem principalLocallyComplete_iff
     (a : (O.obj ⋙ forget CommRingCat).sections) (N : DerivedCategory A) :
     letI : ∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}

@@ -17,9 +17,6 @@ import Mathlib.Algebra.Field.Rat
 
 /-!
 # The compactification category and base change
-
-Source: blueprint, sec-nagata-compactification/sk-prop-nagata-sketch-comp-category,
-remark-base-change-compactification--1 (blueprint: remark-base-change-compactification--1).
 -/
 
 @[expose] public section
@@ -31,12 +28,11 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Compactification
 
 set_option linter.unusedVariables false in
-/-- Source: blueprint sec-nagata-compactification/sk-prop-nagata-sketch-comp-category,
-remark-base-change-compactification--1 (blueprint: remark-base-change-compactification--1).
+/-- 
 
 Proof plan (the eleven steps of the node). Refinements are proper by
 lemma-nagata-proper-to-separated-target and compose by proper composition. Nagata's theorem
-(theorem-nagata-s-compactification-theorem--1) supplies an object. For two objects use the image of
+supplies an object. For two objects use the image of
 their graph in the fibre product: the ambient product is proper, and the graph is a quasi-compact
 immersion by separatedness and open-immersion base change. The immersion-compactification
 lemmas make its image a compactification with dense open, and its two projections are
@@ -47,7 +43,7 @@ change of the original quasi-compact open immersion. This compactification equal
 maps. These properties give cofilteredness.
 Base change preserves the open and proper maps and refinement equations, and the universal
 property of fibre products gives preservation of identities, composites and equalities.
-The image universal property (lemma-nagata-scheme-image-universal) gives the comparison
+The image universal property gives the comparison
 closed immersion from the image formed after base change to the pulled-back image, over
 both projections. If the base change is flat, lemma-nagata-dense-flat-pullback preserves
 density of the quasi-compact, quasi-separated open immersion; its zero kernel forces the

@@ -36,8 +36,7 @@ For augmentation compatibility, precompose in each degree with every image of a 
 summand inclusion. Naturality replaces both augmentations by their images under F;
 the factor equation and hy reduce the calculation to the normalized unit equation hu.
 The degree-zero single-complex comparison is the unit identification and the other target
-components vanish. Coproduct extensionality gives the asserted chain-map equality.
-(blueprint: lem-weil-pbc-cech-pullback-augmented-tensor-step) -/
+components vanish. Coproduct extensionality gives the asserted chain-map equality. -/
 theorem cech_pullback_augmented_tensor_step
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

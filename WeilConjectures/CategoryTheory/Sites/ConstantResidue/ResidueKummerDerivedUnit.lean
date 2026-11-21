@@ -37,8 +37,7 @@ import all WeilConjectures.SixFunctors.BaseChange.DerivedForget
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 import all Mathlib.CategoryTheory.Abelian.ShortExact
 
-/-! # Kummer-normalized derived residue units
-(blueprint: lem-sp-residue-kummer-derived-unit).
+/-! # Kummer-normalized derived residue units.
 -/
 
 @[expose] public noncomputable section
@@ -108,8 +107,8 @@ open SheafOfModules.DivisibleReduction in
 hypotheses, let n>0 and H be a ULift(Z/n)-module sheaf. If 0→UH→G→G→0 is short exact, the last map
 being n, its positive connecting class in Ext^1(G,UH) has the unbounded DerivedExtUnit property
 [def-sp-derived-scalar-ext-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-residue-kummer-derived-unit).
+Source: Stacks 0152,
+06YY and 0GLZ.
 Proof: In integer modules use the split extension G→G→0 in normalized divisible-extension reduction.
 Its Kummer identification identifies the derived adjunction unit with the positive connecting class.
 Realize raw residue-module sheaves as constant-ring modules and abelian sheaves as integer modules.

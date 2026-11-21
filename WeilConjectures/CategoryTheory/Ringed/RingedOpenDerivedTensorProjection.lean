@@ -97,8 +97,7 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Derived projection for extension from a ringed slice
 
-Source: Stacks Project, Tags 0E8I and 06YN
-(blueprint: lem-weil-pbc-ringed-open-derived-tensor-projection).
+Source: Stacks Project, Tags 0E8I and 06YN.
 -/
 
 @[expose] public noncomputable section
@@ -207,8 +206,7 @@ attribute [local irreducible] complexProjection RingedDerivedNative.comparison
   coefficientTotalTensor in
 /-- Extension from a slice satisfies the unbounded derived tensor projection formula,
 naturally in the slice object and the ambient object.
-Source: Stacks Project, Tags 0E8I and 06YN
-(blueprint: lem-weil-pbc-ringed-open-derived-tensor-projection).
+Source: Stacks Project, Tags 0E8I and 06YN.
 
 Proof: on complexes, extension of P tensor the restriction of Q is naturally
 isomorphic to the tensor of the extension of P with Q. This is the sheafified

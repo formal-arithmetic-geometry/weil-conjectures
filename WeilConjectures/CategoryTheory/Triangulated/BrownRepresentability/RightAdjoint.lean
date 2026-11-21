@@ -304,7 +304,7 @@ theorem isLeftAdjoint_localizingClosureLift [HasCoproducts.{v} C₁] [Φ.IsTrian
   obtain ⟨ι, S, hS, -⟩ := hP₁.exists_compactGenerators
   exact Functor.isLeftAdjoint_of_compactGenerators hS _
 
-/-- Blueprint `theorem-existence-exceptional-inverse-image--4`, on localizing closures: if `P₁` and
+/-- on localizing closures: if `P₁` and
 `P₂` compactly generate their localizing closures and `Φ` maps `P₁` into `P₂`, then every right
 adjoint of the restriction `Φ : Loc(P₁) ⥤ Loc(P₂)` preserves coproducts. -/
 theorem preservesColimitsOfShape_of_localizingClosureLift_adjunction [HasCoproducts.{v} C₁]

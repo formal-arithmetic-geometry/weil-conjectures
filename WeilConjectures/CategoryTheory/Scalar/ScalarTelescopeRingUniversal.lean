@@ -10,9 +10,6 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 
 /-!
 # The ring universal property of a scalar telescope
-
-Source: the ring-structure paragraph of the completed coefficient localization proof
-(blueprint: lem-pe-scalar-telescope-ring-universal).
 -/
 
 @[expose] public section
@@ -54,11 +51,6 @@ private theorem scalar_leg_desc
 
 /-- A module telescope with ring zeroth leg is the ring localization at its scalar.
 No commutativity of the test ring is required, since natural-number scalars are central.
-
-Source: literature/blueprint/latest/blueprint/sec-proetale-coefficients/
-sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-invert-ell.proof.md,
-paragraph Ring structure; the argument is the universal property of fractions
-(blueprint: lem-pe-scalar-telescope-ring-universal).
 
 Proof: Given a:R→B, restrict the regular B-module along a. The maps from the regular
 R-module to B given by a followed by inverse multiplication by l to the nth power

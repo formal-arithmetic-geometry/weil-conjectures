@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 Source: Stacks Project, algebra.tex, Tag 00CM (section-localization), and
 sites-modules.tex, Tags 03CY and 03EK.
-(blueprint: lem-weil-pbc-scalar-localization-unit-shift)
 -/
 
 @[expose] public noncomputable section
@@ -49,7 +48,6 @@ private theorem commShift_of_precomp
 
 /-- An exact derived adjunction commutes with shifts when its normalized complex unit does.
 Source: Stacks Project, Derived Categories, Tags 05RU and 015F.
-(blueprint: lem-weil-pbc-scalar-localization-unit-shift).
 
 Proof: compose the unit precomposed with Q with the exact-derived factorization
 isomorphisms. Its components are Q applied to the complex unit, so its shift

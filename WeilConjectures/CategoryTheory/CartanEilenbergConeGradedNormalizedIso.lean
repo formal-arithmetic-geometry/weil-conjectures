@@ -28,8 +28,7 @@ namespace CategoryTheory.Functor
 /-- The inverse comparison is normalized by the actual column inclusions.
 The lifts are unique because the filtration inclusion is monic. These equations
 fix the comparison on both cone summands, and exclude arbitrary automorphisms.
-Source: Stacks, Tags 012X and 0133, retained-column quotient construction.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-normalized-iso). -/
+Source: Stacks, Tags 012X and 0133, retained-column quotient construction. -/
 def CartanEilenbergConeGradedNormalized
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)
@@ -73,8 +72,7 @@ def CartanEilenbergConeGradedNormalized
           (m - p + 1) (m - p) (by omega) ≫ e.inv)
 
 /-- In the possible support range, the column-tail quotient has a normalized isomorphism.
-Source: Stacks Project, Tags 012X and 0133; parent comparison, steps 1 and 2.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-normalized-iso).
+Source: Stacks Project, Tags 012X and 0133.
 
 Proof: project the ambient cone onto its complex-index-p summands. On the K
 summand retain only degree m+1=p; on the diagonal coproduct retain index p.

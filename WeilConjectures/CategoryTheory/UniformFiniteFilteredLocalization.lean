@@ -17,8 +17,7 @@ public import Mathlib.CategoryTheory.EssentialImage
 # Uniformly finite filtered cochain localizations
 
 Source: Stacks Project, Derived Categories, Tags 05S2, 05S4, 05S5 and 05S6,
-restricted to uniformly finite filtrations, as in the trace-formula comparison
-(blueprint: def-trf-uniform-finite-filtered-localization).
+restricted to uniformly finite filtrations, as in the trace-formula comparison.
 
 Filtrations are subobjects in the abelian category of cochain complexes. Thus their
 finite bounds are uniform in cochain degree. `B = some (a,b)` fixes those bounds;
@@ -38,8 +37,7 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- Uniform finite filtration bounds, optional fixed interval, and cochain condition `P`.
-Source: Stacks, Tags 05S2 and 05S4, restricted uniformly in cochain degree
-(blueprint: def-trf-uniform-finite-filtered-localization). -/
+Source: Stacks, Tags 05S2 and 05S4, restricted uniformly in cochain degree. -/
 def uniformFilteredProperty (B : Option (ℤ × ℤ))
     (P : ObjectProperty (CochainComplex C ℤ)) :
     ObjectProperty (WeilFilteredObject (CochainComplex C ℤ)) := fun K ↦
@@ -48,15 +46,13 @@ def uniformFilteredProperty (B : Option (ℤ × ℤ))
       K.filtration.F a = ⊤ ∧ K.filtration.F (b + 1) = ⊥) ∧ P K.obj
 
 /-- Cochain-bounded uniformly finite filtered complexes and filtered chain maps.
-Source: Stacks, Tags 05S2 and 05S4
-(blueprint: def-trf-uniform-finite-filtered-localization). -/
+Source: Stacks, Tags 05S2 and 05S4. -/
 abbrev UniformFilteredComplexes (C : Type u) [Category.{v} C] [Abelian C]
     (B : Option (ℤ × ℤ)) (P : ObjectProperty (CochainComplex C ℤ)) :=
   (uniformFilteredProperty B P).FullSubcategory
 
 /-- The graded quasi-isomorphisms, using the existing canonical graded chain map.
-Source: Stacks, Tag 05S2
-(blueprint: def-trf-uniform-finite-filtered-localization). -/
+Source: Stacks, Tag 05S2. -/
 def uniformFilteredQuasiIso (B : Option (ℤ × ℤ))
     (P : ObjectProperty (CochainComplex C ℤ)) :
     MorphismProperty (UniformFilteredComplexes C B P) := fun _ _ f ↦

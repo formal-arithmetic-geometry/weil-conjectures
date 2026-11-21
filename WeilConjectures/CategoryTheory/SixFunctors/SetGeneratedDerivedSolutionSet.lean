@@ -18,10 +18,7 @@ import Mathlib.CategoryTheory.Triangulated.Orthogonal
 
 /-! # Solution sets on set-generated localizing subcategories
 
-Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2;
-Krause, *Localization theory for triangulated categories*, 7.2.1 and the construction
-in 5.1.1; Krause, *Derived categories, resolutions, and Brown representability*, 4.5.
-(blueprint: lem-sfb-set-generated-derived-solution-set)
+Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2.
 -/
 
 @[expose] public section
@@ -83,11 +80,7 @@ private theorem solutionSet_generators_detect_zero
 localizing subcategory of a Grothendieck derived category have a small weakly
 universal family. This asserts neither uniqueness nor a representing object.
 
-Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2;
-Krause, *Localization theory for triangulated categories*, Theorems 7.2.1 and 5.1.1;
-the cellular construction in Krause, *Derived categories, resolutions, and Brown
-representability*, Section 4.5.
-(blueprint: lem-sfb-set-generated-derived-solution-set)
+Source: Neeman, *On the derived category of sheaves on a manifold*, Theorem 0.2.
 
 Proof: choose an ambient essentially small replete triangulated perfect class
 containing P, with bounded-subcoproduct factorization, using Neeman 0.2 and Krause

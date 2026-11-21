@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.RouteInverseImageConstantSetComparison
 /-!
 # Constant-sheaf comparison for a ring lift
 
-Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV
-(auxiliary; not a blueprint node).
+Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV.
 
 The ring-level operation graph records exactly the compatibility required of the
 underlying set-sheaf isomorphisms.  The theorem then supplies the natural
@@ -43,8 +42,7 @@ constant section of `a` (in particular `L` of the coprojection `i_a`) to the
 sheafified constant section of `a`; since `L(underline A_C)` is the coproduct of the
 `L(i_a)` and `L` of the terminal sheaf is terminal, this determines it.
 
-Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV
-(auxiliary; not a blueprint node).
+Source: Stacks Project, `sites.tex`, Tags 0H7J and 00YV.
 
 Proof: express each constant set sheaf as the coproduct of copies of the
 terminal sheaf, apply the left-adjoint colimit theorem and the finite-limit

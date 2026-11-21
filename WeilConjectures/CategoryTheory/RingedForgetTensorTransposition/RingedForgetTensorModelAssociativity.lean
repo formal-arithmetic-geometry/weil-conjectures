@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForg
 /-! # Associativity of normalized tensor chain models
 
 Source: Stacks Project, Tags 0FPT and 06YU.
-(blueprint: lem-sf-ringed-forget-model-chain-associativity).
 -/
 
 @[expose] public noncomputable section
@@ -26,7 +25,6 @@ namespace CategoryTheory.RingedForgetTensorTransposition
 
 /-- Native associator identifications give the associativity square for chain models.
 Source: Stacks Project, Tags 0FPT and 06YU.
-(blueprint: lem-sf-ringed-forget-model-chain-associativity)
 
 Proof: replace the supplied model associators by the native associators using
 their two identifications. The summand-normalized chain associativity theorem

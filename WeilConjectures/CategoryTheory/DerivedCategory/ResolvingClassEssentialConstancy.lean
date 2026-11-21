@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant
 /-! # Resolving classes give essentially constant denominator diagrams
 
 Source: Stacks Project, Tag 06XN, dual proof, and Tag 05PU(2).
-(blueprint: lem-pur-resolving-class-essential-constancy).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- A resolving class gives a denominator cone with the retraction/factorization
 criterion of essential constancy. At an object of the class its identity leg is invertible.
 Source: Stacks Project, Tag 06XN (dual proof), and Categories, Tag 05PU(2).
-(blueprint: lem-pur-resolving-class-essential-constancy).
 
 Proof: The right fraction calculus makes `W.Over ⊤ X` cofiltered. Resolve the source of
 any denominator to obtain a denominator whose source lies in `P`. These form an initial

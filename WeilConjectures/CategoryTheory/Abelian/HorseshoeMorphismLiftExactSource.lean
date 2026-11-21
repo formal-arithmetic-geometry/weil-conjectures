@@ -15,8 +15,7 @@ import all WeilConjectures.CategoryTheory.Abelian.HorseshoeDefectFactorization
 # Horseshoe morphism lifts from exact augmented source complexes
 
 Source: the classical horseshoe comparison argument, using Stacks Project, Tags 0136 and
-013R; the Cartan--Eilenberg construction of Tag 015I motivates its application
-(blueprint: lem-weil-pbc-horseshoe-morphism-lift-exact-source).
+013R; the Cartan--Eilenberg construction of Tag 015I motivates its application.
 -/
 
 @[expose] public section
@@ -224,16 +223,15 @@ The target horseshoe data use the same declarations and equations as
 `exists_horseshoe_morphism_lift`.
 
 Source: the classical horseshoe comparison calculation, using Stacks Project, Tags 0136
-and 013R, in the setting of the Cartan--Eilenberg construction of Tag 015I
-(blueprint: lem-weil-pbc-horseshoe-morphism-lift-exact-source).
+and 013R, in the setting of the Cartan--Eilenberg construction of Tag 015I.
 
 Proof:
 1. By lem-weil-pbc-ses-injective-kernel-splits, split the target row in each degree,
    choosing a section sigma' of beta'. Extend phiA^n across the source monomorphism
-   i^n into JA^n by injectivity (def-sp-injective-resolutions), obtaining t^n.
+   i^n into JA^n by injectivity, obtaining t^n.
    Set chi^n = alpha'^n t^n + sigma'^n phiC^n p^n in ordinary composition order.
    Then chi i = alpha' phiA and beta' chi = phiC p.
-2. By row exactness in the abelian category (def-sp-abelian), the differential defect
+2. By row exactness in the abelian category, the differential defect
    D = d' chi - chi d factors uniquely as D^n = alpha'^{n+1} E^n p^n.
    The identity d' D = -D d gives d' E + E d = 0. Likewise the augmentation defect
    w = chi^0 sB - sB' b factors as alpha'^0 e g, with E^0 sC = d' e.

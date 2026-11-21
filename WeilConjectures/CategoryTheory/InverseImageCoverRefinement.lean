@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.Sites.InverseImageLocalFamilies
 /-! # Representable refinement of an inverse-image cover
 
 Source: Stacks Project, Sites, Tag 00WL, local lifting for inverse image.
-(blueprint: lem-weil-pbc-inverse-image-cover-refinement).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ namespace CategoryTheory
 associated representables cover the source site.
 
 Source: Stacks Project, Sites, Tag 00WL.
-(blueprint: lem-weil-pbc-inverse-image-cover-refinement).
 
 Proof: map the locally surjective family of associated representables to the terminal
 sheaf through the left adjoint. Its target remains terminal by left exactness. The local

@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.CompactGeneratorTelescopeIso
 /-!
 # Building objects from compact generators
 
-Source: Stacks Project, Derived Categories, Lemma 13.37.4 (Tag 09SN)
-(blueprint: lem-pc-compact-generators-build-objects).
+Source: Stacks Project, Derived Categories, Lemma 13.37.4 (Tag 09SN).
 -/
 
 @[expose] public section
@@ -68,8 +67,7 @@ private theorem generatorStep_exists
   simpa only [a, Sigma.ι_comp_desc_assoc, comp_zero] using h
 
 /-- Every object is the sequential homotopy colimit of a sequence built from coproducts
-of shifts of compact generators (Stacks, Tag 09SN)
-(blueprint: lem-pc-compact-generators-build-objects).
+of shifts of compact generators (Stacks, Tag 09SN).
 
 For the proof, start with the coproduct of all shifted generators mapping to `Y`.
 At each stage take the coproduct of all shifted generators mapping to the current

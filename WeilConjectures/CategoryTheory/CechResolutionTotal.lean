@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.ResolutionSectionCohomology
 /-!
 # Total cohomology of the Čech resolution double complex
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 3; Stacks Project Tags 03AW
+Source: Stacks Project Tags 03AW
 and 03F6.
 -/
 
@@ -34,8 +34,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- The total Čech complex of an injective resolution computes sheaf cohomology.
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 3, and
-lem-sc-cech-spectral, Step 2; Stacks Project Tags 03AW and 03F6.
+Source: Stacks Project Tags 03AW and 03F6.
 Proof: augment every Čech row by I^q(X), using restrictions of sections. The
 sheaf condition identifies degree-zero row cohomology with I^q(X). Since I^q
 is injective, positive row cohomology vanishes by injective Čech acyclicity
@@ -53,8 +52,7 @@ zero, so the cone is acyclic. The augmentation is consequently a
 quasi-isomorphism. Finally the sheafification/free-abelian Yoneda adjunction
 identifies evaluation at X with Hom from the free abelian sheaf on X. Computing
 Ext with I gives H^n(I(X)) ≅ F.H' n X. Compose this with the inverse of the
-homology isomorphism of the augmentation.
-(blueprint: lem-sc-cech-resolution-total) -/
+homology isomorphism of the augmentation. -/
 theorem Sheaf.cechResolutionDoubleComplex_total
     {F : Sheaf J AddCommGrpCat.{v}} (I : InjectiveResolution F) (X : C)
     {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X)

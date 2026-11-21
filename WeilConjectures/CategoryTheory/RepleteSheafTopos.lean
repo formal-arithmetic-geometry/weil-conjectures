@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Category.Preorder
 /-!
 # Replete topoi of set-valued sheaves
 
-Source: blueprint `definition-repleteness--1` (chap-The-pro-etale-site, definition-repleteness);
-Bhatt–Scholze, *The pro-étale topology*, Definition 3.1.1.
+Source: Bhatt–Scholze, *The pro-étale topology*, Definition 3.1.1.
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory.GrothendieckTopology
 
-/-- A Grothendieck topology `J` is *replete* (blueprint: definition-repleteness--1;
-Bhatt–Scholze, Definition 3.1.1) when, in the topos of set-valued sheaves on `J`, every
+/-- A Grothendieck topology `J` is *replete* (Bhatt–Scholze) when, in the topos of set-valued sheaves on `J`, every
 inverse sequence of epimorphisms has epimorphic projections from its limit, at every index.
 An inverse sequence is `F : ℕᵒᵖ ⥤ Sheaf J (Type (max u v w))`; its adjacent transition
 is `F.map (homOfLE (Nat.le_succ n)).op`.

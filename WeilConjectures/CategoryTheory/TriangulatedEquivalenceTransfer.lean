@@ -29,8 +29,7 @@ open Limits
 
 /-- An equivalent category inherits a triangulated structure with a compatible shift.
 Source: Stacks Project, Derived Categories, Tags 05QK and 05QL, the axioms for exact
-functors and triangulated categories
-(blueprint: lem-pc-triangulated-equivalence-transfer).
+functors and triangulated categories.
 
 Proof: Transport the additive groups on Hom sets along the fully faithful inverse
 functor. The image of a zero object is zero. Define the shift by conjugating each

@@ -11,10 +11,6 @@ import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # A common lower bound for a sequential derived limit
-
-Source: the Roos-triangle argument in Step 6 of
-`lem-pur-zero-section-bottom-coefficients`, refining the universal case of
-`thm-pur-localized-top-chern.proof.md`, Step 3.
 -/
 
 @[expose] public section
@@ -26,9 +22,6 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory
 
 /-- The Roos derived limit preserves a common cohomological lower bound.
-Source: blueprint `thm-pur-localized-top-chern.proof.md`, Step 3, universal
-zero-section case, native integral-coefficient refinement, Step 6.
-(blueprint: lem-pur-roos-common-lower-bound).
 
 Proof: orthogonality tests the lower bound of the product: a map from an object
 in degrees at most a-1 is zero after every projection and hence is zero. In the

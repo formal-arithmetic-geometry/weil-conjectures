@@ -13,8 +13,7 @@ public import Mathlib.CategoryTheory.Sites.Sheaf
 /-!
 # Geometric morphisms and their 2-morphisms
 
-Source: ILO, Exposé XI §1.1 and §1.4; Stacks Project, Sites, Tag 00XA
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00XA.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace CategoryTheory
 open Limits
 
 /-- An adjunction with left exact inverse image. When its two categories are topoi,
-this is a geometric morphism. Source: Stacks, Tag 00XA; ILO XI §1.1
-(auxiliary; not a blueprint node). -/
+this is a geometric morphism. Source: Stacks, Tag 00XA. -/
 structure GeometricMorphism (E : Type u₁) (F : Type u₂)
     [Category.{v₁} E] [Category.{v₂} F] where
   inverse : F ⥤ E
@@ -40,8 +38,7 @@ namespace GeometricMorphism
 variable {E : Type u₁} {F : Type u₂} {G : Type u₃}
   [Category.{v₁} E] [Category.{v₂} F] [Category.{v₃} G]
 
-/-- Composition of geometric morphisms. Source: ILO XI §1.4
-(auxiliary; not a blueprint node). -/
+/-- Composition of geometric morphisms. -/
 def comp (a : GeometricMorphism E F) (b : GeometricMorphism F G) :
     GeometricMorphism E G where
   inverse := b.inverse ⋙ a.inverse
@@ -52,14 +49,12 @@ def comp (a : GeometricMorphism E F) (b : GeometricMorphism F G) :
     have := b.leftExact
     exact comp_preservesFiniteLimits _ _
 
-/-- The inverse-image mate of a 2-morphism, whose defining direction is on direct images.
-Source: ILO XI §1.3 (auxiliary; not a blueprint node). -/
+/-- The inverse-image mate of a 2-morphism, whose defining direction is on direct images. -/
 noncomputable def inverseMate {a b : GeometricMorphism E F} (t : a.direct ⟶ b.direct) :
     b.inverse ⟶ a.inverse :=
   (conjugateEquiv a.adj b.adj).symm t
 
-/-- The inverse-image isomorphism corresponding to a direct-image isomorphism.
-Source: ILO XI §1.4 (auxiliary; not a blueprint node). -/
+/-- The inverse-image isomorphism corresponding to a direct-image isomorphism. -/
 noncomputable def inverseIso {a b : GeometricMorphism E F} (t : a.direct ≅ b.direct) :
     b.inverse ≅ a.inverse :=
   (conjugateIsoEquiv a.adj b.adj).symm t

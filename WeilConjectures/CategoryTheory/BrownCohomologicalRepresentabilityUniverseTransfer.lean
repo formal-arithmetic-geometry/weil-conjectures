@@ -13,8 +13,8 @@ import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentabilityUniverse
 /-!
 # Changing universes in the Brown representability criterion
 
-Source: Stacks Project, Tag 0A8F, Lemma `lemma-brown`, with its set-indexing
-convention made explicit (blueprint: lem-pc-brown-representability-universe-transfer).
+Source: Stacks Project, Tag 0A8F, Lemma, with its set-indexing
+convention made explicit.
 -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ open CategoryTheory.Pretriangulated.Opposite
 
 namespace CategoryTheory
 
-/-- (blueprint: lem-pc-brown-representability-universe-transfer) -/
+/--  -/
 theorem brownCohomologicalRepresentabilityUniverseTransfer
     (C : Type u) [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
     [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

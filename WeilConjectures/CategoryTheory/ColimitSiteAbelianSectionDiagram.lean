@@ -120,7 +120,6 @@ private theorem sheaf_triangle_id
 
 /-- Source: Stacks Project, Sites, Tag 0A35, the compatible stage maps in the
 adjunction paragraph (expanded using uniqueness of adjuncts).
-(blueprint: lem-weil-pbc-colimit-site-abelian-section-diagram).
 
 Proof: Evaluate the inverse image along t.hom at its image of U. For b : t ⟶ t',
 map sections by θ b and transport the target along F.map_comp and Under.w b.

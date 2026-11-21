@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.FiniteTypeRestrictionExact
 /-!
 # Local lifting of morphisms from constant finite free module sheaves
 
-Source: Stacks Project, Modules on Sites, Tag 093U (3), finite-generator lifting step.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 093U (3) lifting step.
 -/
 
 @[expose] public noncomputable section
@@ -113,7 +112,6 @@ private theorem biproduct_lift_local {R : Sheaf J RingCat.{u}}
 
 /-- A morphism from a constant finite free module sheaf lifts locally through an epi.
 Source: Stacks Project, Modules on Sites, Tag 093U (3), extension paragraph.
-(auxiliary; not a blueprint node).
 
 Proof: First treat the finite biproduct of copies of the rank-one free sheaf. A morphism
 from each summand is determined by its value at one on the terminal object of the slice.

@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Deriving an adjoint square with exact vertical functors
 
-Source: blueprint thm-weil-pbc-qbar.proof.md, "Forgetting the Weil structure";
-Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND.
+Source: Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND.
 -/
 
 @[expose] public noncomputable section
@@ -57,9 +56,7 @@ private lemma homotopy_comp_inv_app
 -- Preserve the original resolution hypothesis, although this calculation does not need it.
 set_option linter.unusedSectionVars false in
 /-- The canonical right-derived comparison is the mate of the localized left comparison.
-Source: blueprint thm-weil-pbc-qbar.proof.md, "Forgetting the Weil structure";
-Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND.
-(blueprint: lem-sf-derived-exact-forget-mate).
+Source: Stacks Project, Derived Categories, Tags 09T5, 0DVC and 0FND.
 
 Proof: lift the compatible abelian adjunction square to cochain complexes and then to
 homotopy categories. Both `RR ⋙ D(U)` and `D(V) ⋙ RR₀` are right derived functors of the

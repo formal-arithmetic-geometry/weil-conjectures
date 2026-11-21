@@ -11,9 +11,7 @@ import WeilConjectures.CategoryTheory.Sites.EtaleContractedProductUniversal
 
 /-! # Existence of contracted products of étale torsors
 
-Source: Stacks Project, Tags 03AH and 03AJ, contracted-product construction in
-lem-sc-etale-torsor-pushout-extension
-(blueprint: lem-sc-etale-contracted-product-exists).
+Source: Stacks Project, Tags 03AH and 03AJ, contracted-product construction in.
 -/
 
 @[expose] public section
@@ -25,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 namespace CategoryTheory.Sheaf.Torsor
 
 /-- The sheafified orbit quotient of a torsor and the new coefficient group is a torsor.
-Source: Stacks Project, Tags 03AH and 03AJ; the contracted-product construction of
-lem-sc-etale-torsor-pushout-extension.
-(blueprint: lem-sc-etale-contracted-product-exists)
+Source: Stacks Project, Tags 03AH and 03AJ.
 
 Proof: Form the orbit presheaf of T × G' under (g,t,h) ↦ (g +ᵥ t,h - φ(g)) and sheafify.
 The quotient maps are natural and invariant. Translation in the second factor commutes

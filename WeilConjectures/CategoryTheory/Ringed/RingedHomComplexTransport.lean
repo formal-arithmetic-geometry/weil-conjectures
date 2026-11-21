@@ -24,8 +24,7 @@ import all Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # Natural transport of sheaf Hom complexes
 
-Source: Stacks Project, Tags 08J7 and 0A95
-(blueprint: lem-weil-pbc-ringed-hom-complex-transport).
+Source: Stacks Project, Tags 08J7 and 0A95.
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +38,7 @@ attribute [local irreducible] homComplexFunctor
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- An additive functor preserving countable products transports Hom complexes
 naturally whenever it transports ordinary sheaf Hom naturally.
-Source: Stacks Project, Tags 08J7 and 0A95
-(blueprint: lem-weil-pbc-ringed-hom-complex-transport).
+Source: Stacks Project, Tags 08J7 and 0A95.
 
 Proof: form the product comparison in every degree, using the ordinary Hom
 comparisons on its factors. The defining projection equations make this comparison

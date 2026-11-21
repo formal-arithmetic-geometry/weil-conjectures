@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.RightDerivedBinaryProduct
 
 Source: Stacks Project, Tag 0A50, passage from the injective section sequence to
 its long exact homology sequence; Homology, Tag 0117.
-(blueprint: lem-weil-pbc-right-derived-pair-sequence)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Source: Stacks Project, Tag 0A50, final paragraph, and Homology Tag 0117.
-(blueprint: lem-weil-pbc-right-derived-pair-sequence)
 
 Proof: For an injective resolution P of M, evaluate A, B, D, E termwise.
 The maps (a,b) and c-d commute with differentials by naturality. Injectivity,

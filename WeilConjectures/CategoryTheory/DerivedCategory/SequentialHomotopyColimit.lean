@@ -20,9 +20,7 @@ Let `X₀ ⟶ X₁ ⟶ ⋯` be a sequence in a pretriangulated category `T` with
 isomorphism compatible with `π`. A triangulated functor preserving countable coproducts sends
 homotopy colimits to homotopy colimits
 (`CategoryTheory.Pretriangulated.IsHomotopyColimit.map`), so that the homotopy colimit of the
-image of a sequence is isomorphic to the image of its homotopy colimit
-(`CategoryTheory.Pretriangulated.IsHomotopyColimit.exists_iso_map`, blueprint
-`lem-kun-functor-preserves-hocolim`).
+image of a sequence is isomorphic to the image of its homotopy colimit.
 -/
 
 @[expose] public section
@@ -100,7 +98,7 @@ lemma map {X : ℕ ⥤ T} {s : Cofan X.obj} {hs : IsColimit s} {H : T} {π : s.p
   rw [← e]
   exact F.map_distinguished _ hT
 
-/-- Blueprint `lem-kun-functor-preserves-hocolim`: let `F : T ⥤ T'` be a triangulated functor
+/-- let `F : T ⥤ T'` be a triangulated functor
 between pretriangulated categories which preserves coproducts indexed by `ℕ`. For every
 sequence `X` with homotopy colimit `π : ∐ₙ Xₙ ⟶ H`, and every homotopy colimit
 `π' : ∐ₙ F(Xₙ) ⟶ H'` of the image sequence `X ⋙ F`, there is an isomorphism

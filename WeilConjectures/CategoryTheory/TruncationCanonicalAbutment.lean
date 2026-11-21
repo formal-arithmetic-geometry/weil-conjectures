@@ -89,9 +89,7 @@ private noncomputable def quotientOfLECongr
   exact Iso.refl _
 
 /-- Canonical abutment maps and finite image filtration of a truncation couple.
-Source: Stacks Tags 011R, 011T, 012F, 012U (3), 05TC (2);
-blueprint steps 5--7 of lemma-uniform-bound-proper-direct-image--1
-(blueprint: lem-sp-truncation-canonical-abutment).
+Source: Stacks Tags 011R, 011T, 012F, 012U (3), 05TC (2).
 
 Proof: Include each iterated D image recursively in D. Sharp stabilization identifies
 its stable cycles and boundaries with their intersection and union, defining L.

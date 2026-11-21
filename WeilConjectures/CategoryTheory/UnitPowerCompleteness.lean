@@ -16,8 +16,7 @@ set_option linter.privateModule false
 /-!
 # Derived completeness under a unit times a positive power
 
-Source: Stacks Project, algebraization.tex, Tags 099B, 099E and 099F
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 099B, 099E and 099F.
 
 The principal ideal sheaf is the categorical image of multiplication by its generator.
 Thus its sections include locally divisible sections, without requiring a global coefficient.

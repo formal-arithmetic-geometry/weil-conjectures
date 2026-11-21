@@ -583,7 +583,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstruc
 This is the rational-coefficient Ext input needed by the corrected Brown theorem.
 The adopted source currently records the corresponding compactness declarations over finite
 or separably closed fields; this theorem isolates the finite-cd extension.
-(blueprint: lem-sfb-brown-finite-cd-nonfinite-compact)
 -/
 
 @[expose] public section
@@ -723,9 +722,6 @@ private theorem uniform_bound_coefficientIso
 
 /-- Uniform constructible Ext bounds for rational and finite-subextension-valued
 algebraic-closure coefficients over a field of finite ℓ-cohomological dimension.
-
-Source: blueprint latest, `sk-lem-uniform-constructible-ext.proof.md` and
-`sk-lem-int-ext.proof.md`. (blueprint: lem-sfb-brown-finite-cd-nonfinite-compact).
 
 Proof: X is compact and locally Noetherian, hence topologically Noetherian. For a finite
 coefficient field E, every constructible E-sheaf M is the rationalization of a

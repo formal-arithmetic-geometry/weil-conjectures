@@ -144,8 +144,7 @@ private theorem exact_corrected_lift {A B E V K Q H I : C}
   simpa only [Category.assoc] using π₃ ≫= π₂ ≫= (hy =≫ i)
 
 /-- The induced maps are exact, provided they satisfy the defining descent equations.
-Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ
-(blueprint: lem-sp-derived-map-exactness).
+Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ.
 
 Proof. Use generalized elements with epimorphic refinements, which detect images
 and kernels in an abelian category. At the image of `a`, an element annihilated

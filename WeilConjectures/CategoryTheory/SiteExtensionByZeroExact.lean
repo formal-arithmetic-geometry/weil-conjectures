@@ -19,9 +19,6 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Exactness of extension by zero on a localized site
 
-Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Lemma 03DJ
-(blueprint: lem-weil-pbc-site-extension-by-zero-exact)
-
 This statement asserts preservation of short exact sequences by the constructed left
 adjoint to restriction recorded by the restriction-adjunction dependency.
 The proof follows the direct-sum
@@ -84,9 +81,6 @@ private theorem siteExtensionByZero_preserves_monomorphisms
       (Over.forget W) AddCommGrpCat.{u} (J.toGrothendieck.over W) J.toGrothendieck))
 
 /-- Extension by zero from the localized site is exact.
-
-Source: literature/stacks-project/sites-modules.tex, Modules on Sites, Lemma 03DJ
-(blueprint: lem-weil-pbc-site-extension-by-zero-exact).
 
 The site is the precoverage encoding of `def-weil-pbc-sites-and-cohomology`.
 Extension by zero is the constructed left adjoint recorded by

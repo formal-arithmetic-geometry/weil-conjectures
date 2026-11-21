@@ -16,8 +16,7 @@ public import WeilConjectures.Algebra.Homology.SignedDoubleHomCone
 /-!
 # Signed double internal Hom and mapping cones
 
-Source: Stacks Project, sites-cohomology.tex, Sections 0A8X and 08JC;
-derived.tex, Definition 014E (blueprint: lem-sf-double-hom-cone-comparison).
+Source: Stacks Project, sites-cohomology.tex, Sections 0A8X and 08JC.
 The component equations below are equations of module sheaves, hence include every
 local section and all restriction maps. Mathlib orders the cone summands as A[1], B.
 -/
@@ -1199,19 +1198,19 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{r}}
 
 /-- Internal Hom into the fixed complex, using the recorded Hom bifunctor.
-Source: Stacks 0A8X (blueprint: lem-sf-double-hom-cone-comparison). -/
+Source: Stacks 0A8X. -/
 noncomputable abbrev dual (I : Complex.{u, v, w, r} R) :
     (Complex.{u, v, w, r} R)ᵒᵖ ⥤ Complex.{u, v, w, r} R :=
   (homComplexFunctor (R := R)).flip.obj I
 
 /-- Twice applying the same contravariant internal Hom.
-Source: Stacks 08JC (blueprint: lem-sf-double-hom-cone-comparison). -/
+Source: Stacks 08JC. -/
 noncomputable abbrev doubleDual (I : Complex.{u, v, w, r} R) :
     Complex.{u, v, w, r} R ⥤ Complex.{u, v, w, r} R :=
   (dual I).rightOp ⋙ dual I
 
 /-- Reindex T(K)^t into T(K[1])^(t+1) without multiplying by a sign.
-Source: Stacks 0A8X (blueprint: lem-sf-double-hom-cone-comparison). -/
+Source: Stacks 0A8X. -/
 noncomputable def reindexOne (K I : Complex.{u, v, w, r} R) (t : ℤ) :
     (homComplex K I).X t ⟶ (homComplex (K⟦(1 : ℤ)⟧) I).X (t + 1) :=
   Fan.IsLimit.lift (productLimit _ I (t + 1)) (fun a : ℤ ↦
@@ -1229,8 +1228,7 @@ private lemma map_zero_left {A A' B B' : Modules.{u, v, w, r} R} (g : B ⟶ B') 
   SheafOfModules.hom_ext (PresheafOfModules.homObjMap_zero_left g.val)
 
 /-- Signed shift and cone comparisons for double internal Hom into an arbitrary I.
-Source: Stacks 014E and 0A8X; explicit calculation filling the omission in 08JC
-(blueprint: lem-sf-double-hom-cone-comparison).
+Source: Stacks 014E and 0A8X.
 
 Proof: (1) Write eps(t)=(-1)^t. Reindexing a degree q map from K[m] gives degree
 q-m from K. Multiplication by eps(mq) intertwines the two differentials: both

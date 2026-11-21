@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteStageImageSheafAux
 /-! # ColimitSiteStageImageSheaf
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-stage-image-sheaf).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-stage-image-sheaf).
+/-- Source: Stacks Project, Sites, Tag 0A35.
 
 Proof: Lift a finite Q-cover, its arrows and covering pullbacks to a common stage.
 Lift the finitely many presenting arrows and local stage sections to a later

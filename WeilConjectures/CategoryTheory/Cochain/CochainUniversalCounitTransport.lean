@@ -10,9 +10,8 @@ public import WeilConjectures.CategoryTheory.Exact.ExactEquivalenceDerivedSquare
 /-! # Universal cochain counit transported from homotopy localization
 
 Source: the agent-written homotopy-to-cochain refinement of Stacks Tag 099M,
-`proetale-lemma-naive-completion`, in the constant-completion argument for the blueprint's
-completed pullback, `def-weil-pbc-completed-pullback`.
-(blueprint: lem-weil-pbc-cochain-universal-counit-transport)
+`proetale-, in the constant-completion argument for the blueprint's
+completed pullback.
 -/
 
 @[expose] public section
@@ -69,9 +68,7 @@ private theorem counitTransport_iso
 same invertible components, for an additive functor with no exactness assumption.
 
 Source: agent-written categorical refinement of Stacks Tag 099M
-(`proetale-lemma-naive-completion`), the constant-completion argument for the blueprint's
-`def-weil-pbc-completed-pullback`.
-(blueprint: lem-weil-pbc-cochain-universal-counit-transport)
+(`proetale-), the constant-completion argument for the blueprint's.
 
 Proof:
 1. Put `p = HomotopyCategory.quotient A (.up ℤ)`, `H = F^h ⋙ Qh`,

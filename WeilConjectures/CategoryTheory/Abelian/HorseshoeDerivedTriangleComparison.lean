@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunc
 # Comparing the derived image triangle with a fixed horseshoe
 
 Source: Stacks Project, Derived Categories, Tags 014Q, 05TE and 015B.
-(blueprint: lem-sc-p1-horseshoe-derived-triangle-comparison).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ Its endpoint homology maps are the canonical right-derived identifications.
 No delta-functor or chosen connecting maps are involved in this statement.
 
 Source: Stacks Project, Derived Categories, Tags 014Q, 05TE and 015B.
-(blueprint: lem-sc-p1-horseshoe-derived-triangle-comparison).
 
 Proof:
 1. Extend the three resolutions and the two maps by zero to integer-indexed

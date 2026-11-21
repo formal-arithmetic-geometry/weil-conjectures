@@ -37,8 +37,7 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Completion of tensor constraints specified on K-flat pairs
 
-Source: Stacks Project, Tag 0FPT
-(blueprint: lem-sfb-ringed-tensor-constraint-completion).
+Source: Stacks Project, Tag 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -206,8 +205,7 @@ private theorem tensorGenerator_ext₃_private
 variable [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J R)]
 
 /-- The scalar unit, reassociation and signed interchange on simultaneous K-flat models.
-Source: Stacks Tag 0FPT
-(blueprint: lem-sfb-ringed-tensor-constraint-completion). -/
+Source: Stacks Tag 0FPT. -/
 structure RingedTensorConstraintModels
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
     (T : CoefficientTensorModels.{r, c, v, w} J R S)
@@ -417,8 +415,7 @@ private theorem model_leftUnitor
 
 /-- The constraints on simultaneous K-flat representatives determine full representative
 coherence, with the same prescribed coefficient-unit identification.
-Source: Stacks Tags 06YT and 0FPT
-(blueprint: lem-sfb-ringed-tensor-constraint-completion).
+Source: Stacks Tags 06YT and 0FPT.
 
 Proof: extend the tensor comparison by functorial flat resolution. The actual braiding,
 associator and right unit maps of complexes have precisely the stipulated formulas.

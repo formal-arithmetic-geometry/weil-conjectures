@@ -87,8 +87,7 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarIsoInternalHom
 
 /-! # Derived Hom under a site equivalence and coefficient identification
 
-Source: Stacks Project, Tags 03CR, 03D7, 08J7 and 0A95
-(blueprint: lem-weil-pbc-ringed-site-equivalence-hom-transport).
+Source: Stacks Project, Tags 03CR, 03D7, 08J7 and 0A95.
 -/
 
 @[expose] public noncomputable section
@@ -257,8 +256,7 @@ private def scalarEquivalence {C : Type c} [Category.{vc} C]
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- A site equivalence with an identified coefficient sheaf gives a module
  equivalence compatible with the actual derived internal Hom.
-Source: Stacks Project, Tags 03CR, 03D7, 08J7 and 0A95
-(blueprint: lem-weil-pbc-ringed-site-equivalence-hom-transport).
+Source: Stacks Project, Tags 03CR, 03D7, 08J7 and 0A95.
 
 Proof: take direct restriction along the inverse site equivalence, followed by
 scalar restriction along the given ring isomorphism. Both are additive

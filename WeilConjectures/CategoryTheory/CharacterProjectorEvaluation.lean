@@ -30,9 +30,6 @@ namespace CategoryTheory
 /-- If a finite product is acted on by translations of its index group, the image of
 its normalized character projector is identified with a single factor by evaluation at zero.
 
-Source: latest blueprint, `prop-kernel-lisse.proof.md`, splitting-chart calculation
-(blueprint: lem-kernel-character-projector-evaluation).
-
 Proof. Write `q` for the order of the group. The map from one factor to the product with
 components `χ(a)` is `j`. The map `r` in the other direction is the normalized weighted
 sum of projections with weights `χ(-a)`. Character cancellation gives `j ≫ r = 1`.
@@ -91,9 +88,6 @@ theorem characterProjector_evaluation_isIso
   exact ⟨⟨g, hfg, hgf⟩⟩
 
 /-- Evaluation on a character image can use any finite enumeration of the product chart.
-
-Source: the splitting-chart character calculation, with its factors enumerated by Fin n
-(blueprint: lem-kernel-character-projector-evaluation).
 
 Proof. The product over the group is obtained from the enumerated product by the
 reindexing isomorphism. Compare their projections to identify the two product maps.

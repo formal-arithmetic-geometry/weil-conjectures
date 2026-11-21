@@ -25,9 +25,7 @@ module universe, has a left adjoint when the derived category has coproducts
 of the required size. No separator, full faithfulness or exactness is asserted.
 
 Source: Stacks Project, Lemma 19.14.1 (Tag 0F5S), second proof, the
-large-coproduct extension step of node new-stage3-gabriel-popescu-abelian-core.
-
-(auxiliary; not a blueprint node)
+large-coproduct extension step of node.
 
 Proof in words: first construct coproducts of the displayed size in A. For a
 family X_i, take the coproduct K of X_i[0] in the derived category and put

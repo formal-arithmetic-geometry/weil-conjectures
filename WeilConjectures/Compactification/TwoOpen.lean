@@ -16,8 +16,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FinitePresenta
 # The two-open compactification theorem
 
 This file assembles the **two-open compactification theorem** (Stacks Project
-Tag 0F40; blueprint chapter "Nagata compactification", section "The two-open
-compactification theorem", proof order items 43–48): over a Noetherian base `S`, a
+Tag 0F40): over a Noetherian base `S`, a
 separated finite-type morphism `u : U ⟶ S` is compactifiable as soon as `U` is covered
 by two compactifiable opens with dense intersection
 (`AlgebraicGeometry.HasCompactification.of_two_open_cover`).
@@ -27,57 +26,36 @@ The intermediate schemes of the construction are built from a prepared side
 
 - `AlgebraicGeometry.TwoOpenSide.intermediate`: the glued scheme
   `Wᵢ = U ⊔_{O} Xᵢ°` obtained by gluing `U` and the complement `Xᵢ°` of the forbidden
-  boundary along the embedded copy of `O` (blueprint:
-  `proposition-compactifying-union-two-opens--1`; proof order item 43), with its two
+  boundary along the embedded copy of `O`, with its two
   charts `intermediateU`, `intermediateInterior` and structure morphism
   `intermediateHom`;
 - `AlgebraicGeometry.TwoOpenSide.isConstructible_range_intermediateGraph` and
   `AlgebraicGeometry.TwoOpenSide.stableUnderSpecialization_range_intermediateGraph`: the
   image of the overlap `O ⟶ U ×_S Xᵢ°` is constructible (Chevalley) and stable under
   specialization, the latter via
-  `AlgebraicGeometry.TwoOpenSide.exists_graph_eq_of_specializes` (blueprint:
-  `proposition-compactifying-union-two-opens--1`,
-  `lemma-nagata-intermediate-specialization-boundary`,
-  `lemma-nagata-intermediate-overlap-specialization-closed`);
+  `AlgebraicGeometry.TwoOpenSide.exists_graph_eq_of_specializes`;
 - `AlgebraicGeometry.TwoOpenSide.isClosedImmersion_intermediateGraph`: the overlap
   `O ⟶ U ×_S Xᵢ°` is a closed immersion — its range is the preimage of the closed
-  range of the proper graph `V ⟶ U ×_S X` (blueprint:
-  `proposition-compactifying-union-two-opens--1`,
-  `lemma-nagata-intermediate-overlap-closed`; this exact description of the range makes
-  the closedness hold without Noetherian hypotheses);
+  range of the proper graph `V ⟶ U ×_S X`;
 - `AlgebraicGeometry.TwoOpenSide.isSeparated_intermediateHom`: `Wᵢ ⟶ S` is separated
-  (Stacks Project Tag 0F3U via `IsSeparated.pushout_desc`; blueprint:
-  `proposition-compactifying-union-two-opens--1`);
+  (Stacks Project Tag 0F3U via `IsSeparated.pushout_desc`);
 - `AlgebraicGeometry.TwoOpenSide.dense_range_intermediateU`: the copy of `U` is dense
-  in `Wᵢ` (blueprint: part of `proposition-compactifying-union-two-opens--1`);
+  in `Wᵢ`;
 - `AlgebraicGeometry.TwoOpenSide.intermediateLift`: a morphism to the ambient model
-  avoiding the forbidden boundary lifts to `Wᵢ` (blueprint: second half of
-  `proposition-compactifying-union-two-opens--1`).
+  avoiding the forbidden boundary lifts to `Wᵢ`.
 
 The final modification is the common modification (Stacks Project Tag 0F3X) of `W₁`,
-`W₂`, `AlgebraicGeometry.TwoOpenPreparation.FinalModification` (blueprint:
-`proposition-compactifying-union-two-opens--1`;
-item 45; a chosen one is `TwoOpenPreparation.finalModification`, and its structural
-properties are collected in `TwoOpenPreparation.FinalModification.spec`), with the open
-immersion `CommonModification.j : U ⟶ W` (blueprint:
-`proposition-compactifying-union-two-opens--1`). On it:
+`W₂`, `AlgebraicGeometry.TwoOpenPreparation.FinalModification`, with the open
+immersion `CommonModification.j : U ⟶ W`. On it:
 
-- `TwoOpenPreparation.FinalModification.isDominant`: `O₁ ∩ O₂ ⟶ W` is dominant
-  (blueprint: `proposition-compactifying-union-two-opens--1`;
-  items 46–47);
+- `TwoOpenPreparation.FinalModification.isDominant`: `O₁ ∩ O₂ ⟶ W` is dominant;
 - `TwoOpenPreparation.FinalModification.valuativeCriterion_relativeTo`: valuative squares
   through `O₁ ∩ O₂` lift uniquely, using the proper valuative criterion of the sides and
-  the boundary avoidance of the comparison layer (blueprint:
-  `proposition-compactifying-union-two-opens--1`,
-  `lemma-nagata-two-open-valuative-lifting`; item 44);
+  the boundary avoidance of the comparison layer;
 - `TwoOpenPreparation.FinalModification.isProper_w`: `W ⟶ S` is proper by the dense-source
-  valuative criterion (Stacks Project Tag 0894,
-  `UniversallyClosed.of_valuativeCriterion_of_isDominant`; blueprint:
-  `proposition-compactifying-union-two-opens--1`);
+  valuative criterion (Stacks Project Tag 0894);
 - `TwoOpenPreparation.FinalModification.compactification` and
-  `HasCompactification.of_two_open_cover`: the resulting compactification (blueprint:
-  `proposition-compactifying-union-two-opens--1`; item 48).
-
+  `HasCompactification.of_two_open_cover`: the resulting compactification.
 -/
 
 @[expose] public section
@@ -102,8 +80,7 @@ lemma interiorEmb_comm : O.ι ≫ u = σ.interiorEmb ≫ σ.interior.ι ≫ σ.s
   rw [σ.interiorEmb_ι_assoc, σ.embX_s]
 
 /-- The **intermediate scheme** `Wᵢ = U ⊔_O Xᵢ°` of a side: the gluing of `U` and the
-complement of the forbidden boundary along the embedded copy of `O`.
-(Blueprint: `proposition-compactifying-union-two-opens--1`; proof order item 43.) -/
+complement of the forbidden boundary along the embedded copy of `O`. -/
 def intermediate : Scheme.{u} := pushout O.ι σ.interiorEmb
 
 /-- The chart `U ⟶ Wᵢ` of the intermediate scheme. -/
@@ -142,8 +119,7 @@ lemma range_intermediateU_union :
   range_pushout_inl_union_range_pushout_inr O.ι σ.interiorEmb
 
 /-- **The copy of `U` is dense in the intermediate scheme**: the second chart is the
-complement of the forbidden boundary, in which the embedded copy of `O` is dense.
-(Blueprint: part of `proposition-compactifying-union-two-opens--1`.) -/
+complement of the forbidden boundary, in which the embedded copy of `O` is dense. -/
 theorem dense_range_intermediateU : Dense (Set.range σ.intermediateU) := by
   rw [dense_iff_inter_open]
   rintro W₀ hW₀ ⟨w₀, hw₀⟩
@@ -172,8 +148,7 @@ theorem dense_range_intermediateU : Dense (Set.range σ.intermediateU) := by
 
 section Graph
 
-/-- The proper graph `γ : V ⟶ U ×_S X` of the proper extension `ψ`.
-(Blueprint: `proposition-compactifying-union-two-opens--1`.) -/
+/-- The proper graph `γ : V ⟶ U ×_S X` of the proper extension `ψ`. -/
 def graph : σ.V.toScheme ⟶ pullback u σ.s := pullback.lift σ.ψ σ.V.ι σ.ψ_u
 
 @[reassoc (attr := simp)]
@@ -182,8 +157,7 @@ lemma graph_fst : σ.graph ≫ pullback.fst u σ.s = σ.ψ := pullback.lift_fst 
 @[reassoc (attr := simp)]
 lemma graph_snd : σ.graph ≫ pullback.snd u σ.s = σ.V.ι := pullback.lift_snd _ _ _
 
-/-- The graph of the proper extension is proper; in particular its range is closed.
-(Blueprint: `proposition-compactifying-union-two-opens--1`.) -/
+/-- The graph of the proper extension is proper; in particular its range is closed. -/
 theorem isProper_graph : IsProper σ.graph := by
   have := σ.isProper_ψ
   have := σ.isProper_s
@@ -235,8 +209,7 @@ lemma intermediateGraph_openι :
       σ.interiorEmb_ι, Category.assoc, σ.graph_snd]
     rfl
 
-/-- **A specialization of the overlap stays on the graph** (blueprint:
-`proposition-compactifying-union-two-opens--1`): if a point of the image of `O` in
+/-- **A specialization of the overlap stays on the graph**: if a point of the image of `O` in
 `U ×_S X` specializes to `t'`, then `t'` is a graph point `γ(v)`, and if its first
 coordinate leaves `O`, then its second coordinate lies in the forbidden boundary. -/
 theorem exists_graph_eq_of_specializes {t t' : ↥(pullback u σ.s)}
@@ -253,8 +226,7 @@ theorem exists_graph_eq_of_specializes {t t' : ↥(pullback u σ.s)}
   · rwa [← Scheme.Hom.comp_apply, σ.graph_fst] at hv
   · rw [← Scheme.Hom.comp_apply, σ.graph_snd]
 
-/-- **The overlap image is stable under specialization** (blueprint:
-`proposition-compactifying-union-two-opens--1`): a specialization of a point of
+/-- **The overlap image is stable under specialization**: a specialization of a point of
 the image of `O` in `U ×_S Xᵢ°` is a graph point lying over `O`, since its second
 coordinate avoids the forbidden boundary; it is therefore again in the image of `O`. -/
 theorem stableUnderSpecialization_range_intermediateGraph :
@@ -276,8 +248,7 @@ theorem stableUnderSpecialization_range_intermediateGraph :
   refine ⟨o', σ.intermediateOpenι.isOpenEmbedding.injective ?_⟩
   rw [← Scheme.Hom.comp_apply, σ.intermediateGraph_openι, Scheme.Hom.comp_apply, hv]
 
-/-- **The overlap image is constructible** (blueprint:
-`proposition-compactifying-union-two-opens--1`): over a Noetherian base, the overlap
+/-- **The overlap image is constructible**: over a Noetherian base, the overlap
 map is a morphism of finite presentation between Noetherian schemes, so Chevalley's
 theorem applies. -/
 theorem isConstructible_range_intermediateGraph [IsNoetherian S] [LocallyOfFiniteType u]
@@ -307,8 +278,7 @@ theorem isConstructible_range_intermediateGraph [IsNoetherian S] [LocallyOfFinit
   rw [← Set.image_univ]
   exact σ.intermediateGraph.isConstructible_image Topology.IsConstructible.univ
 
-/-- **The overlap of the two charts of the intermediate scheme is a closed immersion**
-(blueprint: `proposition-compactifying-union-two-opens--1`).
+/-- **The overlap of the two charts of the intermediate scheme is a closed immersion**.
 
 The range of the overlap map is the preimage of the closed range of the proper graph
 `V ⟶ U ×_S X`, because over the complement of the forbidden boundary the graph passes
@@ -369,8 +339,7 @@ end Graph
 
 section Structure
 
-/-- **Separatedness of the intermediate scheme** (Stacks Project Tag 0F3U; blueprint:
-`proposition-compactifying-union-two-opens--1`): the two charts of `Wᵢ ⟶ S` are separated and
+/-- **Separatedness of the intermediate scheme** (Stacks Project Tag 0F3U): the two charts of `Wᵢ ⟶ S` are separated and
 their overlap is a closed immersion. -/
 theorem isSeparated_intermediateHom [IsSeparated u] : IsSeparated σ.intermediateHom := by
   have := σ.isProper_s
@@ -378,8 +347,7 @@ theorem isSeparated_intermediateHom [IsSeparated u] : IsSeparated σ.intermediat
   exact IsSeparated.pushout_desc O.ι σ.interiorEmb σ.interiorEmb_comm
     σ.isClosedImmersion_intermediateGraph
 
-/-- The intermediate scheme is of finite type over the base (blueprint:
-`proposition-compactifying-union-two-opens--1`, finite-type part). -/
+/-- The intermediate scheme is of finite type over the base. -/
 theorem locallyOfFiniteType_intermediateHom [LocallyOfFiniteType u] :
     LocallyOfFiniteType σ.intermediateHom := by
   have := σ.isProper_s
@@ -405,8 +373,7 @@ theorem isNoetherian_intermediate [IsNoetherian S] [LocallyOfFiniteType u]
   exact ⟨⟩
 
 /-- The morphism to the intermediate scheme determined by a morphism `g` to the ambient
-model avoiding the forbidden boundary (blueprint: second half of
-`proposition-compactifying-union-two-opens--1`). -/
+model avoiding the forbidden boundary. -/
 def intermediateLift {Y : Scheme.{u}} (g : Y ⟶ σ.X)
     (hg : Set.range g ⊆ (σ.interior : Set σ.X)) : Y ⟶ σ.intermediate :=
   IsOpenImmersion.lift σ.interior.ι g (by rwa [Scheme.Opens.range_ι]) ≫
@@ -441,18 +408,15 @@ namespace TwoOpenPreparation
 
 variable {O₁ O₂ : U.Opens} {u : U ⟶ S} (P : TwoOpenPreparation u O₁ O₂)
 
-/-- The **final common modification** of the two-open construction (blueprint:
-`proposition-compactifying-union-two-opens--1`): a common modification (Stacks Project
+/-- The **final common modification** of the two-open construction: a common modification (Stacks Project
 Tag 0F3X) of the two intermediate schemes `W₁`, `W₂` along their common open `U`. It
 consists of `U`-admissible blow-ups `Wᵢ' ⟶ Wᵢ` glued to a scheme `W` over `S`; the
-induced open immersion `U ⟶ W` is `CommonModification.j` (blueprint:
-`proposition-compactifying-union-two-opens--1`). -/
+induced open immersion `U ⟶ W` is `CommonModification.j`. -/
 abbrev FinalModification : Type (u + 1) :=
   CommonModification P.side₁.intermediateHom P.side₂.intermediateHom
     P.side₁.intermediateU P.side₂.intermediateU
 
-/-- **Existence of the final common modification** (blueprint:
-`proposition-compactifying-union-two-opens--1`): the intermediate schemes are separated and of
+/-- **Existence of the final common modification**: the intermediate schemes are separated and of
 finite type over `S` (`TwoOpenSide.isSeparated_intermediateHom`), so the common
 modification of Stacks Project Tag 0F3X applies. The structural assertions of the lemma
 are the fields of `CommonModification`; the open immersion `U ⟶ W` is
@@ -471,7 +435,7 @@ theorem nonempty_finalModification [IsNoetherian S] [IsSeparated u] [LocallyOfFi
     P.side₁.intermediateU P.side₂.intermediateU
     (by rw [P.side₁.intermediateU_hom, P.side₂.intermediateU_hom])
 
-/-- Blueprint `proposition-compactifying-union-two-opens--1`: Final common modification for the
+/-- Final common modification for the
 two-open construction.
 
 The chosen common modification `W = CM(W₁, W₂; U)` of the two intermediate schemes
@@ -491,7 +455,7 @@ variable {P} (cm : P.FinalModification)
 lemma j_comp_w : cm.j ≫ cm.w = u := by
   rw [cm.j_w, P.side₁.intermediateU_hom]
 
-/-- Blueprint `proposition-compactifying-union-two-opens--1`: Structural properties of the final
+/-- Structural properties of the final
 common modification.
 
 For a final common modification `W` of `W₁`, `W₂` (for instance
@@ -510,11 +474,9 @@ theorem spec :
   ⟨cm.u₁_blowupMap, cm.u₂_blowupMap, inferInstance, inferInstance, cm.cover, cm.u_glue,
     inferInstance, inferInstance, inferInstance, inferInstance, cm.j_comp_w⟩
 
-/-- **Density after the final common modification** (blueprint:
-`proposition-compactifying-union-two-opens--1`): the map `O₁ ∩ O₂ ⟶ W` is dominant. The copies of
+/-- **Density after the final common modification**: the map `O₁ ∩ O₂ ⟶ W` is dominant. The copies of
 `U` are dense in the intermediate schemes, density is transported through the common
-modification (`CommonModification.dense_range_j`, blueprint
-`proposition-compactifying-union-two-opens--1`), and `O₁ ∩ O₂` is dense in `U`. Its
+modification, and `O₁ ∩ O₂` is dense in `U`. Its
 quasi-compactness is automatic, as `O₁ ∩ O₂` is Noetherian. -/
 theorem isDominant [IsNoetherian S] [LocallyOfFiniteType u] [QuasiCompact u]
     (hdense : Dense ((O₁ ⊓ O₂ : U.Opens) : Set U)) :
@@ -529,8 +491,7 @@ theorem isDominant [IsNoetherian S] [LocallyOfFiniteType u] [QuasiCompact u]
   rw [DenseRange, Scheme.Opens.range_ι]
   exact hdense
 
-/-- **Valuative lifting for the two-open candidate** (blueprint:
-`proposition-compactifying-union-two-opens--1`): every valuative square for `W ⟶ S` whose
+/-- **Valuative lifting for the two-open candidate**: every valuative square for `W ⟶ S` whose
 generic point factors through `O₁ ∩ O₂` has a unique lift. Extend the generic point to
 the two proper ambient models, pass to a side whose extension avoids its forbidden
 boundary (`TwoOpenSide.KeyDisjoint.avoids`), lift to the intermediate scheme of that
@@ -619,8 +580,7 @@ theorem valuativeCriterion_relativeTo :
   exact congrArg CommSq.LiftStruct.l
     (@Subsingleton.elim _ huniq ⟨l', hl'.1, hl'.2⟩ ⟨l, hl₁, hl₂⟩)
 
-/-- **Properness of the two-open candidate** (blueprint:
-`proposition-compactifying-union-two-opens--1`): `W ⟶ S` is separated and of finite type, and
+/-- **Properness of the two-open candidate**: `W ⟶ S` is separated and of finite type, and
 universally closed by the dense-source valuative criterion (Stacks Project Tag 0894)
 applied to the dominant quasi-compact map `O₁ ∩ O₂ ⟶ W`. -/
 theorem isProper_w [IsNoetherian S] [LocallyOfFiniteType u] [QuasiCompact u]
@@ -637,7 +597,7 @@ theorem isProper_w [IsNoetherian S] [LocallyOfFiniteType u] [QuasiCompact u]
       cm.valuativeCriterion_relativeTo
   exact ⟨⟩
 
-/-- **The two-open compactification** (blueprint: `proposition-compactifying-union-two-opens--1`):
+/-- **The two-open compactification**:
 the open immersion `U ⟶ W` into the final common modification, which is proper over `S`. -/
 def compactification [IsNoetherian S] [LocallyOfFiniteType u] [QuasiCompact u]
     (hdense : Dense ((O₁ ⊓ O₂ : U.Opens) : Set U)) : Compactification u where
@@ -652,9 +612,7 @@ end FinalModification
 
 end TwoOpenPreparation
 
-/-- **The two-open compactification theorem** (Stacks Project Tag 0F40; blueprint:
-`proposition-compactifying-union-two-opens`, `proposition-compactifying-union-two-opens--1`; proof
-order items 43–48).
+/-- **The two-open compactification theorem** (Stacks Project Tag 0F40).
 
 The compactification is the final common modification `W` (Stacks Project Tag 0F3X) of
 the two intermediate schemes `Wᵢ = U ⊔_{Oᵢ} Xᵢ°`

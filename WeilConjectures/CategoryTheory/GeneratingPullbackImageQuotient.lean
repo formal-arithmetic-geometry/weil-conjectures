@@ -14,7 +14,6 @@ import all WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullbackU
 /-! # Epic quotient onto the structural image ideal
 
 Source: Stacks Project, algebraization.tex, Tags 099E and 0A0G, finite generating covers.
-(blueprint: lem-weil-pbc-ringed-image-ideal-quotient).
 -/
 
 @[expose] public section
@@ -81,7 +80,6 @@ private theorem ideal_unit_endomorphism
 
 /-- The least structural-image ideal is an epic quotient of any specified module pullback.
 Source: Stacks Project, Modules on Sites, Tags 03D7 and 04IE; Algebraization, Tag 0A0G.
-(blueprint: lem-weil-pbc-ringed-image-ideal-quotient).
 
 Proof: present the inverse image algebraically and use tensor adjunction. A factorization
 of the underlying structural map through a monic ideal is linear by cancellation of that

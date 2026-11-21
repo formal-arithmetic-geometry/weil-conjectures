@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedMatePastedUnit
 
 /-! # Compatibility of right derivation with exact-adjoint mate squares
 
-Source: Mathlib's derived adjunction factorization equations; Stacks Project, Tag 079W.
-(blueprint: lem-pc-exact-left-adjoint-derived-mate-compatibility).
+Source: Stacks Project, Tag 079W.
 -/
 
 @[expose] public section
@@ -49,8 +48,7 @@ variable {C : Type u₁} {D : Type u₂} {C' : Type u₃} {D' : Type u₄}
 
 /-- The explicit right-derived comparison, assembled from the two composition
 comparisons and the derivation of the ordinary isomorphism.
-Source: Stacks Project, Tags 079W and 08FE
-(blueprint: lem-pc-exact-left-adjoint-derived-mate-compatibility). -/
+Source: Stacks Project, Tags 079W and 08FE. -/
 noncomputable def exactMateComparison :
     F.rightDerivedFunctor ⋙ G.mapDerivedCategory ≅
       H.mapDerivedCategory ⋙ K.rightDerivedFunctor :=
@@ -61,9 +59,7 @@ noncomputable def exactMateComparison :
 include hm hed in
 /-- Right derivation preserves an ordinary mate square when its two left adjoints
 are exact. The right-adjoint square is fixed by its composite right-derived unit.
-Source: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean,
-`derivedη_fac_app` and `derivedε_fac_app`; Stacks Project, Tag 079W.
-(blueprint: lem-pc-exact-left-adjoint-derived-mate-compatibility).
+Source: Stacks Project, Tag 079W.
 
 Proof: Apply the mates equivalence to the required equality. The right adjoint P
 of exact H preserves K-injective complexes, so RP followed by RF is a right

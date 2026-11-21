@@ -624,8 +624,7 @@ private theorem modelSquare
     Iso.inv_hom_id, Category.comp_id] using hh.symm
 
 /-- The local-family comparison descends to derived Hom with its fixed augmentations.
-Source: Stacks Project, Tags 08JB, 08FI, 0A8X and 0A95
-(blueprint: lem-weil-pbc-ringed-slice-hom-comparison-existence).
+Source: Stacks Project, Tags 08JB, 08FI, 0A8X and 0A95.
 
 Proof: relocalization identifies (C/U)/(V/U) with C/V, with identical covering
 sieves. In degree n this identifies the product of local maps from L^p to I^(p+n)

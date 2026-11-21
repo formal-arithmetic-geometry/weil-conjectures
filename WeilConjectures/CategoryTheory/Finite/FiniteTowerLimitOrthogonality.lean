@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 /-! # Derived orthogonality of finite-torsion tower limits
 
 The countable-power difference operator gives completeness directly.
-(blueprint: lem-sfb-finite-tower-limit-orthogonality).
 -/
 
 @[expose] public noncomputable section
@@ -262,7 +261,6 @@ both before and after exact, product-preserving, conservative scalar restriction
 
 Source: the completeness step of the diagonal tower limit proof, paragraphs (1) and (3),
 and the countable-product telescope argument of Stacks 099L/099M.
-(blueprint: lem-sfb-finite-tower-limit-orthogonality).
 
 Proof: on a countable power use the difference operator 1 minus l times the shift.
 For an object killed by a power of l this operator has a finite geometric inverse.

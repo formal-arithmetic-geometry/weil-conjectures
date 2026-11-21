@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 # Extension of morphisms between distinguished triangles
 
 Source: Beilinson–Bernstein–Deligne, *Faisceaux pervers*, Proposition 1.1.9
-and Corollaire 1.1.10 (ii), pp. 23–24
-(blueprint: lem-weil-pbc-triangle-morphism-extension).
+and Corollaire 1.1.10 (ii), pp. 23–24.
 
 ## Main statements
 
@@ -32,14 +31,13 @@ namespace CategoryTheory.Pretriangulated
 
 /--
 Source: Beilinson–Bernstein–Deligne, *Faisceaux pervers*, Proposition 1.1.9
-and Corollaire 1.1.10 (ii), pp. 23–24
-(blueprint: lem-weil-pbc-triangle-morphism-extension).
+and Corollaire 1.1.10 (ii), pp. 23–24.
 
 Proof:
 1. If `T.mor₁ ≫ g ≫ T'.mor₂ = 0`, exactness of Hom into `T'` gives `f`
    completing the first square (`lem-weil-pbc-hom-into-triangle-exact`, ii).
-2. TR3 (`def-weil-triangulated-category`) completes `(f,g)` to a triangle morphism.
-3. A triangle morphism supplies both squares (`def-weil-pbc-triangles-with-shift`).
+2. TR3 completes `(f,g)` to a triangle morphism.
+3. A triangle morphism supplies both squares.
    Conversely, the first square implies the vanishing composite because the first
    two arrows of `T'` compose to zero (`lem-weil-pbc-hom-into-triangle-exact`, i).
 4. Exactness of Hom out of `T` supplies `h` completing the second square

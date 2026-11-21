@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Limits.Types.Coproducts
 /-!
 # Orbit coproducts of discrete continuous actions
 
-Source: Stacks Project, Tag 03QT, proof of theorem-equivalence-sheaves-point.
+Source: Stacks Project, Tag 03QT.
 -/
 
 @[expose] public section
@@ -30,9 +30,7 @@ attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
   AlgebraicGeometry.etaleFieldActionForget₂
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 03QT, proof of theorem-equivalence-sheaves-point;
-finiteness uses Mathlib Subgroup.quotient_finite_of_isOpen.
-(blueprint: lem-exc-discrete-continuous-action-finite-orbit-coproduct).
+/-- Source: Stacks Project, Tag 03QT.
 
 Proof: Give the underlying type of M its action specified by M.obj.obj.ρ and
 let I be its quotient by the orbit equivalence relation. For each orbit take

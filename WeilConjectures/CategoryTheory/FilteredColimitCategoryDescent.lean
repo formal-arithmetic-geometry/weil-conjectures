@@ -24,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph and its
-finite-diagram remark, with Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-category-descent).
+/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph and its remark, with Categories, Section Tag 04AX.
 
 Proof: The object and arrow cocones are colimits of sets. Represent any finite
 lists by stage elements and take a common stage using filteredness. For each

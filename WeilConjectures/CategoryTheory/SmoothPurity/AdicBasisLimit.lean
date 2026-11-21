@@ -28,8 +28,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 # Finite bases of completed constant quotient sheaves
 
 Source: Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59, for the inverse-limit model.
-The finite-basis and cofinal-filtration refinement is the agent argument in the DAG
-(blueprint: lem-pur-adic-basis-limit).
+The finite-basis and cofinal-filtration refinement is the agent argument in the DAG.
 
 Levels of the inverse sequence are numbered by n : ℕ and have exponent n+1.
 Finite products in module sheaves are the finite direct sums in the statement.
@@ -50,15 +49,13 @@ namespace CategoryTheory
 
 variable {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
 
-/-- Ring sheafification on the small site, via Mathlib's small-model construction.
-Source: def-weil-pbc-constant-sheaf (blueprint: lem-pur-adic-basis-limit). -/
+/-- Ring sheafification on the small site, via Mathlib's small-model construction. -/
 instance adicBasisRingSheafify : HasSheafify J RingCat.{max uC vC r} :=
   letI : EssentiallySmall.{max uC vC r} C := essentiallySmallSelf.{r} _
   hasSheafifyEssentiallySmallSite J RingCat.{max uC vC r}
 
 /-- The constant quotient ring sheaf at a positive exponent n+1.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), inverse-limit model
-(blueprint: lem-pur-adic-basis-limit). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1), inverse-limit model. -/
 abbrev adicBasisResidue (A : Type (max uC vC r)) [CommRing A] (t : A) (n : ℕ) :
     Sheaf J RingCat.{max uC vC r} :=
   letI := adicBasisRingSheafify.{uC, vC, r} J
@@ -66,8 +63,7 @@ abbrev adicBasisResidue (A : Type (max uC vC r)) [CommRing A] (t : A) (n : ℕ) 
     (RingCat.of (A ⧸ (Ideal.span {t}) ^ (n + 1)))
 
 /-- The actual quotient tower, with reduction induced by the identity on A.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), inverse-limit model
-(blueprint: lem-pur-adic-basis-limit). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1), inverse-limit model. -/
 def adicBasisTower (A : Type (max uC vC r)) [CommRing A] (t : A) :
     ℕᵒᵖ ⥤ Sheaf J RingCat.{max uC vC r} :=
   letI := adicBasisRingSheafify.{uC, vC, r} J
@@ -80,20 +76,17 @@ def adicBasisTower (A : Type (max uC vC r)) [CommRing A] (t : A) :
   Q ⋙ constantSheaf J RingCat.{max uC vC r}
 
 /-- The limit is Mathlib's limit of ring sheaves and is computed sectionwise.
-Source: Bhatt--Scholze, Lemma 6.8.2(1); def-pur-sheaf-inverse-limit
-(blueprint: lem-pur-adic-basis-limit). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
 abbrev adicBasisCompletion (A : Type (max uC vC r)) [CommRing A] (t : A) :=
   limit (adicBasisTower.{uC, vC, r} J A t)
 
 /-- The projection at positive exponent n+1.
-Source: Bhatt--Scholze, Lemma 6.8.2(1), inverse-limit model
-(blueprint: lem-pur-adic-basis-limit). -/
+Source: Bhatt--Scholze, Lemma 6.8.2(1), inverse-limit model. -/
 def adicBasisProjection (A : Type (max uC vC r)) [CommRing A] (t : A) (n : ℕ) :
     adicBasisCompletion.{uC, vC, r} J A t ⟶ adicBasisResidue.{uC, vC, r} J A t n :=
   limit.π (adicBasisTower.{uC, vC, r} J A t) (op n)
 
-/-- The residue of an element as a constant section, using the sheafification unit.
-Source: DAG proof, steps 1--2 (blueprint: lem-pur-adic-basis-limit). -/
+/-- The residue of an element as a constant section, using the sheafification unit. -/
 def adicBasisConstant (A : Type (max uC vC r)) [CommRing A] (t : A) (n : ℕ) (U : Cᵒᵖ)
     (a : A) : (adicBasisResidue.{uC, vC, r} J A t n).obj.obj U :=
   letI := adicBasisRingSheafify.{uC, vC, r} J
@@ -101,15 +94,12 @@ def adicBasisConstant (A : Type (max uC vC r)) [CommRing A] (t : A) (n : ℕ) (U
     (RingCat.of (A ⧸ (Ideal.span {t}) ^ (n + 1))))).app U
       (Ideal.Quotient.mk ((Ideal.span {t}) ^ (n + 1)) a)
 
-/-- A finite direct sum of the coefficient module, represented by its finite product.
-Source: DAG proof, step 5; situation-conventions
-(blueprint: lem-pur-adic-basis-limit). -/
+/-- A finite direct sum of the coefficient module, represented by its finite product. -/
 abbrev adicBasisFree (R : Sheaf J RingCat.{max uC vC r}) (d : ℕ) :
     ringedSiteModules.{max uC vC r} R :=
   ∏ᶜ (fun _ : Fin d ↦ SheafOfModules.unit R)
 
-/-- Coordinate projections of the finite direct sum on sections.
-Source: DAG proof, step 5 (blueprint: lem-pur-adic-basis-limit). -/
+/-- Coordinate projections of the finite direct sum on sections. -/
 def adicBasisCoordinate (R : Sheaf J RingCat.{max uC vC r}) (d : ℕ) (U : Cᵒᵖ)
     (x : (adicBasisFree.{uC, vC, r} J R d).val.obj U) (i : Fin d) : R.obj.obj U :=
   (Pi.π (fun _ : Fin d ↦ SheafOfModules.unit R) i).val.app U x
@@ -117,7 +107,6 @@ def adicBasisCoordinate (R : Sheaf J RingCat.{max uC vC r}) (d : ℕ) (U : Cᵒ�
 variable {A B : Type r} [CommRing A] [CommRing B] [Algebra A B]
 
 /-- The two ideal inclusions needed for the same-level and cofinal quotient maps.
-Source: DAG proof, step 3 (blueprint: lem-pur-adic-basis-limit).
 Proof: t^n maps to u^n v^(en), so t^n B = v^(en) B because u^n is a unit.
 Since en ≥ n, this ideal is contained in v^n B. Taking inverse images gives
 both displayed inclusions at the positive exponent n+1. The subtraction in the
@@ -174,8 +163,7 @@ private theorem adicBasisCofinal_basis (d : ℕ) (b : Module.Basis (Fin d) A B)
 variable {A B : Type (max uC vC r)} [CommRing A] [CommRing B] [Algebra A B]
 
 /-- The canonical quotient map A/t^(n+1) -> B/v^(n+1).
-Its underlying ring map is induced by the given algebra map.
-Source: DAG proof, step 3 (blueprint: lem-pur-adic-basis-limit). -/
+Its underlying ring map is induced by the given algebra map. -/
 def adicBasisScalar (t : A) (v : B) (a : Bˣ) (e : ℕ)
     (he : 1 ≤ e) (ht : algebraMap A B t = (a : B) * v ^ e) (n : ℕ) :
     adicBasisResidue.{uC, vC, r} J A t n ⟶ adicBasisResidue.{uC, vC, r} J B v n :=
@@ -185,8 +173,7 @@ def adicBasisScalar (t : A) (v : B) (a : Bˣ) (e : ℕ)
       (adicBasis_ideal_bounds.{max uC vC r} t v a e he ht n).1))
 
 /-- The quotient map at exponents n+1 and e(n+1), using t^(n+1)B=v^(e(n+1))B.
-Natural-number level e(n+1)-1 denotes positive exponent e(n+1).
-Source: DAG proof, steps 3--4 (blueprint: lem-pur-adic-basis-limit). -/
+Natural-number level e(n+1)-1 denotes positive exponent e(n+1). -/
 def adicBasisCofinalScalar (t : A) (v : B) (a : Bˣ) (e : ℕ)
     (he : 1 ≤ e) (ht : algebraMap A B t = (a : B) * v ^ e) (n : ℕ) :
     adicBasisResidue.{uC, vC, r} J A t n ⟶ adicBasisResidue.{uC, vC, r} J B v (e * (n + 1) - 1) :=
@@ -195,8 +182,7 @@ def adicBasisCofinalScalar (t : A) (v : B) (a : Bˣ) (e : ℕ)
     (Ideal.quotientMap ((Ideal.span {v}) ^ (e * (n + 1) - 1 + 1)) (algebraMap A B)
       (adicBasis_ideal_bounds.{max uC vC r} t v a e he ht n).2))
 
-/-- The normalization characterizing the ring map of completions.
-Source: DAG proof, step 3 (blueprint: lem-pur-adic-basis-limit). -/
+/-- The normalization characterizing the ring map of completions. -/
 def AdicBasisScalarCondition (t : A) (v : B) (a : Bˣ) (e : ℕ)
     (he : 1 ≤ e) (ht : algebraMap A B t = (a : B) * v ^ e)
     (f : adicBasisCompletion.{uC, vC, r} J A t ⟶ adicBasisCompletion.{uC, vC, r} J B v) : Prop :=
@@ -677,16 +663,14 @@ private theorem adicBasisForward_isIso (d : ℕ) (b : Module.Basis (Fin d) A B)
 columns and their cofinal projection factorization.
 
 Source: Bhatt--Scholze, Lemma 6.8.2(1), pp. 58--59, for the inverse-limit model;
-finite-basis/cofinal-filtration refinement: DAG agent argument
-(blueprint: lem-pur-adic-basis-limit).
+finite-basis/cofinal-filtration refinement: DAG agent argument.
 
 Proof: (1) The basis map A^d -> B descends modulo t^n, with inverse given by
 reducing the coordinate maps. Both commute with reductions, including d=0.
 (2) Constant presheaves and sheafification carry these maps to quotient basis
-isomorphisms, since sheafification preserves finite products
-(situation-conventions). The module-sheafification universal property
-(lem-pc-sites-module-sheafification-interface) and its underlying-set comparison
-(lem-pc-sites-sheafification-underlying-sets) identify the target with the ring sheaf.
+isomorphisms, since sheafification preserves finite products. The module-sheafification universal property
+and its underlying-set comparison
+identify the target with the ring sheaf.
 (3) The ideal identities t^n B=v^(en)B and inclusions t^m B ⊆ v^m B give
 compatible quotient ring maps. Their sectionwise limit is f; its coordinates give
 uniqueness. (4) Restriction to exponents en identifies the two B-towers cofinally:

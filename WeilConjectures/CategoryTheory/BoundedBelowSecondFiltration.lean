@@ -12,7 +12,6 @@ public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 /-! # The second filtration for a double complex supported in a half-plane
 
 Source: Stacks Project, Tags 012Z and 0132.
-(blueprint: lem-sp-bounded-below-second-filtration).
 -/
 
 @[expose] public section
@@ -54,9 +53,7 @@ private theorem bounded_factors_zsmul
   exact Subobject.factors_comp_arrow _
 
 /-- The finite image sums are preserved by the total differential without a support assumption.
-Source: Stacks Tag 012Z; the calculation in `secondFiltration_subcomplex` of
-`WeilConjectures.CategoryTheory.DoubleComplexTotal`,
-with its unused first-quadrant hypothesis removed. -/
+Source: Stacks Tag 012Z. -/
 private theorem bounded_secondFiltration_subcomplex
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
@@ -107,8 +104,7 @@ private theorem bounded_secondFiltration_subcomplex
   exact ⟨Q.factorThru _ hQ, Subobject.factorThru_arrow _ _ _⟩
 
 /-- The second filtration assembles into subcomplexes and has degreewise bounds.
-Source: Stacks Project, Tags 012Z and 0132; blueprint thm-sp-if-e1, proof paragraph 1.
-(blueprint: lem-sp-bounded-below-second-filtration).
+Source: Stacks Project, Tags 012Z and 0132.
 
 Proof.
 For total degree n the nonzero summands have first index i nonnegative and second

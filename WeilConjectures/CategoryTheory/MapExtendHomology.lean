@@ -23,9 +23,6 @@ namespace CochainComplex
 
 /-- Applying an additive functor to extension by zero does not change homology
 in a nonnegative degree.
-Source: Mathlib `HomologicalComplex.extend` in Embedding/Extend.lean and
-`HomologicalComplex.extendHomologyIso` in Embedding/ExtendHomology.lean.
-(blueprint: lem-weil-pbc-map-extend-homology)
 
 Proof: `HomologicalComplex.mapExtendIso` identifies `E` applied to the extension by zero of `K`
 with the extension by zero of `E` applied to `K`. Map this complex isomorphism by degree-`q`

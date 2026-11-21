@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Brown representability criterion for a right adjoint
 
-Source: Stacks Project, Derived Categories, Tag 0A8G, Proposition `proposition-brown`
-(blueprint: lem-pc-brown-representability-right-adjoint).
+Source: Stacks Project, Derived Categories, Tag 0A8G, Proposition.
 -/
 
 @[expose] public section
@@ -32,7 +31,7 @@ namespace CategoryTheory
 
 /-- An exact functor from a compactly generated triangulated category that preserves
 set-indexed coproducts has a right adjoint. Source: Stacks Project, Tag 0A8G,
-Proposition `proposition-brown` (blueprint: lem-pc-brown-representability-right-adjoint).
+Proposition.
 The indexing universe contains both morphism universes and an arbitrary universe `w`
 for the generating set; object universes are independent.
 

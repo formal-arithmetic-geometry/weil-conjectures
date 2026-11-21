@@ -14,10 +14,6 @@ import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 /-!
 # Objectwise tensor product and internal hom of presheaves
 
-Source: the Weil conjectures blueprint, `chap-The-pro-etale-site`,
-`sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md`, clauses 1--2 and
-both Hom formulas (blueprint: det-def-sfb-sheaf-tensor-presheaf).
-
 The tensor is Mathlib's `Monoidal.functorCategoryMonoidal`; its symmetry is
 `Monoidal.functorCategorySymmetric`. The internal hom is the existing
 `Enriched.FunctorCategory.functorEnrichedHom`, not a second construction.
@@ -38,9 +34,7 @@ open scoped CategoryTheory.MonoidalClosed
 namespace CategoryTheory
 
 /-- Extend the canonical small-model end along preimage isomorphisms and verify
-its universal property. This implements steps 2–3 of the presheaf tensor node.
-Source: `det-def-sfb-sheaf-tensor-presheaf`, clause 2; the projection transport
-calculation is also used in the upstream `precompEnrichedHomInv`. -/
+its universal property. This implements steps 2–3 of the presheaf tensor node. -/
 private theorem hasEnrichedHom_of_essentiallySmall
     {J : Type uC} [Category.{vC} J] [EssentiallySmall.{w} J]
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{w} A]
@@ -110,10 +104,6 @@ private theorem hasEnrichedHom_of_essentiallySmall
 The first family supplies the enriched bifunctor used by the closed structure, and the
 second supplies the end at every object of the site. Neither the object universe of the
 site nor either coefficient universe is identified with the smallness universe `w`.
-
-Source: the Weil conjectures blueprint, `chap-The-pro-etale-site`,
-`sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md`, clause 2 and both
-Hom formulas (blueprint: det-def-sfb-sheaf-tensor-presheaf).
 
 Proof of the node, following its seven steps:
 1. Use the pointwise tensor on functors: objects and arrows are tensor products of their

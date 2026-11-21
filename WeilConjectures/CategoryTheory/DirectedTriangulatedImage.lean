@@ -25,8 +25,6 @@ variable {I : Type w} [Preorder I] [Nonempty I]
 
 /-- If all morphisms between images descend, the union of the essential images is
 triangulated.
-Source: upstream master, ModuleObject/Colimit/TwoColimit.lean, Postnikov object descent
-(auxiliary; not a blueprint node).
 
 Proof: zero is the image of zero at any stage. Shift a model and use the functor's shift
 comparison. Isomorphism closure follows by composing the witnessing isomorphisms.

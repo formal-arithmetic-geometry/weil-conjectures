@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Comparisons normalized on functorial resolutions
 
-Source: Stacks Project, Tag 0D6E; the resolution argument for uniqueness of derived functors.
-(blueprint: lem-pur-resolution-normalized-comparison). -/
+Source: Stacks Project, Tag 0D6E. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,8 +20,7 @@ namespace CategoryTheory.Localization
 
 /-- Two transformations which become isomorphisms on functorial resolutions determine
 one normalized isomorphism after localization.
-Source: Stacks Project, Tag 0D6E
-(blueprint: lem-pur-resolution-normalized-comparison).
+Source: Stacks Project, Tag 0D6E.
 Proof: on a resolution invert the first transformation and follow it by the second.
 Conjugate by the localized resolution maps, which are invertible. Full faithfulness
 of precomposition with localization descends this isomorphism. Naturality along the
@@ -80,8 +78,7 @@ private theorem resolutionNormalizedComparison_aux
   exact (he' (P.obj X)).trans (hn (P.obj X)).symm
 
 /-- A specified model isomorphism may be retained in the normalization equation.
-Source: Stacks Project, Tag 0D6E
-(blueprint: lem-pur-resolution-normalized-comparison).
+Source: Stacks Project, Tag 0D6E.
 Proof: compose the second transformation with the inverse of the model isomorphism.
 The resolution comparison lemma descends the resulting unique isomorphism through
 localization. Postcomposition with the model isomorphism gives the stated equation;

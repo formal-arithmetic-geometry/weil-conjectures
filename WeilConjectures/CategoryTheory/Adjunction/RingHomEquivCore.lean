@@ -22,7 +22,6 @@ namespace CategoryTheory.Adjunction
 
 /-- Restriction of the original natural hom-bijection to ring morphisms, once the
 transported functors and their operation equations have been constructed.
-(blueprint: lem-weil-pbc-ring-hom-equiv-core)
 Source: Stacks Project, Proposition 00YV, proof of (2), details of adjunct restriction.
 
 Proof: identify the underlying objects using hL and hR. Naturality of the unit

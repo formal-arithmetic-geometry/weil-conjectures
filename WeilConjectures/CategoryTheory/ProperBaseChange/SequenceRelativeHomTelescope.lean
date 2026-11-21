@@ -13,9 +13,7 @@ public import Mathlib.Algebra.DirectSum.Basic
 /-!
 # Hom into a sequence-relative telescope
 
-Source: Stacks Project, Derived Categories, Tags 0CRK, 094A and 093W; the
-sequence-relative version of their exact-sequence argument
-(blueprint: lem-weil-pbc-sequence-relative-hom-telescope).
+Source: Stacks Project, Derived Categories, Tags 0CRK, 094A and 093W.
 -/
 
 @[expose] public section
@@ -59,8 +57,7 @@ private theorem sequential_difference_injective
 
 /-- Hom into a chosen telescope is the sequential colimit of the Hom groups if the
 coproduct comparisons for this sequence and its shift by one are bijective.
-Source: Stacks Project, Derived Categories, Tags 0CRK, 094A and 093W
-(blueprint: lem-weil-pbc-sequence-relative-hom-telescope).
+Source: Stacks Project, Derived Categories, Tags 0CRK, 094A and 093W.
 
 The colimit is in `AddCommGrpCat`; its transitions are postcomposition with the maps
 of `X`. The equations on every stage uniquely specify the canonical group homomorphism.
@@ -71,7 +68,7 @@ Proof:
    bijective additive comparison maps identify their direct sums with `Hom(K, B)`
    and `Hom(K, B[1])`. On each summand, postcomposition by `1 - s` corresponds
    to identity minus the forward transition shift. The same holds after shifting,
-   since shift is additive (`def-weil-triangulated-category`). These identities
+   since shift is additive. These identities
    extend to finite sums.
 2. Identity minus forward shift on the shifted direct sum is injective: its
    zeroth coordinate gives `g 0 = 0`, and coordinate `n + 1` gives
@@ -85,7 +82,7 @@ Proof:
    Thus the induced map from the unshifted direct sum is surjective with kernel
    the image of identity minus forward shift.
 4. The quotient of that sum by this image is the sequential colimit of the
-   groups `A n` (`def-weil-pbc-category-colimit`): its summand maps are compatible.
+   groups `A n`: its summand maps are compatible.
    Every compatible family of group homomorphisms extends to the sum, kills the
    image, and factors uniquely through the quotient. Successor compatibility
    extends to all transitions by induction.

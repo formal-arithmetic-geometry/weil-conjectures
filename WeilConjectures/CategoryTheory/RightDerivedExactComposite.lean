@@ -11,9 +11,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 /-!
 # Right derived functors after an exact functor
 
-Source: Weil conjectures blueprint, `theorem-riemann-roch-coherent-serre-duality--2`, standard
-homological algebra parenthetical; Stacks Project, Tag 015M (blueprint:
-lem-sc-ext-derived-composite).
+Source: Stacks Project, Tag 015M.
 -/
 
 @[expose] public section
@@ -61,21 +59,20 @@ private theorem homotopy_of_resolution
     · simp [(CochainComplex.exact_succ_of_quasiIso_single₀ ι (n + 1)).comp_descToInjective]
   exact ⟨Homotopy.equivSubZero.invFun hz0⟩
 
-/-- (blueprint: lem-sc-ext-derived-composite) An exact functor `T` whose injective images
+/--  An exact functor `T` whose injective images
 are `U`-acyclic can be pulled inside every right derived functor of the left exact functor `U`.
 The isomorphism is canonical: for any injective resolutions `I` of `M` and `J` of `T(M)`,
 its forward map is the cohomology map of any lift `φ : T(I) ⟶ J` of the identity, transported
 through the injective-resolution identifications and the complex-composition isomorphism.
 
-Source: blueprint `theorem-riemann-roch-coherent-serre-duality--2`, standard homological algebra
-parenthetical; Stacks Project, Tag 015M, proof (using Tag 015E).
+Source: Stacks Project, Tag 015M, proof (using Tag 015E).
 
-Proof: choose an injective resolution `M ⟶ I` (def-sp-injective-resolutions). Exactness of
+Proof: choose an injective resolution `M ⟶ I`. Exactness of
 `T` makes `T(M) ⟶ T(I)` a resolution, although its terms need not be injective. The hypothesis
-makes every term `T(Iⁿ)` acyclic (def-sp-acyclic). Apply the acyclic-resolution comparison of
+makes every term `T(Iⁿ)` acyclic. Apply the acyclic-resolution comparison of
 lemma-weil-pbc-leray-acyclicity, item 2: any lift to an injective resolution `J` identifies
 `RⁱU(T(M))` with `Hⁱ(U(T(I)))`. The composite `T ⋙ U` is left exact and its right derived
-functor, computed with `I`, is the same cohomology object (def-sp-left-exact-additive).
+functor, computed with `I`, is the same cohomology object.
 Transporting the comparison gives the claimed isomorphism, with the displayed formula for
 all choices of resolutions and lifts; homotopy uniqueness makes the formula independent
 of those choices. -/

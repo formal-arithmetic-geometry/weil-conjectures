@@ -89,9 +89,7 @@ private noncomputable def modelComparison (I : CochainComplex C ℤ) [I.IsKInjec
 end
 
 /-- The native derived closed structure is exact in the contravariant variable.
-Source: Stacks Project, Tag 08JC; the K-injective internal-Hom model used by
-`exists_distinguished_ihom_pre`
-(blueprint: lem-weil-native-internal-hom-contravariant-exact).
+Source: Stacks Project, Tag 08JC.
 
 Proof: Choose a K-injective complex I representing W. Put F(P)=internalHomObj P I.
 Its degree n is the product of [P^p,I^(p+n)], with differential

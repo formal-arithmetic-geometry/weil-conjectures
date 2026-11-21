@@ -23,8 +23,7 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Enough points from a cover by finitary slices
 
-Source: Stacks Project, Sites, Lemma 0DW0, `lemma-criterion-points`, in Section 00YN
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Lemma 0DW0, in Section 00YN.
 -/
 
 @[expose] public section
@@ -410,14 +409,13 @@ private theorem coversTop_of_epi
 
 /-- A cover of the terminal sheaf by sheafified representables whose slices have finite
 limits and finite covering refinements gives a conservative set of points.
-Source: Stacks Project, Sites, Lemma 0DW0, `lemma-criterion-points`, Section 00YN
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Lemma 0DW0, Section 00YN.
 
 The localized covering families are exactly `J.comap (Over.forget (U i))`: membership
 means that the underlying family covers in `C`, and its generated topology is
-`J.toGrothendieck.over (U i)` (def-pur-localized-ringed-site). The representables
+`J.toGrothendieck.over (U i)`. The representables
 are explicitly sheafified; subcanonicity is not assumed. The value and point-index
-universe `max u v w` contains both site universes (prose-01-10).
+universe `max u v w` contains both site universes.
 Every covering presieve has a presentation indexed in `Type (max u v)`, so the
 finite-refinement condition covers arbitrary presentations, including repetitions.
 

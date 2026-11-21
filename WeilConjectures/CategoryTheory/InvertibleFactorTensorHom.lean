@@ -24,8 +24,7 @@ Hom(K,L tensor Q) is invertible because Q is invertible. Curry in P; the
 unit of this adjunction is invertible because tensoring with P is an equivalence.
 Double uncurrying and monoidal coherence identify this composite with the given
 two-evaluation transpose followed by the internal currying isomorphism. Cancel
-the latter. No dualizability of K or L is needed.
-(blueprint: lem-per-invertible-factor-tensor-hom). -/
+the latter. No dualizability of K or L is needed. -/
 theorem tensorHom_isIso_of_isInvertible
     {C : Type*} [Category* C] [MonoidalCategory C] [SymmetricCategory C]
     [MonoidalClosed C] (K L P Q : C) (hP : IsInvertible P) (hQ : IsInvertible Q) :

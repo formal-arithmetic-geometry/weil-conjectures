@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafSections
 /-! # Simultaneous local lifting of finitely many module sections
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3), lifting the chosen generators.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace SheafOfModules
 /-- Finitely many sections lift through a module-sheaf epimorphism on a common covering
 sieve, including the case of no sections.
 Source: Stacks Project, Modules on Sites, Tag 093U (3), extension paragraph.
-(auxiliary; not a blueprint node).
 
 Proof: Forgetting to abelian sheaves preserves epimorphisms because it preserves
 cokernels. An epimorphism of abelian sheaves is locally surjective, so the image sieve

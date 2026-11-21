@@ -9,10 +9,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedC
 
 /-!
 # Closedness of the derived tensor product
-
-Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
-`sk-def-sfb-derived-tensor-hom`, lemma `prose-03-02`
-(blueprint: prose-03-02).
 -/
 
 @[expose] public section
@@ -25,10 +21,6 @@ namespace DerivedCategory
 
 /-- In the situation of `prose-03-02`, tensoring on the left by any object
 of the unbounded derived category has a right adjoint.
-
-Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
-`sk-def-sfb-derived-tensor-hom`, lemma `prose-03-02`
-(blueprint: prose-03-02).
 
 Proof: First form the product internal-Hom complex and use evaluation and currying to
 obtain the tensor-Hom adjunction on the homotopy category. Next, the binary derived

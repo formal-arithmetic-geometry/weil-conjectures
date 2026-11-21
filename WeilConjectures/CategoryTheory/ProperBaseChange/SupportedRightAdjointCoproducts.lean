@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Coproducts and the supported right adjoint
 
-Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4)
-(blueprint: lem-weil-pbc-supported-right-adjoint-coproducts).
+Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +26,7 @@ namespace CategoryTheory
 -- The unbounded derived comparisons require elaborating several functor structures.
 /-- The supported right adjoint preserves any coproduct preserved by the open
 localization endofunctor.
-Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4)
-(blueprint: lem-weil-pbc-supported-right-adjoint-coproducts).
+Source: Stacks Project, Tag 09BM; Bhatt--Scholze, Lemma 6.3.14(4).
 
 Proof: closed restriction and open restriction jointly detect isomorphisms.
 For an object killed by open restriction, the closed-adjunction unit becomes

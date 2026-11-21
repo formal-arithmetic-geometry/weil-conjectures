@@ -188,8 +188,7 @@ attribute [local instance] comp_preservesFiniteLimits
 
 /-- Extension of scalars of internal modules preserves flat objects.
 
-Source: Stacks, sites-modules.tex, lemma-flat-change-of-rings; Tag 07A4.
-(blueprint: lem-sfb-internal-extension-preserves-flat).
+Source: Stacks, sites-modules.tex; Tag 07A4.
 
 Proof: the bimodule associator and right unitor identify the underlying object of
 `N ⊗_S (S ⊗_R M)` with that of `Res N ⊗_R M`, naturally in N. Restriction and the

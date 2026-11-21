@@ -15,7 +15,6 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 # Comparing boundaries after extension by zero
 
 Source: Stacks Project, Homology, Tag 0117; Derived Categories, Tag 014Q.
-(blueprint: lem-sc-p1-nat-complex-derived-boundary).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace CategoryTheory
 an `ℕ`-indexed complex with its original homology. This is the composite of
 localization's homology identification and extension's homology identification.
 
-Source: Stacks Project, Derived Categories, Tag 014Q; Homology, Tag 0117.
-(blueprint: lem-sc-p1-nat-complex-derived-boundary). -/
+Source: Stacks Project, Derived Categories, Tag 014Q; Homology, Tag 0117. -/
 noncomputable def natComplexDerivedHomologyIso
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (K : CochainComplex C ℕ) (n : ℕ) :
@@ -171,7 +169,6 @@ complexes, and its derived triangle boundary is the original snake boundary unde
 `natComplexDerivedHomologyIso`.
 
 Source: Stacks Project, Homology, Tag 0117; Derived Categories, Tag 014Q.
-(blueprint: lem-sc-p1-nat-complex-derived-boundary).
 
 Proof:
 1. Check exactness degreewise. In a nonnegative degree the extended row is

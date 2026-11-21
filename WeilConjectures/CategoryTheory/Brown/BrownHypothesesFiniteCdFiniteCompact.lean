@@ -23,7 +23,6 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructi
 This is the finite-coefficient compactness input needed by the corrected Brown theorem.
 The existing finite-coefficient compactness theorem is specialized to finite or separably
 closed fields; the present statement isolates its finite-cohomological-dimension extension.
-(blueprint: lem-sfb-brown-finite-cd-finite-compact)
 -/
 
 @[expose] public section
@@ -207,8 +206,7 @@ private theorem finiteCoefficientLiftIso (A : Type) [CommRing A] [TopologicalSpa
 /-- For a finite discrete admissible coefficient, finite ℓ-cohomological dimension of the
 base field gives the objectwise compactness clause in the Noetherian Brown criterion.
 
-Source: blueprint `proposition-compactness-finite-coefficients` and
-`sk-lem-brown-hypotheses.proof.md`, compactness paragraph. Proof: transport a bounded constructible
+Proof: transport a bounded constructible
 finite-Tor complex to the finite-coefficient étale model, apply the finite-coefficient compactness
 argument using the finite torsion cohomological-dimension bound supplied by
 `cohomologicalDimension_lt_top_of_finiteType`, and transport compactness back through the

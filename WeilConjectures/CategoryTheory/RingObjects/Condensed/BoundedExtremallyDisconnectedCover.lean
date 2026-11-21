@@ -14,8 +14,7 @@ import Mathlib.Topology.Category.Stonean.Basic
 /-!
 # Bounded extremally disconnected covers of profinite spaces
 
-Source: Stacks Project, Topology, Tags 090D and 090E
-(blueprint: lem-weil-pbc-bounded-extremally-disconnected-cover).
+Source: Stacks Project, Topology, Tags 090D and 090E.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ universe u
 namespace Profinite
 
 /-- Every profinite space admits an extremally disconnected profinite cover with the stated
-cardinal bound. Source: Stacks Project, Topology, Tags 090D and 090E
-(blueprint: lem-weil-pbc-bounded-extremally-disconnected-cover).
+cardinal bound. Source: Stacks Project, Topology, Tags 090D and 090E.
 
 Proof plan:
 1. Take the ultrafilters on the underlying set of `X`, with the compact Hausdorff topology

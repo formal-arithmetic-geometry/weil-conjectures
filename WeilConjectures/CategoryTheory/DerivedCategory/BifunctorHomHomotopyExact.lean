@@ -12,11 +12,8 @@ import WeilConjectures.Algebra.Homology.BifunctorHomCone
 /-!
 # Exactness of the signed bifunctor Hom complex on the homotopy category
 
-Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`, termwise-split Hom argument,
-generalized to a separately additive bifunctor; the signed model is
-`CochainComplex.bifunctorHomObj` in
-`WeilConjectures.Algebra.Homology.BifunctorHomComplex`.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 08JC, termwise-split Hom argument,
+generalized to a separately additive bifunctor.
 
 The existing `bifunctorHomHomotopyFunctor H I` takes values in the opposite derived
 category. Its `leftOp` is the functor from the opposite homotopy category to the derived
@@ -499,9 +496,7 @@ end ShiftConstruction
 commutation with all integer shifts making it triangulated on the opposite homotopy category.
 No K-injectivity of `I`, exactness of products, or preservation of quasi-isomorphisms is needed.
 
-Source: Stacks Project, Tag 08JC, `lemma-RHom-triangulated`; the arbitrary-bifunctor signed
-calculation is the explicit generalization in the blueprint proof.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 08JC.
 
 Proof plan, following the five steps of the node:
 1. Put `U(K) = bifunctorHomObj H K I`. Its degree `n` is the product over `p + n = q`.

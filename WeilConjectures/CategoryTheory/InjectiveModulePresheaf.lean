@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 /-!
 # Injective module sheaves are injective presheaves
 
-Source: literature/stacks-project/sites-cohomology.tex, Lemma Tag 03FB
-(blueprint: lem-weil-pbc-ringed-site-injective-module-injective-presheaf).
+Source: literature/stacks-project/sites-cohomology.tex, Lemma Tag 03FB.
 -/
 
 @[expose] public section
@@ -27,16 +26,13 @@ namespace CategoryTheory
 /-- For a ringed site, an injective sheaf of modules is injective as its underlying
 presheaf of modules. The assertion is the exact-sheafification adjunction argument.
 Source: Stacks Project, Lemma Tag 03FB.
-(blueprint: lem-weil-pbc-ringed-site-injective-module-injective-presheaf)
 
 Proof:
 1. The module sheafification functor `PresheafOfModules.sheafification (𝟙 R.obj)` is left
-   adjoint to the inclusion, by `PresheafOfModules.sheafificationAdjunction`
-   (def-weil-presheaf-modules-sheafification). It is exact
-   (lem-weil-pbc-ringed-site-module-sheafification-exact), so it preserves monomorphisms.
+   adjoint to the inclusion, by `PresheafOfModules.sheafificationAdjunction`. It is exact, so it preserves monomorphisms.
 2. Apply `Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms`
-   (lem-sp-right-adjoint-preserves-injectives) to this adjunction. Since `I` is injective
-   (def-sp-injective-resolutions) in the sheaf category (situation-conventions),
+   to this adjunction. Since `I` is injective
+   in the sheaf category,
    its underlying presheaf is injective. The right adjoint for the identity ring map is
    the inclusion followed by identity restriction of scalars, canonically the inclusion.
 -/

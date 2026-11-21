@@ -21,8 +21,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import Mathlib.CategoryTheory.Abelian.ShortExact
 
-/-! # Kummer-normalized derived residue units
-(blueprint: lem-sp-residue-kummer-derived-unit).
+/-! # Kummer-normalized derived residue units.
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +42,8 @@ variable {C : Type (u + 1)} [Category.{u} C] (J : GrothendieckTopology C)
 [lem-sp-residue-kummer-derived-unit], suppose 0→K→G→G→0 has last map n>0 and f:K≅UH for a
 ULift(Z/n)-module sheaf H. Then the connecting class followed by mk0(f) is a degree-one derived Ext
 unit [def-sp-derived-scalar-ext-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-residue-kummer-iso-derived-unit).
+Source: Stacks 0152,
+06YY and 0GLZ.
 Proof: Replace the kernel map by f inverse followed by the original inclusion. The resulting short
 complex is isomorphic to the original one and is therefore short exact. Apply the residue Kummer
 unit theorem to it. Naturality of Ext classes for the isomorphism of short exact sequences

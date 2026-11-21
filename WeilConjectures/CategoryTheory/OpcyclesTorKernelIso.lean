@@ -22,8 +22,7 @@ import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 /-!
 # Tor as the kernel of a tensor image inclusion
 
-Source: Stacks Project, Tag 0653, the Tor argument in `lemma-last-one-flat`.
-(blueprint: lem-pc-module-opcycles-tor-kernel-iso).
+Source: Stacks Project, Tag 0653, the Tor argument in.
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ private theorem isZero_tor_one_flat
 
 /-- The first Tor of the opcycles is the kernel of the image inclusion after tensoring.
 Source: Stacks Project, Tag 0653, Tor argument; Algebra, Tags 00M0 and 00M3.
-(blueprint: lem-pc-module-opcycles-tor-kernel-iso)
 
 Proof: Put K = im(P.d (a-1) a). The image inclusion and the opcycles projection form
 an exact sequence 0 -> K -> P.X a -> P.opcycles a -> 0. Apply the first-variable

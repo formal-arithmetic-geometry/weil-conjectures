@@ -14,7 +14,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 /-! # Locally specified isomorphisms after module sheafification
 
 Source: Stacks Project, Tag 099E, identification after a covering refinement.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -91,7 +90,6 @@ private theorem locusMap_injective
 /-- Linear identifications on a restriction-stable locus which locally contains every
 object induce an isomorphism after sheafification.
 Source: Stacks Project, Tag 099E, local identities glue after sheafification.
-(auxiliary; not a blueprint node).
 
 Proof: take the subpresheaf of M which equals M on the locus and is zero elsewhere.
 It maps injectively to M and to N, using the prescribed local linear equivalences.
@@ -179,7 +177,6 @@ theorem exists_sheafificationIso_of_localEquiv
 
 /-- Maps out of a sheafification are determined by presheaf sections on a covering locus.
 Source: Stacks Project, Tag 099E, uniqueness of the local identification.
-(auxiliary; not a blueprint node).
 Proof: use the sheafification adjunction, then separatedness on the given covering sieves. -/
 theorem sheafification_hom_ext_on_locus
     (hcover : ∀ X : C, ∃ S ∈ J X, ∀ (Y : C) (f : Y ⟶ X), S f → E (op Y))
@@ -210,9 +207,7 @@ theorem sheafification_hom_ext_on_locus
   change g'.app (op Y) (M.map a.op x) = L.val.map a.op (g'.app X x) at hg
   exact hf.symm.trans ((h (op Y) (hE' Y a ha) (M.map a.op x)).trans hg)
 
-/-- Module sheafification is additive, as an additive left adjoint.
-Source: the sheafification adjunction.
-(auxiliary; not a blueprint node). -/
+/-- Module sheafification is additive, as an additive left adjoint. -/
 instance moduleSheafification_additive (R : Sheaf J RingCat.{u}) :
     (sheafification (𝟙 R.obj)).Additive :=
   (sheafificationAdjunction (𝟙 R.obj)).left_adjoint_additive
@@ -220,7 +215,6 @@ instance moduleSheafification_additive (R : Sheaf J RingCat.{u}) :
 /-- Compatible linear identifications on a covering locus give an augmentation-compatible
 isomorphism of the degreewise sheafified complexes.
 Source: Stacks Project, Tag 099E, the local identities of augmented complexes.
-(auxiliary; not a blueprint node).
 
 Proof: obtain the degreewise isomorphisms from the local-equivalence theorem. Their
 commutation with differentials follows by testing the two maps on presheaf sections on

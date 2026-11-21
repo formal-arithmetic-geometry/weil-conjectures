@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedHom
 # Object cohomology as derived sections
 
 Source: Stacks Project, Cohomology on Sites, Section 01FT.
-(blueprint: lem-sc-site-cohomology-right-derived-sections).
 -/
 
 @[expose] public section
@@ -73,9 +72,7 @@ private noncomputable def sectionsIso
     exact sectionsEquiv_naturality J U f a)
 
 /-- Ext cohomology over an object agrees naturally with the right derived sections functor.
-Source: Stacks Project, Cohomology on Sites, Section 01FT; the convention in
-`def-weil-pbc-sites-and-cohomology`.
-(blueprint: lem-sc-site-cohomology-right-derived-sections).
+Source: Stacks Project, Cohomology on Sites, Section 01FT.
 
 Proof: the free abelian sheaf on the representable of `U` represents sections over `U`.
 Indeed, sheafification adjunction, the free-abelian/forgetful adjunction, and Yoneda

@@ -50,7 +50,6 @@ set_option linter.unusedVariables false in
 /-- Then $Q$ is stable under composition of finite indexed covering families, with finite inner
 index at each outer index.
 Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-colimit-site-covering-axioms-finitecomposition)
 
 Proof: Fix a finite indexed outer covering f and finite indexed coverings
 of each of its sources. Use hQ to represent each covering presieve by a finite

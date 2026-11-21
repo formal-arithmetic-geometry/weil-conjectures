@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Descent of compatible functors from a filtered colimit
 
-Source: Stacks Project, Sites, proof of Tag 09YL
-(blueprint: lem-weil-pbc-filtered-colimit-functor-descent).
+Source: Stacks Project, Sites, proof of Tag 09YL.
 
 The colimits of the object and arrow sets suffice for descent into categories
 with arbitrary object and morphism universes.
@@ -58,8 +57,7 @@ private theorem exists_set_descent
   exact ⟨g, fun j x ↦ congrFun (hg j) x⟩
 
 /-- Source: Stacks Project, Sites, proof of Tag 09YL, the construction of the
-filtered colimit category; the universal property verification is written here.
-(blueprint: lem-weil-pbc-filtered-colimit-functor-descent).
+filtered colimit category.
 
 Proof: send an object represented at stage j to its image under v j, and an arrow
 represented at stage j to its image under v j. Compatibility makes these maps

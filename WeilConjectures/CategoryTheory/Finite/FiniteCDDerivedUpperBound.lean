@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimensi
 /-!
 # Finite cohomological dimension and unbounded right derived functors
 
-Source: Stacks Project, `literature/stacks-project/derived.tex`, Tag 07K7,
-lemma-unbounded-right-derived (1) and (4)(c) (blueprint: lem-sf-finite-cd-derived-upper-bound).
+Source: Stacks Project, `literature/stacks-project/derived.tex`, Tag 07K7 (1) and (4)(c).
 -/
 
 @[expose] public section
@@ -136,7 +135,7 @@ private theorem isLeftKanExtension_of_full_whiskering
     rw [← h]
     simp
 
-/-- (blueprint: lem-sf-finite-cd-derived-upper-bound)
+/-- 
 Finite cohomological dimension gives an unbounded total right derived functor and
 raises an upper cohomological bound by at most the dimension.  This is the statement of
 Stacks Project Tag 07K7, parts (1) and (4)(c), with the unbounded cochain derived

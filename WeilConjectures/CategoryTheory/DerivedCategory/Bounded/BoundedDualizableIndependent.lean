@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Dualizable
 
 /-! # Bounded dualizable complexes with an independent localization universe
 
-Source: Stacks Project, Tag 0FNS; the termwise dual construction.
+Source: Stacks Project, Tag 0FNS.
 -/
 
 @[expose] public section
@@ -28,13 +28,12 @@ local instance instHasColimitsOfSize_boundedDualizableIndependent
 
 /-- A bounded complex of dualizable objects remains dualizable after localization
 in any supported universe.
-Source: Stacks 0FNS; the bounded termwise dual argument.
+Source: Stacks 0FNS.
 Proof: equip every term with a right dual and form the signed dual complex.
 Both complexes are bounded and flat, hence K-flat. The homotopy quotient sends
 their pairing to an exact pairing. On K-flat objects the derived localization
 has invertible tensorators and unit, so it preserves the exact pairing.
-Transport along the canonical composite-localization comparison.
-(blueprint: lem-sf-bounded-dualizable-independent). -/
+Transport along the canonical composite-localization comparison. -/
 theorem isDualizable_Q_obj_independent (P : CochainComplex A ℤ) (a b : ℤ)
     [P.IsStrictlyGE a] [P.IsStrictlyLE b] (hP : ∀ n, IsDualizable (P.X n)) :
     IsDualizable (Q.obj P) := by

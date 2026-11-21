@@ -101,8 +101,7 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Existence of normalized slice comparisons
 
-Source: Stacks Project, Tags 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-normalized-comparisons).
+Source: Stacks Project, Tags 07A4, 08J9 and 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -184,8 +183,7 @@ variable [HasDerivedCategory.{w} (SheafOfModules.{max c v u} ((sheafCompose J (f
   CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
 /-- The normalized tensor, Hom and Koszul comparisons for exact slice restriction exist.
-Source: Stacks Project, Tags 07A4, 08JB, 03EL and the total-complex Koszul exchange
-(blueprint: lem-weil-pbc-ringed-slice-normalized-comparisons).
+Source: Stacks Project, Tags 07A4, 08JB, 03EL and the total-complex Koszul exchange.
 
 Proof: restriction preserves K-flat complexes by 0E8K. Flatness restricts by the
 local equational criterion. On a pair of such complexes, restrict each tensor summand using 03EL,

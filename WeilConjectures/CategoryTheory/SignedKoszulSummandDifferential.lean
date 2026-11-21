@@ -10,9 +10,7 @@ import WeilConjectures.CategoryTheory.SignedKoszulSummandTermTransport
 /-!
 # The differential on a negative Koszul pure tensor
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free tensor calculation.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free tensor calculation.
 -/
 
 @[expose] public section
@@ -331,9 +329,7 @@ end Basis
 /-- The ordered negative Koszul basis differential, before tensoring with coefficients.
 The erased-index coefficient includes the preceding-index sign and the scalar power m+1.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul; the finite ordered-tensor calculation.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E.
 
 Proof in words: induct on the number of factors.  The empty tensor has zero
 differential.  In the successor step use the differential of the two-term head
@@ -392,10 +388,7 @@ theorem ringedNegativeKoszulBasis_d_succ
 The ordered tensor has positive length. This contains neither the coefficient-complex
 differential nor a coordinate isomorphism.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul; the second step of
-lem-cbc-signed-koszul-tensor-coordinates.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E.
 
 Proof in words: use HomologicalComplex.mapBifunctor.ι_D₂ to evaluate the
 second total differential on the inclusion in ringedNegativeKoszulSummand.

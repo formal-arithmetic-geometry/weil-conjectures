@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 # Derived sequence for three functors exact on injectives
 
 Source: Stacks Project, Tags 0A50 and 0117.
-(blueprint: lem-weil-pbc-right-derived-injective-sequence)
 -/
 
 @[expose] public section
@@ -74,7 +73,6 @@ end
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Tag 0A50, passage to derived functors; Homology Tag 0117.
-(blueprint: lem-weil-pbc-right-derived-injective-sequence)
 
 Proof: Evaluate the three functors and the two transformations on a chosen injective
 resolution of each object. Exactness gives the zero composite, and the injectivity and

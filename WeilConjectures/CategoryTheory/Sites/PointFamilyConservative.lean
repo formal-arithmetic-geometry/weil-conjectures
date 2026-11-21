@@ -14,8 +14,7 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 /-!
 # Conservative families of points
 
-Source: Stacks Project, Sites, Tags 00YK and 00YM, using Tags 00Y6 and 00Y8
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tags 00YK and 00YM, using Tags 00Y6 and 00Y8.
 -/
 
 @[expose] public section
@@ -29,7 +28,7 @@ namespace CategoryTheory
 open Limits Opposite
 
 /-- The sheaf morphism represented by a section of a sheaf on an object.
-Source: Stacks, Tags 00Y6 and 00Y8 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 00Y6 and 00Y8. -/
 noncomputable def sectionMorphism {C : Type u} [Category.{v} C] (J : Precoverage C)
     (F : Sheaf J.toGrothendieck (Type (max u v w))) (U : C) (t : F.obj.obj (op U)) :
     (presheafToSheaf J.toGrothendieck (Type (max u v w))).obj
@@ -37,7 +36,7 @@ noncomputable def sectionMorphism {C : Type u} [Category.{v} C] (J : Precoverage
   ⟨sheafifyLift J.toGrothendieck (uliftYonedaEquiv.symm t) F.property⟩
 
 /-- The image in a point fibre of a section class `[U,x,t]`.
-Source: Stacks, Tags 00Y6 and 00Y8 (auxiliary; not a blueprint node). -/
+Source: Stacks, Tags 00Y6 and 00Y8. -/
 noncomputable def pointSectionImage {C : Type u} [Category.{v} C] (J : Precoverage C)
     (p : GeometricMorphism (Type (max u v w))
       (Sheaf J.toGrothendieck (Type (max u v w))))
@@ -49,7 +48,7 @@ noncomputable def pointSectionImage {C : Type u} [Category.{v} C] (J : Precovera
 
 /-- Section separation by a family of geometric-morphism points implies joint reflection of
 isomorphisms. Source: Stacks, Tags 00YK and 00YM, with stalk identifications from Tags 00Y6
-and 00Y8 (auxiliary; not a blueprint node).
+and 00Y8.
 
 Proof: composition with a sheaf morphism carries the morphism represented by a section to
 that represented by its image, by Yoneda naturality and the universal property of

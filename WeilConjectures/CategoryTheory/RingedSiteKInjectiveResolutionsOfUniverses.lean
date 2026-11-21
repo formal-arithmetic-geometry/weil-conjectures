@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # K-injective resolutions with independent site universes
 
-Source: Stacks Project, Section 07A5 and Theorem 079P
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Section 07A5 and Theorem 079P.
 The free lifted Yoneda sheaves are precisely the sheafifications of the localized
 rank-one extension presheaves. Their use preserves the generator in the source statement.
 -/
@@ -34,8 +33,7 @@ namespace SheafOfModules
 
 /-- Grothendieck abelianness, the specified free-sheaf generator, and functorial
 K-injective resolutions with injective terms, without equating site universes.
-Source: Stacks Project, Section 07A5 and Theorem 079P
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Section 07A5 and Theorem 079P.
 Proof:
 1. Form the free module on the lifted representable at each site object. Its
 sections are finite linear combinations of arrows into that object, exactly the

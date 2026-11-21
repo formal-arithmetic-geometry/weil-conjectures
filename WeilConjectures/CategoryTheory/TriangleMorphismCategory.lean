@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DenominatorTriangleCompletion
 
 /-! # Incoming morphisms of distinguished triangles
 
-Source: Stacks Project, Derived Categories, Tag 05R9, dual cofiltered form
-(blueprint: lem-pur-triangle-morphism-category-05r9).
+Source: Stacks Project, Derived Categories, Tag 05R9, dual cofiltered form.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace CategoryTheory
 
 /-- Incoming morphisms of distinguished triangles with all components in `S` form a
 cofiltered category, and each vertex projection to the denominator category is initial.
-Source: Stacks Project, Derived Categories, Tag 05R9, dual cofiltered form
-(blueprint: lem-pur-triangle-morphism-category-05r9).
+Source: Stacks Project, Derived Categories, Tag 05R9, dual cofiltered form.
 
 Proof:
 1. Complete any prescribed denominator at a vertex to a morphism of distinguished triangles

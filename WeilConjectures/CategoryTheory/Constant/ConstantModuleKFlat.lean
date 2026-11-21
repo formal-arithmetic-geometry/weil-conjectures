@@ -125,8 +125,7 @@ private theorem constantModule_colimits
   infer_instance
 
 /-- Constant realization preserves K-flat complexes whose terms are flat.
-Source: Stacks Project, Tag 0G7E
-(blueprint: lem-sfb-constant-module-kflat).
+Source: Stacks Project, Tag 0G7E.
 Proof: constant module presheaves preserve colimits by evaluation, and module
 sheafification is a left adjoint. Constant realization preserves flat objects by
 the local relation criterion. Apply preservation of flat-term K-flat complexes

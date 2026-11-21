@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.RingedKoszulDualizable
 
 /-! # Tensor-Hom comparison for one two-term Koszul factor
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free dual identification.
+Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free dual identification.
 -/
 
 @[expose] public noncomputable section
@@ -1099,10 +1098,8 @@ attribute [-instance] moduleMonoidalStruct moduleMonoidal complexTensorExists
 This is a one-factor calculation with an arbitrary remaining complex `K`; it contains
 no induction on a list of generators and no finite negative tensor.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the finite free dual identification, expanded for
+Source: Stacks Project, algebraization.tex, Tag 0A0E, the finite free dual identification, expanded for
 one two-term factor and the tensor-Hom adjunction.
-(auxiliary; not a blueprint node).
 
 Proof: write `P = [O --b^(m+1)--> O]` in degrees 0,1 and
 `D = [O --b^(m+1)--> O]` in degrees -1,0. Projection to the unique

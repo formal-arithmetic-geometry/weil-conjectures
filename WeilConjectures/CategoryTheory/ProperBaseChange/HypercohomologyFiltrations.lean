@@ -22,9 +22,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Hypercohomology filtrations for an étale base-change square
 
-Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1315;
-Stacks Project, Tags 0DDE and 015J
-(blueprint: def-weil-pbc-hypercohomology-filtrations).
+Source: Stacks Project, Tags 0DDE and 015J.
 
 The three functors are Rf_*, g^{-1}Rf_*, and Rf'_*g'^{-1}. The generic construction
 below applies cohomology to their images of the canonical truncation triangles.
@@ -444,8 +442,7 @@ set_option linter.unusedVariables false in
   convergence, the first couple is the truncation couple of def-sp-truncation-couple for f_*
   through `TruncationCouple.bridgeIso`, and the middle one is the exact inverse image of the
   first.
-Source: blueprint order 1315; Stacks Tags 0DDE, 015J
-(blueprint: def-weil-pbc-hypercohomology-filtrations).
+Source: Stacks Tags 0DDE, 015J.
 
 Proof: Transfer the lower cohomological bound along the supplied representative isomorphism.
   Each of the three functors preserves lower bounds: use the bounded-below compatibility of

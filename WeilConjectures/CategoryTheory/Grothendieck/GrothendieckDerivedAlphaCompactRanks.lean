@@ -34,7 +34,6 @@ attribute [local instance] derived_hasCoproducts
 Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2
 and Section 2; Krause, On Neeman's Well Generated Triangulated Categories (2001),
 page 125, Corollary of Theorem A.
-(blueprint: new-sfb-derived-alpha-compact-ranks)
 
 Proof in words: take a small perfect generating class G at rank kappa, and a
 regular beta above which the canonical alpha-compact classes are extension closed.

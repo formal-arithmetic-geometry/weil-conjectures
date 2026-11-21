@@ -16,8 +16,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
 
 /-! # Derived-limit property of a tower limit cone
-Source: Stacks Project, Derived Categories, Tags 0BK6, 0BK7 and 070M
-(blueprint: lem-weil-derived-limit-tower-core-property). -/
+Source: Stacks Project, Derived Categories, Tags 0BK6, 0BK7 and 070M. -/
 
 @[expose] public section
 universe w v u
@@ -41,7 +40,6 @@ limit cone to this kernel cone transports that triangle to Q(c.pt). Finally e
 induces an isomorphism of the products intertwining their transition
 endomorphisms. Transport the distinguished triangle along this product
 isomorphism to obtain `IsDerivedLimit` for the prescribed tower.
-(blueprint: lem-weil-derived-limit-tower-core-property)
 -/
 theorem derivedCategory_towerLimit_property
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]

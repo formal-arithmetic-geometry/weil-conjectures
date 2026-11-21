@@ -10,9 +10,6 @@ public import Mathlib.CategoryTheory.Triangulated.Triangulated
 import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 
 /-! # The Verdier axioms for common-stage triangles
-
-Source: blueprint `sec-proper-base-change/sk-thm-properbasechange`, Verdier axioms
-(blueprint: thm-weil-pbc-verdier-axioms).
 -/
 
 @[expose] public section
@@ -124,9 +121,6 @@ private theorem commonStage_image_completion {i j : I}
 
 /-- A commuting square between the first arrows of common-stage distinguished
 triangles extends to a triangle morphism.
-Source: the common-stage TR3 argument in the docstring of
-`commonStage_verdier_existsUnique` and
-`WeilConjectures/CategoryTheory/StageSystem/Pretriangulated.lean`, `exists_hom₃_ι`.
 Proof: replace both triangles by isomorphic stage images. Represent the two
 vertical maps at a common stage and extend again until the first square commutes,
 using `mkHom_eq_mkHom_iff`. Apply the triangle morphism axiom to the images of the
@@ -222,7 +216,6 @@ end
 set_option linter.unusedVariables false in
 /-- Common-stage triangles satisfy TR1--TR4; stage inclusions and transition
 identifications are exact. The distinguished set uniquely fixes the pretriangulation.
-Source: blueprint Verdier axioms (blueprint: thm-weil-pbc-verdier-axioms).
 Proof: move every finite collection of objects and arrows to a common stage using
 StageSystem.PairCategory.exists_common_stage. Equalities hold after one further
 extension by mkHom_eq_mkHom_iff. At that stage choose cone and identity triangles;

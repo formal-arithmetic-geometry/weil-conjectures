@@ -23,7 +23,6 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 /-- A categorical degree-zero Cech cocycle gives compatible local morphisms.
 Source: Stacks Project, Cohomology on Sites, Tags 03AM and 03AN.
-(blueprint: lem-sc-cech-zero-cocycle-compatibility)
 
 Proof: For indices i and j, project the equation z d^0 = 0 onto the (i,j)
 component. The alternating coface differential there is the restriction of

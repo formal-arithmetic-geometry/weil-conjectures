@@ -14,7 +14,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- Normalized tensor and unit representative squares imply left unitality.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-left-unit-transport).
+Source: Stacks 07A4.
 Proof: tensor the unit normalization with the representative at X. Tensorator
 naturality and its normalization turn one side into the image of the ordinary
 left-unit law. The other side is the proposed left-unit composite followed by
@@ -70,7 +70,7 @@ theorem leftUnit_on_representative
   exact hright.symm.trans (h.symm.trans hleft)
 
 /-- The left-unit composite of a natural scalar tensor comparison.
-Source: Stacks 07A4 (blueprint: lem-pur-scalar-left-unit-transport). -/
+Source: Stacks 07A4. -/
 def scalarLeftUnitMap
     {C D : Type*} [Category C] [Category D]
     [MonoidalCategory C] [MonoidalCategory D]

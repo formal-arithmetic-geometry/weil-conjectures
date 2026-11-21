@@ -10,8 +10,6 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Basic
 public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Descent of invertible adjoint transitions
-
-Source: Zheng, Construction 4.1 and the adjunction argument in Lemma 4.10.
 -/
 
 @[expose] public section
@@ -27,12 +25,11 @@ namespace CategoryTheory
 /-- In a scalar-change square, an invertible adjoint transition descends along a
 conservative inverse image, provided the two counits at its endpoints are invertible.
 The direct-image comparison is required to be the mate of the inverse-image comparison.
-Source: Zheng, Lemma 4.10. Proof: transpose the transition square first by scalar
+Proof: transpose the transition square first by scalar
 change and then by geometric inverse image. The mate equation identifies the result
 with the original adjoint transition composed with the two counits and the scalar
 comparison. Every other arrow is invertible. Conservativity then applies to the
-adjoint transition downstairs, including when its scalar-extension source is unbounded.
-(blueprint: lem-pur-scalar-adjunction-descent). -/
+adjoint transition downstairs, including when its scalar-extension source is unbounded. -/
 theorem isIso_scalar_transpose_of_mate
     {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
     {C : Type c} [Category.{cv} C] {D : Type d} [Category.{dv} D]

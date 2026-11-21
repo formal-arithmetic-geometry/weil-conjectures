@@ -15,10 +15,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHo
 /-!
 # Semilinear functors under raw scalar localization
 
-Source: Weil conjectures blueprint, main-20261015, `chap-Smooth-purity`,
-`sk-lem-sp-field-extension/prop-pur-rational-purity-transitivity-summands.proof.md`,
-finite-extension sentence (blueprint: lem-pur-semilinear-scalar-localization).
-
 The construction uses the existing scalar-first tensor Hom modules. The unique additive
 Hom extension specifies its data completely, so choosing that extension postpones only
 proofs. Functor, transformation, coherence and exactness statements below express the
@@ -38,15 +34,12 @@ variable {R : Type r} [CommRing R] {S : Type s} [CommRing S]
   {C : Type u} [Category.{v} C] [Preadditive C] [Linear R C]
   {D : Type w} [Category.{x} D] [Preadditive D] [Linear S D]
 
-/-- Semilinearity on Hom modules, with additivity supplied separately.
-Source: the node's definition of semilinearity, extracted from the blueprint's
-finite-extension sentence (blueprint: lem-pur-semilinear-scalar-localization). -/
+/-- Semilinearity on Hom modules, with additivity supplied separately. -/
 def IsSemilinear (φ : R →+* S) (F : C ⥤ D) : Prop :=
   ∀ (K L : C) (a : R) (f : K ⟶ L), F.map (a • f) = φ a • F.map f
 
 /-- The coefficient map induced by the localization universal property.
-Source: Stacks Tag 00CO and the blueprint's finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization). -/
+Source: Stacks Tag 00CO and the blueprint's sentence. -/
 noncomputable def coefficientMap (t : R) (b : S) (φ : R →+* S)
     (h : IsUnit (algebraMap S (Localization.Away b) (φ t))) :
     Localization.Away t →+* Localization.Away b :=
@@ -57,7 +50,7 @@ variable (t : R) (b : S) (φ : R →+* S)
   (h : IsUnit (algebraMap S (Localization.Away b) (φ t)))
 
 /-- Existence and uniqueness of the induced coefficient homomorphism.
-Source: Stacks Tag 00CO (blueprint: lem-pur-semilinear-scalar-localization).
+Source: Stacks Tag 00CO.
 Proof (node Step 1): send r/t^n to φ(r)φ(t)^(-n). The fraction relation gives
 well-definedness after cancelling the invertible image of t. Addition, multiplication
 and one are preserved by the fraction formulas; the inverse of t has a forced image. -/
@@ -76,7 +69,7 @@ theorem coefficientMap_unique :
     exact hc
 
 /-- The uniquely prescribed additive extension on a tensor Hom module.
-Source: Stacks Tags 07K0 and 00DK (blueprint: lem-pur-semilinear-scalar-localization).
+Source: Stacks Tags 07K0 and 00DK.
 Proof (node Steps 2–3): the pairing (a,f) ↦ barφ(a)⊗F(f) is additive in both
 arguments. The coefficient-map equation on R and semilinearity of F identify the two
 values at (ra,f) and (a,rf), by the tensor balancing relation over S. Apply
@@ -114,7 +107,7 @@ theorem existsUnique_semilinearHom (F : C ⥤ D) [F.Additive]
     | add z w hz hw => simp only [map_add, hz, hw]
 
 /-- The additive Hom map determined uniquely on all pure tensors.
-Source: Stacks Tags 07K0 and 00DK (blueprint: lem-pur-semilinear-scalar-localization). -/
+Source: Stacks Tags 07K0 and 00DK. -/
 noncomputable def extensionHom (F : C ⥤ D) [F.Additive]
     (hF : IsSemilinear φ F) (K L : C) :
     (Localization.Away t ⊗[R] (K ⟶ L)) →+
@@ -128,8 +121,6 @@ noncomputable def extensionHom (F : C ⥤ D) [F.Additive]
   Classical.choose_spec (existsUnique_semilinearHom t b φ h F hF K L).exists a f
 
 /-- Identity and composition laws of the extended Hom maps.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization).
 Proof (node Step 4): on fractions both sides of the composition law are
 φ(t)^(-m-n)Q(F(gf)), by bilinearity and the functor laws of F. Identities are
 1⊗F(id)=1⊗id. Extend the equalities using the additive Hom maps and tensor generators. -/
@@ -151,9 +142,7 @@ theorem extensionHom_laws (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F) :
       | add f f' hf hf' => simp [map_add, hf, hf']
     | add g g' hg hg' => simp [map_add, hg, hg']
 
-/-- The semilinear extension, with exactly the original object map.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization). -/
+/-- The semilinear extension, with exactly the original object map. -/
 noncomputable def extension (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F) :
     ScalarLocalization R C t ⥤ ScalarLocalization S D b where
   obj K := ⟨F.obj K.obj⟩
@@ -161,16 +150,13 @@ noncomputable def extension (F : C ⥤ D) [F.Additive] (hF : IsSemilinear φ F) 
   map_id K := (extensionHom_laws t b φ h F hF).1 K.obj
   map_comp {K L M} f g := (extensionHom_laws t b φ h F hF).2 K.obj L.obj M.obj f g
 
-/-- The extended functor is additive by its additive Hom maps.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization). -/
+/-- The extended functor is additive by its additive Hom maps. -/
 noncomputable instance extensionAdditive (F : C ⥤ D) [F.Additive]
     (hF : IsSemilinear φ F) : (extension t b φ h F hF).Additive where
   map_add {K L} {f g} := (extensionHom t b φ h F hF K.obj L.obj).map_add f g
 
 /-- Semilinearity, agreement on integral arrows, and the formula on every fraction.
-Source: blueprint finite-extension sentence and Stacks Tags 00CO, 07K0, 00DK
-(blueprint: lem-pur-semilinear-scalar-localization).
+Source: blueprint sentence and Stacks Tags 00CO, 07K0, 00DK.
 Proof (node Steps 2–4): apply the specification of the unique Hom map. A fraction
 f/t^n is t^(-n)⊗f; its coefficient image is φ(t)^(-n). Multiplying fractions proves
 semilinearity over the induced coefficient map. Tensoring with one gives agreement
@@ -226,8 +212,6 @@ private theorem hom_add_heq {E : Type*} [Category E] [Preadditive E]
   exact heq_of_eq (congrArg₂ (· + ·) (eq_of_heq hf) (eq_of_heq hg))
 
 /-- The additive semilinear extension with this object map and integral values is unique.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization).
 Proof (node Step 3): every pure tensor a⊗f is a times 1⊗f, so semilinearity
 and integral agreement force its image. Transport the object equalities with HEq.
 Tensor induction extends equality from pure tensors to every arrow, and heterogeneous
@@ -263,8 +247,6 @@ variable {F G H : C ⥤ D} [F.Additive] [G.Additive] [H.Additive]
   (hF : IsSemilinear φ F) (hG : IsSemilinear φ G) (hH : IsSemilinear φ H)
 
 /-- The integral components are natural for the extended functors.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization).
 Proof (node Step 5): on f/t^n naturality is the integral naturality equation for η
 multiplied by φ(t)^(-n). Bilinearity moves this common scalar across composition. -/
 theorem extensionNatTrans_naturality (η : F ⟶ G)
@@ -279,9 +261,7 @@ theorem extensionNatTrans_naturality (η : F ⟶ G)
   | tmul a f => simp [composition_tmul, η.naturality f]
   | add f g hf hg => simp [map_add, hf, hg]
 
-/-- Natural isomorphisms extend, including their specified inverses.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization). -/
+/-- Natural isomorphisms extend, including their specified inverses. -/
 noncomputable def extensionNatIso (e : F ≅ G) :
     extension t b φ h F hF ≅ extension t b φ h G hG :=
   NatIso.ofComponents (fun K ↦ (localization S D b).mapIso (e.app K.obj))
@@ -295,8 +275,6 @@ variable {T : Type q} [CommRing T] {E : Type y} [Category.{z} E]
 
 include h hψ in
 /-- The inversion and semilinearity hypotheses are stable under composition.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization).
 Proof (node Step 6): the induced coefficient map for ψ sends the unit λφ(t) to a unit.
 Its value is λψφ(t), giving the first assertion. Apply the two semilinearity equations
 successively for the second; additivity is preserved by functor composition. -/
@@ -314,8 +292,6 @@ theorem semilinear_composition (F : C ⥤ D) (J : D ⥤ E)
     rfl
 
 /-- Extension commutes with composition, including the induced coefficient maps.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization).
 Proof (node Step 6): both coefficient maps extend ψφ, so Step 1 makes them equal.
 The two functors have the same object map. On a⊗f their maps have values
 barψ(barφ(a))⊗J(F(f)), equal by the coefficient-map equation. Tensor induction and
@@ -352,8 +328,6 @@ theorem extension_comp (F : C ⥤ D) (J : D ⥤ E) [F.Additive] [J.Additive]
 end Composition
 
 /-- Linear functors are semilinear for the identity coefficient map.
-Source: the node's definition of semilinearity
-(blueprint: lem-pur-semilinear-scalar-localization).
 Proof: this is exactly the scalar-preservation equation in `Functor.Linear`. -/
 theorem isSemilinear_of_linear (J : C ⥤ C) [J.Linear R] :
     IsSemilinear (RingHom.id R) J := by
@@ -361,8 +335,6 @@ theorem isSemilinear_of_linear (J : C ⥤ C) [J.Linear R] :
   exact J.map_smul a f
 
 /-- Identity extension and agreement with the existing extension of linear endofunctors.
-Source: blueprint finite-extension sentence
-(blueprint: lem-pur-semilinear-scalar-localization).
 Proof (node Steps 3, 6): the identity has the same integral values and object map as its
 extension, giving the identity equation by uniqueness. For a linear endofunctor the
 existing tensor map sends a⊗f to a⊗J(f), the same prescription, so uniqueness identifies
@@ -534,8 +506,7 @@ include triC triD triLC triLD hshiftC hshiftD hQC hQD hdistC hdistD in
 /-- Exactness with the localized, specified shift comparison. The ambient structures
 and their normalizations are exactly those provided by
 `exists_triangulated_scalarLocalization`, separately for C and D.
-Source: blueprint finite-extension sentence; Stacks Tag 05R6
-(blueprint: lem-pur-semilinear-scalar-localization).
+Source: Stacks Tag 05R6.
 Proof (node Step 8): extend the given shift comparison and its inverse by Step 5.
 Use Step 6 and `extension_id_and_linear` to identify its endpoints with the induced
 shifts. Its components are Q(σ_K). A distinguished localized triangle is isomorphic

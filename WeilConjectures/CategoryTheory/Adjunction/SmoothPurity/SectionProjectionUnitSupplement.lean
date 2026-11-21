@@ -12,12 +12,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.UnitComparison
 public import WeilConjectures.CategoryTheory.SectionProjectionUnit
 
 /-!
-Source: blueprint thm-amb-p1-adjunction.proof.md.
-(blueprint: lem-z8-section-projection-unit).
 
 # Projection cancellation along a section
-
-Source: blueprint thm-amb-p1-adjunction.proof.md, contraction along the diagonal section.
 -/
 
 @[expose] public section
@@ -159,7 +155,6 @@ private theorem section_projection_composite
 
 /-- Two ordered projection maps along a section cancel against the conjugate
 composition comparison and the right unitors.
-Source: blueprint thm-amb-p1-adjunction.proof.md, diagonal contraction.
 Proof: the projection map of a composite is the composite of the projection maps.
 Conjugate its adjunction to the identity using the section isomorphism. Tensor
 compatibility identifies its projection with the identity. Naturality of the

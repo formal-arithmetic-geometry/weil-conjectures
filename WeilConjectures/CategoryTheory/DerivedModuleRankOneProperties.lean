@@ -22,7 +22,6 @@ open Limits
 /-- The degree-zero complex on the explicit free rank-one left module is a compact
 weak generator. Source: Stacks Project, Tag 0F5X, first paragraph, and Tag 07D9,
 clauses (1)-(2).
-(auxiliary; not a blueprint node)
 
 Proof in words: put the left module `ULift S` in degree zero using `singleFunctor`.
 Evaluation at the lifted unit identifies module maps out of `ULift S` with elements

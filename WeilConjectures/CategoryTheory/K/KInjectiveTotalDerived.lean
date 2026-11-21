@@ -12,8 +12,8 @@ public import Mathlib.CategoryTheory.Whiskering
 /-!
 # Total right derived functors from enough K-injective complexes
 
-Source: Stacks Project, Derived Categories, Tag 070K, lemma-enough-K-injectives-implies,
-and Tag 070Y, lemma-K-injective-defined (blueprint: lem-weil-pbc-kinjective-total-derived).
+Source: Stacks Project, Derived Categories, Tag 070K,
+and Tag 070Y.
 -/
 
 @[expose] public section
@@ -25,9 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Enough K-injective complexes give a total right derived functor, computed on every
-K-injective complex. Source: Stacks Project, Derived Categories, Tag 070K,
-lemma-enough-K-injectives-implies; Tag 070Y, lemma-K-injective-defined
-(blueprint: lem-weil-pbc-kinjective-total-derived).
+K-injective complex. Source: Stacks Project, Derived Categories, Tag 070K; Tag 070Y.
 
 Proof plan:
 1. Choose a representative of each derived object and a K-injective replacement of its

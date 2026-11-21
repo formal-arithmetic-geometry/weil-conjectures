@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoid
 /-!
 # Change of rings for presheaves of modules
 
-Source: Stacks Project, Sheaves, Tag 006R (blueprint: lem-pc-presheaf-change-of-rings-adjunction)
+Source: Stacks Project, Sheaves, Tag 006R
 -/
 
 @[expose] public section
@@ -217,9 +217,8 @@ The witnesses `T` and `q` present the tensor presheaf functor by sectionwise
 its restrictions and its action on morphisms. The equivalences `e` have the
 unit and inverse formulas and are natural in both module presheaves.
 
-Source: Stacks Project, Sheaves, Tag 006R, lemma-adjointness-tensor-restrict-presheaves,
+Source: Stacks Project, Sheaves, Tag 006R,
 and the definitions immediately preceding it.
-(blueprint: lem-pc-presheaf-change-of-rings-adjunction)
 
 Proof (the four steps of the node):
 1. Restrict scalars using `a`; the ring morphism's naturality gives semilinear

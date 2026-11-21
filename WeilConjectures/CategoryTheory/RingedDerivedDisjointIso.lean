@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.Sites.DisjointGluing
 /-! # Derived isomorphisms on a finite disjoint covering
 
 Source: Stacks Project, Tags 03EM, 070I, 079P and 08FI.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -204,9 +203,7 @@ private theorem homotopyEquivOfDerivedIso
     exact (DerivedCategory.Qh.map_id (q.obj L)).symm
 
 /-- Derived module objects which are isomorphic on a finite disjoint cover are isomorphic.
-Source: Stacks Project, Modules on Sites, Tag 03EM; Derived Categories, Tag 070I;
-Injectives, Tag 079P; Cohomology on Sites, Tag 08FI.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 03EM; Derived Categories, Tag 070I; Injectives, Tag 079P; Cohomology on Sites, Tag 08FI.
 
 Proof: Replace both objects on the slice by K-injective complexes. Exact restriction
 preserves K-injectives. Represent the component isomorphisms by chain maps. Since the

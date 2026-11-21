@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.GrothendieckBottomAugmentation
 /-! # The Grothendieck bottom edge on resolution comparisons
 
 Source: Stacks Project, Tags 015M, 015N and 015J.
-(blueprint: lem-sc-grothendieck-bottom-resolution-comparison)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency false in
 /-- Homology of the canonical resolution comparison transports the composite derived unit.
 Source: Stacks Project, Tags 015M and 015N, composition unit and abutment identification.
-(blueprint: lem-pc-canonical-resolution-composite-unit-comparison).
 
 Proof: Expand grothendieckSpectralObjectHBotTopIso as the inverse composition comparison
 followed by the single-object homology comparison. Apply the ordinary canonical
@@ -342,7 +340,6 @@ set_option backward.isDefEq.respectTransparency false in
 from a resolution of `F(X)` to `F(I)`.
 
 Source: Stacks Project, Tags 015M, 015N and 015J, the degree-zero augmentation.
-(blueprint: lem-sc-grothendieck-bottom-resolution-comparison)
 
 Proof: Extend both complexes by zero to the bounded below homotopy category.
 The augmentation of J identifies J with F(X) in the derived category. The supplied

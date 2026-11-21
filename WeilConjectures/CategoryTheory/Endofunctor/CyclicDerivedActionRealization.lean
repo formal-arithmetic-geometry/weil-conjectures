@@ -19,11 +19,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Realization of a single invertible derived action
 
-Source: blueprint main-20261015, sec-six-functors/sk-thm-sf-package,
-cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence;
-the agent-formulated native-derived foundation and its sequential-colimit proof
-(blueprint: lem-sf-cyclic-derived-action-realization).
-
 The action is the canonical composition comparison followed by localization of the
 structure isomorphisms of fixed pairs. No functorial realization is chosen.
 -/
@@ -256,22 +251,17 @@ private theorem action_comparison
 the ordinary derived category of fixed pairs, preserving its cohomology intervals
 and every isomorphism-invariant class of underlying cohomology objects.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction
-sentence; the agent construction in the DAG supplies the missing realization.
-(blueprint: lem-sf-cyclic-derived-action-realization).
-
 Proof plan, following the seven steps of the node:
 1. The source IsoAlgebra library supplies exact, faithful forgetting. Represent N by
-   a K-injective I with a : QI ≅ N (prose-03-02). By
+   a K-injective I with a : QI ≅ N. By
    lem-weil-pbc-kinjective-hom-derived, the morphism a⁻¹ v D(P)(a) is represented
-   by a chain map f : PI → I. Exact termwise derivation identifies its image
-   (situation-conventions); f is a quasi-isomorphism.
+   by a chain map f : PI → I. Exact termwise derivation identifies its image; f is a quasi-isomorphism.
    Only the target is required to be K-injective; no strict inverse is chosen.
 2. Choose a quasi-inverse R of P, with unit η and counit ε satisfying the triangle
    identities. Put g = R(f)η_I, X_n = RⁿI, and g_n = Rⁿ(g). Equivalences preserve
-   limits and colimits (lem-galois-equivalence-preserves-limits), so R is exact
+   limits and colimits, so R is exact
    and all g_n are quasi-isomorphisms. Form the degreewise sequential colimit C
-   with legs j_n (def-sp-grothendieck-abelian, def-weil-pbc-category-colimit).
+   with legs j_n.
    Its differential and its square are determined on these legs.
 3. AB5 and src-weil-homology-preserves-exact-colimits identify H^q(C) with the
    colimit of H^q(X_n). The transition maps are isomorphisms. The inverses of

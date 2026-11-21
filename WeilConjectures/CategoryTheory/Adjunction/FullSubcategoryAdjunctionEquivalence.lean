@@ -11,9 +11,6 @@ import Mathlib.CategoryTheory.Adjunction.Restrict
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Basic
 
 /-! # Restriction of an adjunction to an equivalence
-
-Source: the Restriction paragraph of the current smooth-purity tower equivalence.
-(blueprint: lem-sp-full-subcategory-adjunction-equivalence).
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +24,6 @@ namespace CategoryTheory.Adjunction
 /-- An adjunction whose functors preserve full subcategories and whose unit and counit
 are invertible there restricts to an equivalence with the very same unit and counit.
 
-Source: sk-lem-sp-tower-equivalence.proof.md, Restriction paragraph
-(blueprint: lem-sp-full-subcategory-adjunction-equivalence).
 Proof: lift the two functors to the full subcategories. Restrict the Hom equivalence
 along their fully faithful inclusions. Its unit and counit map to the ambient maps,
 since the commuting squares are identity isomorphisms. Fully faithful inclusions

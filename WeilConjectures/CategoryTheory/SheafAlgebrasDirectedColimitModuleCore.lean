@@ -19,8 +19,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Underlying modules of directed colimits of algebra sheaves
 
-Source: Stacks Project, Modules, Lemma 01AH; Sheaves, Sections 009D and 009E
-(blueprint: stage3-sheaf-algebras-directed-colimit-module-core).
+Source: Stacks Project, Modules, Lemma 01AH.
 -/
 
 @[expose] public section
@@ -101,8 +100,7 @@ module sheafification have the same underlying abelian sheafification. Their can
 comparison is O-linear: check on local stage representatives and use hι and the Under O
 identities, then glue. It is an isomorphism and carries the sheafified presheaf legs to ι.
 Transporting the module colimit along this cocone isomorphism gives the conclusion.
-Source: Stacks Project, Modules, Lemma 01AH
-(blueprint: stage3-sheaf-algebras-directed-colimit-module-core). -/
+Source: Stacks Project, Modules, Lemma 01AH. -/
 theorem sheafAlgebras_directed_colimit_module_core
     (X : Type u) [TopologicalSpace X]
     (O : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})

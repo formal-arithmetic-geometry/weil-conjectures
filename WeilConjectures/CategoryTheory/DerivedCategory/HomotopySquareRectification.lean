@@ -135,7 +135,6 @@ private lemma rect_cone_homotopy (t : C ⟶ D) (t' : C' ⟶ D')
 /-- Rectification changes only the source middle term and preserves the cone
 map induced by the specified homotopy, after localization.
 Source: Stacks Project, Tags 013N and 013O, with the cone formulas of Tag 014P.
-(blueprint: lem-pc-homotopy-square-cone-rectification).
 
 Proof: Write T = D biproduct Cone(id C), i = (t,inr(id C)) and p = fst.
 For H : t beta homotopic to alpha t', write h for its degree-minus-one cochain,

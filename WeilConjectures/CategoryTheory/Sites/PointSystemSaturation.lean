@@ -83,8 +83,7 @@ attribute [instance] GermSystem.order GermSystem.nonempty GermSystem.directed
 
 /- Countable iteration of the refinement lemma gives an inverse system lifting every
 finite covering and retaining two distinct section germs.
-Source: Stacks Project, Sites, Tags 00YP and 00YQ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tags 00YP and 00YQ.
 
 Proof: start with the singleton system at W. Repeatedly apply 00YP to the two germs,
 and form the Grothendieck construction of the resulting sequence of directed index
@@ -319,8 +318,7 @@ private theorem exists_filteredSystem_finiteCoverLifting
 
 /-- Countable refinement produces a directed inverse system which retains the given
 unequal sections and lifts every finite covering.
-Source: Stacks Project, Sites, Tags 00YP and 00YQ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tags 00YP and 00YQ.
 
 Proof: iterate simultaneous refinement and use the filtered Grothendieck union. Its
 colimit is the sequential colimit of the stage colimits, so equality is witnessed at

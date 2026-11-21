@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-! # Row boundaries in the second graded filtration
 
 Source: Stacks Project, Homology, Tags 0130 and 012K.
-(blueprint: lem-sp-second-filtration-row-boundary-subobject).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ private theorem map_image {C : Type*} [Category C] [Abelian C]
 /-- Under the normalized cycle comparison the first-page boundary subobject is
 exactly the image of the incoming row differential into row cycles.
 Source: Stacks Project, Tag 0130, clauses 2 and 4; Tag 012K, boundary formula.
-(blueprint: lem-sp-second-filtration-row-boundary-subobject).
 
 Proof. The diagonal projection and lift identify the graded row term in each
 resolution degree with the corresponding mapped row term. The total differential

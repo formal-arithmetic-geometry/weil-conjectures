@@ -16,8 +16,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 # Exactness of derived bigraded couples
 
 Source: Stacks Project, Homological Algebra, Lemma 12.21.2 (Tag 011R),
-Definition 12.21.3 (Tag 011S), and Remark 12.21.5 (Tag 0AMJ)
-(blueprint: lem-sp-derived-couple-exact).
+Definition 12.21.3 (Tag 011S), and Remark 12.21.5 (Tag 0AMJ).
 -/
 
 @[expose] public section
@@ -29,7 +28,7 @@ open CategoryTheory.Limits
 namespace CategoryTheory.BigradedExactCouple
 
 /-- Kernel and image identities, and unique induced exact maps, for a type-`s` couple.
-Source: Stacks Project, Tags 011R and 0AMJ (blueprint: lem-sp-derived-couple-exact).
+Source: Stacks Project, Tags 011R and 0AMJ.
 
 Proof (steps 0--10 of the node). Work with generalized elements `T ⟶ Y`, allowing
 precomposition with epimorphic refinements, as in `lem-sp-abelian-refinements`.
@@ -228,7 +227,6 @@ private theorem iterInclusion_image {C : Type u} [Category.{v} C] [Abelian C]
         exact imageSubobject_iso_comp (eqToHom _) _
 
 /-- The recursive image and inclusion properties of iterated derived couples.
-(blueprint: lem-sp-derived-couple-image-prefix)
 
 Source: Stacks Project, Definition 12.21.3 (Tag 011S) and Remark 12.21.5 (Tag 0AMJ).
 
@@ -273,7 +271,7 @@ theorem pageCouple_image_prefix {C : Type u} [Category.{v} C] [Abelian C]
 Here `n` is `r - 2`: the actual page number is `n + 2`. The quantified families
 `A` and `I` are uniquely prescribed by their recurrences: `A` is the incoming
 `alpha` power and `I` is the composite of all the canonical image inclusions.
-Source: Stacks Project, Tags 011S and 0AMJ (blueprint: lem-sp-derived-couple-exact).
+Source: Stacks Project, Tags 011S and 0AMJ.
 
 Proof (step 11 of the node). Use `pageCouple_image_prefix` for the recursive powers,
 monomorphic inclusions, image formula, and compatibility with the original `alpha`.

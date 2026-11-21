@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.RingedSiteLocalizationCech
 /-! # Addition of complete local sections
 
 Source: Stacks Project, Tags 0997 and 0998.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -44,9 +43,7 @@ localizations zero. Apply derived internal Hom into K to its distinguished
 triangle; exactness makes the internal Hom from O[1/h] zero too. This argument
 also applies when f, g, or h is zero, and imposes no bound on K.
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998;
-sites-cohomology.tex, Tag 08JB.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998; sites-cohomology.tex, Tag 08JB. -/
 theorem ringedSite_completeElement_add
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

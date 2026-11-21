@@ -36,8 +36,7 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarLocalizationUnitFactors
 # The underlying telescope for scalar localization
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2), with the telescope
-model expanded using Stacks Project, Derived Categories, Lemma 0949 and Lemma 093W
-(blueprint: lem-weil-pbc-scalar-localization-underlying-telescope).
+model expanded using Stacks Project, Derived Categories, Lemma 0949 and Lemma 093W.
 -/
 
 @[expose] public noncomputable section
@@ -58,8 +57,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 
 /-- The nth scalar-localization leg, for a specified adjunction and scalar action.
 The theorem below supplies the canonical derived action and the normalized unit.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2)
-(blueprint: lem-weil-pbc-scalar-localization-underlying-telescope). -/
+Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2). -/
 def scalarLocalizationTelescopeLeg
     (A : Type v) [CommRing A] (t : A)
     {D : Type uD} [Category.{vD} D]
@@ -70,8 +68,7 @@ def scalarLocalizationTelescopeLeg
 
 /-- The derived unit is the class of the specified termwise unit on every complex,
 after the canonical exact-functor factorization isomorphisms.
-Source: Stacks Project, Derived Categories, Tags 05RU and 015F
-(blueprint: lem-weil-pbc-scalar-localization-underlying-telescope). -/
+Source: Stacks Project, Derived Categories, Tags 05RU and 015F. -/
 def scalarLocalizationTelescopeDerivedUnit
     {B : Type uD} [Category.{vD} B] [Abelian B] [HasDerivedCategory.{w} B]
     {B' : Type uT} [Category.{vT} B'] [Abelian B'] [HasDerivedCategory.{w} B']
@@ -91,8 +88,7 @@ def scalarLocalizationTelescopeDerivedUnit
 /-- The telescope triangle with all its specified legs, naturality and shift equations.
 The predicate P records which source objects need the telescope comparison; the theorem
 below substitutes the bounded-below predicate and the canonical derived scalar actions.
-Source: Stacks Project, Derived Categories, Tags 093W, 0949 and 014A
-(blueprint: lem-weil-pbc-scalar-localization-underlying-telescope). -/
+Source: Stacks Project, Derived Categories, Tags 093W, 0949 and 014A. -/
 def scalarLocalizationTelescopeProperty
     (A : Type v) [CommRing A] (t : A)
     {D : Type uD} [Category.{vD} D] [Preadditive D] [HasZeroObject D] [HasShift D ℤ]

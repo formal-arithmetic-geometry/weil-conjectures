@@ -37,7 +37,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 
 Source: Stacks Project, derived.tex, Tag 015J, proof remark (1), and the
 canonical single-functor, quotient and homology shift comparisons.
-(blueprint: lem-pc-right-derived-single-unit-shift-transport)
 
 Proof: Use the canonical shift isomorphism from single_n X to single_0 X[-n]
 in the bounded-below homotopy category. Naturality of rightDerivedFunctorPlusUnith

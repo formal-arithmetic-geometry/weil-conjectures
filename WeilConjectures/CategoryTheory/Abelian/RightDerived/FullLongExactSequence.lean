@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
 # The full long exact sequence of right derived functors
 
 Source: Stacks Project, Derived Categories, Tag 015B, parts (1) and (2), specialized to
-objects in degree zero (blueprint: lem-weil-pbc-derived-functor-long-exact).
+objects in degree zero.
 -/
 
 @[expose] public section
@@ -27,7 +27,6 @@ namespace CategoryTheory.ShortComplex.ShortExact
 
 /-- A short exact sequence gives a full long exact sequence of right derived functors,
 including the initial monomorphism. Source: Stacks Project, Tag 015B (1)-(2).
-(blueprint: lem-weil-pbc-derived-functor-long-exact)
 
 Proof:
 1. Choose compatible injective resolutions of the three objects using the horseshoe
@@ -35,9 +34,8 @@ lemma (lem-weil-pbc-injective-resolution-ses, Stacks Tag 013T). Their augmentati
 with the two maps of the short exact sequence.
 2. Each degreewise short exact sequence splits, because its first term is injective
 (def-sp-injective-resolutions, Stacks Tag 0136). Additivity of `F`
-(def-sp-left-exact-additive) preserves the splitting identities, so applying `F` gives
-another degreewise short exact sequence of complexes in the abelian target category
-(def-sp-abelian).
+preserves the splitting identities, so applying `F` gives
+another degreewise short exact sequence of complexes in the abelian target category.
 3. Apply the long exact cohomology sequence (lem-weil-pbc-complex-ses-homology-long-exact,
 Stacks Tag 0117). This gives connecting maps and exactness at every term after the first.
 4. The complexes vanish in negative degrees. Their zeroth cohomology is the kernel of

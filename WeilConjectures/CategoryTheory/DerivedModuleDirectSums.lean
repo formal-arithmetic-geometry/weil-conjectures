@@ -18,8 +18,7 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 /-!
 # Direct sums of module complexes in the derived category
 
-Source: Stacks Project, Injectives, Lemma 07D9 (clauses (1)-(2)) (blueprint:
-lem-pc-derived-module-direct-sums).
+Source: Stacks Project, Injectives, Lemma 07D9 (clauses (1)-(2)).
 -/
 
 @[expose] public section
@@ -91,7 +90,7 @@ private lemma derived_map_homotopy
   apply (cancel_mono ((DerivedCategory.quotientCompQhIso C).hom.app L)).1
   simp only [DerivedCategory.quotientCompQhIso_hom_naturality, h]
 
-/-- (blueprint: lem-pc-derived-module-direct-sums) Let `R` be a ring and let
+/--  Let `R` be a ring and let
 `D(R)` be the derived category of `R`-modules. For a family of cochain complexes
 `K` indexed by `I`, the image under `DerivedCategory.Q` of the termwise
 coproduct complex, together with the images of its coprojections, is a

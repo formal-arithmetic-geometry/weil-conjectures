@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.RingedHypercoverInjectiveAugmentationRing
 /-! # The commutative-ring specialization of injective hypercover exactness
 
 Source: Stacks Project, Hypercoverings, Tags 01GE and 01GW.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace CategoryTheory
 
 /-- The commutative-ring specialization of the ringed hypercover augmentation.
 Source: Stacks Project, Hypercoverings, Tags 01GE and 01GW.
-(auxiliary; not a blueprint node).
 Proof: forget commutativity and apply the arbitrary-ring augmentation theorem. -/
 theorem ringedHypercover_injective_augmentation_exact
     {C : Type u} [SmallCategory C]

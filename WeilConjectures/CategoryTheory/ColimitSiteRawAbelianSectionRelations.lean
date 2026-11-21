@@ -21,9 +21,8 @@ import WeilConjectures.CategoryTheory.ColimitSiteAbelianKanUnitRelations
 
 /-! # Raw abelian section relations
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 section presentation; Modules on Sites, Tag 03CO (abelian colimits).
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-relations).
 -/
 
 @[expose] public section
@@ -51,9 +50,8 @@ private theorem arrow_precomp {X Y Z Z' : AddCommGrpCat.{u}}
   subst Z'
   simpa using congrArg (fun k ↦ Arrow.mk (f ≫ k)) hg
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section presentation; Modules on Sites, Tag 03CO (abelian colimits).
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-relations).
 
 Proof: Normalize the two section images to Y = V_i(U) using the equalities in
 hkappa. The equations hbeta_map and hm make these normalized maps compatible

@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.FilteredComplexSuccessorCyclesCover
 
 /-! # Descent between normalized quotient-page sequences
 
-Source: Stacks Project, Homology, Tag 012K, lemma-functorial.
-(blueprint: lem-weil-pbc-filtered-canonical-page-descent).
+Source: Stacks Project, Homology, Tag 012K.
 -/
 
 @[expose] public section
@@ -89,8 +88,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A filtered map descends between spectral sequences whose page complexes and successor
 comparisons are identified with the normalized concrete quotient construction.
 No finiteness assumption on the filtration is made.
-Source: Stacks Project, Tag 012K, lemma-functorial.
-(blueprint: lem-weil-pbc-filtered-canonical-page-descent).
+Source: Stacks Project, Tag 012K.
 
 Proof. Restrict the map to each step, descend to graded pieces, restrict to graded
 cycles, and descend modulo boundaries. The representative differential commutes with

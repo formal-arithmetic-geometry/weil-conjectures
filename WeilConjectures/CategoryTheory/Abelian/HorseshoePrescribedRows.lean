@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Abelian.Refinements
 
 Source: Stacks Project, Derived Categories, Tag 013T, proof Step 2, specialized
 by the cokernel induction to objects with prescribed outer resolutions.
-(blueprint: lem-sp-horseshoe-prescribed-row-construction).
 -/
 
 @[expose] public section
@@ -81,7 +80,6 @@ part of the conclusion and are verified separately.
 
 Source: Stacks Project, Derived Categories, Tag 013T, proof Step 2, specialized
 by the following cokernel induction to prescribed resolutions of objects.
-(blueprint: lem-sp-horseshoe-prescribed-row-construction).
 
 Proof: put `K.X 0 = IA.X 0 ⊞ IC.X 0` and augment by
 `w = (lift, S.g ≫ IC.ι.f 0)`. The hypothesis on `lift` gives a morphism from

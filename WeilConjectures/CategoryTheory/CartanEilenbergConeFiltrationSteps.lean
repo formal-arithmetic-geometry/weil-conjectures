@@ -16,8 +16,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
 
 /-- The finite image sum in the pinned cone-filtration formula.
-Source: Stacks Project, Tags 0133 and 012W, augmented-cone variant.
-(blueprint: lem-sp-cartan-eilenberg-cone-filtration-data-steps). -/
+Source: Stacks Project, Tags 0133 and 012W, augmented-cone variant. -/
 noncomputable def coneFiltrationStep
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)
@@ -60,8 +59,7 @@ Both indices lie in the next interval [max b p,n+1]. Thus every generating image
 lies in the pullback, so their finite supremum does too. The pullback universal
 property supplies the required factorization. Empty intervals require no cases.
 The hypothesis on I below b is unnecessary for stability but is retained here
-for compatibility with the parent's hypotheses.
-(blueprint: lem-sp-cartan-eilenberg-cone-filtration-data-steps). -/
+for compatibility with the parent's hypotheses. -/
 theorem coneFiltrationStep_props
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

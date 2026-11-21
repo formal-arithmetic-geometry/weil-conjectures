@@ -16,9 +16,7 @@ universe z
 open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph and its
-finite-diagram remark.
-(blueprint: lem-weil-pbc-filtered-colimit-category-iso).
+/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph and its remark.
 
 Proof: Encode an invertible arrow as the image of the unique arrow from false to
 true in the finite groupoid on two objects with one arrow between any ordered

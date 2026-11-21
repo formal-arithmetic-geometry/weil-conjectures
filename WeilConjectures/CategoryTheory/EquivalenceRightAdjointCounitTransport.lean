@@ -15,8 +15,7 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 /-- Transport right adjoints along an equivalence and a comparison of left adjoints.
-Source: Stacks Project, Tag 0D5S; uniqueness of adjoints.
-(blueprint: lem-cat-equivalence-right-adjoint-counit-transport)
+Source: Stacks Project, Tag 0D5S.
 
 Proof: Form the comparison j from e.inverse followed by P to Q by whiskering
 p inverse with e.inverse, then applying the counit isomorphism of e. Compose
@@ -56,8 +55,7 @@ private theorem transport
   simp
 
 /-- The functor form of counit transport along an equivalence.
-Source: Stacks Project, Tag 0D5S; uniqueness of adjoints.
-(blueprint: lem-cat-equivalence-right-adjoint-counit-transport)
+Source: Stacks Project, Tag 0D5S.
 
 Proof: Apply the preceding equivalence calculation to L.asEquivalence, whose
 functor is definitionally L. The calculation composes adjunctions and applies

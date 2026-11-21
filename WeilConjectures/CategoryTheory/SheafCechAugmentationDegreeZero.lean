@@ -32,7 +32,6 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 /-- Canonical degree-zero descent for the categorical Čech complex of any sheaf.
 Source: Stacks Project, Cohomology on Sites, Tag 03AN.
-(blueprint: lem-sc-sheaf-cech-augmentation-degree-zero)
 
 Proof: The single complex has zero differentials, hence its degree-zero homology
 is I(X). The Čech complex has no incoming differential in degree zero, hence its

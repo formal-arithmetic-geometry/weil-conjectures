@@ -10,9 +10,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Finite ordered Postnikov towers
 
-Source: BBD, Faisceaux pervers, Propositions 1.3.3 and 1.3.5, Theorem 1.3.6 and its
-derived-category example, pp. 29-32; Stacks Project, derived.tex, Tag 08J5
-(auxiliary; not a blueprint node).
+29-32; Stacks Project, derived.tex, Tag 08J5.
 
 The double truncation `t.truncGELE q q` is Mathlib's existing composite
 `t.truncLE q ⋙ t.truncGE q`. Its value shifted by `q` is the heart object `H_t^q(K)`.
@@ -33,8 +31,8 @@ exactly `n` triangles and with its own cohomology objects as the successive fact
 The `n + 1` vertices are the upper truncations, up to isomorphism, starting at zero
 and ending at the given object. For `n = 0` these endpoints identify the object with zero.
 
-Source: BBD, Faisceaux pervers, 1.3.3-1.3.6, pp. 29-32, and the finite filtrations
-of 1.3.13, pp. 34-35 (auxiliary; not a blueprint node).
+29-32, and the finite filtrations
+of 1.3.13, pp. 34-35.
 
 Proof:
 1. Set `L_j = tau^{<= a+j-1} K`. The truncation right adjunction from
@@ -124,8 +122,8 @@ namespace DerivedCategory
 this same `K` placed in degree zero. Shifting this isomorphism by `-q` identifies
 the factors in `exists_bounded_postnikov_tower` with `H^q(K)[0][-q]`.
 
-Source: BBD, Faisceaux pervers, the example after 1.3.6, p. 31; Stacks Project,
-derived.tex, Tag 08J5 (auxiliary; not a blueprint node).
+31; Stacks Project,
+derived.tex, Tag 08J5.
 
 Proof (step 7 of the node): use the good truncations of
 proposition-open-direct-image-preserves-finite on a cochain representative `E`. The upper truncation

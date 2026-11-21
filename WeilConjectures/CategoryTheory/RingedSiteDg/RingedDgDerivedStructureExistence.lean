@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteDg.SheafDgHomotopySystem
 /-! The homotopy-system and localization steps produce a standard derived
 structure for each coefficient algebra.
 
-Source: Stacks sdga, Tags 0FS7, 0FT4 and 0FT5
-(blueprint: lem-sfb-ringed-dg-derived-structures).
+Source: Stacks sdga, Tags 0FS7, 0FT4 and 0FT5.
 
 Proof in words: construct signed shifts and cone triangles on the dg-module
 homotopy category, then transport the cone characterization through the
@@ -34,8 +33,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{u} C]
 
 /-- Localize the supplied homotopy system and transport its standard shift and
 cone characterization to the fixed localization of actual modules.
-Source: Stacks sdga, 0FT5 and derived, 05R6
-(blueprint: lem-sfb-ringed-dg-derived-structures).
+Source: Stacks sdga, 0FT5 and derived, 05R6.
 
 Proof: the composite from modules to the localization of the homotopy category
 is a localization at underlying quasi-isomorphisms: the cylinder argument makes

@@ -16,7 +16,6 @@ import all WeilConjectures.CategoryTheory.Site.SiteConstantModuleHomSupplement
 This is the existing private generic scalar-comparison argument extracted from
 RationalStratumFiniteFreeModel to keep compilation below the per-file limit.
 Source: Stacks, Tags 03EK and 0GMW; Bhatt--Scholze, Proposition 6.8.14(2).
-(blueprint: lem-per-constant-scalar-tower-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -382,9 +381,7 @@ private theorem scalarModelIso_natural
   rfl
 
 /-- Constant scalar realization commutes with an ordinary scalar tower, naturally
-and with its prescribed constant generators. Source: Stacks, Tags 03EK and 0GMW;
-Bhatt--Scholze, Proposition 6.8.14(2).
-(blueprint: lem-per-constant-scalar-tower-comparison).
+and with its prescribed constant generators. Source: Stacks, Tags 03EK and 0GMW; Bhatt--Scholze, Proposition 6.8.14(2).
 
 Proof: Send each generator a tensor x to a tensor (1 tensor x). In the reverse
 direction, the ordinary extension/restriction adjunction extends x mapped to

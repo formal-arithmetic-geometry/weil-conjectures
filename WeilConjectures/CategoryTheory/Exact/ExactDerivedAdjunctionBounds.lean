@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Bounds and conservativity of exact derived adjunctions
 
-Source: Stacks Project, Derived Categories, Tags 015F and 05TC; Zheng,
-Construction 4.1 and Lemma 4.10.
+Source: Stacks Project, Derived Categories, Tags 015F and 05TC.
 -/
 
 @[expose] public noncomputable section
@@ -59,8 +58,7 @@ private theorem exactDerived_isLE (X : DerivedCategory A) (n : ℤ) [X.IsLE n] :
 /-- A right adjoint to an exact derived inverse image preserves each lower bound.
 Source: Stacks 05TC. Proof: a map from an object in degrees at most n-1 to the
 right-adjoint image transposes to a map into the original object in degrees at least n.
-Exactness preserves the upper bound, so that transpose and hence the map vanish.
-(blueprint: lem-pur-exact-derived-adjunction-bounds). -/
+Exactness preserves the upper bound, so that transpose and hence the map vanish. -/
 theorem exactDerivedAdjunction_isGE
     {RD : DerivedCategory B ⥤ DerivedCategory A} (adj : FD ⊣ RD)
     (X : DerivedCategory B) (n : ℤ) [X.IsGE n] : (RD.obj X).IsGE n := by
@@ -82,8 +80,7 @@ Source: Zheng, proof of Lemma 4.10, with Stacks 015F. Proof: degree-zero single
 functors are fully faithful, so the hypothesis first makes F faithful on the abelian
 categories. Exactness identifies the image of every cohomology morphism with the
 cohomology of the image. Faithful exact functors reflect isomorphisms, and cohomology
-jointly detects isomorphisms in the unbounded derived category.
-(blueprint: lem-pur-exact-derived-adjunction-bounds). -/
+jointly detects isomorphisms in the unbounded derived category. -/
 theorem exactDerived_reflectsIso_of_boundedBelow_faithful
     (hfaith : ∀ (X Y : DerivedCategory A),
       (∃ n : ℤ, X.IsGE n) → (∃ n : ℤ, Y.IsGE n) →
@@ -119,12 +116,11 @@ theorem exactDerived_reflectsIso_of_boundedBelow_faithful
 
 /-- Full faithfulness on bounded-below objects makes the counit invertible on their
 essential image, even though the adjunction itself lives on unbounded categories.
-Source: Zheng, Lemma 4.10. Proof: postcomposition with the unit on a bounded-below X
+Proof: postcomposition with the unit on a bounded-below X
 is the composite of the full-faithfulness bijection and adjunction. Its target is
 bounded below by the preceding bound theorem. Surjectivity at that target supplies a
 left inverse, and injectivity at X supplies the other inverse. The triangle identity
-then inverts the counit on FD X; naturality transports this to its essential image.
-(blueprint: lem-pur-exact-derived-adjunction-bounds). -/
+then inverts the counit on FD X; naturality transports this to its essential image. -/
 theorem exactDerivedAdjunction_counit_isIso_of_origin
     {RD : DerivedCategory B ⥤ DerivedCategory A} (adj : FD ⊣ RD)
     (hfull : ∀ (X Y : DerivedCategory A),

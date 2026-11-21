@@ -19,9 +19,7 @@ import Mathlib.CategoryTheory.Sites.LeftExact
 # Equivariant module sheafification as a reflector
 
 Source: Stacks Project, Modules on Sites, Tag 03CY, and Sites, Tags 00WH, 00WJ,
-00YR; the agent-formulated internal-action extension supporting paragraph (3) of
-main-20261015, sk-thm-sf-ctf-stability-direct-images
-(blueprint: lem-sfb-equivariant-module-sheafification-reflector).
+00YR.
 -/
 
 @[expose] public section
@@ -423,15 +421,14 @@ end ActionConstruction
 /-- Ordinary module sheafification carries the unique natural linear action extending
 the given action, has the equivariant universal property, and gives the reflector.
 
-Source: Stacks Tags 03CY, 00WH, 00WJ and 00YR; agent-formulated equivariant extension
-(blueprint: lem-sfb-equivariant-module-sheafification-reflector).
+Source: Stacks Tags 03CY, 00WH, 00WJ and 00YR.
 
 Proof:
 1. By lem-pc-sites-module-sheafification-interface, the underlying abelian sheaf and
    unit are ordinary abelian sheafification. By lem-pc-sites-sheafification-underlying-sets
    the same holds after forgetting to sets. The universal property in
    def-weil-pbc-sheafification fixes the sheaves K and R. Finite-product preservation
-   (situation-conventions) identifies products of their identities and
+   identifies products of their identities and
    the unit of P with the corresponding sheafification units. Hence maps from these
    product sheaves are determined after those units.
 2. Extend the composite of the action K times P to P with the unit P to P-sharp

@@ -28,8 +28,7 @@ maps through the monic image-sum inclusions therefore supplies subcomplexes.
 The interval `Finset.Icc (max b p) n` is finite, so the supremum exists, and
 the interval inclusions prove antitonicity in `p`; the resulting subcomplexes
 are the required decreasing filtration.
-Source: Stacks Project, Homology, Tag 0133.
-(blueprint: lem-sp-cartan-eilenberg-cone-filtration-data). -/
+Source: Stacks Project, Homology, Tag 0133. -/
 theorem cartanEilenberg_cone_filtration_data
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

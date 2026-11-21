@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # Derived bifunctor restriction to resolving pairs
 
 Source: Stacks Project, categories.tex, localization universal property.
-(blueprint: lem-pur-derived-resolving-pair-restriction).
 -/
 
 @[expose] public section
@@ -26,9 +25,7 @@ namespace CategoryTheory
 
 /-- Restriction to pairs of resolving cochain complexes detects and lifts natural
 transformations of derived bifunctors.
-Source: Stacks Project, categories.tex, localization universal property;
-localization through the homotopy category and resolving-representative restriction.
-(blueprint: lem-pur-derived-resolving-pair-restriction).
+Source: Stacks Project, categories.tex, localization universal property.
 
 Proof: put the resolving predicate on the underlying complexes of homotopy objects.
 A resolving quasi-isomorphism of complexes maps to such a homotopy morphism. Apply

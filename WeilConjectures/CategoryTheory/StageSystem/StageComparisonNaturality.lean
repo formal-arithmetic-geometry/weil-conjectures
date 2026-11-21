@@ -17,8 +17,6 @@ namespace CategoryTheory.StageSystem
 
 /-- Naturality on finite stages and their transition isomorphisms gives naturality
 on every common-stage representative.
-Source: the representative factorization in StageSystem.mkHom_eq_isoToStage.
-(blueprint: lem-sf-stage-comparison-naturality).
 
 Proof: write any common-stage arrow as the source isoToStage, the stage inclusion of
 its representative, and the inverse target isoToStage. The compatibility equation gives

@@ -39,7 +39,7 @@ private theorem pullback_kernelSubobject
 
 /-- Kernel and image identities for the differential of an exact couple.
 Source: Stacks Project, Lemma 12.21.2, clauses (1)--(2), and Remark 12.21.5
-(Tags 011R and 0AMJ) (blueprint: lem-sp-derived-couple-kernel-identities).
+(Tags 011R and 0AMJ).
 
 Proof. The kernel of a composite is the pullback of the second map's kernel:
 both inclusions follow from the kernel and pullback universal properties.

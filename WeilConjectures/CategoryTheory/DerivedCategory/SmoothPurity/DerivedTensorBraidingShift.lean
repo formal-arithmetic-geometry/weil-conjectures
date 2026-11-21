@@ -92,7 +92,6 @@ private theorem derived_braiding_kflat (P : CochainComplex.KFlat C) :
 
 /-- The canonical signed symmetry intertwines the two canonical tensor shifts.
 Source: Stacks Project, More on Algebra, Tag 0BYI (signed tensor symmetry).
-(blueprint: lem-pur-derived-tensor-braiding-shift).
 
 Proof. On each cochain summand, the shift sign times the shifted Koszul sign is
 its unshifted Koszul sign. The identity descends through the tensor comparison

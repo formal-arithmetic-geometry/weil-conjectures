@@ -15,8 +15,7 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits
 /-!
 # Internal action site presentation
 
-Source: the action-site construction, Stacks 00VH, 00WJ, 00YR, 03CY and 03DA
-(blueprint: lem-sfb-internal-action-site-presentation).
+Source: the action-site construction, Stacks 00VH, 00WJ, 00YR, 03CY and 03DA.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace CategoryTheory.InternalActionSite
 variable {C : Type u} [SmallCategory C] (K : Cᵒᵖ ⥤ GrpCat.{u})
 
 /-- The precise presentation data and all its required properties.
-Source: action-site construction and Stacks 00VH, 00WJ, 00YR, 03CY, 03DA
-(blueprint: lem-sfb-internal-action-site-presentation).
+Source: action-site construction and Stacks 00VH, 00WJ, 00YR, 03CY, 03DA.
 
 The equivalences are characterized on sections and maps. The two sheafification
 comparisons commute with their units on underlying abelian presheaves; consequently
@@ -192,10 +190,6 @@ private theorem forgetPresheaf_reflects {R : Cᵒᵖ ⥤ RingCat.{u}} :
 
 /-- Internal actions are modules on the displayed twisted-arrow ringed site,
 compatibly with sheafification, kernels, cokernels and detection of zero.
-
-Source: agent-formulated categorical input to main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3)
-(blueprint: lem-sfb-internal-action-site-presentation).
 
 Proof: construct the category with labels b g*a; associativity is functoriality
 of the group sheaf. The pullback of (f,a),(g,b) has legs (p,1) and

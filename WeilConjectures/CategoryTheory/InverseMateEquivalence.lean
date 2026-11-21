@@ -26,8 +26,7 @@ and naturality of beta identify the resulting function with precomposition
 by alpha at x. This function is bijective for every z. Taking z equal to
 L2(G(x)) supplies a left inverse of alpha; injectivity with z equal to
 H(L1(x)) then proves the other inverse equation. Each component of alpha
-is therefore invertible, so alpha is a natural isomorphism.
-(blueprint: lem-stage3-inverse-mate-equivalences) -/
+is therefore invertible, so alpha is a natural isomorphism. -/
 theorem isIso_inverseMate_of_equivalences
     {C : Type u₁} {D : Type u₂} {E : Type u₃} {F : Type u₄}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} E] [Category.{v₄} F]

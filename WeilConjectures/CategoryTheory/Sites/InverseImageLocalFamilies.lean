@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Functor.EpiMono
 /-!
 # Locally surjective families under an inverse image
 
-Source: Stacks Project, Sites, Tag 00WL; adjunction and local image argument.
+Source: Stacks Project, Sites, Tag 00WL.
 -/
 
 @[expose] public section
@@ -116,8 +116,7 @@ private theorem family_map
 
 /-- Left adjoints between categories of sheaves of sets preserve locally surjective families.
 The sites and the values may lie in independent universes.
-Source: Stacks Project, Sites, Tag 00WL; adjunction and local image argument
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00WL.
 
 Proof: A locally surjective family jointly lifts against monomorphisms: pull back
 such a monomorphism along the proposed map, and local surjectivity makes the

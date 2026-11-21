@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Ulift
 /-!
 # The extension-by-zero presheaf on a localized ringed site
 
-Source: Stacks Project, Modules on Sites, Lemma 03DI, first paragraph of proof
-(blueprint: def-weil-extension-by-zero-presheaf).
+Source: Stacks Project, Modules on Sites, Lemma 03DI, first paragraph of proof.
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ variable {C : Type u₁} [Category.{v₁} C] {J : GrothendieckTopology C}
 open Classical in
 /-- At `V`, the extension-by-zero presheaf has a copy of `G(V ⟶ U)` for every map
 `V ⟶ U`; scalars from `R(V) = (R.over U)(V ⟶ U)` act on each copy.
-Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI. -/
 noncomputable def extensionByZeroPresheafSection
     (G : SheafOfModules.{v} (R.over U)) (V : Cᵒᵖ) :
     ModuleCat.{max v v₁} (R.obj.obj V) :=
@@ -40,7 +39,7 @@ noncomputable def extensionByZeroPresheafSection
 open Classical in
 /-- Restriction sends the `φ` summand through the restriction in `G` along
 `(V' ⟶ U) ⟶ (V ⟶ U)` and then includes it in the `φ ≫ a` summand.
-Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI. -/
 noncomputable def extensionByZeroPresheafRestrictAdd
     (G : SheafOfModules.{v} (R.over U)) {V W : Cᵒᵖ} (a : V ⟶ W) :
     extensionByZeroPresheafSection R U G V →+
@@ -67,7 +66,7 @@ private theorem extensionByZeroPresheafRestrictAdd_of
 
 /-- Restriction is semilinear for the restriction of the ring sheaf.
 The claim follows on each direct-sum injection from semilinearity of `G`.
-Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI. -/
 theorem extensionByZeroPresheafRestrict_smul
     (G : SheafOfModules.{v} (R.over U)) {V W : Cᵒᵖ} (a : V ⟶ W)
     (r : R.obj.obj V) (s : extensionByZeroPresheafSection R U G V) :
@@ -90,7 +89,7 @@ theorem extensionByZeroPresheafRestrict_smul
 
 /-- The sectionwise restriction as a morphism to the module obtained by
 restriction of scalars along `R.map a`.
-Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI. -/
 noncomputable def extensionByZeroPresheafMap
     (G : SheafOfModules.{v} (R.over U)) {V W : Cᵒᵖ} (a : V ⟶ W) :
     extensionByZeroPresheafSection R U G V ⟶
@@ -104,7 +103,7 @@ noncomputable def extensionByZeroPresheafMap
       map_smul' := extensionByZeroPresheafRestrict_smul R U G a }
 
 /-- Identity restriction follows on each summand from the identity law for `G`.
-Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI. -/
 theorem extensionByZeroPresheafMap_id
     (G : SheafOfModules.{v} (R.over U)) (V : Cᵒᵖ) :
     extensionByZeroPresheafMap R U G (𝟙 V) =
@@ -132,7 +131,7 @@ theorem extensionByZeroPresheafMap_id
 
 /-- Composition of restrictions follows on each summand from the
 composition law for `G`.
-Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI. -/
 theorem extensionByZeroPresheafMap_comp
     (G : SheafOfModules.{v} (R.over U)) {V W X : Cᵒᵖ}
     (a : V ⟶ W) (b : W ⟶ X) :
@@ -180,8 +179,7 @@ theorem extensionByZeroPresheafMap_comp
 /-- The presheaf `V ↦ ⨁ (φ : V ⟶ U), G(V ⟶ U)` of `R`-modules. Its
 restriction along `a : V' ⟶ V` sends the `φ` summand into the `a ≫ φ`
 summand using the restriction of `G`. This also covers the case of no map
-to `U`, when the direct sum is zero. Stacks Project, Lemma 03DI
-(blueprint: def-weil-extension-by-zero-presheaf). -/
+to `U`, when the direct sum is zero. Stacks Project, Lemma 03DI. -/
 noncomputable def extensionByZeroPresheafObj
     (G : SheafOfModules.{v} (R.over U)) : PresheafOfModules.{max v v₁} R.obj where
   obj V := extensionByZeroPresheafSection R U G V
@@ -190,8 +188,7 @@ noncomputable def extensionByZeroPresheafObj
   map_comp a b := extensionByZeroPresheafMap_comp R U G a b
 
 /-- On a direct-sum summand, the map induced by `α` is its component at
-`V ⟶ U`. Stacks Project, Lemma 03DI
-(blueprint: def-weil-extension-by-zero-presheaf). -/
+`V ⟶ U`. Stacks Project, Lemma 03DI. -/
 noncomputable def extensionByZeroPresheafHomApp
     {G H : SheafOfModules.{v} (R.over U)} (α : G ⟶ H) (V : Cᵒᵖ) :
     extensionByZeroPresheafSection R U G V ⟶
@@ -200,7 +197,7 @@ noncomputable def extensionByZeroPresheafHomApp
     (α.val.app (Opposite.op (Over.mk φ))).hom)
 
 /-- Naturality follows on each summand from naturality of `α` in `Over U`.
-Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI. -/
 theorem extensionByZeroPresheafHom_naturality
     {G H : SheafOfModules.{v} (R.over U)} (α : G ⟶ H)
     {V W : Cᵒᵖ} (a : V ⟶ W) :
@@ -234,8 +231,7 @@ theorem extensionByZeroPresheafHom_naturality
 
 
 /-- The morphism of presheaves induced by `α` acts by `α_(V ⟶ U)` on the
-corresponding summand. Stacks Project, Lemma 03DI
-(blueprint: def-weil-extension-by-zero-presheaf). -/
+corresponding summand. Stacks Project, Lemma 03DI. -/
 noncomputable def extensionByZeroPresheafHom
     {G H : SheafOfModules.{v} (R.over U)} (α : G ⟶ H) :
     extensionByZeroPresheafObj R U G ⟶ extensionByZeroPresheafObj R U H where
@@ -243,8 +239,7 @@ noncomputable def extensionByZeroPresheafHom
   naturality a := extensionByZeroPresheafHom_naturality R U α a
 
 /-- The map induced by the identity sheaf morphism is the identity on each
-direct-sum summand. Stacks Project, Lemma 03DI
-(blueprint: def-weil-extension-by-zero-presheaf). -/
+direct-sum summand. Stacks Project, Lemma 03DI. -/
 theorem extensionByZeroPresheafHom_id
     (G : SheafOfModules.{v} (R.over U)) :
     extensionByZeroPresheafHom R U (𝟙 G) =
@@ -257,8 +252,7 @@ theorem extensionByZeroPresheafHom_id
   simp
 
 /-- The map induced by a composite is the composite on each direct-sum
-summand. Stacks Project, Lemma 03DI
-(blueprint: def-weil-extension-by-zero-presheaf). -/
+summand. Stacks Project, Lemma 03DI. -/
 theorem extensionByZeroPresheafHom_comp
     {G H K : SheafOfModules.{v} (R.over U)} (α : G ⟶ H) (β : H ⟶ K) :
     extensionByZeroPresheafHom R U (α ≫ β) =
@@ -272,7 +266,7 @@ theorem extensionByZeroPresheafHom_comp
 
 /-- The extension-by-zero presheaf functor from sheaves of modules on the
 localized site to presheaves of modules on the original site.
-Stacks Project, Lemma 03DI (blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI. -/
 noncomputable def extensionByZeroPresheaf :
     SheafOfModules.{v} (R.over U) ⥤ PresheafOfModules.{max v v₁} R.obj where
   obj G := extensionByZeroPresheafObj R U G
@@ -281,8 +275,7 @@ noncomputable def extensionByZeroPresheaf :
   map_comp α β := extensionByZeroPresheafHom_comp R U α β
 
 /-- When there is no map `V ⟶ U`, the direct sum defining the section
-module is zero. Stacks Project, Lemma 03DI and Lemma 0F6Z
-(blueprint: def-weil-extension-by-zero-presheaf). -/
+module is zero. Stacks Project, Lemma 03DI and Lemma 0F6Z. -/
 theorem extensionByZeroPresheafSection_isEmpty
     (G : SheafOfModules.{v} (R.over U)) (V : Cᵒᵖ)
     [IsEmpty (V.unop ⟶ U)] :
@@ -295,8 +288,7 @@ theorem extensionByZeroPresheafSection_isEmpty
 
 /-- When `V ⟶ U` is unique, the canonical isomorphism sends the injection
 of a section into the sole summand to that section, lifted in universe.
-Stacks Project, Lemma 03DI and Lemma 0F6Z
-(blueprint: def-weil-extension-by-zero-presheaf). -/
+Stacks Project, Lemma 03DI and Lemma 0F6Z. -/
 theorem extensionByZeroPresheafSection_unique
     (G : SheafOfModules.{v} (R.over U)) (V : Cᵒᵖ)
     [Unique (V.unop ⟶ U)] :

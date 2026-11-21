@@ -17,9 +17,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 /-!
 # Localization and multiplication by a section on a slice ringed site
 
-Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af;
-Modules on Sites, Tags 03DI and 03DJ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0997; Modules on Sites, Tags 03DI and 03DJ.
 -/
 
 @[expose] public noncomputable section
@@ -31,24 +29,21 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- The ring sheaf underlying the given commutative ring sheaf.
-Source: Stacks Project, Modules on Sites, ringed sites
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, ringed sites. -/
 abbrev localCoefficientRings {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) :=
   (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
 
 /-- Forgetting commutativity commutes definitionally with restriction. This instance
 exposes that equality to typeclass search for the derived category of the slice.
-Source: Stacks Project, localized ringed sites
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, localized ringed sites. -/
 instance localCoefficientOver_hasDerivedCategory {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C)
     [h : HasDerivedCategory.{w} (ringedSiteModules.{u} ((localCoefficientRings R).over U))] :
     HasDerivedCategory.{w} (ringedSiteModules.{u} (localCoefficientRings (R.over U))) := h
 
 /-- Multiplication by the restrictions of `f` on an arbitrary module on the slice.
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0997. -/
 def localSectionMultiplication {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C)
     (f : R.obj.obj (op U))
@@ -60,8 +55,7 @@ def localSectionMultiplication {C : Type u} [SmallCategory C]
 /-- The localized coefficient module, constructed as the colimit of repeated multiplication
 by `f` on the unit module. Sectionwise before sheafification this colimit sends the class of
 `a` at stage `n` to `a/f^n`, hence is precisely the sheafification of sectionwise localization.
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0997. -/
 def localCoefficientLocalization {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C)
     (f : R.obj.obj (op U)) :
@@ -71,8 +65,7 @@ def localCoefficientLocalization {C : Type u} [SmallCategory C]
     (fun _ ↦ localSectionMultiplication R U f _))
 
 /-- Restriction of module sheaves to the slice is additive and exact.
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
 Proof: restrictions are sectionwise, so preserve addition and kernels. A locally surjective
 map remains locally surjective on the induced slice topology, so restriction preserves
 cokernels as well. Additivity and preservation of kernels and cokernels imply preservation
@@ -112,8 +105,7 @@ theorem localCoefficientRestriction_exact {C : Type u} [SmallCategory C]
     preservesFiniteColimits_of_reflects_of_preserves T G⟩
 
 /-- Restriction on the derived categories, induced by exact module restriction.
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ. -/
 def localCoefficientDerivedRestriction {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C)
     [HasDerivedCategory.{w} (ringedSiteModules.{u} (localCoefficientRings R))]
@@ -126,8 +118,7 @@ def localCoefficientDerivedRestriction {C : Type u} [SmallCategory C]
   (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U).mapDerivedCategory
 
 /-- Naturality of multiplication by a section on localized module sheaves.
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0997.
 Proof: on each object of the slice both composites take `x` to `f` times its image;
 linearity of the component map gives the equality. -/
 theorem localSectionMultiplication_naturality {C : Type u} [SmallCategory C]
@@ -140,8 +131,7 @@ theorem localSectionMultiplication_naturality {C : Type u} [SmallCategory C]
     (PresheafOfModules.overSections (R := R.obj) U f)
 
 /-- Multiplication by `f` as a natural endomorphism of slice restriction.
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0997. -/
 def localSectionMultiplicationNatTrans {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C)
     (f : R.obj.obj (op U)) :
@@ -153,8 +143,7 @@ def localSectionMultiplicationNatTrans {C : Type u} [SmallCategory C]
     ((SheafOfModules.overFunctor.{u} (localCoefficientRings R) U).map g)
 
 /-- Multiplication by `f` after localization of the category of complexes.
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0997. -/
 def localSectionDerivedMultiplication {C : Type u} [SmallCategory C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) (U : C)
     (f : R.obj.obj (op U))

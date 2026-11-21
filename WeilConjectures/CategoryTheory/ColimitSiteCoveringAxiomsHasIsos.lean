@@ -18,7 +18,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 /-- Then every singleton presieve of an isomorphism belongs to $Q$.
 Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-colimit-site-covering-axioms-hasisos)
 
 Proof: Given an isomorphism f in the cocone category, represent f and its
 inverse using joint surjectivity of the arrow colimit. Move them to a common

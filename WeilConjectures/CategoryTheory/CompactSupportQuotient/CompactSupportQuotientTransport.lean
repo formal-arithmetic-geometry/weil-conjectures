@@ -9,10 +9,6 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-! # Adjunction and naturality calculations for quotient reduction maps
-
-Source: the quotient-unit characterization and compact-support naturality calculation
-in Steps 2, 3 and 6 of `lem-coef-compact-support-quotient-cocycle`.
-(blueprint: lem-coef-compact-support-quotient-transport).
 -/
 
 @[expose] public section
@@ -21,9 +17,7 @@ set_option autoImplicit false
 namespace CategoryTheory.CompactSupportQuotient
 open CategoryTheory
 
-/-- The twice-transposed unit is the canonical left-adjoint composition isomorphism.
-Source: blueprint quotient-unit and naturality calculation, Steps 2, 3 and 6
-(blueprint: lem-coef-compact-support-quotient-transport). -/
+/-- The twice-transposed unit is the canonical left-adjoint composition isomorphism. -/
 theorem adjunct_isIso
     {C A B : Type*} [Category C] [Category A] [Category B]
     {Lm : C ⥤ A} {Rm : A ⥤ C} {Ln : C ⥤ B} {Rn : B ⥤ C}

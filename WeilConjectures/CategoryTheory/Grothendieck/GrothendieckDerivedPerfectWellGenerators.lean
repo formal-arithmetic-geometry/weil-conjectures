@@ -70,8 +70,7 @@ private theorem compact_localization_images_generate
 /-- A Grothendieck derived category has small shift-closed perfect well-generators.
 
 Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2
-and Section 2; Krause (2001), Theorem A, Theorem C and Lemma 4.
-(blueprint: new-sfb-derived-perfect-well-generators)
+and Section 2.
 
 Proof in words: take the exact Gabriel--Popescu presentation from
 `gabriel_popescu_abelian_core`. Its module derived category is

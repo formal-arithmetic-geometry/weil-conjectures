@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Abelian.Exact
 /-! # A stationary quotient comparison characterized on actual cycles
 
 Source: Stacks Project, Homology, Tags 012K, 012Q and 012W.
-(blueprint: lem-weil-pbc-stationary-cycle-comparison).
 -/
 
 @[expose] public section
@@ -195,9 +194,7 @@ private theorem quotient_kernel
     ← Subobject.pullback_comp]
 
 /-- The page projection and graded homology projection kill the same actual cycles.
-Source: Stacks Project, Homology, Tag 012K, Equation 12.24.5.2;
-Tag 012Q, final subquotient calculation; Tag 012W, stationary bounds calculation.
-(blueprint: lem-weil-pbc-stationary-cycle-comparison).
+Source: Stacks Project, Homology, Tag 012K, Equation 12.24.5.2; Tag 012Q, final subquotient calculation; Tag 012W, stationary bounds calculation.
 
 Proof. Write n=q+p, A=F^q K^n, A'=F^(q+1) K^n, Z=ker(d^n),
 and B=im(d^(n-1)). The inclusion of the cycles of F^q K identifies their
@@ -459,7 +456,6 @@ private theorem epi_iso_of_kernel_eq
 /-- At stationary outer bounds, actual cycles cover the graded cycles, and their
 homology classes determine the stationary comparison.
 Source: Stacks Project, Homology, Tags 012K, 012Q and 012W.
-(blueprint: lem-weil-pbc-stationary-cycle-comparison).
 
 Proof. Write n=q+p. The upper bound makes the r-cycle condition d(x)=0.
 Thus projecting the cycles of F^q K to gr^q K has image exactly the graded

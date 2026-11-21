@@ -9,7 +9,6 @@ module
 public import WeilConjectures.CategoryTheory.SiteCohomologyPullbackData
 
 /-! # Evaluation of degree-zero object cohomology
-Source: Mathlib, SheafCohomology/Basic, Ext/Basic, Sheafification and Yoneda.
 -/
 
 @[expose] public section
@@ -20,8 +19,6 @@ namespace CategoryTheory
 
 /-- Degree-zero evaluation `Sheaf.objectCohomologyEval₀` on the identity generator of the free
 sheaf is injective, preserves zero, and is natural in the sheaf.
-Source: Mathlib, SheafCohomology/Basic, Ext/Basic, Sheafification and Yoneda.
-(blueprint: lem-weil-pbc-object-cohomology-zero-evaluation).
 
 Proof: Ext in degree zero is additively equivalent to Hom. The sheafification
 adjunction identifies Hom from the free sheaf with natural transformations from

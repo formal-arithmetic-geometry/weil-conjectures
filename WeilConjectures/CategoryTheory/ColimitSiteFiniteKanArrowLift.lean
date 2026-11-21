@@ -18,7 +18,6 @@ import Mathlib.Basic.Finite.Sum
 
 Source: Stacks Project, Sites, Tag 0A35, independence of presentations,
 and Categories, Section Tag 04AX, eventual equality in filtered set colimits.
-(blueprint: lem-weil-pbc-colimit-site-finite-kan-arrow-lift).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace CategoryTheory
 
 /-- Source: Stacks Project, Sites, Tag 0A35, omitted independence-of-presentation
 verification, expanded using Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-colimit-site-finite-kan-arrow-lift).
 
 Proof: A costructured arrow p for the opposite stage functor is an arrow
 V_t(U) to V_t(p.left.unop). Represent each of the finitely many such arrows

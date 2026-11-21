@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.FilteredCohomologyImageNormalized
 /-! # A cycle presentation of the graded cohomology image
 
 Source: Stacks Project, Tag 012Q, Equation 12.24.5.2.
-(blueprint: lem-sp-filtered-cohomology-image-presentation).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace CategoryTheory.DecreasingFiltration
 
 /-- The graded cohomology image is a quotient of the ambient cycles in a filtration step.
 Source: Stacks Project, Tag 012Q, final quotient calculation, Equation 12.24.5.2.
-(blueprint: lem-sp-filtered-cohomology-image-presentation).
 
 Proof. Set A=L^pK^n, A'=L^(p+1)K^n, Z=ker(d^n), B=im(d^(n-1)).
 The inclusion of L^pK identifies its cycles with A intersection Z. Its

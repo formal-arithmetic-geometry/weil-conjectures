@@ -20,7 +20,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteKanUnitRelations
 /-! # Eventual equality of stagewise Kan representatives
 
 Source: Stacks Project, Sites, Tag 0A35, arbitrary-object section formula.
-(blueprint: lem-weil-pbc-colimit-stage-kan-relations).
 -/
 
 @[expose] public section
@@ -38,9 +37,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 This is only the relation calculation; it does not assert existence of representatives
 or a colimit universal property.
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 arbitrary-object section formula and its independence of choices.
-(blueprint: lem-weil-pbc-colimit-stage-kan-relations).
 
 Proof: Write S = Under.map(a). This functor is final: for any t in Under i,
 choose a common successor of t.right and k, then equalize the two maps from i.

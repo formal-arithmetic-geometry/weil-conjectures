@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 /-! # The normalized degree-zero cohomology identification
 
 Source: Stacks Project, Derived Categories, Tags 08J5 and 05RU.
-(blueprint: lem-amb-derived-degree-zero-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -34,7 +33,6 @@ private theorem homology_map_injective_single
 /-- Cohomology in degree zero gives the unique normalized identification of a complex
 concentrated in degree zero with its cohomology object placed in degree zero.
 Source: Stacks Project, Tags 08J5 and 05RU.
-(blueprint: lem-amb-derived-degree-zero-normalization).
 
 Proof: vanishing gives the two halves of the standard t-structure. Its heart is the
 image of the fully faithful single-degree embedding. Choose an identification with a
@@ -75,8 +73,7 @@ theorem existsUnique_iso_single_homology_zero
   exact hβ.trans hα.symm
 
 /-- A uniquely characterized map from each normalized heart identification gives
-one unique normalized pair. Source: the degree-zero gluing argument.
-(blueprint: lem-amb-derived-degree-zero-normalization).
+one unique normalized pair.
 
 Proof: the preceding theorem fixes the identification. At that identification the
 hypothesis fixes the sheaf map. Any other pair has the same first component by the

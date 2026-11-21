@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalizationForm
 /-! # Normalization of the bottom-cohomology comparison
 
 Source: Stacks Project, Tag 05TC (2), and the degree-zero comparison for a left
-exact derived functor, as used in Tags 08D4 and 0AVW.
-(blueprint: lem-pc-derived-bottom-unit-normalization). -/
+exact derived functor, as used in Tags 08D4 and 0AVW. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,7 +31,6 @@ that truncation under the derived functor.
 
 Source: Stacks Project, Tag 05TC (2), the double-truncation and degree-zero
 calculation used in Tags 08D4 and 0AVW.
-(blueprint: lem-pc-derived-bottom-unit-normalization).
 
 Proof: Lift the lower truncation to the bounded-below derived category. Apply
 05TC (2) to its upper truncation at n: the complementary term has cohomology

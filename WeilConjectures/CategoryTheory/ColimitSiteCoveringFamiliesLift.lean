@@ -18,8 +18,7 @@ namespace CategoryTheory
 
 /-- Simultaneous lifting of an outer covering and its finite family of inner coverings.
 Source: Stacks Project, Sites, Tag 09YL, the paragraph verifying axiom (2), together
-with the finite-diagram observation at the start of its proof.
-(blueprint: lem-weil-pbc-colimit-site-covering-families-lift)
+with observation at the start of its proof.
 
 Proof: Use hQ to choose a stage covering presieve for the outer family and for
 each inner family. Each of these presieves has finitely many arrows by hfinite.

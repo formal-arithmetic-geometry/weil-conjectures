@@ -26,8 +26,7 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-!
 # Module and abelian evaluation cohomology on a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tag 03FD, second displayed equality
-(blueprint: lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison).
+Source: Stacks Project, Cohomology on Sites, Tag 03FD, second displayed equality.
 -/
 
 @[expose] public section
@@ -194,8 +193,7 @@ set_option backward.isDefEq.respectTransparency false in
  on sections under the canonical degree-zero identifications. The final clause characterizes
  the canonical map by every lift from a module resolution to an abelian resolution.
 
-Source: Stacks Project, Cohomology on Sites, Tag 03FD, objectwise equality
-(blueprint: lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison).
+Source: Stacks Project, Cohomology on Sites, Tag 03FD, objectwise equality.
 
 Proof: Forgetting module structure is exact by moduleSheaves_colimits_forgetful.
 The existing general-site theorem injective_module_abelian_acyclic gives positive

@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Transporting derived comparisons through the homotopy quotient
 
-Source: Stacks 06XN and 0FND; the quotient of complexes by chain homotopy.
+Source: Stacks 06XN and 0FND.
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +25,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{da} A]
   (E : A ⥤ B) [E.Additive]
 
 /-- A universal comparison on complexes descends to the homotopy category, with exactly
-its original components. Source: Stacks 06XN, the ordinary localization construction
-(auxiliary; not a blueprint node).
+its original components. Source: Stacks 06XN, the ordinary localization construction.
 Proof: precomposition by the full, essentially surjective homotopy quotient is fully
 faithful. Lift the comparison through this full functor. To prove its universal property,
 whisker a competing comparison with the quotient and use the given universal property on

@@ -32,9 +32,7 @@ variable (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
 /-- The zero-second-coordinate map from the ordinary limit of the strict Koszul tensor
  tower to its explicit Roos fibre is a quasi-isomorphism on K-injective coefficients.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
-lemma-colim-and-lim-of-duals; derived.tex, Tag 0949, lemma-colim-hocolim.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; derived.tex, Tag 0949.
 
 Proof: write P for the positive finite Koszul diagram and S for its direct sum.
 The canonical telescope map Cone(1-shift:S→S)→colim P is a quasi-isomorphism.

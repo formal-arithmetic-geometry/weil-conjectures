@@ -575,7 +575,7 @@ attribute [local irreducible] sectionModuleEquivalence Mod.extendScalars Mod.com
 /-- Transport a normalized scalar derived pair through the exact section equivalences.
 The input squares are ordinary adjunction squares; this result concerns localization only.
 Source: Stacks Project, Derived Categories, Tag 09T5; Cohomology on Sites, Tags 06YY,
-07A6 (auxiliary; not a blueprint node).
+07A6.
 Proof:
 1. Localize the two exact section equivalences and the restriction square. Define the
 internal derived extension by conjugating the given universal derived extension with

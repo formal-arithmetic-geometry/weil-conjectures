@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Category.Grp.Zero
 # Direct image of an extension and its fibre torsor
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 02UV and 02FQ, and Sheaves of Modules,
-Tag 01AX (blueprint: lem-sc-torsor-h1-ext-pushforward).
+Tag 01AX.
 -/
 
 @[expose] public section
@@ -277,8 +277,7 @@ private theorem pullback_fibre_pushforward_equivariant {Z X : TopCat.{u}} (f : Z
 sections, has fibre torsor canonically equal to the direct image of the original fibre.
 The isomorphism is specified on sections by the first projection of the pullback, and it
 commutes with translation by the direct-image group sheaf.
-Source: Stacks Project, Tags 02UV, 02FQ and 01AX
-(blueprint: lem-sc-torsor-h1-ext-pushforward).
+Source: Stacks Project, Tags 02UV, 02FQ and 01AX.
 
 Proof:
 1. Identify the closed immersion with its closed image. Apply
@@ -293,8 +292,7 @@ its inverse image and p(e)=1. First projection therefore identifies these lifts 
 sections of the original fibre over the inverse-image open. These bijections commute with
 restriction. They commute with translation because the kernel inclusion has first
 projection equal to the pushed-forward inclusion. Consequently they form the canonical
-isomorphism of torsors asserted in the statement (`lemma-cohomology-multiplicative-group--3`,
-`lemma-uniform-bounds-pro-etale-affines` and `def-sc-topological-abelian-cohomology`). -/
+isomorphism of torsors asserted in the statement. -/
 theorem closedImmersion_extension_fibre_pushforward
     (Z X : Scheme.{u}) (i : Z ⟶ X) [IsClosedImmersion i]
     (F E : Z.carrier.Sheaf AddCommGrpCat.{u})

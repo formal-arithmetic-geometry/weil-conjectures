@@ -19,7 +19,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor
 namespace CategoryTheory.Adjunction
 
 /-- The native derived adjunction transposes cochain maps with its actual right-derived
-unit. Source: Stacks 0FND and 09T5; Mathlib derivedη_fac_app.
+unit. Source: Stacks 0FND and 09T5.
 Proof: apply derivedη_fac_app to the homotopy adjunction at the quotient of P.
 The termwise adjunction unit and the exact functor localization factorization have
 the stated cochain components; the quotient comparison has identity components.
@@ -27,8 +27,7 @@ Expand the Hom transpose as the derived unit followed by the derived right funct
 of the given map. Substitute the unit equation and use naturality of the universal
 right-derived unit at f. Functoriality combines the localized ordinary unit with
 the ordinary right functor of f, giving exactly the ordinary Hom transpose.
-No K-injectivity of K is needed, since the universal unit is never inverted.
-(blueprint: lem-pur-exact-left-cochain-transpose). -/
+No K-injectivity of K is needed, since the universal unit is never inverted. -/
 theorem derivedCochain_transpose
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions D]

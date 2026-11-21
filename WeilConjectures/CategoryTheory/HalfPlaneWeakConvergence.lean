@@ -12,9 +12,6 @@ import WeilConjectures.CategoryTheory.DerivedCoupleExact
 
 /-!
 # Canonical quotient maps in half-plane convergence
-
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2, canonical comparison.
-(blueprint: lem-sp-half-plane-weak-convergence)
 -/
 
 @[expose] public section
@@ -223,9 +220,7 @@ have the same kernel. For `p < 0`, the initial E term and all its subquotients
 vanish; the two consecutive filtration steps are the whole colimit, so both
 quotient targets are zero and the same assertion holds. This argument also
 covers `q < a`, when the source D is zero.
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2;
-Stacks Project, Tags 011T and 012F.
-(blueprint: lem-sp-half-plane-weak-convergence) -/
+Source: Stacks Project, Tags 011T and 012F. -/
 theorem halfPlane_weak_convergence (X : BigradedExactCouple C 0) (a : ℤ)
     (hD : ∀ p q : ℤ, q < a → IsZero (X.D p q))
     (hE : ∀ p q : ℤ, (p < 0 ∨ q < a) → IsZero (X.E p q))

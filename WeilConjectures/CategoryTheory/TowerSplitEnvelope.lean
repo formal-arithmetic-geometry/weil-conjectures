@@ -15,7 +15,7 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 # Functorial split envelope of an inverse system
 
 Source: literature/stacks-project/derived.tex, the explicit replacement step
-for Lemma Tag 070M (blueprint: lem-weil-tower-split-envelope).
+for Lemma Tag 070M.
 -/
 
 @[expose] public section
@@ -143,16 +143,16 @@ the three component equations specify its transition projections, its action on
 morphisms, and the embedding by composites of the original transition maps.
 
 Source: literature/stacks-project/derived.tex, explicit replacement step for
-Lemma Tag 070M (lemma-difficulty-K-injectives).
+Lemma Tag 070M.
 
 Proof:
 1. By `def-sp-abelian`, finite products are biproducts. Use their projections and
    injections and the composite transition maps of `def-weil-inverse-system`.
 2. Define the action on morphisms componentwise. Comparing projections proves
    compatibility with transitions, preservation of identities and composition,
-   and additivity by bilinearity (`def-weil-preadditive-category`).
+   and additivity by bilinearity.
 3. The envelope transitions forget the last factor; inclusion with zero last
-   component is a section (`def-weil-additive-category`).
+   component is a section.
 4. The identities f(m+1,k) = f(m+1,m) followed by f(m,k) show that j is a tower
    morphism. Naturality of the original tower morphisms gives naturality of j.
    The last projection retracts each component of j, proving it monic.
@@ -165,8 +165,7 @@ Proof:
    this follows by expanding its composite with the preceding cokernel projection
    and cancelling using f(m+1,k)=f(m,k)f(m+1,m). Inclusion with last component
    zero is its section. Uniqueness of cokernels transports these sections to the
-   chosen cokernel tower, proving it split.
-(blueprint: lem-weil-tower-split-envelope) -/
+   chosen cokernel tower, proving it split. -/
 theorem tower_split_envelope
     {C : Type u} [Category.{v} C] [Abelian C] :
     ∃ (E : (ℕᵒᵖ ⥤ C) ⥤ (ℕᵒᵖ ⥤ C)) (j : 𝟭 (ℕᵒᵖ ⥤ C) ⟶ E)

@@ -11,7 +11,6 @@ import WeilConjectures.CategoryTheory.RingedNegativeKoszulSignedDifferential
 /-! # Exterior coefficients of the canonical negative tensor differential
 
 Source: Stacks Project, More on Algebra, Tags 0622 and 0664; Algebraization, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -191,9 +190,7 @@ contraction coefficients. This fixes every basis map in advance and concerns one
 boundary of one negative tensor; there is no choice of coordinates or duality.
 
 Source: Stacks Project, more-algebra.tex, Tags 0622 and 0664, contraction on ordered
-wedges and the tensor Leibniz rule; algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the finite free Koszul calculation.
-(auxiliary; not a blueprint node).
+wedges and the tensor Leibniz rule; algebraization.tex, Tag 0A0E, the finite free Koszul calculation.
 
 Proof: use ringedNegativeKoszulBasis_signed_d for the canonical negative
 basis, giving the signed sum over erased indices. Expand exterior contraction

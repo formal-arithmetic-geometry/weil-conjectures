@@ -86,8 +86,7 @@ private theorem sigma_isEquivalence : (sigma J s R a).IsEquivalence := by
     (SheafOfModules.pushforwardPushforwardEquivalence s.symm c.hom ψ H₁ H₂).functor.IsEquivalence
 
 /-- Construction of the integer-labelled ringed site and its restriction equivalences.
-Source: steps 1--6 of the twisted action-site argument, Stacks 00W0 motivation
-(blueprint: lem-sf-twisted-action-site-restriction).
+Source: steps 1--6 of the twisted action-site argument, Stacks 00W0 motivation.
 
 Proof: construct arrows as the disjoint union of maps into the coherent integer powers
 of the chosen site equivalence. The unit and associativity coherence give the category

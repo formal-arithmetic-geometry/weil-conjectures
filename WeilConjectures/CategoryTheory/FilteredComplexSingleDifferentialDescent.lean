@@ -15,7 +15,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 # Descent of one filtered differential through the cycle-boundary quotients
 
 Source: Stacks Project, Homology, Tag 012K, displayed differential formula.
-(blueprint: lem-sp-filtered-complex-single-differential-descent).
 -/
 
 @[expose] public section
@@ -185,7 +184,6 @@ private theorem filteredComplex_differential_zero_class
 /-- The underlying complex differential descends between the two actual cokernels
 in one related pair of bidegrees. No square-zero or uniqueness assertion is included.
 Source: Stacks Project, Tag 012K, displayed differential formula.
-(blueprint: lem-sp-filtered-complex-single-differential-descent).
 
 Proof. Take an epimorphic family of simultaneous representatives t,tprime,x,y
 from filteredComplex_differential_representatives_cover and let e = x followed

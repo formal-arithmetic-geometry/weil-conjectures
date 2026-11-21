@@ -21,7 +21,6 @@ import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 # The induction invariant for finite-basis hypercovers
 
 Source: Stacks Project, Hypercoverings, Tag 0DAV, the split-skeleton construction.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -310,8 +309,7 @@ end CategoryTheory
 namespace CategoryTheory.FormalSplitAttachment
 
 /-- Include the proper faces of a retained degree into the truncated simplex category.
-Source: Stacks Project, Tags 0186 and 0DAV.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 0186 and 0DAV. -/
 def faceInclusion {n : ℕ} (q : Fin (n + 1)) :
     SimplicialObject.ProperFaceCategory q.val ⥤ SimplexCategory.Truncated n where
   obj a := ⟨a.obj.left, Nat.le_trans (Nat.le_of_lt a.property.1)
@@ -321,8 +319,7 @@ def faceInclusion {n : ℕ} (q : Fin (n + 1)) :
     (Nat.le_trans (Nat.le_of_lt b.property.1) (Nat.le_of_lt_succ q.isLt))
 
 /-- The proper-face diagram of a truncated simplicial object in a retained degree.
-Source: Stacks Project, Tags 0186 and 0DAV.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 0186 and 0DAV. -/
 def faceDiagram {D : Type u} [Category.{v} D] {n : ℕ}
     (K : SimplicialObject.Truncated D n) (q : Fin (n + 1)) :
     (SimplicialObject.ProperFaceCategory q.val)ᵒᵖ ⥤ D :=
@@ -331,8 +328,7 @@ def faceDiagram {D : Type u} [Category.{v} D] {n : ℕ}
 /-- A finite split truncation with basis components and covering matching maps.
 No matching data are required to be chosen coherently between truncations: the universal
 property transfers each degree's matching cone when the tower is assembled.
-Source: Stacks Project, Tags 0DAV and 01G5.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Tags 0DAV and 01G5. -/
 def IsFiniteBasisTruncation {C : Type u} [Category.{v} C]
     (J : Precoverage C) (B : Set C) (T : C) {n : ℕ}
     (K : SimplicialObject.Truncated (FormalCoproduct.{max u v} (Over T)) n) : Prop :=
@@ -413,7 +409,6 @@ private theorem covers_attached {C : Type u} [Category.{v} C]
 /-- Extend a finite split basis hypercover truncation by one degree.
 Source: Stacks Project, Hypercoverings, Tag 0DAV, construction of the extension and
 the paragraph proving that the new matching map covers; Tag 01G2, finite limits in SR.
-(auxiliary; not a blueprint node)
 
 Proof: Work in C/T, which has terminal object id_T and pullbacks. Finite families have
 finite boundary limits: the boundary category of all operators from retained degrees

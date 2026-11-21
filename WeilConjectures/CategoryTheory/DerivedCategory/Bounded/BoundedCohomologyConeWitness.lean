@@ -11,9 +11,7 @@ import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-! # Finite cohomology cone witnesses
-Source: Stacks Project, Derived Categories, Tags 08J5 and 0118; the Complexes paragraph
-of blueprint sk-cor-coefficient-heart-ii-generation.
-(blueprint: lem-sfb-bounded-cohomology-cone-witness)
+Source: Stacks Project, Derived Categories, Tags 08J5 and 0118.
 -/
 
 @[expose] public section
@@ -85,8 +83,7 @@ private theorem constructionWitness_step {C : Type*} {G : C → Prop}
 cohomology objects, placed in degree zero. This is independent of any constructibility
 condition or coefficient field.
 
-Source: Stacks Project, Derived Categories, Tags 08J5 and 0118; blueprint generation,
-Complexes paragraph (blueprint: lem-sfb-bounded-cohomology-cone-witness).
+Source: Stacks Project, Derived Categories, Tags 08J5 and 0118.
 
 Proof: choose bounds a,b for the canonical t-structure and a complex representing K.
 The upper truncations at a-1 and b are respectively zero and isomorphic to K. For each

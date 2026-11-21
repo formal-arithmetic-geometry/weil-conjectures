@@ -125,7 +125,6 @@ private theorem cycles_subobject {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The class map from filtered cycles has the expected image and inverse image.
 Source: Stacks Project, Section 12.24, Equation 12.24.5.2 and Tag 012Q.
-(blueprint: new-cohomology-image-cycle-map).
 
 Proof. Write A = L^pK^n, A' = L^(p+1)K^n, Z = ker(d^n), B = im(d^(n-1)),
 and S = A intersection Z. Since the inclusion L^pK into K is degreewise monic,

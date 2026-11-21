@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.CartanEilenbergComparisonColumnStep
 
 /-! # Augmented comparison of Cartan–Eilenberg resolutions
 
-Source: Stacks Project, Tags 015H, 015I and 015K
-(blueprint: lem-weil-pbc-ce-augmented-comparison).
+Source: Stacks Project, Tags 015H, 015I and 015K.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace CategoryTheory
 
 /-- An exact additive functor admits an augmented bicomplex comparison.
 This statement concerns the comparison itself; it does not form total complexes.
-Source: Stacks Project, Tags 015H, 015I and 015K
-(blueprint: lem-weil-pbc-ce-augmented-comparison).
+Source: Stacks Project, Tags 015H, 015I and 015K.
 
 Proof: in every complex degree p use the exact sequences
 0 → Bᵖ → Zᵖ → Hᵖ → 0 and 0 → Zᵖ → Kᵖ → Bᵖ⁺¹ → 0, and their

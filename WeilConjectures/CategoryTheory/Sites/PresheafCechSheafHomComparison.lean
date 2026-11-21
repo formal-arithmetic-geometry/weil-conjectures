@@ -27,7 +27,6 @@ namespace CategoryTheory.Sheaf
 /-- The free-sheaf adjunction identifies Hom cochains with presheaf Čech cochains,
 including their differentials. No covering or Ext vanishing is assumed.
 Source: Stacks Project, Cohomology on Sites, Tag 079Z, zero-row identification.
-(blueprint: lem-sc-presheaf-cech-sheaf-hom-comparison)
 
 Proof: in every degree apply the sheafification adjunction to identify morphisms
 from the sheafified free nerve term to F with presheaf morphisms from the free

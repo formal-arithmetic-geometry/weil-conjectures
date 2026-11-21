@@ -22,7 +22,6 @@ namespace CategoryTheory
 
 /-- Existence of the transition transformations and their adjunct equations.
 Source: Stacks Project, Sites, Tag 0A35, adjunction paragraph.
-(blueprint: lem-weil-pbc-stage-section-transition-existence).
 
 Proof: Write S_t for inverse image, R_t for restriction, and R_b for restriction
 along F(b.right). The under-category equation and F.map_comp give the equality

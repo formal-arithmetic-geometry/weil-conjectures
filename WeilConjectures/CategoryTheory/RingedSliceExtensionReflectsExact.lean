@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-!
 # Reflection of exactness by ringed-slice extension
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 0E8G.
 -/
 
 @[expose] public section
@@ -113,8 +112,7 @@ private theorem ringedSliceExtension_faithful
 
 /-- Exactness after the sheafified direct-sum extension detects exactness on the slice.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 0E8G.
 
 Proof: At (V, φ), inject a section of G into the φ summand of its direct-sum
 extension and then sheafify. These maps commute with restrictions. If the

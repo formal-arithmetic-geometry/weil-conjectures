@@ -13,11 +13,6 @@ public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # Additive functors and homology of extension by zero
-
-Source: `HomologicalComplex.mapExtendIso` in
-WeilConjectures/FromJoel/Algebra/Homology/Embedding/ExtendMap.lean and
-`HomologicalComplex.extendHomologyIso` in Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean.
-(blueprint: lem-weil-pbc-map-extend-homology)
 -/
 
 @[expose] public noncomputable section
@@ -30,10 +25,6 @@ open CategoryTheory CategoryTheory.Limits
 
 /-- Applying an additive functor to extension by zero does not change homology
 in a nonnegative degree.
-Source: `HomologicalComplex.mapExtendIso` in
-WeilConjectures/FromJoel/Algebra/Homology/Embedding/ExtendMap.lean and Mathlib
-`HomologicalComplex.extendHomologyIso` in Embedding/ExtendHomology.lean.
-(blueprint: lem-weil-pbc-map-extend-homology)
 
 Proof: Use the existing `HomologicalComplex.mapExtendIso` to identify E applied
 to the integer extension with the integer extension of E applied to K. Additivity

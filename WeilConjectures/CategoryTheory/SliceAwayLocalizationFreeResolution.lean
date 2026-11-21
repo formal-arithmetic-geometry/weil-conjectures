@@ -15,8 +15,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # The free telescope resolution of a localized ring sheaf
 
-Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af, displayed resolution
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0997, displayed resolution.
 -/
 
 @[expose] public section
@@ -124,8 +123,7 @@ private lemma telescope_normal_form (f : R) (x : ℕ →₀ R) :
 /-- The weighted successor presents localization over any commutative ring, including
 rings with zero divisors and localization at zero.
 
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af, sectionwise displayed resolution.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0997, sectionwise displayed resolution.
 
 Proof: coordinate induction proves injectivity of D. The fractions telescope, giving QD=0.
 Modulo the image of D, move each coordinate to a common later coordinate using
@@ -617,11 +615,10 @@ end
 coordinate inclusions determine the maps uniquely and imply the finite-support formulas
 on local representatives. Rings are commutative, as in the Stacks convention.
 
-Source: Stacks Project, Tag 0997, lemma-hom-from-Af, displayed resolution.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0997, displayed resolution.
 
 Proof:
-1. On the slice (def-pur-localized-ringed-site), form the presheaves P of finite-support
+1. On the slice, form the presheaves P of finite-support
 sequences and L of fractions, with the restriction maps on coefficients. Define D by
 identity minus the f-weighted forward shift and Q by summing x_n/f^n.
 2. Coordinate induction makes D injective. Telescoping gives QD = 0, and a single

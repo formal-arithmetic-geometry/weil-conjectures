@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.TruncationTriangle
 /-! # Naturality of the raw truncation maps
 
 Source: Stacks Project, Remark 08J5 and Tags 015J, 05TC.
-(blueprint: lem-pc-raw-truncation-couple-naturality).
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ variable {A : Type uA} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A
   (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
 
 /-- The degree-n canonical truncation inclusion, after RF and the inverse bridge.
-Source: Stacks Tag 05TC (2) (blueprint: lem-pc-raw-truncation-couple-naturality). -/
+Source: Stacks Tag 05TC (2). -/
 noncomputable def abutmentMap (K : CochainComplex.Plus A) (n : ℤ) :
     D F K 0 n ⟶ (F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B n).obj
       (DerivedCategory.Q.obj K.obj) :=
@@ -40,7 +39,7 @@ noncomputable def abutmentMap (K : CochainComplex.Plus A) (n : ℤ) :
       (F.rightDerivedFunctor.map (DerivedCategory.Q.map (K.obj.ιTruncLE n)))
 
 /-- The first shift comparison, without comparison to ordinary right derived functors.
-Source: Stacks Tags 015J, 05TC (blueprint: lem-pc-raw-truncation-couple-naturality). -/
+Source: Stacks Tags 015J, 05TC. -/
 noncomputable def singleIso (K : CochainComplex.Plus A) (p q : ℤ) :
     E F K p q ≅
       (DerivedCategory.singleFunctor A 0 ⋙ F.rightDerivedFunctor ⋙
@@ -58,8 +57,7 @@ noncomputable def singleIso (K : CochainComplex.Plus A) (p q : ℤ) :
         (F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor A 0).obj (K.obj.homology q)))
 
 /-- Transport derived cohomology of a map to cohomology of its representing complexes.
-Source: derived localization, Stacks Tag 05S7
-(blueprint: lem-pc-raw-truncation-couple-naturality). -/
+Source: derived localization, Stacks Tag 05S7. -/
 noncomputable def homologyMap {K N : CochainComplex.Plus A}
     (c : DerivedCategory.Q.obj K.obj ⟶ DerivedCategory.Q.obj N.obj) (q : ℤ) :
     K.obj.homology q ⟶ N.obj.homology q :=
@@ -319,9 +317,7 @@ shift comparison. This concerns two fixed complexes and a single derived morphis
 no exactness, lower bound, choice of representatives, or invertibility of abutment
 maps is asserted.
 
-Source: Stacks Project, Remark 08J5, with Tags 015J and 05TC; step 4 of
-lem-pc-natural-bounded-below-truncation-couples.
-(blueprint: lem-pc-raw-truncation-couple-naturality).
+Source: Stacks Project, Remark 08J5, with Tags 015J and 05TC.
 
 Proof:
 1. Descend the functors tau<=q and H^q(-)[-q] along Q. On the two complexes,

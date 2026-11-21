@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForg
 
 /-! # Representative constraints for exact ringed tensor comparison
 
-Source: Stacks Project, Tags 0FPT, 06YU and 0G7D
-(blueprint: lem-sf-ringed-forget-tensor-unit-representatives).
+Source: Stacks Project, Tags 0FPT, 06YU and 0G7D.
 -/
 
 @[expose] public noncomputable section
@@ -60,8 +59,7 @@ variable [HasDerivedCategory.{wb} (RingedTensorModules.{c, v, r} J R)]
   (cA : RingedDerivedTensorCoherence.{d, vd, s, wa} J' R' SA TA βA)
 
 /-- The normalized unit is a composite of existing isomorphisms, with no chosen data.
-Source: Stacks 0FPT, the unit part of the representative construction
-(blueprint: lem-sf-ringed-forget-tensor-unit-representatives). -/
+Source: Stacks 0FPT, the unit part of the representative construction. -/
 def ringedForgetTensorUnitIso :
     U.mapDerivedCategory.obj SB.monoidal.tensorUnit ≅ SA.monoidal.tensorUnit :=
   U.mapDerivedCategory.mapIso cB.unitIso ≪≫
@@ -78,9 +76,7 @@ def ringedForgetTensorUnitIso :
 constructed degree-zero unit comparison. No assertion is made on other objects,
 or about associators or symmetry.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU;
-the unit part of step 3 of lem-sf-ringed-forget-tensor-coherence
-(blueprint: lem-sf-ringed-forget-tensor-unit-representatives).
+Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU.
 
 Proof: the coefficient ring placed in degree zero is flat-term K-flat. Apply the
 representative square to it and P. Substitute the displayed composite defining

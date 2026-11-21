@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Category.Preorder
 # Normalization of coefficient comparisons
 
 The categorical coherence argument used for Weil II (1.1.1) d).
-(blueprint: new-e5-normalized-fibre-comparisons).
 -/
 
 @[expose] public section
@@ -69,7 +68,6 @@ private lemma whiskerIsoInjectiveFromEnd {C D A : Type*}
 /-- Comparisons of fibres over a preorder with a least object can be normalized when
 restriction from that least object is bijective on natural endomorphisms.
 Source: the coherence step of Weil II (1.1.1) d), proved here from pseudofunctor axioms.
-(blueprint: new-e5-normalized-fibre-comparisons).
 
 Proof: compare all fibres with the least one. Lift the resulting transition comparison
 along the bijection on endomorphisms, after dividing by any supplied comparison; lift
@@ -192,8 +190,7 @@ theorem Pseudofunctor.normalizedFiberComparisons_exists {B : Type*} [Preorder B]
     exact (he'.2.2 f).trans (hs f).symm
 
 /-- The unique comparison family normalized against the prescribed comparisons from
-its least coefficient field. Source: Weil II (1.1.1) d), pp.146-147.
-(blueprint: new-e5-normalized-fibre-comparisons). -/
+its least coefficient field. Source: Weil II (1.1.1) d), pp.146-147. -/
 @[irreducible]
 def Pseudofunctor.normalizedFiberComparisons {B : Type*} [Preorder B]
     (b₀ : B) (hb : ∀ b : B, b₀ ≤ b)
@@ -207,7 +204,6 @@ def Pseudofunctor.normalizedFiberComparisons {B : Type*} [Preorder B]
 
 /-- The normalization and coherence of the selected, unique comparison family.
 Source: Weil II (1.1.1) d), pp.146-147.
-(blueprint: new-e5-normalized-fibre-comparisons).
 Proof: apply the specification of the uniquely determined comparison family. -/
 theorem Pseudofunctor.normalizedFiberComparisons_spec {B : Type*} [Preorder B]
     (b₀ : B) (hb : ∀ b : B, b₀ ≤ b)
@@ -233,8 +229,7 @@ theorem Pseudofunctor.normalizedFiberComparisons_spec {B : Type*} [Preorder B]
   exact (Pseudofunctor.normalizedFiberComparisons_exists b₀ hb P J a h).exists.choose_spec
 
 /-- The functor on coefficient pairs constructed from the uniquely normalized comparisons.
-Source: Weil II (1.1.1) d), pp.146-147.
-(blueprint: new-e5-normalized-fibre-comparisons). -/
+Source: Weil II (1.1.1) d), pp.146-147. -/
 @[irreducible]
 def Pseudofunctor.normalizedGrothendieckFiberFunctor {B : Type*} [Preorder B]
     (b₀ : B) (hb : ∀ b : B, b₀ ≤ b)

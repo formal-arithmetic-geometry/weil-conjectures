@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 
 /-! # Derived scalar extension for fixed-coefficient module sheaves
 
-Source: Stacks Project, Tags 06YY and 06XN
-(blueprint: lem-pur-derived-change-of-rings).
+Source: Stacks Project, Tags 06YY and 06XN.
 
 The general ringed-site and ordinary-module universal pairs are publicly retained.
 The DAG declaration list retains `nonempty_derivedChangeOfRingsCochainModel`:
@@ -35,7 +34,7 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (J : GrothendieckTopology C)
 
 /-- Derived restriction has a left adjoint for every map of constant coefficient rings.
-Source: Stacks 06YY, 06XN (blueprint: lem-pur-derived-change-of-rings).
+Source: Stacks 06YY, 06XN.
 
 Proof: sheafify sectionwise extension of scalars. After restriction to the source ring
 this is tensoring with the constant target-ring module. Hence it preserves
@@ -65,7 +64,7 @@ theorem fixedCoefficientDerivedRestriction_isRightAdjoint
 adjunction-compatible isomorphism by the existing derived restriction functor.
 The preceding theorem constructs it by sheafified tensor and K-flat resolutions;
 no arbitrary map or independent scalar action is selected.
-Source: Stacks 06YY (blueprint: lem-pur-derived-change-of-rings). -/
+Source: Stacks 06YY. -/
 noncomputable def fixedCoefficientDerivedScalarExtension
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B) :
     DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤

@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
 /-! # The normalized exact structure on contravariant derived internal Hom
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0A8X and 08JC.
-(blueprint: lem-coef-signed-derived-internal-hom-exact).
 -/
 
 @[expose] public noncomputable section
@@ -1086,8 +1085,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
 
 /-- Contravariant derived Hom is exact with the coherently normalized signed source shift.
-Source: Stacks 08JC (lemma-RHom-triangulated) and 0A8X (Hom-complex differential).
-(blueprint: lem-coef-signed-derived-internal-hom-exact).
+Source: Stacks 08JC and 0A8X (Hom-complex differential).
 Proof: Represent M by a K-injective I. The signed source comparison on Hom complexes
 multiplies the reindexed degree-q family for E[m] by (-1)^(m*q). For the opposite-category
 shift n this uses m=-n. Raw comparisons have the addition discrepancy (-1)^(n*m).

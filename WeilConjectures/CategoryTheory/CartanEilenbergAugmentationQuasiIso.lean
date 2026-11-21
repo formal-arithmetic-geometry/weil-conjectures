@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 Source: Stacks Project, Homology, Tag 0133 (Lemma 12.25.4), and Derived
 Categories, Tag 015J, proof remark (3).
-(blueprint: lem-sp-cartan-eilenberg-augmentation-quasi-iso).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace CategoryTheory.Functor
 No injectivity hypothesis is needed, and the augmentation is supplied as a chain map.
 Source: Stacks Project, Homology, Tag 0133 (Lemma 12.25.4); Derived Categories,
 Tag 015J, proof remark (3).
-(blueprint: lem-sp-cartan-eilenberg-augmentation-quasi-iso).
 
 Proof.
 1. Choose b with I zero in complex degrees below b. Extend resolution degree by zero.

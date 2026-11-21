@@ -13,9 +13,7 @@ import WeilConjectures.CategoryTheory.NormalizedGradedFiniteKernel
 /-!
 # The finite derived-couple quotient in a half-plane
 
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2;
-Stacks Project, Tags 011R, 011T and 0AMJ.
-(blueprint: lem-sp-finite-page-image-quotient)
+Source: Stacks Project, Tags 011R, 011T and 0AMJ.
 -/
 
 @[expose] public section
@@ -67,9 +65,7 @@ projection. Every lift of the original g into the nth cycle object is equal
 by cancellation of its monic arrow; hence the lift used here equals the
 `factorThru` specified by `hg`. At n=r the cokernel comparison equation gives
 the displayed equation with `toGradedPiece`.
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2;
-Stacks Project, Tags 011R, 011T and 0AMJ.
-(blueprint: lem-sp-finite-page-image-quotient) -/
+Source: Stacks Project, Tags 011R, 011T and 0AMJ. -/
 theorem finitePage_image_quotient (X : BigradedExactCouple C 0)
     (hE : ∀ p q : ℤ, p < 0 → IsZero (X.E p q))
     (A : ∀ n : ℤ, AlphaColimit X n)

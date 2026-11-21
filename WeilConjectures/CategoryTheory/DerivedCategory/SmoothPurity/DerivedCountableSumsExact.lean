@@ -14,8 +14,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 /-!
 # Exact countable sums compute derived coproducts
 
-Source: Stacks Project, Derived Categories, Tag 0A5L, Lemma `lemma-direct-sums`,
-statement and proof (blueprint: lem-kun-derived-countable-sums-exact).
+Source: Stacks Project, Derived Categories, Tag 0A5L, Lemma,
+statement and proof.
 -/
 
 @[expose] public section
@@ -183,8 +183,7 @@ also a coproduct in the derived category. The index type may be empty and may li
 in any universe. The termwise complex and its differential are the actual
 construction `HomologicalComplex.coconeOfHasColimitEval`.
 
-Source: Stacks Project, Derived Categories, Tag 0A5L, Lemma `lemma-direct-sums`
-(blueprint: lem-kun-derived-countable-sums-exact).
+Source: Stacks Project, Derived Categories, Tag 0A5L, Lemma.
 
 Proof plan:
 1. Form sums degreewise. The universal property induces the differential, whose

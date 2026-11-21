@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 # Site axioms for actual covering presieves
 
 Source: Stacks Project, Sites, Definition 00VH, including the clarification after
-axiom (3) (auxiliary; not a blueprint node).
+axiom (3).
 -/
 
 @[expose] public section
@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Precoverage
 
-/-- Source: Stacks Project, Sites, Definition 00VH
-(auxiliary; not a blueprint node).
+/-- Source: Stacks Project, Sites, Definition 00VH.
 
 The site component of the dependency, with composition as `Presieve.bind`, as in
 `Pretopology.transitive`, and existence of covering pullbacks only. Pullbacks are

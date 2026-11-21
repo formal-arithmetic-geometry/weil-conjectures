@@ -34,7 +34,6 @@ variable {C : Type u} [Category.{v} C] (X : C)
 
 /-- The sum of representables of a formal family over X, using only v-small Hom sets.
 Source: Stacks 03AS and 03AT. 
-(blueprint: lem-sc-small-cech-free-exact)
 -/
 def tupleRepresentables (Y : FormalCoproduct.{v} (Over X)) : Cᵒᵖ ⥤ Type v where
   obj Z := Σ i : Y.I, Z.unop ⟶ (Y.obj i).left
@@ -50,7 +49,6 @@ def tupleRepresentables (Y : FormalCoproduct.{v} (Over X)) : Cᵒᵖ ⥤ Type v 
 
 /-- A map of formal families induces a map between their representable sums.
 Source: Stacks 03AS and 03AT. 
-(blueprint: lem-sc-small-cech-free-exact)
 -/
 def tupleRepresentablesMap {Y Y' : FormalCoproduct.{v} (Over X)} (f : Y ⟶ Y') :
     tupleRepresentables X Y ⟶ tupleRepresentables X Y' where
@@ -62,7 +60,6 @@ def tupleRepresentablesMap {Y Y' : FormalCoproduct.{v} (Over X)} (f : Y ⟶ Y') 
 
 /-- The functor sending a formal family to its coproduct of free abelian representables.
 Source: Stacks 03AS and 03AT. 
-(blueprint: lem-sc-small-cech-free-exact)
 -/
 noncomputable def freePresheaf :
     FormalCoproduct.{v} (Over X) ⥤ (Cᵒᵖ ⥤ AddCommGrpCat.{v}) where
@@ -94,7 +91,6 @@ variable [HasFiniteWidePullbacks C] {ι : Type v} (U : ι → C) (π : ∀ i, U 
 
 /-- The alternating chains of the free abelian representable sums on categorical products.
 Source: Stacks 03AT. 
-(blueprint: lem-sc-small-cech-free-exact)
 -/
 noncomputable abbrev freeComplex : ChainComplex (Cᵒᵖ ⥤ AddCommGrpCat.{v}) ℕ :=
   (AlgebraicTopology.alternatingFaceMapComplex _).obj
@@ -351,7 +347,6 @@ private theorem freeComplex_evaluation_contracting (n : ℕ) (Z : Cᵒᵖ) :
 
 /-- The free Čech presheaf chains are exact in positive degrees, for any family.
 Source: Stacks Project, Cohomology on Sites, Tags 03AT and 03AU.
-(blueprint: lem-sc-small-cech-free-exact)
 
 Proof: Evaluate the chain complex at Z. Its basis in degree n consists of an
 (n+1)-tuple of family indices together with a map from Z to the corresponding

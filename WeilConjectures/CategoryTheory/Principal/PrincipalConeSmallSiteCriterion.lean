@@ -140,8 +140,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import all WeilConjectures.CategoryTheory.UnitPowerCompleteness
 
 /-! # The principal cone criterion on a small ringed site
-Source: Stacks 0999, 099B, 0A0E and 0941.
-(blueprint: lem-pur-principal-cone-small-site-criterion). -/
+Source: Stacks 0999, 099B, 0A0E and 0941. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -183,7 +182,6 @@ attribute [local irreducible] principalKoszulRoosUnit roosF koszulTowerComplex k
 
 /-- Singleton Koszul completion is the normalized principal cone completion.
 Source: Stacks 0999, 099B, 0A0E and 0941.
-(blueprint: lem-pur-principal-cone-small-site-criterion).
 Proof: the image ideal of scalar multiplication has precisely the locally divisible
 sections. Apply the singleton Koszul completion reflector to this image ideal, whose
 one-element generating list follows from the image factorization. The comparison with

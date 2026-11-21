@@ -12,9 +12,6 @@ public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.Algebra.Category.Grp.AB
 /-!
 # Homology preservation by formal coproduct evaluation
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2, exactness of products of
-abelian groups.
 -/
 
 @[expose] public section
@@ -38,15 +35,13 @@ instance formalCoproductEval_preservesZero
 /-- Evaluation on a formal coproduct preserves homology of short complexes of
 abelian presheaves.
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2, exactness of products.
 Proof: restriction to the discrete family of constituent objects preserves finite
 limits and colimits, since both are computed objectwise in functor categories.
 Evaluation on the formal coproduct is naturally isomorphic to this restriction
 followed by the product functor. Products of abelian groups are exact (Mathlib's
 AB4* instance), including the empty product. Thus the composite preserves finite
 limits and colimits and consequently homology. The natural isomorphism is the
-canonical product-to-limit comparison, so no arbitrary witnesses are chosen.
-(blueprint: lem-sc-formal-coproduct-evaluation-homology) -/
+canonical product-to-limit comparison, so no arbitrary witnesses are chosen. -/
 theorem formalCoproductEval_preservesHomology
     {C : Type u} [Category.{v} C] (X : (FormalCoproduct.{v} C)ᵒᵖ) :
     ((FormalCoproduct.evalOp C AddCommGrpCat.{v}) ⋙

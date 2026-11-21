@@ -15,8 +15,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.LimitsOfShape
 /-!
 # Coherent objects, topoi, and geometric morphisms
 
-Source: Orgogozo, author draft, §8.1, printed pp. 17--18
-(blueprint: def-trf-coherent-topos).
+17--18.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- An object is quasi-compact when every epimorphic coproduct onto it has a
-finite epimorphic sub-coproduct. Source: Orgogozo, §8.1
-(blueprint: def-trf-coherent-topos). -/
+finite epimorphic sub-coproduct. -/
 def IsQuasiCompactObject {E : Type u} [Category.{v} E]
     [HasCoproducts.{w} E] (A : E) : Prop :=
   ∀ (I : Type w) (B : I → E) (f : ∀ i, B i ⟶ A),

@@ -18,8 +18,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 
 /-! # Directed colimits of sheaves of commutative algebras
 
-Source: Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089;
-Modules, Lemma 01AH (blueprint: lem-weil-pbc-sheaf-algebras-directed-colimit).
+Source: Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ namespace CategoryTheory
 and the underlying module colimit. The structure morphism of the presheaf colimit is
 independent of the stage, and its composite with sheafification is the structure morphism
 of the resulting algebra. The legs are exactly the sheafified presheaf coprojections.
-Source: Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089;
-Modules, Lemma 01AH (blueprint: lem-weil-pbc-sheaf-algebras-directed-colimit).
+Source: Stacks Project, Sheaves, Sections 009D and 009E, Lemmas 0087 and 0089.
 
 1. On each open U, take the colimit of O(U)-algebras. By
    lem-weil-pbc-commutative-algebras-colimits-exist and

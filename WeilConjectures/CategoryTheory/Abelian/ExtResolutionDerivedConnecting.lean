@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Abelian.SplitSESCocycleBoundary
 /-!
 # Injective-resolution and derived connecting morphisms agree
 
-Source: Stacks Project, Derived Categories, Tags 05TE and 06XR
-(blueprint: lem-sc-p1-ext-resolution-derived-connecting).
+Source: Stacks Project, Derived Categories, Tags 05TE and 06XR.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The injective-resolution boundary, computed by lifting a cocycle and taking its
  differential, agrees with the boundary of the distinguished short-exact-sequence triangle.
-Source: Stacks Project, Derived Categories, Tags 05TE and 06XR
-(blueprint: lem-sc-p1-ext-resolution-derived-connecting).
+Source: Stacks Project, Derived Categories, Tags 05TE and 06XR.
 
 Here `i`, `p`, `hιi`, `hιp`, and `hexact` describe any horseshoe resolution of `S`.
 For a cocycle `c`, choose a lift `b` through `p`, and factor its differential as `a ≫ i`.

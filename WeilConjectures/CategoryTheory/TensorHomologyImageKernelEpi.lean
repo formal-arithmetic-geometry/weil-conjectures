@@ -21,8 +21,7 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 /-!
 # Tensor homology maps onto the kernel of the image inclusion
 
-Source: Stacks Project, Tag 0653, the Tor argument in `lemma-last-one-flat`.
-(blueprint: lem-pc-module-tensor-homology-image-kernel-epi).
+Source: Stacks Project, Tag 0653, the Tor argument in.
 -/
 
 @[expose] public section
@@ -50,8 +49,7 @@ private theorem tensorSingleIso_inv_naturality
 -- Comparing total tensor complexes with termwise tensoring requires extra type reductions.
 set_option backward.isDefEq.respectTransparency false in
 /-- Tensor homology surjects naturally onto the kernel of the tensor image inclusion.
-Source: Stacks Project, Tag 0653, the Tor argument in `lemma-last-one-flat`.
-(blueprint: lem-pc-module-tensor-homology-image-kernel-epi)
+Source: Stacks Project, Tag 0653, the Tor argument in.
 
 Proof: Factor d = P.d (a-1) a as the epimorphism pi onto K = im(d), followed by
 its monic inclusion iota. Tensor pi with N; right exactness preserves its

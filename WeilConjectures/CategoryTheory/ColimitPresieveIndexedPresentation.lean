@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 
 /-! # Reindexing a finite presieve in a filtered colimit
 
-Source: Stacks Project, Sites, Tag 09YL, finite-diagram observation.
-(blueprint: lem-weil-pbc-colimit-presieve-indexed-presentation)
+Source: Stacks Project, Sites, Tag 09YL observation.
 -/
 
 @[expose] public section
@@ -96,8 +95,7 @@ private theorem ofArrows_transport
   simp
 
 /-- A finite stage presieve can eventually be presented by any finite indexing of its image.
-Source: Stacks Project, Sites, Tag 09YL, finite-diagram observation and axiom (2).
-(blueprint: lem-weil-pbc-colimit-presieve-indexed-presentation)
+Source: Stacks Project, Sites, Tag 09YL observation and axiom (2).
 
 Proof: For each requested index choose a member of the original presieve with that image.
 Conversely, choose an index for every original member. Each member and the representative

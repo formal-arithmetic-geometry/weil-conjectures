@@ -21,11 +21,9 @@ namespace CategoryTheory
 
 /-- Large derived coproducts give large coproducts in the underlying category.
 
-Source: the first step of node new-stage3-gabriel-popescu-large-hom-right-adjoint,
+Source: the first step of node,
 the explicit derived-to-abelian extension of Stacks Project Tag 0F5S.
 The extension uses injective copresentations and degree-zero cohomology.
-
-(auxiliary; not a blueprint node)
 
 Proof in words: for a family X_i at the displayed size, take the coproduct K
 of the degree-zero objects X_i[0] in D(A), and set P = H^0(K). Apply H^0 to

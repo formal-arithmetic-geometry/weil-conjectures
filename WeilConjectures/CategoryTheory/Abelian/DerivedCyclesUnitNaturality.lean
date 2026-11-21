@@ -15,7 +15,6 @@ public import WeilConjectures.CategoryTheory.Abelian.DerivedSingleShiftNormaliza
 
 /-! # Derived-unit naturality on canonical cycles
 Source: Stacks Project, Tags 05TC (2) and 05TD (3).
-(blueprint: new-lem-pc-derived-cycles-unit-naturality).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ omit [PreservesFiniteLimits S] in
 This holds for any bounded-below target M and any q, without a truncation
 or concentration hypothesis on M.
 Source: Stacks Project, Tags 05TC (2) and 05TD (3).
-(blueprint: new-lem-pc-derived-cycles-unit-naturality).
 
 Proof: Use the chain map whose component in degree n is iCycles and whose
 other components are zero. Naturality of the unbounded derived unit for

@@ -26,8 +26,7 @@ private theorem uniqueness_transpose
   exact h
 
 /-- Canonical scalar and geometric adjunction comparisons commute.
-Source: the mates correspondence, Stacks Tag 06YY
-(blueprint: lem-sf-finite-scalar-pull-adjunction-transport).
+Source: the mates correspondence, Stacks Tag 06YY.
 Proof: apply the composite Hom equivalence. The right square defining the first
 comparison moves through naturality, the scalar unit transfers by left-adjoint
 uniqueness, and the geometric unit transfers through the right comparison.

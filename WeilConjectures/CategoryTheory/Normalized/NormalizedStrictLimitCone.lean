@@ -31,8 +31,7 @@ of the new tower is arbitrary. The normalization concerns every ordinary map int
 the termwise inverse limit, and does not involve principal quotients or completion.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0940 and 0941, the natural Roos
-triangle and its ordinary-limit inclusion
-(blueprint: lem-sfb-normalized-strict-limit-cone).
+triangle and its ordinary-limit inclusion.
 
 Proof: normalizedStrictLimitBase gives the homotopy-limit cone and the identity
 eta followed by its nth leg = Q of the ordinary nth limit projection. The exact

@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.SignedKoszulCompletionModel
 /-! # Normalization of a negative pure tensor by the left unitor
 
 Source: Stacks Project, More on Algebra, Tag 0664; Algebraization, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -55,9 +54,7 @@ private theorem unit_basis_tensor
 /-- The left unitor takes a canonical supported negative tensor to its specified
 pure-tensor summand for the coefficient complex O[0].
 
-Source: Stacks Project, More on Algebra, Tag 0664, tensoring finite Koszul factors;
-Algebraization, Tag 0A0E, lemma-derived-completion-koszul, pure tensor normalization.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, More on Algebra, Tag 0664, tensoring finite Koszul factors; Algebraization, Tag 0A0E, pure tensor normalization.
 
 Proof: in a monoidal category apply leftUnitor'_inv to a map beta from the unit.
 Naturality of the right unitor, the interchange law, and naturality of the left

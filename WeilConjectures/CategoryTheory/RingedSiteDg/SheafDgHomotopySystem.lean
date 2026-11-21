@@ -16,7 +16,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.Monoidal
 # Homotopy triangulation and quasi-isomorphism system for sheaf dg modules
 
 Source: Stacks Project, `sdga.tex`, Tags 0FS7, 0FT2 and 0FT4, with the cone
-convention of Tag 0FS5 (blueprint: lem-sfb-sheaf-dg-homotopy-system).
+convention of Tag 0FS5.
 
 The declarations below record the right-module homotopy quotient, its signed
 shifts and mapping-cone triangles, and the localization data used by the
@@ -45,7 +45,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{u} C]
 variable {O}
 
 /-- Right graded linearity of a degree `-1` homotopy. Source: Stacks `sdga.tex`,
-section-homotopy (blueprint: lem-sfb-sheaf-dg-homotopy-system). -/
+section-homotopy. -/
 def homotopyRightLinear {A : Algebra O} {M N : Module A}
     {f g : M ⟶ N} (h : Homotopy ((underlying A).map f) ((underlying A).map g)) : Prop :=
   ∀ (p q : ℤ), HEq
@@ -53,24 +53,22 @@ def homotopyRightLinear {A : Algebra O} {M N : Module A}
     ((h.hom p (p - 1) ▷ A.X.X q) ≫
       actionDegree N (p - 1) q ((p - 1) + q) rfl)
 
-/-- The action-preserving chain-homotopy relation on right dg modules. Source:
-Stacks `sdga.tex`, definition-homotopy (blueprint: lem-sfb-sheaf-dg-homotopy-system). -/
+/-- The action-preserving chain-homotopy relation on right dg modules. Source: Stacks `sdga.tex`. -/
 def homotopyRel (A : Algebra O) : HomRel (Module A) :=
   fun _M _N f g ↦ ∃ h : Homotopy ((underlying A).map f) ((underlying A).map g),
     homotopyRightLinear h
 
 /-- The right dg-module homotopy category `K(A)`. Source: Stacks `sdga.tex`,
-section-homotopy (blueprint: lem-sfb-sheaf-dg-homotopy-system). -/
+section-homotopy. -/
 abbrev HomotopyCategory (A : Algebra O) :=
   CategoryTheory.Quotient (homotopyRel A)
 
 /-- The quotient functor from right dg modules to `K(A)`. Source: Stacks `sdga.tex`,
-section-homotopy (blueprint: lem-sfb-sheaf-dg-homotopy-system). -/
+section-homotopy. -/
 abbrev homotopyQuotient (A : Algebra O) : Module A ⥤ HomotopyCategory A :=
   CategoryTheory.Quotient.functor (homotopyRel A)
 
-/-- Signed shifts and the specified mapping-cone triangles on `K(A)`. Source:
-Stacks `sdga.tex`, Tags 0FRY, 0FS5 and 0FS7 (blueprint: lem-sfb-sheaf-dg-homotopy-system).
+/-- Signed shifts and the specified mapping-cone triangles on `K(A)`. Source: Stacks `sdga.tex`, Tags 0FRY, 0FS5 and 0FS7.
 -/
 class HomotopyStructure (A : Algebra O) where
   [preadditive : Preadditive (HomotopyCategory A)]
@@ -110,7 +108,7 @@ attribute [instance] HomotopyStructure.preadditive HomotopyStructure.zero
 /-- The complete sheaf dg homotopy/localization package. Its fields render the
 cohomology, cone criterion, saturated triangulated calculus, and two-out-of-three
 clauses of the node statement. Source: Stacks `sdga.tex`, Tags 0FS7, 0FT2 and
-0FT4 (blueprint: lem-sfb-sheaf-dg-homotopy-system). -/
+0FT4. -/
 class HomotopySystem (A : Algebra O) extends HomotopyStructure A where
   cohomology (n : ℤ) : HomotopyCategory A ⥤ Coeff O
   cohomology_factors (n : ℤ) :

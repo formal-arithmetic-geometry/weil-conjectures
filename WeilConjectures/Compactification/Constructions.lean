@@ -61,8 +61,7 @@ namespace AlgebraicGeometry
 
 variable {X X' Y S : Scheme.{u}}
 
-/-- **Compactification constructed from an immersion** (blueprint:
-`def:nagata-immersion-compactification`, `lemma:nagata-immersion-into-proper`). -/
+/-- **Compactification constructed from an immersion**. -/
 noncomputable def Compactification.ofIsImmersion (g : X ⟶ Y) (p : Y ⟶ S)
     [IsImmersion g] [QuasiCompact g] [IsProper p] : Compactification (g ≫ p) where
   Z := g.image
@@ -73,8 +72,7 @@ noncomputable def Compactification.ofIsImmersion (g : X ⟶ Y) (p : Y ⟶ S)
   isOpenImmersion := inferInstance
 
 /-- A quasi-compact morphism that factors as an immersion into a scheme proper over the
-base admits a compactification.
-(blueprint: `lemma:nagata-immersion-into-proper`) -/
+base admits a compactification. -/
 theorem HasCompactification.of_isImmersion {u : X ⟶ S} (g : X ⟶ Y) (p : Y ⟶ S)
     [IsImmersion g] [IsProper p] [QuasiCompact u] (fac : g ≫ p = u) :
     HasCompactification u := by
@@ -82,8 +80,7 @@ theorem HasCompactification.of_isImmersion {u : X ⟶ S} (g : X ⟶ Y) (p : Y �
   have : QuasiCompact g := .of_comp g p
   exact (Compactification.ofIsImmersion g p).hasCompactification
 
-/-- **Closed-subscheme compactification construction** (blueprint:
-`def:nagata-closed-subscheme-compactification`).
+/-- **Closed-subscheme compactification construction**.
 
 The ambient scheme is the scheme-theoretic image of `i ≫ c.i`, and the factorization is
 ```
@@ -114,8 +111,7 @@ end Compactification
 
 /-- **Compactifiability is inherited by closed subschemes**: if a quasi-compact morphism
 `f' : X' ⟶ S` admits a compactification, then so does its restriction `i ≫ f'` to a closed
-subscheme `i : X ⟶ X'`.
-(blueprint: `prop:nagata-closed-subscheme-compactifiable`) -/
+subscheme `i : X ⟶ X'`. -/
 theorem HasCompactification.of_isClosedImmersion (i : X ⟶ X') (f' : X' ⟶ S)
     [IsClosedImmersion i] [QuasiCompact f'] [HasCompactification f'] :
     HasCompactification (i ≫ f') :=

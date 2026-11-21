@@ -16,7 +16,6 @@ import Mathlib.Algebra.Homology.QuasiIso
 /-! # The cohomology image filtration
 
 Source: Stacks Project, Tags 012P and 012W.
-(blueprint: lem-sp-filtered-cohomology-image-finite).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ private theorem complexStep_antitone (n : ℤ) : Antitone (fun p ↦ L.complexSt
 
 /-- Degreewise finite filtrations induce a finite cohomology image filtration.
 Source: Stacks Project, Tag 012W, using the image filtration in Tag 012P.
-(blueprint: lem-sp-filtered-cohomology-image-finite).
 
 Proof. Take the minimum of the lower bounds in degrees n-1, n and n+1.
 Antitonicity makes all three steps at this minimum top. The inclusion of this

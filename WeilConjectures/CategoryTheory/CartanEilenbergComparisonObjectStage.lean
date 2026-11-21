@@ -40,8 +40,7 @@ private theorem cycleObjectRow_shortExact
 /-- Extend a specified augmented cycle map through the object column.
 No incoming boundary map or homology comparison is involved.
 
-Source: Stacks Project, Tags 015I, 015K and 013P(2);
-(blueprint: lem-weil-pbc-ce-comparison-object-stage).
+Source: Stacks Project, Tags 015I, 015K and 013P(2)
 
 Proof: Use q-1=p to form the short exact sequence cycles → object → outgoing boundary
 of resolution complexes, and the analogous sequence for J. Evaluation is exact and F

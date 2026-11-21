@@ -9,9 +9,6 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Functor.Category
 
 /-! # Comparison of an invertible diagram over a cofiltered category
-
-Source: common-refinement cancellation in lem-fix-weil-operations.proof.md,
-paragraph 1 (blueprint: lem-pod-cofiltered-iso-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -25,14 +22,12 @@ variable {C : Type u} [Category.{v} C] [IsCofilteredOrEmpty C]
   {B : Type w} [Category.{z} B] (F : Cᵒᵖ ⥤ B)
   (hF : ∀ {i j : C} (f : i ⟶ j), IsIso (F.map f.op))
 
-/-- Compare through the specified cofiltered cone, using only inverse diagram arrows.
-Source: common refinements (blueprint: lem-pod-cofiltered-iso-comparison). -/
+/-- Compare through the specified cofiltered cone, using only inverse diagram arrows. -/
 def cofilteredIsoComparison (i j : C) : F.obj (op i) ≅ F.obj (op j) :=
   @asIso _ _ _ _ (F.map (IsCofiltered.minToLeft i j).op) (hF _) ≪≫
     (@asIso _ _ _ _ (F.map (IsCofiltered.minToRight i j).op) (hF _)).symm
 
 /-- Every cone gives the same comparison, characterized by cancellation.
-Source: common-refinement independence (blueprint: lem-pod-cofiltered-iso-comparison).
 Proof: refine the two cones by a bowtie. Apply the diagram to its two equalities,
 cancel the second chosen cone arrow and then cancel the arrow of the common refinement. -/
 theorem cofilteredIsoComparison_normalized {i j d : C} (u : d ⟶ i) (v : d ⟶ j) :
@@ -58,7 +53,6 @@ theorem cofilteredIsoComparison_normalized {i j d : C} (u : d ⟶ i) (v : d ⟶ 
     _ = _ := hi'
 
 /-- The comparison with itself is the identity.
-Source: identity refinement (blueprint: lem-pod-cofiltered-iso-comparison).
 Proof: apply normalization to the identity cone and use the diagram's identity law. -/
 theorem cofilteredIsoComparison_refl (i : C) :
     cofilteredIsoComparison F hF i i = Iso.refl _ := by
@@ -66,7 +60,6 @@ theorem cofilteredIsoComparison_refl (i : C) :
   simpa using cofilteredIsoComparison_normalized F hF (𝟙 i) (𝟙 i)
 
 /-- Comparison composes strictly.
-Source: common-refinement cocycle (blueprint: lem-pod-cofiltered-iso-comparison).
 Proof: choose a cone over the three objects, normalize all three comparisons on it,
 then cancel the invertible arrow to the third object. -/
 theorem cofilteredIsoComparison_trans (i j k : C) :
@@ -86,7 +79,6 @@ theorem cofilteredIsoComparison_trans (i j k : C) :
     cofilteredIsoComparison_normalized F hF u w]
 
 /-- Normalization determines the whole family up to strict equality.
-Source: uniqueness by common refinement (blueprint: lem-pod-cofiltered-iso-comparison).
 Proof: apply both normalizations to the chosen binary cone and cancel its second arrow;
 isomorphism extensionality and function extensionality give equality of families. -/
 theorem cofilteredIsoComparison_unique

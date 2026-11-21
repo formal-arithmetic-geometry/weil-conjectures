@@ -14,7 +14,6 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 
 Source: Stacks Project, Homology Tag 0117, and the componentwise description of
 cycles and boundaries for finite products.
-(blueprint: lem-weil-pbc-right-derived-binary-product)
 -/
 
 @[expose] public section
@@ -111,7 +110,6 @@ end
 
 /-- Source: Stacks Project, Homology Tag 0117, finite products in the injective-resolution
 argument for Tag 0A50.
-(blueprint: lem-weil-pbc-right-derived-binary-product)
 
 Proof: Let P be the pointwise Cartesian product functor. Its two projections p,q
 and inclusions i,j satisfy ip = id, iq = 0, jp = 0, jq = id, and pi + qj = id.

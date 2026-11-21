@@ -31,28 +31,21 @@ so it is a parameter of those and not of the structure itself:
 * `TwoOpenSide.forbiddenBoundary` — the closure in `X` of `ψ ⁻¹ (U ∖ O)`.
 
 The predicate `TwoOpenSide.Prepared O'` states that the two boundary closures are
-disjoint (blueprint: `def:nagata-two-open-prepared-boundaries`,
-`lemma:nagata-prepared-boundaries`). The complement of the forbidden boundary is the
-open `TwoOpenSide.interior` (the `Xᵢ°` of the blueprint), which contains the embedded
+disjoint. The complement of the forbidden boundary is the
+open `TwoOpenSide.interior`, which contains the embedded
 copy of `O` (`TwoOpenSide.interiorEmb`).
 
 `TwoOpenSide.admissibleBlowup` transports a side along a `V`-admissible blow-up of the
 ambient scheme; boundary loci transport to preimages
-(`TwoOpenSide.admissibleBlowup_image_preimage`), so preparedness persists
-(`TwoOpenSide.Prepared.admissibleBlowup`; blueprint:
-`lemma:nagata-boundary-disjoint-persists`).
+(`TwoOpenSide.admissibleBlowup_image_preimage`), so preparedness persists.
 
 Finally `AlgebraicGeometry.exists_prepared_twoOpenSide` constructs a prepared side for
 a compactifiable open `O` covering `U` together with `O'`: choose a
 scheme-theoretically dense compactification (proof order item 34,
 `exists_compactification_isSchemeTheoreticallyDominant`), extend it by the graph
-construction (Stacks Project Tag 0F3Z, `Compactification.nonempty_properExtension`;
-blueprint `def:nagata-two-open-graph-extensions`,
-`lemma:nagata-two-open-graph-extensions`, `def:nagata-two-open-boundary-loci`,
-`lemma:nagata-boundary-loci`), and separate the boundary closures by the
+construction (Stacks Project Tag 0F3Z), and separate the boundary closures by the
 constructible-boundary separation blow-up (Stacks Project Tags 080P and 0F3V,
 `exists_admissibleBlowup_disjoint_closures`).
-
 -/
 
 @[expose] public section
@@ -68,8 +61,7 @@ namespace AlgebraicGeometry
 variable {U S : Scheme.{u}}
 
 /-- The data of one **side of the two-open compactification theorem** for a morphism
-`u : U ⟶ S` and an open `O` of `U` (blueprint:
-`def:nagata-two-open-graph-extensions`, `def:nagata-two-open-boundary-loci`).
+`u : U ⟶ S` and an open `O` of `U`.
 
 The second open of the two-open construction plays no role in this data; it enters only
 as a parameter of the boundary loci `TwoOpenSide.selfBoundary` and of the preparedness
@@ -131,18 +123,16 @@ lemma isNoetherian_X [IsNoetherian S] : IsNoetherian σ.X := by
 section Boundary
 
 /-- The **self boundary** of a side, relative to the other open `O'`: the closure in the
-ambient scheme of the inverse image under `ψ` of the closed complement `U ∖ O'`.
-(Blueprint: `Z̄_{i,i}` in `def:nagata-two-open-prepared-boundaries`.) -/
+ambient scheme of the inverse image under `ψ` of the closed complement `U ∖ O'`. -/
 def selfBoundary (O' : U.Opens) : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O' : Set U)ᶜ)))
 
 /-- The **forbidden boundary** of a side: the closure in the ambient scheme of the
 inverse image under `ψ` of the closed complement `U ∖ O` of its own open. Removing it
-yields the intermediate locus `Xᵢ°` of the blueprint.
-(Blueprint: `Z̄_{i,j}` in `def:nagata-two-open-prepared-boundaries`.) -/
+yields the intermediate locus `Xᵢ°` of the blueprint. -/
 def forbiddenBoundary : Set σ.X := closure (σ.V.ι '' (σ.ψ ⁻¹' ((O : Set U)ᶜ)))
 
 /-- A side is **prepared** relative to the other open `O'` if its two boundary closures
-are disjoint. (Blueprint: `lemma:nagata-prepared-boundaries`.) -/
+are disjoint. -/
 def Prepared (O' : U.Opens) : Prop := Disjoint (σ.selfBoundary O') σ.forbiddenBoundary
 
 /-- The image in the ambient scheme of a closed boundary locus of `V` meets `V` in
@@ -182,8 +172,7 @@ lemma disjoint_range_embX_forbiddenBoundary :
     exact h1
   exact this hmemO
 
-/-- The complement of the forbidden boundary, i.e. the locus `Xᵢ°` of the blueprint.
-(Blueprint: `proposition-compactifying-union-two-opens--1`.) -/
+/-- The complement of the forbidden boundary, i.e. the locus `Xᵢ°` of the blueprint. -/
 def interior : σ.X.Opens := ⟨σ.forbiddenBoundaryᶜ, isClosed_closure.isOpen_compl⟩
 
 lemma range_embX_subset_interior : Set.range σ.embX ⊆ (σ.interior : Set σ.X) :=
@@ -210,9 +199,7 @@ section AdmissibleBlowup
 
 variable [IsNoetherian S] (B : IsAdmissible σ.X σ.V)
 
-/-- **Transport of a side along a `V`-admissible blow-up** of the ambient scheme
-(blueprint: `def:nagata-two-open-prepared-boundaries`,
-`def:nagata-two-open-improved-comparison`).
+/-- **Transport of a side along a `V`-admissible blow-up** of the ambient scheme.
 
 The open `V`, the proper extension `ψ` and the embedded copy of `O` transport along the
 isomorphism over `V`; density transports because the complement of the center is dense in
@@ -332,8 +319,7 @@ lemma admissibleBlowup_forbiddenBoundary :
 
 /-- **Preparedness persists along admissible blow-ups**: the transported boundary
 closures are contained in the preimages of the original ones, so disjointness is
-preserved. (Blueprint: `lemma:nagata-boundary-disjoint-persists`; proof order
-item 37.) -/
+preserved. -/
 lemma Prepared.admissibleBlowup {O' : U.Opens} (hσ : σ.Prepared O') :
     (σ.admissibleBlowup B).Prepared O' := by
   have hsub : ∀ A : Set σ.X,
@@ -349,9 +335,7 @@ end AdmissibleBlowup
 
 end TwoOpenSide
 
-/-- **Existence of a prepared side** (blueprint:
-`def:nagata-two-open-dense-compactifications` through
-`lemma:nagata-prepared-boundaries`; proof order items 34–36 applied).
+/-- **Existence of a prepared side**.
 
 Choose a scheme-theoretically dense compactification, extend it to a proper morphism to
 `U` by the graph construction (Stacks Project Tag 0F3Z), and separate the two boundary

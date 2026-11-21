@@ -14,9 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SiteCoveringIsomorphicFamily
 
 /-!
 # Transport of morphisms of sites across equivalences
-
-Source: literature/stacks-project/sites.tex, Definitions 00VH, 00WV, 00X1 and
-Lemma 03CB (blueprint: lem-weil-pbc-site-equivalence-morphism-transport).
 -/
 
 @[expose] public section
@@ -28,8 +25,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: literature/stacks-project/sites.tex, Definitions 00VH, 00WV, 00X1
-and Lemma 03CB (blueprint: lem-weil-pbc-site-equivalence-morphism-transport).
+/-- 
 
 The proof transports continuity and exactness through the two equivalences, using
 site-equivalence-is-morphism, site-morphism-composition, and invariance under

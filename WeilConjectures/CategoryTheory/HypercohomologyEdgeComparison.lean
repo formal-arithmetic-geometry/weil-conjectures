@@ -14,8 +14,7 @@ public import WeilConjectures.CategoryTheory.RightDerivedBaseChangeZeroUnit
 # Exact comparison and the hypercohomology left edge
 
 Source: Stacks Project, Derived Categories, Tag 015J, functoriality of the truncation
-spectral object; the canonical derived base-change unit equation.
-(blueprint: lem-pur-hypercohomology-edge-exact-comparison).
+spectral object.
 -/
 
 @[expose] public noncomputable section
@@ -92,9 +91,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B]
   [PreservesFiniteLimits G] [PreservesFiniteLimits G']
   [PreservesFiniteLimits β] [PreservesFiniteColimits β]
 
-/-- Remove the derived identity from the canonical derived comparison.
-Source: the unit definition of derived base change
-(blueprint: lem-pur-hypercohomology-edge-exact-comparison). -/
+/-- Remove the derived identity from the canonical derived comparison. -/
 abbrev normalizedDerivedBaseChange (e : G ⋙ 𝟭 C ⟶ β ⋙ G') :
     G.rightDerivedFunctorPlus ⟶ β.mapDerivedCategoryPlus ⋙ G'.rightDerivedFunctorPlus :=
   G.rightDerivedFunctorPlus.rightUnitor.inv ≫
@@ -284,8 +281,6 @@ lemma hypercohomologyExactComparisonH_app (e : G ⋙ 𝟭 C ⟶ β ⋙ G')
 -- Keep the original Grothendieck hypotheses in the public signature.
 set_option linter.unusedSectionVars false in
 /-- Exact comparison preserves the canonical normalized hypercohomology left edge.
-Source: functoriality of the truncation spectral object and the derived base-change
-unit equation (blueprint: lem-pur-hypercohomology-edge-exact-comparison).
 
 Proof:
 1. Write τ for the normalized derived comparison. It commutes with shifts: the

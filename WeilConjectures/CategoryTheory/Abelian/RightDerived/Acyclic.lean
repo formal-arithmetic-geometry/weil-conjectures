@@ -86,7 +86,7 @@ instance : F.rightAcyclic.ContainsZero where
 
 variable {F}
 
-/-- Injective objects are `F`-acyclic. (blueprint: `lemma-acyclic-resolutions`, item 1) -/
+/-- Injective objects are `F`-acyclic. -/
 lemma rightAcyclic_of_injective (A : C) [Injective A] : F.rightAcyclic A :=
   fun q ↦ F.isZero_rightDerived_obj_injective_succ q A
 
@@ -215,8 +215,7 @@ quasi-isomorphism `F(φ) : F(K) ⟶ F(L)`:
      ▼              ▼
     F Lᵃ ──F d──▶ F Lᵃ⁺¹ ──F d──▶ ⋯
 ```
-The proof applies `HomologicalComplex.Acyclic.map_of_rightAcyclic` to the mapping cone.
-(blueprint: `lemma-acyclic-resolutions--1`) -/
+The proof applies `HomologicalComplex.Acyclic.map_of_rightAcyclic` to the mapping cone. -/
 theorem quasiIso_map_of_rightAcyclic {K L : CochainComplex C ℤ} (φ : K ⟶ L) [QuasiIso φ]
     (a : ℤ) [K.IsStrictlyGE a] [L.IsStrictlyGE a] (hK : ∀ n, F.rightAcyclic (K.X n))
     (hL : ∀ n, F.rightAcyclic (L.X n)) :
@@ -291,8 +290,7 @@ It is `InjectiveResolution.isoRightDerivedObjOfQuasiIso` applied to the lift
         ╲          │ φ = descOfQuasiIso (𝟙 X) J ι
       J.ι ╲        ▼
             ╲────▶ J
-```
-(blueprint: `lemma-acyclic-resolutions`, item 2) -/
+``` -/
 noncomputable def rightDerivedObjIsoOfResolution (hI : ∀ n, F.rightAcyclic (I.X n)) (q : ℕ) :
     (F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q :=
   (injectiveResolution X).isoRightDerivedObjOfQuasiIso F
@@ -302,8 +300,7 @@ include ι in
 /-- **Acyclic resolutions compute right derived functors.** Let `F : C ⥤ D` be a left exact
 additive functor. If `ι : single₀ X ⟶ I` is a resolution `X → I⁰ → I¹ → ⋯` of `X` by
 `F`-acyclic objects, then `R^q F X ≅ H^q(F I)` for all `q`. The witness is the natural
-isomorphism `Functor.rightDerivedObjIsoOfResolution`. (blueprint: `lemma-acyclic-resolutions`;
-`lemma-acyclic-resolutions`, item 2) -/
+isomorphism `Functor.rightDerivedObjIsoOfResolution`. -/
 theorem nonempty_rightDerivedObjIso_homology_of_acyclic (hI : ∀ n, F.rightAcyclic (I.X n))
     (q : ℕ) :
     Nonempty ((F.rightDerived q).obj X ≅ ((F.mapHomologicalComplex _).obj I).homology q) :=

@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawSectionMatchingLift
 /-! # Raw sections: amalgamation on stage-image covers
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-amalgamation).
 -/
 
 @[expose] public section
@@ -31,9 +30,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-finite-cover matching-family calculation, with the raw Kan presentation explicit.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-amalgamation).
+/-- Source: Stacks Project, Sites, Tag 0A35 matching-family calculation, with the raw Kan presentation explicit.
 
 Proof: First compute raw sections by the pointwise Kan formula. A generator is
 represented by a stage section and an arrow from the object in the limit site

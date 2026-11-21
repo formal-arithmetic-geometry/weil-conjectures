@@ -9,9 +9,6 @@ public import Mathlib.CategoryTheory.Functor.Category
 public import Mathlib.CategoryTheory.Iso
 
 /-! # Transport of a trace integration identity
-
-Source: diagonal tower coefficient changes, proof paragraphs (1)--(2).
-(blueprint: lem-diagonal-coefficient-integration-transport).
 -/
 
 @[expose] public section
@@ -25,10 +22,6 @@ namespace CategoryTheory
 its source, class and trace squares. Only the unit comparison needs to be
 invertible for this implication; no general preservation of inverse limits or
 base-change theorem is used.
-
-Source: blueprint latest, sec-six-functors-basics/sk-prop-diagonal-tower/
-sk-prop-diagonal-tower-coefficients.proof.md, paragraphs (1)--(2).
-(blueprint: lem-diagonal-coefficient-integration-transport).
 
 Proof: precompose the desired identity by the unit isomorphism. Use the
 supported-source square, the class square, naturality of the direct-image

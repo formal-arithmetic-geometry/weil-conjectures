@@ -86,7 +86,6 @@ private theorem presheaf_eq {D : Type u} [Category.{v} D]
     eqToHom_trans, eqToHom_refl, Category.comp_id] using hm'
 
 /-- Injectivity component of internal ring-object reconstruction.
-(blueprint: lem-weil-pbc-sheaf-ring-objects-injective)
 Proof in words: Given equal internal objects, the underlying sheaves agree by `hF`.
 The five transported sectionwise operations agree by `hops`, so addition, zero,
 negation, multiplication, and one agree on every section. Ring structures,

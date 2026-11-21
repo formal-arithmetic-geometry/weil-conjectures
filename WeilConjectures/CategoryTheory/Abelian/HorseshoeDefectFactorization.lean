@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 # Factorization of horseshoe comparison defects
 
 Source: the classical horseshoe naturality argument of Weibel, Theorem 2.4.6,
-using Stacks Project, Tags 0136, 013R, 013P and 013T
-(blueprint: lem-weil-pbc-horseshoe-defect-factorization).
+using Stacks Project, Tags 0136, 013R, 013P and 013T.
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ private theorem factor_through_rows
 /-- The differential and augmentation defects factor through the outer rows.
 Source: classical horseshoe naturality, Weibel Theorem 2.4.6, Step 2; the row
 factorizations use the abelian-category kernel/cokernel argument of Stacks Tag 013T.
-(blueprint: lem-weil-pbc-horseshoe-defect-factorization).
 
 Proof: Put D_n = t_n d'_n - d_n t_{n+1}. The two outer squares for t and the
 chain-map identities for α, β, α', β', φA and φC give α_n D_n = 0 and

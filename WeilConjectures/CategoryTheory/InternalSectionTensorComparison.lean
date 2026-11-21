@@ -21,8 +21,7 @@ import WeilConjectures.CategoryTheory.InternalSectionModuleFlat
 
 /-! # Internal and sectionwise tensor products
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 0GMW;
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03EK and 0GMW
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_has
 
 namespace CategoryTheory.InternalAbelianSheafModule
 /-- The site is essentially small in the coefficient universe.
-Source: the size hypothesis of the node (auxiliary; not a blueprint node).
 Proof: shrink its object and arrow types into the coefficient universe using UnivLE;
 the resulting small category is equivalent to the original category. -/
 @[instance] theorem comparison_essentiallySmall
@@ -54,7 +52,7 @@ variable {C : Type v} [Category.{w} C] (J : GrothendieckTopology C)
   [(J.W (A := AddCommGrpCat.{u})).IsMonoidal]
 
 /-- Left tensor on abelian sheaves preserves the colimits used in relative tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
+Source: Stacks 03EK.
 Proof: use closedness in sk-def-sfb-sheaf-tensor; left tensor is a left adjoint. -/
 @[instance] theorem comparison_sheafTensorLeft (M : Sheaf J AddCommGrpCat.{u}) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft M) := by
@@ -62,7 +60,7 @@ Proof: use closedness in sk-def-sfb-sheaf-tensor; left tensor is a left adjoint.
   exact (sfbSheafTensor_properties (A := AddCommGrpCat.{u}) J).2.2 M |>.1
 
 /-- Right tensor on abelian sheaves preserves the colimits used in relative tensor.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
+Source: Stacks 03EK.
 Proof: conjugate left tensor by the symmetry of det-def-sfb-sheaf-tensor-structure. -/
 @[instance] theorem comparison_sheafTensorRight (M : Sheaf J AddCommGrpCat.{u}) :
     PreservesColimitsOfSize.{0, 0} (tensorRight M) := by
@@ -71,7 +69,7 @@ Proof: conjugate left tensor by the symmetry of det-def-sfb-sheaf-tensor-structu
 variable (R : Sheaf J AddCommGrpCat.{u}) [MonObj R] [IsCommMonObj R]
 
 /-- Module objects have the coproducts used in direct-sum totalization.
-Source: Stacks 03DA--03DB (auxiliary; not a blueprint node).
+Source: Stacks 03DA--03DB.
 Proof: section module sheaves have small colimits by
 situation-conventions. Transfer their universal property
 through sectionModuleEquivalence: applying its inverse to a coproduct gives a
@@ -81,16 +79,16 @@ coproduct of the original internal modules by the equivalence's Hom bijections. 
   exact Adjunction.has_colimits_of_equivalence (sectionModuleEquivalence J R).functor
 
 /-- The fixed sectionwise equivalence is additive on morphisms.
-Source: Stacks 00YV (auxiliary; not a blueprint node).
+Source: Stacks 00YV.
 Proof: its map is the original map on underlying abelian sheaves; addition of module
-maps is computed on those underlying maps (prose-03-02). -/
+maps is computed on those underlying maps. -/
 @[instance] theorem comparison_additive : (sectionModuleEquivalence J R).functor.Additive := by
   have : HasBinaryProducts (Mod (Sheaf J AddCommGrpCat.{u}) R) :=
     Adjunction.hasLimitsOfShape_of_equivalence (sectionModuleEquivalence J R).functor
   exact Functor.additive_of_preserves_binary_products _
 
 /-- Every pair of internal complexes admits its direct-sum total tensor.
-Source: Stacks 012Z (auxiliary; not a blueprint node).
+Source: Stacks 012Z.
 Proof: comparison_internalColimits supplies every coproduct indexed by p+q=n,
 which is the defining HasMapBifunctor condition. -/
 @[instance] theorem comparison_internalTotalExists
@@ -101,7 +99,7 @@ which is the defining HasMapBifunctor condition. -/
 
 /-- The pure tensor in the coequalizer relative tensor, formed using the lax tensor
 comparison of the inclusion of sheaves into presheaves, then the coequalizer projection.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def comparison_internalTmul
     (M N : Mod (Sheaf J AddCommGrpCat.{u}) R) (U : Cᵒᵖ)
     (x : M.X.obj.obj U) (y : N.X.obj.obj U) : (M ⊗ N).X.obj.obj U :=
@@ -111,7 +109,7 @@ noncomputable def comparison_internalTmul
 
 /-- The pure tensor in the sectionwise sheaf tensor: apply the module-sheafification
 unit to the balanced section tensor and the inverse canonical tensor comparison.
-Source: Stacks 03EK and 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK and 0GMW. -/
 noncomputable def comparison_sectionTmul
     (M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj
       (sectionRingSheaf J R))) (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
@@ -635,8 +633,7 @@ private theorem comparison_flat (M : IM) :
 its tensor comparison pinned on local pure tensors, and identifies the unbounded
 sum-total tensors, acyclicity, flatness and K-flatness.
 
-Source: Stacks Project, Modules on Sites, Tags 03EK, 0GMW and 03ER; Cohomology on
-Sites, Definition 06YN (auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03EK, 0GMW and 03ER.
 
 Proof:
 The fixed equivalence preserves finite limits and colimits. The normalized tensor

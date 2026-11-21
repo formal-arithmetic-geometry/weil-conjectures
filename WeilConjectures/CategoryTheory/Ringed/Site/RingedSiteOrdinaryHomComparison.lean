@@ -76,8 +76,7 @@ public import WeilConjectures.Algebra.Homology.HomTensorDegreewiseEquation
 
 The fixed augmentation and localization comparison are shared by shift normalization
 and coefficient duality. They do not depend on either compatibility theorem.
-Source: Stacks Project, Tags 079P, 0A8X and 0A95
-(blueprint: lem-sfb-ringed-site-ordinary-hom-comparison).
+Source: Stacks Project, Tags 079P, 0A8X and 0A95.
 -/
 
 @[expose] public noncomputable section
@@ -102,14 +101,14 @@ attribute [local irreducible] homComplexFunctor homComplexπ
   derivedInternalHomOfUniverses
 
 /-- The actual augmentation to the fixed K-injective replacement.
-Source: Stacks 079P (blueprint: lem-sfb-ringed-site-duality-maps). -/
+Source: Stacks 079P. -/
 def ringedSiteHomAugmentation : 𝟭 _ ⟶ WeilConjectures.coefficientHomResolution.{r, c, v} J R :=
   letI :=
     (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{c, v, r} J R).1
   CochainComplex.toKInjectiveResolution.{max c v r} _
 
 /-- The action of the recorded Hom-complex bifunctor, with both variables explicit.
-Source: Stacks 0A8X (blueprint: lem-sfb-ringed-site-duality-maps). -/
+Source: Stacks 0A8X. -/
 def ringedSiteHomComplexMap
     {E E' F F' : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ}
@@ -120,7 +119,7 @@ def ringedSiteHomComplexMap
     ((homComplexFunctor.{c, v, max c v r, max c v r} (R := R)).obj (op E')).map g
 
 /-- Ordinary Hom to derived Hom, using the fixed augmentation and localization factorization.
-Source: Stacks 0A95 (blueprint: lem-sfb-ringed-site-duality-maps). -/
+Source: Stacks 0A95. -/
 def ringedSiteOrdinaryHomComparison (E F : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ) :
     DerivedCategory.Q.obj (homComplex.{c, v, max c v r, max c v r} (R := R) E F) ⟶
@@ -132,7 +131,7 @@ def ringedSiteOrdinaryHomComparison (E F : CochainComplex (SheafOfModules.{max c
       (WeilConjectures.coefficientHomResolutionIso.{r, c, v, w} J R E F).inv
 
 /-- The ordinary comparison is invertible precisely when its augmentation Hom map is.
-Source: Stacks 0A95 (blueprint: lem-sfb-ringed-site-duality-maps).
+Source: Stacks 0A95.
 Proof: the factorization comparison is an isomorphism. Q inverts the displayed
 quasi-isomorphism, so their composite is an isomorphism. -/
 theorem ringedSiteOrdinaryHomComparison_isIso (E F : CochainComplex (SheafOfModules.{max c v r}
@@ -145,7 +144,7 @@ theorem ringedSiteOrdinaryHomComparison_isIso (E F : CochainComplex (SheafOfModu
   infer_instance
 
 /-- The specified comparison iso when ordinary Hom computes derived Hom.
-Source: Stacks 0A95 (blueprint: lem-sfb-ringed-site-duality-maps). -/
+Source: Stacks 0A95. -/
 def ringedSiteOrdinaryHomIso (E F : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)
     (h : QuasiIso (ringedSiteHomComplexMap.{c, v, r} J R (𝟙 E)

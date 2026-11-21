@@ -28,14 +28,12 @@ private theorem injective_single_from_upper_eq_zero
 
 /-- Injectivity half of the injective-target derived homology comparison.
 
-Source: proof step 1 of `new-stage3-derived-homology-injective-bijective`.
 Proof: if a chain map into the injective complex concentrated in degree zero
 induces zero on degree-zero homology, its degree-zero component factors through
 the image of the preceding differential; injectivity extends this factor to a
 null homotopy. Transporting across the derived localization gives equality of
 the original morphisms. The statement is isolated as the injectivity half.
-
-(auxiliary; not a blueprint node) -/
+-/
 theorem derived_homology_injective_injective
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{w} A]
     (K : DerivedCategory A) (I : A) [Injective I] :

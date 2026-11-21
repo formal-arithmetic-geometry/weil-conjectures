@@ -14,10 +14,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # The complex-degree filtration on an augmentation cone
 
-Source: Stacks Project, Homology, Tag 0133, Lemma
-`lemma-double-complex-gives-resolution`, and Tag 012W, Lemma
-`lemma-biregular-ss-converges`.
-(blueprint: lem-sp-cartan-eilenberg-cone-filtration).
+Source: Stacks Project, Homology, Tag 0133, Lemma, and Tag 012W, Lemma.
 -/
 
 @[expose] public section
@@ -31,10 +28,7 @@ namespace CategoryTheory.Functor
 /-- The cone of the specified diagonal augmentation has a degreewise finite
 complex-degree filtration. Its graded cohomology is the cohomology of the
 extended column augmentation cones. No exactness assumption is made here.
-Source: Stacks Project, Homology, Tag 0133, Lemma
-`lemma-double-complex-gives-resolution`, the canonical augmentation and the
-finite-diagonal filtration, with Tag 012W for the degreewise bounds.
-(blueprint: lem-sp-cartan-eilenberg-cone-filtration).
+Source: Stacks Project, Homology, Tag 0133, Lemma, the canonical augmentation and filtration, with Tag 012W for the degreewise bounds.
 
 Proof.
 1. Write J for the identity-mapped, extended and flipped bicomplex. The cone

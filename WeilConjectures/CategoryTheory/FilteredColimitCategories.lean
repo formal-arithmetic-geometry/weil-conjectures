@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.FilteredColimitCategoryIso
 
 /-! # Filtered colimits of categories
 
-Source: Stacks Project, Sites, proof of Tag 09YL; Categories, Section Tag 04AX
-(blueprint: lem-weil-pbc-filtered-colimit-categories).
+Source: Stacks Project, Sites, proof of Tag 09YL; Categories, Section Tag 04AX.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL; Categories, Section Tag 04AX
-(blueprint: lem-weil-pbc-filtered-colimit-categories).
+/-- Source: Stacks Project, Sites, proof of Tag 09YL; Categories, Section Tag 04AX.
 
 The chosen object colimit admits the induced category structure. Its arrows are the
 set colimit of the arrows at the stages. Finite lists lift with their source, target,
@@ -38,7 +36,7 @@ its equality criterion (the common refinements commute with the arrows out of `j
 An arrow is invertible exactly when it has an invertible representative.
 
 Proof:
-1. Use representatives in the two set colimits (def-weil-pbc-category-colimit).
+1. Use representatives in the two set colimits.
 Move finitely many representatives to a common stage; the equality criterion of
 lem-weil-pbc-filtered-colimit-sets-elementwise makes all operations independent of the
 representatives and proves the category axioms and compatibility of the functors.

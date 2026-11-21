@@ -21,9 +21,6 @@ import WeilConjectures.CategoryTheory.ModuleObjects.SequentialLimitEpi
 /-!
 # Criteria and obstructions for Brown hypotheses
 
-Source: blueprint latest, sec-six-functors-basics/sk-lem-brown-hypotheses,
-proof paragraphs 1--2, and the sources cited at the individual declarations.
-
 These proved formal criteria, generation arguments, and compactness obstructions are
 separate from the unresolved arbitrary-field assertion in `BrownHypotheses`.
 -/
@@ -119,9 +116,6 @@ private theorem isZero_of_shifted_orthogonal
 localizing closure of `S`. The property `S` need not be thick or shift-stable, and
 the representatives need not be compact or pairwise nonisomorphic.
 
-Source: blueprint latest, sec-six-functors-basics/sk-lem-brown-hypotheses,
-proof paragraph 2 (blueprint: lem-sfb-localizing-closure-generators).
-
 Proof: suppose all morphisms from the coproduct into every shift of `K` vanish.
 Every map from one representative to a shift of `K` extends to the coproduct by
 zero on the other summands. Thus every map from an object of `S` into a shift
@@ -164,9 +158,6 @@ private theorem compact_of_iso
 /-- Brown's hypotheses reduce to thickness, essential smallness, and compactness of the
 constructible finite-Tor objects. The ambient structures and generation follow formally
 from the definition of the localizing closure, for every commutative condensed coefficient.
-
-Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2
-(blueprint: lem-sfb-brown-hypotheses-criterion).
 
 Proof: the forward direction uses essential smallness to choose a small equivalent
 category of the constructible finite-Tor subcategory. Its representatives belong to the
@@ -321,10 +312,6 @@ private theorem brownHypotheses_admissible_small
 
 /-- For a Noetherian scheme, admissibility leaves only compactness to check.
 No field, characteristic, or separatedness hypothesis is required for this equivalence.
-
-Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2,
-and lemma-hypotheses-brown-representability--5, whose hypothesis is that X is Noetherian.
-(blueprint: lem-sfb-brown-noetherian-compactness-criterion).
 
 Proof: apply brownHypotheses_admissible_small to the actual admissibility predicate.
 This supplies thickness and essential smallness

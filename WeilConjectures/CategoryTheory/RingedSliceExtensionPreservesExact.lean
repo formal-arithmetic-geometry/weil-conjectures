@@ -15,8 +15,7 @@ import all WeilConjectures.Algebra.Homology.LocalizedRestrictionExtensionExists
 /-!
 # Preservation of exactness by ringed-slice extension
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 0E8G.
 -/
 
 @[expose] public section
@@ -45,8 +44,7 @@ private theorem extensionPresheaf_preservesMonomorphisms
 
 /-- The sheafified direct-sum extension preserves exactness at the middle term.
 
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8G
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0E8G.
 
 Proof: Write L for the displayed extension and T for restriction to the slice.
 A map from the direct-sum presheaf of G to a module sheaf F is specified by

@@ -32,8 +32,7 @@ namespace CategoryTheory.Functor
 Proof. The lax structure on `Q` is `LaxMonoidal.ofIso (quotientCompQhIso C)`. Its
 component is `(1 ⊗ 1) ≫ (μ Qh ≫ Qh.map 1) ≫ 1`, since both quotient comparisons
 and the tensorator of the homotopy quotient are identities. Apply functoriality and
-the identity laws. No tensorator is inverted.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative-counit-transport) -/
+the identity laws. No tensorator is inverted. -/
 theorem cochainLocalization_tensorator_eq
     {C : Type*} [Category.{u + 1} C] [Abelian C]
     [IsGrothendieckAbelian.{u + 1} C]

@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-! # Derived internal Hom under equivalences of sites
 
 Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -24,7 +23,6 @@ namespace CategoryTheory.NativeRestriction
 /-- Restriction by a site equivalence commutes with derived internal Hom.
 
 Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node).
 
 Proof: choose a complex representing L and a K-injective complex representing M.
 An exact additive equivalence preserves K-injectives. Compute the two derived Hom

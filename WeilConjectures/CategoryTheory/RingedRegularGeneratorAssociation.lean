@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Sites.EpiMono
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 rank-one generator calculation.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -137,7 +136,6 @@ rank-one scalar. No complexes or coefficient comparison enter this assertion.
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 rank-one generator calculation.
-(auxiliary; not a blueprint node).
 
 Proof: regular multiplication by t identifies O with the ideal module. Lift a to
 that module using its generating section on each slice; these lifts glue because

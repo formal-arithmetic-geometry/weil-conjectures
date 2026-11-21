@@ -13,9 +13,7 @@ import Mathlib.CategoryTheory.Sites.Subsheaf
 
 /-! # Normalized fixed-subsheaf adjunctions for a product of group sheaves
 
-Source: main-20261015, direct-image stability paragraph (3), agent-formulated
-fixed-subsheaf input; Stacks Tags 03CV, 00VH, 00VM, 0037, 0DV0
-(blueprint: lem-sfb-sheaf-product-fixed-adjunction).
+Source: Stacks Tags 03CV, 00VH, 00VM, 0037, 0DV0.
 
 The action categories and their sectionwise additive structures are the existing
 `InternalActionSite.EquivariantSheaf` categories, recorded by the definition node
@@ -37,8 +35,6 @@ namespace CategoryTheory.InternalActionSite
 variable {C : Type u} [SmallCategory C]
 
 /-- The pair-valued group restriction maps obey the functor laws.
-Source: product of group sheaves in paragraph (3)
-(blueprint: lem-sfb-sheaf-product-fixed-adjunction).
 Proof: evaluate each equation on a pair. In each coordinate the identity equation
 is the corresponding group presheaf's map-identity law, and the composition equation
 is its map-composition law. Extensionality of group homomorphisms concludes. -/
@@ -57,9 +53,7 @@ theorem productGroup_laws (K L : Cᵒᵖ ⥤ GrpCat.{u}) :
     simp only [Functor.map_comp]
     rfl
 
-/-- Sectionwise product, retaining actual pairs of group sections.
-Source: product-action calculation in paragraph (3)
-(blueprint: lem-sfb-sheaf-product-fixed-adjunction). -/
+/-- Sectionwise product, retaining actual pairs of group sections. -/
 def productGroup (K L : Cᵒᵖ ⥤ GrpCat.{u}) : Cᵒᵖ ⥤ GrpCat.{u} where
   obj X := GrpCat.of (K.obj X × L.obj X)
   map f := GrpCat.ofHom ((K.map f).hom.prodMap (L.map f).hom)
@@ -68,9 +62,7 @@ def productGroup (K L : Cᵒᵖ ⥤ GrpCat.{u}) : Cᵒᵖ ⥤ GrpCat.{u} where
 
 variable {J : GrothendieckTopology C} (R : Sheaf J RingCat.{u})
 
-/-- Fixedness is tested after every base change, including the identity restriction.
-Source: invariant-section formula in paragraph (3)
-(blueprint: lem-sfb-sheaf-product-fixed-adjunction). -/
+/-- Fixedness is tested after every base change, including the identity restriction. -/
 def FixedSection {P : Cᵒᵖ ⥤ GrpCat.{u}}
     (M : EquivariantSheaf (K := P) J R) (X : Cᵒᵖ) (m : M.obj.val.obj X) : Prop :=
   ∀ (Y : Cᵒᵖ) (f : X ⟶ Y) (p : P.obj Y),
@@ -78,8 +70,7 @@ def FixedSection {P : Cᵒᵖ ⥤ GrpCat.{u}}
 
 /-- A fixed-subsheaf functor with its normalized additive adjunction. Injectivity and
 image specify the displayed subsheaf; the transpose equations retain every section map.
-Source: fixed-subsheaf construction and Stacks 0037
-(blueprint: lem-sfb-sheaf-product-fixed-adjunction). -/
+Source: fixed-subsheaf construction and Stacks 0037. -/
 structure SheafFixedAdjunction (P : Cᵒᵖ ⥤ GrpCat.{u}) where
   /-- Restriction of equivariant maps to invariant sections. -/
   functor : EquivariantSheaf (K := P) J R ⥤ ringedSiteModules.{u} R

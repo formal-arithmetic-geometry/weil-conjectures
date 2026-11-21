@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.RegularExtensionComparison
 import WeilConjectures.CategoryTheory.FunctorFiniteMatrixCoordinates
 
 /-! # Composition and normalized regular scalar extension
-Source: blueprint Compatible isomorphisms, associativity of ordinary scalar extension.
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +27,6 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C]
   (φ : R ⟶ S) (ψ : S ⟶ T) [IsMonHom φ] [IsMonHom ψ]
 
 /-- The scalar extension composition comparison intertwines the two adjunction units.
-Source: extension--restriction adjunction and uniqueness of left adjoints.
-(blueprint: lem-pe-regular-extension-composition).
 Proof: apply the unit normalization for leftAdjointUniq to the composed adjunction.
 Restriction of scalars and its composition comparison have identity underlying maps. -/
 theorem extendScalarsComp_unit (M : Mod C R) :
@@ -48,8 +45,6 @@ theorem extendScalarsComp_unit (M : Mod C R) :
   exact h'
 
 /-- The normalized regular-module comparison respects composition of scalar extensions.
-Source: blueprint Compatible isomorphisms, multiplication of adjacent scalars.
-(blueprint: lem-pe-regular-extension-composition).
 Proof: use injectivity of the extension--restriction adjunction. Naturality of the
 second unit moves the first regular comparison through it. Both regular comparisons
 then reduce to their coefficient maps, while the composition comparison reduces to
@@ -86,8 +81,6 @@ theorem regularExtensionIso_comp :
     ← Category.assoc (extendUnitHom φ (regular R)), hφ, hφψ]
 
 /-- The normalized free-basis comparison respects successive scalar extensions.
-Source: blueprint Compatible isomorphisms, use the same integral basis at both levels.
-(blueprint: lem-pe-regular-extension-composition).
 Proof: naturality moves the initial basis map through extendScalarsComp. Move the
 first sum of regular comparisons through the second biproduct comparison, and
 combine the two functor biproduct comparisons. Naturality in the composition
@@ -135,8 +128,6 @@ theorem regularFreeComparison_comp
   exact regularExtensionIso_comp φ ψ
 
 /-- Transport of a normalized free comparison along equality of coefficient maps.
-Source: blueprint Compatible isomorphisms, quotient factorization.
-(blueprint: lem-pe-regular-extension-composition).
 Proof: substitute the equality of coefficient maps. Both functors and both normalized
 comparisons then coincide, and transport is the identity by proof irrelevance. -/
 theorem regularFreeComparison_eq
@@ -157,8 +148,6 @@ theorem regularFreeComparison_eq
   simp only [eqToIso_refl, Iso.refl_hom, NatTrans.id_app, Category.id_comp]
 
 /-- Successive normalized finite free comparisons respect the transported balancing map.
-Source: blueprint Compatible isomorphisms, ordinary balancing in fixed integral bases.
-(blueprint: lem-pe-regular-extension-composition).
 Proof: precompose with extendScalarsComp. Its inverse cancels the balancing map.
 The composition identity and transport identity identify the remaining comparisons. -/
 theorem regularFreeComparison_balancing
@@ -190,9 +179,7 @@ theorem regularFreeComparison_balancing
   exact (regularFreeComparison_comp φ ψ M e).trans
     (regularFreeComparison_eq hχ hF M e).symm
 
-/-- The scalar extension comparison of a chosen finite regular basis.
-Source: blueprint Compatible isomorphisms, finite free ordinary scalar extension.
-(blueprint: lem-pe-regular-extension-composition). -/
+/-- The scalar extension comparison of a chosen finite regular basis. -/
 def regularFreeExtensionIso
     [Preadditive (Mod C R)] [Preadditive (Mod C S)]
     [HasFiniteBiproducts (Mod C R)] [HasFiniteBiproducts (Mod C S)]
@@ -204,8 +191,6 @@ def regularFreeExtensionIso
       biproduct.mapIso (fun _ : I ↦ regularExtensionIso φ)
 
 /-- The named finite basis comparison respects transported ordinary balancing.
-Source: blueprint Compatible isomorphisms, the same bases at adjacent levels.
-(blueprint: lem-pe-regular-extension-composition).
 Proof: expand the two named comparisons and apply regularFreeComparison_balancing. -/
 theorem regularFreeExtensionIso_balancing
     {χ : R ⟶ T} [IsMonHom χ]

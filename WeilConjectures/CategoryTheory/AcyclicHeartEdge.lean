@@ -20,9 +20,7 @@ public import WeilConjectures.CategoryTheory.TruncationTriangle
 
 /-! # The canonical edge for acyclic cohomology objects
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D7U, lemma-equivalence-bounded;
-the truncation spectral sequence of Tags 0D7S/0D7T.
-(blueprint: lem-fd-acyclic-heart-edge).
+Source: Stacks Project, sites-cohomology.tex, Tag 0D7U; the truncation spectral sequence of Tags 0D7S/0D7T.
 
 The normalization below specifies the edge by its composite with the canonical
 truncation inclusion. Under column collapse this is precisely the quotient to
@@ -331,7 +329,7 @@ set_option linter.unusedVariables false in
 /-- The degree-zero second-page identification, with an object placed in degree q.
 This is exactly the shift and ordinary-derived comparison in
 lemma-uniform-bound-proper-direct-image--1, followed by the inverse of the degree-zero augmentation.
-Source: Stacks Tags 05TD and 0D7U (blueprint: lem-fd-acyclic-heart-edge). -/
+Source: Stacks Tags 05TD and 0D7U. -/
 noncomputable def acyclicHeartSingleIso (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] (X : A) (q : ℤ) :
     (DerivedCategory.homologyFunctor B q).obj
@@ -348,7 +346,7 @@ noncomputable def acyclicHeartSingleIso (F : A ⥤ B) [F.Additive]
 
 /-- The type of edge families on bounded-below objects with F-acyclic cohomology.
 The proof argument records precisely the positive-degree acyclicity assumption.
-Source: Stacks Tag 0D7U (blueprint: lem-fd-acyclic-heart-edge). -/
+Source: Stacks Tag 0D7U. -/
 def AcyclicHeartEdgeFamily (F : A ⥤ B) [F.Additive] :=
   ∀ (L : DerivedCategory.Plus A),
     (∀ (j : ℤ) (p : ℕ), 0 < p →
@@ -362,8 +360,7 @@ isomorphism. The left side precomposes with c_q, the derived truncation inclusio
 The right side is the map g of the truncation couple, with its bridge isomorphisms
 cancelled, followed by the second-page degree-zero comparison. Thus this condition
 specifies the quotient/Theta edge, rather than an unspecified isomorphism.
-Source: Stacks Tag 0D7U and lemma-uniform-bound-proper-direct-image--1, part 6
-(blueprint: lem-fd-acyclic-heart-edge). -/
+Source: Stacks Tag 0D7U and, part 6. -/
 def IsAcyclicHeartEdge (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F]
     (edge : F.AcyclicHeartEdgeFamily) : Prop :=
   ∀ (L : DerivedCategory.Plus A)
@@ -448,7 +445,7 @@ private noncomputable def truncProjectionNatTrans (q : ℤ) :
 
 omit [IsGrothendieckAbelian.{v₂} B] in
 /-- Descent of `K ↦ H^q(RF(τ_{≤q}K))` along `Q`, with the truncation inclusion `c` and
-the projection `g` to `F(H^q)` (theorem-pbc-injective-acyclicity). -/
+the projection `g` to `F(H^q)`. -/
 private theorem descent_data (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] (q : ℤ) :
     ∃ (T : DerivedCategory A ⥤ B)
       (c : T ⟶ F.rightDerivedFunctor ⋙ DerivedCategory.homologyFunctor B q)
@@ -509,8 +506,7 @@ set_option linter.unusedVariables false in
 /-- The canonical acyclic-heart edge is invertible and natural, including in compatible
 morphisms of the derived-functor data. Compatibility is imposed only on shifted single
 objects, by their degree-zero augmentation comparisons, not on the edge to be proved.
-Source: Stacks Tag 0D7U, lemma-equivalence-bounded, spectral-sequence argument
-(blueprint: lem-fd-acyclic-heart-edge).
+Source: Stacks Tag 0D7U, spectral-sequence argument.
 
 Proof:
 1. Build the raw type-zero exact couple of lem-sp-truncation-raw-exact. Its E term

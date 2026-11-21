@@ -26,9 +26,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 09YL (lemma-colimit-sites), and the first
-paragraph of Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-covering-construction).
+/-- Source: Stacks Project, Sites, Tag 09YL, and the first
+paragraph of Tag 0A35.
 
 Proof: Define Q Y to consist of transported images of stage covering presieves.
 Represent finite objects and arrows using the object and arrow colimit cocones.

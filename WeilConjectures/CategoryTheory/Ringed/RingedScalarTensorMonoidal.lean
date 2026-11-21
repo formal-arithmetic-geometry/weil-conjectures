@@ -80,8 +80,7 @@ import Mathlib.CategoryTheory.Localization.Prod
 import Mathlib.CategoryTheory.Monoidal.Subcategory
 /-! # Strong monoidality of derived scalar extension.
 
-Source: Stacks Project, Tags 06YS, 07A4 and Categories 04VK.
-(blueprint: lem-fix-ringed-scalar-tensor-monoidal). -/
+Source: Stacks Project, Tags 06YS, 07A4 and Categories 04VK. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -515,9 +514,8 @@ variable {C : Type c} [Category.{v} C]
 
 -- The normalization identifies tensorators through several monoidal functor constructions.
 /-- The canonical normalized scalar tensor comparison is strong monoidal.
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product,
-and Tag 0FPT, lemma-symmetric-monoidal-derived
-(blueprint: lem-fix-ringed-scalar-tensor-monoidal).
+Source: Stacks Project, sites-cohomology.tex, Tag 07A4,
+and Tag 0FPT.
 
 Proof: use the supplied canonical scalar total-tensor comparison and its
 normalization. The generator formula uniquely fixes the chain comparison;

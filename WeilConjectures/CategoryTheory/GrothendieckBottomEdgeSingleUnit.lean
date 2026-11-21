@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyCompa
 /-! # The bottom Grothendieck edge and the derived unit
 
 Source: Stacks Project, Derived Categories, Tags 015N and 015J.
-(blueprint: lem-sc-grothendieck-bottom-edge-single-unit)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The raw bottom edge, with its source identified, is homology of the derived unit.
 Source: Stacks Project, Derived Categories, Tags 015N and 015J, bottom interval.
-(blueprint: lem-sc-grothendieck-bottom-edge-single-unit).
 
 Proof: Put R = RF(X). It has no negative homology. The left exactness of F implies
 that the degree-zero homology of the unit F(X)[0] to R is invertible. Specifically,

@@ -114,11 +114,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.auxLemma false in
 /-- Single-object homology comparisons commute with shift transport to degree zero.
 
-Source: the single-functor shift and homology shift constructions in Mathlib,
-`Algebra/Homology/HomotopyCategory/SingleFunctors.lean` and
-`Algebra/Homology/HomotopyCategory/ShiftSequence.lean`.
-(blueprint: lem-pc-single-homology-shift-comparison)
-
 Proof: Lift the single-functor shift to the bounded-below derived category through
 its fully faithful inclusion. The induced homology shift sequence transports the
 result back to the homotopy category and then to cochain complexes, by the quotient

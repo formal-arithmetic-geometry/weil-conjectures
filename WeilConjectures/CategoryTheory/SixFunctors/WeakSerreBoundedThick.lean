@@ -12,9 +12,8 @@ import WeilConjectures.CategoryTheory.SmoothBaseChange.CohomologyInWeakSerreSubc
 /-!
 # Bounded cohomology in a weak Serre class is thick
 
-Source: Stacks Project, Tag 06UQ, `lemma-cohomology-in-serre-subcategory`, including
-bounded versions; Homology, Tag 0754, `lemma-characterize-weak-serre-subcategory`
-(blueprint: lem-sfb-weak-serre-bounded-thick).
+Source: Stacks Project, Tag 06UQ, including
+bounded versions; Homology, Tag 0754.
 -/
 
 @[expose] public section
@@ -29,9 +28,8 @@ namespace CategoryTheory
 For each ambient retract, its cohomology inclusion is the kernel inclusion of one minus
 its cohomological idempotent, and every interval bound passes to the retract unchanged.
 
-Source: Stacks Project, Tag 06UQ, `lemma-cohomology-in-serre-subcategory` (bounded and
-saturated versions), and Tag 0754, `lemma-characterize-weak-serre-subcategory`.
-(blueprint: lem-sfb-weak-serre-bounded-thick)
+Source: Stacks Project, Tag 06UQ (bounded and
+saturated versions), and Tag 0754.
 
 Proof:
 1. By situation-conventions, boundedness is finite cohomological
@@ -43,8 +41,8 @@ Proof:
    closed under isomorphisms. Rotation gives all three two-out-of-three cases, with
    inherited triangles as in def-weil-triangulated-subcategory.
 3. Given i : L → K and r : K → L with i ≫ r = 1, fix n and put I = H^n(i), R = H^n(r).
-   Functoriality (def-weil-abstract-derived-category) gives I ≫ R = 1. Set q = 1 - R ≫ I.
-   Bilinearity (def-weil-preadditive-category) gives I ≫ q = 0. If u ≫ q = 0, then
+   Functoriality gives I ≫ R = 1. Set q = 1 - R ≫ I.
+   Bilinearity gives I ≫ q = 0. If u ≫ q = 0, then
    u = u ≫ R ≫ I, so u factors through I by u ≫ R. This factorization is unique since
    v ≫ I = u implies v = v ≫ I ≫ R = u ≫ R. This is the kernel universal property
    in the abelian category def-sp-abelian and gives the displayed isomorphism.

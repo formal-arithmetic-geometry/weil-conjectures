@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 The finite-free hypothesis and the normalized strong tensor comparison determine the
 transpose uniquely; the proof is the restriction-of-scalars finite-biproduct argument
 from Stacks Tags 08J9 and 08JA.
-(blueprint: lem-sf-ringed-finite-free-hom-base-change)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -252,8 +251,7 @@ private theorem conservative
 The ordinary functor, its universal derived pair and both representative tensor
 normalizations are hypotheses; an arbitrary tensor-preserving functor is insufficient.
 Source: Stacks Project, sites-cohomology.tex, Tags 08J9 and 08JA,
-labels lemma-internal-hom and lemma-section-RHom-over-U; finite-free specialization.
-(blueprint: lem-sf-ringed-finite-free-hom-transpose).
+labels and.
 
 Proof: let U be exact restriction of scalars. A basis S = R^d gives natural
 isomorphisms X^d ≅ U(T X), computed on K-flat representatives by the maps

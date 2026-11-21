@@ -19,8 +19,7 @@ import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 /-! # Triangle closure of bounded-target internal-Hom coproduct continuity
 
 Source: Stacks Project, Cohomology on Sites, Tag 08JC, and the formal bounded-target
-closure argument extracted from Bhatt--Scholze, Lemmas 6.3.14 and 6.8.12
-(blueprint: lem-weil-pbc-rhom-coproduct-triangle-closure).
+closure argument extracted from Bhatt--Scholze, Lemmas 6.3.14 and 6.8.12.
 
 The predicate below is the P introduced in the statement. Its comparison is the image
 under Q of the actual complex-level colimit.post for the existing functor homFixed.
@@ -53,8 +52,7 @@ attribute [local instance high] HomologicalComplex.instHasColimitsOfShape
 
 /-- The property P of the node: continuity for all uniformly cohomologically bounded-below
 discrete complex diagrams, and a uniform lower-bound offset for the target variable.
-Source: Stacks 08JC and the bounded-target closure extraction in the node
-(blueprint: lem-weil-pbc-rhom-coproduct-triangle-closure).
+Source: Stacks 08JC and the bounded-target closure extraction in the node.
 
 The canonical map is Q(colimit.post M (homFixed L)); its coprojection at i is the
 localized Hom map of the target coprojection. Exact termwise sheaf colimits compute
@@ -192,8 +190,7 @@ private theorem continuous_middle
 triangulated subcategory. The source shift by n takes any lower-bound offset d to d+n.
 Finite iterated extensions of isomorphic shifts of any family satisfying P satisfy P.
 Source: Stacks 08JC, with exact coproducts (03DB), the cohomology long exact
-sequence (05RS), and the five lemma (05QB)
-(blueprint: lem-weil-pbc-rhom-coproduct-triangle-closure).
+sequence (05RS), and the five lemma (05QB).
 
 Proof:
 1. Exact coproducts of module sheaves commute with cycles, boundaries and
@@ -257,8 +254,7 @@ theorem boundedCoproductHomContinuous_triangle_closure :
 
 /-- The complex-level coproduct property gives preservation of each actual derived
 coproduct of uniformly bounded-below objects.
-Source: Stacks 07D9 and the representative comparison for RHom
-(blueprint: lem-weil-pbc-rhom-coproduct-triangle-closure).
+Source: Stacks 07D9 and the representative comparison for RHom.
 Proof: choose source and target complex representatives. Their termwise coproduct is
 also a derived coproduct. The normalized Hom comparison identifies Q followed by RHom
 with homFixed followed by Q. The latter carries the coproduct cocone to a colimit:
@@ -306,8 +302,7 @@ theorem boundedCoproductHomContinuous_preservesColimit
 
 /-- Derived coproduct preservation and a uniform lower bound imply the representative
 comparison used by the triangle closure theorem.
-Source: Stacks 07D9; the normalized Hom-resolution comparison
-(blueprint: lem-weil-pbc-rhom-coproduct-triangle-closure).
+Source: Stacks 07D9.
 Proof: identify Q followed by derived Hom with homFixed followed by Q. The derived
 preservation assumption gives preservation for a discrete diagram of representatives.
 The post comparison for the composite factors through the invertible post comparison

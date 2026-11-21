@@ -106,8 +106,7 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomAdjunction
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 /-! # Normalized tensor comparison for scalar extension
 
-Source: Stacks Project, Tags 07A4 and 08J9.
-(blueprint: lem-sf-ringed-finite-free-tensor-data). -/
+Source: Stacks Project, Tags 07A4 and 08J9. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -132,8 +131,7 @@ variable {C : Type c} [Category.{v} C]
 
 /-- A pure scalar-extension section, transported along the specified object equality.
 It is the sheafification unit applied to s tensor x; no basis is used.
-Source: Stacks 03EK, 08J9
-(blueprint: lem-sf-ringed-finite-free-hom-base-change). -/
+Source: Stacks 03EK, 08J9. -/
 def ringedFiniteFreeScalarSection
     (E : SheafOfModules.{max c v r}
       (SheafOfModules.derivedChangeRingIndependentCoefficients J R) ⥤ SheafOfModules.{max c v r}
@@ -197,7 +195,6 @@ private theorem scalarComparison_natural
 
 /-- The actual scalar tensor comparison on complexes and preservation of K-flatness.
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 06YT and 08J9.
-(blueprint: lem-sf-ringed-finite-free-tensor-complex).
 
 Proof: on sheafified pure tensors send s tensor (x tensor y) to
 (s tensor x) tensor (1 tensor y). The inverse multiplies the scalars.

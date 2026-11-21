@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 /-!
 # RingedSiteLocalization
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace CategoryTheory
 /-- Compatibility of the restrictions of a section to all objects of the slice site.
 
 Source: Stacks Project, Modules on Sites, restriction to a slice (Tag 03DH),
-as used in algebraization.tex, Tag 0997
-(auxiliary; not a blueprint node).
+as used in algebraization.tex, Tag 0997.
 
 Proof: for an arrow a in the opposite slice, Over.w says that its underlying
 arrow followed by the structural arrow of its target equals the structural
@@ -52,8 +50,7 @@ of module sheaves are obtained by sheafifying presheaf colimits.
 The rank-one endomorphism comes from the compatible family f restricted to
 all objects over U, using Mathlib's unitHomEquiv, not a new module structure.
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998. -/
 noncomputable def ringedSiteSectionLocalization
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{u}) (U : C) (f : R.obj.obj (op U)) :

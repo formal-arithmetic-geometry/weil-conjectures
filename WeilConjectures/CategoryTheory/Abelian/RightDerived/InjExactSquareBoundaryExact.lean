@@ -11,8 +11,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 
 /-! # Exactness of the explicitly defined derived square boundary
 
-Source: Mathlib, ShortComplex.ShortExact.homology_exact₁/₂/₃; Stacks, Cohomology, 01EB.
-(blueprint: lem-sc-injectively-exact-square-boundary-exact).
+Source: Stacks, Cohomology, 01EB.
 -/
 
 @[expose] public section
@@ -233,7 +232,6 @@ and the initial injection for the derived sequence of the square.
 Source: Mathlib, Algebra/Homology/HomologySequence.lean,
 `ShortComplex.ShortExact.homology_exact₁/₂/₃`, and CategoryTheory/Abelian/RightDerived.lean,
 `InjectiveResolution.isoRightDerivedObj`, following Stacks Cohomology Lemma 01EB.
-(blueprint: lem-sc-injectively-exact-square-boundary-exact).
 
 Proof: The `resolutionSequence` is already proved short exact. Apply Mathlib's
 homology_exact₂ at n, homology_exact₃ at n,n+1, and homology_exact₁ at n,n+1. The four

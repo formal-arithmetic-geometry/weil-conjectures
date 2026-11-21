@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.RingedKoszulTensorTowerLimitAcyclic
 /-! # Internal Hom of Cech and a prescribed strict derived limit
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -98,9 +97,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The telescope/Hom calculation identifies Cech internal Hom with any specified
 presentation of the actual strict Koszul tensor tower and its derived inverse limit.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941;
-more-algebra.tex, Tag 0913; derived.tex, Tag 0949.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941; more-algebra.tex, Tag 0913; derived.tex, Tag 0949.
 
 Proof: compose the augmentation-compatible colimit identification with the canonical
 telescope-to-colimit quasi-isomorphism. Apply Hom into a functorial K-injective I.

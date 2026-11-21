@@ -10,8 +10,8 @@ public import WeilConjectures.CategoryTheory.K.KInjectiveTotalDerived
 /-!
 # Right derived functors using arbitrary K-injective resolutions
 
-Source: blueprint `def-sfb-right-derived-functor`, order 1609; Stacks Project,
-Derived Categories, Tags 070K and 070Y (blueprint: def-sfb-right-derived-functor).
+Source: Stacks Project,
+Derived Categories, Tags 070K and 070Y.
 
 The upstream `Functor.rightDerivedFunctor` requires monomorphic resolutions. Here the
 hypothesis is precisely that of Tag 070K. We choose a universal pair supplied by
@@ -36,7 +36,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     ∃ (I : CochainComplex C ℤ) (s : K ⟶ I), I.IsKInjective ∧ QuasiIso s)
 
 /-- The functor of the universal right-derived pair. Source: blueprint order 1609,
-Stacks Tags 070K and 070Y (blueprint: def-sfb-right-derived-functor).
+Stacks Tags 070K and 070Y.
 The pair is determined up to unique isomorphism by its universal property. -/
 noncomputable def rightDerivedFunctorOfQuasiIsoResolutions :
     DerivedCategory C ⥤ DerivedCategory D :=
@@ -44,7 +44,7 @@ noncomputable def rightDerivedFunctorOfQuasiIsoResolutions :
     (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh))
 
 /-- The unit of the chosen universal pair. Source: blueprint order 1609,
-Stacks Tags 070K and 070Y (blueprint: def-sfb-right-derived-functor). -/
+Stacks Tags 070K and 070Y. -/
 noncomputable def rightDerivedFunctorOfQuasiIsoResolutionsUnit :
     F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶
       DerivedCategory.Qh ⋙ F.rightDerivedFunctorOfQuasiIsoResolutions h :=
@@ -52,12 +52,11 @@ noncomputable def rightDerivedFunctorOfQuasiIsoResolutionsUnit :
     (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)))
 
 /-- Universal property of the pair, for every functor G. Source: blueprint order 1609,
-Stacks Tags 070K and 070Y (blueprint: def-sfb-right-derived-functor).
+Stacks Tags 070K and 070Y.
 
 Proof plan:
 1. Additivity of F preserves zero maps, sums, negatives, shifts and the cone differential,
-   hence its homotopy-category functor is triangulated; Qh is triangulated too
-   (lem-pur-homotopy-category-triangulated, def-weil-abstract-derived-category).
+   hence its homotopy-category functor is triangulated; Qh is triangulated too.
 2. Apply lem-weil-pbc-kinjective-total-derived to this composite and h. The definitions
    choose its universal pair; its bijection on natural transformations is the assertion.
 3. That lemma constructs maps by the Hom bijection into K-injectives, so naturality of
@@ -73,8 +72,7 @@ theorem rightDerivedFunctorOfQuasiIsoResolutions_universal
       (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)))).1 G
 
 /-- Uniqueness of the universal pair, including compatibility with its unit.
-Source: blueprint order 1609, Stacks Tag 070K
-(blueprint: def-sfb-right-derived-functor).
+Source: blueprint order 1609, Stacks Tag 070K.
 
 Proof plan: use the two universal bijections to obtain comparison transformations in
 both directions preserving the units. Their composites preserve the units, so injectivity
@@ -110,7 +108,7 @@ theorem rightDerivedFunctorOfQuasiIsoResolutions_unique
     (he.trans ha.symm)
 
 /-- The unit is invertible on every K-injective complex. Source: blueprint order 1609,
-Stacks Tags 070K and 070Y (blueprint: def-sfb-right-derived-functor).
+Stacks Tags 070K and 070Y.
 
 Proof plan: step 1 of the node's proof verifies exactness of the degreewise composite.
 Step 2 applies lem-weil-pbc-kinjective-total-derived, whose final clause gives this
@@ -125,8 +123,7 @@ theorem rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso
       (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)))).2 I inferInstance
 
 /-- The canonical comparison for any resolution s, without a monomorphism assumption.
-Source: blueprint order 1609, Stacks Tags 070K and 070Y
-(blueprint: def-sfb-right-derived-functor).
+Source: blueprint order 1609, Stacks Tags 070K and 070Y.
 It is RF(Qs) followed by the inverse unit at I, transported between Q and quotient ⋙ Qh,
 as in step 3 of the node's proof. -/
 noncomputable def rightDerivedFunctorOfQuasiIsoResolutionsObjIso

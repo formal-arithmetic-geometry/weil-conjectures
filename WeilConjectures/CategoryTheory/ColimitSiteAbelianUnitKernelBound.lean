@@ -38,10 +38,9 @@ private theorem arrow_zero_iff {A B C : AddCommGrpCat.{u}} (f : A ⟶ B) (g : A 
   have he : f = g := by simpa using hf
   rw [he]
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section formula and its presentation, sheaf and adjunction paragraphs; abelian
 interpretation in Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-abelian-unit-kernel-bound)
 
 Proof: Transpose the canonical limit unit and each later-stage unit through the
 source-stage adjunction. The transposes satisfy the unit equations by the

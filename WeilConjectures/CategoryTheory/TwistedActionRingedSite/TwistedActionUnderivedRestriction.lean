@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionEvalu
 
 /-! # Coherent underived restriction on a specified action site
 
-Source: the normalized tensor and evaluation formulas of the twisted action-site
-presentation; Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
+Source: Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
 -/
 
 @[expose] public noncomputable section
@@ -35,9 +34,8 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 /-- The specified action-site tensor and Hom maps satisfy all underived coherence
 and evaluation equations.
 
-Source: twisted action-site presentation, tensor/Hom steps 9--13; Stacks 03EK,
-03EL and 03EO; native ringed bridge step 2.
-(blueprint: lem-sf-twisted-action-underived-restriction).
+Source: Stacks 03EK,
+03EL and 03EO.
 
 Proof: assemble P.tensor and P.hom into natural isomorphisms by
 NatIso.ofComponents, using P.tensor_naturality and P.hom_naturality, and take

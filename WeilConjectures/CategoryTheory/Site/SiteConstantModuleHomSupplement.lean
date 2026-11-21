@@ -29,8 +29,7 @@ public import WeilConjectures.CategoryTheory.SiteConstantModuleHom
 
 /-! # Internal Hom of constant module sheaves
 
-Source: Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H
-(blueprint: lem-pur-site-constant-module-hom).
+Source: Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H.
 -/
 
 @[expose] public noncomputable section
@@ -406,8 +405,7 @@ private lemma homComparison_isIso (M N : ModuleCat.{max u v} Λ)
 /-- The canonical Hom comparison for constant module sheaves, together with its naturality
 and the same-map rule on each localized site.
 
-Source: Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H
-(blueprint: lem-pur-site-constant-module-hom).
+Source: Stacks Project, Modules on Sites, Tag 093T (1), and Tag 0E8H.
 
 Proof plan:
 1. The local module Hom presheaf is a sheaf by lem-sf-local-module-hom-sheaf.

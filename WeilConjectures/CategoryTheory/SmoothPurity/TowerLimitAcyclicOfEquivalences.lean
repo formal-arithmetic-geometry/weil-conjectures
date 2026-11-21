@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-! # Transporting tower-limit acyclicity through equivalences
 
 Source: Stacks Project, Cohomology on Sites, Tags 0A07 and 0D6E.
-(blueprint: lem-pur-tower-limit-acyclic-of-equivalences).
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ private theorem quasiIsoOfIso
 /-- Inverse-limit acyclicity for a functor on strict towers is invariant under
 compatible equivalences of its source and target abelian categories.
 Source: Stacks Project, Tags 0A07 and 0D6E, transport of the resolution criterion.
-(blueprint: lem-pur-tower-limit-acyclic-of-equivalences).
 
 Proof: whisker the two equivalences by the tower index. They remain additive exact
 equivalences and preserve K-injectivity and quasi-isomorphisms. The supplied

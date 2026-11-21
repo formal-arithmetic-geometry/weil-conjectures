@@ -18,8 +18,7 @@ import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! # Left exactness of finite-free constant scalar extension
 
-Source: Stacks 03CZ and 03EK; finite-basis argument in
-`lem-pur-topos-finite-free-compact-constituents`, proof Step 1.
+Source: Stacks 03CZ and 03EK.
 -/
 
 @[expose] public section
@@ -242,9 +241,7 @@ end CategoryTheory.ConstantFiniteFreeIndependent
 
 /-- Ordinary sheafified extension of finite-free constant scalars is left exact.
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ and 03EK; the finite-basis
-argument in proof Step 1 of lem-pur-topos-finite-free-compact-constituents.
-(blueprint: lem-pur-constant-finite-free-extension-left-exact).
+Source: Stacks Project, Modules on Sites, Tags 03CZ and 03EK.
 
 Proof: choose a finite A-basis of B and its dual coordinates. On constant ring
 presheaves the basis expansion and the Kronecker identities are inverse formulas.

@@ -47,8 +47,6 @@ private theorem derivedModuleHasCoproducts
 /-- A compactly generated triangulated model for the derived category of modules.
 Source: Stacks Project, Tags 0F5V and 0F5X.
 
-(auxiliary; not a blueprint node)
-
 Proof in words: construct the small-Hom derived category of modules by the
 Grothendieck construction.  The rank-one free module in degree zero represents
 cohomology, so its shifted Hom groups are the corresponding cohomology groups;

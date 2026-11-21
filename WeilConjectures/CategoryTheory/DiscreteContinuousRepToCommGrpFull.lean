@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.DiscreteContinuousRepToCommGrp
 /-!
 # Fullness of the internal group object functor
 
-Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
+Source: Stacks Project, Tag 04JQ.
 -/
 
 @[expose] public section
@@ -47,8 +47,7 @@ private lemma discreteRepCommGrp_mul_apply
   rw [hf, hs]
 
 
-/-- Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
-(blueprint: lem-exc-discrete-continuous-rep-to-commgrp-full)
+/-- Source: Stacks Project, Tag 04JQ.
 
 Proof: An internal group morphism gives an equivariant function between the carriers.
 The represented group law is pointwise addition. Apply preservation of multiplication

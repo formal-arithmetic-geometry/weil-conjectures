@@ -24,9 +24,8 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 /-- A finite stage family whose alpha images match becomes matching after refinement.
-Source: Stacks Project, Sites, Tag 0A35, the finite-cover matching equalizer
+Source: Stacks Project, Sites, Tag 0A35 matching equalizer
 paragraph and the adjunction paragraph; Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-abelian-finite-family-stabilization).
 
 Proof: For each pair of arrows of T form the stage covering pullback. The
 hypothesis hy, applied to its two projections, says that the alpha image of the

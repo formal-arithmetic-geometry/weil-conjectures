@@ -18,9 +18,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Point.PointFdMorphismDesce
 
 /-! # The category of finite-stage coefficient complexes
 
-Source: Weil blueprint, `lemma-perfect-complexes-geometric-point`, order 1509
-(blueprint: def-weil-point-fd-qlbar-category).
-
 Objects are literally pairs (finite coefficient field, finite-dimensional derived complex).
 We realize their morphism colimits as morphisms between their scalar extensions in D(Qbar).
 The common-stage bijection is `pointFdQbarCocone_isFilteredTwoColimit`, not an assumption.
@@ -44,32 +41,27 @@ namespace DerivedCategory
 variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
 
-/-- The finite-stage pairs before equipping them with morphisms.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The finite-stage pairs before equipping them with morphisms. -/
 def PointFdQbarObjects :=
   Σ E : Padic.FiniteCoefficientFields l Ω,
     (pointFiniteDimensional E.val).FullSubcategory
 
-/-- The canonical realization of a finite-stage object, by actual scalar extension.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The canonical realization of a finite-stage object, by actual scalar extension. -/
 noncomputable def pointFdQbarObject (X : PointFdQbarObjects l Ω) :
     DerivedCategory (ModuleCat.{u} Ω) :=
   (fieldDerivedScalarExtension (K := X.1.val) (L := Ω) X.1.val.subtype).obj X.2.obj
 
 /-- A concrete realization of the common-stage category. Its Hom is canonically the
-filtered common-stage colimit, as specified by the cocone theorem below.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+filtered common-stage colimit, as specified by the cocone theorem below. -/
 abbrev PointFdQbar :=
   InducedCategory (DerivedCategory (ModuleCat.{u} Ω)) (pointFdQbarObject l Ω)
 
-/-- The faithful realization of the stagewise category in D(Qbar).
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The faithful realization of the stagewise category in D(Qbar). -/
 noncomputable def pointFdQbarRealization :
     PointFdQbar l Ω ⥤ DerivedCategory (ModuleCat.{u} Ω) :=
   inducedFunctor (pointFdQbarObject l Ω)
 
-/-- The canonical functor from a finite coefficient stage to the stagewise category.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The canonical functor from a finite coefficient stage to the stagewise category. -/
 noncomputable def pointFdQbarStage (E : Padic.FiniteCoefficientFields l Ω) :
     (pointFiniteDimensional E.val).FullSubcategory ⥤ PointFdQbar l Ω where
   obj C := ⟨E, C⟩
@@ -81,8 +73,7 @@ noncomputable def pointFdQbarStage (E : Padic.FiniteCoefficientFields l Ω) :
     ((fieldDerivedScalarExtension (K := E.val) (L := Ω) E.val.subtype).map_comp f.hom g.hom)
 
 /-- Compatibility of the canonical finite-stage embeddings, with precisely the
-termwise tensor tower comparison as underlying isomorphism.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+termwise tensor tower comparison as underlying isomorphism. -/
 noncomputable def pointFdQbarStageComp
     {E F : Padic.FiniteCoefficientFields l Ω} (h : E ≤ F) :
     pointFdScalarExtension (IntermediateField.inclusion h).toRingHom ⋙
@@ -93,7 +84,6 @@ noncomputable def pointFdQbarStageComp
 
 omit [IsAlgClosure (Padic l) Ω] in
 /-- Finite-dimensional bounded cohomology is stable under every integer shift.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category).
 Proof: H^i(C[n]) is canonically H^(i+n)(C); translate the finite support by -n
 and retain the same finite-dimensionality proofs. -/
 theorem pointFd_shift_mem {F : Type u} [Field F]
@@ -116,13 +106,11 @@ theorem pointFd_shift_mem {F : Type u} [Field F]
     let := hfd (n + i)
     exact (e i).symm.toLinearEquiv.finiteDimensional
 
-/-- The shift of a stage pair, computed at that same stage.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The shift of a stage pair, computed at that same stage. -/
 noncomputable def pointFdQbarShiftObj (X : PointFdQbar l Ω) (n : ℤ) : PointFdQbar l Ω :=
   ⟨X.1, ⟨X.2.obj⟦n⟧, pointFd_shift_mem X.2.obj X.2.property n⟩⟩
 
-/-- The shifted realization with its object data fixed at the original finite stage.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The shifted realization with its object data fixed at the original finite stage. -/
 noncomputable def pointFdQbarShiftRealization (n : ℤ) :
     PointFdQbar l Ω ⥤ DerivedCategory (ModuleCat.{u} Ω) :=
   (pointFdQbarRealization l Ω ⋙ shiftFunctor _ n).copyObj
@@ -130,16 +118,14 @@ noncomputable def pointFdQbarShiftRealization (n : ℤ) :
     (fun X ↦ ((fieldDerivedScalarExtension (K := X.1.val) (L := Ω)
       X.1.val.subtype).commShiftIso n).symm.app X.2.obj)
 
-/-- The actual shift functor on stage pairs and their induced morphisms.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The actual shift functor on stage pairs and their induced morphisms. -/
 noncomputable def pointFdQbarShift (n : ℤ) : PointFdQbar l Ω ⥤ PointFdQbar l Ω where
   obj X := pointFdQbarShiftObj l Ω X n
   map f := InducedCategory.homMk ((pointFdQbarShiftRealization l Ω n).map f)
   map_id X := InducedCategory.hom_ext ((pointFdQbarShiftRealization l Ω n).map_id X)
   map_comp f g := InducedCategory.hom_ext ((pointFdQbarShiftRealization l Ω n).map_comp f g)
 
-/-- The shift comparison used to transport the coherent shift structure faithfully.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The shift comparison used to transport the coherent shift structure faithfully. -/
 noncomputable def pointFdQbarShiftIso (n : ℤ) :
     pointFdQbarShift l Ω n ⋙ pointFdQbarRealization l Ω ≅
       pointFdQbarRealization l Ω ⋙ shiftFunctor _ n :=
@@ -148,14 +134,12 @@ noncomputable def pointFdQbarShiftIso (n : ℤ) :
     (fun X ↦ ((fieldDerivedScalarExtension (K := X.1.val) (L := Ω)
       X.1.val.subtype).commShiftIso n).symm.app X.2.obj)).symm
 
-/-- The coherent integer shift structure induced from the faithful realization.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- The coherent integer shift structure induced from the faithful realization. -/
 noncomputable instance pointFdQbarHasShift : HasShift (PointFdQbar l Ω) ℤ :=
   (fullyFaithfulInducedFunctor (pointFdQbarObject l Ω)).hasShift
     (pointFdQbarShift l Ω) (pointFdQbarShiftIso l Ω)
 
-/-- Realization commutes with the specified shifts by its canonical tensor comparison.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+/-- Realization commutes with the specified shifts by its canonical tensor comparison. -/
 noncomputable instance pointFdQbarRealizationCommShift :
     (pointFdQbarRealization l Ω).CommShift ℤ :=
   Functor.CommShift.ofHasShiftOfFullyFaithful
@@ -164,8 +148,7 @@ noncomputable instance pointFdQbarRealizationCommShift :
 
 /-- Distinguished triangles are exactly those isomorphic, under faithful realization,
 to scalar extensions of distinguished triangles at one common finite stage, with
-all three vertices in D^b_fd of that stage.
-Source: blueprint order 1509 (blueprint: def-weil-point-fd-qlbar-category). -/
+all three vertices in D^b_fd of that stage. -/
 noncomputable def pointFdQbarDistinguished (T : Triangle (PointFdQbar l Ω)) : Prop :=
   ∃ (E : Padic.FiniteCoefficientFields l Ω)
     (S : Triangle (DerivedCategory (ModuleCat.{u} E.val))),

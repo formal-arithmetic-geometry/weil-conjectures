@@ -23,8 +23,7 @@ import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 /-! # Triangle closure of bounded-target internal-Hom continuity
 
 Source: Stacks Project, Cohomology on Sites, Tag 08JC, and the formal bounded-target
-closure argument extracted from Bhatt--Scholze, Lemmas 6.3.14 and 6.8.12
-(blueprint: lem-sfb-rhom-continuity-triangle-closure).
+closure argument extracted from Bhatt--Scholze, Lemmas 6.3.14 and 6.8.12.
 
 The predicate below is the P introduced in the statement. Its comparison is the image
 under Q of the actual complex-level colimit.post for the existing functor homFixed.
@@ -313,8 +312,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 /-- The property P of the node: continuity for all uniformly cohomologically bounded-below
 filtered complex diagrams, and a uniform lower-bound offset for the target variable.
-Source: Stacks 08JC and the bounded-target closure extraction in the node
-(blueprint: lem-sfb-rhom-continuity-triangle-closure).
+Source: Stacks 08JC and the bounded-target closure extraction in the node.
 
 The canonical map is Q(colimit.post M (homFixed L)); its coprojection at i is the
 localized Hom map of the target coprojection. Exact termwise sheaf colimits compute

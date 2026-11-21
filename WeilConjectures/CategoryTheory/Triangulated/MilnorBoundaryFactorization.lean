@@ -18,7 +18,6 @@ import Mathlib.Algebra.Category.Grp.AB
 # Connecting-map factorization for the Milnor sequence
 
 Source: Stacks Project, More on Algebra, Tags 07KW and 07KY.
-(blueprint: lem-pc-milnor-boundary-factorization).
 -/
 
 @[expose] public section
@@ -80,7 +79,6 @@ private theorem cokernel_exact {C : Type*} [Category C] [Abelian C]
 set_option backward.isDefEq.respectTransparency false in
 /-- Factor the connecting map of a Roos triangle through the first derived limit.
 Source: Stacks Project, More on Algebra, Tag 07KY; Tag 07KW.
-(blueprint: lem-pc-milnor-boundary-factorization).
 
 Proof: preserve countable products under cohomology using Tag 07KC and identify
 cohomology of the transition endomorphism componentwise with the Roos map.

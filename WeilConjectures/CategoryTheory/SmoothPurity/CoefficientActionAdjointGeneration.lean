@@ -24,8 +24,7 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 /-! # Generation for the specified coefficient-action adjoint mate
 
 Source: Zheng, Six operations and Lefschetz–Verdier formula for Deligne–Mumford stacks,
-Construction 2.26, printed p. 15; Stacks Project, More on Algebra, Tag 09PB
-(blueprint: lem-pur-coefficient-action-adjoint-generation).
+Construction 2.26, printed p. 15; Stacks Project, More on Algebra, Tag 09PB.
 
 The actions are curried with the category variable first and the coefficient variable second.
 The mate is defined by the fixed adjunction's hom equivalence, without any choice of map.
@@ -42,8 +41,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The specified transpose of inverse projection comparison followed by the counit.
-Source: Zheng, Construction 2.26, printed p. 15
-(blueprint: lem-pur-coefficient-action-adjoint-generation). -/
+15. -/
 noncomputable def coefficientActionAdjointMate
     {D : Type uD} {A : Type uA} {B : Type uB}
     [Category.{vD} D] [Category.{vA} A] [Category.{vB} B]
@@ -54,8 +52,7 @@ noncomputable def coefficientActionAdjointMate
   adj.homEquiv _ _ ((P.inv.app (G.obj M)).app V ≫ (TB.map (adj.counit.app M)).app V)
 
 /-- The full subcategory of coefficients where the specified transpose is invertible.
-Source: Zheng, Construction 2.26, and Stacks Project, Tag 09PB
-(blueprint: lem-pur-coefficient-action-adjoint-generation). -/
+Source: Zheng, Construction 2.26, and Stacks Project, Tag 09PB. -/
 def coefficientActionAdjointIsoLocus
     {D : Type uD} {A : Type uA} {B : Type uB}
     [Category.{vD} D] [Category.{vA} A] [Category.{vB} B]
@@ -69,9 +66,8 @@ all coefficient shifts, and invertible on the entire unbounded derived module ca
 The explicit isomorphism locus contains the ring and is closed under isomorphisms, all
 integer shifts, distinguished cones, retracts, and arbitrary set-indexed coproducts.
 
-Source: Zheng, Construction 2.26, printed p. 15; blueprint
-`lemma-checking-isomorphisms-constructible-complexes--1`; Stacks Project, More on Algebra, Tag 09PB
-(blueprint: lem-pur-coefficient-action-adjoint-generation).
+15; blueprint
+`lemma-checking-isomorphisms-constructible-complexes--1`; Stacks Project, More on Algebra, Tag 09PB.
 
 Proof:
 1. Set q = inverse projection comparison followed by the action on the counit. The

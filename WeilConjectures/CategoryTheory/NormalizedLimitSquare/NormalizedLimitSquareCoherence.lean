@@ -69,12 +69,6 @@ import all WeilConjectures.CategoryTheory.Roos.RoosComparisonHorizontalCoherence
 
 /-! # Normalized inverse-limit comparisons respect an exact functor square
 
-Source: the final paragraph of
-literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md;
-projection and conjugation calculation in the DAG proof
-(blueprint: lem-cbc-normalized-limit-square-coherence).
-
 The records package conclusions of the theorem, rather than extra hypotheses.
 The underlying complex is the existing `roosF`. Its existing signed `coordinates`
 give (x,y) in degrees (q,q-1), with d(x,y)=(dx,(1-s)x-dy).
@@ -104,8 +98,7 @@ universe c0 d0 r0 c1 d1 r1 c2 d2 r2 c3 d3 r3
 
 /-- One corner's total derived limit and its fixed, K-injective-normalized Roos model.
 `factors` identifies the localized Roos functor with the actual shifted cone.
-Source: Stacks 0941 and the final blueprint comparison paragraph
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+Source: Stacks 0941 and the final blueprint comparison paragraph. -/
 structure Corner {A : Type u} [Category.{v} A] [Abelian A]
     [HasCountableProducts A] [HasLimitsOfShape ℕᵒᵖ A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
@@ -131,9 +124,7 @@ variable {A : Type u} [Category.{v} A] [Abelian A]
   {etaB : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ LB}
 
 /-- The specified comparison on one edge, including both signed coordinate equations,
-its localization, and precisely lambda = theta inverse, kappa, F(theta).
-Source: lem-cbc-exact-product-functor-strict-limit, signed Roos normalization
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+its localization, and precisely lambda = theta inverse, kappa, F(theta). -/
 structure Comparison (a : Corner LA etaA) (b : Corner LB etaB)
     (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F] where
   kappa : roosF ⋙ F.mapHomologicalComplex (.up ℤ) ≅ towerComplex F ⋙ roosF
@@ -159,8 +150,7 @@ structure Comparison (a : Corner LA etaA) (b : Corner LB etaB)
       derivedKappa.hom.app M ≫ b.theta.inv.app ((towerDerived F).obj M)
 
 /-- The canonical derived augmentation obtained from the strict limit cone.
-Source: the strict augmentation clause of Stacks 0941 and
-(blueprint: lem-cbc-normalized-limit-square-coherence).
+Source: the strict augmentation clause of Stacks 0941 and.
 The named map keeps repeated limit-cone conversions out of the coherence record. -/
 @[irreducible] def augmentation
     {T : ℕᵒᵖ ⥤ CochainComplex A ℤ} {Z : DerivedCategory.{w} A}
@@ -348,9 +338,7 @@ omit [HasCountableProducts A0] [HasCountableProducts A1]
   [PreservesFiniteLimits G] [PreservesFiniteColimits G]
   [PreservesFiniteLimits H] [PreservesFiniteColimits H]
   [PreservesFiniteLimits K] [PreservesFiniteColimits K] in
-/-- Termwise square map, with its two-step tower functors explicitly typed.
-Source: naturality of the given square
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- Termwise square map, with its two-step tower functors explicitly typed. -/
 @[irreducible] def towerMap (e : F ⋙ G ⟶ H ⋙ K) :
     towerComplex F ⋙ towerComplex G ⟶ towerComplex H ⋙ towerComplex K :=
   NatTrans.mapHomologicalComplex
@@ -365,8 +353,7 @@ omit [HasCountableProducts A0] [HasLimitsOfShape ℕᵒᵖ A0]
   [HasCountableProducts A3] [HasLimitsOfShape ℕᵒᵖ A3]
   [HasDerivedCategory.{w3} A3] in
 /-- The given square localized termwise on strict towers, with the canonical composition
-and localization isomorphisms. Source: Stacks 05RU, exact-functor localization
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+and localization isomorphisms. Source: Stacks 05RU, exact-functor localization. -/
 def towerSquare (e : F ⋙ G ≅ H ⋙ K) :
     towerDerived F ⋙ towerDerived G ≅ towerDerived H ⋙ towerDerived K :=
   letI : PreservesFiniteLimits ((Functor.whiskeringRight ℕᵒᵖ A0 A1).obj F) :=
@@ -396,54 +383,38 @@ variable (L2 : DerivedCategory.{w2} (ℕᵒᵖ ⥤ A2) ⥤ DerivedCategory.{w2} 
 variable (L3 : DerivedCategory.{w3} (ℕᵒᵖ ⥤ A3) ⥤ DerivedCategory.{w3} A3)
   (eta3 : roosLimitFunctor ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ L3)
 
-/-- The four shared Roos models and their four comparisons.
-Source: the normalized square construction
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- The four shared Roos models and their four comparisons. -/
 def SquareData :=
   Σ a0 : Corner L0 eta0, Σ a1 : Corner L1 eta1,
     Σ a2 : Corner L2 eta2, Σ a3 : Corner L3 eta3,
       Comparison a0 a1 F × Comparison a1 a3 G ×
         Comparison a0 a2 H × Comparison a2 a3 K
 
-/-- The `corner0` component of the fixed comparison data.
-Source: the normalized square construction
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- The `corner0` component of the fixed comparison data. -/
 abbrev SquareData.corner0 (d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3) :=
   d.1
 
-/-- The `corner3` component of the fixed comparison data.
-Source: the normalized square construction
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- The `corner3` component of the fixed comparison data. -/
 abbrev SquareData.corner3 (d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3) :=
   d.2.2.2.1
 
-/-- The `comparisonF` component of the fixed comparison data.
-Source: the normalized square construction
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- The `comparisonF` component of the fixed comparison data. -/
 abbrev SquareData.comparisonF (d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3) :=
   d.2.2.2.2.1
 
-/-- The `comparisonG` component of the fixed comparison data.
-Source: the normalized square construction
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- The `comparisonG` component of the fixed comparison data. -/
 abbrev SquareData.comparisonG (d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3) :=
   d.2.2.2.2.2.1
 
-/-- The `comparisonH` component of the fixed comparison data.
-Source: the normalized square construction
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- The `comparisonH` component of the fixed comparison data. -/
 abbrev SquareData.comparisonH (d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3) :=
   d.2.2.2.2.2.2.1
 
-/-- The `comparisonK` component of the fixed comparison data.
-Source: the normalized square construction
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- The `comparisonK` component of the fixed comparison data. -/
 abbrev SquareData.comparisonK (d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3) :=
   d.2.2.2.2.2.2.2
 
-/-- All equations attached to one fixed square of comparisons.
-Source: the square and augmentation calculation
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+/-- All equations attached to one fixed square of comparisons. -/
 def SquareLaws (d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3)
     (e : F ⋙ G ≅ H ⋙ K) : Prop :=
   (∀ N : ℕ → A0,
@@ -516,9 +487,7 @@ def SquareLaws (d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3)
           ((towerComplex H).obj X))))
 
 /-- All clauses of square coherence, with the very same corners and comparisons.
-Fields are conclusions, and specify actual chain maps and natural isomorphisms.
-Source: the final blueprint comparison paragraph and the DAG's projection calculation
-(blueprint: lem-cbc-normalized-limit-square-coherence). -/
+Fields are conclusions, and specify actual chain maps and natural isomorphisms. -/
 def Coherence (e : F ⋙ G ≅ H ⋙ K) :=
   ∃ d : SquareData F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3,
     SquareLaws F G H K L0 eta0 L1 eta1 L2 eta2 L3 eta3 d e

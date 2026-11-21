@@ -22,9 +22,8 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-section construction and adjunction paragraphs; the raw Kan presentation of that construction.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-presentation).
+/-- Source: Stacks Project, Sites, Tag 0A35,
+section construction and adjunction paragraphs.
 
 Proof: Put Y = V_i(U). The cocone equality supplies, for each t, an equality
 V_t(F(t.hom)(U)) = Y. Compose E_t, the Kan unit beta_t, and the coprojection

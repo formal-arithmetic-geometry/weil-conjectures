@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 /-! # Extending a natural comparison from a resolving class
 
 Source: Stacks Project, Tag 06YJ, resolving-class argument, and Tag 04VC,
-right fractions. (blueprint: lem-sc-nattrans-from-resolving-class).
+right fractions.
 -/
 
 @[expose] public section
@@ -31,8 +31,7 @@ on the resulting two arrows and cancellation of A of the weak equivalence show
 A(t) β_X = α_P B(t). Applying this formula to a resolution of the source of an
 arbitrary arrow proves naturality of β. Applying it to an identity proves β_P = α_P.
 The argument uses only invertibility of A(s), and therefore also works for zero
-objects and for a resolving class containing all objects.
-(blueprint: lem-sc-nattrans-from-resolving-class). -/
+objects and for a resolving class containing all objects. -/
 theorem exists_natTrans_from_resolvingClass
     {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]
     (W : MorphismProperty C) [W.HasRightCalculusOfFractions]

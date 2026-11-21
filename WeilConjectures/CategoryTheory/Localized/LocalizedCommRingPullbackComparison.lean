@@ -21,7 +21,6 @@ import WeilConjectures.CategoryTheory.Localized.LocalizedSetPullbackComparison
 /-! # The canonical commutative-ring comparison for localization of a site
 
 Source: Stacks Project, Sites, Tag 03CF; Modules on Sites, Tag 04J0.
-(blueprint: lem-weil-pbc-slice-commRing-pullback-isIso).
 -/
 
 @[expose] public noncomputable section

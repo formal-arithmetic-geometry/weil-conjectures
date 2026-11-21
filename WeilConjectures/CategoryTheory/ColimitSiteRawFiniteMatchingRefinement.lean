@@ -20,7 +20,6 @@ public import Mathlib.Basic.Finite.Sigma
 /-! # Finite raw overlap refinement
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-finite-matching-refinement).
 -/
 
 @[expose] public section
@@ -41,9 +40,8 @@ private theorem raw_arrow_transport {C : Type u} [Category.{u} C]
   simpa using hh.symm
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 the finite overlap-equation calculation before stage gluing.
-(blueprint: lem-weil-pbc-colimit-site-raw-finite-matching-refinement).
 
 Proof: Take the pairwise covering pullbacks at the given stage. Naturality of beta
 and the coprojections identifies the raw images of the two restricted sections.

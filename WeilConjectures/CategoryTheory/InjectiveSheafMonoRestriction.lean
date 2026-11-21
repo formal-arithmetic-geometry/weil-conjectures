@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
 # Injective abelian sheaves restrict surjectively along monomorphisms
 
 Source: Stacks Project, Cohomology on Sites, Tag 093X.
-(blueprint: lem-weil-pbc-injective-sheaf-mono-restriction)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max w v}]
 
 /-- Source: Stacks Project, Tag 093X, specialized to abelian sheaves.
-(blueprint: lem-weil-pbc-injective-sheaf-mono-restriction)
 
 Proof: Evaluation at U is represented by the sheafification of the free abelian
 presheaf on the (universe-lifted) representable U. A monomorphism a : U' → U gives

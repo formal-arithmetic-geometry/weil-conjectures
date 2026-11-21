@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.GrothendieckResolutionUnitComparison
 /-! # Comparing the resolution and complex hypercohomology edges
 
 Source: Stacks Project, derived.tex, Tags 015N and 015J.
-(blueprint: lem-pc-grothendieck-hypercohomology-edge).
 -/
 
 @[expose] public section
@@ -83,9 +82,7 @@ private lemma grothendieckLeftEdgeTargetIso_hom_app
 
 /-- For F applied to an injective resolution, the Grothendieck edge is the
 hypercohomology edge transported through the canonical resolution comparisons.
-Source: Stacks Project, Tags 015N and 015J; steps 1 and 2 of
-lem-pc-grothendieck-cocycle-comparison
-(blueprint: lem-pc-grothendieck-hypercohomology-edge).
+Source: Stacks Project, Tags 015N and 015J.
 
 Proof:
 The prescribed resolution comparison identifies RF(X[0]) with Q of the zero

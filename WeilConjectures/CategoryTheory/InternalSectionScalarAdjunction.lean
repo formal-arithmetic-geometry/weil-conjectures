@@ -22,9 +22,7 @@ import WeilConjectures.CategoryTheory.DerivedSectionScalarTransport
 /-! # Scalar adjunctions under section reconstruction
 
 Source: Stacks Project, Modules on Sites, Tags 03EK and 0GMW; Cohomology on Sites,
-Tags 06YS, 06YY and 07A6; Derived Categories, Tag 09T5; blueprint main-20261015,
-det-prop-scalar-six-pullback.proof.md, (1), first paragraph
-(auxiliary; not a blueprint node).
+Tags 06YS, 06YY and 07A6; Derived Categories, Tag 09T5.
 -/
 
 @[expose] public noncomputable section
@@ -47,7 +45,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [(J.W (A := AddCommGrpCat.{u})).IsMonoidal]
 
 /-- The section-ring map reconstructed from the specified internal ring map.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 def sectionScalarMap {R S : Sheaf J AddCommGrpCat.{u}}
     [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
     (a : R ⟶ S) [IsMonHom a] : sectionRingSheaf J R ⟶ sectionRingSheaf J S :=
@@ -61,7 +59,7 @@ variable {R S : Sheaf J AddCommGrpCat.{u}}
   (a : R ⟶ S) [IsMonHom a]
 
 /-- Internal modules for the scalar comparison; this is the recorded module category.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 abbrev scalarInternalModules (T : Sheaf J AddCommGrpCat.{u}) [MonObj T] :=
   Mod (Sheaf J AddCommGrpCat.{u}) T
 
@@ -156,7 +154,7 @@ attribute [local instance] sfbSheafTensor_monoidalPreadditive sfbSheafTensor_has
 
 
 /-- The balanced generator in internal coequalizer extension.
-Source: Stacks 03EK (blueprint: lem-sfb-internal-section-scalar-adjunction). -/
+Source: Stacks 03EK. -/
 def internalScalarGenerator (M : Mod (Sheaf J AddCommGrpCat.{u}) R) (U : Cᵒᵖ)
     (s : S.obj.obj U) (m : M.X.obj.obj U) :
     ((Mod.extendScalars a).obj M).X.obj.obj U :=
@@ -394,8 +392,7 @@ private theorem scalarExtension_generator
 /-- The complete normalized comparison, using the actual internal coequalizer extension,
 actual sectionwise sheafification, and universal unbounded derived pairs. This proposition
 asserts existence of the comparison data with all their normalization properties.
-Source: Stacks 03EK, 0GMW, 06YS, 06YY, 07A6 and 09T5
-(blueprint: lem-sfb-internal-section-scalar-adjunction). -/
+Source: Stacks 03EK, 0GMW, 06YS, 06YY, 07A6 and 09T5. -/
 def InternalSectionScalarAdjunction : Prop :=
   -- The recorded normalized sectionwise extension and its derived adjunction.
   ∃ sectionPair : (SheafOfModules.ScalarDerivedPair (sectionScalarMap J a)),
@@ -493,9 +490,7 @@ def InternalSectionScalarAdjunction : Prop :=
 
 /-- Scalar reconstruction preserves restriction, balanced extension and their specified
 ordinary and unbounded derived adjunctions, with no flatness hypothesis on the ring map.
-Source: Stacks 03EK, 0GMW, 06YS, 06YY, 07A6 and 09T5; blueprint
-main-20261015, det-prop-scalar-six-pullback.proof.md, (1), first paragraph
-(blueprint: lem-sfb-internal-section-scalar-adjunction).
+Source: Stacks 03EK, 0GMW, 06YS, 06YY, 07A6 and 09T5.
 
 Proof:
 1. Internal restriction acts on each section by a(r)n. Reconstruction leaves the

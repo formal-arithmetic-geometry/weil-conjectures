@@ -11,8 +11,7 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-! # Open restriction of the intrinsic proper/open comparison
 
-Source: Stacks 0F7B and 07A7; the normalization calculation for the intrinsic
-proper/open lambda (blueprint: lem-sf-system-proper-open-lambda-exchange). -/
+Source: Stacks 0F7B and 07A7. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -27,7 +26,7 @@ open CategoryTheory AlgebraicGeometry
 namespace CategoryTheory
 
 /-- A natural inverse-open-unit normalization of an exchange map.
-Source: Stacks 07A7 (blueprint: lem-sf-system-proper-open-lambda-exchange). -/
+Source: Stacks 07A7. -/
 def OpenExchangeUnitFormula
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     (Jk : A ⥤ B) (Rp : B ⥤ D) (Pi : D ⥤ C) (Pk : B ⥤ A) (Rr : A ⥤ C)
@@ -475,8 +474,7 @@ private theorem restrictFactor_formula (a : OpenComparisons l E o c)
     (a.unit l E o c (Limits.pullback.fst p i))
 
 /-- The prescribed lambda is proper exchange followed by the inverse open unit.
-Source: Stacks 0F7B (restriction of proper/open interchange) and 07A7 (mates)
-(blueprint: lem-sf-system-proper-open-lambda-exchange).
+Source: Stacks 0F7B (restriction of proper/open interchange) and 07A7 (mates).
 
 Proof: write s for the canonical clopen lift, b and q for the two projections of
 B times_D C. Associativity of the recorded pullback compositors identifies the

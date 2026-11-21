@@ -10,9 +10,6 @@ public import Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 import all Mathlib.Algebra.Homology.SpectralObject.SpectralSequence
 
 /-! # Page homology compatibility with the finite interval
-
-Source: Mathlib spectral-object homology data, Page.lean and Cycles.lean.
-(blueprint: lem-sc-spectral-object-bottom-page-interval-compatibility)
 -/
 
 @[expose] public section
@@ -24,10 +21,6 @@ namespace CategoryTheory.Abelian.SpectralObject
 /-- Compatibility of the page homology comparison with the canonical maps to
 `H^p(0,r-1)`. This only concerns finite intervals; it uses no inverse map from
 `H^p(0,r-1)` to `H^p(bottom,r-1)` and no map to the abutment.
-Source: Mathlib SpectralObject/SpectralSequence.lean (`spectralSequence_iso`,
-`spectralSequenceHomologyData_left_i`, `spectralSequenceHomologyData_left_π`),
-Page.lean (`map_ιE`) and Cycles.lean (`opcyclesMap_fromOpcycles`).
-(blueprint: lem-sc-spectral-object-bottom-page-interval-compatibility)
 
 Proof: Put a=2-r and c=r-1. The page homology data have kernel object
 E^p(a-1,0,1,c), with inclusion changing a-1 to a and quotient changing

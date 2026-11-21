@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteDg.RingedSiteDgModules
 
 /-! The ordinary tensor/restriction construction is the first scalar step.
 
-Source: Stacks sdga, section-dg-bimodules
-(blueprint: lem-sfb-ringed-dg-ordinary-extension).
+Source: Stacks sdga, section-dg-bimodules.
 
 Proof in words: form the balanced sheaf tensor, prove its universal property,
 and use the unit inserting `1` and the action map as the ordinary adjunction
@@ -32,8 +31,7 @@ variable {C : Type c} [Category.{v} C] [EssentiallySmall.{u} C]
 
 /-- The balanced sheaf tensor represents ordinary scalar extension, with the
 unit inserting one and counit given by the module action.
-Source: Stacks sdga, section-dg-bimodules and adjunction-push-pull-dg
-(blueprint: lem-sfb-ringed-dg-ordinary-extension).
+Source: Stacks sdga, section-dg-bimodules and adjunction-push-pull-dg.
 
 Proof: coequalize the two A-action maps on the total tensor M tensor B in
 B-modules.  Tensor preserves this coequalizer, so it represents balanced,

@@ -166,8 +166,7 @@ private theorem generator_induction (S : Site J s R a) :
 /-- An individual fixed module pair extends to a module sheaf on the action site.
 
 Source: the object and sheaf-condition part of step 4 of the agent-formulated twisted
-variant of Stacks 00W0, `sites.tex`, proposition-sheaves-on-group; Stacks 03CV
-(blueprint: lem-sf-twisted-action-module-object-extension).
+variant of Stacks 00W0, `sites.tex`; Stacks 03CV.
 
 Proof: for a fixed pair P, put its section module at X on the copied object X,
 transporting scalars along coefficientRestriction.hom. Define restriction along

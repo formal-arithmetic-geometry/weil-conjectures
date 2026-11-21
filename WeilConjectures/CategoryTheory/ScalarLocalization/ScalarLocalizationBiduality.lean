@@ -10,9 +10,7 @@ public import Mathlib.CategoryTheory.Preadditive.Opposite
 import WeilConjectures.SmoothPurity.OperationsScalarLocalization.DerivedScalarLocalizationIso
 
 /-! # Localization of a specified contravariant biduality isomorphism
-
-Source: blueprint theorem-verdier-biduality--3, paragraph 1
-(blueprint: lem-coef-scalar-localization-biduality). -/
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -42,8 +40,6 @@ private theorem map_heq {C : Type*} [Category* C] {D : Type*} [Category* D]
 /-- A specified integral biduality localizes to a natural biduality with exactly
 its localized components, even when the localized dual's objects are only propositionally
 identified with integral duals.
-Source: blueprint theorem-verdier-biduality--3, paragraph 1
-(blueprint: lem-coef-scalar-localization-biduality).
 Proof: the double localized dual has the integral double-dual object by applying the
 object equation twice. Its map on a pure tensor is the same scalar times the integral
 double-dual map, by applying the contravariant pure-tensor formula twice. The existing

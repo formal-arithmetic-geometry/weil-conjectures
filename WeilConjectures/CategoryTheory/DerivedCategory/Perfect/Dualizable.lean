@@ -41,7 +41,7 @@ Let `C` be dualizable, with right dual `D`, and represent `C` by a complex `L`.
 - `DerivedCategory.exists_retract_of_exactPairing`: a dualizable object of `D(R)` is a retract
   of a bounded complex with finitely generated terms.
 - `DerivedCategory.isPerfect_of_isDualizable`, `DerivedCategory.isPerfect_iff_isDualizable`
-  (`sk-def-perfect`): over a Noetherian ring, the perfect objects of `D(R)` are exactly the
+  : over a Noetherian ring, the perfect objects of `D(R)` are exactly the
   dualizable ones.
 -/
 
@@ -204,7 +204,7 @@ theorem exists_homologyConcentratedIn_and_finite_of_exactPairing [IsNoetherianRi
     exact Module.Finite.of_surjective ((H i).map r).hom
       ((ModuleCat.epi_iff_surjective _).1 inferInstance)
 
-/-- Blueprint `sk-def-perfect`: a dualizable point complex is perfect.
+/-- a dualizable point complex is perfect.
 
 Over a Noetherian ring `R`, an object `C` of `D(R)` which is dualizable for the derived tensor
 product is quasi-isomorphic to a bounded complex of finitely generated projective modules. `C`
@@ -226,7 +226,7 @@ theorem isPerfect_of_isDualizable [IsNoetherianRing R] {C : DerivedCategory (Mod
     ((exists_homologyConcentratedIn_iff_bounded C).1 ⟨a, b, hC₁, hC₂⟩) hfin
     ⟨-b', b, torAmplitudeIn_of_exactPairing_of_isLE (L := Cᘁ) b b'⟩
 
-/-- Blueprint `sk-def-perfect`: perfect point complexes are the dualizable objects.
+/-- perfect point complexes are the dualizable objects.
 
 Over a Noetherian ring `R`, an object of `D(R)` is quasi-isomorphic to a bounded complex of
 finitely generated projective modules if and only if it is dualizable for the derived tensor

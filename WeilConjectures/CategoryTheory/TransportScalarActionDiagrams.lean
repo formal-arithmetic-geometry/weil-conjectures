@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-! # Transport of the two monoid action diagrams
 
-Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-transport-scalar-action-diagrams). -/
+Source: Stacks Project, Tag 03D2. -/
 
 @[expose] public section
 
@@ -59,8 +58,7 @@ private theorem actionPair_lift
   · simpa [actionPair, Category.assoc, ← L.map_comp] using ha
   · simpa [actionPair, Category.assoc, ← L.map_comp] using hb
 
-/-- Source: Stacks Project, Tag 03D2, proof of lemma-pullback-module.
-(blueprint: lem-weil-pbc-transport-scalar-action-diagrams).
+/-- Source: Stacks Project, Tag 03D2.
 
 Proof: Apply L to the two given source action equations. Compare the image of
 (RV times RV) times AV with (RU times RU) times AU using the inverse binary

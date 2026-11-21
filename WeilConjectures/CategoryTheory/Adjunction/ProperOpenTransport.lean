@@ -15,9 +15,6 @@ Comparison functors compatible with inverse images carry the unit-transpose open
 comparison, the open-to-direct-image comparison and the clopen projection to their
 counterparts, the open extensions being compared by the mates of the inverse-image
 comparisons.
-
-Source: Weil conjectures blueprint, node proposition-composition-base-change-rf-shriek--4, proof
-step 8 (blueprint: proposition-composition-base-change-rf-shriek--4).
 -/
 
 @[expose] public noncomputable section

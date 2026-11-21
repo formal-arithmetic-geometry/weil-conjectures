@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.RingedScalarTensorSections
 /-! # The ordinary scalar tensor comparison preserves insertion of one
 
 Source: Stacks Project, Tags 03EK and 03CZ.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -93,9 +92,7 @@ private theorem single_second {N N' : Mod R} (g : N ⟶ N') (P : Cx R) (q : ℤ)
 /-- The explicit ordinary comparison identifies the two insertion-of-one maps.
 There is no derived functor, K-flatness hypothesis, inverse limit or tower here.
 
-Source: Stacks Project, Modules on Sites, Tag 03EK, tensor cancellation identity;
-Modules on Sites, Tag 03CZ, lemma-adjointness-tensor-restrict.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 03EK, tensor cancellation identity; Modules on Sites, Tag 03CZ.
 
 Proof: evaluate the maps of complexes in degree q. The right unitor includes the
 (q,0) summand, and the single-complex contraction in scalarTensorComplexIso

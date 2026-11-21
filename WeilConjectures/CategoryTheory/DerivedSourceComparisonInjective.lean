@@ -21,7 +21,6 @@ public import Mathlib.Algebra.FiveLemma
 /-! # Detecting derived classes through an acyclic source comparison
 
 Source: Stacks Project, Tags 03FD and 015E, acyclic-resolution argument.
-(blueprint: lem-sbc-derived-source-comparison-injective).
 -/
 
 @[expose] public section
@@ -158,7 +157,6 @@ private theorem sourceExtMap_bijective
 
 /-- Termwise Hom comparison and acyclicity detect derived classes.
 Source: Stacks Project, Tag 03FD, first and second proof paragraphs; Tag 015E.
-(blueprint: lem-sbc-derived-source-comparison-injective).
 
 Proof: Choose an injective resolution I of Y in C. Exactness of V makes V(I)
 an exact resolution of V(Y). Its terms are acyclic for Hom(B,-) by hac.

@@ -17,8 +17,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # Unbounded sections and localization of a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6F and its K-injective proof
-(blueprint: lem-sfb-unbounded-sections-localization).
+Source: Stacks Project, Cohomology on Sites, Tag 0D6F and its K-injective proof.
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +49,7 @@ private lemma compUnit_app
   simp [Functor.rightDerivedFunctorCompUnit, hi]
 
 /-- Normalization of the derived composition comparison on a K-injective complex.
-Source: Stacks Project, Tag 0D6E, the compatibility with resolution units
-(blueprint: lem-sfb-unbounded-sections-localization). -/
+Source: Stacks Project, Tag 0D6E, the compatibility with resolution units. -/
 lemma compIso_objQ
     {A B E : Type*} [Category A] [Category B] [Category E]
     [Abelian A] [Abelian B] [Abelian E]
@@ -112,20 +110,18 @@ lemma compIso_objQ
   rfl
 
 /-- The common-universe module category is Grothendieck abelian by the proved
-small-site ring-sheaf theorem. Source: Stacks, Section 07A5
-(blueprint: lem-sfb-unbounded-sections-localization). -/
+small-site ring-sheaf theorem. Source: Stacks, Section 07A5. -/
 instance modulesGrothendieck : IsGrothendieckAbelian.{u} (ringedSiteModules.{u} R) :=
   SheafOfModules.isGrothendieckAbelian R
 
 /-- Evaluation at an object, followed by forgetting scalars.
-Source: Stacks, Tag 0D6F (blueprint: lem-sfb-unbounded-sections-localization). -/
+Source: Stacks, Tag 0D6F. -/
 abbrev evaluation (W : C) : ringedSiteModules.{u} R ⥤ AddCommGrpCat.{u} :=
   SheafOfModules.forget R ⋙ PresheafOfModules.evaluation R.obj (op W) ⋙
     forget₂ (ModuleCat.{u} (R.obj.obj (op W))) AddCommGrpCat.{u}
 
 /-- Restriction is additive sectionwise.
-Source: Stacks, Tags 03DJ and 08FI
-(blueprint: lem-sfb-unbounded-sections-localization). -/
+Source: Stacks, Tags 03DJ and 08FI. -/
 instance restrictionAdditive (W : C) : (SheafOfModules.overFunctor.{u} R W).Additive := by
   constructor
   intro M N f g
@@ -133,7 +129,7 @@ instance restrictionAdditive (W : C) : (SheafOfModules.overFunctor.{u} R W).Addi
   rfl
 
 /-- Termwise restriction of an unbounded complex.
-Source: Stacks, Tag 0D6F (blueprint: lem-sfb-unbounded-sections-localization). -/
+Source: Stacks, Tag 0D6F. -/
 abbrev restrictComplex (W : C) :=
   (SheafOfModules.overFunctor.{u} R W).mapHomologicalComplex (.up ℤ)
 
@@ -141,16 +137,14 @@ variable [HasDerivedCategory.{w} (ringedSiteModules.{u} R)]
   [HasDerivedCategory.{z} AddCommGrpCat.{u}]
 
 /-- Unbounded derived evaluation, with scalars forgotten after evaluation.
-Source: Stacks, Section 07A5 and Tag 0D6F
-(blueprint: lem-sfb-unbounded-sections-localization). -/
+Source: Stacks, Section 07A5 and Tag 0D6F. -/
 def derivedEvaluation (W : C) :
     DerivedCategory (ringedSiteModules.{u} R) ⥤ DerivedCategory AddCommGrpCat.{u} :=
   (evaluation R W).rightDerivedFunctor
 
 /-- Unbounded derived restriction. Since sectionwise restriction is exact, its total
 right derived functor is the usual termwise restriction on the derived category.
-Source: Stacks, Tags 03DJ, 08FI and 0D6F
-(blueprint: lem-sfb-unbounded-sections-localization). -/
+Source: Stacks, Tags 03DJ, 08FI and 0D6F. -/
 def derivedRestriction (W : C)
     [HasDerivedCategory.{w} (ringedSiteModules.{u} (R.over W))] :
     DerivedCategory (ringedSiteModules.{u} R) ⥤

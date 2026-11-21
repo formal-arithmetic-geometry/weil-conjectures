@@ -53,8 +53,7 @@ to an image of one of the supplied actual module cones. Conversely every such
 image is distinguished, since both functors are triangulated. This proves the
 required distinguished_iff, not just one implication. No boundedness of A or
 of modules is used; zero modules and zero cones are included.
-
-(blueprint: lem-sfb-sheaf-dg-standard-derived-structure-stage3) -/
+-/
 theorem sheaf_dg_standard_derived_structure (A : Algebra O) :
     Nonempty (DerivedStructure A) := by sorry
 

@@ -16,7 +16,6 @@ import Mathlib.Algebra.Homology.ShortComplex.Ab
 # Čech nerve acyclicity for injective module presheaves
 
 Source: Stacks Project, Cohomology on Sites, Tags 03FC, 03F5, 03AT.
-(blueprint: lem-sc-injective-presheaf-module-nerve-acyclic)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace CategoryTheory
 cochain degrees against an injective module presheaf. No covering condition is needed.
 Source: Stacks Project, Cohomology on Sites, proof of Tag 03FC, using Tags 03F5,
 03AS and 03AT; Hypercoverings, Tag 01GC, fibrewise nerve formulation.
-(blueprint: lem-sc-injective-presheaf-module-nerve-acyclic)
 
 Proof: apply the free `R`-module presheaf functor to the simplicial nerve of `f`.
 At each object, split its basis by the value of `f`. A fibre with no elements

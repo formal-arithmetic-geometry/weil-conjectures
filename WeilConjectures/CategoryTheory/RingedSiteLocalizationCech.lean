@@ -15,7 +15,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-! # The binary localization Cech sequence
 
 Source: Stacks Project, Tags 00EJ and 0998.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -472,8 +471,7 @@ Iterated localizations identify with localization at the product. The maps
 transported along these comparisons give i and p. No nonzero hypothesis
 is used, so the argument includes f=0, g=0 and f+g=0.
 
-Source: Stacks Project, algebra.tex, Tag 00EJ; algebraization.tex, Tag 0998.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebra.tex, Tag 00EJ; algebraization.tex, Tag 0998. -/
 theorem ringedSite_localization_cech
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) (U : C) (f g : R.obj.obj (op U)) :

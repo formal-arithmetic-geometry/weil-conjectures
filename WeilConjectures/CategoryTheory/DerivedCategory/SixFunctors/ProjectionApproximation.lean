@@ -22,7 +22,6 @@ namespace DerivedCategory
 /-- A natural transformation between triangulated functors with a common upper amplitude
 bound is invertible at an object admitting arbitrarily accurate approximations where it is
 invertible. Source: Stacks Project, Tag 0944, degreewise comparison in the proof.
-(blueprint: lem-sf-projection-approximation-comparison).
 
 Proof: in degree r choose an approximation with cone bound r-d-2. After either functor,
 the cone vanishes in degrees r-1 and r. The long exact sequences make both approximation

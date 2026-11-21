@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Limits.Final
 /-!
 # One directed reindexing for colimits and inverse limits
 
-Source: Stacks Project, Categories, Lemma 4.21.5 (Tag 0032), clauses (1) and (2)
-(blueprint: lem-weil-pbc-filtered-category-directed-cofinal).
+Source: Stacks Project, Categories, Lemma 4.21.5 (Tag 0032), clauses (1) and (2).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace CategoryTheory
 colimit cocones and all given limit cones on opposite diagrams. The functor `F` encodes the
 objects `x_a` and transition maps `φ_ab`; its identity and composition laws are precisely the
 system laws. Whiskering retains the given vertex and selects its legs at `F.obj a`.
-Source: Stacks Project, Categories, Lemma 4.21.5 (Tag 0032), clauses (1) and (2)
-(blueprint: lem-weil-pbc-filtered-category-directed-cofinal).
+Source: Stacks Project, Categories, Lemma 4.21.5 (Tag 0032), clauses (1) and (2).
 
 Proof:
 1. Apply `lem-weil-pbc-filtered-category-exists-directed-final` to obtain a nonempty directed

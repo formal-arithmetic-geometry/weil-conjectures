@@ -9,8 +9,6 @@ public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizati
 public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Localized comparison for a functor composed with a restricted pair operation
-
-Source: blueprint dual-Tate compatibility, Step 5, raw coefficient transport.
 -/
 
 @[expose] public noncomputable section
@@ -64,8 +62,6 @@ private def bilinear_pre {M N P M' N' : Type*}
   map_add' x y := by ext z; simp
 
 /-- A comparison between an operation and pullback extends over scalar-localized arrows.
-Source: blueprint dual-Tate compatibility, Step 5
-(blueprint: lem-pod-localized-pullback-pair-comparison).
 Proof: the source composite has the object formula obtained by composing the two
 object formulas. The target composite has the same formula because the induced
 pair functor sends each underlying integral pair to its integral pullback pair.

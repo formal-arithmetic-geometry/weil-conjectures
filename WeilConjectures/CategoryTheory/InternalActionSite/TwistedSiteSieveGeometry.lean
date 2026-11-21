@@ -10,9 +10,8 @@ public import WeilConjectures.CategoryTheory.InternalActionSite.InternalActionSi
 /-!
 # Labeled pullbacks and sieves of the internal action category
 
-Source: the agent-formulated categorical foundation motivated by main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3); Stacks Sites, Tags 00VH, 00Z4,
-00ZD for the site and topology axioms (blueprint: lem-sfb-twisted-site-sieve-geometry).
+Source: Stacks Sites, Tags 00VH, 00Z4,
+00ZD for the site and topology axioms.
 
 The existing `InternalActionSite.Object`, `Arrow`, `categoryStruct`, `category`,
 `projection`, `precoverage`, and `topology` give the actual construction. In particular,
@@ -245,9 +244,8 @@ private theorem generated_topology (J : Precoverage C) (X : Object K) (S : Sieve
 set_option linter.unusedVariables false in
 /-- Labeled pullbacks, normalization, sieve correspondence and generated covering topology.
 
-Source: agent-formulated categorical foundation for main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3); Stacks Sites 00VH, 00Z4, 00ZD
-for the background axioms (blueprint: lem-sfb-twisted-site-sieve-geometry).
+Source: Stacks Sites 00VH, 00Z4, 00ZD
+for the background axioms.
 The twisted construction itself is an agent lemma; no external theorem asserting this
 whole construction is claimed.
 

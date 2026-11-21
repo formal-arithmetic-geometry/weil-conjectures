@@ -26,7 +26,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-! # ColimitSiteRawAbelianSectionSheaf
 
 Source: Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-sheaf).
 -/
 
 @[expose] public section
@@ -39,10 +38,9 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 presentation construction and adjunction paragraphs; abelian colimits
 as in Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-sheaf).
 
 Proof: Fix an object Y of the limit category. A presentation is a stage t
 above i, an object W at that stage, and an equality V_t(W) = Y. Refinements

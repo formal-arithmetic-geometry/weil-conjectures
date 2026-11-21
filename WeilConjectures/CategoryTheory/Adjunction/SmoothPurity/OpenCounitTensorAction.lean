@@ -18,8 +18,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory.Adjunction
 
 /-- The symmetry-conjugate inverse open projection satisfies the counit square.
-Source: Stacks Tag 0GL1, extension by zero and tensor
-(blueprint: lem-pur-open-counit-tensor-action).
+Source: Stacks Tag 0GL1, extension by zero and tensor.
 
 Proof: the unit-defined right-coefficient projection satisfies the counit equation
 by transposition and the right triangle identity. Braidedness moves the swap through

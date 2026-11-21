@@ -17,7 +17,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The universal-property construction of arrow-indexed product transitions.
-(blueprint: lem-weil-pbc-arrow-product-transitions-existence)
 Source: Stacks Project, Sites, Tag 0EXZ, construction of canonical transition components.
 The proof uses preservation of products by continuous sheaf pushforward and the product
 universal property to construct a map with the displayed projection equations. -/

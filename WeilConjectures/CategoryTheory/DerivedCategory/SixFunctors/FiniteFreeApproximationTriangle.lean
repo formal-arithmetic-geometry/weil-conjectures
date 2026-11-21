@@ -41,7 +41,6 @@ namespace DerivedCategory
 /-- A finitely presented module over a Noetherian ring has bounded finite free
 approximations with arbitrarily low error cone. Source: Stacks Project, Tag 0944,
 finite free resolution and brutal truncation in the projection formula proof.
-(blueprint: lem-sf-finite-free-approximation-triangle).
 
 Proof: the module in degree zero is pseudo-coherent by the Noetherian cohomology
 criterion. Its m-pseudo-coherent approximation is bounded finite free and induces

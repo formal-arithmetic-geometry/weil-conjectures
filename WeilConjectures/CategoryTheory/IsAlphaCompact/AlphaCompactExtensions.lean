@@ -12,9 +12,6 @@ import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 
 /-! # Extension closure of Krause alpha-compactness
-
-Source: Krause (2001), Lemma 5, page 124.
-(blueprint: lem-sfb-alpha-compact-extensions)
 -/
 
 @[expose] public section
@@ -156,8 +153,6 @@ private theorem factorsOut_cone
   abel
 
 /-- Extensions of alpha-compact objects are alpha-compact.
-Source: Krause (2001), Lemma 5, page 124, preservation of (G4) under triangles.
-(blueprint: lem-sfb-alpha-compact-extensions)
 
 Proof: form the finite extension closure H of the canonical alpha-compact class.
 It is shift closed and triangulated, and all its objects are alpha-small.

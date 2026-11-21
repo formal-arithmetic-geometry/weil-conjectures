@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.ModuleInverseImageActionOfPresentations
 import WeilConjectures.CategoryTheory.SheafPullbackForgetComparison
 /-! # Restricting the abelian inverse-image adjunction to modules
 Source: Stacks Project, Modules on Sites, Tag 03D3.
-(auxiliary; not a blueprint node).
 -/
 @[expose] public section
 universe u
@@ -82,7 +81,6 @@ private theorem linear_of_adjunct_linear
 include hgen in
 /-- Identify module pullback after constructing its action and testing scalar maps on units.
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(auxiliary; not a blueprint node).
 Proof: The unit is linear by the action hypothesis. The scalar-pair testing property
 shows that an abelian map is linear whenever its adjunct is linear: compare its two
 scalar-action composites on pairs of unit sections. Lift the abelian inverse-image
@@ -204,7 +202,6 @@ private theorem inverseImage_underlying_of_actions
   exact hh.trans hu0
 /-- A ring unit presenting the set inverse image identifies the underlying module pullback.
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(auxiliary; not a blueprint node).
 Proof: the canonical abelian/set comparison is compatible with its unit. Pair this
 presentation with the given ring presentation. It both constructs scalar actions and
 shows that linearity can be tested on unit pairs. Apply the restricted adjunction

@@ -11,7 +11,6 @@ import WeilConjectures.RingTheory.ModuleLocalizationFilteredColimit
 /-! # The one-section Koszul localization colimit
 
 Source: Stacks Project, More on Algebra, Tag 0913.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -371,7 +370,6 @@ private def factorCoconeIsColimit
 /-- The fraction cocone of the one-section Koszul system is a colimit and preserves
 its degree-zero augmentation.
 Source: Stacks Project, More on Algebra, Tag 0913.
-(auxiliary; not a blueprint node).
 
 Proof: in degree zero use the identity cocone on the constant ring module.
 In degree one send a section a at stage m to a/s^(m+1). The identity

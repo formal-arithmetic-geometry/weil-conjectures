@@ -12,9 +12,7 @@ import Mathlib.Data.Fin.VecNotation
 /-!
 # Compatible local cones on finite families of hypercover simplices
 
-Source: Stacks Project, Hypercoverings, Tag 01GE, and the finite-support argument in
-lem-weil-pbc-ringed-hypercover-injective-augmentation.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Hypercoverings, Tag 01GE, and argument in.
 
 The cone functions retain the original labels before restriction. This permits the
 alternating cone identity even when distinct labels become equal on a covering member.
@@ -48,8 +46,7 @@ def HasLocalLifts (W : C) (U : SimplicialObject C)
               t ≫ U.map θ.op = f ≫ p Δ h θ
 
 /-- Two vertices with the same augmentation are locally the two faces of an edge.
-Source: Stacks Project, Tag 01GE, degree-one matching surjectivity.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 01GE, degree-one matching surjectivity. -/
 lemma local_edge (W : C) (U : SimplicialObject C)
     (e : U ⟶ (Functor.const SimplexCategoryᵒᵖ).obj W) (hcover : HasLocalLifts J W U e)
     (T : C) (a b : T ⟶ U _⦋0⦌) (hab : a ≫ e.app (op ⦋0⦌) = b ≫ e.app (op ⦋0⦌)) :
@@ -377,8 +374,7 @@ private lemma cone_faces_compatible (U : SimplicialObject C) (n : ℕ) (T V : C)
       simpa only [Category.assoc, hi', j', hj'] using congrArg (fun t ↦ a ≫ t) he
 
 /-- Finite simplices in a hypercover admit compatible local cones.
-Source: Stacks Project, Hypercoverings, Tag 01GE, finite-support contraction argument.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Hypercoverings, Tag 01GE contraction argument.
 
 Proof: A map from a lower-dimensional simplex misses a vertex, so factor it through
 that face. Two choices give the same component: factor through their common face

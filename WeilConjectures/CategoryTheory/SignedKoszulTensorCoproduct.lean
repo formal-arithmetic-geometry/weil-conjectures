@@ -10,9 +10,7 @@ import WeilConjectures.CategoryTheory.SignedKoszulTensorAssembly
 /-!
 # The coproduct property of negative Koszul pure tensors
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free tensor calculation.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free tensor calculation.
 -/
 
 @[expose] public section
@@ -28,10 +26,7 @@ namespace CategoryTheory
 inclusions form a coproduct in each degree. This concerns only the underlying
 graded object, not its differential.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul; the first step of
-lem-cbc-signed-koszul-tensor-coordinates.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E.
 
 Proof in words: first expand the graded object of the ordered negative Koszul
 complex by induction on its number of factors. The empty tensor is the single

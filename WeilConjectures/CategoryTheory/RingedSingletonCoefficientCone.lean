@@ -10,7 +10,6 @@ import WeilConjectures.CategoryTheory.RingedNegativeKoszulDuality
 /-! # The normalized singleton Koszul coefficient cone
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -231,9 +230,7 @@ private theorem singletonCoefficientIso_transition
 /-- The internal dual of the singleton positive Koszul complex is the negative scalar
 cone, with its normalized degree-zero unit and compatible second projections.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the finite free dual identification.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, the finite free dual identification.
 
 Proof: specialize negative Koszul duality to one factor. Remove the right tensor
 unit from the negative factor and identify its degrees -1 and 0 with the scalar

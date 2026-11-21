@@ -29,7 +29,6 @@ variable {C : Type u} [Category.{v} C] {T : Type v} {U : C}
 
 /-- The free Čech chain complex is exact in every positive degree, without a covering.
 Source: Stacks Project, Cohomology on Sites, Tags 03AT and 03F5.
-(blueprint: lem-weil-pbc-site-cech-free-complex-exact)
 
 Proof: evaluate at an object X. A basis element is a pair (t,a), with t an
 (n+1)-tuple of indices and a:X→W(n,t). Partition these elements by

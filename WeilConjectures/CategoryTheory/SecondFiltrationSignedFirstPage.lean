@@ -12,9 +12,8 @@ import WeilConjectures.CategoryTheory.SecondFiltrationRowCycleComparison
 
 /-! # The signed row comparison for one concrete quotient page
 
-Source: Stacks Project, Homology, Tag 0130, `lemma-ss-double-complex`, clauses 2 and 4,
+Source: Stacks Project, Homology, Tag 0130, clauses 2 and 4,
 and Tag 012K, the representative formula for a filtered-complex differential.
-(blueprint: lem-sp-second-filtration-signed-first-page).
 -/
 
 @[expose] public section
@@ -78,9 +77,8 @@ private theorem row_cycle_total_d
 representative differential carries the totalization sign. This concerns a single
 page with specified differential, without constructing a spectral sequence or
 asserting anything about higher pages.
-Source: Stacks Project, Homology, Tag 0130, `lemma-ss-double-complex`, clauses 2 and 4,
+Source: Stacks Project, Homology, Tag 0130, clauses 2 and 4,
 and Tag 012K, the displayed representative differential formula.
-(blueprint: lem-sp-second-filtration-signed-first-page).
 
 Proof. Write J for the flipped mapped bicomplex and n = s+r. The diagonal
 coprojection from J^(r,s) lifts to the filtration step L^s in degree n. Modulo

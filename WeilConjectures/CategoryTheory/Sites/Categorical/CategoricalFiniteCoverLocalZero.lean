@@ -453,7 +453,6 @@ all generalized sections killed by restriction to a finite basis cover.
 Source: Stacks Project, Section 7.10 (Tag 00W1), the filtered-colimit equality
 description before Lemma 7.10.8 and Theorem 7.10.10 (Tag 00WB), extended using
 AB5 to Grothendieck abelian coefficients.
-(blueprint: stage3-categorical-finite-cover-local-zero).
 
 Proof: AB5 computes the kernel of the plus unit as the filtered union of the
 kernels of the matching-family restriction maps. Each covering sieve has a finite

@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Types.Basic
 /-!
 # Retaining lifting witnesses in a posetal refinement
 
-Source: Stacks Project, Sites, Tag 00YP (auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP.
 -/
 
 @[expose] public section
@@ -28,8 +28,7 @@ namespace CategoryTheory
 /-- A preorder refinement of a partial order can be replaced by a partial order,
 retaining the embedding, separation and a prescribed lifting witness.
 
-Source: Stacks Project, Sites, Tag 00YP, relabelling the refinements before taking unions
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Sites, Tag 00YP, relabelling the refinements before taking unions.
 Proof: Choose representatives of the antisymmetrization, retaining each original index.
 The representatives are cofinal. Restrict the diagram to them. The canonical colimit map
 is an isomorphism, so the lift has a unique inverse image. Naturality and composition of

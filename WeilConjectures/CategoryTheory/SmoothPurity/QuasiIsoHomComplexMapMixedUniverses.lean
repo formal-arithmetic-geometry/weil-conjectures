@@ -58,7 +58,6 @@ set_option linter.privateModule false
 /-! # Quasi-isomorphism invariance of the Hom complex with smaller coefficient rings
 
 Source: Stacks Project, Tags 03DI, 03DJ, 08FI, 0A8Y, 0A94 and 0A95.
-(blueprint: lem-pur-rhom-well-defined-mixed-universes).
 The sectionwise proof uses rings in r and module sections in max u v r throughout.
 The private helpers generalize the existing independent-universe proofs without changing
 any existing interface or replacing the ring sheaf.

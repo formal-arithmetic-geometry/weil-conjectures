@@ -32,10 +32,7 @@ attribute [local instance] derived_hasCoproducts
 /-- Above a fixed rank, alpha-compact objects form an essentially small
 extension-closed subcategory.
 
-Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2;
-Krause (2001), Lemma 5, pages 124--125; Krause, Localization theory for
-triangulated categories, Section 6.3.
-(blueprint: new-sfb-derived-alpha-compact-classes)
+Source: Neeman, On the derived category of sheaves on a manifold, Theorem 0.2.
 
 Proof in words: choose the small shift-closed generating class G and its regular
 smallness bound beta from derived_exists_perfect_well_generators. For every

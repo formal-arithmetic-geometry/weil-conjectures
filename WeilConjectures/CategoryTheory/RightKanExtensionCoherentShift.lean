@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Functor.KanExtension.Basic
 /-! # Shift structures on right Kan extensions
 
 Source: Stacks Project, Derived Categories, Tag 05SU and Proposition Tag 05SE.
-(blueprint: lem-pur-right-kan-extension-coherent-shift).
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -176,9 +175,7 @@ private lemma kanShiftIso_add
 
 
 /-- A right Kan extension inherits coherent integer shifts from its two input functors.
-Source: Stacks Project, Derived Categories, Tag 05SU and Proposition Tag 05SE;
-the universal-property argument assembling the shift comparisons.
-(blueprint: lem-pur-right-kan-extension-coherent-shift).
+Source: Stacks Project, Derived Categories, Tag 05SU and Proposition Tag 05SE.
 
 Proof: For each integer n, precomposition with the shift equivalence on the source and
 postcomposition with the shift equivalence on the target preserve right Kan extensions.

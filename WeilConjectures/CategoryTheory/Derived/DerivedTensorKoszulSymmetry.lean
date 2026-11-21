@@ -10,9 +10,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 
 /-! # The canonical signed derived tensor symmetry
 
-Source: main-20261015, composition Steps 1--2; Stacks cohomology.tex,
-lemma-symmetric-monoidal-derived
-(blueprint: def-pur-localized-derived-tensor-braiding).
+Source: Stacks cohomology.tex.
 
 ## Main definitions
 
@@ -29,9 +27,7 @@ namespace CategoryTheory
 /-- The specified signed K-flat derived tensor braiding (a symmetry for symmetric
 coefficients). Its data is the existing
 localization braiding at Qh and quasi-isomorphisms, not a choice of braided structure.
-Source: main-20261015, composition Steps 1--2; Stacks cohomology.tex,
-lemma-symmetric-monoidal-derived; upstream DerivedMonoidal.braiding'
-(blueprint: def-pur-localized-derived-tensor-braiding). -/
+Source: Stacks cohomology.tex. -/
 def derivedTensorKoszulSymmetry
     (C : Type v) [Category.{w} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [MonoidalCategory C] [MonoidalClosed C] [MonoidalPreadditive C] [BraidedCategory C]

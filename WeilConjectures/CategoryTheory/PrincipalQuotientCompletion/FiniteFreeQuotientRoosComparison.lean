@@ -68,7 +68,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 /-! # Cochain comparisons for finite free principal quotient towers
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YT and 0941, and the
-balanced quotient calculation in lem-pur-finite-free-completion-exchange.
+balanced quotient calculation in.
 -/
 
 @[expose] public section
@@ -99,10 +99,7 @@ local instance (T : Sheaf J CommRingCat.{r}) (I : Type r) :
   PresheafOfModules.hasColimitsOfShape _ _
 
 /-- Cochain data for scalar extension of principal quotient towers. No derived
-completion functor occurs here. Naturality is required for all cochain maps.
-Source: the balanced quotient calculation and additive cone construction in steps
-1--5 of lem-pur-finite-free-completion-exchange
-(blueprint: lem-pur-finite-free-quotient-roos-comparison). -/
+completion functor occurs here. Naturality is required for all cochain maps. -/
 structure QuotientRoosExchange
     (F : SheafOfModules.DerivedChangeOfRingsCochainModel φ)
     (t : (SheafOfModules.unit
@@ -863,10 +860,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- Finite free scalar extension gives the balanced comparison of strict quotient
 Roos complexes, natural before localization.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YT and 0941; the explicit
-finite-basis, balancing and arithmetic calculations in steps 1--5 of
-lem-pur-finite-free-completion-exchange
-(blueprint: lem-pur-finite-free-quotient-roos-comparison).
+Source: Stacks Project, sites-cohomology.tex, Tags 06YT and 0941.
 
 Proof: After restriction of scalars, scalar extension is tensor with the underlying
 finite free R-module S, hence a finite direct sum of the identity. Faithful exact

@@ -23,7 +23,6 @@ namespace CategoryTheory.ClosedScalarHom
 /-- The five-bijection comparison respects the unit-adjusted inverse closed transpose.
 Only the displayed unit square is needed; no associativity or symmetry is assumed.
 Source: Stacks 07A6 and 08J9, evaluation-transpose calculation at the unit.
-(blueprint: lem-coef-closed-scalar-hom-unit-calculation).
 
 Proof: postcompose the defining five-bijection formula with the inverse comparison.
 The two comparison maps cancel, leaving the closed transpose of q. Apply the inverse

@@ -18,8 +18,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Objectwise Brown representability with small Hom sets
 
-Source: Stacks Project, Derived Categories, Proposition 0A8G, proof of
-`proposition-brown` (blueprint: lem-pc-brown-hom-representability-locally-small).
+Source: Stacks Project, Derived Categories, Proposition 0A8G.
 -/
 
 @[expose] public section
@@ -33,9 +32,8 @@ namespace CategoryTheory
 /-- For an exact coproduct-preserving functor with compactly generated source,
 `Hom(F(-), Y)` is representable. The Hom types may live in unrelated universes,
 provided both categories are locally small in the coproduct indexing universe.
-Source: Stacks Project, Derived Categories, Tag 0A8G, proof of `proposition-brown`,
-and Tag 0A8F, `lemma-brown`
-(blueprint: lem-pc-brown-hom-representability-locally-small).
+Source: Stacks Project, Derived Categories, Tag 0A8G,
+and Tag 0A8F.
 
 Proof: Replace both categories by their equivalent `ShrinkHoms` models with Hom
 sets in universe `w`. Transport the additive, zero, shift and triangulated structures

@@ -10,9 +10,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.ZeroObjects
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 
 /-! # Vanishing of the other summands after applying cohomology
-
-Source: latest blueprint lemma-integral-linear-character--2, isotypic
-splitting and the assertion that only the constant summand remains on constants.
 -/
 
 @[expose] public section
@@ -25,8 +22,6 @@ namespace CategoryTheory
 
 /-- A zero-preserving functor kills the other summands if the total object is zero
 or one summand inclusion becomes an isomorphism.
-Source: blueprint lemma-integral-linear-character--2, isotypic decomposition
-and constants paragraph (blueprint: lem-fd-cohomology-character-coproduct-glue).
 
 Proof: use the coproduct property to project onto the selected summand, with
 identity on that summand and zero on all others. If the total object becomes

@@ -37,7 +37,7 @@ public import WeilConjectures.CategoryTheory.TwistedActionRingedSiteData
 /-! # The ringed site of a site automorphism
 
 Source: Stacks, Sites, Tag 00W0 is motivation for the agent-formulated twisted
-construction (blueprint: def-sf-twisted-action-presentation-data).
+construction.
 
 The presentation below characterizes the integer-labelled arrows, the topology,
 the coefficient ring, the two restriction functors, and the orbit-sum adjunction.
@@ -55,40 +55,35 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace CategoryTheory.TwistedActionRingedSite
 
 /-- The objects are a copy of the objects of the original site.
-Source: the twisted variant of Stacks 00W0
-(blueprint: lem-sf-twisted-action-ringed-site). -/
+Source: the twisted variant of Stacks 00W0. -/
 structure Object (C : Type u) where
   /-- The original site object. -/
   base : C
 
 
 /-- The recorded tensor on morphisms, with the same resolved coefficient.
-Source: Stacks 03EK (blueprint: lem-sf-twisted-action-ringed-site). -/
+Source: Stacks 03EK. -/
 noncomputable abbrev tensorMap {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}} {M M' N N' : Modules R}
     (f : M ⟶ M') (g : N ⟶ N') : tensorObj M N ⟶ tensorObj M' N' := f ⊗ₘ g
 
 /-- Ordinary sheaf evaluation, from the recorded tensor-Hom adjunction.
-Source: Stacks 03EK and 04TT (blueprint: lem-sf-twisted-action-ringed-site). -/
+Source: Stacks 03EK and 04TT. -/
 noncomputable def evaluationMap {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}} (M N : Modules R) :
     tensorObj M (SheafOfModules.homObj (R := R) M N) ⟶ N :=
   (SheafOfModules.tensorHomEquiv (R := R) M
     (SheafOfModules.homObj (R := R) M N) N).symm (𝟙 _)
 
-/-- The full subcategory of endofunctor algebras with invertible structure map.
-Source: the fixed-pair dependency's exact Mathlib specialization
-(blueprint: lem-sf-twisted-action-ringed-site). -/
+/-- The full subcategory of endofunctor algebras with invertible structure map. -/
 abbrev Pairs {A : Type (u + 1)} [Category.{u} A] (T : A ⥤ A) :=
   ObjectProperty.FullSubcategory (fun M : Endofunctor.Algebra T ↦ IsIso M.str)
 
-/-- Forgetting a fixed pair uses the recorded algebra-forgetful construction.
-Source: the fixed-pair dependency (blueprint: lem-sf-twisted-action-ringed-site). -/
+/-- Forgetting a fixed pair uses the recorded algebra-forgetful construction. -/
 def forgetPairs {A : Type (u + 1)} [Category.{u} A] (T : A ⥤ A) : Pairs T ⥤ A :=
   ObjectProperty.ι _ ⋙ Endofunctor.Algebra.forget T
 
-/-- The isomorphism already contained in a fixed pair.
-Source: the fixed-pair dependency (blueprint: lem-sf-twisted-action-ringed-site). -/
+/-- The isomorphism already contained in a fixed pair. -/
 noncomputable def pairIso {A : Type (u + 1)} [Category.{u} A] {T : A ⥤ A}
     (M : Pairs T) : T.obj M.obj.a ≅ M.obj.a :=
   @asIso A _ _ _ M.obj.str M.property
@@ -100,8 +95,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 /-- Translation of modules along the chosen inverse, with scalars transported by a.
 This is the actual precomposition-and-restriction-of-scalars functor.
-Source: twisted Stacks 00W0; Stacks 03D6
-(blueprint: lem-sf-twisted-action-ringed-site). -/
+Source: twisted Stacks 00W0; Stacks 03D6. -/
 noncomputable def sigma : Modules R ⥤ Modules R :=
   SheafOfModules.pushforward
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map a.inv)
@@ -109,8 +103,7 @@ noncomputable def sigma : Modules R ⥤ Modules R :=
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- All the data and normalizations asserted by the twisted ringed-site lemma.
-Source: the agent-formulated twisted version of Stacks 00W0
-(blueprint: lem-sf-twisted-action-ringed-site).
+Source: the agent-formulated twisted version of Stacks 00W0.
 
 Powers of a chosen equivalence are associated only up to their displayed natural
 isomorphisms; the arrow-composition equation includes this necessary associator.
@@ -162,8 +155,7 @@ structure Site where
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The module and set presentations and the geometric restriction.
-Source: the agent-formulated twisted version of Stacks 00W0
-(blueprint: lem-sf-twisted-action-ringed-site). -/
+Source: the agent-formulated twisted version of Stacks 00W0. -/
 structure RestrictionPresentation extends Site J s R a where
   /-- The translation is an autoequivalence, not an arbitrary endofunctor. -/
   translation : Modules R ≌ Modules R
@@ -218,9 +210,7 @@ structure RestrictionPresentation extends Site J s R a where
   modulePullback : (modules.functor ⋙ forgetPairs (sigma J s R a)) ⊣ geometric.modules
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
-/-- Restriction together with its created limits, colimits, and exactness.
-Source: step 5 of the twisted action-site construction
-(blueprint: lem-sf-twisted-action-ringed-site). -/
+/-- Restriction together with its created limits, colimits, and exactness. -/
 structure ModulePresentation extends RestrictionPresentation J s R a where
   /-- Forgetting the module action is conservative. -/
   conservative : (forgetPairs (sigma J s R a)).ReflectsIsomorphisms
@@ -235,8 +225,7 @@ structure ModulePresentation extends RestrictionPresentation J s R a where
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The exact orbit-sum induction on the displayed action site.
-Source: the agent-formulated twisted version of Stacks 00W0
-(blueprint: lem-sf-twisted-action-ringed-site). -/
+Source: the agent-formulated twisted version of Stacks 00W0. -/
 structure OrbitPresentation extends ModulePresentation J s R a where
   /-- The orbit-sum LEFT adjoint. -/
   induction : Modules R ⥤ Pairs (sigma J s R a)
@@ -273,8 +262,7 @@ structure OrbitPresentation extends ModulePresentation J s R a where
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- The full presentation, including canonical tensor and internal Hom comparisons.
-Source: the agent-formulated twisted version of Stacks 00W0
-(blueprint: lem-sf-twisted-action-ringed-site). -/
+Source: the agent-formulated twisted version of Stacks 00W0. -/
 structure Presentation extends OrbitPresentation J s R a where
   /-- The restriction of the sheaf tensor is the ordinary sheaf tensor. -/
   tensor (M N : Modules coefficient) :

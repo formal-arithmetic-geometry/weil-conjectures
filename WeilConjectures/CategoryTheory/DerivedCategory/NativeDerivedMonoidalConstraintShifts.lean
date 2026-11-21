@@ -36,8 +36,7 @@ variable [Qh.HasDerivedMonoidalCategory (HomotopyCategory.quasiIso C (.up ℤ))]
 
 /-- The three native associator slots, the left unitor and the Koszul braiding commute
 with the native integer shift comparisons.
-Source: Stacks 0FPQ and 0FNH; blueprint `fix-prop-coherence.proof.md`, maps-used sentence.
-(blueprint: lem-pur-native-derived-monoidal-constraint-shifts).
+Source: Stacks 0FPQ and 0FNH.
 
 Proof: the native associator shift instances descend the signed cochain associator
 through K-flat localization in each slot, and transport along resolving isomorphisms.

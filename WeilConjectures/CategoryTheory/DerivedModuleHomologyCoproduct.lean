@@ -26,9 +26,8 @@ set_option backward.isDefEq.respectTransparency.types false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Every degree of derived module homology preserves an ambient coproduct.
-Source: Stacks Project, Injectives, Lemma 07D9, and the direct-sum calculation
+Source: Stacks Project, Injectives, Lemma 07D9, and calculation
 in the proof of Tag 09M1.
-(blueprint: lem-pc-derived-module-homology-coproduct)
 Proof: Choose complex representatives K_i of E_i using the localization functor.
 The termwise coproduct of the K_i represents their coproduct in the derived
 category by Lemma 07D9. Transport the specified colimit to this coproduct along

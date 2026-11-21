@@ -29,8 +29,7 @@ namespace CategoryTheory
 natural isomorphism in the original category. The proof transports all structures
 along `ULiftHom.equiv`, applies the common-universe Brown principle, and descends
 along the equivalence and the universe-lift equivalences on additive groups.
-Source: Stacks Project, Tag 0A8F, with explicit universe bookkeeping
-(blueprint: lem-pc-brown-representability-universe-transfer-aux).
+Source: Stacks Project, Tag 0A8F, with explicit universe bookkeeping.
 
 Proof: Construct the category `ULiftHom.{max w v vH} C` and transport zero objects,
 shifts, preadditivity, distinguished triangles, coproducts, compact generators, and

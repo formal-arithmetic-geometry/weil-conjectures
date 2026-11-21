@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteStageImageAmalgamation
 
 /-! Local sheaf condition for stage image.
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: aux-colimit-site-stage-image-local-isSheafFor).
 -/
 
 @[expose] public section
@@ -35,7 +34,7 @@ then refine once more so that representatives and their restrictions agree.  The
 filtered colimit of the stage matching-family equalizers is an equalizer because the
 cover is finite.  The stage adjunctions and the compatibility equation `hα` identify
 this equalizer with the stage-image sections, proving both existence and uniqueness
-of a glued section.  (blueprint: aux-colimit-site-stage-image-local-isSheafFor)
+of a glued section.
 -/
 theorem colimit_site_stage_image_local_isSheafFor
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})

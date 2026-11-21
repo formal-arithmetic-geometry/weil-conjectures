@@ -12,7 +12,6 @@ public import Mathlib.AlgebraicTopology.AlternatingFaceMapComplex
 Source: Stacks Project, Tag 0194. Only the coface relations are needed for the
 alternating differential to square to zero. The proof pairs two ways of deleting
 two positions, exactly as in Mathlib's alternating face-map complex.
-(blueprint: new-finite-cover-alternating-coface-square)
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ variable {C : Type*} [Category C] [Preadditive C]
 Source: Stacks Project, Tag 0194. Partition pairs `(i,j)` according to `j ≤ i`.
 The bijection `(i,j) ↦ (j,i+1)` pairs every term in the first part with a term
 in the complement. The coface identity identifies their composites and the
-incremented index reverses the sign, so the two sums cancel.
-(blueprint: new-finite-cover-alternating-coface-square) -/
+incremented index reverses the sign, so the two sums cancel. -/
 theorem alternatingCofaceSquare (A : ℕ → C)
     (δ : ∀ n : ℕ, Fin (n + 2) → (A n ⟶ A (n + 1)))
     (hδ : ∀ (n : ℕ) (i : Fin (n + 2)) (j : Fin (n + 3)) (h : j.val ≤ i.val),

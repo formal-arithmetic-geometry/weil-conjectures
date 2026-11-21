@@ -22,8 +22,7 @@ attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
   AlgebraicGeometry.etaleFieldActionForget₂
 
 /--
-Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
-(blueprint: lem-exc-discrete-continuous-rep-commgrp-compatible).
+Source: Stacks Project, Tag 04JQ.
 
 Proof: Given a commutative internal group object, transport its multiplication,
 unit, and inverse along Cartesian comparison maps to obtain an abelian group on the

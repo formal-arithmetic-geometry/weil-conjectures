@@ -18,9 +18,8 @@ import WeilConjectures.CategoryTheory.StrictRoosNormalization
 /-!
 # Natural strict Roos comparison with total derived inverse limit
 
-Source: Stacks Project, Cohomology on Sites, Tag 0941, lemma-derived-limit-is-ok,
-and the strict-cone naturality and augmentation refinement of its proof
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 0941,
+and the strict-cone naturality and augmentation refinement of its proof.
 
 The complex functor `F` has exactly the displayed shifted-cone objects. The coordinates
 `χ` are the canonical shift/cone coordinates, and determine its maps. This spells out
@@ -50,9 +49,8 @@ The equations pin the chain evaluation `a`, the derived evaluation `e`, the augm
 `b` and its ordinary-limit lift `λ`. The last clause gives the canonical transport between
 any two resolutions along a comparison map compatible up to homotopy.
 
-Source: Stacks Project, Tag 0941, lemma-derived-limit-is-ok, proof, with the strict-cone
-naturality and augmentation refinement in the blueprint
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 0941, proof, with the strict-cone
+naturality and augmentation refinement in the blueprint.
 
 Proof plan, following the eight steps of the node:
 1. Take the shifted cone of `1-s` on the termwise product. Strict maps act by the product

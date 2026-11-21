@@ -14,7 +14,6 @@ import Mathlib.Algebra.Homology.Functor
 /-! # Total-tensor augmentation components
 
 Source: Stacks Project, Tags 099M and 0913.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +32,7 @@ variable {E : Type*} [Category E] [Abelian E] [HasCountableCoproducts E]
   [MonoidalCategory E] [MonoidalPreadditive E] [MonoidalClosed E]
 
 /-- The degree-zero total-tensor quotient component, defined by coproduct descent.
-Source: Stacks Project, Tag 099M.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 099M. -/
 def quotientTensorComponent (P D : CochainComplex E ℤ)
     (e : D.X 0 ≅ 𝟙_ E) (F : E ⥤ E) (η : 𝟭 E ⟶ F) (t : ℤ) :
     (HomologicalComplex.mapBifunctor P D (curriedTensor E) (.up ℤ)).X t ⟶ F.obj (P.X t) :=
@@ -65,7 +63,6 @@ omit [MonoidalClosed E] in
 /-- The augmentation supported on Koszul degree zero is a cochain map when the
 incoming differential is killed by the reduction unit.
 Source: Stacks Project, Tag 099M, construction of the Koszul augmentation; Tag 0913.
-(auxiliary; not a blueprint node).
 
 Proof: test the equation on every total-tensor summand. Degree zero gives the
 naturality equation for the reduction unit, degree minus one gives the assumed

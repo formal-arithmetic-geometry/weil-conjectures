@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.Sites.PresheafCechExtEdgeKernel
 # Injectivity of the presheaf Čech descent edge map
 
 Source: Stacks Project, Cohomology on Sites, Tag 079Z; Hypercoverings, Tag 01GC.
-(blueprint: lem-sc-presheaf-cech-ext-edge-injective)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace CategoryTheory.Sheaf
 
 /-- The Čech edge map in degree q is injective when its other filtration pieces vanish.
 Source: Stacks Project, Cohomology on Sites, Tag 079Z, and Hypercoverings, Tag 01GC.
-(blueprint: lem-sc-presheaf-cech-ext-edge-injective)
 
 Proof: replace the target of f objectwise by its image, without changing the nerve.
 The free abelian augmented nerve of this surjection is exact by the fibrewise

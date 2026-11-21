@@ -106,9 +106,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
 
 /-! # Evaluation-normalized scalar Hom comparison for a site-perfect source
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08JJ, lemma-dual-perfect-complex;
-current blueprint lem-fix-operation-reduction.proof.md, paragraph 1.
-(blueprint: lem-fix-site-perfect-scalar-hom).
+Source: Stacks Project, sites-cohomology.tex, Tag 08JJ.
 
 The auxiliary data retain the existing scalar universal pair, fixed K-flat tensor
 models, and Koszul symmetry. The comparison is constructed by the specified transpose.
@@ -135,8 +133,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasDerivedCategory.{w} (RingedTensorModules.{c, v, r} J S)]
 
 /-- The canonical ordinary scalar tensor formula on pure generators, before localization.
-Source: Stacks 07A4; blueprint proof paragraph 1
-(blueprint: lem-fix-site-perfect-scalar-hom). -/
+Source: Stacks 07A4. -/
 def SiteScalarHomGeneratorFormula
     (D : SheafOfModules.DerivedChangeOfRingsCochainModel.{c, v, max c v r, w, w} φ)
     (κ : coefficientTotalTensor.{r, c, v} J R ⋙ D.E.mapHomologicalComplex (.up ℤ) ≅
@@ -158,8 +155,7 @@ def SiteScalarHomGeneratorFormula
 
 /-- The canonical derived tensor comparison is fixed by its K-flat counit square.
 This is the same representative characterization as ringed-topos tensor pullback.
-Source: Stacks 07A4; blueprint proof paragraph 1
-(blueprint: lem-fix-site-perfect-scalar-hom). -/
+Source: Stacks 07A4. -/
 def SiteScalarHomTensorNormalization
     (D : SheafOfModules.DerivedChangeOfRingsCochainModel.{c, v, max c v r, w, w} φ)
     (AR : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, r, w} J R))
@@ -191,8 +187,7 @@ attribute [local irreducible] SiteScalarHomGeneratorFormula SiteScalarHomTensorN
 The final two fields are exactly the canonical pure-tensor and K-flat counit squares
 of the published scalar tensor comparison, with no finite-free hypothesis on S.
 These data are existential conclusions of the main theorem, not extra hypotheses.
-Source: Stacks 07A4, 08J9 and 08JJ; blueprint proof paragraph 1
-(blueprint: lem-fix-site-perfect-scalar-hom). -/
+Source: Stacks 07A4, 08J9 and 08JJ. -/
 structure SitePerfectScalarHomData where
   /-- The existing universal derived change of rings, with actual ordinary extension. -/
   scalar : SheafOfModules.DerivedChangeOfRingsCochainModel.{c, v, max c v r, w, w} φ

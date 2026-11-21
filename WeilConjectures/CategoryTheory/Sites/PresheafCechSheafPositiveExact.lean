@@ -167,7 +167,6 @@ private theorem presheaf_nerve_positive_exact
 
 /-- The sheafified free Čech chain complex is exact in every positive degree.
 Source: Stacks Project, Tag 01GC, positive-degree part.
-(blueprint: lem-sc-presheaf-cech-sheaf-positive-exact)
 
 Proof: replacing a set map's target by its image leaves its nerve unchanged;
 `nerveMonoIso` constructs the isomorphism by the wide-pullback universal property.

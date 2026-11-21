@@ -24,7 +24,6 @@ open Limits
 
 /-- The derived module category is compactly generated in the modules' universe.
 Source: Stacks Project, Tag 0F5X, first paragraph, and Tag 07D9.
-(auxiliary; not a blueprint node)
 
 Proof in words: let P be the single complex in degree zero on the free left S-module
 of rank one, represented at the modules' universe by ULift S. It is K-projective.

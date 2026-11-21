@@ -17,7 +17,6 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-! # ColimitSiteRawAbelianSectionDiagram
 
 Source: Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-diagram).
 -/
 
 @[expose] public section
@@ -302,10 +301,9 @@ private theorem colimit_site_raw_comparison_unit_compatibility
   intro X
   exact NatTrans.congr_app (congrArg (fun k ↦ k.hom) hc) (op X)
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 presentation construction and adjunction paragraphs; abelian colimits
 as in Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-diagram).
 
 Proof: Construct B(t) as the left Kan extension of the underlying stage inverse-image
 sheaf along V(t.right).op, and β(t) as its universal unit. For b : t to t',

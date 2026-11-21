@@ -16,8 +16,7 @@ import WeilConjectures.CategoryTheory.SheafRingObjectsBijective
 /-!
 # Sectionwise ring objects and strict inverse functors
 
-Source: Stacks Project, Section 00YR and Proposition 00YV,
-`proposition-functoriality-algebraic-structures-topoi`.
+Source: Stacks Project, Section 00YR and Proposition 00YV.
 -/
 
 @[expose] public section
@@ -200,7 +199,6 @@ private theorem forward_full
 
 
 /-- Sectionwise ring structures and their strict inverse construction.
-(blueprint: lem-weil-pbc-sheaf-algebraic-structures-ring-core)
 Source: Stacks Project Section 00YR, rings as sextuples in Proposition 00YV.
 
 Proof in words:

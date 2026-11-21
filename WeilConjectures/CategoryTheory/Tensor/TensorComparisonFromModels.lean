@@ -12,7 +12,7 @@ import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.Ringed
 
 /-! # Associativity from four inverse tensor-model squares
 
-Source: Stacks 06YU, 0FPT; pasting and cancellation of tensor-model comparisons.
+Source: Stacks 06YU, 0FPT.
 -/
 
 @[expose] public section
@@ -21,8 +21,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- Four binary model squares and a localized chain square imply associativity.
-Source: Stacks 06YU, 0FPT
-(blueprint: lem-sf-tensor-comparison-from-models).
+Source: Stacks 06YU, 0FPT.
 
 Proof: use inverse tensorator naturality to paste the two left binary squares
 and the two right binary squares. The inverse lax tensorators satisfy the

@@ -15,8 +15,7 @@ public import Mathlib.CategoryTheory.Abelian.Exact
 /-!
 # Finite-filtration devissage through a triangulated derived functor
 
-Source: Stacks Project, Tags 0GKY, 06UQ, and 0152 (blueprint:
-lem-weil-pbc-etale-lisse-filtration-devissage).
+Source: Stacks Project, Tags 0GKY, 06UQ, and 0152.
 -/
 
 @[expose] public section
@@ -29,9 +28,8 @@ namespace CategoryTheory
 
 /-- Finite-filtration dévissage for cohomology under a triangulated functor.
 
-Source: Stacks Project, Tag 0GKY, label `lemma-loc-constant-shriek-rel-dim-1`,
+Source: Stacks Project, Tag 0GKY, label,
 proof final paragraph, using Tags 06UQ and 0152.
-(blueprint: lem-weil-pbc-etale-lisse-filtration-devissage).
 
 The proof proceeds by applying the weak-Serre cohomology triangulated-subcategory
 lemma, taking the zero step as the base case, obtaining distinguished triangles

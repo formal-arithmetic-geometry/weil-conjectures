@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.FilteredComplexPageHomology
 /-!
 # Positive pages of a filtered complex
 
-Source: Stacks Project, Homology, Tag 012K and Remark 12.18.2
-(blueprint: lem-sp-filtered-complex-positive-pages).
+Source: Stacks Project, Homology, Tag 012K and Remark 12.18.2.
 -/
 
 @[expose] public section
@@ -28,9 +27,7 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The positive-page sequence, without its initial graded complex.
-Source: Stacks Project, Homology, Tag 012K, proof of
-`lemma-spectral-sequence-filtered-complex`, and `remark-differential-object-selfmap`.
-(blueprint: lem-sp-filtered-complex-positive-pages).
+Source: Stacks Project, Homology, Tag 012K, and.
 
 Proof. For every positive integer r, form the actual cokernel of the boundary
 inclusion into the cycles, using filteredComplex_boundaries_le_cycles. The latter

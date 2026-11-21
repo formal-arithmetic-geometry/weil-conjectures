@@ -26,7 +26,6 @@ namespace CategoryTheory
 /-- A Grothendieck derived category admits an exact localization from a compactly
  generated triangulated category. Source: Stacks Project, Tag 0F5V and the compact
  generation observation in the first paragraph of Tag 0F5X.
- (auxiliary; not a blueprint node)
 
  Proof in words: choose a generator G of A and shrink its endomorphism ring
  (with the appropriate opposite for left modules) to universe w by local smallness.

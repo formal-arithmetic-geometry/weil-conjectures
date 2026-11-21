@@ -16,9 +16,7 @@ import WeilConjectures.CategoryTheory.Sites.PresheafCechVanishingCriterion
 /-!
 # Injective module sheaves are acyclic after forgetting to abelian sheaves
 
-Source: literature/stacks-project/sites-cohomology.tex, Lemma Tag 03FD
-(lemma-cohomology-modules-abelian-agree), proof, second paragraph (via Lemmas 03FC and 03F9)
-(blueprint: lem-sc-injective-module-abelian-acyclic-zariski).
+Source: literature/stacks-project/sites-cohomology.tex, Lemma Tag 03FD, proof, second paragraph (via Lemmas 03FC and 03F9).
 
 The proof uses the presheaf-nerve form of the Čech argument: fibre products are formed
 in presheaves, where they always exist, and the presheaf Čech vanishing criterion
@@ -36,9 +34,7 @@ namespace CategoryTheory
 
 /-- The underlying abelian sheaf of an injective sheaf of modules has no positive
 cohomology over any object of the site.
-Source: Stacks Project, `sites-cohomology.tex`, Tag 03FD
-(`lemma-cohomology-modules-abelian-agree`), proof, second paragraph, via Tags 03FC and 03F9.
-(blueprint: lem-sc-injective-module-abelian-acyclic-zariski)
+Source: Stacks Project, `sites-cohomology.tex`, Tag 03FD, proof, second paragraph, via Tags 03FC and 03F9.
 
 Proof: exact module sheafification makes `I.val` injective as a module presheaf
 (Tag 03FB). For every map of small-valued presheaves of sets, its free-module

@@ -9,8 +9,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-!
 # Removing the identity homotopy factor from the complex derived unit
-
-Source: the canonical quotient and right-derived unit constructions.
 -/
 
 @[expose] public section
@@ -21,8 +19,6 @@ open CategoryTheory
 namespace CategoryTheory.Functor
 
 /-- The explicit homotopy-factor comparison in the complex derived unit is identity.
-Source: the definitions of mapHomotopyCategoryFactors and rightDerivedFunctorUnitQ.
-(blueprint: lem-pbc-right-derived-complex-unit-normalization).
 Proof: the inverse homotopy-factor comparison is identity by construction. Its image
 under Qh is identity, so deleting that factor gives the canonical complex unit. -/
 theorem rightDerivedComplexUnitNormalization

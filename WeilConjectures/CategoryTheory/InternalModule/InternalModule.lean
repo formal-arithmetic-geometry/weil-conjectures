@@ -13,8 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.FiniteProducts
 /-!
 # Internal left modules over an external ring
 
-Source: Stacks Project, Tag 0DV5, proof of (2)-(3)
-(blueprint: def-pod-internal-module).
+Source: Stacks Project, Tag 0DV5, proof of (2)-(3).
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ namespace CategoryTheory
 variable (R : Type r) [Ring R] (C : Type u) [Category.{v} C] [HasFiniteProducts C]
 
 /-- Internal module operations and all module axioms, tested on generalized elements.
-Source: Stacks Tag 0DV5, proof of (2)-(3) (blueprint: def-pod-internal-module).
+Source: Stacks Tag 0DV5, proof of (2)-(3).
 Testing all `T ⟶ X` expresses the commutative diagrams, not merely global elements. -/
 structure InternalModule where
   X : C
@@ -59,20 +58,18 @@ namespace InternalModule
 variable {R C}
 
 /-- A map of internal modules commutes with all four operations.
-Source: Stacks Tag 0DV5, proof of (3) (blueprint: def-pod-internal-module). -/
+Source: Stacks Tag 0DV5, proof of (3). -/
 def IsHom (A B : InternalModule R C) (f : A.X ⟶ B.X) : Prop :=
   A.add ≫ f = prod.map f f ≫ B.add ∧ A.zero ≫ f = B.zero ∧
     A.neg ≫ f = f ≫ B.neg ∧ ∀ a : R, A.smul a ≫ f = f ≫ B.smul a
 
-/-- Identity maps preserve the operations. Source: Stacks Tag 0DV5
-(blueprint: def-pod-internal-module).
+/-- Identity maps preserve the operations. Source: Stacks Tag 0DV5.
 Proof: compose each operation with the identity and use the product identity law. -/
 theorem isHom_id (A : InternalModule R C) : IsHom A A (𝟙 A.X) := by
   simp only [IsHom, Category.comp_id, Category.id_comp, prod.map_id_id, and_self,
     implies_true]
 
-/-- Composites preserve the operations. Source: Stacks Tag 0DV5
-(blueprint: def-pod-internal-module).
+/-- Composites preserve the operations. Source: Stacks Tag 0DV5.
 Proof: substitute the two compatibility equations successively, use associativity,
 and use functoriality of the binary product map. -/
 theorem isHom_comp (A B D : InternalModule R C) (f : A.X ⟶ B.X) (g : B.X ⟶ D.X)
@@ -88,7 +85,7 @@ theorem isHom_comp (A B D : InternalModule R C) (f : A.X ⟶ B.X) (g : B.X ⟶ D
     rw [← Category.assoc, hf_smul, Category.assoc, hg_smul, ← Category.assoc]
 
 /-- The category of internal modules, with operation-preserving morphisms.
-Source: Stacks Tag 0DV5 (blueprint: def-pod-internal-module). -/
+Source: Stacks Tag 0DV5. -/
 instance category : Category (InternalModule R C) where
   Hom A B := { f : A.X ⟶ B.X // IsHom A B f }
   id A := ⟨𝟙 A.X, isHom_id A⟩
@@ -98,7 +95,7 @@ instance category : Category (InternalModule R C) where
   assoc _ _ _ := Subtype.ext (Category.assoc _ _ _)
 
 /-- Forget the internal module operations.
-Source: Stacks Tag 0DV5 (blueprint: def-pod-internal-module). -/
+Source: Stacks Tag 0DV5. -/
 def forget (R : Type r) [Ring R] (C : Type u) [Category.{v} C] [HasFiniteProducts C] :
     InternalModule R C ⥤ C where
   obj A := A.X

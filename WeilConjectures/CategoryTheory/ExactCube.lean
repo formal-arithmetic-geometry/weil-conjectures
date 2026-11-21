@@ -115,10 +115,6 @@ variable {C₀ C₁ C₂ C₃ D₀ D₁ D₂ D₃ : Type*}
   [PreservesFiniteLimits I'] [PreservesFiniteColimits I']
 
 /-- An exact functorial cube remains commutative on unbounded derived categories.
-Source: the final tensor-compatibility paragraph of the latest blueprint's
-lemma-sp-reduction--1; exact localization via
-`Functor.mapDerivedCategoryCompIso_assoc` and its whiskering identities.
-(blueprint: lem-sp-exact-derived-cube)
 Proof: form the two ordinary triple pastings. Their components agree by hc, hence
 natural-isomorphism extensionality identifies them. The left and right triple-comparison
 whiskering identities express the two derived pastings as the images of these ordinary

@@ -10,7 +10,6 @@ import WeilConjectures.CategoryTheory.SiteConstantModuleHomSurjective
 /-! # Local linearity of maps between finite constant module sheaves
 
 Source: Stacks Project, Modules on Sites, Tags 093T and 093U (3).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 /-- A morphism between restricted constant module sheaves, with finite source, is locally
 induced by a linear map over the original coefficient ring.
 Source: Stacks Project, Modules on Sites, Tags 093T and 093U (3).
-(auxiliary; not a blueprint node).
 
 Proof: Over a Noetherian ring the finite source module is finitely presented. The two
 constant-module sheafification constructions agree definitionally. Apply local

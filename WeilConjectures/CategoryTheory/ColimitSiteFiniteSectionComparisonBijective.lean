@@ -23,7 +23,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteFiniteSectionEventualZero
 
 Source: Stacks Project, Sites, Tag 0A35, independence of presentations and
 identification by adjunction; abelian extension via Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-finite-section-comparison-bijective).
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ private theorem arrow_map_apply_heq
 
 /-- Source: Stacks Project, Sites, Tag 0A35, the general-object presentation,
 sheaf equalizer and adjunction paragraphs; Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-finite-section-comparison-bijective).
 
 Proof: A presentation of a limit object Y is a triple (t, W, p), with
 t : Under i, W in F(t.right), and p : V(t.right)(W) = Y. A refinement

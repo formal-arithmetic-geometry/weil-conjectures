@@ -17,7 +17,7 @@ import Mathlib.RingTheory.Flat.EquationalCriterion
 /-! # Pseudo-coherent complexes of finite Tor dimension are perfect
 
 Source: literature/stacks-project/more-algebra.tex, More on Algebra, Lemma 15.76.2
-(Tag 0658) (blueprint: lem-pc-ring-pseudo-coherent-finite-tor-perfect).
+(Tag 0658).
 -/
 
 @[expose] public section
@@ -31,8 +31,7 @@ namespace DerivedCategory
 /-- A pseudo-coherent object `C` of `D(R)` with Tor amplitude in some interval `[a, b]`,
 `a ≤ b`, is isomorphic in `D(R)` to a bounded complex of finitely generated projective
 `R`-modules, i.e. it is perfect in the affine sense.
-Source: Stacks Project, More on Algebra, Lemma 15.76.2 (Tag 0658)
-(blueprint: lem-pc-ring-pseudo-coherent-finite-tor-perfect).
+Source: Stacks Project, More on Algebra, Lemma 15.76.2 (Tag 0658).
 
 Proof: Use the bounded-above finite-free model `P` supplied by pseudo-coherence,
 with upper bound `c`. Testing the Tor amplitude against `R` gives `H^i(P) = 0`

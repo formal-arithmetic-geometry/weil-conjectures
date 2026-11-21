@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Right-fraction localization of a dense full subcategory
 
-Source: Stacks Project, `derived.tex`, Tag 0GSL (blueprint:
-lem-trf-right-fraction-dense-subcategory).
+Source: Stacks Project, `derived.tex`, Tag 0GSL.
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ of the ambient and restricted categories.  The conclusion records both the
 restricted right calculus and the equivalence induced by the inclusion.
 -/
 /--
-(blueprint: lem-trf-right-fraction-dense-subcategory)
 
 Let `C` be a category and `W` a class of arrows containing identities and closed
 under composition, satisfying the right-fraction Ore and cancellation axioms.
@@ -51,11 +49,10 @@ Proof plan:
    denominator from the subcategory. This proves restricted cancellation and
    hence the first conclusion.
 3. The localization universal property
-   (`lem-weil-pbc-localization-universal-property`) gives `F` and a natural
+   gives `F` and a natural
    isomorphism `QB ⋙ F ≅ P.ι ⋙ Q`. Naturality identifies its conjugated Hom map
    on roofs with the corresponding ambient roof map.
-4. Represent an ambient localized arrow by a right fraction
-   (`lem-pc-right-fraction-representation`). Refine its source by a denominator
+4. Represent an ambient localized arrow by a right fraction. Refine its source by a denominator
    from the subcategory; the numerator and denominator then lie in the full
    subcategory and represent the same arrow. This proves Hom surjectivity.
 5. Represent two restricted arrows by roofs. If their ambient images agree,
@@ -64,7 +61,7 @@ Proof plan:
    common-refinement criterion to obtain equality. Only the common composite
    denominator must belong to `W`; the two refinement legs need not do so.
 6. Essential surjectivity of `QB`
-   (`lem-trf-localization-essentially-surjective`) transports these Hom
+   transports these Hom
    bijections by conjugation to every pair of objects of `E`. Thus `F` is full
    and faithful.
 7. Essential surjectivity of `Q` and a denominator from the subcategory show

@@ -40,8 +40,7 @@ private theorem action_unit {D : Type*} [Category D] [MonoidalCategory D]
 /-- An associative invertible tensor comparison has a compatible left-unit map
 if the image of the source unit is isomorphic to the target unit.
 
-Source: monoidal-category unit and associator identities; Stacks Project Tag 0FPT.
-(blueprint: lem-sf-semigroupal-left-unit).
+Source: Stacks Project Tag 0FPT.
 
 Proof: write a_X for the inverse tensor comparison at (1,X), followed by the
 mapped left unitor. Associativity and naturality identify these isomorphisms as

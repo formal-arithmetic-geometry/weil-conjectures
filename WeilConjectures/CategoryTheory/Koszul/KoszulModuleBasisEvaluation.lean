@@ -67,7 +67,6 @@ import all WeilConjectures.Algebra.Homology.Monoidal.Dual
 /-! # KoszulModuleBasisEvaluation for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-module-basis-evaluation).
 -/
 
 @[expose] public noncomputable section
@@ -231,8 +230,7 @@ Proof step 2: Apply tensorHomEquiv naturality for precomposition by b and then t
 This gives the displayed curryBasis formula.
 Proof step 3: For cochain evaluation use the existing signed curry-component formula on the
 evaluation map. Curry of evaluation is the identity. Apply uncurry and cancel the square of the
-integer sign to get the evaluation component identity.
-(blueprint: lem-f5-koszul-module-basis-evaluation). -/
+integer sign to get the evaluation component identity. -/
 theorem curryBasis (O : Sheaf J CommRingCat.{u}) {P X Y : Modules O}
     (b : one O ⟶ P) (g : ((tensor O).obj P).obj X ⟶ Y) :
     let := SheafOfModules.monoidalCategory O

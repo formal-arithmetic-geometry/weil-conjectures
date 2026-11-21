@@ -24,7 +24,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawAbelianSectionRelations
 /-! # ColimitSiteRawAbelianSectionEvaluation
 
 Source: Stacks Project, Sites, Tag 0A35; Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-evaluation).
 -/
 
 @[expose] public section
@@ -36,10 +35,9 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 presentation construction and adjunction paragraphs; abelian colimits
 as in Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-section-evaluation).
 
 Proof: Construct R as the chosen abelian colimit cocone of D. Put Y = V_i(U).
 For each t the cocone equation gives e_t : V_t(F(t.hom)(U)) = Y. Compose E_t,

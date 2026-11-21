@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Limits.Final.Type
 /-! # Construction of the third denominator Hom comparison
 
 Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause, dualized.
-(blueprint: lem-pur-derived-functor-triangles-05sc-third-value-core).
 -/
 
 @[expose] public section
@@ -54,9 +53,7 @@ private theorem bijective_retraction_hom_colimit
 /-- The third denominator diagram has a stage whose map to a candidate value induces
 Hom-colimit bijections.
 
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause, dualized;
-Categories, initial-functor colimit comparison in Tag 0A1T.
-(blueprint: lem-pur-derived-functor-triangles-05sc-third-value-core).
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause, dualized; Categories, initial-functor colimit comparison in Tag 0A1T.
 
 Proof: Extract the cones for the supplied values A and B and use 05SA to obtain
 lf : A -> B. Choose a retraction rY at sY. MS2 completes the first triangle arrow

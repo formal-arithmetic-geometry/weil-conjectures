@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteStageImageRefinement
 /-! # Every limit inverse-image section is represented by a stage section.
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-set-section-representatives).
 -/
 
 @[expose] public section
@@ -45,8 +44,7 @@ private theorem arrow_restrict_eq {C : Type u} [SmallCategory C]
   rw [eqToHom_op, eqToHom_map, Arrow.arrow_mk_comp_eqToHom]
   exact hf
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-set-section-representatives).
+/-- Source: Stacks Project, Sites, Tag 0A35.
 
 Every limit inverse-image section is represented by a stage section.
 

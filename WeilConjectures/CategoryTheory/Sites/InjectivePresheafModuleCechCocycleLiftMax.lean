@@ -77,7 +77,6 @@ private theorem liftModule_injective
 coefficient universe contains the hom and index universes. No topology is required.
 Source: Stacks Project, Cohomology on Sites, proof of Tag 03FC after Tag 03FB,
 using Tags 03AS, 03F5 and 03AT.
-(blueprint: lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift-max)
 
 Proof: Replace C by ULiftHom.{w} C, whose homs lie in max v w. Precompose R and M
 with its down functor. This preserves injectivity: pull an extension problem back

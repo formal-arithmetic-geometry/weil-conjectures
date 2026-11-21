@@ -15,7 +15,6 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.defeqAttrib.useBackward true
 
 /-- Intermediate construction of the lifted commutative-group adjunction.
-(blueprint: lem-weil-pbc-lifted-comm-group-branch)
 Source: Stacks Project, Proposition 00YV, proof of the abelian-group part.
 
 Proof: use `Adjunction.mapCommGrp` with the canonical braided structures induced by

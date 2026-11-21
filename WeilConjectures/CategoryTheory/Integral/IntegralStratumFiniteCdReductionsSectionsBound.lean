@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortEx
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 /-! Bounded-heart devissage for the continuous integral coefficient.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
 -/
 
 @[expose] public noncomputable section
@@ -30,11 +29,8 @@ attribute [local instance 20000] HasDerivedCategory.ofIsGrothendieckAbelian
 namespace CategoryTheory
 
 /-- Bounded-heart section bound for an arbitrary bounded classical local-torsion complex.
-Source: blueprint latest, `part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-the dual-tensor and filtration steps; Stacks Tag 08J5. The proof applies
+Source: Stacks Tag 08J5. The proof applies
 bounded-heart amplitude to the heart bound and the triangulated derived sections functor.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
 
 The hypothesis `hD` pins `D` to `stratumModuleDual _ S L = RHom(L[0], A[0])`.  Since
 `L` has a finite constant local model, `L[0]` is dualizable (local length-one free

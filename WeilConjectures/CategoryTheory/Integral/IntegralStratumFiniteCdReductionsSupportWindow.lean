@@ -18,9 +18,6 @@ import Mathlib.CategoryTheory.Comma.Arrow
 
 /-!
 # Supported cohomology of a finite integral reduction
-
-Source: blueprint latest, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-the first two finite-reduction steps.
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +37,7 @@ open scoped CategoryTheory.Obj
 
 namespace CategoryTheory
 
-/-- The continuous coefficient map, with both rings retained for dependent transport.
-Source: actual quotient projection in the item node. -/
+/-- The continuous coefficient map, with both rings retained for dependent transport. -/
 private def coefficientArrow (A B : Type u) [CommRing A] [CommRing B]
     (tA : TopologicalSpace A) (tB : TopologicalSpace B)
     (hA : @IsTopologicalRing A tA _) (hB : @IsTopologicalRing B tB _)
@@ -69,8 +65,7 @@ private theorem coefficientArrow_eq (A B : Type u) [CommRing A] [CommRing B]
   subst tB'
   rfl
 
-/-- The two norm presentations give the same actual positive quotient arrow.
-Source: the spectral-norm coefficient comparison and the finite quotient calculation. -/
+/-- The two norm presentations give the same actual positive quotient arrow. -/
 private theorem reductionArrow_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) :
     Arrow.mk (Mon.ofHom (DerivedNakayama.reductionRing l E (n + 1))) =
@@ -98,9 +93,7 @@ private theorem reductionArrow_eq (l : ℕ) [Fact l.Prime] (E : Type u) [Field E
 /-- The open restriction of supported sections of a finite reduction has cohomology
 in `[-1,c+1]`, and its underlying cohomology sheaves are classical local torsion.
 
-Source: blueprint latest, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-first two finite-reduction steps; Stacks Tags 0A45, 09B1 and 09AA.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions-support-window).
+Source: Stacks Tags 0A45, 09B1 and 09AA.
 
 Proof: use the length-one uniformizer resolution to identify the scalar restriction
 of the positive quotient reduction with the cone of the uniformizer power on N[0].

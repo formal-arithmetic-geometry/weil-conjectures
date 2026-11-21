@@ -81,8 +81,7 @@ private theorem presieve_eq_of_arrow_eq
 /-- A finite family of prescribed covering pullback squares admits a common stage presentation.
 The conclusion supplies a stage cover and pullback squares, without asserting that their first
 projections cover. In particular no stage base-change or composition axiom is assumed.
-Source: Stacks Project, Sites, Tag 09YL, finite-diagram and pullback paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-covering-pullback-stage-presentation)
+Source: Stacks Project, Sites, Tag 09YL and pullback paragraphs.
 
 Proof: The equality himage represents the indexed family by the finite stage presieve R₀.
 For each f i choose a representing arrow in R₀, including its endpoint equalities. Conversely,

@@ -22,7 +22,7 @@ namespace CategoryTheory
 /-! # Equivalence of sites gives morphisms of sites
 
 Source: Stacks Project, Sites, Definitions 00VH, 00WV, 00X1 and Lemmas 00WW,
-00WX (blueprint: lem-weil-pbc-site-equivalence-is-morphism-of-sites).
+00WX.
 -/
 
 private theorem covering_map_iso_id
@@ -63,8 +63,7 @@ continuity follows; `p^s`, `p'^s` are quasi-inverse via Lemma 00WW and `epsilon`
 right adjoint `p'^s`, so preserves limits; `p'` by symmetry.
 
 Source: Stacks Project, Sites, Definitions 00VH, 00WV, 00X1 and Lemmas 00WW,
-00WX; Categories, Definitions 001J and 0034.
-(blueprint: lem-weil-pbc-site-equivalence-is-morphism-of-sites)
+00WX.
 -/
 theorem site_equivalence_is_morphism_of_sites
     {A C : Type u} [SmallCategory A] [SmallCategory C]

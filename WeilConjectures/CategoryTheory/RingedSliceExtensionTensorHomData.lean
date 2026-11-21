@@ -628,8 +628,7 @@ end RingedSliceTensor
 /--
 The Hom-equivalence family underlying the ringed-slice projection formula.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8I, lemma-j-shriek-and-tensor.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Modules on Sites, Tag 0E8I.
 
 Proof: Construct the extension adjunction by evaluating a map out of the direct sum
 on each summand; its inverse sums the components of a map to the restricted sheaf.

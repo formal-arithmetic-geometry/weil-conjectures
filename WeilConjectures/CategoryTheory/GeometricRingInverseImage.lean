@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.RouteInverseImageConstantComparison
 /-! # Ring transport along a geometric inverse image
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tag 03D2.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ open CategoryTheory
 namespace SheafOfModules
 /-- The ring-only part of algebraic inverse image, specified on arbitrary generalized
 sections. It includes no module functor or module operation.
-Source: Stacks Project, Sites, Tag 00YV (rings as algebraic objects).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Sites, Tag 00YV (rings as algebraic objects). -/
 structure RingInverseImage
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]
@@ -119,7 +117,6 @@ private theorem transport_constant
 /-- Coherent inverse image of ring sheaves, including the natural constant comparison.
 Source: Stacks Project, Sites, Tag 00YV (ring objects and constant objects), and
 Modules on Sites, Tag 03D2.
-(auxiliary; not a blueprint node).
 
 Proof: identify a ring sheaf with a commutative ring object in the category of set
 sheaves. Apply L to its underlying object and every operation, using the inverse

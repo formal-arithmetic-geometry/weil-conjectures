@@ -15,9 +15,7 @@ import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
 /-!
 # Tensor action of the unit-defined left-adjoint projection
 
-Source: Stacks Project, Cohomology on Sites, Tag 0GL1, and Modules on Sites, Tag 0E8I,
-`lemma-j-shriek-and-tensor`; the abstract coherence calculation is agent-written
-(blueprint: lem-pur-unit-adjunct-tensor-action).
+Source: Stacks Project, Cohomology on Sites, Tag 0GL1, and Modules on Sites, Tag 0E8I.
 
 The map used below is the existing `Adjunction.projectionMap`, with the forward tensorator
 of the strong monoidal right adjoint. Its defining transpose is the unit tensored with
@@ -35,8 +33,7 @@ open MonoidalCategory
 /-- The unit-defined projection of a left adjoint to a strong monoidal functor is natural,
 associative as a tensor action, and compatible with the adjunction counit.
 
-Source: the agent-written abstract calculation underlying Stacks Tags 0GL1 and 0E8I,
-`lemma-j-shriek-and-tensor` (blueprint: lem-pur-unit-adjunct-tensor-action).
+Source: the agent-written abstract calculation underlying Stacks Tags 0GL1 and 0E8I.
 
 Write `m` for the forward tensorator of `Q`, and `k` for the displayed components of
 `projectionMap`. The node's inverse comparison `mu` is the inverse of `m`.

@@ -14,9 +14,7 @@ import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 /-!
 # Deriving an exact localization sequence
 
-Source: Stacks, Tags 0152, 070I and 070K; the construction used in blueprint
-`proposition-extension-zero-restriction-closed-subscheme`, proof (1)
-(blueprint: lem-sf-exact-localization-derived-triangle).
+Source: Stacks, Tags 0152, 070I and 070K.
 -/
 
 @[expose] public section
@@ -41,7 +39,7 @@ variable {E : Type*} [Category* E]
 
 /-- The natural transformation `L ⟶ M` obtained by transporting the first arrows of a
 family of short complexes along natural identifications.
-Source: Stacks, Tag 0152 (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 0152. -/
 noncomputable def transportShortComplexMor₁
     (hn : ∀ {X Y} (f : X ⟶ Y), ∃ g : T X ⟶ T Y,
       L.map f ≫ (p Y).hom = (p X).hom ≫ DerivedCategory.Q.map g.τ₁ ∧
@@ -61,7 +59,7 @@ noncomputable def transportShortComplexMor₁
 
 /-- The natural transformation `M ⟶ N` obtained by transporting the second arrows of a
 family of short complexes along natural identifications.
-Source: Stacks, Tag 0152 (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 0152. -/
 noncomputable def transportShortComplexMor₂
     (hn : ∀ {X Y} (f : X ⟶ Y), ∃ g : T X ⟶ T Y,
       L.map f ≫ (p Y).hom = (p X).hom ≫ DerivedCategory.Q.map g.τ₁ ∧
@@ -81,7 +79,7 @@ noncomputable def transportShortComplexMor₂
 
 /-- The natural connecting transformation `N ⟶ L[1]` obtained by transporting the
 connecting maps of a family of short exact sequences of complexes.
-Source: Stacks, Tag 0152 (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 0152. -/
 noncomputable def transportShortComplexMor₃
     (ht : ∀ X, (T X).ShortExact)
     (hn : ∀ {X Y} (f : X ⟶ Y), ∃ g : T X ⟶ T Y,
@@ -105,7 +103,7 @@ noncomputable def transportShortComplexMor₃
     simp only [← Functor.map_comp, hg₁, Iso.inv_hom_id_assoc]
 
 /-- The transported arrows form distinguished triangles.
-Source: Stacks, Tag 0152 (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 0152. -/
 theorem transportShortComplex_distinguished
     (ht : ∀ X, (T X).ShortExact)
     (hn : ∀ {X Y} (f : X ⟶ Y), ∃ g : T X ⟶ T Y,
@@ -165,7 +163,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
 /-- Every derived object is isomorphic to the localization of a K-injective complex,
 given a supply of K-injective resolutions.
-Source: Stacks, Tag 070I (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 070I. -/
 theorem exists_isKInjective_derivedCategory_iso
     (h : ∀ K : CochainComplex C ℤ,
       ∃ (J : CochainComplex C ℤ) (s : K ⟶ J), J.IsKInjective ∧ QuasiIso s)
@@ -176,7 +174,7 @@ theorem exists_isKInjective_derivedCategory_iso
   exact ⟨J, hJ, ⟨(asIso (DerivedCategory.Q.map s)).symm ≪≫ e⟩⟩
 
 /-- A chosen K-injective complex representing a derived object.
-Source: Stacks, Tag 070I (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 070I. -/
 noncomputable def kInjectiveRepresentative
     (h : ∀ K : CochainComplex C ℤ,
       ∃ (J : CochainComplex C ℤ) (s : K ⟶ J), J.IsKInjective ∧ QuasiIso s)
@@ -190,7 +188,7 @@ instance kInjectiveRepresentative_isKInjective
   (exists_isKInjective_derivedCategory_iso h K).choose_spec.1
 
 /-- The chosen identification of the localized K-injective representative.
-Source: Stacks, Tag 070I (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 070I. -/
 noncomputable def kInjectiveRepresentativeIso
     (h : ∀ K : CochainComplex C ℤ,
       ∃ (J : CochainComplex C ℤ) (s : K ⟶ J), J.IsKInjective ∧ QuasiIso s)
@@ -205,7 +203,7 @@ variable (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteCo
 
 /-- The termwise short complex `F(S(G J)) → G J → H(G J)` given by `a` and `b`, where `J`
 is the chosen K-injective representative.
-Source: Stacks, Tag 0152 (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 0152. -/
 noncomputable def exactLocalizationShortComplex (a : S ⋙ F ⟶ 𝟭 D) (b : 𝟭 D ⟶ H)
     (hab : ∀ M, a.app M ≫ b.app M = 0) (K : DerivedCategory C) :
     ShortComplex (CochainComplex D ℤ) :=
@@ -220,7 +218,7 @@ noncomputable def exactLocalizationShortComplex (a : S ⋙ F ⟶ 𝟭 D) (b : �
 
 /-- The identification of `F` applied to `K` with the first term of the short complex, via
 the counit `S(G J) ≅ J`.
-Source: Stacks, Tag 070K (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 070K. -/
 noncomputable def exactLocalizationIsoLeft (K : DerivedCategory C) :
     F.mapDerivedCategory.obj K ≅ DerivedCategory.Q.obj
       (((S ⋙ F).mapHomologicalComplex (.up ℤ)).obj
@@ -232,7 +230,7 @@ noncomputable def exactLocalizationIsoLeft (K : DerivedCategory C) :
         (kInjectiveRepresentative h K)))).symm
 
 /-- The computation of the right derived functor of `G` on the K-injective representative.
-Source: Stacks, Tag 070K (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 070K. -/
 noncomputable def exactLocalizationIsoMiddle (K : DerivedCategory C) :
     (G.rightDerivedFunctorOfQuasiIsoResolutions h).obj K ≅ DerivedCategory.Q.obj
       ((G.mapHomologicalComplex (.up ℤ)).obj (kInjectiveRepresentative h K)) :=
@@ -241,7 +239,7 @@ noncomputable def exactLocalizationIsoMiddle (K : DerivedCategory C) :
     G.rightDerivedFunctorOfQuasiIsoResolutionsObjIso h (𝟙 (kInjectiveRepresentative h K))
 
 /-- The identification of `H` applied to `RG(K)` with the third term of the short complex.
-Source: Stacks, Tag 070K (blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tag 070K. -/
 noncomputable def exactLocalizationIsoRight (K : DerivedCategory C) :
     (G.rightDerivedFunctorOfQuasiIsoResolutions h ⋙ H.mapDerivedCategory).obj K ≅
       DerivedCategory.Q.obj ((H.mapHomologicalComplex (.up ℤ)).obj
@@ -252,8 +250,7 @@ noncomputable def exactLocalizationIsoRight (K : DerivedCategory C) :
 set_option backward.isDefEq.respectTransparency false in
 /-- The three identifications are natural: every derived morphism is induced by a
 morphism of short complexes.
-Source: Stacks, Tags 070I and 070K
-(blueprint: lem-sf-exact-localization-derived-triangle).
+Source: Stacks, Tags 070I and 070K.
 
 Proof: compute morphisms on K-injectives, where localization is fully faithful (070I),
 lift to a cochain map `c` of representatives and apply `G` termwise. The three squares
@@ -346,8 +343,7 @@ theorem exactLocalizationShortComplex_naturality (a : S ⋙ F ⟶ 𝟭 D) (b : �
 sequence: on `K` it is `a` applied termwise to `G(J)` for the chosen K-injective
 representative `J` of `K`, transported along `exactLocalizationIsoLeft` and
 `exactLocalizationIsoMiddle`.
-Source: Stacks, Tags 0152 and 070K
-(blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tags 0152 and 070K. -/
 noncomputable def exactLocalizationDerivedMor₁ (a : S ⋙ F ⟶ 𝟭 D) (b : 𝟭 D ⟶ H)
     (hab : ∀ M, a.app M ≫ b.app M = 0) :
     F.mapDerivedCategory ⟶ G.rightDerivedFunctorOfQuasiIsoResolutions h :=
@@ -359,8 +355,7 @@ noncomputable def exactLocalizationDerivedMor₁ (a : S ⋙ F ⟶ 𝟭 D) (b : �
 /-- The canonical natural transformation `RG ⟶ H ∘ RG` of the derived exact localization
 sequence: on `K` it is `b` applied termwise to `G(J)`, transported along
 `exactLocalizationIsoMiddle` and `exactLocalizationIsoRight`.
-Source: Stacks, Tags 0152 and 070K
-(blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tags 0152 and 070K. -/
 noncomputable def exactLocalizationDerivedMor₂ (a : S ⋙ F ⟶ 𝟭 D) (b : 𝟭 D ⟶ H)
     (hab : ∀ M, a.app M ≫ b.app M = 0) :
     G.rightDerivedFunctorOfQuasiIsoResolutions h ⟶
@@ -373,8 +368,7 @@ noncomputable def exactLocalizationDerivedMor₂ (a : S ⋙ F ⟶ 𝟭 D) (b : �
 /-- The canonical connecting transformation `H ∘ RG ⟶ F[1]`: on `K` it is the connecting
 map of the termwise short exact sequence `F(S(G J)) → G J → H(G J)`, transported along
 `exactLocalizationIsoRight` and `exactLocalizationIsoLeft`.
-Source: Stacks, Tags 0152 and 070K
-(blueprint: lem-sf-exact-localization-derived-triangle). -/
+Source: Stacks, Tags 0152 and 070K. -/
 noncomputable def exactLocalizationDerivedMor₃ (a : S ⋙ F ⟶ 𝟭 D) (b : 𝟭 D ⟶ H)
     (hab : ∀ M, a.app M ≫ b.app M = 0)
     (hseq : ∀ M, (ShortComplex.mk (a.app M) (b.app M) (hab M)).ShortExact) :
@@ -408,8 +402,7 @@ theorem exactLocalizationDerivedMor₂_app (a : S ⋙ F ⟶ 𝟭 D) (b : 𝟭 D 
 the canonical maps `exactLocalizationDerivedMor₁`, `exactLocalizationDerivedMor₂` and
 `exactLocalizationDerivedMor₃`, induced by `a`, `b` and the connecting map of Tag 0152,
 form a distinguished triangle `F(K) → RG(K) → H(RG(K)) → F(K)[1]` for every `K`.
-Source: Stacks, Tags 0152, 070I and 070K; blueprint proof (1)
-(blueprint: lem-sf-exact-localization-derived-triangle).
+Source: Stacks, Tags 0152, 070I and 070K.
 
 Proof: Choose a K-injective representative J of K. Apply `a` and `b` in each degree to
 G(J). The supplied short exact sequences form a short exact sequence of complexes. Its

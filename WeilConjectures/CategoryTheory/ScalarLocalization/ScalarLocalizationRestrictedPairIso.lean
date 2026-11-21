@@ -11,8 +11,6 @@ public import Mathlib.CategoryTheory.Products.Basic
 import Mathlib.CategoryTheory.EqToHom
 
 /-! # Localizing natural isomorphisms on a restricted contravariant pair domain
-
-Source: blueprint dual-Tate compatibility, Step 5, raw coefficient transport.
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +23,6 @@ open CategoryTheory Opposite TensorProduct
 namespace CategoryTheory.ScalarLocalization
 
 /-- A prescribed integral comparison extends uniquely to the restricted localized pair domain.
-Source: blueprint dual-Tate compatibility, Step 5
-(blueprint: lem-pod-restricted-pair-localization-iso).
 Proof: conjugate each localized integral component and inverse by the given object
 identifications. For naturality, use the two separately additive action formulas
 and induct on both tensor Hom groups. Zero and sum cases follow from additivity.

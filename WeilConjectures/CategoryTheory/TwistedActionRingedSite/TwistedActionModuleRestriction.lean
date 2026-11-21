@@ -298,8 +298,7 @@ private theorem restriction_essSurj [HasPullbacks C] :
 /-- Module restriction for a specified underlying twisted action site.
 
 Source: original steps 3 and 4 of the agent-formulated twisted variant of Stacks 00W0,
-`sites.tex`, proposition-sheaves-on-group, together with Stacks 03CV
-(blueprint: lem-sf-twisted-action-module-restriction).
+`sites.tex`, together with Stacks 03CV.
 
 Proof: restrict a coefficient module to degree-zero arrows and transport its scalars
 through coefficientRestriction. Apply its restriction along the minus-one generator,

@@ -178,7 +178,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.CompactConstruc
 /-!
 # Hypotheses of Brown representability
 
-Source: blueprint latest, sec-six-functors-basics/sk-lem-brown-hypotheses/_section.md.
 The main theorem assumes finite ℓ-cohomological dimension of the base field, as the blueprint's
 compactness input does (proposition-compactness-finite-coefficients: "finite type over the base
 field, so all cd_ℓ are finite"); the former arbitrary-field statement was false. The bundle lives
@@ -290,12 +289,8 @@ characteristic different from the coefficient prime, for exactly the admissible 
 `IsLocalizingAdmissibleCoefficient` specifies the six concrete coefficient objects up to
 ring-object isomorphism, including the discrete finite rings killed by a power of `ℓ`.
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-lem-brown-hypotheses/_section.md and sk-lem-brown-hypotheses.proof.md
-(blueprint: lemma-hypotheses-brown-representability).
-
 Proof: First unpack lemma-hypotheses-brown-representability--1: the datum is a prime ℓ, a field of
-characteristic p > 0 distinct from ℓ with cd_ℓ(k) < ∞ (definition-cohomological-dimension), and a
+characteristic p > 0 distinct from ℓ with cd_ℓ(k) < ∞, and a
 separated finite-type k-scheme X; by Stacks 0F10 all cd_ℓ in the setting are then finite.
 Unpack definition-localizing-subcategory: Λ is one of the six specified condensed rings;
 the ambient category is the unbounded derived category of modules over Λ_X;

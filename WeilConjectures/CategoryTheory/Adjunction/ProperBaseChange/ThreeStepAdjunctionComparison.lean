@@ -28,8 +28,6 @@ variable {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type*}
 
 /-- Coherent pullback and pushforward comparisons satisfying the unit and counit
 identities identify the three exchange factors.
-Source: Mathlib `unit_mateEquiv` and `mateEquiv_counit`
-(blueprint: lem-weil-pbc-three-step-adjunction-comparison).
 
 Proof. At the first vertex compose the horizontal pullback comparison with the
 first right-adjoint comparison. At the middle vertices insert the second
@@ -97,8 +95,7 @@ theorem threeStepComparison
     exact αH.hom.naturality (a.counit.app K)
 
 /-- The same comparison with endpoints fixed by the two exchange diagrams.
-Source: threeStepComparison. Proof: its factors are the defining diagram fields.
-(blueprint: lem-weil-pbc-three-step-adjunction-comparison). -/
+Proof: its factors are the defining diagram fields. -/
 theorem threeStepComparison_chains
     (θ : G ⋙ V ≅ U ⋙ H) (θe : Ge ⋙ Ve ≅ Ue ⋙ He)
     (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)
@@ -124,8 +121,6 @@ namespace CategoryTheory.Adjunction
 open AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Apply the diagram comparison to one square in a coherent family.
-Source: threeStepComparison_chains and FunctorComparisonSquare
-(blueprint: lem-weil-pbc-three-step-adjunction-comparison).
 
 Proof. Evaluate the family cube at the given square. Its three terms are the
 three cube terms in threeStepComparison_chains. Apply that theorem with the

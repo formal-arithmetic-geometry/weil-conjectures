@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.DerivedExactSquare
 
 Source: the universal property of localization and the canonical exact-functor
 composition comparisons (Stacks Project, Tags 05S7 and 014F).
-(blueprint: lem-weil-pbc-derived-exact-square-factorization).
 -/
 
 @[expose] public section
@@ -33,8 +32,6 @@ variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
   [PreservesFiniteLimits S] [PreservesFiniteColimits S]
 
 /-- The constructed square is characterized by its ordinary localization square.
-Source: the defining factorization equations for exact functors on derived categories.
-(blueprint: lem-weil-pbc-derived-exact-square-factorization).
 
 Proof: Postcompose the constructed square with the localization factors for L and S.
 The composition factorization cancels the last comparison, and the natural-isomorphism
@@ -96,7 +93,6 @@ variable {C₀ C₁ C₂ D₀ D₁ D₂ : Type*}
 
 /-- Exact derived square comparisons respect a specified composition identity.
 Source: the localization universal property, Stacks Project, Tags 05S7 and 014F.
-(blueprint: lem-weil-pbc-derived-exact-square-factorization).
 
 Proof: Form the two natural transformations in the displayed equation and use
 localization extensionality for Qh on bounded-below homotopy objects. Postcompose

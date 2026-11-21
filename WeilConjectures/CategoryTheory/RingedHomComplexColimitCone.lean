@@ -104,8 +104,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
 
 /-- Precomposition with colimit inclusions gives the canonical Hom cone.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A. -/
 abbrev ringedHomComplexColimitCone (F : ℕ ⥤ ringedSiteComplex O) (N : ringedSiteComplex O) :
     Cone (F.op ⋙ (homComplexFunctor.{u, u, u, u} (R := O)).flip.obj N) where
   pt := ((homComplexFunctor.{u, u, u, u} (R := O)).obj (op (colimit F))).obj N
@@ -134,10 +133,7 @@ attribute [local irreducible] sheafHomAdjunction homColimitConeIsLimit
 
 /-- Internal Hom converts any sequential colimit of complexes into a limit.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
-lemma-colim-and-lim-of-duals (the Hom-of-colimit step);
-Section 0A8X (the product Hom complex).
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A (the Hom-of-colimit step).
 
 Proof: evaluation in each source degree preserves the colimit of complexes.
 Internal sheaf Hom from that colimit is the inverse limit of internal Homs:

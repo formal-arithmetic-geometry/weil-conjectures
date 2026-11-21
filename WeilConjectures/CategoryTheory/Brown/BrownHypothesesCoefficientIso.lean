@@ -18,8 +18,6 @@ import WeilConjectures.CategoryTheory.Triangulated.CompactBoundedHom
 /-!
 # Coefficient-isomorphism invariance of Brown hypotheses
 
-Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2,
-and the coefficient identifications in sk-lem-brown-hypotheses-generation.proof.md.
 The proof uses an equivalence of localizing categories and the compact-object
 adjunction theorem, independently of the geometric finite-field compactness inputs.
 -/
@@ -169,10 +167,6 @@ private theorem brownHypothesesFor_of_coefficientIso
 open scoped CategoryTheory.Obj in
 /-- Brown's bundle is invariant under isomorphisms of commutative condensed rings.
 No admissibility, Noetherian, finite-type, or field hypothesis is required.
-
-Source: blueprint latest, sk-lem-brown-hypotheses.proof.md, paragraphs 1--2,
-and sk-lem-brown-hypotheses-generation.proof.md, coefficient identifications.
-(blueprint: lem-sfb-brown-coefficient-iso-invariance).
 
 Proof: scalar restriction along the inverse ring isomorphism is an exact monoidal
 equivalence. Its derived functor preserves and reflects constructibility, boundedness,

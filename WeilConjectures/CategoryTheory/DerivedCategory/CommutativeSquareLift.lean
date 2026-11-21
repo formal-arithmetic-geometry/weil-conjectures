@@ -33,8 +33,7 @@ private theorem lift_to_complex
 /-- A commuting derived square admits representatives commuting up to chain homotopy.
 
 Source: Stacks Project, Derived Categories, Tag 05RR (localization of the homotopy
-category at quasi-isomorphisms); Mathlib `DerivedCategory.right_fac` and the
-right-fraction equality criterion.
+category at quasi-isomorphisms).
 
 Proof: Choose complexes for X,Y,X',Y'. Fix the complex for the sink Y'. Use right
 fractions to replace the representatives of Y and X' so that b and f' are chain
@@ -128,7 +127,6 @@ representatives, allowing all four representatives to vary.
 
 Source: Stacks Project, Derived Categories, Tag 05RR (fractions) and Tag 014D,
 Lemmas 13.9.5 and 13.9.6 (homotopy adjustment and cylinder factorization).
-(blueprint: lem-pc-derived-commutative-square-lift).
 
 Proof: Choose complexes for the four objects. Express the four derived maps by
 roofs in the homotopy category. Common refinements first give representatives of

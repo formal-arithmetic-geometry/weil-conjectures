@@ -202,9 +202,7 @@ private lemma resolution_comparison_naturality
 set_option linter.unusedVariables false in
 /-- A represented additive functor has an Ext comparison normalized on every resolution.
 
-Source: Stacks Project, Derived Categories, Tag 06XR, Lemma 13.27.2;
-Tag 013P, comparison maps between injective resolutions.
-(blueprint: lem-sc-ext-right-derived-cocycle-comparison)
+Source: Stacks Project, Derived Categories, Tag 06XR, Lemma 13.27.2; Tag 013P, comparison maps between injective resolutions.
 
 Proof: For the chosen injective resolution of Y, identify Ext from A with cohomology
 classes of Hom(single(A,0),I) using extAddEquivCohomologyClass. The from-single

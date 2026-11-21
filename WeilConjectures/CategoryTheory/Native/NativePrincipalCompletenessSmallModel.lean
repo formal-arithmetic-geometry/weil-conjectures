@@ -24,8 +24,7 @@ import WeilConjectures.CategoryTheory.Native.NativeRingedRestrictionLocalTest
 import WeilConjectures.CategoryTheory.Native.NativeRingedRestrictionDivisibility
 /-! # Principal completeness on a small model
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999.
-(blueprint: lem-pur-native-principal-completeness-small-model). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -77,8 +76,7 @@ section. Transfer its covering divisibility and localization test. In the revers
 choose the AsSmall copy of each native object; the faithful derived slice equivalence reflects
 zero objects. No vanishing or invertibility hypothesis on the generator is used.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999.
-(blueprint: lem-pur-native-principal-completeness-small-model). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999. -/
 theorem smallModelComplete
     (a : (R.obj ⋙ forget CommRingCat).sections)
     (N : DerivedCategory (NativeModules.{max c v r, c, v} R)) :

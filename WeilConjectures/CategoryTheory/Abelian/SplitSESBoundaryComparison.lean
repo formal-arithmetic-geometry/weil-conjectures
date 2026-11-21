@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 # Comparing the cone and split-row boundaries
 
 Source: Stacks Project, Derived Categories, Tag 0152.
-(blueprint: lem-sc-p1-split-ses-boundary-comparison).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The canonical cone boundary is the image of the split-row boundary.
 Source: Stacks Project, Derived Categories, Tag 0152, the formula for the canonical
 boundary through the cone quasi-isomorphism.
-(blueprint: lem-sc-p1-split-ses-boundary-comparison).
 
 Proof: Let q : Cone(S.f) -> S.X₃ be the cone comparison. Its components are the
 projection onto S.X₂ followed by S.g. In the chosen splitting write S.X₂ⁿ as

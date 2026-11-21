@@ -14,8 +14,7 @@ import all WeilConjectures.CategoryTheory.UnboundedExactTower.UnboundedExactAdju
 /-!
 # Naturality of normalized right-derived squares
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E
-(blueprint: lem-pur-derived-square-normalization-naturality).
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E.
 
 A normalization by right-derived units determines a square on the derived category.
 It therefore preserves ordinary naturality, horizontal composition, and commuting cubes.
@@ -253,8 +252,7 @@ private theorem derived_unit_ext_general
   rw [← a.naturality e.hom, ← b.naturality e.hom, hi]
 
 /-- A square normalized by the canonical right-derived units and localization factors.
-Source: Stacks Tag 0D6E
-(blueprint: lem-pur-derived-square-normalization-naturality). -/
+Source: Stacks Tag 0D6E. -/
 def unitNormalized
     (X : DerivedCategory.{w} A ⥤ DerivedCategory.{w} Ap)
     (Y : DerivedCategory.{w} B ⥤ DerivedCategory.{w} Bp)
@@ -272,7 +270,6 @@ omit [PreservesFiniteLimits x] [PreservesFiniteColimits x]
   [PreservesFiniteLimits y] [PreservesFiniteColimits y] in
 /-- A square normalized by right-derived units respects a morphism of ordinary squares.
 Source: Stacks Project, Cohomology on Sites, Tag 0D6E, uniqueness of right derivation.
-(blueprint: lem-pur-derived-square-normalization-naturality).
 Proof: evaluate on a K-injective representative, cancel the invertible source unit,
 and use the two normalization equations. The ordinary square's naturality and the
 naturality of the target derived unit then identify the two composites. Essential

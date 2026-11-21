@@ -32,7 +32,6 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 
 /-- Positive exactness of the categorical Čech complex of a size-aligned injective presheaf.
 Source: Stacks Project, Cohomology on Sites, Tags 03AS, 03AT and 03AU.
-(blueprint: lem-sc-small-injective-presheaf-cech-exact)
 
 Proof: In degree n form the coproduct of free abelian representables of the products
 indexed by Fin (n+1) -> iota. Hom sets and the tuple index are v-small, so these are

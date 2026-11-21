@@ -67,7 +67,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 /-! # KoszulScalarHomDiagram for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-scalar-hom-diagram).
 -/
 
 @[expose] public noncomputable section
@@ -144,8 +143,7 @@ comparison and compose with theta to obtain homDiagramComparison.
 Proof step 2: Every finite positive Koszul stage is dualizable, so canonical tensor-Hom
 evaluation is an isomorphism. Its source naturality makes these stage isomorphisms natural in the
 inverse diagram. Whisker B evaluation with restriction, compose with homDiagramComparison and
-inverse R evaluation.
-(blueprint: lem-f5-koszul-scalar-hom-diagram). -/
+inverse R evaluation. -/
 private def tensorDiagramComparison (φ : R ⟶ B) (r : ℕ)
     (a : Fin r → (R.obj ⋙ forget CommRingCat).sections)
     (e : ringedKoszulDiagram R r a ⋙
@@ -159,8 +157,7 @@ private def tensorDiagramComparison (φ : R ⟶ B) (r : ℕ)
     (koszulEvaluation R r a ((restrictComplex φ).obj N)).symm
 
 /-- Transport a commuting square through a functor and a further commuting square.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-hom-diagram). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem naturalityCompositionCore
     {D : Type*} [Category D] {D' : Type*} [Category D'] (F : D ⥤ D')
     {X Y X' Y' : D} {N M : D'}

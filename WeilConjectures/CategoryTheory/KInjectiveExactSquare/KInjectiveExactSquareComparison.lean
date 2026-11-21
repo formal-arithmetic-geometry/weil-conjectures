@@ -11,9 +11,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Normalized comparison for an exact square preserving K-injectives
 
-Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K; exact-square
-extraction of the tower normalization argument
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison).
+Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K.
 
 The units are expressed on the homotopy category, as in def-sfb-right-derived-functor.
 The canonical localization factors are retained in the two normalization arrows.
@@ -53,8 +51,7 @@ variable {A' : Type uA'} {A : Type uA} {B' : Type uB'} {B : Type uB}
     DerivedCategory.Qh ⋙ RH)
 
 /-- The canonical strict-square identification on homotopy categories, directed from Hr to sH'.
-Source: Stacks Tags 070I and 070Y, exact-square extraction, proof step 1
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison). -/
+Source: Stacks Tags 070I and 070Y, exact-square extraction, proof step 1. -/
 def sourceIso :
     r.mapHomotopyCategory (.up ℤ) ⋙ H.mapHomotopyCategory (.up ℤ) ≅
       H'.mapHomotopyCategory (.up ℤ) ⋙ s.mapHomotopyCategory (.up ℤ) :=
@@ -62,8 +59,7 @@ def sourceIso :
     (Functor.mapHomotopyCategoryCompIso (eqToIso h) (.up ℤ)).symm
 
 /-- The arrow a_J, including the inverse exact-localization factor for s.
-Source: Stacks Tags 070Y and 070K, exact-square extraction, proof step 1
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison). -/
+Source: Stacks Tags 070Y and 070K, exact-square extraction, proof step 1. -/
 noncomputable def leftUnit (J : CochainComplex A' ℤ) :
     DerivedCategory.Qh.obj ((H.mapHomotopyCategory (.up ℤ)).obj
       ((r.mapHomotopyCategory (.up ℤ)).obj
@@ -77,8 +73,7 @@ noncomputable def leftUnit (J : CochainComplex A' ℤ) :
     s.mapDerivedCategory.map (η'.app ((HomotopyCategory.quotient A' (.up ℤ)).obj J))
 
 /-- The arrow b_J, including RH of the inverse exact-localization factor for r.
-Source: Stacks Tags 070Y and 070K, exact-square extraction, proof step 1
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison). -/
+Source: Stacks Tags 070Y and 070K, exact-square extraction, proof step 1. -/
 noncomputable def rightUnit (J : CochainComplex A' ℤ) :
     DerivedCategory.Qh.obj ((H.mapHomotopyCategory (.up ℤ)).obj
       ((r.mapHomotopyCategory (.up ℤ)).obj
@@ -91,8 +86,7 @@ noncomputable def rightUnit (J : CochainComplex A' ℤ) :
       ((HomotopyCategory.quotient A' (.up ℤ)).obj J))
 
 /-- The normalized comparison δ_J = b_J a_J⁻¹, when a_J is invertible.
-Source: Stacks Tags 070I, 070Y and 070K, exact-square extraction, proof step 1
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison). -/
+Source: Stacks Tags 070I, 070Y and 070K, exact-square extraction, proof step 1. -/
 noncomputable def delta (J : CochainComplex A' ℤ)
     (ha : IsIso (leftUnit H' H r s h RH' η' J)) :
     (RH' ⋙ s.mapDerivedCategory).obj
@@ -123,8 +117,7 @@ private theorem unit_isIso
 
 /-- An exact strictly commuting square preserving K-injectives has a unique comparison
 normalized only on K-injectives, natural on homotopy classes and independent of resolutions.
-Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K; exact-square extraction
-(blueprint: lem-weil-pbc-kinjective-exact-square-comparison).
+Source: Stacks Project, Derived Categories, Tags 070I, 070Y and 070K.
 
 Proof plan:
 1. The units of the fixed universal pairs are invertible on K-injectives by

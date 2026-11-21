@@ -58,7 +58,6 @@ attribute [local irreducible] pureTensor evaluationMap
 /-- A sheaf-Hom evaluation pairing with the prescribed pure-tensor values is canonical.
 
 Source: Stacks Project, Tags 03EK and 03EO: the sheaf tensor-Hom adjunction and evaluation.
-(blueprint: lem-sf-twisted-action-evaluation-unique).
 
 Proof: the tensor-Hom adjunction computes evaluationMap on a pure tensor x tensor phi
 as phi applied to x. The sheafification adjunction transports this computation from

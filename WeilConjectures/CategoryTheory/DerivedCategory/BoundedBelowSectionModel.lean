@@ -46,7 +46,6 @@ private noncomputable def chainRightDerivedUnit
 /-- A section-total model which inverts bounded-below quasi-isomorphisms and whose
 augmentation is a quasi-isomorphism on injective complexes computes the derived functor.
 Source: Stacks Project, Tag 09A2, injective-resolution comparison.
-(auxiliary; not a blueprint node).
 Proof: choose a bounded-below injective resolution of each input. Both the model of
 the resolution map and the augmentation on its injective target become invertible
 in the derived category. Compose their inverses with the derived unit at that target.

@@ -11,9 +11,8 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionTenso
 
 /-! # The canonical restriction comparison for sheaf Hom
 
-Source: Stacks, sites-modules.tex, section-internal-hom, lemma-internal-hom-restriction
-and lemma-internal-hom-adjoint-tensor; the restriction part of steps 11--12 of the
-agent-formulated twisted action-site construction.
+Source: Stacks, sites-modules.tex, section-internal-hom
+and.
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
 /-- Transpose restricted evaluation after the inverse tensor comparison. The map is
 constructed without choosing an internal Hom isomorphism.
-Source: Stacks, lemma-internal-hom-adjoint-tensor.
-(blueprint: lem-sf-twisted-action-restriction-hom-comparison-iso). -/
+Source: Stacks. -/
 noncomputable def restrictionHomComparison (P : RestrictionPresentation J s R a)
     (T : TensorComparisons J s R a P) :
     letI := P.category
@@ -130,10 +128,7 @@ private theorem restriction_uncurry (P : RestrictionPresentation J s R a)
 
 include hs in
 /-- The canonical restriction comparison is invertible.
-Source: Stacks, sites-modules.tex, section-internal-hom,
-lemma-internal-hom-restriction and lemma-internal-hom-adjoint-tensor; restriction
-part of steps 11--12 of the twisted action-site construction.
-(blueprint: lem-sf-twisted-action-restriction-hom-comparison-iso).
+Source: Stacks, sites-modules.tex, section-internal-hom and.
 
 Proof: translation is an equivalence with natural tensor comparisons. The
 transpose of translated evaluation is consequently invertible: maps into it are

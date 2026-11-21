@@ -21,21 +21,16 @@ compactification theorem" (`def:nagata-two-open-comparison-space` through
 Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 
 - `AlgebraicGeometry.TwoOpenSide.comparisonMap`: the canonical morphism
-  `V₁ ×_U V₂ ⟶ X₁ ×_S X₂` (blueprint: `def:nagata-two-open-comparison-space`);
+  `V₁ ×_U V₂ ⟶ X₁ ×_S X₂`;
 - `AlgebraicGeometry.TwoOpenSide.comparisonSpace`: its scheme-theoretic image `X₁₂`,
-  with the two proper projections `comparisonFst`/`comparisonSnd` (blueprint:
-  `lemma:nagata-comparison-projections-proper`);
+  with the two proper projections `comparisonFst`/`comparisonSnd`;
 - `AlgebraicGeometry.TwoOpenSide.KeyDisjoint`: the **key boundary disjointness**
-  `X₁₂ ∩ (Z̄₁,₂ ×_S Z̄₂,₁) = ∅` in pointwise form (blueprint:
-  `lemma:nagata-key-boundary-disjointness`);
+  `X₁₂ ∩ (Z̄₁,₂ ×_S Z̄₂,₁) = ∅` in pointwise form;
 - `AlgebraicGeometry.TwoOpenSide.exists_comparisonFst_comparisonSnd`: a pair of
   valuation-ring extensions of a common generic point of `O₁ ∩ O₂` to the two ambient
-  models factors through the comparison space (blueprint:
-  `proposition-compactifying-union-two-opens--1`);
+  models factors through the comparison space;
 - `AlgebraicGeometry.TwoOpenSide.KeyDisjoint.avoids`: key disjointness implies that of
-  any such pair at least one avoids its forbidden boundary (blueprint:
-  `proposition-compactifying-union-two-opens--1`,
-  `lemma-nagata-one-valuation-avoids-boundary`);
+  any such pair at least one avoids its forbidden boundary;
 - `AlgebraicGeometry.TwoOpenPreparation`: the bundled output of the comparison layer,
   consumed by the final assembly of the two-open theorem;
 - `AlgebraicGeometry.nonempty_twoOpenPreparation`: existence. The construction of a
@@ -56,7 +51,7 @@ Given two sides `σ₁ : TwoOpenSide u O₁` and `σ₂ : TwoOpenSide u O₂`,
 the geometric core of the file. Its ingredients, all proved here, are:
 
 - `TwoOpenSide.range_toImage_comparisonMap`
-  (`lemma:nagata-comparison-restrict-proper-open`): over the proper-extension open
+  : over the proper-extension open
   `V₁` the comparison space is the fibre product `V₁ ×_U V₂` itself. The comparison
   morphism is an immersion, being the base change of the diagonal of `u` followed by
   an open immersion, and it is proper over `V₁`, so its range is closed there;
@@ -82,7 +77,6 @@ the geometric core of the file. Its ingredients, all proved here, are:
 The closed immersion of the improved comparison space into the strict transform is
 built directly from the universal property of the scheme-theoretic image, so Stacks
 Project Tag 0F3Y (`Scheme.Hom.ker_lift_admissibleBlowup`) is not used here.
-
 -/
 
 @[expose] public section
@@ -102,13 +96,12 @@ namespace TwoOpenSide
 variable (σ₁ : TwoOpenSide u O₁) (σ₂ : TwoOpenSide u O₂)
 
 /-- The canonical morphism `V₁ ×_U V₂ ⟶ X₁ ×_S X₂` from the fibre product of the two
-proper extensions to the product of the two ambient models.
-(Blueprint: `def:nagata-two-open-comparison-space`.) -/
+proper extensions to the product of the two ambient models. -/
 def comparisonMap : pullback σ₁.ψ σ₂.ψ ⟶ pullback σ₁.s σ₂.s :=
   pullback.map σ₁.ψ σ₂.ψ σ₁.s σ₂.s σ₁.V.ι σ₂.V.ι u σ₁.ψ_u σ₂.ψ_u
 
 /-- The **comparison space** `X₁₂`: the scheme-theoretic image of `V₁ ×_U V₂` in
-`X₁ ×_S X₂`. (Blueprint: `def:nagata-two-open-comparison-space`.) -/
+`X₁ ×_S X₂`. -/
 def comparisonSpace : Scheme.{u} := (comparisonMap σ₁ σ₂).image
 
 /-- The first projection `X₁₂ ⟶ X₁` of the comparison space. -/
@@ -127,8 +120,7 @@ lemma comparisonFst_eq :
 lemma comparisonSnd_eq :
     comparisonSnd σ₁ σ₂ = (comparisonMap σ₁ σ₂).imageι ≫ pullback.snd σ₁.s σ₂.s := rfl
 
-/-- **Properness of the comparison projections** (blueprint:
-`lemma:nagata-comparison-projections-proper`): the projection `X₁₂ ⟶ X₁` is a closed
+/-- **Properness of the comparison projections**: the projection `X₁₂ ⟶ X₁` is a closed
 immersion followed by a base change of the proper structure morphism of `X₂`. -/
 theorem isProper_comparisonFst : IsProper (comparisonFst σ₁ σ₂) := by
   have := σ₂.isProper_s
@@ -149,8 +141,7 @@ section ComparisonOverV
 
 Over `V₁ ⊆ X₁` the comparison space is the fibre product `V₁ ×_U V₂` itself, and over the
 locus of `V₁ lying above `O₂` — where `ψ₂` is an isomorphism — the first comparison
-projection is an isomorphism. This is the input of the improved comparison
-(blueprint: `lemma:nagata-comparison-restrict-proper-open`). -/
+projection is an isomorphism. This is the input of the improved comparison. -/
 
 /-- The two comparison projections lie over the same morphism to the base. -/
 @[reassoc]
@@ -284,8 +275,7 @@ instance quasiCompact_comparisonMap : QuasiCompact (comparisonMap σ₁ σ₂) :
   have : QuasiSeparated (pullback.fst σ₁.s σ₂.s) := inferInstance
   exact QuasiCompact.of_comp _ (pullback.fst σ₁.s σ₂.s)
 
-/-- **Restriction of the comparison image over the proper-extension open** (blueprint:
-`lemma:nagata-comparison-restrict-proper-open`): the part of the comparison space lying
+/-- **Restriction of the comparison image over the proper-extension open**: the part of the comparison space lying
 over `V₁` is exactly the image of `V₁ ×_U V₂`, which is an open subscheme of the
 comparison space because the comparison morphism is a quasi-compact immersion. -/
 theorem range_toImage_comparisonMap :
@@ -426,7 +416,7 @@ lemma range_comparisonSection :
     exact Scheme.Hom.comp_apply _ _ _
 
 /-- **The first comparison projection is an isomorphism over the locus above `O₂`**
-(blueprint: part of `lemma:nagata-comparison-isIso-near-boundary`): over `O₂` the proper
+: over `O₂` the proper
 extension `ψ₂` is an isomorphism, hence so is its base change `V₁ ×_U V₂ ⟶ V₁`, and the
 comparison space agrees with `V₁ ×_U V₂` over `V₁`. -/
 theorem isIso_comparisonFst_restrict_isoOpen :
@@ -436,8 +426,7 @@ theorem isIso_comparisonFst_restrict_isoOpen :
 
 end ComparisonSection
 
-/-- The **key boundary disjointness** (blueprint:
-`lemma:nagata-key-boundary-disjointness`): no point of the comparison space projects
+/-- The **key boundary disjointness**: no point of the comparison space projects
 into the forbidden boundary on both sides, i.e.
 `X₁₂ ∩ (Z̄₁,₂ ×_S Z̄₂,₁) = ∅` inside `X₁ ×_S X₂`. -/
 def KeyDisjoint : Prop :=
@@ -448,7 +437,7 @@ def KeyDisjoint : Prop :=
 /-- The **comparison boundary** of the pair `(σ₁, σ₂)`: the locus of the comparison
 space lying over the forbidden boundary `Z̄₁,₂` of the first side. Key boundary
 disjointness is the assertion that its second projection avoids the forbidden boundary
-of the second side. (Blueprint: `lemma:nagata-comparison-boundary-density`.) -/
+of the second side. -/
 def comparisonBoundary : Set (comparisonSpace σ₁ σ₂) :=
   comparisonFst σ₁ σ₂ ⁻¹' σ₁.forbiddenBoundary
 
@@ -463,8 +452,7 @@ lemma mem_comparisonBoundary_iff {z : comparisonSpace σ₁ σ₂} :
 
 
 variable {σ₁ σ₂} in
-/-- **Key boundary disjointness from the self boundary** (blueprint:
-`lemma:nagata-key-boundary-disjointness`): if the second projection of the comparison
+/-- **Key boundary disjointness from the self boundary**: if the second projection of the comparison
 boundary lands in the self boundary `Z̄₂,₂` of the second side, then key disjointness
 holds, because a prepared side has disjoint self and forbidden boundaries.
 
@@ -476,8 +464,7 @@ theorem keyDisjoint_of_comparisonBoundary_subset (h₂ : σ₂.Prepared O₁)
   fun _ hz ↦ Set.disjoint_left.mp h₂ (h hz)
 
 variable {σ₁ σ₂} in
-/-- **The comparison boundary density criterion** (blueprint:
-`lemma:nagata-comparison-boundary-density`): it suffices to control the second
+/-- **The comparison boundary density criterion**: it suffices to control the second
 projection on a subset `D` in which the comparison boundary is contained after taking
 closures. The locus where the second projection lands in the self boundary is closed,
 since the self boundary is a closure, so it swallows `closure D`. -/
@@ -489,8 +476,7 @@ theorem comparisonBoundary_subset_preimage_selfBoundary {D : Set (comparisonSpac
     isClosed_closure.preimage (comparisonSnd σ₁ σ₂).continuous
 
 variable {σ₁ σ₂} in
-/-- **Key boundary disjointness by density** (blueprint:
-`lemma:nagata-comparison-boundary-density`, `lemma:nagata-key-boundary-disjointness`):
+/-- **Key boundary disjointness by density**:
 the combination of the two previous lemmas, which is the shape the improved-comparison
 chain of the blueprint produces. -/
 theorem keyDisjoint_of_dense_comparisonBoundary (h₂ : σ₂.Prepared O₁)
@@ -510,8 +496,7 @@ variable {A K : Type u} [CommRing A] [IsDomain A] [ValuationRing A] [Field K]
   (g₁ : Spec (CommRingCat.of A) ⟶ σ₁.X) (g₂ : Spec (CommRingCat.of A) ⟶ σ₂.X)
 
 omit [ValuationRing A] in
-/-- **The pair of valuation extensions factors through the comparison space** (blueprint:
-`proposition-compactifying-union-two-opens--1`): if `gᵢ : Spec A ⟶ Xᵢ` extend a generic
+/-- **The pair of valuation extensions factors through the comparison space**: if `gᵢ : Spec A ⟶ Xᵢ` extend a generic
 point `Spec K ⟶ O₁ ∩ O₂` over a common morphism to `S`, then `(g₁, g₂)` factors through
 the closed subscheme `X₁₂ ⊆ X₁ ×_S X₂`. Generically the pair lands in `V₁ ×_U V₂`, and a
 morphism from the spectrum of a domain factoring generically through a closed subscheme
@@ -558,12 +543,10 @@ theorem exists_comparisonFst_comparisonSnd
   · rw [comparisonFst, ← Category.assoc, hl, hĝ₁]
   · rw [comparisonSnd, ← Category.assoc, hl, hĝ₂]
 
-/-- **One valuation extension avoids its forbidden boundary** (blueprint:
-`proposition-compactifying-union-two-opens--1`): the closed points of `g₁` and `g₂` cannot
+/-- **One valuation extension avoids its forbidden boundary**: the closed points of `g₁` and `g₂` cannot
 both lie in the forbidden boundaries, since the pair factors through the comparison space
 (`exists_comparisonFst_comparisonSnd`) on which the key disjointness holds; and an open of
-`Spec A` containing the closed point is everything (`IsLocalRing.closedPoint_mem_iff`,
-blueprint `proposition-compactifying-union-two-opens--1`). -/
+`Spec A` containing the closed point is everything. -/
 theorem KeyDisjoint.avoids (hkey : KeyDisjoint σ₁ σ₂)
     (hg₁ : Spec.map (CommRingCat.ofHom (algebraMap A K)) ≫ g₁ =
       η ≫ U.homOfLE inf_le_left ≫ σ₁.embX)
@@ -833,11 +816,7 @@ end Improved
 end TwoOpenSide
 
 open TwoOpenSide in
-/-- **The improved comparison** (Stacks Project Tag 0F3W; blueprint:
-`lemma:nagata-comparison-restrict-proper-open`,
-`def:nagata-two-open-improved-comparison`,
-`lemma:nagata-comparison-isIso-near-boundary`,
-`lemma:nagata-comparison-boundary-density`).
+/-- **The improved comparison** (Stacks Project Tag 0F3W).
 
 This is the geometric core of the comparison layer. The forbidden boundary locus
 `Z₁,₂ = ψ₁⁻¹(U ∖ O₁)` is closed in `V₁` and lies in the open `TwoOpenSide.isoOpen`
@@ -860,8 +839,7 @@ criterion `comparisonBoundary_subset_preimage_selfBoundary` then concludes.
 The blow-up shape of the conclusion is the one the surrounding API was built for:
 `TwoOpenSide.admissibleBlowup` is the Lean form of
 `def:nagata-two-open-improved-comparison`, and preparedness of the improved first side is
-supplied by `TwoOpenSide.Prepared.admissibleBlowup` (blueprint:
-`lemma:nagata-boundary-disjoint-persists`). No preparedness of the two sides is assumed. -/
+supplied by `TwoOpenSide.Prepared.admissibleBlowup`. No preparedness of the two sides is assumed. -/
 theorem exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary [IsNoetherian S]
     {u : U ⟶ S} [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]
     {O₁ O₂ : U.Opens} (σ₁ : TwoOpenSide u O₁) (σ₂ : TwoOpenSide u O₂)
@@ -965,12 +943,7 @@ theorem exists_admissibleBlowup_comparisonBoundary_subset_selfBoundary [IsNoethe
   exact comparisonBoundary_subset_preimage_selfBoundary hDcl hmem
 
 open TwoOpenSide in
-/-- **Existence of a prepared, key-disjoint pair of sides** (blueprint:
-`lemma:nagata-comparison-restrict-proper-open`,
-`def:nagata-two-open-improved-comparison`,
-`lemma:nagata-comparison-isIso-near-boundary`,
-`lemma:nagata-comparison-boundary-density`,
-`lemma:nagata-key-boundary-disjointness`).
+/-- **Existence of a prepared, key-disjoint pair of sides**.
 
 The first side is improved by the isomorphism-near-closure blow-up (Stacks Project
 Tag 0F3W) of the first comparison projection at the forbidden boundary locus.

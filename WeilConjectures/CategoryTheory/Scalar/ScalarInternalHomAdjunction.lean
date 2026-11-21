@@ -154,10 +154,7 @@ private theorem scalarDerivedRestriction_conservative (a : R ⟶ S)
 The existential presentations are fixed by the recorded universal derived pairs,
 actual pure-tensor formulas and representative evaluation. No arbitrary replacement
 of tensor, internal Hom, restriction or the comparison map is admitted.
-Source: Bhatt--Scholze, Remark 6.8.15, ambient derived operations;
-Stacks Project, sites-cohomology.tex, Tags 07A6, 07A4, 08J9, 08JA and 0D6D;
-derived.tex Tag 05RT
-(blueprint: lem-sfb-dc-hom-scalar-adjunction).
+Source: Bhatt--Scholze, Remark 6.8.15, ambient derived operations; Stacks Project, sites-cohomology.tex, Tags 07A6, 07A4, 08J9, 08JA and 0D6D; derived.tex Tag 05RT.
 Proof: obtain the actual tensor-Hom representative model from the ringed-derived
 closed-structure theorem. Construct the normalized scalar pair from independent-universe
 derived change of rings and the extension-restriction adjunction; quotient comparison

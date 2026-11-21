@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.LeftDerivedExactWhenDefined
 /-! # Exactness on a chosen derived category
 
 Source: Stacks Project, Tag 05SE and the localization universal property.
-(blueprint: lem-pur-left-derived-exact-chosen-localization).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace CategoryTheory.Functor
 
 /-- Exactness of an everywhere-defined left derived functor on the chosen derived category.
 Source: Stacks Project, Tag 05SE, left derived part.
-(blueprint: lem-pur-left-derived-exact-chosen-localization).
 
 Proof: Let E be the equivalence from the strict constructed localization of the homotopy
 category at quasi-isomorphisms to the chosen derived category. Descend the shift structure

@@ -14,8 +14,7 @@ import WeilConjectures.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
 /-!
 # Homology of the initial graded page
 
-Source: Stacks Project, Homology, Tag 012K, the page-one calculation
-(blueprint: lem-sp-filtered-complex-graded-homology).
+Source: Stacks Project, Homology, Tag 012K, the page-one calculation.
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ private theorem homology_quotient (S : ShortComplex C) :
 
 /-- Homology of any page-zero complex identified with the associated graded complex.
 Source: Stacks Project, Homology, Tag 012K, displayed Z and B formulas and the
-page-one assertion of `lemma-spectral-sequence-filtered-complex`.
-(blueprint: lem-sp-filtered-complex-graded-homology).
+page-one assertion of.
 
 Proof. In degree n = p+q the differential of gr^p K is induced from K.d.
 Its kernel consists of the classes represented in F^p K^n whose differential lies

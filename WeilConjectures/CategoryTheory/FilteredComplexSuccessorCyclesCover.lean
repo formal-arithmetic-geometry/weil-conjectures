@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.FilteredComplexSuccessorCyclesCoverEpi
 # Successor cycles cover the kernel of a page differential
 
 Source: Stacks Project, Homology, Tag 012K, displayed cycle and differential formulas.
-(blueprint: lem-sp-filtered-complex-successor-cycles-cover).
 -/
 
 @[expose] public section
@@ -29,9 +28,7 @@ namespace CategoryTheory
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The projection of successor graded cycles covers the cycles of the page differential.
-Source: Stacks Project, Homology, Tag 012K, the cycle and differential formulas preceding
-lemma-spectral-sequence-filtered-complex.
-(blueprint: lem-sp-filtered-complex-successor-cycles-cover).
+Source: Stacks Project, Homology, Tag 012K, the cycle and differential formulas preceding.
 
 Proof. Write n = p+q. The composite from Z_(r+1) into Z_r/B_r is killed by d_r:
 a representative has differential in F^(p+r+1), so its target graded class is zero.

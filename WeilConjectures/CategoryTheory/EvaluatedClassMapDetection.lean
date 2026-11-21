@@ -37,8 +37,6 @@ namespace CategoryTheory
 
 /-- Exact evaluation, an isomorphic pair of coordinates and class detection recover
 ordinary maps from equality of the evaluated shifted composites.
-Source: diagonal coefficient changes (3), exact evaluation and single comparisons.
-(blueprint: lem-diagonal-evaluated-class-map-detection).
 
 Proof: naturality of the shift and exact-single comparisons moves evaluation of
 single(a) and single(b) to single(V(a)) and single(V(b)). Postcompose both by the

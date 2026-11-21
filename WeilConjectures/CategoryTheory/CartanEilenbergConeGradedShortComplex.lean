@@ -92,9 +92,7 @@ private theorem normalized_iso_all_degrees
       omega
 
 /-- The three terms and two differentials of a graded cone are those of its column cone.
-Source: Stacks Project, Homology, Tags 0133 and 012X; augmented-cone refinement
-of the parent filtration-properties node, proof step 2.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-short-complex-iso).
+Source: Stacks Project, Homology, Tags 0133 and 012X.
 
 Proof: fix p and a total degree m. The cone object is the biproduct of K^(m+1)
 and the diagonal coproduct of the extended bicomplex. The formula hF presents

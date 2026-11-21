@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteRawSectionMatchingLift
 
 /-! Existence of stage-image amalgamations on finite mapped stage covers.
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: aux-colimit-site-stage-image-cover-amalgamation).
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the finite-cover equalizer argument.
-(blueprint: aux-colimit-site-stage-image-cover-amalgamation).
+/-- Source: Stacks Project, Sites, Tag 0A35 equalizer argument.
 
 Proof: The cover R is finite by hfinite. Choose stage presentations of its finitely
 many section values using the definition of colimitSiteStageImage. Lift their

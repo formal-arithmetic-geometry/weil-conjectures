@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Triangulated.Triangulated
 /-!
 # Pro-zero middle terms in a tower of distinguished triangles
 
-Source: Stacks Project, Derived Categories, Tag 0G3A, zero-valued specialization
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Derived Categories, Tag 0G3A, zero-valued specialization.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace CategoryTheory.Pretriangulated
 first and third transition maps implies eventual vanishing of the middle transition maps.
 Index `n : ℕ` denotes level `n + 1` of the positive-integer tower.
 
-Source: Stacks Project, Derived Categories, Tag 0G3A, zero-valued specialization
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Derived Categories, Tag 0G3A, zero-valued specialization.
 
 Proof (the direct zero-valued argument recorded in the node):
 1. Fix a level `n`. Choose `m ≥ n` with zero first transition `a` from `m` to `n`, using
@@ -38,7 +36,7 @@ Proof (the direct zero-valued argument recorded in the node):
    Obtain `h : C_m ⟶ B_n` with `b = v_m ≫ h`.
 3. Choose `k ≥ m` with zero third transition from `k` to `m`. The second
    triangle-morphism square gives `b_km ≫ v_m = v_k ≫ c_km = 0`.
-   The functor composition law (def-weil-inverse-system) now gives
+   The functor composition law now gives
    `b_kn = b_km ≫ b_mn = b_km ≫ v_m ≫ h = 0`.
 4. Since `n ≤ m ≤ k`, this proves the required vanishing at every level. -/
 theorem proZero_middle_of_distinguished_tower

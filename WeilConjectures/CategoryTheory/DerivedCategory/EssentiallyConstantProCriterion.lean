@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Limits.Types.ColimitTypeFiltered
 
 /-! # Hom-colimit criterion for an essentially constant pro-diagram
 
-Source: Stacks Project, Categories, Lemma 05PY (implication (4) => (1))
-(blueprint: lem-pur-essential-constant-pro-criterion-05py).
+Source: Stacks Project, Categories, Lemma 05PY (implication (4) => (1)).
 -/
 
 @[expose] public section
@@ -28,9 +27,7 @@ namespace CategoryTheory
 /-- The Hom-colimit bijections induced by `r` make `G` essentially constant with value `X`.
 The cone maps are the preimages of the identity classes, and `r` retracts the leg at `j₀`.
 
-Source: Stacks Project, Categories, Lemma 05PY, implication (4) => (1), dualized;
-Lemma 05PZ, implication (4) => (1)
-(blueprint: lem-pur-essential-constant-pro-criterion-05py).
+Source: Stacks Project, Categories, Lemma 05PY, implication (4) => (1), dualized.
 
 Proof (using def-pc-essentially-constant-pro-diagram):
 1. For each `j`, bijectivity with `W = G.obj j` gives the unique preimage `u_j` of the

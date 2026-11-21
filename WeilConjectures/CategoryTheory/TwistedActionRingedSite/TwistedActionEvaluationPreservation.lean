@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.TwistedActionRingedSite.TwistedActionEvalu
 
 /-! # Preservation of the specified sheaf-Hom evaluations
 
-Source: the normalized tensor and evaluation formulas of the twisted action-site
-presentation; Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
+Source: Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +40,7 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 omit [s.functor.IsContinuous J J] in
 /-- The specified tensor and Hom components preserve right sheaf-Hom evaluation.
 
-Source: Stacks 03EK and 03EO; the specified presentation evaluation and symmetry
-(blueprint: lem-sf-twisted-action-evaluation-preservation).
+Source: Stacks 03EK and 03EO.
 
 Proof: the complete pure-tensor characterization of each evaluation identifies it
 with braiding followed by canonical left evaluation. Braiding naturality moves the

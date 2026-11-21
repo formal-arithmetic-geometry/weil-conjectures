@@ -139,8 +139,7 @@ omit [EnoughInjectives C] in
 `τ : G ≅ G₁ ⋙ G₂`. Pushing a class of `Extⁿ(A, B)` forward along `G` agrees, up to `τ`, with
 pushing it forward along `G₁` and then along `G₂`.
 
-Source: Stacks Project, derived.tex, Tag 015F
-(blueprint: lem-weil-pbc-ext-exact-functor-composition-comparison).
+Source: Stacks Project, derived.tex, Tag 015F.
 
 Proof: identify `Ext` with shifted morphisms between single complexes in the derived category.
 The functor induced by `G` agrees with that induced by `G₁` followed by `G₂` through

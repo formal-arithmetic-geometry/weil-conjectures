@@ -9,7 +9,6 @@ public import WeilConjectures.CategoryTheory.FiniteTypeLocallyConstantModuleShea
 /-! # Exactness of constant module sheafification
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3), kernel and cokernel argument.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -22,7 +21,6 @@ namespace SheafOfModules
 
 /-- The constant module sheaf functor preserves finite limits and finite colimits.
 Source: Stacks Project, Modules on Sites, Tag 093U (3).
-(auxiliary; not a blueprint node).
 
 Proof: Evaluation of the constant module presheaf functor at any object is the identity
 functor on modules. Limits and colimits of presheaves of modules are sectionwise, so this

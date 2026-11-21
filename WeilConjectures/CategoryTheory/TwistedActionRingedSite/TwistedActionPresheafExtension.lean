@@ -335,8 +335,7 @@ private theorem labelMap_generator (S : Site J s R a) (F : Cᵒᵖ ⥤ Type u)
 /-- An invertible presheaf translation extends to the integer-labelled category.
 
 Source: the presheaf-extension part of original step 3 of the agent twisted variant
-of Stacks Tag 00W0, `sites.tex`, proposition-sheaves-on-group
-(blueprint: lem-sf-twisted-action-presheaf-extension).
+of Stacks Tag 00W0, `sites.tex`.
 
 Proof: assign F(X) to the copied object X. Give a minus-one generator the restriction
 map τ.inv at X. For an arrow labelled n, first restrict along its base arrow and

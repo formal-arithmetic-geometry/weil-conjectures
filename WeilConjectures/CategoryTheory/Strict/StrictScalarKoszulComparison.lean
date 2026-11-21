@@ -19,7 +19,6 @@ import all WeilConjectures.CategoryTheory.Koszul.KoszulTensorEvaluationCoordinat
 /-! # StrictScalarKoszulComparison for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-weil-pbc-strict-scalar-koszul-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -120,9 +119,7 @@ private theorem strictComparisonFromPositive_unit (φ : R ⟶ B) (r : ℕ)
 /-- The finite ordered Koszul comparison is independent of flatness and of derived
 categories.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E (finite Koszul calculation);
-more-algebra.tex, Tag 0913 (Koszul complexes).
-(blueprint: lem-weil-pbc-strict-scalar-koszul-comparison).
+Source: Stacks Project, algebraization.tex, Tag 0A0E (finite Koszul calculation); more-algebra.tex, Tag 0913 (Koszul complexes).
 
 Proof: Let E be ordinary scalar extension along φ, left adjoint to restriction. Its
 binary tensor and unit isomorphisms, transported from the localization tensor to the

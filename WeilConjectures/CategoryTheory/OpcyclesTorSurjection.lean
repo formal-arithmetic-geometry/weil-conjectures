@@ -20,8 +20,7 @@ import WeilConjectures.CategoryTheory.TensorHomologyImageKernelEpi
 /-!
 # Tor of an opcycle cokernel
 
-Source: Stacks Project, More on Algebra, Lemma 15.59.2 (Tag 0653), Tor argument
-(blueprint: lem-pc-module-opcycles-tor-surjection).
+Source: Stacks Project, More on Algebra, Lemma 15.59.2 (Tag 0653), Tor argument.
 -/
 
 @[expose] public section
@@ -32,31 +31,30 @@ open CategoryTheory CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory
 
-/-- (blueprint: lem-pc-module-opcycles-tor-surjection) For a complex of flat modules,
+/--  For a complex of flat modules,
 the cohomology one degree before an opcycle cokernel surjects naturally onto its first Tor.
-Source: Stacks Project, More on Algebra, Tag 0653 (`lemma-last-one-flat`), Tor argument.
+Source: Stacks Project, More on Algebra, Tag 0653, Tor argument.
 
 Step 1. Put `K = im(d^(a-1))` and factor the differential as a surjection `π` onto `K`
 followed by its inclusion `ι` into `P^a`. The low-degree Tor sequence for
-`0 -> K -> P^a -> P.opcycles a -> 0` (lem-weil-pbc-tor-long-exact-first-variable)
+`0 -> K -> P^a -> P.opcycles a -> 0`
 identifies `Tor_1(P.opcycles a, N)` with `ker(ι tensor 1)`. Indeed,
-`Tor_1(P^a, N) = 0`: use Tor symmetry (lem-weil-pbc-tor-symmetry) and a free resolution
-of `N` (def-weil-pbc-tor-modules). Tensoring its image sequence with the flat module
-`P^a` is exact by flatness (def-weil-pbc-flat-ring-map) and tensor right exactness
-(lem-weil-pbc-tensor-right-exact), so its first homology vanishes.
+`Tor_1(P^a, N) = 0`: use Tor symmetry and a free resolution
+of `N`. Tensoring its image sequence with the flat module
+`P^a` is exact by flatness and tensor right exactness, so its first homology vanishes.
 
-Step 2. Place `N` in degree zero (def-pc-tensor-complex-sheaves). The differential is
+Step 2. Place `N` in degree zero. The differential is
 `(ι tensor 1) ∘ (π tensor 1)`, and `π tensor 1` is surjective by tensor right exactness.
 It maps cycles into `ker(ι tensor 1)` and boundaries to zero: `π ∘ d^(a-2) = 0`
 because its composite with the injective `ι` is `d^(a-1) ∘ d^(a-2) = 0`.
-It therefore descends to cohomology (def-pc-acyclic-complex-modules).
+It therefore descends to cohomology.
 
 Step 3. Given an element `y` of `ker(ι tensor 1)`, lift it along `π tensor 1` to `x`.
 The factorization of the differential shows that `x` is a cycle, so its cohomology
 class maps to `y`. Thus the descended map is surjective.
 
 Step 4. Compose this surjection with the inverse of the Tor boundary isomorphism of
-Step 1. Both the Tor boundary map (lem-weil-pbc-tor-long-exact-first-variable) and
+Step 1. Both the Tor boundary map and
 `π tensor 1` commute with every module map `N -> N'`, giving naturality in `N`. -/
 theorem exists_epi_homology_tensor_to_tor_opcycles
     (A : Type u) [CommRing A] (P : CochainComplex (ModuleCat.{u} A) ℤ)

@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-! # The stationary subquotient comparison at explicit filtration bounds
 
 Source: Stacks Project, Tags 012Q and 0132.
-(blueprint: lem-sp-filtered-stable-subquotient-at-bounds).
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ private theorem quotient_iso_of_eq
 
 /-- At stationary outer steps the cycle/boundary quotient is the graded cohomology image.
 Source: Stacks Project, Tags 012Q and 0132.
-(blueprint: lem-sp-filtered-stable-subquotient-at-bounds).
 
 Proof. Replace L^(p+r)K^(n+1) by zero in the cycle formula and replace
 L^(p-r+1)K^(n-1) by the whole object in the boundary formula. Write A=L^pK^n,

@@ -27,8 +27,7 @@ variable {X Y Z A B C : Type*}
   {L₃ : A ⥤ C} {R₃ : C ⥤ A}
 
 /-- Evaluation of the canonical composite extension is the canonical scalar
-associator. Source: Stacks 0FND
-(blueprint: lem-pur-adjunction-evaluation-composition).
+associator. Source: Stacks 0FND.
 Proof: compare the inverses of the two isomorphisms and transpose through the total
 scalar adjunction. The composite scalar transpose formula and the three evaluation
 transpose equations identify both sides with the composite extension unit. The

@@ -21,8 +21,7 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Constant realization takes flat modules to flat module sheaves.
-Source: Stacks Project, Tags 03ET and 08FC
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03ET and 08FC.
 Proof: lift the finitely many scalars and module sections in a relation on a common
 cover. Local injectivity of the module sheafification unit refines that cover so
 the lifted relation holds in the original module. Flatness factors this relation

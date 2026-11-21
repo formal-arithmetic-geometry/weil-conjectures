@@ -9,9 +9,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Endofunctor.Algebra
 public import Mathlib.CategoryTheory.Monoidal.NaturalTransformation
 
 /-! # Tensoring strict pairs
-
-Source: the tensor formula in the latest blueprint's Tate compatibility lemma.
-(blueprint: lem-wf-strict-pair-tensor)
 -/
 
 @[expose] public noncomputable section
@@ -26,7 +23,6 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   (P : C ⥤ C) [P.Monoidal] {L : C} (τ : P.obj L ≅ L)
 
 /-- Tensor with a fixed strict pair, using the inverse tensorator.
-Source: latest blueprint, Tate twist formula (blueprint: lem-wf-strict-pair-tensor).
 The morphism equation follows by tensorator naturality and the original strict
 morphism equation; tensor bifunctoriality gives the identity and composition laws. -/
 def tensorWith : IsoAlgebra P ⥤ IsoAlgebra P where
@@ -72,8 +68,6 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   (B : C ⥤ D) [B.Monoidal] (c : B ⋙ Q ≅ P ⋙ B) [c.hom.IsMonoidal]
 
 /-- The cotensor square associated to a monoidal commuting comparison.
-Source: latest blueprint, monoidality used in the beta square
-(blueprint: lem-wf-strict-pair-tensor).
 Proof: precompose with the composite tensorator, apply the monoidal equation for
 c, and cancel each tensorator with its inverse. -/
 lemma scalar_cotensor_square (K L : C) :
@@ -94,8 +88,6 @@ lemma scalar_cotensor_square (K L : C) :
 
 /-- A monoidal scalar comparison and an equivariant line isomorphism induce a
 natural isomorphism between the corresponding strict tensor functors.
-Source: latest blueprint, beta_K=(1 tensor b)t_B
-(blueprint: lem-wf-strict-pair-tensor).
 Proof: inverse tensorators are natural. The monoidal square for c identifies their
 composites on the two sides; the line equation replaces Q(b) followed by sigma.
 Bifunctoriality and naturality of B's tensorator then give the strict morphism
@@ -157,7 +149,6 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   {P : C ⥤ C} [P.Monoidal] {Q : D ⥤ D} [Q.Monoidal]
 
 /-- Existential monoidal and line data suffice to construct the strict comparison.
-Source: Tate compatibility, the beta square (blueprint: lem-wf-strict-pair-tensor).
 Proof: eliminate the two witnesses and use tensorRightScalarIso. This elimination
 is performed for abstract monoidal categories, so applications need not expand
 monoidal structures in the concrete derived category. -/

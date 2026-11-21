@@ -42,9 +42,8 @@ import Mathlib.CategoryTheory.Category.ULift
 /-!
 # The representative normalization of the derived constant-tower comparison
 
-Source: Stacks Project, Derived Categories, Tag 06XN, `lemma-find-existence-computes`
-(dual), and the completed-pullback constant-tower subargument, Step 4
-(blueprint: lem-cbc-derived-constant-tower-normalization).
+Source: Stacks Project, Derived Categories, Tag 06XN
+(dual), and the completed-pullback constant-tower subargument, Step 4.
 
 The auxiliary maps below merely spell out the canonical localization identifications.
 Strict towers are indexed by `ℕᵒᵖ`, with level `n` representing the paper's level `n + 1`.

@@ -29,7 +29,7 @@ variable {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B
   (adj : E ⊣ R)
 
 /-- Totalizing the sheaf unit equation gives the unit equation on complexes.
-Source: Stacks 012Z, 0GL1 (blueprint: lem-sf-open-tensor-unit-totalization).
+Source: Stacks 012Z, 0GL1.
 Proof: test on every homogeneous tensor summand. Naturality of the total tensor
 moves the sheaf unit through its insertion. The restriction summand equation,
 composed with the two inverses, identifies the inverse restriction map on that

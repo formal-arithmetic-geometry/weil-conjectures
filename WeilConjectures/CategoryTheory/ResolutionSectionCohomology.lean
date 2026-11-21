@@ -14,9 +14,6 @@ import Mathlib.Algebra.Category.Grp.Ulift
 
 /-!
 # Sections of an injective resolution compute object cohomology
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 3; Mathlib's computation of
-Ext.
 -/
 
 @[expose] public section
@@ -82,10 +79,6 @@ private noncomputable def sectionComplexIso
         exact congrArg ULift.up (sectionEquiv_naturality J X (K.d i j) a).symm)
 
 /-- The section complex of any specified injective resolution computes object cohomology.
-
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 3; the free-abelian
-sheafification adjunction and Mathlib's injective-resolution computation of Ext.
-(blueprint: lem-sc-resolution-section-cohomology)
 
 Proof: Sheafification adjunction identifies morphisms from the free abelian sheaf on X
 with morphisms from the free abelian representable presheaf. The free-forgetful

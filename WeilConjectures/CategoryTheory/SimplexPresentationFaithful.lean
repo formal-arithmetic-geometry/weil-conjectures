@@ -225,7 +225,6 @@ private theorem coface_injective {a b : SimplexCategoryGenRel} {f g : a ⟶ b}
 /-- The canonical presentation functor is faithful.
 Source: Stacks Project, Tag 0168, Lemma 14.2.4(c); Kerodon, Propositions
 1.1.1.9 and 1.1.2.13 (Tags 04FQ and 04FT) for the two pure normal forms.
-(blueprint: lem-sc-module-cup-godement-simplex-presentation-faithful)
 Proof: factor each word as a pure sigma block followed by a pure delta block,
 using Mathlib's factorization theorem. Equal monotone maps have the same image,
 so the middle ordinals agree. Uniqueness of epi-mono factorizations then shows

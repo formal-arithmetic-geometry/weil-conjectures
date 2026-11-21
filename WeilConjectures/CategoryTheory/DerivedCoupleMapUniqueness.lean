@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.ExactCouple
 universe u v
 open CategoryTheory.Limits
 namespace CategoryTheory.BigradedExactCouple
-/-- (blueprint: lem-sp-derived-couple-map-uniqueness)
+/-- 
 The three induced maps are uniquely determined by their descent equations.
 This is the universal-property portion of Stacks Tag 011R.
 

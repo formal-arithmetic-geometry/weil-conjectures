@@ -21,8 +21,7 @@ import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 /-!
 # Injective abelian étale sheaves are Čech-acyclic
 
-Source: Stacks Project, sites-cohomology.tex, Lemma 03AW
-(blueprint: lem-weil-pbc-injective-sheaf-cech-acyclic).
+Source: Stacks Project, sites-cohomology.tex, Lemma 03AW.
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ indexed by any `I : Type (u + 1)` (finite or not, possibly empty). The Čech com
 recorded `cechComplexFunctor` of the family `i ↦ Over.mk (f i)` in `Over U`, whose finite
 products are the fibre products `V i₀ ×_U ⋯ ×_U V iₚ`, applied to `𝓘` restricted to `Over U`.
 Source: Stacks Project, Lemma 03AW, via Lemmas 03F6, 03AS, 03AT.
-(blueprint: lem-weil-pbc-injective-sheaf-cech-acyclic)
 
 Proof (the node's five steps). (1) With `O` the constant presheaf of rings `ℤ`, presheaves of
 `O`-modules are presheaves of abelian groups, and the free complex `K_• = O_{𝒰,•}` of

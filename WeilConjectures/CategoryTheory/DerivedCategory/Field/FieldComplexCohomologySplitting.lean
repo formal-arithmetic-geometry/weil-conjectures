@@ -22,10 +22,7 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-! # Cohomology models and retracts over a field
 
-Source: Weil conjectures blueprint, main-20261015, chap-The-trace-formula,
-theorem-trace-formula-euler-product, first sentence of prop-trf-karoubi-independence.proof.md;
-Stacks Project Tags 09FN, 09FP, 05CF and 05RU
-(blueprint: lem-trf-field-complex-cohomology-splitting).
+Source: Stacks Project Tags 09FN, 09FP, 05CF and 05RU.
 -/
 
 @[expose] public section
@@ -542,12 +539,10 @@ private theorem derived_splitting {F : Type u} [Field F]
 
 /-- Complexes over a field have cohomology models, and finite cohomology models have
 compatible image/kernel retracts.
-Source: main-20261015, prop-trf-karoubi-independence.proof.md, first sentence;
-Stacks Project Tags 09FN, 09FP, 05CF and 05RU
-(blueprint: lem-trf-field-complex-cohomology-splitting).
+Source: Stacks Project Tags 09FN, 09FP, 05CF and 05RU.
 
 Proof:
-1. By vector-space projectivity (lem-weil-pbc-vector-space-projective), the maps
+1. By vector-space projectivity, the maps
    from cycles onto cohomology and from terms onto boundaries have sections.
    Their images give complements V to boundaries in cycles and T to cycles in terms.
    The differential identifies T in degree n with boundaries in degree n+1.
@@ -561,7 +556,7 @@ Proof:
 4. For a quasi-isomorphism f, invert its degreewise cohomology maps and conjugate
    this inverse family by a and b. Step 3 makes the resulting map a homotopy inverse.
 5. Quasi-isomorphisms are therefore already invertible in the homotopy category.
-   The localization universal property (def-weil-abstract-derived-category) factors
+   The localization universal property factors
    its identity through D(F). Applying that property again to natural transformations
    gives inverse equivalences between the homotopy category and D(F).
 6. Maps between zero-differential complexes are arbitrary degreewise maps, and a
@@ -569,9 +564,9 @@ Proof:
    on Hom sets. The normalization in Step 2 identifies it with the canonical map
    induced by def-weil-derived-category-cohomology-functor.
 7. For pointFiniteDimensional objects, the cohomology model is bounded and termwise
-   finite-dimensional (def-weil-point-fd-complexes). Its terms are finitely generated
-   (def-weil-finite-dimensional-subspace, def-weil-finitely-generated-module) and
-   projective (lem-weil-pbc-vector-space-projective), so it is perfect by
+   finite-dimensional. Its terms are finitely generated
+   and
+   projective, so it is perfect by
    def-pc-perfect-ring-complex.
 8. For an idempotent e, each cohomology space decomposes as image H(e) plus kernel
    H(e), via x ↦ (H(e)x, (1-H(e))x), with inverse addition. Both summands retain

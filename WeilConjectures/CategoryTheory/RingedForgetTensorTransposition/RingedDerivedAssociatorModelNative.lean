@@ -28,7 +28,7 @@ import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedTens
 
 /-! # The canonical chain associator models the ringed derived associator
 
-Source: Stacks 0FPQ, 0FPT; detection on local pure triples.
+Source: Stacks 0FPQ, 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -55,8 +55,7 @@ variable {C : Type c} [SmallCategory C] (J : GrothendieckTopology C)
 
 -- Comparing the two concrete tensor presentations requires additional elaboration steps.
 /-- The concrete cochain associator gives the derived associator on K-flat models.
-Source: Stacks 0FPQ, 0FPT
-(blueprint: lem-sf-ringed-derived-associator-model-native).
+Source: Stacks 0FPQ, 0FPT.
 
 Proof: apply the supplied derived associator model and identify its chain
 isomorphism with the canonical associator by its local pure-triple formula.

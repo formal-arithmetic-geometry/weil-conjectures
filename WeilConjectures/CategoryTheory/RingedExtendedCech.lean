@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.RingedSectionLocalization
 /-!
 # The augmented extended localization Cech complex
 
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0996 and 099E.
 
 The alternating complex is constructed as the ordered total tensor product of
 `[O → O[1/f_i]]` in degrees zero and one. Tensoring localizations identifies the summand
@@ -34,22 +33,19 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
 
 /-- Complexes of module sheaves over the given ring sheaf, with integer degrees.
-Source: Stacks Project, algebraization.tex, Tag 099E
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 099E. -/
 abbrev ringedSiteComplex :=
   CochainComplex (SheafOfModules.{u}
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ℤ
 
 /-- The degree-zero ring complex.
-Source: Stacks Project, algebraization.tex, Tag 099E
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 099E. -/
 abbrev ringedSiteRingComplex : ringedSiteComplex O :=
   (HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj
     (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))
 
 /-- Terms of the one-section localization complex.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 def ringedLocalizationTwoTermX (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℤ) :
     SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) :=
   if n = 0 then SheafOfModules.unit
@@ -57,8 +53,7 @@ def ringedLocalizationTwoTermX (s : (O.obj ⋙ forget CommRingCat).sections) (n 
   else if n = 1 then ringedSectionLocalization O s else 0
 
 /-- The degree-zero term is the ring sheaf.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: evaluate the first branch of the definition of the graded terms. -/
 theorem ringedLocalizationTwoTermX_zero
     (s : (O.obj ⋙ forget CommRingCat).sections) :
@@ -67,8 +62,7 @@ theorem ringedLocalizationTwoTermX_zero
   simp [ringedLocalizationTwoTermX]
 
 /-- The degree-one term is the localization sheaf.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: zero and one are distinct integers, so the second branch gives the localization. -/
 theorem ringedLocalizationTwoTermX_one
     (s : (O.obj ⋙ forget CommRingCat).sections) :
@@ -76,8 +70,7 @@ theorem ringedLocalizationTwoTermX_one
   simp [ringedLocalizationTwoTermX]
 
 /-- The differential of the one-section complex is localization in degree zero.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 def ringedLocalizationTwoTermD (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℤ) :
     ringedLocalizationTwoTermX O s n ⟶ ringedLocalizationTwoTermX O s (n + 1) :=
   if h : n = 0 then
@@ -89,8 +82,7 @@ def ringedLocalizationTwoTermD (s : (O.obj ⋙ forget CommRingCat).sections) (n 
   else 0
 
 /-- The localization differential squares to zero.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: the only possibly nonzero differential has source degree zero and target degree one;
 its two neighbours vanish, so every composite is zero. -/
 theorem ringedLocalizationTwoTermD_comp
@@ -102,16 +94,14 @@ theorem ringedLocalizationTwoTermD_comp
   · simp [ringedLocalizationTwoTermD, hn]
 
 /-- The actual two-term localization complex, with no chosen or postponed data.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 def ringedLocalizationTwoTerm (s : (O.obj ⋙ forget CommRingCat).sections) :
     ringedSiteComplex O :=
   CochainComplex.of (ringedLocalizationTwoTermX O s) (ringedLocalizationTwoTermD O s)
     (ringedLocalizationTwoTermD_comp O s)
 
 /-- Components of the projection to the ring complex.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 def ringedLocalizationTwoTermAugmentationF
     (s : (O.obj ⋙ forget CommRingCat).sections) (n : ℤ) :
     (ringedLocalizationTwoTerm O s).X n ⟶ (ringedSiteRingComplex O).X n :=
@@ -124,8 +114,7 @@ def ringedLocalizationTwoTermAugmentationF
   else 0
 
 /-- The projection to `O[0]` is a chain map.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0996.
 Proof: in degree zero the target differential and the degree-one projection are both zero;
 in all other degrees the assertion follows from a zero component or a zero differential. -/
 theorem ringedLocalizationTwoTermAugmentationF_comm
@@ -145,8 +134,7 @@ theorem ringedLocalizationTwoTermAugmentationF_comm
     simp [ringedLocalizationTwoTermD, hn]
 
 /-- The augmented one-section localization complex.
-Source: Stacks Project, algebraization.tex, Tag 0996
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tag 0996. -/
 def ringedLocalizationTwoTermAugmentation
     (s : (O.obj ⋙ forget CommRingCat).sections) :
     ringedLocalizationTwoTerm O s ⟶ ringedSiteRingComplex O where
@@ -158,8 +146,7 @@ of the one-section complexes. Its degree-q summands are indexed by q-element sub
 the localization tensor identity makes them `O[1/(∏ f_i)]`. Finite sums are also finite
 products. The tensor differential gives the alternating localization maps. The augmentation
 is the degree-zero identity under the unit identifications and zero in other degrees.
-Source: Stacks Project, algebraization.tex, Tags 0996 and 099E
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0996 and 099E. -/
 def ringedExtendedCech :
     (r : ℕ) → (Fin r → (O.obj ⋙ forget CommRingCat).sections) →
       Σ K : ringedSiteComplex O, K ⟶ ringedSiteRingComplex O :=

@@ -24,7 +24,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 term of one higher filtration. This assertion only concerns target boundaries;
 it neither corrects a source representative nor constructs successor cycles.
 Source: Stacks Project, Homology, Tag 012K, displayed boundary formula.
-(blueprint: lem-sp-filtered-complex-cycle-representative-correction).
 
 Proof. The kernel of the page cokernel is the boundary inclusion, so y factors
 through graded boundaries. Pull back the epimorphism defining their image to
@@ -166,7 +165,6 @@ private theorem filteredComplex_boundary_representative_lift
 /-- A representative whose differential is a page boundary can be corrected to a
 successor-cycle representative without changing its source graded class.
 Source: Stacks Project, Homology, Tag 012K, displayed cycle and boundary formulas.
-(blueprint: lem-sp-filtered-complex-cycle-representative-correction).
 
 Proof. Write p = i.1 and n = i.1 + i.2. The relation gives j.1 = p+r and
 j.1+j.2 = n+1. Since the target page is the cokernel of its boundary inclusion,

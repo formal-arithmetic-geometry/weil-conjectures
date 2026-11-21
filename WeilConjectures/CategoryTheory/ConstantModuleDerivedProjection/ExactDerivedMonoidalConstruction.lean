@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Whiskering
 /-! # Construction of normalized exact derived monoidal functors
 
 Source: Stacks Project, Tags 07A4, 0FPQ and 0FPT.
-(blueprint: lem-sfb-exact-derived-monoidal-construction).
 -/
 
 @[expose] public noncomputable section
@@ -127,7 +126,7 @@ private theorem tensor_localization_iso (P R : CochainComplex E ℤ)
 /-- An exact flat-preserving monoidal functor has a representative-normalized derived
 strong monoidal structure, for the chosen derived-category universes.
 Source: Stacks Project, Derived Categories, Tags 0FPQ and 0FPT, and Cohomology on Sites,
-Tag 07A4 (blueprint: lem-sfb-exact-derived-monoidal-construction).
+Tag 07A4.
 
 Proof: take the subcategory of source K-flat complexes whose termwise images are K-flat.
 Functorial flat-term resolutions land in it, because the functor preserves flat objects

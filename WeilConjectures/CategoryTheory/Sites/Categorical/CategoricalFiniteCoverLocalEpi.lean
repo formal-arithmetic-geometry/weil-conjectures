@@ -81,7 +81,6 @@ private theorem finiteProduct_exact {K : Type} [Finite K]
 admitting local lifts through a sheaf epimorphism on a finite basis cover.
 Source: Stacks Project, Tags 00W1, 00W9 and 00WL (the plus construction and local
 description of epimorphisms), with Grothendieck abelian coefficients.
-(blueprint: stage3-categorical-finite-cover-local-epi).
 
 Proof: The hypothesis applied to restrictions of a global P-section shows that
 b annihilates f(V). Thus b descends to the pointwise presheaf cokernel R(V).

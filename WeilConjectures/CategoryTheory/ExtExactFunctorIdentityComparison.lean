@@ -11,12 +11,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 /-!
 # Ext identity comparison
 
-Source: Stacks Project, derived.tex, Tag 015F; Mathlib Ext.Map.
+Source: Stacks Project, derived.tex, Tag 015F.
 
 The comparison is obtained directly from Mathlib's
 `LocalizerMorphism.equiv_smallShiftedHomMap`, specializing the localized functor to
 the identity. No injective resolutions or separate Ext composition comparison are needed.
-(blueprint: lem-weil-pbc-ext-exact-functor-identity-comparison)
 -/
 
 @[expose] public section
@@ -57,7 +56,6 @@ The components of e induce the corresponding isomorphism from the functor induce
 to the identity. Naturality for the shifted morphism is exactly the displayed square.
 After cancelling the canonical comparisons with single complexes and shifts, its
 components are Ext.mk₀ (e.hom.app X) and Ext.mk₀ (e.hom.app Y).
-(blueprint: lem-weil-pbc-ext-exact-functor-identity-comparison)
 -/
 theorem exactFunctorIdentityComparison
     {C : Type*} [Category C] [Abelian C] [HasExt.{w} C]

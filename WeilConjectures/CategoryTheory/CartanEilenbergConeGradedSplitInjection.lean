@@ -12,8 +12,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 
 /-! # A normalized split injection from the retained column cone
 
-Source: Stacks Project, Homology, Tags 012X and 0133; retained-column construction
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-split-injection).
+Source: Stacks Project, Homology, Tags 012X and 0133.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ summand of the supremum, and factors through the step. Transport these
 factorizations by extendXIso, and use the mapping-cone degreewise biproduct
 to combine them into w. Cancellation of the step monomorphism identifies
 all the transported lifts with w on their respective cone coprojections.
-This asserts no retraction and involves no quotient.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-split-injection). -/
+This asserts no retraction and involves no quotient. -/
 private theorem cartanEilenberg_cone_retained_lift
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)
@@ -190,8 +188,7 @@ that step occurs only when p+1 <= m+1, so m+1 differs from p and is killed
 too. Hence the map annihilates the degreewise step inclusion, by the
 universal property of the supremum of image subobjects. Empty intervals
 and p<b need no exceptional choices. No lift, quotient or splitting is
-asserted here.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-split-injection). -/
+asserted here. -/
 private theorem cartanEilenberg_cone_retained_projection
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)
@@ -316,8 +313,7 @@ private theorem cartanEilenberg_cone_retained_projection
     simp [c]
 
 /-- The retained cone summands give a normalized map into the quotient with a left inverse.
-Source: Stacks Project, Tags 012X and 0133; retained-column quotient construction.
-(blueprint: lem-sp-cartan-eilenberg-cone-graded-split-injection).
+Source: Stacks Project, Tags 012X and 0133.
 
 Proof: in degree m, project the ambient cone onto the complex-index-p summands.
 The cone K summand is retained only when m+1=p; otherwise the corresponding

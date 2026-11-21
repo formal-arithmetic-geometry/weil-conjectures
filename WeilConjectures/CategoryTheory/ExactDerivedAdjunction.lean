@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 /-! # The specified localization of an exact adjunction
 
 Source: Stacks Project, Derived Categories, Tag 015F, and the termwise
-exact-adjunction localization specified in `def-weil-exact-derived-adjunction`
-(auxiliary; not a blueprint node).
+exact-adjunction localization specified in.
 
 The categories have independent object, morphism, and derived morphism universes.
 The commutative squares are precisely the standard exact-functor factorizations;
@@ -32,7 +31,7 @@ namespace CategoryTheory.Adjunction
 factorizations, with independent universes for both categories. Its unit and
 counit are the original termwise unit and counit after localization and these
 specified comparisons. Source: Stacks Tag 015F and the construction specified
-by the node (auxiliary; not a blueprint node). -/
+by the node. -/
 @[reducible]
 def mapExactDerivedCategory
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]

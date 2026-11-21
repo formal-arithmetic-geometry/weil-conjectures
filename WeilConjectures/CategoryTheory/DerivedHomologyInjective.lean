@@ -19,9 +19,6 @@ namespace CategoryTheory
 /-- Zeroth cohomology computes maps from any derived object into an injective
 object concentrated in degree zero.
 
-Source: the injective comparison in proof step 1 of
-`new-stage3-derived-large-coproducts-transfer`.
-
 Proof in words: represent K by a complex C. The single complex I[0] is K-injective,
 so maps in the derived category are chain maps C -> I[0] modulo homotopy.
 A chain map is a map C⁰ -> I killing the degree-minus-one boundaries. It restricts
@@ -34,8 +31,7 @@ this extension is a null homotopy. Thus the cohomology map is both surjective
 and injective. Transport along the canonical localization and single-object
 cohomology isomorphisms. This argument also covers acyclic C and the zero
 injective, and does not require any coproduct in either category.
-
-(auxiliary; not a blueprint node) -/
+-/
 theorem derived_homology_injective_bijective
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{w} A]
     (K : DerivedCategory A) (I : A) [Injective I] :

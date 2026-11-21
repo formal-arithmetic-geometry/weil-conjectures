@@ -98,8 +98,7 @@ public import Mathlib.CategoryTheory.Limits.Final
 /-! # Evaluation-defined scalar Hom comparisons in coefficient towers
 
 Source: Stacks Project, sites-cohomology.tex, Tags 08J9 and 07A4, and the formal
-coefficient-tower argument in the proof of the blueprint node
-(blueprint: lem-pur-scalar-hom-comparison-tower).
+coefficient-tower argument in the proof of the blueprint node.
 
 The comparison is the existing `WeilConjectures.coefficientBaseChangeHom`.
 It uses evaluation on Hom tensor P, the symmetry-equivalent convention of the
@@ -334,9 +333,8 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 /-- Evaluation-transpose scalar Hom maps are natural and respect coefficient towers
 and the identity coefficient map, without flatness or boundedness assumptions.
 Source: Stacks Project, sites-cohomology.tex, Tags 08J9 (equation-internal-hom)
-and 07A4 (lemma-pullback-tensor-product); the tower argument is formal, rather than
-an additional theorem asserted in Stacks
-(blueprint: lem-pur-scalar-hom-comparison-tower).
+and 07A4; the tower argument is formal, rather than
+an additional theorem asserted in Stacks.
 
 Proof:
 1. Use the closed adjunction already supplied by M.closed.

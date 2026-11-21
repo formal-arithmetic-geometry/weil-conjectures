@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.DerivedFunctorValueTriangle
 /-!
 # Left derived functors preserve distinguished triangles
 
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause
-(blueprint: lem-pur-derived-functor-triangles-05sc).
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace CategoryTheory.Functor
 vertices, then the value at the third exists and the three values form a
 distinguished triangle, with the third map viewed through the canonical shift
 isomorphism.
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause
-(blueprint: lem-pur-derived-functor-triangles-05sc).
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause.
 
 Proof (the LF dual of the source proof):
 1. For values A at X and B at Y, use `lem-pur-derived-functor-morphisms-05sa`

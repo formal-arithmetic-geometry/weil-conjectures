@@ -19,8 +19,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Exact countable products descend to the derived category and commute with homology.
-Source: Stacks Project, Derived Categories, Lemma 13.34.2, Tag 07KC
-(blueprint: lem-weil-derived-limit-products-core).
+Source: Stacks Project, Derived Categories, Lemma 13.34.2, Tag 07KC.
 
 Proof: Exact products preserve the short exact sequences defining cycles, boundaries and
 homology, so homology commutes with termwise products and products of quasi-isomorphisms

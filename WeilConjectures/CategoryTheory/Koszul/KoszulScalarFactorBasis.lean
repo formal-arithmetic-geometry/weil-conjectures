@@ -14,7 +14,6 @@ import all WeilConjectures.Algebra.Homology.CanonicalRingedTensorComparison.Ring
 /-! # KoszulScalarFactorBasis for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-scalar-factor-basis).
 -/
 
 @[expose] public noncomputable section
@@ -115,8 +114,7 @@ rank-one formula. In each of the two factor degrees, unfold the double-complex c
 cancel single-object identifications, leaving this rank-one formula.
 Proof step 3: For the tensor unit basis, compare inverse left unitors under scalar extension
 using the module binary comparison and its unit formula; naturality and inverse cancellation
-finish the identity.
-(blueprint: lem-f5-koszul-scalar-factor-basis). -/
+finish the identity. -/
 theorem scalarFactorBasis (φ : R ⟶ B)
     (s : (R.obj ⋙ forget CommRingCat).sections) (m : ℕ) (e : Bool)
     (j : (extension φ).obj (one R) ≅ one B)

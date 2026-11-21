@@ -9,8 +9,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-! # Coproduct preservation from copower preservation
-
-Source: the retract argument for coproduct comparison maps, written by V3.
 -/
 
 @[expose] public section
@@ -23,8 +21,6 @@ namespace CategoryTheory
 
 /-- A functor from a category with zero morphisms preserves coproducts if it preserves
 sums of copies of one object, for every object.
-Source: the elementary retract argument applied to the comparison morphisms.
-(auxiliary; not a blueprint node)
 
 Proof in words: given a family K_i, put S = coproduct K_i. Each K_i is a retract
 of S, using its coprojection and the map equal to the identity on that summand

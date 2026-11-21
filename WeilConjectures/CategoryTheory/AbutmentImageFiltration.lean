@@ -145,7 +145,6 @@ private theorem finite_inverse_limit
 /-- A normalized invertible diagonal cocone transports the finite image filtration
 and its convergence to the prescribed abutment.
 Source: Stacks Tags 011T, 012F and 012U (3), blueprint steps 5 and 7.
-(blueprint: lem-sp-abutment-image-filtration)
 
 Proof: Take the normalized diagonal colimits A supplied by negative-E vanishing.
 Factor the prescribed cocone through A using its universal property. Its component

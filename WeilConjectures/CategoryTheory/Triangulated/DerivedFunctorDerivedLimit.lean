@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.Triangulated.RightDerivedFunctorCountableP
 /-!
 # Right derived functors and countable derived limits
 
-Source: Stacks Project, Injectives, Lemma Tag 08U1
-(blueprint: lem-pc-derived-functor-commutes-derived-limit).
+Source: Stacks Project, Injectives, Lemma Tag 08U1.
 -/
 
 @[expose] public section
@@ -32,17 +31,14 @@ triangle. The comparison of product vertices respects each projection.
 
 Choose the Roos triangle for `L`. Represent the terms of the tower by K-injective
 complexes. Their termwise product is K-injective and computes the product in the
-derived category (blueprint: lem-pc-ringed-space-product-kinjective). Product
+derived category. Product
 preservation by `F` identifies its image with the product of the images; the
-derived-product construction gives the target product
-(blueprint: lemma-reduction-derived-nakayama). The right derived functor is
-triangulated (blueprint: lem-pc-right-derived-functor-triangulated). Its image
+derived-product construction gives the target product. The right derived functor is
+triangulated. Its image
 of the source Roos triangle is therefore distinguished, and the product
-comparison identifies its middle map with the target transition endomorphism
-(blueprint: lem-pc-homotopy-limit-map). This gives a Roos triangle for the image,
-so the image is a derived limit (blueprint: def-weil-derived-limit).
-Stacks Project, Injectives, Lemma Tag 08U1
-(blueprint: lem-pc-derived-functor-commutes-derived-limit). -/
+comparison identifies its middle map with the target transition endomorphism. This gives a Roos triangle for the image,
+so the image is a derived limit.
+Stacks Project, Injectives, Lemma Tag 08U1. -/
 theorem rightDerivedFunctor_isDerivedLimitTriangle (X : Scheme.{u})
     (F : X.Modules ⥤ AddCommGrpCat.{u}) [F.Additive]
     [PreservesLimitsOfShape (Discrete ℕ) F]

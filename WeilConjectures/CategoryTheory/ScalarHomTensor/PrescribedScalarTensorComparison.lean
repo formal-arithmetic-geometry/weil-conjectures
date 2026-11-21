@@ -39,13 +39,13 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   (TS : CoefficientTensorModels.{r, c, v, w} J S SS)
 
 /-- The ordinary adjunction unit on local sections of the prescribed scalar pair.
-Source: Stacks 03CZ (blueprint: lem-coef-prescribed-scalar-tensor-comparison). -/
+Source: Stacks 03CZ. -/
 noncomputable def pairUnit (X : scalarModules J R) (V : Cᵒᵖ) (x : X.val.obj V) :
     (s.extension.obj X).val.obj V :=
   (s.ordinaryAdjunction.unit.app X).val.app V x
 
 /-- The prescribed unit equals the sheafified tensor-insertion section.
-Source: Stacks 03CZ (blueprint: lem-coef-prescribed-scalar-tensor-comparison).
+Source: Stacks 03CZ.
 Proof: apply the inverse object transport to the scalar pair's ordinary-unit
 formula. Its composite with the forward transport is the identity. -/
 theorem pairUnit_eq_tensorSection (X : scalarModules J R) (V : Cᵒᵖ)
@@ -63,7 +63,7 @@ theorem pairUnit_eq_tensorSection (X : scalarModules J R) (V : Cᵒᵖ)
   exact hi.symm.trans he
 
 /-- The representative square for a prescribed scalar-derived pair.
-Source: Stacks 07A4 (blueprint: lem-coef-prescribed-scalar-tensor-comparison). -/
+Source: Stacks 07A4. -/
 def pairTensorNormalization
     (hE : ∀ (P : CochainComplex (scalarModules J R) ℤ),
       CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P →
@@ -101,8 +101,7 @@ attribute [local irreducible] pairTensorNormalization
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Strong scalar tensor comparison, retaining its actual pure-tensor normalization
 before and after passage to the derived category.
-Source: Stacks 07A4 and 0D6D
-(blueprint: lem-coef-prescribed-scalar-tensor-comparison). -/
+Source: Stacks 07A4 and 0D6D. -/
 structure PairTensorComparison where
   /-- Scalar extension carries K-flat complexes to K-flat complexes. -/
   preservesKFlat : ∀ (P : CochainComplex (scalarModules J R) ℤ),
@@ -157,8 +156,7 @@ private theorem withScalarPair_scalar (M : ScalarHomModels.{c, v, r, w} J)
 
 /-- A normalized tensor comparison for any prescribed scalar-derived pair, using
 simultaneous closed tensor models.
-Source: Stacks 07A4, 07A6 and 0D6D
-(blueprint: lem-coef-prescribed-scalar-tensor-comparison).
+Source: Stacks 07A4, 07A6 and 0D6D.
 Proof: update the simultaneous scalar family at the given coefficient map, retaining
 all closed structures and tensor models. Apply the existing scalar tensor comparison
 to this family. At the updated map the scalar pair is the prescribed pair, so all
@@ -182,8 +180,7 @@ theorem pairTensorComparison_from_models
     exact t.normalization
 
 /-- Unit generators uniquely determine the scalar tensor comparison on complexes.
-Source: Stacks 03EK and 07A4
-(blueprint: lem-coef-prescribed-scalar-tensor-comparison).
+Source: Stacks 03EK and 07A4.
 Proof: transpose a component through the ordinary scalar adjunction. The resulting
 maps out of the total tensor agree on every summand's pure tensors, hence agree.
 The existing normalized comparison supplies existence. -/
@@ -224,7 +221,7 @@ theorem pairTensorIso_existsUnique
   exact (he p q k h V x y).trans ((tc.generators P Q p q k h V x y).symm)
 
 /-- Ordinary tensor evaluation depends on the prescribed ordinary functor and adjunction.
-Source: Stacks 03CZ and 07A4 (blueprint: lem-coef-prescribed-scalar-tensor-comparison).
+Source: Stacks 03CZ and 07A4.
 Proof: identify the extension functors and their ordinary adjunctions, then apply
 pairTensorIso_existsUnique. The derived presentation does not enter the generator formula. -/
 theorem pairTensorIso_existsUnique_with_ordinary
@@ -254,7 +251,7 @@ theorem pairTensorIso_existsUnique_with_ordinary
   exact pairTensorIso_existsUnique.{c, v, r, w} a s M P Q
 
 /-- K-flat preservation is unchanged when the scalar extension is given explicitly.
-Source: Stacks 07A4 (blueprint: lem-coef-prescribed-scalar-tensor-comparison).
+Source: Stacks 07A4.
 Proof: identify the ordinary extension functors and apply scalarExtension_preservesKFlat. -/
 theorem pair_preservesKFlat_with_extension
     (E : scalarModules J R ⥤ scalarModules J S) [E.Additive]

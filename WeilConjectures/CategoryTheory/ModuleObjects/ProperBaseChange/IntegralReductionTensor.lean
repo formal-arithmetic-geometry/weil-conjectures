@@ -26,7 +26,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralReductionTensor
 /-! # Integral reduction as a derived tensor functor
 
 Source: Bhatt--Scholze, Lemma 6.5.9(3), and the definition of derived extension
-of scalars (blueprint: lem-weil-pbc-integral-reduction-tensor).
+of scalars.
 -/
 
 @[expose] public section
@@ -62,8 +62,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- Derived reduction followed by restriction is a left derived functor of tensor
 with the residue regular module regarded as an integral module.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), and derived extension of scalars
-(blueprint: lem-weil-pbc-integral-reduction-tensor).
+Source: Bhatt--Scholze, Lemma 6.5.9(3), and derived extension of scalars.
 
 Proof in words. The coequalizer defining extension of scalars, after restriction,
 is the coequalizer defining relative tensor with the restricted regular residue

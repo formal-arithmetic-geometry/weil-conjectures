@@ -297,8 +297,7 @@ end Derived
 
 /-- The evaluation transpose of an exact derived monoidal functor respects the signed
 contravariant source shifts. This asserts a shift square only, not exactness or thick closure.
-Source: Stacks Project, Tags 08J9 and 08JC; steps 2--4 of the site comparison argument
-(blueprint: lem-sf-exact-derived-hom-comparison-shift).
+Source: Stacks Project, Tags 08J9 and 08JC.
 
 Proof: choose a K-injective representative I of M and a K-injective replacement
 q:FI -> J. The ordinary map F Hom(E,I) -> Hom(FE,FI) -> Hom(FE,J) is natural in E.

@@ -27,8 +27,7 @@ attribute [local instance] derived_hasCoproducts
 
 /-- The well-generation and common cardinal-bound part of the perfect-class argument.
 
-Source: Neeman, Theorem 0.2; Krause, Sections 6.2--6.3.
-(blueprint: new-sfb-derived-perfect-small-class-core)
+Source: Neeman, Theorem 0.2.
 
 Proof: construct a sufficiently large regular cardinal above the well-generation bound and
 above representatives for `P`; the alpha-compact objects form the required class. -/

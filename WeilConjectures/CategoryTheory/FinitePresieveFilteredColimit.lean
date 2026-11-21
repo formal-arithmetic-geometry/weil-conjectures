@@ -64,8 +64,7 @@ private theorem finite_sections_equal
 
 /-- A filtered colimit of presheaves satisfying the sheaf condition for one finite
 presieve with pairwise pullbacks satisfies that same condition.
-Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W
-(blueprint: lem-weil-pbc-finite-presieve-filtered-colimit).
+Source: Stacks Project, Sites, Tag 0738(4) and Tag 00VM; Categories, Tag 002W.
 
 Proof: Index the arrows of R by its finite subtype of uncurried arrows. Evaluation
 preserves presheaf colimits. For separatedness, lift two sections over X to a common

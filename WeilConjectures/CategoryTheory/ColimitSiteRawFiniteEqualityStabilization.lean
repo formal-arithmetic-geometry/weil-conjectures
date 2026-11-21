@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.ColimitSiteKanUnitRelations
 /-! # Finite raw section equality stabilization
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-finite-equality-stabilization).
 -/
 
 @[expose] public section
@@ -47,9 +46,8 @@ private theorem arrow_eq_preserves_equality {S T U : Type u}
   rw [← Arrow.mk_injective _ _ h]
   exact hxy
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 finite overlap equalities in the filtered-colimit calculation.
-(blueprint: lem-weil-pbc-colimit-site-raw-finite-equality-stabilization).
 
 Proof: The unit condition htheta determines each theta uniquely by the sheaf
 adjunction hom-equivalence. Consequently theta preserves identity and composition,

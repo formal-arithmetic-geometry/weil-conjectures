@@ -43,9 +43,7 @@ import Mathlib.CategoryTheory.Limits.Final
 # Cofinality of the arithmetic Roos tower
 
 Source: Stacks Project, Cohomology on Sites, Tag 0941, and Modules on Sites,
-Tag 03EK; the explicit finite-block comparison and scalar-extension refinement
-in the proof of `lem-pur-compact-support-integral-coefficient-comparison`
-(blueprint: lem-pur-compact-support-roos-cofinality).
+Tag 03EK.
 
 The category parameter below is instantiated by `Mod (underline A)` for a
 small site and its constant ring sheaf.  The recorded arithmetic restriction,

@@ -19,8 +19,6 @@ namespace CategoryTheory
 
 /-- Compatible morphisms into a finite cokernel presentation have a limit when
 endomorphisms of the projective generator are continuous functions into a compact ring.
-Source: Hemo--Richarz--Scholbach, Proposition 5.1, finite-presentation chart argument.
-(blueprint: lem-sp-integral-projective-presentation-complete).
 
 Proof. Lift each morphism through the finite free presentation by projectivity.
 Lift each scalar-divisible difference by exactness of the scalar cokernel sequence,

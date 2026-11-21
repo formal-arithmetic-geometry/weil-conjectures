@@ -17,8 +17,7 @@ namespace CategoryTheory
 
 /-- Right unitality needs the tensor square only at the chosen representative
 and the coefficient unit, rather than on every pair of complexes.
-Source: Stacks Project, Tag 07A4
-(blueprint: lem-pur-scalar-right-unit-at-representative).
+Source: Stacks Project, Tag 07A4.
 Proof: postcompose by the monic computation counit at X. Substitute the unit
 normalization in its tensor with that counit. Naturality of the derived tensor
 comparison moves the localized source unit into the representative tensor square.

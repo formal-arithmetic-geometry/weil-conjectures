@@ -12,9 +12,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
 
 /-! # Additive functors commute with the finite Cartan--Eilenberg diagonals
-
-Source: blueprint thm-sp-if-e1, proof paragraph 2, finite diagonal sums.
-(blueprint: lem-sp-cartan-eilenberg-mapped-total).
 -/
 
 @[expose] public section
@@ -28,8 +25,6 @@ namespace CategoryTheory.Functor
 set_option backward.isDefEq.respectTransparency false in
 /-- An additive functor commutes with this totalization because each diagonal has
 only finitely many nonzero terms. The comparison is fixed on the diagonal inclusions.
-Source: blueprint thm-sp-if-e1, proof paragraph 2, finite diagonal sums.
-(blueprint: lem-sp-cartan-eilenberg-mapped-total).
 
 Proof.
 1. Choose b below which I vanishes. In total degree n, extension by zero leaves only

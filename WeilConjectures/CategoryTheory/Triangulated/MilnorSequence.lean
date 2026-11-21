@@ -18,9 +18,7 @@ import WeilConjectures.CategoryTheory.Triangulated.MilnorProjectionFactorization
 /-!
 # Milnor exact sequence for a derived inverse limit
 
-Source: Stacks Project, More on Algebra, Tags 07KY and 08U5;
-Derived Categories of Schemes, Tag 08D4, proof of (2)
-(blueprint: lem-pc-derived-limit-milnor-sequence).
+Source: Stacks Project, More on Algebra, Tags 07KY and 08U5; Derived Categories of Schemes, Tag 08D4, proof of (2).
 
 The maps are chosen simultaneously for all specified Roos triangles and are natural
 for morphisms of these triangles. No functorial choice of a derived-limit object is assumed.
@@ -68,12 +66,11 @@ private def milnorProjectionCone [HasDerivedCategory.{v} AddCommGrpCat.{u}]
       simpa only [Category.assoc] using (sub_eq_zero.mp hn))
 
 /-- The natural Milnor short exact sequence for every derived inverse limit of abelian groups.
-Source: Stacks Project, Tags 07KY and 08U5; Tag 08D4, proof of (2)
-(blueprint: lem-pc-derived-limit-milnor-sequence).
+Source: Stacks Project, Tags 07KY and 08U5; Tag 08D4, proof of (2).
 
 Proof, following the node:
-1. Use the defining distinguished Roos triangle (`def-weil-derived-limit`). Exactness of
-countable products in abelian groups (`lem-pc-abelian-groups-exact-products`) and part (2)
+1. Use the defining distinguished Roos triangle. Exactness of
+countable products in abelian groups and part (2)
 of `lemma-reduction-derived-nakayama` identify the cohomology of the product with the
 product of the cohomology groups, compatibly with every projection. Under this identification
 cohomology sends the transition endomorphism to the transition endomorphism of the cohomology

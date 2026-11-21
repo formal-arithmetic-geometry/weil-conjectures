@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Filtered.Final
 /-! # Finite raw section lifts
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-raw-finite-sections-lift).
 -/
 
 @[expose] public section
@@ -175,9 +174,8 @@ private theorem untransport_raw
   simpa using hz
 
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-the raw section presentation and finite-stage construction.
-(blueprint: lem-weil-pbc-colimit-site-raw-finite-sections-lift).
+/-- Source: Stacks Project, Sites, Tag 0A35,
+the raw section presentation and construction.
 
 Proof: Evaluation preserves the outer presheaf colimit, so each of the finitely
 many given elements has a representative in some B(t). The pointwise Kan formula

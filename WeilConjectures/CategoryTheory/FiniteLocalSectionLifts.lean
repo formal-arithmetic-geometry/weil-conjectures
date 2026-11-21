@@ -22,8 +22,7 @@ namespace CategoryTheory.Presheaf
 In particular, finitely many entries in a sheafified constant ring are simultaneously
 constant after refinement, by applying this to its sheafification unit.
 
-Source: Stacks, Sites, Tag 00Z5; Mathlib `Presheaf.imageSieve_mem`.
-(auxiliary; not a blueprint node).
+Source: Stacks, Sites, Tag 00Z5.
 
 Proof: each section has a covering image sieve. Intersect these sieves over the finite
 index set; the empty intersection is maximal, and binary intersections preserve covering.

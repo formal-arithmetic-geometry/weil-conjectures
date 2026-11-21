@@ -204,7 +204,7 @@ lemma exists_shortExact_of_smul_pow_succ_eq_zero (r : R) {m : ℕ} {F : C}
       ← Linear.smul_comp]
     exact h
 
-/-- Blueprint `lemma-bounds-finite-reductions--2`: The residue test on the pro-étale site (the
+/-- The residue test on the pro-étale site (the
 categorical statement).
 
 Let `r ∈ R` be nilpotent and `κ ≅ 𝟙 / r` the cokernel of `r` on the unit, and assume that

@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 /-!
 # Products in the derived category of a ringed space
 
-Source: Stacks Project, Injectives, Tag 07D9 (blueprint: lem-pc-ringed-space-derived-products).
+Source: Stacks Project, Injectives, Tag 07D9.
 -/
 
 @[expose] public section
@@ -28,11 +28,11 @@ namespace AlgebraicGeometry.RingedSpace
 
 /-- The derived category of modules on a ringed space has products indexed by every set
 (the abelian structure is Mathlib's `SheafOfModules.instAbelian`).
-Source: Stacks Project, Injectives, Tag 07D9 (blueprint: lem-pc-ringed-space-derived-products).
+Source: Stacks Project, Injectives, Tag 07D9.
 Proof:
 1. Regard the opens of `X` as a small site with structure sheaf `moduleRings X`.
    By `prop-pur-kinjective-resolutions-exist` its module-sheaf category is Grothendieck
-   abelian and every complex has a K-injective resolution (`def-pur-kinjective-complex`).
+   abelian and every complex has a K-injective resolution.
    Choose representatives of the objects `K_i` and resolutions `K_i → I_i`.
 2. Module sheaves have sectionwise products. Form the termwise product complex `P` of
    the `I_i`, with its projections. Maps and homotopies into `P` are exactly families

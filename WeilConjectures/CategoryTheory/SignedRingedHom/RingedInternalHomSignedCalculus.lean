@@ -97,8 +97,7 @@ import WeilConjectures.Algebra.Homology.KInjectiveHomComplexOfUniverses
 
 /-! # Canonical closed calculus for the recorded ringed-site internal Hom
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 08J9, 08JB and 08JC
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks Project, Cohomology on Sites, Tags 06YS, 08J9, 08JB and 08JC.
 The original tensor, restriction and exactness statements are retained by public import.
 -/
 
@@ -111,7 +110,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace CategoryTheory.SignedRingedHom
 
 /-- The module category of the ringed site.
-Source: Stacks 08J9 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08J9. -/
 abbrev Modules {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) :=
   SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
@@ -120,28 +119,28 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{u})
 
 /-- The sheafified tensor, before deriving.
-Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 06YL. -/
 noncomputable instance moduleMonoidal : MonoidalCategory (Modules J R) :=
   SheafOfModules.monoidalCategory R
 
 /-- The ordinary symmetry of module sheaves.
-Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 06YL. -/
 noncomputable instance moduleSymmetric : SymmetricCategory (Modules J R) :=
   SheafOfModules.symmetricCategory R
 
 /-- The sheaf tensor--Hom adjunction.
-Source: Stacks 08J9 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08J9. -/
 noncomputable instance moduleClosed : MonoidalClosed (Modules J R) :=
   SheafOfModules.monoidalClosed (R := R)
 
 /-- The module category is Grothendieck abelian.
-Source: Stacks 07A5 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 07A5.
 Proof: sheafification is exact and module sheaves have the local free generators. -/
 instance moduleGrothendieck : IsGrothendieckAbelian.{u} (Modules J R) :=
   SheafOfModules.isGrothendieckAbelian _
 
 /-- Additivity of tensoring module sheaves in either variable.
-Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 06YL.
 Proof: tensor is the sheafification of the sectionwise module tensor, whose
 maps are additive in each factor; sheafification is additive. -/
 theorem moduleMonoidalPreadditive : MonoidalPreadditive (Modules J R) := by
@@ -161,8 +160,7 @@ theorem moduleMonoidalPreadditive : MonoidalPreadditive (Modules J R) := by
 attribute [instance] moduleMonoidalPreadditive
 
 /-- Functorial flat covers used to construct the ordinary K-flat derived tensor.
-Source: Stacks 06YL and 06YS, local free covers and their functorial direct sums
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 06YL and 06YS, local free covers and their functorial direct sums.
 Proof: take the sum of the free modules extended by zero from site objects, indexed
 by all local sections of the module. The evaluation is an epimorphism, each free
 summand is flat, and sums of flat modules are flat. A module map sends the summand
@@ -174,11 +172,11 @@ theorem moduleFlatResolution : Abelian.HasFunctorialFlatResolution (Modules J R)
 attribute [instance] moduleFlatResolution
 
 /-- The unbounded module derived category, with its small Hom universe.
-Source: Stacks 08J7 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08J7. -/
 abbrev D [HasDerivedCategory.{u} (Modules J R)] := DerivedCategory (Modules J R)
 
 /-- The countable-colimit convention used by the native derived tensor API.
-Source: Stacks 06YS (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 06YS. -/
 noncomputable instance moduleCountableColimits : HasColimitsOfSize.{0, 0} (Modules J R) :=
   hasColimitsOfSizeShrink.{0, 0, u, u} (Modules J R)
 
@@ -186,13 +184,12 @@ variable [HasDerivedCategory.{u} (Modules J R)]
 
 /-- The ordinary K-flat derived monoidal structure, with coherences descended
 from total tensor complexes.
-Source: Stacks 06YS, 08J9
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 06YS, 08J9. -/
 noncomputable instance derivedMonoidal : MonoidalCategory (D J R) :=
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory (Modules J R)
 
 /-- Cache the native localization tensor map with the same monoidal instance.
-Source: Stacks 06YS (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 06YS. -/
 noncomputable instance localizationLaxMonoidal :
     (DerivedCategory.Q : CochainComplex (Modules J R) ℤ ⥤ D J R).LaxMonoidal :=
   DerivedCategory.laxMonoidalQ (Modules J R)
@@ -207,8 +204,7 @@ private theorem nativeMonoidalEquality (A : Type (u + 1)) [Category.{u} A] [Abel
   rfl
 
 /-- The native derived tensor and its explicit localization implementation agree.
-Source: Stacks 06YS, 08J9
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 06YS, 08J9.
 Proof: both are the localization monoidal structure induced by the same K-flat
 left derivability structure and the same ordinary total tensor. Unfold the
 native instance and identify the localization structure fields. -/
@@ -220,17 +216,17 @@ theorem derivedMonoidal_eq_localization :
 
 /-- The recorded derived internal Hom, with independent-universe implementation
 specialized to this small site.
-Source: Stacks 08J7 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08J7. -/
 noncomputable def homFunctor : (D J R)ᵒᵖ × D J R ⥤ D J R :=
   derivedInternalHomOfUniverses.{u, u, u, u} J R
 
 /-- The unary recorded Hom functor.
-Source: Stacks 08J9 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08J9. -/
 noncomputable abbrev hom (K : D J R) : D J R ⥤ D J R :=
   Prod.sectR (op K) (D J R) ⋙ homFunctor J R
 
 /-- The ordinary Koszul braiding descended from complexes.
-Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 06YL. -/
 noncomputable instance derivedBraiding : BraidedCategory (D J R) :=
   Eq.mp (congrArg (fun m ↦ @BraidedCategory (D J R) _ m)
     (derivedMonoidal_eq_localization J R).symm)
@@ -241,7 +237,7 @@ set_option backward.isDefEq.respectTransparency false
 
 set_option linter.unusedSectionVars false in
 /-- The total tensor used in the representative model is the native complex tensor.
-Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 06YL.
 Proof: both are the totalization of the curried sheaf tensor, with the same
 summands, differential and Koszul sign. Unfold the two totalizations. -/
 theorem totalTensor_eq_native (P L : CochainComplex (Modules J R) ℤ) :
@@ -249,7 +245,7 @@ theorem totalTensor_eq_native (P L : CochainComplex (Modules J R) ℤ) :
   rfl
 
 /-- The explicit identification of the two ordinary total-tensor implementations.
-Source: Stacks 06YL (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 06YL. -/
 noncomputable def totalTensorNativeIso (P L : CochainComplex (Modules J R) ℤ) :
     (WeilConjectures.coefficientTotalTensor.{u, u, u} J R).obj (P, L) ≅ P ⊗ L :=
   eqToIso (totalTensor_eq_native J R P L)
@@ -467,7 +463,7 @@ private theorem normalizedAdjunction_unique
 
 /-- The tensor--Hom adjunction is uniquely fixed by ordinary evaluation on
 K-flat representatives, for the actual derived monoidal structure.
-Source: Stacks 08J9 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 08J9.
 Proof: compute the tensor by a K-flat source and Hom by a K-injective target.
 Componentwise evaluation identifies the two Hom sets by ordinary currying.
 The Hom differential and total-tensor Koszul differential agree under this
@@ -493,7 +489,7 @@ theorem normalizedAdjunction_existsUnique :
 end Normalization
 
 /-- The unique evaluation-normalized adjunction, not an arbitrary chosen adjoint.
-Source: Stacks 08J9 (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08J9. -/
 noncomputable def adjunction (K : D J R) : tensorRight K ⊣ hom J R K :=
   Eq.mp (congrArg (fun (m : MonoidalCategory (D J R)) ↦ ∀ P : D J R,
       @MonoidalCategory.tensorRight (D J R) _ m P ⊣ hom J R P)
@@ -501,14 +497,14 @@ noncomputable def adjunction (K : D J R) : tensorRight K ⊣ hom J R K :=
     (normalizedAdjunction_existsUnique J R).choose.adjunction K
 
 /-- Moving a shift between the two tensor inputs, using ordinary totalization.
-Source: Stacks 08JC (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08JC. -/
 noncomputable def tensorParameterShiftIso (K : D J R) (s : ℤ) (X : D J R) :
     X ⊗ K⟦s⟧ ≅ X⟦s⟧ ⊗ K :=
   (((curriedTensor (D J R)).obj X).commShiftIso s).app K ≪≫
     ((((curriedTensor (D J R)).flip.obj K).commShiftIso s).app X).symm
 
 /-- Naturality of the ordinary tensor shift comparison.
-Source: Stacks 08JC (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 08JC.
 Proof: the second-input total-tensor shift is natural in the first input by the
 bifunctor shift structure. The inverse first-input shift is natural by its
 functor commutation with shifts. Compose these two naturality equations. -/
@@ -529,7 +525,7 @@ theorem tensorParameterShift_naturality (K : D J R) (s : ℤ)
   rw [Functor.commShiftIso_inv_naturality, Category.assoc]
 
 /-- The natural tensor parameter shift comparison.
-Source: Stacks 08JC (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08JC. -/
 noncomputable def tensorParameterShift (K : D J R) (s : ℤ) :
     tensorRight (K⟦s⟧) ≅ shiftFunctor (D J R) s ⋙ tensorRight K :=
   NatIso.ofComponents (tensorParameterShiftIso J R K s)
@@ -539,8 +535,7 @@ noncomputable def tensorParameterShift (K : D J R) (s : ℤ) :
 mate of the ordinary total-tensor shift. It has the signed reindexing of the
 Hom complex; changing its normalization by a scalar depending only on s
 multiplies every component by that same scalar.
-Source: Stacks 0A8X and 08JC
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 0A8X and 08JC. -/
 noncomputable def sourceShift (K : D J R) (s : ℤ) :
     hom J R (K⟦s⟧) ≅ hom J R K ⋙ shiftFunctor (D J R) (-s) :=
   (adjunction J R (K⟦s⟧)).rightAdjointUniq

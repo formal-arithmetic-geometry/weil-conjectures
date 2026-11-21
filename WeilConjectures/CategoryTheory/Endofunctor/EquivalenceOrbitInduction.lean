@@ -14,7 +14,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-! # Exact orbit induction for an additive autoequivalence
 
 Source: steps 7--8 of the twisted ringed-action-site construction, motivated by
-Stacks Tag 00W0 (blueprint: lem-sf-equivalence-orbit-induction).
+Stacks Tag 00W0.
 -/
 
 @[expose] public section
@@ -127,9 +127,7 @@ private noncomputable def powerSum [HasCoproducts.{0} A] (X : A) :
     eqToIso ((congrArg (fun G : A ⥤ A ↦ G.obj X) (powerFunctor_eq F n)).trans
       (obj_eq F X n)))
 
-/-- The normalizations of exact orbit induction for an additive autoequivalence.
-Source: steps 7--8 of the twisted ringed-action-site construction
-(blueprint: lem-sf-equivalence-orbit-induction). -/
+/-- The normalizations of exact orbit induction for an additive autoequivalence. -/
 structure ExactOrbitInduction [Abelian A] [F.Additive] where
   /-- The free fixed-pair functor. -/
   induction : A ⥤ IsoAlgebra F
@@ -161,8 +159,7 @@ structure ExactOrbitInduction [Abelian A] [F.Additive] where
   colimits : PreservesFiniteColimits induction
 
 /-- Orbit-sum induction is additive and exact, with the specified power and zero-summand
-normalizations. Source: steps 7--8 of the twisted action-site construction; AB5 implies AB4.
-(blueprint: lem-sf-equivalence-orbit-induction).
+normalizations.
 
 Proof: use the source library's explicit free algebra, whose sum is indexed by all integers.
 Identify its recursively defined iterates with the powers of the chosen autoequivalence.

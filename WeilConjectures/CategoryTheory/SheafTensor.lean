@@ -14,10 +14,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 /-!
 # Closed symmetric tensor product of sheaves
 
-Source: the Weil conjectures blueprint, `chap-The-pro-etale-site`,
-`sk-def-sfb-sheaf-tensor/_section.md` and its proof
-(auxiliary; not a blueprint node).
-
 The tensor and symmetric structure are the existing `sfbSheafTensorStructure`, not a
 second construction. The first two statements discharge its additivity and sheafification
 inputs from the hypotheses of this node; they are local instances, to be enabled with
@@ -35,9 +31,6 @@ open scoped CategoryTheory.MonoidalClosed
 namespace CategoryTheory
 
 /-- Tensoring is additive in each variable under the coefficient hypotheses of the node.
-
-Source: blueprint `sk-def-sfb-sheaf-tensor`, proof, Presheaves paragraph
-(auxiliary; not a blueprint node).
 
 Proof: closedness makes left tensor a left adjoint; symmetry gives the same for right
 tensor. Both preserve zero objects and finite coproducts by
@@ -64,9 +57,6 @@ shows that both tensor functors are additive.
 /-- Sheafification exists at the site's essentially-small size, measured in the coefficient
 Hom universe. This is a consequence, rather than an added hypothesis.
 
-Source: blueprint `sk-def-sfb-sheaf-tensor`, the choice of `a` in the statement, and
-`def-weil-pbc-sheafification` (auxiliary; not a blueprint node).
-
 Proof: replace the essentially small site by a small equivalent site in the coefficient
 Hom universe. A Grothendieck abelian category has small limits and colimits, exact
 filtered colimits and a presentable generator. Choose a regular cardinal larger than
@@ -90,9 +80,6 @@ of sites. This is the sheafification universal property of
 constant coefficient unit, and it is closed and right exact in both variables.
 The symmetric structure and strong symmetric monoidality of sheafification are the
 fields of `sfbSheafTensorStructure J`.
-
-Source: blueprint `sk-def-sfb-sheaf-tensor`, clauses 1--2 and the Ab specialization
-(auxiliary; not a blueprint node).
 
 Proof, following the node:
 1. Closed coefficient tensor is additive by `sfbSheafTensor_monoidalPreadditive`.
@@ -173,9 +160,6 @@ attribute [local instance]
 objectwise tensor. It uses the inverse sheafification counits followed by the tensor
 comparison of the strong monoidal sheafification functor, so it is natural in both
 sheaves and specifies the tensor, not an arbitrary isomorphism.
-
-Source: blueprint `sk-def-sfb-sheaf-tensor`, the displayed tensor definition and proof,
-Monoidal structure on sheaves paragraph (blueprint: sk-def-sfb-sheaf-tensor).
 -/
 noncomputable def sfbSheafTensor_comparison
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{vA} C]

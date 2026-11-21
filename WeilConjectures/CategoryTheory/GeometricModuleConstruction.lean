@@ -19,7 +19,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 # Constructing module functors through a geometric morphism
 
 Source: Stacks Project, Modules on Sites, Tags 03D1--03D3 and 03D7.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -723,9 +722,8 @@ open GeometricConstruction
 set_option linter.unusedVariables false in
 -- The statement records every operation and its underlying comparison.
 /-- Construct the transported module functors and their operation comparisons.
-Source: Stacks Project, Tags 03D1 and 03D2, `lemma-pushforward-module`
-and `lemma-pullback-module`.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03D1 and 03D2
+and.
 
 Proof: L preserves finite products, and V does so because it is a right adjoint.
 For M, transport addition, zero, negation and scalar multiplication through L,
@@ -1150,7 +1148,6 @@ theorem geometric_module_construction
 /-- Construct the module direct image from a structural ring map.
 
 Source: Stacks Project, Modules on Sites, pushforward of modules on ringed topoi.
-(auxiliary; not a blueprint node).
 The underlying sheaf is literally the given direct image. The scalar action is
 restriction along the adjunct of the structural map, and the Hom adjunction
 transports this action and addition to those of the original module. -/

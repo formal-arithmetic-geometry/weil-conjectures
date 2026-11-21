@@ -19,7 +19,6 @@ open Limits
 
 /-- Every nonzero derived module object receives a nonzero map from the rank-one
 single complex into an integer shift. Source: Stacks Project, Tag 0F5X, first paragraph.
-(auxiliary; not a blueprint node)
 
 Proof in words: represent the object by a complex. Nonvanishing of the object implies
 nonvanishing of some cohomology module, since an acyclic representative is zero in the

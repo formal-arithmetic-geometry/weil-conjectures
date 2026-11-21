@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.ColimitStageKanRelations
 /-! # A stagewise Kan comparison cocone is colimiting
 
 Source: Stacks Project, Sites, Tag 0A35, arbitrary-object section formula.
-(blueprint: lem-weil-pbc-colimit-stage-kan-cocone).
 -/
 
 @[expose] public section
@@ -286,9 +285,8 @@ The supplied stage transitions satisfy identity and composition componentwise
 as objects of Arrow(Set), which includes their endpoint transports.
 This is a presheaf result: it uses neither a topology nor sheaf adjunctions.
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 arbitrary-object section formula and the verification of its independence of choices.
-(blueprint: lem-weil-pbc-colimit-stage-kan-cocone).
 
 Proof: Evaluate at U of F(j). By the pointwise Kan presentation, every element of
 B(t)(V(j)U) has a representative consisting of a stage section x and an arrow from

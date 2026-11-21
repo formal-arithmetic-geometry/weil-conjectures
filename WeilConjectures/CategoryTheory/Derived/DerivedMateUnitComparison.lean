@@ -20,7 +20,7 @@ open CategoryTheory CategoryTheory.Functor
 namespace CategoryTheory
 
 /-- A mate comparison needs normalization by right-derived units, which need not be
-isomorphisms. Source: Zheng Construction 4.1; Stacks 0FND and 09T5.
+isomorphisms. Source: Stacks 0FND and 09T5.
 Proof: transpose the proposed equality through the second derived adjunction.
 The mate-transpose formula and naturality move the first left comparison and the
 vertical target comparison out of that transpose. Substitute the first normalized
@@ -28,8 +28,7 @@ unit formula. The right-square unit equation then replaces the middle three maps
 Naturality of the source vertical comparison moves the ordinary unit to the other
 side. The ordinary mate equation and the second normalized Hom formula identify
 this with the transpose of the second path. Injectivity of the Hom equivalence
-proves equality. No cancellation or invertibility of a right-derived unit is used.
-(blueprint: lem-pur-derived-mate-unit-comparison). -/
+proves equality. No cancellation or invertibility of a right-derived unit is used. -/
 private theorem unitComparison_aux
     {A B C D AD BD CD DD : Type*}
     [Category A] [Category B] [Category C] [Category D]
@@ -73,13 +72,12 @@ private theorem unitComparison_aux
   simp only [Functor.id_obj, Functor.comp_map, Category.assoc]
 
 /-- An invertible mate comparison on representatives, normalized by arbitrary
-right-derived units. Source: Zheng Construction 4.1 and Lemma 5.16; Stacks 0FND.
+right-derived units. Source: Stacks 0FND.
 Proof: the auxiliary transpose calculation identifies the derived left mate with
 its ordinary representative using the two normalized Hom formulas and the right
 unit square. The given mate equation identifies that mate with ιD.hom.
 Precompose by ιD.inv and postcompose by QD(ι.hom). Cancel the two isomorphism
-pairs; the right-derived units are never inverted.
-(blueprint: lem-pur-derived-mate-unit-comparison). -/
+pairs; the right-derived units are never inverted. -/
 theorem derivedMate_unitComparison
     {A B C D AD BD CD DD : Type*}
     [Category A] [Category B] [Category C] [Category D]

@@ -16,8 +16,7 @@ import WeilConjectures.Algebra.Homology.RoosComplex
 import WeilConjectures.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-! The derived universal property of the explicit Roos cone.
-Source: Stacks Project, Cohomology on Sites, Tag 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Cohomology on Sites, Tag 0941. -/
 
 @[expose] public section
 
@@ -363,9 +362,8 @@ private theorem roos_tower_grothendieck
 right-derived unit. On every K-injective tower with injective terms the inclusion is
 a quasi-isomorphism.
 
-Source: Stacks Project, Cohomology on Sites, Tag 0941, lemma-derived-limit-is-ok,
-with the strict-cone refinement of steps 2--5 of lem-weil-strict-roos-comparison
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 0941,
+with the strict-cone refinement of steps 2--5 of.
 
 Proof: Exact countable products preserve quasi-isomorphisms of evaluated complexes.
 The natural mapping-cone triangles and two-out-of-three show that roosF preserves

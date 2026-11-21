@@ -13,7 +13,6 @@ Tower evaluation and adjacent transitions use arbitrary target categories.
 The Roos construction uses the additive structure and countable products.
 
 Source: Stacks Project, Tags 011G, 014E and 08TC.
-(blueprint: lem-weil-roos-comm-shift)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -134,7 +133,7 @@ attribute [local instance] endomorphism_commShift
 noncomputable abbrev roosFunctor := K ⋙ WeilConjectures.integralOperationsRoosFunctor
 
 /-- The native strict Roos functor has the signed mapping-cocone shift.
-Source: Stacks 011G, 014E, 08TC (blueprint: lem-weil-roos-comm-shift).
+Source: Stacks 011G, 014E, 08TC.
 Proof: the level shifts identify products and conjugate the transition endomorphism.
 Apply the signed cocone shift. Its zero and addition laws give coherence. -/
 @[instance_reducible]
@@ -166,7 +165,7 @@ lemma commShift_inr (X : S) (m i j : ℤ) (h : i + 1 = j) :
     (productFunctor K) (productFunctor K) (endomorphism K) X m i j h
 
 /-- The two coordinate equations for a native Roos shift and a fixed product comparison.
-Source: Stacks 011G, 014E and 08TC (blueprint: lem-weil-roos-comm-shift). -/
+Source: Stacks 011G, 014E and 08TC. -/
 def ConeFormula
     (productIso : ∀ (X : S) (m : ℤ),
       (∏ᶜ fun n ↦ (levelFunctor K n).obj (X⟦m⟧)) ≅
@@ -191,7 +190,7 @@ def ConeFormula
             m j (j + m) rfl).inv))
 
 /-- The constructed native shift satisfies its coordinate API for the canonical product shift.
-Source: Stacks 011G and 014E (blueprint: lem-weil-roos-comm-shift).
+Source: Stacks 011G and 014E.
 Proof: substitute the prescribed product comparison and use the two inclusion formulas. -/
 theorem commShift_formula
     (productIso : ∀ (X : S) (m : ℤ),
@@ -205,7 +204,7 @@ theorem commShift_formula
 
 /-- A map with zero second coordinate commutes with the Roos shift when its first
 coordinate commutes with the product shift.
-Source: Stacks 011G and 08TC (blueprint: lem-weil-roos-comm-shift).
+Source: Stacks 011G and 08TC.
 Proof: the two cocone projections determine a map. The first-coordinate hypothesis
 identifies the first components. The signed second inclusion multiplies zero by a sign,
 so the second components are both zero. -/

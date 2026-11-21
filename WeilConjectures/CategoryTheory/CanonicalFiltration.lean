@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.Abelian.Filtration
 /-!
 # Filtrations of objects in an abelian category
 
-Source: Stacks Project, Homology, Definition 12.19.1 (Tag 0121)
-(blueprint: def-sp-filtration).
+Source: Stacks Project, Homology, Definition 12.19.1 (Tag 0121).
 -/
 
 @[expose] public section
@@ -42,7 +41,7 @@ namespace WeilFilteredObject
 
 
 
-/-- (blueprint: def-sp-filtration) Filtered objects and filtration-preserving maps
+/--  Filtered objects and filtration-preserving maps
 form the category `Fil(C)` (Stacks, Tag 0121). -/
 instance : Category.{v} (WeilFilteredObject C) where
   Hom := Hom
@@ -74,7 +73,7 @@ end WeilFilteredObject
 
 namespace DecreasingFiltration
 
-/-- (blueprint: def-sp-filtration) The filtration induced on a subobject `X` is the
+/--  The filtration induced on a subobject `X` is the
 intersection of `X` with each filtration step, viewed inside `X` (Stacks, Tag 0121). -/
 noncomputable def induced {A : C} (F : DecreasingFiltration A) (X : Subobject A) :
     DecreasingFiltration (X : C) where
@@ -83,35 +82,35 @@ noncomputable def induced {A : C} (F : DecreasingFiltration A) (X : Subobject A)
     exact leOfHom ((Subobject.pullback X.arrow).map
       (homOfLE (F.F_succ_le i)))
 
-/-- (blueprint: def-sp-filtration) The filtration on an epimorphic quotient is the
+/--  The filtration on an epimorphic quotient is the
 image of each filtration step (Stacks, Tag 0121). -/
 noncomputable abbrev quotient {A Y : C} (F : DecreasingFiltration A)
     (π : A ⟶ Y) [Epi π] : DecreasingFiltration Y := F.image π
 
-/-- (blueprint: def-sp-filtration) The intersection of the steps exists when there is
+/--  The intersection of the steps exists when there is
 a greatest subobject lying in every step (Stacks, Tag 0121). -/
 def HasIntersection {A : C} (F : DecreasingFiltration A) : Prop :=
   ∃ X : Subobject A, (∀ i, X ≤ F.step i) ∧
     ∀ Y : Subobject A, (∀ i, Y ≤ F.step i) → Y ≤ X
 
-/-- (blueprint: def-sp-filtration) The union of the steps exists when there is
+/--  The union of the steps exists when there is
 a least subobject containing every step (Stacks, Tag 0121). -/
 def HasUnion {A : C} (F : DecreasingFiltration A) : Prop :=
   ∃ X : Subobject A, (∀ i, F.step i ≤ X) ∧
     ∀ Y : Subobject A, (∀ i, F.step i ≤ Y) → X ≤ Y
 
-/-- (blueprint: def-sp-filtration) A filtration is separated when the greatest
+/--  A filtration is separated when the greatest
 subobject contained in every step is zero (Stacks, Tag 0121). -/
 def IsSeparated {A : C} (F : DecreasingFiltration A) : Prop :=
   ∀ X : Subobject A, (∀ i, X ≤ F.step i) → X = ⊥
 
-/-- (blueprint: def-sp-filtration) A filtration is exhaustive when the least
+/--  A filtration is exhaustive when the least
 subobject containing every step is the entire object (Stacks, Tag 0121). -/
 def IsExhaustive {A : C} (F : DecreasingFiltration A) : Prop :=
   ∀ X : Subobject A, (∀ i, F.step i ≤ X) → X = ⊤
 
-/-- (blueprint: def-sp-filtration) The `n`-th graded piece is the quotient of
-`Fⁿ A` by `Fⁿ⁺¹ A` (Stacks, Tag 0121; blueprint node). -/
+/--  The `n`-th graded piece is the quotient of
+`Fⁿ A` by `Fⁿ⁺¹ A` (Stacks, Tag 0121). -/
 noncomputable abbrev gradedPiece {A : C} (F : DecreasingFiltration A) (n : ℤ) : C :=
   F.gr n
 

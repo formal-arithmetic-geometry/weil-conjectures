@@ -32,8 +32,7 @@ variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
   {QA : A ⥤ AD} {QB : B ⥤ BD} {QC : C ⥤ CD} {QD : D ⥤ DD}
 
 /-- A derived mate is computed by the ordinary mate and the normalized derived
-comparisons. Source: Stacks 0FND and 09T5
-(blueprint: lem-pur-derived-mate-comparison).
+comparisons. Source: Stacks 0FND and 09T5.
 Proof: apply the second derived Hom bijection and postcompose with the invertible
 right factorization. The mate transpose identity moves the first comparison through
 the first adjunction. Its normalization, the right-square comparison, and naturality

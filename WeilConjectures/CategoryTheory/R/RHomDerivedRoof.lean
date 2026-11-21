@@ -17,7 +17,7 @@ import WeilConjectures.CategoryTheory.R.RHomInjectiveCocycleBijective
 /-!
 # The natural RHom comparison and its roof normalization
 
-Source: Stacks Tags 06XR and 070I (blueprint: lem-sc-p1-rhom-hom-derived-roof).
+Source: Stacks Tags 06XR and 070I.
 -/
 
 @[expose] public section
@@ -30,8 +30,7 @@ open CochainComplex.HomComplex
 namespace CategoryTheory.Functor
 
 /-- The natural RHom comparison with its cocycle roof formula, before shift compatibility.
-Source: Stacks Project, Tags 06XR (part 1) and 070I
-(blueprint: lem-sc-p1-rhom-hom-derived-roof).
+Source: Stacks Project, Tags 06XR (part 1) and 070I.
 
 Proof: represent a bounded below derived object by a bounded below complex of injectives.
 Cocycles from M to its degree n terms are degree n Hom-complex cocycles from M[0].

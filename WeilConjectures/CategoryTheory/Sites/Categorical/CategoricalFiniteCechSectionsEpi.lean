@@ -317,7 +317,6 @@ private theorem glue_categoricalCech_lift
 /-- Vanishing of first finite Čech cohomology makes a short exact sheaf sequence
 right exact on the specified objects.
 Source: Stacks Project, Tag 03F8.
-(blueprint: stage3-categorical-finite-cech-sections-epi).
 
 Proof: Apply the local test for sheaf epimorphisms to the coefficient cokernel
 projection of I(V) → Q(V). For any generalized Q(V)-section with simultaneous

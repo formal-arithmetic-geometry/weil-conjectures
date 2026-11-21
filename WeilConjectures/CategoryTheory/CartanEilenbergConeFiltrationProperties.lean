@@ -37,8 +37,7 @@ isomorphism.  Reindexing degree `n` to `n-p` therefore identifies the graded
 complex with the mapping cone of `extendMap (a.f p)`; applying homology gives
 the asserted isomorphism.  This argument uses only canonical projections and
 inclusions, so it also covers zero columns and all integer indices.
-Source: Stacks Project, Homology, Tag 0133.
-(blueprint: lem-sp-cartan-eilenberg-cone-filtration-properties). -/
+Source: Stacks Project, Homology, Tag 0133. -/
 theorem cartanEilenberg_cone_filtration_properties
     {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{vA} A]
     (K : CochainComplex A ℤ)

@@ -18,9 +18,7 @@ public import WeilConjectures.AlgebraicGeometry.ConstantInternalModuleSheafEquiv
 
 /-! # Encoding internal modules over a constant ring sheaf
 
-Source: Bhatt--Scholze, Section 5.3, and Stacks Project, Tag 093I;
-the tensor and sheafification encoding argument is expanded below
-(blueprint: lem-weil-pbc-constant-internal-module-sheaf-equivalence).
+Source: Bhatt--Scholze, Section 5.3, and Stacks Project, Tag 093I.
 -/
 
 @[expose] public section
@@ -99,9 +97,7 @@ attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 /-- Internal modules over the sheafified constant ring are module-valued sheaves,
 compatibly with the underlying abelian sheaves.
 
-Source: Bhatt--Scholze, Section 5.3, and Stacks Project, Tag 093I; the worker expands
-its tensor-product and sheafification encoding argument
-(blueprint: lem-weil-pbc-constant-internal-module-sheaf-equivalence).
+Source: Bhatt--Scholze, Section 5.3, and Stacks Project, Tag 093I.
 
 Proof in words. Over the constant ring presheaf, evaluate an internal action at each
 object. Naturality says its restriction maps are linear. Conversely a presheaf of

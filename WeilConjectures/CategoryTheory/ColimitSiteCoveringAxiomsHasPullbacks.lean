@@ -62,7 +62,6 @@ private theorem hasPullback_of_arrow_eq
 
 /-- Then every member of every Q-cover has a pullback along every arrow into its target.
 Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-colimit-site-covering-axioms-haspullbacks)
 
 Proof: Fix a Q-cover R, a member f of R, and an arbitrary arrow g into
 its target. Represent R by a stage covering S using hQ and f by a member of S

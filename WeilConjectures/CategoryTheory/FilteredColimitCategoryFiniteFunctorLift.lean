@@ -32,9 +32,7 @@ private theorem arrow_comp_congr {C : Type z} [Category.{z} C]
   subst d
   rfl
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph;
-Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-category-finite-functor-lift).
+/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph; Categories, Section Tag 04AX.
 
 Proof: Enumerate the finitely many objects of D and the finitely many
 arrows (the dependent sum over pairs of objects). Apply finite-list lifting to

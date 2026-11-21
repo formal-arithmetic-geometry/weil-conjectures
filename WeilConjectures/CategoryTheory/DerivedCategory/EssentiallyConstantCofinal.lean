@@ -20,8 +20,8 @@ namespace CategoryTheory
 
 /-! # Essential constancy under initial restriction
 
-Source: Stacks Project, Categories, Lemma Tag 0A1T (lemma-initial-essentially-constant),
-the pro form of Lemma Tag 0A1S (blueprint: lem-pur-essential-constant-cofinal-0a1s).
+Source: Stacks Project, Categories, Lemma Tag 0A1T,
+the pro form of Lemma Tag 0A1S.
 -/
 
 private theorem restrict_witness
@@ -124,8 +124,7 @@ old retraction still splits. For an arbitrary `j`, choose `p : H.obj i ⟶ j` by
 initiality and postcompose the common-stage factorization for `i` with `M.map p`.
 The component formula gives the factorization for the extended cone. Finally these
 two witness constructions prove the equivalence by unpacking the definition.
-Source: Stacks Project, Categories, Lemma Tag 0A1T
-(blueprint: lem-pur-essential-constant-cofinal-0a1s). -/
+Source: Stacks Project, Categories, Lemma Tag 0A1T. -/
 theorem initial_iff_essentiallyConstantProDiagram
     {I : Type uI} {J : Type uJ} {C : Type uC}
     [Category.{vI} I] [Category.{vJ} J] [Category.{vC} C]

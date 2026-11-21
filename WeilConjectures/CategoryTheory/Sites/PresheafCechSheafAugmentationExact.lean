@@ -295,7 +295,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The canonical free Čech augmentation is exact and epic for a locally
 surjective presheaf map.
 Source: Stacks Project, Tag 01GC, degree-zero part.
-(blueprint: lem-sc-presheaf-cech-sheaf-augmentation-exact)
 
 Proof: the augmentation sends each vertex to its image. Both faces of an edge
 have the same image, so its composite with the first differential is zero.

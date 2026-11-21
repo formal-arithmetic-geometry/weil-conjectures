@@ -29,7 +29,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 /-- The left edge on a complex supported in a single degree is the identity, under the
 canonical identifications of its cohomology with its sole term.
 Source: Stacks Project, derived.tex, Tag 015J, second spectral sequence for a single complex.
-(blueprint: lem-pc-hypercohomology-left-edge-single)
 
 Proof: extend the single complex by zero. Its image in the derived category is the object
 A placed in degree n. Its truncations in degrees below n are zero and those containing n

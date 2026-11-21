@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Derived.DerivedScalarExtUnit
 
-/-! # Degree-zero scalar Ext units
-(blueprint: lem-sp-derived-scalar-ext-unit-zero).
+/-! # Degree-zero scalar Ext units.
 -/
 
 @[expose] public noncomputable section
@@ -23,8 +22,8 @@ variable {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C]
 
 /-- For exact additive U and η:F→UH with DerivedUnit [def-sp-exact-functor-derived-unit], the
 degree-zero class mk0(η) has DerivedExtUnit [def-sp-derived-scalar-ext-unit].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-derived-scalar-ext-unit-zero).
+Source: Stacks 0152,
+06YY and 0GLZ.
 Proof: The zero-shift functor is canonically isomorphic to the identity. Transfer the domain Hom set
 through that isomorphism and use the given unit bijection. The zero-shift coherence for exact
 derived functors and the formula for mk0 identify the transferred function with the displayed

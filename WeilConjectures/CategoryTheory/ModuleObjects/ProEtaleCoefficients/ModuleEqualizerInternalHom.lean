@@ -11,10 +11,6 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 /-!
 # The equalizer internal hom for the relative monoidal tensor
 
-Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
-unit sk-prop-sfb-module-category, definition def-sfb-modobj-internal-hom
-(blueprint: def-sfb-modobj-internal-hom).
-
 The object and functor are the existing `CategoryTheory.Mod.ihom'`. Its equalizer uses
 `homModPre` and `homModB`, with the action through the target given by `homAct`.
 The statement below identifies this specified functor as a right adjoint for the

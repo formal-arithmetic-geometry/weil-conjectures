@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.CartanEilenbergRows
 
 /-! # Homology of the complex assembled from alternating exact rows
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof conclusion
-(blueprint: lem-sp-cartan-eilenberg-rows-identifications).
+Source: Stacks Project, Derived Categories, Lemma 015I, proof conclusion.
 -/
 
 @[expose] public section
@@ -87,8 +86,7 @@ private noncomputable def rowHomologyData
 complex, compatibly with its augmentation. No injectivity or resolution hypothesis
 is used: this is a statement about short exact diagrams in any abelian category.
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof conclusion
-(blueprint: lem-sp-cartan-eilenberg-rows-identifications).
+Source: Stacks Project, Derived Categories, Lemma 015I, proof conclusion.
 
 Proof:
 1. The composite D^(p+1) -> Z^(p+1) -> A^(p+1) is monic. Since

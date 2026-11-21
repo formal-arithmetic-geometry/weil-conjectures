@@ -12,10 +12,6 @@ import WeilConjectures.CategoryTheory.RightDerivedBaseChangeSingleUnit
 
 /-!
 # The homology unit equation for derived base change
-
-Source: `rightDerivedFunctorPlusBaseChange_fac` in
-`WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange`
-(blueprint: lem-sbc-right-derived-base-change-single-unit-homology).
 -/
 
 @[expose] public section
@@ -34,11 +30,6 @@ variable {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Categor
   [PreservesFiniteLimits γ] [PreservesFiniteColimits γ]
 
 /-- Degree-zero homology of the derived base-change unit equation on single complexes.
-
-Source: `rightDerivedFunctorPlusBaseChange_fac` in `PlusBaseChange.lean`, together with
-`mapDerivedCategoryPlusHomologyFunctorIso_hom_app_singleFunctor` in
-`WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor`.
-(blueprint: lem-sbc-right-derived-base-change-single-unit-homology).
 
 Proof: evaluate rightDerivedFunctorPlusBaseChange_fac on the homotopy single complex
 Y[0]. Expand rightDerivedFunctorPlusBaseChangeAux: its associators are identity maps,

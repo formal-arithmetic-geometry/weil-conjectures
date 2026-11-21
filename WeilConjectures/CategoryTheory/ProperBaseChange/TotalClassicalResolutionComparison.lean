@@ -10,9 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Total and classical right-derived comparisons on a supplied resolution
 
-Source: Stacks Project, Derived Categories, Tags 015E and 070K; the total/plus
-compatibility and the injective-resolution construction of classical derived functors.
-(blueprint: lem-weil-pbc-total-classical-resolution-comparison).
+Source: Stacks Project, Derived Categories, Tags 015E and 070K.
 -/
 
 @[expose] public section
@@ -214,8 +212,7 @@ private theorem total_model_naturality
 
 /-- The canonical total/classical cohomology comparison computed on any supplied
 injective resolution, retaining the actual augmentation and both localization factors.
-Source: Stacks Project, Derived Categories, Tags 015E and 070K; total/plus compatibility.
-(blueprint: lem-weil-pbc-total-classical-resolution-comparison).
+Source: Stacks Project, Derived Categories, Tags 015E and 070K.
 
 Proof: For the chosen injective resolution, expand the total/classical comparison into
 its total/plus compatibility and the bounded-below single-object comparison. The

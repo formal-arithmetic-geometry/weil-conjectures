@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.SecondFiltrationRowCohomology
 
 /-! # Signed row identifications for the second-filtration spectral sequence
 
-Source: Stacks Project, Tag 0130; blueprint thm-sp-if-e1, proof paragraph 1.
-(blueprint: lem-sp-cartan-eilenberg-row-pages).
+Source: Stacks Project, Tag 0130.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace CategoryTheory.Functor
 
 /-- The second-filtration pages, with the signed injective-resolution comparison.
 This statement asserts no convergence or derived interpretation of total cohomology.
-Source: Stacks Project, Tag 0130; blueprint thm-sp-if-e1, proof paragraph 1.
-(blueprint: lem-sp-cartan-eilenberg-row-pages).
+Source: Stacks Project, Tag 0130.
 
 Proof.
 Construct the spectral sequence of L by the filtered-complex construction, retaining

@@ -269,8 +269,7 @@ All components of f ≫ a vanish; the product universal property makes f ≫ a =
 As a is inverted in the localization, the difference is zero there. Every derived object
 is isomorphic to Q(L), so this proves the universal
 property for all vertices. Empty and singleton families give the zero and identity
-cones, respectively.
-(blueprint: lem-weil-derived-countable-products-core) -/
+cones, respectively. -/
 theorem derivedCategory_termwiseProduct_isLimit
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     [HasCountableProducts A] [CountableAB4Star A]

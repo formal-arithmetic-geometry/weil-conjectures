@@ -63,7 +63,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f}
 /-- **A refinement out of a dense compactification is cartesian over the source**: if the
 open immersion `c.i` of the compactification `c` is scheme-theoretically dominant and
 quasi-compact, then the inverse image of `X` under the ambient morphism of a refinement
-`r : c.Refinement d` is again `X`. (blueprint: `BA43-DENSE-DATA`)
+`r : c.Refinement d` is again `X`.
 
 This is phrased with the density and quasi-compactness of `c.i` as instance binders, as in
 `AlgebraicGeometry.Compactification.Refinement.instSubsingleton`: neither is findable by

@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 # Invertibility of mates along an equivalence and a fully faithful functor
 
 Source: the abstract transport argument used for Deligne, La conjecture de Weil II,
-(1.1.7), p. 151, and (1.1.14), p. 153
-(blueprint: lem-weil-mate-iso-along-equivalences).
+(1.1.7), p. 151, and (1.1.14), p. 153.
 The abstract lemma is agent-written; those passages motivate its use but do not state it.
 -/
 
@@ -28,8 +27,7 @@ and `G'` is fully faithful. Its component at `d` is
 R'.map (G'.map (adj.counit.app d))`.
 
 Source: agent-written abstract transport lemma for Deligne, La conjecture de Weil II,
-(1.1.7), p. 151, and (1.1.14), p. 153
-(blueprint: lem-weil-mate-iso-along-equivalences).
+(1.1.7), p. 151, and (1.1.14), p. 153.
 
 Proof:
 1. For `c : C` and `d : D`, full faithfulness of `G` and `G'`, the two adjunction

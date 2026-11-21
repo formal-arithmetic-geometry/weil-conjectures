@@ -28,8 +28,6 @@ private theorem tensor_second_comp {C : Type*} [Category C] (B : C × C ⥤ C)
 
 /-- A normalized scalar evaluation square commutes with the specified dual shifts,
 provided the tensor cancellation maps commute with scalar extension.
-Source: blueprint thm-coef-qbar-verdier, tensor--Hom transpose in steps 3--4.
-(blueprint: lem-coef-evaluation-shift-transport-X3).
 Proof: cancel the target dual shift and test both maps by evaluation. Naturality
 of tensor cancellation moves beta through that evaluation. The normalized beta
 square, followed by the scalar tensor cancellation square and naturality of the

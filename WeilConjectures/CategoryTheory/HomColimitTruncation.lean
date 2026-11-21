@@ -62,9 +62,7 @@ private theorem comparison_iso_transfer
   exact IsIso.of_isIso_comp_right (colimit.desc D c) v.hom
 
 /-- It suffices to check canonical Hom continuity on termwise bounded-below diagrams.
-Source: Bhatt--Scholze, proof of Lemma 6.3.14, and Lemma 6.8.12; exact filtered
-colimits and good truncation.
-(auxiliary; not a blueprint node)
+Source: Bhatt--Scholze, proof of Lemma 6.3.14, and Lemma 6.8.12.
 
 Proof. Truncate the diagram at its common cohomological lower bound. Each truncation
 map is a quasi-isomorphism. Exact colimits preserve these quasi-isomorphisms, since

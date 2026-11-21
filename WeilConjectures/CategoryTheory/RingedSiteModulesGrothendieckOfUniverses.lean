@@ -11,8 +11,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Grothendieck module sheaves with independent site and coefficient universes
 
-Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA; Cohomology on Sites,
-Section 07A5; Injectives, Tag 079Q (auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA; Injectives, Tag 079Q.
 -/
 
 @[expose] public section
@@ -96,8 +95,7 @@ end
 
 /-- Module sheaves form a Grothendieck abelian category in a common universe containing
 both the small site and its ring coefficients. The rings need not be commutative.
-Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA; Cohomology on Sites,
-Section 07A5; Injectives, Tag 079Q (auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tags 03CV and 03DA; Injectives, Tag 079Q.
 
 Proof:
 1. Construct free representable presheaves in the common module universe as finitely

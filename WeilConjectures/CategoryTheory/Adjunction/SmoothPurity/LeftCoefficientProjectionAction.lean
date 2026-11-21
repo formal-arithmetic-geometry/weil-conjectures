@@ -14,7 +14,6 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
 
 Source: Stacks Project, Tag 0B56, equation-projection-formula-map; the categorical
 symmetry and coefficient calculations use Tags 0037, 0FFK and 0FFL.
-(blueprint: lem-pur-adjoint-left-projection-action)
 
 The right-coefficient map is the existing `Adjunction.rightAdjointProjectionMap`.
 The left-coefficient map is its symmetry conjugate, without an invertibility assumption.
@@ -37,7 +36,7 @@ right-coefficient counit adjunct: first swap `B` and `R N`, apply the existing r
 then apply `R` to the swap of `N` and `F B`.
 
 Source: Stacks Project, Tag 0B56, equation-projection-formula-map, with symmetry as in the
-node's definition of `t`. (blueprint: lem-pur-adjoint-left-projection-action) -/
+node's definition of `t`. -/
 noncomputable def leftCoefficientProjectionMap (adj : F ⊣ R) (B : C) (N : D) :
     B ⊗ R.obj N ⟶ R.obj (F.obj B ⊗ N) :=
   (β_ B (R.obj N)).hom ≫
@@ -49,7 +48,7 @@ followed by the counit in the second factor, and it obeys the left coefficient u
 associativity constraints.
 
 Source: Stacks Project, Tag 0B56, equation-projection-formula-map; agent categorical calculation
-using Tags 0037, 0FFK and 0FFL. (blueprint: lem-pur-adjoint-left-projection-action)
+using Tags 0037, 0FFK and 0FFL.
 
 Proof plan:
 1. Transpose the defining symmetry conjugate using the natural Hom bijection of
@@ -57,8 +56,8 @@ Proof plan:
    counit in the first factor. Symmetry naturality moves the counit to the second factor;
    preservation of symmetry by `F` and involutivity cancel the two adjacent swaps.
 2. For `f : B ⟶ B'` and `g : N ⟶ N'`, transpose both naturality composites. Inverse tensorator
-   naturality (`def-sfb-strong-monoidal-functor`), counit naturality and tensor bifunctoriality
-   (`def-sfb-monoidal-category`) identify them. Injectivity of transposition gives naturality.
+   naturality, counit naturality and tensor bifunctoriality
+   identify them. Injectivity of transposition gives naturality.
 3. Invert the strong monoidal left unit axiom. The transpose of the unit composite is
    `δ` followed by `1 ⊗ ε`, then `e ⊗ 1` and the left unitor. Tensor bifunctoriality and
    unitor naturality move `ε` past the unitor, leaving the transpose of the left unitor on

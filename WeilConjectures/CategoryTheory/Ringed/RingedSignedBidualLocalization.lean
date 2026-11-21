@@ -83,8 +83,7 @@ import WeilConjectures.Algebra.Homology.HomComplexComponents
 
 /-! # Signed ordinary biduality and the two augmentation comparisons
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0A8X, 0A92 and 0A97
-(blueprint: lem-sfb-ringed-signed-bidual-localization).
+Source: Stacks Project, sites-cohomology.tex, Tags 0A8X, 0A92 and 0A97.
 
 The statement uses only the prerequisite product Hom complex, coefficient unit,
 fixed augmentation and localization factorization. It gives a family of actual chain
@@ -723,8 +722,7 @@ private lemma comparison_beta
 under the two fixed augmentation comparisons, without a flatness hypothesis.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 0A8X (section-hom-complexes),
-0A92 (lemma-evaluate-and-more) and 0A97 (lemma-internal-hom-evaluate)
-(blueprint: lem-sfb-ringed-signed-bidual-localization).
+0A92 and 0A97.
 
 Proof plan, following the node's eight steps:
 1. Use the actual Hom-product projections and localized sheaf Hom. For x in degree a,

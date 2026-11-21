@@ -17,8 +17,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
 /-- One finite layer of covering families lifts over targets already fixed at a stage.
-Source: Stacks Project, Sites, Tag 09YL, finite-diagram observation.
-(blueprint: lem-weil-pbc-colimit-site-covering-families-at-stage)
+Source: Stacks Project, Sites, Tag 09YL observation.
 
 Proof: For each family use hQ to choose a finite covering stage presieve with the
 specified image. For every requested indexed arrow choose a member of that presieve

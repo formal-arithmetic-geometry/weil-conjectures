@@ -21,8 +21,7 @@ import WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 /-!
 # Composition of unbounded derived direct images of ringed topoi
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E.
 -/
 
 @[expose] public section
@@ -390,8 +389,7 @@ private theorem flatKFlat_inverts
 /-- The total derived module direct images compose canonically, including the normalization
 on arbitrary K-injective resolutions of the intermediate direct image.
 
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 0D6E.
 
 The three existential functors and their units are total right derived functors, computed
 on K-injectives as asserted by the invertibility clauses. The direct image of the composite
@@ -410,7 +408,7 @@ Proof plan:
    the underived module pullback composition and its composite counit equation.
 3. Choose a K-flat resolution with flat terms using lem-pc-kflat-resolution. Pullback
    preserves these representatives. The termwise pullback comparison descends through
-   the K-flat localization (lem-weil-pbc-site-derived-tensor-descent) to a natural derived
+   the K-flat localization to a natural derived
    pullback composition isomorphism, independently of the resolution.
 4. Conjugate that isomorphism through the canonical derived adjunctions to obtain kappa.
    The adjunction hom bijections characterize it and give its inverse and naturality.

@@ -15,7 +15,7 @@ A perfect complex over a commutative ring has finite Tor amplitude, and over a l
 represented by a bounded complex of finitely generated *free* modules. Over a Noetherian local
 ring (for instance the finite coefficient ring `A_{E,n} = 𝒪_E/ϖⁿ`), a bounded complex with
 finite cohomology modules therefore has finite Tor amplitude exactly when it is quasi-isomorphic
-to a bounded complex of finite free modules (`lemma-perfect-complexes-geometric-point--1`).
+to a bounded complex of finite free modules.
 
 ## Main statements
 
@@ -23,8 +23,7 @@ to a bounded complex of finite free modules (`lemma-perfect-complexes-geometric-
   a perfect complex has finite Tor amplitude.
 - `DerivedCategory.IsPerfect.exists_free`: over a local ring a perfect complex is represented by
   a bounded complex of finite free modules.
-- `DerivedCategory.finiteTorAmplitude_iff_exists_free`
-(`lemma-perfect-complexes-geometric-point--1`).
+- `DerivedCategory.finiteTorAmplitude_iff_exists_free`.
 -/
 
 @[expose] public section
@@ -65,7 +64,7 @@ theorem IsPerfect.exists_free [IsLocalRing R] {C : DerivedCategory (ModuleCat.{u
   have := (hP i).2
   exact ⟨Module.free_of_flat_of_isLocalRing, inferInstance⟩
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point--1`: Finite Tor amplitude and perfectness
+/-- Finite Tor amplitude and perfectness
 over the finite coefficient ring.
 
 Let `R` be a Noetherian local ring (for instance the finite coefficient ring

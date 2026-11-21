@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 /-! # A derived adjunction counit on cochain representatives
 
-Source: Stacks Project, Cohomology on Sites, Tag 06YY; the derived unit identity
-of `CategoryTheory.Adjunction.derivedη_fac_app`.
+Source: Stacks Project, Cohomology on Sites, Tag 06YY.
 -/
 
 @[expose] public noncomputable section
@@ -155,8 +154,7 @@ private theorem derived_unit_cochain (adj : E ⊣ U) (X : CochainComplex C ℤ) 
 
 /-- Transporting the left-derived counit to a chosen adjunction gives the transpose
 of the ordinary cochain unit, including both quotient comparison isomorphisms.
-Source: Stacks Project, Tag 06YY, derived scalar adjunction
-(blueprint: lem-derived-adjoint-cochain-counit).
+Source: Stacks Project, Tag 06YY, derived scalar adjunction.
 Proof: the derived-unit identity on the homotopy category identifies the composite
 of the derived unit with the left-derived counit and the right-derived unit.
 Exactness of the right adjoint identifies its right-derived functor with the

@@ -37,7 +37,6 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 Source: Stacks Project, Modules on Sites, Tag 03ET, with Tags 03ER, 03ES,
 03DA and 03DB, and Algebra, Tag 00HT.
-(blueprint: lem-weil-pbc-scalar-localization-sheaf-exact)
 -/
 
 @[expose] public section
@@ -222,8 +221,7 @@ end Helpers
 functor. The object and arrow equalities specify the existing sheafified change of rings;
 the existential packages those objects and maps as a functor, without choosing an unrelated
 left adjoint.
-Source: Stacks Project, Modules on Sites, Tag 03ET and Tags 03DA, 03DB, 03ER, 03ES;
-Algebra, Tag 00HT (blueprint: lem-weil-pbc-scalar-localization-sheaf-exact).
+Source: Stacks Project, Modules on Sites, Tag 03ET and Tags 03DA, 03DB, 03ER, 03ES; Algebra, Tag 00HT.
 
 Proof:
 1. The presheaf `P(V) = R(V)[1/s(V)]` has flat section modules by

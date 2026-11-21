@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.Projection.ProjectionFormulaArrows
 /-!
 # Mate coherence from tensor-square coherence
 
-Source: Stacks 07A4, 0D6D and 0E48
-(blueprint: lemma-weil-pbc-projection-mate-square-coherence).
+Source: Stacks 07A4, 0D6D and 0E48.
 -/
 
 @[expose] public section

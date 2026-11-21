@@ -24,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
 /-- Relocalization preserves K-injectives, with an independent coefficient universe.
-Source: Stacks Project, Cohomology on Sites, lemma-restrict-K-injective-to-open;
-Modules on Sites, Tags 03DI and 03DJ.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites; Modules on Sites, Tags 03DI and 03DJ.
 
 Proof: Regard f as an object X of C/U. Restriction from C/U to (C/U)/X preserves
 K-injectives by exact extension by zero. The iterated-slice equivalence identifies

@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-!
 # Finite exact-couple quotient kernels
 
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2;
-Stacks Project, Tags 011R, 011T and 0AMJ.
+Source: Stacks Project, Tags 011R, 011T and 0AMJ.
 -/
 
 @[expose] public section
@@ -102,9 +101,7 @@ Finally hnext makes the following f zero, so exact_f makes image(g_r) top.
 Cancel the top arrow in its composite with the cokernel projection to show this
 projection is zero. Thus g_r is epic, and so is its composite with e and the
 endpoint isomorphism. No half-plane or colimit assumption is used.
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2, finite image
-induction, exact triangle and original-g projection; Stacks Tags 011R and 0AMJ.
-(blueprint: lem-sp-finite-cycle-kernel-presentation) -/
+Source: Stacks Tags 011R and 0AMJ. -/
 theorem finiteCycle_kernel_presentation (X : BigradedExactCouple C 0)
     (r : ℕ) (p q : ℤ)
     (hnext : IsZero ((X.pageCouple r).D (p + 2) (q - 1)))

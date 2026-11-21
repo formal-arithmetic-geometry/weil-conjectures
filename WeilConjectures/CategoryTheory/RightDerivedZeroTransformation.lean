@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 # Naturality of the zeroth derived augmentation in the functor
 
 Source: Stacks Project, Tag 0156, zeroth right derived functor and its augmentation.
-(blueprint: lem-weil-pbc-right-derived-zero-transformation)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ variable {C D : Type*} [Category* C] [Category* D]
   [Abelian C] [HasInjectiveResolutions C] [Abelian D]
 
 /-- Source: Stacks Project, Tag 0156, construction of the zeroth right derived functor.
-(blueprint: lem-weil-pbc-right-derived-zero-transformation)
 
 Proof: On a chosen resolution P of M, the augmentation is the map into the
 zeroth cycles followed by cycles-to-homology and the derived comparison.

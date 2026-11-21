@@ -11,9 +11,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.ColimitsOfShape
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 
 /-! # Perfect generators of a localizing hull
-
-Source: Krause, Localization theory for triangulated categories, Theorem 7.2.1.
-(blueprint: lem-sfb-perfect-family-localizing-hull)
 -/
 
 @[expose] public section
@@ -161,10 +158,6 @@ end Factorization
 /-- A small triangulated hull of a perfect class gives perfect generators of its
 localizing hull, provided maps from that class into coproducts of hull objects
 factor through a hull object.
-
-Source: Krause, *Localization theory for triangulated categories*, Theorem 7.2.1(1)-(3),
-expanded using its factorization argument.
-(blueprint: lem-sfb-perfect-family-localizing-hull)
 
 Proof: let R consist of objects X such that every map U to X with U in S factors
 through an object of B. This class is replete and shift closed. To check extensions,

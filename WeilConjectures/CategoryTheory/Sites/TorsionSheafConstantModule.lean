@@ -181,7 +181,7 @@ theorem exists_constantZModModule_iff (F : Sheaf J AddCommGrpCat.{w}) :
   exact (congrArg (e.hom.hom.app U)
     (nsmul_eq_zero_of_constantZMod M (show M.val.obj U from y))).trans (map_zero _)
 
-/-- Blueprint `definition-tate-twists`: An abelian sheaf killed by N is a module
+/-- An abelian sheaf killed by N is a module
 over the constant sheaf Z/N.
 
 Let `J` be a site, `N ≥ 1` and `F` an abelian sheaf killed by `N`. Then:

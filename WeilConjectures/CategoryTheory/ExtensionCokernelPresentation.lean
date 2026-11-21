@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Abelian.Exact
 # Cokernel presentation of an extension from a lifted presentation
 
 Source: Stacks Project, Modules on Sites, Tag 093U (3).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -22,7 +21,6 @@ namespace CategoryTheory
 
 /-- A lift of a presentation of the quotient presents the middle term as a cokernel.
 Source: Stacks Project, Modules on Sites, Tag 093U (3).
-(auxiliary; not a blueprint node).
 
 Proof: Exactness factors the composite from the relation object through the subobject.
 The map from the biproduct to the middle term is epi: a map killing it kills the subobject,

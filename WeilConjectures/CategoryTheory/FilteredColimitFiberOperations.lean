@@ -49,7 +49,6 @@ private theorem eventually_equal₂
 
 /-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph,
 and Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-fiber-operations).
 
 Proof: Represent an object in the object colimit by a stage object and send its
 identity to the arrow colimit. Represent two composable fiber elements by stage

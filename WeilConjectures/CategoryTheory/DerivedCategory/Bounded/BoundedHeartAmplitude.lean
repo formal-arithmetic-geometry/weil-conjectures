@@ -12,9 +12,7 @@ import WeilConjectures.CategoryTheory.TruncationTriangle
 /-!
 # Finite cohomological amplitude from bounds on cohomology objects
 
-Source: Stacks Project, derived.tex, Tag 08J5, remark-truncation-distinguished-triangle;
-more-etale.tex, Tag 0G2A, lemma-derived-lower-shriek-bounded, proof of (3)
-(blueprint: lem-pur-bounded-heart-amplitude).
+Source: Stacks Project, derived.tex, Tag 08J5; more-etale.tex, Tag 0G2A, proof of (3).
 -/
 
 @[expose] public section
@@ -28,8 +26,7 @@ namespace DerivedCategory
 
 /-- An exact triangulated functor bounded on a class of heart objects has the corresponding
 finite cohomological amplitude on bounded objects with cohomology in that class.
-Source: Stacks Project, derived.tex, Tag 08J5; more-etale.tex, Tag 0G2A, proof of (3)
-(blueprint: lem-pur-bounded-heart-amplitude).
+Source: Stacks Project, derived.tex, Tag 08J5; more-etale.tex, Tag 0G2A, proof of (3).
 
 Proof:
 1. Choose a complex C representing K. Let K_q be its canonical upper truncation at q.

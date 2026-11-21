@@ -18,9 +18,9 @@ import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 /-!
 # Right derived functors computed on adapted complexes
 
-Source: Stacks Project, Derived Categories, Tag 06XN, `lemma-find-existence-computes`,
+Source: Stacks Project, Derived Categories, Tag 06XN,
 in Situation 05S8, with the universal comparison of Definition 05S9 and
-`equation-everywhere` (blueprint: lem-sf-right-derived-from-adapted-complexes).
+`equation-everywhere`.
 -/
 
 @[expose] public section
@@ -190,20 +190,18 @@ are complexes; no invariance or closure condition on the class is required.
 `IsRightDerivedFunctor` is the universal property: for every `T` and `β : G ⟶ Qh ⋙ T`,
 there is a unique `u : RG ⟶ T` such that `α ≫ whiskerLeft Qh u = β`.
 
-Source: Stacks Project, Derived Categories, Tag 06XN, `lemma-find-existence-computes`,
-right-derived assertion in Situation 05S8; Definition 05S9 and `equation-everywhere`
-(blueprint: lem-sf-right-derived-from-adapted-complexes).
+Source: Stacks Project, Derived Categories, Tag 06XN,
+right-derived assertion in Situation 05S8.
 
 Proof:
 1. Quasi-isomorphisms in the homotopy category admit a left calculus of fractions
-   (`lem-pc-quasi-isomorphisms-multiplicative-system`) and satisfy two out of three,
+   and satisfy two out of three,
    as can be checked on every cohomology functor. Choose replacements `r_K : K ⟶ I_K`
    with `I_K` in the class. These choices need not be functorial.
 2. A derived morphism between adapted objects is a left fraction `(a : I ⟶ P, b : J ⟶ P)`
-   with `b` a quasi-isomorphism (`lem-pc-left-localization-fraction-representation`).
+   with `b` a quasi-isomorphism.
    Replace its common target to make `P` adapted, and assign `G.map a ≫ inv (G.map b)`.
-3. Equal fractions have common postcompositions with equal numerators and denominators
-   (`lem-pc-left-localization-fraction-equality`). Two out of three makes these
+3. Equal fractions have common postcompositions with equal numerators and denominators. Two out of three makes these
    postcompositions quasi-isomorphisms. Replace the common target again; all resulting
    objects are adapted, so cancellation of the invertible images proves independence.
    The fraction `(f, identity)` shows that actual arrows are sent to `G.map f`.

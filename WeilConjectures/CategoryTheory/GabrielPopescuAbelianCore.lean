@@ -24,8 +24,6 @@ namespace CategoryTheory
 needed to extend the small presentation to the displayed module universe.
 Source: Stacks Project, Tags 0F5V and 0F5X, with Tag 05NU for the Baer criterion.
 
-(auxiliary; not a blueprint node)
-
 Proof in words: choose a separator G of A and replace its endomorphism ring by
 the opposite of the w-small endomorphism ring obtained from local smallness.
 For a module M, use the canonical free presentation by coproducts of G and take

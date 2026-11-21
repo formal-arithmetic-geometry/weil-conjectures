@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.Endofunctor.CyclicDerivedOffDiagona
 /-! # Comparison of the free and off-diagonal boundaries
 
 Source: Stacks Tags 0149, 0152, and the normalized cyclic free resolution.
-(blueprint: lem-sf-cyclic-free-boundary-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -287,8 +286,7 @@ Use naturality of delta to transport the presentation's endpoint isomorphisms.
 Finally cyclicDerivedOffDiagonalBoundary_eq identifies the presented morphism
 with the specified boundary. The computation uses the normalized SES sign,
 and works for unbounded complexes and independent localizations.
-Source: parent calculus step 2, Stacks 0152 and parent presentation step 8
-(blueprint: lem-sf-cyclic-free-boundary-comparison). -/
+Source: parent calculus step 2, Stacks 0152 and parent presentation step 8. -/
 theorem cyclicDerivedFreeBoundary_comparison (R : CyclicDerivedFreeResolution F)
     {M N : DerivedCategory (IsoAlgebra F)} (u : CyclicDerivedHom F M N (-1)) :
     cyclicDerivedOffDiagonalBoundary F u =

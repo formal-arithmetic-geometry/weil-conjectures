@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-!
 # Lifting a homology quotient through an epimorphism
 
-Source: blueprint def-sp-convergence, cycle/boundary recursion; Stacks Section 12.20
-(blueprint: lem-sp-subobject-homology-step).
+Source: Stacks Section 12.20.
 -/
 
 @[expose] public section
@@ -52,8 +51,7 @@ image of `image b`: the kernel of the cokernel in an abelian category is the ima
 input, and inverse image commutes with kernel. Under the inclusion in `T`, that inverse
 image is exactly `B'`, hence the displayed kernel-subobject identity.
 This is a single local quotient step, with no grading, page recursion or infinite tower.
-Source: blueprint def-sp-convergence, sentences defining the successor cycles, boundaries
-and quotient; Stacks Section 12.20 (blueprint: lem-sp-subobject-homology-step). -/
+Source: Stacks Section 12.20. -/
 theorem subobjectHomology_step {T E H F : C} (Z B : Subobject T) (hBZ : B ≤ Z)
     (π : (Z : C) ⟶ E) [Epi π]
     (hker : kernelSubobject π = Subobject.mk (Subobject.ofLE B Z hBZ))

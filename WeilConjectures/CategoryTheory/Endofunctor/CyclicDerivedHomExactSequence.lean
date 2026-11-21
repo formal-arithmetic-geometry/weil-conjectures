@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.Exact.ExactInputDerivedTransformation
 
 Proofs of the cyclic invariant/coinvariant sequence and its functoriality.
 Source: Stacks Project, Derived Categories, Tags 0149, 0152, 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence).
 -/
 
 @[expose] public noncomputable section
@@ -80,10 +79,8 @@ Proof plan, following node steps 1--8 and the uniqueness implicit in its normali
    such a representative. Naturality and this formula force uniqueness after transport
    along the representing isomorphisms. No derived faithfulness claim is used.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Source: Stacks derived.tex,
+Tags 0149, 0152 and 070I. -/
 theorem exists_cyclicDerivedHomBoundary [IsGrothendieckAbelian.{v} C] :
     ∃! b : CyclicDerivedHomBoundary F,
       CyclicDerivedHomBoundaryExact F b ∧ CyclicDerivedHomBoundaryNatural F b ∧
@@ -216,7 +213,7 @@ Proof plan, node steps 6--12 in the exact case:
    J has contractible kernel, so it is a quasi-isomorphism by the cohomology long exact
    sequence and a homotopy equivalence by the K-injective Hom lemma.
 3. Additivity preserves finite sums, shifts, cones and chain homotopies. An exact H
-   acts termwise on the derived category (situation-conventions).
+   acts termwise on the derived category.
    The formula -Qπ (Qq)⁻¹ of Stacks Tag 0152 is consequently preserved, including its sign.
 4. Naturality of e gives the new upper entry H(θ_A)e P′H(u); thus the image extension
    is precisely the normalized extension for the prescribed underlying morphism.
@@ -225,10 +222,8 @@ Proof plan, node steps 6--12 in the exact case:
    and the forgetting square. The two boundary naturality predicates transport these
    calculations from representatives to all native derived objects and morphisms.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Source: Stacks derived.tex,
+Tags 0149, 0152 and 070I. -/
 theorem cyclicDerivedHom_exact_functorial [IsGrothendieckAbelian.{v} C]
     [IsGrothendieckAbelian.{vD} D] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
     (b : CyclicDerivedHomBoundary F) (b' : CyclicDerivedHomBoundary G)
@@ -275,10 +270,8 @@ Proof plan, node steps 6--12 in the left exact case:
    the right square. Resolution witnesses are universally quantified proof choices;
    their existence is the Grothendieck K-injective theorem, not an added hypothesis.
 
-Source: cor-coef-verdier-weil-equivariance.proof.md, final exceptional-adjunction sentence; the
-DAG node's agent-formulated native-derived expansion, proof steps 1--12; Stacks derived.tex,
-Tags 0149, 0152 and 070I.
-(blueprint: lem-sf-cyclic-derived-hom-exact-sequence). -/
+Source: Stacks derived.tex,
+Tags 0149, 0152 and 070I. -/
 theorem cyclicDerivedHom_rightDerived_functorial [IsGrothendieckAbelian.{v} C]
     [IsGrothendieckAbelian.{vD} D] [PreservesFiniteLimits L]
     (hF : ∀ K : CochainComplex (IsoAlgebra F) ℤ,

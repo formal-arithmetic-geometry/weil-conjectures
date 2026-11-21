@@ -43,8 +43,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Tensor descent under exact ringed forgetting
 
-Source: Stacks 06YU, 0G7D, 0FPT
-(blueprint: lem-sf-ringed-forget-tensor-descent).
+Source: Stacks 06YU, 0G7D, 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -205,8 +204,7 @@ section
 attribute [local irreducible] coefficientTotalTensor tensorSummand
 
 /-- The tensor-only comparison, before comparing closed adjunctions.
-Source: Stacks 06YU, 0FPT
-(blueprint: lem-sf-ringed-forget-tensor-descent). -/
+Source: Stacks 06YU, 0FPT. -/
 structure TensorComparison where
   /-- The sum of the specified underived comparisons, on actual total tensor complexes. -/
   chain : coefficientTotalTensor.{r, c, v} J R ⋙ U.mapHomologicalComplex (.up ℤ) ≅
@@ -328,9 +326,7 @@ private theorem representative_unique
 /-- The summandwise underived comparison extends uniquely and coherently to derived tensors.
 This assertion concerns tensors only; it has no internal-Hom comparison or transpose law.
 
-Source: Stacks 06YU, 0G7D, 0FPT; steps 1--4 of
-lem-sf-ringed-forget-tensor-transposition
-(blueprint: lem-sf-ringed-forget-tensor-descent).
+Source: Stacks 06YU, 0G7D, 0FPT.
 
 Proof: take coproducts of the given tensor comparison in total degree n. The coproduct
 inclusions show that the resulting maps commute with both tensor differentials:

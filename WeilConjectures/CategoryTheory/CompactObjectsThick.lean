@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.CompactCone
 /-!
 # Compact objects form a thick subcategory
 
-Source: Stacks Project, Derived Categories, Lemma 13.37.2 (Tag 09QH)
-(blueprint: lem-sc-compact-objects-thick).
+Source: Stacks Project, Derived Categories, Lemma 13.37.2 (Tag 09QH).
 -/
 
 @[expose] public section
@@ -71,7 +70,6 @@ private theorem compact_zero
 
 /-- Compact objects are closed under thick operations.
 Source: Stacks Project, Derived Categories, Lemma 13.37.2, Tag 09QH.
-(blueprint: lem-sc-compact-objects-thick).
 
 Proof: the zero object is compact since all its Hom groups are zero. The adjunction
 between a shift and its inverse, and preservation of coproducts by both equivalences,

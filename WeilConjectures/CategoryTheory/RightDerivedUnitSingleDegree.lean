@@ -31,7 +31,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 is the ordinary coefficient comparison on cycles. This statement involves no spectral
 object, truncation functor, or spectral edge.
 Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1).
-(blueprint: lem-pc-right-derived-unit-single-degree)
 
 Proof: The support hypothesis gives the componentwise isomorphism from L to the
 single complex on L.X n, with the degree-n component the identity and the other components

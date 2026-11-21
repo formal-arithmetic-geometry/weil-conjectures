@@ -28,8 +28,7 @@ import WeilConjectures.CategoryTheory.ConstantRingSectionRigidity
 
 /-! # Constant scalars in an algebraic inverse-image lift
 
-Source: Stacks Project, Tags 00YV and 03D2; the constant-coefficient calculation
-in Step 2 of lem-sf-constant-open-restriction-model-comparison.
+Source: Stacks Project, Tags 00YV and 03D2.
 -/
 
 @[expose] public section
@@ -209,9 +208,7 @@ private theorem constantAdjunctRingHom_naturality
 transpose of the constant-section map. This concerns only the coefficient ring,
 not modules, site equivalences, open immersions or extension by zero.
 
-Source: Stacks Project, Tags 00YV and 03D2; Step 2 of
-lem-sf-constant-open-restriction-model-comparison.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 00YV and 03D2.
 
 Proof: the finite-product graph equations identify the algebraic ring lift with
 transport of ring objects through L. A left exact left adjoint preserves the

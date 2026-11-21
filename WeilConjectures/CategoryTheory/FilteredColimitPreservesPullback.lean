@@ -28,7 +28,6 @@ namespace CategoryTheory
 /-- A stage pullback preserved by every transition out of that stage is preserved
 by the canonical functor to a category whose object and arrow cocones are colimits.
 Source: Stacks Project, Sites, Tag 09YL, pullback paragraph and its Hom calculation.
-(blueprint: lem-weil-pbc-filtered-colimit-preserves-pullback)
 
 Proof: Take the chosen limiting pullback cone at stage j. To prove its image is
 limiting, fix a cone in the colimit category. Joint surjectivity of the object and

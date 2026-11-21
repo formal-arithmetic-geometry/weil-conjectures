@@ -13,9 +13,6 @@ public import WeilConjectures.CategoryTheory.SheafTensorStructure
 
 /-! # The augmented internal homogeneous bar resolution
 
-Source: blueprint, direct-image stability, paragraph (3), formal internal bar input
-(auxiliary; not a blueprint node).
-
 Free objects are the actual composite of free abelian sheaf and free internal module.
 The resolution specification retains all generator formulas, including the equivariant
 induced presentation. No object is selected from the postponed existence theorem.
@@ -38,9 +35,7 @@ namespace Profinite.CondensedAction.InternalBar
 
 variable (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X]
 
-/-- The free internal module on a condensed set, by the two free adjunctions.
-Source: the free-module construction in step 1 of the internal bar proof
-(auxiliary; not a blueprint node). -/
+/-- The free internal module on a condensed set, by the two free adjunctions. -/
 def free : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)) ⥤ Modules R :=
   Sheaf.composeAndSheafify (coherentTopology Profinite.{u}) AddCommGrpCat.free.{u + 1} ⋙
     Mod.free R.X

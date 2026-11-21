@@ -139,7 +139,6 @@ private theorem finiteCech_shortExact {S : ShortComplex (Sheaf J A)} (hS : S.Sho
 
 /-- Categorical finite Čech exactness implies vanishing of positive derived evaluation.
 Source: Stacks Project, Tag 03F9.
-(blueprint: stage3-categorical-finite-cech-criterion).
 
 Proof: The local section-lifting lemma makes evaluation on B right exact for every
 short exact sequence whose first term has positive Čech exactness. Injective sheaves

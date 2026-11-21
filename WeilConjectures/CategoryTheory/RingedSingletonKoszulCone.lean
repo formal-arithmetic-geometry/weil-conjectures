@@ -11,7 +11,6 @@ public import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 /-! # The singleton dual Koszul tensor as a scalar cone
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -45,7 +44,7 @@ local instance instMonoidalClosedRingedSingletonKoszulCone : MonoidalClosed (She
 attribute [local irreducible] homComplexFunctor
 
 /-- The positive scalar power acting on the tensor with O[0].
-Source: Stacks 0A0E (auxiliary; not a blueprint node). -/
+Source: Stacks 0A0E. -/
 @[irreducible] def ringedSingletonKoszulPower
     (a : (O.obj ⋙ forget CommRingCat).sections) (P : ringedSiteComplex O) (n : ℕ) :
     End (((ringedKoszulTensor O).obj P).obj (ringedSiteRingComplex O)) :=
@@ -191,7 +190,6 @@ it mentions no quotient, residue map, coefficient field or flatness hypothesis.
 
 Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
 the two-term finite free Koszul complex and its dual.
-(auxiliary; not a blueprint node).
 
 Proof: identify the negative singleton complex with the internal dual by
 ringedNegativeKoszulSuccDuality at rank one. The tail factor is O[0], removed

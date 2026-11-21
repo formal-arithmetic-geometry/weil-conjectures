@@ -88,8 +88,7 @@ import Mathlib.Algebra.Homology.Functor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Restriction of a principal localization test
-Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999.
-(blueprint: lem-pur-native-ringed-restriction-local-test). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG and 0999. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -130,8 +129,7 @@ compare its degree-zero derived object. The exact derived slice square compares 
 argument. Compose these isomorphisms, reversing the localization isomorphism in the
 contravariant argument.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0999.
-(blueprint: lem-pur-native-ringed-restriction-local-test). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0999. -/
 theorem localTestRestriction (U : C)
     (N : DerivedCategory (NativeModules.{max c d vc vd r, d, vd} R))
     (s : ((R.over (F.obj U)).obj ⋙ forget CommRingCat).sections) :

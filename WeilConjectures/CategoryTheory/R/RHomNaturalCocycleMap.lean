@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.R.RHomNaturalCocycleExtension
 /-!
 # The natural cocycle comparison for RHom
 
-Source: Stacks Tags 06XR (1) and 070I
-(blueprint: lem-sc-p1-rhom-natural-cocycle-map).
+Source: Stacks Tags 06XR (1) and 070I.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ open CochainComplex.HomComplex
 namespace CategoryTheory.Functor
 
 /-- There is a natural additive comparison, normalized on injective complexes.
-Source: Stacks Tags 06XR (1) and 070I
-(blueprint: lem-sc-p1-rhom-natural-cocycle-map).
+Source: Stacks Tags 06XR (1) and 070I.
 
 Proof: On a bounded below complex of injectives I, send a cocycle M → Iⁿ to its
 localized map M[0] → I[n]. A boundary gives a null-homotopic map by

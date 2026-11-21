@@ -25,8 +25,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 /-- Evaluation detects equality between morphisms of towers placed in degree zero.
-Source: Stacks 06XS(2); diagonal trace proof paragraph (2)
-(blueprint: lem-sfb-single-tower-evaluation-faithful).
+Source: Stacks 06XS(2).
 Proof: fullness writes both derived arrows as single images of actual tower maps.
 Naturality of the single/evaluation comparison and faithfulness of the single functor
 show that each component agrees. Extensionality of natural transformations gives
@@ -58,8 +57,6 @@ theorem singleTowerEvaluationFaithful
     ((((evaluation ℕᵒᵖ A).obj n).mapDerivedCategorySingleFunctor 0).hom.app N)) hn
 
 /-- Transport a degree-zero tower identity through any specified limit square.
-Source: diagonal trace proof paragraph (2), final passage to inverse limit
-(blueprint: lem-sfb-single-tower-limit-identity).
 Proof: evaluation detects equality with the identity by the preceding theorem.
 Functoriality sends that identity to the identity. Cancel the invertible comparison
 in the given square to conclude. -/
@@ -80,9 +77,7 @@ theorem singleTowerLimitIdentity
   apply (cancel_mono j.hom).1
   simpa only [he, Functor.map_id, Category.comp_id, Category.id_comp] using hf
 
-/-- A specified limit square for a degree-zero tower endomorphism with identity levels.
-Source: diagonal trace proof paragraph (2)
-(blueprint: lem-sfb-single-tower-limit-identity). -/
+/-- A specified limit square for a degree-zero tower endomorphism with identity levels. -/
 structure SingleTowerLimitWitness
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
@@ -97,8 +92,6 @@ structure SingleTowerLimitWitness
   square : f ≫ comparison.hom = comparison.hom ≫ limitFunctor.map endomorphism
 
 /-- The specified limit square transports the identity to its lower endomorphism.
-Source: diagonal trace proof paragraph (2)
-(blueprint: lem-sfb-single-tower-limit-identity).
 Proof: apply the preceding degree-zero limit identity to the recorded tower and square. -/
 theorem SingleTowerLimitWitness.eq_id
     {A : Type u} [Category.{v} A] [Abelian A]

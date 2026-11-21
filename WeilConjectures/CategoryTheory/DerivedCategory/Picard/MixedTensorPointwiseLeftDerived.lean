@@ -24,7 +24,6 @@ import WeilConjectures.FromJoel.CategoryTheory.Localization.DerivabilityStructur
 # Exact left derived mixed tensor for a fixed complex
 
 Source: Stacks Project, More on Algebra, Section 06Y5, Tag 06Y6.
-(blueprint: lem-pc-mixed-tensor-pointwise-left-derived)
 -/
 
 @[expose] public section
@@ -39,7 +38,6 @@ namespace DerivedCategory
 
 /-- Existence, exactness, and computation on K-flat complexes for one fixed A-complex.
 Source: Stacks Project, Section 06Y5, Tag 06Y6.
-(blueprint: lem-pc-mixed-tensor-pointwise-left-derived)
 
 Proof: Mixed total tensor in the R-variable sends a chain homotopy h to the
 termwise tensor homotopy h ⊗ 1. Thus it factors through K(R). Its signed

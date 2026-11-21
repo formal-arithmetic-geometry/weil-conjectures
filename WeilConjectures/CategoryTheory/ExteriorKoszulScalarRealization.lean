@@ -11,9 +11,8 @@ import WeilConjectures.CategoryTheory.RingedKoszulDualBasis
 
 /-! # Finite exterior Koszul complexes under scalar realization
 
-Source: Stacks Project, more-algebra.tex, lemma-join-sequences-koszul-complex
-(0664), and algebraization.tex, lemma-derived-completion-koszul (0A0E).
-(auxiliary; not a blueprint node).
+Source: Stacks Project, more-algebra.tex
+(0664), and algebraization.tex (0A0E).
 -/
 
 @[expose] public noncomputable section
@@ -209,9 +208,8 @@ private theorem exteriorKoszulBasis_zero {A : Type w} [CommRing A]
 identifies the finite exterior Koszul complex with the ordered positive tensor's dual.
 No exactness, Noetherianity, quotients, augmentations or cones are involved.
 
-Source: Stacks Project, more-algebra.tex, lemma-join-sequences-koszul-complex
-(0664), and algebraization.tex, lemma-derived-completion-koszul (0A0E).
-(auxiliary; not a blueprint node).
+Source: Stacks Project, more-algebra.tex
+(0664), and algebraization.tex (0A0E).
 
 Proof: conjugate the image under E of scalar multiplication by the regular-module
 isomorphism c. Functoriality and additivity make this a ring homomorphism from A

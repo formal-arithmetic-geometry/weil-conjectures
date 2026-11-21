@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-! # Countable coproducts and idempotent completeness
 
-Source: Stacks Project, Tag 05QW, `derived-lemma-countable-products-karoubian`.
+Source: Stacks Project, Tag 05QW, `derived-.
 -/
 
 @[expose] public section
@@ -24,7 +24,6 @@ namespace CategoryTheory
 
 /-- A pretriangulated category admitting countable coproducts is idempotent complete.
 Source: Stacks Project, Tag 05QW, Lemma 13.4.14, coproduct assertion.
-(blueprint: lem-countable-coproducts-idempotent-complete)
 
 Proof in words: the opposite category has countable products. To split an
 idempotent in an additive category with countable products it suffices to have

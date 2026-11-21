@@ -13,9 +13,7 @@ import all WeilConjectures.CategoryTheory.SmoothPurity.CanonicalRightDerivedAdju
 
 /-! # Cyclic Hom functoriality for the canonical total right derived functor
 
-Source: Stacks Project, Derived Categories, Tags 070I, 070K and 070Y; the
-right-derived comparison step in the native compact-support transport argument.
-(blueprint: lem-sf-cyclic-derived-canonical-right-boundary).
+Source: Stacks Project, Derived Categories, Tags 070I, 070K and 070Y.
 -/
 
 @[expose] public noncomputable section
@@ -175,9 +173,7 @@ Naturality of the cyclic structure identifies the endpoint-conjugated actions as
 well. Additivity and degree-zero forgetting follow directly from the transport
 formula and its zero-shift axiom. Thus all four functoriality components hold.
 
-Source: Stacks Project, Derived Categories, Tags 070I, 070K and 070Y; the native
-comparison step of lem-sf-native-exceptional-hom-transport-boundary.
-(blueprint: lem-sf-cyclic-derived-canonical-right-boundary). -/
+Source: Stacks Project, Derived Categories, Tags 070I, 070K and 070Y. -/
 theorem cyclicDerivedCanonicalRight_functorial
     (α : (mapOfNatIso e).rightDerivedFunctor ⋙ (forget G).mapDerivedCategory ≅
       (forget F).mapDerivedCategory ⋙ L.rightDerivedFunctor)

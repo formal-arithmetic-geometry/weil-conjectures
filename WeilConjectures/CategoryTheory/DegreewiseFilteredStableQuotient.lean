@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-! # Stationary quotients for a degreewise finite filtered complex
 
 Source: Stacks Project, Tags 012Q, 012W and 0132.
-(blueprint: lem-sp-degreewise-filtered-stable-quotient).
 -/
 
 @[expose] public section
@@ -66,7 +65,6 @@ set_option linter.unusedVariables false in
 Only degreewise finiteness is needed; no spectral sequence is part of this statement.
 Source: Stacks Project, Tags 012Q (stable subquotients),
 012W (degreewise finite convergence) and 0132.
-(blueprint: lem-sp-degreewise-filtered-stable-quotient).
 
 Proof.
 For each n define the p-th step on H^n(K) to be the image of H^n(L^pK) → H^n(K).

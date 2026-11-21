@@ -12,9 +12,6 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-! # Descent of a module action through a coefficient cokernel
-
-Source: blueprint integral finite-level dual classicality, scalar reduction step;
-the coefficient quotient step of the integral dual argument.
 -/
 
 @[expose] public noncomputable section
@@ -25,9 +22,6 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory MonObj
 namespace CategoryTheory.Mod
 
 /-- A module action descends through a ring quotient when the kernel acts by zero.
-
-Source: the finite scalar reduction in the integral
-finite-level dual argument (blueprint: lem-sfb-finite-level-scalar-descent).
 
 Proof: tensor the coefficient cokernel with the underlying module. Right exactness
 makes this a cokernel again, so the action factors uniquely through the quotient.

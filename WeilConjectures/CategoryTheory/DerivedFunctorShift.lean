@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicati
 
 /-! # Left derived values commute with shifts
 
-Source: Stacks Project, Derived Categories, Lemma 05SU(2)
-(blueprint: lem-pur-derived-functor-shift-05su).
+Source: Stacks Project, Derived Categories, Lemma 05SU(2).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
 
 /-- Apply a functor to the cone, its retraction, and each factorization equation.
-Source: Stacks Project, Categories, Definition 05PU(2)
-(blueprint: def-pc-essentially-constant-pro-diagram). -/
+Source: Stacks Project, Categories, Definition 05PU(2). -/
 private theorem pro_map
     {J : Type*} {A B : Type*} [Category J] [Category A] [Category B]
     (G : J ⥤ A) (H : A ⥤ B) (Y : A) (h : IsEssentiallyConstantProDiagram G Y) :
@@ -42,8 +40,7 @@ private theorem pro_map
 
 /-- Compose the cone with the diagram isomorphism and the retraction with its inverse.
 Naturality transports the common-stage factorization equation.
-Source: Stacks Project, Categories, Definition 05PU(2)
-(blueprint: def-pc-essentially-constant-pro-diagram). -/
+Source: Stacks Project, Categories, Definition 05PU(2). -/
 private theorem pro_iso
     {J : Type*} {A : Type*} [Category J] [Category A]
     {G G' : J ⥤ A} (e : G ≅ G') (Y : A)
@@ -65,8 +62,7 @@ private theorem pro_iso
 stage, and compose its retraction with the counit. For each common earlier stage,
 apply the inverse functor to its two maps, using the inverse unit to reach the given
 stage. Counit naturality and the triangle identity give the factorization equation.
-Source: Stacks Project, Categories, Definition 05PU(2)
-(blueprint: def-pc-essentially-constant-pro-diagram). -/
+Source: Stacks Project, Categories, Definition 05PU(2). -/
 private theorem pro_reindex
     {J K : Type*} {A : Type*} [Category J] [Category K] [Category A]
     (e : K ≌ J) (G : J ⥤ A) (Y : A) (h : IsEssentiallyConstantProDiagram G Y) :
@@ -94,8 +90,7 @@ private theorem pro_reindex
     simp only [Category.assoc]
 
 /-- Apply reindexing in both directions and cancel the inverse-functor composite.
-Source: Stacks Project, Categories, Definition 05PU(2)
-(blueprint: def-pc-essentially-constant-pro-diagram). -/
+Source: Stacks Project, Categories, Definition 05PU(2). -/
 private theorem pro_reindex_iff
     {J K : Type*} {A : Type*} [Category J] [Category K] [Category A]
     (e : J ≌ K) (G : K ⥤ A) (Y : A) :
@@ -107,8 +102,7 @@ private theorem pro_reindex_iff
   · exact pro_reindex e G Y
 
 /-- Shift each denominator and each commuting triangle, using MS5 for membership in S.
-Source: Stacks Project, Derived Categories, Lemma 05SU(2), Situation 05S8
-(blueprint: lem-pur-derived-functor-shift-05su). -/
+Source: Stacks Project, Derived Categories, Lemma 05SU(2), Situation 05S8. -/
 private def shiftOver
     {C : Type u} [Category.{v} C] [HasShift C ℤ]
     (S : MorphismProperty C) [S.IsCompatibleWithShift ℤ] (X : C) (n : ℤ) :
@@ -125,8 +119,7 @@ private def shiftOver
 /-- The shift on denominators is fully faithful because the shift on C is. To lift an
 object, choose a preimage of its source under the shift and lift its structural map
 using fullness. MS5 and invariance under isomorphisms show this map belongs to S.
-Source: Stacks Project, Derived Categories, Lemma 05SU(2), Situation 05S8
-(blueprint: lem-pur-derived-functor-shift-05su). -/
+Source: Stacks Project, Derived Categories, Lemma 05SU(2), Situation 05S8. -/
 private theorem shiftOver_equivalence
     {C : Type u} [Category.{v} C] [HasShift C ℤ]
     (S : MorphismProperty C) [S.IsCompatibleWithShift ℤ] [S.RespectsIso]
@@ -162,8 +155,7 @@ objects. Their limit property follows from the retraction and common-stage
 factorization in `IsEssentiallyConstantProDiagram`. The leg equation uniquely
 characterizes the shift comparison; MS5 guarantees the shifted denominator belongs
 to `S`, so its proof argument does not restrict the denominators being tested.
-Source: Stacks Project, Derived Categories, Lemma 05SU(2)
-(blueprint: lem-pur-derived-functor-shift-05su).
+Source: Stacks Project, Derived Categories, Lemma 05SU(2).
 The proof shifts the denominator category by the equivalence induced by `[n]`, using
 MS5 and its inverse. Exactness transports the essentially constant pro-diagram and
 its value through the shift isomorphisms, preserving the cone, retraction, and

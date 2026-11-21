@@ -9,9 +9,6 @@ public import WeilConjectures.CategoryTheory.ScalarLocalization.ScalarLocalizati
 public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-! # Natural isomorphisms with specified scalar-localized components
-
-Source: blueprint sk-def-sf-operations, raw rationalization Hom formula.
-(blueprint: lem-pur-scalar-localization-component-iso)
 -/
 
 @[expose] public section
@@ -20,8 +17,6 @@ open TensorProduct
 namespace CategoryTheory.ScalarLocalization
 
 /-- Compatible component formulas lift an ordinary natural isomorphism uniquely.
-Source: blueprint sk-def-sf-operations, raw rationalization Hom formula
-(blueprint: lem-pur-scalar-localization-component-iso).
 Proof: conjugate each localized component by the given object identifications.
 For naturality, induct on scalar-first tensors in the localized Hom group. The zero
 and sum cases follow from additivity. For a pure tensor use the specified formulas

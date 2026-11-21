@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 /-!
 # Symmetric tensor structure on sheaves
 
-Source: blueprint `det-def-sfb-sheaf-tensor-structure` and Stacks Tags 00WH, 0H7J.
+Source: blueprint and Stacks Tags 00WH, 0H7J.
 
 The tensor is the sheafification of the objectwise presheaf tensor.  The canonical
 localized symmetric structure and the canonical strong monoidal and braided structures
@@ -41,7 +41,6 @@ The symmetric structure is `Sheaf.symmetricCategory`; its tensor object is there
 localization tensor, namely the sheafification of the objectwise tensor.  The final two fields
 record the canonical monoidal and braided structures on `presheafToSheaf`, whose tensorator
 is thus the specified comparison between sheafified tensors.
-(blueprint: det-def-sfb-sheaf-tensor-structure)
 -/
 structure SfbSheafTensorStructure
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
@@ -59,8 +58,7 @@ structure SfbSheafTensorStructure
     @Functor.Braided (Cᵒᵖ ⥤ A) _ _ _ (Sheaf J A) _ monoidal symmetric.toBraidedCategory
       (presheafToSheaf J A)
 
-/-- The canonical symmetric sheaf tensor structure.
-(blueprint: det-def-sfb-sheaf-tensor-structure) -/
+/-- The canonical symmetric sheaf tensor structure. -/
 noncomputable def sfbSheafTensorStructure
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C)

@@ -10,9 +10,8 @@ public import WeilConjectures.CategoryTheory.IsSaturatedTriangulatedMultiplicati
 
 /-! # Completing denominators to morphisms of distinguished triangles
 
-Source: Stacks Project, Derived Categories, Tag 05R9 (lemma-limit-triangles),
-construction over a prescribed denominator, in its incoming-arrow form
-(blueprint: lem-pur-triangle-completion-ms6-05r9).
+Source: Stacks Project, Derived Categories, Tag 05R9,
+construction over a prescribed denominator, in its incoming-arrow form.
 -/
 
 @[expose] public section
@@ -25,9 +24,8 @@ namespace CategoryTheory
 
 /-- Every denominator into any vertex of a distinguished triangle extends to a morphism
 from a distinguished triangle whose other two components are also denominators.
-Source: Stacks Project, Derived Categories, Tag 05R9 (lemma-limit-triangles),
-construction over a prescribed denominator, dualized to incoming arrows
-(blueprint: lem-pur-triangle-completion-ms6-05r9).
+Source: Stacks Project, Derived Categories, Tag 05R9,
+construction over a prescribed denominator, dualized to incoming arrows.
 
 Proof:
 1. For `s : X' ⟶ T.obj₁`, TR1 of `def-weil-triangulated-category` gives a distinguished

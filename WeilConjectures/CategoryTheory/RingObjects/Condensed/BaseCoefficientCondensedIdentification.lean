@@ -19,10 +19,6 @@ public import WeilConjectures.NumberTheory.Padics.Extension
 
 /-!
 # Condensed realizations of the base p-adic coefficients
-
-Source: blueprint `main-20261015`, `theorem-exceptional-inverse-image`, opening paragraphs of
-`det-existence-localizing.proof.md` and `det-existence-restriction.proof.md`
-(blueprint: lem-sfb-base-coefficient-condensed-identification).
 -/
 
 @[expose] public section
@@ -64,11 +60,6 @@ private noncomputable def coefficientIso {R T : Type}
 integral condensed coefficients, compatibly with inclusion. The bottom intermediate field
 has its inherited subspace norm; `PadicAlgCl.integers` is the unit ball for precisely this
 norm. Ring objects here use the tensor product of condensed abelian groups.
-
-Source: blueprint `main-20261015`, `theorem-exceptional-inverse-image`, introductory coefficient
-specializations in `det-existence-localizing.proof.md` and
-`det-existence-restriction.proof.md`
-(blueprint: lem-sfb-base-coefficient-condensed-identification).
 
 Proof: (1) Restrict the structural embedding to its image, the bottom intermediate field.
 Its inverse sends an image element to its unique preimage; this is

@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Compact tests for preservation of coproducts by a right adjoint
 
-Source: Stacks Project, Tag 0A9R; the explicit compact-test and indexing-universe
-argument in `lem-sc-compact-tests-right-adjoint-coproducts`.
+Source: Stacks Project, Tag 0A9R.
 -/
 
 @[expose] public section
@@ -150,7 +149,6 @@ private theorem compactTests_small
 /-- An adjunction whose left adjoint takes a small detecting family of compact objects
  to compact objects has a coproduct-preserving right adjoint.
 Source: Stacks Project, Tag 0A9R, adjunction Hom calculation and conclusion.
-(blueprint: lem-sc-compact-tests-right-adjoint-coproducts).
 
 Proof. For a u-small family K form the coproduct comparison for c. Compactness of
 G s identifies Hom(G s, the coproduct of c(K i)) with the direct sum of Hom(G s,c(K i)).

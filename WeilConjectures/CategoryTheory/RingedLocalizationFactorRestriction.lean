@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.RingedKoszulSystem
 /-! # Restriction of one augmented localization factor
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JB; algebraization.tex, Tag 0996.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -238,7 +237,6 @@ variable (O : Sheaf J CommRingCat.{u})
 onto the ring complex, including restriction between two slices.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08JB; algebraization.tex, Tag 0996.
-(auxiliary; not a blueprint node).
 
 Proof: the fraction presheaf restricted along Over.forget U is the fraction presheaf
 of the restricted section: its objectwise identity maps commute with the restriction

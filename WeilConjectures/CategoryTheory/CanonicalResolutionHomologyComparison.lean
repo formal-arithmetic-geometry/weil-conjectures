@@ -13,7 +13,6 @@ import all Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 /-! # Resolution comparisons and the composite derived unit
 
 Source: Stacks Project, derived.tex, Tags 015M and 015N.
-(blueprint: lem-pc-grothendieck-resolution-unit-comparison).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace CategoryTheory
 set_option backward.isDefEq.respectTransparency false in
 /-- Homology of the canonical comparison computes the prescribed resolution comparison.
 Source: Stacks Project, Tag 015M, resolution computation of derived functors.
-(blueprint: lem-pc-canonical-resolution-homology-comparison).
 
 Proof: For the chosen injective resolution, expand the single-object homology comparison;
 its final inverse resolution comparison cancels the resolution comparison in the left

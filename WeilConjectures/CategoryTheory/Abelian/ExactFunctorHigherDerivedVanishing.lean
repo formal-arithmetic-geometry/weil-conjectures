@@ -14,8 +14,7 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 /-!
 # Higher right derived functors of exact functors
 
-Source: Stacks Project, Derived Categories, Lemma 13.16.9, Tag 015F, part (5)
-(blueprint: lem-sc-exact-functor-higher-derived-vanishing).
+Source: Stacks Project, Derived Categories, Lemma 13.16.9, Tag 015F, part (5).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace CategoryTheory.Functor
 higher right derived functors: `R^{q+1} v (M) = 0` for every `q : ℕ`, i.e. `R^q v (M) = 0`
 for every integer `q > 0`, in the natural-number indexing of `Functor.rightDerived`.
 
-Source: Stacks Project, Derived Categories, Lemma 13.16.9, Tag 015F, part (5)
-(blueprint: lem-sc-exact-functor-higher-derived-vanishing).
+Source: Stacks Project, Derived Categories, Lemma 13.16.9, Tag 015F, part (5).
 
 Proof: Exactness implies left exactness and additivity, so choose an injective resolution
 `M → I` as in [def-sp-left-exact-additive] and [def-sp-injective-resolutions]. Its cohomology

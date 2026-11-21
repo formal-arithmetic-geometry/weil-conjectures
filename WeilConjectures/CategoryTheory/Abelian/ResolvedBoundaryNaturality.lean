@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Abelian.RightDerivedTriangleConnecting
 /-! # Naturality of a boundary computed by compatible resolutions
 
 Source: Stacks Project, Tags 015B and 01DZ.
-(blueprint: lem-sc-resolved-boundary-naturality).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ universe v₁ v₂ u₁ u₂ w₁ w₂
 set_option backward.isDefEq.respectTransparency false in
 /-- A compatible resolution computes the natural derived connecting map.
 Source: Stacks Project, Tags 015B and 01DZ.
-(blueprint: lem-sc-resolved-boundary-naturality).
 Proof: Obtain the cohomological delta-functor and both comparison identities from
 rightDerived_triangle_connecting. Eliminate the equality identifying its functors with
 rightDerived. Its first comparison identifies the source delta with the boundary of the
@@ -84,7 +82,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The resolved boundary comparison, precomposed with the section comparison and
 evaluated on a module element, with the quotient component explicitly identified.
 Source: Stacks Project, Tags 015B and 01DZ.
-(blueprint: lem-sc-resolved-boundary-naturality).
 Proof: Apply the abstract resolution/triangle comparison and delta naturality above.
 Precompose by toRightDerivedZero, move it past the third component by its naturality,
 and evaluate. Composition of module maps is composition of their linear maps.

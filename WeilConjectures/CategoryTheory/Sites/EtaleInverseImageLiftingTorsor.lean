@@ -14,7 +14,7 @@ import WeilConjectures.CategoryTheory.Sites.EtaleInverseImageLiftsFibre
 /-! # Inverse image of a lifting torsor
 
 Source: Stacks Project, Tag 03AJ, lifting-torsor construction and its inverse-image
-compatibility (blueprint: lem-sc-etale-inverse-image-lifting-torsor).
+compatibility.
 -/
 
 @[expose] public section
@@ -26,9 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory.Sheaf.Torsor
 
 /-- Inverse image preserves the fibre torsor of a short exact sequence over a section.
-Source: Stacks Project, Tag 03AJ, construction of the torsor of lifts;
-inverse-image fibre compatibility in lem-sc-etale-torsor-inverse-image-extension.
-(blueprint: lem-sc-etale-inverse-image-lifting-torsor)
+Source: Stacks Project, Tag 03AJ, construction of the torsor of lifts.
 
 Proof: Express the sheaf of lifts as the pullback of the underlying sheaf map to the
 quotient along the global section. Set inverse image preserves finite limits and the

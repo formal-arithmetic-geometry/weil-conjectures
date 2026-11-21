@@ -19,9 +19,7 @@ open scoped MonoidalCategory
 namespace CategoryTheory.Monoidal
 
 /-- A fully faithful functor induces a monoidal structure with prescribed tensor objects.
-Source: Mathlib's `CategoryTheory.Monoidal.induced`, applied to the objectwise comparisons;
-the categorical transport in Weil II (1.1.1), (1.1.6).
-(blueprint: new-c5-prescribed-monoidal-transport).
+Source: the categorical transport in Weil II (1.1.1), (1.1.6).
 
 Proof: define whiskering and tensor products of arrows as fully faithful preimages of
 the target maps conjugated by the supplied comparisons. Define associators and unitors

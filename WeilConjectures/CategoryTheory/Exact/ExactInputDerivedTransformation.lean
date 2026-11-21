@@ -13,8 +13,7 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.KInjectives.KInjectiveR
 /-!
 # Right-derived transformations through an exact input functor
 
-Source: Stacks Project, Derived Categories, Tags 05SE, 070Y and 070K; the exact-input
-assembly in the DAG (blueprint: lem-sfb-exact-input-derived-transformation).
+Source: Stacks Project, Derived Categories, Tags 05SE, 070Y and 070K.
 
 The unit equation characterizes the transformation without requiring the exact input
 functor to preserve K-injectives. Its computation uses a second K-injective resolution.
@@ -45,8 +44,7 @@ variable {A : Type uA} {B : Type uB} {C : Type uC}
 
 /-- The unit equation defining the exact-input comparison, written on the homotopy
 category with the canonical localization and composition identifications inserted.
-Source: the exact-input assembly from Stacks Tags 05SE and 070Y
-(blueprint: lem-sfb-exact-input-derived-transformation). -/
+Source: the exact-input assembly from Stacks Tags 05SE and 070Y. -/
 def IsExactInputDerivedTransformation
     (τ : F.rightDerivedFunctorOfQuasiIsoResolutions hA ⟶
       E.mapDerivedCategory ⋙ G.rightDerivedFunctorOfQuasiIsoResolutions hB) : Prop :=
@@ -494,8 +492,7 @@ set_option backward.isDefEq.respectTransparency false in
 compatibility with all signed shifts and distinguished triangles. The existential shift
 structures are normalized by commutation of the computation units with the standard
 signed shifts; thus they are the canonical structures on the chosen universal pairs.
-Source: Stacks Tags 05SE, 070Y and 070K, exact-input assembly in the DAG
-(blueprint: lem-sfb-exact-input-derived-transformation).
+Source: Stacks Tags 05SE, 070Y and 070K, exact-input assembly in the DAG.
 
 Proof:
 1. Restrict each computation unit to K-injectives, where it is invertible. The

@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.SpectralObjectBottomPageIntervalCompatibil
 
 /-! # Compatibility of a bottom-page map with passage to homology
 
-Source: Stacks Project, Tags 012K and 015N; spectral-object page construction.
-(blueprint: lem-sc-spectral-object-bottom-page-compatibility)
+Source: Stacks Project, Tags 012K and 015N.
 -/
 
 @[expose] public section
@@ -24,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits ComposableArrows
 namespace CategoryTheory.Abelian.SpectralObject
 
 /-- The cycles-to-homology square commutes with the bottom-page map to the abutment.
-Source: Stacks Project, Tags 012K and 015N; expanded in Mathlib's spectral-object
-`SpectralSequence.homologyData` and `spectralSequence_iso`.
-(blueprint: lem-sc-spectral-object-bottom-page-compatibility)
+Source: Stacks Project, Tags 012K and 015N.
 
 Proof: Write a = 2-r and c = r-1. The page-r term is
 E^p(a,0,1,c), and the successor is E^p(a-1,0,1,c+1). In the

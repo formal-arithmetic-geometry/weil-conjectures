@@ -17,8 +17,7 @@ namespace CategoryTheory
 
 /-- A counit normalized by a trace respects the coefficient action.
 Source: the coefficient-action calculation in the affine-space trace proof,
-Stacks Tags 0B56 and 0GL1
-(blueprint: lem-pur-normalized-tensor-counit-action).
+Stacks Tags 0B56 and 0GL1.
 
 Proof: precompose by the invertible map `H tensor p B W`. The action equation
 replaces the two projections by the projection for `H tensor B` and its

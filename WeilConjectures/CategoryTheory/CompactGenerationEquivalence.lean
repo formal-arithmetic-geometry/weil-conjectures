@@ -28,8 +28,7 @@ open Limits
 
 /-- An additive equivalence compatible with shifts preserves compact generation.
 Source: Stacks Project, Derived Categories, Definition 13.37.1 (Tag 09SM),
-Definition 13.36.3 (Tag 09SJ) and Definition 13.37.5 (Tag 09SQ)
-(blueprint: lem-pc-compact-generation-equivalence).
+Definition 13.36.3 (Tag 09SJ) and Definition 13.37.5 (Tag 09SQ).
 
 Proof: Choose the original compact generating family and map it by e.functor.
 For a family in D, use e.inverse to pull it back to C. The additive Hom equivalences

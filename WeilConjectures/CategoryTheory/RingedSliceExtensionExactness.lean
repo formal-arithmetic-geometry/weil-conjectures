@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.RingedSliceExtensionReflectsExact
 /-!
 # Exactness detected by extension from a ringed-site slice
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 0E8G.
 -/
 
 @[expose] public section
@@ -31,17 +30,15 @@ preserves and reflects exactness at the middle term. Equality is equality of
 subobjects of the middle module sheaf, so it expresses precisely `im(a) = ker(b)`.
 The module universe `max u v` contains both the objects and arrows of the site.
 
-Source: Stacks Project, Modules on Sites, Tag 0E8G
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 0E8G.
 
 Proof plan:
 1. By `lem-pur-site-restriction-module-adjunction-exact`, the sheafified direct-sum
 extension is exact, hence preserves the equality of image and kernel.
 2. The adjunction unit sends a section over `(V, φ)` into the `φ` summand and then
 into its sheafification. This is natural and module-linear. The underlying abelian
-and set sheafification comparisons (`lem-pc-sites-module-sheafification-interface`
-and `lem-pc-sites-sheafification-underlying-sets`) and the local equality criterion
-(`lem-weil-pbc-site-sheafification-sections-local`) show that a section in its kernel
+and set sheafification comparisons and the local equality criterion
+show that a section in its kernel
 vanishes locally. Coordinate injection into a direct sum is injective, and sheaf
 separatedness makes the section zero. This includes empty covering families.
 3. This monic unit implies that extension detects zero objects: if the extension

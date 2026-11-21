@@ -48,7 +48,7 @@ section Colimit
 variable [Abelian.HasKInjectiveResolutions C] [HasColimitsOfShape ℕ C]
   [HasExactColimitsOfShape ℕ C] [HasCoproductsOfShape ℕ C]
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Sequential colimits represent
+/-- Sequential colimits represent
 homotopy colimits.
 
 For a sequence `F₀ ⟶ F₁ ⟶ ⋯` of cochain complexes in an abelian category `C` with exact colimits
@@ -185,7 +185,7 @@ noncomputable def complexTruncLESequenceCompQIso (K : CochainComplex C ℤ) :
     complexTruncLESequence K ⋙ Q ≅ truncLESequence (Q.obj K) :=
   asIso (complexTruncLESequenceCompQHom K)
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`: Recovery from bounded-above
+/-- Recovery from bounded-above
 truncations.
 
 For every `E ∈ D(C)`, `C` an abelian category with exact colimits of shape `ℕ` (e.g. étale

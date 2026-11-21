@@ -14,7 +14,6 @@ public import WeilConjectures.CategoryTheory.Sites.MonObj
 
 proof.md`, first two sentences;
 the expanded proof of `lem-sfb-section-action-internal`.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -26,7 +25,6 @@ open scoped TensorProduct CategoryTheory.MonoidalClosed
 namespace CategoryTheory
 
 /-- The prescribed sheafification-local maps are stable under tensor.
-Source: the sheaf tensor in the node's setup (auxiliary; not a blueprint node).
 Proof: use `presheaf_enrichedHoms_exist` for the essentially small site. The
 presheaf tensor-Hom adjunction and the sheaf property of Hom into a sheaf show
 stability under left tensor; symmetry gives stability under right tensor. -/

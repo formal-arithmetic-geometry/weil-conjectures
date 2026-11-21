@@ -15,7 +15,7 @@ import WeilConjectures.CategoryTheory.CompactObjectsThick
 # Finite thick approximation of a connecting component
 
 Source: Stacks Project, Derived Categories, Tag 09SP, with the stage notation of
-Tag 09SN (blueprint: lem-sc-compact-triangle-connecting-approximation).
+Tag 09SN.
 -/
 
 @[expose] public section
@@ -29,7 +29,6 @@ namespace CategoryTheory
 /-- Approximate the connecting component across one distinguished triangle by a finite
 thick object. Source: Stacks Project, Derived Categories, Tag 09SP, induction step
 up to (but excluding) the exactness correction.
-(blueprint: lem-sc-compact-triangle-connecting-approximation).
 
 Proof: factor the connecting map from K into Z[1] through F[1], with F a finite
 sum of shifts of generators, using compactness and preservation of coproducts by

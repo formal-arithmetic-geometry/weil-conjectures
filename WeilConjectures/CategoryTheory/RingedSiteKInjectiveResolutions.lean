@@ -20,7 +20,7 @@ import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 # Functorial K-injective resolutions on small ringed sites
 
 Source: Stacks Project, Cohomology on Sites, Section 07A5, first paragraph,
-and Injectives, Theorem 079P (blueprint: prop-pur-kinjective-resolutions-exist).
+and Injectives, Theorem 079P.
 -/
 
 @[expose] public section
@@ -41,8 +41,7 @@ with the coproduct of the localized rank-one extensions as a generator. Every
 integer-indexed cochain complex has a functorial K-injective resolution whose
 terms are injective.
 
-Source: Stacks Project, Section 07A5 and Theorem 079P
-(blueprint: prop-pur-kinjective-resolutions-exist).
+Source: Stacks Project, Section 07A5 and Theorem 079P.
 
 Proof:
 1. Apply `lem-pur-ringed-site-grothendieck-abelian` to obtain the Grothendieck

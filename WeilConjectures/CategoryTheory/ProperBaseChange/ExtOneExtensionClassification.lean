@@ -14,7 +14,7 @@ import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 # Degree-one Ext classes classify short exact extensions
 
 Source: Stacks Project, Derived Categories, Tags 06XU and 06XV; exact-functor compatibility
-by Tags 0151 and 0152 (blueprint: lem-weil-pbc-ext-one-extension-classification).
+by Tags 0151 and 0152.
 -/
 
 @[expose] public section
@@ -82,8 +82,7 @@ private theorem single_triangle_boundary_unique
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Short exact extensions with fixed endpoints are classified by their connecting class.
-Source: Stacks Project, Tags 06XU and 06XV
-(blueprint: lem-weil-pbc-ext-one-extension-classification).
+Source: Stacks Project, Tags 06XU and 06XV.
 
 The first clause gives every class a representative. The second says precisely that equal
 classes have an isomorphism of middle objects inducing identities on both endpoints; its

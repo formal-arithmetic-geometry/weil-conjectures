@@ -16,9 +16,8 @@ import Mathlib.CategoryTheory.Limits.Types.Colimits
 
 /-! # Equality of Kan units at one stage
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 independence of presentations in the section construction.
-(blueprint: lem-weil-pbc-colimit-site-kan-unit-relations).
 -/
 
 @[expose] public section
@@ -71,9 +70,8 @@ private theorem finite_colimit_relation_support
       (Finset.mem_union_right _ hf) a)
     exact h₁.trans h₂
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section construction, independence of the presentation and restriction arrows.
-(blueprint: lem-weil-pbc-colimit-site-kan-unit-relations).
 
 Proof: Compute the value of the left Kan extension K by the set colimit
 on structured arrows. The two unit generators have the same stage object and

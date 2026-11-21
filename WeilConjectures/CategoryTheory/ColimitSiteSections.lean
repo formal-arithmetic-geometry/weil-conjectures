@@ -12,8 +12,7 @@ public import WeilConjectures.CategoryTheory.SiteFilteredColimitSections
 import Mathlib.CategoryTheory.Filtered.Final
 
 /-! # Sections of the colimit sheaf on a colimit of sites
-Source: Stacks Project, Sites, Lemma 09YN and Modules on Sites, Lemma 03CO
-(blueprint: lem-weil-pbc-colimit-of-sites-sections).
+Source: Stacks Project, Sites, Lemma 09YN and Modules on Sites, Lemma 03CO.
 -/
 
 @[expose] public section
@@ -22,7 +21,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Lemma 09YN (blueprint: lem-weil-pbc-colimit-of-sites-sections).
+/-- Source: Stacks Project, Sites, Lemma 09YN.
 The sections of the colimit of inverse-image sheaves are the filtered colimit of the
 sections at the corresponding stage objects. The proof applies the finite-covering
 section theorem to the diagram `D`.
@@ -45,8 +44,7 @@ theorem colimitSite_sections_bijective
   exact siteFilteredColimit_sections_bijective Q hfinite D c hc
     ((V.ι.app i).toFunctor.obj U)
 
-/-- Source: Stacks Project, Modules on Sites, Lemma 03CO
-(blueprint: lem-weil-pbc-colimit-of-sites-sections).
+/-- Source: Stacks Project, Modules on Sites, Lemma 03CO.
 The same assertion for abelian sheaves says that the canonical map of section groups is
 an isomorphism, by the abelian finite-covering section theorem.
 -/

@@ -561,7 +561,6 @@ private theorem pullbackComparison (A : Type w) [CommRing A] :
 constant coefficient rings, after the normalized constant-scalar equivalences.
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 03D2; Sites, Tag 00YV.
-(auxiliary; not a blueprint node).
 
 Proof: construct the coefficient homomorphism through the commutative-ring
 sheafification adjunction and normalize the constant-object comparison on constant

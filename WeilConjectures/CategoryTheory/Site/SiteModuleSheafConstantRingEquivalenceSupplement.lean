@@ -27,8 +27,7 @@ public import WeilConjectures.CategoryTheory.SiteModuleSheafConstantRingEquivale
 /-! # Constant-coefficient module sheaves on an arbitrary small site
 
 Source: Stacks Project, Modules on Sites, Tag 093I, and Cohomology on Sites,
-Tag 03FD; encoding construction used by Tag 094G
-(blueprint: lem-weil-pbc-site-module-sheaf-constant-ring-equivalence).
+Tag 03FD; encoding construction used by Tag 094G.
 -/
 
 -- After pruning, this module only keeps private declarations.
@@ -420,7 +419,6 @@ The locally bijective constant-ring unit may be the restriction of a global unit
 
 Source: Stacks Project, Modules on Sites, Tag 093I (constant algebraic structures),
 and Cohomology on Sites, Tag 03FD; the encoding used by Tag 094G.
-(blueprint: lem-weil-pbc-site-module-sheaf-constant-ring-equivalence).
 
 Proof: Encode a ModuleCat-valued presheaf as modules over the constant ring presheaf,
 then sheafify along the given ring unit. Local bijectivity is supplied as an explicit

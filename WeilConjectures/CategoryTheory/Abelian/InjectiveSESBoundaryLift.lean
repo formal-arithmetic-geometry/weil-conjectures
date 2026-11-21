@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.Abelian.SplitSESBoundaryComparison
 # A simultaneous homotopy representative for split SES boundaries
 
 Source: Stacks Project, Derived Categories, Tags 014Q and 0152.
-(blueprint: lem-sc-p1-injective-ses-homotopy-boundary-lift).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ set_option backward.isDefEq.respectTransparency false in
 represents the canonical boundary after any additive functor.
 
 Source: Stacks Project, Derived Categories, Tags 014Q and 0152.
-(blueprint: lem-sc-p1-injective-ses-homotopy-boundary-lift).
 
 Proof: Split the degree rows by injectivity of the first term, and form the
 connecting chain map whose degree n component is section, differential,

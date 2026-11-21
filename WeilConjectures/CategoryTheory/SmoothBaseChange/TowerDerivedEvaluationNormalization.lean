@@ -137,9 +137,8 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-!
 # Normalized evaluation of a total derived tower functor
 
-Source: Stacks Project, Sites Cohomology, Tag 0A07, lemma-Rf-commutes-with-Rlim,
-diagram-topos proof, expanded using Derived Categories, Tags 070I, 070Y and 09T5
-(blueprint: lem-weil-pbc-tower-derived-evaluation-normalization).
+Source: Stacks Project, Sites Cohomology, Tag 0A07,
+diagram-topos proof, expanded using Derived Categories, Tags 070I, 070Y and 09T5.
 
 Natural number `n` denotes the positive tower level `n + 1`.
 -/
@@ -155,8 +154,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Package Mathlib's pointwise limit-preservation instances for a termwise exact functor.
-Source: Stacks Project, Tag 0A07, diagram-topos proof; Mathlib functor-category limits
-(blueprint: lem-weil-pbc-tower-derived-evaluation-normalization). -/
+Source: Stacks Project, Tag 0A07, diagram-topos proof. -/
 instance towerNormalization_preservesFiniteLimits
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [HasFiniteLimits B] (F : B ⥤ A) [PreservesFiniteLimits F] :
@@ -164,8 +162,7 @@ instance towerNormalization_preservesFiniteLimits
   preservesFiniteLimits _ _ _ := inferInstance
 
 /-- Package Mathlib's pointwise colimit-preservation instances for a termwise exact functor.
-Source: Stacks Project, Tag 0A07, diagram-topos proof; Mathlib functor-category colimits
-(blueprint: lem-weil-pbc-tower-derived-evaluation-normalization). -/
+Source: Stacks Project, Tag 0A07, diagram-topos proof. -/
 instance towerNormalization_preservesFiniteColimits
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [HasFiniteColimits B] (F : B ⥤ A) [PreservesFiniteColimits F] :
@@ -174,9 +171,7 @@ instance towerNormalization_preservesFiniteColimits
 
 /-- The canonical transition between derived evaluations, obtained by localizing the
 ordinary transition of exact evaluation functors. This includes every transition,
-including the identity. Source: Stacks Project, Tag 0A07, diagram-topos proof;
-Derived Categories, Tag 05RU
-(blueprint: lem-weil-pbc-tower-derived-evaluation-normalization). -/
+including the identity. Source: Stacks Project, Tag 0A07, diagram-topos proof; Derived Categories, Tag 05RU. -/
 def towerDerivedEvaluationTransition
     (A : Type uA) [Category.{vA} A] [Abelian A]
     [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wTA} (ℕᵒᵖ ⥤ A)]
@@ -194,8 +189,7 @@ def towerDerivedEvaluationTransition
 /-- The canonical exact-localization identification of evaluation after termwise `F`
 with `F` after evaluation. It is the composite of the canonical composition comparisons;
 its ordinary comparison is the strict evaluation identity. Source: Stacks Project,
-Tag 0A07, diagram-topos proof, and Derived Categories, Tag 015F
-(blueprint: lem-weil-pbc-tower-derived-evaluation-normalization). -/
+Tag 0A07, diagram-topos proof, and Derived Categories, Tag 015F. -/
 def towerDerivedEvaluationInterchange
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B]

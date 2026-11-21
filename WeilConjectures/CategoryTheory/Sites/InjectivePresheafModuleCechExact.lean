@@ -123,7 +123,6 @@ Homs, rings, module values and family indices share a universe, so the free
 representables lie in the category in which injectivity is assumed.
 Source: Stacks Project, Cohomology on Sites, proof of Tag 03FC after the application
 of Tag 03FB; Tags 03AS, 03F5 and 03AT.
-(blueprint: lem-weil-pbc-injective-presheaf-module-cech-cocycle-lift)
 
 Proof: form the chain complex K of coproducts of free representable R-module
 presheaves on the chosen products. Its boundary deletes factors with alternating

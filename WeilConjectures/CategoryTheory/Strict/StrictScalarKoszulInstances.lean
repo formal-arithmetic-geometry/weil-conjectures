@@ -65,7 +65,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 /-! # StrictScalarKoszulInstances for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-strict-scalar-koszul-instances).
 -/
 
 @[expose] public noncomputable section
@@ -90,15 +89,13 @@ attribute [local irreducible] homComplexFunctor
   Localization.Monoidal.tensorBifunctor
 
 /-- Coproducts supply the tensor product of two integer-graded objects.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem gradedTensorCache {D : Type*} [Category D] [MonoidalCategory D]
     [HasCoproducts.{0} D] (X Y : GradedObject ℤ D) : X.HasTensor Y := by
   infer_instance
 
 /-- Closed tensor preserves the coproducts for the left-associated triple tensor.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem gradedGoodTensorLeftCache {D : Type*} [Category D] [Abelian D]
     [MonoidalCategory D] [SymmetricCategory D] [MonoidalPreadditive D]
     [MonoidalClosed D] [HasCoproducts.{0} D] (X Y Z : GradedObject ℤ D) :
@@ -106,8 +103,7 @@ theorem gradedGoodTensorLeftCache {D : Type*} [Category D] [Abelian D]
   infer_instance
 
 /-- Closed tensor preserves the coproducts for the right-associated triple tensor.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem gradedGoodTensorRightCache {D : Type*} [Category D] [Abelian D]
     [MonoidalCategory D] [SymmetricCategory D] [MonoidalPreadditive D]
     [MonoidalClosed D] [HasCoproducts.{0} D] (X Y Z : GradedObject ℤ D) :
@@ -115,8 +111,7 @@ theorem gradedGoodTensorRightCache {D : Type*} [Category D] [Abelian D]
   infer_instance
 
 /-- Fourfold graded tensor maps are determined by their summand inclusions.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem gradedFourCache {D : Type*} [Category D] [Abelian D]
     [MonoidalCategory D] [SymmetricCategory D] [MonoidalPreadditive D]
     [MonoidalClosed D] [HasCoproducts.{0} D] (W X Y Z : GradedObject ℤ D) :
@@ -124,16 +119,14 @@ theorem gradedFourCache {D : Type*} [Category D] [Abelian D]
   infer_instance
 
 /-- Tensoring on the left preserves the empty colimit.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem tensorPreservesEmptyLeftCache {D : Type*} [Category D] [Abelian D]
     [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] (X : D) :
     PreservesColimit (Functor.empty.{0} D) ((curriedTensor D).obj X) := by
   infer_instance
 
 /-- Symmetry transfers empty-colimit preservation to tensoring on the right.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem tensorPreservesEmptyRightCache {D : Type*} [Category D] [Abelian D]
     [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D]
     [SymmetricCategory D] (X : D) :
@@ -141,16 +134,14 @@ theorem tensorPreservesEmptyRightCache {D : Type*} [Category D] [Abelian D]
   infer_instance
 
 /-- The canonical site tensor structure on module sheaves.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 @[instance_reducible] def cachedModuleMonoidal (O : Sheaf J CommRingCat.{u}) :
     MonoidalCategory (Modules O) := SheafOfModules.monoidalCategory O
 
 attribute [local instance] cachedModuleMonoidal
 
 /-- The symmetry of the canonical site tensor on module sheaves.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 @[instance_reducible] def cachedModuleSymmetric (O : Sheaf J CommRingCat.{u}) :
     SymmetricCategory (Modules O) := by
   let := SheafOfModules.monoidalCategory O
@@ -159,8 +150,7 @@ Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
 attribute [local instance] cachedModuleSymmetric
 
 /-- The additive tensor witness supplied by the existing closed tensor theorem.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 theorem cachedModulePreadditive (O : Sheaf J CommRingCat.{u}) :
     MonoidalPreadditive (Modules O) := by
   let := SheafOfModules.monoidalCategory O
@@ -169,8 +159,7 @@ theorem cachedModulePreadditive (O : Sheaf J CommRingCat.{u}) :
 attribute [local instance] cachedModulePreadditive
 
 /-- The existing tensor-Hom adjunction for module sheaves.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 @[instance_reducible] def cachedModuleClosed (O : Sheaf J CommRingCat.{u}) :
     MonoidalClosed (Modules O) := by
   let := SheafOfModules.monoidalCategory O
@@ -180,8 +169,7 @@ Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
 attribute [local instance] cachedModuleClosed
 
 /-- The coproduct total tensor on integer cochain complexes of module sheaves.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 @[instance_reducible] def cachedComplexMonoidal (O : Sheaf J CommRingCat.{u}) :
     MonoidalCategory (ringedSiteComplex O) := by
   let : IsGrothendieckAbelian.{u} (Modules O) := SheafOfModules.isGrothendieckAbelian _
@@ -194,8 +182,7 @@ Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
 attribute [local instance] cachedComplexMonoidal
 
 /-- The graded braiding on integer cochain complexes of module sheaves.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 @[instance_reducible] def cachedComplexBraided (O : Sheaf J CommRingCat.{u}) :
     BraidedCategory (ringedSiteComplex O) := by
   let : IsGrothendieckAbelian.{u} (Modules O) := SheafOfModules.isGrothendieckAbelian _
@@ -214,8 +201,7 @@ module sheaves. The monoidal preadditivity witness is the first component of ten
 closed structure is the existing monoidalClosed definition.
 Proof step 2: The sheaf module category is Grothendieck abelian, hence has the coproducts needed
 for the total tensor. Synthesize the monoidal and braided structures of cochain complexes, and
-use ringedComplexClosed for its chosen closed structure.
-(blueprint: lem-f5-strict-scalar-koszul-instances). -/
+use ringedComplexClosed for its chosen closed structure. -/
 @[instance_reducible] def cachedComplexClosed (O : Sheaf J CommRingCat.{u}) :
     MonoidalClosed (ringedSiteComplex O) := by
   let : IsGrothendieckAbelian.{u} (Modules O) := SheafOfModules.isGrothendieckAbelian _

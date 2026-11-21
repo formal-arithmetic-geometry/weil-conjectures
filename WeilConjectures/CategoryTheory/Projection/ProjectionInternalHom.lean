@@ -56,7 +56,6 @@ noncomputable def projectionInternalHomMap (L : D) (N : C) :
 
 /-- Projection isomorphisms give an isomorphism of internal Hom objects.
 Source: Bhatt--Scholze Lemma 6.7.13, formal adjunction argument, steps 9--11.
-(blueprint: lem-sfb-projection-internal-hom-formal)
 Proof: tensor-Hom, projection, e adjoint to s, tensor-Hom and r adjoint to q give
 natural bijections on Hom from every test object. Apply the bijections to identities;
 naturality proves the inverse identities. The hom is the evaluation transpose. -/

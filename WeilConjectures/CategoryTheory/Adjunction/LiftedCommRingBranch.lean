@@ -21,7 +21,6 @@ namespace CategoryTheory.Adjunction
 
 /-- Assembly of the lifted ring adjunction from single-functor transport and the
 restricted natural hom-bijection.
-(blueprint: lem-weil-pbc-lifted-comm-ring-branch)
 Source: Stacks Project, Proposition 00YV, paragraph on rings as sextuples.
 
 Proof: apply finiteProductRingFunctor separately to L and R. Their operation

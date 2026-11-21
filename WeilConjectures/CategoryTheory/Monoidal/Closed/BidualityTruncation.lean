@@ -121,7 +121,6 @@ private instance shiftedBidualityLocus_triangulated (W : DerivedCategory C) :
 
 Source: the finite truncation argument in Bhatt--Scholze, Proposition 6.8.11(3),
 and the formal exactness of internal Hom (Stacks Project, Tag 08JC).
-(blueprint: lem-pd-biduality-finite-truncation)
 
 Proof: let P(K) assert invertibility of the canonical biduality map for every
 integral shift of K. Naturality makes P invariant under isomorphisms, and the

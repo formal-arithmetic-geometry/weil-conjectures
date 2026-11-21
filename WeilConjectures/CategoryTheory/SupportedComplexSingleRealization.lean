@@ -20,9 +20,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [HasDerivedCategory B]
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A normalized map from a supported complex is represented by its homology projection.
-Source: Stacks Project, derived.tex, Tag 015J, single-complex specialization;
-Mathlib's `HomologicalComplex.mkHomToSingle` and pure-degree homology faithfulness.
-(blueprint: lem-pc-supported-complex-single-realization)
+Source: Stacks Project, derived.tex, Tag 015J, single-complex specialization.
 
 Proof: All differentials of L vanish, since each has a zero source or target.
 Consequently the cycle inclusion and the homology projection in degree n are

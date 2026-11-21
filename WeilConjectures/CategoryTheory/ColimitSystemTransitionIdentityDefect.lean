@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 /-! # Transitions on an augmented product of direct images
 
 Source: Stacks Project, Sites, Lemma 0EXZ, product and transition construction.
-(blueprint: lem-weil-pbc-transition-identity-defect)
 -/
 
 @[expose] public section
@@ -24,9 +23,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0EXZ, transition cocycle; nonunital
-identity correction written by X3 in the parent node, step 3.
-(blueprint: lem-weil-pbc-transition-identity-defect)
+/-- Source: Stacks Project, Sites, Tag 0EXZ, transition cocycle.
 
 Proof in words: set e_k=φ_id followed by the identity comparison E_k.
 The cocycle for a and id_k, together with a≫id_k=a and the coherence of the

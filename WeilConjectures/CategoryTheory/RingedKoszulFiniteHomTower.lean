@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 
 /-! # Finite Koszul evaluation on the strict inverse tower
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A, lemma-colim-and-lim-of-duals.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A.
 -/
 
 @[expose] public section
@@ -216,9 +215,7 @@ end
 including every transition map. This involves ordinary complexes and arbitrary
 coefficients, and does not assert a quasi-isomorphism or a limit comparison.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
-lemma-colim-and-lim-of-duals; more-algebra.tex, Tag 0913.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; more-algebra.tex, Tag 0913.
 
 Proof: the positive one-generator complex has two rank-one terms. Evaluation
 identifies the Hom from either term with the corresponding coefficient term.

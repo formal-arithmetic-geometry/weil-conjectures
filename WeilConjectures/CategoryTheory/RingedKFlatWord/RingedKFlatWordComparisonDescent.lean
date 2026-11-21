@@ -127,9 +127,7 @@ import WeilConjectures.Algebra.Homology.PullbackTensorResolving.PullbackTensorRe
 
 /-! # Simultaneous K-flat word models and normalized comparison descent
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 0G7E, 06YY and 0D6D;
-sites-modules.tex, Tags 03EK and 0GMW. Finite-word argument in the DAG proof
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent).
+Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 0G7E, 06YY and 0D6D; sites-modules.tex, Tags 03EK and 0GMW. Finite-word argument in the DAG proof.
 
 Words retain their parenthesizations. Their cochain counits are the actual composites
 of the chosen universal edge counits. All constructions occur on the whole ringed site,
@@ -308,8 +306,7 @@ theorem comparison_descent_iso
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- A ringed site in fixed size bounds, with the existing module derived category.
-Source: Stacks 06YS and 06YY; size convention prose-01-10
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: Stacks 06YS and 06YY. -/
 structure Site where
   C : Type u
   [category : Category.{v} C]
@@ -335,8 +332,7 @@ private noncomputable def siteAbelian (X : Site.{u, v, r, d}) :
 
 /-- An edge is an actual ringed pullback with its chosen universal cochain counit.
 Exact derived functors are included through their canonical universal counit.
-Source: Stacks 06YY and 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: Stacks 06YY and 0D6D. -/
 structure Edge (X Y : Site.{u, v, r, d}) where
   pullback : CategoryTheory.CochainPullback.RingedPullback.{r, u, v, u, v} (J := X.J) (K := Y.J)
       X.R Y.R
@@ -351,16 +347,14 @@ variable {I : Type z} (S : I → Site.{u, v, r, d}) (E : I → I → Type e)
   (A : ∀ {i j : I}, E i j → Edge (S i) (S j))
 
 /-- Finite composable words, including empty words and all parenthesizations.
-Source: finite-word argument following Stacks 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: argument following Stacks 0D6D. -/
 inductive Word : I → I → Type (max z e)
   | nil (i : I) : Word i i
   | edge {i j : I} (a : E i j) : Word i j
   | comp {i j k : I} (w : Word i j) (v : Word j k) : Word i k
 
 /-- The ordinary composite together with its inherited additivity proof.
-Source: degreewise additive pullback, Stacks 06YY
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: degreewise additive pullback, Stacks 06YY. -/
 def Word.ordinaryData {i j : I} : Word E i j →
     {F : CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R ⥤
       CochainPullback.Modules.{r, u, v} (J := (S j).J) (S j).R // F.Additive}
@@ -376,21 +370,21 @@ def Word.ordinaryData {i j : I} : Word E i j →
          ⟨fw.val ⋙ fv.val, inferInstance⟩)
 
 /-- The ordinary word functor, without any change of module category.
-Source: Stacks 0D6D (blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: Stacks 0D6D. -/
 abbrev Word.ordinary {i j : I} (w : Word E i j) := (w.ordinaryData S E A).val
 
 /-- Additivity inherited from the ordinary pullback factors.
-Source: Stacks 06YY (blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: Stacks 06YY. -/
 instance Word.additive {i j : I} (w : Word E i j) : (w.ordinary S E A).Additive :=
   (w.ordinaryData S E A).property
 
 /-- Degreewise application of the ordinary composite to entire unbounded complexes.
-Source: Stacks 06YY (blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: Stacks 06YY. -/
 abbrev Word.complex {i j : I} (w : Word E i j) :=
   (w.ordinary S E A).mapHomologicalComplex (.up ℤ)
 
 /-- The composite of the specified derived edge functors.
-Source: Stacks 0D6D (blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: Stacks 0D6D. -/
 noncomputable def Word.derived {i j : I} : Word E i j →
     (DerivedCategory (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ⥤
       DerivedCategory (CochainPullback.Modules.{r, u, v} (J := (S j).J) (S j).R))
@@ -399,8 +393,7 @@ noncomputable def Word.derived {i j : I} : Word E i j →
   | .comp w v => derived w ⋙ derived v
 
 /-- The displayed composite counit, including canonical degreewise compositors.
-Source: Stacks 0D6D and DAG proof step 2
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: Stacks 0D6D and DAG proof step 2. -/
 noncomputable def Word.counit : {i j : I} → (w : Word E i j) →
     (P : CochainComplex (CochainPullback.Modules.{r, u, v} (J := (S i).J) (S i).R) ℤ) →
     ((w.derived S E A).obj (DerivedCategory.Q.obj P) ⟶
@@ -416,7 +409,7 @@ noncomputable def Word.counit : {i j : I} → (w : Word E i j) →
           (Iso.refl (w.ordinary S E A ⋙ v.ordinary S E A)) (.up ℤ)).hom.app P)
 
 /-- Flat-term K-flat is a conjunction of the two recorded predicates.
-Source: Stacks 06YS (blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: Stacks 06YS. -/
 abbrev Resolving (X : Site.{u, v, r, d})
     (P : CochainComplex (CochainPullback.Modules.{r, u, v} (J := X.J) X.R) ℤ) : Prop :=
   P.IsKFlatIndependentCoefficients ∧
@@ -441,8 +434,7 @@ end
 
 set_option linter.style.haveILetI false in
 /-- Every resolving model, not just the chosen replacement, computes every word.
-Source: Stacks 0G7E, 06YY, 0D6D; DAG proof steps 1--2
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent).
+Source: Stacks 0G7E, 06YY, 0D6D.
 
 Proof: induction on the finite word. The empty functor and counit are identities
 up to the canonical degreewise identity identification. An edge preserves flat-term
@@ -481,8 +473,7 @@ theorem word_computation [Finite I] {i j : I} (w : Word E i j)
       infer_instance
 
 /-- One incoming resolution computes every word and, therefore, every prefix.
-Source: Stacks 06YS, 0G7E, 06YY and 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent).
+Source: Stacks 06YS, 0G7E, 06YY and 0D6D.
 
 Proof: choose a single flat-term K-flat resolution by lem-pc-kflat-resolution.
 For an edge use lem-weil-pbc-ringed-topos-kflat-pullback and the actual counit
@@ -502,8 +493,7 @@ theorem simultaneous_resolution [Finite I] (i : I)
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- Normalization of a descended ordinary cell through the actual word counits.
-Source: DAG proof steps 3--4 following Stacks 06YY and 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: DAG proof steps 3--4 following Stacks 06YY and 0D6D. -/
 def Normalized {i j : I} {w v : Word E i j}
     (t : w.ordinary S E A ⟶ v.ordinary S E A)
     (tL : w.derived S E A ⟶ v.derived S E A) : Prop :=
@@ -554,8 +544,7 @@ end
 -- Inline these canonical instances to avoid repeated dependent instance reduction.
 set_option linter.style.haveILetI false in
 /-- Unique descent with the required resolving-representative equation.
-Source: DAG proof steps 3--5, Stacks 04VC, 04VK, 05RT, 06YS and 06YY
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent).
+Source: DAG proof steps 3--5, Stacks 04VC, 04VK, 05RT, 06YS and 06YY.
 
 Proof: on a resolving P conjugate Q(C(t)_P) by the two counit isomorphisms.
 Counit naturality proves naturality on all maps of resolving complexes. Additivity
@@ -591,8 +580,7 @@ theorem descent_existsUnique [Finite I] {i j : I} {w v : Word E i j}
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q)
 
 /-- The uniquely specified descent; choice extracts a uniquely determined object.
-Source: DAG proof step 4, Stacks 06YY
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: DAG proof step 4, Stacks 06YY. -/
 noncomputable def Word.cell [Finite I] {i j : I} {w v : Word E i j}
     (t : w.ordinary S E A ⟶ v.ordinary S E A) :
     w.derived S E A ⟶ v.derived S E A :=
@@ -603,8 +591,7 @@ set_option backward.isDefEq.respectTransparency.types true
 
 /-- Finite pastings of ordinary cells, with the actual functor associators and unitors.
 Whiskering by words includes whiskering by each specified edge.
-Source: DAG proof steps 6--8 following Stacks 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: DAG proof steps 6--8 following Stacks 0D6D. -/
 inductive Expression : {i j : I} → Word E i j → Word E i j →
     Type (max z e u v (r + 1) d)
   | cell {i j : I} {w v : Word E i j}
@@ -626,8 +613,7 @@ inductive Expression : {i j : I} → Word E i j → Word E i j →
   | rightUnitInv {i j : I} (w : Word E i j) : Expression w (.comp w (.nil j))
 
 /-- Ordinary evaluation uses the literal composition and whiskering operations.
-Source: DAG proof steps 6--8, Stacks 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: DAG proof steps 6--8, Stacks 0D6D. -/
 def Expression.ordinary {i j : I} {w v : Word E i j} :
     Expression S E A w v → (w.ordinary S E A ⟶ v.ordinary S E A)
   | .cell t => t
@@ -644,8 +630,7 @@ def Expression.ordinary {i j : I} {w v : Word E i j} :
   | .rightUnit w => (Functor.rightUnitor (w.ordinary S E A)).hom
   | .rightUnitInv w => (Functor.rightUnitor (w.ordinary S E A)).inv
 /-- Derived evaluation uses the same operations on the uniquely descended cells.
-Source: DAG proof steps 6--8, Stacks 0D6D
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent). -/
+Source: DAG proof steps 6--8, Stacks 0D6D. -/
 noncomputable def Expression.derived [Finite I] {i j : I} {w v : Word E i j} :
     Expression S E A w v → (w.derived S E A ⟶ v.derived S E A)
   | .cell t => Word.cell S E A t
@@ -756,8 +741,7 @@ private noncomputable def scalar_restriction_unit :
 
 /-- Identity scalar extension is uniquely the identity, with multiplication on local
 pure tensors and the prescribed K-flat computation equation.
-Source: Stacks 03EK and 06YY; DAG proof step 9
-(blueprint: lem-trf-ringed-kflat-word-comparison-descent).
+Source: Stacks 03EK and 06YY.
 
 Proof: the ordinary multiplication s tensor x ↦ sx is inverse to x ↦ 1 tensor x
 on sectionwise tensors; sheafification preserves this isomorphism since M is already

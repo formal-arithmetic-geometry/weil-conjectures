@@ -17,7 +17,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 # Ordinary global Hom-complex cohomology with independent site universes
 
 Source: Stacks Project, Equation 0A8Z and Lemma 08JA.
-(blueprint: lem-pur-hom-complex-global-homotopy)
 -/
 
 @[expose] public section
@@ -112,8 +111,7 @@ private theorem rhomNormalizedHomProjection_isLimit (A B : CochainComplex Mod �
   exact ⟨homComplexIsLimit.{c, v, max c v r, max c v r} (R := R) A B n⟩
 
 /-- The explicit product-projection comparison with ordinary cochains.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z. -/
 private noncomputable def rhomNormalizedHomGlobalCochains
     (R : Sheaf J CommRingCat.{max c v r}) (A B : CochainComplex Mod ℤ) (n : ℤ) :
     (SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X n) ≃+
@@ -123,8 +121,7 @@ private noncomputable def rhomNormalizedHomGlobalCochains
     (rhomNormalizedHomProjection_isLimit.{c, v, r} A B n).some
 
 /-- The component formula retained by the explicit comparison.
-Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z. -/
 private theorem rhomNormalizedHomGlobalCochains_v
     (R : Sheaf J CommRingCat.{max c v r}) (A B : CochainComplex Mod ℤ) (n : ℤ)
     (s : SheafOfModules.unit 𝓡 ⟶ (homComplex (R := R) A B).X n)
@@ -180,7 +177,6 @@ private lemma rhomNormalizedHomGlobalCochainsOfFan_comm (A B : CochainComplex Mo
 
 /-- The explicit normalized comparison commutes with the cochain differential.
 Source: Stacks Project, sites-cohomology.tex, Tag 0A8Z.
-(blueprint: lem-pc-normalized-hom-complex-global-cochains).
 Proof: project onto each Hom factor, apply the differential projection formula,
 and identify internal-Hom sections with morphisms. The resulting formula is
 exactly the ordinary cochain differential. For nonconsecutive degrees both
@@ -416,7 +412,6 @@ private lemma externalHomologyIso_naturality
 set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary zeroth cohomology of global cochains is naturally the group of homotopy classes.
 Source: Stacks Project, Tag 0A8Z and Tag 08JA, first global-cochain computation.
-(blueprint: lem-pur-hom-complex-global-homotopy)
 
 Proof: take the projections furnished by `homComplex_projections_exists` once for the
 whole bifunctor. Their product universal property identifies maps from the unit to

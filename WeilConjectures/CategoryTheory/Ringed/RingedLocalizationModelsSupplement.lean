@@ -63,9 +63,7 @@ import Mathlib.RingTheory.Flat.Localization
 /-!
 # Localization complexes and derived internal Hom on a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tags 08J9 and 08JB;
-Algebraization of Formal Spaces, Tag 0996
-(blueprint: lem-weil-pbc-ringed-localization-rhom-calculus).
+Source: Stacks Project, Cohomology on Sites, Tags 08J9 and 08JB; Algebraization of Formal Spaces, Tag 0996.
 -/
 
 -- After pruning, this module only keeps private declarations.

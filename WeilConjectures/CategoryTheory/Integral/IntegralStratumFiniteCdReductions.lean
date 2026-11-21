@@ -30,11 +30,8 @@ import Mathlib.CategoryTheory.HomCongr
 /-!
 # Integral stratum finite-reduction bound
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md, three finite-reduction bullets.
 The bound is stated with explicit finite upper bounds on the two classical
 cohomological dimensions. Positive quotient exponents are indexed by `n + 1`.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions)
 -/
 
 @[expose] public noncomputable section
@@ -90,10 +87,6 @@ private theorem stratum_hom_zero
 
 /-- The integral stratum finite-reduction bound, uniform in the constructible target
 and in the positive quotient exponent. Both local scalar models allow torsion.
-
-Source: blueprint latest, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-three finite-reduction bullets; the node makes their finite dimension bounds explicit.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
 
 Proof: the length-one uniformizer resolution gives the reduction cohomology window
 `[-1,0]`, with classical locally ell-power torsion cohomology, without a flatness

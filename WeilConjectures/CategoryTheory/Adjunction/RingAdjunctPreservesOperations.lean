@@ -39,8 +39,7 @@ eta_terminal with the images of the two terminal comparison maps is the unique t
 endomorphism, hence the identity. Using opsL, opsR and the constant equation for f gives q_X
 followed by the conjugated adjunct equal to q_(RF Y), for q zero and one. The zero and addition
 equations give IsAddMonHom; the one and multiplication equations give IsMonHom. These yield
-IsRingHom. No separate negation equation is required for IsRingHom.
-(blueprint: lem-weil-pbc-ring-adjunct-preserves-operations) -/
+IsRingHom. No separate negation equation is required for IsRingHom. -/
 theorem ringAdjunctPreservesOperations
     {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]
     {B : Type uB} [Category.{vB} B] [CartesianMonoidalCategory B]

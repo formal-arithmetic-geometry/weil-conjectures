@@ -93,9 +93,7 @@ private theorem cover_above
     (V.ι.app j).toFunctor (congrArg Cat.Hom.toFunctor (V.w b)) S
 
 /-- Finite covering families of generated sections have individual stage lifts.
-Source: Stacks Project, Sites, Tag 0A35, the general-object presentation and
-finite-cover paragraph; Modules on Sites, Tag 03CO, for abelian coefficients.
-(blueprint: lem-weil-pbc-colimit-site-abelian-cover-section-lift).
+Source: Stacks Project, Sites, Tag 0A35, the general-object presentation and paragraph; Modules on Sites, Tag 03CO, for abelian coefficients.
 
 Proof: Write the Q-cover R as the transported image of a stage cover using hQ.
 Its stage presieve is finite by hfinite. Move that stage above i by filteredness,

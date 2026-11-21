@@ -11,8 +11,7 @@ public import WeilConjectures.CategoryTheory.RingedStrictTowerHomotopyLimit
 /-!
 # The finite Koszul system on a ringed site
 
-Source: Stacks Project, More on Algebra, Tag 0913; Cohomology on Sites, Tag 0A0A
-(auxiliary; not a blueprint node).
+Source: Stacks Project, More on Algebra, Tag 0913; Cohomology on Sites, Tag 0A0A.
 -/
 
 @[expose] public noncomputable section
@@ -31,23 +30,20 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
 
 /-- Multiplication by a global section on the rank-one module sheaf.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulScalar (s : (O.obj ⋙ forget CommRingCat).sections) :
     End (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) :=
   .of (SheafOfModules.unitHomEquiv _ |>.symm ⟨s.val, s.property⟩)
 
 /-- The positive Koszul factor [O --s^(m+1)--> O] in degrees zero and one.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulFactor (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     ringedSiteComplex O :=
   HomologicalComplex.double ((ringedKoszulScalar O s ^ (m + 1)).asHom)
     (by decide : (ComplexShape.up ℤ).Rel 0 1)
 
 /-- Components of the forward map (1,s), zero outside degrees zero and one.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulFactorStepF (s : (O.obj ⋙ forget CommRingCat).sections)
     (m : ℕ) (n : ℤ) :
     (ringedKoszulFactor O s m).X n ⟶ (ringedKoszulFactor O s (m + 1)).X n :=
@@ -66,8 +62,7 @@ def ringedKoszulFactorStepF (s : (O.obj ⋙ forget CommRingCat).sections)
 
 /-- The components (1,s) commute with the differential.
 Proof: the sole nonzero square is s^(m+1) s = s^(m+2); elsewhere both sides vanish.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulFactorStepF_comm
     (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n k : ℤ)
     (h : (ComplexShape.up ℤ).Rel n k) :
@@ -86,16 +81,14 @@ theorem ringedKoszulFactorStepF_comm
     simp
 
 /-- The forward Koszul chain map with components (1,s).
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulFactorStep (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     ringedKoszulFactor O s m ⟶ ringedKoszulFactor O s (m + 1) where
   f := ringedKoszulFactorStepF O s m
   comm' := ringedKoszulFactorStepF_comm O s m
 
 /-- The total tensor bifunctor of module-sheaf complexes, with its Koszul signs.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulTensor : ringedSiteComplex O ⥤ ringedSiteComplex O ⥤
     ringedSiteComplex O :=
   letI : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
@@ -109,16 +102,14 @@ def ringedKoszulTensor : ringedSiteComplex O ⥤ ringedSiteComplex O ⥤
     (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)
 
 /-- The strict sequential diagram of the positive one-section Koszul factors.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulFactors (s : (O.obj ⋙ forget CommRingCat).sections) :
     ℕ ⥤ ringedSiteComplex O :=
   Functor.ofSequence (ringedKoszulFactorStep O s)
 
 /-- The ordered total tensor of the positive Koszul systems.
 The empty tensor is the constant diagram O[0]. The index m denotes exponent m+1.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulDiagram : (r : ℕ) →
     (Fin r → (O.obj ⋙ forget CommRingCat).sections) → ℕ ⥤ ringedSiteComplex O :=
   fun r ↦ Nat.rec
@@ -128,8 +119,7 @@ def ringedKoszulDiagram : (r : ℕ) →
         Functor.uncurry.obj (ringedKoszulTensor O)) r
 
 /-- The strict dual inverse tower Hom(P_m,O[0]), including its dual chain maps.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulDualTower (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) :
     ℕᵒᵖ ⥤ ringedSiteComplex O :=
@@ -137,8 +127,7 @@ def ringedKoszulDualTower (r : ℕ)
     (homComplexFunctor (R := O)).flip.obj (ringedSiteRingComplex O)
 
 /-- Components of the degree-zero projection of a positive Koszul factor.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulFactorProjectionF (s : (O.obj ⋙ forget CommRingCat).sections)
     (m : ℕ) (n : ℤ) :
     (ringedKoszulFactor O s m).X n ⟶ (ringedSiteRingComplex O).X n :=
@@ -152,8 +141,7 @@ def ringedKoszulFactorProjectionF (s : (O.obj ⋙ forget CommRingCat).sections)
 /-- The degree-zero projection commutes with the differential.
 Proof: the target differential is zero and the source differential lands in degree one,
 where the projection vanishes. All other squares have a zero component.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulFactorProjectionF_comm
     (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) (n k : ℤ)
     (h : (ComplexShape.up ℤ).Rel n k) :
@@ -169,16 +157,14 @@ theorem ringedKoszulFactorProjectionF_comm
       HomologicalComplex.double_d_eq_zero₀ _ _ _ _ hn, zero_comp]
 
 /-- The augmented positive Koszul factor.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulFactorProjection (s : (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     ringedKoszulFactor O s m ⟶ ringedSiteRingComplex O where
   f := ringedKoszulFactorProjectionF O s m
   comm' := ringedKoszulFactorProjectionF_comm O s m
 
 /-- The ordinary unit identification O[0] tensor O[0] = O[0].
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulUnitTensorIso :
     ((ringedKoszulTensor O).obj (ringedSiteRingComplex O)).obj (ringedSiteRingComplex O) ≅
       ringedSiteRingComplex O :=
@@ -192,8 +178,7 @@ def ringedKoszulUnitTensorIso :
   HomologicalComplex.leftUnitor _
 
 /-- Tensor the degree-zero projections, using the ordinary unit identification.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulProjection : (r : ℕ) →
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) →
       (m : ℕ) → (ringedKoszulDiagram O r b).obj m ⟶ ringedSiteRingComplex O :=
@@ -207,8 +192,7 @@ def ringedKoszulProjection : (r : ℕ) →
 /-- The Koszul projections are compatible with the forward transitions.
 Proof: in one factor, the forward map is identity in degree zero. Tensor this identity
 and induct on the number of factors; composition gives the identity for every transition.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulProjection_naturality (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (m n : ℕ) (f : m ⟶ n) :
@@ -255,8 +239,7 @@ theorem ringedKoszulProjection_naturality (r : ℕ)
       ← Functor.map_comp, hf, ← Functor.map_comp_assoc, ih]
 
 /-- The compatible Koszul projections as an actual cocone.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulAugmentationCocone (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) :
     Cocone (ringedKoszulDiagram O r b) where
@@ -267,8 +250,7 @@ def ringedKoszulAugmentationCocone (r : ℕ)
 
 /-- The strict tensor tower N tensor Hom(P_m,O), functorial in N.
 Its morphisms are total tensors with the dual transitions.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulTensorTower (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) :
     ringedSiteComplex O ⥤ (ℕᵒᵖ ⥤ ringedSiteComplex O) :=
@@ -278,8 +260,7 @@ def ringedKoszulTensorTower (r : ℕ)
 
 /-- The strict-tower differentials square to zero.
 Proof: evaluate at every tower index and use the square-zero identity of its complex.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulTensorTower_d_comp (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O)
     (n : ℤ) :
@@ -292,8 +273,7 @@ theorem ringedKoszulTensorTower_d_comp (r : ℕ)
   exact (((ringedKoszulTensorTower O r b).obj N).obj m).d_comp_d _ _ _
 
 /-- The strict tensor tower, transposed into a complex in the abelian category of towers.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulTensorTowerComplex (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O) :
     CochainComplex (ℕᵒᵖ ⥤ SheafOfModules.{u}
@@ -306,8 +286,7 @@ def ringedKoszulTensorTowerComplex (r : ℕ)
     (ringedKoszulTensorTower_d_comp O r b N)
 
 /-- Degreewise components of the strict tensor-tower map induced by a chain map.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulTensorTowerComplexMapF (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     {N M : ringedSiteComplex O} (f : N ⟶ M) (n : ℤ) :
@@ -318,8 +297,7 @@ def ringedKoszulTensorTowerComplexMapF (r : ℕ)
 
 /-- Tensor-tower maps commute with the differentials.
 Proof: evaluate at each tower index and use the chain-map identity of the tensor map.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulTensorTowerComplexMapF_comm (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     {N M : ringedSiteComplex O} (f : N ⟶ M) (n k : ℤ)
@@ -336,8 +314,7 @@ theorem ringedKoszulTensorTowerComplexMapF_comm (r : ℕ)
     CochainComplex.of_d]
 
 /-- The actual strict map of tower complexes induced by a chain map.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulTensorTowerComplexMap (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     {N M : ringedSiteComplex O} (f : N ⟶ M) :
@@ -347,8 +324,7 @@ def ringedKoszulTensorTowerComplexMap (r : ℕ)
 
 /-- The strict tensor-tower construction preserves identity maps.
 Proof: evaluate in each tower index and degree and use the identity law of the tensor functor.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulTensorTowerComplexMap_id (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O) :
     ringedKoszulTensorTowerComplexMap O r b (𝟙 N) = 𝟙 _ := by
@@ -362,8 +338,7 @@ theorem ringedKoszulTensorTowerComplexMap_id (r : ℕ)
 
 /-- The strict tensor-tower construction preserves composition.
 Proof: evaluate in each tower index and degree and use functoriality of total tensor.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulTensorTowerComplexMap_comp (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     {N M L : ringedSiteComplex O} (f : N ⟶ M) (g : M ⟶ L) :
@@ -379,8 +354,7 @@ theorem ringedKoszulTensorTowerComplexMap_comp (r : ℕ)
   rfl
 
 /-- The functor from module complexes to strict tensor-tower complexes.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulTensorTowerFunctor (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) :
     ringedSiteComplex O ⥤ CochainComplex (ℕᵒᵖ ⥤ SheafOfModules.{u}
@@ -392,8 +366,7 @@ def ringedKoszulTensorTowerFunctor (r : ℕ)
 
 /-- The degree-zero unit O[0] to the dual Koszul complex,
 obtained by dualizing the projection P_m to O[0] and evaluation at one.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulDualUnit (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (m : ℕ) :
     ringedSiteRingComplex O ⟶ (ringedKoszulDualTower O r b).obj (op m) :=
@@ -401,8 +374,7 @@ def ringedKoszulDualUnit (r : ℕ)
     ((homComplexFunctor (R := O)).map (ringedKoszulProjection O r b m).op).app _
 
 /-- The canonical total-tensor right unit isomorphism.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulRightUnitIso (N : ringedSiteComplex O) :
     ((ringedKoszulTensor O).obj N).obj (ringedSiteRingComplex O) ≅ N :=
   letI : IsGrothendieckAbelian.{u} (SheafOfModules.{u}
@@ -415,8 +387,7 @@ def ringedKoszulRightUnitIso (N : ringedSiteComplex O) :
   HomologicalComplex.rightUnitor _
 
 /-- The actual map N to N tensor Q_m induced by its degree-zero unit.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulTensorUnitComponent (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (N : ringedSiteComplex O) (m : ℕᵒᵖ) :
@@ -427,8 +398,7 @@ def ringedKoszulTensorUnitComponent (r : ℕ)
 /-- The degree-zero units form a cone over the strict tensor tower.
 Proof: dualize compatibility of the Koszul projections with transitions, then tensor by N.
 Taking the component in degree n gives the asserted equality.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulTensorUnitComponent_naturality (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (N : ringedSiteComplex O) (n : ℤ) {m k : ℕᵒᵖ} (f : m ⟶ k) :
@@ -449,8 +419,7 @@ theorem ringedKoszulTensorUnitComponent_naturality (r : ℕ)
   simpa [ringedKoszulTensorTowerComplex] using congrArg (fun g ↦ g.f n) hu
 
 /-- The compatible degree-zero maps as a degreewise cone over the strict tensor tower.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulTensorUnitCone (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (N : ringedSiteComplex O) (n : ℤ) :
@@ -462,8 +431,7 @@ def ringedKoszulTensorUnitCone (r : ℕ)
         ringedKoszulTensorUnitComponent_naturality O r b N n f }
 
 /-- The canonical degreewise map to the ordinary strict inverse limit.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulLimitUnitF (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (N : ringedSiteComplex O) (n : ℤ) :
@@ -476,8 +444,7 @@ def ringedKoszulLimitUnitF (r : ℕ)
 /-- The map to the ordinary inverse limit is a chain map.
 Proof: compose with each limit projection and use the chain-map identity of the degree-zero
 unit into each tensor complex. Joint monicity of limit projections gives the equality.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 theorem ringedKoszulLimitUnitF_comm (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     (N : ringedSiteComplex O) (n k : ℤ) (h : (ComplexShape.up ℤ).Rel n k) :
@@ -502,8 +469,7 @@ theorem ringedKoszulLimitUnitF_comm (r : ℕ)
     CochainComplex.of_d]
 
 /-- The canonical ordinary strict-limit unit, before deriving inverse limit.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulLimitUnit (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O) :
     N ⟶ ((lim : (ℕᵒᵖ ⥤ SheafOfModules.{u}
@@ -513,15 +479,13 @@ def ringedKoszulLimitUnit (r : ℕ)
   comm' := ringedKoszulLimitUnitF_comm O r b N
 
 /-- Restrict a global section to the slice site by its underlying compatible sections.
-Source: Stacks Project, Tags 0913 and 0A0A
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913 and 0A0A. -/
 def ringedKoszulSliceSection (s : (O.obj ⋙ forget CommRingCat).sections) (U : C) :
     ((O.over U).obj ⋙ forget CommRingCat).sections :=
   ⟨fun V ↦ s.val (op V.unop.left), fun f ↦ s.property f.unop.left.op⟩
 
 /-- Derived restriction between the two slice sites, along the actual overMap functor.
-Source: Stacks Project, Tag 08JB
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 08JB. -/
 def ringedKoszulDerivedOverMap {U V : C} (f : V ⟶ U)
     [hU : HasDerivedCategory.{w} (SheafOfModules.{u}
       ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))]
@@ -536,8 +500,7 @@ def ringedKoszulDerivedOverMap {U V : C} (f : V ⟶ U)
     ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) f).mapDerivedCategory
 
 /-- The canonical composition isomorphism between successive and direct slice restrictions.
-Source: Stacks Project, Tag 08JB
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 08JB. -/
 def ringedKoszulDerivedOverComparison {U V : C} (f : V ⟶ U)
     [HasDerivedCategory.{w} (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]
@@ -564,8 +527,7 @@ def ringedKoszulDerivedOverComparison {U V : C} (f : V ⟶ U)
 derived inverse limit. The factorization fixes the strict tower including its transitions.
 The right-derived universal property and computation on K-injective towers fix inverse
 limit up to its unique normalized comparison isomorphism.
-Source: Stacks Project, Tags 0913, 0A0A and 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913, 0A0A and 0941. -/
 structure RingedKoszulLimitPresentation (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections)
     [HasDerivedCategory.{w} (SheafOfModules.{u}
@@ -599,16 +561,14 @@ variable [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.{u}
 variable (D : RingedKoszulLimitPresentation O r b)
 
 /-- Compose the descended strict tensor-tower functor with total derived inverse limit.
-Source: Stacks Project, Tags 0913, 0A0A and 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913, 0A0A and 0941. -/
 def completion : ringedSiteDerived O ⥤ ringedSiteDerived O :=
   D.tensorTower ⋙ D.inverseLimit
 
 /-- The canonical strict derived-limit unit on a representative complex.
 Apply the derived-functor comparison to the actual map into the ordinary inverse limit,
 then use the specified localization factorization of the strict tensor tower.
-Source: Stacks Project, Tags 0913, 0A0A and 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913, 0A0A and 0941. -/
 def unitOnComplex (N : ringedSiteComplex O) :
     DerivedCategory.Q.obj N ⟶ D.completion.obj (DerivedCategory.Q.obj N) :=
   DerivedCategory.Q.map (ringedKoszulLimitUnit O r b N) ≫
@@ -617,8 +577,7 @@ def unitOnComplex (N : ringedSiteComplex O) :
 
 /-- The canonical strict derived-limit unit on a derived object, using its localization
 representative and transporting back along its specified representative isomorphism.
-Source: Stacks Project, Tags 0913, 0A0A and 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0913, 0A0A and 0941. -/
 def unit (E : ringedSiteDerived O) : E ⟶ D.completion.obj E :=
   (DerivedCategory.Q.objObjPreimageIso E).inv ≫
     D.unitOnComplex (DerivedCategory.Q.objPreimage E) ≫

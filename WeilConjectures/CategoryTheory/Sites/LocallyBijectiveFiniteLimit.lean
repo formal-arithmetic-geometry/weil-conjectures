@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-! # Finite limits of locally bijective abelian presheaf maps
 
-Source: Stacks Project, Tags 00WJ and 03CN.
-(blueprint: lem-sc-locally-bijective-finite-limit) -/
+Source: Stacks Project, Tags 00WJ and 03CN. -/
 
 @[expose] public section
 
@@ -67,8 +66,7 @@ private theorem section_exists
 /-- Finite limits of componentwise locally bijective morphisms of abelian
 presheaves are locally bijective.
 
-Source: Stacks Project, Tag 00WJ, finite-limit refinement argument, and Tag 03CN.
-(blueprint: lem-sc-locally-bijective-finite-limit)
+Source: Stacks Project, Tag 00WJ refinement argument, and Tag 03CN.
 
 Proof: limits are computed sectionwise. For local injectivity, project two
 sections to every component and intersect the finitely many covering equality

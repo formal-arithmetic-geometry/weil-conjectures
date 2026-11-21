@@ -19,8 +19,7 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # Derived tensor with a principal quotient is a multiplication cone
 
-The chosen mixed derived tensor is compared with the two-term free coefficient resolution.
-(blueprint: lem-pod-principal-derived-tensor-cone) -/
+The chosen mixed derived tensor is compared with the two-term free coefficient resolution. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,8 +40,7 @@ with the ordinary total tensor of P and the restricted quotient in degree zero. 
 single-factor comparison and the K-flat tensor computation identify it with
 QP tensor the quotient. Transport QP to QC. The short exact coefficient sequence gives
 the final isomorphism with the multiplication cone, via its two-term free resolution.
-Source: Stacks Tags 05RT and 06Y6; original blueprint step 11.
-(blueprint: lem-pod-principal-derived-tensor-cone) -/
+Source: Stacks Tags 05RT and 06Y6. -/
 theorem principalDerivedTensorCone {R A : Type u} [CommRing R] [CommRing A]
     [HasDerivedCategory.{wR} (ModuleCat.{u} R)]
     [HasDerivedCategory.{wA} (ModuleCat.{u} A)]

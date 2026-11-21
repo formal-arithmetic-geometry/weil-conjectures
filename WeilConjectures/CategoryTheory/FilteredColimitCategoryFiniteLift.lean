@@ -88,9 +88,7 @@ private theorem arrow_composite_congr {C : Type z} [Category.{z} C]
   subst c'
   rfl
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph;
-Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-category-finite-lift).
+/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph; Categories, Section Tag 04AX.
 
 Proof: Choose stage representatives of the objects and arrows using joint
 surjectivity of their set colimits. Move the finitely many stages to a common

@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.CanonicalResolutionCompositeUnitComparison
 /-! # Resolution comparisons and the composite derived unit
 
 Source: Stacks Project, derived.tex, Tags 015M and 015N.
-(blueprint: lem-pc-grothendieck-resolution-unit-comparison).
 -/
 
 @[expose] public section
@@ -27,9 +26,7 @@ namespace CategoryTheory
 /-- The prescribed resolution identifies both ordinary derived homology and
 composite derived homology with the complexes used to represent them. This assertion
 compares the derived units and resolution isomorphisms; it involves no edge map.
-Source: Stacks Project, derived.tex, Tags 015M and 015N; resolution-identification
-step of lem-pc-grothendieck-hypercohomology-edge.
-(blueprint: lem-pc-grothendieck-resolution-unit-comparison).
+Source: Stacks Project, derived.tex, Tags 015M and 015N.
 
 Proof:
 Only an isomorphism and its two homology components are asserted here. The first

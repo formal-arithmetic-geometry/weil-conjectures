@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Subobject.Limits
 /-! # Refining finite subobject filtrations
 
 Source: Stacks Project, Tag 01YF, proof, induced filtrations in extensions.
-(blueprint: lem-pc-s3-finite-filtration-refinement)
 -/
 
 @[expose] public section
@@ -147,9 +146,8 @@ private theorem closure_of_subobject_filtration
 /-- A finite filtration can be refined by finite filtrations of its successive quotients.
 A quotient already satisfying the isomorphism-invariant property needs no refinement.
 
-Source: Stacks Project, Tag 01YF (`coherent.tex`, `lemma-coherent-filter`), proof,
+Source: Stacks Project, Tag 01YF (`coherent.tex`), proof,
 induced filtrations in extensions and refinement of the J-adic filtration.
-(blueprint: lem-pc-s3-finite-filtration-refinement)
 
 Proof: Use the proved source-library property P.filtrationClosure, which contains P
 and zero objects and is closed under isomorphisms and extensions. First convert any

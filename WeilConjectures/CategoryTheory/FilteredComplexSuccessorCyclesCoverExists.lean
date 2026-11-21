@@ -18,8 +18,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The successor-cycle inclusion into the page factors through its cycles.
 Source: Stacks Project, Homology, Tag 012K, displayed cycle, boundary and
-differential formulas preceding lemma-spectral-sequence-filtered-complex.
-(blueprint: lem-sp-filtered-complex-successor-cycles-cover-exists).
+differential formulas preceding.
 
 Proof. Put p = pq.1, n = pq.1 + pq.2 and j = (p+r,pq.2-r+1). Let a be the
 successor-cycle inclusion followed by the page quotient projection. The image

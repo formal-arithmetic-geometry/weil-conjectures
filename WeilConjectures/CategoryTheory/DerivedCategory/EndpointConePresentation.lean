@@ -24,7 +24,6 @@ component is not prescribed.
 
 Source: Stacks Project, Derived Categories, Tags 014D and 05QK (cone and rotation),
 and Tag 05RR (localization of the homotopy category at quasi-isomorphisms).
-(blueprint: lem-pc-derived-endpoint-cone-presentation).
 
 Proof: Rotate both triangles twice, so their connecting arrows are the first arrows.
 Represent their third vertices and shifted first vertices by complexes. The

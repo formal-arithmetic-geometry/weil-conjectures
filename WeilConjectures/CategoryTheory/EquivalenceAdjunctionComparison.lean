@@ -10,9 +10,7 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Normalized adjunction comparisons across equivalences
 
-Source: Stacks Project, Tags 0B65 and 0DV0; categorical extension used in the blueprint
-`lemma-passing-schematic-closure--1`, Steps 1–2.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tags 0B65 and 0DV0.
 
 The three statements give the unique normalized comparison, its compatibility with
 adjoint compositors, and the comparison of actual inverse mates. Diagram equalities
@@ -44,8 +42,7 @@ one left-adjoint comparison, normalized by its inverse mate, and identifies all 
 transposes, the units, and the counits. Applying this statement to C, D, Cb, Db gives
 exactly the primed assertion of clause (1).
 
-Source: Stacks Project, Tag 0B65; blueprint normalization proof, Step 1.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 0B65.
 
 Proof: (1) Apply `isIso_inverseMate_of_equivalences` to the inverse mate alpha of u.
 Set j = alpha inverse. Injectivity of `mateEquiv` gives uniqueness from normalization.
@@ -104,8 +101,7 @@ variable {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
 /-- Clause (2): normalized left comparisons preserve the specified adjoint compositors.
 All equivalences, comparisons, and composite/direct adjunctions remain specified data.
 
-Source: Stacks Project, Tags 0B65 and 0DV0; blueprint normalization proof, Step 1.
-(blueprint: lem-sfb-equivalence-square-inverse-mate-coherence)
+Source: Stacks Project, Tags 0B65 and 0DV0.
 
 Proof: (3) Put alpha_ij = c_ij inverse. By `mateEquiv_hcomp`, their pasted left square
 has mate the pasted right square, under `Adjunction.comp` on both sides. Apply
@@ -199,8 +195,7 @@ variable {A : Type uA} [Category.{vA} A] {B : Type uB} [Category.{vB} B]
 /-- Clause (3): a compatible square of right-adjoint transformations transports the
 actual inverse mates, and invertibility is equivalent on the two sides.
 
-Source: Stacks Project, Tag 0B65; blueprint normalization proof, Step 2.
-(blueprint: lem-sfb-equivalence-square-inverse-mate-coherence)
+Source: Stacks Project, Tag 0B65.
 
 Proof: (5) Write alpha = j inverse and alpha' = j' inverse. The inverse-mate transpose
 formula at the identity of J X says the transpose of beta_X is P(eta_X) followed by

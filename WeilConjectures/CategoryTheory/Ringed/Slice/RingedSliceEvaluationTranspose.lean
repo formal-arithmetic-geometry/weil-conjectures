@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.Ringed.Slice.RingedSliceKoszulCoherence
 
 /-! # Slice evaluation and transpose compatibility
 
-Source: Stacks Project, Tags 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose).
+Source: Stacks Project, Tags 07A4, 08J9 and 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -97,18 +96,14 @@ private theorem transpose_of_evaluation
 
 /-- Slice restriction preserves evaluation, its adjunction transpose, and Koszul symmetry
 for arbitrary unbounded objects, with the canonical representative normalizations above.
-Source: Stacks 07A4, 08J9, 08JB and the blueprint delta-restriction proof
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-transpose).
+Source: Stacks 07A4, 08J9, 08JB and the blueprint delta-restriction proof.
 
 Proof:
 1. Resolve L by a flat-term K-flat P and M by a K-injective I; resolve Hom(P,I) by
-   a flat-term K-flat Q (lem-pc-kflat-resolution and prop-pur-kinjective-resolutions-exist).
-   Restriction preserves these properties (lem-weil-pbc-ringed-topoi-derived-tensor-pullback,
-   lem-pur-kinjective-restrict-localized), and exactness preserves the resolving quasi-isos.
+   a flat-term K-flat Q.
+   Restriction preserves these properties, and exactness preserves the resolving quasi-isos.
 2. Relocalization identifies local Hom families with the same maps and differential
-   d(h)=d_I h-(-1)^n h d_P. Tensor restriction is identity on local pure tensors
-   (lem-sfb-localized-site-tensor-restriction). It commutes with sheafification and sums
-   (lem-cbc-sieve-slice-sheafification), hence totalization. The descent theorem
+   d(h)=d_I h-(-1)^n h d_P. Tensor restriction is identity on local pure tensors. It commutes with sheafification and sums, hence totalization. The descent theorem
    lem-weil-pbc-site-derived-tensor-descent gives the natural derived comparisons.
 3. By def-coef-ringed-tensor-hom-model evaluation on Q tensor P is x tensor p ↦ q(x)(p).
    Restricting gives the same formula, proving the evaluation equation on representatives

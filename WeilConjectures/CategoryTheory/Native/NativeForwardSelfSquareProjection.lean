@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.IntegralResidueDerivedMonoidal
 import WeilConjectures.CategoryTheory.Projection.ProjectionMateSquareCoherence
 /-! # Forward projection and exchange for the native self-square
 
-The tensor comparison is stored once before specializing the adjunction mate calculation.
-(blueprint: lem-sfb-native-forward-self-square-projection). -/
+The tensor comparison is stored once before specializing the adjunction mate calculation. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,9 +39,7 @@ attribute [local irreducible] DerivedCategory.Qh
 
 namespace CategoryTheory
 
-/-- The forward projection square with its tensor structures stored once.
-Source: the projection/exchange compatibility in the Second identity
-(blueprint: lem-sfb-native-forward-self-square-projection). -/
+/-- The forward projection square with its tensor structures stored once. -/
 def ForwardProjectionSquare
     {C D V : Type*} [Category C] [Category D] [Category V]
     {F : C ⥤ D} {U₁ U₂ : D ⥤ V} (d : TraceComparisonData F U₁ U₂)
@@ -183,9 +180,7 @@ private theorem forward_tensor_component
 
 end CategoryTheory
 
-/-- The canonical derived tensor comparison for a functor between internal-module categories.
-Source: the canonical derived tensor comparison
-(blueprint: lem-sfb-native-forward-self-square-projection). -/
+/-- The canonical derived tensor comparison for a functor between internal-module categories. -/
 def CategoryTheory.moduleDerivedTensorComparisonHom
     {C : Type u₁} [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     [MonoidalCategory C] [SymmetricCategory C] [MonoidalPreadditive C] [MonoidalClosed C]
@@ -378,8 +373,7 @@ attribute [local irreducible] upperStar lowerStar
   CategoryTheory.Functor.rightDerivedFunctor
 
 /-- The forward projection square for the canonical pullback square and its mate.
-Source: rational projective-line triangle, Second identity, extraction of q*K;
-Stacks 07A7 and 0D6D (blueprint: lem-sfb-native-forward-self-square-projection).
+Source: Stacks 07A7 and 0D6D.
 
 Proof: the canonical pullback composition comparison preserves the derived tensor
 comparison. Apply the adjunction mate square with both tensor variables reversed.

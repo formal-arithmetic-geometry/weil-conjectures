@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunc
 
 /-! # Right-derived transport of cyclic presentations
 
-Source: Stacks Project, Derived Categories, Tags 070I, 070K, 070Y and 0152;
-the right-derived companion proof plan in CyclicDerivedHomExactSequence.
+Source: Stacks Project, Derived Categories, Tags 070I, 070K, 070Y and 0152.
 -/
 
 @[expose] public noncomputable section
@@ -366,9 +365,7 @@ expand the two conjugations: the structure equation at M moves the inverse
 structure past alpha; naturality of beta moves the arbitrary derived morphism;
 its shift equation and the structure equation at N identify the remaining factors.
 Thus no representation of the arbitrary degree-r morphism is required.
-Source: the action calculation in the parent right-derived companion, and the comparison of
-lem-sf-fixed-pair-derived-forget-comparison; Stacks Tags 070I, 070K and 070Y.
-(blueprint: lem-sf-cyclic-derived-right-action). -/
+Source: Stacks Tags 070I, 070K and 070Y. -/
 theorem cyclicDerivedHomTransport_rightDerived_action
     (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ)
     (u : CyclicDerivedHom F M N r) :

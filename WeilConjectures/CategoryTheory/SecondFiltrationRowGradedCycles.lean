@@ -14,7 +14,6 @@ import all WeilConjectures.CategoryTheory.DoubleComplexTotal
 /-! # Row cycles in the second graded filtration
 
 Source: Stacks Project, Homology, Tags 0130 and 012K.
-(blueprint: lem-sp-second-filtration-row-graded-cycles).
 -/
 
 @[expose] public section
@@ -124,7 +123,6 @@ private theorem inclusion_lift
 
 /-- The diagonal inclusions give graded term isomorphisms commuting with the row differential.
 Source: Stacks Project, Tag 0130, clause 2.
-(blueprint: lem-sp-second-filtration-row-graded-cycles).
 
 Proof. Set J = flip(mappedFunctor F(I)). In degree n = s+r the filtration step
 is the finite sum of images of the inclusions with second coordinate in [s,n].
@@ -258,7 +256,6 @@ private theorem secondFiltration_row_graded_terms
 /-- The normalized diagonal map induces an isomorphism on cycles, before taking
 any quotient by boundaries.
 Source: Stacks Project, Tag 0130, clause 2; Tag 012K, first-page cycle formula.
-(blueprint: lem-sp-second-filtration-row-graded-cycles).
 
 Proof. Write J = flip(mappedFunctor F(I)) and n = s+r. In degree n the second
 step is the finite sum of the images of the diagonal inclusions with second

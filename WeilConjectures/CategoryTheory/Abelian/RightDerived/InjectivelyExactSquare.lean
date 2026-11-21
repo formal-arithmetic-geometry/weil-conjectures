@@ -17,8 +17,7 @@ public import Mathlib.Algebra.Category.Grp.Abelian
 /-! # Short exact resolution sequences of squares exact on injectives
 
 Source: Stacks Project, Cohomology, Lemma 01EB, via the short exact sequence of
-section complexes; Homology, the long exact sequence of a short exact sequence.
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact).
+section complexes.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ variable (C : Type u) [Category.{v} C] [Abelian C]
 
 /-- A square of additive group valued functors whose associated three-term sequence
 is short exact on injective objects. These are underived, objectwise conditions.
-Source: Stacks, Cohomology, proof of Lemma 01EB
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact). -/
+Source: Stacks, Cohomology, proof of Lemma 01EB. -/
 structure InjectivelyExactSquare extends Square (C ⥤ AddCommGrpCat.{w}) where
   additive₁ : X₁.Additive := by infer_instance
   additive₂ : X₂.Additive := by infer_instance
@@ -55,18 +53,14 @@ namespace InjectivelyExactSquare
 
 variable {C}
 
-/-- The explicit pointwise binary product of two group-valued functors.
-Source: Mathlib, Grp/Biproducts, binaryProductLimitCone
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact). -/
+/-- The explicit pointwise binary product of two group-valued functors. -/
 def pairFunctor (F G : C ⥤ AddCommGrpCat.{w}) : C ⥤ AddCommGrpCat.{w} where
   obj I := AddCommGrpCat.of (F.obj I × G.obj I)
   map f := AddCommGrpCat.ofHom ((F.map f).hom.prodMap (G.map f).hom)
   map_id I := by ext x <;> simp
   map_comp f g := by ext x <;> simp
 
-/-- The explicit product functor is additive coordinatewise.
-Source: Mathlib, Functor.Additive and the additive structure on a product of groups
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact). -/
+/-- The explicit product functor is additive coordinatewise. -/
 instance pairFunctor_additive (F G : C ⥤ AddCommGrpCat.{w}) [F.Additive] [G.Additive] :
     (pairFunctor F G).Additive where
   map_add := by
@@ -77,8 +71,7 @@ instance pairFunctor_additive (F G : C ⥤ AddCommGrpCat.{w}) [F.Additive] [G.Ad
 variable (S : InjectivelyExactSquare.{u, v, w} C)
 
 /-- The diagonal into the explicit product functor.
-Source: Stacks, Cohomology, proof of Lemma 01EB
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact). -/
+Source: Stacks, Cohomology, proof of Lemma 01EB. -/
 def diagonal : S.X₁ ⟶ pairFunctor S.X₂ S.X₃ where
   app I := AddCommGrpCat.ofHom ((S.f₁₂.app I).hom.prod (S.f₁₃.app I).hom)
   naturality := by
@@ -89,8 +82,7 @@ def diagonal : S.X₁ ⟶ pairFunctor S.X₂ S.X₃ where
     · exact congrArg (fun h ↦ h x) (S.f₁₃.naturality f)
 
 /-- The difference from the explicit product functor.
-Source: Stacks, Cohomology, proof of Lemma 01EB
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact). -/
+Source: Stacks, Cohomology, proof of Lemma 01EB. -/
 def difference : pairFunctor S.X₂ S.X₃ ⟶ S.X₄ where
   app I := AddCommGrpCat.ofHom
     ((S.f₂₄.app I).hom.comp (AddMonoidHom.fst _ _) -
@@ -106,8 +98,7 @@ def difference : pairFunctor S.X₂ S.X₃ ⟶ S.X₄ where
       (congrArg (fun h ↦ h x.2) (S.f₃₄.naturality f))
 
 /-- The diagonal followed by the difference vanishes by commutativity of the square.
-Source: Stacks, Cohomology, proof of Lemma 01EB
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact). -/
+Source: Stacks, Cohomology, proof of Lemma 01EB. -/
 theorem diagonal_difference : S.diagonal ≫ S.difference = 0 := by
   ext I x
   exact sub_eq_zero.mpr (congrArg (fun h ↦ h.app I x) S.fac)
@@ -115,8 +106,7 @@ theorem diagonal_difference : S.diagonal ≫ S.difference = 0 := by
 variable [EnoughInjectives C]
 
 /-- Apply the diagonal and difference to a chosen injective resolution.
-Source: Stacks, Cohomology, proof of Lemma 01EB
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact). -/
+Source: Stacks, Cohomology, proof of Lemma 01EB. -/
 noncomputable def resolutionSequence (F : C) : ShortComplex (CochainComplex AddCommGrpCat.{w} ℕ) :=
   ShortComplex.mk
     ((NatTrans.mapHomologicalComplex S.diagonal (ComplexShape.up ℕ)).app
@@ -129,9 +119,7 @@ noncomputable def resolutionSequence (F : C) : ShortComplex (CochainComplex AddC
         S.diagonal_difference)
 
 /-- The resolution sequence is short exact, because every resolution term is injective.
-Source: Stacks, Cohomology, proof of Lemma 01EB; Mathlib,
-HomologicalComplex.shortExact_iff_degreewise_shortExact
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact).
+Source: Stacks, Cohomology, proof of Lemma 01EB.
 Proof: Evaluate in each degree. The maps are exactly the diagonal and the difference
 in the three hypotheses on S; all resolution terms are injective. Injectivity makes
 the first morphism mono, exactness is kernel=image, and surjectivity makes the second
@@ -149,8 +137,7 @@ theorem resolutionSequence_shortExact (F : C) : (S.resolutionSequence F).ShortEx
 
 /-- The connecting homomorphism transported from the chosen resolution to derived objects.
 Source: Stacks, Cohomology, Lemma 01EB, and Mathlib,
-ShortComplex.ShortExact.δ and InjectiveResolution.isoRightDerivedObj
-(blueprint: lem-sc-injectively-exact-square-resolution-short-exact). -/
+ShortComplex.ShortExact.δ and InjectiveResolution.isoRightDerivedObj. -/
 noncomputable def boundary (F : C) (n : ℕ) :
     (S.X₄.rightDerived n).obj F ⟶ (S.X₁.rightDerived (n + 1)).obj F :=
   ((injectiveResolution F).isoRightDerivedObj S.X₄ n).hom ≫

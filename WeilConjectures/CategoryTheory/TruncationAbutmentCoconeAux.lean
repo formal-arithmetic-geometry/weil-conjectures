@@ -18,10 +18,7 @@ namespace CategoryTheory
 
 
 /-- Auxiliary compatibility package for the normalized truncation cocone.
-Source: Stacks Tag 05TC (2), blueprint step 5; (blueprint: lem-sp-truncation-abutment-cocone-aux)
-Proof: Normalize the total-degree and truncation indices of alpha, cancel the two bridge
-isomorphisms, combine the three functor maps, and use transition_comp_ιTruncLE and
-transport naturality for the inclusion. For c, the inclusion tau_{<=n}K -> K is a
+Source: Stacks Tag 05TC (2), blueprint step 5. For c, the inclusion tau_{<=n}K -> K is a
 cohomology isomorphism through n and has zero source cohomology in degree n+1. Apply the
 proved low-degree right-derived map theorem on D+ and transport it by the natural
 bounded-below/unbounded derived-functor comparison. Composing with the inverse bridge

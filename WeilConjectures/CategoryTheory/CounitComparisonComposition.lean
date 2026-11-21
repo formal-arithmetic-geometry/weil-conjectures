@@ -9,8 +9,7 @@ module
 public import Mathlib.CategoryTheory.NatIso
 
 /-! # Composition after inverting comparison counits
-Source: the counit equation for left derived functors; Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-counit-comparison-composition). -/
+Source: Stacks Project, Tag 0D5S. -/
 
 @[expose] public section
 open CategoryTheory
@@ -18,8 +17,7 @@ namespace CategoryTheory
 set_option autoImplicit false
 
 /-- Inverting compatible counits transfers underived composition to derived composition.
-Source: Stacks Project, Tag 0D5S; naturality and cancellation of invertible counits.
-(blueprint: lem-pc-counit-comparison-composition).
+Source: Stacks Project, Tag 0D5S.
 Proof: postcompose both sides by the direct counit. Its defining equation replaces
 the derived comparison by the two successive counits and the underived comparison.
 Cancel the first counit, move the model isomorphism through the second counit by
@@ -62,8 +60,7 @@ theorem counitComparisonComposition
     Category.comp_id, Functor.map_comp] using hs
 
 /-- Conjugating every comparison by model isomorphisms preserves its composition law.
-Source: naturality of functor composition comparisons; Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-counit-comparison-composition).
+Source: Stacks Project, Tag 0D5S.
 Proof: cancel the two adjacent middle-model isomorphisms. Move the initial-model
 isomorphism through the natural composition comparison, and move the final-model
 isomorphism through the scalar comparison. What remains is the original law. -/
@@ -93,8 +90,7 @@ theorem conjugateComparisonComposition
   simpa only [Category.assoc] using congrArg (fun t ↦ s₂.hom ≫ t ≫ Dr.map s₀.inv) hd
 
 /-- Naturality survives conjugation by natural model isomorphisms.
-Source: naturality of the two chart isomorphisms; Stacks Project, Tag 08DW.
-(blueprint: lem-pc-counit-comparison-composition). -/
+Source: Stacks Project, Tag 08DW. -/
 theorem conjugateComparisonNaturality
     {C D : Type*} [Category* C] [Category* D]
     (F G F' G' : C ⥤ D) (s : F ≅ F') (t : G ≅ G')
@@ -115,8 +111,7 @@ theorem conjugateComparisonNaturality
     _ = (s.app X ≪≫ δX ≪≫ (t.app X).symm).hom ≫ G.map f := by simp [Category.assoc]
 
 /-- The inverse of a counit remains natural between objects where it is invertible.
-Source: naturality of the counit; Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-counit-comparison-composition). -/
+Source: Stacks Project, Tag 0D5S. -/
 theorem inverseCounitNaturality
     {C C' D D' : Type*} [Category* C] [Category* C'] [Category* D] [Category* D']
     (Q : C ⥤ D) (Q' : C' ⥤ D') (T : C ⥤ C') (L : D ⥤ D')
@@ -131,8 +126,7 @@ theorem inverseCounitNaturality
   simp only [IsIso.inv_hom_id_assoc]
 
 /-- Compose a natural inverse-counit comparison with a natural model comparison.
-Source: naturality and the preceding inverse-counit identity; Stacks Project, Tag 08DW.
-(blueprint: lem-pc-counit-comparison-composition). -/
+Source: Stacks Project, Tag 08DW. -/
 theorem inverseCounitModelNaturality
     {A C C' D D' : Type*} [Category* A] [Category* C] [Category* C']
     [Category* D] [Category* D'] (Q : C ⥤ D) (Q' : C' ⥤ D')

@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.Sites.Pullback
 /-!
 # Ringed localization for continuous cocontinuous restriction
 
-Source: Stacks Project, Tag 04IE; sites.tex Tag 00XO
-(blueprint: lem-weil-pbc-continuous-cocontinuous-ringed-restriction).
+Source: Stacks Project, Tag 04IE; sites.tex Tag 00XO.
 -/
 
 @[expose] public section
@@ -397,8 +396,7 @@ end
 
 /-- Ringed localization for continuous cocontinuous restriction.
 
-Source: literature/stacks-project/sites-modules.tex, Tag 04IE; sites.tex Tag 00XO
-(blueprint: lem-weil-pbc-continuous-cocontinuous-ringed-restriction).
+Source: literature/stacks-project/sites-modules.tex, Tag 04IE; sites.tex Tag 00XO.
 Proof: Use Mathlib Functor.sheafAdjunctionCocontinuous to obtain the set adjunction with continuous
 precomposition as inverse image. Sectionwise limits prove left exactness. Take the structural
 ring map to be the identity of the restricted ring. The generalized-element ring identities

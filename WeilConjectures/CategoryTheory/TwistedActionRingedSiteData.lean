@@ -18,7 +18,7 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 /-! # The ringed site of a site automorphism
 
 Source: Stacks, Sites, Tag 00W0 is motivation for the agent-formulated twisted
-construction (auxiliary; not a blueprint node).
+construction.
 
 The presentation below characterizes the integer-labelled arrows, the topology,
 the coefficient ring, the two restriction functors, and the orbit-sum adjunction.
@@ -36,18 +36,18 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace CategoryTheory.TwistedActionRingedSite
 
 /-- Forget commutativity only for the existing module-sheaf interface.
-Source: Stacks 03CV (auxiliary; not a blueprint node). -/
+Source: Stacks 03CV. -/
 abbrev ring {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) : Sheaf J RingCat.{u} :=
   (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
 
 /-- The existing category of sheaves of modules, with the compatible size convention.
-Source: Stacks 03CV (auxiliary; not a blueprint node). -/
+Source: Stacks 03CV. -/
 abbrev Modules {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) := ringedSiteModules.{u} (ring R)
 
 /-- The image of a local pure tensor under ordinary module sheafification.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 noncomputable def pureTensor {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}} (M N : Modules R) (X : Cᵒᵖ)
     (x : M.val.obj X) (y : N.val.obj X) : (M ⊗ N).val.obj X :=
@@ -70,7 +70,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 /-- The recorded sheaf tensor, with its coefficient argument resolved once.
-Source: Stacks 03EK (blueprint: lem-sf-twisted-action-ringed-site). -/
+Source: Stacks 03EK. -/
 noncomputable abbrev tensorObj {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}} (M N : Modules R) : Modules R := M ⊗ N
 

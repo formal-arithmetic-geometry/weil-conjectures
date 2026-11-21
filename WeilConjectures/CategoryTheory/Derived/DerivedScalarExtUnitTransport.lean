@@ -22,8 +22,7 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 import all Mathlib.CategoryTheory.Abelian.ShortExact
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 
-/-! # Transport of normalized scalar Ext units
-(blueprint: lem-sp-derived-scalar-ext-unit-transport).
+/-! # Transport of normalized scalar Ext units.
 -/
 
 @[expose] public noncomputable section
@@ -48,8 +47,8 @@ variable {A : Type uA} {B : Type uB} {C : Type uC} {D : Type uD}
 /-- Let E:C≃A and T:B≃D be exact equivalences, U:A→B and V:C→D exact additive, and ρ:E⋙U⋙T≅V. If
 a∈Ext^n(X,U(EH)) is a DerivedExtUnit [def-sp-derived-scalar-ext-unit], a source isomorphism c:TX≅F
 and a class b∈Ext^n(F,VH) satisfy T(a)ρ_H=c b, then b is a V-derived Ext unit.
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-derived-scalar-ext-unit-transport).
+Source: Stacks 0152,
+06YY and 0GLZ.
 Proof: Transport the universal Hom bijections along the two derived equivalences and the derived
 square isomorphism. Exact-functor single and shift coherence identifies the transported unit. The
 assumed Ext equation identifies this unit with b, including its positive shift and the prescribed

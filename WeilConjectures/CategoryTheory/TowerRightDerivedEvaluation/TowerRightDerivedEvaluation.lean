@@ -12,9 +12,7 @@ import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
 /-! # Unbounded right derivation commutes with tower evaluation
 
-Source: Stacks Project, Sites Cohomology, Tag 0941, proof of
-`lemma-derived-limit-is-ok`, and Derived Categories, Tags 070I, 070Y and 070K;
-additive-functor generalization (blueprint: lem-coef-tower-right-derived-evaluation).
+Source: Stacks Project, Sites Cohomology, Tag 0941, and Derived Categories, Tags 070I, 070Y and 070K.
 
 The units and resolution comparisons are those of
 `Functor.rightDerivedFunctorOfQuasiIsoResolutions`. Natural number `n` denotes positive
@@ -33,8 +31,7 @@ namespace CategoryTheory.TowerRightDerivedEvaluation
 
 /-- The cochain realization of the universal unit for arbitrary quasi-isomorphism
 K-injective resolutions, using the canonical quotient/localization comparisons.
-Source: Stacks Project, Derived Categories, Tags 070K and 070Y
-(blueprint: lem-coef-tower-right-derived-evaluation). -/
+Source: Stacks Project, Derived Categories, Tags 070K and 070Y. -/
 def cochainUnit
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     [Abelian A] [Abelian B] [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wB} B]
@@ -245,9 +242,7 @@ exact evaluation, with its universal units, every K-injective resolution and eve
 actual tower transition. The resolution equation identifies both sides with Q(F(I_n));
 since it holds for every resolution and the same natural isomorphism, it includes
 resolution independence and naturality for all derived morphisms.
-Source: Stacks Project, Sites Cohomology, Tag 0941, exact-left-adjoint paragraph;
-Derived Categories, Tags 070I, 070Y and 070K; additive-functor generalization
-(blueprint: lem-coef-tower-right-derived-evaluation).
+Source: Stacks Project, Sites Cohomology, Tag 0941, exact-left-adjoint paragraph; Derived Categories, Tags 070I, 070Y and 070K.
 
 Proof:
 1. Use the universal derived pairs of `def-sfb-right-derived-functor`. The two

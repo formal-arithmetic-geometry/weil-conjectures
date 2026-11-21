@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHo
 /-! # The derived counit for acyclic cohomology
 
 Source: Stacks, Cohomology on Sites, Tags 0D7S and 0D7U; Homology, Tag 0117.
-(blueprint: lem-fd-acyclic-cohomology-derived-counit).
 -/
 
 @[expose] public section
@@ -294,7 +293,6 @@ omit [EnoughInjectives C] in
 isomorphisms for R⁺ and an invertible canonical derived counit.
 
 Source: Stacks, Cohomology on Sites, Tags 0D7S and 0D7U; Homology, Tag 0117.
-(blueprint: lem-fd-acyclic-cohomology-derived-counit).
 
 Proof: represent L by a bounded-below complex I of injectives. Starting at its
 lower bound, use 0 → ZⁿI → Iⁿ → Bⁿ⁺¹I → 0 and

@@ -53,7 +53,7 @@ section BoundaryLoci
 
 variable {O : U.Opens} (σ : TwoOpenSide u O)
 
-/-- **The four boundary loci** (blueprint: `proposition-compactifying-union-two-opens--1`). For a
+/-- **The four boundary loci**. For a
 side `σ` over `O` and the other open `O'` with `O ∪ O' = U`, write `Z = U ∖ O'` and `Z' = U ∖ O`.
 Then `Z` is closed in `U` and contained in `O`; the loci `ψ⁻¹(Z)` and `ψ⁻¹(Z')` are
 closed in `V`, i.e. their closures in `X` (the self and the forbidden boundary) meet `V`
@@ -553,8 +553,7 @@ theorem exists_admissibleBlowup_isIso_comparisonFst_near_forbiddenBoundary [IsNo
   exact hcl
 
 open TwoOpenSide in
-/-- **Improved comparison and key disjointness** (blueprint:
-`proposition-compactifying-union-two-opens--1`). For prepared sides `σ₁, σ₂` there is a further
+/-- **Improved comparison and key disjointness**. For prepared sides `σ₁, σ₂` there is a further
 `V₁`-admissible blow-up of `X₁` such that the improved first side is still prepared, the
 first projection `p₁ : X₁₂ ⟶ X₁` of the improved comparison space is an isomorphism over
 an open neighbourhood of the forbidden boundary `Z̄₁,₂`, and the key disjointness

@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 # Cochain normalization of the canonical derived adjunction unit
 
 Source: Stacks Project, derived.tex, Tags 0DVC and 09T5.
-(blueprint: lem-sfb-derived-adjunction-cochain-unit).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace CategoryTheory
 /-- For an exact additive left adjoint, the canonical derived unit agrees with the
 ordinary cochain unit followed by the universal right-derived comparison.
 Source: Stacks Project, derived.tex, Tags 0DVC and 09T5.
-(blueprint: lem-sfb-derived-adjunction-cochain-unit).
 Proof: apply the normalized derived-unit equation on the homotopy category to the
 quotient of E. The exact-functor factorization there is the cochain factorization
 conjugated by quotientCompQhIso. Naturality of the derived unit transports its

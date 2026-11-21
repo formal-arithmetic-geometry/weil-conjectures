@@ -65,9 +65,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Localization and geometric inverse image
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 03CZ and 03D2; the localization
-universal property and its identity/composition normalization
-(blueprint: lem-weil-pbc-localization-inverse-image-coherence).
+Source: Stacks Project, Modules on Sites, Tags 03EL, 03CZ and 03D2.
 
 ## Main statements
 
@@ -121,8 +119,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- The existing module category of a commutative ring sheaf.
-Source: Stacks, Tag 03D2
-(blueprint: lem-weil-pbc-localization-inverse-image-coherence). -/
+Source: Stacks, Tag 03D2. -/
 abbrev inverseLocalizationModules
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -133,8 +130,7 @@ abbrev inverseLocalizationModules
 
 /-- Scalar localization is the existing sheaf tensor product with the localized ring.
 The order of factors is `M ⊗ R[1/t]`, the symmetric form of `R[1/t] ⊗ M`.
-Source: Stacks, Tags 03EK and 00DK
-(blueprint: lem-weil-pbc-localization-inverse-image-coherence). -/
+Source: Stacks, Tags 03EK and 00DK. -/
 abbrev scalarLocalization
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -145,8 +141,7 @@ abbrev scalarLocalization
   SheafOfModules.siteSheafTensorRight (A := R) (ringedSectionLocalizationOfUniverses R t)
 
 /-- The localization unit is uniquely specified by `m ↦ m ⊗ 1` on every section.
-Source: Stacks, Tags 03EK and 00DK
-(blueprint: lem-weil-pbc-localization-inverse-image-coherence).
+Source: Stacks, Tags 03EK and 00DK.
 Proof: the pure-tensor map is linear and compatible with restriction because the
 localization restrictions preserve one. Compose with the module sheafification unit.
 Naturality follows on pure tensors. Every section of the source has the specified image,
@@ -215,8 +210,7 @@ theorem existsUnique_scalarLocalizationUnit
     exact hθ M U m
 
 /-- The actual localization unit, chosen from its unique sectionwise specification.
-Source: Stacks, Tags 03EK and 00DK
-(blueprint: lem-weil-pbc-localization-inverse-image-coherence). -/
+Source: Stacks, Tags 03EK and 00DK. -/
 def scalarLocalizationUnit
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -227,8 +221,7 @@ def scalarLocalizationUnit
   Classical.choose (existsUnique_scalarLocalizationUnit R t)
 
 /-- The underlying set sheaf of a module sheaf.
-Source: Stacks, Tag 03D2
-(blueprint: lem-weil-pbc-localization-inverse-image-coherence). -/
+Source: Stacks, Tag 03D2. -/
 abbrev localizationModuleSets
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{u} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -240,8 +233,7 @@ abbrev localizationModuleSets
 
 /-- Transport of a global section, tested on all generalized elements. This expresses
 `t' = f⁻¹t` without a point or a presentation of the geometric morphism by a site functor.
-Source: Stacks, Tag 00YV
-(blueprint: lem-weil-pbc-localization-inverse-image-coherence). -/
+Source: Stacks, Tag 00YV. -/
 def IsInverseImageSection
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]

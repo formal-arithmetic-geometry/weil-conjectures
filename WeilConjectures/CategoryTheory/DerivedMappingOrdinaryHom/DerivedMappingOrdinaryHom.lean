@@ -13,7 +13,6 @@ public import Mathlib.Algebra.Module.ULift
 
 Source: Stacks Project, Differential Graded Algebra, Example 09L9.
 The differential is Mathlib's Hom differential and the maps are pre/postcomposition.
-(blueprint: lem-sf-derived-mapping-ordinary-hom)
 -/
 
 @[expose] public noncomputable section
@@ -30,7 +29,7 @@ variable (B : Type b) [CommRing B]
   {A : Type u} [Category.{v} A] [Preadditive A] [Linear B A]
 
 /-- The scalar-linear Hom differential, with its carrier lifted once.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-hom). -/
+Source: Stacks 09L9. -/
 def differential (X Y : CochainComplex A ℤ) (n m : ℤ) :
     ULift.{b} (Cochain X Y n) →ₗ[ULift.{v} B] ULift.{b} (Cochain X Y m) where
   toFun x := ULift.up (δ n m x.down)
@@ -38,7 +37,7 @@ def differential (X Y : CochainComplex A ℤ) (n m : ℤ) :
   map_smul' a x := congrArg ULift.up ((δ_hom B X Y n m).map_smul a.down x.down)
 
 /-- The actual product Hom complex, with the prescribed signed differential.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-hom). -/
+Source: Stacks 09L9. -/
 def complex (X Y : CochainComplex A ℤ) : CochainComplex (ModuleCat.{max b v} (ULift.{v} B)) ℤ
     where
   X n := ModuleCat.of (ULift.{v} B) (ULift.{b} (Cochain X Y n))
@@ -55,7 +54,7 @@ def complex (X Y : CochainComplex A ℤ) : CochainComplex (ModuleCat.{max b v} (
     exact congrArg ULift.up (δ_δ n m k x.down)
 
 /-- Precomposition and postcomposition on every homogeneous cochain.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-hom). -/
+Source: Stacks 09L9. -/
 def mapTerm {X X' Y Y' : CochainComplex A ℤ}
     (f : X' ⟶ X) (g : Y ⟶ Y') (n : ℤ) :
     (complex B X Y).X n ⟶ (complex B X' Y').X n :=
@@ -66,7 +65,7 @@ def mapTerm {X X' Y Y' : CochainComplex A ℤ}
       map_smul' := by intros; apply ULift.ext; simp }
 
 /-- Actual chain map of product Hom complexes.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-hom). -/
+Source: Stacks 09L9. -/
 def map {X X' Y Y' : CochainComplex A ℤ} (f : X' ⟶ X) (g : Y ⟶ Y') :
     complex B X Y ⟶ complex B X' Y' where
   f n := mapTerm B f g n
@@ -82,7 +81,7 @@ def map {X X' Y Y' : CochainComplex A ℤ} (f : X' ⟶ X) (g : Y ⟶ Y') :
     rw [δ_ofHom_comp, δ_comp_ofHom]
 
 /-- The linear Hom complex is a genuine bifunctor on unbounded complexes.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-hom). -/
+Source: Stacks 09L9. -/
 def functor : (CochainComplex A ℤ)ᵒᵖ × CochainComplex A ℤ ⥤
     CochainComplex (ModuleCat.{max b v} (ULift.{v} B)) ℤ where
   obj X := complex B X.1.unop X.2
@@ -114,7 +113,7 @@ def functor : (CochainComplex A ℤ)ᵒᵖ × CochainComplex A ℤ ⥤
     simp
 
 /-- The bifunctor acts by the actual componentwise pre/postcomposition formula.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-hom).
+Source: Stacks 09L9.
 Proof: evaluate the two zero-degree cochains and use the definition of composition. -/
 theorem map_apply (X X' Y Y' : CochainComplex A ℤ) (f : X' ⟶ X) (g : Y ⟶ Y')
     (n p q : ℤ) (hpq : p + n = q) (x : ((functor B).obj (op X, Y)).X n) :

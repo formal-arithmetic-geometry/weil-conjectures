@@ -303,7 +303,7 @@ private noncomputable def homologyObjEquiv [HasExt.{w} A] (X : A) (q : ℕ) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Ext is computed by the Hom complex of any injective resolution, naturally in the
-first variable. Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 2.
+first variable.
 
 Proof: Extend the resolution from natural to integer degrees by zero. The from-single
 additive equivalence identifies the Hom complex from thedegree-zero single complex
@@ -421,9 +421,7 @@ private noncomputable def sectionsComplexIso
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Objectwise comparison isomorphisms for the cohomology of an injective resolution,
-with the restriction compatibility needed to assemble them into a natural isomorphism.
-Source: blueprint lem-sc-injective-resolution-cohomology-presheaf, Step 2.
-(blueprint: lem-sc-injective-resolution-cohomology-presheaf-data) -/
+with the restriction compatibility needed to assemble them into a natural isomorphism. -/
 theorem Sheaf.injectiveResolution_cohomologyPresheaf_data
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{v}] [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]

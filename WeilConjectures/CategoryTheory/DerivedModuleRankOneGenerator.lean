@@ -19,7 +19,6 @@ open Limits
 
 /-- The degree-zero explicit free rank-one module is a weak triangulated generator
 of the derived module category. Source: Stacks Project, Tag 0F5X, first paragraph.
-(auxiliary; not a blueprint node)
 
 Proof in words: choose a representative complex L of a derived object K.
 If all cohomology modules of L vanish, the map from the zero complex to L is

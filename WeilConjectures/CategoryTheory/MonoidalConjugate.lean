@@ -21,10 +21,6 @@ namespace CategoryTheory
 /-- The right-adjoint conjugate of a monoidal transformation between strong monoidal
 left adjoints is monoidal.
 
-Source: the mate formula for monoidal adjunctions, used in latest blueprint
-`prop-kernel-lisse.proof.md` to transport the algebra structure of functions
-(blueprint: lem-kernel-monoidal-right-conjugate).
-
 Proof. The conjugate is the composite of the second adjunction unit, the image of the
 left-adjoint transformation, and the image of the first counit, with associators and
 unitors inserted. Units and counits of strong monoidal adjunctions are monoidal, as

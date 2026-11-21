@@ -76,8 +76,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Slice evaluation on resolved representatives
 
-Source: Stacks Project, Tags 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-representative-evaluation).
+Source: Stacks Project, Tags 07A4, 08J9 and 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -388,8 +387,7 @@ end SliceChains
 
 -- Assemble the dependent tensor and Hom normalization squares without unfolding their data.
 /-- Normalized slice evaluation on a flat-term K-flat source and K-injective target.
-Source: Stacks Project, Tags 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-representative-evaluation).
+Source: Stacks Project, Tags 08J9 and 08JB.
 
 Proof: resolve Hom(P,I) by a flat-term K-flat Q. Use the ordinary chain-level
 uncurrying equivalence on q:Q to Hom(P,I), and on its restriction followed by the

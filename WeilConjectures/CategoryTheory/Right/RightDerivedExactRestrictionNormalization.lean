@@ -146,9 +146,7 @@ private lemma unitQ_homotopy (H : C â¥¤ D) [H.Additive] (P : CochainComplex C â„
 omit [Abelian.HasKInjectiveResolutions D] in
 /-- The exact restriction square satisfies its full canonical cochain-unit equation.
 
-Source: Stacks Project Tag 070G, uniqueness and composition of right-derived functors;
-blueprint coefficient changes, paragraph (2), deriving the restriction square.
-(blueprint: lem-right-derived-exact-restriction-normalization).
+Source: Stacks Project Tag 070G, uniqueness and composition of right-derived functors.
 
 Proof: cancel the inverse exact-functor comparison. The defining equations for the
 composition comparison and the comparison of naturally isomorphic functors reduce the

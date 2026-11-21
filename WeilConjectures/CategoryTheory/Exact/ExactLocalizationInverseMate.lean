@@ -13,9 +13,8 @@ public import Mathlib.CategoryTheory.Localization.Adjunction
 
 /-! # Exact localization and inverse mates
 
-Source: Stacks Project, Tag 07A7 (remark-base-change), and the inverse-mate
-compatibility sentence of `fix-prop-coherence`.
-(blueprint: lem-sf-exact-localization-inverse-mate).
+Source: Stacks Project, Tag 07A7, and the inverse-mate
+compatibility sentence of.
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +29,7 @@ namespace CategoryTheory
 /-- The exact adjunction obtained by localizing a specified termwise adjunction,
 with independent universes on its two abelian categories. This item helper uses
 the same construction as `SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction`;
-when the universes agree, the two definitions are definitionally equal. Source: Stacks Tag 015F
-(blueprint: lem-sf-exact-localization-inverse-mate). -/
+when the universes agree, the two definitions are definitionally equal. Source: Stacks Tag 015F. -/
 def exactLocalizationDerivedAdjunction
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w₁} C] [HasDerivedCategory.{w₂} D]
@@ -275,9 +273,8 @@ private lemma mate_unit_Q
   exact hc
 
 /-- Exact localization preserves the inverse mate and its normalized Hom bijections.
-Source: Stacks Project, Tag 07A7 (remark-base-change), and the inverse-mate
-compatibility sentence of `fix-prop-coherence`.
-(blueprint: lem-sf-exact-localization-inverse-mate).
+Source: Stacks Project, Tag 07A7, and the inverse-mate
+compatibility sentence of.
 
 Proof: localize the cochain unit with the specified exact-functor factorizations.
 Expanding the localized Hom bijection and using naturality proves both Hom

@@ -15,8 +15,7 @@ public import Mathlib.CategoryTheory.Category.Preorder
 /-!
 # Compact Hom commutes with sequential homotopy colimits
 
-Source: Stacks Project, Derived Categories, Lemma 13.33.9 (Tag 094A)
-(blueprint: lem-pc-compact-hom-hocolim).
+Source: Stacks Project, Derived Categories, Lemma 13.33.9 (Tag 094A).
 -/
 
 @[expose] public section
@@ -194,18 +193,17 @@ private theorem telescope_boundary_eventually_zero
 
 /-- For compact `K`, the canonical comparison from the sequential colimit of `Hom(K, X n)`
 to `Hom(K, Y)` is bijective when `Y` belongs to the telescope triangle.
-Source: Stacks Project, Derived Categories, Tag 094A
-(blueprint: lem-pc-compact-hom-hocolim).
+Source: Stacks Project, Derived Categories, Tag 094A.
 
 The equations on the stage maps specify the canonical comparison uniquely by the colimit
 universal property. The coproduct index is lifted to the universe of compactness.
 
-Proof: put `A = ⨁ X n`. Compactness (`def-pc-compact-object`) identifies `Hom(K, A)`
+Proof: put `A = ⨁ X n`. Compactness identifies `Hom(K, A)`
 and `Hom(K, A[1])` with the sums of `Hom(K, X n)` and `Hom(K, X n[1])`.
 The endomorphism induced by identity minus shift becomes identity minus the transition
 shift on these sums. It is injective: its zeroth component forces the zeroth input to vanish,
 and induction forces every later component to vanish. Apply triangle exactness
-(`lem-weil-pbc-hom-into-triangle-exact`) and the vanishing of consecutive compositions to
+and the vanishing of consecutive compositions to
 the telescope triangle and its rotation. Every map `K → Y` then factors through `q`, and
 the kernel of postcomposition with `q` is the image of identity minus shift.
 Construct the comparison by the colimit universal property using stage compatibility.

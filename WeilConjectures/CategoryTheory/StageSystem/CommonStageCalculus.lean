@@ -27,9 +27,6 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcUniformReductionCriterion
 import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleCoefficientHomologyTriangulated
 /-! # The actual common-stage additive structure and shift
 
-Source: blueprint `prop-weil-pbc-common-stage-calculus`.
-(blueprint: prop-weil-pbc-common-stage-calculus)
-
 These generic constructions apply to the canonical exact scalar-extension system.
 They do not substitute an arbitrary system for the coefficient categories.
 The sigma used in the representative formula is the adjunction mate of derived
@@ -500,8 +497,7 @@ private theorem cscIntegralTriangulated (l : ℕ) [Fact l.Prime]
   exact ⟨inferInstance, inferInstance⟩
 
 /-- Signed reindexing preserves completion, bounded constructible reductions and
-compatible etale origins. Source: blueprint orders 1308--1309
-(blueprint: prop-weil-pbc-common-stage-calculus).
+compatible etale origins.
 Proof: tensor with each finite quotient commutes with signed reindexing. Shift
 all the bounded local models and all etale witnesses by the same integer; their
 bounds translate by that integer and their quotient equations are unchanged.
@@ -513,7 +509,6 @@ The Koszul completion tower is shifted termwise, so its limit and unit shift too
   infer_instance
 
 /-- The inherited shift remains linear for the actual constant-section action.
-Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: scalar multiplication is degreewise multiplication on complexes. Signed
 reindexing commutes with it. This passes to roofs in the ambient derived category
 and restricts to the full integral subcategory. -/
@@ -529,8 +524,7 @@ and restricts to the full integral subcategory. -/
   simp only [Functor.map_smul]
 
 /-- The rational shift is fixed on tensor Homs, including its unit and addition
-comparisons. Source: blueprint orders 1308--1309
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+comparisons. -/
 def PbcRationalShiftNormalized (E : Padic.FiniteCoefficientFields l Ω)
     (s : HasShift (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
       (pbcStageUniformizer.{u} l Ω E)) ℤ) : Prop := by
@@ -560,8 +554,7 @@ def PbcRationalShiftNormalized (E : Padic.FiniteCoefficientFields l Ω)
             (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E)) n m).hom.app K.obj)))
 
 /-- Tensoring the integral shift and its comparisons gives the unique normalized
-rational shift. Source: blueprint order 1309
-(blueprint: prop-weil-pbc-common-stage-calculus).
+rational shift.
 Proof: extend each integral shift linearly on tensor Homs via ScalarLocalization.map.
 Localize the integral zero and addition comparisons. Their coherence holds on
 integral maps and extends to all tensors by bilinearity. The object and map
@@ -575,14 +568,12 @@ theorem pbcRationalShift_exists (E : Padic.FiniteCoefficientFields l Ω) :
     (pbcStageUniformizer.{u} l Ω E)
 
 /-- The rational shift has actual signed-reindexing data, uniquely normalized on
-integral objects and tensor morphisms. Source: blueprint order 1309
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+integral objects and tensor morphisms. -/
 instance pbcRationalHasShift (E : Padic.FiniteCoefficientFields l Ω) :
     HasShift (PbcRationalCategory T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E)) ℤ :=
   (pbcRationalShift_exists l Ω T E).exists.choose
 
-/-- The tensor Hom shift is additive. Source: blueprint order 1309
-(blueprint: prop-weil-pbc-common-stage-calculus).
+/-- The tensor Hom shift is additive.
 Proof: its normalized Hom action is ScalarLocalization.map, whose mapHom is linear. -/
 @[instance] theorem pbcRationalShiftAdditive (E : Padic.FiniteCoefficientFields l Ω) (n : ℤ) :
     (shiftFunctor (PbcRationalCategory T (pbcStageDatum.{u} l Ω E)
@@ -592,7 +583,6 @@ Proof: its normalized Hom action is ScalarLocalization.map, whose mapHom is line
 
 set_option linter.unusedVariables false in
 /-- Localization commutes with shifts through the identity component comparison.
-Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: the normalized shift has the same objects and sends 1 tensor f to
 1 tensor f[n]. Thus identity components are natural, and the normalized zero
 and addition maps give the CommShift laws. The components imply uniqueness. -/
@@ -614,27 +604,23 @@ theorem pbcRationalizationShift_exists (E : Padic.FiniteCoefficientFields l Ω) 
     (PbcBoundedConstructibleComplete T (pbcStageDatum.{u} l Ω E))
     (pbcStageUniformizer.{u} l Ω E) h.1 h.2.1 h.2.2
 
-/-- The normalized identity comparison with rationalization.
-Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- The normalized identity comparison with rationalization. -/
 instance pbcRationalizationCommShift (E : Padic.FiniteCoefficientFields l Ω) :
     (pbcRationalization T (pbcStageDatum.{u} l Ω E) (pbcStageUniformizer.{u} l Ω E)).CommShift ℤ :=
   (pbcRationalizationShift_exists l Ω T E).exists.choose
 
-/-- Derived scalar restriction has its canonical exact-functor shift comparison.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- Derived scalar restriction has its canonical exact-functor shift comparison. -/
 instance pbcScalarRestrictCommShift (h : E ≤ F) :
     (pbcDerivedRestrict (pbcCompletedScalarMap l Ω T h)).CommShift ℤ :=
   inferInstanceAs (((pbcRestrict (pbcCompletedScalarMap l Ω T h)).mapDerivedCategory).CommShift ℤ)
 
 /-- The ambient tensor shift comparison is the mate of the canonical shift of
-scalar restriction. Source: blueprint order 1307
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+scalar restriction. -/
 instance pbcAmbientScalarCommShift (h : E ≤ F) :
     (pbcAmbientScalarExtension l Ω T h).CommShift ℤ :=
   (pbcDerivedScalarAdjunction (pbcCompletedScalarMap l Ω T h)).leftAdjointCommShift ℤ
 
-/-- The integral tensor comparison is inherited through its fully faithful inclusion.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- The integral tensor comparison is inherited through its fully faithful inclusion. -/
 instance pbcIntegralScalarCommShift (h : E ≤ F) :
     (pbcIntegralScalarExtension l Ω T hdim hl h).CommShift ℤ :=
   Functor.CommShift.ofComp
@@ -646,7 +632,6 @@ instance pbcIntegralScalarCommShift (h : E ≤ F) :
 
 set_option linter.unusedVariables false in
 /-- The rational tensor shift comparison is fixed by the actual integral comparison.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: localize the ambient tensor shift component on each integral object and
 conjugate by the normalized integral/rational square. Naturality extends from
 integral morphisms to their fractions. The integral zero and addition laws
@@ -669,8 +654,7 @@ theorem pbcScalarShift_exists (h : E ≤ F) :
     (pbcIntegralScalarExtension l Ω T hdim hl h ⋙ pbcStageLocalization l Ω T F)
     (pbcScalarExtension l Ω T hdim hl h) (pbcScalarIntegralComparison l Ω T hdim hl h)
 
-/-- The specified sigma comparison for finite coefficient extension.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- The specified sigma comparison for finite coefficient extension. -/
 instance pbcScalarCommShift (h : E ≤ F) :
     (pbcScalarExtension l Ω T hdim hl h).CommShift ℤ :=
   (pbcScalarShift_exists l Ω T hdim hl h).exists.choose
@@ -714,7 +698,6 @@ private theorem cscIntegralAssociatorShift (h : E ≤ F) (k : F ≤ G) :
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Tensor balancing commutes with the normalized sigma comparisons.
-Source: blueprint order 1307 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: the ambient associator is the mate of identity-on-sections restriction
 composition, which commutes with signed reindexing. Restrict and rationalize
 that equation; the normalizations of both comparisons preserve it. -/
@@ -743,7 +726,6 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- The actual raw rational stages have finite biproducts and a zero object.
-Source: blueprint orders 1308--1309 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: the zero complex and finite sums satisfy all three defining integral
 conditions: their reductions, local finite models and etale witnesses are the
 corresponding sums. Finite sums commute with the Koszul limit. Their inclusion
@@ -778,8 +760,6 @@ variable [stageShift : ∀ i, HasShift (C i) ℤ]
 include associatorShift
 
 /-- Compatibility of the shift comparisons with associators.
-Source: blueprint scalar-extension shifts and common-stage shift
-(blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: expand the composite functor's shift comparison in the CommShift equation
 for the associator. Its component equation is exactly the displayed compatibility. -/
 theorem pbcStageShift_coherence (n : ℤ) {i j k : I}
@@ -793,24 +773,18 @@ theorem pbcStageShift_coherence (n : ℤ) {i j k : I}
     Category.assoc] using
     NatTrans.shift_app_comm (S.assoc h h').hom n X
 
-/-- Shifting each finite stage gives a morphism of the actual stage system.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- Shifting each finite stage gives a morphism of the actual stage system. -/
 def pbcStageShift (n : ℤ) : S.Morphism S where
   Φ i := shiftFunctor (C i) n
   β h := (S.T h).commShiftIso n
   coh h h' X := pbcStageShift_coherence S n h h' X
 
 /-- The induced shift sends (E,K) literally to (E,K[n]) and acts on representatives
-by the prescribed shift-comparison conjugation.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+by the prescribed shift-comparison conjugation. -/
 def pbcPairShift (n : ℤ) : S.PairCategory ⥤ S.PairCategory :=
   (pbcStageShift S n).functor
 
 /-- Naturality of the stagewise zero-shift comparison on common-stage classes.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: represent f at one stage. The CommShift zero axiom identifies its conjugated
 shift with f, using naturality of the finite-stage zero comparison. Applying the
 common-stage quotient yields the displayed equation. -/
@@ -828,17 +802,13 @@ theorem pbcPairShiftZero_naturality {X Y : S.PairCategory} (f : X ⟶ Y) :
     simp [Morphism.mapAt, Functor.commShiftIso_zero,
       Functor.CommShift.isoZero, Category.assoc, ← Functor.map_comp]
 
-/-- The zero comparison is the actual image of the finite-stage zero comparison.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- The zero comparison is the actual image of the finite-stage zero comparison. -/
 def pbcPairShiftZero : pbcPairShift S 0 ≅ 𝟭 S.PairCategory :=
   NatIso.ofComponents
     (fun X ↦ (S.ι X.stage).mapIso ((shiftFunctorZero (C X.stage) ℤ).app X.obj))
     (fun f ↦ pbcPairShiftZero_naturality S f)
 
 /-- Naturality of the stagewise addition comparison on morphism classes.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: use one representative of f. The CommShift addition axiom rewrites both
 composites into the same shifted representative. Finite-stage naturality of
 shiftFunctorAdd proves equality before passing to the common-stage quotient. -/
@@ -862,9 +832,7 @@ theorem pbcPairShiftAdd_naturality (n m : ℤ) {X Y : S.PairCategory} (f : X ⟶
       Category.assoc, ← Functor.map_comp]
     simp only [Functor.map_comp, Category.assoc]
 
-/-- The addition comparison is the actual image of the finite-stage comparison.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- The addition comparison is the actual image of the finite-stage comparison. -/
 def pbcPairShiftAdd (n m : ℤ) :
     pbcPairShift S (n + m) ≅ pbcPairShift S n ⋙ pbcPairShift S m :=
   NatIso.ofComponents
@@ -872,8 +840,6 @@ def pbcPairShiftAdd (n m : ℤ) :
     (fun f ↦ pbcPairShiftAdd_naturality S n m f)
 
 /-- Coherence of the actual descended shift comparisons.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: each comparison component is the stage inclusion applied to the corresponding
 finite-stage shift comparison. The shift of an included map is its included finite-stage
 shift. Thus the three equations are the associativity and two unit equations of the
@@ -914,9 +880,7 @@ theorem pbcPairShift_laws :
       pbcStageShift, Functor.map_comp, eqToHom_map,
       Morphism.functor_obj] using h
 
-/-- The common-stage shift with the actual finite-stage unit and addition maps.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- The common-stage shift with the actual finite-stage unit and addition maps. -/
 def pbcPairShiftCore : ShiftMkCore S.PairCategory ℤ where
   F := pbcPairShift S
   zero := pbcPairShiftZero S
@@ -925,24 +889,19 @@ def pbcPairShiftCore : ShiftMkCore S.PairCategory ℤ where
   zero_add_hom_app := (pbcPairShift_laws S).2.1
   add_zero_hom_app := (pbcPairShift_laws S).2.2
 
-/-- The canonical HasShift structure; its object action is (E,K) ↦ (E,K[n]).
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- The canonical HasShift structure; its object action is (E,K) ↦ (E,K[n]). -/
 @[instance_reducible] def pbcPairHasShift : HasShift S.PairCategory ℤ :=
   hasShiftMk S.PairCategory ℤ (pbcPairShiftCore S)
 
 attribute [instance] pbcPairHasShift
 
 /-- The canonical comparison for the finite-stage inclusion is the inverse of the
-upstream stage-morphism comparison. Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+upstream stage-morphism comparison. -/
 def pbcStageInclusionShiftIso (i : I) (n : ℤ) :
     shiftFunctor (C i) n ⋙ S.ι i ≅ S.ι i ⋙ shiftFunctor S.PairCategory n :=
   ((pbcStageShift S n).ιCompFunctorIso i).symm
 
 /-- The inclusion comparisons retain the zero and addition normalization of the stages.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: the comparison components for an included object are identities in the pair
 category. Its compatibility with the zero and addition comparisons follows because
 those were defined as the actual images of the same finite-stage comparisons. -/
@@ -964,9 +923,7 @@ theorem pbcStageInclusionShift_laws (i : I) :
     simp [pbcStageInclusionShiftIso, Morphism.ιCompFunctorIso,
       pbcPairShiftAdd, ι_obj, Morphism.functor_obj, pbcStageShift, ← Functor.map_comp]
 
-/-- Finite-stage inclusions commute with the actual common-stage shift.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- Finite-stage inclusions commute with the actual common-stage shift. -/
 instance pbcStageInclusionCommShift (i : I) : (S.ι i).CommShift ℤ where
   commShiftIso := pbcStageInclusionShiftIso S i
   commShiftIso_zero := (pbcStageInclusionShift_laws S i).1
@@ -979,8 +936,6 @@ variable [stagePreadditive : ∀ i, Preadditive (C i)]
 include stagePreadditive transitionAdditive stageShiftAdditive
 
 /-- The descended shift preserves the actual common-stage addition formula.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: represent two morphisms at a common stage. The stage shift is additive,
 and pre- and post-composition by its comparison isomorphisms preserve sums.
 The common-stage Hom quotient therefore identifies the shifted sum with the
@@ -1006,8 +961,6 @@ attribute [instance] pbcPairShift_additive
 variable [∀ i, Limits.HasZeroObject (C i)]
 
 /-- An included finite-stage zero object is a genuine zero object of the pair category.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: move a morphism from or to this object to any common stage. Additivity
 of transition functors sends a zero object to a zero object, so its arrow is
 uniquely zero there. The common-stage quotient preserves this equality. -/
@@ -1022,9 +975,7 @@ theorem pbcPairZero_isZero (i : I) :
   rw [e, Functor.map_zero]
   exact ((S.pairPreadditive_exists).exists.choose_spec _ _ i _ _ 0 0).2
 
-/-- Existence of a zero object, witnessed by the image of any finite-stage zero.
-Source: blueprint common-stage calculus
-(blueprint: prop-weil-pbc-common-stage-calculus). -/
+/-- Existence of a zero object, witnessed by the image of any finite-stage zero. -/
 instance pbcPairHasZeroObject [Nonempty I] : Limits.HasZeroObject S.PairCategory :=
   (pbcPairZero_isZero S (Classical.choice (inferInstance : Nonempty I))).hasZeroObject
 
@@ -1035,7 +986,6 @@ section FiniteDiagrams
 variable [Nonempty I]
 
 /-- Finite graphs of objects and arrows have simultaneous representatives.
-Source: blueprint common-stage calculus (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: choose one representative for each of the finitely many arrows. Directedness
 provides one upper bound for their stages and for the finitely many object stages.
 Transport every representative to that upper bound. The associator cocycle identifies
@@ -1066,7 +1016,6 @@ variable [∀ i, Preadditive (C i)]
     [∀ i, Limits.HasFiniteBiproducts (C i)]
 
 /-- Finite direct sums descend without adjoining new objects.
-Source: blueprint common-stage calculus (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof: transport the finitely many objects to one stage and take their biproduct
 there. Include its injections and projections in the pair category. To test the
 biproduct equations or its universal property, transport the finitely many arrows
@@ -1105,8 +1054,7 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
       NatTrans.CommShift (S.assoc h h').hom ℤ]
 
 /-- All finitely many asserted equalities are detected simultaneously at one
-further stage. Source: blueprint order 1309
-(blueprint: prop-weil-pbc-common-stage-calculus).
+further stage.
 Proof: choose the eventual-equality witness for each equation and take an upper
 bound of their finitely many stages and the prescribed starting stage. The
 transport cocycle preserves each equality. Conversely the common stage witnesses
@@ -1135,8 +1083,7 @@ theorem pbcFiniteEqualities_detection {A : Type c} [Finite A]
     exact (PairCategory.mkHom_eq_mkHom_iff' _ _).mpr ⟨N, hr a, hs a, e a⟩
 
 /-- A literal clause-by-clause specification of the common-stage calculus, using
-actual typed representatives, quotient morphisms and sigma comparisons.
-Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus). -/
+actual typed representatives, quotient morphisms and sigma comparisons. -/
 structure CommonStageCalculusSpec : Prop where
   relation : ∀ X Y : S.PairCategory,
     _root_.Equivalence (PairCategory.Rep.Rel (X := X) (Y := Y))
@@ -1230,7 +1177,6 @@ open CategoryTheory.StageSystem
 
 /-- Common-stage additive and shift calculus for the concrete finite coefficient
 system of the node, with no arbitrary stage-category parameter.
-Source: blueprint order 1309 (blueprint: prop-weil-pbc-common-stage-calculus).
 Proof plan: (1) Integral finite sums and signed shifts preserve K-flatness,
 completion and the normalized reduction towers. (2) The full integral categories
 and their tensor-Hom rationalizations inherit the finite-stage additive structures.

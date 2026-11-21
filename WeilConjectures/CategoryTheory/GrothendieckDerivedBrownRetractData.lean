@@ -27,8 +27,7 @@ namespace CategoryTheory
 
 /-- Gabriel-Popescu localization followed by Brown representability on the module
 category supplies a representation of the pullback of H.  Source: Stacks Project,
-Tag 0F5X, `injectives-lemma-brown`, first paragraph, and Tag 0F5V.
-(auxiliary; not a blueprint node)
+Tag 0F5X, `injectives-, first paragraph, and Tag 0F5V.
 
 Proof in words: choose a Gabriel-Popescu presentation by modules over the endomorphism
 ring of a generator. Its exact localization induces L on derived categories, with

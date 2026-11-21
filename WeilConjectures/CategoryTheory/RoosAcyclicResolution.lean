@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.RoosPrefixAcyclic
 # The functorial acyclic resolution of a tower
 
 The finite-prefix construction of Stacks Project, Tag 07KW, Lemma 15.88.1.
-(blueprint: lem-pc-roos-functorial-acyclic-resolution).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace CategoryTheory
 open Limits
 
 /-- The product of all levels of a tower, with componentwise maps. 
-(blueprint: lem-pc-roos-functorial-acyclic-resolution)
 -/
 noncomputable def roosProductFunctor :
     (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u} where
@@ -46,7 +44,6 @@ noncomputable def roosProductFunctor :
     simp
 
 /-- The natural endomorphism `1 - shift` of the levelwise product functor. 
-(blueprint: lem-pc-roos-functorial-acyclic-resolution)
 -/
 noncomputable def roosProductDifferential :
     roosProductFunctor.{u} ⟶ roosProductFunctor.{u} where
@@ -111,7 +108,6 @@ private theorem prefixLimitDifferential (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
 /-- Finite-prefix towers give a functorial length-one limit-acyclic resolution.
 
 Source: Stacks Project, More on Algebra, Tag 07KW, Lemma 15.88.1, proof.
-(blueprint: lem-pc-roos-functorial-acyclic-resolution).
 
 Proof: for a tower A indexed starting at zero, put U(A)_n = product of A_i for
 0 <= i <= n, and V(A)_n = product of A_i for 0 <= i < n. Transitions forget

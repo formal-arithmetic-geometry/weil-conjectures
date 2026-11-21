@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Cones
 
 /-! # Essentially constant cofiltered diagrams
 
-Source: Stacks Project, Categories, Definition 05PU
-(blueprint: def-pc-essentially-constant-pro-diagram).
+Source: Stacks Project, Categories, Definition 05PU.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ natural maps `u j : X ⟶ D.obj j`, a retraction `r : D.obj j₀ ⟶ X` of `u j�
 `j` a common earlier stage `k` at which the transition map to `j` factors through
 `k ⟶ j₀`, `r` and `u j`.
 
-Source: Stacks Project, Categories, Definition 05PU(2)
-(blueprint: def-pc-essentially-constant-pro-diagram). -/
+Source: Stacks Project, Categories, Definition 05PU(2). -/
 def IsEssentiallyConstantProDiagram {J : Type uJp} {C : Type uCp}
     [Category.{vJp} J] [Category.{vCp} C] (D : J ⥤ C) (X : C) : Prop :=
   IsCofiltered J ∧ ∃ u : (Functor.const J).obj X ⟶ D, ∃ j₀ : J, ∃ r : D.obj j₀ ⟶ X,

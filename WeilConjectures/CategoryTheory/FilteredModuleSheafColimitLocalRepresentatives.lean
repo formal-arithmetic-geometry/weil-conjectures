@@ -27,7 +27,7 @@ namespace CategoryTheory
 
 /-- Every section of a filtered sheaf colimit locally comes from a diagram stage.
 Source: Stacks Project, Sites, Tag 0738, proof of (4), local representability before
-finite selection (blueprint: lem-weil-pbc-filtered-module-sheaf-colimit-local-representatives).
+finite selection.
 
 Proof (the local-image argument written out by Y2): Inside the colimit sheaf H, take
 the sectionwise union of the images of all

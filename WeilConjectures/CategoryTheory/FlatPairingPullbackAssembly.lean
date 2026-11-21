@@ -20,7 +20,6 @@ namespace CategoryTheory
 
 /-- A canonical tensorator pullback square and naturality imply the square for pairings.
 Source: Stacks, Cohomology on Sites, Tag 06YU, functoriality of derived tensor comparisons.
-(auxiliary; not a blueprint node).
 Proof: use naturality of the single/pullback comparison on the pairing map. Apply the
 ordinary pullback square under the single functor. Its initial tensor comparison is
 the assumed canonical square. Naturality of the target tensorator moves the two

@@ -34,8 +34,7 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- Only the tensor and unit part of a full action-site presentation.
-Source: steps 9--10 and the tensor part of step 13 of the twisted Stacks 00W0 argument
-(blueprint: lem-sf-twisted-action-tensor-comparisons). -/
+Source: steps 9--10 and the tensor part of step 13 of the twisted Stacks 00W0 argument. -/
 structure TensorComparisons (P : RestrictionPresentation J s R a) where
   /-- The restriction of the sheaf tensor is the ordinary sheaf tensor. -/
   tensor :
@@ -381,9 +380,7 @@ private theorem restrictedUnitIso_action (P : RestrictionPresentation J s R a) :
 attribute [irreducible] restrictedTensorIso translatedTensorIso
 
 /-- Restriction and translation preserve the normalized tensor and unit.
-Source: steps 9--10 and the tensor part of step 13 of the twisted Stacks 00W0 argument;
-Stacks 03EK for the sheafified sectionwise tensor.
-(blueprint: lem-sf-twisted-action-tensor-comparisons).
+Source: steps 9--10 and the tensor part of step 13 of the twisted Stacks 00W0 argument; Stacks 03EK for the sheafified sectionwise tensor.
 
 Proof: the degree-zero inclusion is continuous and cocontinuous. Restriction therefore
 preserves local injectivity and local surjectivity of presheaf morphisms. Transpose the

@@ -74,7 +74,7 @@ variable {R B : Type u} [CommRing R] [CommRing B] (φ : R →+* B)
   [HasDerivedCategory.{u} (ModuleCat.{u} B)]
   [Abelian.HasFunctorialFlatResolution (ModuleCat.{u} B)]
 
-/-- Blueprint `proposition-properties-trace`, item (3) (scalar extension): let `φ : R →+* B` be a
+/-- item (3) (scalar extension): let `φ : R →+* B` be a
 homomorphism of commutative rings, `P` a bounded complex of finitely generated free `R`-modules
 and `v` a chain endomorphism of `P`. Since `P` is degreewise free, `P ⊗^L_R B` is represented by
 the termwise scalar extension `P_B = B ⊗[R] P`, with endomorphism `v_B = B ⊗[R] v`. Then the

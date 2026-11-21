@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Whiskering
 /-! # Component form of normalized descent
 
 The categorical component calculation used for normalized integral pullback descent.
-Source: Stacks Project, Tag 099N(5); normalized descent universal property
-(blueprint: lem-pur-integral-pullback-descent-components).
+Source: Stacks Project, Tag 099N(5).
 -/
 
 @[expose] public section
@@ -22,8 +21,7 @@ universe u₁ u₂ u₃ v₁ v₂ v₃
 namespace CategoryTheory
 
 /-- Rewrite a normalized descent universal property as equations on representatives.
-Source: Stacks Project, Tag 099N(5), the categorical part of normalized descent
-(blueprint: lem-pur-integral-pullback-descent-components).
+Source: Stacks Project, Tag 099N(5), the categorical part of normalized descent.
 Proof: apply the given universal property to G and c. Evaluate its compatibility
 equation at each representative P, then cancel c(P) to obtain the component formula.
 Conversely, compose every proposed component formula with c(P). Cancel the inverse

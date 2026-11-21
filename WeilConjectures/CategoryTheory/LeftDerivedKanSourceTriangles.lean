@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.LeftDerivedKanTriangleValueComparison
 /-! # Distinguished source triangles under a left derived Kan extension
 
 Source: Stacks Project, Derived Categories, Lemmas Tags 05SA, 05SU, 05SC.
-(blueprint: lem-pur-left-derived-kan-source-triangles).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace CategoryTheory.Functor
 /-- The supplied shift-compatible Kan extension preserves distinguished source triangles.
 Source: Stacks Project, Derived Categories, Lemmas Tags 05SA, 05SU, 05SC,
 and the pointwise Kan interpretation of Definition Tag 05S9.
-(blueprint: lem-pur-left-derived-kan-source-triangles).
 
 Proof: Essential constancy at every X gives a limit over the denominator category.
 The pointwise Kan bridge extends each such limit to the structured-arrow diagram at Q(X).

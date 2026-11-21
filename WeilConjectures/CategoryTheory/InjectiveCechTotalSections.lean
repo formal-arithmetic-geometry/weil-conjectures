@@ -17,7 +17,7 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 /-!
 # Total Čech cohomology of a complex of injective sheaves
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 3; Stacks Project Tags 03AW
+Source: Stacks Project Tags 03AW
 and 03F6.
 -/
 
@@ -85,8 +85,6 @@ private theorem restriction₀_d
   simp
 
 /-- Row augmentation before extension by zero.
-Source: blueprint lem-sc-injective-cech-total-sections, proof Steps 1--3.
-(blueprint: lem-sc-injective-cech-total-sections-nat)
 Proof: Apply injective Čech acyclicity and the chosen-product comparison to each
 row, then apply the first-quadrant column augmentation criterion. -/
 theorem injective_cech_total_sections_nat
@@ -159,9 +157,7 @@ theorem injective_cech_total_sections_nat
 This is a statement about any nonnegative complex of injective sheaves, with no
 resolution, Ext, or sheaf-cohomology hypothesis.
 
-Source: blueprint lemma-coherent-base-change-invertible-sheaves--1, Step 3;
-lem-sc-cech-resolution-total, Steps 1--2; Stacks Project Tags 03AW and 03F6.
-(blueprint: lem-sc-injective-cech-total-sections)
+Source: Stacks Project Tags 03AW and 03F6.
 
 Proof: Regard J as its associated precoverage. Choose iterated fibre products of the
 covering; the comparison with Mathlib's Čech complex intertwines the alternating

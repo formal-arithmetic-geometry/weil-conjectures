@@ -16,8 +16,8 @@ import Mathlib.LinearAlgebra.Dimension.Free
 
 /-! # Finite free approximation in one homology degree
 
-Source: Stacks Project, Tag 0944, and the current scalar-extension blueprint
-clause (2), bpq #46. (blueprint: lem-sp-finite-free-approximation-homology).
+Source: Stacks Project, Tag 0944, and the current blueprint
+clause (2), bpq #46.
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +28,7 @@ namespace CochainComplex
 
 set_option backward.defeqAttrib.useBackward true in
 /-- Bounded complexes are finite iterated extensions of their terms placed in their
-actual degrees. Source: Stacks 066H
-(blueprint: lem-sp-finite-free-approximation-homology).
+actual degrees. Source: Stacks 066H.
 Proof: induct on the length of the support, using the degreewise split stupid
 truncation triangle. A single supported degree is the single complex, and an empty
 support is zero. This reuses the source-library bounded-term induction. -/
@@ -95,7 +94,7 @@ end CochainComplex
 namespace DerivedCategory
 
 /-- Finite free terms map into a triangulated class once the rank-one term does.
-Source: Stacks 0944 (blueprint: lem-sp-finite-free-approximation-homology).
+Source: Stacks 0944.
 Proof: a finite free module is a finite power of R, including the zero-ring case.
 An additive functor preserves finite products. The image of a single in degree i
 is the shift by -i of its image in degree zero. -/
@@ -130,8 +129,7 @@ theorem triangulatedImage_single_free
 
 /-- A triangulated functor with a uniform upper bound admits finite-free comparisons
 in every homology degree at every finitely presented module over a Noetherian ring.
-Source: Stacks 0944; blueprint scalar extension (2), bpq #46
-(blueprint: lem-sp-finite-free-approximation-homology).
+Source: Stacks 0944.
 Proof: choose a bounded finite-free approximation to M[0] whose error cone is at most
 r-d-2. Its image cone is at most r-2. The long exact homology sequence makes the
 comparison invertible in degree r. The approximation image lies in P by the bounded-term

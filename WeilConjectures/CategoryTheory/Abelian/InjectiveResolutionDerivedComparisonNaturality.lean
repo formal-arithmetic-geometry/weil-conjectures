@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.Embedding.ExtendHomotopy
 # Naturality of the explicit derived resolution comparison
 
 Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
-(blueprint: lem-sc-p1-injective-resolution-derived-comparison-naturality).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The explicit comparison is natural for any compatible map of resolutions.
 
 Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
-(blueprint: lem-sc-p1-injective-resolution-derived-comparison-naturality).
 
 Proof: Use naturality of the chosen-resolution comparison. The two composites
 from the chosen source resolution to the specified target resolution lift the

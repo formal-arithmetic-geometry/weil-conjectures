@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.GrothendieckHypercohomologyEdge
 /-! # Comparing the Grothendieck edge with the cocycle quotient
 
 Source: Stacks Project, Derived Categories, Tags 015N and 015J, with the
-quotient/inclusion edge of the double-complex model
-(blueprint: lem-pc-grothendieck-cocycle-comparison).
+quotient/inclusion edge of the double-complex model.
 -/
 
 @[expose] public section
@@ -30,9 +29,7 @@ The morphism c is given, and only its compatibility with the cycle inclusions is
 This lemma asserts no existence of c, no filtration properties, and no collapse criterion.
 
 Source: the Cartan--Eilenberg construction of Stacks Project, Derived Categories,
-Tags 015N and 015J; the explicit cocycle calculation in step 2 of
-lem-pc-grothendieck-edge-cocycle
-(blueprint: lem-pc-grothendieck-cocycle-comparison).
+Tags 015N and 015J.
 
 Proof:
 Choose a Cartan--Eilenberg resolution of F(I), extending I by zero in negative degrees.

@@ -33,8 +33,7 @@ import all WeilConjectures.SecSmoothPurity.CochainInverseComparison
 /-! # Constant scalar restriction and tensor products
 
 Source: Stacks Project, Modules on Sites, Tags 03CY and 0GMW, and Cohomology on Sites,
-Tags 06YN, 06YP, 06YS, 0G7D, 06YT and 06YU
-(auxiliary; not a blueprint node).
+Tags 06YN, 06YP, 06YS, 0G7D, 06YT and 06YU.
 
 The coefficient-sized small site implements the size convention. The restriction is the
 existing literal restriction along the constant commutative-ring sheafification unit.
@@ -107,7 +106,7 @@ private theorem flatResolutionTransport
     infer_instance
 
 /-- Cache the canonical signed-total monoidal structure on complexes.
-Source: Stacks 06YN (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN. -/
 @[instance_reducible]
 def complexTensorMemo (D : Type dU) [Category.{dV} D] [Abelian D]
     [HasColimitsOfSize.{0, 0} D] [MonoidalCategory D] [MonoidalClosed D]
@@ -115,7 +114,7 @@ def complexTensorMemo (D : Type dU) [Category.{dV} D] [Abelian D]
     MonoidalCategory (CochainComplex D ℤ) := inferInstance
 
 /-- Cache the canonical K-flat localization monoidal structure.
-Source: Stacks 06YT (auxiliary; not a blueprint node). -/
+Source: Stacks 06YT. -/
 @[instance_reducible]
 def derivedTensorMemo (D : Type dU) [Category.{dV} D] [Abelian D]
     [IsGrothendieckAbelian.{dV} D] [HasColimitsOfSize.{0, 0} D]
@@ -127,7 +126,7 @@ attribute [local instance] complexTensorMemo derivedTensorMemo
 
 /-- Koszul symmetry compatibility for a termwise monoidal functor, expressed once
 with abstract coefficient-category structures.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks 06YL. -/
 def ComplexSymmetryCompatibility
     (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
     [Abelian D] [Abelian E]
@@ -142,7 +141,7 @@ def ComplexSymmetryCompatibility
 
 /-- The acyclic test and both quasi-isomorphism tests for the termwise image of a
 complex, formulated once over abstract coefficient categories.
-Source: Stacks 06YN and 06YP (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN and 06YP. -/
 def KFlatComparison
     (D : Type dU) (E : Type u) [Category.{dV} D] [Category.{v} E]
     [Abelian D] [Abelian E] [MonoidalCategory D] [MonoidalCategory E]
@@ -234,17 +233,17 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   (B : Type (max u v)) [CommRing B]
 
 /-- The specified constant commutative ring sheaf, not an arbitrary coefficient ring.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 def ring := (constantSheaf J CommRingCat.{max u v}).obj (CommRingCat.of B)
 
 /-- The existing ringed-site module category at the constant ring.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 abbrev Modules := SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj (ring J B))
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Exact fixed-coefficient sheafification, transported from the small model of the site.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 instance fixedSheafify : HasSheafify J (ModuleCat.{max u v} B) :=
   letI : PreservesFilteredColimitsOfSize.{max u v, max u v}
       (CategoryTheory.forget (ModuleCat.{max u v} B)) :=
@@ -255,90 +254,84 @@ instance fixedSheafify : HasSheafify J (ModuleCat.{max u v} B) :=
   hasSheafifyEssentiallySmallSite J (ModuleCat.{max u v} B)
 
 /-- The existing fixed-coefficient sheaf category.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 abbrev Fixed := Sheaf J (ModuleCat.{max u v} B)
 
 /-- Cache the existing abelian structure of module sheaves.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks 03DA. -/
 instance ringAbelian : Abelian (Modules J B) := inferInstance
 
 /-- Cache the abelian structure supplied by exact sheafification.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 instance fixedAbelian : Abelian (Fixed J B) := inferInstance
 
 /-- Use the additive structure of this same abelian category throughout.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks 03DA. -/
 instance ringPreadditive : Preadditive (Modules J B) :=
   (ringAbelian J B).toPreadditive
 
 /-- Use the additive structure of the fixed-coefficient abelian category throughout.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks 03DA. -/
 instance fixedPreadditive : Preadditive (Fixed J B) :=
   (fixedAbelian J B).toPreadditive
 
 /-- The canonical additive zero morphisms, used uniformly in complex constructions.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 instance ringZeroMorphisms : HasZeroMorphisms (Modules J B) :=
   Preadditive.preadditiveHasZeroMorphisms
 
 /-- The canonical additive zero morphisms on fixed-coefficient module sheaves.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 instance fixedZeroMorphisms : HasZeroMorphisms (Fixed J B) :=
   Preadditive.preadditiveHasZeroMorphisms
 
 /-- The recorded restriction, with precisely the action induced by the sheafification unit.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 def restriction : Modules J B ⥤ Fixed J B :=
   SheafOfModules.restrictScalars
     ((constantCommuteCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).inv.app
       (CommRingCat.of B)) ⋙ constantRingModuleRestriction J B
 
 /-- Use the recorded sheafified objectwise tensor structure.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 instance fixedMonoidal : MonoidalCategory (Fixed J B) :=
   (sfbSheafTensorStructure (A := ModuleCat.{max u v} B) J).monoidal
 
 /-- Use the symmetry of that same sheafified tensor.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 instance fixedSymmetric : SymmetricCategory (Fixed J B) :=
   (sfbSheafTensorStructure (A := ModuleCat.{max u v} B) J).symmetric
 
-/-- Closedness of the recorded tensor, characterized by its tensor--Hom adjunction.
-Source: sk-def-sfb-sheaf-tensor (auxiliary; not a blueprint node). -/
+/-- Closedness of the recorded tensor, characterized by its tensor--Hom adjunction. -/
 instance fixedClosed : MonoidalClosed (Fixed J B) :=
   (sfbSheafTensor_properties.{u, v, (max u v) + 1, max u v, 0, 0}
     (A := ModuleCat.{max u v} B) J).2.1.some
 
-/-- Tensoring preserves the coproducts used in the signed total.
-Source: sk-def-sfb-sheaf-tensor (auxiliary; not a blueprint node). -/
+/-- Tensoring preserves the coproducts used in the signed total. -/
 instance fixedLeftColimits (M : Fixed J B) :
     PreservesColimitsOfSize.{0, 0} (tensorLeft M) :=
   (sfbSheafTensor_properties.{u, v, (max u v) + 1, max u v, 0, 0}
     (A := ModuleCat.{max u v} B) J).2.2 M |>.1
 
-/-- Tensoring on the other side preserves those coproducts.
-Source: sk-def-sfb-sheaf-tensor (auxiliary; not a blueprint node). -/
+/-- Tensoring on the other side preserves those coproducts. -/
 instance fixedRightColimits (M : Fixed J B) :
     PreservesColimitsOfSize.{0, 0} (tensorRight M) :=
   (sfbSheafTensor_properties.{u, v, (max u v) + 1, max u v, 0, 0}
     (A := ModuleCat.{max u v} B) J).2.2 M |>.2.1
 
-/-- Cache additivity of the recorded sheaf tensor.
-Source: blueprint sk-def-sfb-sheaf-tensor
-(auxiliary; not a blueprint node). -/
+/-- Cache additivity of the recorded sheaf tensor. -/
 instance fixedTensorAdditive : MonoidalPreadditive (Fixed J B) :=
   sfbSheafTensor_monoidalPreadditive
 
 /-- The canonical ringed tensor structure, cached before generator formulas.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 instance ringMonoidal : MonoidalCategory (Modules J B) := inferInstance
 
 /-- Symmetry of the cached ringed tensor structure.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 instance ringSymmetric : SymmetricCategory (Modules J B) := inferInstance
 
-/-- Restriction is additive. Source: Stacks 03CY
-(auxiliary; not a blueprint node).
+/-- Restriction is additive. Source: Stacks 03CY.
 Proof: the section homomorphisms are unchanged, so sums of maps are unchanged (step 1). -/
 @[instance] theorem additive : (restriction J B).Additive := by
   constructor
@@ -365,8 +358,7 @@ private def restrictCancelIso {R S : Sheaf J RingCat.{max u v}}
     ext U x
     rfl
 
-/-- Restriction is an equivalence. Source: Stacks 03CY
-(auxiliary; not a blueprint node).
+/-- Restriction is an equivalence. Source: Stacks 03CY.
 Proof: step 1 uses lem-cbc-constant-ring-module-sheaves. Extend the scalar action locally;
 uniqueness on the original abelian sheaf gives the inverse and both inverse identities.
 The CommRingCat presentation is identified with RingCat by constantCommuteCompose. -/
@@ -385,7 +377,7 @@ The CommRingCat presentation is identified with RingCat by constantCommuteCompos
     (SheafOfModules.restrictScalars c.inv ⋙ constantRingModuleRestriction J B).IsEquivalence
 
 /-- Restriction is exact for the two abelian categories.
-Source: Stacks 03CY and 0038 (auxiliary; not a blueprint node).
+Source: Stacks 03CY and 0038.
 Proof: step 1 applies lem-galois-equivalence-preserves-limits to the equivalence and
 its inverse. In particular both preserve kernels and cokernels, hence finite limits
 and finite colimits. -/
@@ -394,7 +386,7 @@ theorem exact : exactFunctor _ _ (restriction J B) := by
     inferInstanceAs (PreservesFiniteColimits (restriction J B))⟩
 
 /-- The local pure tensor in the ordinary ringed-site tensor.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 def ringPure (M N : Modules J B) (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj U) :
     (M ⊗ N).val.obj U :=
   (SheafOfModules.tensorObjIsoSheafification M N).inv.val.app U
@@ -402,27 +394,24 @@ def ringPure (M N : Modules J B) (U : Cᵒᵖ) (x : M.val.obj U) (y : N.val.obj 
       (x ⊗ₜ[(ring J B).obj.obj U] y))
 
 /-- The local pure tensor in the sheafified objectwise fixed-ring tensor.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 def fixedPure (M N : Fixed J B) (U : Cᵒᵖ) (x : M.obj.obj U) (y : N.obj.obj U) :
     (M ⊗ N).obj.obj U :=
   (sfbSheafTensor_comparison J M N).inv.hom.app U
     ((toSheafify J (M.obj ⊗ N.obj)).app U (x ⊗ₜ[B] y))
 
-/-- Identify the fixed tensor unit with the recorded constant module sheaf.
-Source: blueprint sk-def-sfb-sheaf-tensor
-(auxiliary; not a blueprint node). -/
+/-- Identify the fixed tensor unit with the recorded constant module sheaf. -/
 def fixedUnitIso : 𝟙_ (Fixed J B) ≅ (constantSheaf J (ModuleCat B)).obj (ModuleCat.of B B) :=
   eqToIso (sfbSheafTensor_properties.{u, v, (max u v) + 1, max u v, 0, 0}
     (A := ModuleCat.{max u v} B) J).1
 
 /-- The image of a constant scalar in the fixed tensor unit.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 def fixedUnitScalar (U : Cᵒᵖ) (b : B) : (𝟙_ (Fixed J B)).obj.obj U :=
   (fixedUnitIso J B).inv.hom.app U
     ((toSheafify J ((Functor.const Cᵒᵖ).obj (ModuleCat.of B B))).app U b)
 
-/-- The normalized coherent ordinary comparison. Source: Stacks 0GMW
-(auxiliary; not a blueprint node).
+/-- The normalized coherent ordinary comparison. Source: Stacks 0GMW.
 The braided monoidal structure includes naturality, associators, both unitors and symmetry.
 The generator equations determine its tensorator and unit, hence determine its data uniquely. -/
 structure Ordinary where
@@ -1010,8 +999,7 @@ private def ordinaryMonoidal : (restriction J B).Monoidal := by
   exact monoidalKeepingLax (restriction J B)
 
 /-- Existence of the normalized ordinary tensor comparison.
-Source: Stacks 03CY and 0GMW
-(auxiliary; not a blueprint node).
+Source: Stacks 03CY and 0GMW.
 Proof: Compose sectionwise lax braided scalar restriction with the lax inclusion of
 module sheaves and strong braided fixed-coefficient sheafification. Transport across the
 sheafification counit to the literal restriction. The adjunction triangle identity makes
@@ -1054,52 +1042,52 @@ theorem ordinary_exists : Nonempty (Ordinary J B) := by
 end OrdinaryProof
 /-- The canonical ordinary structure, uniquely determined by both pure-tensor equations
 and the constant-scalar unit equation in `Ordinary`.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 def ordinary : Ordinary J B := (ordinary_exists J B).some
 
 /-- The canonical normalized braided structure on restriction.
-Source: Stacks 0GMW (auxiliary; not a blueprint node). -/
+Source: Stacks 0GMW. -/
 instance restrictionBraided : (restriction J B).Braided := (ordinary J B).braided
 
 /-- The existing Grothendieck structure of module sheaves.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks 03DA. -/
 instance ringGrothendieck : IsGrothendieckAbelian.{max u v} (Modules J B) :=
   SheafOfModules.isGrothendieckAbelian_coefficientUniverse _
 
 /-- Transport the Grothendieck structure along the actual restriction equivalence.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 instance fixedGrothendieck : IsGrothendieckAbelian.{max u v} (Fixed J B) :=
   IsGrothendieckAbelian.of_equivalence (restriction J B).asEquivalence
 
 /-- Cache countable colimits in fixed-coefficient module sheaves.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 instance fixedSmallColimits : HasColimitsOfSize.{0, 0} (Fixed J B) :=
   letI : HasColimitsOfSize.{max u v, max u v} (Fixed J B) :=
     IsGrothendieckAbelian.hasColimits (Fixed J B)
   hasColimitsOfSizeShrink.{0, 0, max u v, max u v} (Fixed J B)
 
 /-- The discrete colimits used in signed totals, at their actual index size.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks 06YL. -/
 instance fixedDiscreteColimits (I : Type) : HasColimitsOfShape (Discrete I) (Fixed J B) :=
   (fixedSmallColimits J B).has_colimits_of_shape (Discrete I)
 
 /-- Evaluate the preceding discrete-colimit instance without searching for a new size.
-Source: Stacks 06YL (auxiliary; not a blueprint node). -/
+Source: Stacks 06YL. -/
 instance fixedDiscreteColimit {I : Type} (F : Discrete I ⥤ Fixed J B) : HasColimit F :=
   (fixedDiscreteColimits J B I).has_colimit F
 
 /-- Countable coproducts for the two-sided quasi-isomorphism test.
-Source: Stacks 06YP (auxiliary; not a blueprint node). -/
+Source: Stacks 06YP. -/
 instance fixedCountableCoproducts : HasCountableCoproducts (Fixed J B) where
   out I _ := fixedDiscreteColimits J B I
 
 /-- Closedness of the existing ringed-site tensor at the independent site universes.
-Source: Stacks 03EO (auxiliary; not a blueprint node). -/
+Source: Stacks 03EO. -/
 instance ringClosed : MonoidalClosed (Modules J B) :=
   (SheafOfModules.nonempty_monoidalClosed_independentCoefficients (R := ring J B)).some
 
 /-- Flatness is preserved and reflected.
-Source: Stacks 03ER (auxiliary; not a blueprint node).
+Source: Stacks 03ER.
 Proof: step 5 conjugates right tensor by the normalized tensor isomorphism and the
 exact equivalence from step 1. Exactness is invariant under these conjugations. -/
 theorem flat_iff (M : Modules J B) :
@@ -1115,7 +1103,7 @@ theorem flat_iff (M : Modules J B) :
 
 /-- The acyclic-test K-flat condition agrees on both sides and agrees with the two-sided
 quasi-isomorphism test.
-Source: Stacks 06YN and 06YP (auxiliary; not a blueprint node).
+Source: Stacks 06YN and 06YP.
 Proof: step 5 lifts every acyclic fixed-coefficient complex by the inverse exact
 equivalence. Step 4 identifies its total tensor with the image of the ringed total tensor.
 Step 6 uses lem-pc-tensor-mapping-cone-iso and lem-pur-quasi-iso-cone-acyclic to pass from
@@ -1131,12 +1119,12 @@ theorem kflat_iff (P : CochainComplex (Modules J B) ℤ) :
   exact abstract_kflat_comparison (restriction J B) P
 
 /-- The recorded functorial flat resolutions for ringed-site modules.
-Source: Stacks 06YS (auxiliary; not a blueprint node). -/
+Source: Stacks 06YS. -/
 instance ringFlatResolutions : Abelian.HasFunctorialFlatResolution (Modules J B) :=
   SheafOfModules.hasFunctorialFlatResolution_kfi (ring J B)
 
 /-- Transport flat resolutions to fixed-coefficient module sheaves.
-Source: Stacks 06YS (auxiliary; not a blueprint node).
+Source: Stacks 06YS.
 Proof: apply the inverse equivalence to a module sheaf, take the functorial flat cover
 used in lem-pc-kflat-resolution, then restrict back. Step 5 identifies flatness and
 step 1 preserves the epimorphic augmentation; naturality gives the resolution functor.

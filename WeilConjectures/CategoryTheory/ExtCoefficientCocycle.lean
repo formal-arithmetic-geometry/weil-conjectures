@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Map
 /-! # Exact functors and coefficient maps on individual Ext cocycles
 
 Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
-(blueprint: lem-weil-pbc-ext-coefficient-cocycle).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace CategoryTheory.InjectiveResolution
 set_option backward.isDefEq.respectTransparency false in
 /-- An exact functor and a coefficient map send a single Ext cocycle to its image.
 Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA; Tag 013P.
-(blueprint: lem-weil-pbc-ext-coefficient-cocycle)
 
 Proof. Express the class of a as the derived-category roof with denominator the
 augmentation of R. Exactness of L preserves this invertible denominator. The supplied

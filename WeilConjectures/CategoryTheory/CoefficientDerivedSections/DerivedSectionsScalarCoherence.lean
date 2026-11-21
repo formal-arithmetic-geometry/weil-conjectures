@@ -150,8 +150,7 @@ import Mathlib.Algebra.Module.ULift
 import Mathlib.Algebra.Category.Grp.Biproducts
 /-! # Coherent scalar comparison for unbounded derived global sections
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E, lemma-derived-pushforward-composition
-(blueprint: lem-coef-derived-sections-scalar-coherence).
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E.
 
 The displayed localization factors make the source's identifications explicit. They
 normalize derived scalar restriction, its composition comparison, and its identity.
@@ -178,16 +177,14 @@ variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
   [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
 
 /-- The existing module-sheaf category for a commutative coefficient sheaf.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence).
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E.
 -/
 abbrev coefficientModules (R : Sheaf J CommRingCat.{u}) :=
   ringedSiteModules.{u, u, u, u}
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
 
 /-- The existing scalar restriction along a morphism of coefficient sheaves.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence).
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E.
 -/
 def coefficientRestriction {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     coefficientModules S ⥤ coefficientModules R :=
@@ -195,16 +192,14 @@ def coefficientRestriction {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map a)
 
 /-- Scalar restriction is the existing additive functor.
-Source: Stacks Project, modules.tex, restriction of scalars
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, modules.tex, restriction of scalars. -/
 instance coefficientRestriction_additive {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     (coefficientRestriction a).Additive :=
   inferInstanceAs (SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).map a)).Additive
 
 /-- Global sections of the underlying abelian sheaf, with its abelian group structure.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence).
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E.
 Mathlib's global-sections adjunction identifies this with maps from the terminal
 set sheaf to the underlying set sheaf. No terminal object of the site is needed.
 -/
@@ -213,37 +208,32 @@ def coefficientSections (R : Sheaf J CommRingCat.{u}) :
   SheafOfModules.toSheaf _ ⋙ Sheaf.Γ J AddCommGrpCat.{u}
 
 /-- Global sections is the existing additive functor.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 instance coefficientSections_additive (R : Sheaf J CommRingCat.{u}) :
     (coefficientSections R).Additive := by
   change (SheafOfModules.toSheaf _ ⋙ Sheaf.Γ J AddCommGrpCat.{u}).Additive
   infer_instance
 
 /-- Termwise scalar restriction on unbounded cochain complexes.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence).
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E.
 -/
 def coefficientComplexRestriction {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :=
   (coefficientRestriction a).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- Termwise global sections on unbounded complexes.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def coefficientComplexSections (R : Sheaf J CommRingCat.{u}) :=
   (coefficientSections R).mapHomologicalComplex (.up ℤ)
 
 /-- The canonical composition isomorphism for scalar restriction.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def coefficientRestrictionComp {R S T : Sheaf J CommRingCat.{u}}
     (a : R ⟶ S) (b : S ⟶ T) :
     coefficientRestriction b ⋙ coefficientRestriction a ≅ coefficientRestriction (a ≫ b) :=
   Iso.refl _
 
 /-- Composition of termwise scalar restriction.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def coefficientComplexRestrictionComp {R S T : Sheaf J CommRingCat.{u}}
     (a : R ⟶ S) (b : S ⟶ T) :
     coefficientComplexRestriction b ⋙ coefficientComplexRestriction a ≅
@@ -251,22 +241,19 @@ def coefficientComplexRestrictionComp {R S T : Sheaf J CommRingCat.{u}}
   Functor.mapHomologicalComplexCompIso (coefficientRestrictionComp a b) (.up ℤ)
 
 /-- The canonical identity isomorphism for scalar restriction.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def coefficientRestrictionId (R : Sheaf J CommRingCat.{u}) :
     coefficientRestriction (𝟙 R) ≅ 𝟭 (coefficientModules R) := Iso.refl _
 
 /-- Identity of termwise scalar restriction.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def coefficientComplexRestrictionId (R : Sheaf J CommRingCat.{u}) :
     coefficientComplexRestriction (𝟙 R) ≅ 𝟭 (CochainComplex (coefficientModules R) ℤ) :=
   NatIso.mapHomologicalComplex (coefficientRestrictionId R) (.up ℤ) ≪≫
     Functor.mapHomologicalComplexIdIso (coefficientModules R) (.up ℤ)
 
 /-- Restriction preserves the underlying abelian sheaf.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def coefficientRestrictionForget {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     coefficientRestriction a ⋙ SheafOfModules.toSheaf.{u}
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ≅
@@ -274,54 +261,46 @@ def coefficientRestrictionForget {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
         ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj S) := Iso.refl _
 
 /-- Scalar restriction preserves the underlying global sections.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def coefficientSectionsRestriction {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     coefficientRestriction a ⋙ coefficientSections R ≅ coefficientSections S :=
   Functor.isoWhiskerRight (coefficientRestrictionForget a) (Sheaf.Γ J AddCommGrpCat.{u})
 
 /-- The termwise scalar-sections comparison.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def coefficientComplexSectionsRestriction {R S : Sheaf J CommRingCat.{u}} (a : R ⟶ S) :
     coefficientComplexSections S ≅
       coefficientComplexRestriction a ⋙ coefficientComplexSections R :=
   (Functor.mapHomologicalComplexCompIso (coefficientSectionsRestriction a) (.up ℤ)).symm
 
 /-- A universe-sized presentation of the one-object site for Set.
-Source: Stacks Project, sites.tex, Tag 00X9
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites.tex, Tag 00X9. -/
 abbrev sectionsPoint : Type u := Discrete PUnit.{u + 1}
 
 /-- The topology with only the maximal covering sieve on the one-object site.
-Source: Stacks Project, sites.tex, Tag 00X9
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites.tex, Tag 00X9. -/
 def sectionsPointTopology : GrothendieckTopology sectionsPoint.{u} := ⊥
 
 /-- The constant integer ring sheaf on the point, lifted to the coefficient universe.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def sectionsPointIntegers : Sheaf sectionsPointTopology CommRingCat.{u} :=
   ⟨(Functor.const sectionsPointᵒᵖ).obj (CommRingCat.of (ULift.{u} ℤ)),
     Presheaf.isSheaf_bot _⟩
 
 /-- The existing evaluation equivalence's functor, followed by forgetting integer scalars.
-Source: Stacks Project, sites.tex, Tag 00X9; sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites.tex, Tag 00X9; sites-cohomology.tex, Tag 0D6E. -/
 abbrev sectionsPointAbelian :
     coefficientModules sectionsPointIntegers ⥤ AddCommGrpCat.{u} :=
   SheafOfModules.evaluation _ (op (Discrete.mk PUnit.unit)) ⋙
     forget₂ (ModuleCat.{u} (ULift.{u} ℤ)) AddCommGrpCat.{u}
 
 /-- Evaluation of a sheaf of sets at the only point of the singleton site.
-Source: Stacks Project, sites.tex, Tag 00X9
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites.tex, Tag 00X9. -/
 abbrev sectionsPointSets : Sheaf sectionsPointTopology (Type u) ⥤ Type u :=
   sheafToPresheaf _ _ ⋙ (evaluation _ _).obj (op (Discrete.mk PUnit.unit))
 
 /-- The global-sections ringed-topos morphism, with its pinned integer structural map.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence). -/
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E. -/
 def CoefficientSectionsGeometry (R : Sheaf J CommRingCat.{u}) : Prop :=
       ∃ (g : RingedToposMorphism
           ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
@@ -1188,8 +1167,7 @@ attribute [local irreducible] restrictionDerived restrictionDerivedFactors
   CoefficientSectionsGeometry SheafOfModules.instCategory
 
 /-- The unit-normalized scalar comparisons, their resolution formula, and their cocycle.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E
-(blueprint: lem-coef-derived-sections-scalar-coherence).
+Source: Stacks Project, sites-cohomology.tex, Tag 0D6E.
 
 Proof plan:
 1. Restriction preserves underlying abelian sheaves, hence kernels, cokernels and

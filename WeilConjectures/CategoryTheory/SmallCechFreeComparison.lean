@@ -27,7 +27,6 @@ variable {C : Type u} [Category.{v} C] (X : C)
 
 /-- Extend sections on summands by the free abelian group universal property.
 Source: Stacks 03AS. 
-(blueprint: lem-sc-small-cech-free-comparison)
 -/
 noncomputable def freeDesc (Y : FormalCoproduct.{v} (Over X))
     (P : Cᵒᵖ ⥤ AddCommGrpCat.{v}) (b : ∀ i, P.obj (op (Y.obj i).left)) :
@@ -49,7 +48,6 @@ noncomputable def freeDesc (Y : FormalCoproduct.{v} (Over X))
 set_option backward.isDefEq.respectTransparency false in
 /-- Free Yoneda identifies maps out of the representable sum with sections on its summands.
 Source: Stacks 03AS. 
-(blueprint: lem-sc-small-cech-free-comparison)
 -/
 noncomputable def freeHomEquiv (Y : FormalCoproduct.{v} (Over X))
     (P : Cᵒᵖ ⥤ AddCommGrpCat.{v}) :
@@ -86,7 +84,6 @@ noncomputable def freeHomEquiv (Y : FormalCoproduct.{v} (Over X))
 
 /-- The categorical product is the group of dependent functions.
 Source: the product universal property, as used in Stacks 03AS. 
-(blueprint: lem-sc-small-cech-free-comparison)
 -/
 noncomputable def productIso {J : Type v} (F : J → AddCommGrpCat.{v}) :
     (∏ᶜ F) ≅ AddCommGrpCat.of (∀ j, F j) :=
@@ -110,7 +107,6 @@ private theorem hom_zsmul_apply {A B : AddCommGrpCat.{v}} (r : ℤ)
 
 /-- Free Yoneda followed by the universal property of the categorical product.
 Source: Stacks 03AS. 
-(blueprint: lem-sc-small-cech-free-comparison)
 -/
 noncomputable def sectionsEquiv (Y : FormalCoproduct.{v} (Over X))
     (P : Cᵒᵖ ⥤ AddCommGrpCat.{v}) :
@@ -135,7 +131,6 @@ variable [HasFiniteWidePullbacks C] {ι : Type v} (U : ι → C) (π : ∀ i, U 
 
 /-- The free Yoneda and product comparison in each Čech degree.
 Source: Stacks 03AS. 
-(blueprint: lem-sc-small-cech-free-comparison)
 -/
 noncomputable def cochainEquiv (n : ℕ) :
     ((freeComplex X U π).X n ⟶ P) ≃+
@@ -168,7 +163,6 @@ private theorem freeHomEquiv_map {Y Y' : FormalCoproduct.{v} (Over X)}
 set_option backward.isDefEq.respectTransparency false in
 /-- The comparison takes the alternating projection boundary to the Čech differential.
 Source: Stacks Project, Cohomology on Sites, Tags 03AS and 03AT.
-(blueprint: lem-sc-small-cech-free-comparison)
 
 Proof: The free representable adjunction sends a natural transformation to its
 value on the generator given by the identity of the represented product. For each

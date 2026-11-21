@@ -12,9 +12,7 @@ import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 /-!
 # Finite coordinates of the normalized negative Koszul tensors
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free tensor calculation.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free tensor calculation.
 -/
 
 @[expose] public section
@@ -181,10 +179,7 @@ scalar-diagonal transitions, compatible empty-coordinate inclusions, and preserv
 quasi-isomorphisms. No countable product, fibre, localization, or coefficient functor
 comparison occurs in this finite statement.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, bounded finite free Koszul calculation;
-steps 1--3 and 7 of lem-cbc-exact-linear-koszul-fiber.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, bounded finite free Koszul calculation.
 
 Proof in words: induct on the number of ordered factors. The empty tensor is O[0]
 and its tensor with K is K by the right unitor. Split a subset into whether it contains

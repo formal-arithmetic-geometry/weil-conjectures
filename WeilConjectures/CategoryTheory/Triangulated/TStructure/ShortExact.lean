@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 Let `t` be a t-structure on a triangulated category `C`, with heart `H`, which is abelian
 (`CategoryTheory.Triangulated.TStructure.abelianHeart`). This file records the basic dictionary
 between the triangulated structure of `C` and the abelian structure of `H`
-(blueprint `lemma-perverse-sheaves-curve--1`):
+:
 
 1. truncation triangles are unique up to unique isomorphism
    (`CategoryTheory.Triangulated.TStructure.triangle_hom_ext_of_isLE_of_isGE`,

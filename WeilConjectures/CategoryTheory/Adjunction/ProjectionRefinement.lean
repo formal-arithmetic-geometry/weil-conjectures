@@ -23,13 +23,12 @@ comparison `I₁ ⟶ H ∘ I` (the unit of `Hs ⊣ H` followed by the inverse of
 comparison) and of `H ⋙ P₁ ≅ P`. This file shows that `ρ` intertwines the exceptional projection
 morphisms (`CategoryTheory.Adjunction.whiskerRight_refinement_comp_exceptionalProjection`), for
 abstract adjunctions: this is the independence of the projection formula from the
-compactification (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2).
+compactification (SGA 4).
 
 For the trivial compactification `(j, 𝟙)` of an open immersion, with `Gs ≅ 𝟭` and the conjugate
 `G ≅ 𝟭`, the exceptional projection morphism followed by the projection comparison of `I ⊣ Is` is
 the identification
 (`CategoryTheory.Adjunction.trivial_exceptionalProjection_comp_projectionComparison`).
-
 -/
 
 @[expose] public section

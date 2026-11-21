@@ -66,8 +66,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 # The strict Roos comparison and its evaluation maps
 
 Source: Stacks Project, Derived Categories, Tags 07KC and 08TC, and Cohomology on Sites,
-Tags 0940 and 0941; the explicit comparison and evaluation square in the DAG proof
-(blueprint: lem-sf-strict-roos-derived-limit-comparison).
+Tags 0940 and 0941.
 
 The helper definitions spell out the products, transition endomorphism and signed cone
 already introduced by this statement. The comparison maps are uniquely specified by
@@ -87,28 +86,25 @@ namespace CategoryTheory
 variable {A : Type u} [Category.{v} A] [Abelian A] [HasCountableProducts A]
 
 /-- The termwise product of the evaluated strict tower complexes. Index `n` means the
-paper's positive index `n+1`. Source: Stacks 07KC and 08TC
-(blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+paper's positive index `n+1`. Source: Stacks 07KC and 08TC. -/
 def strictRoosProduct (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) : CochainComplex A ℤ :=
   ∏ᶜ (fun n : ℕ ↦ X.asFunctor.obj (op n))
 
 /-- The existing transition endomorphism, applied in the category of complexes.
-Source: Stacks 08TC (blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+Source: Stacks 08TC. -/
 def strictRoosEndomorphism (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
     strictRoosProduct X ⟶ strictRoosProduct X :=
   towerTransitionEndomorphism
     (fun n ↦ X.asFunctor.map (homOfLE (Nat.le_succ n)).op)
 
 /-- The actual shifted mapping cone of `1-s`. In the coordinate order `(y,x)`, its
- differential is `(-dy-(1-s)x,dx)`. Source: Stacks 07KC and 08TC
-(blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+ differential is `(-dy-(1-s)x,dx)`. Source: Stacks 07KC and 08TC. -/
 def strictRoosComplex (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) : CochainComplex A ℤ :=
   (CochainComplex.mappingCone (strictRoosEndomorphism X))⟦(-1 : ℤ)⟧
 
 /-- The degree `p+1` coordinates `(y,x)`, interchanging Mathlib's source-first cone
 summands. All transports are the canonical shift and cone isomorphisms.
-Source: Stacks 08TC and the displayed differential of the node
-(blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+Source: Stacks 08TC and the displayed differential of the node. -/
 def strictRoosCoordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
     (strictRoosComplex X).X (p + 1) ≅
       (strictRoosProduct X).X p ⊞ (strictRoosProduct X).X (p + 1) :=
@@ -119,8 +115,7 @@ def strictRoosCoordinates (X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (p : ℤ) :
     biprod.braiding _ _
 
 /-- The product map induced by a strict map of tower complexes, on both cone coordinates.
-Source: Stacks 07KC and the strict naturality square of the DAG proof
-(blueprint: lem-sf-strict-roos-derived-limit-comparison). -/
+Source: Stacks 07KC and the strict naturality square of the DAG proof. -/
 def strictRoosProductMap {X I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : X ⟶ I) :
     strictRoosProduct X ⟶ strictRoosProduct I :=
   Limits.Pi.map (fun n ↦
@@ -177,9 +172,7 @@ The sectionwise commutativity binder is the commutative-ring-sheaf hypothesis. T
 module universe contains both site universes, without equating them. The sheafification
 instances and the derived-category instance only supply the standard category structures.
 
-Source: Stacks 07KC, 08TC, 0940 and 0941; explicit arbitrary-K-injective extension and
-evaluation square in the node's proof
-(blueprint: lem-sf-strict-roos-derived-limit-comparison).
+Source: Stacks 07KC, 08TC, 0940 and 0941.
 
 Proof plan:
 1. Exact countable products preserve quasi-isomorphisms (Stacks 07KC). Naturality of

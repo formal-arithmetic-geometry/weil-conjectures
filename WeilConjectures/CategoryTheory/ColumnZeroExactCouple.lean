@@ -11,7 +11,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 /-! # Degeneration of an exact couple supported on column zero
 
 Source: Stacks Project, Tag 0H7Z, degeneration of its convergent spectral sequence.
-(blueprint: lem-pur-column-zero-exact-couple)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -60,7 +59,7 @@ private theorem differentials_zero
     · exact (page_zero_off_column X hE r p q hp).eq_zero_of_tgt _
 
 /-- With only column zero present all cycles are permanent and all boundaries vanish.
-Source: Stacks Project, Tag 0H7Z. (blueprint: lem-pur-column-zero-exact-couple)
+Source: Stacks Project, Tag 0H7Z.
 Proof: a later page is a subquotient of the initial page, so its other columns remain
 zero. Every differential either has zero source or zero target. The cycle and boundary
 recursions therefore leave the initial whole and zero subobjects unchanged. Take their
@@ -102,7 +101,7 @@ private theorem filtration_step_eq_of_zero_graded {A : C}
   exact Subobject.eq_of_comm (asIso f) (Subobject.ofLE_arrow _)
 
 /-- For an exhaustive column-zero abutment filtration, its zeroth step is the whole object.
-Source: Stacks Project, Tag 0H7Z. (blueprint: lem-pur-column-zero-exact-couple)
+Source: Stacks Project, Tag 0H7Z.
 Proof: outside column zero, the limiting page and therefore the associated graded are zero.
 For every negative p the inclusion F^(p+1) into F^p is thus an isomorphism. Integer induction
 shows that every negative step equals F^0. Every positive step is contained in F^0 by

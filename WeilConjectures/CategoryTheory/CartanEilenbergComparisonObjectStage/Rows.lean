@@ -52,7 +52,7 @@ structure CartanEilenbergAugmentedRow
   quasiIso₃ : QuasiIso augmentation.τ₃
 
 /-- The cycle/object/image row is short exact for any complex shape.
-Source: Stacks Project, Tag 015I; the kernel/image factorization in an abelian category. -/
+Source: Stacks Project, Tag 015I. -/
 private theorem row_shortExact
     {A : Type*} [Category A] [Abelian A] {ι : Type*} {c : ComplexShape ι}
     (I : HomologicalComplex A c) (p q : ι) (hq : c.next p = q) :
@@ -150,7 +150,7 @@ This statement constructs rows and identifies augmentations; it constructs no
 comparison map between the resolution columns and assumes no injectivity.
 
 Source: Stacks Project, Tags 015I and 015K, alternating short exact rows and their
-naturality (blueprint: lem-weil-pbc-ce-comparison-augmented-rows).
+naturality.
 
 Proof: In the abelian category of resolution complexes the cycle inclusion is the
 kernel of the outgoing differential, and its factorization through its image is an

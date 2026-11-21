@@ -148,7 +148,6 @@ private theorem stable_page_comparison
 
 /-- Stable finite pages are canonical graded quotients of incoming-alpha images.
 Source: Stacks Tags 011R, 011T and 012F, blueprint steps 5--6.
-(blueprint: lem-sp-abutment-finite-page-comparison)
 
 Proof: For p>=0 put R=max(p+3,q-a+2),
 u=p-R+2 and v=q+R-2. The alpha iterate from (0,p+q) to (u,v) is invertible:

@@ -13,8 +13,7 @@ import all WeilConjectures.CategoryTheory.HalfPlaneDiagonalColimits
 /-!
 # Finite exact-couple quotient kernels
 
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2;
-Stacks Project, Tags 011R, 011T and 0AMJ.
+Source: Stacks Project, Tags 011R, 011T and 0AMJ.
 -/
 
 @[expose] public section
@@ -166,9 +165,7 @@ projection of iota_p gives the inverse image of the next filtration step along
 iota_p. Cancel the invertible cocone map in this pullback, obtaining the formula.
 This also covers r=0 and negative p: the transported identities and zero graded
 pieces obey the same kernel calculation.
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 2, finite images
-in the normalized alpha colimit; Stacks Tags 011T and 0AMJ.
-(blueprint: lem-sp-normalized-graded-finite-kernel) -/
+Source: Stacks Tags 011T and 0AMJ. -/
 theorem normalizedGraded_finite_kernel (X : BigradedExactCouple C 0)
     (hE : ∀ p q : ℤ, p < 0 → IsZero (X.E p q))
     (A : ∀ n : ℤ, AlphaColimit X n)

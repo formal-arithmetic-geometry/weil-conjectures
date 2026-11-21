@@ -36,7 +36,7 @@ import Mathlib.CategoryTheory.Comma.Over.Pullback
 /-! # Ordinary ringed pullback and localization at a sheaf
 
 Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tags 04IF, 04IE,
-03D6 (2), 03EL and 03EK (blueprint: lem-weil-pbc-geometric-ringed-pullback-slice).
+03D6 (2), 03EL and 03EK.
 
 ## Main definitions
 
@@ -69,8 +69,7 @@ open scoped ChangeOfRings
 namespace CategoryTheory
 
 /-- The product over a sheaf used in the slice inverse-image comparison.
-Source: Stacks Project, Sites, Tag 04H1
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice). -/
+Source: Stacks Project, Sites, Tag 04H1. -/
 def geometricSliceProductOver {E : Type uE} [Category.{vE} E] [CartesianMonoidalCategory E]
     (A : E) : E ⥤ Over A where
   obj H := Over.mk (CartesianMonoidalCategory.fst A H)
@@ -79,8 +78,7 @@ def geometricSliceProductOver {E : Type uE} [Category.{vE} E] [CartesianMonoidal
   map_comp h k := by apply Over.OverMorphism.ext; simp
 
 /-- The fibre of `A × H -> A` is canonically the sectionwise restriction of H.
-Source: Stacks Project, Sites, Tag 0791; Modules on Sites, Tag 04IE
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice). -/
+Source: Stacks Project, Sites, Tag 0791; Modules on Sites, Tag 04IE. -/
 noncomputable def geometricSliceProductFibreIso
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     {R : Sheaf J RingCat.{u}} (A : Sheaf J (Type u))
@@ -103,8 +101,7 @@ noncomputable def geometricSliceProductFibreIso
 
 /-- Finite-product preservation gives the slice product comparison.
 Its two components are the images of the two projections.
-Source: Stacks Project, Sites, Tag 04H1
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice). -/
+Source: Stacks Project, Sites, Tag 04H1. -/
 noncomputable def geometricSliceProductPostIso
     {E : Type uE} {E' : Type uE'} [Category.{vE} E] [Category.{vE'} E']
     [CartesianMonoidalCategory E] [CartesianMonoidalCategory E']
@@ -124,8 +121,7 @@ noncomputable def geometricSliceProductPostIso
 
 /-- The canonical comparison between inverse image and restriction, constructed from
 finite-product comparisons and the fibre equivalences, with no existence choice.
-Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tag 04IF
-(blueprint: lem-weil-pbc-geometric-ringed-pullback-slice). -/
+Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tag 04IF. -/
 noncomputable def geometricSliceSetComparison
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -161,7 +157,7 @@ namespace SheafOfModules
 /-- Localization at an arbitrary sheaf commutes with ordinary ringed-topos pullback.
 
 Source: Stacks Project, Sites, Tag 04H1; Modules on Sites, Tags 04IF, 04IE,
-03D6 (2), 03EL and 03EK (blueprint: lem-weil-pbc-geometric-ringed-pullback-slice).
+03D6 (2), 03EL and 03EK.
 
 `y` and `x` are presentations of the two localizations, supplied by
 `ringed_sheaf_slice_adjunction`. The slice inverse image, under these equivalences,

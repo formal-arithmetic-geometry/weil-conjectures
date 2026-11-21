@@ -46,7 +46,7 @@ variable {A B : Type a} [Category.{b} A] [Category.{b} B] [Abelian A] [Abelian B
   (c : OpenTensorPresentation A B) (adj : c.E ⊣ c.R)
 
 /-- The representative squares preserve the unit equation on K-flat inputs.
-Source: Stacks 015F and 0GL1 (blueprint: lem-sf-open-tensor-unit-localization).
+Source: Stacks 015F and 0GL1.
 Proof: postcompose the derived unit equation with the exact-functor factors
 and the open tensor model. The representative square replaces gamma by the
 localized total map; the restriction square replaces rho by the localized
@@ -259,8 +259,7 @@ private theorem normalization_of_dense_inputs
 
 /-- If K-flat representatives cover both derived categories, the localized unit
 identity on representatives holds on all inputs.
-Source: Stacks 015F, 06YS and 0GL1
-(blueprint: lem-sf-open-tensor-unit-localization).
+Source: Stacks 015F, 06YS and 0GL1.
 Proof: use `unit_on_models` on the prescribed K-flat representatives. Both sides
 of the unit equation are natural transformations of the two inputs. Transport
 the equality along the isomorphisms from the representatives to arbitrary

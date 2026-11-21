@@ -107,7 +107,6 @@ private theorem arrow_comp_congr
 
 /-- Existence of a mediating arrow for the image of a stable stage pullback.
 Source: Stacks Project, Sites, Tag 09YL, pullback paragraph and Hom calculation.
-(blueprint: lem-weil-pbc-filtered-colimit-pullback-exists)
 
 Proof: Lift the vertex and two legs using joint surjectivity of the object and
 arrow set colimits. Pass to a common stage above these representatives and j.

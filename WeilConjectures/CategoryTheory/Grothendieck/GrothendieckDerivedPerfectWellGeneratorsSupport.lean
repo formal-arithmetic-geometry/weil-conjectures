@@ -693,7 +693,6 @@ private theorem bounded_family_cardinal
 
 /-- Supporting small-class construction for the exact compact localization.
 Source: Neeman, Theorem 0.2 and Krause, Sections 6.2--6.3.
-(blueprint: new-sfb-derived-perfect-well-generators-support-b4)
 
 Proof in words: choose the exact compact localization model and a complex representative
 of each image generator. Choose a regular cardinal dominating the subobject lattices of

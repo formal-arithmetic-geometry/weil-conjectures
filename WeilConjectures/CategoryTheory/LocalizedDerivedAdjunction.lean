@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Shift.Localization
 # Localized derived adjunction from a resolving class
 
 Source: Stacks Project, Tags 06XN, 05SE, 05SU and 0FND.
-(blueprint: lem-sf-localized-derived-adjunction).
 
 This file records the statement corresponding to Stacks Project, Tags 06XN,
 05SE, 05SU and 0FND.  It is the arbitrary triangulated-category form used by
@@ -44,7 +43,7 @@ universe uK vK uH vH uA vA uB vB uJ vJ
 
 namespace CategoryTheory
 
-/-- Stacks Project, Tags 06XN, 05SE, 05SU and 0FND (blueprint: lem-sf-localized-derived-adjunction).
+/-- Stacks Project, Tags 06XN, 05SE, 05SU and 0FND.
 
 Let `K` and `H` be triangulated categories, with saturated multiplicative
 systems `W` and `V` compatible with their triangulations.  Let `Q` and `Q'`
@@ -66,7 +65,7 @@ adjunction is compatible with the canonical shift of `Rbar` and not merely
 with the one `Adjunction.commShift_of_leftAdjoint` would supply for any `L`.
 No ordinary-complex realization is assumed.
 
-Proof (blueprint steps):
+Proof:
 1. `W` has a right calculus of fractions and two-out-of-three (MS1–MS4).  The
    resolving-class lemma (Tag 06XN) makes every denominator diagram
    `W/X → B` of `F = E ⋙ Q'` essentially constant, with cone `u_s`, and

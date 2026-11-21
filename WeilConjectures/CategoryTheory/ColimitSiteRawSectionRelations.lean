@@ -17,9 +17,8 @@ import WeilConjectures.CategoryTheory.ColimitSiteKanUnitRelations
 
 /-! # Eventual equality for the raw Kan section colimit
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-relations).
 -/
 
 @[expose] public section
@@ -47,9 +46,8 @@ private theorem arrow_precomp {X Y Z Z' : Type u}
   subst Z'
   simpa using congrArg (fun k ↦ Arrow.mk (f ≫ k)) hg
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section construction, independence of the presentation and restriction arrows.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-relations).
 
 Proof: Normalize each stage map to the fixed object Y = V_i(U), using the
 object equality supplied by hkappa. The equations hbeta_map and hm, together

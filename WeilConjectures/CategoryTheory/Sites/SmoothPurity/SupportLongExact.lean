@@ -34,9 +34,7 @@ import WeilConjectures.CategoryTheory.InjectiveSheafMonoRestriction
 /-!
 # The long exact sequence of cohomology with support
 
-Source: Milne, Lectures on Etale Cohomology, Section 9, Theorem 9.4;
-Stacks Project, Tags 093X, 03F3, 0117, 070I
-(blueprint: thm-pur-with-support-exactness).
+Source: Milne, Lectures on Etale Cohomology, Section 9, Theorem 9.4; Stacks Project, Tags 093X, 03F3, 0117, 070I.
 -/
 
 @[expose] public section
@@ -54,8 +52,7 @@ variable (A : Type a) [Category.{w} A] [Abelian A]
 variable {V W : C} (j : W ⟶ V)
 
 /-- Inclusion of the kernel of restriction into sections on `V`.
-Source: Milne, Section 9, definition before Theorem 9.4
-(blueprint: thm-pur-with-support-exactness). -/
+Source: Milne, Section 9, definition before Theorem 9.4. -/
 noncomputable def supportedSectionsInclusion :
     supportedSectionsFunctor J A j ⟶ (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V)) where
   app F := kernel.ι (F.obj.map j.op)
@@ -67,8 +64,7 @@ variable [HasDerivedCategory A]
 
 /-- Derived evaluation on an object of a site, followed by integer-indexed cohomology.
 For a terminal object this is global hypercohomology; for the open object it is
-hypercohomology of the localized site. Source: Stacks, Tag 03F3
-(blueprint: thm-pur-with-support-exactness). -/
+hypercohomology of the localized site. Source: Stacks, Tag 03F3. -/
 noncomputable abbrev sectionHypercohomologyFunctor (V : C) (q : ℤ) :
     DerivedCategory.Plus (Sheaf J A) ⥤ A :=
   (sheafToPresheaf J A ⋙ (evaluation _ _).obj (op V)).rightDerivedFunctorPlus ⋙
@@ -76,22 +72,21 @@ noncomputable abbrev sectionHypercohomologyFunctor (V : C) (q : ℤ) :
 
 /-- Derived supported sections followed by cohomology: this specializes exactly to
 `Etale.supportHypercohomology` and `ProEtale.supportHypercohomology`.
-Source: the support definition and Milne, Section 9, Theorem 9.4
-(blueprint: thm-pur-with-support-exactness). -/
+Source: the support definition and Milne, Section 9, Theorem 9.4. -/
 noncomputable abbrev supportHypercohomologyFunctor (q : ℤ) :
     DerivedCategory.Plus (Sheaf J A) ⥤ A :=
   (supportedSectionsFunctor J A j).rightDerivedFunctorPlus ⋙
     DerivedCategory.Plus.homologyFunctor A q
 
 /-- The canonical first arrow in the support sequence, obtained by deriving kernel inclusion.
-Source: Milne, Section 9, Theorem 9.4 (blueprint: thm-pur-with-support-exactness). -/
+Source: Milne, Section 9, Theorem 9.4. -/
 noncomputable def supportHypercohomologyInclusion (q : ℤ) :
     supportHypercohomologyFunctor J A j q ⟶ sectionHypercohomologyFunctor J A V q :=
   Functor.whiskerRight (Functor.rightDerivedFunctorPlusNatTrans
     (supportedSectionsInclusion J A j)) (DerivedCategory.Plus.homologyFunctor A q)
 
 /-- The canonical second arrow in the support sequence, obtained by deriving restriction.
-Source: Milne, Section 9, Theorem 9.4 (blueprint: thm-pur-with-support-exactness). -/
+Source: Milne, Section 9, Theorem 9.4. -/
 noncomputable def sectionHypercohomologyRestriction (q : ℤ) :
     sectionHypercohomologyFunctor J A V q ⟶ sectionHypercohomologyFunctor J A W q :=
   Functor.whiskerRight (Functor.rightDerivedFunctorPlusNatTrans
@@ -101,7 +96,7 @@ noncomputable def sectionHypercohomologyRestriction (q : ℤ) :
 
 /-- The canonical cohomology comparison from a bounded-below injective representative,
 including its specified identification with the derived object. Source: Stacks, Tags 05TI,
-05TH and 070I (blueprint: thm-pur-with-support-exactness). -/
+05TH and 070I. -/
 noncomputable def supportSequenceModelIso (E : Sheaf J A ⥤ A) [E.Additive]
     (I : CochainComplex.Plus (Sheaf J A)) [∀ n : ℤ, Injective (I.obj.X n)]
     (K : DerivedCategory.Plus (Sheaf J A)) (e : DerivedCategory.Plus.Q.obj I ≅ K)
@@ -129,14 +124,14 @@ variable [HasDerivedCategory A] {V W : C} (j : W ⟶ V)
 variable (P : ObjectProperty (DerivedCategory.Plus (Sheaf J A)))
 
 /-- A family of boundary maps natural in the permitted derived coefficients.
-Source: Milne, Section 9, Theorem 9.4 (blueprint: thm-pur-with-support-exactness). -/
+Source: Milne, Section 9, Theorem 9.4. -/
 abbrev SupportSequenceBoundary :=
   ∀ q : ℤ, P.ι ⋙ sectionHypercohomologyFunctor J A W q ⟶
     P.ι ⋙ supportHypercohomologyFunctor J A j (q + 1)
 
 /-- Exactness at all three places, in all integer degrees, of the displayed sequence.
 The other two maps are the derived kernel inclusion and restriction, not existential maps.
-Source: Milne, Section 9, Theorem 9.4 (blueprint: thm-pur-with-support-exactness). -/
+Source: Milne, Section 9, Theorem 9.4. -/
 def SupportSequenceExact (δ : SupportSequenceBoundary J A j P) : Prop :=
   ∀ (K : P.FullSubcategory) (q : ℤ),
     ∃ (w₁ : (supportHypercohomologyInclusion J A j q).app K.obj ≫
@@ -147,8 +142,7 @@ def SupportSequenceExact (δ : SupportSequenceBoundary J A j P) : Prop :=
         (ShortComplex.mk _ _ w₃).Exact
 
 /-- The boundary on a specified injective representative, transported by the canonical
-right-derived-functor unit. Source: Stacks, Tags 05TI, 05TH, 0117
-(blueprint: thm-pur-with-support-exactness). -/
+right-derived-functor unit. Source: Stacks, Tags 05TI, 05TH, 0117. -/
 noncomputable def supportSequenceModelBoundary (δ : SupportSequenceBoundary J A j P)
     (I : CochainComplex.Plus (Sheaf J A)) [∀ n : ℤ, Injective (I.obj.X n)]
     (K : P.FullSubcategory) (e : DerivedCategory.Plus.Q.obj I ≅ K.obj) (q : ℤ) :

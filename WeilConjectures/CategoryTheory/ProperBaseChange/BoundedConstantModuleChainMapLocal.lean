@@ -102,8 +102,7 @@ private theorem over_isZero (V : C) (hV : (⊥ : Sieve V) ∈ J V)
 /-- A chain map between constant complexes with bounded finite source is locally
 algebraic, with equality after slice restriction.
 
-Source: Stacks Project, Tag 09BE, finite-generator descent of chain maps.
-(blueprint: lem-weil-pbc-bounded-constant-module-chain-map-local)
+Source: Stacks Project, Tag 09BE descent of chain maps.
 
 Proof: Lift the components in the finite support of the source through the constant
 module morphism theorem, and intersect the resulting covering sieves. Away from the

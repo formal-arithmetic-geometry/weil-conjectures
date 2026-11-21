@@ -36,7 +36,6 @@ private theorem fiber_arrow_eq
 
 /-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph, and
 Categories, Section Tag 04AX (filtered colimits of sets).
-(blueprint: lem-weil-pbc-filtered-colimit-category-structure).
 
 Proof: Let A be the filtered colimit of the sets of stage arrows. The source and
 target maps to the object colimit O descend by their compatibility with transition

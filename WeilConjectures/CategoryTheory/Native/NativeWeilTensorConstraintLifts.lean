@@ -17,8 +17,7 @@ import WeilConjectures.WeilSheaf.Native.NativeHomRepresentativeUniqueness
 /-! # Lifting individual tensor constraints from the Frobenius action site
 
 This file separates lifting structural isomorphisms from checking their coherence laws.
-Source: Stacks 06YS and 0FPT
-(blueprint: lem-sf-native-weil-tensor-constraint-lifts).
+Source: Stacks 06YS and 0FPT.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace CategoryTheory
 
 /-- Individual associator, unitors and swap for a fixed tensor functor and unit.
 No naturality, pentagon, triangle, hexagon or involutivity is assumed here.
-Source: Stacks 0FPT, descent of the structural isomorphisms
-(blueprint: lem-sf-native-weil-tensor-constraint-lifts). -/
+Source: Stacks 0FPT, descent of the structural isomorphisms. -/
 structure TensorConstraintCandidate {C : Type v} [Category.{w} C]
     (T : C × C ⥤ C) (U : C) where
   associator : ∀ A B D : C, T.obj (T.obj (A, B), D) ≅ T.obj (A, T.obj (B, D))
@@ -43,7 +41,7 @@ structure TensorConstraintCandidate {C : Type v} [Category.{w} C]
   braiding : ∀ A B : C, T.obj (A, B) ≅ T.obj (B, A)
 
 /-- Raw monoidal operations, using precisely the given bifunctor on arrows.
-Source: Stacks 0FPT (blueprint: lem-sf-native-weil-tensor-constraint-lifts). -/
+Source: Stacks 0FPT. -/
 @[instance_reducible]
 def TensorConstraintCandidate.operations {C : Type v} [Category.{w} C]
     {T : C × C ⥤ C} {U : C} (q : TensorConstraintCandidate T U) :
@@ -62,8 +60,7 @@ def TensorConstraintCandidate.operations {C : Type v} [Category.{w} C]
 not assert any coherence law for the raw operations. `forgetData` specifies the
 images of the individual constraints for the very tensor comparison supplied
 by the caller. Faithfulness is required only of `model`, never of forgetting.
-Source: Stacks 0FPT and the native tensor lift, constraint-descent step
-(blueprint: lem-sf-native-weil-tensor-constraint-lifts). -/
+Source: Stacks 0FPT and the native tensor lift, constraint-descent step. -/
 structure TensorConstraintLifts {C : Type v} [Category.{w} C]
     {D : Type v} [Category.{w} D]
     (F : C ⥤ D) (T : C × C ⥤ C) (U : C) (V : D) (ζ : F.obj U ≅ V)
@@ -580,9 +577,7 @@ variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
 ringed model and under forgetting. This theorem supplies no monoidal structure
 on the specified tensor T, and no pentagon, triangle or braiding axioms for it.
 
-Source: Stacks 06YS and 0FPT; native tensor coherence steps 1--3, restricted to
-lifting individual constraints and identifying their images
-(blueprint: lem-sf-native-weil-tensor-constraint-lifts).
+Source: Stacks 06YS and 0FPT.
 
 Proof: present native Weil sheaves as modules on the small Frobenius action
 site using frobenius_action_resolutions. If Φ is the ordinary restriction

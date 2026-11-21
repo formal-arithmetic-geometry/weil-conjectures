@@ -143,10 +143,7 @@ public import WeilConjectures.RingTheory.PseudoCoherentNormalizedAlgebraTower
 /-!
 # Effectivity of a normalized algebra tower
 
-Source: Stacks Project, More on Algebra, Tags 09AV and 066E,
-lemma-Rlim-pseudo-coherent-gives-complete-pseudo-coherent and
-lemma-Noetherian-pseudo-coherent
-(blueprint: lem-weil-pbc-pseudocoherent-normalized-algebra-tower).
+Source: Stacks Project, More on Algebra, Tags 09AV and 066E and.
 -/
 
 @[expose] public section
@@ -257,8 +254,7 @@ not an independently chosen isomorphism. The all-level equation gives compatibil
 transitions and their quotient cocycles. The last clause exhibits `E` itself as a derived
 limit of its reductions, with transitions transported along these specified isomorphisms.
 
-Source: Stacks Project, More on Algebra, Tags 09AV, 0CQF and 066E
-(blueprint: lem-weil-pbc-pseudocoherent-normalized-algebra-tower).
+Source: Stacks Project, More on Algebra, Tags 09AV, 0CQF and 066E.
 
 Proof:
 1. Quotients of the Noetherian ring C are Noetherian. The Noetherian cohomology criterion

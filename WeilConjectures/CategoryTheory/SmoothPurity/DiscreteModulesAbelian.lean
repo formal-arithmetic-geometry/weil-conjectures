@@ -22,8 +22,7 @@ import WeilConjectures.RepresentationTheory.SmoothPurity.DiscreteRep
 /-!
 # Discrete modules with profinite group action
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0A2H and Definition 04JP;
-injectives.tex, Tag 04JF (blueprint: lem-exc-discrete-modules-abelian).
+Source: Stacks Project, etale-cohomology.tex, Tag 0A2H and Definition 04JP; injectives.tex, Tag 04JF.
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ namespace CategoryTheory
 /-- Enough injectives, module kernels and cokernels, and module-detected exactness for
 the discrete-action category once its abelian structure is fixed.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0A2H and Definition 04JP;
-injectives.tex, Tag 04JF (blueprint: lem-exc-discrete-modules-abelian). -/
+Source: Stacks Project, etale-cohomology.tex, Tag 0A2H and Definition 04JP; injectives.tex, Tag 04JF. -/
 abbrev discreteModuleActionProperties (A : Type v) [Ring A] (G : Type u)
     [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (h : Abelian (Rep.DiscreteContinuousRep.{v, u, w} A G)) : Prop :=
@@ -58,15 +56,13 @@ abbrev discreteModuleActionProperties (A : Type v) [Ring A] (G : Type u)
 stabilizers they had in the source. The module cokernel inherits the action and each
 class has an open stabilizer containing that of a representative. Thus the zero object,
 finite biproducts, kernels and cokernels come from modules; exactness is detected there.
-Normality of monos and epis then gives the abelian structure
-(`lem-exc-discrete-modules-abelian-structure`, `def-sp-abelian`). The group ring is
+Normality of monos and epis then gives the abelian structure. The group ring is
 small in the carrier universe because the coefficient ring is finite and that universe
 contains the group. Its module category has enough injectives. The representation/group-ring
 equivalence and the open-stabilizer right adjoint transfer enough injectives to discrete
-actions, as in Stacks Tag 04JF (`def-sp-injective-resolutions`).
+actions, as in Stacks Tag 04JF.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0A2H and Definition 04JP;
-injectives.tex, Tag 04JF (blueprint: lem-exc-discrete-modules-abelian). -/
+Source: Stacks Project, etale-cohomology.tex, Tag 0A2H and Definition 04JP; injectives.tex, Tag 04JF. -/
 theorem discreteModules_abelian
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

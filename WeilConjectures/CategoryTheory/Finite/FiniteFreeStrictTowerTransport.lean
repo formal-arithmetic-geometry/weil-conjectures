@@ -147,7 +147,6 @@ import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E (application); sites-cohomology.tex,
 Tag 0941 (resolved Roos triangle); derived.tex, Tags 070I, 08BJ, 0BK6.
-(blueprint: lem-weil-pbc-finite-free-strict-tower-transport).
 
 The helpers specify canonical maps and their cochain factorizations. Positive
 levels are indexed by `n : ℕ` meaning level `n + 1`. All complexes are unbounded.
@@ -168,13 +167,13 @@ open SheafOfModules
 namespace CategoryTheory
 
 /-- The ordinary inverse-limit functor on cochain complexes of strict towers.
-Source: Stacks 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0941. -/
 abbrev strictTowerLimitComplex (A : Type uA) [Category.{vA} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] :=
   (lim : (ℕᵒᵖ ⥤ A) ⥤ A).mapHomologicalComplex (ComplexShape.up ℤ)
 
 /-- The canonical inclusion of the ordinary strict limit into the product of evaluations.
-Source: Stacks 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0941. -/
 def strictTowerLimitInclusion {A : Type uA} [Category.{vA} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
     (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :
@@ -184,7 +183,7 @@ def strictTowerLimitInclusion {A : Type uA} [Category.{vA} A] [Abelian A]
 
 /-- Product comparison from a cochain tower to its derived evaluations, including the
 specified evaluation factorization of the strict-limit interface.
-Source: Stacks 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0941. -/
 def strictTowerResolvedProduct {A : Type uA} [Category.{vA} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
     [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ A)]
@@ -199,7 +198,7 @@ def strictTowerResolvedProduct {A : Type uA} [Category.{vA} A] [Abelian A]
 /-- Normalization of the whole Roos triangle on injective-term K-injective towers.
 The last equation fixes the connecting arrow as the actual short-exact-sequence boundary.
 It does not choose a completion of an abstract triangle.
-Source: Stacks 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0941. -/
 def strictTowerRoosNormalized
     {A : Type uA} [Category.{vA} A] [Abelian A]
     [HasLimitsOfShape ℕᵒᵖ A] [HasCountableProducts A]
@@ -249,7 +248,7 @@ private theorem towerProductComparison_middle
 /-- Finite-free transport data with the normalized ordinary and derived comparisons,
 all three Roos squares and the strict augmentation formula. `augmentation` quantifies
 all maps to the ordinary limit, equivalently all compatible strict augmented towers.
-Source: Stacks 0A0E, 0941 (blueprint: lem-weil-pbc-finite-free-strict-tower-transport). -/
+Source: Stacks 0A0E, 0941. -/
 structure FiniteFreeStrictTowerTransport
     {A : Type uA} [Category.{vA} A] [Abelian A]
     {B : Type uB} [Category.{vB} B] [Abelian B]
@@ -1433,8 +1432,7 @@ and the complete functorial Roos triangles of strict towers, including strict au
 The hypothesis is only existence of a finite basis, not the choice of one. The counit equation
 identifies the exact cochain model with the recorded derived tensor functor.
 
-Source: Stacks 0A0E, 0941, 070I, 08BJ, 0BK6
-(blueprint: lem-weil-pbc-finite-free-strict-tower-transport).
+Source: Stacks 0A0E, 0941, 070I, 08BJ, 0BK6.
 
 Proof:
 1. Tensor cancellation at the unit identifies restriction of scalar extension with

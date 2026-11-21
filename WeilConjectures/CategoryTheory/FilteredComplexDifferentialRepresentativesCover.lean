@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.FilteredComplexBoundariesLECycles
 # Epimorphic filtered cycle representatives
 
 Source: Stacks Project, Homology, Tag 012K, displayed cycle formula.
-(blueprint: lem-sp-filtered-complex-differential-representatives-cover).
 -/
 
 @[expose] public section
@@ -70,7 +69,6 @@ private theorem graded_image_sup {A B D : C} (f : A ⟶ B) [Mono f] (g : A ⟶ D
 /-- For related bidegrees there is an epimorphic family of source graded cycles
 with simultaneous representatives for the source and its differential.
 Source: Stacks Project, Tag 012K, the displayed cycle and differential formulas.
-(blueprint: lem-sp-filtered-complex-differential-representatives-cover).
 
 Proof. Put p = i.1 and n = i.1+i.2, so j.1 = p+r and j.1+j.2 = n+1.
 Take A to be R = F^p K^n intersect d-inverse(F^(p+r) K^(n+1)), regarded

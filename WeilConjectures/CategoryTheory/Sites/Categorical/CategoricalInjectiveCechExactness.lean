@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 
 /-! # Positive Čech exactness of injective categorical presheaves
 
-Source: Stacks Project, Tag 03AW; the cofree contraction works in any abelian
-coefficient category with the indicated products.
+Source: Stacks Project, Tag 03AW.
 -/
 
 @[expose] public section
@@ -185,7 +184,6 @@ private theorem exactAt_categoricalCech_cofree (q : ℕ) :
 /-- An injective categorical presheaf is a retract of its cofree presheaf, so its
 finite Čech complex is exact in every positive degree.
 Source: Stacks Project, Tag 03AW, and the cofree insertion contraction.
-(blueprint: stage3-categorical-injective-cech-exactness).
 
 Proof: Restrict sections along every arrow into an object to embed the presheaf
 in the product of the right adjoints of the evaluation functors. Evaluation at

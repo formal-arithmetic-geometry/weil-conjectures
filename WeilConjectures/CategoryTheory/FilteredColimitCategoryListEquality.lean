@@ -46,9 +46,7 @@ private theorem finite_stage_eq
     · simpa only [G.map_comp, ConcreteCategory.comp_apply] using
         congrArg (fun a ↦ G.map g a) (hf q)
 
-/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph;
-Categories, Section Tag 04AX.
-(blueprint: lem-weil-pbc-filtered-colimit-category-list-equality).
+/-- Source: Stacks Project, Sites, proof of Tag 09YL, first paragraph; Categories, Section Tag 04AX.
 
 Proof: Apply the equality criterion of filtered colimits of sets to every
 pair of corresponding objects, and apply it to the arrow cocone through its

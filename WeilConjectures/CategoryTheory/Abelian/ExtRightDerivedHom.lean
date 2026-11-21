@@ -208,7 +208,6 @@ private lemma extRightDerivedHomObjIso_naturality (X : A) {Y Z : A} (f : Y ⟶ Z
 
 /-- Ext in the second variable is the right-derived additive Hom functor.
 Source: Stacks Project, Tag 06XR, Lemma 13.27.2 (injective-resolution computation).
-(blueprint: lem-sc-ext-right-derived-hom)
 
 Proof: Choose the standard injective resolution of each object. Mathlib identifies Ext
 with cohomology classes in its Hom complex. The from-single additive equivalence gives

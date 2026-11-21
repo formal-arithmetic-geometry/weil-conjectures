@@ -25,8 +25,7 @@ private abbrev tensorAdj := PresheafOfModules.sheafificationAdjunction (𝟙 (ri
 
 /-- The left unitor acts by scalar multiplication on a sheafified pure tensor.
 
-Source: Stacks 03EK and 03EL, the tensor unit of module sheaves
-(blueprint: lem-sf-sheaf-tensor-pure-left-unit).
+Source: Stacks 03EK and 03EL, the tensor unit of module sheaves.
 
 Proof: give the forgetful functor to presheaves its lax monoidal structure from the
 sheafification adjunction. Its unit map is the identity by the adjunction triangle;

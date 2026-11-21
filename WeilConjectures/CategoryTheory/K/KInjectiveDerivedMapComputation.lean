@@ -11,7 +11,7 @@ public import WeilConjectures.CategoryTheory.Right.RightDerivedFunctorOfQuasiIso
 # Computing derived morphisms with arbitrary K-injective resolutions
 
 Source: Stacks Project, Derived Categories, Tags 070I and 070Y, and the explicit
-arbitrary-resolution consequence in the DAG (blueprint: lem-sf-kinjective-derived-map-computation).
+arbitrary-resolution consequence in the DAG.
 The comparison is the recorded comparison of `def-sfb-right-derived-functor`.
 All complexes are unbounded, and resolution maps need only be quasi-isomorphisms.
 -/

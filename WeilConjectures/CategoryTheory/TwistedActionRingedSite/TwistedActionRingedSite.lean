@@ -41,12 +41,6 @@ variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 omit [s.functor.IsContinuous J J] in
 /-- Canonical small-limit lifting for the module translation forgetful functor.
 
-Source: step 2 of the action-site assembly (step 5 of the detailed proof below), in
-`literature/blueprint/latest/blueprint/part-duality-trace-formula/`
-`sec-poincare-duality/sec-perfect-complexes-on-the-point-and-two-exchange-formulas/`
-`sk-def-ops/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.md`.
-(blueprint: lem-sf-twisted-action-ringed-site).
-
 For each diagram, compose the generic full-subcategory and endofunctor-algebra lifts.
 The module-sheaf limit exists, and translation preserves it because it is an equivalence.
 -/
@@ -58,12 +52,6 @@ noncomputable instance translationForgetCreatesLimits [(sigma J s R a).IsEquival
   exact ⟨fun {_} _ ↦ inferInstance⟩
 
 /-- Canonical small-colimit lifting for the module translation forgetful functor.
-
-Source: step 2 of the action-site assembly (step 5 of the detailed proof below), in
-`literature/blueprint/latest/blueprint/part-duality-trace-formula/`
-`sec-poincare-duality/sec-perfect-complexes-on-the-point-and-two-exchange-formulas/`
-`sk-def-ops/sk-thm-sf-package/cor-coef-verdier-weil-equivariance.md`.
-(blueprint: lem-sf-twisted-action-ringed-site).
 
 For each diagram, compose the generic full-subcategory and endofunctor-algebra lifts.
 The module-sheaf colimit exists, and translation preserves it because it is an equivalence.
@@ -129,8 +117,7 @@ private theorem addOrbit (P : ModulePresentation J s R a) :
 
 /-- The semidirect ringed site, with exact orbit induction and its tensor/Hom calculus.
 
-Source: Stacks Tag 00W0 is motivation only; the twisted assertion is agent-formulated
-(blueprint: lem-sf-twisted-action-ringed-site).
+Source: Stacks Tag 00W0 is motivation only.
 
 Proof plan:
 

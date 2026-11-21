@@ -28,8 +28,7 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 /-- Identify degree-n derived cohomology of an object placed in degree n with its image
 under the left exact functor. The construction shifts to degree zero, commutes the derived
 functor with the shift, and uses the classical degree-zero comparison.
-Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1).
-(blueprint: def-pc-right-derived-single-degree-comparison) -/
+Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1). -/
 noncomputable def rightDerivedSingleDegreeComparison (n : ℕ) :
     DerivedCategory.Plus.singleFunctor B n ⋙ G.rightDerivedFunctorPlus ⋙
       DerivedCategory.Plus.homologyFunctor C n ≅ G := by

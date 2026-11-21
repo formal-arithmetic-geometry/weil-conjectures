@@ -11,10 +11,6 @@ public import Mathlib.Algebra.Group.Int.Defs
 import Mathlib.Data.Int.Basic
 
 /-! # Extending a degree-one shift comparison
-
-Source: iteration and inverse iteration in the proof of
-lem-sc-derived-pullback-tensor-unit-shift, using the shift addition isomorphisms.
-(blueprint: lem-sc-integer-shift-from-one).
 -/
 
 @[expose] public section
@@ -115,9 +111,6 @@ private lemma iterated_add' (a : I(1 : ℤ)) (n m k : ℤ) (h : n + m = k) :
 
 /-- A natural isomorphism commuting with translation by one extends to an integer
 shift structure.
-
-Source: the iteration step of lem-sc-derived-pullback-tensor-unit-shift.
-(blueprint: lem-sc-integer-shift-from-one).
 
 Proof. Postcomposition with shift by one is fully faithful. Given a comparison
 at n+1, compose its hom with the inverse of a and with the source and target

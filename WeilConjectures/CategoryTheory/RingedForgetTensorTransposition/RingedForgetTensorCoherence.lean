@@ -42,8 +42,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Structural coherence of a normalized ringed tensor comparison
 
-Source: Stacks Project, Tags 0FPT, 06YU and 0G7D
-(blueprint: lem-sf-ringed-forget-tensor-coherence).
+Source: Stacks Project, Tags 0FPT, 06YU and 0G7D.
 -/
 
 @[expose] public noncomputable section
@@ -324,16 +323,13 @@ preserves the structural constraints of the two fixed derived tensor presentatio
 This statement constructs neither the chain comparison nor its derived extension and
 makes no uniqueness assertion.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0FPT
-(`lemma-symmetric-monoidal-derived`), with Tags 06YS, 06YU and 0G7D;
-step 4 of lem-sf-ringed-forget-tensor-descent
-(blueprint: lem-sf-ringed-forget-tensor-coherence).
+Source: Stacks Project, sites-cohomology.tex, Tag 0FPT, with Tags 06YS, 06YU and 0G7D.
 
 Proof: define the unit comparison by composing the image of cB.unitIso, the
 termwise exact-functor factor, the single-complex comparison, the degree-zero
 image of u.coherence.unit, and cA.unitIso inverse. Its normalization follows by
 cancelling cA.unitIso. For flat-term K-flat P,Q,N, their total tensor complexes
-are flat-term K-flat (lem-pur-kflat-total-tensor-model); their termwise U-images
+are flat-term K-flat; their termwise U-images
 have the same properties by hypothesis. Apply the representative square to the
 inner and outer tensor pairs. Apply the associator-model equations of cB and cA
 and naturality of the representative comparisons. Cancel these isomorphisms to

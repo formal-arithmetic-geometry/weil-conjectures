@@ -21,8 +21,7 @@ open scoped CategoryTheory.Obj
 namespace CategoryTheory.Functor
 
 /-- A monoidal left adjoint intertwines extensions along a ring map and its image.
-Source: Stacks Project, Modules on Sites, Tag 03EK
-(blueprint: lem-pe-mapmod-scalar-extension).
+Source: Stacks Project, Modules on Sites, Tag 03EK.
 
 Proof: lift the monoidal adjunction to module objects for each ring. Both composites
 are left adjoint to the same restriction functor: the comparison for the right

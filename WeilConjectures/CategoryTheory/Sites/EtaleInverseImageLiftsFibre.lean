@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Equalizers
 
 /-! # The underlying fibre comparison for étale inverse image
 
-Source: Stacks Project, Tags 03AJ and 00X6
-(blueprint: lem-sc-etale-inverse-image-lifts-fibre).
+Source: Stacks Project, Tags 03AJ and 00X6.
 -/
 
 @[expose] public section
@@ -82,7 +81,6 @@ end Fibre
 /-- Set inverse image identifies the underlying fibre sheaves, compatibly with their
 inclusions into the abelian middle objects on sections from the adjunction unit.
 Source: Stacks Project, Tag 03AJ (the sheaf of lifts) and Tag 00X6 (finite limits).
-(blueprint: lem-sc-etale-inverse-image-lifts-fibre)
 
 Proof: The subtype sheaf of lifts is the equalizer of the underlying quotient map
 and the map sending every section to the restriction of s. Express this as a limiting

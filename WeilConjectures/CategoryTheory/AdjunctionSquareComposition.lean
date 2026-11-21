@@ -9,8 +9,7 @@ module
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-! # Pasting invertible squares of adjoints
-Source: Mathlib's conjugation identities; Stacks Project, Tag 0D5S.
-(blueprint: lem-pc-adjunction-square-composition). -/
+Source: Stacks Project, Tag 0D5S. -/
 
 @[expose] public section
 open CategoryTheory Functor
@@ -64,8 +63,6 @@ private theorem conjugateIso_associator
   exact conjugateEquiv_associator_hom a₁ a₂ a₃
 
 /-- Pasting two invertible right-adjoint squares gives the pasted left-adjoint square.
-Source: Mathlib `conjugateEquiv_comp`, its whiskering formulas and associator formula.
-(blueprint: lem-pc-adjunction-square-composition).
 Proof: conjugate both paths by the composite adjunctions. Conjugation reverses
 composition and exchanges left and right whiskering. The assumed right-square
 identity then identifies the paths; its adjacent comparison inverses cancel. -/

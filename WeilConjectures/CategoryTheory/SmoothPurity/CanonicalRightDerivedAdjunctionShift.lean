@@ -150,7 +150,6 @@ private theorem canonical_unit_commShift
 /-- The adjunction induced by an exact left adjoint and the canonical K-injective
 right-derived functor respects their canonical shifts.
 Source: Stacks Project, Tags 07A6 and 0DVC.
-(blueprint: lem-sp-canonical-right-derived-adjunction-shift).
 
 Proof: on K-injective complexes the canonical derived unit is invertible, and
 its comparison with the K-injective equivalence makes it commute with shifts.

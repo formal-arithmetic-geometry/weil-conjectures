@@ -21,8 +21,7 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Filtered colimits of sites
 
-Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35
-(blueprint: lem-weil-pbc-colimit-of-sites).
+Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35
-(blueprint: lem-weil-pbc-colimit-of-sites).
+/-- Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35.
 
 We use the filtered opposite of Stacks' cofiltered index category. A cocone in `Cat`
 whose object and arrow cocones are set colimits encodes the category in 09YL.
@@ -61,8 +59,7 @@ Proof:
 6. Steps 3 and 4 show that each canonical functor preserves coverings and their
    pullbacks. Precomposition therefore preserves sheaves, using
    lem-weil-pbc-site-continuous-pushforward-sheaf. Cocone naturality gives composition.
-7. The constructed sheaf inverse image is left adjoint to precomposition
-   (def-weil-pbc-sites-and-cohomology), hence preserves finite colimits by
+7. The constructed sheaf inverse image is left adjoint to precomposition, hence preserves finite colimits by
    situation-conventions.
 8. For a refinement, transpose the unit of inverse image at the refined stage
    through the original stage adjunction. The result is the transition morphism.
@@ -90,8 +87,7 @@ theorem filtered_index_nonempty (J : Type u) [SmallCategory J] [IsFiltered J] :
     Nonempty J := by
   exact IsFiltered.nonempty
 
-/-- Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35
-(blueprint: lem-weil-pbc-colimit-of-sites-reduced).
+/-- Source: Stacks Project, Sites, Situation 0A34 and Lemmas 09YL, 0A35.
 
 We use the filtered opposite of Stacks' cofiltered index category. A cocone in `Cat`
 whose object and arrow cocones are set colimits encodes the category in 09YL.
@@ -117,8 +113,7 @@ Proof:
 6. Steps 3 and 4 show that each canonical functor preserves coverings and their
    pullbacks. Precomposition therefore preserves sheaves, using
    lem-weil-pbc-site-continuous-pushforward-sheaf. Cocone naturality gives composition.
-7. The constructed sheaf inverse image is left adjoint to precomposition
-   (def-weil-pbc-sites-and-cohomology), hence preserves finite colimits by
+7. The constructed sheaf inverse image is left adjoint to precomposition, hence preserves finite colimits by
    situation-conventions.
 8. For a refinement, transpose the unit of inverse image at the refined stage
    through the original stage adjunction. The result is the transition morphism.
@@ -354,7 +349,7 @@ theorem exists_colimit_site_reduced
   exact ⟨V, ⟨hobjects⟩, ⟨harrows⟩, hLift, hFinite, Q, hQ, hisos, hcomp, hbase, hpb,
     hVcover, hVpullback, hcontinuous, hlimits, hcolimits, hsets, hgroups⟩
 
-/-- (blueprint: lem-weil-pbc-colimit-of-sites) -/
+/--  -/
 theorem exists_colimit_site
     (J : Type u) [SmallCategory J] [IsFiltered J] (F : J ⥤ Cat.{u, u})
     (P : ∀ j : J, Precoverage (F.obj j))

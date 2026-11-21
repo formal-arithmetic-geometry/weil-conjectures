@@ -182,9 +182,7 @@ variable [HasDerivedCategory.{w}
 /-- Principal quotient completion exists on the unbounded derived category, with
 its universal counit and its prescribed quotient augmentation.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YT and 0941;
-steps 2, 4, 7 and 8 of lem-pur-finite-free-completion-exchange
-(blueprint: lem-pur-principal-quotient-completion-exists).
+Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YT and 0941.
 
 Proof: The quotient maps form a strict natural augmentation. Its product is killed
 by 1 minus the transition shift, so the canonical Roos lift defines an augmentation

@@ -169,7 +169,6 @@ presentation, naturally on its first and third vertices.
 
 Source: Stacks Project, Derived Categories, Tag 014D (mapping cones and the
 canonical double-cone homotopy equivalences), and Tag 05QK (rotation).
-(blueprint: lem-pc-derived-cone-square-unrotation).
 
 Proof: Take A = L[-1], B = Cone(g)[-1], t = inr(g)[-1], and the
 corresponding primed objects; take the vertical maps r[-1] and Cone(s,r)[-1].

@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Bijectivity of the normalized comparison on an injective complex
 
-Source: Stacks Tags 06XR (1) and 070I
-(blueprint: lem-sc-p1-rhom-injective-cocycle-bijective).
+Source: Stacks Tags 06XR (1) and 070I.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ open CochainComplex.HomComplex
 namespace CategoryTheory.Functor
 
 /-- The cocycle normalization forces a comparison on an injective complex to be bijective.
-Source: Stacks Tags 06XR (1) and 070I
-(blueprint: lem-sc-p1-rhom-injective-cocycle-bijective).
+Source: Stacks Tags 06XR (1) and 070I.
 
 Proof: The inverse cohomology-to-Q isomorphism followed by the derived unit induces
 an isomorphism from Hⁿ(Hom(M,I)) to Hⁿ(RHom(M,QI)), since I is degreewise injective.

@@ -13,9 +13,7 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-! Invertibility on all shifts of an object is a localizing predicate for a
 natural transformation between exact functors. The transformation itself need
-not commute with the chosen shifts. Source: the five-term exact-sequence
-argument, already used privately in FlatTelescopeNormalizationUnshiftedIsIso.
-(blueprint: lem-sc-shift-saturated-iso-locus). -/
+not commute with the chosen shifts. -/
 @[expose] public section
 set_option autoImplicit false
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
@@ -83,8 +81,7 @@ private theorem cone_five_lemma
 
 /-- Naturality and the two exact functor structures form five-term commuting
 rows. Transport the independently invertible components at `A[1]` and `B[1]`
-through the shift isomorphisms and apply `cone_five_lemma`.
-(blueprint: lem-sc-shift-saturated-iso-locus). -/
+through the shift isomorphisms and apply `cone_five_lemma`. -/
 theorem isoOnThirdOfIsoOnFour
     {C D : Type*} [Category C] [Category D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
@@ -121,33 +118,25 @@ section Saturation
 variable {C D : Type*} [Category C] [Category D] [HasShift C ℤ]
   (F G : C ⥤ D) (τ : F ⟶ G)
 
-/-- The isomorphism locus saturated under every integer shift.
-Source: the all-shifts predicate in the five-term exact-sequence argument.
-(blueprint: lem-sc-shift-saturated-iso-locus). -/
+/-- The isomorphism locus saturated under every integer shift. -/
 def isoOnAllShifts (X : C) : Prop := ∀ n : ℤ, IsIso (τ.app (X⟦n⟧))
 
 /-- Invertibility on all shifts is invariant under object isomorphism.
-Proof: apply naturality to the image of the isomorphism under each shift functor.
-Source: `NatTrans.isIso_app_iff_of_iso`.
-(blueprint: lem-sc-shift-saturated-iso-locus). -/
+Proof: apply naturality to the image of the isomorphism under each shift functor. -/
 theorem isoOnAllShifts_of_iso {X Y : C} (e : X ≅ Y)
     (h : isoOnAllShifts F G τ X) : isoOnAllShifts F G τ Y := by
   intro n
   exact (NatTrans.isIso_app_iff_of_iso τ ((shiftFunctor C n).mapIso e)).mp (h n)
 
 /-- Invertibility on all shifts is preserved by any further integer shift.
-Proof: transport the component at n + m through the shift-add isomorphism.
-Source: `shiftFunctorAdd` and naturality.
-(blueprint: lem-sc-shift-saturated-iso-locus). -/
+Proof: transport the component at n + m through the shift-add isomorphism. -/
 theorem isoOnAllShifts_shift {X : C} (h : isoOnAllShifts F G τ X) (n : ℤ) :
     isoOnAllShifts F G τ (X⟦n⟧) := by
   intro m
   exact (NatTrans.isIso_app_iff_of_iso τ ((shiftFunctorAdd C n m).app X)).mp (h (n + m))
 
 /-- Invertibility on all shifts descends to retracts.
-Proof: shift the retraction and use the induced retraction of component arrows.
-Source: `NatTrans.retractArrowApp` and `MorphismProperty.of_retract`.
-(blueprint: lem-sc-shift-saturated-iso-locus). -/
+Proof: shift the retraction and use the induced retraction of component arrows. -/
 theorem isoOnAllShifts_retract {X Y : C} (r : Retract X Y)
     (h : isoOnAllShifts F G τ Y) : isoOnAllShifts F G τ X := by
   intro n
@@ -157,9 +146,7 @@ theorem isoOnAllShifts_retract {X Y : C} (r : Retract X Y)
 /-- Invertibility on all shifts passes to coproducts preserved by both functors.
 Proof: whisker the transformation by each shift equivalence, which preserves colimits,
 then use invertibility on the summands to detect invertibility on the colimit point.
-This also covers an empty index set.
-Source: `isIso_app_coconePt_of_preservesColimit`.
-(blueprint: lem-sc-shift-saturated-iso-locus). -/
+This also covers an empty index set. -/
 theorem isoOnAllShifts_coproduct
     {J : Type*} (E : J → C) (q : Cofan E) (hq : IsColimit q)
     [PreservesColimitsOfShape (Discrete J) F] [PreservesColimitsOfShape (Discrete J) G]
@@ -180,9 +167,7 @@ variable [HasZeroObject C] [Preadditive C]
 
 /-- Invertibility on all shifts passes to the third object of a distinguished triangle.
 Proof: shift the triangle by n, supply invertibility at its first two objects and their
-further shifts by one, and apply the four-component five-term lemma for every n.
-Source: `Triangle.shift_distinguished` and `isoOnThirdOfIsoOnFour` above.
-(blueprint: lem-sc-shift-saturated-iso-locus). -/
+further shifts by one, and apply the four-component five-term lemma for every n. -/
 theorem isoOnAllShifts_cone (T : Triangle C) (hT : T ∈ distTriang C)
     (h₁ : isoOnAllShifts F G τ T.obj₁) (h₂ : isoOnAllShifts F G τ T.obj₂) :
     isoOnAllShifts F G τ T.obj₃ := by

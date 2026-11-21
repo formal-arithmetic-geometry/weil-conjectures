@@ -15,10 +15,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 
 /-! # The support and closure API for alpha-compact objects
-
-Source: Krause (2001), conditions (G3)--(G4), pages 121--122,
-and alpha-localizing closure, page 124.
-(blueprint: lem-sfb-alpha-compact-object-api)
 -/
 
 @[expose] public section
@@ -31,18 +27,14 @@ namespace CategoryTheory
 
 variable {C : Type u} [Category.{v} C] [HasCoproducts.{v} C]
 
-/-- Alpha-compact objects are alpha-small by construction.
-Source: Krause (2001), page 122.
-(blueprint: lem-sfb-alpha-compact-object-api) -/
+/-- Alpha-compact objects are alpha-small by construction. -/
 theorem IsAlphaCompact.isAlphaSmall {U : C} {α : Cardinal.{v}}
     (hU : IsAlphaCompact U α) : IsAlphaSmall U α := by
   obtain ⟨S, hSU, hsmall, _⟩ := hU
   exact hsmall U hSU
 
 /-- The maximal class itself satisfies (G4), since the witnessing class for the
-source object also contains every object in its factorization.
-Source: Krause (2001), page 122, maximal-class construction.
-(blueprint: lem-sfb-alpha-compact-object-api) -/
+source object also contains every object in its factorization. -/
 theorem IsAlphaCompact.factorizationClass (α : Cardinal.{v}) :
     (alphaCompactObjects C α).IsCoproductFactorizationClass := by
   intro U hU I Y f
@@ -51,8 +43,6 @@ theorem IsAlphaCompact.factorizationClass (α : Cardinal.{v}) :
   exact ⟨Z, fun i ↦ ⟨S, hZ i, hsmall, hfactor⟩, a, g, hg⟩
 
 /-- Krause's factorization condition (G4) implies perfectness (G2).
-Source: Krause (2001), page 123, first implication of Lemma 4.
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: factor a map through a coproduct of objects of S, lift each component by
 the given surjectivity, and compose the coproduct of lifts with the factorization. -/
@@ -70,26 +60,20 @@ theorem ObjectProperty.IsCoproductFactorizationClass.perfect
   rw [Category.assoc, Limits.Sigma.map_comp_map]
   simpa only [hb] using hg
 
-/-- Increasing the cardinal only relaxes the bound on support.
-Source: Krause (2001), condition (G3).
-(blueprint: lem-sfb-alpha-compact-object-api) -/
+/-- Increasing the cardinal only relaxes the bound on support. -/
 theorem IsAlphaSmall.of_le {U : C} {α β : Cardinal.{v}}
     (hU : IsAlphaSmall U α) (h : α ≤ β) : IsAlphaSmall U β := by
   intro I Y f
   obtain ⟨J, hJ, g, hg⟩ := hU I Y f
   exact ⟨J, hJ.of_le h, g, hg⟩
 
-/-- Alpha-compactness is monotone in the cardinal.
-Source: Krause (2001), page 122, maximal-class construction.
-(blueprint: lem-sfb-alpha-compact-object-api) -/
+/-- Alpha-compactness is monotone in the cardinal. -/
 theorem IsAlphaCompact.of_le {U : C} {α β : Cardinal.{v}}
     (hU : IsAlphaCompact U α) (h : α ≤ β) : IsAlphaCompact U β := by
   obtain ⟨S, hSU, hsmall, hfactor⟩ := hU
   exact ⟨S, hSU, fun V hV ↦ (hsmall V hV).of_le h, hfactor⟩
 
-/-- Smallness is invariant under isomorphism, by precomposing a factorization.
-Source: Krause (2001), condition (G3).
-(blueprint: lem-sfb-alpha-compact-object-api) -/
+/-- Smallness is invariant under isomorphism, by precomposing a factorization. -/
 theorem IsAlphaSmall.of_iso {U V : C} {α : Cardinal.{v}}
     (hU : IsAlphaSmall U α) (e : U ≅ V) : IsAlphaSmall V α := by
   intro I Y f
@@ -98,9 +82,7 @@ theorem IsAlphaSmall.of_iso {U V : C} {α : Cardinal.{v}}
   rw [Category.assoc, hg]
   simp
 
-/-- Repletion preserves the smallness and factorization conditions.
-Source: Krause (2001), page 122, maximal-class construction.
-(blueprint: lem-sfb-alpha-compact-object-api) -/
+/-- Repletion preserves the smallness and factorization conditions. -/
 theorem IsAlphaCompact.of_iso {U V : C} {α : Cardinal.{v}}
     (hU : IsAlphaCompact U α) (e : U ≅ V) : IsAlphaCompact V α := by
   obtain ⟨S, hSU, hsmall, hfactor⟩ := hU
@@ -118,8 +100,6 @@ instance isAlphaCompact_isClosedUnderIsomorphisms (α : Cardinal.{v}) :
   of_iso e hU := hU.of_iso e
 
 /-- A coproduct of fewer than alpha alpha-small objects is alpha-small.
-Source: Krause (2001), page 124, alpha-localizing closure of alpha-small objects.
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: factor each component map through a support of size less than alpha.
 Regularity bounds the union of these supports by alpha. Map every component
@@ -147,8 +127,6 @@ theorem IsAlphaSmall.coproduct (α : Cardinal.{v}) [Fact α.IsRegular]
   rw [hk, hg]
 
 /-- Coproducts of fewer than alpha alpha-compact objects are alpha-compact.
-Source: Krause (2001), page 124, alpha-localizing closure of T^alpha.
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: take the replete class of coproducts of fewer than alpha alpha-compact
 objects. Its objects are alpha-small by regularity. To factor a map from such
@@ -216,8 +194,6 @@ private theorem alphaSmall_of_equivalence (e : C ≌ D)
   simp [s]
 
 /-- Equivalences preserve alpha-compactness.
-Source: Krause (2001), pages 121--122, conditions (G3)--(G4).
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: pull the canonical class back along the inverse equivalence. Coproduct
 comparison isomorphisms transfer the support condition. For (G4), factor the
@@ -265,17 +241,13 @@ theorem IsAlphaCompact.of_equivalence (e : C ≌ D)
 
 end Equivalence
 
-/-- Shifts preserve alpha-compactness, being equivalences preserving coproducts.
-Source: Krause (2001), page 124, alpha-localizing closure of T^alpha.
-(blueprint: lem-sfb-alpha-compact-object-api) -/
+/-- Shifts preserve alpha-compactness, being equivalences preserving coproducts. -/
 theorem IsAlphaCompact.shift [HasShift C ℤ]
     {U : C} {α : Cardinal.{v}} (hU : IsAlphaCompact U α) (n : ℤ) :
     IsAlphaCompact (U⟦n⟧) α := hU.of_equivalence (shiftEquiv C n)
 
 open scoped ZeroObject in
 /-- The zero object is alpha-compact for every regular alpha.
-Source: Krause (2001), page 124, alpha-localizing closure of T^alpha.
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: the class of zero objects satisfies (G4) using zero component maps.
 Every map from a zero object factors through the empty subcoproduct. -/
@@ -309,8 +281,6 @@ variable [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
 open Pretriangulated
 
 /-- Alpha-small objects are closed under extensions.
-Source: Krause (2001), page 124, alpha-localizing closure of alpha-small objects.
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: restrict a map from the middle vertex to the first vertex and factor it
 through a small support J. The subcoproduct inclusion is split monic, so the
@@ -365,8 +335,6 @@ theorem IsAlphaSmall.extension (α : Cardinal.{v}) [Fact α.IsRegular]
 end Triangle
 
 /-- Bounded coproducts of an essentially small class form an essentially small class.
-Source: Krause (2001), Lemma 5, smallness of the alpha-localizing closure.
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: embed every indexing set of cardinality less than alpha into a fixed set
 of cardinality alpha. Reindex its coproduct by the image. The resulting shapes
@@ -400,8 +368,6 @@ theorem ObjectProperty.EssentiallySmall.bounded_coproducts
 
 omit [HasCoproducts.{v} C] in
 /-- Extensions of two essentially small classes form an essentially small class.
-Source: Krause (2001), Lemma 5, smallness of the alpha-localizing closure.
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: choose small representative sets for both outer vertices. The connecting
 maps between their representatives form a small set by local smallness. Choose
@@ -439,8 +405,6 @@ theorem ObjectProperty.EssentiallySmall.extensionProduct
 
 omit [HasCoproducts.{v} C] in
 /-- The shift closure of an essentially small class is essentially small.
-Source: Krause (2001), Lemma 5, construction of the small alpha-localizing hull.
-(blueprint: lem-sfb-alpha-compact-object-api)
 
 Proof: shift every member of a small representative set by every integer. These
 objects form a small representative set for the shift closure. -/

@@ -12,7 +12,6 @@ import all WeilConjectures.WeilSheaf.SixFunctors.DerivedWeilTensorOperations
 /-! # Evaluation-normalized models of K-flat total tensor
 
 Source: Stacks 0A96, 08J9 and 06YN.
-(blueprint: lem-sf-normalized-kflat-tensor-models).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ variable (F : A ⥤ A ⥤ A) [F.flip.Additive] [∀ P, (F.flip.obj P).Additive]
   (KFlat : CochainComplex A ℤ → Prop)
 
 /-- The signed componentwise evaluation fixes the model, rather than just its naturality.
-Source: Stacks 0A96 and 08J9, tensor--Hom on complexes and K-injective localization.
-(blueprint: lem-sf-normalized-kflat-tensor-models). -/
+Source: Stacks 0A96 and 08J9, tensor--Hom on complexes and K-injective localization. -/
 def KFlatTensorModelNormalization
     (model : ∀ P T : CochainComplex A ℤ, KFlat P → KFlat T →
       (S.tensor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj T) ≅
@@ -53,7 +51,6 @@ def KFlatTensorModelNormalization
 
 /-- Normalized total tensor models, including their evaluation and naturality equations.
 Source: Stacks 0A96, 08J9, 06YN and the representative tensor--Hom construction.
-(blueprint: lem-sf-normalized-kflat-tensor-models).
 
 Proof: the parametrized adjunction gives the isomorphism of Hom complexes. Its
 unflipped degree-zero uncurry is unsigned. Exchange the two total directions to

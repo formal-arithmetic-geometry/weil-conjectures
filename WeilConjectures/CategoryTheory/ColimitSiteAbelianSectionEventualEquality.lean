@@ -84,7 +84,6 @@ private theorem comparison_kernel_iff
 /-- Source: Stacks Project, Sites, Tag 0A35, presentation independence and
 unit-compatible adjunction identification; abelian extension by Modules on Sites,
 Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-abelian-section-eventual-equality).
 
 Proof: Write H for the inverse image of G at t.right, and W for the image of U.
 For continuous f, g and h with f followed by g equal to h, the composite

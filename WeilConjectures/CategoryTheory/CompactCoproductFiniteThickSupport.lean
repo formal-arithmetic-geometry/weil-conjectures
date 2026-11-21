@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Triangulated.Generators
 # Compact maps into a coproduct have finite thick support
 
 Source: Stacks Project, Derived Categories, Tag 09SP, with the stage notation of
-Tag 09SN (blueprint: lem-sc-compact-coproduct-finite-thick-support).
+Tag 09SN.
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ open CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory
 
 /-- Enlarging a finite generator support enlarges its thick envelope.
-Source: Stacks Project, Tag 09SP
-(blueprint: lem-sc-compact-coproduct-finite-thick-support).
+Source: Stacks Project, Tag 09SP.
 Proof: include the smaller coproduct into the larger and retract by zero on the
 extra summands. Retract closure and minimality of the thick envelope give inclusion. -/
 theorem finite_thick_mono
@@ -55,7 +54,6 @@ theorem finite_thick_mono
 
 /-- A compact-source map into a coproduct of shifted generators has finite thick support.
 Source: Stacks Project, Derived Categories, Tag 09SP, initial-stage argument.
-(blueprint: lem-sc-compact-coproduct-finite-thick-support).
 
 Proof: compactness writes the map as a finite sum of maps to individual summands.
 Take the image of the finite support in the generator index set. Each corresponding

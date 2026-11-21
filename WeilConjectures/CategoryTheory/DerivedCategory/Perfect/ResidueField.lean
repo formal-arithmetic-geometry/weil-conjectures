@@ -257,7 +257,7 @@ lemma exactAt_tensorRight_of_exactAt_tensorRight_residueField [IsLocalRing R]
   refine LinearMap.exact_rTensor_of_exact_rTensor_residueField _ _ ?_ hκ M
   rw [← ModuleCat.hom_comp, P.d_comp_d, ModuleCat.hom_zero]
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Testing finite Tor amplitude at the residue
+/-- Testing finite Tor amplitude at the residue
 field (over a point).
 
 Let `R` be an Artinian local ring with residue field `κ` (for instance `A_{E,n} = 𝒪_E/ϖⁿ`), and
@@ -275,7 +275,7 @@ theorem torAmplitudeIn_of_homologyConcentratedIn_tensor_residueField [IsLocalRin
   exact (torAmplitudeIn_iff_forall_exactAt hPk e a b).2 fun M q hq ↦
     exactAt_tensorRight_of_exactAt_tensorRight_residueField P hP q (hC q hq) M
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Testing finite Tor amplitude at the residue
+/-- Testing finite Tor amplitude at the residue
 field (over a point).
 
 Over an Artinian local ring `R` with residue field `κ`, an object `C ∈ D(R)` has Tor amplitude in

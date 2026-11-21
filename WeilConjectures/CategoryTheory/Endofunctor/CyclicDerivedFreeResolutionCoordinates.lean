@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 
 The already proved chain resolution is localized in the two specified derived categories.
 Source: Stacks Tags 0152 and 015F and the normalized free resolution.
-(blueprint: lem-sf-cyclic-free-resolution-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -30,18 +29,17 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
   [HasDerivedCategory.{w} C] [HasDerivedCategory.{wF} (IsoAlgebra F)]
 
 /-- The exact free adjunction in the specified, independently chosen localizations.
-Source: Stacks 015F (blueprint: lem-sf-cyclic-free-resolution-coordinates). -/
+Source: Stacks 015F. -/
 def cyclicDerivedFreeAdjunction :
     (Free.functor F).mapDerivedCategory ⊣ (forget F).mapDerivedCategory :=
   (Free.adjunction F).mapExactDerivedCategory
 
-/-- Its free-forgetful composite.
-Source: the free resolution (blueprint: lem-sf-cyclic-free-resolution-coordinates). -/
+/-- Its free-forgetful composite. -/
 abbrev cyclicDerivedFreeFunctor :=
   (forget F).mapDerivedCategory ⋙ (Free.functor F).mapDerivedCategory
 
 /-- Comparison with the termwise free-forgetful composite.
-Source: Stacks 015F (blueprint: lem-sf-cyclic-free-resolution-coordinates). -/
+Source: Stacks 015F. -/
 def cyclicDerivedFreeComparison (K : CochainComplex (IsoAlgebra F) ℤ) :
     (cyclicDerivedFreeFunctor F).obj (DerivedCategory.Q.obj K) ≅
       DerivedCategory.Q.obj
@@ -52,8 +50,7 @@ def cyclicDerivedFreeComparison (K : CochainComplex (IsoAlgebra F) ℤ) :
       (((forget F).mapHomologicalComplex (.up ℤ)).obj K)
 
 /-- A normalized free triangle, retaining the summand and SES formulas.
-Source: Stacks 0152 and the free resolution
-(blueprint: lem-sf-cyclic-free-resolution-coordinates). -/
+Source: Stacks 0152 and the free resolution. -/
 structure CyclicDerivedFreeResolution where
   theta : ∀ (M : IsoAlgebra F) (n : ℤ), Free.obj F M.carrier n ≅ M.carrier
   d : forget F ⋙ Free.functor F ⟶ forget F ⋙ Free.functor F
@@ -157,8 +154,7 @@ Proof: take the proved termwise resolution, descend its differential and its SES
 boundary through fully faithful localization, and identify its counit using the
 specified exact adjunction. On representatives the resulting triangle is isomorphic
 to the canonical SES triangle. Essential surjectivity gives the result for every object.
-Source: Stacks 0152, 015F; free-resolution steps 5--9
-(blueprint: lem-sf-cyclic-free-resolution-coordinates). -/
+Source: Stacks 0152, 015F. -/
 theorem exists_cyclicDerivedFreeResolution : Nonempty (CyclicDerivedFreeResolution F) := by
   obtain ⟨theta, d, ht, hd, hz, hs⟩ := cyclicFree_heart F
   let B := (forget F ⋙ Free.functor F).mapHomologicalComplex (.up ℤ)

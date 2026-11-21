@@ -13,8 +13,7 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Associativity of the specified tensor comparison
 
-Source: the normalized tensor and evaluation formulas of the twisted action-site
-presentation; Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
+Source: Stacks 03EK, 03EL and 03EO. No native or derived category occurs.
 -/
 
 @[expose] public noncomputable section
@@ -90,8 +89,7 @@ private theorem restriction_tensor_map_pure (P : Presentation J s R a) :
 omit [s.functor.IsContinuous J J] in
 /-- The specified tensor comparisons preserve associativity.
 
-Source: Stacks 03EK, 03EL; the pure-tensor formula for specified restriction
-(blueprint: lem-sf-twisted-action-tensor-associativity).
+Source: Stacks 03EK, 03EL.
 
 Proof: cancel the two inverse tensor comparisons before and after the associativity
 square. Postcompose with the restriction isomorphism and test on local pure triples,

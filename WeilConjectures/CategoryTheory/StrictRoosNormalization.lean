@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteModules
 public import WeilConjectures.CategoryTheory.StrictRoosModel
 
 /-! Normalization of the universal derived Roos model.
-Source: Stacks Project, Tag 0941 and the strict comparison refinement
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0941 and the strict comparison refinement. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -24,7 +23,7 @@ namespace CategoryTheory
 
 /-- The right-derived universal property fixes the normalized comparison and its evaluations.
 Source: Stacks Project, Cohomology on Sites, Tag 0941, proof, with steps 5--8 of the
-strict-cone comparison (auxiliary; not a blueprint node).
+strict-cone comparison.
 
 Proof: Use uniqueness of right derived functors to obtain ρ. The unit equality is
 Q(roosι X) κ_X ρ_X = η_X. Define e_X,n by the inverse of κ_X ρ_X followed by

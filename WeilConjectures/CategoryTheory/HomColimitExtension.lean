@@ -36,9 +36,7 @@ variable {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C]
   [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
   {I : Type v} [SmallCategory I] [IsFiltered I]
 
-/-- Objects whose shifted additive Hom functors carry a specified cocone to colimits.
-Source: the canonical comparison in Hemo--Richarz--Scholbach, Lemma 5.3(2).
-(auxiliary; not a blueprint node) -/
+/-- Objects whose shifted additive Hom functors carry a specified cocone to colimits. -/
 def homColimitProperty (D : I ⥤ C) (c : Cocone D) : ObjectProperty C :=
   fun K ↦ ∀ n : ℤ, IsIso (colimit.desc _
     ((shiftFunctor C n ⋙ preadditiveCoyoneda.obj (op K)).mapCocone c))
@@ -146,8 +144,6 @@ private theorem iso_middle_of_homological
     (inferInstanceAs (Mono (α.app (T.obj₁⟦(1 : ℤ)⟧))))
 
 /-- Filtered Hom continuity is closed under distinguished extensions.
-Source: Hemo--Richarz--Scholbach, Lemma 5.3(2), long exact Hom sequence argument.
-(auxiliary; not a blueprint node)
 
 Proof: for a distinguished triangle A → B → C → A[1], take its contravariant
 long exact additive Hom sequence into each Dᵢ[n] and into c.pt[n]. Filtered colimits

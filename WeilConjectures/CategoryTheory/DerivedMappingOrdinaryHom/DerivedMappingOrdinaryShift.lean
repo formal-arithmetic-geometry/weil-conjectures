@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
 /-! # The signed target shift of the ordinary linear Hom complex
 
 Source: Stacks Project, Differential Graded Algebra, Example 09L9.
-(blueprint: lem-sf-derived-mapping-ordinary-shift)
 -/
 
 @[expose] public noncomputable section
@@ -28,7 +27,7 @@ variable (B : Type b) [CommRing B]
   {A : Type u} [Category.{v} A] [Preadditive A] [Linear B A]
 
 /-- The family identification underlying the shift of the Hom complex.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-shift). -/
+Source: Stacks 09L9. -/
 def shiftLinearEquiv (X Y : CochainComplex A ℤ) (a n : ℤ) :
     ULift.{b} (Cochain X (Y⟦a⟧) n) ≃ₗ[ULift.{v} B]
       ULift.{b} (Cochain X Y (n + a)) where
@@ -41,7 +40,7 @@ def shiftLinearEquiv (X Y : CochainComplex A ℤ) (a n : ℤ) :
 
 /-- The target-shift isomorphism of unbounded linear Hom complexes.
 The factor in the shifted differential cancels the factor in `δ_rightUnshift`.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-shift). -/
+Source: Stacks 09L9. -/
 def targetShift (X Y : CochainComplex A ℤ) (a : ℤ) :
     complex B X (Y⟦a⟧) ≅ (complex B X Y)⟦a⟧ :=
   HomologicalComplex.Hom.isoOfComponents
@@ -57,7 +56,7 @@ def targetShift (X Y : CochainComplex A ℤ) (a : ℤ) :
       simp only [smul_smul, Int.units_mul_self, one_smul])
 
 /-- On families of morphisms, the shift is precisely Mathlib's `rightUnshift`.
-Source: Stacks 09L9 (blueprint: lem-sf-derived-mapping-ordinary-shift).
+Source: Stacks 09L9.
 Proof: evaluate the component isomorphism; the degree-reindexing isomorphism is the identity. -/
 theorem targetShift_apply (X Y : CochainComplex A ℤ) (a n : ℤ)
     (x : (complex B X (Y⟦a⟧)).X n) :

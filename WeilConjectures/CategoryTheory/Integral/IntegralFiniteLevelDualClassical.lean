@@ -33,10 +33,6 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalShe
 
 /-!
 # Classicality of the finite-level integral dual tensor
-
-Source: `literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-int-compactness/`
-`sk-lem-int-ext-bound.proof.md`, second and third finite-reduction bullets
-(blueprint: lem-sfb-integral-finite-level-dual-classical).
 -/
 
 @[expose] public noncomputable section
@@ -251,10 +247,6 @@ private theorem quotient_action_zero
     _ = 0 := by rw [hkill, comp_zero]
 
 /-- Finite-level classicality and annihilation of the ordinary integral dual tensor.
-
-Source: latest blueprint, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-second and third finite-reduction bullets
-(blueprint: lem-sfb-integral-finite-level-dual-classical).
 
 Proof:
 1. A finite constant integral model has a local two-term resolution by dualizable

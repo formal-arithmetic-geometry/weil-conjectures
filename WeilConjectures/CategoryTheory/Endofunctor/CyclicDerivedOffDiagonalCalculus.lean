@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.Endofunctor.CyclicDerivedFreeBoundaryCompa
 
 Source: Stacks Tag 0149, applied to the free triangle, and the identification of its
 boundary with strict off-diagonal presentations in Tag 0152.
-(blueprint: lem-sf-cyclic-derived-off-diagonal-calculus).
 -/
 
 @[expose] public noncomputable section
@@ -71,9 +70,8 @@ the free resolution and its derived triangle are unbounded. Independently chosen
 localizations are compared by their canonical localization equivalences; the standard
 factorization isomorphisms transport the displayed formulas unchanged.
 
-Source: steps 1--5 and 8 of lem-sf-cyclic-derived-hom-exact-sequence; Stacks Tags 0149
-and 0152, and the explicitly normalized free-resolution triangle.
-(blueprint: lem-sf-cyclic-derived-off-diagonal-calculus). -/
+Source: Stacks Tags 0149
+and 0152, and the explicitly normalized free-resolution triangle. -/
 theorem cyclicDerivedOffDiagonal_calculus [IsGrothendieckAbelian.{v} C] :
     (∀ (M N : DerivedCategory (IsoAlgebra F)) (u v : CyclicDerivedHom F M N (-1)),
       cyclicDerivedOffDiagonalBoundary F (u + v) =
@@ -206,8 +204,7 @@ theorem cyclicDerivedOffDiagonal_calculus [IsGrothendieckAbelian.{v} C] :
       AddEquiv.apply_symm_apply, AddEquiv.apply_symm_apply]
 
 /-- The raw connecting map as an additive homomorphism.
-Source: the additive free-adjunction boundary of Stacks Tags 0149 and 0152
-(blueprint: lem-sf-cyclic-derived-off-diagonal-calculus). -/
+Source: the additive free-adjunction boundary of Stacks Tags 0149 and 0152. -/
 def cyclicDerivedOffDiagonalBoundaryHom [IsGrothendieckAbelian.{v} C]
     (M N : DerivedCategory (IsoAlgebra F)) : CyclicDerivedHom F M N (-1) →+ (M ⟶ N) :=
   AddMonoidHom.mk' (cyclicDerivedOffDiagonalBoundary F)

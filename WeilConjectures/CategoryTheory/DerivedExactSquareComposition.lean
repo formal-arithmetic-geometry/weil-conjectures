@@ -263,7 +263,6 @@ private theorem exactSquare_comp_forward
 /-- Exact derived square comparisons respect a specified composition identity as natural
 isomorphisms, before taking components.
 Source: the localization universal property, Stacks Project, Tags 05S7 and 014F.
-(auxiliary; not a blueprint node).
 
 Proof: First invert the ordinary comparison square by cancelling its three isomorphisms.
 Apply its resulting component equation degreewise to cochain complexes. Form the two

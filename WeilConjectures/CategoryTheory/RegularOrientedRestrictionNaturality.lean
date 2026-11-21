@@ -11,10 +11,6 @@ public import Mathlib.CategoryTheory.Whiskering
 
 The formal naturality calculation in Step 4(ii) of the regular-immersion proof,
 before applying co-projection or cancelling Tate factors.
-Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
-sec-poincare-duality/sec-the-trace-map-in-top-degree/sk-cor-trace/sk-thm-regular/
-sk-thm-regular.proof.md, Step 4(ii).
-(blueprint: lem-pur-regular-oriented-restriction-naturality).
 -/
 
 @[expose] public section
@@ -32,9 +28,7 @@ Proof: substitute the orientation identity for `PU`, cancel `Cu` with its invers
 and use naturality of `B` at `PX.hom`. The dualizing square then replaces the middle
 word by `Ev.hom` followed by the pullback of `b.hom`. The orientation identity for
 `PV` implies `PV.inv ≫ Ev.hom = Cv.inv ≫ T.map PZ.inv`. Substitution and functoriality
-of `T` give the result. No tensor, invertibility detection, or choice of maps is used.
-Source: regular-immersion proof Step 4(ii), equation (3), refining the item's
-fourth proof step (blueprint: lem-pur-regular-oriented-restriction-naturality). -/
+of `T` give the result. No tensor, invertibility detection, or choice of maps is used. -/
 theorem regularOrientedRestrictionNaturality
     {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
     (S : C ⥤ D) (G : C ⥤ E) (H : D ⥤ F) (T : E ⥤ F)

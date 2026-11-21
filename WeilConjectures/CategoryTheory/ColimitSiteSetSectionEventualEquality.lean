@@ -22,7 +22,6 @@ import WeilConjectures.CategoryTheory.FilteredColimitCategories
 /-! # Equal stage-section images become equal after one refinement.
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-set-section-eventual-equality).
 -/
 
 @[expose] public section
@@ -160,8 +159,7 @@ private theorem raw_colimit_comparison_iso
   rw [he] at hi
   exact hi
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-set-section-eventual-equality).
+/-- Source: Stacks Project, Sites, Tag 0A35.
 
 Equal stage-section images become equal after one refinement.
 

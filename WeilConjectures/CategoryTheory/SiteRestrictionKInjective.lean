@@ -20,9 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace SheafOfModules
 
 /-- Slice restriction preserves K-injectives, with an independent ring universe.
-Source: Stacks Project, Cohomology on Sites, lemma-restrict-K-injective-to-open;
-Modules on Sites, Tags 03DI and 03DJ.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites; Modules on Sites, Tags 03DI and 03DJ.
 
 Proof: The explicit sheafified direct-sum construction is exact and left adjoint to
 restriction. Under the termwise adjunction, a map from an acyclic complex to the

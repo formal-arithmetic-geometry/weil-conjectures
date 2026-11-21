@@ -16,7 +16,7 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 # Čech acyclicity of injective sheaves on a site
 
 Source: Stacks Project, Cohomology on Sites, Tags 03AW, 03F6, 03AS, 03AT, 03AU,
-03AN (blueprint: lem-weil-pbc-site-injective-cech-acyclic).
+03AN.
 -/
 
 @[expose] public section
@@ -37,8 +37,7 @@ monomorphism into the cofree presheaf splits by injectivity. The chosen Čech fu
 this to a split embedding of complexes. Positive cocycles map to cocycles of the cofree
 complex; the insertion contraction supplies primitives there. Mapping these primitives
 back by the splitting gives primitives of the original cocycles. Hence the positive
-homology is zero. The sheaf gluing theorem identifies degree-zero homology with sections.
-(blueprint: lem-weil-pbc-site-injective-cech-acyclic) -/
+homology is zero. The sheaf gluing theorem identifies degree-zero homology with sections. -/
 theorem site_injective_cech_acyclic
     {C : Type u} [Category.{v} C]
     {J : Precoverage C} [J.HasIsos] [J.IsStableUnderComposition]

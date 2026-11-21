@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Sites.CoverLifting
 /-!
 # Special cocontinuous functors between sites
 
-Source: Stacks Project, Definitions 00XJ and 03CG, Lemma 03A0, conditions (1)-(5)
-(blueprint: def-weil-pbc-special-cocontinuous-functor).
+Source: Stacks Project, Definitions 00XJ and 03CG, Lemma 03A0, conditions (1)-(5).
 
 Cocontinuity itself is `Functor.IsCocontinuous` for the generated topologies.
 The remaining conditions use the actual covering presieves, not their saturation.
@@ -27,8 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
 
-/-- Source: Stacks Project, Lemma 03A0, conditions (1)-(5), and Definition 03CG
-(blueprint: def-weil-pbc-special-cocontinuous-functor).
+/-- Source: Stacks Project, Lemma 03A0, conditions (1)-(5), and Definition 03CG.
 
 The sites use covering presieves and their generated topologies. No strict indexed
 composition class is imposed: finite coverings form a pretopology, but do not satisfy

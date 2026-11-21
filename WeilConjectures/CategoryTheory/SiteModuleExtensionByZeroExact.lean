@@ -30,7 +30,6 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Sheafify the direct sum of sections over all maps to the slice object.
 Source: Stacks Project, Tag 03DI.
-(auxiliary; not a blueprint node).
 -/
 def siteModuleExtensionByZero :
     SheafOfModules.{max c v r} (R.over U) ⥤ SheafOfModules.{max c v r} R :=
@@ -224,7 +223,6 @@ private noncomputable def extensionSheafAdjunction
 /-- Extension by zero is exact and left adjoint to restriction, with no identification
 of the ring universe and the site universes.
 Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
-(auxiliary; not a blueprint node).
 
 Proof: A map from the direct-sum presheaf is uniquely a compatible map from every
 summand. Evaluating the corresponding restriction map on a slice object, and inserting

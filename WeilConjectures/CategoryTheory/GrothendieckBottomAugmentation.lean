@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.ResolutionDerivedSingleUnitAugmentation
 /-! # The bottom interval and an augmented comparison
 
 Source: Stacks Project, Tags 015N and 015J, bottom interval of the second spectral sequence.
-(blueprint: lem-sc-grothendieck-bottom-augmentation)
 -/
 
 @[expose] public section
@@ -29,9 +28,7 @@ namespace CategoryTheory
 homology of the augmented comparison after applying the second derived functor.
 No composite acyclicity hypothesis or resolution computation for G is used here.
 
-Source: Stacks Project, Tags 015N and 015J; the bottom interval augmentation in steps
-1 and 2 of lem-sc-grothendieck-bottom-resolution-comparison.
-(blueprint: lem-sc-grothendieck-bottom-augmentation)
+Source: Stacks Project, Tags 015N and 015J.
 
 Proof: Extend J and F(I) by zero. Precomposing the extension of phi with the
 augmentation of J gives the augmentation F(X)[0] to F(I): in degree zero this

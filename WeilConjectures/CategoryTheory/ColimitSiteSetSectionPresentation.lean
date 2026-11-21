@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Limits.Types.Filtered
 /-! # Stage section colimit presentation
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-set-section-presentation).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
 /-- Source: Stacks Project, Sites, Tag 0A35, the section formula and adjunction paragraph.
-(blueprint: lem-weil-pbc-colimit-site-set-section-presentation).
 
 Proof: The unit equations uniquely determine alpha and theta by the stage adjunctions.
 The same uniqueness proves their composition and identity laws. For each limit-site

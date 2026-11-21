@@ -56,9 +56,8 @@ private theorem arrow_comp_congr {C : Type u} [Category.{u} C]
   rfl
 
 /-- Finitely many isomorphisms out of fixed stage objects lift above that stage.
-Source: Stacks Project, Sites, Tag 09YL, finite-diagram observation, and Categories,
+Source: Stacks Project, Sites, Tag 09YL observation, and Categories,
 Tag 04AX, the object and arrow description of filtered colimits.
-(blueprint: lem-weil-pbc-filtered-colimit-finite-iso-lift)
 
 Proof: Represent the hom and inverse arrows of each E i by surjectivity of the
 arrow cocone. Move this finite family above j using maxima and IsFiltered.wideSpan.

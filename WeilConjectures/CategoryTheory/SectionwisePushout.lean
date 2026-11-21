@@ -8,8 +8,7 @@ public import Mathlib.CategoryTheory.Sites.Sheaf
 
 /-! # Sectionwise pushouts of sheaves
 
-Source: Stacks Project, Tag 03EK; coefficient-twist blueprint, proof step 6.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 03EK.
 -/
 
 @[expose] public section
@@ -22,7 +21,6 @@ namespace CategoryTheory
 /-- A sectionwise pushout square of sheaves is a pushout square of sheaves.
 
 Source: Stacks Project, Tag 03EK.
-(auxiliary; not a blueprint node)
 
 Proof: evaluation jointly reflects colimits of presheaves. The fully faithful
 inclusion of sheaves into presheaves reflects colimits, so the sectionwise universal

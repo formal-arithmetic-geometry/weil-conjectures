@@ -130,9 +130,7 @@ private theorem computationCounit_app_eq {R' S' : C} [MonObj R'] [MonObj S']
     Category.comp_id]
 
 /-- The canonical derived association intertwines the three computation counits.
-Source: Stacks Tags 06YY and 0FND; the normalized transpose calculation in
-`lem-pe-internal-kflat-scalar-tower-realization`.
-(blueprint: lem-pe-internal-scalar-extension-counit-composition).
+Source: Stacks Tags 06YY and 0FND.
 
 Proof: apply the composite derived adjunction's Hom bijection. Adjoint uniqueness
 identifies the transpose of its association with the direct unit and the inverse

@@ -17,9 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Pbc.PbcExchangeCompatibleFamily
 /-!
 # Descent of scalar-compatible exact functors
 
-Source: Weil conjectures blueprint main-20261015, proper base change, order 1312
-(blueprint: prop-weil-pbc-descent-functors).
-
 The stage-system morphism records the finite-stage functors and their comparison
 isomorphisms.  Its induced pair-category functor is the coefficient-category
 functor of the proposition; the displayed map formula is included explicitly.
@@ -67,9 +64,7 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I]
 
 /-- The exactness clause for the induced functor, with its shift structure existentially
 quantified. This packages the existing Additive, CommShift and IsTriangulated predicates;
-all category structures are the supplied canonical ones.
-Source: blueprint main-20261015, order 1312, exactness clause
-(blueprint: prop-weil-pbc-descent-functors). -/
+all category structures are the supplied canonical ones. -/
 def ExactDescent (F : StageSystem.Morphism S S') : Prop :=
     F.functor.Additive ∧
       (∃ s : F.functor.CommShift ℤ,
@@ -77,9 +72,7 @@ def ExactDescent (F : StageSystem.Morphism S S') : Prop :=
 
 /-- The full general descent conclusion, including every representative and every equation
 between compatible transformation families. This predicate packages the displayed formulas
-without choosing replacement categories, shifts, arrows or functors.
-Source: blueprint main-20261015, order 1312, general descent paragraph
-(blueprint: prop-weil-pbc-descent-functors). -/
+without choosing replacement categories, shifts, arrows or functors. -/
 def DescentSpec (F : StageSystem.Morphism S S') : Prop :=
     ExactDescent F ∧
       (∀ (K L : S.PairCategory) (M : I)
@@ -313,8 +306,6 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w)
 
 /-- Exact descent on the actual Qbar coefficient categories, with the prescribed
 representative formula and all compatible transformation equations.
-Source: blueprint main-20261015, proper base change, order 1312
-(blueprint: prop-weil-pbc-descent-functors).
 
 Proof: use the canonical stage-system functor, with objects (E, Φ_E K) and
 representative map β.hom.app K ≫ Φ_M.map u ≫ β.inv.app L. Associator coherence
@@ -372,9 +363,6 @@ The four stage functors are identified with `pbcDescentDirectImage` and
 `pbcDescentPullback`. All four scalar-comparison families are characterized by
 `PbcDirectImageBetaSpec` and `PbcPullbackBetaSpec`; their exchange is identified
 with the localization of `pbcActualCompletedExchange`.
-
-Source: Weil conjectures blueprint main-20261015, proper base change, order 1312
-(blueprint: prop-weil-pbc-descent-functors).
 
 Proof: use pbcDirectImageCoherentFamily twice and pbcPullbackCoherentFamily twice.
 Their canonical normalizations let pbcExchangeCompatibleFamily supply the compatible

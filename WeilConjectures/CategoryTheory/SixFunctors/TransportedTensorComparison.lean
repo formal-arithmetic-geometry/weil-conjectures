@@ -9,8 +9,6 @@ public import Mathlib.CategoryTheory.Monoidal.Transport
 import all WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForgetTensorAssociatorRepresentatives
 
 /-! # Tensor comparisons for transported monoidal structures
-
-Source: Mathlib monoidal transport and functor associativity; explicit model comparison.
 -/
 
 @[expose] public noncomputable section
@@ -18,9 +16,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.MonoidalCategory
 namespace CategoryTheory
 
-/-- Counit tensor comparison for a monoidal structure transported along an equivalence.
-Source: Mathlib monoidal transport, the counit of the transported equivalence.
-(blueprint: lem-sf-transported-tensor-comparison). -/
+/-- Counit tensor comparison for a monoidal structure transported along an equivalence. -/
 def transportedTensorComparison {C D : Type*} [Category C] [Category D]
     [MonoidalCategory D] (E : C ≌ D) :
     letI := Monoidal.transport E.symm
@@ -32,9 +28,7 @@ def transportedTensorComparison {C D : Type*} [Category C] [Category D]
       exact E.counitIso.hom.naturality (E.functor.map f.1 ⊗ₘ E.functor.map f.2))
 
 set_option linter.style.haveILetI false in
-/-- The transported counit comparison respects associativity.
-Source: Mathlib Functor.OplaxMonoidal.associativity.
-(blueprint: lem-sf-transported-tensor-comparison). -/
+/-- The transported counit comparison respects associativity. -/
 theorem transportedTensorComparison_associativity
     {C D : Type*} [Category C] [Category D] [MonoidalCategory D] (E : C ≌ D)
     (X Y Z : C) :
@@ -49,9 +43,7 @@ theorem transportedTensorComparison_associativity
     inferInstanceAs (Monoidal.equivalenceTransported E.symm).inverse.Monoidal
   exact Functor.OplaxMonoidal.associativity E.functor X Y Z
 
-/-- Faithful monoidal comparison detects an associator equation between explicit models.
-Source: elementary cancellation and associator naturality, used in native tensor transport.
-(blueprint: lem-sf-transported-tensor-comparison). -/
+/-- Faithful monoidal comparison detects an associator equation between explicit models. -/
 theorem associator_of_model_comparison
     {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [MonoidalCategory D]
     (F : C ⥤ D) [F.Faithful]
@@ -91,9 +83,7 @@ theorem associator_of_model_comparison
     _ = F.map a ≫ eW ≫ r' := by rw [reassoc_of% hC]
     _ = _ := by rw [hR]
 
-/-- Naturality of a localization factor carries a model square through localization.
-Source: naturality of a natural isomorphism and functoriality of composition.
-(blueprint: lem-sf-transported-tensor-comparison). -/
+/-- Naturality of a localization factor carries a model square through localization. -/
 theorem localizationModel_square
     {C D B A : Type*} [Category C] [Category D] [Category B] [Category A]
     (q : C ⥤ B) (p : D ⥤ A) (F : B ⥤ A) (V : C ⥤ D)
@@ -107,9 +97,7 @@ theorem localizationModel_square
   dsimp only [Functor.comp_map] at hn
   rw [reassoc_of% hn, ← p.map_comp, h, p.map_comp, Category.assoc]
 
-/-- The preimage of a conjugated associator satisfies its defining model square.
-Source: full faithfulness and cancellation of the right model isomorphism.
-(blueprint: lem-sf-transported-tensor-comparison). -/
+/-- The preimage of a conjugated associator satisfies its defining model square. -/
 theorem preimageAssociator_square
     {C D : Type*} [Category C] [Category D] [MonoidalCategory D]
     (F : C ⥤ D) [F.Full] [F.Faithful]
@@ -120,9 +108,7 @@ theorem preimageAssociator_square
   simp only [Functor.preimageIso_hom, Functor.map_preimage, Iso.trans_hom,
     Iso.symm_hom, Category.assoc, Iso.inv_hom_id, Category.comp_id]
 
-/-- Paste two binary model squares and move the inner comparison through localization.
-Source: tensor-comparison naturality and functoriality of the tensor.
-(blueprint: lem-sf-transported-tensor-comparison). -/
+/-- Paste two binary model squares and move the inner comparison through localization. -/
 theorem tensorModel_left_square
     {B A D : Type*} [Category B] [Category A] [Category D]
     [MonoidalCategory B] [MonoidalCategory A] [MonoidalCategory D]
@@ -150,9 +136,7 @@ theorem tensorModel_left_square
   rw [← reassoc_of% hn]
   simp only [p.map_comp, Category.assoc]
 
-/-- The right-associated form of the binary model square calculation.
-Source: tensor-comparison naturality and functoriality of the tensor.
-(blueprint: lem-sf-transported-tensor-comparison). -/
+/-- The right-associated form of the binary model square calculation. -/
 theorem tensorModel_right_square
     {B A D : Type*} [Category B] [Category A] [Category D]
     [MonoidalCategory B] [MonoidalCategory A] [MonoidalCategory D]
@@ -180,9 +164,7 @@ theorem tensorModel_right_square
   rw [← reassoc_of% hn]
   simp only [p.map_comp, Category.assoc]
 
-/-- Invert a normalized forward representative square.
-Source: cancellation of model isomorphisms and functoriality of inverses.
-(blueprint: lem-sf-transported-tensor-comparison). -/
+/-- Invert a normalized forward representative square. -/
 theorem inverseModel_square
     {C D : Type*} [Category C] [Category D] (F : C ⥤ D)
     {X Y : C} {V Z Z' W : D} (i : X ≅ Y)

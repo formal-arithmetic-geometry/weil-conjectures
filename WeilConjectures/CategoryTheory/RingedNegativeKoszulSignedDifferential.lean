@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.SignedKoszulSummandDifferential
 /-! # Signed differential of the canonical negative Koszul basis
 
 Source: Stacks Project, More on Algebra, Tags 0622 and 0664; Algebraization, Tag 0A0E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -183,9 +182,7 @@ private theorem negative_basis_d_signed
 /-- The canonical negative pure tensor has the signed erased-index boundary.
 
 Source: Stacks Project, More on Algebra, Tags 0622 and 0664, contraction on ordered
-Koszul generators and the graded tensor Leibniz rule; Algebraization, Tag 0A0E,
-lemma-derived-completion-koszul, the finite free calculation.
-(auxiliary; not a blueprint node).
+Koszul generators and the graded tensor Leibniz rule; Algebraization, Tag 0A0E, the finite free calculation.
 
 Proof: evaluate endomorphisms of the regular module sheaf at one to construct a
 ring homomorphism into the ring of global sections. A module endomorphism sends

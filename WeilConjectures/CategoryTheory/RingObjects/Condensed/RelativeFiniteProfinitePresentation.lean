@@ -176,8 +176,7 @@ private noncomputable def partitionConeIsLimit {S : Profinite.{u}} (E : Over S) 
 /-- Every profinite space over a profinite base has a small cofiltered presentation by
 pullbacks of maps of finite sets along surjective finite quotients of the base.
 
-Source: Bhatt--Scholze, proof of Lemma 2.2.8
-(blueprint: new-lem-zl-relative-finite-profinite-presentation).
+Source: Bhatt--Scholze, proof of Lemma 2.2.8.
 
 Proof: index by compatible finite clopen partitions of source and base. Common
 intersection refines two such pairs, and trivial partitions give an object. A stage

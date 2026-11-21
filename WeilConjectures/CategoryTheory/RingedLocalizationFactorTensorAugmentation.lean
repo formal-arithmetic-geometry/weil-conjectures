@@ -15,7 +15,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 /-! # The tensor augmentation for one localization factor
 
 Source: Stacks Project, algebraization.tex, Tag 099B.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -280,9 +279,7 @@ private theorem quasiIso_projection
 
 /-- The self-tensor projection for the two-term complex of one localization.
 
-Source: Stacks Project, algebraization.tex, Tag 099B, proof of
-`lemma-derived-completion`, the contraction after localizing at a generator.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099B, the contraction after localizing at a generator.
 
 Proof: write L = [O -> S] with S = O[1/s] in degrees zero and one.
 The map id_L tensor epsilon has target L tensor O[0]. Its kernel is L tensor

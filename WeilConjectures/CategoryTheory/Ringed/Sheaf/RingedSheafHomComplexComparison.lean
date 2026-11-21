@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.Ringed.RingedHomComplexComparison
 
 /-! # The product-total Hom comparison for actual sheaf complexes
 
-Source: Stacks Project, Section 0A8X; the component calculation in the ringed-forgetting
-argument (blueprint: lem-sf-ringed-sheaf-hom-complex-comparison).
+Source: Stacks Project, Section 0A8X.
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +39,7 @@ attribute [local irreducible] homComplexFunctor homComplexπ
 
 /-- Product preservation and the specified sheaf-Hom comparison induce the normalized
 comparison of actual Hom complexes.
-Source: Stacks Project, Section 0A8X; steps 4–5 of the ringed-forgetting comparison
-(blueprint: lem-sf-ringed-sheaf-hom-complex-comparison).
+Source: Stacks Project, Section 0A8X.
 Proof: specialize the abstract product-total comparison to homComplexFunctor and homComplexπ.
 The cones homComplexIsLimit give the products. The equations homComplex_d_π give the standard
 differential, and homComplexFunctor_map_f_π gives the map equation after composing the two

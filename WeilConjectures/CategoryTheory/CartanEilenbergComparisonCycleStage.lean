@@ -625,8 +625,7 @@ private theorem exists_cartanEilenberg_cycle_row_presentation
 an object-column or outgoing-boundary comparison. The augmentation equation is written after
 inclusion into the target object column, so no identification of single-complex cycles is needed.
 
-Source: Stacks Project, Tags 015I, 015K and 013P(2);
-(blueprint: lem-weil-pbc-ce-comparison-cycle-stage).
+Source: Stacks Project, Tags 015I, 015K and 013P(2)
 
 Proof: Form the short exact boundary → cycles → homology rows of the two single
 bicomplexes and the resolutions. Apply F to the source rows and evaluate both coefficient

@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Comma.Over.Basic
 /-! # Unit-compatible section maps satisfy the functor and cocone laws.
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-set-section-coherence).
 -/
 
 @[expose] public section
@@ -124,8 +123,7 @@ private theorem sheaf_triangle_id
 
 -- The arrow binder in the given family m does not occur in its codomain.
 set_option linter.unusedVariables false in
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit).
-(blueprint: lem-weil-pbc-colimit-site-set-section-coherence).
+/-- Source: Stacks Project, Sites, Tag 0A35.
 
 Unit-compatible section maps satisfy the functor and cocone laws.
 

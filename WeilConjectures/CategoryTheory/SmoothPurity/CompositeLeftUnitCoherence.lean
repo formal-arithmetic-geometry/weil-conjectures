@@ -13,7 +13,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- Left-unit coherence pastes under composition of tensor functors.
-Source: Stacks 07A4 (blueprint: lem-pur-composite-left-unit-coherence).
+Source: Stacks 07A4.
 Proof: expand the composite unit. Naturality of the second tensor comparison
 moves the image of the first unit to the left of that comparison. Apply the
 second left-unit law and functoriality, then apply the first left-unit law. -/

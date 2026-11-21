@@ -49,7 +49,6 @@ private theorem inverse_equations_of_arrow_eq
 
 /-- Stage representation of an isomorphism in a filtered colimit category.
 Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-filtered-colimit-iso-presieve-representation)
 
 Proof: Represent the arrow and its inverse in the arrow colimit. Filteredness gives
 one stage containing both representatives and all endpoint equalities. The two

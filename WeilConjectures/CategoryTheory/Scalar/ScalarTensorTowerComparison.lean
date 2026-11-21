@@ -34,8 +34,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- Scalar extension preserves K-flatness and has the normalized strong tensor
 comparison, coherent along coefficient towers and at identity maps.
-Source: Stacks 07A4, 07A6 and 0D6D
-(blueprint: lem-sfb-scalar-tensor-tower-comparison).
+Source: Stacks 07A4, 07A6 and 0D6D.
 Proof: scalar extension is the identity-topos pullback. The sectionwise tensor
 map sends s tensor (x tensor y) to (s tensor x) tensor (1 tensor y), with inverse
 (s tensor x) tensor (t tensor y) mapped to st tensor (x tensor y). Extend through

@@ -28,8 +28,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Slice evaluation compatibility
 
-Source: Stacks Project, Tags 07A4, 08J9 and 08JB
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-coherence).
+Source: Stacks Project, Tags 07A4, 08J9 and 08JB.
 -/
 
 @[expose] public noncomputable section
@@ -159,8 +158,7 @@ private theorem evaluation_of_iso
       · simp
 
 /-- Exact slice restriction preserves the representative-normalized evaluation counit.
-Source: Stacks Project, Tags 08J9 and 08JB, and equation-internal-hom
-(blueprint: lem-weil-pbc-ringed-slice-evaluation-coherence).
+Source: Stacks Project, Tags 08J9 and 08JB, and equation-internal-hom.
 
 Proof: resolve L by a flat-term K-flat complex P and M by a K-injective complex I.
 Resolve Hom(P,I) by a flat-term K-flat complex Q. Exact restriction preserves the

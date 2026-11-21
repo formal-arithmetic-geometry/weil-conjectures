@@ -14,7 +14,6 @@ import all WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionConstraintCohe
 /-! # KoszulScalarTensorComparison for strict Koszul comparison
 
 Source: Stacks Project, Tags 0A0E and 0913.
-(blueprint: lem-f5-koszul-scalar-tensor-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +44,7 @@ attribute [local instance] gradedTensorCache gradedGoodTensorLeftCache
   cachedComplexBraided cachedComplexClosed
 
 /-- Ordinary scalar extension, constructed using its actual sheafification maps.
-Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation).
-(blueprint: lem-f5-koszul-scalar-tensor-comparison). -/
+Source: Stacks Project, Tags 0A0E and 0913 (finite Koszul tensor calculation). -/
 def extension (φ : R ⟶ B) : Modules R ⥤ Modules B where
   obj M := SheafOfModules.changeOfRingsOfUniverses.{u, u, u, u} φ M
   map f := SheafOfModules.changeOfRingsHomOfUniverses.{u, u, u, u} φ _ f
@@ -200,8 +198,7 @@ Transport binary naturality and right-unit coherence across this isomorphism, ca
 invertible components.
 Proof step 3: Use the ordinary extension/restriction adjunction and the generic total tensor
 comparison construction. Supply its unit condition by inverting the proved module right-unit
-coherence.
-(blueprint: lem-f5-koszul-scalar-tensor-comparison). -/
+coherence. -/
 private def scalarTensorComparison (φ : R ⟶ B) :
     ScalarKoszulTransport.TensorPullbackComparison
       ((extension φ).mapHomologicalComplex (.up ℤ))

@@ -230,8 +230,7 @@ end Normalized
 
 /-- The scalar-unit inclusions are finite-biproduct inclusions with their prescribed
 pure-tensor representatives on every unbounded complex.
-Source: Stacks 03CY, 03CZ and 07A6; finite-coefficient transport Steps 1 and 3
-(blueprint: lem-pur-constant-scalar-normalized-basis).
+Source: Stacks 03CY, 03CZ and 07A6.
 Proof: sheafify the basis of B over A and its dual coordinate functionals. They give
 mutually inverse maps between restricted tensor extension of M and a finite power
 of M. Define each inclusion as the scalar unit followed by multiplication by its

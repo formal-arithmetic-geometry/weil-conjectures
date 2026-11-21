@@ -9,9 +9,8 @@ import WeilConjectures.CategoryTheory.SignedKoszulFiniteCoordinates
 
 /-! # The two highest terms of an ordered negative Koszul tensor
 
-Source: Stacks Project, algebraization.tex, lemma-derived-completion-koszul (0A0E),
+Source: Stacks Project, algebraization.tex (0A0E),
 the finite free complex in degrees -r through 0.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -59,9 +58,8 @@ private theorem scalarPow_apply
 This is a statement about two terms of one finite complex, with no quotient, tower,
 coefficient-ring presentation, or augmentation.
 
-Source: Stacks Project, algebraization.tex, lemma-derived-completion-koszul (0A0E),
-the negative finite free Koszul complex; more-algebra.tex, lemma-sequence-Koszul-complexes.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex (0A0E),
+the negative finite free Koszul complex.
 
 Proof: expand the ordered tensor by its standard subset basis. In degree zero the
 only subset is empty, so its inclusion ringedNegativeKoszulBasis is an isomorphism

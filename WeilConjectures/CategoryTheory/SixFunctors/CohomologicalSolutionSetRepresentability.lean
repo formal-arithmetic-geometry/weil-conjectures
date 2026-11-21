@@ -20,7 +20,6 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 
 Source: Krause, *Localization theory for triangulated categories*, Theorem 5.1.1,
 and the cofiber/kernel-killing argument in Stacks Project, Tag 0A8F.
-(blueprint: lem-sfb-cohomological-solution-set-representability)
 -/
 
 @[expose] public section
@@ -76,9 +75,7 @@ variable [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
 
 /-- A cohomological functor with a small solution set is representable.
 
-Source: Krause, *Localization theory for triangulated categories*, Theorem 5.1.1,
-final solution-set argument; Stacks Project, Tag 0A8F, kernel-killing argument.
-(blueprint: lem-sfb-cohomological-solution-set-representability)
+Source: Stacks Project, Tag 0A8F, kernel-killing argument.
 
 Proof: Take the coproduct of the solution objects and lift their distinguished
 values using preservation of products. Its value x is weakly universal. Form the

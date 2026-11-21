@@ -22,9 +22,6 @@ import WeilConjectures.CategoryTheory.DerivedCoyonedaEvaluation
 
 /-!
 # Hom bound for a bounded classical torsion complex on an integral stratum
-
-Source: blueprint latest, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-the dual-tensor and bounded-heart steps.
 -/
 
 @[expose] public noncomputable section
@@ -71,9 +68,7 @@ end
 classical locally ell-power torsion cohomology. This assertion does not involve
 an ambient scheme, a closed support, a reduction functor, or a constructible target.
 
-Source: blueprint latest, `sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-dual-tensor and bounded-heart steps; Stacks Tag 08JJ.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
+Source: Stacks Tag 08JJ.
 
 Proof: transport the continuous integral coefficient to integralCoefficientRing.
 Since cd_ell(S) <= s, choose its finite natural value s0 <= s. The finite local

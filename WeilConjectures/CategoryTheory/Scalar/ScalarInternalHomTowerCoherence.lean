@@ -36,7 +36,6 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 /-- The normalized closed-Hom comparisons respect coefficient towers and identities.
 Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 07A4 and 07A6.
-(blueprint: lem-sfb-scalar-internal-hom-tower-coherence).
 
 Proof: on a K-flat representative, the unit-normalized left-adjoint composition
 comparison is t tensor (s tensor x) mapped to t b(s) tensor x. It intertwines the

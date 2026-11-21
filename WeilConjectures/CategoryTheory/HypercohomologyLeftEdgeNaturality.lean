@@ -26,7 +26,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 
 /-- Naturality of the complex hypercohomology left edge.
 Source: Stacks Project, derived.tex, Tag 015J, functoriality of the second spectral sequence.
-(blueprint: lem-pc-hypercohomology-left-edge-naturality)
 
 Proof: extend the cochain map by zero. Naturality of the extension homology isomorphism,
 the map-extension isomorphism and the quotient homology isomorphism transports its ordinary

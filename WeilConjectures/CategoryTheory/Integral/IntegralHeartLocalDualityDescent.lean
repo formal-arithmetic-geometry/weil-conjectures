@@ -16,10 +16,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Descent of duality and Tor bounds along a pro-etale cover
-
-Source: blueprint main-20261015, sec-six-functors-basics/sk-lem-int-integral-heart,
-the global comparison and local Tor bounds in integral-heart-dualizable.
-(blueprint: lem-integral-heart-local-duality-descent)
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +33,7 @@ namespace AlgebraicGeometry.ProEtale
 /-- Local dualizability of a degree-zero module gives invertibility of its global
 canonical tensor--Hom comparison; local Tor bounds descend on the same cover.
 
-Source: Stacks Project, Tags 08JJ, 08J9 and 0G7E; integral-heart-dualizable,
-proof steps 3, 4, 6 and 7.
-(blueprint: lem-integral-heart-local-duality-descent)
+Source: Stacks Project, Tags 08JJ, 08J9 and 0G7E.
 
 Proof: each member of the pro-etale cover is weakly etale, so its inverse image is
 exact slice restriction. Exact restriction commutes with cohomology, derived tensor,

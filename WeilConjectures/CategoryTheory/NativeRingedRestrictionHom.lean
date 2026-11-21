@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 The site-object, site-arrow and coefficient universes are independent. Restriction is
 implemented without the redundant identity change of scalars. Source: Stacks 03A0, 03CH, 03DA, 03DG,
-08J7 and 0A95 (auxiliary; not a blueprint node).
+08J7 and 0A95.
 -/
 
 @[expose] public noncomputable section
@@ -30,8 +30,7 @@ namespace CategoryTheory.NativeRestriction
 /-- The ring sheaf underlying a commutative ring sheaf, with its original site and coefficient
 universes.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 abbrev NativeRings {E : Type e} [Category.{ve} E] {τ : GrothendieckTopology E}
     [τ.HasSheafCompose (forget₂ CommRingCat.{s} RingCat.{s})]
     (R : Sheaf τ CommRingCat.{s}) :=
@@ -39,8 +38,7 @@ abbrev NativeRings {E : Type e} [Category.{ve} E] {τ : GrothendieckTopology E}
 /-- Module sheaves over the given commutative ring sheaf, keeping the coefficient universe
 independent of both site universes.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 abbrev NativeModules {E : Type e} [Category.{ve} E] {τ : GrothendieckTopology E}
     [τ.HasSheafCompose (forget₂ CommRingCat.{s} RingCat.{s})]
     (R : Sheaf τ CommRingCat.{s}) :=
@@ -146,8 +144,7 @@ variable {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
 
 /-- The commutative ring sheaf restricted along the continuous site functor.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 abbrev restrictedCommRing :=
   (F.sheafPushforwardContinuous CommRingCat K J).obj R
 
@@ -155,8 +152,7 @@ abbrev restrictedCommRing :=
 presheaf and its sheaf proof. This construction keeps the underlying module objects unchanged
 and omits the redundant identity restriction of scalars.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 def restrictModules :
     NativeModules.{max c d vc vd r, d, vd} R ⥤ NativeModules.{max c d vc vd r, c, vc}
       (restrictedCommRing.{_, _, _, _, r} (K := K) F R) :=
@@ -170,8 +166,7 @@ def restrictModules :
 /-- Direct restriction is additive. Its map on each component is the original map, so it preserves
 the sum of two morphisms componentwise.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 instance restrictModules_additive : (restrictModules.{_, _, _, _, r} (K := K) F R).Additive := by
   constructor
   intro M N f g
@@ -181,8 +176,7 @@ instance restrictModules_additive : (restrictModules.{_, _, _, _, r} (K := K) F 
 /-- Direct restriction agrees with the standard ringed pushforward. At each object use the identity
 restriction-of-scalars isomorphism; its naturality is the componentwise identity equation.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 def restrictModules_standardIso :
     restrictModules.{_, _, _, _, r} (K := K) F R ≅
       SheafOfModules.pushforward.{max c d vc vd r} (F := F)
@@ -297,8 +291,7 @@ private theorem fanIso {E : Type*} [Category E] {ι : Type*}
 
 /-- Apply an additive module restriction degreewise to a cochain complex.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 abbrev complexMap
     {A B : Type*} [Category A] [Category B] [HasZeroMorphisms A] [HasZeroMorphisms B]
     (T : A ⥤ B) [T.PreservesZeroMorphisms] := T.mapHomologicalComplex (.up ℤ)
@@ -409,8 +402,7 @@ postcomposition identifies the two terms of the Hom differential, so these degre
 isomorphisms form a cochain isomorphism. All products have indices in the fixed coefficient
 universe; no site or coefficient universe is identified.
 
-Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95.
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03A0, 03CH, 03DA, 03DG, 08J7 and 0A95. -/
 theorem homComplexRestriction
     {C : Type c} {D : Type d} [Category.{vc} C] [Category.{vd} D]
     {K : GrothendieckTopology C} {J : GrothendieckTopology D}

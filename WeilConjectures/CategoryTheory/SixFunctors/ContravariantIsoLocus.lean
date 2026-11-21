@@ -13,8 +13,7 @@ import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-! # Thick isomorphism loci of exact contravariant transformations
 
-Source: Stacks Project, Tags 0144 and 08JC; the categorical last two steps of
-lem-sf-site-hom-comparison-thick.
+Source: Stacks Project, Tags 0144 and 08JC.
 -/
 
 @[expose] public section
@@ -36,7 +35,7 @@ variable {C D : Type*} [Category C] [Category D]
   (β : B ⟶ E) [NatTrans.CommShift β ℤ]
 
 /-- The components of an exact contravariant transformation have a thick isomorphism locus.
-Source: Stacks 0144 and 08JC (blueprint: lem-sf-contravariant-comparison-iso-locus).
+Source: Stacks 0144 and 08JC.
 
 Proof: the component at zero is an isomorphism between zero objects. Naturality along
 isomorphisms and the shift square transport invertibility. Apply the triangle morphism

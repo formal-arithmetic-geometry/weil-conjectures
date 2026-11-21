@@ -22,7 +22,6 @@ import Mathlib.CategoryTheory.Limits.Types.Colimits
 /-! # General-object section functor presentation
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-set-evaluation-presentation).
 -/
 
 @[expose] public section
@@ -108,9 +107,8 @@ private theorem exists_unit_transition_nat
   rw [A.homEquiv_unit] at he
   exact congrArg (fun k ↦ Arrow.mk (k.hom.app (op Z))) he
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section formula, adjunction paragraph, and final left-exactness paragraph.
-(blueprint: lem-weil-pbc-colimit-site-set-evaluation-presentation).
 
 Proof: At t : Under i evaluate the stage inverse image along F(t.hom) at
 F(t.hom)(U). Transpose the unit at t' through the adjunction at t to obtain
@@ -256,7 +254,6 @@ private theorem source_evaluation_presentation
 
 /-- Source: Stacks Project, Sites, Tag 0A35, general-object section construction and
 final left-exactness paragraph.
-(blueprint: lem-weil-pbc-colimit-site-set-evaluation-presentation).
 
 Proof: Represent Y by an object X of some stage j, using joint surjectivity
 of the object colimit. Choose a common stage k receiving i and j, and transport

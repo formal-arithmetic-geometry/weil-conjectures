@@ -16,9 +16,8 @@ import Mathlib.Algebra.DirectSum.Module
 /-!
 # Recognizing a generator approximation telescope
 
-Source: Stacks Project, Derived Categories, Tag 09SN, lemma-write-as-colimit,
+Source: Stacks Project, Derived Categories, Tag 09SN,
 proof: vanishing of the cone of the comparison map.
-(blueprint: lem-pc-compact-generator-telescope-iso).
 -/
 
 @[expose] public section
@@ -41,9 +40,8 @@ set_option backward.defeqAttrib.useBackward true
 /-- The comparison from a telescope to `Y` is an isomorphism if every map from a
 shifted generator to `Y` lifts at stage zero and every map to a stage with zero
 composite to `Y` is killed at the next stage.
-Source: Stacks Project, Derived Categories, Tag 09SN, lemma-write-as-colimit,
+Source: Stacks Project, Derived Categories, Tag 09SN,
 proof: the paragraph beginning "Choose a distinguished triangle".
-(blueprint: lem-pc-compact-generator-telescope-iso).
 
 Proof: let `ι n` be the coprojection followed by `q`. Restricting the zero
 composition in the telescope triangle to each summand gives `t n ≫ ι (n+1) = ι n`.

@@ -14,7 +14,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Subobject.FactorThru
 # Incoming differentials vanish modulo successor boundaries
 
 Source: Stacks Project, Homology, Tag 012K, the displayed differential and boundary formulas.
-(blueprint: new-filtered-complex-incoming-boundary-quotient).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- Any map out of a page that kills successor boundaries kills the incoming differential.
 Source: Stacks Project, Homology, Tag 012K, the displayed differential and boundary formulas.
-(blueprint: new-filtered-complex-incoming-boundary-quotient).
 
 Proof. Write pq = (p,q), n = p+q. The preceding bidegree is
 (p-r,q+r-1), of total degree n-1. Pull back along epimorphisms to lift

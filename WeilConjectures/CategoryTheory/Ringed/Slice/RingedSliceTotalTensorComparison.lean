@@ -377,8 +377,7 @@ private theorem tensorComplexOverComparison (U : C) :
 end NativeTensorRestriction
 
 /-- Ordinary slice restriction commutes with total tensor by the pure-tensor identity.
-Source: Stacks Project, Tags 03EL, 06YN and 07A4
-(blueprint: lem-weil-pbc-ringed-slice-total-tensor-comparison).
+Source: Stacks Project, Tags 03EL, 06YN and 07A4.
 
 Proof: use the natural module tensor restriction isomorphism on every (p,q)
 summand. Its pure-section formula is x tensor y mapped to x tensor y, including

@@ -57,8 +57,7 @@ variable {X S : Scheme.{u}}
 
 /-- **The affine compactification construction**: given an immersion `i : X ⟶ 𝔸(n; S)` of
 `X` into a relative affine space over `S` compatible with `f : X ⟶ S`, composing `i` with
-the standard chart `𝔸(n; S) ⟶ ℙ(Option n; S)` and closing up the image compactifies `f`.
-(blueprint: `def:nagata-affine-compactification`) -/
+the standard chart `𝔸(n; S) ⟶ ℙ(Option n; S)` and closing up the image compactifies `f`. -/
 noncomputable def Compactification.ofIsImmersionAffineSpace {n : Type u} [Finite n]
     {f : X ⟶ S} (i : X ⟶ 𝔸(n; S)) [IsImmersion i] [QuasiCompact f]
     (hi : i ≫ 𝔸(n; S) ↘ S = f) : Compactification f :=
@@ -71,8 +70,7 @@ noncomputable def Compactification.ofIsImmersionAffineSpace {n : Type u} [Finite
   (Compactification.ofIsImmersion (i ≫ AffineSpace.toRelativeProjectiveSpace n S)
     (ℙ(Option n; S) ↘ S)).copy hfac.symm
 
-/-- **A quasi-affine scheme of finite type over `S` is compactifiable over `S`**
-(blueprint: `prop:nagata-affine-compactification`).
+/-- **A quasi-affine scheme of finite type over `S` is compactifiable over `S`**.
 
 Since an affine scheme is quasi-affine, this covers the case of an affine `X` used in the
 induction of Nagata's theorem. -/

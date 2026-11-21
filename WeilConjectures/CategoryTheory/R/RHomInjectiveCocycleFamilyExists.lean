@@ -193,7 +193,6 @@ precompose with the homology comparison induced by the invertible derived unit.
 The two inverse comparisons cancel in the normalization formula. Naturality of
 the unit and of the homology-to-Q comparison gives compatibility after this
 transport. No restriction on the integer degree is used.
-(blueprint: lem-sc-p1-rhom-natural-cocycle-map-injective-family)
 -/
 theorem exists_rhom_injective_cocycle_family
     {C : Type u} [Category.{v} C] [Abelian C] [EnoughInjectives C]

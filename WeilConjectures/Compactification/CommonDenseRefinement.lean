@@ -10,11 +10,6 @@ public import WeilConjectures.Compactification.BoundaryRefinement
 
 /-!
 # The closure of the diagonal is a common dense refinement
-
-Source: literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/
-sk-prop-nagata-sketch-comp-category/det-nagata-refinement-common-dense.md,
-node `proposition-dense-compactifications-form-cofiltered-category--1` (blueprint:
-proposition-dense-compactifications-form-cofiltered-category--1).
 -/
 
 @[expose] public section
@@ -39,10 +34,8 @@ private lemma infSnd_preimage {X S : Scheme.{u}} {f : X ⟶ S} [QuasiCompact f]
 
 /-- For two compactifications of a separated finite-type morphism over a qcqs scheme,
 the scheme-theoretic image of the diagonal graph is a dense compactification refining both;
-every finite nonempty family admits such a common dense refinement. Source: blueprint
-`proposition-dense-compactifications-form-cofiltered-category--1`, with Stacks Project Tags 01W3,
-01W4, 01W5, 01JY, 01QR, 01RG and 01R7 (blueprint:
-proposition-dense-compactifications-form-cofiltered-category--1).
+every finite nonempty family admits such a common dense refinement. Source: blueprint, with Stacks Project Tags 01W3,
+01W4, 01W5, 01JY, 01QR, 01RG and 01R7.
 
 Proof (the seven DAG steps):
 1. Put `P = c₁.Z ×_S c₂.Z`. Its first projection is the base change of the proper

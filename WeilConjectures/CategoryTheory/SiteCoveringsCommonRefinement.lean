@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.Sites.Hypercover.Zero
 /-!
 # Common refinements of coverings of a site
 
-Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6) and its proof
-(blueprint: lem-weil-pbc-site-coverings-common-refinement).
+Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6) and its proof.
 -/
 
 @[expose] public section
@@ -25,10 +24,9 @@ namespace CategoryTheory.Precoverage
 
 /-- Any choice of the pairwise fibre products gives a covering, and the specified projections
 are refinement morphisms with the two coordinate index maps. Source: Stacks Project,
-Sites, Lemma 7.10.5 (Tag 00W6)
-(blueprint: lem-weil-pbc-site-coverings-common-refinement).
+Sites, Lemma 7.10.5 (Tag 00W6).
 
-Proof: Apply site axiom (iii) (def-weil-pbc-sites-and-cohomology) to the second covering
+Proof: Apply site axiom (iii) to the second covering
 along each member of the first, using the given pullback squares. The resulting families
 cover each `E.X i`. Apply axiom (ii) to compose these families with `E`. Reindex the sigma
 index type by its equivalence with the product to obtain the displayed covering presieve.
@@ -74,8 +72,7 @@ theorem siteCoverings_common_refinement {C : Type u} [SmallCategory C]
     exact ⟨r, rfl, HEq.rfl⟩
 
 /-- Any finite family of coverings of an object has a common refinement.
-Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6), finite iteration
-(blueprint: lem-weil-pbc-site-coverings-common-refinement).
+Source: Stacks Project, Sites, Lemma 7.10.5 (Tag 00W6), finite iteration.
 
 Proof: Induct on the cardinality of the finite family. For the empty family use the
 singleton identity covering, which is a covering by axiom (i) of

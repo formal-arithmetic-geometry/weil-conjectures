@@ -17,7 +17,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- The successor-cycle inclusion into the page is killed by the outgoing page differential.
 Source: Stacks Project, Homology, Tag 012K, displayed cycle and differential formulas.
-(blueprint: lem-sp-filtered-complex-successor-cycles-differential-zero).
 
 Proof. Put p = pq.1, n = pq.1 + pq.2, and j = (p+r, pq.2-r+1).
 Take the intersection R = F^p K^n ∩ d⁻¹(F^(p+r+1) K^(n+1)), regarded as a

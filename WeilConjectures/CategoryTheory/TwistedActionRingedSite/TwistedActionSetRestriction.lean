@@ -477,8 +477,7 @@ private theorem setRestrictionFunctor_essSurj [HasPullbacks C] (S : Site J s R a
 /-- Set-sheaf restriction for a specified underlying twisted action site.
 
 Source: original step 3 of the agent-formulated twisted variant of Stacks 00W0,
-`sites.tex`, proposition-sheaves-on-group
-(blueprint: lem-sf-twisted-action-set-restriction).
+`sites.tex`.
 
 Proof: let γ_X be the arrow labelled (-1, identity). Its composites with the
 arrow labelled (1, s.counitInv at X) are images of base isomorphisms, so γ_X is

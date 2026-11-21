@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRetract
 
 /-! # Cohomological Brown representability for Grothendieck derived categories
 
-Source: Stacks Project, Tag 0F5X, `injectives-lemma-brown`.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 0F5X, `injectives-.
 -/
 
 @[expose] public section
@@ -63,8 +62,7 @@ private theorem representable_of_uliftYoneda_retract
 
 /-- A cohomological functor on the unbounded derived category of a Grothendieck
 abelian category taking set-indexed coproducts to products is representable.
-Source: Stacks Project, Tag 0F5X, `injectives-lemma-brown`.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 0F5X, `injectives-.
 
 Proof in words: Use Gabriel-Popescu to write A as an exact localization of modules
 by L, with fully faithful derived right adjoint RG and counit L RG ≅ identity.

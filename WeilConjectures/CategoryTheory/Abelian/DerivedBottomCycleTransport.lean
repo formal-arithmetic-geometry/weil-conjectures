@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Abelian.DerivedCyclesUnitNaturality
 /-! # Canonical-cycle transport to the double truncation
 
 Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-bottom-cycle-transport).
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ variable {C : Type uC} [Category.{vC} C] [Abelian C]
 
 /-- The part of the bottom comparison before the single-object normalization.
 All maps are taken from its explicit double-truncation construction.
-Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-bottom-cycle-transport). -/
+Source: Stacks Project, Tag 05TC (2). -/
 noncomputable def rightDerivedBottomToSingleIso (n : ℤ) :
     DerivedCategory.TStructure.t.truncGE n ⋙ S.rightDerivedFunctor ⋙
       DerivedCategory.homologyFunctor D n ≅
@@ -89,7 +87,6 @@ noncomputable def rightDerivedBottomToSingleIso (n : ℤ) :
 /-- Transport of canonical cycles to the actual unit on the single homology object.
 
 Source: Stacks Project, Tag 05TC (2), with the unit of Tag 05TD (3).
-(blueprint: new-lem-pc-derived-bottom-cycle-transport).
 
 Proof: Lift the lower truncation to the bounded-below derived category and
 map the single object of cycles into it using the canonical cycle inclusion.

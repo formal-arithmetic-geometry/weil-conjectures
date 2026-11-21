@@ -10,8 +10,7 @@ public import WeilConjectures.CategoryTheory.Ringed.Sheaf.RingedSheafSliceConstr
 /-!
 # Descent along the element site
 
-Source: Stacks Project, Tag 0791, lemma-localize-topos-site; sites-modules.tex Tag 04J4
-(blueprint: lem-weil-pbc-element-site-descent).
+Source: Stacks Project, Tag 0791; sites-modules.tex Tag 04J4.
 -/
 
 @[expose] public section
@@ -498,9 +497,7 @@ private theorem fibre_essSurj {C : Type u} [SmallCategory C]
 
 /-- Descent along the element site.
 
-Source: literature/stacks-project/sites.tex, Tag 0791, lemma-localize-topos-site;
-sites-modules.tex Tag 04J4
-(blueprint: lem-weil-pbc-element-site-descent).
+Source: literature/stacks-project/sites.tex, Tag 0791; sites-modules.tex Tag 04J4.
 Proof: Lift every arrow v:V→U uniquely below (U,s) to (V,A(v)s)→(U,s). Sieves below these objects
 identify with sieves below U, compatibly with pullback and transitivity. The resulting topology
 is restrictedTopology, and precomposition preserves sheaves, so Mathlib

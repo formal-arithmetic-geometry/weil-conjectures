@@ -54,8 +54,7 @@ set_option linter.privateModule false
 /-!
 # Derived ringed-topos counit under coefficient restriction
 
-Source: Stacks, Tags 03D7, 07A6 and 0D6E
-(blueprint: lem-pur-ringed-coefficient-restriction-counit).
+Source: Stacks, Tags 03D7, 07A6 and 0D6E.
 -/
 
 @[expose] public noncomputable section

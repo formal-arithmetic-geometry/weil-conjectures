@@ -12,9 +12,6 @@ public import Mathlib.CategoryTheory.Linear.LinearFunctor
 import Mathlib.CategoryTheory.Limits.Shapes.Equivalence
 
 /-! # Clearing denominators in a tensor-Hom coefficient comparison
-
-Source: current blueprint sk-prop-sp-rational-adjunction, its clearing-denominators
-argument (blueprint: lem-sp-scalar-tensor-denominators).
 -/
 
 @[expose] public noncomputable section
@@ -25,15 +22,13 @@ open scoped TensorProduct
 
 /-- A tensor-Hom equivalence gives common prime-power denominators and detects
 exactly prime-power torsion in the kernel on integral arrows.
-Source: the denominator argument in sk-prop-sp-rational-adjunction.
 Proof: identify each target Hom group with the corresponding raw tensor module
 using the equivalence and its specified comparison on integral objects. Module
 localization clears a denominator of an arbitrary tensor and detects equality
 of tensors with coefficient one. Since the denominator is a power of a natural
 number, its action is repeated addition; the additive Hom identification
 preserves that action. Naturality identifies coefficient-one tensors with the
-original functor's arrows.
-(blueprint: lem-sp-scalar-tensor-denominators). -/
+original functor's arrows. -/
 theorem scalarTensor_denominators
     (R : Type*) [CommRing R] {C D : Type*} [Category* C] [Category* D]
     [Preadditive C] [Linear R C] [Preadditive D] [HasBinaryProducts D]

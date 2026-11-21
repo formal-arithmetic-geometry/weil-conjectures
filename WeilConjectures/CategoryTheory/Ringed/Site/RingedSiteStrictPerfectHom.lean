@@ -56,9 +56,7 @@ import all WeilConjectures.Algebra.Homology.SmoothPurity.PullbackDualFreeChart
 
 /-! # Ordinary Hom calculations for a bounded finite-free retract complex
 
-Source: Stacks Project, sites-cohomology.tex, Tags 08JH and 08JJ,
-lemma-Rhom-strictly-perfect and lemma-dual-perfect-complex.
-(blueprint: lem-sfb-ringed-site-strict-perfect-hom).
+Source: Stacks Project, sites-cohomology.tex, Tags 08JH and 08JJ and.
 -/
 
 @[expose] public section
@@ -762,9 +760,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max c v r})
 
 /-- Ordinary duality for a bounded complex of finite-free retracts.
-Source: Stacks Project, sites-cohomology.tex, Tags 08JH and 08JJ,
-lemma-Rhom-strictly-perfect and the strictly perfect case of lemma-dual-perfect-complex.
-(blueprint: lem-sfb-ringed-site-strict-perfect-hom).
+Source: Stacks Project, sites-cohomology.tex, Tags 08JH and 08JJ and the strictly perfect case of.
 
 Proof: split each term into a finite power of the coefficient sheaf. Dualizing
 its inclusion and projection gives a splitting for its dual. The dual basis

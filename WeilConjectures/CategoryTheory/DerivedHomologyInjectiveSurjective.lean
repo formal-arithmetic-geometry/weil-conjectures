@@ -48,7 +48,6 @@ private theorem homology_to_single_surjective
 
 /-- Surjectivity half of the injective-target derived homology comparison.
 
-Source: proof step 1 of `new-stage3-derived-homology-injective-bijective`.
 Proof: choose a cochain complex P representing K. Use the localization homology
 comparison and the isomorphism K ≅ Q(P) to transport the given map to a map
 H⁰(P) → H⁰(I[0]). Identify H⁰(I[0]) with I and extend the map along the
@@ -58,8 +57,7 @@ map P → I[0]. The identity homologyπ ≫ homologyι = iCycles ≫ pOpcycles a
 naturality of homologyπ show that its homology map is the prescribed map.
 Apply Q and precompose with K ≅ Q(P); naturality of the localization homology
 comparison proves the desired equality. No K-injective replacement is needed.
-
-(auxiliary; not a blueprint node) -/
+-/
 theorem derived_homology_injective_surjective
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{w} A]
     (K : DerivedCategory A) (I : A) [Injective I] :

@@ -22,8 +22,7 @@ we show that a compactly generated triangulated category in the sense of
 `CategoryTheory.BrownRepresentability`, and deduce Brown representability in the form
 `H ≅ preadditiveYoneda.obj G` from `BrownRepresentability.exists_bijective`.
 
-Source: Stacks Project, Derived Categories, Tag 0A8F, Lemma `lemma-brown`
-(blueprint: lem-pc-brown-cohomological-representability).
+Source: Stacks Project, Derived Categories, Tag 0A8F, Lemma.
 -/
 
 @[expose] public section
@@ -59,13 +58,12 @@ theorem IsCompactlyGeneratedTriangulated.exists_compactGenerators
     hX (i, -n) ((adj.homEquiv _ _).symm (Sigma.ι E i ≫ f)), Adjunction.homEquiv_unit,
     Functor.map_zero, comp_zero]
 
-/-- (blueprint: lem-pc-brown-cohomological-representability) Every cohomological
+/--  Every cohomological
 functor on a compactly generated triangulated category that
 converts coproducts to products is represented by an object. Set-indexed means
 indexed by `Type v`, the universe of the morphism sets of `C`.
 
-This is Brown representability (Stacks Project, Tag 0A8F, Lemma `lemma-brown`;
-blueprint: lem-pc-brown-cohomological-representability). The hypotheses say that
+This is Brown representability (Stacks Project, Tag 0A8F). The hypotheses say that
 `C` is compactly generated, that `H` is homological on `Cᵒᵖ` (the contravariant
 cohomological condition), and that `H` preserves all discrete limits, which are
 the products corresponding to set-indexed coproducts in `C`. The conclusion is

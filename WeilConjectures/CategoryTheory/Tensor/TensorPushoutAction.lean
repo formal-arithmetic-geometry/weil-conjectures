@@ -16,7 +16,6 @@ The sectionwise tensor action extends through sheafification. Its normalization
 on the two scalar factors determines it uniquely.
 
 Source: Stacks Project, Tag 03EK.
-(blueprint: lem-pur-tensor-pushout-action)
 -/
 
 @[expose] public noncomputable section
@@ -226,9 +225,7 @@ private theorem rawAction_restriction (e : ∀ U : Cᵒᵖ,
 
 /-- A sectionwise scalar pushout acts uniquely on the balanced tensor sheaf.
 
-Source: Stacks Project, Tag 03EK; the balanced tensor calculation in step 6 of
-`lem-pur-twist-sheaf-locally-free`.
-(blueprint: lem-pur-tensor-pushout-action)
+Source: Stacks Project, Tag 03EK.
 
 Proof: the two scalar actions define a ring map from the scalar tensor to the
 endomorphism ring of the balanced module tensor. Transport along the given

@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForg
 
 /-! # Representative constraints for exact ringed tensor comparison
 
-Source: Stacks Project, Tags 0FPT, 06YU and 0G7D
-(blueprint: lem-sf-ringed-forget-tensor-associator-representatives).
+Source: Stacks Project, Tags 0FPT, 06YU and 0G7D.
 -/
 
 @[expose] public noncomputable section
@@ -246,9 +245,7 @@ set_option linter.unusedSectionVars false
 This only concerns three specified complexes, not arbitrary derived objects, and
 constructs neither a unit comparison nor any other structural constraint.
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0FPT, via Tag 06YU;
-step 2 of lem-sf-ringed-forget-tensor-coherence
-(blueprint: lem-sf-ringed-forget-tensor-associator-representatives).
+Source: Stacks Project, sites-cohomology.tex, Tag 0FPT, via Tag 06YU.
 
 Proof: total tensors of the three complexes have flat terms and are K-flat by
 lem-pur-kflat-total-tensor-model, so the given representative square applies to

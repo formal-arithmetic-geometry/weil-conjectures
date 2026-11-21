@@ -13,10 +13,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 /-!
 # Base change of compactifications in the six-functor setting
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-shriek-base-change-morphism-compactification.md,
-clauses 1--3 (blueprint: remark-base-change-compactification--1).
-
 The compactification and its base change are the existing constructions. Objects of
 `Over (Spec (.of k))` and their morphisms retain all the structure maps over the field.
 -/
@@ -38,10 +34,6 @@ unique, both component squares are cartesian, and the new proper arrow and open 
 form the existing base-changed compactification. All three new arrows are over `k`:
 `overBaseChangeFst`, `overI` and `overG` are morphisms of `Over (Spec (.of k))`.
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-open-coefficients/det-def-sfb-shriek-base-change-morphism-compactification.md,
-clauses 1--3 (blueprint: remark-base-change-compactification--1).
-
 Proof plan, following the node's five steps:
 1. The factorization `c.comm` and the given cartesian square make the pair `(g' ≫ i, f')`
 compatible. The universal property of `def-pc-fibre-product` gives its unique lift, namely
@@ -53,7 +45,7 @@ to these two squares. Neither application needs a flatness hypothesis.
 3. Give each middle scheme the composite structure map through the target. The projection
 equation, `Over.w g`, and the factorization show that all arrows are over the field,
 exactly as in `def-weil-scheme-over-base`.
-4. Properness implies separatedness and finite type (`def-weil-proper-morphism`). Compose
+4. Properness implies separatedness and finite type. Compose
 with the structure maps of `Y` and `Y'`, using clause (e) of
 `lem-weil-pbc-proper-fp-permanence` and clause (1) of
 `lem-sfb-finite-type-composition-base-change`. Both middle schemes are consequently

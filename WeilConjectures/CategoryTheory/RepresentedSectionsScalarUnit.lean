@@ -24,7 +24,6 @@ namespace CategoryTheory
 the object representing target sections. This formulation records that value as
 an explicit morphism, rather than choosing a witness of an existence theorem.
 Source: Yoneda, applied to the global-sections comparison of Stacks 03CZ and 08JA.
-(blueprint: lem-coef-represented-sections-scalar-unit).
 
 Proof: put r equal to the target representation of the transported section.
 Naturality of the target representation identifies its image of the identity

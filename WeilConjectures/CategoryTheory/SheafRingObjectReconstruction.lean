@@ -14,8 +14,7 @@ public import Mathlib.Algebra.Category.Ring.Limits
 /-!
 # Sectionwise reconstruction of a commutative ring sheaf
 
-Source: Stacks Project, Section 00YR, proof of Proposition 00YV,
-`proposition-functoriality-algebraic-structures-topoi` (rings as sextuples).
+Source: Stacks Project, Section 00YR, proof of Proposition 00YV (rings as sextuples).
 -/
 
 @[expose] public section
@@ -114,7 +113,6 @@ private def reconstructedPresheaf
 underlying sheaf by a sheaf of commutative rings.
 
 Source: Stacks Project, Section 00YR, proof of Proposition 00YV, rings as sextuples.
-(blueprint: lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction)
 
 Proof in words: On the set of sections over U define addition, zero, negation,
 multiplication and one by evaluating the corresponding internal morphisms.

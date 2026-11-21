@@ -104,7 +104,7 @@ theorem Sheaf.hasLocallyTrivialRelations_lan (hG : CoverPreserving J K G)
 variable [K.HasSheafCompose (forget (ModuleCat.{u + 1} R))]
   [K.WEqualsLocallyBijective (ModuleCat.{u + 1} R)]
 
-/-- Blueprint `corollary-finite-tor-amplitude-under-comparison`, for an arbitrary site morphism:
+/-- for an arbitrary site morphism:
 **pullback along a flat functor preserves flat sheaves of modules.** Let `G : C ⥤ D` be a
 representably flat, cover-preserving functor and `R` a Noetherian commutative ring. The pullback
 `G^* F = (Lan_G F)^#` of a flat sheaf `F` of `R`-modules on `C` is flat.

@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 /-! # Idempotence of the actual Cech completion unit
 
 Source: Stacks Project, algebraization.tex, Tag 099B.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -259,8 +258,7 @@ private theorem cech_tensor_projections :
 object both give isomorphisms. These are statements about the two actual maps,
 not about an unspecified isomorphism between double and single completion.
 
-Source: Stacks Project, algebraization.tex, Tag 099B, proof of lemma-derived-completion.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 099B.
 
 Proof: write K in degree q as the finite sum over q-element subsets I of the
 localizations S_I = O[1/(product of b_i for i in I)], with S_empty = O. These sheaves

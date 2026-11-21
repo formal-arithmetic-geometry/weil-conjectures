@@ -44,7 +44,7 @@ perfect objects of `D(R)` are the *perfect point complexes*.
 
 ## Main statements
 
-- `DerivedCategory.isPerfect_iff` (`corollary-degreewise-duality-over-fields--1`): over a field, `C`
+- `DerivedCategory.isPerfect_iff`: over a field, `C`
   is perfect if and only if it is bounded with finite-dimensional cohomology.
 - `DerivedCategory.IsPerfect.bounded`, `DerivedCategory.IsPerfect.finite_homology`: a perfect
   complex over a Noetherian ring is bounded with finitely generated cohomology.
@@ -61,15 +61,15 @@ dual
 - `DerivedCategory.IsPerfect.isDualizable` (`lemma-perfect-complexes-geometric-point--8`, Steps
 1–3): a
   perfect complex is dualizable for the derived tensor product.
-- `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit` (`lemma-perfect-complexes-geometric-point--8`):
+- `DerivedCategory.IsPerfect.isIso_toIhomIhomUnit`:
 for
   any braiding of `D(R)`, the canonical biduality map `C ⟶ C^∨∨` is an isomorphism for a
   perfect `C`, where `C^∨ = RHom_R(C, R)`.
 - `DerivedCategory.IsPerfect.isIso_ihomUnitTensorToIhom`
-(`lemma-perfect-complexes-geometric-point--8`):
+:
   the canonical comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism for a perfect `C` and
   any `D`.
-- `DerivedCategory.nonempty_iso_homology_ihom` (`corollary-degreewise-duality-over-fields--1`): over
+- `DerivedCategory.nonempty_iso_homology_ihom`: over
   a field, `H^{-i}(C^∨) ≅ H^i(C)^∨`.
 
 ## Implementation notes
@@ -95,9 +95,9 @@ namespace DerivedCategory
 
 variable {R : Type u} [CommRing R] [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Perfect complex of finite modules.
+/-- Perfect complex of finite modules.
 
-Also blueprint `sk-def-perfect` (also `lemma-perfect-complexes-geometric-point`): perfect point
+Also blueprint `sk-def-perfect`: perfect point
 complexes.
 
 An object `C` of `D(R)` is *perfect* if it is isomorphic to the image of a bounded complex of
@@ -536,7 +536,7 @@ section Field
 
 variable {K : Type u} [Field K] [HasDerivedCategory.{u} (ModuleCat.{u} K)]
 
-/-- Blueprint `corollary-degreewise-duality-over-fields--1`: perfect point complexes over a field.
+/-- perfect point complexes over a field.
 
 Over a field `K`, an object `C` of `D(K)` is perfect if and only if it is bounded and all its
 cohomology spaces `H^i(C)` are finite dimensional over `K`. -/
@@ -602,7 +602,7 @@ theorem IsPerfect.isDualizable {C : DerivedCategory (ModuleCat.{u} R)} (hC : C.I
   have := (hP n).2
   exact ModuleCat.isDualizable_of_projective (P.X n)
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point--8`: biduality at the point.
+/-- biduality at the point.
 
 For a perfect point complex `C` and any braiding of `D(R)`, the canonical biduality map
 `C ⟶ C^∨∨`, where `C^∨ = RHom_R(C, R)`, is an isomorphism. This is also clause (3) of blueprint
@@ -624,7 +624,7 @@ theorem IsPerfect.nonempty_iso_ihom_ihom {C : DerivedCategory (ModuleCat.{u} R)}
   have := hC.isIso_toIhomIhomUnit
   exact ⟨asIso (MonoidalClosed.toIhomIhomUnit C)⟩
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point--8`: biduality at the point.
+/-- biduality at the point.
 
 For a perfect point complex `C` and every object `D` of `D(R)`, the canonical tensor–internal-Hom
 comparison `C^∨ ⊗ᴸ_R D ⟶ RHom_R(C, D)` is an isomorphism. -/
@@ -640,7 +640,7 @@ end Biduality
 
 section CohomologyDual
 
-/-- Blueprint `corollary-degreewise-duality-over-fields--1`: cohomology of the dual of a finite
+/-- cohomology of the dual of a finite
 complex over a field.
 
 Over a field `R`, the cohomology of the dual `C^∨ = RHom_R(C, R)` of a complex `C` is the dual
@@ -724,8 +724,7 @@ theorem nonempty_iso_homology_ihom (hR : IsField R) (C : DerivedCategory (Module
 cohomology modules `Hʲ(C)` are finitely generated projective `R`-modules, then the cohomology of
 the dual `C^∨ = RHom_R(C, R)` is the dual of the cohomology: `H^{-i}(C^∨) ≅ Hom_R(H^i(C), R)`.
 This is the form of `DerivedCategory.nonempty_iso_homology_ihom` over a ring which is not a
-field, used for the degreewise duality at the integral stage `𝒪_E`
-(`prop-pod-integral-degreewise-form`).
+field, used for the degreewise duality at the integral stage `𝒪_E`.
 
 As over a field, `C` is split: it is quasi-isomorphic to the bounded complex `H` of its
 cohomology modules with zero differential

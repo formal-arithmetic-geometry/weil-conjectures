@@ -11,9 +11,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 
 /-! # Adjunctions after localizing the Hom modules
 
-Source: blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e.proof.md`, final sentence.
 Tensoring the linear adjunction bijections gives the adjunction after inverting ell.
-(blueprint: lem-sfb-scalar-localization-adjunction)
 
 ## Main definitions
 
@@ -42,8 +40,6 @@ variable (R : Type r) [CommRing R] (p : R)
 /-- A linear adjunction `F ⊣ G` induces an adjunction between the scalar localizations
 `transport R p F ⊣ transport R p G`. The Hom bijections are the base changes of the
 original ones, so `a ⊗ f` corresponds to `a ⊗ adj.homEquiv f`.
-Source: blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e.proof.md`, final sentence
-(blueprint: lem-sfb-scalar-localization-adjunction).
 
 Proof: tensor each linear adjunction bijection with the localized coefficient ring.
 Naturality in both variables is checked on two pure tensors, where it is the original
@@ -95,8 +91,6 @@ def transportAdjunction {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
         | add g i hg hi => simp only [map_add, hg, hi] }
 
 /-- A linear left adjoint remains a left adjoint after scalar localization.
-Source: blueprint `lem-sfb-dc-proper-pushforward-left-adjoint-e.proof.md`, final sentence
-(blueprint: lem-sfb-scalar-localization-adjunction).
 
 Proof: the right adjoint is additive and linear, so `transportAdjunction` applies. This does
 not assert any geometric comparison or existence of an integral adjoint. -/

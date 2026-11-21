@@ -11,9 +11,7 @@ public import Mathlib.CategoryTheory.Limits.Types.ColimitType
 
 /-! # Hom out of an essentially constant pro-diagram
 
-Source: Stacks Project, Categories, Definition 05PU(2), Lemma 05PZ;
-Derived Categories, Lemma 0FND, sixth equality
-(blueprint: lem-pc-essentially-constant-pro-hom-colimit).
+Source: Stacks Project, Categories, Definition 05PU(2), Lemma 05PZ.
 -/
 
 @[expose] public section
@@ -42,9 +40,7 @@ They therefore represent the same colimit element, proving injectivity. These ar
 exactly the three elementary steps of the node's proof; no additional proof nodes
 are required.
 
-Source: Stacks Project, Categories, Definition 05PU(2), Lemma 05PZ;
-Derived Categories, Lemma 0FND, sixth equality
-(blueprint: lem-pc-essentially-constant-pro-hom-colimit). -/
+Source: Stacks Project, Categories, Definition 05PU(2), Lemma 05PZ. -/
 theorem essentiallyConstantPro_hom_colimit
     {J : Type uJ} {C : Type uC} [Category.{vJ} J] [Category.{vC} C]
     (D : J ⥤ C) (X : C) (h : IsEssentiallyConstantProDiagram D X) :

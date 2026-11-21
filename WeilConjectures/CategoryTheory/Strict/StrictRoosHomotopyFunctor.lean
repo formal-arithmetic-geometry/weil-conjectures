@@ -22,10 +22,9 @@ public import Mathlib.CategoryTheory.Linear.FunctorCategory
 /-!
 # The strict Roos functor on compatible homotopies
 
-Source: Stacks Project, derived.tex, Tags 014E (definition-cone),
-08TC (definition-derived-limit), 013H (definition-complexes-notation),
-and dga.tex, Tag 09MJ (definition-linear-category).
-(blueprint: lem-pur-strict-roos-homotopy-functor)
+Source: Stacks Project, derived.tex, Tags 014E,
+08TC, 013H,
+and dga.tex, Tag 09MJ.
 -/
 
 @[expose] public section
@@ -301,10 +300,8 @@ categories. Both functors are linear whenever the coefficient category is linear
 The two projection equations express exactly `(-h_P y, h_P x)` in the coordinates
 `roosχ`, without treating objects of an arbitrary abelian category as sets.
 
-Source: Stacks Project, derived.tex, Tags 014E (definition-cone),
-08TC (definition-derived-limit), 013H (definition-complexes-notation);
-homology.tex, Tag 0112; dga.tex, Tag 09MJ (definition-linear-category).
-(blueprint: lem-pur-strict-roos-homotopy-functor)
+Source: Stacks Project, derived.tex, Tags 014E,
+08TC, 013H; homology.tex, Tag 0112; dga.tex, Tag 09MJ.
 
 Proof plan:
 1. Use the universal property of termwise products: product maps preserve identities,

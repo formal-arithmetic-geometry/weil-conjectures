@@ -8,8 +8,7 @@ module
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! Compatibility of exchange mates with a cube of inverse-image comparisons.
-Source: Stacks Project, Tag 0E47; adjunction transposition.
-(blueprint: lem-weil-pbc-exchange-mate-cube) -/
+Source: Stacks Project, Tag 0E47. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -31,8 +30,7 @@ private theorem mate_app_eq_adjunct
   exact mateEquiv_counit a b (TwoSquare.mk _ _ _ _ θ) E
 
 /-- A cube commuting on inverse-image functors commutes after taking the four mates.
-Source: Stacks Project, Tag 0E47
-(blueprint: lem-weil-pbc-exchange-mate-cube).
+Source: Stacks Project, Tag 0E47.
 Proof: transpose both proposed maps under the final adjunction. Naturality of its
 counit moves the horizontal comparison past that counit. The mate/counit equations
 for the two vertical comparisons then replace their transposes by the original

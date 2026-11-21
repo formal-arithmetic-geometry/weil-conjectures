@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 
 Source: the calculus of adjunction mates, expanded for the coefficient comparison in
 Bhatt--Scholze, Lemma 6.5.9(3).
-(blueprint: lem-weil-pbc-coefficient-exchange-mates)
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -34,8 +33,7 @@ variable {C₁ C₂ C₃ C₄ D₁ D₂ D₃ D₄ : Type w}
 /-- The coefficient pullback square, over fixed category and functor instances.
 Keeping this equation as one predicate gives concrete derived applications the same
 implicit instance arguments as the abstract mate theorem.
-Source: adjunction mate calculus, Bhatt--Scholze Lemma 6.5.9(3).
-(blueprint: lem-weil-pbc-coefficient-exchange-mates). -/
+Source: adjunction mate calculus, Bhatt--Scholze Lemma 6.5.9(3). -/
 def coefficientPullbackSquare
     (θ : G ⋙ V ⟶ U ⋙ H) (θe : Ge ⋙ Ve ⟶ Ue ⋙ He)
     (αU : U ⋙ T₂ ≅ T₁ ⋙ Ue) (αV : V ⋙ T₄ ≅ T₃ ⋙ Ve)
@@ -48,7 +46,6 @@ def coefficientPullbackSquare
 The exchange maps and push comparisons satisfy their two counit mate equations.
 
 Source: Mathlib's adjunction mates and Bhatt--Scholze, Lemma 6.5.9(3).
-(blueprint: lem-weil-pbc-coefficient-exchange-mates)
 
 Proof. Apply injectivity of the second target adjunction's inverse Hom equivalence.
 Replace both exchange maps by their adjuncts. Naturality of the target square moves
@@ -106,7 +103,6 @@ theorem coefficient_exchange_of_counit_at
 its two counit mate equations.
 
 Source: Mathlib's adjunction mates and Bhatt--Scholze, Lemma 6.5.9(3).
-(blueprint: lem-weil-pbc-coefficient-exchange-mates)
 
 Proof. Apply injectivity of the second target adjunction's inverse Hom equivalence.
 Replace both exchange maps by their adjuncts. Naturality of the target square moves
@@ -143,8 +139,6 @@ theorem coefficient_exchange_of_counit
     (hδ K) (hδ' (H.obj K)) (hcube (R.obj K))
 
 /-- Composition compatibility implies compatibility with a transported square.
-Source: cancellation of composition isomorphisms in the calculus of mates.
-(blueprint: lem-weil-pbc-composition-square-cancellation)
 Proof. Cancel r₁, use the two composition equations and the transport equation,
 and cancel s₁ with its inverse. -/
 theorem composition_square_aux {D : Type*} [Category D]

@@ -328,7 +328,7 @@ variable [HasDerivedCategory.{w}
 on every K-flat cochain complex.
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YS, 06YT and 0941, and
-Derived Categories, Tag 06XN (blueprint: lem-pur-principal-quotient-roos-derived).
+Derived Categories, Tag 06XN.
 
 Proof: Tensor homotopies with the fixed quotient complexes. Naturality in their
 transition maps assembles these homotopies on the tower. Products and the signed

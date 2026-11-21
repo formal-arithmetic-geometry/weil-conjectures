@@ -19,9 +19,7 @@ import WeilConjectures.CategoryTheory.TruncationCoupleNaturality
 
 /-! # Individual natural truncation couples
 
-Source: Stacks Project, Tags 015J, 05TC and 08J5; the individual construction and naturality
-in steps 1, 3 and 4 of lem-pc-coproduct-truncation-couple.
-(blueprint: lem-pc-natural-bounded-below-truncation-couples).
+Source: Stacks Project, Tags 015J, 05TC and 08J5.
 -/
 
 @[expose] public section
@@ -90,9 +88,7 @@ private theorem abutmentMap_isIso
 /-- Choose truncation couples for individual derived objects with a fixed lower bound.
 The comparisons commute with every individual morphism. No coproduct is involved.
 
-Source: Stacks Project, Tags 015J, 05TC and 08J5; steps 1, 3 and 4 of
-lem-pc-coproduct-truncation-couple.
-(blueprint: lem-pc-natural-bounded-below-truncation-couples).
+Source: Stacks Project, Tags 015J, 05TC and 08J5.
 
 Proof:
 1. Use Mathlib's standard t-structure to choose a strictly bounded-below

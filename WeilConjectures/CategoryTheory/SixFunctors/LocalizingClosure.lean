@@ -13,9 +13,6 @@ public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
 /-!
 # The localizing closure
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node definition-localizing-subcategory (blueprint: definition-localizing-subcategory).
-
 The ambient category is the unbounded derived category of module objects on the
 small pro-etale site.  The localizing closure is defined as the intersection of
 all full replete triangulated subcategories containing the bounded constructible
@@ -49,9 +46,7 @@ def IsLocalizingSubcategory {C : Type u} [Category.{v, u} C]
         P (colimit F)
 
 /-- The intersection of all localizing subcategories containing `S`.
-
-Source: blueprint definition-localizing-subcategory, first paragraph
-(blueprint: definition-localizing-subcategory). -/
+-/
 def localizingClosure {C : Type u} [Category.{v, u} C]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -269,8 +264,6 @@ open AlgebraicGeometry Scheme
 /-- The localizing closure of bounded constructible finite-Tor complexes on a
 pro-etale scheme.
 
-Source: blueprint main-20261015, sec-proetale-coefficients/sk-def-localizing-closure,
-node definition-localizing-subcategory (blueprint: definition-localizing-subcategory).
 The coefficient ring is the condensed ring `Λ`; `condensedRingObj Λ X` is its
 pullback `Λ_X`, and `ConstantModelConstructibleFiniteTor Λ X` is `Dctf(X, Λ)`.
 The localizing closure is the intersection defining the smallest full replete

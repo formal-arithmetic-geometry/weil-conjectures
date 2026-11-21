@@ -13,7 +13,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-! # Pasted-unit normalization for derived mates
 
 The normalization is separate from right-derived extensionality and the particular
-composition comparison. Source: Mathlib's derived adjunction factorization equations.
+composition comparison.
 -/
 
 @[expose] public section
@@ -108,9 +108,7 @@ include hβ in
 localized ordinary mate. This calculation does not identify that mate with a specified
 right-adjoint comparison; right-derived extensionality is a separate step.
 
-Source: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean,
-`derivedη_fac_app` and `derivedε_fac_app`; Stacks Project, Tag 079W.
-(blueprint: lem-pc-derived-mate-pasted-unit).
+Source: Stacks Project, Tag 079W.
 
 Proof: Evaluate at an object X of the homotopy category of C'. Expand the pasted
 P,F unit and the forward mate into the G-unit, Q-image of β at RP(X), and H-counit.

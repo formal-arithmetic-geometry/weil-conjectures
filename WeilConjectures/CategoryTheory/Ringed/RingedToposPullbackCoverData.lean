@@ -28,7 +28,6 @@ namespace CategoryTheory
 /-- The sections of inverse images of sheafified representables form a cover.
 
 Source: Stacks Project, Sites, Tag 00WN; Modules on Sites, Tag 03DO (5).
-(blueprint: lem-weil-pbc-ringed-topos-pullback-cover-data).
 
 Proof: The canonical maps from the sheafifications of `yoneda.obj (Y i)` to the
 terminal sheaf are jointly epic. Indeed, the covering sieves `ofObjects Y W` locally

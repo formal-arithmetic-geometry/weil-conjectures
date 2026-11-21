@@ -9,7 +9,6 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 /-! Compatible families of local module sections, with restrictions indexed by all test objects.
 Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node)
 
 Instead of choosing fibre products, use all test spans `W → V`, `W → U i`. The equations
 for restrictions identify this family with the usual product over the fibre products.
@@ -43,8 +42,7 @@ instance {D : Type uD} [Category.{vD} D] {K : GrothendieckTopology D}
   inferInstanceAs (Module R ((F i).val.obj (op V)))
 
 /-- Linear gluing data on localizations of a ringed site.
-Source: Stacks Project, Sites, Tag 04TR.
-(auxiliary; not a blueprint node) -/
+Source: Stacks Project, Sites, Tag 04TR. -/
 structure ModuleGlueData {D : Type uD} [Category.{vD} D]
     {K : GrothendieckTopology D} (A : Sheaf K RingCat.{uR})
     {I : Type w} (U : I → D) where
@@ -525,7 +523,6 @@ Source: Stacks Project, Sites, Tag 04TR. Glue each test-coordinate along the pul
 covering sieve in the corresponding local sheaf. Local separatedness proves that these
 sections respect restrictions and transition maps. The glued tuple is an amalgamation by
 matching-family compatibility, and uniqueness is checked in every local sheaf.
-(auxiliary; not a blueprint node)
 -/
 theorem presheaf_isSheaf : Presheaf.IsSheaf K G.presheaf.presheaf := by
   apply Presheaf.isSheaf_of_isSheaf_comp K G.presheaf.presheaf

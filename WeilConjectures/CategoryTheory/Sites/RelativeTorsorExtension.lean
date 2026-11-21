@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.Sites.ExtensionPresentationShortExact
 /-! # Relative extensions of a torsor
 
 Source: Stacks Project, Tags 03AJ and 0A45. The quotient of the free torsor
-extension by the prescribed lift on an open subset gives the relative class.
-(auxiliary; not a blueprint node). -/
+extension by the prescribed lift on an open subset gives the relative class. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -217,7 +216,6 @@ private theorem relativeSpec_existsUnique (X : Scheme.{u})
 /-- A torsor with a specified section determines a unique relative extension class
 whenever the integer source has its normalized open-support presentation.
 Source: Stacks Project, Tag 03AJ, free abelian presentation, and Tag 0A45, excision.
-(auxiliary; not a blueprint node)
 Proof: take the free extension of the torsor by the constant integers. The sections
 adjunction turns the chosen torsor section into a lift of the open-source inclusion.
 Kill this lift by a cokernel. The two short exact sequences show that the quotient

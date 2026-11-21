@@ -12,10 +12,6 @@ import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # The fixed exact-derived adjunction unit commutes with shifts
 
-Source: blueprint, `sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md`,
-adjunction units and counits, and its extracted signed cochain computation
-(blueprint: lem-pur-exact-adjunction-unit-shift-descent).
-
 The cochain comparisons are the standard identity-in-each-degree comparisons
 `Functor.mapCochainComplexShiftIso`, including their zero and addition coherence.
 The derived comparisons are the standard exact-functor comparisons, and the
@@ -33,8 +29,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Adjunction
 
 /-- The degreewise unit and its specified localization commute with all integer shifts.
-Source: blueprint `fix-prop-coherence.proof.md`, adjunction units and counits;
-extracted obligation (blueprint: lem-pur-exact-adjunction-unit-shift-descent).
 
 Proof plan, following the five steps of the node:
 1. Additivity gives F((-1)^a d) = (-1)^a F(d), for F = L and F = P. Hence the
@@ -58,7 +52,7 @@ cochain comparison and the localization shift comparison.
 localization shift comparison. Cancel kappa_X shifted and Q's shift comparison
 to obtain the derived unit equation at QX. Both sides are natural
 transformations on the whole derived category, so `Localization.natTrans_ext`
-(`lem-weil-pbc-localization-universal-property`) gives their equality everywhere.
+gives their equality everywhere.
 No boundedness, resolution, monoidal or K-injective hypothesis is used. -/
 theorem mapExactDerivedCategory_unit_commShift
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]

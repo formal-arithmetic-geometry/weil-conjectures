@@ -10,9 +10,6 @@ public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-!
 # Normalized colimits of half-plane exact-couple diagonals
-
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 1, the stable diagonal.
-(blueprint: lem-sp-half-plane-diagonal-colimits)
 -/
 
 @[expose] public section
@@ -150,9 +147,7 @@ cocone equations, and at negative indices cancel the invertible transitions.
 Uniqueness follows from the map at zero being the identity. The negative-index
 maps are inverse composites of isomorphisms, proving the last assertion.
 This construction is degreewise and needs no infinite colimits in `C`.
-Source: blueprint thm-sp-half-plane-convergence, proof paragraph 1, stable diagonal;
-Stacks Project, Tags 011Q and 011T.
-(blueprint: lem-sp-half-plane-diagonal-colimits) -/
+Source: Stacks Project, Tags 011Q and 011T. -/
 theorem halfPlane_diagonal_colimits (X : BigradedExactCouple C 0)
     (hE : ∀ p q : ℤ, p < 0 → IsZero (X.E p q)) :
     ∃ A : ∀ n : ℤ, AlphaColimit X n,

@@ -20,8 +20,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTower
 /-!
 # Existence and computation of derived limits
 
-Source: Stacks Project, Derived Categories, Tags 08TC, 07KC, 0BK6, 0BK7 and 070M
-(blueprint: lemma-reduction-derived-nakayama).
+Source: Stacks Project, Derived Categories, Tags 08TC, 07KC, 0BK6, 0BK7 and 070M.
 
 ## Main statements
 
@@ -39,8 +38,7 @@ open CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- A tower with an existing product has a derived limit, unique up to isomorphism.
-Source: Stacks Project, Definition 13.34.1 (Tag 08TC) and the following paragraph
-(blueprint: lemma-reduction-derived-nakayama).
+Source: Stacks Project, Definition 13.34.1 (Tag 08TC) and the following paragraph.
 
 Proof (clause 1 of the node): form `1 - s` using `def-weil-derived-limit`. TR1 and TR2
 of `def-weil-triangulated-category` give its distinguished triangle, rotated backwards.
@@ -70,9 +68,7 @@ theorem exists_isDerivedLimit_and_iso {D : Type u} [Category.{v} D]
 
 /-- Exact countable products pass to the derived category and commute with cohomology;
 a K-injective complex of towers computes the derived limit by its termwise inverse limit.
-Source: Stacks Project, Lemma 13.34.2 (Tag 07KC), Tags 0BK6, 0BK7 and 070M;
-the tower computation is the general form in the blueprint
-(blueprint: lemma-reduction-derived-nakayama).
+Source: Stacks Project, Lemma 13.34.2 (Tag 07KC), Tags 0BK6, 0BK7 and 070M.
 
 Proof (clauses 2 and 3 of the node):
 1. Exact products applied to the short exact sequences defining cycles, boundaries and

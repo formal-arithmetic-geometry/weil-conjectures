@@ -29,7 +29,7 @@ variable {A : Type u₁} [Category.{v₁} A] {B : Type u₂} [Category.{v₂} B]
 
 include hc hμ in
 /-- Transporting a scalar adjunction and its tensor comparison transports the closed-Hom map.
-Source: Stacks 07A6 and 0D6D (blueprint: lem-sfb-closed-scalar-hom-transport).
+Source: Stacks 07A6 and 0D6D.
 Proof: apply the closed transpose, followed by the inverse scalar transpose, to both
 sides. The adjunction compatibility moves d across the scalar transpose. Naturality
 of evaluation moves c in the internal-Hom input to the second tensor factor. The
@@ -91,7 +91,7 @@ theorem transport (K : A) (N : B) :
   rw [hT]
 
 /-- The canonical left-adjoint uniqueness map has the required transpose compatibility.
-Source: adjoint uniqueness, Stacks 07A6 (blueprint: lem-sfb-closed-scalar-hom-transport).
+Source: adjoint uniqueness, Stacks 07A6.
 Proof: naturality moves the final map past the hom equivalence. The unit identity
 for leftAdjointUniq and the transported-adjunction hom equivalence finish. -/
 theorem adjunction_compatibility (X : A) (N : B) (f : F'.obj X ⟶ N) :
@@ -103,7 +103,7 @@ theorem adjunction_compatibility (X : A) (N : B) (f : F'.obj X ⟶ N) :
   exact Adjunction.homEquiv_ofNatIsoRight_apply adj' d f
 
 /-- The closed-Hom comparison for the identity tensor adjunction is the identity.
-Source: Stacks 07A6 (blueprint: lem-sfb-closed-scalar-hom-transport).
+Source: Stacks 07A6.
 Proof: expand the five equivalences; the identity scalar equivalences and tensor
 comparison disappear and the two closed transposes cancel. -/
 theorem identity (K N : A) :
@@ -124,7 +124,7 @@ theorem identity (K N : A) :
   rw [Category.id_comp, Equiv.apply_symm_apply]
 
 /-- Identity transport of the five-Hom comparison, with its identity map simplified.
-Source: Stacks 07A6 (blueprint: lem-sfb-closed-scalar-hom-transport).
+Source: Stacks 07A6.
 Proof: specialize transport to the identity adjunction and use the identity
 comparison proved above. The last identity morphism disappears. -/
 theorem transport_identity {F₀ U₀ : A ⥤ A} (a₀ : F₀ ⊣ U₀)

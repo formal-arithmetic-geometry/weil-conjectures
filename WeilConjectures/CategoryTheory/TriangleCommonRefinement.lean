@@ -12,8 +12,7 @@ import Mathlib.Data.Fintype.Option
 
 /-! # Common refinements of denominator triangles
 
-Source: Stacks Project, Derived Categories, Tag 05R9, with arrows reversed
-(blueprint: lem-pur-triangle-common-refinement-ms3-05r9).
+Source: Stacks Project, Derived Categories, Tag 05R9, with arrows reversed.
 -/
 
 @[expose] public section
@@ -311,8 +310,7 @@ private lemma finite_triangle_refinement
 
 /-- Finite families of distinguished denominator triangles over `T` have a common predecessor,
 and parallel denominator triangle morphisms are equalized by another denominator triangle.
-Source: Stacks Project, Derived Categories, Tag 05R9, dual construction
-(blueprint: lem-pur-triangle-common-refinement-ms3-05r9).
+Source: Stacks Project, Derived Categories, Tag 05R9, dual construction.
 
 Proof: (1) The right fraction calculus makes `S/X` cofiltered. Saturation ensures every
 commuting arrow between denominators lies in `S`: use MS2 to complete a square, MS3 to

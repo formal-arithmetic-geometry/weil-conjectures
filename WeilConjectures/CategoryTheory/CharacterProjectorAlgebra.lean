@@ -53,9 +53,6 @@ private theorem image_eigen (χ : AddChar G K) (b : G) :
 /-- Multiplication preserving a finite translation action sends products of character
 images into the image of the product character, and constant sections into the trivial image.
 
-Source: latest blueprint `prop-kernel-lisse.proof.md`, multiplication of eigensections
-(blueprint: lem-kernel-character-projector-algebra).
-
 Proof. Reindexing the projector sum proves `eχ τ(b) = χ(b)eχ`, hence the image inclusion
 has the same eigenvalue after cancellation of its image epimorphism. Equivariance and
 bilinearity make a product of eigensections have eigenvalue `χ(b)χ'(b)`. Averaging with

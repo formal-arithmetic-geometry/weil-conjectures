@@ -254,8 +254,7 @@ private theorem supported_isIso {C : Type u} [Category.{v} C]
 
 set_option linter.unusedVariables false in
 /-- The ordinary open-extension mate of the underlying restriction square is invertible.
-Source: Stacks 03DI, 03DJ and 03CZ; finite-coefficient transport Step 1
-(blueprint: lem-pur-algebraic-open-scalar-restriction).
+Source: Stacks 03DI, 03DJ and 03CZ.
 Proof: form the subsheaf of module sections which are locally zero or lie over P.
 The raw supported sections form a submodule on each object; their local closure is
 again a submodule and a sheaf. Its inclusion becomes invertible after restriction

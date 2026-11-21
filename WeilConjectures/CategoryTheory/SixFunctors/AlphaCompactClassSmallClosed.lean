@@ -27,8 +27,7 @@ namespace CategoryTheory
 there is a small shift-closed perfect generating class of alpha-small objects.
 
 Source: Krause, On Neeman's Well Generated Triangulated Categories (2001),
-Lemma 5, pages 124--125; Localization theory, Sections 6.2--6.3.
-(blueprint: new-sfb-alpha-compact-class-small-closed)
+Lemma 5, pages 124--125.
 
 Proof in words: first show that the maximal alpha-compact class S is extension
 closed. Take its finite extension hull. The alpha-small API preserves support

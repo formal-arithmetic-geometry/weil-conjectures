@@ -128,8 +128,6 @@ private theorem roos_zero_leg
 
 /-- Eventual constancy in two adjacent degrees makes every sufficiently late cone leg
 invertible on cohomology.
-Source: blueprint main-20261015, sk-lem-proper-unbounded-window-arbitrary.proof.md,
-Milnor paragraph (blueprint: lem-roos-eventually-constant-projection).
 
 Proof: discard the finite initial segment by homotopy-limit tail invariance. Apply
 cohomology to its Milnor triangle. The degree q-1 difference map has a section, obtained

@@ -25,8 +25,7 @@ private abbrev tensorAdj := PresheafOfModules.sheafificationAdjunction (𝟙 (ri
 
 /-- Maps from an iterated sheaf tensor agree if they agree on all pure triples.
 
-Source: Stacks 03EK, sheaf tensor as the sheafification of presheaf tensor
-(blueprint: lem-sf-sheaf-tensor-pure-triple-ext).
+Source: Stacks 03EK, sheaf tensor as the sheafification of presheaf tensor.
 
 Proof: tensor the inner sheafification unit with the third factor, then sheafify.
 This morphism is invertible because tensor preserves local equivalences. Compose

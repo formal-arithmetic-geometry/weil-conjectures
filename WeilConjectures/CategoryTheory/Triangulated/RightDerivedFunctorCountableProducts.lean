@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 /-!
 # Countable products and unbounded right derived functors
 
-Source: Stacks Project, Tag 08U1, proof of `lemma-RF-commutes-with-Rlim`.
-(blueprint: lem-pc-right-derived-functor-countable-products).
+Source: Stacks Project, Tag 08U1.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- An additive countable-product-preserving functor from sheaves of modules to abelian
  groups has a countable-product-preserving unbounded right derived functor.
-Source: Stacks Project, Tag 08U1, proof of `lemma-RF-commutes-with-Rlim`.
-(blueprint: lem-pc-right-derived-functor-countable-products).
+Source: Stacks Project, Tag 08U1.
 
 Proof: For a countable family `K n`, choose K-injective representatives `I n`, together
 with isomorphisms `Q(I n) ≅ K n`. The termwise product `P` of the representatives is

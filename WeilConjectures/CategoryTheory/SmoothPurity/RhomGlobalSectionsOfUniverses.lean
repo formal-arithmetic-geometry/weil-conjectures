@@ -75,8 +75,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 /-!
 # Global sections of derived internal Hom with independent site universes
 
-Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement
-(blueprint: lem-pur-rhom-global-sections).
+Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement.
 
 This is the same comparison as the publicly imported `rhom_global_sections`, with site
 objects, site arrows and coefficient sizes independent. Both operations are the recorded
@@ -100,8 +99,7 @@ with derived morphisms, without identifying the site object and morphism univers
 The sheafification instances are the canonical abelian-category infrastructure in a
 universe containing the site; no flatness, boundedness or product-exactness is assumed.
 
-Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement
-(blueprint: lem-pur-rhom-global-sections).
+Source: Stacks Project, Lemma 21.35.1, Tag 08JA, global statement.
 
 Proof:
 1. Use the recorded independent-universe K-flat and K-injective resolutions on C.

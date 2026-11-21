@@ -46,7 +46,6 @@ with `towerTransitionEndomorphism`, as checked on each projection. Transport
 along this isomorphism gives the asserted triangle, whose first map is the
 product lift of the localized legs of c. No representation of a
 second tower is used here; that transport is proved by the caller.
-(blueprint: lem-weil-derived-limit-tower-core-property-triangle)
 -/
 theorem derivedCategory_towerLimit_triangle
     (A : Type u) [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]

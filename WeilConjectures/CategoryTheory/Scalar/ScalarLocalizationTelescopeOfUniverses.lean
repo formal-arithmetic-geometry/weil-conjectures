@@ -329,7 +329,6 @@ assertion about Hom groups or Hom continuity.
 Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2), pp. 61--62;
 Stacks Tags 093W, 0949 and 015F; the universe-independent form of
 lem-weil-pbc-scalar-localization-underlying-telescope.
-(blueprint: lem-weil-pbc-scalar-localization-telescope-of-universes).
 
 Proof: take ordinary restriction along the sheaf localization unit. It is additive and
 exact, and tensor extension is its left adjoint, with unit m mapped to 1 tensor m.

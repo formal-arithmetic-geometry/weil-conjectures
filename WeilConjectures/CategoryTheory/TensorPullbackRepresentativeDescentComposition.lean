@@ -11,8 +11,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # Composition law of descended tensor comparisons
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0D6D
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0D6D.
 
 Derived tensor comparisons descended from representatives, as in
 `tensorComparisonDescent`, inherit the composition law of their representative
@@ -38,7 +37,7 @@ For representatives `X`, `Y` and `A = qY X`, `B = qY Y`, the following square co
       ↓                                   ↓
   Lh Lf(A ⊗ B) ─ Lh σf → Lh(Lf A ⊗ Lf B) ─ σh → Lh Lf A ⊗ Lh Lf B
 ```
-Source: Stacks 07A4 and 0D6D (auxiliary; not a blueprint node).
+Source: Stacks 07A4 and 0D6D.
 Proof: precompose with the source tensor identification and postcompose with the
 invertible comparisons of the two inputs. Both sides then become the localization of
 the representative composite, by the descent squares, naturality of the derived
@@ -162,7 +161,7 @@ For all `A B : DY` the following square commutes:
       ↓                                   ↓
   Lh Lf(A ⊗ B) ─ Lh σf → Lh(Lf A ⊗ Lf B) ─ σh → Lh Lf A ⊗ Lh Lf B
 ```
-Source: Stacks 07A4 and 0D6D (auxiliary; not a blueprint node).
+Source: Stacks 07A4 and 0D6D.
 Proof: both sides are components of natural transformations between the same functors
 on pairs of derived objects. Restriction along the localization of pairs of
 representatives is faithful, and on representatives the two components agree by
@@ -235,7 +234,7 @@ conclusion is the commutative square
       ↓                                                ↓
   qX F(P ⊗ Q) ─ qX c_p → qX(F P ⊗ F Q) ─── mX ──→ qX F P ⊗ qX F Q
 ```
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: rewrite the transported comparison through the two bridges, move the bridges
 across the source model by naturality and across the target model by its naturality,
 and apply the original descent square. -/

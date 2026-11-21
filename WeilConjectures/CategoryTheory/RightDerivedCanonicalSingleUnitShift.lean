@@ -26,7 +26,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [EnoughInjectives B]
 /-- Transport of the single-complex unit from degree n to degree zero.
 Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1), and
 `Functor.commShift_rightDerivedFunctorPlusUnit`.
-(blueprint: lem-pc-right-derived-canonical-single-unit-shift)
 
 Proof: Identify the degree-n single object with the shift by -n of the degree-zero
 single object using singleFunctors.shiftIso. Apply naturality of the derived unit

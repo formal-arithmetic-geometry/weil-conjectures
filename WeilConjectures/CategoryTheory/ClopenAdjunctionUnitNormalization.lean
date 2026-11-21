@@ -9,8 +9,7 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Unit normalization of the clopen adjunction word
 
-Source: Stacks Project, Modules on Sites, Tag 03DI; categorical adjunction calculation.
-(blueprint: lem-cbc-clopen-adjunction-unit-normalization). -/
+Source: Stacks Project, Modules on Sites, Tag 03DI. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -45,8 +44,7 @@ as the second unit followed by the rightmost functor applied to the inverse firs
 The adjunction bijection sends the latter inverse to exactly this composite. Applying
 its inverse cancels the bijection, and the first unit cancels its inverse.
 
-Source: Stacks Project, Modules on Sites, Tag 03DI; categorical unit calculation.
-(blueprint: lem-cbc-clopen-adjunction-unit-normalization). -/
+Source: Stacks Project, Modules on Sites, Tag 03DI. -/
 theorem clopenAdjunctionUnitNormalization {A X : Type*} [Category A] [Category X]
     {L : A ⥤ X} {G : X ⥤ A} {D : A ⥤ X}
     (a : L ⊣ G) (b : G ⊣ D) [IsIso a.unit] (M : A) :

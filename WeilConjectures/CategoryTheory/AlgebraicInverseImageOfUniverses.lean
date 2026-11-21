@@ -15,8 +15,7 @@ public import Mathlib.CategoryTheory.Types.Basic
 /-!
 # Algebraic inverse image along a morphism of topoi
 
-Source: Stacks Project, Modules on Sites, Tag 03D2, and Sites, Tag 00YV;
-Cohomology on Sites, Tag 06YY (auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 03D2, and Sites, Tag 00YV; Cohomology on Sites, Tag 06YY.
 
 The underlying sheaves are identified with inverse images of sheaves of sets.
 Operations are transported by requiring preservation of their graphs on generalized
@@ -41,8 +40,7 @@ namespace SheafOfModules
 transported along it. The natural underlying-sheaf isomorphism also fixes the action
 on module morphisms. Graph equations are imposed for every test sheaf, so they apply
 to the universal tuples of operands, not merely to global sections.
-Source: Stacks Project, Modules on Sites, Tag 03D2, and Sites, Tag 00YV
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Modules on Sites, Tag 03D2, and Sites, Tag 00YV. -/
 structure AlgebraicInverseImageOfUniverses
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}

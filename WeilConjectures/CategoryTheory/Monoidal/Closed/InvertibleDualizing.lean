@@ -48,7 +48,7 @@ dualizable `X`, and `[-, W]` restricts to an anti-equivalence of the dualizable 
 - `CategoryTheory.MonoidalClosed.ihomCurry_comp_map_ihomIsoIhomUnitTensor_hom`: `θ` is compatible
   with internal currying, `[K ⊗ A, W] ≅ [A, [K, W]]`; this gives the compatibility with shifts.
 - `CategoryTheory.MonoidalClosed.map_ihomIsoIhomUnitTensor_hom`: `θ` is compatible with monoidal
-  functors, such as a change of coefficients (blueprint `theorem-poincare-duality--2`).
+  functors, such as a change of coefficients.
 - `CategoryTheory.MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom`: under `θ` the
   double-dual map into `[[X, W], W]` is the coefficient biduality.
 - `CategoryTheory.MonoidalClosed.isIso_toIhomIhom_of_isDualizable`: biduality relative to `W`
@@ -131,7 +131,7 @@ lemma whiskerLeft_ihomIsoIhomUnitTensor_hom_comp (X : C) :
   rw [this, MonoidalCategory.whiskerLeft_comp_assoc, ihom.ev_naturality_assoc,
     ihom.ev_naturality_assoc, Iso.inv_hom_id, Category.comp_id]
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (compatibility with
+/-- The dual of a perfect complex (compatibility with
 twisting the source).
 
 The isomorphism `θ` is compatible with internal currying: for all `K` and `A`, the square
@@ -183,7 +183,7 @@ noncomputable def ihomUnitComparison (X : C) :
 variable {T W : C} (γ : T ≅ W) (hT : IsInvertible T) {T' W' : D} (γ' : T' ≅ W')
   (hT' : IsInvertible T') (e : F.obj T ≅ T') (eW : F.obj W ≅ W')
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (compatibility with
+/-- The dual of a perfect complex (compatibility with
 finite reduction and scalar extension).
 
 The twist interchange `θ_X : [X, W] ≅ [X, 𝟙_ C] ⊗ T` is compatible with a monoidal functor

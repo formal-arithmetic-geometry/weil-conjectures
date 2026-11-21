@@ -38,8 +38,7 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Associativity of normalized slice tensor comparison
 
-Source: Stacks Project, Tags 07A4 and 0FPT
-(blueprint: lem-sfb-ringed-slice-tensor-constraints).
+Source: Stacks Project, Tags 07A4 and 0FPT.
 -/
 
 @[expose] public noncomputable section
@@ -1241,8 +1240,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 -- Normalize localization comparisons without unfolding the tensor construction.
 include K KU hd in
 /-- The normalized slice tensor comparison preserves the derived associator.
-Source: Stacks Tags 07A4 and 0FPT
-(blueprint: lem-sfb-ringed-slice-tensor-constraints).
+Source: Stacks Tags 07A4 and 0FPT.
 
 Proof: choose flat-term K-flat representatives for the three arguments. Their total
 products again have flat terms and are K-flat. The four tensor comparison squares

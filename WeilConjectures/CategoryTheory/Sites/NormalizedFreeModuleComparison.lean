@@ -15,9 +15,8 @@ import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 /-!
 # Conditional calculus of normalized free-module comparisons
 
-Source: Stacks Project, Modules on Sites, Tag 08TQ (lemma-pullback-differentials),
-free-module identifications, and Tag 04BL (lemma-universal-module), generator extensions
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Modules on Sites, Tag 08TQ,
+free-module identifications, and Tag 04BL, generator extensions.
 
 The free sheaves, generators, and simultaneous coefficient/generator changes are the
 existing `SheafFreeModule.free`, `generator`, and `change`. No adjunction is assumed for
@@ -279,8 +278,7 @@ private theorem change_identity_comp {B : Sheaf J CommRingCat.{w}}
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Underlying comparison for an arbitrary algebraic transport, with the canonical
-underlying-module identification retained. Source: Stacks 08TQ, free identifications
-(auxiliary; not a blueprint node). -/
+underlying-module identification retained. Source: Stacks 08TQ, free identifications. -/
 def normalizedFreeComparison
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -294,8 +292,7 @@ def normalizedFreeComparison
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- The stated representing hypothesis is precisely bijectivity of restriction along
 L of the canonical generator, for every target module sheaf. Source: Stacks 04BL and
-08TQ, conditional free identification
-(auxiliary; not a blueprint node). -/
+08TQ, conditional free identification. -/
 def HasTransportedFreeUniversalProperty
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))
     {B : Sheaf J CommRingCat.{w}} {BI : Sheaf K CommRingCat.{w}}
@@ -308,8 +305,7 @@ def HasTransportedFreeUniversalProperty
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- The source and target underlying identifications applied to L of a coefficient and
- generator change. Source: Stacks 04BL and 08TQ, semilinear generator extension
-(auxiliary; not a blueprint node). -/
+ generator change. Source: Stacks 04BL and 08TQ, semilinear generator extension. -/
 def transportedFreeChange
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))
     {B B' : Sheaf J CommRingCat.{w}} {BI BI' : Sheaf K CommRingCat.{w}}
@@ -323,8 +319,7 @@ def transportedFreeChange
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Sectionwise form of the transported change, descending the interface's `ULift`.
-Source: Stacks 04BL and 08TQ, semilinear generator extension
-(auxiliary; not a blueprint node). -/
+Source: Stacks 04BL and 08TQ, semilinear generator extension. -/
 def transportedFreeChangeSection
     (L : Sheaf J (Type w) ⥤ Sheaf K (Type w))
     {B B' : Sheaf J CommRingCat.{w}} {BI BI' : Sheaf K CommRingCat.{w}}
@@ -339,8 +334,7 @@ attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Applying L to the actual semilinear extension gives a semilinear map over Lb,
 including additivity and zero compatibility. The equation hb merely identifies Lb
 in the chosen ring presentations; it does not assume it invertible.
-Source: Stacks 08TQ and 04BL, operation transport and generator extension
-(auxiliary; not a blueprint node).
+Source: Stacks 08TQ and 04BL, operation transport and generator extension.
 
 Proof: node step 1 constructs change by scalar restriction and sheafification; it is
 additive and satisfies c(ax)=b(a)c(x). Step 2 writes these laws as operation diagrams
@@ -380,8 +374,7 @@ theorem normalizedFreeModule_change_semilinear
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Simultaneous naturality for arbitrary coefficient maps and generator maps.
-Source: Stacks 08TQ and 04BL, normalized free identifications
-(auxiliary; not a blueprint node).
+Source: Stacks 08TQ and 04BL, normalized free identifications.
 
 Proof: node step 1 identifies change with the sheafified semilinear extension and proves
 its generator equation, using lem-trf-free-module-sheaf-universal-property. Step 2
@@ -454,8 +447,7 @@ theorem normalizedFreeModule_naturality
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Generator compatibility after an arbitrary map out of LE, without requiring that map
-be invertible. Source: Stacks 08TQ and 04BL, generator extensions
-(auxiliary; not a blueprint node).
+be invertible. Source: Stacks 08TQ and 04BL, generator extensions.
 
 Proof: node step 4 composes normalization with the generator equation for c(1,v).
 That equation follows by evaluating the sectionwise extension on [e] and factoring
@@ -474,8 +466,7 @@ theorem normalizedFreeModule_generators
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Finite-product generator normalization, including the empty product, and every
-projection square. Source: Stacks 08TQ, free module on the product of generator sheaves
-(auxiliary; not a blueprint node).
+projection square. Source: Stacks 08TQ, free module on the product of generator sheaves.
 
 Proof: in node step 5 apply step 4 with v the canonical finite-product comparison.
 Finite-limit preservation makes this comparison an isomorphism, even for the empty
@@ -518,8 +509,7 @@ theorem normalizedFreeModule_products
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- For identity transport with the original operations, a normalized comparison is
-literally the identity isomorphism. Source: Stacks 04BL and 08TQ, normalized uniqueness
-(auxiliary; not a blueprint node).
+literally the identity isomorphism. Source: Stacks 04BL and 08TQ, normalized uniqueness.
 
 Proof: node step 6 applies the free-sheaf restriction bijection of
 lem-trf-free-module-sheaf-universal-property. The comparison and the identity both
@@ -628,8 +618,7 @@ private def compositePresentation
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
 /-- Coherence for composite transported operations and their underlying identifications.
-Source: Stacks 08TQ and 04BL, composite normalized free identifications
-(auxiliary; not a blueprint node).
+Source: Stacks 08TQ and 04BL, composite normalized free identifications.
 
 Proof: in node step 7, step 2 makes K of the first linear comparison linear over KLB.
 The ring equation hB identifies the composite scalar action with the one of FG.

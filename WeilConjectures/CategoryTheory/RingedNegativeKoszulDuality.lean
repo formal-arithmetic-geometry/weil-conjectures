@@ -9,9 +9,7 @@ import WeilConjectures.CategoryTheory.RingedNegativeKoszulFactorHomTensor
 
 /-! # Duality between positive and negative two-term Koszul tensors
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the identification of finite free dual complexes.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, the identification of finite free dual complexes.
 -/
 
 @[expose] public noncomputable section
@@ -164,9 +162,7 @@ ones, compatibly with their explicit transitions and empty-subset units.
 This assertion is entirely on one ringed site: it has no exterior algebra,
 coefficient ring, scheme, sheafification or scalar transport.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the displayed finite free dual identification.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, the displayed finite free dual identification.
 
 Proof: the positive factor is O --b^(m+1)--> O in degrees 0 and 1. In its
 internal Hom into O[0], project the degree n product to p=-n: every other

@@ -94,7 +94,7 @@ theorem comp_assoc {c' : Compactification f} (r : Refinement c d) (s : Refinemen
 
 end Refinement
 
-/-- Blueprint `definition-compactification-refinement`: Compactifications and refinements, the
+/-- Compactifications and refinements, the
 category `Comp(f)`; also part of `proposition-dense-compactifications-form-cofiltered-category`.
 
 The compactifications of `f : X ⟶ Y` form a category, with the refinements as

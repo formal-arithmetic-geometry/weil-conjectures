@@ -157,8 +157,7 @@ private theorem image_cover_pullback (S : Site J s R a) :
 /-- Sheaf descent along the degree-zero inclusion of a specified twisted site.
 
 Source: the covering-basis part of original step 3 of the agent twisted variant
-of Stacks Tag 00W0, `sites.tex`, proposition-sheaves-on-group
-(blueprint: lem-sf-twisted-action-sheaf-detection).
+of Stacks Tag 00W0, `sites.tex`.
 
 Proof: a degree-n arrow is a degree-zero arrow followed by an isomorphism of
 copied objects. Pulling a generating J-cover back along it is therefore the same,

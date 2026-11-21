@@ -27,7 +27,6 @@ variable {C D : Type u} [SmallCategory C] [SmallCategory D]
   (φ : A ⟶ (F.sheafPushforwardContinuous RingCat.{u} J K).obj B)
 /-- The underlying module inverse image comparison respects the adjunction unit.
 Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
-(auxiliary; not a blueprint node).
 Proof: use the ring and abelian unit presentations to construct the scalar action
 on the actual abelian inverse image. Unit generators detect linearity of adjoints.
 The restricted adjunction therefore has the abelian unit as its underlying unit.

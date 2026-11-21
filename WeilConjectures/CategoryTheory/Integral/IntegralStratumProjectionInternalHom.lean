@@ -11,8 +11,7 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Tensor projection and internal Hom
 
-Source: Stacks Project, Tags 0E8I and 08J9
-(blueprint: lem-weil-pbc-projection-internal-hom).
+Source: Stacks Project, Tags 0E8I and 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +40,7 @@ private def fixedFirstTensorAdjunction
 /-- A tensor projection formula identifies internal Hom from an extended source.
 The two adjunctions allow distinct right adjoints, covering both open extension
 and closed direct image.
-Source: Stacks Project, Tags 0E8I and 08J9
-(blueprint: lem-weil-pbc-projection-internal-hom).
+Source: Stacks Project, Tags 0E8I and 08J9.
 
 Proof: fix P in the projection formula. The resulting left functor is F followed
 by tensor with P followed by E. Its right adjoint is the right adjoint of E,

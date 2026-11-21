@@ -18,7 +18,6 @@ import Mathlib.Algebra.FiveLemma
 /-! # Third Hom comparison for a cofiltered diagram of distinguished triangles
 
 Source: Stacks Project, Derived Categories, Lemma 05SC, five-term Hom diagram, dualized.
-(blueprint: lem-pur-triangulated-hom-colimit-comparison).
 -/
 
 @[expose] public section
@@ -243,7 +242,6 @@ induces bijective first and second Hom comparisons for every test object.
 
 Source: Stacks Project, Derived Categories, Lemma 05SC, displayed five-term Hom diagram,
 with contravariant Hom and cofiltered indexing.
-(blueprint: lem-pur-triangulated-hom-colimit-comparison).
 
 Proof: For a test object W apply Hom(-,W) to the distinguished triangles H(j) and U.
 The five terms are Hom(second[1],W), Hom(first[1],W), Hom(third,W), Hom(second,W),

@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 # Degree-zero Čech cohomology of an abelian sheaf
 
 Source: Stacks Project, Cohomology on Sites, Tag 03AN.
-(blueprint: lem-weil-pbc-site-cech-zero-cohomology)
 -/
 
 @[expose] public section
@@ -123,7 +122,6 @@ private theorem cech_zero_glue
 
 /-- Degree-zero Čech cohomology of an abelian sheaf is its sections on the covered object.
 Source: Stacks Project, Cohomology on Sites, Tag 03AN.
-(blueprint: lem-weil-pbc-site-cech-zero-cohomology)
 
 Proof: the alternating degree-zero differential says precisely that the transported
 sections on the covering objects agree on every pairwise fibre product. The universal

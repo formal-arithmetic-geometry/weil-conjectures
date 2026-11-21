@@ -11,7 +11,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 # Scalar compatibility of exact derived factorization
 
 Source: Stacks Project, Derived Categories, Tag 015F.
-(blueprint: lem-weil-pbc-scalar-localization-unit-factors)
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace CategoryTheory
 
 /-- A normalized termwise unit intertwines target scalars under derived factorization.
 Source: Stacks Project, Derived Categories, Tag 015F.
-(blueprint: lem-weil-pbc-scalar-localization-unit-factors).
 Proof: commute the scalar through the extension factorization isomorphism by
 bilinearity; then use naturality of the restriction factorization and the unit
 normalization. No linearity of restriction over the target ring is required. -/

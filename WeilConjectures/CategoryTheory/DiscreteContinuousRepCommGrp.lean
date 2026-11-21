@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DiscreteContinuousRepCommGrpAux
 /-!
 # Commutative group objects in discrete continuous actions
 
-Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
-(blueprint: lem-exc-discrete-continuous-rep-commgrp)
+Source: Stacks Project, Tag 04JQ.
 -/
 
 @[expose] public section
@@ -29,9 +28,7 @@ namespace Rep
 attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
   AlgebraicGeometry.etaleFieldActionForget₂
 
-/-- Source: Stacks Project, Tag 04JQ, proof of
-`lemma-equivalence-abelian-sheaves-point`.
-(blueprint: lem-exc-discrete-continuous-rep-commgrp).
+/-- Source: Stacks Project, Tag 04JQ.
 
 Proof: A commutative group object in discrete continuous G-sets gives an abelian
 law on its carrier: interpret its product as the Cartesian product via the

@@ -9,9 +9,6 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Identity functor and the derived homology comparison
-
-Source: the canonical localization constructions in ExactFunctor.lean.
-(blueprint: lem-weil-pbc-identity-derived-homology-comparison)
 -/
 
 @[expose] public section
@@ -23,9 +20,7 @@ namespace CategoryTheory.Functor
 /-- The homology comparison of the identity functor is homology of its inverse
 canonical derived identity comparison.
 
-Source: Stacks Project, Tag 01F8, equation 01FA; the localization constructions
-`mapDerivedCategoryHomologyFunctorIso` and `mapDerivedCategoryPlusIdIso`.
-(blueprint: lem-weil-pbc-identity-derived-homology-comparison)
+Source: Stacks Project, Tag 01F8, equation 01FA.
 
 Proof: on complexes the identity functor acts as identity on kernels, cokernels,
 and hence homology. The induced homology comparison is therefore homology of the

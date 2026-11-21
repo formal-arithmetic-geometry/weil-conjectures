@@ -14,8 +14,6 @@ import WeilConjectures.CategoryTheory.Abelian.ExtEpiEffacement
 # Local killing of Ext classes from free abelian sheaves
 
 Source: Stacks Project, Derived Categories, Tag 06XU; Cohomology on Sites, Tag 03F9.
-(blueprint: lem-sc-presheaf-free-ext-local-killing)
-(blueprint: lem-sc-presheaf-free-ext-local-killing-witness)
 
 This implementation follows the explicit generator lifting construction.
 The witness conclusion contains the vanishing equation directly; it has no
@@ -199,8 +197,6 @@ private theorem exists_presheaf_cover_lift
 locally surjective map of small-valued presheaves.
 Source: Stacks Project, Derived Categories, Tag 06XU (Yoneda representatives), and
 Cohomology on Sites, Tag 03F9 (local lifting in the vanishing argument).
-(blueprint: lem-sc-presheaf-free-ext-local-killing)
-(blueprint: lem-sc-presheaf-free-ext-local-killing-witness)
 
 Proof: apply Ext.exists_epi_comp_eq_zero, whose fraction argument from Tag 06XU
 provides an epimorphism g : G -> Z[P] that kills x. At each object V construct
@@ -233,7 +229,7 @@ theorem exists_presheaf_ext_local_killing_witness
   refine ⟨E, f, hf, ?_⟩
   rw [← hl, ← Ext.mk₀_comp_mk₀_assoc, hx, Ext.comp_zero]
 
-/-- The local Ext killing conclusion. (blueprint: lem-sc-presheaf-free-ext-local-killing)
+/-- The local Ext killing conclusion.
 Proof: apply the preceding Yoneda witness theorem, which directly supplies the
 presheaf, locally surjective map, and vanishing equation. No existential proof
 witness or auxiliary True proposition is needed. -/

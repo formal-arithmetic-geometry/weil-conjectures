@@ -17,8 +17,7 @@ import Mathlib.CategoryTheory.Adjunction.Evaluation
 /-!
 # Small diagrams of module sheaves form a Grothendieck category
 
-Source: Stacks Project, Injectives, Tags 05AB, 079B and 079Q; extension to small diagrams
-(blueprint: lem-weil-pbc-small-module-diagrams-grothendieck).
+Source: Stacks Project, Injectives, Tags 05AB, 079B and 079Q.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ open CategoryTheory
 namespace CategoryTheory
 
 /-- Small diagrams of left module sheaves over an arbitrary ring sheaf are Grothendieck abelian.
-Source: Stacks Project, Injectives, Tags 05AB, 079B and 079Q, with the small-diagram extension
-(blueprint: lem-weil-pbc-small-module-diagrams-grothendieck).
+Source: Stacks Project, Injectives, Tags 05AB, 079B and 079Q, with the small-diagram extension.
 
 Proof plan:
 1. By `lem-weil-pbc-ring-sheaves-grothendieck`, module sheaves are abelian, have small

@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.GrothendieckDerivedBrownCohomologicalRepre
 /-! # Grothendieck derived Brown right adjoint
 
 Source: Stacks Project, Tag 0F5Y, Proposition 19.15.2,
-`injectives-proposition-brown`.
-(auxiliary; not a blueprint node)
+`injectives-.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace CategoryTheory
 
 /-- An exact coproduct-preserving functor out of the unbounded derived category of a
 Grothendieck abelian category has a right adjoint.
-Source: Stacks Project, Tag 0F5Y, `injectives-proposition-brown`.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 0F5Y, `injectives-.
 
 Proof in words: for each target object Y, the additive functor
 H(W) = Hom(F(W), Y) is cohomological by exactness and takes coproducts to products.

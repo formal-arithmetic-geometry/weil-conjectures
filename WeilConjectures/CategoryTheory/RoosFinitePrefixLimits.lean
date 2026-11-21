@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.RoosFinitePrefixes
 # Limits of finite-prefix towers
 
 Source: Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
-(blueprint: lem-pc-roos-finite-prefix-limits).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace CategoryTheory
 open Limits
 
 /-- Evaluation on a finite prefix. 
-(blueprint: lem-pc-roos-finite-prefix-limits)
 -/
 def roosPrefixEval (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (n i : ℕ)
     (h : i < n + s) : (roosPrefixTower s A).obj (Opposite.op n) ⟶
@@ -35,7 +33,6 @@ def roosPrefixEval (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (n i : ℕ)
       map_add' := fun _ _ ↦ rfl }
 
 /-- Restriction of an infinite tuple to a finite prefix. 
-(blueprint: lem-pc-roos-finite-prefix-limits)
 -/
 noncomputable def roosPrefixCone (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     Cone (roosPrefixTower s A) where
@@ -47,7 +44,7 @@ noncomputable def roosPrefixCone (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
           map_add' := by intros; ext i; exact map_add _ _ _ }
       naturality := by intros; rfl }
 
-/-- (blueprint: lem-pc-roos-finite-prefix-limits) -/
+/--  -/
 theorem roosPrefixCone_coordinate (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
     (c : Cone (roosPrefixTower s A)) (n m i : ℕ) (hn : i < n + s) (hm : i < m + s) :
     c.π.app (Opposite.op n) ≫ roosPrefixEval s A n i hn =
@@ -61,7 +58,6 @@ theorem roosPrefixCone_coordinate (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}
 /-- Compatible finite prefixes are exactly infinite tuples.
 
 Source: Stacks Project, Tag 07KW, proof of Lemma 15.88.1.
-(blueprint: lem-pc-roos-finite-prefix-limits).
 
 Extract coordinate i from prefix i+1. Compatibility makes this the same as its
 value in any prefix containing i: compare both with the prefix of maximum length.

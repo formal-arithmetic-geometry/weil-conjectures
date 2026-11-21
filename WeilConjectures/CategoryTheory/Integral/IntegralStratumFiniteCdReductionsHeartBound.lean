@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.Integral.IntegralStratumFiniteCdRed
 public import WeilConjectures.CategoryTheory.Integral.IntegralStratumFiniteCdReductionsSectionsFromData
 
 /-! Heart-level section bound for the continuous integral coefficient.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
 
 The proof transports the continuous coefficient to the normalized integral coefficient,
 uses the finite local two-term resolution and the integral dual-torsion heart theorem,
@@ -33,11 +32,7 @@ attribute [local instance 20000] HasDerivedCategory.ofIsGrothendieckAbelian
 namespace CategoryTheory
 
 /-- Heart-level dual-torsion section bound for the continuous integral coefficient.
-Source: blueprint latest, `part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-the dual-tensor step (Tor amplitude [0,1] of `L^∨`, then `RΓ(S,-)` raises degrees by
-at most `cd_ℓ(S)`); Stacks Tags 08JJ and 099Y.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
+Source: Stacks Tags 08JJ and 099Y.
 
 The hypothesis `hD` pins `D` to `stratumModuleDual _ S L = RHom(L[0], A[0])`; the
 statement is false for an arbitrary object `D` (take `D = A[0]⟦10⟧` and `F` the

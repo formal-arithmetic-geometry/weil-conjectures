@@ -23,7 +23,6 @@ variable {B : Type uB} [Category.{vB} B] [Abelian B] [IsGrothendieckAbelian.{vB}
 
 /-- The canonical derived unit on a literal single complex in degree n.
 Source: Stacks Project, derived.tex, Tag 015J, proof, remark (1).
-(blueprint: lem-pc-right-derived-canonical-single-unit)
 
 Proof: Shift the literal degree-n single complex by n to degree zero. The
 single-functor shift isomorphism identifies the result with X[0]. Naturality of

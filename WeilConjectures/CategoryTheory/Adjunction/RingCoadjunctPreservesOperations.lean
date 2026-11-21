@@ -104,7 +104,6 @@ identity. With the constant equations opsL, opsR, and that for g, this proves q_
 the inverse adjunct equals q_Y, both for zero and for one. Package zero and addition as
 IsAddMonHom and one and multiplication as IsMonHom; these give IsRingHom. Negation preservation
 follows from additivity and is not a field of IsRingHom.
-(blueprint: lem-weil-pbc-ring-coadjunct-preserves-operations)
 -/
 theorem ringCoadjunctPreservesOperations
     {A : Type uA} [Category.{vA} A] [CartesianMonoidalCategory A]

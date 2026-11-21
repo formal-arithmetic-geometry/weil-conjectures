@@ -11,8 +11,7 @@ public import Mathlib.Algebra.Category.Grp.Basic
 
 /-! # Extending a presheaf action through sheafification
 
-Source: Stacks Project, Tag 00WH; finite-product preservation of sheafification.
-(blueprint: lem-sc-sheafify-add-action).
+Source: Stacks Project, Tag 00WH.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [Presheaf.IsLocallySurjective J (toSheafify J P)]
 
 /-- Extending an action through sheafification.
-Source: Stacks Project, Tag 00WH; local bijectivity of the associated-sheaf unit.
-(blueprint: lem-sc-sheafify-add-action)
+Source: Stacks Project, Tag 00WH.
 
 Proof: Local injectivity of the unit and separatedness show that translating two
 representatives with the same image gives the same image. For a section x of the

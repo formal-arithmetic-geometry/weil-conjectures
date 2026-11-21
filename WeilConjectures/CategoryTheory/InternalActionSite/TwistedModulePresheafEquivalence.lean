@@ -16,10 +16,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 /-!
 # Module presheaves and sheaves on the internal action site
 
-Source: the agent-formulated categorical foundation accompanying main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3), returned steps 4--6;
-Stacks Sites, Tags 00Z8, 00ZC, and Modules on Sites, Section 03CS for background
-(blueprint: lem-sfb-twisted-module-presheaf-equivalence).
+Source: Stacks Sites, Tags 00Z8, 00ZC, and Modules on Sites, Section 03CS for background.
 
 All categories, actions and coefficient objects are the existing constructions in
 `InternalActionSitePresentation`, exposed by the sieve-geometry dependency. The theorem
@@ -523,10 +520,7 @@ private theorem coefficient_sheaf [HasFiniteLimits C] (J : Precoverage C)
 
 /-- The explicit additive equivalence of module presheaves, preserving and reflecting sheaves.
 
-Source: agent-formulated categorical foundation for main-20261015,
-sk-thm-sf-ctf-stability-direct-images, paragraph (3), returned steps 4--6;
-Stacks Sites 00Z8, 00ZC and Modules on Sites 03CS are background only
-(blueprint: lem-sfb-twisted-module-presheaf-equivalence).
+Source: Stacks Sites 00Z8, 00ZC and Modules on Sites 03CS are background only.
 
 Proof: (1) Use `lem-sfb-twisted-site-sieve-geometry` to identify every covering sieve
 with all labels over a base covering sieve, and factor (f,a) as (1,a) followed by (f,1).

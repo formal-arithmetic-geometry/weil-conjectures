@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.RingedSiteCompleteElementsLocal
 /-!
 # Vanishing localizations form a sheaf of ideals
 
-Source: Stacks Project, algebraization.tex, Tags 0998 and 0997
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0998 and 0997.
 -/
 
 @[expose] public section
@@ -83,8 +82,7 @@ criterion. Ideals encode zero, addition, and multiplication by arbitrary section
 next clauses express restriction and descent for every covering sieve. The final clause
 is the locally finite-generated ideal consequence, using local finite-span membership.
 
-Source: Stacks Project, algebraization.tex, Tags 0998 and 0997
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tags 0998 and 0997.
 
 Proof: Localization at zero is the colimit of zero transition maps, hence zero.
 Contravariant derived internal Hom preserves zero, proving zero membership.

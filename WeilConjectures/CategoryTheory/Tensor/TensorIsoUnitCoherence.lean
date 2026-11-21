@@ -13,7 +13,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory
 
 /-- An invertible tensor-compatible comparison between unital tensor functors preserves units.
-Source: Stacks 07A4 (blueprint: lem-pur-tensor-iso-unit-coherence).
+Source: Stacks 07A4.
 Proof: specialize tensor compatibility to the pair of units, then use naturality at
 its left unitor and the left-unit axioms. Cancel the invertible tensor comparison
 and the left unitor. Cancel tensoring with the invertible unit component. Finally,

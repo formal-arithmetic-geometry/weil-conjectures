@@ -11,7 +11,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Plus
 /-! # The canonical inclusion of bottom homology
 
 Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-bottom-inclusion).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
 /-- The canonical inclusion `H^n(M)[-n] ⟶ M` for an object with no homology below n.
 It is the inverse double-truncation identification, inverse lower projection,
-and upper inclusion. Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-bottom-inclusion). -/
+and upper inclusion. Source: Stacks Project, Tag 05TC (2). -/
 noncomputable def bottomHomologyInclusion (n : ℤ) (M : Plus C) [M.IsGE n] :
     (singleFunctor C n).obj ((homologyFunctor C n).obj M) ⟶ M := by
   let t := TStructure.t (C := C)
@@ -38,7 +36,6 @@ noncomputable def bottomHomologyInclusion (n : ℤ) (M : Plus C) [M.IsGE n] :
 /-- Every map from an object in degree n to an object concentrated in degrees ≥ n
 factors through the canonical inclusion of bottom homology.
 Source: Stacks Project, Tag 05TC (2).
-(blueprint: new-lem-pc-derived-bottom-inclusion).
 
 Proof: The upper truncation inclusion on the source single object is invertible.
 Naturality factors f through the upper truncation of M. Since M is ≥ n, the

@@ -18,9 +18,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Flat constant extension and tensor of pro-zero cone towers
 
-Source: Stacks Project, proetale.tex, Tag 099M, transport of the Koszul pro-isomorphism;
-sites-cohomology.tex, Tags 06YN and 0941.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, proetale.tex, Tag 099M, transport of the Koszul pro-isomorphism; sites-cohomology.tex, Tags 06YN and 0941.
 
 ## Main declarations
 
@@ -41,15 +39,14 @@ attribute [local instance] Functor.preservesZeroMorphisms_of_additive
 namespace CategoryTheory
 
 /-- The existing equivalence writes a strict tower of complexes as a complex of towers.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks 0941. -/
 abbrev flatConstantTowerComplex {B : Type a} [Category.{b} B] [HasZeroMorphisms B] :=
   (HomologicalComplex.functorEquivalence B (.up ℤ) ℕᵒᵖ).inverse
 
 /-- The canonical map from a strict cone to the total derived inverse limit. It is the
 ordinary constant/limit adjunction unit, followed by the strict cone and the derived
 comparison η. On a K-injective replacement j it is Q(lim(jα)), as in Stacks 0941.
-Source: Stacks 0940--0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks 0940--0941. -/
 def flatConstantStrictConeMap {B : Type a} [Category.{b} B] [Abelian B]
     [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory.{d} B]
     [HasDerivedCategory.{d} (ℕᵒᵖ ⥤ B)]
@@ -67,7 +64,7 @@ def flatConstantStrictConeMap {B : Type a} [Category.{b} B] [Abelian B]
 /-- The pointed version of the canonical strict-cone comparison, for any strict functor.
 The map is the localization of the chosen strict point followed by the constant/limit
 adjunction and the derived comparison, with no choice of a derived-category map.
-Source: Stacks 0941 (auxiliary; not a blueprint node). -/
+Source: Stacks 0941. -/
 def flatConstantPointedLimitMap
     {T : Type u} [Category.{v} T] {B : Type a} [Category.{b} B] [Abelian B]
     [HasLimitsOfShape ℕᵒᵖ B] [HasDerivedCategory.{d} B]
@@ -86,8 +83,7 @@ def flatConstantPointedLimitMap
 /-- A strict cone tower is pro-zero after localization exactly when each level is hit
 by a transition that is zero in the derived category. The cone is formed in the
 abelian category of towers, retaining all strict transition maps.
-Source: Stacks 014E--014F and 0941
-(auxiliary; not a blueprint node). -/
+Source: Stacks 014E--014F and 0941. -/
 def FlatConstantConeProZero {B : Type a} [Category.{b} B] [Abelian B]
     [HasDerivedCategory.{d} B] {X Y : ℕᵒᵖ ⥤ CochainComplex B ℤ} (v : X ⟶ Y) : Prop :=
   ∀ n : ℕ, ∃ (m : ℕ) (h : n ≤ m),
@@ -352,7 +348,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{max u v} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]
 
 /-- Reuse the existing coefficient-forgetful sheaf-composition instance.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 instance flatConstantHasSheafCompose :
     J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v}) :=
   inferInstance
@@ -364,7 +360,7 @@ variable (A : Type (max u v)) [CommRing A]
   {O : Sheaf J CommRingCat.{max u v}} (φ : realizationRing J A ⟶ O)
 
 /-- Reuse the existing abelian structure of the module-sheaf category.
-Source: Stacks 03DA (auxiliary; not a blueprint node). -/
+Source: Stacks 03DA. -/
 instance flatConstantModulesAbelian :
     Abelian (SheafOfModules.{max u v}
       (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) :=
@@ -374,7 +370,7 @@ attribute [-instance] flatConstantModulesAbelian
 attribute [local instance] flatConstantModulesAbelian
 
 /-- Reuse ordinary strict inverse limits in the module-sheaf category.
-Source: Stacks 0940 (auxiliary; not a blueprint node). -/
+Source: Stacks 0940. -/
 instance flatConstantModulesLimits :
     HasLimitsOfShape ℕᵒᵖ (SheafOfModules.{max u v}
       (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) :=
@@ -389,7 +385,7 @@ variable
 
 /-- Specialize the existing canonical scalar-extension model to the constant ring sheaf,
 using the standard source localization. No source localization is additional input.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 noncomputable instance flatConstantSourceHasDerivedCategory :
     HasDerivedCategory
       (SheafOfModules (SheafOfModules.derivedChangeRingIndependentCoefficients J
@@ -397,7 +393,7 @@ noncomputable instance flatConstantSourceHasDerivedCategory :
   HasDerivedCategory.standard (realizationModules J A)
 
 /-- The recorded canonical extension model, at the standard source localization.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+Source: Stacks 06YY. -/
 noncomputable def flatConstantExtensionModel
     (φ : realizationRing J A ⟶ O) :
     SheafOfModules.DerivedChangeOfRingsCochainModel.{u, v, max u v,
@@ -406,8 +402,7 @@ noncomputable def flatConstantExtensionModel
 
 /-- Ordinary E(M) = O ⊗_R underline M, with its prescribed O-action. The existing
 canonical model fixes objects and maps to sheafified scalar tensor by obj_eq and map_eq.
-Source: Stacks 03EK and 099M
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK and 099M. -/
 abbrev flatConstantExtension
     (φ : realizationRing J A ⟶ O) :
     ModuleCat.{max u v} A ⥤ SheafOfModules.{max u v}
@@ -415,7 +410,7 @@ abbrev flatConstantExtension
   commutativeSiteConstantModuleFunctor J A ⋙ (flatConstantExtensionModel J A φ).E
 
 /-- Reuse the existing monoidal structure on total cochain tensor.
-Source: Stacks 06YN (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN. -/
 instance flatConstantCochainMonoidal :
     MonoidalCategory (CochainComplex (SheafOfModules.{max u v}
       (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) ℤ) :=
@@ -425,7 +420,7 @@ attribute [-instance] flatConstantCochainMonoidal
 attribute [local instance] flatConstantCochainMonoidal
 
 /-- Use the same cochain tensor data for whiskering and the unitors.
-Source: Stacks 06YN (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN. -/
 instance flatConstantCochainMonoidalStruct :
     MonoidalCategoryStruct (CochainComplex (SheafOfModules.{max u v}
       (SheafOfModules.derivedChangeRingIndependentCoefficients.{max u v, u, v} J O)) ℤ) :=
@@ -435,7 +430,7 @@ attribute [-instance] flatConstantCochainMonoidalStruct
 attribute [local instance] flatConstantCochainMonoidalStruct
 
 /-- Reuse the existing additivity witness for ordinary constant extension.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 instance flatConstantExtensionAdditive (φ : realizationRing J A ⟶ O) :
     (flatConstantExtension J A φ).Additive :=
   inferInstance
@@ -446,8 +441,7 @@ attribute [local instance] flatConstantExtensionAdditive
 attribute [local irreducible] flatConstantExtensionModel
 
 /-- Termwise constant extension followed by the direct-sum total tensor with P.
-Source: Stacks 06YN and 099M
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YN and 099M. -/
 def flatConstantTensorFunctor
     (φ : realizationRing J A ⟶ O)
     (P : CochainComplex (SheafOfModules.{max u v}
@@ -458,7 +452,7 @@ def flatConstantTensorFunctor
   (flatConstantExtension J A φ).mapHomologicalComplex (.up ℤ) ⋙ tensorLeft P
 
 /-- The actual constant section of the constant module A.
-Source: Stacks 03CY (auxiliary; not a blueprint node). -/
+Source: Stacks 03CY. -/
 def flatConstantRegularSection (U : Cᵒᵖ) (x : A) :
     ((commutativeSiteConstantModuleFunctor J A).obj (ModuleCat.of A A)).val.obj U :=
   (toSheafify J ((siteConstantModulePresheafGeneral (C := C) A).obj
@@ -466,7 +460,7 @@ def flatConstantRegularSection (U : Cᵒᵖ) (x : A) :
 
 /-- The normalization of the canonical coefficient-unit isomorphism: multiplication
 s ⊗ underline a ↦ s φ(a). Thus the unit used below is determined on local pure tensors.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 def FlatConstantUnitNormalized
     (φ : realizationRing J A ⟶ O)
     (i : (flatConstantExtension J A φ).obj (ModuleCat.of A A) ≅
@@ -483,8 +477,7 @@ def FlatConstantUnitNormalized
 
 /-- P → P ⊗ E(A[0]) is the inverse ordinary tensor unitor and the inverse coefficient
 multiplication isomorphism, extended as a degree-zero complex. This is a strict chain map.
-Source: Stacks 03EK and 099M
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK and 099M. -/
 def flatConstantTensorUnit
     (φ : realizationRing J A ⟶ O)
     (P : CochainComplex (SheafOfModules.{max u v}

@@ -14,9 +14,6 @@ import Mathlib.CategoryTheory.Localization.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHom
 
 /-! # Verdier axioms for the specified common-stage triangles
-
-Source: blueprint `thm-weil-pbc-verdier-axioms`, order 1540.
-(blueprint: thm-weil-pbc-verdier-axioms)
 -/
 
 @[expose] public noncomputable section
@@ -108,8 +105,6 @@ variable {I : Type w} [Preorder I] [IsDirectedOrder I] [Nonempty I]
 
 set_option linter.unusedSectionVars false in
 /-- Finite-stage inclusions preserve the already recorded common-stage addition.
-Source: blueprint order 1540, exact stage inclusion
-(blueprint: thm-weil-pbc-verdier-axioms).
 Proof: both included sums are represented by the transition image of the same
 sum at the original stage. Additivity of the transitions makes this the sum of
 the two included representatives; pairPreadditiveNormalized identifies the classes. -/
@@ -123,8 +118,6 @@ the two included representatives; pairPreadditiveNormalized identifies the class
 
 set_option linter.unusedSectionVars false in
 /-- The actual transition identification commutes with the induced pair shift.
-Source: blueprint order 1540, exact transition identifications
-(blueprint: thm-weil-pbc-verdier-axioms).
 Proof: the components of transIso are finite-stage identity maps with the
 specified associators. Expand the induced pair shift on those representatives.
 The associator CommShift equation identifies the two resulting arrows at the
@@ -156,8 +149,7 @@ same common stage, so their classes agree. This is precisely NatTrans.CommShift.
 
 /-- The recorded Verdier theorem uniquely fixes the pretriangulation by the
 recorded CommonStageDistinguished predicate. Its data is the specified triangle
-set; the inherited HasShift and Hom group structures are retained.
-Source: blueprint order 1540 (blueprint: thm-weil-pbc-verdier-axioms). -/
+set; the inherited HasShift and Hom group structures are retained. -/
 instance qbarPairPretriangulated : Pretriangulated S.PairCategory :=
   (commonStage_verdier_existsUnique S).exists.choose
 
@@ -172,7 +164,6 @@ variable (l : ℕ) [Fact l.Prime] (Qbar : Type w)
     [hInv : Fact (∀ t : T, IsUnit (l : T.presheaf.stalk t))]
 
 /-- The finite stage is triangulated for exactly its integral-image triangles.
-Source: blueprint order 1540, finite-stage input (blueprint: thm-weil-pbc-verdier-axioms).
 Proof: apply raw scalar-localization triangulation to the inherited integral
 triangulation. Its normalized shift agrees with the published rational shift;
 its image-triangle characterization is qbarStagePretriangulated_exists, which
@@ -210,8 +201,6 @@ specifies the same distinguished set. Transport TR4 along these identifications.
   exact ht4
 
 /-- The prescribed coefficient tensor preserves the integral-image triangles.
-Source: blueprint order 1540, exact finite-stage input
-(blueprint: thm-weil-pbc-verdier-axioms).
 Proof: on K-flat complexes integral tensor takes cone triangles to cone triangles.
 It preserves the defining integral subcategories. The normalized localization
 square therefore takes every integral image triangle to a target integral image
@@ -258,7 +247,6 @@ exactness on every distinguished rational triangle, including identity fields. -
     ((G.mapTriangle.mapIso e) ≪≫ c)
 
 /-- The actual common-stage triangulation satisfies all four Verdier axioms.
-Source: blueprint order 1540 (blueprint: thm-weil-pbc-verdier-axioms).
 Proof: apply commonStage_verdier_existsUnique to the actual completed integral
 rational stages and their exact scalar transitions. Its proof moves finitely
 many representatives and equations to one common stage: finite-stage TR1 gives

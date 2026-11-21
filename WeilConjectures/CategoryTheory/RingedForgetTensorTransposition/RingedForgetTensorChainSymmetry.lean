@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.Rin
 
 /-! # Representative constraints for exact ringed tensor comparison
 
-Source: Stacks Project, Tags 0FPT, 06YU and 0G7D
-(blueprint: lem-sf-ringed-forget-tensor-chain-symmetry).
+Source: Stacks Project, Tags 0FPT, 06YU and 0G7D.
 -/
 
 @[expose] public noncomputable section
@@ -46,9 +45,7 @@ variable (u : Underived.{c, v, r, d, vd, s} J R J' R' U)
 omit [PreservesFiniteLimits U] [PreservesFiniteColimits U]
 -- Component checking traverses the totalization and sheaf tensor instances.
 /-- The total-tensor comparison commutes with the signed chain swaps.
-Source: Stacks 0FPT and 06YU; the chain calculation in the symmetry part of
-lem-sf-ringed-forget-tensor-coherence
-(blueprint: lem-sf-ringed-forget-tensor-chain-symmetry).
+Source: Stacks 0FPT and 06YU.
 
 Proof: precompose with the inverse comparison, then test every target coproduct
 summand. The summand law expresses its inverse as the inverse underived tensor

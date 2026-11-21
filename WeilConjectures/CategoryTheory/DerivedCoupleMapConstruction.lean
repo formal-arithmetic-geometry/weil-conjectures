@@ -34,8 +34,7 @@ private theorem transport_family {F G : ℤ → ℤ → C}
   simp
 
 /-- The restricted alpha map is an explicit composition of image maps.
-Source: Stacks Project, Lemma 12.21.2, setup (4), Tag 011R
-(blueprint: lem-sp-derived-map-construction). -/
+Source: Stacks Project, Lemma 12.21.2, setup (4), Tag 011R. -/
 noncomputable def derivedCoupleAlpha (D : ℤ → ℤ → C)
     (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1)) (p q : ℤ) :
     image (a (p + 1) (q - 1)) ⟶ image (a ((p - 1) + 1) ((q + 1) - 1)) :=
@@ -43,8 +42,7 @@ noncomputable def derivedCoupleAlpha (D : ℤ → ℤ → C)
     factorThruImage (a ((p - 1) + 1) ((q + 1) - 1))
 
 /-- The explicit restricted alpha satisfies its defining equation.
-Source: Stacks Project, Lemma 12.21.2, setup (4), Tag 011R
-(blueprint: lem-sp-derived-map-construction). -/
+Source: Stacks Project, Lemma 12.21.2, setup (4), Tag 011R. -/
 theorem derivedCoupleAlpha_comm (D : ℤ → ℤ → C)
     (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1)) (p q : ℤ) :
     derivedCoupleAlpha D a p q ≫ image.ι (a ((p - 1) + 1) ((q + 1) - 1)) ≫
@@ -68,8 +66,7 @@ private theorem lift_image_of_eq {A B T U : C} (a : A ⟶ B) (g : B ⟶ T)
   exact ⟨l.1, l.2⟩
 
 /-- The forward map is obtained by restricting to cycles and descending the boundary.
-Source: Stacks Project, Remark 12.21.5, Tag 0AMJ
-(blueprint: lem-sp-derived-map-construction). -/
+Source: Stacks Project, Remark 12.21.5, Tag 0AMJ. -/
 theorem derivedCoupleForward_exists (D E : ℤ → ℤ → C)
     (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1))
     (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1))
@@ -144,8 +141,7 @@ private theorem desc_image_at_index (D E : ℤ → ℤ → C)
   exact desc_image_of_eq (f p q) (a (p + 2) (q - 1)) (ha p q) u hu
 
 /-- The backward map descends the cycle quotient map through the alpha image.
-Source: Stacks Project, Remark 12.21.5 and its footnote, Tag 0AMJ
-(blueprint: lem-sp-derived-map-construction). -/
+Source: Stacks Project, Remark 12.21.5 and its footnote, Tag 0AMJ. -/
 theorem derivedCoupleBackward_exists (D E : ℤ → ℤ → C)
     (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1))
     (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1))
@@ -218,8 +214,7 @@ theorem derivedCoupleBackward_exists (D E : ℤ → ℤ → C)
 
 /-- The two descended maps with their defining equations. The alpha restriction
 is constructed explicitly; exactness is a separate theorem.
-Source: Stacks Project, Tags 011R and 0AMJ
-(blueprint: lem-sp-derived-map-construction). -/
+Source: Stacks Project, Tags 011R and 0AMJ. -/
 structure DerivedCoupleMapData (D E : ℤ → ℤ → C)
     (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1))
     (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1))
@@ -267,13 +262,13 @@ variable {D E : ℤ → ℤ → C}
     {hg : ∀ p q, g p q ≫ f (p + s) (q - s) = 0}
 
 /-- Alpha is the explicit image restriction, independent of any choices.
-Source: Stacks Project, Tag 011R (blueprint: lem-sp-derived-map-construction). -/
+Source: Stacks Project, Tag 011R. -/
 noncomputable def alpha (_M : DerivedCoupleMapData D E a f g β hβ hg) (p q : ℤ) :
     image (a (p + 1) (q - 1)) ⟶ image (a ((p - 1) + 1) ((q + 1) - 1)) :=
   derivedCoupleAlpha D a p q
 
 /-- The defining equation for the explicit alpha restriction.
-Source: Stacks Project, Tag 011R (blueprint: lem-sp-derived-map-construction). -/
+Source: Stacks Project, Tag 011R. -/
 theorem alpha_comm (M : DerivedCoupleMapData D E a f g β hβ hg) (p q : ℤ) :
     M.alpha p q ≫ image.ι (a ((p - 1) + 1) ((q + 1) - 1)) ≫
       eqToHom (by congr 1 <;> omega) =
@@ -283,8 +278,7 @@ theorem alpha_comm (M : DerivedCoupleMapData D E a f g β hβ hg) (p q : ℤ) :
 end DerivedCoupleMapData
 
 /-- The restriction equations determine all three maps uniquely.
-Source: Stacks Project, Lemma 12.21.2 and Remark 12.21.5, Tags 011R and 0AMJ
-(blueprint: lem-sp-derived-map-construction). -/
+Source: Stacks Project, Lemma 12.21.2 and Remark 12.21.5, Tags 011R and 0AMJ. -/
 theorem derivedCoupleMapData_unique (D E : ℤ → ℤ → C)
     (a : ∀ p q, D p q ⟶ D (p - 1) (q + 1))
     (f : ∀ p q, E p q ⟶ D (p + 2) (q - 1))
@@ -312,8 +306,7 @@ theorem derivedCoupleMapData_unique (D E : ℤ → ℤ → C)
   rfl
 
 /-- Construct the induced maps, without asserting exactness of the new triangle.
-Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ
-(blueprint: lem-sp-derived-map-construction).
+Source: Stacks Project, Lemma 12.21.2, Tag 011R, and Remark 12.21.5, Tag 0AMJ.
 
 Proof. Restrict `a` to its incoming image: its composite with the next image
 inclusion factors through that image, using the image factorization of the incoming

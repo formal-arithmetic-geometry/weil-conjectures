@@ -15,9 +15,8 @@ import WeilConjectures.CategoryTheory.FilteredComplexSuccessorBoundariesImage
 /-!
 # Successor homology of a filtered-complex quotient page
 
-Source: Stacks Project, Homology, Tag 012K, lemma-spectral-sequence-filtered-complex,
+Source: Stacks Project, Homology, Tag 012K,
 and the displayed cycle, boundary, and differential formulas preceding it.
-(blueprint: lem-sp-filtered-complex-page-homology).
 -/
 
 @[expose] public section
@@ -44,9 +43,8 @@ private theorem pullback_kernel {A B T : C} (f : A ⟶ B) (g : B ⟶ T) :
 
 /-- The homology of the representative differential is the next concrete quotient.
 The next page's differential is not needed for this assertion.
-Source: Stacks Project, Tag 012K, lemma-spectral-sequence-filtered-complex,
+Source: Stacks Project, Tag 012K,
 and the displayed cycle, boundary, and differential formulas preceding it.
-(blueprint: lem-sp-filtered-complex-page-homology).
 
 Proof. Work at (p,q), put n = p+q, and write R_s for
 F^p K^n ∩ d⁻¹(F^(p+s) K^(n+1)) and T_s for

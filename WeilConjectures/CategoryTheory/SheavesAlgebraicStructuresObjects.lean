@@ -19,8 +19,7 @@ import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresRing
 # Algebraic sheaves as internal algebraic objects
 
 Source: Stacks Project, Section 00YR, quadruples before Proposition 00YV and its
-sextuple description of rings; Lemmas 006J and 00W2
-(blueprint: situation-conventions).
+sextuple description of rings.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Section 00YR (quadruples and sextuples), Lemmas 006J and 00W2
-(blueprint: situation-conventions).
+/-- Source: Stacks Project, Section 00YR (quadruples and sextuples), Lemmas 006J and 00W2.
 
 `CommGrp` uses multiplicative names for addition, zero and negation. The equations
 of functors are strict inverse identities, not merely an equivalence. The `eqToIso`

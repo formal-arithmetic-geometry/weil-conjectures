@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBri
 /-! # Comparing a Kan-extension triangle with denominator values
 
 Source: Stacks Project, Derived Categories, Tags 05SA, 05SU, 05SC.
-(blueprint: lem-pur-left-derived-kan-triangle-value-comparison).
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -136,9 +135,7 @@ private theorem kan_value_shift_leg
   simp
 
 /-- Compatible denominator values identify a Kan-extension image triangle.
-Source: Stacks Project, Derived Categories, Tags 05SA, 05SU, 05SC;
-the value-identification step in Proposition Tag 05SE.
-(blueprint: lem-pur-left-derived-kan-triangle-value-comparison).
+Source: Stacks Project, Derived Categories, Tags 05SA, 05SU, 05SC; the value-identification step in Proposition Tag 05SE.
 
 Proof: Each supplied retraction and common-stage factorization makes its denominator
 cone a limit. The pointwise Kan bridge extends it to a structured-arrow limit cone at

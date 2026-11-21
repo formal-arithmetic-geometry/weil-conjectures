@@ -15,7 +15,6 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerivedCommShift
 # Boundary compatibility of the explicit resolution comparisons
 
 Source: Stacks Project, Derived Categories, Tags 014Q, 05TE and 015B.
-(blueprint: lem-sc-p1-horseshoe-comparison-boundary).
 -/
 
 @[expose] public section
@@ -228,9 +227,7 @@ private theorem augmentation_boundary
 /-- The explicit comparisons respect the connecting arrow of the derived
 horseshoe triangle.
 
-Source: Stacks Project, Derived Categories, Tags 014Q, 0159 and 015B;
-fixed-horseshoe comparison, Steps 1-3.
-(blueprint: lem-sc-p1-horseshoe-comparison-boundary).
+Source: Stacks Project, Derived Categories, Tags 014Q, 0159 and 015B.
 
 Proof:
 1. Extend the compatible horseshoe and its augmentations by zero. Each degree

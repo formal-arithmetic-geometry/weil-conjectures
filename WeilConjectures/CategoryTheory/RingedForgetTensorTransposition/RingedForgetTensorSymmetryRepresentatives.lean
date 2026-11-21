@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.RingedForgetTensorTransposition.RingedForg
 
 /-! # Representative constraints for exact ringed tensor comparison
 
-Source: Stacks Project, Tags 0FPT, 06YU and 0G7D
-(blueprint: lem-sf-ringed-forget-tensor-symmetry-representatives).
+Source: Stacks Project, Tags 0FPT, 06YU and 0G7D.
 -/
 
 @[expose] public noncomputable section
@@ -153,9 +152,7 @@ include cB cA
 There are no unit or associativity assertions, and the arguments are fixed
 complexes rather than arbitrary derived objects.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU;
-the symmetry part of step 3 of lem-sf-ringed-forget-tensor-coherence
-(blueprint: lem-sf-ringed-forget-tensor-symmetry-representatives).
+Source: Stacks Project, sites-cohomology.tex, Tags 0FPT and 06YU.
 
 Proof: take the chain swaps supplied by cB.symmetry_model and cA.symmetry_model.
 Use the representative equations for (P,Q) and (Q,P), naturality of the

@@ -9,8 +9,7 @@ public import WeilConjectures.CategoryTheory.RingedSiteDg.RingedSiteDgModules
 
 /-! Derived restriction descends from the literal dg restriction and is exact.
 
-Source: the restriction part of Stacks sdga, Tags 0FT4 and 0FT5
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact).
+Source: the restriction part of Stacks sdga, Tags 0FT4 and 0FT5.
 
 Proof in words: restriction keeps the underlying complex, hence preserves
 quasi-isomorphisms, shifts and mapping-cone triangles.  The localization
@@ -41,8 +40,7 @@ structure RestrictionDescentData {O : Sheaf J CommRingCat.{u}}
   restrictionExact : restriction.IsTriangulated
 
 /-- Restriction retains the whole underlying complex, so it preserves quasi-isomorphisms.
-Source: Stacks sdga, 0FT4
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
+Source: Stacks sdga, 0FT4. -/
 theorem restriction_preserves_quasiisomorphisms
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
     {M N : Module B} (f : M ⟶ N) (hf : quasiIsomorphisms B f) :
@@ -50,8 +48,7 @@ theorem restriction_preserves_quasiisomorphisms
   exact hf
 
 /-- The literal descended restriction, constructed by localization.
-Source: Stacks sdga, 0FT5
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
+Source: Stacks sdga, 0FT5. -/
 def derivedRestriction
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B) :
     Derived B ⥤ Derived A :=
@@ -60,8 +57,7 @@ def derivedRestriction
       (restriction_preserves_quasiisomorphisms φ f hf)) (Q B)
 
 /-- The fixed factorization of the literal descended restriction.
-Source: Stacks sdga, 0FT5
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
+Source: Stacks sdga, 0FT5. -/
 def derivedRestrictionIso
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B) :
     Q B ⋙ derivedRestriction φ ≅ RingedSiteDg.restriction φ ⋙ Q A :=
@@ -70,8 +66,7 @@ def derivedRestrictionIso
       (restriction_preserves_quasiisomorphisms φ f hf)) (Q B)
 
 /-- The descended literal restriction respects standard shifts and cone triangles.
-Source: Stacks sdga, 0FT5 and derived, 05R6
-(blueprint: lem-sfb-ringed-dg-restriction-localization-exact).
+Source: Stacks sdga, 0FT5 and derived, 05R6.
 
 Proof: restriction leaves the underlying complexes and the cone matrices
 unchanged and changes actions only by precomposition with the algebra map.
@@ -88,8 +83,7 @@ theorem restriction_localization_exact
   sorry
 
 /-- Package the constructed localization lift with its shift and exactness data.
-Source: Stacks sdga, 0FT5
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
+Source: Stacks sdga, 0FT5. -/
 theorem restriction_descends_and_is_exact
     {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
     [DerivedStructure A] [DerivedStructure B] :

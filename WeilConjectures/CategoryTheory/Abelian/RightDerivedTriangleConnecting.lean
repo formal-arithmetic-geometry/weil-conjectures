@@ -15,8 +15,7 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoeDerivedTriangleComparison
 /-!
 # Right-derived connecting maps and the derived triangle
 
-Source: Stacks Project, Derived Categories, Tags 05TE and 015B
-(blueprint: lem-sc-p1-right-derived-triangle-connecting).
+Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ canonical single-object identifications, with the connecting morphisms in the
 homology sequence of the image of the distinguished triangle of a short exact
 sequence.
 
-Source: Stacks Project, Derived Categories, Tags 05TE and 015B
-(blueprint: lem-sc-p1-right-derived-triangle-connecting).
+Source: Stacks Project, Derived Categories, Tags 05TE and 015B.
 
 The first conjunct specifies that `G.delta` is the horseshoe boundary, using exactly
 all the compatible resolutions and the comparison of

@@ -10,7 +10,7 @@ import WeilConjectures.CategoryTheory.GrothendieckDerivedBrownRetractData
 
 /-! # The localization step in Grothendieck Brown representability
 
-Source: Stacks Project, Tag 0F5X, `injectives-lemma-brown`, before the final
+Source: Stacks Project, Tag 0F5X, `injectives-, before the final
 Karoubianity argument.
 -/
 
@@ -70,8 +70,7 @@ private theorem localization_retract
 
 /-- The localization construction makes a cohomological functor a natural retract
 of a representable functor, before splitting any idempotent in the derived category.
-Source: Stacks Project, Tag 0F5X, `injectives-lemma-brown`, first two paragraphs.
-(auxiliary; not a blueprint node)
+Source: Stacks Project, Tag 0F5X, `injectives-, first two paragraphs.
 
 Proof in words: obtain the localization adjunction L left adjoint to R, its invertible
 counit, and the representation of the pulled-back lifted underlying functor F from

@@ -910,7 +910,6 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 /-- The normalized derived scalar tensor comparisons respect the unit-normalized
 left-adjoint composition and identity comparisons.
 Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0D6D.
-(blueprint: lem-sfb-scalar-hom-tensor-coherence).
 
 Proof: the normalized derived transpose gives the unit square on K-flat complexes
 with flat terms. Naturality along a K-flat resolution extends that square to all

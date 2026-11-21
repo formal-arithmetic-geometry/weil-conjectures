@@ -18,7 +18,6 @@ import WeilConjectures.CategoryTheory.StageSectionFunctorFromTransitions
 /-! # Functorial stage section diagrams
 
 Source: Stacks Project, Sites, Tag 0A35.
-(blueprint: lem-weil-pbc-colimit-site-stage-section-diagram).
 -/
 
 @[expose] public section
@@ -30,9 +29,8 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 unit-transposed transition maps in the section formula.
-(blueprint: lem-weil-pbc-colimit-site-stage-section-diagram).
 
 Proof: At t : Under i assign to G the sections of F(t.hom) inverse image at
 F(t.hom)(U). For b : t to t', transpose the unit of the inverse image at t'

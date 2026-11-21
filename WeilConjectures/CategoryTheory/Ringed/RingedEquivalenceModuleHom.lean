@@ -315,9 +315,7 @@ private def flat_tensor_representative
 /-- The module adjunction of a ringed equivalence is an equivalence, with its
 underlying inverse image, structural rank-one map and forward internal Hom comparison.
 
-Source: Stacks Project, sites-modules.tex, Tags 03CR and 03D7;
-sites-cohomology.tex, Tags 07A4 and 08J9.
-(blueprint: lem-weil-pbc-ringed-equivalence-module-hom).
+Source: Stacks Project, sites-modules.tex, Tags 03CR and 03D7; sites-cohomology.tex, Tags 07A4 and 08J9.
 
 Proof: transport the zero, addition, inverse and scalar-action maps along the
 finite-product-preserving equivalence of set sheaves. Its unit and counit

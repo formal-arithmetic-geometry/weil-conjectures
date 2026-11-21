@@ -22,10 +22,6 @@ public import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 /-!
 # Truncations and homotopy colimits
 
-Source: Weil conjectures blueprint, chap-Smooth-purity, proposition-ordinary-external-kunneth--1,
-node proposition-open-direct-image-preserves-finite, order 1690 (blueprint:
-proposition-open-direct-image-preserves-finite).
-
 The existing constructions are used without defining them a second time:
 
 * Stupid truncations are `K.stupidTrunc (ComplexShape.embeddingUpIntGE n)` and
@@ -66,9 +62,7 @@ namespace CategoryTheory
 `B --(1 - s)--> B --> H --> B[1]`, where `B` is the countable coproduct of `E j`
 and `s` is determined by `Sigma.ι E j ≫ s = u j ≫ Sigma.ι E (j + 1)`.
 The two remaining arrows are existentially quantified: no cone or functorial choice
-is part of the definition. Source: blueprint chap-Smooth-purity,
-proposition-ordinary-external-kunneth--1, node order 1690 (blueprint:
-proposition-open-direct-image-preserves-finite). -/
+is part of the definition. -/
 def IsSequentialHomotopyColimit
     {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C]

@@ -10,10 +10,9 @@ public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 
 /-! # Pasting canonical truncation and cohomology comparisons
 
-Source: BBD, Proposition 1.3.3(i)--(ii), Theorem 1.3.6, printed pp. 29--31.
+29--31.
 The transformation, composition and pasting calculations are the agent argument extracted
-from the coefficient-stage descent proof, rather than a verbatim BBD theorem
-(blueprint: lem-a1-cohomology-comparison-pasting).
+from the coefficient-stage descent proof, rather than a verbatim BBD theorem.
 
 Cohomology is written using the existing `truncGELE j j` followed by the j-shift.
 All equations are in the ambient category; the heart is a full subcategory.

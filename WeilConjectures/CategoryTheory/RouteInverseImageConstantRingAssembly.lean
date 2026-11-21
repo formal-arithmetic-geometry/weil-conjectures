@@ -15,8 +15,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory
 
 /-- Ring-object assembly from a canonical underlying comparison.
-Source: Stacks Project, `sites.tex`, Tag 00YV
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, `sites.tex`, Tag 00YV. -/
  theorem constantRingComparisonAssembly
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     (JC : GrothendieckTopology C) (JD : GrothendieckTopology D)

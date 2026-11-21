@@ -33,9 +33,6 @@ public import WeilConjectures.CategoryTheory.InternalAbelianSheafModuleEquivalen
 
 /-!
 # The sections bound for the integral derived dual on classical torsion sheaves
-
-Source: blueprint `sk-lem-int-ext.proof.md`, paragraph (2), finite-reduction bullets.
-(blueprint: lem-route-integral-dual-torsion-heart-sections).
 -/
 
 @[expose] public section
@@ -506,10 +503,7 @@ private theorem sections_bound_of_tor_and_classical_cohomology
 finite constant integral local model followed by derived sections has amplitude `[0,s+1]`.
 The target sheaf need not be constructible or annihilated by one uniform prime power.
 
-Source: blueprint `sk-lem-int-ext.proof.md`, paragraph (2), second and third bullets;
-`lem-sf-integral-stratum-reduction-ext-bound`, steps 4 and 8--9;
-Stacks Tags 08JJ, 099Y and 08J5.
-(blueprint: lem-route-integral-dual-torsion-heart-sections).
+Source: Stacks Tags 08JJ, 099Y and 08J5.
 
 Proof: the local two-term resolution of L makes each local single L dualizable of
 Tor amplitude [-1,0]; proetale descent and the exact dual pairing give Tor amplitude

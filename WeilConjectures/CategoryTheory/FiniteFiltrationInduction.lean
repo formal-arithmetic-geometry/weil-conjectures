@@ -31,7 +31,7 @@ noncomputable def restriction {A B : WeilFilteredObject C} (f : Hom A B) (p : �
     (A.filtration.F p : C) ⟶ (B.filtration.F p : C) :=
   Classical.choose (f.preserves p)
 
-/-- Blueprint: lem-sp-finite-filtration-induction. -/
+/--  -/
 theorem exists_gradedMap (A B : WeilFilteredObject C) (f : Hom A B) (p : ℤ) :
     ∃ g : A.filtration.gr p ⟶ B.filtration.gr p,
       cokernel.π (Subobject.ofLE (A.filtration.F (p + 1))
@@ -73,7 +73,7 @@ by
       cokernel.π_desc _ _ _⟩
   exact Classical.choose (exists_gradedMap A B f p)
 
-/-- Blueprint: lem-sp-finite-filtration-induction. -/
+/--  -/
 theorem finite_filtration_induction (A B : WeilFilteredObject C) (f : Hom A B)
     (hA : A.filtration.IsFinite) (hB : B.filtration.IsFinite)
     (hgraded : ∀ p : ℤ, IsIso (gradedMap f p)) :

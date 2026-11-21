@@ -18,8 +18,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory.Functor
 
 /-- Supplied value cones and the first two induced maps extend to a distinguished triangle.
-Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause
-(blueprint: lem-pur-derived-functor-triangles-05sc-value-triangle).
+Source: Stacks Project, Derived Categories, Lemma 05SC, LF clause.
 
 Proof: complete the supplied lf to a distinguished triangle (LX,LY,C,lf,b,c).
 Use MS2 and the common-stage clauses of huX and huY to choose a denominator

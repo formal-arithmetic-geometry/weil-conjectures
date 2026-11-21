@@ -23,7 +23,6 @@ namespace CategoryTheory
 /-- Canonical truncation maps form a normalized diagonal cocone whose degree-zero
 component is invertible.
 Source: Stacks Tag 05TC (2), and truncation spectral sequence blueprint step 5.
-(blueprint: lem-sp-truncation-abutment-cocone)
 
 Proof: Set H to the cohomology of RF(K), j to the inverse bridge followed by
 RF of the truncation inclusion, and c to the degree-zero component of j.

@@ -12,7 +12,6 @@ import WeilConjectures.CategoryTheory.Abelian.DerivedBottomCycleTransport
 /-! # Canonical-cycle normalization of the specified bottom comparison
 
 Source: Stacks Project, Tags 05TC, 08D4 and 0AVW.
-(blueprint: new-lem-pc-derived-bottom-unit-normalization-formula).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ using only the canonical cycle kernel and homology quotient.
 
 Source: Stacks Project, Tag 05TC (2), and the degree-zero comparison used in
 Tags 08D4 and 0AVW.
-(blueprint: new-lem-pc-derived-bottom-unit-normalization-formula).
 
 Proof: Model the lower truncation by the smart truncation of K. Its term in
 bottom degree is the quotient of K's term by boundaries, and the kernel of

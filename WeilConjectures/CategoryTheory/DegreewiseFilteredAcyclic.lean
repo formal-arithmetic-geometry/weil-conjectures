@@ -13,8 +13,7 @@ import WeilConjectures.CategoryTheory.DegreewiseFilteredStableQuotient
 
 /-! # Acyclicity from a degreewise finite filtration
 
-Source: Stacks Project, Homology, Tag 012W, Lemma `lemma-biregular-ss-converges`.
-(blueprint: lem-sp-degreewise-filtered-acyclic).
+Source: Stacks Project, Homology, Tag 012W, Lemma.
 -/
 
 @[expose] public section
@@ -72,9 +71,8 @@ private theorem page_zero_of_first
 
 /-- A cochain complex with a degreewise finite subcomplex filtration and acyclic
 associated graded complexes is acyclic.
-Source: Stacks Project, Homology, Tag 012W, Lemma `lemma-biregular-ss-converges`,
+Source: Stacks Project, Homology, Tag 012W, Lemma,
 parts (2)--(4), applied to the zero Serre subcategory.
-(blueprint: lem-sp-degreewise-filtered-acyclic).
 
 Proof.
 1. Construct the filtered-complex spectral sequence. The differential-compatible

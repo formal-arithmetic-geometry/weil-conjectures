@@ -188,7 +188,6 @@ import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorComparisonIndepe
 
 Source: Stacks Project, algebraization.tex, Tag 0A0G, the final pullback identity,
 and sites-cohomology.tex, Tags 07A4 and 08J9.
-(blueprint: lem-weil-pbc-augmented-cech-tensor-pullback).
 -/
 
 @[expose] public section

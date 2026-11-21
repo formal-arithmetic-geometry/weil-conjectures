@@ -11,9 +11,8 @@ public import Mathlib.CategoryTheory.Shift.Adjunction
 /-!
 # Shift compatibility of the mate of an adjunction square
 
-Source: Stacks Project, Tag 0A8D, `lemma-adjoint-is-exact`, adjoint shift construction;
-Tag 0037, `definition-adjoint`, adjunct formulas. The four-category refinement and its
-explicit adjunct equations are agent-written (blueprint: lem-weil-pbc-adjunction-square-shift-mate).
+Source: Stacks Project, Tag 0A8D, adjoint shift construction; Tag 0037, adjunct formulas. The four-category refinement and its
+explicit adjunct equations are agent-written.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ shifted adjunct formulas. Here `h_P` is expanded as `r.map (adj.unit.app P) ≫ 
 its adjunct `θ_P` as `L'.map h_P ≫ adj'.counit.app (t.obj (L.obj P))`, and `d_P` as the
 composite comparison for `L ⋙ t`.
 
-Source: Stacks Project, Tags 0A8D and 0037; the four-category refinement is agent-written
-(blueprint: lem-weil-pbc-adjunction-square-shift-mate).
+Source: Stacks Project, Tags 0A8D and 0037.
 
 Proof plan:
 1. Expand `h` and `d`. Naturality of `β` at the shift comparison of `L`, the shift

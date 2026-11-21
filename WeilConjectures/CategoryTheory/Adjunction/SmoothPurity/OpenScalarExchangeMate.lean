@@ -13,7 +13,7 @@ namespace CategoryTheory.Adjunction
 
 /-- The coefficient square for open exchange follows from the pullback cube and
 its specified unit transposes.
-Source: Stacks 03S6 and 07A4 (blueprint: lem-pur-open-scalar-exchange-unit-mates).
+Source: Stacks 03S6 and 07A4.
 Proof: apply the target open adjunction Hom bijection. Naturality of its unit
 moves the scalar inverse-image comparison through the unit. The exchange unit
 formula, square naturality and the open scalar unit formula compute the first

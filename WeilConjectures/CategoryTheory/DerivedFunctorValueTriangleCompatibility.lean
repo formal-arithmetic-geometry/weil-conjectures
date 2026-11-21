@@ -75,8 +75,7 @@ uK and the supplied uZ to get e : K to LZ preserving all legs. A fraction square
 for T.mor₂ with a retracting target leg then proves b e.hom = lg.
 Set lh = e.inv c. Transport the distinguished completion along identities at
 LX and LY and e at K. Compose the established third cone equation with e.inv
-to obtain the required equation for every supplied h'.
-(blueprint: lem-pur-derived-functor-triangles-05sc-value-triangle-compatibility) -/
+to obtain the required equation for every supplied h'. -/
 theorem leftDerived_value_triangle_extension_compat
     {C : Type u} {D : Type uD} [Category.{v} C] [Category.{vD} D]
     [HasZeroObject C] [HasShift C ℤ] [Preadditive C]

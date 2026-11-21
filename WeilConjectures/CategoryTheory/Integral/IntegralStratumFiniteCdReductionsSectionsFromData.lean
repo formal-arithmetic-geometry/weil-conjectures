@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomological.CohomologicalDimen
 import all WeilConjectures.CategoryTheory.Integral.IntegralDualTorsionHeartSections
 
 /-! Generic heart-to-sections amplitude for the continuous integral coefficient.
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions).
 -/
 
 @[expose] public noncomputable section
@@ -27,15 +26,11 @@ namespace CategoryTheory
 
 /-- Derived sections of a Tor-amplitude `[0,1]` dual tensor a classical locally
 ell-power-torsion heart object vanish outside `[0,s+1]` when `cd_ell(S) ≤ s`.
-Source: blueprint latest, `part-six-operations/sec-constructibility-upper-shriek/
-sec-ladic-summary/sec-i-heart/sk-prop-int-compactness/sk-lem-int-ext-bound.proof.md`,
-dual-tensor and derived-sections bullets.
 Proof: write the finite cohomological dimension as a natural number t≤s. Convert
 local torsion of each tensor homology sheaf to the kernel-colimit formulation. Apply the
 existing generic sections estimate: Tor amplitude gives tensor cohomology only in [0,1],
 and the classical torsion heart estimate bounds its sections in [0,t]. Bounded-heart
-amplitude therefore gives [0,t+1]. Widen this interval to [0,s+1].
-(blueprint: lem-sfb-integral-stratum-finite-cd-reductions). -/
+amplitude therefore gives [0,t+1]. Widen this interval to [0,s+1]. -/
 theorem integralStratumFiniteCdReductions_sections_from_data
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

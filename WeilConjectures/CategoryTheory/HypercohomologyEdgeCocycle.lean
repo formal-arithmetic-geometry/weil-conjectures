@@ -13,7 +13,6 @@ import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeCanonical
 /-! # The cocycle equation for the hypercohomology left edge
 
 Source: Stacks Project, derived.tex, Tag 015J, the second spectral sequence.
-(blueprint: lem-pc-hypercohomology-edge-cocycle).
 -/
 
 @[expose] public section
@@ -25,9 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CategoryTheory.Functor
 
 /-- The derived unit and the left edge send a cocycle to its quotient after `G`.
-Source: Stacks Project, Tag 015J; the representative calculation in step 3 of
-lem-pc-grothendieck-cocycle-comparison
-(blueprint: lem-pc-hypercohomology-edge-cocycle).
+Source: Stacks Project, Tag 015J.
 
 Proof:
 Extend K by zero and choose a Cartan--Eilenberg resolution. The injective horizontal

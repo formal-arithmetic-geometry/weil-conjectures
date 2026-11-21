@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Functor.Derived.RightDerived
 /-! # Uniqueness of normalized derived adjunctions
 
 Source: Stacks Project, Derived Categories, Tag 09T5.
-(blueprint: lem-pc-derived-adjunction-normalization-unique).
 -/
 
 @[expose] public section
@@ -48,8 +47,7 @@ triangle identity gives the right-derived unit, and inverse transposition gives
 with the unit of the right-derived functor `R ⋙ L`. Its universal property makes
 the two natural transformations equal. An adjunction is determined by its counit.
 The argument works for zero objects, empty categories, and identity functors.
-Source: Stacks Project, Derived Categories, Tag 09T5
-(blueprint: lem-pc-derived-adjunction-normalization-unique). -/
+Source: Stacks Project, Derived Categories, Tag 09T5. -/
 theorem eq_of_normalization
     (b : T ⊣ U) (a a' : L ⊣ R) (Q : C ⥤ H) (P : D ⥤ J)
     (ε : Q ⋙ L ⟶ T ⋙ P) (β : U ⋙ Q ⟶ P ⋙ R) (W : MorphismProperty D)

@@ -19,8 +19,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C]
 
 /-- Every successor-cycle map satisfying the representative equation is epic.
 Source: Stacks Project, Homology, Tag 012K, displayed cycle, boundary and
-differential formulas preceding lemma-spectral-sequence-filtered-complex.
-(blueprint: lem-sp-filtered-complex-successor-cycles-cover-epi).
+differential formulas preceding.
 
 Proof. Put p = pq.1, n = pq.1 + pq.2 and j = (p+r,pq.2-r+1). To show that f
 covers the kernel, take any morphism into D.page.cycles pq. After pulling back

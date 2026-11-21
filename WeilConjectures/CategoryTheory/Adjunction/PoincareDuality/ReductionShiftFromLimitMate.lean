@@ -19,8 +19,7 @@ namespace CategoryTheory.Adjunction
 
 /-- An invertible left comparison normalized by the unit square is the mate of
 the right comparison, so it commutes with shifts whenever the latter does.
-Source: Stacks 0A8D and 0037, adjoint shifts and the adjunct formulas
-(blueprint: lem-pod-reduction-shift-from-limit-mate-s8).
+Source: Stacks 0A8D and 0037, adjoint shifts and the adjunct formulas.
 Proof: cancel the right adjoint applied to the invertible left comparison in the
 unit square. This identifies the adjunct of the inverse left comparison with the
 unit followed by the right comparison. The inverse hom equivalence identifies

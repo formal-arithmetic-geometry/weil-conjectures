@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.SemilinearDerivedCalculus
 /-! # Monoidal restriction along a cocontinuous site functor
 
 Source: Stacks, Tags 03CY, 03EK and 04B8.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -119,8 +118,7 @@ private theorem restrictionUnit_isIso (B E : Type w) [CommRing B] [CommRing E]
 
 /-- Restriction with invertible scalar map along a continuous, cocontinuous functor is
 strong monoidal, for the existing sheaf tensor products.
-Source: Stacks, Modules on Sites, Tags 03CY and 03EK; Sites, Tag 04B8
-(auxiliary; not a blueprint node).
+Source: Stacks, Modules on Sites, Tags 03CY and 03EK; Sites, Tag 04B8.
 
 Proof: the presheaf restriction is strong monoidal. Its unit is the invertible coefficient
 map; its tensorator is the scalar-restriction tensorator, invertible by the semilinear

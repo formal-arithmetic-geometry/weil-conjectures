@@ -97,7 +97,6 @@ private theorem commGrp_eq_of_mul
   rfl
 
 /-- Source: Stacks Project Section 00YR, quadruples and Proposition 00YV.
-(blueprint: lem-weil-pbc-sheaf-abelian-objects-bijective-surjective)
 Proof: for an internal commutative group object, evaluate multiplication, unit, and
 inverse on every section. These operations give an additive commutative group by
 evaluating the internal group identities, using that products and the terminal sheaf

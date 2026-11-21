@@ -12,8 +12,7 @@ import WeilConjectures.CategoryTheory.Abelian.HorseshoePrescribedResolutions
 
 /-! # Alternating resolutions of the object-level rows
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--3
-(blueprint: lem-sp-cartan-eilenberg-object-resolution-rows).
+Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--3.
 -/
 
 @[expose] public section
@@ -27,9 +26,7 @@ universe u v
 /-- Resolve the boundary/cycle/homology short exact sequences. This makes no
 choice of resolutions of the terms of K, nor of the cycle/term/next-boundary rows.
 
-Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--3;
-Tag 013T, prescribed-end horseshoe lemma
-(blueprint: lem-sp-cartan-eilenberg-object-resolution-rows).
+Source: Stacks Project, Derived Categories, Lemma 015I, proof Steps 1--3; Tag 013T, prescribed-end horseshoe lemma.
 
 Proof: The image inclusion of d^(p-1) factors through Z^p since d^(p-1)d^p=0.
 The resulting sequence 0 -> B^p -> Z^p -> H^p -> 0 is short exact, because

@@ -163,8 +163,7 @@ public import WeilConjectures.Algebra.Homology.RingedInternalHomShiftOfUniverses
 
 /-! # Normalized internal-Hom shifts with independent site universes
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A8X, 08JA and 08JC
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks Project, Cohomology on Sites, Tags 0A8X, 08JA and 08JC.
 The existing restriction and signed small-site interfaces are reexported. The
 normalizations below use the very same Hom complex, its fixed product projections,
 and its fixed augmentation to the K-injective localization.
@@ -1879,8 +1878,7 @@ private theorem leftFormula_unique (L F : Complex.{c, v, r} J R) (s : ℤ)
 /-- The right shift structure agrees, through the fixed ordinary-to-derived
 comparison, with unsigned target reindexing. This pins the shift signs, rather
 than choosing an arbitrary shift structure.
-Source: Stacks 08JA, 08JC
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08JA, 08JC. -/
 def RightNormalization
     (S : ∀ M : D.{c, v, r, w} J R, (hom.{c, v, r, w} J R M).CommShift ℤ) : Prop :=
   ∀ (M : D.{c, v, r, w} J R) (L F : Complex.{c, v, r} J R)
@@ -2021,8 +2019,7 @@ private theorem rightNormalizedShift_exists :
   exact hS M L F eM s
 
 /-- Existence and uniqueness of the ordinary normalized right shift structure.
-Source: Stacks 08JA, 08JC
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 08JA, 08JC.
 Proof: product projections define the unsigned reindexing chain isomorphism.
 The shifted Hom differential and Hom into the shifted target agree. Its naturality
 commutes with the fixed K-injective augmentation. Localize this identity; on
@@ -2037,14 +2034,13 @@ theorem rightShift_existsUnique :
   exact ⟨S, hS, fun T hT ↦ rightNormalization_unique.{c, v, r, w} J R T S hT hS⟩
 
 /-- The uniquely normalized shift of the recorded Hom functor.
-Source: Stacks 08JC (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08JC. -/
 instance homCommShift (M : D.{c, v, r, w} J R) : (hom.{c, v, r, w} J R M).CommShift ℤ :=
   (rightShift_existsUnique.{c, v, r, w} J R).exists.choose M
 
 /-- Normalization of the signed source-shift family against the fixed
 ordinary-to-derived Hom comparison.
-Source: Stacks 0A8X, 08JA
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 0A8X, 08JA. -/
 def LeftNormalization
     (S : ∀ (M : D.{c, v, r, w} J R) (s : ℤ),
       hom.{c, v, r, w} J R M ⋙ shiftFunctor _ (-s) ≅ hom.{c, v, r, w} J R (M⟦s⟧)) : Prop :=
@@ -2131,8 +2127,7 @@ private theorem leftNormalization_unique
   exact h F.obj
 
 /-- The uniquely specified signed source shift.
-Source: Stacks 0A8X, 08JA
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 0A8X, 08JA.
 Proof: in degree k reindex p to p+s and multiply by (-1)^(s*k).
 The ratio between consecutive degrees is (-1)^s, exactly compensating for
 the shifted source differential. The inverse reindexes backwards with the same
@@ -2147,14 +2142,13 @@ theorem leftShift_existsUnique :
   exact ⟨S, hS, fun T hT ↦ leftNormalization_unique.{c, v, r, w} J R T S hT hS⟩
 
 /-- The signed source shift selected by its full representative normalization.
-Source: Stacks 08JA (blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction). -/
+Source: Stacks 08JA. -/
 def sourceShift (M : D.{c, v, r, w} J R) (s : ℤ) :
     hom.{c, v, r, w} J R M ⋙ shiftFunctor _ (-s) ≅ hom.{c, v, r, w} J R (M⟦s⟧) :=
   (leftShift_existsUnique.{c, v, r, w} J R).exists.choose M s
 
 /-- Exactness for the normalized target shift at independent site universes.
-Source: Stacks 08JC
-(blueprint: lem-weil-pbc-ringed-internal-hom-exact-restriction).
+Source: Stacks 08JC.
 Proof: represent a target triangle by a cone of a map of K-injective complexes.
 The cone is K-injective, since Hom from an acyclic test complex takes it to a
 cone of acyclic complexes. Hom(L,Cone(f)) is the cone of Hom(L,f), with its

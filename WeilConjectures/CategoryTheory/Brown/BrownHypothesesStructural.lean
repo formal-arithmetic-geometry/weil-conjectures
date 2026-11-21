@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.SmoothPurity.CountableCoproductsIdempotent
 # Ambient structures of the constructible localizing closure
 
 The ambient structures in Brown's hypotheses hold for arbitrary condensed coefficients.
-Source: blueprint lemma-hypotheses-brown-representability, proof paragraph 1.
 -/
 
 @[expose] public section
@@ -30,10 +29,8 @@ open scoped CategoryTheory.Obj
 namespace CategoryTheory
 
 /-- Structural part of the Brown-hypotheses conclusion.
-Source: blueprint main-20261015, lemma-hypotheses-brown-representability, proof paragraph 1.
 The proof packages the generic localizing-closure ambient structures.
-No field or coefficient admissibility hypothesis is needed.
-(blueprint: h1-brown-hypotheses-structural). -/
+No field or coefficient admissibility hypothesis is needed. -/
 theorem brownHypotheses_structural
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :

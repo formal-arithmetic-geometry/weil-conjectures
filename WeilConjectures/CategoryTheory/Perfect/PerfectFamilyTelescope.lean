@@ -10,9 +10,6 @@ import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 import Mathlib.CategoryTheory.Limits.Shapes.Opposites.Products
 
 /-! # The perfect-family calculation on a Brown telescope
-
-Source: Krause, Derived categories, resolutions, and Brown representability, Section 4.5.
-(blueprint: lem-sfb-perfect-family-telescope)
 -/
 
 @[expose] public section
@@ -312,11 +309,6 @@ end TowerSeparation
 
 /-- A compatible telescope element is universal on a perfect family if the initial
 stage surjects and each transition kills the preceding kernel.
-
-Source: Krause, *Derived categories, resolutions, and Brown representability*,
-Section 4.5, the lemma on coherent functors and the comparison of (4.1) with the
-telescope triangle; Krause, *Localization theory for triangulated categories*, 5.1.1.
-(blueprint: lem-sfb-perfect-family-telescope)
 
 Proof: cover each X n by X 0 plus the evaluation coproduct of generator maps
 in the kernel of its element. Perfectness lifts generator maps into the sum of X n

@@ -29,10 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 open CategoryTheory.Functor.sheafPullbackConstruction
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Sites, Tag 0A35, the general-object section construction,
-finite-cover sheaf equalizers and adjunction paragraphs; abelian extension by
+/-- Source: Stacks Project, Sites, Tag 0A35, the general-object section construction sheaf equalizers and adjunction paragraphs; abelian extension by
 Modules on Sites, Tag 03CO.
-(blueprint: lem-weil-pbc-colimit-site-abelian-section-representatives).
 
 Proof: Construct the additive subpresheaf B of the canonical inverse image H
 whose sections are finite sums of restrictions of stage images. Restrictions

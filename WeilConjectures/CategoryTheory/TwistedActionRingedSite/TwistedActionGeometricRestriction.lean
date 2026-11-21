@@ -112,8 +112,7 @@ omit [s.functor.IsContinuous J J] in
 /-- Geometric restriction and its ordinary module-restriction adjunction.
 
 Source: original step 6 of the agent-formulated twisted variant of Stacks 00W0,
-`sites.tex`, proposition-sheaves-on-group; Stacks 00XO and 04IE
-(blueprint: lem-sf-twisted-action-geometric-restriction).
+`sites.tex`; Stacks 00XO and 04IE.
 
 Proof: apply continuous_cocontinuous_ringed_restriction to the coefficient ring
 on the fixed action site, using the supplied cocontinuity of inclusion. This gives

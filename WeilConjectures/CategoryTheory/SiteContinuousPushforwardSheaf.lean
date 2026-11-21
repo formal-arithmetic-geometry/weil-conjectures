@@ -13,8 +13,7 @@ public import WeilConjectures.CategoryTheory.SheavesAlgebraicStructuresObjects
 /-!
 # Precomposition with a continuous functor of sites
 
-Source: Stacks Project, Definition 00WV and Lemma 00WW
-(blueprint: lem-weil-pbc-site-continuous-pushforward-sheaf).
+Source: Stacks Project, Definition 00WV and Lemma 00WW.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/-- Source: Stacks Project, Definition 00WV and Lemma 00WW
-(blueprint: lem-weil-pbc-site-continuous-pushforward-sheaf).
+/-- Source: Stacks Project, Definition 00WV and Lemma 00WW.
 
 The four precoverage instances express the site axioms of 00VH. Covering families
 are encoded by their presieves of arrows. The generated topology has exactly the

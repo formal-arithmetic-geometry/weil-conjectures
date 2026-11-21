@@ -69,9 +69,7 @@ private theorem derived_maps_surjective
 /-- Derived morphisms between bounded complexes of finite modules over a finite ring form
   a finite set.
 
-Source: Stacks Project, Tags 064U and 09BE; finite-module Hom argument in
-`lem-weil-pbc-finite-ring-derived-local-constancy`, steps 2 and 6.
-(blueprint: lem-weil-pbc-finite-ring-derived-hom-finite)
+Source: Stacks Project, Tags 064U and 09BE.
 
 Proof: Each cone of a finite free complex mapping to E has finite terms, hence finite
 cohomology. Apply the finite-cone free-model theorem to obtain a bounded-above finite

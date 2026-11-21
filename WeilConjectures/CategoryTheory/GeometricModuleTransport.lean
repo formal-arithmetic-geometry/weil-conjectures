@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 # The underlying sheaf adjunction restricted to linear maps
 
 Source: Stacks Project, Modules on Sites, Tags 03D1--03D3 and 03D7.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -552,10 +551,7 @@ end Helpers
 -- The statement records every operation and its underlying comparison.
 
 /-- Transport module structures and restrict the given set adjunction to linear maps.
-Source: Stacks Project, Tags 03D1--03D3, `lemma-pushforward-module`,
-`lemma-pullback-module`, `lemma-adjoint-push-pull-modules`, and Tag 03D7,
-`lemma-adjoint-pullback-pushforward-modules`.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03D1--03D3, and Tag 03D7.
 
 Proof: L preserves finite products by hypothesis, and V does so because it is a
 right adjoint. Transport the addition, zero, inverse and scalar-action diagrams

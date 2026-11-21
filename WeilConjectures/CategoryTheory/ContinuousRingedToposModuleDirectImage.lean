@@ -16,7 +16,6 @@ set_option linter.privateModule false
 Generic constructions extracted from the étale presentation so callers can use their
 module-functor equations without importing the étale derived comparison theory.
 Source: Stacks, Modules on Sites, ringed topoi and module direct image.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -198,8 +197,7 @@ private noncomputable def siteContinuousRingedTopos
 end
 
 /-- A continuous site functor and a structural ring map induce the specified module
-pushforward. Source: Stacks, Modules on Sites, ringed topoi and module direct images
-(auxiliary; not a blueprint node).
+pushforward. Source: Stacks, Modules on Sites, ringed topoi and module direct images.
 Proof: transpose the structural map through the given sheaf adjunction. Transposition
 of product maps gives preservation of the ring operations and scalar multiplication.
 Take sectionwise module pushforward; its underlying set sheaf is precomposition, and

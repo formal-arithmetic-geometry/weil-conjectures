@@ -65,7 +65,6 @@ private abbrev transportedRing
 
 
 /-- Transport of a single finite-product-preserving functor on commutative ring objects.
-(blueprint: lem-weil-pbc-finite-product-ring-functor)
 Source: Stacks Project, Proposition 00YV, paragraph on rings as sextuples.
 
 Proof: on an object X take the underlying object F(X). Define addition and

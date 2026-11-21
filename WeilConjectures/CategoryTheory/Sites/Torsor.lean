@@ -74,9 +74,6 @@ def nonemptySieve (F : Cᵒᵖ ⥤ Type w) (U : C) : Sieve U where
 `G × T → T` of `G` which is simply transitive on the sections over every object, and such
 that `T` has sections locally, i.e. every object is covered by objects over which `T` has a
 section. Equivalently, `T` is locally isomorphic to `G` with its translation action.
-(blueprint: `lemma-cohomology-multiplicative-group--3`, for a general abelian sheaf `G` on a general
-site; the étale `𝔾ₘ`-torsors and the Zariski `𝒪ˣ`-torsors of the blueprint are the cases
-`G = AlgebraicGeometry.Scheme.gmSheaf X` and `G = AlgebraicGeometry.Scheme.unitsSheaf X`).
 For `G` the constant sheaf of a finite abelian group on a small étale site these are the finite
 torsors of blueprint `def-weil-pbc-finite-torsors`. -/
 structure Torsor (G : Sheaf J AddCommGrpCat.{w}) where
@@ -366,8 +363,7 @@ lemma add_mem_liftsSubfunctor (s : Q.obj.obj (op T)) (hw : ι ≫ d = 0) {U : C�
 /-- The *lifting torsor* `P_s` of a global section `s` of `Q`, for a short exact sequence
 `0 → G → I → Q → 0` of abelian sheaves: the sheaf of local lifts of `s` to `I`, on which `G`
 acts by translation. The action is simply transitive because two lifts differ by a section of
-the kernel `G` of `I → Q`, and `P_s` has sections locally because `I → Q` is an epimorphism.
-(blueprint: `thm-galois-torsor-h1`, Steps 1 and 2) -/
+the kernel `G` of `I → Q`, and `P_s` has sections locally because `I → Q` is an epimorphism. -/
 def lifts [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrpCat.{w}]
     (hS : (ShortComplex.mk ι d w).ShortExact) (s : Q.obj.obj (op T)) : Torsor G where
   sheaf := ⟨(liftsSubfunctor d hT s).toFunctor, isSheaf_liftsSubfunctor hT s⟩
@@ -409,8 +405,7 @@ lemma lifts_val {U : Cᵒᵖ} {s : Q.obj.obj (op T)} (x : (lifts hT hS s).sheaf.
     d.hom.app U x.1 = Q.obj.map (hT.from U.unop).op s := x.2
 
 /-- Translation by a global section `x` of `I` identifies the lifting torsors of `s` and of
-`s + d x`, so the class of `P_s` only depends on the class of `s` in the cokernel of `d`.
-(blueprint: `thm-galois-torsor-h1`, Step 3) -/
+`s + d x`, so the class of `P_s` only depends on the class of `s` in the cokernel of `d`. -/
 lemma lifts_equiv_lifts_add (s : Q.obj.obj (op T)) (x : I.obj.obj (op T)) :
     lifts hT hS s ≈ lifts hT hS (s + d.hom.app (op T) x) := by
   refine ⟨Iso.ofHom (ObjectProperty.homMk
@@ -431,8 +426,7 @@ lemma lifts_equiv_lifts_add (s : Q.obj.obj (op T)) (x : I.obj.obj (op T)) :
 
 /-- If the lifting torsors of `s` and `s'` are isomorphic, then `s' - s` lifts to a global
 section of `I`: the differences `φ(x) - x`, for `φ : P_s ≅ P_{s'}` and `x` a local section
-of `P_s`, do not depend on `x` and glue to such a lift.
-(blueprint: `thm-galois-torsor-h1`, Step 4) -/
+of `P_s`, do not depend on `x` and glue to such a lift. -/
 lemma exists_hom_app_eq_sub_of_lifts_equiv {s s' : Q.obj.obj (op T)}
     (h : lifts hT hS s ≈ lifts hT hS s') : ∃ x : I.obj.obj (op T), d.hom.app (op T) x = s' - s := by
   obtain ⟨e⟩ := h
@@ -604,9 +598,7 @@ variable [HasSheafify J AddCommGrpCat.{w}] [J.WEqualsLocallyBijective AddCommGrp
 
 Since `I` is injective, the map `ℤ[P × P] → G → I` extends along `ℤ[P × P] → ℤ[P]`; this gives
 a map `b : P → I` with `b(a + x) = b(x) + a`. Then `d ∘ b` is invariant, hence a global
-section `s` of `Q`, and `b` is an isomorphism `P ≅ P_s`.
-(blueprint: `thm-galois-torsor-h1`, Step 5, where the Čech argument with the Godement sheaf is
-replaced by the injectivity of `I`) -/
+section `s` of `Q`, and `b` is an isomorphism `P ≅ P_s`. -/
 theorem exists_equiv_lifts [Injective I] (P : Torsor G) : ∃ s, P ≈ lifts hT hS s := by
   have : Injective I.obj :=
     Injective.injective_of_adjoint (sheafificationAdjunction J AddCommGrpCat.{w}) I
@@ -758,8 +750,7 @@ sequence `0 → G → E → Q → 0` and every global section `s` of `Q`, the to
 `Γ(Q) → H¹(G)`. In particular it does not depend on the injective resolution
 `0 → G → I → Q → 0` (`CategoryTheory.Sheaf.Torsor.injectiveSequence`) through which it is
 constructed: there, every torsor is a lifting torsor (`exists_equiv_lifts`) and `H¹(G)` is the
-cokernel of `Γ(I) → Γ(Q)`.
-(blueprint: `thm-galois-torsor-h1`) -/
+cokernel of `Γ(I) → Γ(Q)`. -/
 noncomputable def classH1 : _root_.Quotient (Torsor.setoid (G := G)) ≃ H G 1 :=
   (Equiv.ofBijective _ (bijective_quotientToTorsor (G := G) hT)).symm.trans
     (H.quotientRangeAddEquiv (injectiveSequence_shortExact G) hT).toEquiv
@@ -783,8 +774,7 @@ private lemma classH1_lifts_injectiveSequence (s : (injectiveSequence G).X₃.ob
 /-- **The class of a lifting torsor is the connecting homomorphism.** For a short exact sequence
 `0 → G → E → Q → 0` of abelian sheaves and a global section `s` of `Q`, the class in `H¹(G)` of
 the torsor of local lifts of `s` to `E` is the image `δ(s)` of `s` under the connecting
-homomorphism `Γ(Q) → H¹(G)`. This characterises `CategoryTheory.Sheaf.Torsor.classH1`.
-(blueprint: `thm-galois-torsor-h1`) -/
+homomorphism `Γ(Q) → H¹(G)`. This characterises `CategoryTheory.Sheaf.Torsor.classH1`. -/
 theorem classH1_lifts {E Q : Sheaf J AddCommGrpCat.{w}} {ι : G ⟶ E} {d : E ⟶ Q} {w : ι ≫ d = 0}
     (hS : (ShortComplex.mk ι d w).ShortExact) (s : Q.obj.obj (op T)) :
     classH1 G hT ⟦lifts hT hS s⟧ = H.δSections hS hT s := by
@@ -816,8 +806,7 @@ variable (G) in
 `T`, the isomorphism classes of `G`-torsors are in bijection with `H¹(G)`, by a bijection under
 which a torsor has class `0` exactly when it has a global section. This is the canonical
 bijection `CategoryTheory.Sheaf.Torsor.classH1` with the property
-`CategoryTheory.Sheaf.Torsor.classH1_eq_zero_iff` recorded.
-(blueprint: `thm-galois-torsor-h1`) -/
+`CategoryTheory.Sheaf.Torsor.classH1_eq_zero_iff` recorded. -/
 theorem exists_quotientEquiv_H_one :
     ∃ c : _root_.Quotient (Torsor.setoid (G := G)) ≃ H G 1,
       ∀ P : Torsor G, c ⟦P⟧ = 0 ↔ Nonempty (P.sheaf.obj.obj (op T)) :=
@@ -830,8 +819,7 @@ case of the contracted product `P'' = P ∧ P'`, whose class is the sum of the c
 
 Writing `P ≅ P_s`, `P' ≅ P_{s'}` and `P'' ≅ P_{s''}` as lifting torsors for an injective
 resolution `0 → G → I → Q → 0`, the differences `b''(μ(x, x')) - b(x) - b'(x')` of the lifts are
-invariant, hence glue to a global section `c` of `I` with `d c = s'' - s - s'`.
-(blueprint: `lemma-cohomology-multiplicative-group--3`, the group structure on torsors) -/
+invariant, hence glue to a global section `c` of `I` with `d c = s'' - s - s'`. -/
 theorem classH1_eq_add_of_equivariant (P P' P'' : Torsor G)
     (μ : ∀ U, P.sheaf.obj.obj U → P'.sheaf.obj.obj U → P''.sheaf.obj.obj U)
     (hμ : ∀ ⦃U V : Cᵒᵖ⦄ (f : U ⟶ V) (x : P.sheaf.obj.obj U) (x' : P'.sheaf.obj.obj U),
@@ -1062,8 +1050,7 @@ projection `π : E → ℤ` to the torsor `π⁻¹(1)`; its inverse sends `T` to
 
 Only the existence of a bijection is recorded. It is obtained from an injective resolution
 `0 → G → I → Q → 0`: both sides are identified with the cokernel of `Γ(I) → Γ(Q)`
-(`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`).
-(blueprint: `lemma-cohomology-multiplicative-group--3`) -/
+(`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`). -/
 theorem nonempty_equiv_ext_torsor {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Nonempty (Abelian.Ext ((constantSheaf J AddCommGrpCat.{w}).obj
       (AddCommGrpCat.of (ULift ℤ))) G 1 ≃ _root_.Quotient (Torsor.setoid (G := G))) :=
@@ -1075,8 +1062,7 @@ terminal object, `H¹(G)` is in bijection with the set of isomorphism classes of
 is `Ext¹(ℤ, G)`, to which `CategoryTheory.Sheaf.nonempty_equiv_ext_torsor` applies.
 
 The vanishing direction is also proved directly, without torsors, in
-`CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`.
-(blueprint: `lemma-cohomology-multiplicative-group--3`) -/
+`CategoryTheory.Sheaf.subsingleton_H_one_of_surjective`. -/
 theorem nonempty_equiv_H_one_torsor {T : C} (hT : IsTerminal T) (G : Sheaf J AddCommGrpCat.{w}) :
     Nonempty (H G 1 ≃ _root_.Quotient (Torsor.setoid (G := G))) :=
   nonempty_equiv_ext_torsor hT G

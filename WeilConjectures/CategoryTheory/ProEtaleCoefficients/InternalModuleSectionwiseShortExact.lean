@@ -27,10 +27,7 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Sectionwise short exactness of internal sheaf modules
 
-Source: Weil conjectures blueprint, `chap-The-pro-etale-site`,
-`sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md`,
-On the point, final sentence; Stacks Tags 03CL, 03CN, 03CO
-(blueprint: lem-pe-internal-module-sectionwise-short-exact).
+Source: Stacks Tags 03CL, 03CN, 03CO.
 
 The canonical sheaf tensor of `sk-def-sfb-sheaf-tensor` is selected as an instance, with
 the sheafification, additivity and colimit-preservation interfaces derived from that node's
@@ -49,10 +46,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposi
 namespace CategoryTheory
 
 /-- Left exact abelian sheafification on the essentially small site, transported from its
-small model in the coefficient universe.
-Source: blueprint `sk-lem-pe-derived-nakayama-resolution.proof.md`, On the point, with
-sheafification as in `sk-def-sfb-sheaf-tensor`
-(blueprint: lem-pe-internal-module-sectionwise-short-exact). -/
+small model in the coefficient universe. -/
 noncomputable instance sectionwiseShortExactSheafify
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) : HasSheafify J AddCommGrpCat.{w} := by
@@ -60,17 +54,13 @@ noncomputable instance sectionwiseShortExactSheafify
       AddCommGrpCat.{w} := GrothendieckTopology.hasSheafify_of_isGrothendieckAbelian _ _
   exact hasSheafifyEssentiallySmallSite J AddCommGrpCat.{w}
 
-/-- The canonical sheafified tensor over the integers of `sk-def-sfb-sheaf-tensor`.
-Source: blueprint `sk-lem-pe-derived-nakayama-resolution.proof.md`, On the point, using
-`sk-def-sfb-sheaf-tensor` (blueprint: lem-pe-internal-module-sectionwise-short-exact). -/
+/-- The canonical sheafified tensor over the integers of `sk-def-sfb-sheaf-tensor`. -/
 noncomputable instance sectionwiseShortExactSheafMonoidal
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) : MonoidalCategory (Sheaf J AddCommGrpCat.{w}) :=
   (sfbSheafTensorStructure (A := AddCommGrpCat.{w}) J).monoidal
 
-/-- The symmetry of the same canonical sheaf tensor.
-Source: blueprint `sk-lem-pe-derived-nakayama-resolution.proof.md`, On the point, using
-`sk-def-sfb-sheaf-tensor` (blueprint: lem-pe-internal-module-sectionwise-short-exact). -/
+/-- The symmetry of the same canonical sheaf tensor. -/
 noncomputable instance sectionwiseShortExactSheafSymmetric
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) : SymmetricCategory (Sheaf J AddCommGrpCat.{w}) :=
@@ -78,9 +68,7 @@ noncomputable instance sectionwiseShortExactSheafSymmetric
 
 /-- Closedness of the canonical sheaf tensor, from the recorded properties theorem of
 `sk-def-sfb-sheaf-tensor`. Not an instance: it only serves to derive the Prop-valued
-additivity below. A right adjoint of a fixed functor; the tensor itself is not chosen.
-Source: blueprint `sk-lem-pe-derived-nakayama-resolution.proof.md`, On the point, using
-`sk-def-sfb-sheaf-tensor` (blueprint: lem-pe-internal-module-sectionwise-short-exact). -/
+additivity below. A right adjoint of a fixed functor; the tensor itself is not chosen. -/
 @[instance_reducible]
 noncomputable def sectionwiseShortExactSheafClosed
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
@@ -88,18 +76,14 @@ noncomputable def sectionwiseShortExactSheafClosed
   (sfbSheafTensor_properties.{uC, vC, w + 1, w, 0, 0}
     (A := AddCommGrpCat.{w}) J).2.1.some
 
-/-- Additivity of the canonical sheaf tensor in each variable (proof step 3).
-Source: blueprint `sk-lem-pe-derived-nakayama-resolution.proof.md`, On the point, using
-`sk-def-sfb-sheaf-tensor` (blueprint: lem-pe-internal-module-sectionwise-short-exact). -/
+/-- Additivity of the canonical sheaf tensor in each variable (proof step 3). -/
 noncomputable instance sectionwiseShortExactSheafPreadditive
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) : MonoidalPreadditive (Sheaf J AddCommGrpCat.{w}) :=
   letI := sectionwiseShortExactSheafClosed J
   sfbSheafTensor_monoidalPreadditive
 
-/-- Left tensor with a sheaf preserves finite colimits (closedness, proof step 3).
-Source: blueprint `sk-lem-pe-derived-nakayama-resolution.proof.md`, On the point, using
-`sk-def-sfb-sheaf-tensor` (blueprint: lem-pe-internal-module-sectionwise-short-exact). -/
+/-- Left tensor with a sheaf preserves finite colimits (closedness, proof step 3). -/
 noncomputable instance sectionwiseShortExactSheafLeftColimits
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C]
     (J : GrothendieckTopology C) (F : Sheaf J AddCommGrpCat.{w}) :
@@ -114,9 +98,8 @@ namespace CategoryTheory.Mod
 /-- Sectionwise short exactness implies short exactness of the underlying presheaves,
 the underlying sheaves, and the internal modules, with the same arrows.
 
-Source: blueprint `sk-lem-pe-derived-nakayama-resolution.proof.md`, On the point,
-final sentence, and Stacks Tags 03CL, 03CN, 03CO
-(blueprint: lem-pe-internal-module-sectionwise-short-exact).
+Source: blueprint, On the point,
+final sentence, and Stacks Tags 03CL, 03CN, 03CO.
 
 Proof, following the node:
 1. By `lem-weil-pbc-abelian-presheaves-evaluation-exact`, kernels and cokernels
@@ -124,7 +107,7 @@ of abelian presheaves are sectionwise. The evaluated hypotheses give zero kernel
 of the first arrow, zero cokernel of the second, and image equal to kernel.
 The restrictions agree as subpresheaves of the middle term. This proves the
 first conclusion, using `def-weil-pbc-exact-sequence`.
-2. Apply exact abelian sheafification (`situation-conventions`).
+2. Apply exact abelian sheafification.
 The sheaf category is abelian by `lem-sfb-abelian-sheaves-left-exact-reflector`;
 for an essentially small site transport from its small model in the coefficient
 universe. The sheafification counits are isomorphisms by

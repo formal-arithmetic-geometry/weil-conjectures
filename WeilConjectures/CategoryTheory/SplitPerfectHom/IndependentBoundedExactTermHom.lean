@@ -24,7 +24,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 /-! # Bounded exact-term Hom with independent site universes
 
 Source: Stacks Project, Tags 08DM, 0A8X and 0117.
-(blueprint: lem-sfb-independent-bounded-exact-term-hom).
 This extends the existing bounded exact-term proof without equating the site,
 coefficient and morphism universes. All auxiliary proofs are private.
 -/
@@ -74,9 +73,7 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Internal Hom from a complex concentrated in one degree preserves quasi-isomorphisms
 if internal Hom from its sole possibly nonzero term preserves short exact sequences.
 
-Source: Stacks Project, Tag 0A8X, Hom complexes; Tag 08DM, bounded Hom calculation;
-Tag 010N, exact functors.
-(blueprint: lem-pc-single-degree-exact-term-hom-quasi-iso).
+Source: Stacks Project, Tag 0A8X, Hom complexes; Tag 08DM, bounded Hom calculation; Tag 010N, exact functors.
 
 Proof: all factors of the degree-n Hom product other than the factor at k are zero:
 internal Hom from a zero object is zero. The product universal property identifies
@@ -318,9 +315,7 @@ tail occur as the three components of a morphism of short exact sequences.
 The arrow isomorphisms include the identifications of each Hom complex and its map,
 so the statement supplies naturality in the second variable as well as exactness.
 
-Source: Stacks Project, Tag 0A8X, product Hom differential;
-Tag 0117, natural long exact cohomology sequence.
-(blueprint: lem-pc-stupid-tail-hom-short-exact).
+Source: Stacks Project, Tag 0A8X, product Hom differential; Tag 0117, natural long exact cohomology sequence.
 
 Proof: let T be the stupid tail of P in degrees at least k+1 and let G be P.X k
 placed in degree k. Since P vanishes below k, inclusion of T and projection to G
@@ -623,9 +618,7 @@ sends every quasi-isomorphism in the second variable to a quasi-isomorphism. The
 variable is arbitrary, and no K-injective resolution or derived category occurs here.
 
 The site object and morphism universes may differ from the coefficient universe.
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DM, bounded Hom calculation;
-Homology, Tag 0117, long exact cohomology sequence.
-(blueprint: lem-sfb-independent-bounded-exact-term-hom).
+Source: Stacks Project, Cohomology of Sheaves, Tag 08DM, bounded Hom calculation; Homology, Tag 0117, long exact cohomology sequence.
 
 Proof:
 1. Prove the assertion for a source supported in [a,a+d], by induction on the

@@ -21,7 +21,6 @@ import all WeilConjectures.CategoryTheory.ColimitSiteRawStageRestriction
 /-! # Stage restriction of the raw Kan colimit
 
 Source: Stacks Project, Sites, Tag 0A35, section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-stage-restriction).
 -/
 
 @[expose] public section
@@ -44,9 +43,8 @@ private theorem arrow_transport_comp {C : Type u} [SmallCategory C]
 set_option backward.isDefEq.respectTransparency false in
 /-- The restriction of the raw presheaf to any stage is a filtered presheaf colimit
 of stage sheaves. This comparison uses no finiteness assumption on covering presieves.
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-abelian-stage-restriction).
 
 Proof: Choose a common stage k receiving i and j by filteredness, with arrows a and b.
 First use htheta and injectivity of the adjunction hom-equivalence to prove the

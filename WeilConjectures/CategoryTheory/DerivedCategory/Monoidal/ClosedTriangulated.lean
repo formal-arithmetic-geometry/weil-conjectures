@@ -344,7 +344,7 @@ lemma exists_distinguished_ihom_pre_of_iso {T T' : Triangle (DerivedCategory C)}
     simp only [assoc, ← CategoryTheory.Functor.map_comp, Iso.inv_hom_id,
       CategoryTheory.Functor.map_id, comp_id]
 
-/-- Blueprint `definition-verdier-dual-evaluation--3`: Exactness of the internal Hom in each
+/-- Exactness of the internal Hom in each
 variable, first variable.
 
 For a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` of `D(C)` and any `M`, the maps

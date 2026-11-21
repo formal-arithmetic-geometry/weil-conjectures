@@ -16,9 +16,7 @@ public import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Epimorphic families and finite quasi-compact cover calculus
 
-Source: Stacks Project, `sites.tex`, Tags 00WN, 00W2, 00WK, 0GMP and 0GMQ;
-the agent expansion of the local-lifting and finite-cover arguments
-(blueprint: lem-trf-topos-finite-cover-calculus).
+Source: Stacks Project, `sites.tex`, Tags 00WN, 00W2, 00WK, 0GMP and 0GMQ.
 
 The site and all section and index sets lie in the common containing universe
 `max u v w`, following `prose-01-10`. Covering sieves express local
@@ -38,9 +36,7 @@ namespace CategoryTheory
 /-- Coproducts in the containing universe, using Mathlib's sheafification construction
 with the discrete diagram shape specified explicitly. This packages the existing
 colimit structure so typeclass search need not rediscover its diagram universes.
-Source: Stacks Project, Sites, Tag 00WB, the sheafification universal property;
-the coproduct construction in step 1 of the node
-(blueprint: lem-trf-topos-finite-cover-calculus). -/
+Source: Stacks Project, Sites, Tag 00WB, the sheafification universal property. -/
 instance (priority := 2000) toposFiniteCoverCoproducts
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) :
     HasCoproducts.{max u v w} (Sheaf J (Type (max u v w))) :=
@@ -260,8 +256,7 @@ finite coproducts preserve quasi-compactness, including the empty coproduct. Hen
 finite jointly epimorphic family of quasi-compact objects has quasi-compact target.
 
 Source: Stacks Project, `sites.tex`, Tags 00WN, 00W2, 00WK, 0GMP and 0GMQ,
-with the agent expansion recorded in the node
-(blueprint: lem-trf-topos-finite-cover-calculus).
+with the agent expansion recorded in the node.
 
 Proof:
 1. Form the objectwise disjoint union presheaf of a family. Its sheafification is

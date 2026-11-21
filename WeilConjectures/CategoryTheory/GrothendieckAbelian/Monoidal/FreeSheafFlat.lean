@@ -14,8 +14,6 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 /-!
 # Flatness of the sheafified free presheaf
 
-Source: literature/stacks-project/sites-modules.tex, Lemma 03EV.
-
 ## Main statement
 
 The sheaf associated to the free presheaf on a representable, with a flat
@@ -42,8 +40,7 @@ The sheafification of the free presheaf on a representable with flat
 coefficient object is flat, expressed as preservation of finite limits by
 left tensoring. This is Lemma 03EV of the Stacks Project, generalized to
 Grothendieck abelian symmetric monoidal closed coefficient categories.
-Source: Stacks Project, Modules on Sites, Lemmas 03EV, 03ES, 03ET and 0GMW;
-the coefficient-category generalization is described in the module docstring of
+Source: Stacks Project, Modules on Sites, Lemmas 03EV, 03ES, 03ET and 0GMW; the coefficient-category generalization is described in the module docstring of
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution`.
 
 Proof:

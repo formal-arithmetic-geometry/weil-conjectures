@@ -29,8 +29,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionIn
 
 /-! # K-injective resolutions with independent site universes
 
-Source: Stacks Project, Section 07A5 and Theorem 079P
-(blueprint: prop-pur-kinjective-resolutions-exist).
+Source: Stacks Project, Section 07A5 and Theorem 079P.
 The ring universe is r, while module sections live in max c v r.
 The free lifted Yoneda sheaves are precisely the sheafifications of the localized
 rank-one extension presheaves. Their use preserves the generator in the source statement.
@@ -50,8 +49,7 @@ namespace CategoryTheory
 
 /-- Forgetting commutativity preserves the sheaf condition, independently of the
 size of the site. This supplies the underlying ring sheaf used in Mod(O).
-Source: Stacks, Modules on Sites 03D7, and Sites 00VR
-(blueprint: prop-pur-kinjective-resolutions-exist).
+Source: Stacks, Modules on Sites 03D7, and Sites 00VR.
 Proof: a compatible family of ring maps has the same underlying functions as a
 compatible family of commutative-ring maps when its test ring is commutative. For
 an arbitrary test ring, glue the images of its elements in the commutative sheaf;
@@ -91,8 +89,7 @@ namespace PresheafOfModules
 
 /-- Canonical sectionwise universe transport of a module presheaf. Restrictions are
 conjugated by ULift.up/down; the coefficient presheaf is unchanged.
-Source: Stacks size convention 000H, used for the generator of 03EW
-(blueprint: prop-pur-kinjective-resolutions-exist). -/
+Source: Stacks size convention 000H, used for the generator of 03EW. -/
 noncomputable def sectionUniverseLift {C : Type c} [Category.{v} C] (R : Cᵒᵖ ⥤ RingCat.{r}) :
     PresheafOfModules.{s} R ⥤ PresheafOfModules.{max c v r s} R where
   obj M :=
@@ -161,8 +158,7 @@ private noncomputable def liftedExtensionDesc
 
 /-- Grothendieck abelianness, the specified free-sheaf generator, and functorial
 K-injective resolutions with injective terms, without equating site universes.
-Source: Stacks Project, Section 07A5 and Theorem 079P
-(blueprint: prop-pur-kinjective-resolutions-exist).
+Source: Stacks Project, Section 07A5 and Theorem 079P.
 Proof:
 1. Form the free module on the lifted representable at each site object. Its
 sections are finite linear combinations of arrows into that object, exactly the

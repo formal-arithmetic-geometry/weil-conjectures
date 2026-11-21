@@ -19,8 +19,6 @@ homogeneous summands. No preservation of coproducts by the functor is required.
 The coherence proofs adapt the strong monoidal implementation in
 `WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex`; the differential
 calculation follows the explicit totalization in `CochainCoefficientArrows`.
-Source: blueprint local boundary duality, Step 5, signed totalization of section pairings.
-(blueprint: lem-a1-canonical-lax-totalization)
 -/
 
 @[expose] public noncomputable section
@@ -337,9 +335,7 @@ lemma mapCochainComplex_rightUnitor_inv (K : CochainComplex C ℤ) :
 
 Proof: the summand formula defines a chain map by additivity and naturality of the
 ordinary tensorator. Its naturality follows on double summands, associativity on
-triple summands, and the two unit identities on the degree-zero summands of the unit.
-Source: blueprint local boundary duality, Step 5, totalization of section tensor.
-(blueprint: lem-a1-canonical-lax-totalization) -/
+triple summands, and the two unit identities on the degree-zero summands of the unit. -/
 @[instance_reducible]
 def mapCochainComplexLax : (G.mapHomologicalComplex (.up ℤ)).LaxMonoidal where
   ε := chainUnit G

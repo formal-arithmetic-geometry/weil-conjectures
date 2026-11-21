@@ -15,8 +15,7 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 /-!
 # Compact objects form a thick subcategory
 
-Source: Stacks Project, Derived Categories, Lemma 13.37.2 (Tag 09QH)
-(blueprint: lem-sc-compact-objects-thick).
+Source: Stacks Project, Derived Categories, Lemma 13.37.2 (Tag 09QH).
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ open CategoryTheory.Limits CategoryTheory.Pretriangulated
 namespace CategoryTheory
 
 /-- Integer shifts preserve compactness.
-Source: Stacks Project, Tag 09QH (blueprint: lem-sc-compact-cone).
+Source: Stacks Project, Tag 09QH.
 Proof: conjugate the compact-Hom comparison by the additive Hom equivalences of
 shift and inverse shift, using the inverse-shift coproduct comparison. -/
 theorem compact_shift {C : Type u} [Category.{v} C] [HasShift C ℤ]
@@ -88,7 +87,7 @@ theorem compact_shift {C : Type u} [Category.{v} C] [HasShift C ℤ]
 
 open Classical in
 /-- The compact-Hom comparison is natural in its source.
-Source: Stacks Project, Tag 09QH (blueprint: lem-sc-compact-cone).
+Source: Stacks Project, Tag 09QH.
 Proof: evaluate on a single direct-sum component and use composition associativity. -/
 theorem compact_comparison_naturality
     {C : Type u} [Category.{v} C] [Preadditive C] [HasCoproducts.{w} C]
@@ -140,7 +139,6 @@ private theorem triangle_hom_exact
 
 /-- The third term of a distinguished triangle of compact objects is compact.
 Source: Stacks Project, Derived Categories, Lemma 13.37.2, Tag 09QH.
-(blueprint: lem-sc-compact-cone).
 
 Proof: apply Hom(-,A_j) to the triangle and to its rotations. The resulting
 five-term exact sequences have the five Hom groups from Y[1], X[1], Z, Y, X.

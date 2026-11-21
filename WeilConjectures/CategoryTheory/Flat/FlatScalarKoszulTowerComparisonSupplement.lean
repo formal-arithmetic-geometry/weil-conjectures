@@ -230,7 +230,6 @@ public import WeilConjectures.CategoryTheory.FlatScalarKoszulTowerComparison
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E; sites-cohomology.tex, Tags 0A07
 and 0941; more-algebra.tex, Tag 0913.
-(blueprint: lem-weil-pbc-flat-scalar-koszul-tower-comparison).
 
 ## Main statements
 
@@ -262,19 +261,16 @@ variable [HasDerivedCategory.{w} (Modules R)] [HasDerivedCategory.{w} (Modules B
 variable [HasDerivedCategory.{w} (Towers R)] [HasDerivedCategory.{w} (Towers B)]
 
 /-- Exact levelwise scalar restriction on the derived category of strict towers.
-Source: Stacks 0A07
-(blueprint: lem-weil-pbc-flat-scalar-koszul-tower-comparison). -/
+Source: Stacks 0A07. -/
 abbrev restrictTowerDerived (φ : R ⟶ B) := (restrictTower φ).mapDerivedCategory
 
-/-- Exact evaluation on the derived category of strict towers. Source: Stacks 0941
-(blueprint: lem-weil-pbc-flat-scalar-koszul-tower-comparison). -/
+/-- Exact evaluation on the derived category of strict towers. Source: Stacks 0941. -/
 abbrev evaluateDerived (O : Sheaf J CommRingCat.{u})
     [HasDerivedCategory.{w} (Modules O)] [HasDerivedCategory.{w} (Towers O)]
     (m : ℕᵒᵖ) := ((evaluation ℕᵒᵖ (Modules O)).obj m).mapDerivedCategory
 
 /-- Restriction and evaluation commute by the exact-functor localization comparisons.
-Source: Stacks 0A07
-(blueprint: lem-weil-pbc-flat-scalar-koszul-tower-comparison). -/
+Source: Stacks 0A07. -/
 def evaluationComparison (φ : R ⟶ B) (m : ℕᵒᵖ) :
     restrictTowerDerived φ ⋙ evaluateDerived R m ≅
       evaluateDerived B m ⋙ restrictDerived φ :=
@@ -915,7 +911,6 @@ The index m : ℕ represents exponent m+1, hence includes exactly the positive p
 
 Source: Stacks Project, algebraization.tex, Tag 0A0E; sites-cohomology.tex, Tags 0A07
 and 0941; more-algebra.tex, Tag 0913.
-(blueprint: lem-weil-pbc-flat-scalar-koszul-tower-comparison).
 
 Proof:
 1. Use the strict ordered-coordinate comparison and its coaugmentation equation.

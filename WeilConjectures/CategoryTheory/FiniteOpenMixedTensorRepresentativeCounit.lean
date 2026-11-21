@@ -13,12 +13,10 @@ import all Mathlib.Algebra.Homology.Localization
 /-!
 # Counit normalization for a derived functor representative
 
-Source: Stacks Project, sites-cohomology.tex, Tag 07A4; the native exact-derived
-comparison counit equation in `LeftDerivedFunctor.MapDerivedCategoryCounit`.
+Source: Stacks Project, sites-cohomology.tex, Tag 07A4.
 
 The factor comparison of an exact left-derived functor is its canonical counit on
 the quotient of a cochain complex.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative-leftDerivedFactors-eq-counit)
 
 Proof. Apply the defining comparison equation at the homotopy quotient of the
 complex. Unfold the quotient comparison and the homotopy-category factor maps;
@@ -39,8 +37,7 @@ namespace CategoryTheory.Functor
 
 Proof. Evaluate the published homotopy factorization at the quotient complex, expand
 the cochain-to-homotopy comparison factors, and cancel their identity components.
-Source: Stacks Project, Tag 07A4; the native exact-derived counit factorization.
-(blueprint: lem-sf-finite-open-mixed-tensor-representative-leftDerivedFactors-eq-counit) -/
+Source: Stacks Project, Tag 07A4. -/
 theorem leftDerivedFactors_eq_counit
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]

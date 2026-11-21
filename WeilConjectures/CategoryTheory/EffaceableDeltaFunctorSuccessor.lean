@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.EffacingSequencePushout
 # Successor transformations by effacement
 
 Source: Stacks Project, Homology, Lemma 010T and the parent node's comparison arguments.
-(blueprint: lem-weil-pbc-effaceable-delta-functor-successor).
 -/
 
 @[expose] public section
@@ -81,8 +80,7 @@ their direct sum: the projections induce morphisms of short exact sequences, and
 cancellation of the epimorphic connecting map proves independence and naturality.
 Finally push out an arbitrary short exact sequence along an effacing embedding; its
 map to an effacing sequence, together with naturality of connecting maps, proves the
-required compatibility for every short exact sequence.
-(blueprint: lem-weil-pbc-effaceable-delta-functor-successor) -/
+required compatibility for every short exact sequence. -/
 theorem effaceable_deltaFunctor_successor
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B]

@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjuncti
 /-! # Opposite shifts and right exact derived tensor comparisons
 
 Source: Stacks Project, Tags 06YY, 07A4 and 08JC.
-(blueprint: lem-derived-right-exact-tensor-shift-cancellation)
 -/
 
 @[expose] public noncomputable section
@@ -576,8 +575,7 @@ end Normalized
 /-- A flat-model-normalized tensor comparison for a right exact monoidal functor
 commutes with cancellation of opposite shifts. The shift on the chosen derived
 left adjoint is the mate of the exact right adjoint's termwise shift.
-Source: Stacks 06YY, 07A4, 08JC
-(blueprint: lem-derived-right-exact-tensor-shift-cancellation).
+Source: Stacks 06YY, 07A4, 08JC.
 
 The derived counit is the transpose of the ordinary unit and thus commutes with
 shifts. On good K-flat models its components are invertible. The ordinary tensor
@@ -653,8 +651,7 @@ private theorem rightExactTensorComparison_shiftCancellation_aux
 /-- The normalized right exact tensor comparison respects opposite-shift cancellation,
 written using the tensor bifunctors. The proof is the counit/model argument above,
 followed by the defining equations of the curried tensor bifunctor.
-Source: Stacks 06YY, 07A4, 08JC
-(blueprint: lem-derived-right-exact-tensor-shift-cancellation). -/
+Source: Stacks 06YY, 07A4, 08JC. -/
 theorem rightExactTensorComparison_shiftCancellation
     (adj : E ⊣ U) [E.PreservesFlat] [E.IsLeftAdjoint] [E.Monoidal]
     (G : DerivedCategory C ⥤ DerivedCategory D) (ad : G ⊣ U.mapDerivedCategory)

@@ -1111,8 +1111,7 @@ end FiniteFreeScalarProof
 /-- The basis components of a finite-free scalar-extension isomorphism, specified
 on every K-flat representative. The degreewise map is multiplication by the actual
 basis section, followed by sheafification; the localization square fixes its derived class.
-Source: Stacks Project, Tags 08J9 and 08JA.
-(blueprint: lem-sf-ringed-finite-free-hom-coordinates). -/
+Source: Stacks Project, Tags 08J9 and 08JA. -/
 def RingedFiniteFreeBasisCoordinates
     [HasDerivedCategory.{w} (SheafOfModules.scalarModules J R)]
     [HasDerivedCategory.{w} (SheafOfModules.scalarModules J S)]
@@ -1248,9 +1247,8 @@ derived adjunction by its chain transposes, and β by restricted evaluation. Onl
 the resulting equation on basis inclusions remains to be calculated. Product preservation,
 the matrix calculation, naturality, conservativity and assembly of the internal-Hom
 isomorphism are proved outside.
-Source: Stacks Project, sites-cohomology.tex, Tags 08J9 and 08JA, finite-free
-specialization of lemma-internal-hom and lemma-section-RHom-over-U.
-(blueprint: lem-sf-ringed-finite-free-hom-coordinates).
+Source: Stacks Project, sites-cohomology.tex, Tags 08J9 and 08JA
+specialization of and.
 
 Proof: use the displayed basis of S over R. On K-flat representatives the maps
 (x_j) ↦ sum e_j tensor x_j and the basis coefficient maps are inverse chain maps.

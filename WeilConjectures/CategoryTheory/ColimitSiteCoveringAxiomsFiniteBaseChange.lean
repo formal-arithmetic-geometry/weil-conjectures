@@ -20,7 +20,6 @@ namespace CategoryTheory
 /-- Then for every finite indexed Q-cover and every arrow into its target, any family of pullback
 squares has a covering family of first projections.
 Source: Stacks Project, Sites, Tag 09YL.
-(blueprint: lem-weil-pbc-colimit-site-covering-axioms-finitebasechange)
 
 Proof: Fix a finite indexed Q-cover f, an arrow g into its target, and
 an arbitrary pullback square for each f i and g. Represent the cover using hQ.

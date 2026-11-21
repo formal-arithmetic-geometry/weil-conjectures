@@ -124,7 +124,6 @@ private theorem lift_pair
 
 /-- Joint monicity of the image of the two stable stage pullback projections.
 Source: Stacks Project, Sites, Tag 09YL, pullback paragraph and Hom calculation.
-(blueprint: lem-weil-pbc-filtered-colimit-pullback-hom-ext)
 
 Proof: Lift the two proposed arrows to stage arrows using joint surjectivity
 of the arrow colimit. Move their stages and j to a common upper stage. Eventual

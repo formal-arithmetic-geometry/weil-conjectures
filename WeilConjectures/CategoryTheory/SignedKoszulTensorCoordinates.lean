@@ -11,9 +11,7 @@ import WeilConjectures.CategoryTheory.SignedKoszulTensorCoproduct
 /-!
 # The normalized finite tensor calculation
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, finite free tensor calculation.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, finite free tensor calculation.
 -/
 
 @[expose] public section
@@ -141,10 +139,7 @@ private theorem zeroKoszulSummands_isColimit
 matrix for its differential and the canonical pure-tensor normalization.
 This does not construct transitions or assert quasi-isomorphism invariance.
 
-Source: Stacks Project, algebraization.tex, Tag 0A0E,
-lemma-derived-completion-koszul, the finite free negative Koszul calculation;
-step 1 of lem-cbc-signed-koszul-finite-coordinates.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, algebraization.tex, Tag 0A0E, the finite free negative Koszul calculation.
 
 Proof in words: induct on the number of ordered factors. For zero factors, identify
 K tensor O[0] with K by its right unitor and identify the sole subset with the empty

@@ -114,7 +114,7 @@ attribute [local irreducible] monoidalCategory scalarPairComplexComparison
   CoefficientTensorModels.iso
 
 /-- The normalized strong tensor comparison for scalar extension.
-Source: Stacks 07A4 (blueprint: lem-sfb-scalar-tensor-comparison).
+Source: Stacks 07A4.
 
 Proof: use the normalized ordinary tensor comparison in each bidegree and sum its
 inverse over the total coproduct. Naturality commutes with both differentials and

@@ -17,7 +17,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 /-! # Multiplication of complete local sections
 
 Source: Stacks Project, Tags 0997 and 0998.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -164,9 +163,7 @@ by af. Exact filtered colimits show that these colimits of the flat unit module
 are flat. No cancellation
 or nonzero assumption is used; a=0 and f=0 give the zero localization.
 
-Source: Stacks Project, algebraization.tex, Tags 0997 and 0998;
-sites-cohomology.tex, Tag 08JB.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, algebraization.tex, Tags 0997 and 0998; sites-cohomology.tex, Tag 08JB. -/
 theorem ringedSite_completeElement_mul
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u})

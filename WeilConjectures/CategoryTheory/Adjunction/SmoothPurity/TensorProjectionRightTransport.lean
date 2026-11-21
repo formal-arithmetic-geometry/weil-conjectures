@@ -16,8 +16,7 @@ open CategoryTheory MonoidalCategory
 namespace CategoryTheory.Adjunction
 
 /-- Transporting a right adjoint transports the unit-defined projection by its mixed
-comparison. Source: adjunction Hom bijections and Stacks Tag 0GL1
-(blueprint: lem-pur-tensor-projection-right-transport).
+comparison. Source: adjunction Hom bijections and Stacks Tag 0GL1.
 
 Proof: express both projection components as inverse Hom transposes. For the
 transported adjunction its unit is the original unit followed by the inverse right

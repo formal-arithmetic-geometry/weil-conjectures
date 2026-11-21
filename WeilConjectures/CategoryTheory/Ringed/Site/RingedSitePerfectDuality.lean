@@ -45,8 +45,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-! # Perfect duality on a small ringed site
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08JJ,
-lemma-dual-perfect-complex (blueprint: lem-sfb-ringed-site-perfect-duality).
+Source: Stacks Project, sites-cohomology.tex, Tag 08JJ.
 The canonical maps are explicit transposes of evaluation in a normalized K-flat
 closed tensor-Hom presentation, rather than unspecified isomorphic morphisms.
 -/
@@ -588,8 +587,7 @@ tensor and Hom: its transposition, unit, associator and symmetry are fixed on
 ordinary representatives. It is not a choice of an arbitrary bidual morphism or
 an arbitrary isomorphism. The last clause says the actual canonical evaluation
 natural transformation is invertible, in the tensor order of the node.
-Source: Stacks Project, Tag 08JJ, lemma-dual-perfect-complex
-(blueprint: lem-sfb-ringed-site-perfect-duality).
+Source: Stacks Project, Tag 08JJ.
 
 Proof:
 1. Use lem-sfb-ringed-site-duality-maps for the normalized canonical maps and
@@ -599,7 +597,7 @@ Proof:
    the dual-basis formulas invert termwise biduality and tensor-Hom evaluation.
    Hom out of each term, and tensor with it or its dual, are exact retracts of
    finite direct sum, using lem-sc-finite-free-internal-hom-exact. Thus the terms
-   and their duals are flat (def-pc-flat-sheaf-modules).
+   and their duals are flat.
 3. Apply lem-pc-bounded-exact-term-hom-quasi-iso to the K-injective augmentation
    of an arbitrary complex F. Ordinary Hom(E,F) computes derived Hom, naturally
    in F; boundedness of E makes each Hom product finite.
@@ -618,7 +616,7 @@ Proof:
    bounded dual makes each degree sum finite even when N is unbounded. The
    normalized Koszul symmetry gives precisely the order dual tensor N here.
 8. Exact slice restriction commutes with cohomology. Represent any derived map
-   by an actual map to a K-injective complex (lem-weil-pbc-kinjective-hom-derived).
+   by an actual map to a K-injective complex.
    The sheaf-cover criterion lem-sfb-sheaf-cover-local-isomorphism makes its
    cohomology maps invertible globally if they are so on this covering family.
    Apply this to the canonical maps of steps 5 and 7.

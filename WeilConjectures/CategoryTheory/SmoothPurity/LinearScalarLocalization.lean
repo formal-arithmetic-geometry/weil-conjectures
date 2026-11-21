@@ -14,8 +14,6 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 /-!
 # Category laws for raw scalar localization
 
-Source: the Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-operations`,
-`def-weil-rationalization-karoubi` (blueprint: lem-weil-linear-scalar-localization-category).
 The scalar-first tensor order is the convention of `LinearMap.baseChange`.
 `ULift.{0} C` is only a wrapper for the unchanged objects, with no new objects adjoined.
 -/
@@ -126,8 +124,6 @@ open LinearScalarConstruction
 
 /-- The raw tensor-Hom localization is a linear category, with a linear localization functor
 and induced strict automorphisms.
-Source: the Weil conjectures blueprint, `def-weil-rationalization-karoubi`
-(blueprint: lem-weil-linear-scalar-localization-category).
 
 Proof plan:
 1. Extend the bilinear composition of the original category by the unique bilinear extension

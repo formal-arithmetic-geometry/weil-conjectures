@@ -16,9 +16,8 @@ import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
 
 /-! # Stage representatives for the raw Kan section colimit
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+Source: Stacks Project, Sites, Tag 0A35,
 section construction and adjunction paragraphs.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-generators).
 -/
 
 @[expose] public section
@@ -129,9 +128,8 @@ private theorem lift_under_arrow
     (V.w c)
   exact hvc.trans hg
 
-/-- Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
+/-- Source: Stacks Project, Sites, Tag 0A35,
 section construction, independence of the presentation and restriction arrows.
-(blueprint: lem-weil-pbc-colimit-site-raw-section-generators).
 
 Proof: Evaluate the outer presheaf colimit at V_i(U). Evaluation preserves
 colimits, so every element comes from B_t at V_i(U). The pointwise left Kan

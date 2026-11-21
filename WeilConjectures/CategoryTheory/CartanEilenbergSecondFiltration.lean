@@ -17,8 +17,7 @@ import WeilConjectures.CategoryTheory.DegreewiseFilteredStableQuotient
 
 /-! # The second-filtration spectral sequence and its total abutment
 
-Source: blueprint thm-sp-if-e1, proof paragraph 1; Stacks Tags 0130 and 0132.
-(blueprint: lem-sp-cartan-eilenberg-second-filtration).
+Source: Stacks Tags 0130 and 0132.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace CategoryTheory.Functor
 /-- The resolution-degree cohomology spectral sequence converges to the cohomology
 of the mapped total complex. Its filtration may be transported to any isomorphic family.
 This statement makes no claim that this total computes a derived functor on complexes.
-Source: blueprint thm-sp-if-e1, proof paragraph 1; Stacks Tags 0130 and 0132.
-(blueprint: lem-sp-cartan-eilenberg-second-filtration).
+Source: Stacks Tags 0130 and 0132.
 
 Proof.
 1. Form the filtration by complex degree of the flipped, extended, F-mapped bicomplex.

@@ -12,7 +12,7 @@ import Mathlib.CategoryTheory.Monoidal.Internal.Types.CommGrp_
 /-!
 # Reconstruction of a representation from an internal group object
 
-Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
+Source: Stacks Project, Tag 04JQ.
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ attribute [local instance] AlgebraicGeometry.etaleFieldDiscreteForget₂
   AlgebraicGeometry.etaleFieldActionForget₂
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 04JQ, proof of lemma-equivalence-abelian-sheaves-point.
-(blueprint: lem-exc-discrete-continuous-rep-to-commgrp-ess-surj)
+/-- Source: Stacks Project, Tag 04JQ.
 
 Proof: The forgetful functor from discrete continuous actions to types preserves
 finite products: the terminal carrier is a singleton and binary products carry the

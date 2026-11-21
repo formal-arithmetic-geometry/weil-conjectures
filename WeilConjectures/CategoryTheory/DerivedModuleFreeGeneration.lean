@@ -14,8 +14,7 @@ import WeilConjectures.CategoryTheory.DerivedModuleFiltrationTelescope
 
 /-! # Generation of a module derived category by shifts of the ring
 
-Source: literature/stacks-project/more-algebra.tex, Remark 15.60.11 (Tag 09PB)
-(blueprint: lem-pc-derived-module-free-generation).
+Source: literature/stacks-project/more-algebra.tex, Remark 15.60.11 (Tag 09PB).
 
 The property in the conclusion is the semantic description of the smallest full
 subcategory containing the shifts of the free rank-one module and closed under
@@ -34,8 +33,7 @@ namespace CategoryTheory
 of the free rank-one module `R[0]` (`singleFunctor 0`) by coproducts indexed in the
 modules' universe, distinguished triangles (third vertex), and retracts. `R` is
 commutative, as rings are in the source.
-Source: More on Algebra, Remark 15.60.11 (Tag 09PB),
-(blueprint: lem-pc-derived-module-free-generation).
+Source: More on Algebra, Remark 15.60.11 (Tag 09PB)
 
 Proof:
 1. Represent `K` by a cochain complex and use

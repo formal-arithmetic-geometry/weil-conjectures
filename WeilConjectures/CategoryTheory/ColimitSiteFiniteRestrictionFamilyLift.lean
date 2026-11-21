@@ -16,9 +16,8 @@ import all WeilConjectures.CategoryTheory.ColimitSiteRawSectionGenerators
 
 /-! # Lifting a finite family of restrictions and its triangles
 
-Source: Stacks Project, Sites, Tag 0A35 (lemma-compute-pullback-to-limit),
-independence of the section presentation; Tag 09YL, finite-diagram observation.
-(blueprint: lem-weil-pbc-colimit-site-finite-restriction-family-lift).
+Source: Stacks Project, Sites, Tag 0A35,
+independence of the section presentation; Tag 09YL observation.
 -/
 
 @[expose] public section
@@ -58,7 +57,6 @@ private theorem lift_same_stage_arrow
 
 /-- Source: Stacks Project, Sites, Tags 0A35 and 09YL, finite diagram lifting
 in the section presentation.
-(blueprint: lem-weil-pbc-colimit-site-finite-restriction-family-lift).
 
 Proof: Lift each restriction arrow and align its endpoints with the prescribed
 stage objects by eventual equality in the object colimit. Equalize the two

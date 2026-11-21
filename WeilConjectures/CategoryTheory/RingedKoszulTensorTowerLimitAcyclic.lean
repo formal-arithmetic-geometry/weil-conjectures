@@ -228,10 +228,7 @@ variable [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ SheafOfModules.{u}
 /-- The ordinary-to-derived inverse-limit comparison is invertible on the actual
 Koszul tensor tower of a K-injective coefficient complex.
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941,
-lemma-colim-and-lim-of-duals and lemma-derived-limit-is-ok;
-derived.tex, Tag 0949, lemma-colim-hocolim.
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tags 0A0A and 0941 and; derived.tex, Tag 0949.
 
 Proof: finite Koszul evaluation identifies the tower with Hom(P_m,I). Its ordinary
 limit is Hom(colim P_m,I). The telescope-to-colimit quasi-isomorphism becomes a

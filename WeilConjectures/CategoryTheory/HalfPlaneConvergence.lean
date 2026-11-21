@@ -13,8 +13,8 @@ import WeilConjectures.CategoryTheory.HalfPlaneWeakConvergence
 /-!
 # Half-plane convergence of an exact couple
 
-Source: blueprint node thm-sp-half-plane-convergence, order 511; Stacks Project,
-Tags 011T and 012F (blueprint: thm-sp-half-plane-convergence).
+Source: Stacks Project,
+Tags 011T and 012F.
 -/
 
 @[expose] public section
@@ -213,7 +213,7 @@ The incoming differential has source first index `p - R < 0` for `R > p`,
 and the outgoing differential has target second index `q - R + 1 < a` for
 `R > q - a + 1`. Page cohomology therefore gives the canonical stabilization
 isomorphism, and the recursive cycles and boundaries become constant, yielding
-regularity and limiting subobjects (def-sp-exact-couple, def-sp-convergence).
+regularity and limiting subobjects.
 The incoming image of `alpha^R` is zero for `R > q - a`, yielding completeness.
 Exactness makes alpha an isomorphism to the left of first index zero, since both
 adjacent initial E terms vanish there. Thus the diagonal colimit is `D 0 n`,
@@ -233,8 +233,8 @@ in the inverse-limit sense, proving convergence.
 
 Step 3: Compare the cycle/boundary formulas in Stacks Tag 011T and the
 infinite-page and associated-graded discussion in Tag 012F.
-Source: blueprint node thm-sp-half-plane-convergence, order 511; Stacks Project,
-Tags 011T and 012F (blueprint: thm-sp-half-plane-convergence). -/
+Source: Stacks Project,
+Tags 011T and 012F. -/
 theorem halfPlaneConvergence
     (X : BigradedExactCouple C 0) (a : ℤ)
     (hD : ∀ (p q : ℤ), q < a → IsZero (X.D p q))

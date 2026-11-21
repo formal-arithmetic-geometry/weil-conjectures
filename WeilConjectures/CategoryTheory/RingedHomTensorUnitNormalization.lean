@@ -143,8 +143,7 @@ attribute [local irreducible] ringedHomUnitEvaluationIso
 /-- Transposing the tensor left unitor gives inverse evaluation at one.
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X, Hom complexes and
-its tensor-Hom adjunction; sites-modules.tex, internal Hom from the ring sheaf.
-(auxiliary; not a blueprint node).
+its tensor-Hom adjunction.
 
 Proof: project to source degree zero. The signed comparison between the two
 Hom conventions has sign (-1)^(0*n)=1 on this component. The tensor left unitor
