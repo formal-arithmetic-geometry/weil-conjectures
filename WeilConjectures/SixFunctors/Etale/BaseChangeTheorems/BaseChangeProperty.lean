@@ -132,9 +132,8 @@ base change map `BC_sq(K) : g^*(Rf_* K) ⟶ Rf'_*(g'^* K)` is an isomorphism. No
 imposed on `g`, and none on `f`: the proper base change theorem says that `PBC(f)` holds
 whenever `f` is proper.
 
-This is the restriction to torsion cohomology of `AlgebraicGeometry.Etale.IsBaseChangeIso`,
-which is the declaration realising the blueprint's `definition-torsion-pbc-property--1`; see the
-module docstring. (blueprint: `sec-Torsion-sheaves-and-acyclicity`) -/
+This is the restriction to torsion cohomology of `AlgebraicGeometry.Etale.IsBaseChangeIso`;
+see the module docstring. -/
 def Etale.HasTorsionBaseChange (f : X ⟶ Y) : Prop :=
   ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄ (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
