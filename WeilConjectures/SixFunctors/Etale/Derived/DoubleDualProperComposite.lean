@@ -19,6 +19,11 @@ structure of `Rf_*` and the trace `Rf_* ω_X ≅ Rf_* Rf^! ω_Y ⟶ ω_Y`. It is
 (`AlgebraicGeometry.Etale.isIso_dualComparison_rightDerivedLowerStar`), the inverse direction of
 the exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` (`Rf_! = Rf_*`), and it is compatible with the double-dual
 morphisms (`AlgebraicGeometry.Etale.rightDerivedLowerStar_map_toIhomIhom_comp_dualComparison`).
+
+## Implementation details
+
+The dual comparison of `Rf_*` is an isomorphism by the projection formula for `Rf_*`
+(`CategoryTheory.Adjunction.isIso_dualComparison_of_isIso_projection`).
 -/
 
 @[expose] public section
@@ -55,9 +60,7 @@ isomorphism. For `γ : Rf^! ω_Y ≅ ω_X`, it is the dual comparison
 `Rf_* RHom(M, ω_X) ⟶ RHom(Rf_* M, Rf_* ω_X) ⟶ RHom(Rf_* M, ω_Y)`
 (`CategoryTheory.MonoidalClosed.dualComparison`) through the lax monoidal structure of `Rf_*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerStarLaxBraided`) and the trace
-`Rf_* ω_X ≅ Rf_* Rf^! ω_Y ⟶ ω_Y` (the counit of `Rf_* ≅ Rf_! ⊣ Rf^!`); it is an isomorphism by
-the projection formula for `Rf_*`
-(`CategoryTheory.Adjunction.isIso_dualComparison_of_isIso_projection`). -/
+`Rf_* ω_X ≅ Rf_* Rf^! ω_Y ⟶ ω_Y` (the counit of `Rf_* ≅ Rf_! ⊣ Rf^!`). -/
 theorem isIso_dualComparison_rightDerivedLowerStar
     (γ : (R(f)^![Λ]).obj (dualizingComplex Λ aY) ≅ dualizingComplex Λ aX)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

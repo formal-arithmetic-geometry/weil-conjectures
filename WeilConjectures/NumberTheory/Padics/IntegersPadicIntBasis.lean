@@ -25,6 +25,13 @@ topologically isomorphic to `ℤ_ℓʳ`, and that `E` is the localization of `�
 - `PadicAlgCl.exists_continuousAddEquiv_integers`: `𝒪_E ≃ₜ+ ℤ_ℓʳ` for some `r`.
 - `PadicAlgCl.isLocalizedModule_integers_subtype`: the inclusion `𝒪_E → E` is the localization
   of abelian groups at the powers of `ℓ`.
+
+## Implementation details
+
+For finiteness, the coordinates in a `ℚ_ℓ`-basis of `E` are continuous, hence bounded on the
+compact `𝒪_E`, so that `x ↦ (ℓ^N c_i(x))_i` embeds `𝒪_E` into `ℤ_ℓⁿ`. For the topological
+isomorphism, the coordinates in a `ℤ_ℓ`-basis form a continuous bijection `ℤ_ℓʳ → 𝒪_E` from a
+compact space to a Hausdorff space.
 -/
 
 @[expose] public section
@@ -74,8 +81,7 @@ theorem isLocalizedModule_integers_subtype :
 
 variable [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E]
 
-/-- `𝒪_E` is a finite `ℤ_ℓ`-module: the coordinates in a `ℚ_ℓ`-basis of `E` are continuous,
-hence bounded on the compact `𝒪_E`, so that `x ↦ (ℓ^N c_i(x))_i` embeds `𝒪_E` into `ℤ_ℓⁿ`. -/
+/-- `𝒪_E` is a finite `ℤ_ℓ`-module. -/
 theorem finite_integersPadicIntHom :
     letI := (integersPadicIntHom l E).toAlgebra
     Module.Finite ℤ_[l] (integers l E) := by
@@ -136,8 +142,7 @@ theorem free_integersPadicIntHom :
   exact Module.free_of_finite_type_torsion_free'
 
 /-- **`𝒪_E ≅ ℤ_ℓʳ` topologically.** The ring of integers of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`
-is isomorphic, as a topological group, to `ℤ_ℓʳ`: the coordinates in a `ℤ_ℓ`-basis form a
-continuous bijection `ℤ_ℓʳ → 𝒪_E` from a compact space to a Hausdorff space. -/
+is isomorphic, as a topological group, to `ℤ_ℓʳ`. -/
 theorem exists_continuousAddEquiv_integers :
     letI := normedFieldOfAlgebra l E
     ∃ r : ℕ, Nonempty (integers l E ≃ₜ+ (Fin r → ℤ_[l])) := by

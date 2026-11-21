@@ -62,10 +62,7 @@ include a
 
 /-- The trace isomorphism with integral coefficients, in existential form: for `X` smooth, proper
 and geometrically connected of pure dimension `d` over the algebraically closed `k` and `ℓ`
-invertible in `k`, `H^{2d}(X_proét, 𝒪_{E,X}) ≅ 𝒪_E(-d) ≅ 𝒪_E` as abelian groups.
-
-The isomorphism is not the trace map, which is not available on pro-étale cohomology in the
-repository (see the module docstring). -/
+invertible in `k`, `H^{2d}(X_proét, 𝒪_{E,X}) ≅ 𝒪_E(-d) ≅ 𝒪_E` as abelian groups. -/
 theorem nonempty_addEquiv_H_padicIntegersSheaf_two_mul :
     letI := normedFieldOfAlgebra l E
     Nonempty (Sheaf.H (continuousMapAbSheaf X (integers l E)) (2 * d) ≃+ integers l E) := by
@@ -81,10 +78,7 @@ theorem nonempty_addEquiv_H_padicIntegersSheaf_two_mul :
 /-- The trace isomorphism with coefficients in a finite extension `E` of `ℚ_ℓ`, in existential
 form: for `X` smooth, proper and geometrically connected of pure dimension `d` over the
 algebraically closed `k` and `ℓ` invertible in `k`, `H^{2d}(X_proét, E_X) ≅ E(-d) ≅ E` as
-abelian groups.
-
-The isomorphism is not the trace map, which is not available on pro-étale cohomology in the
-repository. -/
+abelian groups. -/
 theorem nonempty_addEquiv_H_padicSubfieldSheaf_two_mul :
     letI := normedFieldOfAlgebra l E
     Nonempty (Sheaf.H (continuousMapAbSheaf X E) (2 * d) ≃+ E) := by

@@ -50,8 +50,7 @@ include a hS
 
 /-- **Cohomological dimension of `𝒪_E`.** For a scheme `S` of finite type and of dimension at
 most `d` over a separably closed field and a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`,
-`Hᵠ(S_proét, 𝒪_E) = 0` for `q > 2d`: `𝒪_E` is compact, with the decreasing sequence of open
-subgroups `{x | ‖x‖ < 1 / (m + 1)}` of trivial intersection. -/
+`Hᵠ(S_proét, 𝒪_E) = 0` for `q > 2d`. -/
 theorem subsingleton_H_padicIntegersSheaf_of_two_mul_lt (q : ℕ) (hq : 2 * d < q) :
     letI := normedFieldOfAlgebra l E
     Subsingleton (Sheaf.H (continuousMapAbSheaf S (integers l E)) q) := by

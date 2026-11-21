@@ -34,6 +34,14 @@ Milnor sequences, since `H^{2d+1}(X_proét, ℤ_ℓ) = 0`.
 - `AlgebraicGeometry.ProEtale.nat_card_finiteAdicH_two_mul`: `#H^{2d}(X_proét, ℤ/ℓᵐ) = ℓᵐ`.
 - `AlgebraicGeometry.ProEtale.nonempty_linearEquiv_integralAdicH_two_mul`:
   `H^{2d}(X_proét, ℤ_ℓ) ≅ ℤ_ℓ` as `ℤ_ℓ`-modules.
+
+## Implementation details
+
+`M = H^{2d}(X_proét, ℤ_ℓ)` is a finitely generated `ℤ_ℓ`-module
+(`AlgebraicGeometry.ProEtale.module_finite_integralAdicH`). As `H^{2d+1}(X_proét, ℤ_ℓ) = 0`, the
+Bockstein sequence identifies `M / ℓᵐ M` with `H^{2d}(X_proét, ℤ/ℓᵐ)`, which has `ℓᵐ` elements
+(`AlgebraicGeometry.ProEtale.nat_card_finiteAdicH_two_mul`); this forces `M ≅ ℤ_ℓ`
+(`PadicInt.nonempty_linearEquiv_of_nat_card`).
 -/
 
 @[expose] public section
@@ -74,13 +82,7 @@ theorem nat_card_finiteAdicH_two_mul {k : Type u} [Field k] [IsAlgClosed k] {X :
 
 /-- **Top-degree `ℓ`-adic cohomology.** For `a : X ⟶ Spec k` proper, smooth of relative
 dimension `d` and geometrically connected over an algebraically closed field `k` in which `ℓ` is
-invertible, `H^{2d}(X_proét, ℤ_ℓ) ≅ ℤ_ℓ` as `ℤ_ℓ`-modules.
-
-`M = H^{2d}(X_proét, ℤ_ℓ)` is a finitely generated `ℤ_ℓ`-module
-(`AlgebraicGeometry.ProEtale.module_finite_integralAdicH`). As `H^{2d+1}(X_proét, ℤ_ℓ) = 0`, the
-Bockstein sequence identifies `M / ℓᵐ M` with `H^{2d}(X_proét, ℤ/ℓᵐ)`, which has `ℓᵐ` elements
-(`AlgebraicGeometry.ProEtale.nat_card_finiteAdicH_two_mul`); this forces `M ≅ ℤ_ℓ`
-(`PadicInt.nonempty_linearEquiv_of_nat_card`). -/
+invertible, `H^{2d}(X_proét, ℤ_ℓ) ≅ ℤ_ℓ` as `ℤ_ℓ`-modules. -/
 theorem nonempty_linearEquiv_integralAdicH_two_mul {k : Type u} [Field k] [IsAlgClosed k]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) (d : ℕ) [IsProper a] [SmoothOfRelativeDimension d a]
     [GeometricallyConnected a] (l : ℕ) [Fact l.Prime] (hl : (l : k) ≠ 0) :
