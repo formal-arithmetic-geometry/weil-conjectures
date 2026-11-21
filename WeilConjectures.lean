@@ -21038,6 +21038,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.DoubleDual
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Duality
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHomGeneric
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Restriction
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.SeparatedDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBidualityInduction
