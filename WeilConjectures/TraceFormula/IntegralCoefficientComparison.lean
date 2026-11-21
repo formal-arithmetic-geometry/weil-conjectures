@@ -275,9 +275,9 @@ lemma toPadicAlgCl_extendScalars_map_upperStarComp_hom_app (x : Z ⟶ Y) (h : Y 
     ((e₃ =≫ _).trans (Category.assoc _ _ _))).symm
 
 /-- **The pullback comparison commutes with composition** (on bounded constructible
-complexes, for `𝒪_E ⟶ ℚ̄_ℓ`): for `x : Z ⟶ Y` and `h : Y ⟶ X`, the comparison `T L(x ≫ h)^* ≅ L(x ≫ h)^* T`
-followed by `L(x ≫ h)^* ≅ Lx^* Lh^*` is `T` of the composition isomorphism followed by the
-comparisons for `x` and `h`. -/
+complexes, for `𝒪_E ⟶ ℚ̄_ℓ`): for `x : Z ⟶ Y` and `h : Y ⟶ X`, the comparison
+`T L(x ≫ h)^* ≅ L(x ≫ h)^* T` followed by `L(x ≫ h)^* ≅ Lx^* Lh^*` is `T` of the composition
+isomorphism followed by the comparisons for `x` and `h`. -/
 theorem integersToPadicAlgCl_map_upperStarComp_hom_app (x : Z ⟶ Y) (h : Y ⟶ X)
     (K : Dᵇc(X.left)⟦𝒪⟧) :
     (𝐓 Z).map ((boundedConstructibleUpperStarComp 𝒪 ℓ x h).hom.app K) ≫
@@ -392,8 +392,9 @@ theorem integersToPadicAlgCl_map_unit_app (h : Y ⟶ X) (K : Dᵇc(X.left)⟦�
   simp only [← hn, reassoc_of% h₁]
   exact h₂
 
-/-- **`Rh_! ≅ Rh_*` commutes with the coefficient comparisons** for a proper `h`: the comparison `T Rh_! ≅ Rh_! T` corresponds to the comparison
-`T Rh_* ≅ Rh_* T` under the identifications `Rh_! ≅ Rh_*` over `𝒪_E` and over `ℚ̄_ℓ`. -/
+/-- **`Rh_! ≅ Rh_*` commutes with the coefficient comparisons** for a proper `h`: the
+comparison `T Rh_! ≅ Rh_! T` corresponds to the comparison `T Rh_* ≅ Rh_* T` under the
+identifications `Rh_! ≅ Rh_*` over `𝒪_E` and over `ℚ̄_ℓ`. -/
 theorem integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app (h : Y ⟶ X) [IsProper h.left]
     (M : Dᵇc(Y.left)⟦𝒪⟧) :
     (𝐓 X).map ((boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E.1 h).inv.app M) ≫
@@ -402,10 +403,10 @@ theorem integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app (h : Y ⟶ X) [
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h).inv.app ((𝐓 Y).obj M) := by
   sorry
 
-/-- **The compactly supported comparison commutes with composition** (for `𝒪_E ⟶ ℚ̄_ℓ`): for `f : Y ⟶ X` and
-`g : X ⟶ Z`, the comparison `T R(f ≫ g)_! ≅ R(f ≫ g)_! T` followed by the composition isomorphism
-`R(f ≫ g)_! ≅ Rg_! Rf_!` is `T` of the composition isomorphism followed by the comparisons for `g`
-and `f`. -/
+/-- **The compactly supported comparison commutes with composition** (for `𝒪_E ⟶ ℚ̄_ℓ`):
+for `f : Y ⟶ X` and `g : X ⟶ Z`, the comparison `T R(f ≫ g)_! ≅ R(f ≫ g)_! T` followed by the
+composition isomorphism `R(f ≫ g)_! ≅ Rg_! Rf_!` is `T` of the composition isomorphism followed
+by the comparisons for `g` and `f`. -/
 theorem integersToPadicAlgCl_map_lowerShriekComp_hom_app (f : Y ⟶ X) (g : X ⟶ Z)
     (M : Dᵇc(Y.left)⟦𝒪⟧) :
     (𝐓 Z).map ((boundedConstructibleLowerShriekComp_padicIntegers ℓ E.1 f g).hom.app M) ≫
@@ -418,8 +419,8 @@ theorem integersToPadicAlgCl_map_lowerShriekComp_hom_app (f : Y ⟶ X) (g : X �
   sorry
 
 /-- The comparison `Rf_! ⋙ T_X ≅ T_Y ⋙ Rf_!` of the compactly supported direct images along
-`𝒪_E ⟶ ℚ̄_ℓ` (`boundedConstructibleLowerShriekIntegersToPadicAlgClIso`), with the extension of scalars written as
-`T = boundedConstructibleIntegersToPadicAlgCl`. -/
+`𝒪_E ⟶ ℚ̄_ℓ` (`boundedConstructibleLowerShriekIntegersToPadicAlgClIso`), with the extension of
+scalars written as `T = boundedConstructibleIntegersToPadicAlgCl`. -/
 noncomputable def lowerShriekIntegersToPadicAlgClIso (f : Y ⟶ X) :
     PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E.1 f ⋙ 𝐓 X ≅
       𝐓 Y ⋙ boundedConstructibleLowerShriek ℓ f :=

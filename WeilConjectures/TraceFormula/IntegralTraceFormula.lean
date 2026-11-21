@@ -37,12 +37,12 @@ integral formula is deduced from it by the extension of scalars
 
 * `T` is braided monoidal on the point, so it carries traces to traces through the ring map
   `ρ_T : End(𝟙) ⟶ End(𝟙)` it induces on the endomorphisms of the units
-  (`CategoryTheory.Functor.trace_eq_unitEndRingHom_trace`); on the separably closed point this map is the inclusion
-  `𝒪_E ⊆ ℚ̄_ℓ`, hence injective
+  (`CategoryTheory.Functor.trace_eq_unitEndRingHom_trace`); on the separably closed point this
+  map is the inclusion `𝒪_E ⊆ ℚ̄_ℓ`, hence injective
   (`ProEtale.CondensedRing.injective_unitEndRingHom_boundedConstructibleIntegersToPadicAlgCl`);
 * `T` commutes with `RΓ_c`, with the pullbacks and with the operators `h^♯`
-  (`ProEtale.CondensedRing.integersToPadicAlgCl_map_compactPullback_app`), so it carries the global operator and the
-  stalk maps of `θ` to those of the `ℚ̄_ℓ`-coefficient map `ψ = T θ`.
+  (`ProEtale.CondensedRing.integersToPadicAlgCl_map_compactPullback_app`), so it carries the
+  global operator and the stalk maps of `θ` to those of the `ℚ̄_ℓ`-coefficient map `ψ = T θ`.
 
 Applying `ρ_T` to both sides of the integral formula therefore gives the two sides of the
 `ℚ̄_ℓ`-formula for `(T K, ψ)`.
