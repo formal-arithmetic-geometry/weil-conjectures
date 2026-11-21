@@ -19,8 +19,7 @@ For étale `e : V' ⟶ V`, `g : V ⟶ B` and `g' = e ≫ g`, the identification 
 isomorphism `R(g')_! ≅ R(e)_! ⋙ R(g)_!` under the adjunctions `R(e)_! ⊣ Le^*` and
 `R(g)_! ⊣ Rg^!`. This file shows that these identifications, and hence the identifications of
 section invariants `𝒞(g', s') ≅ 𝒞(g, s)` (`AlgebraicGeometry.Etale.sectionInvariantEtaleIso`),
-are compatible with composition and identities: clause `--8` of
-`lemma-naturality-under-base-change-etale`, for Noetherian schemes.
+are compatible with composition and identities, for Noetherian schemes.
 
 ## Main statements
 
@@ -42,8 +41,9 @@ isomorphisms of `D(-)_!` and of `R(-)_!`
 `D(-)_!` is conjugate to that of the levelwise pullbacks
 (`AlgebraicGeometry.Etale.etaleSumCompositionCounit`). Both inputs, and the associativity of
 `R(-)_!` (`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso_assoc`), are stated for
-Noetherian schemes. The identity case follows from the composition case, since the
-identification along `𝟙` is then an idempotent isomorphism.
+Noetherian schemes. The identity case follows from the composition case
+(`AlgebraicGeometry.Etale.sectionInvariantEtaleIso_comp`), since the identification along `𝟙`
+is then an idempotent isomorphism.
 -/
 
 @[expose] public section
@@ -407,8 +407,7 @@ theorem sectionInvariantEtaleIso_comp [IsNoetherian V''] [IsNoetherian V'] [IsNo
   erw [reassoc_of% n]
   rfl
 
-/-- The identification of section invariants along the identity is the identity: by
-`AlgebraicGeometry.Etale.sectionInvariantEtaleIso_comp` it is an idempotent isomorphism. -/
+/-- The identification of section invariants along the identity is the identity. -/
 theorem sectionInvariantEtaleIso_id [IsNoetherian V] [IsNoetherian B] (g : V ⟶ B)
     [HasCompactification g] [QuasiCompact g] [HasCompactification (𝟙 V)] (s : B ⟶ V) :
     sectionInvariantEtaleIso Λ (𝟙 V) g g (Category.id_comp g) s s (Category.comp_id s) =
