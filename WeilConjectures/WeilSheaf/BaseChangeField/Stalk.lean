@@ -34,7 +34,7 @@ Frobenius of `F` at `x`.
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.baseChangeField`: the restriction of a
   punctually pure Weil sheaf to `X_K` is punctually pure of the same weight.
 
-## Implementation notes
+## Implementation details
 
 The kernel compares two congruence isomorphisms `(g)_* ≅ (g')_*` along a non-definitional
 equation `g = g'` by unfolding them, which does not terminate in reasonable time unless they are

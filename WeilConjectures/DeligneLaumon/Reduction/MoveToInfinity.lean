@@ -365,8 +365,7 @@ private theorem exists_lisseOnDenseOpen_of_surjective {K : Type u} [Field K] [Fi
 weight `w`. There are a finite extension `K` of `k₀`, a dense open `V₀` of the affine line `𝔸¹_K`
 with a lisse Weil sheaf `G` on it, punctually `ι`-pure of weight `w` and unramified at infinity,
 and a surjection `H_c^1(V, G) ↠ H_c^1(W, F)` carrying the geometric Frobenius of `K` to the
-`[K : k₀]`-th power of that of `k₀`.
-(blueprint: `lemma-finite-extension-base-field-moving`) -/
+`[K : k₀]`-th power of that of `k₀`. -/
 theorem exists_surjective_compactlySupportedCohomology_one_of_projectiveLine
     (ι : PadicAlgCl l →+* ℂ) {W : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))] [Nonempty W]
     (c : W ⟶ ProjectiveLine (Spec (CommRingCat.of k₀))) [IsOpenImmersion c]

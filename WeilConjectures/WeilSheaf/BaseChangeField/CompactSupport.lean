@@ -22,8 +22,15 @@ type. A finite extension of the constant field does not change the geometric sch
 `X_K = X ×_{k₀} K` (`AlgebraicGeometry.WeilSheaf.baseChangeField`) has
 `H_c^r(X_K ⊗_K k̄, F_K) = H_c^r(X ⊗_{k₀} k̄, F)`, with the Frobenius of `K` acting as `Fᵐ`.
 
+## Main definitions
+
+- `AlgebraicGeometry.WeilSheaf.baseChangeFieldSpec`: the restriction of pro-étale Weil sheaves on
+  `Spec k₀` to `Spec K`.
+
 ## Main statements
 
+- `AlgebraicGeometry.WeilSheaf.nonempty_derivedLowerShriek_baseChangeField_iso`: `R(f_K)_! F_K`
+  is the restriction of `Rf_! F` to `Spec K`.
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_baseChangeField`.
 
 ## Implementation details
@@ -65,20 +72,44 @@ namespace WeilSheaf
 
 open ProEtaleWeilSheaf Scheme.Hom
 
-variable [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X}
+omit [X.Over (Spec (CommRingCat.of k₀))] in
+/-- The cartesian square exhibiting `Spec K` as the base change of `Spec k₀` along
+`Spec K ⟶ Spec k₀`. -/
+lemma isPullback_spec_baseChangeField :
+    IsPullback (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))
+      (Spec (CommRingCat.of K) ↘ Spec (CommRingCat.of K))
+      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
+      (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))) :=
+  IsPullback.id_vert _
+
+variable [Finite k₀] (l : ℕ) [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] [Finite K]
+  [Fact (ringChar K ≠ l)]
+
+/-- The restriction of pro-étale Weil sheaves on `Spec k₀` to `Spec K`, for a finite extension
+`K` of `k₀`: the transport along the identification of the geometric fibers, under which the
+geometric Frobenius of `K` is the `[K : k₀]`-th power of that of `k₀`. -/
+noncomputable abbrev baseChangeFieldSpec :
+    ProEtaleWeilSheaf k₀ l (Spec (CommRingCat.of k₀)) ⥤
+      ProEtaleWeilSheaf K l (Spec (CommRingCat.of K)) :=
+  ProEtaleWeilSheaf.transport (geometricFiberBaseChangeIso (isPullback_spec_baseChangeField K))
+    (Module.finrank k₀ K) (geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius _ _
+      Module.natCard_eq_pow_finrank)
+
+variable {l} {X}
   [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [Finite K] [Fact (ringChar K ≠ l)]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- **Compactly supported cohomology under a finite extension of the base field.** Let `K` be a
-finite extension of `k₀` of degree `m` and `F` a Weil sheaf on a separated `k₀`-scheme `X` of
-finite type. The compactly supported cohomology `H_c^r(X_K ⊗_K k̄, F_K)` of the restriction
-`F_K` of `F` to `X_K = X ×_{k₀} K` is `H_c^r(X ⊗_{k₀} k̄, F)`, with the geometric Frobenius of
-`K` acting as the `m`-th power of that of `k₀`. -/
-theorem nonempty_equiv_compactlySupportedCohomology_baseChangeField (F : WeilSheaf k₀ l X)
-    (r : ℤ) :
-    Nonempty ((((baseChangeField K).obj F).compactlySupportedCohomology r).Equiv
-      ((F.compactlySupportedCohomology r).powFrobenius (Module.finrank k₀ K))) := by
+/-- **Compactly supported direct image under a finite extension of the base field.** Let `K` be a
+finite extension of `k₀` and `F` a Weil sheaf on a separated `k₀`-scheme `X` of finite type.
+The derived direct image with compact support `R(f_K)_! F_K` of the restriction `F_K` of `F` to
+`X_K = X ×_{k₀} K` is the restriction to `Spec K` of `Rf_! F`. -/
+theorem nonempty_derivedLowerShriek_baseChangeField_iso (F : WeilSheaf k₀ l X) :
+    Nonempty (((WeilComplex.derivedLowerShriek K l
+      (X.baseChangeField k₀ K ↘ Spec (CommRingCat.of K))).obj
+        (toComplex.obj ((baseChangeField K).obj F))).obj ≅
+      (baseChangeFieldSpec K l).mapDerivedCategory.obj ((WeilComplex.derivedLowerShriek k₀ l
+        (X ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F)).obj) := by
   set m := Module.finrank k₀ K
   have hm : Nat.card K = Nat.card k₀ ^ m := Module.natCard_eq_pow_finrank
   -- a compactification `X ⟶ Z ⟶ Spec k₀` and its base change `X_K ⟶ Z_K ⟶ Spec K`
@@ -101,29 +132,24 @@ theorem nonempty_equiv_compactlySupportedCohomology_baseChangeField (F : WeilShe
     hiK.symm
   obtain ⟨e₀⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_ι_iso (k₀ := k₀) (l := l) i g hgi
   -- the identifications of the geometric fibers
-  have hS : IsPullback (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))
-      (Spec (CommRingCat.of K) ↘ Spec (CommRingCat.of K))
-      (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀))
-      (Spec.map (CommRingCat.ofHom (algebraMap k₀ K))) :=
-    IsPullback.id_vert _
   let θ := geometricFiberBaseChangeIso (isPullback_baseChangeField (k₀ := k₀) X K)
   let θZ := geometricFiberBaseChangeIso (isPullback_baseChangeField (k₀ := k₀) Z K)
-  let θS := geometricFiberBaseChangeIso hS
+  let θS := geometricFiberBaseChangeIso (isPullback_spec_baseChangeField (k₀ := k₀) K)
   have hθ := geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius
     (isPullback_baseChangeField (k₀ := k₀) X K) m hm
   have hθZ := geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius
     (isPullback_baseChangeField (k₀ := k₀) Z K) m hm
-  have hθS := geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius hS m hm
+  have hθS := geometricFiberBaseChangeIso_hom_comp_geometricGaloisFrobenius
+    (isPullback_spec_baseChangeField (k₀ := k₀) K) m hm
   have hsqi := geometricFiberBaseChangeIso_hom_comp_geometricFiberMap
     (isPullback_baseChangeField (k₀ := k₀) X K) (isPullback_baseChangeField (k₀ := k₀) Z K)
     (φ := i) (comp_over i _) (φ' := iK) (comp_over iK _) (pullback.lift_fst _ _ _)
   have hsqg := geometricFiberBaseChangeIso_hom_comp_geometricFiberMap
-    (isPullback_baseChangeField (k₀ := k₀) Z K) hS (φ := g) (Category.comp_id _) (φ' := gK)
-    (Category.comp_id _) pullback.condition.symm
+    (isPullback_baseChangeField (k₀ := k₀) Z K) (isPullback_spec_baseChangeField (k₀ := k₀) K)
+    (φ := g) (Category.comp_id _) (φ' := gK) (Category.comp_id _) pullback.condition.symm
   let T := ProEtaleWeilSheaf.transport (l := l) θ m hθ
   let TZ := ProEtaleWeilSheaf.transport (l := l) θZ m hθZ
   let TS := ProEtaleWeilSheaf.transport (l := l) θS m hθS
-  -- `Rf_K! F_K ≅ T_S (Rf_! F)`
   let β : ((WeilComplex.derivedLowerShriek K l
       (X.baseChangeField k₀ K ↘ Spec (CommRingCat.of K))).obj
         (toComplex.obj ((baseChangeField K).obj F))).obj ≅
@@ -138,16 +164,30 @@ theorem nonempty_equiv_compactlySupportedCohomology_baseChangeField (F : WeilShe
         (Functor.mapDerivedCategoryCompIso _ TZ).symm.app _) ≪≫
       (transportRightDerivedLowerStarIso θZ m hθZ θS hθS g gK hsqg).app _ ≪≫
       TS.mapDerivedCategory.mapIso (e₀.app (toComplex.obj F)).symm
+  exact ⟨β⟩
+
+/-- **Compactly supported cohomology under a finite extension of the base field.** Let `K` be a
+finite extension of `k₀` of degree `m` and `F` a Weil sheaf on a separated `k₀`-scheme `X` of
+finite type. The compactly supported cohomology `H_c^r(X_K ⊗_K k̄, F_K)` of the restriction
+`F_K` of `F` to `X_K = X ×_{k₀} K` is `H_c^r(X ⊗_{k₀} k̄, F)`, with the geometric Frobenius of
+`K` acting as the `m`-th power of that of `k₀`. -/
+theorem nonempty_equiv_compactlySupportedCohomology_baseChangeField (F : WeilSheaf k₀ l X)
+    (r : ℤ) :
+    Nonempty ((((baseChangeField K).obj F).compactlySupportedCohomology r).Equiv
+      ((F.compactlySupportedCohomology r).powFrobenius (Module.finrank k₀ K))) := by
+  obtain ⟨β⟩ := nonempty_derivedLowerShriek_baseChangeField_iso K F
   let α : ((WeilComplex.homologySheaf r).obj ((WeilComplex.derivedLowerShriek K l
       (X.baseChangeField k₀ K ↘ Spec (CommRingCat.of K))).obj
         (toComplex.obj ((baseChangeField K).obj F)))).obj ≅
-      TS.obj ((WeilComplex.homologySheaf r).obj ((WeilComplex.derivedLowerShriek k₀ l
-        (X ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F))).obj :=
+      (baseChangeFieldSpec K l).obj ((WeilComplex.homologySheaf r).obj
+        ((WeilComplex.derivedLowerShriek k₀ l
+          (X ↘ Spec (CommRingCat.of k₀))).obj (toComplex.obj F))).obj :=
     (DerivedCategory.homologyFunctor _ r).mapIso β ≪≫
-      (TS.mapDerivedCategoryHomologyFunctorIso r).symm.app _
-  obtain ⟨e, he⟩ := exists_linearEquiv_globalSections_of_iso_transport θS m hθS _ _ α
+      ((baseChangeFieldSpec K l).mapDerivedCategoryHomologyFunctorIso r).symm.app _
+  obtain ⟨e, he⟩ := exists_linearEquiv_globalSections_of_iso_transport
+    (geometricFiberBaseChangeIso (isPullback_spec_baseChangeField K)) _ _ _ _ α
   exact ⟨⟨e, fun x ↦ (he x).trans
-    (LinearMap.congr_fun (FrobeniusModule.powFrobenius_frobeniusEnd _ m).symm (e x))⟩⟩
+    (LinearMap.congr_fun (FrobeniusModule.powFrobenius_frobeniusEnd _ _).symm (e x))⟩⟩
 
 end WeilSheaf
 
