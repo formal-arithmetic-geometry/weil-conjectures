@@ -261,8 +261,10 @@ theorem exists_tStructure_of_punctual
       ∀ (G : WeilSheaf k₀ l X) (i : G ⟶ Q), Mono i → G.support.Finite → IsZero G := by
     obtain ⟨P, i, _, hP, hQ⟩ := hX F
     refine ⟨cokernel i, cokernel.π i, inferInstance, ?_, hQ⟩
-    rwa [WeilSheaf.support_congr (IsLimit.conePointUniqueUpToIso (kernelIsKernel _)
-      (Abelian.monoIsKernelOfCokernel _ (cokernelIsCokernel i)))]
+    let S := ShortComplex.mk i (cokernel.π i) (cokernel.condition i)
+    have : Epi (kernel.lift _ _ S.zero) :=
+      (S.exact_of_g_is_cokernel (cokernelIsCokernel i)).epi_kernelLift
+    exact hP.subset (WeilSheaf.support_subset_of_epi (kernel.lift _ _ S.zero))
   let t : TStructure (WeilComplex k₀ l X) :=
     { le n := IsCurvePerverseLE n
       ge n := IsCurvePerverseGE n
