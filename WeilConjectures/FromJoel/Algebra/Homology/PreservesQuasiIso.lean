@@ -19,7 +19,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
 Migrated from `Mathlib/Algebra/Homology/PreservesQuasiIso.lean`
 on the branch `jriou_localization` of Joël Riou's mathlib fork
 (leanprover-community/mathlib4#25848), adapted to mathlib `v4.33.1`.
-
 -/
 
 @[expose] public section

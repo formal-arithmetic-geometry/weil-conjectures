@@ -39,7 +39,6 @@ These are the topological input to Chow's lemma (Stacks Project Tag 0200, Step 1
 The key geometric ingredient is
 `AlgebraicGeometry.IsAffineOpen.exists_mem_basicOpen_and_disjoint`, the scheme-theoretic form of
 Stacks Project Tag 00EV.
-
 -/
 
 /-!

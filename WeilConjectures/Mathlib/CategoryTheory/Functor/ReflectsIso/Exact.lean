@@ -32,7 +32,6 @@ the three criteria apply to a pair of functors out of the box.
   epimorphism by every member of the family is an epimorphism.
 - `CategoryTheory.JointlyReflectIsomorphisms.exactFunctor_of_iso`: a functor which becomes
   exact after a jointly conservative family of exact functors is exact.
-
 -/
 
 @[expose] public section

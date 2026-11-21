@@ -45,7 +45,6 @@ terms, in particular when a natural transformation is applied to two spellings o
 The abstract statement therefore takes all heavy data as variables, they are passed in the
 spelling of the goal (including the instance arguments of the triangle of factorizations), and
 the two remaining identifications are left to the kernel with `exact_by_kernel`.
-
 -/
 
 @[expose] public section

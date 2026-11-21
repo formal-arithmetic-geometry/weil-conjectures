@@ -17,7 +17,6 @@ public import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
   the unit can be applied in either order.
 - `CategoryTheory.MonoidalCategory.whiskerRight_injective_of_tensorIso`: if `X ⊗ Y ≅ 𝟙_ C`,
   then `- ▷ X` is injective on morphisms.
-
 -/
 
 @[expose] public section

@@ -30,7 +30,6 @@ points is again finite étale over `R`, and compute its geometric points.
 
 - `AlgHom.tensorFixedPointsEquiv`: base change along a flat algebra commutes with taking fixed
   points.
-
 -/
 
 @[expose] public section

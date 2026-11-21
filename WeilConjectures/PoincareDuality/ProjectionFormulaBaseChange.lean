@@ -60,7 +60,6 @@ As in `WeilConjectures.TraceFormula.KunnethVerdierOpen`, the projection of the m
 instance is made the preferred tensor structure, and the composition law of the projection
 formula is restated accordingly
 (`ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp_of_eq'`).
-
 -/
 
 @[expose] public section

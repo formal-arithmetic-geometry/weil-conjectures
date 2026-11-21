@@ -20,7 +20,8 @@ Source: Stacks Project, Tag 03QW, discussion of the action on geometric stalks.
 
 universe u
 
-/--Source: Stacks Project, Tag 03QW, construction of the Galois action on stalks. -/
+/-- Every automorphism of a separable closure `Ks` of `K` extends to a `K`-automorphism of an
+algebraically closed extension `Ω` of `Ks`. Source: Stacks Project, Tag 03QW. -/
 theorem exists_algEquiv_extending_separableClosure
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]

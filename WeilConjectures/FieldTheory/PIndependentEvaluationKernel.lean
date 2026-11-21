@@ -25,9 +25,7 @@ universe u v w
 
 namespace MvPolynomial
 
-/--Source: Stacks Project, More on Algebra, Tag 07P2, presentation argument in (a) implies (b).
-
-Put B = kK^p. If the bounded monomials in t are B-linearly independent, the
+/-- Put B = kK^p. If the bounded monomials in t are B-linearly independent, the
 kernel of evaluation B[X_i] → K is stable under every formal partial derivative. -/
 theorem aeval_pderiv_eq_zero_of_pIndependent
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]

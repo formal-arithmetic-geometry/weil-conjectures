@@ -56,7 +56,6 @@ The comparisons of factorizations are typed by `i_! ⋙ Rp_*` and those of compa
 elaborated on either side is compared by the kernel by unfolding it completely; the two typings are
 therefore related only for a variable natural transformation
 (`natTrans_app_whiskerRight_comp_homMk_exceptionalProjectionMorphismOfCompactification`).
-
 -/
 
 @[expose] public section

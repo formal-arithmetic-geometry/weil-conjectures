@@ -24,7 +24,6 @@ retracts, `x` is invertible if `π` is (`CategoryTheory.isIso_of_comp_eq_of_retr
   `x ≫ a = δ ≫ t ≫ π` with `δ` and `π` invertible.
 * `CategoryTheory.IsTensorRetract.isSquareRetract`: in a monoidal category, a retraction of `u₁`
   and an invertible `u₂` give a retraction of `u₁ ⊗ u₂`.
-
 -/
 
 @[expose] public section

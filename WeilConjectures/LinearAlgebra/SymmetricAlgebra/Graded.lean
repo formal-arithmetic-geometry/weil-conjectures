@@ -116,8 +116,8 @@ theorem graded_image_internal (R : Type u) (M : Type v) [CommRing R]
   let h : GradedAlgebra D := GradedAlgebra.ofAlgHom D g hleft hg
   exact DirectSum.Decomposition.isInternal D
 
-/--Source: Stacks Project, Algebra, Section 00DM, and the universal-property construction of
- `graded_image_internal`. -/
+/-- The kernel of `TensorAlgebra R M → SymmetricAlgebra R M` is the internal direct sum of its
+intersections with the tensor powers of `M`. Source: Stacks Project, Section 00DM. -/
 theorem graded_kernel_internal (R : Type u) (M : Type v) [CommRing R]
     [AddCommGroup M] [Module R M] :
     DirectSum.IsInternal (fun n : ℕ =>
@@ -178,7 +178,9 @@ theorem graded_image_mul (R : Type u) (M : Type v) [CommRing R]
   intro n m
   rw [← Submodule.map_mul, ← pow_add]
 
-/--Source: Stacks Project, Algebra, Section 00DM. -/
+/-- The kernel of `TensorAlgebra R M → SymmetricAlgebra R M` is graded by its intersections with
+the tensor powers of `M`, and the images of the tensor powers grade the symmetric algebra.
+Source: Stacks Project, Section 00DM. -/
 theorem graded_by_tensor_images (R : Type u) (M : Type v)
     [CommRing R] [AddCommGroup M] [Module R M] :
     DirectSum.IsInternal (fun n : ℕ =>

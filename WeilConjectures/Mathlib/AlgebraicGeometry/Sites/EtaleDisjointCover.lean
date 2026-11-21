@@ -16,7 +16,6 @@ many pairwise disjoint subobjects `W i ⟶ V` to the product of the `G (W i)`
 reads `G V ≅ ∏ G (W i)` because any two morphisms `Z ⟶ W i`, `Z ⟶ W j` agreeing on `V` are
 either equal (`i = j`, the `W i ⟶ V` being monomorphisms) or have empty source (`i ≠ j`),
 where `G` has terminal sections.
-
 -/
 
 @[expose] public section

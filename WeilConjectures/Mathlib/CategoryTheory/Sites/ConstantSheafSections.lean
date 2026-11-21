@@ -25,7 +25,6 @@ locally surjective. For the constant presheaf at `N : A` this gives:
 - over an object `U` which is not covered by the empty sieve, the map `N ⟶ N_C(U)` is
   injective (`CategoryTheory.GrothendieckTopology.toSheafify_const_app_injective`), the
   constant presheaf having identity restriction maps.
-
 -/
 
 @[expose] public section

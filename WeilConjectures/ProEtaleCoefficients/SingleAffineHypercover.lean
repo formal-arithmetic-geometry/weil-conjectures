@@ -77,8 +77,8 @@ open AlgebraicGeometry.Scheme.ProEt
 open scoped Simplicial
 
 set_option backward.isDefEq.respectTransparency false in
-/--Source: Stacks Project, Tag 09A1; Hypercoverings Tags 094K, 0DAV and 0DB2.
--/
+/-- A quasi-compact quasi-separated object `U` of the pro-étale site of `X` has a hypercover by
+single affine w-contractible objects. Source: Stacks Project, Tags 09A1, 094K, 0DAV and 0DB2. -/
 theorem exists_single_affine_wContractible_hypercover
     (X : Scheme.{u}) (U : X.ProEt) (hUqc : CompactSpace U.left)
     (hUqs : QuasiSeparatedSpace U.left) :

@@ -25,18 +25,18 @@ variable {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
   (c : Scheme.GaloisCover (ULift.{u + 1} P) V)
   (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
 
-/-- The torsor as an object of the small etale site. 
+/-- The torsor as an object of the small etale site.
 -/
 abbrev sectionObject : V.Etale :=
   have := c.etale
   Etale.mk c.π
 
-/-- Deck transformations acting on the site object. 
+/-- Deck transformations acting on the site object.
 -/
 def sectionDeck (g : P) : c.sectionObject ⟶ c.sectionObject :=
   MorphismProperty.Over.homMk (c.smul ⟨g⟩) (c.smul_π ⟨g⟩)
 
-/-- The sections over the cover, with scalars transported to the unlifted field. 
+/-- The sections over the cover, with scalars transported to the unlifted field.
 -/
 noncomputable abbrev sectionModule : ModuleCat.{u + 1} (ZMod ℓ) :=
   (ModuleCat.restrictScalars
@@ -66,7 +66,7 @@ noncomputable def sectionRepresentation : Rep.{u + 1} (ZMod ℓ) P :=
         simp only [mul_inv_rev, hd, op_comp, Functor.map_comp]
         rfl }
 
-/-- The coefficient-lifted equivariant section presheaf for the canonical representation. 
+/-- The coefficient-lifted equivariant section presheaf for the canonical representation.
 -/
 noncomputable abbrev sectionRepresentationPresheaf :
     V.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)) :=
@@ -75,7 +75,7 @@ noncomputable abbrev sectionRepresentationPresheaf :
       (ULift.ringEquiv.toRingHom : ULift.{u + 1} (ZMod ℓ) →+* ZMod ℓ)
 
 /-- The diagonal normalization of the evaluation map: a section over the torsor evaluates
-at each diagonal point to itself. 
+at each diagonal point to itself.
 -/
 def SectionEvaluationNormalized
     (α : F.obj ⟶ c.sectionRepresentationPresheaf ℓ F) : Prop :=

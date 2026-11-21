@@ -73,7 +73,6 @@ The isomorphism `γ` is the conjugate of the composition isomorphism of lower sh
 **Constructible biduality**, `δ_K` an isomorphism for every bounded constructible `K`
 (`ProEtale.CondensedRing.isIso_verdierBiduality`), is proved in
 `WeilConjectures.PoincareDuality.Biduality.Constructible`, by reduction to finite coefficients.
-
 -/
 
 @[expose] public section

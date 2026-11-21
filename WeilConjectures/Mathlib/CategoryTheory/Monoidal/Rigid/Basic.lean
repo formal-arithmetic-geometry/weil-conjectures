@@ -51,7 +51,6 @@ two-sided tensor inverse (`CategoryTheory.IsInvertible.isDualizable`).
   left dual of `X`.
 - `CategoryTheory.MonoidalClosed.isIso_ihomTensorToIhom`: the comparison map
   `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism when `N` is invertible.
-
 -/
 
 @[expose] public section

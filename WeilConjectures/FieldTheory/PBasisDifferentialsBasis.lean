@@ -25,9 +25,8 @@ universe u v w
 
 namespace KaehlerDifferential
 
-/--Source: Stacks Project, Tags 07P1 and 07P2, implication (a) implies (b).
-
-The differentials of a p-basis form a basis of the relative differentials. -/
+/-- The differentials of a p-basis form a basis of the relative differentials.
+Source: Stacks Project, Tags 07P1 and 07P2. -/
 theorem exists_basis_differentials_of_pBasis
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]
     (p : ℕ) [Fact p.Prime] [CharP k p] [CharP K p]

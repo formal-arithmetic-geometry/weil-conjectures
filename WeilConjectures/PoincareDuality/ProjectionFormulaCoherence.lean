@@ -30,7 +30,6 @@ For a proper morphism `f`, the exceptional projection morphism
 
 They are proved in `WeilConjectures.PoincareDuality.ProjectionFormulaProper` (the first and the
 last) and `WeilConjectures.PoincareDuality.ProjectionFormulaComposition` (composition).
-
 -/
 
 @[expose] public section
