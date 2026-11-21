@@ -90,7 +90,7 @@ every geometric stalk is killed by a positive integer. Torsion refers to the und
 abelian group of the stalk, not to its `Λ`-module structure; for `Λ = ℤ` this is the
 classical notion of a torsion abelian sheaf [Stacks 03SA].
 
-This is the notion of torsion sheaf of blueprint `def-weil-pbc-etale-sheaves`, phrased with
+This is the notion of torsion sheaf of blueprint `definition-torsion-sheaves--1`, phrased with
 geometric stalks, which the blueprint notes is equivalent to local killing of sections. -/
 class Scheme.IsTorsionModuleSheaf {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
@@ -200,8 +200,8 @@ lemma Scheme.IsTorsionModuleSheaf.of_isTorsionSheafOfInvertibleOrder
 /-- A sheaf `F` of `Λ`-modules on the small étale site of `X` is *`P`-torsion*, for a set `P`
 of primes, if every element of every geometric stalk of `F` is killed by a positive integer all
 of whose prime divisors lie in `P`. This is the condition on the cohomology sheaves in the
-categories with allowable torsion of blueprint `sbc-def-derived-categories-with-allowable-torsion`
-and `sk-def-sf-categories`. -/
+categories with allowable torsion of blueprint `theorem-smooth-base-change-classical-torsion-2`
+and `definition-constructible-sheaves`. -/
 class Scheme.IsTorsionSheafOfPrimes (P : Set ℕ) {Λ : Type (u + 1)} [CommRing Λ]
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
   exists_nsmul_eq_zero (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
@@ -220,7 +220,7 @@ lemma Scheme.IsTorsionModuleSheaf.of_isTorsionSheafOfPrimes (P : Set ℕ) {Λ : 
 /-- A torsion sheaf `F` of `Λ`-modules is the point of a colimit cocone over a filtered diagram
 of sheaves, each of which is killed by some positive integer.
 
-This is blueprint `lemma-weil-pbc-torsion-filtered-union`: `F` is the colimit of its
+This is blueprint `definition-torsion-sheaves--3`: `F` is the colimit of its
 `n`-torsion subsheaves `F[n] = ker (n : F ⟶ F)` over the positive integers ordered by
 divisibility, because every local section of `F` is, locally, killed by a positive integer;
 this lemma only records the existence of some such diagram, which is the form in which it is
@@ -365,7 +365,7 @@ private lemma invertibleOrderProd_nsmul_eq_zero {Λ : Type (u + 1)} [CommRing Λ
 colimit cocone over a filtered diagram of sheaves, each of which is killed by some positive
 integer `n` invertible on `S`.
 
-This is blueprint `lemma-weil-pbc-torsion-filtered-union` for the integers invertible on `S`.
+This is blueprint `definition-torsion-sheaves--3` for the integers invertible on `S`.
 The diagram is the chain of the `N_k`-torsion subsheaves `F[N_k]`, `k ∈ ℕ`, where `N_k` is the
 product of the positive integers `d ≤ k` invertible on `S`. Its colimit maps monomorphically
 to `F`, filtered colimits of sheaves being exact. It maps epimorphically too: by
@@ -508,12 +508,12 @@ lemma Etale.DerivedCategory.Plus.torsionHomologyOfPrimes_le_moduleTorsionHomolog
       Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X :=
   fun _ hK n ↦ have := hK n; .of_isTorsionSheafOfPrimes P _
 
-/-- Blueprint `sk-def-sf-categories`: Ambient categories and small subcategories.
+/-- Blueprint `definition-constructible-sheaves`: Ambient categories and small subcategories.
 
 The ambient category `D⁺_P-tor(X, Λ)` of bounded below complexes of étale sheaves of
 `Λ`-modules whose cohomology sheaves have `P`-torsion geometric stalks, for a set `P` of primes,
 as a full subcategory of `D⁺(X_ét, Λ)` (blueprint
-`sbc-def-derived-categories-with-allowable-torsion`). -/
+`theorem-smooth-base-change-classical-torsion-2`). -/
 noncomputable def Etale.DerivedCategoryPlusTorsionOfPrimes (P : Set ℕ) : Type _ :=
   (Etale.DerivedCategory.Plus.torsionHomologyOfPrimes Λ X P).FullSubcategory
 

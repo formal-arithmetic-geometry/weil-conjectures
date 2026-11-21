@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 # Height formula at a prime of a fibre ring
 
 Source: Stacks Project, Algebra, Tags 0339, 0337, 00ON and Remark 0H9M.
-(blueprint: lem-weil-pbc-flat-fiber-prime-height).
+(blueprint: proposition-proper-direct-image-constructible-complexes).
 -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ namespace RingHom
 
 /-- Height splits into a base term and a fibre term for a flat map.
 Source: Stacks Project, Algebra, proof of Tag 0339, Tag 00ON and Remark 00E6.
-(blueprint: lem-weil-pbc-flat-fiber-prime-height).
+(blueprint: proposition-proper-direct-image-constructible-complexes).
 
 Proof: Localize at p and q = Q.comap includeRight. The induced flat local
 map R_p -> S_q gives a going-down algebra. Apply the height formula of Tag 00ON

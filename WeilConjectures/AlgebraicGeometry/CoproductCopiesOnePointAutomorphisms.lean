@@ -22,7 +22,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- Permuting the summands gives every automorphism of copies of a one-point base.
-Source: blueprint lem-fd-as-cover, final split-cover example.
+Source: blueprint lemma-artin-schreier-character-sheaf, final split-cover example.
 (blueprint: new-d9-one-point-coproduct-aut)
 
 Proof: each map from the base into the coproduct lands in a single summand, since the

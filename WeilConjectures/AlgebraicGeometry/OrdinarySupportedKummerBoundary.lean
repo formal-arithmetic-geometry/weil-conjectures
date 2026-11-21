@@ -75,7 +75,7 @@ def supportedIntegralGenerator (A : Type (u + 1)) [CommRing A]
   (lowerStar AddCommGrpCat.{u + 1} i).map (ordinaryFiniteIntegralGenerator A D)
 
 /-- The canonical section of O(D), transposed from the inclusion of its ideal.
-Source: blueprint lem-amb-cartier-kummer-map, paragraph 1
+Source: blueprint lemma-cycle-class-cartier-divisor, paragraph 1
 (auxiliary; not a blueprint node). -/
 def supportedDivisorSection {D T : Scheme.{u}} (i : D ⟶ T) :
     Scheme.Modules.unit T ⟶ Scheme.Modules.dual i.ker.toModules :=
@@ -85,7 +85,7 @@ def supportedDivisorSection {D T : Scheme.{u}} (i : D ⟶ T) :
 
 /-- Restriction of the canonical divisor section, transported to the recorded frame
  torsor's ordinary-pullback interface by uniqueness of left adjoints.
-Source: blueprint lem-amb-cartier-kummer-map, paragraph 1
+Source: blueprint lemma-cycle-class-cartier-divisor, paragraph 1
 (auxiliary; not a blueprint node). -/
 def supportedDivisorSectionPullback {D T : Scheme.{u}} (i : D ⟶ T) (W : T.Opens) :
     (Scheme.Modules.pullback W.ι).obj (Scheme.Modules.unit T) ⟶
@@ -113,7 +113,7 @@ def supportedKummerChern (A : Type (u + 1)) [CommRing A] (N : ℕ)
 The lifting torsor of E at the supported section one is the frame torsor of O(D),
 and its specified section over the complementary open is sent to zero in E.
 Thus it remembers the trivialization, not merely the ordinary Picard class.
-Source: Stacks 03AJ, 03PL, 0A45 and blueprint lem-amb-cartier-kummer-map, paragraphs 1--4
+Source: Stacks 03AJ, 03PL, 0A45 and blueprint lemma-cycle-class-cartier-divisor, paragraphs 1--4
 (auxiliary; not a blueprint node). -/
 @[irreducible]
 def SupportedKummerBoundary (A : Type (u + 1)) [CommRing A] (N : ℕ)

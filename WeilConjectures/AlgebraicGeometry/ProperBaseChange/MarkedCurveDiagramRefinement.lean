@@ -23,7 +23,10 @@ import WeilConjectures.AlgebraicGeometry.Proper.ProperFibreDimensionUpperSemicon
 /-!
 # Final shrinking of an existing marked curve diagram
 
-Source: Stacks Project, Tag 0GK7, final shrinking paragraphs.
+## References
+
+* Stacks Project, Tag 0GK7, final shrinking paragraphs
+* Stacks Project, Tag 0GK7, the proper-smooth fibre and marked-open shrinking paragraphs
 -/
 
 @[expose] public section
@@ -37,28 +40,6 @@ set_option backward.isDefEq.respectTransparency false in
 be restricted to a base neighbourhood where those conditions hold everywhere.
 The output includes the cartesian comparisons with the original diagram and lifts a
 specified map whose image lies over the point. No generic diagram is constructed here.
-
-Source: Stacks Project, Tag 0GK7, the proper-smooth fibre and marked-open shrinking
-paragraphs; finite closed images descend shrinkings through the radicial cover.
-(blueprint: lem-weil-pbc-marked-curve-diagram-refinement)
-
-Proof: For each T_i, geometric connectedness is open in the proper smooth family,
-and the fibre-dimension-at-most-one locus is open by proper upper semicontinuity.
-The marked open in Y_i is smooth over T_i, so its image is open. Intersect these
-three opens. The hypotheses put every point above η in this intersection.
-Each composite T_i→V→U is finite. Apply the simultaneous finite-image shrinking
-lemma to these composites and the threefold intersections, obtaining an affine
-neighbourhood U₀ of η inside U whose inverse images lie in all those intersections.
-The specified σ maps into its inverse image because every point maps to η.
-Apply the restriction theorem to U₀. It provides U', V' and the restricted diagram.
-Base change preserves finiteness, surjectivity, etaleness, open immersions, smoothness,
-properness, and thickenings. Coproducts commute with this base change; the original
-commuting triangles restrict to the new ones. The three chosen loci give precisely
-the asserted fibre conditions and marked surjectivity. Since the marked open is
-contained in Y'_i, the latter surjectivity also gives surjectivity of Y'_i→T'_i.
-All comparison squares are restriction pullback squares. The specified map σ lifts
-uniquely because its image lies in V'. If n=0, take U'=U and all restrictions at the
-top open; all component conditions are vacuous. No reducedness or genericity is needed.
 -/
 theorem exists_marked_curve_diagram_refinement
     {X S V Z : Scheme.{u}} (f : X ⟶ S) (U : S.Opens) (η : S) (hη : η ∈ U)

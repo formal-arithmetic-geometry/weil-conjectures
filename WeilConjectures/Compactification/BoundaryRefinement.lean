@@ -14,9 +14,9 @@ public import WeilConjectures.Compactification.RefinementCategory
 /-!
 # Boundary-preserving refinements of compactifications
 
-Source: blueprint main-20261015, sec-nagata-compactification,
-sk-def-nagata-sketch-data, det-nagata-definition-refinement
-(blueprint: det-nagata-definition-refinement).
+Source: blueprint main-20261015, chap-Nagata-compactification-and-Chows-lemma,
+definition-compactification-refinement, definition-compactification-refinement--3
+(blueprint: definition-compactification-refinement--3).
 
 The upstream `Compactification.Refinement` records the two commuting triangles only.
 Here morphisms additionally preserve the inverse image of the distinguished open.
@@ -33,8 +33,8 @@ open CategoryTheory
 namespace AlgebraicGeometry.Compactification
 
 /-- Compactifications with quasi-compact open immersion, using the existing compactification
-structure. Source: blueprint main-20261015, det-nagata-definition-refinement, opening sentence
-(blueprint: det-nagata-definition-refinement). -/
+structure. Source: blueprint main-20261015, definition-compactification-refinement--3, opening
+sentence (blueprint: definition-compactification-refinement--3). -/
 abbrev QuasiCompactObjects {X S : Scheme.{u}} (f : X ⟶ S) : Type (u + 1) :=
   ObjectProperty.FullSubcategory (fun c : Compactification f ↦ QuasiCompact c.i)
 
@@ -43,15 +43,15 @@ exactly the source's distinguished open. The underlying upstream refinement alre
 `r.hom.hom ≫ d.obj.g = c.obj.g` and `c.obj.i ≫ r.hom.hom = d.obj.i`.
 The latter identifies the restriction with `j ∘ (j')⁻¹`; the additional equality says that
 boundary points map to boundary points.
-Source: blueprint main-20261015, det-nagata-definition-refinement, conditions 1--3
-(blueprint: det-nagata-definition-refinement). -/
+Source: blueprint main-20261015, definition-compactification-refinement--3, conditions 1--3
+(blueprint: definition-compactification-refinement--3). -/
 def boundaryRefinementProperty {X S : Scheme.{u}} (f : X ⟶ S) :
     MorphismProperty (QuasiCompactObjects f) :=
   fun c d r ↦ r.hom.hom ⁻¹ᵁ d.obj.i.opensRange = c.obj.i.opensRange
 
 /-- Identity refinements preserve the open, and boundary-preserving refinements compose.
-Source: blueprint main-20261015, det-nagata-definition-refinement, final paragraph
-(blueprint: det-nagata-definition-refinement).
+Source: blueprint main-20261015, definition-compactification-refinement--3, final paragraph
+(blueprint: definition-compactification-refinement--3).
 
 Proof: the identity has inverse image equal to the same open. For consecutive refinements
 `r : c ⟶ d` and `s : d ⟶ e`, inverse image under their ambient composite is the iterated
@@ -73,17 +73,17 @@ attribute [instance] boundaryRefinementProperty_isMultiplicative
 /-- The category of compactifications with quasi-compact open immersions and refinements
 satisfying all three conditions: the two commuting triangles and equality of inverse-image
 open subschemes. Identities and composition are induced by those of the ambient schemes.
-Source: blueprint main-20261015, det-nagata-definition-refinement, final paragraph
-(blueprint: det-nagata-definition-refinement). -/
+Source: blueprint main-20261015, definition-compactification-refinement--3, final paragraph
+(blueprint: definition-compactification-refinement--3). -/
 abbrev BoundaryCompactification {X S : Scheme.{u}} (f : X ⟶ S) : Type (u + 1) :=
   WideSubcategory (boundaryRefinementProperty f)
 
 /-- The full subcategory on the scheme-theoretically dense compactifications.
 Density is precisely the dependency's `IsSchemeTheoreticallyDominant` on the open immersion;
 quasi-compactness is already part of the ambient category's objects.
-Source: blueprint main-20261015, det-nagata-definition-refinement, last sentence, and
-def-nagata-dense-compactification
-(blueprint: det-nagata-definition-refinement). -/
+Source: blueprint main-20261015, definition-compactification-refinement--3, last sentence, and
+definition-compactification-refinement--2
+(blueprint: definition-compactification-refinement--3). -/
 abbrev DenseBoundaryCompactification {X S : Scheme.{u}} (f : X ⟶ S) : Type (u + 1) :=
   ObjectProperty.FullSubcategory
     (fun c : BoundaryCompactification f ↦ IsSchemeTheoreticallyDominant c.obj.obj.i)

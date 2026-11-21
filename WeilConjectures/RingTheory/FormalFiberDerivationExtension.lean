@@ -87,8 +87,35 @@ private theorem localize {R : Type u} {S : Type v} [CommRing R] [CommRing S]
       leibniz' := IsLocalization.extendDerivation_mul W ψ δ hδ }
   exact ⟨E, fun x ↦ IsLocalization.extendDerivation_algebraMap W ψ δ hδ x⟩
 
-set_option maxHeartbeats 800000 in
--- Completion and tensor scalar towers require extra elaboration work.
+private theorem extend_from_tensor
+    {B H M R : Type*} [CommRing B] [CommRing H] [Field M] [CommRing R]
+    [Algebra B H] [Algebra B M] [IsFractionRing B M] [Algebra M R]
+    (D : Derivation ℤ B B) (Dh : Derivation ℤ H H)
+    (hDh : ∀ b, Dh (algebraMap B H b) = algebraMap B H (D b))
+    (e : R ≃ₐ[M] (M ⊗[B] H)) :
+    ∃ E : Derivation ℤ R R, ∀ b : B,
+      E (algebraMap M R (algebraMap B M b)) =
+        algebraMap M R (algebraMap B M (D b)) := by
+  let T := M ⊗[B] H
+  let : Algebra H T := Algebra.TensorProduct.rightAlgebra
+  let : IsLocalization (Algebra.algebraMapSubmonoid H (nonZeroDivisors B)) T :=
+    IsLocalization.tensorRight (S := H) M (nonZeroDivisors B)
+  obtain ⟨Dt, hDt⟩ := localize
+    (Algebra.algebraMapSubmonoid H (nonZeroDivisors B)) Dh (S := T)
+  obtain ⟨E, hE⟩ := transport e.symm.toRingEquiv Dt
+  change ∀ x : T, E (e.symm x) = e.symm (Dt x) at hE
+  have hb (b : B) : e (algebraMap M R (algebraMap B M b)) =
+      algebraMap H T (algebraMap B H b) := by
+    rw [e.commutes]
+    change (algebraMap B M b) ⊗ₜ[B] (1 : H) =
+      (1 : M) ⊗ₜ[B] (algebraMap B H b)
+    rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one]
+    exact TensorProduct.smul_tmul b (1 : M) (1 : H)
+  refine ⟨E, fun b ↦ ?_⟩
+  rw [← e.symm_apply_apply (algebraMap M R (algebraMap B M b)), hE, hb, hDt, hDh,
+    ← hb (D b)]
+  exact e.symm_apply_apply _
+
 /-- Every absolute derivation of a finite integral model extends to the base-changed
 formal fibre, compatibly with the model's inclusion into its fraction field.
 Source: Stacks Project, More on Algebra, Tag 07PR, finite-model and extension paragraphs;
@@ -161,28 +188,11 @@ theorem exists_formalFiber_extension
   obtain ⟨Dh, _, hDh, _, _⟩ :=
     (exists_completion_and_unique_localization (Localization.AtPrime r) Dr).1
       (IsLocalRing.maximalIdeal (Localization.AtPrime r))
-  let T := M ⊗[B] H
-  let : Algebra H T := Algebra.TensorProduct.rightAlgebra
-  let : IsLocalization (Algebra.algebraMapSubmonoid H (nonZeroDivisors B)) T :=
-    IsLocalization.tensorRight (S := H) M (nonZeroDivisors B)
-  obtain ⟨Dt, hDt⟩ := localize
-    (Algebra.algebraMapSubmonoid H (nonZeroDivisors B)) Dh (S := T)
-  obtain ⟨E, hE⟩ := transport eR.symm.toRingEquiv Dt
-  change ∀ x : T, E (eR.symm x) = eR.symm (Dt x) at hE
-  refine ⟨E, ?_⟩
-  have hb (b : B) : eR (Algebra.TensorProduct.includeLeftRingHom (b : M)) =
-      algebraMap H T (algebraMap (Localization.AtPrime r) H
-        (algebraMap B (Localization.AtPrime r) b)) := by
-    change eR (algebraMap M R (b : M)) = _
-    rw [eR.commutes]
-    change (algebraMap B M b) ⊗ₜ[B] (1 : H) =
-      (1 : M) ⊗ₜ[B] (algebraMap B H b)
-    rw [Algebra.algebraMap_eq_smul_one, Algebra.algebraMap_eq_smul_one]
-    exact TensorProduct.smul_tmul b (1 : M) (1 : H)
+  apply extend_from_tensor D Dh _ eR
   intro b
-  rw [← eR.symm_apply_apply (Algebra.TensorProduct.includeLeftRingHom (b : M)), hE, hb,
-    hDt, hDh, hDr]
-  rw [← hb (D b)]
-  exact eR.symm_apply_apply _
+  change Dh (algebraMap (Localization.AtPrime r) H
+    (algebraMap B (Localization.AtPrime r) b)) = _
+  rw [hDh, hDr]
+  rfl
 
 end Derivation

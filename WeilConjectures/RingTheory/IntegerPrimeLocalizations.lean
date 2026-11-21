@@ -48,7 +48,8 @@ Proof:
    fraction field follow from `lem-weil-pbc-localization-normal-domain`, and Noetherianity
    from `lem-weil-pbc-localization-noetherian`.
 4. The nonzero localization has dimension one and principal maximal ideal. Apply the
-   normal-local criterion `lem-sc-normal-dim1-dvr` (Stacks 00PD) to obtain the DVR assertion. -/
+   normal-local criterion `lemma-proper-smooth-model--1` (Stacks 00PD) to obtain the DVR
+   assertion. -/
 theorem prime_localizations_dvr :
     IsDedekindDomain ℤ ∧ ringKrullDim ℤ = 1 ∧ IsFractionRing ℤ ℚ ∧
       (∀ P : Ideal ℤ,

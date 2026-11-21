@@ -12,10 +12,13 @@ public import WeilConjectures.CategoryTheory.StageSystem.PbcQbarCategory
 
 /-! # Interfaces for scalar-compatible proper-base-change operations
 
-These are the unchanged operation interfaces of the descent proposition. Keeping
-these definitions separate lets its finite-stage inputs avoid importing descent.
-Source: blueprint main-20261015, order 1312
-(blueprint: prop-weil-pbc-descent-functors).
+These are the operation interfaces used by proper-base-change descent.
+
+## Implementation details
+
+Keeping these definitions separate lets the finite-stage inputs of descent avoid importing it.
+On the normalized PBC stage systems, the unit equation of a `CoherentExactMorphism` follows from
+associator coherence at repeated stages.
 -/
 
 @[expose] public noncomputable section
@@ -26,15 +29,9 @@ universe w u v u' v'
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.StageSystem
-/-- A family of exact finite-stage functors with scalar-extension comparisons.
-The `base` field contains the stage functors `Φ_E`, comparisons `β_{F/E}`, and
-their associator coherence.  The remaining fields record additivity,
-compatibility with shifts of the stage functors and comparisons, and
-preservation of distinguished triangles at every stage. On the normalized PBC
-stage systems, the unit equation follows from associator coherence at repeated
-stages: the resulting idempotent isomorphism component is the identity.
-Source: blueprint main-20261015, order 1312
-(blueprint: prop-weil-pbc-descent-functors). -/
+/-- A family of exact finite-stage functors `Φ_E` with scalar-extension comparisons `β_{F/E}`
+satisfying associator coherence, which are additive, compatible with shifts and preserve
+distinguished triangles at every stage. -/
 structure CoherentExactMorphism {I : Type w} [Preorder I]
     {C : I → Type u} [∀ i, Category.{v} (C i)]
     {D : I → Type u'} [∀ i, Category.{v'} (D i)]
@@ -61,9 +58,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type w)
   [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- The rational finite-stage direct image is the restriction of the actual ringed
-pro-etale derived direct image followed by the recorded raw scalar localization.
-Source: blueprint main-20261015, order 1312, final paragraph, using
-prop-weil-pbc-rational-transport (blueprint: prop-weil-pbc-descent-functors). -/
+pro-etale derived direct image followed by the recorded raw scalar localization. -/
 def pbcDescentDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (h : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω X E),
       PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)
@@ -74,9 +69,7 @@ def pbcDescentDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)
     (pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)) (h E) (pbcStageUniformizer.{u} l Ω E)
 
 /-- The rational finite-stage pullback is the restriction of the actual completed
-ringed pro-etale pullback followed by the recorded raw scalar localization.
-Source: blueprint main-20261015, order 1312, final paragraph, using
-prop-weil-pbc-rational-transport (blueprint: prop-weil-pbc-descent-functors). -/
+ringed pro-etale pullback followed by the recorded raw scalar localization. -/
 def pbcDescentPullback {X Y : Scheme.{u}} (g : X ⟶ Y)
     (h : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω Y E),
       PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)
@@ -113,9 +106,7 @@ integral/scalar comparisons, including equal coefficient stages. The right-hand
 side is the unique comparison characterized by the localized ambient mate in
 `pbcScalarDirectImage_rational`, at the canonical small coefficient fields.
 The endpoint equalities are already concluded separately for every stage;
-quantification over their proofs does not impose an additional assumption.
-Source: blueprint main-20261015, descent proposition, final paragraph
-(blueprint: prop-weil-pbc-descent-functors). -/
+quantification over their proofs does not impose an additional assumption. -/
 def PbcDirectImageBetaSpec (f : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω X E),
       PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)
@@ -145,9 +136,7 @@ conjugated by the integral/scalar comparisons, including equal stages. The
 right-hand side is the unique comparison characterized by the localized
 completed tensor comparison in `pbcScalarCompletedPull_rational`, at the small
 coefficient fields. Its orientation is opposite to `Morphism.β`. Endpoint
-identifications are concluded separately, so this predicate fixes every β.
-Source: blueprint main-20261015, descent proposition, final paragraph
-(blueprint: prop-weil-pbc-descent-functors). -/
+identifications are concluded separately, so this predicate fixes every β. -/
 def PbcPullbackBetaSpec (g : X ⟶ Y)
     (pres : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω Y E),
       PbcIsBoundedConstructibleComplete X (pbcStageDatum.{u} l Ω E)

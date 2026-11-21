@@ -416,8 +416,8 @@ import WeilConjectures.AlgebraicGeometry.Affine.Trace.AffineTraceRightNormalForm
 
 /-!
 # The affine-space top trace
-Source: blueprint sk-prop-an, Steps 5(b) and 6
-(blueprint: lem-amb-affine-space-top-trace).
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b) and 6
+(blueprint: lemma-integral-linear-character--1).
 -/
 
 @[expose] public noncomputable section
@@ -429,7 +429,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The counit is invertible along the entire ordered coordinate tower.
 Source: blueprint affine-space top trace, step 7
-(blueprint: lem-amb-affine-space-top-trace). -/
+(blueprint: lemma-integral-linear-character--1). -/
 private theorem towerCounit_isIso (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -448,8 +448,8 @@ private theorem towerCounit_isIso (A : Type (u + 1)) [CommRing A] [Finite A]
 /-- The affine-space trace is the actual composite counit, is invertible, and obeys
 arbitrary Noetherian base change. The exchange is the pasted compact-support exchange;
 the right-object comparison is the normalized Tate pullback comparison above.
-Source: blueprint sk-prop-an, Steps 5(b), 6, detailed affine-space top trace lemma
-(blueprint: lem-amb-affine-space-top-trace).
+Source: blueprint proposition-purity-vector-bundles, Steps 5(b), 6, detailed affine-space top trace
+lemma (blueprint: lemma-integral-linear-character--1).
 
 Proof: use the normalized projective-line adjunction and its base-change datum.
 Push the open-closed triangle to the base and use the projective decomposition.

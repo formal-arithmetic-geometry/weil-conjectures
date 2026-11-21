@@ -17,7 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.FiniteFieldFiber
 /-!
 # Global finite-field datum and geometric base change
 
-Source: Weil conjectures blueprint, `sec-nagata-compactification`,
+Source: Weil conjectures blueprint, `chap-Nagata-compactification-and-Chows-lemma`,
 `sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md`, order 411
 (blueprint: def-weil-finite-field-fiber).
 

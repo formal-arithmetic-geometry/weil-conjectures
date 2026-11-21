@@ -23,7 +23,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 retraction is natural for every arrow, including arrows unrelated to the chosen
 temporary trivializations.
 Source: the cycle-map naturality in Step 9 of point-section transport, refining
-the twist-removal step of blueprint `sk-thm-frobenius`.
+the twist-removal step of blueprint `theorem-poincare-duality-frobenius`.
 Proof: conjugate the arrow by the two trivializations and lift it through the
 fully faithful functor. Naturality of the retraction isomorphism at that lift,
 followed by cancellation of the trivializations, is the asserted square.

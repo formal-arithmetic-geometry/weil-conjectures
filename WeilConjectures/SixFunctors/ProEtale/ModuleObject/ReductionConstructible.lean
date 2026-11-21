@@ -78,8 +78,8 @@ theorem boundedConstructible_derivedExtendScalars_residueField
     fun i ↦ IsConstructibleModuleObject.of_comap_of_regularLift _ hS
       ((hc i).of_iso (hiso i).symm)⟩
 
-/-- Blueprint `sk-prop-integral-criterion` (section `sec-proetale-coefficients`), implication
-(1) ⇒ (2), its second half: on a noetherian scheme `X`, the first derived reduction
+/-- Blueprint `proposition-integral-constructibility-criterion` (section `chap-The-pro-etale-site`),
+implication (1) ⇒ (2), its second half: on a noetherian scheme `X`, the first derived reduction
 `K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` of a bounded constructible `𝒪_E`-complex `K` lies in
 `Dᵇc(X, 𝔽_E)`, read as the complexes of étale origin
 (`ProEtale.DerivedCategory.boundedConstructible`). -/

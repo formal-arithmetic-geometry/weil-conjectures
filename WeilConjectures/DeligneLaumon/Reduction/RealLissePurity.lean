@@ -16,7 +16,8 @@ public import WeilConjectures.WeilSheaf.FrobeniusTwistStalk
 
 Let `X₀` be a smooth geometrically connected affine scheme of dimension `d ≥ 2` over a finite
 field `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on `X₀`. Every irreducible lisse subquotient `V`
-of `𝒢` is punctually `ι`-pure (blueprint `thm-zl-real-mixed-by-curves`, the lisse stratum).
+of `𝒢` is punctually `ι`-pure (blueprint `theorem-real-constructible-sheaves-are-mixed--1`, the
+lisse stratum).
 
 The proof follows the blueprint, with the finite constant extension replaced by the Frobenius
 twist of subsheaves (`AlgebraicGeometry.WeilSheaf.frobeniusTwist`): `V̄` has a geometrically
@@ -70,11 +71,11 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
     (Y ↘ Spec (CommRingCat.of L)).geometricGaloisFrobenius.asIso.hom ≫ j)
   (θ : AlgebraicClosure k₀ →ₐ[k₀] AlgebraicClosure L)
 
-/-- **Purity at a closed point read off on a curve** (blueprint: `thm-zl-real-mixed-by-curves`,
-"the same power calculation at `x`"). If the pullback of `F` to a curve `Y` over `L` through a
-geometric point over the closed point `x` is punctually pure of weight `w`, then so is the stalk
-of `F` at `x`: the stalk of the pullback at a point of `Y` over `x` is the stalk of `F` with a
-power of its Frobenius. -/
+/-- **Purity at a closed point read off on a curve** (blueprint:
+`theorem-real-constructible-sheaves-are-mixed--1`, "the same power calculation at `x`"). If the
+pullback of `F` to a curve `Y` over `L` through a geometric point over the closed point `x` is
+punctually pure of weight `w`, then so is the stalk of `F` at `x`: the stalk of the pullback at a
+point of `Y` over `x` is the stalk of `F` with a power of its Frobenius. -/
 theorem isPureOfWeight_stalk_of_curvePullback [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of L))]
     [Mono j] {F : WeilSheaf k₀ l X} {w : ℝ}
     (hF : ((curvePullback j hj).obj F).IsPunctuallyPureOfWeight ι w) (x : X.finitePoints)
@@ -97,9 +98,9 @@ theorem isPureOfWeight_stalk_of_curvePullback [LocallyOfFiniteType (Y ↘ Spec (
       x)).2 (h1.of_equiv E.symm)
 
 
-/-- **The curve step** (blueprint: `thm-zl-real-mixed-by-curves`). Let `𝒢` be an `ι`-real lisse
-Weil sheaf on `X` with an irreducible lisse subquotient `V = 𝒢₂ / 𝒢₁`, let `P ⊆ V̄` be an
-irreducible local system fixed by the `M`-th power of the Frobenius twist `T`, whose twists
+/-- **The curve step** (blueprint: `theorem-real-constructible-sheaves-are-mixed--1`). Let `𝒢` be an
+`ι`-real lisse Weil sheaf on `X` with an irreducible lisse subquotient `V = 𝒢₂ / 𝒢₁`, let `P ⊆ V̄`
+be an irreducible local system fixed by the `M`-th power of the Frobenius twist `T`, whose twists
 `P, …, T^{M-1} P` span `V̄`. Let `j : Ȳ ⟶ X̄` be a curve over a finite field `L` with
 `M ∣ [L : k₀]`, on which every `Tⁿ P` stays irreducible, passing through the translates
 `σ⁻ᵃ ≫ t₀ ≫ Frᵃ` of the geometric point `t₀` over a closed point `x₀`. Then the restriction of
@@ -239,10 +240,10 @@ theorem _root_.AlgebraicGeometry.ProEtale.IsIrreducibleAdicLocalSystem.upperStar
     (((adicUpperStarIsoLowerStarInv l e).app _).symm ≪≫ ((adicUpperStarComp l e.hom i).app F).symm)
 
 /-- **Purity of the irreducible constituents of a real lisse sheaf on a smooth affine scheme**
-(blueprint: `thm-zl-real-mixed-by-curves`, the lisse stratum). Let `X₀` be a smooth geometrically
-connected affine scheme of dimension `d ≥ 2` over `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on
-`X₀`. Every irreducible lisse subquotient `𝒢₂ / 𝒢₁` of lisse Weil subsheaves `𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` is
-punctually `ι`-pure.
+(blueprint: `theorem-real-constructible-sheaves-are-mixed--1`, the lisse stratum). Let `X₀` be a
+smooth geometrically connected affine scheme of dimension `d ≥ 2` over `k₀` and `𝒢` an `ι`-real
+lisse Weil sheaf on `X₀`. Every irreducible lisse subquotient `𝒢₂ / 𝒢₁` of lisse Weil subsheaves
+`𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` is punctually `ι`-pure.
 
 Its underlying sheaf contains an irreducible local system `P` defined over a finite extension
 (`AlgebraicGeometry.WeilSheaf.exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq`)

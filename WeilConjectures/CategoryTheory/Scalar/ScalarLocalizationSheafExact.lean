@@ -239,7 +239,7 @@ Proof:
    objects and maps E. The sectionwise identity on tensors, followed by sheafification,
    identifies restriction of scalars of E with T. The balancing relation identifies
    their R-actions, and the formula `b ⊗ m ↦ b ⊗ f(m)` proves naturality.
-5. By `lem-weil-pbc-module-sheaves-colimits-forgetful`, forgetting to abelian sheaves
+5. By `situation-conventions`, forgetting to abelian sheaves
    is faithful and exact and detects exactness. Thus exactness of T proves exactness
    of E in R_s-modules; faithfulness also proves additivity. No surjectivity on sections
    of a sheaf epimorphism is assumed.

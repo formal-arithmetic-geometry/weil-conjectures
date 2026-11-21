@@ -174,8 +174,8 @@ private theorem torsion_comparison_stalkIso
       (Scheme.pointSmallEtale t).uliftSheafFiberIso.{u + 1} A⟩
 
 /-- Exact fully faithful comparison inverse image reflects local integer torsion.
-Source: Stacks Tags 099T and 03SA, and blueprint sk-thm-properbasechange, opening paragraph
-(blueprint: lem-pe-comparison-reflects-local-torsion).
+Source: Stacks Tags 099T and 03SA, and blueprint theorem-proper-base-change-classical-pro, opening
+paragraph (blueprint: lem-pe-comparison-reflects-local-torsion).
 Proof: every germ in the pro-etale geometric stalk is represented by a section on
  a pointed weakly etale neighbourhood. A covering on which that section is torsion
  has a member lifting the geometric point: base change to the algebraically closed

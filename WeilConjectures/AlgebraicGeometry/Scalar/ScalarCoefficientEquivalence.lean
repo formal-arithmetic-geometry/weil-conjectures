@@ -9,8 +9,12 @@ public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowe
 
 /-! # Scalar adjunctions under equivalences of coefficient categories
 
-Source: Stacks Project, Modules on Sites, change of rings; the calculus of mates.
-(blueprint: lem-pbc-scalar-coefficient-equivalence).
+## References
+
+* Stacks Project, Modules on Sites, change of rings
+* Stacks, change of rings
+* Stacks, Modules on Sites, change of rings
+* Stacks, change of rings and adjunction mate calculus
 -/
 
 @[expose] public noncomputable section
@@ -21,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-/-- Identity scalar restriction is identity on sections.
-Source: Stacks, change of rings (blueprint: lem-pbc-scalar-coefficient-equivalence). -/
+/-- Identity scalar restriction is identity on sections. -/
 def coefficientRestrictIdentity (T : Scheme.{u})
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     pbcRestrict (𝟙 R) ≅ 𝟭 (pbcModules T R) :=
@@ -32,20 +35,14 @@ def coefficientRestrictIdentity (T : Scheme.{u})
         (M.val.obj U)) (fun {_ _} _ ↦ by ext x; rfl)))
     (fun _ ↦ by ext U x; rfl)
 
-/-- The identity restriction comparison after exact localization.
-Source: Stacks, change of rings (blueprint: lem-pbc-scalar-coefficient-equivalence). -/
+/-- The identity restriction comparison after exact localization. -/
 def coefficientDerivedRestrictIdentity {T : Scheme.{u}}
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     pbcDerivedRestrict (𝟙 R) ≅ 𝟭 (DerivedCategory (pbcModules T R)) :=
   Functor.mapDerivedCategoryNatIso (coefficientRestrictIdentity T R) ≪≫
     Functor.mapDerivedCategoryIdIso _
 
-/-- Restriction by an isomorphism of ring sheaves is an equivalence after localization.
-Source: Stacks, Modules on Sites, change of rings.
-(blueprint: lem-pbc-scalar-coefficient-equivalence).
-Proof: restriction by the inverse ring map is an inverse. The composition comparisons
-and the sectionwise identity comparison give the two inverse isomorphisms. Apply
-termwise exact localization to these inverse isomorphisms. -/
+/-- Restriction by an isomorphism of ring sheaves is an equivalence after localization. -/
 theorem derivedRestrictIso_isEquivalence {T : Scheme.{u}}
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (b : R ≅ S) :
     (pbcDerivedRestrict b.hom).IsEquivalence := by
@@ -57,9 +54,7 @@ theorem derivedRestrictIso_isEquivalence {T : Scheme.{u}}
     Functor.mapDerivedCategoryNatIso rR ≪≫ Functor.mapDerivedCategoryIdIso _
   exact Functor.IsEquivalence.mk' (pbcDerivedRestrict b.inv) eS.symm eR
 
-/-- The exact restriction square of a commutative coefficient square.
-Source: Stacks, Modules on Sites, change of rings.
-(blueprint: lem-pbc-scalar-coefficient-equivalence). -/
+/-- The exact restriction square of a commutative coefficient square. -/
 def derivedRestrictionSquare {T : Scheme.{u}}
     {R₀ R S₀ S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (b : R₀ ⟶ R) (φ : R ⟶ S) (c : S₀ ⟶ S) (ψ : R₀ ⟶ S₀)
@@ -73,14 +68,7 @@ end AlgebraicGeometry.Scheme
 
 namespace CategoryTheory
 
-/-- A scalar adjunction transports along equivalences with its unit unchanged.
-Source: Stacks, change of rings and adjunction mate calculus.
-(blueprint: lem-pbc-scalar-coefficient-equivalence).
-Proof: take the inverse mate of k. Taking a second mate along the two equivalences
-is conjugation between composite adjunctions. This second mate is invertible,
-since the equivalence units, counits and k are invertible. Conjugation reflects
-invertibility, so the inverse mate is invertible. The mate unit equation, followed
-by its inverse, gives the displayed normalization. -/
+/-- A scalar adjunction transports along equivalences with its unit unchanged. -/
 theorem scalarAdjunctionCoefficientEquivalence
     {C D C₀ D₀ : Type*} [Category C] [Category D] [Category C₀] [Category D₀]
     {L : C ⥤ D} {R : D ⥤ C} {L₀ : C₀ ⥤ D₀} {R₀ : D₀ ⥤ C₀}

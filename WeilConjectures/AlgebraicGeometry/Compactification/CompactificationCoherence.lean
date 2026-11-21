@@ -15,7 +15,7 @@ import WeilConjectures.Compactification.CategoryBaseChange
 
 Source: Weil blueprint, sec-smooth-purity/sk-def-sf-operations,
 prop-compactification-coherence, order 1485
-(blueprint: prop-compactification-coherence-detailed).
+(blueprint: proposition-construction-independence-rf-shriek).
 
 The candidates and their specified objectwise comparisons are written in the canonical
 fixed-scalar presentation of the recorded finite coefficient module categories. The
@@ -38,7 +38,7 @@ etale-origin objects, in the fixed-scalar presentation used by the recorded refi
 comparison. The coefficient equivalence is the same one as `refinementFixedObject`;
 objects, maps, and witnesses are transported canonically, without a new choice of map.
 Source: blueprint prop-compactification-coherence, displayed candidates and final scope
-paragraph, order 1485 (blueprint: prop-compactification-coherence-detailed). -/
+paragraph, order 1485 (blueprint: proposition-construction-independence-rf-shriek). -/
 def compactificationOriginCandidate (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
@@ -331,35 +331,37 @@ proper pushforward of the inverse proper-open map, rather than an arbitrary isom
 The domain consists of bounded below etale-origin triples, with all ambient morphisms.
 
 Source: blueprint prop-compactification-coherence, statement and proof paragraphs 1--4,
-order 1485 (blueprint: prop-compactification-coherence-detailed).
+order 1485 (blueprint: proposition-construction-independence-rf-shriek).
 
 Proof plan:
 1. Finite type over the field makes X, Y and every proper compactification Noetherian
    (lem-weil-pbc-finite-type-over-noetherian). Refinements are proper, hence qcqs
-   (def-weil-compactifications-refinements and lem-weil-pbc-proper-fp-permanence).
+   (definition-compactification-refinement and lem-weil-pbc-proper-fp-permanence).
 2. In the defining etale proper-open map, derived open restriction, extension-zero
    base change, and restriction to the clopen section are natural. Compose their
    naturality squares and invert the restriction comparison; the adjunction counit
    gives naturality of the specified etale proper-open map
-   (def-weil-pbc-proper-open-comparison, lem-weil-pbc-derived-open-restriction,
-   cor-cbc-derived-extension-zero-base-change, lem-weil-pbc-clopen-section-direct-image).
+   (proposition-construction-independence-rf-shriek--7,
+   proposition-construction-independence-rf-shriek--7,
+   proposition-extension-zero-restriction-closed-subscheme--11,
+   proposition-construction-independence-rf-shriek--7).
 3. Transport this square using the natural extension-zero site comparison and the
    direct-image comparison; exactness descends the termwise construction to complexes
-   and roofs (lem-cbc-proetale-extension-zero-comparison,
+   and roofs (proposition-comparison-immersions--1,
    lem-weil-pbc-extension-by-zero-exact, def-sf-comparison-derived-pullback,
-   prop-weil-pbc-comparison-direct-image, lem-weil-pbc-proper-open-comparison-proetale).
+   theorem-comparison-direct-images--1, proposition-construction-independence-rf-shriek--7).
 4. Conjugate by the retained alpha. Full faithfulness of comparison pullback lifts
    every ambient map between witnessed objects to an etale map, proving naturality
    for all domain morphisms. The identity map between two witnesses gives witness
-   independence (def-sf-etale-origin-subcategory, thm-weil-pbc-site-comparison).
+   independence (def-sf-etale-origin-subcategory, theorem-bounded-below-cohomology-comparison).
 5. Invert that proper-open isomorphism and apply the proper direct image after its
    canonical compositor. This is precisely refinementComparisonIsomorphism; naturality
    of its two factors gives theta (def-sf-refinement-comparison-isomorphism,
-   lem-weil-derived-direct-image-composition, def-weil-compact-support-candidate).
+   lem-weil-derived-direct-image-composition, proposition-construction-independence-rf-shriek).
 6. The proper-open identity and composition laws survive witness conjugation: cancel
    the intermediate witness maps and move the compositor past alpha by naturality.
    Associativity of the direct-image compositor then gives theta_id and theta_comp
-   (lem-weil-pbc-proper-open-comparison-proetale,
+   (proposition-construction-independence-rf-shriek--7,
    lem-weil-derived-direct-image-composition).
 7. For d mapping to c1 and c2, put T12 = theta(d,c1)^(-1) followed by theta(d,c2).
    Transitivity cancels theta for any further refinement of d.

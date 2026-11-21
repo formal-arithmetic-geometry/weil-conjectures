@@ -27,7 +27,7 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-! # Sectionwise short exactness of internal sheaf modules
 
-Source: Weil conjectures blueprint, `sec-proetale-coefficients`,
+Source: Weil conjectures blueprint, `chap-The-pro-etale-site`,
 `sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md`,
 On the point, final sentence; Stacks Tags 03CL, 03CN, 03CO
 (blueprint: lem-pe-internal-module-sectionwise-short-exact).
@@ -124,15 +124,15 @@ of abelian presheaves are sectionwise. The evaluated hypotheses give zero kernel
 of the first arrow, zero cokernel of the second, and image equal to kernel.
 The restrictions agree as subpresheaves of the middle term. This proves the
 first conclusion, using `def-weil-pbc-exact-sequence`.
-2. Apply exact abelian sheafification (`lem-weil-pbc-sheafification-exact`).
+2. Apply exact abelian sheafification (`situation-conventions`).
 The sheaf category is abelian by `lem-sfb-abelian-sheaves-left-exact-reflector`;
 for an essentially small site transport from its small model in the coefficient
 universe. The sheafification counits are isomorphisms by
-`lem-weil-pbc-presheaf-finite-limits-objectwise`, and their naturality identifies
+`situation-conventions`, and their naturality identifies
 the sheafified arrows with precisely the original underlying sheaf arrows.
 3. Closedness of `sk-def-sfb-sheaf-tensor` gives tensor colimit preservation,
 and `lem-sfb-preserving-colimits-additive` gives additivity. Thus
-`lem-sfb-modobj-abelian` applies. Its forgetful functor preserves finite limits
+`prose-03-02` applies. Its forgetful functor preserves finite limits
 and finite colimits by `lem-sfb-modobj-forget-left-exact` and
 `lem-sfb-modobj-forget-right-exact`.
 4. Forgetting preserves zero morphisms and is faithful by

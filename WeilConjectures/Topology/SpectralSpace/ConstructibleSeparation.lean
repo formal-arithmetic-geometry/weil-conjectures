@@ -15,10 +15,10 @@ Let `T₁`, `T₂` be disjoint closed subsets of a compact prespectral space `X`
 lemma `PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ` provides compact opens
 `O₁`, `O₂` covering `X` with `O₁ ∩ T₁ = ∅` and `O₂ ∩ T₂ = ∅`. Choosing such a pair, the
 **constructible separation data** of `(T₁, T₂)` is the pair of complements `(O₁ᶜ, O₂ᶜ)`
-(blueprint: `def-nagata-spectral-constructible-separation`). These are closed subsets with
+(blueprint: `lemma-extending-isomorphism-over-closure-closed--1`). These are closed subsets with
 compact complements containing `T₁` and `T₂` respectively, and they are disjoint; in a
 spectral (more generally quasi-separated) space they are constructible
-(blueprint: `lemma-nagata-spectral-constructible-separation`).
+(blueprint: `lemma-extending-isomorphism-over-closure-closed--1`).
 
 ## Main definitions
 
@@ -40,10 +40,10 @@ variable {X : Type*} [TopologicalSpace X] [CompactSpace X] [PrespectralSpace X]
   {T₁ T₂ : Set X} (h₁ : IsClosed T₁) (h₂ : IsClosed T₂) (hd : Disjoint T₁ T₂)
 
 /-- **Constructible separation data in a spectral space** (blueprint:
-`def-nagata-spectral-constructible-separation`): for disjoint closed subsets `T₁`, `T₂`,
+`lemma-extending-isomorphism-over-closure-closed--1`): for disjoint closed subsets `T₁`, `T₂`,
 select compact opens `(O₁, O₂)` from
 `PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ` (blueprint:
-`lemma-nagata-spectral-constructible-separation-exists`) and return the complements
+`lemma-extending-isomorphism-over-closure-closed--1`) and return the complements
 `(O₁ᶜ, O₂ᶜ)`. -/
 noncomputable def constructibleSeparation : Set X × Set X :=
   ((exists_isCompact_isOpen_disjoint_union_eq_univ h₁ h₂ hd).choose ᶜ,
@@ -88,7 +88,7 @@ lemma disjoint_constructibleSeparation :
     compl_inter, (constructibleSeparation_spec_compl h₁ h₂ hd).2.2.2.2.2.2, compl_univ]
 
 /-- **Properties of the constructible separation data** (blueprint:
-`lemma-nagata-spectral-constructible-separation`): in a compact quasi-separated prespectral
+`lemma-extending-isomorphism-over-closure-closed--1`): in a compact quasi-separated prespectral
 space (for instance a spectral space), the separation data `(T₁_c, T₂_c)` are closed and
 constructible, contain `T₁` resp. `T₂`, and are disjoint. Complements of compact opens are
 constructible since compact opens of a quasi-separated space are retrocompact. -/

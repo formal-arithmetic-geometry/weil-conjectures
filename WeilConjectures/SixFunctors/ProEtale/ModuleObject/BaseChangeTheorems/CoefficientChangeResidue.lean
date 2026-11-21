@@ -139,7 +139,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
   [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-set_option maxHeartbeats 400000 in
 -- the objects of the bounded constructible and of the ambient derived categories are compared
 /-- A public copy of the private lemma `pullbackSquareComparison_hom_app_hom_aux` of
 `CoefficientChangeCubeBoundedConstructible`: on the ambient derived categories, the pullback
@@ -171,8 +170,8 @@ lemma pullbackSquareComparison_hom_app_hom_lift
       (eqToHom h).hom = eqToHom (congrArg ObjectProperty.FullSubcategory.obj h) := by
     subst h
     rfl
-  rw [boundedConstructiblePullbackSquareComparison_hom_app, pullbackSquareComparison_hom_app]
-  exact congrArg₂ (· ≫ ·) (hinv f' g) (congrArg₂ (· ≫ ·) (e _)
-    (boundedConstructibleUpperStarComp_hom_app_hom Λ ℓ g' f K))
+  simp only [boundedConstructiblePullbackSquareComparison_hom_app Λ ℓ sq K,
+    pullbackSquareComparison_hom_app Λ _ K.obj, ObjectProperty.FullSubcategory.comp_hom,
+    hinv f' g, boundedConstructibleUpperStarComp_hom_app_hom Λ ℓ g' f K, e]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

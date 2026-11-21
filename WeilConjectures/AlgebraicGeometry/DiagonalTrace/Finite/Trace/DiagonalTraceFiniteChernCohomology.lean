@@ -58,7 +58,7 @@ private theorem evaluation_reflects_iso
 /-- The actual untwisted Chern component induces the finite degree-two generator.
 
 Source: `sk-prop-diagonal-tower-trace.proof.md` (1), and
-`sk-lem-geo-p1-cohomology` (G2), the Chern summand.
+`lemma-cohomology-projective-line-trace` (G2), the Chern summand.
 (blueprint: lem-sfb-diagonal-trace-finite-chern-cohomology).
 
 Proof: compare the positive Chern adjunct at each finite level with the second

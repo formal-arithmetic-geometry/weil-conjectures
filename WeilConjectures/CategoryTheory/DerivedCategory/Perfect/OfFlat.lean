@@ -43,7 +43,7 @@ generated, then `C` is represented by a bounded complex of finitely generated pr
 The complex `F` gives `C` Tor amplitude in `[a, b]`, and a bounded object with finitely
 generated cohomology and finite Tor amplitude is perfect.
 
-(blueprint: `lem-pc-noetherian-flat-complex-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`) -/
 theorem isPerfect_of_flat_of_finite_homology [IsNoetherianRing A]
     {C : DerivedCategory (ModuleCat.{u} A)} (F : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ)
     [F.IsStrictlyGE a] [F.IsStrictlyLE b] (hF : ∀ n, Module.Flat A (F.X n)) (e : C ≅ Q.obj F)

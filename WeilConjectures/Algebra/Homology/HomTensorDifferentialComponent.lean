@@ -41,7 +41,6 @@ private lemma homObjMap_add_first {A A' B : Mod} (f g : A' ⟶ A) :
   SheafOfModules.hom_ext
     (PresheafOfModules.homObjMap_add_left (R := R.obj) f.val g.val (𝟙 B.val))
 
-set_option maxHeartbeats 1000000 in
 -- Rewriting the total-complex differential elaborates the dependent coproduct indices.
 set_option synthInstance.maxSize 256 in
 /-- The component of the iterated Hom differential after degreewise currying.
@@ -83,21 +82,11 @@ theorem homTensorDegreewiseMap_iteratedDifferential_component
     let T := CochainComplex.mapBifunctor K L (curriedTensor Mod)
     apply homTensorSummandRestriction_ext R K L t
     intro p q h
-    rw [Preadditive.sub_comp, Linear.units_smul_comp]
-    simp only [Category.assoc, SheafOfModules.homObjMap_comp_homObjMap,
-      Category.comp_id]
-    have hd :
-        CochainComplex.ιMapBifunctor K L (curriedTensor Mod) p q t h ≫
-          T.d t (t + 1) =
-        HomologicalComplex.mapBifunctor.d₁ K L (curriedTensor Mod)
-          (ComplexShape.up ℤ) p q (t + 1) +
-        HomologicalComplex.mapBifunctor.d₂ K L (curriedTensor Mod)
-          (ComplexShape.up ℤ) p q (t + 1) := by
-      rw [HomologicalComplex.mapBifunctor.d_eq, Preadditive.comp_add,
-        HomologicalComplex.mapBifunctor.ι_D₁, HomologicalComplex.mapBifunctor.ι_D₂]
-    rw [hd, homObjMap_add_first, Preadditive.comp_add, Preadditive.comp_add, smul_add]
-    rw [← sub_sub]
-    simpa only [Category.assoc] using
+    simpa only [Preadditive.sub_comp, Linear.units_smul_comp, Category.assoc,
+      SheafOfModules.homObjMap_comp_homObjMap, Category.comp_id,
+      HomologicalComplex.mapBifunctor.d_eq, Preadditive.comp_add,
+      HomologicalComplex.mapBifunctor.ι_D₁, HomologicalComplex.mapBifunctor.ι_D₂,
+      homObjMap_add_first, smul_add, ← sub_sub] using
       homTensorDegreewiseMap_iteratedDifferential_summand R K L M n t p q h
 
 end CategoryTheory

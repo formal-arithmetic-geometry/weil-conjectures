@@ -11,7 +11,7 @@ public import WeilConjectures.RingTheory.BertiniSmoothAux
 # Generic members of a separating linear system avoid `m²`
 
 This is the smoothness half of the Bertini argument (blueprint
-`lem-zl-bertini-finite-cover-curve`): for a smooth domain `A` of finite type over an
+`lemma-curve-preserving-finite-cover--1`): for a smooth domain `A` of finite type over an
 algebraically closed field `k` and a linear system `v` which separates tangent vectors away from
 a finite set `S` of maximal ideals (and generates the cotangent spaces at the points of `S`), a
 generic member `∑ bᵢ vᵢ` of the system lies outside `m²` at every maximal ideal `m` containing it.
@@ -99,7 +99,7 @@ the smooth domain `A` separates tangent vectors at every maximal ideal outside t
 of nonzero ideals, vanishes on `S` and generates the cotangent spaces at the points of `S`, then
 for `b` outside a hypersurface `h = 0`, the member `∑ bᵢ vᵢ` lies outside `m²` at every maximal
 ideal `m` containing it. Part of the Bertini argument, blueprint
-`lem-zl-bertini-finite-cover-curve`. -/
+`lemma-curve-preserving-finite-cover--1`. -/
 theorem Algebra.Smooth.exists_ne_zero_forall_notMem_sq {k A : Type u} [Field k] [IsAlgClosed k]
     [CommRing A] [IsDomain A] [Algebra k A] [Algebra.FiniteType k A] [Algebra.Smooth k A]
     {M : ℕ} (v : Fin M → A) (S : Set (Ideal A)) (hS : S.Finite)

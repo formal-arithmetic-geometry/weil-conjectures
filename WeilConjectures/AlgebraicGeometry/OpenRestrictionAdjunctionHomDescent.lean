@@ -60,8 +60,6 @@ private theorem localization_hom
     ((CatCommSq.iso G rX rY GO).hom.naturality v)
 
 
-set_option maxHeartbeats 500000 in
--- The independent derived-category instances require extra elaboration heartbeats.
 /-- The adjunction descends coherently to the inverse-image open.
 Source: Stacks Project, Tags 08EU (locality) and 08FE (direct-image restriction).
 Proof: both exact derived restriction functors are localizations at the maps they make
@@ -87,17 +85,18 @@ theorem exists_openRestriction_adjunction_hom_descent
         (v : (derivedPullback f).obj A ⟶ B),
         rY.map (p.homEquiv A B v) ≫ beta.hom.app B =
           q.homEquiv (rY.obj A) (rX.obj B) (alpha.inv.app A ≫ rX.map v)  := by
-  let rX := (schemeOpenRestriction X (f ⁻¹ᵁ U)).mapDerivedCategory
-  let rY := (schemeOpenRestriction Y U).mapDerivedCategory
+  intro rX rY
   let WX := (MorphismProperty.isomorphisms
     (schemeDerivedCategory (f ⁻¹ᵁ U).toScheme)).inverseImage rX
   let WY := (MorphismProperty.isomorphisms
     (schemeDerivedCategory U.toScheme)).inverseImage rY
   have : rX.IsLocalization WX := schemeDerivedOpenRestriction_isLocalization X (f ⁻¹ᵁ U)
   have : rY.IsLocalization WY := schemeDerivedOpenRestriction_isLocalization Y U
-  obtain ⟨alpha⟩ := derivedPullback_openRestriction_iso_universes f (f ⁻¹ᵁ U) U le_rfl
-  simp only [Scheme.Hom.resLE_eq_morphismRestrict] at alpha
-  obtain ⟨beta⟩ := schemeDerivedDirectImage_openRestriction f U
+  have hAlpha := derivedPullback_openRestriction_iso_universes.{u, w, u}
+    f (f ⁻¹ᵁ U) U le_rfl
+  rw [Scheme.Hom.resLE_eq_morphismRestrict] at hAlpha
+  let alpha := Classical.choice hAlpha
+  let beta := Classical.choice (schemeDerivedDirectImage_openRestriction.{u, w, w, u, u} f U)
   let : CatCommSq (derivedPullback f) rY rX (derivedPullback (f ∣_ U)) := ⟨alpha⟩
   let : CatCommSq (schemeDerivedDirectImage f) rX rY
       (schemeDerivedDirectImage (f ∣_ U)) := ⟨beta⟩

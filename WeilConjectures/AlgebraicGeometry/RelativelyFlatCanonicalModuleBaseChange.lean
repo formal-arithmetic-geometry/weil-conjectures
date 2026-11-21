@@ -18,7 +18,7 @@ import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
 /-! # Canonical relatively flat module base change
 
 Source: Stacks Project, Tag 0A1D, and the finite affine Cech proof of
-`lem-pc-rf-base-change-flat-module`.
+`lemma-coherent-base-change-invertible-sheaves--2`.
 -/
 
 @[expose] public section
@@ -66,9 +66,9 @@ private theorem isIso_of_open_restrictions
 invertible, for any cartesian square. This does not assert that the derived-to-ordinary
 pullback comparison itself is invertible.
 
-Source: Stacks Project, Tag 0A1D; blueprint `lem-pc-rf-base-change-flat-module`,
-Steps 1--5, and `lem-pc-base-change-map-cech`.
-(blueprint: lem-pc-relatively-flat-canonical-module-base-change).
+Source: Stacks Project, Tag 0A1D; blueprint `lemma-coherent-base-change-invertible-sheaves--2`,
+Steps 1--5, and `lemma-coherent-base-change-invertible-sheaves--2`.
+(blueprint: lemma-coherent-base-change-invertible-sheaves--2).
 
 Proof: Take the left-derived counit of tensor pullback at G[0] and compose it with
 singleMapHomologicalComplex to obtain c. This is the comparison characterized by

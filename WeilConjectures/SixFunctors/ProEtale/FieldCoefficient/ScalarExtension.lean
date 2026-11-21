@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 
 Let `Λ` be a field with an ultrametric norm which is a finite-dimensional `ℚ_ℓ`-algebra, with a
 continuous `ℚ_ℓ`-algebra embedding `e : Λ → ℚ̄_ℓ`; the case of interest is a finite extension
-`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (blueprint `def-weil-weil-sheaf-complex`, `def-weil-algebraically-closed-
+`E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` (blueprint `definition-weil-structure`, `def-weil-algebraically-closed-
 coefficients`). This file constructs the extension of scalars
 
 `ℚ̄_ℓ ⊗_Λ - : Sh(X_proét, Λ_X) ⥤ Sh(X_proét, ℚ̄_ℓ,X)`

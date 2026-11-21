@@ -15,7 +15,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 Levelwise pullback of towers is exact and commutes with evaluation; the mates of the
 evaluation interchanges are isomorphisms compatible with units, counits and transitions.
-Source: blueprint Assertion 3 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral).
 -/
 
 @[expose] public noncomputable section
@@ -33,7 +33,7 @@ section General
 
 /-- Mates are compatible with whiskering the two vertical sides of a square.
 Source: blueprint Assertion 3, transition compatibility
-(blueprint: det-pbc-complete-derived-completion).
+(blueprint: proposition-proper-base-change-complete-integral).
 Proof: expand the mate as unit, square and counit; move the left whiskering through the
 unit by naturality, apply the hypothesis, and move the right whiskering past the counit. -/
 theorem mateEquiv_whisker_app
@@ -115,7 +115,7 @@ private theorem transition_fac {m n : ℕᵒᵖ} (t : m ⟶ n) (J : CochainCompl
   simp [towerDerivedEvaluationTransition, Localization.liftNatTrans_app, hm, hn]
 
 /-- The evaluation interchange of an exact functor commutes with the transitions.
-Source: blueprint Assertion 3 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: both natural transformations are determined on localized complexes, where the
 interchange and the transitions are the strict evaluation identities. -/
 theorem interchange_transition {m n : ℕᵒᵖ} (t : m ⟶ n) (M : DerivedCategory (ℕᵒᵖ ⥤ B)) :
@@ -220,7 +220,7 @@ private theorem evaluation_localizedSquare' (n : ℕᵒᵖ) :
   simp
 
 /-- The evaluation comparison of an exact adjunction is an isomorphism.
-Source: blueprint Assertion 3 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: on a K-injective tower complex, its normalization identifies it with the
 derived unit of the evaluated K-injective complex, an isomorphism. -/
 theorem evaluationComparison_isIso (a : F ⊣ G) (n : ℕᵒᵖ) :
@@ -273,7 +273,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The canonical mate of the pullback/evaluation comparison is invertible.
-Source: blueprint Assertion 3 (blueprint: det-pbc-complete-derived-completion). -/
+Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral). -/
 instance pushEvaluationMap_isIso {T T' : Scheme.{u}} (f : T' ⟶ T) (n : ℕ) :
     IsIso (pushEvaluationMap l E f n) :=
   UnboundedExactTower.evaluationComparison_isIso
@@ -281,7 +281,7 @@ instance pushEvaluationMap_isIso {T T' : Scheme.{u}} (f : T' ⟶ T) (n : ℕ) :
 
 /-- Pullback of towers is exact, commutes with evaluation, and the derived pushforward
 commutes with derived evaluation compatibly with units, counits and transitions.
-Source: blueprint Assertion 3 (blueprint: det-pbc-complete-derived-completion).
+Source: blueprint Assertion 3 (blueprint: proposition-proper-base-change-complete-integral).
 Proof: pullback is levelwise exact. The comparisons are the mates of the exact evaluation
 interchanges, invertible by K-injective normalization; the unit and counit equations are
 the mate identities, and the transition equation follows from compatibility of the

@@ -34,7 +34,7 @@ For a Weil sheaf placed in degree zero, the stalk cohomology is the stalk itself
 ## Main statements
 
 - `AlgebraicGeometry.WeilComplex.coeff_prod_inv_alternatingCharpolyRevProd_stalk`
-  (`thm-trf-l-function-euler-product`): the Euler-product form of the trace formula.
+  (`theorem-trace-formula-euler-product`): the Euler-product form of the trace formula.
 - `AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk`: its form for a Weil
   sheaf.
 
@@ -92,7 +92,7 @@ variable [IsSeparated (X ↘ Spec (CommRingCat.of k₀))]
 
 namespace WeilComplex
 
-/-- Blueprint `thm-trf-l-function-euler-product`: Euler-product form of the trace formula.
+/-- Blueprint `theorem-trace-formula-euler-product`: Euler-product form of the trace formula.
 
 Let `X₀` be a separated scheme of finite type over `k₀ = 𝔽_q` and `K` a Weil complex on `X₀`
 with coefficients in `ℚ̄_ℓ`, `ℓ ≠ p`. Write `F` for the global geometric Frobenius on

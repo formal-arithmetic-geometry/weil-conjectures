@@ -30,8 +30,12 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 The arbitrary invertible-coefficient interface is reexported; the following
 specialization also retains the noninvertible completed coefficient structure maps.
-Source: Stacks Tags 03D8, 0D6D and 099N
-(blueprint: def-weil-pbc-ambient-ringed-exchange).
+
+## References
+
+* Stacks Tag 03D8
+* Stacks Tag 0D6D
+* Stacks Tag 099N
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,13 +56,7 @@ private theorem actualCoefficient_eq {S T : Scheme.{u}} (f : S ⟶ T) :
   rw [d.projection_comm]
   exact limit.lift_π _ n
 
-/-- Fiber-product pasting determines the ordinary direct-image comparison on sections.
-Source: Stacks Tag 03D8 (blueprint: def-weil-pbc-ambient-ringed-exchange).
-Proof: a section of the iterated direct image is a section over the iterated
-fiber product. Restrict along the canonical fiber-product pasting isomorphism.
-The completed coefficient structures agree after every finite projection, hence
-agree by the limit property. This section map is therefore linear. It is natural
-and invertible, and the specified section formula determines it uniquely. -/
+/-- Fiber-product pasting determines the ordinary direct-image comparison on sections. -/
 theorem pbcActualModuleDirectCompIso_exists :
     ∃! e : pbcActualModulePush h d ⋙ pbcActualModulePush k d ≅
         pbcActualModulePush (h ≫ k) d,
@@ -79,12 +77,10 @@ theorem pbcActualModuleDirectCompIso_exists :
   ext N U m
   exact (he' N U.unop m).trans (he N U.unop m).symm
 
-/-- The unique fiber-product-pasting comparison.
-Source: Stacks Tag 03D8 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The unique fiber-product-pasting comparison. -/
 def pbcActualModuleDirectCompIso := (pbcActualModuleDirectCompIso_exists h k d).exists.choose
 
-/-- The ordinary pullback composition is the adjunction conjugate of actual pasting.
-Source: Stacks Tag 03D8 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The ordinary pullback composition is the adjunction conjugate of actual pasting. -/
 def pbcActualModulePullCompIso :
     pbcActualModulePull (h ≫ k) d ≅
       pbcActualModulePull k d ⋙ pbcActualModulePull h d :=
@@ -94,8 +90,7 @@ def pbcActualModulePullCompIso :
     (pbcActualModuleAdjunction (h ≫ k) d)).symm
         (pbcActualModuleDirectCompIso h k d)
 
-/-- Its degreewise comparison on cochain complexes.
-Source: Stacks Tag 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- Its degreewise comparison on cochain complexes. -/
 def pbcActualModulePullCompComplexIso :
     (pbcActualModulePull (h ≫ k) d).mapHomologicalComplex (.up ℤ) ≅
       (pbcActualModulePull k d).mapHomologicalComplex (.up ℤ) ⋙
@@ -103,13 +98,7 @@ def pbcActualModulePullCompComplexIso :
   NatIso.mapHomologicalComplex (pbcActualModulePullCompIso h k d) (.up ℤ) ≪≫
     (Functor.mapHomologicalComplexCompIso (Iso.refl _) (.up ℤ)).symm
 
-/-- Universal derived counits retain the ordinary composition comparison on K-flat models.
-Source: Stacks Tag 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange).
-Proof: both ordinary pullbacks preserve flat-term K-flat resolving complexes.
-On these complexes the universal counits are invertible. Conjugate the ordinary
-pasting comparison by those counits; it is natural and invariant under resolving
-quasi-isomorphisms. Descent gives the displayed isomorphism. The same equation
-on a resolving representative of every object proves uniqueness. -/
+/-- Universal derived counits retain the ordinary composition comparison on K-flat models. -/
 theorem pbcActualDerivedPullCompIso_exists :
     ∃! e : pbcActualDerivedPull (h ≫ k) d ≅
         pbcActualDerivedPull k d ⋙ pbcActualDerivedPull h d,
@@ -185,16 +174,10 @@ theorem pbcActualDerivedPullCompIso_exists :
     intro K hp
     exact (normalize e' K).2 (he' K hp.1 hp.2)
 
-/-- The derived composition comparison with its resolving normalization retained.
-Source: Stacks Tag 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The derived composition comparison with its resolving normalization retained. -/
 def pbcActualDerivedPullCompIso := (pbcActualDerivedPullCompIso_exists h k d).exists.choose
 
-/-- The identity direct image is normalized by the actual identity fiber-product map.
-Source: Stacks Tag 03D8 (blueprint: def-weil-pbc-ambient-ringed-exchange).
-Proof: base change along identity has its canonical pullbackId isomorphism.
-Restrict sections along its inverse. The completed coefficient map has the
-identity residue formula, so these section functions are linear. They form a
-natural isomorphism, uniquely determined by the displayed section formula. -/
+/-- The identity direct image is normalized by the actual identity fiber-product map. -/
 theorem pbcActualModuleDirectIdIso_exists (T : Scheme.{u}) :
     ∃! e : pbcActualModulePush (𝟙 T) d ≅ 𝟭 _,
       ∀ (N : pbcModules T (pbcAdicCompletion T d)) (U : T.ProEt)
@@ -205,32 +188,24 @@ theorem pbcActualModuleDirectIdIso_exists (T : Scheme.{u}) :
   rw [actualCoefficient_eq d (𝟙 T)]
   exact d.modulePushId_existsUnique T
 
-/-- The ordinary identity direct-image comparison with its fiber-product normalization.
-Source: Stacks Tag 03D8 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The ordinary identity direct-image comparison with its fiber-product normalization. -/
 def pbcActualModuleDirectIdIso (T : Scheme.{u}) := (pbcActualModuleDirectIdIso_exists d
   T).exists.choose
 
-/-- The ordinary pullback unit is the adjunction conjugate of identity fiber-product pasting.
-Source: Stacks Tag 03D8 (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The ordinary pullback unit is the adjunction conjugate of identity fiber-product pasting. -/
 def pbcActualModulePullIdIso (T : Scheme.{u}) : pbcActualModulePull (𝟙 T) d ≅ 𝟭 _ :=
   ((conjugateIsoEquiv
     (pbcActualModuleAdjunction (𝟙 T) d)
     (Adjunction.id : (𝟭 (pbcModules T (pbcAdicCompletion T d))) ⊣ 𝟭 _)).symm
       (pbcActualModuleDirectIdIso d T)).symm
 
-/-- The ordinary identity comparison on actual cochain complexes.
-Source: Stacks Tag 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The ordinary identity comparison on actual cochain complexes. -/
 def pbcActualModulePullIdComplexIso (T : Scheme.{u}) :
     (pbcActualModulePull (𝟙 T) d).mapHomologicalComplex (.up ℤ) ≅ 𝟭 _ :=
   NatIso.mapHomologicalComplex (pbcActualModulePullIdIso d T) (.up ℤ) ≪≫
     Functor.mapHomologicalComplexIdIso _ (.up ℤ)
 
-/-- The derived identity is uniquely fixed on resolving models by the ordinary identity.
-Source: Stacks Tag 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange).
-Proof: on flat-term K-flat representatives the universal pullback counit is
-invertible. Compose it with the ordinary identity comparison above. This is
-natural and invariant under resolving quasi-isomorphisms, so descends uniquely
-to the derived localization. Resolving every object proves invertibility. -/
+/-- The derived identity is uniquely fixed on resolving models by the ordinary identity. -/
 theorem pbcActualDerivedPullIdIso_exists (T : Scheme.{u}) :
     ∃! e : pbcActualDerivedPull (𝟙 T) d ≅ 𝟭 _,
       ∀ P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ,
@@ -287,13 +262,11 @@ theorem pbcActualDerivedPullIdIso_exists (T : Scheme.{u}) :
     intro K hp
     exact (normalize e' K).2 (he' K hp.1 hp.2)
 
-/-- The derived pullback identity with its ordinary normalization retained.
-Source: Stacks Tag 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The derived pullback identity with its ordinary normalization retained. -/
 def pbcActualDerivedPullIdIso (T : Scheme.{u}) := (pbcActualDerivedPullIdIso_exists d
   T).exists.choose
 
-/-- Derived direct-image identity is conjugate to the normalized pullback identity.
-Source: Stacks Tag 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- Derived direct-image identity is conjugate to the normalized pullback identity. -/
 def pbcActualDerivedDirectIdIso (T : Scheme.{u}) :
     pbcActualDerivedPush (𝟙 T) d ≅ 𝟭 _ :=
   conjugateIsoEquiv (pbcActualDerivedAdjunction (𝟙 T) d)
@@ -301,11 +274,7 @@ def pbcActualDerivedDirectIdIso (T : Scheme.{u}) :
     (pbcActualDerivedPullIdIso d T).symm
 
 -- Compare two universal arrows from the same functor into the same full subcategory.
-/-- Completed identity pullback fixes complete objects through its actual unit.
-Source: Stacks 099N (blueprint: def-weil-pbc-ambient-ringed-exchange).
-Proof: identity ordinary pullback has the canonical identity pasting comparison.
-Completion of an intrinsically complete object has invertible unit. Compose its
-inverse with the identity comparison. The reflection property proves uniqueness. -/
+/-- Completed identity pullback fixes complete objects through its actual unit. -/
 theorem pbcActualCompletedPullIdIso_exists (T : Scheme.{u}) :
     ∃! e : ObjectProperty.ι (PbcIsIntrinsicallyComplete T d) ⋙
         pbcActualCompletedPull (𝟙 T) d ≅ ObjectProperty.ι (PbcIsIntrinsicallyComplete T d),
@@ -338,16 +307,14 @@ theorem pbcActualCompletedPullIdIso_exists (T : Scheme.{u}) :
   apply (cancel_epi (q.app K)).1
   exact (he' K).trans (he K).symm
 
-/-- The completed identity comparison on the actual complete subcategory.
-Source: Stacks 099N (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The completed identity comparison on the actual complete subcategory. -/
 def pbcActualCompletedPullIdIso (T : Scheme.{u}) :=
   (pbcActualCompletedPullIdIso_exists d T).exists.choose
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}
     {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)
 
-/-- The ringed pullback square is formed solely from canonical composition and commutativity.
-Source: Stacks Tag 0D6D (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+/-- The ringed pullback square is formed solely from canonical composition and commutativity. -/
 def pbcActualCompletedPullSquareIso :
     pbcActualDerivedPull g d ⋙ pbcActualDerivedPull f' d ≅
       pbcActualDerivedPull f d ⋙ pbcActualDerivedPull g' d :=
@@ -356,8 +323,7 @@ def pbcActualCompletedPullSquareIso :
     pbcActualDerivedPullCompIso g' f d
 
 /-- Ambient exchange is the adjunction mate of the actual ringed pullback square.
-It precedes completion and constructibility. Source: Stacks Tag 099N
-(blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+It precedes completion and constructibility. -/
 def pbcActualCompletedAmbientExchange :
     pbcActualDerivedPush f d ⋙ pbcActualDerivedPull g d ⟶
       pbcActualDerivedPull g' d ⋙ pbcActualDerivedPush f' d :=
@@ -365,8 +331,7 @@ def pbcActualCompletedAmbientExchange :
     (TwoSquare.mk _ _ _ _ (pbcActualCompletedPullSquareIso d sq).hom))
 
 /-- Completed exchange is the ambient mate followed by completion and its direct-image
-comparison, with the canonical pullback-completion identifications on both sides.
-Source: Stacks Tag 099N (blueprint: def-weil-pbc-ambient-ringed-exchange). -/
+comparison, with the canonical pullback-completion identifications on both sides. -/
 def pbcActualCompletedExchange :
     pbcActualDerivedPush f d ⋙ pbcActualCompletedPull g d ⟶
       pbcActualCompletedPull g' d ⋙ pbcActualDerivedPush f' d :=

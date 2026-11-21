@@ -26,7 +26,7 @@ under composition used for cohomologically smooth morphisms
 properties of the projection map: its compatibility with the associativity of `⊗ᴸ`
 (`AlgebraicGeometry.Etale.ProjectionMapAssociativity`) and with a composition isomorphism
 `Rh_! ≅ Rf_! ⋙ Rg_!` (`CategoryTheory.Adjunction.ProjectionCompCompatible`). Both hold for
-finite coefficients (`sk-prop-sf-pf-coherence`).
+finite coefficients (`proposition-composition-base-change-rf-shriek--1`).
 
 ## Main statements
 

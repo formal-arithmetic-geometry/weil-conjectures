@@ -61,9 +61,9 @@ namespace AlgebraicGeometry
 constructed from K-flat resolutions.
 
 Source: literature/blueprint/master/blueprint/sec-picard-framework/
-  det-thm-picard-semicon/def-pc-derived-pullback.md, node def-pc-derived-pullback;
-  the functor is `L g^* = L(g^sharp)^* ∘ g⁻¹`, and on a K-flat resolution
-  `P ⟶ E` it is represented by `𝒪_T ⊗_{g⁻¹𝒪_S} g⁻¹P`.
+  det-thm-picard-semicon/def-pc-derived-pullback.md, node
+  lemma-coherent-base-change-invertible-sheaves--2; the functor is `L g^* = L(g^sharp)^* ∘ g⁻¹`, and
+  on a K-flat resolution `P ⟶ E` it is represented by `𝒪_T ⊗_{g⁻¹𝒪_S} g⁻¹P`.
 The functor `I` is the exact module inverse image, and `E` is the recorded tensor
 pullback, on the shared module-sheaf category instances. The universal property and
 K-flat counit specify the derived composite uniquely up to canonical isomorphism.
@@ -81,7 +81,7 @@ Proof (the three steps of the node):
    isomorphism. The canonical comparison for `s : P → G` is the inverse of `L(Q(s))`
    followed by this counit at `P`. Comparisons between resolutions factor through
    `L(Q(G))`, so are independent of choices and compatible with composition.
-(blueprint: def-pc-derived-pullback). -/
+(blueprint: lemma-coherent-base-change-invertible-sheaves--2). -/
 theorem exists_derivedPullback {T S : Scheme.{u}} (g : T ⟶ S)
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings S.toRingedSpace))]
@@ -193,7 +193,7 @@ these equivalences (`AlgebraicGeometry.derivedPullbackIso`), and it is a left de
 the tensor pullback whose counit is an isomorphism on K-flat complexes
 (`AlgebraicGeometry.derivedPullback_spec`).
 
-(blueprint: def-pc-derived-pullback) -/
+(blueprint: lemma-coherent-base-change-invertible-sheaves--2) -/
 noncomputable irreducible_def derivedPullback :
     schemeDerivedCategory.{u, w} S ⥤ schemeDerivedCategory.{u, w} T :=
   (schemeDerivedCategoryEquiv S).functor ⋙ Scheme.Modules.derivedPullback g ⋙
@@ -276,7 +276,7 @@ Proof: `derivedPullback g` and the functor of `exists_derivedPullback` are left 
 functors of isomorphic functors, as `E ≅ Scheme.Modules.pullback g`; hence they are isomorphic,
 and the properties of the latter transfer.
 
-(blueprint: def-pc-derived-pullback) -/
+(blueprint: lemma-coherent-base-change-invertible-sheaves--2) -/
 theorem derivedPullback_spec :
     ∃ (I : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤
           SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology T)

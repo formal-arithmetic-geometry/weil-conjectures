@@ -31,9 +31,9 @@ Source: Stacks Project, Etale Cohomology, Lemma 59.70.5, Tag 03S6
 (blueprint: lem-weil-pbc-etale-shriek-base-change-modules).
 
 Proof:
-1. The base change of `j` is etale (lem-weil-pbc-etale-base-change-finite-limits).
-Compose the adjunctions for extension by zero (lem-weil-pbc-etale-restriction-injectives)
-and inverse image (prop-weil-pbc-inverse-image-modules-exact), using
+1. The base change of `j` is etale (situation-conventions).
+Compose the adjunctions for extension by zero (lemma-acyclicity-pulled-back-injectives)
+and inverse image (situation-conventions), using
  def-weil-pbc-composite-adjunction. The two left adjoints are `f⁻¹ j_!` and `j'_! f'⁻¹`.
 By def-weil-pbc-etale-shriek-base-change-map, the conjugate of the displayed transformation
 is the underived exchange between their right adjoints.
@@ -42,7 +42,7 @@ on abelian sheaves: sections identify the two iterated fibre products.
 3. By lem-weil-pbc-underived-exchange-module-linear, exchange is module-linear. The inverse
 of each bijective linear section map is linear, and these inverses commute with restriction.
 Thus the exchange is a natural isomorphism on module sheaves
-(def-weil-sheaf-of-modules-category).
+(situation-conventions).
 4. Conjugation preserves and reflects isomorphisms (def-weil-pbc-adjunction-conjugate),
 so the base-change transformation is an isomorphism. Its inverse is natural in the sheaf. -/
 theorem isIso_etaleLowerShriekBaseChangeMap (Λ : Type (u + 1)) [CommRing Λ]

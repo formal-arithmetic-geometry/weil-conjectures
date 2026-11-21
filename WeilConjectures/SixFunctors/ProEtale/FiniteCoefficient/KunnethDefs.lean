@@ -12,8 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Finite-coefficient pro-étale definitions for the ordinary Künneth formula
 
-The pro-étale definitions of the blueprint subsection `sk-prop-sf-kunneth-ordinary`, at a
-Noetherian commutative coefficient ring `Λ` (in the blueprint the finite ring `𝒪_E/ϖⁿ`): they are
+The pro-étale definitions of the blueprint subsection `proposition-ordinary-external-kunneth--1`, at
+a Noetherian commutative coefficient ring `Λ` (in the blueprint the finite ring `𝒪_E/ϖⁿ`): they are
 the pro-étale functors and projection maps of the repository specialised to the coefficients
 `ModuleCat Λ`.
 
@@ -21,9 +21,9 @@ the pro-étale functors and projection maps of the repository specialised to the
   pro-étale case).
 - `AlgebraicGeometry.ProEtale.IndEtaleTestObject` (`pur7710-def-ind-etale-tests`) and the
   restriction `AlgebraicGeometry.ProEtale.IndEtaleTestObject.restrict`.
-- `AlgebraicGeometry.ProEtale.starProjectionMapModule` (`pur713-def-star-projection`).
+- `AlgebraicGeometry.ProEtale.starProjectionMapModule` (`definition-projection-formula-map--1`).
 - `AlgebraicGeometry.ProEtale.openProjectionMapModule` (`pur713-def-open-projection`).
-- `AlgebraicGeometry.ProEtale.shriekProjectionMapModule` (`pur713-def-shriek-projection`).
+- `AlgebraicGeometry.ProEtale.shriekProjectionMapModule` (`proposition-purity-vector-bundles`).
 
 ## Implementation notes
 
@@ -107,7 +107,7 @@ end IndEtaleTestObject
 
 variable [IsNoetherianRing Λ]
 
-/-- Blueprint `pur713-def-star-projection`: direct-image projection transformation, finite
+/-- Blueprint `definition-projection-formula-map--1`: direct-image projection transformation, finite
 coefficients.
 
 For `f : X ⟶ Y`, `K ∈ D(X_proét, Λ)` and `L ∈ D(Y_proét, Λ)`,
@@ -135,7 +135,7 @@ noncomputable abbrev openProjectionMapModule {U X : Scheme.{u}} (j : U ⟶ X) [I
       derivedTensorWhiskeringLeftOpenImmersionLowerShriek (ModuleCat.{u + 1} Λ) j :=
   derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j
 
-/-- Blueprint `pur713-def-shriek-projection`: compact-support projection transformation, finite
+/-- Blueprint `proposition-purity-vector-bundles`: compact-support projection transformation, finite
 coefficients.
 
 For a compactification `d = (j, p)` of `f` (for the chosen one `c_f`, this is `PF_f`,

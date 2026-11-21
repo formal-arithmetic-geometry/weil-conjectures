@@ -28,9 +28,9 @@ exchange map `Ex_!` along the compatible compactifications
 `h = 𝟙 Y` it is an endomorphism of `Rf_!(c) K`, the *compact Frobenius*
 (`AlgebraicGeometry.ProEtale.compactFrobenius`); for `f = a_X` the structure morphism and the
 iterated datum `φ_m` this is the global geometric Frobenius `F_{c,m}` on
-`RΓ_c(X, K) = Ra_{X!} K` of blueprint `def-trf-frobenius-operators`, in the form
+`RΓ_c(X, K) = Ra_{X!} K` of blueprint `definition-frobenius-operator--1`, in the form
 `F_{c,m} = RΓ_c(X, φ_m) ∘ g_{γ,c}^{m,*}` of blueprint
-`lem-trf-frobenius-operator-compact-description`.
+`lemma-scheme-frobenius-geometric-frobenius--3`.
 
 ## Main definitions
 
@@ -117,8 +117,8 @@ noncomputable def lowerShriekWeilDatum (hi : IsPullback g c.i c.i gZ) (hg : Comm
     L((h)^*[A]).obj (Rf_!(c)[A].obj K) ⟶ Rf_!(c)[A].obj K :=
   (rightDerivedLowerShriekOfCompactificationBaseChange A c c hi hg).app K ≫ Rf_!(c)[A].map φ
 
-/-- Blueprint `def-trf-frobenius-operators` (the global operator) and
-`lem-trf-frobenius-operator-compact-description`: the *compact Frobenius* of a Weil datum
+/-- Blueprint `definition-frobenius-operator--1` (the global operator) and
+`lemma-scheme-frobenius-geometric-frobenius--3`: the *compact Frobenius* of a Weil datum
 `φ : Lg^* K ⟶ K`, for endomorphisms `g`, `gZ` compatible with the compactification `c` over the
 identity of `Y`, is the endomorphism
 ```

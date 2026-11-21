@@ -56,7 +56,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 # Bounded flat models at finite coefficient levels
 
 Source: Weil conjectures blueprint, `sec-smooth-purity/sk-lem-sf-flat-model`,
-`lem-sf-flat-model.md`, all three clauses (blueprint: lem-sf-flat-model).
+`lem-sf-flat-model.md`, all three clauses (blueprint: lemma-flat-models-generators--1).
 
 ## Main statements
 
@@ -84,7 +84,7 @@ namespace AlgebraicGeometry.Scheme
 set_option synthInstance.maxSize 2048 in
 /-- The pro-etale flat-model equivalence at the finite coefficient ring `A_{E,n}`.
 Source: blueprint `sec-smooth-purity/sk-lem-sf-flat-model/lem-sf-flat-model.md`,
-conditions (i) and (ii) (blueprint: lem-sf-flat-model).
+conditions (i) and (ii) (blueprint: lemma-flat-models-generators--1).
 
 Proof: work directly in the recorded constant-ring module category, identify site
 flatness with categorical flatness, and compare the explicit K-flat tensor model with
@@ -213,7 +213,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The same equivalence on the small etale site, with finite-value constructibility.
 Source: blueprint `sec-smooth-purity/sk-lem-sf-flat-model/lem-sf-flat-model.md`,
-the small-etale clause (blueprint: lem-sf-flat-model).
+the small-etale clause (blueprint: lemma-flat-models-generators--1).
 
 Proof: convert bounded constructibility using the constructible-sheaf comparison and
 apply lem-sf-etale-flat-model. The flat terms and support interval are unchanged. -/

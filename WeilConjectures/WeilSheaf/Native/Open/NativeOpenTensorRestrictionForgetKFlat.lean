@@ -21,6 +21,23 @@ attribute [local irreducible]
 universe u a b
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.ProEtaleWeilSheaf
+
+private theorem cancel_total_model_square
+    {C D : Type*} [Category* C] [Category* D] (F : C ⥤ D)
+    {X Y Z : C} {A B E W V K : D} (mZ : X ≅ Z) (mU : W ≅ V)
+    {t : X ⟶ Y} {z : Y ⟶ Z} {u : W ⟶ V}
+    {a : A ⟶ B} {b : B ⟶ E} {c : E ⟶ W}
+    {d : A ⟶ F.obj X} {q : F.obj Z ⟶ K} {r : K ⟶ V} {ord : F.obj Y ⟶ W}
+    (hmZ : mZ.hom = t ≫ z) (hmU : mU.hom = u)
+    (hr : a ≫ b ≫ c ≫ mU.hom = d ≫ F.map mZ.hom ≫ q ≫ r)
+    (ho : ord ≫ u = F.map z ≫ q ≫ r) :
+    a ≫ b ≫ c = d ≫ F.map t ≫ ord := by
+  apply (cancel_mono mU.hom).1
+  simp only [Category.assoc]
+  rw [hr, hmZ, F.map_comp]
+  simp only [Category.assoc]
+  rw [← ho, ← hmU]
+
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime]
   [Fact (ringChar k₀ ≠ l)]
 variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
@@ -33,8 +50,6 @@ variable {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (Z ↘ Spec (CommRingCat.of k₀))]
   [IsSeparated (Z ↘ Spec (CommRingCat.of k₀))]
 
-set_option maxHeartbeats 2000000 in
--- The HEq transports and long categorical reassociation require the larger reduction budget.
 /-- The restriction/forgetting square on two actual K-flat complexes, for the
 ordinary comparison already constructed by normalized tensor--Hom adjunctions.
 
@@ -120,12 +135,6 @@ theorem native_open_tensor_restriction_forget_kflat (s : NativeOpenTensorData k�
     ((nativeForget k₀ l Z).obj (DerivedCategory.Q.obj T))
     (F.mapDerivedCategoryFactors.app P) (F.mapDerivedCategoryFactors.app T)
   dsimp only [F, P₀, T₀, Iso.app_hom] at ho
-  erw [← hmU] at ho
-  apply (cancel_mono mU.hom).1
-  simp only [Category.assoc]
-  erw [hr]
-  erw [hmZ]
-  simp only [Functor.map_comp, Category.assoc] at ho ⊢
-  erw [← ho]
+  exact cancel_total_model_square R.mapDerivedCategory mZ mU hmZ hmU hr ho
 
 end AlgebraicGeometry.ProEtaleWeilSheaf

@@ -52,7 +52,7 @@ compatible equivalences of sheaf categories and of global sections. Only direct
 images occur here; no inverse-image adjunction or restriction unit is used.
 
 Source: Stacks Project, Tag 09ZG, closed-image and universe-transport step.
-(blueprint: lem-weil-pbc-embedding-pushforward-transport)
+(blueprint: theorem-gabber-affine-proper-base-change)
 
 Proof:
 1. The homeomorphism e identifies the frames of opens of X and Y. Its order
