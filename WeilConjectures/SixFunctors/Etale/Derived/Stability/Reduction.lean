@@ -245,7 +245,7 @@ variable [IsAlgClosed k]
 omit [IsAlgClosed k] in
 /-- Coefficient reduction commutes with the six operations at the finite stage.
 
-Let `k` be algebraically closed, `Λ` a finite ring whose exponent is invertible on `k` (the
+Let `k` be a field, `Λ` a finite ring whose exponent is invertible on `k` (the
 finite stage `A = A_{E,n}`), `B = Λ ⧸ J` a finite coefficient quotient and `f : X ⟶ Y` a morphism
 of separated finite-type `k`-schemes. On the finite-Tor constructible domains, the coefficient
 reduction `K ↦ K_B = K ⊗ᴸ (Λ/J)_X` (read after restriction of scalars to `Λ`) commutes with
