@@ -17,7 +17,6 @@ For a finite extension `E` of `ℚ_[l]` living in `Type`, the algebra isomorphis
 `E ≃ₐ[ℚ_[l]] ULift E` preserves spectral norms. Hence it identifies the rings of integers
 and the condensed rings of continuous maps into them:
 `continuousMapRingObj 𝒪_E ≅ DerivedNakayama.integerRing l (ULift E)`, as ring objects.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -30,10 +29,6 @@ namespace AlgebraicGeometry.ProEtale.IntegralQuotient
 
 variable (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra ℚ_[l] E]
 
-/-- The universe lift `E ≃ₐ[ℚ_[l]] ULift E`. -/
-noncomputable def uliftAlgEquiv : E ≃ₐ[ℚ_[l]] ULift.{u} E :=
-  { ULift.ringEquiv.symm with commutes' := fun _ ↦ rfl }
-
 variable [FiniteDimensional ℚ_[l] E]
 
 omit [FiniteDimensional ℚ_[l] E] in
@@ -41,13 +36,13 @@ omit [FiniteDimensional ℚ_[l] E] in
 theorem spectralNorm_uliftUp (x : E) :
     spectralNorm ℚ_[l] (ULift.{u} E) (ULift.up x) = spectralNorm ℚ_[l] E x := by
   unfold spectralNorm
-  exact congrArg _ (minpoly.algEquiv_eq (uliftAlgEquiv.{u} l E) x)
+  exact congrArg _ (minpoly.algEquiv_eq (ULift.algEquiv.{0, 0, u} (R := ℚ_[l]) (A := E)).symm x)
 
 /-- The universe lift restricts to a ring isomorphism of the rings of integers. -/
 noncomputable def uliftIntegersRingEquiv :
     Padic.coefficientExtensionIntegers l E ≃+*
       Padic.coefficientExtensionIntegers l (ULift.{u} E) :=
-  (uliftAlgEquiv.{u} l E).toRingEquiv.restrict _ _ fun x ↦ by
+  (ULift.algEquiv.{0, 0, u} (R := ℚ_[l]) (A := E)).symm.toRingEquiv.restrict _ _ fun x ↦ by
     rw [Padic.mem_coefficientExtensionIntegers, Padic.mem_coefficientExtensionIntegers,
       Padic.coefficientExtensionAbsoluteValue_apply,
       Padic.coefficientExtensionAbsoluteValue_apply]
