@@ -14,6 +14,7 @@ public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.PointCount
 public import WeilConjectures.WeilSheaf.BaseChangeField.CompactSupport
+public import WeilConjectures.WeilSheaf.BaseChangeField.Stalk
 public import WeilConjectures.WeilSheaf.LisseLocus
 public import WeilConjectures.WeilSheaf.OpenClosedTriangle
 public import WeilConjectures.WeilSheaf.StalkUpperStar
@@ -62,9 +63,8 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 namespace WeilSheaf
 
 /-- **Localization in degree one.** Let `j : U ⟶ X` be an open immersion of separated
-`k₀`-schemes of finite type whose complement is finite. For a Weil sheaf `F` on `X`, the open–closed
-triangle gives a Frobenius-equivariant surjection `H_c^1(U, j^*F) ↠ H_c^1(X, F)`: the next term
-`H_c^1(Z, i^*F)` of the long exact sequence vanishes, the complement `Z` being finite. -/
+`k₀`-schemes of finite type whose complement is finite. For a Weil sheaf `F` on `X`, there is a
+Frobenius-equivariant surjection `H_c^1(U, j^*F) ↠ H_c^1(X, F)`. -/
 theorem exists_surjective_compactlySupportedCohomology_one_of_finite_compl
     {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [X.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]
@@ -149,8 +149,7 @@ of `ℙ¹_{k₀}`, embedded by `c`. There are a finite extension `K` of `k₀` a
 `W_K = W₀ ×_{k₀} K` with finite complement, embedded by `i`, together with a dense open
 immersion `j : V ⟶ 𝔸¹_K` which extends over infinity: there are an open `W'` of `ℙ¹_K`
 containing `∞` with `W' ∩ 𝔸¹_K = j(V)` and a morphism `ψ : W' ⟶ W_K` restricting to `i` on
-`j(V)`. Indeed, `W₀` has a rational point `s` over the residue field `K` of a closed point, and
-the composite of a translation of `𝔸¹_K` and of the chart at infinity sends `s` to `∞`. -/
+`j(V)`. -/
 theorem ProjectiveLine.exists_isOpenImmersion_affineLine_baseChangeField {W : Scheme.{u}}
     [W.Over (Spec (CommRingCat.of k₀))] [Nonempty W]
     (c : W ⟶ ProjectiveLine (Spec (CommRingCat.of k₀))) [IsOpenImmersion c]
@@ -366,15 +365,21 @@ private theorem exists_lisseOnDenseOpen_of_surjective {K : Type u} [Field K] [Fi
 weight `w`. There are a finite extension `K` of `k₀`, a dense open `V₀` of the affine line `𝔸¹_K`
 with a lisse Weil sheaf `G` on it, punctually `ι`-pure of weight `w` and unramified at infinity,
 and a surjection `H_c^1(V, G) ↠ H_c^1(W, F)` carrying the geometric Frobenius of `K` to the
-`[K : k₀]`-th power of that of `k₀`. -/
+`[K : k₀]`-th power of that of `k₀`.
+(blueprint: `lemma-finite-extension-base-field-moving`) -/
 theorem exists_surjective_compactlySupportedCohomology_one_of_projectiveLine
     (ι : PadicAlgCl l →+* ℂ) {W : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))] [Nonempty W]
     (c : W ⟶ ProjectiveLine (Spec (CommRingCat.of k₀))) [IsOpenImmersion c]
-    [c.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact (W ↘ Spec (CommRingCat.of k₀))]
+    [c.IsOver (Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l W) (hF : F.IsLisse) {w : ℝ} (hw : F.IsPunctuallyPureOfWeight ι w) :
-    -- `W ↘ Spec k₀` is separated and locally of finite type, being `c` followed by `ℙ¹ ↘ Spec k₀`
+    -- `W ↘ Spec k₀` is separated, locally of finite type and quasi-compact, being `c` followed by
+    -- `ℙ¹ ↘ Spec k₀`, and `c` being quasi-compact as `ℙ¹` is noetherian
     haveI : IsSeparated (W ↘ Spec (CommRingCat.of k₀)) := by rw [← comp_over c]; infer_instance
     haveI : LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀)) := by
+      rw [← comp_over c]; infer_instance
+    haveI : QuasiCompact (W ↘ Spec (CommRingCat.of k₀)) := by
+      have : IsLocallyNoetherian (ProjectiveLine (Spec (CommRingCat.of k₀))) :=
+        LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine _ ↘ Spec (CommRingCat.of k₀))
       rw [← comp_over c]; infer_instance
     ∃ (K : Type u) (_ : Field K) (_ : Finite K) (_ : Algebra k₀ K) (_ : Fact (ringChar K ≠ l))
       (D : WeilSheaf.LisseOnDenseOpen K l),
@@ -388,6 +393,9 @@ theorem exists_surjective_compactlySupportedCohomology_one_of_projectiveLine
   have hc := comp_over c (Spec (CommRingCat.of k₀))
   have : IsSeparated (W ↘ Spec (CommRingCat.of k₀)) := by rw [← hc]; infer_instance
   have : LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀)) := by rw [← hc]; infer_instance
+  have : IsLocallyNoetherian (ProjectiveLine (Spec (CommRingCat.of k₀))) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine _ ↘ Spec (CommRingCat.of k₀))
+  have : QuasiCompact (W ↘ Spec (CommRingCat.of k₀)) := by rw [← hc]; infer_instance
   obtain ⟨K, _, _, _, V, _, i, _, _, j, _, _, W', ψ, _, hj, hfin, hW', htop, hψ⟩ :=
     ProjectiveLine.exists_isOpenImmersion_affineLine_baseChangeField c
   have : Finite K := Module.finite_of_finite k₀
@@ -400,14 +408,16 @@ theorem exists_surjective_compactlySupportedCohomology_one_of_projectiveLine
     LocallyOfFiniteType.isLocallyNoetherian (affineLine K ↘ Spec (CommRingCat.of K))
   have : IsDominant j := ⟨hj⟩
   -- the restriction `F_K` of `F` to `W_K`, and the localization sequence for `V ⊆ W_K`
-  obtain ⟨FK, hFKl, hFKp, hFKc⟩ := WeilSheaf.exists_compactlySupportedCohomology_baseChangeField K F
+  set FK := (WeilSheaf.baseChangeField K).obj F
+  have hFKl : FK.IsLisse := hF.baseChangeField K
+  have hFKp : FK.IsPunctuallyPureOfWeight ι w := hw.baseChangeField K
   obtain ⟨g, hg, hgF⟩ :=
     WeilSheaf.exists_surjective_compactlySupportedCohomology_one_of_finite_compl i hfin FK
-  obtain ⟨E⟩ := hFKc 1
-  have hinf := (hFKl hF).isUnramifiedAtInfinity_upperStar i j W' ψ hW' htop hψ
+  obtain ⟨E⟩ := WeilSheaf.nonempty_equiv_compactlySupportedCohomology_baseChangeField K F 1
+  have hinf := hFKl.isUnramifiedAtInfinity_upperStar i j W' ψ hW' htop hψ
   obtain ⟨D, h₁, h₂, h₃⟩ := exists_lisseOnDenseOpen_of_surjective ι
     ((F.compactlySupportedCohomology 1).powFrobenius (Module.finrank k₀ K)) j _
-    ((hFKl hF).upperStar i) ((hFKp ι w hw).upperStar i) hinf
+    (hFKl.upperStar i) (hFKp.upperStar i) hinf
     (E.toLinearEquiv.toLinearMap ∘ₗ g) (E.toLinearEquiv.surjective.comp hg) fun x ↦ by
       change E.toLinearEquiv (g _) = _
       rw [hgF, E.map_frobenius]

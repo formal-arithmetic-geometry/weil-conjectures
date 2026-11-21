@@ -217,7 +217,7 @@ closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perf
 
 It is exhibited as a linear isomorphism of `(j_*F^∨)_s̄` onto the `ℚ̄_ℓ`-dual of `(R¹j_*F)_s̄`
 which intertwines the two local Frobenius actions up to the factor `q_s` coming from the Tate
-twist.
+twist. (blueprint: `lemma-local-duality-point-c-u--1`)
 -/
 theorem exists_linearEquiv_dual_stalk_higherDirectImage
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
