@@ -22,11 +22,6 @@ of closed subsets stabilize, and there are finitely many irreducible components.
   at most as many prime ideals as its dimension.
 - `Ideal.exists_notMem_forall_of_isNoetherianRing`: *Nagata's criterion* for a set of primes of a
   noetherian ring to be open.
-
-## Blueprint
-
-- `lem-wf-affine-noetherian-components`: affine schemes of finite type are Noetherian with
-  finitely many irreducible components.
 -/
 
 @[expose] public section
@@ -34,11 +29,7 @@ of closed subsets stabilize, and there are finitely many irreducible components.
 namespace PrimeSpectrum
 
 /-- The spectrum of a finitely generated algebra `A` over a field `k` is a Noetherian space with
-finitely many irreducible components.
-
-The ring `A` is Noetherian by the Hilbert basis theorem (`Algebra.FiniteType.isNoetherianRing`),
-so `Spec A` is a Noetherian space (`PrimeSpectrum.instNoetherianSpace`), and a Noetherian space
-has finitely many irreducible components. -/
+finitely many irreducible components. -/
 theorem finite_irreducibleComponents_of_finiteType (k A : Type*) [Field k] [CommRing A]
     [Algebra k A] [Algebra.FiniteType k A] :
     TopologicalSpace.NoetherianSpace (PrimeSpectrum A) ∧

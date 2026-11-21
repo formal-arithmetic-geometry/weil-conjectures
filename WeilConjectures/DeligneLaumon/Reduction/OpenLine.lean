@@ -28,10 +28,10 @@ connected curve, the middle extension
 
 ## Main statements
 
-- `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve`: blueprint
-  `theorem-weight-bound-curve--2`.
-- `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine`:
-  blueprint `theorem-weight-bound-curve--2`.
+- `AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve`: the weight
+  bound for a lisse sheaf on a smooth geometrically connected curve.
+- `AlgebraicGeometry.hasWeightsAtMost_compactlySupportedCohomology_of_projectiveLine`: the weight
+  bound on a nonempty open of the projective line.
 
 ## References
 
@@ -162,9 +162,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve
 
 /-- **Compact-support upper bound on a curve.** Let `C` be a smooth geometrically connected curve
 over `k₀` and let `F` be a lisse Weil sheaf on `C`, punctually `ι`-pure of weight `w`. Then every
-`H_c^r(C, F)` has weights at most `w + r`: this is
-`AlgebraicGeometry.hasWeightsAtMostOver_compactlySupportedCohomology_directImage_of_isCurve` for
-the identity of `C`, whose middle extension `(𝟙 C)_* F` is `F` itself. -/
+`H_c^r(C, F)` has weights at most `w + r`. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_of_isCurve {C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]

@@ -84,7 +84,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Limits
 
 /-! # Resolution normalization for the actual completed-coefficient Roos functor
 
-Source: Stacks Tag 0941,.
+Source: Stacks Tag 0941.
 -/
 
 @[expose] public noncomputable section
@@ -105,7 +105,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-- The literal Roos functor agrees with the canonical right derived limit, with
 normalization on every K-injective resolution of an entire strict tower.
 
-Source: Stacks 0941, proof of. -/
+Source: Stacks 0941. -/
 theorem pbc_integral_strict_roos_resolution
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (U : Scheme.{u}) :
     ∃ ρ : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙

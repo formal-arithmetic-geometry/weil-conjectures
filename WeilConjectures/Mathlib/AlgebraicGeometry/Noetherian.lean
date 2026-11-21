@@ -39,12 +39,7 @@ open TopologicalSpace Topology
 namespace AlgebraicGeometry
 
 /-- A connected locally noetherian scheme all of whose local rings are integral domains is
-irreducible.
-
-Each point `x` lies in a unique irreducible component of a noetherian affine open neighbourhood,
-since the generic points of these components are generalizations of `x`, and the set of
-generalizations of `x` is irreducible, being the image of `Spec 𝒪_{X, x}`. So every point has an
-irreducible open neighbourhood, and a connected locally irreducible space is irreducible. -/
+irreducible. -/
 theorem irreducibleSpace_of_isDomain_stalk (X : Scheme.{u}) [IsLocallyNoetherian X]
     [ConnectedSpace X] (h : ∀ x : X, IsDomain (X.presheaf.stalk x)) : IrreducibleSpace X := by
   refine irreducibleSpace_of_forall_exists_isPreirreducible fun x ↦ ?_
@@ -73,8 +68,7 @@ theorem irreducibleSpace_of_isDomain_stalk (X : Scheme.{u}) [IsLocallyNoetherian
   exact ⟨((↑) : V → X) '' U, V.2.isOpenMap_subtype_val U hU, ⟨_, hxU, rfl⟩,
     hUirr.image _ continuous_subtype_val.continuousOn⟩
 
-/-- A locally noetherian scheme is locally connected, since it is covered by noetherian open
-subspaces. -/
+/-- A locally noetherian scheme is locally connected. -/
 instance (priority := 100) IsLocallyNoetherian.locallyConnectedSpace {X : Scheme.{u}}
     [IsLocallyNoetherian X] : LocallyConnectedSpace X := by
   rw [locallyConnectedSpace_iff_subsets_isOpen_isConnected]
@@ -106,8 +100,7 @@ theorem isNoetherian_left {k : Type u} [Field k] (Y : CategoryTheory.Over (Spec 
   isNoetherian_of_locallyOfFiniteType Y.hom
 
 /-- On a quasi-compact locally noetherian scheme the nilpotency index of nilpotent sections is
-uniformly bounded: every local ring is a localization of a noetherian ring of sections over one
-of finitely many affine opens, whose nilradical is nilpotent. -/
+uniformly bounded. -/
 theorem Scheme.exists_pow_eq_zero_of_isNilpotent (X : Scheme.{u}) [CompactSpace X]
     [IsLocallyNoetherian X] :
     ∃ N : ℕ, ∀ (U : X.Opens) (a : Γ(X, U)), IsNilpotent a → a ^ N = 0 := by

@@ -86,21 +86,16 @@ classical case is `k = ℤ/p`.
   `AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_neg_inv`: the inverse of
   `ℒ_{Ψ, f}` is both `ℒ_{Ψ, -f}` and `ℒ_{Ψ⁻¹, f}`, and `ℒ_{Ψ, -f} ≅ ℒ_{Ψ⁻¹, f}`.
 
-## Blueprint
+## Implementation notes
 
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
-
-The subsection `lemma-artin-schreier-character-sheaf` also contains the trace function of
-`ℒ_{Ψ, a x}` (`AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`, stated for the `ℓ`-adic
-Weil sheaf `AlgebraicGeometry.artinSchreier`, where trace functions are defined) and the cohomology
-of the affine line with coefficients in `ℒ_{Ψ, a x}`
-(`WeilConjectures.FourierTransform.ArtinSchreierCohomology`). The orthogonality
+The trace function of `ℒ_{Ψ, a x}` is
+`AlgebraicGeometry.WeilSheaf.traceFunction_artinSchreier`, stated for the `ℓ`-adic Weil sheaf
+`AlgebraicGeometry.artinSchreier`, where trace functions are defined; the cohomology of the
+affine line with coefficients in `ℒ_{Ψ, a x}` is in
+`WeilConjectures.FourierTransform.ArtinSchreierCohomology`. The orthogonality
 `e_χ e_{χ'} = 0` and completeness `∑_χ e_χ = 1` of the character projectors fail for a general
 `Λ` (the first when `Λ` has zero divisors, the second when `Λ` lacks the `p`-th roots of unity);
 the isotypic decomposition is stated for a primitive character with values in a domain.
-
-## Implementation notes
 
 `q` is required to be invertible in `Λ` throughout: the idempotent `e_Ψ` that defines `ℒ_Ψ` is
 `q⁻¹ ∑_a Ψ(-a) σ_a`, and without it the pushforward `(AS_q)_* Λ` has no isotypic
@@ -140,7 +135,6 @@ and `𝔸²_k`: `zero` and `one` along `g^* Λ ≅ Λ`, and `add` and `mul` alon
 `g^* (A ⊗ B) ≅ g^* A ⊗ g^* B` from the strong monoidal structure
 `AlgebraicGeometry.Etale.monoidal_upperStar`. For `add` the pullback is along the pair
 `(f, g) : X ⟶ 𝔸²_k`.
-
 -/
 
 @[expose] public section
@@ -294,14 +288,7 @@ lemma exists_eq_comp_artinSchreierTranslation {T : Scheme.{u}} [IsDomain Γ(T, �
 
 /-- **The automorphisms of the Artin–Schreier covering are the translations.** Every
 endomorphism `g` of `𝔸¹_k` over the Artin–Schreier map `AS_q`, that is with `g ≫ AS_q = AS_q`,
-is a translation `σ_a`, and `a` is unique by
-`AlgebraicGeometry.Etale.artinSchreierTranslation_injective`. Together with the finiteness
-(`AlgebraicGeometry.AffineSpace.isFinite_artinSchreierMap`), the étaleness
-(`AlgebraicGeometry.Etale.etale_artinSchreierMap`), the surjectivity
-(`AlgebraicGeometry.AffineSpace.surjective_artinSchreierMap`) and the torsor structure
-(`AlgebraicGeometry.AffineSpace.isIso_artinSchreierTorsorMap`) of `AS_q`, this is the
-Artin–Schreier covering lemma for the universal covering `AS_q : 𝔸¹_k ⟶ 𝔸¹_k`, whose source is
-connected; the covering of a function `f` is its base change along `f`. -/
+is a translation `σ_a`. -/
 theorem exists_eq_artinSchreierTranslation_of_comp_artinSchreierMap (g : 𝔸¹[k] ⟶ 𝔸¹[k])
     (hg : g ≫ AS[k] = AS[k]) : ∃ a : k, g = artinSchreierTranslation k a := by
   obtain ⟨a, ha⟩ := exists_eq_comp_artinSchreierTranslation (𝟙 _) g (by rw [hg, Category.id_comp])
@@ -462,7 +449,7 @@ lemma image_ι_artinSchreierIdempotent_comp_artinSchreierTranslationAction
 
 /-- The Artin–Schreier sheaf `ℒ_{Ψ, f} := f^* ℒ_Ψ` of a global function `f` on a `k`-scheme
 `X`, where `f` is viewed as a morphism `X ⟶ 𝔸¹_k`. The variants `ℒ_{ψ⁻¹, f}` and
-`ℒ_{ψ(a f)}` of the blueprint are `artinSchreierSheafOf X Ψ⁻¹ f` and
+`ℒ_{ψ(a f)}` are `artinSchreierSheafOf X Ψ⁻¹ f` and
 `artinSchreierSheafOf X Ψ (a • f)`. -/
 def artinSchreierSheafOf (X : Scheme.{u}) [X.Over (Spec (.of k))] (Ψ : AddChar k Λ)
     (f : Γ(X, ⊤)) : Sheaf X.smallEtaleTopology (ModuleCat Λ) :=
@@ -503,8 +490,7 @@ instance invertible_card_ulift_zmod {p : ℕ} [NeZero p] [Invertible (p : Λ)] :
 
 /-- For a scheme `X` of characteristic `p`, the Artin–Schreier sheaf `ℒ_{Ψ, f}` of a global
 function `f` and an additive character `Ψ` of `ℤ/p`, where `X` is viewed as a scheme over
-`𝔽_p` by `AlgebraicGeometry.Scheme.overSpecZModOfCharP`. This is the construction of the
-blueprint definition `lemma-artin-schreier-character-sheaf--1`: the `Ψ`-isotypic part, for a
+`𝔽_p` by `AlgebraicGeometry.Scheme.overSpecZModOfCharP`. It is the `Ψ`-isotypic part, for a
 character `Ψ` of `𝔽_p`, of the Artin–Schreier covering `T ^ p - T = f`. -/
 def artinSchreierSheafZMod {p : ℕ} [Fact p.Prime] [Invertible (p : Λ)] (X : Scheme.{u})
     [CharP Γ(X, ⊤) p] (Ψ : AddChar (ZMod p) Λ) (f : Γ(X, ⊤)) :
@@ -1451,8 +1437,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts in
 character `Ψ` of `k` with values in a domain `Λ`, the characters of `k` are the `Ψ(b ·)`,
 `b ∈ k`, and the pushforward `(AS_q)_* Λ` is the direct sum of their isotypic components:
 `(AS_q)_* Λ ≅ ⨁_{b ∈ k} ℒ_{Ψ(b ·)}`, with inclusions the inclusions of the images of the
-idempotents `e_{Ψ(b ·)}` and projections the corestrictions of these idempotents. The
-idempotents are orthogonal and sum to the identity, by the orthogonality relations for `Ψ`.
+idempotents `e_{Ψ(b ·)}` and projections the corestrictions of these idempotents.
 Each summand is lisse of rank one (`AlgebraicGeometry.Etale.artinSchreierSheafUpperStarIso`),
 and the summand of `b = 0` is the constant sheaf
 (`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheaf_one`). -/

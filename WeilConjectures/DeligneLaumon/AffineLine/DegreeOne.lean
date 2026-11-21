@@ -156,11 +156,7 @@ middle extension `(j_*M)[1]` is the middle extension `(j'_*M')[1]` of `D'`, then
 the transform at the origin `0'` of the dual line identifies `H_c^1(𝔸¹, j_*M)` with the stalk
 `(j'_*M')_{0'}`, Frobenius-equivariantly: the geometric Frobenius of `k₀` on the left
 corresponds to the local Frobenius `F_{0'}` at the `k₀`-rational point `0'` on the right.
-Moreover `H_c^2(𝔸¹, j_*M) = 0`.
-
-Indeed the fibre of `FT_ψ(K)` at `0'` is `RΓ_c(𝔸¹, K)[1]`, the kernel being trivial there, so
-the fibre of `FT_ψ((j_*M)[1])` has `H_c^1` in degree `-1` and `H_c^2` in degree `0`, while the
-fibre of `(j'_*M')[1]` is the stalk `(j'_*M')_{0'}` placed in degree `-1`. -/
+Moreover `H_c^2(𝔸¹, j_*M) = 0`. -/
 theorem nonempty_equiv_stalk_origin_of_isFourierPartner (ψ : AddChar k₀ (PadicAlgCl l))
     (D D' : LisseOnDenseOpen k₀ l) (hFT : D.IsFourierPartner ψ D') :
     Nonempty ((D.directImage.compactlySupportedCohomology 1).Equiv

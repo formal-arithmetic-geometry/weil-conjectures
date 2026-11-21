@@ -265,13 +265,13 @@ lemma connectedSpace_of_range_eq_compl_zeroSection {G : Scheme.{u}}
   have := isIntegral_of_isAffine_of_isDomain G
   infer_instance
 
-/-- Blueprint `thm-pur-kummer-affine-line` (1), degree zero: `H⁰(𝔸¹_k, Λ) = Λ`. -/
+/-- Degree zero cohomology of the affine line: `H⁰(𝔸¹_k, Λ) = Λ`. -/
 theorem nonempty_iso_cohomology_zero_affineLine :
     Nonempty ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(ULift.{u} (Fin 1); Spec (.of k)) 0).obj
       (constantComplex Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) ≅ ModuleCat.of Λ Λ) :=
   ⟨cohomologyZeroConstantComplexIso Λ _⟩
 
-/-- Blueprint `thm-pur-kummer-affine-line` (2), degree zero: `H⁰(𝔾_{m,k}, Λ) = Λ`. -/
+/-- Degree zero cohomology of the punctured line: `H⁰(𝔾_{m,k}, Λ) = Λ`. -/
 theorem nonempty_iso_cohomology_zero_multiplicativeGroup {G : Scheme.{u}}
     (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsOpenImmersion j]
     (hj : Set.range j.base = (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1))

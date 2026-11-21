@@ -241,8 +241,7 @@ namespace AlgebraicGeometry.Scheme
 open Opposite
 
 /-- A nonempty scheme is connected if and only if its only idempotent global sections are `0`
-and `1`. An idempotent `e` cuts `X` into the two disjoint opens `D(e)` and `D(1 - e)`; conversely
-a clopen `U` gives the idempotent which is `1` on `U` and `0` on its complement. -/
+and `1`. -/
 theorem connectedSpace_iff_isIdempotentElem (X : Scheme.{u}) [Nonempty X] :
     ConnectedSpace X ↔ ∀ e : Γ(X, ⊤), IsIdempotentElem e → e = 0 ∨ e = 1 := by
   classical

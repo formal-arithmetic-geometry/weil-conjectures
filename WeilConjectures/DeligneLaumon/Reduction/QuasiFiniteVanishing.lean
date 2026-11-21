@@ -28,10 +28,10 @@ Frobenius of quasi-finite direct images in
 - `AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerStar_of_neg` and
   `AlgebraicGeometry.WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg`: vanishing in
   negative degrees.
-- `AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite`: blueprint
-  `lemma-finite-direct-images--2`.
-- `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`: blueprint
-  `lemma-finite-quasi-finite-direct-images`, part 1.
+- `AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite`: finite direct images are
+  exact.
+- `AlgebraicGeometry.isZero_higherLowerShriek_of_quasiFinite`: vanishing of the higher direct
+  images with compact support along a separated quasi-finite morphism.
 -/
 
 @[expose] public section
@@ -59,8 +59,7 @@ noncomputable def WeilComplex.upperStarToComplexIso (G : WeilSheaf k₀ l X) :
 
 end UpperStar
 
-/-- The derived direct image `Rf₀*G` of a Weil sheaf is concentrated in degrees `≥ 0`: it is
-computed by `f₀*` applied to an injective resolution of `G`. -/
+/-- The derived direct image `Rf₀*G` of a Weil sheaf is concentrated in degrees `≥ 0`. -/
 theorem WeilSheaf.isZero_homologySheaf_derivedLowerStar_of_neg {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
     [f.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact f] [QuasiSeparated f]
@@ -83,7 +82,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 attribute [local instance] Compactification.over in
 /-- The direct image with compact support `Rf₀!G` of a Weil sheaf is concentrated in degrees
-`≥ 0`: it is `Rḡ_*` applied to the extension by zero of `G`, a sheaf. -/
+`≥ 0`. -/
 theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf k₀ l X) {n : ℤ}
     (hn : n < 0) :
     IsZero ((WeilComplex.homologySheaf n).obj
@@ -107,9 +106,7 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf 
 end LowerShriek
 
 /-- **Finite direct images are exact**: for a finite morphism `p : T ⟶ Y` of `k₀`-schemes, the
-higher direct images `Rʳp₀*G` of a Weil sheaf vanish for `r > 0`: the pushforward `p₀*` is exact
-(`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite`), hence is
-its own right derived functor. -/
+higher direct images `Rʳp₀*G` of a Weil sheaf vanish for `r > 0`. -/
 theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
     [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]
@@ -143,12 +140,7 @@ variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the higher direct images
-with compact support `Rʳf₀!` vanish for `r > 0`.
-
-Zariski's main theorem factors `f` as a quasi-compact open immersion `j : X ⟶ T` followed by a
-finite morphism `p : T ⟶ Y`, so that `Rf₀! ≅ Rp₀! ∘ Rj₀! ≅ Rp₀* ∘ j₀!`; the extension by zero
-`j₀!` is exact and so is the finite direct image `p₀*`
-(`AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_isFinite`). -/
+with compact support `Rʳf₀!` vanish for `r > 0`. -/
 theorem isZero_higherLowerShriek_of_quasiFinite (r : ℕ) (hr : 0 < r) (F : WeilSheaf k₀ l X) :
     IsZero ((WeilSheaf.higherLowerShriek k₀ l f r).obj F) := by
   have : CompactSpace Y :=

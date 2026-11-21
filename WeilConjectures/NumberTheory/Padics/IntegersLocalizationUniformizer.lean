@@ -25,7 +25,7 @@ namespace Padic
 and identifies their tensor products as E-modules. The two module structures in the last
 clause are specified on pure tensors: the left action is transported using `φ.symm`, and
 the right action is multiplication on the field factor. The additive equivalence `F`
-intertwines these actions, which states precisely that it is an E-linear isomorphism.
+intertwines these actions, i.e. it is an E-linear isomorphism.
 
 Source: Stacks Project, Tags 00CO and 00CX. -/
 theorem coefficientExtension_localization_uniformizer (l : ℕ) [Fact l.Prime]

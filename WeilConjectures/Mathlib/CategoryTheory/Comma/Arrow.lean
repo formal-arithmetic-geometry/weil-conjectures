@@ -53,8 +53,7 @@ noncomputable def isoOfFac {D E : Type*} [Category* D] [Category* E] (H : D ⥤ 
       ← H.map_comp, w])
 
 /-- The component of a whiskered natural transformation `E ◁ (α ▷ H)` at `x` is, as an arrow,
-`H (α_{E x})`. Stated for abstract functors, this identification is checked syntactically
-when the functors are instantiated. -/
+`H (α_{E x})`. -/
 lemma mk_whiskerLeft_whiskerRight_app {B D E : Type*} [Category* B] [Category* D]
     [Category* E] (F : B ⥤ C) {P Q : C ⥤ D} (α : P ⟶ Q) (H : D ⥤ E) (x : B) :
     Arrow.mk ((Functor.whiskerLeft F (Functor.whiskerRight α H)).app x) =

@@ -14,10 +14,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierDualWeil
 # Weil equivariance of smooth purity and of the smooth trace
 
 Let `f : X ⟶ Y` be smooth of relative dimension `d`, and let `g_X`, `g_Y` be endomorphisms of `X`
-and `Y` forming a cartesian square `g_X ≫ f = f ≫ g_Y` (in the blueprint, the geometric-Galois
-Frobenii of `sec-Weil-complexes`). A Weil datum `φ_K : Lg_Y^* K ⟶ K` induces
+and `Y` forming a cartesian square `g_X ≫ f = f ≫ g_Y` (typically the geometric-Galois
+Frobenii). A Weil datum `φ_K : Lg_Y^* K ⟶ K` induces
 data on the source and on the target of the smooth purity map `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K`
-(`definition-weil-structure--1`: `AlgebraicGeometry.Etale.smoothPurityWeilDatum` and
+(`AlgebraicGeometry.Etale.smoothPurityWeilDatum` and
 `AlgebraicGeometry.Etale.upperShriekWeilDatum`, constructed in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.WeilDatum`), and on compactly supported direct
 images. This file proves that purity, the exceptional counit
@@ -46,11 +46,10 @@ are transported by every functor commuting with the Frobenius pullbacks.
 The library constructs the smooth purity map `γ_{f,K}` from an identification `θ` of the
 dualizing complex and a natural tensor formula `Φ` (`AlgebraicGeometry.Etale.smoothPurityIso`),
 which are arguments here. The purity square is proved for arbitrary `θ` and `Φ`. The counit and
-trace squares use, as in the blueprint, that the smooth pullback exchange of
-`proposition-compatibility-purity-base-change--1` is the exceptional base change, i.e. the mate of
-the compact-support base change (`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`); this is the
-base-change compatibility of purity of `proposition-exceptional-inverse-image-smooth-morphism` (c)
-for the canonical purity map, which is not constructed in the library, so it is a hypothesis `hcoh`.
+trace squares use that the smooth pullback exchange is the exceptional base change, i.e. the mate
+of the compact-support base change (`AlgebraicGeometry.Etale.upperShriekBaseChangeMap`); this is
+the base-change compatibility of purity for smooth morphisms for the canonical purity map, which
+is not constructed in the library, so it is a hypothesis `hcoh`.
 For arbitrary `θ` and `Φ` it can fail: a natural automorphism of `Rf^!` that does not commute with
 `Lg^*` (for instance `±1` on two components of `X` swapped by `g`) changes `Φ` without changing
 anything else.
@@ -125,7 +124,8 @@ variable {gX : X ⟶ X} {gY : Y ⟶ Y}
 
 For a cartesian square `g_X ≫ f = f ≫ g_Y` and a Weil datum `φ_K` on `K`, the smooth purity map
 `γ_{f,K} : Lf^* K(d)[2d] ⟶ Rf^! K` is a morphism of Weil objects for the data `φ^pur_{f,K}` and
-`φ^!_{f,K}` of `definition-weil-structure--1`:
+`φ^!_{f,K}` (`AlgebraicGeometry.Etale.smoothPurityWeilDatum`,
+`AlgebraicGeometry.Etale.upperShriekWeilDatum`):
 ```
 Lg_X^* Lf^* K(d)[2d] ──Lg_X^* γ──▶ Lg_X^* Rf^! K
         │ φ^pur                        │ φ^!
@@ -172,8 +172,8 @@ noncomputable abbrev compactSupportWeilTransport (sq : IsPullback gX f f gY)
       (R(f)_![ModuleCat.{u + 1} Λ]).obj M :=
   lowerShriekWeilDatum sq φM
 
-/-- Under the base-change compatibility `hcoh` of purity, the datum `φ^!_{f,K}` of
-`definition-weil-structure--1` is the exceptional transport of `φ_K`
+/-- Under the base-change compatibility `hcoh` of purity, the datum `φ^!_{f,K}`
+(`AlgebraicGeometry.Etale.upperShriekWeilDatum`) is the exceptional transport of `φ_K`
 (`AlgebraicGeometry.Etale.upperShriekMateWeilDatum`). -/
 lemma upperShriekWeilDatum_eq (sq : IsPullback gX f f gY) {K : DerivedCategoryModule Λ Y}
     (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
@@ -186,7 +186,7 @@ lemma upperShriekWeilDatum_eq (sq : IsPullback gX f f gY) {K : DerivedCategoryMo
 /-- Weil equivariance of purity and trace, the counit square.
 
 If the smooth pullback exchange of the square is the exceptional base change `hcoh` (the
-base-change compatibility of purity, `proposition-exceptional-inverse-image-smooth-morphism` (c)),
+base-change compatibility of purity),
 then the exceptional counit `Rf_! Rf^! K ⟶ K` is a morphism of Weil objects from the compact-support
 transport of `φ^!_{f,K}` to `φ_K`. -/
 theorem isWeilMorphism_counit (sq : IsPullback gX f f gY)
@@ -203,8 +203,7 @@ theorem isWeilMorphism_counit (sq : IsPullback gX f f gY)
 
 Under the base-change compatibility `hcoh` of purity, the smooth trace
 `Tr^sm_{f,K} : Rf_!(Lf^* K(d)[2d]) ⟶ K` is a morphism of Weil objects from the compact-support
-transport of `φ^pur_{f,K}` to `φ_K`: it is the composite of the purity square, pushed forward
-along `Rf_!`, with the counit square. -/
+transport of `φ^pur_{f,K}` to `φ_K`. -/
 theorem isWeilMorphism_smoothCoefficientTrace (sq : IsPullback gX f f gY)
     {K : DerivedCategoryModule Λ Y} (φK : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)
     (hcoh : (smoothPullbackExchange Λ f sq K θ (Φ.app K) θ (Φ.app _)).hom =
@@ -225,7 +224,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}} {F g : X ⟶ X}
 
 The scheme-Frobenius form `u_N = φ_N ∘ κ_N : LΦ^* N ⟶ N` of a Weil datum `φ_N : Lg^* N ⟶ N`,
 for a comparison `κ : LΦ^* ⟶ Lg^*` of the pullbacks along the scheme Frobenius `Φ` and the
-geometric-Galois automorphism `g` (in the blueprint, `κ_X` or `κ_Y` of the purity Frobenius
+geometric-Galois automorphism `g` (for instance `κ_X` or `κ_Y` of the purity Frobenius
 datum `AlgebraicGeometry.Etale.PurityFrobeniusDatum`). -/
 noncomputable def schemeFrobeniusWeilDatum
     (κ : L((F)^*[ModuleCat.{u + 1} Λ]) ⟶ L((g)^*[ModuleCat.{u + 1} Λ]))
@@ -234,8 +233,7 @@ noncomputable def schemeFrobeniusWeilDatum
   κ.app N ≫ φ
 
 /-- A morphism of Weil objects for the geometric-Galois data is one for their scheme-Frobenius
-forms (`AlgebraicGeometry.Etale.schemeFrobeniusWeilDatum`): precomposing the vertical maps of
-an equivariance square with `κ` preserves its commutativity. -/
+forms (`AlgebraicGeometry.Etale.schemeFrobeniusWeilDatum`). -/
 lemma IsWeilMorphism.schemeFrobeniusWeilDatum
     (κ : L((F)^*[ModuleCat.{u + 1} Λ]) ⟶ L((g)^*[ModuleCat.{u + 1} Λ]))
     {M N : DerivedCategoryModule Λ X} {φM : (L((g)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M}

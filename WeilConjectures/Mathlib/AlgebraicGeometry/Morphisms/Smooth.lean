@@ -119,10 +119,7 @@ V --e--> 𝔸(d; U)
   \         ↓
 g.resLE     U
 ```
-
-On rings, this is `Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial`:
-reading the last `d` variables of a submersive presentation as coordinates of the base turns
-it into a square Jacobian presentation over `Γ(Y, U)[x₁, …, x_d]`. -/
+-/
 theorem Scheme.Hom.exists_etale_to_affineSpace_of_isStandardSmoothOfRelativeDimension
     {X Y : Scheme.{u}} (g : X ⟶ Y) {d : ℕ} {U : Y.Opens} {V : X.Opens} (hU : IsAffineOpen U)
     (hV : IsAffineOpen V) (hVU : V ≤ g ⁻¹ᵁ U)
@@ -193,9 +190,7 @@ V --e--> 𝔸(d; U)
   \         ↓
 g.resLE     U
 ```
-
-Near `x` the ring map `Γ(Y, U) ⟶ Γ(X, V)` is standard smooth, and
-`Scheme.Hom.exists_etale_to_affineSpace_of_isStandardSmoothOfRelativeDimension` applies. -/
+-/
 @[stacks 054L]
 theorem Scheme.Hom.exists_etale_to_affineSpace_of_mem_smoothLocus {X Y : Scheme.{u}} (g : X ⟶ Y)
     [LocallyOfFinitePresentation g] {x : X} (hx : x ∈ g.smoothLocus) :
@@ -265,9 +260,7 @@ theorem Smooth.exists_etale_affineSpace {X Y : Scheme.{u}} (t : X ⟶ Y) [Smooth
 
 open Order in
 /-- Let `φ : K[X₁, …, Xₙ] ⟶ A` be an étale ring map over a field `K`. Every point of `Spec A`
-has codimension at most `n`, and every closed point has codimension exactly `n`: the étale map
-`Spec A ⟶ 𝔸ⁿ_K` preserves codimension and maps closed points to closed points, and maximal
-ideals of `K[X₁, …, Xₙ]` have height `n`. -/
+has codimension at most `n`, and every closed point has codimension exactly `n`. -/
 theorem coheight_le_of_etale_mvPolynomial {K : Type u} [Field K] {A : CommRingCat.{u}} {n : ℕ}
     (φ : MvPolynomial (Fin n) K →+* A) (hφ : φ.Etale) (y : Spec A) :
     coheight y ≤ n ∧ (IsClosed {y} → coheight y = n) := by
@@ -311,7 +304,7 @@ theorem coheight_le_of_smoothOfRelativeDimension {K : Type u} [Field K] {X : Sch
 
 open Order in
 /-- A closed point of a scheme smooth of relative dimension `n` over a field has codimension
-exactly `n`: in an affine chart étale over `K[X₁, …, Xₙ]` it is a maximal ideal, of height `n`. -/
+exactly `n`. -/
 theorem coheight_eq_of_smoothOfRelativeDimension_of_isClosed {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] {x : X}
     (hx : IsClosed ({x} : Set X)) : coheight x = n := by
@@ -327,10 +320,7 @@ theorem coheight_eq_of_smoothOfRelativeDimension_of_isClosed {K : Type u} [Field
   rw [← hy, coheight_eq_of_isOpenImmersion]
   exact (coheight_le_of_etale_mvPolynomial φ hφ y).2 hy'
 
-/-- A scheme smooth of relative dimension `n` over a field has dimension at most `n`. It is
-normal and locally noetherian, so its connected components are open and irreducible; each of
-them is smooth of relative dimension `n`, hence of dimension `n` by
-`AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`. -/
+/-- A scheme smooth of relative dimension `n` over a field has dimension at most `n`. -/
 theorem topologicalKrullDim_le_of_smoothOfRelativeDimension {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] :
     topologicalKrullDim X ≤ n := by
@@ -338,9 +328,7 @@ theorem topologicalKrullDim_le_of_smoothOfRelativeDimension {K : Type u} [Field 
     Order.krullDim_eq_iSup_coheight]
   exact iSup_le fun x ↦ by exact_mod_cast coheight_le_of_smoothOfRelativeDimension f n x
 
-/-- A nonempty scheme smooth of relative dimension `n` over a field has dimension exactly `n`:
-each of its connected components is irreducible and smooth of relative dimension `n`, hence of
-dimension `n` by `AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq`. -/
+/-- A nonempty scheme smooth of relative dimension `n` over a field has dimension exactly `n`. -/
 theorem topologicalKrullDim_eq_of_smoothOfRelativeDimension {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f]
     [Nonempty X] : topologicalKrullDim X = n := by
@@ -360,13 +348,7 @@ theorem topologicalKrullDim_eq_of_smoothOfRelativeDimension {K : Type u} [Field 
 open Limits in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Affine space is smooth**. The affine space
-`𝔸(n; S)` over `S` in finitely many variables is smooth of relative dimension `#n` over `S`.
-
-The affine space of blueprint `def-sbc-affine-space` is Mathlib's `AlgebraicGeometry.AffineSpace`,
-and the smooth morphisms (of relative dimension `n`) of blueprint `def-sbc-smooth-morphisms` are
-Mathlib's `AlgebraicGeometry.Smooth` and `AlgebraicGeometry.SmoothOfRelativeDimension`; the
-morphisms locally of finite presentation of blueprint `def-sbc-locally-finite-presentation` are
-Mathlib's `AlgebraicGeometry.LocallyOfFinitePresentation`. -/
+`𝔸(n; S)` over `S` in finitely many variables is smooth of relative dimension `#n` over `S`. -/
 instance AffineSpace.smoothOfRelativeDimension_over (n : Type u) [Finite n] (S : Scheme.{u}) :
     SmoothOfRelativeDimension (Nat.card n) (𝔸(n; S) ↘ S) :=
   have := smoothOfRelativeDimension_isStableUnderBaseChange (n := Nat.card n)
@@ -382,9 +364,7 @@ instance AffineSpace.smoothOfRelativeDimension_over (n : Type u) [Finite n] (S :
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The map `𝔸^{d+1}_S ⟶ 𝔸^d_S` forgetting the first coordinate is smooth of relative
-dimension one: it is isomorphic, over `𝔸^d_S`, to the affine line `𝔸^1` over `𝔸^d_S`. Writing
-`𝔸^d_S ⟶ S` as the composite of `d` such maps reduces statements about smooth morphisms to
-relative dimension one. -/
+dimension one. -/
 instance AffineSpace.smoothOfRelativeDimension_reindex_succ (d : ℕ) (S : Scheme.{u}) :
     SmoothOfRelativeDimension 1
       (reindex (fun i : ULift.{u} (Fin d) ↦ (⟨i.down.succ⟩ : ULift.{u} (Fin (d + 1)))) S) := by
@@ -429,9 +409,7 @@ instance AffineSpace.smoothOfRelativeDimension_reindex_succ (d : ℕ) (S : Schem
 
 /-- A smooth morphism is, locally on the source and on the target, smooth of some relative
 dimension: every point `x` has affine open neighbourhoods `V ∋ x` and `U ∋ f.base x` with
-`V ≤ f ⁻¹ᵁ U` such that `f.resLE U V` is smooth of relative dimension `d` for some `d`.
-This is the input needed to apply `AlgebraicGeometry.Smooth.exists_etale_to_affineSpace` to
-a smooth morphism whose relative dimension varies. -/
+`V ≤ f ⁻¹ᵁ U` such that `f.resLE U V` is smooth of relative dimension `d` for some `d`. -/
 theorem Smooth.exists_smoothOfRelativeDimension_resLE {X Y : Scheme.{u}} (f : X ⟶ Y) [Smooth f]
     (x : X) :
     ∃ (U : Y.Opens) (V : X.Opens) (_ : IsAffineOpen U) (_ : IsAffineOpen V) (_ : x ∈ V)
@@ -475,9 +453,7 @@ theorem SmoothOfRelativeDimension.eq_of_field {K : Type u} [Field K] {X : Scheme
   exact_mod_cast h₁.symm.trans h₂
 
 /-- An irreducible scheme `X` smooth over a field `K` is smooth of relative dimension `n` over
-`K` if and only if `X` has dimension `n`: the relative dimension of a smooth morphism at a point
-is the dimension of the fibre at that point, and an irreducible scheme locally of finite type
-over a field has the same dimension at all of its points. -/
+`K` if and only if `X` has dimension `n`. -/
 theorem smoothOfRelativeDimension_iff_topologicalKrullDim_eq {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) [Smooth f] [IrreducibleSpace X] (n : ℕ) :
     SmoothOfRelativeDimension n f ↔ topologicalKrullDim X = n := by
@@ -510,9 +486,7 @@ theorem smoothOfRelativeDimension_iff_topologicalKrullDim_eq {K : Type u} [Field
   exact this
 
 /-- A scheme `X` smooth of relative dimension `n` over a field has local dimension `n` at every
-point: every open neighbourhood of a point is a nonempty scheme smooth of relative dimension `n`
-over the field, hence of dimension `n` by
-`AlgebraicGeometry.topologicalKrullDim_eq_of_smoothOfRelativeDimension`. -/
+point. -/
 theorem topologicalKrullDimAt_eq_of_smoothOfRelativeDimension {K : Type u} [Field K]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of K)) (n : ℕ) [SmoothOfRelativeDimension n f] (x : X) :
     topologicalKrullDimAt x = n := by
@@ -526,13 +500,7 @@ theorem topologicalKrullDimAt_eq_of_smoothOfRelativeDimension {K : Type u} [Fiel
 open Limits in
 /-- **Local constancy of the relative dimension**. For a smooth morphism `f : X ⟶ Y`, the function
 `x ↦ dim_x (X_{f(x)})`, the local dimension at `x` of the fibre of `f` through `x`, is locally
-constant on `X`.
-
-Near `x`, the morphism `f` restricts to a morphism `V ⟶ U` of open subschemes which is smooth
-of some relative dimension `d`; for `x' ∈ V` the open subscheme `V ∩ X_{f(x')}` of the fibre
-is its base change to `κ(f(x'))`, smooth of relative dimension `d` over that field, so that
-`dim_{x'} (X_{f(x')}) = d` by
-`AlgebraicGeometry.topologicalKrullDimAt_eq_of_smoothOfRelativeDimension`. -/
+constant on `X`. -/
 @[stacks 02G1]
 theorem Smooth.isLocallyConstant_topologicalKrullDimAt_asFiber {X Y : Scheme.{u}} (f : X ⟶ Y)
     [Smooth f] : IsLocallyConstant fun x : X ↦ topologicalKrullDimAt (f.asFiber x) := by
@@ -592,8 +560,7 @@ theorem smoothOfRelativeDimension_of_fiberToSpecResidueField {X Y : Scheme.{u}} 
   exact ⟨V, hx, inferInstance⟩
 
 /-- Over a field, the relative dimension of a smooth morphism `f : X ⟶ Spec K` can be computed
-after composing with a universally closed, locally quasi-finite surjection `u : X' ⟶ X`: such
-a `u` preserves the dimension of open subschemes. -/
+after composing with a universally closed, locally quasi-finite surjection `u : X' ⟶ X`. -/
 theorem smoothOfRelativeDimension_of_comp_of_surjective_of_field {K : Type u} [Field K]
     {X' X : Scheme.{u}} (u : X' ⟶ X) (f : X ⟶ Spec (.of K)) [Smooth f] [UniversallyClosed u]
     [LocallyQuasiFinite u] [Surjective u] (n : ℕ) [SmoothOfRelativeDimension n (u ≫ f)] :
@@ -619,8 +586,7 @@ theorem smoothOfRelativeDimension_of_comp_of_surjective_of_field {K : Type u} [F
   exact ⟨V, hx, inferInstance⟩
 
 /-- Let `V` be an affine open of a scheme `X` and `R → Γ(X, V)` an étale ring map from a regular
-ring `R`. Then the local rings of `X` at the points of `V` are regular: they are localizations of
-`Γ(X, V)` at primes (`IsRegularLocalRing.localization_of_etale`). -/
+ring `R`. Then the local rings of `X` at the points of `V` are regular. -/
 theorem IsAffineOpen.isRegularLocalRing_stalk_of_etale {X : Scheme.{u}} {R : Type u}
     [CommRing R] [IsRegularRing R] {V : X.Opens} (hV : IsAffineOpen V) (φ : R →+* Γ(X, V))
     (hφ : φ.Etale) (x : X) (hx : x ∈ V) : IsRegularLocalRing (X.presheaf.stalk x) := by
@@ -631,9 +597,7 @@ theorem IsAffineOpen.isRegularLocalRing_stalk_of_etale {X : Scheme.{u}} {R : Typ
   exact .of_ringEquiv (IsLocalization.algEquiv (hV.primeIdealOf ⟨x, hx⟩).asIdeal.primeCompl
     (Localization.AtPrime (hV.primeIdealOf ⟨x, hx⟩).asIdeal) (X.presheaf.stalk x)).toRingEquiv
 
-/-- The local rings of a scheme smooth over a field `k` are regular local rings: near any point
-the scheme is étale over an affine space `𝔸ⁿ_k`, whose local rings are regular, and étale maps
-preserve regularity. -/
+/-- The local rings of a scheme smooth over a field `k` are regular local rings. -/
 theorem Smooth.isRegularLocalRing_stalk {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [Smooth f] (x : X) : IsRegularLocalRing (X.presheaf.stalk x) := by
   obtain ⟨U, V, -, -, hx, e, d, hd⟩ := Smooth.exists_smoothOfRelativeDimension_resLE f x
@@ -687,13 +651,7 @@ theorem Scheme.Hom.mem_smoothLocus_of_isRegularLocalRing {K : Type u} [Field K] 
 open Limits in
 /-- **Smoothness over a field descends along flat surjections** (Stacks, Tag 05AX). Let
 `u : X' ⟶ X` be flat and surjective, and let `f : X ⟶ Spec K` be locally of finite type. If
-`u ≫ f` is smooth, then so is `f`.
-
-After base change to an algebraic closure of `K` (smoothness descends along the fpqc covering
-`Spec K̄ ⟶ Spec K`), it suffices to show that `f` is smooth at the closed points, as the smooth
-locus is open and `X` is a Jacobson space. At a closed point `x = u x'`, the local ring `𝒪_{X,x}`
-is regular since `𝒪_{X,x} ⟶ 𝒪_{X',x'}` is a flat local homomorphism and `𝒪_{X',x'}` is regular
-(`IsRegularLocalRing.of_flat`), and a regular point with residue field `K` is smooth. -/
+`u ≫ f` is smooth, then so is `f`. -/
 @[stacks 05AX]
 theorem Smooth.of_comp_of_flat_of_surjective_of_field {K : Type u} [Field K] {X' X : Scheme.{u}}
     (u : X' ⟶ X) (f : X ⟶ Spec (.of K)) [Flat u] [Surjective u] [LocallyOfFiniteType f]
@@ -735,9 +693,7 @@ theorem Smooth.of_comp_of_flat_of_surjective_of_field {K : Type u} [Field K] {X'
 open Limits in
 /-- **Smoothness descends along flat surjections** (Stacks, Tag 05B5). Let `u : X' ⟶ X` be
 flat, surjective and locally of finite presentation, and let `f : X ⟶ S`. If `u ≫ f` is smooth,
-then so is `f`: the morphism `f` is flat and locally of finite presentation by descent, and its
-fibres are smooth by `AlgebraicGeometry.Smooth.of_comp_of_flat_of_surjective_of_field` applied
-to the base change of `u` to the fibres. -/
+then so is `f`. -/
 @[stacks 05B5]
 theorem Smooth.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}} (u : X' ⟶ X) (f : X ⟶ S)
     [Flat u] [Surjective u] [LocallyOfFinitePresentation u] [Smooth (u ≫ f)] : Smooth f := by
@@ -756,11 +712,7 @@ theorem Smooth.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}} (u : X' ⟶ X
 open Limits in
 /-- **Smoothness descends along finite locally free surjections.** Let `u : X' ⟶ X` be finite,
 flat, locally of finite presentation and surjective, and let `f : X ⟶ S`. If `u ≫ f` is smooth of
-relative dimension `n`, then so is `f`.
-
-Smoothness descends along flat surjective morphisms locally of finite presentation (Stacks, Tag
-05B5), and the relative dimension is preserved since `u` is finite flat surjective, so that
-fibres of `u ≫ f` and of `f` have the same local dimensions. -/
+relative dimension `n`, then so is `f`. -/
 theorem smoothOfRelativeDimension_of_comp_of_isFinite_of_surjective {X' X S : Scheme.{u}}
     (u : X' ⟶ X) (f : X ⟶ S) [IsFinite u] [Flat u] [LocallyOfFinitePresentation u]
     [Surjective u] (n : ℕ) [SmoothOfRelativeDimension n (u ≫ f)] :

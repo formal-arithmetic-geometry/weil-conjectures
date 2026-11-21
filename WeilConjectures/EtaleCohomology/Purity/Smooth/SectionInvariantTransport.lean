@@ -325,8 +325,7 @@ square `eB ≫ s = s' ≫ eV` of closed immersions, identifications `vω : LeV^*
 exceptional base change (`hθ`, `hε`), the isomorphisms `Ls^* ω ≅ Ls^* T` and
 `Ls'^* ω' ≅ Ls'^* T'`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso`) correspond
-under `LeB^* Ls^* ≅ Ls'^* LeV^*`. This is the geometric form of
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.PreservesSectionInvariantIso`. -/
+under `LeB^* Ls^* ≅ Ls'^* LeV^*`. -/
 theorem leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso_baseChange
     {ω T : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {ω' T' : _root_.DerivedCategory (Sheaf V'.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

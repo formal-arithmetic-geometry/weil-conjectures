@@ -26,7 +26,9 @@ affine space over a base separated and locally of finite type over a field
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord_of_field`), e.g.
 the diagonal of a smooth morphism.
 
-This is the input replacing smooth purity in clause (a) of blueprint `lemma-class-of-point--1`: for
+This is the input replacing smooth purity in the concentration statement for fundamental
+classes of regular immersions
+(`AlgebraicGeometry.Etale.isZero_homology_rightDerivedUpperShriek_of_isRegularImmersion`): for
 such `i`, the object `Ri_! Ri^! (Λ_X(c)[2c])` is concentrated in degree zero, as it becomes
 `Ri_{U!} Λ` on every Thom frame and vanishes off `Z`.
 
@@ -90,8 +92,7 @@ variable [Finite Λ] [HasKummerClass Λ] {X Z : Scheme.{u}} (c : ℕ)
 /-- A closed immersion `i : Z ⟶ X` *has Thom frames* of codimension `c`: every point of `Z` lies
 in the zero locus of an étale frame (`AlgebraicGeometry.Scheme.Hom.EtaleFrame`) whose frame
 class is a Thom class, i.e. has invertible adjoint `Λ ⟶ R i_F^! (Λ(c)[2c])`
-(`AlgebraicGeometry.Etale.supportedClassMap`). This is the local input of clause (a) of blueprint
-`lemma-class-of-point--1`. -/
+(`AlgebraicGeometry.Etale.supportedClassMap`). -/
 def HasThomFrames [HasInvertibleExponent Λ X] : Prop :=
   ∀ z : Z, ∃ F : i.EtaleFrame c, z ∈ Set.range F.toZ ∧
     IsIso (supportedClassMap Λ (F.U.zeroLocusSubschemeι (Set.range F.f)) (frameClass Λ F))
@@ -107,10 +108,7 @@ variable {Λ c i}
 
 omit [IsClosedImmersion i] in
 /-- **Thom frames are stable under étale base change.** If `i` has Thom frames, so does its base
-change `i'` along an étale `e : X' ⟶ X`: a frame `(U, f)` of `i` pulls back to the frame
-`(U ×_X X', f)` of `i'`, whose frame class is the restriction of that of `(U, f)`, and the
-adjoint of the restricted class is an isomorphism, restriction of supports along the étale
-`U ×_X X' ⟶ U` being invertible. -/
+change `i'` along an étale `e : X' ⟶ X`. -/
 theorem HasThomFrames.of_isPullback [HasInvertibleExponent Λ X] (hT : HasThomFrames Λ c i)
     {X' Z' : Scheme.{u}} (e : X' ⟶ X) [AlgebraicGeometry.Etale e] (i' : Z' ⟶ X')
     [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e) :
@@ -166,10 +164,7 @@ attribute [local instance] HasInvertibleExponent.opens
 /-- Purity for regular closed immersions
 
 **(a) Concentration in degree zero, for closed immersions with Thom frames.** If `i` has Thom
-frames, then `Ri_! Ri^! (Λ_X(c)[2c])` has no cohomology sheaves outside degree `0`. Off `Z` it
-vanishes; on a Thom frame `(e : U ⟶ X, f)` it becomes `Ri_{U!} Ri_U^! (Λ_U(c)[2c])`
-(`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_etale`), which is `Ri_{U!} Λ` through the
-adjoint of the frame class, and `Ri_{U!} = i_{U*}` is exact. -/
+frames, then `Ri_! Ri^! (Λ_X(c)[2c])` has no cohomology sheaves outside degree `0`. -/
 theorem HasThomFrames.isZero_homology_rightDerivedLowerShriek [HasInvertibleExponent Λ X]
     (hT : HasThomFrames Λ c i) (n : ℤ) (hn : n ≠ 0) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
@@ -226,8 +221,7 @@ theorem HasThomFrames.isZero_homology_rightDerivedLowerShriek [HasInvertibleExpo
 /-- Purity for regular closed immersions
 
 For a closed immersion with Thom frames, classes with supports `H^{2c}_Z(X, Λ(c))` are sections
-of a sheaf: `Ri_! Ri^! (Λ_X(c)[2c])` is a sheaf placed in degree zero
-(`AlgebraicGeometry.Etale.HasThomFrames.isZero_homology_rightDerivedLowerShriek`). -/
+of a sheaf: `Ri_! Ri^! (Λ_X(c)[2c])` is a sheaf placed in degree zero. -/
 theorem HasThomFrames.exists_iso_singleFunctor_rightDerivedLowerShriek
     [HasInvertibleExponent Λ X] (hT : HasThomFrames Λ c i) :
     ∃ G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),

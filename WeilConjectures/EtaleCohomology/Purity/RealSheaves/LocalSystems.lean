@@ -41,7 +41,7 @@ a curve over a finite field into statements about representations of its Weil gr
 - the identification of the ordinary étale `H⁰` with the invariants of the geometric
   fundamental group, equivariantly for the residual Frobenius.
 
-## Implementation notes
+## Implementation details
 
 Lisse `ℚ̄_ℓ`-sheaves do not exist in Mathlib. The renderings chosen here are therefore the
 following.
@@ -54,7 +54,7 @@ following.
   `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf` deduces the
   version with `G` existentially quantified as a bundled profinite group (`ProfiniteGrp`).
   The target category is the full subcategory of `Rep Λ G` cut out by
-  `Rep.IsFiniteContinuous`. Compatibility with the geometric stalk is the requested clause; it
+  `Rep.IsFiniteContinuous`. Compatibility with the geometric stalk is the clause stated; it
   is an isomorphism of underlying `Λ`-modules only, not tied to the action of `G` on geometric
   fibres. Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`
   (in `WeilConjectures.EtaleCohomology.Purity.RealSheaves.LocalSystemsExact`). Compatibility
@@ -67,7 +67,7 @@ following.
   version it could now be written down, but it is not part of the statement here.
 
 - `AlgebraicGeometry.WeilGroup.isLisseRep` is a full subcategory of `Rep ℚ̄_ℓ W(C₀)`, and the
-  content of the lisse sheaf–representation equivalence used by the rest of the block is
+  content of the lisse sheaf–representation equivalence used in the rest of the development is
   recorded by the closure properties
   `AlgebraicGeometry.WeilGroup.isLisseRep.isClosedUnderKernels` and its companions together
   with `AlgebraicGeometry.WeilGroup.isLisseRep_shortExact_iff`. The equivalence itself, from lisse
@@ -83,10 +83,14 @@ following.
   existentially quantified as a finite-dimensional `IntermediateField ℚ_[l] (PadicAlgCl l)`,
   which is what makes "after replacing `E` by a finite extension" a true statement; the
   `𝒪_E`-module structure on `V` is the restriction of scalars along
-  `𝒪_E → E → ℚ̄_ℓ`, introduced by `letI` inside the statement.
+  `𝒪_E → E → ℚ̄_ℓ`, introduced by `letI` inside the statement. The finiteness of the image in
+  `Aut (L / 𝔪_E ^ n L)` is expressed as the finiteness of the set of maps `L → V / 𝔪_E ^ n L`
+  induced by the elements of `π₁(U)`; since `L` is stable and `L / 𝔪_E ^ n L → V / 𝔪_E ^ n L` is
+  injective, this is the same condition, and it avoids having to restrict `ρ g` to `L` before
+  the lattice is known to be stable.
 
 - `AlgebraicGeometry.WeilGroup.globalSections_eq_invariants` is the representation-theoretic
-  step of the proof sketch: the `π₁(U)`-equivariant maps from the trivial line
+  part of the computation of `H⁰`: the `π₁(U)`-equivariant maps from the trivial line
   (`AlgebraicGeometry.WeilGroup.globalSections`) are the invariants. The statement about the
   étale global sections `H⁰(Ū, F|_U)` of a lisse Weil sheaf is
   `AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`.
@@ -174,9 +178,7 @@ end CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The functor sending a finite étale `Y`-scheme `P` to the étale sheaf of sets `Hom_Y(-, P)` it
-represents. This is the first half of the step *sheaves and covers* of
-`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`:
-finite locally constant sheaves of sets are the sheaves in its essential image. -/
+represents. Finite locally constant sheaves of sets are the sheaves in its essential image. -/
 noncomputable def Scheme.FiniteEtale.toSheaf (Y : Scheme.{u}) :
     Y.FiniteEtale ⥤ Sheaf Y.smallEtaleTopology (Type u) :=
   ObjectProperty.ι _ ⋙ Y.smallEtaleTopology.yoneda
@@ -251,13 +253,7 @@ noncomputable def Scheme.FiniteEtale.equivalenceFiniteLocallyConstant (Y : Schem
   (Scheme.FiniteEtale.toFiniteLocallyConstant Y).asEquivalence
 
 /-- **The sheaf of sets underlying a finite locally constant sheaf of `Λ`-modules**, for a
-finite ring `Λ`, is finite locally constant: it is constant on the members of the same étale
-cover, the forgetful functor preserving sheafification, and its stalks are the underlying sets
-of the stalks of `F`, finitely generated modules over a finite ring. This is the first step of
-the *linear structure* part of
-`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`:
-a finite locally constant sheaf of `Λ`-modules is a finite locally constant sheaf of sets with a
-`Λ`-module structure. -/
+finite ring `Λ`, is finite locally constant. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {Y : Scheme.{u}}
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : IsFiniteLocallyConstantSheaf F) :
@@ -1288,22 +1284,13 @@ instance : (Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).IsEquivalenc
 
 end GaloisRepEquivalence
 
-/-- Galois correspondence for finite local systems. Also blueprint
-`proposition-lattices-representations-normal-scheme`: Lisse sheaves and continuous
-representations.
+/-- Galois correspondence for finite local systems, for a named fundamental group.
 
-The steps *sheaves and covers* and *linear structure* of the proof, for a named fundamental
-group: let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
+Let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
 and `G` a fundamental group of the fibre functor `AlgebraicGeometry.Scheme.FiniteEtale.fiber s`
 on finite étale `Y`-schemes, i.e. `G = π₁(Y, s)`. Then the geometric stalk at `s` is an
 equivalence between finite locally constant sheaves of `Λ`-modules on `Y_ét` and finite
-`Λ`-modules with a continuous `G`-action.
-
-Mathematically, a finite locally constant sheaf of sets is represented by a finite étale
-`Y`-scheme, whose geometric fibre is the stalk at `s`; the Galois correspondence
-`AlgebraicGeometry.Scheme.FiniteEtale.equivalenceContAction` identifies these with finite
-continuous `G`-sets, and a `Λ`-module structure on the sheaf is transported to one on the
-`G`-set. -/
+`Λ`-modules with a continuous `G`-action. -/
 theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup
     (Y : Scheme.{u}) [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ Y) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (G : ProfiniteGrp.{u})
@@ -1336,17 +1323,7 @@ continuous `G`-action, compatible with the geometric stalk at `s`: the triangle
      ModuleCat Λ  ══════════════  ModuleCat Λ
 ```
 
-commutes up to isomorphism.
-
-Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`.
-Compatibility with `⊗_Λ` is not automatic for an equivalence of abelian categories; it is
-`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`, which
-strengthens this statement by a natural isomorphism `(F ⊗ F')_s ≅ F_s ⊗ F'_s` of
-representations and the identification of the stalk of `Λ_Y` with the trivial representation.
-The compatibility with base change along a
-map `Λ → Λ'` of finite rings is not restated here, see the module implementation notes and
-`AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
-for the version with `π₁(Y, s)` named. -/
+commutes up to isomorphism. -/
 theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf (Y : Scheme.{u})
     [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
@@ -1370,9 +1347,8 @@ namespace WeilGroup
 
 The property of an object of `Rep ℚ̄_ℓ W(C₀)` of being a *lisse Weil representation*: the
 underlying `ℚ̄_ℓ`-vector space is finite dimensional and the geometric subgroup `π₁(C)`
-acts continuously (`AlgebraicGeometry.WeilGroup.IsLisse`). Under the equivalence of
-`definition-weil-representation--1` these are exactly the objects corresponding to lisse
-Weil sheaves on `C₀`. -/
+acts continuously (`AlgebraicGeometry.WeilGroup.IsLisse`). Under the lisse sheaf–representation
+equivalence these are exactly the objects corresponding to lisse Weil sheaves on `C₀`. -/
 def isLisseRep (W : WeilGroup p) (l : ℕ) [Fact l.Prime] :
     ObjectProperty (Rep.{u} (PadicAlgCl l) W.carrier) :=
   fun X ↦ FiniteDimensional (PadicAlgCl l) X.V ∧ W.IsLisse l X.ρ
@@ -1428,19 +1404,9 @@ instance isLisseRep.isClosedUnderCokernels :
     ObjectProperty.IsClosedUnderCokernels (W.isLisseRep l) :=
   inferInstance
 
-/-- Blueprint `definition-weil-representation--1`, node
-`definition-weil-representation--1`: The lisse sheaf–representation equivalence.
-
-A short complex of lisse Weil representations is short exact exactly when its geometric
-generic stalk, i.e. its image under the forgetful functor to `ModuleCat ℚ̄_ℓ`, is short exact.
-This is the form in which the exactness of the geometric-generic-stalk equivalence of
-`definition-weil-representation--1` is used, lisse `ℚ̄_ℓ`-sheaves themselves being
-unavailable.
-
-The forgetful functor is faithful and exact, since kernels and cokernels of representations
-are computed on the underlying vector spaces, so it preserves and reflects short exactness;
-the lisse hypotheses are not needed. The exactness of the equivalence with lisse Weil sheaves
-itself is `AlgebraicGeometry.WeilGroup.isLisse_shortExact_iff`. -/
+/-- The lisse sheaf–representation equivalence: a short complex of lisse Weil representations is
+short exact exactly when its geometric generic stalk, i.e. its image under the forgetful functor
+to `ModuleCat ℚ̄_ℓ`, is short exact. -/
 theorem isLisseRep_shortExact_iff (S : ShortComplex (Rep.{u} (PadicAlgCl l) W.carrier))
     (_h₁ : W.isLisseRep l S.X₁) (_h₂ : W.isLisseRep l S.X₂) (_h₃ : W.isLisseRep l S.X₃) :
     S.ShortExact ↔ (S.map (forget₂ (Rep.{u} (PadicAlgCl l) W.carrier)
@@ -1456,12 +1422,7 @@ groups along a nonempty open subscheme `j : U₀ ⊆ C₀`. Then, after replacin
 field by a finite extension `E/ℚ_ℓ` — here a finite-dimensional intermediate field of
 `ℚ_ℓ ⊆ ℚ̄_ℓ` — there is an `𝒪_E`-lattice `L ⊂ V`, that is a free `𝒪_E`-submodule of rank
 `dim V` whose `ℚ̄_ℓ`-span is all of `V`, which is stable under `ρ (π₁(U))` and whose
-reduction modulo `𝔪_E ^ n` has finite `π₁(U)`-image for every `n`.
-
-The finiteness of the image in `Aut (L / 𝔪_E ^ n L)` is expressed as the finiteness of the
-set of maps `L → V / 𝔪_E ^ n L` induced by the elements of `π₁(U)`; since `L` is stable and
-`L / 𝔪_E ^ n L → V / 𝔪_E ^ n L` is injective, this is the same condition, and it avoids
-having to restrict `ρ g` to `L` before the lattice is known to be stable. -/
+reduction modulo `𝔪_E ^ n` has finite `π₁(U)`-image for every `n`. -/
 theorem IsLisse.exists_lattice {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : Type u}
     [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
     {ρ : Representation (PadicAlgCl l) W.carrier V} (hρ : W.IsLisse l ρ) {j : U ⟶ C}
@@ -1514,7 +1475,7 @@ theorem IsLisse.exists_lattice {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : T
 /-- Global sections as invariants.
 
 The global sections `H⁰(U, F|_U)` of the lisse sheaf `F` with geometric generic stalk
-`(V, ρ)`, rendered as in the proof sketch: a global section is a morphism from the constant
+`(V, ρ)`: a global section is a morphism from the constant
 rank-one sheaf, i.e. a `π₁(U)`-equivariant `ℚ̄_ℓ`-linear map `ℚ̄_ℓ → V`, where `π₁(U)` acts
 on `V` through the restriction `R : W(U₀) → W(C₀)` of Weil groups along the open `U₀ ⊆ C₀`. -/
 noncomputable def globalSections (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u}
@@ -1563,21 +1524,12 @@ theorem comp_mem_globalSections (f : PadicAlgCl l →ₗ[PadicAlgCl l] V)
   exact frobeniusLift_mem_invariants ρ R (f a)
     (fun g ↦ by simpa using LinearMap.congr_fun (hf g) a) g
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--1`, node `lemma-degree-zero-top-cohomology--1`:
-Global sections as invariants.
+/-- Global sections as invariants.
 
 For a lisse Weil representation `(V, ρ)` and a restriction `R` of Weil groups along a nonempty
 open `U₀ ⊆ C₀`, the global sections `H⁰(U, F|_U) = Hom_{π₁(U)}(𝟙, V)` are the invariants
-`V ^ (π₁(U))`, by evaluation at `1`: an equivariant map `ℚ̄_ℓ → V` is determined by the
-image of `1`, which is fixed by `π₁(U)`, and every fixed vector arises this way. The finiteness
-and lisse hypotheses are not needed for this. The corresponding statement for the étale global
-sections of a lisse Weil sheaf is
-`AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`.
-
-Both sides carry a residual action of the geometric Frobenius `F = ρ (res γ)`
-(`AlgebraicGeometry.WeilGroup.comp_mem_globalSections` and
-`AlgebraicGeometry.WeilGroup.frobeniusLift_mem_invariants`), and the identification is
-equivariant for it:
+`V ^ (π₁(U))`, by evaluation at `1`, equivariantly for the residual action of the geometric
+Frobenius `F = ρ (res γ)`:
 
 ```
     H⁰(U, F|_U) ──── e ────▶ V^{π₁(U)}

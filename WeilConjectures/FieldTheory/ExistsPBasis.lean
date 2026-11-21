@@ -19,7 +19,7 @@ import WeilConjectures.FieldTheory.PBasisExtension
 Source: Stacks Project, More on Algebra, Definition 07P1 and Lemma 07P2, applied to the extension
 from the prime field.
 
-The p-basis is written inline in the form of `lem-weil-pbc-p-basis-differentials-basis`
+The p-basis is written inline in the form of
 (`KaehlerDifferential.exists_basis_differentials_of_pBasis`) with base field the prime
 field `ZMod p`: `k^p = (ZMod p) k^p` is `IntermediateField.adjoin (ZMod p) (Set.range (· ^ p))`.
 The prime-field algebra structure is Mathlib's `ZMod.algebra`, registered locally as in
@@ -34,13 +34,10 @@ attribute [local instance] ZMod.algebra
 
 namespace Field
 
-/-- Every field of prime characteristic has a p-basis over its subfield of p-th powers.
-Source: Stacks Project, More on Algebra, Definition 07P1 and Lemma 07P2.
-
-The subfield `k^p` is `IntermediateField.adjoin (ZMod p) (Set.range (· ^ p))` over the prime
-field (it already contains the prime field, so the adjunction adds nothing), the p-basis
-form of `lem-weil-pbc-p-basis-differentials-basis` for the extension `ZMod p → k`.
--/
+/-- Every field of prime characteristic has a p-basis over its subfield of p-th powers, written
+as a basis of `k` over `IntermediateField.adjoin (ZMod p) (Set.range (· ^ p))` indexed by
+exponent vectors with entries `< p`.
+Source: Stacks Project, More on Algebra, Definition 07P1 and Lemma 07P2. -/
 theorem exists_p_basis (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] :
     ∃ (I : Type u) (t : I → k)
       (b : Module.Basis {E : I →₀ ℕ // ∀ i : I, E i < p}

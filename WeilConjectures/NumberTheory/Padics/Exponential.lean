@@ -784,13 +784,9 @@ theorem mul_logExpConst_lt_one_of_div_mem_integers {x : E}
     _ = (l : ℝ)⁻¹ := by field_simp
     _ < 1 := inv_lt_one_of_one_lt₀ hl
 
-/-- A multiplicative curve character produces an invariant additive character.
-
-The core of the lemma, for a continuous character `χ : G → Eˣ` of a compact group: its values are
-units of `𝒪_E` (the norms `|χ g| ^ n = |χ (g ^ n)|` are bounded for all `n ∈ ℤ`), so for some
-`N ≥ 1` (`PadicAlgCl.exists_pow_norm_sub_one_le`) the character `χ ^ N` takes values in the
-principal units `1 + ℓ² 𝒪_E = 1 + 𝔪_E ^ (2 e)`, where the logarithm is a homomorphism; then
-`λ g = log (χ g ^ N)` is a continuous additive character `G → E`. -/
+/-- A multiplicative character produces an additive character: for a continuous character
+`χ : G → Eˣ` of a compact group there is `N ≥ 1` such that `χ ^ N` takes values in the principal
+units `1 + ℓ² 𝒪_E`, and `λ g = log (χ g ^ N)` is a continuous additive character `G → E`. -/
 theorem exists_smallLog_pow_hom {G : Type*} [Group G] [TopologicalSpace G] [CompactSpace G]
     (χ : G →* Eˣ) (hχ : Continuous fun g ↦ algebraMap E (PadicAlgCl l) (χ g)) :
     ∃ N : ℕ, 0 < N ∧ (∀ g, χ g ^ N ∈ smallUnits l E) ∧

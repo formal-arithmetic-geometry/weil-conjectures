@@ -36,7 +36,12 @@ homomorphism `A ⟶ B` of strictly henselian local rings
 
 The bijectivity of these pullback maps is the strictly henselian case of the acyclicity of the
 affine line (`AlgebraicGeometry.Etale.bijective_cohomologyMap_affineLine_of_strictlyHenselian`),
-the one input which is not proved here.
+which is reduced to discrete valuation rings
+(`AlgebraicGeometry.Etale.affineLineAcyclicAt_of_isDiscreteValuationRing`).
+
+## References
+
+SGA 4 XV 2.1–2.2; Milne, *Étale cohomology*, VI.4.20; Fu, *Étale cohomology theory*, 7.7.4.
 -/
 
 @[expose] public section
@@ -63,18 +68,7 @@ henselian local rings, `Λ` a finite coefficient ring whose exponent is invertib
 `M` a locally constant sheaf of `Λ`-modules on `Spec A`. Then the pullback map
 `Hᵠ(𝔸¹_A, p_A^* M) ⟶ Hᵠ(𝔸¹_B, p_A^* M|)` along `𝔸¹_B ⟶ 𝔸¹_A` is bijective for every `q`.
 
-This is SGA 4 XV 2.1–2.2 (Milne, *Étale cohomology*, VI.4.20; Fu, *Étale cohomology theory*,
-7.7.4): over a strictly henselian local ring `R` with residue characteristic prime to the
-exponent of `Λ`, `Hᵠ(𝔸¹_R, p_R^* M) = 0` for `q > 0` and `H⁰(𝔸¹_R, p_R^* M) = M(R)`; for `R = A`
-and `R = B` both sides of the map are the stalk of `M` at the closed point, and the map is the
-identity of it. It is the strictly henselian case of
-`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_strictlyHenselian`, and the one
-input of it which is not proved in the repository (where the acyclicity is proved over fields,
-`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_field`). The classical proof
-compactifies `𝔸¹_R ⊆ ℙ¹_R`, uses proper base change for `ℙ¹_R`
-(`AlgebraicGeometry.Etale.bijective_cohomologyMap_projectiveLine_residueField`) and computes the
-local cohomology along the section at infinity by Kummer theory over the henselisation of `ℙ¹_R`
-along it. -/
+Source: SGA 4 XV 2.1–2.2. -/
 theorem bijective_cohomologyMap_affineLine_of_strictlyHenselian
     {A B : Type u} [CommRing A] [HenselianLocalRing A]
     [IsSepClosed (IsLocalRing.ResidueField A)] [CommRing B] [HenselianLocalRing B]
@@ -121,12 +115,7 @@ variable [HasTateTwist Λ]
 
 /-- **Homotopy invariance of the affine line over an arbitrary base**, for the coefficients
 `Λ(1)`: for every scheme `S` on which the exponent of `Λ` is invertible, the unit
-`Λ_S(1) ⟶ Rp_* Lp^* Λ_S(1)` of the projection `p : 𝔸¹_S ⟶ S` is an isomorphism.
-
-It is checked after pullback to the geometric points `s̄ : Spec Ω ⟶ S`: over `Ω` the unit is an
-isomorphism (`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine`), and the derived base
-change map of `p` along `s̄` is an isomorphism at `Lp^* Λ_S(1)`
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_affineLine_upperStar`). -/
+`Λ_S(1) ⟶ Rp_* Lp^* Λ_S(1)` of the projection `p : 𝔸¹_S ⟶ S` is an isomorphism. -/
 theorem isIso_unit_tateObject_affineLine_of_strictlyHenselian (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)

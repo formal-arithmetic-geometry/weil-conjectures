@@ -26,16 +26,8 @@ field `k`; and an element of `A` vanishing at every `k`-point is nilpotent.
 - `existsUnique_comp_mkₐ_eq_of_forall_algHom`: a regular map sending `k`-points into a closed
   subvariety factors through it.
 - `Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero`: the vanishing principle on a
-  product of affine varieties.
-
-## Blueprint
-
-- `det-i-geometry`: the Nullstellensatz and the vanishing principle.
-- `lem-wf-affine-nullstellensatz-vanishing`: residue fields of closed points and the vanishing
-  principle.
-- `lem-wf-affine-product-reduced`: the vanishing principle on a product of reduced affine
-  varieties. Its reducedness clause holds over any perfect field, see
-  `isReduced_tensorProduct_of_perfectField`.
+  product of affine varieties. The tensor product of reduced algebras is reduced more generally
+  over any perfect field, see `isReduced_tensorProduct_of_perfectField`.
 -/
 
 @[expose] public section
@@ -66,12 +58,8 @@ theorem iInf_ker_algHom_eq_nilradical :
     exact iInf_le _ φ
   · exact le_iInf fun φ ↦ @nilradical_le_prime _ _ _ (RingHom.ker_isPrime φ)
 
-/-- Blueprint `lem-wf-affine-nullstellensatz-vanishing`, clause (2) (the vanishing principle): over
-an algebraically closed field `k`, an element of a reduced finitely generated `k`-algebra vanishing
-at every `k`-point is zero.
-
-By `iInf_ker_algHom_eq_nilradical` such an element is nilpotent, hence zero. Clause (1), that the
-closed points are the `k`-points, is `exists_algHom_ker_eq_of_isMaximal`. -/
+/-- **The vanishing principle.** Over an algebraically closed field `k`, an element of a reduced
+finitely generated `k`-algebra vanishing at every `k`-point is zero. -/
 theorem eq_zero_of_forall_algHom_apply_eq_zero [IsReduced A] {a : A}
     (h : ∀ φ : A →ₐ[k] k, φ a = 0) : a = 0 := by
   have : a ∈ nilradical A := by
@@ -79,14 +67,10 @@ theorem eq_zero_of_forall_algHom_apply_eq_zero [IsReduced A] {a : A}
     exact fun φ ↦ h φ
   rwa [nilradical_eq_zero, Submodule.zero_eq_bot, Ideal.mem_bot] at this
 
-/-- Blueprint `lem-wf-affine-nullstellensatz-vanishing`, clause (3): let `f : B →ₐ[k] A` be the
-coordinate map of a regular map `X → Y` of affine varieties over an algebraically closed field `k`,
-with `A` reduced and finitely generated, and let `J` be an ideal of `B` (cutting out `Z ⊆ Y`). If
-every `k`-point of `X` maps into `Z`, i.e. `φ (f b) = 0` for every `k`-point `φ` of `X` and
-`b ∈ J`, then `f` factors uniquely through `B ⧸ J`.
-
-Each `f b` with `b ∈ J` vanishes at every `k`-point, so it is zero by the vanishing principle
-`eq_zero_of_forall_algHom_apply_eq_zero`; uniqueness holds as `B → B ⧸ J` is surjective. -/
+/-- Let `f : B →ₐ[k] A` be the coordinate map of a regular map `X → Y` of affine varieties over
+an algebraically closed field `k`, with `A` reduced and finitely generated, and let `J` be an
+ideal of `B` (cutting out `Z ⊆ Y`). If every `k`-point of `X` maps into `Z`, i.e. `φ (f b) = 0`
+for every `k`-point `φ` of `X` and `b ∈ J`, then `f` factors uniquely through `B ⧸ J`. -/
 theorem existsUnique_comp_mkₐ_eq_of_forall_algHom {B : Type*} [CommRing B] [Algebra k B]
     [IsReduced A] (f : B →ₐ[k] A) (J : Ideal B) (h : ∀ φ : A →ₐ[k] k, ∀ b ∈ J, φ (f b) = 0) :
     ∃! g : B ⧸ J →ₐ[k] A, g.comp (Ideal.Quotient.mkₐ k J) = f := by
@@ -100,13 +84,7 @@ open TensorProduct in
 /-- Let `A` and `B` be reduced finitely generated algebras over an algebraically closed field `k`,
 the coordinate algebras of affine varieties `X` and `Y`. The `k`-points of
 `X × Y = Spec (A ⊗[k] B)` are the pairs `(φ, ψ)` of `k`-points, and a function on `X × Y`
-vanishing at all of them is zero.
-
-Evaluating the first factor at a `k`-point `φ` of `X` sends `t` to a function on `Y`, which
-vanishes at every `k`-point of `Y` and hence is zero by the vanishing principle for `B`. As the
-evaluations at `k`-points of `X` are jointly injective on `A` (the vanishing principle for `A`),
-`t = 0` by `TensorProduct.eq_zero_of_forall_rTensor_eq_zero`. In particular `A ⊗[k] B` is reduced,
-which holds more generally over a perfect field (`isReduced_tensorProduct_of_perfectField`). -/
+vanishing at all of them is zero. -/
 theorem Algebra.TensorProduct.eq_zero_of_forall_lift_algHom_eq_zero (B : Type*) [CommRing B]
     [Algebra k B] [Algebra.FiniteType k B] [IsReduced A] [IsReduced B] {t : A ⊗[k] B}
     (h : ∀ (φ : A →ₐ[k] k) (ψ : B →ₐ[k] k), lift φ ψ (fun _ _ ↦ .all _ _) t = 0) : t = 0 := by

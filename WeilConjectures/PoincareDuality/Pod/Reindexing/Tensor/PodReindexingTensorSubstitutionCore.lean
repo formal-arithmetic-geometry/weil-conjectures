@@ -28,14 +28,9 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The fixed-model part of normalized reindexing substitution.
-
-The construction follows the normalized quotient/Roos presentation: use the
-specified calculus, completion and pullback data from `D`, transport the
-canonical closed tensor realization to the two integral completed tensors, and
-prove the primitive comparison, substitution, and structural laws by the
-whole-system counit and expression induction. The two tensor-normalization
-fields are deliberately omitted and are supplied by the tensor laws of `T`.
+/-- The fixed-model part of normalized reindexing substitution: the completed-operation model
+with its comparison, substitution and structural laws, without the two tensor-normalization
+fields (supplied by the tensor laws of `T`).
 Source: Stacks 07A4, 0941. -/
 structure PodReindexingTensorSubstitutionCoreData
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -70,12 +65,8 @@ structure PodReindexingTensorSubstitutionCoreData
 
 -- Preserve the published names of the unused tensor law and existential witness.
 set_option linter.unusedVariables false in
-/-- Core normalized model construction.
-
-The proof is the construction described in the declaration above. Its remaining
-work is strictly below `PodReindexSubstitution`: it constructs the fixed model,
-its realization identifications and all three expression laws, while leaving the
-already supplied tensor `Model` and `Canonical` assertions to the caller.
+/-- Core normalized model data exist for every normalized completion reindexing `D` and
+completed tensor reindexing `T` satisfying their laws.
 Source: Stacks 07A4, 0941. -/
 theorem podReindexingTensorSubstitutionCore
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

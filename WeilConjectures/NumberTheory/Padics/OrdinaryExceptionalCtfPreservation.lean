@@ -23,11 +23,10 @@ Source: Zheng, Six operations and Lefschetz--Verdier formula for Deligne--Mumfor
 Propositions 3.16(2) and 2.29(2); Bhatt--Scholze, The pro-etale topology for schemes, Lemma
 6.7.18.
 
-This is the finite-coefficient preservation step of the third proof sentence of
-`theorem-exceptional-inverse-image--16` in the current blueprint. The categories
-are the ordinary unbounded small etale derived categories. Constructibility uses the
-existing finite-stratification predicate; on these Noetherian schemes it is the same
-notion as the affine-local predicate of `def-pe-etale-constructible-module`.
+This is the finite-coefficient case of the preservation of constructibility by the exceptional
+inverse image. The categories are the ordinary unbounded small etale derived categories.
+Constructibility uses the existing finite-stratification predicate; on these Noetherian schemes
+it is the same notion as the affine-local definition of étale constructible modules.
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +39,7 @@ open CategoryTheory
 
 namespace Padic
 
-/-- The literal quotient `O_E / ell^r O_E`. This uses the recorded ring of integers
-and Mathlib's principal-ideal quotient, rather than replacing `ell` by a uniformizer. -/
+/-- The quotient `O_E / ell^r O_E` of the ring of integers by the principal ideal `(ell^r)`. -/
 abbrev coefficientExtensionEllQuotient (ell : ℕ) [Fact ell.Prime]
     (E : Type v) [Field E] [Algebra ℚ_[ell] E] [FiniteDimensional ℚ_[ell] E] (r : ℕ) :=
   coefficientExtensionIntegers ell E ⧸

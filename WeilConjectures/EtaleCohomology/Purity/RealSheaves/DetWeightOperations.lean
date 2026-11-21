@@ -17,10 +17,10 @@ Let `ρ` be a nonzero lisse Weil sheaf on a smooth geometrically connected curve
 determinantal-weight multiset `α₁, …, αₙ` (`AlgebraicGeometry.WeilGroup.detWeightMultiset`). By
 rank-one purity every lisse sheaf has finite geometric determinant and its determinant weight
 `dw_ι` is the determinant weight `dw_{λ_ι}` for the real weight character `λ_ι`,
-so the representation-theoretic weight rules of
-`chap-Algebraic-groups-in-characteristic-zero` apply. This file deduces from the two-factor tensor
-rule that the determinant weights of the
-constituents of the tensor power `ρ^{⊗ k}` are exactly the sums `α_{i₁} + ⋯ + α_{i_k}`.
+so the representation-theoretic weight rules for algebraic groups in characteristic zero apply.
+This file deduces from the two-factor tensor rule that the determinant weights of the
+constituents of the tensor power `ρ^{⊗ k}` are exactly the sums `α_{i₁} + ⋯ + α_{i_k}`. No
+geometric semisimplicity of `ρ` is needed.
 
 ## Main statements
 
@@ -72,11 +72,9 @@ theorem sum_map_pow_localEigenvalues_tensorPower (x : C.finitePoints) (n : ℕ) 
       localEigenvalues_tprod, Multiset.map_map_product_mul,
       Multiset.sum_map_pow_map_product_mul, ih, pow_succ]
 
-/-- Blueprint `lemma-positivity-euler-factors--1`, part (i): every tensor power `ℱ^{⊗ k}`, `k ≥ 1`,
-of an `ι`-real sheaf is `ι`-real, its local eigenvalues being the `k`-fold products of the
-conjugation-stable local eigenvalues of `ℱ`. This is the version for Weil group
-representations over a curve; for lisse Weil sheaves on an arbitrary `k₀`-scheme see
-`AlgebraicGeometry.WeilSheaf.IsReal.tensorPow`. -/
+/-- Every tensor power `ℱ^{⊗ k}`, `k ≥ 1`, of an `ι`-real sheaf is `ι`-real. This is the version
+for Weil group representations over a curve; for lisse Weil sheaves on an arbitrary `k₀`-scheme
+see `AlgebraicGeometry.WeilSheaf.IsReal.tensorPow`. -/
 theorem IsReal.tensorPower (hρ : W.IsReal l ρ ι) {k : ℕ} (hk : 1 ≤ k) :
     W.IsReal l (ρ.tensorPower k) ι := by
   refine isReal_of_map_conj_localEigenvalues ι fun x ↦ ?_
@@ -92,15 +90,8 @@ theorem IsReal.tensorPower (hρ : W.IsReal l ρ ι) {k : ℕ} (hk : 1 ≤ k) :
 /-- Even tensor powers of a real sheaf are positive.
 
 If `ℱ` is `ι`-real and `k ≥ 1` is even, then every inverse local factor
-`ι P_x (ℱ^{⊗ k}, T ^ e_x)⁻¹` has nonnegative real coefficients (its constant term is `1` by
-`AlgebraicGeometry.WeilGroup.constantCoeff_eulerFactor`). Indeed the `n`-th power sum of the
-complex local eigenvalues of `ℱ^{⊗ k}` is `(ι Tr (F_x ^ n ∣ ℱ)) ^ k`
-(`AlgebraicGeometry.WeilGroup.sum_map_pow_localEigenvalues_tensorPower`), an even power of a
-real number since the eigenvalue multiset of `ℱ` is stable under complex conjugation, and
-nonnegative power sums give nonnegative coefficients
-(`AlgebraicGeometry.WeilGroup.hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg`). This is the
-version for Weil group representations over a curve; for lisse Weil sheaves on an arbitrary
-`k₀`-scheme, with the constant term, see
+`ι P_x (ℱ^{⊗ k}, T ^ e_x)⁻¹` has nonnegative real coefficients. This is the version for Weil
+group representations over a curve; for lisse Weil sheaves on an arbitrary `k₀`-scheme see
 `AlgebraicGeometry.WeilSheaf.IsReal.inv_localPolynomial_stalk_tensorPow_nonneg`. -/
 theorem IsReal.hasNonnegCoeffs_eulerFactor_tensorPower (hρ : W.IsReal l ρ ι)
     (x : C.finitePoints) {k : ℕ} (hk : 1 ≤ k) (heven : Even k) :
@@ -119,12 +110,7 @@ Let `ρ` be a lisse Weil sheaf, with determinantal-weight multiset `α₁, …, 
 Every constituent `S / U` of the tensor power `ρ^{⊗ k}` has determinant weight
 `α_{i₁} + ⋯ + α_{i_k}` for some indices `i₁, …, i_k` (that is, the sum of a multiset of `k`
 entries of the determinantal-weight multiset, with repetitions allowed), and every such sum
-occurs for some constituent. The proof is the induction of the blueprint on `k`, using
-`ρ^{⊗ (k + 1)} ≅ ρ^{⊗ k} ⊗ ρ` and the two-factor tensor rule
-(`Representation.exists_detWeight_eq_add_of_subquotient_tprod` and its converse
-`Representation.exists_isIrreducible_subquotient_tprod_detWeight_eq_add`), whose finite
-geometric determinant hypotheses hold by `corollary-determinant-weights--1`. The geometric
-semisimplicity assumed in the blueprint is not needed. -/
+occurs for some constituent. -/
 theorem detWeight_subquotient_tensorPower (hρ : W.IsLisse l ρ) {n : ℕ} (hn : 1 ≤ n) :
     (∀ U S : Subrepresentation (ρ.tensorPower n), (S.subquotient U).IsIrreducible →
       ∃ s : Multiset ℝ, Multiset.card s = n ∧ (∀ a ∈ s, a ∈ W.detWeightMultiset l ρ ι) ∧

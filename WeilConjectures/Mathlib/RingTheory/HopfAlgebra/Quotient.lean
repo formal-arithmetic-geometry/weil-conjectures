@@ -13,12 +13,8 @@ public import Mathlib.RingTheory.HopfAlgebra.Quotient
 
 If two algebra homomorphisms out of a Hopf algebra `A` vanish on a Hopf ideal `I`, then so does
 their convolution product: both factor through the quotient Hopf algebra `A ⧸ I`, and the
-quotient map is a bialgebra homomorphism.
-
-## Blueprint
-
-- `det-d-geometry`: the points of a closed subgroup scheme `V(I)` of an affine group scheme form a
-  subgroup.
+quotient map is a bialgebra homomorphism. Geometrically, the points of a closed subgroup scheme
+`V(I)` of an affine group scheme form a subgroup.
 -/
 
 @[expose] public section

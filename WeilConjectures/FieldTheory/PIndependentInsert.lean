@@ -112,14 +112,7 @@ private theorem pMonomial_span_eq_adjoin
       (IntermediateField.subset_adjoin F T t.property) _
 
 /-- An element outside the bounded monomial span has independent first p powers.
-Source: Stacks Project, More on Algebra, Lemma Tag 07P2, third proof paragraph.
-
-The span equality makes x lie outside L = F(T). Its p-th power c lies in L,
-but has no p-th root there: injectivity of Frobenius would identify such a root
-with x. Thus X^p - C(c) is irreducible by the Mathlib lemma tagged Stacks 09HF.
-It is monic and annihilates x, so it is the minimal polynomial. Its degree p
-then gives independence of the first p powers by `linearIndependent_pow`.
--/
+Source: Stacks Project, More on Algebra, Lemma Tag 07P2, third proof paragraph. -/
 private theorem pIndependent_powers_of_not_mem_span
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]
     (p : ℕ) [Fact p.Prime] [CharP k p] [CharP K p]

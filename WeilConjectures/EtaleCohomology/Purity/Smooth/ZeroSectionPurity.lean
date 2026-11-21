@@ -39,8 +39,12 @@ automorphism of the support.
 The one input which is not proved here is the homotopy invariance of the étale cohomology of the
 affine line over an arbitrary base
 (`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`),
-proved in the repository only over
-fields.
+proved in the repository only over separably closed fields and, by Künneth, over schemes of
+finite type over them (`AlgebraicGeometry.Etale.isIso_unit_affineLine_of_cohomology`). Over a
+general base it amounts to the compatibility of `Rp_*` with base change to the geometric points
+(equivalently, by compactifying `𝔸¹_S ⊆ ℙ¹_S` and proper base change, of `Rj_*` for the
+complement `j` of the section at infinity: Deligne, SGA 4½, [Th. finitude] Appendice 1.3.3;
+SGA 4 XVI 3.7).
 
 ## Main statements
 
@@ -78,8 +82,7 @@ variable {X S Z : Scheme.{u}} (a : X ⟶ S) (x : Z ⟶ X) [IsClosedImmersion x] 
 `x : Z ⟶ X` be a closed immersion with `x ≫ a : Z ⟶ S` an isomorphism and
 `γ : Λ_X ⟶ Rx_! Rx^! L` a class supported on `x`. If
 `U ⟶ Ra_* La^* U ≅ Ra_* Λ_X ⟶ Ra_* Rx_! Rx^! L` is an isomorphism, then so is the adjoint
-`Λ_Z ⟶ Rx^! L` of `γ`. Indeed, up to isomorphisms, this map is the image of the adjoint by the
-equivalence `R(x ≫ a)_*`. -/
+`Λ_Z ⟶ Rx^! L` of `γ`. -/
 lemma isIso_supportedClassMap_of_isIso_unit_comp_map
     {L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {U : DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -146,10 +149,7 @@ complement of `Z`, with `p = j ≫ q`. Let `ε : Lq^* M ≅ K`, `e : Lq^* N ≅ 
 
 `(η_M ≫ Rq_* ε, η_N ≫ Rq_*(e ≫ γ ≫ counit)) : M ⊕ N ⟶ Rq_* K`
 
-are isomorphisms, then so is the adjoint `Λ_Z ⟶ Ri^! K` of `γ`. Indeed the split triangle
-`N ⟶ N ⊕ M ⟶ M ⟶` maps to the image by `Rq_*` of the localization triangle of `K`, by
-isomorphisms on the second and third terms, hence also on the first terms
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_of_isIso_unit_comp_map`). -/
+are isomorphisms, then so is the adjoint `Λ_Z ⟶ Ri^! K` of `γ`. -/
 theorem isIso_supportedClassMap_of_isIso_biprodDesc {X S Z U : Scheme.{u}} (q : X ⟶ S)
     (i : Z ⟶ X) [IsClosedImmersion i] [IsIso (i ≫ q)] (j : U ⟶ X) [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) (p : U ⟶ S) (hp : j ≫ q = p)
@@ -222,15 +222,7 @@ variable [HasTateTwist Λ]
 /-- **Homotopy invariance of the affine line over an arbitrary base**, for the coefficients
 `Λ(1)`: for every scheme `S` on which the exponent of `Λ` is invertible, the unit
 `Λ_S(1) ⟶ Rp_* Lp^* Λ_S(1)` of the projection `p : 𝔸¹_S ⟶ S` is an isomorphism.
-
-This is the acyclicity of the affine line (SGA 4 XV 2.1–2.2; Milne, *Étale cohomology*, VI.4;
-Fu, *Étale cohomology theory*, 7.7), a step of the smooth base change theorem; in this
-repository it is proved only over separably closed fields and, by Künneth, over schemes of
-finite type over them (`AlgebraicGeometry.Etale.isIso_unit_affineLine_of_cohomology`). Over a
-general base it amounts to the compatibility of `Rp_*` with base change to the geometric points
-(equivalently, by compactifying `𝔸¹_S ⊆ ℙ¹_S` and proper base change, of `Rj_*` for the
-complement `j` of the section at infinity: Deligne, SGA 4½, [Th. finitude] Appendice 1.3.3;
-SGA 4 XVI 3.7). It is the only input of the relative purity of this file which is not proved. -/
+Source: SGA 4 XV 2.1–2.2; Milne, *Étale cohomology*, VI.4; Fu, *Étale cohomology theory*, 7.7. -/
 theorem isIso_unit_tateObject_affineLine_of_hasInvertibleExponent
     (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
@@ -256,12 +248,7 @@ variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]
 /-- **The class of the section at infinity of `ℙ¹_S` is a fundamental class**, over every base
 `S` on which the exponent of `Λ` is invertible: the adjoint `Λ_Z ⟶ Ri^!(Λ(1)[2])` of the class
 with supports of the section at infinity `i : Z ⟶ ℙ¹_S`
-(`AlgebraicGeometry.Etale.chartBoundarySupportedClass`) is an isomorphism. This follows from the
-decomposition of the cohomology of the projective line
-(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`) and the homotopy invariance of
-its complement `𝔸¹_S`
-(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`), by
-`AlgebraicGeometry.Etale.isIso_supportedClassMap_of_isIso_biprodDesc`. -/
+(`AlgebraicGeometry.Etale.chartBoundarySupportedClass`) is an isomorphism. -/
 theorem isIso_supportedClassMap_lineInfinity (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     IsIso (supportedClassMap Λ (ProjectiveSpace.lineInfinityι S)
       (chartBoundarySupportedClass Λ (ProjectiveSpace.lineInfinityOpen S)
@@ -334,14 +321,7 @@ cohomology theory*, 8.4; Milne, *Étale cohomology*, VI.5): for every scheme `B`
 exponent of `Λ` is invertible, the adjoint `Λ_{V(t)} ⟶ Rs^!(Λ(1)[2])` of the Kummer boundary
 `∂κ(t)` of the coordinate `t` of `𝔸¹_B` is an isomorphism, `s : V(t) ⟶ 𝔸¹_B` the zero section.
 The normalisation `AlgebraicGeometry.Etale.HasKummerClass.IsNormalized` is the case of `B`
-separated and locally of finite type over a field.
-
-It is the restriction to the chart at infinity of the class of the section at infinity of
-`ℙ¹_B`, which is a fundamental class
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_lineInfinity`).
-The proof uses the homotopy invariance
-`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_hasInvertibleExponent`.
--/
+separated and locally of finite type over a field. -/
 theorem isIso_supportedClassMap_kummerBoundary_coord_of_hasInvertibleExponent (B : Scheme.{u})
     [HasInvertibleExponent Λ B] :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin 1); B).zeroLocusSubschemeι

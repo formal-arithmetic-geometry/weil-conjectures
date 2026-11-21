@@ -10,7 +10,7 @@ public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescent
 /-!
 # Descent of the degree-zero and degree-one computations on `𝔾ₘ`
 
-The degree-zero and degree-one computations of blueprint `sk-prop-a1-kummer` for the twist
+The degree-zero and degree-one computations on `𝔸¹` and `𝔾ₘ` for the twist
 `Λ(1) = μₙ ⊗ Λ`, in the form of `WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`
 (for `π = j ≫ p` with `j : G ⟶ 𝔸¹_B` an open complement of the zero section), over a base `B`
 separated and locally of finite type over an arbitrary field `k`:

@@ -29,39 +29,7 @@ namespace FieldTheory
 /-- Any finite family in a field algebraic over `k(x)` has triangular monic relations
 whose ideal is exactly the kernel of evaluation. The family need not generate `K`.
 Source: Stacks Project, proof of Tag 07BV, the minimal polynomial construction and denominator
-clearing; Tag 08JZ (localization presentation), the kernel of that presentation.
-
-Proof (the first four steps are supplied by `exists_triangularFieldModel_data`;
-the monic quotient coordinates in step 5 are supplied by
-`triangularFieldModel_normal_form`; the independence and ideal inclusions are
-proved here):
-1. Let `F = k(x)` inside `K`. Algebraic independence embeds `k[X]` in `F`,
-   which is its fraction field. The transcendence basis makes every `b i`
-   algebraic over `F`. Set `L_i = F(b j : j < i)`; do not identify `L_m` with `K`.
-2. The minimal polynomial of `b i` over `L_i` is monic, of positive degree `e_i`.
-   The simple-extension quotient isomorphism and its power basis, followed by
-   `Basis.smulTower`, give the bounded products of preceding `b j` as an `F`-basis
-   of `L_i`. Expand the coefficients of the minimal polynomial in this basis and
-   replace `b j` by `Y_j`, obtaining a monic triangular polynomial over `F`.
-3. Express the finitely many `F`-coefficients of all these polynomials as fractions
-   in `k[X]`. Let `h` be the product of their nonzero denominators (one if there
-   are none). All coefficients lie in `D = k[X,1/h]`. Lift each coefficient
-   `a/h^n` to `a(X) T^n`; lift the leading coefficient as exactly one. This gives
-   the asserted monic `p i`. Define `y` on the first `d` variables by `x`, on
-   variable `d` by `(h(x))⁻¹`, and on variable `d+1+i` by `b i`.
-4. The localization quotient identifies `k[X,T]/(hT-1)` with `D`. Quotienting
-   further by the lifted `p i` gives `B = D[Y]/(P_i)`, and evaluation kills the
-   displayed list of equations.
-5. Iterated monic division gives `B` a `D`-basis of the monomials with exponents
-   below `e_i`, using the monic quotient power basis and `Basis.smulTower`.
-   Their evaluations are the `F`-basis of `L_m` from step 2. Since `D` embeds in
-   `F`, an element of `B` evaluating to zero has all its basis coefficients zero.
-   Thus evaluation from `B` is injective: a polynomial evaluates to zero exactly
-   when it belongs to the displayed ideal, which proves the kernel equality.
-For `m = 0` use `h = 1`, the empty polynomial family, and evaluation at `T = 1`.
-For `d = 0` the coefficient fraction field is `k`. Repeated generators give
-linear minimal polynomials; inseparability does not affect monic division or
-power bases. No fraction representation for all of `K` is asserted. -/
+clearing; Tag 08JZ (localization presentation), the kernel of that presentation. -/
 theorem exists_triangularFieldModel_evaluation_kernel
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (d : ℕ) (x : Fin d → K) (hx : IsTranscendenceBasis k x)

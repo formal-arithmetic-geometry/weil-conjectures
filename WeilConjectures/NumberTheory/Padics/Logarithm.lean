@@ -380,10 +380,7 @@ theorem smallLog_mul (u v : smallUnits l E) :
 
 /-- Small logarithm.
 
-The logarithm is injective on `U_E = 1 + ℓ² 𝒪_E`: it is a homomorphism there, and its kernel
-is trivial since `‖log (1 + x) - x‖ ≤ ℓ⁻¹ ‖x‖` (`PadicAlgCl.eq_zero_of_smallLog_eq_zero`).
-This is what `theorem-rank-one-sheaves-have-finite` uses to turn a character of `π₁` with values in
-`U_E` into a continuous additive character. -/
+The logarithm is injective on `U_E = 1 + ℓ² 𝒪_E`. -/
 theorem injOn_smallLog :
     Set.InjOn (fun u : Eˣ ↦ smallLog l E ((u : E) - 1)) (smallUnits l E) := by
   intro u hu v hv huv

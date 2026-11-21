@@ -20,11 +20,6 @@ eigenvalues on the ambient space.
   an eigenvalue of the ambient endomorphism.
 * `Module.End.hasEigenvalue_of_comp_eq_comp`: an eigenvalue of an endomorphism induced on a quotient
   is an eigenvalue of the ambient endomorphism.
-
-## Blueprint
-
-`Module.End.hasEigenvalue_of_subquotient` and `Module.End.hasEigenvalue_of_comp_eq_comp`
-implement part of `lemma-filtrations-spectra--2`.
 -/
 
 @[expose] public section

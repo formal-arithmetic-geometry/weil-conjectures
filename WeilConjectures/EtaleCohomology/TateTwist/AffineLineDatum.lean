@@ -90,9 +90,8 @@ lemma isUnit_ringChar_multiplicativeGroup :
 /-- The affine-line datum
 
 The torsor form of `κ(t)`: the `ℓ^N`-th root of the coordinate defines the Kummer cover
-`𝒯_t = Spec 𝒪_{𝔾_{m,Y}}[T₀]/(T₀^{ℓ^N} - t) ⟶ 𝔾_{m,Y}`, a finite étale `𝔾_{m,Y}`-scheme: the
-quotient is finite free, `T₀` is a unit and `ℓ^N T₀^{ℓ^N - 1}` is invertible. Multiplication of
-`T₀` by `ℓ^N`-th roots of unity makes it a `μ_{ℓ^N}`-torsor
+`𝒯_t = Spec 𝒪_{𝔾_{m,Y}}[T₀]/(T₀^{ℓ^N} - t) ⟶ 𝔾_{m,Y}`, a finite étale `𝔾_{m,Y}`-scheme, which
+is a `μ_{ℓ^N}`-torsor under multiplication of `T₀` by `ℓ^N`-th roots of unity
 (`AlgebraicGeometry.Scheme.EtaleTorsor.kummer`). -/
 noncomputable def affineLineKummerCover : (multiplicativeGroup Y).toScheme.FiniteEtale :=
   kummerFiniteEtale (n := ringChar Λ) (f := (multiplicativeGroupCoord Y : _))

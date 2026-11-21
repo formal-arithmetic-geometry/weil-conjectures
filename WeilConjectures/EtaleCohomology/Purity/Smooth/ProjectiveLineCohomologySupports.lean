@@ -83,8 +83,7 @@ adjoint of its restriction along `e` (`AlgebraicGeometry.Etale.restrictSupported
 `Λ_{Z'} ≅ Lg^* Λ_Z ⟶ Lg^* Ri^! L ⟶ Ri'^! Le^* L ≅ Ri'^! L'`,
 
 the pullback of the adjoint of `γ` followed by the base change map of the exceptional inverse
-image (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`). The isomorphism `Θ`
-compares two reflections of `Λ_U` into the objects of the form `Ri'_! N`. -/
+image (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`). -/
 theorem exists_isIso_supportedClassMap_restrictSupportedClass :
     ∃ Θ : constantComplex Λ Z' ⟶ (L((g)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ Z),
       IsIso Θ ∧ ∀ (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

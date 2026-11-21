@@ -48,16 +48,6 @@ extension preserves the Krull dimension, `s` is the dimension of the algebra.
   over `R[x]`, then it is finite over `R[x ^ q - a]` for every `a : A` and all large `q`.
 - `ringKrullDim_eq_of_isLocalization_away`: localizing a finitely generated domain over a field
   away from a nonzero element preserves the Krull dimension.
-
-## Blueprint
-
-- `lemma-point-count-bound`: Noether normalization.
-- `lemma-point-count-bound`: Mathlib's `exists_finite_inj_algHom_of_fg`.
-- `lemma-point-count-bound`: `ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial`.
-- `det-i-geometry`: dimension drop.
-- `lemma-relative-noether-normalization-over-stratification--1`:
-`Algebra.FiniteType.exists_finite_aeval_away`.
-- `lem-pc-dim-base-change`: `ringKrullDim_tensorProduct_of_finiteType`.
 -/
 
 @[expose] public section
@@ -85,11 +75,7 @@ theorem ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial {K B : Type*} [Field K
 
 /-- Noether normalization in the sharp form: a finitely generated algebra `B` of Krull
 dimension `n` over a field `K` admits an injective `K`-algebra map from the polynomial ring in
-`n` variables making `B` a finite module.
-
-The number of variables is forced: a finite injective algebra map is an integral extension,
-and an integral extension preserves the Krull dimension, so the polynomial ring produced by
-`exists_finite_inj_algHom_of_fg` has `ringKrullDim B` many variables. -/
+`n` variables making `B` a finite module. -/
 theorem exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq
     (K B : Type*) [Field K] [CommRing B] [Algebra K B] [Algebra.FiniteType K B] (n : ℕ)
     (hB : ringKrullDim B = (n : ℕ)) :
@@ -106,11 +92,7 @@ theorem exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq
 /-- One-dimensional Noether normalization.
 
 A finitely generated algebra `B` of Krull dimension one over a field `K` admits an injective
-`K`-algebra map from the polynomial ring `K[T]` making `B` a finite module.
-
-Nontriviality of `B` is automatic: the zero ring has `ringKrullDim = ⊥`. This is the case
-`n = 1` of `exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq`, along the isomorphism
-`MvPolynomial (Fin 1) K ≃ₐ[K] K[T]`. -/
+`K`-algebra map from the polynomial ring `K[T]` making `B` a finite module. -/
 theorem exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one
     (K B : Type*) [Field K] [CommRing B] [Algebra K B] [Algebra.FiniteType K B]
     (hB : ringKrullDim B = 1) :
@@ -133,16 +115,9 @@ attribute [local instance] MvPolynomial.algebraMvPolynomial in
 /-- Spreading Noether normalization to a principal open.
 
 Let `A` be a domain and `B` a finitely generated `A`-algebra. Then there are `0 ≠ s₀ ∈ A`,
-`d ≥ 0` and `t₁, …, t_d ∈ B` such that for the localizations `A_s = A[1/s]` and `B_s = B[1/s]`, the
-algebra map `A_s[T₁, …, T_d] → B_s`, `Tᵢ ↦ tᵢ` makes `B_s` a finite module. If moreover `A → B`
- is injective, this map is injective as well.
-
-The blueprint statement is the case `s = s₀`; we allow any nonzero multiple `s` of `s₀`, as
-localizing further preserves finiteness.
-
-Following the blueprint, apply Noether normalization (`exists_finite_inj_algHom_of_fg`) to the
-generic fibre `B ⊗_A Frac A`, rescale the coordinates so that they come from `B`, and clear the
-finitely many denominators of the integral equations of generators of `B`. -/
+`d ≥ 0` and `t₁, …, t_d ∈ B` such that for every nonzero multiple `s` of `s₀` and the localizations
+`A_s = A[1/s]` and `B_s = B[1/s]`, the algebra map `A_s[T₁, …, T_d] → B_s`, `Tᵢ ↦ tᵢ` makes `B_s`
+a finite module. If moreover `A → B` is injective, this map is injective as well. -/
 theorem Algebra.FiniteType.exists_finite_aeval_away (A B : Type u) [CommRing A] [IsDomain A]
     [CommRing B] [Algebra A B] [Algebra.FiniteType A B] :
     ∃ s₀ : A, s₀ ≠ 0 ∧ ∃ (d : ℕ) (t : Fin d → B), ∀ s : A, s₀ ∣ s → s ≠ 0 →

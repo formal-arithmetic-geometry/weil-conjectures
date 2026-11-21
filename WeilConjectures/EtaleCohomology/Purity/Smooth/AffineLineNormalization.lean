@@ -14,13 +14,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 # The rank-one normalisation from the cohomology of `𝔸¹` and `𝔾ₘ`
 
 Let `p : 𝔸¹_B ⟶ B` be the projection, `s : V(t) ⟶ 𝔸¹_B` the zero section (cut out by the
-coordinate `t`) and `j : 𝔾_{m,B} ⟶ 𝔸¹_B` its open complement. The proof of `sk-prop-a1` applies
-`Rp_*` to the localization triangle `Rs_! Rs^! Λ(1) ⟶ Λ(1) ⟶ Rj_* Lj^* Λ(1) ⟶ [1]` and reads off
-the long exact sequence of cohomology sheaves with the computations of `sk-prop-a1-kummer`:
-`Rp_* Λ(1)` sits in degree zero, `p^*` identifies it with `R⁰π_* Λ(1)`, `R¹π_* Λ(1)` is free
-on the Kummer class `κ(t)` and `R^mπ_* Λ(1) = 0` for `m ≥ 2`. Hence `Rs^! Λ(1)[2]` sits in degree
-zero, and the boundary `∂κ(t)` generates it: the adjoint `Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` of the Kummer
-boundary is an isomorphism.
+coordinate `t`) and `j : 𝔾_{m,B} ⟶ 𝔸¹_B` its open complement. The computation of the
+fundamental class `Rs^! Λ(1)[2] ≅ Λ` applies `Rp_*` to the localization triangle
+`Rs_! Rs^! Λ(1) ⟶ Λ(1) ⟶ Rj_* Lj^* Λ(1) ⟶ [1]` and reads off the long exact sequence of
+cohomology sheaves with the computations of the cohomology of `𝔸¹` and `𝔾ₘ`: `Rp_* Λ(1)` sits
+in degree zero, `p^*` identifies it with `R⁰π_* Λ(1)`, `R¹π_* Λ(1)` is free on the Kummer class
+`κ(t)` and `R^mπ_* Λ(1) = 0` for `m ≥ 2`. Hence `Rs^! Λ(1)[2]` sits in degree zero, and the
+boundary `∂κ(t)` generates it: the adjoint `Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` of the Kummer boundary is
+an isomorphism.
 
 This file proves that implication for an arbitrary rank-one datum
 (`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord_of_affineLine`); the
@@ -277,7 +278,7 @@ noncomputable def kummerClassAffineLineDirectImage :
 
 /-- Rank-one orientation: the fundamental class of the zero section
 
-*The proof from `sk-prop-a1-kummer`.* For a rank-one datum, suppose that, with
+*From the cohomology of `𝔸¹` and `𝔾ₘ`.* For a rank-one datum, suppose that, with
 `p : 𝔸¹_B ⟶ B`, `j : 𝔾_{m,B} ⟶ 𝔸¹_B` and `π = p ∘ j`,
 
 * `Rp_* Λ(1)` has cohomology only in degree `0` (`ha`);
@@ -285,11 +286,7 @@ noncomputable def kummerClassAffineLineDirectImage :
 * the Kummer class induces an isomorphism `Λ_B ≅ R¹π_* Λ(1)`, `1 ↦ κ(t)` (`hb₁`);
 * `R^mπ_* Λ(1) = 0` for `m ≠ 0, 1` (`hc`).
 
-Then the adjoint `Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` of the Kummer boundary `∂κ(t)` is an isomorphism.
-Indeed `Rp_*` of the localization triangle of `(s, j)` is a triangle
-`Rp_* Rs_! Rs^! Λ(1) ⟶ Rp_* Λ(1) ⟶ Rπ_* Λ(1) ⟶ [1]`, in which `Rp_* Rs_! ≅ R(ps)_*` is an
-equivalence as `ps` is an isomorphism, and `Rp_*` of `∂κ(t)` is `κ(t)` followed by the boundary
-of this triangle; `DerivedCategory.isIso_shiftedHomComp_of_distTriang` concludes. -/
+Then the adjoint `Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` of the Kummer boundary `∂κ(t)` is an isomorphism. -/
 theorem isIso_supportedClassMap_kummerBoundary_coord_of_affineLine
     (ha : ∀ n : ℤ, n ≠ 0 → IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
       ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).obj

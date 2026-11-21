@@ -14,10 +14,10 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomFrames
 Let `i : Z ⟶ X` be a closed immersion which has Thom frames of codimension `c`
 (`AlgebraicGeometry.Etale.HasThomFrames`) and regular Zariski frames
 (`AlgebraicGeometry.Etale.HasRegularZariskiFrames`), with `X` locally of finite type over a
-field. This file reruns the construction of the fundamental class `[Z ⊂ X]` of blueprint
-`lemma-class-of-point--1` (`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`) under
+field. This file reruns the construction of the fundamental class `[Z ⊂ X]` of a regular
+immersion (`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`) under
 these hypotheses, which hold étale-locally for the zero section of affine space, e.g. for the
-diagonal of a smooth morphism, and without using smooth purity: clause (a) is
+diagonal of a smooth morphism, and without using smooth purity: concentration in degree zero is
 `AlgebraicGeometry.Etale.HasThomFrames.isZero_homology_rightDerivedLowerShriek`, and frame
 independence is the version over a field
 `AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec_of_field`.
@@ -38,6 +38,14 @@ is so on every Thom frame.
 - `AlgebraicGeometry.Etale.isIso_thomFundamentalClassMap`: `cl_i` is an isomorphism.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_tateObject_of_hasThomFrames`:
   `Ri^! (Λ_X(c)[2c]) ≅ Λ_Z`.
+
+## Implementation details
+
+The fundamental class is defined as `Classical.choose` of
+`AlgebraicGeometry.Etale.HasThomFrames.existsUnique_fundamentalClass`; uniqueness makes the choice
+canonical. Unlike the purity theorem for regular immersions over a perfect field,
+`nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersion`,
+which is derived from smooth purity, the purity statement here does not use smooth purity.
 -/
 
 @[expose] public section
@@ -67,12 +75,7 @@ omit [HasKummerClass.IsNormalized Λ] in
 
 *Uniqueness of the fundamental class, for closed immersions with Thom frames.* Two classes in
 `H^{2c}_Z(X, Λ(c))` are equal if every point of `Z` lies in a Zariski frame on which their
-restrictions agree. The classes are sections of a sheaf
-(`AlgebraicGeometry.Etale.HasThomFrames.exists_iso_singleFunctor_rightDerivedLowerShriek`),
-so they are determined by their pullbacks to the geometric points of `X`. A geometric point
-outside `Z` sees nothing; a geometric point of `Z` factors through a Zariski frame, and the
-restriction of supports along an open immersion is invertible
-(`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_isOpenImmersion`). -/
+restrictions agree. -/
 theorem HasThomFrames.eq_of_forall_exists_frameRestriction_eq (hT : HasThomFrames Λ c i)
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![Λ]).obj ((tateObject Λ X c)⟦2 * (c : ℤ)⟧))}
@@ -116,9 +119,7 @@ omit [HasKummerClass.IsNormalized Λ] in
 /-- Purity for regular closed immersions
 
 *Uniqueness of the fundamental class, for closed immersions with Thom frames.* Two classes in
-`H^{2c}_Z(X, Λ(c))` whose restrictions to every Zariski frame agree are equal
-(`AlgebraicGeometry.Etale.HasThomFrames.eq_of_forall_exists_frameRestriction_eq`): every point
-of `Z` lies in a Zariski frame by `hR`. -/
+`H^{2c}_Z(X, Λ(c))` whose restrictions to every Zariski frame agree are equal. -/
 theorem HasThomFrames.eq_of_frameRestriction_eq (hT : HasThomFrames Λ c i)
     (hR : HasRegularZariskiFrames c i)
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -134,12 +135,7 @@ theorem HasThomFrames.eq_of_frameRestriction_eq (hT : HasThomFrames Λ c i)
 
 **Frame classes agree on overlaps, for closed immersions with Thom frames.** Two frames `F₁`,
 `F₂`, with `F₁` given by a weakly regular sequence on an affine scheme, have the same restriction
-to any `W` étale over both. Near every point the two frames differ by an invertible matrix, under
-which frame classes agree
-(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec_of_field`, which
-needs `X` locally of finite type over a field), and the uniqueness of classes applies to the base
-change of `i` to `W`, which has Thom frames
-(`AlgebraicGeometry.Etale.HasThomFrames.of_isPullback`). -/
+to any `W` étale over both. -/
 theorem HasThomFrames.restrictSupportedClass_frameClass_eq (hT : HasThomFrames Λ c i)
     {k : Type u} [Field k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
     (F₁ F₂ : i.EtaleFrame c)
@@ -271,17 +267,7 @@ theorem HasThomFrames.restrictSupportedClass_frameClass_eq (hT : HasThomFrames �
 closed immersion with Thom frames and regular Zariski frames of codimension `c`, with `X` locally
 of finite type over a field `k`. The frame classes depend only on `Z_U ⊂ U`, not on the frame,
 and they glue: there is a unique class `[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every
-frame is the frame class.
-
-Near every point of `Z` there is a frame given by a regular sequence on an affine open, and any
-other frame differs from it, near `Z`, by a matrix with invertible determinant
-(`RingTheory.Sequence.IsWeaklyRegular.exists_mulVec_isUnit_det`), under which the frame classes
-agree (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec_of_field`); so
-frame classes agree on overlaps
-(`AlgebraicGeometry.Etale.HasThomFrames.restrictSupportedClass_frameClass_eq`). By (a)
-(`AlgebraicGeometry.Etale.HasThomFrames.isZero_homology_rightDerivedLowerShriek`) the classes are
-morphisms into a sheaf placed in degree zero, so the Zariski-local classes glue
-(`AlgebraicGeometry.Etale.exists_hom_of_isOpenImmersion_cover`). -/
+frame is the frame class. -/
 theorem HasThomFrames.existsUnique_fundamentalClass (hT : HasThomFrames Λ c i)
     (hR : HasRegularZariskiFrames c i) {k : Type u} [Field k] (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] :
@@ -434,11 +420,7 @@ variable (Λ)
 The *fundamental class* `[Z ⊂ X] = cl_{Z/X} ∈ H^{2c}_Z(X, Λ(c))` of a closed immersion
 `i : Z ⟶ X` with Thom frames and regular Zariski frames of codimension `c`, with `X` locally of
 finite type over a field: the unique class restricting to the frame class
-`∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` on every frame.
-
-It is *defined* as `Classical.choose` of
-`AlgebraicGeometry.Etale.HasThomFrames.existsUnique_fundamentalClass`; uniqueness is what makes
-the choice canonical. -/
+`∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` on every frame. -/
 noncomputable def thomFundamentalClass (hT : HasThomFrames Λ c i)
     (hR : HasRegularZariskiFrames c i) {k : Type u} [Field k] (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] :
@@ -467,13 +449,7 @@ noncomputable def thomFundamentalClassMap (hT : HasThomFrames Λ c i)
 
 /-- Purity for regular closed immersions
 
-**(c) `cl_i` is an isomorphism, for closed immersions with Thom frames.** On a Thom frame
-`(e : U ⟶ X, f)`, the fundamental class restricts to the frame class
-(`AlgebraicGeometry.Etale.frameRestriction_thomFundamentalClass`), whose adjoint is an
-isomorphism; restriction of supports along the étale `e` being invertible, the restriction of
-`cl_i` to `V(f) ⟶ Z` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_restrictSupportedClass_iff`), and these
-restrictions detect isomorphisms on cohomology sheaves. -/
+**(c) `cl_i` is an isomorphism, for closed immersions with Thom frames.** -/
 theorem isIso_thomFundamentalClassMap (hT : HasThomFrames Λ c i)
     (hR : HasRegularZariskiFrames c i) {k : Type u} [Field k] (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] :
@@ -506,11 +482,7 @@ theorem isIso_thomFundamentalClassMap (hT : HasThomFrames Λ c i)
 
 **Purity for closed immersions with Thom frames**, `Ri^! (Λ_X(c)[2c]) ≅ Λ_Z`, for a closed
 immersion `i : Z ⟶ X` with Thom frames and regular Zariski frames of codimension `c`, with `X`
-locally of finite type over a field: the inverse of `cl_i`
-(`AlgebraicGeometry.Etale.isIso_thomFundamentalClassMap`). Unlike
-the purity theorem for regular immersions over a perfect field, which is
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersion`
-and is derived from smooth purity, this does not use smooth purity. -/
+locally of finite type over a field. -/
 theorem nonempty_iso_rightDerivedUpperShriek_tateObject_of_hasThomFrames
     (hT : HasThomFrames Λ c i) (hR : HasRegularZariskiFrames c i) {k : Type u} [Field k]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] :

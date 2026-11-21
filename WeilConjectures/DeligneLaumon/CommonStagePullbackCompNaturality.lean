@@ -47,14 +47,8 @@ private theorem comp_ofHom_square
     StageSystem.PairCategory.mkHom_comp_mkHom] using
       congrArg (StageSystem.PairCategory.mkHom L hP hS) e
 
-/-- Naturality for one explicit common-stage representative.
-The representative formula is expanded at a common coefficient stage.  One first
-uses the scalar-extension tower coherence to transport the integral compositor to
-that stage, then applies the naturality square of the integral pullback compositor
-and cancels the comparison isomorphisms.  The proof is the finite-stage core of
-`commonStagePullbackCompComponent_naturality`.
-Source: Stacks 099N(5), coefficient-compatibility argument in residue-compatible pullback, Step
-10. -/
+/-- Naturality of the common-stage pullback compositor for one explicit common-stage
+representative. Source: Stacks 099N(5). -/
 theorem commonStagePullbackCompComponent_naturality_ofHom {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]

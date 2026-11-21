@@ -62,6 +62,11 @@ This file provides the site-theoretic inputs for the pro-étale six functors of 
   étale site into the small pro-étale site, which is fully faithful, representably flat and
   continuous (`AlgebraicGeometry.Scheme.isContinuous_toProEt`).
 
+## Implementation details
+
+The instance `AlgebraicGeometry.Scheme.ProEt.locallySmall` is stated directly so that instance
+search does not go through the slow `HasCardinalFilteredGenerator` route before the low-priority
+`locallySmall_of_univLE`.
 -/
 
 @[expose] public section
@@ -74,16 +79,15 @@ open CategoryTheory Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
 
-/-- A Zariski open cover is a pro-étale covering family: it is quasi-compact since open
-immersions are open maps, and open immersions are weakly étale. -/
+/-- A Zariski open cover is a pro-étale covering family. -/
 lemma zariskiPrecoverage_le_proetalePrecoverage :
     zariskiPrecoverage ≤ proetalePrecoverage.{u} :=
   zariskiPrecoverage_le_propQCPrecoverage
 
 section Quotient
 
-/-- A subset of the target of a pro-étale covering family whose preimages are all open is open:
-the members are flat and the family is quasi-compact. -/
+/-- A subset of the target of a pro-étale covering family whose preimages are all open is
+open. -/
 lemma isOpen_of_isOpen_preimage_of_mem_proetalePrecoverage {Y : Scheme.{u}} {ι : Type*}
     {X : ι → Scheme.{u}} (f : ∀ i, X i ⟶ Y)
     (hf : Presieve.ofArrows X f ∈ proetalePrecoverage Y) (S : Set Y)
@@ -184,9 +188,7 @@ instance : (precoverage X).IsStableUnderComposition := by
 instance : (precoverage X).IsStableUnderBaseChange := by
   dsimp [precoverage]; infer_instance
 
-/-- `X.ProEt` is locally `u + 1`-small. Stated directly so that instance search does not go
-through the slow `HasCardinalFilteredGenerator` route before the low-priority
-`locallySmall_of_univLE`. -/
+/-- `X.ProEt` is locally `u + 1`-small. -/
 instance locallySmall : LocallySmall.{u + 1} X.ProEt :=
   ⟨fun _ _ ↦ ⟨ULift.{u + 1} _, ⟨Equiv.ulift.symm⟩⟩⟩
 
@@ -208,8 +210,7 @@ lemma mem_precoverage_iff {V : X.ProEt} {R : Presieve V} :
   Iff.rfl
 
 /-- A sieve on `V : X.ProEt` is covering for the pro-étale topology exactly when it contains
-a pro-étale covering presieve: the pro-étale precoverage has isomorphisms, pullbacks and is
-stable under base change and composition, so no further saturation is needed. -/
+a pro-étale covering presieve. -/
 lemma mem_topology_iff {V : X.ProEt} {S : Sieve V} :
     S ∈ topology X V ↔ ∃ R ∈ precoverage X V, R ≤ S.arrows :=
   Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition
@@ -225,19 +226,7 @@ lemma topology_eq_restrictedTopology :
 /-! ### Base change -/
 
 /-- Base change along an *arbitrary* morphism `g : W ⟶ U` preserves the covering sieves of
-the pro-étale topologies: a covering presieve of `V` is carried to the family of base
-changes, and each of the squares
-
-```
-  Z i ×_U W ──(Over.pullback @WeaklyEtale ⊤ g).map (f i)──→ V ×_U W
-      │                                                        │
-      │ pullback.fst (Z i).hom g                               │ pullback.fst V.hom g
-      ↓                                                        ↓
-    Z i ────────────────── (f i).left ────────────────────────→ V
-```
-
-is cartesian by `MorphismProperty.Over.isPullback_map_left`, so the conclusion is the
-stability of `proetalePrecoverage` under base change. -/
+the pro-étale topologies. -/
 lemma coverPreserving_overPullback {W U : Scheme.{u}} (g : W ⟶ U) :
     CoverPreserving (ProEt.topology U) (ProEt.topology W)
       (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g) where
@@ -257,8 +246,7 @@ lemma coverPreserving_overPullback {W U : Scheme.{u}} (g : W ⟶ U) :
       exact ⟨Z i, f i, 𝟙 _, hle _ _ ⟨i⟩, (Category.id_comp _).symm⟩
 
 /-- Base change along an *arbitrary* morphism `g : W ⟶ U` is continuous for the pro-étale
-topologies: it preserves covers by `ProEt.coverPreserving_overPullback` and compatible
-families since it is representably flat, the small pro-étale site being finitely complete. -/
+topologies. -/
 instance isContinuous_overPullback {W U : Scheme.{u}} (g : W ⟶ U) :
     (MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).IsContinuous
       (ProEt.topology U) (ProEt.topology W) :=
@@ -272,9 +260,7 @@ section OverMap
 variable {V U : Scheme.{u}} {f : V ⟶ U} (h : WeaklyEtale f)
 
 /-- A morphism of the small pro-étale site of `U` whose target lies in the image of the
-localization functor of `h : WeaklyEtale f` is weakly étale over `V` as well: cancel `f` off
-the structure morphism using `MorphismProperty.HasOfPostcompProperty @WeaklyEtale
-@WeaklyEtale`. -/
+localization functor of `h : WeaklyEtale f` is weakly étale over `V` as well. -/
 lemma weaklyEtale_left_comp {W : V.ProEt} {Z : U.ProEt}
     (φ : Z ⟶ (MorphismProperty.Over.map ⊤ h).obj W) : WeaklyEtale (φ.left ≫ W.hom) := by
   refine MorphismProperty.of_postcomp (W := @WeaklyEtale) (W' := @WeaklyEtale)
@@ -283,9 +269,7 @@ lemma weaklyEtale_left_comp {W : V.ProEt} {Z : U.ProEt}
   exact (MorphismProperty.Over.w φ) ▸ Z.prop
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The localization functor is cocontinuous for the pro-étale topologies: a covering of
-`(Over.map ⊤ h).obj W` is, on underlying schemes, a covering of `W`, and the corresponding
-morphisms of the small pro-étale site of `V` are carried back into the given sieve. -/
+/-- The localization functor is cocontinuous for the pro-étale topologies. -/
 instance isCocontinuous_overMap :
     (MorphismProperty.Over.map ⊤ h).IsCocontinuous (ProEt.topology V) (ProEt.topology U) where
   cover_lift {W S} hS := by
@@ -316,9 +300,7 @@ instance isCocontinuous_overMap :
       exact S.downward_closed (hle _ _ ⟨i⟩) e
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The localization functor preserves covering sieves of the pro-étale topologies: it is
-the identity on underlying schemes and morphisms, so a covering presieve is carried to a
-presieve with the same image in `proetalePrecoverage`. -/
+/-- The localization functor preserves covering sieves of the pro-étale topologies. -/
 lemma coverPreserving_overMap :
     CoverPreserving (ProEt.topology V) (ProEt.topology U)
       (MorphismProperty.Over.map ⊤ h) where
@@ -335,9 +317,7 @@ lemma coverPreserving_overMap :
       exact ⟨Z i, φ i, 𝟙 _, hle _ _ ⟨i⟩, (Category.id_comp _).symm⟩
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The localization functor is continuous for the pro-étale topologies. Compatible
-families are preserved by `MorphismProperty.Over.compatiblePreserving_map`, which holds for
-an arbitrary topology on `@WeaklyEtale.Over ⊤ U`. -/
+/-- The localization functor is continuous for the pro-étale topologies. -/
 instance isContinuous_overMap :
     (MorphismProperty.Over.map ⊤ h).IsContinuous (ProEt.topology V) (ProEt.topology U) :=
   Functor.isContinuous_of_coverPreserving
@@ -376,9 +356,7 @@ variable {X : Scheme.{u}} (V : X.ProEt) {ι : Type*} {W : ι → Scheme.{u}} (g 
   [∀ i, WeaklyEtale (g i)]
 
 /-- For a pro-étale covering family `g i : W i ⟶ X`, the base changes `V ×_X W i` cover `V`
-in the pro-étale topology, for every weakly étale `X`-scheme `V`: the family of projections
-is the base change of `g` along `V.hom`, and `proetalePrecoverage` is stable under base
-change. -/
+in the pro-étale topology, for every weakly étale `X`-scheme `V`. -/
 lemma ofArrows_baseChange_mem_topology
     (hg : Presieve.ofArrows W g ∈ proetalePrecoverage X) :
     Sieve.ofArrows (fun i ↦ baseChange (g i) V) (fun i ↦ baseChangeHom (g i) V) ∈
@@ -399,8 +377,7 @@ section EmptyObject
 variable {A : Type u'} [Category.{w} A] {X : Scheme.{u}}
 
 /-- A sheaf on the small pro-étale site has terminal sections over an object whose
-underlying scheme is empty. This is the sheaf condition for the empty covering, which is a
-pro-étale covering by `AlgebraicGeometry.Scheme.ProEt.bot_mem_topology`. -/
+underlying scheme is empty. -/
 noncomputable def isTerminalSectionsOfIsEmpty (G : Sheaf (ProEt.topology X) A) (T : X.ProEt)
     [IsEmpty T.left] : IsTerminal (G.obj.obj (op T)) :=
   G.isTerminalOfBotCover T (ProEt.bot_mem_topology T)
@@ -451,8 +428,7 @@ instance isContinuous_toProEt :
     etaleTopology_le_proetaleTopology
 
 /-- **The small étale site is subcanonical**: the representable presheaves `U ↦ Hom_X(U, V)` are
-sheaves, as the small étale site embeds fully faithfully and continuously into the small
-pro-étale site, which is subcanonical. -/
+sheaves. -/
 instance subcanonical_smallEtaleTopology : (smallEtaleTopology X).Subcanonical :=
   GrothendieckTopology.subcanonical_of_full_of_faithful (toProEt X) _ (ProEt.topology X)
 
@@ -479,7 +455,7 @@ noncomputable def ofOpenImmersionHom (U : X.ProEt) {Y : Scheme.{u}} (j : Y ⟶ U
   MorphismProperty.Over.homMk j
 
 /-- A sieve on `U : X.ProEt` containing a jointly surjective family of open immersions is
-covering: the open immersions form a Zariski cover. -/
+covering. -/
 lemma mem_topology_of_openImmersion {U : X.ProEt} (S : Sieve U) {ι : Type u}
     {Y : ι → Scheme.{u}} (j : ∀ i, Y i ⟶ U.left) [∀ i, IsOpenImmersion (j i)]
     (hj : ∀ x, ∃ i, x ∈ Set.range (j i)) (hS : ∀ i, S (ofOpenImmersionHom U (j i))) :

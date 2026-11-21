@@ -81,7 +81,7 @@ def exchangeChain (a : U ⊣ R) (b : V ⊣ S) (θ : G ⋙ V ⟶ U ⋙ H) (K : D)
 
 set_option backward.defeqAttrib.useBackward true in
 /-- The component of the actual adjunction mate is the composite of this diagram.
-Source: Mathlib `mateEquiv`. Proof: expand the mate component and functor composition. -/
+Source: Mathlib `mateEquiv`. -/
 theorem mate_eq_exchangeChain_composite (a : U ⊣ R) (b : V ⊣ S)
     (θ : G ⋙ V ⟶ U ⋙ H) (K : D) :
     (mateEquiv a b (TwoSquare.mk _ _ _ _ θ)).app K =

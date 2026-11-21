@@ -52,8 +52,7 @@ instance (priority := low) LocallyQuasiFinite.of_etale (f : X ⟶ Y) [Etale f] :
   algebraize [(f.appLE U V e).hom]
   exact RingHom.quasiFinite_algebraMap.mpr inferInstance
 
-/-- A formally unramified morphism locally of finite type is locally quasi-finite: on affine
-opens, a formally unramified algebra of finite type is quasi-finite. -/
+/-- A formally unramified morphism locally of finite type is locally quasi-finite. -/
 instance (priority := low) LocallyQuasiFinite.of_formallyUnramified (f : X ⟶ Y)
     [FormallyUnramified f] [LocallyOfFiniteType f] : LocallyQuasiFinite f := by
   rw [HasRingHomProperty.iff_appLE (P := @LocallyQuasiFinite)]
@@ -72,9 +71,7 @@ lemma Scheme.Hom.eq_of_specializes_of_apply_eq (f : X ⟶ Y) [LocallyQuasiFinite
   exact congrArg Subtype.val h'.eq
 
 /-- **A universally closed, locally quasi-finite, surjective morphism preserves the dimension.**
-Such a morphism `f : X ⟶ Y`, for instance a finite surjective one, satisfies `dim X = dim Y`:
-chains of specializations in `Y` lift to `X` since `f` is closed (going up), and their images in
-`Y` stay strict since the fibres of `f` are discrete (incomparability). -/
+Such a morphism `f : X ⟶ Y`, for instance a finite surjective one, satisfies `dim X = dim Y`. -/
 theorem Scheme.Hom.topologicalKrullDim_eq_of_surjective (f : X ⟶ Y) [UniversallyClosed f]
     [LocallyQuasiFinite f] [Surjective f] : topologicalKrullDim X = topologicalKrullDim Y :=
   le_antisymm
@@ -92,9 +89,7 @@ lemma Scheme.Hom.finite_preimage_singleton_of_isFinite_morphismRestrict (f : X �
 
 /-- **Quasi-finiteness descends along surjective base changes.** Let `f : X ⟶ Z` be quasi-compact
 and locally of finite type, and let `snd : P ⟶ Y` be its base change along a surjective
-`g : Y ⟶ Z`. If `snd` is locally quasi-finite, so is `f`: every fibre of `f` is the image of a
-fibre of `snd`, which is finite. The hypothesis `QuasiCompact f` is only a convenience, used to
-get finite fibres of `snd`; the statement also holds without it. -/
+`g : Y ⟶ Z`. If `snd` is locally quasi-finite, so is `f`. -/
 lemma LocallyQuasiFinite.of_isPullback_of_surjective {P Z : Scheme.{u}} {fst : P ⟶ X}
     {snd : P ⟶ Y} {f : X ⟶ Z} {g : Y ⟶ Z} (h : IsPullback fst snd f g) [Surjective g]
     [LocallyQuasiFinite snd] [QuasiCompact f] [LocallyOfFiniteType f] : LocallyQuasiFinite f := by
@@ -110,9 +105,7 @@ lemma LocallyQuasiFinite.of_isPullback_of_surjective {P Z : Scheme.{u}} {fst : P
 open Order in
 /-- **Flat locally quasi-finite morphisms preserve codimension.** For a flat, locally
 quasi-finite morphism `f`, the codimension (coheight in the specialisation order) of `f y` is that
-of `y`: chains of generisations of `y` map to chains of generisations of `f y`, as no two points
-of a fibre specialise to each other, and chains of generisations of `f y` lift, as flat morphisms
-are generalizing. -/
+of `y`. -/
 lemma Scheme.Hom.coheight_apply_of_flat (f : X ⟶ Y) [Flat f] [LocallyQuasiFinite f] (y : X) :
     coheight (f y) = coheight y := by
   have hf : StrictMono f := by
@@ -129,19 +122,12 @@ lemma Scheme.Hom.coheight_apply_of_flat (f : X ⟶ Y) [Flat f] [LocallyQuasiFini
   exact ⟨ha', fun h ↦ hab.2 (h.map f.continuous)⟩
 
 /-- **A locally quasi-finite morphism does not increase dimension.** For `f : X ⟶ Y` locally
-quasi-finite, `dim X ≤ dim Y`: the fibres of `f` are discrete, so `f` maps strict chains of
-specializations to strict chains.
-
-Used for blueprint `theorem-results-from-etale-theory--4`: an étale `X`-scheme has dimension at
-most `dim X`. -/
+quasi-finite, `dim X ≤ dim Y`. -/
 theorem Scheme.Hom.topologicalKrullDim_le_of_locallyQuasiFinite (f : X ⟶ Y)
     [LocallyQuasiFinite f] : topologicalKrullDim X ≤ topologicalKrullDim Y :=
   topologicalKrullDim_le_of_continuous f.continuous fun _ _ ↦ f.eq_of_specializes_of_apply_eq
 
-/-- **An étale morphism does not increase dimension.** For `f : X ⟶ Y` étale, `dim X ≤ dim Y`.
-
-Used for blueprint `theorem-results-from-etale-theory--4`: an étale `X`-scheme has dimension at
-most `dim X`. -/
+/-- **An étale morphism does not increase dimension.** For `f : X ⟶ Y` étale, `dim X ≤ dim Y`. -/
 theorem Scheme.Hom.topologicalKrullDim_le_of_etale (f : X ⟶ Y) [Etale f] :
     topologicalKrullDim X ≤ topologicalKrullDim Y :=
   f.topologicalKrullDim_le_of_locallyQuasiFinite

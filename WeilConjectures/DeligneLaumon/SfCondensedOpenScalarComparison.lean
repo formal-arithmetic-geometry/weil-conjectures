@@ -9,8 +9,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 
 /-! # The normalized condensed coefficient comparison for open extension
 
-The open-extension step of `lemma-weight-bounds-partitions` uses module objects over
-pulled-back condensed coefficient rings. Its coefficient comparison is the conjugate of the
+The open-extension step in bounding weights along a partition into strata uses module objects
+over pulled-back condensed coefficient rings. Its coefficient comparison is the conjugate of the
 specified scalar-restriction/pullback square along the derived open and scalar adjunctions.
 
 The distinct name `sfCondensedOpenScalarComparison` denotes this canonical comparison.
@@ -54,9 +54,8 @@ theorem sfCondensedOpenScalarComparison_existsUnique :
   exact ⟨e.symm (CondensedRing.derivedComapUpperStarIso a j),
     e.apply_symm_apply _, fun c hc ↦ e.injective (hc.trans (e.apply_symm_apply _).symm)⟩
 
-/-- The normalized scalar/open-extension comparison on the current condensed coefficients.
-
-This is the existing canonical conjugate, not a second choice of comparison data. -/
+/-- The normalized scalar/open-extension comparison on the current condensed coefficients: the
+canonical conjugate of the specified pullback square. -/
 abbrev sfCondensedOpenScalarComparison :
     D(CondensedRing.openImmersionLowerShriek Λ j) ⋙
         L(Mod.extendScalars (coefficientMap a X)) ≅

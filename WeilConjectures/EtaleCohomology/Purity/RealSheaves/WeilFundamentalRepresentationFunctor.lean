@@ -11,7 +11,7 @@ public import WeilConjectures.RepresentationTheory.RepFunctors
 /-!
 # The Weil fundamental representation as a tensor functor
 
-The Weil fundamental representation `ℱ ↦ (ℱ_t, ρ_ℱ)` of `situation-weil`
+The Weil fundamental representation `ℱ ↦ (ℱ_t, ρ_ℱ)`
 (`AlgebraicGeometry.WeilGroup.fundamentalRep`) is a functor from lisse Weil sheaves to
 representations of the Weil group, a morphism acting on the stalks at the base point
 (`AlgebraicGeometry.WeilGroup.fundamentalRepFunctor`). It is a tensor functor:
@@ -114,8 +114,8 @@ end StalkMap
 variable (D : WeilMonodromyData B)
 
 /-- The functor `ℱ ↦ (ℱ_t, ρ_ℱ)` from lisse Weil sheaves to representations of the Weil group,
-sending a lisse Weil sheaf to its Weil fundamental representation (`situation-weil`,
-`AlgebraicGeometry.WeilGroup.fundamentalRep`) on its stalk at the base point, and a morphism to
+sending a lisse Weil sheaf to its Weil fundamental representation
+(`AlgebraicGeometry.WeilGroup.fundamentalRep`) on its stalk at the base point, and a morphism to
 its stalk at the base point. -/
 noncomputable def fundamentalRepFunctor :
     LisseWeilSheaf K l C ⥤ Rep.{u + 1} (PadicAlgCl l) W.carrier where

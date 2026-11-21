@@ -21,8 +21,7 @@ We show
 Hom_A(E, ω)^G ≃ Hom_A(E^G, ω),
 ```
 with inverse `φ ↦ φ ∘ avg`, where `avg = Representation.discreteAverage` is the averaging
-retraction `E → E^G`. This is the module-level profinite step of blueprint
-`lemma-duality-invariants-pro-p--1`; the finite-group core in an arbitrary linear category is
+retraction `E → E^G`. The finite-group analogue in an arbitrary linear category is
 `CategoryTheory.invariantsDualIso`. Note that no finiteness hypothesis on `E` is needed: an
 invariant functional is automatically constant on the fibres of the averaging map
 (`Representation.map_discreteAverage_of_mem_invariants`).

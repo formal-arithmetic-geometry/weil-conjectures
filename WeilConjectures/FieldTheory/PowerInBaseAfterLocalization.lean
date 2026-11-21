@@ -25,18 +25,9 @@ open scoped TensorProduct
 
 namespace RingTheory
 
-/--
-
-Choose finitely many A'-module generators of E. The finite purely inseparable field
-extension has a uniform exponent N, by Mathlib's `hasExponent_of_finiteDimensional`.
-Write each generator's q^N-th power in K' as a fraction b_i/t_i, where q = ringExpChar K'.
-The compatible maps and injectivity of E into L give the equality t_i e_i^(q^N) = b_i
-already in E. Let s be the product of the finitely many nonzero t_i. Each denominator
-is a unit in A'[1/s], since it divides s. Map the equality in E to the tensor product
-and multiply by the image of this unit's inverse to obtain the required base element.
-This works also when q=1 and N=0. Empty products are 1; no normality assumption on A'
-is used.
--/
+/-- With `A'`, `E`, `K'`, `L` as in `power_in_base_after_localization`, there are a nonzero
+`s ∈ A'`, a finite set `g` of `A'`-module generators of `E` and an exponent `N` such that the
+`q^N`-th power of every `e ⊗ 1`, `e ∈ g`, comes from `A'[1/s]`, where `q = ringExpChar K'`. -/
 private theorem localized_generator_powers
     (A' : Type u) (K' : Type v) (E : Type w) (L : Type z)
     [CommRing A'] [IsDomain A'] [IsNoetherianRing A']
@@ -130,26 +121,10 @@ private theorem powers_from_generators
       simp [ι, Algebra.TensorProduct.tmul_mul_tmul]
     rw [hm, mul_pow]
 
-/--
-
-Proof, following the node's steps:
-1. By `def-weil-finite-integral-morphism`, choose finitely many module generators
-   e_i of E. The compatible fraction-field maps embed A' and E into L.
-   By `def-pc-field-extension` and `def-weil-pbc-finite-purely-inseparable-extension`,
-   each generator lies in K' in characteristic zero, and a common p^N-th power
-   of all generators lies in K' in characteristic p. Write these elements as
-   b_i/t_i, with nonzero t_i in A', and take s to be the product of the t_i.
-   Localization embeds A'[1/s] in K' and E[1/s] in L; the displayed generators
-   or their common powers then belong to the localized base.
-2. In characteristic zero, E[1/s] is spanned by generators in A'[1/s], so the
-   canonical inclusion of the base is surjective. It is injective by step 1,
-   and hence this says E[1/s] = A'[1/s] as subrings of L.
-3. In characteristic p, write any x as a finite A'[1/s]-linear combination of
-   the e_i. Frobenius to the common power p^N distributes over this sum, and
-   each summand is in the base. Thus x^(p^N) is in the base, allowing n = N.
-4. Since s is nonzero and the maps are compatible, localization preserves
-   the fraction fields K' and L. This establishes both characteristic clauses.
--/
+/-- Let `A'` be a noetherian domain with fraction field `K'`, `E` a finite `A'`-domain with
+fraction field `L`, and `L/K'` finite purely inseparable. Then after inverting some nonzero
+`s ∈ A'`, the map `A'[1/s] → E ⊗[A'] A'[1/s]` is surjective in characteristic zero, and
+in characteristic `p` some `p`-power of every element of `E ⊗[A'] A'[1/s]` comes from `A'[1/s]`. -/
 theorem power_in_base_after_localization
     (A' : Type u) (K' : Type v) (E : Type w) (L : Type z)
     [CommRing A'] [IsDomain A'] [IsNoetherianRing A']

@@ -17,8 +17,8 @@ Let `X` be a separated `k`-scheme of finite type with a morphism `b : X ⟶ 𝔸
 (`AlgebraicGeometry.affineLineGenericPoint`); for instance the geometric generic point
 `Spec \overline{k(x)} ⟶ 𝔸¹_k`. For the base change `g : X ×_{𝔸¹_k} Spec L ⟶ X` of `t` along `b`,
 the derived pullback `Lg^*` commutes with internal homs of bounded constructible
-`ℚ̄_ℓ`-complexes (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_isPullback`): this is
-blueprint `lemma-restriction-geometric-generic-fibre` (2) for `B = 𝔸¹_k`.
+`ℚ̄_ℓ`-complexes (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_isPullback`). This is
+the internal-hom assertion of the restriction to the geometric generic fibre, for the base `𝔸¹_k`.
 
 ## Proof
 

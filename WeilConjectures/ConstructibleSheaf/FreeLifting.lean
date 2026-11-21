@@ -144,9 +144,7 @@ lemma _root_.CategoryTheory.ObjectProperty.isClosedUnderFiniteCoproducts_of_bipr
 `Λ`-modules closed under finite coproducts and containing the free sheaves `Λ[W]` on the affine
 étale `X`-schemes `W`, and let `T` be a property such that every sheaf `G` in `T` is a quotient
 of a finite coproduct of such free sheaves, that is, receives a jointly epimorphic finite
-family of maps from them. Then `S` lifts along epimorphisms onto `T`: sections
-lift locally along an epimorphism (`AlgebraicGeometry.Etale.exists_lift_freeYoneda`), and the
-local pieces again form a finite coproduct of free sheaves on affine étale `X`-schemes. -/
+family of maps from them. Then `S` lifts along epimorphisms onto `T`. -/
 theorem liftsAlongEpi_of_exists_epi_sigma_freeYoneda
     (S T : ObjectProperty (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     [S.IsClosedUnderFiniteCoproducts]
@@ -440,11 +438,7 @@ end FiniteEtale
 
 /-- **Generic finiteness of étale morphisms** [Stacks 03I1, 02NW]. Let `Z` be a nonempty scheme
 with Noetherian underlying space and `W` an affine étale `Z`-scheme. Over some nonempty open
-`U ⊆ Z` the morphism `W ⟶ Z` is finite: over the generic point `η` of an irreducible open
-`U₀`, the fibre of `W` is finite, and by Zariski's Main Theorem `W` is open in a scheme `T` finite
-over `U₀`; the closure of `W` in `T` meets its complement only over a closed subset of `U₀` not
-containing `η`, and over the complement `U` of that subset `W` is closed in `T`, hence finite
-over `U`. -/
+`U ⊆ Z` the morphism `W ⟶ Z` is finite. -/
 theorem exists_isFinite_etale_obj {Z : Scheme.{u}} [TopologicalSpace.NoetherianSpace Z]
     [Nonempty Z] (W : Z.Etale) [IsAffine W.left] :
     ∃ U : Z.Opens, (U : Set Z).Nonempty ∧ IsFinite (U.ι.Etale.obj W).hom := by
@@ -459,11 +453,7 @@ theorem exists_isFinite_etale_obj {Z : Scheme.{u}} [TopologicalSpace.NoetherianS
 
 /-- **Generic local constancy of free sheaves.** Let `Z` be a nonempty scheme with Noetherian
 underlying space and `Λ` finite. The free étale sheaf `Λ[W]` on an affine étale `Z`-scheme `W`
-is finite locally constant on some nonempty open `U ⊆ Z`: over a nonempty open `U` the morphism
-`W ⟶ Z` is finite étale (`AlgebraicGeometry.Etale.exists_isFinite_etale_obj`), the restriction
-of `Λ[W]` to `U` is the free sheaf on `W ×_Z U` (`AlgebraicGeometry.Etale.upperStarFreeYonedaIso`),
-and the free sheaf on a finite étale scheme is finite locally constant
-(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_freeYoneda_of_isFinite`). -/
+is finite locally constant on some nonempty open `U ⊆ Z`. -/
 theorem exists_isFiniteLocallyConstantSheaf_freeYoneda [Finite Λ] {Z : Scheme.{u}}
     [TopologicalSpace.NoetherianSpace Z] [Nonempty Z] (W : Z.Etale) [IsAffine W.left] :
     ∃ U : Z.Opens, (U : Set Z).Nonempty ∧ Scheme.IsFiniteLocallyConstantSheaf
@@ -476,11 +466,7 @@ theorem exists_isFiniteLocallyConstantSheaf_freeYoneda [Finite Λ] {Z : Scheme.{
 
 /-- **Free sheaves on affine étale schemes are constructible** [Stacks 03SA, 095M]. Let `X` be
 a scheme with Noetherian underlying space and `Λ` finite. The free étale sheaf `Λ[W] = j_{W!} Λ_W`
-on an affine étale `X`-scheme `W` is constructible. By Noetherian induction it is finite
-locally constant on a nonempty open `U`
-(`AlgebraicGeometry.Etale.exists_isFiniteLocallyConstantSheaf_freeYoneda`) and, by base change
-(`AlgebraicGeometry.Etale.upperStarFreeYonedaIso`), its restriction to the closed complement of
-`U` is the free sheaf on an affine étale scheme over a smaller closed subset. -/
+on an affine étale `X`-scheme `W` is constructible. -/
 theorem isConstructibleSheaf_freeYoneda [Finite Λ] [TopologicalSpace.NoetherianSpace X]
     (W : X.Etale) [IsAffine W.left] :
     Scheme.IsConstructibleSheaf (Sheaf.freeYoneda X.smallEtaleTopology W (ModuleCat.of Λ Λ)) := by

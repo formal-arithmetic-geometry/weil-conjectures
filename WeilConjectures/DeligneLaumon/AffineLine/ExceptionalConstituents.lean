@@ -18,8 +18,8 @@ Let `j : U₀ ↪ 𝔸¹` be a dense open immersion and let `M ≅ ℚ̄_ℓ(b)`
 the constant sheaf on `U₀`. The underlying sheaf of the direct image `j_*M` is `j̄_*ℚ̄_ℓ ≅ ℚ̄_ℓ`,
 the constant sheaf extending uniquely across the boundary, so `j_*M` is a constant twist of the
 constant sheaf of the line. Hence `H_c^1(𝔸¹, j_*M) = 0`, since `R Γ_c(𝔸¹, ℚ̄_ℓ) = ℚ̄_ℓ(-1)[-2]`.
-This is the geometrically constant case of Step 4 of the blueprint proof of
-`theorem-weight-bound-affine-line`.
+This is the geometrically constant case of the weight bound on the affine line
+(`â¦LisseOnDenseOpen.hasWeightsAtMost_compactlySupportedCohomology_directImage`).
 
 ## Main statements
 

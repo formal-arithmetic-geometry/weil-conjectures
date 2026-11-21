@@ -41,7 +41,7 @@ The open–closed triangle `j_!F → j_*F → i_*i^*j_*F` also gives the boundar
 `H_c^0(Z, i^*j_*F) → H_c^1(U, F) → H_c^1(C, j_*F) → 0`, since the cohomology of the finite
 boundary `Z` is concentrated in degree zero.
 
-The second half of the same blueprint subsection, that a nonzero linear Artin–Schreier sheaf
+The related statement that a nonzero linear Artin–Schreier sheaf
 `ℒ_{ψ(a x)}` is ramified at infinity, is stated for the Artin–Schreier extension of the local
 field `k((t))` at infinity, where the inertia group acts:
 `LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
@@ -59,13 +59,11 @@ proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 
 ## Implementation notes
 
-The local boundary pairing follows the Verdier duality argument of the blueprint. The nodes of
-other sections it uses are stated for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual`,
-each with its blueprint id: `theorem-verdier-biduality` (the adjunction `Rf₀! ⊣ Rf^!`,
-biduality, `Rf^! = 𝔻 f^* 𝔻`), `lemma-internal-adjunction-two-exchange-formulas--2` (for `j`),
-`corollary-dualizing-complex-smooth-scheme--1` (`ω_U = ℚ̄_ℓ(1)[2]`, `ω_Z = ℚ̄_ℓ`),
-`proposition-six-operations-dctf--15` (`RHom(P, N) = P^∨ ⊗ N` for lisse `P`) and
-`lemma-local-cohomology-right-adjoint--2` (`Ri^! Rj_* = 0`). The steps proved here are:
+The local boundary pairing follows a Verdier duality argument. The duality inputs it uses are
+stated for Weil complexes in `WeilConjectures.WeilSheaf.VerdierDual`: Verdier biduality (the
+adjunction `Rf₀! ⊣ Rf^!`, biduality, `Rf^! = 𝔻 f^* 𝔻`), the exchange formulas for `j`, the
+dualizing complex of a smooth scheme (`ω_U = ℚ̄_ℓ(1)[2]`, `ω_Z = ℚ̄_ℓ`),
+`RHom(P, N) = P^∨ ⊗ N` for lisse `P`, and `Ri^! Rj_* = 0`. The steps proved here are:
 1. `𝔻_C Rj_* G ≅ j_! 𝔻_U G` (exchange and biduality);
 2. `Ri^! 𝔻_C K ≅ 𝔻_Z i^* K`;
 3. `Ri^! j_! G ≅ i^* Rj_* G [-1]` (open–closed triangle and `j^* Rj_* = 𝟭`);
@@ -415,11 +413,8 @@ private theorem exact_boundary_of_triangle
     erw [(EU 0).symm_map_frobenius x, WeilComplex.cohomologyMap_frobenius]
 
 /-- *Boundary localization sequence for a curve.* Let `j : U₀ ↪ C₀` be a dense open immersion
-of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. The
-open–closed triangle `j_!F → j_*F → i_*i^*j_*F →` gives a long exact sequence of compactly
-supported cohomology, and since the boundary `Z₀` is finite its cohomology is concentrated in
-degree zero (`AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite`).
-Hence there are Frobenius-equivariant maps forming an exact sequence
+of smooth curves, `i : Z₀ ↪ C₀` the closed complement and `F` a lisse Weil sheaf on `U₀`. There
+are Frobenius-equivariant maps forming an exact sequence
 
 `H_c^0(Z, i^*j_*F) → H_c^1(U, F) → H_c^1(C, j_*F) → 0`,
 

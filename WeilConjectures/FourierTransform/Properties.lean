@@ -79,8 +79,8 @@ quasi-compact.
 
 Base linearity is the base linearity of kernel transforms on full subcategories
 (`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_tensor_of_hasProjectionFormula`), that
-is, the projection formula for `Rp₂,!`. As in the blueprint it is stated for `K` bounded
-constructible and `N` in `Dᵇctf`, where the projection formula of `sk-thm-sf-pf-finite`
+is, the projection formula for `Rp₂,!`. It is stated for `K` bounded
+constructible and `N` in `Dᵇctf`, where the projection formula for finite Tor-dimension
 (`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`) applies to
 `p₁^* K ⊗ᴸ 𝒦_ψ[r]` and `π'^* N`.
 
@@ -91,10 +91,5 @@ This module only imports its parts: the stalk formula is in
 `WeilConjectures.FourierTransform.Properties.Stalk`, base change in
 `WeilConjectures.FourierTransform.Properties.BaseChange` and base linearity and the Tate twist
 in `WeilConjectures.FourierTransform.Properties.BaseLinear`.
-
-## Blueprint
-
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
 -/
 

@@ -26,9 +26,11 @@ import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdju
 
 /-! # Data for normalized integral support operations
 
-The existing definitions are shared by the separate open and closed support proofs.
-Their public names, signatures and bodies agree with the original theorem module.
-Source: Stacks 09AA, 09BM, 09BN, 0GL1, 0A07, 04C4 and 095R.
+The definitions here are shared by the separate open and closed support proofs.
+
+## References
+
+Stacks 09AA, 09BM, 09BN, 0GL1, 0A07, 04C4 and 095R.
 -/
 
 @[expose] public noncomputable section
@@ -241,8 +243,8 @@ def closedReduction {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
       ((FrobeniusExchange.models l E).roos Z)
       ((FrobeniusExchange.models l E).pullback i)
 
-/-- The direct-image/strict-limit comparison is the canonical right-adjunction conjugate.
-The input iso is the specified quotient comparison, not an arbitrary comparison of values.
+/-- The direct-image/strict-limit comparison, as the canonical right-adjunction conjugate of the
+specified quotient comparison.
 Source: Stacks 0A07, 07A6. -/
 def closedLimit {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (C : SfOrdinaryIntegralComparison l E i) [IsIso (closedReduction l E i C)] :
@@ -311,10 +313,9 @@ def directEvaluationIso {Z X : Scheme.{u}} (i : Z ⟶ X) (n : ℕ) :=
   letI := FrobeniusExchange.systemDirectEvaluation_isIso l E i n
   asIso (FrobeniusExchange.systemDirectEvaluation l E i n)
 
-/-- The support normalization, retaining the specified functors, maps and shifts.
-All inherited geometric properties are outputs, not additional hypotheses. The closed
-comparison uses the actual unit and the strict-limit conjugate defined above. The open
-comparison is the fixed compact-support realization followed by identity direct image.
+/-- The support normalization, retaining the specified functors, maps and shifts. The closed
+comparison uses the completion unit and the strict-limit conjugate `closedLimit`; the open
+comparison is the compact-support realization followed by the identity direct image.
 Source: Stacks 09AA, 09BM, 0GL1, 0A07. -/
 structure Normalization (D : FiniteFieldDatum.{u})
     {Z U X : Scheme.{u}} [X.Over (Spec (.of D.k))]

@@ -17,7 +17,7 @@ finite open cover of `X` are constructible is constructible
 of members: the restrictions to the first member `V` and to its closed complement `Z` are
 constructible, the latter by induction, `Z` being covered by the traces of the other members; and
 a sheaf is constructible as soon as its restrictions to an open and to its closed complement are
-(`AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_upperStar`, `prop-constructible-open-closed`).
+(`AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_upperStar`).
 -/
 
 @[expose] public section

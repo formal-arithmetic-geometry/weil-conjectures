@@ -50,14 +50,10 @@ private theorem descendIso {A B C : Type*} [Category* A] [Category* B] [Category
   let h := Localization.fullyFaithfulWhiskeringLeft q W C
   exact ⟨h.preimageIso e, fun a ↦ congr_app (h.map_preimage e.hom) a⟩
 
-/-- Construct the limit comparison by descending the full strict Roos map.
-
-Source: Stacks 0941. STATEMENT-DISPUTED (old statement, repaired): the assertion for an arbitrary
-raw limit map was false: its sign could be changed independently. Here that map is replaced by
-the descent of the specified Roos comparison. The restricted generator law identifies the strict
-restriction comparison with the natural inverse-image unit. Compose this natural isomorphism with
-both normalized Roos models and the exact-functor localization comparisons. Fully faithful
-precomposition with the localization functor descends it uniquely. -/
+/-- The limit comparison obtained by descending the full strict Roos comparison: there is a natural
+isomorphism `L` between limit-then-reindexing and pullback-then-limit for which the assembled
+core datum satisfies the limit-model law.
+Source: Stacks 0941. -/
 theorem podReindexingDerivedCoreData_limitModel
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

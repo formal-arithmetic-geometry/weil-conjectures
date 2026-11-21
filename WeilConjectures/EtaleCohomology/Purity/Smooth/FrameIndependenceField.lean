@@ -51,10 +51,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 /-- **Universal frame independence over a field**. For `S` separated and locally of finite type
 over a field, on `𝔸^c_{GL_{c,S}}`, with coordinates `t` and universal matrix `A`, the frames `t`
 and `A t` of the zero section have the same class: restricting `∂κ(At₁) ∪ ⋯` to the support
-`V(t)` gives `∂κ(t₁) ∪ ⋯`. Same proof as
-`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_glMatrix`, using the Thom
-class isomorphism over a field
-`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundaryProduct_coord_of_field`. -/
+`V(t)` gives `∂κ(t₁) ∪ ⋯`. -/
 theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix_of_field {k : Type u} [Field k]
     {S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [IsSeparated aS] [LocallyOfFiniteType aS]
     [HasInvertibleExponent Λ S]
@@ -190,10 +187,7 @@ theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix_of_field {k : Type
 /-- **Frame independence over a field**. For `U`
 separated and locally of finite type over a field, functions `f₁, …, f_c` on `U` and an invertible
 matrix `M`, the frames `f` and `M f` cut out the same closed subscheme and have the same class:
-restricting `∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` to the support `V(f)` gives `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)`.
-This is the pullback of the universal case
-`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_glMatrix_of_field` along
-`(M, f) : U ⟶ 𝔸^c_{GL_c}`. -/
+restricting `∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` to the support `V(f)` gives `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)`. -/
 theorem restrictSupportedClass_kummerBoundaryProduct_mulVec_of_field {k : Type u} [Field k]
     {U : Scheme.{u}} (aU : U ⟶ Spec (.of k)) [IsSeparated aU] [LocallyOfFiniteType aU]
     [HasInvertibleExponent Λ U] (f : Fin c → Γ(U, ⊤)) (M : Matrix (Fin c) (Fin c) Γ(U, ⊤))

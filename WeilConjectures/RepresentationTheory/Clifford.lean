@@ -28,8 +28,8 @@ gives a `Π`-irreducible subspace stable under `Fᵐ`.
 
 ## Main statements
 
-- `Representation.exists_filtration_isIrreducible_restrict`: blueprint
-  `lemma-geometric-constituents-after-constant-extension--1`.
+- `Representation.exists_filtration_isIrreducible_restrict`: after passing to a power `Fᵐ`, a
+  finite filtration by `Π`- and `Fᵐ`-stable subspaces with `Π`-irreducible quotients.
 -/
 
 @[expose] public section

@@ -142,9 +142,7 @@ theorem bijective_derivedTensor_map_comp_counit_comp_twistedEvaluation_of_isIso
 omit [HasSmallSiteSheafify A] in
 /-- The derived Poincaré pairing `β_K` is perfect as soon as the comparison map
 `K^∨ ⊗ᴸ T ⟶ RHom(K, T)` is an isomorphism and the projection formula holds at a class of test
-objects detecting isomorphisms after the shift by `2d`. This is
-`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isDetecting` with the
-dualizability of `K` replaced by its only consequence used in the proof. -/
+objects detecting isomorphisms after the shift by `2d`. -/
 theorem isPerfectPairing_poincarePairing_of_isDetecting_of_isIso {T : 𝐃(X, A)}
     (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _))
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
@@ -182,10 +180,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 /-- **The derived Poincaré pairing is perfect for every complex when the twist is invertible.**
 For a finite coefficient ring `Λ`, a purity isomorphism `γ : T[2d] ≅ Ra^! Λ_Y` with `T`
 invertible (as the Tate twist `Λ_X(d)` is), and every `K ∈ D(X_ét, Λ)`, the derived Poincaré
-pairing `β_K` is perfect: its adjoint `(Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨` is an isomorphism.
-Indeed `K^∨ ⊗ᴸ T ≅ RHom(K, T)` for `T` invertible
-(`CategoryTheory.MonoidalClosed.isIso_ihomUnitTensorToIhom_of_isInvertible`), which is the only
-use of the dualizability of `K` in `AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`. -/
+pairing `β_K` is perfect: its adjoint `(Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨` is an isomorphism. -/
 theorem isPerfectPairing_poincarePairing_of_isInvertible {T : DerivedCategoryModule Λ X}
     (γ : T⟦(2 * d : ℤ)⟧ ≅ dualizingComplex Λ a) (hT : IsInvertible T)
     (K : DerivedCategoryModule Λ X) :
@@ -202,8 +197,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {a}
 /-- **The derived Poincaré pairing of a Tate orientation is perfect for every complex.** At a
 finite coefficient ring `Λ`, the derived Poincaré pairing
 `β_K : Ra_! K ⊗ᴸ (Ra_*(K^∨(d)))[2d] ⟶ Λ_Y` of a Tate orientation `γ` is perfect for every
-`K ∈ D(X_ét, Λ)`, the Tate twist `Λ_X(d)` being invertible. For `K` dualizable this is
-`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing`. -/
+`K ∈ D(X_ét, Λ)`. -/
 theorem isPerfectPairing_poincarePairing_of_finite [HasInvertibleExponent Λ X]
     (γ : TateOrientation Λ a d)
     (K : DerivedCategoryModule Λ X) :

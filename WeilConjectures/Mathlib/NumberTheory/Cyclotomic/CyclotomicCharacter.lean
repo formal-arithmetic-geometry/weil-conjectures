@@ -32,11 +32,6 @@ scalars.
   the scalar `q`.
 * `cyclotomicCharacter_frobeniusEquiv_pow_inv_mul`: the geometric Frobenius acts by the inverse
   scalar `q⁻¹`, a unit of `ℤ_ℓ`.
-
-## Blueprint
-
-`cyclotomicCharacter_frobeniusEquiv_pow` and `cyclotomicCharacter_frobeniusEquiv_pow_inv_mul`
-implement `proposition-weights-under-usual-operations--13`.
 -/
 
 @[expose] public section

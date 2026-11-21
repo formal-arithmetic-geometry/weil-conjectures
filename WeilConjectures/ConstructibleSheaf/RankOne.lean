@@ -79,14 +79,9 @@ lemma HasRankOneStalks.of_iso {L L' : Sheaf X.smallEtaleTopology (ModuleCat.{u +
 
 variable (L M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
-/-- Automorphisms of a rank-one finite locally constant sheaf
-
-Clause (1): for a locally constant sheaf `L` of rank one, the canonical map
-`Λ_X ⟶ [L, L]`, `1 ↦ id_L` (`CategoryTheory.MonoidalClosed.id`), is an isomorphism. On a
-trivialising cover with nonempty members, `L` is a constant sheaf with stalks `Λ`, hence
-isomorphic to `Λ`, for which the canonical map is an isomorphism; and the pullback, which is
-strong monoidal and commutes with internal homs, carries the canonical map of `L` to the
-canonical map of its pullback. -/
+/-- **Automorphisms of a rank-one locally constant sheaf.** For a locally constant sheaf `L` of
+rank one, the canonical map `Λ_X ⟶ [L, L]`, `1 ↦ id_L` (`CategoryTheory.MonoidalClosed.id`), is
+an isomorphism. -/
 theorem isIso_id_of_hasRankOneStalks [IsLocallyConstantSheaf L] (hL : HasRankOneStalks L) :
     IsIso (MonoidalClosed.id L) := by
   obtain ⟨⟨𝒰₀, h𝒰₀⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := L)

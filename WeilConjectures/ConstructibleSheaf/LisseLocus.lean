@@ -96,12 +96,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 Let `X` be a nonempty scheme of finite type over a field `k` and `F` a constructible sheaf on
 `X_et`. Then there is an open subscheme `U ⊆ X` with `dim (X \ U) < dim X` on which the
-restriction `F|_U` is lisse, that is, finite locally constant.
-
-(For `X` empty both dimensions are `⊥` and the strict inequality cannot hold, which is why `X`
-is assumed nonempty.) Generic constancy gives a dense open `U` on which `F` is finite locally
-constant, and the complement of a dense open in the Noetherian space `X`, of finite dimension,
-has smaller dimension (`topologicalKrullDim_compl_lt_of_dense`). -/
+restriction `F|_U` is lisse, that is, finite locally constant. -/
 theorem IsConstructibleSheaf.exists_open_topologicalKrullDim_compl_lt {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f]
     [Nonempty X] (F : Sheaf X.smallEtaleTopology A) [IsConstructibleSheaf F] :

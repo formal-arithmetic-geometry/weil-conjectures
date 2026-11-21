@@ -118,18 +118,9 @@ private theorem reduction_square_transport
       (S.map (F.map eP.hom)) (S.map (F.map eQ.hom)))) hg
 
 /--
-STATEMENT-DISPUTED: The former statement quantified over arbitrary `w` and `v`,
-although no compatibility laws related them to the canonical comparisons were assumed.
-The corrected statement uses the canonical normalized system comparison and ordinary
-tensor map.
-
-The strict pure-tensor calculation descends through the two K-flat localizations.
-The hypothesis is the comparison's sectionwise pure-tensor formula; the conclusion
-is the whole-system square after the reduction and system tensor maps.  The descent
-uses the quotient-generator and transition laws of `A`, the normalized system
-comparison, and full faithfulness of the product localization.  It is stated
-separately so that the representative calculation is not hidden in the derived
-square theorem.
+The strict pure-tensor calculation descends through the two K-flat localizations: if the
+canonical normalized system comparison satisfies the sectionwise pure-tensor formula, then the
+whole-system square after the reduction and system tensor maps commutes.
 Source: Stacks 07A4 and 0941.
 -/
 theorem podReindexing_reduction_tensor_square_descent

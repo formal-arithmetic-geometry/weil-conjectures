@@ -61,12 +61,7 @@ e.homEquiv f` for every `f : X ⟶ Y`: `u` is the unique isomorphism making the 
            \               /
             --->  F(X)  <--
 ```
-commute for every `X`.
-
-For the functor `Pic^0_{C/k}` this is the uniqueness of the Jacobian; that `u` is a homomorphism
-of group schemes is not part of the statement, as `Pic^0_{C/k}` is only a functor to types here.
-For `C` the category `Over S` of schemes over `S` this is the uniqueness of the scheme
-representing a functor `(Sch/S)ᵒᵖ ⥤ Set`. -/
+commute for every `X`. -/
 theorem existsUnique_iso (e : F.RepresentableBy Y) (e' : F.RepresentableBy Y') :
     ∃! u : Y ≅ Y', ∀ {X : C} (f : X ⟶ Y), e'.homEquiv (f ≫ u.hom) = e.homEquiv f := by
   refine ⟨e.uniqueUpToIso e', fun f ↦ homEquiv_comp_uniqueUpToIso_hom e e' f, fun u hu ↦ ?_⟩

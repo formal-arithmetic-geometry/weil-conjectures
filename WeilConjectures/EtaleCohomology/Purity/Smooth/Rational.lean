@@ -21,6 +21,13 @@ isomorphism is the image of the adic purity isomorphism of
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_iso_fromIntegral_realization_twistShiftPullbackLevel`
+
+## Implementation details
+
+The main statement is only the `E`-stage packaging of the realized isomorphism: the compatibility
+`hγ` of the levelwise isomorphisms is assumed, the objects are arbitrary homotopy limits rather
+than `Lf^* K_E(d)[2d]` and `Rf^! K_E`, and the `IsIso` conclusion follows formally from `e` being
+an isomorphism.
 -/
 
 @[expose] public section
@@ -62,12 +69,7 @@ these levels forming a morphism of normalized systems (`hγ`). Then any homotopy
 and `T` are derived complete, so they are objects of `D_comp(X, 𝒪_E)`; the isomorphism `e`
 between them of `AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel`
 reduces to `γ_n` at every level, and its image under the exact functor `- ⊗ᴸ_{𝒪_E} E`
-(`DerivedCategoryDerivedCompleteRational.fromIntegral`) is an isomorphism in `D_comp(X, E)`.
-
-This is the `E`-stage packaging of the realized isomorphism, not the `E`-part of the
-blueprint statement: `hγ` is assumed, the objects are arbitrary homotopy limits rather than
-`Lf^* K_E(d)[2d]` and `Rf^! K_E`, and the `IsIso` conclusion follows formally from `e` being an
-isomorphism. -/
+(`DerivedCategoryDerivedCompleteRational.fromIntegral`) is an isomorphism in `D_comp(X, E)`. -/
 theorem exists_iso_fromIntegral_realization_twistShiftPullbackLevel
     (K : NormalizedTower (PadicAlgCl.maximalIdealShrink l E) Y)
     (S T : NormalizedTower (PadicAlgCl.maximalIdealShrink l E) X)

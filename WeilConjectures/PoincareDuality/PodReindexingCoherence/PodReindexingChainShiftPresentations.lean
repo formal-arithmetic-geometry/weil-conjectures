@@ -81,14 +81,8 @@ private theorem chainShift_exists (W : Scheme.{u})
     (by omega) rfl
 
 set_option linter.unusedVariables false in
-/-- Signed Hom-complex shift presentations exist on each of the two sites.
-
-The construction uses the product projections of the Hom complex.  In degree
-`r`, the component indexed by `p` is reindexed to `p-a` and multiplied by
-`(-1)^(a*r)`.  The ratio of consecutive scalars is the sign in the Hom
- differential, so the projectionwise maps form chain isomorphisms.  This
-statement is the first, strictly smaller part of Step 4.
-
+/-- Signed Hom-complex shift presentations exist on each of the two sites: in degree `r`, the
+component indexed by `p` is reindexed to `p-a` and multiplied by `(-1)^(a*r)`.
 Source: Stacks 0A8X, 08JA. -/
 theorem chain_shift_presentations
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

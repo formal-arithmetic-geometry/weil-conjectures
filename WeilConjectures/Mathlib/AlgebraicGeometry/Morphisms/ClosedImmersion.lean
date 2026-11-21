@@ -27,8 +27,7 @@ its defining factorization (`lift_fac`) and an invertibility criterion (`isIso_l
 the two remaining clauses of the universal property: that the lift is itself a closed
 immersion when both morphisms are, and that it is the *unique* morphism over the target.
 Together with `Scheme.Hom.toImage_imageι` these give the universal property of the
-scheme-theoretic image in the form stated in the Nagata blueprint,
-and its packaging as a minimality statement:
+scheme-theoretic image, and its packaging as a minimality statement:
 the scheme-theoretic image is the smallest closed subscheme of the target through which
 the morphism factors.
 
@@ -121,8 +120,7 @@ section Lift
 variable {Z : Scheme.{u}}
 
 /-- The lift of a closed immersion `g` through a closed immersion `f` is again a closed
-immersion: it composes with `f` to give `g`, and `IsClosedImmersion.of_comp_isClosedImmersion`
-applies. -/
+immersion. -/
 instance isClosedImmersion_lift (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f]
     [IsClosedImmersion g] (H : f.ker ≤ g.ker) :
     IsClosedImmersion (IsClosedImmersion.lift f g H) :=
@@ -131,8 +129,7 @@ instance isClosedImmersion_lift (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f
     infer_instance
   .of_comp_isClosedImmersion _ f
 
-/-- `IsClosedImmersion.lift f g H` is the **unique** morphism composing with `f` to give `g`,
-since a closed immersion is a monomorphism. -/
+/-- `IsClosedImmersion.lift f g H` is the **unique** morphism composing with `f` to give `g`. -/
 lemma IsClosedImmersion.eq_lift (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f]
     (H : f.ker ≤ g.ker) (c : Y ⟶ X) (hc : c ≫ f = g) :
     c = IsClosedImmersion.lift f g H := by
@@ -140,12 +137,7 @@ lemma IsClosedImmersion.eq_lift (f : X ⟶ Z) (g : Y ⟶ Z) [IsClosedImmersion f
 
 /-- If `g` factors as `h ≫ z` through the closed immersion `z`, then so does its
 scheme-theoretic image, compatibly: the comparison `IsClosedImmersion.lift z g.imageι`
-composed with the factor `g.toImage` recovers `h`.
-
-This is the third equality of the universal property of the scheme-theoretic image; the other
-two are `Scheme.Hom.toImage_imageι` and `IsClosedImmersion.lift_fac`. The factorization is
-taken as a propositional hypothesis rather than by forcing the target to be syntactically
-`h ≫ z`, so that the lemma rewrites at an arbitrary `g`. -/
+composed with the factor `g.toImage` recovers `h`. -/
 lemma Scheme.Hom.toImage_lift {g : X ⟶ Y} (h : X ⟶ Z) (z : Z ⟶ Y) [IsClosedImmersion z]
     (w : h ≫ z = g) (H : z.ker ≤ g.imageι.ker) :
     g.toImage ≫ IsClosedImmersion.lift z g.imageι H = h := by
@@ -161,8 +153,7 @@ lemma Scheme.Hom.ker_le_ker_imageι_comp (h : X ⟶ Z) (z : Z ⟶ Y) :
 
 /-- The scheme-theoretic image is the smallest closed subscheme of `Y` through which `g`
 factors: a closed subscheme `z : Z ⟶ Y` contains the scheme-theoretic image of `g` (i.e.
-`z.ker ≤ g.ker`) if and only if `g` factors through `z`, and the factorization is then
-unique because `z` is a monomorphism. -/
+`z.ker ≤ g.ker`) if and only if `g` factors uniquely through `z`. -/
 theorem Scheme.Hom.ker_le_ker_iff_existsUnique_fac (g : X ⟶ Y) (z : Z ⟶ Y)
     [IsClosedImmersion z] : z.ker ≤ g.ker ↔ ∃! h : X ⟶ Z, h ≫ z = g := by
   refine ⟨fun H ↦ ?_, fun ⟨h, w, _⟩ ↦ ?_⟩
@@ -179,10 +170,7 @@ section Point
 variable {Z : Scheme.{u}}
 
 /-- A morphism `s : X ⟶ Y` from a **reduced** scheme whose set-theoretic image is contained in
-the range of a closed immersion `i : Z ⟶ Y` factors uniquely through `i`.
-
-Reducedness of the source is needed: for `X = Y = Spec k[ε]` and `Z` the reduced point, the
-identity of `X` has image the single point of `Z` but does not factor through `Z`. -/
+the range of a closed immersion `i : Z ⟶ Y` factors uniquely through `i`. -/
 theorem IsClosedImmersion.existsUnique_fac_of_range_subset_range [IsReduced X] (i : Z ⟶ Y)
     [IsClosedImmersion i] (s : X ⟶ Y) (hs : Set.range s.base ⊆ Set.range i.base) :
     ∃! t : X ⟶ Z, t ≫ i = s :=
@@ -298,8 +286,7 @@ section StalkMap
 variable {Z : Scheme.{u}}
 
 /-- The kernel of the stalk map of a closed immersion `i : Z ⟶ X` at `z` is the extension to the
-stalk `𝒪_{X,i(z)}` of the ideal of `i` on any affine open `U` containing `i(z)`: the stalk of
-`Z` at `z` is the quotient of `𝒪_{X,i(z)}` by the stalk of the ideal sheaf. -/
+stalk `𝒪_{X,i(z)}` of the ideal of `i` on any affine open `U` containing `i(z)`. -/
 lemma Scheme.Hom.ker_stalkMap (i : Z ⟶ X) [IsClosedImmersion i] (U : X.affineOpens) (z : Z)
     (hz : i z ∈ U.1) :
     RingHom.ker (i.stalkMap z).hom = (i.ker.ideal U).map (X.presheaf.germ U (i z) hz).hom := by

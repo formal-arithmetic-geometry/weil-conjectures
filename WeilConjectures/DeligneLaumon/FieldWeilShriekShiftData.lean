@@ -215,8 +215,8 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] constructibleIntegralPullback integralDerivedPullback
   rationalDerivedPullback commonStageDerivedPullback
 
-/-- Localize the fixed integral shift at one; the CommShift laws determine all integer
-shifts. Source: blueprint coefficient passage; Stacks 014E, 099N(5). -/
+/-- There is a unique shift structure on the rational pullback whose shift-by-one isomorphism is
+the localization of the integral one. Source: Stacks 014E, 099N(5). -/
 theorem fieldRationalPullShift_existsUnique :
     ∃! c : (rationalDerivedPullback l E f).CommShift ℤ,
       ∀ K : sfIntegralConstructibleCategory l E Y,
@@ -239,7 +239,7 @@ theorem fieldRationalPullShift_existsUnique :
   funext K
   exact eq_of_heq ((hc' K.obj).trans (hn.1 K).symm)
 
-/-- The localized canonical pullback shift. Source: blueprint coefficient passage. -/
+/-- The localized canonical pullback shift. -/
 instance fieldRationalPullShift : (rationalDerivedPullback l E f).CommShift ℤ :=
   (fieldRationalPullShift_existsUnique l E f).exists.choose
 end PullbackShift
@@ -272,7 +272,7 @@ private theorem fieldRationalShift_normalization
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) f).exists.choose_spec
 
 /-- The common-stage shift is the class of the normalized rational shift at the
-object's finite field. Source: blueprint common-stage coefficient passage. -/
+object's finite field. -/
 theorem fieldCommonPullShift_existsUnique :
     ∃! c : (commonStageDerivedPullback l Ω f).CommShift ℤ,
       ∀ (L : AlgebraicallyClosedCoefficients.Index l Ω)
@@ -309,7 +309,7 @@ theorem fieldCommonPullShift_existsUnique :
   funext K
   exact eq_of_heq ((hc' K.stage K.obj).trans (hn K.stage K.obj).symm)
 
-/-- The representative-normalized common-stage shift. Source: blueprint coefficient passage. -/
+/-- The representative-normalized common-stage shift. -/
 instance fieldCommonPullShift : (commonStageDerivedPullback l Ω f).CommShift ℤ :=
   (fieldCommonPullShift_existsUnique l Ω f).exists.choose
 end CommonShift
@@ -483,8 +483,7 @@ end OpenGeometry
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The rational inverse image along the geometric fibre map. Source: blueprint
-lem-fix-weil-operations.proof, first paragraph. -/
+/-- The rational inverse image along the geometric fibre map. -/
 def fieldWeilPull {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :=
@@ -561,7 +560,7 @@ private theorem fieldLocalizeIso
       (eqToHom_comp_heq (Q.map (e.hom.app K.obj)) (hF K))
 
 /-- Rational composition is the localization of the already normalized integral
-composition. Source: Stacks 099N(5), blueprint pullback composition. -/
+composition. Source: Stacks 099N(5). -/
 theorem fieldRationalPullComp_existsUnique {X Y Z : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -623,9 +622,8 @@ variable {X₀ Y₀ : Over (Spec (.of D.k₀))}
   [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
   [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
 
-/-- The finite-stage Frobenius square uses the normalized composition and the actual
-semilinear geometric-Frobenius naturality equality. Source: blueprint
-lem-fix-weil-operations.proof, first paragraph. -/
+/-- The finite-stage Frobenius square: the rational inverse image along the geometric fibre map
+commutes with the geometric-Frobenius pullbacks. -/
 def fieldWeilPullSquare (f₀ : X₀ ⟶ Y₀) :
     fieldWeilPull D l hl E f₀ ⋙ sfWeilFrobeniusPullback D l hl X₀ E ≅
       sfWeilFrobeniusPullback D l hl Y₀ E ⋙ fieldWeilPull D l hl E f₀ :=
@@ -795,15 +793,14 @@ attribute [local semireducible] FiniteFieldDatum.geometricFiber zlFiberMap
 
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The canonical finite-stage Frobenius shift. Source: Stacks 099N(5), blueprint
-geometric Frobenius. -/
+/-- The canonical finite-stage Frobenius shift. Source: Stacks 099N(5). -/
 instance fieldWeilFrobeniusShift (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (sfWeilFrobeniusPullback D l hl X₀ E).CommShift ℤ :=
   @fieldRationalPullShift l _ E _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
     (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀)
 
-/-- The canonical common-stage Frobenius shift. Source: blueprint geometric Frobenius. -/
+/-- The canonical common-stage Frobenius shift. -/
 instance fieldCommonWeilFrobeniusShift (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).CommShift ℤ :=

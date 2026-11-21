@@ -42,15 +42,7 @@ instance Flat.descendsAlong_surjective_inf_flat_inf_quasicompact :
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Being affine satisfies fpqc descent.** If the base change of `f : X ⟶ Y` along a
-faithfully flat quasi-compact morphism is affine, then `f` is affine.
-
-The question is local on `Y`, so let `Y = Spec R` and let `Spec S ⟶ Spec R` be faithfully flat
-with `X' = X ×_R Spec S` affine. Then `X` is quasi-compact and quasi-separated, as `X' ⟶ X` is
-surjective and quasi-compact, so `Γ(X') = Γ(X) ⊗_R S` by flat base change. Hence the canonical
-morphism `X' ⟶ Spec Γ(X')`, an isomorphism, is the base change of `X ⟶ Spec Γ(X)` along the
-faithfully flat `Spec Γ(X') ⟶ Spec Γ(X)`, and isomorphisms descend.
-
-This is used in the proof of `theorem-hilbert-schemes-points-smooth-curve--1`. -/
+faithfully flat quasi-compact morphism is affine, then `f` is affine. -/
 @[stacks 02L5]
 theorem IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact :
     DescendsAlong (@IsAffineHom : MorphismProperty Scheme.{u})
@@ -100,8 +92,7 @@ theorem IsAffineHom.descendsAlong_surjective_inf_flat_inf_quasicompact :
       (inferInstanceAs (IsIso (pullback (Spec.map φ) g).toSpecΓ))
   exact ⟨this⟩
 
-/-- **Being finite satisfies fpqc descent.** A morphism is finite if and only if it is
-universally closed, affine and locally of finite type, and each of these properties descends. -/
+/-- **Being finite satisfies fpqc descent.** -/
 @[stacks 02LA]
 theorem IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact :
     DescendsAlong @IsFinite (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := by
@@ -110,16 +101,13 @@ theorem IsFinite.descendsAlong_surjective_inf_flat_inf_quasicompact :
   infer_instance
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- **Monomorphisms satisfy fpqc descent**: a morphism is a monomorphism if and only if its
-diagonal is an isomorphism, and isomorphisms descend. -/
+/-- **Monomorphisms satisfy fpqc descent.** -/
 theorem descendsAlong_monomorphisms_surjective_inf_flat_inf_quasicompact :
     DescendsAlong (monomorphisms Scheme.{u}) (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := by
   rw [← diagonal_isomorphisms]
   infer_instance
 
-/-- **Being a closed immersion satisfies fpqc descent**: a closed immersion is the same as a
-finite monomorphism (`AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono`), and both
-properties descend. -/
+/-- **Being a closed immersion satisfies fpqc descent.** -/
 theorem IsClosedImmersion.descendsAlong_surjective_inf_flat_inf_quasicompact :
     DescendsAlong (@IsClosedImmersion : MorphismProperty Scheme.{u})
       (@Surjective ⊓ @Flat ⊓ @QuasiCompact) := by

@@ -34,13 +34,13 @@ on a `k₀`-scheme (`AlgebraicGeometry.WeilSheaf`) rather than for Weil group re
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.tateTwist` and
-  `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.tateTwist`: blueprint
-  `proposition-weights-under-usual-operations--14`.
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.dual`: blueprint
-`proposition-weights-under-usual-operations--4`.
+  `AlgebraicGeometry.WeilSheaf.IsMixedOfWeightsAtMost.tateTwist`: a Tate twist `ℱ (n)` shifts
+  weights by `-2 n`.
+- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.dual`: the dual of a punctually pure
+  sheaf of weight `w` is punctually pure of weight `-w`.
 - `AlgebraicGeometry.WeilSheaf.IsReal.tensorPow` and
-  `AlgebraicGeometry.WeilSheaf.IsReal.inv_localPolynomial_stalk_tensorPow_nonneg`: blueprint
-  `lemma-positivity-euler-factors--1`.
+  `AlgebraicGeometry.WeilSheaf.IsReal.inv_localPolynomial_stalk_tensorPow_nonneg`: positivity of
+  the Euler factors of even tensor powers of real sheaves.
 -/
 
 @[expose] public section

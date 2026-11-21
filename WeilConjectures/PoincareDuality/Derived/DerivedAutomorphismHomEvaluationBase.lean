@@ -127,7 +127,7 @@ attribute [local irreducible] AlgebraicGeometry.Scheme.residueField
   HasDerivedCategory.standard
 
 /-- Partial closed data on precisely the pairs for which internal Hom is permitted.
-Source: Stacks 08J9 and the integral qualification in the node. -/
+Source: Stacks 08J9. -/
 structure PodPartialClosed {C : Type a} [Category.{b} C] [Preadditive C]
     (T : C × C ⥤ C) (J : ObjectProperty (Cᵒᵖ × C)) (H : J.FullSubcategory ⥤ C) where
   /-- Tensor-Hom transposition on every permitted pair. -/
@@ -139,7 +139,7 @@ structure PodPartialClosed {C : Type a} [Category.{b} C] [Preadditive C]
     transpose L' P (T.map (Prod.mkHom f (𝟙 _)) ≫ h) = f ≫ transpose L P h
 
 /-- Evaluation is the inverse transpose of the identity, with Hom first.
-The node's argument-first convention is obtained by the canonical Koszul symmetry.
+The argument-first convention is obtained by the canonical Koszul symmetry.
 Source: Stacks 08J9. -/
 def PodPartialClosed.evaluation {C : Type a} [Category.{b} C] [Preadditive C]
     {T : C × C ⥤ C} {J : ObjectProperty (Cᵒᵖ × C)} {H : J.FullSubcategory ⥤ C}
@@ -170,10 +170,10 @@ def podPartialHomComparison {C : Type a} {D : Type c}
     F.obj (HC.obj P) ⟶ HD.obj ((podPairPullback F J K h).obj P) :=
   SD.transpose _ _ ((μ (HC.obj P) P.obj.1.unop).inv ≫ F.map (SC.evaluation P))
 
-/-- The displayed naturality, evaluation, and transposition identities, together
+/-- The naturality, evaluation, and transposition identities of the comparison, together
 with invertibility of the evaluation-defined map. All arrows are in the stated
 category itself, including when that category is a derived system category.
-Source: Stacks 0GMX, node proof steps 3--5. -/
+Source: Stacks 0GMX. -/
 structure PodPartialHomCompatibility {C : Type a} {D : Type c}
     [Category.{b} C] [Category.{d} D] [Preadditive C] [Preadditive D]
     {TC : C × C ⥤ C} {TD : D × D ⥤ D}
@@ -390,7 +390,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
 /-- The finite unbounded comparison: transpose of pullback of ordinary evaluation.
-Source: Stacks 0GMX, node proof steps 3--5. -/
+Source: Stacks 0GMX. -/
 def podFiniteHomComparison (n : ℕ)
     (M N : proEtaleDerivedCategory Y (finiteCoefficientRing l E (n + 1))) :
     (finiteDerivedPullback l E n g).obj
@@ -476,7 +476,7 @@ theorem podFiniteHomComparison_laws_remaining (n : ℕ) :
       (finiteDerivedPullback l E n g) (finiteComparisonTensor l E g n) L M N b
 
 /-- Finite unbounded internal Hom is preserved, naturally and with its actual evaluation
-and transposition. Source: Stacks 0GMX, node proof steps 1--5. -/
+and transposition. Source: Stacks 0GMX. -/
 theorem podFiniteHomComparison_laws (n : ℕ) :
     (∀ M N, IsIso (podFiniteHomComparison l E g n M N)) ∧
     (∀ M N M' N' (a : M' ⟶ M) (b : N ⟶ N'),

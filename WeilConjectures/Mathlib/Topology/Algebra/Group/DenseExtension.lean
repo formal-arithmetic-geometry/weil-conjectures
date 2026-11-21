@@ -45,10 +45,7 @@ variable {W P Γ : Type*} [Group W] [Group P] [TopologicalSpace P] [IsTopologica
 /-- **Continuous extension from a dense subgroup.** Let `α : W →* Π` have dense range in a
 compact Hausdorff group, and `A : W →* Γ` take values in a compact Hausdorff group, such that
 for every neighbourhood `U` of `1` in `Γ` there is a neighbourhood `O` of `1` in `Π` with
-`α w ∈ O → A w ∈ U`. Then `A = σ ∘ α` for a continuous homomorphism `σ : Π →* Γ`: the closure
-`H` of the graph `{(α w, A w)}` is a compact subgroup of `Π × Γ` whose first projection is
-surjective (its image is compact and dense) and injective (an element `(1, x)` of `H` has `x` in
-the closure of every neighbourhood of `1`), hence a homeomorphism `H ≅ Π`. -/
+`α w ∈ O → A w ∈ U`. Then `A = σ ∘ α` for a continuous homomorphism `σ : Π →* Γ`. -/
 theorem exists_continuous_comp_eq_of_denseRange (α : W →* P) (A : W →* Γ) (hα : DenseRange α)
     (hA : ∀ U ∈ 𝓝 (1 : Γ), ∃ O ∈ 𝓝 (1 : P), ∀ w, α w ∈ O → A w ∈ U) :
     ∃ σ : P →* Γ, Continuous σ ∧ σ.comp α = A := by
@@ -101,11 +98,7 @@ Hausdorff group onto `ker deg`. Let `α : W →* Π` have dense range in a profi
 `α ∘ θ` is continuous and injective, and such that `α` detects the degree modulo every `m > 0`
 (an open neighbourhood `O` of `1` with `α w ∈ O → m ∣ deg w`). Then every homomorphism
 `A : W →* Γ` into a profinite group with `A ∘ θ` continuous is `σ ∘ α` for a continuous
-`σ : Π →* Γ`.
-
-Given an open normal subgroup `N` of `Γ`, the open subgroup `(A ∘ θ)⁻¹ N` of `G₀` is cut out by an
-open normal subgroup `O₂` of `Π`, `α ∘ θ` being a closed embedding; for `m` the index of
-`O₂ × N`, `(α γ ^ m, A γ ^ m) ∈ O₂ × N`, and then `α w ∈ O₂ ∩ O_m` forces `A w ∈ N`. -/
+`σ : Π →* Γ`. -/
 theorem exists_continuous_comp_eq_of_deg [TotallyDisconnectedSpace P] [TotallyDisconnectedSpace Γ]
     {G₀ : Type*} [Group G₀] [TopologicalSpace G₀] [CompactSpace G₀]
     (deg : W →* Multiplicative ℤ) {γ : W} (hγ : deg γ = Multiplicative.ofAdd 1) (θ : G₀ →* W)

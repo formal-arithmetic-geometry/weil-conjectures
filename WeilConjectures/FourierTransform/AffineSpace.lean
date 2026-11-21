@@ -61,10 +61,4 @@ isomorphism `ι × 1`, over the identity of the second factor
 (`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_of_isIso`).
 
 TODO: upgrade these back to `Iso` constructions once they can be built.
-
-## Blueprint
-
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
-
 -/

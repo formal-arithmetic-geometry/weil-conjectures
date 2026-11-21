@@ -10,7 +10,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivari
 /-!
 # Frobenius: reciprocity
 
-Part (b) of `theorem-poincare-duality-frobenius`. Over a field, if the line-valued Poincaré pairing
+Frobenius reciprocity for Poincaré duality. Over a field, if the line-valued Poincaré pairing
 is perfect, `F_{K^∨}` is conjugate to `q^d (F_{c,K}^{-1})^t`, so the eigenvalues of `F` on
 `H^{2d-i}(X, K^∨)` are the `q^d / α` for the eigenvalues `α` of `F` on `H^i_c(X, K)`, with
 multiplicities.
@@ -18,8 +18,7 @@ multiplicities.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap`,
-  `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`:
-conjugacy and
+  `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`: conjugacy and
   reciprocal eigenvalues.
 -/
 
@@ -46,14 +45,12 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
-/-- Reciprocal eigenvalues.
-
-**The Frobenius of the dual is conjugate to `q^d` times the inverse transpose.** If `Λ` is a
+/-- **The Frobenius of the dual is conjugate to `q^d` times the inverse transpose.** If `Λ` is a
 field, then with the hypotheses of
 `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing_frobeniusOperator`,
 `q` invertible in `Λ`, and the line-valued pairing
 `H^i_c(X, K) × H^{2d-i}(X, K^∨) ⟶ Λ(-d) ≃ Λ` perfect (for a trivialisation `ℓ` of the value
-line; at a field stage this is `corollary-degreewise-duality-over-fields--1`), the adjoint
+line), the adjoint
 `Φ : H^{2d-i}(X, K^∨) ≃ H^i_c(X, K)^∨` of the pairing satisfies
 
 `Φ ∘ F_{K^∨} ∘ Φ⁻¹ = q^d (F_{c,K}^{-1})^t`.
@@ -85,15 +82,11 @@ theorem conj_frobeniusOperator_eq_smul_inverse_dualMap (sq : IsPullback g a a h)
     untwistedDegreewisePoincarePairing_frobeniusOperator sq γ φ ψ hψ τ hTr q hτ, map_smul,
     smul_eq_mul]
 
-/-- Reciprocal eigenvalues.
-
-**Reciprocal eigenvalues.** With the hypotheses of
+/-- **Reciprocal eigenvalues.** With the hypotheses of
 `AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap`, the
 eigenvalues of `F_{K^∨}` on `H^{2d-i}(X, K^∨)`, computed in an algebraically closed field `M`
 containing `Λ` and counted with algebraic multiplicity, are the `q^d / α` for the eigenvalues
-`α` of `F_{c,K}` on `H^i_c(X, K)`. The finiteness and freeness of the two spaces, needed to
-speak of characteristic polynomials, also follow from the perfectness of the pairing over the
-field `Λ`. -/
+`α` of `F_{c,K}` on `H^i_c(X, K)`. -/
 theorem roots_map_charpoly_frobeniusOperator (sq : IsPullback g a a h)
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)

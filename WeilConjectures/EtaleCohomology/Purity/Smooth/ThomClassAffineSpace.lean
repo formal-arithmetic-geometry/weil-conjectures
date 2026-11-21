@@ -93,17 +93,11 @@ theorem isIso_supportedClassMap_kummerBoundaryProduct_cons_coord_of_hasInvertibl
     ← Functor.map_comp, ← Functor.map_comp]
   exact isIso_supportedClassMap_comp_map Λ _ _ _ hcup
 
-/-- `𝔸¹ ⇒ 𝔸ⁿ`: the model purity, clause (i), over any base.
+/-- `𝔸¹ ⇒ 𝔸ⁿ`: the model purity over any base.
 
 For any scheme `B` on which the exponent of `Λ` is invertible and the zero section
 `z : B ↪ 𝔸^c_B`, cut out by the coordinates `t₁, …, t_c`, the adjoint `Λ_B ⟶ Rz^! (Λ(c)[2c])`
-of `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_c)` (`AlgebraicGeometry.Etale.supportedClassMap`) is an isomorphism.
-
-By induction on `c`, writing `𝔸^{c+1}_B ≅ 𝔸¹_{𝔸^c_B}`
-(`AlgebraicGeometry.Etale.affineSpaceConsIso`) with the first coordinate as the coordinate of
-the affine line; the step is
-`isIso_supportedClassMap_kummerBoundaryProduct_cons_coord_of_hasInvertibleExponent`.
--/
+of `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_c)` (`AlgebraicGeometry.Etale.supportedClassMap`) is an isomorphism. -/
 theorem isIso_supportedClassMap_kummerBoundaryProduct_coord_of_hasInvertibleExponent (c : ℕ)
     (B : Scheme.{u}) [HasInvertibleExponent Λ B] :
     IsIso (supportedClassMap Λ (𝔸(ULift.{u} (Fin c); B).zeroLocusSubschemeι

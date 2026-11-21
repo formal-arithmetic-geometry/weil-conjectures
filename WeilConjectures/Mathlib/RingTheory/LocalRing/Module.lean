@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.LocalRing.Module
 # Finitely generated flat modules over local rings
 
 A finitely generated flat module over a local ring is free. This is mathlib's
-`Module.free_of_flat_of_isLocalRing`, restated here as a blueprint node.
+`Module.free_of_flat_of_isLocalRing`, restated here.
 
 ## Main statements
 

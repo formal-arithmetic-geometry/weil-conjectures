@@ -39,17 +39,16 @@ false, already for `Λ = ℤ/p` over a base of characteristic `p`. The remaining
 
 ## Implementation notes
 
-The Tate twist is the one place where a genuinely missing object had to be named. Its
-blueprint home is the framework chapter, not this block, and the
-sheaf of roots of unity `μ_n` it is built from belongs to the Kummer block. It is therefore
+The Tate twist is the one place where a genuinely missing object had to be named. It belongs
+to the general six-functor framework, and the sheaf of roots of unity `μ_n` it is built from to
+Kummer theory. It is therefore
 taken as a *parameter*: `AlgebraicGeometry.Etale.HasTateTwist` bundles the twisting objects
 `Λ_X(m)` with the identifications `Λ_X(0) ≅ Λ_X`, `Λ_X(m) ⊗ Λ_X(m') ≅ Λ_X(m + m')` and
 `Lf^* Λ_Y(m) ≅ Λ_X(m)`, ⊗-invertibility, membership in `D^b_{ctf}`, and the coherences
-between these identifications listed in "Additivity and pullback of twists" of the framework
-chapter: unit and associativity laws, compatibility of pullback with composition, and
-compatibility of pullback with products. The Kummer classes of units, the rank-one datum, are
-cohomological data about `μ_n` rather than twist data; they are the separate class
-`AlgebraicGeometry.Etale.HasKummerClass` of
+between these identifications (additivity and pullback of twists): unit and associativity laws,
+compatibility of pullback with composition, and compatibility of pullback with products. The
+Kummer classes of units, the rank-one datum, are cohomological data about `μ_n` rather than
+twist data; they are the separate class `AlgebraicGeometry.Etale.HasKummerClass` of
 `WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass`.
 
 These fields do not determine the twisting objects: the untwisted datum `Λ_X(m) = Λ_X` and the
@@ -67,6 +66,17 @@ invertible.
 Invertibility is a field rather than a consequence of the zero and addition isomorphisms:
 `Λ_X(m) ⊗ Λ_X(-m) ≅ Λ_X(0) ≅ Λ_X` is a two-line proof, but checking it forces the kernel to
 unfold `AlgebraicGeometry.Etale.derivedTensor`, and that does not terminate in reasonable time.
+
+The identifications of a twist datum are *data*, not mere existence statements: the fundamental
+class of a regular immersion is glued from local classes built out of them, and the gluing is
+only meaningful because the coherences make the identifications used on overlapping pieces agree.
+
+The purity conventions are stated on the small pro-étale site in the literature; this chapter is
+formalised on the small étale site, the pro-étale comparison
+(`WeilConjectures.SixFunctors.ProEtale.Comparison`: `ν^*` is fully faithful on bounded below
+complexes, and the pro-étale `Rf^!` is `ν_X^* ∘ Rf^! ∘ Rν_{Y,*}`,
+`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`) transporting every statement on the
+constructible categories.
 
 ## Main definitions
 
@@ -110,21 +120,14 @@ A *Tate twist datum* for the coefficient ring `Λ`: for every scheme `X` and eve
 * `Λ_X(m) ⊗ Λ_X(m') ≅ Λ_X(m + m')` (`twistObjectAddIso`),
 * `Lf^* Λ_Y(m) ≅ Λ_X(m)` (`leftDerivedUpperStarTwistObjectIso`),
 
-subject to the coherences of the framework's twists (`def:coefficient-twists`, "Additivity and
-pullback of twists"): the zero-twist unit laws, the associativity law, compatibility of the
-pullback identifications with composition of morphisms, and compatibility of the pullback
-identifications with the products.
-
-The identifications are *data*, not mere existence statements: the fundamental class of a
-regular immersion is glued from local classes built out of them, and the gluing is only
-meaningful because the coherences make the identifications used on overlapping pieces agree.
+subject to the coherences of additivity and pullback of twists: the zero-twist unit laws, the
+associativity law, compatibility of the pullback identifications with composition of morphisms,
+and compatibility of the pullback identifications with the products.
 
 **The concrete model.** Let `ℓ` be the prime with `ℓ^N Λ = 0`, `N ≥ 1`, and `ℓ` invertible on
 the schemes in sight. Then `Λ_X(1) = μ_{ℓ^N} ⊗_{ℤ/ℓ^N} Λ`, which does not depend on the choice
-of `N`, `Λ_X(m) = Λ_X(1)^{⊗ m}` for `m ≥ 0` and `Λ_X(m) = RHom(Λ_X(-m), Λ_X)` for `m < 0`.
-The sheaf of roots of unity belongs to the Kummer block and the twist itself to the framework
-chapter, so the datum is taken as a parameter here rather than constructed. -/
--- TODO(unify): def:coefficient-twists
+of `N`, `Λ_X(m) = Λ_X(1)^{⊗ m}` for `m ≥ 0` and `Λ_X(m) = RHom(Λ_X(-m), Λ_X)` for `m < 0`. -/
+-- TODO(unify): coefficient twists of the six-functor framework
 class HasTateTwist where
   /-- The twisting object `Λ_X(m)`. -/
   twistObject (X : Scheme.{u}) (m : ℤ) :
@@ -132,26 +135,18 @@ class HasTateTwist where
   /-- `Λ_X(0)` is the constant complex. -/
   twistObjectZeroIso (X : Scheme.{u}) [HasInvertibleExponent Λ X] :
     twistObject X 0 ≅ constantComplex Λ X
-  /-- `Λ_X(m) ⊗^L Λ_X(m') ≅ Λ_X(m + m')`, which is what makes `Λ(c)[2c]` the `c`-th tensor
-  power of `Λ(1)[2]` in the Künneth iteration of `proposition-purity-vector-bundles`. -/
+  /-- `Λ_X(m) ⊗^L Λ_X(m') ≅ Λ_X(m + m')`. -/
   twistObjectAddIso (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m m' : ℤ) :
     ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj (twistObject X m)).obj (twistObject X m') ≅
       twistObject X (m + m')
-  /-- The twist is compatible with pullback, `Lf^* Λ_Y(m) ≅ Λ_X(m)`; this is what makes the
-  purity isomorphisms compatible with base change. -/
+  /-- The twist is compatible with pullback, `Lf^* Λ_Y(m) ≅ Λ_X(m)`. -/
   leftDerivedUpperStarTwistObjectIso {X Y : Scheme.{u}} [HasInvertibleExponent Λ X]
       [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (m : ℤ) :
     (L((f)^*[ModuleCat.{u + 1} Λ])).obj (twistObject Y m) ≅ twistObject X m
-  /-- Every twisting object is ⊗-invertible, with inverse `Λ_X(-m)`. Mathematically this is
-  a consequence of `twistObjectZeroIso` and `twistObjectAddIso`; it is a field of its own
-  because deriving it forces the kernel to unfold `AlgebraicGeometry.Etale.derivedTensor`,
-  which is prohibitively expensive. -/
+  /-- Every twisting object is ⊗-invertible, with inverse `Λ_X(-m)`. -/
   isInvertible_twistObject (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m : ℤ) :
     DerivedCategory.isInvertible Λ X (twistObject X m)
-  /-- Every twisting object lies in `D^b_{ctf}(X, Λ)`: in the concrete model `Λ_X(m)` is a lisse
-  sheaf of free `Λ`-modules of rank one placed in degree zero. This is what lets the twists pass
-  through the co-projection formula and the other finiteness statements of the chapter, all of
-  which are stated on `D^b_{ctf}`. -/
+  /-- Every twisting object lies in `D^b_{ctf}(X, Λ)`. -/
   boundedConstructibleFiniteTor_twistObject (X : Scheme.{u}) [HasInvertibleExponent Λ X]
       (m : ℤ) :
     DerivedCategory.boundedConstructibleFiniteTor Λ X (twistObject X m)
@@ -265,24 +260,8 @@ theorem boundedConstructibleFiniteTor_tateObject [HasInvertibleExponent Λ X] (m
 /-- Purity coefficient conventions
 
 The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, `K(m) = K ⊗^L_{Λ_X} Λ_X(m)`, tensoring with the
-twisting object `Λ_X(m)`.
-
-The purity conventions fix a finite coefficient ring `Λ` (the finite stage `A = A_{E,n}`), whose
-exponent is invertible on the schemes in sight (`AlgebraicGeometry.HasInvertibleExponent`, i.e.
-`ℓ ≠ p`), the operations `Lf^*`, `⊗^L`, `Rf_*`, `Rf_!`, `Rf^!` of the framework on the
-categories `D(X_ét, Λ)`, `D^b_{ctf}(X, Λ)`, and the twists `K(m)` defined here; the dualizing
-complex of `a : Y ⟶ Spec k` is `ω_{Y,Λ} = Ra^! Λ` (`AlgebraicGeometry.Etale.dualizingComplex`).
-The normalization of geometric Frobenius on the twists (`q^{-m}` on `Λ(m)`) is
-`prose-10-21` (`WeilConjectures.WeilSheaf.FrobeniusTwist`), and the
-other coefficient stages `𝒪_E, E, ℚ̄_ℓ` are the transports of
-`WeilConjectures.EtaleCohomology.Purity.Smooth.Transport`.
-
-The blueprint states the conventions on the small pro-étale site; the purity chapter is
-formalised on the small étale site, the pro-étale comparison
-(`WeilConjectures.SixFunctors.ProEtale.Comparison`: `ν^*` is fully faithful on bounded below
-complexes, and the pro-étale `Rf^!` is `ν_X^* ∘ Rf^! ∘ Rν_{Y,*}`,
-`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`) transporting every statement on the
-constructible categories. -/
+twisting object `Λ_X(m)`. The normalization of geometric Frobenius on the twists (`q^{-m}` on
+`Λ(m)`) is in `WeilConjectures.WeilSheaf.FrobeniusTwist`. -/
 noncomputable def tateTwist (m : ℤ) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
@@ -351,11 +330,8 @@ variable (Λ X)
 
 /-- Section invariant
 
-Part of blueprint `sk-def-purity-conv`. The *section invariant*
-`𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism `g : V ⟶ B` together with a section
-`s : B ⟶ V`. For `g` smooth of pure relative dimension `d` with `s` a
-closed section, smooth purity identifies it with `Λ_B(d)[2d]`; the deformation to the normal
-cone of the section reduces the general case to the standard pair `(𝔸^d_B → B, 0)`. -/
+The *section invariant* `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism `g : V ⟶ B`
+together with a section `s : B ⟶ V`. -/
 noncomputable def sectionInvariant [Finite Λ] {V B : Scheme.{u}} (g : V ⟶ B)
     [HasCompactification g]
     (s : B ⟶ V) : DerivedCategory (Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=

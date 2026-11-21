@@ -282,13 +282,7 @@ attribute [local irreducible] podReindexCalculus integralComparisonSequenceScala
 attribute [local irreducible] integralComparisonSystemScalarPullback podScalarReduction
 
 /-- The reduction square component of a normalized coefficient transition.
-Source: Stacks 03EL, 06YY, 0941.
-
-Edge cases: for identity reindexing or identity scalar extension this is the
-corresponding normalized identity square. The generator and localization argument
-also applies to zero complexes and to the empty scheme; it uses no nonzero section
-or nonempty-site assumption.
--/
+Source: Stacks 03EL, 06YY, 0941. -/
 theorem podReindexingTensorCoefficientTransition_reduction
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

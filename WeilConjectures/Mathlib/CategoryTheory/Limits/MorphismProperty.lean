@@ -25,6 +25,12 @@ coefficient category `A` with `Hom`-types in `Type (u + 1)`, the pointwise left 
 of `A`-valued presheaves along the opposite of base change exist by
 `CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`, and they are left
 exact (`CategoryTheory.MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback`).
+
+## Implementation details
+
+In `CategoryTheory.MorphismProperty.Over.preservesFiniteLimits_op_lan_pullback` the hypothesis
+`[P.HasOfPostcompProperty P]` enters only through `MorphismProperty.Over.hasPullbacks`, which
+is what makes `P.Over ⊤ Y` finitely complete and hence base change representably flat.
 -/
 
 @[expose] public section
@@ -69,11 +75,7 @@ variable {T : Type (u + 1)} [Category.{u} T] [HasPullbacks T]
 
 /-- The presheaf-level left Kan extension along the opposite of base change by an
 *arbitrary* morphism `f : X ⟶ Y` is left exact for a Grothendieck abelian coefficient
-category `A` with `Hom`-types in `Type (u + 1)`.
-
-Here `[P.HasOfPostcompProperty P]` enters only through `MorphismProperty.Over.hasPullbacks`,
-which is what makes `P.Over ⊤ Y` finitely complete and hence base change representably
-flat. -/
+category `A` with `Hom`-types in `Type (u + 1)`. -/
 instance preservesFiniteLimits_op_lan_pullback (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] (P : MorphismProperty T) [P.IsMultiplicative]
     [P.IsStableUnderBaseChange] [P.HasOfPostcompProperty P] {X Y : T} (f : X ⟶ Y) :

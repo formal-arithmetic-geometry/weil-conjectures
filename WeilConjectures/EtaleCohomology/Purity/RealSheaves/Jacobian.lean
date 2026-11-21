@@ -38,7 +38,7 @@ the datum one reads off the Tate module `T_ℓ J = lim_n J[ℓⁿ]`
 (`AlgebraicGeometry.IsAbelianVariety.tateModule`) and its identification with the Tate module of
 `Pic(C)` (`AlgebraicGeometry.JacobianTorsionDatum.nonempty_tateModuleEquiv`).
 
-The Kummer half of blueprint `proposition-kummer-duality-integral-tate-module` — the system
+The Kummer half of the Kummer duality for the integral Tate module — the system
 `(μ_{lⁿ}, z ↦ z ^ l)` defining `ℤ_l(1)` — consists of the transition maps
 `AlgebraicGeometry.Scheme.rootsOfUnityPowMap`; the resulting identification
 `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` is `AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv`. The Tate twist
@@ -137,9 +137,7 @@ variable (l) in
 
 The Tate module `T_l J = lim_n J₀(K̄)[lⁿ]` of the abelian variety of a Jacobian torsion datum,
 the compatible systems of `lⁿ`-torsion geometric points under multiplication by `l`
-(`AlgebraicGeometry.IsAbelianVariety.tateModule`).
-
-Inverting `l` gives `V_l J = T_l J ⊗ ℚ_l`, the `l`-adic homology of the curve. -/
+(`AlgebraicGeometry.IsAbelianVariety.tateModule`). -/
 noncomputable abbrev tateModule (d : JacobianTorsionDatum p l) :
     AddSubgroup (∀ _ : ℕ, Additive (Scheme.specAlgebraicClosure K ⟶ d.J)) :=
   IsAbelianVariety.tateModule l d.J
@@ -167,8 +165,7 @@ theorem equivTorsion_symm_zsmul (d : JacobianTorsionDatum p l) (n : ℕ)
 
 The comparison isomorphisms `J₀(K̄)[lⁿ] ≃ Pic(C)[lⁿ]` are compatible with the transition maps,
 so they identify the Tate module `T_l J` of the datum with the Tate module
-`AddCommGroup.tateModule` of the Picard group of the geometric curve. This is the form in which
-`T_l J` enters `theorem-rank-one-sheaves-have-finite`. -/
+`AddCommGroup.tateModule` of the Picard group of the geometric curve. -/
 theorem nonempty_tateModuleEquiv (d : JacobianTorsionDatum p l) :
     Nonempty (d.tateModule l ≃+ AddCommGroup.tateModule l (Additive p.geometricFiber.Pic)) := by
   let M := Additive (Scheme.specAlgebraicClosure K ⟶ d.J)
@@ -292,11 +289,8 @@ module.
 
 Let `d` be a Jacobian torsion datum of a proper smooth geometrically integral curve `C₀` over a
 finite field `K`, with abelian variety `J₀`. The arithmetic Frobenius `σ : z ↦ z ^ q` of
-`Gal(K̄ / K)`, acting on `J₀(K̄)` by coordinates, fixes no nonzero vector of `V_l J`: its fixed
-points on `J₀(K̄)` are the finitely many rational points `J₀(K)`
-(`AlgebraicGeometry.IsAbelianVariety.finite_setOf_frobenius_fixed`), so this is
-`AddCommGroup.rationalTateModule.eq_zero_of_map_eq_self`. In other words `σ - 1` is injective
-on `V_l J`. -/
+`Gal(K̄ / K)`, acting on `J₀(K̄)` by coordinates, fixes no nonzero vector of `V_l J`. In other
+words `σ - 1` is injective on `V_l J`. -/
 theorem eq_zero_of_map_frobenius_eq_self [Fintype K] (d : JacobianTorsionDatum p l)
     {v : IsAbelianVariety.rationalTateModule l d.J}
     (hv : AddCommGroup.rationalTateModule.map (IsAbelianVariety.geometricPointsAddEquiv
@@ -319,13 +313,7 @@ theorem eq_zero_of_galoisRepresentation_frobenius_eq_self [Fintype K]
   IsAbelianVariety.eq_zero_of_galoisRepresentation_frobenius_eq_self l d.J ht
 
 /-- For `l` invertible in `K`, `σ - 1` is an automorphism of the rational Tate module `V_l J`, `σ`
-the arithmetic Frobenius.
-
-`V_l J` is finite dimensional, of dimension `2 dim J₀`
-(`AlgebraicGeometry.IsAbelianVariety.nonempty_linearEquiv_rationalTateModule_of_natCast_ne_zero`)
-and `σ - 1` is injective
-(`AlgebraicGeometry.JacobianTorsionDatum.eq_zero_of_map_frobenius_eq_self`),
-hence bijective. -/
+the arithmetic Frobenius. -/
 theorem bijective_rationalTateModuleGaloisMap_frobenius_sub_id [Fintype K]
     (d : JacobianTorsionDatum p l) (hl : (l : K) ≠ 0) :
     Function.Bijective (IsAbelianVariety.rationalTateModuleGaloisMap l d.J
@@ -347,12 +335,7 @@ noncomputable def frobeniusSubOneLinearEquiv [Fintype K] (d : JacobianTorsionDat
 Let `C₀` be a proper smooth geometrically integral curve over a finite field `K`, `C` its
 geometric fibre and `l` a prime. The arithmetic Frobenius `σ : z ↦ z ^ q` of `Gal(K̄ / K)` acts
 on `Pic(C)` by pullback of line bundles along `𝟙 × Spec σ`; on the Tate module
-`T_l Pic(C) = T_l J` it has no nonzero fixed vector. Indeed a Jacobian torsion datum
-(`AlgebraicGeometry.JacobianTorsionDatum.nonempty`) identifies `Pic(C)[lⁿ]` with `J₀(K̄)[lⁿ]`
-compatibly with `σ` (`AlgebraicGeometry.JacobianTorsionDatum.equivTorsion_galois`) and with the
-transition maps, and `σ` has only the finitely many fixed points `J₀(K)` on `J₀(K̄)`
-(`AlgebraicGeometry.IsAbelianVariety.finite_setOf_frobenius_fixed`), so this is
-`AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed`. -/
+`T_l Pic(C) = T_l J` it has no nonzero fixed vector. -/
 theorem _root_.AlgebraicGeometry.Scheme.Hom.eq_zero_of_mem_tateModule_pic_of_forall_frobenius
     [Fintype K] [SmoothOfRelativeDimension 1 p] {t : ℕ → Additive p.geometricFiber.Pic}
     (ht : t ∈ AddCommGroup.tateModule l (Additive p.geometricFiber.Pic))
@@ -435,9 +418,8 @@ lemma specAlgebraicClosureMap_inv_left_comp (σ : Gal(AlgebraicClosure K/K)) :
 
 variable (A : Over (Spec (.of K))) [GrpObj A]
 
-/-- Blueprint `proposition-jacobian-over-ground-field--5` (Galois module of points): for a group
-scheme `A` over `K` and `σ ∈ Gal(K̄ / K)`, transporting a `K̄`-point `P` of `A_{K̄}` along the
-semilinear automorphism `σ_A = 𝟙 × Spec σ`
+/-- Galois module of points: for a group scheme `A` over `K` and `σ ∈ Gal(K̄ / K)`,
+transporting a `K̄`-point `P` of `A_{K̄}` along the semilinear automorphism `σ_A = 𝟙 × Spec σ`
 (`AlgebraicGeometry.Scheme.geometricFiberGaloisGrpHom`), `P ↦ σ_A ∘ P ∘ Spec σ⁻¹`, is the
 action of `σ⁻¹` by coordinates on `A(K̄) = A_{K̄}(K̄)`
 (`AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`). -/
@@ -664,15 +646,13 @@ variable [Finite K] {p : C ⟶ Spec (.of K)} [IsCurve p] [Smooth p] [IsProper p]
   [GeometricallyIntegral p] {l : ℕ} [Fact l.Prime]
 
 variable (p l) in
-/-- Blueprint `proposition-jacobian-over-ground-field--5` (torsion clause), as used in
-`proposition-h-1-curve-tate-module--1`: the comparison isomorphisms of a Jacobian torsion
-datum can be taken to be induced by the representing isomorphism.
+/-- The comparison isomorphisms of a Jacobian torsion datum can be taken to be induced by the
+representing isomorphism.
 
 There is a Jacobian torsion datum `d` together with an injective homomorphism
 `φ : J₀(K̄) → Pic(C)` determined by the representing isomorphism `d.representableBy` of `J₀`
 (a geometric point `x` is the point which it attaches to the class of `φ x`), such that every
-comparison isomorphism `J₀(K̄)[lⁿ] ≃ Pic(C)[lⁿ]` of `d` is the restriction of `φ`. This is the
-datum obtained from `AlgebraicGeometry.exists_jacobian_galoisAction`. -/
+comparison isomorphism `J₀(K̄)[lⁿ] ≃ Pic(C)[lⁿ]` of `d` is the restriction of `φ`. -/
 theorem exists_equivTorsion_eq_restrict [SmoothOfRelativeDimension 1 p] :
     ∃ (d : JacobianTorsionDatum p l)
       (φ : (Scheme.specAlgebraicClosure K ⟶ d.J) →* p.geometricFiber.Pic),

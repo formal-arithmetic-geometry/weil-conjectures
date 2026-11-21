@@ -484,7 +484,7 @@ theorem bijective_kummerCoefficientTensorMap (f : X ⟶ Spec (.of k))
 /-- Base change of the Kummer coefficients.
 
 Let `k` be an algebraically closed field, `Λ` a finite coefficient ring of characteristic `n`
-invertible in `k` which is free over `ℤ/n` (the blueprint's `A`, free over `ℤ/ℓᴺ`), and `X` a
+invertible in `k` which is free over `ℤ/n` (for instance `A` free over `ℤ/ℓᴺ`), and `X` a
 quasi-compact quasi-separated `k`-scheme, for instance a smooth separated curve. Then for every
 `q` the natural map
 

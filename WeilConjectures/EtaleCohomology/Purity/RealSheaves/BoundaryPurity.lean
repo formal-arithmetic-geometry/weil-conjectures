@@ -16,8 +16,8 @@ Let `𝒢` be a lisse Weil sheaf on a smooth geometrically connected curve `C₀
 `U₀ ⊆ C₀` a nonempty open on which `𝒢` is punctually `ι`-pure of weight `w`. Then `𝒢` is
 punctually `ι`-pure of weight `w` on all of `C₀`.
 
-The argument is the one of `proposition-weights-j-boundary-points--1`, for the lisse sheaf
-`𝒢 = j_* j^* 𝒢`, whose boundary stalks are its own stalks. On an affine
+The argument is the one bounding the weights of `j_* ℱ` at the boundary points, for the lisse
+sheaf `𝒢 = j_* j^* 𝒢`, whose boundary stalks are its own stalks. On an affine
 neighbourhood `X'₀` of a closed point `s`, the Euler product of `𝒢`
  splits into the Euler series over the closed points of
 `X'₀ ∩ U₀` and the finitely many local factors at the points of `X'₀ \ U₀`:
@@ -57,11 +57,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
 
 /-- The eigenvalues of the geometric Frobenius on `H_c² (U, ℱ) = V_{π₁(U)} (-1)` are bounded by
-`q ^ (β / 2 + 1)` as soon as `ℱ` has weights at most `β` at a single closed point `x`.
-
-Since `π₁(U)` acts trivially on the coinvariants, the local Frobenius `F_x` of degree `e` acts on
-them as `γ ^ e`. If `μ` is an eigenvalue of `q γ`, then `(μ / q) ^ e` is an eigenvalue of `F_x` on
-the quotient `V_{π₁(U)}` of `V`, hence of `F_x` on `V`, so it has weight at most `β`. -/
+`q ^ (β / 2 + 1)` as soon as `ℱ` has weights at most `β` at a single closed point `x`. -/
 theorem norm_le_of_hasEigenvalue_compactTopFrobenius_of_forall (x : C.finitePoints) {β : ℝ}
     (hw : ∀ α ∈ W.localEigenvalues l ρ x, frobeniusWeight ι (C.pointNorm x.1) α ≤ β)
     {μ : PadicAlgCl l} (hμ : (W.compactTopFrobenius l ρ).HasEigenvalue μ) :
@@ -139,16 +135,11 @@ theorem norm_le_of_hasEigenvalue_compactTopFrobenius_of_forall (x : C.finitePoin
 
 variable {W l ρ ι}
 
-/-- The analytic step of `proposition-weights-j-boundary-points--1` (Steps 1–3).
-
-Let `T` be a set of closed points with at most `A q ^ e` points of degree `e`, at which `ℱ` has
-weights at most `β`, and suppose that the Euler series of `ℱ` over `T` satisfies
+/-- Let `T` be a set of closed points with at most `A q ^ e` points of degree `e`, at which `ℱ`
+has weights at most `β`, and suppose that the Euler series of `ℱ` over `T` satisfies
 `L (T, ℱ, T) · ∏_{c ∈ S} (1 - c T) = P · B` for polynomials `P` and `B`, where every `c ∈ S`
 has `|c| ≤ q ^ (β / 2 + 1)`. Then `B` has no zero in the disc of radius `R = q ^ (-(β / 2 + 1))`.
-
-Indeed `B⁻¹ = (P / ∏ (1 - c T)) · L (T, ℱ, T)⁻¹`, and both factors converge on that disc
-(`PowerSeries.le_radius_coe_mul_inv_prod`,
-`AlgebraicGeometry.WeilGroup.le_radius_inv_tprod_eulerFactor`). -/
+-/
 theorem le_norm_of_mul_eq_mul (T : Set C.finitePoints) {β : ℝ}
     (hw : ∀ x ∈ T, ∀ α ∈ W.localEigenvalues l ρ x, frobeniusWeight ι (C.pointNorm x.1) α ≤ β)
     {A : ℝ} (hA : ∀ (s : Finset T) (e : ℕ),
@@ -274,20 +265,9 @@ theorem eulerSeries_eq_tprod_mul_prod {T : Set C.finitePoints} (hT : Tᶜ.Finite
   congr 1
   exact tprod_congr_set_coe _ hT.coe_toFinset.symm
 
-/-- Steps 0–3 of `proposition-weights-j-boundary-points--1` for a lisse sheaf on an affine curve.
-
-Let `C₀` be a smooth geometrically connected affine curve, `ℱ` lisse on `C₀` and `T` a set of
+/-- Let `C₀` be a smooth geometrically connected affine curve, `ℱ` lisse on `C₀` and `T` a set of
 closed points with finite complement, containing some point `x₀`, at which `ℱ` has weights at
-most `β`. Then every local eigenvalue of `ℱ`, at any closed point, has weight at most `β + 2`.
-
-By the Euler product of `ℱ`, split into the Euler product
-over `T` and the local factors at the points outside `T`
-(`AlgebraicGeometry.WeilGroup.eulerSeries_eq_tprod_mul_prod`), the product `B` of the local
-polynomials outside `T` satisfies `L (T, ℱ, T) · ι det (1 - F T ∣ H_c²) = P · B`. The eigenvalues
-on `H_c²` are bounded through the point `x₀`
-(`AlgebraicGeometry.WeilGroup.norm_le_of_hasEigenvalue_compactTopFrobenius_of_forall`), so `B`
-has no zero in the disc of radius `q ^ (-(β / 2 + 1))`
-(`AlgebraicGeometry.WeilGroup.le_norm_of_mul_eq_mul`). -/
+most `β`. Then every local eigenvalue of `ℱ`, at any closed point, has weight at most `β + 2`. -/
 theorem frobeniusWeight_le_add_two_of_isAffine [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ)
     {T : Set C.finitePoints} (hT : Tᶜ.Finite) {x₀ : C.finitePoints} (hx₀ : x₀ ∈ T) {β : ℝ}
@@ -353,11 +333,9 @@ theorem frobeniusWeight_le_add_two_of_isAffine [IsAffine C] [SmoothOfRelativeDim
   rw [Scheme.Hom.pointNorm_eq_pow_degreeOver p s.2]
   exact frobeniusWeight_le_add_two_of_le_norm hα0 he hz hzR
 
-/-- Step 4 of `proposition-weights-j-boundary-points--1` for a lisse sheaf on an affine curve:
-sharpening by tensor powers. Applying
-`AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_two_of_isAffine` to the iterated tensor squares
-`ℱ ^ ⊗ 2 ^ k`, of weights at most `2 ^ k β` on `T` and with the local eigenvalue `α ^ (2 ^ k)`,
-gives `wt (α) ≤ β + 2 / 2 ^ k`. -/
+/-- For a lisse sheaf `ℱ` on a smooth geometrically connected affine curve with weights at most `β`
+at the closed points of a nonempty set `T` with finite complement, every local eigenvalue `α` of
+`ℱ` satisfies `wt (α) ≤ β + 2 / 2 ^ k`, for every `k`. -/
 theorem frobeniusWeight_le_add_div_two_pow_of_isAffine [IsAffine C]
     [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (k : ℕ) :
     ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
@@ -389,9 +367,9 @@ theorem frobeniusWeight_le_add_div_two_pow_of_isAffine [IsAffine C]
     push_cast at h
     linarith
 
-/-- `proposition-weights-j-boundary-points--1` for a lisse sheaf on an affine curve: if `ℱ` is lisse
-on a smooth geometrically connected affine curve and has weights at most `β` at the closed points of
-a nonempty set `T` with finite complement, then it has weights at most `β` everywhere. -/
+/-- If `ℱ` is lisse on a smooth geometrically connected affine curve and has weights at most `β`
+at the closed points of a nonempty set `T` with finite complement, then it has weights at most `β`
+everywhere. -/
 theorem frobeniusWeight_le_of_isAffine [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ)
     {T : Set C.finitePoints} (hT : Tᶜ.Finite) {x₀ : C.finitePoints} (hx₀ : x₀ ∈ T) {β : ℝ}
@@ -431,14 +409,7 @@ theorem inv_mem_localEigenvalues_of_mem_dual {x : C.finitePoints} {α : PadicAlg
 variable (W l ρ)
 
 /-- Weights at most `β` on a nonempty open `U₀` of a smooth geometrically connected curve `C₀`
-give weights at most `β` on all of `C₀`, for a lisse sheaf on `C₀`.
-
-Fix a closed point `x` and an affine open neighbourhood `X'₀` of it, a smooth geometrically
-connected affine curve with a restriction of Weil groups `W(X'₀) → W(C₀)`
-(`AlgebraicGeometry.WeilGroup.Restriction.exists_weilGroup`). The closed points of `X'₀` in `U₀`
-form a nonempty set with finite complement, the boundary `C₀ \ U₀` being finite, so the affine case
-(`AlgebraicGeometry.WeilGroup.frobeniusWeight_le_of_isAffine`) applies to the restriction of `ℱ`
-to `X'₀`, whose local eigenvalues at `x` are those of `ℱ`. -/
+give weights at most `β` on all of `C₀`, for a lisse sheaf on `C₀`. -/
 theorem hasWeightsAtMost_of_forall_mem_range [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] {U : Scheme.{u}} (j : U ⟶ C)
     [IsOpenImmersion j] [Nonempty U] (hρ : W.IsLisse l ρ) {β : ℝ}
@@ -495,15 +466,9 @@ theorem hasWeightsAtMost_of_forall_mem_range [SmoothOfRelativeDimension 1 p]
   exact frobeniusWeight_le_of_isAffine W' l (ρ.comp R.restrict) ι (R.isLisse_comp l hρ) hT hx₀
     hw' _ α hα
 
-/-- Purity at an unramified boundary point, the consequence. Also the second assertion of
-`proposition-weights-j-boundary-points`.
-
-A lisse Weil sheaf `𝒢` on a smooth geometrically connected curve `C₀` which is punctually
-`ι`-pure of weight `w` at the closed points of a nonempty open `U₀` is punctually `ι`-pure of
-weight `w` on all of `C₀`: the weights are at most `w`
-(`AlgebraicGeometry.WeilGroup.hasWeightsAtMost_of_forall_mem_range`), and so are those of the
-dual `𝒢 ^ ∨`, which is pure of weight `-w` on `U₀`, whose local eigenvalues are the inverses of
-those of `𝒢`. -/
+/-- Purity at an unramified boundary point: a lisse Weil sheaf `𝒢` on a smooth geometrically
+connected curve `C₀` which is punctually `ι`-pure of weight `w` at the closed points of a
+nonempty open `U₀` is punctually `ι`-pure of weight `w` on all of `C₀`. -/
 theorem isPunctuallyPure_of_forall_mem_range [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] {U : Scheme.{u}} (j : U ⟶ C)
     [IsOpenImmersion j] [Nonempty U] (hρ : W.IsLisse l ρ) {w : ℝ}

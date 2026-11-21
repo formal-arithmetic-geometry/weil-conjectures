@@ -245,8 +245,7 @@ the square
   EC⁻¹ ⋙ L ─────────▶ EC⁻¹ ⋙ R
               EC⁻¹ can
 ```
-commutes. Both composites are determined by their transposes under `M ⊣ R` and
-`L ⋙ ED⁻¹ ⊣ ED ⋙ M`, which agree by the conjugation identities for `e_!` and `e_*`. -/
+commutes. -/
 lemma whiskerRight_comp_conjugateIsoEquiv_hom :
     whiskerRight can ED.inverse ≫
         (conjugateIsoEquiv (ED.toAdjunction.comp adj₂) (adj₂.comp EC.toAdjunction) e.symm).hom =
@@ -312,8 +311,7 @@ variable (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) (adj₃ : F₁ ⊣ U�
 /-- In a square of four left adjoints, the mate `R₁ ⋙ F₁ ⟶ F₂ ⋙ R₂` of an isomorphism
 `F₁ ⋙ L₂ ≅ L₁ ⋙ F₂` becomes an isomorphism after applying the right adjoint `U₁` of `F₁`,
 provided the units of `F₁ ⊣ U₁` and `F₂ ⊣ U₂` are isomorphisms (i.e. `F₁` and `F₂` are fully
-faithful). Indeed, `U₁` of the mate is, up to these units, the iterated mate, which is the
-conjugate of the isomorphism (`CategoryTheory.iterated_mateEquiv_conjugateEquiv`). -/
+faithful). -/
 lemma isIso_map_mateEquiv_app_of_isIso (α : TwoSquare F₁ L₁ L₂ F₂) [IsIso α]
     [IsIso adj₃.unit] [IsIso adj₄.unit] (b : B) :
     IsIso (U₁.map ((mateEquiv adj₁ adj₂ α).app b)) := by

@@ -28,11 +28,8 @@ namespace Rep
 
 /-- Discrete coinduced modules have zero positive continuous cochain cohomology.
 The linear equivalence `eD` and `hD` specify the coinduced module of
-`exists_coinduced_discrete_embedding`. Locally constant maps are exactly continuous
-maps with discrete codomain. The equivalences `eK` and equation `hd` specify the
-inhomogeneous complex, independently of its choice of realization. The last summand
-of `hd` omits the last argument; the preceding ones multiply adjacent arguments.
-For `n = 0` the same formula is the action minus the identity.
+`exists_coinduced_discrete_embedding`; the equivalences `eK` and equation `hd` specify the
+inhomogeneous complex, independently of its choice of realization.
 
 Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential and final profinite
 comparison. -/

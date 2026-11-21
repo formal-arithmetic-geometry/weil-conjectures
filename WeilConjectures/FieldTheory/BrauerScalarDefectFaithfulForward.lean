@@ -24,16 +24,9 @@ private theorem scalarDefect_transport (K : Type u) [Field K]
   intro g a
   simpa [t] using hdesc g (f.symm a)
 
-/-- Equality of scalar-defect classes follows from Brauer equivalence.
-
-Given matrix amplifications of `A` and `B` that are isomorphic, tensor the two
-splittings and their projective descent lifts (using the opposite lift for `B`).
-The scalar defect of the tensor lift is the quotient of the two scalar defects.
-Changing a lift by the resulting scalar one-cochain changes its homogeneous
-two-cocycle by the corresponding coboundary.  Thus the two representatives have
-the same image under `ContinuousCohomology.π`, and hence `x = y`.  This is the
-comparison calculation in Stacks Project, Theorem 03R7, with the homogeneous to
-inhomogeneous conversion from Section 0DVG. -/
+/-- Equality of scalar-defect classes follows from Brauer equivalence: if
+`IsBrauerEquivalent A B`, then the scalar-defect classes of `A` and `B` in `GaloisUnitsH2 K`
+agree. Source: Stacks Project, Theorem 03R7; cocycle conventions of Section 0DVG. -/
 theorem brauerScalarDefect_eq_of_brauerEquivalent (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y)

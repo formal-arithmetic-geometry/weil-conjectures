@@ -113,11 +113,7 @@ theorem supportedTatePure_iff_isZero_homology (c : ℕ) (i : Z ⟶ X) [IsClosedI
 variable {Λ} in
 /-- **The purity hypothesis is local.** Let `e_a : U_a ⟶ X` be open immersions whose images
 cover `Z`, and `i_a : Z_a ⟶ U_a` the base changes of `i`. If the purity hypothesis holds for
-every `i_a`, it holds for `i`. Indeed the cohomology sheaves of `Ri_! Ri^! (Λ_X(c)[2c])` in
-nonzero degrees vanish on every `U_a`, where this object restricts to
-`Ri_a! Ri_a^! (Λ_{U_a}(c)[2c])`
-(`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_isOpenImmersion`),
-and on the complement of `Z`, where it vanishes. -/
+every `i_a`, it holds for `i`. -/
 theorem SupportedTatePure.of_isOpenImmersion_cover {c : ℕ} {i : Z ⟶ X} [IsClosedImmersion i]
     [HasInvertibleExponent Λ X] {ι : Type u} {U Z' : ι → Scheme.{u}} (e : ∀ a, U a ⟶ X)
     [∀ a, IsOpenImmersion (e a)] [∀ a, HasInvertibleExponent Λ (U a)] (i' : ∀ a, Z' a ⟶ U a)

@@ -68,7 +68,7 @@ structure PodCompletedTensorReindex {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
         ((integralOperationsTensorTowerFunctor l E Y).obj (P.obj,Q.obj)) ≅
       (integralOperationsTensorTowerFunctor l E X).obj
         (((podGoodReindex l E g D).obj P).obj,((podGoodReindex l E g D).obj Q).obj)
-  /-- The comparison on the complete constructible objects of the node. -/
+  /-- The comparison on the complete constructible objects. -/
   tensor : ∀ M N : sfIntegralConstructibleCategory l E Y,
     (podOrdinaryReindex l E g).obj ((integralCompletedTensor l E Y).obj (M.obj,N.obj)) ≅
       (integralCompletedTensor l E X).obj

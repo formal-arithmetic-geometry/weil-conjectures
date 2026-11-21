@@ -33,11 +33,6 @@ We show that for a suitable `m > 0`, every irreducible subrepresentation of the 
 * `Representation.exists_pos_iSupIndep_isIrreducible_comp_inclusion`: a semisimple
   representation is, after replacing `φ` by a power, a direct sum of subrepresentations of
   `N ⊔ zpowers (φ ^ m)` which are irreducible under `N`.
-
-## Blueprint
-
-`lemma-geometric-constituents-after-constant-extension`, at the level of representations of the Weil
-group.
 -/
 
 @[expose] public section

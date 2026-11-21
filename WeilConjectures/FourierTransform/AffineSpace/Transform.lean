@@ -56,17 +56,11 @@ constant sheaf, shifted by the relative dimension `r = #n`:
 
 `FT_ψ(δ₀) ≅ Λ[r]`.
 
-On the affine line, the blueprint's case, this reads `FT_ψ(δ₀) ≅ Λ[1]`. Unlike
+On the affine line this reads `FT_ψ(δ₀) ≅ Λ[1]`. Unlike
 `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit` this holds for every
-character: the kernel restricted to `{0} ×_S 𝔸(n; S)` is the Artin–Schreier sheaf of the zero
-function.
+character.
 
-Class: torsion; decided by compact-support base change of `Rp₂,!` along the zero section,
-which needs `[Finite Λ]`. The proof
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_obj_rightDerivedLowerStar`) writes
-`δ₀ = Rz_* Λ = Rz_! Λ`, moves `p₁^*` past it by base change, applies the projection formula for
-the base change `ξ ↦ (0, ξ)` of `z`, along which the kernel is trivial, and ends with
-`R(p₂ ∘ (0, 1))_! = R(𝟙)_!`. -/
+Class: torsion (compact-support base change). -/
 theorem nonempty_iso_affineFourierTransform_skyscraperZero [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty ((affineFourierTransform Λ n S Ψ).obj (skyscraperZero Λ n S) ≅
         (shiftFunctor _ (Fintype.card n : ℤ)).obj (𝟙_ _)) := by
@@ -127,14 +121,7 @@ naturally in `K`:
                     D(𝔸(n; S))
 ```
 
-The kernel of `FT_{ψ⁻¹}` is the pullback of the kernel of `FT_ψ` along `ι × 1`, by
-`AlgebraicGeometry.Etale.nonempty_iso_artinSchreierSheafOf_inv` and `b(-x, ξ) = -b(x, ξ)`.
-It holds for every character.
-
-The proof is compact-support base change of `Rp₂,!` along the cartesian square with sides
-`ι × 1`, `p₂`, `p₂` and `𝟙`, so the same compactification of `p₂` is used on both sides;
-`[Finite Λ]` enters through that base change
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`). -/
+It holds for every character. Class: torsion (compact-support base change). -/
 theorem nonempty_iso_affineFourierTransform_inv [Finite Λ] (Ψ : AddChar (ZMod p) Λ) :
     Nonempty (affineFourierTransform Λ n S Ψ⁻¹ ≅
         D((neg n S)^*[ModuleCat.{u + 1} Λ]) ⋙ affineFourierTransform Λ n S Ψ) := by

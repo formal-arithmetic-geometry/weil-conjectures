@@ -52,16 +52,7 @@ namespace Adjunction
 
 /-- Let `F ⊣ G`, and let `J` be a fully faithful functor with right adjoint `J'` such that
 `J ⋙ F` is fully faithful. Then for every `K`, composing with the unit `η_{J K}` is a bijection
-`(J T ⟶ J K) ≃ (J T ⟶ G (F (J K)))` for every `T`. Under the adjunction bijection it is
-`f ↦ F f`, which is bijective as `J` and `J ⋙ F` are fully faithful:
-```
-  (J T ⟶ J K) --(- ≫ η_{J K})--> (J T ⟶ G (F (J K)))
-       |                                  |
-       F                                  ≅ adj
-       v                                  v
-  (F (J T) ⟶ F (J K)) ========== (F (J T) ⟶ F (J K))
-```
--/
+`(J T ⟶ J K) ≃ (J T ⟶ G (F (J K)))` for every `T`. -/
 lemma bijective_comp_unit_app_obj (adj : F ⊣ G) [J.Full] [J.Faithful] [(J ⋙ F).Full]
     [(J ⋙ F).Faithful] (T K : U) :
     Function.Bijective (fun f : J.obj T ⟶ J.obj K ↦ f ≫ adj.unit.app (J.obj K)) := by
@@ -82,17 +73,7 @@ lemma bijective_comp_unit_app_obj (adj : F ⊣ G) [J.Full] [J.Faithful] [(J ⋙ 
 
 /-- Let `F ⊣ G`, and let `J` be a fully faithful functor with right adjoint `J'` such that
 `J ⋙ F` is fully faithful. Then `J'` sends the unit `η_{J K} : J K ⟶ G (F (J K))` to an
-isomorphism. By Yoneda it suffices that composing with `J' η_{J K}` is a bijection on maps out
-of every `T`; through the bijections of `J ⊣ J'` this is composing with `η_{J K}`, which is
-`CategoryTheory.Adjunction.bijective_comp_unit_app_obj`:
-```
-  (T ⟶ J' (J K)) --(- ≫ J' η_{J K})--> (T ⟶ J' (G (F (J K))))
-        |                                       |
-        ≅ adjJ                                  ≅ adjJ
-        v                                       v
-  (J T ⟶ J K) -----(- ≫ η_{J K})-----> (J T ⟶ G (F (J K)))
-```
--/
+isomorphism. -/
 lemma isIso_map_unit_app_obj (adj : F ⊣ G) (adjJ : J ⊣ J') [J.Full] [J.Faithful]
     [(J ⋙ F).Full] [(J ⋙ F).Faithful] (K : U) :
     IsIso (J'.map (adj.unit.app (J.obj K))) := by
@@ -136,8 +117,7 @@ lemma map_bijective_of_isIso_unit_app (adj : L ⊣ R) (A : C) {B : C}
   exact (adj.homEquiv A (L.obj B)).symm.bijective.comp
     ((asIso (adj.unit.app B)).homToEquiv (Z := A)).bijective
 
-/-- For an adjunction `L ⊣ R` with invertible unit, `R` inverts the counit: by the triangle
-identity, `R ε_Y` is a retraction of the invertible `η_{R Y}`. -/
+/-- For an adjunction `L ⊣ R` with invertible unit, `R` inverts the counit. -/
 lemma isIso_map_counit_app_of_isIso_unit (adj : L ⊣ R) [IsIso adj.unit] (Y : D) :
     IsIso (R.map (adj.counit.app Y)) := by
   have h := adj.right_triangle_components Y
@@ -170,11 +150,7 @@ lemma iso_ext_of_inv_app_comp_counit {𝒜 : Type*} [Category* 𝒜]
 
 /-- Let `F ⊣ G` and `F' ⊣ G'` be adjunctions such that the left adjoint `F ⋙ F'` of the composite
 adjunction is fully faithful and the unit of `F' ⊣ G'` is an isomorphism. Then the unit of
-`F ⊣ G` is an isomorphism: the unit of the composite adjunction is
-```
-  X --η_X--> G (F X) --G (η'_{F X})--> G (G' (F' (F X)))
-```
-which is an isomorphism, and so is its second factor. -/
+`F ⊣ G` is an isomorphism. -/
 lemma isIso_unit_of_fullyFaithful_comp {E : Type*} [Category E] {F' : D ⥤ E} {G' : E ⥤ D}
     (adj : F ⊣ G) (adj' : F' ⊣ G') [IsIso adj'.unit] [(F ⋙ F').Full] [(F ⋙ F').Faithful] :
     IsIso adj.unit := by

@@ -51,15 +51,10 @@ private theorem discreteOpenImage {A : Type u} [Ring A] {G : Type v} [Group G]
   change N.ρ g (f.hom x) = f.hom x
   rw [← Rep.hom_comm_apply, hg]
 
-/-- Stacks Project, Definition 04JP and the paragraph after it (Section 0A2H).
-The zero module has its unique action. Binary direct sums have componentwise action and
-open stabilizers by intersection. An equivariant map has the ordinary module kernel,
-whose stabilizers stay open, and the ordinary quotient cokernel, whose stabilizers contain
-the open stabilizers of representatives. The usual universal properties are equivariant.
-Addition of maps is equivariant; mono and epi coincide with injective and surjective maps,
-respectively. These calculations give the abelian-category criterion of `def-sp-abelian`.
-The image and kernel computed in this category are the underlying module image and kernel,
-so exactness at each term is exactly underlying module exactness. -/
+/-- Discrete continuous `A`-linear representations of a profinite group `G` form an abelian
+category whose forgetful functor to `A`-modules is additive, preserves finite limits and
+colimits, and detects exactness of short complexes.
+Source: Stacks Project, Definition 04JP and the paragraph after it (Section 0A2H). -/
 theorem discreteRep_abelian_structure (A : Type u) [Ring A] [Finite A]
     (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] :

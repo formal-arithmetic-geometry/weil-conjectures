@@ -32,8 +32,7 @@ universe u v
 
 /-- **Finitely many finite separable extensions embed into one finite Galois extension.**
 If `L₁, …, Lₙ` are finite separable field extensions of `k`, there is a finite Galois extension
-`M / k` together with `k`-algebra maps `Lᵢ →ₐ[k] M`. We take for `M` the normal closure, inside
-a separable closure of `k`, of the compositum of the images of the `Lᵢ`. -/
+`M / k` together with `k`-algebra maps `Lᵢ →ₐ[k] M`. -/
 theorem exists_finiteDimensional_isGalois_algHom_of_isSeparable {k : Type u} [Field k] {n : ℕ}
     (L : Fin n → Type v) [∀ i, Field (L i)] [∀ i, Algebra k (L i)]
     [∀ i, FiniteDimensional k (L i)] [∀ i, Algebra.IsSeparable k (L i)] :

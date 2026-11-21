@@ -18,13 +18,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 Let `f₁, …, f_c` be functions on a scheme `U` and `M` an invertible `c × c` matrix of functions.
 The tuples `f` and `M f` cut out the same closed subscheme, and the cup products of Kummer
 boundaries `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` and `∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` agree
-(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`). This is Step 3
-of the proof of `lemma-class-of-point--1`.
+(`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`).
 
 The proof is universal: on `𝔸^c` over the general linear group `GL_{c,S}`, the coordinate frame
 `t` and the frame `A t` given by the universal matrix differ by an endomorphism of `Λ` on the
-zero section (the adjoint of the coordinate class being an isomorphism,
-`proposition-purity-vector-bundles`), which is the identity along the identity section, hence
+zero section (the adjoint of the coordinate class being an isomorphism, by purity for vector
+bundles), which is the identity along the identity section, hence
 everywhere since `GL_{c,S} ⟶ S` has connected fibres. Pulling back along
 `(M, f) : U ⟶ 𝔸^c_{GL_{c,U}}` gives the general case.
 
@@ -36,6 +35,13 @@ everywhere since `GL_{c,S} ⟶ S` has connected fibres. Pulling back along
 
 - `AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_glMatrix`
 - `AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`
+
+## Implementation details
+
+The repository also has `AlgebraicGeometry.GeneralLinearGroup` (`𝔾𝕃(n; k)`), a group scheme over
+an affine base `Spec k`. Here the base `S` is an arbitrary scheme, and only the scheme together
+with its universal matrix and identity section is needed, not the group structure, so the
+relative open model `AlgebraicGeometry.generalLinearOpen` inside `𝔸^{c × c}_S` is used.
 -/
 
 @[expose] public section
@@ -67,12 +73,7 @@ noncomputable def matrixCoord :
   fun a b ↦ AffineSpace.coord S (ULift.up (a, b))
 
 /-- The general linear group `GL_{c,S}`: the open of `𝔸^{c × c}_S` where the determinant is
-invertible.
-
-The repository also has `AlgebraicGeometry.GeneralLinearGroup` (`𝔾𝕃(n; k)`), a group scheme over
-an affine base `Spec k`. Here the base `S` is an arbitrary scheme, and only the scheme together
-with its universal matrix and identity section is needed, not the group structure, so the
-relative open model inside `𝔸^{c × c}_S` is used. -/
+invertible. -/
 noncomputable def generalLinearOpen : 𝔸(ULift.{u} (Fin c × Fin c); S).Opens :=
   𝔸(ULift.{u} (Fin c × Fin c); S).basicOpen (matrixCoord c S).det
 
@@ -226,11 +227,7 @@ variable [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ S]
 
 /-- **Universal frame independence.** On `𝔸^c_{GL_{c,S}}`, with coordinates `t` and universal
 matrix `A`, the frames `t` and `A t` of the zero section have the same class: restricting
-`∂κ(At₁) ∪ ⋯` to the support `V(t)` gives `∂κ(t₁) ∪ ⋯`. Both adjoints differ by an endomorphism
-`h` of `Λ` on `V(t) ≅ GL_{c,S}`, the adjoint of the latter being an isomorphism;
-along the identity section both classes become the coordinate
-class of `𝔸^c_S`, so `h` is the identity along the identity section, hence everywhere, the fibres of
-`GL_{c,S} ⟶ S` being connected. -/
+`∂κ(At₁) ∪ ⋯` to the support `V(t)` gives `∂κ(t₁) ∪ ⋯`. -/
 theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix
     (g : (glAffine c S).zeroLocusSubscheme (Set.range (glCoord c S)) ⟶
       (glAffine c S).zeroLocusSubscheme (Set.range ((glMatrix c S).mulVec (glCoord c S))))
@@ -387,8 +384,7 @@ lemma exists_glAffine_point {U : Scheme.{u}} (f : Fin c → Γ(U, ⊤))
 
 /-- **Frame independence.** For functions `f₁, …, f_c` on `U` and an invertible matrix `M`, the
 frames `f` and `M f` cut out the same closed subscheme and have the same class: restricting
-`∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` to the support `V(f)` gives `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)`. This is the
-pullback of the universal case along `(M, f) : U ⟶ 𝔸^c_{GL_c}`. -/
+`∂κ((Mf)₁) ∪ ⋯ ∪ ∂κ((Mf)_c)` to the support `V(f)` gives `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)`. -/
 theorem restrictSupportedClass_kummerBoundaryProduct_mulVec {U : Scheme.{u}}
     [HasInvertibleExponent Λ U] (f : Fin c → Γ(U, ⊤)) (M : Matrix (Fin c) (Fin c) Γ(U, ⊤))
     (hM : IsUnit M.det)

@@ -116,10 +116,8 @@ variable {T X : Scheme.{u}} (ψ : T ⟶ X) (V : X.Opens) (v : V.toScheme ⟶ T)
 
 /-- **A morphism with an open section covering the inverse image is an isomorphism over
 the open**: if `v` is an open immersion lifting the inclusion of `V` along `ψ` whose
-range is the whole inverse image of `V`, then `ψ` restricts to an isomorphism over `V`.
-This produces the isomorphism over `V` of the graph extension of a compactification
-(Stacks Project Tag 0F3Z; revised blueprint
-`lemma:nagata-scheme-image-partial-section`). -/
+range is the whole inverse image of `V`, then `ψ` restricts to an isomorphism over `V`
+(compare Stacks Project Tag 0F3Z). -/
 theorem isIso_morphismRestrict_of_range_eq [IsOpenImmersion v] (hv : v ≫ ψ = V.ι)
     (hrange : ((ψ ⁻¹ᵁ V : T.Opens) : Set T) = Set.range v) : IsIso (ψ ∣_ V) := by
   -- lift `v` to the inverse image of `V`
@@ -178,8 +176,7 @@ section RestrictOfSectionRange
 /-- **A partial section identifies an isomorphism locus**: if `m` is an open immersion
 whose composite `j := m ≫ ψ` is again an open immersion and whose range is the full
 inverse image of the range of `j`, then `ψ` restricts to an isomorphism over the range
-of `j`. This is `AlgebraicGeometry.isIso_morphismRestrict_of_range_eq` in the form in
-which the modification layer produces its data. -/
+of `j`. -/
 theorem isIso_morphismRestrict_opensRange_of_range_eq {W T X : Scheme.{u}} (ψ : T ⟶ X)
     (m : W ⟶ T) [IsOpenImmersion m] [IsOpenImmersion (m ≫ ψ)]
     (hrange : Set.range m = ψ ⁻¹' Set.range (m ≫ ψ)) :

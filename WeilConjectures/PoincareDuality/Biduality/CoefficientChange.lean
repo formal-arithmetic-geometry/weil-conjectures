@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShr
 
 Write `T_X = ℚ̄_ℓ ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧` for the extension of scalars along
 `𝒪_E ⟶ E ⟶ ℚ̄_ℓ` on bounded constructible complexes. This file proves the last two steps of
-blueprint `theorem-verdier-biduality` ((iii) and (iv)): `T_X` carries the double-dual morphism
+Verdier biduality (the passage from `𝒪_E` to `ℚ̄_ℓ`): `T_X` carries the double-dual morphism
 of an integral complex to the double-dual morphism of its extension of scalars, and every bounded
 constructible `ℚ̄_ℓ`-complex has an integral model, so `ℚ̄_ℓ`-biduality follows from
 `𝒪_E`-biduality.

@@ -43,7 +43,7 @@ Coefficients are `ℚ̄_ℓ = PadicAlgCl l`, and the archimedean comparison is a
 
 The curve itself enters through the instance arguments `[Finite K]` and `[IsCurve p]` of
 `AlgebraicGeometry.WeilGroup`, so that every statement about a `W : WeilGroup p` carries them.
-Geometric connectedness of `C₀`, a standing hypothesis of `situation-weil`, is the field
+Geometric connectedness of `C₀`, a standing hypothesis, is the field
 `AlgebraicGeometry.WeilGroup.geometricallyConnected`, since the presentation through
 `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` requires it; smoothness is an extra hypothesis
 where it is needed. Only closed
@@ -87,9 +87,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {C : Scheme.{u}}
 
-/-- Weil sheaves and their representations.
-
-The Weil group of a curve `p : C₀ ⟶ Spec 𝔽_q`. It is the preimage of the integer powers of
+/-- The Weil group of a curve `p : C₀ ⟶ Spec 𝔽_q`. It is the preimage of the integer powers of
 the geometric Frobenius under `π₁(C₀, s) → Gal(k / 𝔽_q)`, and comes with the exact degree
 sequence `1 → π₁(C) → W(C₀) → ℤ → 0` whose kernel is the profinite geometric fundamental
 group `π₁(C)`.
@@ -107,10 +105,7 @@ group `π₁(C₀, s)` of `C₀` at a geometric base point `s`:
 * the topology of `W` induces the profinite topology of `π₁(C₀, s)` on `π₁(C)`;
 * `frobenius x` is a Frobenius element at `x` of `π₁(C₀, s)`: it acts on the geometric fibres
   at `s` as the geometric Frobenius of `κ(x)` acts on those at a geometric point over `x`,
-  transported along a path (`AlgebraicGeometry.Scheme.FiniteEtale.IsFrobeniusElement`).
-
-That the local Frobenius elements generate a dense normal subgroup (Chebotarev density) is a
-theorem about these data, `AlgebraicGeometry.WeilGroup.dense_frobenius`. -/
+  transported along a path (`AlgebraicGeometry.Scheme.FiniteEtale.IsFrobeniusElement`). -/
 structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
   /-- The underlying group `W(C₀)` of the Weil group. -/
   carrier : Type u
@@ -133,7 +128,7 @@ structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
   /-- The chosen lift has degree one. -/
   deg_frobeniusLift : deg frobeniusLift = Multiplicative.ofAdd 1
   /-- A choice of local Frobenius element at a closed point of `C₀`; it is well defined up to
-  conjugacy, so the characteristic polynomials of `definition-weights` do not depend on it. -/
+  conjugacy, so the characteristic polynomials defining weights do not depend on it. -/
   frobenius : C.finitePoints → carrier
   /-- The local Frobenius at `x` has degree `e_x = [k(x) : 𝔽_q]`. -/
   deg_frobenius (x : C.finitePoints) :
@@ -153,9 +148,7 @@ structure WeilGroup [Finite K] (p : C ⟶ Spec (.of K)) [IsCurve p] where
     MulAction fundamentalGroup ((Scheme.FiniteEtale.fiber basePoint).obj P)]
   [isFundamentalGroup :
     PreGaloisCategory.IsFundamentalGroup (Scheme.FiniteEtale.fiber basePoint) fundamentalGroup]
-  /-- The curve `C₀` is geometrically connected over `𝔽_q`, the standing hypothesis of the Weil
-  group `situation-weil`: without it the degree map of
-  `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup` is not surjective. -/
+  /-- The curve `C₀` is geometrically connected over `𝔽_q`. -/
   [geometricallyConnected : GeometricallyConnected p]
   /-- The identification of `W(C₀)` with the Weil group of `π₁(C₀, s)`: the pairs `(g, n)` such
   that `g` acts on the geometric fibres of the constant covers as the `n`-th power of the
@@ -198,21 +191,15 @@ theorem toFundamentalGroup_apply (g : W.carrier) :
     W.toFundamentalGroup g = (W.weilGroupEquiv g).1.1 :=
   rfl
 
-/-- Boundary stalks and restriction to an open.
-
-The restriction of Weil groups along a nonempty open immersion `j : U₀ ↪ C₀` of curves over
+/-- The restriction of Weil groups along a nonempty open immersion `j : U₀ ↪ C₀` of curves over
 `𝔽_q`: the homomorphism `W(U₀) → W(C₀)` induced by the restriction functor
 `j^* : FÉt(C₀) ⥤ FÉt(U₀)` of finite étale covers and a path `τ` between the base points, that is
 an isomorphism `τ : F_{s_U} ∘ j^* ≅ F_{s_C}` of fibre functors on `FÉt(C₀)`: an element `g` of
 `W(U₀)` acts on the geometric fibre at `s_U` of the restriction `j^* P` of a finite étale
 `C₀`-scheme `P`, and its restriction acts on the fibre of `P` at `s_C` through `τ`
-(`restrict_smul`). Since `W(C₀)` embeds into `π₁(C₀, s_C)`, this determines the restriction
-map.
-
-The remaining fields are theorems about the map so defined: it is continuous and preserves
-degrees, it is surjective because `π₁(U) → π₁(C)` is for a nonempty open of a connected
-normal curve, and it carries the local Frobenius at a closed point of
-`U₀` into the Frobenius conjugacy class at its image. -/
+(`restrict_smul`). The restriction map is continuous, preserves degrees, is surjective, and
+carries the local Frobenius at a closed point of `U₀` into the Frobenius conjugacy class at its
+image. -/
 structure Restriction {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] (j : U ⟶ C)
     [IsOpenImmersion j] [Nonempty U] (WU : WeilGroup pU) (WC : WeilGroup p) where
   /-- `j` is a morphism of curves over `𝔽_q`. -/
@@ -243,16 +230,9 @@ structure Restriction {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] (j
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- Weil sheaves and their representations.
-
-A `ℚ̄_ℓ`-representation of the Weil group is *lisse* if the geometric subgroup `π₁(C)` acts
+/-- A `ℚ̄_ℓ`-representation of the Weil group is *lisse* if the geometric subgroup `π₁(C)` acts
 continuously, i.e. the matrix coefficients of the restricted representation are continuous in
-every basis. By `proposition-lattices-representations-normal-scheme` this is equivalent, for a
-finite-dimensional `V`, to the existence of a model over a finite extension `E/ℚ_ℓ` carrying a
-`π₁(C)`-stable `𝒪_E`-lattice.
-
-Finite-dimensionality of `V` is not part of this predicate: it is an independent condition,
-imposed where it is needed (see `AlgebraicGeometry.WeilGroup.isLisseRep`). -/
+every basis. Finite-dimensionality of `V` is not part of this predicate. -/
 structure IsLisse {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
     (ρ : Representation (PadicAlgCl l) W.carrier V) : Prop where
   /-- In every basis, the matrix coefficients of the geometric part of `ρ` are continuous. -/
@@ -262,7 +242,7 @@ structure IsLisse {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
 variable {W l} in
 /-- For a lisse representation on a finite-dimensional `V`, every coefficient
 `g ↦ φ (ρ g v)` of the geometric part of `ρ`, for a linear form `φ` and a vector `v`, is
-continuous: in a basis it is a fixed linear combination of matrix coefficients. -/
+continuous. -/
 theorem IsLisse.continuous_apply {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
     [FiniteDimensional (PadicAlgCl l) V] {ρ : Representation (PadicAlgCl l) W.carrier V}
     (hρ : W.IsLisse l ρ) (φ : V →ₗ[PadicAlgCl l] PadicAlgCl l) (v : V) :
@@ -280,8 +260,7 @@ theorem IsLisse.continuous_apply {V : Type u} [AddCommGroup V] [Module (PadicAlg
 
 variable {W l} in
 /-- A representation is lisse as soon as every coefficient `g ↦ φ (ρ g v)` of its geometric
-part, for a linear form `φ` and a vector `v`, is continuous: the matrix coefficients in a
-basis `b` are the coefficients for the coordinate forms of `b` and the vectors of `b`. -/
+part, for a linear form `φ` and a vector `v`, is continuous. -/
 theorem IsLisse.of_continuous_apply {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
     {ρ : Representation (PadicAlgCl l) W.carrier V}
     (h : ∀ (φ : V →ₗ[PadicAlgCl l] PadicAlgCl l) (v : V),
@@ -290,11 +269,8 @@ theorem IsLisse.of_continuous_apply {V : Type u} [AddCommGroup V] [Module (Padic
   continuous_toMatrix b i j := by
     simpa [LinearMap.toMatrix_apply] using h (b.coord i) (b j)
 
-/-- Weil sheaves and their representations.
-
-Continuity of the matrix coefficients in *one* basis of a finite-dimensional `V` implies
-continuity in every basis: a change of basis is a fixed invertible matrix, so it acts on the
-matrix coefficients by a fixed polynomial expression. -/
+/-- Continuity of the matrix coefficients in *one* basis of a finite-dimensional `V` implies
+continuity in every basis. -/
 theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
     [FiniteDimensional (PadicAlgCl l) V]
     (ρ : Representation (PadicAlgCl l) W.carrier V) :
@@ -313,10 +289,7 @@ theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlg
   exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
     continuous_finsetSum _ fun j _ ↦ (hb i j).mul continuous_const
 
-/-- Operations, constituents and coinvariants. Blueprint
-`proposition-twisting-weight-zero-adding-dual--2`: Constant Weil twist.
-
-The constant Weil line `B_b`: the one-dimensional representation of `W(C₀)` on which `g`
+/-- The constant Weil line `B_b`: the one-dimensional representation of `W(C₀)` on which `g`
 acts by `b ^ deg g`; it is trivial on `π₁(C) = ker deg`. Tensoring with it,
 `ρ.tprod (W.constLine l b)`, is the constant Weil twist of `ρ`. -/
 noncomputable def constLine (b : (PadicAlgCl l)ˣ) :
@@ -331,9 +304,7 @@ noncomputable def constLine (b : (PadicAlgCl l)ˣ) :
     ext
     simp [smul_smul, mul_comm]
 
-/-- Operations, constituents and coinvariants.
-
-The Tate line `ℚ̄_ℓ(n) = B_{q ^ (-n)}`, on which the geometric Frobenius acts by `q ^ (-n)`. -/
+/-- The Tate line `ℚ̄_ℓ(n) = B_{q ^ (-n)}`, on which the geometric Frobenius acts by `q ^ (-n)`. -/
 noncomputable def tateLine (n : ℤ) :
     Representation (PadicAlgCl l) W.carrier (PadicAlgCl l) :=
   W.constLine l (Units.mk0 ((Nat.card K : PadicAlgCl l) ^ (-n))

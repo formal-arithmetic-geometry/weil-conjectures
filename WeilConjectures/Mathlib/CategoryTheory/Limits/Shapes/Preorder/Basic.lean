@@ -43,8 +43,8 @@ F₁.obj i ──────▶ F₁.obj (succ i)
 F₂.obj i ──────▶ F₂.obj (succ i)
 ```
 i.e. `u.app i ≫ v i` and `v i ≫ u.app (succ i)` are the transition maps of `F₁` and `F₂`. Then
-any map `f` between colimits of `F₁` and `F₂` compatible with `u` is an isomorphism. The inverse
-is induced by the maps `v i`; no naturality of `v` in `i` is needed. -/
+any map `f` between colimits of `F₁` and `F₂` compatible with `u` is an isomorphism.
+No naturality of `v` in `i` is needed. -/
 lemma isIso_of_interleave (h₁ : IsColimit c₁) (h₂ : IsColimit c₂)
     (u : F₁ ⟶ F₂) (v : ∀ i, F₂.obj i ⟶ F₁.obj (Order.succ i))
     (hu : ∀ i, u.app i ≫ v i = F₁.map (homOfLE (Order.le_succ i)))

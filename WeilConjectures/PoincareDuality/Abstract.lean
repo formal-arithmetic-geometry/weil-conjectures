@@ -65,9 +65,8 @@ The internal hom `RHom(K, -)` is `ihom K`, the right adjoint of `K ⊗ -`; with 
   the transpose `P 𝟙 ⊗ G T ⟶ 𝟙` of the Poincaré duality morphism is the composite of the cup
   product `P 𝟙 ⊗ G T ⟶ P (𝟙 ⊗ T) ≅ P T` and the trace.
 * `CategoryTheory.Verdier.isIso_exchange_of_isIso`: the exchange morphism `Φ_{K,L}` is an
-  isomorphism if the component of `pf` at `(K, B)` is an isomorphism for every `B` (the Yoneda
-  argument of the specification).
-
+  isomorphism if the component of `pf` at `(K, B)` is an isomorphism for every `B` (by a Yoneda
+  argument).
 -/
 
 @[expose] public section
@@ -246,14 +245,7 @@ lemma uncurry_exchange (K : C) (L : D) :
   uncurry_curry _
 
 /-- **Verdier exchange is an isomorphism** as soon as the projection morphisms
-`(pf.app K).app B` are, for every `B`: for every test object `T`, composing with `Φ_{K,L}` is
-the chain of bijections
-```
-Hom(T, G RHom(K, S L)) ≃ Hom(F T, RHom(K, S L)) ≃ Hom(K ⊗ F T, S L) ≃ Hom(P (K ⊗ F T), L)
-  ≃ Hom(P K ⊗ T, L) ≃ Hom(T, RHom(P K, L)),
-```
-the fourth one being precomposition with the isomorphism `(pf.app K).app T`, so `Φ_{K,L}` is
-an isomorphism by the Yoneda lemma. -/
+`(pf.app K).app B` are, for every `B`. -/
 theorem isIso_exchange_of_isIso (K : C) (L : D) [∀ B, IsIso ((pf.app K).app B)] :
     IsIso (exchange adj adj' pf K L) := by
   rw [isIso_iff_yoneda_map_bijective]

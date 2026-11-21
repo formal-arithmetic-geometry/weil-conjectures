@@ -14,8 +14,7 @@ public import WeilConjectures.WeilSheaf.Defs
 # Lisse Weil sheaves on a dense open of the affine line
 
 This file fixes the conventions of the Deligne–Laumon affine-line estimate
-(`WeilConjectures.DeligneLaumon.AffineLine.Upper`) and of its auxiliary statements, following
-the blueprint subsection `lemma-unramified-at-infinity-no-linear-characters--1`. The `ℓ`-adic
+(`WeilConjectures.DeligneLaumon.AffineLine.Upper`) and of its auxiliary statements. The `ℓ`-adic
 formalism they are phrased against is the provisional interface of `WeilConjectures.WeilSheaf.Defs`;
 what this block owns is the two conditions on a lisse Weil sheaf on a dense open of the affine line,
 and the bundling of that situation.
@@ -63,11 +62,7 @@ variable {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 /-- A Weil sheaf `F` on `U` is *geometrically constant* if its underlying `ℓ`-adic sheaf is
 constant on every connected open `V` of the geometric fiber `Ū = U ⊗ k̄`, where `k̄` is an
 algebraic closure of `k₀`: its restriction to `V` is a finite direct sum of copies of the
-constant `ℓ`-adic sheaf `ℚ̄_ℓ`. Its Frobenius module may still be nontrivial. When the connected
-components of `Ū` are open, for instance when `U` is of finite type over `k₀`, this says that
-`F` is constant on each connected component of `Ū`. For `Ū` connected, as for `U` an open of
-`𝔸¹_{k₀}`, it is the constancy of `F` on `Ū`, which motivates the definition: the geometric
-fundamental group `π₁(Ū)` acts trivially on the stalks of `F`. -/
+constant `ℓ`-adic sheaf `ℚ̄_ℓ`. Its Frobenius module may still be nontrivial. -/
 def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
   ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
     ∃ n : ℕ, Nonempty ((V.ι)^*ᵃ[l].obj F.obj.carrier ≅
@@ -86,9 +81,7 @@ the point `∞`, and the extension is a lisse Weil sheaf `G` on an open `W ⊆ �
   ▼          ▼
   𝔸¹ ──ι───▶ ℙ¹
 ```
-The choice of chart does not matter: two open immersions `𝔸¹ ↪ ℙ¹` of `k₀`-schemes differ by
-a `k₀`-automorphism of `ℙ¹`. This condition is equivalent to the inertia group at `∞` acting
-trivially on the geometric generic fiber of `F`. -/
+-/
 def IsUnramifiedAtInfinity (F : WeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
   let ι := ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))

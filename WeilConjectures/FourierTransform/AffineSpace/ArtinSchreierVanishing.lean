@@ -47,10 +47,8 @@ as a summand; on the stalks of the cohomology sheaves this forces `N = 0`, the s
 being finite (`AlgebraicGeometry.Etale.isZero_of_iso_singleFunctor_unit_biprod`). The relative
 statement over `T` follows by compact-support base change along `T ⟶ Spec 𝔽_p`.
 
-## Blueprint
-
-This is the vanishing `H^*_c(𝔸¹, ℒ_ψ) = 0` used in the proofs of
-`lemma-fourier-transform-constant-sheaf` and `proposition-fourier-inversion`.
+This is the vanishing `H^*_c(𝔸¹, ℒ_ψ) = 0` used in the computation of the Fourier transform of
+the constant sheaf and in Fourier inversion.
 -/
 
 @[expose] public section

@@ -705,7 +705,7 @@ attribute [local irreducible] AdicCoefficientDatum.completedPull
 /-- A simultaneous realization over all separated finite-type schemes and all morphisms.
 The composition and identity isomorphisms are normalized by the specified completed
 comparisons and tensor formulas, and the completed exchange is compared as an arrow.
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15, and the. -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15. -/
 structure Data where
   atObject : ∀ T : Base k, At l E T.scheme
   along : ∀ (T U : Base k) (h : T.scheme ⟶ U.scheme) [h.IsOver (Spec (.of k))],

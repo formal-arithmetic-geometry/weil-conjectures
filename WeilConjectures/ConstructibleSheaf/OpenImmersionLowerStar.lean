@@ -33,8 +33,8 @@ from the closed complement `W` of `V`, and `j_* K` is constructible by induction
 `0 ⟶ j_* K ⟶ j_* F ⟶ I ⟶ 0` is exact with `I ⊆ (j h)_* h^* F`, and constructible sheaves form a
 Serre class.
 
-The blueprint first reduces to a reduced `X` and treats a non-dense `U` separately; both steps are
-unnecessary here: the induction runs over arbitrary closed subschemes, the reduced structure only
+There is no need to first reduce to a reduced `X` or to treat a non-dense `U` separately: the
+induction runs over arbitrary closed subschemes, the reduced structure only
 being used on the closure of `V` (through a thickening, along which pullback is an equivalence),
 and a single open `V` is chosen in each step.
 -/
@@ -73,15 +73,7 @@ lemma _root_.CategoryTheory.Abelian.prop_of_isLimit_kernelFork {C : Type*} [Cate
 
 /-- **A normal open piece.** Let `Z` be of finite type over a field and `O` a nonempty open of `Z`
 with irreducible underlying set. There is a nonempty open `V ⊆ O` such that the direct image
-along `V ⟶ Z` of every finite locally constant sheaf of `Λ`-modules on `V` is constructible.
-
-Let `ι : Z_C ⟶ Z` be the reduced closed subscheme on the closure `C` of `O`, an integral scheme.
-Take `V` with `ι⁻¹ V` a nonempty normal open of `Z_C`
-(`AlgebraicGeometry.Scheme.exists_nonempty_forall_isIntegrallyClosed_stalk`). Then
-`Q = Z_C ×_Z V ⟶ V` is a thickening, so `L ≅ snd_* snd^* L`, and
-`(V ⟶ Z)_* L ≅ ι_* fst_* snd^* L` with `fst : Q ⟶ Z_C` a normal open, to which
-`AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isFiniteLocallyConstantSheaf`
-applies. -/
+along `V ⟶ Z` of every finite locally constant sheaf of `Λ`-modules on `V` is constructible. -/
 theorem exists_isConstructibleSheaf_lowerStar_opens {k : Type u} [Field k] {Z : Scheme.{u}}
     (aZ : Z ⟶ Spec (.of k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] (O : Z.Opens)
     (hO : IsIrreducible (O : Set Z)) :
@@ -278,9 +270,7 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux {k : Type u} [Fiel
 
 Let `X` be of finite type over a field `k`, `j : U ⟶ X` an open immersion and `F` a
 constructible sheaf of modules over a finite commutative ring `Λ` on `U_ét`. Then `j_* F` is
-constructible on `X_ét`. This is
-`AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux` for the closed
-subscheme `X` of itself. -/
+constructible on `X_ét`. -/
 theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion {k : Type u} [Field k]
     {U X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     (j : U ⟶ X) [IsOpenImmersion j]
@@ -292,11 +282,7 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion {k : Type u} [Field k]
 
 Let `X` be of finite type over a field `k`, `j : U ⟶ X` an open immersion, `i : Z ⟶ X` a
 closed immersion onto the closed complement of `U`, and `F` a constructible sheaf of
-`Λ`-modules on `U_ét`. Then the boundary sheaf `i^* j_* F` is constructible on `Z_ét`: `j_* F` is
-constructible (`AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isOpenImmersion`), and
-inverse images of constructible sheaves are constructible
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.upperStar`). The statement holds for any `i`;
-the hypothesis that `i` is the closed complement of `j` only fixes the blueprint's setting. -/
+`Λ`-modules on `U_ét`. Then the boundary sheaf `i^* j_* F` is constructible on `Z_ét`. -/
 theorem isConstructibleSheaf_upperStar_lowerStar_of_isOpenImmersion {k : Type u} [Field k]
     {U X Z : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     (j : U ⟶ X) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i]

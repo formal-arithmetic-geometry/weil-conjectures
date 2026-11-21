@@ -56,7 +56,7 @@ point `t` of the base point data `B`, there
 is an equivalence `e` between lisse Weil sheaves on `C₀` and lisse representations of `W(C₀)` such
 that
 * (`η`) the representation `e ℱ` is, naturally in `ℱ`, the Weil fundamental representation
-  `(ℱ_t, ρ_ℱ)` of `situation-weil`
+  `(ℱ_t, ρ_ℱ)`
   (`AlgebraicGeometry.WeilGroup.fundamentalRepFunctor`; up to the universe lift
   `Rep.uliftFunctor`, the stalks living in a larger universe);
 * (`τ`) `e` is compatible with tensor products: there is an isomorphism of bifunctors

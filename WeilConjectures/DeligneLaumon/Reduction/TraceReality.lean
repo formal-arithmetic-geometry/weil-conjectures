@@ -120,9 +120,7 @@ theorem norm_inv_eq_of_mem_roots_map_charpolyRev (ι : K →+* ℂ) (A : Module.
 
 omit [IsAlgClosed K] in
 /-- If the alternating traces `ι (tr A₂ᵐ - tr A₁ᵐ)`, `m ≥ 1`, are real, then the fraction
-`P₁ / P₂` of the images `P_i = ι (det (1 - T A_i))` is real: `P₁ P̄₂ = P̄₁ P₂`. Both sides have
-constant term `1` and logarithmic derivative minus the generating series of the traces of
-`A₁ ⊕ Ā₂`, resp. `Ā₁ ⊕ A₂`, which agree. -/
+`P₁ / P₂` of the images `P_i = ι (det (1 - T A_i))` is real: `P₁ P̄₂ = P̄₁ P₂`. -/
 theorem map_charpolyRev_mul_conj_eq_of_trace (ι : K →+* ℂ) {V₂ : Type*} [AddCommGroup V₂]
     [Module K V₂] [FiniteDimensional K V₂] (A₁ : Module.End K V) (A₂ : Module.End K V₂)
     (htr : ∀ m, m ≠ 0 →
@@ -170,10 +168,7 @@ theorem map_charpolyRev_mul_conj_eq_of_trace (ι : K →+* ℂ) {V₂ : Type*} [
 /-- **Reality of reduced factors**. Let
 `A₁, A₂` be endomorphisms whose eigenvalues satisfy `|ι α| ≤ R` for `A₁` and `|ι α| = S` for
 `A₂`, with `R < S`. If the alternating traces `ι (tr A₂ᵐ - tr A₁ᵐ)`, `m ≥ 1`, are real, then the
-images `ι (det (1 - T A₁))` and `ι (det (1 - T A₂))` have real coefficients: the fraction
-`P₁ / P₂` is real (`LinearMap.map_charpolyRev_mul_conj_eq_of_trace`) and reduced
-(`Polynomial.isCoprime_of_norm_inv_roots`), so both factors are real
-(`Polynomial.map_conj_eq_self_of_isCoprime`). -/
+images `ι (det (1 - T A₁))` and `ι (det (1 - T A₂))` have real coefficients. -/
 theorem map_charpolyRev_conj_eq_self_of_trace (ι : K →+* ℂ) {V₂ : Type*} [AddCommGroup V₂]
     [Module K V₂] [FiniteDimensional K V₂] (A₁ : Module.End K V) (A₂ : Module.End K V₂)
     {R S : ℝ} (h₁ : ∀ α, A₁.HasEigenvalue α → ‖ι α‖ ≤ R)
@@ -198,8 +193,7 @@ theorem map_charpolyRev_conj_eq_self_of_trace (ι : K →+* ℂ) {V₂ : Type*} 
 end IsAlgClosed
 
 /-- Conversely, if the images under `ι : K →+* ℂ` of the traces of the powers of `A` are real,
-then so are those of the coefficients of `det (1 - T A)`: compare `A` with the endomorphism of
-the zero space in `LinearMap.map_charpolyRev_mul_conj_eq_of_trace`. -/
+then so are those of the coefficients of `det (1 - T A)`. -/
 theorem conj_charpolyRev_coeff_of_trace (ι : K →+* ℂ) (A : Module.End K V)
     (h : ∀ m, (starRingEnd ℂ) (ι (LinearMap.trace K V (A ^ m))) =
       ι (LinearMap.trace K V (A ^ m))) (n : ℕ) :
@@ -235,8 +229,7 @@ namespace FrobeniusModule
 
 variable {K : Type*} [Field K]
 
-/-- A Frobenius module with subsingleton underlying space is `ι`-real: its local polynomial
-is `1`. -/
+/-- A Frobenius module with subsingleton underlying space is `ι`-real. -/
 theorem isReal_of_subsingleton (ι : K →+* ℂ) (M : FrobeniusModule K) [Subsingleton M.carrier] :
     M.IsReal ι := by
   have hdeg : M.frobeniusEnd.charpoly.natDegree = 0 := by

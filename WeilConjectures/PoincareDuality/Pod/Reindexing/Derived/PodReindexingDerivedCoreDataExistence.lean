@@ -68,14 +68,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-- The strict quotient and normalized limit constructions provide all raw maps.
-
-The proof follows the construction in the strict comparison and coefficient
-calculus nodes: take the induced derived reduction, finite evaluation and
-restriction maps, the normalized total-limit comparison, and the two normalized
-Roos models, together with the induced pullback comparison.  No normalization
-law is asserted here; those five laws are the separate split obligations used by
-the core theorem. -/
+/-- The strict quotient and normalized limit constructions provide all raw maps: from strict
+reindexing data and normalized completions on `X` and `Y`, there is a derived core datum
+`PodReindexingDerivedCoreData l E g`. No normalization law is asserted here. -/
 theorem podReindexingDerivedCoreData_exists
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

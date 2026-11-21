@@ -32,10 +32,8 @@ open CategoryTheory
 namespace WeilConjectures
 
 /-- The whole-system counit comparison equals the specified tensor-and-completion
-comparison, as a morphism in the ambient derived category. The model parameter D
-carries the representative normalizations of the whole-system construction;
-no arbitrary comparison map is supplied. The completeness proof used on the
-right is supplied by the specified-alpha theorem, and is proof irrelevant.
+comparison, as a morphism in the ambient derived category. The model parameter `D`
+carries the representative normalizations of the whole-system construction.
 -/
 theorem isomorphismScalarComparisonAgreement
     (l : ℕ) [Fact l.Prime]

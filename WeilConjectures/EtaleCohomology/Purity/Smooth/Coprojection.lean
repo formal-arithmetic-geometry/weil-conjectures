@@ -31,9 +31,14 @@ compactification.
 - `AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`: the co-projection
   `Rf^! (- ⊗^L L) ≅ Rf^! (-) ⊗^L Lf^* L` for `L` invertible.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`:
-  the subsection statement `sk-lem-coprojection`.
+  the co-projection for a closed immersion and an invertible object of `D^b_{ctf}`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject`:
   the case of the Tate twists, `Ri^! (K ⊗^L Λ(m)[2m]) ≅ Ri^! K ⊗^L Λ(m)[2m]`.
+
+## Implementation details
+
+The co-projection is stated for any morphism admitting a compactification; it does not use
+that the morphism is a closed immersion, nor that the complexes are constructible.
 -/
 
 @[expose] public section
@@ -67,13 +72,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The co-projection `Rf^! (K ⊗ᴸ L) ≅ Rf^! K ⊗ᴸ Lf^* L`, natural in `K ∈ D(Y_ét)`, for an
 object `L` of `D(Y_ét)` with a two-sided tensor inverse `M` (`e : M ⊗ᴸ L ≅ 𝟙_`,
-`e' : L ⊗ᴸ M ≅ 𝟙_`).
-
-Both sides are right adjoints, of `Rf_!(-) ⊗ᴸ M` and of `Rf_!(- ⊗ᴸ Lf^* M)` respectively. The
-object `M` is dualizable, so the projection formula identifies these two left adjoints
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_isDualizable`), and the co-projection is the
-induced isomorphism of right adjoints
-(`CategoryTheory.Adjunction.tensorRightCompIsoOfTensorIso`). -/
+`e' : L ⊗ᴸ M ≅ 𝟙_`), obtained as the induced isomorphism of right adjoints. -/
 noncomputable def derivedTensorRightCompRightDerivedUpperShriekIsoOfTensorIso
     (L M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (e : ((derivedTensor (ModuleCat.{u + 1} Λ) Y).obj M).obj L ≅ 𝟙_ _)
@@ -108,15 +107,7 @@ a two-sided tensor inverse `M` (`e : M ⊗^L L ≅ Λ_Y`, `e' : L ⊗^L M ≅ Λ
 
 `Rf^! (K ⊗^L L) ≅ Rf^! K ⊗^L Lf^* L`
 
-is an isomorphism natural in `K ∈ D(Y_ét, Λ)`. Both sides are right adjoints:
-`(- ⊗^L L) ⋙ Rf^!` of `Rf_! ⋙ (- ⊗^L M)`, and `Rf^! ⋙ (- ⊗^L Lf^* L)` of
-`(- ⊗^L Lf^* M) ⋙ Rf_!`, since tensoring with an invertible object is an equivalence and `Lf^*`
-is monoidal. The projection formula at the dualizable object `M`
-identifies the two left adjoints, so the right adjoints agree; this is the Yoneda argument of
-the blueprint.
-
-The blueprint states this for a closed immersion `f`, where `Rf_! = Rf_*`; the argument does
-not use that `f` is a closed immersion. -/
+is an isomorphism natural in `K ∈ D(Y_ét, Λ)`. -/
 noncomputable def derivedTensorRightCompRightDerivedUpperShriekIso (f : X ⟶ Y)
     [HasCompactification f]
     (L M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -138,22 +129,7 @@ For a closed immersion `i : Z ⟶ X`, a complex `K ∈ D^b_{ctf}(X, Λ)` and an 
 `Ri^! (K ⊗^L L) ≅ Ri^! K ⊗^L Li^* L`
 
 is an isomorphism: an invertible tensor factor passes through `i^!` at the cost of restricting
-it. Testing against an arbitrary `A ∈ D^b_{ctf}(Z, Λ)` and using `Ri_! = Ri_*`, the projection
-formula for `Ri_*` and invertibility of `L`, the two Hom-functors agree naturally in `A`, so
-Yoneda gives the isomorphism. Here it is the component at `K` of the co-projection
-`AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`,
-which needs neither that `i` is a closed immersion nor that
-`K` and `L` lie in `D^b_{ctf}`.
-
-Taking `L = Λ_X(m)[2m]`, whose restriction is `Λ_Z(m)[2m]`, this reads
-`Ri^!(K(m)[2m]) ≅ (Ri^! K)(m)[2m]`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject`);
-taking `L = Lf^* B` for `B` invertible on `Y` and `f' = f ∘ i` it reads
-`Ri^!(K ⊗ Lf^* B) ≅ Ri^! K ⊗ Lf'^* B`
-(`nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar`);
-the diagonal identity is
-`nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar_pair`.
--/
+it. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible
     (i : Z ⟶ X) [IsClosedImmersion i] [HasCompactification i]
     (K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -173,13 +149,10 @@ section Consequences
 variable {Y W : Scheme.{u}}
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `sk-lem-coprojection`, invertible factor pulled back from the base: for
+/-- Co-projection, invertible factor pulled back from the base: for
 `i : Z ⟶ X`, `f : X ⟶ Y`, `K ∈ D(X_ét, Λ)` and `B` invertible on `Y`,
 
-`Ri^! (K ⊗^L Lf^* B) ≅ Ri^! K ⊗^L L(i ≫ f)^* B`.
-
-This is the co-projection for the invertible object `L = Lf^* B`, followed by
-`Li^* Lf^* B ≅ L(i ≫ f)^* B`. -/
+`Ri^! (K ⊗^L Lf^* B) ≅ Ri^! K ⊗^L L(i ≫ f)^* B`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar (i : Z ⟶ X)
     [HasCompactification i] (f : X ⟶ Y)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -196,9 +169,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar 
       ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) i f).app B).symm⟩
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `sk-lem-coprojection`, two invertible factors: for `i : Z ⟶ W` and `L₁`, `L₂`
-invertible on `W`, applying the co-projection twice (to `L₁ ⊗^L L₂ ≅ (Λ_W ⊗^L L₁) ⊗^L L₂`)
-gives
+/-- Co-projection, two invertible factors: for `i : Z ⟶ W` and `L₁`, `L₂` invertible on `W`,
 
 `Ri^! (L₁ ⊗^L L₂) ≅ (Ri^! Λ_W ⊗^L Li^* L₁) ⊗^L Li^* L₂`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible_of_isInvertible
@@ -222,13 +193,10 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible_of_is
       ((derivedTensorRightCompRightDerivedUpperShriekIso Λ i L₁ M₁ e₁ e₁').app _)).app _⟩
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `sk-lem-coprojection`, the diagonal identity: for `Δ : X ⟶ W` and
-`p₁, p₂ : W ⟶ X` (in the blueprint, the diagonal of `X ⟶ Y` and the two projections of
-`W = X ×_Y X`) and `ω` invertible on `X`,
+/-- Co-projection, the diagonal identity: for `Δ : X ⟶ W` and `p₁, p₂ : W ⟶ X` (typically the
+diagonal of `X ⟶ Y` and the two projections of `W = X ×_Y X`) and `ω` invertible on `X`,
 
-`RΔ^! (Lp₁^* ω ⊗^L Lp₂^* ω) ≅ (RΔ^! Λ_W ⊗^L LΔ^* Lp₁^* ω) ⊗^L LΔ^* Lp₂^* ω`.
-
-The objects `Lp₁^* ω` and `Lp₂^* ω` are invertible as pullbacks of an invertible object. -/
+`RΔ^! (Lp₁^* ω ⊗^L Lp₂^* ω) ≅ (RΔ^! Λ_W ⊗^L LΔ^* Lp₁^* ω) ⊗^L LΔ^* Lp₂^* ω`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar_pair
     (Δ : X ⟶ W) [HasCompactification Δ] (p₁ p₂ : W ⟶ X)
     {ω : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -249,14 +217,9 @@ end Consequences
 
 /-- The co-projection for the twist
 
-For `i : Z ⟶ X` admitting a compactification (in the blueprint: a closed immersion of separated
-finite-type `k`-schemes), `K ∈ D(X_ét, Λ)` and `m ∈ ℤ`,
+For `i : Z ⟶ X` admitting a compactification, `K ∈ D(X_ét, Λ)` and `m ∈ ℤ`,
 
-`Ri^! (K ⊗^L Λ_X(m)[2m]) ≅ Ri^! K ⊗^L Λ_Z(m)[2m]`.
-
-This is the co-projection `AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`
- for the invertible object `L = Λ_X(m)[2m]`, followed by the
-identification `Li^* (Λ_X(m)[2m]) ≅ Λ_Z(m)[2m]` of the Tate twist datum. -/
+`Ri^! (K ⊗^L Λ_X(m)[2m]) ≅ Ri^! K ⊗^L Λ_Z(m)[2m]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject (i : Z ⟶ X)
     [HasCompactification i] [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m : ℤ) :

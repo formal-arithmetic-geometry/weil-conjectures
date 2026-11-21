@@ -22,7 +22,7 @@ universe u v
 namespace Module.Basis
 
 /-- Removing a unit pivot from a functional gives a finite free kernel.
-Source: Stacks Project, Algebra, Tag 00MT, proof, changes of basis and complementary spans. -/
+Source: Stacks Project, Algebra, Tag 00MT. -/
 theorem exists_basis_ker_of_isUnit_value
     {R : Type u} [CommRing R] {F : Type v} [AddCommGroup F] [Module R F]
     {n : ℕ} (b : Module.Basis (Fin n) R F) (ℓ : F →ₗ[R] R) (p : Fin n)

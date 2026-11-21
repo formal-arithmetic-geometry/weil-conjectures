@@ -55,7 +55,7 @@ private theorem euler_monomial
 
 /-- If the differential of an element vanishes, all its nonconstant p-basis coordinates
 vanish when the differentials of the p-basis form the given basis.
-Source: Stacks Project, More on Algebra, Tag 07P2, proof of (2) implies (1), and step 4 of. -/
+Source: Stacks Project, More on Algebra, Tag 07P2, proof of (2) implies (1). -/
 theorem pBasis_repr_eq_zero_of_D_eq_zero
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]
     (p : ℕ) [Fact p.Prime] [CharP k p] [CharP K p]

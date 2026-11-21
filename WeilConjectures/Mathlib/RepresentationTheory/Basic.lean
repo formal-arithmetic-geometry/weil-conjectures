@@ -40,12 +40,6 @@ have, alongside `Representation.tprod` and `Representation.dual`:
   `n → k`.
 * `Representation.hasEigenvalue_dual_iff`: the eigenvalues of `g` on the dual representation are
   those of `g⁻¹`.
-
-## Blueprint
-
-`Representation.detCharacter` implements part of `definition-determinant-weight--1`.
-`Representation.exteriorPower` is the exterior power `⋀^s V` of `det-d-linear`, and `⋀^r V` for
-`r = dim V` its determinant representation.
 -/
 
 @[expose] public section

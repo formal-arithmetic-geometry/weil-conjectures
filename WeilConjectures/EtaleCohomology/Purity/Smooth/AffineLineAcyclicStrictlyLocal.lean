@@ -134,13 +134,7 @@ lemma hasInvertibleExponent_spec_of_isUnit {A : Type u} [CommRing A] (N : ℕ) (
 /-- **The affine line over a strictly henselian local ring has no cohomology in positive
 degrees**, given the acyclicity of the affine line over discrete valuation rings. Let `R` be a
 strictly henselian local ring on which the exponent of `Λ` is invertible and `M` a sheaf of
-`Λ`-modules on `Spec R`. Then `Hᵠ(𝔸¹_R, p_R^* M) = 0` for `q > 0`.
-
-Let `P ⊆ ℤ` be the preimage of the maximal ideal of `R`; the integers outside `P` are units in
-`R`, so that `R` is an algebra over `A = ℤ_P`, in which the exponent `N` of `Λ` is invertible.
-If `P = 0`, `A = ℚ` is a field (`AlgebraicGeometry.Etale.affineLineAcyclicAt_of_field`);
-otherwise `A` is a discrete valuation ring (the hypothesis `hDVR`). Conclude by
-`AlgebraicGeometry.Etale.subsingleton_sheafH_affineLine_of_affineLineAcyclicAt`. -/
+`Λ`-modules on `Spec R`. Then `Hᵠ(𝔸¹_R, p_R^* M) = 0` for `q > 0`. -/
 theorem subsingleton_sheafH_affineLine_of_isStrictlyHenselianLocalRing [Finite Λ]
     (hDVR : ∀ (A : Type u) [CommRing A] [IsDomain A] [IsDiscreteValuationRing A]
       [HasInvertibleExponent Λ (Spec (.of A))], AffineLineAcyclicAt Λ (Spec (.of A)))

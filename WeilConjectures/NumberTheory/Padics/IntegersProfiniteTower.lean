@@ -14,8 +14,7 @@ import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
 /-!
 # The profinite tower of the integers in a finite p-adic extension
 
-Stacks Project, Tags 08ZU, 0ET8, 08ZY and 08ZZ
-(auxiliary; not a blueprint node).
+Stacks Project, Tags 08ZU, 0ET8, 08ZY and 08ZZ.
 
 ## Main definitions and statements
 
@@ -36,8 +35,7 @@ namespace Padic
 the quotient at exponent `n + 1`; equalizers impose precisely the successive reductions.
 Ring operations are inherited coordinatewise from the product.
 
-Stacks Tag 08ZY
-(auxiliary; not a blueprint node). -/
+Stacks Tag 08ZY. -/
 noncomputable def coefficientExtensionPositiveLimit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
     Subring (∀ n : ℕ, coefficientExtensionRing l E (n + 1)) :=
@@ -47,9 +45,7 @@ noncomputable def coefficientExtensionPositiveLimit (l : ℕ) [Fact l.Prime]
     (Pi.evalRingHom (fun k : ℕ ↦ coefficientExtensionRing l E (k + 1)) n)
 
 /-- The topology on the integers induced from the spectral absolute value on `E`.
-This is the extending absolute value recorded by the coefficient-extension dependency.
-
-(auxiliary; not a blueprint node). -/
+This is the extending absolute value on the coefficient extension. -/
 @[instance_reducible]
 noncomputable def coefficientExtensionIntegersTopology (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
@@ -60,8 +56,7 @@ noncomputable def coefficientExtensionIntegersTopology (l : ℕ) [Fact l.Prime]
 
 /-- The subspace topology from the product of the discrete positive coefficient rings.
 
-Stacks Tag 08ZY
-(auxiliary; not a blueprint node). -/
+Stacks Tag 08ZY. -/
 @[instance_reducible]
 noncomputable def coefficientExtensionPositiveLimitTopology (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :
@@ -74,8 +69,7 @@ noncomputable def coefficientExtensionPositiveLimitTopology (l : ℕ) [Fact l.Pr
 They are compact, Hausdorff and totally disconnected. Every continuous surjection to
 a finite discrete set factors uniquely through every sufficiently high positive level.
 
-Stacks Tags 08ZU, 0ET8, 08ZY and 08ZZ
-(auxiliary; not a blueprint node).
+Stacks Tags 08ZU, 0ET8, 08ZY and 08ZZ.
 -/
 theorem coefficientExtension_integers_profinite_tower (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :

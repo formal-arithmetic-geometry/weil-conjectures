@@ -112,18 +112,11 @@ private theorem scalar_cocycle_identity (K : Type u) [Field K]
     abel
   exact congrArg Additive.toMul hadd
 
-/-- A prescribed continuous two-cocycle factors through a finite group quotient.
-
-The homogeneous cycle equation evaluated on (1,g,g*h,g*h*j), together with
-homogeneous equivariance, yields c(g,h)c(g*h,j) = g(c(h,j))c(g,h*j).
-For any quotient index j choose a representative r. Substitute r for j in that
-identity and use the factorization of c and q(g*h)=q(g)q(h). Commutativity of
-units reorders the two factors on the right. This gives the last displayed
-identity for d. The construction concerns the prescribed cocycle itself, not
-only its class. It needs no normalization, no division by the group order, and
-no matrix algebra. For a trivial quotient one may have d(1,1) different from 1.
-
-Source: Stacks Project, Theorem 03R7 surjectivity sketch and Section 0DVG. -/
+/-- A prescribed continuous two-cocycle factors through a finite group quotient: there are a
+finite group structure on `Fin n`, a locally constant homomorphism `q` from the absolute Galois
+group onto it and a function `d` on pairs with `z(g, h) = d(q g, q h)`, satisfying the cocycle
+identity `d(q g, q h * j) · g(d(q h, j)) = d(q g, q h) · d(q (g h), j)`.
+Source: Stacks Project, Theorem 03R7 (surjectivity) and Section 0DVG. -/
 theorem exists_finite_galois_cocycle_data (K : Type u) [Field K]
     (z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2) :
     ∃ (n : ℕ) (_ : n ≠ 0) (grp : Group (Fin n)),

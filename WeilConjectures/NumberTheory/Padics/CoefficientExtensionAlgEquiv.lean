@@ -17,7 +17,7 @@ An isomorphism of finite extensions of `ℚ_[l]` preserves the spectral absolute
 identifies the valuation rings and their uniformizer ideals. Every finite extension has an
 isomorphic model in any universe.
 
-Source: Serre, Local Fields, Chapter II, §2 (auxiliary.
+Source: Serre, Local Fields, Chapter II, §2.
 -/
 
 @[expose] public noncomputable section
@@ -33,16 +33,14 @@ variable {E : Type v} [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E
 variable {E' : Type w} [Field E'] [Algebra ℚ_[l] E'] [FiniteDimensional ℚ_[l] E']
 
 /-- Algebra isomorphisms preserve the spectral absolute value: it only depends on the
-minimal polynomial. Source: Serre, Local Fields, Chapter II, §2
-(auxiliary; not a blueprint node). -/
+minimal polynomial. Source: Serre, Local Fields, Chapter II, §2. -/
 theorem coefficientExtensionAbsoluteValue_algEquiv (σ : E ≃ₐ[ℚ_[l]] E') (x : E) :
     coefficientExtensionAbsoluteValue l E' (σ x) = coefficientExtensionAbsoluteValue l E x := by
   rw [coefficientExtensionAbsoluteValue_apply, coefficientExtensionAbsoluteValue_apply]
   change spectralValue (minpoly ℚ_[l] (σ x)) = spectralValue (minpoly ℚ_[l] x)
   rw [minpoly.algEquiv_eq]
 
-/-- An algebra isomorphism maps the valuation ring onto the valuation ring.
-(auxiliary; not a blueprint node). -/
+/-- An algebra isomorphism maps the valuation ring onto the valuation ring. -/
 theorem coefficientExtensionIntegers_map_algEquiv (σ : E ≃ₐ[ℚ_[l]] E') :
     (coefficientExtensionIntegers l E).map σ.toRingEquiv.toRingHom =
       coefficientExtensionIntegers l E' := by
@@ -58,23 +56,20 @@ theorem coefficientExtensionIntegers_map_algEquiv (σ : E ≃ₐ[ℚ_[l]] E') :
     rw [← coefficientExtensionAbsoluteValue_algEquiv l σ, σ.apply_symm_apply]
     exact hy
 
-/-- The ring isomorphism of valuation rings induced by an algebra isomorphism.
-(auxiliary; not a blueprint node). -/
+/-- The ring isomorphism of valuation rings induced by an algebra isomorphism. -/
 def coefficientExtensionIntegersEquiv (σ : E ≃ₐ[ℚ_[l]] E') :
     coefficientExtensionIntegers l E ≃+* coefficientExtensionIntegers l E' :=
   RingEquiv.trans (σ.toRingEquiv.subringMap (s := coefficientExtensionIntegers l E))
     (RingEquiv.subringCongr (coefficientExtensionIntegers_map_algEquiv l σ))
 
-/-- The uniformizer ideal is the maximal ideal of the valuation ring.
-(auxiliary; not a blueprint node). -/
+/-- The uniformizer ideal is the maximal ideal of the valuation ring. -/
 theorem span_coefficientExtensionUniformizer_eq_maximalIdeal (E : Type v) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     Ideal.span {coefficientExtensionUniformizer l E} =
       coefficientExtensionMaximalIdeal l E :=
   (coefficientExtensionIntegers_dvr l E).choose_spec.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
 
-/-- The chosen uniformizer is nonzero, since the maximal ideal is nonzero.
-(auxiliary; not a blueprint node). -/
+/-- The chosen uniformizer is nonzero, since the maximal ideal is nonzero. -/
 theorem coefficientExtensionUniformizer_ne_zero (E : Type v) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     coefficientExtensionUniformizer l E ≠ 0 := by
@@ -85,7 +80,7 @@ theorem coefficientExtensionUniformizer_ne_zero (E : Type v) [Field E]
   rw [← span_coefficientExtensionUniformizer_eq_maximalIdeal, h, Ideal.span_singleton_eq_bot]
 
 /-- Any ring isomorphism of valuation rings identifies the uniformizer ideals, since these
-are the unique maximal ideals. (auxiliary; not a blueprint node). -/
+are the unique maximal ideals. -/
 theorem map_span_coefficientExtensionUniformizer
     (e : coefficientExtensionIntegers l E ≃+* coefficientExtensionIntegers l E') :
     Ideal.map e (Ideal.span {coefficientExtensionUniformizer l E}) =
@@ -97,8 +92,7 @@ theorem map_span_coefficientExtensionUniformizer
   have : (coefficientExtensionMaximalIdeal l E).IsMaximal := h.2.2.2.2.1
   exact h'.2.2.2.2.2.1 _ (Ideal.map_isMaximal_of_equiv e)
 
-/-- Every finite extension of `ℚ_[l]` has an isomorphic copy in any universe.
-(auxiliary; not a blueprint node). -/
+/-- Every finite extension of `ℚ_[l]` has an isomorphic copy in any universe. -/
 theorem exists_algEquiv_coefficientExtension (E : Type v) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     ∃ (E₀ : Type u) (_ : Field E₀) (_ : Algebra ℚ_[l] E₀) (_ : FiniteDimensional ℚ_[l] E₀),

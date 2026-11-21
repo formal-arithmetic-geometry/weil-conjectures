@@ -94,8 +94,7 @@ instance exchangeWord_isIso
   dsimp only [exchangeWord]
   infer_instance
 
-/-- Compatibility of each factor implies compatibility of the transported exchange.
-Source: Mathlib shift calculus and normalized exchange, Step 5. -/
+/-- Compatibility of each factor implies compatibility of the transported exchange. -/
 theorem exchangeWord_commShift
     {C₀ D₀ : Type*} [catC₀ : Category C₀] [catD₀ : Category D₀]
     (P : ObjectProperty C₀) (Q : ObjectProperty D₀)

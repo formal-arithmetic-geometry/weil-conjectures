@@ -138,8 +138,7 @@ theorem ker_residueRestrict :
   rfl
 
 /-- **The composite of two valuation rings has second factor `A''`**: the quotient of the
-composite `C` by the trace of the maximal ideal of `A` is `A''`. This is the
-identification `C/𝔪' ≅ A''` of `lemma:nagata-composite-valuation-ring`. -/
+composite `C` by the trace of the maximal ideal of `A` is `A''`. -/
 noncomputable def residueRestrictEquiv :
     (A.comapResidue A'' ⧸ (maximalIdeal A).comap
       (inclusion _ _ (A.comapResidue_le A''))) ≃+* A'' :=

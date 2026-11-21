@@ -140,10 +140,7 @@ variable (U : Scheme.{u}) [HasInvertibleExponent Λ U]
           │                                          │
           ▼                                          ▼
    Λ((a + b) + c)[…] ═══════════════════════ Λ(a + (b + c))[…]
-```
-
-It follows from `HasTateTwist.twistObjectAddIso_assoc` and the compatibility of the associator of
-the derived tensor product with shifts. -/
+``` -/
 def ShiftTateObjectAddIsoAssoc (a b c : ℤ) : Prop :=
   derivedTensorHom (ModuleCat.{u + 1} Λ) (shiftTateObjectAddIso Λ U a b).hom
       (𝟙 ((tateObject Λ U c)⟦2 * c⟧)) ≫ (shiftTateObjectAddIso Λ U (a + b) c).hom =

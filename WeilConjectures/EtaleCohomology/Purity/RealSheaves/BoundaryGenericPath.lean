@@ -29,9 +29,9 @@ the universal cover `Ỹ_t` defines a path `F_t ≅ F_η`
   for `σ` acting on `k̄` as `Φⁿ`, pushes down to the image of `σ` in `π₁(U₀)`
   (`AlgebraicGeometry.WeilGroup.BasePointData.downAut_ofLift`).
 
-This identifies the inertia groups and residue Frobenius lifts of `lemma-boundary-stalk--1` with
-transports of lisse sheaves along lifts of the generic geometric point, as needed for blueprint
-`lemma-boundary-stalk--1`.
+This identifies the inertia groups and residue Frobenius lifts of a boundary datum
+(`AlgebraicGeometry.BoundaryDatum`) with transports of lisse sheaves along lifts of the generic
+geometric point, as needed for the description of the boundary stalks as inertia invariants.
 -/
 
 @[expose] public section

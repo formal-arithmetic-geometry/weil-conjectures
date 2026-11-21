@@ -14,13 +14,12 @@ public import WeilConjectures.WeilSheaf.SupportSubobject
 
 Let `K` be a Weil complex on the affine line concentrated in degrees `≤ m`. Then `FT_ψ(K)` is
 concentrated in degrees `≤ m + 1`, and its top cohomology sheaf `H = 𝓗^{m+1} FT_ψ(K)` has finite
-support (`AlgebraicGeometry.support_homologySheaf_fourierTransform_finite`, the key step 1(a) of
-blueprint `proposition-fourier-transform-perverse-heart--1`).
+support (`AlgebraicGeometry.support_homologySheaf_fourierTransform_finite`), a key step in
+showing that the Fourier transform preserves the perverse heart.
 
-The blueprint computes the stalk of `H` at a geometric point `ξ` as
-`H²_c(U, F ⊗ ℒ_{ψ(ξ x)})`, the coinvariants of `F ⊗ ℒ_{ψ(ξ x)}`, and counts the linear
-characters which are quotients of `F`. We argue by Fourier inversion instead, which avoids the
-stalks at points which are not `k₀`-rational:
+Rather than computing the stalk of `H` at a geometric point `ξ` as `H²_c(U, F ⊗ ℒ_{ψ(ξ x)})`, the
+coinvariants of `F ⊗ ℒ_{ψ(ξ x)}`, and counting the linear characters which are quotients of `F`,
+we argue by Fourier inversion, which avoids the stalks at points which are not `k₀`-rational:
 
 - for a closed point `x` in the support of `H`, the closed complement `i : Z₀ ↪ 𝔸¹` of
   `V₀ = 𝔸¹ ∖ {x}` gives a nonzero morphism `H ⟶ i_* i^* H`, from the open–closed triangle and
@@ -267,15 +266,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 character quotient**. Let `K ≤ m`, with truncation triangles `F₁ ⟶ FT_ψ(K) ⟶ G[-m-1] ⟶` and
 `K₁ ⟶ K(-1) ⟶ N[-m] ⟶` (`F₁ ≤ m`, `K₁ ≤ m - 1`), and let `x` be a closed point in the support of
 `G`. Then for every dense open `U ⊆ 𝔸¹` there are `a ∈ k̄` minus the coordinate of a geometric
-point over `x` and a nonzero morphism `N|_Ū ⟶ ℒ_{ψ(a x)}|_Ū`.
-
-Let `j : V ↪ 𝔸¹` be the complement of `x` and `i : Z ↪ 𝔸¹` the reduced point `x`. The open–closed
-triangle `j_!j^*G ⟶ G ⟶ i_*i^*G ⟶` has nonzero second morphism, as `x` lies in the support of
-`G`, so the composite `FT_ψ(K) ⟶ G[-m-1] ⟶ (i_*i^*G)[-m-1]` is nonzero. Applying `FT_{ψ⁻¹}` and
-Fourier inversion gives a nonzero morphism `K(-1) ⟶ B[-m]`, where `B[1] = FT_{ψ⁻¹}(i_*i^*G)`, and
-hence a nonzero morphism `N ⟶ B`, still nonzero on `U` since `FT_ψ(B) ≥ 0`. Geometrically `B` is
-a sum of characters `ℒ_{ψ(a x)}` with `-a` the coordinate of a geometric point over `x`
-(`AlgebraicGeometry.WeilSheaf.exists_iso_carrier_lowerStar_tensorObj_fourierKernel_inv`). -/
+point over `x` and a nonzero morphism `N|_Ū ⟶ ℒ_{ψ(a x)}|_Ū`. -/
 theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) {K : WeilComplex k₀ l (affineLine k₀)} {m : ℤ}
     {F₁ F₃ : WeilComplex k₀ l (affineLine k₀)} (f : F₁ ⟶ (fourierTransform ψ).obj K)
@@ -406,12 +397,7 @@ theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAl
     simpa [V] using hmem
 
 /-- **The top cohomology sheaf of the transform of a complex `≤ m` has finite support**. Let
-`K ≤ m`, so that `FT_ψ(K) ≤ m + 1`, and let `N = 𝓗^m(K(-1))`, lisse on a dense open `U`. Each
-closed point `x` in the support of `𝓗^{m+1} FT_ψ(K)` gives a nonzero morphism from `N|_Ū` to a
-linear character `ℒ_{ψ(a x)}|_Ū`, with `-a` the coordinate of a geometric point over `x`
-(`AlgebraicGeometry.exists_isNegCoordOver_ne_zero_of_mem_support`). Distinct points give distinct
-irreducible characters, so there are at most `rank N|_U` of them
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.le_finrank_of_ne_zero`). -/
+`K ≤ m`, so that `FT_ψ(K) ≤ m + 1`. Then the support of `𝓗^{m+1} FT_ψ(K)` is finite. -/
 theorem support_homologySheaf_fourierTransform_finite (ψ : AddChar k₀ (PadicAlgCl l))
     (hψ : ψ ≠ 1) {m : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.obj.IsLE m) :
     ((WeilComplex.homologySheaf (m + 1)).obj ((fourierTransform ψ).obj K)).support.Finite := by

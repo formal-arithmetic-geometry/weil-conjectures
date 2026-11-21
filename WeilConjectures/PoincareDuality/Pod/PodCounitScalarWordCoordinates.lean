@@ -327,42 +327,9 @@ private theorem betaB_eq_mu (K : sfIntegralConstructibleCategory l E.carrier Y) 
   erw [CategoryTheory.Functor.map_id, Category.comp_id]
   exact coordinate_eq _ _ _ _ _ _ _
 
-/-- Simultaneous normalized models give the scalar/pullback word-coordinate identity.
-
-Proof, following the DAG:
-1. Apply lem-trf-effective-comparison-realization-models with M=L. Its primitive
-models give the simultaneous quotients of every flat-term K-flat representative,
-with their actual transitions and zero shifted Roos coordinate. By
-lem-pur-kflat-change-of-rings, both P tensor B_F,n and Q=P tensor R_L are flat-term
-K-flat. The balanced maps (p tensor s) tensor b -> p tensor pi_n(s)b and
-p tensor b -> (p tensor 1) tensor b identify Q tensor B_L,n with P_L,n.
-2. By lem-pur-normalized-actual-reconstruction-maps, C=R(K) is normalized, its
-actual counit is invertible, and the actual unit at K is invertible. Effective
-primitive models give U_E C and S_Y C. Apply them to L(U_E C) and L(S_Y C), then
-transport along S_X(e_(U_E C)) and U_L(e_(S_Y C)), to obtain A and B with every
-constructible-complete intermediate domain verified.
-3. Apply lem-trf-counit-realization-substitution. Each r=b followed by L(O(e))
-is an isomorphism on those domains. Naturality of b and the triangle identity
-of lem-coef-derived-system-evaluation-calculus give r_(O,C) O-hat(u_K)=b_(O,K).
-The cut formula gives beta_A=r_(S_X U_E,C) (S_X U_E)-hat(u_K), and similarly beta_B.
-4. Use the scalarPullback generator of the substitution theorem. Its realized
-conjugate is the specified integralComparisonScalar: lambda is scalar change of
-the pullback counit; mu is pullback of the scalar counit followed by kappa inverse.
-Both are computed by the same ordinary limit cone on K-injective towers, as in
-lem-trf-integral-pullback-comparison-realization. Therefore the word square holds
-at L(C) with precisely that lambda/mu arrow.
-5. Naturality of that specified arrow at u_K transports the square to K and gives
-the displayed equality. This composes entire-system morphisms, not evaluated arrows.
-6. Naturality of b and e gives both coordinate naturality equations. The normalized
-models are tested on every representative and K-injective resolution, so descent
-through common refinements preserves the equality with all transitions and tower
-homotopies. Identity coefficients, zero objects and nonflat finite quotient maps
-require neither a Tor bound nor any additional assumption.
-
-The word-coordinate assertion holds for every simultaneous system D: each D carries the
-prescribed representative normalization, and the specified a of the citer
-lem-pod-isomorphism-scalar-comparison-agreement is integralComparisonScalar at an arbitrary
-D. Models with the quotient-augmentation completion normalization exist (first conjunct). -/
+/-- Simultaneous normalized models give the scalar/pullback word-coordinate identity: some
+integral comparison system has models with the quotient-augmentation completion normalization,
+and for every integral comparison system `D` the word-coordinate square holds. -/
 theorem podCounitScalarWordCoordinates (l : ℕ) [Fact l.Prime] :
     (∃ D : IntegralComparisonSystem.{u} l,
       ∀ (F : Coefficient.{u} l) (W : Scheme.{u})

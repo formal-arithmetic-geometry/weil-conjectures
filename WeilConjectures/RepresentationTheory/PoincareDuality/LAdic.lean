@@ -21,8 +21,8 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 Source: Deligne, Weil II (1.1.6), and Milne, Lectures on Étale Cohomology, §19, p. 125.
 
 A representation of `G` by linear automorphisms is a monoid homomorphism `G →* (V ≃ₗ[R] V)`
-with jointly continuous action map `fun p : G × V ↦ ρ p.1 p.2`, the form of the pod family
-(`Padic.exists_stable_lattice`, lem-pod-profinite-stable-lattice). `E` carries the topology of
+with jointly continuous action map `fun p : G × V ↦ ρ p.1 p.2`, as in
+`Padic.exists_stable_lattice`. `E` carries the topology of
 `spectralNorm.nontriviallyNormedField ℚ_[l] E` and `V` the topology `moduleTopology E V`.
 Morphisms are the `R`-linear maps `f` with `f (ρ g v) = σ g (f v)` (`IsEquivariant`); tensor
 products carry the diagonal action (`tensorDiagonal`); the unit is `R` with the trivial action
@@ -95,9 +95,8 @@ noncomputable def tensorDiagonal (R : Type u) [CommRing R] (G : Type z) [Group G
         ((LinearMap.GeneralLinearGroup.generalLinearEquiv R W).symm.toMonoidHom.comp σ))))
 
 /-- Extension of coefficients carries the action `1 ⊗ σ` on `L ⊗[E] V`, canonically the
-same as `σ ⊗ 1` on `V ⊗[E] L` via the tensor flip. For the node this is used when
-`E ⊆ L` are finite subextensions. Source: Deligne, Weil II (1.1.6), coefficient extension,
-and (1.1.1)(d). -/
+same as `σ ⊗ 1` on `V ⊗[E] L` via the tensor flip. Source: Deligne, Weil II (1.1.6),
+coefficient extension, and (1.1.1)(d). -/
 noncomputable def coefficientScalarExtension (E : Type u) [Field E] (L : Type v) [Field L]
     [Algebra E L] (G : Type z) [Group G] (V : Type w) [AddCommGroup V] [Module E V]
     (ρ : G →* (V ≃ₗ[E] V)) : G →* ((L ⊗[E] V) ≃ₗ[L] (L ⊗[E] V)) :=

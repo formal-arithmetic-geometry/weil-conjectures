@@ -98,7 +98,7 @@ end Support
 section Subscheme
 
 /-- An ideal sheaf pulls back to zero along the inclusion of the closed subscheme it cuts
-out: the inclusion is a monomorphism, so it is its own kernel pair. -/
+out. -/
 lemma comap_subschemeι (I : X.IdealSheafData) : I.comap I.subschemeι = ⊥ :=
   Scheme.Hom.ker_eq_bot_of_isIso (pullback.fst I.subschemeι I.subschemeι)
 
@@ -115,9 +115,7 @@ theorem _root_.AlgebraicGeometry.Scheme.Hom.comap_ker_self (j : X ⟶ Y) : j.ker
   rw [hfac, comap_subschemeι, comap_bot]
 
 /-- **The kernel is the largest ideal sheaf pulling back to zero**: an ideal sheaf whose
-inverse image along a morphism vanishes is contained in the kernel of that morphism. This
-is the Galois connection `le_map_iff_comap_le` at the zero ideal sheaf, whose pushforward
-is the kernel. -/
+inverse image along a morphism vanishes is contained in the kernel of that morphism. -/
 theorem le_ker_of_comap_eq_bot {J : Y.IdealSheafData} (g : X ⟶ Y) (h : J.comap g = ⊥) :
     J ≤ g.ker := by
   rw [← map_bot g]
@@ -236,8 +234,7 @@ end FlatBaseChange
 
 section FlatPullback
 
-/-- Pullback of ideal sheaves along a flat morphism commutes with finite intersections: on affine
-opens it is the extension of ideals along a flat ring map (`Ideal.map_iInf_of_flat`). -/
+/-- Pullback of ideal sheaves along a flat morphism commutes with finite intersections. -/
 lemma comap_iInf_of_flat (f : X ⟶ Y) [Flat f] {ι : Type*} [Finite ι]
     (I : ι → Y.IdealSheafData) : (⨅ i, I i).comap f = ⨅ i, (I i).comap f := by
   refine ext_of_iSup_eq_top (ι := {p : Y.affineOpens × X.affineOpens // p.2.1 ≤ f ⁻¹ᵁ p.1.1})
@@ -258,12 +255,7 @@ lemma comap_iInf_of_flat (f : X ⟶ Y) [Flat f] {ι : Type*} [Finite ι]
 /-- **Descent of ideal sheaves along a finite flat quasi-compact family.** Let `q k : W k ⟶ V`
 be finitely many flat quasi-compact morphisms and `I k` ideal sheaves on the `W k` whose
 pullbacks to every `W k ×_V W l` agree. Then the pullback of `⨅ k, (I k).map (q k)` along
-each `q l` is `I l`.
-
-This is the effectivity step "descending the quotients" of the proof of
-`theorem-hilbert-schemes-points-smooth-curve--1`, in the form of an explicit formula: it uses
-flat base change (`map_comap_of_isPullback`) and that flat pullback commutes with finite
-intersections (`comap_iInf_of_flat`). -/
+each `q l` is `I l`. -/
 theorem comap_iInf_map_of_flat {V : Scheme.{u}} {κ : Type*} [Finite κ] {W : κ → Scheme.{u}}
     (q : ∀ k, W k ⟶ V) [∀ k, Flat (q k)] [∀ k, QuasiCompact (q k)]
     (I : ∀ k, (W k).IdealSheafData)
@@ -369,9 +361,7 @@ end Sections
 
 section Mul
 
-/-- **Pullback of ideal sheaves is multiplicative.** On affine opens `V ⊆ f ⁻¹ᵁ U` the pullback
-of an ideal sheaf is the extension of its ideal of sections along `Γ(Y, U) ⟶ Γ(X, V)`, and
-extension of ideals is multiplicative. -/
+/-- **Pullback of ideal sheaves is multiplicative**: `(I * J).comap f = I.comap f * J.comap f`. -/
 theorem comap_mul (f : X ⟶ Y) (I J : Y.IdealSheafData) :
     (I * J).comap f = I.comap f * J.comap f := by
   let ι := Σ' (U : Y.affineOpens) (V : X.affineOpens), V.1 ≤ f ⁻¹ᵁ U.1

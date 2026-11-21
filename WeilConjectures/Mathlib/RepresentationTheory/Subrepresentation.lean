@@ -53,13 +53,6 @@ quotient is the honest subquotient `S / U`.
   finite-dimensional representation has an irreducible quotient.
 * `Subrepresentation.exists_subquotient_tprod_equiv`: every irreducible subquotient of `ρ ⊗ σ` is
   a subquotient of `V_i ⊗ E_j` for irreducible subquotients `V_i` of `ρ` and `E_j` of `σ`.
-
-## Blueprint
-
-`Subrepresentation.exists_subquotient_tprod_equiv` and the lemmas it rests on implement the parts
-`lemma-tensor-exterior-powers-filtered-representations--1` and
-`lemma-tensor-exterior-powers-filtered-representations--3` of
-`lemma-tensor-exterior-powers-filtered-representations--3` that `sk-p-tensor` uses.
 -/
 
 @[expose] public section
@@ -286,7 +279,8 @@ theorem dualAnnihilatorToDualSubquotient_surjective {U S : Subrepresentation ρ}
   exact ⟨⟨g, hgU⟩, Submodule.linearMap_qext _ hg⟩
 
 /-- **The contragredient of a subquotient.** For subrepresentations `U ≤ S`, the subquotient
-`U^⊥ / S^⊥` of the contragredient representation is the contragredient of the subquotient `S / U`. -/
+`U^⊥ / S^⊥` of the contragredient representation is the contragredient of the subquotient
+`S / U`. -/
 noncomputable def subquotientDualEquiv {U S : Subrepresentation ρ} (h : U ≤ S) :
     (U.dualAnnihilator.subquotient S.dualAnnihilator).Equiv (S.subquotient U).dual :=
   .mk ((Submodule.quotEquivOfEq _ _ (ker_dualAnnihilatorToDualSubquotient U S).symm).trans
@@ -708,8 +702,7 @@ open TensorProduct
 
 /-- Peeling off the first factor of a tensor product, for a subrepresentation `A`: every
 irreducible subquotient of `A ⊗ σ` is equivalent to a subquotient of `(SV / UV) ⊗ σ` for an
-irreducible subquotient `SV / UV` of `ρ`. The proof runs along a composition series of `A`,
-using the right exactness of `- ⊗ σ`. -/
+irreducible subquotient `SV / UV` of `ρ`. -/
 theorem exists_subquotient_tprod_equiv_of_subrepresentation [FiniteDimensional k V]
     (A : Subrepresentation ρ) {U S : Subrepresentation (A.toRepresentation.tprod σ)}
     (hirr : (S.subquotient U).IsIrreducible) :

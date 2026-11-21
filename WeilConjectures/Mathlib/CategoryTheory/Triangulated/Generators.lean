@@ -23,8 +23,6 @@ isomorphism when `P` is a classical generator
 
 This only propagates *invertibility*: a natural transformation is not determined by its
 values on a generating class.
-
-This is blueprint `lemma-checking-isomorphisms-constructible-complexes--1`.
 -/
 
 @[expose] public section
@@ -48,9 +46,8 @@ instance (τ : F₁ ⟶ F₂) : τ.isoLocus.IsStableUnderRetracts where
 
 instance (τ : F₁ ⟶ F₂) : τ.isoLocus.IsClosedUnderIsomorphisms := inferInstance
 
-/-- Part of blueprint `lemma-checking-isomorphisms-constructible-complexes--1`: a natural
-transformation which is an isomorphism on `Y` is an isomorphism on every retract of `Y`, for
-instance on every direct summand of `Y`. -/
+/-- A natural transformation which is an isomorphism on `Y` is an isomorphism on every retract
+of `Y`, for instance on every direct summand of `Y`. -/
 lemma isIso_app_of_retract (τ : F₁ ⟶ F₂) {X Y : C} (h : Retract X Y) [IsIso (τ.app Y)] :
     IsIso (τ.app X) :=
   τ.isoLocus.prop_of_retract h (inferInstanceAs (IsIso (τ.app Y)))
@@ -60,9 +57,8 @@ section Shift
 variable [HasShift C ℤ] [HasShift D ℤ] [F₁.CommShift ℤ] [F₂.CommShift ℤ]
   (τ : F₁ ⟶ F₂) [NatTrans.CommShift τ ℤ]
 
-/-- Part of blueprint `lemma-checking-isomorphisms-constructible-complexes--1`: a natural
-transformation compatible with the shifts is an isomorphism on `X⟦n⟧` if and only if it is an
-isomorphism on `X`. -/
+/-- A natural transformation compatible with the shifts is an isomorphism on `X⟦n⟧` if and only
+if it is an isomorphism on `X`. -/
 lemma isIso_app_shift_iff (X : C) (n : ℤ) : IsIso (τ.app (X⟦n⟧)) ↔ IsIso (τ.app X) := by
   rw [NatTrans.app_shift τ n X]
   constructor

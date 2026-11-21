@@ -53,11 +53,10 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X�
   [HasInvertibleExponent Λ f.geometricFiber]
   [HasCompactification f.geometricFiberToAlgebraicClosure]
 
-/-- Blueprint `proposition-purity-trace-commute-frobenius` (Weil equivariance of purity and
-trace, with the Tate datum `definition-weil-structure--1`), for the geometric fibre
-`a : X ⟶ Spec k̄` of a smooth separated `𝔽_q`-scheme of finite type and relative dimension `d`, in
-untwisted form: there are a Tate orientation `γ` of `a` and a Weil datum `τ` on `Λ_{k̄}(-d)` for the
-geometric Frobenius of `Spec k̄`, on whose sections Frobenius acts by `q^d`, such that the untwisted
+/-- **Weil equivariance of the smooth trace**, for the geometric fibre `a : X ⟶ Spec k̄` of a
+smooth separated `𝔽_q`-scheme of finite type and relative dimension `d`, in untwisted form: there
+are a Tate orientation `γ` of `a` and a Weil datum `τ` on `Λ_{k̄}(-d)` for the geometric
+Frobenius of `Spec k̄`, on whose sections Frobenius acts by `q^d`, such that the untwisted
 smooth trace of `γ` is a morphism of Weil objects from the datum induced by the canonical datum of
 `Λ_X` (through `Ra_!` and the shift by `2d`) to `τ`. -/
 theorem exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace :

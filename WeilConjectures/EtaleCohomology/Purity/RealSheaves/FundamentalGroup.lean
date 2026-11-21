@@ -15,9 +15,9 @@ public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 An `AlgebraicGeometry.WeilGroup` is presented through the étale fundamental group
 `π₁(C₀, s)` of the curve `C₀` over `K`, and its geometric part `ker deg` is the kernel of
 `π₁(C₀, s) → Gal(K̄ / K)`. That this kernel is the étale fundamental group of the *geometric*
-curve `C = C₀ ×_K K̄` is the homotopy exact sequence. The rank-one purity statements of
-`theorem-rank-one-sheaves-have-finite` use the geometric curve: they compare Frobenius-fixed classes
-in `H¹(C, ℤ / ℓⁿ)` with homomorphisms on `ker deg`.
+curve `C = C₀ ×_K K̄` is the homotopy exact sequence. The rank-one purity statements (finiteness of
+the geometric image of rank-one sheaves) use the geometric curve: they compare Frobenius-fixed
+classes in `H¹(C, ℤ / ℓⁿ)` with homomorphisms on `ker deg`.
 
 This file states that identification as `AlgebraicGeometry.WeilGroup.IsEtaleQuotient`: the
 geometric part of `W` is isomorphic, as a topological group, to a fundamental group
@@ -67,11 +67,7 @@ consists of
 * an isomorphism of topological groups `π : G ≃ W.geometric`;
 * a transport `τ : F_s ∘ g_* ≅ F_s` of the fibre functor along the geometric Galois Frobenius
   `g` of `C`, with the induced map `σ : G → G`, `τ (h • x) = σ h • τ x`;
-* an element `w` of degree `± 1` of `W` with `π (σ h) = w π(h) w⁻¹`.
-
-For the Weil group `W(C₀, s) ⊆ π₁(C₀, s)` itself, `π` is the identity of `π₁(C, s)`, `τ` is the
-action of a lift `γ` of Frobenius on fibres, and `w = γ ^ (± 1)`, the sign depending on the
-conventions for `γ` and `g`. -/
+* an element `w` of degree `± 1` of `W` with `π (σ h) = w π(h) w⁻¹`. -/
 structure EtaleQuotientData (W : WeilGroup p) where
   /-- The geometric curve is connected. -/
   [connectedSpace : ConnectedSpace p.geometricFiber]
@@ -161,10 +157,7 @@ theorem conj_invariant_of_conj_invariant_frobeniusLift {A : Type*} [CommGroup A]
 Let `W` be the Weil group of a smooth geometrically connected curve `C₀ / 𝔽_q`, linked to the
 étale fundamental group (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`), and `ℓ ≠ char 𝔽_q`.
 A continuous homomorphism `b : π₁(C) → ℤ_ℓ` invariant under conjugation by the Frobenius lift
-is trivial. Its reductions modulo `ℓⁿ` are classes in `H¹(C, ℤ / ℓⁿ) = Hom_cont(π₁(C), ℤ / ℓⁿ)`
- which are fixed
-by the Frobenius and compatible in `n`; by blueprint `proposition-no-fixed-class-degree-one--1`
-they vanish. -/
+is trivial. -/
 theorem eq_one_of_conj_invariant [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
     [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] (b : W.geometric →ₜ* Multiplicative ℤ_[l])
     (hb : ∀ g h : W.geometric, (h : W.carrier) = W.frobeniusLift⁻¹ * g * W.frobeniusLift →

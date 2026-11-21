@@ -297,11 +297,8 @@ noncomputable def dualizingComplexIsoUpperStar :
 
 /-- **Restriction of biduality to an open subscheme**: for an open immersion `j : U ⟶ X`, the
 restriction `Lj^* δ_K` of the double-dual morphism of `K` is an isomorphism if and only if the
-double-dual morphism `δ_{Lj^* K}` is, under
-the identification `Lj^* ω_X ≅ ω_U` (`dualizingComplexIsoUpperStar`) and the
-commutation of `Lj^*` with internal homs
-(`isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion`). The compatibility of
-`Lj^*` with the Koszul braidings is `boundedConstructibleUpperStar_map_braiding_hom_δ`. -/
+double-dual morphism `δ_{Lj^* K}` is, under the identification `Lj^* ω_X ≅ ω_U`
+(`dualizingComplexIsoUpperStar`) and the commutation of `Lj^*` with internal homs. -/
 theorem isIso_map_verdierBiduality_iff_of_isOpenImmersion
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((boundedConstructibleUpperStar _ ℓ j).map (verdierBiduality ℓ K)) ↔

@@ -18,9 +18,8 @@ public import WeilConjectures.Tactic.ExactByKernel
 The exceptional projection morphism `PF_f : Rf_! T ⊗ M ⟶ Rf_! (T ⊗ Lf^* M)` of bounded
 constructible `ℚ̄_ℓ`-complexes is compatible with the composition isomorphisms
 `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`
-(`ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft`,
-blueprint
-`prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2).
+(`ProEtale.CondensedRing.boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft`;
+SGA 4, Exposé XVII, 5.2.2).
 
 The composition isomorphism of the lower shriek is computed through a triangle of
 compactifications and the composition isomorphism `compIso` of the exchange formalism of bounded

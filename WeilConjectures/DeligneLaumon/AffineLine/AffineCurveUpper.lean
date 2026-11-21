@@ -220,12 +220,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiv
 /-- **Degree one through a quasi-finite map to `ℙ¹`.** Let `U` be a separated `k₀`-scheme of
 finite type, `𝓕` a Weil sheaf on `U`, punctually `ι`-pure of weight `w`, `H : U ⟶ ℙ¹` a separated
 quasi-finite morphism and `W ⊆ ℙ¹` an open containing `∞`, with finite complement, on which
-`H₀!𝓕` is lisse. Then `H_c^1(U, 𝓕)` has weights at most `w + 1`:
-`H_c^1(U, 𝓕) = H_c^1(ℙ¹, H₀!𝓕)` is a quotient of `H_c^1(W, (H₀!𝓕)|_W)`, the finite complement of
-`W` having no `H_c^1`, and
-`hasWeightsAtMostOver_compactlySupportedCohomology_one_of_opens_projectiveLine`
-applies on `W`. No constant field extension and no homography of `ℙ¹` moving a point to `∞`
-are needed. -/
+`H₀!𝓕` is lisse. Then `H_c^1(U, 𝓕)` has weights at most `w + 1`. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_projectiveLine
     {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (U ↘ Spec (CommRingCat.of k₀))]

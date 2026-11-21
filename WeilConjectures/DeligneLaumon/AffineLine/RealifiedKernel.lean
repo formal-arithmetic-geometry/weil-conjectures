@@ -78,11 +78,7 @@ theorem exists_frobeniusEnd_stalk_fourierKernel (z : (affinePlane k₀).finitePo
 /-- **The traces of the local Frobenius of the kernel sheaf `𝒦_ψ ⊗ pr₁^* F`.** At a closed
 point `z` of the Fourier square over the closed point `x = pr₁ z` of the line, the trace of the
 `n`-th power of the local Frobenius of `𝒦_ψ ⊗ pr₁^* F` is `ψ(c) ^ (r n) tr (Fₓ ^ (e n))`, with
-`c`, `r` and `e` independent of `ψ` and `F`: the stalk is `Hom(𝒦_ψ^∨, (pr₁^* F)_z)`
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_tensorObj`), the Frobenius of the line
-`(𝒦_ψ^∨)_z` is multiplication by `ψ(c) ^ (-r)`
-(`AlgebraicGeometry.WeilSheaf.exists_frobeniusEnd_stalk_fourierKernel`), and the local
-Frobenius of `pr₁^* F` at `z` has the characteristic polynomial of `Fₓ ^ e`. -/
+`c`, `r` and `e` independent of `ψ` and `F`. -/
 theorem exists_trace_frobeniusEnd_pow_stalk_fourierKernelTensor
     (z : (affinePlane k₀).finitePoints) :
     ∃ (c : k₀) (r e : ℕ), ∀ (ψ : AddChar k₀ (PadicAlgCl l))

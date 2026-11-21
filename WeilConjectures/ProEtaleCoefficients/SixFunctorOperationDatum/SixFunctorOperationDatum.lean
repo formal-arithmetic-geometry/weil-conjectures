@@ -34,7 +34,7 @@ open AlgebraicallyClosedCoefficients (Coefficient)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- All coefficient levels with the finite, completed, localized and common-stage
-normalizations. Source: all five clauses of def-fix-six-functor-datum. -/
+normalizations. -/
 structure SixFunctorOperationDatum
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -93,7 +93,7 @@ abbrev SixFunctorOperationDatum.finiteTensor
     (X : SixFunctorSpace D) := S.finiteTensorDomainStage X
 
 /-- The finite-Tor domain is the recorded predicate, restricted to the bounded
-constructible category. Source: the initial domains. -/
+constructible category. -/
 def SixFunctorOperationDatum.finiteTorDomain
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]

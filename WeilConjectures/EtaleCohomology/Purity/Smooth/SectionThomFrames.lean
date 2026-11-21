@@ -28,8 +28,8 @@ By the co-projection formula this computes the section invariant, `𝒞(g, s) �
 (`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_twistShift_of_iso`).
 
 Applied to the diagonal of a smooth morphism, a section of the first projection, this is
-smooth purity (`proposition-smooth-purity-finite-coefficients`,
-`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`).
+smooth purity with finite coefficients
+(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`).
 
 ## Main statements
 
@@ -60,9 +60,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} (c : �
 
 /-- **The coordinate frames of a section are Thom frames.** Every point of `B` lies in the zero
 locus of a Zariski frame of `s` given by étale coordinates `x₁, …, x_c` on an affine open
-`U ⊆ V`, and the adjoint of its class is an isomorphism: the class is the restriction, along the
-étale chart `U ⟶ 𝔸^c_W`, of the Thom class of the zero section of `𝔸^c_W`, with `W ⊆ B` affine
-and hence separated and locally of finite type over the field. -/
+`U ⊆ V`, and the adjoint of its class is an isomorphism. -/
 theorem hasThomFrames_of_section [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]
     (hs : s ≫ g = 𝟙 B) {k : Type u} [Field k] (aB : B ⟶ Spec (.of k)) [IsSeparated aB]
     [LocallyOfFiniteType aB] [HasInvertibleExponent Λ V] :
@@ -117,12 +115,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_tateObject_of_section [HasKummerCla
 dimension `c` with a closed section `s`, `B` separated and locally of finite type over a field,
 and a normalized Tate twist,
 
-`𝒞(g, s) = Ls^* ω_g ≅ Λ_B(c)[2c]`.
-
-The twist underlies a normalized rank-one datum, for which `Rs^! (Λ_V(c)[2c]) ≅ Λ_B`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_tateObject_of_section`), and this
-determines the section invariant
-(`AlgebraicGeometry.Etale.nonempty_iso_sectionInvariant_twistShift_of_iso`). -/
+`𝒞(g, s) = Ls^* ω_g ≅ Λ_B(c)[2c]`. -/
 theorem nonempty_iso_sectionInvariant_twistShift_of_section [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ] [HasCompactification g] (hs : s ≫ g = 𝟙 B) {k : Type u}
     [Field k] (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]

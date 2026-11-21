@@ -12,7 +12,7 @@ import Mathlib.FieldTheory.PurelyInseparable.Tower
 /-!
 # Separable tensor purely inseparable field extensions
 
-Source: literature/stacks-project/algebra.tex, Lemma Tag 07QH.
+Source: Stacks Project, Algebra, Lemma Tag 07QH.
 -/
 
 @[expose] public section
@@ -28,7 +28,7 @@ The tensor product of a separable algebraic field extension with a finite purely
 inseparable extension is a field and is finite purely inseparable over the first
 field, with the expected dimension.
 
-Source: literature/stacks-project/algebra.tex, Lemma Tag 07QH, proof first paragraph.
+Source: Stacks Project, Algebra, Lemma Tag 07QH, proof first paragraph.
 -/
 theorem separableTensor_purelyInseparable_isField
     (k : Type u) (k' : Type v) (L : Type w) [Field k] [Field k'] [Field L]

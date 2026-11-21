@@ -302,9 +302,8 @@ theorem galoisUnitsHomogeneousCocyclesEquivTwoCocycle_apply
   rfl
 
 /-- The homogeneous degree-two cohomology model agrees with the explicit inhomogeneous
-continuous cocycle quotient. This is a comparison of two continuous cochain models and
-involves no etale sheaves or sheaf cohomology. The equivalence is induced by the change of
-variables `galoisUnitsHomogeneousCocyclesEquivTwoCocycle` on cocycles
+continuous cocycle quotient. The equivalence is induced by the change of variables
+`galoisUnitsHomogeneousCocyclesEquivTwoCocycle` on cocycles
 (see `galoisUnitsH2EquivTwoCocycleClasses_π`).
 
 Source: Stacks Project, Section 0DVG, inhomogeneous differential. -/

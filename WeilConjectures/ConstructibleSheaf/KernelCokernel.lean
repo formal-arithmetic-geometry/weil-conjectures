@@ -35,6 +35,13 @@ For a finite ring `Λ`, an extension of finite locally constant sheaves is finit
 constant (`IsFiniteLocallyConstantSheaf.of_shortExact`): étale locally the outer terms are
 constant, a presentation of the quotient lifts to the extension, and the extension is the
 constant sheaf at the pushout of the presentation, by the five lemma.
+
+## Implementation details
+
+Such an extension need not be étale locally split: over `Λ = ℤ/4`, the constant extension
+`0 ⟶ ℤ/2 ⟶ ℤ/4 ⟶ ℤ/2 ⟶ 0` does not split on any nonempty étale scheme. This is why
+`IsFiniteLocallyConstantSheaf.of_shortExact` shows instead that the extension is étale locally
+the constant sheaf at an extension of modules, rather than using the torsor of splittings.
 -/
 
 @[expose] public section
@@ -402,9 +409,7 @@ variable {X Y : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
 `S.X₁ ≅ M_Y` and `S.X₃ ≅ N_Y`, let `p : Λᵇ ⟶ N` be surjective with kernel `K`, and let `V` be an
 étale `Y`-scheme over which the images of the basis vectors under `p` lift to sections `y i` of
 `S.X₂`, and such that the induced map `K_V ⟶ S.X₁|_V` is the constant map at a linear map
-`α : K ⟶ M`. Then `S.X₂|_V` is the constant sheaf at the pushout `L` of `α` and `K ⟶ Λᵇ`: the
-constant sequence `0 ⟶ M_V ⟶ L_V ⟶ N_V ⟶ 0` maps to the restriction of `S`, by isomorphisms on
-the outer terms, so the middle map is an isomorphism by the five lemma. -/
+`α : K ⟶ M`. Then `S.X₂|_V` is the constant sheaf at the pushout `L` of `α` and `K ⟶ Λᵇ`. -/
 lemma isConstant_over_of_shortExact_of_lift
     {S : ShortComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     {M N : ModuleCat.{u + 1} Λ}
@@ -482,10 +487,7 @@ lemma isConstant_over_of_shortExact_of_lift
 short exact sequence `0 ⟶ S.X₁ ⟶ S.X₂ ⟶ S.X₃ ⟶ 0` of sheaves of modules on `Y_ét` with
 `S.X₁ ≅ M_Y` and `S.X₃ ≅ N_Y`, `N` finitely generated, every object `T` of the small étale site
 has a covering sieve over whose non-degenerate members `V` the restriction of `S.X₂` is
-constant. Choose a surjection `p : Λᵇ ⟶ N` with kernel `K`; the images of the basis vectors
-lift to sections of `S.X₂` locally (`S.X₂ ⟶ S.X₃` being locally surjective), the finitely many
-resulting sections of `S.X₁ ≅ M_Y` indexed by the finite set `K` are locally constant, and then
-`isConstant_over_of_shortExact_of_lift` applies. -/
+constant. -/
 lemma exists_isConstant_over_of_shortExact [Finite Λ]
     {S : ShortComplex (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     {M N : ModuleCat.{u + 1} Λ} [Module.Finite Λ N]
@@ -600,22 +602,10 @@ lemma exists_isConstant_over_of_shortExact [Finite Λ]
     exact hP g hg f hf hV⟩
 
 
-/-- Kernels, cokernels and extensions of finite locally constant sheaves.
-
-**The extension clause.** For a finite ring `Λ`, the middle term of a short exact sequence of
-sheaves of `Λ`-modules whose outer terms are finite locally constant is finite locally constant.
-On an étale cover trivialising the outer terms, `S.X₁ ≅ M_U` and `S.X₃ ≅ N_U` with `M`, `N`
-finite; choosing a presentation `0 ⟶ K ⟶ Λᵇ ⟶ N ⟶ 0`, the generators of `N` lift to sections
-of `S.X₂` étale locally and the induced map `K_U ⟶ M_U` is étale locally constant, at a linear
-map `α`; there `S.X₂` is the constant sheaf at the pushout of `α` and `K ⟶ Λᵇ`, by the five
-lemma (`AlgebraicGeometry.Scheme.exists_isConstant_over_of_shortExact`). The stalks of `S.X₂`
-are extensions of finitely generated modules, hence finitely generated.
-
-Implementation note: the blueprint argues that the extension is étale locally split, the sheaf
-of splittings being a torsor under `Hom_Λ(N, M)`. This fails: over `Λ = ℤ/4`, the constant
-extension `0 ⟶ ℤ/2 ⟶ ℤ/4 ⟶ ℤ/2 ⟶ 0` does not split on any nonempty étale scheme. The proof
-above shows instead that the extension is étale locally the constant sheaf at an extension of
-modules. -/
+/-- **Extensions of finite locally constant sheaves.** For a finite ring `Λ`, the middle term of a
+short exact sequence of sheaves of `Λ`-modules whose outer terms are finite locally constant is
+finite locally constant.
+-/
 theorem IsFiniteLocallyConstantSheaf.of_shortExact [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)

@@ -80,8 +80,7 @@ noncomputable def selector (E : Set (PrimeSpectrum R)) (hE : Topology.IsConstruc
   (colimit.ι (diagram (A := R)) (selectorIndex E hE)).hom
     (fun F ↦ if F.val ⊆ E then 1 else 0)
 
-/-- The selector is idempotent. Proof: each stage coordinate is zero or one, so its square
-is itself; the colimit inclusion preserves multiplication. -/
+/-- The selector is idempotent. -/
 theorem selector_idempotent (E : Set (PrimeSpectrum R)) (hE : Topology.IsConstructible E) :
     IsIdempotentElem (selector E hE) := by
   classical
@@ -98,9 +97,7 @@ Here neighbourhood means a constructible superset, exactly as in the source. -/
 abbrev Neighborhood (T : Set (PrimeSpectrum R)) :=
   OrderDual {E : Set (PrimeSpectrum R) // Topology.IsConstructible E ∧ T ⊆ E}
 
-/-- The neighbourhood index is filtered. Proof: the whole spectrum is a neighbourhood;
-the intersection of two neighbourhoods contains `T`, is constructible, and is an upper
-bound for reverse inclusion. The preorder has at most one arrow between any two objects. -/
+/-- The neighbourhood index is filtered. -/
 theorem neighborhood_isFiltered (T : Set (PrimeSpectrum R)) : IsFiltered (Neighborhood T) := by
   refine { cocone_objs := ?_, cocone_maps := ?_, nonempty := ?_ }
   · intro E F

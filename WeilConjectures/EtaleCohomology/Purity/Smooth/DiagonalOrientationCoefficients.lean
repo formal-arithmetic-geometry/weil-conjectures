@@ -321,10 +321,7 @@ variable {X Z : Scheme.{u}} [HasInvertibleExponent Λ X] [HasInvertibleExponent 
 `X` locally of finite type over a field. If the change of coefficients carries the frame class
 `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ` of every Zariski frame to the frame class over `Λ'` (the
 compatibility of the Kummer classes), then it carries the fundamental class `[Z ⊂ X]` over `Λ`
-to the fundamental class over `Λ'`: the latter is the unique class restricting to the frame
-classes (`AlgebraicGeometry.Etale.HasThomFrames.eq_of_frameRestriction_eq`), and the change of
-coefficients commutes with restriction to frames
-(`AlgebraicGeometry.Etale.SupportedCoefficientChange.frameRestriction_mapSupportedClass`). -/
+to the fundamental class over `Λ'`. -/
 theorem mapSupportedClass_thomFundamentalClass (hT : HasThomFrames Λ c i)
     (hT' : HasThomFrames Λ' c i) (hR : HasRegularZariskiFrames c i) {k : Type u} [Field k]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
@@ -439,9 +436,7 @@ immersion `s : B ⟶ V`: for identifications `vω : Ψ ω ≅ ω'` and `vT : Ψ 
 objects, the isomorphisms `Ls^* ω ≅ Ls^* T`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso`, built from the
 tensor maps `Rs^! M ⊗ Ls^* N ⟶ Rs^!(M ⊗ N)`, the symmetry and the unitors of `⊗ᴸ`) built from
-corresponding isomorphisms `Rs^! T ≅ Λ_B`, `Rs^! ω ≅ Λ_B` over `Λ` and `Λ'` correspond. This
-holds for a change of coefficients compatible with the monoidal structures and the tensor maps
-of `Rs^!`. -/
+corresponding isomorphisms `Rs^! T ≅ Λ_B`, `Rs^! ω ≅ Λ_B` over `Λ` and `Λ'` correspond. -/
 def PreservesSectionInvariantIso {V B : Scheme.{u}} (s : B ⟶ V) [IsClosedImmersion s] : Prop :=
   ∀ {ω T : 𝐃(V, Λ)} {ω' T' : 𝐃(V, Λ')} (vω : (Φ.functor V).obj ω ≅ ω')
     (vT : (Φ.functor V).obj T ≅ T') (hω : DerivedCategory.isInvertible Λ V ω)
@@ -474,8 +469,7 @@ coefficients.** Let `g : V ⟶ B` be smooth of relative dimension `c` with a clo
 `B` separated and locally of finite type over a field, and `vω : Ψ ω_g ≅ ω'_g` an
 identification of the dualizing complexes. Assume
 * `hframe`: the change of coefficients carries the frame classes of `s` over `Λ` to those
-  over `Λ'` (this gives the compatibility of the purity isomorphism of `s`,
-  `SupportedCoefficientChange.map_rightDerivedUpperShriekTateObjectIsoOfSection`);
+  over `Λ'`;
 * `hε`: the isomorphisms `Rs^! ω_g ≅ Λ_B` (composition of `R^!`,
   `AlgebraicGeometry.Etale.rightDerivedUpperShriekDualizingComplexIsoOfCompEqId`) correspond;
 * `hL`: the change of coefficients preserves the section invariant construction at `s`
@@ -510,8 +504,7 @@ theorem map_sectionInvariantTwistShiftIsoOfSection {V B : Scheme.{u}} (c : ℕ) 
     Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% hτ,
     reassoc_of% (hL vω (Φ.tateShiftIso V c) _ _ _ _ _ _ _ _ hθ hε)]
 
-/-- Blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`
+/-- Change of coefficients in purity
 
 **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with the change of
 coefficients.** Let `f : X ⟶ Y` be smooth separated of relative dimension `d`, `Y` separated and
@@ -526,9 +519,7 @@ dualizing complexes. Assume
 * `hL`: the change of coefficients preserves the section invariant construction at `Δ`.
 
 Then the canonical orientations `θ_f` (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`)
-over `Λ` and `Λ'` correspond: `vω ≫ θ'_f = Ψ θ_f ≫ (Ψ(Λ_X(d)[2d]) ≅ Λ'_X(d)[2d])`. This is the
-hypothesis `hθ` of `AlgebraicGeometry.Etale.map_smoothPurityIso_hom_comp` for the canonical
-orientation. -/
+over `Λ` and `Λ'` correspond: `vω ≫ θ'_f = Ψ θ_f ≫ (Ψ(Λ_X(d)[2d]) ≅ Λ'_X(d)[2d])`. -/
 theorem map_dualizingComplexTwistShiftIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f] [HasCompactification f] [IsSeparated f]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {k : Type u} [Field k]

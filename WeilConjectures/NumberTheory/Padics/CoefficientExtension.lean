@@ -137,8 +137,7 @@ noncomputable def coefficientExtensionUniformizer (l : ℕ) [Fact l.Prime] (E : 
   (coefficientExtensionIntegers_dvr l E).choose_spec
     |>.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose
 
-/-- The ideal `ϖ_Eⁿ 𝒪_E`. We use `(span {ϖ_E})ⁿ`, equal to `span {ϖ_Eⁿ}` by
-`Ideal.span_singleton_pow`, and equal to `𝔪_Eⁿ` since the chosen element generates `𝔪_E`. -/
+/-- The ideal `ϖ_Eⁿ 𝒪_E = (span {ϖ_E})ⁿ`, equal to `span {ϖ_Eⁿ}` and to `𝔪_Eⁿ`. -/
 noncomputable def coefficientExtensionIdeal (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
     Ideal (coefficientExtensionIntegers l E) :=

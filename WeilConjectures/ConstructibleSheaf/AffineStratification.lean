@@ -18,7 +18,7 @@ of the underlying space of `Spec R` is the underlying stratification of a scheme
 (`AlgebraicGeometry.Scheme.Stratification.ofAffine`). With the descent of stratifications to a
 finitely generated subring, every stratification of `Spec A` comes from a scheme stratification
 of a Noetherian affine scheme (`AlgebraicGeometry.exists_finset_schemeStratification`), which is
-the stratification part of Step 2 of `lemma-finiteness-small-etale-topoi--3`.
+the stratification input to the Noetherian approximation of constructible sheaves.
 -/
 
 @[expose] public section

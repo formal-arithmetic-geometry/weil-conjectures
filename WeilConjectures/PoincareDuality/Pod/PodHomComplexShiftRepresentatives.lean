@@ -160,7 +160,7 @@ abbrev PodModules := SheafOfModules.{max s t r}
   ((sheafCompose J (forget₂ CommRingCat.{max s t r} RingCat.{max s t r})).obj A)
 
 /-- The canonical signed Hom-complex shift, fixed by every product projection.
-Source: node proof step 6, Stacks 08JA. -/
+Source: Stacks 08JA. -/
 theorem podHomComplexShift_existsUnique
     (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) (m n : ℤ) :
     ∃! e : (homComplex.{s, t, max s t r, max s t r} (R := A) K I)⟦n - m⟧ ≅
@@ -244,7 +244,7 @@ def podHomAugmentation (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) :
     ((CochainComplex.toKInjectiveResolution _).app I)
 
 /-- The K-injective representative model is fixed by the actual augmentation.
-Source: Stacks 0A95, node proof steps 3 and 6. -/
+Source: Stacks 0A95. -/
 theorem podKInjectiveHomModel_existsUnique
     (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) [I.IsKInjective] :
     ∃! e : (derivedInternalHomOfUniverses.{s, t, r, w} J A).obj

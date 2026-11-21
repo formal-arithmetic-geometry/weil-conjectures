@@ -229,12 +229,7 @@ section IsReduced
 
 /-- Let `P = (f, g)` be a standard etale pair over a reduced ring `R`, and `a ∈ R[X]/f`. If
 `gʲ aᵐ = 0` in `R[X]/f`, then already `gⁿ a = 0` with `n = deg f`; in other words, the kernel of
-`R[X]/f ⟶ (R[X]/f)[1/g]` contains every nilpotent class and is killed by `gⁿ`.
-
-Over each minimal prime `p` of `R` the localisation `R_p` is a field, over which
-`(R_p[X]/f)[1/g]` is etale, hence reduced; so `gᵏ a = 0` in the `n`-dimensional `R_p`-vector
-space `R_p[X]/f` for some `k`, hence for `k = n`. The remainder of `gⁿ a` modulo the monic `f`
-therefore has all its coefficients in every minimal prime of `R`, which intersect to `0`. -/
+`R[X]/f ⟶ (R[X]/f)[1/g]` contains every nilpotent class and is killed by `gⁿ`. -/
 theorem mk_g_pow_natDegree_mul_eq_zero [IsReduced R] (P : StandardEtalePair R)
     (a : AdjoinRoot P.f) (j m : ℕ) (h : AdjoinRoot.mk P.f P.g ^ j * a ^ m = 0) :
     AdjoinRoot.mk P.f P.g ^ P.f.natDegree * a = 0 := by
@@ -343,10 +338,7 @@ theorem existsUnique_algHom_and_hasMap {R : Type*} [CommRing R] (P : StandardEta
 end StandardEtalePair
 
 /-- **The Kummer algebra is etale.** For `n ≠ 0` and `n`, `t` invertible in `R`, the algebra
-`R[X]/(Xⁿ - t)` is etale over `R`: it is the standard etale algebra of the pair `(Xⁿ - t, 1)`,
-the derivative `nXⁿ⁻¹` of `Xⁿ - t` being invertible modulo `Xⁿ - t`.
-
-This is the unramifiedness step of the proof of exactness of the Kummer sequence. -/
+`R[X]/(Xⁿ - t)` is etale over `R`. -/
 theorem AdjoinRoot.etale_X_pow_sub_C {n : ℕ} {t : R} (hn₀ : n ≠ 0) (hn : IsUnit (n : R))
     (ht : IsUnit t) : Algebra.Etale R (AdjoinRoot (X ^ n - C t)) :=
   Algebra.Etale.of_equiv (StandardEtalePair.ofXPowSubCRingEquiv hn₀ hn ht)

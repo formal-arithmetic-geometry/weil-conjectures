@@ -44,7 +44,7 @@ open scoped TensorProduct
 namespace WeilConjectures
 
 /-- The tensor lift uses the existing product of fixed pairs and the existing
-transport. Source: blueprint sec-Weil-complexes, proof sentence 1. -/
+transport. -/
 def PodTensorWeilLiftSpec
     {C : Type a} [Category.{b} C] (P : C ⥤ C) (T : C × C ⥤ C)
     (μ : T ⋙ P ≅ P.prod P ⋙ T) : Prop :=
@@ -71,7 +71,7 @@ def podWeilHomPairForget {C : Type a} [Category.{b} C] (P : C ⥤ C)
 
 /-- The Hom structure is H(theta_M inverse,theta_N) after the canonical comparison.
 The functor is defined only on the original permitted pairs, and forgetting fixes
-its entire object and arrow action. Source: blueprint sec-Weil-complexes, sentence 1. -/
+its entire object and arrow action. -/
 def PodHomWeilLiftSpec
     {C : Type a} [Category.{b} C] (P : C ⥤ C) (J : ObjectProperty (Cᵒᵖ × C))
     (H : J.FullSubcategory ⥤ C)
@@ -162,7 +162,7 @@ def podRationalSquarePullbackComponent
     pullbackTensorRationalComposition l E gY f K
 
 /-- The same square component in the actual common-stage category, through the
-canonical common-stage compositors. Source: blueprint sec-Weil-complexes, sentence 1. -/
+canonical common-stage compositors. -/
 def podCommonSquarePullbackComponent
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {X Y : Scheme.{u}}
@@ -383,43 +383,7 @@ private theorem pod_field_transport
 /-- Semilinear Frobenius geometry, exact field transport, and the canonical tensor
 and internal-Hom lifts on both models. The covariant lifts, including the specified
 Ex_* and Ex_!, are `pod_supplied_field_operation_lifts`; their explicit object and
-arrow calculation is `pod_covariant_field_operation_lift`.
-
-Proof (the original nine steps, with existing field-transport records reused):
-1. Apply lem-weil-frobenius-square-cartesian to the geometric scalar extension.
-The upper structure map is g_T followed by a_T. Commutativity and f being over k
-make the left vertical arrow a map between precisely those restructured corners;
-no k-linearity of g_T is asserted, including when a model is nonseparated.
-2. The exact inverse-image equivalence on completed modules identifies integral
-pullback with termwise transport. Compose lambda for g and its inverse with the inverse-image
-counit to obtain the normalized epsilon and its reverse.
-3. Localize the integral inverse equations linearly on Hom tensor E. At common
-stages represent an arrow over one finite field. Scalar compatibility of the
-inverse identities and the specified
-operation scalar comparisons turn its naturality square into that finite-stage
-square. Identity extensions and tower cocycles preserve its class. Exactness
-comes from the exact module transport, integral triangles and common-stage triangles.
-4. For pullback compose the inverse compositor for (g_X,f) with that for (f,g_Y).
-Integral composition is lem-pod-integral-pullback-composition; its scalar equation
-descends to rational and common stages, with the same comparison on every arrow.
-5. The mate of its inverse is exactly Ex_* of def-exchange-projection. Horizontal
-equivalences make it invertible by lem-weil-mate-iso-along-equivalences. For Ex_!,
-the proper mate is invertible by the same argument; compose it with the supplied
-open comparison and the compactification identifications on the preserved domain.
-6. The covariant calculation is pod_covariant_field_operation_lift. Applying it
-to those comparisons gives pod_supplied_field_operation_lifts, with the actual
-supplied-domain units, counits, compactification and coefficient normalizations.
-7. The canonical tensor comparison is lem-pur-derived-pullback-tensor-iso.
-Tensoring the two structure maps after it gives the tensor lift and its arrow law.
-8. Lem-pod-derived-automorphism-hom-evaluation supplies the evaluation-defined Hom
-comparison, natural on exactly the permitted pairs. Apply the inverse structure
-in the first variable and the forward structure in the second. The inverse
-intertwining equation and comparison naturality give the Hom arrow law.
-9. The forgetful equalities retain every original object and arrow. Finite-Tor
-field categories equal the bounded constructible categories by definition.
-Any previously imposed site-perfect first-variable subdomain remains a restriction
-of the same permitted-pair functor. No new constructibility or triangulation
-of fixed pairs is inferred. -/
+arrow calculation is `pod_covariant_field_operation_lift`. -/
 theorem semilinearFieldOperationLifts
     (X₀ Y₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]

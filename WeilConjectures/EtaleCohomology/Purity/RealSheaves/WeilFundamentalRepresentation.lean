@@ -23,7 +23,7 @@ curve with geometric Galois Frobenius `Fr`, and fix base point data `B`
 (`AlgebraicGeometry.WeilGroup.BasePointData`: a point `t` of `C`, a path `β : F_t ≅ F_{t ≫ Fr}`)
 and a monodromy `M` of lisse sheaves on `C` (`AlgebraicGeometry.ProEtale.LisseMonodromy`).
 
-Following `situation-weil`, a lisse Weil sheaf `ℱ` with Weil structure
+A lisse Weil sheaf `ℱ` with Weil structure
 `φ : Fr^* ℱ ≅ ℱ` gives:
 
 * the geometric fundamental representation `ρ_geom` of `π₁(C, t) = Aut F_t` on the stalk
@@ -201,7 +201,7 @@ theorem frobUnit_conj (F : WeilSheaf K l C) (hF : F.IsLisse) (u : W.carrier)
 /-- **The Weil fundamental representation** of a lisse Weil sheaf: the representation
 `ρ(u γⁿ) = ρ_geom(u) Φⁿ` of the Weil group on the stalk `ℱ_t`, extending the geometric
 fundamental representation by the Frobenius `Φ` of the Weil structure
-(`AlgebraicGeometry.Monodromy.DegreeDatum.lift`, `situation-weil`). -/
+(`AlgebraicGeometry.Monodromy.DegreeDatum.lift`). -/
 noncomputable def fundamentalRep (F : WeilSheaf K l C) (hF : F.IsLisse) :
     Representation (PadicAlgCl l) W.carrier (LisseMonodromy.StalkSpace B.t (F.toLisse hF)) :=
   (Units.coeHom _).comp
@@ -482,10 +482,7 @@ theorem upperStar_comp_lisseFrobStr_of_frobStalk (hM : M.IsEquivalenceAt B.t)
   exact (hf v).symm
 
 /-- **Fullness of the Weil fundamental representation**: a linear map of stalks intertwining the
-Weil fundamental representations is the stalk of a morphism of lisse Weil sheaves. On the
-geometric part it is the stalk of a morphism of lisse sheaves, by
-`proposition-lattices-representations-normal-scheme`; commuting with `Φ`, this morphism commutes
-with the Weil structures. -/
+Weil fundamental representations is the stalk of a morphism of lisse Weil sheaves. -/
 theorem exists_stalkMap_eq (hM : M.IsEquivalenceAt B.t) {X Y : LisseWeilSheaf K l C}
     (φ : LisseMonodromy.StalkSpace B.t (X.obj.toLisse X.property) →ₗ[PadicAlgCl l]
       LisseMonodromy.StalkSpace B.t (Y.obj.toLisse Y.property))
@@ -514,10 +511,7 @@ theorem exists_stalkMap_eq (hM : M.IsEquivalenceAt B.t) {X Y : LisseWeilSheaf K 
 
 /-- **Essential surjectivity of the Weil fundamental representation**: every finite-dimensional
 representation of the Weil group which is continuous on the geometric part is the Weil fundamental
-representation of a lisse Weil sheaf. Its restriction to the geometric part is the monodromy of a
-lisse sheaf `𝒢`, and the action of the lift
-`γ` of the Frobenius defines the Weil structure `Fr^* 𝒢 ≅ 𝒢` through `frobPathStalkIso`
-(`definition-weil-representation--1`, Frobenius descent). -/
+representation of a lisse Weil sheaf. -/
 theorem exists_fundamentalRep_linearEquiv (hM : M.IsEquivalenceAt B.t) (V : Type (u + 1))
     [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
     (ρ : Representation (PadicAlgCl l) W.carrier V) (hρ : ρ.IsContinuousOn W.geometric.subtype) :

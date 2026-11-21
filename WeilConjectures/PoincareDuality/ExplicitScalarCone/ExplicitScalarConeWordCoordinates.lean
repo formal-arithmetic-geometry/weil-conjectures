@@ -222,9 +222,6 @@ The five effectivity hypotheses are at C, U_E C, S_Y C, A, and B respectively.
 Each lists normalization, constructible-complete realization, and invertible counit.
 The primitive realization structures impose the simultaneous quotient and Roos
 normalizations; no finite-level flatness or Tor interval is assumed.
-
-These are whole-system calculations. No faithfulness of the separate finite
-levels, flatness of a ramified quotient map, or additional Tor bound is used.
 -/
 theorem explicitScalarConeWordCoordinates
     [IsIso g]

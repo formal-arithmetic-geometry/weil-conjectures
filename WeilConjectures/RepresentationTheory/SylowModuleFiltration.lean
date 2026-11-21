@@ -14,9 +14,10 @@ public import WeilConjectures.RepresentationTheory.DiscreteContinuousRep
 import WeilConjectures.RepresentationTheory.PrimaryPGroupFiltration
 
 /-!
-# Blueprint statements
+# Filtrations of finite primary discrete modules
 
-theorem-cohomology-curves.
+A finite discrete `ℓ`-primary module over a profinite group has, over an open subgroup of index
+prime to `ℓ`, a finite filtration whose graded pieces are killed by `ℓ` and have trivial action.
 -/
 
 @[expose] public section

@@ -30,6 +30,12 @@ The chain of reductions is:
 
 - `ProEtale.CondensedRing.PadicIntegersRingObj.isIso_verdierBiduality`: biduality for `𝒪_E`.
 - `ProEtale.CondensedRing.isIso_verdierBiduality`: biduality for `ℚ̄_ℓ`.
+
+## Implementation details
+
+The dualizing complex must be taken relative to `Spec k` (or at least to a regular base): for the
+complex `Ra^! ℚ̄_ℓ = ℚ̄_ℓ` relative to `a = 𝟙` on a nodal curve and `K` the skyscraper `ℚ̄_ℓ` at
+the nodal point, `𝔻𝔻K` has rank `9`.
 -/
 
 @[expose] public section
@@ -63,11 +69,7 @@ theorem PadicIntegersRingObj.isIso_verdierBiduality (E : PadicAlgCl.FiniteInterm
 /-- **Constructible Verdier biduality**: the double-dual
 morphism `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for `K` bounded constructible, with
 `ℚ̄_ℓ`-coefficients and `ω_X` the dualizing complex relative to the structure morphism
-`X ⟶ Spec k` (Input 3.3 of the specification).
-
-The dualizing complex must be taken relative to `Spec k` (or at least to a regular base): for the
-complex `Ra^! ℚ̄_ℓ = ℚ̄_ℓ` relative to `a = 𝟙` on a nodal curve and `K` the skyscraper `ℚ̄_ℓ` at
-the node, `𝔻𝔻K` has rank `9`. -/
+`X ⟶ Spec k`. -/
 theorem isIso_verdierBiduality (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso (verdierBiduality ℓ K) :=
   isIso_verdierBiduality_of_integral ℓ

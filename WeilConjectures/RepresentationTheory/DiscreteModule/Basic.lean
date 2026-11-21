@@ -35,8 +35,8 @@ a full subcategory `DiscreteModule G` of `Action AddCommGrpCat G`, which is abel
 
 ## Implementation notes
 
-The blueprint works with discrete modules over a finite
-coefficient ring `A`. We work with `ℤ`-coefficients throughout: a discrete `A`-module with an
+Discrete modules over a finite coefficient ring `A` are treated through their underlying
+abelian groups: we work with `ℤ`-coefficients throughout. A discrete `A`-module with an
 `A`-linear action is in particular a discrete `G`-module, and all statements we need (vanishing of
 cohomology of torsion modules) are about the underlying abelian groups. For a module killed by
 `n`, such as an `A`-module with `n = 0` in `A`, the cohomology groups are killed by `n`
@@ -108,8 +108,7 @@ variable (G : Type u) [Group G] [TopologicalSpace G]
 /-- The category of discrete `G`-modules: abelian groups with an action of the topological group
 `G` such that every element has an open stabilizer. It is abelian, its invariants functor is
 `DiscreteModule.invariants`, and its cohomology `DiscreteModule.H` is the right derived functor
-of the invariants, computed as `Ext` from the trivial module `ℤ`. We use `ℤ`-coefficients
-instead of the finite coefficient ring `A` of the blueprint; see the implementation notes. -/
+of the invariants, computed as `Ext` from the trivial module `ℤ`. -/
 abbrev DiscreteModule :=
   (Action.IsDiscreteModule.{max u w} (G := G)).FullSubcategory
 

@@ -80,18 +80,16 @@ theorem isIso_dualizingComplexBaseChangeMap {X' Y' : Scheme.{u}} {v : Y' ⟶ �
     quasiSeparatedSpace_of_quasiSeparated (𝔸(ULift.{u} (Fin 1); B) ↘ B)
   isIso_dualizingComplexBaseChangeMap_of_smoothOfRelativeDimension Λ d sq
 
-/-- Blueprint `prose-09-12` (1): the fibre of the family object at `t = 1` is
-the section invariant of `(g, s)`, `θ₁ : Li₁^* F ≅ 𝒞(g, s)`, by base change for the smooth `g̃`
-along the unit section. -/
+/-- The fibre of the family object at `t = 1` is the section invariant of `(g, s)`,
+`θ₁ : Li₁^* F ≅ 𝒞(g, s)`, the base change isomorphism along the unit section. -/
 noncomputable def oneFibreIso [HasCompactification g] [QuasiCompact g] :
     (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s :=
   have := D.isIso_dualizingComplexBaseChangeMap Λ D.isPullback_oneFibre
   sectionInvariantBaseChangeIso Λ D.isPullback_oneFibre D.sect s D.comp_oneFibre
 
-/-- Blueprint `prose-09-12` (1): the fibre of the family object at `t = 0` is
-the section invariant of the normal cone, `θ₀ : Li₀^* F ≅ 𝒞(π_N, 0_N)`, by base change for the
-smooth `g̃` along the zero section. -/
+/-- The fibre of the family object at `t = 0` is the section invariant of the normal cone,
+`θ₀ : Li₀^* F ≅ 𝒞(π_N, 0_N)`, the base change isomorphism along the zero section. -/
 noncomputable def zeroFibreIso [HasCompactification N.proj] [QuasiCompact N.proj] :
     (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ N.proj N.zeroSection :=
@@ -104,7 +102,7 @@ variable [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] [HasCompactification g
   {k : Type u} [Field k] (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
   [QuasiCompact D.proj]
 
-/-- Blueprint `lemma-section-normal-bundle--1` (2), (3): the constancy comparison
+/-- The constancy comparison
 `κ : F ≅ La^* 𝒞(g, s)` of the family object, the unique one restricting at `t = 1` to a given
 identification `θ : Li₁^* F ≅ 𝒞(g, s)` (`existsUnique_familyObject_iso`). -/
 noncomputable def familyObjectIso
@@ -249,7 +247,7 @@ theorem eq_sectionInvariantIsoOfFibreIso [SmoothOfRelativeDimension d g]
   (existsUnique_iso_sectionInvariant_normalCone Λ d g s N D aB θ₁ θ₀ u e).unique hΨ
     (D.leftDerivedUpperStar_mapIso_sectionInvariantIsoOfFibreIso Λ aB θ₁ θ₀ u e)
 
-/-- Blueprint `lemma-section-normal-bundle`, `lemma-section-normal-bundle--1`: the DNC isomorphism
+/-- The DNC isomorphism
 `δ_{g,s} : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)` for the canonical fibre identifications `oneFibreIso` and
 `zeroFibreIso` of the family object. -/
 noncomputable def sectionInvariantIso :

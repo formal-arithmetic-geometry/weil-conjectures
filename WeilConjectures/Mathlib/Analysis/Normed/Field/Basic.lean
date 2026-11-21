@@ -20,8 +20,6 @@ variable {α : Type*} [NormedDivisionRing α]
 
 /-- Modulus of a root of unity.
 
-A root of unity in a normed division ring has norm `1`: `‖ζ‖ ^ n = ‖ζ ^ n‖ = 1`. Applied to
-`ℚ̄_ℓ` and to the image of `ζ` under a field embedding `ι : ℚ̄_ℓ → ℂ` this gives both halves of
-the blueprint lemma. -/
+A root of unity in a normed division ring has norm `1`. -/
 theorem norm_eq_one_of_pow_eq_one {ζ : α} {n : ℕ} (h : ζ ^ n = 1) (hn : n ≠ 0) : ‖ζ‖ = 1 :=
   (pow_eq_one_iff_of_nonneg (norm_nonneg ζ) hn).mp (by rw [← norm_pow, h, norm_one])

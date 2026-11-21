@@ -32,15 +32,7 @@ namespace Padic
 full integral basis of the sum or any summand gives a homeomorphism from the power of
 the valuation ring to that submodule with its induced topology.
 
-Source: Stacks Project, Tag 0AUW(3).
-
-For any full integral basis of the sum or a summand, its field basis defines an
-E-linear automorphism of E^r. The recorded absolute value makes E complete and
-nontrivially normed. By `lem-weil-pbc-finite-dimensional-linear-homeomorphism`, this
-automorphism and its inverse are continuous. Restrict them to A^r and the lattice;
-the basis property identifies the image with the lattice. The product of the subspace
-topologies on A is the subspace topology on A^r in E^r, so both restrictions are continuous.
-For r = 0, all modules and coordinate spaces are one-point spaces and the bases are empty. -/
+Source: Stacks Project, Tag 0AUW(3). -/
 theorem finite_sum_lattice
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

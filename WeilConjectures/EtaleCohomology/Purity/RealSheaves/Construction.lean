@@ -345,10 +345,11 @@ field, not only for curves. It preserves the degrees, it is the map of fundament
 `AlgebraicGeometry.WeilGroup.restrictionMap` on the underlying elements, hence on the geometric
 subgroups `ker deg`, and it is surjective as soon as that map is, e.g. for `C₀` regular or normal.
 
-The blueprint states part (2) for `V₀` separated of finite type over `k₀` with `V = V₀ ⊗ k`
-connected and normal. Here normality is asked of `V₀` (its local rings are integrally closed
-domains); it follows from normality of `V` by faithfully flat descent, and is equivalent to it
-over the perfect field `k₀`. The surjectivity of `π₁(V'₀) → π₁(V₀)` is then
+Part (2) of the purity theorem for real sheaves on curves concerns `V₀` separated of finite type
+over `k₀` with `V = V₀ ⊗ k` connected and normal. Here normality is asked of `V₀` (its local
+rings are integrally closed domains); it follows from normality of `V` by faithfully flat
+descent, and is equivalent to it over the perfect field `k₀`. The surjectivity of
+`π₁(V'₀) → π₁(V₀)` is then
 `AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_surjective_of_isIntegrallyClosed_stalk`,
 giving `AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isIntegrallyClosed_stalk`; the
 regular case is `AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`. The Weil
@@ -374,13 +375,7 @@ lemma weilGroupDeg_restrictionHom (w : weilGroup pU sU GU) :
 
 omit [IsOpenImmersion j] [Nonempty U] in
 /-- The restriction of Weil groups maps the geometric subgroup `ker deg` of `W(U₀)` onto that of
-`W(C₀)` if it is surjective (e.g. for `C₀` regular or normal,
-`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isRegular`,
-`AlgebraicGeometry.WeilGroup.restrictionHom_surjective_of_isIntegrallyClosed_stalk`), since it
-preserves degrees. On the underlying elements of `π₁(U₀)` it is the map of fundamental groups
-`AlgebraicGeometry.WeilGroup.restrictionMap` (`AlgebraicGeometry.WeilGroup.restrictionHom_apply`),
-so on the geometric subgroups it is the surjection of part (1) of
-`theorem-purity-real-sheaves-curves`. -/
+`W(C₀)` if it is surjective (e.g. for `C₀` regular or normal). -/
 lemma map_ker_weilGroupDeg_restrictionHom
     (hsurj : Function.Surjective (restrictionHom j hj τ GU GC)) :
     (weilGroupDeg pU sU GU).ker.map (restrictionHom j hj τ GU GC) =
@@ -448,9 +443,7 @@ noncomputable abbrev standard : WeilGroup p :=
   ofFundamentalGroup p W.basePoint W.fundamentalGroup
 
 /-- **A Weil group is isomorphic, as a topological group, to the standard one** built from its
-base point and fundamental group: the isomorphism is `weilGroupEquiv`, which is a homeomorphism
-because both topologies make the geometric part open, with the topology induced from
-`π₁(C₀, s)`. -/
+base point and fundamental group, via `weilGroupEquiv`. -/
 noncomputable def toStandard : W.carrier ≃ₜ* W.standard.carrier where
   toMulEquiv := W.weilGroupEquiv
   continuous_toFun := by

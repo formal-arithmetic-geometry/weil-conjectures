@@ -16,8 +16,7 @@ For `g : X ⟶ Y`, the pullback `g^* μₙ ⟶ μₙ` induces base change maps
 (`AlgebraicGeometry.Etale.upperStarExtendScalarsAlongRootsOfUnity`), and the identification
 `Λ ⊗_ℤ μₙ ≅ μₙ ⊗_{ℤ/n} Λ` commutes with them
 (`AlgebraicGeometry.Etale.upperStar_map_extendScalarsIsoExtendScalarsAlong_hom`): the finite
-Kummer level identification of blueprint `lem-pur-finite-kummer-level` is compatible with base
-change.
+Kummer level identification `Λ(1) ≅ μₙ ⊗_{ℤ/n} Λ` is compatible with base change.
 -/
 
 @[expose] public section

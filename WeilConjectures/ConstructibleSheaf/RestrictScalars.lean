@@ -292,11 +292,7 @@ lemma isConstructibleSheaf_restrictScalars_iff [Finite (Λ ⧸ J)]
 /-- **Extensions of constructible sheaves killed by an ideal of finite index.** Let `J` be an
 ideal of `Λ` with `Λ ⧸ J` finite, and let `0 ⟶ F₁ ⟶ F₂ ⟶ F₃ ⟶ 0` be a short exact sequence of
 sheaves of `Λ`-modules with `F₁` and `F₃` constructible and `F₂` killed by `J`. Then `F₂` is
-constructible: the sequence is the restriction of scalars of a short exact sequence of sheaves of
-`Λ ⧸ J`-modules, whose outer terms are constructible
-(`AlgebraicGeometry.Scheme.isConstructibleSheaf_restrictScalars_iff`), and the extension
-property holds over the finite ring `Λ ⧸ J`
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_shortExact`). -/
+constructible. -/
 theorem IsConstructibleSheaf.of_shortExact_of_smul_eq_zero [Finite (Λ ⧸ J)]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     (hJ : ∀ r ∈ J, r • 𝟙 S.X₂ = 0) [IsConstructibleSheaf S.X₁] [IsConstructibleSheaf S.X₃] :

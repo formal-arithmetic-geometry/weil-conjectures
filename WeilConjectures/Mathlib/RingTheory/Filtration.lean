@@ -257,7 +257,7 @@ lemma lTensor_inclusion_injective_of_smul_le
 /-- **Relative purity over a flat module.** Let `F` be flat, `K ≤ F` containing `I F`, and assume
 `M ⊗ N' → M ⊗ N` is injective for `N' ≤ N` killed by `I`. Then every element of the kernel of
 `M ⊗ K → M ⊗ F` is a sum of images of `k ⊗ f`, `k` in the kernel of `M ⊗ I → M`, under
-`M ⊗ I → M ⊗ K`, `m ⊗ i ↦ m ⊗ i f`. We state this as: a linear map `ψ` out of `M ⊗ K` killing
+`M ⊗ I → M ⊗ K`, `m ⊗ i ↦ m ⊗ i f`. Formally: a linear map `ψ` out of `M ⊗ K` killing
 all these images kills the kernel. -/
 lemma map_eq_zero_of_lTensor_subtype_eq_zero_of_flat
     (hQ : ∀ (N : Type u) [AddCommGroup N] [Module R N], (∀ i ∈ I, ∀ n : N, i • n = 0) →

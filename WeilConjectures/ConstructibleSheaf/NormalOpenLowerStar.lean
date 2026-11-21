@@ -53,8 +53,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 Let `Y` be a locally Noetherian normal integral scheme (integral, with integrally closed local
 rings), `v : V ⟶ Y` an open immersion with `V` nonempty and `M` a module. The canonical map
-`M_Y ⟶ v_* M_V` of étale sheaves is an isomorphism. The blueprint states this for a finite
-module; finiteness is not needed. -/
+`M_Y ⟶ v_* M_V` of étale sheaves is an isomorphism. -/
 theorem isIso_constantSheafToLowerStar_of_isOpenImmersion {Y V : Scheme.{u}}
     [IsLocallyNoetherian Y] [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))
     (v : V ⟶ Y) [IsOpenImmersion v] [Nonempty V] (M : ModuleCat.{u + 1} Λ) :
@@ -101,14 +100,7 @@ theorem isConstructibleSheaf_lowerStar_constantSheaf_of_isFinite {k : Type u} [F
 
 Let `X` be an integral scheme of finite type over a field `k`, `kV : V ⟶ X` an open immersion with
 `V` nonempty and normal (its local rings are integrally closed), and `L` a finite locally
-constant sheaf of modules over a finite ring `Λ` on `V_ét`. Then `kV_* L` is constructible.
-
-Choose a connected finite étale surjective `p : P ⟶ V` with `p^* L ≅ M_P` constant. The unit
-`L ⟶ p_* p^* L` is injective, `p` being surjective, so `kV_* L` embeds into
-`(p ≫ kV)_* M_P`. Factoring `p ≫ kV` through the normalization `Y` of `X` in `P` as an open
-immersion `v` followed by the finite `g`, with `Y` normal integral, gives
-`(p ≫ kV)_* M_P ≅ g_* v_* M_P ≅ g_* M_Y`, which is constructible; so is its subsheaf
-`kV_* L` (`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_mono`). -/
+constant sheaf of modules over a finite ring `Λ` on `V_ét`. Then `kV_* L` is constructible. -/
 theorem isConstructibleSheaf_lowerStar_of_isFiniteLocallyConstantSheaf {k : Type u} [Field k]
     {V X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [IsIntegral X] (kV : V ⟶ X) [IsOpenImmersion kV] [Nonempty V]

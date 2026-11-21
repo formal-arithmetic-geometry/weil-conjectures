@@ -143,8 +143,8 @@ theorem trace_comp_comm {X Y : C} [HasRightDual X] [HasRightDual Y] (g : X ⟶ Y
     BraidedCategory.braiding_naturality_right_assoc, rightAdjointMate_comp_evaluation,
     ← BraidedCategory.braiding_naturality_left_assoc]
 
-/-- Blueprint `proposition-properties-trace` (1), conjugacy invariance of the trace: if
-`w : X ≅ X'` intertwines `f : X ⟶ X` and `f' : X' ⟶ X'`, then `tr(f) = tr(f')`. -/
+/-- **Conjugacy invariance of the trace.** If `w : X ≅ X'` intertwines `f : X ⟶ X` and
+`f' : X' ⟶ X'`, then `tr(f) = tr(f')`. -/
 theorem trace_eq_of_iso {X X' : C} [HasRightDual X] [HasRightDual X'] (w : X ≅ X') (f : X ⟶ X)
     (f' : X' ⟶ X') (h : f ≫ w.hom = w.hom ≫ f') : trace f = trace f' := by
   have : f' = w.inv ≫ f ≫ w.hom := by rw [h, Iso.inv_hom_id_assoc]

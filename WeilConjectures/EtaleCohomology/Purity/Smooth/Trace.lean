@@ -49,15 +49,13 @@ composition coherence of the purity maps, with respect to the composition isomor
 
 ## Implementation notes
 
-The blueprint's purity map `γ_{f,K}` is the canonical map of
-`proposition-smooth-purity-finite-coefficients--1`. In the repository it is
+The purity map `γ_{f,K}` of smooth purity with finite coefficients is
 `AlgebraicGeometry.Etale.smoothPurityIso`, built from the identifications it is composed of, which
 are only known to exist; the trace is therefore defined for an arbitrary isomorphism
 `γ : Lf^* K(d)[2d] ≅ Rf^! K`, the intended one being `smoothPurityIso f K θ φ`. Likewise the
 composition law of `R_!` is only known to exist
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`), so it is an argument of the
-transitivity statement, and the composition isomorphism of `R^!` is its conjugate, as in the
-blueprint.
+transitivity statement, and the composition isomorphism of `R^!` is its conjugate.
 -/
 
 @[expose] public section
@@ -160,9 +158,8 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f
 
 /-- The composition isomorphism `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` of the exceptional inverse image
 conjugate to a composition isomorphism `α : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the compactly
-supported direct image, i.e. the inverse of the blueprint's `c_{g,f}`.
-Its defining property is that it identifies the counit
-of `R(f ≫ g)_! ⊣ R(f ≫ g)^!` with that of the composite adjunction
+supported direct image, i.e. the inverse of the composition isomorphism `c_{g,f}`. It identifies
+the counit of `R(f ≫ g)_! ⊣ R(f ≫ g)^!` with that of the composite adjunction
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek_hom_app_counit`). -/
 noncomputable def rightDerivedUpperShriekCompIsoOfLowerShriek
     (α : R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
@@ -217,7 +214,7 @@ relative dimensions `d` and `e`, let `α : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` be th
 `R_!`, `c_{g,f}⁻¹ : Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!`
 its conjugate (`AlgebraicGeometry.Etale.rightDerivedUpperShriekCompIsoOfLowerShriek`), and let
 `Γ_f : Lf^* (-)(d)[2d] ≅ Rf^!`, `γ_{g,K}` and `γ_{f ≫ g,K}` be purity maps satisfying the
-composition coherence `proposition-compatibility-purity-composition--1`:
+composition coherence of purity:
 
 `γ_{f ≫ g,K} = c_{g,f}⁻¹ ∘ γ_{f,Rg^! K} ∘ Lf^*(γ_{g,K})(d)[2d]`
 
@@ -323,8 +320,8 @@ variable [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ X']
 **Base change of the smooth traces.** Let `g ≫ f = f' ≫ v` be a cartesian square with `f`
 smooth separated of relative dimension `d`, let `β : Lg^* ⋙ Rf'_! ≅ Rf_! ⋙ Lv^*` be the
 compact-support base change, and let the purity maps `γ_{f,K}` and `γ_{f',Lv^* K}` satisfy the
-smooth base-change coherence `proposition-compatibility-purity-base-change--1` with respect to the
-exchange `Lg^* Rf^! ⟶ Rf'^! Lv^*` conjugate to `β`
+smooth base-change coherence of purity with respect to the exchange `Lg^* Rf^! ⟶ Rf'^! Lv^*`
+conjugate to `β`
 (`AlgebraicGeometry.Etale.upperShriekBaseChangeOfLowerShriek`). Then the smooth trace is
 compatible with the base change: the square
 

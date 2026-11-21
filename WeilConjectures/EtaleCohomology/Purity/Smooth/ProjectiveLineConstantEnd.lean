@@ -204,11 +204,7 @@ end Untwisted
 
 /-- The pullback of an endomorphism of `Λ_{ℙ¹_S}` along a geometric point
 `x : Spec Ω ⟶ ℙ¹_S` is determined by its pullback along the section at infinity: it is the
-pullback along some `x' : Spec Ω ⟶ Z`, depending only on `x`, of the latter. The point `x` is a
-section of `ℙ¹_Ω` followed by the base change `ℙ¹_Ω ⟶ ℙ¹_S`, and this section may be replaced by
-the point at infinity of `ℙ¹_Ω`
-(`AlgebraicGeometry.Etale.constantComplexEndPullback_eq_of_comp_eq`),
-which lies over the section at infinity of `ℙ¹_S`. -/
+pullback along some `x' : Spec Ω ⟶ Z`, depending only on `x`, of the latter. -/
 theorem exists_constantComplexEndPullback_eq_lineInfinityι [HasKummerClass Λ]
     [HasKummerClass.IsNormalized Λ] (S : Scheme.{u}) [HasInvertibleExponent Λ S]
     (Ω : Type u) [Field Ω] [IsSepClosed Ω]
@@ -241,9 +237,7 @@ theorem exists_constantComplexEndPullback_eq_lineInfinityι [HasKummerClass Λ]
   simp only [Category.assoc, hgZ.w]
 
 /-- An endomorphism of the constant complex `Λ_{ℙ¹_S}` of the projective line is determined by
-its pullback along the section at infinity `ι : Z ⟶ ℙ¹_S`. It is checked at the geometric points
-`x : Spec Ω ⟶ ℙ¹_S`, where the pullback along `x` is determined by the pullback along `ι`
-(`AlgebraicGeometry.Etale.exists_constantComplexEndPullback_eq_lineInfinityι`). -/
+its pullback along the section at infinity `ι : Z ⟶ ℙ¹_S`. -/
 theorem eq_of_leftDerivedUpperStar_lineInfinityι_map_eq [HasKummerClass Λ]
     [HasKummerClass.IsNormalized Λ]
     (S : Scheme.{u}) [HasInvertibleExponent Λ S]

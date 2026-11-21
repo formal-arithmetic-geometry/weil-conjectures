@@ -22,8 +22,7 @@ the pullback of the adjoint of `γ`, read through the canonical identification
 `Lg^* Λ_Z ≅ Λ_{Z'}`, followed by the base change map of the exceptional inverse image
 (`AlgebraicGeometry.Etale.supportedClassMap_restrictSupportedClass`). This makes
 `AlgebraicGeometry.Etale.exists_isIso_supportedClassMap_restrictSupportedClass` explicit: the
-isomorphism `Θ` there is the canonical one. The proof uses that `Ri_! ≅ Ri_*` intertwines the
-exchange maps (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_comp_lowerStarIso`).
+isomorphism `Θ` there is the canonical one.
 -/
 
 @[expose] public section

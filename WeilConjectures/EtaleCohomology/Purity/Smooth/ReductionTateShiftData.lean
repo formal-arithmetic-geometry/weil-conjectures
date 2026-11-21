@@ -130,14 +130,10 @@ variable [NeZero (ringChar Λ)]
     ((tateObject Λ (invertibleExponentBase.{u} Λ) m)⟦2 * m⟧) ≅
       (tateObject Λ' (invertibleExponentBase.{u} Λ) m)⟦2 * m⟧)
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`
-
-**The Tate shift datum of the reduction of coefficients pulled back from the universal base.**
+/-- **The Tate shift datum of the reduction of coefficients pulled back from the universal base.**
 A family of identifications `c_m : Ψ(Λ_S(m)[2m]) ≅ Λ'_S(m)[2m]` on `S = Spec ℤ[1/n]`, `n` the
 characteristic of `Λ`, pulled back along the unique morphisms `X ⟶ S`
-(`AlgebraicGeometry.toInvertibleExponentBase`), is a Tate shift datum of `Ψ`: the compatibility
-with the derived pullbacks is
-`AlgebraicGeometry.Etale.derivedExtendScalarsTateShiftIsoOfPullback_hom_pullback`. -/
+(`AlgebraicGeometry.toInvertibleExponentBase`), is a Tate shift datum of `Ψ`. -/
 noncomputable def DerivedExtendScalarsTateShiftData.ofBase :
     DerivedExtendScalarsTateShiftData Λ Λ' hρ ha :=
   haveI := HasInvertibleExponent.of_ringHom ρ (invertibleExponentBase.{u} Λ)

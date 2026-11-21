@@ -113,14 +113,10 @@ theorem Etale.exists_dense_isFiniteLocallyConstantSheaf_lowerStar {S Z : Scheme.
   obtain ⟨M, _, ⟨e⟩⟩ := h𝒰 i
   exact Sheaf.isConstant_of_iso _ e
 
-/-- The generic step of `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isFinite`:
-a nonempty closed subset `Z` of the Noetherian base has a nonempty relatively open subset
-`Z ∩ O`, realised by an immersion, along which the direct image `h_* E` pulls back to a finite
-locally constant sheaf. Take `Z ∩ O` irreducible with generic point `x`; on an affine open `W` of
-the reduced closure of `x` lying over `O` the direct image is, by finite base change, the direct
-image along a finite morphism to an integral Noetherian affine scheme, which is finite locally
-constant on a dense open
-(`AlgebraicGeometry.Etale.exists_dense_isFiniteLocallyConstantSheaf_lowerStar`). -/
+/-- **Generic local constancy of a finite direct image.** For a finite `h : V ⟶ U` and a
+constructible `E` on `V`, a nonempty closed subset `Z` of the Noetherian base has a nonempty
+relatively open subset `Z ∩ O`, realised by an immersion, along which the direct image `h_* E` pulls
+back to a finite locally constant sheaf. -/
 theorem Etale.exists_isOpen_isFiniteLocallyConstantSheaf_upperStar_lowerStar {U V : Scheme.{u}}
     [IsNoetherian U] (h : V ⟶ U) [IsFinite h]
     (E : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf E] {Z : Set U}

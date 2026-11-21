@@ -28,8 +28,8 @@ Let `G` be a `p`-group and `V` a finite-dimensional `𝔽_p`-linear representati
 - `Representation.invariants_ne_bot_of_isPGroup`: `V^G ≠ 0` for `V ≠ 0`.
 - `Representation.exists_forall_sub_mem_of_isPGroup`: for a proper `G`-stable subspace `W`
   there is `x ∉ W` with `g x - x ∈ W` for all `g`.
-- `Representation.invariants_ne_bot_and_exists_filtration_of_isPGroup`: both statements of
-  the blueprint lemma together.
+- `Representation.invariants_ne_bot_and_exists_filtration_of_isPGroup`: both statements
+  together.
 - `Representation.IsIrreducible.invariants_comp_subtype_eq_bot_or_eq_top`: in an irreducible
   representation the invariants of a normal subgroup are zero or everything.
 -/
@@ -60,8 +60,7 @@ theorem invariants_ne_bot_of_isPGroup (hG : IsPGroup p G) [Nontrivial V] :
 
 /-- **A step of the `p`-group filtration**: for a proper `G`-stable subspace `W` of a
 finite-dimensional `𝔽_p`-representation of a `p`-group `G`, there is `x ∉ W` such that
-`g x - x ∈ W` for every `g`, i.e. whose class in `V / W` is invariant. This is
-`Representation.invariants_ne_bot_of_isPGroup` for the quotient representation `V / W`. -/
+`g x - x ∈ W` for every `g`, i.e. whose class in `V / W` is invariant. -/
 theorem exists_forall_sub_mem_of_isPGroup (hG : IsPGroup p G) (W : Submodule (ZMod p) V)
     (hW : ∀ g, W ≤ W.comap (ρ g)) (hne : W ≠ ⊤) :
     ∃ x ∉ W, ∀ g, ρ g x - x ∈ W := by

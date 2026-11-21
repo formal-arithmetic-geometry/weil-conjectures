@@ -131,12 +131,7 @@ open subcurve with restriction of Weil groups `R : W(U₀) → W(C₀)`. Then
 `H⁰(Ū, F|_U) ≅ V ^ {π₁(U)}`,
 
 `π₁(U)` acting through `R`, compatibly with the Frobenius of the global sections and the action
-of the Frobenius lift `ρ (R γ_U)` of `W(U₀)`.
-
-Restriction of global sections `H⁰(C̄, F) → H⁰(Ū, F|_U)` is bijective and Frobenius-equivariant
-(`AlgebraicGeometry.WeilSheaf.IsLisse.bijective_globalSectionsRestrict_of_isOpenImmersion`,
-`AlgebraicGeometry.WeilSheaf.globalSectionsRestrict_frobenius`), and `V ^ {π₁(U)} = V ^ {π₁(C)}`
-since `π₁(U) → π₁(C)` is surjective; on these invariants `ρ (R γ_U)` and `ρ (γ_C)` agree. -/
+of the Frobenius lift `ρ (R γ_U)` of `W(U₀)`. -/
 theorem exists_globalSections_upperStar_linearEquiv_invariants
     (e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌
       ObjectProperty.FullSubcategory (W.isLisseRep l))

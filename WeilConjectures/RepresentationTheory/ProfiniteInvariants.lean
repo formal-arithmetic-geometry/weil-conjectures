@@ -24,8 +24,8 @@ From this we deduce:
 * `Representation.invariantsTensorEquiv`: for an `A`-module `B` with trivial action, the natural
   map `ρ.invariants ⊗[A] B → (ρ ⊗ trivial)^G` is an isomorphism.
 
-This is the blueprint lemma `prose-E-10`, used in Gabber's Künneth formula for
-nearby cycles (Illusie, *Autour du théorème de monodromie locale*, 4.7).
+This is used in Gabber's Künneth formula for nearby cycles (Illusie, *Autour du théorème de
+monodromie locale*, 4.7).
 
 The finite-level input is `Representation.cosetSum`, the sum of the `ρ g` over representatives
 of the left cosets of a finite-index subgroup `N`; on vectors fixed by `N` (with `N` normal) it

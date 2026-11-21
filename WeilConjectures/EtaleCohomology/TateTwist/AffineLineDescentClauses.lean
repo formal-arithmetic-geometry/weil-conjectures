@@ -10,10 +10,10 @@ public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDescentKummer
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
 
 /-!
-# The degree-zero and degree-one clauses of `sk-prop-a1-kummer` over an arbitrary field
+# The degree-zero and degree-one cohomology of `𝔸¹` and `𝔾ₘ` over an arbitrary field
 
-The clauses (b) of blueprint `sk-prop-a1-kummer` for the twist `Λ(1) = μₙ ⊗ Λ`, over a base `B`
-separated and locally of finite type over an arbitrary field, in the form of
+The degree-zero and degree-one computations on `𝔸¹` and `𝔾ₘ` for the twist `Λ(1) = μₙ ⊗ Λ`,
+over a base `B` separated and locally of finite type over an arbitrary field, in the form of
 `AlgebraicGeometry.Etale.affineLine_multiplicativeGroup_homology_tateObject`: with
 `p : 𝔸¹_B ⟶ B` and `j : 𝔾_{m,B} ⟶ 𝔸¹_B` the basic open of the coordinate,
 
@@ -48,14 +48,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [NeZero (ringChar Λ)]
   [LocallyOfFiniteType aB] [HasInvertibleExponent Λ B]
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`, clause (b) in degree zero, for the twist `Λ(1) = μₙ ⊗ Λ`,
-over an arbitrary field: for `B` separated and locally of finite type over a field `k`, the
-projection `p : 𝔸¹_B ⟶ B` and the basic open `j : 𝔾_{m,B} ⟶ 𝔸¹_B` of the coordinate, the
-restriction `R⁰p_* Λ(1) ⟶ R⁰p_* Rj_* j^* Λ(1)` is an isomorphism. Both the unit of `p` and the
-unit of `π = j ≫ p` are isomorphisms on `H⁰`
-(`AlgebraicGeometry.Etale.isIso_unit_tateObject_affineLine_of_field`,
-`AlgebraicGeometry.Etale.isIso_homology_zero_unit_tateObject_multiplicativeGroup_of_field`), and
-the unit of `π` is the unit of `p` followed by `Rp_*` of the unit of `j`. -/
+/-- Restriction to `𝔾ₘ` in degree zero, for the twist `Λ(1) = μₙ ⊗ Λ`, over an arbitrary
+field: for `B` separated and locally of finite type over a field `k`, the projection
+`p : 𝔸¹_B ⟶ B` and the basic open `j : 𝔾_{m,B} ⟶ 𝔸¹_B` of the coordinate, the restriction
+`R⁰p_* Λ(1) ⟶ R⁰p_* Rj_* j^* Λ(1)` is an isomorphism. -/
 theorem isIso_homology_zero_map_unit_multiplicativeGroup_of_field :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).map
       ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).map
@@ -92,13 +88,11 @@ theorem isIso_homology_zero_map_unit_multiplicativeGroup_of_field :
 
 -- the composites of derived functors on the three schemes `B`, `𝔸¹_B` and `𝔾_{m,B}` are large
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`, clause (b) in degree one, for the twist `Λ(1) = μₙ ⊗ Λ`, over
-an arbitrary field: for `B` separated and locally of finite type over a field `k`, the Kummer
+/-- The Kummer class generates `R¹π_* Λ(1)` on `𝔾ₘ`, for the twist `Λ(1) = μₙ ⊗ Λ`, over an
+arbitrary field: for `B` separated and locally of finite type over a field `k`, the Kummer
 class `κ(t) : Λ_B ⟶ (Rp_* Rj_* j^* Λ(1))[1]`
 (`AlgebraicGeometry.Etale.kummerClassAffineLineDirectImage`) induces an isomorphism
-`Λ_B ≅ R¹π_* Λ(1)`. Up to the composition isomorphism `Rp_* Rj_* ≅ Rπ_*`, `κ(t)` is the adjoint
-of the Kummer class for `π = j ≫ p`, which is an isomorphism on `H⁰` by
-`AlgebraicGeometry.Etale.isIso_homology_zero_homEquiv_kummerClass_of_field`. -/
+`Λ_B ≅ R¹π_* Λ(1)`. -/
 theorem isIso_shiftMap_kummerClassAffineLineDirectImage_of_field :
     IsIso ((_root_.DerivedCategory.homologyFunctor _ 0).shiftMap
       (kummerClassAffineLineDirectImage Λ B) 0 1 (by norm_num)) := by

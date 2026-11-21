@@ -62,9 +62,8 @@ variable {E : Type*} [Field E] (ι : E →+* ℂ) (q : ℕ)
 
 An element `α` (typically an eigenvalue of a Frobenius operator) has *weight* `w` relative to
 the prime power `q` if `|ι α| = q ^ (w / 2)`, the absolute value being read through the fixed
-embedding `ι` into `ℂ`; so `|q| = q` and `q` itself has weight `2`. This is the convention of
-`definition-weights`; it is related to the `ι`-weight
-`AlgebraicGeometry.WeilGroup.frobeniusWeight` by
+embedding `ι` into `ℂ`; so `|q| = q` and `q` itself has weight `2`. It is related to the
+`ι`-weight `AlgebraicGeometry.WeilGroup.frobeniusWeight` by
 `AlgebraicGeometry.WeilGroup.isOfWeight_iff_frobeniusWeight_eq`. The weight `w` is allowed
 to be any real number. -/
 def IsOfWeight (w : ℝ) (α : E) : Prop :=
@@ -154,8 +153,7 @@ theorem IsMixedFrobeniusModule.mono [IsAlgClosed E] {F : V ≃ₗ[E] V} {w w' : 
   exact ⟨m, Fil, wt, h0, hm, hle, hF, fun i hi ↦ ⟨(hw' i hi).1.trans hw, (hw' i hi).2⟩⟩
 
 /-- Every eigenvalue `α` of an `ι`-mixed Frobenius module of weights at most `w` satisfies
-`|ι α| ≤ q ^ (w / 2)`, for `q ≥ 1`: an eigenvector lies in a first step `V_r` of the
-filtration, and then `α` is an eigenvalue on `V_r / V_{r-1}`. -/
+`|ι α| ≤ q ^ (w / 2)`, for `q ≥ 1`. -/
 theorem IsMixedFrobeniusModule.norm_le [IsAlgClosed E] (hq : 1 ≤ q) {F : V ≃ₗ[E] V} {w : ℝ}
     (h : IsMixedFrobeniusModule ι q F w) {α : E}
     (hα : Module.End.HasEigenvalue (F : Module.End E V) α) :
@@ -191,7 +189,7 @@ variable (W l) {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
 /-- Operations on Weil representations.
 
 The determinant line `det V = ⋀^{dim V} V` of a Weil representation, with `g` acting by
-`g (v₁ ∧ ⋯ ∧ v_r) = g v₁ ∧ ⋯ ∧ g v_r`. The other operations of the blueprint are
+`g (v₁ ∧ ⋯ ∧ v_r) = g v₁ ∧ ⋯ ∧ g v_r`. The other operations on Weil representations are
 `Representation.directSum`, `Representation.tprod`, `Representation.exteriorPower`,
 `Representation.dual` (with `(g λ)(v) = λ (g⁻¹ v)`), the irreducible representations
 `Representation.IsIrreducible`, the constituents `Representation.IsConstituent`, the
@@ -255,8 +253,7 @@ theorem charpoly_semisimplification {F : ℕ → Subrepresentation ρ} {n : ℕ}
 
 The semisimplification `⨁ F (i + 1) / F i` of a Weil representation along a filtration by
 subrepresentations (for instance a composition series) has the same local characteristic
-polynomials as `ρ`: in a basis adapted to the filtration the local Frobenius is block upper
-triangular. -/
+polynomials as `ρ`. -/
 theorem localPolynomial_semisimplification {F : ℕ → Subrepresentation ρ} {n : ℕ}
     (h0 : F 0 = ⊥) (hn : F n = ⊤) (hF : ∀ i < n, F i ≤ F (i + 1)) (x : C.finitePoints) :
     W.localPolynomial l (semisimplification W l F n) x = W.localPolynomial l ρ x := by
@@ -266,9 +263,7 @@ theorem localPolynomial_semisimplification {F : ℕ → Subrepresentation ρ} {n
 /-- Reality survives semisimplification.
 
 The semisimplification of an `ι`-real Weil representation along a filtration by
-subrepresentations (for instance a composition series) is `ι`-real, since it has the same local
-characteristic polynomials
-(`AlgebraicGeometry.WeilGroup.localPolynomial_semisimplification`). -/
+subrepresentations (for instance a composition series) is `ι`-real. -/
 theorem IsReal.semisimplification (hreal : W.IsReal l ρ ι) {F : ℕ → Subrepresentation ρ}
     {n : ℕ} (h0 : F 0 = ⊥) (hn : F n = ⊤) (hF : ∀ i < n, F i ≤ F (i + 1)) :
     W.IsReal l (semisimplification W l F n) ι := fun x m ↦ by
@@ -278,7 +273,7 @@ theorem IsReal.semisimplification (hreal : W.IsReal l ρ ι) {F : ℕ → Subrep
 /-- Weights, reality and semisimplification.
 
 The semisimplification `⨁ F (i + 1) / F i` along a filtration by subrepresentations has the same
-local eigenvalues as `ρ`, since it has the same local characteristic polynomials. -/
+local eigenvalues as `ρ`. -/
 theorem localEigenvalues_semisimplification {F : ℕ → Subrepresentation ρ} {n : ℕ}
     (h0 : F 0 = ⊥) (hn : F n = ⊤) (hF : ∀ i < n, F i ≤ F (i + 1)) (x : C.finitePoints) :
     W.localEigenvalues l (semisimplification W l F n) x = W.localEigenvalues l ρ x := by

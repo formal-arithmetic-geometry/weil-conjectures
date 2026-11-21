@@ -195,12 +195,7 @@ theorem isIso_unit_app_of_isZero_upperStar {U Z S : Scheme.{u}} (j : U ⟶ S) (i
 /-- **Acyclicity of the affine line glues along an open–closed decomposition.** Let
 `j : U ⟶ S` be a quasi-compact open immersion and `i : Z ⟶ S` a closed immersion with
 complementary ranges, and let the exponent of `Λ` be invertible on `S`. If the affine line is
-acyclic over `U` and over `Z`, it is acyclic over `S`.
-
-Every `G ∈ D⁺(S)` sits in a distinguished triangle `G ⟶ Rj_* j^* G ⟶ C ⟶ G[1]` with
-`j^* C = 0`; the unit is an isomorphism at `Rj_* j^* G` by smooth base change
-(`AlgebraicGeometry.Etale.isIso_unit_app_rightDerivedFunctorPlus_obj_of_qcqs`) and at `C` by
-finite base change (`AlgebraicGeometry.Etale.isIso_unit_app_of_isZero_upperStar`). -/
+acyclic over `U` and over `Z`, it is acyclic over `S`. -/
 theorem AffineLineAcyclicAt.of_isOpenImmersion_of_isClosedImmersion {U Z S : Scheme.{u}}
     (j : U ⟶ S) (i : Z ⟶ S) [IsOpenImmersion j] [QuasiCompact j] [IsClosedImmersion i]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) [HasInvertibleExponent Λ S]

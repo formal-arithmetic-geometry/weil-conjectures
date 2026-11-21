@@ -52,8 +52,6 @@ def podTowerIsoOfAdjacent {C : Type a} [Category.{b} C] {F G : ℕᵒᵖ ⥤ C}
     (fun f ↦ (NatTrans.ofOpSequence (fun n ↦ (e n).hom) he).naturality f)
 
 /-- Assemble the sign-free finite comparisons into a comparison of strict towers.
-The naturality proof uses only adjacent quotient squares; all components are the
-explicit finite comparisons.
 Source: Stacks 011G and 07A4. -/
 def podTensorSignedShiftLeftTower (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (r : ℤ) :
@@ -94,7 +92,6 @@ abbrev PodTensorDerivedShiftRight (W : Scheme.{u}) :=
       ((integralCompletedTensor l E W).obj (M.obj, N.obj))⟦r⟧
 
 /-- Combine the constructed strict data with supplied derived shift fields.
-Every non-proof field is explicit or is a parameter.
 Source: Stacks 011G and 07A4. -/
 def podTensorSignedShiftOfDerived (W : Scheme.{u})
     (L : PodTensorDerivedShiftLeft l E W) (R : PodTensorDerivedShiftRight l E W) :

@@ -155,7 +155,7 @@ instance Etale.mono_openImmersionLowerShriekUpperStarAdjunction_counit {U X : Sc
 
 /-- Dévissage of a constructible sheaf.
 
-Let `X` be Noetherian (in the blueprint: of finite type over a field) and `F` a constructible
+Let `X` be Noetherian and `F` a constructible
 sheaf of `Λ`-modules on `X_ét`. There is a finite filtration by subsheaves
 `0 = F₀ ⊆ F₁ ⊆ ⋯ ⊆ F_m = F` and, for each `1 ≤ r ≤ m`, a locally closed subscheme of `X`, given
 as a closed immersion `i_r : Y_r ⟶ W_r` into an open `W_r ⊆ X`, with a finite locally constant

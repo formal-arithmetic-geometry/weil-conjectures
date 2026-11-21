@@ -31,6 +31,14 @@ needs, so that `HasLimitsOfSize.{u, u} A`, `HasColimitsOfSize.{u, u} A` and
 `HasColimitsOfSize.{u, u + 1} A` need not be carried as hypotheses alongside
 `IsGrothendieckAbelian.{u + 1} A`.
 
+## Implementation details
+
+Instance search does not climb the universes through these instances: discharging the
+hypothesis `HasLimitsOfSize.{u + 1, u + 1} A` through `hasLimitsOfSize_of_succ` itself would
+require `Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. The priority is
+`low` so that this attempt is made only after the instances which do provide limits and colimits
+of size `u + 1`; tried first it aborts elaboration with a universe constraint error instead of
+failing silently.
 -/
 
 @[expose] public section
@@ -40,26 +48,13 @@ universe u' u
 namespace CategoryTheory.Limits
 
 /-- A category with `Hom`-types in `u + 1` and limits of size `u + 1` has limits of size
-`u`, by `hasLimitsOfSizeShrink`.
-
-Instance search does not climb the universes here: discharging the hypothesis
-`HasLimitsOfSize.{u + 1, u + 1} A` through this very instance would require
-`Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. The priority is `low`
-so that this attempt is made only after the instances which do provide limits of size
-`u + 1`; tried first it aborts elaboration with a universe constraint error instead of
-failing silently. -/
+`u`, by `hasLimitsOfSizeShrink`. -/
 instance (priority := low) hasLimitsOfSize_of_succ (A : Type u') [Category.{u + 1} A]
     [HasLimitsOfSize.{u + 1, u + 1} A] : HasLimitsOfSize.{u, u} A :=
   hasLimitsOfSizeShrink.{u, u, u + 1, u + 1} A
 
 /-- A category with `Hom`-types in `u + 1` and colimits of size `u + 1` has colimits of
-size `u`, by `hasColimitsOfSizeShrink`.
-
-Instance search does not climb the universes here: discharging the hypothesis
-`HasColimitsOfSize.{u + 1, u + 1} A` through this very instance would require
-`Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. As for
-`hasLimitsOfSize_of_succ` the priority is `low`, so that the attempt is made only after the
-instances which do provide colimits of size `u + 1`. -/
+size `u`, by `hasColimitsOfSizeShrink`. -/
 instance (priority := low) hasColimitsOfSize_of_succ (A : Type u') [Category.{u + 1} A]
     [HasColimitsOfSize.{u + 1, u + 1} A] : HasColimitsOfSize.{u, u} A :=
   hasColimitsOfSizeShrink.{u, u, u + 1, u + 1} A
@@ -67,13 +62,7 @@ instance (priority := low) hasColimitsOfSize_of_succ (A : Type u') [Category.{u 
 /-- A category with `Hom`-types in `u + 1` and colimits of size `u + 1` has colimits
 indexed by categories with objects in `Type (u + 1)` and `Hom`-types in `Type u`, by
 `hasColimitsOfSizeShrink`. Such are the comma categories indexing the pointwise left Kan
-extensions along a functor between small sites.
-
-Instance search does not climb the universes here: discharging the hypothesis
-`HasColimitsOfSize.{u + 1, u + 1} A` through this very instance would require
-`Category.{u + 2} A`, which the `Category.{u + 1} A` binder rules out. As for
-`hasColimitsOfSize_of_succ` the priority is `low`, so that the attempt is made only after
-the instances which do provide colimits of size `u + 1`. -/
+extensions along a functor between small sites. -/
 instance (priority := low) hasColimitsOfSize_succ_of_succ (A : Type u') [Category.{u + 1} A]
     [HasColimitsOfSize.{u + 1, u + 1} A] : HasColimitsOfSize.{u, u + 1} A :=
   hasColimitsOfSizeShrink.{u, u + 1, u + 1, u + 1} A

@@ -41,8 +41,8 @@ The image of `I_z` in `π₁(U₀)` (`AlgebraicGeometry.WeilGroup.inertiaGroup`)
 A lift in `D_z` of the inverse arithmetic Frobenius of `κ(z)` restricts to a Frobenius element at
 `z` in `π₁(C₀)`
 (`BoundaryChart.exists_mem_stabilizer_isFrobeniusElement_restrictionMap`).
-Together with the density of the Weil group in `π₁(U₀)`, this builds the boundary datum of
-`lemma-boundary-stalk--1` (`AlgebraicGeometry.WeilGroup.boundaryDatum`).
+Together with the density of the Weil group in `π₁(U₀)`, this builds the boundary datum
+`AlgebraicGeometry.WeilGroup.boundaryDatum`.
 -/
 
 @[expose] public section

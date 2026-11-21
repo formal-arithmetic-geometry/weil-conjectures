@@ -20,8 +20,8 @@ the irreducible subquotients. Irreducibility itself is `Representation.IsIrreduc
 `Representation.IsConstituent` forgets the multiplicity, being a `Prop`. Invariants of the
 composition factors counted with multiplicity are recorded by
 `Subrepresentation.factorMultiset` (in `WeilConjectures.RepresentationTheory.CompositionFactors`);
-the rank `N_γ` and the weight sum `B_γ` of blueprint `definition-determinant-weight--1` are sums
-over it.
+the rank `N_γ` and the weight sum `B_γ` entering the definition of determinant weights are
+sums over it.
 
 ## Main definitions
 

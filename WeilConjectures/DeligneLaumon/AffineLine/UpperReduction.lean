@@ -23,7 +23,8 @@ Each step of it stays short exact after `j_*` (exactness of the middle extension
 pure weight), the long exact sequence of compactly supported cohomology gives an exact triple
 in degree one, and the middle term inherits a common upper weight bound from its outer terms.
 Hence the bound `w + 1` for `H_c^1(𝔸¹, j_*F)` follows from the same bound for the graded pieces.
-This is Step 3 of the blueprint proof of `theorem-weight-bound-affine-line`.
+This reduction is used in the proof of the weight bound on the affine line
+(`…LisseOnDenseOpen.hasWeightsAtMost_compactlySupportedCohomology_directImage`).
 
 ## Main statements
 
@@ -89,9 +90,8 @@ variable (ι : PadicAlgCl l →+* ℂ)
 `F = D.sheaf` be punctually `ι`-pure of weight `w` on the dense open `U₀` of the affine line,
 and let `F ≅ j'^* G` for a lisse Weil sheaf `G` on a `k₀`-scheme `W` with irreducible geometric
 fiber. If `H_c^1(𝔸¹, j_*(j'^* M))` has weights at most `w + 1` for every irreducible lisse sheaf
-`M` on `W` with `j'^* M` pure of weight `w`, then `H_c^1(𝔸¹, j_*F)` has weights at most `w + 1`:
-along a composition series of `G` the middle extension is exact at the fixed weight `w`, and the
-long exact sequence of compactly supported cohomology propagates the bound. -/
+`M` on `W` with `j'^* M` pure of weight `w`, then `H_c^1(𝔸¹, j_*F)` has weights at most `w + 1`.
+-/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_upperStar
     {W : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (W ↘ Spec (CommRingCat.of k₀))]

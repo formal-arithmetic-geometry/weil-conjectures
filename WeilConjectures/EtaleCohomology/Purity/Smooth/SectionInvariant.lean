@@ -31,6 +31,15 @@ is `F = Ls̃^* ω_{g̃}` (`AlgebraicGeometry.Etale.deformationFamilyObject`), ag
 
 - `AlgebraicGeometry.Etale.isInvertible_sectionInvariant`
 - `AlgebraicGeometry.Etale.isInvertible_deformationFamilyObject`
+
+## Implementation details
+
+The deformation `g̃` is compactifiable
+(`AlgebraicGeometry.Scheme.Hom.hasCompactification_deformationSpaceProj`).
+`AlgebraicGeometry.Etale.deformationFamilyObject` is the concrete counterpart of
+`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.familyObject`, which is the same section
+invariant for an abstract deformation datum; a concrete datum with this deformation space is not
+yet constructed.
 -/
 
 @[expose] public section
@@ -50,10 +59,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} (d : �
 /-- Section invariant
 
 For `g : V ⟶ B` smooth of pure relative dimension `d` and a section `s` of `g`, the section
-invariant `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` is an invertible object of `D(B_ét, Λ)`: the
-dualizing complex `ω_g` is invertible by cohomological smoothness,
-and derived pullback preserves
-invertible objects. -/
+invariant `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` is an invertible object of `D(B_ét, Λ)`. -/
 theorem isInvertible_sectionInvariant (g : V ⟶ B) [SmoothOfRelativeDimension d g]
     [HasCompactification g] [HasInvertibleExponent Λ V] (s : B ⟶ V) :
     DerivedCategory.isInvertible Λ B (sectionInvariant Λ g s) :=
@@ -66,13 +72,7 @@ section `s` of `g : V ⟶ B`: the section invariant of the
 deformation `g̃ : D_s V ⟶ 𝔸¹_B` (`AlgebraicGeometry.Scheme.Hom.deformationSpaceProj`) and its
 section `s̃ : 𝔸¹_B ⟶ D_s V` (`AlgebraicGeometry.Scheme.Hom.deformationSpaceSection`). Here
 `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` is the extended Rees algebra form of
-`Bl_{s(B) × 0} (V ×_B 𝔸¹_B) ∖ (strict transform of V ×_B 0)`.
-
-In the purity conventions `g̃` is compactifiable
-(`AlgebraicGeometry.Scheme.Hom.hasCompactification_deformationSpaceProj`). This is the concrete
-counterpart of `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.familyObject`, which is
-the same section invariant for an abstract deformation datum; a concrete datum with this
-deformation space is not yet constructed. -/
+`Bl_{s(B) × 0} (V ×_B 𝔸¹_B) ∖ (strict transform of V ×_B 0)`. -/
 noncomputable def deformationFamilyObject (g : V ⟶ B) (s : B ⟶ V)
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] :
     _root_.DerivedCategory
@@ -83,8 +83,7 @@ noncomputable def deformationFamilyObject (g : V ⟶ B) (s : B ⟶ V)
 
 The family object `F = Ls̃^* ω_{g̃}` of the deformation to the normal cone of a closed section `s`
 of a morphism `g` smooth of pure relative dimension `d` is an invertible object of
-`D(𝔸¹_B, Λ)`: `g̃` is again smooth of relative dimension `d`
-(`AlgebraicGeometry.Scheme.Hom.smoothOfRelativeDimension_deformationSpaceProj`). -/
+`D(𝔸¹_B, Λ)`. -/
 theorem isInvertible_deformationFamilyObject (g : V ⟶ B) [SmoothOfRelativeDimension d g]
     (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)
     [HasCompactification (Scheme.Hom.deformationSpaceProj g s)] [HasInvertibleExponent Λ B] :

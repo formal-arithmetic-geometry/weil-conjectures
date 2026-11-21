@@ -34,10 +34,7 @@ variable (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
 `G`-module `M` and a discrete topological representation `N` of `G` together with an
 equivariant additive equivalence `e : M ≃+ N`, this is the additive equivalence
 `Hⁿ(G, M) ≃+ Hⁿ_cont(G, N)` between `Extⁿ(ℤ, M)` in discrete `G`-modules and the cohomology of
-continuous homogeneous cochains with values in `N`. It is the composite of
-`DiscreteModule.hAddEquivRightDerivedInvariants` and
-`Rep.rightDerivedAddEquivContinuousCohomology`, applied through the equivalence
-`DiscreteModule.discreteContinuousRepEquivalence`. -/
+continuous homogeneous cochains with values in `N`. -/
 noncomputable def hAddEquivContinuousCohomology (M : DiscreteModule.{w} G)
     (N : TopRep.{max u t} ℤ G) [DiscreteTopology N.V] (e : M.obj.V ≃+ N.V)
     (he : ∀ (g : G) (x : M.obj.V), e ((M.obj.ρ g).asHom.hom x) = N.ρ g (e x)) (n : ℕ) :

@@ -245,7 +245,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The actual ordinary-to-completed tensor unit: reduction's adjunction unit,
 its tensor comparison, and the inverse of the recorded Roos realization.
-Source: node proof step 10, Stacks 099B. -/
+Source: Stacks 099B. -/
 def podCompletedTensorUnit (M N : DerivedCategory (integralTowerModules l E W)) :
     (pullbackTensorCalculus l E W).integralClosed.tensor.obj (M, N) ⟶
       (integralCompletedTensor l E W).obj (M, N) :=
@@ -256,7 +256,7 @@ def podCompletedTensorUnit (M N : DerivedCategory (integralTowerModules l E W)) 
 
 /-- The completed closed adjunction is uniquely normalized by ordinary evaluation
 precomposed with the actual completion unit. No perfectness assumption is imposed.
-Source: node proof steps 10--11, Stacks 099B, 0A0E. -/
+Source: Stacks 099B, 0A0E. -/
 theorem podIntegralClosed_existsUnique :
     ∃! S : PodPartialClosed (constructibleIntegralTensor l E W)
         (constructibleIntegralHomPairs l E W) (constructibleIntegralHom l E W),
@@ -355,7 +355,7 @@ theorem podIntegralPairs_pullback
   exact PodCoefficientDescent.integral_pair_permitted l E g P
 
 /-- The integral comparison is the transpose of completed pullback of evaluation.
-Source: node proof steps 10--11, Stacks 0GMX. -/
+Source: Stacks 0GMX. -/
 def podIntegralHomComparison :=
   podPartialHomComparison (podIntegralClosed l E Y) (podIntegralClosed l E X)
     (constructibleIntegralPullback l E g) (podIntegralPairs_pullback l E g)

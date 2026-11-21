@@ -27,10 +27,6 @@ public import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Topology
 - `ringKrullDim_quotient_lt_of_irreducibleSpace`: a proper closed subset of an irreducible affine
   variety has strictly smaller dimension.
 - `MvPolynomial.height_eq_of_isMaximal`: every maximal ideal of `k[X₁, …, Xₙ]` has height `n`.
-
-## Blueprint
-
-- `lem-wf-affine-dimension-drop`: proper closed subsets have strictly smaller dimension.
 -/
 
 @[expose] public section
@@ -88,10 +84,7 @@ theorem ringKrullDim_quotient_lt_of_ne_bot {R : Type*} [CommRing R] [IsDomain R]
 /-- Let `A` be the coordinate algebra of an irreducible affine variety over a field `k`, i.e. a
 reduced finitely generated `k`-algebra with irreducible spectrum. Then `A` is a domain
 (`PrimeSpectrum.isDomain_of_irreducibleSpace`), and a proper closed subset `V(I)`, i.e. one with
-`I ≠ 0`, has strictly smaller dimension: `dim (A ⧸ I) < dim A`.
-
-The dimension of `A` is finite (`ringKrullDim_ne_top_of_finiteType`), and the strict drop is
-`ringKrullDim_quotient_lt_of_ne_bot`. -/
+`I ≠ 0`, has strictly smaller dimension: `dim (A ⧸ I) < dim A`. -/
 theorem ringKrullDim_quotient_lt_of_irreducibleSpace (k A : Type*) [Field k] [CommRing A]
     [IsReduced A] [IrreducibleSpace (PrimeSpectrum A)] [Algebra k A] [Algebra.FiniteType k A]
     {I : Ideal A} (hI : I ≠ ⊥) : ringKrullDim (A ⧸ I) < ringKrullDim A := by

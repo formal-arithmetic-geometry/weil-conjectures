@@ -27,13 +27,14 @@ morphism and its structural properties are in
 
 ## Implementation notes
 
-The three clauses of `proposition-exceptional-inverse-image-smooth-morphism` are read off from the
-orientation-free smooth duality of the ambient chapter, as in the proof of
-`proposition-exceptional-inverse-image-smooth-morphism`: the locally constant rank-one shape of
-`ω_f` and the tensor formula (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`,
-`proposition-exceptional-inverse-image-smooth-morphism`), and arbitrary base change for `Rf^!`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`,
-`proposition-exceptional-inverse-image-smooth-morphism--6`). A locally constant sheaf with free
+The three clauses (a) invertibility of `ω_f`, (b) the tensor formula and (c) base change for
+`Rf^!` are read off from the orientation-free smooth duality: the locally constant rank-one
+shape of `ω_f` and the tensor formula
+(`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`), and arbitrary base change
+for `Rf^!`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`). The
+base change map is constructed for quasi-compact `f'` and shown to be an isomorphism over a
+quasi-separated base `Y`. A locally constant sheaf with free
 rank-one stalks, placed in any degree, is invertible
 (`AlgebraicGeometry.Etale.isInvertible_shift_singleFunctor_obj_of_isLocallyConstantSheaf`).
 The canonical form of clause (b) is
@@ -96,10 +97,8 @@ include d in
 
 `Rf^! K ≅ Lf^* K ⊗^L ω_f`.
 
-Equivalently, `Rf^!` is `Lf^*` twisted by the invertible object `ω_f` of clause (a); this is
-what turns the computation of `ω_f` into a computation of `Rf^!` on all coefficients. The
-blueprint statement is that the mate `φ_K` of the projection formula is this isomorphism, which
-is `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`. -/
+The canonical form, that the mate of the projection formula is an isomorphism, is
+`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (_hK : DerivedCategory.boundedConstructibleFiniteTor Λ Y K) :
@@ -136,13 +135,9 @@ include d in
   Y' --g---> Y
 ```
 
-with `f` smooth and `f'` its base change along `g`, the formation of `Rf^!` commutes with base
-change. Applied to the diagonal square `W = X ×_Y X` this gives `ω_{p₁} ≅ Lp₂^* ω_f` and
-`ω_{p₂} ≅ Lp₁^* ω_f`, which is what makes the diagonal computation of the purity theorem
-possible. The isomorphism is the canonical base change map
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`),
-which is constructed for quasi-compact `f'` and shown to be an isomorphism over a
-quasi-separated base `Y`; both hypotheses hold in the Noetherian setting of the blueprint.
+with `f` smooth and `f'` its base change along `g`, over a quasi-separated base `Y`, the
+formation of `Rf^!` commutes with base change. The canonical form is
+`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`.
 -/
 theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek [QuasiSeparatedSpace Y]
     {X' Y' : Scheme.{u}} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
@@ -170,9 +165,7 @@ theorem nonempty_dualizingComplex_iso_constantComplex_of_etale {X Y : Scheme.{u}
 
 omit [HasTateTwist Λ] in
 /-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the
-ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of
-`proposition-exceptional-inverse-image-smooth-morphism` (b) for `e`, smooth of relative dimension
-zero, together with `ω_e ≅ Λ_X`. -/
+ordinary one, `Re^! K ≅ Le^* K`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
     [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ X]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

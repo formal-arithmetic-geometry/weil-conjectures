@@ -161,9 +161,7 @@ include c c' in
 is `ι`-real, and that `D'` is a Fourier partner of `D` whose lisse sheaf `M'` is irreducible,
 with correction sequences `c` for `D` and `c'` for the twisted dual `D†` (so that both
 transforms `FT_ψ(j_!M)` and `FT_{ψ⁻¹}(j_!M†)` are sheaves). Then `M'` is punctually `ι`-pure of
-some real weight: on a dense open `W ⊆ U'` where `H = R¹pr₂! 𝒦` is lisse, `M'|_W` is an
-irreducible quotient of the `ι`-real lisse sheaf `H|_W`, hence pure by real-sheaf purity, and
-purity extends from `W` to `U'`. -/
+some real weight. -/
 theorem exists_isPunctuallyPureOfWeight_of_correction {ι : PadicAlgCl l →+* ℂ}
     (hreal : (realifiedKernel ψ D b).IsReal ι) (hD' : D'.sheaf.IsIrreducibleLisse) :
     ∃ v : ℝ, D'.sheaf.IsPunctuallyPureOfWeight ι v := by
@@ -319,8 +317,7 @@ theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner_weight_zero (ι : Pa
 
 /-- For an irreducible nonexceptional `M` pure of weight `w` and a nontrivial `ψ`, the
 irreducible lisse sheaf `M'` of its Fourier partner is punctually `ι`-pure of some real weight
-`v`. By a constant twist we may assume `w = 0`
-(`AlgebraicGeometry.exists_isPunctuallyPureOfWeight_of_isFourierPartner_of_weight_zero`). -/
+`v`. -/
 theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ)
     (hψ : ψ ≠ 1) (D D' : WeilSheaf.LisseOnDenseOpen k₀ l)
     (hD : D.sheaf.IsIrreducibleLisse)

@@ -51,12 +51,7 @@ instance _root_.AlgebraicGeometry.affineLine.nontrivial (k₀ : Type u) [Field k
 open scoped ProEtale in
 /-- **A middle extension has no punctual subsheaf**: every morphism from a Weil sheaf `G` of
 finite support on the affine line to the direct image `j_*M` of a lisse Weil sheaf on a dense
-open vanishes. Let `V₀` be the complement of the support of `G`; then `G|_{V₀} = 0`, its stalks
-at the closed points of `V₀` vanishing. The adjoint `j̄^* G ⟶ M` of the morphism therefore
-vanishes on `Ū ∩ V̄₀`, and every point of `Ū` specializes from a point of `Ū ∩ V̄₀`, namely from
-the generic point of the irreducible geometric line, which lies over `V₀` since the affine line
-is not a single closed point. A morphism into the lisse `M` vanishing there vanishes
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_adicUpperStar_map_eq_zero`). -/
+open vanishes. -/
 theorem LisseOnDenseOpen.eq_zero_of_support_finite (D : LisseOnDenseOpen k₀ l)
     {G : WeilSheaf k₀ l (affineLine k₀)} (hG : G.support.Finite) (i : G ⟶ D.directImage) :
     i = 0 := by

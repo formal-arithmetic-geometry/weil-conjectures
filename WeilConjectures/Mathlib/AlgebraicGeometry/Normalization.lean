@@ -51,8 +51,7 @@ section OpenImmersion
 variable [IsOpenImmersion f] [QuasiCompact f]
 
 /-- For a quasi-compact open immersion `f : X ⟶ Y`, the morphism `X ⟶ f.normalization` is an
-open immersion: normalization commutes with the smooth base change `f` itself, and the
-normalization of the isomorphism `X ×_Y X ⟶ X` is trivial. -/
+open immersion. -/
 instance isOpenImmersion_toNormalization : IsOpenImmersion f.toNormalization := by
   have h := f.toNormalization_normalizationPullback_fst f
   have : f.toNormalization = inv (pullback.fst f f) ≫ (pullback.snd f f).toNormalization ≫
@@ -64,9 +63,7 @@ instance isOpenImmersion_toNormalization : IsOpenImmersion f.toNormalization := 
 end OpenImmersion
 
 /-- The relative normalization of `Y` in an integral scheme `X` with integrally closed local
-rings has integrally closed local rings. Over an affine open `V` of `Y` it is the spectrum of
-the integral closure of `Γ(Y, V)` in the integrally closed domain `Γ(X, f⁻¹ V)`, which is
-again an integrally closed domain. -/
+rings has integrally closed local rings. -/
 theorem isIntegrallyClosed_stalk_normalization [QuasiCompact f] [QuasiSeparated f]
     [IsIntegral X] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x))
     (y : f.normalization) : IsIntegrallyClosed (f.normalization.presheaf.stalk y) := by
@@ -115,12 +112,7 @@ theorem isFinite_fromNormalization_of_finite [QuasiCompact f] [QuasiSeparated f]
     exact RingHom.finite_algebraMap.mpr inferInstance
 
 /-- The normalization of a scheme `Y` locally of finite type over a field `K` in a
-quasi-compact integral open subscheme `X` is finite over `Y`.
-
-Over an affine open `Spec A` of `Y` meeting `X`, the ring of the normalization is the integral
-closure of `A` in `Γ(X ∩ Spec A)`, which lies in the integral closure of the finitely generated
-`K`-domain `A ⧸ 𝔭` in its fraction field, `𝔭` the generic point of the closure of `X`; the
-latter is a finite `A`-module by E. Noether's finiteness theorem. -/
+quasi-compact integral open subscheme `X` is finite over `Y`. -/
 theorem isFinite_fromNormalization {K : Type u} [Field K] [IsOpenImmersion f] [QuasiCompact f]
     [IsIntegral X] (q : Y ⟶ Spec (.of K)) [LocallyOfFiniteType q] :
     IsFinite f.fromNormalization := by
@@ -194,16 +186,16 @@ instance isDominant_fromNormalization : IsDominant X.fromNormalization :=
     rw [Hom.toNormalization_fromNormalization]; infer_instance
   .of_comp X.fromSpecFunctionField.toNormalization _
 
-/-- The normalization `ν : X^ν ⟶ X` of an integral scheme in its function field is surjective:
-it is integral, hence closed, and dominant. -/
+/-- The normalization `ν : X^ν ⟶ X` of an integral scheme in its function field is
+surjective. -/
 instance surjective_fromNormalization : Surjective X.fromNormalization :=
   have : UniversallyClosed X.fromNormalization :=
     (IsIntegralHom.iff_universallyClosed_and_isAffineHom.mp inferInstance).1
   inferInstance
 
 /-- Over a nonempty affine open `V` of an integral scheme `X` with `Γ(X, V)` integrally closed,
-the normalization `ν : X^ν ⟶ X` in the function field induces an isomorphism on sections:
-`Γ(X^ν, ν⁻¹ V)` is the integral closure of `Γ(X, V)` in its fraction field `k(X)`. -/
+the normalization `ν : X^ν ⟶ X` in the function field induces an isomorphism on sections
+over `V`. -/
 theorem isIso_fromNormalization_app {V : X.Opens} (hV : IsAffineOpen V) [Nonempty V]
     [IsIntegrallyClosed Γ(X, V)] : IsIso (X.fromNormalization.app V) := by
   let f := X.fromSpecFunctionField
@@ -245,8 +237,7 @@ theorem isIso_fromNormalization_app {V : X.Opens} (hV : IsAffineOpen V) [Nonempt
 
 /-- **The normalization over the normal locus.** For every open `U` of an integral scheme `X`
 whose local rings are integrally closed, the normalization `ν : X^ν ⟶ X` restricts to an
-isomorphism `ν⁻¹ U ⟶ U`: over an affine open `Spec A ⊆ U` the ring `A` is an integrally closed
-domain, hence equal to its integral closure in `k(X)`. -/
+isomorphism `ν⁻¹ U ⟶ U`. -/
 theorem isIso_fromNormalization_restrict (U : X.Opens)
     (hU : ∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) :
     IsIso (X.fromNormalization ∣_ U) := by
@@ -308,9 +299,7 @@ noncomputable abbrev fromNormalizationIn : X.normalizationIn L ⟶ X :=
 
 /-- **Finiteness of the normalization in a finite extension.** Let `X` be an integral scheme
 locally of finite type over a field `k` and `L` a finite extension of its function field `K`.
-Then the normalization `X^L ⟶ X` of `X` in `L` is finite: over an affine open `Spec B`, the
-integral closure of the finitely generated `k`-domain `B` in `L` is a finite `B`-module
-(E. Noether's finiteness theorem, Stacks `0359`; `L / K` need not be separable). -/
+Then the normalization `X^L ⟶ X` of `X` in `L` is finite (Stacks `0359`). -/
 theorem isFinite_fromNormalizationIn {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [FiniteDimensional X.functionField L] :
     IsFinite (X.fromNormalizationIn L) := by
@@ -359,8 +348,7 @@ theorem isFinite_fromNormalizationIn {k : Type u} [Field k] (q : X ⟶ Spec (.of
 /-- **The function field of the normalization in `L` is `L`.** For an integral scheme `X` and
 an algebraic extension `L` of its function field, the morphism `Spec L ⟶ X^L` is the generic
 point of the normalization `X^L` of `X` in `L`, and it identifies `L` with the function field of
-`X^L`: over an affine open `Spec B` of `X`, every element of `L` is a quotient of an element of
-the integral closure `B'` of `B` in `L` by a nonzero element of `B`, so `Frac(B') = L`. -/
+`X^L`. -/
 theorem exists_iso_toNormalization_normalizationIn
     [Algebra.IsAlgebraic X.functionField L] :
     ∃ e : Spec (.of L) ≅ Spec (X.normalizationIn L).functionField,
@@ -460,10 +448,7 @@ theorem exists_iso_toNormalization_normalizationIn
 end FiniteExtension
 
 /-- **Finiteness of the normalization.** For an integral scheme `X` locally of finite type over a
-field `k`, the normalization `ν : X^ν ⟶ X` in the function field is finite: over an affine open
-`Spec A`, the integral closure of the finitely generated `k`-domain `A` in its fraction field is a
-finite `A`-module by E. Noether's finiteness theorem. In particular `X^ν` is proper over `k` if
-`X` is. -/
+field `k`, the normalization `ν : X^ν ⟶ X` in the function field is finite. -/
 theorem isFinite_fromNormalization_of_locallyOfFiniteType {k : Type u} [Field k]
     (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] : IsFinite X.fromNormalization := by
   have h : X.fromSpecOfAlgebraFunctionField X.functionField = X.fromSpecFunctionField := by
@@ -514,8 +499,7 @@ theorem exists_isIso_fromNormalization_restrict {k : Type u} [Field k] (q : X �
     (hW.primeIdealOf ⟨y, hy⟩).asIdeal.primeCompl_le_nonZeroDivisors
 
 /-- **The normalization preserves dimension.** For an integral scheme `X` locally of finite type
-over a field `k`, `dim X^ν = dim X`: the finite surjective morphism `ν` lifts chains of
-specializations, and identifies no two distinct points one of which specializes to the other. -/
+over a field `k`, `dim X^ν = dim X`. -/
 theorem topologicalKrullDim_normalization {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] : topologicalKrullDim X.normalization = topologicalKrullDim X := by
   have := X.isFinite_fromNormalization_of_locallyOfFiniteType q

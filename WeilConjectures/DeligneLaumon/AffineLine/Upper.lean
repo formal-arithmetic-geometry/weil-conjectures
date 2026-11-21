@@ -29,12 +29,10 @@ exact sequence gives an exact triple in degree one whose middle term inherits th
 bound, characteristic polynomials being multiplicative in short exact sequences of Frobenius
 modules. Induction through the filtration finishes the proof.
 
-The blueprint proof opens with two further steps: a base change to a finite constant extension
-`𝔽_{q^m}` and a reduction to geometrically irreducible graded pieces. They are not needed here,
-and no statement of this block corresponds to them: the Fourier route of
-`proposition-fourier-transform-middle-extension` only assumes arithmetic irreducibility, so the
-composition filtration of the Weil representation over `k₀` is already fine enough, and neither the
-filtration nor a semisimplicity theorem for pure sheaves is used.
+No base change to a finite constant extension `𝔽_{q^m}` and no reduction to geometrically
+irreducible graded pieces are needed: the Fourier transform of a middle extension only assumes
+arithmetic irreducibility, so the composition filtration of the Weil representation over `k₀`
+is already fine enough, and no semisimplicity theorem for pure sheaves is used.
 
 ## Main statements
 
@@ -141,11 +139,7 @@ theorem hasWeightsAtMostOver_compactlySupportedCohomology_one_of_iso_upperStar
 
 /-- **Degree one of the affine-line estimate.** If `F` is lisse on the dense open `U₀ ⊆ 𝔸¹`,
 punctually `ι`-pure of weight `w` and unramified at infinity, then `H_c^1(𝔸¹, j_*F)` has weights
-at most `w + 1`. Write `F ≅ j'^* G` for a lisse `G` on an open `W ⊆ ℙ¹` containing `∞`; by
-`hasWeightsAtMostOver_compactlySupportedCohomology_one_of_upperStar` it suffices to treat
-`N = j'^* M` for `M` irreducible lisse on `W`. Such an `N` is irreducible and unramified at
-infinity; it is either geometrically constant, hence a constant twist with `H_c^1 = 0`, or it is
-covered by `hasWeightsAtMost_compactlySupportedCohomology_one_of_isUnramifiedAtInfinity`. -/
+at most `w + 1`. -/
 theorem hasWeightsAtMostOver_compactlySupportedCohomology_one (ι : PadicAlgCl l →+* ℂ)
     (D : LisseOnDenseOpen k₀ l) (hinf : D.IsUnramifiedAtInfinity) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) :

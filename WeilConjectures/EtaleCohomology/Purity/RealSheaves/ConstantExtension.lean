@@ -244,11 +244,10 @@ noncomputable def constantExtensionEquiv :
 
 Let `C₀` be a geometically connected curve over `𝔽_q`, `L = 𝔽_{q ^ m}` and
 `C₀' = C₀ ×_{𝔽_q} 𝔽_{q ^ m}`, regarded as a curve over `𝔽_{q ^ m}`. Under the natural map
-`W(C₀') → W(C₀)` induced by the projection `C₀' ⟶ C₀` (and a path between the base points, which
-exists by `AlgebraicGeometry.WeilGroup.nonempty_constantExtensionPath`), the Weil group of `C₀'`
-identifies with `W(C₀)^[m] = deg⁻¹(m ℤ)`: the map is a continuous injective homomorphism with
-image `W(C₀)^[m]`, its geometric subgroup `π₁(C)` is carried onto that of `W(C₀)`, and the
-normalised degree is `deg_{𝔽_{q ^ m}} = deg_{𝔽_q} / m`. -/
+`W(C₀') → W(C₀)` induced by the projection `C₀' ⟶ C₀` (and a path between the base points), the
+Weil group of `C₀'` identifies with `W(C₀)^[m] = deg⁻¹(m ℤ)`: the map is a continuous injective
+homomorphism with image `W(C₀)^[m]`, its geometric subgroup `π₁(C)` is carried onto that of
+`W(C₀)`, and the normalised degree is `deg_{𝔽_{q ^ m}} = deg_{𝔽_q} / m`. -/
 theorem constantExtension :
     Function.Injective (W.constantExtensionMap W' τ) ∧ Continuous (W.constantExtensionMap W' τ) ∧
       (W.constantExtensionMap W' τ).range = W.degMultiples (Module.finrank K L) ∧
@@ -278,13 +277,9 @@ theorem exists_constantExtensionMap_eq_pow (s : W.carrier)
   exact h
 
 omit [Finite L] in
-/-- Pointer to the properties of `situation-weil`.
-
-The degree `deg : W(C₀) → ℤ` is a surjective homomorphism with kernel the geometric subgroup
+/-- The degree `deg : W(C₀) → ℤ` is a surjective homomorphism with kernel the geometric subgroup
 `π₁(C)`, and it sends every lift of the geometric Frobenius `Φ` to `1`: an element of `W(C₀)`
-acting on the geometric fibres of the constant covers of `C₀` as `Φ` has degree one
-(`situation-weil`, through
-`AlgebraicGeometry.Scheme.FiniteEtale.exact_weilGroupDeg`). -/
+acting on the geometric fibres of the constant covers of `C₀` as `Φ` has degree one. -/
 theorem exact_deg :
     Function.Surjective W.deg ∧ W.deg.ker = W.geometric ∧
       ∀ w : W.carrier, (∀ (A : FiniteEtaleAlgebra K)

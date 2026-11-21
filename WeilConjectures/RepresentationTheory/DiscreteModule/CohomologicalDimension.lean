@@ -216,8 +216,7 @@ lemma injective_ofInvariant (X : DiscreteModule.{w} G) (x : X.obj.V) (hx : ℓ �
 
 /-- **Modules over an `ℓ`-group.** Suppose that `G` acts on finite `ℓ`-primary modules through
 an `ℓ`-group: the normal subgroup `N` acts trivially and every element of `G` has an `ℓ`-power in
-`N`. If `H²(G, 𝔽_ℓ) = 0`, then `H²(G, X) = 0` for every such `X`: a nonzero `X` contains a
-copy of `𝔽_ℓ` spanned by a fixed vector, and we argue by induction on `#X`. -/
+`N`. If `H²(G, 𝔽_ℓ) = 0`, then `H²(G, X) = 0` for every such `X`. -/
 theorem subsingleton_H_two_of_forall_pow_mem (N : Subgroup G) [N.Normal]
     (hpow : ∀ k : G, ∃ j : ℕ, k ^ ℓ ^ j ∈ N) (h2 : Subsingleton (H G (trivialZMod.{w} G ℓ) 2))
     (n : ℕ) (X : DiscreteModule.{w} G) [Finite X.obj.V] (hn : Nat.card X.obj.V = n)

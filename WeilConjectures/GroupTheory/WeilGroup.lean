@@ -29,10 +29,9 @@ cyclic subgroup `⟨Φ⟩` and `W(π, Φ)` with the inverse image of `⟨Φ⟩` 
 * `MonoidHom.exact_weilGroupDeg`: the sequence `1 → ker π → W(π, Φ) → ℤ → 0` is exact, and the
   lifts of `Φ` have degree one.
 
-## Blueprint
+## Implementation details
 
-`MonoidHom.exact_weilGroupDeg` implements `situation-weil`. The Weil group of a
-scheme is `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, the Weil group
+The Weil group of a scheme is `AlgebraicGeometry.Scheme.FiniteEtale.weilGroup`, the Weil group
 `W(π, Φ)` of the action of `π₁(X₀, s)` on the geometric fibres of the constant covers and the
 geometric Frobenius.
 -/

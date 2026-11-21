@@ -27,10 +27,13 @@ stalk formula along the zero section that restriction is the compactly supported
 
 - `AlgebraicGeometry.Etale.nonempty_iso_affineFourierTransform_unit`: `FT_ψ(Λ) ≅ δ₀(-r)[-r]`.
 
-## Blueprint
+## Implementation details
 
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
+The character is assumed nontrivial in the strong sense that `Ψ 1 - 1` is a unit of `Λ`: the
+proof uses `H_c^*(𝔸¹, ℒ_ψ) = 0`, and the `ψ`-isotypic part of `H_c^*(𝔸¹, Λ)` is killed by
+`Ψ 1 - 1`. For `Ψ = 1` the transform of `Λ` is `Λ(-r)[-r]`, supported everywhere. Asking
+`Ψ ≠ 1` is not enough when `Λ` is not a domain: for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the
+transform has the trivial-character transform as a factor.
 -/
 
 @[expose] public section
@@ -268,17 +271,10 @@ the origin of the dual, Tate twisted and shifted by the relative dimension `r = 
 
 `FT_ψ(Λ) ≅ δ₀(-r)[-r]`.
 
-On the affine line, the blueprint's case, this reads `FT_ψ(Λ) ≅ δ₀(-1)[-1]`.
+On the affine line this reads `FT_ψ(Λ) ≅ δ₀(-1)[-1]`. The character must be nontrivial in the
+strong sense that `Ψ 1 - 1` is a unit of `Λ`.
 
-The character must be **nontrivial** in the strong sense that `Ψ 1 - 1` is a unit of `Λ`:
-the proof uses `H_c^*(𝔸¹, ℒ_ψ) = 0`, and the `ψ`-isotypic part of `H_c^*(𝔸¹, Λ)` is killed
-by `Ψ 1 - 1`. For `Ψ = 1` the kernel is the constant sheaf and the transform of `Λ` is
-`Λ(-r)[-r]`, supported everywhere. Asking `Ψ ≠ 1` is not enough when `Λ` is not a domain:
-for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the trivial-character transform as a
-factor.
-
-Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`. -/
+Class: torsion (the cohomology of `𝔸^r`). -/
 theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : IsUnit (Ψ 1 - 1)) :

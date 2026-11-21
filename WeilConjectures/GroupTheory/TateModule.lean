@@ -64,8 +64,7 @@ The *Tate module* `T_ℓ M` of an abelian group `M` at a prime `ℓ` is the subg
 `∀ n : ℕ, M` consisting of the compatible systems `t` of `ℓ ^ n`-torsion points, that is, those
 `t` with `ℓ ^ n • t n = 0` for all `n` and `ℓ • t (n + 1) = t n` for all `n`.
 
-This is also blueprint `definition-tate-module`; the blueprint indexes from `n = 1`, and
-the extra coordinate `t 0` here is always `0`. -/
+The coordinate `t 0` is always `0`. -/
 def tateModule : AddSubgroup (∀ _ : ℕ, M) where
   carrier := {t | (∀ n, (ℓ : ℤ) ^ n • t n = 0) ∧ ∀ n, (ℓ : ℤ) • t (n + 1) = t n}
   zero_mem' := by simp
@@ -173,17 +172,14 @@ theorem pow_zsmul_coe_add (t : tateModule ℓ M) (n k : ℕ) :
   | succ k ih => rw [pow_succ', mul_smul, smul_comm, ← add_assoc, zsmul_coe_succ, ih]
 
 omit [Fact ℓ.Prime] in
-/-- Part of blueprint `proposition-no-frobenius-fixed-vector`: the Tate module has no `ℓ`-power
-torsion. -/
+/-- The Tate module has no `ℓ`-power torsion. -/
 theorem eq_zero_of_pow_zsmul_eq_zero {t : tateModule ℓ M} {k : ℕ}
     (h : (ℓ : ℤ) ^ k • t = 0) : t = 0 :=
   Subtype.ext <| funext fun n ↦ by
     rw [← pow_zsmul_coe_add t n k]
     exact congr_fun (congr_arg Subtype.val h) (n + k)
 
-/-- Part of blueprint `proposition-no-frobenius-fixed-vector`: the Tate module is a torsion-free
-`ℤ_[ℓ]`-module, since a nonzero `ℓ`-adic integer is a unit times a power of `ℓ` and the Tate
-module has no `ℓ`-power torsion. -/
+/-- The Tate module is a torsion-free `ℤ_[ℓ]`-module. -/
 instance : NoZeroSMulDivisors ℤ_[ℓ] (tateModule ℓ M) where
   eq_zero_or_eq_zero_of_smul_eq_zero {a t} h := by
     by_cases ha : a = 0
@@ -219,19 +215,8 @@ noncomputable def congr (e : M ≃+ N) : tateModule ℓ M ≃ₗ[ℤ_[ℓ]] tate
     (LinearMap.ext fun _ ↦ Subtype.ext <| funext fun _ ↦ by simp)
 
 variable (ℓ M) in
-/-- Blueprint `proposition-integral-tate-module--2` (group-theoretic content): the Tate module of an
-`ℓ`-divisible group is free.
-
-Let `M` be an abelian group on which multiplication by the prime `ℓ` is surjective and whose
-`ℓ`-torsion `M[ℓ]` has order `ℓ ^ r`. Then `T_ℓ M ≅ ℤ_[ℓ] ^ r`.
-
-Choose an "integral basis" `e` of `M[ℓ]` (`AddSubgroup.exists_basis_torsionBy`) and compatible
-lifts `z k` of `e` along multiplication by `ℓ ^ k`, so that `ℓ • z (k + 1) = z k`. The family
-`z k` is a basis of `M[ℓ ^ (k + 1)]` over `ℤ / ℓ ^ (k + 1)`
-(`AddSubgroup.sum_zsmul_dvd_and_exists_of_pow_zsmul_eq`); hence the elements
-`(0, z 0 i, z 1 i, …)` of `T_ℓ M` form a `ℤ_[ℓ]`-basis of it: coordinates of an element of the
-Tate module with respect to the `z k` form a compatible system modulo `ℓ ^ (k + 1)`, whose limit
-is an `ℓ`-adic integer. -/
+/-- The Tate module of an `ℓ`-divisible group is free: if multiplication by the prime `ℓ` is
+surjective on `M` and the `ℓ`-torsion `M[ℓ]` has order `ℓ ^ r`, then `T_ℓ M ≅ ℤ_[ℓ] ^ r`. -/
 theorem nonempty_linearEquiv_of_natCard_eq (hdiv : ∀ x : M, ∃ y : M, (ℓ : ℤ) • y = x) (r : ℕ)
     (hr : Nat.card (AddSubgroup.torsionBy M (ℓ : ℤ)) = ℓ ^ r) :
     Nonempty (tateModule ℓ M ≃ₗ[ℤ_[ℓ]] (Fin r → ℤ_[ℓ])) := by
@@ -317,8 +302,7 @@ noncomputable instance : AddCommGroup (rationalTateModule ℓ M) :=
 noncomputable instance : Module ℚ_[ℓ] (rationalTateModule ℓ M) :=
   inferInstanceAs (Module ℚ_[ℓ] (ℚ_[ℓ] ⊗[ℤ_[ℓ]] (tateModule ℓ M)))
 
-/-- Part of blueprint `proposition-no-frobenius-fixed-vector`: since `T_ℓ M` is a torsion-free
-`ℤ_[ℓ]`-module, the natural map `T_ℓ M → V_ℓ M = ℚ_[ℓ] ⊗ T_ℓ M`, `t ↦ 1 ⊗ t`, is injective. -/
+/-- The natural map `T_ℓ M → V_ℓ M = ℚ_[ℓ] ⊗ T_ℓ M`, `t ↦ 1 ⊗ t`, is injective. -/
 theorem injective_one_tmul :
     Function.Injective fun t : tateModule ℓ M ↦ (1 : ℚ_[ℓ]) ⊗ₜ[ℤ_[ℓ]] t := by
   refine (injective_iff_map_eq_zero (TensorProduct.mk ℤ_[ℓ] ℚ_[ℓ] (tateModule ℓ M) 1)).mpr
@@ -396,10 +380,8 @@ theorem map_tmul (f : M →+ N) (a : ℚ_[ℓ]) (t : tateModule ℓ M) :
   rfl
 
 variable (ℓ) in
-/-- Tate module of an abelian group.
-
-The fixed submodule `(V_ℓ M)^s` of an endomorphism `s` of `M` (in the blueprint an
-automorphism), which acts on `V_ℓ M` coordinatewise and on fractions through
+/-- The fixed submodule `(V_ℓ M)^s` of an endomorphism `s` of `M`, which acts on `V_ℓ M`
+coordinatewise and on fractions through
 `AddCommGroup.rationalTateModule.map`. -/
 noncomputable def fixedSubmodule (s : M →+ M) : Submodule ℚ_[ℓ] (rationalTateModule ℓ M) :=
   LinearMap.eqLocus (map s) LinearMap.id
@@ -410,10 +392,8 @@ theorem mem_fixedSubmodule {s : M →+ M} {v : rationalTateModule ℓ M} :
 
 
 variable (ℓ M) in
-/-- Blueprint `proposition-integral-tate-module--2` (group-theoretic content, rational form): if
-multiplication by the prime `ℓ` is surjective on `M` and `M[ℓ]` has order `ℓ ^ r`, then
-`V_ℓ M ≅ ℚ_[ℓ] ^ r`. This is the base change to `ℚ_[ℓ]` of
-`AddCommGroup.tateModule.nonempty_linearEquiv_of_natCard_eq`. -/
+/-- If multiplication by the prime `ℓ` is surjective on `M` and `M[ℓ]` has order `ℓ ^ r`, then
+`V_ℓ M ≅ ℚ_[ℓ] ^ r`. -/
 theorem nonempty_linearEquiv_of_natCard_eq (hdiv : ∀ x : M, ∃ y : M, (ℓ : ℤ) • y = x) (r : ℕ)
     (hr : Nat.card (AddSubgroup.torsionBy M (ℓ : ℤ)) = ℓ ^ r) :
     Nonempty (rationalTateModule ℓ M ≃ₗ[ℚ_[ℓ]] (Fin r → ℚ_[ℓ])) :=

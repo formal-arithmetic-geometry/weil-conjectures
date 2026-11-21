@@ -19,8 +19,10 @@ off the local factors of an `L`-function from the `L`-function itself:
 
 ## Main statements
 
-- `Polynomial.isCoprime_of_norm_inv_roots`: blueprint `theorem-pure-lisse-sheaves-over-relative--1`.
-- `Polynomial.map_conj_eq_self_of_isCoprime`: blueprint `theorem-pure-lisse-sheaves-over-relative`.
+- `Polynomial.isCoprime_of_norm_inv_roots`: polynomials whose reciprocal roots lie on disjoint
+  sets of radii are coprime.
+- `Polynomial.map_conj_eq_self_of_isCoprime`: coprime polynomials with constant term `1` whose
+  quotient is real have real coefficients.
 -/
 
 @[expose] public section
@@ -31,9 +33,7 @@ namespace Polynomial
 
 /-- **Separation by root radii.** Let `A` and `B` be nonzero complex polynomials. If every root
 `z` of `A` has `‖z‖⁻¹ ≤ R` and every root `z` of `B` has `‖z‖⁻¹ = S` with `R < S`, then `A` and
-`B` are coprime. For `A` and `B` with constant term `1` the numbers `z⁻¹` are their reciprocal
-roots, so this says that no reciprocal root of `B` cancels in the fraction `A / B`: its
-reciprocal poles of modulus `S` are exactly the reciprocal roots of `B`, with multiplicity. -/
+`B` are coprime. -/
 theorem isCoprime_of_norm_inv_roots {A B : ℂ[X]} (hA : A ≠ 0) (hB : B ≠ 0) {R S : ℝ}
     (hAR : ∀ z ∈ A.roots, ‖z‖⁻¹ ≤ R) (hBS : ∀ z ∈ B.roots, ‖z‖⁻¹ = S) (hRS : R < S) :
     IsCoprime A B := by

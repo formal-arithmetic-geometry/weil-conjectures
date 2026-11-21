@@ -24,7 +24,7 @@ coefficient ring `Λ` is invertible and a normalized rank-one datum, the auxilia
 (`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`, with the auxiliary class
 `-h = c₁(𝒪(-∞))`) is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMapAux`), hence so is the decomposition
-map `(1, h)` with the hyperplane class `h = c₁(𝒪(1))` of the notes
+map `(1, h)` with the hyperplane class `h = c₁(𝒪(1))`
 (`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`).
 
 ## The argument
@@ -307,18 +307,15 @@ end GeometricPoint
 of `Λ` is invertible and a normalized rank-one datum, the auxiliary decomposition map
 `(1, -h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
 (`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`, with `-h = c₁(𝒪(-∞))`) is an
-isomorphism. It is checked at
-the geometric points of `S`
-(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMapAux`). -/
+isomorphism. -/
 theorem isIso_projectiveLineDecompositionMapAux [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] : IsIso (projectiveLineDecompositionMapAux Λ S) :=
   isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map Λ _ fun y ↦
     isIso_leftDerivedUpperStar_map_projectiveLineDecompositionMapAux Λ _ (S.algClosurePoint y)
 
 /-- *The cohomology of the projective line*: the decomposition map `(1, h)` with the
-hyperplane class of the notes (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) is an
-isomorphism: it is the auxiliary one up to the automorphism `1 ⊕ (-1)`
-(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap_iff`). -/
+hyperplane class `h = c₁(𝒪(1))` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`) is an
+isomorphism. -/
 theorem isIso_projectiveLineDecompositionMap [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] : IsIso (projectiveLineDecompositionMap Λ S) :=
   (isIso_projectiveLineDecompositionMap_iff Λ S).2 (isIso_projectiveLineDecompositionMapAux Λ S)
@@ -327,7 +324,7 @@ theorem isIso_projectiveLineDecompositionMap [HasKummerClass.IsNormalized Λ] (S
 `Tr_q : Rq_*(Λ_{ℙ¹_S}(1)[2]) ⟶ Λ_S`, the second component of the inverse of the decomposition
 isomorphism `(1, h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMap`,
 `AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`), `h = c₁(𝒪(1))` the hyperplane
-class of the notes; it is characterised by `Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`
+class; it is characterised by `Tr_q ∘ h♭ = 1` and `Tr_q ∘ η = 0`
 (`AlgebraicGeometry.Etale.homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace`). It is
 the negative of the auxiliary trace `AlgebraicGeometry.Etale.projectiveLineTraceAux`, normalized
 by `-h` (`AlgebraicGeometry.Etale.projectiveLineTrace_eq_neg`). -/
@@ -340,8 +337,7 @@ noncomputable def projectiveLineTrace [HasKummerClass.IsNormalized Λ] (S : Sche
 
 /-- The auxiliary trace: the second component of the inverse of the auxiliary decomposition
 isomorphism `(1, -h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`), normalized by
-`-h`; the trace of the notes is its negative (`AlgebraicGeometry.Etale.projectiveLineTrace_eq_neg`).
--/
+`-h`; the trace `AlgebraicGeometry.Etale.projectiveLineTrace` is its negative. -/
 noncomputable def projectiveLineTraceAux [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
@@ -349,7 +345,7 @@ noncomputable def projectiveLineTraceAux [HasKummerClass.IsNormalized Λ] (S : S
   haveI := isIso_projectiveLineDecompositionMapAux Λ S
   inv (projectiveLineDecompositionMapAux Λ S) ≫ biprod.snd
 
-/-- The trace of the notes is the negative of the auxiliary trace. -/
+/-- The trace `Tr_q` is the negative of the auxiliary trace. -/
 lemma projectiveLineTrace_eq_neg [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     projectiveLineTrace Λ S = -projectiveLineTraceAux Λ S := by

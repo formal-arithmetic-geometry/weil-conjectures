@@ -14,8 +14,7 @@ import Mathlib.Topology.Compactness.Compact
 /-!
 # Continuity of the coinduced contracting operator
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, label , final profinite comparison. The
-explicit contraction is an agent-written proof ingredient.
+Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, final profinite comparison.
 -/
 
 @[expose] public section
@@ -25,13 +24,10 @@ universe u v w
 namespace Rep
 
 /-- The formula inserting `x` as the first group variable and evaluating the resulting
-function at the identity defines a linear map between continuous cochains.
-`LocallyConstant G M.obj.V` is the coinduced function module of
-`exists_coinduced_discrete_embedding`. Nested locally constant maps encode the discrete
-topology on that whole module, rather than a compact-open topology.
-The index `n + 1` ranges over all positive degrees, including degree one at `n = 0`.
+function at the identity defines a linear map between continuous cochains, in every positive
+degree `n + 1`.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, label , final profinite comparison. -/
+Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, final profinite comparison. -/
 theorem exists_coinduced_continuous_contraction
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

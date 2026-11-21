@@ -55,16 +55,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 -- Keep the original tower interface while reducing to the generator calculation.
-/-- The left tensor-shift square commutes on the entire strict quotient tower.
-Source: Stacks 011G and 07A4.
-
-Precompose with the inverse normalized tensor comparison and evaluate at a quotient
-and a degree. Finite tensor extensionality tests unit reduction generators. The
-quotient normalization computes their images, then the inverse tensor normalization,
-the signed shift laws, and the forward tensor normalization compute the left path.
-The finite tensor map law and the identity components of termwise reindexing with
-shift compute the right path. Integer degree transport identifies the outputs.
-These identities apply for every integer shift, including zero and negative shifts. -/
+/-- The left tensor-shift square commutes on the entire strict quotient tower, for every
+integer shift.
+Source: Stacks 011G and 07A4. -/
 theorem podTensorShift_strictTowerLeftSquare
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

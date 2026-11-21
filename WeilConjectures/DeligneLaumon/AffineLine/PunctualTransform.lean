@@ -254,10 +254,7 @@ theorem exists_iso_carrier_lowerStar_tensorObj_fourierKernel_inv
 reduced `k₀`-scheme over the line and `X' = Z₀ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and
 `π : X' ⟶ 𝔸¹` and `i' = (i ∘ q, π) : X' ⟶ 𝔸¹ × 𝔸¹`. For a Weil sheaf `E` on `Z₀`, the geometric
 sheaf underlying `π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E)` is, if nonzero, a quotient of some linear character
-`ℒ_{ψ(a x)}` on `𝔸¹_{k̄}`: `Z̄` is a finite disjoint union of points `ξ`, so the sheaf is the
-direct sum of its restrictions to the lines `{ξ} × 𝔸¹`, on which `i'^*𝓚_{ψ⁻¹}` is `ℒ_{ψ⁻¹(ξ x)}`
-and `q^*E` is constant; and the tensor product `ℒ_{ψ⁻¹(ξ x)} ⊗ ℚ̄_ℓ = 𝓗om(ℒ_{ψ⁻¹(ξ x)}^∨, ℚ̄_ℓ)`
-is `ℒ_{ψ(-ξ x)}`. -/
+`ℒ_{ψ(a x)}` on `𝔸¹_{k̄}`. -/
 theorem exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv
     (ψ : AddChar k₀ (PadicAlgCl l)) {Z X' : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))]
     [IsFinite (Z ↘ Spec (CommRingCat.of k₀))] [IsReduced Z] [X'.Over (Spec (CommRingCat.of k₀))]
@@ -420,8 +417,10 @@ theorem isZero_of_isZero_carrier_directImage (h : IsZero D.directImage.obj.carri
   have := (ProEtale.adicUpperStarLowerStarAdjunction l jg).isLeftAdjoint
   exact isZero_iff_isZero_carrier.2 (((jg)^*ᵃ[l].map_isZero h).of_iso cD)
 
-/-- The punctual case of `proposition-fourier-transform-middle-extension--1`, Step 3, for an
-explicit presentation `FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E))[1]` of the inverse transform. -/
+/-- **A punctual transform forces a linear geometric constituent**, for an explicit presentation
+`FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^*E))[1]` of the inverse transform: if the transform of the
+nonzero middle extension `(j_*M)[1]` is a sheaf `G` in degree `0`, then `M_k̄` has a linear
+Artin–Schreier constituent `ℒ_{ψ(a x)}|_U`. -/
 theorem exists_hasLinearArtinSchreierConstituent_of_iso_of_isPullback (hψ : ψ ≠ 1)
     (hD : ¬ IsZero D.sheaf) (G : WeilSheaf k₀ l (affineLine k₀))
     (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G)
@@ -448,12 +447,8 @@ theorem exists_hasLinearArtinSchreierConstituent_of_iso_of_isPullback (hψ : ψ 
   exact ⟨a, D.hasLinearArtinSchreierConstituent_of_epi ψ (c.hom ≫ p)⟩
 
 /-- **A punctual transform forces a linear geometric constituent**. If the transform of the middle
-extension `(j_*M)[1]` is a sheaf `G` of finite support in degree `0`, then by Fourier inversion
-`(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(G) ≅ (π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^* i^* G))[1]`, so `j_*M` and
-`π_*(i'^*𝓚_{ψ⁻¹} ⊗ q^* i^* G)` have the same underlying geometric sheaf. The latter surjects onto
-some `ℒ_{ψ(a x)}` if `M ≠ 0`
-(`AlgebraicGeometry.WeilSheaf.exists_epi_carrier_lowerStar_tensorObj_fourierKernel_inv`), and
-restricting along `j` with `j^* j_* M = M` makes `ℒ_{ψ(a x)}|_U` a quotient of `M_k̄`. -/
+extension `(j_*M)[1]` of a nonzero `M` is a sheaf `G` of finite support in degree `0`, then
+`M_k̄` has a linear Artin–Schreier constituent `ℒ_{ψ(a x)}|_U`. -/
 theorem exists_hasLinearArtinSchreierConstituent_of_iso (hψ : ψ ≠ 1) (hD : ¬ IsZero D.sheaf)
     (G : WeilSheaf k₀ l (affineLine k₀)) (hG : (WeilSheaf.support G).Finite)
     (e : (fourierTransform ψ).obj D.middleExtension ≅ WeilSheaf.toComplex.obj G) :

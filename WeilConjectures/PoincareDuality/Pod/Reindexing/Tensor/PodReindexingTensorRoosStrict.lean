@@ -9,7 +9,14 @@ public import WeilConjectures.PoincareDuality.PodCompletedTensorReindex.PodCompl
 import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorRoosRepresentativeSquare
 import WeilConjectures.SmoothPurity.Sf.SfDerivedCompleteLegacyComparison
 
-/-! # Strict Roos realization for normalized tensor reindexing -/
+/-! # Strict Roos realization for normalized tensor reindexing
+
+## Implementation details
+
+The generator and tower naturality laws do not constrain `T.tensor`, so they cannot imply the
+global canonical equation; `podReindexingTensorRoosNormalization_model_iff_canonical` is stated
+for good representatives only.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -159,15 +166,9 @@ private theorem representative_equivalence
       ((podGoodReindex l E g D).obj P,(podGoodReindex l E g D).obj Q)) a r B c hs
 
 /-- The strict Roos equation is equivalent to the canonical equation on good
-representatives. No naturality of the independently supplied derived tensor family
-is assumed, so the conclusion concerns actual localized representatives only.
-
-Source: Stacks 07A4 and 0941.
-
-STATEMENT-DISPUTED: the old generator and tower naturality laws do not
-constrain T.tensor. In particular they cannot imply the global Canonical equation.
-The repaired statement identifies exactly the equation needed by the parent.
--/
+representatives; no naturality of the supplied derived tensor family is assumed, so the
+statement concerns actual localized representatives only.
+Source: Stacks 07A4 and 0941. -/
 theorem podReindexingTensorRoosNormalization_model_iff_canonical
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

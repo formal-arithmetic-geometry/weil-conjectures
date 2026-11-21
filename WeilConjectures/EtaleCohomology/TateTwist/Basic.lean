@@ -17,9 +17,8 @@ public import WeilConjectures.ConstructibleSheaf.Monoidal
 # The Tate twists
 
 Let `Λ` be a commutative ring of positive characteristic `n`. This file constructs the Tate
-twists `Λ_X(m)`, `m ∈ ℤ`, of the blueprint on every scheme
-`X` on which `n` is invertible, and shows that they form a Tate twist datum
-(`AlgebraicGeometry.Etale.HasTateTwist`) for the coefficient ring `Λ`.
+twists `Λ_X(m)`, `m ∈ ℤ`, on every scheme `X` on which `n` is invertible, and shows that they
+form a Tate twist datum (`AlgebraicGeometry.Etale.HasTateTwist`) for the coefficient ring `Λ`.
 
 ## Construction
 

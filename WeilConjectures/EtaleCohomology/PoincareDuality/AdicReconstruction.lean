@@ -17,8 +17,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduct
 
 Let `k` be a separably closed field, `a : X ⟶ Spec k` a morphism admitting a compactification
 for which `Ra_!` has a right adjoint, `γ : T[2d] ≅ Ra^! Λ` a purity isomorphism (`T = Λ_X(d)`)
-and `K ∈ D(X_ét, Λ)` perfect over `Λ_X`. This file proves blueprint
-`theorem-poincare-duality--6` in the form the repository can express.
+and `K ∈ D(X_ét, Λ)` perfect over `Λ_X`. This file proves the following form of adic Poincaré
+duality.
 
 * The adjoint `β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the derived Poincaré pairing
   (`AlgebraicGeometry.Etale.poincareAdjoint`) is an isomorphism over every coefficient ring
@@ -63,6 +63,10 @@ identification of the transported isomorphisms over `E` and `L` with the Poincar
 the base-changed complexes, and the transport of the degree-indexing maps, the relative form
 and the Frobenius squares, need the compatibility of `Ra_!`, `Ra_*`, `RHom` and `⊗ᴸ` with
 derived base change, which the repository does not have; they are not stated.
+
+`AlgebraicGeometry.Etale.pairingAdjoint` and `AlgebraicGeometry.Etale.coefficientDualIsoIhom` are
+stated for a general coefficient category, so that the kernel need not compare tensor products at
+`ModuleCat Λ`.
 -/
 
 @[expose] public section
@@ -103,8 +107,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The tensor–internal-hom adjoint `D ⟶ RHom(C, Λ_Y)` of a pairing `b : C ⊗ᴸ D ⟶ Λ_Y` in
 `D(Y_ét)`. It is an isomorphism exactly when `b` is perfect
-(`AlgebraicGeometry.Etale.IsPerfectPairing`). Like that definition, it is stated for a general
-coefficient category, so that the kernel need not compare tensor products at `ModuleCat Λ`. -/
+(`AlgebraicGeometry.Etale.IsPerfectPairing`). -/
 noncomputable def pairingAdjoint {C D : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (b : ((derivedTensor A Y).obj C).obj D ⟶ 𝟙_ _) : D ⟶ (ihom C).obj (𝟙_ _) :=
   MonoidalClosed.curry (C := _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) b
@@ -115,8 +118,7 @@ lemma IsPerfectPairing.isIso_pairingAdjoint
     IsIso (pairingAdjoint b) :=
   hb.isIso
 
-/-- The coefficient dual `RHom(C, Λ_Y)` is the internal hom `[C, Λ_Y]`, stated for a general
-coefficient category so that the kernel compares the two only generically. -/
+/-- The coefficient dual `RHom(C, Λ_Y)` is the internal hom `[C, Λ_Y]`. -/
 noncomputable def coefficientDualIsoIhom
     (C : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     (DerivedCategory.coefficientDual A Y).obj (op C) ≅ (ihom C).obj (𝟙_ _) :=
@@ -152,8 +154,7 @@ variable {K}
 
 For `K` perfect over `Λ_X`, the adjoint `β_K^♯` of the derived Poincaré pairing is an
 isomorphism, over every coefficient ring `Λ`, in particular over `𝒪_E`; its inverse is the
-duality isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`
-(`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable`). -/
+duality isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`. -/
 theorem isIso_poincareAdjoint (hKd : IsDualizable K) : IsIso (poincareAdjoint a adj γ K) :=
   (isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable a adj γ hKd).isIso_pairingAdjoint
 
@@ -161,8 +162,7 @@ include adj γ in
 /-- Adic reconstruction and scalar extension (the duality isomorphism in `D(Λ)`).
 
 For `K` perfect over `Λ_X`, there is an isomorphism of complexes of `Λ`-modules
-`RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`, obtained from the inverse of `β_K^♯` by evaluation at the
-point, which commutes with duals. -/
+`RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]`. -/
 theorem nonempty_iso_ihom_compactlySupportedGlobalSections (hKd : IsDualizable K) :
     Nonempty ((ihom ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K)).obj
         (𝟙_ _) ≅
@@ -185,12 +185,7 @@ variable {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
 
 Let `ϖ` be a nonzerodivisor of `Λ` (a uniformizer of `𝒪_E`) and `A_n = Λ/(ϖ)ⁿ`, read through
 `K ↦ K_n = K ⊗ᴸ (A_n)_X`. For `K` perfect over `Λ_X` and every `n`, the reduction
-`β_K^♯ ⊗ᴸ A_n` is an isomorphism. By
-`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_poincareAdjoint_source` and
-`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_poincareAdjoint_target` its source is
-`RΓ(X, K^∨(d)_n)[2d]` and its target `RHom(RΓ_c(X, K), A_n)`, the `A_n`-dual of
-`RΓ_c(X, K_n) ≅ RΓ_c(X, K) ⊗ᴸ A_n`: the reduction is the finite-level duality, and these form
-a morphism of towers (`AlgebraicGeometry.Etale.poincareAdjoint_reduction_naturality`). -/
+`β_K^♯ ⊗ᴸ A_n` is an isomorphism. -/
 theorem isIso_reductionModIdeal_map_poincareAdjoint (hKd : IsDualizable K) (J : Ideal Λ) :
     IsIso ((reductionModIdeal Λ (Spec (.of k)) J).map (poincareAdjoint a adj γ K)) := by
   have := isIso_poincareAdjoint a adj γ hKd
@@ -243,8 +238,7 @@ section IntegralPairing
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- The reduction `K ⊗ᴸ (Λ/ϖⁿ)_X` of a dualizable (that is, perfect over `Λ_X`) object `K` of
-`D(X_ét, Λ)` is dualizable, for `ϖ` a nonzerodivisor of `Λ`: `(Λ/ϖⁿ)_X` is dualizable
-(`AlgebraicGeometry.Etale.isDualizable_constantSingle_quotient_span_pow`). -/
+`D(X_ét, Λ)` is dualizable, for `ϖ` a nonzerodivisor of `Λ`. -/
 theorem isDualizable_reductionModIdeal {X : Scheme.{u}} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (n : ℕ) {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) :
@@ -289,10 +283,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [IsDomain Λ] [IsPrincipalIdealRing �
   {I : Ideal Λ} [IsAdicComplete I Λ] {k : Type u} [Field k] [IsSepClosed k]
 
 /-- Over a separably closed field `k`, the unit `Λ_s` of `D(Spec(k)_ét, Λ)` is derived complete
-for an ideal `I = (ϖ)` of a principal ideal domain `Λ` which is `I`-adically complete. Evaluation
-at the point is a `Λ`-linear equivalence `D(Spec(k)_ét, Λ) ≌ D(Λ)` carrying `Λ_s` to `Λ[0]`, and
-`Λ[0]` receives no nonzero morphism from an object on which `ϖ` acts invertibly
-(`DerivedCategory.eq_zero_of_isIso_smul_of_singleFunctor`). -/
+for an ideal `I = (ϖ)` of a principal ideal domain `Λ` which is `I`-adically complete. -/
 theorem derivedComplete_unit_of_isSepClosed (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (hI : I = Ideal.span {ϖ}) :
     _root_.DerivedCategory.derivedComplete (Spec (.of k)).smallEtaleTopology I
@@ -332,19 +323,11 @@ variable (l : ℕ) [Fact l.Prime] (E L : Type w) [Field E] [Field L]
 /-- Adic reconstruction and scalar extension (the integral stage and the scalar extension).
 
 Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ`, `𝒪_E` its ring of integers, `L ⊇ E` a
-further finite extension, and `K ∈ D(X_ét, 𝒪_E)` perfect over `𝒪_{E,X}`. The constant complex `𝒪_E`
-of the point is derived complete (`AlgebraicGeometry.Etale.derivedComplete_unit_of_isSepClosed`),
-hence so is `RΓ_c(X, K)^∨`, and the adjoint
-`β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the `𝒪_E`-valued derived Poincaré pairing is an
-isomorphism between derived complete objects: it is an isomorphism `e` of the adic category
-`D_comp(Spec k, 𝒪_E)`, so `β_K^♯` is the realization of its tower of reductions, the
-finite-level dualities (`AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_poincareAdjoint`).
-Its inverse is the duality isomorphism `RΓ_c(X, K)^∨ ≅ RΓ(X, K^∨(d))[2d]` over `𝒪_E`.
-Localization `𝒪_E ⟶ E` (`DerivedCategoryDerivedCompleteRational.fromIntegral`) and the finite
-coefficient-field extension `E ⊆ L`, both integrally
-(`AlgebraicGeometry.Etale.derivedCompleteIntegralScalarExtension`) and rationally
-(`AlgebraicGeometry.Etale.derivedCompleteRationalScalarExtension`), carry `e` to
-isomorphisms: the duality isomorphism over `E` and over `L`. -/
+further finite extension, and `K ∈ D(X_ét, 𝒪_E)` perfect over `𝒪_{E,X}`. Then the adjoint
+`β_K^♯ : RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of the `𝒪_E`-valued derived Poincaré pairing is the
+realization of an isomorphism `e` of the adic category `D_comp(Spec k, 𝒪_E)`, and localization
+`𝒪_E ⟶ E` and the finite coefficient-field extension `E ⊆ L`, both integrally and rationally,
+carry `e` to isomorphisms. -/
 theorem adicReconstruction_scalarExtension (hKd : IsDualizable K) :
     ∃ (P Q : DerivedCategoryDerivedCompleteIntegral (Spec (.of k)).smallEtaleTopology l E)
       (e : P ≅ Q),

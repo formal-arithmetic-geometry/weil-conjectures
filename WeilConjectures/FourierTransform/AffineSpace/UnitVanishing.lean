@@ -76,10 +76,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {p : ℕ} [Fact p.Prime] [Invertible 
 /-- **Compactly supported cohomology of `ℒ_ψ` of a linear form with a unit coefficient.** For
 `g : T ⟶ S` and coefficients `c : n → Γ(T, 𝒪)` with `cᵢ` a unit, the compactly supported
 direct image along `q : 𝔸(n; S) ×_S T ⟶ T` of the Artin–Schreier sheaf of the linear form
-`ℓ = ∑ⱼ cⱼ xⱼ` vanishes: `Rq_! ℒ_{ψ(ℓ)} = 0`. The change of variables
-`AlgebraicGeometry.AffineSpace.linearCoordHom` makes `ℓ` the coordinate of the affine line over
-`𝔸(n ∖ {i}; T)`; compact-support base change along it and the composition law reduce the
-statement to `AlgebraicGeometry.Etale.isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_coord`. -/
+`ℓ = ∑ⱼ cⱼ xⱼ` vanishes: `Rq_! ℒ_{ψ(ℓ)} = 0`. -/
 theorem isZero_rightDerivedLowerShriek_artinSchreierSheafZMod_linearForm [Finite Λ]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] {n : Type u} [Fintype n]
     {S T : Scheme.{u}} (g : T ⟶ S) [HasInvertibleExponent Λ T]

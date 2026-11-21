@@ -99,10 +99,7 @@ include aY in
 For a normalized rank-one datum and `Y` separated and locally of finite type over a field, the
 orientation `pur_s : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` of the zero section is an isomorphism: the map
 `Λ ⟶ H⁰(Rs^! Λ(1)[2])`, `1 ↦ ∂κ(t)`, is an isomorphism of sheaves and `Rs^! Λ(1)[2]` is
-concentrated in degree zero. This is the rank-one normalisation
-`AlgebraicGeometry.Etale.HasKummerClass.IsNormalized`; the blueprint derives it from the long
-exact sequence of `Rp_*` applied to the localization triangle of the closed–open pair
-`(s, j)`. -/
+concentrated in degree zero. -/
 theorem isIso_affineLineOrientation [HasKummerClass.IsNormalized Λ] :
     IsIso (affineLineOrientation Λ Y) :=
   HasKummerClass.IsNormalized.isIso_supportedClassMap_kummerBoundary_coord Y aY
@@ -142,11 +139,7 @@ include aY in
 
 *Injectivity of the restriction to geometric points.* For a normalized rank-one datum, a
 morphism `φ : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` whose pullback along every geometric point
-`x : Spec Ω ⟶ V(t)` vanishes is zero: through the orientation, `Rs^! Λ(1)[2]` is the constant
-sheaf `Λ` placed in degree zero (`AlgebraicGeometry.Etale.isIso_affineLineOrientation`), so `φ`
-is a section of a sheaf, which is determined by its stalks
-(`AlgebraicGeometry.Etale.constantComplex_hom_ext_of_leftDerivedUpperStar_map_eq`).
-Consequently two such morphisms with the same pullbacks to all geometric points are equal. -/
+`x : Spec Ω ⟶ V(t)` vanishes is zero. -/
 theorem eq_zero_of_leftDerivedUpperStar_map_eq_zero_affineLineZeroLocus
     [HasKummerClass.IsNormalized Λ]
     (φ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
@@ -167,8 +160,7 @@ include aY in
 /-- Uniqueness of the global orientation
 
 Two morphisms `φ ψ : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` whose pullbacks along every geometric point
-`x : Spec Ω ⟶ V(t)` agree are equal. For the form with the restrictions along `𝔸¹_v` used by the
-blueprint, see
+`x : Spec Ω ⟶ V(t)` agree are equal. For the form with the restrictions along `𝔸¹_v`, see
 `AlgebraicGeometry.Etale.affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom`. -/
 theorem affineLineOrientation_hom_ext [HasKummerClass.IsNormalized Λ]
     {φ ψ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
@@ -224,12 +216,7 @@ zero section of `𝔸¹_{Y'}`. Here `pur_s` is read as its global section
 `∂κ(t) ∈ H²_{s(Y)}(𝔸¹_Y, Λ(1))` (`AlgebraicGeometry.Etale.supportedClassMap_bijective`), the
 comparison of exceptional inverse images is the restriction of supports
 `L𝔸¹_v^* Rs_! Rs^! ⟶ Rs'_! Rs'^! L𝔸¹_v^*` (`AlgebraicGeometry.Etale.restrictSupportedClass`),
-and the statement is that the adjoint of the restricted class is `pur_{s'}`.
-
-The blueprint deduces this from the uniqueness of the orientation and the computation of both
-sides at the geometric points; here it is proved directly: the Kummer class is compatible with
-pullback, and so is the boundary of the supported localization triangle
-(`AlgebraicGeometry.Etale.kummerBoundary_baseChange`). -/
+and the statement is that the adjoint of the restricted class is `pur_{s'}`. -/
 theorem supportedClassMap_restrictSupportedClass_affineLineOrientation
     [HasInvertibleExponent Λ Y'] (v : Y' ⟶ Y) :
     supportedClassMap Λ _
@@ -300,13 +287,7 @@ include aY in
 *Injectivity of the restriction to geometric points.* For a normalized rank-one datum, two
 morphisms `φ ψ : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` whose restrictions along `𝔸¹_v` agree for every
 geometric point `v : Spec Ω ⟶ Y` (`AlgebraicGeometry.Etale.restrictAffineLineZeroLocusHom`) are
-equal.
-
-Through the orientation (`AlgebraicGeometry.Etale.isIso_affineLineOrientation`), `φ` and `ψ` are
-`s^♯ h ≫ pur_s` for endomorphisms `h` of `Λ_{𝔸¹_Y}`, and their restrictions are
-`s'^♯ (𝔸¹_v^♯ h) ≫ pur_{s'}`. Since `pur_{s'}` is an isomorphism, the hypothesis gives the
-equality of the pullbacks of the two endomorphisms of `Λ_{V(t)}` to every geometric point of
-`V(t) ≅ Y`, and endomorphisms of a constant sheaf are determined at the geometric points. -/
+equal. -/
 theorem affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom
     [HasKummerClass.IsNormalized Λ]
     {φ ψ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
@@ -365,10 +346,7 @@ include aY in
 
 For a normalized rank-one datum, the orientation `pur_s` is the unique morphism
 `φ : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` whose restriction along `𝔸¹_v` is the orientation
-`pur_{Spec Ω}` for every geometric point `v : Spec Ω ⟶ Y`. The orientation has this property by
-its base change (`AlgebraicGeometry.Etale.restrictAffineLineZeroLocusHom_affineLineOrientation`),
-and it is the only one by the injectivity of the restriction to the geometric points
-(`AlgebraicGeometry.Etale.affineLineOrientation_hom_ext_of_restrictAffineLineZeroLocusHom`). -/
+`pur_{Spec Ω}` for every geometric point `v : Spec Ω ⟶ Y`. -/
 theorem eq_affineLineOrientation_iff [HasKummerClass.IsNormalized Λ]
     (φ : constantComplex Λ (𝔸(ULift.{u} (Fin 1); Y).zeroLocusSubscheme
         {AffineSpace.coord Y (ULift.up 0)}) ⟶

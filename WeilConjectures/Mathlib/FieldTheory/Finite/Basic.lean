@@ -39,16 +39,8 @@ namespace FiniteField
 
 variable (K L : Type*) [Field K] [Fintype K] [Field L] [Algebra K L] [Algebra.IsAlgebraic K L]
 
-/-- Finite fields, Frobenius and abelian varieties.
-
-Fix a finite field `K` with `q` elements and an algebraic extension `L`. The *arithmetic
-Frobenius* is `σ : x ↦ x ^ q`; the *geometric Frobenius* is `F = σ⁻¹`.
-
-This is also blueprint `definition-abelian-variety--1`; its abelian varieties are
-`AlgebraicGeometry.IsAbelianVariety` (see
-`AlgebraicGeometry.isAbelianVariety_iff_geometricallyConnected`)
-and the action of `Gal(L/K)` on geometric points by coordinates is
-`AlgebraicGeometry.IsAbelianVariety.geometricPointsAddEquiv`. -/
+/-- The *geometric Frobenius* `F = σ⁻¹` of an algebraic extension `L` of a finite field `K` with
+`q` elements, where `σ : x ↦ x ^ q` is the *arithmetic Frobenius*. -/
 @[simps!]
 noncomputable def geometricFrobeniusAlgEquivOfAlgebraic : Gal(L/K) :=
   (frobeniusAlgEquivOfAlgebraic K L)⁻¹

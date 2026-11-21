@@ -42,16 +42,7 @@ lemma whiskerRight_comp_leftUnitor_hom_comp {A B : C} (f : A ⟶ 𝟙_ C) (g : B
   rw [← leftUnitor_naturality, ← whisker_exchange_assoc, ← rightUnitor_naturality,
     unitors_equal]
 
-/-- If `e : X ⊗ Y ≅ 𝟙_ C`, then `- ▷ X` is injective on morphisms: every `k : Z ⟶ Z'` is
-recovered from `k ▷ X` as the composite
-```
-       ρ⁻¹          Z ◁ e⁻¹                α⁻¹                (k ▷ X) ▷ Y
-  Z -------> Z ⊗ 𝟙 --------> Z ⊗ (X ⊗ Y) -----> (Z ⊗ X) ⊗ Y -------------> (Z' ⊗ X) ⊗ Y
-
-       α            Z' ◁ e               ρ
-  ----> Z' ⊗ (X ⊗ Y) -------> Z' ⊗ 𝟙 -------> Z'.
-```
--/
+/-- If `e : X ⊗ Y ≅ 𝟙_ C`, then `- ▷ X` is injective on morphisms. -/
 lemma whiskerRight_injective_of_tensorIso {X Y : C} (e : X ⊗ Y ≅ 𝟙_ C) {Z Z' : C}
     {f g : Z ⟶ Z'} (h : f ▷ X = g ▷ X) : f = g := by
   have key (k : Z ⟶ Z') : k = (ρ_ Z).inv ≫ Z ◁ e.inv ≫ (α_ Z X Y).inv ≫ (k ▷ X) ▷ Y ≫

@@ -27,7 +27,6 @@ morphisms induce isomorphisms in homology in the expected range of degrees, and 
 - `DerivedCategory.Plus.nonempty_eTruncGE_eTruncLT_iso_singleFunctor`:
   `τ_{≥ q} τ_{< q + 1} X ≅ H^q(X)[-q]`.
 - `DerivedCategory.Plus.eTruncLTCompETruncGEIso`: the same isomorphism, natural in `X`.
-
 -/
 
 @[expose] public section
@@ -92,12 +91,7 @@ noncomputable def singleFunctorCompHomologyFunctorIso (n : ℤ) :
 
 /-- The truncation `τ_{≥ q} τ_{< q + 1}` on `DerivedCategory.Plus C`, written with the
 `EInt`-indexed truncations as in `t.spectralObject`, is isomorphic to `X ↦ H^q(X)[-q]`,
-naturally in `X`.
-
-Since the single functor in degree `q` is fully faithful and `τ_{≥ q} τ_{< q + 1}` lands in its
-essential image (`DerivedCategory.Plus.nonempty_eTruncGE_eTruncLT_iso_singleFunctor`), this
-truncation factors through the single functor, and the factorization is identified with `H^q`
-using that the truncation maps induce isomorphisms on `H^q`. -/
+naturally in `X`. -/
 noncomputable def eTruncLTCompETruncGEIso (q : ℤ) :
     (t (C := C)).eTruncLT.obj ((q + 1 : ℤ) : EInt) ⋙ (t (C := C)).eTruncGE.obj (q : EInt) ≅
       homologyFunctor C q ⋙ singleFunctor C q :=

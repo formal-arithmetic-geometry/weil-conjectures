@@ -65,7 +65,6 @@ assumed only there: the definition `ProEtale.boundedConstructible` makes sense o
 
 The derived category itself uses the `sorry`ed instances of
 `WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory`.
-
 -/
 
 @[expose] public section
@@ -255,7 +254,7 @@ variable (X : Scheme.{u})
 
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `𝒪̲_E`: for a finite
+/-- **Bounded constructible complexes are triangulated**, for `𝒪̲_E`: for a finite
 subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`, the bounded constructible complexes of `𝒪_{E,X}`-modules on a
 topologically noetherian scheme form a triangulated subcategory. -/
 instance isTriangulated_boundedConstructible_padicIntegersRingObj
@@ -286,7 +285,7 @@ instance isTriangulated_boundedConstructible_padicIntegersRingObj
       ObjectProperty.prop_cokernel _ f hM hN⟩)
     (fun S hS h₁ h₃ ↦ ObjectProperty.prop_X₂_of_shortExact _ hS h₁ h₃)
 
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `𝒪̲_E` given as the closed unit
+/-- **Bounded constructible complexes are triangulated**, for `𝒪̲_E` given as the closed unit
 ball of a finite normed extension `E` of `ℚ_ℓ` (`CondensedRing.integralCoeff`): the bounded
 constructible complexes of `𝒪_{E,X}`-modules on a topologically noetherian scheme form a
 triangulated subcategory. -/
@@ -304,7 +303,7 @@ instance isTriangulated_boundedConstructible_integralCoeff
 -- The prime `ℓ` of `E̲` occurs only in the instance `NormedAlgebra ℚ_[ℓ] E`; it is found from the
 -- local instance `Fact ℓ.Prime`, so the synthesis order is not the default one.
 set_option synthInstance.checkSynthOrder false in
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `E̲`: for a finite
+/-- **Bounded constructible complexes are triangulated**, for `E̲`: for a finite
 extension `E` of `ℚ_ℓ`, the bounded constructible complexes of `E_X`-modules on a topologically
 noetherian scheme form a triangulated subcategory. -/
 instance isTriangulated_boundedConstructible_continuousMapRingObj
@@ -316,7 +315,7 @@ instance isTriangulated_boundedConstructible_continuousMapRingObj
     (Profinite.continuousMapRingObj E) (continuous_lf ℓ E) X
   exact isTriangulated_boundedConstructible_of_serre _ hk he
 
-/-- Blueprint `prop-sfb-bounded-constructible-triangulated`, for `ℚ̲̄_ℓ`: the bounded
+/-- **Bounded constructible complexes are triangulated**, for `ℚ̲̄_ℓ`: the bounded
 constructible complexes of `ℚ̄_{ℓ,X}`-modules on a topologically noetherian scheme form a
 triangulated subcategory. -/
 instance isTriangulated_boundedConstructible_padicAlgClRingObj

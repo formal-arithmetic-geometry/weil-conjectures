@@ -92,12 +92,8 @@ instance isLisseRep.isClosedUnderFiniteProducts : (W.isLisseRep l).IsClosedUnder
 Let `e` be an equivalence between lisse Weil sheaves on `C₀` and lisse Weil representations of
 `W(C₀)`, such as `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`. A short complex
 `0 → ℱ' → ℱ → ℱ'' → 0` of lisse Weil sheaves is short exact in the category of Weil sheaves if
-and only if the corresponding complex `0 → V' → V → V'' → 0` of representations is short exact:
-both categories are abelian full subcategories, closed under kernels, cokernels and finite
-direct sums (`AlgebraicGeometry.WeilSheaf.IsLisse.kernel_cokernel`,
-`AlgebraicGeometry.WeilGroup.isLisseRep.isClosedUnderKernels`), so their inclusions are exact,
-and an equivalence of abelian categories is exact. In particular subobjects, quotients and
-subquotients match on the two sides. -/
+and only if the corresponding complex `0 → V' → V → V'' → 0` of representations is short exact.
+-/
 theorem isLisse_shortExact_iff {C : Scheme.{u}} [C.Over (Spec (.of K))]
     [IsCurve (C ↘ Spec (.of K))] [Fact (ringChar K ≠ l)] {W : WeilGroup (C ↘ Spec (.of K))}
     (e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌

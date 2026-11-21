@@ -120,9 +120,7 @@ lemma finite_and_natCard_le_of_irreducibleSpace
 Let `X` be a locally noetherian scheme such that the local rings of all étale `X`-schemes are
 integral domains, `j : U ⟶ X` an open immersion and `F` a locally constant sheaf of modules on
 `U` whose geometric stalks are finite with at most `B` elements. Then the geometric stalks of
-`j_* F` are finite: finitely many germs are germs of sections over one étale neighbourhood,
-which may be taken irreducible, and there are at most `max B 1` of them
-(`AlgebraicGeometry.Etale.finite_and_natCard_le_of_irreducibleSpace`). -/
+`j_* F` are finite. -/
 theorem finite_sheafFiber_lowerStar
     (hX : ∀ (W : X.Etale) (w : W.left), IsDomain (W.left.presheaf.stalk w))
     [IsLocallyNoetherian X] (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))

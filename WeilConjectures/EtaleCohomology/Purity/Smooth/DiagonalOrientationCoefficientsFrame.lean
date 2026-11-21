@@ -197,8 +197,7 @@ variable {U : Scheme.{u}} [HasInvertibleExponent Λ U] (f : Γ(U, ⊤))
 `Λ_U ⟶ (Rj_* Lj^* Λ_U(1))[1]`, which the boundary
 `δ : Rj_* Lj^* Λ_U(1) ⟶ (Ri_! Ri^! Λ_U(1))[1]`
 (`AlgebraicGeometry.Etale.supportedLocalizationBoundary`) carries to
-`Λ_U ⟶ (Ri_! Ri^! Λ_U(1))[2]`. For the Kummer class `κ(f|_{U_f})` it is the Kummer boundary
-`∂κ(f)` (`AlgebraicGeometry.Etale.kummerBoundary_eq_localizationBoundaryClass`). -/
+`Λ_U ⟶ (Ri_! Ri^! Λ_U(1))[2]`. -/
 noncomputable def localizationBoundaryClass
     (α : constantComplex Λ (U.basicOpen f) ⟶ (tateObject Λ (U.basicOpen f) 1)⟦(1 : ℤ)⟧) :
     constantComplex Λ U ⟶
@@ -268,12 +267,8 @@ constituents of the iterated cup products of Kummer boundaries
 frame classes are built:
 * the unit class `Λ_U ≅ Λ_U(0) ≅ Λ_U(0)[0]`, through `Ψ Λ_U ≅ Λ'_U` and
   `Ψ(Λ_U(0)[0]) ≅ Λ'_U(0)[0]`;
-* the Kummer boundaries `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` (see
-  `AlgebraicGeometry.Etale.SupportedCoefficientChange.mapSupportedClass_kummerBoundary` for a
-  reduction to the Kummer classes and the localization boundaries);
-* the cup product with supports `AlgebraicGeometry.Etale.cupWithSupportsTateObject` (see
-  `MonoidalSupportedCoefficientChange.mapSupportedClass_cupWithSupportsTateObject`
-  for a monoidal change of coefficients). -/
+* the Kummer boundaries `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))`;
+* the cup product with supports `AlgebraicGeometry.Etale.cupWithSupportsTateObject`. -/
 structure PreservesKummerBoundaries : Prop where
   /-- The change of coefficients carries the unit class `Λ_U ≅ Λ_U(0)[0]` to the unit class. -/
   map_unitClass (U : Scheme.{u}) [HasInvertibleExponent Λ U] [HasInvertibleExponent Λ' U] :
@@ -324,10 +319,7 @@ theorem mapSupportedClass_kummerBoundaryProduct (hΦ : Φ.PreservesKummerBoundar
 
 **A change of coefficients preserving Kummer boundaries carries frame classes to frame
 classes**: for every frame `(e : U ⟶ X, f₁, …, f_c)` of a closed immersion, the change of
-coefficients of `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ` is `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ'`. This is
-the hypothesis `hframe` of
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.mapSupportedClass_thomFundamentalClass` and
-its consequences. -/
+coefficients of `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ` is `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` over `Λ'`. -/
 theorem mapSupportedClass_frameClass (hΦ : Φ.PreservesKummerBoundaries) {X Z : Scheme.{u}}
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {c : ℕ} {i : Z ⟶ X}
     (F : i.EtaleFrame c) :
@@ -445,9 +437,7 @@ variable {U Z₁ Z₂ Z : Scheme.{u}} (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i
               │                                         │
               ▼                                         ▼
 Ri₁_! Ri₁^! M' ⊗ᴸ Ri₂_! Ri₂^! N' ───product───▶ Ri_! Ri^!(M' ⊗ᴸ N')
-```
-Both composites are maps out of an object supported on `Z`, so they are determined by their
-composites with the counit, which are both the tensor product of the counits. -/
+``` -/
 lemma map_supportedProduct_comp_supportsMap {M N : 𝐃(U, Λ)} {M' N' : 𝐃(U, Λ')}
     (vM : (Φ.functor U).obj M ≅ M') (vN : (Φ.functor U).obj N ≅ N') :
     (Φ.functor U).map (supportedProduct Λ i₁ i₂ i h M N) ≫
@@ -572,15 +562,12 @@ section Orientation
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (Φ : MonoidalSupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`
+/-- Change of coefficients in purity
 
 **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with a monoidal change of
 coefficients preserving Kummer boundaries**, as soon as the smooth base change identifications
 `𝒞(p₁, Δ) ≅ ω_f` (`hC`) and the composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`)
-correspond: `MonoidalSupportedCoefficientChange.map_dualizingComplexTwistShiftIso` with
-`hframe` supplied by
-`SupportedCoefficientChange.PreservesKummerBoundaries.mapSupportedClass_frameClass`. -/
+correspond. -/
 theorem map_dualizingComplexTwistShiftIso_of_preservesKummerBoundaries {X Y : Scheme.{u}}
     (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f] [HasCompactification f] [IsSeparated f]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {k : Type u} [Field k]

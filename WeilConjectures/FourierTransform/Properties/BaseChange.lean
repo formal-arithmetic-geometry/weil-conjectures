@@ -20,8 +20,19 @@ public import WeilConjectures.FourierTransform.Defs
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_baseChange`: the transform commutes
   with base change along `S' ⟶ S`.
 
-See `WeilConjectures.FourierTransform.Properties` for the implementation notes.
+See `WeilConjectures.FourierTransform.Properties` for further implementation notes.
 
+## Implementation details
+
+The base change of the pairing only needs the two squares to commute; the base change theorem
+asks them to be cartesian, and fails for merely commuting squares. The theorem is
+compact-support base change along the cartesian square `W ×_{S'} W' ⟶ V ×_S V'`. The hypothesis
+`[Finite Λ]` enters solely through independence of the compactification
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), since `R(f)_!` is computed with a chosen
+compactification. The same comparison is why `[QuasiCompact (pullback.snd π π')]` is assumed:
+`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap` needs the base changed
+morphism `pullback.snd ρ ρ'` to be quasi-compact, which holds as it is a base change of
+`pullback.snd π π'`.
 -/
 
 @[expose] public section
@@ -48,10 +59,7 @@ along the induced morphism of fibre products,
      ρ│        │π          ρ'│        │π'
       ▼        ▼            ▼         ▼
       S' ──g──▶ S           S' ──g──▶ S
-```
-
-Only commutativity of the two squares is needed to pull the pairing back; the base change
-*theorem* below asks them to be cartesian. -/
+``` -/
 noncomputable def pairingBaseChange (b : Γ(pullback π π', ⊤)) {S' W W' : Scheme.{u}}
     (g : S' ⟶ S) (ρ : W ⟶ S') (ρ' : W' ⟶ S') (u : W ⟶ V) (u' : W' ⟶ V')
     (hu : u ≫ π = ρ ≫ g) (hu' : u' ≫ π' = ρ' ≫ g) :
@@ -74,18 +82,7 @@ naturally in `K`. Both squares
       S' ──g──▶ S           S' ──g──▶ S
 ```
 
-must be **cartesian**; the statement fails for merely commuting squares.
-
-Class: compactification-dependent; decided by independence of the compactification. The
-blueprint proof is formal: compact-support base change along the cartesian square
-`W ×_{S'} W' ⟶ V ×_S V'`. Here `[Finite Λ]` enters solely through independence of the
-compactification (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`), since `R(f)_!` is
-computed with a chosen compactification. The same comparison is why
-`[QuasiCompact (pullback.snd π π')]` is assumed: compact-support base change
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap` needs the base changed
-morphism `f' = pullback.snd ρ ρ'` to be quasi-compact, because it goes through
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, and `f'` is quasi-compact as a base change
-of `pullback.snd π π'` (`MorphismProperty.of_isPullback`). -/
+must be **cartesian**. -/
 theorem nonempty_iso_fourierTransform_baseChange [Finite Λ]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
     [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]

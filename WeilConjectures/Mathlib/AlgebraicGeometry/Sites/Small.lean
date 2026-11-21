@@ -45,7 +45,6 @@ of `P`-schemes over `V`.
 - `AlgebraicGeometry.Scheme.isContinuous_overMap_comp_overPullback` and
   `AlgebraicGeometry.Scheme.isContinuous_overPullback_comp_overMap`: the two composites of
   base change and localization are continuous for the small `P`-topologies.
-
 -/
 
 @[expose] public section
@@ -65,19 +64,7 @@ variable (P Q : MorphismProperty Scheme.{u})
 /-! ### Base change -/
 
 /-- Base change along an *arbitrary* morphism `g : W ⟶ U` preserves the covering sieves of
-the small `Q`-topologies of `P`-schemes, for `Q ≤ P`.
-
-Both squares below are cartesian, so a point `x` of `V ×_U W` and a preimage `w` of its
-image in `V` under a covering morphism `φ.left` are jointly a point of `V' ×_U W`:
-
-```
-  V' ×_U W ──(Over.pullback P ⊤ g).map φ──→ V ×_U W ──────→ W
-      │                                        │            │
-      │ pullback.fst V'.hom g                  │ fst V.hom g│ g
-      ↓                                        ↓            ↓
-      V' ───────────── φ.left ──────────────→ V ──V.hom──→ U
-```
--/
+the small `Q`-topologies of `P`-schemes, for `Q ≤ P`. -/
 lemma coverPreserving_overPullback (hQP : Q ≤ P) {W U : Scheme.{u}} (g : W ⟶ U) :
     CoverPreserving (U.smallGrothendieckTopology Q (Q := P))
       (W.smallGrothendieckTopology Q (Q := P)) (MorphismProperty.Over.pullback P ⊤ g) where
@@ -103,8 +90,7 @@ theorem isContinuous_overPullback (hQP : Q ≤ P) {W U : Scheme.{u}} (g : W ⟶ 
 /-! ### The forgetful functor -/
 
 /-- The forgetful functor from `P`-schemes over `S` to `S`-schemes is continuous for the small
-`Q`-topology and the `Q`-topology on `Over S`, for `Q ≤ P`: it preserves covers by definition
-of the small topology, and compatible families since it is representably flat. -/
+`Q`-topology and the `Q`-topology on `Over S`, for `Q ≤ P`. -/
 lemma isContinuous_overForget (hQP : Q ≤ P) (S : Scheme.{u}) :
     (MorphismProperty.Over.forget P ⊤ S).IsContinuous
       (S.smallGrothendieckTopology Q (Q := P)) (S.overGrothendieckTopology Q) :=
@@ -181,10 +167,8 @@ lemma coverPreserving_overMap (hQP : Q ≤ P) :
       ⟨Z, g, 𝟙 _, hSg, (Category.id_comp _).symm⟩, hgl, hgz⟩
 
 omit [Q.IsMultiplicative] [Q.IsStableUnderBaseChange] [P.IsStableUnderBaseChange] in
-/-- The localization functor preserves compatible families of elements. This is the case
-`K = U.smallGrothendieckTopology Q` of
-`CategoryTheory.MorphismProperty.Over.compatiblePreserving_map`, which holds for an
-arbitrary topology on `P.Over ⊤ U`. -/
+/-- The localization functor preserves compatible families of elements for the small
+`Q`-topology. -/
 lemma compatiblePreserving_overMap :
     CompatiblePreserving.{w} (U.smallGrothendieckTopology Q (Q := P))
       (MorphismProperty.Over.map ⊤ h) :=

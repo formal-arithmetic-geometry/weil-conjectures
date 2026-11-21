@@ -29,25 +29,11 @@ namespace Field
 
 open scoped TensorProduct
 
-/-- A locally constant matrix conjugation action descends to a central simple algebra.
-
-For any vector v in that matrix space and a in L, the sum of g(a)T_g(v) over
-Gamma is invariant, by reindexing the sum. If an L-linear functional kills all
-these sums, linear independence of distinct field automorphisms implies it kills
-every T_g(v), hence every v. Thus invariants span over L. Select an L-basis from
-these invariant vectors. An invariant linear combination has coefficients fixed
-by Gamma, hence in K; the selected vectors are therefore also a K-basis of A.
-The explicit multiplication map L tensor_K A to the matrix algebra is now an
-algebra isomorphism. In particular A is finite dimensional. A nonzero two-sided
-ideal extends to a nonzero ideal of the simple matrix algebra and so to the whole
-algebra. Extension of scalars preserves dimensions, forcing the ideal to equal A.
-A central element extends to a scalar matrix, and invariance forces that scalar
-into K. Thus the constructed A is central simple. Nonzero n ensures nontriviality.
-Extend this multiplication isomorphism to Ksep to obtain e. Invariance says
-b(g) * g(e(1 tensor a)) * b(g)^(-1) = e(1 tensor a); multiplying by the inverses
-gives exactly the displayed descent equation. This also handles n = 1 and
-unnormalized scalar lifts, without any division by the order of Gamma.
-
+/-- A locally constant matrix conjugation action descends to a central simple algebra: if the
+conjugations by the locally constant `b g` define a semilinear action of the absolute Galois
+group on `n × n` matrices over the separable closure (`n ≠ 0`), there are a central simple
+algebra `A` over `K` and a splitting `e` of `A` satisfying the descent equation
+`g(e(1 ⊗ a)) = (b g)⁻¹ * e(1 ⊗ a) * b g`.
 Source: Stacks Project, the construction preceding Theorem 03R7. -/
 theorem exists_CSA_of_matrix_descent_action (K : Type u) [Field K]
     (n : ℕ) (hn : n ≠ 0)

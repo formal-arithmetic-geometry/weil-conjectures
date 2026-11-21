@@ -98,21 +98,9 @@ private theorem independent_adjoin_of_subset
   rw [h]
   exact hz.restrict_scalars' (⊥ : IntermediateField k K)
 
-/-- Differential kernel detection.
-Source: Stacks Project, More on Algebra, Tag 07P4, `literature/stacks-project/more-algebra.tex`.
-
-1. Frobenius is an injective ring homomorphism, so `K^p` and `L^p` are subfields, and the
-prime field lies in `K^p`. Choose a p-basis `x_i` of `K` over the prime field using
-`lem-weil-pbc-p-basis-exists`. Its p-monomials form a basis over `K^p`, and `dx_i` form a
-basis of the absolute differentials by `lem-weil-pbc-p-basis-differentials-basis`.
-
-2. If a nonzero differential dies in every relative module, express it with finite nonempty
-support in the `dx_i`. By `lem-weil-pbc-p-independent-differentials-independent`, its
-support's p-monomials have a nontrivial relation over each `Kα`. The space of relations
-therefore meets every `Kα^N` nontrivially. The index family is nonempty: otherwise the
-intersection condition makes `K` perfect, contradicting the nonempty p-basis support.
-Apply `theorem-finite-etale-covers-proper-henselian--2` to obtain a nontrivial relation over
-`K^p`, contradicting the p-basis monomials' independence. This proves the first clause. -/
+/-- Differential kernel detection: let `Kα` be a directed family of subfields of `K` containing
+`K^p` with intersection `K^p`. A differential in `Ω[K⁄𝔽ₚ]` whose image in every `Ω[K⁄Kα]` is
+zero is zero. Source: Stacks Project, More on Algebra, Tag 07P4. -/
 theorem intersection_subfields_differentials_kernel
     (p : ℕ) [Fact p.Prime] (K : Type u) [Field K] [CharP K p]
     {ι : Type v} (Kα : ι → IntermediateField (ZMod p) K)

@@ -117,14 +117,9 @@ namespace AlgebraicGeometry.Scheme
 open AlgebraicGeometry.Etale
 
 attribute [local instance] Abelian.hasFiniteBiproducts in
-/-- Blueprint `lemma-cohomology-near-two-transverse-divisors--1`, constant coefficients: if
-`ι^* Rj_* ℤ/ℓ` has finite locally constant cohomology sheaves, then so has `ι^* Rj_* N_V` for
-every finite module `N` killed by `ℓ` over a finite ring `Λ`.
-
-The underlying abelian group of `N` is a direct sum of `r` copies of `ℤ/ℓ`, so the underlying
-abelian sheaf of `ℋⁿ(ι^* Rj_* N_V)` is a direct sum of `r` copies of that of
-`ℋⁿ(ι^* Rj_* ℤ/ℓ)`; this identifies the underlying sheaves of sets, and finite local constancy
-of a sheaf of modules over a finite ring is detected on its underlying sheaf of sets. -/
+/-- **Cohomology near a divisor with elementary abelian coefficients.** If `ι^* Rj_* ℤ/ℓ`
+has finite locally constant cohomology sheaves, then so has `ι^* Rj_* N_V` for every finite
+module `N` killed by `ℓ` over a finite ring `Λ`. -/
 theorem HasFiniteLocallyConstantHomology.constantSheaf_of_constantZModModule
     {W V D : Scheme.{u}} (j : V ⟶ W) (ι : D ⟶ W) (ℓ : ℕ) [Fact ℓ.Prime]
     (h : HasFiniteLocallyConstantHomology D

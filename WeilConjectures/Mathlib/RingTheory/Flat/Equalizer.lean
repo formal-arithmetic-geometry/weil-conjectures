@@ -139,10 +139,7 @@ lemma Module.Flat.of_exact_of_flat_of_flat_right {R M' M M'' : Type*} [CommRing 
 /-- **Universal left exactness of a complex of flat modules.** Let `C₀ ⟶ C₁ ⟶ C₂` be a complex
 of `R`-modules with `C₁` and `C₂` flat, which stays exact at `C₁` after tensoring with every
 `R`-module. Then the kernel `Z` of `d₀` stays a submodule of `C₀` after tensoring: for every
-`R`-module `M`, the map `M ⊗ Z ⟶ M ⊗ C₀` is injective.
-
-The cokernel `Q` of `d₀` embeds universally into `C₂`, hence is flat; so is the image of `d₀`,
-as the kernel of `C₁ ⟶ Q`; and `0 ⟶ Z ⟶ C₀ ⟶ im d₀ ⟶ 0` stays exact after tensoring. -/
+`R`-module `M`, the map `M ⊗ Z ⟶ M ⊗ C₀` is injective. -/
 theorem Module.Flat.lTensor_injective_ker_subtype {R : Type u} [CommRing R]
     {C₀ C₁ C₂ : Type*} [AddCommGroup C₀] [AddCommGroup C₁] [AddCommGroup C₂] [Module R C₀]
     [Module R C₁] [Module R C₂] [Module.Flat R C₁] [Module.Flat R C₂] (d₀ : C₀ →ₗ[R] C₁)

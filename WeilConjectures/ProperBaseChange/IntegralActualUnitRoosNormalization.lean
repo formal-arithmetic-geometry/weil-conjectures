@@ -328,10 +328,8 @@ private theorem lift_roos
 
 /-- On a good representative, the actual strict completion unit is computed by
 any chain augmentation with quotient first coordinates and zero second coordinate.
-This concerns only the actual completed coefficients; no ordinary integral model
-comparison or pullback identification is an input.
 
-Source: Stacks 0941, proof of , and 099N(5); Bhatt--Scholze, Lemma 6.5.9(4). -/
+Source: Stacks 0941 and 099N(5); Bhatt--Scholze, Lemma 6.5.9(4). -/
 theorem pbc_integral_actual_unit_roos_normalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)

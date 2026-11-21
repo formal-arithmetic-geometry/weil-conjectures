@@ -259,9 +259,7 @@ variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExpo
 `e : X' ⟶ X` with `X'` smooth over `k` and the base change `i' : Z' ⟶ X'` of `i` with `Z'`
 regular, the restriction of supports along `e`
 (`AlgebraicGeometry.Etale.restrictSupportedClass`) carries the fundamental class of `i` to that
-of `i'`. Near a point of `Z'`, a Zariski frame `(U, f)` of `i` pulls back to the Zariski frame
-`(e⁻¹ U, e^* f)` of `i'`, and the product of Kummer boundaries of `f` restricts to that of
-`e^* f` (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct`). -/
+of `i'`. -/
 theorem restrictSupportedClass_fundamentalClass_of_flat (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) {X' Z' : Scheme.{u}} (e : X' ⟶ X)
     [Flat e] [Smooth (e ≫ aX)] (i' : Z' ⟶ X') (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
@@ -321,11 +319,7 @@ theorem restrictSupportedClass_fundamentalClass_of_flat (aX : X ⟶ Spec (.of k)
 /-- Compatibilities of purity for regular immersions
 
 **Smooth base change of the fundamental class**, `[Z' ⊂ X'] = e^* [Z ⊂ X]` for a smooth
-`e : X' ⟶ X` and the base change `i' : Z' ⟶ X'` of `i`
-(`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_flat`). The hypotheses on
-the base change are derived: `e` is flat, `X'` is smooth over `k`, and `Z'` is smooth over `Z`,
-which is smooth over the perfect field `k` (`AlgebraicGeometry.IsRegularImmersion.smooth_comp`),
-hence regular. -/
+`e : X' ⟶ X` and the base change `i' : Z' ⟶ X'` of `i`. -/
 theorem restrictSupportedClass_fundamentalClass_of_smooth (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) {X' Z' : Scheme.{u}} (e : X' ⟶ X)
     [Smooth e] (i' : Z' ⟶ X') (g : Z' ⟶ Z) (hg : IsPullback g i' i e) :

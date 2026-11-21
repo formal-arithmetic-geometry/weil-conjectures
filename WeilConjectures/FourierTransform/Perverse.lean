@@ -30,11 +30,14 @@ one.
 
 ## Implementation notes
 
-The blueprint states the theorem for `V = V' = 𝔸¹_{k₀}`. It is stated here for a general pair
+The main application is `V = V' = 𝔸¹_{k₀}`. The theorems are stated for a general pair
 `π`, `π'` under the three geometric facts the proof uses: the first projection
 `p₁ : V ×ₖ V' ⟶ V` is smooth of relative dimension one, and the second projection
 `p₂ : V ×ₖ V' ⟶ V'` is affine of finite type with fibres of dimension at most one. For the
 affine line all three hold, `p₁` and `p₂` being base changes of `𝔸¹ ⟶ Spec k`.
+
+`IsLisse` does not record the rank of the Fourier kernel: that the rank is one is recorded only
+through the tensor inverse, `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_inv`.
 -/
 
 @[expose] public section
@@ -55,11 +58,8 @@ variable {V V' : Scheme.{u}} (π : V ⟶ Spec (.of k)) (π' : V' ⟶ Spec (.of k
   [CharP Γ(pullback π π', ⊤) p]
 
 omit [HasInvertibleExponent Λ (Spec (.of k))] in
-/-- The Fourier kernel `𝒦_ψ = ℒ_{Ψ, b}`, placed in degree zero, is lisse of rank one: it is
-the pullback of the Artin–Schreier sheaf `ℒ_Ψ` along the pairing `b`, hence locally constant,
-and it is invertible, with inverse `𝒦_{ψ⁻¹}`; so it is dualizable, constructible and of finite
-Tor amplitude. `IsLisse` does not record the rank: that the rank is one is recorded only through
-the tensor inverse, `AlgebraicGeometry.Etale.nonempty_iso_fourierKernel_inv`. -/
+/-- The Fourier kernel `𝒦_ψ = ℒ_{Ψ, b}`, placed in degree zero, is lisse: dualizable,
+constructible and of finite Tor amplitude. -/
 theorem isLisse_fourierKernel (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) :
     IsLisse ((_root_.DerivedCategory.singleFunctor _ 0).obj (fourierKernel Λ π π' Ψ b)) :=
   ⟨isDualizable_fourierKernel Λ π π' Ψ b,

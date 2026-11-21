@@ -14,7 +14,7 @@ import Mathlib.RingTheory.TensorProduct.Nontrivial
 /-!
 # A common extension of two fields
 
-Source: Stacks Project, Fields, Tag 0H7K, `fields-lemma-common-extension-field`.
+Source: Stacks Project, Fields, Tag 0H7K.
 -/
 
 @[expose] public section

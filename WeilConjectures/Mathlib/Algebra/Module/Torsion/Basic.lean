@@ -36,7 +36,7 @@ the structural input that makes the Tate module of an abelian variety a free `�
 
 ## Implementation notes
 
-Instead of the classification of finite abelian `ℓ`-groups used in the blueprint, we choose an
+Instead of the classification of finite abelian `ℓ`-groups, we choose an
 `𝔽_ℓ`-basis `e` of `D[ℓ]`, lift it along multiplication by `ℓ ^ (n - 1)` to `y` using
 divisibility, and show by induction on `n` that `c ↦ ∑ i, c i • y i` identifies
 `(ℤ / ℓ ^ n) ^ r` with `D[ℓ ^ n]`.
@@ -216,8 +216,6 @@ theorem exists_basis_torsionBy (D : Type*) [AddCommGroup D] (ℓ : ℕ) [Fact �
 
 /-- The torsion of a divisible group.
 
-This is also the blueprint lemma `proposition-integral-tate-module--1`.
-
 Let `D` be a divisible abelian group, let `ℓ` be a prime and suppose that the `ℓ`-torsion of
 `D` is finite of order `ℓ ^ r`. Then for every `n` the `ℓ ^ n`-torsion of `D` is isomorphic
 to `(ℤ / ℓ ^ n) ^ r`. -/
@@ -319,13 +317,11 @@ theorem nonempty_addEquiv_torsionBy_mul_prod (D : Type*) [AddCommGroup D] {a b :
         rw [smul_add, smul_smul, smul_smul, mul_comm (a : ℤ) v, mul_smul v, hy, smul_zero,
           zero_add, mul_comm, ← hz']
 
-/-- The Chinese remainder step of blueprint `proposition-multiplication-n--2`.
+/-- The `n`-torsion of a divisible group.
 
 Let `D` be a divisible abelian group and suppose that for every prime `ℓ` dividing `n ≠ 0` the
 `ℓ`-torsion of `D` has order `ℓ ^ r`. Then the `n`-torsion of `D` is isomorphic to
-`(ℤ / n) ^ r`: for prime powers this is
-`AddSubgroup.nonempty_addEquiv_torsionBy_of_natCard_eq`, and the general case follows by the
-Chinese remainder theorem. -/
+`(ℤ / n) ^ r`. -/
 theorem nonempty_addEquiv_torsionBy_of_forall_prime (D : Type*) [AddCommGroup D]
     [DivisibleBy D ℤ] (r : ℕ) {n : ℕ} (hn : n ≠ 0)
     (h : ∀ ℓ : ℕ, ℓ.Prime → ℓ ∣ n → Nat.card D[(ℓ : ℤ)] = ℓ ^ r) :

@@ -13,8 +13,7 @@ import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
 /-!
 # Coinduced embeddings of discrete continuous modules
 
-Source: Stacks Project, etale-cohomology.tex, Tag 04JP, label definition-G-module-continuous; Tag
-0DVG, label . The coinduced embedding is the agent-written comparison ingredient.
+Source: Stacks Project, etale-cohomology.tex, Tags 04JP and 0DVG.
 -/
 
 @[expose] public section
@@ -142,12 +141,9 @@ private def discreteOrbitMap {G : Type u} [Group G] [TopologicalSpace G]
         simp [map_mul, Module.End.mul_apply] })
 
 /-- Discrete continuous modules admit the natural injective orbit-map embedding into
-continuous functions with right translation. `LocallyConstant G M.obj.V` is exactly
-`Cont(G, M)` with discrete codomain, and its module operations are pointwise.
-The linear equivalences identify the coinduced objects with those function modules.
+continuous functions with right translation, modelled by `LocallyConstant G M.obj.V`.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 04JP, label definition-G-module-continuous; Tag
-0DVG, label. -/
+Source: Stacks Project, etale-cohomology.tex, Tags 04JP and 0DVG. -/
 theorem exists_coinduced_discrete_embedding
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

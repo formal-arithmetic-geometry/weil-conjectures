@@ -56,13 +56,7 @@ theorem IsAlgClosed.finrank_eq_one_of_isReduced {K B : Type*} [Field K] [IsAlgCl
 
 open Polynomial in
 /-- Every unit of a finite algebra `A` over an algebraically closed field `k` is an `n`-th power,
-for `n` invertible in `k`.
-
-The reduced quotient `A ⧸ nilradical A` is a finite product of fields, each finite over `k` and
-hence equal to `k`, so `u` has an `n`-th root there. That root lifts to `A` because
-`A[T]/(Tⁿ - u)` is étale over `A` and the nilradical of the Artinian ring `A` is nilpotent.
-This is the input "the units of `𝒪_C(C)` are `n`-divisible for `C` proper" of blueprint
-`proposition-smooth-proper-curves-torsion-prime--2`. -/
+for `n` invertible in `k`. -/
 theorem IsAlgClosed.exists_pow_eq_of_finite {k A : Type*} [Field k] [IsAlgClosed k] [CommRing A]
     [Algebra k A] [Module.Finite k A] {n : ℕ} (hn : (n : k) ≠ 0) (u : Aˣ) :
     ∃ v : Aˣ, v ^ n = u := by

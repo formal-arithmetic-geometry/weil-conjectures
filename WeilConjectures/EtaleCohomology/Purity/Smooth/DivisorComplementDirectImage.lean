@@ -105,20 +105,13 @@ noncomputable def homologyRightDerivedLowerShriekIso {X Y : Scheme.{u}} (f : X �
 
 end ClosedImmersion
 
-/-- Blueprint `lemma-punctured-surface-punctured-curve--1`, via `lemma-class-of-point--1`.
-
-**Direct images from the complement of a smooth divisor**, for a finite coefficient ring `Λ`
+/-- **Direct images from the complement of a smooth divisor**, for a finite coefficient ring `Λ`
 whose exponent is invertible in the algebraically closed field `k`. Let `W` be smooth over `k`,
 `i : D ⟶ W` a regular closed immersion of codimension one with `D` regular and `j : U ⟶ W` the
 complementary open immersion. Every point of `D` has an open neighbourhood `W₀` in `W` over
 which, writing `j₀ : U ∩ W₀ ⟶ W₀` and `i₀ : D ∩ W₀ ⟶ W₀`,
 
-`R⁰j₀_* Λ ≅ Λ`, `R¹j₀_* Λ ≅ i₀_* Λ` and `R^q j₀_* Λ = 0` for `q ≥ 2`.
-
-On an affine neighbourhood `W₀` where `W` and `D` have constant relative dimensions, purity gives
-`Ri₀^! (Λ(1)[2]) ≅ Λ`, and `Λ_{W₀}(1) ≅ Λ_{W₀}` is pulled back from `Spec k`, where the Tate
-twist is trivial. Hence `Ri₀^! Λ ≅ Λ[-2]`, and the claim is the long exact cohomology sequence
-of the supported localization triangle `i₀_* Ri₀^! Λ ⟶ Λ ⟶ Rj₀_* Λ ⟶`. -/
+`R⁰j₀_* Λ ≅ Λ`, `R¹j₀_* Λ ≅ i₀_* Λ` and `R^q j₀_* Λ = 0` for `q ≥ 2`. -/
 theorem exists_higherDirectImage_constantSheaf_of_isRegularImmersion (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [NeZero (ringChar Λ)] {k : Type u} [Field k] [IsAlgClosed k]
     [HasInvertibleExponent Λ (Spec (.of k))] {W D U : Scheme.{u}} (aW : W ⟶ Spec (.of k))
@@ -211,19 +204,12 @@ theorem exists_higherDirectImage_constantSheaf_of_isRegularImmersion (Λ : Type 
       (pullback.snd i W₀.ι)_*[ModuleCat.{u + 1} Λ].mapIso
         (homologyZeroConstantComplexIso Λ (pullback i W₀.ι))⟩⟩
 
-/-- Blueprint `lemma-punctured-surface-punctured-curve--1`, via `lemma-class-of-point--1`.
-
-**Direct images from the complement of a smooth divisor.** Let `W` be smooth over an
+/-- **Direct images from the complement of a smooth divisor.** Let `W` be smooth over an
 algebraically closed field `k`, `i : D ⟶ W` a regular closed immersion of codimension one with
 `D` regular and `j : U ⟶ W` the complementary open immersion. Every point of `D` has an open
 neighbourhood `W₀` in `W` over which, writing `j₀ : U ∩ W₀ ⟶ W₀` and `i₀ : D ∩ W₀ ⟶ W₀`,
 
-`R⁰j₀_* ℤ/ℓ ≅ ℤ/ℓ`, `R¹j₀_* ℤ/ℓ ≅ i₀_* ℤ/ℓ` and `R^q j₀_* ℤ/ℓ = 0` for `q ≥ 2`.
-
-This is `AlgebraicGeometry.Etale.exists_higherDirectImage_constantSheaf_of_isRegularImmersion`
-for `Λ = ℤ/ℓ`: it follows from purity `Ri^! (ℤ/ℓ(1)[2]) ≅ ℤ/ℓ` near the points of `D`,
-the localization triangle `i_* Ri^! ℤ/ℓ ⟶ ℤ/ℓ ⟶ Rj_* ℤ/ℓ ⟶` and the trivialization
-`ℤ/ℓ(1) ≅ ℤ/ℓ` over the algebraically closed field `k`. -/
+`R⁰j₀_* ℤ/ℓ ≅ ℤ/ℓ`, `R¹j₀_* ℤ/ℓ ≅ i₀_* ℤ/ℓ` and `R^q j₀_* ℤ/ℓ = 0` for `q ≥ 2`. -/
 theorem exists_hasDivisorComplementDirectImages_of_isRegularImmersion {k : Type u} [Field k]
     [IsAlgClosed k] {W D U : Scheme.{u}} (aW : W ⟶ Spec (.of k)) [Smooth aW] (i : D ⟶ W)
     [IsRegularImmersion 1 i] (hD : ∀ x : D, IsRegularLocalRing (D.presheaf.stalk x))

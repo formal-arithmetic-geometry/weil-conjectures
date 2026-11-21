@@ -28,7 +28,9 @@ regular cardinal `κ`, and only proves that `colim (Hom(G, Y j)) ⟶ Hom(G, coli
 injective for `κ`-filtered diagrams, and bijective for `κ`-filtered diagrams of monomorphisms.
 The results of this file settle that expectation and are intended for Mathlib.
 
-## Proof of surjectivity
+## Implementation details
+
+Outline of the proof of surjectivity:
 
 Let `R := (End G)ᵐᵒᵖ`, `U := preadditiveCoyonedaObj G : C ⥤ ModuleCat R` and let `T` be its
 left adjoint `tensorObj G`. By the Gabriel-Popescu theorem, `U` is fully faithful and `T` is

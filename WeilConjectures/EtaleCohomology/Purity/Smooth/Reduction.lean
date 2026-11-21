@@ -42,9 +42,8 @@ repository: there is no derived change of rings between the derived categories o
 sheaves of modules over different rings. They are therefore arguments of the statements, as
 `AlgebraicGeometry.ProEtale.nonempty_rightDerivedLowerShriek_comp_iso` does for the trace
 formula, and so are the constituents of the purity maps
-(`AlgebraicGeometry.Etale.smoothPurityIso`). The hypotheses are exactly the compatibilities the
-blueprint proof establishes for each constituent; the statement is that the purity map, their
-composite, is then compatible.
+(`AlgebraicGeometry.Etale.smoothPurityIso`). The hypotheses are the compatibilities of each
+constituent; the statement is that the purity map, their composite, is then compatible.
 -/
 
 @[expose] public section
@@ -197,10 +196,7 @@ Rf_! Lf^* K'(d)[2d] ──────Tr^sm_{f,K'}──────▶ K'
         ▼                                      ▼
 Rf_! Ψ_X Lf^* K(d)[2d] ──ψ⁻¹──▶ Ψ_Y Rf_! Lf^* K(d)[2d] ──Ψ_Y Tr^sm_{f,K}──▶ Ψ_Y K
 ```
-
-Hence the levelwise traces are a morphism
-of normalized systems, which is what the uniform-tower reconstruction realizes at the adic
-stage. -/
+-/
 theorem smoothPurityTrace_comp_eq_of_transition {d : ℤ} (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ'))
     (ΨY : 𝐃(Y, Λ) ⥤ 𝐃(Y, Λ'))
     (ψ : R(f)_![ModuleCat.{u + 1} Λ] ⋙ ΨY ≅ ΨX ⋙ R(f)_![ModuleCat.{u + 1} Λ'])

@@ -71,13 +71,7 @@ lemma Proj.iSup_basicOpen_homogeneous_eq_top :
   rw [← Scheme.OpenCover.iSup_opensRange (Proj.affineOpenCover 𝒜).openCover]
   exact iSup_congr fun i ↦ (Proj.opensRange_awayι 𝒜 _ i.2.2 i.1.2).symm
 
-/-- **`Proj` of a surjective graded ring homomorphism is a closed immersion.**
-
-`IsClosedImmersion` is Zariski-local on the target, so it suffices to check this over the
-standard affine opens `D₊(s) ⊆ Proj 𝒜` for `s` homogeneous of positive degree. There
-`Proj.awayι_comp_map` identifies the restriction of `Proj.map f hf` with
-`Spec.map (HomogeneousLocalization.Away.map f s)`, which is a closed immersion because
-`HomogeneousLocalization.Away.map` of a surjection is surjective. -/
+/-- **`Proj` of a surjective graded ring homomorphism is a closed immersion.** -/
 theorem Proj.isClosedImmersion_map (f : 𝒜 →+*ᵍ ℬ)
     (hf : HomogeneousIdeal.irrelevant ℬ ≤ (HomogeneousIdeal.irrelevant 𝒜).map f)
     (hsurj : Function.Surjective f) :

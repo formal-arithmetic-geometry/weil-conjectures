@@ -22,6 +22,15 @@ constant twist.
 - `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two`: the top
   compactly supported cohomology of a pure lisse sheaf on a smooth affine curve has weights at
   most `w + 2`.
+
+## Implementation details
+
+Rather than splitting `C₀` into connected components and those into geometrically connected
+curves over a finite extension `k₁` of `k₀` (Weil sheaves over `k₁` are not available), the proof
+uses the purity of `H_c^2` of a sheaf punctually pure of weight zero on a smooth affine curve, not
+necessarily geometrically connected, after a constant twist normalizing the weight to zero. If
+`G` has no local Frobenius eigenvalue at all, it is punctually pure of the weights `0` and `-2` at
+once, so `H_c^2(C, G)` has no Frobenius eigenvalue.
 -/
 
 @[expose] public section
@@ -73,18 +82,7 @@ end WeilSheaf
 
 /-- *Top compact-support bound on a curve.* If `C₀` is a smooth affine curve and `G` is a lisse
 Weil sheaf on `C₀`, punctually `ι`-pure of weight `w`, then `H_c^2(C, G)` has weights at most
-`w + 2`.
-
-The blueprint proof splits `C₀` into its connected components, and a connected component with
-field of constants `k₁ = 𝔽_{q^d}` into the `d` geometrically connected curves over `k₁` which make
-up its geometric fibre, permuted cyclically by the Frobenius. Weil sheaves over a finite extension
-`k₁` of `k₀` are not available, so we use instead the purity of `H_c^2` of a sheaf punctually pure
-of weight zero on a smooth affine curve, not necessarily geometrically connected, after a
-constant twist normalizing the weight to zero
-(`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq`).
-If `G` has no local Frobenius eigenvalue at all, it is punctually pure of the weights `0` and
-`-2` at once, so `H_c^2(C, G)` is pure of the weights `2` and `0` at once and has no Frobenius
-eigenvalue. -/
+`w + 2`. -/
 theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two
     (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
     (hw : G.IsPunctuallyPureOfWeight ι w) :

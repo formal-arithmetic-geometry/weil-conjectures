@@ -107,8 +107,7 @@ open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 namespace WeilConjectures
 
 /-- The canonical reindexing identification for inverse isomorphisms, with identity
-underlying scheme maps. Source: Stacks Tag 03D6 and the first paragraph of
-lem-fix-weil-operations.proof.md. -/
+underlying scheme maps. Source: Stacks Tag 03D6. -/
 def integralInverseImageCounitSite {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     proEtaleIsoPostcompose (inv g) ⋙ proEtaleIsoPostcompose g ≅ 𝟭 Y.ProEt :=
   (MorphismProperty.Over.mapComp (Q := ⊤)

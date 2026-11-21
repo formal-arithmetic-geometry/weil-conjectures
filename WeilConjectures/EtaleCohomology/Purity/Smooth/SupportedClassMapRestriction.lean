@@ -349,11 +349,7 @@ include hg in
 change of a closed immersion `i : Z ⟶ X` along `e : U ⟶ X`, let `γ : Λ_X ⟶ Ri_! Ri^! L` be a
 class supported on `Z` with adjoint `φ : Λ_Z ⟶ Ri^! L`, and let `τ : Le^* L ≅ L'`. If the
 restriction of supports `Le^* Ri_! Ri^! L ⟶ Ri'_! Ri'^! L'` is an isomorphism, then the adjoint
-of the restricted class `γ'` is an isomorphism if and only if `Lg^* φ` is one.
-
-Indeed `Ri'_!` of the adjoint of `γ'` is, up to isomorphisms, `Le^* Ri_!(φ)` followed by the
-restriction of supports. As `Le^* Ri_! B` is supported on `Z'`, `Le^* Ri_!(φ)` is an isomorphism
-if and only if `Li'^* Le^* Ri_!(φ) ≅ Lg^* Li^* Ri_!(φ) ≅ Lg^*(φ)` is one. -/
+of the restricted class `γ'` is an isomorphism if and only if `Lg^* φ` is one. -/
 theorem isIso_supportedClassMap_restrictSupportedClass_iff [Finite Λ]
     (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L' : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

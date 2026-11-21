@@ -281,9 +281,7 @@ commutative ring and `L` a finite locally constant sheaf of `Λ`-modules on `X_�
 finitely many connected schemes `P_a` with finite étale morphisms `p_a : P_a ⟶ X`, jointly
 surjective, such that each `p_a^* L` is the constant sheaf of a finite `Λ`-module `M_a`. In
 other words `p : P = ∐ P_a ⟶ X` is finite étale surjective and `p^* L` is constant with finite
-value on each connected component of `P`. If `X` is connected, a single connected `P` suffices
-(`AlgebraicGeometry.Scheme.exists_isConstant_upperStar_of_connectedSpace`); in general we apply
-that to the finitely many connected components of `X`, which are open and closed. -/
+value on each connected component of `P`. -/
 theorem exists_isConstant_upperStar {X : Scheme.{u}} [IsNoetherian X]
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf L] :
     ∃ (n : ℕ) (P : Fin n → Scheme.{u}) (p : ∀ a, P a ⟶ X),

@@ -21,8 +21,8 @@ the inverse `γ` of `z ↦ z ^ q`. For a commutative ring `Λ` of characteristic
 `Y`, this file shows that the Frobenius operator of the Tate datum
 `τ_r : Lh^* Λ_Y(r) ≅ Λ_Y(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the genuine Tate twist
 (`AlgebraicGeometry.Etale.hasTateTwist`) is the multiplication by `q^{-r}`
-(`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`): this is the twist normalization of
-`prose-10-21`.
+(`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum`): this is the normalization of the
+Tate twist with respect to geometric Frobenius.
 
 By `WeilConjectures.EtaleCohomology.TateTwist.FrobeniusScalar` the Frobenius operator on
 `H⁰(Y, Λ(r))` is the multiplication by `c_1 ^ r` for a unit `c_1`, and it remains to show
@@ -310,10 +310,9 @@ theorem isUnit_natCard_of_hasInvertibleExponent : IsUnit (Nat.card k : Λ) :=
 
 The Tate datum `τ_r : Lg^* Λ(r) ≅ Λ(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the Tate
 twist, for `g` the geometric Frobenius of `Spec k̄` over the finite field `k` with `q` elements, is
-normalized as in `prose-10-21`: geometric Frobenius acts on
-`H⁰(Spec k̄, Λ(r))` by `q^{-r}` (hence by `q^r` on `Λ(-r)`). Here `Λ` is a commutative ring of
-characteristic `n ≠ 0` invertible on `Spec k̄`, so that `q` is a unit of `Λ`
-(`AlgebraicGeometry.Etale.isUnit_natCard_of_hasInvertibleExponent`). -/
+normalized: geometric Frobenius acts on `H⁰(Spec k̄, Λ(r))` by `q^{-r}` (hence by `q^r` on
+`Λ(-r)`). Here `Λ` is a commutative ring of characteristic `n ≠ 0` invertible on `Spec k̄`, so
+that `q` is a unit of `Λ` (`AlgebraicGeometry.Etale.isUnit_natCard_of_hasInvertibleExponent`). -/
 theorem frobeniusOperator_tateWeilDatum (r : ℤ)
     (x : 𝟙_ (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k)))) ⟶
       tateObject Λ (Spec (.of (AlgebraicClosure k))) r) :

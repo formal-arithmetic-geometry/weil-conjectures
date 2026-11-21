@@ -19,14 +19,14 @@ with internal homs of bounded constructible `ℚ̄_ℓ`-complexes: the compariso
 `Lπ^* RHom(K, M) ⟶ RHom(Lπ^* K, Lπ^* M)`
 (`ProEtale.CondensedRing.ihomUpperStarComparison`) is an isomorphism
 (`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_fieldExtension`). This is the
-internal-hom assertion of blueprint `lemma-restriction-geometric-generic-fibre` (2) for a change of
-the base field; the geometric generic fibre of blueprint `lemma-restriction-geometric-generic-fibre`
-is such a change of base field followed by the weakly étale inclusion of a generic point
+internal-hom assertion of the restriction to the geometric generic fibre, for a change of the base
+field; the geometric generic fibre is such a change of base field followed by the weakly étale
+inclusion of a generic point
 (`WeilConjectures.PoincareDuality.GenericRestriction.GenericFibre`).
 
 ## Proof
 
-As in the blueprint, by noetherian induction on the closed subschemes `Z` of `X`, in the second
+By noetherian induction on the closed subschemes `Z` of `X`, in the second
 variable `M`. By topological invariance we may replace `Z` by its reduction. On a reduced `Z`,
 `K` is dualizable on a nonempty open `j : U ⟶ Z`
 (`ProEtale.CondensedRing.exists_isOpenImmersion_exactPairing_upperStar`, from generic
@@ -162,9 +162,8 @@ lemma isIso_baseChangeMap_app_of_isPullback_fieldExtension {Z V : Over (Spec (.o
 morphism of separated `k`-schemes of finite type with fully faithful `Rf_*` (an open or a closed
 immersion), and `f' : V_L ⟶ Z_L` its base change along the field extension, again with fully
 faithful `Rf'_*`. If the comparison of `π_V : V_L ⟶ V` is an isomorphism at `(Lf^* K, N)`, then
-the comparison of `π_Z` is an isomorphism at `(K, Rf_* N)`, for bounded constructible `K` and `N`:
-`Rf_*` commutes with the change of the base field
-(`ProEtale.CondensedRing.isIso_baseChangeMap_app_of_isPullback_fieldExtension`). -/
+the comparison of `π_Z` is an isomorphism at `(K, Rf_* N)`, for bounded constructible `K` and
+`N`. -/
 lemma isIso_ihomUpperStarComparison_rightDerivedLowerStar_of_fieldExtension
     {Z V : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
     [IsSeparated Z.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom]
@@ -222,14 +221,9 @@ private lemma isIso_ihomUpperStarComparison_of_isIso_open_closed_of_forall
     IsIso (ihomUpperStarComparison Λ gZ K M) :=
   isIso_ihomUpperStarComparison_of_isIso_open_closed Λ hij sqU K M hM hjM (hbc _ hPM) hU hW
 
-/-- The noetherian induction behind `isIso_ihomUpperStarComparison_of_fieldExtension`: for a
+/-- Auxiliary form of `isIso_ihomUpperStarComparison_of_fieldExtension`: for a
 closed immersion `c : Z ⟶ X` with image in the closed subset `C` of `X`, the comparison of the
-base change `π_Z : Z_L ⟶ Z` is an isomorphism at bounded constructible `(K, M)`. By topological
-invariance we may replace `Z` by its reduction; for reduced nonempty `Z`, `K` has a left dual on
-a nonempty open subscheme `U` (`exists_isOpenImmersion_exactPairing_upperStar`), and the
-dévissage in the second variable
-(`ProEtale.CondensedRing.isIso_ihomUpperStarComparison_of_isIso_open_closed`) reduces to `U`
-and to the closed complement of `U`, whose image in `X` is strictly smaller. -/
+base change `π_Z : Z_L ⟶ Z` is an isomorphism at bounded constructible `(K, M)`. -/
 theorem isIso_ihomUpperStarComparison_of_fieldExtension_of_range_subset (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     (C : TopologicalSpace.Closeds X.left) :

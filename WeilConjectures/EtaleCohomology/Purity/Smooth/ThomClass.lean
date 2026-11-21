@@ -14,8 +14,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ThomClassAffineSpace
 For the zero section `z : B ↪ 𝔸^c_B`, realised as the closed subscheme cut out by the
 coordinates `t₁, …, t_c`, the cup product with supports `∂κ(t₁) ∪ ⋯ ∪ ∂κ(t_c)` of the Kummer
 boundaries of the coordinates (`AlgebraicGeometry.Etale.kummerBoundaryProduct`) is the Thom
-class: its adjoint `Λ_B ⟶ Rz^! (Λ(c)[2c])` is an isomorphism. This is the generator clause of
-clause (i) of `proposition-purity-vector-bundles`; the bare isomorphism `Rz^! Λ(c)[2c] ≅ Λ_B` is
+class: its adjoint `Λ_B ⟶ Rz^! (Λ(c)[2c])` is an isomorphism. This is the generator statement of
+purity for the zero section of a vector bundle; the bare isomorphism `Rz^! Λ(c)[2c] ≅ Λ_B` is
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_affineSpaceZero`.
 
 ## Main statements

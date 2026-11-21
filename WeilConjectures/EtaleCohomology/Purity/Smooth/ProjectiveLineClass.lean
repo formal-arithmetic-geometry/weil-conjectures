@@ -20,13 +20,13 @@ chart `D₊(T₀) ≅ 𝔸¹_S` at infinity.
 
 *Sign.* Forgetting supports, the Kummer boundary `∂κ(f)` of a local equation `f` of a divisor
 `D` is `c₁(𝒪(-D)) = -c₁(𝒪(D))`, not `c₁(𝒪(D))`: the Kummer and the support connecting maps
-anticommute (the notes' cycle class `c_D` of a Cartier divisor is `-∂κ(f)`). The auxiliary
+anticommute (the usual cycle class `c_D` of a Cartier divisor is `-∂κ(f)`). The auxiliary
 objects carry that sign: `AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux` is
 `c₁(𝒪(-∞)) = -c₁(𝒪(1))`, and the auxiliary trace `AlgebraicGeometry.Etale.projectiveLineTraceAux`,
 normalized by `Tr ∘ (-h)♭ = 1`, is `-t_q`. The main objects are their negatives, so that they match
-the notes: the hyperplane class `AlgebraicGeometry.Etale.projectiveLineHyperplaneClass` is
-`h = c₁(𝒪(1))`, and the trace `AlgebraicGeometry.Etale.projectiveLineTrace`, normalized by
-`Tr_q ∘ h♭ = 1`, is the trace `t_q` of the notes, normalized by `t_q(c₁(𝒪(1))) = 1`. The
+the usual conventions: the hyperplane class `AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`
+is `h = c₁(𝒪(1))`, and the trace `AlgebraicGeometry.Etale.projectiveLineTrace`, normalized by
+`Tr_q ∘ h♭ = 1`, is the usual trace `t_q`, normalized by `t_q(c₁(𝒪(1))) = 1`. The
 constructions below are carried out for the auxiliary class, which is used consistently; the sign
 enters only in the passage to the main objects.
 
@@ -165,9 +165,8 @@ immersion `i' = i ≫ (V ⊆ X)` of the adjoint `Λ_Z ⟶ Ri^! Λ_V(1)[2]` of th
 
 `Λ_X ⟶ Λ_X(1)[2]`.
 
-No excision isomorphism is chosen. It is the blueprint's class `cl(Z)` of a divisor,
-which forgets supports to `c₁(𝒪_X(-Z)) = -c₁(𝒪_X(Z))`,
-not to `c₁(𝒪_X(Z))`. -/
+It is the class `cl(Z)` of a divisor, which forgets supports to
+`c₁(𝒪_X(-Z)) = -c₁(𝒪_X(Z))`, not to `c₁(𝒪_X(Z))`. -/
 noncomputable def chartBoundaryClass : constantComplex Λ X ⟶ (tateObject Λ X 1)⟦(2 : ℤ)⟧ :=
   haveI : HasInvertibleExponent Λ V := .of_hom V.ι
   gysinClass Λ (V.toScheme.zeroLocusSubschemeι {V.topIso.inv s} ≫ V.ι) _ 2
@@ -188,20 +187,15 @@ section ProjectiveLine
 
 variable (S : Scheme.{u}) [HasInvertibleExponent Λ S]
 
-/-- *The hyperplane class of the projective line*, the class `h` of blueprint
-`lemma-cohomology-projective-line-trace` up to sign:
+/-- *The auxiliary hyperplane class of the projective line*, the hyperplane class up to sign:
 
-`h = -c₁(𝒪(1)) : Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
+`-h = -c₁(𝒪(1)) : Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
 
 on `ℙ¹_S = ℙ(Option (ULift (Fin 1)); S)`, the class of the section at infinity
 (`AlgebraicGeometry.Etale.chartBoundaryClass`): the zero locus of the coordinate
 `s = T_∞ / T₀` of the chart `D₊(T₀)` at infinity, which is closed in `ℙ¹_S`, the complement of
 the standard chart `D₊(T_∞) ≅ 𝔸¹_S` (`AlgebraicGeometry.ProjectiveSpace.range_chartBoundaryι`).
-The sign comes from `AlgebraicGeometry.Etale.chartBoundaryClass`, which forgets supports to
-`c₁(𝒪(-Z))` (the notes' cycle class of a Cartier divisor, clause (b)): this is `-c₁(𝒪(1))`, the
-auxiliary convention of the construction; the hyperplane class of the notes is its negative
-`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`. The decomposition of the cohomology of
-the projective line holds for `h` and `-h` alike. -/
+Its negative is `AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`. -/
 noncomputable def projectiveLineHyperplaneClassAux :
     constantComplex Λ ℙ(Option (ULift.{u} (Fin 1)); S) ⟶
       (tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧ :=
@@ -209,7 +203,7 @@ noncomputable def projectiveLineHyperplaneClassAux :
     (ProjectiveSpace.coordRatio (Option (ULift.{u} (Fin 1))) S (some ⟨0⟩) none)
 
 /-- The *hyperplane class* `h = c₁(𝒪(1)) : Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]` of the projective line, the
-class of the divisor at infinity with the sign of the notes (the cycle class `c_D` of a Cartier
+class of the divisor at infinity with the usual sign (the cycle class `c_D` of a Cartier
 divisor `D` is the class of `𝒪(D)`): the negative of the boundary class `c₁(𝒪(-∞))` of the chart
 at infinity (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`). -/
 noncomputable def projectiveLineHyperplaneClass :
@@ -225,9 +219,8 @@ whose first component is the unit of `Lq^* ⊣ Rq_*` read through
 `Lq^*(Λ_S(1)[2]) ≅ Λ_{ℙ¹_S}(1)[2]`, and whose second component is adjoint to the auxiliary
 hyperplane class `-h : Lq^* Λ_S ≅ Λ_{ℙ¹_S} ⟶ Λ_{ℙ¹_S}(1)[2]`
 (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`): the auxiliary form of the
-decomposition `Λ_S ⊕ Λ_S(-1)[-2] ⟶ Rq_* Λ_{ℙ¹_S}` of `lemma-cohomology-projective-line-trace`,
-see `AlgebraicGeometry.Etale.projectiveLineDecompositionMap` for the one with the sign of the
-notes. -/
+decomposition `Λ_S ⊕ Λ_S(-1)[-2] ⟶ Rq_* Λ_{ℙ¹_S}` of the cohomology of the projective line;
+see `AlgebraicGeometry.Etale.projectiveLineDecompositionMap` for the one with the usual sign. -/
 noncomputable def projectiveLineDecompositionMapAux :
     (tateObject Λ S 1)⟦(2 : ℤ)⟧ ⊞ constantComplex Λ S ⟶
       (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
@@ -246,14 +239,13 @@ noncomputable def projectiveLineDecompositionMapAux :
         projectiveLineHyperplaneClassAux Λ S))
 
 /-- The *decomposition map* of the projective line `q : ℙ¹_S ⟶ S`, twisted by `(1)[2]`, with the
-hyperplane class `h = c₁(𝒪(1))` of the notes
-(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`):
+hyperplane class `h = c₁(𝒪(1))` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`):
 
-`(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`
+`(1, h) : Λ_S(1)[2] ⊕ Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])`,
 
-(`AlgebraicGeometry.Etale.projectiveLineDecompositionMap_eq`). It is the auxiliary decomposition
-map `(1, -h)` (`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`) precomposed with the
-sign change `1 ⊕ (-1)` of the second summand, so that both are isomorphisms together. -/
+defined as the auxiliary decomposition map `(1, -h)`
+(`AlgebraicGeometry.Etale.projectiveLineDecompositionMapAux`) precomposed with the sign change
+`1 ⊕ (-1)` of the second summand. -/
 noncomputable def projectiveLineDecompositionMap :
     (tateObject Λ S 1)⟦(2 : ℤ)⟧ ⊞ constantComplex Λ S ⟶
       (R(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_*[ModuleCat.{u + 1} Λ])).obj
@@ -282,7 +274,7 @@ lemma projectiveLineDecompositionMap_eq :
   · simp [projectiveLineDecompositionMap, projectiveLineDecompositionMapAux,
       projectiveLineHyperplaneClass, Adjunction.homEquiv_unit]
 
-/-- The decomposition map with the hyperplane class of the notes is an isomorphism exactly when
+/-- The decomposition map with the hyperplane class `h` is an isomorphism exactly when
 the auxiliary one is: they differ by the automorphism `1 ⊕ (-1)`. -/
 lemma isIso_projectiveLineDecompositionMap_iff :
     IsIso (projectiveLineDecompositionMap Λ S) ↔

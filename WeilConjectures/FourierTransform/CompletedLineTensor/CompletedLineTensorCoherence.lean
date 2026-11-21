@@ -128,7 +128,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
   (j : F →ₐ[ℚ_[l]] G)
 
 /-- Existence and uniqueness of all ordinary signed-line comparisons with their
-representative formulas. Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3). -/
+representative formulas. Source: Stacks 03EL, 03EO, 06YY. -/
 theorem pairData_existsUnique (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -725,7 +725,8 @@ attribute [local irreducible] sfIntegralConstructible
 
 variable (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- Precisely the conditional constructible-preservation hypothesis in the node. -/
+/-- Tensoring with the line `L` and twisting by any `m` preserves integral constructible
+complexes. -/
 def PreservesConstructible (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1] :
     Prop := ∀ (m : ℤ) (K : DerivedCategory (integralTowerModules l E Y)),
   sfIntegralConstructible l E Y K →

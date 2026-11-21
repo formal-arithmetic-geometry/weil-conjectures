@@ -20,7 +20,7 @@ independent matrices; this is witnessed by a nonzero determinant, which stays no
 `ρ(γ₁), …, ρ(γ_{n²})` with `γᵢ` close to `gᵢ`. Hence there is a neighbourhood `U` of `1` such
 that every subgroup `Γ` meeting every left coset `g U` still acts irreducibly
 (`Representation.exists_mem_nhds_one_forall_isIrreducible`). This is the topological form of the
-finite matrix witness of `lemma-detecting-irreducibility-finite-quotient--1`, used for curve testing.
+finite matrix witness `Representation.exists_forall_isIrreducible_baseChange_of_congr`.
 
 ## Main statements
 
@@ -67,9 +67,7 @@ end Irreducible
 of `1`.** Let `ρ` be an irreducible finite-dimensional representation of a topological group `G`
 over an algebraically closed topological field `k`, with continuous matrix coefficients. There is
 a neighbourhood `U` of `1` such that every subgroup `Γ` meeting every coset `g U` acts
-irreducibly. By Burnside's theorem `ρ(g₁), …, ρ(g_{n²})` span `End_k(V)` for some `gᵢ`, as
-witnessed by a nonzero determinant of their matrices; the determinant stays nonzero when the
-`gᵢ` are replaced by nearby `γᵢ ∈ Γ`. -/
+irreducibly. -/
 theorem exists_mem_nhds_one_forall_isIrreducible {k G V : Type*} [Field k] [TopologicalSpace k]
     [IsTopologicalRing k] [T1Space k] [IsAlgClosed k] [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] [AddCommGroup V] [Module k V] [FiniteDimensional k V]

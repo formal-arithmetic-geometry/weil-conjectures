@@ -17,7 +17,8 @@ Source: Stacks Project, Fields, Tags 09FV, 09GC, 09H1, 09HE, and 09GS.
 
 * `FieldExtension.degree` is the vector-space degree, with `⊤` for an infinite
   dimensional extension.
-The other clauses in the blueprint are recorded by Mathlib's existing notions:
+Finite, algebraic, finite separable and purely inseparable extensions and algebraic closures are
+recorded by Mathlib's existing notions:
 `Module.Finite k K`, `Algebra.IsAlgebraic k K`,
 `Module.Finite k K ∧ Algebra.IsSeparable k K`,
 `IsPurelyInseparable k K`, and `IsAlgClosure k K`, respectively.

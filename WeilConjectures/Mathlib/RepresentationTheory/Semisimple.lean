@@ -37,15 +37,6 @@ of simple submodules is semisimple. No finiteness of `G ⧸ N` is used.
 * `Representation.isSemisimpleRepresentation_iff_exists_iSupIndep`: a finite-dimensional
   representation is semisimple if and only if it is a direct sum of irreducible
   subrepresentations.
-
-## Blueprint
-
-`Representation.isSemisimpleRepresentation_comp_subtype` implements part of
-`lemma-restriction-normal-subgroup`, `lemma-restriction-normal-subgroup--1` and
-`lemma-restriction-normal-subgroup--1` (whose finite-index hypothesis is not needed).
-`Representation.IsIrreducible.eq_one_of_isConstituent_trivial` is the case `a = 0` of
-`lemma-unramified-at-infinity-no-linear-characters`.
-`Representation.isSemisimpleRepresentation_iff_exists_iSupIndep` is `def-wf-semisimple-module`.
 -/
 
 @[expose] public section

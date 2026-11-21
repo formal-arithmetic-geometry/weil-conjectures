@@ -32,15 +32,14 @@ the determinant `Δ ∈ O` of their vectorised matrices is nonzero, and for `N` 
 
 ## Main statements
 
-- `Representation.exists_forall_isIrreducible_baseChange_of_congr`: blueprint
-  `lemma-detecting-irreducibility-finite-quotient--1`.
+- `Representation.exists_forall_isIrreducible_baseChange_of_congr`: absolute irreducibility is
+  detected modulo a power of the maximal ideal.
 
 ## Implementation notes
 
 The stable lattice `L` is recorded as a basis `b` of `V` in which all the matrices of `ρ` have
 entries in `O`; its existence for a continuous representation of a profinite group is
-`proposition-lattices-representations-normal-scheme`
-(`AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`). Extension of scalars of `ρ` to a field `K`
+`AlgebraicGeometry.WeilGroup.IsLisse.exists_lattice`. Extension of scalars of `ρ` to a field `K`
 is `(Module.End.baseChangeHom E K V).toMonoidHom.comp ρ`.
 -/
 

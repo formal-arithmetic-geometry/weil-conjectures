@@ -28,7 +28,7 @@ of `K`. An invariant of `Mᴷ` under `τ` is invariant under `G`, as every open 
 `G → M`, by summation along the powers of `τ`; this computes `H¹` through the embedding of `M`
 into its coinduced module, and shows the vanishing of `H²`.
 
-The case `G = ℤ_ℓ`, `χ = id`, `K = 1` is blueprint `lem-exc-procyclic-two-term`.
+The case `G = ℤ_ℓ`, `χ = id`, `K = 1` is the classical two-term computation for `ℤ_ℓ`.
 
 ## Main definitions and statements
 

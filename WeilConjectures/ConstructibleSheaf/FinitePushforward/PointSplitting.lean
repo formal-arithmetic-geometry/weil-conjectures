@@ -43,9 +43,7 @@ variable {Λ : Type (u + 1)} [Ring Λ]
 /-- **A constructible sheaf is constant on an étale neighbourhood of a point with finite
 separable residue field extension.** For a constructible sheaf `C` of `Λ`-modules on `X` and a
 point `x`, there is a morphism `w : W ⟶ X` and a point `v ↦ x` such that `κ(v) / κ(x)` is finite
-separable and `w^* C` is constant: `W` is a member of an étale cover of `Spec κ(z)` trivialising
-the restriction of `C` to the stratum through `x`, where `z ↦ x`. This is Step 3 of the proof of
-Stacks 09Z6. -/
+separable and `w^* C` is constant. -/
 theorem exists_isConstant_upperStar_of_isConstructibleSheaf {X : Scheme.{u}}
     (C : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf C] (x : X) :
     ∃ (W : Scheme.{u}) (w : W ⟶ X) (v : W), w.base v = x ∧ (w.residueFieldMap v).hom.Finite ∧

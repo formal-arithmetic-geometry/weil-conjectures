@@ -29,9 +29,7 @@ universe u
 
 namespace PrincipalWLocalization.StrictWCover
 
-/-- A principal ind-Zariski presentation is an ind-etale presentation: principal
-localizations and their finite products are etale, and etaleness respects algebra equivalences.
-Source: the definitions in `IndPrincipalZariski` and Mathlib's etale-localization API. -/
+/-- A principal ind-Zariski presentation is an ind-etale presentation. -/
 private theorem indEtale_of_principal (R S : Type u) [CommRing R] [CommRing S]
     [Algebra R S] (h : Algebra.IsIndPrincipalZariski R S) : Algebra.IndEtale R S := by
   obtain ⟨I, hI, hF, P, hP⟩ := h
@@ -44,10 +42,7 @@ private theorem indEtale_of_principal (R S : Type u) [CommRing R] [CommRing S]
     Algebra.Etale.of_isLocalizationAway (f j)
   exact Algebra.Etale.of_equiv e.symm
 
-/-- A prime over a maximal ideal under an ind-etale map is maximal. Map its quotient
-into its fraction field. The ind-etale local-field image lemma makes every image separable,
-hence integral over the base quotient field. Injectivity reflects integrality, so the domain
-quotient is integral over a field and is itself a field.
+/-- A prime over a maximal ideal under an ind-etale map is maximal.
 Source: Stacks 097X, first proof paragraph. -/
 private theorem maximal_of_indEtale (R S : Type u) [CommRing R] [CommRing S]
     [Algebra R S] [Algebra.IndEtale R S] (q : Ideal S) [q.IsPrime]

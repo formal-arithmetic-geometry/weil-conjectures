@@ -44,12 +44,8 @@ same constituents: the graded pieces of a filtration of `V` determine the consti
 - `Representation.CompositionSeries.constituentsLE_exteriorPower_semisimplification` and its primed
   version: `⋀ⁿ V` and `⋀ⁿ V^ss` have the same constituents.
 
-## Blueprint
-
-- `lemma-tensor-exterior-powers-filtered-representations--2`,
-`lemma-tensor-exterior-powers-filtered-representations--3`: the exterior power of a
-  filtered representation, through its constituents. The full filtration with graded pieces
-  `⨂ᵢ ⋀^{nᵢ} A_i` is in `WeilConjectures.RepresentationTheory.ExteriorPowerFiltration`.
+The full filtration with graded pieces `⨂ᵢ ⋀^{nᵢ} A_i` is in
+`WeilConjectures.RepresentationTheory.ExteriorPowerFiltration`.
 -/
 
 @[expose] public section
@@ -106,8 +102,7 @@ theorem map_mem_countSpan {f : V →ₗ[k] V} (hf : ∀ x ∈ P, f x ∈ P) {j :
 
 /-- **Perturbing a wedge by vectors of `P`.** If `a` has at least `j` entries in `P` on a set `J`
 of indices, and `y` is a family of vectors of `P` vanishing on `J`, then
-`ι(a + y) - ι(a)` lies in the next filtration step `F_{j+1}`: expanding multilinearly, every other
-term has an extra entry in `P`, or a zero entry. -/
+`ι(a + y) - ι(a)` lies in the next filtration step `F_{j+1}`. -/
 theorem ιMulti_add_sub_ιMulti_mem_countSpan {j : ℕ} (a y : Fin n → V) (J : Finset (Fin n))
     (hJ : j ≤ J.card) (haJ : ∀ i ∈ J, a i ∈ P) (hyJ : ∀ i ∈ J, y i = 0) (hy : ∀ i, y i ∈ P) :
     ιMulti k n (a + y) - ιMulti k n a ∈ countSpan P n (j + 1) := by

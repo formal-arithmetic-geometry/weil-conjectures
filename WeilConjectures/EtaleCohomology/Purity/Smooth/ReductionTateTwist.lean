@@ -159,9 +159,7 @@ noncomputable def derivedExtendScalarsTateShiftIso (m : ℤ) :
   ((derivedExtendScalars hρ ha X).commShiftIso (2 * m)).app _ ≪≫
     (shiftFunctor _ (2 * m)).mapIso (derivedExtendScalarsTateObjectIso hρ ha X m)
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`
-
-**The Tate shift datum of the reduction of coefficients.** For a surjective morphism
+/-- **The Tate shift datum of the reduction of coefficients.** For a surjective morphism
 `ρ : Λ →+* Λ'` of rings of positive characteristics with principal kernel (for instance
 `A_{E,N+1} → A_{E,N}`), the identifications `Ψ(Λ_S(m)[2m]) ≅ Λ'_S(m)[2m]` on
 `S = Spec ℤ[1/n]` induced by `μₙ ⊗ Λ' ≅ μ_{n'} ⊗ Λ'`

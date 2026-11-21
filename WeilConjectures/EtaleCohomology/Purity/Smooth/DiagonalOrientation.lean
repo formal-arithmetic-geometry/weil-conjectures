@@ -53,6 +53,14 @@ does not depend on the structure morphism to the field
 
 - `AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_eq`: the isomorphism does not depend on
   the structure morphism of `Y` to a field.
+
+## Implementation details
+
+The identification `Ls^* ω ≅ Ls^* T` of
+`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso` goes through the
+canonical tensor maps; unlike the co-projection
+`AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`, it does not depend on
+a choice of tensor inverses.
 -/
 
 @[expose] public section
@@ -98,10 +106,8 @@ with `Rs^! T ≅ Λ_B` and `Rs^! ω ≅ Λ_B`, the isomorphism
 `Ls^* ω ≅ Rs^! T ⊗ Ls^* ω ≅ Rs^!(T ⊗ ω) ≅ Rs^!(ω ⊗ T) ≅ Rs^! ω ⊗ Ls^* T ≅ Ls^* T`,
 
 through the canonical tensor maps `Rs^! M ⊗ Ls^* N ⟶ Rs^!(M ⊗ N)`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`, the co-projection of
-`lem-pur-coprojection`), which are isomorphisms for `N` invertible, and the symmetry of `⊗ᴸ`.
-Unlike `AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`, it does not
-depend on a choice of tensor inverses of `ω` and `T`. -/
+(`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`), which are isomorphisms for `N`
+invertible, and the symmetry of `⊗ᴸ`. -/
 noncomputable def leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso {V B : Scheme.{u}}
     (s : B ⟶ V) [HasCompactification s]
     {ω T : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -179,10 +185,7 @@ is the base change of the smooth `f`, so the canonical base change map
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`);
 this is its inverse
 
-`ω_{p₁} = Rp₁^! Λ_X ≅ Lp₂^* Rf^! Λ_Y = Lp₂^* ω_f`.
-
-Smooth base change is available over a quasi-separated base `Y` for the quasi-compact base
-change `p₁` of `f`. -/
+`ω_{p₁} = Rp₁^! Λ_X ≅ Lp₂^* Rf^! Λ_Y = Lp₂^* ω_f`. -/
 noncomputable def dualizingComplexPullbackFstIso [QuasiSeparatedSpace Y] [QuasiCompact f] :
     dualizingComplex Λ (pullback.fst f f) ≅
       (L((pullback.snd f f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ f) :=
@@ -219,10 +222,7 @@ normalized Kummer class, the isomorphism
 of the diagonal argument: the inverse of
 `AlgebraicGeometry.Etale.sectionInvariantDiagonalIso` (smooth base change) followed by
 `AlgebraicGeometry.Etale.sectionInvariantTwistShiftIsoOfSection` for the diagonal, a closed
-section of the smooth projection `p₁ : X ×_Y X ⟶ X`. Every step is a concrete isomorphism, so
-this is a canonical form of `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`;
-it does not depend on the structure morphism `aY`
-(`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso_eq`). -/
+section of the smooth projection `p₁ : X ×_Y X ⟶ X`. -/
 noncomputable def dualizingComplexTwistShiftIso [HasKummerClass Λ]
     [HasKummerClass.IsNormalized Λ] [IsSeparated f] {k : Type u} [Field k]
     (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY] :

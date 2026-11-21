@@ -44,7 +44,6 @@ sends `R` to a ring object `g^* R` and `R`-modules to `g^* R`-modules (`Functor.
 stratum `Xₐ`, `M|_{Xₐ}` is pro-étale locally finitely presented over `R|_{Xₐ}`. For
 `R = 𝒪_{E,X}` these are the constructible `𝒪_E`-sheaves; for `R = E_X` (with `E` a field)
 they are the constructible `E`-sheaves, lisse on the strata.
-
 -/
 
 @[expose] public section

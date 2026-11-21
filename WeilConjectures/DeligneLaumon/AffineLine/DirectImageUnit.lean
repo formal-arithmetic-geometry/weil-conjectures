@@ -237,16 +237,7 @@ theorem exists_dense_forall_notMem (S : Set (affineLine k₀).finitePoints) (hS 
 /-- **Simplicity of a middle extension, sheaf part**. Let
 `A ↪ M ⟶ B ↠ C` be an exact sequence of Weil sheaves on the affine line with `M ≅ j_*N` for an
 irreducible lisse `N`, `C` punctual and `B` without nonzero punctual subsheaf. Then `A = C = 0`
-or `B = 0`. Choose a dense open `k : V ↪ U₀` on which `A` and `C` are lisse; then `C|_V = 0`,
-and `A|_V ⊆ N|_V` is `0` or `N|_V`, the restriction `N|_V` being irreducible
-(`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse.upperStar_of_isDominant`):
-
-- if `A|_V = 0`, then `A` is a punctual subsheaf of `j_*N`, hence zero, and `M ⟶ B` is
-  injective and an isomorphism on `V`. The map `θ : B ⟶ j_* k_* (B|_V)` is injective, its kernel
-  being a punctual subsheaf of `B`, and `M ⟶ B ⟶ j_* k_* (B|_V)` is the isomorphism
-  `M ≅ j_* k_* (M|_V) ≅ j_* k_* (B|_V)`, the unit `N ⟶ k_* k^* N` being invertible for the
-  lisse `N`. So `M ⟶ B` is an isomorphism and `C = 0`;
-- if `A|_V = N|_V`, then `B|_V ⊆ C|_V = 0`, so `B` is punctual, hence zero. -/
+or `B = 0`. -/
 theorem isZero_or_isZero_of_exact (hD : D.sheaf.IsIrreducibleLisse)
     {A M B C : WeilSheaf k₀ l (affineLine k₀)} (eM : M ≅ D.directImage) (a : A ⟶ M) (s : M ⟶ B)
     (t : B ⟶ C) [Mono a] [Epi t] (has : a ≫ s = 0) (hst : s ≫ t = 0)

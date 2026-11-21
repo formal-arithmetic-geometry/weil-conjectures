@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Lie.Solvable
 
 This file states Cartan's trace criterion for a Lie algebra of endomorphisms of a
 finite-dimensional vector space, and the non-degeneracy of the Killing form of a Lie algebra with
-trivial radical, in the forms used by the blueprint.
+trivial radical.
 
 ## Main declarations
 
@@ -24,14 +24,6 @@ trivial radical, in the forms used by the blueprint.
   finite-dimensional characteristic-zero Lie algebra with trivial radical is non-degenerate.
 * `LieAlgebra.HasTrivialRadical.derivedSeries_eq_top`: a finite-dimensional characteristic-zero
   Lie algebra with trivial radical is perfect, `⁅L, L⁆ = L`.
-
-## Blueprint
-
-* `LieSubalgebra.isSolvable_of_trace_mul_eq_zero` implements `lemma-cartan-s-criterion--1`.
-* `LieAlgebra.HasTrivialRadical.killingForm_nondegenerate` implements
-  `lemma-killing--1`.
-* `LieAlgebra.HasTrivialRadical.killingForm_nondegenerate` and
-  `LieAlgebra.HasTrivialRadical.derivedSeries_eq_top` together implement `lemma-killing`.
 -/
 
 @[expose] public section
@@ -85,10 +77,7 @@ theorem killingForm_nondegenerate [HasTrivialRadical k L] : (killingForm k L).No
   IsKilling.killingForm_nondegenerate k L
 
 /-- A finite-dimensional Lie algebra with trivial radical over a field of characteristic zero is
-perfect: `⁅L, L⁆ = L`. The Killing complement of `⁅L, L⁆` is an ideal meeting `⁅L, L⁆` trivially,
-so it is central; the centre lies in the radical, which is zero. Together with
-`LieAlgebra.HasTrivialRadical.killingForm_nondegenerate` this is the blueprint lemma
-`lemma-killing`. -/
+perfect: `⁅L, L⁆ = L`. -/
 theorem derivedSeries_eq_top [HasTrivialRadical k L] : derivedSeries k L 1 = ⊤ := by
   set D := derivedSeries k L 1
   have hc := D.isCompl_killingCompl

@@ -18,8 +18,8 @@ Let `X₀` be a smooth geometrically connected affine scheme of dimension `d ≥
 field `k₀` and `𝒢` an `ι`-real lisse Weil sheaf on `X₀`. Every irreducible lisse subquotient `V`
 of `𝒢` is punctually `ι`-pure.
 
-The proof follows the blueprint, with the finite constant extension replaced by the Frobenius
-twist of subsheaves (`AlgebraicGeometry.WeilSheaf.frobeniusTwist`): `V̄` has a geometrically
+The proof uses the Frobenius twist of subsheaves (`AlgebraicGeometry.WeilSheaf.frobeniusTwist`)
+in place of a finite constant extension: `V̄` has a geometrically
 irreducible subsheaf `P`, defined over the extension of degree `M`, whose twists
 `P, T P, …, T^{M-1} P` span `V̄`. A curve `Y` through a geometric point `t₀` over a closed point
 `x₀`, its Frobenius translates and a geometric point over a closed point `x`, defined over a finite
@@ -72,8 +72,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- **Purity at a closed point read off on a curve**. If the pullback of `F` to a curve `Y` over
 `L` through a geometric point over the closed point `x` is punctually pure of weight `w`, then so
-is the stalk of `F` at `x`: the stalk of the pullback at a point of `Y` over `x` is the stalk of
-`F` with a power of its Frobenius. -/
+is the stalk of `F` at `x`. -/
 theorem isPureOfWeight_stalk_of_curvePullback [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of L))]
     [Mono j] {F : WeilSheaf k₀ l X} {w : ℝ}
     (hF : ((curvePullback j hj).obj F).IsPunctuallyPureOfWeight ι w) (x : X.finitePoints)
@@ -102,8 +101,7 @@ be an irreducible local system fixed by the `M`-th power of the Frobenius twist 
 `P, …, T^{M-1} P` span `V̄`. Let `j : Ȳ ⟶ X̄` be a curve over a finite field `L` with
 `M ∣ [L : k₀]`, on which every `Tⁿ P` stays irreducible, passing through the translates
 `σ⁻ᵃ ≫ t₀ ≫ Frᵃ` of the geometric point `t₀` over a closed point `x₀`. Then the restriction of
-`V` to the curve is punctually pure: its constituents `Tⁿ P|_Y` are pure by purity on curves, of
-a common weight since the weight of `Tᵃ P` at `t₀` is that of `P` at `σ⁻ᵃ ≫ t₀ ≫ Frᵃ`. -/
+`V` to the curve is punctually pure. -/
 theorem exists_isPunctuallyPureOfWeight_curvePullback
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [ConnectedSpace (X ↘ Spec (CommRingCat.of k₀)).geometricFiber]
@@ -241,17 +239,7 @@ theorem _root_.AlgebraicGeometry.ProEtale.IsIrreducibleAdicLocalSystem.upperStar
 Let `X₀` be a
 smooth geometrically connected affine scheme of dimension `d ≥ 2` over `k₀` and `𝒢` an `ι`-real
 lisse Weil sheaf on `X₀`. Every irreducible lisse subquotient `𝒢₂ / 𝒢₁` of lisse Weil subsheaves
-`𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` is punctually `ι`-pure.
-
-Its underlying sheaf contains an irreducible local system `P` defined over a finite extension
-(`AlgebraicGeometry.WeilSheaf.exists_isIrreducibleAdicLocalSystem_frobeniusTwist_iterate_eq`)
-whose Frobenius twists span it (`AlgebraicGeometry.WeilSheaf.iSup_frobeniusTwist_iterate_eq_top`).
-Curve testing (`AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_isIrreducibleAdicLocalSystem_
-upperStar`) through a geometric point over a fixed closed point `x₀`, its Frobenius translates and
-a geometric point over an arbitrary closed point `x` gives a curve, which has a model over a finite
-field (`AlgebraicGeometry.Scheme.Hom.exists_finiteModel_of_isClosedImmersion`). On it the
-subquotient is pure (`AlgebraicGeometry.WeilSheaf.exists_isPunctuallyPureOfWeight_curvePullback`),
-of a weight read off at `x₀`, and this weight is the weight at `x`. -/
+`𝒢₁ ⊆ 𝒢₂ ⊆ 𝒢` is punctually `ι`-pure. -/
 theorem IsReal.exists_isPunctuallyPureOfWeight_cokernel_of_smooth {X₀ : Scheme.{u}}
     [X₀.Over (Spec (CommRingCat.of k₀))] [IsAffine X₀] {d : ℕ} (hd : 2 ≤ d)
     [SmoothOfRelativeDimension d (X₀ ↘ Spec (CommRingCat.of k₀))]

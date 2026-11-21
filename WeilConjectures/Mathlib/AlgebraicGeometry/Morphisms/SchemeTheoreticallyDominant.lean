@@ -129,13 +129,7 @@ lemma Scheme.Hom.ker_comp_of_isSchemeTheoreticallyDominant {T' : Scheme.{u}} (d 
 
 /-- **Scheme-theoretic dominance descends along a flat monomorphism**: if `s ≫ j` is
 quasi-compact and scheme-theoretically dominant and `j` is a flat monomorphism, then the
-first factor `s` is scheme-theoretically dominant.
-
-The typical case is `j` an open immersion: the scheme-theoretic image of `s` inside the
-open subscheme `U` is the trace on it of the scheme-theoretic image of `s ≫ j`. The proof
-is that the square with vertical maps `s` and `s ≫ j` and horizontal maps `𝟙` and `j` is
-cartesian, `j` being a monomorphism, so this is flat base change for scheme-theoretic
-dominance. -/
+first factor `s` is scheme-theoretically dominant. -/
 lemma IsSchemeTheoreticallyDominant.of_comp {U : Scheme.{u}} (s : T ⟶ U) (j : U ⟶ Y)
     [Mono j] [Flat j] [QuasiCompact (s ≫ j)] [IsSchemeTheoreticallyDominant (s ≫ j)] :
     IsSchemeTheoreticallyDominant s :=
@@ -211,9 +205,7 @@ theorem Scheme.Hom.ker_of_isPullback {T' : Scheme.{u}} {p₁ : T' ⟶ T} {p₂ :
   rw [← H.isoPullback_hom_snd, Scheme.Hom.ker_comp_of_isIso, ker_pullback_snd]
 
 /-- Restriction of a scheme-theoretic image to an open subscheme of the target: the
-kernel of `g ∣_ U` is the restriction of the kernel of `g`. This is the special case of
-`AlgebraicGeometry.Scheme.Hom.ker_of_isPullback` for the open immersion `U.ι`, which is
-flat. -/
+kernel of `g ∣_ U` is the restriction of the kernel of `g`. -/
 theorem Scheme.Hom.ker_morphismRestrict (U : Y.Opens) :
     (g ∣_ U).ker = g.ker.comap U.ι :=
   g.ker_of_isPullback U.ι (isPullback_morphismRestrict g U).flip
@@ -254,8 +246,7 @@ lemma Scheme.Hom.image.pullbackIso_inv_imageι :
     (pullbackIso g q).inv ≫ (pullback.snd g q).imageι = pullback.fst q g.imageι := by
   rw [Iso.inv_comp_eq, pullbackIso_hom_fst]
 
-/-- The base change isomorphism is the unique morphism over `Y'`, since both closed
-immersions into `Y'` are monomorphisms. -/
+/-- The base change isomorphism is the unique morphism over `Y'`. -/
 lemma Scheme.Hom.image.eq_pullbackIso_hom (c : (pullback.snd g q).image ⟶ pullback q g.imageι)
     (hc : c ≫ pullback.fst q g.imageι = (pullback.snd g q).imageι) :
     c = (pullbackIso g q).hom := by
@@ -370,13 +361,7 @@ section Separated
 /-- **Rigidity of morphisms into a separated scheme**: if `Y` is separated over `S`, then
 two `S`-morphisms `a b : T ⟶ Y` that agree after composing with a scheme-theoretically
 dominant morphism `v : V ⟶ T` are equal. The classical case is `v = V.ι` for a
-scheme-theoretically dense open subscheme `V ⊆ T`.
-
-The equaliser of `a` and `b` is the base change of the diagonal `Y ⟶ Y ×[S] Y` along
-`(a, b) : T ⟶ Y ×[S] Y`, hence a *closed* subscheme of `T` because `Y ⟶ S` is separated.
-As `v` factors through it, its kernel ideal sheaf is contained in the kernel of `v`, which
-is trivial; so the closed immersion is an isomorphism, in particular an epimorphism, and
-`a = b`. -/
+scheme-theoretically dense open subscheme `V ⊆ T`. -/
 @[stacks 01RH]
 theorem ext_of_isSchemeTheoreticallyDominant {V T Y S : Scheme.{u}} (g : Y ⟶ S)
     [IsSeparated g] {a b : T ⟶ Y} (h : a ≫ g = b ≫ g) (v : V ⟶ T)
@@ -424,11 +409,7 @@ variable (g : X ⟶ Y) (g' : X' ⟶ Y') (u : X ⟶ X') (v : Y ⟶ Y') (w : g ≫
 `g ≫ v = u ≫ g'` with `g` quasi-compact induces a morphism `g.image ⟶ g'.image` between
 the scheme-theoretic images of its two horizontal sides, compatible with the closed
 immersions into `Y` and `Y'` (`AlgebraicGeometry.Scheme.Hom.imageMap_imageι`) and with
-the factor maps (`AlgebraicGeometry.Scheme.Hom.toImage_imageMap`).
-
-The kernel comparison needed for the universal property of the closed immersion
-`g'.imageι` is `g'.ker ≤ (u ≫ g').ker = (g ≫ v).ker = (g.imageι ≫ v).ker`, the last
-step because `g.toImage` is scheme-theoretically dominant and quasi-compact. -/
+the factor maps (`AlgebraicGeometry.Scheme.Hom.toImage_imageMap`). -/
 @[stacks 01R9]
 noncomputable def Scheme.Hom.imageMap : g.image ⟶ g'.image :=
   IsClosedImmersion.lift g'.imageι (g.imageι ≫ v) <| by
@@ -452,8 +433,7 @@ lemma Scheme.Hom.toImage_imageMap : g.toImage ≫ imageMap g g' u v w = u ≫ g'
     g.toImage_imageι, w, Category.assoc, g'.toImage_imageι]
 
 /-- The induced morphism between the scheme-theoretic images is the unique morphism
-compatible with the closed immersions into `Y` and `Y'`, since `g'.imageι` is a
-monomorphism. -/
+compatible with the closed immersions into `Y` and `Y'`. -/
 lemma Scheme.Hom.eq_imageMap (c : g.image ⟶ g'.image)
     (hc : c ≫ g'.imageι = g.imageι ≫ v) :
     c = imageMap g g' u v w := by
@@ -482,8 +462,7 @@ section ImageOverOpen
 the range of a quasi-compact morphism `g` is closed in an open `W` of the target, then
 every point of the scheme-theoretic image of `g` lying over `W` is in the range of the
 canonical morphism `g.toImage`, so over `W` the scheme-theoretic image adds nothing to the
-range. In the application `g` is proper over an open of the base, so its range is closed
-there. -/
+range. -/
 theorem Scheme.Hom.preimage_subset_range_toImage_of_isClosed {V Y : Scheme.{u}} (g : V ⟶ Y)
     [QuasiCompact g] {W : Y.Opens} (hW : IsClosed (⇑W.ι ⁻¹' Set.range ⇑g)) :
     ⇑g.imageι ⁻¹' (W : Set Y) ⊆ Set.range ⇑g.toImage := by
@@ -509,12 +488,7 @@ section AppInjective
 
 /-- **Scheme-theoretic density via sections**: a quasi-compact morphism `f : X ⟶ Y` is
 scheme-theoretically dominant if and only if every map on sections `f.app U` is injective,
-i.e. the sheaf map `𝒪_Y ⟶ f_* 𝒪_X` is injective.
-
-For a quasi-compact open immersion `j : U ⟶ X` this is the blueprint's definition of a
-scheme-theoretically dense open (`𝒪_X → j_* 𝒪_U` injective). The project uses Mathlib's
-`IsSchemeTheoreticallyDominant` (kernel ideal sheaf `⊥`) as the definition, and this
-lemma identifies it with the blueprint's formulation. -/
+i.e. the sheaf map `𝒪_Y ⟶ f_* 𝒪_X` is injective. -/
 theorem isSchemeTheoreticallyDominant_iff_app_injective {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] :
     IsSchemeTheoreticallyDominant f ↔ ∀ U : Y.Opens, Function.Injective (f.app U) := by

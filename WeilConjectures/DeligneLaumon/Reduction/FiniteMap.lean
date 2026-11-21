@@ -20,9 +20,9 @@ Deligne–Laumon bound on a curve is reduced to the affine line.
 ## Main statements
 
 - `WeilSheaf.nonempty_equiv_compactlySupportedCohomology_lowerStar_of_isFinite`:
-  blueprint `lemma-finite-generically-etale-map-line--3`.
+  `H_c^i(C, F) ≅ H_c^i(Y, g₀*F)` for a finite morphism `g`.
 - `WeilSheaf.nonempty_equiv_compactlySupportedCohomology_lowerStar_extensionByZero`:
-  blueprint `lemma-finite-generically-etale-map-line--3`.
+  `H_c^i(C, F) ≅ H_c^i(Y, g₀*j₀!F)` for an open immersion `j` followed by a finite morphism `g`.
 -/
 
 @[expose] public section
@@ -36,9 +36,7 @@ namespace AlgebraicGeometry.WeilSheaf
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 /-- **Cohomology under a finite map**. For a finite morphism `g : C ⟶ Y` of separated `k₀`-schemes
-of finite type and a Weil sheaf `F` on `C`, `H_c^i(C, F) ≅ H_c^i(Y, g₀*F)` as Frobenius modules:
-the direct image `Rg₀*F` is `g₀*F` placed in degree zero, `g₀*` being exact, and
-`R(a_C)₀! ≅ R(a_Y)₀! ∘ Rg₀! ≅ R(a_Y)₀! ∘ Rg₀*` since `g` is proper. -/
+of finite type and a Weil sheaf `F` on `C`, `H_c^i(C, F) ≅ H_c^i(Y, g₀*F)` as Frobenius modules. -/
 theorem nonempty_equiv_compactlySupportedCohomology_lowerStar_of_isFinite
     {C Y : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
     [IsSeparated (C ↘ Spec (CommRingCat.of k₀))]
@@ -68,11 +66,7 @@ theorem nonempty_equiv_compactlySupportedCohomology_lowerStar_of_isFinite
 
 /-- **Cohomology transport under the finite-map reduction**. For a quasi-compact open immersion
 `j : C ⟶ C'` and a finite morphism `g : C' ⟶ Y` of separated `k₀`-schemes of finite type and a
-Weil sheaf `F` on `C`, `H_c^i(C, F) ≅ H_c^i(Y, g₀*j₀!F)` as Frobenius modules:
-`H_c^i(C, F) ≅ H_c^i(C', j₀!F)` since `R(a_C)₀! ≅ R(a_{C'})₀! ∘ Rj₀!` and `Rj₀!F ≅ j₀!F`, and the
-finite-map transport
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_lowerStar_of_isFinite`)
-applies to `j₀!F`. -/
+Weil sheaf `F` on `C`, `H_c^i(C, F) ≅ H_c^i(Y, g₀*j₀!F)` as Frobenius modules. -/
 theorem nonempty_equiv_compactlySupportedCohomology_lowerStar_extensionByZero
     {C C' Y : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))]
     [C'.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]

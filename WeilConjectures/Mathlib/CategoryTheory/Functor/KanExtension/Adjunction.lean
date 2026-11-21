@@ -130,15 +130,7 @@ lemma lanUnit_app_app_η_app (c : C) :
 
 /-- The comparison map `δ : L.lan (P ⊗ Q) ⟶ L.lan P ⊗ L.lan Q` is an isomorphism if the
 categories `CostructuredArrow L X` are sifted and the tensor product preserves colimits of
-these shapes in each variable. At `X`, both sides are colimits over `CostructuredArrow L X`
-(the right one because the category is sifted), and `δ.app X` is the morphism of cocones
-```
-  (P ⊗ Q).obj c ──ι_f──▶ colim (P ⊗ Q) = (L.lan (P ⊗ Q)).obj X
-        ‖                         │ δ.app X
-        ‖                         ▼
-  P.obj c ⊗ Q.obj c ──ι_f ⊗ ι_f──▶ (L.lan P).obj X ⊗ (L.lan Q).obj X
-```
-over the legs indexed by `f : L.obj c ⟶ X`. This applies to a representably coflat `L`. -/
+these shapes in each variable. This applies to a representably coflat `L`. -/
 instance isIso_lan_δ [∀ X : D, IsSifted (CostructuredArrow L X)]
     [∀ (X : D) (M : H), PreservesColimitsOfShape (CostructuredArrow L X) (tensorLeft M)]
     [∀ (X : D) (M : H), PreservesColimitsOfShape (CostructuredArrow L X) (tensorRight M)]

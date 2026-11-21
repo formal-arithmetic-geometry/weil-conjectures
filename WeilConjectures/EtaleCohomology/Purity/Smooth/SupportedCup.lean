@@ -220,15 +220,13 @@ Let `i : Z ⟶ X` and `k : W ⟶ X` be closed immersions and `h : V ⟶ X` a clo
 `Z ∩ W` factoring through both (for instance `h : Z ×_X W ⟶ X`,
 `AlgebraicGeometry.Etale.cupSupportCohomologyPullback`). For `α ∈ H^a_Z(X, F)` and
 `β ∈ H^b_W(X, G)`, represented by morphisms `i_* Λ_Z ⟶ F[a]` and `k_* Λ_W ⟶ G[b]`
-(`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`,
-`lemma-sections-support-closed-subscheme--1`), their
+(`AlgebraicGeometry.Etale.derivedSupportCohomologyAddEquiv`), their
 *supported cup product* is the morphism
 
 `h_* Λ_V ≅ i_* Λ_Z ⊗ᴸ k_* Λ_W ⟶ (F ⊗ᴸ G)[a + b]`
 
 (`AlgebraicGeometry.Etale.cupSupportedHom`), read as an element of
-`H^{a+b}_{Z ∩ W}(X, F ⊗ᴸ G)`. As throughout the purity chapter this is
-the étale form. The cup product of classes in the model `Λ_X ⟶ Ri_! Ri^! M` is
+`H^{a+b}_{Z ∩ W}(X, F ⊗ᴸ G)`. The cup product of classes in the model `Λ_X ⟶ Ri_! Ri^! M` is
 `AlgebraicGeometry.Etale.cupWithSupports`. -/
 noncomputable def cupSupportCohomology
     {F G : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {a b : ℤ}

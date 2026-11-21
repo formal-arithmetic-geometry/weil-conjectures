@@ -225,9 +225,9 @@ theorem isClosedImmersion_of_injective_of_le_map_maximalIdeal {k : Type u} [Fiel
 end ClosedImmersion
 
 /-- **Quasi-finite = locally quasi-finite + quasi-compact**. A
-morphism is quasi-finite in the sense of blueprint `pqf-def-quasifinite` (of finite type, with
-every point isolated in its fibre) if and only if it is locally quasi-finite (locally of finite
-type and quasi-finite at every point) and quasi-compact. -/
+morphism is quasi-finite (of finite type, with every point isolated in its fibre) if and only
+if it is locally quasi-finite (locally of finite type and quasi-finite at every point) and
+quasi-compact. -/
 theorem Scheme.Hom.locallyQuasiFinite_and_quasiCompact_iff {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (LocallyOfFiniteType f ∧ LocallyQuasiFinite f ∧ QuasiCompact f) ↔
       (LocallyOfFiniteType f ∧ QuasiCompact f ∧ ∀ x : X, IsOpen {f.asFiber x}) := by

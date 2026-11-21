@@ -95,7 +95,8 @@ private theorem compositor_transport
   erw [← CategoryTheory.Functor.map_comp_assoc, Iso.hom_inv_id_app,
     CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
 
-/-- A transported comparison whose implementation stays behind an opaque boundary. -/
+/-- The comparison `TB (p Q) ≅ q (TA Q)` obtained by transporting `ρ` along the equalities
+`eA` and `eB`. -/
 private irreducible_def commonStageTransportComparison
     {A B C D : Type*} [Category* A] [Category* B] [Category* C] [Category* D]
     (p : A ⥤ B) (q : C ⥤ D)

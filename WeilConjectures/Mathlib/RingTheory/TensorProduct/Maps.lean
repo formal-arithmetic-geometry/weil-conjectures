@@ -132,8 +132,7 @@ variable {R A B : Type*} [CommRing R] [CommRing A] [CommRing B] [Algebra R A] [A
 
 /-- Let `φ : A → R` be an `R`-algebra homomorphism whose kernel consists of nilpotent elements,
 and let `B` be an `R`-algebra with no idempotents other than `0` and `1`. Then `A ⊗[R] B` has no
-idempotents other than `0` and `1`: the kernel of `φ ⊗ id : A ⊗[R] B → B` is spanned by the
-nilpotent elements `(a - φ a) ⊗ b`, so an idempotent is congruent to `0` or `1` modulo nilpotents.
+idempotents other than `0` and `1`.
 
 Geometrically: if `Spec A` is a single point with an `R`-rational structure, then the base change
 of a connected `Spec B` along it stays connected. -/

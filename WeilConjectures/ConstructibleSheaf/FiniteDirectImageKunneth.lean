@@ -80,8 +80,7 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_isFinite {k : Typ
 
 Let `k` be a field, `Y` a scheme of finite type over `k`, `f : X ⟶ Y` a finite morphism and `Λ` a
 finite ring. If `F` is a constructible sheaf of `Λ`-modules on `X_ét`, then `f_* F` is
-constructible on `Y_ét` and `R^q f_* F = 0` for every `q > 0`. The blueprint also assumes `X` of
-finite type over `k` and `Λ` killed by an integer invertible in `k`, which is not needed. -/
+constructible on `Y_ét` and `R^q f_* F = 0` for every `q > 0`. -/
 theorem isConstructibleSheaf_lowerStar_of_isFinite_of_locallyOfFiniteType {k : Type u} [Field k]
     {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     (f : X ⟶ Y) [IsFinite f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

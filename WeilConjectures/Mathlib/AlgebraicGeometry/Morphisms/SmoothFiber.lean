@@ -36,8 +36,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- **A smooth morphism is flat and locally of finite presentation.** Both are Mathlib instances
-for `Smooth f`. -/
+/-- **A smooth morphism is flat and locally of finite presentation.** -/
 theorem Smooth.flat_and_locallyOfFinitePresentation {X Y : Scheme.{u}} (f : X ⟶ Y) [Smooth f] :
     Flat f ∧ LocallyOfFinitePresentation f :=
   ⟨inferInstance, inferInstance⟩
@@ -45,12 +44,7 @@ theorem Smooth.flat_and_locallyOfFinitePresentation {X Y : Scheme.{u}} (f : X �
 
 /-- **Smoothness by flatness and smooth fibres**. A
 morphism `f : X ⟶ Y` is smooth if and only if it is flat, locally of finite presentation, and
-every fibre `X_y ⟶ Spec κ(y)` is smooth. A smooth morphism is flat and locally of finite
-presentation, and its fibres are smooth by base change; the converse is
-`AlgebraicGeometry.Smooth.of_smooth_fiberToSpecResidueField`.
-
-This is also blueprint `lem-pc-smooth-characterization`, stated there for `f` locally of finite
-presentation. -/
+every fibre `X_y ⟶ Spec κ(y)` is smooth. -/
 @[stacks 01V8]
 theorem smooth_iff_flat_locallyOfFinitePresentation_smooth_fiberToSpecResidueField
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
@@ -75,8 +69,7 @@ instance {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFinitePresentation f] (y : Y
     LocallyOfFinitePresentation (f.fiberToSpecResidueField y) :=
   inferInstanceAs (LocallyOfFinitePresentation (pullback.snd _ _))
 
-/-- Postcomposing with an open immersion does not change the smooth locus: the stalk maps differ
-by an isomorphism. -/
+/-- Postcomposing with an open immersion does not change the smooth locus. -/
 lemma Scheme.Hom.smoothLocus_comp_of_isOpenImmersion {X Y Z : Scheme.{u}} (g : X ⟶ Y)
     (j : Y ⟶ Z) [IsOpenImmersion j] [LocallyOfFinitePresentation g] :
     (g ≫ j).smoothLocus = g.smoothLocus := by
@@ -87,8 +80,7 @@ lemma Scheme.Hom.smoothLocus_comp_of_isOpenImmersion {X Y Z : Scheme.{u}} (g : X
   rfl
 
 /-- Let `g ≫ j = i ≫ f` with `i` and `j` open immersions. If the fibre of `g` over `z` maps into
-the smooth locus of the fibre of `f` over `j z`, then the fibre of `g` over `z` is smooth: it is
-an open subscheme of the fibre of `f` over `j z`, compatibly with `κ(z) ≅ κ(j z)`. -/
+the smooth locus of the fibre of `f` over `j z`, then the fibre of `g` over `z` is smooth. -/
 lemma smooth_fiberToSpecResidueField_of_comp_eq {X' Y' X Y : Scheme.{u}} (g : X' ⟶ Y')
     (i : X' ⟶ X) (f : X ⟶ Y) (j : Y' ⟶ Y) [IsOpenImmersion i] [IsOpenImmersion j]
     [LocallyOfFinitePresentation f] [LocallyOfFinitePresentation g] (w : g ≫ j = i ≫ f) (z : Y')
@@ -114,8 +106,7 @@ lemma smooth_fiberToSpecResidueField_of_comp_eq {X' Y' X Y : Scheme.{u}} (g : X'
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pointwise fibrewise criterion for `Spec S ⟶ Spec R`: if `Spec S ⟶ Spec R` is flat, of
-finite presentation and its fibre over the image of `x` is smooth, then it is smooth at `x`
-(`Algebra.IsSmoothAt.of_formallySmooth_fiber`). -/
+finite presentation and its fibre over the image of `x` is smooth, then it is smooth at `x`. -/
 lemma mem_smoothLocus_SpecMap_of_smooth_fiberToSpecResidueField {R S : CommRingCat.{u}}
     (φ : R ⟶ S) [Flat (Spec.map φ)] [LocallyOfFinitePresentation (Spec.map φ)] (x : Spec S)
     (h : Smooth ((Spec.map φ).fiberToSpecResidueField (Spec.map φ x))) :
@@ -145,9 +136,7 @@ lemma mem_smoothLocus_SpecMap_of_smooth_fiberToSpecResidueField {R S : CommRingC
 set_option backward.isDefEq.respectTransparency false in
 /-- **Pointwise fibrewise criterion for smoothness**. Let `f : X ⟶ Y` be flat and locally of
 finite presentation. If the fibre `X_y ⟶ Spec κ(y)` is smooth at `w`, then `f` is smooth at the
-image of `w` in `X`. We shrink to affine opens `V ⊆ f ⁻¹ U` whose fibre over `y` lies in the
-smooth locus of the fibre and apply
-`AlgebraicGeometry.mem_smoothLocus_SpecMap_of_smooth_fiberToSpecResidueField`. -/
+image of `w` in `X`. -/
 theorem Scheme.Hom.fiberι_mem_smoothLocus {X Y : Scheme.{u}} (f : X ⟶ Y) [Flat f]
     [LocallyOfFinitePresentation f] {y : Y} {w : f.fiber y}
     (hw : w ∈ (f.fiberToSpecResidueField y).smoothLocus) : f.fiberι y w ∈ f.smoothLocus := by

@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Lie.Semisimple.Basic
 # Solvability, the radical, the centre and the Killing form
 
 The basic notions of Lie algebras used in the study of monodromy groups, in the form in which they
-are stated in the blueprint, deduced from their Mathlib definitions.
+are used in this project, deduced from their Mathlib definitions.
 
 ## Main declarations
 

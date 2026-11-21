@@ -23,7 +23,7 @@ Let `k` be a separably closed field, `Λ` a finite field whose characteristic is
 (`AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`) are perfect: the adjoint
 `H^{2d-i}(X, K^∨(d)) ⟶ H^i_c(X, K)^∨` is an isomorphism.
 
-The proof is the one of the blueprint, read on classes. The derived pairing `β_K` is perfect
+The proof reads the derived duality on classes. The derived pairing `β_K` is perfect
 (`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`), so its
 degree-zero part is the composition pairing `⟨x, y⟩ = x ≫ g(y)` for a bijection
 `g : H^{2d-i}(X, K^∨(d)) ≃ Hom((Ra_! K)[i], Λ_s)`
@@ -35,12 +35,10 @@ the composition pairing `Hom(Λ_s, E) × Hom(E, Λ_s) ⟶ End(Λ_s) = Λ` is per
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`:
-the
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`: the
   degreewise pairings are perfect.
 - `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing_of_isProper`:
-the same for `a` proper, with `H^i(X, K)` in place of
-  `H^i_c(X, K)`.
+  the same for `a` proper, with `H^i(X, K)` in place of `H^i_c(X, K)`.
 -/
 
 @[expose] public section
@@ -87,27 +85,17 @@ variable [HasTateTwist Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)} [HasCompact
 
 namespace TateOrientation
 
-/-- Degreewise perfectness over a field (finite-field case). This is also the degreewise part of
-blueprint `corollary-degreewise-duality-over-fields`.
-
-Let `k` be separably closed, `Λ` a finite field (a finite domain) whose characteristic is
-invertible on `X`, `γ` a Tate orientation of `a : X ⟶ Spec k` of relative dimension `d`, with
-`a` locally of finite type, and `K ∈ D^b_{ctf}(X, Λ)`. Then for `i + j = 2d` the degreewise
-Poincaré pairing
+/-- Degreewise perfectness over a field (finite-field case). Let `k` be separably closed, `Λ` a
+finite field (a finite domain) whose characteristic is invertible on `X`, `γ` a Tate orientation of
+`a : X ⟶ Spec k` of relative dimension `d`, with `a` locally of finite type, and
+`K ∈ D^b_{ctf}(X, Λ)`. Then for `i + j = 2d` the degreewise Poincaré pairing
 
 `⟨-, -⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`
 
 (`AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`, with values in
 `End(Λ_s)`, read in `Λ` through any linear isomorphism `ℓ : End(Λ_s) ≃ Λ`) is perfect: its
 adjoint `H^j(X, K^∨(d)) ⟶ H^i_c(X, K)^∨` is an isomorphism of finite-dimensional
-`Λ`-vector spaces.
-
-It follows from the derived Poincaré duality
-(`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`): the
-degree-zero part of a perfect pairing is a composition pairing
-(`AlgebraicGeometry.Etale.IsPerfectPairing.exists_addEquiv_degreeZero`), and over a field the
-composition pairing with the unit of the point category is perfect
-(`AlgebraicGeometry.Etale.nondegenerate_comp_unit_of_isSepClosed`). -/
+`Λ`-vector spaces. -/
 theorem isPerfPair_degreewisePoincarePairing (γ : TateOrientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
     (i j : ℤ) (hij : i + j = 2 * d)

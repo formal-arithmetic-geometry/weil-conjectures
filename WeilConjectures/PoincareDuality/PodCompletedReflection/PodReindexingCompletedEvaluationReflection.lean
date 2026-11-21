@@ -149,14 +149,7 @@ private theorem adjunction_unit_bijective
 
 /-- The first bijection is precomposition with precisely the published tensor unit.
 No assumption says the ordinary tensor is complete or M is perfect.
-Source: Stacks 099B, 0A0E and 099M.
-
-Proof (node Step 1): the strict balanced comparison identifies the quotient tower of
-ordinary tensor with the two-reduction tensor tower, including the augmentation.
-The constant-completion equivalence identifies this unit with the Koszul unit.
-Constructible N is locally derived complete by integralConstructible_locallyComplete.
-The ambient completed tensor adjunction and the Koszul reflector then give precisely
-this Hom bijection. Neither input needs a finite Tor bound. -/
+Source: Stacks 099B, 0A0E and 099M. -/
 theorem precompose_bijective (W : Scheme.{u})
     (M L N : sfIntegralConstructibleCategory l E W) :
     Function.Bijective (fun f : (integralCompletedTensor l E W).obj (M.obj, L.obj) ⟶ N.obj ↦
@@ -199,7 +192,7 @@ def reflectorEquiv (W : Scheme.{u}) (M L N : sfIntegralConstructibleCategory l E
       ((closed l E W).tensor.obj (M.obj, L.obj) ⟶ N.obj) :=
   Equiv.ofBijective _ (precompose_bijective l E W M L N)
 
-/-- The composite of the two specified bijections, in the node's M-first order.
+/-- The composite of the two specified bijections, in M-first order.
 Source: Stacks 099B, 08J9. -/
 def transpose (W : Scheme.{u}) (M L N : sfIntegralConstructibleCategory l E W) :
     ((integralCompletedTensor l E W).obj (M.obj, L.obj) ⟶ N.obj) ≃
@@ -343,14 +336,7 @@ private theorem ordinary_naturality (W : Scheme.{u})
 
 /-- Naturality of both bijections, in the parameter and both internal-Hom variables,
 and unique extension of evaluation along the actual completion unit.
-Source: Stacks 099B, 08J9.
-
-Proof (node Steps 1--2 and 6): naturality of the reduction unit and tensor comparison
-makes precomposition natural. Compose with ordinary signed currying. Its naturality
-in all variables gives the displayed transpose equation. The inverse image of the
-identity under currying is ordinary M-first evaluation; reflector bijectivity gives
-its unique extension, and equality with the explicitly defined completed evaluation.
-This argument uses only completeness of the target and full-subcategory Hom sets. -/
+Source: Stacks 099B, 08J9. -/
 theorem reflection_laws (W : Scheme.{u}) :
     (∀ (M L N : sfIntegralConstructibleCategory l E W)
       (b : (integralCompletedTensor l E W).obj (M.obj, L.obj) ⟶ N.obj),
@@ -399,14 +385,7 @@ theorem reflection_laws (W : Scheme.{u}) :
     exact (precompose_bijective l E W M ⟨hom l E W M.obj N.obj, hH⟩ N).injective
       (h.trans he.symm)
 
-/-- The ambient isomorphism restricts to the actual constructible integral category.
-
-Proof (node Step 3): T.constructible puts FM, FN and FHom(M,N) in the integral
-subcategory with their complete uniform finite reductions. The ambient Hom
-comparison is an isomorphism. Completeness, constructibility of every positive
-reduction and its common cohomological interval are invariant under isomorphism.
-Transport these properties through homComparison. Fullness restricts that same
-isomorphism; it introduces no new internal-Hom map. -/
+/-- The ambient isomorphism restricts to the actual constructible integral category. -/
 theorem constructible_hom {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -508,19 +487,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Completed evaluation, its tensor-Hom transpose, and the exact ordinary equation
 obtained by precomposition with the normalized tensor unit.
-Source: Stacks 099B, 0A0E.
-
-Proof (node Steps 4--5): the normalized tensor-augmentation square gives the first
-law. Its inverse form identifies unit_X followed by the inverse completed tensor
-comparison with the inverse ordinary comparison followed by F(unit_Y). Composing
-the reflector bijection with the two tensor isomorphisms proves the second law.
-For b, the same inverse unit square reduces completed currying to ambient ordinary
-M-first currying, proving the transpose law. To prove evaluation compatibility,
-precompose by the inverse tensor comparison and apply completed currying injectivity.
-Naturality in its second input sends the Hom comparison followed by evaluation to
-the Hom comparison itself, since evaluation transposes to the identity. The transpose
-law gives the same answer for F(evaluation). The last law is naturality of the
-ambient natural isomorphism obtained by whiskering the original c with reindexIso. -/
+Source: Stacks 099B, 0A0E. -/
 theorem reindexing_laws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -611,15 +578,7 @@ end
 
 /-- Both signed Hom shifts are the existing ordinary shifts. Their completion transport
 uses the same signed tensor maps and both actual Roos coordinates.
-Source: Stacks 011G, 0A8X, 099B.
-
-Proof (node Step 6): on Hom degree r the double shift reindexes its source by a
-and multiplies by (-1)^(a*r), exactly as in the ordinary evaluation lemma.
-The reindexing tensor lemma shifts the second Roos coordinate by (-1)^r.
-Thus the ordinary signed square commutes with the tensor completion unit.
-Reflector injectivity, as in coherence_iff, makes its completed extension unique.
-The chain and derived Hom squares are the ordinary ones with the same c, and
-RoosFst and RoosSnd explicitly fix both product coordinates of that extension. -/
+Source: Stacks 011G, 0A8X, 099B. -/
 theorem signed_shifts {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

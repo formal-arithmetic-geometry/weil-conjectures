@@ -31,21 +31,12 @@ namespace AlgebraicGeometry
 
 open Etale
 
-/-- **A prime-to-ℓ cover with constant successive quotients.**
-The coefficient field is `ULift.{u + 1} (ZMod ℓ)`, a universe lift of the prime field
-`ℤ/ℓℤ`.
-
-Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R, statement and proof.
-
-On V the action on M factors through P. A finite ℓ-group in characteristic ℓ has nonzero
-invariants in every nonzero finite-dimensional representation. Choose a one-dimensional
-invariant subspace, apply the same argument to the quotient, and induct on dimension.
-This produces a P-stable flag with one-dimensional trivial successive quotients. Under
-the exact representation/sheaf equivalence on V, this flag gives monomorphisms of sheaves,
-with initial object zero, final object isomorphic to v*G, and cokernels isomorphic to the
-constant coefficient sheaf. For M = 0 the flag has length zero. Extend the finite sequence
-W to all natural indices by its final object, with identity maps after the last index;
-only maps before that index occur in the conclusion. -/
+/-- **A prime-to-ℓ cover with constant successive quotients.** For a finite locally constant sheaf
+`G` of `𝔽_ℓ`-vector spaces on a connected scheme `U`, there is a connected finite étale `v : V ⟶ U`
+whose geometric fibres all have the same cardinality `d`, prime to `ℓ`, such that `v^* G` has a
+finite filtration by monomorphisms whose successive cokernels are isomorphic to the constant sheaf
+`𝔽_ℓ`. The coefficient field is `ULift.{u + 1} (ZMod ℓ)`, a universe lift of the prime field `ℤ/ℓℤ`.
+Source: Stacks Project, Tag 0A3R. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_cover_filtration_sheaf
     {U : Scheme.{u}} [ConnectedSpace U] (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))

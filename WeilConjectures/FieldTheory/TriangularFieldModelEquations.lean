@@ -25,7 +25,7 @@ namespace FieldTheory
 /-- The equations `h T - 1, P₀, ..., Pᵣ₋₁` in `d + 1 + r` variables.
 The first `d` variables are the transcendence variables, variable `d` is `T`, and
 variable `d + 1 + i` is the new variable of `p i`. Its coefficients involve only
-preceding variables. This is a real polynomial construction; no witnesses are chosen.
+preceding variables.
 Source: Stacks Project, proof of Tags 07BV and 08JZ. -/
 noncomputable def triangularFieldModelEquations
     (k : Type u) [CommRing k] (d r : ℕ) (h : MvPolynomial (Fin d) k)

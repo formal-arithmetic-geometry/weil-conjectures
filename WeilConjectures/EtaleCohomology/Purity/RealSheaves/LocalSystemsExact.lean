@@ -178,9 +178,7 @@ Every equivalence `e` between finite locally constant sheaves of `Λ`-modules on
 continuous `Λ`-representations of a topological group `G` — such as the Galois correspondence
 `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup`
 — is exact: a short complex of finite locally constant sheaves is short exact as a complex of
-sheaves if and only if its image is short exact as a complex of representations. Both sides
-are abelian full subcategories closed under kernels, cokernels and finite direct sums, so their
-inclusions are exact, and an equivalence of abelian categories is exact. -/
+sheaves if and only if its image is short exact as a complex of representations. -/
 theorem isFiniteLocallyConstantSheaf_shortExact_iff (G : Type u) [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G]
     (e : ObjectProperty.FullSubcategory

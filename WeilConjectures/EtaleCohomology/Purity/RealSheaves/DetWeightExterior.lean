@@ -25,7 +25,8 @@ proper nonzero subrepresentation `A`, and `⋀^r ρ` has a filtration with steps
 two-factor tensor rule (`Representation.exists_detWeight_eq_add_of_subquotient_tprod` and its
 converse) and the additivity `L(ρ) = L(A) + L(ρ / A)`
 (`AlgebraicGeometry.WeilGroup.rankDetWeightMultiset_eq_add`) reduce the claim to `A` and `ρ / A`.
-The finite geometric determinant hypotheses of the tensor rule hold by rank-one purity.
+The finite geometric determinant hypotheses of the tensor rule hold by rank-one purity, so no
+geometric semisimplicity of `ρ` is needed.
 
 ## Main statements
 
@@ -113,8 +114,7 @@ theorem exists_le_rankDetWeightMultiset_of_isIrreducible (hρ : W.IsLisse l ρ)
     rfl
 
 /-- The constituents of the steps `⋀^j A ⊗ ⋀^{r - j} (ρ / A)` of the filtration of `⋀^r ρ` along
-a subrepresentation `A` of a lisse `ρ` have finite geometric determinant: these steps are
-subquotients of the lisse `⋀^r ρ`. -/
+a subrepresentation `A` of a lisse `ρ` have finite geometric determinant. -/
 theorem hasFiniteGeometricDet_subquotient_tprod (hρ : W.IsLisse l ρ) (A : Subrepresentation ρ)
     {r j : ℕ} (hjr : j ≤ r)
     (U S : Subrepresentation ((A.toRepresentation.exteriorPower j).tprod
@@ -128,9 +128,7 @@ theorem hasFiniteGeometricDet_subquotient_tprod (hρ : W.IsLisse l ρ) (A : Subr
 `AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`:
 if the constituents of all exterior powers of a subrepresentation `A` and of the quotient `ρ / A`
 have determinant weights which are sums of entries of their rank-counted lists, then so do those
-of `⋀^r ρ`. A constituent of `⋀^r ρ` is a constituent of a step `⋀^j A ⊗ ⋀^{r - j} (ρ / A)` of
-the filtration along `A`, so its weight is a sum `dw_ι(Q₁) + dw_ι(Q₂)` of weights of constituents
-of `⋀^j A` and `⋀^{r - j} (ρ / A)` by the two-factor tensor rule. -/
+of `⋀^r ρ`. -/
 theorem exists_le_rankDetWeightMultiset_of_subrepresentation (hρ : W.IsLisse l ρ)
     (A : Subrepresentation ρ)
     (hA : ∀ (j : ℕ) (U S : Subrepresentation (A.toRepresentation.exteriorPower j)),
@@ -177,8 +175,7 @@ theorem exists_le_rankDetWeightMultiset_of_subrepresentation (hρ : W.IsLisse l 
 `AlgebraicGeometry.WeilGroup.detWeight_subquotient_exteriorPower`: if every sum of `j` entries of
 the rank-counted list of a subrepresentation `A`, resp. of the quotient `ρ / A`, is the weight of
 a constituent of `⋀^j A`, resp. `⋀^j (ρ / A)`, then every sum of `r` entries of the list of `ρ` is
-the weight of a constituent of `⋀^r ρ`. Split the entries between `A` and `ρ / A`, and take a
-constituent of `⋀^j A ⊗ ⋀^{r - j} (ρ / A)` given by the converse of the two-factor tensor rule. -/
+the weight of a constituent of `⋀^r ρ`. -/
 theorem exists_detWeight_eq_sum_of_subrepresentation (hρ : W.IsLisse l ρ)
     (A : Subrepresentation ρ)
     (hA : ∀ (j : ℕ) (T : Multiset ℝ), T ≤ W.rankDetWeightMultiset l A.toRepresentation ι →
@@ -293,12 +290,7 @@ of `γ` in `T`), with `∑ T = ∑ n_γ γ`. In these terms:
 * every constituent `S / U` of the exterior power `⋀^r ρ` has determinant weight `∑ T` for a
   sub-multiset `T ≤ L` with `r` elements;
 * conversely, for every sub-multiset `T ≤ L` with `r` elements, some constituent of `⋀^r ρ` has
-  determinant weight `∑ T`.
-
-The finite geometric determinant hypotheses of
-`proposition-determinant-weights-tensor-operations--2` hold by rank-one purity;
-the geometric semisimplicity assumed in the blueprint is not
-needed. -/
+  determinant weight `∑ T`. -/
 theorem detWeight_subquotient_exteriorPower [Nontrivial V] (hρ : W.IsLisse l ρ) (r : ℕ) :
     (∀ U S : Subrepresentation (ρ.exteriorPower r), (S.subquotient U).IsIrreducible →
       ∃ T : Multiset ℝ, T ≤ W.rankDetWeightMultiset l ρ ι ∧ Multiset.card T = r ∧

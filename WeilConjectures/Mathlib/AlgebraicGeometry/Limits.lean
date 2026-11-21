@@ -43,10 +43,7 @@ variable {X : Scheme.{u}}
 
 /-- **Affine neighbourhoods containing all generic points**: every point `x` of a
 scheme with finitely many irreducible components has an affine open neighbourhood
-containing every generic point. The neighbourhood is the disjoint union of an affine
-open `W ∋ x` avoiding the components not through `x` — which automatically contains
-the generic points of the components through `x` — with, for each remaining generic
-point, a small affine open around it avoiding `closure W` and all other components.
+containing every generic point.
 (Stacks Project Tag 01ZX, simplified for the finite-components case) -/
 theorem exists_isAffineOpen_mem_and_genericPoints_subset
     (hX : (irreducibleComponents X).Finite) (x : X) :
@@ -192,9 +189,7 @@ lemma sigmaSpec_comp_Spec_map_algebraMap (ι : Type u) (k : Type u) [CommRing k]
   rw [Sigma.ι_comp_desc, ι_sigmaSpec_assoc, ← Spec.map_comp, ← Spec.map_id]
   rfl
 
-/-- A scheme whose ring of global sections is the zero ring is empty: at a point `p` the germ map
-`Γ(X, ⊤) → 𝒪_{X,p}` would send `0 = 1` to `0 = 1` in the nonzero local ring `𝒪_{X,p}`. This is
-the converse of the instance `Subsingleton Γ(X, U)` for empty `X`. -/
+/-- A scheme whose ring of global sections is the zero ring is empty. -/
 lemma Scheme.isEmpty_of_subsingleton_Γ (h : Subsingleton Γ(X, ⊤)) : IsEmpty X :=
   ⟨fun p ↦ by
     have := congrArg (X.presheaf.germ ⊤ p trivial).hom (Subsingleton.elim (0 : Γ(X, ⊤)) 1)

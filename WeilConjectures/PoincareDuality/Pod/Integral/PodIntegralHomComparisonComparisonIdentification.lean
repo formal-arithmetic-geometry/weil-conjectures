@@ -170,10 +170,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
 /-- The normalized comparison is the evaluation-defined partial comparison.
-
-Source: Stacks Project, Tag 0GMX, proof Steps 8--11.  The normalized integral comparison is
-characterized by its completion-unit equation.  Expand the completion-unit normalization and use
-the defining transposition of `podIntegralClosed`. -/
+Source: Stacks Project, Tag 0GMX. -/
 theorem podIntegralHomComparison_eq_integralComparison :
     ∀ P : (constructibleIntegralHomPairs l E Y).FullSubcategory,
       podPartialHomComparison (podIntegralClosed l E Y) (podIntegralClosed l E X)

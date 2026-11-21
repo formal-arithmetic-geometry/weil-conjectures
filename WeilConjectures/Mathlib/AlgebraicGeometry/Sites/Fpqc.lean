@@ -181,11 +181,7 @@ lemma exists_finite_affine_flat_of_mem_fpqcTopology {V : Scheme.{u}} [IsAffine V
 
 /-- An fppf covering family of an affine scheme `U` is refined by a finite fppf covering family
 consisting of affine opens of its members. Source: Stacks Project, Topologies, Lemma 34.7.4
-(Tag 021P).
-
-Every point of `U` lies in the image of an affine open of some member. The composite of the
-inclusion of such an affine open with the original morphism is flat and locally of finite
-presentation, so its image is open; quasi-compactness of `U` selects finitely many of them. -/
+(Tag 021P). -/
 theorem exists_finite_fppf_affine_open_refinement {U : Scheme.{u}} [IsAffine U]
     {I : Type v} (T : I → Scheme.{u}) (f : ∀ i, T i ⟶ U)
     (hf : Presieve.ofArrows T f ∈ fppfPrecoverage U) :
@@ -264,8 +260,7 @@ surjective, quasi-compact morphism `φ : Y₁ ⟶ Y` over `S` whose target facto
                \     v
                 ---> S
 ```
-Indeed `φ` is the image under `Over.map g` of the covering `φ : (Y₁, φ ≫ a) ⟶ (Y, a)` of the fpqc
-site of `S'`. -/
+-/
 lemma isSheafFor_singleton_of_isSheaf_overMap {S S' : Scheme.{u}} (g : S' ⟶ S)
     {G : (Over S)ᵒᵖ ⥤ Type*} (hG : Presheaf.IsSheaf (fpqcTopology.over S') ((Over.map g).op ⋙ G))
     {Y Y₁ : Over S} (φ : Y₁ ⟶ Y) [Flat φ.left] [Surjective φ.left] [QuasiCompact φ.left]
@@ -310,18 +305,15 @@ lemma etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
   Precoverage.toGrothendieck_mono
     (precoverage_mono fun _ _ _ _ ↦ ⟨inferInstance, inferInstance⟩)
 
-/-- **Zariski coverings are fppf coverings.** A family of open immersions covering a scheme `T` is
-an fppf covering of `T`: open immersions are flat and locally of finite presentation (on the level
-of covering families this is Mathlib's `zariskiPrecoverage_le_fppfPrecoverage`), so every Zariski
-covering sieve is an fppf covering sieve. -/
+/-- **Zariski coverings are fppf coverings.** Every Zariski covering sieve is an fppf covering
+sieve. -/
 lemma zariskiTopology_le_fppfTopology : zariskiTopology.{u} ≤ fppfTopology :=
   Precoverage.toGrothendieck_mono zariskiPrecoverage_le_fppfPrecoverage
 
 instance : etaleTopology.{u}.Subcanonical :=
   .of_le etaleTopology_le_fppfTopology
 
-/-- The global sections functor `Γ` is a sheaf for every subcanonical topology on `Scheme`:
-for a ring `R`, the presheaf `U ↦ (R ⟶ Γ(U, 𝒪_U))` is represented by `Spec R`. -/
+/-- The global sections functor `Γ` is a sheaf for every subcanonical topology on `Scheme`. -/
 lemma isSheaf_Γ (J : GrothendieckTopology Scheme.{u}) [J.Subcanonical] :
     Presheaf.IsSheaf J Scheme.Γ := fun R ↦
   have := (ΓSpec.representableBy R).isRepresentable

@@ -67,9 +67,7 @@ commutative diagram
   v        v          v
   V --a--> V' --ρ---> V
 ```
-with `w ≫ w' = 𝟙`, `a ≫ ρ = 𝟙` and `π` invertible, the morphism `x` is invertible. The
-commutativity of the right square follows from that of the left one and the compatibility
-`w' ≫ w ≫ π = π ≫ ρ ≫ a` of the idempotents with `π`. -/
+with `w ≫ w' = 𝟙`, `a ≫ ρ = 𝟙` and `π` invertible, the morphism `x` is invertible. -/
 lemma isIso_of_comp_eq_of_retraction [IsIso π] (ha : a ≫ ρ = 𝟙 V) (hw : w ≫ w' = 𝟙 U)
     (hsq : x ≫ a = w ≫ π) (hc : w' ≫ w ≫ π = π ≫ ρ ≫ a) : IsIso x :=
   (MorphismProperty.isomorphisms C).of_retract

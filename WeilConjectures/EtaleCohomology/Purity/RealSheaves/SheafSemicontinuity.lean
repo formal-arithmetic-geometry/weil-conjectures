@@ -174,11 +174,7 @@ theorem hasWeightsAtMostOver_geometricCoinvariants
 
 /-- *Weights of `H_c²` on an affine curve.* Let `U₀` be a smooth geometrically connected affine
 curve over `k₀ = 𝔽_q` and `F` a lisse Weil sheaf on `U₀` with punctual weights at most `w`.
-Then `H_c²(U, F)` has weights at most `w + 2` over `k₀`: it is the Tate twist `(-1)` of the
-geometric coinvariants
-(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`), which have
-weights at most `w` (`AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_geometricCoinvariants`),
-and the twist `(-1)` raises weights by two. This is the upper-bound analogue of
+Then `H_c²(U, F)` has weights at most `w + 2` over `k₀`. This is the upper-bound analogue of
 `AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two`; for a
 punctually pure sheaf on a smooth affine curve that need not be geometrically connected see
 `AlgebraicGeometry.WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two`. -/
@@ -406,13 +402,7 @@ theorem norm_le_of_hasEigenvalue_stalk_directImage {F : WeilSheaf k₀ l U} (hF 
 
 Let `C₀` be a smooth geometrically connected affine curve over `k₀`, `j : U₀ ⟶ C₀` a dense
 quasi-compact open immersion and `ℱ` a lisse Weil sheaf on `U₀` with punctual weights at most
-`β`. Then `j_* ℱ` has punctual weights at most `β` on all of `C₀`.
-
-At the points of `U₀` the stalks of `j_* ℱ` are those of `ℱ`. At a boundary point `s`, an
-eigenvalue `α` of the local Frobenius gives the eigenvalue `α ^ k` at `s` of `j_* (ℱ^{⊗ k})`,
-where `ℱ^{⊗ k}` has weights at most `k β`; the preliminary bound
-(`AlgebraicGeometry.WeilSheaf.norm_le_of_hasEigenvalue_stalk_directImage`) gives
-`|ι α| ^ k ≤ q_s ^ (k β / 2 + 1)` for every `k ≥ 1`, hence `|ι α| ≤ q_s ^ (β / 2)`. -/
+`β`. Then `j_* ℱ` has punctual weights at most `β` on all of `C₀`. -/
 theorem hasWeightsAtMost_directImage {F : WeilSheaf k₀ l U} (hF : F.IsLisse) {β : ℝ}
     (hw : F.HasWeightsAtMost ι β) : ((directImage j).obj F).HasWeightsAtMost ι β := by
   set p := C ↘ Spec (CommRingCat.of k₀) with hp

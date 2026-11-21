@@ -22,14 +22,8 @@ universe u v
 
 namespace FieldExtension
 
-/-- A finite field extension that is not
-separable has an element whose minimal polynomial is inseparable.
-
-For the contrapositive, assume every element has a separable minimal polynomial. Each
-finitely generated intermediate field is finite-dimensional over the base, hence algebraic.
-Its elements remain separable over the base. The empty transcendence basis therefore makes
-each such field separably generated. By Definition 10.42.1 (Tag 030O), the whole extension
-is separable, contrary to the hypothesis. -/
+/-- A finite field extension that is not separable has an element whose minimal polynomial is
+inseparable. Source: Stacks Project, Definition 10.42.1 (Tag 030O). -/
 theorem exists_not_isSeparable_of_not_isSeparableExtension
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (hfinite : degree k K ≠ ⊤) (hnot : ¬ Algebra.IsSeparableExtension k K) :

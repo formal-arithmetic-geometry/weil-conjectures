@@ -26,8 +26,7 @@ namespace Representation
 /-- A finite primary abelian group with a p-group action has a stable filtration
 with trivial quotients killed by the prime.
 
-Source: Stacks Project, Etale Cohomology, Lemma 0GIZ, and Lemma 0GJ0, the finite-module
-filtration part of the proof of. -/
+Source: Stacks Project, Etale Cohomology, Lemmas 0GIZ and 0GJ0. -/
 theorem exists_primary_filtration_of_isPGroup
     (Q : Type u) [Group Q] (ℓ : ℕ) (hℓ : ℓ.Prime) (hQ : IsPGroup ℓ Q)
     (V : Type v) [AddCommGroup V] [Module ℤ V] [Finite V]

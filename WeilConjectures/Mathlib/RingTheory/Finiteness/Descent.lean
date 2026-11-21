@@ -186,12 +186,7 @@ omit [CommRing A₀] [CommRing B₀] [Algebra A₀ A] [Algebra A₀ B₀] in
 Stacks, Tag 034Y). A faithfully flat `A`-algebra `B` of finite presentation is the base change
 of a faithfully flat algebra of finite presentation `B₁` over a finitely presented `ℤ`-algebra
 `A₁` mapping to `A`.
-
-`B` first descends to a finitely generated subring `A₀` of `A`; the flat locus of a model over a
-noetherian ring is open (Stacks, Tag 00RC) and contains every point coming from `B` after a
-finitely generated enlargement (Stacks, Tag 00R6), and a further enlargement makes the model flat
-everywhere. Its image in the spectrum of the base is open (Stacks, Tag 00I1) and contains the
-image of `Spec A`, so a last enlargement makes it surjective. -/
+-/
 theorem exists_isPushout_faithfullyFlat (B : Type u) [CommRing B] [Algebra A B]
     [Algebra.FinitePresentation A B] [Module.FaithfullyFlat A B] :
     ∃ (A₁ B₁ : Type u) (_ : CommRing A₁) (_ : CommRing B₁) (_ : Algebra A₁ A)
@@ -219,14 +214,7 @@ theorem exists_isPushout_faithfullyFlat (B : Type u) [CommRing B] [Algebra A B]
 omit [CommRing A₀] [CommRing B₀] [Algebra A₀ A] [Algebra A₀ B₀] in
 /-- **Finite presentation descends along faithfully flat maps of finite presentation** (Stacks,
 Tag 02KK). Let `R → A → B` be ring maps such that `B` is of finite presentation over `R` and
-faithfully flat and of finite presentation over `A`. Then `A` is of finite presentation over `R`.
-
-By `Algebra.FinitePresentation.exists_isPushout_faithfullyFlat`, `A → B` is the base change of a
-faithfully flat map of finite presentation `A₁ → B₁` with `A₁` of finite presentation over `ℤ`.
-Base changing further to `A₀ = R ⊗[ℤ] A₁`, which is of finite presentation over `R`, `A → B` is
-the base change along `A₀ → A` of the faithfully flat map `A₀ → A₀ ⊗[A₁] B₁`, and `B` is of finite
-presentation over `A₀ ⊗[A₁] B₁`. So `A` is of finite presentation over `A₀` by faithfully flat
-descent (`RingHom.FinitePresentation.codescendsAlong_faithfullyFlat`), hence over `R`. -/
+faithfully flat and of finite presentation over `A`. Then `A` is of finite presentation over `R`. -/
 @[stacks 02KK]
 theorem of_finitePresentation_of_faithfullyFlat (R B : Type u) [CommRing R] [CommRing B]
     [Algebra R A] [Algebra A B] [Algebra R B] [IsScalarTower R A B]

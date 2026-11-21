@@ -21,7 +21,7 @@ import Mathlib.LinearAlgebra.DirectSum.Basis
 /-!
 # Purity of real lisse Weil sheaves on curves
 
-This file states the climax of the block: an `ι`-real lisse Weil sheaf on a smooth
+This file states the main theorem: an `ι`-real lisse Weil sheaf on a smooth
 geometrically connected curve over a finite field is, constituent by constituent, punctually
 `ι`-pure of the expected weight.
 
@@ -41,22 +41,22 @@ restricting to an affine open neighbourhood of each closed point gives the gener
 (`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal`, using the transfer
 lemmas of `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Restriction`).
 
-## Implementation notes
+## Implementation details
 
 The arithmetic and geometric monodromy groups are the Zariski
 closures of `ρ (W (C₀))` and `ρ (π₁ C)` inside `GL V`. Zariski closures of subgroups of `GL V`
-are owned by the algebraic groups block and do not exist here; only the map
+belong to the theory of linear algebraic groups and are not used here; only the map
 `AlgebraicGeometry.WeilGroup.toLinearAut` whose images they are closures of is recorded, and the
-positive central Frobenius representative of the arithmetic monodromy group is left to that
-block.
+positive central Frobenius representative of the arithmetic monodromy group is not treated.
 
 An `AlgebraicGeometry.WeilGroup p` is presented through the étale fundamental group of the
-curve `C₀` over `𝔽_q`; the identification of its geometric part `ker deg` with the étale
-fundamental group of the geometric curve `C = C₀ ×_{𝔽_q} 𝔽̄_q` (the homotopy exact sequence) is
-not available. The rank-one theorems, and everything downstream of them, therefore assume it, in
+curve `C₀` over `𝔽_q`. The rank-one theorems, and everything downstream of them, assume the
+identification of its geometric part `ker deg` with the étale fundamental group of the geometric
+curve `C = C₀ ×_{𝔽_q} 𝔽̄_q` (the homotopy exact sequence), in
 the form `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` (the geometric part of `W` is,
-Frobenius-equivariantly, the étale fundamental group of `C`), together with `ℓ ≠ char 𝔽_q`,
-without which they are false (for `ℓ = p` the character of a Frobenius-invariant
+Frobenius-equivariantly, the étale fundamental group of `C`); it holds for every Weil group of a
+geometrically connected curve (`AlgebraicGeometry.WeilGroup.isEtaleQuotient`). They also assume
+`ℓ ≠ char 𝔽_q`, without which they are false (for `ℓ = p` the character of a Frobenius-invariant
 Artin–Schreier–Witt tower has infinite geometric image). The Rankin–Selberg statements
 moreover use the Grothendieck–Lefschetz trace formula relating
 `AlgebraicGeometry.WeilGroup.eulerSeries` to compactly supported cohomology, which is
@@ -110,11 +110,9 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
 
 /-- Arithmetic monodromy and a central representative.
 
-The Weil representation `ρ` viewed as a homomorphism to the automorphism group of `V`: every
-`ρ g` is invertible because `g` is invertible, so `ρ` factors through `GL V = (V →ₗ V)ˣ`,
-which is multiplicatively equivalent to `V ≃ₗ V`. The arithmetic and geometric monodromy
-groups are the Zariski closures of the images of `W (C₀)` and of
-`π₁ C` under this map. -/
+The Weil representation `ρ` viewed as a homomorphism to the automorphism group `V ≃ₗ V` of `V`.
+The arithmetic and geometric monodromy groups are the Zariski closures of the images of `W (C₀)`
+and of `π₁ C` under this map. -/
 noncomputable def toLinearAut : W.carrier →* (V ≃ₗ[PadicAlgCl l] V) :=
   (LinearMap.GeneralLinearGroup.generalLinearEquiv (PadicAlgCl l) V).toMonoidHom.comp
     ρ.asGroupHom
@@ -135,14 +133,7 @@ theorem IsLisse.continuous_detCharacter (hρ : W.IsLisse l ρ) :
 
 The geometric image `χ (π₁ U)` of a rank-one lisse Weil sheaf on a smooth geometrically
 connected curve `U₀ / 𝔽_q` is finite, for `ℓ ≠ p` and a Weil group linked to the étale
-fundamental group (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`).
-
-This is the heart of the matter: the `ℓ`-adic logarithm turns an `N`-th power of `χ`
-restricted to `π₁ U` into a continuous additive map invariant under conjugation by `γ`, and
-such a map is a Frobenius-fixed class in `H¹ (U, ℚ̄_ℓ)`, which vanishes because on a proper
-curve `H¹` is dual to a Tate module with no Frobenius-fixed vector, and the boundary
-contribution for an open curve is a nonzero power of `q`
-(`AlgebraicGeometry.WeilGroup.finite_range_of_continuous`, applied to `χ = det ρ`). -/
+fundamental group (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`). -/
 theorem IsLisse.finite_geometric_image [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient]
     (hrank : Module.finrank (PadicAlgCl l) V = 1) (hρ : W.IsLisse l ρ) :
@@ -161,12 +152,7 @@ A rank-one lisse Weil sheaf `L` on a smooth geometrically connected curve `U₀ 
 character `χ : W (U₀) → ℚ̄_ℓ ˣ`, is punctually `ι`-pure of weight
 `w = 2 log |ι c| / log q`, where `c = χ γ` is the value at the chosen degree-one lift; here
 `ℓ ≠ p` and the Weil group is linked to the étale fundamental group
-(`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`).
-
-Once the geometric image is finite (`AlgebraicGeometry.WeilGroup.IsLisse.finite_geometric_image`),
-`χ` is a root of unity times the constant character `c ^ deg`, so the local scalar at a point
-of degree `e` has complex modulus `|ι c| ^ e = q ^ (e * w / 2)`
-(`AlgebraicGeometry.WeilGroup.frobeniusWeight_eq_of_continuous`). -/
+(`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`). -/
 theorem IsLisse.isPunctuallyPure_of_finrank_eq_one [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient]
     (hrank : Module.finrank (PadicAlgCl l) V = 1) (hρ : W.IsLisse l ρ) :
@@ -243,9 +229,8 @@ theorem IsLisse.hasDetWeight [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] (hρ 
     simp [h0, LinearMap.det_eq_one_of_subsingleton, frobeniusWeight]
   · field_simp
 
-/-- The determinant of a lisse Weil representation
-takes finitely many values on the geometric fundamental group, since the determinant line has finite
-geometric image. -/
+/-- The determinant of a lisse Weil representation takes finitely many values on the geometric
+fundamental group. -/
 theorem IsLisse.hasFiniteGeometricDet [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient]
     (hρ : W.IsLisse l ρ) :
     ρ.HasFiniteGeometricDet W.deg := by
@@ -304,11 +289,7 @@ variable [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
 
 /-- The determinant weights of the constituents of a tensor product
 `ℱ ⊗ 𝒢` of lisse Weil sheaves are bounded by `d₁ + d₂` if those of `ℱ` are bounded by `d₁` and
-those of `𝒢` by `d₂`: by the tensor rule a constituent of `ℱ ⊗ 𝒢` has determinant weight
-`dw (ℱ_i) + dw (𝒢_j)` for constituents `ℱ_i` of `ℱ` and `𝒢_j` of `𝒢`, and by
-the finiteness theorem for rank-one sheaves every lisse Weil sheaf has its determinant weight in the
-sense of `AlgebraicGeometry.WeilGroup.HasDetWeight`, which is unique as soon as the curve has a
-closed point `x₀`. -/
+those of `𝒢` by `d₂`. -/
 theorem le_add_of_isConstituent_tprod_of_hasDetWeight [Fact (ringChar K ≠ l)]
     [W.IsEtaleQuotient] (x₀ : C.finitePoints)
     (hρ : W.IsLisse l ρ) (hσ : W.IsLisse l σ) {d₁ d₂ : ℝ}
@@ -351,15 +332,7 @@ private theorem frobeniusWeight_sq (qx : ℕ) (α : PadicAlgCl l) :
 
 Let `ℋ` be a lisse Weil sheaf on a smooth geometrically connected affine curve whose inverse
 local factors have nonnegative coefficients and whose constituents have determinant weight at
-most `D`. Then every local eigenvalue of `ℋ` has `ι`-weight at most `D + 2`.
-
-The eigenvalues `λ` of the geometric Frobenius on `H_c² (U, ℋ)` satisfy
-`|ι λ| ≤ q ^ (D / 2 + 1)`, so by the Euler product
-(the Euler product of the trace formula) the Euler series of `ℋ` converges on the disc of radius
-`R = q ^ (-(D / 2 + 1))`. By positivity every local factor converges there as well
-(positivity and convergence), so its denominator `ι P_x (ℋ, T ^ e)` has no zero in that
-disc; a local eigenvalue `β` produces the zero `T` with `T ^ e = (ι β)⁻¹`, whence
-`|ι β| ^ (-1 / e) ≥ R`. -/
+most `D`. Then every local eigenvalue of `ℋ` has `ι`-weight at most `D + 2`. -/
 theorem frobeniusWeight_le_add_two_of_hasNonnegCoeffs [IsAffine C] [Fact (ringChar K ≠ l)]
     (hρ : W.IsLisse l ρ)
     (hpos : ∀ x, (W.eulerFactor l ρ ι x).HasNonnegCoeffs) {D : ℝ}
@@ -473,13 +446,7 @@ theorem frobeniusWeight_le_add_two_of_hasNonnegCoeffs [IsAffine C] [Fact (ringCh
 
 /-- The iterated Rankin–Selberg bound: if `ℱ` is lisse and `ι`-real on a smooth geometrically
 connected affine curve and its constituents have determinant weight at most `d`, then every
-local eigenvalue of `ℱ` has `ι`-weight at most `d + 2 ^ (-j)`, for every `j`.
-
-For `j = 0` apply `AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_two_of_hasNonnegCoeffs`
-to the tensor square `ℱ ⊗ ℱ`, whose inverse local factors are nonnegative
-(positivity of the Euler factors) and whose constituents have determinant weight at most `2 d`
-(the tensor rule), and to the local eigenvalue `α ^ 2`; for `j + 1` apply the case `j` to
-`ℱ ⊗ ℱ`, which is again lisse and `ι`-real. -/
+local eigenvalue of `ℱ` has `ι`-weight at most `d + 2 ^ (-j)`, for every `j`. -/
 theorem frobeniusWeight_le_add_inv_two_pow_of_isReal [IsAffine C] [Fact (ringChar K ≠ l)]
     [W.IsEtaleQuotient] (j : ℕ) :
     ∀ {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
@@ -524,16 +491,7 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
 
 Let `U₀` be an affine smooth geometrically connected curve over `𝔽_q` and let `ℱ ≠ 0` be an
 `ι`-real lisse Weil sheaf on it all of whose irreducible constituents have determinant weight
-at most `d`. Then every local Frobenius eigenvalue of `ℱ` has `ι`-weight at most `d`.
-
-The proof runs the Rankin–Selberg trick on the even tensor powers `ℋ_m = ℱ ^ ⊗ (2 m)`. Their
-constituents have determinant weight at most `2 m d`, so the top compactly supported
-cohomology `H_c² (U, ℋ_m)`, a coinvariant Tate twist, has eigenvalues of modulus at most
-`q ^ (m d + 1)`; the Grothendieck trace formula therefore bounds the radius of convergence of
-`L_ι (U₀, ℋ_m, T)` below by `q ^ (-(m d + 1))`. Reality of `ℱ` makes every coefficient of
-every inverse local factor nonnegative, so each individual factor inherits that radius bound
-from the product, and a zero of the local denominator at `|ι α| ^ (-2 m / e)` gives
-`wt (α) ≤ d + 1 / m` for every `m`. -/
+at most `d`. Then every local Frobenius eigenvalue of `ℱ` has `ι`-weight at most `d`. -/
 theorem hasWeightsAtMost_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] [Nontrivial V]
     (hρ : W.IsLisse l ρ)
@@ -549,17 +507,11 @@ theorem hasWeightsAtMost_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
   rw [one_div_pow] at hj
   linarith
 
-/-- Upper bound via the largest
-determinant weight.
+/-- Upper bound via the largest determinant weight.
 
 Let `U₀` be a smooth geometrically connected affine curve, `ℱ` an `ι`-real lisse Weil sheaf on
 it and `d` an upper bound for the determinant weights of its constituents. Then every local
-eigenvalue `α` of `ℱ` at a closed point `x` satisfies `|ι α| ^ 2 ≤ q_x ^ d`.
-
-This is `AlgebraicGeometry.WeilGroup.hasWeightsAtMost_of_isReal` with the weight unfolded: the
-Rankin–Selberg bound for the iterated tensor squares
-(`AlgebraicGeometry.WeilGroup.frobeniusWeight_le_add_inv_two_pow_of_isReal`) gives
-`|ι α| ^ 2 ≤ q_x ^ (d + 2 ^ (-j))` for every `j`. -/
+eigenvalue `α` of `ℱ` at a closed point `x` satisfies `|ι α| ^ 2 ≤ q_x ^ d`. -/
 theorem sq_norm_le_rpow_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] [Nontrivial V]
     (hρ : W.IsLisse l ρ)
@@ -588,32 +540,17 @@ variable {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] {j : U ⟶ C}
   [AddCommGroup V] [Module (PadicAlgCl l) V] [FiniteDimensional (PadicAlgCl l) V]
   (ι : PadicAlgCl l →+* ℂ)
 
-/-- Semi-continuity of weights at the boundary points (the first assertion), on
-the representation side and conditional on the Euler-product hypothesis `hD`; this is not a proof of
-that assertion.
+/-- Semi-continuity of weights at the boundary points, on the representation side and
+conditional on the hypothesis `hD`, the trace formula in its Euler-product form for middle
+extensions (which does not follow from the fields of a `BoundaryDatum`, see
+`AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`).
 
 For a boundary datum `D` on a smooth geometrically connected curve `C₀`, if the lisse Weil sheaf
 `ℱ` on `U₀` has weights at most `w`, then `j_* ℱ` has weights at most `w` on `C₀`. Concretely:
 at a boundary point `s`, the residue Frobenius acts on the boundary stalk `V ^ (I_s)`, and every
 one of its eigenvalues `α`, witnessed by a nonzero invariant eigenvector `v`, has `ι`-weight at
-most `w` relative to the residue cardinality `q_s`.
-
-Shrinking to an affine neighbourhood, the counting bound `N_e ≤ A q ^ e` for closed points of
-degree `e` shows that `L_ι (U₀, ℱ, T)⁻¹` has radius at least `q ^ (-(w + 2) / 2)`, while the
-open–closed sequence identifies `H_c² (C, j_* ℱ)` with a coinvariant Tate twist whose
-eigenvalues are bounded by `q ^ ((w + 2) / 2)`. The trace formula then confines the zeros of
-the boundary factor, giving the preliminary bound `|ι α| ≤ q_s ^ ((w + 2) / 2)`; applying it
-to the tensor powers `ℱ ^ ⊗ n`, whose boundary stalks receive `(V ^ (I_s)) ^ ⊗ n`, improves it
-to `|ι α| ≤ q_s ^ (w / 2 + 1 / n)` for every `n`, and `n → ∞` finishes
-(`AlgebraicGeometry.BoundaryDatum.frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius`).
-
-The curve `C₀` is smooth and geometrically connected and `ℓ ≠ char 𝔽_q`, as in the setting
-`situation-weil` of the block, and `ℱ` is lisse. The trace formula used in the proof, in its
-Euler-product form for middle extensions, is the
-hypothesis `hD`: it does not follow from the fields of a `BoundaryDatum` (see
-`AlgebraicGeometry.BoundaryDatum.HasMiddleExtensionEulerProduct`). The unconditional, sheaf-level
-form of this assertion is
-`AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`. -/
+most `w` relative to the residue cardinality `q_s`. The unconditional, sheaf-level form of this
+statement is `AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`. -/
 theorem frobeniusWeight_le_of_hasWeightsAtMost [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hD : D.HasMiddleExtensionEulerProduct l ι)
     (ρ : Representation (PadicAlgCl l) WU.carrier V) (hρ : WU.IsLisse l ρ) {w : ℝ}
@@ -627,20 +564,9 @@ theorem frobeniusWeight_le_of_hasWeightsAtMost [SmoothOfRelativeDimension 1 p]
     simp [boundaryFrobenius, hα]
   · exact fun h ↦ hv0 (congrArg Subtype.val h)
 
-/-- Semi-continuity of weights, the second
-assertion.
-
-The consequence of the weight bound for `j_* ℱ`: a lisse Weil sheaf `𝒢` on a smooth
-geometrically connected curve `C₀` whose restriction to the open `U₀` is punctually `ι`-pure of
-weight `w` is punctually `ι`-pure of weight `w` on all of `C₀`.
-
-At a closed point of `U₀` this is the hypothesis, the local Frobenius of `C₀` being conjugate to
-the image of that of `U₀`. At a boundary point `s` the middle extension of `𝒢|_{U₀}` is `𝒢`
-itself, so the semi-continuity argument runs with the Euler
-product of the lisse sheaf `𝒢` on an affine neighbourhood of `s`
-(the Euler product of the trace formula); applied to `𝒢` and to its dual `𝒢 ^ ∨`, whose
-eigenvalues are the inverses of those of `𝒢`, it gives an upper bound `w` and a lower bound `w`
-(`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_forall_mem_range`). -/
+/-- Semi-continuity of weights: a lisse Weil sheaf `𝒢` on a smooth geometrically connected curve
+`C₀` whose restriction to the open `U₀` is punctually `ι`-pure of weight `w` is punctually
+`ι`-pure of weight `w` on all of `C₀`. -/
 theorem isPunctuallyPure_of_isPunctuallyPure_restrict [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
     (ρ : Representation (PadicAlgCl l) WC.carrier V) {w : ℝ} (hρ : WC.IsLisse l ρ)
@@ -663,23 +589,12 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   (ρ : Representation (PadicAlgCl l) W.carrier V) (ι : PadicAlgCl l →+* ℂ)
 
 -- The constituent bound elaborates exterior powers of direct sums of subquotients.
-/-- Steps 1–3 of the purity of real sheaves on curves, for the composition factors.
+/-- Purity of real sheaves on affine curves, for the composition factors.
 
 Let `ρ` be an `ι`-real lisse Weil representation on a smooth geometrically connected affine
 curve, and `0 = F 0 ⋖ F 1 ⋖ ⋯ ⋖ F n = ρ` a composition series. Then every composition factor
 `Q j = F (j + 1) ⧸ F j` is punctually `ι`-pure of its determinant weight
-`γ = wt_{ι, q}(det Q j (γ)) / rank Q j`.
-
-The semisimplification `S = ⨁ i, Q i` has the local polynomials of `ρ`, so its exterior power
-`E = ⋀^(N + 1) S`, where `N` is the total rank of the factors of determinant weight `> γ`, is
-real; by the exterior-power rule
-its constituents have determinant weight at most `B + γ`, where `B` is the sum of the determinant
-weights of those factors counted with rank. The Rankin–Selberg bound
-then bounds every local eigenvalue of `E` by
-`B + γ`. At a closed point `x`, the product of an eigenvalue `β` of `Q j` with all eigenvalues of
-the factors of weight `> γ` is such an eigenvalue, of weight
-`wt β + B`; so `wt β ≤ γ`. The weights of the eigenvalues of `Q j` sum to the weight
-`rank (Q j) * γ` of its determinant, so all of them equal `γ`. -/
+`γ = wt_{ι, q}(det Q j (γ)) / rank Q j`. -/
 theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] (hρ : W.IsLisse l ρ)
     (hreal : W.IsReal l ρ ι) {n : ℕ}
@@ -849,13 +764,7 @@ theorem isPunctuallyPure_subquotient_of_isReal [IsAffine C] [SmoothOfRelativeDim
 
 Let `C₀ / 𝔽_q` be a smooth geometrically connected curve and `ρ` an `ι`-real lisse Weil
 representation. Every irreducible constituent `σ` of `ρ` is punctually `ι`-pure of its
-determinant weight `γ`. This declaration is Steps 1–4 of the proof, for an affine
-curve; Step 0, the reduction of a general curve to an affine open, is
-`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal`. Indeed `σ` is a
-composition factor `F (i₀ + 1) ⧸ F i₀` of a composition series of `ρ`, and the composition
-factors are pure of their determinant weights
-(`AlgebraicGeometry.WeilGroup.isPunctuallyPure_subquotient_of_isReal`); the determinant weight
-of a nonzero representation is unique. -/
+determinant weight `γ`. -/
 theorem isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine [IsAffine C]
     [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
     [W.IsEtaleQuotient] (hρ : W.IsLisse l ρ)
@@ -971,9 +880,7 @@ end Transfer
 
 /-- **Local eigenvalues are compatible with restriction to an open.** For a restriction
 `W(U₀) → W(C₀)` of Weil groups along `j : U₀ ⟶ C₀`, the local Frobenius eigenvalues of
-`ρ ∘ restrict` at a closed point `x` of `U₀` are those of `ρ` at `j x`: the restriction carries
-the local Frobenius at `x` into the Frobenius conjugacy class at `j x`. This is the first step of
-reducing purity on `C₀` to purity on an affine open subcurve. -/
+`ρ ∘ restrict` at a closed point `x` of `U₀` are those of `ρ` at `j x`. -/
 theorem localEigenvalues_comp_restrict {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)}
     [IsCurve pU] {j : U ⟶ C} [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU}
     {WC : WeilGroup p} (R : Restriction j WU WC) {l : ℕ} [Fact l.Prime] {V : Type u}
@@ -987,9 +894,7 @@ theorem localEigenvalues_comp_restrict {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)
 geometrically connected curve `C₀` lies in a nonempty affine open `j : U₀ ⟶ C₀`, itself a smooth
 geometrically connected curve, with a Weil group `W(U₀)` and a continuous, surjective,
 degree-preserving homomorphism `r : W(U₀) →* W(C₀)` carrying local Frobenius elements into the
-Frobenius conjugacy classes. It is the restriction `W(U₀) → W(C₀, s)` to the standard Weil group
-(`AlgebraicGeometry.WeilGroup.restrictionOfPath`), followed by the inverse of
-`AlgebraicGeometry.WeilGroup.toStandard`. -/
+Frobenius conjugacy classes. -/
 theorem exists_restriction_isAffine [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
     (W : WeilGroup p) (y : C) :
     ∃ (U : C.Opens) (_ : IsAffine U) (_ : IsCurve (U.ι ≫ p))
@@ -1030,21 +935,11 @@ theorem exists_restriction_isAffine [SmoothOfRelativeDimension 1 p] [Geometrical
 
 /-- Purity of real lisse sheaves on curves.
 
-The main theorem of the block. Let `C₀ / 𝔽_q` be a smooth geometrically connected curve,
-`ℓ ≠ char 𝔽_q`, and `ℱ` an `ι`-real lisse Weil sheaf on it. Then every irreducible constituent
-`V` of `ℱ` is punctually `ι`-pure of weight `dw_ι (V)`, its own determinant weight. This is also
-the full statement of the purity of real sheaves on curves, whose Step 0 is the proof given
-here.
-(The hypothesis `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` holds for every Weil group of a
-geometrically connected curve, `AlgebraicGeometry.WeilGroup.isEtaleQuotient`.)
-
-Purity is a condition at each closed point `x` separately. Choose an affine open `U₀ ∋ x`; it is
-again a smooth geometrically connected curve, and `W(C₀)` receives a surjective restriction from
-a Weil group of `U₀` (`AlgebraicGeometry.WeilGroup.Restriction.exists_weilGroup`). The restriction
-`ℱ|_{U₀}` is lisse and `ι`-real, `V|_{U₀}` is a constituent of it, with
-the same determinant weight, and its local eigenvalues at `x` are those of `V`. The affine case
-(`AlgebraicGeometry.WeilGroup.isPunctuallyPure_of_isConstituent_of_isReal_of_isAffine`) applied
-on `U₀` gives purity of `V` at `x`. -/
+Let `C₀ / 𝔽_q` be a smooth geometrically connected curve, `ℓ ≠ char 𝔽_q`, and `ℱ` an `ι`-real
+lisse Weil sheaf on it. Then every irreducible constituent `V` of `ℱ` is punctually `ι`-pure of
+weight `dw_ι (V)`, its own determinant weight. (The hypothesis
+`AlgebraicGeometry.WeilGroup.IsEtaleQuotient` holds for every Weil group of a geometrically
+connected curve, `AlgebraicGeometry.WeilGroup.isEtaleQuotient`.) -/
 theorem isPunctuallyPure_of_isConstituent_of_isReal [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient]
     (hρ : W.IsLisse l ρ) (hreal : W.IsReal l ρ ι)

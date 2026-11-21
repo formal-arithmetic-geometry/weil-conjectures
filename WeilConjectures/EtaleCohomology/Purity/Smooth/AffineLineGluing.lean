@@ -21,7 +21,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 /-!
 # Gluing comparisons along the affine line
 
-The inputs of the gluing half of blueprint `lemma-section-normal-bundle--1`
+The inputs of the gluing half of weak `𝔸¹`-invariance
 (`AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`):
 
 * the unit section of `𝔸¹_S` is a closed immersion meeting every fibre, and the affine line
@@ -283,10 +283,7 @@ theorem conj_leftDerivedUpperStar_section_eq {B B' P P' : Scheme.{u}}
 `p₁, p₂ : B'' ⟶ B'` with `p₁ ≫ v = p₂ ≫ v`, carrying a section `i''` to `i'`, and suppose every
 point of `P''` lies in a preconnected set meeting the closed immersion `i''`. Let `F ∈ D(P)` be
 invertible, `θ : Li^* F ≅ C`, and `κ' : Lw^* F ≅ La'^* Lv^* C` normalized at `i'` against `θ`.
-Then the two pullbacks of `κ'`, viewed as maps `Lw^* F ⟶ Lw^* La^* C`, to `P''` agree: both are
-normalized at `i''` against the pullback of `θ`, and comparisons out of an invertible object
-are determined at `i''`
-(`AlgebraicGeometry.Etale.eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible`). -/
+Then the two pullbacks of `κ'`, viewed as maps `Lw^* F ⟶ Lw^* La^* C`, to `P''` agree. -/
 theorem conj_leftDerivedUpperStar_eq_of_section {B B' B'' P P' P'' : Scheme.{u}}
     {a : P ⟶ B} {a' : P' ⟶ B'} {v : B' ⟶ B} {w : P' ⟶ P} {p₁ p₂ : B'' ⟶ B'}
     {r₁ r₂ : P'' ⟶ P'} {i : B ⟶ P} {i' : B' ⟶ P'} {i'' : B'' ⟶ P''} [IsClosedImmersion i'']

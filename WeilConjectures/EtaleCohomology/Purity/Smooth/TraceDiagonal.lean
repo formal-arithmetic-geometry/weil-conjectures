@@ -29,10 +29,10 @@ exceptional inverse image: `Rf^! ≅ Lf^*(-) ⊗ᴸ L` and `ω_f = Rf^! Λ_Y ≅
 
 * Everything is stated on the ambient unbounded derived categories `D(X_ét, Λ)`, where the
   exceptional inverse image `Rf^!` is defined as the right adjoint of `Rf_!`
-  (`AlgebraicGeometry.Etale.rightDerivedUpperShriek`); this is the ambient right adjoint the
-  blueprint invokes. The criterion is then a statement
-  about functors on all of `D(X_ét, Λ)` and `D(Y_ét, Λ)`, and the triangular identities are
-  assumed for all objects.
+  (`AlgebraicGeometry.Etale.rightDerivedUpperShriek`); the exceptional inverse image on
+  `D^b_ctf` is its restriction. The criterion is then a statement about functors on all of
+  `D(X_ét, Λ)` and `D(Y_ét, Λ)`, and the triangular identities are assumed for all objects, not
+  only on `D^b_ctf`.
 * The derived tensor product has a symmetry only as an existence statement
   (`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`); the unit and counit use one
   chosen symmetry `AlgebraicGeometry.Etale.derivedTensorFlipIso`, because the projection map
@@ -84,7 +84,7 @@ variable (Λ) in
 /-- Trace–diagonal datum
 
 For `f : X ⟶ Y` with `W = X ×_Y X`, projections `p₁, p₂` and diagonal `Δ`, and an object
-`L ∈ D(X_ét, Λ)` (in the blueprint a ⊗-invertible object of `D^b_{ctf}(X, Λ)`), a
+`L ∈ D(X_ét, Λ)` (typically a ⊗-invertible object of `D^b_{ctf}(X, Λ)`), a
 *trace–diagonal datum* for `(f, L)` is a pair
 ```
 tr_f : Rf_! L ⟶ Λ_Y,        cl_Δ : RΔ_! Λ_X ⟶ Lp₂^* L.
@@ -180,11 +180,7 @@ variable (hl : d.leftTriangle = 𝟙 _) (hr : d.rightTriangle = 𝟙 _)
 
 If the two triangular composites of a trace–diagonal datum are the identity, then the unit and
 counit exhibit `G_L = Lf^*(-) ⊗ᴸ L` as a right adjoint of `Rf_!`: the two assumed equations are
-the triangular identities.
-
-This is a variant of the blueprint statement: the triangular identities are assumed on all of
-`D(X_ét, Λ)` and `D(Y_ét, Λ)`, not only on `D^b_ctf` as in the blueprint, and the conclusion is
-the adjunction on the ambient derived categories. -/
+the triangular identities. -/
 noncomputable def adjunction : R(f)_![ModuleCat.{u + 1} Λ] ⊣ d.functor :=
   Adjunction.mkOfUnitCounit
     { unit := d.unit
@@ -203,11 +199,8 @@ lemma adjunction_counit : (d.adjunction hl hr).counit = d.counit :=
 /-- Trace–diagonal criterion
 
 If the two triangular composites are the identity, the exceptional inverse image is
-`Rf^! ≅ Lf^*(-) ⊗ᴸ L`, by uniqueness of right adjoints.
-
-Here `Rf^!` is the ambient right adjoint `AlgebraicGeometry.Etale.rightDerivedUpperShriek` of
-`Rf_!` on the unbounded derived categories; the blueprint's `Rf^!` on `D^b_ctf` is its
-restriction. -/
+`Rf^! ≅ Lf^*(-) ⊗ᴸ L`, for the right adjoint `AlgebraicGeometry.Etale.rightDerivedUpperShriek` of
+`Rf_!` on the unbounded derived categories. -/
 noncomputable def rightDerivedUpperShriekIso :
     R(f)^![Λ] ≅ d.functor :=
   (rightDerivedUpperShriekAdjunction _ f).rightAdjointUniq (d.adjunction hl hr)

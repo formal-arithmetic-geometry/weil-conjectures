@@ -179,8 +179,6 @@ private theorem roosShift_eq (S S' : PodSignedRoosShift A)
       exact roosShift_hom_ext _ _ hS hS' C r
 
 /-- The additive structure already captured by canonical derived shifts.
-This explicit choice avoids expanding module-sheaf operations when specializing
-cochain shift formulas. It is registered only locally in the proof modules.
 Source: Mathlib's abelian instance for module sheaves. -/
 abbrev podSheafCanonicalPreadditive
     {T : Type v} [Category.{w} T] {J : GrothendieckTopology T}

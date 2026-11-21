@@ -28,8 +28,8 @@ Quasi-compactness of the open immersion (retrocompactness of its range) is neede
 constructible sheaves are defined via stratifications by *constructible* locally closed subsets;
 on a non-Noetherian scheme the extension by zero of the constant sheaf along a non-quasi-compact
 open immersion is not constructible. It is automatic on a locally Noetherian scheme, where every
-open immersion is quasi-compact (an instance of Mathlib), which covers the schemes of finite type
-over a field of the blueprint.
+open immersion is quasi-compact (an instance of Mathlib), for instance on a scheme of finite
+type over a field.
 -/
 
 @[expose] public section
@@ -64,13 +64,10 @@ theorem IsConstructibleSheaf.openImmersionLowerShriek_of_quasiCompact {U : Schem
 variable [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`, constructibility part: closed
-immersions preserve constructibility.
-
-Let `i : Z ⟶ X` be a closed immersion and `G` a constructible sheaf on `Z_ét`. Then `i_* G` is
-constructible on `X_ét`. The open complement of `i` is assumed quasi-compact, which is automatic
-on a locally Noetherian scheme, see the module docstring. The vanishing of the higher direct
-images is `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isClosedImmersion`. -/
+/-- **Closed immersions preserve constructibility.** Let `i : Z ⟶ X` be a closed
+immersion and `G` a constructible sheaf on `Z_ét`. Then `i_* G` is constructible on `X_ét`.
+The open complement of `i` is assumed quasi-compact, which is automatic on a locally Noetherian
+scheme, see the module docstring. -/
 theorem IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact {Z : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] [QuasiCompact (openComplementOfIsClosedImmersion i).ι]
     [Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]

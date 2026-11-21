@@ -24,9 +24,7 @@ universe u
 namespace FieldTheory
 
 /-- Reconstruction from localized coefficients and bounded monomials is bijective.
-Source: Stacks Project, Algebra, proof of Tag 07BV and Tag 08JZ.
-
--1, so D and the quotient are zero as well. No field evaluation is used. -/
+Source: Stacks Project, Algebra, proof of Tag 07BV and Tag 08JZ. -/
 theorem triangularFieldModel_reconstruction_bijective
     (k : Type u) [Field k] (d m : ℕ) (h : MvPolynomial (Fin d) k)
     (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))

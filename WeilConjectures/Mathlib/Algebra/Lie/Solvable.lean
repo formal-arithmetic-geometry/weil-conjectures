@@ -20,17 +20,15 @@ preserved by isomorphisms; in particular it is a characteristic ideal.
   solvable.
 * `LieAlgebra.map_radical`: an isomorphism of Lie algebras maps the radical onto the radical.
 
-## Blueprint
+## Implementation details
 
-The blueprint subsection `det-d-lie` consists of definitions and facts already in Mathlib:
-* `def-wf-lie-algebra`: `LieRing`/`LieAlgebra`, `LieIdeal`, `LieAlgebra.derivedSeries`,
+The basic definitions and facts on Lie algebras are taken from Mathlib:
+* Lie algebras: `LieRing`/`LieAlgebra`, `LieIdeal`, `LieAlgebra.derivedSeries`,
   `LieAlgebra.IsSolvable`, the quotient `L ⧸ I`, `LieModule`, `LieModule.toEnd`;
-* `def-wf-semisimple-lie-algebra`: `LieAlgebra.HasTrivialRadical`;
-* `def-wf-lie-radical-centre`: `LieAlgebra.radical`, `LieAlgebra.center`, and
+* semisimple Lie algebras: `LieAlgebra.HasTrivialRadical`;
+* radical and centre: `LieAlgebra.radical`, `LieAlgebra.center`, and
   `LieAlgebra.HasCentralRadical`; the Killing form is `killingForm`;
-* `proposition-lie-algebras-faithful-semisimple-representation--1`: `LieAlgebra.isSolvableAdd`.
-
-`LieAlgebra.map_radical` implements `rem-ptr-wf-lie-radical-centre-3`.
+* the sum of two solvable ideals is solvable: `LieAlgebra.isSolvableAdd`.
 -/
 
 @[expose] public section

@@ -24,8 +24,8 @@ for real sheaves: the sheaf side, lisse Weil sheaves `AlgebraicGeometry.WeilShea
 their geometric stalks, local Frobenius, global sections and geometric coinvariants, and the
 representation side, lisse representations of `W(C₀)`.
 
-The lisse sheaf–representation equivalence (`definition-weil-representation--1`,
-`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`) sends a lisse Weil sheaf `ℱ` to its
+The lisse sheaf–representation equivalence
+(`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`) sends a lisse Weil sheaf `ℱ` to its
 Weil fundamental representation `(V, ρ) = (ℱ_η̄, ρ_ℱ)`. From it we deduce that every lisse
 representation `ρ` of `W(C₀)` is the fundamental representation of a lisse Weil sheaf `ℱ`
 whose local Frobenius at a closed point `x` has the characteristic polynomial of
@@ -48,21 +48,19 @@ representation and of its tensor compatibility (an isomorphism of bifunctors, an
 
 ## Implementation notes
 
-The Weil fundamental representation of `situation-weil` is the geometric
+The Weil fundamental representation is the geometric
 generic stalk `ℱ_η̄` with the monodromy action of `π₁(C₀, η̄)` extended to the Weil group by the
 Weil structure. It is constructed in
 `WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation`
 (`AlgebraicGeometry.WeilGroup.fundamentalRep`) from a monodromy of lisse sheaves on the geometric
-curve (`AlgebraicGeometry.ProEtale.LisseMonodromy`,
-`proposition-lattices-representations-normal-scheme`), at a base point which depends on choices; the
-equivalence is therefore existentially quantified, and the fact that it *is* the Weil fundamental
-representation is recorded by the properties of it that the blueprint uses: at a closed point `x`,
+curve (`AlgebraicGeometry.ProEtale.LisseMonodromy`), at a base point which depends on choices;
+the equivalence is therefore existentially quantified, and the fact that it *is* the Weil
+fundamental representation is recorded by the properties of it that are used: at a closed point `x`,
 the stalk `ℱ_x̄` with its local Frobenius `F_x` is `V` with `ρ (Frob_x)` (the stalk at `x̄` being
 transported to the base point along a path, which carries the geometric Frobenius of `κ(x)` to
 the Frobenius element `Frob_x` of `W(C₀)`); the equivalence is compatible with duals (it is a
 tensor equivalence); and the global sections `H⁰(C̄, ℱ)` are the invariants `V ^ {π₁(C)}` with
-the Frobenius `ρ (γ)`, which is `lemma-degree-zero-top-cohomology--1` for `U₀ = C₀`. The last clause
-is a consequence of the equivalence in the blueprint; it is
+the Frobenius `ρ (γ)`. The last clause is a consequence of the equivalence; it is
 recorded with it here because the functor, being existentially quantified, can only be described
 through its properties.
 -/
@@ -196,12 +194,10 @@ representation:
 
 * at every closed point `x`, the geometric stalk `ℱ_x̄` with its local Frobenius `F_x` is
   isomorphic to `V` with `ρ (Frob_x)`, `Frob_x = W.frobenius x` being a Frobenius element at `x`
-  (`situation-weil`, the stalk at `x̄` transported to the base point along a
-  path);
+  (the stalk at `x̄` transported to the base point along a path);
 * it is compatible with duals: the representation of `ℱ^∨` is the contragredient of that of `ℱ`;
 * the global sections `H⁰(C̄, ℱ)` are the invariants `V ^ {π₁(C)}`, compatibly with the
-  Frobenius `ρ (γ)` of the degree-one lift `γ` (`lemma-degree-zero-top-cohomology--1`, for
-  `U₀ = C₀`; for a general open `U₀ ⊆ C₀` see
+  Frobenius `ρ (γ)` of the degree-one lift `γ` (for a general open `U₀ ⊆ C₀` see
   `AlgebraicGeometry.WeilGroup.exists_globalSections_upperStar_linearEquiv_invariants`);
 * it is compatible with tensor products: the representation of `ℱ ⊗ 𝒢` is the tensor product of
   those of `ℱ` and `𝒢`.
@@ -389,14 +385,7 @@ variable {W l}
 sheaf `ℱ` on `C₀`: the local Frobenius `F_x` on the stalk `ℱ_x̄` has the characteristic
 polynomial of `ρ (Frob_x)` at every closed point `x`, and the geometric coinvariants
 `Γ(C̄, ℱ^∨)^∨` of `ℱ` are the coinvariants `V_{π₁(C)}` of `ρ`, with the Frobenius induced by
-`ρ (γ)`.
-
-The sheaf is the image of `ρ` under the inverse of the equivalence
-`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`. Its stalks are described by that
-equivalence. For the coinvariants: the global sections `Γ(C̄, ℱ^∨)` are the invariants of the
-representation of `ℱ^∨`, which is the contragredient `ρ^∨`, and the `π₁(C)`-invariant linear
-forms on `V` are the linear forms on `V_{π₁(C)}`; dualising gives `V_{π₁(C)}` back, with the
-Frobenius `ρ (γ)`. -/
+`ρ (γ)`. -/
 theorem exists_weilSheaf_of_isLisse {V : Type u} [AddCommGroup V] [Module (PadicAlgCl l) V]
     [FiniteDimensional (PadicAlgCl l) V] {ρ : Representation (PadicAlgCl l) W.carrier V}
     (hρ : W.IsLisse l ρ) :

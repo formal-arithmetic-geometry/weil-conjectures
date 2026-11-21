@@ -252,11 +252,7 @@ private theorem leftUnitorNatural (W : Scheme.{u})
 /--
 For a fixed completion/tensor family and fixed section-normalized identity and
 composition comparisons, the completed tensor maps satisfy associativity, signed
-braiding and both unitors. On homogeneous strict generators the two associator
-paths are the same map, the two braiding paths carry the same Koszul sign, and the
-coefficient unit is preserved. Tensor-model descent and naturality extend these
-equalities to all constructible objects. The zero and empty-scheme cases are
-included by the same generator formulas.
+braiding and both unitors.
 Source: Stacks 07A4, 0941.
 -/
 theorem podReindexingTensorFamilyTensorConstraints

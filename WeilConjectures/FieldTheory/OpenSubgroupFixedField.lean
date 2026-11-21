@@ -23,17 +23,11 @@ Source: Stacks Project, Tags 03QR and 03SF, with the Galois correspondence in Ta
 
 universe u v w
 
-/-- Stacks, Tags 03QR and 0BML.
-For an open subgroup of the absolute Galois group, the fixed field is finite and separable,
-and its fixing subgroup is the original subgroup. The quotient is finite and discrete;
-its left translation action is continuous. Conversely, a point in a finite transitive
-discrete continuous G-set has open stabilizer, whose fixed field is finite separable.
-
-For the first clause, apply the fixed-field Galois correspondence to the open (hence closed)
-subgroup, as in `lem-exc-etale-open-subgroup-fixed-field-galois`. Compactness of the Krull
-topology makes its coset space finite, while openness makes that space discrete, as in
-`lem-exc-etale-open-subgroup-quotient-finite-discrete`. For the converse, continuity on a
-discrete set makes the point stabilizer open; apply the fixed-field correspondence again. -/
+/-- For an open subgroup `H` of the absolute Galois group, the fixed field is finite and
+separable, its fixing subgroup is `H`, and the quotient by `H` is finite and discrete with a
+continuous left translation action. Conversely, a point of a finite transitive discrete
+continuous `G`-set has an open stabilizer, whose fixed field is finite separable.
+Source: Stacks, Tags 03QR and 0BML. -/
 theorem openSubgroup_fixedField_finite_separable
     (K : Type u) (Ks : Type v) [Field K] [Field Ks] [Algebra K Ks]
     [IsSepClosure K Ks] :

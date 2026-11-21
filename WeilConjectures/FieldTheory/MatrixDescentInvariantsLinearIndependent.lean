@@ -26,7 +26,7 @@ namespace Field
 /-- A base-field independent family of twisted invariant matrices remains independent
 in the ambient matrix space over the separable closure.
 
-Source: Stacks Project, Tag 03R6, coefficient uniqueness argument of step 4 of. -/
+Source: Stacks Project, Tag 03R6, coefficient uniqueness argument. -/
 theorem matrixDescentInvariants_linearIndependent (K : Type u) [Field K] (n : ℕ)
     (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →
       Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))

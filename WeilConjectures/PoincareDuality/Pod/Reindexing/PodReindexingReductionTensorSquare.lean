@@ -80,8 +80,8 @@ structure PodTensorAugmentationFrame
   unit : F.map (adjY.unit.app S) ≫ δ.app (LY.obj S) ≫ RX.map a =
     adjX.unit.app (F.obj S)
 
-/-- The frame is built from the specified comparisons, with the Unit law as its
-only compatibility proof. It makes no tensor compatibility assertion.
+/-- The frame built from the specified comparisons; its only compatibility is the unit law, and
+no tensor compatibility is asserted.
 Source: Stacks 07A4 and the reduction/limit adjunction. -/
 def podReindexingTensorFrame
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

@@ -9,7 +9,8 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 /-!
 # Uniformizer cosets form a neighbourhood basis
 
-(auxiliary; not a blueprint node).
+In the ring of integers of a finite extension of `ℚ_[l]`, the cosets of the powers of the
+uniformizer form a neighbourhood basis.
 -/
 
 @[expose] public section
@@ -21,9 +22,6 @@ universe u
 namespace Padic
 
 /-- The positive uniformizer-power cosets form a neighbourhood basis in the ring of integers.
-
-parent node lem-sfb-integers-profinite-tower, proof step 1
-(auxiliary; not a blueprint node).
 -/
 theorem coefficientExtension_integers_coset_basis (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :

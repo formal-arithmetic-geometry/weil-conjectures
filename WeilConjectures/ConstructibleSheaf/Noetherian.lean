@@ -36,9 +36,9 @@ are constructible.
 stalks is constructible if and only if the loci where its stalks have a given cardinality are
 constructible.
 
-The blueprint states these for abelian étale sheaves; a constructible abelian sheaf on a
-Noetherian scheme has finite stalks and finitely many strata, hence is killed by some `N`, so it
-is a constructible sheaf of `ℤ/N`-modules, an instance of the present setting.
+These cover abelian étale sheaves: a constructible abelian sheaf on a Noetherian scheme has finite
+stalks and finitely many strata, hence is killed by some `N`, so it is a constructible sheaf of
+`ℤ/N`-modules, an instance of the present setting.
 
 The geometric stalk at a point `x : X` is taken at the geometric point
 `AlgebraicGeometry.Scheme.algClosurePoint x`, with values in an algebraic closure of the residue
@@ -113,10 +113,7 @@ theorem Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf {S : Scheme.{u}}
 /-- **Vanishing of a stalk map spreads to a constructible neighbourhood.** Let `T` be Noetherian,
 `Q` a constructible sheaf of `Λ`-modules on `T_ét` and `χ : G ⟶ Q` a morphism of sheaves whose
 stalk at the geometric point over `x` vanishes. Then the stalks of `χ` vanish on a constructible
-subset containing `x`: on a dense open `U` of the closure of `x` the pullback of `Q` is locally
-constant, and the pullback of `χ` to `U` vanishes since its image is a locally constant subsheaf
-with vanishing generic stalk
-(`AlgebraicGeometry.Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf`). -/
+subset containing `x`. -/
 theorem Etale.exists_isConstructible_sheafFiber_map_eq_zero {T : Scheme.{u}} [IsNoetherian T]
     {G Q : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [IsConstructibleSheaf Q]
     (χ : G ⟶ Q) (x : T) (hx : (pointSmallEtale (T.algClosurePoint x)).sheafFiber.map χ = 0) :

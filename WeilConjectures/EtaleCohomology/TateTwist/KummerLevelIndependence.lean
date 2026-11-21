@@ -187,13 +187,10 @@ theorem isIso_extendScalars_map_rootsOfUnityPow (n d : ℕ) (hn : (n : Λ) = 0)
 /-- Purity conventions and the rank-one datum
 
 *The finite-level twist does not depend on the Kummer level.* Let `Λ` be a ring of
-characteristic `n ≠ 0` (for `Λ = A_{E,n}`, `n = ℓ^N` with `N` minimal) and `X` a scheme on which
-`n` is invertible. For every `m` with `m Λ = 0` (that is, `n ∣ m`; for instance `m = ℓ^{N'}`
-with `ℓ^{N'} A = 0`) which is invertible on `X`, the power map `μ_m ⟶ μ_n`, `u ↦ u^{m/n}`,
+characteristic `n ≠ 0` and `X` a scheme on which `n` is invertible. For every `m` with `m Λ = 0`
+which is invertible on `X`, the power map `μ_m ⟶ μ_n`, `u ↦ u^{m/n}`,
 induces an isomorphism `μ_m ⊗ Λ ≅ μ_n ⊗ Λ = Λ(1)`
-(`AlgebraicGeometry.Etale.tateTwistSheafOneIso`): the twist `μ_{ℓ^{N'}} ⊗ Λ` is the same for
-every admissible `N'`. The tensor product is over `ℤ`, which for sheaves killed by `m` is the
-tensor product over `ℤ/m`. -/
+(`AlgebraicGeometry.Etale.tateTwistSheafOneIso`). The tensor product is over `ℤ`. -/
 noncomputable def extendScalarsRootsOfUnityIsoTateTwistSheaf [NeZero (ringChar Λ)]
     [HasInvertibleExponent Λ X] (m : ℕ) (hm : (m : Λ) = 0) (hu : IsUnit (m : Γ(X, ⊤))) :
     (extendScalars Λ X).obj (X.rootsOfUnitySheaf m) ≅ tateTwistSheaf Λ X 1 :=

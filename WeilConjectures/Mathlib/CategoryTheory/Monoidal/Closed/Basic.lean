@@ -210,9 +210,8 @@ pairing `ExactPairing X Y` is a perfect pairing `Y ⊗ X ⟶ 𝟙_ C`, but a per
 object that is not dualizable is not part of an exact pairing. It is not to be confused with
 `LinearMap.IsPerfPair`, perfectness of a bilinear form on modules.
 
-This is the perfectness of a pairing of blueprint `definition-perfect-pairing` and
-`definition-perfect-pairing--1`; its symmetry in the two variables is
- `CategoryTheory.MonoidalClosed.isPerfectPairing_braiding_hom_comp_iff`. -/
+Its symmetry in the two variables is
+`CategoryTheory.MonoidalClosed.isPerfectPairing_braiding_hom_comp_iff`. -/
 structure IsPerfectPairing {X Y : C} (b : X ⊗ Y ⟶ 𝟙_ C) : Prop where
   /-- The adjoint `Y ⟶ [X, 𝟙_ C]` of the pairing is an isomorphism. -/
   isIso : IsIso (curry b)
@@ -227,12 +226,7 @@ instance isIso_pre {X X' : C} (f : X' ⟶ X) [IsIso f] : IsIso (pre f) :=
     by rw [← pre_map, IsIso.hom_inv_id, pre_id]⟩
 
 /-- Precomposing a perfect pairing `b : X ⊗ Y ⟶ 𝟙_ C` with an isomorphism `f : X' ⟶ X` in the
-first variable gives a perfect pairing `X' ⊗ Y ⟶ 𝟙_ C`: the adjoint of the composite is the
-adjoint of `b` followed by the isomorphism `pre f`,
-```
-         curry b                 pre f
-  Y ─────────────▶ [X, 𝟙_ C] ─────────▶ [X', 𝟙_ C]
-``` -/
+first variable gives a perfect pairing `X' ⊗ Y ⟶ 𝟙_ C`. -/
 lemma IsPerfectPairing.whiskerRight_comp {X X' Y : C} {b : X ⊗ Y ⟶ 𝟙_ C}
     (h : IsPerfectPairing b) (f : X' ⟶ X) [IsIso f] : IsPerfectPairing (f ▷ Y ≫ b) :=
   ⟨by

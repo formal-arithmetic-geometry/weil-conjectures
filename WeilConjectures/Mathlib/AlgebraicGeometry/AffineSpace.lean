@@ -47,7 +47,6 @@ The part of the additive group structure of relative affine space that is used e
 - `AlgebraicGeometry.AffineSpace.stdPairing`: the standard pairing on `𝔸(n; S) ×_S 𝔸(n; S)`.
 - `AlgebraicGeometry.AffineSpace.reindexIso`: relabelling the coordinates along a bijection.
 - `AlgebraicGeometry.AffineSpace.sumIso`: `𝔸(n ⊕ m; S) ≅ 𝔸(m; 𝔸(n; S))`.
-
 -/
 
 /-!
@@ -76,15 +75,17 @@ over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; 
 - `AlgebraicGeometry.AffineSpace.isAffine_fiber_of_isOpenImmersion`: the fibres of an open
   subscheme of the relative affine line `𝔸¹_Y` over the points of `Y` are affine.
 
-## Blueprint
+## Implementation details
 
-This implements `lemma:nagata-quasi-affine-immersion-affine-space-exists` of the Nagata
-compactification blueprint. Following the Stacks project, the hypotheses are that the
-*scheme* `X` is quasi-affine (`X.IsQuasiAffine`) and that `π` is locally of finite type;
+Following the Stacks project (Tag 04II), the hypotheses of the immersion into affine space are
+that the *scheme* `X` is quasi-affine (`X.IsQuasiAffine`) and that `π` is locally of finite type;
 no hypothesis on `S` is needed. This applies in particular to the case needed for the
-Nagata compactification of an affine morphism, where `X` is affine
-(`lemma:nagata-affine-finite-type-is-quasi-affine` is the Mathlib instance
-`[IsAffine X] : X.IsQuasiAffine`).
+Nagata compactification of an affine morphism, where `X` is affine (an affine scheme is
+quasi-affine by the Mathlib instance `[IsAffine X] : X.IsQuasiAffine`).
+
+The unit section `AffineSpace.oneSection` is the normalization point of weak `𝔸¹`-invariance,
+where a comparison on `𝔸(n; S)` is pinned down by its restriction to `t = 1`; this is why it sits
+alongside `AffineSpace.zeroSection`.
 -/
 
 @[expose] public section
@@ -389,9 +390,7 @@ theorem exists_immersion_affineSpace_of_quasiAffine' {X S : Scheme.{u}} (π : X 
     infer_instance
 
 /-- **Stacks Tag 04II**: a quasi-affine scheme that is locally of finite type over `S` admits
-an immersion into a relative affine space over `S`. This is
-`lemma:nagata-quasi-affine-immersion-affine-space-exists` of the Nagata compactification
-blueprint. -/
+an immersion into a relative affine space over `S`. -/
 @[stacks 04II]
 theorem exists_immersion_affineSpace_of_quasiAffine {X S : Scheme.{u}} (π : X ⟶ S)
     [X.IsQuasiAffine] [LocallyOfFiniteType π] :
@@ -427,7 +426,8 @@ noncomputable def Scheme.Hom.affineSpaceImmersionDim : ℕ :=
   (exists_immersion_affineSpace_of_quasiAffine π).choose
 
 /-- **The chosen immersion** `ι_X : X ⟶ 𝔸ⁿ_S` over `S` of a quasi-affine scheme `X` locally of
-finite type over `S` (selected by `AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`). -/
+finite type over `S`, selected by
+`AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`. -/
 noncomputable def Scheme.Hom.affineSpaceImmersion :
     X ⟶ 𝔸(ULift.{u} (Fin π.affineSpaceImmersionDim); S) :=
   (exists_immersion_affineSpace_of_quasiAffine π).choose_spec.choose
@@ -693,9 +693,8 @@ end iteratedAffineLine
 morphism to the iterated affine line: the coordinate `t 0` is the coordinate of the outermost
 affine line.
 
-For `X = Spec B_s` over `S = Spec A_s` this is the map `ν_t : Spec B_s ⟶ 𝔸ᵈ_{D(s)}` of blueprint
-`lemma-relative-noether-normalization-over-stratification--1`, given by `A_s[T₁, …, T_d] → B_s`,
-`Tᵢ ↦ tᵢ`; see `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine_appTop_comp_evalCoord`. -/
+For `X = Spec B` this is the map `Spec B ⟶ 𝔸ʳ_S` given by `Tᵢ ↦ tᵢ`; see
+`AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine_appTop_comp_evalCoord`. -/
 noncomputable def Scheme.Hom.toIteratedAffineLine {X S : Scheme.{u}} (g : X ⟶ S) :
     ∀ {r : ℕ}, (Fin r → Γ(X, ⊤)) → (X ⟶ iteratedAffineLine S r)
   | 0, _ => g
@@ -836,19 +835,8 @@ lemma AffineSpace.zeroSection_comp_over (n : Type u) (S : Scheme.{u}) :
     AffineSpace.zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
   AffineSpace.homOfVector_over _ _
 
-/-- The affine line over a base.
-
-The affine line `𝔸¹_Y` over `Y` is `𝔸(ULift (Fin 1); Y)`, with coordinate
-`AffineSpace.coord Y 0`, projection `𝔸(ULift (Fin 1); Y) ↘ Y`, zero section
-`AffineSpace.zeroSection` (`t = 0`) and unit section `AffineSpace.oneSection` (`t = 1`, this
-declaration); the open complement `𝔾_{m,Y}` of the zero section is
-`AlgebraicGeometry.Scheme.Hom.puncturedLine Y`, through which the unit section factors
-(`AlgebraicGeometry.Scheme.Hom.oneSectionToPuncturedLine`).
-
-The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
-whose coordinates are `1`, i.e. the section `t = 1`. It is the normalization point of weak
-`𝔸¹`-invariance, where a comparison on `𝔸(n; S)` is pinned down by its restriction to
-`t = 1`; this is why it sits here alongside `AffineSpace.zeroSection`. -/
+/-- The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
+whose coordinates are `1`, i.e. the section `t = 1`. -/
 noncomputable def AffineSpace.oneSection (n : Type u) (S : Scheme.{u}) : S ⟶ 𝔸(n; S) :=
   AffineSpace.homOfVector (𝟙 S) 1
 

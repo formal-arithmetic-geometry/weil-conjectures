@@ -39,14 +39,7 @@ namespace IsSepClosed
 variable {k A : Type*} [Field k] [IsSepClosed k] [CommRing A] [Algebra k A]
 
 /-- Over a separably closed field `k`, tensoring a `k`-algebra `A` without nontrivial idempotents
-with a finitely generated `k`-domain `B` creates no nontrivial idempotents.
-
-At a maximal ideal `m` of `B` the residue field `B ⧸ m` is finite, hence purely inseparable,
-over `k`, so the image of an idempotent `e` in `A ⊗[k] (B ⧸ m)` comes from `A` and is `0`
-or `1`: all coordinates of `e` or all coordinates of `1 - e` (with respect to a `k`-basis of
-`A`) lie in `m`. If `e ≠ 0, 1`, the product of a nonzero coordinate of `e` and a nonzero
-coordinate of `1 - e` thus lies in every maximal ideal of the Jacobson domain `B`, so it is
-zero, a contradiction. -/
+with a finitely generated `k`-domain `B` creates no nontrivial idempotents. -/
 theorem eq_zero_or_eq_one_of_isIdempotentElem_tensorProduct_of_finiteType
     {B : Type*} [CommRing B] [IsDomain B] [Algebra k B] [Algebra.FiniteType k B]
     (hA : ∀ e : A, IsIdempotentElem e → e = 0 ∨ e = 1) {e : A ⊗[k] B}
@@ -115,8 +108,7 @@ theorem eq_zero_or_eq_one_of_isIdempotentElem_tensorProduct_of_finiteType
   exact mul_ne_zero hi hj hjac
 
 /-- Over a separably closed field `k`, tensoring a `k`-algebra `A` without nontrivial idempotents
-with a `k`-domain `L` (e.g. a field extension) creates no nontrivial idempotents. An idempotent
-of `A ⊗[k] L` already lives in `A ⊗[k] B` for a finitely generated `k`-subalgebra `B` of `L`. -/
+with a `k`-domain `L` (e.g. a field extension) creates no nontrivial idempotents. -/
 @[stacks 037U "Stated in terms of idempotents."]
 theorem eq_zero_or_eq_one_of_isIdempotentElem_tensorProduct
     {L : Type*} [CommRing L] [IsDomain L] [Algebra k L]
@@ -173,11 +165,7 @@ variable (F : Type*) {E : Type*} [Field F] [Field E] [Algebra F E] (q : ℕ) [Ex
 /-- **Purely inseparable extensions.** A field extension `E / F` of exponential characteristic
 `q` is purely inseparable if and only if every `α ∈ E` satisfies `α ^ (q ^ n) ∈ F` for some `n`.
 In characteristic `0` we have `q = 1`, and this says `E = F`. This is
-`isPurelyInseparable_iff_pow_mem`, stated with an explicit preimage.
-
-The other notions of the blueprint definition are those of Mathlib: `Module.Finite F E`
-(finite), `Algebra.IsAlgebraic F E` (algebraic), `Algebra.IsSeparable F E` (separable), and
-`IsAlgClosure F E` (algebraic closure: `E` is algebraically closed and algebraic over `F`). -/
+`isPurelyInseparable_iff_pow_mem`, stated with an explicit preimage. -/
 theorem isPurelyInseparable_iff_exists_algebraMap_eq_pow :
     IsPurelyInseparable F E ↔ ∀ α : E, ∃ n : ℕ, ∃ a : F, algebraMap F E a = α ^ q ^ n :=
   isPurelyInseparable_iff_pow_mem F q

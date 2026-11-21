@@ -67,7 +67,6 @@ open Scheme Etale
 /-- The original stalk exchange of the affine line with abelian coefficients: the stalk at a
 geometric point of the degree-`q` exchange morphism of a cartesian square over `𝔸¹_S ⟶ S` is
 the pullback map between the cohomologies of the affine lines over the strict henselisations.
-The proof is that of `AlgebraicGeometry.Etale.projectiveLine_abelian_originalStalk_totalExchange`.
 -/
 theorem Etale.affineLine_abelian_originalStalk_totalExchange
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ 𝔸(ULift.{u} (Fin 1); S)}
@@ -142,8 +141,7 @@ theorem Etale.affineLine_abelian_originalStalk_totalExchange
 of the degree-`q` exchange morphism `g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` of a cartesian square over
 `p : 𝔸¹_S ⟶ S` is, up to isomorphisms of its source and target, the pullback map
 `Hᵠ(𝔸¹_A, F|) ⟶ Hᵠ(𝔸¹_B, F|)` along the local homomorphism `A ⟶ B` of the strict
-henselisations. The proof is that of
-`AlgebraicGeometry.Etale.projectiveLine_originalStalk_totalCohomologyExchange`. -/
+henselisations. -/
 theorem Etale.affineLine_originalStalk_totalCohomologyExchange
     (Λ : Type (u + 1)) [CommRing Λ]
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ 𝔸(ULift.{u} (Fin 1); S)}
@@ -221,9 +219,7 @@ T ----g----> S
 a sheaf `F` of `Λ`-modules on `𝔸¹_S` and `q ≥ 0`, suppose that for every local homomorphism
 `φ : A ⟶ B` of strictly henselian local rings and every `j : Spec A ⟶ S` the pullback map
 `Hᵠ(𝔸¹_A, F|) ⟶ Hᵠ(𝔸¹_B, F|)` along `𝔸¹_B ⟶ 𝔸¹_A` is bijective. Then the degree-`q` exchange
-morphism `g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` is an isomorphism: at every geometric point of `T` it is
-such a pullback map (`AlgebraicGeometry.Etale.affineLine_originalStalk_totalCohomologyExchange`),
-and geometric stalks are conservative. -/
+morphism `g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` is an isomorphism. -/
 theorem Etale.isIso_baseChangeHomologyMap_affineLine_of_strictLocal (Λ : Type (u + 1))
     [CommRing Λ] {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T}
     {g' : X' ⟶ 𝔸(ULift.{u} (Fin 1); S)} (sq : IsPullback g' f' (𝔸(ULift.{u} (Fin 1); S) ↘ S) g)

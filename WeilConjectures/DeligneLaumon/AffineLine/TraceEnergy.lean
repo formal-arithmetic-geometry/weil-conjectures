@@ -473,11 +473,7 @@ end Envelope
 
 /-- If `F` is a lisse Weil sheaf of rank at
 most `N` on an affine curve `V` over `k₀`, punctually `ι`-mixed of weights at most `w`, and
-`#V(𝔽_{qⁿ}) ≤ d qⁿ`, then `S_n(F) ≤ d N² q^{n(w + 1)}` for all `n ≥ 1`: at
-`y ∈ V(𝔽_{qᵐ})` the eigenvalues of the Frobenius have absolute value at most `q^{mw/2}`, so
-`|ι t_F(y)|² ≤ r² q^{mw}` for a bound `r` of the rank of `F`, and
-`S_m ≤ r² · #V(𝔽_{qᵐ}) · q^{mw} ≤ C q^{m(w + 1)}` by the linear growth of the point counts of an
-affine curve. -/
+`#V(𝔽_{qⁿ}) ≤ d qⁿ`, then `S_n(F) ≤ d N² q^{n(w + 1)}` for all `n ≥ 1`. -/
 theorem traceEnergy_le_of_hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
@@ -611,12 +607,7 @@ theorem traceFunction_tensorObj_and_l2Series_mul_lSeries (ι : PadicAlgCl l →+
 
 /-- The *`L²`-rigidity* for real sheaves: let `G` be a nonzero lisse `ι`-real Weil sheaf on the
 smooth geometrically connected affine curve `X₀`, punctually `ι`-pure of weight `w`. Then
-`‖G‖ = w`.
-
-The proof writes `φ_G = L'/L` with `L` the ratio of the determinants of the
-Frobenius on `H_c¹` and `H_c²` of `G ⊗ G`; the denominator is pure of weight `2w + 2` by the
-endpoint lemma, positivity of the local factors forces a surviving pole on `|t| = q^{-w-1}`,
-and the radius `q^{-w-1}` gives `‖G‖ = w` by `AlgebraicGeometry.WeilSheaf.lt_l2Weight_iff`. -/
+`‖G‖ = w`. -/
 theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
@@ -703,12 +694,7 @@ theorem l2Weight_eq_of_isReal (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
 
 /-- The *`L²`-weight of a punctually pure lisse sheaf equals its weight*: let `G` be a nonzero
 lisse Weil sheaf on the smooth geometrically connected affine curve `X₀`, punctually `ι`-pure
-of weight `w`. Then `‖G‖ = w`; the reality hypothesis of
-`AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isReal` is not needed.
-
-The twist `G⁰ = G ⊗ 𝓑_b` with `|ι b| = q^{-w/2}` has `‖G⁰‖ = ‖G‖ - w`; its envelope `E` is
-real and pure of weight `0`, so `‖E‖ = 0`; the traces of `E` are `2 Re t_{G⁰}`, so
-`‖E‖ ≤ ‖G⁰‖`; and `‖G⁰‖ ≤ 0` by `AlgebraicGeometry.WeilSheaf.l2Weight_le_of_hasWeightsAtMost`. -/
+of weight `w`. Then `‖G‖ = w`. -/
 theorem l2Weight_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
@@ -747,11 +733,7 @@ theorem l2Weight_eq_of_isPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) {V
 set_option linter.unusedVariables false in
 /-- Let `N ≠ 0` be lisse on a smooth geometrically connected affine curve `V₀` of finite type
 over `k₀` and punctually `ι`-pure of weight `v`. If the trace energies satisfy
-`S_n(V₀, N) ≤ C q^{nB}` for every `n ≥ 1`, with `0 < C` independent of `n`, then `v ≤ B - 1`.
-
-The energy bound bounds the `L²`-weight parameter `‖N‖` by `B - 1`
-(`AlgebraicGeometry.WeilSheaf.l2Weight_le_of_traceEnergy_le`), and `‖N‖ = v` by the
-`L²`-rigidity `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight`. -/
+`S_n(V₀, N) ≤ C q^{nB}` for every `n ≥ 1`, with `0 < C` independent of `n`, then `v ≤ B - 1`. -/
 theorem le_sub_one_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}
     [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]
@@ -933,15 +915,7 @@ theorem exists_traceEnergy_directImage_le_add (ι : PadicAlgCl l →+* ℂ)
 
 /-- *The middle extension does not change the `L²`-weight*: let `j : U₀ ↪ 𝔸¹_{k₀}` be a dense
 open immersion and `M` a nonzero lisse Weil sheaf on the smooth geometrically connected affine
-curve `U₀`, punctually `ι`-pure of weight `w`. Then `‖j_*M‖ = ‖M‖ = w`.
-
-The rigidity `AlgebraicGeometry.WeilSheaf.l2Weight_eq_of_isPunctuallyPureOfWeight` gives
-`‖M‖ = w`. The trace energies of `j_*M` are those of `M` plus the boundary contribution
-`E_m = ∑_{y ∈ S₀(𝔽_{qᵐ})} |t_{j_*M}(y)|² ≥ 0`, which is at most `D r² q^{mw}` by the boundary
-semicontinuity, with `D = ∑_{s ∈ S₀} d(s)` and `r` the rank of `M`. Hence `‖M‖ ≤ ‖j_*M‖` and
-`‖j_*M‖ ≤ max ‖M‖ (w - 1) = w`.
-
-The nonvanishing of `M` is needed: the zero sheaf has `‖0‖ = -∞`. -/
+curve `U₀`, punctually `ι`-pure of weight `w`. Then `‖j_*M‖ = ‖M‖ = w`. -/
 theorem l2Weight_directImage (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l)
     [IsAffine D.U] [LocallyOfFiniteType (D.U ↘ Spec (CommRingCat.of k₀))]
     [SmoothOfRelativeDimension 1 (D.U ↘ Spec (CommRingCat.of k₀))]

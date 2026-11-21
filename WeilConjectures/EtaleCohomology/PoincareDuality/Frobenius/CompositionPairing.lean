@@ -118,14 +118,7 @@ noncomputable def homSingleRingEquiv (E : DerivedCategory (ModuleCat.{u} R)) :
 /-- **The composition pairing with `R[0]` is nondegenerate over a finite field.** Let `R` be a
 finite field and `E ∈ D(R)` with `H^0(E)` finite-dimensional. Then `Hom(R[0], E)` is finite and
 the composition pairing `Hom(R[0], E) × Hom(E, R[0]) ⟶ End(R[0])` is nondegenerate on both
-sides.
-
-As in the blueprint, `E` is split: it is the complex
-`H` of its cohomology spaces with zero differential. The inclusion and the projection of the
-degree-zero summand `H^0(E)[0]` give, for `v ∈ H^0(E)` and `φ ∈ H^0(E)^∨`, morphisms
-`x_v : R[0] ⟶ E` and `f_φ : E ⟶ R[0]` with `x_v ≫ f_φ = φ(v)`. Counting, `v ↦ x_v` and
-`φ ↦ f_φ` are bijective: `Hom(R[0], E) = H^0(E)`, and `Hom(E, R[0]) = H^0(E^∨) ≅ H^0(E)^∨`
-(`DerivedCategory.nonempty_iso_homology_ihom`). -/
+sides. -/
 theorem nondegenerate_comp_singleFunctor_of_isField (hR : IsField R) [Finite R]
     (E : DerivedCategory (ModuleCat.{u} R))
     (hE : Module.Finite R ((homologyFunctor (ModuleCat.{u} R) 0).obj E)) :
@@ -251,10 +244,7 @@ noncomputable def rightDerivedGlobalSectionsUnitIso :
 /-- **The composition pairing with the unit is nondegenerate at the point.** Let `k` be a
 separably closed field, `Λ` a finite field and `E` an object of the point category
 `D(Spec k_ét, Λ)` with `H^0(RΓ(Spec k, E))` finite-dimensional. Then `Hom(Λ_s, E)` is finite and
-the composition pairing `Hom(Λ_s, E) × Hom(E, Λ_s) ⟶ End(Λ_s)` is nondegenerate on both sides.
-This follows from the case of `D(Λ)`
-(`DerivedCategory.nondegenerate_comp_singleFunctor_of_isField`) through the equivalence
-`RΓ(Spec k, -)`. -/
+the composition pairing `Hom(Λ_s, E) × Hom(E, Λ_s) ⟶ End(Λ_s)` is nondegenerate on both sides. -/
 theorem nondegenerate_comp_unit_of_isSepClosed (hΛ : IsField Λ) [Finite Λ]
     (E : DerivedCategoryModule Λ (Spec (.of k)))
     (hE : Module.Finite Λ ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) 0).obj

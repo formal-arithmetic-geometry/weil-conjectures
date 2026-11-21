@@ -112,18 +112,13 @@ The Euler series `L_ι(C₀, ρ, T) = ∏_{x ∈ |C₀|} ι P_x(ρ, T ^ e_x)⁻�
 `ρ`, the locally finite product over the closed points `x` of the curve of the inverses of the
 local polynomials `P_x(ρ, T)` of `AlgebraicGeometry.WeilGroup.localPolynomial`, transported to
 `ℂ` along `ι` and substituted into `T ^ e_x` for the residue degree `e_x = p.degreeOver x`.
-
-Each factor is a formal power series with constant term `1`, so the product lies in
-`1 + T ℂ⟦X⟧` (`AlgebraicGeometry.WeilGroup.constantCoeff_eulerSeries`); it is taken in the
-product topology on `ℂ⟦X⟧`, in which it converges by
-`AlgebraicGeometry.WeilGroup.multipliable_eulerFactors`. -/
+The product is taken in the product topology on `ℂ⟦X⟧`. -/
 noncomputable def eulerSeries : PowerSeries ℂ :=
   ∏' x : C.finitePoints, W.eulerFactor l ρ ι x
 
 /-- Cohomology and the Euler series.
 
-The Euler series lies in `1 + T ℂ⟦X⟧`: every local factor has constant term `1`, because the
-local polynomial `P_x(ρ, T) = det (1 - T F_x)` does. -/
+The Euler series lies in `1 + T ℂ⟦X⟧`. -/
 theorem constantCoeff_eulerSeries :
     PowerSeries.constantCoeff (W.eulerSeries l ρ ι) = 1 := by
   have h := (W.multipliable_eulerFactors l ρ ι).hasProd.map (PowerSeries.constantCoeff (R := ℂ))

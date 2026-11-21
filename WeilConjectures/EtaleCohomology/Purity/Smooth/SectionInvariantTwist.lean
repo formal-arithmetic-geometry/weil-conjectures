@@ -72,11 +72,7 @@ variable [HasTateTwist Λ]
 
 For `g : V ⟶ B` smooth of pure relative dimension `c` with a closed section `s`, purity of
 the section `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` determines the section invariant:
-`𝒞(g, s) = Ls^* ω_g ≅ Λ_B(c)[2c]`.
-
-The dualizing complex `ω_g` is invertible,
-and so is `Λ_V(c)[2c]`; the co-projection formula for `Rs^!` moves either
-factor of `Λ_V(c)[2c] ⊗ ω_g` out of `Rs^!`, and `Rs^! ω_g ≅ Λ_B` since `s ≫ g = 𝟙 B`. -/
+`𝒞(g, s) = Ls^* ω_g ≅ Λ_B(c)[2c]`. -/
 theorem nonempty_iso_sectionInvariant_twistShift_of_iso {V B : Scheme.{u}} {c : ℕ}
     (g : V ⟶ B) [SmoothOfRelativeDimension c g] [HasCompactification g] (s : B ⟶ V)
     [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) [HasInvertibleExponent Λ V]

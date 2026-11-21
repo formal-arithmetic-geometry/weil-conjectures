@@ -259,10 +259,9 @@ theorem Etale.isIso_unit_constantSheaf_fromSpecStalk_genericPoint (Z : Scheme.{u
     · obtain ⟨m, rfl⟩ := Scheme.surjective_toSheafify_app_of_connectedSpace _ M FW y
       exact ⟨_, Etale.constantSheafUnit_app_toSheafify g M W m⟩
 
-/-- **Maps into pushforwards of constant sheaves from a normal integral scheme** (Step 5 of the
-proof of Stacks 09Z6). Let `f : Y ⟶ X` with `Y` integral with integrally closed local rings, and
-`g : Spec K ⟶ Y` its generic point. Maps `C ⟶ f_* M_Y` correspond to maps `(g ≫ f)^* C ⟶ M_K`:
-by 09Z5 the constant sheaf `M_Y` is `g_* M_K`. -/
+/-- **Maps into pushforwards of constant sheaves from a normal integral scheme.** Let
+`f : Y ⟶ X` with `Y` integral with integrally closed local rings, and `g : Spec K ⟶ Y` its
+generic point. Maps `C ⟶ f_* M_Y` correspond to maps `(g ≫ f)^* C ⟶ M_K`. -/
 noncomputable def Etale.homLowerStarConstantSheafEquiv {X Y : Scheme.{u}} (f : Y ⟶ X)
     [IsIntegral Y] (hY : ∀ y : Y, IsIntegrallyClosed (Y.presheaf.stalk y))
     (C : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (M : ModuleCat.{u + 1} Λ) :

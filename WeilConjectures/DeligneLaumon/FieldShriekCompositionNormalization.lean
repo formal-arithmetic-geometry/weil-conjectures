@@ -38,9 +38,8 @@ def sfCompositionPullSquare {V T Y S : Scheme.{u}}
     eqToIso (congrArg (fun h ↦ pull (completed l E) h) w.symm) ≪≫
     geometricPullComposition (completed l E) b p (completedPull_comp l E b p)
 
-/-- The open restriction comparison: geometric exchange, then the inverse open unit.
-The unit proof is supplied by the statement, rather than assumed as a geometric
-hypothesis. Source: Stacks 0F7J, proper/open comparison. -/
+/-- The open restriction comparison: geometric exchange, then the inverse open unit, given the
+invertibility `hη` of the open unit at `N`. Source: Stacks 0F7J. -/
 def sfCompositionLambda {V T Y S : Scheme.{u}}
     (b : V ⟶ T) (r : V ⟶ Y) (p : T ⟶ S) (i : Y ⟶ S)
     [IsOpenImmersion b] (w : b ≫ p = r ≫ i)

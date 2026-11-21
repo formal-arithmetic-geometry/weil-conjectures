@@ -31,7 +31,6 @@ For any `P` containing zero and closed under isomorphisms, `homologyProperty P` 
 the truncations `τ^{≤ n}` and `τ^{≥ n}` of the canonical t-structure
 (`DerivedCategory.homologyProperty_truncLE`, `DerivedCategory.homologyProperty_truncGE`): the
 homology of a truncation is that of the complex in the surviving degrees and zero elsewhere.
-
 -/
 
 @[expose] public section
@@ -119,7 +118,7 @@ instance homologyProperty_isTriangulatedClosed₂ [P.IsClosedUnderIsomorphisms]
       ((homologyFunctor A 0).homologySequence_exact₃ T hT n (n + 1) rfl)
       (h₃ (n - 1)) (h₁ n) (h₃ n) (h₁ (n + 1))
 
-/-- Blueprint `corollary-ambient-ind-derived--1`, general form: in the derived category
+/-- In the derived category
 of an abelian category, the complexes whose homology objects lie in a class containing zero,
 closed under isomorphisms, kernels, cokernels and extensions form a triangulated
 subcategory. -/

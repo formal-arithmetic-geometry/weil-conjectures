@@ -39,8 +39,8 @@ when `a ≠ 0`, while for `a = 0` it is the constant sheaf, whose cohomology is 
 The cohomology `H^q(X, F)` of an étale sheaf `F` of `Λ`-modules is
 `AlgebraicGeometry.Etale.cohomology` applied to `F` placed in degree `0`, the `q`-th cohomology
 of the derived global sections `RΓ(X, F)`.
-The blueprint works with `ℚ̄_ℓ`-coefficients; here the coefficients are a finite domain `Λ` in
-which `q` is invertible, a finite level of the `ℓ`-adic coefficients.
+The coefficients are a finite domain `Λ` in which `q` is invertible, a finite level of the
+`ℓ`-adic coefficients.
 -/
 
 @[expose] public section
@@ -215,11 +215,7 @@ theorem nonempty_iso_biproduct_cohomology_affineLine [IsDomain Λ] (Ψ : AddChar
 
 /-- **Vanishing of the cohomology of a nontrivial Artin–Schreier sheaf on the affine line.**
 For a primitive additive character `Ψ` of `k` with values in a finite domain `Λ` and `a ≠ 0`,
-`H^q(𝔸¹_Ω, ℒ_{Ψ, a x}) = 0` for every `q`. The scaling `x ↦ a x` identifies `ℒ_{Ψ, a x}` with
-`ℒ_{Ψ(a ·), x}`, and `Ψ(a ·)` is a nontrivial character; by the finite pushforward along the
-Artin–Schreier covering `y ↦ y ^ q - y` and the isotypic decomposition, the cohomology of
-`𝔸¹_Ω` with constant coefficients is the direct sum of the cohomology of the `ℒ_{Ψ(b ·), x}`,
-and only the trivial character contributes, in degree `0`. -/
+`H^q(𝔸¹_Ω, ℒ_{Ψ, a x}) = 0` for every `q`. -/
 theorem isZero_cohomology_affineLine_artinSchreierSheafOf [IsDomain Λ] [Finite Λ]
     (Ψ : AddChar k Λ) (hΨ : Ψ.IsPrimitive) {a : k} (ha : a ≠ 0) (q : ℤ) :
     IsZero ((cohomology (ModuleCat.{u + 1} Λ) 𝔸(PUnit; Spec (CommRingCat.of Ω)) q).obj

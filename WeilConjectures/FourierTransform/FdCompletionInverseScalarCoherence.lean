@@ -390,37 +390,7 @@ structure FdCompletionScalarComparison
 
 /-- The specified completion map restricts to an integral isomorphism, and its inverse
 rationalizes to an exact scalar comparison satisfying shifts, units, the cocycle and
-four-field compatibility, including repeated fields.
-
-Proof, following the eight steps of the DAG node:
-1. The stratified-perfect characterization identifies the integral categories after the
-quotient-normalized coefficient transport. Finite-free scalar transport preserves them.
-Completeness makes the specified ambient chi invertible, so it and its inverse restrict.
-2. On a flat-term K-flat representative the ordinary transport fixes every tensor
-factor. Chi has the actual quotient coordinates and zero shifted-product coordinate.
-Quotient-scalar descent makes this normalization independent of the representative;
-its countable-product exactness hypothesis holds on the small pro-etale site.
-3. Ordinary derived tensor is exact. The cone shift comparison is (x,y) ↦ (x,(-1)^m y);
-it fixes (c(z),0). Thus chi and its inverse commute with the specified shifts, and the
-completed restriction is exact for those shifts and the inherited triangles.
-4. The scalar-completion associator equation identifies the completed associator with
-ordinary tensor balancing conjugated by these same chi maps. This is precisely the
-normalization of the integral pullback realization and the chosen framework associator.
-5. Naturality of chi moves its inner component across the outer scalar functor.
-Multiplying by the inverse comparison on both sides and cancelling gives the inverse
-cocycle with the stated arrow directions.
-6. For equal fields ordinary multiplication identifies the tensor unit and chi is the
-completeness unit. Its inverse is the normalized unit. The two associator unit equations
-therefore give both comparison unit squares, also when all fields coincide.
-7. Raw semilinear scalar localization sends these maps and their inverses to the
-specified rational comparisons: the source uniformizer is invertible in the final
-field. It preserves composition, whiskering, shifts and the integral-lift equation.
-The identity raw equivalences preserve each scalar and integral tensor factor.
-8. For four nested fields expand the three successive inverse comparisons. Twice use
-the cocycle and naturality; the two contractions become j_30 followed by J_3 of the
-two framework associator composites. The framework pentagon equates them, and the
-PBC pentagon identifies the corresponding contractions on that side. Unit substitutions
-cover every repeated-field degeneracy. -/
+four-field compatibility, including repeated fields. -/
 theorem fdCompletionInverseScalarCoherence
     (_D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ _D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

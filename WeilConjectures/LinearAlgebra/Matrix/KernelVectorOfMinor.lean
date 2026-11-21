@@ -27,12 +27,7 @@ variable {R : Type*} [CommRing R] {m n : Type*} [Fintype n]
 
 /-- **A kernel vector with a unit entry.** Let `B : R^n → R^m` have an invertible `a × a` minor,
 with `|n| = a + 1`, and let `u` be a vector of the kernel of `B` with `c • u = 0 → c = 0` for
-`c : R`. Then the kernel of `B` contains a vector `w` with `w j = 1` for some `j`.
-
-Let `j` be the column outside the minor and `S` the minor. The rows of the minor cut out the free
-rank one submodule spanned by the vector `w` with `w j = 1` whose other coordinates are
-`-S⁻¹ B_{•j}`, so `u = u j • w`. Then `u j • B w = 0`, hence `(B w)_r • u = 0` for every `r`, and
-`B w = 0` by faithfulness. -/
+`c : R`. Then the kernel of `B` contains a vector `w` with `w j = 1` for some `j`. -/
 theorem exists_mulVec_eq_zero_and_eq_one_of_isUnit_det_submatrix {a : ℕ} (B : Matrix m n R)
     (e₁ : Fin a → m) (e₀ : Fin a → n) (hB : IsUnit (B.submatrix e₁ e₀).det)
     (hcard : Fintype.card n = a + 1) (u : n → R) (hu : B *ᵥ u = 0)

@@ -365,7 +365,7 @@ private theorem podCompletedRingMap_eq_inverseImage {V W : Scheme.{u}} (k : V �
   rfl
 
 /-- Composition of exact completed inverse image is fixed on all local sections.
-Source: node proof steps 1 and 7, Stacks 00WX. -/
+Source: Stacks 00WX. -/
 theorem podCompletedModuleComp_existsUnique :
     ∃! e : podCompletedModuleInverseImage l E (h ≫ g) ≅
         podCompletedModuleInverseImage l E g ⋙ podCompletedModuleInverseImage l E h,

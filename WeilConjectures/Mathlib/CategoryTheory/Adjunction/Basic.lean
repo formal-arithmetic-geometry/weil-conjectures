@@ -31,7 +31,6 @@ restriction `L.op ⋙ F` along a left adjoint `L ⊣ R` by `R.obj Y`.
   `R Y` when the counit is invertible at `Y`.
 - `CategoryTheory.Adjunction.subsingleton_hom_of_isZero_leftAdjoint`: there is at most one
   morphism from an object killed by a left adjoint to an object in the image of its right adjoint.
-
 -/
 
 @[expose] public section
@@ -47,19 +46,7 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
 /-- The transpose along `adj.comp adjS : L ⋙ S ⊣ S' ⋙ R` of the morphism
 `S (ε_Y) ≫ g : S (L (R Y)) ⟶ M` is the image under `R` of the transpose of `g` along
 `adjS`, where `ε` is the counit of `adj : L ⊣ R`. Both sides are morphisms
-`R Y ⟶ R (S' M)`, and the equality between them is the naturality square of the unit `η` of
-`adjS` at `ε_Y`
-```
-                     η_{L (R Y)}
-     L (R Y) --------------------------> S' (S (L (R Y)))
-        |                                       |
-       ε_Y                              S' (S (ε_Y))
-        ↓                                       ↓
-        Y ------------------------------> S' (S Y)
-                         η_Y
-```
-composed with the right triangle identity of `adj`, which says that
-`R Y ⟶ R (L (R Y)) ⟶ R Y` is the identity. -/
+`R Y ⟶ R (S' M)`. -/
 theorem comp_homEquiv_map_counit_app_comp (Y : C) (M : E) (g : S.obj Y ⟶ M) :
     (adj.comp adjS).homEquiv (R.obj Y) M (S.map (adj.counit.app Y) ≫ g) =
       R.map (adjS.homEquiv Y M g) := by

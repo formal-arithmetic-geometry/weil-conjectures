@@ -55,11 +55,7 @@ include hj τ GC in
 lisse representation of `W(U₀)` on which the inertia group `I_z` at a boundary point `z` acts
 trivially. Then every element of `W(U₀)` of degree zero acting trivially on the covers of `U₀`
 which extend over `z` (`AlgebraicGeometry.WeilGroup.weilLocalKernel`) acts trivially through `ρ`.
-
-The elements of the geometric part acting trivially form a closed normal subgroup `N` of
-`W(U₀)`, since `ρ` is continuous on the geometric part. Its image in `π₁(U₀)` is compact, hence
-closed, and normal since the Weil group is dense; it contains the inertia group, hence the local
-kernel (`AlgebraicGeometry.WeilGroup.localKernel_le_topologicalClosure_normalClosure`). -/
+-/
 theorem apply_eq_self_of_mem_weilLocalKernel
     {ρ : Representation (PadicAlgCl l) (weilGroup pU sU GU) V}
     (hρ : (ofFundamentalGroup pU sU GU).IsLisse l ρ) (z : ↥((Set.range j.base)ᶜ))
@@ -257,12 +253,7 @@ omit [IsIntegral C] [GeometricallyConnected (U ↘ Spec (.of K))] [ConnectedSpac
 open of a smooth geometrically connected curve, `z` a boundary point, `V₀ = U₀ ∪ {z}` and `F` a
 lisse Weil sheaf on `U₀`, punctually `ι`-pure of weight `w`. If the monodromy of `F` on `Ū` at a
 geometric point `t` (`AlgebraicGeometry.ProEtale.universalLisseMonodromy`) is trivial on the
-kernel of `π₁(Ū, t) → π₁(V̄, t)`, then the stalk `(j_* F)_z̄` is `ι`-pure of weight `w`: `F`
-extends to a lisse Weil sheaf `G` on `V₀`
-(`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`), which is pure of
-weight `w` since its restriction to `U₀` is
-(`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`), and
-`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄`. -/
+kernel of `π₁(Ū, t) → π₁(V̄, t)`, then the stalk `(j_* F)_z̄` is `ι`-pure of weight `w`. -/
 theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.base)ᶜ))
     {F : WeilSheaf K l U} (hF : F.IsLisse)
     (t : Spec (.of (AlgebraicClosure K)) ⟶ (U ↘ Spec (.of K)).geometricFiber)
@@ -360,8 +351,8 @@ variable (sU : Spec (.of (AlgebraicClosure K)) ⟶ U)
   (GC : Type u) [Group GC] [TopologicalSpace GC] [IsTopologicalGroup GC] [CompactSpace GC]
   [∀ P, MulAction GC ((fiber sC).obj P)] [IsFundamentalGroup (fiber sC) GC]
 
-/-- Blueprint `corollary-unramified-boundary-point--2` (first clause, inertia form), together with
-`definition-weil-representation--1`.
+/-- Purity at an unramified boundary point, in inertia form, for a lisse sheaf–representation
+equivalence.
 
 Let `j : U₀ ⟶ C₀` be a nonempty open of a smooth geometrically connected curve over `𝔽_q`, `U₀`
 geometrically connected, with the boundary datum of actual inertia groups and residue Frobenius
@@ -369,16 +360,7 @@ lifts (`AlgebraicGeometry.WeilGroup.boundaryDatum`). There is a lisse sheaf–re
 equivalence `ℱ ↦ (V, ρ)` for `W(U₀)`, identifying the stalk `ℱ_x̄` with its local Frobenius with
 `V` with `ρ (Frob_x)` at the closed points of `U₀`, such that: if `ℱ` is punctually `ι`-pure of
 weight `w` and the inertia group `I_z` at a boundary point `z` acts trivially on `V` (the boundary
-stalk `V ^ (I_z)` is everything), then the stalk `(j_* ℱ)_z̄` is `ι`-pure of weight `w`.
-
-The equivalence is the Weil fundamental representation at the monodromy of universal covers
-(`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_of_lisseMonodromy`). A representation
-trivial on `I_z` is trivial on the kernel of `π₁(U₀) → π₁(U₀ ∪ {z})`
-(`AlgebraicGeometry.WeilGroup.apply_eq_self_of_mem_weilLocalKernel`), which contains the images
-of the loops of `Ū` trivial on `V̄`
-(`AlgebraicGeometry.WeilGroup.BasePointData.geomAut_mem_fixingSubgroup`); so `ℱ` extends to a
-lisse Weil sheaf on `U₀ ∪ {z}` and the stalk is pure
-(`AlgebraicGeometry.WeilGroup.isPureOfWeight_stalk_directImage_of_rep_eq_self`). -/
+stalk `V ^ (I_z)` is everything), then the stalk `(j_* ℱ)_z̄` is `ι`-pure of weight `w`. -/
 theorem exists_equivalence_isLisse_isPureOfWeight_stalk_directImage :
     ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l U ↦ F.IsLisse) ≌
         ObjectProperty.FullSubcategory ((ofFundamentalGroup (U ↘ Spec (.of K)) sU GU).isLisseRep l),

@@ -21,6 +21,15 @@ member `g` of the Frobenius conjugacy class of `x` in the Weil group.
 
 - `AlgebraicGeometry.WeilGroup.exists_equivalence_localPolynomial_stalk`: the local polynomials
   of a lisse Weil sheaf are those of its Weil fundamental representation.
+
+## Implementation details
+
+Exterior powers and determinants of lisse Weil sheaves are defined by transport along the
+equivalence: the lisse Weil sheaf with representation `∧ʳρ` or `det ρ` and its local polynomials
+are given by `AlgebraicGeometry.WeilGroup.exists_weilSheaf_of_isLisse` applied to
+`ρ.exteriorPower r` (`AlgebraicGeometry.WeilGroup.IsLisse.exteriorPower`) or to
+`Representation.ofCharacter ρ.detCharacter`
+(`AlgebraicGeometry.WeilGroup.IsLisse.ofCharacter_detCharacter`).
 -/
 
 @[expose] public section
@@ -43,10 +52,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
 Under the lisse sheaf–representation equivalence `ℱ ↦ (V, ρ)` of
 `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse`, the local characteristic factor
 `P_x(ℱ, T) = det (1 - T F_x ∣ ℱ_x̄)` of a lisse Weil sheaf `ℱ` at a closed point `x` is
-`det (1 - T ρ(g) ∣ V)` for every `g ∈ W(C₀)` conjugate to the local Frobenius element at `x`:
-the stalk `ℱ_x̄` with `F_x` is `V` with `ρ (Frob_x)`, and a characteristic polynomial is invariant
-under conjugation (`AlgebraicGeometry.WeilGroup.localPolynomial_eq_charpolyRev_of_isConj`).
-The operations on lisse Weil sheaves are transported along this equivalence. -/
+`det (1 - T ρ(g) ∣ V)` for every `g ∈ W(C₀)` conjugate to the local Frobenius element at `x`. -/
 theorem exists_equivalence_localPolynomial_stalk :
     ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌
         ObjectProperty.FullSubcategory (W.isLisseRep l),
@@ -107,14 +113,7 @@ sheaves are computed by the corresponding operations on representations: for eve
 * `P_x(ℱ, T) = det (1 - T ρ_ℱ(g) ∣ V_ℱ)`;
 * `P_x(ℱ^∨, T) = det (1 - T ρ_ℱ^∨(g) ∣ V_ℱ^∨)`;
 * `P_x(ℱ ⊗ 𝒢, T) = det (1 - T (ρ_ℱ ⊗ ρ_𝒢)(g) ∣ V_ℱ ⊗ V_𝒢)`;
-* `P_x(ℱ ⊕ 𝒢, T) = P_x(ℱ, T) P_x(𝒢, T)`.
-
-Exterior powers and determinants of lisse Weil sheaves are defined by transport along the
-equivalence: the lisse Weil sheaf with representation `∧ʳρ` or `det ρ` and its local polynomials
-are given by `AlgebraicGeometry.WeilGroup.exists_weilSheaf_of_isLisse` applied to
-`ρ.exteriorPower r` (`AlgebraicGeometry.WeilGroup.IsLisse.exteriorPower`) or to
-`Representation.ofCharacter ρ.detCharacter`
-(`AlgebraicGeometry.WeilGroup.IsLisse.ofCharacter_detCharacter`). -/
+* `P_x(ℱ ⊕ 𝒢, T) = P_x(ℱ, T) P_x(𝒢, T)`. -/
 theorem exists_equivalence_localPolynomial_operations :
     ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌
         ObjectProperty.FullSubcategory (W.isLisseRep l),

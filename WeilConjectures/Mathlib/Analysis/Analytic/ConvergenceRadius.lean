@@ -29,7 +29,7 @@ applied to the coefficients of `f`, and `FormalMultilinearSeries.radius` of that
 usual radius of convergence.
 
 This file also introduces nonnegative series, those all of whose complex coefficients lie in
-`ℝ≥0`, and proves the comparison results of the real-sheaves chapter: a factor of a convergent
+`ℝ≥0`, and proves comparison results for them: a factor of a convergent
 product of nonnegative series with constant term `1` has at least the radius of the product,
 and a polynomial whose inverse has radius `R` has no zero in
 the open disc of radius `R`.
@@ -53,6 +53,17 @@ the open disc of radius `R`.
   `P_j(0) = 1` form such a product, no `P_j` vanishes inside its disc of convergence.
 - `PowerSeries.le_radius_of_differentiableOn` : the Taylor series at `0` of a function
   holomorphic on the disc of radius `R` has radius at least `R`.
+
+## Implementation details
+
+`PowerSeries.radius` is defined as the radius of convergence of the formal multilinear series
+`FormalMultilinearSeries.ofScalars 𝕜 (fun n ↦ coeff n f)`, whose `n`-th coefficient is `aₙ` by
+`FormalMultilinearSeries.coeff_ofScalars`. By `FormalMultilinearSeries.radius` it is the supremum
+of the `r ≥ 0` for which `‖aₙ‖ rⁿ` is bounded, and boundedness of `‖aₙ‖ rⁿ` for one `r` is
+equivalent to summability of `∑ₙ ‖aₙ‖ tⁿ` for all `t < r`
+(`FormalMultilinearSeries.summable_norm_mul_pow` and
+`FormalMultilinearSeries.le_radius_of_summable_norm`), so this agrees with the classical
+definition.
 -/
 
 @[expose] public section
@@ -64,25 +75,13 @@ namespace PowerSeries
 /-- Radius of a formal series.
 
 The radius of convergence `R(f) ∈ ℝ≥0∞` of a formal power series `f = ∑ aₙ Tⁿ ∈ 𝕜⟦X⟧` over a
-nontrivially normed field `𝕜`.
-
-This is defined as the radius of convergence of the associated formal multilinear series
-`FormalMultilinearSeries.ofScalars 𝕜 (fun n ↦ coeff n f)`, whose `n`-th coefficient is `aₙ` by
-`FormalMultilinearSeries.coeff_ofScalars`. It agrees with the description in the blueprint as
-the supremum of the `r ≥ 0` for which `∑ₙ ‖aₙ‖ tⁿ` converges for all `0 ≤ t < r`: by
-`FormalMultilinearSeries.radius` it is the supremum of the `r ≥ 0` for which `‖aₙ‖ rⁿ` is
-bounded, and boundedness of `‖aₙ‖ rⁿ` for one `r` is equivalent to summability of
-`∑ₙ ‖aₙ‖ tⁿ` for all `t < r` (`FormalMultilinearSeries.summable_norm_mul_pow` and
-`FormalMultilinearSeries.le_radius_of_summable_norm`). -/
+nontrivially normed field `𝕜`: the supremum of the `r ≥ 0` for which `∑ₙ ‖aₙ‖ tⁿ` converges for
+all `0 ≤ t < r`. -/
 noncomputable def radius {𝕜 : Type*} [NontriviallyNormedField 𝕜] (f : 𝕜⟦X⟧) : ℝ≥0∞ :=
   (FormalMultilinearSeries.ofScalars 𝕜 fun n ↦ coeff n f).radius
 
-/-- Radius of a formal series.
-
-A formal power series `f = ∑ aₙ Tⁿ ∈ ℂ⟦X⟧` has nonnegative coefficients if every `aₙ` is a
-nonnegative real number. These are the series for which the coefficientwise comparison
-arguments of the real-sheaves chapter apply: a coefficientwise bound between them is preserved
-by products and gives a bound on the radius of convergence. -/
+/-- A formal power series `f = ∑ aₙ Tⁿ ∈ ℂ⟦X⟧` has nonnegative coefficients if every `aₙ` is a
+nonnegative real number. -/
 def HasNonnegCoeffs (f : ℂ⟦X⟧) : Prop :=
   ∀ n, coeff n f ∈ Set.range ((↑) : ℝ≥0 → ℂ)
 
@@ -116,8 +115,7 @@ theorem radius_le_radius_of_norm_coeff_le {f g : 𝕜⟦X⟧} (h : ∀ n, ‖coe
     (summable_norm_coeff_mul_pow hr).of_nonneg_of_le (fun _ ↦ by positivity)
       fun n ↦ mul_le_mul_of_nonneg_right (h n) (by positivity)
 
-/-- The radius of a product of two series is at least the smaller of their radii: inside both
-discs the Cauchy product of the two absolutely convergent series converges absolutely. -/
+/-- The radius of a product of two series is at least the smaller of their radii. -/
 theorem min_radius_le_radius_mul (f g : 𝕜⟦X⟧) : min f.radius g.radius ≤ (f * g).radius := by
   refine ENNReal.le_of_forall_nnreal_lt fun r hr ↦ le_radius_of_summable ?_
   set a : ℕ → ℝ := fun n ↦ ‖coeff n f‖ * (r : ℝ) ^ n
@@ -181,8 +179,7 @@ theorem le_radius_coe_mul_inv_prod (P : Polynomial 𝕜) (s : Multiset 𝕜) {r 
     exact le_radius_inv_one_sub_C_mul_X (hr c (Multiset.mem_cons_self c s))
 
 /-- A polynomial with nonzero constant term has no zero inside the disc of convergence of its
-inverse: at such a zero `z` the Cauchy product of the convergent series `P (z) = ∑ pₙ zⁿ` and
-`P⁻¹ (z) = ∑ bₙ zⁿ` would be the value `1` of the series `P P⁻¹ = 1`. -/
+inverse. -/
 theorem eval_ne_zero_of_lt_radius_inv [CompleteSpace 𝕜] {P : Polynomial 𝕜} (hP : P.coeff 0 ≠ 0)
     {z : 𝕜} (hz : (‖z‖₊ : ℝ≥0∞) < ((P : 𝕜⟦X⟧)⁻¹).radius) : P.eval z ≠ 0 := by
   set G := (P : 𝕜⟦X⟧)⁻¹
@@ -231,12 +228,7 @@ theorem hasNonnegCoeffs_iff {f : ℂ⟦X⟧} : f.HasNonnegCoeffs ↔ ∀ n, 0 �
 /-- Positive products and radii of convergence.
 
 Let `(f_j)` be a family of series in `1 + T ℝ≥0⟦T⟧` whose product converges in the product
-topology. Then every factor `f_j` has radius of convergence at least that of the product.
-
-Indeed nonnegativity and the constant terms `1` give the coefficientwise inequality
-`0 ≤ a_{j, n} ≤ A_n` between the coefficients of `f_j` and those of the product, first for the
-finite partial products containing `f_j` and then, the set of such series being closed, for the
-product itself. -/
+topology. Then every factor `f_j` has radius of convergence at least that of the product. -/
 theorem radius_tprod_le_radius {J : Type*} {f : J → ℂ⟦X⟧} (hf : ∀ j, (f j).HasNonnegCoeffs)
     (h1 : ∀ j, constantCoeff (f j) = 1) (hmul : Multipliable f) (j : J) :
     (∏' i, f i).radius ≤ (f j).radius := by
@@ -279,14 +271,11 @@ theorem radius_tprod_le_radius {J : Type*} {f : J → ℂ⟦X⟧} (hf : ∀ j, (
   rw [RCLike.norm_ofReal, RCLike.norm_ofReal, abs_of_nonneg ha, abs_of_nonneg hb]
   exact_mod_cast hab
 
-/-- Blueprint `lemma-positivity-convergence--1` (the "in particular" clause): Positive products
-and radii of convergence.
+/-- Positive products and zeros of polynomials.
 
 Let `(P_j)` be polynomials with `P_j(0) = 1` whose inverses `f_j = P_j⁻¹` lie in
 `1 + T ℝ≥0⟦T⟧` and have a convergent product `F = ∏ f_j`. Then no `P_j` vanishes in the open
-disc of radius `R(F)`: each `P_j⁻¹` has radius at least `R(F)` by `radius_tprod_le_radius`, and
-a polynomial has no zero inside the disc of convergence of its inverse
-(`eval_ne_zero_of_lt_radius_inv`). -/
+disc of radius `R(F)`. -/
 theorem eval_ne_zero_of_lt_radius_tprod_inv {J : Type*} {P : J → Polynomial ℂ}
     (hP : ∀ j, (P j).coeff 0 = 1) (hf : ∀ j, ((P j : ℂ⟦X⟧)⁻¹).HasNonnegCoeffs)
     (hmul : Multipliable fun j ↦ (P j : ℂ⟦X⟧)⁻¹) (j : J) {z : ℂ}
@@ -296,13 +285,10 @@ theorem eval_ne_zero_of_lt_radius_tprod_inv {J : Type*} {P : J → Polynomial �
       rw [constantCoeff_inv, ← coeff_zero_eq_constantCoeff_apply, Polynomial.coeff_coe, hP,
         inv_one]) hmul j
 
-/-- Blueprint `lemma-positivity-convergence--1` (holomorphic hypothesis): Positive products and
-radii of convergence.
+/-- Taylor series of holomorphic functions and radii of convergence.
 
 If `F ∈ ℂ⟦X⟧` is the Taylor series at `0` of a function `g` holomorphic on the open disc of
-radius `R`, then `F` has radius of convergence at least `R`: on every closed disc of radius
-`r < R` the Cauchy integral formula expands `g` into a power series, which agrees with the
-Taylor series of `g` by uniqueness of power series expansions. -/
+radius `R`, then `F` has radius of convergence at least `R`. -/
 theorem le_radius_of_differentiableOn {g : ℂ → ℂ} {R : ℝ≥0∞} {F : ℂ⟦X⟧}
     (hg : DifferentiableOn ℂ g (Metric.eball 0 R))
     (hF : ∀ n, coeff n F = iteratedDeriv n g 0 / n.factorial) : R ≤ F.radius := by
@@ -329,8 +315,7 @@ theorem le_radius_of_differentiableOn_tprod {J : Type*} {f : J → ℂ⟦X⟧}
     R ≤ (f j).radius :=
   (le_radius_of_differentiableOn hg hF).trans (radius_tprod_le_radius hf h1 hmul j)
 
-/-- Blueprint `lemma-positivity-convergence--1` (the "in particular" clause): Positive products
-and radii of convergence.
+/-- Positive products and zeros of polynomials.
 
 Let `(P_j)` be polynomials with `P_j(0) = 1` whose inverses `f_j = P_j⁻¹` lie in
 `1 + T ℝ≥0⟦T⟧` and have a convergent product `F = ∏ f_j`. If `F` is the Taylor series at `0` of
@@ -352,8 +337,7 @@ section Pole
 variable {𝕜 : Type*} [NontriviallyNormedField 𝕜] [CompleteSpace 𝕜]
 
 /-- If `f Q = P` for polynomials `P` and `Q`, then inside the disc of convergence of `f` the
-sum of `f` at `z` times `Q (z)` is `P (z)`: the Cauchy product of the two absolutely convergent
-series. -/
+sum of `f` at `z` times `Q (z)` is `P (z)`. -/
 theorem tsum_mul_eval_eq_eval_of_mul_eq {f : 𝕜⟦X⟧} {P Q : Polynomial 𝕜}
     (h : f * (Q : 𝕜⟦X⟧) = P) {z : 𝕜} (hz : (‖z‖₊ : ℝ≥0∞) < f.radius) :
     (∑' n, coeff n f * z ^ n) * Q.eval z = P.eval z := by
@@ -392,9 +376,7 @@ theorem radius_le_of_mul_eq {f : 𝕜⟦X⟧} {P Q : Polynomial 𝕜} (h : f * (
 
 /-- **A rational function which is not a polynomial has a pole.** If `f D = N` for polynomials
 `N` and `D ≠ 0` over `ℂ`, every zero of `D` has absolute value at most `R`, and `f` is not
-everywhere convergent, then the radius of convergence of `f` is at most `R`: in lowest terms
-`f = N₀ / D₀` the denominator `D₀` divides `D` and is not constant, and a zero of `D₀` is not a
-zero of `N₀`. -/
+everywhere convergent, then the radius of convergence of `f` is at most `R`. -/
 theorem radius_le_of_mul_coe_eq {f : ℂ⟦X⟧} {N D : Polynomial ℂ} (h : f * D = N) (hD : D ≠ 0)
     {R : ℝ≥0} (hroots : ∀ z, D.eval z = 0 → ‖z‖₊ ≤ R) (hf : f.radius ≠ ⊤) : f.radius ≤ R := by
   classical
@@ -437,10 +419,7 @@ end Pole
 section LogDerivative
 
 /-- **The solution of `f' = g f` converges where `g` does.** If `f' = g f`, then the radius of
-convergence of `f` is at least that of `g`: writing `mₙ = ‖fₙ‖ rⁿ` for `r` inside the disc of
-`g`, the recursion `(n + 1) f_{n + 1} = ∑_{i + j = n} gᵢ fⱼ` gives
-`(n + 1) m_{n + 1} ≤ r C (m₀ + ⋯ + mₙ)` with `C = ∑ ‖gᵢ‖ rⁱ`, so the partial sums of the `mₙ`
-grow more slowly than any exponential `(1 + ε)ⁿ`. -/
+convergence of `f` is at least that of `g`. -/
 theorem radius_le_radius_of_derivative_eq_mul {f g : ℂ⟦X⟧} (h : derivative (R := ℂ) f = g * f) :
     g.radius ≤ f.radius := by
   refine ENNReal.le_of_forall_nnreal_lt fun r hr ↦ ENNReal.le_of_forall_nnreal_lt fun ρ hρ ↦ ?_
@@ -548,8 +527,7 @@ section NonnegRecursion
 open scoped ComplexOrder
 
 /-- If `X G' = S G` with `S` having nonnegative coefficients and no constant term, and `G` has a
-nonnegative constant coefficient, then all the coefficients of `G` are nonnegative: the
-recursion `n gₙ = ∑_{i + j = n, i ≥ 1} sᵢ gⱼ` preserves nonnegativity. -/
+nonnegative constant coefficient, then all the coefficients of `G` are nonnegative. -/
 theorem coeff_nonneg_of_X_mul_derivative_eq {G S : ℂ⟦X⟧} (h : X * derivative (R := ℂ) G = S * G)
     (hS : ∀ n, 0 ≤ coeff n S) (hS0 : coeff 0 S = 0) (hG0 : 0 ≤ coeff 0 G) (k : ℕ) :
     0 ≤ coeff k G := by

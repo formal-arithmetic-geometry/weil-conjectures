@@ -115,15 +115,8 @@ injectives. There is a first quadrant double complex `D` of abelian groups such 
   presheaf `ℋ^q(F) : V ↦ H^q(V, F)`;
 * the total complex of `D` computes the cohomology `H^n(X, F)`.
 
-It is `D^{p, q} = C^p(𝔘, I^q)` for an injective resolution `F → I^•`: the cohomology of the
-complex `I^•(V)` is `H^•(V, F)` (`Sheaf.cohomologyPresheafIso`) and cohomology commutes with the
-products defining the Čech complex, so the columns compute `C^p(𝔘, ℋ^q(F))` (Step 2); the
-augmented Čech complex of the injective sheaf `I^q` is exact (Stacks `03F6`, `03AW`), so
-`I^•(X) ⟶ Tot D` is a quasi-isomorphism and the total complex computes
-`H^n(I^•(X)) = H^n(X, F)` (Step 3).
-
-The groups `I^q(V)` are only `v`-small, so `D` lives in `AddCommGrpCat.{v}`; this is why the
-covering is indexed by `ι : Type v` and the cohomology is computed in `AddCommGrpCat.{v}`. See
+It is `D^{p, q} = C^p(𝔘, I^q)` for an injective resolution `F → I^•`. The covering is indexed
+by `ι : Type v` and the cohomology is computed in `AddCommGrpCat.{v}`; see
 `Sheaf.exists_cechDoubleComplex_uliftFunctor` for other universes. -/
 theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
     [EnoughInjectives (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)

@@ -23,10 +23,10 @@ and conversely for a scheme with a single point.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`: blueprint
-  `lemma-finite-quasi-finite-direct-images`, part 3.
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite`,
-  `AlgebraicGeometry.WeilSheaf.IsReal.higherLowerShriek_zero_of_quasiFinite`.
+- `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite`,
+  `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite`,
+  `AlgebraicGeometry.WeilSheaf.IsReal.higherLowerShriek_zero_of_quasiFinite`: `f₀!` preserves
+  upper weight bounds, punctual purity and `ι`-reality.
 - `AlgebraicGeometry.WeilSheaf.HasWeightsAtMost.compactlySupportedCohomology_zero`,
   `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.compactlySupportedCohomology_zero`,
   `AlgebraicGeometry.WeilSheaf.IsReal.compactlySupportedCohomology_zero`, and the converses
@@ -93,9 +93,7 @@ theorem WeilSheaf.exists_hasEigenvalue_stalk_of_hasEigenvalue_stalk_higherLowerS
   exact Scheme.Hom.degreeOver_ne_zero _ x.2 hde.symm
 
 /-- For a separated quasi-finite morphism `f : X ⟶ Y` of `k₀`-schemes the exact functor `f₀!`
-preserves punctual upper weight bounds: at a closed point `y` the Frobenius permutes the points
-above `y`; on an orbit of length `e` an eigenvalue `α` upstairs contributes eigenvalues `β` with
-`βᵉ = α` downstairs, whose normalized weights agree because `q_x = q_yᵉ`. -/
+preserves punctual upper weight bounds. -/
 theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
     {F : WeilSheaf k₀ l X} (h : F.HasWeightsAtMost ι w) :
     ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).HasWeightsAtMost ι w := by
@@ -107,9 +105,7 @@ theorem WeilSheaf.HasWeightsAtMost.higherLowerShriek_zero_of_quasiFinite {w : �
   exact (pow_le_natCast_pow_rpow_iff (norm_nonneg _) _ he _).1 hw
 
 /-- For a separated quasi-finite morphism `f` of `k₀`-schemes the exact functor `f₀!` preserves
-punctual purity of weight `w`: every
-eigenvalue `β` of the local Frobenius at `y` has a power `βᵉ` which is an eigenvalue at a point `x`
-above `y` with `q_x = q_yᵉ`. -/
+punctual purity of weight `w`. -/
 theorem WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite {w : ℝ}
     {F : WeilSheaf k₀ l X} (h : F.IsPunctuallyPureOfWeight ι w) :
     ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsPunctuallyPureOfWeight ι w := by
@@ -121,8 +117,7 @@ theorem WeilSheaf.IsPunctuallyPureOfWeight.higherLowerShriek_zero_of_quasiFinite
   exact (pow_eq_natCast_pow_rpow_iff (norm_nonneg _) _ he _).1 hw
 
 /-- For a separated quasi-finite morphism `f` of `k₀`-schemes the exact functor `f₀!` preserves
-`ι`-reality: the local polynomial of `f₀!F` at `y` is a product of expansions
-`det (1 - T^{e_x} F_x)` of local polynomials of `F`. -/
+`ι`-reality. -/
 theorem WeilSheaf.IsReal.higherLowerShriek_zero_of_quasiFinite {F : WeilSheaf k₀ l X}
     (h : F.IsReal ι) : ((WeilSheaf.higherLowerShriek k₀ l f 0).obj F).IsReal ι := by
   have isReal_of_charpolyRev_eq_prod {α : Type u}
@@ -197,8 +192,7 @@ theorem WeilSheaf.IsPunctuallyPureOfWeight.compactlySupportedCohomology_zero {w 
   exact (pow_eq_natCast_pow_rpow_iff (norm_nonneg _) _
     (Scheme.Hom.degreeOver_ne_zero _ t.2) _).1 hw
 
-/-- On a scheme quasi-finite over `k₀`, `H_c^0` of an `ι`-real Weil sheaf is `ι`-real: its local
-polynomial is the product of the expansions `det (1 - T^{deg t} F_t)`. -/
+/-- On a scheme quasi-finite over `k₀`, `H_c^0` of an `ι`-real Weil sheaf is `ι`-real. -/
 theorem WeilSheaf.IsReal.compactlySupportedCohomology_zero (h : G.IsReal ι) :
     (G.compactlySupportedCohomology 0).IsReal ι := by
   have : Finite T :=
@@ -214,8 +208,7 @@ theorem WeilSheaf.IsReal.compactlySupportedCohomology_zero (h : G.IsReal ι) :
 variable [Subsingleton T]
 
 /-- On a scheme with a single point, quasi-finite over `k₀`, weights at most `v` on `H_c^0`
-(relative to `q = #k₀`) give punctual weights at most `v`: the local polynomial of `H_c^0` is
-`det (1 - T^d F_t)`, so every eigenvalue of `F_t` is the `d`-th power of one on `H_c^0`. -/
+(relative to `q = #k₀`) give punctual weights at most `v`. -/
 theorem WeilSheaf.hasWeightsAtMost_of_compactlySupportedCohomology_zero {v : ℝ}
     (h : (G.compactlySupportedCohomology 0).HasWeightsAtMostOver k₀ ι v) :
     G.HasWeightsAtMost ι v := by
@@ -241,7 +234,7 @@ theorem WeilSheaf.isPunctuallyPureOfWeight_of_compactlySupportedCohomology_zero 
   exact (pow_eq_natCast_pow_rpow_iff (norm_nonneg _) _ hd _).2 (h β hβ)
 
 /-- On a scheme with a single point, quasi-finite over `k₀`, if `H_c^0` is `ι`-real then so is
-the Weil sheaf: the local polynomial of `H_c^0` is the expansion `det (1 - T^d F_t)`. -/
+the Weil sheaf. -/
 theorem WeilSheaf.isReal_of_compactlySupportedCohomology_zero
     (h : (G.compactlySupportedCohomology 0).IsReal ι) : G.IsReal ι := by
   intro t

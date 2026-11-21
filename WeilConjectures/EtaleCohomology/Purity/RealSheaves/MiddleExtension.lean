@@ -72,10 +72,7 @@ immersion and `ℱ` a lisse Weil sheaf on `U₀`. Then, as power series in `T`,
 
 the product over the closed points being locally finite: for every `n` and every finite set `s`
 of closed points containing those of degree at most `n`, the coefficients of `T ^ n` of the
-finite product over `s` and of the right-hand side agree.
-
-This is the trace formula in its Euler-product form for the constructible sheaf `j_* ℱ` in
-degree zero, whose compactly supported cohomology vanishes outside degrees `1` and `2`. -/
+finite product over `s` and of the right-hand side agree. -/
 theorem coeff_prod_inv_localPolynomial_stalk_directImage (F : WeilSheaf k₀ l U) (hF : F.IsLisse)
     (n : ℕ) (s : Finset C.finitePoints)
     (hs : ∀ x : C.finitePoints, (C ↘ Spec (CommRingCat.of k₀)).degreeOver x.1 ≤ n → x ∈ s) :

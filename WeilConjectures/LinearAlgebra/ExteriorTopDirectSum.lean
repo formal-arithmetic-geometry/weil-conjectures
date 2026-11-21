@@ -157,19 +157,9 @@ private theorem tensor_wedge_ext
   intro n
   exact h m n
 
-/--
-
-Choose bases of `M` and `N`. The top exterior-power basis lemma
-`lem-weil-pbc-exterior-power-free-basis` gives one-element wedge bases of their top powers
-and of the top power of the concatenated basis of `M × N`.
-The product-basis lemma `lem-sc-tensor-product-free-basis` gives the tensor of the two
-one-element bases as a basis of the tensor product. Sending this tensor basis vector to
-the concatenated wedge basis vector defines an isomorphism with coefficient +1.
-Expand arbitrary vectors in the chosen bases by multilinearity, remove repeated factors
-by alternation, and reorder using anticommutation: the same coefficients occur before
-and after the two inclusions, giving the displayed formula on all pure wedges.
-Pure wedges span exterior powers and pure tensors span the tensor product, so this
-formula determines the isomorphism uniquely and makes it independent of the bases. -/
+/-- For free modules `M` and `N` of ranks `r` and `s`, there is a unique isomorphism
+`⋀^(r + s) (M × N) ≃ ⋀^r M ⊗ ⋀^s N` whose inverse sends `(m₁ ∧ ⋯ ∧ m_r) ⊗ (n₁ ∧ ⋯ ∧ n_s)` to
+`(m₁, 0) ∧ ⋯ ∧ (m_r, 0) ∧ (0, n₁) ∧ ⋯ ∧ (0, n_s)`. -/
 theorem existsUnique_topDirectSum
     {R : Type u} [CommRing R]
     {M : Type v} [AddCommGroup M] [Module R M]
@@ -192,15 +182,9 @@ theorem existsUnique_topDirectSum
     have h' : e.symm = a := LinearEquiv.toLinearMap_injective h
     exact congrArg LinearEquiv.symm h'
 
-/--
-
-Apply isomorphisms `f` and `g` to the pure-wedge characterization of the two isomorphisms.
-Exterior-power maps send each wedge to the wedge of the images, tensor-product maps send
-pure tensors to the tensors of their images, and the inclusions into the direct sum
-commute with `f` and `g`. Thus the naturality square commutes on pure tensors of wedges.
-These span by the exterior-power and tensor-product universal properties, so the square
-commutes everywhere. Taking inverses gives the displayed naturality in the orientation
-from the top exterior power of the direct sum to the tensor product. -/
+/-- The isomorphisms `⋀^(r + s) (M × N) ≃ ⋀^r M ⊗ ⋀^s N` characterised on wedges as in
+`exteriorPower.existsUnique_topDirectSum` are natural with respect to isomorphisms
+`f : M ≃ M'` and `g : N ≃ N'`. -/
 theorem topDirectSum_natural
     {R : Type u} [CommRing R]
     {M : Type v} [AddCommGroup M] [Module R M]

@@ -182,12 +182,10 @@ variable {U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [IsC
   [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
 include hij in
-/-- Blueprint `prop-constructible-open-closed`, first assertion: stratifications of the members
-of a complementary pair `(j, i)` concatenate to a stratification of `X`: the strata are the
-images of the strata of `U` and of `Z`. The open immersion `j` is assumed quasi-compact (its
-range retrocompact), so that the images of constructible strata are constructible: this is
-implicit in the blueprint, whose constructible subsets are meant in the sense of a
-quasi-compact quasi-separated (e.g. Noetherian) scheme, where it is automatic. -/
+/-- Stratifications of the members of a complementary pair `(j, i)` concatenate to a
+stratification of `X`: the strata are the images of the strata of `U` and of `Z`. The open
+immersion `j` is assumed quasi-compact (its range retrocompact), so that the images of
+constructible strata are constructible; this is automatic on a Noetherian scheme. -/
 def Stratification.openClosed (SU : Stratification U) (SZ : Stratification Z) :
     Stratification X where
   n := SU.n + SZ.n

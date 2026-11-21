@@ -47,8 +47,7 @@ instance (priority := low) GeometricallyConnected.of_geometricallyIrreducible
     inferInstance
 
 /-- Over a separably closed field `k`, the spectrum of a field extension `L` of `k` is
-geometrically connected: for every field `K` over `k` the ring `L ⊗[k] K` has no nontrivial
-idempotents (`IsSepClosed.eq_zero_or_eq_one_of_isIdempotentElem_tensorProduct`). -/
+geometrically connected. -/
 theorem GeometricallyConnected.SpecMap_algebraMap_of_isSepClosed (k L : Type u) [Field k]
     [IsSepClosed k] [Field L] [Algebra k L] :
     GeometricallyConnected (Spec.map (CommRingCat.ofHom (algebraMap k L))) := by
@@ -59,8 +58,7 @@ theorem GeometricallyConnected.SpecMap_algebraMap_of_isSepClosed (k L : Type u) 
       (fun a ha ↦ IsIdempotentElem.iff_eq_zero_or_one.mp ha) he
 
 /-- A connected scheme over a separably closed field `k` is geometrically connected over `k`
-(Stacks 0363): for a field `K` over `k`, the base change `X_K` is the product of the connected
-scheme `X` with the geometrically connected `Spec K`, along a universally open morphism. -/
+(Stacks 0363). -/
 @[stacks 0363]
 theorem GeometricallyConnected.of_connectedSpace_of_isSepClosed {k : Type u} [Field k]
     [IsSepClosed k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [ConnectedSpace X] :
@@ -80,10 +78,7 @@ theorem GeometricallyConnected.of_isSepClosed {k : Type u} [Field k] [IsSepClose
 
 /-- Let `X` be a connected scheme over a field `k` with a `k`-rational point, that is, a section
 `s` of its structure morphism `f`. Then `X_K` is connected for every algebraic extension `K` of
-`k`. Indeed, the projection `p : X_K ⟶ X` is integral, hence closed, and open, and its fibre over
-the rational point is a single point. If `X_K` were the disjoint union of two nonempty clopen
-subsets, their images under `p` would be nonempty clopen subsets of `X`, hence all of `X`, so
-both would meet the fibre over the rational point. -/
+`k`. -/
 theorem GeometricallyConnected.connectedSpace_pullback_of_section_of_isAlgebraic {k K : Type u}
     [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [ConnectedSpace X] (s : Spec (.of k) ⟶ X) (hs : s ≫ f = 𝟙 _) :
@@ -120,13 +115,7 @@ theorem GeometricallyConnected.connectedSpace_pullback_of_section_of_isAlgebraic
   exact hz' (hfib z z' hzt hzt' ▸ hz)
 
 /-- A connected scheme `X` over a field `k` with a `k`-rational point, that is, a section `s` of
-its structure morphism `f`, is geometrically connected over `k`.
-
-Let `K` be a field over `k`, let `Ω` be an algebraic closure of `K` and let `k̄ ⊆ Ω` be an
-algebraic closure of `k`. The base change `X_k̄` is connected
-(`connectedSpace_pullback_of_section_of_isAlgebraic`), hence geometrically connected over the
-separably closed field `k̄` (`of_connectedSpace_of_isSepClosed`). So `X_Ω = (X_k̄)_Ω` is
-connected, and it surjects onto `X_K`. -/
+its structure morphism `f`, is geometrically connected over `k`. -/
 @[stacks 04KV]
 theorem GeometricallyConnected.of_connectedSpace_of_section {k : Type u} [Field k]
     {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [ConnectedSpace X] (s : Spec (.of k) ⟶ X)
@@ -162,10 +151,7 @@ theorem GeometricallyConnected.of_connectedSpace_of_section {k : Type u} [Field 
     (pullback.fst (pullback.snd f gK) gΩK).continuous
 
 /-- An irreducible scheme `Y` over a field `K` containing a nonempty open subscheme `X` which is
-geometrically connected over `K` is geometrically connected over `K`. After a base change to a
-field `L`, the open `X_L` is connected, and it is dense in `Y_L`: the projection `Y_L ⟶ Y` is
-flat, hence generalizing, so every point of `Y_L` specializes from a point over the generic point
-of `Y`, which lies in `X`. A space with a dense connected subset is connected. -/
+geometrically connected over `K` is geometrically connected over `K`. -/
 theorem GeometricallyConnected.of_isOpenImmersion {K : Type u} [Field K] {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j] [Nonempty X] [IrreducibleSpace Y] (f : Y ⟶ Spec (.of K))
     [GeometricallyConnected (j ≫ f)] : GeometricallyConnected f where

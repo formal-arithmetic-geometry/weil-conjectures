@@ -30,6 +30,13 @@ carrying `F₁` and `false` carrying `F₂`.
   `CategoryTheory.JointlyReflectIsomorphisms.pairFunctor_of_iso`: joint reflection of
   isomorphisms is invariant under replacing the functors by isomorphic ones.
 
+## Implementation details
+
+The index type is `Bool` and the family of target categories is `fun b ↦ cond b D₁ D₂`,
+rather than `Fin 2` with a `Matrix.cons` or a `Sum`: `cond` is the eliminator of `Bool`, so
+`cond true D₁ D₂` and `cond false D₁ D₂` reduce to `D₁` and `D₂` by `rfl`, and every
+statement about the family therefore splits into two goals about `F₁` and `F₂` with no
+transport.
 -/
 
 @[expose] public section
@@ -59,13 +66,7 @@ variable (F₁ : C ⥤ D₁) (F₂ : C ⥤ D₂)
 
 /-- The two-element family of functors with value `F₁ : C ⥤ D₁` at `true` and `F₂ : C ⥤ D₂`
 at `false`. This is the shape in which a pair of functors is fed to
-`CategoryTheory.JointlyReflectIsomorphisms` and to the lemmas about it.
-
-The index type is `Bool` and the family of target categories is `fun b ↦ cond b D₁ D₂`,
-rather than `Fin 2` with a `Matrix.cons` or a `Sum`: `cond` is the eliminator of `Bool`, so
-`cond true D₁ D₂` and `cond false D₁ D₂` reduce to `D₁` and `D₂` by `rfl`, and every
-statement about the family therefore splits into two goals about `F₁` and `F₂` with no
-transport. -/
+`CategoryTheory.JointlyReflectIsomorphisms` and to the lemmas about it. -/
 def pairFunctor (b : Bool) : C ⥤ cond b D₁ D₂ :=
   Bool.rec (motive := fun b ↦ C ⥤ cond b D₁ D₂) F₂ F₁ b
 

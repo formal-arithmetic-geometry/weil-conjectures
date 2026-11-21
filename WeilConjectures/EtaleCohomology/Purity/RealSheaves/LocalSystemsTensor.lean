@@ -478,8 +478,7 @@ representations of `G` such that
   `τ : e (F₁ ⊗ F₂) ≅ e F₁ ⊗ e F₂`, natural in `F₁` and `F₂`, whose underlying linear map is, via
   `η`, the identification `(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s` of
   `AlgebraicGeometry.Scheme.sheafFiberTensorIso'`;
-* `e` sends the constant sheaf `Λ_Y` to the trivial representation `Λ`.
-Exactness is `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`. -/
+* `e` sends the constant sheaf `Λ_Y` to the trivial representation `Λ`. -/
 theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor_of_isFundamentalGroup
     (Y : Scheme.{u}) [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ Y) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (G : ProfiniteGrp.{u})
@@ -517,9 +516,7 @@ constant sheaves of `Λ`-modules on `Y_ét` and finite continuous representation
 the underlying `Λ`-module of `e F` is the stalk `F_s` (via `η`), `e` is compatible with tensor
 products through an isomorphism of bifunctors `τ` lifting
 `(F₁ ⊗ F₂)_s ≅ F₁_s ⊗ F₂_s` (`AlgebraicGeometry.Scheme.sheafFiberTensorIso'`), and `e` sends
-`Λ_Y` to the trivial representation. See the `_of_isFundamentalGroup` version for the statement
-with `G` named; exactness is
-`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_shortExact_iff`. -/
+`Λ_Y` to the trivial representation. -/
 theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor (Y : Scheme.{u})
     [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :

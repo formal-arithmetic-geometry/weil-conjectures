@@ -23,7 +23,9 @@ Source: Stacks Project, Tag 0DVG.
 universe u v w s
 open CategoryTheory
 namespace Rep
-/--Source: Stacks Project, Tag 0DVG, proof of degreewise exactness. -/
+/-- Cochains of locally constant functions `Gⁿ → M` carry short exact sequences of discrete
+continuous representations to degreewise short exact sequences.
+Source: Stacks Project, Tag 0DVG. -/
 theorem locallyConstantCochains_degreewise_exact
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (A : Type v) [Category.{w} A] [Abelian A]

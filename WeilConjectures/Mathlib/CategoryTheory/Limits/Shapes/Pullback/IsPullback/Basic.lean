@@ -117,8 +117,7 @@ the base changes to `S` of `X` and `Y`, if `W = XS ×[S] YS` and if `P = X × Y`
 base change of `P` to `S`.
 
 The legs `s'` and `r` of the resulting cospan are arbitrary morphisms into an arbitrary terminal
-object `T'`, so this applies to a caller whose squares are stated over `⊤_ C` as well as to one
-whose squares are stated over some other terminal object. -/
+object `T'`. -/
 theorem baseChange_prod {T' : C} (hT : IsTerminal T) (hT' : IsTerminal T')
     (hX : IsPullback a a' s p) (hY : IsPullback b b' s q) (hW : IsPullback u v a b)
     (hP : IsPullback c d p q) {s' : S ⟶ T'} {r : P ⟶ T'} :

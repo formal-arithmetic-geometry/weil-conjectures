@@ -230,12 +230,7 @@ instance isMonoidal_sheafAdjunctionContinuous :
 /-- The isomorphism from the restriction along `F.op` of the underlying presheaf of a sheaf to
 the underlying presheaf of its pushforward. Both functors send a sheaf `P` to `F.op ⋙ P.obj`,
 but the lax monoidal structure of the target is transported along
-`sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso`. At `P` it is
-```
-  F.op ⋙ P.obj ──toSheafify──▶ sheafify (F.op ⋙ P.obj) ──≅──▶ ((F_*) P).obj
-```
-where the first map is invertible since `F.op ⋙ P.obj` is a sheaf, and this is a monoidal
-isomorphism. -/
+`sheafToPresheafCompWhiskeringLeftCompPresheafToSheafIso`; this is a monoidal isomorphism. -/
 noncomputable def sheafToPresheafCompWhiskeringLeftIsoPushforward :
     sheafToPresheaf K A ⋙ (whiskeringLeft _ _ A).obj F.op ≅
       F.sheafPushforwardContinuous A J K ⋙ sheafToPresheaf J A :=
@@ -287,20 +282,7 @@ variable [∀ X : Dᵒᵖ, IsSifted (CostructuredArrow F.op X)]
 /-- The comparison map `δ : F^*(S ⊗ T) ⟶ F^*S ⊗ F^*T` of the pullback of sheaves is an
 isomorphism if the comma categories `CostructuredArrow F.op X` are sifted (e.g. if `F` is
 representably flat) and tensoring in `A` on the left preserves colimits of these shapes; via
-the braiding, so does tensoring on the right.
-
-On sheafifications of presheaves `P`, `Q` this follows, as for `isIso_η_sheafPullback`, from
-the conjugate square `CategoryTheory.conjugateEquiv_symm_app_tensor_comp_δ`, since `δ` is
-invertible for left Kan extension along `F.op` followed by sheafification. For general
-sheaves it follows from the naturality square of `δ` along the counit isomorphisms
-`sheafify S.obj ⟶ S` and `sheafify T.obj ⟶ T`:
-```
-  F^*(sheafify S.obj ⊗ sheafify T.obj) ──δ──▶ F^*(sheafify S.obj) ⊗ F^*(sheafify T.obj)
-              │ F^*(ε_S ⊗ ε_T)                          │ F^*ε_S ⊗ F^*ε_T
-              ▼                                         ▼
-          F^*(S ⊗ T) ─────────────δ─────────────▶ F^*S ⊗ F^*T
-```
--/
+the braiding, so does tensoring on the right. -/
 instance isIso_δ_sheafPullback (S T : Sheaf J A) : IsIso (δ (sheafPullback F A J K) S T) := by
   have (X : Dᵒᵖ) (M : A) : PreservesColimitsOfShape (CostructuredArrow F.op X) (tensorRight M) :=
     preservesColimitsOfShape_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)

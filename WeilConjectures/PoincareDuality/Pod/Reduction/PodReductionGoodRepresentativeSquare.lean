@@ -94,8 +94,7 @@ attribute [local irreducible] podReindexingDerivedFunctor podReindexingDerivedFa
 open PodReindexingCoherence
 
 /-- The reduction/reindexing tensor square on flat-term K-flat representatives.
-Source: Stacks 07A4 and 0941. The proof pastes the unary models with the strict tensor identity
-and cancels the model isomorphisms. No finite-evaluation faithfulness is used. -/
+Source: Stacks 07A4 and 0941. -/
 theorem podReduction_representative_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

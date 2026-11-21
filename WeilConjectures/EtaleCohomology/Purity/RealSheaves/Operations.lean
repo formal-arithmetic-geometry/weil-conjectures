@@ -19,10 +19,10 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 /-!
 # Linear-algebra operations on lisse Weil sheaves
 
-The operations of `definition-weil-representation` and `proposition-weights-under-usual-operations`
-on lisse Weil representations: subquotients, finite direct sums, exterior powers and the determinant
-line of a lisse Weil representation are again lisse, and an exterior power of a Weil representation
-whose local characteristic polynomials are those of an `ι`-real one is again `ι`-real.
+The usual operations on lisse Weil representations: subquotients, finite direct sums, exterior
+powers and the determinant line of a lisse Weil representation are again lisse, and an exterior
+power of a Weil representation whose local characteristic polynomials are those of an `ι`-real
+one is again `ι`-real.
 
 Lisseness is checked on the coefficients `g ↦ φ (ρ g v)` of the geometric part
 (`AlgebraicGeometry.WeilGroup.IsLisse.continuous_apply` and
@@ -105,9 +105,8 @@ theorem frobeniusWeight_prod (qx : ℕ) {ι' : Type*} (s : Finset ι') {f : ι' 
   · simp only [Multiset.mem_map, not_exists, not_and]
     exact fun i hi h ↦ hf i hi h
 
-/-- The real weight character `a ↦ wt_{ι, q}(a)` of `definition-determinant-weight--1`, whose
-determinant weights (`Representation.detWeight`) are the determinant weights `dw_ι` of
-`definition-determinant-weight--1`. -/
+/-- The real weight character `a ↦ wt_{ι, q}(a)`, whose determinant weights
+(`Representation.detWeight`) are the determinant weights `dw_ι`. -/
 noncomputable def weightCharacter (q : ℕ) : Representation.RealCharacter E where
   toFun a := Multiplicative.ofAdd (frobeniusWeight ι q (a : E))
   map_one' := by simp [frobeniusWeight]

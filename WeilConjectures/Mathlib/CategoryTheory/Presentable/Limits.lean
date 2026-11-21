@@ -53,20 +53,7 @@ lemma Functor.isCardinalAccessible_lim {K : Type u'} [Category.{v'} K]
 
 /-- In a category `A` with a `κ`-presentable detector `G`, the limit functor
 `lim : (K ⥤ A) ⥤ A` over a category `K` with `HasCardinalLT (Arrow K) κ` preserves
-colimits of any `κ`-filtered shape `J`.
-
-The proof uses the square
-```
-               lim
-    (K ⥤ A) ────────▶ A
-       │              │
-  - ⋙ Hom(G, -)    Hom(G, -)
-       ▼              ▼
-  (K ⥤ Type v) ───▶ Type v
-               lim
-```
-which commutes up to `preservesLimitNatIso (coyoneda.obj (op G))`. The left, bottom and right
-functors preserve `κ`-filtered colimits, and `Hom(G, -)` reflects them. -/
+colimits of any `κ`-filtered shape `J`. -/
 lemma preservesColimitsOfShape_lim_of_isDetector {A : Type u} [Category.{v} A]
     {G : A} (hG : IsDetector G) (κ : Cardinal.{v}) [Fact κ.IsRegular]
     [IsCardinalPresentable G κ]

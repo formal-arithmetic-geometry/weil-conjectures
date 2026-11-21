@@ -27,10 +27,8 @@ For `d = 1` the curve is `X` itself. For `d ≥ 2`, the monodromy representation
 `π₁(X, s)` on the stalks of the `𝒮ⱼ` at a point `s ∈ S` are continuous and irreducible over
 `ℚ̄_ℓ`. By Burnside's theorem there is a neighbourhood `U` of `1` such that every subgroup meeting
 every coset `g U` still acts irreducibly through each `ρⱼ`
-(`Representation.exists_mem_nhds_one_forall_isIrreducible`); this replaces the integral model and
-the finite matrix witness of the blueprint, which serve to produce the same open subgroup.
-Shrinking `U`, it is the stabilizer of a point `a` of the fibre of a connected (Galois) finite
-étale cover `T ⟶ X`. The Bertini theorem
+(`Representation.exists_mem_nhds_one_forall_isIrreducible`). Shrinking `U`, it is the stabilizer
+of a point `a` of the fibre of a connected (Galois) finite étale cover `T ⟶ X`. The Bertini theorem
 `AlgebraicGeometry.Scheme.Hom.exists_isClosedImmersion_connectedSpace_pullback` gives a curve
 `i : C ⟶ X` through `S` with `T ×_X C` connected, so that `π₁(C, c)` acts transitively on the
 fibre of `T` at `s = i(c)`: its image meets every coset `g U`. Finally the monodromy

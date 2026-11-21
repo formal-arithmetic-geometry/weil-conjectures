@@ -46,9 +46,9 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`, vanishing part: for a finite
-morphism `f : X ⟶ S` and a sheaf `F` of `Λ`-modules on `X_ét`, the higher direct images `R^q f_* F`
-vanish for `q ≠ 0`, the direct image `f_*` being exact. -/
+/-- **Higher direct images along a finite morphism vanish.** For a finite
+morphism `f : X ⟶ S` and a sheaf `F` of `Λ`-modules on `X_ét`, the higher direct images
+`R^q f_* F` vanish for `q ≠ 0`. -/
 theorem isZero_homology_rightDerivedLowerStar_singleFunctor_of_isFinite {X S : Scheme.{u}}
     (f : X ⟶ S) [IsFinite f] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
     (hq : q ≠ 0) :

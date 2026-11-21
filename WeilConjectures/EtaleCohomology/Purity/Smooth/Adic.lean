@@ -28,6 +28,12 @@ maps exhibiting each level as the derived base change of the next) need the comp
 `Lf^*`, of the twist and of `Rf^!` with a change of coefficient ring, which the repository
 does not construct; they are therefore given as normalized systems `S` and `T` together with
 identifications `eS`, `eT` of their levels.
+
+`AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel` is only the
+reconstruction step: that the finite-coefficient purity maps `γ_{f,K_n}` form a morphism of
+normalized systems is assumed as the hypothesis `hγ`; the points `cS.pt`, `cT.pt` are arbitrary
+homotopy limits of `S` and `T`, not identified with `Lf^* K(d)[2d]` and `Rf^! K`; and `f` enters
+only through the levels.
 -/
 
 @[expose] public section
@@ -92,14 +98,7 @@ there is an isomorphism `e : cS.pt ≅ cT.pt` reducing to `γ_n` at every level 
    π_n                          π_n
     v                            v
    S_n -- eS ≫ γ_n ≫ eT⁻¹ --> T_n
-```
-
-This is only the reconstruction step of the blueprint statement: that the finite-coefficient
-purity maps `γ_{f,K_n}` form a morphism of normalized systems is assumed as `hγ`, although it is
- the first half of the blueprint's conclusion; the points `cS.pt`, `cT.pt` are arbitrary homotopy
- limits of `S` and `T`, not identified with `Lf^* K(d)[2d]` and `Rf^! K`; and `f` enters only
- through the levels. The proof is
- `AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotopyLimit`. -/
+``` -/
 theorem exists_iso_realization_twistShiftPullbackLevel (K : NormalizedTower I Y)
     (S T : NormalizedTower I X) (eS : ∀ n : ℕ, S.obj n ≅ twistShiftPullbackLevel d f K n)
     (eT : ∀ n : ℕ, T.obj n ≅ upperShriekLevel f K n)

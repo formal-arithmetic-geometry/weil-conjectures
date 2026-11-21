@@ -389,28 +389,9 @@ private theorem identity_tensor_representative (X : Scheme.{u})
     (Q₀.map (c.tensorChain P Q).hom ≫ T.comparison.hom.app (⟨_, hFP⟩, ⟨_, hFQ⟩))
     (k.model P) (k.model Q) (k.model (B.obj (P, Q))) hm hd
 
-/-- The canonical site and localized tensor identity comparison.
+/-- The canonical site and localized tensor identity comparison exists, together with its
+derived tensor equation.
 Source: Stacks 09A5, 07A4, 0FPI.
-
-On a cochain complex take these ordinary maps in every degree. Their naturality with respect to
-the differentials gives a chain isomorphism; its degree field is the defining formula. The chain
-isomorphisms are natural in P. Descend them through localization, since reindexing preserves
-quasi-isomorphisms. Full faithfulness of whiskering with the localization determines the resulting
-derived isomorphism, and its defining representative equation is exactly Identity.model with the
-recorded podReindexingDerivedFactors. Thus every field is constructed by restriction or
-localization.
-
-For the tensor equation first use c.tensorChain_pure on the actual total tensor of complexes P,Q.
-On a pure section x tensor y in the (p,q) summand, restriction along siteId.inv gives the tensor
-of the two restricted sections. These are exactly the two routes in the proposed chain square. No
-degree is permuted, so no sign occurs. Sheafification and total-summand extensionality give
-equality of chain maps. Choose P,Q independently K-flat. Their reindexings are K-flat, since the
-inverse exact reindexing equivalence transports the defining acyclic tensor tests. Substitute
-c.tensor_model and the identity model equation into the localized chain square, and cancel the
-K-flat comparison isomorphisms. This gives the desired square on their localized objects.
-Independent K-flat resolutions and naturality of c.tensor and the identity comparison then give
-the equation for arbitrary M,N. This argument proves only the tensor equation; the item derives
-the Hom equation from evaluation.
 -/
 theorem tensor_identity_exists (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
     [EssentiallySmall.{u + 1} X.ProEt] (s : Option ℕ)

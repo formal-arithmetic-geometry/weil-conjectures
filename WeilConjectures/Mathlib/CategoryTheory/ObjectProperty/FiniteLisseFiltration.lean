@@ -12,8 +12,9 @@ import Mathlib.CategoryTheory.Simple
 
 /-! # Finite filtrations from an additive faithful natural-number rank
 
-Source: the actual composition-filtration step, and Weil II (1.1.6). This is the elementary
-categorical induction behind that step, separated from the construction of the geometric fibre.
+This is the elementary categorical induction behind the composition-filtration step of the purity
+theorem for real sheaves on curves (Weil II (1.1.6)), separated from the construction of the
+geometric fibre.
 -/
 
 @[expose] public noncomputable section
@@ -121,7 +122,7 @@ theorem filtrationClosure_isSimpleIn_of_rank
     exact hT0 (R.detects_zero _ hT (by omega))
 
 /-- A concrete chain version of the rank-induction theorem, retaining lissity at every
-stage. Source: theorem-purity-real-sheaves-curves--1, final composition-filtration paragraph. -/
+stage. -/
 theorem exists_filtration_isSimpleIn_of_rank
     (P : ObjectProperty C) [P.IsClosedUnderIsomorphisms]
     (R : LisseRankData P) (M : C) (hM : P M) :

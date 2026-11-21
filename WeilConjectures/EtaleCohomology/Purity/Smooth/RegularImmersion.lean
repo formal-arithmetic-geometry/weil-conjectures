@@ -45,7 +45,7 @@ classes, and with them the fundamental class, could be zero.
 
 Classes with supports are morphisms `Λ_X ⟶ Ri_! Ri^! L`, with the supported term `Ri_!` of the
 supported localization triangle; for the closed immersion `i` it is `Ri_*`. The coefficients
-`Λ_X(c)[2c]` are placed inside `Ri^!`: the blueprint's `Ri^! Λ_X(c)[2c]` is
+`Λ_X(c)[2c]` are placed inside `Ri^!`: `Ri^! Λ_X(c)[2c]` means
 `Ri^! (Λ_X(c)[2c])`, which is `(Ri^! Λ_X)(c)[2c]` by the co-projection formula
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`).
 
@@ -62,7 +62,7 @@ supported localization triangle; for the closed immersion `i` it is `Ri_*`. The 
   clause (a).
 - `AlgebraicGeometry.Etale.existsUnique_fundamentalClass`: clause (b), existence and uniqueness
   of the fundamental class.
-- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion`: Steps 1–2,
+- `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion`:
   `Ri^! Λ_X ≅ Λ_Z(-c)[-2c]`.
 - `AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass`: clause (d), étale base
   change.
@@ -72,6 +72,13 @@ The generation clause (b) and clause (c), `cl_i` is an isomorphism, are in
 exterior products of clause (d) are in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionBaseChange` and
 `WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionProduct`.
+
+## Implementation details
+
+The relative dimension of `Z` is carried as `m` with `hm : m + c = n` rather than as `n - c`:
+truncated subtraction would silently read `0` when `c > n`. The fundamental class is defined as
+`Classical.choose` of `AlgebraicGeometry.Etale.existsUnique_fundamentalClass`; uniqueness is what
+makes the choice canonical.
 -/
 
 @[expose] public section
@@ -96,8 +103,6 @@ variable [Finite Λ]
 
 /-- Purity for regular closed immersions
 
-Blueprint `lemma-class-of-point--1` (the detailed form of the same theorem).
-
 **Purity for a regular closed immersion.** Let `i : Z ⟶ X` be a regular closed immersion of
 pure codimension `c`, with `X` smooth of relative dimension `n` over a perfect field `k` and
 `Z` regular — hence, by `AlgebraicGeometry.IsRegularImmersion.smooth_comp`, smooth of relative
@@ -109,12 +114,7 @@ the inverse of `cl_i(-c)[-2c]`, where `cl_i : Λ_Z ≅ Ri^! (Λ_X(c)[2c])`, `1 �
 `AlgebraicGeometry.Etale.fundamentalClassMap` (an isomorphism by
 `AlgebraicGeometry.Etale.isIso_fundamentalClassMap`); it is compatible with étale base change
 and with exterior products (`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass`,
-`AlgebraicGeometry.Etale.fundamentalClass_eq_cupWithSupportsTateObject`).
-
-Smooth purity computes `ω_{a_X}` and `ω_{a_Z}`, and the co-projection formula lets one divide
-the former into the latter. The relative dimension of `a_Z` is carried as `m` with
-`hm : m + c = n` rather than as `n - c`: truncated subtraction would silently read `0` when
-`c > n`. -/
+`AlgebraicGeometry.Etale.fundamentalClass_eq_cupWithSupportsTateObject`). -/
 theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [HasTateTwist Λ]
     [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] [PerfectField k] (c n m : ℕ) (hm : m + c = n) (i : Z ⟶ X)
@@ -162,9 +162,7 @@ theorem nonempty_iso_dualizingComplex_of_isRegularImmersion [HasTateTwist Λ]
 
 /-- Purity for regular closed immersions
 
-The twisted form of purity, `Ri^! (Λ_X(c)[2c]) ≅ Λ_Z`: the co-projection formula moves the
-invertible twist out of `Ri^!`, and `Ri^! Λ_X ≅ Λ_Z(-c)[-2c]`
-(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_of_isRegularImmersion`). -/
+The twisted form of purity, `Ri^! (Λ_X(c)[2c]) ≅ Λ_Z`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersion
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
     {k : Type u} [Field k] [PerfectField k] (c n m : ℕ) (hm : m + c = n) (i : Z ⟶ X)
@@ -199,11 +197,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_shiftTateObject_of_isRegularImmersi
 *The local form of purity.* Let `i : Z ⟶ X` be a regular closed immersion of pure codimension
 `c`, with `X` smooth over a perfect field `k` and `Z` regular. Every point of `Z` has an affine
 open neighbourhood `W` in `X` such that the restriction of `Ri^! (Λ_X(c)[2c])` to `Z ∩ W` is the
-constant complex: on `W` the structure morphisms of `W` and of `Z ∩ W` have constant relative
-dimensions `n` and `m` with `m + c = n`
-(`AlgebraicGeometry.IsRegularImmersion.exists_isAffineOpen_smoothOfRelativeDimension`) and admit
-compactifications, so the twisted form of purity applies to `i ∣_ W`, and `Ri^!` commutes with
-the restriction to `W`. -/
+constant complex. -/
 theorem exists_nonempty_iso_upperStar_rightDerivedUpperShriek_of_isRegularImmersion
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] [HasInvertibleExponent Λ X]
     {k : Type u} [Field k] [PerfectField k] (c : ℕ) (i : Z ⟶ X) [IsRegularImmersion c i]
@@ -343,13 +337,7 @@ theorem exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion
 /-- Purity for regular closed immersions
 
 *Uniqueness of the fundamental class.* Two classes in `H^{2c}_Z(X, Λ(c))` are equal if every
-point of `Z` lies in a Zariski frame on which their restrictions agree. The classes are sections
-of a sheaf
-(`AlgebraicGeometry.Etale.exists_iso_singleFunctor_rightDerivedLowerShriek_of_isRegularImmersion`),
-so they are determined by their pullbacks to the geometric points of `X`. A geometric point
-outside `Z` sees nothing; a geometric point of `Z` factors through a Zariski frame, and the
-restriction of supports along an open immersion is invertible
-(`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_isOpenImmersion`). -/
+point of `Z` lies in a Zariski frame on which their restrictions agree. -/
 theorem eq_of_forall_exists_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -394,9 +382,7 @@ theorem eq_of_forall_exists_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smoot
 /-- Purity for regular closed immersions
 
 *Uniqueness of the fundamental class.* Two classes in `H^{2c}_Z(X, Λ(c))` whose restrictions to
-every Zariski frame agree are equal
-(`AlgebraicGeometry.Etale.eq_of_forall_exists_frameRestriction_eq`): every point of `Z` lies in a
-Zariski frame (`AlgebraicGeometry.Scheme.Hom.exists_etaleFrame_isOpenImmersion`). -/
+every Zariski frame agree are equal. -/
 theorem eq_of_frameRestriction_eq (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
     {γ γ' : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -540,15 +526,7 @@ theorem restrictSupportedClass_frameClass_eq (aX : X ⟶ Spec (.of k)) [Smooth a
 **(b) The fundamental class.** Let `i : Z ⟶ X` be a regular closed immersion of pure
 codimension `c`, with `X` smooth over the perfect field `k` and `Z` regular. The frame classes
 depend only on `Z_U ⊂ U`, not on the frame, and they glue: there is a unique class
-`[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every frame is the frame class.
-
-Near every point of `Z` there is a frame given by a regular sequence on an affine open, and any
-other frame differs from it, near `Z`, by a matrix with invertible determinant
-(`RingTheory.Sequence.IsWeaklyRegular.exists_mulVec_isUnit_det`), under which the frame classes
-agree (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`); so frame
-classes agree on overlaps (`AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq`). By
-(a) the classes are morphisms into a sheaf placed in degree zero, so the Zariski-local classes
-glue (`AlgebraicGeometry.Etale.exists_hom_of_isOpenImmersion_cover`). -/
+`[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every frame is the frame class. -/
 theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     ∃! γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -702,11 +680,7 @@ theorem existsUnique_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
 
 The *fundamental class* `[Z ⊂ X] = cl_{Z/X} ∈ H^{2c}_Z(X, Λ(c))` of a regular closed immersion
 `i : Z ⟶ X` of pure codimension `c`, with `X` smooth over a perfect field and `Z` regular: the
-unique class restricting to the frame class `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` on every frame.
-
-It is *defined* as `Classical.choose` of
-`AlgebraicGeometry.Etale.existsUnique_fundamentalClass`; uniqueness
-is what makes the choice canonical. -/
+unique class restricting to the frame class `∂κ(f₁) ∪ ⋯ ∪ ∂κ(f_c)` on every frame. -/
 noncomputable def fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) :
     constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -736,11 +710,7 @@ noncomputable def fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
 **(d) Étale base change**, `[Z_{X'} ⊂ X'] = [Z ⊂ X]|_{X'}`: for an étale `e : X' ⟶ X` and the
 base change `i' : Z' ⟶ X'` of `i`, the restriction of supports along `e`
 (`AlgebraicGeometry.Etale.restrictSupportedClass`) carries the fundamental class of `i` to that
-of `i'`. An étale map pulls frames back to frames and frame classes to frame classes.
-
-The hypotheses on the base change are derived: `i'` is a regular immersion of codimension `c`
-by flat base change, `e ≫ aX` is smooth, the exponent of `Λ` is invertible on `X'`, and `Z'`
-is regular, being étale over `Z`. -/
+of `i'`. -/
 theorem restrictSupportedClass_fundamentalClass (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) {X' Z' : Scheme.{u}} (e : X' ⟶ X)
     [AlgebraicGeometry.Etale e] (i' : Z' ⟶ X') (g : Z' ⟶ Z) (hg : IsPullback g i' i e) :

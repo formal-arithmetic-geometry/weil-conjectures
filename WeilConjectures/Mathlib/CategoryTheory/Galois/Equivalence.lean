@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.Galois.Equivalence
 
 Let `F : C ⥤ FintypeCat` be a functor. The group `Aut F` carries the topology induced by the
 evaluation embedding `Aut F ⟶ ∏_X Aut (F X)`, the target carrying the product of the discrete
-topologies. This file restates, in the form of the blueprint, the following results of
-Mathlib's Galois theory:
+topologies. This file restates the following results of Mathlib's Galois theory:
 
 - the action of `Aut F` on each fibre is continuous;
 - the evaluation embedding is a closed embedding, so `Aut F` is profinite;

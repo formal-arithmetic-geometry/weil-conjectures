@@ -52,17 +52,7 @@ variable {C : Type u} [Category.{v} C] [Abelian C] {I : Type*} {D : I → Type*}
 namespace JointlyReflectIsomorphisms
 
 /-- **A family of left exact functors which jointly reflects isomorphisms detects the zero
-morphisms.** Indeed, the kernel inclusion of a morphism `φ` killed by every `F i` becomes
-invertible under every `F i`, by the comparison square
-```
-     (F i).obj (kernel φ) --(F i).map (kernel.ι φ)--> (F i).obj X
-              |                                            ‖
-    kernelComparison φ (F i)                               ‖
-              ↓                                            ‖
-     kernel ((F i).map φ) ---------kernel.ι-----------> (F i).obj X
-```
-whose left vertical map is invertible since `F i` is left exact; so `kernel.ι φ` is
-invertible and `φ = 0`. -/
+morphisms.** If every `F i` sends `φ` to zero, then `φ = 0`. -/
 lemma eq_zero_of_map_eq_zero (hP : JointlyReflectIsomorphisms F) {X Y : C} (φ : X ⟶ Y)
     (h : ∀ i, (F i).map φ = 0) : φ = 0 := by
   have : IsIso (kernel.ι φ) := by
@@ -74,17 +64,7 @@ lemma eq_zero_of_map_eq_zero (hP : JointlyReflectIsomorphisms F) {X Y : C} (φ :
   rw [← cancel_epi (kernel.ι φ), kernel.condition, comp_zero]
 
 /-- **A family of left exact functors which jointly reflects isomorphisms detects the
-epimorphisms.** Indeed, the cokernel projection of a morphism `φ` sent to an epimorphism by
-every `F i` is killed by every `F i`, by the comparison square
-```
-     (F i).obj Y ----(F i).map (cokernel.π φ)---> (F i).obj (cokernel φ)
-          ‖                                                ↑
-          ‖                                   cokernelComparison φ (F i)
-          ‖                                                |
-     (F i).obj Y --------cokernel.π-----------> cokernel ((F i).map φ)
-```
-whose bottom map is zero; so `cokernel.π φ = 0` by
-`CategoryTheory.JointlyReflectIsomorphisms.eq_zero_of_map_eq_zero` and `φ` is an
+epimorphisms.** If every `F i` sends `φ` to an epimorphism, then `φ` is an
 epimorphism. -/
 lemma epi_of_epi_map (hP : JointlyReflectIsomorphisms F) {X Y : C} (φ : X ⟶ Y)
     (h : ∀ i, Epi ((F i).map φ)) : Epi φ := by

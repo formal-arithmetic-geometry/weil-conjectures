@@ -403,11 +403,7 @@ attribute [local irreducible] podReindexingCoefficient
   Padic.coefficientExtensionAbsoluteValue
   SheafOfModules.ScalarHomOrdinary.tensorIsoSite
 
-/-- Tensor and ordinary sheaf-Hom comparisons, normalized on local sections.
-
-The proof is the sheafified sectionwise tensor and slice-Hom comparison of
-`inverseImage_tensor_hom_iso`, with the coefficient isomorphism transported by
-`podReindexingCoefficient`; the displayed section equations are the normalizations. -/
+/-- Tensor and ordinary sheaf-Hom comparisons, normalized on local sections. -/
 theorem podReindexing_tensor_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -913,21 +909,7 @@ private theorem podReindexingModuleRoundTrip {X Y : Scheme.{u}}
 
 /-- Coefficient and action round trips, identity shift components, and termwise derived
 unit and counit. The finite-stage functor agrees with the specified finite pullback.
-Source: Stacks Tags 09A5 and 05RU.
-
-Proof (node Steps 3 and 11): the finite scalar maps and their reverses are identities
-on constants; the completed composites have the same projections as the canonical
-site round trip, so they are equal by the inverse-limit universal property. Thus
-transporting the scalar action twice restores it. The module unit and counit are the
-original restrictions along the identity-on-schemes site round trips. Apply these
-maps in each cochain degree. Their naturality makes them chain maps and the module
-triangle identities hold degreewise. Localize these termwise maps; exactness inverts
-quasi-isomorphisms and gives the derived equivalence with the displayed unit/counit.
-The shifted term is F(K^(i+n)) and the differential is (-1)^n F(d), so the comparison
-is identity in every degree. Finally the finite coefficient identification is the
-canonical one, hence this is precisely finiteDerivedPullback, whose definition is
-exact termwise inverse image. The completed assertion is ordinary inverse image;
-no quotient-tower derived-completion comparison is invoked. -/
+Source: Stacks Tags 09A5 and 05RU. -/
 theorem podReindexing_roundTrip_shift {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (s : Option ℕ) :
@@ -974,18 +956,7 @@ theorem podReindexing_roundTrip_shift {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 /-- Exact module equivalence and preservation of resolutions at finite and completed stages.
 The inverse is reverse reindexing, including its transported module action.
-Source: Stacks Tags 03EL and 079I.
-
-Proof (node Steps 1--6): postcompose site objects by g and its inverse; the original
-restriction identifications give inverse module functors. They are additive, preserve
-all existing small limits and colimits, and hence are exact. Tensor comparisons on
-pure tensors transport exact tensor functors, so flatness is preserved. The direct-sum
-total tensor comparison transports the test against every acyclic complex, proving
-K-flat preservation. For K-injectivity, transport any map from an acyclic complex to
-I through the inverse equivalence, take its null homotopy, and reindex that homotopy.
-Exactness preserves quasi-isomorphisms, so both sorts of resolution remain resolutions.
-Use lem-weil-proetale-isomorphism-inverse-image, lem-pur-isomorphism-inverse-image-tensor-hom,
-def-pc-flat-sheaf-modules, def-pc-kflat-complex and def-pur-kinjective-complex. -/
+Source: Stacks Tags 03EL and 079I. -/
 theorem podReindexing_resolution_preservation {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -1094,25 +1065,7 @@ private theorem podReindexingHomModel_inv (W : Scheme.{u}) (s : Option ℕ)
 
 set_option backward.isDefEq.respectTransparency true in
 /-- The actual Hom-complex and derived localization comparisons, with their
-projection, naturality, quasi-isomorphism, and resolution-model laws.
-
-The supplied comparison is required to act on local families by reindexing. Evaluating
-on every site object, slice object and section therefore proves its naturality in
-both module arguments. Exact reindexing preserves integer products. The generic
-product-Hom comparison applies this natural family to each product projection;
-its two-term differential calculation gives an actual natural chain isomorphism.
-Quasi-isomorphism invariance into K-injectives and exact reindexing prove the
-quasi-isomorphism clause.
-
-For descent, use the fixed functorial K-injective replacement on the source site.
-Its augmentation becomes invertible after localization. The ordinary-to-derived
-Hom comparisons on both resolved targets are invertible, since reindexing preserves
-K-injectivity. The generic resolution-descent lemma then gives a natural derived
-isomorphism and its comparison equation. The ordinary comparison is the localized
-augmentation followed by the inverse localization factorization, which is exactly
-`podReindexingHomModel.inv`. Substitute these identities in the descent equation
-and multiply by the source model isomorphism. This gives the displayed formula,
-including the contravariant transport in the first argument. -/
+projection, naturality, quasi-isomorphism, and resolution-model laws. -/
 theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -1263,23 +1216,7 @@ theorem podReindexing_derived_hom_data {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
 -- The theorem combines the two strictly smaller comparison packages above.
 /-- Tensor and Hom comparisons, the actual unbounded product Hom-complex comparison,
 and its natural derived descent with the specified K-injective resolution model.
-Source: Stacks Tags 03EL, 0GMX, 0A8X, 0A95, 079I and 08J7.
-
-Proof (node Steps 4, 7--10): the tensor comparison comes from the sheafified
-sectionwise tensor comparison of lem-pur-isomorphism-inverse-image-tensor-hom;
-it sends s tensor t to Fs tensor Ft. The Hom comparison reindexes maps of slice
-modules, sending f to Ff. For each integer r preserve the product over every integer
-p, then compare its Hom factors. The p-th projection is F of the original projection
-followed by the slice Hom comparison. Naturality and additivity identify the two
-summands d_I f and -(-1)^r f d_K, so these components form an isomorphism of complexes.
-The same computation with b f a proves joint naturality. By lem-pur-rhom-well-defined,
-quasi-isomorphisms in either input induce quasi-isomorphisms when both targets are
-K-injective. Exact reindexing preserves them and K-injectivity (Steps 2 and 6).
-Use prop-pur-kinjective-resolutions-exist, and descend through the localization of
-pairs of complexes used by def-pur-derived-internal-hom. Its factorization comparison
-and the inverse of Hom(K,I→I₀(I)) give podReindexingHomModel; consequently the displayed
-model square commutes. This also proves independence of representatives and resolution.
-No boundedness or exactness of infinite products is used. -/
+Source: Stacks Tags 03EL, 0GMX, 0A8X, 0A95, 079I and 08J7. -/
 theorem podReindexing_hom_resolution_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

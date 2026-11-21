@@ -25,9 +25,9 @@ namespace SymmetricAlgebra
 
 open scoped DirectSum Pointwise
 
-/-- Intermediate component of `graded_by_tensor_images`; source: Stacks Project, Algebra,
-Section 00DM. The proof expands tensors into pure tensors and applies the quotient homomorphism
-multiplicatively; the resulting products span each image of a tensor-power range. -/
+/-- The image in the symmetric algebra of the `n`-th power of the range of `TensorAlgebra.ι` is
+spanned by the products of `n` elements `ι x`. Source: Stacks Project, Algebra,
+Section 00DM. -/
 theorem graded_span_pure_tensors (R : Type u) (M : Type v) [CommRing R]
     [AddCommGroup M] [Module R M] :
     ∀ n : ℕ,

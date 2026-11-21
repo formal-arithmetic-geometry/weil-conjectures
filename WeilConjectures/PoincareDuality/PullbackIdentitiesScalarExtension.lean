@@ -73,8 +73,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The site identification of successive postcomposition by the inverse and by g.
-Its arrows are identity on the underlying schemes. Source: Stacks 09A5 and 03D6;
-blueprint inverse automorphism squares. -/
+Its arrows are identity on the underlying schemes. Source: Stacks 09A5 and 03D6. -/
 def pullbackIdentitySiteUnit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     𝟭 Y.ProEt ≅ proEtaleIsoPostcompose (inv g) ⋙ proEtaleIsoPostcompose g :=
   (MorphismProperty.Over.mapId (P := @WeaklyEtale) ⊤ Y (inv g ≫ g)
@@ -97,14 +96,12 @@ theorem pullbackIdentityModuleCounit_existsUnique
     Iso.trans_inv, Iso.symm_inv, Iso.trans_hom, Iso.symm_hom] using
     integralInverseImageCounit_existsUnique l E g
 
-/-- The uniquely section-normalized module counit. Source: Stacks 09A5, 03D6;
-blueprint inverse automorphism identity. -/
+/-- The uniquely section-normalized module counit. Source: Stacks 09A5, 03D6. -/
 def pullbackIdentityModuleCounit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :=
   (pullbackIdentityModuleCounit_existsUnique l E g).exists.choose
 
 /-- Apply the section-normalized counit termwise and localize, including the exact
-functor composition and identity comparisons. Source: Stacks 03D6, 05RU;
-blueprint inverse automorphism identity. -/
+functor composition and identity comparisons. Source: Stacks 03D6, 05RU. -/
 def pullbackIdentityInverseImageCounit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     inverseImageIntegralDerived l E g ⋙ inverseImageIntegralDerived l E (inv g) ≅
       𝟭 (DerivedCategory (integralTowerModules l E Y)) :=
@@ -113,7 +110,7 @@ def pullbackIdentityInverseImageCounit {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
       Functor.mapDerivedCategoryNatIso (pullbackIdentityModuleCounit l E g) ≪≫
         Functor.mapDerivedCategoryIdIso _
 
-/-- Kappa is invertible on exactly the constructible complete inputs in the node. -/
+/-- Kappa is invertible on exactly the constructible complete inputs. -/
 theorem pullbackIdentityKappa_isIso
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -137,7 +134,7 @@ theorem pullbackIdentityKappa_isIso
   infer_instance
 
 /-- Lambda is the inverse of the specified quotient-cone kappa, rather than an
-unspecified isomorphism with the same endpoints. Source: blueprint inverse squares. -/
+unspecified isomorphism with the same endpoints. -/
 def pullbackIdentityLambda
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -149,7 +146,7 @@ def pullbackIdentityLambda
   (asIso (inverseImagePullbackComparisonDerived l E g hX hY K.obj)).symm
 
 /-- The inverse identity epsilon is lambda for inv g, inverse image of lambda for g,
-then the canonical inverse-image counit, in that order. Source: blueprint inverse squares. -/
+then the canonical inverse-image counit, in that order. -/
 def pullbackIdentityEpsilon
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -425,32 +422,8 @@ private theorem lambda_scalar
   simpa only [pullbackIdentityLambda, Iso.symm_hom, asIso_inv] using hh
 
 /-- Composition and inverse identities commute with integral scalar extension, for the
-specified whole-system comparison families. Source: blueprint main-20261015,
-sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md, first paragraph.
-
-Proof, following the node:
-1. Apply lem-trf-integral-pullback-comparison-realization to E into L, h, k and K.
-Its entire quotient-diagram scalar/composition equation is the first conjunct.
-The composition and scalar maps here are exactly its counit-built families.
-2. For an isomorphism g write P=Lg*, Q=L(inv g)*, G=g-inverse and H=(inv g)-inverse.
-The inverse images are exact site equivalences and preserve the required domains.
-The normalization lemma inverts the specified kappa. Thus lambda=kappa inverse
-and epsilon=u H(lambda) lambda, with u the section-normalized inverse-image counit.
-3. Lem-weil-isomorphism-comparison-scalar-extension gives the kappa/scalar square.
-Lem-pod-isomorphism-scalar-comparison-agreement identifies its tensor/completion alpha
-with the whole-system alpha used here, for both g and inv g. Cancel the invertible
-kappas to obtain lambda_L alpha = beta T(lambda_E), for both isomorphisms.
-4. Write C for ordinary derived coefficient change and chi:C iso T for the specified
-finite-free completed comparison. Beta=G(chi) b chi inverse. The sectionwise tensor
-map b only reindexes x tensor a. Reindexing by g and inv g returns x and a unchanged.
-Consequently u_L H(b_g) b_inv = C(u_E), already on complexes, and hence after
-sheafification and localization. Substitution cancels the adjacent chi inverses;
-naturality of u and chi gives u_L H(beta_g) beta_inv = T(u_E).
-5. Expand epsilon_L. Naturality of lambda for inv g and step 3 replace the two lambdas
-by beta T(lambda_E). Naturality of beta_inv moves T(lambda_g) past beta_inv.
-Step 4 replaces the initial three factors by T(u_E). Functoriality of T combines
-the remaining factors to T(epsilon_E). This is the second conjunct, as an equality
-of whole derived arrows; no finite-reduction detection or Tor-amplitude bound is used. -/
+specified whole-system comparison families: the quotient-diagram scalar/composition equation
+holds, and the inverse identity epsilon commutes with the scalar comparisons. -/
 theorem pullbackIdentities_scalarExtension
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
     (ι : E →ₐ[ℚ_[l]] L) (D : IntegralComparisonSystem.{u} l) :

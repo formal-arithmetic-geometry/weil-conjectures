@@ -31,12 +31,6 @@ are constituents of its graded pieces, and it is compatible with tensor products
 - `Representation.ConstituentsLE.of_chain`: constituents of a representation with a finite
   filtration are constituents of the graded pieces.
 - `Representation.ConstituentsLE.tprod`: `ρ ≤ ρ'` implies `ρ ⊗ σ ≤ ρ' ⊗ σ`.
-
-## Blueprint
-
-- `lemma-tensor-exterior-powers-filtered-representations--3`,
-`lemma-tensor-exterior-powers-filtered-representations--1`: the constituents of a filtered
-  representation and of a tensor product.
 -/
 
 @[expose] public section

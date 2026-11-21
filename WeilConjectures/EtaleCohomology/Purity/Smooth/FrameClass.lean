@@ -157,8 +157,7 @@ boundaries `α_k = ∂κ(f_k) ∈ H²_{V(f_k)}(U, Λ(1))`,
 `cl(f) = α₁ ∪ ⋯ ∪ α_c ∈ H^{2c}_{Z ∩ U}(U, Λ(c)) = Hom(Λ_U, Ri_! Ri^! (Λ_U(c)[2c]))`,
 
 where `i : Z ×_V U ⟶ U` (`AlgebraicGeometry.Etale.kummerBoundaryProduct`, read through
-`V(f₁, …, f_c) = Z ∩ U`, `AlgebraicGeometry.Etale.supportedTransportIso`). Each factor has degree
-two and twist one, and their supports meet in `Z ∩ U`, giving degree `2c` and twist `c`. -/
+`V(f₁, …, f_c) = Z ∩ U`, `AlgebraicGeometry.Etale.supportedTransportIso`). -/
 noncomputable def cl (F : PurityFrame z c) [HasInvertibleExponent Λ V] :
     haveI : HasInvertibleExponent Λ F.U := .of_hom F.e
     constantComplex Λ F.U ⟶ (R(pullback.snd z F.e)_![ModuleCat.{u + 1} Λ]).obj

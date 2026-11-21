@@ -34,14 +34,6 @@ factors*.
   up to permutation and isomorphism.
 - `Representation.CompositionSeries.nonempty_semisimplification_equiv`: the semisimplification does
   not depend on the composition series.
-
-## Blueprint
-
-- `prose-14-13`: composition series and composition factors.
-- `definition-determinant-weight--2`, `lemma-tensor-exterior-powers-filtered-representations--3`:
-existence, and Jordan–Hölder.
-- `prose-14-13`, `lemma-tensor-exterior-powers-filtered-representations--3`: the
-  semisimplification.
 -/
 
 @[expose] public section

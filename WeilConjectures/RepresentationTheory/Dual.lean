@@ -19,10 +19,9 @@ on `S / U` is a linear form on `S` vanishing on `U`, and extends to `V` because 
 
 Consequently a finite filtration `0 = F₀ ≤ ⋯ ≤ F_m = V` induces the filtration
 `0 = F_m^⊥ ≤ ⋯ ≤ F₀^⊥ = V^∨` of `ρ^∨`, whose graded pieces are the contragredients of the graded
-pieces of `F`, and the constituents of `ρ^∨` are the contragredients of those of `ρ`. This is the
-case of the dual in part L3 (tensor filtration) of the linear-algebra library
-`lemma-tensor-exterior-powers-filtered-representations--3`; the cases of tensor products and
-exterior powers are `Representation.HasGradedPieces.tprod_left`,
+pieces of `F`, and the constituents of `ρ^∨` are the contragredients of those of `ρ`. The
+analogous statements for tensor products and exterior powers are
+`Representation.HasGradedPieces.tprod_left`,
 `Representation.CompositionSeries.hasGradedPieces_tprod` and
 `Representation.CompositionSeries.hasGradedPieces_exteriorPower`.
 
@@ -81,7 +80,8 @@ theorem hasGradedPieces_dual (s : ρ.CompositionSeries) :
 
 /-- **Composition factors of the contragredient.** For a finite-dimensional representation `ρ`,
 the composition factors of any composition series `c` of the contragredient `ρ^∨` are, with
-multiplicities, the contragredients of the composition factors of a composition series `s` of `ρ`. -/
+multiplicities, the contragredients of the composition factors of a composition series `s` of
+`ρ`. -/
 theorem exists_equiv_dual [FiniteDimensional k V] (s : ρ.CompositionSeries)
     (c : ρ.dual.CompositionSeries) :
     ∃ e : Fin c.length ≃ Fin s.length, ∀ j, Nonempty ((c.factor j).Equiv (s.factor (e j)).dual) :=

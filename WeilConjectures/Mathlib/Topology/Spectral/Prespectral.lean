@@ -34,7 +34,7 @@ variable {X : Type*} [TopologicalSpace X]
 closed subsets `T₁`, `T₂` there are compact opens `O₁`, `O₂` covering the space such
 that `O₁` avoids `T₁` and `O₂` avoids `T₂`. Equivalently, the closed sets `O₁ᶜ ⊇ T₁`
 and `O₂ᶜ ⊇ T₂` are disjoint and have quasi-compact complements.
-(Constructible approximation step in the proof of Stacks Project Tag 0F3W.) -/
+(See Stacks Project Tag 0F3W.) -/
 theorem PrespectralSpace.exists_isCompact_isOpen_disjoint_union_eq_univ
     [CompactSpace X] [PrespectralSpace X] {T₁ T₂ : Set X}
     (h₁ : IsClosed T₁) (h₂ : IsClosed T₂) (hd : Disjoint T₁ T₂) :

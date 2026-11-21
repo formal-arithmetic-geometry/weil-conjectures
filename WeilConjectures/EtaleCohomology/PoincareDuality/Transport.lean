@@ -10,14 +10,14 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
 /-!
 # Transport through the coefficient stages
 
-The blueprint builds the Poincaré pairing at the finite stages `A_{E,n} = 𝒪_E/ϖ^n` and
-carries it to `𝒪_E`, `E` and `ℚ̄_ℓ` by the uniform-tower reconstruction and by descent along
-the common-stage construction. In this repository a coefficient stage is a ring `Λ` with the
+The Poincaré pairing is built at the finite stages `A_{E,n} = 𝒪_E/ϖ^n` and carried to `𝒪_E`,
+`E` and `ℚ̄_ℓ` by the uniform-tower reconstruction and by descent along the common-stage
+construction. In this repository a coefficient stage is a ring `Λ` with the
 category `ModuleCat Λ`, the finite reduction along an ideal `J` is the endofunctor
 `AlgebraicGeometry.Etale.reductionModIdeal` (`K ↦ K ⊗ᴸ (Λ/J)_X`) of `D(X_ét, Λ)`, and the
 `𝒪_E` stage is the derived-complete subcategory `DerivedCategory.derivedCompleteIntegral`.
-This file states the genuinely new content of `theorem-poincare-duality--9` that the API can
-express.
+This file states the compatibility of Poincaré duality with finite reduction, in the form the
+API can express.
 
 ## Main statements
 
@@ -25,7 +25,7 @@ express.
   Poincaré pairing of the reduction `K ⊗ᴸ (Λ/J)_X` is perfect, as is that of every complex at a
   finite coefficient ring.
 
-The other ingredients of `theorem-poincare-duality--9` are stated where they belong:
+The other ingredients of the transport are stated where they belong:
 `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal` and
 `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar` identify the two
 factors of the reduced pairing with the reductions of the two factors of `β_K`, and
@@ -34,18 +34,15 @@ factors of the reduced pairing with the reductions of the two factors of `β_K`,
 `AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerStar` place every object of
 `β_K` at `Λ = 𝒪_E` in the adic category `D_comp(−, 𝒪_E)`.
 
-The two other nodes of the subsection are proved in their own files:
-`prop-pod-integral-degreewise-form` in
+The integral degreewise form is in
 `WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise` (the universal coefficient
 sequences `AlgebraicGeometry.Etale.shortExact_compactlySupportedReductionSequence`,
 `AlgebraicGeometry.Etale.shortExact_cohomologyReductionSequence`,
 `AlgebraicGeometry.Etale.integralDegreewise_adjoint` and the degreewise duality
-`AlgebraicGeometry.Etale.integralDegreewiseDuality`), and
-`theorem-poincare-duality--6` in
+`AlgebraicGeometry.Etale.integralDegreewiseDuality`), and the adic reconstruction in
 `WeilConjectures.EtaleCohomology.PoincareDuality.AdicReconstruction` (the adjoint
 `AlgebraicGeometry.Etale.poincareAdjoint`, its reductions and
-`AlgebraicGeometry.Etale.adicReconstruction_scalarExtension`). The third node,
-`theorem-poincare-duality--6`, is treated separately.
+`AlgebraicGeometry.Etale.adicReconstruction_scalarExtension`).
 
 ## Not stated
 
@@ -61,11 +58,10 @@ sequences `AlgebraicGeometry.Etale.shortExact_compactlySupportedReductionSequenc
   of the base-changed complexes needs the compatibility of the six operations with derived base
   change, which the repository does not have. The transport of the degree-indexing maps, of
   the relative form and of the Frobenius squares is not stated.
-- *The `ℚ̄_ℓ` stage.* The colimit over finite `E/ℚ_ℓ` is treated with
-  `theorem-poincare-duality--6`.
+- *The `ℚ̄_ℓ` stage.* The colimit over finite `E/ℚ_ℓ` is treated with the adic reconstruction.
 - *The trace isomorphism and the Frobenius statements.* They are built from the pairing and
-  the smooth trace, and transport with them; the Frobenius statements belong to
-  `theorem-poincare-duality-frobenius`.
+  the smooth trace, and transport with them; the Frobenius statements are in
+  `WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius`.
 -/
 
 @[expose] public section
@@ -83,16 +79,9 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
 
-/-- Transport through the coefficient stages.
-
-**The duality is compatible with finite reduction.** For an ideal `J` of the finite
+/-- **The duality is compatible with finite reduction.** For an ideal `J` of the finite
 coefficient ring `Λ`, a Tate orientation `γ` and `K ∈ D(X_ét, Λ)`, the derived Poincaré pairing
-`β_{K ⊗ᴸ (Λ/J)}` of the reduction of `K` is perfect. The reduction of a perfect complex need not
-be perfect over `Λ`, so this is not an instance of
-`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing` for `K ⊗ᴸ (Λ/J)`
-itself; it holds because at a finite coefficient ring the derived Poincaré pairing is perfect
-for every complex, the Tate twist being invertible
-(`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`). -/
+`β_{K ⊗ᴸ (Λ/J)}` of the reduction of `K` is perfect. -/
 theorem isPerfectPairing_poincarePairing_reductionModIdeal [HasInvertibleExponent Λ X]
     (γ : TateOrientation Λ a d)
     (J : Ideal Λ) (K : DerivedCategoryModule Λ X) :

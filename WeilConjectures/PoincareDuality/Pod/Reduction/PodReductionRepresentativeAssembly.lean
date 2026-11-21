@@ -187,8 +187,7 @@ private theorem map_three {C D : Type*} [Category C] [Category D]
   simpa only [Functor.map_comp] using congrArg (fun z ↦ F.map z) h
 
 /-- The reduction/reindexing tensor square on flat-term K-flat representatives.
-Source: Stacks 07A4 and 0941. The proof pastes the unary models with the strict tensor identity
-and cancels the model isomorphisms. No finite-evaluation faithfulness is used. -/
+Source: Stacks 07A4 and 0941. -/
 theorem podReduction_assemble_representative
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

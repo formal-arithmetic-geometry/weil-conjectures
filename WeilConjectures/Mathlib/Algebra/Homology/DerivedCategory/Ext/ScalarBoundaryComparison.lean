@@ -32,7 +32,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 /-- In an exact-functor square U⋙G≅F⋙V, a degree-two class c with scalar adjunct βκ transports to
 the class d under given source comparison isomorphisms. If the degree-one Kummer classes κ and
 κprime commute with the target comparison and with a map on unit sheaves, then the V-scalar adjunct
-of d is the transported boundary composed with κprime [def-weil-abstract-derived-category].
+of d is the transported boundary composed with κprime.
 Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem scalar_boundary_comparison
     (τ : U ⋙ G ≅ F ⋙ V) {P Q : C} {X Y : B} {X' Y' : E} {P' : D}

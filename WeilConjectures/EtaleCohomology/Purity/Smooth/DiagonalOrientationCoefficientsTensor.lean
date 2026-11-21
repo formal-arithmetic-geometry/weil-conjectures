@@ -265,11 +265,7 @@ closed immersion `s : B ⟶ V`, identifications `vω : Ψ ω ≅ ω'`, `vT : Ψ 
 objects and corresponding isomorphisms `θ : Rs^! T ≅ Λ_B`, `θ' : Rs^! T' ≅ Λ'_B` and
 `ε : Rs^! ω ≅ Λ_B`, `ε' : Rs^! ω' ≅ Λ'_B`, the isomorphisms `Ls^* ω ≅ Ls^* T`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso`) over `Λ` and
-`Λ'` correspond. After composing with the isomorphism
-`Ls^* T ≅ Λ_B ⊗ Ls^* T ≅ Rs^! ω ⊗ Ls^* T ≅ Rs^!(ω ⊗ T)`, the construction becomes
-`Ls^* ω ≅ Λ_B ⊗ Ls^* ω ≅ Rs^! T ⊗ Ls^* ω ≅ Rs^!(T ⊗ ω) ≅ Rs^!(ω ⊗ T)`; both are composites of
-unitors, of the given isomorphisms, of tensor maps of `Rs^!` and of `Rs^!` of the symmetry,
-each of which is compatible with the change of coefficients. -/
+`Λ'` correspond. -/
 theorem map_leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso {ω T : 𝐃(V, Λ)}
     {ω' T' : 𝐃(V, Λ')} (vω : (Φ.functor V).obj ω ≅ ω') (vT : (Φ.functor V).obj T ≅ T')
     (hω : DerivedCategory.isInvertible Λ V ω) (hT : DerivedCategory.isInvertible Λ V T)
@@ -369,17 +365,13 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finit
   [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasKummerClass Λ']
   [HasKummerClass.IsNormalized Λ'] (Φ : MonoidalSupportedCoefficientChange Λ Λ')
 
-/-- Blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`
+/-- Change of coefficients in purity
 
 **The canonical orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with a monoidal change of
 coefficients** (`AlgebraicGeometry.Etale.dualizingComplexTwistShiftIso`), as soon as the change
 of coefficients carries the frame classes of the diagonal over `Λ` to those over `Λ'`
 (`hframe`), and the smooth base change identifications `𝒞(p₁, Δ) ≅ ω_f` (`hC`) and the
-composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`) correspond: this is
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`, whose
-remaining hypothesis is
-`AlgebraicGeometry.Etale.MonoidalSupportedCoefficientChange.preservesSectionInvariantIso`. -/
+composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`) correspond. -/
 theorem map_dualizingComplexTwistShiftIso {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
     [SmoothOfRelativeDimension d f] [HasCompactification f] [IsSeparated f]
     [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ' X] {k : Type u} [Field k]

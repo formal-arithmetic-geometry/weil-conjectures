@@ -33,7 +33,7 @@ namespace WeilConjectures
 
 /-- The canonical truncation comparisons together with exactness and t-exactness.
 The equations fix both comparisons by the truncation counit and unit.
-Source: the DAG proof, Steps 2--4, using BBD 1.3.3. -/
+Source: BBD 1.3.3. -/
 structure PointRealizationComparison
     {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -52,8 +52,8 @@ structure PointRealizationComparison
     F.map ((t.truncGEπ j).app K) ≫ (lower j).hom.app K =
       (s.truncGEπ j).app (F.obj K)
 
-/-- Compose the counit- and unit-characterized comparisons, then commute the shift.
-This is the truncation-induced δ, rather than an arbitrary cohomology isomorphism. -/
+/-- The truncation-induced comparison `δ`: the composite of the counit- and
+unit-characterized comparisons, followed by commuting the shift. -/
 def PointRealizationComparison.delta
     {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

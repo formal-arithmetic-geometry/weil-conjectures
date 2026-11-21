@@ -27,10 +27,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /--
-The normalized tensor and Hom comparison data exists for reindexing along a scheme
-isomorphism.  This is the construction of all fields of `Comparison`, before the
-evaluation equation is imposed.
-
+The normalized tensor and Hom comparison data (all fields of `Comparison`, without the
+evaluation equation) exist for reindexing along a scheme isomorphism.
 Source: Stacks 0GMX and 0A8X.
 -/
 theorem comparison_core_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

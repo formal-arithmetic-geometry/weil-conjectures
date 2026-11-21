@@ -114,14 +114,6 @@ private lemma chain_projection' {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   exact c.chain_projection P I n p U.unop V.unop.left V.unop.hom z x
 
 /-- The supplied signed shifts satisfy the chain reindexing square.
-
-For each product projection, both routes reindex the source factor from `p`
-to `p-a` and carry the scalar `(-1)^(a*r)`.  The `chain_projection` field of
-the normalized comparison identifies the two projection maps.  Product
-extensionality then gives the displayed equality of chain morphisms.  This is
-strictly smaller than the existence theorem because the two shift structures
-are fixed as hypotheses.
-
 Source: Stacks 0A8X, 08JA. -/
 theorem chain_shift_reindexing_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

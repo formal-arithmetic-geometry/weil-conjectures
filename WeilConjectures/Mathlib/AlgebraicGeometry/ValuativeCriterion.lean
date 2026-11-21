@@ -42,14 +42,7 @@ instance : IsZariskiLocalAtTarget ValuativeCriterion.Existence := by
 /-- **An affineness criterion for opens of universally closed schemes.** Let `f : X ⟶ S` be
 universally closed with `S` affine, let `D j` be finitely many affine opens covering `X`, and let
 `U` be an open of `X` with `U ⊓ D j = D(a j)` for functions `a j` on `D j`. If there are
-functions `g j` on `U` with `D(g j) ⊆ D j` and `g j * a j = 1` on `U ⊓ D j`, then `U` is affine.
-
-The canonical map `U ⟶ Spec Γ(X, U)` satisfies the existence part of the valuative criterion:
-the lift `Spec R ⟶ X` given by the valuative criterion for `f` sends the closed point into some
-`D j`, hence lands in `D j`, and there `a j` becomes a unit, its inverse being the image of
-`g j`; so it lands in `U`. Being quasi-compact, `U ⟶ Spec Γ(X, U)` is universally closed, and
-it is dominant, hence surjective. As the `D(g j)` cover `U`, the `g j` then generate the unit
-ideal of `Γ(X, U)`, and `D(g j) = D(a j)` is affine. -/
+functions `g j` on `U` with `D(g j) ⊆ D j` and `g j * a j = 1` on `U ⊓ D j`, then `U` is affine. -/
 theorem IsAffineOpen.of_universallyClosed {X S : Scheme.{u}} (f : X ⟶ S) [UniversallyClosed f]
     [IsAffine S] {ι : Type*} [Finite ι] (D : ι → X.Opens) (hD : ∀ j, IsAffineOpen (D j))
     (hcov : ⨆ j, D j = ⊤) (U : X.Opens) (a : ∀ j, Γ(X, D j))

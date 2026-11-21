@@ -180,10 +180,8 @@ theorem nonempty_iso_fourierTransform_derivedLowerShriek_of_isPullback
 /-- **The transform of a punctual sheaf, explicitly**. Let `F` be a Weil sheaf on the affine line
 vanishing on a dense open `U₀` with closed complement `i : Z₀ ↪ 𝔸¹`, and let `X'` be the base
 change of `i` along the first projection of `𝔸¹ × 𝔸¹`, with projections `q : X' ⟶ Z₀` and
-`i' : X' ⟶ 𝔸¹ × 𝔸¹`, and `π = pr₂ ∘ i'` finite. Then `FT_ψ(F) ≅ (π_*(i'^* 𝓚_ψ ⊗ q^* i^* F))[1]`:
-`F ≅ i_* i^* F`, compact support base change, the projection formula and the composition law give
-`FT_ψ(i_* E) ≅ Rπ_!(i'^*𝓚_ψ ⊗ q^*E)[1]`, and `Rπ_!` of a sheaf is the sheaf `π_*` in degree zero
-since `π` is finite. -/
+`i' : X' ⟶ 𝔸¹ × 𝔸¹`, and `π = pr₂ ∘ i'` finite. Then
+`FT_ψ(F) ≅ (π_*(i'^* 𝓚_ψ ⊗ q^* i^* F))[1]`. -/
 theorem nonempty_iso_fourierTransform_toComplex_of_isPullback
     (ψ : AddChar k₀ (PadicAlgCl l)) {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     (j : U ⟶ affineLine k₀) [IsOpenImmersion j] [QuasiCompact j]

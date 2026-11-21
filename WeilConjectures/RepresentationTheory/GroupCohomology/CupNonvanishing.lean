@@ -18,8 +18,7 @@ Let `G` be a commutative group, `k` a nontrivial commutative ring, and suppose t
 homomorphisms `a₁, …, aₙ : G → k` and elements `e₁, …, eₙ ∈ G` with `aᵢ(eⱼ) = δᵢⱼ`. Then
 `Hⁿ(G, k) ≠ 0` for the trivial representation `k`
 (`groupCohomology.not_isZero_of_dualFamily`). This applies to `G ≅ ℤⁿ` and to `G ≅ ⊕_ℕ ℤ` in
-every degree, which is the group-cohomological input `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0` of blueprint
-`sk-rem-sf-fullcd-scope`.
+every degree, giving `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0`.
 
 The proof avoids the Künneth formula. The cup product `a₁ ∪ ⋯ ∪ aₙ`, `(g₁, …, gₙ) ↦ ∏ aᵢ(gᵢ)`,
 is a cocycle (a telescoping sum). The alternating pairing
@@ -234,8 +233,7 @@ theorem not_isZero_of_dualFamily [Nontrivial k] {n : ℕ} (e : Fin (n + 1) → G
   exact one_ne_zero this
 
 /-- `Hⁿ(⊕_ι ℤ, k) ≠ 0` in every positive degree for an infinite index type `ι` and a nontrivial
-commutative ring `k`, with trivial action; in particular `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0` for `n ≥ 1`, the
-group-cohomological input of blueprint `sk-rem-sf-fullcd-scope`. -/
+commutative ring `k`, with trivial action; in particular `Hⁿ(⊕_ℕ ℤ, Λ) ≠ 0` for `n ≥ 1`. -/
 theorem not_isZero_groupCohomology_finsupp [Nontrivial k] (ι : Type u) [Infinite ι] (n : ℕ) :
     ¬ Limits.IsZero
       (groupCohomology (Rep.trivial k (Multiplicative (ι →₀ ℤ)) k) (n + 1)) := by

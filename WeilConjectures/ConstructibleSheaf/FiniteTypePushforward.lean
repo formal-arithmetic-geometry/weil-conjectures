@@ -38,8 +38,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 Let `X` be of finite type over a field `k` and `F` a constructible sheaf of `Λ`-modules on
 `X_ét`, for a finite ring `Λ`. There are finitely many finite morphisms `hᵢ : Yᵢ ⟶ X`, finite
-`Λ`-modules `Mᵢ` and a monomorphism `F ⟶ ⨁ᵢ (hᵢ)_* Mᵢ`. The blueprint states this for
-`Λ = ℤ/N`, where the `Mᵢ` are finite abelian groups killed by `N`. -/
+`Λ`-modules `Mᵢ` and a monomorphism `F ⟶ ⨁ᵢ (hᵢ)_* Mᵢ`. -/
 theorem Etale.exists_mono_biproduct_lowerStar_of_locallyOfFiniteType {k : Type u} [Field k]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] :

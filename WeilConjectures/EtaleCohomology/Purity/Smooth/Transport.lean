@@ -30,9 +30,13 @@ reductions) and `AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotop
 realization at the `𝒪_E` stage of a levelwise isomorphism of normalized systems); the smooth
 traces are in
 `WeilConjectures.EtaleCohomology.Purity.Smooth.Trace`. The purity isomorphism cannot be read
-off `proposition-smooth-purity-finite-coefficients` at `Λ = 𝒪_E`: in the étale model `Lf^* K` of a
+off smooth purity with finite coefficients at `Λ = 𝒪_E`: in the étale model `Lf^* K` of a
 derived complete `K` need not be derived complete (the constant sheaf `𝒪_E` on `𝔾_m` over an
 algebraically closed field is not), whereas `Rf^! K` is.
+
+The exceptional inverse image `Rf^!` at the integral stage is the right adjoint of `Rf_!`, whose
+existence is assumed: the instance `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`
+only covers finite coefficients.
 
 ## Main statements
 
@@ -80,13 +84,7 @@ omit [IsSeparated f] in
 relative dimension `d` and let `Λ = 𝒪_E` be the integral coefficient stage. Then `Rf^!`
 carries derived-complete objects of `D(Y_ét, 𝒪_E)` to derived-complete objects of
 `D(X_ét, 𝒪_E)`, so that it restricts to the adic categories `D_comp(−, 𝒪_E)` in which the
-`ℓ`-adic formalism is typed. The exceptional inverse image `Rf^!` at the integral stage is the
-right adjoint of `Rf_!`, whose existence is assumed here: the instance
-`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek` only covers finite coefficients.
-
-The purity isomorphism `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` at the adic stage, realized from the
-finite-level purity isomorphisms, is their realization
-(`AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotopyLimit`). -/
+`ℓ`-adic formalism is typed. Here `Rf_!` is assumed to have a right adjoint. -/
 theorem derivedCompleteIntegral_rightDerivedUpperShriek
     [(R(f)_![ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).IsLeftAdjoint]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology

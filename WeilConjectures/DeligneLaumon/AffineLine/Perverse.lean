@@ -27,12 +27,12 @@ exact equivalence between the perverse hearts of the two dual lines.
 The three classes below are stated for an arbitrary `k₀`-scheme, but they agree with the
 perverse t-structure only on a smooth curve — whence the names. On a scheme of dimension at
 least two the perverse t-structure is not described by these two conditions, and the names
-`IsCurvePerverse*` keep the description distinct from the genuine t-structure that
-`chap-The-six-operations-on-Dbctf` will build.
+`IsCurvePerverse*` keep the description distinct from the genuine perverse t-structure on
+`Dᵇc`.
 
-That the Fourier transform is an equivalence at all is Fourier inversion, which belongs to the
-block `chap-The-Fourier-transform`: it is `AlgebraicGeometry.isEquivalence_fourierTransform`. What
-this subsection adds is that the equivalence is exact for the perverse t-structures.
+That the Fourier transform is an equivalence at all is Fourier inversion,
+`AlgebraicGeometry.isEquivalence_fourierTransform`. What this file adds is that the equivalence is
+exact for the perverse t-structures.
 
 ## Main declarations
 
@@ -751,15 +751,9 @@ theorem isZero_of_isZero_shift_one_toComplex {G : WeilSheaf k₀ l (affineLine k
   ((homologySheaf (-1 : ℤ)).map_isZero h).of_iso
     (homologySheafShiftToComplexIso G 1 (-1) (by norm_num)).symm
 
-/-- **Simple objects without `𝓗⁰` are middle extensions**. Let
-`P` be simple with `𝓗⁰P = 0`, so `P ≅ F[1]` for `F = 𝓗⁻¹P` without punctual subsheaf. On a
-dense open `j : U₀ ↪ 𝔸¹` where `F` is lisse, the unit `F ⟶ j_*j^*F` is injective with punctual
-cokernel `Q` (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_mono_directImage`), and the
-triangle `Q[0] ⟶ F[1] ⟶ (j_*j^*F)[1] ⟶` exhibits `Q[0]` as a subobject of `P`, so `Q = 0` and
-`P ≅ (j_*N)[1]`, `N = j^*F`. A lisse subsheaf `N' ⊆ N` gives the subobject `(j_*N')[1]` of `P`,
-with quotient `C[1]`, `C = coker(j_*N' ⟶ j_*N)` having no punctual subsheaf
-(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isZero_of_mono_cokernel_lowerStar_map`); so
-`N' = 0` or `N' = N`. -/
+/-- **Simple objects without `𝓗⁰` are middle extensions**. A simple curve perverse object `P`
+with `𝓗⁰P = 0` is isomorphic to the middle extension `(j_*N)[1]` of an irreducible lisse Weil
+sheaf `N` on a dense open `j : U₀ ↪ 𝔸¹`. -/
 theorem exists_middleExtension_of_simple
     (P : (curvePerverse (k₀ := k₀) (l := l)).FullSubcategory) [Simple P]
     (h : IsZero ((homologySheaf (0 : ℤ)).obj P.obj)) :
@@ -886,13 +880,7 @@ theorem WeilComplex.isCurvePerverseLE_tateTwist_iff (m n : ℤ)
     WeilComplex.support_homologySheaf_tateTwist]
 
 /-- **The Fourier transform is perverse t-exact on the line**, upper classes: for a nontrivial
-`ψ`, the transform `FT_ψ` carries `ᵖD^{≤n}(A₀)` into `ᵖD^{≤n}(A'₀)`. The truncation triangle
-`τ_{<n}K ⟶ K ⟶ 𝓗ⁿK[-n] ⟶` reduces this to two facts: `FT_ψ` carries `D^{≤n-1}` into
-`D^{≤n}` with top cohomology sheaf of finite support
-(`AlgebraicGeometry.isLE_fourierTransform_obj`,
-`AlgebraicGeometry.support_homologySheaf_fourierTransform_finite`), and a sheaf of finite
-support transforms into a complex `≤ -1`
-(`AlgebraicGeometry.isLE_fourierTransform_of_isGE_of_isLE`). -/
+`ψ`, the transform `FT_ψ` carries `ᵖD^{≤n}(A₀)` into `ᵖD^{≤n}(A'₀)`. -/
 theorem isCurvePerverseLE_fourierTransform_obj (ψ : AddChar k₀ (PadicAlgCl l)) (hψ : ψ ≠ 1)
     {n : ℤ} {K : WeilComplex k₀ l (affineLine k₀)} (hK : K.IsCurvePerverseLE n) :
     ((fourierTransform ψ).obj K).IsCurvePerverseLE n := by

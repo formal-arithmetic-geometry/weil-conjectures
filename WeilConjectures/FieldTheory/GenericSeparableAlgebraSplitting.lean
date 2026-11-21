@@ -34,8 +34,7 @@ open scoped TensorProduct
 namespace Algebra
 
 /-- The reduction of a finite-dimensional commutative algebra over a field is a finite product
-of finite field extensions.  This is the Artinian nilradical/Chinese-remainder part of the
-finite-algebra calculation in the proof of Tag 02LM. -/
+of finite field extensions. Source: Stacks Project, proof of Tag 02LM. -/
 private theorem exists_reduction_equiv_pi_of_finite_dimensional
     (K : Type u) [Field K] (C : Type v) [CommRing C] [Algebra K C]
     [FiniteDimensional K C] :

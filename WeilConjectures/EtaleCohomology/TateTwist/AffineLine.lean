@@ -14,28 +14,28 @@ public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageAmplitude
 # The cohomology of `𝔸¹` and `𝔾ₘ` with coefficients in the Tate twist `μₙ ⊗ Λ`
 
 For the concrete Tate twist `Λ(1) = μₙ ⊗ Λ` and its Kummer classes
-(`AlgebraicGeometry.Etale.hasKummerClass`), the computations of `sk-prop-a1-kummer` on the
-affine line `p : 𝔸¹_B ⟶ B` and on `π : 𝔾_{m,B} ⟶ 𝔸¹_B ⟶ B`, over a base `B` separated and
-locally of finite type over a field on which `n` is invertible:
+(`AlgebraicGeometry.Etale.hasKummerClass`), the cohomology of the affine line
+`p : 𝔸¹_B ⟶ B` and of `π : 𝔾_{m,B} ⟶ 𝔸¹_B ⟶ B`, over a base `B` separated and locally of finite
+type over a field on which `n` is invertible:
 
 * `Rp_* Λ(1)` is `Λ_B(1)` in degree zero;
 * restriction along `j : 𝔾_{m,B} ⟶ 𝔸¹_B` identifies `R⁰p_* Λ(1)` with `R⁰π_* Λ(1)`;
 * `R¹π_* Λ(1)` is free of rank one on the Kummer class `κ(t)` of the coordinate;
 * `R^mπ_* Λ(1) = 0` for `m ≥ 2`.
 
-These are the clauses (a)–(c) of `sk-prop-a1-kummer`, read for the twisted coefficients `Λ(1)`
-as they are used in the proof of `sk-prop-a1`, and with the generator `κ(t)` of clause (b) made
-explicit. The forms `AlgebraicGeometry.Etale.nonempty_iso_homology_one_multiplicativeGroup` and
+These computations are stated for the twisted coefficients `Λ(1)`, with the generator `κ(t)` of
+`R¹π_* Λ(1)` made explicit. The forms
+`AlgebraicGeometry.Etale.nonempty_iso_homology_one_multiplicativeGroup` and
 `AlgebraicGeometry.Etale.isZero_homology_multiplicativeGroup` of
 `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine` assume a normalized twist datum,
-which for the concrete twist is the very statement `sk-prop-a1` they are used to prove, and they
-do not name the generator; hence these statements for the concrete twist. The vanishing in
-negative degrees is the left t-exactness of the direct images.
+which for the concrete twist is the relative purity of the zero section of `𝔸¹` that they
+are used to prove, and they do not name the generator; hence these statements for the concrete
+twist. The vanishing in negative degrees is the left t-exactness of the direct images.
 
 Over an algebraically closed field and for `B` quasi-compact, the same computations, phrased
 for the direct image along the composite `G ⟶ 𝔸¹_B ⟶ B` of an arbitrary open complement of the
 zero section, are proved in `WeilConjectures.EtaleCohomology.Purity.Smooth.GmRelativeKummer`,
-for instance clause (c) as
+for instance the vanishing of `R^mπ_* Λ(1)` for `m ≥ 2` as
 `AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_tateObject_multiplicativeGroup`;
 the statements here are over an arbitrary field.
 
@@ -71,7 +71,7 @@ attribute [local instance] HasInvertibleExponent.opens
 include aB in
 /-- The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
-The proposition `sk-prop-a1-kummer`, clauses (a)–(c), for the concrete Tate twist
+The cohomology of `𝔸¹_B` and `𝔾_{m,B}` with coefficients in the concrete Tate twist
 `Λ(1) = μₙ ⊗ Λ`, with the generator `κ(t)` of clause (b) made explicit. Write
 `p : 𝔸¹_B ⟶ B` for the projection, `j : 𝔾_{m,B} ⟶ 𝔸¹_B` for the open complement of the zero
 section and `π = p ∘ j`, so that `Rπ_* Λ(1) = Rp_* Rj_* j^* Λ(1)`:
@@ -80,11 +80,7 @@ section and `π = p ∘ j`, so that `Rπ_* Λ(1) = Rp_* Rj_* j^* Λ(1)`:
 * (b) restriction along `j` identifies `R⁰p_* Λ(1)` with `R⁰π_* Λ(1)`, and the Kummer class
   `κ(t) : Λ_B ⟶ (Rπ_* Λ(1))[1]` (`AlgebraicGeometry.Etale.kummerClassAffineLineDirectImage`)
   induces an isomorphism `Λ_B ≅ R¹π_* Λ(1)`;
-* (c) `R^m π_* Λ(1) = 0` for `m ≥ 2`.
-
-The forms of this proposition in `WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLine`
-assume a normalized twist datum, which for the concrete twist is the statement `sk-prop-a1`
-proved from this one, and do not name the generator. -/
+* (c) `R^m π_* Λ(1) = 0` for `m ≥ 2`. -/
 theorem affineLine_multiplicativeGroup_homology_tateObject :
     (∀ n : ℤ, 0 < n → IsZero ((_root_.DerivedCategory.homologyFunctor _ n).obj
       ((R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ])).obj

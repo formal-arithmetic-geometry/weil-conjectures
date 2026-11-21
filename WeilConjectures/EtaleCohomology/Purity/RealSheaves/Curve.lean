@@ -15,10 +15,10 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.FundamentalGrou
 For a geometrically connected curve `C₀` over a finite field, the geometric part of every Weil
 group `W` of `C₀` is the étale fundamental group of the geometric curve, Frobenius-equivariantly
 (the homotopy exact sequence, `AlgebraicGeometry.WeilGroup.isEtaleQuotient`). This is the
-hypothesis `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` of the purity theorems of
-`theorem-rank-one-sheaves-have-finite`, `proposition-bound-largest-determinant-weight--1` and
-`theorem-purity-real-sheaves-curves--1`. Since it is an instance, those theorems apply as stated to
-every Weil group of a smooth geometrically connected curve, for instance to
+hypothesis `AlgebraicGeometry.WeilGroup.IsEtaleQuotient` of the finiteness of the geometric
+determinant of rank-one sheaves, the bound on the largest determinant weight and the purity of
+real sheaves on curves. Since it is an instance, those theorems apply as stated to every Weil
+group of a smooth geometrically connected curve, for instance to
 `AlgebraicGeometry.WeilGroup.ofFundamentalGroup`.
 
 ## Main statements
@@ -46,16 +46,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} (p : C ⟶ Spec (.of
 /-- **The homotopy exact sequence** (Stacks `0BTX`, SGA 1 IX.6.1): for a geometrically connected
 curve `C₀` over a finite field `𝔽_q`, the geometric part `ker deg` of a Weil group
 `W(C₀, s) ⊆ π₁(C₀, s) × ℤ`, that is the kernel of `π₁(C₀, s) → Gal(𝔽̄_q / 𝔽_q)`, is the étale
-fundamental group of the geometric curve `C = C₀ ×_{𝔽_q} 𝔽̄_q`, Frobenius-equivariantly.
-
-The map `π₁(C, t) → π₁(C₀, s)` at a `𝔽̄_q`-rational point `t` of `C` lands in `ker deg`
-(`AlgebraicGeometry.Scheme.FiniteEtale.mem_weilGroup_fundamentalGroupMap`), is injective
-(`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_injective_geometricFiber`), with image
-`ker deg` (`AlgebraicGeometry.Scheme.FiniteEtale.mem_range_fundamentalGroupMap_of_mem_weilGroup`),
-and a homeomorphism onto it since `π₁(C, t)` is compact. The Frobenius acts on `π₁(C, t)` through
-conjugation by an element of degree one
-(`AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroupMap_transportConj`,
-`AlgebraicGeometry.Scheme.FiniteEtale.mem_weilGroup_frobeniusElement`). -/
+fundamental group of the geometric curve `C = C₀ ×_{𝔽_q} 𝔽̄_q`, Frobenius-equivariantly. -/
 instance isEtaleQuotient (W : WeilGroup p) : W.IsEtaleQuotient := by
   have := W.connectedSpace
   have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace p

@@ -21,11 +21,6 @@ the computation of the convolution of the Fourier kernels.
 
 - `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_comp`: `FT_{ψ'} ∘ FT_ψ` is the kernel
   transform of `𝒦_{ψ'} ∗ 𝒦_ψ` with shift `r + r'`.
-
-## Blueprint
-
-The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
-repository; they are not labels of `blueprint/src` and so are not checked by the build.
 -/
 
 @[expose] public section

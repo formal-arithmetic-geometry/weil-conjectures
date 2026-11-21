@@ -17,11 +17,11 @@ public import WeilConjectures.WeilSheaf.MiddleExtension
 # Boundary semicontinuity of weights: reduction to affine curves
 
 Let `C₀` be a smooth geometrically connected curve over `k₀ = 𝔽_q`, `j : U₀ ⟶ C₀` a dense open
-immersion and `ℱ` a lisse Weil sheaf on `U₀` with punctual weights at most `β`. Step 0 of the
-proof of `proposition-weights-j-boundary-points--1` reduces the weight bound for `j_* ℱ` at a closed
-point `s` of `C₀` to the affine case `AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`: `s`
-has an affine open neighbourhood `X'₀`, again a smooth geometrically connected curve (a nonempty
-open of the geometrically irreducible `C₀`), and the stalk of `j_* ℱ` at `s` is that of
+immersion and `ℱ` a lisse Weil sheaf on `U₀` with punctual weights at most `β`. This file
+reduces the weight bound for `j_* ℱ` at a closed point `s` of `C₀` to the affine case
+`AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_directImage`: `s` has an affine open
+neighbourhood `X'₀`, again a smooth geometrically connected curve (a nonempty open of the
+geometrically irreducible `C₀`), and the stalk of `j_* ℱ` at `s` is that of
 `j'_* (ℱ|_{U'₀})` for the restriction `j' : U'₀ = U₀ ∩ X'₀ ⟶ X'₀`
 (`AlgebraicGeometry.WeilSheaf.nonempty_equiv_stalk_directImage_of_isPullback`). The general
 statement is `AlgebraicGeometry.WeilSheaf.IsLisse.hasWeightsAtMost_directImage`.
@@ -83,10 +83,9 @@ local instance locallyOfFiniteType_boundaryPurity :
   haveI := SmoothOfRelativeDimension.smooth 1 (C ↘ Spec (CommRingCat.of k₀))
   inferInstance
 
-/-- Step 0 of `proposition-weights-j-boundary-points--1`, abstractly: if a closed point `x` of `C₀`
-lies in the image of an open immersion `i : X'₀ ⟶ C₀` from a smooth geometrically connected affine
-curve, then the eigenvalues of the local Frobenius of `j_* ℱ` at `x` satisfy the weight bound,
-by the affine case applied to the restriction `j' : U'₀ ⟶ X'₀` of `j`. -/
+/-- Reduction of boundary weight bounds to affine curves: if a closed point `x` of `C₀` lies in
+the image of an open immersion `i : X'₀ ⟶ C₀` from a smooth geometrically connected affine
+curve, then the eigenvalues of the local Frobenius of `j_* ℱ` at `x` satisfy the weight bound. -/
 theorem norm_le_of_hasEigenvalue_stalk_directImage_of_isPullback {X' U' : Scheme.{u}}
     [X'.Over (Spec (CommRingCat.of k₀))] [U'.Over (Spec (CommRingCat.of k₀))] [IsAffine X']
     [SmoothOfRelativeDimension 1 (X' ↘ Spec (CommRingCat.of k₀))]

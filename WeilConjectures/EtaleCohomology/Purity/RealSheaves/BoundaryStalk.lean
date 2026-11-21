@@ -83,7 +83,7 @@ noncomputable def galoisStalkMap (F : Sheaf U.smallEtaleTopology (ModuleCat.{u +
   (pointSmallEtaleHom (genericGeometricPoint j) (σ : Ω →+* Ω)
     (specMap_comp_genericGeometricPoint j σ)).sheafFiber.app F
 
-/-- Blueprint `lemma-boundary-stalk--1` (the comparison map): the specialization map
+/-- Boundary stalk (the comparison map): the specialization map
 `(j_* F)_x̄ ⟶ F_η` from the stalk of the direct image at the geometric point over the boundary
 point to the geometric generic stalk, sending the germ of a section of `F` over `V ×_C U`, for an
 étale neighbourhood `V` of `x̄`, to its germ at the lift of `η` through `Spec B_Q ⟶ V`. -/
@@ -94,7 +94,7 @@ noncomputable def boundarySpecialization (F : Sheaf U.smallEtaleTopology (Module
   specializationStalk j (specAtPrime Fact.out Q) (CommRingCat.ofHom (Ideal.atPrimeToField Q)) _
     (pointOfAlgebra_comp_eq_specAtPrime j Fact.out Q) F
 
-/-- Blueprint `lemma-boundary-stalk--1` (injectivity): for `F` locally constant and `C`
+/-- Boundary stalk (injectivity): for `F` locally constant and `C`
 locally noetherian with étale local rings that are domains (e.g. regular), the specialization
 map of the boundary stalk is injective. -/
 theorem injective_boundarySpecialization
@@ -159,7 +159,7 @@ noncomputable def boundaryStalkMap (F : Sheaf U.smallEtaleTopology (ModuleCat.{u
   (pointSmallEtaleHom _ (residueAut Q hσ)
     (specMap_residueAut_comp_boundaryGeometricPoint Q hσ)).sheafFiber.app _
 
-/-- Blueprint `lemma-boundary-stalk--1` (Frobenius equivariance): the specialization
+/-- Boundary stalk (Frobenius equivariance): the specialization
 map intertwines the action of an element `σ` of the decomposition group on `F_η` with the action
 on `(j_* F)_x̄` of its residue automorphism. For a lift of the geometric Frobenius of `κ(x)` this is
 the compatibility of the geometric Frobenius on the boundary stalk with the residue Frobenius
@@ -190,7 +190,7 @@ lemma boundaryStalkMap_eq_id_of_mem_inertia (hσ' : σ ∈ Q.inertia (Ω ≃ₐ[
     boundaryStalkMap (j := j) Q (Ideal.inertia_le_stabilizer Q hσ') F = 𝟙 _ :=
   pointSmallEtaleHom_sheafFiber_app_eq_id _ _ (residueAut_apply_of_mem_inertia Q hσ') _ _
 
-/-- Blueprint `lemma-boundary-stalk--1` (the image consists of invariants): the image of
+/-- Boundary stalk (the image consists of invariants): the image of
 the specialization map is fixed by the inertia group. -/
 theorem galoisStalkMap_boundarySpecialization (hσ' : σ ∈ Q.inertia (Ω ≃ₐ[C.functionField] Ω))
     (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -210,7 +210,7 @@ variable [QuasiCompact j] [IsDedekindDomain Γ(C, W)] (ϖ : Γ(C, W)) (hϖ : ϖ 
   [PerfectField m.ResidueField] [Q.LiesOver m]
 
 include hϖ hWU m in
-/-- Blueprint `lemma-boundary-stalk--1` (the inertia invariants lie in the image): for `F`
+/-- Boundary stalk (the inertia invariants lie in the image): for `F`
 finite locally constant, every inertia invariant of the geometric generic stalk `F_η` comes from
 the boundary stalk `(j_* F)_x̄`. -/
 theorem exists_boundarySpecialization_eq {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
@@ -325,7 +325,7 @@ theorem range_boundarySpecialization [Finite Λ] [ConnectedSpace U]
   exact galoisStalkMap_boundarySpecialization j Q hσ F y
 
 include hϖ hWU m in
-/-- Blueprint `lemma-boundary-stalk--1` (finite coefficient level): for a finite locally
+/-- Boundary stalk (finite coefficient level): for a finite locally
 constant sheaf `F` of modules over a finite ring, the boundary stalk `(j_* F)_x̄` is isomorphic,
 through the specialization map, to the inertia invariants `F_η^I` of the geometric generic
 stalk. -/
@@ -432,7 +432,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
   (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
 
 -- instance search through `SeparableClosure` and its integral closures is slow
-/-- Blueprint `lemma-boundary-stalk--1` (finite coefficient level): for a dense open
+/-- Boundary stalk (finite coefficient level): for a dense open
 `j : U₀ ⟶ C₀` of a smooth curve over a finite field, a boundary point `z` with an affine chart
 `c`, and a finite locally constant sheaf `F` of modules over a finite ring on `U₀`, the stalk of
 the middle extension `j_* F` at the geometric point `x̄` over `z` given by the point `Q` of `c`
@@ -467,7 +467,7 @@ lemma boundaryStalkEquiv_apply (hz : z ∉ Set.range j.base)
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
-/-- Blueprint `lemma-boundary-stalk--1` (Frobenius equivariance): for `σ` in the
+/-- Boundary stalk (Frobenius equivariance): for `σ` in the
 decomposition group of `Q`, the identification `(j_* F)_x̄ ≃ F_η^I` intertwines the action of `σ`
 on `F_η^I` with the action on `(j_* F)_x̄` of the automorphism of the geometric point `x̄`
 induced by the residue automorphism of `σ`. For `σ` a residue Frobenius lift, this is the
@@ -509,7 +509,7 @@ lemma map_inertiaInvariants_transport :
     rw [hT, T.apply_symm_apply]
     exact hy ⟨_, σ, hσ, rfl⟩
 
-/-- Blueprint `lemma-boundary-stalk--1` (finite coefficient level, representation form):
+/-- Boundary stalk (finite coefficient level, representation form):
 the boundary stalk `(j_* F)_x̄` is isomorphic to the invariants, in the stalk `F_{s_U}` with its
 action of `π₁(U₀, s_U)` (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.galoisRep`), of
 the image of the inertia group at the point `Q` of the chart. -/
@@ -523,7 +523,7 @@ noncomputable def boundaryStalkEquivInvariants (hz : z ∉ Set.range j.base) :
 
 set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
-/-- Blueprint `lemma-boundary-stalk--1` (Frobenius equivariance, representation form):
+/-- Boundary stalk (Frobenius equivariance, representation form):
 for `σ` in the decomposition group of `Q`, the identification of the boundary stalk with the
 inertia invariants in `F_{s_U}` intertwines the action of the residue automorphism of `σ` on
 `(j_* F)_x̄` with the action of the image of `σ` in `π₁(U₀, s_U)`. -/

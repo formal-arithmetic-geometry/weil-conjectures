@@ -21,11 +21,7 @@ open Polynomial
 
 /-- Let `g : K → A` be an integral ring homomorphism from a field, such that `A` has no
 idempotents other than `0` and `1`, and let `φ : A → K` be a retraction of `g`. Then every element
-of the kernel of `φ` is nilpotent.
-
-Indeed, if `a` is a root of the monic polynomial `X ^ m * q` with `q(0) ≠ 0`, then `X ^ m` and `q`
-are coprime, say `u X ^ m + v q = 1`, and `v(a) q(a)` is an idempotent. It is not `0`, since
-`a ^ m` is not a unit, so it is `1`, which forces `a ^ m = 0`. -/
+of the kernel of `φ` is nilpotent. -/
 theorem RingHom.IsIntegral.isNilpotent_of_eq_zero {K A : Type*} [Field K] [CommRing A]
     {g : K →+* A} (hg : g.IsIntegral) (φ : A →+* K) (hφ : φ.comp g = RingHom.id K)
     (hA : ∀ e : A, IsIdempotentElem e → e = 0 ∨ e = 1) {a : A} (ha : φ a = 0) :

@@ -200,9 +200,7 @@ theorem Etale.exists_isPullback_of_isClosedImmersion {X Z W : Scheme.{u}} (i : Z
   rw [Scheme.Hom.resLE_comp_ι] at hpaste
   exact ⟨W.basicOpen a, hw₀, Spec (CommRingCat.of T), _, inferInstance, _, hpaste⟩
 
-/-- Blueprint `lemma-openclosed-etale-lifts-locally`, pointed form.
-
-The pointed form of `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: if
+/-- The pointed form of `AlgebraicGeometry.Etale.exists_isPullback_of_isClosedImmersion`: if
 `i : Z ⟶ X` is a closed immersion, `p : W ⟶ Z` is étale and `s : Spec Ω ⟶ W` is a point of `W`
 with values in a field `Ω`, then there is an étale morphism `q : V ⟶ X` together with a morphism
 `g : V ×[X] Z ⟶ W` over `Z` through which `s` factors. -/
@@ -227,10 +225,7 @@ theorem Etale.exists_pullback_hom_of_isClosedImmersion {X Z W : Scheme.{u}} (i :
 
 /-- **Étale morphisms are locally standard étale.** For an étale morphism `q : W ⟶ Spec B` and a
 point `w` of `W`, there is a standard étale `B`-algebra `P.Ring` and a morphism
-`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`: the restriction of `q` to an affine
-open `Spec C` around `w` is given by an étale `B`-algebra `C`, which is standard étale after
-inverting an element not in the prime of `w` (`Algebra.IsEtaleAt.exists_isStandardEtale`).
-The morphism `Spec P.Ring ⟶ W` is an open immersion onto a basic open of the affine open. -/
+`Spec P.Ring ⟶ W` over `Spec B` which is an open immersion and whose image contains `w`. -/
 theorem Etale.exists_standardEtalePair_isOpenImmersion {B : CommRingCat.{u}} {W : Scheme.{u}}
     (q : W ⟶ Spec B) [Etale q] (w : W) :
     ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W), IsOpenImmersion e ∧
@@ -268,8 +263,7 @@ theorem Etale.exists_standardEtalePair_isOpenImmersion {B : CommRingCat.{u}} {W 
 
 /-- **Étale morphisms are locally standard étale.** For an étale morphism `q : W ⟶ Spec B` and a
 point `w` of `W`, there is a standard étale `B`-algebra `P.Ring` and a morphism
-`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`
-(`AlgebraicGeometry.Etale.exists_standardEtalePair_isOpenImmersion`). -/
+`Spec P.Ring ⟶ W` over `Spec B` whose image contains `w`. -/
 theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q : W ⟶ Spec B)
     [Etale q] (w : W) :
     ∃ (P : StandardEtalePair B) (e : Spec (.of P.Ring) ⟶ W),
@@ -280,13 +274,7 @@ theorem Etale.exists_standardEtalePair {B : CommRingCat.{u}} {W : Scheme.{u}} (q
 /-- An étale morphism `p : V ⟶ S` into an integral normal scheme `S` with separably closed
 function field is a local isomorphism: every point of `V` has an open neighbourhood mapping
 isomorphically onto an open of `S`. Normality of `S` is the hypothesis `hS` that every stalk of
-`S` is integrally closed.
-
-Over affine charts `Spec A ⊆ S` and `Spec B ⊆ V` this is
-`Algebra.Etale.exists_algHom_localizationAway_comap_eq`: every point of `Spec B` lies on a
-section of `Spec B → Spec A` over a basic open of `Spec A`, and a section of an étale morphism
-over an open is an open immersion (`AlgebraicGeometry.FormallyUnramified.isOpenImmersion_of_comp`).
--/
+`S` is integrally closed. -/
 theorem Etale.isLocalIso_of_isSepClosed_functionField {V S : Scheme.{u}} [IsIntegral S]
     (hS : ∀ x : S, IsIntegrallyClosed (S.presheaf.stalk x))
     [IsSepClosed S.functionField] (p : V ⟶ S) [Etale p] : IsLocalIso p := by
@@ -387,9 +375,7 @@ theorem Etale.exists_finite_opens_isOpenImmersion_of_isSepClosed_functionField
 
 /-- Let `f : X ⟶ S` be locally of finite type, `r : Z ⟶ S` étale and `p` a point of `X ×_S Z`
 over `z : Z`. The first projection maps the connected component of `p` in the fibre over `z`
-onto the connected component of its image in the fibre of `f` over `r z`: the map between these
-fibres is open, the fibre of `r` being discrete, and closed, being the base change of the finite
-morphism `Spec κ(z) ⟶ Spec κ(r z)`. -/
+onto the connected component of its image in the fibre of `f` over `r z`. -/
 theorem connectedComponentIn_subset_image_pullback_fst {X S Z : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFiniteType f] (r : Z ⟶ S) [Etale r] {z : Z} (p : ↑(pullback f r))
     (hp : pullback.snd f r p = z) :
@@ -451,9 +437,7 @@ theorem connectedComponentIn_subset_image_pullback_fst {X S Z : Scheme.{u}} (f :
     (Set.mem_image_of_mem _ mem_connectedComponent) hy'
   exact ⟨q, hq, by rw [← hy, ← hqy]⟩
 
-/-- A scheme `X` étale over a reduced scheme `Y` is reduced: every point of `X` has an affine
-neighbourhood `U` mapping into an affine open `V` of `Y` with `Γ(Y, V) ⟶ Γ(X, U)` étale, so
-`Γ(X, U)` is reduced by `Algebra.Etale.isReduced`, and so is its localisation, the stalk. -/
+/-- A scheme `X` étale over a reduced scheme `Y` is reduced. -/
 theorem isReduced_of_etale {X Y : Scheme.{u}} (f : X ⟶ Y) [Etale f] [IsReduced Y] :
     IsReduced X := by
   have (x : X) : _root_.IsReduced (X.presheaf.stalk x) := by

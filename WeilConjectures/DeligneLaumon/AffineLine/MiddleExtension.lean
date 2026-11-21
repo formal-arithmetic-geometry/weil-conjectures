@@ -74,10 +74,8 @@ def IsNonexceptional {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
 *Fourier-nonexceptional* if after geometric base change it is neither a constant sheaf (up to a
 constant Weil twist) nor the Artin–Schreier sheaf `ℒ_{ψ(a x)}` for any `a ∈ k`.
 
-The condition is phrased on `U`, using `j^* j_* M = M` and `j_*(ℒ|_U) = ℒ` for `ℒ` lisse on the
-whole line: `M_k̄` is not constant, and it is not isomorphic to `ℒ_{ψ(a x)}|_U`. The latter
-isomorphism is phrased as "`M_k̄` is irreducible and `ℒ_{ψ(a x)}|_U` is a constituent of it",
-which is equivalent since the Artin–Schreier sheaves are irreducible. -/
+The condition is phrased on `U`: `M_k̄` is not constant, and it is not the case that `M_k̄` is
+irreducible with `ℒ_{ψ(a x)}|_U` as a constituent. -/
 def LisseOnDenseOpen.IsFourierNonexceptional (ψ : AddChar k₀ (PadicAlgCl l))
     (D : LisseOnDenseOpen k₀ l) : Prop :=
   ¬ D.IsGeometricallyConstant ∧ ∀ a : AlgebraicClosure k₀,
@@ -158,11 +156,7 @@ lisse Weil sheaf `M'` on it whose middle extension is the transform:
 Irreducibility is meant among lisse sheaves (`AlgebraicGeometry.WeilSheaf.IsIrreducibleLisse`),
 not simplicity in the category of all Weil sheaves: a nonzero lisse sheaf on a curve is never
 simple there. A lisse `M` with `[Simple M]` is irreducible lisse by
-`AlgebraicGeometry.WeilSheaf.IsLisse.isIrreducibleLisse`.
-
-The object `(j_*M)[1]` is simple in the curve perverse heart, hence so is its transform; a simple
-perverse object is punctual or a middle extension, and the punctual case is excluded by
-nonexceptionality. -/
+`AlgebraicGeometry.WeilSheaf.IsLisse.isIrreducibleLisse`. -/
 theorem exists_middleExtension_fourierTransform (hψ : ψ ≠ 1)
     (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ D.j) :

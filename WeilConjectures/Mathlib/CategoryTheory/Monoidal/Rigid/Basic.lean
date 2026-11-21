@@ -367,13 +367,8 @@ lemma ihomTensorToIhom_comp_ihomCurry (K A Z N : C) :
   rw [key, whiskerLeft_curry_ihom_ev_app]
   monoidal
 
-/-- Internal Hom with an invertible twist (the categorical core).
-
-In a monoidal closed category, for every invertible object `N` the canonical map
-`(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism, for all `X` and `Z`. Since
-`- ⊗ N` is an autoequivalence, both sides corepresent the same functor
-`T ↦ (X ⊗ T ⊗ N⁻¹ ⟶ Z)`, and the canonical map induces this identification (Yoneda). No
-hypothesis on `X` is needed. -/
+/-- In a monoidal closed category, for every invertible object `N` the canonical map
+`(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism, for all `X` and `Z`. -/
 theorem isIso_ihomTensorToIhom (X Z : C) {N : C} (hN : IsInvertible N) :
     IsIso (ihomTensorToIhom X Z N) := by
   obtain ⟨N', ⟨e⟩, ⟨e'⟩⟩ := hN

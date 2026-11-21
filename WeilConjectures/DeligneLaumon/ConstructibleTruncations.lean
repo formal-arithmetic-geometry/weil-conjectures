@@ -18,10 +18,9 @@ The current ordinary condensed-coefficient proposition is proved in
 `WeilConjectures.AlgebraicGeometry.Condensed.CondensedConstructibleTruncations`,
 publicly reexported here.
 
-The declarations below retain the previously proved rational/common-stage API for its
-existing consumers. Their coefficient categories come from the historical 2026-10-15
-blueprint, and they are not the realization of the current ordinary-category proposition.
-No historical declaration or proof is removed.
+The declarations below provide the rational/common-stage API used by its consumers. Their
+coefficient categories differ from the ordinary condensed coefficient categories, and they are
+not the realization of the ordinary-category statement.
 -/
 
 @[expose] public noncomputable section

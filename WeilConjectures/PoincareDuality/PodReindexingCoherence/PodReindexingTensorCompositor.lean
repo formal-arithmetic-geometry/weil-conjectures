@@ -559,28 +559,9 @@ private theorem tensor_on_representatives {X Y Z : Scheme.{u}}
 -- The representative argument involves three exact derived functors.
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
-/-- The canonical site and localized tensor composition comparison.
+/-- The canonical site and localized tensor composition comparison exists: a `Compositor` for
+`g` and `h` whose derived tensor square commutes.
 Source: Stacks 09A5, 07A4, 0FPI.
-
-For each cochain complex P use this ordinary comparison in degree i. Naturality with respect to
-P.d proves commutation with the differential. The degree field is then the defining equation, and
-naturality in chain maps is inherited degreewise. Both exact reindexing functors invert quasi-
-isomorphisms. Descend this natural chain isomorphism through the localization functor. Whiskering
-with the localization is fully faithful, so the descended isomorphism has exactly the model
-equation with the three recorded podReindexingDerivedFactors. This constructs every field of
-Compositor, without choosing an arbitrary natural isomorphism.
-
-First prove the tensor square on the actual total complexes. In the summand of bidegree (p,q),
-both routes send a pure section x tensor y over U to the tensor of their restrictions along
-siteComp.inv.app U. This uses the tensorChain_pure fields of cg, ch and cgh; there is no
-interchange of degrees and hence no sign. The sheafified pure generators and total-summand
-inclusions detect equality, so the chain square follows. Reindexing along a scheme isomorphism
-preserves K-flat complexes as already recorded in the tensor_model fields. Apply the three
-tensor_model equations to independently K-flat representatives P,Q. Substitute the chain square
-and the compositor model equation, and cancel the comparison isomorphisms. This proves the
-displayed derived tensor square on Q(P),Q(Q). Finally take independent K-flat resolutions of
-arbitrary M,N; naturality of the tensor comparisons and compositor transports that square across
-their invertible augmentations. No Hom equation is assumed or asserted here.
 -/
 theorem tensor_compositor_exists {X Y Z : Scheme.{u}} (g : X ⟶ Y) (h : Z ⟶ X) [IsIso g] [IsIso h]
     [∀ x : X, Invertible (l : X.residueField x)]

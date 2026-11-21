@@ -10,7 +10,18 @@ public import WeilConjectures.RepresentationTheory.Continuous.ContinuousCochains
 /-!
 # Continuous cohomology of discrete profinite modules
 
-Source: Stacks Project, Tags 04JP, 04JR and 0DVG.
+## Implementation details
+
+The abelian structure and enough injectives of `DiscreteContinuousRep A G` come from
+`discreteModules_abelian`. The invariant functor is chosen from
+`continuousCochains_derived_invariants`: its objects are naturally linearly equivalent to the
+submodules `{m | ∀ g, ρ g m = m}`, and its maps are the restrictions of the coefficient maps.
+The same theorem identifies these derived functors naturally with cohomology of the continuous
+inhomogeneous cochain complex.
+
+## References
+
+Stacks Project, Tags 04JP, 04JR and 0DVG.
 -/
 
 @[expose] public section
@@ -21,20 +32,9 @@ open CategoryTheory
 
 namespace Rep
 
-/-- The functor `H^q(G, -)` on discrete left `A`-modules with continuous `G`-action.
-Its value on `M` is the `q`-th right derived functor of invariants, computed using
-injective resolutions in the ordinary abelian category `DiscreteContinuousRep A G`.
-The category uses open stabilizers and equivariant `A`-linear maps; its abelian structure
-and enough injectives come from `discreteModules_abelian`.
-
-The invariant functor is chosen from `continuousCochains_derived_invariants`: its objects
-are naturally linearly equivalent to the submodules `⨅ g, ker (ρ g - id)`, precisely
-`{m | ∀ g, ρ g m = m}`, and its maps are the restrictions of the coefficient maps.
-That same theorem identifies these derived functors naturally with cohomology of the
-continuous inhomogeneous cochain complex, with the usual differential and discrete
-coefficient topology. Choosing data from that theorem postpones the existence and comparison
-proofs, not the definition's data. No finiteness condition is imposed on the modules.
-
+/-- The functor `H^q(G, -)` on discrete left `A`-modules with continuous `G`-action: the
+`q`-th right derived functor of invariants in the abelian category `DiscreteContinuousRep A G`.
+No finiteness condition is imposed on the modules.
 Source: Stacks Project, Tags 04JP, 04JR and 0DVG. -/
 noncomputable def discreteContinuousCohomologyFunctor
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]

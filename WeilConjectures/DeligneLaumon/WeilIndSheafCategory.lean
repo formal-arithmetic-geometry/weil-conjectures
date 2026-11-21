@@ -77,7 +77,7 @@ def zlPull {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y)
 
 /-- The prescribed integral pullback composition, normalized by finite reductions.
-Source: Stacks 099N(5), composition proof, first paragraph. -/
+Source: Stacks 099N(5). -/
 def zlIntegralPullComp (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] {X Y Z : Scheme.{u}}
     [∀ x : X, Invertible (l : X.residueField x)]

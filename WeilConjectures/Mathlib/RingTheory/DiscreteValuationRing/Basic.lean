@@ -80,8 +80,7 @@ lemma isFractionRing_tensorProduct
 omit [IsDiscreteValuationRing R] in
 /-- Let `R` be a discrete valuation ring with uniformiser `ϖ` and `B` a flat `R`-algebra whose
 special fibre `B ⧸ ϖB` is reduced. Then every idempotent of `B[1/ϖ]` comes from `B`.
-
-The proof only uses that `R` is a domain and `ϖ ≠ 0`. -/
+Only the facts that `R` is a domain and `ϖ ≠ 0` are required. -/
 theorem exists_eq_algebraMap_of_isIdempotentElem {B : Type*} [CommRing B] [Algebra R B]
     [Module.Flat R B] {ϖ : R} (hϖ : Irreducible ϖ)
     (hred : IsReduced (B ⧸ Ideal.span {algebraMap R B ϖ}))

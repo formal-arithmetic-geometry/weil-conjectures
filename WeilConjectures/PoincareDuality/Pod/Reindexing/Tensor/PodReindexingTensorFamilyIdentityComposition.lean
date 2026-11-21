@@ -237,14 +237,8 @@ private theorem ordinaryComposition_sections {V W Z : Scheme.{u}}
 
 /--
 Section-normalized identity and composition comparisons exist for every fixed family
-of completion and tensor reindexings satisfying their component laws. The identity
-comparison is induced by `MorphismProperty.Over.mapId` on sections. The compositor
-is induced by `MorphismProperty.Over.mapComp`. Their coefficient maps agree after
-each quotient projection, and the projections jointly detect completed sections;
-therefore both are module isomorphisms. Localization gives the reduction and limit
-equations, while the tensor generator formula gives the tensor equation. Naturality
-and inverse laws follow from the site isomorphism identities. Empty sites and zero
-objects are covered by the same formulas.
+of completion and tensor reindexings satisfying their component laws; they are induced by
+`MorphismProperty.Over.mapId` and `MorphismProperty.Over.mapComp` on sections.
 Source: Stacks 03EL, 07A4.
 -/
 theorem podReindexingTensorFamilyIdentityComposition

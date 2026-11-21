@@ -44,11 +44,7 @@ structure RealizationScalarFunctorCoreDerivedData
     IsIso (pbcComplexCounit φ P)
 
 /-- The derived scalar extension construction supplies the two core identities.
-
-Source: Stacks Tags 06YY and 0DVC, via the exact termwise extension and its
-universal derived adjunction. The proof is the derived scalar extension
-construction specialized to the integral-to-rational coefficient map.
--/
+Source: Stacks Tags 06YY and 0DVC. -/
 theorem realization_scalar_functor_core_derived_data
     [HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1}]
     [(ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1}]

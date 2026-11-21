@@ -13,8 +13,7 @@ public import WeilConjectures.WeilSheaf.Fourier
 # Concentration of the zero-extension transform
 
 For a nonzero irreducible lisse Weil sheaf `M` on a dense open `j : U₀ ↪ 𝔸¹` which is
-constituent-nonexceptional, the blueprint lemma `proposition-purity-lisse-part-fourier-transform`
-states:
+constituent-nonexceptional, the purity of the Fourier transform of the lisse part states:
 
 1. the twisted cohomology `H_c^q(U, M ⊗ ℒ_{ψ(ax)})` is concentrated in degree one;
 2. the twisted dual `M† = M^∨ ⊗ 𝓑_b` is again irreducible lisse and nonexceptional;

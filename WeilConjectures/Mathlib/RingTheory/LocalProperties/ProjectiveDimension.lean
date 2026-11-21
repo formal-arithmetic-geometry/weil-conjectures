@@ -40,8 +40,7 @@ variable {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (S : Sub
 
 /-- Let `R` be a noetherian local ring and `M` a finite `R`-module of projective dimension at most
 `n`. If `N` is a localization of `M` at `S` which is projective over `Localization S`, then `N` is
-stably free. The proof is by induction on `n`, localizing a presentation of `M` by a finite free
-module and splitting the resulting short exact sequence. -/
+stably free. -/
 theorem isStablyFree_of_isLocalizedModule_of_hasProjectiveDimensionLE (n : ℕ) :
     ∀ (M : Type u) [AddCommGroup M] [Module R M] [Module.Finite R M],
       HasProjectiveDimensionLE (ModuleCat.of R M) n →

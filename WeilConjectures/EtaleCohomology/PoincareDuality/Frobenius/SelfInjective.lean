@@ -20,8 +20,8 @@ self-injective ring the dual `RHom(C, Λ)` of a complex is computed degreewise,
 `Hom(C, Λ[0]) = Hom(H⁰(C), Λ)`
 (`DerivedCategory.bijective_homologyFunctor_map_singleFunctor_of_injective`).
 
-This is the finite-level duality `A_{E,n}` of blueprint `theorem-poincare-duality--9` in the form
-needed for the transport to `ℚ̄_ℓ` (`LinearMap.mem_torsion_of_finiteLevel`).
+This is finite-level Poincaré duality at `A_{E,n}`, in the form needed for the transport to
+`ℚ̄_ℓ` (`LinearMap.mem_torsion_of_finiteLevel`).
 -/
 
 @[expose] public section
@@ -104,8 +104,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Module.Injective Λ Λ] {k : Type u}
 
 /-- **The composition pairing with the unit is nondegenerate at the point, over a self-injective
 cogenerating ring.** For `k` separably closed and `E` in the point category `D(Spec k_ét, Λ)`,
-the composition pairing `Hom(Λ_s, E) × Hom(E, Λ_s) ⟶ End(Λ_s)` is nondegenerate on both sides.
-This follows from the case of `D(Λ)` through the equivalence `RΓ(Spec k, -)`. -/
+the composition pairing `Hom(Λ_s, E) × Hom(E, Λ_s) ⟶ End(Λ_s)` is nondegenerate on both sides. -/
 theorem nondegenerate_comp_unit_of_isSepClosed_of_injective
     (hcog : ∀ (M : ModuleCat.{u + 1} Λ) (x : M), x ≠ 0 → ∃ χ : M →ₗ[Λ] Λ, χ x ≠ 0)
     (E : DerivedCategoryModule Λ (Spec (.of k))) :
@@ -129,12 +128,7 @@ namespace TateOrientation
 closed, `Λ` a finite self-injective cogenerating ring (e.g. `ℤ/ℓᵐ`) whose characteristic is
 invertible on `X`, and `γ` a Tate orientation of `a : X ⟶ Spec k`. For every `K ∈ D(X_ét, Λ)` and
 `i + j = 2d`, the degreewise Poincaré pairing `H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ End(Λ_s)` is
-nondegenerate on both sides.
-
-The derived Poincaré pairing is perfect
-(`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`), so its
-degree-zero part is a composition pairing `⟨x, y⟩ = x ≫ g(y)` with `g` bijective, which is
-nondegenerate (`AlgebraicGeometry.Etale.nondegenerate_comp_unit_of_isSepClosed_of_injective`). -/
+nondegenerate on both sides. -/
 theorem injective_degreewisePoincarePairing
     (hcog : ∀ (M : ModuleCat.{u + 1} Λ) (x : M), x ≠ 0 → ∃ χ : M →ₗ[Λ] Λ, χ x ≠ 0)
     (γ : TateOrientation Λ a d) (K : DerivedCategoryModule Λ X) (i j : ℤ)

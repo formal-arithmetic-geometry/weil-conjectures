@@ -36,12 +36,6 @@ a family of open immersions covering `X`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.pow`
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsLocallyPrincipal.isInvertible`: on an integral
   scheme a nonzero locally principal ideal is invertible.
-
-## Blueprint
-
-This file implements `def:nagata-invertible-ideal-effective-cartier` (MLCI0) and the parts of
-`lemma:nagata-invertible-ideal-effective-cartier` asserting locality and stability under
-restriction to an open subscheme, under isomorphism, and under flat pullback.
 -/
 
 @[expose] public section
@@ -65,11 +59,7 @@ lemma IsInvertible.of_isAffine [IsAffine X] {J : X.IdealSheafData}
   fun _ ↦ ⟨⟨⊤, isAffineOpen_top X⟩, trivial, h⟩
 
 /-- **Invertibility is stable under flat pullback.** If `f : X ⟶ Y` is flat and `J` is an
-invertible ideal on `Y`, then the extended ideal `J · 𝒪_X` is invertible.
-
-On an affine chart `V ⊆ f ⁻¹ᵁ U` the extended ideal is `(J.ideal U).map (f.appLE U V)` by
-`ideal_comap_appLE`, that map is flat by `Scheme.Hom.flat_appLE`, and a flat ring map sends
-non-zerodivisors to non-zerodivisors. -/
+invertible ideal on `Y`, then the extended ideal `J · 𝒪_X` is invertible. -/
 lemma IsInvertible.comap_of_flat {J : Y.IdealSheafData} (hJ : J.IsInvertible) (f : X ⟶ Y)
     [Flat f] : (J.comap f).IsInvertible := by
   intro x
@@ -81,14 +71,12 @@ lemma IsInvertible.comap_of_flat {J : Y.IdealSheafData} (hJ : J.IsInvertible) (f
   exact hU.map_of_flat (f.flat_appLE U.2 hVaff hVU)
 
 /-- Invertibility is preserved by restriction along an open immersion; in particular by
-restriction to an open subscheme and by isomorphism. This is the special case of
-`IsInvertible.comap_of_flat` for an open immersion, which is flat. -/
+restriction to an open subscheme and by isomorphism. -/
 lemma IsInvertible.comap_of_isOpenImmersion {J : Y.IdealSheafData} (hJ : J.IsInvertible)
     (f : X ⟶ Y) [IsOpenImmersion f] : (J.comap f).IsInvertible :=
   hJ.comap_of_flat f
 
-/-- Powers of an invertible ideal are invertible: a power of a local single
-nonzerodivisor generator generates the power. -/
+/-- Powers of an invertible ideal are invertible. -/
 lemma IsInvertible.pow {C : X.IdealSheafData} (hC : C.IsInvertible) (d : ℕ) :
     (C ^ d).IsInvertible := by
   intro x
@@ -136,8 +124,7 @@ lemma IsInvertible.isLocallyPrincipal {J : X.IdealSheafData} (hJ : J.IsInvertibl
   obtain ⟨U, hx, s, -, hs⟩ := hJ x
   exact ⟨U, hx, ⟨s, hs⟩⟩
 
-/-- **Locally principal ideals pull back to locally principal ideals**: on an affine chart the
-pulled back ideal is the extension of the ideal, by `ideal_comap_appLE`. -/
+/-- **Locally principal ideals pull back to locally principal ideals.** -/
 lemma IsLocallyPrincipal.comap {J : Y.IdealSheafData} (hJ : J.IsLocallyPrincipal) (f : X ⟶ Y) :
     (J.comap f).IsLocallyPrincipal := by
   intro x
@@ -148,10 +135,7 @@ lemma IsLocallyPrincipal.comap {J : Y.IdealSheafData} (hJ : J.IsLocallyPrincipal
   rw [ideal_comap_appLE J f U ⟨V, hVaff⟩ hVU, hb, Ideal.submodule_span_eq, Ideal.map_span,
     Set.image_singleton]
 
-/-- **On an integral scheme a nonzero locally principal ideal is invertible.** A local generator
-`b` of `J` on a nonempty affine open `U` is nonzero: otherwise `J` vanishes on `U`, hence on
-every affine open (they all meet `U`, and restriction maps of an integral scheme are
-injective), so `J = ⊥`. In the domain `Γ(X, U)`, the nonzero `b` is a non-zerodivisor. -/
+/-- **On an integral scheme a nonzero locally principal ideal is invertible.** -/
 lemma IsLocallyPrincipal.isInvertible [IsIntegral X] {J : X.IdealSheafData}
     (hJ : J.IsLocallyPrincipal) (h : J ≠ ⊥) : J.IsInvertible := by
   intro x

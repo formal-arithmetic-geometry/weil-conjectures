@@ -325,14 +325,7 @@ private def comparisonAt {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     exact h)
 
 /--
-The target-shift square for the normalized comparison on localized
-representatives.  Resolve the second representative by a K-injective complex,
-expand `Comparison.derived_model` at the two pairs, and compare every
-Hom-product projection after unsigned target reindexing.  The fixed
-`chain_projection` field identifies the projections, so product extensionality
-and localization yield the displayed equation.  This is the representative
-step of the target-shift argument; the passage to arbitrary objects is a
-separate descent theorem.
+The target-shift square for the normalized comparison on localized representatives.
 Source: Stacks 0A8X, 08JA.
 -/
 private theorem derived_target_shift_model
@@ -402,7 +395,6 @@ private theorem derived_target_shift_model
     (model_square l E g s SX SY TX TY c P (I⟦b⟧))
 
 /-- Reindexing respects the normalized target shift of derived internal Hom.
-
 Source: Stacks 0A8X, 08JA. -/
 theorem derived_target_shift_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

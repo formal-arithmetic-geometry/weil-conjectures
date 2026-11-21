@@ -50,18 +50,10 @@ variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [IsAlgClosed k] [Fact (
   [HasCompactification aX]
 
 omit [IsSeparated aX] [LocallyOfFiniteType aX] in
-/-- Finiteness: the global sections are perfect at the point.
-
-**`RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of the
+/-- **`RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of the
 algebraically closed field `k`. For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the compactly supported cohomology
 `RΓ_c(X, K)` is a perfect complex of `ℚ̄_ℓ`-vector spaces: bounded with finite dimensional
-cohomology. For the compactification `X ⟶[j] X̄ ⟶[ā] Spec k` of `a_X`, the extension by zero
-`j_! K` is again in `D^b_c(X̄, ℚ̄_ℓ)`, hence so is `Rā_* j_! K ∈ D^b_c(Spec k, ℚ̄_ℓ)` by the
-finiteness theorem (`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`), all of this
-computed on the underlying sheaves of `ℚ̄_ℓ`-modules
-(`AlgebraicGeometry.ProEtale.mapDerivedCategoryForgetCompRightDerivedLowerStarIso`); and the
-global sections of an object of `D^b_c(Spec k, ℚ̄_ℓ)` are perfect
-(`AlgebraicGeometry.ProEtale.isPerfect_rightDerivedGlobalSections_forget_of_isAlgClosed`). -/
+cohomology. -/
 theorem isPerfect_compactlySupportedGlobalSections_adic
     (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
@@ -96,13 +88,9 @@ theorem isPerfect_compactlySupportedGlobalSections_adic
         ((c.g)_*[WeilCoefficients.{u} l]).rightDerivedFunctor.mapIso e₁.symm))
 
 omit [HasCompactification aX] in
-/-- Finiteness: the global sections are perfect at the point.
-
-**`RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of the
+/-- **`RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of the
 algebraically closed field `k`. For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the cohomology `RΓ(X, K)` is a
-perfect complex of `ℚ̄_ℓ`-vector spaces: `RΓ(X, K) ≅ RΓ(Spec k, Ra_{X*} K)` (Leray), and
-`Ra_{X*} K ∈ D^b_c(Spec k, ℚ̄_ℓ)` by the finiteness theorem
-(`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor`). -/
+perfect complex of `ℚ̄_ℓ`-vector spaces. -/
 theorem isPerfect_rightDerivedGlobalSections_adic [QuasiCompact aX]
     (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
@@ -122,9 +110,7 @@ theorem isPerfect_rightDerivedGlobalSections_adic [QuasiCompact aX]
         (globalSectionsLowerStarIso (WeilCoefficients.{u} l) aX)).app _)
 
 omit [IsSeparated aX] [LocallyOfFiniteType aX] in
-/-- Finiteness: the global sections are perfect at the point.
-
-**The dual of `RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** -/
+/-- **The dual of `RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** -/
 theorem isPerfect_ihom_compactlySupportedGlobalSections_adic
     (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
@@ -134,9 +120,7 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections_adic
   (isPerfect_compactlySupportedGlobalSections_adic l aX K hK).ihom_unit
 
 omit [HasCompactification aX] in
-/-- Finiteness: the global sections are perfect at the point.
-
-**The dual of `RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** -/
+/-- **The dual of `RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** -/
 theorem isPerfect_ihom_rightDerivedGlobalSections_adic [QuasiCompact aX]
     (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :
@@ -146,11 +130,10 @@ theorem isPerfect_ihom_rightDerivedGlobalSections_adic [QuasiCompact aX]
   (isPerfect_rightDerivedGlobalSections_adic l aX K hK).ihom_unit
 
 
-/-- Point perfectness of global sections, the stage `ℚ̄_ℓ`.
-
-For `ℓ` different from the characteristic of `k` and `K ∈ D^b_c(X, ℚ̄_ℓ)`, the four complexes
-`RΓ(X, K)`, `RΓ_c(X, K)` and their duals are perfect complexes of `ℚ̄_ℓ`-vector spaces: bounded
-with finite-dimensional cohomology. -/
+/-- **Point perfectness of global sections, the stage `ℚ̄_ℓ`.** For `ℓ` different from the
+characteristic of `k` and `K ∈ D^b_c(X, ℚ̄_ℓ)`, the four complexes `RΓ(X, K)`, `RΓ_c(X, K)` and
+their duals are perfect complexes of `ℚ̄_ℓ`-vector spaces: bounded with finite-dimensional
+cohomology. -/
 theorem isPerfect_globalSections_adic [QuasiCompact aX]
     (K : _root_.DerivedCategory (ProEtale.AdicSheaf l X))
     (hK : DerivedCategory.boundedAdicConstructible l X K) :

@@ -14,7 +14,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceB
 /-!
 # The two integrals of the diagonal class
 
-Blueprint `lemma-class-diagonal-projective-line`. Let `P = ℙ¹_S` and
+Let `P = ℙ¹_S` and
 `W = ℙ¹_P`, which is `P ×_S P` (`AlgebraicGeometry.ProjectiveSpace.isPullback_map`) with first
 projection `p₁ = W ↘ P` and second projection `p₂ = map (P ↘ S)`. The diagonal
 `Δ : P ⟶ W` (`AlgebraicGeometry.ProjectiveSpace.diagonal`) is an effective Cartier divisor; given
@@ -30,19 +30,19 @@ exchanging the factors (`AlgebraicGeometry.Etale.projectiveLineDiagonalSwap`).
 
 *Signs.* The auxiliary classes `δ_aux` (`AlgebraicGeometry.Etale.cartierKummerCycleClassAux`) and
 `-h` (`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`) are built from Kummer boundaries
-`∂κ(f)` of local equations, which forget supports to `c₁(𝒪(-D))`; the classes of the notes
+`∂κ(f)` of local equations, which forget supports to `c₁(𝒪(-D))`; the usual classes
 `δ = c₁(𝒪(Δ))` (`AlgebraicGeometry.Etale.cartierKummerCycleClass`) and `h = c₁(𝒪(1))`
-(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`) are their negatives, and the trace of the
-notes (`AlgebraicGeometry.Etale.projectiveLineTrace`) is the negative of the auxiliary trace
-normalized by `-h`. The two signs cancel: the diagonal integrals are `1` for the conventions of the
-notes as for the auxiliary ones.
+(`AlgebraicGeometry.Etale.projectiveLineHyperplaneClass`) are their negatives, and the trace
+`AlgebraicGeometry.Etale.projectiveLineTrace` is the negative of the auxiliary trace
+normalized by `-h`. The two signs cancel: the diagonal integrals are `1` for the usual
+conventions as for the auxiliary ones.
 
 ## The argument
 
 The composite `φ` is an endomorphism of `Λ_P`. Endomorphisms of `Λ_{ℙ¹_S}` are determined by
 their restriction to the section at infinity `ι : Z ⟶ ℙ¹_S`
 (`AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_lineInfinityι_map_eq`: they are pulled back
-from `S`, by the decomposition `lemma-cohomology-projective-line-trace` on geometric fibres). By the
+from `S`, by the decomposition of the cohomology of the projective line on geometric fibres). By the
 base change of the trace (`AlgebraicGeometry.Etale.projectiveLineTrace_baseChange`) the restriction
 of `φ` along `ι` is the trace on `ℙ¹_Z` of the restriction of `δ`. The diagonal meets `ℙ¹_Z` in its
 section at infinity (`AlgebraicGeometry.ProjectiveSpace.isPullback_lineInfinityι_diagonal`),
@@ -93,18 +93,17 @@ variable [HasKummerClass.IsNormalized Λ] {T D : Scheme.{u}} [HasInvertibleExpon
 `i : D ⟶ T` satisfying the purity hypothesis: the class `AlgebraicGeometry.Etale.cartierKummerClass`
 with supports forgotten. With the conventions of `AlgebraicGeometry.Etale.kummerBoundary` it is
 `c₁(𝒪_T(-D))`, the same convention as the auxiliary hyperplane class
-`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`; the cycle class `δ = c₁(𝒪_T(D))` of
-the notes is its negative (`AlgebraicGeometry.Etale.cartierKummerCycleClass`). -/
+`AlgebraicGeometry.Etale.projectiveLineHyperplaneClassAux`; the cycle class `δ = c₁(𝒪_T(D))`
+is its negative (`AlgebraicGeometry.Etale.cartierKummerCycleClass`). -/
 noncomputable def cartierKummerCycleClassAux (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ T ⟶ (tateObject Λ T 1)⟦(2 : ℤ)⟧ :=
   cartierKummerClass Λ i hP ≫
     (rightDerivedUpperShriekAdjunction Λ i).counit.app ((tateObject Λ T 1)⟦(2 : ℤ)⟧)
 
 /-- The *cycle class* `δ = c₁(𝒪_T(D)) : Λ_T ⟶ Λ_T(1)[2]` of an effective Cartier divisor
-`i : D ⟶ T` satisfying the purity hypothesis, with the sign of the notes (the class of `𝒪(D)`,
-as in the notes' cycle class of a Cartier divisor): the negative of the
-forgotten-supports Kummer class `AlgebraicGeometry.Etale.cartierKummerCycleClassAux`, which is
-`c₁(𝒪_T(-D))`. -/
+`i : D ⟶ T` satisfying the purity hypothesis, with the usual sign (the class of `𝒪(D)`): the
+negative of the forgotten-supports Kummer class
+`AlgebraicGeometry.Etale.cartierKummerCycleClassAux`, which is `c₁(𝒪_T(-D))`. -/
 noncomputable def cartierKummerCycleClass (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ T ⟶ (tateObject Λ T 1)⟦(2 : ℤ)⟧ :=
   -cartierKummerCycleClassAux Λ i hP
@@ -288,14 +287,15 @@ theorem leftDerivedUpperStar_lineInfinityι_map_diagonalIntegral
     Adjunction.homEquiv_unit, reassoc_of% hC,
     reassoc_of% hD, Iso.hom_inv_id]
 
-/-- Blueprint `lemma-class-diagonal-projective-line`,
-*the first integral of the diagonal class*: for `P = ℙ¹_S`, `W = ℙ¹_P ≅ P ×_S P` with first
-projection `p : W ⟶ P`, and the diagonal `Δ : P ⟶ W` satisfying the purity hypothesis, the composite
+/-- *The first integral of the diagonal class*, auxiliary form: for `P = ℙ¹_S`,
+`W = ℙ¹_P ≅ P ×_S P` with first projection `p : W ⟶ P`, and the diagonal `Δ : P ⟶ W` satisfying
+the purity hypothesis, the composite
 
 `Λ_P ⟶ Rp_* Lp^* Λ_P ≅ Rp_* Λ_W ⟶ Rp_*(Λ_W(1)[2]) ⟶ Λ_P`
 
-of the adjoint of the cycle class `δ` of `Δ` (`AlgebraicGeometry.Etale.cartierKummerCycleClassAux`)
-and the trace of `p` (`AlgebraicGeometry.Etale.projectiveLineTraceAux`) is the identity. -/
+of the adjoint of the auxiliary cycle class `δ_aux` of `Δ`
+(`AlgebraicGeometry.Etale.cartierKummerCycleClassAux`) and the auxiliary trace of `p`
+(`AlgebraicGeometry.Etale.projectiveLineTraceAux`) is the identity. -/
 theorem projectiveLineTraceAux_diagonal
     [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
     (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
@@ -334,16 +334,13 @@ theorem cartierKummerCycleClass_diagonalSwap
   rw [restrictSupportedClass_cartierKummerClass Λ _ hP _ _ _ hsq hP] at h₁
   exact h₁.symm
 
-/-- Blueprint `lemma-class-diagonal-projective-line`,
-*the second integral of the diagonal class*. The second projection `p₂ = map (P ↘ S) : W ⟶ P`
-of `W = ℙ¹_P ≅ P ×_S P` is the first projection `p₁ = W ↘ P` composed with the exchange `σ` of the
-factors (`AlgebraicGeometry.ProjectiveSpace.diagonalSwap`), an isomorphism of `P`-schemes
-`(W, p₂) ≅ (W, p₁)`. Transported along `σ`, the trace of `p₂` is the trace of `p₁` and the cycle
-class `δ` of the diagonal becomes `σ^* δ`; the composite
+/-- *The second integral of the diagonal class*, auxiliary form. For `W = ℙ¹_P ≅ P ×_S P` and the
+exchange `σ` of the factors (`AlgebraicGeometry.ProjectiveSpace.diagonalSwap`), the composite
 
 `Λ_P ⟶ Rp₁_* Λ_W ⟶ Rp₁_*(Λ_W(1)[2]) ⟶ Λ_P`
 
-of the adjoint of `σ^* δ` and the trace of `p₁` is the identity. -/
+of the adjoint of `σ^* δ_aux`, for the auxiliary cycle class `δ_aux` of the diagonal, and the
+auxiliary trace of the first projection `p₁ : W ⟶ P` is the identity. -/
 theorem projectiveLineTraceAux_diagonal_swap
     [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
     (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
@@ -364,8 +361,7 @@ theorem projectiveLineTraceAux_diagonal_swap
   exact projectiveLineTraceAux_diagonal Λ S hP
 
 /-- The trace of `ℙ¹_S` is normalized by `Tr_q ∘ h♭ = 1`, for the adjoint
-`h♭ : Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the hyperplane class `h = c₁(𝒪(1))` of the notes: from the
-auxiliary normalisation by the two signs. -/
+`h♭ : Λ_S ⟶ Rq_*(Λ_{ℙ¹_S}(1)[2])` of the hyperplane class `h = c₁(𝒪(1))`. -/
 lemma homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace :
     (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ)
         (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S)).homEquiv _ _
@@ -377,9 +373,8 @@ lemma homEquiv_projectiveLineHyperplaneClass_comp_projectiveLineTrace :
     Adjunction.homEquiv_unit, Functor.map_neg, Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 
-/-- *The first diagonal integral*, with the cycle
-class `δ = c₁(𝒪(Δ))` and the trace of the notes: `Tr_p(δ) = 1`. From the auxiliary statement
-`AlgebraicGeometry.Etale.projectiveLineTraceAux_diagonal` by the two signs. -/
+/-- *The first diagonal integral*, with the cycle class `δ = c₁(𝒪(Δ))` and the trace
+`AlgebraicGeometry.Etale.projectiveLineTrace`: `Tr_p(δ) = 1`. -/
 theorem projectiveLineTrace_diagonal
     [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
     (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :
@@ -396,9 +391,8 @@ theorem projectiveLineTrace_diagonal
     Functor.map_neg, Preadditive.comp_neg, Preadditive.neg_comp, neg_neg] at this ⊢
   exact this
 
-/-- *The second diagonal integral* (the swapped
-factor), with the cycle class and the trace of the notes. From
-`AlgebraicGeometry.Etale.projectiveLineTraceAux_diagonal_swap` by the two signs. -/
+/-- *The second diagonal integral* (the swapped factor), with the cycle class `δ = c₁(𝒪(Δ))` and
+the trace `AlgebraicGeometry.Etale.projectiveLineTrace`. -/
 theorem projectiveLineTrace_diagonal_swap
     [IsRegularImmersion 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)]
     (hP : SupportedTatePure Λ 1 (ProjectiveSpace.diagonal (Option (ULift.{u} (Fin 1))) S)) :

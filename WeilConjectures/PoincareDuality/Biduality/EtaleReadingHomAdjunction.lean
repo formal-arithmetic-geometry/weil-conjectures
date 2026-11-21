@@ -25,6 +25,13 @@ The comparison map is an isomorphism as soon as the counit `L G A ⟶ A` is an i
 `T ⟶ G [A, B] ⟶ [G A, G B]` gives `L (G A ⊗ T) ≅ L G A ⊗ L T ≅ A ⊗ L T ⟶ B`, the uncurried
 transpose of `T ⟶ G [A, B]`. This is the internal form of the projection formula
 `G [L M, N] ≅ [M, G N]` for objects `A = L M` on which the counit is invertible.
+
+## Implementation details
+
+`CategoryTheory.Adjunction.ihomComparisonIsoOfCompEq` is stated for an abstract `F` with an
+equation `ι ⋙ G = F` (instead of relying on the definitional equality
+`F.obj A = G.obj (ι.obj A)`); this keeps the kernel from unfolding `F` and `G` when checking terms
+involving this isomorphism.
 -/
 
 @[expose] public section
@@ -162,11 +169,7 @@ theorem isIso_ihomComparison (A B : D) [IsIso (adj.counit.app A)] :
 
 /-- The comparison isomorphism `G [ι A, ι B] ≅ [F A, F B]`
 (`CategoryTheory.Adjunction.ihomComparison` followed by `eqToIso`) for a functor `ι : C' ⥤ D`
-and a functor `F` equal to `ι ⋙ G`, when the counit `L G ι A ⟶ ι A` is an isomorphism.
-
-Stating it for an abstract `F` with an equation `ι ⋙ G = F` (instead of relying on the
-definitional equality `F.obj A = G.obj (ι.obj A)`) keeps the kernel from unfolding `F` and `G`
-when checking terms involving this isomorphism. -/
+and a functor `F` equal to `ι ⋙ G`, when the counit `L G ι A ⟶ ι A` is an isomorphism. -/
 noncomputable def ihomComparisonIsoOfCompEq {C' : Type*} [Category* C'] (ι : C' ⥤ D)
     (F : C' ⥤ C) (hF : ι ⋙ G = F) (A B : C') [hA : IsIso (adj.counit.app (ι.obj A))] :
     G.obj ((ihom (ι.obj A)).obj (ι.obj B)) ≅ (ihom (F.obj A)).obj (F.obj B) :=

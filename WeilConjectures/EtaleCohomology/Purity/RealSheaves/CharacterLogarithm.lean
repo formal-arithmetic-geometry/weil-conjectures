@@ -42,9 +42,7 @@ Let `χ : W(C₀) → Eˣ` be a character with values in a finite extension `E /
 continuous on `Π = π₁(C) = ker deg`, and let `s ∈ W(C₀)` (for instance of degree one). There is
 `N ≥ 1` such that `χ(g) ^ N` lies in the principal units `1 + ℓ² 𝒪_E` (on which the logarithm is
 defined) for `g ∈ Π`, and `λ(g) = log (χ(g) ^ N)` is a continuous additive character of `Π`
-with `λ(s g s⁻¹) = λ(g) = λ(s⁻¹ g s)`. The compactness of `Π` is the field
-`AlgebraicGeometry.WeilGroup.compactSpace_ker`; the invariance holds because the values of `χ`
-commute. -/
+with `λ(s g s⁻¹) = λ(g) = λ(s⁻¹ g s)`. -/
 theorem exists_smallLog_pow_hom (χ : W.carrier →* Eˣ)
     (hχ : Continuous fun g : W.geometric ↦ algebraMap E (PadicAlgCl l) (χ g)) (s : W.carrier) :
     ∃ N : ℕ, 0 < N ∧ (∀ g : W.geometric, χ g ^ N ∈ PadicAlgCl.smallUnits l E) ∧

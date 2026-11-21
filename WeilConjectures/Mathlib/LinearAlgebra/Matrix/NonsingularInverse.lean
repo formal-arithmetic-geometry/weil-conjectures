@@ -33,12 +33,7 @@ variable {R : Type*} [CommRing R] {ι₀ ι₁ ι₂ α β : Type*} [Fintype ι�
 /-- **A complex of free modules with invertible minors of complementary sizes is exact.** Let
 `B * A = 0` for matrices `A : R^{ι₀} → R^{ι₁}` and `B : R^{ι₁} → R^{ι₂}`. If an `a × a` minor of
 `A` and a `b × b` minor of `B` are units, with `a + b = |ι₁|`, then every `v` with `B v = 0` is of
-the form `A w`.
-
-The columns of `A` through the first minor and a right inverse `S` of the rows of `B` through the
-second minor form a square matrix `Φ = (A' | S)`, which is invertible since `(L ; B') Φ` is block
-unitriangular for a left inverse `L` of `A'`. Writing `v = A' w₁ + S w₂` and applying `B'` gives
-`w₂ = 0`. -/
+the form `A w`. -/
 theorem Matrix.exists_mulVec_eq_of_isUnit_det_submatrix (A : Matrix ι₁ ι₀ R)
     (B : Matrix ι₂ ι₁ R) (hBA : B * A = 0) (e₁ : α → ι₁) (e₀ : α → ι₀)
     (hA : IsUnit (A.submatrix e₁ e₀).det) (f₂ : β → ι₂) (f₁ : β → ι₁)

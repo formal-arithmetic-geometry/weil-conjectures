@@ -97,16 +97,7 @@ private lemma charpolyRev_eq_localPolynomial {l : ℕ} [Fact l.Prime]
 variable (f) in
 /-- **Reality survives a direct image concentrated in degree one.** Let `f : X ⟶ Y` be a
 separated morphism of finite type of `k₀`-schemes and `K` an `ι`-real Weil sheaf on `X` such
-that the higher direct images `Rᵛf_!K` vanish for `ν ≠ 1`. Then `R¹f_!K` is `ι`-real.
-
-At a closed point `ξ` of degree `d`, with fibre `X_ξ`, compact support base change gives
-`det(1 - T^d F_ξ | (R¹f_!K)_ξ̄) = det(1 - T F | H_c^1(X_ξ ⊗ k̄, K))` and the vanishing of the
-other `H_c^ν(X_ξ ⊗ k̄, K)`
-(`AlgebraicGeometry.WeilSheaf.exists_fiber_expand_charpolyRev_stalk_higherLowerShriek`). The
-restriction of `K` to `X_ξ` is `ι`-real, so `H_c^1(X_ξ ⊗ k̄, K)` is `ι`-real by the
-Grothendieck–Lefschetz trace formula
-(`AlgebraicGeometry.WeilSheaf.IsReal.isReal_compactlySupportedCohomology_of_subsingleton`),
-and the coefficients of `det(1 - T F_ξ)` are among those of its local polynomial. -/
+that the higher direct images `Rᵛf_!K` vanish for `ν ≠ 1`. Then `R¹f_!K` is `ι`-real. -/
 theorem isReal_higherLowerShriek_one {ι : PadicAlgCl l →+* ℂ} {K : WeilSheaf k₀ l X}
     (hK : K.IsReal ι) (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l f ν).obj K)) :
     ((higherLowerShriek k₀ l f 1).obj K).IsReal ι := by

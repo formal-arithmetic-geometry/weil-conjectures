@@ -13,7 +13,15 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Descent of the strict tensor limit model
 
-Source: Stacks 07A4 and 0941.
+## Implementation details
+
+The generator hypothesis of `podReindexing_tensor_limit_model_descent` is necessary:
+simultaneously negating `T.tower` and `T.tensor` preserves the model equation and naturality,
+but changes the conclusion.
+
+## References
+
+Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -119,15 +127,8 @@ private theorem frameFinish
 The strict normalized tensor equation descends through the product of the two good
 complex localizations. The hypotheses record the pure-tensor generator normalization,
 the strict model equation and its naturality; the conclusion is the component equation
-used by the parent limit-model lemma.
-
-Source: Stacks 07A4, 08TC, 0941. Construct the natural coherent comparison. Its strict Roos
-normalization and Model identify it with T.tensor on good representatives after cancelling the
-target realization. Choose representatives of the constructible inputs, transport
-constructibility across their isomorphisms, and use Naturality to transport this component
-equality. Postcompose with the target tensor realization to get the frame equation.
-STATEMENT-DISPUTED: the original signature omitted Generators. Simultaneously negating T.tower
-and T.tensor preserves Model and Naturality, but changes the equation.
+of the limit-model statement.
+Source: Stacks 07A4, 08TC, 0941.
 -/
 theorem podReindexing_tensor_limit_model_descent
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

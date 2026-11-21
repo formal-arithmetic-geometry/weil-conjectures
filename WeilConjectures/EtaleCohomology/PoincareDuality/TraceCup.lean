@@ -14,8 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 Let `a : X ⟶ Y` be a morphism admitting a compactification, `Λ` a coefficient ring with a Tate
 twist datum and `γ : Λ_X(d)[2d] ≅ Ra^! Λ_Y` a Tate orientation of `a`. Over `Y = Spec k` this
-is the setting of the Poincaré duality chapter, and this file defines its trace map and its
-trace–cup pairing.
+is the setting of Poincaré duality, and this file defines its trace map and its trace–cup
+pairing.
 
 Cohomology classes are morphisms out of the unit: a class of degree `n` of `X` with
 coefficients `Λ` is a morphism `Λ_X ⟶ Λ_X[n]` in `D(X_ét, Λ)`, so that
@@ -44,7 +44,7 @@ coefficients `Λ` is a morphism `Λ_X ⟶ Λ_X[n]` in `D(X_ét, Λ)`, so that
 - `AlgebraicGeometry.Etale.TateOrientation.traceMap`: `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ`.
 - `AlgebraicGeometry.Etale.TateOrientation.untwistedSmoothTrace`,
   `AlgebraicGeometry.Etale.TateOrientation.untwistedTraceMap`:
-`tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)`.
+  `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)`.
 - `AlgebraicGeometry.Etale.TateOrientation.traceCupPairing`: `⟨x, y⟩ = tr^{(-d)}_X(x ⌣ y)`.
 
 ## Main statements
@@ -111,9 +111,7 @@ lemma cupProductAux_add_right {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ �
     cupProductAux A x (y + y') = cupProductAux A x y + cupProductAux A x y' := by
   simp [cupProductAux, derivedTensor, MonoidalPreadditive.whiskerLeft_add]
 
-/-- Poincare trace and cup-product pairing.
-
-The *cup product* `⌣ : H^i(X, Λ) × H^j(X, Λ) ⟶ H^{i+j}(X, Λ)` on the cohomology classes
+/-- The *cup product* `⌣ : H^i(X, Λ) × H^j(X, Λ) ⟶ H^{i+j}(X, Λ)` on the cohomology classes
 `Λ_X ⟶ Λ_X[n]` of `D(X_ét)`, induced by the multiplication `Λ_X ⊗ᴸ Λ_X ≅ Λ_X`
 (`AlgebraicGeometry.Etale.cupProductAux`), as a biadditive map. -/
 noncomputable def cupProduct (i j : ℤ) :
@@ -138,14 +136,8 @@ lemma cupProduct_eq_shiftProduct {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 
   simp only [Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom, Category.assoc]
   rfl
 
-/-- Poincare trace and cup-product pairing.
-
-**The cup product is graded commutative**: for `x ∈ H^i(X, Λ)` and `y ∈ H^j(X, Λ)`,
-`y ⌣ x = (-1)^{ij} x ⌣ y`, the two sides being compared along `Λ_X[j + i] = Λ_X[i + j]`.
-
-This is the Eckmann–Hilton argument: `x ⊗ y = (x ⊗ 1) ≫ (1 ⊗ y) = (1 ⊗ y) ≫ (x ⊗ 1)`, and
-the two ways of moving the shifts out of `Λ_X[i] ⊗ᴸ Λ_X[j]` differ by `(-1)^{ij}`
-(`CategoryTheory.MonoidalCategory.shiftProduct_comm`). -/
+/-- **The cup product is graded commutative**: for `x ∈ H^i(X, Λ)` and `y ∈ H^j(X, Λ)`,
+`y ⌣ x = (-1)^{ij} x ⌣ y`, the two sides being compared along `Λ_X[j + i] = Λ_X[i + j]`. -/
 theorem cupProduct_comm {i j : ℤ} (x : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A))⟦i⟧)
     (y : (𝟙_ 𝐃(X, A)) ⟶ (𝟙_ 𝐃(X, A))⟦j⟧) :
     cupProduct A j i y x =
@@ -164,9 +156,7 @@ noncomputable def rightDerivedLowerStarShiftIsoLowerShriek (a : X ⟶ Y) [HasCom
   ((R((a)_*[A])).commShiftIso n).app M ≪≫
     (shiftFunctor _ n).mapIso ((rightDerivedLowerShriekIsoRightDerivedLowerStar A a).app M).symm
 
-/-- Poincare duality conventions: trace and trace-cup pairing.
-
-For a proper morphism `a : X ⟶ Y`, ordinary and compactly supported cohomology agree:
+/-- For a proper morphism `a : X ⟶ Y`, ordinary and compactly supported cohomology agree:
 `H^n(X, Λ) = Hom(Λ_X, Λ_X[n]) ≃ Hom(Λ_Y, (Ra_! Λ_X)[n]) = H^n_c(X, Λ)`. The equivalence is
 the adjunction `La^* ⊣ Ra_*` read through an identification `e : La^* Λ_Y ≅ Λ_X`, followed by
 `Ra_*(Λ_X[n]) ≅ (Ra_! Λ_X)[n]` (`Ra_! ≅ Ra_*` for `a` proper),
@@ -194,15 +184,11 @@ namespace TateOrientation
 variable {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
-/-- Poincare trace and cup-product pairing.
-
-The *trace map* `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ`: a compactly
+/-- The *trace map* `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` of a Tate orientation `γ`: a compactly
 supported class `Λ_Y ⟶ (Ra_! Λ_X(d))[2d]` is composed with the shift compatibility of `Ra_!`
 and the smooth trace `Ra_!(Λ_X(d)[2d]) ⟶ Λ_Y`
 (`AlgebraicGeometry.Etale.TateOrientation.smoothTrace`), the counit of `Ra_! ⊣ Ra^!` read
-through `γ`. The target `Hom(Λ_Y, Λ_Y)` is `Λ` for `Y = Spec k`.
-
-This is also the trace map of `theorem-trace-isomorphism-top-degree`: it does not use properness. -/
+through `γ`. The target `Hom(Λ_Y, Λ_Y)` is `Λ` for `Y = Spec k`. -/
 noncomputable def traceMap (γ : TateOrientation Λ a d) :
     ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶
         ((R(a)_![ModuleCat.{u + 1} Λ]).obj (tateObject Λ X d))⟦(2 * d : ℤ)⟧) →+
@@ -238,9 +224,7 @@ noncomputable def constantComplexIsoTateObjectTensor (Y : Scheme.{u}) [HasInvert
   (HasTateTwist.twistObjectZeroIso Y).symm ≪≫ eqToIso (by rw [add_neg_cancel]) ≪≫
     (HasTateTwist.twistObjectAddIso Y d (-d)).symm
 
-/-- Poincare duality conventions: trace and trace-cup pairing.
-
-The *untwisted smooth trace* `(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)` of a Tate orientation `γ`: the
+/-- The *untwisted smooth trace* `(Ra_! Λ_X)[2d] ⟶ Λ_Y(-d)` of a Tate orientation `γ`: the
 twisted smooth trace `(Ra_! Λ_X)[2d] ⊗ᴸ Λ_Y(d) ⟶ Λ_Y`
 (`AlgebraicGeometry.Etale.TateOrientation.twistedSmoothTrace`) tensored with `Λ_Y(-d)`, read
 through `Λ_Y(d) ⊗ᴸ Λ_Y(-d) ≅ Λ_Y`,
@@ -260,23 +244,17 @@ noncomputable def untwistedSmoothTrace (γ : TateOrientation Λ a d) :
         ((derivedTensor _ Y).map γ.twistedSmoothTrace).app _ ≫
           (derivedTensorLeftUnitor _ Y _).hom
 
-/-- Poincare duality conventions: trace and trace-cup pairing.
-
-The *untwisted trace map* `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` of a Tate orientation `γ`:
+/-- The *untwisted trace map* `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` of a Tate orientation `γ`:
 a compactly supported class `Λ_Y ⟶ (Ra_! Λ_X)[2d]` is composed with the untwisted smooth trace
 (`AlgebraicGeometry.Etale.TateOrientation.untwistedSmoothTrace`). The target
-`Hom(Λ_Y, Λ_Y(-d))` is `Λ(-d)` for `Y = Spec k`. It does not use properness; for `a` proper it
-is the map `H^{2d}(X, Λ) ⟶ Λ(-d)` of `corollary-cup-product-pairing--1`, through
-`AlgebraicGeometry.Etale.cohomologyAddEquivCompactSupport`. -/
+`Hom(Λ_Y, Λ_Y(-d))` is `Λ(-d)` for `Y = Spec k`. -/
 noncomputable def untwistedTraceMap (γ : TateOrientation Λ a d) :
     ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶
         ((R(a)_![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ X))⟦(2 * d : ℤ)⟧) →+
       ((𝟙_ (DerivedCategoryModule Λ Y)) ⟶ tateObject Λ Y (-d)) :=
   Preadditive.rightComp _ γ.untwistedSmoothTrace
 
-/-- Trace and trace–cup pairing.
-
-The *trace–cup pairing* of a Tate orientation `γ` of a proper morphism `a : X ⟶ Y`, for
+/-- The *trace–cup pairing* of a Tate orientation `γ` of a proper morphism `a : X ⟶ Y`, for
 complementary degrees `i + j = 2d`,
 
 `⟨x, y⟩ = tr^{(-d)}_X(x ⌣ y) : H^i(X, Λ) × H^j(X, Λ) ⟶ Λ(-d)`,

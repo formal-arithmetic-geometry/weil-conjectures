@@ -30,10 +30,10 @@ surjective projection to `V`, and carry a lisse sheaf.
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification`: blueprint
-  `proposition-relative-affine-line--1`.
+- `AlgebraicGeometry.WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification`: a sheaf
+  on `𝔸¹_S` punctually pure of weight `w` has a relative-line stratification.
 
-## Proof
+## Implementation details
 
 Noetherian induction on the closed subsets of `S`: for a nonempty reduced closed subscheme `T` of
 `S`, choose an integral affine open `V` of `T`. The sheaf is lisse on a dense open `U` of the
@@ -82,8 +82,7 @@ end Instances
 
 namespace WeilSheaf
 
-/-- A Weil sheaf punctually pure of weight `w` is mixed of weights at most `w`, through the
-filtration of length one. -/
+/-- A Weil sheaf punctually pure of weight `w` is mixed of weights at most `w`. -/
 theorem IsPunctuallyPureOfWeight.isMixedOfWeightsAtMost_stratification {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     {F : WeilSheaf k₀ l X} {w : ℝ} (hF : F.IsPunctuallyPureOfWeight ι w) :
@@ -159,8 +158,7 @@ theorem WeilSheaf.HasRelativeLineStratification.of_eq {X : Scheme.{u}}
   subst e
   exact H
 
-/-- A punctually pure sheaf on an empty scheme has a relative-line stratification: the empty
-scheme is quasi-finite over `S`. -/
+/-- A punctually pure sheaf on an empty scheme has a relative-line stratification. -/
 theorem WeilSheaf.HasRelativeLineStratification.of_isEmpty {X : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
     [IsEmpty X] (h : X ⟶ S) [h.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated h]
@@ -174,8 +172,7 @@ variable [IsSeparated (S ↘ Spec (CommRingCat.of k₀))]
 /-- Let `W` be an affine open of a `k₀`-scheme `V`, with an immersion `c : W ⟶ S`, and `U` an open
 of `𝔸¹_V` meeting every fibre over `W`, whose complement has finite fibres over `W`. If a pullback
 `n^* G` of a sheaf punctually pure of weight `w` is lisse on `U`, then its restriction to `𝔸¹_W`
-has a relative-line stratification over `S`: `𝔸¹_W` is the union of the relative-line piece
-`U ∩ 𝔸¹_W` and of its quasi-finite closed complement. -/
+has a relative-line stratification over `S`. -/
 theorem WeilSheaf.hasRelativeLineStratification_of_forall_exists_mem_and_finite
     {V B : Scheme.{u}} [V.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))] [B.Over (Spec (CommRingCat.of k₀))]
@@ -246,8 +243,7 @@ variable [QuasiCompact (S ↘ Spec (CommRingCat.of k₀))]
 /-- **The generic step.** Let `c : T ⟶ S` be an immersion from a nonempty reduced `k₀`-scheme of
 finite type, and `G` a Weil sheaf on `𝔸¹_T` punctually pure of weight `w`. There is a nonempty
 open `W` of an open `V` of `T` such that the restriction of `G` to `𝔸¹_W` has a relative-line
-stratification over `S`: over a suitable principal open `W` of an integral affine open `V`, the
-lissity locus of `G` on `𝔸¹_V` meets every fibre, and its complement is quasi-finite. -/
+stratification over `S`. -/
 theorem WeilSheaf.exists_hasRelativeLineStratification_affineSpace_map {T : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))]
     [IsReduced T] [Nonempty T] (c : T ⟶ S) [IsImmersion c] [QuasiCompact c]
@@ -293,10 +289,7 @@ instance {T : Scheme.{u}} (c : T ⟶ S) [IsClosedImmersion c] :
     inferInstance
 
 /-- **Noetherian induction.** For a reduced closed subscheme `T` of `S` and a Weil sheaf `G` on
-`𝔸¹_T` punctually pure of weight `w`, `G` has a relative-line stratification over `S`: the
-generic step (`WeilSheaf.exists_hasRelativeLineStratification_affineSpace_map`) treats the
-relative affine line over a nonempty open `W` of `T`, and the induction hypothesis the one over
-the reduced complement of `W`. -/
+`𝔸¹_T` punctually pure of weight `w`, `G` has a relative-line stratification over `S`. -/
 theorem WeilSheaf.hasRelativeLineStratification_of_isClosedImmersion (Z : Closeds S)
     (T : Scheme.{u}) [T.Over (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (T ↘ Spec (CommRingCat.of k₀))] [IsReduced T] (c : T ⟶ S)
@@ -347,12 +340,7 @@ line `𝔸¹_S`, punctually `ι`-pure of weight `w`. Then `F` has a relative-lin
 `S` with pure pieces of weight `w`: there are finite stratifications of source and target, refined
 to open–closed filtrations, such that each source stratum is either separated quasi-finite over
 its target stratum, or open in its relative affine line with surjective projection and carries a
-lisse restriction of `F`.
-
-Over an integral affine open `Spec B` of `S`, the complement of the lissity locus of `F` is cut
-out by an ideal of `B[T]` containing a nonzero polynomial; over the principal open of its leading
-coefficient it is finite, and its complement is open in the relative affine line with nonempty
-fibres. Noetherian induction on `S` covers the rest. -/
+lisse restriction of `F`. -/
 theorem WeilSheaf.IsPunctuallyPureOfWeight.hasRelativeLineStratification {w : ℝ}
     {F : WeilSheaf k₀ l 𝔸(PUnit.{u + 1}; S)} (hF : F.IsPunctuallyPureOfWeight ι w) :
     F.HasRelativeLineStratification ι w (𝔸(PUnit.{u + 1}; S) ↘ S) := by

@@ -363,8 +363,7 @@ G (B K L) -------> B (F₁ K) (F₂ L) ---------> B K L
 ```
 
 It is the one-variable transport `mapOfNatIso e` along `uncurry B`, applied to the product
-algebra `prod.obj (K, L)` and curried. This is the transport of Weil structures along a tensor
-product. -/
+algebra `prod.obj (K, L)` and curried. -/
 noncomputable def mapOfNatIso₂
     (e : Functor.uncurry.obj B ⋙ G ≅ F₁.prod F₂ ⋙ Functor.uncurry.obj B) :
     IsoAlgebra F₁ ⥤ IsoAlgebra F₂ ⥤ IsoAlgebra G :=
@@ -392,8 +391,7 @@ section Op
 
 /-- An algebra with invertible structure morphism `(a, Φ : F a ≅ a)` of `F` gives an algebra
 with invertible structure morphism of `F.op` on `op a`, with structure isomorphism the opposite
-of `Φ⁻¹ : a ≅ F a`. This is the contravariant variable of a transport along a bifunctor such as
-an internal hom: the structure isomorphism enters through its inverse. -/
+of `Φ⁻¹ : a ≅ F a`. -/
 noncomputable def opFunctor : (IsoAlgebra F)ᵒᵖ ⥤ IsoAlgebra F.op where
   obj K := mk (Opposite.op K.unop.carrier) K.unop.str.symm.op
   map {K K'} φ := ObjectProperty.homMk
@@ -595,21 +593,7 @@ instance [HasFiniteColimits C] [PreservesFiniteColimits F] :
   preservesFiniteColimits _ := inferInstance
 
 /-- The structure morphism of the point of a limit of algebras with invertible structure
-morphisms is invertible, if `F` preserves the limit: it agrees with the comparison isomorphism
-`F (lim D) ≅ lim D` between the limits of `F (D j)` and of `D j` induced by the structure
-isomorphisms, since the square
-
-```
-         c.pt.str
-F c.pt -----------> c.pt
-   |                  |
-F (π j)              π j
-   v                  v
-F (D j) ----------> D j
-         (D j).str
-```
-
-commutes. -/
+morphisms is invertible, if `F` preserves the limit. -/
 lemma isIsoStr_of_isLimit {D : J ⥤ Algebra F} {c : Cone D} (hc : IsLimit c)
     [PreservesLimit (D ⋙ forget F) F] [PreservesLimit D (forget F)]
     (hD : ∀ j, IsIsoStr F (D.obj j)) : IsIsoStr F c.pt := by
@@ -622,21 +606,7 @@ lemma isIsoStr_of_isLimit {D : J ⥤ Algebra F} {c : Cone D} (hc : IsLimit c)
   infer_instance
 
 /-- The structure morphism of the point of a colimit of algebras with invertible structure
-morphisms is invertible, if `F` preserves the colimit: it agrees with the comparison
-isomorphism `F (colim D) ≅ colim D` between the colimits of `F (D j)` and of `D j` induced by
-the structure isomorphisms, since the square
-
-```
-         (D j).str
-F (D j) ----------> D j
-   |                  |
-F (ι j)              ι j
-   v                  v
-F c.pt -----------> c.pt
-         c.pt.str
-```
-
-commutes. -/
+morphisms is invertible, if `F` preserves the colimit. -/
 lemma isIsoStr_of_isColimit {D : J ⥤ Algebra F} {c : Cocone D} (hc : IsColimit c)
     [PreservesColimit (D ⋙ forget F) F] [PreservesColimit D (forget F)]
     (hD : ∀ j, IsIsoStr F (D.obj j)) : IsIsoStr F c.pt := by

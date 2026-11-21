@@ -16,7 +16,7 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-!
 # Invariants of a tensor product with a field extension
 
-Source: Stacks Project, Varieties, proof of Lemma 038B (lemma-closed-fixed-by-Galois),
+Source: Stacks Project, Varieties, proof of Lemma 038B,
 computation of the invariant polynomial coefficients.
 -/
 

@@ -59,11 +59,7 @@ triangulated functors `C ⥤ D` compatible with the shifts. Let `Gᵢ n` be the 
 `L ⋙ Fᵢ ⋙ H.shift n` and `φ n : G₁ n ⟶ G₂ n` the natural transformation induced by `τ`. Then
 there are connecting morphisms `δᵢ : (Gᵢ n₀).obj X₃ ⟶ (Gᵢ n₁).obj X₁`, where `n₀ + 1 = n₁`,
 making the sequences `(Gᵢ n₀).obj X₂ ⟶ (Gᵢ n₀).obj X₃ ⟶ (Gᵢ n₁).obj X₁ ⟶ (Gᵢ n₁).obj X₂`
-exact, and commuting with the maps `φ n₀` and `φ n₁`.
-
-The functors `H.shift n`, `Gᵢ n` and the transformations `φ n` are taken as arbitrary data
-together with equations identifying them, so that the statement can be applied to concrete
-functors which are only definitionally of this form. -/
+exact, and commuting with the maps `φ n₀` and `φ n₁`. -/
 theorem exists_homologySequenceδ_whiskerRight {C₀ : Type*} [Category* C₀]
     [HasZeroMorphisms C₀] (L : C₀ ⥤ C) {F₁ F₂ : C ⥤ D} [F₁.CommShift ℤ] [F₂.CommShift ℤ]
     [F₁.IsTriangulated] [F₂.IsTriangulated] (τ : F₁ ⟶ F₂) [NatTrans.CommShift τ ℤ]

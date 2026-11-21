@@ -20,8 +20,7 @@ The purity isomorphism `cl_i : Λ_Z ≅ Ri^! (Λ_X(c)[2c])`
 
 the reduction of `cl_i` followed by the canonical comparison
 `Ri^! K ⊗ᴸ Li^* M ⟶ Ri^! (K ⊗ᴸ M)` and `(Λ/J)_Z ≅ Li^* (Λ/J)_X`. This is the form of the
-finite reduction `A_{E,n} ⟶ A_{E,n-1}` of item 4 of blueprint
-`prop-pur-regular-immersion-purity-compatibilities` in which the reduction is applied to the
+finite reduction `A_{E,n} ⟶ A_{E,n-1}` of purity in which the reduction is applied to the
 target *before* `Ri^!`.
 
 The reduction map `ρ : K ⟶ K ⊗ᴸ (Λ/J)_X` is natural in `K`, and the adjoint of the reduced
@@ -196,13 +195,12 @@ noncomputable def fundamentalClassMapModIdeal (aX : X ⟶ Spec (.of k)) [Smooth 
 
 /-- Compatibilities of purity for regular immersions
 
-**Finite reduction** (item 4), on the level of classes. For an ideal `J` of `Λ` (for
+**Finite reduction**, on the level of classes. For an ideal `J` of `Λ` (for
 `Λ = A_{E,n}` and `J = ϖ^{n-1}` this is the reduction `A_{E,n} ⟶ A_{E,n-1}`), the reduction
 `ρ : K ⟶ K ⊗ᴸ (Λ/J)_X` (`AlgebraicGeometry.Etale.reductionModIdealUnit`) carries the fundamental
 class `[Z ⊂ X] : Λ_X ⟶ Ri_! Ri^! (Λ_X(c)[2c])` to a class with supports in the reduced
 coefficients `Λ_X(c)[2c] ⊗ᴸ (Λ/J)_X`, and the adjoint of this reduced class is the purity map
-`cl_i` followed by `Ri^!(ρ)`: the purity map is natural in the coefficients, so the classes
-reduce compatibly. -/
+`cl_i` followed by `Ri^!(ρ)`. -/
 theorem supportedClassMap_fundamentalClass_reductionModIdealUnit (aX : X ⟶ Spec (.of k))
     [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) (J : Ideal Λ) :
     supportedClassMap Λ i (fundamentalClass Λ c i aX hZ ≫
@@ -214,7 +212,7 @@ theorem supportedClassMap_fundamentalClass_reductionModIdealUnit (aX : X ⟶ Spe
 
 /-- Compatibilities of purity for regular immersions
 
-Item 4, finite reduction `A_{E,n} → A_{E,n-1}`: reducing the coefficients modulo `J` commutes
+Finite reduction `A_{E,n} → A_{E,n-1}`: reducing the coefficients modulo `J` commutes
 with the purity map `cl_i`. The square
 ```
   Λ_Z ─────────────cl_i─────────────▶ Ri^! (Λ_X(c)[2c])

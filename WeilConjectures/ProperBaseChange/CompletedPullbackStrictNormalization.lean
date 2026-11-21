@@ -164,7 +164,7 @@ private theorem pullbackUnit_tower
 /-- Compute the completed pullback comparison by the strict quotient augmentation
 on a K-flat representative, followed by any map to a K-injective strict tower.
 
-Source: Stacks Tag 0941, proof of; Tag 099N(5). -/
+Source: Stacks Tags 0941 and 099N(5). -/
 theorem completedPullbackComparison_strict_normalization
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {U T : Scheme.{u}} (h : U ⟶ T)

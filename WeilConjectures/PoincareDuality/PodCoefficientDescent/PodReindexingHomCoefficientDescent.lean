@@ -298,12 +298,7 @@ end IntegralTransposeLinearity
 
 /-- Rational transposition is the unique linear extension of completed transposition.
 The HEq premises transport only the already specified, unchanged integral objects.
-Source: Stacks 08J9.
-Proof (node Steps 10--11): completed currying is O_E-linear, since evaluation,
-the tensor unit and ordinary signed currying commute with constant scalars.
-Tensor its linear map and inverse with E. The two inverse equations localize.
-The recorded tensor and Hom object formulas identify the endpoints, giving the
-specified formula on pure tensors. Pure tensors generate, proving uniqueness. -/
+Source: Stacks 08J9. -/
 theorem rational_transpose_existsUnique (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (P : (constructibleRationalHomPairs l E W).FullSubcategory)
@@ -340,10 +335,7 @@ def rationalEvaluation (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueFie
   (rationalTranspose l E W P ((rationalDerivedInternalHom l E W).obj P)).symm (𝟙 _)
 
 /-- Both integer shifts preserve the specified permitted-pair domain.
-Source: Stacks 08JA.
-Proof (node Steps 9--12): signed ambient Hom shift identifies the shifted output
-with the old Hom shifted by b - a. Constructibility is stable under every integer
-shift and under this isomorphism. Both source and target shifts are retained. -/
+Source: Stacks 08JA. -/
 theorem shifted_pair_permitted (W : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) (a b : ℤ) :
     constructibleIntegralHomPairs l E W (op (P.obj.1.unop⟦a⟧), P.obj.2⟦b⟧) := by
@@ -363,11 +355,7 @@ def shiftedPair (W : Scheme.{u})
   ⟨(op (P.obj.1.unop⟦a⟧), P.obj.2⟦b⟧), shifted_pair_permitted l E W P a b⟩
 
 /-- Fullness restricts the actual signed ambient Hom shift, including its Koszul sign.
-Source: Stacks 0A8X, 08JA.
-Proof (node Steps 9--12): use the inherited ambient shifts and the signed Hom
-comparison. Its degree-r source-shift factor is (-1)^(a*r). Both endpoints are
-constructible by shifted_pair_permitted; fullness restricts the same arrow and
-its inverse. The underlying arrow fixes the isomorphism uniquely. -/
+Source: Stacks 0A8X, 08JA. -/
 theorem integral_signedShift_existsUnique (W : Scheme.{u})
     (P : (constructibleIntegralHomPairs l E W).FullSubcategory) (a b : ℤ) :
     ∃! e : (constructibleIntegralHom l E W).obj (shiftedPair l E W P a b) ≅
@@ -407,11 +395,7 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The specified pullback preserves the permitted integral Hom domain.
-Proof (node Steps 8--9): identify ordinary reindexing with the specified pullback
-by their identical quotient and zero shifted-product coordinates. The ambient
-comparison and completed-evaluation reflection preserve constructibility of Hom.
-Conjugate its two inputs by the projection-normalized pullback identifications. -/
+/-- The specified pullback preserves the permitted integral Hom domain. -/
 theorem integral_pair_permitted
     (P : (constructibleIntegralHomPairs l E Y).FullSubcategory) :
     constructibleIntegralHomPairs l E X
@@ -478,15 +462,7 @@ private theorem completionUnit_isIso
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The uniquely normalized integral comparison in the constructible category.
-Source: Stacks 099B, 08J9.
-Proof (node Steps 6--9): finite-free completion exchange preserves the actual unit;
-the DVR equation varpi_E=u varpi_L^e and exact products apply also when ramified.
-The entire-system scalar realization pins tensor and pullback comparisons on both
-Roos coordinates. The specified-Hom evaluation pin identifies the remaining Hom
-comparison. Precompose with the ordinary-to-completed unit; reflector injectivity
-reduces every completed equation to the ordinary one. The kappa-conjugate is the
-specified integral isomorphism. Fullness gives naturality; invertibility of kappa
-and the ambient map gives invertibility and uniqueness, without any perfectness. -/
+Source: Stacks 099B, 08J9. -/
 theorem integral_comparison_existsUnique
     (A : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g A)
     (_hA : PodCompletionReindex.Laws l E g A)
@@ -587,9 +563,7 @@ theorem integral_comparison_existsUnique
   apply (cancel_mono d.hom).1
   simpa only [Category.assoc] using hβ'.trans hn'.symm
 
-/-- Rational pullback preserves exactly the integral permitted-pair domain on objects.
-Proof (node Step 10): rational pullback has the same integral object formula, so
-integral_pair_permitted gives the result. No restriction is imposed on arrows. -/
+/-- Rational pullback preserves exactly the integral permitted-pair domain on objects. -/
 theorem rational_pair_permitted
     (P : (constructibleRationalHomPairs l E Y).FullSubcategory) :
     constructibleRationalHomPairs l E X
@@ -634,14 +608,7 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedInternalHom
 private theorem localized_chosen_spec {T : Sort*} {P : T → Prop} (h : ∃! t, P t)
     (t : T) (ht : t = h.exists.choose) : P t := ht.symm ▸ h.exists.choose_spec
 
-/-- Raw localization gives a unique comparison natural for arbitrary localized arrows.
-Proof (node Steps 10--12): tensor the integral component and its inverse with one.
-Both operation functors have their recorded object formulas. Naturality is integral
-naturality multiplied by lambda*nu on pure tensors; bilinearity extends it to every
-finite sum, including arrows with no integral lift. Evaluation is bilinear and
-transposition linear, so their equations extend in the same way. Composition,
-inverse, identity and both signed shift equations localize with their original
-comparisons. No idempotents are introduced. The prescribed components give uniqueness. -/
+/-- Raw localization gives a unique comparison natural for arbitrary localized arrows. -/
 theorem rational_comparison_existsUnique
     (α : constructibleIntegralHom l E Y ⋙ constructibleIntegralPullback l E g ≅
       integralPair l E g ⋙ constructibleIntegralHom l E X) :
@@ -777,13 +744,7 @@ private theorem integral_normalized_component
   exact (Category.assoc _ _ _).trans
     (((hα P).trans hnfinal).trans (Category.assoc _ _ _).symm)
 
-/-- The normalized integral comparison is independent of its resolution presentation.
-Proof (node Steps 8--9): completion-unit tensor compatibility and transpose
-naturality identify every normalized component with the transpose of pulled-back
-evaluation. Cancel the invertible kappa maps in IsIntegralNormalized. This formula
-is independent of the chosen completion presentation, so componentwise equality
-gives uniqueness. Existence is integral_comparison_existsUnique applied to the
-coherent family supplied by completed-evaluation reflection. -/
+/-- The normalized integral comparison is independent of its resolution presentation. -/
 theorem integral_existsUnique :
     ∃! α : constructibleIntegralHom l E Y ⋙ constructibleIntegralPullback l E g ≅
       integralPair l E g ⋙ constructibleIntegralHom l E X,
@@ -812,10 +773,7 @@ def integralComparison := (integral_existsUnique l E g).exists.choose
 def rationalComparison :=
   (rational_comparison_existsUnique l E g (integralComparison l E g)).exists.choose
 
-/-- Naturality includes every pair of localized arrows, not only integral lifts.
-Proof (node Step 11): apply naturality of the hom of rationalComparison to
-the permitted-pair arrow (a.op, b). The domain is full, so this includes every
-localized arrow without choosing an integral lift or a tensor expression. -/
+/-- Naturality includes every pair of localized arrows, not only integral lifts. -/
 theorem rational_naturality
     (P Q : (constructibleRationalHomPairs l E Y).FullSubcategory)
     (a : Q.obj.1.unop ⟶ P.obj.1.unop) (b : P.obj.2 ⟶ Q.obj.2) :
@@ -831,11 +789,7 @@ theorem rational_naturality
     (ObjectProperty.homMk (X := P) (Y := Q) (Prod.mkHom a.op b))
 
 /-- The specified comparisons commute with the specified completed scalar comparisons.
-The two input scalar/pullback comparisons occur with their required variances.
-Proof (node Steps 4--9): transpose the ambient scalar square in the S_X category,
-then use the specified Hom evaluation pin, the tensor completion-unit square and
-the alpha/kappa scalar square. Cancel completion units by reflector injectivity.
-Fullness gives the displayed equation in the constructible integral category. -/
+The two input scalar/pullback comparisons occur with their required variances. -/
 theorem integral_scalar
     (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
     (ι : E →ₐ[ℚ_[l]] L)
@@ -1134,12 +1088,7 @@ end RationalScalarProof
 
 /-- The rational pullback shift is the localization of the termwise reindexing shift,
 conjugated only by the specified ordinary-to-completed pullback maps.
-Source: Stacks 011G, 099B.
-Proof (node Steps 9--12): exact reindexing shifts termwise with identity degree maps.
-The normalized Roos comparison carries the second product coordinate with its
-specified sign. The completed reflection comparison intertwines these shifts.
-Restrict by fullness, then localize. Every component is prescribed by the
-invertible kappa and localization, so the full shift structure is unique. -/
+Source: Stacks 011G, 099B. -/
 theorem rational_pullbackShift_existsUnique :
     ∃! s : (rationalDerivedPullback l E g).CommShift ℤ,
       ∃ (A : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g A)
@@ -1209,12 +1158,7 @@ private theorem commonPullback_eq : commonPullback l Ω g = commonStageDerivedPu
   copyObj_eq _ _
     ((podCommonStageObjectNormalizations l Ω).1 g)
 
-/-- Evaluation at every common field, with the fixed Hom and tensor comparisons.
-Proof (node Steps 13--14): at a common coefficient stage evaluate after the two
-specified scalar comparisons. rational_scalar and the tensor tower square identify
-this representative at any larger field. The common-stage equality criterion gives
-a class independent of representatives. Every arrow has a representative, hence
-this prescription fixes the evaluation class uniquely. -/
+/-- Evaluation at every common field, with the fixed Hom and tensor comparisons. -/
 theorem common_evaluation_existsUnique (W : Scheme.{u})
     [∀ w : W, Invertible (l : W.residueField w)]
     (P : (commonStageHomPairs l Ω W).FullSubcategory) :
@@ -1280,12 +1224,7 @@ private def stagePullbackIntegralIso
     (constructibleIntegralPullback l (Coefficient.{u} l Ω L) g).mapIso
       (eqToIso (stageIntegralObject l Ω Y P L h).symm)
 
-/-- The specified common-stage pullback preserves the permitted Hom domain.
-Proof (node Steps 13--14): represent the two objects at their compositum and apply
-integral_pair_permitted to the underlying integral pair. The rational scalar object
-formula and the pullback/scalar comparison identify both pulled-back stage objects
-with integral pullbacks. Apply internal Hom with its contravariant first argument,
-then transport constructibility through this isomorphism. -/
+/-- The specified common-stage pullback preserves the permitted Hom domain. -/
 theorem common_pair_permitted
     (P : (commonStageHomPairs l Ω Y).FullSubcategory) :
     commonStageHomPairs l Ω X
@@ -1429,17 +1368,7 @@ private theorem pullback_step (K : generalAlgebraicallyClosedConstructibleCatego
 end CommonComparisonProof
 
 /-- The same evaluation-normalized comparison descends uniquely to actual common-stage classes.
-Source: Stacks 08J9.
-Proof (node Steps 13--14): every finite list of objects and arrows is represented
-at a common finite coefficient compositum. Conjugate the rational comparison
-there by the recorded pullback and Hom scalar comparisons. rational_scalar and
-the coefficient tower and unit identities identify these maps at every further
-field. The representative equality criterion therefore gives a well-defined
-class, independent of representatives. The inverse descends in exactly the same
-way. Naturality is rational naturality at a common field. The fixed component
-representatives give uniqueness. Evaluate every finite evaluation, transposition,
-inverse, signed-shift or scheme-composition diagram at such a field: its integral
-equation localizes there, and equality of classes gives its common-stage equation. -/
+Source: Stacks 08J9. -/
 theorem common_comparison_existsUnique :
     ∃! α : commonHom l Ω Y ⋙ commonPullback l Ω g ≅
       commonPair l Ω g ⋙ commonHom l Ω X,
@@ -1461,12 +1390,7 @@ private theorem transportNatIso {C D : Type*} [Category* C] [Category* D]
 
 section CommonCompositorProof
 
-/-- The recorded scheme compositor in literal common-stage coordinates.
-Proof (node Step 14): tensor-product induction proves rational compositor naturality.
-Represent each common-stage arrow over one field; the prescribed component formulas
-and cancellation of the operation comparisons give common-stage naturality. Form
-the natural isomorphism and transport it through the equality-only functor copies.
-Every component is prescribed, so componentwise extensionality proves uniqueness. -/
+/-- The recorded scheme compositor in literal common-stage coordinates. -/
 theorem common_compositor_existsUnique {Z : Scheme.{u}} (h : Z ⟶ X) [IsIso h]
     [∀ z : Z, Invertible (l : Z.residueField z)] :
     ∃! p : commonPullback l Ω (h ≫ g) ≅ commonPullback l Ω g ⋙ commonPullback l Ω h,

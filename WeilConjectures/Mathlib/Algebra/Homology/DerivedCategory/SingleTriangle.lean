@@ -17,6 +17,17 @@ triangle `X₁[0] ⟶ X₂[0] ⟶ X₃[0] ⟶ X₁[1]` in the bounded below deri
 `CategoryTheory.ShortComplex.ShortExact.singleTrianglePlus_distinguished`): the lift of
 Mathlib's `CategoryTheory.ShortComplex.ShortExact.singleTriangle` along the inclusion
 `DerivedCategory.Plus C ⥤ DerivedCategory C`.
+
+## Implementation details
+
+`CategoryTheory.ShortComplex.ShortExact.exists_mk_singleTrianglePlus_distinguished` spells out the
+objects and first two morphisms of the triangle. Use it over a concrete abelian category: there,
+identifying the objects and morphisms of `hE.singleTrianglePlus` with those of
+`DerivedCategory.Plus.singleFunctor C 0` makes the kernel unfold the derived category, while
+here the identification is checked once, over an abstract `C`. The zero morphisms of `C` (and of
+the target category) are arbitrary instances, so that the lemmas apply as they stand to short
+complexes of sheaves, whose zero morphisms come from the full subcategory of sheaves rather than
+from the abelian structure: comparing the two instances is expensive for the kernel too.
 -/
 
 @[expose] public section
@@ -57,14 +68,7 @@ lemma singleTrianglePlus_distinguished (hE : E.ShortExact) :
 
 /-- The distinguished triangle `X₁[0] ⟶ X₂[0] ⟶ X₃[0] ⟶ X₁[1]` of
 `CategoryTheory.ShortComplex.ShortExact.singleTrianglePlus_distinguished`, written with
-`CategoryTheory.Pretriangulated.Triangle.mk`, its objects and first two morphisms spelled out.
-Use it over a concrete abelian category: there, identifying the objects and morphisms of
-`hE.singleTrianglePlus` with those of `DerivedCategory.Plus.singleFunctor C 0` makes the kernel
-unfold the derived category, while here the identification is checked once, over an abstract
-`C`. The zero morphisms of `C` are an arbitrary instance, so that the lemma applies as it
-stands to a short complex of sheaves, whose zero morphisms come from the full subcategory of
-sheaves rather than from the abelian structure: comparing the two instances is expensive for
-the kernel too. -/
+`CategoryTheory.Pretriangulated.Triangle.mk`, its objects and first two morphisms spelled out. -/
 lemma exists_mk_singleTrianglePlus_distinguished [Z : Limits.HasZeroMorphisms C]
     {E : ShortComplex C} (hE : E.ShortExact) :
     ∃ δ : (DerivedCategory.Plus.singleFunctor C 0).obj E.X₃ ⟶
@@ -78,11 +82,7 @@ lemma exists_mk_singleTrianglePlus_distinguished [Z : Limits.HasZeroMorphisms C]
 
 /-- The image of a short exact sequence `E` under a functor `F : C ⥤ D` which factors as the
 inclusion of `C` in degree `0` followed by a homological functor `G : D⁺(C) ⥤ D` is exact in
-the middle: it is the image under `G` of the distinguished triangle of `E`.
-
-The zero morphisms of `C` and of `D` are arbitrary instances, as in
-`CategoryTheory.ShortComplex.ShortExact.exists_mk_singleTrianglePlus_distinguished`, so that the
-lemma applies as it stands to sheaves. -/
+the middle. -/
 lemma map_exact_of_isHomological [Z₀ : Limits.HasZeroMorphisms C] {E : ShortComplex C}
     (hE : E.ShortExact) {D : Type*} [Category* D] [Abelian D] [Z : Limits.HasZeroMorphisms D]
     (G : DerivedCategory.Plus C ⥤ D) [G.IsHomological] (F : C ⥤ D) [F.PreservesZeroMorphisms]

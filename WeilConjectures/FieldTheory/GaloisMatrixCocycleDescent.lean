@@ -95,8 +95,9 @@ private def matrixConjugation (K : Type u) [Field K] (n : ℕ)
     rw [mul_assoc, Algebra.commutes r t.val, ← mul_assoc, ← Units.val_mul,
       inv_mul_cancel, Units.val_one, one_mul]
 
-/-- The descent construction produces a bijective algebra homomorphism over the base.
-The proof is the matrix Hilbert 90 and finite Galois descent argument from Stacks Tag 03R7. -/
+/-- The descent construction produces a bijective algebra homomorphism over the base: a splitting
+of `D` with a locally constant matrix cocycle `b` satisfying the descent equation gives a
+`K`-algebra isomorphism of `D` with a matrix algebra. Source: Stacks Project, Tag 03R7. -/
 theorem exists_algHom_matrix_of_galois_cocycle (K : Type u) [Field K]
     (D : Type u) [Ring D] [Algebra K D] (n : ℕ)
     (e : (SeparableClosure K ⊗[K] D) ≃ₐ[SeparableClosure K]

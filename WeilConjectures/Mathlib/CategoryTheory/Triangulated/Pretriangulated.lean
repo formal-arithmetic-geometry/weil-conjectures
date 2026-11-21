@@ -162,8 +162,7 @@ X  ⟶ 0 ⟶ Z  ⟶ X⟦1⟧
 ↓φ₁       ↓φ₃    ↓φ₁⟦1⟧
 X' ⟶ 0 ⟶ Z' ⟶ X'⟦1⟧
 ```
-the first component of `φ` vanishes if and only if the third one does: the third morphisms of
-the triangles are isomorphisms, and they intertwine `φ.hom₃` with `φ.hom₁⟦1⟧'`. -/
+the first component of `φ` vanishes if and only if the third one does. -/
 lemma hom₁_eq_zero_iff_hom₃_eq_zero {T T' : Triangle C} (φ : T ⟶ T')
     (hT : T ∈ distTriang C) (hT' : T' ∈ distTriang C) (h₂ : IsZero T.obj₂)
     (h₂' : IsZero T'.obj₂) : φ.hom₁ = 0 ↔ φ.hom₃ = 0 := by
@@ -188,12 +187,7 @@ variable {D : Type*} [Category* D]
 `K ⟶ L ⟶ R ⟶ K⟦1⟧` be a distinguished triangle whose first vertex `K` lies in the essential
 image of `F` and whose third vertex receives no maps from the shifts of objects of that
 essential image. Then the counit `F G L ⟶ L` and the second map `L ⟶ R` extend to a
-distinguished triangle `F G L ⟶ L ⟶ R ⟶ (F G L)⟦1⟧`.
-
-Indeed `F G L ⟶ L` factors through `K ⟶ L` by a map `b`, and composition with `b` is bijective on
-maps out of the essential image of `F`: composition with `K ⟶ L` is bijective there, by the
-long exact sequence of the triangle, and so is composition with the counit, by full faithfulness
-of `F`. As both ends of `b` lie in the essential image, `b` is an isomorphism. -/
+distinguished triangle `F G L ⟶ L ⟶ R ⟶ (F G L)⟦1⟧`. -/
 theorem exists_distTriang_counit_of_subsingleton {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
     (hF : F.FullyFaithful) {T : Triangle C} (hT : T ∈ distTriang C)
     (h₃ : ∀ (M : D) (n : ℤ), Subsingleton ((F.obj M)⟦n⟧ ⟶ T.obj₃))

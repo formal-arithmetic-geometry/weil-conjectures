@@ -128,12 +128,7 @@ lemma isIso_ε_of_isIso_η [IsIso adj.unit] [IsIso (η F)] : IsIso (ε G) := by
   infer_instance
 
 /-- For a monoidal adjunction `F ⊣ G` with invertible unit and counit, the tensor comparison
-map `μ : G X ⊗ G Y ⟶ G (X ⊗ Y)` is invertible if `δ : F (G X ⊗ G Y) ⟶ F (G X) ⊗ F (G Y)` is:
-it is the composite
-```
-  G X ⊗ G Y ──unit──▶ G (F (G X ⊗ G Y)) ──G δ──▶ G (F (G X) ⊗ F (G Y))
-            ──G (counit ⊗ counit)──▶ G (X ⊗ Y)
-```
+map `μ : G X ⊗ G Y ⟶ G (X ⊗ Y)` is invertible if `δ : F (G X ⊗ G Y) ⟶ F (G X) ⊗ F (G Y)` is.
 -/
 lemma isIso_μ_of_isIso_δ [IsIso adj.unit] [IsIso adj.counit] (X Y : D)
     [IsIso (δ F (G.obj X) (G.obj Y))] : IsIso (μ G X Y) := by

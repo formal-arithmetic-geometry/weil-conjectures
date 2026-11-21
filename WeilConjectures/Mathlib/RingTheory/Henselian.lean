@@ -31,7 +31,7 @@ a section sends `X` to a root of `f`.
 - `IsLocalRing.isSepClosed_residueField_of_exists_algHom_comap_maximalIdeal_eq`: such a local
   ring has separably closed residue field.
 
-The henselian pairs `(A, I)` of the blueprint are
+Henselian pairs `(A, I)` are
 Mathlib's `HenselianRing A I`; a henselian local ring is `HenselianLocalRing`, and it is
 strictly henselian when moreover `IsSepClosed (IsLocalRing.ResidueField A)`.
 -/

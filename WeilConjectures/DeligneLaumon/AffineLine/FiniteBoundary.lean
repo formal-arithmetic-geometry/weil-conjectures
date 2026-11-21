@@ -41,12 +41,7 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
 /-- *Cohomology of a finite boundary.* If `X` is finite over `k₀`, then the compactly supported
-cohomology `H_c^r(X ⊗ k̄, G)` of a Weil sheaf `G` on `X` vanishes for `r ≠ 0`: after geometric
-base change `X` becomes a finite discrete space, whose cohomology is concentrated in degree
-zero. For `r > 0` this is the vanishing of the higher direct images with compact support along
-the quasi-finite structure morphism, for `r < 0` the concentration of the direct image of a sheaf
-in nonnegative degrees. The blueprint states this for `G` with stalk weights at most some `w`;
-the weights play no role. -/
+cohomology `H_c^r(X ⊗ k̄, G)` of a Weil sheaf `G` on `X` vanishes for `r ≠ 0`. -/
 theorem WeilSheaf.subsingleton_compactlySupportedCohomology_of_isFinite
     [IsFinite (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l X) {r : ℤ} (hr : r ≠ 0) :
     Subsingleton (G.compactlySupportedCohomology r).carrier := by

@@ -23,9 +23,7 @@ comparison
 RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)
 ```
 (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism
-(`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction`; blueprint
-`proposition-six-operations-change-coefficients--7`,
-`proposition-six-operations-change-coefficients` (2) for `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`).
+(`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction`).
 
 Since `0 ⟶ 𝒪_{E,X} --ℓⁿ--> 𝒪_{E,X} ⟶ (𝒪_E ⧸ ℓⁿ)_X ⟶ 0` is short exact
 (`ProEtale.shortExact_integersModPowReduction`), this is an instance of

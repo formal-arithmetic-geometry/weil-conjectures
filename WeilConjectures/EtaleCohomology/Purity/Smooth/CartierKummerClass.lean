@@ -22,7 +22,7 @@ public import WeilConjectures.SixFunctors.Integral.Exact
 /-!
 # The cycle class of an effective Cartier divisor via Kummer boundaries
 
-Blueprint `lemma-cycle-class-cartier-divisor`. Let `i : D ⟶ T` be an effective Cartier divisor, that
+Let `i : D ⟶ T` be an effective Cartier divisor, that
 is a regular closed immersion of codimension one (`AlgebraicGeometry.IsRegularImmersion 1 i`): near
 every point, `D` is cut out by one non-zero-divisor `f`. On such a chart the Kummer boundary
 `∂κ(f) ∈ H²_{V(f)}(U, Λ(1))` (`AlgebraicGeometry.Etale.kummerBoundary`) is a class supported on
@@ -61,8 +61,9 @@ regularity hypotheses replaced by the purity hypothesis. That file is not import
 closure contains the smooth duality of `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality`,
 which is not needed here.
 
-*Sign.* Forgetting supports, `∂κ(f)` is `c₁(𝒪(-D))`; the blueprint's class `c_D`, whose image is
-`c₁(𝒪(D))`, is `-∂κ(f)` (see `WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineClass`).
+*Sign.* Forgetting supports, `∂κ(f)` is `c₁(𝒪(-D))`; the cycle class of `D` normalized to have
+image `c₁(𝒪(D))` is `-∂κ(f)`
+(see `WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineClass`).
 
 ## Main definitions
 
@@ -329,16 +330,7 @@ theorem restrictSupportedClass_frameClass_eq_of_pure [IsClosedImmersion i]
 immersion of pure codimension `c` such that `Ri_! Ri^! (Λ_X(c)[2c])` is a sheaf placed in degree
 zero (`AlgebraicGeometry.Etale.SupportedTatePure`). The frame classes
 depend only on `Z_U ⊂ U`, not on the frame, and they glue: there is a unique class
-`[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every frame is the frame class.
-
-Near every point of `Z` there is a frame given by a regular sequence on an affine open, and any
-other frame differs from it, near `Z`, by a matrix with invertible determinant
-(`RingTheory.Sequence.IsWeaklyRegular.exists_mulVec_isUnit_det`), under which the frame classes
-agree (`AlgebraicGeometry.Etale.restrictSupportedClass_kummerBoundaryProduct_mulVec`); so frame
-classes agree on overlaps
-(`AlgebraicGeometry.Etale.restrictSupportedClass_frameClass_eq_of_pure`). By the purity
-hypothesis the classes are morphisms into a sheaf placed in degree zero, so the Zariski-local
-classes glue (`AlgebraicGeometry.Etale.exists_hom_of_isOpenImmersion_cover`). -/
+`[Z ⊂ X] ∈ H^{2c}_Z(X, Λ(c))` whose restriction to every frame is the frame class. -/
 theorem existsUnique_pureFundamentalClass [IsRegularImmersion c i]
     (hP : SupportedTatePure Λ c i) :
     ∃! γ : constantComplex Λ X ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
@@ -575,8 +567,7 @@ The *class of an effective Cartier divisor* `i : D ⟶ T` (a regular closed imme
 codimension one), `c_D ∈ H²_D(T, Λ(1)) = Hom(Λ_T, Ri_! Ri^! (Λ_T(1)[2]))`: the Kummer boundaries
 `∂κ(f)` of the local equations `f` of `D`, glued under the purity hypothesis
 (`AlgebraicGeometry.Etale.pureFundamentalClass` with `c = 1`). With the conventions of
-`AlgebraicGeometry.Etale.kummerBoundary` it forgets supports to `c₁(𝒪_T(-D))`, so it is the
-negative of the blueprint's `c_D`. -/
+`AlgebraicGeometry.Etale.kummerBoundary` it forgets supports to `c₁(𝒪_T(-D))`. -/
 noncomputable def cartierKummerClass (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ T ⟶ (R(i)_![ModuleCat.{u + 1} Λ]).obj
       ((R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧)) :=
@@ -592,7 +583,7 @@ noncomputable def cartierKummerMap (hP : SupportedTatePure Λ 1 i) :
     constantComplex Λ D ⟶ (R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧) :=
   supportedClassMap Λ i (cartierKummerClass Λ i hP)
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`, local description: on every chart
+/-- Local description of the class of a Cartier divisor: on every chart
 `(e : U ⟶ T, f)` of `D`, an étale `e` with a function `f` on `U` cutting out `D ×_T U`, the class
 `c_D` restricts to the Kummer boundary class `∂κ(f) ∪ 1` of `f`
 (`AlgebraicGeometry.Etale.kummerBoundaryProduct` of the one-element tuple). -/
@@ -611,7 +602,7 @@ theorem eq_cartierKummerClass (hP : SupportedTatePure Λ 1 i)
   (existsUnique_pureFundamentalClass Λ 1 i hP).unique hγ
     (frameRestriction_pureFundamentalClass Λ 1 i hP)
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`, base change: for any `g : T' ⟶ T` along which the
+/-- Base change of the class of a Cartier divisor: for any `g : T' ⟶ T` along which the
 pulled-back divisor `i' : D' ⟶ T'` is again an effective Cartier divisor satisfying the purity
 hypothesis, the restriction of `c_D` along `g` is `c_{D'}`. -/
 theorem restrictSupportedClass_cartierKummerClass (hP : SupportedTatePure Λ 1 i)

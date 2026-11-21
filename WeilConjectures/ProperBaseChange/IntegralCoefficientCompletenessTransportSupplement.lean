@@ -164,9 +164,8 @@ def purDerivedCoefficientRoundTrip (W : Scheme.{u}) :
     Functor.mapDerivedCategoryNatIso (purOrdinaryCoefficientRoundTrip l E W) ≪≫
       Functor.mapDerivedCategoryIdIso _
 
-/-- Reuse the inverse of the landed transport. changeFunctor gives its explicit
-CommRing restriction model via the identity-on-sections round trip; the inverse
-functor remains exactly integralDetailedTransport.
+/-- The coefficient model whose inverse functor is exactly `integralDetailedTransport`, with
+explicit `CommRing` restriction model given by `changeFunctor`.
 Source: Stacks 099N. -/
 def purCoefficientModel (W : Scheme.{u}) :
     PbcCompletedDerived W (pbcIntegralDatum l E) ≌

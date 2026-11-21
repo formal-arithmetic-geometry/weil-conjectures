@@ -164,11 +164,9 @@ There is a Jacobian torsion datum `d` and an injective homomorphism `φ : J₀(K
 determined by the representing isomorphism `d.representableBy` of the Jacobian (a geometric
 point `x` of `J₀` is the point which it attaches to the class of `φ x`), such that the
 isomorphism `H¹(C, μ_{lⁿ}) ≅ J₀(K̄)[lⁿ]` of `d`
-(`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv`, Galois-equivariant by
-`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_restrictMuH` and compatible with the
-transition maps by `AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv_map_rootsOfUnityPowMap`)
-is the Kummer identification `H¹(C, μ_{lⁿ}) ≅ Pic(C)[lⁿ]`
-(`AlgebraicGeometry.Scheme.kummerTorsionEquiv`) followed by the inverse of `φ`. -/
+(`AlgebraicGeometry.JacobianTorsionDatum.kummerEquiv`) is the Kummer identification
+`H¹(C, μ_{lⁿ}) ≅ Pic(C)[lⁿ]` (`AlgebraicGeometry.Scheme.kummerTorsionEquiv`) followed by the
+inverse of `φ`. -/
 theorem exists_kummerEquiv_eq [SmoothOfRelativeDimension 1 p] (hl : (l : K) ≠ 0) :
     ∃ (d : JacobianTorsionDatum p l)
       (φ : (Scheme.specAlgebraicClosure K ⟶ d.J) →* p.geometricFiber.Pic),

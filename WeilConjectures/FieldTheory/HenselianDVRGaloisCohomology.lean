@@ -288,9 +288,7 @@ closure `Ω` of `F`, and fix a prime `ℓ ≠ p`. Then `Hᵠ(G, M) = 0` for `q >
 
 Discrete modules over a finite ring `A` killed by a power of `ℓ` are in particular `ℓ`-primary
 discrete `G`-modules, and the cohomology is computed with `ℤ`-coefficients (see
-`DiscreteModule`). The excellence assumption of the blueprint is not needed: integral closures
-in finite separable extensions of `F` are finite over `R`; and the residue field only needs to
-be separably closed. -/
+`DiscreteModule`). -/
 theorem subsingleton_H_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime) (hℓp : ℓ ≠ p)
     (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) {q : ℕ} (hq : 1 < q) :
     Subsingleton (DiscreteModule.H Gal(Ω/F) M q) :=

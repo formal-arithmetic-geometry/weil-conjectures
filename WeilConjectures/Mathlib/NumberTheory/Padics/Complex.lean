@@ -79,11 +79,8 @@ theorem PadicAlgCl.nonempty_ringEquiv_complex : Nonempty (PadicAlgCl p ≃+* ℂ
 theorem PadicAlgCl.nonempty_ringHom_complex : Nonempty (PadicAlgCl p →+* ℂ) :=
   (PadicAlgCl.nonempty_ringEquiv_complex p).map RingEquiv.toRingHom
 
-/-- Blueprint `lemma-reciprocal-roots-zeta--6` (extension of embeddings): every field embedding
-`σ : L → ℂ` of a number field `L ⊆ ℚ̄_p` extends to an abstract field isomorphism
-`ι : ℚ̄_p ≃ ℂ`. Both fields are algebraically closed of cardinality `𝔠`, so their transcendence
-bases over the countable field `L` (acting on `ℂ` through `σ`) are equipotent
-(`IsAlgClosed.exists_ringEquiv_extend`). -/
+/-- **Extension of embeddings.** Every field embedding `σ : L → ℂ` of a number field `L ⊆ ℚ̄_p`
+extends to an abstract field isomorphism `ι : ℚ̄_p ≃ ℂ`. -/
 theorem PadicAlgCl.exists_ringEquiv_complex_extend (L : IntermediateField ℚ (PadicAlgCl p))
     [FiniteDimensional ℚ L] (σ : L →ₐ[ℚ] ℂ) :
     ∃ ι : PadicAlgCl p ≃+* ℂ, ∀ x : L, ι x = σ x := by

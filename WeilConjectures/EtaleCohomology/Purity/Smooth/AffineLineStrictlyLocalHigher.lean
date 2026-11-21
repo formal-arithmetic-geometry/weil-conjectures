@@ -73,11 +73,7 @@ theorem isZero_cohomology_singleFunctor_iff_subsingleton_H (X : Scheme.{u})
 /-- **Cohomology over a strictly local base through the stalk of the higher direct image.**
 Let `f : X ⟶ T` be a morphism to a scheme `T ≅ Spec R` with `R` strictly henselian local, `t` a
 geometric point of `T` over the closed point and `F` a sheaf of `Λ`-modules on `X`. If the stalk
-at `t` of `Rᵠf_* F` vanishes, then so does `Hᵠ(X, F)`.
-
-Indeed, by the Leray isomorphism `RΓ(X, -) ≅ RΓ(T, Rf_* -)` and the exactness of the global
-sections functor of `T`, `Hᵠ(X, F) = Γ(T, Rᵠf_* F)`, and a sheaf on `T` with vanishing stalk at
-`t` has vanishing global sections. -/
+at `t` of `Rᵠf_* F` vanishes, then so does `Hᵠ(X, F)`. -/
 theorem subsingleton_H_of_isZero_sheafFiber_higherDirectImage {R : Type u} [CommRing R]
     [IsStrictlyHenselianLocalRing R] {X T : Scheme.{u}} (f : X ⟶ T) (e : T ≅ Spec (.of R))
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ T)
@@ -107,14 +103,10 @@ theorem subsingleton_H_of_isZero_sheafFiber_higherDirectImage {R : Type u} [Comm
       ((Sheaf.Γ T.smallEtaleTopology _).rightDerivedFunctorIsoMapDerivedCategory.app L) ≪≫
     (((Sheaf.Γ T.smallEtaleTopology _).mapDerivedCategoryHomologyFunctorIso q).app L).symm)
 
-/-- **The affine line over a strictly henselian local ring has no cohomology in degrees `≥ 2`**
-with locally constant coefficients from the base: for `R` strictly henselian local, `Λ` a finite
-ring whose exponent is invertible on `Spec R` and `M` a locally constant sheaf of `Λ`-modules on
-`Spec R`, `Hᵠ(𝔸¹_R, p^* M) = 0` for `q ≥ 2` (SGA 4 XV 2.1–2.2).
-
-It is `Γ(Spec R, Rᵠp_*(p^* M))`
-(`AlgebraicGeometry.Etale.subsingleton_H_of_isZero_sheafFiber_higherDirectImage`), and
-as soon as `Rᵠp_*(p^* M) = 0` (SGA 4 XV 2.2; this vanishing is the hypothesis `hM`). -/
+/-- **Cohomology of the affine line over a strictly henselian local ring from the higher direct
+image**: for `R` strictly henselian local, `Λ` a finite ring whose exponent is invertible on
+`Spec R` and `M` a locally constant sheaf of `Λ`-modules on `Spec R`, `Hᵠ(𝔸¹_R, p^* M) = 0` as
+soon as `Rᵠp_*(p^* M) = 0` (the hypothesis `hM`). Source: SGA 4 XV 2.1–2.2. -/
 theorem subsingleton_H_affineLine_of_isZero_higherDirectImage
     {R : Type u} [CommRing R]
     [HenselianLocalRing R] [IsSepClosed (IsLocalRing.ResidueField R)]

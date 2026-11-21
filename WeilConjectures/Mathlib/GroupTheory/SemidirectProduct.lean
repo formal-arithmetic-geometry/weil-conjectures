@@ -36,14 +36,6 @@ the unit group `Eˣ` of a field and `χ` is a rank-one character, with finite ge
   degree-zero subgroup.
 * `SemidirectProduct.finite_range_finitePart`: consequently the finite part has finite image as
   soon as `χ` does on the degree-zero subgroup.
-
-## Blueprint
-
-`SemidirectProduct.inrOfAddOne`, `SemidirectProduct.degreeCharacter` and
-`SemidirectProduct.finitePart` implement `corollary-rank-one-weights`;
-`SemidirectProduct.eq_finitePart_mul_degreeCharacter`,
-`SemidirectProduct.finitePart_inrOfAddOne` and `SemidirectProduct.range_finitePart` implement
-`corollary-rank-one-weights`.
 -/
 
 @[expose] public section

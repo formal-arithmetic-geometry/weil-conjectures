@@ -49,8 +49,7 @@ theorem refines_refl (i : Index A) : Refines i i := by
   intro F
   exact ⟨F, Set.Subset.rfl, dvd_refl _⟩
 
-/-- Refinement is transitive: choose the intermediate parent, then its parent, and compose
-subset inclusions and divisibility relations. Source: blueprint order 1222. -/
+/-- Refinement is transitive. -/
 theorem refines_trans (i j k : Index A) (hij : Refines i j) (hjk : Refines j k) :
     Refines i k := by
   intro F
@@ -69,8 +68,8 @@ Its ring operations and its diagonal algebra structure are the standard Pi struc
 abbrev Stage (i : Index A) : Type u :=
   (E : i.parts) → Localization.Away (i.denominator E)
 
-/-- Choose the parent supplied by refinement. It is unique because the child is nonempty
-and different parts of a partition are disjoint. Source: blueprint order 1222. -/
+/-- The parent supplied by refinement; it is unique because the child is nonempty
+and different parts of a partition are disjoint. -/
 noncomputable def parent {i j : Index A} (h : i ≤ j) (F : j.parts) : i.parts :=
   Classical.choose (h F)
 
@@ -79,9 +78,8 @@ theorem parent_dvd {i j : Index A} (h : i ≤ j) (F : j.parts) :
     i.denominator (parent h F) ∣ j.denominator F := by
   exact (Classical.choose_spec (h F)).2
 
-/-- The component map is projection to the parent followed by the unique localization map.
-The parent's denominator is a unit in the child localization by divisibility. The lift sends
-`a/f^n` to `(a/1)(f/1)^(-n)`. Source: blueprint order 1222. -/
+/-- The component map is projection to the parent followed by the unique localization map,
+sending `a/f^n` to `(a/1)(f/1)^(-n)`. -/
 noncomputable def transition {i j : Index A} (h : i ≤ j) : Stage i →ₐ[A] Stage j :=
   AlgHom.pi fun F ↦
     (IsLocalization.Away.liftAlgHom (i.denominator (parent h F))
@@ -151,12 +149,7 @@ noncomputable def diagram : Index A ⥤ CommAlgCat.{u} A where
   map_id i := congrArg CommAlgCat.ofHom (transition_id i)
   map_comp h g := congrArg CommAlgCat.ofHom (transition_comp h.le g.le)
 
-/-- The index category is filtered. It is inhabited by the one-part partition with denominator
-one when the spectrum is nonempty, and by the empty partition otherwise. For two indices,
-take all nonempty intersections, with denominator the product of the two denominators.
-Constructibility is closed under intersections; primality gives nonvanishing of the product.
-Each factor divides that product, giving both refinement arrows. Parallel arrows are equal
-because the category is a preorder. Source: blueprint order 1222. -/
+/-- The index category is filtered. -/
 theorem index_isFiltered : IsFiltered (Index A) := by
   classical
   have hnonempty : Nonempty (Index A) := by
@@ -240,7 +233,7 @@ attribute [instance] index_isFiltered
 
 /-- The affine principal w-localization is the colimit of the partition/denominator diagram
 in commutative `A`-algebras. Its algebra structure is the structural map induced by the diagonal
-maps into the stages. Source: blueprint order 1222. -/
+maps into the stages. -/
 noncomputable def algebra (A : Type u) [CommRing A] : CommAlgCat.{u} A :=
   colimit (diagram (A := A))
 

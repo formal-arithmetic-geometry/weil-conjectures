@@ -195,12 +195,7 @@ lemma map_derivedExtendScalarsUpperShriekMap_app_comp_counit (L : 𝐃(X, Λ)) :
 
 omit [Finite Λ] [Finite Λ'] in
 /-- **The derived extension of scalars carries the restriction map `Λ_X ⟶ Ri_! Λ_Z` to the
-restriction map.** The restriction map is `Λ_X ⟶ Ri_* Li^* Λ_X ≅ Ri_* Λ_Z ≅ Ri_! Λ_Z`
-(`AlgebraicGeometry.Etale.unit_comp_map_comp_inv_eq_supportedRestrictionMap_comp`), and each step
-is compatible with `Ψ`: the unit by the definition of `Ψ Ri_* ≅ Ri_* Ψ` as a mate, and
-`Li^* Λ_X ≅ Λ_Z` by
-`AlgebraicGeometry.Etale.derivedExtendScalarsConstantComplexIso_hom_pullback`.
--/
+restriction map.** -/
 lemma map_supportedRestrictionMap_comp_derivedExtendScalarsLowerShriekIso_hom_app :
     (derivedExtendScalars hρ ha X).map (supportedRestrictionMap Λ i) ≫
         (derivedExtendScalarsLowerShriekIso hρ ha i).hom.app _ ≫

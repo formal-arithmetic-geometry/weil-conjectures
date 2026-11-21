@@ -166,12 +166,8 @@ variable (ψ : AddChar k₀ (PadicAlgCl l))
 /-- *Plancherel for a middle extension*: let `M` be a nonzero lisse sheaf on a dense open
 `j : U₀ ↪ 𝔸¹_{k₀}`, punctually `ι`-pure of weight `w`, whose middle extension has a Fourier
 partner `FT_ψ((j_*M)[1]) ≅ (j'_*M')[1]` with `M'` punctually `ι`-pure of weight `v`. Then
-`v = w + 1`.
-
-Both sides of the isomorphism have the same `L²`-weight; that of the transform is
-`‖j_*M‖ + 1 = w + 1`, and that of `(j'_*M')[1]` is `‖j'_*M'‖ = v`. The sheaf `M'` is nonzero,
-since otherwise `‖j'_*M'‖ = -∞`. The nonvanishing of `M`, implicit in the blueprint, is needed:
-the zero sheaf is pure of every weight. -/
+`v = w + 1`. The hypothesis that `M` is nonzero is needed, since the zero sheaf is pure of
+every weight. -/
 theorem eq_add_one_of_isFourierPartner (ι : PadicAlgCl l →+* ℂ) (hψ : ψ ≠ 1)
     (D D' : WeilSheaf.LisseOnDenseOpen k₀ l) (hM : ¬ Limits.IsZero D.sheaf) {w v : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) (hFT : D.IsFourierPartner ψ D')

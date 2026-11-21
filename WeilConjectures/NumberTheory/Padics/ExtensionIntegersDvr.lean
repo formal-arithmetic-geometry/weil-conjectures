@@ -14,8 +14,7 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUniq
 /-!
 # The ring of integers of a finite extension of the p-adic numbers
 
-Source: Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1
-(auxiliary.
+Source: Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ finite residue field. Uniformizers attain the largest nonzero value in the maxim
 exist, and differ by units; every nonzero field element has a unique unit-times-integer-power
 expression for a fixed uniformizer.
 
-Source: Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1.
-(auxiliary. -/
+Source: Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1. -/
 theorem extension_integers_dvr (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (abv : AbsoluteValue E ℝ)
     (h_ext : ∀ a : ℚ_[l], abv (algebraMap ℚ_[l] E a) = ‖a‖) :

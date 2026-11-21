@@ -47,10 +47,9 @@ The degreewise consequences over a field are in
 
 ## Implementation notes
 
-The orientation is an explicit argument. The *normalized* orientation is the one
-built in the purity chapter, which the repository does not define yet; the traces and pairings
-of this chapter are those of an arbitrary Tate orientation, and are normalized when the
-orientation is.
+The orientation is an explicit argument. The *normalized* orientation coming from smooth purity
+is not defined in the repository yet; the traces and pairings here are those of an arbitrary
+Tate orientation, and are normalized when the orientation is.
 
 The coefficients are `ModuleCat Λ` for a commutative ring `Λ` with a Tate twist datum. With
 `[Finite Λ]` and the exponent of `Λ` invertible on the base, this is the finite stage `A_{E,n}`;
@@ -106,17 +105,13 @@ noncomputable def toOrientation [SmoothOfRelativeDimension d a] (γ : TateOrient
     Orientation Λ a d :=
   Orientation.ofDualizingComplexIso γ.dualizingComplexIso
 
-/-- The pairing data.
-
-The smooth trace `Tr_γ : Ra_!(Λ_X(d)[2d]) ⟶ Λ_Y` of a Tate orientation
+/-- The smooth trace `Tr_γ : Ra_!(Λ_X(d)[2d]) ⟶ Λ_Y` of a Tate orientation
 (`AlgebraicGeometry.Etale.smoothTrace`). -/
 noncomputable def smoothTrace (γ : TateOrientation Λ a d) :
     (R(a)_![ModuleCat.{u + 1} Λ]).obj ((tateObject Λ X d)⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
   Etale.smoothTrace (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso
 
-/-- The derived pairing, and perfectness of a pairing.
-
-The derived Poincaré pairing of a Tate orientation `γ`,
+/-- The derived Poincaré pairing of a Tate orientation `γ`,
 
 `β_K : Ra_! K ⊗ᴸ (Ra_*(K^∨(d)))[2d] ⟶ Λ_Y`
 
@@ -128,15 +123,10 @@ noncomputable def poincarePairing (γ : TateOrientation Λ a d)
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
   Etale.poincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso K
 
-/-- Derived Poincaré duality, at a finite coefficient stage `Λ = A`. This is also the derived
-part of the degreewise duality over fields.
-
-The derived Poincaré pairing of a Tate orientation is perfect, for a finite coefficient ring
-`Λ` and `K` dualizable (`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing`): the
+/-- **Derived Poincaré duality** at a finite coefficient stage. The derived Poincaré pairing of a
+Tate orientation is perfect, for a finite coefficient ring `Λ` and `K` dualizable: the
 tensor–internal-hom adjoint `RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨` of
-`β_K : RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` is an isomorphism, read in `D(Y_ét, Λ)`. The integral
-stage `Λ = 𝒪_E` is
-`AlgebraicGeometry.Etale.isPerfectPairing_poincarePairing_of_isSepClosed_of_isDualizable`. -/
+`β_K : RΓ_c(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` is an isomorphism, read in `D(Y_ét, Λ)`. -/
 theorem isPerfectPairing_poincarePairing (γ : TateOrientation Λ a d)
     {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) :
     IsPerfectPairing (γ.poincarePairing K) :=
@@ -152,12 +142,9 @@ noncomputable def properPoincarePairing [IsProper a] (γ : TateOrientation Λ a 
         (((R((a)_*[ModuleCat.{u + 1} Λ])).obj (twistedDual Λ d K))⟦(2 * d : ℤ)⟧) ⟶ 𝟙_ _ :=
   Etale.properPoincarePairing (rightDerivedUpperShriekAdjunction Λ a) γ.dualizingComplexIso K
 
-/-- Proper Poincaré duality.
-
-For `a` proper, the derived Poincaré pairing of a Tate orientation read through
-`Ra_! ≅ Ra_*`, `RΓ(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` over `Y = Spec k`, is perfect for a finite
-coefficient ring `Λ` and `K` dualizable
-(`AlgebraicGeometry.Etale.isPerfectPairing_properPoincarePairing`). -/
+/-- **Proper Poincaré duality.** For `a` proper, the derived Poincaré pairing of a Tate
+orientation read through `Ra_! ≅ Ra_*`, `RΓ(X, K) ⊗ᴸ RΓ(X, K^∨(d))[2d] ⟶ Λ` over `Y = Spec k`, is
+perfect for a finite coefficient ring `Λ` and `K` dualizable. -/
 theorem isPerfectPairing_properPoincarePairing [IsProper a]
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X} (hKd : IsDualizable K) :
     IsPerfectPairing (γ.properPoincarePairing K) :=
@@ -174,8 +161,7 @@ variable [HasTateTwist.IsNormalized Λ] {d : ℕ} (a : X ⟶ Y) [IsSeparated a]
 include aY in
 /-- **Tate orientations exist**: for `a : X ⟶ Y` smooth separated of pure relative dimension `d`,
 with `Y` separated and locally of finite type over a field `k` and the exponent of `Λ` invertible
-on `X`, smooth purity (`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`) gives
-`Ra^! Λ_Y ≅ Λ_X(d)[2d]`, i.e. a Tate orientation `Λ_X(d)[2d] ≅ Ra^! Λ_Y` of `a`. -/
+on `X`, there is a Tate orientation `Λ_X(d)[2d] ≅ Ra^! Λ_Y` of `a`. -/
 theorem TateOrientation.nonempty : Nonempty (TateOrientation Λ a d) :=
   (nonempty_iso_dualizingComplex_twistShift Λ (d := d) a aY).map Iso.symm
 

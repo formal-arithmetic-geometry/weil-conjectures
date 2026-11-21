@@ -15,8 +15,8 @@ public import WeilConjectures.PoincareDuality.Biduality.ReductionIhom
 
 Write `R = (𝒪_E ⧸ ℓⁿ) ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ D(Mod_{(𝒪_E ⧸ ℓⁿ)_X})` for the reduction modulo
 `ℓⁿ` of bounded constructible `𝒪_E`-complexes, with values in the ambient derived category of
-module objects over `(𝒪_E ⧸ ℓⁿ)_X`. This file proves the integral step (ii) of blueprint
-`theorem-verdier-biduality`: `R` is lax braided monoidal and commutes with internal homs, so it
+module objects over `(𝒪_E ⧸ ℓⁿ)_X`. This file proves the integral step of Verdier
+biduality: `R` is lax braided monoidal and commutes with internal homs, so it
 carries the double-dual morphism `δ_{K₀}` of `K₀` (relative to `ω_{X, 𝒪_E}`) to the double-dual
 morphism of `R K₀` (relative to `R ω_{X, 𝒪_E}`), and `R` detects isomorphisms (derived Nakayama).
 
@@ -95,9 +95,7 @@ attribute [local instance] leftDerivedIntegersModPowReductionMonoidal
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
-/-- Blueprint
-`proposition-six-operations-change-coefficients`, (2), for the coefficient map
-`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`. **Reduction modulo `ℓⁿ` commutes with internal homs**: for bounded constructible
+/-- **Reduction modulo `ℓⁿ` commutes with internal homs**: for bounded constructible
 `𝒪_E`-complexes `A` and `B`, the comparison
 `v_{A,B} : RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`, the transpose of the
 reduction of the evaluation (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an

@@ -73,12 +73,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 **Base change of the fundamental class to a regular immersion of the same codimension**,
 `[Z' ⊂ X'] = e^* [Z ⊂ X]`: for any `e : X' ⟶ X` with `X'` smooth over `k` whose base change
 `i' : Z' ⟶ X'` of `i` is a regular immersion of the same codimension `c`, with `Z'` regular,
-the restriction of supports along `e` carries the fundamental class of `i` to that of `i'`.
-Near a point of `Z'`, a Zariski frame `(U, f)` of `i` pulls back to the Zariski frame
-`(e⁻¹ U, e^* f)` of `i'`, and the product of Kummer boundaries of `f` restricts to that of
-`e^* f`. This generalizes
-`AlgebraicGeometry.Etale.restrictSupportedClass_fundamentalClass_of_flat`, where flatness of `e`
-serves only to make `i'` regular. -/
+the restriction of supports along `e` carries the fundamental class of `i` to that of `i'`. -/
 theorem restrictSupportedClass_fundamentalClass_of_isPullback (aX : X ⟶ Spec (.of k))
     [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z)) {X' Z' : Scheme.{u}}
     (e : X' ⟶ X) [Smooth (e ≫ aX)] (i' : Z' ⟶ X') [IsRegularImmersion c i'] (g : Z' ⟶ Z)

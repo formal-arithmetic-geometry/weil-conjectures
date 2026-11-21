@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LocallyTrivialInv
 Let `Λ` be a commutative ring of characteristic `n`. The *Tate sheaf* of `Λ` on a scheme `X` is
 the étale sheaf of `Λ`-modules `Λ_X(1) = μₙ ⊗_ℤ Λ` (`AlgebraicGeometry.Etale.tateSheaf`), where
 `μₙ = ker(n : 𝔾ₘ ⟶ 𝔾ₘ)` is the sheaf of `n`-th roots of unity. When `ℓ^N` is the exponent of `Λ`
-this is `μ_{ℓ^N} ⊗_{ℤ/ℓ^N} Λ`, the finite-level twist of the blueprint.
+this is `μ_{ℓ^N} ⊗_{ℤ/ℓ^N} Λ`, the finite-level Tate twist.
 
 The pullback of `μₙ` maps to `μₙ`
 (`AlgebraicGeometry.Scheme.upperStarRootsOfUnitySheafToRootsOfUnitySheaf`), isomorphically along

@@ -22,7 +22,7 @@ identification `Rj_! ≅ j_!`
 the exceptional projection morphism `PF_j : Rj_! K ⊗ B ⟶ Rj_! (K ⊗ Lj^* B)` of bounded
 constructible `ℚ̄_ℓ`-complexes is the inverse of the projection comparison of `j_! ⊣ Lj^*`
 (`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison`,
-blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2).
+SGA 4, Exposé XVII, 5.2.2 and 5.1.2).
 
 The proof follows the definition of `Rj_! ≅ j_!`: the lower shriek `Rj_!` is defined through the
 compactification of `j` chosen by Nagata's theorem, compared with the trivial compactification

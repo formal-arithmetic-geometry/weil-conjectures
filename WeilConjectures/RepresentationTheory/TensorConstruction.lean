@@ -24,11 +24,6 @@ subquotients by scalars.
 * `Representation.IsTensorConstruction`: `σ` is a tensor construction on `ρ`.
 * `Representation.IsTensorConstruction.subrepresentation`: a subrepresentation of a tensor
   construction is a tensor construction.
-
-## Blueprint
-
-`Representation.IsTensorConstruction` implements `definition-tensor-construction` and its clause
-`definition-tensor-construction--1`.
 -/
 
 @[expose] public section

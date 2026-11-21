@@ -248,11 +248,7 @@ variable {C B S : Type*} [CommRing C] [CommRing B] [CommRing S] [Algebra C S] {a
 /-- **Affine scheme-image saturation**. Let `f : C → B` be a ring map with kernel `K` (so that
 `C ⧸ K → B` is injective), and let `a : C` map to a unit of `B`. Then the kernel of the
 factorization `C → C[1/a] → B` is the `a`-saturation `{c | ∃ n, a ^ n * c ∈ K}` of `K`, and it is
-the inverse image of the `a`-power torsion `Γ_(a)(C ⧸ K)` under `C → C ⧸ K`.
-
-On a blow-up chart this says that the scheme-theoretic image is the quotient by the
-`a`-power torsion, i.e. the strict-transform chart; the global form of that consequence is
-`AlgebraicGeometry.Scheme.Hom.ker_lift_admissibleBlowup`. -/
+the inverse image of the `a`-power torsion `Γ_(a)(C ⧸ K)` under `C → C ⧸ K`. -/
 theorem ker_lift_comp_algebraMap_eq_comap_powTorsion (f : C →+* B) (ha : IsUnit (f a)) :
     (RingHom.ker ((lift a ha : S →+* B).comp (algebraMap C S)) : Set C) =
         {c | ∃ n : ℕ, a ^ n * c ∈ RingHom.ker f} ∧

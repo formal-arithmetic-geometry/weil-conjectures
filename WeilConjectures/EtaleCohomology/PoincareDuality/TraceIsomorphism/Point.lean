@@ -77,8 +77,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k
 
 omit [IsSepClosed k] in
 /-- For `a : X ⟶ s` with `X` connected, `g ↦ e⁻¹ ≫ La^* g ≫ e` is a bijection
-`End(Λ_s) ≃ End(Λ_X)` for any `e : La^* Λ_s ≅ Λ_X`: both endomorphism rings are `Λ`, by
-`r ↦ r • 𝟙`, and `La^*` is `Λ`-linear. -/
+`End(Λ_s) ≃ End(Λ_X)` for any `e : La^* Λ_s ≅ Λ_X`. -/
 theorem bijective_leftDerivedUpperStar_map_comp {X : Scheme.{u}} [ConnectedSpace X]
     (a : X ⟶ Spec (.of k)) (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) :
     Function.Bijective (fun g : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ 𝟙_ _ ↦
@@ -106,8 +105,7 @@ lemma isGE_rightDerivedLowerStar_obj_unit {X Y : Scheme.{u}} (a : X ⟶ Y) :
 
 omit [IsSepClosed k] in
 /-- For `a : X ⟶ s` with `X` connected and `e : La^* Λ_s ≅ Λ_X`, composition with the class
-`u : Λ_s ⟶ Ra_* Λ_X` of `1 ∈ H⁰(X, Λ)` is a bijection `End(Λ_s) ≃ Hom(Λ_s, Ra_* Λ_X)`: it is
-`AlgebraicGeometry.Etale.bijective_leftDerivedUpperStar_map_comp` read through `La^* ⊣ Ra_*`. -/
+`u : Λ_s ⟶ Ra_* Λ_X` of `1 ∈ H⁰(X, Λ)` is a bijection `End(Λ_s) ≃ Hom(Λ_s, Ra_* Λ_X)`. -/
 lemma bijective_comp_unit_comp_rightDerivedLowerStar_map {X : Scheme.{u}} [ConnectedSpace X]
     (a : X ⟶ Spec (.of k)) (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) :
     Function.Bijective (fun g : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ 𝟙_ _ ↦
@@ -126,13 +124,7 @@ lemma bijective_comp_unit_comp_rightDerivedLowerStar_map {X : Scheme.{u}} [Conne
 /-- **Evaluation at `1` is bijective.** Let `k` be separably closed, `Λ` self-injective, and
 `a : X ⟶ Spec k` with `X` connected. For an identification `e : La^* Λ_s ≅ Λ_X`, let
 `u : Λ_s ⟶ Ra_* Λ_X` be the class `1 ∈ H⁰(X, Λ)` (the unit of `La^* ⊣ Ra_*` read through `e`).
-Then `h ↦ u ≫ h`, `Hom(Ra_* Λ_X, Λ_s) ⟶ Hom(Λ_s, Λ_s)`, is bijective.
-
-Indeed `Ra_* Λ_X ∈ D^{≥ 0}`, and `Hom(Λ_s, u)` is bijective since `H⁰(X, Λ) = Λ` for the connected
-`X` (`AlgebraicGeometry.Etale.bijective_comp_unit_comp_rightDerivedLowerStar_map`), so the cone of
-`u` lies in `D^{≥ 1}` (`AlgebraicGeometry.Etale.isGE_one_of_bijective_comp_of_isSepClosed`); and
-`Λ_s` is an injective sheaf, so it has no morphisms from `D^{≥ 1}` and its shift
-(`DerivedCategory.bijective_comp_singleFunctor_of_injective_of_isGE`). -/
+Then `h ↦ u ≫ h`, `Hom(Ra_* Λ_X, Λ_s) ⟶ Hom(Λ_s, Λ_s)`, is bijective. -/
 theorem bijective_comp_unit_rightDerivedLowerStar [Module.Injective Λ Λ] {X : Scheme.{u}}
     [ConnectedSpace X] (a : X ⟶ Spec (.of k))
     (e : (L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ≅ 𝟙_ _) :
@@ -164,7 +156,7 @@ theorem bijective_comp_unit_rightDerivedLowerStar [Module.Injective Λ Λ] {X : 
 
 omit [IsSepClosed k] in
 /-- Injectivity of precomposition with the unit `Q ⟶ Ra_* La^* Q` is invariant under
-isomorphisms `Q ≅ Q'`, by naturality of the unit. -/
+isomorphisms `Q ≅ Q'`. -/
 lemma injective_comp_unit_of_iso {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
     {Q Q' : DerivedCategoryModule Λ (Spec (.of k))} (ι : Q ≅ Q')
     (h : Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
@@ -195,8 +187,7 @@ lemma injective_comp_unit_of_iso {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
 
 set_option maxRecDepth 20000 in
 omit [IsSepClosed k] in
-/-- Injectivity of precomposition with the unit `Q ⟶ Ra_* La^* Q` is invariant under shifts:
-the unit commutes with the shift functors. -/
+/-- Injectivity of precomposition with the unit `Q ⟶ Ra_* La^* Q` is invariant under shifts. -/
 lemma injective_comp_unit_shift {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
     {Q : DerivedCategoryModule Λ (Spec (.of k))} (n : ℤ)
     (h : Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
@@ -224,8 +215,7 @@ lemma injective_comp_unit_shift {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
 
 /-- **Evaluation at `1`, injectivity form.** For `a : X ⟶ Spec k` with `X` connected and `Λ`
 self-injective, precomposition with the unit `Λ_s ⟶ Ra_* La^* Λ_s` is injective on
-`Hom(Ra_* La^* Λ_s, Λ_s)`
-(`AlgebraicGeometry.Etale.bijective_comp_unit_rightDerivedLowerStar`). -/
+`Hom(Ra_* La^* Λ_s, Λ_s)`. -/
 lemma injective_comp_unit_rightDerivedLowerStar_unit [Module.Injective Λ Λ] {X : Scheme.{u}}
     [ConnectedSpace X] (a : X ⟶ Spec (.of k)) :
     Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
@@ -247,9 +237,7 @@ lemma injective_comp_unit_rightDerivedLowerStar_unit [Module.Injective Λ Λ] {X
 variable [HasTateTwist Λ]
 
 variable (Λ k) [HasInvertibleExponent Λ (Spec (.of k))] in
-/-- Over a separably closed field the Tate twists are trivial, `Λ_s(m) ≅ Λ_s`: the twisting
-object is a locally constant sheaf in degree `0` whose stalk is free of rank one, and on
-`Spec k` such a sheaf is constant. -/
+/-- Over a separably closed field the Tate twists are trivial, `Λ_s(m) ≅ Λ_s`. -/
 theorem nonempty_tateObject_iso_unit (m : ℤ) :
     Nonempty (tateObject Λ (Spec (.of k)) m ≅ 𝟙_ (DerivedCategoryModule Λ (Spec (.of k)))) := by
   obtain ⟨L, -, hL, ⟨e⟩⟩ :=
@@ -263,9 +251,7 @@ variable (Λ) in
 /-- **Evaluation at a point is determined by the unit.** For `a : X ⟶ Spec k` with `X` connected
 over the separably closed field `k`, `Λ` self-injective and the shifted Tate object
 `Q = Λ_s(m)[n]`, precomposition with the unit `Q ⟶ Ra_* La^* Q` is injective on
-`Hom(Ra_* La^* Q, Q)`: the Tate twist is trivial over `s`
-(`AlgebraicGeometry.Etale.nonempty_tateObject_iso_unit`) and the case `Q = Λ_s` is
-`AlgebraicGeometry.Etale.injective_comp_unit_rightDerivedLowerStar_unit`. -/
+`Hom(Ra_* La^* Q, Q)`. -/
 theorem injective_comp_unit_tateObject_shift [Module.Injective Λ Λ]
     [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} [ConnectedSpace X]
     (a : X ⟶ Spec (.of k)) (m n : ℤ) :
@@ -284,10 +270,7 @@ variable [Finite Λ] [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}}
   {a : X ⟶ Spec (.of k)} [HasCompactification a] {d : ℕ}
 
 /-- Over a separably closed field the untwisted trace `tr^{(-d)}_X : H^{2d}_c(X, Λ) ⟶ Λ(-d)` is
-bijective as soon as the twisted trace `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` is: the twists `Λ_s(±d)`
-are trivial (`AlgebraicGeometry.Etale.nonempty_tateObject_iso_unit`) and the projection
-formula identifies `(Ra_! Λ_X)[2d] ⊗ Λ_s(d)` with `(Ra_! Λ_X(d))[2d]`
-(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). -/
+bijective as soon as the twisted trace `tr_X : H^{2d}_c(X, Λ(d)) ⟶ Λ` is. -/
 theorem bijective_untwistedTraceMap_of_bijective_traceMap (γ : TateOrientation Λ a d)
     (h : Function.Bijective γ.traceMap) : Function.Bijective γ.untwistedTraceMap := by
   obtain ⟨eA⟩ := nonempty_tateObject_iso_unit Λ k (d : ℤ)

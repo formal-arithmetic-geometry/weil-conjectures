@@ -27,25 +27,8 @@ namespace Matrix
 
 /-- The ideal of maximal row minors gives scalar left inverses, and a scalar left inverse
 puts the `m`-th power of its scalar in that ideal, with the explicit Cauchy–Binet expression.
-Source: Stacks Project, Algebra, Lemma 07DQ and item 0F0K.
-
-Each subset of size `m` is enumerated in increasing order by `orderEmbOfFin`. The ideal is
-written using `Ideal.span` of the range of these determinants. For `m = 0` the unique subset
-is empty, its determinant is one, and this ideal is the whole ring.
-
-Proof (the four steps of the node):
-1. For each subset `I`, let `E_I` be the projection matrix selecting its rows. Entrywise
-   multiplication gives `E_I * A = A_I`.
-2. For `f` in the span, write `f = ∑ I, c_I * det A_I`. Put
-   `B = ∑ I, c_I • (adjugate A_I * E_I)`. The identity
-   `adjugate A_I * A_I = det A_I • 1`
-   gives `B * A = f • 1`. For zero columns all these matrices are empty.
-3. If `B * A = f • 1`, take determinants. The Leibniz expansion of the diagonal matrix
-   `f • 1` gives `det (B * A) = f ^ m`, also for `m = 0` when both sides are one.
-4. Apply lem-weil-pbc-cauchy-binet to `B` and `A`: the determinant of the product is the
-   sum of the products of their corresponding column and row minors. These column minors
-   are precisely the coefficients in the stated formula. It is an ideal combination of
-   the generators, so `f ^ m` belongs to the span. -/
+Each subset of size `m` is enumerated in increasing order by `orderEmbOfFin`.
+Source: Stacks Project, Algebra, Lemma 07DQ and Tag 0F0K. -/
 theorem scalar_left_inverse_maximal_minors {R : Type u} [CommRing R]
     (n m : ℕ) (_hmn : m ≤ n) (A : Matrix (Fin n) (Fin m) R) :
     let J : Ideal R := Ideal.span (Set.range

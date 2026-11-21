@@ -49,7 +49,6 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.ZlOpenUnit
 
 /-- The normalized equation and its adjunction transpose, with invertible open unit.
-These are clauses about specified functors, not alternative coefficient categories.
 Source: Stacks 03DI, 09BN. -/
 structure OpenData {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     (J : A ⥤ B) (P : B ⥤ A) (GU : A ⥤ A) (GX : B ⥤ B)
@@ -345,8 +344,7 @@ instance fiberMapQuasiCompact : QuasiCompact (zlFiberMap D j₀) :=
   @quasiCompact_of_noetherianSpace_source (D.geometricFiber U₀).left
     (D.geometricFiber X₀).left inferInstance (zlFiberMap D j₀)
 
-/-- Integral compact support for the compactification (j,id), with its recorded action.
-Only the geometric Noetherian instance is supplied here. -/
+/-- Integral compact support for the compactification (j,id), with its recorded action. -/
 def integralJ (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :
     sfIntegralConstructibleCategory l E (D.geometricFiber U₀).left ⥤
@@ -575,7 +573,6 @@ abbrev CommonData (S : Action D l hl X₀ U₀ j₀ Ω) :=
 
 /-- Stalk vanishing in every coefficient category, including arbitrary complexes
 and all coefficient cohomology degrees of the specified point fibre.
-The natural zero comparison is unique since each target object is zero.
 Source: Stacks 099N. -/
 def EmptyFibre (S : Action D l hl X₀ U₀ j₀ Ω)
     (R : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],

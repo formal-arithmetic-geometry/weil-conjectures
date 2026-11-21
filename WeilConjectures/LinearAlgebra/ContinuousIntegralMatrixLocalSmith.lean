@@ -14,8 +14,7 @@ import WeilConjectures.LinearAlgebra.DvrMatrixSmithPowers
 # Local continuous Smith reduction of integral matrices
 
 Source: Hemo--Richarz--Scholbach, arXiv:2305.18131, Example 3.1 and the proof of Theorem 6.12(2),
-finite coefficient extension case. The local constant-cokernel-type Smith variant is the agent
-argument recorded in the.
+finite coefficient extension case.
 
 The valuation topology on the integer ring is its maximal-ideal-adic topology.
 The cokernels below are ordinary algebraic module quotients, with no sheaf structure.

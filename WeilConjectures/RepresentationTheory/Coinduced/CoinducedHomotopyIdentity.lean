@@ -11,7 +11,7 @@ import Mathlib.Tactic.Abel
 /-!
 # The coinduced contraction satisfies the homotopy identity
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, label , final profinite comparison.
+Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, final profinite comparison.
 -/
 
 @[expose] public section
@@ -109,12 +109,9 @@ private theorem coinducedDifferential_apply
 /-- The inhomogeneous continuous cochain differential and the evaluation contraction
 satisfy the contracting homotopy identity in every positive degree.
 The witnesses `d` and `h` are uniquely specified by their pointwise formulas;
-`h n` is the paper's `h_{n+1}`, so `n = 0` includes the degree-one identity.
-Nested locally constant maps give the discrete topology on the coinduced module.
-`Fin.contractNth` combines adjacent entries, or drops the last entry at the last index.
-Integer scalar multiplication expresses alternating signs over an arbitrary ring.
+`h n` is the contraction in degree `n + 1`, so `n = 0` includes the degree-one identity.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, label. -/
+Source: Stacks Project, etale-cohomology.tex, Tag 0DVG. -/
 theorem coinduced_homotopy_identity
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

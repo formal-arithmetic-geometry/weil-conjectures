@@ -10,7 +10,7 @@ public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 
 /-! # A simultaneous finite free splitting extension
 
-Source: Stacks Project, Morphisms, Tag 03HW, proof of.
+Source: Stacks Project, Morphisms, Tag 03HW.
 -/
 
 @[expose] public section
@@ -44,10 +44,7 @@ private theorem exists_nontrivial_splitting (n : ℕ) (R : Type u) [CommRing R]
       exact hS j
 
 /-- A finite family of monic equations splits over one faithful finite free algebra.
-Source: Stacks Project, Tag 03HW, proof of , and Algebra, . Split each equation by
-`Polynomial.Monic.exists_splits_map`, preserving previous factorizations by mapping them into the
-next extension. Transitivity of finite free modules supplies the final basis. Nontriviality and
-freeness imply faithfulness. For the zero base ring the identity extension suffices. -/
+Source: Stacks Project, Tag 03HW. -/
 theorem exists_faithful_finite_free_splitting (R : Type u) [CommRing R]
     (n : ℕ) (P : Fin n → R[X]) (hP : ∀ i, (P i).Monic) :
     ∃ (S : Type u) (_ : CommRing S) (_ : Algebra R S)

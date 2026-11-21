@@ -24,7 +24,7 @@ sheaf of `n`-th roots of `u`, which is represented by the Kummer cover
 `𝒯_u = Spec 𝒪_X[T₀]/(T₀ⁿ - u)` (`AlgebraicGeometry.Scheme.kummerCover`): over every étale
 `U ⟶ X`, the sections of `E_u` lying over `1` are the `X`-morphisms `U ⟶ 𝒯_u`
 (`AlgebraicGeometry.Scheme.kummerExtensionFiberEquiv`). This is the torsor form of the Kummer
-class of blueprint `def-pur-affine-line-datum`: `κ(u)` is the class of the `μₙ`-torsor `𝒯_u`.
+class: `κ(u)` is the class of the `μₙ`-torsor `𝒯_u`.
 
 ## Main definitions
 
@@ -139,17 +139,11 @@ noncomputable def unitsPowEqEquiv {R : Type*} [CommRing R] (a : Rˣ) :
   left_inv v := Subtype.ext (Units.ext rfl)
   right_inv w := rfl
 
-/-- Blueprint `def-pur-affine-line-datum` (torsor form): the Kummer class `κ(u)` is the class of
-the `μₙ`-torsor `𝒯_u = Spec 𝒪_X[T₀]/(T₀ⁿ - u)`.
+/-- The Kummer class `κ(u)` is the class of the `μₙ`-torsor `𝒯_u = Spec 𝒪_X[T₀]/(T₀ⁿ - u)`:
+over an étale `U ⟶ X`, the sections of the Kummer extension `E_u`
+(`AlgebraicGeometry.Scheme.kummerExtension`) lying over the section `1` of `ℤ` correspond to the
+`X`-morphisms `U ⟶ 𝒯_u`. -/
 
-The Kummer class of `u` is the connecting morphism of the extension
-`0 ⟶ μₙ ⟶ E_u ⟶ ℤ ⟶ 0` (`AlgebraicGeometry.Scheme.kummerExtension`, the pullback of the Kummer
-sequence along `u : ℤ ⟶ 𝔾ₘ`, see `AlgebraicGeometry.Etale.kummerClassOf`), and the `μₙ`-torsor
-attached to an extension of `ℤ` by `μₙ` is the preimage of the section `1` of `ℤ`. Over every
-étale `U ⟶ X`, the sections of `E_u` lying over `1` are the pairs `(x, 1)` with `xⁿ = u|_U`,
-that is, the `X`-morphisms `U ⟶ 𝒯_u`
-(`AlgebraicGeometry.Scheme.kummerCoverHomEquiv`): the preimage of `1` in `E_u` is the sheaf
-represented by `𝒯_u`. -/
 noncomputable def kummerExtensionFiberEquiv :
     {e : (kummerExtension n u).obj.obj (op U) //
         (kummerExtensionToInt n u).hom.app (op U) e = constantSheafIntOne U} ≃

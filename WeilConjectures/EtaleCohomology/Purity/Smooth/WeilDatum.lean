@@ -16,11 +16,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobeniusAdjunction
 Let `f : X ⟶ Y` be the base change to `k̄` of a morphism `f₀ : X₀ ⟶ Y₀` of schemes over a finite
 field, smooth of relative dimension `d`, and let `g_X`, `g_Y` be the geometric-Frobenius
 automorphisms of `X` and `Y`, which form a cartesian square `g_X ≫ f = f ≫ g_Y`
-(`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`). Following
-blueprint `definition-weil-structure--1`, a *strict geometric-Weil datum* on `K ∈ D(Y_ét, Λ)` is an
-isomorphism `φ_K : Lg_Y^* K ≅ K`, a Weil structure in the sense of `definition-weil-structure`
-(`AlgebraicGeometry.Etale.WeilComplex`). This file constructs the Weil data that the smooth purity
-chapter transports through the purity isomorphism:
+(`AlgebraicGeometry.Scheme.Hom.isPullback_geometricGaloisFrobenius_geometricFiberMap`). A
+*strict geometric-Weil datum* on `K ∈ D(Y_ét, Λ)` is an isomorphism `φ_K : Lg_Y^* K ≅ K`, a Weil
+structure (`AlgebraicGeometry.Etale.WeilComplex`). This file constructs the Weil data that are
+transported through the smooth purity isomorphism:
 
 * the *Tate datum* `τ_r : Lg^* Λ_Y(r) ≅ Λ_Y(r)` of the Tate twist
   (`AlgebraicGeometry.Etale.tateWeilDatum`): the identification of the twist datum with its
@@ -36,8 +35,7 @@ chapter transports through the purity isomorphism:
   `Lf^* φ_K`, the Tate datum `τ_d` entering through the base change identification;
 * the datum `φ^!_{f,K}` on the exceptional inverse image `Rf^! K`
   (`AlgebraicGeometry.Etale.upperShriekWeilDatum`): the smooth pullback exchange
-  `Ex^{!,sm}_{f,g_Y,K}` of `proposition-compatibility-purity-base-change--1` followed by
-  `Rf^!(φ_K)`.
+  `Ex^{!,sm}_{f,g_Y,K}` followed by `Rf^!(φ_K)`.
 
 The scheme-Frobenius form `u_K = φ_K ∘ κ_{Y,K}` of a datum is
 `AlgebraicGeometry.Etale.schemeFrobeniusForm` in
@@ -50,7 +48,8 @@ The constructions only use the commutativity of the squares (and their cartesian
 smooth pullback exchange), so they are stated for arbitrary endomorphisms `g_X`, `g_Y` forming
 such a square; the geometric-Frobenius automorphisms are the case of interest. As for
 `AlgebraicGeometry.Etale.smoothPullbackExchange`, the identifications `θ` of the dualizing complex
-and the tensor formulas `φ` are arguments of the construction of `φ^!_{f,K}`.
+and the tensor formulas `φ` are arguments of the construction of `φ^!_{f,K}`; the result is the
+canonical `φ^!_{f,K}` only when these are the canonical identifications.
 -/
 
 @[expose] public section
@@ -78,9 +77,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 `Z ⊗ᴸ Z ⟶ Z` and `Z' ⊗ᴸ Z' ⟶ Z'` satisfying the left unit law, and `τ : Lf^* Z ≅ Z'` compatible
 with the products. Then `τ` corresponds to the canonical identification `Lf^* Λ_Y ≅ Λ_X`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`) under the identifications with the
-units. The statement is phrased with the derived tensor product `-⊗ᴸ-`, so that it can be
-instantiated at `A = ModuleCat Λ`
-(`CategoryTheory.MonoidalCategory.map_hom_comp_eq_of_whiskerRight_comp_leftUnitor`). -/
+units. -/
 lemma leftDerivedUpperStar_map_hom_comp_unitIso_hom_eq
     {Z : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     {Z' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (zY : Z ≅ 𝟙_ _) (zX : Z' ≅ 𝟙_ _)
@@ -112,8 +109,7 @@ The *Tate datum* `τ_r : Lg^* Λ_X(r) ≅ Λ_X(r)` on the Tate twist `Λ_X(r)` f
 `g` of `X` (for `g = g_{X,γ}` the geometric-Frobenius automorphism): the identification
 `Lg^* Λ_X(r) ≅ Λ_X(r)` of the Tate twist datum
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarTateObjectIso`). This is the canonical Weil
-structure of the twist, the twist normalization of `prose-10-21`,
-on which geometric Frobenius acts by `q^{-r}`. -/
+structure of the twist, on which geometric Frobenius acts by `q^{-r}`. -/
 noncomputable def tateWeilDatum (g : X ⟶ X) (r : ℤ) :
     (L((g)^*[ModuleCat.{u + 1} Λ])).obj (tateObject Λ X r) ≅ tateObject Λ X r :=
   leftDerivedUpperStarTateObjectIso g r
@@ -155,10 +151,7 @@ For every morphism `f : X ⟶ Y` the identification `Lf^* Λ_Y(0) ≅ Λ_X(0)` o
 corresponds to the canonical identification `ε : Lf^* Λ_Y ≅ Λ_X`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarUnitIso`) under `Λ(0) ≅ Λ`
 (`HasTateTwist.twistObjectZeroIso`). In particular, for an endomorphism `g` the Tate datum `τ_0`
-(`AlgebraicGeometry.Etale.tateWeilDatum`) is the canonical Weil structure `φ_Λ` of `Λ_X`. This
-holds for every Tate twist datum: both identifications are compatible with the unit law
-`Λ(0) ⊗ Λ(0) ≅ Λ(0)` of the twist datum
-(`CategoryTheory.MonoidalCategory.map_hom_comp_eq_of_whiskerRight_comp_leftUnitor`). -/
+(`AlgebraicGeometry.Etale.tateWeilDatum`) is the canonical Weil structure `φ_Λ` of `Λ_X`. -/
 theorem leftDerivedUpperStar_map_twistObjectZeroIso_hom :
     (L((f)^*[ModuleCat.{u + 1} Λ])).map (HasTateTwist.twistObjectZeroIso (Λ := Λ) Y).hom ≫
         (leftDerivedUpperStarUnitIso _ f).hom =
@@ -245,12 +238,9 @@ square `g_X ≫ f = f ≫ g_Y`:
                 Ex^{!,sm}_{f,g_Y,K}                 Rf^!(φ_K)
   Lg_X^* Rf^! K ───────────────────▶ Rf^! Lg_Y^* K ──────────▶ Rf^! K,
 ```
-the smooth pullback exchange of `proposition-compatibility-purity-base-change--1`
-(`AlgebraicGeometry.Etale.smoothPullbackExchange`) followed by `Rf^!(φ_K)`. The identifications
-`θ : ω_f ≅ Λ_X(d)[2d]` and the tensor formulas `φf : Lf^* K ⊗ ω_f ≅ Rf^! K`,
-`φf' : Lf^* Lg_Y^* K ⊗ ω_f ≅ Rf^! Lg_Y^* K` that the exchange is built from are arguments, as in
-`AlgebraicGeometry.Etale.smoothPullbackExchange`; the result is the blueprint's canonical
-`φ^!_{f,K}` only when these are the canonical identifications. -/
+the smooth pullback exchange (`AlgebraicGeometry.Etale.smoothPullbackExchange`) followed by
+`Rf^!(φ_K)`, built from identifications `θ : ω_f ≅ Λ_X(d)[2d]` and tensor formulas
+`φf : Lf^* K ⊗ ω_f ≅ Rf^! K`, `φf' : Lf^* Lg_Y^* K ⊗ ω_f ≅ Rf^! Lg_Y^* K`. -/
 noncomputable def upperShriekWeilDatum (sq : IsPullback gX f f gY)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : (L((gY)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K)

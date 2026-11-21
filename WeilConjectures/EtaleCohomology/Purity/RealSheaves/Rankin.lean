@@ -18,21 +18,19 @@ import Mathlib.Algebra.Order.Star.Real
 /-!
 # The ingredients of the Rankin–Selberg bound
 
-This file collects the inputs of the Rankin–Selberg argument of
-`proposition-bound-largest-determinant-weight--1`, which bounds the local Frobenius eigenvalues of
-an `ι`-real lisse Weil sheaf on an affine curve by the largest determinant weight of its
-constituents.
+This file collects the inputs of the Rankin–Selberg argument which bounds the local Frobenius
+eigenvalues of an `ι`-real lisse Weil sheaf on an affine curve by the largest determinant weight of
+its constituents.
 
 * Tensor squares: the tensor square `ℱ ⊗ ℱ` of a lisse, `ι`-real Weil sheaf is lisse and
   `ι`-real, and `α ^ 2` is a local eigenvalue of `ℱ ⊗ ℱ` whenever `α` is one of `ℱ`.
-* `proposition-weights-under-usual-operations--14`: a Tate twist `ℱ (n)` shifts weights by `-2 n`.
-* `lemma-positivity-euler-factors--1`: the inverse local factors of the tensor square of an
+* Tate twists: a Tate twist `ℱ (n)` shifts weights by `-2 n`.
+* Positivity: the inverse local factors of the tensor square of an
   `ι`-real sheaf have nonnegative coefficients.
-* `proposition-bound-largest-determinant-weight`: the eigenvalues of the geometric Frobenius on
+* Top cohomology: the eigenvalues of the geometric Frobenius on
   the coinvariant Tate twist `V_{π₁(U)} (-1) = H_c² (U, ℱ)` are determinant weights.
-* `theorem-trace-formula-euler-product--4`: the Euler series of `ℱ` times
-`det (1 - F T ∣ H_c² (U, ℱ))` is a
-  polynomial, namely `det (1 - F T ∣ H_c¹ (U, ℱ))`.
+* Euler product: the Euler series of `ℱ` times `det (1 - F T ∣ H_c² (U, ℱ))` is a polynomial,
+  namely `det (1 - F T ∣ H_c¹ (U, ℱ))`.
 
 ## Implementation notes
 
@@ -300,13 +298,7 @@ If `ℱ` is `ι`-real, then every inverse local factor `ι P_x (ℱ ⊗ ℱ, T ^
 square of `ℱ` has nonnegative real coefficients (and constant term `1`, by
 `AlgebraicGeometry.WeilGroup.constantCoeff_eulerFactor`); that `ℱ ⊗ ℱ` is again `ι`-real is
 `AlgebraicGeometry.WeilGroup.IsReal.tprod`. The case of all even tensor powers is
-`AlgebraicGeometry.WeilGroup.IsReal.hasNonnegCoeffs_eulerFactor_tensorPower`; the Rankin–Selberg
-argument here only uses tensor squares, iterated.
-
-Indeed the `n`-th power sum of the complex local eigenvalues of `ℱ ⊗ ℱ` is
-`ι Tr (F_x ^ n ∣ ℱ ⊗ ℱ) = (ι Tr (F_x ^ n ∣ ℱ)) ^ 2`, the square of a real number since the
-eigenvalue multiset of `ℱ` is stable under complex conjugation
-(`AlgebraicGeometry.WeilGroup.hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg`). -/
+`AlgebraicGeometry.WeilGroup.IsReal.hasNonnegCoeffs_eulerFactor_tensorPower`. -/
 theorem IsReal.hasNonnegCoeffs_eulerFactor_tprod_self (hρ : W.IsReal l ρ ι)
     (x : C.finitePoints) : (W.eulerFactor l (ρ.tprod ρ) ι x).HasNonnegCoeffs := by
   refine hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg ι x fun n ↦ ?_
@@ -343,13 +335,7 @@ Let `ℱ` be a Weil representation on `V`, and let `α` be an eigenvalue of the 
 Frobenius on `H_c² (U, ℱ) = V_{π₁(U)} (-1)`, which acts as `q` times the endomorphism induced by
 the degree-one lift `γ` on the geometric coinvariants. Then `wt_{ι, q} (α q⁻¹)` is a
 determinant weight of `ℱ`: it is the determinant weight of an irreducible constituent of `ℱ`,
-presented as a subquotient `M ⧸ N` of `V`.
-
-Indeed `β = α q⁻¹` is an eigenvalue of `γ` on `V_{π₁(U)}`, whose generalized eigenspace is
-stable under `W (U₀)`, since `π₁(U)` acts trivially on the coinvariants and `W (U₀)` is generated
-by `π₁(U)` and `γ`. An irreducible subquotient of it has trivial geometric action and `γ` acts on
-it with the single eigenvalue `β`, so that the local Frobenius at a point of degree `e` has
-determinant `β ^ (r e)`, of weight `r wt_{ι, q} (β)` relative to `q ^ e`. -/
+presented as a subquotient `M ⧸ N` of `V`. -/
 theorem exists_isConstituent_hasDetWeight_of_hasEigenvalue {α : PadicAlgCl l}
     (hα : (W.compactTopFrobenius l ρ).HasEigenvalue α) :
     ∃ N M : Subrepresentation ρ, N ≤ M ∧ (M.subquotient N).IsConstituent ρ ∧
@@ -469,13 +455,7 @@ Then, as power series in `T`,
 `∏_{x ∈ |U₀|} ι det (1 - F_x T ^ e_x ∣ ℱ)⁻¹ = ι det (1 - F T ∣ H_c¹) / ι det (1 - F T ∣ H_c²)`,
 with `H_c² (U, ℱ) = V_{π₁(U)} (-1)` the coinvariant Tate twist, on which the geometric Frobenius
 acts as `q` times the endomorphism induced by `γ`. Here the numerator `ι det (1 - F T ∣ H_c¹)`
-is only recorded as some polynomial `P`.
-
-This is the curve case of the Euler-product form of the Grothendieck–Lefschetz trace formula,
-together with `H_c⁰ (U, ℱ) = 0` and the coinvariant
-description of `H_c²`, for `ℓ ≠ char 𝔽_q`, applied to the
-lisse Weil sheaf attached to `ρ`
-(`AlgebraicGeometry.WeilSheaf.coeff_prod_inv_localPolynomial_stalk_eq`). -/
+is only recorded as some polynomial `P`. -/
 theorem exists_eulerSeries_mul_eq_coe [IsAffine C] [SmoothOfRelativeDimension 1 p]
     [GeometricallyConnected p] [Fact (ringChar K ≠ l)] (hρ : W.IsLisse l ρ) :
     ∃ P : Polynomial ℂ, W.eulerSeries l ρ ι *

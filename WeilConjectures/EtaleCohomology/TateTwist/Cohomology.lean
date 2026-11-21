@@ -11,9 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 /-!
 # Cohomology with Tate twisted finite coefficients
 
-Let `Λ` be a finite coefficient ring, in the blueprint `A_{E,n} = 𝒪_E / ϖ_Eⁿ`, and `Y` a scheme
-on which the characteristic of `Λ` is invertible. Following blueprint
-`def-weil-ordinary-compact-cohomology`, the cohomology with coefficients in the Tate twist
+Let `Λ` be a finite coefficient ring, typically `A_{E,n} = 𝒪_E / ϖ_Eⁿ`, and `Y` a scheme on which
+the characteristic of `Λ` is invertible. The cohomology with coefficients in the Tate twist
 `Λ(m)` is the cohomology of the twisting object `Λ_Y(m) = Λ_Y ⊗ᴸ Λ(m)_Y`
 (`AlgebraicGeometry.Etale.tateTwistObject`):
 
@@ -41,9 +40,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [NeZero (ringChar Λ)]
 
 The cohomology `Hⁱ(Y, Λ(m)) = Hⁱ(RΓ(Y, Λ_Y(m)))` of a scheme `Y` with coefficients in the Tate
 twist `Λ(m)`: the étale cohomology (`AlgebraicGeometry.Etale.cohomology`) of the twisting object
-`Λ_Y(m)` (`AlgebraicGeometry.Etale.tateTwistObject`). The exponent of `Λ` is assumed
-invertible on `Y`: otherwise `AlgebraicGeometry.Etale.tateTwistObject` is the untwisted
-`Λ_Y`. -/
+`Λ_Y(m)` (`AlgebraicGeometry.Etale.tateTwistObject`), for `Y` on which the exponent of `Λ` is
+invertible. -/
 noncomputable def cohomologyTateTwist (Y : Scheme.{u}) [HasInvertibleExponent Λ Y] (m i : ℤ) :
     ModuleCat.{u + 1} Λ :=
   (cohomology (ModuleCat.{u + 1} Λ) Y i).obj (tateTwistObject Λ Y m)

@@ -257,13 +257,7 @@ unit (e.g. a local ring and its residue field). Let `C` be a bounded complex of 
 `C i (i + 1) * D = 0`: every cycle is a boundary plus a combination of the columns of `D` (`ha`),
 uniquely so (`hb`). Then in every degree `q`,
 `rank C_{q-1} + rank C_q + [q = i] |κ| = |ι q|` at `ψ`: the fibre of the complex at `ψ` has
-cohomology of dimension `|κ|` in degree `i` and vanishing cohomology in the other degrees.
-
-The proof is a descending induction on `q`: in the degrees above `i`, the split factorisation of
-the outgoing matrix and exactness give the rank equality, and the rank equality gives the split
-factorisation of the incoming matrix (`Matrix.exists_split_of_rank_map_add_eq`). In degrees `i`
-and `i - 1` the same argument is run on the complex obtained by adding `S^κ` in degree `i - 1`,
-mapping by `D`, which is exact in these two degrees. -/
+cohomology of dimension `|κ|` in degree `i` and vanishing cohomology in the other degrees. -/
 theorem rank_map_add_rank_map_add_eq_of_exact (hψ : ∀ s, ψ s ≠ 0 → IsUnit s)
     (hC : ∀ n m l, C m l * C n m = 0) (N : ℤ) (hN : ∀ n, N < n → IsEmpty (ι n)) (i : ℤ)
     {κ : Type u} [Fintype κ]

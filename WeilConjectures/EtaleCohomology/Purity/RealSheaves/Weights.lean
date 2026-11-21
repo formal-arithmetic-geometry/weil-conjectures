@@ -21,7 +21,7 @@ local eigenvalue `α` is `2 log |ι α| / log q_x`.
 This file defines these notions, punctual `ι`-purity, the bound `weights ≤ w`, `ι`-reality,
 and the determinant weight `dw_ι(V) = wt_ι(det V) / rank V`.
 
-The rank `N_γ` and the weight sum `B_γ` of `definition-determinant-weight--1` are sums over the
+The rank `N_γ` and the weight sum `B_γ` attached to a determinant weight `γ` are sums over the
 family of irreducible constituents of a semisimple Weil sheaf *counted with multiplicity*; they are
 defined in `WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeights`
 (`AlgebraicGeometry.WeilGroup.rankAbove`, `AlgebraicGeometry.WeilGroup.weightSumAbove`).
@@ -114,8 +114,7 @@ def IsReal : Prop :=
 /-- Determinant weights and weight blocks.
 
 `ρ` has determinant weight `γ`, written `dw_ι(ρ) = γ`, if the determinant character is
-punctually `ι`-pure of weight `rank ρ * γ`. By `theorem-rank-one-sheaves-have-finite` a nonzero
-irreducible `ρ` has exactly one determinant weight. -/
+punctually `ι`-pure of weight `rank ρ * γ`. -/
 def HasDetWeight (γ : ℝ) : Prop :=
   ∀ x : C.finitePoints,
     frobeniusWeight ι (C.pointNorm x.1) (LinearMap.det (ρ (W.frobenius x)))
@@ -126,9 +125,7 @@ variable {W l ρ}
 /-- Local Frobenius polynomials.
 
 The local polynomial at `x` is `det (1 - T ρ g ∣ V)` for *every* member `g` of the
-Frobenius conjugacy class of degree `e_x` supplied by `x`: a characteristic polynomial is
-invariant under conjugation, so the local polynomial of `definition-weights` is well defined
-and is computed by the representation of `definition-weil-representation--1`. -/
+Frobenius conjugacy class of degree `e_x` supplied by `x`. -/
 theorem localPolynomial_eq_charpolyRev_of_isConj {x : C.finitePoints} {g : W.carrier}
     (hg : IsConj (W.frobenius x) g) :
     W.localPolynomial l ρ x = (ρ g).charpolyRev :=

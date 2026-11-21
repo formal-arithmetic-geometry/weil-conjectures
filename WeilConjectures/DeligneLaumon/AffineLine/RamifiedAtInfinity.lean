@@ -31,10 +31,9 @@ generic point `x = 1 / t` of a dense open `Ū ⊆ 𝔸¹_{k̄}`.
   trivialised `ĀS^* ℒ_ψ` by `ψ(-c)`
   (`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
 
-Together they give the blueprint lemma `lemma-unramified-at-infinity-no-linear-characters--1`: a
-nonzero linear Artin–Schreier sheaf is not unramified at infinity
-(`AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`), and the case `a ≠ 0` of
-`lemma-unramified-at-infinity-no-linear-characters`: a lisse sheaf unramified at infinity has no
+Together they show that a nonzero linear Artin–Schreier sheaf is not unramified at infinity
+(`AlgebraicGeometry.not_isUnramifiedAtInfinity_artinSchreier`), and that a lisse sheaf unramified
+at infinity has no
 geometric constituent `ℒ_{ψ(a x)}|_U` with `a ≠ 0`
 (`WeilSheaf.LisseOnDenseOpen.not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity'`).
 The second statement needs no semisimplicity: a subquotient of a constant sheaf on `Spec K` is

@@ -143,7 +143,7 @@ lemma EtaleFrame.mem_range_ofSpanEq_toZ {c : ℕ} (i : Z ⟶ X) [IsClosedImmersi
 
 *Frames exist Zariski-locally.* Every point of `Z` lies in the zero locus of a frame of a regular
 closed immersion `i : Z ⟶ X` of codimension `c` whose étale map is the inclusion of an affine
-open `U ⊆ X`: the ideal of `Z` is generated on `U` by a regular sequence `f₁, …, f_c`. -/
+open `U ⊆ X`, given by a regular sequence `f₁, …, f_c` generating the ideal of `Z` on `U`. -/
 theorem exists_etaleFrame_isOpenImmersion (c : ℕ) (i : Z ⟶ X)
     [IsRegularImmersion c i] (z : Z) :
     ∃ F : i.EtaleFrame c, IsOpenImmersion F.e ∧ z ∈ Set.range F.toZ ∧ IsAffine F.U ∧

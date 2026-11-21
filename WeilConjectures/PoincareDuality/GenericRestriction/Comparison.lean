@@ -205,9 +205,7 @@ variable {Z Z' V V' : Scheme.{u}} {gZ : Z' ⟶ Z} {f : V ⟶ Z} {f' : V' ⟶ Z'}
 (an open or a closed immersion), `f' : V' ⟶ Z'` its base change along `gZ : Z' ⟶ Z`, again with
 fully faithful `Rf'_*`. If `Rf_*` commutes with the base change at `N` and at `RHom(Lf^* K, N)`,
 and the comparison of the base change `gV : V' ⟶ V` is an isomorphism at `(Lf^* K, N)`, then the
-comparison of `gZ` is an isomorphism at `(K, Rf_* N)`: both sides are direct images along `f'`,
-and after `Lf'^*` the comparison is that of `gV` (composition with the comparisons of `f`, `f'`,
-which are isomorphisms on direct images). -/
+comparison of `gZ` is an isomorphism at `(K, Rf_* N)`. -/
 lemma isIso_ihomUpperStarComparison_rightDerivedLowerStar_of_isPullback
     [IsIso (derivedUpperStarLowerStarAdjunction Λ f).counit]
     [IsIso (derivedUpperStarLowerStarAdjunction Λ f').counit]
@@ -250,21 +248,7 @@ omit [IsOpenImmersion j'] in
 closed complement `i : W ⟶ Z` and `j'` its base change along `gZ : Z' ⟶ Z`, such that `Rj_*`
 commutes with the base change at `Lj^* M`. If the comparison of `gZ` is an isomorphism at
 `(K, Rj_* Lj^* M)` and at every `(K, Ri_* X)` with `X` bounded constructible, then it is one at
-`(K, M)`, for bounded constructible `M` with `Rj_* Lj^* M` bounded constructible. Complete the
-unit `M ⟶ Rj_* Lj^* M` to a distinguished triangle `M ⟶ Rj_* Lj^* M ⟶ C ⟶ M[1]`: `C` is killed
-by `Lj^*`, so `C ≅ Ri_* Li^* C` (the restrictions to `U` and `W` jointly detect isomorphisms, `j`
-being quasi-compact), and the five lemma without connecting morphisms
-(`CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton`) applies to the images of the
-rotated triangle `C[-1] ⟶ M ⟶ Rj_* Lj^* M ⟶ C` under both sides of the comparison: there are no
-maps from `Lg^* RHom(K, C)` to `RHom(Lg^* K, Rj'_* -)` since `Lj'^*` kills the former.
-Writing `A(-) = Lg^* RHom(K, -)` and `B(-) = RHom(Lg^* K, Lg^* -)`, the diagram is
-```
-A(C[-1]) ⟶ A(M) ⟶ A(Rj_* Lj^* M) ⟶ A(C)
-   │≅        │        │≅              │
-   ↓         ↓ ρ      ↓               ↓
-B(C[-1]) ⟶ B(M) ⟶ B(Rj_* Lj^* M) ⟶ B(C)
-```
-with `B(Rj_* Lj^* M) ≅ RHom(Lg^* K, Rj'_* Lg_U^* Lj^* M)`. -/
+`(K, M)`, for bounded constructible `M` with `Rj_* Lj^* M` bounded constructible. -/
 lemma isIso_ihomUpperStarComparison_of_isIso_open_closed [QuasiCompact j]
     [(boundedConstructible (condensedRingObj Λ Z)).IsTriangulated]
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (sqU : IsPullback gU j' j gZ)

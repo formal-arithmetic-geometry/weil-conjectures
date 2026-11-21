@@ -454,10 +454,10 @@ lemma stalkZeroLocus_subset_of_mono {G K : Sheaf X.smallEtaleTopology (ModuleCat
   have : Mono ((pointSmallEtale s).sheafFiber.map ι) := inferInstance
   IsZero.of_mono ((pointSmallEtale s).sheafFiber.map ι) (hy Ω s hs)
 
-/-- Blueprint `lem-trf-simple-constructible`, converse: for a point `x`, closed in an open `W`,
-and a simple constructible sheaf `M` on `Spec κ(x)`, the extension by zero `i_{x!} M = j_! g_* M`
-along `Spec κ(x) ⟶[g] W ⟶[j] X` is a simple object of the abelian category of constructible
-sheaves on `X_ét`: its constructible subsheaves are `i_{x!} N` for the subsheaves `N` of `M`. -/
+/-- **Extensions by zero of simple sheaves at a point are simple.** For a point `x`, closed in an
+open `W`, and a simple constructible sheaf `M` on `Spec κ(x)`, the extension by zero
+`i_{x!} M = j_! g_* M` along `Spec κ(x) ⟶[g] W ⟶[j] X` is a simple object of the abelian category of
+constructible sheaves on `X_ét`. -/
 theorem simple_openImmersionLowerShriek_lowerStar [IsNoetherianRing Λ]
     [TopologicalSpace.NoetherianSpace X] {x : X} (W : X.Opens) (hxW : x ∈ W)
     (g : Spec (X.residueField x) ⟶ W) [IsClosedImmersion g]
@@ -535,11 +535,10 @@ lemma simple_of_iso_obj [IsNoetherianRing Λ] {Z : Scheme.{u}}
   · have : IsIso (H.map ι) := IsIso.of_isIso_comp_right _ e.inv
     exact .inr (isIso_of_fully_faithful H ι)
 
-/-- Blueprint `lem-trf-simple-constructible`, the case of a scheme of finite type over a field:
-the point `x` supporting a simple constructible sheaf `F` is then a closed point (a locally
-closed point of a Jacobson space is closed), and `i_{x!} = i_{x*}`: `F` is the direct image
-`i_{x*} M` along the closed immersion `i_x : Spec κ(x) ⟶ X` of a simple constructible sheaf `M`
-on `Spec κ(x)`. -/
+/-- **Simple constructible sheaves over a field.** On a scheme of finite type over a field, the
+point `x` supporting a simple constructible sheaf `F` is a closed point, and `F` is the direct image
+`i_{x*} M` along the closed immersion `i_x : Spec κ(x) ⟶ X` of a simple constructible sheaf `M` on
+`Spec κ(x)`. -/
 theorem exists_iso_lowerStar_fromSpecResidueField_of_simple [IsNoetherianRing Λ] {k : Type u}
     [Field k]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -581,13 +580,12 @@ lemma stalkZeroLocus_inter_subset {S : ShortComplex (Sheaf X.smallEtaleTopology
   have hS' := hS.map_of_exact (pointSmallEtale s).sheafFiber
   exact hS'.exact.isZero_X₂ ((h₁ Ω s hs).eq_of_src _ _) ((h₃ Ω s hs).eq_of_tgt _ _)
 
-/-- Blueprint `lem-trf-simple-constructible`, last assertion: on a connected scheme `X` of
-positive dimension and of finite type over a field, a nonzero locally constant sheaf `L` is not a
-finite extension of simple constructible sheaves. Stated through the universal property of the
-closure under extensions: there is a property of sheaves containing zero, closed under
-isomorphisms and extensions, holding for every simple constructible sheaf, but not for `L`. The
-property is "the stalks vanish at the non-closed points": a simple constructible sheaf is
-supported at a closed point, while the stalks of `L` vanish on a clopen set, which is empty. -/
+/-- **Locally constant sheaves are not finite extensions of simple constructible sheaves.** On a
+connected scheme `X` of positive dimension and of finite type over a field, a nonzero locally
+constant sheaf `L` is not a finite extension of simple constructible sheaves. Stated through the
+universal property of the closure under extensions: there is a property of sheaves containing zero,
+closed under isomorphisms and extensions, holding for every simple constructible sheaf, but not for
+`L`. -/
 theorem not_forall_prop_of_isLocallyConstantSheaf [IsNoetherianRing Λ] {k : Type u} [Field k]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [ConnectedSpace X]
     (hX : 0 < topologicalKrullDim X) (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

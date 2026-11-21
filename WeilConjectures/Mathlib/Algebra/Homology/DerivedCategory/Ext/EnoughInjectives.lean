@@ -97,8 +97,7 @@ and let `P : C` and `Z : D`. Assume that
 * for every short exact sequence `0 → S.X₁ → S.X₂ → S.X₃ → 0` in `C` with `S.X₂` injective and
   `Ext¹(Z, Φ S.X₁) = 0`, every morphism `P ⟶ S.X₃` lifts along `S.g`.
 
-Then `Ext^{n + 1}(P, F) = 0` as soon as `Ext^{n + 1}(Z, Φ F) = 0`. The proof embeds `F` into an
-injective object and shifts dimensions on both sides. -/
+Then `Ext^{n + 1}(P, F) = 0` as soon as `Ext^{n + 1}(Z, Φ F) = 0`. -/
 theorem subsingleton_of_subsingleton_map (Φ : C ⥤ D) [Φ.Additive]
     (hΦex : ∀ (S : ShortComplex C), S.ShortExact → (S.map Φ).ShortExact) (P : C) (Z : D)
     (hΦ : ∀ (I : C) [Injective I] (n : ℕ), Subsingleton (Ext.{w'} Z (Φ.obj I) (n + 1)))

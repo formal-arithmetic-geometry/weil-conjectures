@@ -21,12 +21,10 @@ in general, and defines the degreewise Poincaré pairing
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`:
-`⟨-, -⟩_i`.
+- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`: `⟨-, -⟩_i`.
 - `AlgebraicGeometry.Etale.TateOrientation.untwistedPoincarePairing`,
-  `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing`:
-the untwisted pairing
-  `Ra_! K ⊗ᴸ (Ra_* K^∨)[2d] ⟶ Λ_Y(-d)` and its degreewise form.
+  `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing`: the untwisted
+  pairing `Ra_! K ⊗ᴸ (Ra_* K^∨)[2d] ⟶ Λ_Y(-d)` and its degreewise form.
 -/
 
 @[expose] public section
@@ -48,9 +46,7 @@ section Generic
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
 
-/-- Frobenius: equivariance, similitudine, reciprocity (a).
-
-**The derived Poincaré pairing of a purity isomorphism is a morphism of Weil objects**: the
+/-- **The derived Poincaré pairing of a purity isomorphism is a morphism of Weil objects**: the
 form of `AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_poincarePairing` for a purity
 isomorphism `γ : T[2d] ≅ ω_X`, a Weil datum `τ` on `T`, and the pairing
 `AlgebraicGeometry.Etale.poincarePairing`. -/
@@ -110,9 +106,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
-/-- Degree of the pairing.
-
-The *degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`,
+/-- The *degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`,
 
 `⟨-, -⟩_i : H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`,
 
@@ -146,9 +140,7 @@ lemma degreewisePoincarePairing_apply (γ : TateOrientation Λ a d)
         (shiftFunctorZero' (DerivedCategoryModule Λ Y) (i + (j - 2 * d)) (by omega)).hom.app _ :=
   rfl
 
-/-- Degree of the pairing.
-
-The *untwisted derived Poincaré pairing* of a Tate orientation `γ`,
+/-- The *untwisted derived Poincaré pairing* of a Tate orientation `γ`,
 
 `β_K^{untw} : Ra_! K ⊗ᴸ (Ra_* K^∨)[2d] ⟶ Λ_Y(-d)`,
 
@@ -166,9 +158,7 @@ noncomputable def untwistedPoincarePairing (γ : TateOrientation Λ a d)
       tateObject Λ Y (-d) :=
   poincarePairingOfTrace a K (2 * d : ℤ) γ.untwistedSmoothTrace
 
-/-- Degree of the pairing.
-
-The *untwisted degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`, the
+/-- The *untwisted degreewise Poincaré pairing* of a Tate orientation `γ`, for `i + j = 2d`, the
 line-valued pairing
 
 `⟨-, -⟩^{untw}_i : H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)`,

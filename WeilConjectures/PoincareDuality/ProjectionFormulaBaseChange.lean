@@ -51,9 +51,8 @@ The diagram chases are carried out for abstract functors in
 
 ## Main statements
 
-- `ProEtale.CondensedRing.pfBaseChange_boundedConstructibleExceptionalProjection`: the clause
-  "compatible with base change" of blueprint `proposition-composition-base-change-rf-shriek--1`
-  (section `chap-The-six-operations-on-Dbctf`).
+- `ProEtale.CondensedRing.pfBaseChange_boundedConstructibleExceptionalProjection`: the
+  exceptional projection morphism is compatible with base change.
 
 ## Implementation notes
 
@@ -96,13 +95,8 @@ lemma boundedConstructiblePullbackSquareComparison_flip (sq : CommSq g' f' f g) 
     boundedConstructiblePullbackSquareComparison_inv_app]
 
 /-- **The projection formula of an open immersion is compatible with base change**: for a
-cartesian square with `f` and `f'` open immersions, the projection morphisms are the inverses of
-the projection comparisons of `f_! ⊣ Lf^*` and `f'_! ⊣ Lf'^*`
-(`boundedConstructibleExceptionalProjectionMorphism_comp_projectionComparison`) and `Ex_!` is
-the inverse of the base change of extension by zero
-(`boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion`), the exchange
-morphism of the pullback comparison; this is
-`CategoryTheory.ProjectionBaseChange.pfBaseChange_of_projectionComparison`. -/
+cartesian square with `f` and `f'` open immersions, the exceptional projection morphisms are
+compatible with compact-support base change. -/
 theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_isOpenImmersion
     (sq : IsPullback g' f' f g) [IsOpenImmersion f.left] [IsOpenImmersion f'.left] :
     ProjectionBaseChange.PFBaseChange
@@ -259,12 +253,7 @@ lemma boundedConstructiblePullbackSquareComparison_inv_app_paste_vert {i : X ⟶
 /-- **The projection formula is compatible with base change, by factorisation**: for a cartesian
 square `g' ≫ f = f' ≫ g` and factorisations `f = i ≫ p`, `f' = i' ≫ p'` into open immersions
 followed by proper maps, through cartesian squares `g' ≫ i = i' ≫ gZ` and `gZ ≫ p = p' ≫ g`, the
-compatibility for `f` follows from those for `i` and `p`
-(`CategoryTheory.ProjectionBaseChange.pfBaseChange_comp`): the projection formula is compatible
-with composition (`boundedConstructibleExceptionalProjectionMorphism_comp_of_eq`), and so are
-compact-support base change
-(`boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert_of_eq`) and the pullback
-comparisons (`boundedConstructiblePullbackSquareComparison_inv_app_paste_vert`). -/
+compatibility for `f` follows from those for `i` and `p`. -/
 theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_factorisation
     {Z Z' : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
     [IsSeparated Z.hom] [LocallyOfFiniteType Z'.hom] [QuasiCompact Z'.hom] [IsSeparated Z'.hom]

@@ -645,37 +645,7 @@ set_option backward.isDefEq.respectTransparency.types true
 /-- The common integral identity induces inverse exact linear equivalences on the
 integral categories and their raw rationalizations, with the prescribed finite reductions.
 Source: Bhatt--Scholze, Section 6.5, Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 05R6.
-
-Proof (the four steps of the DAG node):
-1. Apply lem-weil-pbc-integral-coefficient-presentation-comparison. Its unique quotient
-isomorphisms send [x] to [x.down].up. Their inverse-limit isomorphism is fixed by every
-finite projection. Scalar restriction along it and its inverse are exact inverse functors,
-with their normalized finite reductions and transitions. By
-lem-weil-pbc-integral-stratified-perfect-characterization, these restrictions preserve and
-reflect precisely the two integral predicates, including compatible etale-origin witnesses.
-Restrict the ambient functors to the full subcategories. In their common realization both
-are identity on objects and arrows.
-2. By lem-weil-integral-constructible-triangulated and
-lem-weil-pbc-uniform-complete-triangulated, shifts and triangles are inherited.
-situation-conventions supplies the shift comparisons induced
-by the degreewise identity: coefficient restriction does not change differentials,
-shift signs or the cone matrix. Consequently the two restrictions preserve triangles.
-lem-weil-integral-constructible-linear identifies the Hom action with constant sections;
-the coefficient projection equations fix every constant scalar, proving linearity in
-both directions.
-3. Use def-weil-rationalization-karoubi, def-weil-pbc-rational-category and
-def-weil-linear-scalar-localization. Send K to I(K) and f tensor a to I(f) tensor a.
-Integral linearity gives balancedness; additivity extends the map from pure tensors.
-On pure tensors the identity and composition equations are the integral functor equations
-and multiplication of scalars. The inverse restriction gives the same construction in
-reverse. Both composites fix integral objects and pure tensors, hence all morphisms.
-Thus these are equivalences with the displayed inverse formulas and field linearity.
-The raw categories have exactly the original integral objects: no retract is adjoined.
-4. By lem-weil-linear-scalar-localization-triangulated, a distinguished rational triangle
-is isomorphic to the localization of an integral distinguished triangle. The localized
-identity-induced shift comparison intertwines the two localization functors. Step 2
-therefore makes its image distinguished; use the same argument for the inverse.
-This proves rational exactness with precisely the shift pins in the comparison datum. -/
+-/
 theorem fdIntegralIdentityRationalEquivalence
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

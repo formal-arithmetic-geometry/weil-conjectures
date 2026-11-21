@@ -23,7 +23,7 @@ the multiplication by a scalar `c_r ∈ Λ`
 `Λ_Y(m) ⊗ Λ_Y(m') ≅ Λ_Y(m + m')` are Weil pairings for the Tate data, these scalars are
 multiplicative, `c_{m + m'} = c_m c_{m'}`; each of them is a unit, so `c_r = c_1 ^ r`.
 
-This is the formal half of the normalization `prose-10-21`: geometric
+This is the formal half of the normalization of the Tate twist: geometric
 Frobenius acts on `Λ(r)` by `q^{-r}`, which comes down to `c_1 = q⁻¹`; that value is computed for
 the genuine Tate twist in `WeilConjectures.EtaleCohomology.TateTwist.FrobeniusNormalization`.
 
