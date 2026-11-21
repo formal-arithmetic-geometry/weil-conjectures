@@ -19,14 +19,16 @@ namespace AlgebraicGeometry.Scheme
 
 /-! # Finite open--closed refinement through constructible strata
 
-Source: Stacks Project, Topology, Tags 005H, 09YH, and 09Y4; Schemes, Tags
-01ZG, 01KO, 01J3, 03GI, 01JR, 01JT, and 01JY.
-
 ## Main statement
 
 * `exists_finite_open_closed_refinement`: factor finitely many constructible
   immersed partitions through quasi-compact open--closed pieces and a finite
-  binary pullback tree.  This declaration is statement-only in stage 2.
+  binary pullback tree.
+
+## References
+
+* Stacks Project, Topology, Tags 005H, 09YH, and 09Y4
+* Stacks Project, Schemes, Tags 01ZG, 01KO, 01J3, 03GI, 01JR, 01JT, and 01JY
 -/
 
 private theorem exists_constructible_cut
@@ -92,53 +94,7 @@ private theorem exists_constructible_cut
       exact hx ⟨t, congrArg U.ι ht⟩
   · simp [I]
 
-/-- Finite open--closed refinement through constructible strata.
-
-Source: Stacks Project, Topology, Tags 005H, 09YH, and 09Y4; Schemes, Tags
-01ZG, 01KO, 01J3, 03GI, 01JR, 01JT, and 01JY.
-
-Proof (all deferred to stage 3):
-1. Write `E = range s`.  Constructible sets are retrocompact (Topology Tag 09YH); on the
-   quasi-compact open `W` itself this makes `E` quasi-compact.  An immersion is a closed
-   immersion followed by an open immersion, each a homeomorphism onto its image, so `S` is
-   homeomorphic to `E` and quasi-compact.
-2. The closed-immersion neighbourhood theorem (Limits Tag 01ZG, shrinking argument) applied
-   to `s` with quasi-compact source gives a quasi-compact open `O ⊆ W` and a closed
-   immersion `c : S ⟶ O` with `c ≫ o = s`.  Put `Q = O \ E`, an open subscheme of `O`.  By
-   Boolean closure (Tag 005H) `W \ E` is constructible; its retrocompactness on the
-   quasi-compact open `O` makes `Q = (W \ E) ∩ O` quasi-compact.
-3. Open and closed subschemes of a quasi-separated scheme are quasi-separated (Schemes Tag
-   01KO, by the affine-cover criterion, the affine description of closed immersions and
-   compactness of closed subsets of quasi-compact spaces).
-4. Let `Z ⟶ W` be the reduced induced closed subscheme on `W \ O` (Schemes Tag 01J3); it is
-   quasi-compact (closed in `W`) and quasi-separated by step 3.  `O, S, Q` are qcqs by
-   steps 1--3.  Each of `o, z, c, q` has quasi-compact source and quasi-separated target,
-   hence is quasi-compact (Tag 03GI (1)).
-5. Images of these pullbacks are set-theoretic inverse images: for opens by Tag 01JR; for a
-   closed immersion `Z ⟶ X` and `f : T ⟶ X`, by Tag 01JT the points over `t` and `z`
-   are the primes of `κ(t) ⊗_{κ(f t)} κ(z) ≅ κ(t)` when `f t` is the image of `z`, so the
-   image of `T ×_X Z ⟶ T` is `f⁻¹(Z)`, also for nonreduced `Z`.
-6. Replacement of a current leaf `t : T ⟶ W` for one index: the children of `T` are
-   `A = T ×_W O` (open) and `D = T ×_W Z` (closed); the children of `A` are
-   `B = A ×_O Q` (open) and `C = A ×_O S` (closed), by base change of open and closed
-   immersions (Tag 01JY).  By step 5 the images are complementary; `C ⟶ S` is the second
-   projection and its composite to `W` is the structural map.  `D, B, C` have images
-   outside `O`, in `O \ E`, and in `E`; only `C` meets `E`.  Empty children are allowed.
-7. The four child arrows are quasi-compact by base change (Tag 01K5); for quasi-compact `T`,
-   Tag 03GI (2) makes `A, D`, then `B, C` quasi-compact, and step 3 makes them
-   quasi-separated.  Every vertex stays a closed subscheme of an open subscheme of `W`
-   (restriction to opens, composition of closed immersions, Morphisms Tag 01QS).
-8. Enumerate all strata of all partitions and process them one by one from the one-vertex
-   tree `W` (Topology Tag 09Y4), keeping the invariant: a finite binary tree of qcqs
-   locally closed vertices with quasi-compact arrows, terminal images disjoint and covering
-   `W`, and for each processed stratum every terminal vertex avoids `E` or has a recorded
-   factorization through `S` (kept by composing with later projections).  With no strata
-   no replacement is made and the tree is the single leaf `W`.
-9. A nonempty final leaf has a point lying in some stratum of each partition; the invariant
-   excludes avoidance, so the recorded projection gives `f : V ⟶ S` with `f ≫ s` the
-   canonical map.  The nonempty leaves partition `W`; for empty `W` or no partitions the
-   remaining clauses are vacuous.
--/
+/-- Finite open--closed refinement through constructible strata. -/
 theorem exists_finite_open_closed_refinement
     {W : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpace W]
     (m : ℕ) (n : Fin m → ℕ)

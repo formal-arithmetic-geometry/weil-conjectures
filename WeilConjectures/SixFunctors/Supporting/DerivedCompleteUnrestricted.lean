@@ -11,7 +11,12 @@ public import WeilConjectures.SixFunctors.Integral.IntegralScalarExtensionWellDe
 /-!
 # Unrestricted derived completeness
 
-Source: Bhatt--Scholze, Definition 3.5.2.
+A complex is unrestrictedly derived complete if it is derived complete for some choice of
+finite-field datum.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2, p. 24
 -/
 
 @[expose] public section
@@ -30,12 +35,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t})
 
-/-- Derived completeness of the existing completed coefficient sheaf, with no
-finite-field condition. The finite-field datum is an auxiliary presentation only:
-all the completed rings, reductions and augmentation maps in IsDerivedComplete
-ignore it. Such a datum with characteristic different from l always exists (use
-F_2 if l differs from 2 and F_3 otherwise), so this existential changes no condition
-on K. Source: Bhatt--Scholze, Definition 3.5.2, p. 24. -/
+/-- Derived completeness of the completed coefficient sheaf, with no finite-field condition:
+it holds for some finite-field datum of characteristic different from `l`, which always
+exists. -/
 noncomputable def IsDerivedCompleteUnrestricted
     (K : DerivedCategory (integralTowerModules.{t, u} l E Y)) : Prop :=
   ∃ (D : FiniteFieldDatum.{0}) (hl : l ≠ D.p), IsDerivedComplete l E Y D hl K

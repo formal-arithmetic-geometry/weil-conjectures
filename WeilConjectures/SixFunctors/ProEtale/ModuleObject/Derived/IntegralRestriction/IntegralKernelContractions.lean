@@ -12,8 +12,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralRestriction.IntegralKernelFirstContraction
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralRestriction.IntegralKernelSecondContraction
 /-! # The two integral diagonal contractions before integration
-
-Source: sk-thm-int-restriction-line.proof.md, paragraph (1).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -28,19 +26,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction
 open DiagonalCoefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 /-- Before integration, the two normalized unit-counit composites are tensor
-contractions with the two diagonal integrals. No adjunction is assumed.
-Source: paragraph (1), both trace/base-change rearrangements and section normalization.
-Proof: transport the completed trace base-change equations through the retained
-coefficient reference. In the first composite use the first trace/base-change
-rearrangement to move the counit across proper exchange. Projection naturality moves
-the diagonal class through the inverse projection. The first diagonal section
-normalization then leaves identity tensor the first integral, followed by pushforward.
-For the second composite use the second rearrangement, identifying the two pullbacks
-of q-star K through the Cartesian square and Tate comparisons. The two degree-two
-rank-one factors have identity interchange. The second section normalization leaves
-identity tensor the second integral. Full universal-unit normalization identifies the
-support arrows with the literal support fields below. This calculation uses neither
-integration equality; those are applied only after these formulas. -/
+contractions with the two diagonal integrals. No adjunction is assumed. -/
 theorem integralKernel_contractions
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

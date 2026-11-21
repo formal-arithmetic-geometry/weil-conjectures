@@ -24,14 +24,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   Functor.leftDerivedFunctor Functor.mapDerivedCategory
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
-/-- Trace adjustment for module sheaves before specializing the coefficient objects.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, transport through a presentation.
-
-Proof: inverse image along the isomorphism is an equivalence, so its adjoint direct
-image is an equivalence. The adjunction unit followed by direct image of bL is an
-isomorphism from L to the direct image of B. Apply the derived trace-adjustment
-calculation to this isomorphism, v and the component of z. Its component equation is
-exactly the displayed equality for the native module-valued functors. -/
+/-- Trace adjustment for module sheaves before specializing the coefficient objects. -/
 theorem exists_moduleTraceAdjustment
     (A : Type (u + 1)) [CommRing A]
     {X Y Z : Scheme.{u}} (e : X ≅ Y) (g : Y ⟶ Z) (q : X ⟶ Z) [IsProper q]

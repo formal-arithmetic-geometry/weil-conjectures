@@ -20,8 +20,11 @@ public import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteCoefficient
 
 Stated per coefficient ring (`𝒪̲_E`, `E̲`, `ℚ̲̄_ℓ`, unit ball `O̲`). The field cases use local
 finite freeness. The integral cases use the integral Serre
-criterion. These are exactly the heart-closure inputs in the last step of blueprint
-`proposition-six-operations-dctf--14`.
+criterion.
+
+## References
+
+* Bhatt--Scholze, Proposition 6.8.11(1),(3)
 -/
 
 @[expose] public section
@@ -39,9 +42,7 @@ variable (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (ℓ : ℕ) [Fact
 
 /-- The bounded constructible module-object category over `𝒪̲_E` is triangulated: the integral
 case of the ell-adic finiteness coefficients, by the integral constructible Serre theorem.
-Applying homology to distinguished triangles gives triangulated closure.
-Source: Bhatt--Scholze, Proposition 6.8.11(1),(3), and the heart-closure inputs in
-`proposition-six-operations-dctf--14`, step 10. -/
+Applying homology to distinguished triangles gives triangulated closure. -/
 theorem isTriangulated_boundedConstructible_ellAdic_padicIntegers (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] :

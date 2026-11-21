@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyFreeOfFin
 /-!
 # The uniform `Ext` bound for constructible `E`-sheaves, from `𝒪_E`, by dévissage
 
-Blueprint `lemma-uniform-ext-bound`, coefficients `E`. Let `E ⊆ ℚ̄_ℓ` be a finite
+Let `E ⊆ ℚ̄_ℓ` be a finite
 subextension of `ℚ_ℓ` and `X` a noetherian scheme locally of finite type over a perfect field. If
 constructible `𝒪_{E,X}`-modules satisfy the uniform `Ext` bound and `Hom(M[0], -[q])` factors
 through filtered colimits for constructible `𝒪_{E,X}`-modules `M`, then constructible
@@ -187,10 +187,10 @@ theorem eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField {k
   let e := ((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).app B
   exact hom_eq_zero_of_target_iso e (hP n hn) f
 
-/-- Blueprint `lemma-uniform-ext-bound`, coefficients `E`: on a noetherian scheme
-locally of finite type over a perfect field, the uniform `Ext` bound for constructible
-`E_X`-modules follows from the uniform bound and the continuity of `Ext` for constructible
-`𝒪_{E,X}`-modules. Both arguments of `Hom(M[0], B[n])` are dévissé to the generators `E ⊗ G₀`,
+/-- On a noetherian scheme locally of finite type over a perfect field, the uniform `Ext` bound
+for constructible `E_X`-modules follows from the uniform bound and the continuity of `Ext` for
+constructible `𝒪_{E,X}`-modules. Both arguments of `Hom(M[0], B[n])` are dévissé to the generators
+`E ⊗ G₀`,
 `G₀` a constructible `𝒪_{E,X}`-module
 (`ProEtale.exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_lowerShriek`). -/
 theorem hasUniformConstructibleExtBound_continuousMapRingObj_of_padicIntegersRingObj

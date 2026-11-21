@@ -11,8 +11,12 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientScalarTensorRepresentativeTransport
 /-! # Tensor representatives under coefficient scalar reconstruction
 
-Source: Stacks Project, Tags 03EK, 03EL, 06YY, 07A4 and 07A6;
-steps 1--3 of `lem-sfb-coefficient-scalar-tensor-realization`.
+The signed scalar tensor equation for representatives under coefficient scalar reconstruction.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03EL
+* Stacks Project, Cohomology on Sites, Tags 06YY, 07A4 and 07A6
 -/
 
 @[expose] public noncomputable section
@@ -41,30 +45,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 /-- The signed scalar tensor equation follows from the ordinary generator normalization,
 the scalar comparison on complexes, and the identification of the derived tensorator.
-Only the representative equation is asserted; no scalar pair or comparison is constructed.
-
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03EL; Cohomology on Sites,
-Tags 07A4 and 07A6; step 3 of coefficient scalar section realization.
-
-Proof: first take two internal complexes whose reconstructed terms are flat and whose
-reconstructions are K-flat. Precompose the two ordinary scalar tensor comparisons with
-the balanced tensor coprojections and the scalar extension units. The generator formula
-for o and the generator formula for m identify these maps with the scalar-unit normalized
-internal tensorator. Balanced tensor universality and the sheafification adjunction give
-the equality of ordinary maps. In bidegree (i,j), this is the same equation, and both
-complex tensor differentials use the same Koszul signs. The coproduct universal property
-therefore gives equality of their signed total maps. Scalar extension preserves these
-coproducts by its specified ordinary adjunction. Apply localization. The defining
-bifunctor-derived square for internalScalarTensorComparison and the fixed qTensor
-normalization identify its internal representative. Substitute hscalar for each scalar
-comparison and htensor for the derived tensorator comparison. Cancel the adjacent
-comparison isomorphisms to obtain the displayed section square on reconstructed pairs.
-For arbitrary section complexes P and Q, apply the inverse exact section equivalence
-termwise. Its counit gives chain isomorphisms back to P and Q, and section reconstruction
-preserves and reflects flatness and K-flatness. Apply the equation already proved to the
-internal pair and use naturality of qTensor, the scalar computation map and signed
-totalization to transport it along these counit isomorphisms. This proves the equation
-for all the stated unbounded complexes, including zero complexes and the zero ring. -/
+Only the representative equation is asserted; no scalar pair or comparison is constructed. -/
 theorem coefficientScalarTensorRepresentative (Z : Scheme.{u})
     (b : SheafOfModules.ScalarDerivedPair.{u + 1, u, u + 1, u + 1}
       (C := Z.ProEt) (J := Scheme.ProEt.topology Z) (coefficientSectionScalarMap a Z))

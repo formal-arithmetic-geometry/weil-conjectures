@@ -67,14 +67,25 @@ import all WeilConjectures.Algebra.Homology.SubterminalLocal.SubterminalModuleLo
 
 /-! # Restriction of the normalized open Roos comparison through its unit
 
-Source: Stacks Project, proetale.tex, Tag 09BP, lemma-j-shriek-limits;
-sites-modules.tex, Tags 04IX and 03DJ; sites-cohomology.tex, Tag 0941.
-
 The open is presented by its pro-etale slice, with the actual completed ring,
 extension, restriction and normalized adjunction from the recorded dependencies.
-Index n is positive level n+1. Both comparison directions share their signed
-Roos models, coordinates and normalized derived-limit identifications.
+Both comparison directions share their signed Roos models, coordinates and normalized
+derived-limit identifications.
+
+## Implementation details
+
+Index n is positive level n+1.
+
+## References
+
+* [Stacks, Tag 09BP](https://stacks.math.columbia.edu/tag/09BP)
+* [Stacks, Tag 04IX](https://stacks.math.columbia.edu/tag/04IX)
+* [Stacks, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 015F](https://stacks.math.columbia.edu/tag/015F)
+* [Stacks, Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -90,8 +101,7 @@ namespace WeilConjectures.SfOpenRoos
 
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
-/-- Localization of the actual exact adjunction, allowing independent localization sizes.
-Source: Stacks 015F, 03DI. -/
+/-- Localization of the actual exact adjunction, allowing independent localization sizes. -/
 def restrictionUnitDerivedAdjunction
     {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
     [Abelian A] [Abelian B]
@@ -109,8 +119,7 @@ def restrictionUnitDerivedAdjunction
     DerivedCategory.Q (HomologicalComplex.quasiIso _ (.up ℤ))
     J.mapDerivedCategory G.mapDerivedCategory
 
-/-- Localize the actual termwise tower adjunction with its pointwise exactness data.
-Source: Stacks 015F, 03DI. -/
+/-- Localize the actual termwise tower adjunction with its pointwise exactness data. -/
 def restrictionUnitTowerDerivedAdjunction
     {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
     [Abelian A] [Abelian B]
@@ -150,10 +159,8 @@ variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
   [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)]
   [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ B)]
 
-/-- Expanded normalization and compatibility laws of this node. These are propositions
-about shared comparison data; no arbitrary derived map replaces either comparison.
-The signed coordinates are the canonical shifted-cone coordinates (u,-v).
-Source: Stacks 09BP and 0941. -/
+/-- Expanded normalization and compatibility laws, stated as propositions about shared
+comparison data, in the canonical shifted-cone coordinates (u,-v). -/
 def RestrictionUnitAssertions (J : A ⥤ B) (G : B ⥤ A)
     [J.Additive] [PreservesFiniteLimits J] [PreservesFiniteColimits J]
     [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
@@ -1524,51 +1531,23 @@ attribute [-instance] complexProducts complexTowerLimits
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{t}) (U : X.ProEt)
 
-/-- Exact restriction structure reused from the canonical slice functor.
-Source: Stacks 03DJ. -/
+/-- Exact restriction structure reused from the canonical slice functor. -/
 instance restrictionUnitAdditive : (restriction l E X U).Additive :=
   SheafOfModules.localizedSystemRestrictionAdditive.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
 
-/-- Exact restriction structure reused from the canonical slice functor.
-Source: Stacks 03DJ. -/
+/-- Exact restriction structure reused from the canonical slice functor. -/
 instance restrictionUnitLimits : PreservesFiniteLimits (restriction l E X U) :=
   SheafOfModules.localizedSystemRestrictionLimits.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
 
-/-- Exact restriction structure reused from the canonical slice functor.
-Source: Stacks 03DJ. -/
+/-- Exact restriction structure reused from the canonical slice functor. -/
 instance restrictionUnitColimits : PreservesFiniteColimits (restriction l E X U) :=
   SheafOfModules.localizedSystemRestrictionColimits.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
 
 /-- Restriction preserves coefficients and products, and its normalized Roos comparison
-composed with the open-extension comparison is precisely the actual open unit.
-
-Source: Stacks 09BP, 04IX, 03DJ and 0941.
-
-Proof:
-1. The actual restriction is a right adjoint, so it preserves countable products.
-   The product-comparison projection equation gives the stated section formula.
-   The clopen coefficient comparison identifies the completed coefficients.
-2. An open slice is subterminal. On it the extension presheaf has one summand;
-   its canonical injection is invertible. Cocontinuous restriction commutes with
-   sheafification, so the uniquely normalized actual unit is invertible. The
-   localization-unit formula gives the same result for the derived unit.
-3. Reuse the shared signed Roos models of the extension comparison. Apply the
-   exact-product chain-map theorem to restriction with these models reversed.
-   Descend the resulting natural comparison through Q by full faithfulness of
-   whiskering, and use the existing compatibility theorem for augmentations.
-4. On each signed coordinate, product projection and actual unit naturality
-   identify the composite comparison with HA of the tower unit. Product and
-   biproduct extensionality prove the chain-map equality. The same argument on
-   the coordinates (gamma,0) proves the two chain augmentation identities.
-5. Postcompose with the tower localization comparisons and thetaA. Naturality
-   of rho, its normalized square, and the extension square cancel thetaB.
-   Derived-unit naturality, the localization-unit formula, and the chain
-   identity reduce both sides to thetaA followed by Q of HA of the tower unit.
-All degrees are arbitrary integers; no tensor, boundedness or constructibility is used.
--/
+composed with the open-extension comparison is precisely the actual open unit. -/
 theorem restriction_unit
     (D : FiniteFieldDatum.{t}) (_hl : l ≠ D.p)
     (aX : X ⟶ Spec (CommRingCat.of D.k))

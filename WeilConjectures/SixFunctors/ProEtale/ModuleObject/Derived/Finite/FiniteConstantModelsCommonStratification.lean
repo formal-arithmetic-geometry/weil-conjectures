@@ -14,7 +14,14 @@ import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartOrdered
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteModelStratumFiltration
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
-/-! # Common reduced strata for finite families of constant-model constructible sheaves -/
+/-! # Common reduced strata for finite families of constant-model constructible sheaves
+
+## References
+
+* Stacks Project, Tag 09Y5
+* Stacks Project, Tag 01J3
+* Stacks Project, Tag 01J4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -218,19 +225,7 @@ private theorem finiteStratifications_family
   exact Classical.axiomOfChoice hM
 
 /-- A finite family of constructible module sheaves has a common ordered reduced
-stratification on which every restriction has a finite constant local model.
-Source: blueprint lemma-sections-support-closed-subscheme--3, proof steps 1--5; Stacks Tags 09Y5,
-01J3 and 01J4.
-
-Proof: choose an adapted finite stratification for each sheaf. Intersections indexed
-by tuples of old stratum indices form a finite locally closed cover. Apply Noetherian
-ordered refinement to this cover, obtaining a partition whose prefixes are open.
-Realize each piece as an open subscheme of the reduced closed tail before it.
-Its map into X factors through the corresponding old immersion: first factor through
-the old open coborder, then use reducedness to factor through the closed part.
-Exact inverse image pulls back the finite scalar presentation, and the composition
-comparison identifies the resulting module with the restriction from X. The empty
-family and the empty scheme are included by the same finite-cover argument. -/
+stratification on which every restriction has a finite constant local model. -/
 theorem finiteConstantModels_commonReducedStratification
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

@@ -9,7 +9,9 @@ public import WeilConjectures.SixFunctors.Published.PublishedSystemAmbientPresen
 
 /-! # Normalization of the published system presentation
 
-Source: Stacks 03D3, 03EL, 07A4 and 07A7.
+## References
+
+* Stacks Project, Tags `03D3`, `07A7`, `015F`, `03EL`, `07A4`
 -/
 
 @[expose] public noncomputable section
@@ -237,20 +239,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftAdjoint
 attribute [local irreducible] publishedSystemAmbientData
 
 /-- The section-normalized derived compositor is the inverse ambient compositor,
-after the specified equality of the two inverse-image presentations.
-Source: Stacks 03D3 and 07A7, and exact localization (015F).
-Proof: sequence_direct_eq identifies the two ordinary direct images. The sections
-field of c and pushComp_existsUnique give the same restriction along the canonical
-isomorphism of fibre products, with opposite orientation. Module-sheaf morphisms
-are determined on every sequence-site section, so these right-adjoint compositors
-agree. Apply conjugateIsoEquiv injectivity, using c.conjugate and the definition
-of AmbientPullbackTensor.comp, to identify the ordinary inverse-image compositors.
-For the derived equation, restrict to the cochain localization, where c.pullComp_model
-and the factor equations of mapDerivedCategoryNatIso and mapDerivedCategoryCompIso
-reduce it to the ordinary equality. Cancel the invertible exact-factorization
-maps. Faithfulness of restriction along localization proves the equation for all
-unbounded derived objects. Only the section formula is used, so the result is
-independent of the Operations package and includes arbitrary semilinear transitions. -/
+after the specified equality of the two inverse-image presentations. -/
 theorem publishedSystemCompositorIdentification
     (o : IntegralSystemRealization.Operations l E)
     (c : IntegralSystemRealization.Compositors l E o)

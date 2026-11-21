@@ -163,7 +163,11 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.Cont
 
 /-! # Spectral integral coefficient lattices
 
-Source: Bhatt--Scholze, Section 6.8, and blueprint main-20261015.
+Lisse spectral-coefficient modules admit integral lattices on qcqs etale covers.
+
+## References
+
+* Bhatt--Scholze, Section 6.8, Proposition 6.8.4(6) and Lemma 6.8.13
 -/
 
 @[expose] public noncomputable section
@@ -351,21 +355,7 @@ private theorem normedDiagram_localLattice
   intro P hP
   exact normedLisse_etale_lattice l E X P hP
 
-/-- A lisse spectral-coefficient module admits an integral lattice on a qcqs etale cover.
-Source: Bhatt--Scholze, Proposition 6.8.4(6) and Lemma 6.8.13, first paragraph;
-blueprint main-20261015, lemma-lattices-after-finite-stratification, "Sheaf of lattices".
-
-Proof. Equip E with its spectral norm and its original field and algebra structures.
-The spectral norm extends the p-adic norm. The norm-at-most-one subring is the recorded
-valuation ring, by the integer-ring characterization in extension_integers_dvr.
-Apply continuousLisse_etale_lattice to get a qcqs etale surjection and a locally free
-integral module with its scalar-extension comparison. Transport the two coefficient
-rings and their inclusion along the preceding equality, preserving the module action,
-its free cover, and its rationalization. These are the same continuous-function rings
-with their subspace topology. The existing etale-local proof chooses finitely many
-pointed affine etale lattice neighbourhoods using Noetherian compactness and takes
-their coproduct; its coproduct is affine, hence qcqs. Empty schemes give the empty
-coproduct, and zero ranks remain zero. No global descent or stratification is asserted. -/
+/-- A lisse spectral-coefficient module admits an integral lattice on a qcqs etale cover. -/
 theorem spectralLisse_etale_lattice
     (l : ℕ) [Fact l.Prime] (E : Type) [hField : Field E]
     [hAlg : Algebra ℚ_[l] E] [hFin : FiniteDimensional ℚ_[l] E]

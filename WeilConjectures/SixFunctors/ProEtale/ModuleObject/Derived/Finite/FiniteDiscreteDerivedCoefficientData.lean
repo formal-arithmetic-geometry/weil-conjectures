@@ -16,7 +16,12 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Mon
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
 
-/-! # Coherent inverse-image comparisons for the common coefficient encoding -/
+/-! # Coherent inverse-image comparisons for the common coefficient encoding
+
+## References
+
+* Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3
+-/
 
 @[expose] public section
 
@@ -178,26 +183,7 @@ variable
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
 /-- The common sectionwise encoding intertwines pullback, with invertible canonical
-right mates on qcqs morphisms.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3.
-
-Proof in words. First work with ordinary module-valued pro-etale sheaves. Restriction
-commutes with the etale/pro-etale comparison pushforward. Conjugating its natural
-isomorphism gives the inverse-image comparison. The restriction identity is coherent
-with composition; conjugation, exact derivation, and the canonical composition
-isomorphisms preserve this coherence. This proves the displayed square equation,
-including the equality transport supplied by sq.w. Encode internal modules using the
-same functor G on every object of every site. Its forgetful equality ensures that its
-maps on sections and restrictions are the original additive maps. The constant ring
-identifications are all pulled back from eR at the profinite point. Their monoidal
-pullback compatibility therefore identifies the scalar actions in these comparisons.
-Transport the comparison through the coefficient equivalences and apply the exact
-functors on derived categories, identifying the total left derived internal pullback
-with its levelwise functor. For a qcqs morphism, the canonical right mate is the
-bounded-below direct-image comparison, transported through those same equivalences.
-It is invertible by the finite coefficient direct-image comparison. Restriction to D+
-and its inclusion into the full derived category preserve the mate equation. Empty
-schemes and the zero ring cause no exception: all identities come from adjunctions. -/
+right mates on qcqs morphisms. -/
 theorem finiteDiscreteCoefficient_derivedComparisonData [DiscreteTopology B] [Finite B] :
     Nonempty (FiniteDiscreteCoefficientComparisonData B
       (finiteDiscreteCoefficientEquivalence B eR G hG)) := by

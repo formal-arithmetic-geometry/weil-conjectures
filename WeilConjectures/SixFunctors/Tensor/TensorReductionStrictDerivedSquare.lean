@@ -11,7 +11,11 @@ import WeilConjectures.SixFunctors.Tensor.TensorReductionCanonicalSquare
 
 /-! # Derived normalization of the strict reduction tensor map
 
-Source: Stacks 07A4, 07A6 and 0941.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -32,25 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The strict balanced map satisfies the representative square for derived reduction.
 The ordinary map is already constructed and characterized by its finite components.
-This assertion only identifies its localization with the recorded tensor comparison.
-
-Source: Stacks 07A4 and 07A6; step 2 of
-lem-coef-tensor-reduction-ordinary-model.
-Proof: compute derived inverse image for the ringed sequence projection on the
-flat-term K-flat representatives P,Q and their total tensor. Ordinary reduction
-is its ordinary left adjoint. Uniqueness of the derived adjunction identifies the
-localization comparison with pullbackTensorReductionModel, because both transpose
-to the localized ordinary unit followed by the total-limit comparison. The
-ordinary pullback tensor comparison sends b tensor (x tensor y) to
-(b tensor x) tensor (1 tensor y); hence its finite components are exactly those
-of tensorReductionStrictMap. Uniqueness of the strict map identifies these maps
-before localization. The K-flat tensor comparison is natural on pairs of K-flat
-complexes. Its localization square is therefore the displayed equation in the
-whole system category, using reductionTensor_normalization for the recorded
-comparison. No inference from equality of finite derived evaluations is used.
-The good-total-tensor hypothesis supplies the third ordinary reduction model;
-no flatness of the finite quotient ring is required. Zero complexes and an empty
-site are covered by the same universal comparison square. -/
+This assertion only identifies its localization with the recorded tensor comparison. -/
 theorem tensorReductionStrictMap_derived_square (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
     (hT : integralOperationsGoodComplex l E W

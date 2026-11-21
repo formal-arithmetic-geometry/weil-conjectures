@@ -9,7 +9,18 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunct
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ModuleOpenPasting.ModuleDirectImageOpenPasting
 import WeilConjectures.AlgebraicGeometry.Derived.DerivedExchangeModuleTermwiseSupplement
 
-/-! Source: blueprint composition isomorphism and its canonicity and associativity. -/
+/-! # Derived open restriction and its representative normalization
+
+The canonical derived open restriction comparison, together with its description on
+K-injective representatives.
+
+## References
+
+* [Stacks, Tag 08BJ](https://stacks.math.columbia.edu/tag/08BJ)
+* [Stacks, Tag 070I](https://stacks.math.columbia.edu/tag/070I)
+* [Stacks, Tag 070Y](https://stacks.math.columbia.edu/tag/070Y)
+* [Stacks, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -275,23 +286,7 @@ private theorem derived_invertible
     (directImageOpenRestriction Λ sq.toCommSq)
     (derivedDirectImageOpenRestriction Λ sq.toCommSq) rfl rfl
 
-/-- Canonical derived open restriction and its representative normalization.
-Source: blueprint composition isomorphism; Canonicity and associativity;
-Stacks Tags 08BJ, 070I, 070Y and 0D6E.
-
-Proof: The module open-pasting construction betaMap is the mate of the canonical pullback
-square: betaMap_formalism and formalism_sqIso identify it with directImageOpenRestriction.
-Its section formula gives exactly the coprojections and fibre-product arrow in
-OpenCoherenceSectionwise; its inverse follows from the open-slice equivalence. For a
-K-injective I, restriction along i is K-injective because it has exact extension by zero
-as left adjoint. Apply derivedExchangeUnitQ to the two exact-left adjunctions and the
-canonical upperStar square. Replace each right-derived unit on a K-injective by the
-inverse evaluation isomorphism and cancel these isomorphisms. This yields the stated
-representative formula. Its right-hand side is a composite of isomorphisms, so cancellation
-proves invertibility at Q(I). Every derived object is isomorphic to a K-injective
-representative; naturality transports invertibility to all objects.
-The coprojections and section formula include empty opens and identity morphisms.
--/
+/-- Canonical derived open restriction and its representative normalization. -/
 theorem derivedOpenRestrictionNormalization
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion i]

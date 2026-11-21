@@ -17,8 +17,7 @@ the mate under the adjunctions `ν^* ⊣ ν_*` of the identification `ν_{Y,*} f
 Since `ν^*` is exact, it induces a canonical base change morphism of bounded below right derived
 functors `ν_Y^* ∘ Rf_* ⟶ Rf_* ∘ ν_X^*`
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange`), and for `f`
-quasi-compact and quasi-separated this morphism is an isomorphism (blueprint
-`theorem-bounded-below-cohomology-comparison`, the comparison direct image): the underived morphism
+quasi-compact and quasi-separated this morphism is an isomorphism: the underived morphism
 is invertible and `ν^*` sends injective étale sheaves to `f_*`-acyclic pro-étale sheaves.
 
 This makes the isomorphism of
@@ -70,8 +69,7 @@ theorem rightDerivedLowerStarComparisonPlusBaseChange_fac :
     Functor.rightDerivedFunctorPlusBaseChangeAux (lowerStarComparisonUpperStarBaseChange f A) :=
   Functor.rightDerivedFunctorPlusBaseChange_fac _
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison`, the comparison direct image: for `f`
-quasi-compact and quasi-separated, the canonical base change morphism
+/-- For `f` quasi-compact and quasi-separated, the canonical base change morphism
 `ν_Y^* ∘ R⁺f_* ⟶ R⁺f_* ∘ ν_X^*` is an isomorphism. The underived base change morphism is invertible
 (`AlgebraicGeometry.ProEtale.isIso_lowerStarComparisonUpperStarBaseChange`) and `ν_X^*` sends
 injective étale sheaves to `f_*`-acyclic pro-étale sheaves
@@ -83,8 +81,7 @@ instance isIso_rightDerivedLowerStarComparisonPlusBaseChange [QuasiCompact f]
     (asIso (lowerStarComparisonUpperStarBaseChange f A))
     (fun I _ ↦ rightAcyclic_lowerStar_comparisonUpperStar_obj_of_injective A f I)
 
-/-- Blueprint `theorem-comparison-direct-images--1` (and
-`theorem-bounded-below-cohomology-comparison`, the comparison direct image): for `f` quasi-compact
+/-- For `f` quasi-compact
 and quasi-separated, the canonical isomorphism `ν_Y^* Rf_* ≅ Rf_* ν_X^*` on bounded below derived
 categories, the base change morphism
 `AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange` of right derived functors

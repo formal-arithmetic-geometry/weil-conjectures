@@ -12,14 +12,13 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 # The compact-support candidate and its compactification independence
 
 Let `f : X ⟶ Y` be a morphism of schemes, `Λ` a finite ring (the stage `A = A_{E,n}`) and
-`c = (X ⟶[j] X̄ ⟶[f̄] Y)` a compactification of `f`. Blueprint
-`proposition-construction-independence-rf-shriek` attaches to `c` the functor
+`c = (X ⟶[j] X̄ ⟶[f̄] Y)` a compactification of `f`. To `c` one attaches the functor
 `Rf^c_{!,n} = Rf̄_* j_! : D(X_proét, Λ) ⥤ D(Y_proét, Λ)`; this is
 `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification`. On the full subcategory
 `D⁺_et(X, Λ)` of complexes coming from the étale site with a witness — the bounded below objects
 of étale origin `AlgebraicGeometry.ProEtale.DerivedCategory.plusEtaleOrigin`, which contain the
-bounded constructible ones — the superscript `c` may be dropped: blueprint
-`proposition-construction-independence-rf-shriek` provides, for a refinement `u : c₁ ⟶ c₂`, a
+bounded constructible ones — the superscript `c` may be dropped: for a refinement `u : c₁ ⟶ c₂`
+there is a
 comparison isomorphism `Rf^{c₁}_{!,n} ≅ Rf^{c₂}_{!,n}` which is the identity for identity
 refinements and transitive under composition.
 
@@ -69,7 +68,7 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`: Compact-support candidate attached
+/-- Compact-support candidate attached
 to a compactification.
 
 For a compactification `c = (X ⟶[j] X̄ ⟶[f̄] Y)` of `f`, the functor `Rf^c_{!,n} = Rf̄_* j_!`
@@ -181,7 +180,7 @@ section Refinement
 
 variable [Finite Λ] [QuasiCompact f] {c d e : Compactification f}
 
-/-- Blueprint `proposition-construction-independence-rf-shriek`: Compactification-independent
+/-- Compactification-independent
 finite-level direct image.
 
 For a refinement `r : c.Refinement d` (a proper map `c.Z ⟶ d.Z` compatible with the open

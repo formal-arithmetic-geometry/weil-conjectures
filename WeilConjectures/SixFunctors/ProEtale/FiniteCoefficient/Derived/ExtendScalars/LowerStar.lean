@@ -22,8 +22,7 @@ Let `R` be a finite commutative ring and `S` an `R`-algebra. The base change map
 image is the mate of the commutation of `Ψ` with `Lg^*`. For proper `g` it is an isomorphism at
 `M = j_! K` with `K` bounded constructible of finite Tor amplitude on an open `j : U ⟶ Z`:
 restricted back to `R`, it is the projection map `Rg_* M ⊗ᴸ S_Y ⟶ Rg_* (M ⊗ᴸ Lg^* S_Y)` for the
-constant sheaf `S_Y`, an isomorphism by the projection formula
-(blueprint `theorem-grothendieck-lefschetz-trace-formula--7`).
+constant sheaf `S_Y`, an isomorphism by the projection formula.
 -/
 
 @[expose] public section

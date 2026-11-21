@@ -57,8 +57,6 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Algebra.Category.Grp.Ulift
 
 /-! # Section ranges of a trace image on a specified splitting
-
-Source: blueprint, stratified lattice trace proof, Local computation, paragraph 1.
 -/
 
 @[expose] public noncomputable section
@@ -686,29 +684,7 @@ attribute [local irreducible] comapUpperStarIso comapLowerStarIso
 
 /-- On an already specified splitting and in already specified embedded sheet
 coordinates, the pulled-back categorical trace image has the sum of the sheet
-ranges. Local freeness and existence of any chart are not hypotheses or conclusions.
-
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1–2.
-
-Proof. The coefficient-restriction mate identity compares the actual counits,
-and composition coherence compares their restrictions to each sheet. Naturality
-then identifies the normalized integral trace map with the sum of the actual
-sheet embeddings after the canonical integral sheet projections. The split
-product comparison is invertible. Its inverse and the finite biproduct injections
-insert arbitrary sheet sections, so the section range of this sum is exactly
-the supremum of the specified sheet ranges.
-
-The continuous lattice sum theorem identifies this supremum with continuous
-functions into the algebraic sum lattice. In the target, sections whose supplied
-coordinates take values in this lattice form a submodule sheaf: the coordinate
-presentation identifies it naturally with continuous functions into the lattice.
-The trace map factors through this sheaf. The cokernel of its inclusion therefore
-kills the normalized trace map, and cancellation of the epimorphism in the pulled
-and encoded categorical image factorization shows it also kills the image
-inclusion. The kernel property factors the latter through the same submodule
-sheaf. This gives one range inclusion; the trace factorization gives the reverse.
-Neither the trace nor the embedding of M must be epic or monic. Rank zero and the
-empty test scheme are included. -/
+ranges. Local freeness and existence of any chart are not hypotheses or conclusions. -/
 theorem finiteEtaleTrace_sheet_ranges
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

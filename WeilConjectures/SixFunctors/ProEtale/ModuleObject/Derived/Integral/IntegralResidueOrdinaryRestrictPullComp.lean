@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueComparisonInterface
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChange.ComapUpperStarIsoComposition
 
-/-! # Composition of restriction and derived pullback -/
+/-! # Composition of restriction and derived pullback
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,22 +27,7 @@ local instance instEssentiallySmallProfinite_integralResidueOrdinaryRestrictPull
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- Ordinary scalar restriction commutes with pullback composition.
-Source: coefficient-map composition and the ordinary inverse-image identities, as in
-Bhatt--Scholze, Remark 6.8.15.
-
-Proof. Rewrite extension along the coefficient pullback isomorphism as restriction
-along its inverse. After these identifications, all three pullbacks are inverse image
-on the underlying sheaves equipped with the transported coefficient action. The
-coefficient-map composition identity makes the two transported actions identical.
-The restriction comparisons have underlying identity maps, and the two composites
-have the underlying inverse-image composition map. To identify this map with the
-specified `upperStarComp`, transpose under the three pull/push adjunctions: its
-transpose is `lowerStarComp`, by the definition of `upperStarComp`. The corresponding
-restriction/pushforward comparisons have underlying identities, so their composition
-law follows from the composition law for inverse image and direct image. Faithfulness
-of the module forgetful functor finishes. The argument includes the zero module and
-empty schemes; no flatness of reduction or finiteness of E is needed. -/
+/-- Ordinary scalar restriction commutes with pullback composition. -/
 theorem integralResidue_ordinaryRestrictPull_comp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (N : Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})

@@ -67,6 +67,10 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 This is the finite-coefficient step of the integral proper-base-change proof.
 Completeness is neither assumed nor concluded here.
+
+## References
+
+- Stacks Project, Tags `07A7`, `0E47`, `0E48`.
 -/
 
 @[expose] public noncomputable section
@@ -324,44 +328,7 @@ end Helpers
 
 /-- The first reduction of the canonical proper exchange and projection maps is
 invertible when the input reductions have bounded constructible cohomology and finite
-Tor amplitude. The original integral complexes need not be complete or bounded.
-Source: blueprint latest, chap-Construction-of-f,
-`sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`, paragraph (3),
-the reduction-to-finite-coefficients step; Stacks Project, Tags 07A7, 0E47 and 0E48.
-
-Proof:
-1. Put A = O_E/pi_E. The DVR and finite-quotient results make A a finite field killed
-by l. Its quotient topology is discrete. The constant-function map identifies the
-sheafified constant coefficient ring in finiteProperBaseChange with the continuous
-condensed ring of A. This works in universe u by sheafifying ULift-valued constants;
-on a profinite set, a continuous map to A is locally constant on its finite clopen
-fibre partition. The constant map preserves one and products.
-2. The proved coefficientTopology and quotientDiscrete lemmas identify the two
-integer-ring topologies and identify the quotient topology with the discrete one.
-Bundle both coefficient rings, their monoid structures and the actual quotient map.
-The bundles are equal after those topology equalities; proof irrelevance identifies
-the topological-ring, commutativity and continuity witnesses. Equality of the bundles
-transports the full reduced assertion, including its canonical pullback, direct-image,
-exchange and projection maps. No separate choice of a coefficient equivalence is needed.
-3. Apply the finite proper-base-change theorem to the first reduction of K, using
-its stated bounded constructible and finite-Tor properties. Apply the exchange
-comparison rectangle from integral_quotient_exchange_comparison at exponent one.
-The two scalar/geometric balancing comparisons and both scalar/direct-image mates
-are isomorphisms. The finite exchange is invertible by the finite theorem. Cancel
-the invertible outer comparisons in the rectangle. After the coefficient
-identifications of step 2, the remaining arrow is precisely derivedReduction.map
-of condensedAmbientExchange. This treats arbitrary base-changed schemes; only X
-and Y have the standing hypotheses.
-4. Apply the finite projection formula to the reductions of K and M. The scalar
-tensor comparison identifies reduction of their integral tensor with the tensor of
-their reductions. The projection comparison equation from
-integral_quotient_projection_comparison identifies reduction of the actual
-counit-defined projection map, conjugated by the scalar tensor, pullback and
-scalar/direct-image comparisons, with this finite projection map. Every comparison
-is invertible, so cancellation gives the second assertion. This uses the ordinary
-uncompleted tensor. Empty schemes, zero complexes and noncomplete integral inputs
-are included: every comparison used is defined on the ambient derived categories,
-and all constructibility assumptions are on the finite reductions themselves. -/
+Tor amplitude. The original integral complexes need not be complete or bounded. -/
 theorem integralResidueProperFormulas
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

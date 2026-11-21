@@ -25,8 +25,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableShortEx
 
 /-! # Dualizability of the residue coefficient as an integral complex
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3), and the two-term free resolution of
-O_E/ℓ.
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3).
 -/
 
 @[expose] public section
@@ -44,18 +45,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The residue coefficient module, restricted to integral coefficients and placed
-in degree zero, is dualizable.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), applied to the two-term free resolution.
-
-Proof in words. Pull the proved short exact integral module reduction sequence from
-the profinite point to T. Inverse image is exact and strong monoidal, so its two
-integral regular modules identify with the tensor unit on T. The first two terms are
-therefore dualizable. A short exact sequence with dualizable first and second terms
-has dualizable third term in the derived category: the third term is represented by
-the mapping cone of the map between these two terms. Finally transport along the
-canonical comparison between inverse image of restricted scalars and restriction of
-inverse image. This identifies the third term with the displayed residue coefficient.
-The argument also applies to the empty scheme. -/
+in degree zero, is dualizable. -/
 theorem integralResidue_isDualizable (T : Scheme.{u}) :
     IsDualizable ((DerivedCategory.singleFunctor _ 0).obj
       ((Mod.comap (coefficientMap (integralReductionMap ℓ E) T)).obj

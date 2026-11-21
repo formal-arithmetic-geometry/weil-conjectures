@@ -11,7 +11,10 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleLisseFiniteModels
 
 /-! # Finite projective cover data for an étale lisse sheaf
 
-Source: blueprint scalar-six-ctf (1), finite projective local models.
+## References
+
+* [Stacks, Tag 00NX](https://stacks.math.columbia.edu/tag/00NX)
+* [Stacks, Tag 099Y](https://stacks.math.columbia.edu/tag/099Y)
 -/
 
 @[expose] public noncomputable section
@@ -28,13 +31,7 @@ variable (A : Type) [CommRing A] [Finite A]
 /-- A finite projective étale lisse sheaf has a pro-étale cover by finite projective
 constant ordinary modules.  This is the cover and module data used by the scalar
 comparison construction below.
-
-Source: blueprint scalar-six-ctf (1), finite ring generators; Stacks 00NX and 099Y.
-
-Proof: choose the locally constant datum supplied by the étale lisse hypothesis,
-replace each geometric stalk by the corresponding finite projective constant module,
-and regard the resulting étale cover as a pro-étale cover.  The empty chart uses the
-zero module.  The comparison isomorphisms are stable under refinement of the cover. -/
+-/
 theorem finiteEtaleLisseScalarComparisonData
     (S : Scheme.{u}) [IsNoetherian S]
     (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A)))

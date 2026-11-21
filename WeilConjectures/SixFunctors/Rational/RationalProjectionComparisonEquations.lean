@@ -12,8 +12,8 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # Compact-support projection comparison equations
 
-Source: the coherence paragraph of the projection-formula proof in
-literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done.
+Comparison equations between the integral and rational compact-support projection
+formula isomorphisms.
 -/
 
 @[expose] public noncomputable section
@@ -643,29 +643,7 @@ private theorem integral_finiteTor {D : FiniteFieldDatum.{u}} {C : D.Coefficient
 
 /-- Rational localization preserves the four comparison equations of the
 normalized compact-support projection. This only transports equalities; it does
-not assert invertibility or naturality of the rational component.
-Source: thm-sf-pf-field.proof.md, Compatibility, and the final coherence sentence
-of fix-prop-projection-formula.proof.md, in literature/blueprint/latest/blueprint.
-Proof: give each rational input its literal integral model; the raw scalar
-localization has unchanged objects. The residue Tor criterion identifies the
-integral constructible predicate with the uniform finite-Tor predicate, so the
-input equations apply to these models. Use the canonical tensor localization
-comparison, normalized on pure tensor morphisms. The tensor and tensor-pullback
-normalizations in H identify it with the prescribed tensor operations and their
-pullback comparisons. The operation comparisons preserve adjunction units and
-counits, hence identify the localization of the proper counit mate and the
-open projection with the prescribed rational component. Apply localization to
-the integral refinement equation and cancel the canonical tensor/support
-endpoint comparisons. For composition, move those comparisons past tensor and
-support maps by naturality; H.rationalization.composition and .pullComposition
-identify the two compositors and the final pullback comparison. The remaining
-equation is the image of the integral composition equation. Apply the same
-calculation to three support factors to transport the pentagon, keeping the
-associativity transport of its compactification. Finally, .compactification and
-.properIdentity carry properIdentification to its rational counterpart; the
-unit/counit comparison identifies the proper projection mate, giving the proper
-equation. Every cancellation is of a specified natural isomorphism, and every
-equality is transported forward, without reflecting equality by localization. -/
+not assert invertibility or naturality of the rational component. -/
 theorem compactSupportProjectionCoherence_rational
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]

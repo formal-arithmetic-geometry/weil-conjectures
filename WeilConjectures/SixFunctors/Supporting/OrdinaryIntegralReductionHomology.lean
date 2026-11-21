@@ -17,7 +17,11 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingO
 
 /-! # Cohomology of ordinary pullback and finite integral reduction
 
-Source: Stacks Project, Tags 06YY and 0735; Bhatt--Scholze, Lemma 6.5.8.
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 0735](https://stacks.math.columbia.edu/tag/0735)
+* Bhatt--Scholze, Lemma 6.5.8
 -/
 
 @[expose] public section
@@ -128,25 +132,8 @@ private noncomputable def reductionOrdinarySquare (n : ℕ) :
 end
 
 /-- Finite reduction after ordinary integral pullback has the pulled-back cohomology
-of the original finite reduction. No derived completion occurs.
-
-Source: Stacks Project, Tags 06YY (derived tensor pullback) and 0735 (exact pullback
-and cohomology); Bhatt--Scholze, Lemma 6.5.8. This is the finite-reduction part of
-step 3 of lem-fix-constructible-residue-tree.
-
-Proof: choose a flat-term K-flat representative P of K. The projection equations
-for ordinaryIntegralDirectRingMap give the commutative square of completed and
-finite constant coefficient sheaves. Associativity of tensor extension identifies
-finite reduction of ordinary pullback of P with constant-coefficient pullback of
-the finite reduction of P. The identification sends a pulled section tensored with
-a residue coefficient to that same section and coefficient; thus it is compatible
-with sheafification, differentials and the resolution counits. Ordinary module
-pullback preserves flat modules, so these complexes compute the corresponding
-left derived functors; uniqueness compatible with their counits descends the
-identification to K. Constant-coefficient pullback is exact, hence commutes with
-cohomology. Compose this homology comparison with the descended tensor comparison.
-The tensor formulas also include zero modules, the zero coefficient ring and the
-empty scheme. Index n denotes the positive exponent n + 1. -/
+of the original finite reduction. No derived completion occurs. Index `n` denotes the positive
+exponent `n + 1`. -/
 theorem ordinaryIntegralReductionHomology
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

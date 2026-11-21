@@ -101,8 +101,7 @@ noncomputable def coefficientEtaleExchangeChain (B₀ : Type) [CommRing B₀]
     (Etale.pullbackSquareComparison (ModuleCat.{u + 1} (ULift.{u + 1} B₀)) sq).hom L
 
 attribute [local semireducible] residueExchangeUpperStar residueExchangeLowerStar in
-/-- The original bounded exchange with endpoints fixed by its actual exchange diagram.
-Source: boundedConstructibleBaseChange. -/
+/-- The original bounded exchange with endpoints fixed by its actual exchange diagram. -/
 noncomputable def coefficientAmbientBoundedExchange
     (T : Type) [CommRing T] [TopologicalSpace T] [IsTopologicalRing T]
     [DiscreteTopology T] [Finite T] [Fact (IsNilpotent (ℓ : T))]
@@ -141,8 +140,7 @@ theorem coefficientAmbientBoundedExchange_factorization
       (residueExchangeAdjunction (Profinite.continuousMapRingObj T) f')
       (residueExchangeSquare (Profinite.continuousMapRingObj T) sq).hom K.obj)
 
-/-- The original etale exchange, with endpoints fixed by its actual exchange diagram.
-Source: Etale.baseChange. -/
+/-- The original etale exchange, with endpoints fixed by its actual exchange diagram. -/
 noncomputable def coefficientEtaleExchange (B₀ : Type) [CommRing B₀]
     (sq : CommSq g' f' f g) (L : FiniteDiscreteEtalePlus B₀ X) :
     (coefficientEtaleExchangeChain B₀ sq L).obj0 ⟶
@@ -235,12 +233,7 @@ def finiteDiscreteExchangeSteps [DiscreteTopology B] [Finite B] [Fact (IsNilpote
     Prop :=
   coefficientExchangeSteps ℓ k B B sq F0 F1
 
-/-- A step comparison identifies the two original specified total arrows.
-Source: the factored comparison and the defining equations for the two typed arrows.
-
-Proof. Apply the generic factored-comparison arrow isomorphism. Rewrite both entire
-arrow objects by the cache equations, retaining the original endpoints as well as
-its morphisms. No component or derived functor is expanded in the consumer. -/
+/-- A step comparison identifies the two original specified total arrows. -/
 theorem finiteDiscreteExchangeSteps_arrowIso
     [DiscreteTopology B] [Finite B] [Fact (IsNilpotent (ℓ : B))]
     (sq : CommSq g' f' f g)

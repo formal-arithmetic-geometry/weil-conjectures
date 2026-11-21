@@ -614,16 +614,7 @@ private meta def memoTraceProofCongruenceWithFacts
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Proper coincidence and tensor symmetry identify the kernel counit with the
-specified inverse ordered-projection counit.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, G7 and proper coincidence.
-
-Proof: proper coincidence commutes with the canonical projection map. Cancel the two
-projection isomorphisms to compare their inverses. Naturality of the source braiding
-moves it through proper coincidence. Naturality of the target braiding moves the trace
-from the left factor to the right factor; the braiding with the unit identifies the
-left unitor with the right unitor. The ordered ordinary projection is the symmetry
-conjugate of the original projection, so its inverse has precisely these factors.
-This argument uses actual maps and applies on the unbounded categories. -/
+specified inverse ordered-projection counit. -/
 theorem finiteP1TraceCounit_kernel_comparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (q : X ⟶ Y) [IsProper q]

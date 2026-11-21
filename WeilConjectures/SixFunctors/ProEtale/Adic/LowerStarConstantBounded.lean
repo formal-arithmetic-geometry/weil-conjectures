@@ -24,21 +24,13 @@ field `k`, with `dim T ≤ d`. Then the derived pushforward of the constant `ℓ
 `ℚ̄_ℓ,T` lies in degrees `[0, 2d + 1]`
 (`AlgebraicGeometry.ProEtale.bounded_rightDerivedFunctor_adicLowerStar_unit`), the boundedness
 half of the finiteness theorem (`WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`) for the
-constant sheaf. The argument runs through the abelian sheaves underlying the `ℓ`-adic sheaves:
+constant sheaf.
 
-1. `Rg_* 𝒪_{E,T} = R lim_n ν^* Rg_*^{ét}(𝒪_E ⧸ ℓⁿ)`, and the étale terms lie in degrees
-   `[0, 2d]` (`AlgebraicGeometry.Etale.isGE_and_isLE_rightDerivedLowerStar_constantSheaf_ab`), so
-   by repleteness `Rg_* 𝒪_{E,T}` lies in degrees `[0, 2d + 1]`
-   (`AlgebraicGeometry.ProEtale.isGE_and_isLE_of_isHomotopyLimit_proEt`,
-   `AlgebraicGeometry.ProEtale.isGE_and_isLE_rightDerivedLowerStar_padicIntegersSheaf`);
-2. `Rⁱg_*` commutes with the colimits `E_T = 𝒪_{E,T}[1/ℓ]` and `ℚ̄_ℓ,T = colim_E E_T`, so
-   `Rⁱg_* ℚ̄_ℓ,T = 0` for `i > 2d + 1`
-   (`AlgebraicGeometry.ProEtale.isZero_rightDerived_lowerStar_adicConstantSheaf`);
-3. the derived pushforward of `ℓ`-adic sheaves commutes with taking underlying abelian sheaves
-   (`AlgebraicGeometry.ProEtale.rightDerivedAdicLowerStarCompForgetAbIso`), which is faithful.
+## Implementation details
 
-The comparison `Rg_* ν^* ≅ ν^* Rg_*^{ét}` used in step 1 depends on
-`AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective`.
+The argument runs through the abelian sheaves underlying the `ℓ`-adic sheaves, using that the
+derived pushforward of `ℓ`-adic sheaves commutes with taking underlying abelian sheaves
+(`AlgebraicGeometry.ProEtale.rightDerivedAdicLowerStarCompForgetAbIso`).
 -/
 
 @[expose] public section

@@ -38,6 +38,10 @@ to which the induction hypothesis applies.
 - `ProEtale.finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf_of_isIntegral`:
   the reduction to lisse sheaves on integral affine schemes, and its corollary
   `AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf`.
+
+## References
+
+* SGA 4½, *Th. finitude*
 -/
 
 @[expose] public section
@@ -250,16 +254,10 @@ lemma finiteLowerStar_singleFunctor_of_opens {Y Z : Scheme.{u}} [IsLocallyNoethe
         (finiteLowerStar_of_bounded (i₁ ≫ g) (fun F' hF' ↦ ih _ i₁ hns F' hF') _ hC'.1 hC'.2))
   exact (finiteLowerStar l g).ext_of_isTriangulatedClosed₁ _ hT h₂ h₃
 
-/-- **The inductive step of the dévissage**. Let `g : Z ⟶ Y` be a morphism locally of finite type
+/-- **The inductive step of the dévissage.** Let `g : Z ⟶ Y` be a morphism locally of finite type
 from an affine scheme to an affine scheme of finite type over a field `K`, and assume the
 finiteness theorem for lisse sheaves over `K` (`H`), and for constructible sheaves on the proper
-closed subschemes of `Z` (`ih`). Then it holds for constructible sheaves on `Z`.
-
-A constructible sheaf `F` on `Z` is lisse on a stratum containing a nonempty affine open `W`,
-with closed complement `i : Z₁ ⟶ Z`. By `H`, `j^* F` has bounded constructible derived
-pushforward along `j : W ⟶ Z` and along `j ≫ g`. The cone `C` of the unit
-`F ⟶ Rj_* j^* F` vanishes on `W`, so `C ≅ Ri_* i^* C`, and `C` is bounded with constructible
-cohomology; by `ih`, `R(i ≫ g)_* i^* C` is bounded constructible, hence so is `Rg_* F`. -/
+closed subschemes of `Z` (`ih`). Then it holds for constructible sheaves on `Z`. -/
 lemma finiteLowerStar_singleFunctor_of_isAffine_step {K : Type u} [Field K]
     (H : ∀ ⦃Y : Scheme.{u}⦄ (_ : Y ⟶ Spec (.of K)) [LocallyOfFiniteType ‹Y ⟶ Spec (.of K)›]
       [IsAffine Y] ⦃T : Scheme.{u}⦄ [IsAffine T] [IsIntegral T] (g : T ⟶ Y)
@@ -328,18 +326,12 @@ lemma finiteLowerStar_singleFunctor_of_isAffine_step {K : Type u} [Field K]
   exact finiteLowerStar_singleFunctor_of_opens g ih hF W hxW hj hjZ
 
 
-/-- **Dévissage for the finiteness theorem: reduction to lisse sheaves** (SGA 4½,
-*Th. finitude*), integral form. Over a field `K`, if the derived pushforward of every lisse
+/-- **Dévissage for the finiteness theorem: reduction to lisse sheaves**, integral form. Over a
+field `K`, if the derived pushforward of every lisse
 `ℓ`-adic sheaf along a morphism locally of finite type from an *integral* affine scheme to an
 affine scheme of finite type over `K` is bounded with constructible cohomology sheaves (`H`),
 then so is the derived pushforward of every constructible `ℓ`-adic sheaf along a morphism
-locally of finite type between affine schemes.
-
-The proof is a noetherian induction over the closed subschemes of the source
-(`AlgebraicGeometry.ProEtale.finiteLowerStar_singleFunctor_of_isAffine_step`): a constructible
-sheaf is lisse, up to a surjective closed immersion from an integral scheme, on a nonempty
-irreducible affine open, and the cone of the unit of the restriction to it is supported on the
-closed complement. -/
+locally of finite type between affine schemes. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf_of_isIntegral {K : Type u}
     [Field K]
     (H : ∀ ⦃Y : Scheme.{u}⦄ (_ : Y ⟶ Spec (.of K)) [LocallyOfFiniteType ‹Y ⟶ Spec (.of K)›]
@@ -374,12 +366,10 @@ theorem finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf_of_isInteg
     exact ⟨y, i.isClosedEmbedding.injective hy⟩
   simpa only [Category.assoc] using ih _ hlt Z' (i' ≫ i) rfl F' hF'
 
-/-- **Dévissage for the finiteness theorem: reduction to lisse sheaves** (SGA 4½,
-*Th. finitude*). Over a field `K`, if the derived pushforward of every lisse `ℓ`-adic sheaf along
-a morphism locally of finite type between affine schemes, with target of finite type over `K`,
-is bounded with constructible cohomology sheaves (`H`), then so is the derived pushforward of
-every constructible `ℓ`-adic sheaf. It suffices to know `H` for integral sources
-(`finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf_of_isIntegral`). -/
+/-- **Dévissage for the finiteness theorem: reduction to lisse sheaves.** Over a field `K`, if the
+derived pushforward of every lisse `ℓ`-adic sheaf along a morphism locally of finite type between
+affine schemes, with target of finite type over `K`, is bounded with constructible cohomology
+sheaves (`H`), then so is the derived pushforward of every constructible `ℓ`-adic sheaf. -/
 theorem finiteLowerStar_singleFunctor_of_isAffine_of_isAdicLisseSheaf {K : Type u} [Field K]
     (H : ∀ ⦃Y : Scheme.{u}⦄ (_ : Y ⟶ Spec (.of K)) [LocallyOfFiniteType ‹Y ⟶ Spec (.of K)›]
       [IsAffine Y] ⦃T : Scheme.{u}⦄ [IsAffine T] (g : T ⟶ Y) [LocallyOfFiniteType g]

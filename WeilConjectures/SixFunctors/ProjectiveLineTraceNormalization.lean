@@ -153,15 +153,7 @@ attribute [local irreducible] rightDerivedLowerShriekOfCompactification
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- A coefficient automorphism identifies the transported kernel trace with the
-prescribed presentation trace.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, transport through a presentation.
-
-Proof: direct image along e is an equivalence. Lift the discrepancy between the
-adjunction-unit coefficient identification and the geometric inverse-image comparison
-to an automorphism of the shifted line. Naturality of derived direct-image composition
-moves this automorphism to the coefficient slot and cancels that discrepancy. The
-constant-sheaf unit comparison is the identity before applying the single-complex
-functor, so its composite is the canonical single-complex unit comparison. -/
+prescribed presentation trace. -/
 theorem exists_presentedFiniteP1TraceNormalization
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

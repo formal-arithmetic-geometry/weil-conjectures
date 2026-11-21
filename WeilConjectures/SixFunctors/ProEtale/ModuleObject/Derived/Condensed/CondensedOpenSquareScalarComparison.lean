@@ -50,13 +50,13 @@ set_option linter.privateModule false
 
 /-! # Scalar-compatible open base change for condensed coefficients
 
-Source: blueprint main-20261015, proposition-extension-zero-restriction-closed-subscheme, proof (4),
-and sk-prop-sfb-cartesian-coefficients/lem-sfb-eta-comp; exact localization uses
-Stacks Project, Tag 04VG, lemma-properties-left-localization.
-
 The pullback square comparison and its complex-level map are real constructions from
 existing module pullbacks, their specified compositors, and termwise application.
 The theorem retains the specified open adjunctions and ordinary unbounded derived categories.
+
+## References
+
+* Stacks Project, Tag 04VG
 -/
 
 @[expose] public noncomputable section

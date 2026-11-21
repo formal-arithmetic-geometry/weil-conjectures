@@ -11,7 +11,11 @@ import WeilConjectures.SixFunctors.ProEtale.InternalRoosOutputComplete
 
 /-! # Canonical completeness detected by the internal reduction Roos triangle
 
-Source: Stacks 099B, 0A0E and 0941; blueprint integral-criterion-reductions, final sentence.
+## References
+
+* [Stacks, Tag 099B](https://stacks.math.columbia.edu/tag/099B)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -24,18 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Obj
 namespace AlgebraicGeometry.ProEtale.AdicCompletion
 
-/-- A Roos triangle on the actual reductions implies canonical-map completeness.
-Source: Stacks 099B, 0A0E, 0941; blueprint integral-criterion-reductions, final sentence.
-
-Proof: choose a K-flat representative P of K. Its strict Roos complex gives a
-second distinguished triangle for the same reduction tower. Rotate both triangles:
-their first two objects and their first map coincide. Complete the identity maps
-to an isomorphism of distinguished triangles, then reflect the isomorphism of their
-third objects through the shift equivalence. Thus K is isomorphic to Q(roos P).
-The quotient Roos output is complete by the regular-scalar completion reflector.
-Compose its K-flat representative isomorphism with this isomorphism to obtain
-IsDerivedComplete for K, retaining exactly the same invertible augmentation. No
-equality between this triangle isomorphism and the specified augmentation is used. -/
+/-- A Roos triangle on the actual reductions implies canonical-map completeness. -/
 theorem isDerivedComplete_of_roos
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})

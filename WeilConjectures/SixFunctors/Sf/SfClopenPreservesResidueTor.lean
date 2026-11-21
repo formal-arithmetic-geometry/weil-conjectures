@@ -47,7 +47,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Objectwise residue Tor bounds under clopen restriction
 
-Source: Stacks Project, Tags 08FZ, 06YY and 00Y0.
+## References
+
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 00Y0](https://stacks.math.columbia.edu/tag/00Y0)
 -/
 
 @[expose] public noncomputable section
@@ -330,30 +334,7 @@ private theorem clopenFinite_preservesTor
     (nD.app X) a b ht
   exact ht'
 
-/-- Objectwise residue Tor bounds under clopen restriction.
-
-Source: Stacks Project, Tags 08FZ, 06YY and 00Y0; the relocalization paragraph of
-lem-sf-clopen-derived-compatibility.
-
-Proof: Use the exponent-one derived scalar comparison to identify the local reduction
-of the restricted object with restriction of its global reduction. For any local
-site object V, compose V to U and U to T. Relocalization identifies the slice of
-the local site at V with the slice of the global site at that same composite
-object: an object over V is just its weakly etale morphism to V in either case.
-Under this site equivalence, the finite coefficient rings are identified by
-d.finite 0; d.projection gives the scalar-extension identification. Consequently
-slice restriction of the local reduction is the image of slice restriction of
-the global reduction under this exact ringed-site equivalence. Every degree-zero
-module on the local slice corresponds to a module on the global slice. The
-equivalence preserves sheaf tensor products by the balanced pure-tensor formula,
-and K-flat resolutions by exactness of its inverse, so it preserves the derived
-tensor with these degree-zero modules. It also preserves and reflects zero
-cohomology. Apply the assumed global objectwise Tor bound at the composite V to
-all these corresponding modules. The ordered-interval conjunct is inherited from
-the global test at the same V.
-The same cohomology groups vanish outside [a,b], so the integers are unchanged.
-For a>b the ordered-interval conjunct makes the premise impossible; empty components
-satisfy the same argument. -/
+/-- Objectwise residue Tor bounds under clopen restriction. -/
 theorem sf_clopen_preserves_residue_tor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)

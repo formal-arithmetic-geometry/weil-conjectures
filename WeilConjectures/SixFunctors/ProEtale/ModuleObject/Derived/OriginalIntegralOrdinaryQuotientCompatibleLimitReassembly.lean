@@ -29,6 +29,11 @@ import Mathlib.CategoryTheory.Limits.Types.Limits
 
 This statement concerns only existence of sections. The caller separately proves
 that these sections assemble into a linear natural morphism.
+
+## References
+
+* Hemo, Richarz, Scholbach, Proposition 5.1
+* Bhatt, Scholze, Corollary 6.1.5
 -/
 
 @[expose] public section
@@ -388,25 +393,7 @@ private theorem quotient_obstruction_zero_of_constructible
     exact ⟨a, (S.range_immersion a).symm ▸ ha⟩
   · exact hstr
 
-/-- Reassembly of individual section limits over a constructible module.
-Source: Hemo--Richarz--Scholbach, Proposition 5.1, proof for constructible sheaves;
-Bhatt--Scholze, Corollary 6.1.5.
-Proof: first use finite-presentation separatedness to make the section limits
-supplied by hlocal unique, hence linear and natural. They give limits for all
-compatible sequences of morphisms into a finitely presented module. For a
-constructible M, its augmentation A into the product of positive quotients is
-monic by constructible separatedness. For a compatible sequence a_n : W -> M,
-let t : W -> product(M/ell^(n+1)) have coordinates a_n modulo ell^(n+1).
-It lifts through A exactly when t followed by cokernel.π A vanishes. Pullback
-to each finite-presentation chart preserves the countable product and ordinary
-cokernels. The chartwise limit factors the pulled-back t through the pulled-back
-A, so this obstruction vanishes there. Cover-local detection and finite
-quasi-compact detection along the constructible strata make it vanish on X.
-The abelian mono-lifting property now supplies the required morphism limit.
-Finally, sections over U are represented by the sheafification of the free
-module presheaf on the lifted Yoneda object of U. Apply the morphism limit to
-these representing maps and evaluate to obtain the requested section. This
-includes empty schemes, empty strata, and the zero module. -/
+/-- Reassembly of individual section limits over a constructible module. -/
 theorem originalIntegralOrdinaryQuotient_compatibleLimit_reassembly
     (ell : ℕ) [Fact ell.Prime]
     (E : IntermediateField ℚ_[ell] (PadicAlgCl ell))

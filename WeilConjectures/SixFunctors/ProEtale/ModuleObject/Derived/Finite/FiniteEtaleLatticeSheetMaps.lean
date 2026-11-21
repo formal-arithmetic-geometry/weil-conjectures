@@ -8,8 +8,6 @@ module
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.ContinuousLatticeIntersectionSupplement
 
 /-! # Actual sheet and trace-image inclusions
-
-Source: blueprint, stratified lattice proof, "Pushing down by the trace".
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +22,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S]
 
 /-- Restrict the supplied integral lattice embedding to an actual sheet and
-identify its rational target using the specified composition equation.
-Source: blueprint, stratified lattice trace proof, Local computation, paragraph 1. -/
+identify its rational target using the specified composition equation. -/
 def finiteEtaleLatticeSheetEmbedding (a : R ⟶ S) [IsMonHom a]
     {X U Y : Scheme.{u}}
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X))
@@ -42,8 +39,7 @@ def finiteEtaleLatticeSheetEmbedding (a : R ⟶ S) [IsMonHom a]
           upperStarComp S t p).inv.app P)
 
 /-- Pull back the actual inclusion of the integral trace image and normalize
-its target by the canonical restriction-of-scalars comparison.
-Source: blueprint, stratified lattice trace proof, Local computation, paragraph 1. -/
+its target by the canonical restriction-of-scalars comparison. -/
 def finiteEtaleTraceImageEmbedding (a : R ⟶ S) [IsMonHom a]
     {X U Y : Scheme.{u}}
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X))
@@ -60,10 +56,7 @@ def finiteEtaleTraceImageEmbedding (a : R ⟶ S) [IsMonHom a]
         (Mod.comap (coefficientMap a X)).map τ)) ≫
     (comapUpperStarIso a g).inv.app P
 
-/-- The normalized pulled-back image inclusion is monic.
-Source: exact module pullback and the categorical image inclusion.
-
-Proof. Pullback preserves monomorphisms, and the normalization is an isomorphism. -/
+/-- The normalized pulled-back image inclusion is monic. -/
 instance finiteEtaleTraceImageEmbedding_mono (a : R ⟶ S) [IsMonHom a]
     {X U Y : Scheme.{u}}
     (P : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj S X))

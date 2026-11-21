@@ -22,29 +22,24 @@ Let `i : Z ⟶ X` be a closed immersion and `j : U ⟶ X` a quasi-compact open i
 the complement of its range. For pro-étale sheaves of modules over a ring `R`:
 
 * the restrictions `i^*` and `j^*` jointly detect zero objects
-  (`AlgebraicGeometry.ProEtale.isZero_of_isZero_upperStar_of_isCompl`, blueprint
-  `proposition-extension-zero-restriction-closed-subscheme`), hence jointly detect isomorphisms;
-* `i_*` is exact (`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`,
-  blueprint `proposition-extension-zero-restriction-closed-subscheme--4`);
+  (`AlgebraicGeometry.ProEtale.isZero_of_isZero_upperStar_of_isCompl`), hence jointly detect
+  isomorphisms;
+* `i_*` is exact (`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`);
 * a sheaf lies in the essential image of `i_*` if and only if its restriction to `U` vanishes,
   and then the unit `F ⟶ i_* i^* F` is an isomorphism
   (`AlgebraicGeometry.ProEtale.lowerStar_essImage_iff_of_isCompl`,
-  `AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl`,
-  blueprint `lemma-passing-schematic-closure--1`).
+  `AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl`).
 
 All three rest on the full faithfulness of `i_*`, that the counit `i^* i_* G ⟶ G` is an
 isomorphism (`AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_counit`, proved for
-sheaves with values in any Grothendieck abelian category, blueprint
-`proposition-extension-zero-restriction-closed-subscheme--5` of the subsection
-`proposition-extension-zero-restriction-closed-subscheme`).
+sheaves with values in any Grothendieck abelian category).
 
-## Implementation notes
+## Implementation details
 
 The detection statement is the case of the finite jointly surjective family `{i, j}` of the
 general `AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero`: a section whose
 restrictions along `i` and `j` vanish vanishes on weakly étale neighbourhoods of the points of
-`Z` and `U`, and these form a pro-étale cover because both `i` and `j` are quasi-compact. This
-replaces the blueprint's lifting of coverings of the closed fibre.
+`Z` and `U`, and these form a pro-étale cover because both `i` and `j` are quasi-compact.
 
 Exactness of `i_*` then follows from the counit isomorphism: the cokernel of `i_* φ` for an
 epimorphism `φ` has vanishing restriction to `Z`, since `i^* i_* φ ≅ φ`, and to `U`, since
@@ -175,20 +170,10 @@ private lemma isIso_closedCounit_localization {U' U Z' Z : Scheme.{u}}
   exact isIso_map_counit_of_local_adjunction ai ai' aj aj' α this hc F
 
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--5` (subsection
-`proposition-extension-zero-restriction-closed-subscheme`): for a closed immersion `i : Z ⟶ X` the
+/-- For a closed immersion `i : Z ⟶ X` the
 counit `i^* i_* G ⟶ G` of the pro-étale adjunction `i^* ⊣ i_*` is an isomorphism on all pro-étale
 sheaves with values in a Grothendieck abelian category `C` (for instance modules over a ring
-or abelian groups); so `i_*` is fully faithful, without a constructibility hypothesis.
-
-Proof: on the affine pro-étale bases of Spec A and Spec (A/I), closed base change is
-right adjoint to the closed-site lift with invertible unit. Opposites and precomposition
-therefore make direct image fully faithful on presheaves. Restriction to these bases is
-an equivalence on sheaves, so the same holds for sheaves. An arbitrary closed
-immersion into an affine scheme is isomorphic to such a quotient immersion. Finally,
-restrict the counit to the inverse image of an affine open cover of the target. Weakly
-étale base change and the double-mate identity identify these restrictions with the affine
-counits, up to isomorphisms. Open-cover conservativity proves the global claim. -/
+or abelian groups); so `i_*` is fully faithful, without a constructibility hypothesis. -/
 theorem isIso_upperStarLowerStarAdjunction_counit (i : Z ⟶ X) [IsClosedImmersion i] :
     IsIso (upperStarLowerStarAdjunction C i).counit := by
   have happ (F : Sheaf (ProEt.topology Z) C) :
@@ -250,12 +235,8 @@ variable {R}
 variable (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
 
 omit [IsOpenImmersion j] in
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: let `i : Z ⟶ X` be a closed
-immersion with quasi-compact open complement `j : U ⟶ X`. A pro-étale sheaf of modules `F` on `X`
-with `i^* F = 0` and `j^* F = 0` is zero.
-
-This is `AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero` for the identity
-of `F` and the quasi-compact jointly surjective family `{i, j}`. -/
+/-- Let `i : Z ⟶ X` be a closed immersion with quasi-compact open complement `j : U ⟶ X`. A
+pro-étale sheaf of modules `F` on `X` with `i^* F = 0` and `j^* F = 0` is zero. -/
 theorem isZero_of_isZero_upperStar_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))
@@ -318,7 +299,7 @@ lemma epi_lowerStar_map_of_isCompl (hij : IsCompl (Set.range i.base) (Set.range 
   · exact (IsZero.of_epi (cokernel.π _) (isZero_upperStar_lowerStar_of_disjoint _ i j
       hij.disjoint H)).of_iso (PreservesCokernel.iso _ _)
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--4`: let `i : Z ⟶ X` be a
+/-- Let `i : Z ⟶ X` be a
 closed immersion whose complementary open immersion `j` is quasi-compact. Then `i_*` is exact on
 pro-étale sheaves of modules. It is left exact as a right adjoint, and it preserves epimorphisms by
 `AlgebraicGeometry.ProEtale.epi_lowerStar_map_of_isCompl`. -/
@@ -330,11 +311,8 @@ theorem preservesFiniteColimits_lowerStar_of_isCompl
   have := Functor.preservesHomology_of_preservesEpis_and_kernels ((i)_*[ModuleCat.{u + 1} R])
   exact Functor.preservesFiniteColimits_of_preservesHomology _
 
-/-- Blueprint `lemma-passing-schematic-closure--1`, the unit: let `i : Z ⟶ X` be a closed
-immersion with quasi-compact open complement `j`. For a pro-étale sheaf of modules `F` with
-`j^* F = 0`, the unit `F ⟶ i_* i^* F` is an isomorphism. Its restriction to `Z` is inverse to the
-counit isomorphism by a triangle identity, and its restriction to `U` is a map between zero
-objects, so `AlgebraicGeometry.ProEtale.isIso_of_isIso_upperStar_of_isCompl` applies. -/
+/-- Let `i : Z ⟶ X` be a closed immersion with quasi-compact open complement `j`. For a
+pro-étale sheaf of modules `F` with `j^* F = 0`, the unit `F ⟶ i_* i^* F` is an isomorphism. -/
 theorem isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (F : Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))
@@ -353,7 +331,7 @@ theorem isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl
       _).eq_of_src _ _⟩⟩
   exact isIso_of_isIso_upperStar_of_isCompl i j hij _
 
-/-- Blueprint `lemma-passing-schematic-closure--1`: let `i : Z ⟶ X` be a closed immersion
+/-- Let `i : Z ⟶ X` be a closed immersion
 with quasi-compact open complement `j`. A pro-étale sheaf of modules `F` on `X` lies in the
 essential image of `i_*` if and only if `j^* F = 0`. -/
 theorem lowerStar_essImage_iff_of_isCompl

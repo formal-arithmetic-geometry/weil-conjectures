@@ -10,7 +10,10 @@ import all WeilConjectures.AlgebraicGeometry.SmoothPurity.UnitNormalizedCochainT
 import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! Tensor-model representative rectangles and transport.
-Source: Stacks 03D3, 03EL and 07A4.
+
+## References
+
+* Stacks Project, Tags `03D3`, `03EL`, `07A4`
 -/
 
 @[expose] public noncomputable section
@@ -158,16 +161,7 @@ private theorem model_forward
 
 end
 
-/-- Transport the forward tensor-model rectangle along equal ring maps and exact inverse images.
-Source: Stacks 03D3, 03EL and 07A4.
-
-Proof: invert the ordinary model summand square. Adjunction-unit naturality and
-ordinary pure-tensor normalization identify the inverse chain comparison with the
-unit-normalized forward cochain comparison, by adjunction injectivity and pure
-extensionality on all total summands. Substitute this equality into the derived
-model equation and cancel the invertible model, tensor and localization factors.
-Finally use equality induction on the coefficient map, functor and specified
-adjunction, after which the eqToIso transport is the identity. -/
+/-- Transport the forward tensor-model rectangle along equal ring maps and exact inverse images. -/
 private theorem model_transport {C D : Type c} [Category.{v} C] [Category.{v} D]
   [EssentiallySmall.{max c v r} C] [EssentiallySmall.{max c v r} D]
   (J : GrothendieckTopology C) (K : GrothendieckTopology D)
@@ -249,12 +243,7 @@ private theorem model_transport {C D : Type c} [Category.{v} C] [Category.{v} D]
   exact model_forward J K U R S phi F adjF A B TA TB mu M hiso e ho he
     P Q hP hQ flatP flatQ
 
-/-- The representative rectangle expressed through named presentation wrappers.
-Source: Stacks 03D3, 03EL and 07A4.
-
-Proof: substitute the equal total complexes and derived functor. Each heterogeneous
-model, comparison, localization-factor and cochain-map equality becomes an ordinary
-equality. Substitute them and apply the generic transported model rectangle. -/
+/-- The representative rectangle expressed through named presentation wrappers. -/
 theorem model_transport_named {C D : Type c} [Category.{v} C] [Category.{v} D]
   [EssentiallySmall.{max c v r} C] [EssentiallySmall.{max c v r} D]
   (J : GrothendieckTopology C) (K : GrothendieckTopology D)

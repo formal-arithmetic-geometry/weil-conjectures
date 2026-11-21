@@ -25,8 +25,7 @@ derived functors form a morphism of triangles
 
 natural in the bounded below complex `K` of pro-étale sheaves
 (`AlgebraicGeometry.ProEtale.sectionsWithSupportTrianglePullback`), so that the long exact
-sequence of cohomology with support on the pro-étale site of blueprint
-`thm-pur-with-support-exactness` is functorial in the pair
+sequence of cohomology with support on the pro-étale site is functorial in the pair
 (`AlgebraicGeometry.ProEtale.homology_sectionsWithSupportTrianglePullback_comm`), compatibly with
 composition (`AlgebraicGeometry.ProEtale.sectionsWithSupportTrianglePullback_comp`).
 -/
@@ -408,8 +407,8 @@ lemma sectionsWithSupportPullback_comp :
   ext F
   exact sectionsWithSupportPullbackApp_comp A e i i' h F
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-(functoriality in the pair, for arbitrary morphisms of pairs).
+/-- Functoriality in the pair of the long exact sequence for cohomology with support, for
+arbitrary morphisms of pairs.
 
 For a morphism of schemes `e : X' ⟶ X` and closed immersions `i : Z ⟶ X`, `i' : Z' ⟶ X'` whose
 open complements satisfy `U' ⊆ e⁻¹(U)` (i.e. `e⁻¹(Z) ⊆ Z'`), the pullback maps
@@ -426,8 +425,7 @@ noncomputable def sectionsWithSupportTrianglePullback :
     (openComplementSectionsPullback A e i i' h) (sectionsWithSupportPullback_comp A e i i' h).symm
     (ΓPullback_comp_natTransΓRes A e i i' h).symm
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-(functoriality of the long exact sequence in the pair).
+/-- Functoriality of the long exact sequence for cohomology with support in the pair.
 
 The pullback maps along a morphism of pairs `e : (X', X' ∖ Z') ⟶ (X, X ∖ Z)` commute with all
 the maps of the long exact sequences
@@ -514,8 +512,8 @@ lemma sectionsWithSupportPullback_comp_comp :
 
 attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
 
-/-- Blueprint `thm-pur-with-support-exactness`: Long exact sequence for cohomology with support
-(compatibility of the functoriality in the pair with composition).
+/-- Compatibility of the functoriality in the pair of the long exact sequence for cohomology with
+support with composition.
 
 For morphisms of pairs `e : (X', Z') ⟶ (X, Z)` and `e' : (X'', Z'') ⟶ (X', Z')`, the morphism of
 triangles of cohomology with support along `e' ≫ e` is the composite of the morphisms of

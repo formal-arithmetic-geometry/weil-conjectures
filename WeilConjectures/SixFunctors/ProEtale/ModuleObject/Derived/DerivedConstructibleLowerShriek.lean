@@ -11,10 +11,6 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 /-!
 # Lower shriek on bounded constructible complexes and its ambient compatibility
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-`sk-prop-sf-existence/det-def-sfb-dc-lower-shriek.md`
-(blueprint: proposition-six-operations-dctf--9).
-
 The lower shriek `Rf_!^c = Rp_* ∘ i_!` on bounded constructible complexes, for an arbitrary
 commutative condensed coefficient ring whose derived pushforwards preserve bounded
 constructibility, and the chosen `Rf_! = Rf_!^{c_f}`, are the landed declarations
@@ -58,11 +54,7 @@ lower shriek `R(p_*) ∘ D(i_!)` for the same `c`: `ι_Y ∘ Rf_!^c ≅ R(p_*) �
 Following the proof: with `F = i_!`, `G = Rp_*` the two restrictions, `a : ι_Z F ≅ D(i_!) ι_X`
 and `b : ι_Y G ≅ R(p_*) ι_Z` their inclusion compatibilities, the component at `K` is
 `R(p_*)(a_K) ∘ b_{F K}`; it is a natural isomorphism by pasting `b` (whiskered by `F`) and
-`a` (whiskered by `R(p_*)`), with inverse and naturality those of the pasted isomorphisms.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-`sk-prop-sf-existence/det-def-sfb-dc-lower-shriek.md`, compatibility paragraph
-(blueprint: proposition-six-operations-dctf--9). -/
+`a` (whiskered by `R(p_*)`), with inverse and naturality those of the pasted isomorphisms. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationOfPreservesCompatibility
     {f : X ⟶ Y} (c : Compactification.BoundaryCompactification f.left) :
     boundedConstructibleLowerShriekOfCompactificationOfPreserves Λ ℓ H c ⋙

@@ -29,8 +29,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 /-!
 # Gluing rational constructibility and restricting the exceptional adjunction
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-restriction/
-sk-thm-restriction-glue.md and its proof.
 
 The two restriction functors below retain the objects and maps of the supplied
 compactification functor and its right adjoint. The theorem identifies their Hom
@@ -53,8 +51,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 /-- Restrict the actual compactification composite to bounded constructible objects.
-The membership proof changes neither its objects nor its maps.
-Source: blueprint sk-thm-restriction-glue, paragraph (2). -/
+The membership proof changes neither its objects nor its maps. -/
 noncomputable def restrictionGlueLowerShriek (c : Compactification f)
     (hF : ∀ A, constantModelBoundedConstructible Λ X A →
       constantModelBoundedConstructible Λ Y
@@ -66,8 +63,7 @@ noncomputable def restrictionGlueLowerShriek (c : Compactification f)
     (fun A ↦ hF A.obj A.property)
 
 /-- Restrict the supplied right adjoint, using the full inclusion of Dbc into Loc(Dctf).
-No new exceptional inverse image is chosen.
-Source: blueprint sk-thm-restriction-glue, paragraph (2). -/
+No new exceptional inverse image is chosen. -/
 noncomputable def restrictionGlueUpperShriek
     (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤
       (localizingClosureProEtale Λ X).FullSubcategory)
@@ -246,38 +242,9 @@ private theorem auxiliaryAdjoint
 /-- Finite open covers detect bounded constructibility, and the supplied exceptional
 adjunction restricts to Dbc. The final equality says that its natural Hom bijection is
 exactly the original one, after forgetting the full-subcategory membership proofs.
-The arguments `h`, `G`, and `adj` name the functor and adjunction supplied by
-theorem-existence-exceptional-inverse-image; no preservation of Dbc or inclusion in the localizing
-closure is assumed. The coefficient identification is an isomorphism of condensed ring objects.
-Source: blueprint sk-thm-restriction-glue, clauses (1)--(2).
-
-Proof plan, following the six steps of the DAG:
-1. The standing finite-type schemes are Noetherian (pqf-lem-locnoeth-lft,
-   lem-weil-pbc-qcqs-over-affine). For the given rational coefficient
-   det-def-localizing-closure-ctf-equals-bc gives Dctf = Dbc, hence Dbc lies in
-   definition-localizing-subcategory. For Qbar use the finite-subextension-valued
-   sk-def-sfb-qlbar-condensed ring.
-2. Boundedness: forgetting to abelian sheaves (upperStarObjXIso), a module whose
-   restrictions to a finite cover vanish is zero
-   (lem-pod-finite-qc-proetale-abelian-detection). Exact restriction commutes with
-   cohomology (def-sfb-exact-derived-cohomology-comparison); common bounds are taken
-   over the finite ranges of local bounds, also for an empty index type.
-3. Constructibility of each cohomology module: on each affine open W pull the cover
-   back to W, pull back the local stratifications and finite constant models
-   (lemma-constructible-pullback-stratification,
-   new-unbounded-pullback-finite-constant-local-model) and assemble them with
-   lem-sfb-constructible-zariski-locality, which also gives the global statement.
-4. For K in Dbc, theorem-f-shriek-ell-adic-coefficients (with the projection and closed-immersion
-   adjunctions supplied by theorem-existence-exceptional-inverse-image for
-   proposition-construction-independence-rf-shriek) gives a finite affine chart cover where f^!K is
-   bounded constructible; transport to the open ranges of the charts and apply clause (1).
-5. proposition-construction-independence-rf-shriek preserves Dctf along the boundary
-compactification
-   (definition-compactification-refinement); step 1 identifies Dctf with Dbc.
-6. The inclusions of Dbc into the localizing closures are fully faithful and the
-   squares commute definitionally; CategoryTheory.Adjunction.restrictFullyFaithful
-   gives the restricted adjunction with the original Hom equivalence.
--/
+The arguments `h`, `G`, and `adj` name the functor and adjunction of the exceptional inverse
+image existence theorem; no preservation of Dbc or inclusion in the localizing closure is
+assumed. The coefficient identification is an isomorphism of condensed ring objects. -/
 theorem rationalRestrictionGlue
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) [FiniteDimensional ℚ_[ℓ] E]

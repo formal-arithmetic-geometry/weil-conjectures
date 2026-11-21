@@ -10,10 +10,15 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 import WeilConjectures.AlgebraicGeometry.InverseImageModuleFlat
 
 /-! Flatness preservation for the integral residue pullback.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
 
 The proof is the local flatness argument for inverse image of module sheaves,
-transported across the coefficient pullback isomorphism. -/
+transported across the coefficient pullback isomorphism.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3), Remark 6.8.15.
+- Stacks Project, Tag `05VD`.
+-/
 
 @[expose] public section
 
@@ -33,14 +38,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 coefficients sends flat objects to flat objects. The proof uses the local
 relation criterion for flatness, invariance under extension along the
 coefficient pullback isomorphism, and preservation of colimits by inverse
-image.
-Source: Stacks Project, Tag 05VD, lemma-pullback-flat.
-
-Proof. Restriction along the inverse coefficient isomorphism is naturally
-isomorphic to extension along the coefficient isomorphism. Whisker this
-isomorphism with ambient inverse image on module objects. The resulting functor
-preserves flatness by inverseImageModule_preservesFlat, and flatness is invariant
-under each component of the comparison isomorphism. -/
+image. -/
 theorem integralResidue_pullback_preservesFlat {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat := by
   let G := (f)^*[Ab.{u + 1}]

@@ -12,9 +12,6 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Perfect complexes on the coefficient site
 
-Source: current Weil conjectures blueprint, `chap-Smooth-purity`,
-`sk-lem-sp-tower/def-weil-site-perfect-complex.md`, order 2959.
-
 The same definition applies to every commutative condensed coefficient ring, including
 finite discrete coefficients, integral and rational coefficients, and the finite-subextension
 condensed algebraic closure. Restriction is the exact module pullback applied termwise.

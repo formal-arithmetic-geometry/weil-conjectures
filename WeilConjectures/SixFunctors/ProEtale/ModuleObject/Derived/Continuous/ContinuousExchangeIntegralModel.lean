@@ -541,7 +541,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Integral realization of a continuous E exchange arrow
 
-Source: Bhatt--Scholze, Sections 6.7--6.8.
+## References
+
+* Bhatt--Scholze, Sections 6.7--6.8
+* Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2)
 -/
 
 @[expose] public section
@@ -597,27 +600,7 @@ abbrev continuousExchangeIntegralModelStatement
           (sq.toCommSq.asOver (Spec (.of k)))).app K).hom)
 
 -- Elaborating both bundled coefficient exchange arrows needs the extra budget.
-/-- A continuous E exchange arrow is realized by scalar extension of an integral one.
-Source: Bhatt--Scholze, Lemma 6.8.13 and Proposition 6.8.14(2), with the exchange
-compatibility of `lem-weil-pbc-condensed-e-realization`.
-
-Proof in words. Lemma 6.8.13 gives a constructible O_E lattice for each lisse
- E-cohomology sheaf; it need not be a global lisse integral lattice. Refine the finite
- stratification until the integral lattices have the required finite presentations.
- Extend them across the open and closed pieces, and lift the
- finitely many extension classes after multiplying by powers of ℓ. Bounded truncation
- triangles yield a bounded constructible integral complex M whose derived E scalar
- extension is K. The completed integral realization identifies M with its ordinary
- continuous-coefficient complex. The proved `continuousIntegralFunctions_isLocalization`
- identifies coefficient localization on compact profinite tests. Exact inverse image
- from the point preserves it. Exact scalar localization commutes with inverse image.
- For proper direct image, bounded-below coproduct continuity makes the scalar-localization
- comparison invertible. These comparisons preserve units and counits, and the coherent
- pullback composition comparison. Substitute them into the specified three-factor
- exchange formula. Its image under scalar extension is conjugate to the continuous E
- exchange at the realized object. Naturality transports across its isomorphism to K.
- The two conjugating object comparisons define the asserted isomorphism of arrows.
- No invertibility of either exchange arrow is asserted or used. -/
+/-- A continuous E exchange arrow is realized by scalar extension of an integral one. -/
 theorem continuousExchange_integral_model [IsProper f]
     (sq : IsPullback g' f' f g)
     (K : ProEtale.BoundedConstructible

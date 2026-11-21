@@ -10,8 +10,12 @@ public import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Normalized scalar tensor sections and their adjunction unit
 
-Source: Stacks Project, Tag 03EK. These are proved tensor-section helpers for
+These are proved tensor-section helpers for
 ramified finite pullback, separated to keep individual module compile times small.
+
+## References
+
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +44,7 @@ variable
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)}
     (f : N ⟶ N'), F.map f = eqToHom (h N) ≫
     SheafOfModules.changeOfRingsHom φ N f ≫ eqToHom (h N').symm)
-/-- Section tensor in a functor identified with sheafified scalar extension.
-Source: Stacks 03EK. -/
+/-- Section tensor in a functor identified with sheafified scalar extension. -/
 noncomputable def tensorSection
     (N : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
@@ -49,8 +52,7 @@ noncomputable def tensorSection
   (eqToHom (h N).symm).val.app U
     ((toSheafify J (SheafOfModules.changeOfRingsPresheaf φ N).presheaf).app U
       (s ⊗ₜ[R.obj.obj U, (φ.hom.app U).hom] x))
-/-- Unit tensor sections detect equality of maps out of scalar extension.
-Source: Stacks 03EK. -/
+/-- Unit tensor sections detect equality of maps out of scalar extension. -/
 theorem tensorSection_ext
     (N : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))
@@ -69,8 +71,7 @@ theorem tensorSection_ext
   exact he U x
 
 include hm in
-/-- Naturality of section tensors for a specified scalar-extension functor.
-Source: Stacks 03EK. -/
+/-- Naturality of section tensors for a specified scalar-extension functor. -/
 theorem tensorSection_map
     {N N' : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)}
@@ -100,8 +101,7 @@ theorem tensorSection_map
   exact hn.symm
 
 include hm in
-/-- The specified tensor functor is naturally isomorphic to the standard extension functor.
-Source: Stacks 03EK. -/
+/-- The specified tensor functor is naturally isomorphic to the standard extension functor. -/
 noncomputable def tensorPresentation [EssentiallySmall.{r} C] :
     F ≅ CategoryTheory.CochainPullback.extensionFunctor φ :=
   NatIso.ofComponents (fun N ↦ eqToIso (h N)) (by
@@ -109,8 +109,7 @@ noncomputable def tensorPresentation [EssentiallySmall.{r} C] :
     rw [hm]
     simp [CategoryTheory.CochainPullback.extensionFunctor])
 
-/-- The adjunction transported along a tensor presentation has the normalized unit.
-Source: Stacks 03EK. -/
+/-- The adjunction transported along a tensor presentation has the normalized unit. -/
 theorem tensorAdjunction_unit [EssentiallySmall.{r} C]
     (N : SheafOfModules.{r}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -138,8 +137,7 @@ end TensorProof
 
 attribute [local irreducible] HasDerivedCategory.standard scalarWitness
 
-/-- Scalar tensor sections are natural in the module.
-Source: Stacks 03EK. -/
+/-- Scalar tensor sections are natural in the module. -/
 theorem scalar_map_tensor {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S)
     {M N : Mod R} (f : M ⟶ N) (U : W.ProEtᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
@@ -151,8 +149,7 @@ theorem scalar_map_tensor {W : Scheme.{t}}
       (fun {M N : Mod.{t, u} R} (a : M ⟶ N) ↦
         (scalarWitness.{t, u} c).choose_spec.choose_spec.choose a) f U s x
 
-/-- The scalar adjunction transported through its actual sheafified tensor presentation.
-Source: Stacks 03EK. -/
+/-- The scalar adjunction transported through its actual sheafified tensor presentation. -/
 @[irreducible] noncomputable def scalarAdjunction {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S) :
     scalar.{t, u} c ⊣ SheafOfModules.restrictScalars
@@ -163,15 +160,7 @@ Source: Stacks 03EK. -/
       (fun {A B : Mod.{t, u} R} (f : A ⟶ B) ↦
         (scalarWitness.{t, u} c).choose_spec.choose_spec.choose f)).symm
 
-/-- The scalar adjunction unit is the section tensor with coefficient one.
-Source: Stacks 03EK.
-
-Proof: transport the extension-of-scalars adjunction along the object and map
-identifications of the specified scalar functor with sheafified balanced tensor.
-The sheafification adjunction unit sends x to the image of 1 tensor x. Applying
-the transported object identification gives the asserted normalized section.
-The same tensor presentation proves map naturality, and its universal property
-makes maps out of it equal when they agree on these unit tensors. -/
+/-- The scalar adjunction unit is the section tensor with coefficient one. -/
 theorem scalarAdjunction_unit {W : Scheme.{t}}
     {R S : Sheaf (Scheme.ProEt.topology W) CommRingCat.{max u (t + 1)}} (c : R ⟶ S)
     (M : Mod.{t, u} R) (U : W.ProEtᵒᵖ) (x : M.val.obj U) :

@@ -19,8 +19,7 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantStrat
 
 /-! # Proper closed exchange for constructible sheaves in degree zero
 
-Source: blueprint latest, compactification coherence, refinement (2), closed-complement
-calculation. This is the sheaf case of the closed lifted-test argument; no Tor bound
+This is the sheaf case of the closed lifted-test argument; no Tor bound
 is imposed on the sheaf.
 -/
 

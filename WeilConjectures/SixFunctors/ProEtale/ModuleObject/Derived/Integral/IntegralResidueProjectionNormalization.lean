@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 
 /-! # Projection normalization of integral residue comparisons
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3), and Remark 6.8.15.
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3), Remark 6.8.15.
 -/
 
 set_option backward.defeqAttrib.useBackward true
@@ -150,38 +152,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 attribute [local instance 2000] residueExchangeIntegralDerivedMonoidal
 
-/-- Coherent pull comparisons identify the restricted push mate with the projection map.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15, and associativity of derived tensor.
-
-Proof. The inverse image on sheaves preserves the coequalizers of balanced tensor pairs.
-Its strong monoidal comparison therefore induces the relative tensor comparison on
-module objects, and the coefficient-pullback isomorphism identifies their base rings.
-The unit and associativity diagrams follow after precomposing with the epimorphisms
-from the balanced tensor presentations. Pullback preserves flat modules and colimits;
-apply the functorial flat resolutions to obtain resolutions with K-flat pullback.
-The derived tensor comparison of these resolutions is invertible, and its unit and
-associativity diagrams follow by uniqueness of derived comparisons. This gives m.
-
-Resolve the input of scalar extension by K-flat modules. Associativity of relative tensor
-and the coefficient-pullback isomorphism give the pull comparison. The associativity
-pentagon and the coefficient-map composition equations give its composition law with
-leftDerivedUpperStarComp, so the comparisons form c. The canonical balanced tensor
-counit is a left-derived presentation. Uniqueness of left derivation and symmetry
-identify restricted reduction with right tensor by the residue regular module.
-This gives s. Derived scalar
-extension is left adjoint to exact scalar restriction. Thus the two composite functors
-in c.pull are left adjoints, and conjugating c.pull gives an isomorphism of their right
-adjoints, Rf_* followed by restriction and restriction followed by Rf_*. Evaluate it at
-reduction of K. Combine it with the tensor identification on X and the coefficient
-pullback isomorphism f^* A_Y ≅ A_X to obtain e on X. The target identification is the
-composite of c.restrictPushIso at reduction of K with Rf_* applied to e. To identify the
-morphism, transpose under the integral pull-push adjunction. The counit identity for
-c.push, tensor associativity, and the coefficient-pullback isomorphism reduce both
-sides to the oplax tensor comparison followed by the counit tensored with the identity.
-This is the defining transpose of rightAdjointProjectionMap. No dualizability or
-invertibility of the projection map is used. Empty schemes and zero complexes are
-included: all comparisons remain the canonical ones. -/
+/-- Coherent pull comparisons identify the restricted push mate with the projection map. -/
 theorem integralResidue_projection_normalization
     (hTensor : ∀ T : Scheme.{u},
       ∃ ε : DerivedCategory.Qh ⋙ (integralReduction ℓ E T ⋙

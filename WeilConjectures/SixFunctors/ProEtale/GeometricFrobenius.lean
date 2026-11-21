@@ -199,23 +199,10 @@ lemma ProEtale.conjugateEquiv_openImmersionRestrictionFrobeniusIso_inv :
   exact (congrArg (· ≫ _) (congrArg (· ≫ _) (Category.id_comp _))).trans
     (Category.assoc _ _ _)
 
-/-- The comparison `φ̄_! ⟶ φ̄_*` commutes with the Frobenius exchange isomorphisms
-`ProEtale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso` (`e_!`) and
-`ProEtale.lowerStarGeometricFiberMapCompFrobeniusIso` (`e_*`): the square
-
-```
-                  Fr_Y^* (can)
-  Fr_Y^* ∘ φ̄_! ────────────────▶ Fr_Y^* ∘ φ̄_*
-       │                              │
-   e_! │                              │ e_*
-       ▼                              ▼
-  φ̄_! ∘ Fr_X^* ────────────────▶ φ̄_* ∘ Fr_X^*
-                  can Fr_X^*
-```
-
-commutes, where `can` is `AlgebraicGeometry.ProEtale.openImmersionLowerShriekToLowerStar`. Both
-composites are adjoint, under `φ̄_! ⊣ φ̄^*`, to the inverse of the counit of `φ̄^* ⊣ φ̄_*`
-transported along the Frobenii. -/
+/-- The comparison `φ̄_! ⟶ φ̄_*`
+(`AlgebraicGeometry.ProEtale.openImmersionLowerShriekToLowerStar`) commutes with the Frobenius
+exchange isomorphisms `ProEtale.openImmersionLowerShriekGeometricFiberMapCompFrobeniusIso` and
+`ProEtale.lowerStarGeometricFiberMapCompFrobeniusIso`. -/
 lemma ProEtale.openImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso :
     Functor.whiskerRight
         (ProEtale.openImmersionLowerShriekToLowerStar A (Scheme.Hom.geometricFiberMap φ h))

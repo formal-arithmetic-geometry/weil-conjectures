@@ -333,14 +333,7 @@ variable [Abelian.HasFunctorialFlatResolution A]
 
 namespace ProEtale
 
-/-- Blueprint `prose-03-02`: Derived direct image; and blueprint
-`prose-03-02`, the derived pullback. The derived direct image
-`Rg_* = R((g)_*[A])` (the generic total right derived functor, computed by K-injective
-resolutions) and the derived pullback `Lg^* = L((g)^*[A])` (computed by K-flat resolutions,
-isomorphic to `D((g)^*[A])` by `leftDerivedUpperStarIsoMapDerivedCategory`) have no
-definitions of their own; this is their adjunction.
-
-The derived adjunction `Lg^* ⊣ Rg_*` between the total derived functors of the
+/-- The derived adjunction `Lg^* ⊣ Rg_*` between the total derived functors of the
 pullback and the pushforward along an arbitrary morphism `g : Z ⟶ Y` on the unbounded
 derived categories of pro-étale sheaves, induced by the adjunction `g^* ⊣ g_*`. -/
 noncomputable def derivedUpperStarLowerStarAdjunction :
@@ -368,10 +361,7 @@ noncomputable def leftDerivedUpperStarSquareIso (sq : CommSq g' f' f g) :
   (leftDerivedUpperStarComp A f' g).symm ≪≫ leftDerivedUpperStarCongr A sq.w.symm ≪≫
     leftDerivedUpperStarComp A g' f
 
-/-- Blueprint `definition-pro-etale-base-change-map--1`: Exchange and projection transformations,
-the direct-image exchange `Ex_*`.
-
-The derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*` of a commutative square
+/-- The derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*` of a commutative square
 `g' ≫ f = f' ≫ g` of schemes,
 
 ```

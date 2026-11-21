@@ -26,7 +26,9 @@ import Mathlib.CategoryTheory.Abelian.ShortExact
 
 /-! # Reduction preserves triangulated properties after restriction
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3), the two-term free resolution of O_E/ℓ.
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3).
 -/
 
 @[expose] public section
@@ -110,20 +112,7 @@ private theorem reduction_mem_aux
     (P.prop_of_iso eL.symm hK) (P.prop_of_iso eL.symm hK)
 
 /-- Any triangulated property of an integral complex also holds for its derived reduction
-regarded as an integral complex by restriction of scalars.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(3), using the two-term free coefficient resolution.
-
-Proof. Pull the short exact integral coefficient sequence to X; exact monoidal inverse
-image identifies it with the short exact sequence from multiplication by ℓ on the regular
-integral module to the restricted residue regular module. Choose a K-flat representative
-P of K. The assumed derived tensor counit is invertible on P, by the K-flat criterion.
-Tensor symmetry and the comparison between derived tensor and termwise tensor on P
-identify restricted reduction with P tensored with the residue module in degree zero.
-The two-term coefficient resolution identifies this with the cone of multiplication by
-ℓ on P. The mapping cone triangle is distinguished. Its first two objects are isomorphic
-to K, so triangulated closure and isomorphism invariance give the assertion. This works
-for unbounded K, for the zero complex, and on the empty scheme. -/
+regarded as an integral complex by restriction of scalars. -/
 theorem integralReduction_restricted_mem
     (X : Scheme.{u})
     (P : ObjectProperty (DerivedCategory

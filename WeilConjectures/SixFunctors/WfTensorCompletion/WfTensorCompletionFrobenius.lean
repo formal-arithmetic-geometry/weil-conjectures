@@ -13,9 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.Weil.WeilTensorProduct
 /-!
 # Frobenius compatibility of ordinary and completed tensor
 
-Source: literature/blueprint/main-20261015/blueprint/sec-six-functors/
-sk-rem-sf-pf-done/fix-prop-projection-formula.proof.md, step 13.
-
 ## Main statements
 
 * `WfTensorCompletion.integral`: completeness, constructibility and unit naturality.
@@ -49,48 +46,32 @@ variable (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
   [hsep : IsSeparated X₀.hom] [hft : LocallyOfFiniteType X₀.hom]
   [hqc : QuasiCompact X₀.hom] (E : Padic.FiniteCoefficientFields c.l c.Qbar)
 
-/-- The specified completed-coefficient integral category on the geometric fibre.
-Source: blueprint step 13. -/
+/-- The specified completed-coefficient integral category on the geometric fibre. -/
 abbrev Integral := PbcBoundedConstructibleComplete (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E)
 
-/-- The uniformizer is the single Koszul generator; this is the existing completion functor.
-Source: blueprint step 13. -/
+/-- The uniformizer is the single Koszul generator; this is the existing completion functor. -/
 abbrev completion := wfCompletion (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) 1
   (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E)
 
-/-- The existing completion unit, retaining its actual mapping-fibre normalization.
-Source: blueprint step 13. -/
+/-- The existing completion unit, retaining its actual mapping-fibre normalization. -/
 abbrev unit := wfCompletionUnit (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) 1
   (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E) (wfUniformizer_generates D c E)
 
-/-- The ordinary ambient derived tensor on the constructible inputs, with no completion.
-Source: blueprint step 13. -/
+/-- The ordinary ambient derived tensor on the constructible inputs, with no completion. -/
 abbrev ordinaryAmbient : Integral D c X₀ E × Integral D c X₀ E ⥤
     PbcCompletedDerived (D.geometricFiber X₀).left (pbcStageDatum.{u} c.l c.Qbar E) :=
   ((ObjectProperty.ι _).prod (ObjectProperty.ι _)) ⋙
     wfOrdinaryDerivedTensor (D.geometricFiber X₀).left (pbcStageDatum.{u} c.l c.Qbar E)
 
-/-- The completed ambient tensor is ordinary tensor followed by the published reflector.
-Source: blueprint step 13. -/
+/-- The completed ambient tensor is ordinary tensor followed by the published reflector. -/
 abbrev completedAmbient := ordinaryAmbient D c X₀ E ⋙ completion D c X₀ E ⋙
   ObjectProperty.ι _
 
 include hsep hft hqc in
-/-- The canonical quotient/Koszul comparison is invertible and natural on integral inputs.
-Source: blueprint step 13.
-Proof: use integral-stratified-perfect-characterization to identify both integral
-conventions inside the same completed-coefficient derived category. Finite type over
-k makes the fibre noetherian and finite-dimensional; separation gives qcqs and l≠p
-makes l invertible. Constructible-tensor-completion gives completeness and an invertible
-quotient-tower unit. The integer ring is a Noetherian DVR with finite residue field;
-its positive quotients are finite and have the two-term free uniformizer resolution.
-Constant-completion-equivalence therefore identifies the quotient and Koszul units.
-Integral-operations-preserve-constructible gives bounded constructibility of the completed
-tensor, hence also of the ordinary tensor. Finally the reflector's Hom bijection identifies
-its morphism action and makes its unit natural in every pair of integral arrows. -/
+/-- The canonical quotient/Koszul comparison is invertible and natural on integral inputs. -/
 theorem integral :
     (∀ MN : Integral D c X₀ E × Integral D c X₀ E,
       PbcIsBoundedConstructibleComplete (D.geometricFiber X₀).left
@@ -109,31 +90,26 @@ theorem integral :
   · intro MN PQ f
     exact (wfConstructibleTensorKoszulUnit D c X₀ E).2 MN.1 PQ.1 MN.2 PQ.2 f.1 f.2
 
-/-- Restriction of ordinary tensor to the full integral constructible category.
-Source: blueprint step 13. -/
+/-- Restriction of ordinary tensor to the full integral constructible category. -/
 def ordinary : Integral D c X₀ E × Integral D c X₀ E ⥤ Integral D c X₀ E :=
   ObjectProperty.lift _ (ordinaryAmbient D c X₀ E)
     (fun MN ↦ (integral D c X₀ E).1 MN |>.1)
 
-/-- Restriction of completed tensor to the same full integral constructible category.
-Source: blueprint step 13. -/
+/-- Restriction of completed tensor to the same full integral constructible category. -/
 def completed : Integral D c X₀ E × Integral D c X₀ E ⥤ Integral D c X₀ E :=
   ObjectProperty.lift _ (completedAmbient D c X₀ E)
     (fun MN ↦ (integral D c X₀ E).1 MN |>.2.1)
 
-/-- The actual completion unit lifted through the full constructible inclusion.
-Source: blueprint step 13. -/
+/-- The actual completion unit lifted through the full constructible inclusion. -/
 def chi : ordinary D c X₀ E ⟶ completed D c X₀ E where
   app MN := ObjectProperty.homMk (unit D c X₀ E ((ordinaryAmbient D c X₀ E).obj MN))
   naturality MN PQ f := ObjectProperty.hom_ext _ ((integral D c X₀ E).2 MN PQ f)
 
-/-- The integral Frobenius is the existing exact coefficient transport.
-Source: blueprint step 13. -/
+/-- The integral Frobenius is the existing exact coefficient transport. -/
 abbrev pullback := pbcIsoIntegralPullback (D.geometricFrobenius X₀).asIso.hom
   (pbcStageDatum.{u} c.l c.Qbar E)
 
-/-- The ordinary pullback/tensor comparison restricted through the full inclusion.
-Source: blueprint step 13. -/
+/-- The ordinary pullback/tensor comparison restricted through the full inclusion. -/
 def ordinaryMu (M N : Integral D c X₀ E) :
     (pullback D c X₀ E).obj ((ordinary D c X₀ E).obj (M, N)) ≅
       (ordinary D c X₀ E).obj ((pullback D c X₀ E).obj M, (pullback D c X₀ E).obj N) :=
@@ -145,8 +121,7 @@ def ordinaryMu (M N : Integral D c X₀ E) :
       (wfTensorModel _ (pbcStageDatum.{u} c.l c.Qbar E))
       (wfTensorModel _ (pbcStageDatum.{u} c.l c.Qbar E))).app (M.obj, N.obj))
 
-/-- The existing completed comparison on the same inputs, restricted to constructibles.
-Source: blueprint step 13. -/
+/-- The existing completed comparison on the same inputs, restricted to constructibles. -/
 def completedMu (M N : Integral D c X₀ E) :
     (pullback D c X₀ E).obj ((completed D c X₀ E).obj (M, N)) ≅
       (completed D c X₀ E).obj ((pullback D c X₀ E).obj M, (pullback D c X₀ E).obj N) :=
@@ -163,19 +138,16 @@ def completedMu (M N : Integral D c X₀ E) :
           (fun _ : Fin 1 ↦ pbcStageUniformizer.{u} c.l c.Qbar E)
           (wfUniformizer_generates D c E)).obj N)))
 
-/-- The actual rational constructible coefficient stage; its objects remain integral objects.
-Source: blueprint step 13. -/
+/-- The actual rational constructible coefficient stage; its objects remain integral objects. -/
 abbrev Rational := PbcRationalCategory (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
-/-- The actual integral-to-rational localization, tensoring each arrow with one.
-Source: blueprint step 13. -/
+/-- The actual integral-to-rational localization, tensoring each arrow with one. -/
 abbrev localization := pbcRationalization (D.geometricFiber X₀).left
   (pbcStageDatum.{u} c.l c.Qbar E) (pbcStageUniformizer.{u} c.l c.Qbar E)
 
 /-- A comparison package whose normalization below fixes all its maps and objects.
-The tensor functors land in constructibles, so its fixed pairs are actual Weil objects.
-Source: blueprint step 13. -/
+The tensor functors land in constructibles, so its fixed pairs are actual Weil objects. -/
 structure RationalComparison where
   ordinary : Rational D c X₀ E × Rational D c X₀ E ⥤ Rational D c X₀ E
   completed : Rational D c X₀ E × Rational D c X₀ E ⥤ Rational D c X₀ E
@@ -188,8 +160,7 @@ structure RationalComparison where
 /-- Normalization on unchanged integral objects, pure tensors, units and pullback comparisons.
 `HEq` retains the exact object equalities while prescribing the arrows, and does not
 replace the maps by arbitrary isomorphisms. The localization equalities also fix all
-denominators by functoriality.
-Source: blueprint step 13. -/
+denominators by functoriality. -/
 def RationalComparison.Normalized (R : RationalComparison D c X₀ E) : Prop :=
   ((localization D c X₀ E).prod (localization D c X₀ E)) ⋙ R.ordinary =
       WfTensorCompletion.ordinary D c X₀ E ⋙ localization D c X₀ E ∧

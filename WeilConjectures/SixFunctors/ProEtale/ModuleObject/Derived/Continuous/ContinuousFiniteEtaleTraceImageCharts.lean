@@ -18,7 +18,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Continuous finite lattice sum charts of the integral trace image
 
-Source: blueprint, stratified lattice proof, "Pushing down by the trace".
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -110,35 +112,7 @@ private theorem presentation_of_range
     rw [(f.val.app (op B)).hom.map_smul, c.smul, he]
 
 /-- The integral trace image has actual continuous-function charts for finite sums
-of full algebraic lattices. This is a chart computation, without a freeness assertion.
-Source: blueprint, stratified lattice proof, "Pushing down by the trace";
-Bhatt--Scholze, Section 6.8.
-
-Proof. Split p over etale neighbourhoods and trivialize P further pro-etale locally.
-Use the continuous module encoding, its restriction comparison and its scalar
-extension comparison to regard the sheet restrictions of M as embedded integral
-lattice pairs in the fixed free rational module. These embeddings are monic:
-locally M is finite free, so its scalar-extension unit is a finite sum of the
-injective inclusion of continuous integral scalar functions into rational ones;
-compose with e and descend monicity. The lattice-class sheaf theorem
-identifies their classes with sections of the constant lattice-coset sheaf. There
-are finitely many sheets, so choose a common covering refinement on which all
-these sections come from fixed algebraic full lattices. Its normalized class
-presentation identifies their actual embedded images on every further slice;
-equality of their abstract isomorphism classes alone would not suffice.
-Surjectivity makes the sheet set nonempty on every nonempty chart. The sheet-sum
-formula for the supplied trace identifies its integral image with the sheaf sum
-of these embedded sheet lattices, by finite_etale_trace_image. Exact inverse
-image and the coefficient equivalences preserve the categorical image. The
-continuous lattice sum theorem identifies the sheaf sum with continuous functions
-into the algebraic sum: its continuous linear section lifts every function to a
-tuple of sheet functions. Thus the sectionwise equivalences are additive,
-restriction-compatible, and respect the actual continuous scalar action, as
-required by ContinuousFunctionPresentation. Transport the coefficient subring
-from Padic.coefficientExtensionIntegers to continuousIntegers using their proved
-equality. Bind all refinements to obtain the displayed scheme cover. Empty
-members may be discarded; if X is empty use the empty cover. Rank zero uses
-zero lattices with their empty bases and the same formulas. -/
+of full algebraic lattices. This is a chart computation, without a freeness assertion. -/
 theorem continuousFiniteEtaleTrace_image_charts
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

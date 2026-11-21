@@ -18,7 +18,13 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerTransiti
 
 /-! # Signed interchange in the strict finite tensor tower
 
-Source: Stacks 03EL, 06YL, 07A4 and 0941. -/
+## References
+
+* [Stacks, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks, Tag 06YL](https://stacks.math.columbia.edu/tag/06YL)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,8 +42,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Restrict the coherent chain braiding to its actual strict quotient tower and
 transport through the fixed finite tensor comparisons. It is defined before
-completion and does not use any ordinary-to-completed augmentation.
-Source: Stacks 06YL, 07A4, 0941. -/
+completion and does not use any ordinary-to-completed augmentation. -/
 def strictTensorSignedSwap
     (P Q : CochainComplex (integralTowerModules l E X) ℤ) :
     (integralOperationsTensorTowerFunctor l E X).obj (P, Q) ⟶
@@ -184,17 +189,7 @@ attribute [local irreducible] IntegralAmbient.tensorTowerIso
 -- The generator comparison unfolds the sheafified tensor tower at every level.
 /-- At one finite quotient, scalar extension of a signed chain map agrees with
 interchange of the two quotient tensor factors. This assertion concerns only
-finite quotient complexes, without a mapping fibre or derived localization.
-
-Source: Stacks 03EL, 06YL and 07A4; blueprint signed transposition paragraph.
-
-Proof: the normalized balanced-tensor comparison sends the quotient generator
-of a homogeneous tensor x tensor y with coefficient a to (a tensor x) tensor
-(1 tensor y). The coherent signed swap interchanges these factors and multiplies
-by (-1)^(ij). Moving the degree-zero coefficient a between the two factors by
-balancedness gives exactly the image of the signed ordinary generator. The two
-maps agree on all such generators; sheafification and the direct-sum summand
-inclusions detect equality. This also applies to zero sections and an empty site. -/
+finite quotient complexes, without a mapping fibre or derived localization. -/
 theorem tensor_tower_signed_coordinate
     (P Q : CochainComplex (integralTowerModules l E X) ℤ)
     (s : (constructibleTensorTotal l E X).obj (P, Q) ⟶

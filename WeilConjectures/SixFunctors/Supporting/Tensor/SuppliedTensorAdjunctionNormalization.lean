@@ -123,7 +123,9 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Normalizing the scalar-extension adjunction for a supplied direct image
 
-Source: Stacks Project, Modules on Sites, Tag 03D7.
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
 -/
 
 @[expose] public noncomputable section
@@ -217,16 +219,7 @@ private theorem suppliedTensor_mate_linear_iff
 
 -- Restriction of the geometric Hom bijection compares the additive and scalar operations.
 /-- Scalar extension is adjoint to the supplied module direct image, with the underlying
-Hom bijection fixed by the canonical insertion.
-Source: Stacks Project, Modules on Sites, Tag 03D7.
-
-Proof: the geometric sheaf Hom bijection identifies additive and scalar-linear maps
-on both sides, using the structural ring-map equality and the supplied direct-image
-action. Restrict that bijection to module morphisms and compose with the
-extension/restriction-of-scalars adjunction. Naturality gives an adjunction.
-Its Hom bijection on underlying sheaves is the geometric mate after insertion of
-one into the tensor factor: both the scalar-adjunction unit and the given q have
-this sectionwise formula. -/
+Hom bijection fixed by the canonical insertion. -/
 private theorem privateSuppliedTensorAdjunction_normalized
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
@@ -324,13 +317,7 @@ private theorem privateSuppliedTensorAdjunction_normalized
 
 -- Transporting the scalar-extension presentation uses dependent functor equalities.
 /-- The scalar-extension normalization is unchanged by a specified presentation of
-its objects and maps.
-Source: Stacks Project, Modules on Sites, Tag 03D7.
-
-Proof: identify the supplied pullback with the literal scalar-extension functor
-using its object and map equations. Transport the normalized adjunction through
-this natural isomorphism. Both insertion maps send a section to one tensor that
-section; the object identification therefore carries one insertion to the other. -/
+its objects and maps. -/
 theorem suppliedTensorAdjunction_normalized
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

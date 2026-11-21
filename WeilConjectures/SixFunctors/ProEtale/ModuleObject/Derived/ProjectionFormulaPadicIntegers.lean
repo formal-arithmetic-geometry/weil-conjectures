@@ -21,9 +21,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 
 Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E` and residue field
 `𝔽_E`, and let `p : X ⟶ Y` be a proper morphism of separated `k`-schemes of finite type. This file
-proves the projection formula of blueprint `proposition-proper-direct-image-constructible-complexes`
-(3): the projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism for bounded
-constructible `𝒪_E`-complexes `K` and `M`
+proves the projection formula: the projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an
+isomorphism for bounded constructible `𝒪_E`-complexes `K` and `M`
 (`ProEtale.CondensedRing.isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible`).
 
 Both sides are bounded constructible, so by derived Nakayama

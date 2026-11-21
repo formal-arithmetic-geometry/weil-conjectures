@@ -16,8 +16,6 @@ import all WeilConjectures.AlgebraicGeometry.Finite.Comparison.FiniteComparisonP
 import all WeilConjectures.AlgebraicGeometry.InternalModuleAbEquivalence
 
 /-! # Finite scalar realization of the canonical locally closed extension
-
-Source: blueprint scalar-six-ctf (1), comparison of locally closed extensions.
 -/
 
 set_option autoImplicit false
@@ -215,22 +213,7 @@ theorem preservesFiniteColimits_lowerStar_imageι {S X : Scheme.{u}} [IsNoetheri
 
 /-- On a sheaf in degree zero, finite scalar realization commutes with the canonical
 locally closed extension through the scheme-theoretic image.
-
-Source: blueprint scalar-six-ctf (1), ordinary/internal compactification comparison and
-coefficient-isomorphism transport.
-
-Construction: Factor a through its scheme-theoretic image as an open immersion followed
-by its closed image inclusion. The sheaf-level étale/pro-étale direct-image comparison
-and open-extension comparison identify the two ordinary extensions. The specified
-finite coefficient realization is isomorphic to the canonical module encoding;
-restriction compatibility gives its closed-pushforward comparison, while pullback
-compatibility and uniqueness of left adjoints give its open-extension comparison.
-The two coefficient-restriction isomorphisms transport this identification along e.
-Thus the heart realization commutes with the specified extension. Each of its three
-exact functors commutes with the degree-zero single functor. Finally the closed
-internal pushforward is exact by coefficientHeart_locallyClosedExtension, so its
-right derived functor also agrees with the single functor on this input. Composing
-these isomorphisms gives the result. Zero rings and empty strata need no exclusions. -/
+-/
 def finiteScalarRealizationExtensionIso
     {k : Type u} [Field k] (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]

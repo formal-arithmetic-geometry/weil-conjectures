@@ -45,7 +45,13 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyP
 public import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitBallRingObj.FiniteDiscreteCoefficient
 
-/-! # Canonical comparisons for integral coefficient localization. -/
+/-! # Canonical comparisons for integral coefficient localization.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14
+* Bhatt--Scholze, Remark 6.8.15
+-/
 
 @[expose] public section
 
@@ -62,8 +68,7 @@ section General
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- Exact integral localization restricted to bounded constructible objects.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14. -/
+/-- Exact integral localization restricted to bounded constructible objects. -/
 noncomputable def integralScalarConstructible (X : Scheme.{u}) :
     integralConstructible ℓ E X ⥤
       ProEtale.BoundedConstructible (condensedRingObj (Profinite.continuousMapRingObj E) X) :=
@@ -95,8 +100,7 @@ variable {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
   [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
 
 /-- The canonical pullback comparison restricted to bounded constructible objects, in the
-orientation `T_T l_{h,O} ≅ l_{h,E} T_U`. Source: ChangeOfCoefficients.lean, `derivedPullIso`;
-Bhatt--Scholze, Remark 6.8.15. -/
+orientation `T_T l_{h,O} ≅ l_{h,E} T_U`. -/
 noncomputable def integralConstructiblePullIso (K : integralConstructible ℓ E U) :
     (integralScalarConstructible ℓ E T).obj
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (h.asOver (Spec (.of k)))).obj K) ≅
@@ -106,8 +110,7 @@ noncomputable def integralConstructiblePullIso (K : integralConstructible ℓ E 
   ObjectProperty.isoMk _
     ((derivedPullIso (integralScalarMap ℓ E) h).app K.obj)
 
-/-- Forward component of the canonical pull comparison, kept as a named morphism.
-Source: Bhatt--Scholze, Remark 6.8.15; derivedPullIso. -/
+/-- Forward component of the canonical pull comparison, kept as a named morphism. -/
 noncomputable def integralConstructiblePullHom (K : integralConstructible ℓ E U) :=
   (integralConstructiblePullIso ℓ E k h K).hom
 
@@ -128,9 +131,7 @@ variable {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
   [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))]
   [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
 
-/-- The specified pushforward comparison restricted to bounded constructible objects.
-Source: ChangeOfCoefficients.lean, `derivedPushHom`, the mate of restriction/pushforward;
-Bhatt--Scholze, Remark 6.8.15. -/
+/-- The specified pushforward comparison restricted to bounded constructible objects. -/
 noncomputable def integralConstructiblePushHom
     (K : integralConstructible ℓ E T) :
     (integralScalarConstructible ℓ E U).obj
@@ -161,7 +162,7 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 /-- The specified source comparison `S_K`: first the pull comparison for `g`, then the
-pullback of the push comparison for `f`. Source: Bhatt--Scholze, Remark 6.8.15. -/
+pullback of the push comparison for `f`. -/
 noncomputable def integralConstructibleSourceHom (K : integralConstructible ℓ E X) :
     (integralScalarConstructible ℓ E Y').obj
         ((boundedConstructibleUpperStar (integralCoeff ℓ E) ℓ (g.asOver (Spec (.of k)))).obj
@@ -180,7 +181,7 @@ noncomputable def integralConstructibleSourceHom (K : integralConstructible ℓ 
       (integralConstructiblePushHom ℓ E k f K)
 
 /-- The specified target comparison `U_K`: first the push comparison for `f'`, then the
-pushforward of the pull comparison for `g'`. Source: Bhatt--Scholze, Remark 6.8.15. -/
+pushforward of the pull comparison for `g'`. -/
 noncomputable def integralConstructibleTargetHom (K : integralConstructible ℓ E X) :
     (integralScalarConstructible ℓ E Y').obj
         ((UnitBallRingObj.boundedConstructibleLowerStar ℓ (continuousIntegers ℓ E)

@@ -175,16 +175,28 @@ import all Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Normalized open-extension Roos comparison
 
-Source: Stacks Project, proetale.tex, Tag 09BP (lemma-j-shriek-limits), and the
-normalized open-factor argument of the six-functors blueprint.
-
 The open site is presented as the slice at U in X.ProEt, exactly as in
 ProEt.weaklyEtale_localization. Its coefficient sheaf is the restriction of B_X;
 sf_clopen_coefficient_comparison identifies it with B_U, preserving all projections.
 Thus the extension below is the recorded ringed-slice extension, not an arbitrary
-functor. The integer n indexes the positive level n+1. The coefficient universe
+functor.
+
+## Implementation details
+
+The integer n indexes the positive level n+1. The coefficient universe
 max u (t+1) contains the site; no equality between t and u is imposed.
+
+## References
+
+* [Stacks, Tag 09BP](https://stacks.math.columbia.edu/tag/09BP)
+* [Stacks, Tag 00XZ](https://stacks.math.columbia.edu/tag/00XZ)
+* [Stacks, Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
+* [Stacks, Tag 03DJ](https://stacks.math.columbia.edu/tag/03DJ)
+* [Stacks, Tag 01T6](https://stacks.math.columbia.edu/tag/01T6)
+* [Stacks, Tag 01OY](https://stacks.math.columbia.edu/tag/01OY)
+* [Stacks, Tag 0947](https://stacks.math.columbia.edu/tag/0947)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -202,15 +214,13 @@ universe t u wA wB
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 namespace WeilConjectures.SfOpenRoos
 
-/-- Canonical sheafification on the open slice in the fixed module universe.
-Source: Stacks 00XZ. -/
+/-- Canonical sheafification on the open slice in the fixed module universe. -/
 instance sliceAbSheafify (X : Scheme.{t}) (U : X.ProEt) :
     HasSheafify ((Scheme.ProEt.topology X).over U) AddCommGrpCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} (Over U) := essentiallySmallSelf _
   hasSheafifyEssentiallySmallSite _ _
 
-/-- The canonical local-bijection description of sheafification on the open slice.
-Source: Stacks 00XZ. -/
+/-- The canonical local-bijection description of sheafification on the open slice. -/
 instance sliceAbLocallyBijective (X : Scheme.{t}) (U : X.ProEt) :
     ((Scheme.ProEt.topology X).over U).WEqualsLocallyBijective
       AddCommGrpCat.{max u (t + 1)} :=
@@ -220,42 +230,35 @@ instance sliceAbLocallyBijective (X : Scheme.{t}) (U : X.ProEt) :
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{t}) (U : X.ProEt)
 
-/-- The ambient modules over the actual completed ring sheaf.
-Source: Stacks 09BP. -/
+/-- The ambient modules over the actual completed ring sheaf. -/
 abbrev modulesX :=
   ringedSiteModules.{max u (t + 1)} (completedIntegralCoefficientSheafUnrestricted l E X)
 
 /-- The open module category in its ringed-slice presentation. The coefficient
-comparison preserves every finite quotient projection.
-Source: Stacks 09BP, 00XZ. -/
+comparison preserves every finite quotient projection. -/
 abbrev modulesU :=
   ringedSiteModules.{max u (t + 1)}
     ((completedIntegralCoefficientSheafUnrestricted l E X).over U)
 
 /-- The actual exact ringed extension by zero, with direct-sum presheaf and
-module sheafification as in the recorded localized adjunction.
-Source: Stacks 03DI--03DJ. -/
+module sheafification as in the recorded localized adjunction. -/
 def extension : modulesU l E X U ⥤ modulesX l E X :=
   SheafOfModules.localizedSystemExtension.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
 
-/-- Additivity of the recorded extension, reused without changing its data.
-Source: Stacks 03DJ. -/
+/-- Additivity of the recorded extension, reused without changing its data. -/
 instance extensionAdditive : (extension l E X U).Additive :=
   SheafOfModules.localizedSystemExtensionAdditive.{t + 1, t, u} _ U
 
-/-- Left exactness of the recorded extension.
-Source: Stacks 03DJ. -/
+/-- Left exactness of the recorded extension. -/
 instance extensionLimits : PreservesFiniteLimits (extension l E X U) :=
   SheafOfModules.localizedSystemExtensionLimits.{t + 1, t, u} _ U
 
-/-- Right exactness of the recorded extension.
-Source: Stacks 03DJ. -/
+/-- Right exactness of the recorded extension. -/
 instance extensionColimits : PreservesFiniteColimits (extension l E X U) :=
   SheafOfModules.localizedSystemExtensionColimits.{t + 1, t, u} _ U
 
-/-- The actual exact restriction, right adjoint to extension.
-Source: Stacks 03DI--03DJ. -/
+/-- The actual exact restriction, right adjoint to extension. -/
 abbrev restriction : modulesX l E X ⥤ modulesU l E X U :=
   SheafOfModules.localizedSystemRestriction.{t + 1, t, u}
     (completedIntegralCommRingSheafUnrestricted l E X) U
@@ -339,17 +342,7 @@ private theorem slice_products (X : Scheme.{t}) (U : X.ProEt)
 
 end SliceProducts
 
-/-- The geometric and product assertions in the open Roos comparison.
-Source: Stacks 01T6, 01OY, 09BP and 0947.
-Proof: finite type over Spec k gives Noetherian schemes; locally Noetherian
-schemes are quasi-separated. Every affine-open preimage under the open immersion
-is a Noetherian open subscheme, hence quasi-compact. The distinct prime l is a
-unit in k and therefore in every structure-sheaf stalk. Identify the open site
-with the slice and B_U with restricted B_X using weakly-etale localization and
-the completed coefficient comparison. Tag 09BP gives the canonical product
-comparison for the exact ringed extension. Weakly contractible affine covers
-and coordinatewise lifts prove exactness of countable products on both sites.
-These are the first three proof steps of the node. -/
+/-- The geometric and product assertions in the open Roos comparison. -/
 theorem geometry_products
     (D : FiniteFieldDatum.{t}) (_hl : l ≠ D.p)
     (aX : X ⟶ Spec (CommRingCat.of D.k))
@@ -419,13 +412,9 @@ variable {A : Type a} {B : Type b} [Category.{c} A] [Category.{d} B]
   [HasDerivedCategory.{wA} A] [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)]
   [HasDerivedCategory.{wB} B] [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ B)]
 
-/-- The explicit normalization laws for the comparison in this node. This is a
-specification, with no chosen data: it expands to the signed cone identifications,
-canonical product maps, localization square, all resolution formulas, and strict
-augmentation laws. Abstract category parameters keep repeated concrete sheaf-category
-instance terms out of the statement's elaboration.
-Source: Stacks 09BP; the signed normalization of
-lem-cbc-exact-product-functor-strict-limit. -/
+/-- The explicit normalization laws for the comparison: signed cone identifications,
+canonical product maps, localization square, resolution formulas and strict augmentation
+laws. This is a specification with no chosen data. -/
 def ComparisonAssertions (F : A ⥤ B) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F]
     (LA : DerivedCategory.{wA} (ℕᵒᵖ ⥤ A) ⥤ DerivedCategory.{wA} A)
@@ -888,26 +877,7 @@ attribute [local irreducible] extension
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The normalized comparison for every unbounded strict tower, including its
-actual strict augmentation maps.
-
-Source: Stacks 09BP; blueprint open-factor argument, normalized by
-lem-cbc-exact-product-functor-strict-limit and lem-weil-strict-roos-comparison.
-
-Proof: first apply geometry_products (node proof steps 1--3). The recorded slice
-adjunction is exact and additive. Apply exactProductFunctorStrictLimit to this
-extension, using the two exact-product assertions. Its normalized signed Roos
-identifications thetaA and thetaB have K-injective inclusion (iota,0). The chain
-comparison kappa is the canonical product comparison on both signed summands.
-Conjugating it by thetaA and thetaB gives lambda, natural on the derived tower
-category. The formula for every pair of K-injective resolutions identifies the
-same lambda, proving independence of resolutions (node step 4). Finally a strict
-augmentation has representative (gamma,0). Projection normalization sends it to
-(extension(gamma),0); the strict Roos theorem identifies these with the actual
-induced maps. The final equality is lambda composed with extension(a_c)=a_Jc.
-Functoriality and the coordinate formulas give naturality in strict tower maps
-and augmentation squares (node step 5). Empty opens, zero objects, unbounded
-complexes and nonseparated finite-type schemes require no separate assumptions.
--/
+actual strict augmentation maps. -/
 theorem comparison
     (D : FiniteFieldDatum.{t}) (_hl : l ≠ D.p)
     (aX : X ⟶ Spec (CommRingCat.of D.k))

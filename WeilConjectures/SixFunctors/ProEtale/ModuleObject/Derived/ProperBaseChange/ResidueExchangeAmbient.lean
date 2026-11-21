@@ -36,8 +36,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
-/-- The ambient pullback square uses precisely the library's composition constraints.
-Source: the composition constraints used in MorphismDefs. -/
+/-- The ambient pullback square uses precisely the library's composition constraints. -/
 noncomputable def residueExchangeSquare (sq : CommSq g' f' f g) :
     residueExchangeUpperStar Λ g ⋙ residueExchangeUpperStar Λ f' ≅
       residueExchangeUpperStar Λ f ⋙ residueExchangeUpperStar Λ g' :=
@@ -45,8 +44,7 @@ noncomputable def residueExchangeSquare (sq : CommSq g' f' f g) :
     (residueExchangeUpperStarComp Λ g' f)
     (congrArg (fun h : X' ⟶ Y ↦ residueExchangeUpperStar Λ h) sq.w.symm)
 
-/-- The ambient exchange is the adjunction mate of the pullback-square comparison.
-Source: the unit-square-counit definition of exchange. -/
+/-- The ambient exchange is the adjunction mate of the pullback-square comparison. -/
 noncomputable def residueExchangeBaseChange (sq : CommSq g' f' f g) :
     residueExchangeLowerStar Λ f ⋙ residueExchangeUpperStar Λ g ⟶
       residueExchangeUpperStar Λ g' ⋙ residueExchangeLowerStar Λ f' :=
@@ -54,10 +52,7 @@ noncomputable def residueExchangeBaseChange (sq : CommSq g' f' f g) :
     (residueExchangeAdjunction Λ f')
     (TwoSquare.mk _ _ _ _ (residueExchangeSquare Λ sq).hom))
 
-/-- The counit equation characterizing the ambient exchange mate.
-Source: Mathlib, mateEquiv_counit.
-Proof. Apply the mates equivalence's counit identity to the pullback-square comparison.
--/
+/-- The counit equation characterizing the ambient exchange mate. -/
 theorem residueExchangeBaseChange_counit (sq : CommSq g' f' f g)
     (K : residueExchangeDerived Λ X) :
     (residueExchangeUpperStar Λ f').map ((residueExchangeBaseChange Λ sq).app K) ≫

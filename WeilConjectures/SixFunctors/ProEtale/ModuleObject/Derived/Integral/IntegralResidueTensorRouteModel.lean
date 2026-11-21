@@ -8,12 +8,16 @@ module
 public import WeilConjectures.CategoryTheory.Integral.IntegralResidueTensorModel
 
 /-! Canonical tensor-route normalization, directly from the tensor/counit square.
-Source: Bhatt--Scholze, Lemma 6.5.9(5), Remark 6.8.15.
 
 STATEMENT-DISPUTED: the removed arbitrary-monoidal transport assertion used a fixed
 canonical model map on the right. Twisting the ordinary monoidal structure by -1
 changes the left side's tensor comparison but leaves that model map unchanged.
-The canonical theorem below retains its original statement. -/
+The canonical theorem below retains its original statement.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(5), Remark 6.8.15.
+-/
 
 @[expose] public section
 universe u
@@ -34,18 +38,7 @@ local instance instEssentiallySmallProfinite_integralResidueTensorRouteModel
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 set_option linter.style.haveILetI false in
 set_option cleanup.letToHave false in
-/-- Compute the tensor-route against the ordinary homotopy tensor model.
-Source: Bhatt--Scholze, Lemma 6.5.9(5), Remark 6.8.15.
-
-Proof. Use the counit normalization of the fixed derived tensor presentation.
-Move the coefficient single-functor comparison through the tensor comparison by
-naturality. Compatibility of the derived tensor comparison with symmetry moves
-the fixed coefficient to the first tensor factor. Its defining counit identity
-then replaces the derived tensor comparison by Qh of the ordinary tensor
-comparison. Naturality of the exact-pullback counit moves the homotopy
-single-tensor comparison through it. The resulting composite is precisely
-the displayed tensor model map. Every equality is an identity of natural
-transformations, so no flatness of the residue coefficient or of P is required. -/
+/-- Compute the tensor-route against the ordinary homotopy tensor model. -/
 theorem integralResidue_tensorRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

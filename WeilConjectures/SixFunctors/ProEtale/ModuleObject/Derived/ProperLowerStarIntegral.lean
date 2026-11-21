@@ -16,8 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ConstructibleNak
 
 Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ` with ring of integers `𝒪_E` and residue field
 `𝔽_E`. This file reduces statements about the derived pushforward `Rf_*` with coefficients `𝒪_E`
-to the residue field `𝔽_E`, as in the proof of blueprint
-`proposition-proper-direct-image-constructible-complexes` (1).
+to the residue field `𝔽_E`.
 
 ## Main results
 
@@ -87,10 +86,9 @@ theorem nonempty_derivedReduction_rightDerivedLowerStar_iso {X Y : Scheme.{u}} (
     asIso ((residueFieldDerivedPushHom ℓ E f).app
       ((Mod.extendScalars (padicIntegersToResidueField X ℓ E)).leftDerivedFunctor.obj K))⟩
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes` (1), given the finite
-coefficient case: for a morphism `p : Z ⟶ Y` of noetherian schemes, if `Rp_*` preserves
-`Dᵇc(-, 𝔽_E)`, it preserves `Dᵇc(-, 𝒪_E)`. Indeed `Rp_* K` is derived complete, and its first
-derived reduction is `Rp_*(K ⊗ᴸ 𝔽_E)`, which is bounded constructible. -/
+/-- Given the finite coefficient case: for a morphism `p : Z ⟶ Y` of noetherian schemes, if `Rp_*`
+preserves `Dᵇc(-, 𝔽_E)`, it preserves `Dᵇc(-, 𝒪_E)`. Indeed `Rp_* K` is derived complete, and its
+first derived reduction is `Rp_*(K ⊗ᴸ 𝔽_E)`, which is bounded constructible. -/
 theorem boundedConstructible_rightDerivedLowerStar_padicIntegers_of_residueField
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (p : Z ⟶ Y)
     (hp : ∀ L, ProEtale.DerivedCategory.boundedConstructible

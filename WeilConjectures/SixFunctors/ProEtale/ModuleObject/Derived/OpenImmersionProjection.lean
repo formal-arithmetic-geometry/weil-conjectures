@@ -47,7 +47,6 @@ it therefore suffices that `Dj_! M ⊗ᴸ N` lies in the essential image of `Dj_
 K-flat representatives the derived tensor product is computed termwise, and the termwise
 relative tensor products `j_! M^p ⊗_{Λ_X} N^q` lie in the essential image of `j_!` by the
 projection formula for abelian sheaves.
-
 -/
 
 @[expose] public section

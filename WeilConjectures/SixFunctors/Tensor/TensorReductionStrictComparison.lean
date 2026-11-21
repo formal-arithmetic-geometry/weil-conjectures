@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.Tensor.TensorReductionFiniteComponentEquation
 
 /-! # Assembling the ordinary coherent reduction tensor comparison
 
-Source: Stacks 07A4 and 0941.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +34,7 @@ attribute [local irreducible] pullbackTensorReductionEvaluationComplex
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The compatible finite maps determine one strict coherent chain map.
-Source: Stacks 0941. -/
+/-- The compatible finite maps determine one strict coherent chain map. -/
 theorem tensorReductionStrictMap_existsUnique (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)
@@ -50,8 +52,7 @@ theorem tensorReductionStrictMap_existsUnique (W : Scheme.{u})
     (tensorReductionSystemFiniteComponent l E W P Q)
     (tensorReductionFiniteComponents_compatible l E W P Q)
 
-/-- The strict map is selected from its unique finite-component characterization.
-Source: Stacks 07A4, 0941. -/
+/-- The strict map is selected from its unique finite-component characterization. -/
 def tensorReductionStrictMap (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)
@@ -71,8 +72,7 @@ private theorem eq_of_map_conjugate
   rw [e.hom.naturality, h]
   simp only [Iso.hom_inv_id_app_assoc]
 
-/-- In the original evaluation convention the strict map has the prescribed component.
-Source: Stacks 0941. -/
+/-- In the original evaluation convention the strict map has the prescribed component. -/
 theorem tensorReductionStrictMap_component (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map

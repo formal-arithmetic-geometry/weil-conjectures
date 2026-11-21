@@ -31,11 +31,14 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 /-!
 # Projective models from lisse residue cohomology
 
-Source: Stacks Project, proetale.tex, Tag 09C3.
-
 The conclusion records a finite disjoint open cover and, on every member, a bounded
 complex whose terms split off finite sums of the completed coefficient sheaf.  The
 differentials are unrestricted sheaf-linear maps.
+
+## References
+
+* [Stacks, Tag 099I](https://stacks.math.columbia.edu/tag/099I)
+* [Stacks, Tag 09C3](https://stacks.math.columbia.edu/tag/09C3)
 -/
 
 @[expose] public section
@@ -242,31 +245,7 @@ private theorem localFreeModel (X : Scheme.{u}) [CompactSpace X]
 scheme, while the pairwise disjointness condition retains the stated clopen case. -/
 /-- A complete integral complex with bounded finite locally constant residue cohomology
 and finite residue Tor amplitude has bounded finite-projective sheaf models on a finite
-clopen partition. Differentials are arbitrary maps over the completed ring sheaf.
-
-Source: Stacks Project, proetale.tex, Tag 09C3, with Lambda = O_E and I = (varpi);
-algebraization.tex, Tag 099I identifies the complete coefficient categories.
-
-Proof, following the six steps of the node:
-1. lem-sf-residue-lisse-clopen-bases gives a finite disjoint open cover. On each member X
-   the completed pullback M of K is complete, X is compact and weakly contractible, the
-   completed finite free sheaves are projective, and one interval [a,b] with ranks r
-   identifies the residue cohomology with finite free residue sheaves; the residue Tor
-   interval [a,b] holds on every object of the pro-etale site of X.
-2. On X induct strongly on (b-a).toNat. lem-sf-complete-top-residue-cell-cone gives a
-   distinguished triangle F[-b] -> M -> L -> F[-b+1] with F = B_X^(r b), L complete,
-   and the shortened residue bases and Tor interval [a,b-1].
-3. If a = b the first map is an isomorphism, and the single complex F in degree b is
-   the model; its other terms are zero, the free sheaf on the empty basis.
-4. If a < b, induction gives a finite free model Q of L in [a,b-1]; its terms are
-   projective, and the triangle is transported along L = Q(Q).
-5. `attachCell`: Q is a bounded-above complex of projectives, hence K-projective, so
-   the connecting map is a chain map g : Q -> F[-b+1]; comparing the twice-rotated
-   triangle with the cone triangle of g gives Q(Cone(g)[-1]) = M, with terms Q^q for
-   q != b and F in degree b.
-6. A finite free sheaf is the finite product of copies of B_X through the finite
-   biproduct comparisons; the term isomorphisms give inclusion and retraction. The
-   empty cover handles the empty scheme; differentials stay arbitrary. -/
+clopen partition. Differentials are arbitrary maps over the completed ring sheaf. -/
 theorem residue_lisse_projective_models
     (S : Scheme.{u}) (hS : IsAffine S)
     (hweak : (Scheme.ProEt.topology S).IsWeaklyContractible.{u + 1}

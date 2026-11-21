@@ -215,9 +215,6 @@ import WeilConjectures.CategoryTheory.Constant.ConstantSpecifiedBasis
 
 /-! # Integral compact-support coefficient comparison
 
-Source: Weil blueprint, theorem-smooth-purity-all-admissible-coefficients, Step 3; Bhatt--Scholze,
-Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1).
-
 ## Main statements
 
 * `recordedComparisonIso`: the canonical comparison on the recorded support functors.
@@ -228,6 +225,12 @@ Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1).
 * `comparison_projection`, `comparison_commShift`, `comparison_refinement`:
   projection, shift and normalized compactification compatibility.
 * `comparison_identity`, `comparison_composition`: the scalar unit and associativity laws.
+
+## References
+
+* Stacks Project, Tags `03CO`, `03D3`, `03D6`, `03D8`, `03DA`, `03DI`, `06YY`, `070K`, `07A6`,
+  `0941`, `0B56`, `0D6D`, `0D6E`, `0E8I`, `0H9K`
+* Bhatt--Scholze, Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1)
 -/
 
 @[expose] public noncomputable section
@@ -322,20 +325,14 @@ private theorem inverse_mate_shift
       (Functor.rightUnitor _).hom) ℤ
   infer_instance
 
-/-- Normalization of a shift structure by the actual universal scalar counit.
-Source: Stacks Tag 06YY. -/
+/-- Normalization of a shift structure by the actual universal scalar counit. -/
 def IsScalarShiftNormalized {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S)
     (s : (pbcDerivedExtend a).CommShift ℤ) : Prop :=
   letI := s
   (pbcExtensionCounit a).CommShift ℤ
 
-/-- The derived scalar counit uniquely normalizes its shift structure.
-Source: Stacks Tag 06YY.
-Proof: ordinary additive scalar extension commutes with shifts degreewise. The
-universal left-derived counit lifts this square uniquely to the localization.
-The lifted squares satisfy zero and addition because their composites with the
-universal counit do. This gives existence, and the same uniqueness gives uniqueness. -/
+/-- The derived scalar counit uniquely normalizes its shift structure. -/
 theorem scalarCommShift_existsUnique {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) :
     ∃! s : (pbcDerivedExtend a).CommShift ℤ, IsScalarShiftNormalized a s := by
@@ -348,27 +345,21 @@ theorem scalarCommShift_existsUnique {W : Scheme.{u}}
     DerivedCategory.Qh (pbcDerivedExtend a) (pbcExtensionCounit a) hkan
   exact ⟨s, hs, fun t ht ↦ scalarRightKanShift_unique _ _ _ _ t s ht hs⟩
 
-/-- The scalar shift is fixed by its universal derived counit.
-Source: Stacks Tag 06YY. -/
+/-- The scalar shift is fixed by its universal derived counit. -/
 instance scalarCommShift {W : Scheme.{u}}
     {R S : Sheaf (ProEt.topology W) CommRingCat.{u + 1}} (a : R ⟶ S) :
     (pbcDerivedExtend a).CommShift ℤ :=
   (scalarCommShift_existsUnique a).exists.choose
 
 /-- The shift on compact support is exact open descent followed by the canonical
-K-injective proper-image shift. Source: Stacks Tags 03DI, 070K. -/
+K-injective proper-image shift. -/
 instance imageCommShift (R : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (image R c).CommShift ℤ := by
   unfold image
   infer_instance
 
-/-- The scalar mate commutes with the canonical shift comparisons.
-Source: Stacks Tag 07A6.
-Proof: on complexes the coefficient maps are degreewise and commute with shift without
-an extra sign. The exact open comparison and the right-derived proper comparison
-preserve their universal counits and units. Transpose this identity under the derived
-scalar adjunctions; the triangle identities give precisely NatTrans.CommShift. -/
+/-- The scalar mate commutes with the canonical shift comparisons. -/
 theorem comparison_commShift {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (comparison a c).CommShift ℤ := by
@@ -393,8 +384,7 @@ theorem comparison_commShift {R S : Coefficients.{u}} (a : Change R S)
     (pbcDerivedScalarAdjunction (a.map X))
     (pbcDerivedScalarAdjunction (a.map Y))
     (TwoSquare.mk _ _ _ _ (restriction a c).hom)
-/-- Ordinary tensor associativity, fixed by the two tensor-unit normalized adjunctions.
-Source: Stacks Tag 06YY. -/
+/-- Ordinary tensor associativity, fixed by the two tensor-unit normalized adjunctions. -/
 def tensorComposition {W : Scheme.{u}}
     {R S T : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
     (a : R ⟶ S) (b : S ⟶ T) (d : R ⟶ T) (h : a ≫ b = d) :
@@ -402,13 +392,7 @@ def tensorComposition {W : Scheme.{u}}
   (((pbcDerivedScalarAdjunction a).comp (pbcDerivedScalarAdjunction b)).ofNatIsoRight
     (pbcDerivedRestrictComp a b d h)).leftAdjointUniq (pbcDerivedScalarAdjunction d)
 
-/-- Scalar composition, including quotient reductions, for the specified mates.
-Source: Stacks Tag 07A6, mate pasting.
-Proof: transpose under the scalar adjunctions. The tensor-composition maps carry the
-successive units to the direct unit. The proper restriction comparisons compose
-because their ordinary maps are identity on sections and their derived units agree.
-The open comparisons compose by their unit normalization. Thus the two transposes
-are equal. The Hom adjunction is bijective, which proves the displayed equality. -/
+/-- Scalar composition, including quotient reductions, for the specified mates. -/
 theorem comparison_composition {R S T : Coefficients.{u}}
     (a : Change R S) (b : Change S T) (d : Change R T)
     (h : ∀ W : Scheme.{u}, a.map W ≫ b.map W = d.map W)
@@ -428,10 +412,7 @@ theorem comparison_composition {R S T : Coefficients.{u}}
     (restriction a c).hom (restriction b c).hom (restriction d c).hom
     (fun N ↦ restriction_comp a b d h c N) M
 
-/-- Identity scalar restriction has the identity section functions, uniquely.
-Source: Stacks Tag 03DA.
-Proof: the restricted action along identity is the original action. Identity on the
-underlying abelian sheaf is linear and natural. Sectionwise faithfulness gives uniqueness. -/
+/-- Identity scalar restriction has the identity section functions, uniquely. -/
 theorem restrictIdentity_existsUnique {W : Scheme.{u}}
     (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) :
     ∃! e : pbcRestrict (𝟙 R) ≅ 𝟭 _,
@@ -452,8 +433,7 @@ theorem restrictIdentity_existsUnique {W : Scheme.{u}}
     ext M U x
     exact he' M U x
 
-/-- The multiplication unit C_R,R is conjugate to identity scalar restriction.
-Source: Stacks Tags 03DA, 06YY. -/
+/-- The multiplication unit C_R,R is conjugate to identity scalar restriction. -/
 def tensorIdentity {W : Scheme.{u}}
     (R : Sheaf (ProEt.topology W) CommRingCat.{u + 1}) :
     pbcDerivedExtend (𝟙 R) ≅ 𝟭 _ :=
@@ -583,12 +563,7 @@ private theorem identity_inverseMate_isIso
   rw [mateEquiv_symm_apply]
   infer_instance
 
-/-- Multiplication normalizes the identity coefficient comparison.
-Source: Stacks Tags 03DA, 07A6.
-Proof: transpose the identity coefficient square. Its section maps are identities,
-its proper derived comparison preserves the derived unit, and its open mate
-preserves the open unit. The scalar multiplication iso is their conjugate, so the
-two composites have identical transposes and hence are equal. -/
+/-- Multiplication normalizes the identity coefficient comparison. -/
 theorem comparison_identity {R : Coefficients.{u}} (a : Change R R)
     (h : ∀ W : Scheme.{u}, a.map W = 𝟙 (R.ring W))
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -632,8 +607,7 @@ attribute [local irreducible] scalarTensor
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Proper derived composition is the conjugate of this normalized pullback composition.
-Source: Stacks Tag 0D6D. -/
+/-- Proper derived composition is the conjugate of this normalized pullback composition. -/
 def geometricPushComposition (R : Coefficients.{u})
     {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W)
     (hc : R.pull (h ≫ k) = proEtaleRingCompositeCoefficients h k
@@ -644,8 +618,7 @@ def geometricPushComposition (R : Coefficients.{u})
     (proEtaleRingDerivedAdjunction (h ≫ k) (R.ring W) (R.ring U) (R.pull (h ≫ k)))
     (geometricPullComposition R h k hc)
 
-/-- Pullback pasting along a refinement, including the equation of its open triangle.
-Source: Stacks Tags 03D8, 0D6D. -/
+/-- Pullback pasting along a refinement, including the equation of its open triangle. -/
 def refinementPull (R : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refinement d)
     (hc : R.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom
@@ -655,8 +628,7 @@ def refinementPull (R : Coefficients.{u})
     geometricPullComposition R c.i r.hom hc
 
 /-- Restricting the proper refinement image to X, via the proper counit.
-This is the normalization used to specify the proper-open comparison.
-Source: blueprint prop-compactification-coherence, proof part (a). -/
+This is the normalization used to specify the proper-open comparison. -/
 def refinementRestriction (R : Coefficients.{u})
     {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refinement d)
     (hc : R.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom
@@ -670,8 +642,7 @@ def refinementRestriction (R : Coefficients.{u})
       (R.ring d.Z) (R.ring c.Z) (R.pull r.hom)).counit.app _)
 
 /-- The canonical scalar/pullback comparison is the unique left-adjoint comparison
-conjugate to the normalized proper-image restriction square.
-Source: Stacks Tags 03D8, 06YY, 07A6. -/
+conjugate to the normalized proper-image restriction square. -/
 def scalarPull {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     pull R g ⋙ pbcDerivedExtend (a.map U) ≅ pbcDerivedExtend (a.map V) ⋙ pull S g :=
@@ -683,8 +654,7 @@ def scalarPull {R S : Coefficients.{u}} (a : Change R S)
           ((pbcDerivedScalarAdjunction (a.map V)).comp
             (proEtaleRingDerivedAdjunction g (S.ring V) (S.ring U) (S.pull g)))
 
-/-- Arithmetic restriction retains precisely the positive exponents e(n+1).
-Source: Stacks Tags 0941, 0H9K. -/
+/-- Arithmetic restriction retains precisely the positive exponents e(n+1). -/
 abbrev retainedTower {A : Type a} [Category.{b} A] [Abelian A]
     (e : ℕ) (T : ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   CategoryTheory.StrictTowerArithmetic.index e ⋙ T
@@ -695,16 +665,14 @@ variable (l : ℕ) [Fact l.Prime]
 variable (F : Type u) [Field F] [Algebra ℚ_[l] F] [FiniteDimensional ℚ_[l] F]
   (i : E →ₐ[ℚ_[l]] F)
 
-/-- The actual completed coefficient inclusion, with its residue-normalized pullback square.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The actual completed coefficient inclusion, with its residue-normalized pullback square. -/
 def completedChange : Change (completed l E) (completed l F) where
   map := completedCoefficientMap l E F i
   square := completedChange_square l E F i
 
 /-- The proper coefficient arrow: its scalar-adjunction mate is the canonical
 K-injective restriction comparison. Equivalently its proper-adjunction transpose is
-pullback/tensor balancing followed by scalar extension of the proper counit.
-Source: Stacks Tags 07A6, 0B56. -/
+pullback/tensor balancing followed by scalar extension of the proper counit. -/
 def properComparison {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     proEtaleRingDerivedDirectImage g (R.ring V) (R.ring U) (R.pull g) ⋙
@@ -718,8 +686,7 @@ def properComparison {R S : Coefficients.{u}} (a : Change R S)
           (R.ring V) (S.ring V) (R.ring U) (S.ring U)
           (a.map V) (a.map U) (R.pull g) (S.pull g) (a.square g)).inv))
 
-/-- The open coefficient arrow is the mate of the open-unit normalized restriction square.
-Source: Stacks Tag 0E8I. -/
+/-- The open coefficient arrow is the mate of the open-unit normalized restriction square. -/
 def openComparison {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] :
     (openExtension R j).mapDerivedCategory ⋙ pbcDerivedExtend (a.map V) ⟶
@@ -743,13 +710,7 @@ private theorem doubleInverseMate_isIso
   infer_instance
 
 /-- The canonical open coefficient arrow is an identification, without a flatness
-hypothesis on the coefficient map.
-Source: Stacks Tag 0E8I.
-Proof: the exact-localization mate theorem identifies the specified open restriction
-square with the inverse mate of the canonical pullback/restriction isomorphism.
-The scalar inverse mate defining openComparison is consequently a double inverse
-mate. The iterated-mate identity identifies it with conjugation under the composite
-scalar/open adjunctions. Conjugation preserves isomorphisms, as do evaluation functors. -/
+hypothesis on the coefficient map. -/
 theorem openComparison_isIso {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j]
     (M : DerivedCategory (pbcModules U (R.ring U))) :
@@ -779,12 +740,7 @@ theorem openComparison_isIso {R S : Coefficients.{u}} (a : Change R S)
   exact @NatIso.isIso_app_of_isIso _ _ _ _ _ _ _ hi M
 
 /-- The ordered proper/open factorization holds before any inverse limit is taken.
-It is applied below to each ramified finite quotient.
-Source: Stacks Tags 07A6, 0E8I.
-Proof: expand the mate defining comparison. Naturality moves the open square across
-the proper scalar unit, and the scalar triangle identities cancel the middle counit
-and unit. The remaining composite is the proper mate followed by the proper image
-of the open mate. These are equations of natural transformations. -/
+It is applied below to each ramified finite quotient. -/
 theorem comparison_factorization {R S : Coefficients.{u}} (a : Change R S)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategory (pbcModules X (R.ring X))) :
@@ -820,17 +776,13 @@ theorem comparison_factorization {R S : Coefficients.{u}} (a : Change R S)
 attribute [local irreducible] properComparison openComparison
 
 /-- The ramification hypothesis identifies ideals, and does not equate the chosen
-uniformizers. Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+uniformizers. -/
 def Ramification (e : ℕ) : Prop :=
   Ideal.map (integralScalarIntegerInclusion l E F i)
       (Padic.coefficientExtensionIdeal l E 1) =
     Padic.coefficientExtensionIdeal l F e
 
-/-- A source uniformizer power is killed in the retained target quotient.
-Source: Bhatt--Scholze, Lemma 6.8.2(1).
-Proof: map the source principal ideal through the integer inclusion and use the
-ramification ideal equality. Taking nth powers gives the ideal generated by the
-eth times nth target uniformizer power. Its image in the displayed quotient is zero. -/
+/-- A source uniformizer power is killed in the retained target quotient. -/
 theorem ramifiedKernel (e : ℕ) (he : Ramification l E F i e) (n : ℕ)
     (x : Padic.coefficientExtensionIntegers l E)
     (hx : x ∈ Padic.coefficientExtensionIdeal l E n) :
@@ -849,8 +801,7 @@ theorem ramifiedKernel (e : ℕ) (he : Ramification l E F i e) (n : ℕ)
   rw [← hmap]
   exact Ideal.mem_map_of_mem _ hx
 
-/-- The actual retained quotient inclusion A_E,n to A_F,en.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The actual retained quotient inclusion A_E,n to A_F,en. -/
 def ramifiedMap (e : ℕ) (he : Ramification l E F i e) (n : ℕ) :
     Padic.coefficientExtensionRing l E n →+* Padic.coefficientExtensionRing l F (e * n) :=
   Ideal.Quotient.lift (Padic.coefficientExtensionIdeal l E n)
@@ -858,18 +809,13 @@ def ramifiedMap (e : ℕ) (he : Ramification l E F i e) (n : ℕ) :
       (integralScalarIntegerInclusion l E F i))
     (ramifiedKernel l E F i e he n)
 
-/-- The constant-sheaf map induced by the ramified quotient inclusion.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The constant-sheaf map induced by the ramified quotient inclusion. -/
 def ramifiedSheafMap (e : ℕ) (he : Ramification l E F i e) (n : ℕ)
     (W : Scheme.{u}) :=
   (constantSheaf (ProEt.topology W) CommRingCat.{u + 1}).map
     (CommRingCat.ofHom (ramifiedMap l E F i e he n).ulift.{u + 1, u + 1})
 
-/-- The quotient inclusion commutes with the actual constant-ring inverse-image maps.
-Source: Stacks Tag 03CO.
-Proof: both maps carry a constant section represented by x to the constant section
-represented by i(x). Inverse image and sheafification preserve that identity; constant
-sections locally generate the constant sheaves, so the maps agree. -/
+/-- The quotient inclusion commutes with the actual constant-ring inverse-image maps. -/
 theorem finiteChange_square (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) (hn : 1 ≤ n) {U V : Scheme.{u}} (g : U ⟶ V) :
     ((finite l E n hn).pull g).hom ≫ ramifiedSheafMap l E F i e he n U =
@@ -879,19 +825,14 @@ theorem finiteChange_square (e : ℕ) (he : Ramification l E F i e) (hepos : 1 �
   exact (proEtaleConstantInverseImageMap_naturality g
     (CommRingCat.ofHom (ramifiedMap l E F i e he n).ulift.{u + 1, u + 1})).symm
 
-/-- The specified finite coefficient change for the retained levels.
-Source: Bhatt--Scholze, Lemma 6.8.2(1). -/
+/-- The specified finite coefficient change for the retained levels. -/
 def finiteChange (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) (hn : 1 ≤ n) :
     Change (finite l E n hn) (finite l F (e * n) (Nat.mul_pos hepos hn)) where
   map := ramifiedSheafMap l E F i e he n
   square := finiteChange_square l E F i e he hepos n hn
 
-/-- Completed projections commute with the actual inverse-image identifications.
-Source: Bhatt--Scholze, Lemma 6.8.2(1).
-Proof: under the inverse-image adjunction both maps are the same finite projection
-of the canonical completed structure map. The finite projection normalization of
-completedPullMap identifies them. -/
+/-- Completed projections commute with the actual inverse-image identifications. -/
 theorem projection_square (n : ℕ) (hn : 1 ≤ n)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     ((completed l E).pull g).hom ≫ projection l E n hn U =
@@ -911,8 +852,7 @@ theorem projection_square (n : ℕ) (hn : 1 ≤ n)
     exact congrArg (adj.homEquiv _ _).symm
       ((sfCompletedCoefficientMap_existsUnique l E g).exists.choose_spec n)
 
-/-- Reduction means ordinary derived tensor along the specified limit projection.
-Source: Bhatt--Scholze, Definition 6.7.6. -/
+/-- Reduction means ordinary derived tensor along the specified limit projection. -/
 def reduction (n : ℕ) (hn : 1 ≤ n) : Change (completed l E) (finite l E n hn) where
   map := projection l E n hn
   square := projection_square l E n hn
@@ -942,11 +882,7 @@ private theorem quotientSheafFactor (m n k : ℕ) (hn : n ≤ m) (h : k = m + 1)
   induction x using Quotient.inductionOn' with
   | h x => exact (hφ x).symm
 
-/-- The completed inclusion reduces to the specified retained quotient inclusion.
-Source: Bhatt--Scholze, Lemma 6.8.2(1).
-Proof: evaluate the two maps on constant integral sections. Both take x to i(x)
-modulo the eth times nth target uniformizer power. The quotient lift and the completed
-map are normalized by precisely these sections, so the maps agree. -/
+/-- The completed inclusion reduces to the specified retained quotient inclusion. -/
 theorem ramified_reduction_square (e : ℕ) (he : Ramification l E F i e)
     (hepos : 1 ≤ e) (n : ℕ) (hn : 1 ≤ n) (W : Scheme.{u}) :
     (completedChange l E F i).map W ≫ projection l F (e * n) (Nat.mul_pos hepos hn) W =
@@ -1001,16 +937,14 @@ theorem ramified_reduction_square (e : ℕ) (he : Ramification l E F i e)
           integralCoefficientCommRingSheaf l E W n ↦ v ≫ φ)
         (compactSupportProjection_comp l E W (e * (n + 1) - 1) n hmn)
 
-/-- Tensor balancing for a commutative coefficient square, with ordinary associators.
-Source: Stacks Tag 06YY. -/
+/-- Tensor balancing for a commutative coefficient square, with ordinary associators. -/
 def tensorSquare {W : Scheme.{u}}
     {R S A B : Sheaf (ProEt.topology W) CommRingCat.{u + 1}}
     (a : R ⟶ S) (b : A ⟶ B) (r : R ⟶ A) (s : S ⟶ B) (h : a ≫ s = r ≫ b) :
     pbcDerivedExtend a ⋙ pbcDerivedExtend s ≅ pbcDerivedExtend r ⋙ pbcDerivedExtend b :=
   tensorComposition a s (a ≫ s) rfl ≪≫ (tensorComposition r b (a ≫ s) h.symm).symm
 
-/-- Source of the specified finite coefficient comparison, at the positive exponent n+1.
-Source: blueprint theorem-smooth-purity-all-admissible-coefficients Step 3. -/
+/-- Source of the specified finite coefficient comparison, at the positive exponent n+1. -/
 def finiteTensorSource (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategory (scalarReductionSource l E X)) :=
@@ -1019,8 +953,7 @@ def finiteTensorSource (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
       ((image (finite l E (n + 1) (Nat.le_add_left 1 n)) c).obj
         ((pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) X)).obj M))
 
-/-- Target of the same finite comparison, before any total inverse limit.
-Source: blueprint theorem-smooth-purity-all-admissible-coefficients Step 3. -/
+/-- Target of the same finite comparison, before any total inverse limit. -/
 def finiteTensorTarget (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategory (scalarReductionSource l E X)) :=
@@ -1030,9 +963,7 @@ def finiteTensorTarget (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
         ((pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) X)).obj M))
 
 /-- The finite map itself is the ordered proper mate followed by proper image of the
-open coefficient identification. This definition contains both arrows explicitly.
-Source: Stacks Tags 07A6, 0B56, 0E8I; blueprint theorem-smooth-purity-all-admissible-coefficients
-Step 3. -/
+open coefficient identification. This definition contains both arrows explicitly. -/
 def finiteTensorMap (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
     (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (M : DerivedCategory (scalarReductionSource l E X)) :
@@ -1051,12 +982,7 @@ def finiteTensorMap (e : ℕ) (he : Ramification l E F i e) (hepos : 1 ≤ e)
           ((pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) X)).obj M))
 
 /-- The identified constant-coefficient pushforward has exactly the canonical
-constant-section structural map. Equality is of the actual module functors.
-Source: Stacks Tags 03DA and 03D6.
-Proof: transpose the constant inverse-image map under the sheaf adjunction. Its
-transpose is the constant direct-image map by the triangle identity. Both module
-functors are SheafOfModules.pushforward with this same structure map and base-change
-functor; congruence gives the displayed equality, on objects and on maps. -/
+constant-section structural map. Equality is of the actual module functors. -/
 theorem finiteDirectImage_eq (n : ℕ) {U V : Scheme.{u}} (g : U ⟶ V) :
     proEtaleRingModuleDirectImage g
         ((finite l E (n + 1) (Nat.le_add_left 1 n)).ring V)
@@ -1073,7 +999,7 @@ theorem finiteDirectImage_eq (n : ℕ) {U V : Scheme.{u}} (g : U ⟶ V) :
   rw [h]
 
 /-- The canonical pullback presentation comparison, preserving its constant-section
-adjunction. Source: Stacks Tags 03D3 and 03D6. -/
+adjunction. -/
 def finitePullbackIso (n : ℕ) {U V : Scheme.{u}} (g : U ⟶ V) :=
   ((proEtaleRingModuleAdjunction g
     ((finite l E (n + 1) (Nat.le_add_left 1 n)).ring V)
@@ -1082,15 +1008,14 @@ def finitePullbackIso (n : ℕ) {U V : Scheme.{u}} (g : U ⟶ V) :=
       (eqToIso (finiteDirectImage_eq l E n g))).leftAdjointUniq
         (sfIntrinsicConstantModuleAdjunction g (Padic.coefficientExtensionRing l E (n + 1)))
 
-/-- The canonical open presentation comparison, determined by the actual open units.
-Source: Stacks Tag 03DI. -/
+/-- The canonical open presentation comparison, determined by the actual open units. -/
 def finiteOpenIso (n : ℕ) {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] :=
   ((openAdjunction (finite l E (n + 1) (Nat.le_add_left 1 n)) j).ofNatIsoRight
     (finitePullbackIso l E n j)).leftAdjointUniq
       (sfIntrinsicOpenAdjunction (Padic.coefficientExtensionRing l E (n + 1)) j)
 
 /-- The finite proper/open realization isomorphism, preserving the open unit and
-separately derived proper-image unit. Source: Stacks Tags 03DI and 0D6E. -/
+separately derived proper-image unit. -/
 def finiteImageIso (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     image (finite l E (n + 1) (Nat.le_add_left 1 n)) c ≅
       sfAmbientCompactSupportCandidate (Padic.coefficientExtensionRing l E (n + 1)) c :=
@@ -1109,8 +1034,7 @@ def finiteImageIso (n : ℕ) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactificat
 attribute [local irreducible] finiteImageIso
 
 /-- The two derived quotient tensors are identified by their tensor-unit normalized
-adjunctions to exactly the same scalar restriction, including positive-index transport.
-Source: Stacks Tag 06YY. -/
+adjunctions to exactly the same scalar restriction, including positive-index transport. -/
 def finiteReductionIso (W : Scheme.{u}) (n : ℕ) :
     pbcDerivedExtend (projection l E (n + 1) (Nat.le_add_left 1 n) W) ≅
       scalarReductionDerivedExtension l E W n :=
@@ -1120,8 +1044,7 @@ def finiteReductionIso (W : Scheme.{u}) (n : ℕ) :
 attribute [local irreducible] finiteReductionIso
 
 /-- The actual quotient between arbitrary positive exponents, using the recorded
-strict-tower quotient and only reindexing its positive-level convention.
-Source: Stacks Tag 06YY. -/
+strict-tower quotient and only reindexing its positive-level convention. -/
 def finiteQuotient (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n) (h : n ≤ m)
     (W : Scheme.{u}) : (finite l E m hm).ring W ⟶ (finite l E n hn).ring W :=
   eqToHom (congrArg (fun k ↦ proEtaleConstantRing W
@@ -1145,11 +1068,7 @@ private theorem finiteQuotient_eq_map (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n)
     | zero => exact False.elim (Nat.not_succ_le_zero 0 hn)
     | succ n => rfl
 
-/-- Finite quotient maps commute with inverse-image identifications.
-Source: Stacks Tag 03CO.
-Proof: both composites take each locally constant section represented by an integer
-x to its residue at exponent n. These sections locally generate the constant ring
-sheaf, and inverse image and sheafification preserve this equality. -/
+/-- Finite quotient maps commute with inverse-image identifications. -/
 theorem finiteQuotient_square (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n) (h : n ≤ m)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     ((finite l E m hm).pull g).hom ≫ finiteQuotient l E m n hm hn h U =
@@ -1158,18 +1077,13 @@ theorem finiteQuotient_square (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n) (h : n �
   rw [finiteQuotient_eq_map, finiteQuotient_eq_map]
   exact (proEtaleConstantInverseImageMap_naturality g _).symm
 
-/-- The coefficient change for a further quotient, with its canonical section map.
-Source: Stacks Tag 06YY. -/
+/-- The coefficient change for a further quotient, with its canonical section map. -/
 def finiteQuotientChange (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n) (h : n ≤ m) :
     Change (finite l E m hm) (finite l E n hn) where
   map := finiteQuotient l E m n hm hn h
   square := finiteQuotient_square l E m n hm hn h
 
-/-- The coefficient prime is a unit in the geometric base field.
-Source: blueprint def-pur-conventions.
-Proof: the finite field k0 has characteristic p because its cardinality is p^a,
-and its algebraic closure has the same characteristic. A prime l different from p
-therefore has nonzero image in the field k, hence is a unit. -/
+/-- The coefficient prime is a unit in the geometric base field. -/
 theorem coefficientPrimeUnit (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) :
     IsUnit (l : D.k) := by
   let : Fintype D.k₀ := Fintype.ofFinite _
@@ -1206,22 +1120,7 @@ attribute [local semireducible] reductionDerivedChange completedAdicDerivedChang
 is invertible, and its actual source and target are constructible complete objects.
 The map is ordinary derived tensor, defined above by the normalized scalar adjunction.
 The last clause identifies the ambient proper/open realization with the recorded
-integral compact-support value, without selecting a new arbitrary limit vertex.
-Source: blueprint theorem-smooth-purity-all-admissible-coefficients, Step 3; Bhatt--Scholze,
-Definition 6.7.6 and Lemmas 6.7.7, 6.8.2(1).
-
-Proof: ordinary completed scalar extension preserves integral constructibility and
-one uniform finite Tor interval by the finite-free scalar comparison and the finite
-quotient scalar Tor theorem. The lower finite-free direct-image column calculation,
-transported between scalar adjunctions by conjugation, makes the specified proper
-mate invertible. The existing open mate is invertible, and comparison factorization
-therefore proves invertibility of their ordered composite. For each coefficient field
-the ambient proper/open object is a derived limit of the finite support tower.
-The existing derived-limit constructibility theorem makes both output objects
-constructible. Finally the recorded integral compact-support object is another
-vertex of the same derived-limit triangle, so derived-limit uniqueness up to
-isomorphism gives the final existence clause. The remaining declarations below
-separately assert the stronger projection and coherence normalizations. -/
+integral compact-support value, without selecting a new arbitrary limit vertex. -/
 theorem integralCoefficientComparison
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -1272,10 +1171,7 @@ theorem integralCoefficientComparison
 
 end CompletedScalarProof
 
-/-- Completed coefficient multiplication is identity for the identity field inclusion.
-Source: Bhatt--Scholze, Lemma 6.8.2(1).
-Proof: every finite projection of the displayed map is the same projection, because
-the quotient ring map induced by the identity is identity. Joint monicity proves equality. -/
+/-- Completed coefficient multiplication is identity for the identity field inclusion. -/
 theorem completedMap_identity (W : Scheme.{u}) :
     completedCoefficientMap l E E (AlgHom.id ℚ_[l] E) W = 𝟙 _ := by
   apply (completedCoefficientMap_existsUnique l E E (AlgHom.id ℚ_[l] E) W).unique
@@ -1291,11 +1187,7 @@ theorem completedMap_identity (W : Scheme.{u}) :
       (CommRingCat.of (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) using 1 <;> rfl
   simp only [hs, Category.id_comp, Category.comp_id]
 
-/-- Field towers give the actual composite completed inclusion, not a chosen comparison.
-Source: Bhatt--Scholze, Lemma 6.8.2(1).
-Proof: after each target projection, successive quotient inclusions and direct
-inclusion both send the class of x to the class of j(i(x)). The defining residue
-normalization and joint monicity of projections prove equality. -/
+/-- Field towers give the actual composite completed inclusion, not a chosen comparison. -/
 theorem completedMap_composition (L : Type u) [Field L] [Algebra ℚ_[l] L]
     [FiniteDimensional ℚ_[l] L] (j : F →ₐ[ℚ_[l]] L) (W : Scheme.{u}) :
     completedCoefficientMap l E F i W ≫ completedCoefficientMap l F L j W =
@@ -1348,9 +1240,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 include D hl Xbase Ybase Xft Xqc Xs Yft Yqc Ys fbase fs fft fqc
 
-/-- Inclusion of the actual uniform finite-Tor domain into the recorded integral category.
-Source: blueprint definition 1464.
--/
+/-- Inclusion of the actual uniform finite-Tor domain into the recorded integral category. -/
 def finiteTorIntegralInclusion (W : Scheme.{u}) :
     finiteTorConstructibleIntegralCategory l E W ⥤ sfIntegralConstructibleCategory l E W where
   obj M := ⟨M.obj, M.property.1⟩

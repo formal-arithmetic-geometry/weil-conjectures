@@ -10,11 +10,7 @@ public import WeilConjectures.SixFunctors.Supporting.PurSequenceAdjointResolutio
 
 /-! # Resolution-normalized sequence-site adjoints
 
-Source: blueprint main-20261015, `sec-six-functors/sk-thm-sf-package/`
-`fix-prop-coherence.proof.md`, coefficient-comparison sentence; Stacks 0940,
-0941, 03D7, 06YY, 07A6 and 0D6E.
-
-The constructions of this node are the published declarations of
+Constructions of this file are the published declarations of
 `WeilConjectures.SixFunctors.Supporting.PurSequenceAdjointResolutionShifts`, reexported here
 unchanged:
 `purSequenceShiftedReplacement` (the ordinary shift comparison followed by the shifted given
@@ -24,6 +20,16 @@ squares, shifted quasi-isomorphism and signed degreewise equations), the predica
 `purSequenceRightResolutionCompatibility` and `purSequenceShiftedDegreeCompatibility`, and the
 record `PurSequenceAdjointShifts` with the shift compatibility of the same unit and counit.
 They are not redeclared, so that one definition per notion is kept.
+
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 070H](https://stacks.math.columbia.edu/tag/070H)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0940](https://stacks.math.columbia.edu/tag/0940)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
 -/
 
 @[expose] public noncomputable section

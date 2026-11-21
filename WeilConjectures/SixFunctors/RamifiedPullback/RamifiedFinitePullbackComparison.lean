@@ -14,7 +14,10 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Normalized ramified finite pullback comparison
 
-Source: Stacks 093M, 03EK and 03EL; Bhatt--Scholze 6.8.2(1).
+## References
+
+* Stacks Project, Tags `03EL`, `03EK`, `093M`
+* Bhatt--Scholze, 6.8.2(1)
 -/
 
 @[expose] public noncomputable section
@@ -144,25 +147,7 @@ private theorem ramified_projection_square {X : Scheme.{t}}
       (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map)
         (target.ramified_projection n).symm
 
-/-- Normalized finite pullback base change, with its adjacent tower square.
-Source: Stacks 03EL and 03EK; Bhatt--Scholze 6.8.2(1).
-
-Proof: The inverse-image tensor comparison identifies the finite pullback with
-inverse image of P tensored over the inverse-image completed ring with the finite
-coefficient ring on X. Tensor this expression with the completed L ring and
-associate the two last factors. The supplied coefficient isomorphism on X identifies
-them with the L coefficient quotient. On the other route, pullback of P tensor S_Y
-is inverse image of P tensor inverse image of S_Y. Tensoring with the L quotient
-cancels that intermediate ring. The inverse balanced maps insert one and multiply
-coefficients, so give inverse natural maps for all modules, without flatness.
-Naturality makes them commute with differentials and with chain maps. Evaluating
-on the two adjunction-unit tensor generators gives the displayed formula. The fixed-level
-calculation is finiteModuleComparison_exists. For the adjacent square, it suffices to test
-coefficients equal to one. The finite pullback transition
-reduces its unit generator, and scalar tensor naturality preserves the inserted unit.
-Both routes therefore agree on these generators. The tensor and pullback adjunction
-universal properties detect equality, proving the entire square.
--/
+/-- Normalized finite pullback base change, with its adjacent tower square. -/
 theorem finitePullbackComparison_exists {X Y : Scheme.{t}} (g : X ⟶ Y)
     (e : ℕ) (hmono : Monotone (index e))
     (j : ∀ n : ℕ, Padic.coefficientExtensionRing l E (n + 1) →+*

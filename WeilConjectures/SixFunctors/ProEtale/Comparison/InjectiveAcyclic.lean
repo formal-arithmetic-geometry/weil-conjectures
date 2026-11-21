@@ -17,23 +17,16 @@ Let `A` be a Grothendieck abelian category and `I` an injective `A`-valued sheaf
 étale site of a scheme `X`. The comparison pullback `ν^* I` to the small pro-étale site is
 acyclic for the restriction `ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`.
 
-The proof follows [Stacks, Tag 099U] and the blueprint
-(`lemma-acyclicity-pulled-back-injectives`, `prop-weil-pbc-site-comparison-finite-level`).
-On an affine scheme `W`, the higher cohomology of `ν^* I` on `W_proét` is computed on the affine
-pro-étale site, and vanishes by the Čech criterion
-(`AlgebraicGeometry.Scheme.AffineProEt.isZero_rightDerived_of_exactAt_overCechComplex`): the
-Čech complex of `ν^* I` for a surjection of affine pro-étale `W`-schemes is the filtered colimit
-of the Čech complexes of `I` for étale morphisms of affine schemes presenting it, which are
-exact since `I` is injective
-(`AlgebraicGeometry.ProEtale.exactAt_overCechComplex_comparisonUpperStar`). Testing the higher
-direct images on affine étale `X`-schemes reduces the general case to the affine one.
-
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar`:
   `H^q(W_proét, ν^* I) = 0` for `q > 0` and `W` affine.
 - `AlgebraicGeometry.ProEtale.rightAcyclic_comparisonUpperStar_obj_of_injective`:
   `R^q ν_* (ν^* I) = 0` for `q > 0`.
+
+## References
+
+* [Stacks, Tag 099U](https://stacks.math.columbia.edu/tag/099U)
 -/
 
 @[expose] public section
@@ -103,17 +96,8 @@ lemma _root_.AlgebraicGeometry.Etale.exact_of_exact_affineEtale_sections
   refine (ShortComplex.exact_iff_of_iso ?_).1 hT'
   exact (ShortComplex.mapNatIso (S.map Φ) (sheafificationNatIso _ _)).symm
 
-/-- Blueprint `lemma-acyclicity-pulled-back-injectives--1`: Exactness and full faithfulness at
-finite level
-
-*Acyclicity.* For every injective étale sheaf `I` the pro-étale sheaf `ν^* I` is acyclic for
-`ν_*`: `R^q ν_* (ν^* I) = 0` for `q > 0`. The higher direct images are computed on affine étale
-`X`-schemes `U`, where they are the higher cohomology groups of `ν^* (I|_U)` on `U_proét`, which
-vanish (`isZero_rightDerived_globalSectionsFunctor_comparisonUpperStar`). The other two clauses
-of the node, exactness of `ν^*` and invertibility of the unit `F ⟶ ν_* ν^* F`, are
-`AlgebraicGeometry.ProEtale.preservesFiniteLimits_comparisonUpperStar`,
-`AlgebraicGeometry.ProEtale.preservesFiniteColimits_comparisonUpperStar` and
-`AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`. -/
+/-- For every injective étale sheaf `I` the pro-étale sheaf `ν^* I` is acyclic for `ν_*`:
+`R^q ν_* (ν^* I) = 0` for `q > 0`. -/
 theorem rightAcyclic_comparisonUpperStar_obj_of_injective (X : Scheme.{u})
     (I : Sheaf X.smallEtaleTopology A) [Injective I] :
     ν_*(X)[A].rightAcyclic (ν^*(X)[A].obj I) := by

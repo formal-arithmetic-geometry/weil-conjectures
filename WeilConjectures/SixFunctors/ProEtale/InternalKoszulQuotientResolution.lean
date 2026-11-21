@@ -10,7 +10,12 @@ import WeilConjectures.SixFunctors.ProEtale.InternalKoszulFiniteAugmentation
 
 /-! # The finite Koszul resolution of the transported actual quotients
 
-Source: integral-models proof (1), Stacks Tags 099L, 099M and 0A0E.
+## References
+
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
+* [Stacks, Tag 0913](https://stacks.math.columbia.edu/tag/0913)
 -/
 
 @[expose] public noncomputable section
@@ -31,21 +36,7 @@ local instance finiteResolutionTowerDerived :
 
 /-- The strict dual singleton Koszul tower resolves the transported actual quotient
  tower, including the degree-zero augmentation. This statement concerns complexes of
- towers only; it does not involve derived inverse limit or a completion presentation.
-
-Source: integral-models proof (1); Stacks Tags 099L, 099M, 0913 and 0A0E.
-
-Proof: extract a specified generating section from the kernel ideal on each slice;
-its image is a, so a has zero residue. Use koszul_finite_augmentation to construct
-the finite maps, their zero
-components, their unit identities and their successor compatibility. The sequence
-constructor gives a natural transformation of strict towers. Transpose it degreewise
-to obtain q. The one-level theorem koszul_finite_augmentation_quasiIso, followed by
-evaluation detection of quasi-isomorphisms, proves that q is a quasi-isomorphism.
-For the unit equation compose in each complex degree with every limit projection.
-The limMap and limit.lift projection identities reduce it to the finite unit equation.
-Joint monicity of projections proves the result. No derived inverse limit is used.
--/
+ towers only; it does not involve derived inverse limit or a completion presentation. -/
 theorem koszul_quotient_resolution [IsNoetherian X]
     (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)
     (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,

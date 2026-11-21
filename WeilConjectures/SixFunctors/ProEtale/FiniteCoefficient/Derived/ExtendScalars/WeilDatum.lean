@@ -22,8 +22,7 @@ over `S` (`AlgebraicGeometry.ProEtale.extendScalarsWeilDatum`), through the comm
 construction commutes with the operations of `WeilConjectures.SixFunctors.ProEtale.
 FiniteCoefficient.Derived.WeilDatum`: iterates, pullbacks and local Frobenii. In particular the
 identification `Lx^* Ψ K ≅ Ψ Lx^* K` of the geometric stalks intertwines the local Frobenius of
-`(Ψ K, φ_S)` with the scalar extension of the local Frobenius of `(K, φ)` (part of blueprint
-`theorem-grothendieck-lefschetz-trace-formula--7`).
+`(Ψ K, φ_S)` with the scalar extension of the local Frobenius of `(K, φ)`.
 
 ## Main statements
 

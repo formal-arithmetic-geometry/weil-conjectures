@@ -22,13 +22,7 @@ the unbounded derived categories of pro-étale sheaves satisfy
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComp`), and these isomorphisms are unital
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComp_id_left`,
 `AlgebraicGeometry.ProEtale.rightDerivedLowerStarComp_id_right`) and associative
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComp_assoc`). This is the finite-level clause
-of blueprint `lem-weil-derived-direct-image-composition`: `f_*` is right adjoint to the exact
-pullback `f^*`, so it preserves K-injective complexes, and the composition theorem for total
-right derived functors (`CategoryTheory.Functor.rightDerivedFunctorCompIso'`) applies to the
-underived composition isomorphism `f_* ⋙ g_* ≅ (f ≫ g)_*`
-(`AlgebraicGeometry.ProEtale.lowerStarComp`). Identity and associativity hold because they
-hold for the underived composition isomorphisms.
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComp_assoc`).
 
 The first part of the file proves the corresponding coherence statements for the composition
 isomorphisms of general total right derived functors on unbounded derived categories, the
@@ -461,7 +455,7 @@ noncomputable def rightDerivedLowerStarFactor {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y
     (e : b ≫ c = a) : R((b)_*[A]) ⋙ R((c)_*[A]) ≅ R((a)_*[A]) :=
   Functor.rightDerivedFunctorCompIso' (b)_*[A] (c)_*[A] (lowerStarFactor A e)
 
-/-- Blueprint `lem-weil-derived-direct-image-composition`: Composition of derived direct images,
+/-- Composition of derived direct images,
 the finite-level clause on the pro-étale site. For `f : X ⟶ Y` and `g : Y ⟶ Z`, the canonical
 isomorphism `c_{g,f} : Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` of functors
 `D(X_proét) ⥤ D(Z_proét)`: `f_*` preserves K-injective complexes, being right adjoint to the
@@ -482,7 +476,7 @@ induced by `AlgebraicGeometry.ProEtale.lowerStarId`. -/
 noncomputable def rightDerivedLowerStarId : R((𝟙 X)_*[A]) ≅ 𝟭 _ :=
   Functor.rightDerivedFunctorNatIso (lowerStarId A X) ≪≫ Functor.rightDerivedFunctorIdIso _
 
-/-- **The left unit law** of blueprint `lem-weil-derived-direct-image-composition`: the
+/-- **The left unit law**: the
 composition isomorphism for `𝟙 Y ≫ g = g` is `R(𝟙)_* ≅ 𝟭` followed by the left unitor. -/
 theorem rightDerivedLowerStarFactor_id_left (g : Y ⟶ X) :
     (rightDerivedLowerStarFactor A (Category.id_comp g)).hom =
@@ -491,7 +485,7 @@ theorem rightDerivedLowerStarFactor_id_left (g : Y ⟶ X) :
   rw [rightDerivedLowerStarFactor, lowerStarFactor_id_left]
   exact Functor.rightDerivedFunctorCompIso'_hom_of_iso_id_left _ _ _
 
-/-- **The right unit law** of blueprint `lem-weil-derived-direct-image-composition`: the
+/-- **The right unit law**: the
 composition isomorphism for `f ≫ 𝟙 Y = f` is `R(𝟙)_* ≅ 𝟭` followed by the right unitor. -/
 theorem rightDerivedLowerStarFactor_id_right (f : Z ⟶ Y) :
     (rightDerivedLowerStarFactor A (Category.comp_id f)).hom =
@@ -500,7 +494,7 @@ theorem rightDerivedLowerStarFactor_id_right (f : Z ⟶ Y) :
   rw [rightDerivedLowerStarFactor, lowerStarFactor_id_right]
   exact Functor.rightDerivedFunctorCompIso'_hom_of_iso_id_right _ _ _
 
-/-- **The associativity law** of blueprint `lem-weil-derived-direct-image-composition`: the two
+/-- **The associativity law**: the two
 isomorphisms `Rf_* ⋙ Rg_* ⋙ Rh_* ≅ R(f ≫ g ≫ h)_*` built from the composition isomorphisms
 agree. -/
 theorem rightDerivedLowerStarFactor_assoc (f : W ⟶ Z) (g : Z ⟶ Y) (h : Y ⟶ X) {fg : W ⟶ Y}

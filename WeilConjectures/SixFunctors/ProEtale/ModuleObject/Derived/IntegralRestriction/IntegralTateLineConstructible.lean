@@ -512,9 +512,6 @@ import Mathlib.AlgebraicGeometry.Sites.QuasiCompact
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Constructible
 
 /-! # Constructibility of the internal integral Tate line
-
-Source: current blueprint, sk-thm-int-restriction-line.proof.md, paragraph (3),
-and definition-tate-twists, local-generator and signed-power paragraphs.
 -/
 
 @[expose] public noncomputable section
@@ -790,24 +787,8 @@ private theorem bounded_signed_of_cover (X : Scheme.{u})
       signedOverUnit X R L (U i) (hi i).some d⟩
   exact bounded_single_of_locallyFree X R M
     (locallyFree_of_trivial_cover X R M U f hc he)
-
 /-- The actual internal-module realization of every signed integral Tate line is
-constructible in degree zero.
-
-Source: definition-tate-twists, local-generator and signed-power paragraphs;
-sk-thm-int-restriction-line.proof.md, paragraph (3).
-
-Proof: trivialize the degree-one integral line on the compatible-root pro-etale
-cover. The section-module equivalence retains the underlying abelian sheaf and
-scalar action. Its pullback comparison identifies restriction of the internal
-line with restriction of the sectionwise line. On that cover every nonnegative
-power is the tensor power of the regular rank-one module, and every negative
-power is its dual; multiplication and evaluation identify these with the regular
-module. These trivializations are compatible with restriction. Thus the internal
-line has a rank-one finite presentation on this cover. Use the trivial single
-stratum, including for the empty scheme, to obtain constructibility. The single
-complex has this cohomology in degree zero and zero in every other degree,
-so it is bounded constructible. -/
+constructible in degree zero. -/
 theorem integralTateLine_constructible (X : Scheme.{u})
     [∀ x : X, Invertible (ℓ : X.residueField x)] (d : ℤ) :
     boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)

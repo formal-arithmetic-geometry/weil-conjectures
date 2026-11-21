@@ -183,25 +183,7 @@ private theorem comparison_exchange
       (D := residueExchangeDerived Λ Y') (F Y') sq L
 
 attribute [local semireducible] residueExchangeUpperStar residueExchangeLowerStar in
-/-- Coherent coefficient comparisons identify the three specified exchange factors.
-Source: Mathlib adjunction restriction and mates; the specified exchange definitions.
-
-Proof in words. The continuous-function condensed ring of B is killed by ell.
-The finite-type separated hypotheses imply that f and f-prime are qcqs.
-Apply threeStepComparison_family to the two etale and two internal derived adjunctions.
-Its hypotheses are P.unit, P.counit and P.square. First identify the eta-expanded
-pullback family with the original family by function equality, preserving the
-whole square-coherence predicate during this transport. Reverse its four vertex
-isomorphisms using inverse cancellation, and substitute the etale component
-formulas. The residueExchange interfaces are exactly the same actual derived
-functors, adjunction, and pullback-square comparison as the coefficient interfaces.
-This gives the comparison between the specified ambient unit, square, and counit
-factors. Fully faithful restriction identifies these factors with the underlying
-bounded factors. For the source total factorization use the existing theorem
-boundedConstructibleBaseChange_hom_eq_ambient and the component formula for the
-adjunction mate. For the target use Etale.baseChange_app_eq_mateEquiv and functoriality.
-Neither properness, Cartesianity, nor invertibility of exchange is assumed;
-empty schemes and zero objects are included. -/
+/-- Coherent coefficient comparisons identify the three specified exchange factors. -/
 theorem coefficientComparisonData_exchangeSteps [DiscreteTopology B] [Finite B]
     (hB : (ℓ : B) = 0) (sq : CommSq g' f' f g)
     (F : ∀ T : Scheme.{u}, FiniteDiscreteEtalePlus B T ⥤

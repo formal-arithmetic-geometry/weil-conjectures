@@ -10,7 +10,10 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 
 /-! # The fixed part of tensor representative data
 
-Source: Stacks Tags 04VK and 07A4.
+## References
+
+* [Stacks, Tag 04VK](https://stacks.math.columbia.edu/tag/04VK)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public section
@@ -18,8 +21,7 @@ set_option autoImplicit false
 open CategoryTheory CategoryTheory.Functor
 namespace WeilConjectures
 
-/-- A tensor presentation on a class of representatives.
-Source: Stacks Tag 04VK. -/
+/-- A tensor presentation on a class of representatives. -/
 structure TensorFixedRepresentativeData
     (K D : Type*) [Category K] [Category D] where
   q : K ⥤ D
@@ -28,8 +30,7 @@ structure TensorFixedRepresentativeData
   T : D ⥤ D ⥤ D
   r : (P.ι.prod P.ι) ⋙ t ⋙ q ≅ ((P.ι ⋙ q).prod (P.ι ⋙ q)) ⋙ uncurry.obj T
 
-/-- Pullback data between two fixed tensor presentations.
-Source: Stacks Tag 07A4. -/
+/-- Pullback data between two fixed tensor presentations. -/
 structure TensorFixedPullbackData
     {K H D E : Type*} [Category K] [Category H] [Category D] [Category E]
     (Y : TensorFixedRepresentativeData K D) (X : TensorFixedRepresentativeData H E) where
@@ -41,8 +42,7 @@ structure TensorFixedPullbackData
   phiF : (postcompose₂.obj F).obj Y.T ⟶
     (((whiskeringLeft₂ E).obj F).obj F).obj X.T
 
-/-- The representative equation for the fixed tensor comparison.
-Source: Stacks Tag 07A4. -/
+/-- The representative equation for the fixed tensor comparison. -/
 def TensorFixedPullbackData.law
     {K H D E : Type*} [Category K] [Category H] [Category D] [Category E]
     {Y : TensorFixedRepresentativeData K D} {X : TensorFixedRepresentativeData H E}

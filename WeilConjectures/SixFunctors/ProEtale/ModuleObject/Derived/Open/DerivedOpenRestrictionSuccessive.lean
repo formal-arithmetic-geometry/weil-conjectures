@@ -11,7 +11,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 set_option linter.privateModule false
 
-/-! Source: blueprint composition isomorphism and its canonicity and associativity. -/
+/-! # Successive open restrictions for derived direct images -/
 
 @[expose] public section
 set_option autoImplicit false

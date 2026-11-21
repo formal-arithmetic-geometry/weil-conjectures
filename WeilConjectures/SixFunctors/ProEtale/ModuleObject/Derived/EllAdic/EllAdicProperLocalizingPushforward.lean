@@ -14,9 +14,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstruc
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdic
 
 /-! # Proper pushforward on the localizing hull of constructible adic complexes
-
-Source: blueprint `sk-cor-existence-ii-restriction.proof.md`, part (1), and
-`theorem-exceptional-inverse-image`, part (2).
 -/
 
 @[expose] public section

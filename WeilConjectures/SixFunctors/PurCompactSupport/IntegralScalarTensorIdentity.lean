@@ -12,7 +12,8 @@ import all WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupport
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPullbackDescentData
 import all WeilConjectures.Algebra.Homology.CanonicalRingedTensorComparison.RingedTopoiCanonicalTensorPullbackSupplement
 
-/-! Multiplication normalization of the ordinary scalar/tensor comparison. -/
+/-! Multiplication normalization of the ordinary scalar/tensor comparison.
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -274,20 +275,7 @@ private theorem identity_tensor_unit {X : Scheme.{u}}
   · exact (derivedUnit_complex R P hp).symm
   · exact (derivedUnit_complex R Q hq).symm
 
-/-- Identity scalar balancing preserves the multiplication unit.
-Source: current blueprint proposition-six-operations-change-coefficients, final paragraph;
-the flat-representative normalization of scalarTensor.
-
-Proof: take flat-term K-flat representatives P and Q. The identity scalar
-restriction is the identity on sections, so its conjugate tensorIdentity is
-multiplication r tensor x ↦ rx. The inverse balancing map sends
-(r tensor x) tensor (s tensor y) to rs tensor (x tensor y).
-Both displayed composites therefore send this generator to rx tensor sy.
-The same formula holds degreewise on signed total tensors, since the scalars
-have degree zero. The universal derived counits give the equality on the
-localized representatives. Naturality transports it along representative
-isomorphisms to arbitrary K and M. Zero objects and the empty site use the
-same calculation. -/
+/-- Identity scalar balancing preserves the multiplication unit. -/
 theorem scalarTensor_identity {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (a : ProEtaleTensorModel X R) (K M : DerivedCategory (pbcModules X R)) :

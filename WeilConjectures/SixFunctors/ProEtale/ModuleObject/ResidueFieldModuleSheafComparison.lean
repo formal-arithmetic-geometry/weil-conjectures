@@ -26,7 +26,7 @@ since the coefficient morphisms send constant sections to constant sections
 (`ProEtale.sectionActRingHom_lowerStar_residueFieldSectionRingHom` and
 `ProEtale.upperStarUnitHom_comp_sectionActRingHom_residueFieldSectionRingHom`).
 
-## Implementation notes
+## Implementation details
 
 The ring object `Profinite.continuousMapRingObj (integersResidueField ℓ E)` elaborates with the
 ring structure of `𝔽_E` coming from its field structure, while the constant sections

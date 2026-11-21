@@ -13,9 +13,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Cohomology of actual condensed coefficient modules
 
-Source: latest blueprint, ordinary/compact cohomology and the degree-zero clause of
-sk-def-sfb-module-derived-lower-shriek.
-
 The formulas use actual condensed coefficient modules and also work over
 an arbitrary algebraically closed field. Sections are represented by maps from the regular
 coefficient module; evaluation at its unit is terminal-object evaluation. The coefficient
@@ -34,8 +31,7 @@ open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Constant global scalars of any commutative condensed coefficient ring.
-Source: latest blueprint, Lambda_Y = p_Y^* Lambda. -/
+/-- Constant global scalars of any commutative condensed coefficient ring. -/
 def condensedRingScalarSections
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
@@ -50,8 +46,7 @@ def condensedRingScalarSections
   Γ.mapFunctor (upperStarFromPoint X)
 
 /-- Terminal sections with the canonical coefficient action, for every condensed ring.
-This applies to all four coefficient rings of the cohomology convention.
-Source: latest blueprint, Fib_s by geometric-point evaluation. -/
+This applies to all four coefficient rings of the cohomology convention. -/
 abbrev condensedRingCoefficientSections
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) :
@@ -63,8 +58,7 @@ abbrev condensedRingCoefficientSections
 /-- Ordinary coefficient complex, formed with the actual condensed derived direct image.
 Over the algebraically closed point the terminal evaluation is exact, so its right derived
 functor is the geometric-point evaluation on complexes. Any constructible complex, including
-constants, Tate twists and underlying complexes of Weil objects, is an input to this functor.
-Source: latest blueprint, RΓ(Y,K) = Fib_s(Ra_* K). -/
+constants, Tate twists and underlying complexes of Weil objects, is an input to this functor. -/
 def condensedRingOrdinaryCoefficientComplex
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (a : X ⟶ Y) :
@@ -73,8 +67,7 @@ def condensedRingOrdinaryCoefficientComplex
   (lowerStar Λ a).rightDerivedFunctor ⋙
     (condensedRingCoefficientSections Λ Y).rightDerivedFunctor
 
-/-- Compact coefficient complex, formed with the actual compactification lower shriek.
-Source: latest blueprint, RΓ_c(Y,K) = Fib_s(Ra_! K). -/
+/-- Compact coefficient complex, formed with the actual compactification lower shriek. -/
 def condensedRingCompactCoefficientComplex
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
@@ -84,15 +77,13 @@ def condensedRingCompactCoefficientComplex
   rightDerivedLowerShriekOfCompactification Λ c ⋙
     (condensedRingCoefficientSections Λ Y).rightDerivedFunctor
 
-/-- Ordinary cohomology in every integer degree and with any condensed coefficient ring.
-Source: latest blueprint, H^i(Y,K) = H^i(RΓ(Y,K)). -/
+/-- Ordinary cohomology in every integer degree and with any condensed coefficient ring. -/
 def condensedRingOrdinaryCohomology
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (a : X ⟶ Y) (n : ℤ) :=
   condensedRingOrdinaryCoefficientComplex Λ a ⋙ DerivedCategory.homologyFunctor _ n
 
-/-- Compact cohomology in every integer degree and with any condensed coefficient ring.
-Source: latest blueprint, H_c^i(Y,K) = H^i(RΓ_c(Y,K)). -/
+/-- Compact cohomology in every integer degree and with any condensed coefficient ring. -/
 def condensedRingCompactCohomology
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}

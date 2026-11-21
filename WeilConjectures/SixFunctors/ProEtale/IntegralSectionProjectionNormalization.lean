@@ -12,7 +12,10 @@ import all WeilConjectures.SixFunctors.ProEtale.IntegralNormalizedRestrictionSqu
 
 /-! # Quotient projections of the normalized integral section comparison
 
-Source: blueprint integral-criterion-reductions, final coefficient interpretation.
+## References
+
+* [Stacks, Tag 00YV](https://stacks.math.columbia.edu/tag/00YV)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
 -/
 
 @[expose] public noncomputable section
@@ -53,20 +56,7 @@ private theorem source_transport (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     rw [show (integerPointRingIso l E).hom = eqToHom ht from hh, eqToHom_map]
   rw [hpoint, eqToHom_map]
 
-/-- The fixed normalized integral ring comparison commutes with every finite quotient.
-Source: blueprint integral-criterion-reductions, final coefficient interpretation;
-Stacks 00YV and 03EK.
-
-Proof: forget to abelian sheaves. Under the point inverse-image adjunction, the
-mate of the left side is postcomposition of continuous maps with the quotient.
-The mate of the right side has the same value on every profinite test: the
-SfbIntegralComparison equation gives its finite-label representation, and the
-finite encoding normalization identifies constants with their continuous sections.
-Every continuous map into a finite discrete quotient is locally constant on its
-clopen fibres. On each fibre both maps therefore give that constant quotient
-value. Sheaf separation gives equality of the mates, the adjunction gives equality
-of abelian sheaf maps, and faithfulness of forgetting ring structure gives the
-stated commutative-ring equality. Empty fibres need no sections. -/
+/-- The fixed normalized integral ring comparison commutes with every finite quotient. -/
 theorem integral_section_projection_normalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})

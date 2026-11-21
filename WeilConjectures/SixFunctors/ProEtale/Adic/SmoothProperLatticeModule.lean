@@ -121,11 +121,7 @@ lemma zsmul_id_comparisonPadicIntModTower_obj_X {X : Scheme.{u}}
 with the hypotheses of `ProEtale.homologyRightDerivedLowerStarLimitIso`, `Hʲ` of the derived
 pushforward of abelian sheaves of the underlying abelian sheaf of the limit of the transported
 tower `ν^* Gₙ` is the underlying abelian sheaf of the limit of the transported tower `Mₙ` of
-`Rʲf_*^{ét} Gₙ`.
-
-Stating it for a general `Λ` keeps the ring instances of all intermediate objects syntactically
-equal; for `Λ = ULift ℤ_ℓ` this avoids expensive kernel conversions between `ULift.ring` and
-`CommRing.toRing`. -/
+`Rʲf_*^{ét} Gₙ`. -/
 noncomputable def homologyRightDerivedLowerStarForgetLimitComparisonIso [Module.Flat ℤ Λ]
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (f : X ⟶ Y) [Smooth f] [IsProper f]

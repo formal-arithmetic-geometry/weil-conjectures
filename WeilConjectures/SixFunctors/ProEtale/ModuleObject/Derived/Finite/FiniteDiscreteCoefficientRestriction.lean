@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.F
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientDerivedFunctorAPI
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteRestrictionEncodingSupplement
 
-/-! # Restriction comparison for the finite discrete coefficient realization -/
+/-! # Restriction comparison for the finite discrete coefficient realization
+
+## References
+
+* Bhatt--Scholze, Proposition 5.3.2, sectionwise module encoding
+-/
 
 @[expose] public section
 
@@ -224,17 +229,7 @@ private theorem restrictionForget_hom {S T : Scheme.{u}} (h : S ⟶ T)
 
 end ProofHelpers
 
-/-- The normalized additive restriction comparison is linear over the coefficient ring.
-Source: Bhatt--Scholze, Proposition 5.3.2, sectionwise module encoding.
-
-Proof in words. Under the sectionwise encoding, the action of the sheafified constant
-ring is the original module action; the equality hG identifies every underlying additive
-map. Restriction evaluates at the base-changed object and therefore preserves this action.
-The ring identifications at S and T are pulled back from the same eR. Naturality of the
-constant-sheaf pullback comparison identifies the restriction of the ring identification
-at S with that at T, followed by the coefficient unit condensedPushforwardHom. Thus the
-additive comparison intertwines the two scalar actions, giving the displayed equation.
--/
+/-- The normalized additive restriction comparison is linear over the coefficient ring. -/
 theorem finiteDiscreteCoefficientRestrictionForgetIso_linear
     {S T : Scheme.{u}} (h : S ⟶ T) (N : FiniteDiscreteProEtaleSheaves B S) :
     let M := (lowerStar (Profinite.continuousMapRingObj B) h).obj

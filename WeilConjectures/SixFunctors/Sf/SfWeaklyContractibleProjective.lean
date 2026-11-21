@@ -20,8 +20,14 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # Exact evaluation and projective finite free module sheaves
 
-Source: Stacks Project, Tag 0946.
+Over a weakly contractible object, evaluation is exact on module sheaves and finite free module
+sheaves are projective.
+
+## References
+
+* [Stacks, Tag 0946](https://stacks.math.columbia.edu/tag/0946)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -34,17 +40,7 @@ open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
 /-- Exact evaluation at the terminal object makes every finite free module sheaf
-projective, with an independent coefficient universe.
-
-Source: Stacks Project, Tag 0946.
-Proof: forgetting the module structure sends an epimorphism to a locally surjective
-map of abelian sheaves, then to an epimorphism of set sheaves. The evaluation hypothesis
-makes its map on terminal sections surjective. Evaluation preserves kernels sectionwise,
-so it preserves homology. A map from the unit module is a global section. A section at
-the terminal object extends to a compatible family by restriction along the unique
-arrows to that object. Lift that terminal section along the epimorphism; its restrictions
-then lift the given map. Finite products are finite biproducts of these projectives,
-including the empty product, which is zero. -/
+projective, with an independent coefficient universe. -/
 theorem sf_weakly_contractible_projective (X : Scheme.{t})
     (hX : ∀ (F G : Sheaf (ProEt.topology X) (Type (max w (t + 1))))
       (f : F ⟶ G), Epi f →

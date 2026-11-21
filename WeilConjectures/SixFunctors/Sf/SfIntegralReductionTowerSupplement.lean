@@ -42,10 +42,18 @@ public import WeilConjectures.AlgebraicGeometry.SfIntegralReductionTower
 /-!
 # Canonical reduction towers without a finite-field datum
 
-Source: Bhatt--Scholze, Definition 3.5.2, p. 24; Stacks Tags 03EK and 06YY.
 The index n means the positive exponent n+1. All scalar extensions are the published
 universal derived scalar extensions, with their specified K-flat comparisons.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Definition 3.5.2, p. 24
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 03CZ](https://stacks.math.columbia.edu/tag/03CZ)
+* [Stacks, Tag 06YL](https://stacks.math.columbia.edu/tag/06YL)
 -/
+
 
 @[expose] public section
 set_option autoImplicit false
@@ -150,8 +158,7 @@ local instance (priority := 4000) instSfIntegralReductionTowerSupplement1
     : EssentiallySmall.{u + 1} X.ProEt :=
   essentiallySmallSelf.{u} _
 
-/-- Ordinary reduction read as a completed-coefficient module.
-Source: Bhatt--Scholze, Definition 3.5.2. -/
+/-- Ordinary reduction read as a completed-coefficient module. -/
 noncomputable abbrev sfReductionRestricted (n : ℕ) :=
   scalarReductionExtension.{u, u} l E X n ⋙ scalarReductionRestriction.{u, u} l E X n
 
@@ -159,21 +166,18 @@ private noncomputable instance sfRestrictionAdditive (n : ℕ) :
     (scalarReductionRestriction.{u, u} l E X n).Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- The ordinary reduction followed by restriction is additive.
-Source: Stacks Tag 03CZ. -/
+/-- The ordinary reduction followed by restriction is additive. -/
 noncomputable instance sfReductionRestrictedAdditive (n : ℕ) :
     (sfReductionRestricted l E X n).Additive :=
   letI := scalarReductionExtensionAdditive.{u, u} l E X n
   letI := sfRestrictionLimits l E X n
   Functor.additive_of_preserves_binary_products _
 
-/-- Derived reduction read as a completed-coefficient complex.
-Source: Bhatt--Scholze, Definition 3.5.2. -/
+/-- Derived reduction read as a completed-coefficient complex. -/
 noncomputable abbrev sfDerivedReductionRestricted (n : ℕ) :=
   scalarReductionDerivedExtension.{u, u} l E X n ⋙ scalarReductionDerivedRestriction.{u, u} l E X n
 
-/-- The sheafified pure tensor in the actual scalar-extension construction.
-Source: Stacks Tag 03EK. -/
+/-- The sheafified pure tensor in the actual scalar-extension construction. -/
 noncomputable def sfReductionTensor (n : ℕ) (M : scalarReductionSource.{u, u} l E X)
     (U : X.ProEtᵒᵖ) (s : (integralCoefficientCommRingSheaf l E X n).obj.obj U)
     (x : M.val.obj U) : ((scalarReductionExtension.{u, u} l E X n).obj M).val.obj U :=
@@ -211,12 +215,7 @@ private theorem sfReductionTensor_hom_ext (n : ℕ)
     | add z w hz hw => simpa only [map_add] using congrArg₂ (· + ·) hz hw
   exact (cancel_epi e).1 he
 
-/-- The unique ordinary transition sends s tensor x to rho(s) tensor x.
-Source: Stacks Tag 03EK; Bhatt--Scholze, Definition 3.5.2.
-Proof: the quotient projections commute, so the displayed formula is balanced over
-completed coefficients. It commutes with restrictions and defines a sheafified tensor
-map. Naturality follows on pure tensors. Tensor generation and sheafification give
-uniqueness on each module, and hence uniqueness of the natural transformation. -/
+/-- The unique ordinary transition sends s tensor x to rho(s) tensor x. -/
 theorem sfReductionTransition_existsUnique (n : ℕ) :
     ∃! τ : sfReductionRestricted l E X (n + 1) ⟶ sfReductionRestricted l E X n,
       ∀ (M : scalarReductionSource.{u, u} l E X) (U : X.ProEtᵒᵖ)
@@ -247,16 +246,14 @@ theorem sfReductionTransition_existsUnique (n : ℕ) :
   intro U s x
   exact (hτ' M U s x).trans (hτ M U s x).symm
 
-/-- The transition selected by its unique pure-tensor characterization.
-Source: Stacks Tag 03EK. -/
+/-- The transition selected by its unique pure-tensor characterization. -/
 noncomputable def sfReductionTransition (n : ℕ) :
     sfReductionRestricted l E X (n + 1) ⟶ sfReductionRestricted l E X n :=
   (sfReductionTransition_existsUnique l E X n).exists.choose
 
 attribute [local irreducible] sfReductionTransition
 
-/-- The fixed derived comparison to termwise reduction, invertible on K-flat complexes.
-Source: Stacks Tag 06YY. -/
+/-- The fixed derived comparison to termwise reduction, invertible on K-flat complexes. -/
 noncomputable def sfReductionRepresentativeComparison (n : ℕ)
     (P : CochainComplex (scalarReductionSource.{u, u} l E X) ℤ) :
     (sfDerivedReductionRestricted l E X n).obj (DerivedCategory.Q.obj P) ⟶
@@ -269,8 +266,7 @@ noncomputable def sfReductionRepresentativeComparison (n : ℕ)
       (((scalarReductionExtension.{u, u} l E X n).mapHomotopyCategory (.up ℤ)).obj
         ((HomotopyCategory.quotient _ (.up ℤ)).obj P)))
 
-/-- The reduction unit, normalized by the published tensor/restriction adjunction.
-Source: Stacks Tags 03CZ and 06YY. -/
+/-- The reduction unit, normalized by the published tensor/restriction adjunction. -/
 noncomputable def sfDerivedReductionUnit (n : ℕ) :
     𝟭 (DerivedCategory (scalarReductionSource.{u, u} l E X)) ⟶
       sfDerivedReductionRestricted l E X n :=
@@ -412,13 +408,7 @@ attribute [local irreducible] sfComparison
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The derived transition is uniquely determined by termwise quotient maps on K-flat
-representatives. Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tag 06YY.
-Proof: compute both derived reductions on a K-flat resolution. The ordinary transition
-commutes with differentials and homotopies. A comparison of K-flat resolutions is a
-quasi-isomorphism preserved by both reductions, so conjugation by the derived counits
-is independent of the resolution and natural in roofs. These conjugates give the
-transformation. Every derived object has a K-flat representative, where the counits
-are invertible; the displayed equation therefore proves uniqueness. -/
+representatives. -/
 theorem sfDerivedReductionTransition_existsUnique (n : ℕ) :
     ∃! τ : sfDerivedReductionRestricted l E X (n + 1) ⟶
         sfDerivedReductionRestricted l E X n,
@@ -460,8 +450,7 @@ theorem sfDerivedReductionTransition_existsUnique (n : ℕ) :
   exact (hτ' P ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat P).mp hP)).trans
     (hτ P).symm
 
-/-- The canonical derived quotient transition, with its representative normalization.
-Source: Bhatt--Scholze, Definition 3.5.2. -/
+/-- The canonical derived quotient transition, with its representative normalization. -/
 noncomputable def sfDerivedReductionTransition (n : ℕ) :
     sfDerivedReductionRestricted l E X (n + 1) ⟶ sfDerivedReductionRestricted l E X n :=
   (sfDerivedReductionTransition_existsUnique l E X n).exists.choose
@@ -520,8 +509,7 @@ private theorem sfDerivedUnit_step (n : ℕ) :
   funext i
   exact NatTrans.congr_app (sfOrdinaryUnit_step l E X n) (P.X i)
 
-/-- The canonical derived reduction tower at all positive coefficient levels.
-Source: Bhatt--Scholze, Definition 3.5.2. -/
+/-- The canonical derived reduction tower at all positive coefficient levels. -/
 noncomputable def sfIntegralReductionTower
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
     ℕᵒᵖ ⥤ DerivedCategory (scalarReductionSource.{u, u} l E X) :=
@@ -530,13 +518,7 @@ noncomputable def sfIntegralReductionTower
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The reduction units form a cone over the actual derived quotient transitions.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tag 06YL.
-Proof: on a K-flat representative, the tensor/restriction adjunction unit is the
-sheafified map x ↦ 1 tensor x. The quotient transition sends 1 tensor x to
-1 tensor x. Thus adjacent transitions commute with the units on representatives,
-and hence after localization. Every arrow in the opposite natural-number category
-is a composite of consecutive arrows, so induction gives the displayed equation. -/
+/-- The reduction units form a cone over the actual derived quotient transitions. -/
 theorem sfIntegralReductionUnit_naturality
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
     (i j : ℕᵒᵖ) (g : i ⟶ j) :
@@ -553,8 +535,7 @@ theorem sfIntegralReductionUnit_naturality
         (NatTrans.congr_app (sfDerivedUnit_step l E X n) K).symm)
   exact α.naturality g
 
-/-- The reduction tower together with its canonical compatible maps from K.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tag 06YL. -/
+/-- The reduction tower together with its canonical compatible maps from K. -/
 noncomputable def sfIntegralReductionCone
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
     Cone (sfIntegralReductionTower l E X K) where

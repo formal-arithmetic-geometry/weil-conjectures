@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral
 import WeilConjectures.CategoryTheory.Integral.IntegralResidueMatePasting
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueRestrictPullComp
 
-/-! # Composition of the canonical residue pull mates -/
+/-! # Composition of the canonical residue pull mates
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
+-/
 
 @[expose] public section
 
@@ -22,11 +27,7 @@ local instance instEssentiallySmallProfinite_integralResiduePullSquareComp
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- The inverse mates satisfy the composition coherence equation.
-Source: scalar associativity and mate pasting, Bhatt--Scholze, Remark 6.8.15.
-Proof. Apply the generic inverse-mate pasting identity to the three restriction/pullback
-comparison squares. The associativity isomorphisms are `residueExchangeUpperStarComp`;
-naturality and the counit identities reduce both paths to the same composite. -/
+/-- The inverse mates satisfy the composition coherence equation. -/
 theorem integralResidue_pullSquare_comp :
       ∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
         (K : residueExchangeDerived (integralCoeff ℓ E) Z),

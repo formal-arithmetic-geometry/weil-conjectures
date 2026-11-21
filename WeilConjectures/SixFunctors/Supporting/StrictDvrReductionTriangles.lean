@@ -88,14 +88,17 @@ import WeilConjectures.SixFunctors.Supporting.StrictDvrFlatTensorSequence
 
 /-! # Simultaneous strict DVR reductions and residue-kernel triangles
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0942, lemma-bounded, proof (1),
-specialized to the constant DVR coefficient quotients.
-
 The index `n : ℕ` always means exponent `n + 1`. In particular index zero is the
 residue coefficient. The completed ring, finite scalar extension, scalar restriction,
 pure tensors and quotient chain transitions are the existing unrestricted constructions.
 Their scalar-first tensor convention is the canonical symmetry presentation of
 `P ⊗ C_n`; no tensor or coefficient tower is redefined here.
+
+## References
+
+* [Stacks, Tag 06YT](https://stacks.math.columbia.edu/tag/06YT)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 0942](https://stacks.math.columbia.edu/tag/0942)
 -/
 
 @[expose] public noncomputable section
@@ -134,15 +137,13 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
 
-/-- The quotient coefficient itself, as a module over the completion via its projection.
-Source: Stacks 0942, proof (1), coefficient terms. -/
+/-- The quotient coefficient itself, as a module over the completion via its projection. -/
 abbrev strictDvrCoefficientModule (n : ℕ) : scalarReductionSource l E X :=
   (scalarReductionRestriction l E X n).obj
     (SheafOfModules.unit (integralCoefficientSheaf l E X n))
 
 /-- A constant coefficient section represented by an integer of the coefficient field.
-This is the unit of the recorded constant-sheaf sheafification applied to its quotient.
-Source: Stacks 0942, proof (1), DVR kernel identification. -/
+This is the unit of the recorded constant-sheaf sheafification applied to its quotient. -/
 def strictDvrConstantSection (n : ℕ) (U : X.ProEtᵒᵖ)
     (r : Padic.coefficientExtensionIntegers l E) :
     (strictDvrCoefficientModule l E X n).val.obj U :=
@@ -152,18 +153,14 @@ def strictDvrConstantSection (n : ℕ) (U : X.ProEtᵒᵖ)
         (ULift.up (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) r))
 
 /-- The object `Res_{π_n}(K ⊗ᴸ_B C_n)`, using the existing universal derived extension
-and exact derived restriction, at exponent `n + 1`.
-Source: Stacks 06YY and 0942, proof (1). -/
+and exact derived restriction, at exponent `n + 1`. -/
 abbrev strictDvrDerivedReduction
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :=
   (scalarReductionDerivedRestriction l E X n).obj
     ((scalarReductionDerivedExtension l E X n).obj K)
 
 /-- Simultaneous comparison normalized by the universal scalar-extension counit on
-the same K-flat complex and the same isomorphism to `K` at every level.
-Source: Stacks 06YT, 06YY and 0942, proof (1).
-The identity resolution of `P` supplies its K-flat computation; the final map is
-the functorial image of `e`, so no level-dependent resolution is chosen. -/
+the same K-flat complex and the same isomorphism to `K` at every level. -/
 def strictDvrReductionComparison
     {K : DerivedCategory (scalarReductionSource l E X)}
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -180,10 +177,7 @@ def strictDvrReductionComparison
 
 /-- The canonical derived quotient transition, expressed in the fixed simultaneous
 K-flat computation. The chain map is the published `id ⊗ q_n`, characterized on
-sheafified pure tensors; both changes of coordinates are the universal comparisons.
-Source: Stacks 06YT, 06YY and 0942, proof (1).
-Resolution independence is the quotient-transition clause of
-`unrestrictedReductionTowerWellDefined`. -/
+sheafified pure tensors; both changes of coordinates are the universal comparisons. -/
 def strictDvrDerivedQuotientTransition
     {K : DerivedCategory (scalarReductionSource l E X)}
     (P : CochainComplex (scalarReductionSource l E X) ℤ)
@@ -197,33 +191,7 @@ def strictDvrDerivedQuotientTransition
       (strictDvrReductionComparison l E X P hP e n).hom
 
 /-- A single flat-term K-flat representative computes every positive coefficient
-reduction with the actual residue-kernel chain maps and canonical quotient transitions.
-Source: Stacks 0942, lemma-bounded, proof (1), DVR specialization.
-
-Proof:
-1. Represent K by G and resolve G once by a flat-term K-flat P (lem-pc-kflat-resolution).
-Compose the localization of that resolution with the isomorphism from Q(G) to K.
-2. Over the DVR, multiplication by ϖ^(n+1) identifies R/(ϖ) with the kernel of
-R/(ϖ^(n+2)) → R/(ϖ^(n+1)): well-definedness is multiplication of ideals, injectivity
-is cancellation of the nonzero uniformizer in E, and exactness is the quotient formula.
-3. Apply the exact constant-module functor (def-sfb-site-derived-constant-module-functor,
-def-sf-site-constant-module-functor). Exactness can be read on underlying additive
-sheaves by situation-conventions.
-4. The residue injection is linear with the target action reduced to R/(ϖ).
-The limit-projection identities therefore make it B-linear (def-pur-sheaf-inverse-limit,
-def-pc-sheaf-restrict-scalars); its formula on constant sections is the one displayed.
-5. Tensor the coefficient short exact sequence in each degree with the B-flat term P^i.
-Symmetry (lem-pc-sheaf-modules-tensor-closed) identifies the scalar-first and scalar-last
-conventions. The maps commute with d_P, giving the stated degreewise short exact rows.
-6. The universal K-flat counit (lem-pur-derived-change-of-rings) computes all reductions
-from this same P. The restriction localization comparison and symmetry give the
-simultaneous comparisons (lem-pe-restricted-kflat-tensor-identification).
-Coefficient naturality (lem-sf-ringed-kflat-single-tensor-comparison) identifies the
-localized actual quotient chain maps with the canonical derived quotient transitions.
-7. Apply lem-weil-pbc-complex-ses-triangle, then transport the triangle along those
-same comparisons. Its first arrow is the localized kernel injection and its second
-arrow is exactly the canonical quotient transition. No extra condition on K or X occurs.
--/
+reduction with the actual residue-kernel chain maps and canonical quotient transitions. -/
 theorem strictDvrReductionTriangles
     (K : DerivedCategory (scalarReductionSource l E X)) :
     ∃ (P : CochainComplex (scalarReductionSource l E X) ℤ)

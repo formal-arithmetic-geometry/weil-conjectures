@@ -73,10 +73,7 @@ import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartTriangulate
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralRestriction.IntegralTateLineConstructible
 import all WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartLisseRestriction
 
-/-! # Tensor calculus for rational affine-space induction
-
-Source: blueprint `sk-cor-affine-space-rational-induction.proof.md`, both paragraphs.
--/
+/-! # Tensor calculus for rational affine-space induction -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -106,8 +103,7 @@ attribute [-instance] RationalP1.internalTensorCommShift RationalP1.internalMono
   monoidalCategory_cochainComplex in
 section
 
-/-- The recorded positive tensor power, transported back to internal modules.
-Source: blueprint `definition-tate-twists`, signed powers. -/
+/-- The recorded positive tensor power, transported back to internal modules. -/
 def rationalTatePowerFunctor
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -122,8 +118,7 @@ def rationalTatePowerFunctor
       (Scheme.ProEt.topology X) (condensedRingObj Λ X)).inverse.obj
         (spSignedTwist X (condensedRingObj Λ X) L (d : ℤ)))
 
-/-- Pullback followed by the specified degree-d tensor power and the shift [2d].
-Source: blueprint affine-space induction, twist/shift comparison. -/
+/-- Pullback followed by the specified degree-d tensor power and the shift [2d]. -/
 def rationalTatePull
     (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
     {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ) :
@@ -134,9 +129,7 @@ def rationalTatePull
       shiftFunctor (DerivedCategory
         (DiagonalCoefficients.Modules (RationalP1.coefficient ℓ c).X X)) (2 * (d : ℤ))
 
-/-- Degree one is the original internal Tate line. Source: blueprint signed powers.
-Proof: apply the unit isomorphism of the internal/sectionwise equivalence, then single
-and tensor functoriality. -/
+/-- Degree one is the original internal Tate line. -/
 theorem rationalTatePowerOneIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -154,10 +147,7 @@ theorem rationalTatePowerOneIso
       (Scheme.ProEt.topology X) R).functor.obj (Mod.regular R) ≅ 𝟙_ _ :=
   InternalAbelianSheafModule.comparison_unitIso (Scheme.ProEt.topology X) R
 
-/-- The zeroth power and zero shift are the identity. Source: blueprint signed powers.
-Proof: the sectionwise unit comparison identifies the transported power with the internal
-unit. Its single complex is the derived tensor unit; apply the right tensor unitor and
-zero-shift isomorphism. -/
+/-- The zeroth power and zero shift are the identity. -/
 theorem rationalTatePowerZeroIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
@@ -574,25 +564,7 @@ private theorem rationalTatePull_constructible
 
 /-- Positive rational Tate powers preserve bounded constructibility and compose across
 inverse image.
-These are assertions about ambient tensor functors, with no exceptional inverse image.
-Source: blueprint `sk-cor-affine-space-rational-induction.proof.md`, both paragraphs;
-expanded node steps 1--3 and 7.
-
-Proof: the common compatible-root cover trivializes the rational and closure lines.
-The sectionwise/internal tensor comparison identifies their nonnegative powers with
-internal tensor powers, including the unit at zero. Tensor by each power is exact and
-preserves coproducts, with inverse tensor by the dual power. On a pulled-back finite
-constructible stratification refine the constant-model covers by this root cover;
-tensor there is tensor with the unit, so the original finitely presented scalar module
-is unchanged. Cohomology commutes with this exact tensor; shifts reindex it. Exact
-pullback preserves the same constant models. This proves bounded constructibility.
-At degree zero the tensor unit and zero shift leave just pullback. At degree one,
-the counit of the sectionwise equivalence and tensor unitor identify the power with
-the original line. For composition, use Cartesian Tate-line pullback, the monoidal
-inverse-image tensor comparison, associativity of positive powers, and shift addition.
-Exact pullbacks commute with shifts and compose via leftDerivedUpperStarComp. All
-comparisons arise on complexes and descend naturally, so they apply to unbounded objects.
-The empty scheme and zero object use the same unit and shift comparisons. -/
+These are assertions about ambient tensor functors, with no exceptional inverse image. -/
 theorem rationalAffineTensorCalculus
     (ℓ : ℕ) [Fact ℓ.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField ℓ))
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :

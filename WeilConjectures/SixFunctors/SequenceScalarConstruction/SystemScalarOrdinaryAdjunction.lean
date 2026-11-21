@@ -10,7 +10,11 @@ import WeilConjectures.SixFunctors.SequenceScalarConstruction.SystemScalarPackag
 
 /-! # Generic normalized scalar comparison
 
-Source: Stacks 03D7, 03EK and 06YY.
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -27,12 +31,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{sw}] [HasSheafify J AddCommGrpCat.{sw}]
   [EssentiallySmall.{sw} C]
 
-/-- The actual ordinary scalar adjunction for a fixed cochain model, with its unit formula.
-Source: Stacks 03D7, 03EK and 06YY.
-Proof: construct the normalized scalar package with this fixed model. Transport
-its ordinary adjunction through the model equality. Its normalized unit is one
-tensor the section; unfold the generic tensor generator and simplify one_smul.
-The argument is generic in the model so no concrete quotient system is unfolded. -/
+/-- The actual ordinary scalar adjunction for a fixed cochain model, with its unit formula. -/
 theorem scalarOrdinaryAdjunction
     {R S : Sheaf J CommRingCat.{sw}} (φ : R ⟶ S)
     (D : SheafOfModules.DerivedChangeOfRingsCochainModel φ) :

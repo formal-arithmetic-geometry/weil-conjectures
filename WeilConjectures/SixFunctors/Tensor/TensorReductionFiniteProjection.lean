@@ -11,6 +11,11 @@ public import WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefine
 /-! # Finite projections of the ordinary tensor transpose
 
 Compute the ordinary reduction/limit transpose at a fixed finite tensor level.
+
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -198,17 +203,7 @@ private theorem tensor_level_projection (W : Scheme.{u})
       ((pullbackTensorReductionEvaluationComplex l E W n).app T) _ _ hψ
 
 /-- A finite projection of the ordinary tensor transpose is the finite scalar
-adjunction transpose of the prescribed scalar tensor comparison.
-
-Source: Stacks 07A4 and 0941, the ordinary tensor/limit adjunction and normalized
-finite tensor comparisons. Proof: the defining unit equation of the
-reduction/evaluation isomorphism identifies a limit projection of the ordinary
-transpose with a finite adjunction transpose. The specified tensor-tower component
-is the restricted evaluation tensor comparison followed by the two inverse
-reduction/evaluation maps. Naturality moves these comparisons inside the finite
-transpose. The assumed normalization then cancels the reduction/evaluation
-isomorphism and leaves the scalar tensor comparison. All calculations are chain
-maps, obtained degreewise from the ordinary module adjunction. -/
+adjunction transpose of the prescribed scalar tensor comparison. -/
 theorem tensorReduction_finiteProjection (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

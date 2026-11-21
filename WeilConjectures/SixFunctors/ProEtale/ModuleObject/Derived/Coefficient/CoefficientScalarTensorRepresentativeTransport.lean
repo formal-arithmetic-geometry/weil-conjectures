@@ -31,6 +31,10 @@ import all Mathlib.Algebra.Homology.Localization
 
 The second strict substep transports the internal-image equation across the exact
 section equivalence. It is independent of the bidegree generator calculation.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -110,12 +114,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 set_option linter.unusedSectionVars false in
 -- Elaborate the whiskered naturality diagram without unfolding the derived tensor data.
 /-- Transport an equation known on all internal complexes to arbitrary section
-complexes satisfying the same flat-term and K-flat hypotheses. The proof uses the
-counit isomorphisms of the termwise section equivalence and naturality of all maps.
-
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, transport along the section
-equivalence. This is strictly the transport step and leaves the internal equation
-as its hypothesis. -/
+complexes satisfying the same flat-term and K-flat hypotheses. -/
 theorem coefficientScalarTensorRepresentative_transport
     (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)

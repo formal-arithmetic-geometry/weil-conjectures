@@ -18,8 +18,6 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 
 The ambient exchange is a mate of the shift-compatible inverse-image compositor.
 Compatible shifts on its right adjoints make its isomorphism locus triangulated.
-Source: the localizing-extension step of the finite-coefficient proper base-change
-proof.
 -/
 
 @[expose] public noncomputable section
@@ -132,23 +130,7 @@ private theorem finiteProper_comparison_comp_commShift
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- The isomorphism locus of the specified ambient exchange is triangulated.
-No properness or finiteness hypothesis is required for this exactness assertion.
-Source: blueprint main-20261015, proposition-proper-base-change-localizing-categories--1,
-steps 2--4.
-
-Proof: transport the termwise coherent shifts to each total inverse image through
-`leftDerivedUpperStarIsoMapDerivedCategory`. Transport its exactness through the same
-isomorphism. For the two derived adjunctions, equip the right adjoints with the unique
-compatible shifts; the triangulated right-adjoint theorem supplies their exactness.
-The pullback comparison commutes with shifts: after the exact-functor comparisons it
-is the localization of the termwise comparison induced by `upperStarComp` and the square
-equality. In each degree its component on a shifted complex is its component at the
-shifted degree, and additivity respects the signed differential. The derived comparison
-is built by precisely these exact-functor identifications. The units and counits commute
-with these chosen shifts. Expand `mateEquiv`: its whiskered units, comparison and counit,
-and its associators and unitors, all commute with shifts, so their composite does too.
-The two composite functors are triangulated. The standard isomorphism-locus theorem
-then gives closure under zero, all integer shifts and distinguished triangles. -/
+No properness or finiteness hypothesis is required for this exactness assertion. -/
 private theorem cached_exchange_isoLocus
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X' X Y' Y : Scheme.{u}}
@@ -210,12 +192,7 @@ end CachedProofs
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The specified ambient exchange has a triangulated isomorphism locus.
-Source: the localizing extension of finite proper base change.
-
-Proof: the cached argument proves shift compatibility of the pullback comparison,
-then of its adjunction mate. Both composite functors are triangulated, and the
-isomorphism-locus theorem gives the assertion. No finiteness or properness is used. -/
+/-- The specified ambient exchange has a triangulated isomorphism locus. -/
 theorem condensedAmbientExchange_isoLocus_triangulated
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X' X Y' Y : Scheme.{u}}

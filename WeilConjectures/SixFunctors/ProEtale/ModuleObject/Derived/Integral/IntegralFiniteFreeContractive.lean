@@ -80,7 +80,9 @@ import Mathlib.LinearAlgebra.Matrix.Ideal
 
 /-! # Contractive matrices over integral coefficient sheaves
 
-Source: Bhatt--Scholze, Section 6.8, integral Nakayama argument.
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public section
@@ -187,14 +189,7 @@ open MonoidalCategory MonObj
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
-/-- One minus ℓ times an endomorphism of a finite free integral module is invertible.
-Source: Bhatt--Scholze, Section 6.8, integral Nakayama argument.
-
-Proof: the rank-one assertion says that ℓ belongs to the Jacobson radical of
-End(R). Matrix Jacobson radicals are computed entrywise, so the matrix ℓT belongs
-to the radical of the matrix endomorphism ring. One minus a radical element is a unit.
-The biproduct matrix construction is a ring homomorphism from matrices over End(R)
-to End(R^n), and sends this unit to the asserted endomorphism. Rank zero is included. -/
+/-- One minus ℓ times an endomorphism of a finite free integral module is invertible. -/
 theorem integralFiniteFree_one_sub_nsmul_isIso (X : Scheme.{u})
     (R : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) [MonObj R] [IsCommMonObj R]
     (e : R ⟶ condensedRingObj (integralCoeff ℓ E) X) [IsMonHom e] [IsIso e]

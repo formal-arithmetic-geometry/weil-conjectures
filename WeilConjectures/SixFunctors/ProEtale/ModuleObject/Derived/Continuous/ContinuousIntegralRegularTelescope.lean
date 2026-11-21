@@ -29,7 +29,12 @@ import all WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 import all WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import all WeilConjectures.ConstructibleSheaf.FreeLifting
 
-/-! # The regular coefficient localization telescope -/
+/-! # The regular coefficient localization telescope
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.2
+-/
 
 @[expose] public section
 
@@ -194,11 +199,7 @@ private theorem schemeCoefficientIso_naturality (X : Scheme.{u}) :
 
 omit [Fact ℓ.Prime] in
 /-- Transport a scalar telescope colimit and its specified zeroth leg through an
-additive functor and coefficient isomorphisms.
-Source: universal properties of colimits and natural isomorphisms.
-Proof. Reindex the mapped cocone by the natural isomorphism with constant component
-`er.hom`; its inverse changes the zeroth leg by `er.inv`. The given leg equation
-then cancels `er.inv` with `er.hom`. -/
+additive functor and coefficient isomorphisms. -/
 theorem transportRegularTelescope
     {A B C : Type*} [Category A] [Category B] [Category C]
     [Preadditive A] [Preadditive B]
@@ -236,13 +237,7 @@ theorem transportRegularTelescope
   rw [V.map_id, Category.id_comp]
 
 /-- The regular restricted E-module is the scalar telescope of the regular integral
-module; the zeroth leg is the coefficient inclusion.
-Source: Bhatt--Scholze, Lemma 6.8.2, compact-test localization.
-Proof. On every compact profinite test, divide by ℓⁿ. Compactness supplies one
-common denominator, and injectivity gives the colimit equivalence relation.
-Monoidal sheafification and inverse image from the point preserve the resulting
-module colimit. Their coefficient isomorphisms identify the zeroth leg with the
-original coefficient inclusion. -/
+module; the zeroth leg is the coefficient inclusion. -/
 theorem integralRegularTelescope (X : Scheme.{u}) :
     ∃ c : Cocone (integralLocalizationSequence ℓ (Mod.regular
         (condensedRingObj (integralCoeff ℓ E) X))),

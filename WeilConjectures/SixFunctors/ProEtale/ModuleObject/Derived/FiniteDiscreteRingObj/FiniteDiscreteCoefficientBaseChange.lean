@@ -41,7 +41,6 @@ along the pullback comparison `boundedConstructiblePullbackSquareComparison` (st
   `CategoryTheory.Adjunction.exchangeRight` of `θ_sq`.
 - `boundedConstructibleBaseChange_adjunct`: the adjunct of `BC_sq` under `Lf'^* ⊣ Rf'_*` is
   `θ_sq` followed by `Lg'^*` of the counit of `Lf^* ⊣ Rf_*`.
-
 -/
 
 @[expose] public section

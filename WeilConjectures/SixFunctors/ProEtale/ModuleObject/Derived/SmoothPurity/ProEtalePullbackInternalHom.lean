@@ -18,7 +18,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.ProperBaseChange.Grot
 
 /-! # Internal Hom and weakly etale coefficient pullback
 
-Source: the localization calculation for internal Hom, blueprint stratum Hom step 3.
+Coefficient inverse image along a weakly etale morphism commutes with internal Hom.
 -/
 
 @[expose] public section
@@ -150,8 +150,7 @@ private lemma pullbackConcreteIhomIso_embedding
   simpa only [Mod.comp_hom', Mod.mapHomModHom_hom, supportPullback,
     Functor.comp_map, Functor.mapMod, Mod.comap, Mod.homMk] using hc'
 
-/-- Coefficient inverse image is strong monoidal for the relative module tensor.
-Source: blueprint stratum Hom lemma, proof step 3, restriction of evaluation. -/
+/-- Coefficient inverse image is strong monoidal for the relative module tensor. -/
 noncomputable instance supportPullback_monoidal
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) : (supportPullback Λ f).Monoidal := by
@@ -174,20 +173,7 @@ private lemma supportPullback_tensorπ_μ
   rw [Mod.tensorπ_comapTensorIso_hom_hom_assoc,
     Functor.tensorπ_mapModTensorIso_hom_hom]
 
-/-- Weakly etale restriction preserves the canonical internal-Hom comparison.
-Source: blueprint stratum Hom lemma, step 3, restriction of sheaf Hom to the local site.
-
-Proof: identify inverse image along f with restriction to the localized pro-etale site.
-For each further weakly etale Y-scheme V, the over-category of V in that localized site
-is equivalent to the over-category of its image in the original site. Thus restriction
-commutes with the end defining internal Hom of abelian sheaves. Internal Hom of module
-objects is the equalizer imposing linearity on that abelian internal Hom. Restriction
-preserves this equalizer, since it preserves finite limits. Transporting the coefficient
-ring along the canonical isomorphism alpha does not change the linearity equation.
-The resulting isomorphism is the canonical internal-Hom comparison: uncurry it and
-both maps are pullback of evaluation after the tensor comparison. This characterization
-also proves naturality in the second module. No finite generation is needed here; the
-argument applies on the empty site and to the zero coefficient ring. -/
+/-- Weakly etale restriction preserves the canonical internal-Hom comparison. -/
 theorem supportPullback_ihomComparison_isIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [WeaklyEtale f] (M : supportModules Λ Y) :

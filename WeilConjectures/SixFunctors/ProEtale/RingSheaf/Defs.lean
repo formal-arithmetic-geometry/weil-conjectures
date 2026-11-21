@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.ProjectionFormula
 Let `R` be a commutative ring (e.g. `ULift ℤ`) and `B` a sheaf of `R`-algebras on `X_proét`,
 i.e. a monoid object in the monoidal category of pro-étale sheaves of `R`-modules. The
 `B`-module sheaves are the module objects `Mod (Sheaf (ProEt.topology X) (ModuleCat R)) B`.
-This file defines the operations of blueprint
-`proposition-extension-zero-restriction-closed-subscheme` on them; on underlying sheaves of
+This file defines the pullback, pushforward and extension by zero on them; on underlying sheaves of
 `R`-modules they are the operations of `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient` (all
 the `*_comp_forget` lemmas are `rfl`).
 
@@ -51,18 +50,16 @@ section UpperLowerStar
 
 variable (g : Y ⟶ X)
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: the
-pullback `g^*` from `B`-module sheaves on `X_proét` to `g^* B`-module sheaves on `Y_proét`: the
-transport of module objects along the strong monoidal pullback of sheaves of `R`-modules. -/
+/-- The pullback `g^*` from `B`-module sheaves on `X_proét` to `g^* B`-module sheaves on `Y_proét`:
+the transport of module objects along the strong monoidal pullback of sheaves of `R`-modules. -/
 noncomputable abbrev upperStar :
     Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) B ⥤
       Mod (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R)) ((g)^*[ModuleCat.{u + 1} R].obj B) :=
   (g)^*[ModuleCat.{u + 1} R].mapMod B
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: the
-pushforward `g_*` from `g^* B`-module sheaves on `Y_proét` to `B`-module sheaves on `X_proét`:
-the transport along the lax monoidal pushforward, followed by restriction of scalars along the
-unit `B ⟶ g_* g^* B`. -/
+/-- The pushforward `g_*` from `g^* B`-module sheaves on `Y_proét` to `B`-module sheaves on
+`X_proét`: the transport along the lax monoidal pushforward, followed by restriction of scalars
+along the unit `B ⟶ g_* g^* B`. -/
 noncomputable abbrev lowerStar :
     Mod (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R)) ((g)^*[ModuleCat.{u + 1} R].obj B) ⥤
       Mod (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)) B :=
@@ -77,8 +74,8 @@ lemma upperStar_comp_forget :
 lemma lowerStar_comp_forget :
     lowerStar B g ⋙ Mod.forget B = Mod.forget _ ⋙ (g)_*[ModuleCat.{u + 1} R] := rfl
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: the adjunction `g^* ⊣ g_*`
-on module sheaves, lifted from the monoidal adjunction on sheaves of `R`-modules. -/
+/-- The adjunction `g^* ⊣ g_*` on module sheaves, lifted from the monoidal adjunction on sheaves of
+`R`-modules. -/
 noncomputable def upperStarLowerStarAdjunction : upperStar B g ⊣ lowerStar B g :=
   (ProEtale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) g).mapModAdjunction B
 
@@ -106,8 +103,7 @@ variable (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [
 
 include i hij
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`: the
-extension by zero `j_!` from `j^* B`-module sheaves on `U_proét` to `B`-module sheaves on
+/-- The extension by zero `j_!` from `j^* B`-module sheaves on `U_proét` to `B`-module sheaves on
 `X_proét`, for a quasi-compact open immersion `j` with closed complement `i`. The underlying
 sheaf of `j_! N` is the extension by zero of the underlying sheaf of `N`, with `B` acting
 through the projection formula `B ⊗ j_! N ≅ j_!(j^* B ⊗ N) ⟶ j_! N`. -/
@@ -122,8 +118,7 @@ lemma openImmersionLowerShriek_comp_forget :
     openImmersionLowerShriek B i j hij ⋙ Mod.forget B =
       Mod.forget _ ⋙ (j)_!open[ModuleCat.{u + 1} R] := rfl
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (1): the adjunction
-`j_! ⊣ j^*` on module sheaves. -/
+/-- The adjunction `j_! ⊣ j^*` on module sheaves. -/
 noncomputable def openImmersionLowerShriekUpperStarAdjunction :
     openImmersionLowerShriek B i j hij ⊣ upperStar B j :=
   have := hasProjectionFormula_openImmersion_of_isCompl (R := R) i j hij

@@ -14,17 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleUpperStar
 Let `(Gₙ)` be a tower of `ℤ_ℓ,X`-modules on `X_proét` whose transitions are cokernels of `ℓⁿ`
 (`Gₙ₊₁/ℓⁿ ≅ Gₙ`) and whose underlying abelian sheaves are locally isomorphic to `(ℤ/ℓⁿ)_X^r`.
 Then the `ℓ`-adic sheaf `ℚ̄_ℓ ⊗_{ℤ_ℓ} lim Gₙ` is lisse
-(`AlgebraicGeometry.ProEtale.isAdicLisseSheaf_adicSheafExtendScalars_limit`):
-
-1. the lattice `lim Gₙ` is pro-étale locally isomorphic to `ℤ_ℓ,X^r` as an abelian sheaf
-   (`AlgebraicGeometry.ProEtale.exists_cover_nonempty_iso_padicIntAbSheaf_pow_of_isColimit`),
-   over the members `W` of a cover; the isomorphism over the slice `X_proét / W` is an
-   isomorphism of the pullbacks to `W_proét`
-   (`AlgebraicGeometry.ProEtale.localizationRestrictionIsoOfOverPullbackIso`);
-2. such an isomorphism is automatically `ℤ_ℓ`-linear
-   (`AlgebraicGeometry.ProEtale.modIsoBiproductRegularOfIso`);
-3. extension of scalars commutes with the pullback and sends `ℤ_ℓ,W` to `ℚ̄_ℓ,W`
-   (`AlgebraicGeometry.ProEtale.adicUpperStarAdicSheafExtendScalarsIso`).
+(`AlgebraicGeometry.ProEtale.isAdicLisseSheaf_adicSheafExtendScalars_limit`).
 -/
 
 @[expose] public section

@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.F
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.CoefficientDerivedFunctorAPI
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientSquareCoherence
 
-/-! # Coherent pullbacks for the common coefficient realization -/
+/-! # Coherent pullbacks for the common coefficient realization
+
+## References
+
+* Bhatt--Scholze, Proposition 5.3.2; Stacks Project, Tag 09AK
+-/
 
 @[expose] public section
 
@@ -36,23 +41,7 @@ variable
   (hG : G ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1} =
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
-/-- The common coefficient realization has coherent derived inverse-image comparisons.
-Source: Bhatt--Scholze, Proposition 5.3.2; Stacks Project, Tag 09AK.
-
-Proof in words. On module-valued sheaves take the conjugate of the canonical
-restriction identity for the etale/pro-etale site inclusion. Encode internal modules
-sectionwise with the same G. The equality hG identifies underlying restrictions, and
-full faithfulness of G lifts their identities to module morphisms. The constant ring
-isomorphisms are pulled back from the fixed eR at the profinite point; naturality of
-constant-sheaf pullback and associativity of pullback from that point identify the
-scalar maps for every scheme morphism. Thus the encoding intertwines inverse images.
-Apply these exact functors termwise to complexes and localize at quasi-isomorphisms.
-Identify the exact internal pullback with its total left derived functor. Restrict the
-etale source to D+ and include the target in the full derived category. For a square,
-the two restriction composites agree by sq.w. Conjugation preserves this identity,
-as do termwise application, localization and restriction to D+. The canonical derived
-composition isomorphisms give precisely the displayed equation, including its equality
-transport. No direct-image or right-mate assertion is made here. -/
+/-- The common coefficient realization has coherent derived inverse-image comparisons. -/
 theorem finiteDiscreteCoefficient_coherentPullbacks [DiscreteTopology B] [Finite B] :
     Nonempty (FiniteDiscreteCoherentPullbacks B
       (finiteDiscreteCoefficientEquivalence B eR G hG)) := by

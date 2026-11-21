@@ -41,7 +41,9 @@ import all WeilConjectures.AlgebraicGeometry.Adic.AdicCoefficientDatumSupplement
 
 /-! # Tensor coherence for a geometric coefficient square
 
-Source: Stacks Project, Tags 07A4, 07A6 and 0E48.
+## References
+
+* Stacks Project, Tags `07A4`, `07A6`, `0E48`
 -/
 
 @[expose] public noncomputable section
@@ -305,28 +307,7 @@ private theorem scalarPull_tensor_representative
     (by simpa only [Functor.map_comp, Category.assoc] using ho.symm) hrD
 
 /-- The normalized scalar/pullback comparison respects the four tensor comparisons.
-This concerns only left adjoints and contains no projection or direct-image mate.
-
-Source: Stacks Project, Tags 07A4, 07A6 and 0E48, the tensor calculation before
-transposing the coefficient square.
-
-Proof: choose flat-term K-flat resolutions of P and Q. Geometric pullback and
-scalar extension preserve these representatives. The two composite left adjoints
-are identified by the balanced coefficient square: their right adjoints have the
-specified sectionwise restriction/direct-image comparison. On representatives
-this identifies scalarPull inverse with the map sending each iterated unit tensor
-to the corresponding iterated unit tensor. To check this normalization, transpose
-under the composite scalar/geometric adjunctions; both transposes are exactly the
-restriction comparison defining scalarPull, and uniqueness of left adjoints gives
-equality. Expand the representative equations for the two geometric tensorators
-and the two scalar tensorators. On homogeneous pure tensors both routes distribute
-the two sections to the same factors and multiply the same coefficient sections;
-the balancing relations identify the resulting maps. Both preserve the pair of
-degrees, so there is no additional sign on signed total complexes. Sheafification
-and localization preserve the equality. Cancel the representative isomorphisms,
-and use the fully faithful restriction of derived bifunctors to flat K-flat pairs
-to obtain the equation on arbitrary P and Q. This includes identity coefficient
-maps, zero inputs and nonflat quotient maps. -/
+This concerns only left adjoints and contains no projection or direct-image mate. -/
 theorem scalarPull_tensor_coefficient_coherence
     {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V)

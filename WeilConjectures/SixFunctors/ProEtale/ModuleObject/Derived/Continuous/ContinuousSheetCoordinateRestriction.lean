@@ -15,7 +15,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.CompMono
 
 /-! # Restricting the forward coordinate equation to an open subscheme
 
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2.
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -560,26 +562,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 -- Keep the coefficient comparison abstract when applying the restriction construction.
 /-- A global coordinate equation for normalized sheet maps persists on every open.
-The matrices are arbitrary; freeness and invertibility are not assumed.
-Source: blueprint, stratified lattice trace proof, Local computation, paragraphs 1--2;
-Bhatt--Scholze, Section 6.8, restriction of continuous coefficients.
-
-Proof. Restrict the two given continuous-function presentations along W → Y.
-The continuous module encoding identifies inverse image along this open immersion
-with restriction of its module presheaf, so the restricted coordinate maps are
-the same maps on each pro-etale test object B over W, now regarded as an object
-over Y. For the rational presentation first use comapUpperStarIso to commute
-restriction of scalars with inverse image; then upperStarComp identifies the
-rational target with the pullback along W.ι ≫ g. Similarly upperStarComp for
-integral coefficients identifies each source with pullback along W.ι ≫ t j.
-These transports preserve linearity and the coordinate restriction identities.
-The equation (W.ι ≫ t j) ≫ p = W.ι ≫ g follows by associativity and w j.
-Naturality of comapUpperStarIso and associativity of upperStarComp identify
-the transported global sheet map with finiteEtaleLatticeSheetEmbedding for
-these composite arrows. Apply the assumed global equation to B regarded over Y.
-Its point is W.ι (B.hom z), giving the displayed formula. On an empty W there
-are no points z; the same restriction construction still gives the presentations.
-No matrix-continuity, invertibility, rank or scalar-extension claim is needed. -/
+The matrices are arbitrary; freeness and invertibility are not assumed. -/
 theorem continuousSheet_coordinate_restriction
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

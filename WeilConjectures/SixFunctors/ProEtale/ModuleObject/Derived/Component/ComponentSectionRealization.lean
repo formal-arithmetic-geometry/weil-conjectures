@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Component.Compo
 
 /-! # Normalized section-ring realization square for component pullback
 
-Source: Hemo--Richarz--Scholbach, Remark 3.2 and Proposition 4.3(3).
+## References
+
+* Hemo--Richarz--Scholbach, Remark 3.2 and Proposition 4.3(3).
 -/
 
 @[expose] public noncomputable section

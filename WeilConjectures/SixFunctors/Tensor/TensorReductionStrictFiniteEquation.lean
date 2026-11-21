@@ -9,7 +9,10 @@ public import WeilConjectures.SixFunctors.Tensor.TensorReductionStrictComparison
 
 /-! # Assembling the ordinary coherent reduction tensor comparison
 
-Source: Stacks 07A4 and 0941.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -40,8 +43,7 @@ private theorem cancel_tensor_comparisons
   simp only [Category.assoc, Iso.inv_hom_id_assoc]
   rw [← F.map_comp, h, F.map_id, Category.comp_id]
 
-/-- The strict map satisfies the scalar tensor equation before localization.
-Source: Stacks 07A4. -/
+/-- The strict map satisfies the scalar tensor equation before localization. -/
 theorem tensorReductionStrictMap_finite (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

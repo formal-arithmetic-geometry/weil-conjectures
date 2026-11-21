@@ -13,6 +13,10 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.Fini
 
 The underived encoding comparison is already constructed in
 `FiniteDiscreteRestrictionEncoding`. Derive it using the exact coefficient equivalences.
+
+## References
+
+* Bhatt--Scholze, Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 099R
 -/
 
 @[expose] public section
@@ -38,17 +42,7 @@ variable (eR : Sheaf.sheafifyRingPresheaf.{u + 1, u, u + 1}
   (hG : G ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1} =
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
-/-- The explicit finite coefficient equivalences conjugate bounded-below direct image.
-Source: Bhatt--Scholze, Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 099R.
-
-Proof in words. Expand the common coefficient equivalence into the sectionwise module
-encoding and the inverse of the constant-ring restriction equivalence. Sectionwise
-restriction commutes with the fixed additive equivalence by `hG`, while the scalar
-maps commute by naturality of the coefficient-ring map pulled back from the profinite
-point. This gives an underived natural isomorphism between internal pushforward after
-encoding and encoding after module-valued pushforward. The encoding equivalences are
-exact, so applying the right-derived functor construction transports this isomorphism
-to the displayed bounded-below derived categories. -/
+/-- The explicit finite coefficient equivalences conjugate bounded-below direct image. -/
 theorem finiteDiscreteCoefficient_directImage_conjugation [DiscreteTopology B] [Finite B]
     {S T : Scheme.{u}} (h : S ⟶ T) [QuasiCompact h] [QuasiSeparated h] :
     ∀ X : DerivedCategory.Plus (FiniteDiscreteProEtaleSheaves B S),

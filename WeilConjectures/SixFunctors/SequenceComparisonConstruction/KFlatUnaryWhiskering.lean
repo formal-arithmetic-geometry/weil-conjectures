@@ -51,7 +51,11 @@ import WeilConjectures.CategoryTheory.SixFunctors.UnaryWhiskeringOfProduct
 
 /-! # Unary restriction to K-flat representatives
 
-Source: Stacks 06YS, 07A4 and 0G7E.
+## References
+
+* [Stacks, Tag 06YS](https://stacks.math.columbia.edu/tag/06YS)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0G7E](https://stacks.math.columbia.edu/tag/0G7E)
 -/
 
 @[expose] public noncomputable section
@@ -61,13 +65,7 @@ universe a b c d e f
 open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits
 namespace SequenceComparisonConstruction
 
-/-- Restriction along K-flat representatives is fully faithful on functor categories.
-Source: Stacks 06YS, 07A4 and 0G7E.
-Proof: every homotopy object has a K-flat resolution, giving the hypotheses of
-resolvingRepresentativesFullyFaithfulWhiskering on the K-flat full subcategory.
-Transport its product restriction comparison by quotientCompQhIso. Apply the
-projection/diagonal construction unaryWhiskeringOfProduct to obtain unary full
-faithfulness for the actual derived localization on cochain complexes. -/
+/-- Restriction along K-flat representatives is fully faithful on functor categories. -/
 theorem kflatWhiskering
     {D : Type e} [Category.{f} D]
     {C : Type a} [Category.{b} C] [EssentiallySmall.{c} C]

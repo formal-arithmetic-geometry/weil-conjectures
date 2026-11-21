@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenRestrictionData
 import WeilConjectures.SixFunctors.PurCompactSupport.RefinementProperCounitIsIso
 
-/-! Componentwise invertibility of the refinement restriction map. -/
+/-! Componentwise invertibility of the refinement restriction map.
+
+## References
+
+* Stacks Project, Tags `0F7B`, `0F7I`
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,9 +28,7 @@ variable (R : Coefficients.{u})
   (hi : R.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom
     (R.ring d.Z) (R.ring c.Z) (R.ring X) (R.pull r.hom) (R.pull c.i))
 
-/--
-Source: Stacks 0F7B and 0F7I, clopen restriction to the distinguished section.
-The proper restriction map on each derived object is invertible because the
+/-- The proper restriction map on each derived object is invertible because the
 refinement fibre product decomposes into the clopen distinguished section and
 its complement; extension by zero is exact on that section and the proper
 counit restricts to the identity there.

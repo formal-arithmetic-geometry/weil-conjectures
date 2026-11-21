@@ -20,8 +20,8 @@ For `p' : X' ⟶ V'` and a weakly contractible object `W` of `V'_proét`, the fr
 projective (`AlgebraicGeometry.ProEtale.projective_freeSheaf`), so the Leray identification
 collapses: the cohomology of `X' ×_{V'} W` with coefficients in `F` vanishes in degree `r` if and
 only if the sections of `R^r p'_* F` over `W` do
-(`AlgebraicGeometry.ProEtale.subsingleton_ext_freeSheaf_pullback_iff`). This gives the corrected
-form of blueprint `lem-sf-fullcd-detection-equivalence`
+(`AlgebraicGeometry.ProEtale.subsingleton_ext_freeSheaf_pullback_iff`). This gives a detection
+criterion for `FullCD`
 (`AlgebraicGeometry.ProEtale.hasUniformCohomologicalDimensionLE_iff_forall_ext`).
 
 ## Main definitions
@@ -36,8 +36,8 @@ form of blueprint `lem-sf-fullcd-detection-equivalence`
   contractible.
 - `AlgebraicGeometry.ProEtale.subsingleton_ext_freeSheaf_pullback_iff`: the Leray collapse over
   a weakly contractible object.
-- `AlgebraicGeometry.ProEtale.hasUniformCohomologicalDimensionLE_iff_forall_ext`: blueprint
-  `lem-sf-fullcd-detection-equivalence`, corrected.
+- `AlgebraicGeometry.ProEtale.hasUniformCohomologicalDimensionLE_iff_forall_ext`: detection of
+  `FullCD` by the cohomology of base changes of affine weakly contractible objects.
 -/
 
 @[expose] public section
@@ -159,23 +159,12 @@ theorem subsingleton_ext_freeSheaf_pullback_iff {X' V' : Scheme.{u}} (p' : X' �
     DerivedCategory.subsingleton_singleFunctor_hom_shift_iff_of_projective,
     (freeSheafHomEquiv Λ W _).subsingleton_congr]
 
-/-- Blueprint `lem-sf-fullcd-detection-equivalence` (corrected): detection of `FullCD` by the
-cohomology of base changes of affine weakly contractible objects.
+/-- Detection of `FullCD` by the cohomology of base changes of affine weakly contractible objects.
 
 `FullCD(p, Λ; c)` holds if and only if, for every base change `p' : X' ⟶ V` of `p` along an
 object `V` of `Y_proét`, every pro-étale sheaf `F` of `Λ`-modules on `X'`, every `r > c` and
 every affine weakly contractible object `W` of `V_proét`, the pro-étale cohomology
-`H^r((X' ×_V W)_proét, F|) = Ext^r(Λ[X' ×_V W], F)` vanishes.
-
-The blueprint states the equivalence with the vanishing of `H^r((X ×_Y V)_proét, F|)` for all
-objects `V` of `Y_proét`. That statement is false: for `p = 𝟙`, `FullCD(𝟙, Λ; 0)` holds since
-the identity has no higher direct images, while `H^r(V_proét, F)` is nonzero in general. Its
-proof, the collapse of the Leray spectral sequence, only works over weakly contractible `V`,
-where `Λ[V]` is projective; that argument proves the corrected form above, by combining
-`AlgebraicGeometry.ProEtale.subsingleton_ext_freeSheaf_pullback_iff` with the test on affine
-weakly contractible objects of blueprint `cor-sf-fullcd-weakly-contractible-test`
-(`AlgebraicGeometry.ProEtale.hasUniformCohomologicalDimensionLE_iff_forall_isWeaklyContractible`).
-The degree `r : ℤ` of `FullCD` with `r > c ≥ 0` is a natural number here. -/
+`H^r((X' ×_V W)_proét, F|) = Ext^r(Λ[X' ×_V W], F)` vanishes. -/
 theorem hasUniformCohomologicalDimensionLE_iff_forall_ext {X Y : Scheme.{u}} (p : X ⟶ Y)
     (c : ℕ) :
     HasUniformCohomologicalDimensionLE (ModuleCat.{u + 1} Λ) p c ↔

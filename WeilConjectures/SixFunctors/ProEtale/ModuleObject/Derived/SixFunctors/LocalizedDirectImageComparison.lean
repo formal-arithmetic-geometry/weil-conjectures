@@ -44,12 +44,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 /-!
 # Localization of coefficients and bounded-below direct image
 
-Source: Hemo--Richarz--Scholbach, Lemmas 5.3(1) and 5.6; Bhatt--Scholze,
-Remark 6.8.15.
-
 The map is the published coefficient-change mate on the ambient module categories.
 Its flatness argument is supplied by the existing localization theorem, rather than
 assumed of the complex or of the scheme morphism.
+
+## References
+
+* Hemo--Richarz--Scholbach, Lemmas 5.3(1) and 5.6, and natural comparison (5.4)
+* Bhatt--Scholze, Remark 6.8.15
+* Stacks Project, Tags 07A6 and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -69,8 +72,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 from the point. The published `derivedPushHom` is the mate of the canonical restriction
 comparison; equivalently it is adjoint to scalar extension of the geometric counit,
 after the canonical pullback/tensor identification. Its required scalar exactness is
-the last assertion of `padicIntegers_invertEll`, not an additional hypothesis.
-Source: HRS Lemma 5.3(1), natural comparison (5.4), and Stacks 07A6, 07A4. -/
+the last assertion of `padicIntegers_invertEll`, not an additional hypothesis. -/
 def localizedDirectImageComparison (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -267,28 +269,7 @@ set_option maxHeartbeats 120000 in
 -- The ambient derived category retains the full module tensor-resolution structure.
 /-- Localization of coefficients commutes with ordinary ambient derived direct image
 for every bounded-below complex; completeness, constructibility and finite Tor
-amplitude are not required.
-Source: HRS Lemmas 5.3(1), 5.6; Bhatt--Scholze Remark 6.8.15.
-
-Proof:
-1. Equip E with the norm induced from the fixed algebraic closure. The continuous
-integral coefficient ring and its inclusion into E are definitionally the published
-padic coefficient ring and inclusion. Bundle this equality at the coefficient-map
-level before constructing the derived module categories.
-2. Use the internal scalar extension/restriction adjunctions and the published
-restriction/direct-image isomorphism κ. For the specified mate β, the general mate
-unit identity gives η ≫ (U β ≫ κ) = Rf_*(η).
-3. The right derived direct image preserves a cohomological lower bound, by its
-bounded-below compatibility. Form the localization-unit cocone of C, its image under
-Rf_*, and the localization-unit cocone of Rf_* C. The scalar sequence comparison
-identifies their base diagrams; the mate identity identifies their zeroth legs.
-4. The existing integral localization homology and pushforward continuity theorems
-make both lifted cocones colimits after each cohomology functor. Multiplication by ℓ
-is invertible on their localized vertices, so the localization cocone comparison
-criterion proves every cohomology map of U β ≫ κ invertible.
-5. Cohomology detects isomorphisms, κ is invertible, and exact scalar restriction
-reflects isomorphisms, again by cohomology and its faithful underlying forgetful
-functor. Therefore the specified β is invertible. -/
+amplitude are not required. -/
 theorem localizedDirectImageComparison_isIso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f]

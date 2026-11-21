@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueOrdinaryRestrictPullComp
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 
-/-! # Composition of restriction and derived pullback -/
+/-! # Composition of restriction and derived pullback
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,15 +34,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 set_option maxHeartbeats 800000 in
 -- Instantiating naturality for the module-object derived squares repeats exactness searches.
-/-- Restriction of scalars respects the canonical derived pullback composition.
-Source: the coefficient-map composition identity and exact inverse image, as used in
-Bhatt--Scholze, Remark 6.8.15.
-
-Proof. Apply the proved exact-derived square-pasting theorem to the ordinary
-restriction-composition identity. Expand the exact-pullback identifications in the
-left-derived composition maps. Cancel inverse pairs and use naturality of the
-restriction square to transport the levelwise derived identity to the required
-left-derived identity. No flatness of scalar reduction is used. -/
+/-- Restriction of scalars respects the canonical derived pullback composition. -/
 theorem residueExchangeRestrictPullIso_comp
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (N : residueExchangeDerived

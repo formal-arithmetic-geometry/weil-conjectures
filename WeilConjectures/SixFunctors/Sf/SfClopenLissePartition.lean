@@ -15,7 +15,10 @@ import Mathlib.Algebra.Field.ULift
 
 /-! # Simultaneous finite lisse trivialization on clopen pieces
 
-Source: Stacks Project, Tags 098F and 09C3.
+## References
+
+* [Stacks, Tag 098F](https://stacks.math.columbia.edu/tag/098F)
+* [Stacks, Tag 09C3](https://stacks.math.columbia.edu/tag/09C3)
 -/
 
 @[expose] public noncomputable section
@@ -49,16 +52,7 @@ private def constant_model_iso (T : Scheme.{t}) (Λ : Type u) [CommRing Λ]
   exact (PresheafOfModules.sheafification _).mapIso p
 
 /-- Finitely many locally constant finite-dimensional module sheaves on an affine
-categorically weakly contractible scheme have a common finite clopen free partition.
-
-Source: Stacks Project, Tags 098F and 09C3.
-Proof: for each sheaf form the sieve of arrows on which it is constant with a finite
-model. Constant-model restriction makes it downward closed, and the given trivializing
-cover makes it covering. Intersect these finitely many sieves, using the top sieve for
-an empty family. The categorical clopen-cover refinement gives a common partition.
-Choose a finite basis of each model and sheafify the corresponding linear isomorphism
-to obtain the displayed free models. Each piece is closed in the compact affine target,
-so compact. Zero ranks and empty pieces are included. -/
+categorically weakly contractible scheme have a common finite clopen free partition. -/
 theorem sf_clopen_lisse_partition (T : Scheme.{t}) [IsAffine T]
     (hweak : ∀ (A B : Sheaf (ProEt.topology T) (Type (max u (t + 1))))
       (f : A ⟶ B), Epi f → Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 T)))))

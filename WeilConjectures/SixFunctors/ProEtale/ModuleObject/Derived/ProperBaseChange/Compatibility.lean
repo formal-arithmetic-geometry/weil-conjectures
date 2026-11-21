@@ -142,15 +142,6 @@ private theorem coefficientDerivedCoproducts (Λ : Sheaf
 
 -- The explicit mate and coproduct comparison are elaborated in several large derived categories.
 /-- **(Push)** for `E ⊆ ℚ̄_ℓ` is invertible at every bounded-below complex when `f` is proper.
-Source: the finite-support coefficient model and bounded-below coproduct continuity.
-
-Proof: choose the compatible scalar-basis decompositions of both extension units. The mate
-of the canonical push comparison is the inverse restriction/pushforward isomorphism.
-Restriction reflects derived isomorphisms, by exactness and the homology criterion.
-The unit-mate calculation identifies the restricted component, conjugated by the two basis
-isomorphisms, with the copower comparison followed by invertible factors. The copies of the
-input complex have the same lower bound. Bounded-below copower continuity for the proper,
-hence qcqs, map makes this comparison invertible. Reflection gives the conclusion.
 This does not assert an isomorphism of functors on the ambient unbounded categories. -/
 theorem isIso_derivedPushHom_padicSubfieldRingObjToPadicAlgCl_app_of_isGE [IsProper f]
     (E : FiniteIntermediateField ℓ)

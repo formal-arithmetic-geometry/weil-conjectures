@@ -87,16 +87,7 @@ private theorem compOfEq_inv_eq
   rfl
 
 /-- Two isomorphisms identifying the coefficient after an equivalence give traces related
-by an automorphism of that coefficient.
-
-Source: blueprint latest, `thm-amb-p1-adjunction.proof.md`, transport through a presentation.
-
-Proof: direct image along f is an equivalence, so lift the discrepancy b⁻¹ s⁻¹ uniquely
-back to an automorphism of B. Naturality of composition and of the comparison r moves
-this automorphism across both comparisons. Its image cancels s, leaving b⁻¹. For an
-equality of geometric composites, eliminate the equality and apply this categorical
-calculation to the canonical pushforward composition isomorphism. No property of the
-trace itself is required. -/
+by an automorphism of that coefficient. -/
 theorem exists_derivedTraceAdjustment
     (C : Type v) [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : X ⟶ Z) (w : f ≫ g = h)

@@ -128,7 +128,13 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Total tensor evaluation on the ringed sequence site
 
-Source: Stacks Project, Tags 03EK, 07A4 and 0941.
+Evaluation commutes with the unbounded total tensor on the ringed sequence site.
+
+## References
+
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -259,15 +265,7 @@ private theorem evaluationTotalIso_inv_generator (n : ℕ)
 
 attribute [local irreducible] coefficientTensorGenerator coefficientTotalTensor
 
-/-- Evaluation commutes with the unbounded total tensor, uniquely on its pure generators.
-Source: Stacks 03EK, 07A4 and 0941.
-Proof: use the identity-on-pure-sections ordinary evaluation tensor comparison.
-Evaluation is a left adjoint, so it preserves the coproducts defining each total degree.
-The inverse ordinary comparisons therefore give an invertible total chain comparison;
-naturality handles both differentials and their signs. Its summand equation gives
-its value on every pure generator. For uniqueness, precompose with its inverse,
-then test maps out of the total tensor on every summand and every pure tensor.
-No flatness, boundedness, or positivity beyond n being a natural number is used. -/
+/-- Evaluation commutes with the unbounded total tensor, uniquely on its pure generators. -/
 theorem semilinearTotalTensorEvaluation_existsUnique (n : ℕ)
     (F : Systems.{c, v, max c v r} J B τ ⥤ SemilinearSections.Mod.{c, v, max c v r} J (B n))
     [hF0 : F.PreservesZeroMorphisms] (hF : F = SemilinearSections.evaluation J B τ n)

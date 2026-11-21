@@ -41,7 +41,8 @@ of `AlgebraicGeometry.ProEtale.projectionMapOfCompactification` is an isomorphis
 
 ## Main statements
 
-`sk-thm-sf-pf-proetale`, at every coefficient stage:
+The projection formula holds at every coefficient stage:
+
 - `AlgebraicGeometry.ProEtale.hasProjectionFormula_of_constructibleFiniteTor`: the finite stages
   `Λ` (a finite ring), for objects of `Dctf(X_proét, Λ)`; also
   `AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_constructibleFiniteTor`
@@ -61,19 +62,18 @@ the compactification and of the inverse of the projection isomorphism for the op
 `i` (`AlgebraicGeometry.ProEtale.isIso_derivedOpenImmersionLowerShriekProjectionMap`); the
 projection formula asserts that the former is an isomorphism on the relevant objects.
 
-As in the blueprint, every stage is reduced to the étale projection formula along `ν^*`: the
+Every stage is reduced to the étale projection formula along `ν^*`: the
 comparison carries the étale projection map of `Rg_*` to the pro-étale one
 (`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarProjComparison`) and
 `ν^*` commutes with extension by zero. The étale inputs are
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite` at the finite
-stages (`sk-thm-sf-pf-finite`) and
+stages and
 `AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map` at the integral
-stage (`lemma-projection-formula-integral-coefficients`, assuming the two sides of the étale
-projection map derived complete); the rational stage is the image of the integral one under the
-rationalization (`proposition-projection-formula-rational-coefficients`). The finite Tor amplitude
+stage (assuming the two sides of the étale projection map derived complete); the rational stage
+is the image of the integral one under the rationalization. The finite Tor amplitude
 of `L` keeps `i_! K ⊗ᴸ Lg^* L` bounded below, where `ν^*` is known to commute with `Rg_*`.
 
-The blueprint's "étale-origin witnesses" are explicit: at the finite stages they are built into
+The étale-origin witnesses are explicit: at the finite stages they are built into
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor` (pro-étale bounded
 constructibility is étale origin); at the `ℓ`-adic stages they are isomorphisms `ν^* K₀ ≅ K` with
 `K₀` a bounded constructible, derived complete étale complex of finite Tor amplitude. As in the
@@ -242,22 +242,10 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 
-/-- The projection formula of `sk-thm-sf-pf-proetale` for `Rf_!` computed with an arbitrary
-compactification `c` of `f`: for a finite ring `Λ` and `K`, `L` bounded constructible of finite Tor
-amplitude, the projection map `PF_c : (Rf_!(c) K) ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^* L)` is an isomorphism.
-
-Bounded constructibility on the pro-étale site is étale origin, so `K ≅ ν^* K₀` and
-`L ≅ ν^* L₀` for étale complexes `K₀` and `L₀`. For the compactification `X ⟶[i] Z ⟶[g] Y` the
-projection map is the one of `Rg_*` at `(i_! K, L)` followed by isomorphisms, and
-`i_! ν^* K₀ ≅ ν^* i_! K₀`. The comparison `ν^*` carries the étale projection map of `Rg_*` to
-the pro-étale one
-(`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`),
-and the étale projection formula for the proper `g` at finite coefficients is
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`. The finite Tor
-amplitude of `L` makes `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below, where `ν^*` commutes with `Rg_*`.
-
-Only the bounded constructibility of `K` is used, as in the pro-étale half of blueprint
-`lem-weil-finite-compact-projection-formula`. -/
+/-- The projection formula for `Rf_!` computed with an arbitrary compactification `c` of `f`: for a
+finite ring `Λ` and `K`, `L` bounded constructible of finite Tor amplitude, the projection map
+`PF_c : (Rf_!(c) K) ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^* L)` is an isomorphism. Only the bounded
+constructibility of `K` is used. -/
 theorem hasProjectionFormulaOfCompactification_of_boundedConstructible [Finite Λ] {f : X ⟶ Y}
     (c : Compactification f)
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
@@ -285,7 +273,7 @@ theorem hasProjectionFormulaOfCompactification_of_boundedConstructible [Finite �
   have := Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite Λ c.g
   exact hasProjectionFormulaOfCompactification_of_comparison c eK eL hK₀.1 hML inferInstance
 
-/-- The projection formula of `sk-thm-sf-pf-proetale` for `Rf_!` computed with an arbitrary
+/-- The projection formula for `Rf_!` computed with an arbitrary
 compactification `c` of `f`, for `K` and `L` in `Dctf`: a special case of
 `AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_boundedConstructible`. -/
 theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite Λ] {f : X ⟶ Y}
@@ -297,10 +285,7 @@ theorem hasProjectionFormulaOfCompactification_of_constructibleFiniteTor [Finite
     HasProjectionFormulaOfCompactification (ModuleCat.{u + 1} Λ) c K L :=
   hasProjectionFormulaOfCompactification_of_boundedConstructible Λ c hK.1 hL
 
-/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`: Projection formula: the pro-étale
-realization; the finite stages.
-
-Let `Λ` be a finite ring (a finite coefficient stage). For a morphism `f : X ⟶ Y` admitting a
+/-- Let `Λ` be a finite ring. For a morphism `f : X ⟶ Y` admitting a
 compactification, and `K` in `Dctf(X_proét, Λ)` and `L` in `Dctf(Y_proét, Λ)`, the projection
 map `(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism in `D(Y_proét)`. This is
 `AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_constructibleFiniteTor`
@@ -327,20 +312,11 @@ theorem hasProjectionFormula_of_boundedConstructible [Finite Λ] (f : X ⟶ Y)
   hasProjectionFormulaOfCompactification_of_boundedConstructible Λ
     (HasCompactification.compactification f) hK hL
 
-/-- Blueprint `lem-weil-finite-compact-projection-formula`: Finite-coefficient compact-support
-projection formula.
-
-Let `Λ` be a finite coefficient ring and `f : X ⟶ Y` a morphism admitting a compactification.
+/-- Let `Λ` be a finite coefficient ring and `f : X ⟶ Y` a morphism admitting a compactification.
 On the small étale sites, for `K ∈ Dᵇc(X_ét, Λ)` and `L ∈ Dᵇc(Y_ét, Λ)` of finite Tor amplitude,
 the projection transformation `Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism; and the same
 holds on the small pro-étale sites for the pro-étale realizations, i.e. for `K` bounded
-constructible (of étale origin) and `L` in `Dctf(Y_proét, Λ)`. Naturality in `K` and `L` holds
-because the projection map is a natural transformation of bifunctors
-(`AlgebraicGeometry.Etale.projectionMap`, `AlgebraicGeometry.ProEtale.projectionMap`).
-
-The étale half is `AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`, the pro-étale half
-`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_boundedConstructible`, transported along
-the comparison `ν^*`. -/
+constructible (of étale origin) and `L` in `Dctf(Y_proét, Λ)`. -/
 theorem hasProjectionFormula_etale_and_proEtale_of_finite [Finite Λ] (f : X ⟶ Y)
     [HasCompactification f] :
     (∀ (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -384,24 +360,13 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the integral stage `𝒪_E`.
-
-Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the pro-étale realizations of bounded constructible,
+/-- Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the pro-étale realizations of bounded constructible,
 derived complete complexes `K₀`, `L₀` of étale sheaves of `𝒪_E`-modules of finite Tor amplitude,
-with the given étale-origin witnesses, and assume that both sides `Rf_! K₀ ⊗ᴸ L₀` and
-`Rf_!(K₀ ⊗ᴸ Lf^* L₀)` of the étale projection map are derived complete. Then the projection map
-`(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism. As in the blueprint, this is the étale
-projection formula at the integral stage transported along the comparison `ν^*`
-(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_comparison`). The étale
-input is the plain projection map of `D(Y_ét, 𝒪_E)`, an isomorphism because its reduction modulo
-`𝔪_E` is (`lemma-projection-formula-integral-coefficients`, Steps 1 and 2) and both its sides are
-derived complete (`AlgebraicGeometry.Etale.hasProjectionFormula_of_isIso_reductionModIdeal_map`).
-
-The derived completeness of the two sides is a hypothesis: the étale integral stage
-(`AlgebraicGeometry.Etale.isIso_completion_map_projectionMap`) only gives the projection formula
-after derived completion, and the plain operations of `D(Y_ét, 𝒪_E)` need not preserve derived
-completeness (see the module docstring of
-`WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`). -/
+with the given étale-origin witnesses, and assume that both sides `Rf_! K₀ ⊗ᴸ L₀` and `Rf_!(K₀ ⊗ᴸ
+Lf^* L₀)` of the étale projection map are derived complete. Then the projection map `(Rf_! K) ⊗ᴸ L ⟶
+Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism. This is the étale projection formula at the integral stage
+transported along the comparison `ν^*`
+(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_comparison`). -/
 theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌)}
@@ -433,18 +398,11 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
         (HasCompactification.compactification f).i).bounded_mapDerivedCategory_obj hKc.1)
       hLt') hPF'
 
-/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the rational stage `E` (and,
-through the finite stages `E'` at which its objects are represented, the stage `ℚ̄_ℓ`; see
-`AlgebraicGeometry.ProEtale.isIso_rationalization_map_projectionMap_extendScalars` for the
-compatibility with extension of scalars).
-
-The rational stage is the rationalization `D(Y_proét, 𝒪_E)[1/ℓ]` of the integral one, the
-Verdier quotient by the objects killed by a nonzero element of `𝒪_E`, and the projection map
-over `E` for objects obtained by rationalization from the integral stage is the image of the
-integral projection map under the localization functor. It is an isomorphism, as in the blueprint
-(`lemma-kunneth-formula-compact-supports--3`): the integral projection map is
-(`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`, which assumes
-that both sides of the étale projection map are derived complete). -/
+/-- The projection formula at the rational stage `E`: the projection map over `E` for objects
+obtained by rationalization from the integral stage is an isomorphism, being the image of the
+integral projection map
+(`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`) under the
+localization functor. -/
 theorem isIso_rationalization_map_projectionMap (f : X ⟶ Y) [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌)}

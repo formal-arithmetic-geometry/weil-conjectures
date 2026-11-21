@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tri
 Let `E` be a finite extension of `ℚ_ℓ` inside `ℚ̄_ℓ` with ring of integers `𝒪_E`. The integral stage
 `D_comp(X_proét, 𝒪_E)` consists of the derived complete objects of `D(X_proét, 𝒪_E)`
 (`DerivedCategoryDerivedCompleteIntegral`), and the rational stage `D_comp(X_proét, E)` is its
-rationalization (`DerivedCategoryDerivedCompleteRational`). Following the blueprint, the
+rationalization (`DerivedCategoryDerivedCompleteRational`). The
 operations of the rational stage are obtained by transport from the integral stage
 (`CategoryTheory.Rationalization.map`): the integral operations, `K ↦ (F K)^` for the plain
 operation `F`, are `𝒪_E`-linear triangulated functors between the integral stages.
@@ -206,7 +206,7 @@ noncomputable def rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap
 /-- Compact-support base change over a finite extension.
 
 For a finite extension `E/ℚ_ℓ`, a cartesian square `g' ≫ f = f' ≫ g` with `g` arbitrary and a
-compactification `c` of `f` (`remark-base-change-compactification--1`), and an object of the
+compactification `c` of `f`, and an object of the
 rational stage `D_comp(X_proét, E)` given by an integral lattice `K ∈ D_comp(X_proét, 𝒪_E)` whose
 reductions `K_n = K ⊗ᴸ 𝒪_E/𝔪_Eⁿ` carry étale-origin witnesses, the rational compact-support
 exchange map `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` is an isomorphism in `D_comp(Y'_proét, E)`. It is
@@ -215,9 +215,8 @@ it is the component at the rationalization of `K` of a natural transformation of
 rational stage
 (`AlgebraicGeometry.ProEtale.rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap`).
 
-The isomorphism is transported from the integral one,
-`proposition-composition-base-change-rf-shriek--4`
-(`isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`), along the
+The isomorphism is transported from the integral one
+(`isIso_completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`) along the
 rationalization. -/
 theorem isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (sq : IsPullback g' f' f g) (c : Compactification f) (K : 𝐃𝐜(X))

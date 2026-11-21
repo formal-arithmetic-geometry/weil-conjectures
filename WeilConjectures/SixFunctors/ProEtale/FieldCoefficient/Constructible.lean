@@ -22,9 +22,7 @@ interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
 with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
 `WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
 
-Let `X` be a scheme. Following Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8) and
-the blueprint (`definition-constructible-sheaves`), a
-sheaf `F` of `Λ`-modules on the small pro-étale site of `X` is
+Let `X` be a scheme. A sheaf `F` of `Λ`-modules on the small pro-étale site of `X` is
 
 - *lisse* (`AlgebraicGeometry.ProEtale.IsFieldLisseSheaf`) if it is pro-étale locally a finite
   direct sum of copies of the constant sheaf `Λ`
@@ -37,12 +35,12 @@ sheaf `F` of `Λ`-modules on the small pro-étale site of `X` is
 A lisse sheaf on a connected `X` is the same as a continuous finite-dimensional representation
 of `π₁(X)` with coefficients in `Λ`: the trivialising pro-étale cover may be taken to be a
 pro-finite étale Galois cover, whose group acts continuously on the fibre `Λⁿ`. For `Λ = E`
-these are the lisse `E`-sheaves of the blueprint.
+these are the lisse `E`-sheaves.
 
-The strata are only required to be locally closed: on the noetherian schemes of the blueprint
+The strata are only required to be locally closed: on noetherian schemes
 every locally closed subset is constructible, and with this convention pullback along an
 arbitrary morphism preserves constructibility. The stratification is only required locally on
-`X`, so that constructibility is a local property; on the quasi-compact schemes of the blueprint
+`X`, so that constructibility is a local property; on quasi-compact schemes
 this is the same as a global finite stratification.
 
 ## Main definitions
@@ -66,6 +64,10 @@ this is the same as a global finite stratification.
   On a locally Noetherian scheme they are also closed under kernels and cokernels
   (`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Abelian`), and they are closed under
   extensions (`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Extension`).
+
+## References
+
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8]
 -/
 
 @[expose] public section
@@ -118,7 +120,7 @@ lemma IsFieldLisseSheaf.of_isZero {F : FieldSheaf Λ X}
 /-- A sheaf of `Λ`-modules on the small pro-étale site of `X` is *stratified lisse* if `X` is
 the disjoint union of finitely many locally closed constructible subschemes `Z_k`, given by
 immersions `i_k : Z_k ⟶ X` whose images are constructible subsets partitioning `X`, such that
-each restriction `i_k^* F` is lisse (`definition-constructible-sheaves`). -/
+each restriction `i_k^* F` is lisse. -/
 def IsFieldStratifiedLisseSheaf (F : FieldSheaf Λ X) :
     Prop :=
   ∃ (ι : Type) (_ : Finite ι) (Z : ι → Scheme.{u}) (i : (k : ι) → Z k ⟶ X),

@@ -20,9 +20,6 @@ import Mathlib.CategoryTheory.Yoneda
 /-!
 # Closed exceptional inverse image and sections with support
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-yoneda.md.
-
 The comparison lives in the full localizing category, and its counit equation is written
 in the ambient derived category using the specified closed-immersion normalization.
 The algebraic-closure coefficient is the finite-subextension-valued condensed ring.
@@ -139,31 +136,7 @@ private theorem support_preserved_of_coefficientIso
 to derived sections with support, compatibly with their counits. The witnesses `hK` and
 `hS` only record membership in the full localizing subcategories: the two lifted functors
 have exactly the ambient objects and maps. The isomorphism `closed` is the stipulated
-normalization Ri_! = i_*, and `support` specifies the normalized support adjunction.
-
-Source: blueprint main-20261015, sk-prop-closed-adjoint-constructible-yoneda, statement
-and proof.
-
-Proof:
-1. The equality Dctf = Dbc from det-def-localizing-closure-ctf-equals-bc and the intersection
-   definition-localizing-subcategory put every input K in C_X. The adjunction of
-   theorem-existence-exceptional-inverse-image puts i^!K in C_Z. By
-   lem-sfb-rational-closed-support-constructible, RΓ_Z K is Dbc, hence belongs to C_Z.
-   Exact coefficient equivalences transport this assertion to the given ring isomorphism.
-   Both localizing categories are full in the ambient derived categories.
-2. For A in C_Z the two adjunctions identify Hom(A,i^!K) and Hom(A,RΓ_Z K) with
-   Hom(i_*A,K), by a mapped arrow followed by the respective counit. These bijections
-   are natural in A and K. Compose the first with the inverse of the second.
-3. By lem-galois-yoneda-fully-faithful, this natural transformation and its inverse
-   come from mutually inverse maps θ_K and ρ_K in C_Z. Evaluation at the identity
-   gives i_*(θ_K) followed by the support counit equal to the exceptional counit,
-   with the latter transported along `closed`. Injectivity of the support adjunction
-   bijection gives uniqueness of the map satisfying this equation.
-4. For q : K → K', naturality of the two counits gives the same transpose for
-   RΓ_Z(q) θ_K and θ_K' i^!(q). Injectivity gives equality, hence a natural
-   isomorphism. Cohomology of this isomorphism also transfers boundedness and
-   constructibility from the support value to i^!K.
--/
+normalization Ri_! = i_*, and `support` specifies the normalized support adjunction. -/
 theorem closedAdjointConstructibleYoneda
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

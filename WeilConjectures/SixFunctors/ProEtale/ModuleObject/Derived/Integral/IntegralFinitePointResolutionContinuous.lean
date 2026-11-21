@@ -30,14 +30,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- A specified ordinary resolution realizes as a short exact point-module resolution.
-
-Source: the sectionwise finite-discrete quotient argument in the scalar-six direct-image proof.
-
-The maps are applied to continuous sections. Injectivity and middle exactness lift through the
-continuous inverse on the image of the matrix map, while surjectivity uses the finite discrete
-fibres of the target. The resulting module objects are identified with finite biproducts of
-regular modules and with the actual restricted regular target. -/
+/-- A specified ordinary resolution realizes as a short exact point-module resolution. -/
 theorem integralFinitePointResolution_continuous
     (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell)
     (A : Type u) [CommRing A] [Finite A]

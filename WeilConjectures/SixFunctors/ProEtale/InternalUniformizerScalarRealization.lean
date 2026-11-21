@@ -13,8 +13,9 @@ import WeilConjectures.SixFunctors.ProEtale.OrdinaryUniformizerScalarComparison
 
 /-! # The regular uniformizer section and its prescribed scalar realization
 
-Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-and the constant coefficient identification in integral-models proof (1).
+## References
+
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
 -/
 
 @[expose] public noncomputable section
@@ -208,30 +209,7 @@ private theorem complex_scalar_unitor
 
 /-- The constant uniformizer is a regular generator of the residue kernel and realizes
 scalar multiplication under the prescribed ordinary module transport. This assertion
-involves no other generator and no variable change of basis.
-
-Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-and integral-models proof (1), constant coefficient comparison.
-
-Proof: use the canonical constant-sheaf/inverse-image comparison on the integer ring
-and its first quotient, followed by reconstruction of section rings and restriction
-along AsSmall.down. Apply the resulting ring map to the constant uniformizer section.
-The quotient square identifies its principal ideal with the kernel of the residue
-map. Multiplication by the uniformizer is injective on the coefficient DVR. Exact
-constant sheafification, inverse image, and the section-module equivalence preserve
-this injection, so it remains injective on sections of every object of the small
-site. For the action formula, extensionality on continuous functions and hd identify
-d with the canonical uniformizer endomorphism of the point regular module. Pullback
-and the pointComparison identify its action with multiplication by this constant
-section. Restriction of scalars keeps the underlying additive maps; the section
-module equivalence keeps their actual section actions. Powers therefore give the
-same assertion for d^(n+1). In the total tensor with the complex O[0], the right
-unitor removes the rank-one factor, and the tensor of its scalar endomorphism acts
-by precisely this section power. Check the equation on each coproduct summand of
-the total tensor; only the summand with second degree zero is nonzero. The formulas
-are natural in all terms of P and commute with its differential, so hold without
-boundedness or flatness. For the empty scheme or zero complex the same statements
-hold for the unique maps, with no nontriviality assumption on section rings. -/
+involves no other generator and no variable change of basis. -/
 theorem uniformizer_scalar_realization :
     ∃ t : ((ring l E X).obj ⋙ forget CommRingCat).sections,
       (∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,

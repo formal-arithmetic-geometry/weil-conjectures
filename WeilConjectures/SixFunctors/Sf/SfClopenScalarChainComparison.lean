@@ -9,8 +9,16 @@ import WeilConjectures.SixFunctors.Sf.SfClopenScalarModuleComparison
 
 /-! # Chain quotient comparison on a clopen component
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 03EL.
+Completed-coefficient chain quotients commute with restriction to a clopen component, compatibly
+with the tensor formula.
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
 -/
+
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -65,16 +73,7 @@ private def sfClopenScalarRestrictionSquare
     ext V x
     rfl
 
-/-- Completed-coefficient chain quotients commute with restriction, with the tensor formula.
-
-Source: Stacks Project, sites-modules.tex, Tags 03EL and 03CY;
-sites-cohomology.tex, Tag 06YY.
-
-Proof: `d.projection` identifies the two completed scalar actions on a finite module.
-Identity maps on sections therefore define a natural scalar-restriction square. Apply
-that square and the normalized ordinary scalar comparison degreewise to the finite
-quotient complex. The first map acts by the identity on sections, so the tensor formula
-is precisely the ordinary comparison formula in each degree. -/
+/-- Completed-coefficient chain quotients commute with restriction, with the tensor formula. -/
 theorem sf_clopen_scalar_chain_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens)

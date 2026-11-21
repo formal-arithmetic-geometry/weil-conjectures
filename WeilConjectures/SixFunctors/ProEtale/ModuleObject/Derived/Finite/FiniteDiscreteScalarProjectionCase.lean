@@ -23,7 +23,12 @@ import all WeilConjectures.AlgebraicGeometry.FiniteDiscreteOrdinary.FiniteDiscre
 import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalarsUnit
 import all WeilConjectures.AlgebraicGeometry.Finite.Constant.FiniteConstantLocalModel
 
-/-! # The finite discrete coefficient projection case -/
+/-! # The finite discrete coefficient projection case
+
+## References
+
+* Stacks Project, Tag 0F12
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -267,32 +272,7 @@ private def coefficientEncoding_self (T : Scheme.{u}) (e : Encoding A T) :
 end SelfEncoding
 
 -- The proof combines several equivalences between large derived module categories.
-/-- Projection for the restricted regular module of a nonflat finite-ring map.
-
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/sk-prop-scalar-six/
-det-prop-scalar-six-direct-image.proof.md, paragraph "Finite rings A to B";
-Stacks 0F12 and the relative torsion projection theorem.
-
-Proof: give A and B their discrete topologies and choose normalized coefficient
-encodings. The constant-sheaf counits at these finite discrete coefficient rings are
-isomorphisms. Lift the point constant-sheaf adjunction to module objects and apply its
-counit to the restricted regular B-module. Its underlying counit is invertible, so this
-module comes from a scalar module. Pull the resulting isomorphism to Y and use the
-scalar-constant encoding comparison. Thus its encoded degree-zero complex is a constant
-ordinary A-module in degree zero. This construction works for every morphism `a` of
-coefficient rings; no sectionwise normalization is needed.
-
-The fixed-interval finite comparison realizes K as the inverse encoding of nu^* J, where
-J is bounded constructible etale with the same finite Tor interval. If ell^n annihilates
-A, choose N = ell^(n+1). It is positive, annihilates J, and is a unit on Y because char(k)
-is a different prime. Apply the relative torsion constant-module projection theorem to
-J and the ordinary constant module constructed above. The lower Tor bound makes the
-tensor input bounded below, so the canonical etale/pro-etale projection comparison
-applies. Exact-functor and constant-sheaf comparisons and naturality transport its
-invertibility to the encoded K and restricted regular module. The normalized projection
-encoding reflects invertibility of the actual internal projection. Its composite with
-Rf_* of the cartesian coefficient-pullback isomorphism is scalarProjection. This uses
-no flatness assumption on B and includes zero rings and empty schemes. -/
+/-- Projection for the restricted regular module of a nonflat finite-ring map. -/
 theorem isIso_scalarProjection_cartesianFinitePointRing
     (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)]

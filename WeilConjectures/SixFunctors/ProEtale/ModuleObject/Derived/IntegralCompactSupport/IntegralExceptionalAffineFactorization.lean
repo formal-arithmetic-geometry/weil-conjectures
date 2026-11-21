@@ -19,9 +19,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Mate.MateOpenRe
 
 /-!
 # Geometric and adjoint factorization on one affine chart
-
-Source: blueprint main-20261015, sk-thm-int-restriction, General f paragraph,
-and sk-thm-int-restriction-glue.proof.md, paragraph (2).
 -/
 
 @[expose] public section

@@ -8,8 +8,6 @@ module
 public import WeilConjectures.SixFunctors.WfTensorUnitSquare.WfTensorUnitSquareData
 
 /-! # Generator-normalized transport of the strict Koszul fiber
-
-Source: the level, product, and mapping-fiber steps of the Frobenius tensor-unit argument.
 -/
 
 @[expose] public noncomputable section

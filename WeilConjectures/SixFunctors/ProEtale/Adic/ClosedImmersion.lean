@@ -61,10 +61,8 @@ instance isIso_adicUpperStarLowerStarAdjunction_counit :
 
 variable (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
 
-/-- Blueprint `lemma-passing-schematic-closure--1` for `ℓ`-adic sheaves: a sheaf `F`
-vanishing on the quasi-compact open complement of a closed immersion `i` is `i_* i^* F`: the unit
-`F ⟶ i_* i^* F` is an isomorphism
-(`AlgebraicGeometry.ProEtale.isIso_upperStarLowerStarAdjunction_unit_app_of_isCompl`). -/
+/-- For `ℓ`-adic sheaves: a sheaf `F` vanishing on the quasi-compact open complement of a closed
+immersion `i` is `i_* i^* F`, that is, the unit `F ⟶ i_* i^* F` is an isomorphism. -/
 theorem isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) (F : AdicSheaf l X)
     (hF : IsZero ((j)^*ᵃ[l].obj F)) :
@@ -77,9 +75,8 @@ theorem isIso_adicUpperStarLowerStarAdjunction_unit_app_of_isCompl
     this
   exact isIso_of_reflects_iso _ (AdicSheaf.forget X)
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--4` for `ℓ`-adic sheaves: the
-pushforward along a closed immersion with quasi-compact open complement is exact
-(`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`). -/
+/-- For `ℓ`-adic sheaves: the pushforward along a closed immersion with quasi-compact open
+complement is exact. -/
 theorem preservesFiniteColimits_adicLowerStar_of_isCompl
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
     PreservesFiniteColimits (i)_*ᵃ[l] := by

@@ -21,8 +21,8 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 /-!
 # Coefficient compatibility of the actual projection mate
 
-Source: blueprint main-20261015, sk-thm-sfb-proper-base-change-rational.proof.md,
-paragraph (3), projection on integral-model pairs before invertibility.
+The specified scalar push mate and pull comparison commute with the actual projection morphism,
+on integral-model pairs before invertibility.
 -/
 
 @[expose] public noncomputable section
@@ -355,31 +355,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- The statement shares geometric and scalar derived tensor instances.
 -- The categorical square specializes large derived adjunctions.
 /-- The specified scalar push mate and pull comparison commute with the actual projection
-morphism, on ordinary unbounded derived module-object categories.
-Source: blueprint main-20261015, proper-base-change-rational.proof.md (3).
-
-Proof:
-1. Transport the module tensors and geometric derived adjunctions to section-ring modules
-using lem-pd-module-ringed-topos-derived-comparison. Transport scalar extension, restriction
-and their units and counits using lem-sfb-internal-section-scalar-adjunction. Exact extension
-makes restriction preserve K-injectives (lem-sfb-comap-preserves-k-injectives). The coefficient
-square commutes. The K-injective normalization of derived pushforward composition identifies
-its direct-image comparison with the inverse of derivedComapLowerStarIso. The conjugate
-pullback comparison in lem-sfb-ringed-comparison-tensor-adjunction is therefore c inverse.
-2. The tensor equation of that ringed comparison lemma identifies the composite tensorators
-for T_X P_R and P_S T_Y. On flat-term K-flat representatives the scalar tensorator sends
-s tensor (x tensor y) to (s tensor x) tensor (1 tensor y), so it is precisely mu here.
-3. Expand derivedPushHom as the scalar-unit, inverse restriction comparison, scalar-counit
-composite. Conjugacy of derivedPullIso and the composite adjunction counits, naturality,
-and the scalar triangle identity give epsilon_S P_S(gamma_K) = T_X(epsilon_R) c_inverse.
-4. Transpose the left composite under P_S adjoint to G_S. The definition of the projection
-mate and naturality of the pullback tensor map give counit tensor identity after the
-comparison. Insert step 3, then the tensor equation of step 2; naturality of mu rewrites it
-as q T_X((epsilon_R tensor identity) d_R) c_inverse, with q = (identity tensor c_M) mu_X.
-5. Transpose the right composite. Naturality of the counit and step 3 give
-q T_X(epsilon_R) c_inverse P_S T_Y(pi_R). Naturality of c_inverse and the defining
-transpose of pi_R rewrite this to the same expression as step 4. Injectivity of the
-adjunction Hom bijection proves equality, without cancelling any projection or push map. -/
+morphism, on ordinary unbounded derived module-object categories. -/
 theorem coefficientProjectionSquare
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

@@ -19,14 +19,13 @@ pro-étale sheaves, the sections of `N` with support in `Z` form the kernel
 
 `i^!₀ N = i^* Γ_Z N`
 
-(`AlgebraicGeometry.ProEtale.closedUpperShriek`, blueprint
-`definition-local-cohomology--1`). For pro-étale sheaves of modules it is right adjoint
-to the exact functor `i_*` (`AlgebraicGeometry.ProEtale.lowerStarClosedUpperShriekAdjunction`),
-so its right derived functor is right adjoint to `i_*` on the unbounded derived categories
-(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`, blueprint
-`lemma-local-cohomology-right-adjoint--1`), and the unit of this adjunction is an isomorphism
-(`AlgebraicGeometry.ProEtale.isIso_derivedLowerStarClosedUpperShriekAdjunction_unit_app`,
-blueprint `lemma-local-cohomology-right-adjoint--1`).
+(`AlgebraicGeometry.ProEtale.closedUpperShriek`). For pro-étale sheaves of modules it is right
+adjoint to the exact functor `i_*`
+(`AlgebraicGeometry.ProEtale.lowerStarClosedUpperShriekAdjunction`), so its right derived functor is
+right adjoint to `i_*` on the unbounded derived categories
+(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`), and the unit of this
+adjunction is an isomorphism
+(`AlgebraicGeometry.ProEtale.isIso_derivedLowerStarClosedUpperShriekAdjunction_unit_app`).
 
 ## The sheaf-level adjunction
 
@@ -68,9 +67,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
 
 /-- The sheaf `Γ_Z N = ker(N ⟶ j_* j^* N)` of sections of a pro-étale sheaf `N` on `X` with
-support in the complement of `j`, the kernel of the unit of `j^* ⊣ j_*`. With
-`AlgebraicGeometry.ProEtale.closedUpperShriek` and `AlgebraicGeometry.ProEtale.IsFlasqueFor`, this
-is the pro-étale form of blueprint `definition-local-cohomology`. -/
+support in the complement of `j`, the kernel of the unit of `j^* ⊣ j_*`. -/
 noncomputable def sectionsWithSupport :
     Sheaf (ProEt.topology X) A ⥤ Sheaf (ProEt.topology X) A where
   obj N := kernel ((upperStarLowerStarAdjunction A j).unit.app N)
@@ -82,15 +79,14 @@ noncomputable def sectionsWithSupport :
 instance : (sectionsWithSupport A j).Additive where
   map_add := equalizer.hom_ext (by simp [sectionsWithSupport])
 
-/-- Blueprint `definition-local-cohomology--1`: for a closed immersion `i : Z ⟶ X` with
+/-- For a closed immersion `i : Z ⟶ X` with
 complementary open immersion `j`, the functor
 
 `i^!₀ N = i^* ker(N ⟶ j_* j^* N)`
 
 on pro-étale sheaves, the closed inverse image of the sheaf of sections with support in `Z`
 (`AlgebraicGeometry.ProEtale.sectionsWithSupport`). A morphism of sheaves acts through the
-induced map of kernels. It is also the functor `s^!` of blueprint `definition-local-cohomology`
-(pro-étale form), with `s_* s^! ≅ 𝒢_Z`
+induced map of kernels. One has `i_* i^!₀ ≅ Γ_Z`
 (`AlgebraicGeometry.ProEtale.closedUpperShriekCompLowerStarIso`). -/
 noncomputable def closedUpperShriek :
     Sheaf (ProEt.topology X) A ⥤ Sheaf (ProEt.topology Z) A :=
@@ -247,9 +243,8 @@ noncomputable def lowerStarLiftEquivalence
       infer_instance
   (upperStarLowerStarLiftAdjunction (R := R) i j hij.disjoint).toEquivalence
 
-/-- The sheaf-level adjunction `i_* ⊣ i^!₀` of blueprint `lemma-local-cohomology-right-adjoint--1`,
-for a closed immersion `i` with quasi-compact open complement `j`: the composite of the equivalence
-between `Sh(Z)` and the sheaves supported on `Z`
+/-- The sheaf-level adjunction `i_* ⊣ i^!₀`, for a closed immersion `i` with quasi-compact open
+complement `j`: the composite of the equivalence between `Sh(Z)` and the sheaves supported on `Z`
 (`AlgebraicGeometry.ProEtale.lowerStarLiftEquivalence`) and of the coreflection onto the
 sheaves supported on `Z` given by the sections with support
 (`AlgebraicGeometry.ProEtale.supportedAwayιAdjunction`). -/
@@ -261,7 +256,7 @@ noncomputable def lowerStarClosedUpperShriekAdjunction
       (Iso.refl _ : _ ≅ (i)_*[ModuleCat.{u + 1} R])).ofNatIsoRight
     (Iso.refl _ : _ ≅ closedUpperShriek (ModuleCat.{u + 1} R) i j)
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--1`: let `i : Z ⟶ X` be a closed immersion whose
+/-- Let `i : Z ⟶ X` be a closed immersion whose
 open complement `j : U ⟶ X` is quasi-compact (for instance, `X` noetherian). On the unbounded
 derived categories of pro-étale sheaves of modules, the direct image `Ri_*` has a right adjoint,
 the right derived functor of the sheaf-level `i^!₀` of
@@ -301,7 +296,7 @@ instance faithful_rightDerivedFunctor_lowerStar :
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).preservesKInjectiveComplexes
   inferInstance
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--1`: let `i : Z ⟶ X` be a closed immersion whose
+/-- Let `i : Z ⟶ X` be a closed immersion whose
 open complement `j` is quasi-compact (for instance, `X` noetherian), and let `Ri^!` be the right
 adjoint of the direct image `Ri_*` on the unbounded derived categories of pro-étale sheaves of
 modules (`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`). For every

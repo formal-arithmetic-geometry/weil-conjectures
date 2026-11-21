@@ -7,11 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Monoidal.Functor
 
-/-! # Realization of an intertwining tensor map
-
-Source: the explicit calculation in Step 6 of
-`lem-pod-condensed-point-sections-transport`.
--/
+/-! # Realization of an intertwining tensor map -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -21,11 +17,7 @@ open CategoryTheory MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- A natural realization transport compatible with the tensor cup sends an
-intertwining tensor map to an intertwining scalar map.
-Source: blueprint `theorem-poincare-duality-frobenius`, naturality of the cup, and Step 6 of the
-point-section transport argument.
-Proof: move the transport past the realized arrow by naturality, use the
-intertwining equation, use tensor compatibility, then the naturality of the cup. -/
+intertwining tensor map to an intertwining scalar map. -/
 theorem realized_tensor_intertwining
     {A B : Type*} [Category* A] [Category* B]
     [MonoidalCategory A] [MonoidalCategory B]

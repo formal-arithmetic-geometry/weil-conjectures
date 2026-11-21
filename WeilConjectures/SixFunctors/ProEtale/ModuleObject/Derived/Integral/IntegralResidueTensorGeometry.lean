@@ -13,7 +13,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 
 /-! # Ordinary pullback data and the derived residue tensor square
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3), Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -41,35 +43,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 /-- Ordinary pullback has a strong monoidal structure preserving flat modules,
 and its derived tensor comparison agrees with the canonical scalar pull square.
-The monoidal structure and both tensor presentations have already been constructed.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15, balanced tensor associativity.
-
-Proof. On ordinary module objects, apply inverse image to the two balanced action
-maps defining relative tensor. Inverse image preserves their coequalizer and its
-ambient tensor comparison is invertible. The coefficient-pullback isomorphism
-identifies the base rings, giving the ordinary tensor comparison. Its unit map is
-the coefficient-pullback isomorphism on regular modules. Precompose the unit and
-associativity diagrams with the tensor presentation epimorphisms: both sides are
-the corresponding unit or associativity equation in the ambient inverse image.
-This is the proved residueExchangeOrdinaryPullMonoidal. Inverse image preserves
-flat modules: flatness is local and
-is preserved by scalar extension, and the coefficient change here is an
-isomorphism. This gives hFlat. The derived strong monoidal structure is the
-already constructed residueExchangePullMonoidal, computed on flat resolutions.
-The coefficient-pullback comparison identifies the pullback of the restricted
-regular residue module in degree zero with the corresponding module on X.
-Compose that coefficient isomorphism with residueExchangeTensorIso on X to give
-tX. On flat resolutions the asserted square is the balanced tensor associativity
-square: both routes multiply the same scalar factors. The comparison
-residueExchangePullHom is the inverse mate of restriction/pullback, so its scalar
-counit identity identifies it with this scalar multiplication comparison. The
-canonical tensor presentation uses exactly the extension counit followed by the
-balanced tensor isomorphism, hence the square is the stated one, with no freedom
-to replace that presentation by an arbitrary automorphism. Uniqueness of left
-derived comparisons descends the equality to every complex M. The argument does
-not require flatness of the residue coefficient over the integral coefficient,
-and applies also to the zero complex and the empty scheme. -/
+The monoidal structure and both tensor presentations have already been constructed. -/
 theorem integralResidue_tensorGeometry {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat,
         letI := residueExchangePullMonoidal ℓ E f

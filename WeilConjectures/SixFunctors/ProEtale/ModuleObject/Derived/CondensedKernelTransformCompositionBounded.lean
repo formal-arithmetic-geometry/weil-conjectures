@@ -16,8 +16,6 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 /-! Bounded constructibility needed by condensed kernel-transform composition.
 
-Source: boundedness clauses in the statement of `proposition-fourier-inversion`.
-
 The statement isolates the three boundedness assertions used to lift the ambient
 comparison: the convolution kernel is bounded constructible and both sides preserve
 bounded constructible inputs.
@@ -31,19 +29,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The convolution is bounded constructible and both kernel functors preserve
-bounded constructible objects.
-
-Source: latest blueprint `lem-fd-kernel-composition.md`, the bounded kernel hypotheses
-and the convolution membership assertion.
-
-Proof in words: pull both kernels to T. Pullback preserves constructibility and boundedness;
-the coefficient-family finite-Tor comparison makes their derived tensor bounded
-constructible. Compact-support direct image along r13 gives the first assertion.
-For either transform, apply the same pullback and tensor preservation to an arbitrary
-bounded constructible input and the fixed kernel, then compact-support preservation
-along the second projection. Integer shifts preserve the bounded constructible
-predicate. The two preservation statements are independent of the comparison of the
-functors; empty schemes and zero kernels are included by preservation of zero. -/
+bounded constructible objects. -/
 theorem condensedKernelTransform_comp_bounded
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

@@ -75,7 +75,6 @@ There is no derived tensor product or derived hom on `Dᵇc(X)⟦T̲⟧`: the bo
 complexes over a torsion ring are not stable under `- ⊗ᴸ -` and `RHom(-, -)`. For `T = ℤ/4` on a
 geometric point of characteristic `3`, `Tor_i` and `Ext^i` of `ℤ/2` over `ℤ/4` are `ℤ/2` in every
 degree `i ≥ 0`.
-
 -/
 
 @[expose] public section

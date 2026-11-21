@@ -12,7 +12,10 @@ import WeilConjectures.SmoothPurity.Coefficient.CoefficientEvaluationTensorNatur
 
 /-! # Finite components of canonical representative transport
 
-Source: Stacks 07A4 and 0941, evaluation of the ordinary tensor comparison.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -82,12 +85,7 @@ private theorem finite_transport
   simp only [Iso.inv_hom_id, Category.comp_id]
 
 /-- Conjugating a strict tensor comparison by finite-normalized chain isomorphisms
-preserves its prescribed finite component maps.
-
-Source: Stacks 07A4 and 0941. Use evaluation-tensor naturality, substitute the three
-finite comparison equations, and cancel the evaluation tensor isomorphism. The result
-is the finite component of the already assembled strict map. Naturality of the
-comparison between the two ordinary evaluation functors gives the literal system maps. -/
+preserves its prescribed finite component maps. -/
 theorem tensorReductionCanonicalFiniteTransport (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

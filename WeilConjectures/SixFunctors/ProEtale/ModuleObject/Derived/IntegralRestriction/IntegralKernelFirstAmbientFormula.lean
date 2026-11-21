@@ -20,17 +20,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction
 open DiagonalCoefficients
 open RationalP1
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
-/--
-The ambient integral contraction formula for the fixed diagonal coefficient family.
-This is the geometric trace/base-change calculation before restricting the unit and
-counit to localizing subcategories.  It is strictly smaller than the contraction
-with arbitrary restricted unit and counit: it only concerns ambient components whose
-normalizations are the fixed formulas.  The proof transports the completed
-trace/base-change equation through the integral coefficient reference, applies the
-projection/section normalization, and identifies the resulting paste with the
-literal support, diagonal-class, and trace composite.
-Source: `sk-thm-int-restriction-line.proof.md`, paragraph (1), first contraction.
--/
+/-- The ambient integral contraction formula for the fixed diagonal coefficient family, before
+restricting the unit and counit to localizing subcategories. -/
 theorem integralKernel_first_ambient_formula
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

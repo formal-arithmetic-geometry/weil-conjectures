@@ -7,7 +7,18 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
-/-! # Resolution extensionality for derived bifunctors -/
+/-! # Resolution extensionality for derived bifunctors
+
+Two natural transformations between derived bifunctors agree when they agree on all pairs of
+resolving K-flat complexes.
+
+## References
+
+* [Stacks, Tag 04VK](https://stacks.math.columbia.edu/tag/04VK)
+* [Stacks, Tag 06YS](https://stacks.math.columbia.edu/tag/06YS)
+* [Stacks, Tag 06YU](https://stacks.math.columbia.edu/tag/06YU)
+-/
+
 
 @[expose] public section
 set_option autoImplicit false
@@ -15,14 +26,7 @@ universe u v w z
 open CategoryTheory
 
 /-- Two natural transformations between derived bifunctors are equal when they agree on
-all pairs of resolving K-flat complexes.
-
-Source: Stacks Tags 04VK, 06YS and 06YU; the two-variable localization step in
-`new-sf-normalized-pro-scalar-tensor-geometric-square-from-flat`.
-Proof: choose a complex representing each derived object and resolve each by a complex
-satisfying P. The augmentation quasi-isomorphisms become isomorphisms after localization.
-Their product gives an isomorphism from a pair where the components agree to the chosen
-derived pair. Apply naturality of both transformations and cancel its image under U. -/
+all pairs of resolving K-flat complexes. -/
 theorem bifunctor_kflat_localization_extensionality
     {C : Type u} [Category.{v, u} C] [Abelian C] [HasDerivedCategory C]
     (P : ObjectProperty (CochainComplex C ℤ))

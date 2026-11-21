@@ -51,7 +51,12 @@ import all WeilConjectures.CategoryTheory.Monoidal.Conjugate
 import all WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import all WeilConjectures.CategoryTheory.Sites.MonObj
 public import WeilConjectures.AlgebraicGeometry.IntegralResiduePullOrdinaryUnit
-/-! # The ordinary scalar pullback square on homotopy categories -/
+/-! # The ordinary scalar pullback square on homotopy categories
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -187,20 +192,7 @@ end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-/-- The scalar adjunction unit intertwines the ordinary pull isomorphism and restriction.
-
-Source: Bhatt--Scholze, Remark 6.8.15; the extension/restriction adjunction and its
-compatibility with inverse image.
-
-Proof. Forget module structure. Pullback along the coefficient pullback isomorphism
-is identified with inverse image of the underlying sheaf. Under this identification,
-the components of `comapUpperStarIso` are identities. The two module adjunction units
-become the unit for inverse image of abelian sheaves, and `comapLowerStarIso` has
-identity underlying morphism. Hence the inverse of `comapUpperStarIso` is the inverse
-vertical mate of `comapLowerStarIso`. The iterated-mates identity identifies its inverse
-horizontal mate with the conjugate defining `pullIso`. The unit identity for inverse
-mates gives the asserted equation on modules. Apply it in each degree, then pass to
-the homotopy category; the induced adjunction unit is the degreewise scalar unit. -/
+/-- The scalar adjunction unit intertwines the ordinary pull isomorphism and restriction. -/
 theorem residueExchangePull_ordinary_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (H : HomotopyCategory
       (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})

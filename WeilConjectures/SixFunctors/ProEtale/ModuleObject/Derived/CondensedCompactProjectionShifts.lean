@@ -13,9 +13,6 @@ public import WeilConjectures.PoincareDuality.ProjectionFormulaShift
 /-!
 # Native condensed compact-support projection and shifts
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-package/
-fix-lem-tensor-adjunction.proof.md, Step 1 and the final shift assertion.
-
 The projection is the published counit-defined proper projection followed by the inverse
 open projection comparison and the pullback compositor. Tensor and shift structures are
 those of the ordinary relative K-flat derived category, including the signed second slot.
@@ -44,33 +41,7 @@ set_option maxRecDepth 4096 in
 /-- The actual compactification-defined projection commutes separately with every integer
 shift of either finite-Tor input, using the native signed tensor comparisons and the
 unit/counit-compatible derived-adjoint comparisons. The two equalities are the squares
-`τ_[r] ≫ s_G = s_F ≫ τ[r]`, in Lean's left-to-right composition convention.
-
-Source: latest blueprint, fix-lem-tensor-adjunction.proof.md, Step 1 (inverse projection)
-and final shift assertion.
-
-Proof:
-1. First variable, for fixed `L`. Put `I = Di_!`, `G = Rp_*`, `V = Li^*` for `c = (i, p)`,
-and `N = Lp^* L`. The first-variable transformation `β` induced by the lax tensor map of `V`
-is, by `Functor.Monoidal.δ_μ` after cancelling the invertible tensor comparison, the inverse
-of `Adjunction.comparisonFlipApp (leftDerivedUpperStarTensor Λ i) N`; the native tensor
-comparison commutes with shifts, hence so does `β`. The open adjunction `I ⊣ V` commutes
-with shifts (`commShift_derivedOpenImmersionLowerShriekUpperStarAdjunction_ofNatIsoRight`),
-so `Adjunction.commShift_projectionMapFlipApp` gives the shift compatibility of its projection
-map `q`, which is `openImmersionProjectionComparison` (`openImmersionProjectionComparison_eq`)
-and hence invertible; so `inv q` commutes with shifts.
-2. The transformation `τ` obtained by whiskering the proper projection (`projectionMap Λ p`,
-shift-compatible by `commShift_projectionMap_flipApp`) by `I`, then `inv q` by `G`, then the
-tensor with the compositor component `(leftDerivedUpperStarCompactificationIso Λ c).inv.app L`
-by `I ⋙ G`, with the associators, commutes with shifts by composition and whiskering
-(lem-weil-pbc-commshift-nattrans-comp-whisker). Its components are
-`exceptionalProjectionMorphismOfCompactification Λ c K L`; `NatTrans.shift_app_comm`
-gives the first square.
-3. Second variable: `NatTrans.shift_app_comm` applied to
-`exceptionalProjectionMorphismOfCompactificationNatTrans Λ c K`, which commutes with shifts by
-`commShift_exceptionalProjectionMorphismOfCompactificationNatTrans`.
-Both arguments hold in the ambient derived categories for every commutative condensed ring;
-the coefficient hypothesis and the finite-Tor restriction of the inputs are not used. -/
+`τ_[r] ≫ s_G = s_F ≫ τ[r]`, in Lean's left-to-right composition convention. -/
 theorem condensedCompactProjection_shifts
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})

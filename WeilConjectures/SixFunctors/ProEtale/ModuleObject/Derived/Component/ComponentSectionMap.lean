@@ -9,7 +9,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condense
 public import WeilConjectures.CategoryTheory.ZetaWeil.SectionRingGlobalSections
 
 /-! # The section-ring map induced by component inverse image
-Source: Hemo--Richarz--Scholbach, Construction (4.1), Remark 3.2 and Proposition 4.3(3).
+
+## References
+
+* Hemo--Richarz--Scholbach, Construction (4.1), Remark 3.2 and Proposition 4.3(3).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

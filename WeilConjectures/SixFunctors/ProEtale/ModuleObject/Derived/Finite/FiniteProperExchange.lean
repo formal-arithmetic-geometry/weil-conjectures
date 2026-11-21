@@ -21,21 +21,18 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- Equality transport for internal derived inverse images, by equality induction.
-Source: transport of the published derived inverse-image functor. -/
+/-- Equality transport for internal derived inverse images, by equality induction. -/
 @[no_expose] noncomputable def finitePullbackCongr
     {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     (upperStar Λ f).leftDerivedFunctor ≅ (upperStar Λ g).leftDerivedFunctor :=
   h ▸ Iso.refl _
 
-/-- Equality induction normalizes reflexive pullback transport.
-Source: the reflexivity equation for equality transport. -/
+/-- Equality induction normalizes reflexive pullback transport. -/
 @[simp] theorem finitePullbackCongr_rfl {X Y : Scheme.{u}} (f : X ⟶ Y) :
     finitePullbackCongr Λ (rfl : f = f) = Iso.refl _ := by
   rfl
 
-/-- Equality-induction transport is the original equality-to-isomorphism transport.
-Source: equality induction for the published derived inverse-image functor. -/
+/-- Equality-induction transport is the original equality-to-isomorphism transport. -/
 theorem finitePullbackCongr_eqToIso
     {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     finitePullbackCongr Λ h =
@@ -43,8 +40,7 @@ theorem finitePullbackCongr_eqToIso
   cases h
   rfl
 
-/-- The canonical internal derived inverse-image square, kept as a named isomorphism.
-Source: the published pullback compositors and equality transport. -/
+/-- The canonical internal derived inverse-image square, kept as a named isomorphism. -/
 @[no_expose] noncomputable def finitePullbackSquare
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' p' p g) :
@@ -54,8 +50,7 @@ Source: the published pullback compositors and equality transport. -/
     finitePullbackCongr Λ sq.w.symm ≪≫
     leftDerivedUpperStarComp Λ g' p
 
-/-- The unit-square-counit mate of the canonical derived pullback compositor.
-Source: blueprint proper-base-change-finite, clause (2), and the canonical mate convention. -/
+/-- The unit-square-counit mate of the canonical derived pullback compositor. -/
 @[no_expose] noncomputable def finiteProperExchange
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' p' p g) :
@@ -68,8 +63,7 @@ Source: blueprint proper-base-change-finite, clause (2), and the canonical mate 
     (derivedUpperStarLowerStarAdjunction Λ p')
     (TwoSquare.mk _ _ _ _ (finitePullbackSquare Λ sq).hom))
 
-/-- The canonical exchange is its defining mate, without exposing the construction.
-Source: the definition of the unit-square-counit exchange. -/
+/-- The canonical exchange is its defining mate, without exposing the construction. -/
 theorem finiteProperExchange_eq_mate
     {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {p' : X' ⟶ Y'}
     {p : X ⟶ Y} {g : Y' ⟶ Y} (sq : CommSq g' p' p g) :

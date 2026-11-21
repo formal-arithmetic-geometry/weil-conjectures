@@ -56,7 +56,6 @@ comparison, along `q = (𝟙_Z × j) ≫ (g × 𝟙_Y)`; the rest of the proof i
 ## Main statements
 
 - `ProEtale.CondensedRing.isIso_homEquiv_δ_tensorHom_prodUpperStarCounit_prodMap_id_comp`
-
 -/
 
 @[expose] public section

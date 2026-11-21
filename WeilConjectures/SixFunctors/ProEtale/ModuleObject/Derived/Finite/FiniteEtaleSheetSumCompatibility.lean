@@ -44,7 +44,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClopenIdem
 
 /-! # Compatibility of canonical sums of sheet projections
 
-Source: blueprint, stratified lattice trace proof; Stacks Project, Tag 03SH.
+
+## References
+
+* Stacks Project, Tag 03SH
 -/
 
 @[expose] public noncomputable section
@@ -57,8 +60,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 attribute [local irreducible] upperStar lowerStar upperStarComp upperStarLowerStarAdjunction
 
-/-- The sum of the actual counit projections, conjugated by composition comparisons.
-Source: blueprint, stratified lattice trace proof, local computation. -/
+/-- The sum of the actual counit projections, conjugated by composition comparisons. -/
 abbrev finiteEtaleSheetSum
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)
@@ -536,22 +538,7 @@ private theorem compatible_congr
   cases he
   exact hd
 
-/-- Sheet sums agree on overlaps, independently of the enumeration of the sheets.
-Source: blueprint, stratified lattice trace proof, local computation;
-Stacks Project, Tag 03SH.
-
-Proof in words. Refine the two splitting charts to a common weakly etale scheme Z.
-Each splitting gives a finite family of disjoint open-and-closed sections of
-U times_X Z. Intersect each sheet of one splitting with every sheet of the other.
-These intersections give a covering of Z by open-and-closed pieces on each of
-which the two enumerations differ by a bijection. This follows from the finite
-section coproduct local permutation lemma and includes the empty family.
-Inverse-image composition coherence and naturality show that every conjugated
-counit projection commutes with further pullback. The same calculation holds
-for any morphism between the two p-pullbacks. On each piece the two sums are
-therefore reindexings of the same finite sum. Reindex the sum by that bijection
-and use separatedness of linear sheaf morphisms to descend the equality to Z.
-No finiteness condition on p is needed beyond the two given finite splittings. -/
+/-- Sheet sums agree on overlaps, independently of the enumeration of the sheets. -/
 theorem finiteEtaleSheetSum_compatible
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)

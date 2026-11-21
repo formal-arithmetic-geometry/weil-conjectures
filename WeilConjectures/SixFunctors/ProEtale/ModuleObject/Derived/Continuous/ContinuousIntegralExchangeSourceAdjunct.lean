@@ -13,7 +13,12 @@ import WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.OverSquare
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralComparisons
 
-/-! # Coherence of integral localization and the specified exchange map -/
+/-! # Coherence of integral localization and the specified exchange map
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15
+-/
 
 set_option backward.defeqAttrib.useBackward true
 
@@ -230,16 +235,7 @@ private lemma continuous_baseChange_eq_squareExchange (sq : CommSq g' f' f g) :
   (ContinuousMapRingObj.boundedConstructibleBaseChange_eq_exchangeRight ℓ E _).trans
     (Adjunction.squareExchange_eq_unit_square_counit _ _ _ _ _).symm
 
-/-- Normal form for the source side after the bounded f′ adjunction.
-Source: Bhatt--Scholze, Remark 6.8.15; ChangeOfCoefficients.lean derived comparisons
-and the specified unit-square-counit exchange construction.
-
-Proof. Apply the bounded f′ adjunction to the source composite. Expand functoriality, then
-replace the exchange adjunct by square transport followed by the f counit. Naturality of the
-square comparison moves the f push comparison past it. The iterated mate/conjugation identity
-identifies pullback of that push comparison followed by the E counit with the inverse pull
-comparison followed by scalar extension of the integral counit. These substitutions give exactly
-the displayed composite. -/
+/-- Normal form for the source side after the bounded f′ adjunction. -/
 theorem integralConstructible_exchange_source_adjunct
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     ((ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E

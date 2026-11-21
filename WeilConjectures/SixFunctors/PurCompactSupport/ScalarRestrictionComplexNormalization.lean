@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! # Restriction comparison on complexes
 
-Source: Stacks Project, Tag 0D6D.
+## References
+
+* Stacks Project, Tag `0D6D`
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +28,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   proEtaleRingModulePullback proEtaleRingModuleDirectImage
   proEtaleRingRestrictionDirectImage proEtaleRingRestrictionDerivedDirectImage
 
-/-- The canonical cochain computation unit for a right derived functor.
-Source: Mathlib right-derived comparison unit. -/
+/-- The canonical cochain computation unit for a right derived functor. -/
 def coefficientDirectComplexUnit
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
@@ -43,8 +44,7 @@ private theorem cancel_isomorphism_square {C : Type*} [Category C]
   apply e.inv_comp_eq.mpr
   simpa only [Category.assoc] using d.eq_comp_inv.mpr h
 
-/-- Termwise restriction/direct-image comparison, with its composition identifications.
-Source: Stacks Tag 0D6D. -/
+/-- Termwise restriction/direct-image comparison, with its composition identifications. -/
 def scalarRestrictionComplex {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) :
     (proEtaleRingModuleDirectImage g (S.ring V) (S.ring U)
@@ -61,12 +61,7 @@ def scalarRestrictionComplex {R S : Coefficients.{u}} (a : Change R S)
       (Iso.refl (pbcRestrict (a.map U) ⋙
         proEtaleRingModuleDirectImage g (R.ring V) (R.ring U) (R.pull g))) (.up ℤ)).symm
 
-/-- The inverse restriction/direct-image comparison has its complex-unit normalization.
-Source: Stacks Tag 0D6D.
-Proof: start with the defining unit equation of the derived comparison. Cancel the
-exact restriction factorization isomorphisms on its two sides. The general
-isomorphism-square cancellation identity gives the forward square; invert the
-ordinary and derived comparison isomorphisms to obtain this inverse square. -/
+/-- The inverse restriction/direct-image comparison has its complex-unit normalization. -/
 theorem scalarRestriction_complex_normalization
     {R S : Coefficients.{u}} (a : Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V)

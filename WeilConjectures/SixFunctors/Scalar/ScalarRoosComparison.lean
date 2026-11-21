@@ -11,11 +11,14 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # The coordinate-normalized additive Roos comparison
 
-Source: Stacks 08TC and 0941.
-
 This file retains the original additive Roos construction and its unique
 coordinate characterization, together with proved naturality and strict tower
 assembly helpers. No coefficient-specific definitions or instances are needed.
+
+## References
+
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -26,8 +29,7 @@ universe a b a' b'
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures
 
-/-- The boundary of the actual Roos cocone, for use in both coordinate formulas.
-Source: Stacks 08TC. -/
+/-- The boundary of the actual Roos cocone, for use in both coordinate formulas. -/
 abbrev scalarRoosBoundary {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableProducts A] (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   towerTransitionEndomorphism (K := fun n ↦ C.obj (op n))
@@ -81,11 +83,7 @@ private def scalarCoconeSquareMap
 
 /-- An additive functor maps the Roos cocone to the Roos cocone of its tower.
 Both coordinates, including the shifted coordinate, are prescribed, so no cone
-completion is chosen. Source: Stacks 08TC.
-Proof: apply the functor to the two cone coordinates. The universal property of each
-product gives the specified maps to the target products. Additivity preserves 1-s and
-the signed cocone differential, so these coordinates define a chain map. The cocone's
-biproduct coordinates and joint monicity of the product projections give uniqueness. -/
+completion is chosen. -/
 theorem scalarRoosMap_existsUnique
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     {B : Type a'} [Category.{b'} B] [Abelian B] [HasCountableProducts B]
@@ -191,8 +189,7 @@ theorem scalarRoosMap_existsUnique
 
 end ScalarRoos
 
-/-- The Roos map with its two prescribed coordinates.
-Source: Stacks 08TC. -/
+/-- The Roos map with its two prescribed coordinates. -/
 def scalarRoosMap
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     {B : Type a'} [Category.{b'} B] [Abelian B] [HasCountableProducts B]
@@ -208,10 +205,7 @@ open CochainComplex CochainComplex.HomComplex
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
   {B : Type a'} [Category.{b'} B] [Abelian B] [HasCountableProducts B]
 
-/-- Coordinates of a strict tower map, computed directly on the shifted cone.
-Source: Stacks 08TC; the elementary calculation in IntegralAmbientOperationModels.
-Proof: rewrite the homotopy cofiber map as the usual cone map and evaluate its
-first and second summands after shifting by minus one. -/
+/-- Coordinates of a strict tower map, computed directly on the shifted cone. -/
 private theorem scalarRoosTowerCoordinates
     {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ C') :
     integralOperationsRoosMap a ≫ mappingCocone.fst
@@ -353,13 +347,7 @@ private theorem scalarRoosCoordinates (F : A ⥤ B) [F.Additive]
     rw [hp, ← F.map_comp]
   exact ⟨hf, hs⟩
 
-/-- Naturality of the diagonal Roos comparison on arbitrary strict towers.
-Source: Stacks 0941.
-
-Proof: naturality of the product comparison follows after every product projection.
-Compose both proposed maps with the first and second cocone coordinates. The defining
-coordinate equations for the diagonal map and for the tower map reduce both equations
-to this product naturality. The two coordinates jointly determine each degree. -/
+/-- Naturality of the diagonal Roos comparison on arbitrary strict towers. -/
 private theorem scalarRoosNaturality (F : A ⥤ B) [F.Additive]
     {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ C') :
     (F.mapHomologicalComplex (.up ℤ)).map (integralOperationsRoosMap a) ≫

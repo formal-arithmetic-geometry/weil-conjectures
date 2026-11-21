@@ -15,12 +15,13 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.TwistedSectio
 Let `f : W ⟶ X` be weakly étale, surjective and quasi-compact, and `γ` a cocycle of matrices of
 locally finite functions on `W ×_X W`. The sheaf `G` on `X` whose sections over `T` are the
 columns `y` of locally finite functions on `T ×_X W` with `γ(w₁, w₂) y(t, w₁) = y(t, w₂)` is the
-kernel of a morphism `f_* ℚ̄_ℓⁿ ⟶ (p₁ f)_* ℚ̄_ℓⁿ`. The adjoint `f^* G ⟶ ℚ̄_ℓⁿ` of the inclusion
-is an isomorphism, computed on sections through the identification of `f^*` with restriction
-along the localization functor: a section `y` restricts along the graph of `T ⟶ W` to
-`y(t, a t)`, and conversely `c ↦ γ(a t, w) c(t)`. Its transition matrix is `γ`, by the kernel
-condition, the composites of adjunctions computing the pullbacks of the trivialisation
-(`AlgebraicGeometry.ProEtale.AdicSheaf.exists_iso_transitionMatrix_eq`).
+kernel of a morphism `f_* ℚ̄_ℓⁿ ⟶ (p₁ f)_* ℚ̄_ℓⁿ`, and `f^* G` is trivialised with transition
+matrix `γ` (`AlgebraicGeometry.ProEtale.AdicSheaf.exists_iso_transitionMatrix_eq`).
+
+## References
+
+* [SGA 4, Exp. VIII, 9.1]
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, §4.2]
 -/
 
 @[expose] public section
@@ -754,15 +755,11 @@ end Adjunctions
 
 variable {X W : Scheme.{u}}
 
-/-- **Descent of trivial `ℓ`-adic sheaves along a pro-étale cover** (the stack property of
-sheaves on the pro-étale site; SGA 4, Exp. VIII, 9.1, and Bhatt–Scholze, *The pro-étale topology
-for schemes*, §4.2: the pro-étale site is subcanonical and sheaves glue). Let `f : W ⟶ X` be
+/-- **Descent of trivial `ℓ`-adic sheaves along a pro-étale cover.** Let `f : W ⟶ X` be
 weakly étale and `γ` a matrix of locally finite functions on `W ×_X W` which is a cocycle:
 trivial on the diagonal and `γ₁₃ = γ₂₃ γ₁₂` on `W ×_X W ×_X W`. Then the descent datum on
 `ℚ̄_ℓ,Wⁿ` given by `γ` is effective: there are an `ℓ`-adic sheaf `G` on `X` and a trivialisation
-`ε : f^* G ≅ ℚ̄_ℓ,Wⁿ` whose transition matrix on `W ×_X W` is `γ`. The sheaf `G` is the kernel of
-`f_* ℚ̄_ℓ,Wⁿ ⟶ (p₁ f)_* ℚ̄_ℓ,(W ×_X W)ⁿ`, `y ↦ γ · p₁^* y - p₂^* y`
-(`AlgebraicGeometry.ProEtale.AdicSheaf.descentSheaf`). -/
+`ε : f^* G ≅ ℚ̄_ℓ,Wⁿ` whose transition matrix on `W ×_X W` is `γ`. -/
 theorem exists_iso_transitionMatrix_eq (f : W ⟶ X) [WeaklyEtale f] {n : ℕ}
     (γ : Matrix (Fin n) (Fin n) (PadicAlgCl.locallyFiniteFunctions l ↥(Limits.pullback f f)))
     (hdiag : γ.map (PadicAlgCl.locallyFiniteFunctionsComp l (pullback.diagonal f).base.hom) = 1)

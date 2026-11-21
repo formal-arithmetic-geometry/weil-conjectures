@@ -15,22 +15,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ext
 /-!
 # The pushforward of an elliptic curve does not preserve countable coproducts
 
-Blueprint `sk-rem-sf-fullcd-scope` (ii): for the structure morphism `a_E : E ⟶ Spec k` of an
-elliptic curve (more generally an abelian variety of positive dimension) over an algebraically
-closed field `k`, `Ra_{E*}` does not preserve countable coproducts on `D(E_proét, Λ)`, so
-`Ra_{E!} ≅ Ra_{E*}` has no right adjoint.
-
-Let `F` be the sheaf of
-`AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar`, with
-`Extⁿ(Λ_E, F) ≠ 0` for `n ≥ 1`, and `Kₙ = F[n]`. These classes give nonzero morphisms
-`Λ[0] ⟶ (Ra_{E*} F)[n]` on `Spec k`
-(`AlgebraicGeometry.ProEtale.exists_forall_hom_ne_zero_rightDerivedLowerStar`). Since countable
-products of pro-étale sheaves are exact, `⊕ Kₙ` is also the product of the `Kₙ` in
-`D(E_proét, Λ)`, and the right adjoint `Ra_{E*}` preserves this product. On the other hand
-`Λ[0]` is compact in `D((Spec k)_proét, Λ)`: morphisms out of it are global sections of `H⁰`,
-which commute with coproducts (`DerivedCategory.exists_finset_forall_comp_eq_zero`). A morphism
-`Λ[0] ⟶ ∏ Ra_{E*} Kₙ` with all components nonzero then shows that `Ra_{E*}` does not preserve
-the coproduct of the `Kₙ` (`DerivedCategory.not_preservesColimitsOfShape_of_forall_hom_ne_zero`).
+For the structure morphism `a_E : E ⟶ Spec k` of an elliptic curve (more generally an abelian
+variety of positive dimension) over an algebraically closed field `k`, `Ra_{E*}` does not preserve
+countable coproducts on `D(E_proét, Λ)`, so `Ra_{E!} ≅ Ra_{E*}` has no right adjoint.
 
 ## Main statements
 
@@ -59,12 +46,7 @@ variable (Λ : Type (u + 1)) [Field Λ] {k : Type u} [Field k] [IsAlgClosed k]
 algebraically closed field `k` and a field `Λ`, there is a pro-étale sheaf `F` of `Λ`-modules on
 `E` such that for every `n ≥ 1` there is a nonzero morphism `Λ[0] ⟶ (Ra_{E*} F)[n]` in
 `D((Spec k)_proét, Λ)`.
-
-As in `AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar`,
-`F = V(Λ)` for the exact evaluation functor `U ⊣ V` of
-`AlgebraicGeometry.ProEtale.exists_exact_evaluation` has `Extⁿ(Λ_E, F) ≠ 0` for `n ≥ 1`, and
-these classes give nonzero morphisms `Λ[0] ⟶ (Ra_{E*} F)[n]`
-(`AlgebraicGeometry.ProEtale.hom_ne_zero_of_ext_ne_zero`). -/
+-/
 theorem exists_forall_hom_ne_zero_rightDerivedLowerStar (hE : 0 < IsAbelianVariety.dim E) :
     ∃ F : Sheaf (Scheme.ProEt.topology E.left) (ModuleCat.{u + 1} Λ), ∀ n : ℕ,
       ∃ φ : (DerivedCategory.singleFunctor _ 0).obj
@@ -101,15 +83,9 @@ theorem exists_forall_hom_ne_zero_rightDerivedLowerStar (hE : 0 < IsAbelianVarie
 
 -- the instances `HasSheafCompose` and `PreservesSheafification` on the small pro-étale site
 -- take long to synthesize
-/-- Blueprint `sk-rem-sf-fullcd-scope` (ii): for the structure morphism `a_E` of an elliptic
-curve (more generally an abelian variety of positive dimension) over an algebraically closed
-field, `Ra_{E*}` does not preserve countable coproducts on `D(E_proét, Λ)`.
-
-With `F` the sheaf of
-`AlgebraicGeometry.ProEtale.exists_forall_not_isZero_homology_rightDerivedLowerStar` and
-`Kₙ = F[n]`, countable products and coproducts of pro-étale sheaves are exact, so
-`⊕ Kₙ ≅ ∏ Kₙ`, while in degree `0` the coproduct comparison for `Ra_{E*}` is the non-surjective
-map `⊕_{n ≥ 1} Hⁿ(E, F) ⟶ ∏_{n ≥ 1} Hⁿ(E, F)`. -/
+/-- For the structure morphism `a_E` of an elliptic curve (more generally an abelian variety of
+positive dimension) over an algebraically closed field, `Ra_{E*}` does not preserve countable
+coproducts on `D(E_proét, Λ)`. -/
 theorem not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety
     (hE : 0 < IsAbelianVariety.dim E) :
     ¬ PreservesColimitsOfShape (Discrete ℕ) (R((E.hom)_*[ModuleCat.{u + 1} Λ])) := by
@@ -142,12 +118,9 @@ theorem not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety
     fun h ↦ hφ ?_⟩
   exact (cancel_mono _).1 (h.trans zero_comp.symm)
 
-/-- Blueprint `sk-rem-sf-fullcd-scope` (ii): for the structure morphism `a_E` of an elliptic
-curve (more generally an abelian variety of positive dimension) over an algebraically closed
-field, `Ra_{E!}` has no right adjoint on `D(E_proét, Λ)`. Indeed `Ra_{E!} ≅ Ra_{E*}`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoOfIsProper`) does not preserve countable
-coproducts (`not_preservesColimitsOfShape_rightDerivedLowerStar_of_isAbelianVariety`), whereas
-left adjoints preserve all colimits. -/
+/-- For the structure morphism `a_E` of an elliptic curve (more generally an abelian variety of
+positive dimension) over an algebraically closed field, `Ra_{E!}` has no right adjoint on
+`D(E_proét, Λ)`. -/
 theorem not_isLeftAdjoint_rightDerivedLowerShriek_of_isAbelianVariety
     (hE : 0 < IsAbelianVariety.dim E) :
     ¬ (R(E.hom)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint := fun _ ↦

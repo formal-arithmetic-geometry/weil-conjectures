@@ -43,9 +43,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 /-! # Scalar adjunction and tensor realization in the coefficient square
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 07A6; blueprint
-main-20261015, proper-base-change-rational.proof.md (3).
-
 The section realization retains the ordinary balanced generators, the derived Hom
 bijection, and the signed total representative equation. The pullback path comparison
 is constructed by localization of the ordinary coefficient square, independently of
@@ -58,6 +55,9 @@ the derived direct-image mate. All categories are ordinary unbounded derived cat
 
 ## Main statement
 
+## References
+
+* Stacks Project, Tags 07A4, 07A6 and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -250,18 +250,7 @@ variable [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coeffici
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 
 /-- Scalar adjunction and tensor realization, and the tensor equation for the canonical
-coefficient ringed-square pullback comparison, on all unbounded objects.
-Source: Stacks 07A4, 07A6 and 0D6D; blueprint rational proper base change, proof (3).
-
-Proof: the canonical scalar oplax structure is normalized on balanced generators, so
-its adjoint restriction lax structure is the prescribed one. Check the ordinary
-restriction/direct-image comparison on generalized pure tensors, then apply monoidal
-conjugation to the scalar and geometric adjunctions. This proves ordinary monoidality
-of the actual pullIso comparison. The separate coefficientScalarSectionRealization
-lemma supplies the normalized section clauses at X and Y; the separate
-coefficientScalarDerivedTensorSquare lemma lifts this proved ordinary monoidality to
-the displayed derived tensor equation. Combine the three clauses. Nothing uses
-boundedness, constructibility or properness. -/
+coefficient ringed-square pullback comparison, on all unbounded objects. -/
 theorem coefficientScalarTensorRealization
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

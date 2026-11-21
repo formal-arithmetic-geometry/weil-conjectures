@@ -9,7 +9,10 @@ public import WeilConjectures.SixFunctors.Tensor.TensorReductionFiniteComponents
 
 /-! # Equation for the transported finite tensor component
 
-Source: Stacks 07A4 and 0941.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +32,7 @@ attribute [local irreducible] pullbackTensorReductionEvaluationComplex
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- An explicit equation for the transported finite component.
-Source: Stacks 0941. -/
+/-- An explicit equation for the transported finite component. -/
 theorem tensorReductionSystemFiniteComponent_eq (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coeffici
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientDirectImageConjugation
 import WeilConjectures.AlgebraicGeometry.Comparison.ComparisonDirectImage
 
-/-! # Direct image preserves the finite coefficient etale image -/
+/-! # Direct image preserves the finite coefficient etale image
+
+## References
+
+* Bhatt--Scholze, Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 099R
+-/
 
 @[expose] public section
 
@@ -37,21 +42,7 @@ variable
   (hG : G ⋙ forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} B)) Ab.{u + 1} =
     Mod.forget (AddCommGrpCat.of (ULift.{u + 1} B)))
 
-/-- A qcqs derived direct image of a realized complex still has etale origin.
-Source: Bhatt--Scholze, Lemmas 5.4.1 and 5.4.3; Stacks Project, Tag 099R.
-
-Proof in words. Undo the exact coefficient equivalence on the source and target.
-Sectionwise restriction commutes with its common G, and the point-derived constant
-ring identifications commute with scalar restriction along the canonical coefficient
-maps. Hence the ordinary internal direct image is conjugate through these equivalences
-to the ordinary module-valued direct image. Exact equivalences preserve injectives;
-apply this identity to injective resolutions to obtain its derived version. For a
-bounded below etale complex K the finite coefficient direct-image comparison identifies
-R h_proet,* (nu_S^* K) with nu_T^* (R+ h_et,* K). The latter complex is bounded below.
-Transport back by the target coefficient equivalence and include D+ in D. Thus the
-specific witness for the essential image is R+ h_et,* K, and the comparison just
-described supplies its isomorphism to the displayed target. Empty schemes and the
-zero ring require no extra hypothesis. -/
+/-- A qcqs derived direct image of a realized complex still has etale origin. -/
 theorem finiteDiscreteCoefficient_directImage_origin [DiscreteTopology B] [Finite B]
     {S T : Scheme.{u}} (h : S ⟶ T) [QuasiCompact h] [QuasiSeparated h]
     (K : FiniteDiscreteEtalePlus B S) :

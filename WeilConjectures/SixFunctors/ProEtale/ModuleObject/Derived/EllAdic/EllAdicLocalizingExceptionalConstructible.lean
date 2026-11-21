@@ -11,8 +11,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.EllAdic.EllAdicLocalizingExceptionalConstructibleCohomology
 
 /-! # Constructibility of the localizing exceptional inverse image
-
-Source: blueprint `theorem-exceptional-inverse-image` (4), `det-existence-restriction.proof.md`.
 -/
 
 @[expose] public section

@@ -17,8 +17,8 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 /-!
 # One compactification model for nonrational lower-shriek composition
 
-Source: blueprint main-20261015, sk-thm-sf-comp-composition.proof.md,
-"The composition isomorphism".
+A composition isomorphism for `Rf_!` on one compactification triple, for nonrational
+coefficients.
 -/
 
 @[expose] public section
@@ -125,24 +125,7 @@ private theorem interchangeRestrictionNatTrans_app
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- A composition isomorphism exists for one triple of compactifications. No comparison
-with other triples is asserted here. The preservation arguments only type the restrictions.
-
-Source: blueprint main-20261015, sk-thm-sf-comp-composition.proof.md,
-"The composition isomorphism".
-
-Proof: Choose dense compactifications f = pj and g = qi by Nagata, then compactify ip as ru.
-The pair (u ∘ j, q ∘ r) compactifies g ∘ f: open immersions and proper maps compose,
-and quasi-compactness of the open follows from finite type. Extension by zero along j preserves
-the localizing
-closure. Proper/open interchange gives the unique map i! Rp* A → Rr* u! A restricting to the
-identity, invertible for A in that closure. Its normalization and the open adjunction imply
-naturality: the two composites associated to A → B have the same open adjoint. Apply this to
-A = j! K and apply Rq*. Compose the derived proper-direct-image compositor with the open
-extension compositor (the latter comes from uniqueness of left adjoints to the composite
-pullback). This yields Rp*j! followed by Rq*i! isomorphic to R(q ∘ r)*(u ∘ j)!. The supplied
-preservation proofs place the endpoints in the full localizing subcategory, whose fullness
-lifts this ambient natural isomorphism. There is no compatibility claim to prove in this
-lemma; transport by the cocycle supplies that part in the parent. -/
+with other triples is asserted here. The preservation arguments only type the restrictions. -/
 theorem exists_nonrationalLocalizingLowerShriekCompositionSeed
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

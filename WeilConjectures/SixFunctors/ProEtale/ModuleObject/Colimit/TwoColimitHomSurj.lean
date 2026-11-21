@@ -15,8 +15,7 @@ Let `ℓ` be a prime, `X` a topologically noetherian scheme and `E, F` finite su
 `ℚ̄_ℓ`. Every morphism `f : T^X_{E,Ω} K ⟶ T^X_{F,Ω} L` from the extension of scalars of a bounded
 constructible `E_X`-complex `K` to that of a bounded below `F_X`-complex `L` is of the form
 `τ⁻¹ ≫ T^X_{H,Ω} g ≫ τ` for a finite subextension `H ⊇ E, F` and a morphism
-`g : T^X_{E,H} K ⟶ T^X_{F,H} L` (`ProEtale.exists_derivedExtendScalarsToPadicAlgCl_map_eq`,
-blueprint `proposition-dctf-x-qbar-2-colimit--3`).
+`g : T^X_{E,H} K ⟶ T^X_{F,H} L` (`ProEtale.exists_derivedExtendScalarsToPadicAlgCl_map_eq`).
 
 Represent `L` by a complex `Y` of `F_X`-modules vanishing below some degree. By adjunction, `f`
 corresponds to a morphism `K ⟶ D(Res_{E→Ω})(ℚ̄_ℓ,X ⊗_{F_X} Y)`, and
@@ -185,7 +184,7 @@ theorem exists_derivedExtendScalarsToPadicAlgCl_map_eq_of_isStrictlyGE
         (derivedComapExtendScalarsQhIso X ℓ (hEG.trans k.property) (hFG.trans k.property) Y)
         (derivedComapExtendScalarsQhIso_hom_comp_Q_map X ℓ hEG hFG Y k) g₀ hg₀)⟩
 
-/-- **(Hom)-surjectivity** (blueprint `proposition-dctf-x-qbar-2-colimit--3`): every morphism
+/-- **(Hom)-surjectivity**: every morphism
 `f : T^X_{E,Ω} K ⟶ T^X_{F,Ω} L` with `K` bounded constructible and `L` bounded constructible
 (bounded below suffices) is `τ⁻¹ ≫ T^X_{H,Ω} g ≫ τ` for some finite subextension `H ⊇ E, F` and
 some `g : T^X_{E,H} K ⟶ T^X_{F,H} L`. -/

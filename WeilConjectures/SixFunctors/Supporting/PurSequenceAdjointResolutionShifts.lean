@@ -165,9 +165,18 @@ import Mathlib.CategoryTheory.Generator.Basic
 
 /-! # Resolution-normalized sequence-site adjoints
 
-Source: blueprint main-20261015, `sec-six-functors/sk-thm-sf-package/`
-`fix-prop-coherence.proof.md`, coefficient-comparison sentence; Stacks 0940,
-0941, 03D7, 06YY, 07A6 and 0D6E.
+Derived adjoints of the sequence-site pullback and pushforward, identified with the
+resolution-normalized comparisons, and their compatibility with integer shifts.
+
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 070H](https://stacks.math.columbia.edu/tag/070H)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0940](https://stacks.math.columbia.edu/tag/0940)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
 -/
 
 @[expose] public noncomputable section
@@ -197,7 +206,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- Shift the actual simultaneous replacement, including the canonical termwise
-restriction comparison. Source: Stacks 0941, 070H. -/
+restriction comparison. -/
 def purSequenceShiftedReplacement
     (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
@@ -213,8 +222,7 @@ attribute [local irreducible] purSequenceShiftedReplacement
 /-- The prescribed cochain shifts of both derived adjoints, with the same resolutions.
 `CommShift` includes naturality and the zero/addition coherence equations. The
 representative squares use the ordinary termwise shift, hence identity on the
-reindexed scalar-tensor terms and differential multiplied by `r.negOnePow`.
-Source: Stacks 06YY, 0941, 0D6E; cochain shifts in derived.tex. -/
+reindexed scalar-tensor terms and differential multiplied by `r.negOnePow`. -/
 structure PurSequenceLeftShiftModels
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W)
@@ -263,8 +271,7 @@ structure PurSequenceLeftShiftModels
         (S.reduction.obj P) ≫ ((S.reductionEvaluation n).hom.app P)⟦r⟧'
 
 /-- The right comparison square for the actual shifted simultaneous replacement.
-This names the same equation separately to keep repeated structure type checking small.
-Source: Stacks 0941 and 0D6E. -/
+This names the same equation separately to keep repeated structure type checking small. -/
 def purSequenceRightResolutionCompatibility
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W)
@@ -288,8 +295,7 @@ def purSequenceRightResolutionCompatibility
         (((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)
           |>.mapHomologicalComplex (.up ℤ)).obj J)
 
-/-- The degree component of the limit of the actual shifted replacement.
-Source: Stacks 0941 and the cochain shift convention. -/
+/-- The degree component of the limit of the actual shifted replacement. -/
 def purSequenceShiftedDegreeCompatibility : Prop :=
   ∀ (N : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ)
@@ -301,8 +307,7 @@ def purSequenceShiftedDegreeCompatibility : Prop :=
       ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W).map
         (j.f (i + r)))
 
-/-- The total-limit shifts on every supplied simultaneous replacement.
-Source: Stacks 0941 and 0D6E. -/
+/-- The total-limit shifts on every supplied simultaneous replacement. -/
 structure PurSequenceRightShiftModels
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W)
@@ -320,8 +325,7 @@ structure PurSequenceRightShiftModels
   right_resolution : purSequenceRightResolutionCompatibility l E W S O D limit_shift
   shifted_degree : purSequenceShiftedDegreeCompatibility l E W
 
-/-- The prescribed shifts with their actual adjunction compatibility.
-Source: Stacks 06YY, 0941 and 0D6E. -/
+/-- The prescribed shifts with their actual adjunction compatibility. -/
 structure PurSequenceAdjointShifts
     (S : CoefficientDerivedSystemCalculus l E W)
     (O : PurSequenceOrdinaryAdjoints l E W)
@@ -333,55 +337,7 @@ structure PurSequenceAdjointShifts
   adjoint_counit : ∀ r : ℤ,
     purSequenceCounitShiftCompatibility D.adjunction left.left_shift right.right_shift r
 
-/-- Resolution-normalized identification of the sequence-site derived adjoints.
-Source: blueprint main-20261015, `fix-prop-coherence.proof.md`, coefficient-comparison
-sentence; Stacks 0940, 0941, 03D7, 06YS, 06YY, 07A6 and 0D6E.
-
-Proof, following the node:
-1. The constant-tower functor preserves finite limits and is left adjoint to limit,
-so gives the geometric projection g (def-coef-ringed-sequence-site). The actual
-quotient maps cA to B define a ring change a with identity geometric inverse image.
-Restriction a_* is exact on underlying abelian sheaves. Their composite is p.
-2. The ordinary module adjunction (lem-weil-pbc-ringed-topoi-module-adjunction)
-sends h to the family x tensor b mapped to b times pi_n(h(x)); its inverse sends
-x to the compatible family f_n(x tensor 1). These formulas are mutually inverse
-and natural and fix the ordinary unit and counit.
-3. Resolve P by one flat-term K-flat Q (lem-pc-kflat-resolution). The universal
-left-derived comparison (lem-weil-pbc-ringed-topoi-derived-pullback) computes
-Lp^* by the strict quotient system on Q. The supplied calculus uses this same
-model, including the maps of resolutions and quotient transitions; the finite
-comparisons are those of lem-pur-derived-change-of-rings.
-4. Q[r] remains K-flat: the tensor shift multiplies its (p,q) summand by
-(-1)^(r*p), intertwining the tensor differentials. Its terms remain flat and the
-resolution remains a quasi-isomorphism. Ordinary scalar extension commutes with
-cochain shift by the identity on reindexed terms, with differential (-1)^r d.
-5. Apply lem-weil-pbc-ringed-topoi-derived-pushforward-composition to a and g,
-and lem-weil-pbc-ringed-strict-tower-homotopy-limit to g. Exact U localizes
-termwise (situation-conventions). For K-injective I
-and a K-injective replacement j:UI to J, the comparison is represented by lim j,
-which is a quasi-isomorphism. Resolutions exist by
-prop-pur-kinjective-resolutions-exist; U need not preserve K-injectives.
-6. For any N and any supplied replacement UN to J, first resolve N to I.
-The bijection of lem-weil-pbc-kinjective-hom-derived gives a unique homotopy
-class b:UI to J whose composite with Ui is the given replacement. Two-out-of-three
-makes b a quasi-isomorphism. The preceding normalization computes the comparison
-on this particular J. Independence and naturality on all derived morphisms follow
-from lem-sf-kinjective-derived-map-computation and its comparison cocycle equations.
-7. Use lem-coef-sequence-projection-derived-adjunction and the fraction normalization
-of lem-sfb-resolving-derived-adjunction-normalization. A map p^*Q to I transposes
-to Q to lim UI and then lim j. The canonical projection/counit formulas of
-lem-coef-sequence-pushforward-limit-projections are exactly the supplied calculus
-adjunction. Thus the whole Hom bijections agree, so their units and counits agree
-as system maps, without using faithfulness of derived level evaluation.
-8. By lem-weil-pbc-kinjective-shift, I[r] and J[r] are K-injective. Apply step 5
-to exactly j[r]; its degree-i limit map is lim j^(i+r). The ordinary limit shift
-is identity on reindexed terms, with differential (-1)^r d. For arbitrary N,
-use the same shifted replacement and comparison class b[r]; uniqueness and step 6
-give the square on every derived input and morphism.
-9. For r+s use Q[r+s], I[r+s] and j[r+s]. The sign identity
-(-1)^r * (-1)^s = (-1)^(r+s) gives addition coherence, while zero and inverse
-shifts give their identity equations. This covers negative shifts, zero complexes,
-and the empty scheme, without normalizedness, completeness, or exact products. -/
+/-- Resolution-normalized identification of the sequence-site derived adjoints. -/
 theorem purSequenceAdjointResolutionShifts
     (F : FiniteFieldDatum.{t}) (hl : l ≠ F.p)
     [W.Over (Spec (.of F.k))]

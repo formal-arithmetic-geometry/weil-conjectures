@@ -16,8 +16,8 @@ Let `a : X ⟶ Y` carry a compactification, with pro-étale dualizing complex
 identification of `ω_X` with an invertible complex `T`. For `X` smooth of pure dimension `d`
 the smooth purity identification `ω_{X,Λ} ≅ Λ_X(d)[2d]` is such an `η`, at each of the
 coefficient stages `𝒪_E`, `E` and `Q̄_ℓ` of the Poincaré duality conventions; this file records
-what it gives for perfect complexes (blueprint `theorem-poincare-duality--2`), the finite stage
-being `WeilConjectures.SixFunctors.Etale.Derived.Orientation`. The statements are made for an
+what it gives for perfect complexes (for the finite stage see
+`WeilConjectures.SixFunctors.Etale.Derived.Orientation`). The statements are made for an
 arbitrary object `ω` in place of `ω_X` (at a finite coefficient ring `Λ`,
 `ω = AlgebraicGeometry.ProEtale.dualizingComplex Λ a` and `RHom(-, ω)` is
 `AlgebraicGeometry.ProEtale.verdierDual Λ a`).
@@ -59,9 +59,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {X : Scheme.{u}} {ω T : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
   (η : T ≅ ω) (hT : IsInvertible T)
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex.
-
-For an identification `η : T ≅ ω_X` of the pro-étale dualizing complex with an invertible
+/-- For an identification `η : T ≅ ω_X` of the pro-étale dualizing complex with an invertible
 complex `T` (for smooth `X` of pure dimension `d`, `T = Λ_X(d)[2d]`), the natural isomorphism
 ```
   𝔻_X K = RHom(K, ω_X) ≅ RHom(K, T) ≅ K^∨ ⊗ᴸ T,
@@ -72,10 +70,7 @@ noncomputable def verdierDualIsoDerivedDualTensor :
     (RHom(X)[A]).flip.obj ω ≅ derivedDual A X ⋙ tensorRight T :=
   MonoidalClosed.ihomFlipIsoIhomUnitTensor η hT
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (compatibility with the
-canonical evaluation).
-
-Under `𝔻_X K ≅ K^∨ ⊗ᴸ T` the evaluation `K ⊗ᴸ 𝔻_X K ⟶ ω_X` is the coefficient evaluation
+/-- Under `𝔻_X K ≅ K^∨ ⊗ᴸ T` the evaluation `K ⊗ᴸ 𝔻_X K ⟶ ω_X` is the coefficient evaluation
 `K ⊗ᴸ K^∨ ⟶ Λ_X` tensored with `T`, up to `η`. -/
 @[reassoc]
 lemma whiskerLeft_verdierDualIsoDerivedDualTensor_hom_app_comp
@@ -86,9 +81,7 @@ lemma whiskerLeft_verdierDualIsoDerivedDualTensor_hom_app_comp
   MonoidalClosed.whiskerLeft_ihomIsoIhomUnitTensor_hom_comp η hT K
 
 include η hT in
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex.
-
-Under an identification `ω_X ≅ T` with an invertible `T`, the Verdier dual of a perfect complex
+/-- Under an identification `ω_X ≅ T` with an invertible `T`, the Verdier dual of a perfect complex
 is perfect. -/
 theorem isDualizable_verdierDual
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : IsDualizable K) :
@@ -99,9 +92,7 @@ theorem isDualizable_verdierDual
 
 variable [BraidedCategory (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A))]
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex.
-
-For any braiding of `D(X_proét)`, the coefficient-dual biduality `K ⟶ K^∨∨` of a perfect
+/-- For any braiding of `D(X_proét)`, the coefficient-dual biduality `K ⟶ K^∨∨` of a perfect
 complex is an isomorphism. -/
 theorem isIso_toIhomIhomUnit
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : IsDualizable K) :
@@ -115,9 +106,7 @@ noncomputable def verdierDualVerdierDualIso
       (derivedDual A X).obj (op ((derivedDual A X).obj (op K))) :=
   MonoidalClosed.ihomIhomIsoIhomIhomUnit η hT K
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (biduality).
-
-Under the isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `η`, the double-dual map
+/-- Under the isomorphism `𝔻_X 𝔻_X K ≅ K^∨∨` induced by `η`, the double-dual map
 `K ⟶ 𝔻_X 𝔻_X K` is the coefficient-dual biduality `K ⟶ K^∨∨`. -/
 @[reassoc]
 lemma toIhomIhom_comp_verdierDualVerdierDualIso_hom
@@ -128,17 +117,13 @@ lemma toIhomIhom_comp_verdierDualVerdierDualIso_hom
   MonoidalClosed.toIhomIhom_comp_ihomIhomIsoIhomIhomUnit_hom η hT K
 
 include η hT in
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (biduality).
-
-For a perfect `K` the double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. -/
+/-- For a perfect `K` the double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism. -/
 theorem isIso_toIhomIhom_dualizingComplex
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)} (hK : IsDualizable K) :
     IsIso (MonoidalClosed.toIhomIhom (ω) K) :=
   MonoidalClosed.isIso_toIhomIhom_of_isDualizable η hT hK
 
-/-- Blueprint `theorem-poincare-duality--2`: The dual of a perfect complex (anti-equivalence).
-
-The Verdier dual `𝔻_X` restricts to an anti-equivalence of the perfect objects of
+/-- The Verdier dual `𝔻_X` restricts to an anti-equivalence of the perfect objects of
 `D(X_proét)`, its own quasi-inverse, the unit and counit being the double-dual isomorphisms. -/
 noncomputable def verdierDualEquivalenceOfIso :
     (ObjectProperty.FullSubcategory

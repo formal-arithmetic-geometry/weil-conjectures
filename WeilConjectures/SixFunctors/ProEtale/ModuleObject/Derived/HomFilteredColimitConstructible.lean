@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.HomFilte
 /-!
 # Continuity of `Hom` out of a constructible sheaf
 
-Blueprint `lemma-continuity-ext-out-constructible-complex--1`. Let `Λ` be a commutative condensed
+Let `Λ` be a commutative condensed
 ring such that `Λ_X` is flat on every scheme `X`, and such that on every scheme with noetherian
 underlying space, `Hom(L[0], -[q])` commutes with filtered colimits of module objects for every
 pro-étale locally finitely presented (lisse) module object `L`. Then on a scheme `T` with noetherian
@@ -174,7 +174,7 @@ lemma homCommutesWithFilteredColimits_lisse_step
           (R((c)_*⟦Λ⟧)).mapIso ((R((i')_*⟦Λ⟧)).mapIso
             (leftDerivedUpperStarSingleIso Λ i' G).symm))
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1`, dévissage to lisse sheaves: if
+/-- Dévissage to lisse sheaves: if
 `Λ_X` is flat on every scheme and `Hom(L[0], -[q])` commutes with filtered colimits for every lisse
 `L` on a scheme with noetherian underlying space, then so does `Hom(M[0], -[q])` for every
 constructible `M` on a scheme `T` with noetherian underlying space. -/

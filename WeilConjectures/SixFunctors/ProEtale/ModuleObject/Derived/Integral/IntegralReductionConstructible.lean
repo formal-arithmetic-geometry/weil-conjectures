@@ -211,7 +211,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
 
 /-! # Bounded constructibility of integral reduction
 
-Source: Bhatt--Scholze, Proposition 6.8.11(3), and the finite free residue resolution.
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Proposition 6.8.11(3).
 -/
 
 @[expose] public section
@@ -325,23 +327,6 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
   [FiniteDimensional ℚ_[ℓ] E]
 
 /-- Derived reduction modulo ℓ preserves bounded constructible integral complexes.
-
-Source: Bhatt--Scholze, Proposition 6.8.11(3), the two-term finite free residue resolution.
-
-Proof. Constructible integral modules form a weak Serre class, so bounded constructible
-integral complexes form a triangulated subcategory. Restricted derived reduction belongs
-to this subcategory by the mapping-cone argument for multiplication by ℓ. Exact faithful
-restriction of scalars reflects cohomological boundedness. It also reflects constructibility
-along the quotient: restriction along an epimorphism of ring objects is fully faithful,
-because an integral-linear map is residue-linear after cancellation of the epimorphism
-q tensored with its source. Hence the extension-restriction counit is invertible.
-Extension of scalars preserves finite presentations: apply it to the presentation,
-identify the images of finite free modules with the corresponding residue finite free
-modules, and use preservation of cokernels. Thus an integral finite presentation of a
-restricted residue module gives a residue finite presentation. Inverse image commutes
-with restriction, so the same argument on each presentation cover and stratum proves
-reflection of constructibility. Apply it to each cohomology object, using exact
-restriction's homology comparison. Empty covers, zero ranks, and zero modules are included.
 -/
 theorem integralReduction_boundedConstructible (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X] (M : integralConstructible ℓ E X) :

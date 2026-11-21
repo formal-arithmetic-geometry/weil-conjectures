@@ -11,9 +11,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 /-! # Singleton Koszul coordinates after exact coefficient transport
 
-Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-the finite free dual calculation; blueprint proposition-direct-image-along-open-immersion--1,
-Reduction paragraph.
+## References
+
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
 -/
 
 @[expose] public noncomputable section
@@ -271,35 +271,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /-- The singleton dual Koszul tensor has the two coordinates of the uniformizer cone.
 This is a chain isomorphism before localization, without any flatness assumption on P.
 The unshifted inclusion is the Koszul unit. The shifted inclusion factors through
-Koszul degree -1, with its coefficient change and totalization sign absorbed into z.
-
-Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-finite free dual calculation; blueprint proposition-direct-image-along-open-immersion--1, Reduction
-paragraph.
-
-Proof in words: multiplication by the constant uniformizer pi is monic on the
-constant integer sheaf, since inverse image is exact. The locally principal kernel
-of the first residue map is its image. The generating hypothesis gives locally
-unique sections u and v with a=u*pi and pi=v*a. Cancellation of pi gives vu=1,
-so commutativity makes u invertible. Uniqueness glues u and its inverse to global
-sections. Thus a^(n+1)=u^(n+1)*pi^(n+1). Expand the singleton positive Koszul
-complex, including its tensor with the empty factor O[0], by the right unitor.
-Its dual is rank one in degrees -1 and zero, with the signed dual differential.
-Tensoring it with complex(P) gives precisely P^q plus P^(q+1) in total degree q.
-The balanced tensor identity for restriction of scalars identifies these summands
-with the transported terms of P, even when P is not flat. On the unshifted
-summand take the identity; on the shifted summand multiply by u^(-(n+1)) and
-by the totalization sign that changes the dual differential into the usual cone
-differential (dx+pi^(n+1)y,-dy). These maps and their inverses commute with the
-differential, by the displayed scalar identity. The point coefficient comparison
-and the section equivalence give exactly the functor modules used here. The
-unshifted map is the dual projection evaluated at one, so it is the specified
-Koszul tensor unit. The shifted map is the inverse rank-one identification,
-unit multiplication and the indicated sign followed by the total-tensor inclusion
-of bidegree (q+1,-1); call its first factor z. These are the two asserted formulas.
-All operations are explicit finite sums, unitors and invertible scalar maps; zero
-P and the empty scheme obey the same formulas. No quotient target, K-flatness,
-quasi-isomorphism, transition map or inverse limit is used in this calculation. -/
+Koszul degree -1, with its coefficient change and totalization sign absorbed into z. -/
 theorem koszul_uniformizer_cone_coordinates
     (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)
     (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,

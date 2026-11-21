@@ -14,7 +14,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Finite clopen refinements from categorical weak contractibility
 
-Source: Stacks Project, Tag 098F, the section and inverse-image partition argument.
+## References
+
+* [Stacks, Tag 098F](https://stacks.math.columbia.edu/tag/098F)
+* [Stacks, Tag 090M](https://stacks.math.columbia.edu/tag/090M)
 -/
 
 @[expose] public noncomputable section
@@ -133,15 +136,7 @@ private theorem refinement_of_split (T : Scheme.{t}) (W : T.ProEt) [IsAffine W.l
     exact S.downward_closed (hPS _ _ (ha _)) _
 
 /-- A covering sieve on an affine categorical weakly contractible object admits a
-finite clopen partition refining it.
-
-Source: Stacks Project, Tag 098F.
-Proof: refine the sieve to finitely many affine opens in covering members. Their
-finite coproduct is affine, weakly etale and surjective over the target. The represented
-covering morphism is epic, so evaluation lifts the identity to a section. Pull the
-coproduct components back along that section. They are disjoint clopens covering the
-target, and the restricted section factors each inclusion through the original sieve.
-The same construction includes the empty affine scheme and the empty cover. -/
+finite clopen partition refining it. -/
 private theorem sf_clopen_cover_refinement (T : Scheme.{t}) (W : T.ProEt) [IsAffine W.left]
     (hW : ∀ (F G : Sheaf (ProEt.topology T) (Type (max u (t + 1))))
       (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op W)))
@@ -262,15 +257,7 @@ private theorem split_clopen_cover (T : Scheme.{t}) [IsAffine T]
     Category.assoc, hs', Category.comp_id, Category.id_comp]
 
 /-- A clopen of an affine categorically weakly contractible scheme is weakly
-contractible in every coefficient universe.
-
-Source: Stacks Project, Tags 098F and 090M.
-Proof: an affine surjective weakly etale cover of the clopen is augmented by its
-clopen complement to an affine cover of the whole scheme. Lift the identity through
-its represented epimorphism, then restrict the section to the original component.
-Every covering sieve of the clopen therefore has a finite disjoint open refinement.
-The sheaf gluing axiom glues local lifts across that disjoint cover in any universe.
-This includes empty clopens, since the empty family glues the unique empty section. -/
+contractible in every coefficient universe. -/
 private theorem sf_clopen_weak_contractibility (T : Scheme.{t}) [IsAffine T]
     (hT : ∀ (F G : Sheaf (ProEt.topology T) (Type (max u (t + 1))))
       (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 T)))))
@@ -288,16 +275,7 @@ private theorem sf_clopen_weak_contractibility (T : Scheme.{t}) [IsAffine T]
   exact split_clopen_cover T hT U hU V p
 
 /-- Categorical weak contractibility gives finite clopen refinements and is inherited
-by every clopen component, in any coefficient universe.
-
-Source: Stacks Project, Tags 098F and 090M.
-Proof: refine a covering sieve of the affine target to finitely many affine members.
-Their represented coproduct covering is epic, so evaluation lifts the identity to a
-section. Its inverse images of the coproduct summands form a finite clopen partition
-refining the sieve. For a cover of a clopen, adjoin its affine clopen complement and
-split the resulting cover of the whole target. Restricting that section splits the
-original cover. Finite disjoint refinements then glue local lifts of sheaf sections,
-independently of their universe. Empty covers and empty clopens are included. -/
+by every clopen component, in any coefficient universe. -/
 theorem sf_clopen_cover_geometry (T : Scheme.{t}) [IsAffine T]
     (hT : ∀ (F G : Sheaf (ProEt.topology T) (Type (max u (t + 1))))
       (f : F ⟶ G), Epi f → Function.Surjective (f.hom.app (op (ProEt.mk (𝟙 T))))) :

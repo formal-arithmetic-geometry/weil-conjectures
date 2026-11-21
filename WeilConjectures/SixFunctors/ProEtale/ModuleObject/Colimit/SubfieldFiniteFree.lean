@@ -36,7 +36,7 @@ open PadicAlgCl
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {E F : FiniteIntermediateField ℓ} (h : E ≤ F)
 
-/-- Blueprint `lemma-inverse-image-coefficient-sheaves` (2): for finite subextensions `E ≤ F`, the
+/-- For finite subextensions `E ≤ F`, the
 coefficient ring `F_X`, regarded as an `E_X`-module, is finite free, of a rank independent of
 the scheme `X`. -/
 theorem exists_comap_regular_iso_finiteFree :

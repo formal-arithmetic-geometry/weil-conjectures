@@ -65,13 +65,15 @@ public import WeilConjectures.SixFunctors.ProEtale.IntegralPresentationEncoding
 
 /-! # Data for relabelling an integral coefficient presentation
 
-Source: blueprint main-20261015, integral-criterion-reductions, final sentence;
-Stacks Project, Tag 06YY, isomorphism-of-coefficients specialization.
-
 This packages specified data, without choosing an isomorphism or an equivalence.
 The forward functor is fixed to section-action followed by restriction along the
 inverse ring isomorphism. The comparison theorem normalizes the ring isomorphism
 against every finite quotient. No existence assertion is part of this definition.
+
+## References
+
+* [Stacks, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -92,8 +94,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [instance] Encoding.additive Encoding.inverseAdditive
 
-/-- Termwise localization of the specified additive coefficient equivalence.
-Source: Stacks 05RU and 06YY. -/
+/-- Termwise localization of the specified additive coefficient equivalence. -/
 def Encoding.derived (A : Encoding l E X) :
     DerivedCategory.{u + 1} (AdicCompletion.Modules l E X) ≌
       DerivedCategory.{u + 2} (WeilConjectures.scalarReductionSource.{u, u} l E X) :=

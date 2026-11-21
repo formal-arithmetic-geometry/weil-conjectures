@@ -8,7 +8,10 @@ public import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomAdjunction
 
 /-! # Transport of the normalized scalar tensor comparison
 
-Source: Stacks Project, Tags 06YY and 0D6D.
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -110,8 +113,7 @@ attribute [local irreducible] derivedInternalHomOfUniverses homComplexFunctor
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The scalar unit on a fixed degree of a complex, with its extension carrier exposed.
-Source: Stacks 06YY. -/
+/-- The scalar unit on a fixed degree of a complex, with its extension carrier exposed. -/
 noncomputable def fixedScalarComplexUnitSection
     (E : scalarModules J R ⥤ scalarModules J S) (hadd : E.Additive)
     (eta : 𝟭 (scalarModules J R) ⟶ E ⋙ scalarRestriction.{c, v, max c v u} a)
@@ -122,8 +124,7 @@ noncomputable def fixedScalarComplexUnitSection
 
 attribute [local irreducible] fixedScalarComplexUnitSection
 
-/-- Scalar tensor data for a prescribed ordinary and universal derived pair.
-Source: Stacks 06YY and 0D6D. -/
+/-- Scalar tensor data for a prescribed ordinary and universal derived pair. -/
 structure FixedScalarTensorComparison
     (M : ScalarHomModels.{c, v, u, w} J)
     (E : scalarModules J R ⥤ scalarModules J S) (hadd : E.Additive)
@@ -185,18 +186,7 @@ structure FixedScalarTensorComparison
           (CoefficientTensorModels.iso.{u, c, v, w} J S (M.closed S) (M.model S)
             _ _ (preservesKFlat P hp) (preservesKFlat Q hq)).hom
 
-/-- Normalized scalar tensor data transport to any presentation of the same derived pair.
-Source: Stacks 06YY and 0D6D.
-
-Proof: the equality of ordinary extensions identifies their chain tensors and
-ordinary units. The left-derived universal property gives the unique natural
-isomorphism of derived extensions commuting with counits. Conjugate the generic
-strong tensor comparison by that isomorphism, on the output and on each input.
-Its compatibility with the complex comparison follows from counit compatibility
-and naturality at the quotient comparison. Substitution in the generic tensor
-normalization square and cancellation of inverse isomorphisms proves the desired
-square. Ordinary generators and preservation of K-flatness are unchanged under
-the equality of ordinary extensions. -/
+/-- Normalized scalar tensor data transport to any presentation of the same derived pair. -/
 theorem fixedScalarTensorComparison_exists
     (M : ScalarHomModels.{c, v, u, w} J)
     (μ : ScalarHomTensorComparison.{c, v, u, w} M a)

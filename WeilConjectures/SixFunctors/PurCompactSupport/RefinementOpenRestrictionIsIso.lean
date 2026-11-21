@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenRestrictionData
 import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenRestrictionComponentIsIso
 
-/-! Invertibility of the specified refinement-restriction transformation. -/
+/-! Invertibility of the specified refinement-restriction transformation.
+
+## References
+
+* Stacks Project, Tags `0F7B`, `0F7I`
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,17 +27,11 @@ variable (R : Coefficients.{u})
   (hi : R.pull (c.i ≫ r.hom) = proEtaleRingCompositeCoefficients c.i r.hom
     (R.ring d.Z) (R.ring c.Z) (R.ring X) (R.pull r.hom) (R.pull c.i))
 
-/--
-Source: Stacks 0F7B and 0F7I, clopen restriction of the proper refinement
-image.  A natural transformation whose components are the specified proper
+/-- A natural transformation whose components are the specified proper
 restriction maps is invertible on the whole unbounded derived category.  The
 component identification is the only hypothesis; the clopen calculation
 supplies the inverse componentwise and hence the natural-transformation
-isomorphism.
-Proof: the refinement fibre product has a clopen distinguished section; extension by
-zero is exact there, so the component maps have inverses. Extensionality identifies
-any transformation with those components.
--/
+isomorphism. -/
 theorem refinementRestriction_data_isIso
     (θ : ((openExtension R c.i).mapDerivedCategory ⋙ push R r.hom) ⋙ pull R d.i ⟶
         (openExtension R c.i).mapDerivedCategory ⋙ pull R c.i)

@@ -33,16 +33,19 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 /-!
 # Proper projection formula on rational localizing categories
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-sf-pf-field,
-sk-thm-sf-pf-field-localizing.md and its proof
-(blueprint: proposition-projection-formula-rational-coefficients--2).
-
 Membership of both endpoints and invertibility in the ambient category express
 invertibility in the full localizing subcategory. The generators are exactly Dbc,
 with finite constant scalar models; no derived completeness condition is imposed.
 The five helpers below define the actual projection map on internal module objects,
 including the unique representative-normalized tensor comparison. They belong to this
 projection formula; the general ringed projection-mate dependency remains unchanged.
+
+## References
+
+* [Stacks, Tag 06YU](https://stacks.math.columbia.edu/tag/06YU)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0B56](https://stacks.math.columbia.edu/tag/0B56)
+* Bhatt--Scholze, Definition 6.8.1 and Remark 6.8.15
 -/
 
 @[expose] public section
@@ -269,7 +272,7 @@ private local instance genericCochainTensor (A B : CochainComplex D ℤ) :
     HomologicalComplex.HasTensor A B := inferInstance
 
 /-- The representative normalization of a derived tensor comparison for an additive
-monoidal functor. Source: Stacks Tags 06YU, 07A4 and 0B56. -/
+monoidal functor. -/
 @[irreducible, no_expose]
 def tensorRepresentativeFormula
     (μ : Functor.leftDerivedDerivedTensor F ⟶ Functor.derivedTensorLeftDerived F) : Prop :=
@@ -303,8 +306,7 @@ end AbstractComparison
 extension of scalars are the actual extension units; `tensorObjπ` is the relative
 balanced coequalizer projection. Thus this is the map sending a pulled-back pure tensor
 to the tensor of the pulled-back factors, not an arbitrary tensor isomorphism.
-Source: Stacks Tag 0B56, canonical tensor comparison
-(blueprint: proposition-projection-formula-rational-coefficients--2). -/
+-/
 def ModuleObjectTensorGeneratorFormula
     (M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
     (b : (upperStar Λ f).obj (M ⊗ N) ⟶
@@ -323,8 +325,7 @@ def ModuleObjectTensorGeneratorFormula
 map and the derived-functor counits. Each component of the total map is specified on every
 summand by the ordinary balanced tensor formula. The condition is imposed on all complexes,
 so it retains the unbounded comparison, with no boundedness or completeness condition.
-Source: Stacks Tags 06YU, 07A4 and 0B56
-(blueprint: proposition-projection-formula-rational-coefficients--2). -/
+-/
 def ModuleObjectDerivedTensorFormula
     (μ : Functor.leftDerivedDerivedTensor (upperStar Λ f) ⟶
       Functor.derivedTensorLeftDerived (upperStar Λ f)) : Prop :=
@@ -466,17 +467,14 @@ end AbstractComparison
 
 /-- The unique representative-normalized tensor comparison. Its data are determined by
 `ModuleObjectDerivedTensorFormula`, not by a mere existence of an isomorphism.
-Source: Stacks Tag 0B56 (blueprint: proposition-projection-formula-rational-coefficients--2). -/
+-/
 noncomputable def moduleObjectDerivedTensorComparison :
     Functor.leftDerivedDerivedTensor (upperStar Λ f) ⟶
       Functor.derivedTensorLeftDerived (upperStar Λ f) :=
   leftDerivedUpperStarTensor Λ f
 
 /-- The explicitly constructed comparison has the original total-complex normalization.
-Source: Stacks Tags 07A4 and 0B56.
-Proof: identify the adopted comparison with the generic left-derived tensor comparison;
-its counit equation and its maps on every total-complex summand are the generic formulas.
-The previously proved generator formula supplies the ordinary normalization. -/
+-/
 theorem moduleObjectDerivedTensorComparison_normalized :
     ModuleObjectDerivedTensorFormula Λ f (moduleObjectDerivedTensorComparison Λ f) ∧
       IsIso (moduleObjectDerivedTensorComparison Λ f) := by
@@ -491,7 +489,7 @@ theorem moduleObjectDerivedTensorComparison_normalized :
 
 /-- The actual counit mate `(Rf_* A) ⊗ B ⟶ Rf_*(A ⊗ Lf^* B)` on internal module objects.
 The existing derived adjunction and the normalized comparison determine this map.
-Source: Stacks Tag 0B56 (blueprint: proposition-projection-formula-rational-coefficients--2). -/
+-/
 noncomputable def moduleObjectProjectionMate
     (A : DerivedCategory
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
@@ -682,8 +680,8 @@ private theorem projection_localizing_of_interfaces
   · rwa [normalizedMate_eq_published]
 
 -- Realize an arbitrary universe-sized finite coefficient field in the fixed closure.
--- Source: the embedding and spectral-norm argument of normed_coefficient_realization
--- (Bhatt--Scholze, Definition 6.8.1 and Remark 6.8.15), across coefficient universes.
+-- Uses the embedding and spectral-norm argument of `normed_coefficient_realization`
+-- across coefficient universes.
 -- The two presentations use exactly the same continuous-function sections.
 private theorem finite_coefficient_iso (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
@@ -746,35 +744,6 @@ private theorem finite_coefficient_iso (ℓ : ℕ) [Fact ℓ.Prime]
   exact ⟨⟨F, hfin⟩, ⟨Mon.mkIso' ea⟩⟩
 
 /-- Proper projection formula on Loc(Dbc) for a finite extension E of the ell-adic field.
-Source: blueprint main-20261015, sk-thm-sf-pf-field-localizing, both paragraphs
-(blueprint: proposition-projection-formula-rational-coefficients--2).
-
-Proof:
-1. The standing separated finite-type schemes are qcqs. By
-   det-def-localizing-closure-ctf-equals-bc the rational Dctf and Dbc categories and their
-   localizing closures coincide.
-2. Apply proposition-proper-base-change-localizing-categories--1 and
-proposition-proper-direct-image-extension-zero--1.
-   Both restricted functors are exact and preserve sums. Tensor closure from
-   proposition-projection-formula-rational-coefficients--1 puts both endpoints in the target
-   localizing category.
-3. The closed tensor structure of sk-def-sfb-derived-tensor-hom makes tensor preserve sums;
-   its exactness follows from lem-weil-pbc-ringed-projection-mate-exact.
-4. By prose-03-02 and lemma-inverse-image-coefficient-sheaves, module pullback is
-   the exact inverse image, hence its total left derived functor is p*.
-5. The projection map is the counit mate of the canonical tensor comparison. Use
-   lem-weil-pbc-ringed-projection-mate-exact for its naturality and tensor shift compatibility.
-6. The canonical adjoint shifts of lem-weil-pbc-adjunction-shift-compatibility-unique make
-   the counit commute with shifts. Apply lem-sf-triangulated-right-adjoint for exactness of R.
-7. These counit and comparison shift equations make the canonical mate commute with shifts
-   in each variable and give the connecting square on distinguished triangles.
-8. proposition-proper-direct-image-constructible-complexes gives invertibility for bounded
-constructible A,B.
-9. Fix bounded B and apply lemma-checking-isomorphisms-constructible-complexes--1 to the two exact
-sum-preserving functors
-   of A, giving invertibility for arbitrary A in Loc(Dbc).
-10. Fix this arbitrary A and apply the same determination lemma in B. Since the localizing
-    category is full and both endpoints belong to it, this is invertibility there.
 -/
 theorem isIso_projectionMate_localizing_finiteExtension
     (ℓ : ℕ) [Fact ℓ.Prime]
@@ -923,32 +892,6 @@ private local instance qbarFour (T : Scheme.{u})
 end QbarInstances
 
 /-- Proper projection formula on Loc(Dbc) for finite-subextension-valued condensed Qlbar.
-Source: blueprint main-20261015, sk-thm-sf-pf-field-localizing, both paragraphs
-(blueprint: proposition-projection-formula-rational-coefficients--2).
-
-Proof:
-1. Use the standing qcqs hypotheses and det-def-localizing-closure-ctf-equals-bc to identify
-   Dctf, Dbc and their localizing closures for Qlbar.
-2. proposition-proper-base-change-localizing-categories--1 and
-proposition-proper-direct-image-extension-zero--1 restrict
-   p* and Rp* to exact sum-preserving functors;
-   proposition-projection-formula-rational-coefficients--1 gives membership of both endpoints in the
-   target localizing category.
-3. The closed structure sk-def-sfb-derived-tensor-hom gives tensor preservation of sums;
-   lem-weil-pbc-ringed-projection-mate-exact gives exactness in both variables.
-4. prose-03-02 and lemma-inverse-image-coefficient-sheaves identify Lp* with p*.
-5. Use the normalized canonical tensor comparison and its counit mate as supplied by
-   lem-weil-pbc-ringed-projection-mate-exact, natural in both variables.
-6. lem-weil-pbc-adjunction-shift-compatibility-unique gives the counit-compatible adjoint
-   shifts, and lem-sf-triangulated-right-adjoint supplies exactness of Rp* for these shifts.
-7. The comparison and counit shift identities make the mate compatible with shifts in both
-   variables and give its connecting square on distinguished triangles.
-8. proposition-proper-direct-image-constructible-complexes gives invertibility on bounded
-constructible A,B.
-9. For bounded B, apply lemma-checking-isomorphisms-constructible-complexes--1 in A to obtain all A
-in Loc(Dbc).
-10. Fix arbitrary A and apply determination in B, giving all B in Loc(Dbc). Fullness and
-    the membership of both endpoints give the asserted isomorphism in Loc(Dbc).
 -/
 theorem isIso_projectionMate_localizing_padicAlgCl
     (ℓ : ℕ) [Fact ℓ.Prime]

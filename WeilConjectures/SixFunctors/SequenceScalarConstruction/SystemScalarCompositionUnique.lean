@@ -11,7 +11,11 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarGenerators
 
 /-! # Generic normalized scalar comparison
 
-Source: Stacks 03D7, 03EK and 06YY.
+## References
+
+* [Stacks, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -28,12 +32,7 @@ variable {C : Type sa} [Category.{sb} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{sw}] [HasSheafify J AddCommGrpCat.{sw}]
   [EssentiallySmall.{sw} C]
 
-/-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems.
-Source: Stacks 03D7, 03EK and 06YY.
-Proof: Use the existing scalar composition isomorphism and its pure tensor equation for
-existence. For uniqueness transpose under the second ordinary adjunction, then use local unit
-tensor generators for the first model. Both transposes agree on these generators by the two
-specified tensor formulas and the normalized unit equation. -/
+/-- Generic scalar comparison extracted from IntegralComparisonSequenceSystems. -/
 theorem scalarCompositionUnique
     {R S T : Sheaf J CommRingCat.{sw}} {φ : R ⟶ S} {ψ : S ⟶ T} {γ : R ⟶ T}
     (hγ : γ = φ ≫ ψ)

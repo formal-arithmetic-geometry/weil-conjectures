@@ -13,7 +13,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Der
 /-!
 # Proper exchange along a commuting triangle
 
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3), proper mate pasting.
+Proper mate pasting for exchange along a commuting triangle.
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +42,7 @@ end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Direct-image composition followed by the specified equality of scheme maps.
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3). -/
+/-- Direct-image composition followed by the specified equality of scheme maps. -/
 def compactSupportPushforwardTriangle
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -53,15 +52,13 @@ def compactSupportPushforwardTriangle
   (refinementDerivedLowerStarComp Λ a p).symm ≪≫
     Functor.rightDerivedFunctorNatIso (lowerStarCongr Λ e)
 
-/-- Pull back a morphism of triangles to the two literal fibre products.
-Source: blueprint proposition-composition-base-change-rf-shriek--4, proof (3). -/
+/-- Pull back a morphism of triangles to the two literal fibre products. -/
 def compactSupportTrianglePullback
     {A B Y Y' : Scheme.{u}} (a : A ⟶ B) (p : B ⟶ Y) (q : A ⟶ Y)
     (e : a ≫ p = q) (v : Y' ⟶ Y) : pullback q v ⟶ pullback p v :=
   pullback.map q v p v a (𝟙 Y') (𝟙 Y) (by simpa using e.symm) (by simp)
 
-/-- The Cartesian square of a pulled-back morphism of triangles.
-Source: base change of a refinement, as in Compactification.Refinement.ofIsPullback. -/
+/-- The Cartesian square of a pulled-back morphism of triangles. -/
 def compactSupportTrianglePullbackSquare
     {A B Y Y' : Scheme.{u}} (a : A ⟶ B) (p : B ⟶ Y) (q : A ⟶ Y)
     (e : a ≫ p = q) (v : Y' ⟶ Y) :

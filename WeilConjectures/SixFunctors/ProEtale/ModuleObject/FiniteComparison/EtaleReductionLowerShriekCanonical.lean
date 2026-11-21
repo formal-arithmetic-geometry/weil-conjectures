@@ -125,12 +125,10 @@ instance isIso_finiteEtaleReadingLowerShriekSquare (p : X ⟶ Y) [IsProper p.lef
     IsIso (finiteEtaleReadingLowerShriekSquare ℓ E n p) :=
   inferInstanceAs (IsIso (Iso.inv _))
 
-/-- Blueprint `lemma-change-coefficients-compact-support` for the coefficient map `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`,
-read on the étale site, for a proper `p`. **The canonical isomorphism
-`(Rp_! K)_{𝒪_E ⧸ ℓⁿ} ≅ Rp_! (K_{𝒪_E ⧸ ℓⁿ})`**, `Rp_! ⋙ red_Y ≅ red_X ⋙ Rp_!`: the inverse of the
-horizontal paste of the canonical condensed reduction square
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekIntegersModPowReductionSquare`) and the
-canonical étale-reading square (`ProEtale.CondensedRing.finiteEtaleReadingLowerShriekSquare`). -/
+/-- **The canonical isomorphism `(Rp_! K)_{𝒪_E ⧸ ℓⁿ} ≅ Rp_! (K_{𝒪_E ⧸ ℓⁿ})`**, i.e.
+`Rp_! ⋙ red_Y ≅ red_X ⋙ Rp_!`, read on the étale site, for a proper `p`: the inverse of the
+horizontal paste of the canonical condensed reduction square and the canonical étale-reading
+square. -/
 noncomputable def etaleReductionLowerShriekIso (p : X ⟶ Y) [IsProper p.left] :
     have := HasCompactification.of_over p
     PadicIntegersRingObj.boundedConstructibleLowerShriek ℓ E p ⋙ etaleReduction ℓ E n Y ≅
@@ -142,15 +140,9 @@ noncomputable def etaleReductionLowerShriekIso (p : X ⟶ Y) [IsProper p.left] :
   (asIso ((boundedConstructibleLowerShriekIntegersModPowReductionSquare ℓ E n p).hComp
     (finiteEtaleReadingLowerShriekSquare ℓ E n p))).symm
 
-/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image` for the coefficient map
-`𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`, read on the étale site, for a proper `p`: the transpose
-`(Rp^! K)_{𝒪_E ⧸ ℓⁿ} ⟶ Rp^! (K_{𝒪_E ⧸ ℓⁿ})` of the canonical isomorphism
-`ProEtale.CondensedRing.etaleReductionLowerShriekIso` under `Rp_! ⊣ Rp^!` is an isomorphism. The
-mate of a paste is the paste of the mates (`CategoryTheory.isIso_mateEquiv_hComp`): the condensed
-one is invertible by the reduction-triangle argument
-(`ProEtale.CondensedRing.isIso_mateEquiv_boundedConstructibleLowerStarIntegersModPowReduction`),
-the étale-reading one by
-`ProEtale.CondensedRing.exists_isIso_mateEquiv_finiteEtaleReadingLowerShriekIso`. -/
+/-- For a proper `p`, the transpose `(Rp^! K)_{𝒪_E ⧸ ℓⁿ} ⟶ Rp^! (K_{𝒪_E ⧸ ℓⁿ})` of the canonical
+isomorphism `ProEtale.CondensedRing.etaleReductionLowerShriekIso` under `Rp_! ⊣ Rp^!` is an
+isomorphism. -/
 theorem isIso_mateEquiv_etaleReductionLowerShriekIso (p : X ⟶ Y) [IsProper p.left] :
     have := HasCompactification.of_over p
     IsIso (mateEquiv (PadicIntegersRingObj.boundedConstructibleUpperShriekAdjunction ℓ E p)

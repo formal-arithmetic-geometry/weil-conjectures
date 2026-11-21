@@ -9,7 +9,8 @@ public import Mathlib.CategoryTheory.Equivalence
 
 /-! # Naturality of single-object reconstruction
 
-Source: Step 9 of the point-section transport argument.
+Reconstruction of an object from its image under a retraction of a fully faithful functor is
+natural.
 -/
 
 @[expose] public section
@@ -21,12 +22,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- On the essential image of a fully faithful functor, reconstruction using a
 retraction is natural for every arrow, including arrows unrelated to the chosen
-temporary trivializations.
-Source: the cycle-map naturality in Step 9 of point-section transport, refining
-the twist-removal step of blueprint `theorem-poincare-duality-frobenius`.
-Proof: conjugate the arrow by the two trivializations and lift it through the
-fully faithful functor. Naturality of the retraction isomorphism at that lift,
-followed by cancellation of the trivializations, is the asserted square. -/
+temporary trivializations. -/
 theorem single_realization_naturality
     {A B : Type*} [Category* A] [Category* B]
     (S : A ⥤ B) [S.Full] [S.Faithful] (H : B ⥤ A)

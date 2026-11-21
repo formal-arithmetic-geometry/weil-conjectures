@@ -11,6 +11,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 The ordinary scalar tensor square extends to unbounded signed direct-sum total
 complexes by checking every coproduct summand.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -41,14 +45,7 @@ variable {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
   [∀ Z : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules S Z)]
 
 -- Normalize the four functor images of each total-complex summand.
-/-- The ordinary scalar tensor square commutes after signed direct-sum totalization.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
-In degree n, test the maps on each coproduct summand indexed by p+q=n.
-The internal and section total tensor maps restrict to their ordinary tensorators.
-The equivalence comparison restricts to its ordinary comparison and the termwise
-scalar comparison restricts to its component in degrees p and q. Thus the square
-on each summand is exactly the ordinary scalar tensor square. Coproduct
-universality gives equality in every degree, hence equality of chain maps. -/
+/-- The ordinary scalar tensor square commutes after signed direct-sum totalization. -/
 theorem coefficientScalarTensor_total (Z : Scheme.{u})
     (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

@@ -27,9 +27,6 @@ import all WeilConjectures.AlgebraicGeometry.Unbounded.UnboundedLocalizingPullba
 /-!
 # Proper base change with integral adic coefficients
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`.
-
 ## Main statements
 
 * `integralProperDirectImageAndFormulas`: proper direct image, derived Nakayama, and the
@@ -110,32 +107,6 @@ private theorem integral_pull_complete
 
 /-- Proper direct image, derived Nakayama, and the two canonical proper formulas
 for bounded constructible integral adic complexes.
-Source: blueprint main-20261015, chap-Construction-of-f,
-`sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-integral.md`.
-
-Proof:
-1. The internal residue criterion gives completeness and a bounded constructible finite-Tor
-   first reduction for K. Internal direct-image limits gives completeness of Rp_*K and
-   the canonical first-reduction comparison. The existing proper integral finiteness proof
-   gives bounded constructibility of Rp_*K.
-2. The first-reduction Nakayama theorem gives vanishing of any complete complex with zero
-   first reduction, without a boundedness hypothesis.
-3. For an arbitrary map from a scheme T to a qcqs scheme, a bounded constructible integral
-   input has complete pullback: on every affine chart of T, bounded constructible pullback
-   and the qcqs completeness argument apply. The strict completion presentation commutes
-   with the covering open immersions and its unit. Covering restrictions detect whether
-   that unit is invertible, proving completeness on T. This does not require T to be
-   finite type or quasi-compact.
-4. Apply step 3 to g and g', and internal direct-image limits to p'. This makes both
-   exchange endpoints complete, even for arbitrary base-changed schemes. Bounded
-   constructible pullback, integral tensor closure, proper integral finiteness and qcqs
-   completeness similarly make both projection endpoints complete.
-5. The residue criterion puts the input first reductions in Dctf. The separate finite
-   reduction step integralResidueProperFormulas identifies reduction of each canonical
-   arrow with its finite-coefficient formula, through the normalized scalar, tensor,
-   pullback and direct-image comparisons, and applies finite proper base change.
-6. The first-reduction isomorphism criterion applied to the complete endpoints proves
-   invertibility of the actual ambient exchange and ordinary uncompleted projection map.
 -/
 theorem integralProperDirectImageAndFormulas
     (l : ℕ) [Fact l.Prime]

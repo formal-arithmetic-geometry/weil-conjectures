@@ -12,8 +12,12 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Identifying the two canonical presentations of system pullback
 
-Source: Stacks 03D3, 03EL and 07A7. Both direct images use the same map on
-constant sections; their inverse images and composition maps are fixed by adjunction.
+## References
+
+* [Stacks, Tag 015F](https://stacks.math.columbia.edu/tag/015F)
+* [Stacks, Tag 03D3](https://stacks.math.columbia.edu/tag/03D3)
+* [Stacks, Tag 03EL](https://stacks.math.columbia.edu/tag/03EL)
+* [Stacks, Tag 07A7](https://stacks.math.columbia.edu/tag/07A7)
 -/
 
 @[expose] public noncomputable section
@@ -43,19 +47,14 @@ private theorem sequence_ring_eq (f : X ⟶ Y) :
   · intro n U
     rfl
 
-/-- Both presentations of direct image use precisely the same ringed sequence-site map.
-Source: Stacks 03D3.
-Proof: the unique coefficient map is the map on constant sections at every (n,U).
-The displayed direct images are the same pushforward after replacing that map. -/
+/-- Both presentations of direct image use precisely the same ringed sequence-site map. -/
 theorem sequence_direct_eq (f : X ⟶ Y) :
     pullbackTensorSequenceDirect l E f = AmbientPullbackTensor.push l E f none := by
   unfold pullbackTensorSequenceDirect
   rw [sequence_ring_eq]
   rfl
 
-/-- The inverse-image presentations agree because leftAdjoint is applied to equal functors.
-Source: Stacks 03D3.
-Proof: apply congruence to the established equality of the right adjoints. -/
+/-- The inverse-image presentations agree because leftAdjoint is applied to equal functors. -/
 theorem sequence_inverse_eq (f : X ⟶ Y) :
     pullbackTensorSequenceInverse l E f = AmbientPullbackTensor.pull l E f none := by
   unfold pullbackTensorSequenceInverse AmbientPullbackTensor.pull
@@ -63,9 +62,7 @@ theorem sequence_inverse_eq (f : X ⟶ Y) :
     AmbientPullbackTensor.pushRightAdjoint l E f none
   exact chosen_left_eq _ _ (sequence_direct_eq l E f)
 
-/-- Exact localization preserves the equality of these inverse-image presentations.
-Source: Stacks 015F.
-Proof: apply congruence to mapDerivedCategory. -/
+/-- Exact localization preserves the equality of these inverse-image presentations. -/
 theorem sequence_derived_eq (f : X ⟶ Y) :
     pullbackTensorSequenceDerived l E f = AmbientPullbackTensor.derivedPull l E f none := by
   unfold pullbackTensorSequenceDerived AmbientPullbackTensor.derivedPull

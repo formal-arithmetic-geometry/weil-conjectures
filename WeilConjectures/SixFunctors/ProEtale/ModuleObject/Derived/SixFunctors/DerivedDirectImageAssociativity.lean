@@ -10,7 +10,16 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarC
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExact
 
-/-! Source: blueprint composition isomorphism and its canonicity and associativity. -/
+/-!
+# Associativity of the derived direct-image composition isomorphism
+
+## References
+
+* [Stacks, Tag 08BJ](https://stacks.math.columbia.edu/tag/08BJ)
+* [Stacks, Tag 070I](https://stacks.math.columbia.edu/tag/070I)
+* [Stacks, Tag 070Y](https://stacks.math.columbia.edu/tag/070Y)
+* [Stacks, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -20,19 +29,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- Canonical derived direct-image associativity.
-Source: blueprint composition isomorphism; Canonicity and associativity;
-Stacks Tags 08BJ, 070I, 070Y and 0D6E.
-
-Proof: Choose a K-injective resolution I of the input. Exact inverse image is left adjoint to
-each direct image, so each intermediate direct image of I is K-injective. The universal
-right-derived comparison, evaluated on Q(I), is lowerStarComp.inv followed by the
-canonical evaluation isomorphisms. Thus both bracketings are the cells of the two
-underived inverse compositors, with the displayed associator. The equation
-lowerStarComp_assoc identifies these underived composites, including lowerStarCongr
-for the equality of the two composite scheme maps. Apply the finite word diagram
-descent theorem to obtain equality on the entire unbounded derived category.
--/
+/-- Canonical derived direct-image associativity. -/
 theorem derivedDirectImageAssociativity
     {X Y Z T : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T) :
     DirectImageCompositionAssociative Λ f g h := by

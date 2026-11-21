@@ -13,7 +13,12 @@ import WeilConjectures.PoincareDuality.StrictTensorAugmentation.StrictTensorAugm
 /-! # Strict tensor cone coordinates
 
 The ordinary quotient augmentation forms a strict cone whose finite coordinates
-are the normalized scalar tensor transposes. Source: Stacks 03EK and 07A4.
+are the normalized scalar tensor transposes.
+
+## References
+
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +54,7 @@ attribute [local implicit_reducible] IntegralOnSlice.ring IntegralOnSlice.restri
 attribute [local irreducible] coefficientSequenceRestriction
   pullbackTensorOrdinaryAdjunction
 
-/-- The quotient augmentation followed by the normalized strict tensor comparison.
-Source: Stacks 03EK and 07A4. -/
+/-- The quotient augmentation followed by the normalized strict tensor comparison. -/
 def tensorReductionStrictConeMap (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     (Functor.const ℕᵒᵖ).obj
@@ -62,8 +66,7 @@ def tensorReductionStrictConeMap (W : Scheme.{u})
 
 attribute [local irreducible] tensorReductionStrictConeMap
 
-/-- A strict cone with vertex the integral total tensor.
-Source: Stacks 03EK and 07A4. -/
+/-- A strict cone with vertex the integral total tensor. -/
 def tensorReductionStrictCone (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     Cone ((integralOperationsTensorTowerFunctor l E W).obj (P, Q)) where
@@ -82,11 +85,7 @@ private theorem scalar_unit_section (W : Scheme.{u}) (n : ℕ)
   rw [h]
   rfl
 
-/-- The finite scalar transpose is the corresponding strict cone coordinate.
-Source: Stacks 03EK and 07A4. On homogeneous pure tensors both maps insert the
-quotient unit in each factor. The quotient augmentation and tensor comparison
-have these prescribed formulas; tensor generators and total-summand injections
-determine the map in every degree. No flatness or boundedness is needed. -/
+/-- The finite scalar transpose is the corresponding strict cone coordinate. -/
 theorem tensorReductionStrictCone_finiteTranspose (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

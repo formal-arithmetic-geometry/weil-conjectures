@@ -11,18 +11,18 @@ public import Mathlib.AlgebraicGeometry.PullbackCarrier
 /-!
 # Constructing finite pullback refinement trees
 
-Source: Stacks Project, Topology, Tag 09Y4, realized by complementary scheme pullbacks.
+The construction iterates complementary open/closed pullback splits over the finitely many strata.
+
+## References
+
+* [Stacks, Tag 09Y4](https://stacks.math.columbia.edu/tag/09Y4)
 -/
 
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry.Scheme
-/-- Finite binary pullback tree construction from already chosen open/closed refinements.
-Source: Stacks Project, Topology, Tag 09Y4.
-The proof iterates the complementary open/closed pullback split over the finitely many strata
-and records the parent, child, compactness, disjointness, covering, and factorization invariants.
--/
+/-- Finite binary pullback tree construction from already chosen open/closed refinements. -/
 theorem exists_finite_refinement_tree
     {W : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpace W]
     (m : ℕ) (n : Fin m → ℕ)

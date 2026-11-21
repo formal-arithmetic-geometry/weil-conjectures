@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 The categorical derived unit law and the existing normalized open refinement identity
 identify the actual compactification refinement component with the identity.
-Source: blueprint main-20261015, proposition-construction-independence-rf-shriek, proof step 4.
 -/
 
 @[expose] public section
@@ -226,19 +225,7 @@ private theorem identityOfNormalized {X Y : Scheme.{u}} {f : X ⟶ Y}
         (Category.id_comp c.obj.obj.g))).hom.app J = 𝟙 _
   rw [hmap]
   exact congrArg (fun q ↦ q.app J) (refinement_comp_id Λ c.obj.obj.Z Y c.obj.obj.g)
-/-- The canonical refinement component of a dense identity compactification is the identity.
-
-Source: blueprint main-20261015, proposition-construction-independence-rf-shriek, proof step 4,
-and proposition-construction-independence-rf-shriek--7, clause (3).
-
-Proof: The identity clause of localizingRefinement_coherence identifies the normalized
-open refinement arrow with the inverse canonical derived identity comparison. The derived
-compositor for identity followed by the proper map cancels this comparison: test the
-natural-transformation equality against the right-derived-functor unit, use naturality,
-and then the underived left unit law lowerStarComp_id_left. The derived universal property
-makes this test injective. Apply that natural equality to j!K, and substitute the normalized
-open arrow. The final structural equality is Category.id_comp. This argument works for
-every ambient unbounded K; no localizing-membership hypothesis is needed. -/
+/-- The canonical refinement component of a dense identity compactification is the identity. -/
 theorem compactificationRefinementComponent_id
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

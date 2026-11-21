@@ -17,10 +17,10 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison
 /-!
 # The comparison direct image has unbounded cohomological dimension on all sheaves
 
-Blueprint `rem-sf-fullcd-counterexample`: the comparison morphism `ν_U : U_proét ⟶ U_ét` can
-have higher direct images `R^q ν_{U,*} F ≠ 0` in arbitrarily large degrees `q`, for sheaves `F`
-that are not of étale origin. Hence the form `(G)` of the comparison bound, asked for *all*
-pro-étale sheaves and uniformly over the pro-étale base changes, is false.
+The comparison morphism `ν_U : U_proét ⟶ U_ét` can have higher direct images `R^q ν_{U,*} F ≠ 0` in
+arbitrarily large degrees `q`, for sheaves `F` that are not of étale origin. Hence the form `(G)` of
+the comparison bound, asked for *all* pro-étale sheaves and uniformly over the pro-étale base
+changes, is false.
 
 Let `K` be an algebraically closed field, `I` a discrete set of cardinality `ℵ_ω` and
 `S = βI × βI`. Then `U = Spec C_lc(S, K)` is an affine pro-étale object of `(Spec K)_proét`
@@ -31,10 +31,10 @@ sheaves on `S`, and for a finite field `Λ` of odd characteristic the constant s
 4.3). For `G` a sheaf on `S` with `Ext^q(G, Λ) ≠ 0` and `F_G = Hom_Λ(ν_U^* G, Λ)` one finds
 `Γ(U_ét, R^q ν_{U,*} F_G) = Ext^q_{Sh(S, Λ)}(G, Λ) ≠ 0`.
 
-Blueprint `rem-sf-fullcd-counterexample-locus` (i): the object `U` lives at a pro-étale limit.
-It is a cofiltered limit of zero-dimensional finite-type `K`-schemes, but is itself not locally
-of finite type over `K` (`AlgebraicGeometry.ProEtale.not_locallyOfFiniteType_locallyConstantProEt`),
-so no finite-type bound applies to it.
+The object `U` lives at a pro-étale limit. It is a cofiltered limit of zero-dimensional finite-type
+`K`-schemes, but is itself not locally of finite type over `K`
+(`AlgebraicGeometry.ProEtale.not_locallyOfFiniteType_locallyConstantProEt`), so no finite-type bound
+applies to it.
 
 ## Main definitions
 
@@ -48,6 +48,10 @@ so no finite-type bound applies to it.
 - `AlgebraicGeometry.ProEtale.not_exists_forall_isZero_homology_rightDerivedComparisonLowerStar`:
   the uniform form `(G)` of the comparison bound is false.
 - `AlgebraicGeometry.ProEtale.not_locallyOfFiniteType_locallyConstantProEt`.
+
+## References
+
+* [Bergfalk, Lambie-Hanson, arXiv:2412.19605](https://arxiv.org/abs/2412.19605)
 -/
 
 @[expose] public section
@@ -72,11 +76,8 @@ instance weaklyEtale_spec_map_algebraMap_locallyConstant :
   rw [HasRingHomProperty.Spec_iff (P := @WeaklyEtale)]
   exact RingHom.weaklyEtale_algebraMap_iff.2 inferInstance
 
-/-- Blueprint `rem-sf-fullcd-counterexample` (i): for a profinite space `T`, the affine scheme
-`Spec C_lc(T, K)` of locally constant `K`-valued functions on `T`, as an object of the small
-pro-étale site of `Spec K`. The ring `C_lc(T, K)` is the filtered colimit of the finite products
-`K^{T_i}` over the finite quotients `T_i` of `T`, hence ind-Zariski and in particular weakly étale
-over `K`. -/
+/-- For a profinite space `T`, the affine scheme `Spec C_lc(T, K)` of locally constant `K`-valued
+functions on `T`, as an object of the small pro-étale site of `Spec K`. -/
 noncomputable def locallyConstantProEt : (Spec (.of K)).ProEt :=
   Scheme.ProEt.mk (Spec.map (CommRingCat.ofHom (algebraMap K (LocallyConstant T K))))
 
@@ -84,11 +85,8 @@ end LocallyConstant
 
 variable (K : Type u) [Field K] (I : Type u) [TopologicalSpace I] [DiscreteTopology I]
 
-/-- Blueprint `rem-sf-fullcd-counterexample-locus` (i): for an infinite discrete set `I`, the
-pro-étale object `U = Spec C_lc(βI × βI, K)` of `(Spec K)_proét` is not locally of finite type
-over `K`. The clopen subsets `stoneCechClopen i ×ˢ univ`, `i ∈ I`, are pairwise disjoint and
-nonempty, so `C_lc(βI × βI, K)` has infinitely many orthogonal nonzero idempotents and is not
-Noetherian, whereas a `K`-algebra of finite type is. -/
+/-- For an infinite discrete set `I`, the pro-étale object `U = Spec C_lc(βI × βI, K)` of
+`(Spec K)_proét` is not locally of finite type over `K`. -/
 theorem not_locallyOfFiniteType_locallyConstantProEt [Infinite I] :
     ¬ LocallyOfFiniteType (locallyConstantProEt K (StoneCech I × StoneCech I)).hom := by
   intro h
@@ -104,24 +102,15 @@ theorem not_locallyOfFiniteType_locallyConstantProEt [Infinite I] :
     fun i j hij ↦ ?_)
   exact Set.disjoint_prod.2 (.inl (pairwise_disjoint_stoneCechClopen hij))
 
-/-- The pro-étale object `Spec C_lc(βI × βI, K)` of `(Spec K)_proét` of blueprint
-`rem-sf-fullcd-counterexample`, for a discrete set `I`. -/
+/-- The pro-étale object `Spec C_lc(βI × βI, K)` of `(Spec K)_proét`, for a discrete set `I`. -/
 noncomputable abbrev stoneCechProdProEt : (Spec (.of K)).ProEt :=
   locallyConstantProEt K (StoneCech I × StoneCech I)
 
 variable (Λ : Type (u + 1)) [Field Λ] [Finite Λ]
 
-/-- Blueprint `rem-sf-fullcd-counterexample` (iv)–(vi): let `K` be algebraically closed, `I` a
-discrete set of cardinality `ℵ_ω`, `U = Spec C_lc(βI × βI, K)` and `Λ` a finite field of odd
-characteristic. For every `M` there are a sheaf `F` of `Λ`-modules on `U_proét` and `q > M` with
-`R^q ν_{U,*} F ≠ 0`.
-
-By Bergfalk–Lambie-Hanson (arXiv:2412.19605, Theorem 4.3) the constant sheaf `Λ` on `βI × βI`
-has infinite injective dimension, so there are a sheaf `G` on `βI × βI` (equivalently on `U_ét`)
-and `q > M` with `Ext^q(G, Λ) ≠ 0`. The sheaf `F_G = Hom_Λ(ν_U^* G, Λ)` has no higher derived
-`Hom` (the constant sheaf `Λ` is injective on the extremally disconnected basis objects of
-`U_proét`), so `RΓ(U_proét, F_G) = RHom(G, Rν_{U,*} Λ) = RHom(G, Λ)`; as `Γ(U_ét, -)` is exact,
-`Γ(U_ét, R^q ν_{U,*} F_G) = Ext^q(G, Λ) ≠ 0`. -/
+/-- Let `K` be algebraically closed, `I` a discrete set of cardinality `ℵ_ω`,
+`U = Spec C_lc(βI × βI, K)` and `Λ` a finite field of odd characteristic. For every `M` there are a
+sheaf `F` of `Λ`-modules on `U_proét` and `q > M` with `R^q ν_{U,*} F ≠ 0`. -/
 theorem exists_not_isZero_homology_rightDerivedComparisonLowerStar [IsAlgClosed K]
     (hΛ : ringChar Λ ≠ 2) (hI : Cardinal.mk I = Cardinal.aleph Ordinal.omega0) (M : ℕ) :
     ∃ (F : Sheaf (Scheme.ProEt.topology (stoneCechProdProEt K I).left) (ModuleCat.{u + 1} Λ))
@@ -130,12 +119,11 @@ theorem exists_not_isZero_homology_rightDerivedComparisonLowerStar [IsAlgClosed 
           ((DerivedCategory.singleFunctor _ 0).obj F))) :=
   sorry
 
-/-- Blueprints `rem-sf-fullcd-general-form` (2), `rem-ptr-weil-ambient-exceptional-adjoint-13`:
-the all-sheaves, uniform-in-the-base-change form `(G)` of the comparison bound is false. Already
-for `Y = Spec K` with `K` algebraically closed there is no `M` such that `R^q ν_{V,*} F = 0` for
-all `q > M`, all objects `V` of `(Spec K)_proét` and all sheaves `F` of `Λ`-modules on
-`V_proét`, `Λ` a finite field of odd characteristic: the object
-`V = Spec C_lc(βI × βI, K)` with `|I| = ℵ_ω` violates every bound
+/-- The all-sheaves, uniform-in-the-base-change form `(G)` of the comparison bound is false. Already
+for `Y = Spec K` with `K` algebraically closed there is no `M` such that `R^q ν_{V,*} F = 0` for all
+`q > M`, all objects `V` of `(Spec K)_proét` and all sheaves `F` of `Λ`-modules on `V_proét`, `Λ` a
+finite field of odd characteristic: the object `V = Spec C_lc(βI × βI, K)` with `|I| = ℵ_ω` violates
+every bound
 (`AlgebraicGeometry.ProEtale.exists_not_isZero_homology_rightDerivedComparisonLowerStar`). -/
 theorem not_exists_forall_isZero_homology_rightDerivedComparisonLowerStar [IsAlgClosed K]
     (hΛ : ringChar Λ ≠ 2) :

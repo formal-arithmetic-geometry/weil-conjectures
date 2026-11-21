@@ -19,6 +19,11 @@ This is the object-existence part of the projection-compatible direct-image
 comparison.  The construction uses one K-injective system resolution and the
 derived tower limit theorem; the finite evaluation comparisons are supplied by
 the companion interface theorem.
+
+## References
+
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* Zheng, Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -33,14 +38,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 set_option linter.unusedVariables false in
-/-- The actual derived system direct image admits a finite-image Roos object.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tag 0941.
-Proof: choose a K-injective representative of the reduced object, apply the
-derived tower-limit construction to its sectionwise direct image, and transport
-the resulting product and triangle along the canonical finite restrictions.
-The resulting triangle has exactly `sfDirectImageTransition` as its tower map.
-The construction is valid for arbitrary schemes and arbitrary derived inputs,
-including zero objects and empty schemes. -/
+/-- The actual derived system direct image admits a finite-image Roos object. -/
 theorem systemDirectImage_roosExistence
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [(integralComparisonSequenceDirectImage l E f).Additive]

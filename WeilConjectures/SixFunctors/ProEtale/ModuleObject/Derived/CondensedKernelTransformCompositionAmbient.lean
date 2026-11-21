@@ -18,7 +18,6 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 
 This is the compact-support base-change, projection-formula, tensor-coherence and
 compact-support-composition calculation on the triple fibre product.
-Source: the ambient comparison paragraph of `proposition-fourier-inversion`.
 
 The remaining proof is the full six-functor coherence calculation described by the
 source paragraph; it is split from the bounded restriction and Fourier specialization.
@@ -32,21 +31,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor MonoidalCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- Comparison of the two kernel functors after restricting their input to bounded
-constructible complexes, with bounded constructible kernels.
-
-Source: latest blueprint `lem-fd-kernel-composition.proof.md`, first two paragraphs.
-
-Proof in words: write T = X12 ×_{V'} X23 and use compact-support base change for
-q1^* Rp2,! to replace it by Rr23,! r12^*. Pull r12^* through tensor using its strong
-monoidal structure. Apply the projection formula for r23 to move K' inside this
-compact-support image. Apply compact-support composition to q2 r23. On the other
-side, apply the projection formula for r13 to the convolution and the input pullback.
-Use r12 p1 = r13 s1 and the pullback compositor. Tensor associativity and symmetry
-identify both resulting integrands, and compact-support composition identifies both
-pushforwards. Every comparison is natural in the input. Finally commute the first
-shift through the second transform and combine the two shifts by shiftFunctorAdd.
-The comparison is restricted from the start, so no comparison on arbitrary unbounded
-input objects is asserted. -/
+constructible complexes, with bounded constructible kernels. -/
 theorem condensedKernelTransform_comp_ambient
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

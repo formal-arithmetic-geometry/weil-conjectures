@@ -10,7 +10,12 @@ import Mathlib.CategoryTheory.CommSq
 
 /-! # Coherent signed braiding in the strict Roos tensor model
 
-Source: Stacks 06YL, 08TC and 0941. -/
+## References
+
+* [Stacks, Tag 06YL](https://stacks.math.columbia.edu/tag/06YL)
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,19 +43,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralOperationsSiteSmall in
 /-- The coherent derived braiding is represented by the strict tower signed map.
 There is no ordinary tensor augmentation in this statement: both source and target
-are already completed tensor models.
-
-Source: Stacks 06YL, 08TC, 0941; full tensor-model normalization and the signed
-representative clause of the coherent braiding.
-
-Proof: expand the reference tensor model into reduction, the coherent K-flat
-comparison, the Roos limit model and the strict tensor-tower comparison. Coherent
-reduction preserves K-flatness of the good inputs. The representative equation
-for pullbackTensorBraiding identifies the signed total map with its derived
-braiding after the coherent K-flat comparisons. Naturality of the limit/Roos
-isomorphism transports it to Roos of the restricted signed map. The remaining
-strict tensor-tower comparisons give precisely strictTensorSignedSwap. Cancel
-the model isomorphisms on the two sides. No completeness of the inputs is used. -/
+are already completed tensor models. -/
 theorem tensor_roos_signed_model
     (P Q : (integralOperationsGoodComplex l E X).FullSubcategory) :
     DerivedCategory.Q.map

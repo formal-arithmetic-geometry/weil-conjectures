@@ -17,8 +17,7 @@ public import WeilConjectures.TraceFormula.OpenCover
 # Bounded constructible `𝒪_E`-complexes are derived complete
 
 On a noetherian scheme `X`, every bounded constructible complex of `𝒪_{E,X}`-module objects is
-derived complete (`ProEtale.derivedCompleteIntegers_of_boundedConstructible`, part of blueprint
-`proposition-integral-constructibility-criterion`).
+derived complete (`ProEtale.derivedCompleteIntegers_of_boundedConstructible`).
 
 By dévissage along the truncation triangles, it suffices to treat a constructible module object
 `M` placed in one degree. For it, derived completeness follows from the bijectivity of
@@ -149,8 +148,7 @@ theorem isIso_sub_powShift_padicIntegersCenter_of_isConstructible {X : Scheme.{u
     (jointlyReflectIsomorphisms_upperStar_of_cover _ g hg) _ key
 
 
-/-- On a noetherian scheme, **bounded constructible `𝒪_E`-complexes are derived complete**
-(part of blueprint `proposition-integral-constructibility-criterion`). -/
+/-- On a noetherian scheme, **bounded constructible `𝒪_E`-complexes are derived complete**. -/
 theorem derivedCompleteIntegers_of_boundedConstructible {X : Scheme.{u}} [IsNoetherian X]
     {K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))}

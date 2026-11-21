@@ -31,17 +31,15 @@ compact-support direct image on `Loc(Dᵇc)` are:
   `boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj`;
 * for `Y` separated of finite type over `k`, `Rp_*` has finite amplitude on the
   ind-constructible heart and commutes with direct sums there
-  (`AlgebraicGeometry.ProEtale.CondensedRing.ProperLowerStarHeartHypotheses`, blueprints
-  `lemma-uniform-bound-proper-direct-image` for `E` and `ℚ̄_ℓ`,
-  `proposition-compactness-proper-direct-image--2` (1) for `𝒪_E`):
+  (`AlgebraicGeometry.ProEtale.CondensedRing.ProperLowerStarHeartHypotheses`):
   `properLowerStarHeartHypotheses_continuousMapRingObj`,
   `properLowerStarHeartHypotheses_padicIntegersRingObj`,
   `properLowerStarHeartHypotheses_padicAlgClRingObj`.
 
 From the latter, the restriction of `Rp_*` to `Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums
-(`AlgebraicGeometry.ProEtale.CondensedRing.ProperLowerStarHeartHypotheses.preservesColimitsOfShape`,
-blueprint `proposition-compactness-proper-direct-image--2` (2), (3), proved by dévissage and left
-completeness).
+(`ProEtale.CondensedRing.ProperLowerStarHeartHypotheses.preservesColimitsOfShape`).
+
+## Implementation details
 
 The finiteness of `Rp_*` on `Dᵇc` is reduced to residue field coefficients
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicFiniteness`):
@@ -54,8 +52,8 @@ follow from the ind-constructible heart (`isIndConstructibleHeart_*`), the conti
 (`properLowerStarHeartHypotheses_of_isIndConstructibleHeart`) and a uniform bound on
 constructible sheaves
 (`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperLowerStarEllAdicBound`); the
-ind-constructible heart is stated for separated `k`-schemes of finite type (the setting of the
-blueprint), hence the finite type hypotheses on `Y`.
+ind-constructible heart is stated for separated `k`-schemes of finite type, hence the finite type
+hypotheses on `Y`.
 -/
 
 @[expose] public section
@@ -117,10 +115,8 @@ private theorem properHeart_of_bound
 
 /-! ### The coefficient ring `E` -/
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes`
-(`proposition-proper-direct-image-constructible-complexes` (1)): for the coefficient ring `E` of a
-finite extension `E` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*`
-maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧`. -/
+/-- For the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a proper morphism
+`p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦E⟧` into `Dᵇc(Y)⟦E⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMapRingObj
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]
     {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p]
@@ -131,10 +127,9 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_continuousMap
   boundedConstructible_rightDerivedLowerStar_continuousMapRingObj_of_residueField ℓ p E
     (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
-/-- Blueprint `lemma-uniform-bound-proper-direct-image` (`lemma-uniform-bound-proper-direct-image`):
-for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to
-a separated `k`-scheme of finite type, `Rp_*` sends ind-constructible sheaves into degrees `≤ 2d`
-(`d` bounding the dimensions of the fibres) and commutes with direct sums of them. -/
+/-- For the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ` and a proper morphism
+`p : Z ⟶ Y` to a separated `k`-scheme of finite type, `Rp_*` sends ind-constructible sheaves into
+degrees `≤ 2d` (`d` bounding the dimensions of the fibres) and commutes with direct sums of them. -/
 theorem properLowerStarHeartHypotheses_continuousMapRingObj (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
@@ -152,10 +147,8 @@ theorem properLowerStarHeartHypotheses_continuousMapRingObj (E : Type) [NormedFi
 
 /-! ### The coefficient ring `𝒪_E` -/
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes`
-(`proposition-proper-direct-image-constructible-complexes` (1)): for the coefficient ring `𝒪_E` of a
-finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian `k`-scheme,
-`Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧`. -/
+/-- For the coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism
+`p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦𝒪_E⟧` into `Dᵇc(Y)⟦𝒪_E⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegersRingObj
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}}
@@ -167,10 +160,9 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicIntegers
   boundedConstructible_rightDerivedLowerStar_padicIntegersRingObj_of_residueField ℓ p E
     (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
-/-- Blueprint `proposition-compactness-proper-direct-image--2` (1): for the coefficient ring `𝒪_E`
-of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism `p : Z ⟶ Y` to a separated
-`k`-scheme of finite type, `Rp_*` sends ind-constructible sheaves into degrees `≤ 2d` (`d`
-bounding the dimensions of the fibres) and commutes with direct sums of them. -/
+/-- For the coefficient ring `𝒪_E` of a finite extension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a proper morphism
+`p : Z ⟶ Y` to a separated `k`-scheme of finite type, `Rp_*` sends ind-constructible sheaves into
+degrees `≤ 2d` (`d` bounding the dimensions of the fibres) and commutes with direct sums of them. -/
 theorem properLowerStarHeartHypotheses_padicIntegersRingObj (E : Type) [Field E]
     [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E] [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)]
     [FiniteDimensional ℚ_[ℓ] E] {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
@@ -188,9 +180,8 @@ theorem properLowerStarHeartHypotheses_padicIntegersRingObj (E : Type) [Field E]
 
 /-! ### The coefficient ring `ℚ̄_ℓ` -/
 
-/-- Blueprint `proposition-proper-direct-image-constructible-complexes`: for the coefficient ring
-`ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian `k`-scheme, `Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into
-`Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
+/-- For the coefficient ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a noetherian `k`-scheme,
+`Rp_*` maps `Dᵇc(Z)⟦ℚ̄_ℓ⟧` into `Dᵇc(Y)⟦ℚ̄_ℓ⟧`. -/
 theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRingObj
     {Z Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsNoetherian Y] (p : Z ⟶ Y) [IsProper p]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -200,10 +191,9 @@ theorem boundedConstructible_rightDerivedLowerStar_obj_of_isProper_padicAlgClRin
   boundedConstructible_rightDerivedLowerStar_padicAlgClRingObj_of_residueField ℓ p
     (residueFieldFiniteness_of_isNoetherian ℓ p aY) K hK
 
-/-- Blueprint `lemma-uniform-bound-proper-direct-image` (`lemma-uniform-bound-proper-direct-image`):
-for the coefficient ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a separated `k`-scheme of
-finite type, `Rp_*` sends ind-constructible sheaves into degrees `≤ 2d` (`d` bounding the dimensions
-of the fibres) and commutes with direct sums of them. -/
+/-- For the coefficient ring `ℚ̄_ℓ` and a proper morphism `p : Z ⟶ Y` to a separated `k`-scheme of
+finite type, `Rp_*` sends ind-constructible sheaves into degrees `≤ 2d` (`d` bounding the
+dimensions of the fibres) and commutes with direct sums of them. -/
 theorem properLowerStarHeartHypotheses_padicAlgClRingObj {Z Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aY]
     (p : Z ⟶ Y) [IsProper p] :

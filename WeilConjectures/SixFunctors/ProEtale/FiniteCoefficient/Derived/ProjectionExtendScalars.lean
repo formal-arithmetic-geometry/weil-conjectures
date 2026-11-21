@@ -27,11 +27,11 @@ is represented at the finite stages `E'`, is an isomorphism.
   bounded constructible, derived complete `𝒪_E`-complexes of finite Tor amplitude is an
   isomorphism.
 - `AlgebraicGeometry.ProEtale.isIso_rationalization_map_projectionMap_extendScalars`: the same
-  after rationalization, the stage `ℚ̄_ℓ` of `sk-thm-sf-pf-proetale`.
+  after rationalization, the stage `ℚ̄_ℓ`.
 
 ## Implementation notes
 
-The blueprint defines `D(Y, ℚ̄_ℓ)` as the category `C_Y` of pairs `(E, K)`, with
+The category `D(Y, ℚ̄_ℓ)` is the category `C_Y` of pairs `(E, K)`, with
 `Hom((E, K), (E', K'))` the colimit over finite `L ⊇ E, E'` of the morphisms
 `K ⊗_E L ⟶ K' ⊗_{E'} L` at the stage `L`, composition being computed at a common stage. The
 projection map at `ℚ̄_ℓ` of objects represented at `E` is the class of the projection
@@ -130,17 +130,14 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the integral stages `𝒪_{E'}`
-for scalar extensions.
-
-Let `E ⊆ E'` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, and let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be
-the pro-étale realizations of bounded constructible, derived complete complexes `K₀`, `L₀` of
-étale sheaves of `𝒪_E`-modules of finite Tor amplitude, such that both sides of the étale
-projection map at `K₀` and `L₀` are derived complete. Then the projection map over `𝒪_{E'}` at
-the scalar extensions `𝒪_{E'} ⊗ᴸ_{𝒪_E} K` and `𝒪_{E'} ⊗ᴸ_{𝒪_E} L` is an isomorphism: it is the
-scalar extension of the projection map over `𝒪_E`
-(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_extendScalars`, `𝒪_{E'}`
-being finite free over `𝒪_E`), an isomorphism by the integral stage
+/-- Let `E ⊆ E'` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, and let `K ≅ ν^* K₀` and `L ≅ ν^* L₀`
+be the pro-étale realizations of bounded constructible, derived complete complexes `K₀`, `L₀` of
+étale sheaves of `𝒪_E`-modules of finite Tor amplitude, such that both sides of the étale projection
+map at `K₀` and `L₀` are derived complete. Then the projection map over `𝒪_{E'}` at the scalar
+extensions `𝒪_{E'} ⊗ᴸ_{𝒪_E} K` and `𝒪_{E'} ⊗ᴸ_{𝒪_E} L` is an isomorphism: it is the scalar extension
+of the projection map over `𝒪_E`
+(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_extendScalars`, `𝒪_{E'}` being
+finite free over `𝒪_E`), an isomorphism by the integral stage
 (`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`). -/
 theorem hasProjectionFormula_extendScalars_of_derivedCompleteIntegral (f : X ⟶ Y)
     [HasCompactification f]
@@ -165,18 +162,11 @@ theorem hasProjectionFormula_extendScalars_of_derivedCompleteIntegral (f : X ⟶
     hs ht
   exact hasProjectionFormula_extendScalars f K L h
 
-/-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the stage `ℚ̄_ℓ`.
-
-An object of the stage `ℚ̄_ℓ` is represented at a finite stage `E`, and it is carried to every
-larger finite stage `E' ⊇ E` inside `ℚ̄_ℓ` by extension of scalars; the projection map at the
-stage `ℚ̄_ℓ` is represented at the stages `E'`. Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the
+/-- For finite extensions `E ⊆ E'` of `ℚ_ℓ` inside `ℚ̄_ℓ`, let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the
 pro-étale realizations of bounded constructible, derived complete complexes `K₀`, `L₀` of étale
-sheaves of `𝒪_E`-modules of finite Tor amplitude. Then for every `E'`, the projection map over
-`E'` at the scalar extensions of `K` and `L`, the image under the rationalization
-`D(Y_proét, 𝒪_{E'}) ⥤ D(Y_proét, 𝒪_{E'})[1/ℓ]` of the projection map over `𝒪_{E'}`, is an
-isomorphism
-(`AlgebraicGeometry.ProEtale.hasProjectionFormula_extendScalars_of_derivedCompleteIntegral`,
-blueprint `lemma-kunneth-formula-compact-supports--3`). -/
+sheaves of `𝒪_E`-modules of finite Tor amplitude. Then for every `E'`, the projection map over `E'`
+at the scalar extensions of `K` and `L`, the image under the rationalization `D(Y_proét, 𝒪_{E'}) ⥤
+D(Y_proét, 𝒪_{E'})[1/ℓ]` of the projection map over `𝒪_{E'}`, is an isomorphism. -/
 theorem isIso_rationalization_map_projectionMap_extendScalars (f : X ⟶ Y)
     [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}

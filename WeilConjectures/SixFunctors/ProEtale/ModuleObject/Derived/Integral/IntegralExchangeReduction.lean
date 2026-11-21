@@ -31,7 +31,9 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
 
 /-! # Finite reduction of the integral proper exchange
 
-Source: Bhatt--Scholze, Sections 6.7--6.8.
+## References
+
+* Bhatt--Scholze, Sections 6.7--6.8
 -/
 
 @[expose] public section
@@ -63,21 +65,7 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
-/-- The proper exchange on integral constructible complexes becomes invertible modulo ℓ.
-Source: Bhatt--Scholze, Section 6.7 and the integral finite-quotient comparison of Section 6.8;
-Stacks proper base change.
-
-Proof in words. The quotient O_E/ℓ is finite, since O_E is finite over ℤ_ℓ. Its quotient
- topology is discrete and its condensed coefficient sheaf on the pro-etale site is the
- inverse image of the constant finite coefficient sheaf on the etale site. A bounded
- constructible integral complex has a bounded constructible derived reduction over this
- finite ring. Reduction commutes with exact pullback. For proper pushforward, compute the
- reduction by the two-term free resolution of O_E/ℓ over O_E and use preservation of
- finite cones by the derived pushforward. The adjunction comparisons identify the
- reduced unit, pullback square and counit with the finite-coefficient ones, hence identify
- the specified reduced exchange arrow with etale exchange. Torsion proper base change
- makes that arrow invertible. Transport through the actual comparisons yields the
- asserted invertibility, without assuming integral or E exchange invertible. -/
+/-- The proper exchange on integral constructible complexes becomes invertible modulo ℓ. -/
 theorem integralExchange_reduction_isIso [IsProper f]
     (sq : IsPullback g' f' f g)
     (M : integralConstructible ℓ E X) :

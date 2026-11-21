@@ -65,9 +65,6 @@ public import Mathlib.CategoryTheory.Limits.Final
 
 /-! # Interfaces for normalized complete restriction to a clopen
 
-Source: Stacks Project, proetale.tex, Tags 09C3 and 098F; sites-cohomology.tex,
-Tag 0946; derived.tex, Tag 08TC.
-
 The coefficient comparisons below are fixed by constant sections and the actual
 inverse-limit projections. Restriction is sectionwise precomposition, descended
 termwise to unbounded derived categories. Index n denotes the positive exponent n+1.
@@ -76,6 +73,21 @@ termwise to unbounded derived categories. Index n denotes the positive exponent 
 
 - `SfClopenCoefficientRestriction`: the normalized coefficient and exact restriction data.
 - `SfClopenCompleteRestriction`: canonical reduction, augmented tower and Tor compatibility.
+
+## References
+
+* [Stacks, Tag 09C3](https://stacks.math.columbia.edu/tag/09C3)
+* [Stacks, Tag 098F](https://stacks.math.columbia.edu/tag/098F)
+* [Stacks, Tag 0946](https://stacks.math.columbia.edu/tag/0946)
+* [Stacks, Tag 08TC](https://stacks.math.columbia.edu/tag/08TC)
+* [Stacks, Tag 00XZ](https://stacks.math.columbia.edu/tag/00XZ)
+* [Stacks, Tag 09AE](https://stacks.math.columbia.edu/tag/09AE)
+* [Stacks, Tag 00Y0](https://stacks.math.columbia.edu/tag/00Y0)
+* [Stacks, Tag 03DH](https://stacks.math.columbia.edu/tag/03DH)
+* [Stacks, Tag 015F](https://stacks.math.columbia.edu/tag/015F)
+* [Stacks, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
 -/
 
 @[expose] public noncomputable section
@@ -91,28 +103,24 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry Opposite
 open AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- The site inclusion for an open subscheme, by composition of weakly etale maps.
-Source: Stacks 00XZ and 09AE. -/
+/-- The site inclusion for an open subscheme, by composition of weakly etale maps. -/
 abbrev sfClopenSiteInclusion {T : Scheme.{t}} (U : T.Opens) :
     U.toScheme.ProEt ⥤ T.ProEt :=
   MorphismProperty.Over.map ⊤ (inferInstance : WeaklyEtale U.ι)
 
-/-- The continuous site inclusion used for ordinary restriction.
-Source: Stacks 09AE. -/
+/-- The continuous site inclusion used for ordinary restriction. -/
 instance sfClopenSiteInclusionContinuous {T : Scheme.{t}} (U : T.Opens) :
     (sfClopenSiteInclusion U).IsContinuous (Scheme.ProEt.topology U.toScheme)
       (Scheme.ProEt.topology T) :=
   Scheme.ProEt.isContinuous_overMap (inferInstance : WeaklyEtale U.ι)
 
-/-- Restriction of a ring sheaf by precomposition, with unchanged section rings.
-Source: Stacks 00Y0. -/
+/-- Restriction of a ring sheaf by precomposition, with unchanged section rings. -/
 abbrev sfClopenRingRestriction {T : Scheme.{t}} (U : T.Opens)
     (R : Sheaf (Scheme.ProEt.topology T) RingCat.{v}) :=
   ((sfClopenSiteInclusion U).sheafPushforwardContinuous
     RingCat.{v} (Scheme.ProEt.topology U.toScheme) (Scheme.ProEt.topology T)).obj R
 
-/-- Sectionwise restriction with scalars identified by the specified ring comparison.
-Source: Stacks 03DH. -/
+/-- Sectionwise restriction with scalars identified by the specified ring comparison. -/
 abbrev sfClopenModuleRestriction {T : Scheme.{t}} (U : T.Opens)
     (R : Sheaf (Scheme.ProEt.topology T) RingCat.{v})
     (S : Sheaf (Scheme.ProEt.topology U.toScheme) RingCat.{v})
@@ -125,8 +133,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Canonical coefficient identifications and exact ordinary restriction on a component.
 The constant-section normalization fixes the finite comparisons; the projection squares
-fix the completed comparison uniquely. Exactness is evidence, not extra hypotheses on T.
-Source: Stacks 00Y0, 09C3, 015F. -/
+fix the completed comparison uniquely. Exactness is evidence, not extra hypotheses on T. -/
 structure SfClopenCoefficientRestriction (T : Scheme.{t}) (U : T.Opens) where
   /-- Finite coefficients, oriented from local coefficients to restricted coefficients. -/
   finite : ∀ n : ℕ, integralCoefficientSheaf l E U.toScheme n ≅
@@ -173,8 +180,7 @@ structure SfClopenCoefficientRestriction (T : Scheme.{t}) (U : T.Opens) where
   [finite_colimits : ∀ n : ℕ,
     PreservesFiniteColimits (sfClopenModuleRestriction U _ _ (finite n))]
 
-/-- Standard localization on every localized ringed site used in the Tor test.
-Source: Stacks 05RU. -/
+/-- Standard localization on every localized ringed site used in the Tor test. -/
 instance sfClopenSliceHasDerived (T : Scheme.{t})
     (R : Sheaf (Scheme.ProEt.topology T) RingCat.{v}) (V : T.ProEt)
     [HasSheafify ((Scheme.ProEt.topology T).over V) AddCommGrpCat.{v}]
@@ -189,8 +195,7 @@ attribute [instance] SfClopenCoefficientRestriction.additive
 
 variable {l E}
 
-/-- Ordinary restriction on the unbounded completed-coefficient derived category.
-Source: Stacks 015F. -/
+/-- Ordinary restriction on the unbounded completed-coefficient derived category. -/
 def sfClopenDerivedRestriction {T : Scheme.{t}} {U : T.Opens}
     (d : SfClopenCoefficientRestriction l E T U) :
     DerivedCategory (scalarReductionSource l E T) ⥤
@@ -205,8 +210,7 @@ def sfClopenDerivedRestriction {T : Scheme.{t}} {U : T.Opens}
       (completedIntegralCoefficientSheafUnrestricted l E U.toScheme) d.completion)
     d.additive d.limits d.colimits
 
-/-- The same ordinary restriction on a finite quotient, including exponent one.
-Source: Stacks 015F. -/
+/-- The same ordinary restriction on a finite quotient, including exponent one. -/
 def sfClopenFiniteDerivedRestriction {T : Scheme.{t}} {U : T.Opens}
     (d : SfClopenCoefficientRestriction l E T U) (n : ℕ) :
     DerivedCategory (scalarReductionTarget l E T n) ⥤
@@ -221,8 +225,7 @@ def sfClopenFiniteDerivedRestriction {T : Scheme.{t}} {U : T.Opens}
       (integralCoefficientSheaf l E U.toScheme n) (d.finite n))
     (d.finite_additive n) (d.finite_limits n) (d.finite_colimits n)
 
-/-- Restrict cochain complexes degreewise, with the same scalar action as module restriction.
-Source: Stacks 015F. -/
+/-- Restrict cochain complexes degreewise, with the same scalar action as module restriction. -/
 def sfClopenComplexRestriction {T : Scheme.{t}} {U : T.Opens}
     (d : SfClopenCoefficientRestriction l E T U) :
     CochainComplex (scalarReductionSource l E T) ℤ ⥤
@@ -230,8 +233,7 @@ def sfClopenComplexRestriction {T : Scheme.{t}} {U : T.Opens}
   letI := d.additive
   (sfClopenModuleRestriction U _ _ d.completion).mapHomologicalComplex (.up ℤ)
 
-/-- The canonical comparison of termwise restriction with unbounded localization.
-Source: Stacks 015F. -/
+/-- The canonical comparison of termwise restriction with unbounded localization. -/
 def sfClopenLocalizationIso {T : Scheme.{t}} {U : T.Opens}
     (d : SfClopenCoefficientRestriction l E T U)
     (P : CochainComplex (scalarReductionSource l E T) ℤ) :
@@ -242,15 +244,13 @@ def sfClopenLocalizationIso {T : Scheme.{t}} {U : T.Opens}
   letI := d.colimits
   ((sfClopenModuleRestriction U _ _ d.completion).mapDerivedCategoryFactors).app P
 
-/-- Finite-coefficient restriction on actual complexes.
-Source: Stacks 015F. -/
+/-- Finite-coefficient restriction on actual complexes. -/
 def sfClopenFiniteComplexRestriction {T : Scheme.{t}} {U : T.Opens}
     (d : SfClopenCoefficientRestriction l E T U) (n : ℕ) :=
   letI := d.finite_additive n
   (sfClopenModuleRestriction U _ _ (d.finite n)).mapHomologicalComplex (.up ℤ)
 
-/-- The canonical localization comparison for finite-coefficient restriction.
-Source: Stacks 015F. -/
+/-- The canonical localization comparison for finite-coefficient restriction. -/
 def sfClopenFiniteLocalizationIso {T : Scheme.{t}} {U : T.Opens}
     (d : SfClopenCoefficientRestriction l E T U) (n : ℕ)
     (P : CochainComplex (scalarReductionTarget l E T n) ℤ) :
@@ -262,8 +262,7 @@ def sfClopenFiniteLocalizationIso {T : Scheme.{t}} {U : T.Opens}
   ((sfClopenModuleRestriction U _ _ (d.finite n)).mapDerivedCategoryFactors).app P
 
 /-- The existing derived scalar-extension counit, transported from homotopy objects
-by the canonical quotient comparisons. On K-flat complexes it computes reduction.
-Source: Stacks 06YY. -/
+by the canonical quotient comparisons. On K-flat complexes it computes reduction. -/
 def sfClopenReductionCounit (T : Scheme.{t}) (n : ℕ)
     (P : CochainComplex (scalarReductionSource l E T) ℤ) :
     (scalarReductionDerivedExtension l E T n).obj (DerivedCategory.Q.obj P) ⟶
@@ -277,8 +276,7 @@ def sfClopenReductionCounit (T : Scheme.{t}) (n : ℕ)
     ((DerivedCategory.quotientCompQhIso _).app
       (unrestrictedTowerFiniteComplex l E T n P)).hom
 
-/-- Test the same Tor interval after ordinary localization at every site object.
-Source: Stacks 08FZ, 00Y0. -/
+/-- Test the same Tor interval after ordinary localization at every site object. -/
 def SfResidueTorAmplitudeOnEveryObject (T : Scheme.{t})
     (K : DerivedCategory (scalarReductionTarget l E T 0)) (a b : ℤ) : Prop :=
   letI := integralCoefficientAbSheafify.{t, u} T
@@ -295,8 +293,7 @@ def SfResidueTorAmplitudeOnEveryObject (T : Scheme.{t})
         (integralCoefficientSheaf l E T 0) V).obj K) a b
 
 /-- The complete restriction assertions, with normalized comparisons on actual tensors.
-All fields are conclusions of the main existence theorem, not assumptions on the input.
-Source: Stacks 09C3, 06YY and 08TC. -/
+All fields are conclusions of the main existence theorem, not assumptions on the input. -/
 structure SfClopenCompleteRestriction {T : Scheme.{t}} {U : T.Opens}
     (d : SfClopenCoefficientRestriction l E T U) where
   /-- The natural derived reduction comparison at every positive exponent. -/

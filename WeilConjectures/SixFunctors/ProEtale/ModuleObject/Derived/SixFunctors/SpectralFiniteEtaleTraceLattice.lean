@@ -389,7 +389,11 @@ import WeilConjectures.CategoryTheory.ProperBaseChange.CondensedUnderivedPushfor
 
 /-! # Spectral integral coefficient lattices
 
-Source: Bhatt--Scholze, Section 6.8, and blueprint main-20261015.
+Finite etale trace descent gives integral lattices over spectral coefficients.
+
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -413,11 +417,7 @@ private def HasCoefficientLattice
       Mono ι ∧ IsIso (((Mod.extendRestrictAdjunction
         (coefficientMap a X)).homEquiv N P).symm ι)
 
-/-- Rationalization of the image of a surjective trace is the rational module.
-Source: blueprint main-20261015, stratified lattice proof, final paragraph.
-Proof. Exact scalar extension preserves the monic image inclusion. It sends the pushed
-lattice map to an isomorphism; the rational counit is invertible. Composing with the
-surjective trace makes the scalar extension of the image inclusion epi too, hence iso. -/
+/-- Rationalization of the image of a surjective trace is the rational module. -/
 private theorem continuousTraceImage_rationalization_isIso
     (l : ℕ) [Fact l.Prime] (E : Type) [NontriviallyNormedField E] [NormedAlgebra ℚ_[l] E]
     (X : Scheme.{u})
@@ -464,11 +464,8 @@ private theorem continuousTraceImage_rationalization_isIso
   change IsIso (F.map (image.ι g) ≫ adj.counit.app P)
   infer_instance
 
-/-- Rationalization of the image of a surjective trace is the rational module.
-Source: blueprint main-20261015, stratified lattice proof, final paragraph.
-Proof. Exact scalar extension preserves the monic image inclusion. It sends the pushed
-lattice map to an isomorphism; the rational counit is invertible. Composing with the
-surjective trace makes the scalar extension of the image inclusion epi too, hence iso. -/
+/-- If the image of the pushed lattice under a surjective trace is locally free, then the
+rational module has a coefficient lattice. -/
 private theorem continuousTraceImage_lattice
     (l : ℕ) [Fact l.Prime] (E : Type) [NontriviallyNormedField E] [NormedAlgebra ℚ_[l] E]
     (X : Scheme.{u})
@@ -668,25 +665,7 @@ private theorem normedDiagram_finiteLattice
           (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val)) X
   exact normedFiniteEtaleTrace_lattice l E X
 
-/-- Finite etale trace descent gives an integral lattice over spectral coefficients.
-Source: blueprint main-20261015, lemma-lattices-after-finite-stratification, "Pushing down by the
-trace"; Bhatt--Scholze, Section 6.8.
-
-Proof. Split the finite etale surjection etale locally. Sum the sheet counits to define
-p_*p*P → P; invariance under permutations glues these maps. On a nonempty chart there
-is a sheet, and insertion into that sheet makes the trace epic. Take the categorical
-image of p_*M → Res(P) induced by e and trace. Trivialize P pro-etale locally.
-Local constancy of the lattice-class sheaf makes the finitely many sheet lattices
-constant on a common refinement. Their sum is a finite free lattice over the valuation
-ring. A lifted basis supplies a continuous linear section of the sheet sum, so the
-image on continuous functions is the continuous-function sheaf of that sum lattice.
-Thus the image is locally free. Its image inclusion is monic. Integral localization
-is exact; the pushed lattice comparison rationalizes to an isomorphism and trace is
-epic, so the rationalized image inclusion is epic and monic, hence invertible.
-The scalar-extension adjunction identifies that map with the adjoint of the actual
-image inclusion. Transport along continuousIntegers_eq identifies the norm ball
-with the spectral valuation ring; the topology is the subspace topology throughout.
-No degree is divided out. Empty bases and zero ranks yield zero modules. -/
+/-- Finite etale trace descent gives an integral lattice over spectral coefficients. -/
 theorem spectralFiniteEtaleTrace_lattice
     (l : ℕ) [Fact l.Prime] (E : Type) [hField : Field E]
     [hAlg : Algebra ℚ_[l] E] [hFin : FiniteDimensional ℚ_[l] E]

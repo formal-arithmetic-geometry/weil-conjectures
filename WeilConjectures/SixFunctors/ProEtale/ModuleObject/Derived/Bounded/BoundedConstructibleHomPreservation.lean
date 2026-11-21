@@ -13,7 +13,14 @@ import Mathlib.CategoryTheory.Triangulated.Opposite.Subcategory
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
-/-! # Finite truncation induction for derived internal Hom -/
+/-!
+# Finite truncation induction for derived internal Hom
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
+* [Stacks, Tag 08JC](https://stacks.math.columbia.edu/tag/08JC)
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -27,8 +34,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ]
 variable (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
 omit [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] in
 /-- Finite truncation induction in both variables reduces Hom closure to single sheaves, for any
-coefficient ring whose bounded constructible category is triangulated.
-Source: Bhatt--Scholze, Remark 6.8.15, and Stacks Tag 08JC. -/
+coefficient ring whose bounded constructible category is triangulated. -/
 private theorem boundedConstructible_hom_closure_of
     (htri : (boundedConstructible (condensedRingObj Λ X.left)).IsTriangulated)
     (hsingle : ∀ (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})
@@ -88,8 +94,7 @@ private theorem isNoetherian_left : IsNoetherian X.left :=
 variable (X)
 
 /-- Finite truncation induction in both variables reduces Hom closure to single sheaves,
-`ℚ̄_ℓ` coefficients.
-Source: Bhatt--Scholze, Remark 6.8.15, and Stacks Tag 08JC. -/
+`ℚ̄_ℓ` coefficients. -/
 theorem boundedConstructible_hom_closure
     (ℓ : ℕ) [Fact ℓ.Prime] [Fact (ringChar k ≠ ℓ)]
     (hsingle : ∀ (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})

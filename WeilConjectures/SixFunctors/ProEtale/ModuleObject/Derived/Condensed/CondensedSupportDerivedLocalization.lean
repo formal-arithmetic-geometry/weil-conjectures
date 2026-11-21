@@ -14,7 +14,12 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
-/-! # Localization of ordinary derived condensed modules -/
+/-! # Localization of ordinary derived condensed modules
+
+## References
+
+* Stacks Project, Tags 09AA, 09AH, 09BN
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -227,29 +232,7 @@ private theorem derivedMixedClosed {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶
     ((supportPullback Λ j).mapIso ((lowerStar Λ i).mapDerivedCategoryHomologyFunctorIso n
       |>.symm.app P))
 
-/-- Open/closed localization for the exact functors on ordinary unbounded derived modules.
-Source: Stacks Tags 09AA, 09AH, 09BN; original internal-Hom argument steps 1, 2 and 8.
-
-Proof: the forgetful functor from internal modules to abelian sheaves is faithful, exact
-and conservative. Its composite with support inverse image is the abelian inverse image;
-scalar transport along alpha leaves underlying objects and maps unchanged. The underlying
-closed unit differs from the lifted abelian unit only by invertible scalar-transport maps.
-The abelian closed-support theorem therefore makes this unit invertible on modules with
-zero open restriction. The closed counit is invertible by the same lift of the abelian
-closed counit. The open extension/restriction unit is invertible since the abelian extension
-is fully faithful; its module action is the action induced by the projection formula.
-The two mixed composites vanish on underlying sheaves by empty base change and adjunction.
-All four functors are exact. Apply them degreewise to complexes. The units and counits
-are the degreewise maps, transported along the canonical derived factorization isomorphisms.
-Joint detection passes to derived morphisms since exact functors commute with homology.
-The derived supported unit is invertible by its closed triangle identity, the invertible
-closed counit, and its zero open restriction. Mixed closed-image vanishing follows on
-homology; mixed open-extension vanishing follows by transposing its identity through
-the two adjunctions into a zero Hom group. Finally a morphism whose two restrictions are
-invertible has
-kernel and cokernel zero on every homology degree, by ordinary localization. Hence every
-homology map is invertible and the derived morphism is invertible. Empty strata and zero
-coefficients are permitted throughout. No tensor, flat resolution or internal Hom is used. -/
+/-- Open/closed localization for the exact functors on ordinary unbounded derived modules. -/
 theorem condensedSupportDerivedLocalization {Z U X : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :

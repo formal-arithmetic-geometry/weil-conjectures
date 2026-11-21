@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Native.NativeSignedLine
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 /-! # Ordinary derived finiteness for signed local lines
-Source: definition-tate-twists--10.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,8 +25,7 @@ local instance (Y : Scheme.{u}) : EssentiallySmall.{u + 1} Y.ProEt :=
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})
 
-/-- The native module category for the pulled-back condensed coefficient ring.
-Source: definition-tate-twists--10. -/
+/-- The native module category for the pulled-back condensed coefficient ring. -/
 abbrev NativeTwistModules : Type (u + 2) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 

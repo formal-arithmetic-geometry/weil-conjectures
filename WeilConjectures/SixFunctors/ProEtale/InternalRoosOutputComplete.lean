@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.ProEtale.InternalQuotientPrincipalConeCompari
 
 /-! # Completeness of the internal quotient Roos completion
 
-Source: Stacks 099B and 0A0E; blueprint derived-completion reflector.
+## References
+
+* [Stacks, Tag 099B](https://stacks.math.columbia.edu/tag/099B)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
 -/
 
 @[expose] public noncomputable section
@@ -20,20 +23,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.ProEtale.AdicCompletion
 
-/-- The actual Roos completion of a K-flat representative is itself complete.
-Source: Stacks 099B and 0A0E; blueprint proposition-proper-base-change-complete-integral.
-
-Proof: choose the coefficient uniformizer endomorphism d. The normalized comparison
-identifies the quotient Roos output of P with its principal cone completion. Resolve
-that output by a K-flat R, so Q(R) is isomorphic to the principal completion of P.
-The Hom reflection property extends this isomorphism uniquely across the principal
-completion unit v of R. Composing the extension with the inverse isomorphism gives
-a left inverse s of v. Injectivity of precomposition with v, now into the principal
-completion of R itself, shows s v = 1 as well. Thus v is invertible. The normalized
-comparison for R identifies v followed by an isomorphism with its actual quotient
-augmentation. This augmentation is invertible, and R with its resolution is exactly
-the witness required by IsDerivedComplete for the original quotient Roos output.
-No output K-flatness or completeness of a triangle's arbitrary first vertex is used. -/
+/-- The actual Roos completion of a K-flat representative is itself complete. -/
 theorem isDerivedComplete_roos
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})

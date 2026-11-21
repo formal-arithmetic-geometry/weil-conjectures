@@ -12,8 +12,10 @@ public import Mathlib.CategoryTheory.Whiskering
 
 /-! # Descent of normalized derived comparisons
 
-Source: Stacks 06YY and 0D6D; the complete generic proof from
-IntegralComparisonSequenceSystems.
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 0D6D](https://stacks.math.columbia.edu/tag/0D6D)
 -/
 
 @[expose] public noncomputable section
@@ -66,17 +68,7 @@ private theorem isIso_on_resolution
 
 universe g h wA wB wC wD
 
-/-- Unique derived comparison from a normalized comparison on resolving representatives.
-Source: Stacks 06YY and 0D6D.
-Proof: form alpha and beta into the same cochain target using the exact functor
-factorizations and the ordinary comparison. The first counit makes beta invertible
-on the resolving class. The second makes alpha invertible on the good subclass.
-Resolve an arbitrary member of the resolving class by a good member; naturality
-and inversion of quasi-isomorphisms give invertibility of alpha there. Their
-ratio is an isomorphism after restriction to the resolving subcategory. Lift it
-by fully faithful restriction. The lifted hom satisfies the normalization by
-map_preimage and cancellation with beta. Injectivity of restriction and the same
-cancellation prove uniqueness. -/
+/-- Unique derived comparison from a normalized comparison on resolving representatives. -/
 theorem derivedComparison
     {A : Type a} [Category.{b} A] [Abelian A] [HasDerivedCategory.{wA} A]
     {B : Type c} [Category.{d} B] [Abelian B] [HasDerivedCategory.{wB} B]

@@ -453,13 +453,7 @@ private theorem generic_condensed_exchange_iso
 end Helpers
 
 /-- The finite proper exchange and projection formulas for unbundled complexes,
-with a specified finite continuous coefficient presentation.
-Source: the finite proper theorem, blueprint proper-base-change proof, paragraph (3).
-
-Proof: bundle the two schemes and their morphism over Spec k, use the normalized
-finite encoding, and apply the finite coefficient-isomorphism theorem. Bundle each
-Dctf input without changing its object. Identify the canonical finite pullback square
-with the specified ambient pullback square and retain the canonical projection map. -/
+with a specified finite continuous coefficient presentation. -/
 theorem finiteCoefficientProperFormulas
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]

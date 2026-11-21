@@ -23,9 +23,6 @@ set_option linter.privateModule false
 
 /-! # Unbounded open restriction of condensed-module direct image
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md, Proof (2).
-
 The helpers spell out the canonical inverse-image comparison, its open mate, exact
 termwise derivation, and the five Hom bijections. All categories are the ordinary
 unbounded derived categories of internal modules over the pulled-back condensed ring.

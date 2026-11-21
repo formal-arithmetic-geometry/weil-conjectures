@@ -10,7 +10,13 @@ import all WeilConjectures.SmoothPurity.Compact.CompactSupportOpenScalarRestrict
 import WeilConjectures.SmoothPurity.Compact.CompactSupportScalarDirectNormalization
 import all WeilConjectures.CategoryTheory.ExactDerivedSquare.DerivedExactSquareCoherence
 
-/-! # Presentation of the finite proper/open scalar comparison -/
+/-! # Presentation of the finite proper/open scalar comparison
+
+## References
+
+* Stacks Project, Tags `03DI`, `0D6E`, `0GL6`
+* Zheng, Construction 2.26 and Proposition 2.29
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -633,18 +639,7 @@ private theorem mate_whisker
 
 -- Normalizing the two presentations expands their derived scalar functor models.
 /-- The finite ringed presentation and the intrinsic constant-ring presentation give
-exactly the same scalar mate after the canonical presentation isomorphisms.
-Source: Zheng, Construction 2.26 and Proposition 2.29; Stacks Tags 03DI, 0D6E, 0GL6.
-Proof: transpose under the scalar adjunctions. Expand both restriction comparisons
-as the open square followed by the derived proper square. The finite open comparison
-preserves the open units by left-adjoint uniqueness. Transposing its square therefore
-identifies the two open restriction maps. The finite direct-image equality identifies
-the underived proper coefficient squares on every section. Their K-injective derived
-comparisons agree by the uniqueness part of right derivation. Paste these two squares;
-the middle presentation maps cancel. The scalar mate bijection is injective and
-preserves whiskering, giving the displayed conjugation formula. The equality of the
-coefficient maps transports the endpoints; the heterogeneous equality expresses only
-that transport, not any change of coefficients or exponent. -/
+exactly the same scalar mate after the canonical presentation isomorphisms. -/
 theorem finiteScalarPresentationCompatibility
     (l : ℕ) [Fact l.Prime]
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]

@@ -20,7 +20,6 @@ schemes, on module objects over a condensed ring `Λ` on the pro-étale sites
 pullbacks. It is an isomorphism when the horizontal maps are isomorphisms
 (`ProEtale.CondensedRing.isIso_lowerStarBaseChange_of_isIso`), and the base-change morphisms of
 horizontally pasted squares paste (`ProEtale.CondensedRing.lowerStarBaseChange_app_paste`).
-
 -/
 
 @[expose] public section

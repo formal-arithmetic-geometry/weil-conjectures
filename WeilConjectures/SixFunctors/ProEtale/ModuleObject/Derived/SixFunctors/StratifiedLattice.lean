@@ -21,13 +21,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.SixFunctors.Spe
 /-!
 # Integral lattices after finite stratification
 
-Source: Weil conjectures blueprint, main-20261015, six-functors basics,
-`lemma-lattices-after-finite-stratification`, statement and proof; Bhatt--Scholze, Section 6.8,
-Proposition 6.8.4(6) and Lemma 6.8.13.
-
 The coefficients are the pulled condensed topological rings, and modules are internal
 module objects. The lattice inclusion is monic, and its scalar-extension adjoint is an
 isomorphism. Thus the rationalization isomorphism is induced by that very inclusion.
+
+## References
+
+* Bhatt--Scholze, Section 6.8, Proposition 6.8.4(6) and Lemma 6.8.13
 -/
 
 @[expose] public noncomputable section
@@ -156,25 +156,7 @@ private theorem coefficient_stratified_lattice
 stratum of some finite locally closed stratification. Finite ranks may vary, including
 rank zero. The coefficient topology is the canonical spectral norm topology; the integral
 ring has the subspace topology. Scalar extension along its inclusion is inversion of `l`.
-No uniformizer enters this conclusion; any chosen uniformizer in the coefficient datum
-is allowed. The nodal-curve example in the source explains why stratification is necessary.
-
-Source: blueprint main-20261015, `lemma-lattices-after-finite-stratification`, and its proof
-paragraphs "Sheaf of lattices", stratification, and "Pushing down by the trace";
-Bhatt--Scholze, Section 6.8.
-
-Proof. The structure map makes X Noetherian. Apply the etale-local lattice theorem,
-then stratify its qcqs etale cover so that its restrictions are finite etale.
-Pull back the lattice and its scalar-extension isomorphism using the coefficient
-pullback comparison and the base-change square. Local freeness survives pullback.
-On each stratum the normalized finite-etale trace has locally free integral image:
-its split-chart formula is summation of the sheet lattices, which become constant
-on a common refinement, and the continuous finite-sum lattice theorem computes
-this image. Exact scalar extension makes the image inclusion monic and epic,
-so its actual adjoint is invertible. Finally continuousIntegers_eq identifies
-the norm-at-most-one subring with the recorded valuation ring. No degree is divided
-out, and the covers and images include empty schemes and rank zero.
--/
+No uniformizer enters this conclusion. -/
 theorem exists_stratified_lisse_integral_lattice
     (l : ℕ) [Fact l.Prime] (E : Type) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

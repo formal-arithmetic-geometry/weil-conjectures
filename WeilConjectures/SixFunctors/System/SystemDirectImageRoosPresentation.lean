@@ -13,7 +13,10 @@ import WeilConjectures.SixFunctors.System.SystemDirectImageRoosEvaluation
 
 /-! # Projection-compatible Roos presentation of system direct image
 
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tag 0941.
+## References
+
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* Zheng, Construction 4.1, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -29,24 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The limit of the actual derived system direct image has the finite-image Roos
 presentation, with its actual limit projections. This is a comparison of models;
-it asserts neither normalization nor invertibility of any reconstruction counit.
-Source: Zheng, Construction 4.1 and Lemma 4.10; Stacks Project, Tag 0941;
-steps 1--2 of lem-weil-system-direct-image-effectivity.
-
-Proof: resolve the reduction of K once in the category of modules on the ringed
-sequence site. Section-normalized direct-image evaluation identifies its nth derived
-fiber with the finite derived direct image of the nth reduction of K. The reduction
-model identifies the quotient transitions on the source. The ordinary evaluation
-comparison is identity on sections, so its simultaneous derived comparison commutes
-with restriction transitions. After restriction to completed coefficients these are
-exactly sfDirectImageTransition, including the resolution-normalized restriction
-comparisons in that definition. Apply the constant-ring tower Roos model for the
-specified total limit. Transport its two product terms by the finite evaluation
-isomorphisms; the transition equality transports its 1-shift map. The resulting
-triangle defines L. Its first map is transported from the actual total-limit
-projection, giving the displayed equality for every n. This argument does not use
-completeness, boundedness, constructibility, finite type, or invertibility of l on
-the schemes. In particular it includes zero complexes and empty schemes. -/
+it asserts neither normalization nor invertibility of any reconstruction counit. -/
 theorem systemDirectImage_roosPresentation
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [(integralComparisonSequenceDirectImage l E f).Additive]

@@ -19,34 +19,32 @@ Let `k` be separably closed, `p : X̄ ⟶ Y` a proper morphism of `k`-schemes lo
 with `dim X̄ ≤ d`, and `Λ` a finite ring. For every base change `p' : X'' ⟶ Y''` of `p` and every
 étale sheaf `F` of `Λ`-modules on `X''`, the pro-étale higher direct images
 `H^r(Rp'_{proét,*} ν^* F)` vanish for `r > 2d`
-(`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`,
-blueprint `sk-prop-sf-fullcd-etale-origin`). The comparison `ν^* Rp'_{ét,*} ≅ Rp'_{proét,*} ν^*`
-reduces this to the étale statement
+(`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`). The
+comparison `ν^* Rp'_{ét,*} ≅ Rp'_{proét,*} ν^*` reduces this to the étale statement
 `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isPullback_of_isProper`.
 
-This is the uniform bound `FullCD(p, Λ; 2d)` of blueprint `sk-def-sf-admissible` *restricted to
-the sheaves of étale origin*, the essential image `AlgebraicGeometry.ProEtale.etaleOrigin` of the
-comparison pullback `ν^*` (blueprint `definition-classical-pro-etale-sheaves--1`); the unrestricted
-bound fails.
+This is the uniform bound `FullCD(p, Λ; 2d)` *restricted to the sheaves of étale origin*, the
+essential image `AlgebraicGeometry.ProEtale.etaleOrigin` of the comparison pullback `ν^*`; the
+unrestricted bound fails.
 
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtale.etaleOrigin`: the pro-étale sheaves of étale origin.
 - `AlgebraicGeometry.ProEtale.HasCohomologicalDimensionLEOnEtaleOrigin`: the class-restricted
-  bound `FullCD_cls(p, A; c)` of blueprint `def-sf-fullcd-class`.
+  bound `FullCD_cls(p, A; c)`.
 
 ## Main statements
 
 - `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`:
-  blueprint `sk-prop-sf-fullcd-etale-origin`.
-- `AlgebraicGeometry.ProEtale.etaleOrigin_upperStar_obj`: blueprint
-  `proposition-comparison-etale-derived-category--5`.
-- `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedComparisonLowerStar`: blueprint
-  `theorem-bounded-below-cohomology-comparison--1`.
-- `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_of_etaleOrigin`: blueprint
-  `lemma-uniform-bounds-pro-etale-affines--2`.
-- `AlgebraicGeometry.ProEtale.hasCohomologicalDimensionLEOnEtaleOrigin`: blueprint
-  `lemma-uniform-bounds-pro-etale-affines--2`.
+  `FullCD` on the étale-origin class.
+- `AlgebraicGeometry.ProEtale.etaleOrigin_upperStar_obj`: the étale-origin class is stable under
+  pullback.
+- `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedComparisonLowerStar`: the comparison
+  bound on coefficients of étale origin.
+- `AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_of_etaleOrigin`: the bound
+  for coefficients of étale origin.
+- `AlgebraicGeometry.ProEtale.hasCohomologicalDimensionLEOnEtaleOrigin`: the class-restricted
+  bound.
 -/
 
 @[expose] public section
@@ -61,28 +59,11 @@ namespace AlgebraicGeometry
 
 namespace ProEtale
 
-/-- Blueprint `sk-prop-sf-fullcd-etale-origin`: `FullCD` on the étale-origin class
-
-**The cohomological-dimension bound on the étale-origin class.** Let `k` be separably closed,
+/-- **The cohomological-dimension bound on the étale-origin class.** Let `k` be separably closed,
 let `p : X' ⟶ Y` be a proper morphism of finite-type `k`-schemes with `dim X' ≤ d`, and let
-`Λ` be a finite coefficient ring whose exponent is invertible on `X'` — so that every sheaf of
-`Λ`-modules is torsion, which is the first line of the blueprint proof. Then for every étale
+`Λ` be a finite coefficient ring whose exponent is invertible on `X'`. Then for every étale
 sheaf `F` of `Λ`-modules on any base change `X''` of `X'`,
-
-`H^r(Rp'_{proét,*} ν_{X''}^* F) = 0` for `r > 2d`.
-
-Quantifying over the base changes is what turns the statement into the bound
-`HasUniformCohomologicalDimensionLE` restricted to the essential image of `ν^*`. This is *not*
-clause (1) of `HasAmbientExceptionalRightAdjoint`, which quantifies over all pro-étale sheaves
-and fails in general (see `sk-rem-sf-fullcd-scope`); what it supports is the constructible
-`Rf^!` on the étale-origin class.
-
-The proof follows the blueprint: the comparison
-`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonIso'` identifies
-`Rp'_{proét,*} ν^* F` with `ν^* Rp'_{ét,*} F`, `ν^*` is exact, and the étale higher direct
-images vanish above `2d`
-(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isPullback_of_isProper`).
-The invertibility of the exponent of `Λ` is not used. -/
+`H^r(Rp'_{proét,*} ν_{X''}^* F) = 0` for `r > 2d`. -/
 theorem isZero_homology_rightDerivedLowerStar_comparisonUpperStar (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [IsSepClosed k] {X' Y : Scheme.{u}}
     (p : X' ⟶ Y) [IsProper p] (aX' : X' ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
@@ -110,25 +91,19 @@ section EtaleOrigin
 
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
-/-- Blueprint `definition-classical-pro-etale-sheaves--1`: The coefficient class of the blueprint.
+/-- The coefficient class of étale origin.
 
 A sheaf on the small pro-étale site of `X` is *of étale origin* if it is isomorphic to `ν^* G` for
-a sheaf `G` on the small étale site of `X`: the essential image of the comparison pullback. By
-blueprint `theorem-comparison-constructible-sheaves` this class contains the constructible pro-étale
-sheaves at a finite coefficient ring. -/
+a sheaf `G` on the small étale site of `X`: the essential image of the comparison pullback. -/
 abbrev etaleOrigin (X : Scheme.{u}) : ObjectProperty (Sheaf (Scheme.ProEt.topology X) A) :=
   (comparisonUpperStar A X).essImage
 
 variable {A} in
-/-- Blueprint `proposition-comparison-etale-derived-category--5`: The coefficient class is stable
-under restriction to a pro-étale base change.
+/-- The coefficient class is stable under restriction to a pro-étale base change.
 
 The pullback `q^* F` of a sheaf `F` of étale origin along any morphism `q : X' ⟶ X` is again of
 étale origin: `q^* ν_X^* G ≅ ν_{X'}^* q^* G`
-(`AlgebraicGeometry.ProEtale.comparisonUpperStarCompUpperStarIso`). The blueprint states this
-for the projection `q : X̄ ×_Y V ⟶ X̄` of a base change along an object `V` of `Y_proét`, and
-the same argument is the stability under inverse image of blueprint
-`lemma-uniform-bounds-pro-etale-affines--2`. -/
+(`AlgebraicGeometry.ProEtale.comparisonUpperStarCompUpperStarIso`). -/
 lemma etaleOrigin_upperStar_obj {X X' : Scheme.{u}} (q : X' ⟶ X)
     {F : Sheaf (Scheme.ProEt.topology X) A} (hF : etaleOrigin A X F) :
     etaleOrigin A X' ((ProEtale.upperStar A q).obj F) := by
@@ -136,7 +111,7 @@ lemma etaleOrigin_upperStar_obj {X X' : Scheme.{u}} (q : X' ⟶ X)
   exact ⟨(Etale.upperStar A q).obj G,
     ⟨((comparisonUpperStarCompUpperStarIso A q).app G).symm ≪≫ (ProEtale.upperStar A q).mapIso e⟩⟩
 
-/-- Blueprint `def-sf-fullcd-class`: The class-restricted full cohomological-dimension datum.
+/-- The class-restricted full cohomological-dimension datum.
 
 `FullCD_cls(p, A; c)` holds for `p : X ⟶ Y` if `H^r(Rp_* F) = 0` for every `r > c` and every
 pro-étale sheaf `F` of étale origin on `X`, and the same holds after every base change along an
@@ -156,11 +131,9 @@ def HasCohomologicalDimensionLEOnEtaleOrigin {X Y : Scheme.{u}} (p : X ⟶ Y) (c
             ((ProEtale.upperStar A g').obj F))))
 
 variable {A} in
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines--2`: the coefficient class is closed under
-colimits.
-
-The comparison pullback `ν^*` is fully faithful and preserves colimits, being a left adjoint, so
-its essential image is closed under the colimits that exist in pro-étale sheaves. -/
+/-- The coefficient class is closed under colimits: the comparison pullback `ν^*` is fully
+faithful and preserves colimits, so its essential image is closed under the colimits that exist
+in pro-étale sheaves. -/
 instance etaleOrigin_isClosedUnderColimitsOfShape (X : Scheme.{u}) (J : Type*) [Category J]
     [HasColimitsOfShape J (Sheaf X.smallEtaleTopology A)]
     [HasColimitsOfShape J (Sheaf (Scheme.ProEt.topology X) A)] :
@@ -173,15 +146,8 @@ section Bound
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison--1`: The comparison bound on coefficients
-of étale origin is `M = 0`.
-
-For every étale sheaf `G` of `Λ`-modules on `X` (no constructibility needed),
-`R^q ν_* (ν^* G) = 0` for `q > 0`. The first assertion of the blueprint, that the unit
-`G ⟶ ν_* ν^* G` is an isomorphism, is
-`AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit`; the vanishing is its derived form
-`G ≅ Rν_* ν^* G` (Bhatt–Scholze, Corollary 5.1.6,
-`AlgebraicGeometry.ProEtale.isIso_derivedComparisonAdjunction_unit_app`). -/
+/-- The comparison bound on coefficients of étale origin is `M = 0`: for every étale sheaf `G` of
+`Λ`-modules on `X` (no constructibility needed), `R^q ν_* (ν^* G) = 0` for `q > 0`. -/
 theorem isZero_homology_rightDerivedComparisonLowerStar (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (hq : 0 < q) :
     IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj
@@ -196,25 +162,18 @@ theorem isZero_homology_rightDerivedComparisonLowerStar (X : Scheme.{u})
         (asIso ((derivedComparisonAdjunction (ModuleCat.{u + 1} Λ) X).unit.app M)).symm))
 
 open MonoidalCategory in
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines--2`: the constant coefficient sheaf is of
-étale origin.
-
-The constant sheaf `Λ`, the monoidal unit of pro-étale sheaves of `Λ`-modules, is `ν^*` of the
-constant étale sheaf (`AlgebraicGeometry.ProEtale.comparisonUpperStarUnitIso`). -/
+/-- The constant coefficient sheaf is of étale origin: the constant sheaf `Λ`, the monoidal unit
+of pro-étale sheaves of `Λ`-modules, is `ν^*` of the constant étale sheaf
+(`AlgebraicGeometry.ProEtale.comparisonUpperStarUnitIso`). -/
 lemma etaleOrigin_unit (X : Scheme.{u}) :
     etaleOrigin (ModuleCat.{u + 1} Λ) X
       (𝟙_ (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :=
   ⟨𝟙_ _, ⟨comparisonUpperStarUnitIso Λ X⟩⟩
 
 variable {Λ} in
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines--2`: the coefficient class is closed under
-extensions.
-
-Let `0 → F₁ → F₂ → F₃ → 0` be a short exact sequence of pro-étale sheaves of `Λ`-modules on `X`
-with `F₁` and `F₃` of étale origin. Then `F₂` is of étale origin: its extension class lies in
-`Hom(ν^* G₃, ν^* G₁[1]) ≅ Hom(G₃, G₁[1])` by the full faithfulness of `ν^*` on bounded below
-complexes (`AlgebraicGeometry.ProEtale.bijective_comparisonUpperStar_mapDerivedCategory_map`),
-so it is `ν^*` of the extension of `G₃` by `G₁` with the corresponding class. -/
+/-- The coefficient class is closed under extensions: for a short exact sequence
+`0 → F₁ → F₂ → F₃ → 0` of pro-étale sheaves of `Λ`-modules on `X` with `F₁` and `F₃` of étale
+origin, `F₂` is of étale origin. -/
 theorem etaleOrigin_of_shortExact {X : Scheme.{u}}
     {S : ShortComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     (h₁ : etaleOrigin (ModuleCat.{u + 1} Λ) X S.X₁)
@@ -264,16 +223,14 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (
   (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
 
 include hp hd in
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines--2`: FullCD for coefficients of étale origin.
+/-- FullCD for coefficients of étale origin.
 
 Let `k` be separably closed, `p : X ⟶ Y` a proper morphism of finite-type `k`-schemes with
 `dim X ≤ d`, and `F` a pro-étale sheaf of `Λ`-modules of étale origin on `X`. Then
 `H^r(Rp_* F) = 0` for `r > 2d`, and the same holds for the base change of `p` along every object
-`V` of `Y_proét`, applied to the restriction of `F`. The blueprint asks this for the base changes
-whose source has dimension at most `d`; it holds for all of them, as
-`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar` allows
-base change along an arbitrary morphism. The hypothesis `[HasInvertibleExponent Λ X]` is only
-there to apply that statement, whose proof does not use it. -/
+`V` of `Y_proét`, applied to the restriction of `F`. The hypothesis `[HasInvertibleExponent Λ X]`
+is only there to apply
+`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`. -/
 theorem isZero_homology_rightDerivedLowerStar_of_etaleOrigin
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
     (hF : etaleOrigin (ModuleCat.{u + 1} Λ) X F) (r : ℤ) (hr : (2 * d : ℤ) < r) :
@@ -299,16 +256,9 @@ theorem isZero_homology_rightDerivedLowerStar_of_etaleOrigin
     fun V X' g' p' sq ↦ key g' p' V.hom sq (etaleOrigin_upperStar_obj g' hF)⟩
 
 include hp hd in
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines--2`: The blueprint's coefficient class
-supplies the restricted datum, with `c = 2 dim X̄`.
-
-For `p : X ⟶ Y` proper between finite-type `k`-schemes, `k` separably closed and `dim X ≤ d`, the
-class-restricted bound `FullCD_cls(p, Λ; 2d)` holds. This is
-`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_of_etaleOrigin`; the
-comparison bound on the class is `M = 0`
-(`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedComparisonLowerStar`), so the residual
-`2d` is the étale direction. As there, the hypothesis `[HasInvertibleExponent Λ X]` is not
-used. -/
+/-- For `p : X ⟶ Y` proper between finite-type `k`-schemes, `k` separably closed and `dim X ≤ d`,
+the class-restricted bound `FullCD_cls(p, Λ; 2d)` holds. As above, the hypothesis
+`[HasInvertibleExponent Λ X]` is not used. -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin :
     HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} Λ) p (2 * d) :=
   ⟨fun F hF r hr ↦ (isZero_homology_rightDerivedLowerStar_of_etaleOrigin Λ p aX aY hp d hd F hF r
@@ -324,8 +274,7 @@ open Opposite
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `cor-sf-fullcd-weakly-contractible-test`: FullCD tested on affine weakly
-contractible objects.
+/-- FullCD tested on affine weakly contractible objects.
 
 `FullCD(p, Λ; c)` holds if and only if, for every base change `p'` of `p` along an object `V` of
 `Y_proét`, every pro-étale sheaf `F` of `Λ`-modules on the base-changed source and every `r > c`,

@@ -10,7 +10,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.CompactificationRefinementLower
 import WeilConjectures.SixFunctors.Etale.Derived.CupProductCoherence
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 
-/-! # Exchange for the coefficient trace on projective-line presentations -/
+/-! # Exchange for the coefficient trace on projective-line presentations
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -777,26 +778,7 @@ private theorem transport_trace
   simp only [Functor.map_comp, Category.assoc]
   rw [hb]
 
-/-- The transported coefficient trace commutes with compact-support exchange.
-Source: blueprint prop-asd-smooth-base-change.proof.md, second paragraph, trace square;
-thm-amb-p1-adjunction.proof.md, transport between projective-line presentations.
-
-Proof: take the second clause of hbc g hY hY' for the standard projective lines.
-It is the trace square for ordinaryFiniteP1Exchange followed by the normalized
-shifted-line comparison. The two presentation isomorphisms give a map between this
-standard square and sq; we is precisely its horizontal commutativity condition.
-Expand presentedFiniteP1Trace on both sides. Exchange pasting moves the direct-image
-composition comparisons through the square. The mate unit identity moves the
-adjunction unit of e through exchange to the adjunction unit of e'. The normalized
-finite-line pullback comparisons respect composition (their roots and pure tensor
-normalizations characterize them uniquely), so the remaining line comparison is
-the one along g'. Cancel the presentation units, which are isomorphisms. Finally
-proper coincidence identifies compact-support exchange with ordinary proper
-exchange: the unbounded compactification exchange commutes with forgetting supports,
-and the compactification comparison isomorphism preserves that forget-supports map.
-This gives the displayed coefficient equation. No arbitrary complex K,
-projection formula, tensor trace, counit, or exceptional inverse image enters.
-Identity pullback, zero coefficients, N=1 and empty bases use the same equations. -/
+/-- The transported coefficient trace commutes with compact-support exchange. -/
 theorem presentedFiniteP1Trace_exchange
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

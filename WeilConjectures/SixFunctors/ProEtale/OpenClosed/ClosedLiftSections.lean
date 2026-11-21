@@ -25,8 +25,7 @@ covers split (e.g. a w-contractible one), and `W = Spec H_A(C̄)` its henselian 
 * every nonempty clopen subset of `W` meets the closed fibre, so `j_! N` has no sections over
   `W` (`AlgebraicGeometry.ProEtale.subsingleton_openImmersionLowerShriek_closedLiftSpec`);
 * consequently the unit `F(W) ⟶ (i^* F)(W ×_X Z)` is bijective
-  (`AlgebraicGeometry.ProEtale.bijective_unit_app_closedLiftSpec`), part (1) of blueprint
-  `proposition-extension-zero-restriction-closed-subscheme`.
+  (`AlgebraicGeometry.ProEtale.bijective_unit_app_closedLiftSpec`).
 -/
 
 @[expose] public section
@@ -166,16 +165,11 @@ lemma surjective_app_of_isWeaklyContractible {T : Scheme.{u}} {W : T.ProEt}
 
 variable [QuasiCompact j]
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme`, part (1): let
-`i : Spec (A ⧸ I) ⟶ Spec A` have quasi-compact open complement `j`, and let `C̄` be an ind-étale
-`A ⧸ I`-algebra all of whose faithfully flat ind-étale covers split (e.g. a w-contractible one). For
-every pro-étale sheaf of modules `F` on `Spec A`, the unit of `i^* ⊣ i_*` gives a bijection
-`F(v(V)) ≅ (i^* F)(v(V) ×_X Z)` for the henselian lift `v(V) = Spec H_A(C̄)` of `V = Spec C̄`
-(and `v(V) ×_X Z ≅ V` by `Algebra.ClosedLift.bijective_reduction`).
-
-The open–closed sequence `0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0` stays exact on sections over the
-weakly contractible `v(V)`, and `j_! j^* F` has no sections there
-(`AlgebraicGeometry.ProEtale.subsingleton_openImmersionLowerShriek_closedLiftSpec`). -/
+/-- Let `i : Spec (A ⧸ I) ⟶ Spec A` have quasi-compact open complement `j`, and let `C̄` be an
+ind-étale `A ⧸ I`-algebra all of whose faithfully flat ind-étale covers split (e.g. a
+w-contractible one). For every pro-étale sheaf of modules `F` on `Spec A`, the unit of
+`i^* ⊣ i_*` gives a bijection `F(v(V)) ≅ (i^* F)(v(V) ×_X Z)` for the henselian lift
+`v(V) = Spec H_A(C̄)` of `V = Spec C̄`. -/
 theorem bijective_unit_app_closedLiftSpec [Algebra.IndEtale (A ⧸ I) C]
     (hC : ∀ (T : Type u) [CommRing T] [Algebra C T] [Algebra.IndEtale C T]
       [Module.FaithfullyFlat C T], ∃ f : T →+* C, f.comp (algebraMap C T) = RingHom.id C)

@@ -38,9 +38,13 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.ConstantFieldTensorCohomolo
 
 /-! # Finite Tor amplitude at condensed field coefficients
 
-Source: current blueprint `proposition-ctf-equals-bc`, field case of clause (2).
 This specializes the local-model and truncation argument to the two field coefficient
 families, in the ordinary derived category over the pulled-back condensed ring.
+
+## References
+
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
+* [Stacks, Tag 010N](https://stacks.math.columbia.edu/tag/010N)
 -/
 
 @[expose] public section
@@ -62,15 +66,7 @@ open CategoryTheory.Limits MonoidalCategory in
 set_option synthInstance.maxSize 2048 in
 set_option backward.isDefEq.respectTransparency false in
 /-- A bounded complex over a discrete constant field has Tor amplitude in its
-cohomological interval. This existing helper is retained for the residue-field consumers.
-
-Source: Stacks Project, Tags 08FZ and 010N; constant-field tensor cohomology
-`lem-exc-constant-field-sheaf-tensor-cohomology`.
-
-Proof: a quasi-isomorphic representative has the same cohomology as `K`. Exact tensor
-over the constant field commutes with cohomology. The sheafification counit and tensorator
-identify this exact tensor with the tensor used by `derivedTensor`, and the comparison
-with the total complex having one degree-zero factor gives the asserted vanishing. -/
+cohomological interval. This existing helper is retained for the residue-field consumers. -/
 theorem bounded_field_tor (Y : Scheme.{u}) (A : Type u) [Field A]
     (K : proEtaleDerivedCategory Y A) (a b : ℤ) (hab : a ≤ b)
     (hK : ∀ i : ℤ, i < a ∨ b < i →

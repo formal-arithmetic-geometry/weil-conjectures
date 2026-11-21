@@ -47,7 +47,9 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.C
 
 /-! # Descent of module morphisms on finite etale splitting charts
 
-Source: Stacks Project, Tags 03EM, 04TQ and 04HN; blueprint, stratified lattice trace proof.
+## References
+
+* Stacks Project, Tags 03EM, 04TQ and 04HN
 -/
 
 @[expose] public noncomputable section
@@ -63,8 +65,7 @@ attribute [local irreducible] upperStar lowerStar upperStarComp upperStarLowerSt
   ProEtale.upperStar ProEtale.upperStarComp
 
 /-- Agreement after every pair of weakly etale refinements over the same base map.
-The comparisons use the specified inverse-image composition isomorphisms.
-Source: Stacks Project, Tags 03EM and 04TQ. -/
+The comparisons use the specified inverse-image composition isomorphisms. -/
 @[irreducible]
 def FiniteEtaleModuleChart.Compatible
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
@@ -777,8 +778,7 @@ private theorem split_chart_compatible
     localization_component k.map Q.X P.X (ψ k) T b hb] at h''
   exact h''
 
-/-- Existence half of finite-etale compatible Hom descent.
-Source: Stacks Project, Tags 03EM, 04TQ and 04HN. -/
+/-- Existence half of finite-etale compatible Hom descent. -/
 theorem finiteEtaleSplitHom_exists
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)
@@ -807,8 +807,7 @@ theorem finiteEtaleSplitHom_exists
   simp only [ψ, Iso.hom_inv_id_app_assoc] at hn
   exact (cancel_mono ((moduleLocalization Λ c.map).hom.app P)).mp hn
 
-/-- Local surjectivity criterion for the epi half.
-Source: Stacks Project, Tags 03EM, 04TQ and 04HN. -/
+/-- Local surjectivity criterion for the epi half. -/
 theorem finiteEtaleSplitHom_local_surjective
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)
@@ -839,8 +838,7 @@ theorem finiteEtaleSplitHom_local_surjective
   have : Epi f.hom := inferInstanceAs (Epi ((Mod.forget _).map f))
   exact (Sheaf.isLocallySurjective_iff_epi' Ab.{u + 1} f.hom).mpr inferInstance
 
-/-- Epi half of finite-etale compatible Hom descent.
-Source: Stacks Project, Tags 03EM, 04TQ and 04HN. -/
+/-- Epi half of finite-etale compatible Hom descent. -/
 theorem finiteEtaleSplitHom_epi
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X U : Scheme.{u}} (p : U ⟶ X)

@@ -41,7 +41,7 @@ section Finsupp
 
 /-- A family of maps `g x : S → S` depending locally constantly on `x` induces a family of maps
 `Finsupp.mapDomain (g x)` on `S →₀ Λ` depending locally constantly on `x`; used for the free
-cocycle of blueprint `proposition-proper-base-change-degree-zero`. -/
+cocycle. -/
 lemma isLocallyConstant_mapDomain {X : Type*} [TopologicalSpace X] {S Λ : Type*}
     [AddCommMonoid Λ] {g : X → S → S} (hg : ∀ s, IsLocallyConstant fun x ↦ g x s)
     (m : S →₀ Λ) : IsLocallyConstant fun x ↦ Finsupp.mapDomain (g x) m := by
@@ -57,8 +57,7 @@ lemma isLocallyConstant_mapDomain {X : Type*} [TopologicalSpace X] {S Λ : Type*
     exact (hg s).comp (Finsupp.single · b)
 
 /-- An element of `S →₀ Λ` is a basis vector `[s] = single s b` if and only if its image under
-`Finsupp.mapDomain e` for a bijection `e` is; used in blueprint
-`proposition-proper-base-change-degree-zero`. -/
+`Finsupp.mapDomain e` for a bijection `e` is. -/
 lemma exists_mapDomain_eq_single_iff {S Λ : Type*} [AddCommMonoid Λ] {e : S → S}
     (he : Function.Bijective e) (m : S →₀ Λ) (b : Λ) :
     (∃ s, Finsupp.mapDomain e m = Finsupp.single s b) ↔ ∃ s, m = Finsupp.single s b := by

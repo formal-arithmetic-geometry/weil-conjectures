@@ -18,8 +18,7 @@ The adjunction and the monoidal structure of `Lp^*` on `Dᵇc` are the restricti
 ambient derived categories, so the projection morphism is the restriction of the projection map
 of the ambient derived categories
 (`CategoryTheory.Adjunction.ι_map_projectionMorphism_restrictFullyFaithful`), which is an
-isomorphism on bounded constructible complexes by blueprint
-`proposition-proper-direct-image-constructible-complexes`
+isomorphism on bounded constructible complexes
 (`ProEtale.CondensedRing.properDirectImage_baseChange_projectionFormula_padicAlgClRingObj`).
 
 ## Main statements

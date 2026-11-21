@@ -10,7 +10,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 
 /-! Transport of regular quotient trace invertibility from K-injective models.
 
-Source: Stacks Tags 05RT and 0A70.
+## References
+
+* [Stacks, Tag 05RT](https://stacks.math.columbia.edu/tag/05RT)
+* [Stacks, Tag 0A70](https://stacks.math.columbia.edu/tag/0A70)
 -/
 
 @[expose] public noncomputable section
@@ -39,12 +42,6 @@ private local instance (T : Scheme.{u}) :
 attribute [local instance] scalarReductionRestrictionLimits scalarReductionRestrictionColimits
 
 /-- Invertibility on K-injective representatives extends to every derived object.
-Source: Stacks Tags 05RT and 0A70; naturality of the derived trace and essential
-surjectivity of the K-injective localization model.
-
-Proof: represent the object by a K-injective complex and transport the component
-along the representing isomorphism using naturality. Isomorphisms are preserved by
-functors and canceled in the resulting conjugation equation.
 -/
 theorem reductionCoinductionTrace_isIso_of_KInjective
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]

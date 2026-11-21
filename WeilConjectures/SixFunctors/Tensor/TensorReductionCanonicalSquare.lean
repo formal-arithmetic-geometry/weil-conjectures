@@ -12,7 +12,11 @@ import WeilConjectures.SixFunctors.Tensor.TensorReductionCanonicalPresentation
 
 /-! # Canonical representative square for coherent reduction tensor
 
-Source: Stacks 07A4, 07A6 and 0941.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -104,9 +108,7 @@ attribute [local irreducible] coefficientSequenceRestriction scalarReductionExte
 attribute [local implicit_reducible] pullbackTensorReductionEvaluationComplex
 
 /-- The normalized reduction tensor square admits a representative map before
-selecting the uniquely assembled strict map.
-
-Source: Stacks 07A4 and 07A6; transport of the simultaneous representative normalization. -/
+selecting the uniquely assembled strict map. -/
 theorem tensorReductionCanonicalSquare_exists (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory)
     (hT : integralOperationsGoodComplex l E W

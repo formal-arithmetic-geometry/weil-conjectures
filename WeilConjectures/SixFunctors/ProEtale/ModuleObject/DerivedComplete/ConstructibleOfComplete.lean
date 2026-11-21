@@ -20,26 +20,7 @@ and `X` a noetherian scheme. Let `M` be an `𝒪_{E,X}`-module object on `X_pro�
 complete when placed in degree `0`. If the cokernel of `ϖ` on `M` is constructible and the kernel
 of `ϖ` on `M` is a quotient of a constructible module, then `M` is constructible
 (`ProEtale.isConstructibleModuleObject_of_derivedCompleteIntegers`; Bhatt–Scholze, *The
-pro-étale topology for schemes*, proof of Proposition 6.8.11; blueprint
-`proposition-integral-constructibility-criterion`).
-
-## Proof
-
-On each stratum of a common stratification, it suffices to prove that a derived complete `M`
-with `M/ϖ` pro-étale locally finitely presented and `M[ϖ]` pro-étale locally finitely generated
-is pro-étale locally finitely presented
-(`ProEtale.isLocallyFinitelyPresented_of_derivedCompleteIntegers`).
-
-* **Generators** (`ProEtale.isLocallyFinitelyGenerated_of_derivedCompleteIntegers`): if `M/ϖ`
-  is pro-étale locally finitely generated, generators of `M/ϖ` lift pro-étale locally to a map
-  `ψ : R^r ⟶ M` with `M = im ψ + ϖ M`; its cokernel is derived complete and `ϖ` acts
-  surjectively on it, so it vanishes by Nakayama's lemma
-  (`ProEtale.epi_of_epi_comp_cokernel_π_padicIntegersCenter`).
-* **Relations** (`ProEtale.isLocallyFinitelyPresented_of_epi_of_derivedCompleteIntegers`): for
-  `φ : R^r ↠ M` with kernel `N`, the snake lemma for `ϖ` on `0 ⟶ N ⟶ R^r ⟶ M ⟶ 0` gives the
-  exact sequence `M[ϖ] ⟶ N/ϖ ⟶ R^r/ϖ ⟶ M/ϖ ⟶ 0`, so `N/ϖ` is pro-étale locally finitely
-  generated. As `N` is derived complete, it is pro-étale locally finitely generated, and `M` is
-  pro-étale locally finitely presented.
+pro-étale topology for schemes*, proof of Proposition 6.8.11).
 -/
 
 @[expose] public section
@@ -346,8 +327,7 @@ theorem isLocallyFinitelyPresented_of_derivedCompleteIntegers {X : Scheme.{u}}
 
 /-! ### Constructibility -/
 
-/-- **Constructibility of derived complete sheaves** (Bhatt–Scholze, proof of
-Proposition 6.8.11; blueprint `proposition-integral-constructibility-criterion`): on a noetherian
+/-- **Constructibility of derived complete sheaves**: on a noetherian
 scheme `X`, let `M` be an `𝒪_{E,X}`-module object which is derived complete when placed in degree
 `0`, such that the cokernel of a uniformizer `ϖ` on `M` is constructible and the kernel of `ϖ` on
 `M` is a quotient of a constructible module object. Then `M` is constructible. -/

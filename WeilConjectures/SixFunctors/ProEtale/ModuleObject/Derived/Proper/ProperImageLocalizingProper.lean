@@ -33,15 +33,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitudeMapDerivedCate
 /-!
 # Proper direct image on localizing categories
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-prop-proper-image-localizing/sk-prop-proper-image-localizing-proper.md and its proof
-(blueprint: proposition-proper-direct-image-extension-zero--1).
-
 The coefficient list uses bundled ring objects, so membership identifies both the
 underlying condensed abelian sheaf and its multiplication. The two auxiliary predicates
-spell out the hypotheses and conclusion of this node, using the recorded ambient
-module-object derived category and localizing closure. Coproduct indices have universe
-`u + 2`, exactly the indexing universe in the recorded closure of this ambient category.
+spell out the hypotheses and conclusion of the main statement, using the recorded ambient
+module-object derived category and localizing closure.
+
+## Implementation details
+
+Coproduct indices have universe `u + 2`, exactly the indexing universe in the recorded closure
+of this ambient category.
 -/
 
 @[expose] public section
@@ -143,9 +143,7 @@ private theorem preservesColimit_on_class
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 /-- The two hypotheses in the proper localizing-image statement: preservation of
-bounded constructible finite-Tor objects and of ambient sums of localizing objects.
-Source: blueprint proposition-proper-direct-image-extension-zero--1, first paragraph
-(blueprint: proposition-proper-direct-image-extension-zero--1). -/
+bounded constructible finite-Tor objects and of ambient sums of localizing objects. -/
 def ProperLocalizingHypotheses
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y) : Prop :=
@@ -174,9 +172,7 @@ theorem preservesColimit_of_properLocalizingHypotheses
 /-- The canonical restriction of the total derived pushforward is triangulated
 and preserves every small coproduct. The subcategory structures are the induced
 ones from the ambient derived categories, and the functor is the standard lift of
-inclusion followed by the total derived pushforward, with its induced shift structure.
-Source: blueprint proposition-proper-direct-image-extension-zero--1, first paragraph
-(blueprint: proposition-proper-direct-image-extension-zero--1). -/
+inclusion followed by the total derived pushforward, with its induced shift structure. -/
 def ProperLocalizingRestriction
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (p : X ⟶ Y) : Prop :=
@@ -196,22 +192,7 @@ def ProperLocalizingRestriction
 /-- Proper direct image restricts to an exact, sum-preserving functor on the
 localizing categories, provided it preserves the generators and ambient sums of
 localizing objects. The coefficient list is exactly the admissible list, with the
-finite ring discrete, finite subfield E, and finite-subextension condensed Qbar.
-
-Source: blueprint proposition-proper-direct-image-extension-zero--1, first paragraph and first
-proof paragraph (blueprint: proposition-proper-direct-image-extension-zero--1).
-
-Proof: lowerStar is additive, so its total right derived functor is triangulated
-(lem-pc-right-derived-functor-triangulated). Inside the source localizing closure,
-take the objects whose image belongs to the target localizing closure. Exactness
-makes this subcategory replete and triangulated. The first hypothesis puts all
-Dctf generators in it. For a family in it, the second hypothesis identifies the
-image of its ambient sum with the sum of its images, so this subcategory is
-closed under sums. Minimality of definition-localizing-subcategory makes it the entire
-source closure. ObjectProperty.isTriangulated_lift gives exactness of the lift
-(situation-conventions). Fullness and closure under sums
-identify subcategory coproducts with ambient coproducts, giving preservation of
-sums by that same lift. Only sums of localizing objects were used. -/
+finite ring discrete, finite subfield E, and finite-subextension condensed Qbar. -/
 theorem proper_image_localizing_proper
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (A : Type) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A]
@@ -546,24 +527,7 @@ end Coefficients
 
 /-- In the standing separated finite-type positive-characteristic field setting,
 both hypotheses of proper_image_localizing_proper hold for every admissible coefficient.
-The list includes Q_ell and Z_ell explicitly, as the E = Q_ell specializations.
-
-Source: blueprint proposition-proper-direct-image-extension-zero--1, coefficient assertions and
-second proof paragraph (blueprint: proposition-proper-direct-image-extension-zero--1).
-
-Proof: for E and Qbar, the schemes are qcqs by lem-weil-pbc-qcqs-over-affine.
-By det-def-localizing-closure-ctf-equals-bc, Dctf equals Dbc, and the rational
-proper base-change theorem proposition-proper-direct-image-constructible-complexes preserves Dbc.
-By corollary-ambient-ind-derived their localizing closure lies in Dic;
-sk-lem-proper-unbounded-window-ii therefore supplies exactly the required sums.
-For finite A, corollary-proper-direct-image-finite-coefficients-localizing gives preservation of
-Dctf and an exact sum-preserving restriction; its sums are ambient by fullness and sum
-closure. No identification Dctf = Dbc for arbitrary finite A is used.
-For O_E, qcqs again gives Dctf = Dbc; proposition-proper-direct-image-constructible-complexes
-preserves Dbc. Properness and quasi-compactness of the target give a uniform
-fibre-dimension bound by lem-fin-finite-type-fibre-dimension-bound, and
-proposition-compactness-proper-direct-image--2 gives preservation of sums on that closure.
-Taking E = Q_ell yields the Q_ell and Z_ell cases. -/
+The list includes Q_ell and Z_ell explicitly, as the E = Q_ell specializations. -/
 theorem proper_image_localizing_proper_coefficients
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (A : Type) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A]

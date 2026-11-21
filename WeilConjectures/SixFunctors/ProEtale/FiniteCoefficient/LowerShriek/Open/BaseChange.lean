@@ -25,8 +25,7 @@ U  --j-->  Z
 
 with `j` and `j'` open immersions, i.e. `g' ≫ j = j' ≫ g''`. This file constructs the canonical
 base change map `j'_! ∘ g'^* ⟶ g''^* ∘ j_!` on sheaves for the small pro-étale sites, and proves
-that it is an isomorphism when the square is cartesian (blueprint
-`proposition-extension-zero-restriction-closed-subscheme--11`). This is the pro-étale counterpart of
+that it is an isomorphism when the square is cartesian. This is the pro-étale counterpart of
 `WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare`.
 
 The map is the conjugate, under `j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`, of
@@ -84,9 +83,8 @@ U  --j-->  Z
 the canonical natural transformation `g'^* ⋙ j'_! ⟶ j_! ⋙ g''^*`, i.e. `j'_! g'^* ⟶ g''^* j_!`,
 on sheaves for the small pro-étale sites. It is the conjugate of the base change map
 `ProEtale.baseChangeMap A sq : g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` under the adjunctions
-`j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`. It runs against the direction of
-the map `g^{-1} j_! K ⟶ j'_! g_U^{-1} K` of the blueprint, which is its inverse for a cartesian
-square (`AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekBaseChangeMap`). -/
+`j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`. For a cartesian square it is an
+isomorphism (`AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekBaseChangeMap`). -/
 noncomputable def openImmersionLowerShriekBaseChangeMap (sq : CommSq g' j' j g'') :
     (g')^*[A] ⋙ (j')_!open[A] ⟶ (j)_!open[A] ⋙ (g'')^*[A] :=
   (conjugateEquiv ((openImmersionLowerShriekUpperStarAdjunction A j).comp
@@ -95,15 +93,12 @@ noncomputable def openImmersionLowerShriekBaseChangeMap (sq : CommSq g' j' j g''
       (openImmersionLowerShriekUpperStarAdjunction A j'))).symm
     (ProEtale.baseChangeMap A sq)
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--11`: Pro-etale
-extension-by-zero base change.
-
-**Base change for the pro-étale extension by zero along a cartesian square**: if the square
+/-- **Base change for the pro-étale extension by zero along a cartesian square**: if the square
 `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions is cartesian, the base change map
 `j'_! g'^* ⟶ g''^* j_!` on pro-étale sheaves is an isomorphism, natural in the sheaf, being the
 conjugate of the isomorphism `ProEtale.baseChangeMap A hsq.toCommSq` of weakly étale base
-change. Its inverse is the canonical map `g''^{-1} j_! K ⟶ j'_! g'^{-1} K` of the blueprint; for
-complexes see `AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso`. -/
+change. For complexes see
+`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso`. -/
 lemma isIso_openImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :
     IsIso (openImmersionLowerShriekBaseChangeMap A hsq.toCommSq) :=
   have := ProEtale.isIso_baseChangeMap_of_isPullback A hsq
@@ -120,7 +115,7 @@ noncomputable def openImmersionLowerShriekBaseChangeIso (hsq : IsPullback g' j' 
 with `j`, `j'` open immersions, the isomorphism `D(j'_!) D(g'^*) ≅ D(g''^*) D(j_!)` of functors
 `D(U_proét) ⥤ D(Z'_proét)` induced degreewise by
 `AlgebraicGeometry.ProEtale.openImmersionLowerShriekBaseChangeIso`, all four functors being
-exact (blueprint `proposition-extension-zero-restriction-closed-subscheme--11`). -/
+exact. -/
 noncomputable def derivedOpenImmersionLowerShriekBaseChangeIso (hsq : IsPullback g' j' j g'') :
     D((g')^*[A]) ⋙ D((j')_!open[A]) ≅ D((j)_!open[A]) ⋙ D((g'')^*[A]) :=
   Functor.mapDerivedCategoryCompIso _ _ ≪≫

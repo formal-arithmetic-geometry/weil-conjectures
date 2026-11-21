@@ -14,6 +14,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 This is the first half of the representative diagram, before using the two factor
 scalar equations and the assumed derived tensor square.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YU and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -65,14 +69,7 @@ attribute [local irreducible] coefficientInternalScalarComplex
   internalScalarTensorComparison
 
 -- Compare the native totalization and localization morphisms.
-/-- Identify the scalar tensor representative's left path after comparison.
-Source: Stacks Project, Cohomology on Sites, Tags 06YU and 07A4.
-Use the scalar complex comparison only on P tensor Q. Normalize qTensor on both
-reconstructed pairs and apply naturality of the scalar counit. The totalized
-ordinary square changes scalar extension before tensor into the tensor of the
-factor scalar comparisons. The internal derived counit square and naturality of
-tensorComparison and qTensor identify the resulting localized path. This proves
-the displayed path identity, without the factor scalar equations or htensor. -/
+/-- Identify the scalar tensor representative's left path after comparison. -/
 theorem coefficientScalarTensorRepresentative_leftPath
     (Z : Scheme.{u}) (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

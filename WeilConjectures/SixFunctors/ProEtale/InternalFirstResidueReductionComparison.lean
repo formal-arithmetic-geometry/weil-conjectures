@@ -14,7 +14,10 @@ import WeilConjectures.SixFunctors.ProEtale.InternalFirstResidueOrdinaryComparis
 
 /-! # The common first quotient in the internal coefficient presentation
 
-Source: integral-models proof (1)--(2), Stacks Tags 099L and 08FZ.
+## References
+
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
 -/
 
 @[expose] public noncomputable section
@@ -165,29 +168,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
 /-- The two first derived residue functors are naturally isomorphic after a residue
-coefficient isomorphism. There is no finiteness condition on the scheme or on the input complex.
-Source: integral-models proof (1)--(2), Stacks Tags 099L and 08FZ.
-
-Proof: put A = O_E and k = A/(pi). The constant-to-continuous map on k is an
-isomorphism: a continuous function to the finite discrete ring k is constant on the
-finite clopen cover by its fibres; equality of two constants is also detected on this
-cover, including the empty cover. Sheafification therefore identifies both ring objects,
-with their pointwise operations. Use the inverse of this map for e. The square of
-constant-to-continuous maps for A and k commutes by evaluation on constant sections.
-The integral map is flat and induces the common quotient isomorphism, by the integral
-constant completion theorem. On a flat-term K-flat representative P, restricting P
-along this flat map leaves a K-flat complex: tensoring with an acyclic A-complex is
-identified with tensoring P with its exact extension to the continuous ring. The
-common-quotient tensor comparison sends s tensor p to s tensor p and is invertible,
-as follows either from the quotient isomorphism and flatness or the normalized
-finite-reduction comparison in integral_constant_completion. Exact section-action and
-small-site equivalences carry that comparison back to internal modules; the inverse
-pointComparison reconciles the two equal integral point presentations. All maps are
-natural in P and commute with differentials and quasi-isomorphisms. The universal
-property of localization gives the displayed natural isomorphism for unbounded derived
-categories. No choice of a complete representative, cohomological bound, or
-constructible local model enters this construction. The empty scheme and zero complex
-satisfy the same tensor identities. -/
+coefficient isomorphism. There is no finiteness condition on the scheme or on the input complex. -/
 theorem internal_first_residue_reduction_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :

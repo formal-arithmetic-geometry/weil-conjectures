@@ -14,7 +14,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Scalar.ScalarSi
 
 /-! # Lisse finite-projective étale sheaves have local scalar models
 
-Source: blueprint scalar-six-ctf (1), finite-projective local models.
+## References
+
+* [Stacks, Tag 00NX](https://stacks.math.columbia.edu/tag/00NX)
+* [Stacks, Tag 099Y](https://stacks.math.columbia.edu/tag/099Y)
 -/
 
 @[expose] public noncomputable section
@@ -36,21 +39,7 @@ variable (A : Type) [CommRing A] [TopologicalSpace A] [IsTopologicalRing A]
 
 /-- Realization of a lisse finite-projective étale sheaf is locally perfect over the
 specified condensed coefficient ring.
-
-Source: blueprint scalar-six-ctf (1), finite projective local models; Stacks 00NX, 099Y.
-
-Proof: Choose an étale trivializing cover for L. On a nonempty member a geometric stalk
-identifies the constant module with a finite projective module; replace empty members
-by zero models. Regard the cover as a pro-étale cover. Each finite projective module
-splits a finite free surjection. The sectionwise constant-ring equivalence identifies
-finite free modules with finite sums of the scalar regular module and lifts the splitting
-by full faithfulness. Restriction along e identifies the regular scalar modules and
-carries this splitting to the Λ scalar category. Put the resulting scalar module in
-degree zero, with bounds [0,0] and rank-zero splittings in every other degree. The
-constant-model and coefficient-pullback comparisons identify its scalar realization with
-the pullback of the realized L. Exact functors commute with the single-complex functor,
-so these are the isomorphisms required by IsLocallyPerfectScalarModel. The same proof
-handles the zero ring, empty covers and rank zero. -/
+-/
 theorem isLocallyPerfectScalarModel_finiteScalarRealization (S : Scheme.{u}) [IsNoetherian S]
     (L : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} A)))
     (hL : FlatModelEtaleLisseProjective (ULift.{u + 1} A) L) :

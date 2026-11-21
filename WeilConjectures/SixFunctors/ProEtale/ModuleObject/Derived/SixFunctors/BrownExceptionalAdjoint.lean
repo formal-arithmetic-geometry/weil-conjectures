@@ -23,12 +23,15 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Compactificatio
 /-!
 # Brown exceptional adjoints and compactification independence
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-existence,
-det-sf-existence-brown.proof.md, parts (1)--(3); Stacks Tags 0A8F, 0A8G, 0A8D.
-
 All functors act on the recorded localizing closures in the ordinary derived categories
 of internal modules. Comparisons are normalized by the existing open-adjunction refinement
 map and the K-injective-normalized direct-image compositor.
+
+## References
+
+* [Stacks, Tag 0A8F](https://stacks.math.columbia.edu/tag/0A8F)
+* [Stacks, Tag 0A8G](https://stacks.math.columbia.edu/tag/0A8G)
+* [Stacks, Tag 0A8D](https://stacks.math.columbia.edu/tag/0A8D)
 -/
 
 @[expose] public noncomputable section

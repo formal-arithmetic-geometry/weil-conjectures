@@ -13,7 +13,11 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-! # Coefficient restriction without an invertibility hypothesis
 
-Source: Stacks Project, Tags 00Y0 and 03CO.
+## References
+
+* [Stacks, Tag 00Y0](https://stacks.math.columbia.edu/tag/00Y0)
+* [Stacks, Tag 03CO](https://stacks.math.columbia.edu/tag/03CO)
+* [Stacks, Tag 03DH](https://stacks.math.columbia.edu/tag/03DH)
 -/
 
 @[expose] public noncomputable section
@@ -164,18 +168,7 @@ private theorem restriction_exact {T : Scheme.{t}} (U : T.Opens)
   exact ⟨inferInstance, inferInstance, Functor.preservesFiniteColimits_of_preservesHomology F⟩
 
 /-- Canonical finite and completed coefficient comparisons, with exact module
-restriction, require no invertibility of the coefficient prime on the scheme.
-
-Source: Stacks Project, Tags 00Y0, 03CO and 03DH.
-Proof: composition into an open subscheme is continuous and cocontinuous, so its
-precomposition commutes with sheafification. Apply that comparison to each constant
-finite quotient ring; the sheafification units give the constant-section normalization.
-Naturality in the quotient homomorphisms gives all transition squares. Precomposition
-preserves sectionwise limits, so the inverse limit of the finite comparisons gives the
-completion comparison and its projection squares. The underlying abelian-sheaf functor
-of module restriction is the same precomposition, even after scalar transport. It
-preserves kernels and locally surjective maps, hence is additive and exact. This applies
-to the completed ring and every finite quotient, including empty opens. -/
+restriction, require no invertibility of the coefficient prime on the scheme. -/
 theorem sf_clopen_coefficient_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (T : Scheme.{t}) (U : T.Opens) :

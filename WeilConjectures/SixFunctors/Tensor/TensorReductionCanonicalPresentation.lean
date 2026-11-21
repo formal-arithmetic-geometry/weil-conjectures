@@ -13,7 +13,11 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Strict adjunction-normalized reduction presentations
 
-Source: Stacks 07A4, 07A6 and 0941.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -154,14 +158,7 @@ attribute [local implicit_reducible] pullbackTensorReductionEvaluationComplex
 attribute [local irreducible] coefficientScalarTensorIso coefficientEvaluationTensorIso
 
 /-- A strict ordinary quotient-unit presentation is canonically isomorphic to ordinary
-reduction, and its localization agrees with the fixed whole-system reduction model.
-
-Source: Stacks 07A4, 07A6 and 0941. Transpose the retained ordinary-limit map through
-ordinary reduction/limit adjunction. Its finite projections identify its evaluations
-with the inverse evaluation comparisons followed by the representative identifications.
-These evaluations are isomorphisms, so sectionwise detection gives a chain isomorphism.
-Naturality of the derived-limit unit and injectivity of the derived adjunction then
-identify its localization with the prescribed representative isomorphism. -/
+reduction, and its localization agrees with the fixed whole-system reduction model. -/
 theorem tensorReductionCanonicalPresentation (W : Scheme.{u})
     (P : (integralOperationsGoodComplex l E W).FullSubcategory)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ)

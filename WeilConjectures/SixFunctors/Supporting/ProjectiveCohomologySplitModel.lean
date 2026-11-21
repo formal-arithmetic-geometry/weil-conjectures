@@ -30,12 +30,19 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Finite free cohomology and projective split models
 
-Source: Stacks Project, proetale.tex, Tag 09C3, generator lifting in the proof of
-lemma-local-structure-constructible-complex; derived.tex, Tag 064B.
+Finite free complexes with zero differential, and the bijection between derived arrows out of a
+shifted finite free sheaf and its generator sections in cohomology.
+
+## Implementation details
 
 The zero-differential model and its summand inclusions are explicit constructions.
 The cohomology map and its generator-section map use the canonical single-complex
 and localization comparisons, so the asserted bijection has a specified forward map.
+
+## References
+
+* [Stacks, Tag 064B](https://stacks.math.columbia.edu/tag/064B)
+* [Stacks, Tag 09C3](https://stacks.math.columbia.edu/tag/09C3)
 -/
 
 @[expose] public noncomputable section
@@ -52,22 +59,19 @@ namespace WeilConjectures
 variable {U : Scheme.{u}}
     (C : Sheaf (Scheme.ProEt.topology U) CommRingCat.{max (u + 1) v})
 
-/-- The coefficient ring sheaf, forgetting only commutativity.
-Source: Stacks 09C3, module sheaves over the coefficient sheaf. -/
+/-- The coefficient ring sheaf, forgetting only commutativity. -/
 def sfSplitRings : Sheaf (Scheme.ProEt.topology U) RingCat.{max (u + 1) v} :=
   (sheafCompose (Scheme.ProEt.topology U)
     (forget₂ CommRingCat.{max (u + 1) v} RingCat.{max (u + 1) v})).obj C
 
-/-- The prescribed zero-differential complex: finite free terms in `[a,b]`, zero elsewhere.
-Source: Stacks 09C3, simultaneous generator lifting in the proof. -/
+/-- The prescribed zero-differential complex: finite free terms in `[a,b]`, zero elsewhere. -/
 def sfSplitComplex (a b : ℤ) (r : ℤ → ℕ) :
     CochainComplex (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)) ℤ where
   X q := if a ≤ q ∧ q ≤ b then
     SheafOfModules.free (R := sfSplitRings.{u, v} C) (ULift.{max (u + 1) v} (Fin (r q))) else 0
   d _ _ := 0
 
-/-- The actual inclusion of the degree-`q` summand in the zero-differential model.
-Source: Stacks 09C3, identification of the lifted top cell. -/
+/-- The actual inclusion of the degree-`q` summand in the zero-differential model. -/
 def sfSplitCell (a b : ℤ) (r : ℤ → ℕ) (q : ℤ) (hq : a ≤ q ∧ q ≤ b) :
     (CochainComplex.singleFunctor
       (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)) q).obj
@@ -80,8 +84,7 @@ def sfSplitCell (a b : ℤ) (r : ℤ → ℕ) (q : ℤ) (hq : a ≤ q ∧ q ≤ 
 variable [HasDerivedCategory.{w} (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C))]
 
 /-- The cohomology map of an arrow from a finite free sheaf placed in degree `q`.
-The single complex in degree `q` is the model for `C^r[-q]`.
-Source: Stacks 064B and the generator calculation in Stacks 09C3. -/
+The single complex in degree `q` is the model for `C^r[-q]`. -/
 def sfFreeCohomologyMap (q : ℤ) (r : ℕ)
     {A : DerivedCategory (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C))}
     (f : DerivedCategory.Q.obj
@@ -95,8 +98,7 @@ def sfFreeCohomologyMap (q : ℤ) (r : ℕ)
     (DerivedCategory.homologyFunctorFactors _ q).inv.app _ ≫
     (DerivedCategory.homologyFunctor _ q).map f
 
-/-- Send a derived arrow to the images of the standard generators in `H^q(A)(U)`.
-Source: Stacks 09C3, lifting the sections `rho(e_s)`, and Stacks 064B. -/
+/-- Send a derived arrow to the images of the standard generators in `H^q(A)(U)`. -/
 def sfShiftedFreeGeneratorMap (q : ℤ) (r : ℕ)
     (A : DerivedCategory (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)))
     (f : DerivedCategory.Q.obj
@@ -297,15 +299,7 @@ private def sfFreeSectionsEquiv
   right_inv s := by simp
 
 /-- Bounded-above projective module complexes represent all derived maps, with equality
-exactly chain homotopy (`f-g = dh+hd` in Mathlib's Homotopy convention).
-Source: Stacks 064B, lemma-morphisms-from-projective-complex.
-
-Proof: Apply lem-sc-bounded-above-projective-kprojective to P and its bound d.
-Then lem-coef-kprojective-derived-hom-bijection identifies homotopy-category maps
-out of P with derived maps. The quotient functor from complexes is full, and
-its fibers are precisely Nonempty (Homotopy f g). Transport along the canonical
-quotient/localization comparison gives the two assertions for Q itself. No enough
-projectives hypothesis and no boundedness on L are required. -/
+exactly chain homotopy (`f-g = dh+hd` in Mathlib's Homotopy convention). -/
 theorem sf_bounded_above_projective_chain_representatives
     (P : CochainComplex (ringedSiteModules.{max (u + 1) v} (sfSplitRings.{u, v} C)) ℤ)
     (d : ℤ) [P.IsStrictlyLE d] [∀ n : ℤ, Projective (P.X n)]
@@ -433,36 +427,7 @@ private theorem sfFreeCohomologyQuasiIsoAt (q : ℤ) (r : ℕ)
 attribute [local irreducible] sfAssembledMap
 
 /-- Prescribed finite free cohomology gives a chain quasi-isomorphism from its split model;
-any derived arrow inducing the top prescribed isomorphism is its top-cell inclusion.
-Source: Stacks 09C3, generator lifting, expanded degreewise; Stacks 064B.
-
-Proof:
-1. The exact forgetful functor to abelian sheaves preserves epimorphisms
-   (situation-conventions). The local-surjectivity criteria for
-   abelian sheaves and set sheaves identify their underlying maps as epimorphisms of
-   set sheaves. The evaluation hypothesis therefore makes module quotients surjective
-   on sections at U; kernels are sectionwise.
-2. A map from a finite free module sheaf is determined by its generator sections at
-   the terminal object U. Lift those sections through any epimorphism. This proves
-   projectivity, including rank zero.
-3. Step 5 lifts each theta to a derived arrow from the single free term. Compose with
-   e.inv and apply step 4 to obtain a representative chain map. Assemble these maps by
-   inverting each actual cell's component in its degree, and put zero outside [a,b].
-   The resulting chain map v restricts to the chosen representative on every cell.
-   Its cohomology maps are exactly theta. The cells are isomorphisms on cohomology in
-   their degrees; outside the interval both cohomologies vanish. Thus v is a quasi-isomorphism.
-4. Bounded-above projective complexes are K-projective by
-   lem-sc-bounded-above-projective-kprojective; their derived arrows are homotopy classes
-   by lem-coef-kprojective-derived-hom-bijection, with no target boundedness requirement.
-5. For a projective single term P[-q], maps into an object in degrees at most q-1
-   vanish. The canonical truncation triangle and its exact Hom sequence therefore
-   identify maps into A with maps into its truncation in degrees at least q. On that
-   truncation the shifted-heart comparison computes maps by H^q, and the truncation
-   projection induces an isomorphism on H^q. The canonical single-object and localization
-   comparisons give precisely sfFreeCohomologyMap. The free-sheaf and terminal-section
-   equivalences give the specified generator bijection. Functoriality proves naturality.
-6. The top cell followed by v induces theta_b. By step 5 any other arrow with that
-   cohomology map is equal to it, giving the stated summand identification. -/
+any derived arrow inducing the top prescribed isomorphism is its top-cell inclusion. -/
 theorem sf_projective_cohomology_split_model
     (hEval : ∀ (F G : Sheaf (Scheme.ProEt.topology U) (Type (max (u + 1) v)))
       (f : F ⟶ G), Epi f →
@@ -550,17 +515,7 @@ theorem sf_projective_cohomology_split_model
     exact (sfFreeCohomologyBijective C hEval b (r b) N).injective
       (hf.trans (hθ b ⟨hab, le_rfl⟩).symm)
 
-/-- The specified generator-section map is bijective, naturally in the derived target.
-Source: Stacks 064B; Stacks 09C3, lifting `rho(e_s)`.
-
-Proof: Steps 1--2 of sf_projective_cohomology_split_model make each finite free term
-projective. Its derived maps are computed by cohomology using the canonical truncation
-triangle, projective-source vanishing, and the shifted-heart comparison as in step 5.
-Transport along the canonical single-object and localization comparisons gives the
-specified cohomology map. The free-sheaf equivalence and evaluation at the terminal
-object identify its values with the prescribed generator sections, proving bijectivity.
-Functoriality of derived cohomology and evaluation on the standard free generators
-proves the naturality equation for all derived arrows. -/
+/-- The specified generator-section map is bijective, naturally in the derived target. -/
 theorem sf_shifted_free_generator_bijective_natural
     (hEval : ∀ (F G : Sheaf (Scheme.ProEt.topology U) (Type (max (u + 1) v)))
       (f : F ⟶ G), Epi f →

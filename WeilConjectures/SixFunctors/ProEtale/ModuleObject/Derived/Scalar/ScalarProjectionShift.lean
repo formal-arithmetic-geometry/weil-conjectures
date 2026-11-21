@@ -64,14 +64,7 @@ private theorem scalarProjectionGeneric_shift
     (T_C := (curriedTensor C).flip) (T_D := (curriedTensor D).flip)
     ((flipFunctor _ _ _).map δ) K
 
-/-- The scalar-first projection commutes with shifts in the coefficient variable.
-Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
-sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md, cone paragraph.
-Identify the generic derived tensor comparison with the native comparison. Its
-first-variable shift compatibility and the shift compatibility of the native derived
-adjunction imply that the right-adjoint projection for the flipped tensor bifunctors
-commutes with shifts. The tensor action of the counit also commutes with shifts.
--/
+/-- The scalar-first projection commutes with shifts in the coefficient variable. -/
 theorem scalarProjection_commShift
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)

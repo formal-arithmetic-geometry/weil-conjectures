@@ -16,8 +16,11 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 /-! # Realization of finite discrete coefficient sheaves and exchange steps
 
-Source: Bhatt--Scholze, Proposition 5.3.2, Lemmas 5.4.1 and 5.4.3;
-Stacks Project, Tag 09AK.
+
+## References
+
+* Bhatt--Scholze, Proposition 5.3.2, Lemmas 5.4.1 and 5.4.3
+* Stacks Project, Tag 09AK
 -/
 
 @[expose] public section
@@ -53,45 +56,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 set_option linter.unusedVariables false in
-/-- Finite discrete realization on constructible sheaves and on the three exchange steps.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3;
-Stacks Project, Tag 09AK.
-
-Proof in words. Use the supplied monoidal constant-ring identification on every
-scheme. Choose the canonical family induced from the point in the application.
-Encode internal modules over the sheafified constant
-ring as module-valued sheaves. Use a single sectionwise encoding on all schemes, so that
-its comparison with the underlying abelian sheaf respects scalar actions and restriction.
-These equivalences are additive and exact. Compose their inverses on derived categories
-with the exact etale-to-pro-etale inverse image in the specified realization functor.
-Its fullness, shift and triangulated structures are proved separately in the realization
-API. Every constructible internal module becomes
-an intrinsically constructible finite coefficient sheaf: transport its finite local
-presentations on its finite stratification. A presentation map between finite free
-constant-ring sheaves is a finite matrix of locally constant B-valued sections.
-Refine its cover simultaneously for these finitely many entries, so the matrix is
-constant. Its cokernel is then the constant sheaf of a finitely presented B-module,
-which is finite because B is finite. Thus the original strata have locally constant
-finite module sheaves as restrictions, including zero cokernels and empty strata.
-Tag 09AK gives its etale sheaf origin, and
-this gives the underived essential-image assertion here. Compatibility with single
-complexes and bounded devissage are proved outside this statement.
-
-For the step comparisons use functorial inverse-image comparison and the bounded below
-qcqs direct-image comparison. All four morphisms of the square are finite type between
-separated finite-type k-schemes, so the direct-image comparisons apply. These comparisons
-are the mates of the same underived adjunction comparisons. The mate unit equation gives
-the first commuting square below; coherent pullback composition and the commutativity of
-sq give the second; the mate counit equation gives the third. The intermediate vertices
-are exactly those in the specified unit--square--counit definitions. The factored
-comparison record also carries the defining factorization equations for the two total
-arrows; these are the internal definition and Etale.baseChange_app followed by map_comp.
-Restrict along the
-fully faithful bounded constructible inclusions using the displayed hypothesis hL.
-The condition ell B = 0 ensures constructible pushforward in this finite-type setting.
-No invertibility of exchange, properness, or Cartesian hypothesis is used. The construction
-also applies to empty schemes and the zero ring. This statement requires only sheaf-level
-origin, not derived origin for a bounded complex. -/
+/-- Finite discrete realization on constructible sheaves and on the three exchange steps. -/
 theorem finiteDiscreteExchange_coefficientRealization [DiscreteTopology B] [Finite B]
     (hB : (ℓ : B) = 0) (sq : CommSq g' f' f g)
     (eR : ∀ T : Scheme.{u},

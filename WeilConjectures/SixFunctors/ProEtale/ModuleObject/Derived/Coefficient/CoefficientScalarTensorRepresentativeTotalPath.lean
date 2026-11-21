@@ -13,6 +13,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 /-! # The localized scalar total tensor path
 
 This normalizes the scalar path using the ordinary signed total tensor square.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YU and 07A4
 -/
 
 @[expose] public noncomputable section
@@ -84,14 +88,7 @@ attribute [local irreducible] coefficientInternalScalarComplex
   internalScalarTensorComparison
 
 -- Compare the scalar and localization paths on the signed total tensor.
-/-- Normalize the scalar path through the localized signed total tensor.
-Source: Stacks Project, Cohomology on Sites, Tags 06YU and 07A4.
-Normalize the reconstructed localization tensor by its defining conjugation.
-Naturality of the scalar counit moves the total comparison past the counit.
-Use the scalar comparison on the single complex P tensor Q, and then the signed
-ordinary scalar tensor square. Naturality of the localization comparison gives
-the displayed path through the internal scalar extension of the total tensor.
-No derived scalar tensor comparison, nor factor scalar equation, is used here. -/
+/-- Normalize the scalar path through the localized signed total tensor. -/
 theorem coefficientScalarTensorRepresentative_totalPath
     (Z : Scheme.{u}) (d : CoefficientScalarTensorRepresentativeBasicData a Z)
     (h : CoefficientScalarTensorRepresentativeHypotheses a Z d)

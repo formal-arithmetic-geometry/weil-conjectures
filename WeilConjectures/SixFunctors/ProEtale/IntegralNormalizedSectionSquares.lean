@@ -75,7 +75,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-! # Restriction squares for a fixed normalized integral section comparison
 
-Source: blueprint integral-criterion-reductions, final interpretation; Stacks 00YV and 03EK.
+## References
+
+* [Stacks, Tag 00YV](https://stacks.math.columbia.edu/tag/00YV)
+* [Stacks, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
 -/
 
 -- After pruning, this module only keeps private declarations.

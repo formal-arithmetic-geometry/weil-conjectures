@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPullCounitC
 
 /-! The normalized middle composite for the residue tensor-pull counit.
 
-Source: Bhatt--Scholze, Remark 6.8.15 and the proof of Lemma 6.5.9(5), p. 51.
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(5), Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -105,19 +107,8 @@ attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCateg
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- The coefficient-adjusted tensor model composite factors through the inverse of
-its X tensor presentation.  This is the middle identity used to normalize the
-full tensor-pull counit.  It is strictly weaker than the target identity: the
-X presentation map is absent from the left side and its inverse is present on
-the right.
-
-The proof expands the exact-F coefficient comparison and the two defining
-left-derived comparison equations.  Naturality of the tensorator and of the
-lax map of `DerivedCategory.Qh` moves the coefficient comparison to the first
-factor; the defining equation for `derivedTensorPresentationIso` then gives the
-presentation counit.  The remaining maps are the displayed homotopy single
-comparison and the homotopy image of the ordinary coefficient isomorphism.
-This is the explicit formal calculation from Remark 6.8.15, with no flatness
-assumption. -/
+its X tensor presentation. This is strictly weaker than
+the full tensor-pull counit identity. -/
 theorem integralResidue_tensorPullCounit_core {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :

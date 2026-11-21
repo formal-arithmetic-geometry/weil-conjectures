@@ -23,7 +23,6 @@ open DiagonalCoefficients
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 /-- This is the first (pushforward) contraction, a strict component of
 `integralKernel_contractions`.
-Source: sk-thm-int-restriction-line.proof.md, paragraph (1).
 The proof transports the corresponding trace/base-change rearrangement and section
 normalization through the canonical integral coefficient reference. -/
 theorem integralKernel_first_contraction

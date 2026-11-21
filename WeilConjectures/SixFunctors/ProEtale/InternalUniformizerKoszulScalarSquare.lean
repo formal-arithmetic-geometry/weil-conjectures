@@ -12,8 +12,9 @@ import WeilConjectures.SixFunctors.ProEtale.InternalUniformizerScalarRealization
 
 /-! # The scalar square for changing a residue generator
 
-Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-finite free calculation; integral-models proof (1).
+## References
+
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
 -/
 
 @[expose] public noncomputable section
@@ -72,28 +73,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The two scalar endomorphisms are related by a change of source basis, with the
 fixed inverse right unitor as the change of target basis. This contains no cone,
-Koszul dual, augmentation, or assertion about a total-tensor summand.
-
-Source: Stacks Project, algebraization.tex, Lemma derived-completion-koszul (0A0E),
-finite free calculation; integral-models proof (1).
-
-Proof in words: the constant uniformizer pi is a non-zero-divisor on the constant
-integer sheaf, since its multiplication is monic on the coefficient DVR and exact
-inverse image preserves monomorphisms. The residue kernel is its image. Since a
-also generates that image on each slice, locally a=u*pi and pi=v*a. Cancellation
-of pi gives vu=1, hence u is a unit. The equation a=u*pi determines u uniquely,
-so the local u and their inverses glue to global inverse sections. The prescribed
-point coefficient comparison and section-module equivalence carry d to scalar
-multiplication by pi: this follows on continuous sections from hd, and then by
-naturality of inverse image, restriction, and the section-action equivalence.
-They carry d^(n+1) to pi^(n+1). The right unitor identifies the tensor with O[0]
-with the original complex, and identifies ringedSingletonKoszulPower with a^(n+1).
-Let b be multiplication by u^(-(n+1)) followed by that inverse right unitor.
-It is a chain isomorphism, its inverse being the right unitor followed by u^(n+1).
-The identity pi^(n+1)=u^(-(n+1))*a^(n+1) proves the square degreewise.
-All multiplications commute with differentials. This construction requires neither
-flatness nor boundedness of P. On the empty scheme the unique endomorphism is
-invertible and the same equations hold. -/
+Koszul dual, augmentation, or assertion about a total-tensor summand. -/
 theorem uniformizer_koszul_scalar_square
     (a : ((ring l E X).obj ⋙ forget CommRingCat).sections)
     (ha : ∀ U : Scheme.coefficientProEtaleSiteModel.{u, u} X,

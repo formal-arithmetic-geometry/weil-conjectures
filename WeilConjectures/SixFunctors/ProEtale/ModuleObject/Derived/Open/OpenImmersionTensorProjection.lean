@@ -13,10 +13,6 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-! # open immersion projection formula
-
-Source: the open and closed immersion paragraphs and the derived version of
-`literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/`
-`det-lem-int-tensor-projection.proof.md`.
 -/
 
 @[expose] public section
@@ -122,29 +118,7 @@ private noncomputable def projectionOfInternalHom
       Iso.symm_hom, Category.id_comp, Category.assoc,
       d.homEquiv_symm_naturality_two]
 
-/-- The open immersion case of the relative derived projection formula.
-Source: `det-lem-int-tensor-projection.proof.md`, open immersions and Derived version.
-
-Proof: choose the reduced closed complement of the open image using its vanishing
-ideal. The ambient scheme X is Noetherian, since it is quasi-compact and locally of finite type
-over a field, so the open immersion is quasi-compact. Apply
-`openClosedInternalHomFormulas` to this complementary pair. Write E for extension by
-zero, r for supportPullback on derived categories and R for derived direct image.
-For arbitrary M,N,T the existing adjunctions and the open internal-Hom isomorphism give
-
-Hom(E(M tensor rN), T) = Hom(M tensor rN, rT)
-  = Hom(rN, RHom(M,rT)) = Hom(N, R RHom(M,rT))
-  = Hom(N, RHom(EM,T)) = Hom(EM tensor N,T).
-
-Every equality here is an equivalence of Hom sets. Naturality in T follows from the
-ordinary adjunction naturality and the covariant naturality of the open Hom formula;
-naturality in M follows from the parametrized tensor--Hom adjunction and its
-contravariant naturality; naturality in N is the ordinary left-variable adjunction
-naturality. Yoneda therefore gives an isomorphism natural in M and N. Finally transport
-r to the specified upperStar using supportPullbackIsoUpperStar and
-mapDerivedCategoryNatIso. No finiteness of the complexes or Tor-amplitude is used.
-Empty source or target and zero coefficients are included: the adjunctions and Yoneda
-argument remain valid in the zero categories. -/
+/-- The open immersion case of the relative derived projection formula. -/
 theorem openImmersionTensorProjection
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (k : Type u) [Field k] {S X : Scheme.{u}}

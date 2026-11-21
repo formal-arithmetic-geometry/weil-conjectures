@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
 
 /-! # Trace models on presentations of the projective line
 
-Source: current blueprint, proposition-adjunction-projective-line--1 and
-lemma-cohomology-projective-line-trace. The trace is transported from the normalized finite Kummer
+The trace is transported from the normalized finite Kummer
 splitting. The counit is an actual inverse-projection composite, defined before asserting
 adjunction.
 -/
@@ -27,11 +26,7 @@ open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The proper ordered projection is invertible for finite coefficients on all complexes.
-Source: the proper torsion projection formula, blueprint
-proposition-proper-direct-image-constructible-complexes--9.
-Proof: the ordered map is the proper projection map conjugated by tensor symmetries.
-Each component is invertible; hence so is the natural transformation. -/
+/-- The proper ordered projection is invertible for finite coefficients on all complexes. -/
 theorem isIso_finiteP1Projection
     (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}}
     (q : X ⟶ Y) [IsProper q] (L : DerivedCategoryModule A X) :
@@ -44,9 +39,7 @@ theorem isIso_finiteP1Projection
   exact NatIso.isIso_of_isIso_app _
 
 /-- The normalized splitting trace on a projective-line presentation, transported using
-inverse image along its isomorphism, the adjunction unit, and direct-image composition.
-Source: lemma-cohomology-projective-line-trace and the presentation transport in
-proposition-adjunction-projective-line--1. -/
+inverse image along its isomorphism, the adjunction unit, and direct-image composition. -/
 @[irreducible]
 def presentedFiniteP1Trace
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
@@ -68,8 +61,7 @@ def presentedFiniteP1Trace
     (ordinaryFinitePushforward A (ProjectiveLine Y ↘ Y)).map b.inv ≫ d.trace
 
 /-- The candidate counit for a proper map and a specified finite trace. This is inverse
-ordered projection followed by tensor trace, after the canonical proper coincidence.
-Source: lemma-cohomology-projective-line-trace, its displayed formula for epsilon. -/
+ordered projection followed by tensor trace, after the canonical proper coincidence. -/
 @[irreducible]
 def finiteP1TraceCounit
     (A : Type (u + 1)) [CommRing A] [Finite A] {X Y : Scheme.{u}}
@@ -82,8 +74,7 @@ def finiteP1TraceCounit
       (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} A) q).hom ≫
     inv (ordinaryFiniteProjectionNatTrans A q L) ≫ ordinaryFiniteTensorTrace A Y τ
 
-/-- The inverse-projection counit belonging to the splitting on a presentation.
-Source: proposition-adjunction-projective-line--1, canonical counit. -/
+/-- The inverse-projection counit belonging to the splitting on a presentation. -/
 def presentedFiniteP1Counit
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)
@@ -95,9 +86,7 @@ def presentedFiniteP1Counit
       R(q)_![ModuleCat.{u + 1} A] ⟶ 𝟭 (DerivedCategoryModule A Y) :=
   finiteP1TraceCounit A q _ (presentedFiniteP1Trace A N hA t q e w hY d)
 
-/-- The explicit comparison of the two finite twisted inverse images in a square.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism--6, projective-line
-computation. -/
+/-- The explicit comparison of the two finite twisted inverse images in a square. -/
 def finiteP1TwistedPullbackComparison
     (A : Type (u + 1)) [CommRing A] (N : ℕ) (hA : (N : A) = 0)
     (t : OrdinaryFiniteTwistTransport A N hA)

@@ -16,8 +16,8 @@ For a cartesian square `sq : IsPullback g' f' f g` of separated `k`-schemes of f
 `ℚ̄_ℓ`-sheaves is, through `Rf_! ≅ f_!` and `Rf'_! ≅ f'_!`, the inverse of the extension-by-zero
 exchange morphism `Lg'^* f'_! ⟶ f_! Lg^*`
 (`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_comp_isoOpen`,
-blueprint `def-exchange-projection`: `Ex_!` is represented, for the compactification `f = 𝟙 ∘ f`
-of an open immersion, by the identification `Lg^* f_! ≅ f'_! Lg'^*`).
+`Ex_!` is represented, for the compactification `f = 𝟙 ∘ f` of an open immersion, by the
+identification `Lg^* f_! ≅ f'_! Lg'^*`).
 
 The proof computes `Ex_!` through the trivial compactifications `X ⟶[f] Y ⟶[𝟙] Y` and
 `X' ⟶[f'] Y' ⟶[𝟙] Y'` (`boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_baseChange`): the

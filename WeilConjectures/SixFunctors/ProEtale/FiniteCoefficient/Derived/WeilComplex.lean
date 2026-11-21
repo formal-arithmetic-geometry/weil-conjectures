@@ -24,7 +24,7 @@ and an isomorphism `φ : Lg^* K ≅ K` formed using the derived pullback; a morp
 Weil complexes is a morphism of the underlying complexes commuting with the two `φ`s. These
 form a category with a forgetful functor to `Dctf(X, A)`.
 
-The blueprint takes `X = X₀ ×_{k₀} k̄` the geometric fiber of a scheme `X₀` over a finite field
+Typically `X = X₀ ×_{k₀} k̄` is the geometric fiber of a scheme `X₀` over a finite field
 `k₀` and `g = g_γ = 𝟙 × Spec(γ)` its geometric-Frobenius automorphism, `γ` being the inverse of
 the `#k₀`-power map of `k̄`. This is `AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`,
 and the resulting category is `AlgebraicGeometry.ProEtale.GeometricFiberStrictWeilComplex`.
@@ -64,9 +64,8 @@ lies in `Dctf(X, A)`, `φ` is an isomorphism, and the pairs form a category.
 The Weil structure `φ` is an isomorphism in the ambient derived category `D(X_proét)`, so that
 no stability of `Dctf(X, A)` under `Lg^*` is needed to state the definition.
 
-The blueprint fixes `X₀` separated of finite type over `k₀` as a standing convention; the
-definitions do not use these hypotheses, so they are not imposed.
-
+The definitions do not need `X₀` to be separated of finite type over `k₀`, so these hypotheses are
+not imposed.
 -/
 
 @[expose] public section
@@ -94,15 +93,9 @@ section General
 
 variable {X : Scheme.{u}} (g : X ≅ X)
 
-/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
-
-A *strict Weil complex* on `X` for an automorphism `g` of `X` is a pair `(K, φ)` consisting of
+/-- A *strict Weil complex* on `X` for an automorphism `g` of `X` is a pair `(K, φ)` consisting of
 an object `K` of `Dctf(X, A)` — a bounded constructible pro-étale complex of finite Tor
-amplitude — together with an isomorphism `φ : Lg^* K ≅ K` formed using the derived pullback.
-
-The blueprint takes for `g` the geometric-Frobenius automorphism `g_γ` of the geometric fiber
-of a scheme over a finite field; see `AlgebraicGeometry.ProEtale.GeometricFiberStrictWeilComplex`.
--/
+amplitude — together with an isomorphism `φ : Lg^* K ≅ K` formed using the derived pullback. -/
 structure StrictWeilComplex where
   /-- The underlying object of `Dctf(X, A)`. -/
   obj : Dctf(X, A)
@@ -114,9 +107,7 @@ namespace StrictWeilComplex
 
 variable {A g}
 
-/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
-
-A morphism of strict Weil complexes `(K, φ_K) ⟶ (L, φ_L)` is a morphism `u : K ⟶ L` of the
+/-- A morphism of strict Weil complexes `(K, φ_K) ⟶ (L, φ_L)` is a morphism `u : K ⟶ L` of the
 underlying objects of `Dctf(X, A)` making the square
 
 ```
@@ -136,9 +127,7 @@ structure Hom (K L : StrictWeilComplex A g) where
   comm : K.frobenius.hom ≫ (DerivedCategoryFiniteTor.ι A X).map hom =
     L((g.hom)^*[A]).map ((DerivedCategoryFiniteTor.ι A X).map hom) ≫ L.frobenius.hom
 
-/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
-
-The category of strict Weil complexes: identities and composition are computed on the
+/-- The category of strict Weil complexes: identities and composition are computed on the
 underlying objects of `Dctf(X, A)`, and both are compatible with the Weil structures. -/
 noncomputable instance : Category (StrictWeilComplex A g) where
   Hom K L := Hom K L
@@ -162,9 +151,7 @@ lemma comp_hom {K L M : StrictWeilComplex A g} (f : K ⟶ L) (h : L ⟶ M) :
 
 variable (A g)
 
-/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
-
-The forgetful functor `For` from strict Weil complexes to `Dctf(X, A)`, sending `(K, φ)` to the
+/-- The forgetful functor `For` from strict Weil complexes to `Dctf(X, A)`, sending `(K, φ)` to the
 underlying object `K` and forgetting the Weil structure. -/
 noncomputable def forget : StrictWeilComplex A g ⥤ Dctf(X, A) where
   obj K := K.obj
@@ -181,19 +168,14 @@ end General
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k₀))
 
-/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
-
-Let `X₀` be a scheme over a finite field `k₀`, with structure morphism `f`, and let
+/-- Let `X₀` be a scheme over a finite field `k₀`, with structure morphism `f`, and let
 `X = X₀ ×_{k₀} k̄` be its geometric fiber. The category `D^b_{ctf,W}(X, A)` of strict Weil
-complexes on `X` at the coefficients `A` (in the blueprint, `A = A_{E,n}`): pairs `(K, φ)` with
+complexes on `X` at the coefficients `A`: pairs `(K, φ)` with
 `K ∈ Dctf(X, A)` on the small pro-étale site and `φ : Lg_γ^* K ≅ K`, where
 `g_γ = 𝟙 × Spec(γ)` is the geometric-Frobenius automorphism of `X`
 (`AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`); morphisms are the morphisms of the
 underlying complexes commuting with the `φ`s. It comes with the forgetful functor
-`AlgebraicGeometry.ProEtale.StrictWeilComplex.forget` to `Dctf(X, A)`.
-
-This is a category of pairs over `Dctf(X, A)`, not a triangulated category of Weil sheaves such
-as `AlgebraicGeometry.WeilComplex`. -/
+`AlgebraicGeometry.ProEtale.StrictWeilComplex.forget` to `Dctf(X, A)`. -/
 abbrev GeometricFiberStrictWeilComplex : Type _ :=
   StrictWeilComplex A (f.geometricGaloisFrobenius).asIso
 
@@ -201,9 +183,7 @@ section HomGroups
 
 variable {K : Type u} [Field K] [IsAlgClosed K] {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
-
-The Hom-groups of strict Weil complexes are not Ext groups of Weil sheaves. On a point
+/-- The Hom-groups of strict Weil complexes are not Ext groups of Weil sheaves. On a point
 `X ≅ Spec K`, `K` algebraically closed, a strict Weil complex `M` with underlying complex `Λ`
 and one `N` with underlying complex `Λ[1]` admit no nonzero morphism `M ⟶ N`, whatever their
 Weil structures: the underlying morphism lies in `Hom(Λ, Λ[1]) = H¹(X_proét, Λ) = 0`. In
@@ -219,9 +199,7 @@ lemma StrictWeilComplex.map_hom_eq_zero_of_iso_unit {X : Scheme.{u}} (e : X ≅ 
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀]
 
-/-- Blueprint `definition-weil-structure--2`: Strict Weil complex at finite coefficients.
-
-The Hom-groups of `D^b_{ctf,W}(X, Λ)` are not Ext groups of Weil sheaves: on the geometric
+/-- The Hom-groups of `D^b_{ctf,W}(X, Λ)` are not Ext groups of Weil sheaves: on the geometric
 fiber `X = Spec k̄` of the point `Spec k₀`, there is no nonzero morphism of strict Weil
 complexes from one with underlying complex `Λ` to one with underlying complex `Λ[1]`, so a
 nonsplit Frobenius extension of `Λ` by `Λ` (a Jordan block) gives no nonzero map

@@ -16,10 +16,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 
 /-! # Specified condensed finite-to-Qbar comparison maps
 
-The four comparison constructions are moved verbatim from the module
-`CondensedQbarBaseChangeCompatibility` (in `WeilConjectures.SixFunctors.ProEtale.ModuleObject`),
-so the exchange coherence lemma can use them
-without an import cycle.
+The four comparison constructions used by the exchange coherence lemma for finite-to-Qbar
+coefficient change.
 -/
 
 @[expose] public section
@@ -46,8 +44,7 @@ variable {T U : Scheme.{u}} [T.Over (Spec (.of k))] [U.Over (Spec (.of k))]
   [IsSeparated (U ↘ Spec (.of k))] (h : T ⟶ U) [h.IsOver (Spec (.of k))]
 
 /-- The canonical pullback comparison restricted to bounded constructible objects, in the
-orientation `T_T l_{h,E} ≅ l_{h,Ω} T_U`. Source: ChangeOfCoefficients.lean, `derivedPullIso`;
-TwoColimit.lean, final transport paragraph. -/
+orientation `T_T l_{h,E} ≅ l_{h,Ω} T_U`. -/
 noncomputable def constructibleToQbarPullIso (K : PadicSubfieldConstructible U ℓ E) :
     (constructibleToPadicAlgCl T ℓ E).obj
         ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
@@ -58,9 +55,7 @@ noncomputable def constructibleToQbarPullIso (K : PadicSubfieldConstructible U �
   ObjectProperty.isoMk _
     ((derivedPullIso (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) h).app K.obj)
 
-/-- The specified pushforward comparison restricted to bounded constructible objects.
-Source: ChangeOfCoefficients.lean, `derivedPushHom`, the mate of restriction/pushforward;
-TwoColimit.lean, final transport paragraph. -/
+/-- The specified pushforward comparison restricted to bounded constructible objects. -/
 noncomputable def constructibleToQbarPushHom (K : PadicSubfieldConstructible T ℓ E) :
     (constructibleToPadicAlgCl U ℓ E).obj
         ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E
@@ -90,7 +85,7 @@ variable {X Y X' Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 /-- The specified source comparison `S_K`: first the pull comparison for `g`, then the
-pullback of the push comparison for `f`. Source: TwoColimit.lean, final transport paragraph. -/
+pullback of the push comparison for `f`. -/
 noncomputable def constructibleToQbarSourceHom (K : PadicSubfieldConstructible X ℓ E) :
     (constructibleToPadicAlgCl Y' ℓ E).obj
         ((boundedConstructibleUpperStar (Profinite.continuousMapRingObj E) ℓ
@@ -109,7 +104,7 @@ noncomputable def constructibleToQbarSourceHom (K : PadicSubfieldConstructible X
       (constructibleToQbarPushHom ℓ k E f K)
 
 /-- The specified target comparison `U_K`: first the push comparison for `f'`, then the
-pushforward of the pull comparison for `g'`. Source: TwoColimit.lean, final transport paragraph. -/
+pushforward of the pull comparison for `g'`. -/
 noncomputable def constructibleToQbarTargetHom (K : PadicSubfieldConstructible X ℓ E) :
     (constructibleToPadicAlgCl Y' ℓ E).obj
         ((ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E

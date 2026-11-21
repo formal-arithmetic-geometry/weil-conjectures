@@ -9,7 +9,8 @@ public import WeilConjectures.SixFunctors.ProjectionCoefficientTransport.Rationa
 
 /-! # The two factors of a compactification projection
 
-Source: def-exchange-projection, proper counit mate followed by open projection.
+The projection for a compactification factors as the proper counit mate followed by the open
+projection.
 -/
 
 @[expose] public noncomputable section
@@ -34,16 +35,13 @@ variable {D : FiniteFieldDatum.{u}}
   {T : ∀ X, B X ⥤ B X ⥤ B X} {T' : ∀ X, B' X ⥤ B' X ⥤ B' X}
   {Q : SixFunctorCompactifiedSquare D}
 
-/-- The intermediate object after the proper counit mate, before open projection.
-Source: def-exchange-projection. -/
+/-- The intermediate object after the proper counit mate, before open projection. -/
 def middleObject (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)
     (Q : SixFunctorCompactifiedSquare D) (K : B Q.X) (N : B Q.Y) : B Q.Y :=
   (S.direct Q.p).obj
     (((T Q.Z).obj ((S.openExtension Q.i Q.open_i).obj K)).obj ((S.pull Q.p).obj N))
 
-/-- Identify the intermediate object with the supplied stage coordinates.
-Source: def-exchange-projection.
-Proof: substitute the four recorded functor equalities. -/
+/-- Identify the intermediate object with the supplied stage coordinates. -/
 theorem middle_eq (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
     middleObject S T Q K N = A.stage.properPush.obj
       (((A.stage.tensorBar.obj (A.stage.openExtension.obj K)).obj
@@ -51,8 +49,7 @@ theorem middle_eq (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
   rw [A.properPush, A.tensorBar, A.openExtension, A.properPull]
   rfl
 
-/-- Support identification followed by the proper counit projection mate.
-Source: def-exchange-projection. -/
+/-- Support identification followed by the proper counit projection mate. -/
 def properFactor (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
     ((T Q.Y).obj ((S.support Q.f Q.compactification).obj K)).obj N ⟶
       middleObject S T Q K N :=
@@ -62,8 +59,7 @@ def properFactor (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
       A.stage.tensorPullback.hom).app (A.stage.openExtension.obj K)).app N ≫
     eqToHom (middle_eq A K N).symm
 
-/-- Proper image of open projection, followed by inverse support identification.
-Source: def-exchange-projection. -/
+/-- Proper image of open projection, followed by inverse support identification. -/
 def openFactor (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
     middleObject S T Q K N ⟶
       (S.support Q.f Q.compactification).obj
@@ -74,10 +70,7 @@ def openFactor (A : SixFunctorExchangeData S T Q) (K : B Q.X) (N : B Q.Y) :
       (((A.stage.tensorX.obj K).obj (A.stage.pull.obj N))) ≫
     eqToHom (by rw [A.tensorX, A.pull, A.compactSupport])
 
-/-- The specified projection is exactly the composite of these two factors.
-Source: def-exchange-projection.
-Proof: evaluate the supplied bifunctor composite. The two transports at the
-intermediate object cancel. All other factors retain their original order. -/
+/-- The specified projection is exactly the composite of these two factors. -/
 theorem projection_factorization (A : SixFunctorExchangeData S T Q)
     (K : B Q.X) (N : B Q.Y) :
     A.projectionComponent K N = properFactor A K N ≫ openFactor A K N := by
@@ -89,8 +82,7 @@ variable {V : ∀ X, B X ⥤ B' X} (C : SixFunctorCoefficientComparison S S' V)
   (t : ∀ X, Functor.uncurry.obj (T X) ⋙ V X ≅
     (V X).prod (V X) ⋙ Functor.uncurry.obj (T' X))
 
-/-- The coefficient comparison at the intermediate proper-image object.
-Source: thm-sf-pf-field.proof.md, Compatibility. -/
+/-- The coefficient comparison at the intermediate proper-image object. -/
 def middle (Q : SixFunctorCompactifiedSquare D) (K : B Q.X) (N : B Q.Y) :
     (V Q.Y).obj (middleObject S T Q K N) ≅
       middleObject S' T' Q ((V Q.X).obj K) ((V Q.Y).obj N) :=
@@ -101,10 +93,7 @@ def middle (Q : SixFunctorCompactifiedSquare D) (K : B Q.X) (N : B Q.Y) :
           (Iso.prod ((C.openExtension Q.i Q.open_i).app K)
             ((C.directAdjunction Q.p).left.app N)))
 
-/-- Paste the two factor squares to preserve the specified projection component.
-Source: thm-sf-pf-field.proof.md, Compatibility.
-Proof: expand the proved factorization, apply functoriality, substitute first the
-open and then the proper factor square, and recombine the two target factors. -/
+/-- Paste the two factor squares to preserve the specified projection component. -/
 theorem projection_preserved_of_factors
     (A : SixFunctorExchangeData S T Q) (A' : SixFunctorExchangeData S' T' Q)
     (K : B Q.X) (N : B Q.Y)

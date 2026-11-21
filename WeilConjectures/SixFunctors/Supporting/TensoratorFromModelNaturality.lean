@@ -14,11 +14,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace WeilConjectures
 
-/-- Correct a natural tensor model by its unit isomorphism, component by component.
-Source: thm-sf-pf-field.proof.md, Compatibility; naturality of the coefficient-unit maps.
-Proof: assemble the model isomorphisms into a natural isomorphism, compose it with
-its whiskered unit comparison, and take the inverse. Its naturality equation is
-exactly the stated equation after evaluating the two components. -/
+/-- Correct a natural tensor model by its unit isomorphism, component by component. -/
 theorem tensoratorFromModel_naturality
     {A B : Type*} [Category* A] [Category* B]
     (I : A ⥤ B) (R : A × A ⥤ A) (T : B × B ⥤ B)

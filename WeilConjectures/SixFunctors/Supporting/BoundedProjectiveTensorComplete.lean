@@ -117,13 +117,19 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 
 /-! # Canonical completeness of bounded projective sheaf tensors
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Definition 3.4.10 and Proposition 3.5.1;
-Stacks Project, Tags 099M and 0941.
-
 The completion and its quotient augmentation are the existing global-site specialization
 of `IntegralOnSlice`. Finite products of the coefficient unit are finite sums in this
 abelian category. All splittings are morphisms of module sheaves.
+
+## References
+
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.5, pp. 49--50,
+  Definition 3.4.10 and Proposition 3.5.1
+* [Stacks, Tag 099M](https://stacks.math.columbia.edu/tag/099M)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 06YQ](https://stacks.math.columbia.edu/tag/06YQ)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -322,49 +328,7 @@ private theorem finiteRetract_flat
 end FlatRetracts
 
 /-- The canonical derived quotient completion fixes bounded complexes of finite-free
-sheaf retracts and their ordinary total tensor, including its derived representative.
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50; Stacks, Tags 099M, 0941 and 06YQ.
-
-Proof:
-1. Tensor the specified inclusions and retractions with any module sheaf. The resulting
-   functor is a retract of a finite sum of identities, so is exact. Tensoring two
-   splittings gives a splitting off rank r*s; finite sums of these splittings give the
-   total tensor's splittings. Support intervals [a,b] and [c,d] add to [a+c,b+d]. The
-   Koszul signs make the square of the total differential zero. This uses
-   lem-weil-pbc-independent-sheaf-tensor-colimits and def-pc-flat-sheaf-modules.
-2. Apply lem-weil-pbc-independent-bounded-flat-kflat to P, Q and their total tensor.
-   The representative comparison of lem-weil-pbc-site-derived-tensor-descent identifies
-   the latter with the ordinary derived tensor.
-3. Before deriving, termwise quotient tensor and restriction preserve homotopies,
-   shifts and cones. Use lem-pc-tensor-mapping-cone-iso and lem-pe-roos-cone-calculus.
-   On Roos coordinates a degree -1 homotopy h acts as (hv,-hu), which verifies the
-   homotopy identity against d(v,u)=(dv,-du-(1-s)v).
-4. Resolve by lem-pc-kflat-resolution. Quotient tensor inverts good quasi-isomorphisms
-   by lem-pur-derived-change-of-rings, and Roos does so by lem-pe-roos-cone-calculus.
-   Apply lem-pur-left-derived-from-kflat-class: the descended completion is additive
-   and triangulated. Lem-pe-kflat-scalar-tower-realization identifies its entire strict
-   tower, including the quotient maps. Descend the augmentation (quotients,0) using
-   lem-weil-pbc-localization-universal-property.
-5. The signed cone and shift comparisons preserve this augmentation. Every derived
-   triangle comes from a good cone triangle: use lem-pc-right-fraction-representation,
-   resolve the roof's middle term, and use lem-pc-tensor-mapping-cone-iso and
-   lem-pur-quasi-iso-cone-acyclic for closure of good complexes under cones. Hence the
-   unit commutes with shifts and gives triangle morphisms; lem-sf-triangle-morphism-iso
-   gives two-out-of-three for its invertibility.
-6. For the unit in degree zero, the actual quotient maps are the ordinary limit cone
-   by lem-sf-completed-free-cell-ordinary-limit, rank one and degree zero. Its auxiliary
-   finite-field datum may have any characteristic different from l, with no condition
-   on T. Lem-weil-proetale-surjective-tower-derived-limit identifies its kernel inclusion
-   with the mapping-fibre augmentation (quotients,0). This proves invertibility at the
-   coefficient unit. Additivity and shifts give the same for finite sums in any degree.
-7. Naturality passes invertibility to a retract: for i:F -> B^r and p:B^r -> F, an
-   inverse is C(i) followed by the inverse free unit and p. Both composites are identities
-   by naturality and i followed by p = identity.
-8. Descend through the brutal truncations of a bounded complex. The degreewise split
-   sequence from truncation at m+1 to truncation at m to P^m[-m] gives a triangle by
-   lem-weil-pbc-complex-ses-triangle. Start above the upper bound and use step 5 and
-   step 7 at each degree. Apply this to P and to the bounded total tensor of step 1.
-   Zero ranks, the zero complex and arbitrary sheaf-linear differentials are included. -/
+sheaf retracts and their ordinary total tensor, including its derived representative. -/
 theorem bounded_projective_tensor_complete
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

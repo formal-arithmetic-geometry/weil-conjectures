@@ -25,7 +25,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The lax monoidal structure on module direct image induced by its strong monoidal
-left adjoint. Source: monoidal adjunction, latest blueprint `prop-kernel-lisse.proof.md`. -/
+left adjoint. -/
 @[instance_reducible]
 def moduleLowerStarMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (lowerStar Λ f).LaxMonoidal :=
@@ -33,8 +33,7 @@ def moduleLowerStarMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 attribute [local instance] moduleLowerStarMonoidal
 
-/-- The canonical module inverse/direct image adjunction is monoidal.
-Source: monoidal-adjunction construction. -/
+/-- The canonical module inverse/direct image adjunction is monoidal. -/
 instance moduleAdjunctionIsMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (upperStarLowerStarAdjunction Λ f).IsMonoidal := by
   change @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
@@ -43,16 +42,7 @@ instance moduleAdjunctionIsMonoidal {X Y : Scheme.{u}} (f : X ⟶ Y) :
   infer_instance
 
 /-- The composition comparison of module direct images is monoidal for their canonical
-lax monoidal structures.
-
-Source: latest blueprint `prop-kernel-lisse.proof.md`, multiplication on the pushforward
-algebra.
-
-Proof. The tensor comparison identity for inverse-image composition makes that natural
-isomorphism monoidal, using the comonoidal criterion for a strong monoidal isomorphism.
-Both adjunctions are monoidal, including the composite adjunction. Conjugating the
-inverse-image comparison gives the direct-image composition comparison, and conjugation
-preserves monoidality by the explicit unit/counit formula. -/
+lax monoidal structures. -/
 theorem moduleLowerStarCompIsMonoidal {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     NatTrans.IsMonoidal (lowerStarComp Λ f g).hom := by
   have : NatTrans.IsMonoidal (upperStarComp Λ f g).hom :=
@@ -66,8 +56,7 @@ theorem moduleLowerStarCompIsMonoidal {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y 
   rw [← conjugateIsoEquiv_apply_hom, conjugateIsoEquiv_upperStarComp] at h
   exact h
 
-/-- Congruence transport of module direct images is monoidal.
-Source: equality transport. -/
+/-- Congruence transport of module direct images is monoidal. -/
 theorem moduleLowerStarCongrIsMonoidal {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
     NatTrans.IsMonoidal (lowerStarCongr Λ h).hom := by
   subst h

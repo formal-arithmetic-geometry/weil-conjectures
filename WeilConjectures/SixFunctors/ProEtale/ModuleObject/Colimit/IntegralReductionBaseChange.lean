@@ -38,8 +38,7 @@ the pullback comparison
 of mates (`CategoryTheory.mateEquiv_app_cube`) shows that the reduction carries the base change
 morphism `Lg^* Rf_* ⟶ Rf'_* Lg'^*` with `𝒪_E`-coefficients to the one with
 `𝒪_E ⧸ ℓⁿ`-coefficients
-(`ProEtale.CondensedRing.boundedConstructibleIntegersModPowReduction_baseChange`; blueprint
-`proposition-compatibility-purity-base-change`, direct images).
+(`ProEtale.CondensedRing.boundedConstructibleIntegersModPowReduction_baseChange`).
 -/
 
 @[expose] public section

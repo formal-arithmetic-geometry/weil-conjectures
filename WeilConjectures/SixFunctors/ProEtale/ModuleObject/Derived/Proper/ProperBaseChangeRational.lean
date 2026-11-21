@@ -63,16 +63,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperBaseChang
 /-!
 # Proper direct image with rational condensed coefficients
 
-Source: blueprint main-20261015, chap-Construction-of-f,
-sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.md, clauses 1--3.
-
-The three coefficient comparisons are the existing derived push mates. Bounded
-constructibility is the recorded ambient internal-module predicate. Base change uses the
-recorded conditional restriction with its preservation proof supplied by the existing
-finiteness-coefficient interface. Projection uses the existing canonical module-object mate.
-The rational cases are expressed by equality of bundled coefficient ring objects.
-This fixes the ring operations as well as the underlying sheaf.
-
 ## Main statements
 
 * `isIso_rationalizationPushHom_boundedBelow`: localization commutes with proper pushforward.
@@ -81,10 +71,19 @@ This fixes the ring operations as well as the underlying sheaf.
 * `properPushforward_boundedConstructible_rational`: preservation of bounded constructibility.
 * `isIso_properBaseChange_boundedConstructible_rational`: the specified exchange components.
 
+## Implementation details
+
+The three coefficient comparisons are the existing derived push mates. Bounded
+constructibility is the recorded ambient internal-module predicate. Base change uses the
+recorded conditional restriction with its preservation proof supplied by the existing
+finiteness-coefficient interface. Projection uses the existing canonical module-object mate.
+The rational cases are expressed by equality of bundled coefficient ring objects.
+This fixes the ring operations as well as the underlying sheaf.
+
 The helper `rationalCoefficientPushforwardPreservation` supplies the existing preservation
 proof by the displayed ring equality; it introduces no preservation assumption.
 
-For compile time the module is split: clauses 1--2 are in
+For compile time the module is split: the pushforward statements are in
 `Derived.Proper.ProperBaseChangeRationalPushforward`,
 proper base change is in
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Proper.ProperBaseChangeRationalExchange`,
@@ -429,20 +428,7 @@ private theorem algcl_projection (F : PadicAlgCl.FiniteIntermediateField ℓ)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The specified proper projection formula is invertible on bounded constructible objects.
-Source: blueprint rational proper direct image, clause 3, projection formula.
-
-Proof: compare integral coefficient presentations by their canonical ring isomorphism,
-transport bounded constructibility, and apply the integral proper projection formula.
-For finite E, localization of bounded constructible complexes is essentially surjective,
-so choose integral models for K and M. Their derived tensor after pullback is again bounded
-constructible. The coefficient/projection square and the two proper rationalization
-comparisons transfer the integral projection isomorphism to E. Naturality transfers it
-along the model isomorphisms. For Qlbar, descend both objects to finite coefficient fields,
-pass to a common finite subextension, and apply the same square with the E-to-Qlbar proper
-push comparisons. This uses integral models of the actual objects, so no induction on
-lattice generators or triangulated two-out-of-three argument is needed.
--/
+/-- The specified proper projection formula is invertible on bounded constructible objects. -/
 theorem isIso_properProjectionMap_boundedConstructible_rational
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))
     [IsCommMonObj Λ.X]

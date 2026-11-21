@@ -187,23 +187,7 @@ private theorem cancel_equivalence_monoidal {A B : Type*} [Category A] [Category
     Functor.isoWhiskerLeft_hom]
   infer_instance
 
-/-- The canonical trivialization of point pullback preserves tensor products.
-Source: the canonical point equivalence and coefficient comparison
-`upperStarFromPointModComp`; latest blueprint,
-realified-kernel proof Steps 1--2.
-
-Proof: write P for pullback from condensed modules and Q for pullback along σ.
-The coefficient sheaf comparison P ⋙ Q ≅ P is strong monoidal: its underlying
-sheaf comparison is the pullback compositor, and extending scalars along its
-coefficient-ring component makes its tensorator the relative tensor comparison.
-To verify this, precompose both tensor maps with the extension-of-scalars unit
-and the balanced tensor-product projection. The two maps then become the same
-underlying pullback tensor map, by the monoidality of the sheaf compositor.
-The unit identity is `upperStarFromPointModComp_hom_app_unit`.
-Since P is a monoidal equivalence, equip its chosen inverse with the transported
-monoidal structure. Its counit and the associators and unitors are monoidal.
-The defining composite Q ≅ P⁻¹ ⋙ P ⋙ Q ≅ P⁻¹ ⋙ P ≅ id is therefore monoidal.
-This argument includes the zero coefficient ring and every endomorphism σ. -/
+/-- The canonical trivialization of point pullback preserves tensor products. -/
 theorem point_pullback_trivialization_monoidal {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (σ : Spec (.of Ω) ⟶ Spec (.of Ω)) :
     NatTrans.IsMonoidal (upperStarIsoIdOfIsSepClosed Λ σ).hom := by

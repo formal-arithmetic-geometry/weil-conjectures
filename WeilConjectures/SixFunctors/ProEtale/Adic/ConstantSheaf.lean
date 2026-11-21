@@ -18,7 +18,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # The constant `ℓ`-adic sheaf `ℚ̄_ℓ` on the pro-étale site
 
-Let `ℓ` be a prime and `ℚ̄_ℓ = PadicAlgCl ℓ`. The `ℓ`-adic sheaves of the blueprint are
+Let `ℓ` be a prime and `ℚ̄_ℓ = PadicAlgCl ℓ`. The `ℓ`-adic sheaves considered here are
 modules over the pro-étale sheaf of *continuous* `ℓ`-adic functions, not over the constant
 sheaf of the discrete ring `ℚ̄_ℓ` (Bhatt–Scholze, *The pro-étale topology for schemes*, §6.8).
 For a finite extension `E` of `ℚ_ℓ` this is the sheaf `E_X : U ↦ C(U, E)`; for `ℚ̄_ℓ`, the union

@@ -22,9 +22,6 @@ import WeilConjectures.FourierTransform.FrobeniusFixedPairComparison
 
 /-! # Canonical coefficient comparison and Frobenius pairs
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence.
-
 The data use the recorded raw categories and operations. No completion of their
 object sets and no arbitrary replacement comparison is introduced.
 
@@ -58,8 +55,7 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- Specialization to geometric Frobenius, including finite-stage and algebraically
-closed fixed-pair categories and their actual intertwining morphisms.
-Source: trace-definition final sentence, proof steps 10--11. -/
+closed fixed-pair categories and their actual intertwining morphisms. -/
 structure FdFrobeniusComparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (S : FdCoefficientComparisonSystem.{u} l Ω)
     (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]

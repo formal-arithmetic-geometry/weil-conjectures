@@ -170,8 +170,7 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekRefinement (w : i 
     (boundedConstructibleOpenImmersionLowerShriekRefinementTriangleStep Λ ℓ w).hom ≫
     boundedConstructibleOpenImmersionLowerShriekRefinementCounitStep Λ ℓ
 
-/-- Compatibility required from `chap-The-pro-etale-site` (to be proved there): blueprint
-`lemma-passing-schematic-closure`.
+/-- Compatibility with passing to the schematic closure (to be proved on the pro-étale site).
 
 The restriction comparison `i_! ⟶ i₁_! ⋙ Lh^*` is an isomorphism when the square
 ```
@@ -408,8 +407,7 @@ variable {X Z Z₁ : Over (Spec (.of k))}
   {i : X ⟶ Z} {i₁ : X ⟶ Z₁} {h : Z ⟶ Z₁} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left]
   [IsProper h.left]
 
-/-- Compatibility required from `chap-The-pro-etale-site` (to be proved there): blueprint
-`lemma-passing-schematic-closure`.
+/-- Compatibility with passing to the schematic closure (to be proved on the pro-étale site).
 
 For bounded constructible `E`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
 cartesian square `sq` with `h` proper is an isomorphism: over `X ⊆ Z₁` both sides
@@ -441,8 +439,7 @@ theorem isIso_boundedConstructibleOpenImmersionLowerShriekRefinementPushforward
     NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
   infer_instance
 
-/-- Compatibility required from `chap-The-pro-etale-site` (to be proved there): blueprint
-`lemma-passing-schematic-closure`.
+/-- Compatibility with passing to the schematic closure (to be proved on the pro-étale site).
 
 For bounded constructible `ℚ̄_ℓ`-sheaves, the pushforward comparison `i₁_! ⟶ i_! ⋙ Rh_*` of a
 cartesian square `sq` with `h` proper is an isomorphism. -/

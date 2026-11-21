@@ -18,21 +18,7 @@ Let `p : X ⟶ Y` be proper and smooth, `f : V ⟶ X` a pro-étale cover and `c`
 the constant sheaf `S_V`, defining a pro-étale locally constant sheaf of sets `F_c` on `X`
 (`AlgebraicGeometry.IsDescentCocycle`). If `F_c` has a section over every regular Noetherian
 `X`-scheme, then every point `y` of `Y` has an affine étale neighbourhood `U` such that `F_c` has
-a section over `X ×_Y U` (`AlgebraicGeometry.exists_etale_isTwistedSection_of_isProper`,
-blueprint `proposition-proper-base-change-degree-zero`).
-
-The proof follows proper base change in degree zero:
-1. over a strictly henselian local ring `A`, a section of `F_c` over the closed geometric fibre
-   `Z` of a proper `P ⟶ Spec A` extends to `P`
-   (`AlgebraicGeometry.exists_isTwistedSection_of_geometricFibre`): the sections of the sheaf
-   `ℤ[F_c]` of free abelian groups over `P` and `Z` agree
-   (`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_geometricFibre`), and the locus
-   where the extension of `[σ_Z]` is a basis vector is open and closed and descends to a closed
-   subset of `P` containing the closed fibre, hence everything, `P ⟶ Spec A` being closed;
-2. a section over the base change `X ×_Y Spec 𝒪^{sh}_{Y,s}` to the strict localization comes
-   from a section over some `X ×_Y U` for an affine étale neighbourhood `U` of `s`
-   (`AlgebraicGeometry.exists_etale_isTwistedSection_of_strictLocalization`), the base change
-   being the limit of the `X ×_Y U`.
+a section over `X ×_Y U` (`AlgebraicGeometry.exists_etale_isTwistedSection_of_isProper`).
 -/
 
 @[expose] public section

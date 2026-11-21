@@ -13,26 +13,14 @@ public import WeilConjectures.Topology.ProfiniteCondensedRing
 
 /-! # Coherence of native condensed derived pullback comparisons
 
-Source: literature/blueprint/latest/blueprint/sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, paragraphs 2–3.
-
 The native compositor, its associativity and unit laws, and its tensor and coefficient-unit
 compatibilities already exist upstream. This module proves the remaining explicit square
 unit and pasting equations, using those same native comparisons on the unbounded categories.
-The upstream square comparison has the reverse orientation from the square in the node;
+
+## Implementation details
+
+The upstream square comparison has the reverse orientation from the square used here;
 its inverse is the comparison in that orientation, by `pullbackSquareComparison_flip`.
-
-Expand a square as inverse compositor, equality transport and compositor. The compositor's
-coefficient-unit equation proves the square's coefficient-unit equation. Its two unit laws
-prove the identity-square equation. For horizontal pasting, precompose with the lower boundary
-compositor, use associativity, then `map_pullbackSquareComparison_hom_app` and
-`pullbackSquareComparison_hom_app_obj`, and cancel the interior compositors. Vertical pasting
-is horizontal pasting for the transposed squares, inverted using the flip equation.
-
-The public imports also supply the other clauses of the node: compositor associativity and
-unit laws, tensor and coefficient-unit compatibility, the normalized conjugate direct-image
-compositor, and square tensor and cube coherence. These native results make the longer
-section-action and resolution-transport proof route unnecessary here.
 -/
 
 @[expose] public section
@@ -67,15 +55,8 @@ private theorem paste_horizontal_aux {C : Type*} [Category C]
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 -- Instantiating the native coherence equations unifies large derived pullback objects.
-/-- Horizontal pasting of scheme squares gives the pasted native pullback comparison.
-
-Source: the cited blueprint proof, paragraphs 2–3.
-Proof: expand all three square comparisons as inverse compositor, equality transport,
-and compositor. The associativity equation `leftDerivedUpperStarComp_assoc_app` identifies
-the two three-edge expansions. Naturality moves equality transport past a compositor.
-The two expansions through the common middle vertical edge cancel. The remaining two
-boundary compositors are exactly the comparison of the outer square. No square is required
-to be Cartesian, and no edge is required to be invertible. -/
+/-- Horizontal pasting of scheme squares gives the pasted native pullback comparison. No square
+is required to be Cartesian, and no edge is required to be invertible. -/
 theorem pullbackSquareComparison_paste_horizontal
     {A B C A' B' C' : Scheme.{u}} {a : A ⟶ B} {b : B ⟶ C}
     {a' : A' ⟶ B'} {b' : B' ⟶ C'} {u₀ : A' ⟶ A} {v₀ : B' ⟶ B} {w₀ : C' ⟶ C}

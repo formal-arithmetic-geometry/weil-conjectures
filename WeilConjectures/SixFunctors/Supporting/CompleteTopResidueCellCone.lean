@@ -118,9 +118,22 @@ import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-! # A lifted top residue cell and its complete cone
 
-Source: Stacks Project, proetale.tex, Tags 09C2 and 09C3, final induction paragraph;
-derived.tex, Tag 014E.
+Lifting of a prescribed top residue basis to a complete cone, by induction on the Tor interval.
+
+## References
+
+* [Stacks, Tag 09C2](https://stacks.math.columbia.edu/tag/09C2)
+* [Stacks, Tag 09C3](https://stacks.math.columbia.edu/tag/09C3)
+* [Stacks, Tag 014E](https://stacks.math.columbia.edu/tag/014E)
+* [Stacks, Tag 014A](https://stacks.math.columbia.edu/tag/014A)
+* [Stacks, Tag 05QR](https://stacks.math.columbia.edu/tag/05QR)
+* [Stacks, Tag 00W1](https://stacks.math.columbia.edu/tag/00W1)
+* [Stacks, Tag 03DA](https://stacks.math.columbia.edu/tag/03DA)
+* [Stacks, Tag 05RU](https://stacks.math.columbia.edu/tag/05RU)
+* [Stacks, Tag 03CZ](https://stacks.math.columbia.edu/tag/03CZ)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
+
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -142,20 +155,17 @@ attribute [-instance] integralCoefficientAbLocallyBijective integralCoefficientA
   sfResidueDerived sfResidueSliceDerived sfResidueAnySliceDerived
   sfResidueSliceAbSheafify sfResidueSliceAbLocallyBijective sfResidueSliceSmall
 
-/-- The published locally bijective equivalences at the site's module universe.
-Source: Stacks 00W1. -/
+/-- The published locally bijective equivalences at the site's module universe. -/
 instance topCellAbLocallyBijective (Y : Scheme.{u}) :
     (ProEt.topology Y).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} Y
 
-/-- The literal finite zero-differential sum of the indicated single-term complexes.
-Source: Stacks 09C3, split residue model. -/
+/-- The literal finite zero-differential sum of the indicated single-term complexes. -/
 def topCellSplitComplex (C : Type v) [Category.{w} C] [Abelian C]
     (F : ℕ → C) (a b : ℤ) (r : ℤ → ℕ) : CochainComplex C ℤ :=
   ∐ fun q : Set.Icc a b ↦ (HomologicalComplex.single C (.up ℤ) q.val).obj (F (r q.val))
 
-/-- Inclusion in the literal finite split complex, using its finite coproduct.
-Source: Stacks 09C3. -/
+/-- Inclusion in the literal finite split complex, using its finite coproduct. -/
 def topCellSplitInclusion (C : Type v) [Category.{w} C] [Abelian C]
     (F : ℕ → C) (a b : ℤ) (r : ℤ → ℕ) (q : Set.Icc a b) :
     (HomologicalComplex.single C (.up ℤ) q.val).obj (F (r q.val)) ⟶
@@ -166,8 +176,7 @@ def topCellSplitInclusion (C : Type v) [Category.{w} C] [Abelian C]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- Mathlib's abelian category at the explicit completed-coefficient sizes.
-Source: Stacks 03DA. -/
+/-- Mathlib's abelian category at the explicit completed-coefficient sizes. -/
 instance (priority := 3000) topCellSourceAbelian :
     Abelian (scalarReductionSource.{u, u} l E X) :=
   @SheafOfModules.instAbelian X.ProEt inferInstance (ProEt.topology X)
@@ -175,8 +184,7 @@ instance (priority := 3000) topCellSourceAbelian :
     (integralCoefficientAbSheafify.{u, u} X)
     (integralCoefficientAbLocallyBijective.{u, u} X)
 
-/-- Mathlib's abelian category at the explicit residue-coefficient sizes.
-Source: Stacks 03DA. -/
+/-- Mathlib's abelian category at the explicit residue-coefficient sizes. -/
 instance (priority := 3000) topCellTargetAbelian :
     Abelian (scalarReductionTarget.{u, u} l E X 0) :=
   @SheafOfModules.instAbelian X.ProEt inferInstance (ProEt.topology X)
@@ -184,32 +192,27 @@ instance (priority := 3000) topCellTargetAbelian :
     (integralCoefficientAbSheafify.{u, u} X)
     (integralCoefficientAbLocallyBijective.{u, u} X)
 
-/-- Standard localization at the explicit completed-coefficient sizes.
-Source: Stacks 05RU. -/
+/-- Standard localization at the explicit completed-coefficient sizes. -/
 instance (priority := 2000) topCellSourceDerived :
     HasDerivedCategory (scalarReductionSource.{u, u} l E X) :=
   scalarReductionSourceDerived.{u, u} l E X
 
-/-- Standard localization at the explicit residue-coefficient sizes.
-Source: Stacks 05RU. -/
+/-- Standard localization at the explicit residue-coefficient sizes. -/
 instance (priority := 2000) topCellTargetDerived :
     HasDerivedCategory (scalarReductionTarget.{u, u} l E X 0) :=
   scalarReductionTargetDerived.{u, u} l E X 0
 
-/-- Exact restriction, at the specified coefficient sizes.
-Source: Stacks 03CZ. -/
+/-- Exact restriction, at the specified coefficient sizes. -/
 instance (priority := 3000) topCellRestrictionLimits :
     PreservesFiniteLimits (scalarReductionRestriction.{u, u} l E X 0) :=
   scalarReductionRestrictionLimits.{u, u} l E X 0
 
-/-- Exact restriction, at the specified coefficient sizes.
-Source: Stacks 03CZ. -/
+/-- Exact restriction, at the specified coefficient sizes. -/
 instance (priority := 3000) topCellRestrictionColimits :
     PreservesFiniteColimits (scalarReductionRestriction.{u, u} l E X 0) :=
   scalarReductionRestrictionColimits.{u, u} l E X 0
 
-/-- The actual finite free module over the completed coefficient sheaf.
-Source: Stacks 09C3. -/
+/-- The actual finite free module over the completed coefficient sheaf. -/
 abbrev topCellIntegralFree (r : ℕ) : scalarReductionSource.{u, u} l E X :=
   @SheafOfModules.free X.ProEt inferInstance (ProEt.topology X)
     (completedIntegralCoefficientSheafUnrestricted.{u, u} l E X)
@@ -217,8 +220,7 @@ abbrev topCellIntegralFree (r : ℕ) : scalarReductionSource.{u, u} l E X :=
     (integralCoefficientAbLocallyBijective.{u, u} X)
     (ULift.{u + 1} (Fin r))
 
-/-- The actual finite free module over the constant residue ring sheaf.
-Source: Stacks 09C3. -/
+/-- The actual finite free module over the constant residue ring sheaf. -/
 abbrev topCellResidueFree (r : ℕ) : scalarReductionTarget.{u, u} l E X 0 :=
   @SheafOfModules.free X.ProEt inferInstance (ProEt.topology X)
     (integralCoefficientSheaf.{u, u} l E X 0)
@@ -227,8 +229,7 @@ abbrev topCellResidueFree (r : ℕ) : scalarReductionTarget.{u, u} l E X 0 :=
     (ULift.{u + 1} (Fin r))
 
 /-- Coefficient reduction on finite free modules, fixed on every standard generator.
-The restricted residue module has the same underlying global sections.
-Source: Stacks 09C3, quotient of the completed coefficient sheaf. -/
+The restricted residue module has the same underlying global sections. -/
 def topCellFreeQuotient (r : ℕ) : topCellIntegralFree.{u} l E X r ⟶
     (scalarReductionRestriction.{u, u} l E X 0).obj (topCellResidueFree.{u} l E X r) :=
   (@SheafOfModules.freeHomEquiv X.ProEt inferInstance (ProEt.topology X)
@@ -250,8 +251,7 @@ def topCellFreeQuotient (r : ℕ) : topCellIntegralFree.{u} l E X r ⟶
 
 /-- The canonical comparison from the derived reduction of a shifted finite free
 module to its residue free module. It is the adjoint of coefficient reduction,
-using the normalized scalar-extension adjunction and the exact-restriction comparison.
-Source: Stacks 06YY, 09C3. -/
+using the normalized scalar-extension adjunction and the exact-restriction comparison. -/
 def topCellReductionComparison (r : ℕ) (b : ℤ) :
     (scalarReductionDerivedExtension.{u, u} l E X 0).obj
       ((DerivedCategory.singleFunctor (scalarReductionSource.{u, u} l E X) b).obj
@@ -270,14 +270,13 @@ def topCellReductionComparison (r : ℕ) (b : ℤ) :
           (topCellResidueFree.{u} l E X r)))
 
 /-- The split residue model over an integer interval, using the existing single-term
-and coproduct constructions. Source: Stacks 09C3. -/
+and coproduct constructions. -/
 abbrev topCellResidueSplit (a b : ℤ) (r : ℤ → ℕ) :=
   @topCellSplitComplex (scalarReductionTarget.{u, u} l E X 0) inferInstance
     (topCellTargetAbelian.{u} l E X)
     (topCellResidueFree.{u} l E X) a b r
 
-/-- Inclusion of one summand of the literal split residue complex.
-Source: Stacks 09C3. -/
+/-- Inclusion of one summand of the literal split residue complex. -/
 def topCellResidueInclusion (a b : ℤ) (r : ℤ → ℕ) (q : Set.Icc a b) :
     (HomologicalComplex.single (scalarReductionTarget.{u, u} l E X 0)
       (.up ℤ) q.val).obj (topCellResidueFree.{u} l E X (r q.val)) ⟶
@@ -285,8 +284,7 @@ def topCellResidueInclusion (a b : ℤ) (r : ℤ → ℕ) (q : Set.Icc a b) :
   @topCellSplitInclusion (scalarReductionTarget.{u, u} l E X 0) inferInstance
     (topCellTargetAbelian.{u} l E X) (topCellResidueFree.{u} l E X) a b r q
 
-/-- The reduced cell map after the specified free-generator comparison.
-Source: Stacks 09C3. -/
+/-- The reduced cell map after the specified free-generator comparison. -/
 def topCellReducedMap (r : ℕ) (b : ℤ)
     (M : DerivedCategory (scalarReductionSource.{u, u} l E X))
     (e : (scalarReductionDerivedExtension.{u, u} l E X 0).obj
@@ -616,30 +614,7 @@ private theorem topCell_lift_cone
 /-- Lift the prescribed top residue basis, with its complete cone, split residue
 cone model, shortened Tor interval and the singleton-interval and rank-zero cases.
 A single-term complex in degree b is the conventional P[-b]. The identity mapping
-cone on that complex is the identity pair in degrees b-1 and b.
-
-Source: Stacks Project, proetale.tex, Tags 09C2 and 09C3, final induction paragraph;
-derived.tex, Tags 014E, 014A and 05QR.
-
-Proof:
-1. Normalize the ordinary quotient on each free generator. Extension preserves the
-free coproduct, and the shifted free complex is K-flat, so the normalized derived
-adjunction makes the precise comparison in the statement an isomorphism.
-2. Complete residue cohomology bounds and the uniformizer triangle make the top
-reduction epic. Exact terminal evaluation makes the free module projective. The
-projective cohomology lifting argument gives f with its prescribed top reduction.
-3. Complete f to a distinguished triangle. The source is complete, and cone closure
-through the existing intrinsic local completeness criterion makes its cone complete.
-4. Reduce the triangle and apply the prescribed residue cone theorem. Its piecewise
-split complex is canonically the coproduct of singles used here, respecting the
-summand inclusions. Transport the cone decomposition and lower interval model.
-Projectivity makes the top homology map injective, giving the equality for every model.
-5. Exact pro-etale pullback preserves the shortened cohomology interval. Over the
-constant residue field the existing tensor cohomology calculation gives the Tor bound.
-6. For a singleton interval the residue cone vanishes. DVR quotient triangles make
-all higher reductions vanish. Common K-flat roofs compare them with the completion
-tower, whose product and hence limit vanish. Thus L=0 and f is invertible. The empty
-free coproduct gives the rank-zero case; the constructions also allow an empty scheme. -/
+cone on that complex is the identity pair in degrees b-1 and b. -/
 theorem complete_top_residue_cell_cone
     [CompactSpace X]
     (_hweak : ∀ (F G : Sheaf (ProEt.topology X) (Type (u + 1))) (f : F ⟶ G),

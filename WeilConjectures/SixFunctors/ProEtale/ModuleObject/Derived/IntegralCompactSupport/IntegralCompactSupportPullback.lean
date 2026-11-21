@@ -33,22 +33,8 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 variable (k : Type u) [Field k]
-/-- Source: blueprint proposition-construction-independence-rf-shriek steps 2, 3 and 6.
-
-Proof: Standing schemes are qcqs. Specialize localizingClosure_ctf_equals_bc to O_E
-with the identity coefficient-ring isomorphism. Write ht for Dctf = Dbc and he for
-the resulting equality of their localizing closures. Inverse image pulls a finite
-constructible stratification back to one on the source; the finite constant scalar
-models pull back on each stratum. The exact-derived homology comparison then preserves
-bounded constructibility. Flatness is preserved by inverse image, so a bounded flat
-representative of a finite-Tor complex remains a bounded flat representative after
-pullback. This gives the constructible clause of UnboundedLocalizingPullback, by the
-argument of pullback_constructible and pullback_of_constructible in its source module.
-Transport that clause along ht. The total derived pullback is exact and is a left
-adjoint, hence preserves ordinary coproducts. The inverse image of the target localizing
-closure is therefore localizing and contains all source generators; minimality gives
-preservation of the localizing closure. Transport this along he. The argument uses no
-characteristic restriction on k and includes zero objects and empty schemes. -/
+/-- Pullback of bounded constructible generators along a map of finite-type schemes over `k`
+is again a generator, for `O_E` coefficients. -/
 theorem pullback_of_ctf_eq (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {X Y : Spaces k} (v : X ⟶ Y) :

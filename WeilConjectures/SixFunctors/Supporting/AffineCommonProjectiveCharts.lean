@@ -21,11 +21,19 @@ import WeilConjectures.SixFunctors.Supporting.ResidueLisseProjectiveModels
 /-!
 # Common projective charts on an affine weakly contractible scheme
 
-Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
+All restrictions below are ordinary uncompleted derived ringed pullbacks.
 
-All restrictions below are ordinary uncompleted derived ringed pullbacks. Coefficient
-index zero is exponent one. Finite products of the unit module are finite direct sums.
+## Implementation details
+
+Coefficient index zero is exponent one. Finite products of the unit module are finite
+direct sums.
+
+## References
+
+* [Stacks, Tag 09C3](https://stacks.math.columbia.edu/tag/09C3)
+* Bhatt--Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5 and 6.5.8
 -/
+
 
 @[expose] public section
 set_option autoImplicit false
@@ -83,19 +91,7 @@ private theorem residueConstructible (V : Scheme.{u})
 
 /-- Two ordinary restrictions with complete bounded finite lisse residue have
 simultaneous bounded projective sheaf models on a finite clopen cover of an
-already affine weakly contractible scheme.
-
-Source: Stacks Project, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
-
-Proof: the residue quotient is a field. The existing bounded-field Tor lemma
-applies to the given residue cohomology bound and supplies a finite Tor bound
-in the precise all-resolutions convention.
-Finite local models give fixed finite locally constant sheaves and hence
-intrinsic constructibility on the trivial stratification; the finite interval
-bounds the support. Apply the residue-lisse projective-model theorem to each
-ordinary restricted complex. The clopen common-refinement theorem intersects
-the two resulting covers, preserves their bounded projective models, and
-identifies the restrictions with the composite ordinary pullbacks. -/
+already affine weakly contractible scheme. -/
 theorem affine_common_projective_charts
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -9,10 +9,7 @@ public import WeilConjectures.SixFunctors.CompactSupportFiniteProjection.Constru
 public import WeilConjectures.SixFunctors.Rational.RationalProjectionTensorModels
 import Mathlib.Algebra.CharP.CharAndCard
 
-/-! # Shared tensor comparison for rational projection mates
-
-Source: thm-sf-pf-field.proof.md, Compatibility.
--/
+/-! # Shared tensor comparison for rational projection mates -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,8 +35,7 @@ variable {D : FiniteFieldDatum.{u}}
   (t : ∀ X, Functor.uncurry.obj (T X) ⋙ V X ≅
     (V X).prod (V X) ⋙ Functor.uncurry.obj (T' X))
 
-/-- Tensor comparison followed by the pullback comparison in the second slot.
-Source: thm-sf-pf-field.proof.md, Compatibility. -/
+/-- Tensor comparison followed by the pullback comparison in the second slot. -/
 def inner {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
     (V X).obj (((T X).obj K).obj ((S.pull f).obj L)) ≅
       ((T' X).obj ((V X).obj K)).obj ((S'.pull f).obj ((V Y).obj L)) :=
@@ -47,8 +43,7 @@ def inner {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
     (Functor.uncurry.obj (T' X)).mapIso
       (Iso.prod (Iso.refl _) ((C.directAdjunction f).left.app L))
 
-/-- The source endpoint of the localized compact-support projection.
-Source: thm-sf-pf-field.proof.md, Compatibility. -/
+/-- The source endpoint of the localized compact-support projection. -/
 def source {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : B X) (L : B Y) :
     (V Y).obj (((T Y).obj ((S.support f c).obj K)).obj L) ≅
@@ -57,8 +52,7 @@ def source {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (Functor.uncurry.obj (T' Y)).mapIso
       (Iso.prod ((C.supportAdjunction f c).left.app K) (Iso.refl _))
 
-/-- The target endpoint of the localized compact-support projection.
-Source: thm-sf-pf-field.proof.md, Compatibility. -/
+/-- The target endpoint of the localized compact-support projection. -/
 def target {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     (c : Compactification f.hom.left) (K : B X) (L : B Y) :
     (V Y).obj ((S.support f c).obj (((T X).obj K).obj ((S.pull f).obj L))) ≅
@@ -66,8 +60,7 @@ def target {X Y : SixFunctorSpace D} (f : X ⟶ Y)
         (((T' X).obj ((V X).obj K)).obj ((S'.pull f).obj ((V Y).obj L))) :=
   (C.supportAdjunction f c).left.app _ ≪≫ (S'.support f c).mapIso (inner C t f K L)
 
-/-- The proper source endpoint uses the direct-image comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility. -/
+/-- The proper source endpoint uses the direct-image comparison. -/
 def properSource {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
     (V Y).obj (((T Y).obj ((S.direct f).obj K)).obj L) ≅
       ((T' Y).obj ((S'.direct f).obj ((V X).obj K))).obj ((V Y).obj L) :=
@@ -75,8 +68,7 @@ def properSource {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
     (Functor.uncurry.obj (T' Y)).mapIso
       (Iso.prod ((C.directAdjunction f).right.app K) (Iso.refl _))
 
-/-- The proper target endpoint uses the same tensor/pullback comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility. -/
+/-- The proper target endpoint uses the same tensor/pullback comparison. -/
 def properTarget {X Y : SixFunctorSpace D} (f : X ⟶ Y) (K : B X) (L : B Y) :
     (V Y).obj ((S.direct f).obj (((T X).obj K).obj ((S.pull f).obj L))) ≅
       (S'.direct f).obj
@@ -966,15 +958,7 @@ private theorem rationalOpenTensorSquare
 attribute [local irreducible] rationalProjectionTensorComparison
   coordinateTensor coordinateOpen coordinateSupport
 
-/-- The compact-support component square for the canonical tensor comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility...
-
-Proof: expand the compactification projection as the counit mate followed by the
-open projection. Use the unit and counit equations of the coefficient comparison,
-the normalized tensor-pullback comparisons on the integral models, and the
-pure-tensor formula for the canonical localization tensor. Pasting the proper
-and open squares gives the displayed equality; all endpoint maps are the
-specified comparison isomorphisms. -/
+/-- The compact-support component square for the canonical tensor comparison. -/
 theorem rationalProjectionTensorCompatibility_compactSupport
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -1024,14 +1008,7 @@ theorem rationalProjectionTensorCompatibility_compactSupport
     H.rationalization (rationalProjectionTensorComparison H) hp ho K L
   exact hc
 
-/-- The proper counit component square for the canonical tensor comparison.
-Source: thm-sf-pf-field.proof.md, Compatibility...
-
-Proof: expand the proper projection as the right-adjoint projection mate. The
-counit equation for the coefficient comparison and the normalized tensor
-pullback comparison identify its transpose with the localization of the
-integral transpose. Cancel the displayed endpoint isomorphisms and transpose
-back, obtaining the proper square. -/
+/-- The proper counit component square for the canonical tensor comparison. -/
 theorem rationalProjectionTensorCompatibility_proper
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -1071,31 +1048,7 @@ theorem rationalProjectionTensorCompatibility_proper
 
 /-- One normalized tensor comparison carries both the compact-support projection
 and the proper counit mate. This concerns individual arrows only, without assuming
-or asserting any compactification, composition, or pentagon law.
-
-Source: thm-sf-pf-field.proof.md, Compatibility, and the final coherence sentence
-of fix-prop-projection-formula.proof.md.
-
-Proof: use the unchanged integral object formula and pure-tensor morphism formula
-of rationalDerivedTensor_existsUnique. They give a natural tensor comparison with
-identity components on the integral models, independently of a compactification.
-The canonicalRationalPullbackTensor_existsUnique formula identifies the localization
-of each integral proper/open tensor-pullback comparison with the rational one.
-The rationalModelNormalization field makes the prescribed operation comparisons
-identity components on these same models, so these squares use those comparisons.
-Transpose the proper projection under the prescribed pull/direct adjunction.
-The unit and counit equations of H.rationalization identify its transpose with the
-localized integral transpose. For the open projection, transpose under the open
-adjunction, use its unit equation and the open tensor-pullback normalization.
-Invert the resulting equality of the specified open-projection isomorphisms.
-The pullComposition equation identifies the last pullback-composition factor.
-Paste these two squares and use the support factorization normalization to obtain
-the compact-support square below. The proper square is the proper transpose
-calculation alone. All endpoint maps are the displayed operation comparisons.
-The tensor endpoint comparison is constructed from the proved functor equality
-above. Zero objects, empty opens and identity proper maps use the same formulas;
-the proper and compact-support projection components need not be invertible,
-and localization faithfulness is not required. -/
+or asserting any compactification, composition, or pentagon law. -/
 theorem rationalProjectionTensorCompatibility
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]

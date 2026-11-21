@@ -24,8 +24,11 @@ public import WeilConjectures.AlgebraicGeometry.FiniteDiscreteConstructibleKerne
 
 /-! # Kernels of constructible internal modules with finite discrete coefficients
 
-Source: Bhatt--Scholze, Section 5.1 and Lemma 5.4.1, and the noetherian constructible
-Serre theorem. Finite presentations are compared before passing to derived categories.
+Finite presentations are compared before passing to derived categories.
+
+## References
+
+* Bhatt--Scholze, Section 5.1 and Lemma 5.4.1
 -/
 
 @[expose] public section
@@ -255,16 +258,7 @@ private lemma internalComparisonConstructible
       (ModuleCat.{u + 1} (ULift.{u + 1} B)) (S.immersion a)).app F
 
 /-- Constructible internal modules over a finite discrete coefficient ring are closed
-under kernels. Source: Bhatt--Scholze, Section 5.1 and Lemma 5.4.1,
-and the constructible Serre theorem in ConstructibleSheaf/KernelCokernel.lean.
-
-Proof: encode internal modules as ordinary module-valued sheaves. Their local finite
-presentations become finite locally constant sheaves, so the constructible objects descend
-to the etale site. Full faithfulness lifts the given morphism. Its etale kernel is
-constructible because a finite ring is noetherian. Exact comparison and the coefficient
-equivalence identify its image with the original kernel. Conversely, a finite constant
-module has a finite presentation, and encoding preserves finite sums and cokernels.
-Apply this on each stratum to recover internal constructibility of the image kernel. -/
+under kernels. -/
 theorem finiteDiscrete_constructible_kernel
     (B : Type) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
     [DiscreteTopology B] [Finite B] (T : Scheme.{u})

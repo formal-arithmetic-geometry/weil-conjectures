@@ -10,9 +10,6 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Conservative
 
 /-! # Finite-open descent for integral restriction
-
-Source: blueprint main-20261015, sk-thm-int-restriction-glue.proof.md,
-expanded by theorem-f-shriek-ell-adic-coefficients.
 -/
 
 @[expose] public noncomputable section
@@ -64,22 +61,7 @@ private theorem zero_of_open_restrictions
   apply (Mod.forget _).map_injective
   simpa using hsheaf.eq_of_src (𝟙 M.X) 0
 
-/-- Boundedness descends along a finite open cover.
-Source: theorem-f-shriek-ell-adic-coefficients, proof steps 1--2; blueprint
-sk-thm-int-restriction-glue.proof.md, paragraph (1).
-
-Proof: Open inverse image is exact, so its derived functor is termwise restriction
-and commutes with every cohomology functor. For each member choose lower and upper
-cohomological bounds. If the finite index type is inhabited, take the minimum of
-its lower bounds and the maximum of its upper bounds. Outside this interval each
-cohomology module restricts to zero on every open. For a pro-etale object W over X,
-the base changes W times_X U_i cover W. Every section of the cohomology module
-restricts to zero on this covering and is therefore zero by the sheaf condition.
-Thus the global cohomology module is zero in those degrees. The standard derived
-t-structure characterizes boundedness by precisely these vanishings. If the index
-type is empty, the covering equality forces X empty, and the empty pro-etale
-covering makes every module sheaf zero; all cohomology vanishes, so choose bounds
-zero and zero. -/
+/-- Boundedness descends along a finite open cover. -/
 theorem bounded_finiteOpenDescent
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

@@ -15,7 +15,14 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapModMonoidal
 
 /-! # Actual residue reduction under constant scalar restriction
 
-Source: integral-models proof (2), Stacks Tags 099L, 09C1 and 08FZ.
+## References
+
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 09C1](https://stacks.math.columbia.edu/tag/09C1)
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
+* [Stacks, Tag 0651](https://stacks.math.columbia.edu/tag/0651)
+* [Stacks, Tag 08FC](https://stacks.math.columbia.edu/tag/08FC)
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.3.2
 -/
 
 @[expose] public noncomputable section
@@ -43,21 +50,7 @@ local instance residueAbLocallyBijective (X : Scheme.{u}) :
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
-/-- Constant scalar restriction identifies the first-residue constructible Tor condition.
-Source: integral-models proof (1)--(2), Stacks Tags 099L, 09C1 and 08FZ.
-
-Proof: the constant-to-continuous integral scalar map is flat and induces the canonical
-isomorphism on the first quotient. Its derived common-quotient comparison, normalized
-on pure tensors, identifies the constant first reduction with the actual derivedReduction
-at index zero after coefficient transport. The finite residue ring has discrete topology,
-so constant and continuous coefficient sheaves agree. The exact section-action and
-small-site equivalences preserve homology, relative derived tensors and the tensor unit,
-and identify the same finite constant local models on every stratum and cover.
-Thus they preserve and reflect the two residue clauses. Finite Tor amplitude implies
-boundedness by tensoring with the unit; this supplies the boundedness conjunct on the
-right from the left-hand Tor clause. In the other direction discard boundedness and
-transport the constructible homology and Tor witnesses. No completeness of K is used;
-unbounded K, zero residues and empty schemes are allowed. -/
+/-- Constant scalar restriction identifies the first-residue constructible Tor condition. -/
 theorem internal_residue_stacks_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -142,14 +135,8 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
 /-- A bounded constructible complex over the first residue ring `𝒪_E/ϖ_E` has finite Tor
-amplitude. Hence the finite Tor clause in (2) of `proposition-integral-constructibility-criterion`
-holds automatically, `𝒪_E/ϖ_E` being a field.
-Source: Bhatt--Scholze, Remark 6.3.2; Stacks Tags 0651 and 08FC.
-
-Proof: transport along the coefficient isomorphism of
-`internal_first_residue_reduction_comparison` to the pulled-back discrete residue field, where
-every bounded complex has finite Tor amplitude by `finiteTorAmplitude_of_discreteField`;
-restriction of scalars along an isomorphism preserves and reflects Tor amplitude. -/
+amplitude. Hence the finite Tor clause of the integral constructibility criterion holds
+automatically, `𝒪_E/ϖ_E` being a field. -/
 theorem finiteTorAmplitude_of_constantModelBoundedConstructible_residue
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

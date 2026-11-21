@@ -27,8 +27,6 @@ restrict to it, so that it inherits the bounded t-structure, and that for an aut
 
 ## Main statements
 
-All of them are blueprint `prop-constructible-truncations`.
-
 - `AlgebraicGeometry.ProEtale.DerivedCategory.boundedAdicConstructible_truncLE`,
   `AlgebraicGeometry.ProEtale.DerivedCategory.boundedAdicConstructible_truncGE`: the
   truncations restrict to `D^b_c(X, ℚ̄_ℓ)`.
@@ -43,10 +41,9 @@ The finite coefficient stage is
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_truncLE` and
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_truncGE`.
 
-## Implementation notes
+## Implementation details
 
-The blueprint states the proposition at the stages `E` and `ℚ̄_ℓ`. The `E` stage of the
-repository is a rationalization of derived complete integral complexes
+The `E` stage is a rationalization of derived complete integral complexes
 (`DerivedCategoryDerivedCompleteRational`), which has no cohomology sheaves, so the statement is
 made at `ℚ̄_ℓ` and at the finite stages. The bounded t-structure on `D^b_c(X, ℚ̄_ℓ)` is the
 restriction of the canonical t-structure `DerivedCategory.TStructure.t`, whose truncation
@@ -79,9 +76,7 @@ def DerivedCategory.boundedAdicConstructible (X : Scheme.{u}) :
 
 variable {l} {X : Scheme.{u}}
 
-/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
-
-`D^b_c(X, ℚ̄_ℓ)` is stable under the truncation `τ^{≤ n}` of the canonical t-structure: the
+/-- `D^b_c(X, ℚ̄_ℓ)` is stable under the truncation `τ^{≤ n}` of the canonical t-structure: the
 cohomology sheaves of `τ^{≤ n} K` are those of `K` in degrees `≤ n`, and zero above. -/
 lemma DerivedCategory.boundedAdicConstructible_truncLE
     {K : _root_.DerivedCategory (AdicSheaf l X)}
@@ -92,9 +87,7 @@ lemma DerivedCategory.boundedAdicConstructible_truncLE
   exact ⟨⟨⟨a, inferInstance⟩, ⟨n, inferInstance⟩⟩,
     _root_.DerivedCategory.homologyProperty_truncLE hc n⟩
 
-/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
-
-`D^b_c(X, ℚ̄_ℓ)` is stable under the truncation `τ^{≥ n}` of the canonical t-structure: the
+/-- `D^b_c(X, ℚ̄_ℓ)` is stable under the truncation `τ^{≥ n}` of the canonical t-structure: the
 cohomology sheaves of `τ^{≥ n} K` are those of `K` in degrees `≥ n`, and zero below. -/
 lemma DerivedCategory.boundedAdicConstructible_truncGE
     {K : _root_.DerivedCategory (AdicSheaf l X)}
@@ -110,9 +103,7 @@ section Automorphism
 variable (h : X ⟶ X) [IsIso h]
 
 omit [IsIso h] in
-/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
-
-The pullback `h^*` along an automorphism `h` of `X` preserves `D^b_c(X, ℚ̄_ℓ)`: it is exact, so
+/-- The pullback `h^*` along an automorphism `h` of `X` preserves `D^b_c(X, ℚ̄_ℓ)`: it is exact, so
 `𝓗ⁱ(h^* K) ≅ h^* 𝓗ⁱ(K)`, and pullbacks of constructible sheaves are constructible. -/
 lemma DerivedCategory.boundedAdicConstructible_mapDerivedCategory_upperStar
     {K : _root_.DerivedCategory (AdicSheaf l X)}
@@ -125,9 +116,7 @@ lemma DerivedCategory.boundedAdicConstructible_mapDerivedCategory_upperStar
       ((hK.2 i).upperStar h)⟩
 
 omit [IsIso h] in
-/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
-
-The pullback `h^*` along an automorphism `h` of `X` commutes with the truncation `τ^{≤ n}`. -/
+/-- The pullback `h^*` along an automorphism `h` of `X` commutes with the truncation `τ^{≤ n}`. -/
 theorem nonempty_truncLE_comp_mapDerivedCategory_upperStar_iso (n : ℤ) :
     Nonempty (_root_.DerivedCategory.TStructure.t.truncLE n ⋙
         ((h)^*ᵃ[l]).mapDerivedCategory ≅
@@ -136,9 +125,7 @@ theorem nonempty_truncLE_comp_mapDerivedCategory_upperStar_iso (n : ℤ) :
   ⟨Functor.mapDerivedCategoryTruncLEIso _ n⟩
 
 omit [IsIso h] in
-/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
-
-The pullback `h^*` along an automorphism `h` of `X` commutes with the truncation `τ^{≥ n}`. -/
+/-- The pullback `h^*` along an automorphism `h` of `X` commutes with the truncation `τ^{≥ n}`. -/
 theorem nonempty_truncGE_comp_mapDerivedCategory_upperStar_iso (n : ℤ) :
     Nonempty (_root_.DerivedCategory.TStructure.t.truncGE n ⋙
         ((h)^*ᵃ[l]).mapDerivedCategory ≅
@@ -147,9 +134,7 @@ theorem nonempty_truncGE_comp_mapDerivedCategory_upperStar_iso (n : ℤ) :
   ⟨Functor.mapDerivedCategoryTruncGEIso _ n⟩
 
 omit [IsIso h] in
-/-- Blueprint `prop-constructible-truncations`: Construction of constructible truncations.
-
-The pullback `h^*` along an automorphism `h` of `X` commutes with the cohomology sheaves:
+/-- The pullback `h^*` along an automorphism `h` of `X` commutes with the cohomology sheaves:
 `𝓗ⁱ(h^* K) ≅ h^* 𝓗ⁱ(K)`. -/
 theorem nonempty_mapDerivedCategory_upperStar_comp_homologyFunctor_iso (i : ℤ) :
     Nonempty (((h)^*ᵃ[l]).mapDerivedCategory ⋙

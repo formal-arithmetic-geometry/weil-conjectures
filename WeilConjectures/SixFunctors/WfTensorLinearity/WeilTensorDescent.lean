@@ -61,6 +61,11 @@ import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
 The localization and scalar-localization helpers used by `WeilTensorProduct`.
 This module keeps the descent construction independently compilable.
+
+## References
+
+* [Stacks, Tag 06YS](https://stacks.math.columbia.edu/tag/06YS)
+* [Stacks, Tag 06YT](https://stacks.math.columbia.edu/tag/06YT)
 -/
 
 @[expose] public noncomputable section
@@ -356,8 +361,7 @@ namespace SheafOfModules
 
 /-- The derived tensor supplied by localization of the flat-term K-flat subcategory.
 The representative comparison in site_derived_tensor_descent determines this functor
-up to the unique compatible natural isomorphism; no functorial representatives are chosen.
-Source: Stacks 06YS and 06YT. -/
+up to the unique compatible natural isomorphism; no functorial representatives are chosen. -/
 def wfSiteDerivedTensor {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     [J.HasSheafCompose (forget₂ CommRingCat.{max u v} RingCat.{max u v})]
     [J.WEqualsLocallyBijective AddCommGrpCat.{max u v}]

@@ -15,17 +15,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Cons
 # Constructible sheaves are compact in `Loc(Dᵇc)`, given the ind-constructible heart
 
 Let `R` be a commutative ring object of sheaves on `X_proét`. Write `IndCons(X, R)` for the
-filtered colimits of constructible sheaves of `R`-modules (blueprint
-`proposition-ind-constructible-sheaves`, `CategoryTheory.ObjectProperty.ind` of
+filtered colimits of constructible sheaves of `R`-modules (`CategoryTheory.ObjectProperty.ind` of
 `IsConstructibleModuleObject R`), and `Dic(X, R)` for the complexes with cohomology sheaves in
 `IndCons(X, R)`.
 
-We isolate the inputs of blueprints `theorem-compactness-rational-coefficients` and
-`proposition-compactness-proper-direct-image--1` on the coefficient ring:
+We isolate the inputs on the coefficient ring:
 
-* `AlgebraicGeometry.ProEtale.IsIndConstructibleHeart R` (blueprint
-`proposition-ind-constructible-sheaves` (2),
-  `proposition-compactness-proper-direct-image--1` (1)): `IndCons(X, R)` is closed in the category
+* `AlgebraicGeometry.ProEtale.IsIndConstructibleHeart R`: `IndCons(X, R)` is closed in the category
   of `R`-modules under kernels, cokernels, extensions and direct sums;
 * `AlgebraicGeometry.ProEtale.HasIndConstructibleExtBound R`:
   for a constructible sheaf `C` there is `d` with `Ext^q(C, B) = 0` for `q > d` and all `B` in
@@ -91,15 +87,14 @@ instance hasColimitsOfShape_discrete_derivedCategory_mod (J : Type (u + 1)) :
     HasColimitsOfShape (Discrete J)
       (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) A) R)) :=
   DerivedCategory.hasColimitsOfShape_discrete J
-/-- Blueprint `proposition-ind-constructible-sheaves`: the ind-constructible sheaves of `R`-modules,
-the filtered colimits of constructible sheaves. -/
+/-- The ind-constructible sheaves of `R`-modules, the filtered colimits of constructible
+sheaves. -/
 abbrev IsIndConstructibleModuleObject :
     ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) A) R) :=
   ObjectProperty.ind.{u + 1} (IsConstructibleModuleObject R)
 
-/-- Blueprint `proposition-ind-constructible-sheaves` (2) (and
-`proposition-compactness-proper-direct-image--1` (1) for `𝒪_E`): the ind-constructible sheaves are
-closed under kernels, cokernels, extensions and direct sums. -/
+/-- The ind-constructible sheaves are closed under kernels, cokernels, extensions and direct
+sums. -/
 structure IsIndConstructibleHeart : Prop where
   isClosedUnderKernels : (IsIndConstructibleModuleObject R).IsClosedUnderKernels
   isClosedUnderCokernels : (IsIndConstructibleModuleObject R).IsClosedUnderCokernels
@@ -107,8 +102,7 @@ structure IsIndConstructibleHeart : Prop where
   isClosedUnderColimitsOfShape_discrete (J : Type (u + 1)) :
     (IsIndConstructibleModuleObject R).IsClosedUnderColimitsOfShape (Discrete J)
 
-/-- Blueprint `corollary-ind-heart-b` (and `proposition-compactness-proper-direct-image--1` (1) for
-`𝒪_E`): for a constructible sheaf `C`, `Ext^q(C, B) = Hom(C, B[q]) = 0` for `q` large and all
+/-- For a constructible sheaf `C`, `Ext^q(C, B) = Hom(C, B[q]) = 0` for `q` large and all
 ind-constructible `B`, and `Ext^q(C, -)` commutes with direct sums of ind-constructible sheaves. -/
 structure HasIndConstructibleExtBound : Prop where
   exists_eq_zero (M : Mod (Sheaf (Scheme.ProEt.topology X) A) R)
@@ -123,8 +117,8 @@ structure HasIndConstructibleExtBound : Prop where
     CompactFor ((DerivedCategory.singleFunctor _ 0).obj M)
       fun j ↦ (DerivedCategory.singleFunctor _ n).obj (B j)
 
-/-- Blueprint `lemma-uniform-ext-bound`: for a constructible sheaf `C` there is `d` with
-`Ext^q(C, B) = Hom(C, B[q]) = 0` for `q > d` and all constructible `B`. -/
+/-- For a constructible sheaf `C` there is `d` with `Ext^q(C, B) = Hom(C, B[q]) = 0` for `q > d`
+and all constructible `B`. -/
 def HasUniformConstructibleExtBound : Prop :=
   ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) A) R, IsConstructibleModuleObject R M →
     ∃ N : ℤ, ∀ B, IsConstructibleModuleObject R B → ∀ n ≤ N,
@@ -132,19 +126,17 @@ def HasUniformConstructibleExtBound : Prop :=
         (DerivedCategory.singleFunctor _ n).obj B,
         f = 0
 
-/-- Blueprint `lemma-continuity-ext-out-constructible-complex--1` (1) (surjectivity, for filtered
-diagrams of sheaves in degree `0`): for a constructible sheaf `C`, every morphism `C ⟶ B[n]` to a
-filtered colimit `B = colim Bᵢ` of sheaves of `R`-modules factors through some `Bᵢ[n]`. -/
+/-- For a constructible sheaf `C`, every morphism `C ⟶ B[n]` to a filtered colimit
+`B = colim Bᵢ` of sheaves of `R`-modules factors through some `Bᵢ[n]`. -/
 def HasConstructibleExtContinuity : Prop :=
   ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) A) R, IsConstructibleModuleObject R M →
     DerivedCategory.HomFactorsThroughFilteredColimits.{u + 1}
       ((DerivedCategory.singleFunctor _ 0).obj M)
 
 variable {R} in
-/-- Blueprint `corollary-ind-heart-b` from `lemma-continuity-ext-out-constructible-complex--1` and
-`lemma-uniform-ext-bound`: an ind-constructible sheaf is a filtered colimit of
-constructible ones, and a direct sum is the filtered colimit of its finite subsums
-(`corollary-ind-heart-b--1`, `corollary-ind-heart-b--2`). -/
+/-- An ind-constructible sheaf is a filtered colimit of constructible ones, and a direct sum is
+the filtered colimit of its finite subsums, so continuity and a uniform bound give the Ext bound
+for ind-constructible sheaves. -/
 lemma HasIndConstructibleExtBound.of_continuity (h₁ : HasConstructibleExtContinuity R)
     (h₂ : HasUniformConstructibleExtBound R) : HasIndConstructibleExtBound R where
   exists_eq_zero M hM := by
@@ -161,10 +153,9 @@ instance : (IsIndConstructibleModuleObject R).ContainsZero where
     ObjectProperty.le_ind _ _ (isConstructibleModuleObject_of_isZero R (isZero_zero _))⟩
 
 variable {R} in
-/-- Blueprint `corollary-ambient-ind-derived` (3): if `IndCons(X, R)` is closed under kernels,
-cokernels, extensions and direct sums, the complexes with ind-constructible cohomology form a
-localizing subcategory, which contains the bounded constructible complexes, hence their
-localizing closure. -/
+/-- If `IndCons(X, R)` is closed under kernels, cokernels, extensions and direct sums, the
+complexes with ind-constructible cohomology form a localizing subcategory, which contains the
+bounded constructible complexes, hence their localizing closure. -/
 lemma localizingClosure_boundedConstructible_le [IsCommMonObj R] (hR : IsIndConstructibleHeart R) :
     (boundedConstructible R).localizingClosure ≤
       DerivedCategory.homologyProperty (IsIndConstructibleModuleObject R) := by
@@ -182,12 +173,8 @@ lemma localizingClosure_boundedConstructible_le [IsCommMonObj R] (hR : IsIndCons
     ObjectProperty.le_ind _ _ (hK.2 n)
 
 variable {R} in
-/-- Blueprints `theorem-compactness-rational-coefficients` and
-`proposition-compactness-proper-direct-image--1` (3), given the inputs on the ind-constructible
-heart: a constructible sheaf `M` placed in degree `0` is compact in `Loc(Dᵇc(X, R))`. Morphisms out
-of `M` into objects of `Loc(Dᵇc(X, R)) ⊆ Dic(X, R)`
-only see a finite window of degrees (`lemma-reduction-finitely-many-degrees`, using left
-completeness), on which they commute with direct sums by induction on the amplitude. -/
+/-- Given the inputs on the ind-constructible heart, a constructible sheaf `M` placed in degree `0`
+is compact in `Loc(Dᵇc(X, R))`. -/
 theorem isCompactObj_singleFunctor_of_isIndConstructibleHeart [IsCommMonObj R]
     [HasExactLimitsOfShape (Discrete ℕ) (Mod (Sheaf (Scheme.ProEt.topology X) A) R)]
     (hR : IsIndConstructibleHeart R) (hR' : HasIndConstructibleExtBound R)

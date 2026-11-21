@@ -12,7 +12,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteDi
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralExchangeSourceAdjunct
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousIntegralExchangeTargetAdjunct
 
-/-! # Coherence of integral localization and the specified exchange map -/
+/-! # Coherence of integral localization and the specified exchange map
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15
+-/
 
 set_option backward.defeqAttrib.useBackward true
 
@@ -56,10 +61,7 @@ abbrev integralConstructibleExchangeEqualityStatement
           (sq.asOver (Spec (.of k)))).app K) ≫
       integralConstructibleTargetHom ℓ E k f' g' K
 
-/-- Integral coefficient extension respects the specified exchange arrow.
-Source: Bhatt--Scholze, Remark 6.8.15.
-Proof. Apply injectivity of the inverse bounded f′ adjunction hom-equivalence. The source
-and target adjunct calculations identify both sides with the same explicit composite. -/
+/-- Integral coefficient extension respects the specified exchange arrow. -/
 theorem integralConstructible_exchange_equality
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     integralConstructibleExchangeEqualityStatement ℓ E k f g f' g' sq K := by

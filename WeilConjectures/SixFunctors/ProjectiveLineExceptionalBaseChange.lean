@@ -12,9 +12,6 @@ import WeilConjectures.SixFunctors.ProjectiveLineTraceCounitBaseChange
 
 /-!
 # The projective-line case of exceptional base change
-
-Source: blueprint `lemma-affine-space-etale-localization`, proof (1), and
-`proposition-exceptional-inverse-image-smooth-morphism--6`, proof, projective-line model.
 -/
 
 @[expose] public section
@@ -89,27 +86,7 @@ private theorem exceptionalBaseChange_isIso_of_counit
         [Category.assoc, NatIso.isIso_inv_app, IsIso.hom_inv_id_assoc] using hc K)
 
 /-- The canonical exceptional base-change map for a projective-line projection over an
-arbitrary base is invertible, for finite coefficients of invertible exponent.
-
-Source: blueprint `lemma-affine-space-etale-localization`, proof (1), and
-`proposition-exceptional-inverse-image-smooth-morphism--6`, projective-line computation.
-
-Proof: use the projective-line adjunction whose right adjoint is pullback followed by
-the Tate twist and shift (1)[2]. Its counit is the projection-formula map followed by
-the trace, where the trace is projection onto the Kummer-class summand of the
-projective-line decomposition. The unit and the Kummer class commute with arbitrary
-pullback: the first by functoriality of inverse image, the second by naturality of the
-Kummer connecting map. Hence the decomposition square commutes with proper exchange.
-Invert the decomposition square and project to its Kummer summand to obtain the trace
-square. The projection formula and proper exchange satisfy the tensor exchange square;
-combining it with the trace square gives the actual counit base-change equation.
-The same calculation after identifying a given cartesian square with the standard
-base-change square applies to any of its presentations. Transposition through the two
-adjunctions identifies the canonical exceptional mate with the pullback/twist/shift
-isomorphism. Thus every component of the mate is invertible. This construction uses
-the ordinary finite-coefficient projective bundle formula over arbitrary schemes;
-it imposes no Noetherian or finite-type-over-a-field hypothesis on either base.
--/
+arbitrary base is invertible, for finite coefficients of invertible exponent. -/
 theorem projectiveLineExceptionalBaseChange
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (S : Scheme.{u}) [HasInvertibleExponent Λ S] ⦃S' P' : Scheme.{u}⦄

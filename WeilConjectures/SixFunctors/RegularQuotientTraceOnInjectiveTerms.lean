@@ -14,7 +14,15 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! Termwise-injective computation of the regular quotient trace.
 
-Source: Stacks Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ.
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 07A6](https://stacks.math.columbia.edu/tag/07A6)
+* [Stacks, Tag 0A70](https://stacks.math.columbia.edu/tag/0A70)
+* [Stacks, Tag 0BZE](https://stacks.math.columbia.edu/tag/0BZE)
+* [Stacks, Tag 0BZH](https://stacks.math.columbia.edu/tag/0BZH)
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
+* [Stacks, Tag 05TG](https://stacks.math.columbia.edu/tag/05TG)
 -/
 
 @[expose] public noncomputable section
@@ -34,9 +42,7 @@ variable {B D : Type*} [Category B] [Category D] [Abelian B] [Abelian D]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- On a K-injective complex, the counit of the derived adjunction `L ⊣ R(R)` is the localized
-termwise counit, once `R(R)` is computed termwise.
-Source: Stacks Tags 05TG and 0A70; the derived counit is the localization of the ordinary counit
-on K-injective representatives. -/
+termwise counit, once `R(R)` is computed termwise. -/
 theorem CategoryTheory.Adjunction.mapDerivedCategory_map_rightDerivedFunctorObjQIso_inv_counit
     (adj : L ⊣ R) (J : CochainComplex D ℤ) [J.IsKInjective] :
     L.mapDerivedCategory.map (R.rightDerivedFunctorObjQIso J).inv ≫
@@ -95,14 +101,7 @@ attribute [local instance] scalarReductionRestrictionLimits scalarReductionRestr
 
 open SheafOfModules SheafOfModules.RegularQuotientCone in
 /-- The normalized regular quotient trace is invertible on a K-injective complex with injective
-terms.
-Source: Stacks Tags 06YY, 07A6, 0A70 and 08FZ; the principal short exact sequence of complexes
-and its cone-boundary/coinduction comparison.
-
-Proof: derived coinduction at `Q X` is ordinary coinduction applied termwise, with counit the
-localized termwise counit. On injective terms the coinduction counit and the positive
-uniformizer scalar form a short exact sequence; apply it to `X⟦-1⟧` and conclude by the
-normalized cone comparison for short exact sequences of the regular scalar. -/
+terms. -/
 theorem reductionCoinductionTrace_isIso_of_isKInjective_of_injective
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (n : ℕ)
@@ -158,17 +157,6 @@ theorem reductionCoinductionTrace_isIso_of_isKInjective_of_injective
     (reductionAugmentationCoinductionAdjunction l E T n) _ hε hS e w εX he γ hγ
 
 /-- The normalized regular quotient trace is invertible on a complex with injective terms.
-Source: Stacks Tags 06YY, 07A6, 0A70, 0BZE, 0BZH and 08FZ; the principal short exact
-sequence of complexes and its cone-boundary/coinduction comparison.
-
-Proof: a termwise-injective unbounded complex need not be K-injective, so first replace `I`
-by its functorial K-injective resolution `I ⟶ R(I)` with injective terms (Stacks 079P); its
-localization is an isomorphism and naturality of the trace reduces to `R(I)`. There derived
-coinduction at `Q R(I)` is ordinary coinduction applied termwise. Apply the degreewise
-injective short exact sequence to obtain a short exact sequence of complexes. Identify its
-mapping-cone projection with the normalized cone boundary using the augmentation adjoint
-formula, then transpose along the derived coinduction adjunction. The resulting component
-is invertible after localization.
 -/
 theorem reductionCoinductionTrace_isIso_onInjectiveTerms
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]

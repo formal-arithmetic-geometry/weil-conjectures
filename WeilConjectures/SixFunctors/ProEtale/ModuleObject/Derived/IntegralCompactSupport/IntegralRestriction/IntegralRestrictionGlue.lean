@@ -18,9 +18,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.IntegralCompact
 /-!
 # Finite-open gluing and restriction of the integral Brown adjunction
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
-sk-thm-int-restriction-glue.md.
-
 The bounded constructible category uses finite constant scalar models. The restricted
 adjunction has exactly the Hom equivalences of the given integral Brown adjunction.
 -/
@@ -40,23 +37,20 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Integr
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The literal full inclusion Dbc into its ordinary localizing closure.
-Source: blueprint sk-thm-int-restriction-glue, clause 2, final sentence. -/
+/-- The literal full inclusion Dbc into its ordinary localizing closure. -/
 def constructibleInclusion (X : Scheme.{u}) :
     (generators Λ X).FullSubcategory ⥤ (localizing Λ X).FullSubcategory :=
   ObjectProperty.ιOfLE (fun K hK _P _hP hS ↦ hS K hK)
 
 /-- Restriction of the actual compactification composite Rp_* D(j_!) to Dbc,
-using its asserted preservation of Dbc, without changing any morphism.
-Source: blueprint sk-thm-int-restriction-glue, clause 2, final sentence. -/
+using its asserted preservation of Dbc, without changing any morphism. -/
 def restrictedLowerShriek {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (hF : ∀ K, generators Λ X K → generators Λ Y ((image Λ c).obj K)) :
     (generators Λ X).FullSubcategory ⥤ (generators Λ Y).FullSubcategory :=
   (generators Λ Y).lift ((generators Λ X).ι ⋙ image Λ c)
     (fun K ↦ hF K.obj K.property)
 
-/-- Restriction of the given Brown right adjoint to Dbc using its asserted preservation.
-Source: blueprint sk-thm-int-restriction-glue, clause 2. -/
+/-- Restriction of the given Brown right adjoint to Dbc using its asserted preservation. -/
 def restrictedUpperShriek {X Y : Scheme.{u}}
     (G : (localizing Λ Y).FullSubcategory ⥤ (localizing Λ X).FullSubcategory)
     (hG : ∀ K : (localizing Λ Y).FullSubcategory,

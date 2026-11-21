@@ -38,16 +38,14 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 /-!
 # The direct image commutes with direct sums on `Loc(Dᵇc)`, from the heart
 
-Let `Λ` be a commutative condensed ring and `p : Z ⟶ Y` a morphism of schemes. Blueprint
-`proposition-compactness-proper-direct-image--2` (2), (3): the derived direct image `Rp_*` on module
-objects over `Λ` commutes with direct sums of objects of `Loc(Dᵇc(Z)⟦Λ⟧)` as soon as it does so
-on the "ind-constructible heart" and has finite amplitude there.
+Let `Λ` be a commutative condensed ring and `p : Z ⟶ Y` a morphism of schemes. The derived direct
+image `Rp_*` on module objects over `Λ` commutes with direct sums of objects of `Loc(Dᵇc(Z)⟦Λ⟧)`
+as soon as it does so on the "ind-constructible heart" and has finite amplitude there.
 
 The heart is replaced here by the smallest class of module objects containing the constructible
 ones and closed under isomorphisms, kernels, cokernels, extensions and direct sums
 (`AlgebraicGeometry.ProEtale.CondensedRing.constructibleCoproductClosure`). It is contained in
-the class `IndCons(Z, Λ)` of the blueprint, so
-the hypotheses below are implied by blueprint `proposition-compactness-proper-direct-image--2` (1).
+the class `IndCons(Z, Λ)` of ind-constructible sheaves.
 The complexes with cohomology in this class form a localizing subcategory containing `Dᵇc(Z)⟦Λ⟧`,
 hence `Loc(Dᵇc(Z)⟦Λ⟧)`.
 
@@ -89,8 +87,7 @@ instance countableAB4Star_mod (X : Scheme.{u}) :
 
 /-- The smallest class of module objects over `Λ_X` containing the constructible ones and closed
 under isomorphisms, kernels, cokernels, extensions and direct sums. It is contained in the
-ind-constructible sheaves `IndCons(X, Λ)` of the blueprint
-(`proposition-ind-constructible-sheaves`). -/
+ind-constructible sheaves `IndCons(X, Λ)`. -/
 abbrev constructibleCoproductClosure (X : Scheme.{u}) :
     ObjectProperty (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
   ObjectProperty.weakSerreCoproductClosure.{u + 1}
@@ -113,7 +110,7 @@ lemma homologyProperty_of_localizingClosure (X : Scheme.{u}) :
   ObjectProperty.localizingClosure_le fun _ hK n ↦
     ObjectProperty.le_weakSerreCoproductClosure _ _ (hK.2 n)
 
-/-- Blueprint `proposition-compactness-proper-direct-image--2` (2), (3), reduced to the heart: if
+/-- Reduction to the heart: if
 the derived direct image `Rp_*` sends the module objects of `constructibleCoproductClosure`, placed
 in degree `0`, into degrees `≤ d`, and commutes with direct sums of them, then its restriction to
 `Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums. -/
@@ -142,8 +139,7 @@ theorem preservesColimitsOfShape_localizingClosure_rightDerivedLowerStar {Z Y : 
   exact preservesColimitsOfShape_of_discrete _
 
 /-- The properties of the derived direct image `Rp_*` on the heart used for its commutation with
-direct sums (blueprints `lemma-uniform-bound-proper-direct-image` and
-`proposition-compactness-proper-direct-image--2` (1)): there is a `d` such that `Rp_*` sends the
+direct sums: there is a `d` such that `Rp_*` sends the
 module objects of `constructibleCoproductClosure`, placed in degree `0`, into degrees `≤ d`, and
 `Rp_*` commutes with direct sums of such module objects. -/
 def ProperLowerStarHeartHypotheses {Z Y : Scheme.{u}} (p : Z ⟶ Y) : Prop :=
@@ -154,9 +150,8 @@ def ProperLowerStarHeartHypotheses {Z Y : Scheme.{u}} (p : Z ⟶ Y) : Prop :=
     IsIso (sigmaComparison R((p)_*⟦Λ⟧) fun j ↦ (DerivedCategory.singleFunctor _ 0).obj (N j))
 
 variable {Λ} in
-/-- Blueprint `proposition-compactness-proper-direct-image--2` (3) and
-`lemma-proper-direct-image-unbounded-complexes`: under `ProperLowerStarHeartHypotheses`, the
-restriction of `Rp_*` to `Loc(Dᵇc(Z)⟦Λ⟧)` preserves direct sums. -/
+/-- Under `ProperLowerStarHeartHypotheses`, the restriction of `Rp_*` to `Loc(Dᵇc(Z)⟦Λ⟧)`
+preserves direct sums. -/
 theorem ProperLowerStarHeartHypotheses.preservesColimitsOfShape {Z Y : Scheme.{u}}
     {p : Z ⟶ Y} (hp : ProperLowerStarHeartHypotheses Λ p) (J : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete J)

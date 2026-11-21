@@ -12,7 +12,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Proper scalar mates and the proper compositor
 
-Source: Stacks 03D8, 0D6D, 07A6; canonical restriction squares and mate pasting.
+## References
+
+* Stacks Project, Tags `03D8`, `0D6D`, `07A6`
+* Zheng, 5.13--5.15
 -/
 
 @[expose] public noncomputable section
@@ -48,20 +51,7 @@ private theorem properComparison_mate_square {R S : Coefficients.{u}} (a : Chang
   refine NatTrans.ext (funext fun M ↦ ?_)
   exact congrArg (fun t ↦ t.app M) (properComparison_mate a g)
 
-/-- The scalar mate commutes with inverse proper composition, including equality transport.
-Source: Stacks 03D8, 0D6D, 07A6; Zheng 5.13--5.15.
-
-Proof: eliminate the geometric composite equality. Invert the component isomorphism
-in scalarPull_geometric_composition. The resulting compatibility square has the
-inverse scalar/pullback maps and the forward geometric pullback compositors as its
-edges. The generic geometric_scalar_mate counit identity identifies each geometric
-mate with properComparison. Apply mateEquiv_whiskerTop_conjugateEquiv and the mate
-pasting law mateEquiv_hcomp. Since geometricPushComposition is the conjugate of
-geometricPullComposition, this is the forward proper-compositor scalar square.
-Evaluate at M and cancel the forward proper compositors to obtain the displayed
-inverse-compositor formula. Equality transport was eliminated in the first step.
-This works for arbitrary coefficient sheaves, all unbounded inputs, identity maps,
-and zero objects; no properness or absolute separatedness is needed. -/
+/-- The scalar mate commutes with inverse proper composition, including equality transport. -/
 theorem properComparison_inverse_composition
     {R S : Coefficients.{u}} (a : Change R S)
     {U V W : Scheme.{u}} (h : U ⟶ V) (k : V ⟶ W) (g : U ⟶ W)

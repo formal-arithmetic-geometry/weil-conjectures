@@ -21,7 +21,13 @@ public import WeilConjectures.SixFunctors.ProEtale.InternalCompletionSectionTran
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.ContinuousCoefficientModuleEncodingSupplement
 public import WeilConjectures.SixFunctors.Supporting.ConstantCompletionEquivalence
 
-/-! # The ordinary common first-residue tensor comparison -/
+/-! # The ordinary common first-residue tensor comparison
+
+## References
+
+* [Stacks, Tag 099L](https://stacks.math.columbia.edu/tag/099L)
+* [Stacks, Tag 08FZ](https://stacks.math.columbia.edu/tag/08FZ)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -154,23 +160,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify WeilConjectures.integralCoefficientRingSheafify in
 /-- The constant-to-continuous integral map is flat and its ordinary first-residue
-extension is the continuous first-residue extension, followed by residue restriction.
-Source: integral-models proof (1)--(2), Stacks Tags 099L and 08FZ.
-
-Proof: write A = O_E and k = A/(pi). The constant-function map to continuous
-k-valued sections is locally bijective, using the finite clopen cover by fibres.
-For an empty object use the empty cover. Sheafification gives a ring isomorphism;
-let e be its inverse. Naturality of constant functions identifies the quotient
-maps. Identify the continuous integral ring with the inverse limit of its finite
-quotients by the projection-normalized integral coefficient comparison. The
-constant-to-completed scalar map is flat by integral_constant_completion (Stacks
-099L). Its first quotient is k, and the ordinary common-quotient tensor comparison
-is the isomorphism sending s tensor m to s tensor m. The inverse is well-defined
-by the same quotient relation. Transport this ordinary comparison through the
-exact section-module equivalence and the equivalent coefficient-sized small site.
-Finally pointComparison reconciles the two integral topologies. These transports
-preserve finite limits and the tensor comparison is natural in the module. No
-complexes or derived localization occur in this assertion. -/
+extension is the continuous first-residue extension, followed by residue restriction. -/
 theorem internal_first_residue_ordinary_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) :

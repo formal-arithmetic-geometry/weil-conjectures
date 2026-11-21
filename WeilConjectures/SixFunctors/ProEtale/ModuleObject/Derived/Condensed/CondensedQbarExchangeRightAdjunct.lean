@@ -74,16 +74,7 @@ private theorem lifted_inv_naturality (α : l ⋙ tD ≅ tC ⋙ l')
         (PF.lift (PD.ι ⋙ tD) htD).map ((PD.lift (PC.ι ⋙ l) hl).map v) := by
   exact ObjectProperty.hom_ext _ (α.inv.naturality v.hom)
 
-/-- The mate counit identity after restriction to four full subcategories.
-Source: Mathlib/CategoryTheory/Adjunction/Mates.lean, mateEquiv_counit and
-iterated_mateEquiv_conjugateEquiv_symm; Adjunction.restrictFullyFaithful.
-
-Proof in words. Iterated mate cancellation identifies the coefficient push map with
-the mate of the inverse coefficient pull isomorphism. The mate counit equation gives
-the ambient equality. The fully faithful restriction counit formula identifies both
-restricted counits with their ambient counterparts. Faithfulness of the inclusion
-then proves the stated equality. All four subcategories are arbitrary, so this
-calculation also supplies the finite-to-Qbar constructible specialization. -/
+/-- The mate counit identity after restriction to four full subcategories. -/
 theorem lifted_push_counit
     {r : D ⥤ C} {r' : F ⥤ E} (a : l ⊣ r) (b : l' ⊣ r')
     (hr : ∀ K : PD.FullSubcategory, PC (r.obj K.obj))
@@ -177,17 +168,7 @@ private theorem pull_inv_naturality {K M : PadicSubfieldConstructible U ℓ E}
 attribute [local irreducible] derivedUpperStarLowerStarAdjunction
   Mod.derivedExtendMapDerivedCategoryAdjunction derivedComapLowerStarIso
   Adjunction.pushHomOfComapIso Adjunction.pullIsoOfComapIso Adjunction.restrictFullyFaithful in
-/-- Scalar extension's push comparison satisfies the mate counit identity.
-Source: ChangeOfCoefficients.lean, derivedPullIso and derivedPushHom;
-Mathlib/CategoryTheory/Adjunction/Mates.lean, iterated_mateEquiv_conjugateEquiv_symm
-and mateEquiv_counit.
-
-Proof in words. The two coefficient extension/restriction adjunctions and the two
-geometric pullback/pushforward adjunctions form a square. Iterated mate cancellation
-identifies pushHomOfComapIso with the mate of inverse pullIsoOfComapIso. Apply the
-mate counit equation at the underlying object K. Fully faithful restriction to
-bounded constructible objects preserves counits, and its inclusion is faithful,
-so the ambient equation gives exactly the displayed restricted equation. -/
+/-- Scalar extension's push comparison satisfies the mate counit identity. -/
 theorem constructibleToQbar_push_counit (K : PadicSubfieldConstructible T ℓ E) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj.{u} ℓ) ℓ
         (h.asOver (Spec (.of k)))).map
@@ -234,22 +215,7 @@ attribute [local irreducible] constructibleToQbarPullIso constructibleToQbarPush
   boundedConstructibleUpperStarLowerStarAdjunction
   ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction in
 set_option backward.isDefEq.respectTransparency true in
-/-- Normalization of the right side of coefficient exchange under the pullback adjunction.
-Source: ModuleObject/Colimit/TwoColimit.lean, final transport paragraph;
-ChangeOfCoefficients.lean, derivedPullIso and derivedPushHom;
-Mathlib/CategoryTheory/Adjunction/Mates.lean.
-
-Proof in words. Expand the target comparison and functoriality of pullback. Naturality of the
-Omega pullback/pushforward counit moves alpha_g' to the right of that counit. The adjunct
-of the push comparison for f' is inverse alpha_f' at its E pushforward followed by scalar
-extension of the E counit. Indeed pushHomOfComapIso is the mate of inverse
-pullIsoOfComapIso, by iterated mate/conjugation cancellation. Restriction along the fully
-faithful constructible inclusions preserves this counit identity. Naturality of inverse
-alpha_f' at the E base-change morphism moves that morphism across inverse alpha_f'.
-Finally scalar-extension functoriality combines its pullback and the E counit. This is the
-displayed middle expression. This step uses no coefficient square coherence, and applies
-to any morphism with the type of the E base-change component. Thus it is independent of the
-left-side normalization. Identity and zero morphisms satisfy the same naturality laws. -/
+/-- Normalization of the right side of coefficient exchange under the pullback adjunction. -/
 theorem constructibleToQbar_exchange_right_adjunct
     (sq : CommSq g' f' f g) (K : PadicSubfieldConstructible X ℓ E) :
     (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (f'.asOver (Spec (.of k)))).map

@@ -13,7 +13,9 @@ public import WeilConjectures.AlgebraicGeometry.IntegralResidueTensorPullPresent
 
 /-! # Ordinary pullback data and the derived residue tensor square
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3), Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -35,8 +37,7 @@ attribute [local instance 20000] sheafBraidedCategory
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- Pullback identifies the restricted residue regular coefficient in degree zero.
-The isomorphism is constructed using exact pullback and its ordinary unit comparison.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
+The isomorphism is constructed using exact pullback and its ordinary unit comparison. -/
 @[irreducible] noncomputable def residueExchangeCoefficientPullIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (residueExchangeUpperStar (integralCoeff ℓ E) f).obj
@@ -49,9 +50,7 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor compariso
 
 The coefficient isomorphism is the exact single-object comparison followed by
 the ordinary coefficient pullback. Its counit equation is the generic exact-F
-single comparison equation, applied to these fixed ordinary modules.
-
-Source: Bhatt--Scholze, Remark 6.8.15; exact pullback and the fixed single comparisons. -/
+single comparison equation, applied to these fixed ordinary modules. -/
 theorem residueExchangeCoefficientPullIso_counit
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     let F := (f)^*⟦integralCoeff ℓ E⟧
@@ -82,8 +81,7 @@ theorem residueExchangeCoefficientPullIso_counit
   dsimp only [id]
   simpa only [F, B, B', A, e, eH] using h
 
-/-- The tensor presentation on X, with its coefficient identified with pullback from Y.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons. -/
+/-- The tensor presentation on X, with its coefficient identified with pullback from Y. -/
 @[irreducible] noncomputable def residueExchangeTensorPullIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     residueExchangeReduction ℓ E X ⋙ residueExchangeRestriction ℓ E X ≅

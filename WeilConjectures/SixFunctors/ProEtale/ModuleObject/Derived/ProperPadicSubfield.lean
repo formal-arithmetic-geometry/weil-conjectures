@@ -14,8 +14,7 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProjectionF
 # Proper base change and the projection formula for `E`-sheaves
 
 Let `E ⊆ ℚ̄_ℓ` be a finite subextension of `ℚ_ℓ`. This file deduces proper base change and the
-proper projection formula for bounded constructible `E`-complexes from the integral statements
-(blueprint `proposition-proper-direct-image-constructible-complexes` (3), for `Λ = E`):
+proper projection formula for bounded constructible `E`-complexes from the integral statements:
 
 * `ProEtale.CondensedRing.isIso_baseChangeMap_app_padicSubfield_of_isProper`: for a cartesian
   square `g' ≫ p = p' ≫ g` with `p` proper over noetherian bases over fields in which `ℓ` is
@@ -99,8 +98,7 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- **The projection formula for `E`** (blueprint
-`proposition-proper-direct-image-constructible-complexes` (3), for `Λ = E`): for a proper
+/-- **The projection formula for `E`**: for a proper
 `p : X ⟶ Y` and bounded constructible `E`-complexes `K` on `X` and `M` on `Y`, the projection map
 `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism. The complexes have integral models
 `E ⊗ᴸ_{𝒪_E} K₀` and `E ⊗ᴸ_{𝒪_E} M₀` (`exists_derivedExtendScalars_iso_integralModel`), at which the

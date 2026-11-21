@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.Tensor.TensorReductionFiniteDegreeLift
 
 /-! # Finite components of ordinary reduction tensor comparison
 
-Source: Stacks 07A4 and 0941.
+## References
+
+* [Stacks, Tag 07A4](https://stacks.math.columbia.edu/tag/07A4)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +38,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The balanced finite scalar tensor map, transported to ordinary reductions.
-Source: Stacks 07A4. -/
+/-- The balanced finite scalar tensor map, transported to ordinary reductions. -/
 def tensorReductionFiniteComponent (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)
@@ -58,8 +60,7 @@ def tensorReductionFiniteComponent (W : Scheme.{u})
         ((pullbackTensorReductionEvaluationComplex l E W n).hom.app Q)) ≫
     (coefficientEvaluationTensorIso l E W n (G.obj P) (G.obj Q)).inv
 
-/-- The same component using literal vertical evaluation of the sequence ring.
-Source: Stacks 0941. -/
+/-- The same component using literal vertical evaluation of the sequence ring. -/
 def tensorReductionSystemFiniteComponent (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)
@@ -143,19 +144,7 @@ private theorem literal_transition_naturality (W : Scheme.{u})
     (coefficientSequenceCommRingSystem l E W)).map f).comm h
 
 /-- The balanced finite tensor maps commute with every quotient transition,
-before localization, without K-flatness or flat-term hypotheses.
-
-Source: Stacks 07A4 and 0941; step 1 of
-lem-coef-tensor-reduction-ordinary-model.
-Proof: use the ordinary reduction/evaluation adjunction-unit equations to replace
-both finite reductions by scalar extension. Transpose through the scalar
-adjunction at level n. On the total summand of bidegree (p,q), both routes send
-b tensor (x tensor y) to the tensor of the two quotient reductions, multiplying
-b into the first factor. Scalar balancing gives equality for all b. The ordinary
-scalar and evaluation tensor comparisons have exactly these generator formulas.
-Sheafification and the total-summand universal properties give equality in each
-degree. The formula uses the actual quotient maps, hence works also for m = n;
-zero complexes and the empty site give the same equality of zero maps. -/
+before localization, without K-flatness or flat-term hypotheses. -/
 theorem tensorReductionFiniteComponents_compatible (W : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     let T := (coefficientTotalTensor.{u, u + 1, u} (Scheme.ProEt.topology W)

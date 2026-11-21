@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.Published.PublishedSystemTensorRepresentative
 
 /-! # Normalization of the published system presentation
 
-Source: Stacks 03D3, 03EL, 07A4 and 07A7.
+## References
+
+* Stacks Project, Tags `03D3`, `03EL`, `07A4`, `07A7`
 -/
 
 @[expose] public noncomputable section
@@ -26,20 +28,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The published tensor comparison agrees with the ambient comparison under the
-specified equality of inverse-image functors, for a single scheme morphism.
-Source: Stacks 03D3 and 03EL, and 07A4.
-Proof: identify the ordinary inverse images by sequence_inverse_eq. The normalized
-ordinary tensor map sends the adjunction unit of a pure tensor to the tensor of
-its two units. On each summand of the total tensor complex this is exactly the
-formula specifying pullbackTensorSequenceCochain. Adjunction-unit injectivity,
-pure-tensor extensionality and total-summand extensionality identify these maps.
-Invert the ambient representative equation to obtain the defining forward
-representative equation of pullbackTensorSystemComparison. Uniqueness follows
-from tensorComparison_unique_on_flat_representatives, or equivalently from
-faithfulness of restriction to pairs of flat-term K-flat complexes. Cancelling
-the tensor-model and exact-localization isomorphisms gives the displayed equation.
-All operations occur on the sequence site, including its horizontal arrows.
-The argument also applies to zero modules and imposes no transition isomorphisms. -/
+specified equality of inverse-image functors, for a single scheme morphism. -/
 theorem publishedSystemTensorIdentification {X Y : Scheme.{u}} (f : X ⟶ Y)
     (M N : coefficientSequenceDerived l E Y) :
     (WeilConjectures.publishedSystemAmbientPullIso l E f).hom.app

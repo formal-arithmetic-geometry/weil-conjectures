@@ -10,9 +10,6 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Finite-open descent for integral restriction
-
-Source: blueprint main-20261015, sk-thm-int-restriction-glue.proof.md,
-expanded by theorem-f-shriek-ell-adic-coefficients.
 -/
 
 @[expose] public noncomputable section
@@ -351,27 +348,7 @@ private theorem finiteStrat_finite_index
   exact finiteCover_reindex X (stratifiedOnOpen Λ X H) _
     (fun n W hc hlocal ↦ finiteStrat_open_descent Λ X n W hc H hlocal) I U hc hlocal
 
-/-- Finite constant-model constructibility of all cohomology modules descends.
-Source: theorem-f-shriek-ell-adic-coefficients, proof steps 1 and 3; blueprint
-sk-thm-int-restriction-glue.proof.md, paragraph (1).
-
-Proof: Exact restriction identifies the cohomology of each restricted complex
-with the restriction of its global cohomology. Reindex the finite cover by Fin n.
-For each open choose a finite constructible locally closed stratification. For an
-index a let V_a be the union of the earlier opens. Intersect each stratum of U_a
-with the closed complement of V_a, using its reduced closed subscheme and an actual
-fibre product of immersions. These strata are constructible by Noetherianity and
-locally closed by stability of immersions. They are disjoint: distinct open indices
-cannot both be the first containing index, and strata within one open are disjoint.
-They cover X by choosing the least containing open and then its unique stratum.
-Each new stratum has an explicit projection into its original local stratum.
-Pull back the original pro-etale cover and its fixed finitely presented scalar
-module along that projection. The inverse-image composition comparison and the
-point-pullback comparison, together with extension/comap cancellation for the
-Cartesian coefficient isomorphism, identify the pulled-back model with that same
-scalar module pulled back from the point. This proves finite constant stratified
-constructibility in each degree. The empty cover gives an empty stratification
-and forces X empty, so is covered by the same construction. -/
+/-- Finite constant-model constructibility of all cohomology modules descends. -/
 theorem cohomology_finiteOpenDescent
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

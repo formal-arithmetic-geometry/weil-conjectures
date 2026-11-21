@@ -42,8 +42,7 @@ subextensions of `ℚ̄_ℓ`.
 The same holds for the condensed ring `𝒪̲_E` (`Profinite.padicIntegersRingObj`) of a finite
 extension `E` of `ℚ_ℓ` embedded in `ℚ̄_ℓ`.
 
-All three are deduced from the torsion case, as in the proof of blueprint
-`theorem-smooth-base-change-all-admissible`.
+All three are deduced from the torsion case.
 A bounded constructible `E`-complex is `E ⊗ᴸ_{𝒪_E} K₀` for a bounded constructible
 `𝒪_E`-complex `K₀` (`ProEtale.exists_boundedConstructibleExtendScalars_obj_iso`), and a bounded
 constructible `ℚ̄_ℓ`-complex is `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` for some `E` and `K₀`

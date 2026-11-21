@@ -8,8 +8,11 @@ module
 public import WeilConjectures.SixFunctors.Integral.IntegralModelsGenerators
 
 /-! Constructibility of a single integral locally closed extension in the topological
-Noetherian setting. Source: Bhatt--Scholze, Lemma 6.8.13, and step 1 of the plan of
-lem-sfb-topological-integral-generators.
+Noetherian setting.
+
+## References
+
+* Bhatt--Scholze, Lemma 6.8.13
 -/
 
 @[expose] public section
@@ -20,22 +23,7 @@ open AlgebraicGeometry AlgebraicGeometry.ProEtale
 namespace WeilConjectures.SixFunctors
 
 /-- The integral extension by zero `i_* j_! L₀` of a locally finite free `O_E`-module is
-constant-model constructible on a topologically Noetherian scheme.
-
-Source: step 1 of the plan of lem-sfb-topological-integral-generators; definition
-definition-constructible-sheaves.
-
-Proof:
-1. `X` is topologically Noetherian, so it is quasi-compact and quasi-separated and every
-   open (in particular `X ∖ Z` and `Z ∖ T`) is quasi-compact
-   (lem-sfb-noetherian-space-compact-subsets); the constructibility condition is the
-   finite-stratification one.
-2. Stratify `X` by `T`, `Z ∖ T` and `X ∖ Z`. By lem-sfb-topological-locally-closed-extension
-   the restrictions of `i_* j_! L₀` to these strata are `L₀`, `0` and `0`.
-3. `L₀` is pro-étale locally `O_E^r`, the pullback of the finitely presented condensed
-   module `O_E^r` on the point, and `0` is the pullback of `0`; so every stratum has finite
-   constant local models (definition-constructible-sheaves--1), and `i_* j_! L₀` is
-   constructible. -/
+constant-model constructible on a topologically Noetherian scheme. -/
 theorem topological_integral_extension_constructible
     (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
     (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X]

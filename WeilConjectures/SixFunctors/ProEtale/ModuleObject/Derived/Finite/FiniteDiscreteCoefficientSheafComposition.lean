@@ -9,7 +9,12 @@ import WeilConjectures.CategoryTheory.AdjunctionSquareComposition
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientRestrictionCoherence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Coherence
 
-/-! # Composition coherence before derivation -/
+/-! # Composition coherence before derivation
+
+## References
+
+* Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1
+-/
 
 @[expose] public section
 open CategoryTheory Functor
@@ -374,26 +379,7 @@ private theorem sheaf_pullback_hom {S T : Scheme.{u}} (f : S ⟶ T)
     isoWhiskerRight_hom, isoWhiskerLeft_hom, whiskerRight_app, whiskerLeft_app,
     associator_hom_app, associator_inv_app, Category.id_comp, Category.comp_id]
 
-/-- The canonical ordinary coefficient pullback comparisons commute with composition.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemma 5.4.1; the normalized restriction
-comparison.
-
-Proof in words. First apply finiteDiscreteCoefficientRestrictionIso_comp to the
-normalized restriction comparisons. Cancel the encoding equivalences on the two
-right adjoints using their unit and counit isomorphisms. Conjugate the resulting
-identity through the composite pullback adjunctions that define
-finiteDiscreteCoefficientProEtalePullbackIso. The conjugation composition and
-whiskering laws reverse its order and identify the two pullback composition maps.
-For the etale/pro-etale site comparison, restriction along the composite base-change
-functor is the composite restriction; its comparison is natural in the sheaf. Apply
-the same conjugation laws to this identity, using comparisonAdjunction. Finally
-expand finiteDiscreteCoefficientSheafPullbackIso as the paste of the site comparison
-and the coefficient comparison. Move the site composition map through the coefficient
-comparison by naturality. Cancel the intermediate associators, whose components are
-identities. The two composition identities give exactly the displayed equation.
-This argument also applies when either morphism is an identity, and requires no
-cartesian or finiteness hypothesis on the morphisms.
--/
+/-- The canonical ordinary coefficient pullback comparisons commute with composition. -/
 theorem finiteDiscreteCoefficientSheafPullbackIso_comp {S T U : Scheme.{u}}
     (f : S ⟶ T) (g : T ⟶ U)
     (N : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} B))) :

@@ -29,7 +29,7 @@ that the base change map `Lg^* Rp_* ⟶ Rp'_* Lg'^*` on the ambient derived cate
 `ℚ̄_ℓ`-module objects is invertible at every bounded constructible complex
 (`ProEtale.CondensedRing.isIso_baseChangeMap_app_padicAlgCl_of_isProper`).
 
-The proof follows blueprint `theorem-smooth-base-change-all-admissible`, on the ambient derived
+The proof works on the ambient derived
 categories since the square mixes the two base fields:
 * a bounded constructible `ℚ̄_ℓ`-complex has an integral model `ℚ̄_ℓ ⊗ᴸ_E (E ⊗ᴸ_{𝒪_E} K₀)`
   (`ProEtale.CondensedRing.exists_padicAlgCl_iso_integralModel_obj`), and the base change map
@@ -125,7 +125,7 @@ with `p` proper, `Y` a noetherian `k`-scheme and `Y'` a noetherian `k₂`-scheme
 `Lg^* Rp_* ⟶ Rp'_* Lg'^*` on the ambient derived categories of `ℚ̄_ℓ`-module objects is
 invertible at every bounded constructible complex `K`.
 
-As in the proof of blueprint `theorem-smooth-base-change-all-admissible`: `K` has an integral model
+The object `K` has an integral model
 (`exists_padicAlgCl_iso_integralModel_obj`), which reduces the claim to the integral base change
 map (`isIso_baseChangeMap_app_padicAlgCl_of_isIso_integral`), invertible by
 `isIso_baseChangeMap_app_padicIntegers_of_isProper_of_isNoetherian`. -/

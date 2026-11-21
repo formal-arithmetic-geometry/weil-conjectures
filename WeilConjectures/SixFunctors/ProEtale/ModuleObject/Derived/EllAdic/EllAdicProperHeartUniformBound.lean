@@ -35,7 +35,12 @@ import WeilConjectures.Mathlib.CategoryTheory.ObjectProperty.Kernels
 # Uniform proper heart amplitude over a Noetherian base
 
 The finite-amplitude part of the proper heart theorem, independently of coproduct
-continuity. Source: Bhatt--Scholze, Section 6.8, and blueprint proper heart bound.
+continuity. 
+
+## References
+
+* Bhatt--Scholze, Section 6.8
+* Bhatt--Scholze, Theorem 6.7.1, Lemma 6.7.2 and Remark 6.8.15
 -/
 
 @[expose] public section
@@ -466,32 +471,7 @@ private theorem integral_bound (ℓ : ℕ) [Fact ℓ.Prime]
 set_option linter.unusedVariables false in
 /-- Proper direct image has a uniform upper bound on the Serre coproduct closure of
 constructible modules, for the coefficient ring `E` of a finite extension `E` of `ℚ_ℓ`
-and a Noetherian base scheme (the other ℓ-adic coefficient rings follow below).
-
-Source: Bhatt--Scholze, Theorem 6.7.1, Lemma 6.7.2 and Remark 6.8.15;
-blueprint lemma-uniform-bound-proper-direct-image and
-proposition-proper-direct-image-constructible-complexes, integral compactness/direct-sums clause
-(1).
-
-Proof: a proper morphism is of finite type and the base is quasi-compact. A finite
-collection of affine charts bounds the dimensions of all its geometric fibres by one
-integer r. On constructible integral modules, reduce an integral lattice modulo the
-powers of a uniformizer. Proper torsion cohomological dimension gives vanishing above
-2r for every reduction. Derived completeness and the Milnor exact sequence give
-vanishing above 2r+1 for the lattice. Inverting ell gives the same bound for finite
-rational coefficients. For the condensed algebraic closure, use the filtered system
-of finite coefficient fields and bounded-below qcqs continuity; the bound is independent
-of the coefficient field. Finite extensions given by an arbitrary presentation have
-the same coefficient rings after transport along a continuous field isomorphism.
-Constructible modules form a coherent abelian subcategory over these coefficients;
-their filtered-colimit closure is replete and closed under kernels, cokernels,
-extensions and small coproducts. It therefore contains their Serre coproduct closure.
-Bounded-below qcqs continuity extends the constructible bound to these filtered
-colimits. Restricting to the smaller Serre coproduct closure proves the assertion.
-This proof is local on the Noetherian target; it uses a relative fibre bound, not
-finite-dimensionality of the base or positive characteristic. Empty fibres, zero
-modules and the empty coproduct satisfy the same bound.
--/
+and a Noetherian base scheme (the other ℓ-adic coefficient rings follow below). -/
 theorem properLowerStar_uniformBound_continuousMapRingObj
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E]

@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexIsIso
 public import WeilConjectures.Compactification.ProjectiveSpace
 
 /-! # Changing the two homogeneous coordinates of the projective line
-
-Source: blueprint lemma-affine-space-etale-localization, proof (1), transport of the standard model.
 -/
 
 @[expose] public noncomputable section
@@ -19,11 +17,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-/-- The standard-chart coordinates give the same projective line as the finite trace model.
-Source: blueprint lemma-affine-space-etale-localization, proof (1), coordinate identification.
-Proof: reindex the homogeneous sections by the explicit bijection from two lifted indices
- to an optional lifted singleton. The existing coordinate reindexing theorem makes the
-resulting morphism invertible, and its construction gives the equation over the base. -/
+/-- The standard-chart coordinates give the same projective line as the finite trace model. -/
 theorem exists_projectiveLinePresentation (S : Scheme.{u}) :
     ∃ e : ℙ(Option (ULift.{u} (Fin 1)); S) ≅ ProjectiveLine S,
       e.hom ≫ (ProjectiveLine S ↘ S) = (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) := by
@@ -43,11 +37,7 @@ theorem exists_projectiveLinePresentation (S : Scheme.{u}) :
   refine ⟨asIso f, ?_⟩
   exact ProjectiveSpace.homOfIsFreeGenerator_over s U hs _ hU
 
-/-- A pullback of a presented projective line is again presented by the standard model.
-Source: blueprint lemma-affine-space-etale-localization, proof (1), pullback universal property.
-Proof: transport the pullback square along the given isomorphism on its upper right.
-Its universal-property isomorphism to the standard projective-line square preserves
-both projections, in particular the projection to the new base. -/
+/-- A pullback of a presented projective line is again presented by the standard model. -/
 theorem exists_projectiveLinePullbackPresentation
     {X X' Y Y' : Scheme.{u}} {q : X ⟶ Y} {q' : X' ⟶ Y'}
     {g : Y' ⟶ Y} {g' : X' ⟶ X} (sq : IsPullback g' q' q g)

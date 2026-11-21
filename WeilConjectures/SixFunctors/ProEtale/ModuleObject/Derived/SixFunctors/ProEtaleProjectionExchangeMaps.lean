@@ -17,11 +17,12 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 /-!
 # Canonical projection and exchange maps on internal pro-etale modules
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
-`sk-thm-int-restriction-line.proof.md`, (1), second triangle.
-
 The tensor comparison is the existing representative-normalized comparison on internal
 module objects. Projection and base change are its actual adjunction mates.
+
+## References
+
+* Stacks Project, Tags 07A4 and 0B56
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +42,7 @@ open scoped CategoryTheory.Functor
 
 namespace CategoryTheory
 
-/-- The actual Koszul braiding, as a generic derived-category shortcut.
-Source: Stacks 07A4. -/
+/-- The actual Koszul braiding, as a generic derived-category shortcut. -/
 def traceDerivedBraiding {A : Type uA} [Category.{vA} A] [Abelian A]
     [IsGrothendieckAbelian.{wA} A] [HasDerivedCategory.{wA} A]
     [MonoidalCategory A] [MonoidalClosed A] [MonoidalPreadditive A] [BraidedCategory A]
@@ -58,22 +58,21 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- The actual internal module category. Source: blueprint (1), second triangle. -/
+/-- The actual internal module category. -/
 abbrev TraceModules (X : Scheme.{u}) :=
   Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)
 
-/-- The actual unbounded derived category. Source: blueprint (1), second triangle. -/
+/-- The actual unbounded derived category. -/
 abbrev TraceDerived (X : Scheme.{u}) := DerivedCategory (TraceModules Λ X)
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The signed braiding descended from the actual tensor on complexes.
-Source: Stacks 07A4. -/
+/-- The signed braiding descended from the actual tensor on complexes. -/
 def traceBraiding (Z : Scheme.{u}) (K L : TraceDerived Λ Z) : K ⊗ L ≅ L ⊗ K :=
   traceDerivedBraiding K L
 
 /-- The existing comparison in its original curried interface; its total-complex
-formula fixes every component. Source: Stacks 07A4, 0B56. -/
+formula fixes every component. -/
 def traceTensorComparison :
     (Functor.postcompose₂.obj (tracePull Λ f)).obj (derivedTensor Λ Y) ≅
       (((Functor.whiskeringLeft₂ _).obj (tracePull Λ f)).obj (tracePull Λ f)).obj
@@ -82,8 +81,7 @@ def traceTensorComparison :
     (moduleObjectDerivedTensorComparison_normalized Λ f).2
   asIso (moduleObjectDerivedTensorComparison Λ f)
 
-/-- Left-factor projection from the recorded counit mate and the two signed symmetries.
-Source: Stacks 0B56. -/
+/-- Left-factor projection from the recorded counit mate and the two signed symmetries. -/
 def traceProjection (K : TraceDerived Λ Y) (N : TraceDerived Λ X) :
     K ⊗ (tracePush Λ f).obj N ⟶
       (tracePush Λ f).obj

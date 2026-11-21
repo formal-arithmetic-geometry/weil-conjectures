@@ -94,15 +94,9 @@ private theorem generic_transport
 open Lean Meta Elab Tactic
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
 -- Kernel conversion checks the fixed integral Tate casts and derived-category aliases.
-/--
-The normalized restricted components factor through ambient normalized components.
-For each restricted object, the unit followed by the canonical ambient comparison and
-the counit comparison give ambient maps `u` and `v`; their ambient composite is
-exactly the original restricted composite after applying the pushforward.  This is
-the formal transport part of the first contraction and is strictly smaller than the
-geometric ambient trace/base-change calculation.
-Source: `sk-thm-int-restriction-line.proof.md`, paragraph (1), normalization transport.
--/
+/-- The normalized restricted components factor through ambient normalized components: the
+ambient composite of the maps `u` and `v` is the original restricted composite after
+applying the pushforward. -/
 theorem integralKernel_first_transport
     (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
     (Y : Scheme.{u}) [Y.Over (Spec (.of k))]

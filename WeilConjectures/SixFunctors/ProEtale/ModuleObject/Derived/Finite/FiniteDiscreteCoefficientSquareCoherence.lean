@@ -10,7 +10,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Finite.FiniteDiscreteCoefficientSheafComposition
 
-/-! # Square coherence for the finite discrete coefficient realization -/
+/-! # Square coherence for the finite discrete coefficient realization
+
+## References
+
+* Bhatt--Scholze, Lemma 5.4.1; Proposition 5.3.2
+-/
 
 @[expose] public section
 
@@ -493,26 +498,7 @@ private theorem pullback_comp {S T U : Scheme.{u}} (f : S ⟶ T) (g : T ⟶ U)
     Iso.app, Functor.comp_obj] using H
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The canonical derived coefficient pullback comparison commutes with square transport.
-Source: Bhatt--Scholze, Lemma 5.4.1; Proposition 5.3.2.
-
-Proof in words. Use finiteDiscreteCoefficientRestrictionIso_comp from
-the module `FiniteDiscreteCoefficientRestrictionCoherence` for the specified restriction
-comparison. Its proof cancels the intermediate encoding isomorphism after forgetting
-module actions and uses naturality of restriction composition.
-Conjugate this identity through the adjunctions used
-in finiteDiscreteCoefficientProEtalePullbackIso. The composition law for conjugation gives
-the corresponding identity for the ordinary pullback comparison, including the ordinary
-etale/pro-etale comparison. Apply exact functors termwise to complexes and then localize;
-Functor.mapDerivedCategorySquareIso_hom_app_comp from the source library gives
-the component composition compatibility, while naturality of the derived comparisons
-transports the ordinary composition maps. Restrict the etale source to D+ using
-mapDerivedCategoryPlusCompatibility.
-Finally replace the exact internal pullbacks by their total left derived functors.
-Their composition isomorphism is defined by the same replacement, so the replacement
-isomorphisms cancel. Transporting along sq.w yields exactly coefficientAmbientSquare.
-Thus the resulting equation is the displayed equation for the specified comparison.
--/
+/-- The canonical derived coefficient pullback comparison commutes with square transport. -/
 theorem finiteDiscreteCoefficientPullbackIso_square
     : CoefficientPullbackSquare B (Profinite.continuousMapRingObj B)
       (fun T ↦ finiteDiscreteRealization B T

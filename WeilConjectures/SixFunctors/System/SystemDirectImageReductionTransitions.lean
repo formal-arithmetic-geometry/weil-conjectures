@@ -15,8 +15,12 @@ import all WeilConjectures.SmoothPurity.Sf.SfNormalizedInputTransition
 
 /-! # Actual transitions of reduction in the normalized finite presentation
 
-Source: Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.21;
-Stacks 0941, 0944 and 099N.
+## References
+
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 0944](https://stacks.math.columbia.edu/tag/0944)
+* [Stacks, Tag 099N](https://stacks.math.columbia.edu/tag/099N)
+* Zheng, Construction 4.1, Lemma 4.10, Proposition 4.21
 -/
 
 @[expose] public noncomputable section
@@ -105,8 +109,7 @@ private theorem quotient_transition_comparison (W : Scheme.{u}) {m n : ℕ} (h :
   intro i
   exact NatTrans.congr_app (ordinary_transition_comparison l E W h) (P.X i)
 
-/-- The scalar-adjunction quotient transformation in the normalized finite presentation.
-Source: Zheng Construction 4.1 and Proposition 4.21. -/
+/-- The scalar-adjunction quotient transformation in the normalized finite presentation. -/
 def systemReductionQuotient (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :=
   coefficientQuotientNatTrans (coefficientFiniteAdjunction l E W m)
     (coefficientFiniteAdjunction l E W n) (normalizedDVRRes l E W h)
@@ -158,14 +161,7 @@ private theorem restriction_comp_change (W : Scheme.{u}) {m n : ℕ} (h : n ≤ 
   rw [he]
   exact derivedComp_change _ _ _ _ _ (eqIso_comp _ e h₁ h₀)
 
-/-- Reduction evaluations carry actual system transitions to scalar-adjunction quotient maps.
-Source: Zheng Construction 4.1 and Proposition 4.21; Stacks 0941.
-
-Proof: compare the native and normalized ordinary transition maps on sections and
-localize that equality. The reduction unit and total-limit projection equations
-identify the native transition with its scalar-adjunction mate. Change the scalar
-restriction compositor along the canonical presentation equality, then cancel the
-comparison isomorphism. This works for every pair of levels, including equal ones. -/
+/-- Reduction evaluations carry actual system transitions to scalar-adjunction quotient maps. -/
 theorem systemReductionQuotient_transitions (W : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus l E W)
     {m n : ℕ} (h : n ≤ m) (K : DerivedCategory (scalarReductionSource l E W)) :

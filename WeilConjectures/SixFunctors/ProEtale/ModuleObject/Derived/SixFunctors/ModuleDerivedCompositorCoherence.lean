@@ -16,16 +16,16 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 /-!
 # Coherence of the unbounded module direct-image compositor
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-sf-comp-coherence,
-det-sf-comp-coherence-cocycle.proof.md, "Refinement isomorphisms"; Stacks Project,
-Tag 0D6E.
-
 The comparisons below specialize the existing total-right-derived universal construction
 to the actual module-object pushforwards. Their K-injective normalization identifies them
 with the ringed-topos comparisons transported through the internal/sectionwise module
 equivalence: both are uniquely characterized by compatibility with the resolution units.
 The derived categories are ordinary unbounded categories, with the published universe
 convention: Scheme.{u}, abelian coefficients in u + 1, and the induced derived categories.
+
+## References
+
+* Stacks Project, Tag 0D6E
 -/
 
 @[expose] public section
@@ -84,9 +84,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{u + 1})
 
 /-- The canonical comparison `R(gf)_* ≅ Rf_* ⋙ Rg_*`, in inverse-compositor direction.
 The existing exact inverse-image adjunction supplies K-injective preservation; the
-comparison is the universal derived comparison of the existing ordinary compositor.
-Source: Stacks 0D6E and blueprint proposition-construction-independence-rf-shriek, Refinement
-isomorphisms. -/
+comparison is the universal derived comparison of the existing ordinary compositor. -/
 noncomputable def moduleDerivedCompositor {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) :
     (lowerStar Λ (f ≫ g)).rightDerivedFunctor ≅
@@ -96,19 +94,7 @@ noncomputable def moduleDerivedCompositor {X Y Z : Scheme.{u}}
     (lowerStarComp Λ f g)).symm
 
 /-- Associativity of the normalized module-object derived compositor, including
-functor associators and transport along associativity of scheme-map composition.
-Source: Stacks 0D6E and blueprint proposition-construction-independence-rf-shriek, Refinement
-isomorphisms.
-
-Proof plan: (1)-(3) identify the ordinary and derived sectionwise pushforwards and
-normalize on K-injectives as in module_derived_compositor_normalization. (4) Apply
-lem-pur-ringed-derived-composition-cocycle to the four ringed topoi. Conjugate the
-two composites by the resolution-compatible equivalences supplied by
-lem-pd-section-derived-pushpull-normalization. The intermediate comparison isomorphisms
-cancel; naturality moves the remaining comparisons past each compositor. The sectionwise
-cocycle identifies the results. Faithfulness of the derived equivalence then identifies
-the original transformations. The displayed associator and lowerStarCongr account for
-both functor parentheses and equality of the two composite scheme maps. -/
+functor associators and transport along associativity of scheme-map composition. -/
 theorem module_derived_compositor_coherence (ℓ : ℕ) [Fact ℓ.Prime]
     (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ)
     {X Y Z W : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ W) :

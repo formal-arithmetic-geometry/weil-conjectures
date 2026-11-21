@@ -21,9 +21,6 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 /-!
 # Restriction of the integral exceptional inverse image
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
-_section.md and sk-thm-int-restriction.proof.md.
-
 The Brown adjoint acts on the ordinary localizing closure of the recorded constant-model
 bounded constructible objects. The assertion below uses the recorded finite-Tor subcategory
 and restricts the actual functors by full-subcategory lifts, on objects and morphisms alike.

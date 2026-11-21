@@ -15,11 +15,16 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 /-!
 # Canonical maps and predicates for derived direct-image coherence
 
-Source: blueprint main-20261015, `proposition-composition-base-change-rf-shriek--1`, Composition
-isomorphism and Canonicity and associativity; Stacks Tags 08BJ, 070I, 070Y and 0D6E.
-
 All categories below are the ordinary unbounded derived categories of internal modules
 on the small pro-etale sites, with the actual pulled-back condensed coefficient rings.
+
+## References
+
+* [Stacks, Tag 08BJ](https://stacks.math.columbia.edu/tag/08BJ)
+* [Stacks, Tag 0D6E](https://stacks.math.columbia.edu/tag/0D6E)
+* [Stacks, Tag 09A5](https://stacks.math.columbia.edu/tag/09A5)
+* [Stacks, Tag 070I](https://stacks.math.columbia.edu/tag/070I)
+* [Stacks, Tag 070Y](https://stacks.math.columbia.edu/tag/070Y)
 -/
 
 @[expose] public section
@@ -36,15 +41,13 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
-/-- Direct image preserves K-injectives, as the right adjoint of exact module pullback.
-Source: Stacks Tag 08BJ. -/
+/-- Direct image preserves K-injectives, as the right adjoint of exact module pullback. -/
 instance lowerStar_preservesKInjectives {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (lowerStar Λ f).PreservesKInjectiveComplexes :=
   (upperStarLowerStarAdjunction Λ f).preservesKInjectiveComplexes
 
 /-- The resolution-normalized composition comparison: derive the inverse of the existing
-module direct-image comparison and then use the canonical derived composition isomorphism.
-Source: Stacks Tag 0D6E. -/
+module direct-image comparison and then use the canonical derived composition isomorphism. -/
 noncomputable def directImageComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (lowerStar Λ (f ≫ g)).rightDerivedFunctor ≅
       (lowerStar Λ f).rightDerivedFunctor ⋙ (lowerStar Λ g).rightDerivedFunctor :=
@@ -52,8 +55,7 @@ noncomputable def directImageComposition {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g :
     Functor.rightDerivedFunctorCompIso (lowerStar Λ f) (lowerStar Λ g)
 
 /-- The canonical pullback square comparison on module objects; coefficient actions use
-extension along alpha, equivalently restriction along alpha inverse by CartesianCoefficients.
-Source: blueprint composition proof. -/
+extension along alpha, equivalently restriction along alpha inverse by CartesianCoefficients. -/
 noncomputable def openCoherencePullbackSquare
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} (sq : CommSq i f' f j) :
@@ -62,8 +64,7 @@ noncomputable def openCoherencePullbackSquare
     eqToIso (congrArg (upperStar Λ) sq.w.symm) ≪≫ upperStarComp Λ i f
 
 /-- The canonical underived open restriction map, defined as the mate of the specified
-pullback square comparison. Its sectionwise normalization is stated below.
-Source: Stacks Tag 09A5. -/
+pullback square comparison. Its sectionwise normalization is stated below. -/
 noncomputable def directImageOpenRestriction
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} (sq : CommSq i f' f j) :
@@ -71,8 +72,7 @@ noncomputable def directImageOpenRestriction
   (mateEquiv (upperStarLowerStarAdjunction Λ f) (upperStarLowerStarAdjunction Λ f')
     (TwoSquare.mk _ _ _ _ (openCoherencePullbackSquare Λ sq).hom))
 
-/-- The same pullback square comparison after exact, termwise passage to derived categories.
-Source: blueprint composition proof. -/
+/-- The same pullback square comparison after exact, termwise passage to derived categories. -/
 noncomputable def derivedOpenCoherencePullbackSquare
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} (sq : CommSq i f' f j) :
@@ -82,8 +82,7 @@ noncomputable def derivedOpenCoherencePullbackSquare
     Functor.mapDerivedCategoryNatIso (openCoherencePullbackSquare Λ sq) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The canonical derived open restriction map, using the exact-left derived adjunctions.
-Source: blueprint composition proof. -/
+/-- The canonical derived open restriction map, using the exact-left derived adjunctions. -/
 noncomputable def derivedDirectImageOpenRestriction
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} (sq : CommSq i f' f j) :
@@ -95,13 +94,13 @@ noncomputable def derivedDirectImageOpenRestriction
     (TwoSquare.mk _ _ _ _ (derivedOpenCoherencePullbackSquare Λ sq).hom))
 
 /-- Open restriction preserves K-injectives because exact extension by zero is its left
-adjoint. Source: Stacks Tag 08BJ. -/
+adjoint. -/
 instance upperStar_preservesKInjectives {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] : (upperStar Λ j).PreservesKInjectiveComplexes :=
   (openImmersionLowerShriekUpperStarAdjunction Λ j).preservesKInjectiveComplexes
 
 /-- The canonical open-slice section identification, expressed by the module adjunction
-unit at the distinguished site object. Source: Stacks Tag 09A5. -/
+unit at the distinguished site object. -/
 noncomputable def openCoherenceSectionCoprojection
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
@@ -116,8 +115,7 @@ noncomputable def openCoherenceSectionCoprojection
           (inferInstance : WeaklyEtale j)).obj V))) s)
 
 /-- The fibre-product identification used to compare sections in a Cartesian open square.
-It is the identity on the test object and the specified open inclusion on the other factor.
-Source: blueprint composition proof. -/
+It is the identity on the test object and the specified open inclusion on the other factor. -/
 noncomputable def openCoherenceSectionArrow
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion i]
@@ -133,8 +131,7 @@ noncomputable def openCoherenceSectionArrow
 
 /-- Sectionwise normalization: the open-slice identifications are bijective, and the
 comparison sends a section to the same section along the canonical fibre-product map.
-Identity maps and identity opens are included in these quantifiers.
-Source: Stacks Tag 09A5. -/
+Identity maps and identity opens are included in these quantifiers. -/
 def OpenCoherenceSectionwise
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion i]
@@ -152,9 +149,7 @@ def OpenCoherenceSectionwise
       openCoherenceSectionCoprojection Λ i M ((Scheme.proEtaleBaseChange f').obj V)
         (M.X.obj.map (openCoherenceSectionArrow sq V).op s)
 
-/-- Associativity with the canonical functor associator and scheme associativity inserted.
-Source: blueprint canonicity paragraph.
--/
+/-- Associativity with the canonical functor associator and scheme associativity inserted. -/
 def DirectImageCompositionAssociative {X Y Z T : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ Z) (h : Z ⟶ T) : Prop :=
   (directImageComposition Λ (f ≫ g) h).hom ≫
@@ -170,8 +165,7 @@ def DirectImageCompositionAssociative {X Y Z T : Scheme.{u}}
 -- (see `DerivedOpenRestrictionNormalization`).
 attribute [-instance] InternalAbelianSheafModule.comparison_essentiallySmall in
 /-- Open restriction is invertible and is the class of the degreewise canonical underived
-restriction comparison on every K-injective representative. No boundedness is imposed.
-Source: Stacks Tags 08BJ, 070I and 070Y. -/
+restriction comparison on every K-injective representative. No boundedness is imposed. -/
 structure DirectImageRestrictionNormalized
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {j : Y' ⟶ Y}
     {f' : X' ⟶ Y'} {i : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion i]
@@ -211,9 +205,7 @@ structure DirectImageRestrictionNormalized
           ((lowerStar Λ f').rightDerivedFunctorObjQIso
             (((upperStar Λ i).mapHomologicalComplex (.up ℤ)).obj I)).inv
 
-/-- Exact derived restriction along a composite, including its canonical comparison.
-Source: blueprint canonicity paragraph.
--/
+/-- Exact derived restriction along a composite, including its canonical comparison. -/
 noncomputable def openCoherenceRestrictionComp
     {X Y Z : Scheme.{u}} (i : X ⟶ Y) (j : Y ⟶ Z) :
     (upperStar Λ (i ≫ j)).mapDerivedCategory ≅

@@ -13,13 +13,16 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Adjunction
 /-!
 # Canonical shifts of the ambient condensed-module exchange
 
-Source: Stacks Project, derived.tex, Tags 015F, 05SU and 0DVC; blueprint
-compactification coherence, refinement (2).
-
 All categories are ordinary unbounded derived categories. The pullback shifts are
 transported from exact termwise inverse image by `modulePullbackExactComparison`;
 the pushforward shifts are the fixed K-injective shifts. The transformation is the
 published `condensedAmbientExchange`, rather than a choice of base-change map.
+
+## References
+
+* [Stacks, Tag 015F](https://stacks.math.columbia.edu/tag/015F)
+* [Stacks, Tag 05SU](https://stacks.math.columbia.edu/tag/05SU)
+* [Stacks, Tag 0DVC](https://stacks.math.columbia.edu/tag/0DVC)
 -/
 
 @[expose] public noncomputable section

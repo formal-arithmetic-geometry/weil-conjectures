@@ -420,25 +420,7 @@ private theorem total_restriction {X Y : Scheme.{u}} {f : X ⟶ Y}
     Lean.Elab.Tactic.closeMainGoal `exact result
 
 /-- The proper-open refinement map on Loc is invertible and its normalization transports
-from the exact open adjunction to the total-derived open adjunction.
-
-Source: blueprint proposition-construction-independence-rf-shriek--7, clauses (1)--(3), and
-lem-sfb-total-derived-normalized-comparisons, inverse-component step.
-
-Proof: use the supplied Loc(Dctf) membership of K (the caller obtains it from
-Loc(Dbc) by the equality of localizing closures). Dominate the source compactification
-by a common dense refinement with itself.
-The localizing refinement maps for that refinement and its composite with r are
-invertible by boundary vanishing; their composition law cancels the first to prove
-invertibility of the map for r. Take e to be the isomorphism of that canonical map.
-Transport localizingRefinementMap_normalized along the canonical isomorphism between
-termwise and total pullback. Naturality cancels the transport factors, giving the
-unit equation displayed here. Identify pushComp with the inverse recorded derived
-pushforward compositor by conjugating the pullback compositor under the derived
-adjunctions. Expand the inverse of refinementIso: its three factors are Rp_* of e,
-the inverse compositor, and the pushforward equality transport, exactly the factors
-of compactificationRefinementComponent. No density of c or d is used, and empty
-opens and zero objects satisfy the same equations. -/
+from the exact open adjunction to the total-derived open adjunction. -/
 theorem integral_boundaryRefinement_normalization
     (ℓ : ℕ) [Fact ℓ.Prime] (hadm : IsLocalizingAdmissibleCoefficient ℓ Λ)
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

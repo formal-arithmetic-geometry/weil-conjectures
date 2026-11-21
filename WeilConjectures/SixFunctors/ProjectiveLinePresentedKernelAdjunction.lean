@@ -54,15 +54,7 @@ private theorem diagonalAdjunction
            left_triangle_components := hl
            right_triangle_components := hr }, rfl⟩
 
-/-- The constructed projective-line diagonal datum yields its kernel adjunction.
-Source: blueprint latest, thm-amb-p1-adjunction.proof.md, both triangle calculations.
-
-Proof: the finite diagonal property and the integral comparison give a supported class
-whose constructed compact-support datum has both integrals one. Invertibility of N on
-global sections implies invertibility on each stalk. The local trivialization theorem
-therefore makes the finite Tate sheaf a lisse line. Apply the diagonal-kernel triangle
-theorem to this line and the shifted coefficient pullback comparison. The prescribed
-kernel unit and counit, with those two triangles, form the asserted adjunction. -/
+/-- The constructed projective-line diagonal datum yields its kernel adjunction. -/
 theorem exists_presentedFiniteP1KernelAdjunction
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

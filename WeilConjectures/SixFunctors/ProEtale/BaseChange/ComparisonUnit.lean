@@ -96,8 +96,7 @@ categories and for an arbitrary morphism `f : U ⟶ V`: `ν_V^*` of the étale u
 `ν_V^* R⁺f_* f^* G ⟶ R⁺f_* ν_U^* f^* G` of right derived functors
 (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange`) and `R⁺f_*` of the
 pullback comparison `ν_U^* f^* G ≅ f^* ν_V^* G`, is the pro-étale unit
-`ν_V^* G ⟶ R⁺f_* f^* ν_V^* G`. No hypothesis on `f` is needed: this is the unit form of the
-counit compatibility `AlgebraicGeometry.ProEtale.ComparisonCore.comparison_counit_plus`. -/
+`ν_V^* G ⟶ R⁺f_* f^* ν_V^* G`. -/
 theorem comparison_unit_plus {U V : Scheme.{u}} (f : U ⟶ V)
     (G : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     let a := (Functor.mapDerivedCategoryPlusCompIso

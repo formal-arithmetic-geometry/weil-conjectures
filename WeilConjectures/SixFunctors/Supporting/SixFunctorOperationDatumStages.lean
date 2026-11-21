@@ -31,18 +31,24 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 /-!
 # Six-functor construction stages
 
-Source: blueprint master, sec-smooth-purity/sk-def-sf-operations,
-def-fix-six-functor-datum, order 1491.
-
 ## Main definitions
 
 * `SixFunctorPushStage`: operations, compactification comparisons, and adjunctions.
 * `SixFunctorHigherOperations`: integral and rational constructions.
 * `SixFunctorDualityData`: the dualizing object and its internal-Hom construction.
 
+## Implementation details
+
 The datum is construction data, including the comparisons, rather than a choice
 from an unnormalized existence assertion. This file does not assert that such a
 datum exists: the operation theorems supply its adjunction and preservation fields.
+
+## References
+
+* [Stacks, Tag 03D2](https://stacks.math.columbia.edu/tag/03D2)
+* [Stacks, Tag 03DI](https://stacks.math.columbia.edu/tag/03DI)
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+* [Stacks, Tag 0E8I](https://stacks.math.columbia.edu/tag/0E8I)
 -/
 
 @[expose] public noncomputable section
@@ -64,35 +70,31 @@ open TensorProduct
 open GeneralAlgebraicallyClosedCoefficients
 open AlgebraicallyClosedCoefficients (Coefficient)
 
-/-- Finite-type schemes over the specified base, using the existing over category.
-Source: the initial setting of def-fix-six-functor-datum. -/
+/-- Finite-type schemes over the specified base, using the existing over category. -/
 abbrev SixFunctorSpace (D : FiniteFieldDatum.{u}) :=
   ObjectProperty.FullSubcategory (fun X : Over (Spec (.of D.k)) ↦
     LocallyOfFiniteType X.hom ∧ QuasiCompact X.hom)
 
-/-- The base field as an object of the same finite-type category.
-Source: the structure map in clause (5). -/
+/-- The base field as an object of the same finite-type category. -/
 def sixFunctorPoint (D : FiniteFieldDatum.{u}) : SixFunctorSpace D :=
   ⟨Over.mk (𝟙 (Spec (.of D.k))),
     ⟨inferInstanceAs (LocallyOfFiniteType (𝟙 (Spec (.of D.k)))),
       inferInstanceAs (QuasiCompact (𝟙 (Spec (.of D.k))))⟩⟩
 
-/-- The structure morphism, with its original base map, in the over category.
-Source: clause (5). -/
+/-- The structure morphism, with its original base map, in the over category. -/
 def sixFunctorStructure {D : FiniteFieldDatum.{u}} (X : SixFunctorSpace D) :
     X ⟶ sixFunctorPoint D :=
   ObjectProperty.homMk (Over.homMk X.obj.hom (by simp [sixFunctorPoint]))
 
 /-- Identity-proper compactification of an open immersion, with its supplied
-open-immersion proof. Source: clause (2). -/
+open-immersion proof. -/
 def sixFunctorOpenCompactification {D : FiniteFieldDatum.{u}}
     {X Y : SixFunctorSpace D} (j : X ⟶ Y) (hj : IsOpenImmersion j.hom.left) :
     Compactification j.hom.left :=
   @Compactification.ofIsOpenImmersion X.obj.left Y.obj.left j.hom.left hj
 
 /-- A Cartesian scheme square with an open/proper compactification square,
-bundled in the existing category of finite-type schemes over the fixed base.
-Source: clause (3) and def-exchange-projection. -/
+bundled in the existing category of finite-type schemes over the fixed base. -/
 structure SixFunctorCompactifiedSquare (D : FiniteFieldDatum.{u}) where
   X : SixFunctorSpace D
   Y : SixFunctorSpace D
@@ -122,8 +124,7 @@ structure SixFunctorCompactifiedSquare (D : FiniteFieldDatum.{u}) where
   properComm : h ≫ p = p' ≫ g
   openComm : g' ≫ i = i' ≫ h
 
-/-- The existing compactification represented by the supplied over-category factors.
-Source: clause (3). -/
+/-- The existing compactification represented by the supplied over-category factors. -/
 def SixFunctorCompactifiedSquare.compactification {D : FiniteFieldDatum.{u}}
     (Q : SixFunctorCompactifiedSquare D) : Compactification Q.f.hom.left where
   Z := Q.Z.obj.left
@@ -133,8 +134,7 @@ def SixFunctorCompactifiedSquare.compactification {D : FiniteFieldDatum.{u}}
   isProper := Q.proper_p
   isOpenImmersion := Q.open_i
 
-/-- The base-changed candidate from the same supplied compactification square.
-Source: clause (3). -/
+/-- The base-changed candidate from the same supplied compactification square. -/
 def SixFunctorCompactifiedSquare.compactification' {D : FiniteFieldDatum.{u}}
     (Q : SixFunctorCompactifiedSquare D) : Compactification Q.f'.hom.left where
   Z := Q.Z'.obj.left
@@ -148,8 +148,7 @@ def SixFunctorCompactifiedSquare.compactification' {D : FiniteFieldDatum.{u}}
 at one coefficient level. Comparisons are natural isomorphisms with identity and
 cocycle equations. The operation datum additionally identifies the finite
 comparisons with the recorded refinement, composition, proper and open maps;
-coherence equations alone do not prescribe their normalization.
-Source: clauses (1), (2), and (4) of `def-fix-six-functor-datum`. -/
+coherence equations alone do not prescribe their normalization. -/
 structure SixFunctorPushStage (D : FiniteFieldDatum.{u})
     (B : SixFunctorSpace D → Type v) [∀ X, Category.{w} (B X)] where
   pull : ∀ {X Y : SixFunctorSpace D}, (X ⟶ Y) → B Y ⥤ B X
@@ -192,16 +191,14 @@ structure SixFunctorPushStage (D : FiniteFieldDatum.{u})
     (hj : IsOpenImmersion j.hom.left),
     support j (sixFunctorOpenCompactification j hj) ≅ openExtension j hj
 
-/-- The proper identification factors through the identity-open compactification.
-Source: clause (2). -/
+/-- The proper identification factors through the identity-open compactification. -/
 def SixFunctorPushStage.properIdentification {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     [IsProper f.hom.left] (c : Compactification f.hom.left) :=
   S.comparison f c (.ofIsProper f.hom.left) ≪≫ S.properIdentity f
 
-/-- The open exchange inverse is the mate of the prescribed pullback square.
-Source: def-exchange-projection, open factor. -/
+/-- The open exchange inverse is the mate of the prescribed pullback square. -/
 def sixFunctorOpenBaseChangeInverse {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (Q : SixFunctorCompactifiedSquare D) :=
@@ -218,8 +215,7 @@ def sixFunctorOpenBaseChangeInverse {D : FiniteFieldDatum.{u}}
       (S.openAdjunction Q.i' Q.open_i').counit
 
 /-- The inverse open projection is the transpose of the open unit tensored with identity,
-followed by inverse tensor pullback and the specified f=pi comparison.
-Source: def-exchange-projection, projection factor gamma. -/
+followed by inverse tensor pullback and the specified f=pi comparison. -/
 def sixFunctorOpenProjectionInverse {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)
@@ -236,8 +232,7 @@ def sixFunctorOpenProjectionInverse {D : FiniteFieldDatum.{u}}
           ((S.pull Q.i).obj ((S.pull Q.p).obj N)) ≫
         (μ.inv.app ((S.openExtension Q.i Q.open_i).obj K)).app ((S.pull Q.p).obj N))
 
-/-- A compactification given by its actual open and proper factors in the base category.
-Source: clause (2), compactification formula. -/
+/-- A compactification given by its actual open and proper factors in the base category. -/
 def sixFunctorFactorCompactification {D : FiniteFieldDatum.{u}}
     {X Y Z : SixFunctorSpace D} (i : X ⟶ Z) (p : Z ⟶ Y)
     (hi : IsOpenImmersion i.hom.left) (hp : IsProper p.hom.left)
@@ -250,8 +245,7 @@ def sixFunctorFactorCompactification {D : FiniteFieldDatum.{u}}
   isProper := hp
 
 /-- The support factorization uses the recorded composition law, then the open and
-proper identity identifications, in exactly that order.
-Source: def-exchange-projection, candidate realization. -/
+proper identity identifications, in exactly that order. -/
 def sixFunctorFactoredSupportIdentification {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) {X Y Z : SixFunctorSpace D}
@@ -269,8 +263,7 @@ def sixFunctorFactoredSupportIdentification {D : FiniteFieldDatum.{u}}
 
 /-- The dependency's mate, proper/open paste, and projection construction at a
 higher coefficient stage, tied to the very operations of that stage. Its three
-maps are `stage.exchange`, `stage.compactExchange`, and `stage.projection`.
-Source: clause (3), def-exchange-projection. -/
+maps are `stage.exchange`, `stage.compactExchange`, and `stage.projection`. -/
 structure SixFunctorExchangeData {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)
@@ -324,8 +317,7 @@ structure SixFunctorExchangeData {D : FiniteFieldDatum.{u}}
 
 /-- Coefficient change retains the specified adjunctions, compactification
 comparisons, and their units and counits. This is a record of actual natural
-isomorphisms and commuting diagrams, not five arbitrary proposition fields.
-Source: def-exchange-projection and the higher-coefficient construction clauses. -/
+isomorphisms and commuting diagrams, not five arbitrary proposition fields. -/
 structure SixFunctorCoefficientComparison {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {B' : SixFunctorSpace D → Type v'} [∀ X, Category.{w'} (B' X)]
@@ -387,8 +379,7 @@ structure SixFunctorCoefficientComparison {D : FiniteFieldDatum.{u}}
 /-- Localization and common-stage inclusion keep the prescribed object models.
 Their operation comparisons are identity components on those models, rather than
 freely chosen automorphisms. Together with SixFunctorCoefficientComparison this
-pins comparison, composition, proper/open identification and both adjunctions.
-Source: rational and common-stage construction formulas, clauses (1)--(4). -/
+pins comparison, composition, proper/open identification and both adjunctions. -/
 def SixFunctorCoefficientModelNormalization {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {B' : SixFunctorSpace D → Type v'} [∀ X, Category.{w'} (B' X)]
@@ -409,8 +400,7 @@ def SixFunctorCoefficientModelNormalization {D : FiniteFieldDatum.{u}}
     HEq ((C.openExtension j hj).hom.app K)
       (𝟙 ((L Y).obj ((S.openExtension j hj).obj K))))
 
-/-- Compose the two operation-realization isomorphisms, inserting only associators.
-Source: coefficient-change paragraph of def-exchange-projection. -/
+/-- Compose the two operation-realization isomorphisms, inserting only associators. -/
 def sixFunctorCompositeRealization
     {A : Type v} {B : Type w} {C : Type hA}
     {A' : Type v'} {B' : Type w'} {C' : Type hA'}
@@ -424,8 +414,7 @@ def sixFunctorCompositeRealization
     (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight α _ ≪≫
     Functor.associator _ _ _
 
-/-- A transformation square has specified endpoints; neither endpoint is new data.
-Source: def-exchange-projection, coefficient comparisons. -/
+/-- A transformation square has specified endpoints; neither endpoint is new data. -/
 def SixFunctorTransformationComparison
     {A : Type v} {B : Type w} {A' : Type v'} {B' : Type w'}
     [Category.{hA} A] [Category.{hB} B] [Category.{hA'} A'] [Category.{hB'} B']
@@ -434,8 +423,7 @@ def SixFunctorTransformationComparison
     (source : F ⋙ R ≅ L ⋙ F') (target : G ⋙ R ≅ L ⋙ G') : Prop :=
   ExchangeProjectionComparisonPreserves L R source target η η'
 
-/-- Transport a prescribed operation realization along the recorded stage equalities.
-Source: def-exchange-projection, realization convention. -/
+/-- Transport a prescribed operation realization along the recorded stage equalities. -/
 def sixFunctorStageRealization
     {A : Type v} {B : Type w} {A' : Type v'} {B' : Type w'}
     [Category.{hA} A] [Category.{hB} B] [Category.{hA'} A'] [Category.{hB'} B']
@@ -446,7 +434,7 @@ def sixFunctorStageRealization
     Functor.isoWhiskerLeft L (eqToIso h').symm
 
 /-- The projection component in the named operation coordinates, using only the
-recorded functor equalities. Source: clause (3). -/
+recorded functor equalities. -/
 def SixFunctorExchangeData.projectionComponent {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {S : SixFunctorPushStage D B} {T : ∀ X, B X ⥤ B X ⥤ B X}
@@ -460,8 +448,7 @@ def SixFunctorExchangeData.projectionComponent {D : FiniteFieldDatum.{u}}
     eqToHom (by rw [A.tensorX, A.compactSupport, A.pull]; rfl)
 
 /-- Coefficient comparison for the actual exchange maps. Endpoints are composites
-of the operation realizations, rather than independent isomorphisms.
-Source: clause (3). -/
+of the operation realizations, rather than independent isomorphisms. -/
 structure SixFunctorExchangeComparison {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {B' : SixFunctorSpace D → Type v'} [∀ X, Category.{w'} (B' X)]
@@ -510,7 +497,7 @@ structure SixFunctorExchangeComparison {D : FiniteFieldDatum.{u}}
 
 /-- The duality construction uses the same exceptional functor and internal Hom.
 The pair condition is the recorded bounded-Hom domain, not an unrestricted Hom
-closure hypothesis. Source: clause (5). -/
+closure hypothesis. -/
 structure SixFunctorDualityData {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B)
@@ -521,7 +508,7 @@ structure SixFunctorDualityData {D : FiniteFieldDatum.{u}}
     P X (K, (S.exceptional (sixFunctorStructure X) c).obj unit)
 
 /-- Exceptional inverse image of the coefficient unit, with no independent choice
-of a dualizing object. Source: clause (5). -/
+of a dualizing object. -/
 def SixFunctorDualityData.dualizing {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {S : SixFunctorPushStage D B} {P : ∀ X, ObjectProperty ((B X)ᵒᵖ × B X)}
@@ -529,8 +516,7 @@ def SixFunctorDualityData.dualizing {D : FiniteFieldDatum.{u}}
     [IsSeparated X.obj.hom] (c : Compactification (sixFunctorStructure X).hom.left) : B X :=
   (S.exceptional (sixFunctorStructure X) c).obj T.unit
 
-/-- Internal Hom into that very dualizing object, including the functor action.
-Source: clause (5). -/
+/-- Internal Hom into that very dualizing object, including the functor action. -/
 def SixFunctorDualityData.verdier {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     {S : SixFunctorPushStage D B} {P : ∀ X, ObjectProperty ((B X)ᵒᵖ × B X)}
@@ -542,15 +528,13 @@ def SixFunctorDualityData.verdier {D : FiniteFieldDatum.{u}}
     ((𝟭 (B X)ᵒᵖ).prod' ((Functor.const (B X)ᵒᵖ).obj (T.dualizing X c)))
     (T.dualPair X c) ⋙ H X
 
-/-- Finite bounded constructible objects in the existing intrinsic realization.
-Source: initial domains. -/
+/-- Finite bounded constructible objects in the existing intrinsic realization. -/
 abbrev sixFunctorFiniteCategory (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (X : SixFunctorSpace D) :=
   (intrinsicFiniteTorsionConstructible C.l E n hn X.obj.left).FullSubcategory
 
-/-- The positive exponent version of the recorded ambient finite Hom.
-Source: clause (1). -/
+/-- The positive exponent version of the recorded ambient finite Hom. -/
 def sixFunctorFiniteInternalHom (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (X : SixFunctorSpace D) :
@@ -561,8 +545,7 @@ def sixFunctorFiniteInternalHom (D : FiniteFieldDatum.{u}) (C : D.CoefficientDat
   | zero => exact False.elim (Nat.not_succ_le_zero 0 hn)
   | succ m => exact finiteIntrinsicDerivedInternalHom C.l E X.obj.left m
 
-/-- Positive-exponent ambient tensor from the recorded quotient construction.
-Source: clause (1). -/
+/-- Positive-exponent ambient tensor from the recorded quotient construction. -/
 def sixFunctorFiniteTensor (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (X : SixFunctorSpace D) :
@@ -573,8 +556,7 @@ def sixFunctorFiniteTensor (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
   | zero => exact False.elim (Nat.not_succ_le_zero 0 hn)
   | succ m => exact finiteIntrinsicDerivedTensor C.l E X.obj.left m
 
-/-- Positive-exponent ambient pullback, including exponent one.
-Source: clause (1). -/
+/-- Positive-exponent ambient pullback, including exponent one. -/
 def sixFunctorFinitePullback (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -585,7 +567,7 @@ def sixFunctorFinitePullback (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
   sfIntrinsicDerivedPullback (Padic.coefficientExtensionRing C.l E n) f.hom.left
 
 /-- The finite permitted-Hom domain is the inverse image of bounded constructibility
-under the recorded ambient internal Hom. Source: clause (1). -/
+under the recorded ambient internal Hom. -/
 def sixFunctorFiniteHomPairs (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (X : SixFunctorSpace D) :
@@ -595,8 +577,7 @@ def sixFunctorFiniteHomPairs (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     ((sixFunctorFiniteInternalHom D C E n hn X).obj
       (op MN.1.unop.obj, MN.2.obj))
 
-/-- Restrict the existing finite internal Hom on exactly its bounded-output pairs.
-Source: clause (1). -/
+/-- Restrict the existing finite internal Hom on exactly its bounded-output pairs. -/
 def sixFunctorFiniteHom (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (X : SixFunctorSpace D) :
@@ -610,22 +591,19 @@ def sixFunctorFiniteHom (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (fun MN ↦ MN.property)
 
 /-- The bundled finite-type object uses its given structure map, without choosing
-an alternative map to the base. Source: initial setting. -/
+an alternative map to the base. -/
 instance sixFunctorSpaceOver {D : FiniteFieldDatum.{u}} (X : SixFunctorSpace D) :
     X.obj.left.Over (Spec (.of D.k)) := ⟨X.obj.hom⟩
 
-/-- Finite-type structure from the existing full subcategory.
-Source: initial setting. -/
+/-- Finite-type structure from the existing full subcategory. -/
 instance sixFunctorSpaceLft {D : FiniteFieldDatum.{u}} (X : SixFunctorSpace D) :
     LocallyOfFiniteType (X.obj.left ↘ Spec (.of D.k)) := X.property.1
 
-/-- Quasi-compactness from the same finite-type structure.
-Source: initial setting. -/
+/-- Quasi-compactness from the same finite-type structure. -/
 instance sixFunctorSpaceQc {D : FiniteFieldDatum.{u}} (X : SixFunctorSpace D) :
     QuasiCompact (X.obj.left ↘ Spec (.of D.k)) := X.property.2
 
-/-- Over-category arrows retain the base compatibility equation.
-Source: initial setting. -/
+/-- Over-category arrows retain the base compatibility equation. -/
 instance sixFunctorMapOver {D : FiniteFieldDatum.{u}} {X Y : SixFunctorSpace D}
     (f : X ⟶ Y) : f.hom.left.IsOver (Spec (.of D.k)) := ⟨Over.w f.hom⟩
 
@@ -634,9 +612,7 @@ The tower is the dependency's specified construction; the total inverse limit
 carries its right-derived universal property and its unit is invertible on K-injectives;
 comparison with the chosen Roos vertex preserves every projection. Rational maps
 are the linear extension on pure tensors. This records the complete construction,
-rather than selecting an operation from a weakened existence statement.
-Source: lem-weil-compact-support-reduction-tower-functor and the normalized
-compact-support value definitions, clauses (1)--(4). -/
+rather than selecting an operation from a weakened existence statement. -/
 def SixFunctorSupportConstruction
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -674,8 +650,7 @@ def SixFunctorSupportConstruction
       (a ⊗ₜ[Padic.coefficientExtensionIntegers C.l E]
         (F.map v : F.obj K ⟶ F.obj K')))
 
-/-- The degree-zero completed rank-one coefficient module.
-Source: clause (5). -/
+/-- The degree-zero completed rank-one coefficient module. -/
 def sixFunctorIntegralUnit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (X : Scheme.{u}) : DerivedCategory (scalarReductionSource l E X) :=
@@ -685,7 +660,7 @@ def sixFunctorIntegralUnit (l : ℕ) [Fact l.Prime]
 /-- Completed and localized operation constructions at a finite coefficient field.
 The equations identify the functors with their recorded constructions, including
 morphism actions. The generic stage retains all compactification and adjunction
-comparisons. Source: higher-coefficient clauses (1)--(5). -/
+comparisons. -/
 structure SixFunctorHigherOperations
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -781,7 +756,7 @@ structure SixFunctorHigherOperations
     (sfRationalConstructibleLocalization C.l E (Spec (.of D.k))).obj integralDuality.unit
 
 /-- The identity transition is the recorded scalar unit, transported through the
-specified stage-system equality. Source: common-stage coefficient conventions. -/
+specified stage-system equality. -/
 def sixFunctorStageUnitor (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (X : SixFunctorSpace D) (E₀ : Padic.FiniteCoefficientFields C.l C.Qbar) :
     (stageSystem C.l C.Qbar X.obj.left).T (le_rfl : E₀ ≤ E₀) ≅
@@ -790,7 +765,7 @@ def sixFunctorStageUnitor (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     GeneralAlgebraicallyClosedCoefficients.unitor C.l C.Qbar X.obj.left E₀
 
 /-- The recorded finite compact-support candidate, with quotient finiteness
-supplied by the named positive-quotient theorem. Source: clause (2). -/
+supplied by the named positive-quotient theorem. -/
 def sixFunctorFiniteSupport (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -799,7 +774,7 @@ def sixFunctorFiniteSupport (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
   sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing C.l E n)
 
 /-- The recorded etale-transported finite exceptional functor, without an ambient
-admissibility hypothesis. Source: clause (4). -/
+admissibility hypothesis. -/
 def sixFunctorFiniteExceptional (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -807,8 +782,7 @@ def sixFunctorFiniteExceptional (D : FiniteFieldDatum.{u}) (C : D.CoefficientDat
   letI := Padic.finite_coefficientExtensionRing C.l E n hn
   AlgebraicGeometry.ProEtale.sfFiniteExceptional (Padic.coefficientExtensionRing C.l E n) c
 
-/-- The recorded termwise finite extension by zero.
-Source: clause (2). -/
+/-- The recorded termwise finite extension by zero. -/
 def sixFunctorFiniteOpen (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -821,8 +795,7 @@ def sixFunctorFiniteOpen (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Rational operations at the specified small coefficient model.
-Source: common-stage conventions. -/
+/-- Rational operations at the specified small coefficient model. -/
 def sixFunctorCoefficientRational (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (A : ∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar,
       SixFunctorHigherOperations D C (Coefficient.{u} C.l C.Qbar E₀))
@@ -830,8 +803,7 @@ def sixFunctorCoefficientRational (D : FiniteFieldDatum.{u}) (C : D.CoefficientD
     SixFunctorPushStage D (fun X ↦ Stage C.l C.Qbar X.obj.left E₀) :=
   (A E₀).rational
 
-/-- Tensor at the same small coefficient model.
-Source: clause (3). -/
+/-- Tensor at the same small coefficient model. -/
 def sixFunctorCoefficientTensor (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (A : ∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar,
       SixFunctorHigherOperations D C (Coefficient.{u} C.l C.Qbar E₀))
@@ -840,8 +812,7 @@ def sixFunctorCoefficientTensor (D : FiniteFieldDatum.{u}) (C : D.CoefficientDat
       Stage C.l C.Qbar X.obj.left E₀ ⥤ Stage C.l C.Qbar X.obj.left E₀ :=
   (A E₀).rationalTensor
 
-/-- The three exchange constructions at that small coefficient model.
-Source: clause (3). -/
+/-- The three exchange constructions at that small coefficient model. -/
 def sixFunctorCoefficientExchange (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (A : ∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar,
       SixFunctorHigherOperations D C (Coefficient.{u} C.l C.Qbar E₀))
@@ -850,8 +821,7 @@ def sixFunctorCoefficientExchange (D : FiniteFieldDatum.{u}) (C : D.CoefficientD
       (sixFunctorCoefficientTensor D C A E₀) Q :=
   (A E₀).rationalExchange Q
 
-/-- The coefficient unit and dualizing construction at that coefficient model.
-Source: clause (5). -/
+/-- The coefficient unit and dualizing construction at that coefficient model. -/
 def sixFunctorCoefficientDuality (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (A : ∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar,
       SixFunctorHigherOperations D C (Coefficient.{u} C.l C.Qbar E₀))
@@ -862,8 +832,7 @@ def sixFunctorCoefficientDuality (D : FiniteFieldDatum.{u}) (C : D.CoefficientDa
   (A E₀).rationalDuality
 
 /-- Common-stage operations and the specified finite-stage comparisons.
-These are actual functors and exchange data on the recorded pair categories.
-Source: clauses (1)--(5) and common-stage coefficient conventions. -/
+These are actual functors and exchange data on the recorded pair categories. -/
 structure SixFunctorCommonStages (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum) where
   coefficientStages : ∀ E₀ : Padic.FiniteCoefficientFields C.l C.Qbar,
     SixFunctorHigherOperations D C (Coefficient.{u} C.l C.Qbar E₀)
@@ -961,8 +930,7 @@ set_option backward.isDefEq.respectTransparency.types true
 
 /-- The component equation identifying scalar transition followed by inclusion with
 inclusion followed by the common-stage operation. Stating this equation for general
-categories avoids unfolding coefficient-localization morphisms while checking it.
-Source: common-stage coefficient conventions. -/
+categories avoids unfolding coefficient-localization morphisms while checking it. -/
 def SixFunctorInclusionCoherence
     {A₀ : Type v} {A₁ : Type v'} {B₀ : Type w} {B₁ : Type w'}
     {Ainf : Type hA} {Binf : Type hB}
@@ -978,8 +946,7 @@ def SixFunctorInclusionCoherence
     γ'.inv.app (c.obj K) ≫ V'.map (α.inv.app K) ≫ v.hom.app (F.obj K)
 
 /-- Identity, successive-extension, and inclusion coherence for the four operations.
-The equations use the stage system's prescribed unitors, associators, and inclusions.
-Source: common-stage coefficient conventions in clauses (1), (2), and (4). -/
+The equations use the stage system's prescribed unitors, associators, and inclusions. -/
 def SixFunctorCommonStageCoherence {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (A : SixFunctorCommonStages D C) : Prop :=
   (∀ {X Y : SixFunctorSpace D} (f : X ⟶ Y),
@@ -1100,11 +1067,7 @@ def SixFunctorCommonStageCoherence {D : FiniteFieldDatum.{u}} {C : D.Coefficient
 /-- The finite-stage refinement comparison is the recorded witness from
 `refinementComparisonIsomorphism`, specialized to the fixed finite-field and
 positive quotient data. The operation datum normalizes its comparison components
-against this witness; it does not introduce a second witness.
-Source: the compactification-comparison paragraph of
-`literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/
-sk-lem-sf-mate/def-fix-six-functor-datum.md`, blueprint id
-`def-fix-six-functor-datum`, clause (2). -/
+against this witness; it does not introduce a second witness. -/
 noncomputable def sixFunctorFiniteRefinementComparison
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -1117,8 +1080,7 @@ noncomputable def sixFunctorFiniteRefinementComparison
   refinementComparisonIsomorphism D.k C.l hl E n hn
     f.hom.left r O
 
-/-- The fixed canonical coefficient realization at every positive quotient level.
-Source: coefficient presentation in clause (1). -/
+/-- The fixed canonical coefficient realization at every positive quotient level. -/
 def sixFunctorFiniteRealization (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n) (X : SixFunctorSpace D) :=
@@ -1127,8 +1089,7 @@ def sixFunctorFiniteRealization (D : FiniteFieldDatum.{u}) (C : D.CoefficientDat
 
 /-- Realize a support value at its retained etale-origin witness. All three factors
 are the operation realization, the retained input identification, and the recorded
-constant-section/K-injective-normalized coefficient comparison.
-Source: clause (2). -/
+constant-section/K-injective-normalized coefficient comparison. -/
 def sixFunctorFiniteWitnessSupport
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -1147,8 +1108,7 @@ def sixFunctorFiniteWitnessSupport
     (sfIntrinsicCompactSupportComparison (Padic.coefficientExtensionRing C.l E n) c).app
       (refinementFiniteLevelFixedObject C.l E n hn X.obj.left O)
 
-/-- The recorded origin compositor with precisely the three supplied compactifications.
-Source: proposition-composition-base-change-rf-shriek--1, witnessed composition. -/
+/-- The recorded origin compositor with precisely the three supplied compactifications. -/
 def sixFunctorFiniteCompositionComparison
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -1174,8 +1134,7 @@ def sixFunctorFiniteCompositionComparison
 
 /-- Realize a composite of two support operations at the retained input witness.
 The factors are exactly the two operation realizations and the two canonical
-fixed-scalar compact-support realizations; no composite endpoint is supplied.
-Source: clause (2). -/
+fixed-scalar compact-support realizations; no composite endpoint is supplied. -/
 def sixFunctorFiniteCompositeWitnessSupport
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -1203,8 +1162,7 @@ def sixFunctorFiniteCompositeWitnessSupport
         (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing C.l E n))) cf).obj
           (refinementFiniteLevelFixedObject C.l E n hn X.obj.left O))
 
-/-- Identity open extension followed by direct image, with the canonical open unit.
-Source: the proper identity compactification in clause (2). -/
+/-- Identity open extension followed by direct image, with the canonical open unit. -/
 def sixFunctorProperCandidateIso (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
     sfIntrinsicCompactSupport (Compactification.ofIsProper f) A ≅
@@ -1213,24 +1171,21 @@ def sixFunctorProperCandidateIso (A : Type u) [CommRing A] [Finite A]
     (Functor.mapDerivedCategoryNatIso (sfIntrinsicOpenId A X) ≪≫
       Functor.mapDerivedCategoryIdIso _) _ ≪≫ Functor.leftUnitor _
 
-/-- The canonical identity direct image is fixed by the inverse-image adjunction.
-Source: the open identity compactification in clause (2). -/
+/-- The canonical identity direct image is fixed by the inverse-image adjunction. -/
 def sixFunctorDirectIdentity (A : Type u) [CommRing A] [Finite A] (X : Scheme.{u}) :
     proEtaleConstantDerivedDirectImage (𝟙 X) A ≅ 𝟭 _ :=
   (((sfIntrinsicConstantModuleAdjunction (𝟙 X) A).mapDerivedCategoryRightDerivedAdjunction)
     |>.ofNatIsoLeft (Functor.mapDerivedCategoryNatIso (sfIntrinsicPullbackId A X) ≪≫
       Functor.mapDerivedCategoryIdIso _)).rightAdjointUniq Adjunction.id
 
-/-- Open support is the same exact open extension, using the normalized identity image.
-Source: clause (2). -/
+/-- Open support is the same exact open extension, using the normalized identity image. -/
 def sixFunctorOpenCandidateIso (A : Type u) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] :
     sfIntrinsicCompactSupport (Compactification.ofIsOpenImmersion j) A ≅
       (sfIntrinsicExtensionByZero j A).mapDerivedCategory :=
   Functor.isoWhiskerLeft _ (sixFunctorDirectIdentity A Y) ≪≫ Functor.rightUnitor _
 
-/-- Finite operations with their prescribed realization and normalization data.
-Source: clauses (1)--(5) of def-fix-six-functor-datum. -/
+/-- Finite operations with their prescribed realization and normalization data. -/
 structure SixFunctorFiniteOperations
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -1376,8 +1331,7 @@ structure SixFunctorFiniteOperations
       (proEtaleConstantModule (Spec (.of D.k)) (Padic.coefficientExtensionRing C.l E n)))
 
 /-- The actual derived quotient reduction restricted to integral constructible objects.
-Membership is the corresponding clause of the integral predicate, not a new assumption.
-Source: integral coefficient convention, positive exponent m+1. -/
+Membership is the corresponding clause of the integral predicate, not a new assumption. -/
 def sixFunctorIntegralReduction (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (m : ℕ) (X : SixFunctorSpace D) :
@@ -1392,8 +1346,7 @@ def sixFunctorIntegralReduction (D : FiniteFieldDatum.{u}) (C : D.CoefficientDat
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Quotient reduction on a good representative, fixed by the derived scalar counit.
-Source: Stacks 06YY, integral reduction construction. -/
+/-- Quotient reduction on a good representative, fixed by the derived scalar counit. -/
 def sixFunctorIntegralReductionModel
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -1405,8 +1358,7 @@ def sixFunctorIntegralReductionModel
     unrestrictedTowerResolutionIso C.l E Y.obj.left m (𝟙 P.obj)
       ⟨inferInstance, P.property.1⟩
 
-/-- The finite pullback presentation is the unique comparison preserving its adjunction.
-Source: Stacks 03D2, canonical constant-section inverse image. -/
+/-- The finite pullback presentation is the unique comparison preserving its adjunction. -/
 def sixFunctorFinitePullbackModel
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -1428,8 +1380,7 @@ def sixFunctorFinitePullbackModel
       ).mapDerivedCategoryFactors.hom.app P ≫
     DerivedCategory.Q.map ((NatIso.mapHomologicalComplex α.symm (.up ℤ)).hom.app P)
 
-/-- Reduction of exact completed open extension is its canonical scalar-adjunction mate.
-Source: Stacks 03DI and 0E8I, open coefficient-change construction. -/
+/-- Reduction of exact completed open extension is its canonical scalar-adjunction mate. -/
 def sixFunctorIntegralOpenReduction
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -1457,12 +1408,9 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- Reduction of integral construction maps to every normalized finite stage.
-The support comparison is the adjunct of the chosen Roos projection (hence of the
-projection retained in supportConstruction), and the direct comparison is the
-adjunct of its recorded direct-image projection. The coefficient comparison record
-imposes the refinement, composition, proper, open, unit and counit equations on
-these very maps. Rationalization then carries these same equations to rational
-coefficients. Source: clauses (1)--(4), derived-limit and scalar-extension conventions. -/
+The support and direct comparisons are the adjuncts of the chosen Roos and direct-image
+projections, and the coefficient comparison record imposes the refinement, composition, proper,
+open, unit and counit equations on these maps. -/
 structure SixFunctorIntegralNormalization
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]

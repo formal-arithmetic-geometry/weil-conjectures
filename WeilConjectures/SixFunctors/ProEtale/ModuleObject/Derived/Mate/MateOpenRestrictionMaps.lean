@@ -17,8 +17,6 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 import WeilConjectures.Compactification.BoundaryRefinement
 
 /-! # The specified comparison maps for open restriction
-
-Source: blueprint proposition-composition-open-restriction-compactifications-f, clauses (1)--(2).
 These are the original maps, separated from the exceptional-adjoint theorem so that
 its geometric compact-support comparison can be proved independently.
 -/
@@ -39,8 +37,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- Restriction of the existing exact termwise inverse image to the recorded localizing
-closures. The witness certifies membership only; no functor is chosen.
-Source: blueprint proposition-composition-open-restriction-compactifications-f (1). -/
+closures. The witness certifies membership only; no functor is chosen. -/
 def mateOpenPullback {U X : Scheme.{u}} (j : U ⟶ X)
     (h : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory,
       localizingClosureProEtale Λ U ((upperStar Λ j).mapDerivedCategory.obj K.obj)) :
@@ -49,8 +46,7 @@ def mateOpenPullback {U X : Scheme.{u}} (j : U ⟶ X)
   (localizingClosureProEtale Λ U).lift
     ((localizingClosureProEtale Λ X).ι ⋙ (upperStar Λ j).mapDerivedCategory) h
 
-/-- Restriction of actual levelwise extension by zero to the localizing closures.
-Source: blueprint proposition-composition-open-restriction-compactifications-f (1). -/
+/-- Restriction of actual levelwise extension by zero to the localizing closures. -/
 def mateOpenExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (h : ∀ K : (localizingClosureProEtale Λ U).FullSubcategory,
       localizingClosureProEtale Λ X
@@ -62,9 +58,7 @@ def mateOpenExtension {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
       (openImmersionLowerShriek Λ j).mapDerivedCategory) h
 
 /-- Canonical composition of open extensions: the left-adjoint comparison of the exact
-open adjunctions and the coefficient-compatible inverse-image compositor.
-Source: blueprint proposition-composition-open-restriction-compactifications-f (2), composite
-adjunction calculation. -/
+open adjunctions and the coefficient-compatible inverse-image compositor. -/
 def mateOpenExtensionComp {U X Z : Scheme.{u}} (j : U ⟶ X) (i : X ⟶ Z)
     [IsOpenImmersion j] [IsOpenImmersion i] :
     (openImmersionLowerShriek Λ j).mapDerivedCategory ⋙
@@ -79,9 +73,7 @@ def mateOpenExtensionComp {U X Z : Scheme.{u}} (j : U ⟶ X) (i : X ⟶ Z)
 
 /-- The canonical identification of compact-support image for the trivial open
 compactification (j,id) with levelwise extension by zero. The identity direct-image
-identification is the derived one normalized on ordinary module sheaves.
-Source: blueprint proposition-composition-open-restriction-compactifications-f (1), trivial
-compactification. -/
+identification is the derived one normalized on ordinary module sheaves. -/
 def mateOpenTrivialLowerShriek {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     rightDerivedLowerShriekOfCompactification Λ (Compactification.ofIsOpenImmersion j) ≅
       (openImmersionLowerShriek Λ j).mapDerivedCategory :=

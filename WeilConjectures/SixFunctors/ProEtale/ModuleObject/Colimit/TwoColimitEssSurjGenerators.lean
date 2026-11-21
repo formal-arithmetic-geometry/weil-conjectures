@@ -25,8 +25,8 @@ immersion `a = j ∘ i : S ⟶ U ⟶ X` (`i` a closed immersion, `j` an open imm
 `ℚ̄_ℓ,S`-module `L`, write `a_! L = j_! Ri_* L` for the extension by zero of `L` placed in
 degree `0`.
 
-* `ProEtale.CondensedRing.boundedConstructible_le_of_lowerShriek_isLocallyFree` (blueprint
-  `corollary-coefficient-heart-b--2`): every bounded constructible `ℚ̄_ℓ,X`-complex lies
+* `ProEtale.CondensedRing.boundedConstructible_le_of_lowerShriek_isLocallyFree`:
+  every bounded constructible `ℚ̄_ℓ,X`-complex lies
   in the smallest class of complexes closed under isomorphisms and extensions in distinguished
   triangles and containing the shifts `(a_! L)[n]`. The class of `K` all of whose shifts lie in
   such a class is triangulated, so by the truncation dévissage
@@ -114,8 +114,7 @@ noncomputable def derivedExtendScalarsLowerShriekSingleIso
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 open ZeroObject in
-/-- Blueprint `corollary-coefficient-heart-b--2` (subsection
-`corollary-coefficient-heart-b`): on a scheme `X` with noetherian underlying
+/-- On a scheme `X` with noetherian underlying
 space, every `K ∈ Dᵇc(X, ℚ̄_ℓ)` is obtained by finitely many cones from the objects
 `(a_! L)[n]`, for `a = j ∘ i : S ⟶ U ⟶ X` a locally closed immersion (`i` a closed immersion,
 `j` an open immersion), `L` a lisse `ℚ̄_ℓ,S`-module and `n ∈ ℤ`, where
@@ -123,7 +122,7 @@ space, every `K ∈ Dᵇc(X, ℚ̄_ℓ)` is obtained by finitely many cones from
 closed under isomorphisms and extensions in distinguished triangles and contains these
 objects.
 
-This states only one direction of the blueprint node (the objects `(a_! L)[n]` generate
+This states only one direction (the objects `(a_! L)[n]` generate
 `Dᵇc`; that they lie in `Dᵇc` is not restated), and only for `Λ = ℚ̄_ℓ`. -/
 theorem boundedConstructible_le_of_lowerShriek_isLocallyFree (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]

@@ -12,11 +12,8 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ModuleOpenPasting.ModuleDirectImageOpenPasting
 
 /-! # Open base-change component isomorphism
-Source: literature/blueprint/latest/blueprint/part-six-operations/sec-six-functors-basics/
-sec-brown-construction/sec-construction-of-rf/sk-thm-sf-comp-composition/
-det-sf-comp-composition-base-change.md,
-Clause (1); proof (1), first sentence: the common right adjoint
-`u_* j'^* ≅ j^* a_*` and its section normalization.
+
+The common right adjoint `u_* j'^* ≅ j^* a_*` and its section normalization.
 -/
 set_option autoImplicit false
 @[expose] public section
@@ -27,9 +24,6 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 open AlgebraicGeometry Scheme
 
 /-- The canonical mate comparison for open base change of condensed module objects.
-Source: blueprint proof (1), first sentence: the common right adjoint and its
-section normalization.
-
 The mate is formed from the specified upper-star compositors and the pullback
 square; it is the actual natural isomorphism used by the normalized section formula. -/
 noncomputable def openBaseChangeCanonical
@@ -47,26 +41,8 @@ noncomputable def openBaseChangeCanonical
           upperStarComp Λ (pullback.snd a j) j).inv)))
 
 /-- The open base-change mate has the canonical section normalization.
-Source: blueprint proof (1), first sentence: the common right adjoint and its
-section normalization.
 The coprojections and section arrow are the specified module constructions, so
-the displayed equation fixes the mate rather than allowing arbitrary section isos.
-
-Proof (node stage3-sfb-open-base-change-component-mono, to be formalized at stage 3):
-1. Pass to sectionwise module sheaves (def-weil-pbc-internal-abelian-sheaf-module-equivalence).
-   The coefficient maps `α_f` of lemma-inverse-image-coefficient-sheaves--1 are ring isomorphisms,
-   and extension of scalars along each is restriction along its inverse
-   (def-sfb-modobj-extension-along-iso); so `upperStar`/`lowerStar` are the ringed-site
-   inverse and direct images over the canonically identified coefficient rings.
-2. Apply lem-sfb-proetale-open-restriction-counit with `f = a`, `h = j`, `g = j'`,
-   `f_W = u` and `R = Λ_Z`, regarding `N` as an `a⁻¹Λ_Z`-module along `α_a`; it gives
-   `j⁻¹a_*N ≅ u_*j'⁻¹N`, transported back through step 1 to `j^*a_*N ≅ u_*j'^*N`,
-   with no qcqs, field or finiteness hypothesis.
-3. Its evaluation formula `N(Z' ×_Z V) ≅ N(X' ×_X V)` is, after swapping factors, the
-   restriction along `sectionArrow`; both coprojections are bijective for the open
-   immersions `j`, `j'`. Naturality in `V` follows from the fibre-product universal
-   property, naturality in `N` by definition, and linearity because the scalar
-   identifications are restrictions along ring isomorphisms. -/
+the displayed equation fixes the mate rather than allowing arbitrary section isos. -/
 theorem openBaseChangeComponentIso
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

@@ -45,9 +45,6 @@ import WeilConjectures.CategoryTheory.RingedDerivedComparisons.RingedDerivedMono
 /-!
 # Trace and base change before the second triangle
 
-Source: blueprint main-20261015, sec-six-functors-basics/sk-thm-int-restriction,
-`sk-thm-int-restriction-line.proof.md`, (1), second triangle.
-
 The tensor comparison is the existing representative-normalized comparison on internal
 module objects. Projection and base change are its actual adjunction mates.
 -/

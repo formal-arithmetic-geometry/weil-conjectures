@@ -212,15 +212,7 @@ namespace ProEtale
 
 /-- The pullback `g^*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 pro-étale sites: left Kan extension on presheaves followed by sheafification, left adjoint
-to `ProEtale.lowerStar`. The Kan extensions are provided by
-`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
-`WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, and the sheafification by
-`CategoryTheory.GrothendieckTopology.hasSheafify_proEtTopology` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is proved
-through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g`
-weakly étale the Kan extension hypothesis is automatic by
-`ProEtale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by
-restriction, see `ProEtale.upperStarIsoOpenImmersionRestriction`. -/
+to `ProEtale.lowerStar`. -/
 noncomputable def upperStar :
     Sheaf (Scheme.ProEt.topology Y) A ⥤ Sheaf (Scheme.ProEt.topology Z) A :=
   Functor.sheafPullbackConstruction.sheafPullback
@@ -304,15 +296,8 @@ noncomputable def ProEtale.upperStarId : (𝟙 X)^*[A] ≅ 𝟭 _ :=
 
 /-- Under the conjugation bijection between the adjunctions `𝟭 ⊣ 𝟭` and `(𝟙 X)^* ⊣ (𝟙 X)_*`,
 the identity isomorphism of the pullback corresponds to the inverse of the identity
-isomorphism of the pushforward:
-
-```
-  (𝟙 X)^* ⊣ (𝟙 X)_*        upperStarId : (𝟙 X)^* ≅ 𝟭
-      ↕ conjugate                  ↦
-      𝟭 ⊣ 𝟭               lowerStarId.symm : 𝟭 ≅ (𝟙 X)_*
-```
-
-This is the pro-étale counterpart of `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarId`. -/
+isomorphism of the pushforward. This is the pro-étale counterpart of
+`AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarId`. -/
 lemma ProEtale.conjugateIsoEquiv_upperStarId :
     conjugateIsoEquiv Adjunction.id (upperStarLowerStarAdjunction A (𝟙 X))
         (upperStarId A X) = (lowerStarId A X).symm :=

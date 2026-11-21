@@ -182,7 +182,9 @@ import all WeilConjectures.Mathlib.CategoryTheory.Sites.Pullback
 
 /-! # Nakayama for integral constructible module objects
 
-Source: Bhatt--Scholze, Proposition 6.8.11(3), and Nakayama's lemma.
+## References
+
+* Bhatt--Scholze, Proposition 6.8.11(3)
 -/
 
 @[expose] public section
@@ -310,20 +312,7 @@ private lemma finitelyPresented_nakayama (X : Scheme.{u})
   have : Epi (F.map π) := inferInstance
   exact (IsZero.iff_id_eq_zero _).2 ((cancel_epi (F.map π)).1 (by simp [hπ]))
 
-/-- An integral constructible module on which multiplication by ℓ is invertible is zero.
-Source: Bhatt--Scholze, Proposition 6.8.11(3), and Nakayama's lemma.
-
-Proof: choose a finite stratification and finite presentations on pro-etale covers.
-For a presented module M, let π : R^n → M be the presentation epimorphism. Pull π back
-along π composed with the inverse of multiplication by ℓ. Locally this pullback
-epimorphism onto R^n splits: lift its finitely many basis sections through an epimorphism
-of sheaves and combine their covering families. The resulting endomorphism T of R^n
-satisfies Tπ = π/ℓ, so (1-ℓT)π=0. The contractive-matrix lemma makes 1-ℓT invertible;
-thus π=0, and its epimorphism property makes M zero. Restriction along a presentation
-cover detects zero by sheaf separatedness. The finitely many quasi-compact stratum
-immersions jointly detect zero as well: after sheafification and filtered Kan extension,
-vanishing along their pullbacks supplies a pro-etale cover on which each section
-vanishes. This yields zero globally. Empty strata and rank zero satisfy the same formulas. -/
+/-- An integral constructible module on which multiplication by ℓ is invertible is zero. -/
 theorem integralConstructible_isZero_of_isIso_nsmul (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

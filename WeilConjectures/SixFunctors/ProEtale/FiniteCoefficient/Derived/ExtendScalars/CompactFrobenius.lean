@@ -20,8 +20,7 @@ the comparison map `ξ : Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)`
 intertwines the scalar extension of the compact Frobenius of a Weil datum `φ : Lg^* K ⟶ K` with
 the compact Frobenius of its scalar extension `φ_S : Lg^* Ψ K ≅ Ψ Lg^* K --Ψ φ--> Ψ K`
 (`AlgebraicGeometry.ProEtale.extendScalarsWeilDatum`). This is the compatibility of compact
-cohomology with the change of coefficients and the Frobenius maps of blueprint
-`theorem-grothendieck-lefschetz-trace-formula--7`.
+cohomology with the change of coefficients and the Frobenius maps.
 
 ## Main results
 
@@ -70,8 +69,7 @@ theorem lowerShriekWeilDatum_extendScalarsWeilDatum (hi : IsPullback g c.i c.i g
   rw [hξ]
   exact (reassoc_of% hEx) _
 
-/-- **Derived scalar extension commutes with the compact Frobenius** (blueprint
-`theorem-grothendieck-lefschetz-trace-formula--7`): the comparison map
+/-- **Derived scalar extension commutes with the compact Frobenius**: the comparison map
 `ξ : Ψ (Rf_!(c) K) ⟶ Rf_!(c) (Ψ K)` carries the scalar extension of the compact Frobenius of `φ` to
 the compact Frobenius of its scalar extension `φ_S`, `Ψ (F_c(φ)) ≫ ξ = ξ ≫ F_c(φ_S)`. -/
 theorem compactFrobenius_extendScalarsWeilDatum (hi : IsPullback g c.i c.i gZ)

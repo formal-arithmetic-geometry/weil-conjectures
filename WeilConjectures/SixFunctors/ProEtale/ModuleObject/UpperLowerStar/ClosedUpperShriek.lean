@@ -24,13 +24,7 @@ of the unit of `j^* ⊣ j_*` (`ProEtale.CondensedRing.sectionsWithSupport`), and
 `i^!₀ N = i^* Γ_Z N` (`ProEtale.CondensedRing.closedUpperShriek`). It is right adjoint to the
 pushforward `i_*` (`ProEtale.CondensedRing.lowerStarClosedUpperShriekAdjunction`). This is the
 module-object counterpart of
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion`, used for
-blueprint `lemma-sections-support-closed-subscheme`.
-
-The adjunction is the composite of two adjunctions: a morphism `i_* P ⟶ N` is killed by the unit
-`N ⟶ j_* j^* N` (since `j^* i_* P = 0`), so factors uniquely through `Γ_Z N`; and `Γ_Z N`,
-which vanishes on `U`, is `i_* i^* Γ_Z N` (`i_*` is fully faithful with essential image the
-module objects vanishing on `U`).
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedImmersion`.
 -/
 
 @[expose] public section

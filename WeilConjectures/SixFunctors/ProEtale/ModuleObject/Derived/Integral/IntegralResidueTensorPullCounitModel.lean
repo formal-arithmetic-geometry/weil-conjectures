@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueScalarCounitModel
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.IntegralResidueTensorPullCounitCore
 
-/-! Normalization of the coefficient-adjusted tensor presentation on X. -/
+/-! Normalization of the coefficient-adjusted tensor presentation on X.
+
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Remark 6.8.15.
+-/
 
 @[expose] public section
 
@@ -25,46 +30,7 @@ set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
 /-- The tensor-pull presentation followed by its ordinary model comparison is
 its defining tensor-presentation counit, with the ordinary coefficient identified.
-Only the X presentation occurs; there is no scalar pull mate in this identity.
-
-Source: Bhatt--Scholze, Remark 6.8.15 and the tensor-pullback identity in the
-proof of Lemma 6.5.9(5), p. 51. The following normalization of the fixed
-comparisons is an explicit formal argument, not a separate statement of the paper.
-
-Proof. For an ordinary coefficient C, write C0 for tensorModelCoefficient C and
-jC for tensorModelCoefficientIso C. Put gamma = F.leftDerivedFunctorCounit and
-let c = residueExchangeCoefficientPullIso. The definition of c is the exact-F
-single-object comparison followed by single e. Naturality of the exact-F
-comparison, its counit factorization, and naturality of quotientCompQhIso give
-c inverse followed by LF(jB.hom) followed by gamma(B0)
-= jB'.hom followed by Qh(eH inverse).
-This is simply compatibility of the degree-zero comparison with the exact-F
-counit; neither coefficient is required to be flat.
-
-For any left-derived tensor presentation (H, epsilon) with coefficient B',
-the definitions of derivedTensorSingleIso and derivedTensorPresentationIso
-and leftDerivedNatTrans_app give the following normalization at any R:
-the presentation at Qh R, followed by the inverse braiding, followed by
-jB'.hom tensor identity, followed by the lax tensor map of Qh, equals
-epsilon(R) followed by Qh(homotopyTensorSingleIso B' inverse at R).
-Indeed the defining leftDerivedNatIso equation for the single comparison is
-leftDerivedNatTrans_app; compose it with the equation for leftDerivedUnique.
-The adjacent braiding and inverse braiding cancel. The result is precisely
-the displayed normalization, with no inversion of epsilon.
-
-Expand residueExchangeTensorPullIso as the X presentation followed by tensor
-with c inverse, and expand tensorModelTarget as inverse braiding, the tensor
-of LF(jB.hom) followed by gamma(B0) with gamma(P), and the lax map of Qh.
-Braiding naturality moves c inverse to the first factor. The first identity
-replaces its composite with the coefficient counit by jB'.hom then Qh(eH inverse).
-Use tensor exchange to move gamma(P) next to the presentation, and use the
-presentation's naturality at a = gamma(P). Naturality of the lax map of Qh
-moves Qh(eH inverse) to the homotopy target. Apply the preceding presentation
-normalization with R = Fh(P), and combine the two final Qh maps using map_comp.
-This gives exactly the right-hand side in the statement. All these are
-naturality and defining counit identities; gamma(P) and the tensor counit are
-retained as morphisms. Thus arbitrary P, including zero, is allowed without
-flatness of P, its pullback, or either coefficient. -/
+Only the X presentation occurs; there is no scalar pull mate in this identity. -/
 theorem integralResidue_tensorPullCounit_model {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
       (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :

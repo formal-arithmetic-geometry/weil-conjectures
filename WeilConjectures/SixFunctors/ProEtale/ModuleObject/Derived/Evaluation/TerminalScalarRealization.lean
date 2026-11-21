@@ -19,7 +19,11 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! The concrete ordinary functor underlying terminal scalar realization.
 
-Source: Hemo--Richarz--Scholbach, Section 3, equations (3.1)--(3.2).
+## References
+
+* Hemo--Richarz--Scholbach, Section 3, equations (3.1)--(3.2)
+* Hemo--Richarz--Scholbach, Section 3
+* Hemo--Richarz--Scholbach, equations (3.1)--(3.2)
 -/
 
 @[expose] public noncomputable section
@@ -33,15 +37,13 @@ variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   (O : Sheaf J Ab.{u + 1}) [MonObj O] [IsCommMonObj O]
   (U : C) (hU : IsTerminal U)
 
-/-- Constant realization, sheafified scalar extension, and internal reconstruction.
-Source: HRS equations (3.1)--(3.2). -/
+/-- Constant realization, sheafified scalar extension, and internal reconstruction. -/
 def terminalScalarRealization :
     ModuleCat.{u + 1} (A J O U) ⥤ Mod (Sheaf J Ab.{u + 1}) O :=
   SheafOfModules.flatScalarRealization J (scalarMap J O U hU) ⋙
     (InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J O).inverse
 
-/-- Both scalar realization and the inverse section equivalence preserve addition.
-Source: HRS Section 3. -/
+/-- Both scalar realization and the inverse section equivalence preserve addition. -/
 instance terminalScalarRealization_additive : (terminalScalarRealization J O U hU).Additive := by
   let e := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u} J O
   let : e.inverse.Additive := Functor.additive_of_preserves_binary_products e.inverse

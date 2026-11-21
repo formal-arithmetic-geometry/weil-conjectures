@@ -15,7 +15,7 @@ Let `Λ` and `Λ'` be coefficient rings with pushforward data `P` and `P'`
 (`ProEtale.CondensedRing.BoundedConstructiblePushforwardData`: the functors `Rf_*` and the
 adjunctions `Lf^* ⊣ Rf_*`). A *coefficient change* `Λ ⟶ Λ'`
 (`ProEtale.CondensedRing.BoundedConstructibleCoefficientChange`) packages the data entering the
-coefficient compatibilities of blueprint `sk-thm-sf-compatibility` (7):
+coefficient compatibilities of the six operations:
 
 * functors `T_X : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ'⟧` (extension of scalars) and commutation squares
   **(Pull)** `Lf^* ⋙ T_X ≅ T_Y ⋙ Lf^*`, given as parameters, so that they appear unfolded in the

@@ -12,23 +12,22 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 /-!
 # Finite-coefficient pro-étale definitions for the ordinary Künneth formula
 
-The pro-étale definitions of the blueprint subsection `proposition-ordinary-external-kunneth--1`, at
-a Noetherian commutative coefficient ring `Λ` (in the blueprint the finite ring `𝒪_E/ϖⁿ`): they are
-the pro-étale functors and projection maps of the repository specialised to the coefficients
-`ModuleCat Λ`.
+The pro-étale definitions for the ordinary Künneth formula, at a Noetherian commutative
+coefficient ring `Λ` (typically the finite ring `𝒪_E/ϖⁿ`): they are the pro-étale functors and
+projection maps of the repository specialised to the coefficients `ModuleCat Λ`.
 
-- `AlgebraicGeometry.ProEtale.rightDerivedGlobalSectionsModule` (`pur7710-def-derived-sections`,
-  pro-étale case).
-- `AlgebraicGeometry.ProEtale.IndEtaleTestObject` (`pur7710-def-ind-etale-tests`) and the
+- `AlgebraicGeometry.ProEtale.rightDerivedGlobalSectionsModule` (derived sections, pro-étale
+  case).
+- `AlgebraicGeometry.ProEtale.IndEtaleTestObject` (affine ind-étale test objects) and the
   restriction `AlgebraicGeometry.ProEtale.IndEtaleTestObject.restrict`.
-- `AlgebraicGeometry.ProEtale.starProjectionMapModule` (`definition-projection-formula-map--1`).
-- `AlgebraicGeometry.ProEtale.openProjectionMapModule` (`pur713-def-open-projection`).
-- `AlgebraicGeometry.ProEtale.shriekProjectionMapModule` (`proposition-purity-vector-bundles`).
+- `AlgebraicGeometry.ProEtale.starProjectionMapModule` (direct-image projection map).
+- `AlgebraicGeometry.ProEtale.openProjectionMapModule` (open-extension projection map).
+- `AlgebraicGeometry.ProEtale.shriekProjectionMapModule` (compact-support projection map).
 
 ## Implementation notes
 
 The three projection maps are stated as natural transformations of bifunctors, whose
-`(K, L)`-components are the morphisms of the blueprint: stating the components for objects `K`
+`(K, L)`-components are the expected morphisms: stating the components for objects `K`
 of `D(X_proét, Λ)` elaborated afresh at `ModuleCat Λ` makes the kernel compare instances of
 the sheaf categories found along different paths, which it fails to do in reasonable time.
 -/
@@ -49,19 +48,18 @@ namespace ProEtale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `pur7710-def-derived-sections` (pro-étale case): derived sections.
+/-- Derived sections (pro-étale case).
 
 For a scheme `W`, `RΓ_{W,proét,Λ} : D(W_proét, Λ) ⥤ D(Mod_Λ)` is the total right derived
 functor, computed on K-injective resolutions, of the global sections functor `Γ(W_proét, -)` on
 pro-étale sheaves of `Λ`-modules (`AlgebraicGeometry.ProEtale.rightDerivedGlobalSections` for
-`A = ModuleCat Λ`). The étale case is `AlgebraicGeometry.Etale.rightDerivedGlobalSectionsModule`;
-the blueprint takes `Λ = 𝒪_E/ϖⁿ`. -/
+`A = ModuleCat Λ`). The étale case is `AlgebraicGeometry.Etale.rightDerivedGlobalSectionsModule`. -/
 noncomputable abbrev rightDerivedGlobalSectionsModule (W : Scheme.{u}) :
     DerivedCategory (Sheaf (Scheme.ProEt.topology W) (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (ModuleCat.{u + 1} Λ) :=
   rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) W
 
-/-- Blueprint `pur7710-def-ind-etale-tests`: affine ind-étale test objects.
+/-- Affine ind-étale test objects.
 
 A test object of `W_proét` is a morphism `u_B : B ⟶ W` factoring as `B ⟶ V ⟶ W` through an
 affine open `V ⊆ W`, where `B ⟶ V` is a cofiltered limit of affine schemes étale over `V`
@@ -107,8 +105,7 @@ end IndEtaleTestObject
 
 variable [IsNoetherianRing Λ]
 
-/-- Blueprint `definition-projection-formula-map--1`: direct-image projection transformation, finite
-coefficients.
+/-- Direct-image projection transformation, finite coefficients.
 
 For `f : X ⟶ Y`, `K ∈ D(X_proét, Λ)` and `L ∈ D(Y_proét, Λ)`,
 `P_{f,K,L} : Rf_* K ⊗ᴸ L ⟶ Rf_*(K ⊗ᴸ Lf^* L)` is the adjoint under `Lf^* ⊣ Rf_*` of the monoidal
@@ -121,7 +118,7 @@ noncomputable abbrev starProjectionMapModule {X Y : Scheme.{u}} (f : X ⟶ Y) :
       rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar (ModuleCat.{u + 1} Λ) f :=
   rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f
 
-/-- Blueprint `pur713-def-open-projection`: open-extension projection map, finite coefficients.
+/-- Open-extension projection map, finite coefficients.
 
 For an open immersion `j : U ⟶ X`, `K ∈ D(U_proét, Λ)` and `N ∈ D(X_proét, Λ)`,
 `σ_{j,K,N} : D(j_!)(K ⊗ᴸ D(j^*) N) ⟶ D(j_!) K ⊗ᴸ N` is the adjoint under `D(j_!) ⊣ D(j^*)` of
@@ -135,8 +132,7 @@ noncomputable abbrev openProjectionMapModule {U X : Scheme.{u}} (j : U ⟶ X) [I
       derivedTensorWhiskeringLeftOpenImmersionLowerShriek (ModuleCat.{u + 1} Λ) j :=
   derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j
 
-/-- Blueprint `proposition-purity-vector-bundles`: compact-support projection transformation, finite
-coefficients.
+/-- Compact-support projection transformation, finite coefficients.
 
 For a compactification `d = (j, p)` of `f` (for the chosen one `c_f`, this is `PF_f`,
 `AlgebraicGeometry.ProEtale.projectionMap`), `K ∈ D(X_proét, Λ)` and `L ∈ D(Y_proét, Λ)`,

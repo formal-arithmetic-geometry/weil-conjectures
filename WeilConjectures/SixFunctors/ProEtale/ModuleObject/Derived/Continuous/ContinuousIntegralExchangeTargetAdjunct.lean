@@ -16,7 +16,12 @@ import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Continuous.
 import all WeilConjectures.SixFunctors.Supporting.ModCondensedCachedInstances
 import all WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.FiniteDiscreteRingObj.FiniteDiscreteCoefficientBaseChange
 
-/-! # Coherence of integral localization and the specified exchange map -/
+/-! # Coherence of integral localization and the specified exchange map
+
+## References
+
+* Bhatt--Scholze, Remark 6.8.15
+-/
 
 set_option backward.defeqAttrib.useBackward true
 
@@ -870,20 +875,7 @@ private lemma integral_target_start
     (integralPull_counit ℓ E k f' _)
     (integralPull_inv_naturality ℓ E k f' _)
 
-/-- Normal form for the target side after the bounded f′ adjunction.
-Source: Bhatt--Scholze, Remark 6.8.15; ChangeOfCoefficients.lean derived comparisons
-and the specified unit-square-counit exchange construction.
-
-Proof. Apply the bounded f′ adjunction to the target composite. Counit naturality moves the g′
-pull comparison past the f′ counit. The mate/counit identity replaces the f′ push comparison.
-Naturality of the inverse f′ pull comparison moves scalar extension of integral exchange past
-it. Expand the integral exchange adjunct and use naturality of the g′ pull comparison. Coherence
-of the specified pull comparisons with composition, obtained by right deriving the
-restriction/pushforward composition diagram and conjugating through adjunctions, gives the pull
-square cube. Precompose that cube with inverse f′ pull comparison and postcompose with g′
-pullback of inverse f pull comparison. Cancel these two isomorphisms and postcompose with scalar
-extension of the integral counit. This is the displayed composite. No push comparison or
-exchange is inverted. -/
+/-- Normal form for the target side after the bounded f′ adjunction. -/
 theorem integralConstructible_exchange_target_adjunct
     (sq : CommSq g' f' f g) (K : integralConstructible ℓ E X) :
     ((ContinuousMapRingObj.boundedConstructibleUpperStarLowerStarAdjunction ℓ E

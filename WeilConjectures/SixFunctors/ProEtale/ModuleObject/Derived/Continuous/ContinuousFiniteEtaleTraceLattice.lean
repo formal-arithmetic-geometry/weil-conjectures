@@ -142,7 +142,9 @@ import all WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 
 /-! # Locally free integral images under finite etale trace
 
-Source: blueprint main-20261015, stratified lattice proof, Pushing down by the trace.
+## References
+
+* Bhatt--Scholze, Section 6.8
 -/
 
 @[expose] public noncomputable section
@@ -152,25 +154,7 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- The finite etale trace is epic and its integral image is locally free.
-Source: Bhatt--Scholze, Section 6.8; blueprint main-20261015,
-stratified lattice proof, Pushing down by the trace.
-
-Proof. Split the finite etale surjection etale locally. On a split chart define trace
-by summing the sheet counits. Permutation invariance and sheaf descent glue this map.
-On any nonempty chart surjectivity supplies a sheet; insertion into that sheet gives
-a local right inverse, hence trace is epic. The integral image restricts to the sum
-of the sheet lattices, by the local sum formula of finite_etale_trace_image.
-Trivialize P pro-etale locally. The lattice-class sheaf is the constant coset sheaf,
-so the finitely many sheet lattices are constant on a common refinement, with equality
-of their embedded images. Their finite sum is an algebraic free full lattice.
-The continuous lattice sum theorem gives a continuous linear section of the sum map
-and a restriction-compatible free presentation of its continuous-function sheaf.
-Therefore the sheaf image is that free sheaf on the refinement. Transport back through
-the continuous coefficient module equivalence and compose the covers to obtain local
-freeness of the actual categorical image below. This argument includes empty schemes
-and zero rank and does not divide by the covering degree. No rationalization of the
-image inclusion is asserted here. -/
+/-- The finite etale trace is epic and its integral image is locally free. -/
 theorem continuousFiniteEtaleTrace_lattice
     (l : ℕ) [Fact l.Prime] (E : Type) [NormedField E]
     [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

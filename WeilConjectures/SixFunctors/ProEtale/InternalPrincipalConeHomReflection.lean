@@ -17,7 +17,11 @@ import all WeilConjectures.CategoryTheory.UnitPowerCompleteness
 
 /-! # Reflection into internal principal cone outputs
 
-Source: Stacks Project, Tags 099B, 0A0E and 0941.
+## References
+
+* [Stacks, Tag 099B](https://stacks.math.columbia.edu/tag/099B)
+* [Stacks, Tag 0A0E](https://stacks.math.columbia.edu/tag/0A0E)
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
 -/
 
 @[expose] public noncomputable section
@@ -249,21 +253,7 @@ private theorem scalar_section_apply
 attribute [local irreducible] CochainComplex.PrincipalCone.completion
   CochainComplex.PrincipalCone.unit sectionTransport
 
-/-- Maps into a principal cone completion extend uniquely across the principal cone unit.
-Source: Stacks 099B (derived completion is a reflection), 0A0E (Koszul computation),
-and 0941 (Roos computation of the strict derived limit).
-
-Proof: reconstruct section modules by the exact tensor equivalence. The scalar d is
-multiplication by the constant uniformizer, as follows by the displayed test on every
-continuous function and every point. The two-term principal cone tower therefore becomes
-the singleton negative Koszul tower, with transitions (pi,1) and degree-zero inclusions.
-The equivalence preserves products and mapping cocones. Exact countable products on the
-pro-etale site identify this Roos complex with total derived inverse limit, preserving
-the strict zero-homotopy unit. The singleton Koszul reflector has locally complete output
-for Q and its unit on P induces a Hom bijection into every locally complete object.
-Apply that bijection to the output for Q and transport back through the fully faithful
-derived section equivalence. Finite free Koszul factors preserve quasi-isomorphisms,
-so neither P nor Q needs K-flatness, boundedness, or termwise flatness. -/
+/-- Maps into a principal cone completion extend uniquely across the principal cone unit. -/
 theorem internal_principal_cone_hom_reflection
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (f : (DerivedNakayama.integerRing l E).obj.obj S)

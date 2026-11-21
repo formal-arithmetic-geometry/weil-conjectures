@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 /-!
 # Weil data on pro-étale complexes at finite coefficients
 
-Let `g : X ⟶ X` be an endomorphism of a scheme. As in blueprint
-`definition-frobenius-correspondences-their-operators`, a *Weil datum* on a complex
+Let `g : X ⟶ X` be an endomorphism of a scheme. A *Weil datum* on a complex
 `K ∈ D(X_proét, A)` is a morphism `φ : Lg^* K ⟶ K`, without an invertibility requirement (a strict
 Weil complex, `AlgebraicGeometry.ProEtale.StrictWeilComplex`, is the case of an isomorphism and an
 automorphism `g`). This file attaches to Weil data the operations that the Frobenius operators of
@@ -19,7 +18,7 @@ the trace formula are built from.
 
 * **Iterates.** Writing `g_m = g^m` (`AlgebraicGeometry.ProEtale.iterateHom`), the iterate
   `φ_m : Lg_m^* K ⟶ K` composes the pulled back copies of `φ` along the composition isomorphisms
-  of the derived pullback (blueprint `definition-frobenius-correspondences-their-operators--4`):
+  of the derived pullback:
   ```
   φ_0 : L(𝟙 X)^* K ≅ K,
   φ_{m+1} : L(g ≫ g_m)^* K ≅ Lg^* Lg_m^* K --Lg^* φ_m--> Lg^* K --φ--> K.
@@ -31,7 +30,7 @@ the trace formula are built from.
   ```
 * **Stalks.** For a point `x : P ⟶ X` fixed by `g`, `x ≫ g = x`, this is a Weil datum for the
   identity of `P`, that is an endomorphism `F_x` of the stalk complex `K_x = Lx^* K`: the *local
-  Frobenius* of blueprint `definition-frobenius-correspondences-their-operators`,
+  Frobenius*, with
   `F_{x,m} = (φ_m)_x` for a point fixed by `g_m`.
 
 ## Main definitions
@@ -91,7 +90,7 @@ section Datum
 variable {X : Scheme.{u}} {g : X ⟶ X}
   {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
 
-/-- Blueprint `definition-frobenius-correspondences-their-operators--4`: the iterate
+/-- The iterate
 `φ_m : Lg_m^* K ⟶ K` of a Weil datum `φ : Lg^* K ⟶ K`, for the iterate `g_m = g^m`
 (`AlgebraicGeometry.ProEtale.iterateHom`): `φ_0` is the identification `L(𝟙 X)^* K ≅ K` and
 `φ_{m+1}` is the composite
@@ -135,15 +134,13 @@ noncomputable def upperStarWeilDatum (h : e ≫ x = x ≫ g) (φ : L((g)^*[A]).o
 lemma id_comp_eq_comp_of_comp_eq (hx : x ≫ g = x) : 𝟙 P ≫ x = x ≫ g := by
   rw [Category.id_comp, hx]
 
-/-- Blueprint `definition-frobenius-correspondences-their-operators`: the *local Frobenius*
+/-- The *local Frobenius*
 `F_x : K_x ⟶ K_x` of a Weil datum `φ : Lg^* K ⟶ K` at a point `x : P ⟶ X` fixed by `g`
 (`x ≫ g = x`), on the stalk complex `K_x = Lx^* K`:
 ```
 Lx^* K ≅ L(𝟙 P)^* Lx^* K ≅ L(x ≫ g)^* K ≅ Lx^* Lg^* K --Lx^* φ--> Lx^* K,
 ```
-the Weil datum `AlgebraicGeometry.ProEtale.upperStarWeilDatum` for the identity of `P`. For a
-point fixed by the iterate `g_m`, the local Frobenius `F_{x,m}` of the trace formula is the
-local Frobenius of the iterated datum `φ_m` (`AlgebraicGeometry.ProEtale.weilDatumIterate`). -/
+the Weil datum `AlgebraicGeometry.ProEtale.upperStarWeilDatum` for the identity of `P`. -/
 noncomputable def stalkFrobenius (hx : x ≫ g = x) (φ : L((g)^*[A]).obj K ⟶ K) :
     L((x)^*[A]).obj K ⟶ L((x)^*[A]).obj K :=
   (leftDerivedUpperStarId A P).inv.app _ ≫ upperStarWeilDatum (id_comp_eq_comp_of_comp_eq hx) φ

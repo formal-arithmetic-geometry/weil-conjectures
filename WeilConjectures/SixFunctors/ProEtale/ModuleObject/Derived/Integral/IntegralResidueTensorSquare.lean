@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Integral.Integr
 
 /-! # Tensor coherence of the residue pull square
 
-Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
+## References
+
+- Bhatt--Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(3), Remark 6.8.15.
 -/
 
 @[expose] public section
@@ -30,16 +32,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra 
 
 attribute [local instance 2000] residueExchangeIntegralDerivedMonoidal
 
-/-- The canonical residue tensor square, with a constructed derived monoidal structure.
-
-Source: Bhatt--Scholze, Lemma 6.5.9(3) and Remark 6.8.15.
-
-Proof. Take the ordinary monoidal pullback structure and preservation of flat
-modules from integralResidue_tensorGeometry. Apply the proved generic derivation
-of strong monoidal structures. The source tensor presentation is the actual
-residueExchangeTensorIso; the target tensor presentation and compatibility are
-the geometric square. This construction uses no choice of a derived monoidal
-structure and no additional tensor universal-property assumption. -/
+/-- The canonical residue tensor square, with a constructed derived monoidal structure. -/
 theorem integralResidue_tensorSquare {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ m : (residueExchangeUpperStar (integralCoeff ℓ E) f).Monoidal,
       letI := m

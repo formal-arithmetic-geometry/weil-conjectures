@@ -99,14 +99,19 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Cohomological bounds from complete residue Tor amplitude
 
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1) and (2);
-sites-cohomology.tex, Tags 0942 and 0947; algebraization.tex, Tag 099I.
-
 The completion is the inverse limit of constant quotient ring sheaves, not the
 constant sheaf of the valuation ring. Level zero of the reduction API means the
 positive exponent one, hence the residue field. No characteristic, constructibility,
 or local constancy condition is imposed.
+
+## References
+
+* [Stacks, Tag 09C2](https://stacks.math.columbia.edu/tag/09C2)
+* [Stacks, Tag 0942](https://stacks.math.columbia.edu/tag/0942)
+* [Stacks, Tag 0947](https://stacks.math.columbia.edu/tag/0947)
+* [Stacks, Tag 099I](https://stacks.math.columbia.edu/tag/099I)
 -/
+
 
 @[expose] public section
 
@@ -171,37 +176,7 @@ private theorem reduction_transition_eq
 attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralOperationsAbLocallyBijective in
 /-- A derived-complete complex has the same cohomological bounds as a Tor interval
-of its residue reduction, tested after restriction to every small-site object.
-
-Source: Stacks Project, proetale.tex, Tag 09C2, proof of (1),(2);
-sites-cohomology.tex, Tags 0942 and 0947; algebraization.tex, Tag 099I.
-
-Proof:
-1. Test residue Tor amplitude with the coefficient sheaf itself on X. The tensor
-unit identity gives vanishing of residue cohomology outside [a,b].
-2. Choose one flat-term K-flat resolution P by lem-pc-kflat-resolution. By
-lem-pur-derived-change-of-rings its reductions compute every K_n. Their actual
-chain maps 1_P tensor (C_(n+1) to C_n) give the canonical quotient transitions.
-3. The DVR coefficient sequence 0 to k_X to C_(n+1) to C_n to 0 is short exact:
-the first map sends r to varpi^n r; cancellation proves injectivity and identifies
-its image with the quotient kernel. Surjectivity and these identities pass to
-constant sheaves locally. Compatibility of the limit projections makes the maps
-B_X-linear (def-weil-l-adic-coefficient-extension, def-weil-pbc-constant-sheaf).
-4. Flatness of each term of P preserves this exact sequence
-(def-pc-flat-sheaf-modules). Apply lem-weil-pbc-complex-ses-triangle and
-lem-sf-derived-homology-long-exact to obtain the cohomology exact sequences.
-5. Induction gives cohomology in [a,b] for all K_n. The exact sequence in degree b
-also makes each canonical transition on H^b epimorphic.
-6. Apply proposition-milnor-sequence--2 to this strict tower. By proposition-exact-products--2,
-its termwise product represents the product in D(Mod(B_X)), and localization
-identifies 1-T with the tower transition endomorphism. Rotating the cone triangle
-gives a Roos triangle (def-weil-abstract-derived-category,
-def-weil-triangulated-category, def-weil-derived-limit). Completeness and the
-uniqueness clause of lemma-reduction-derived-nakayama identify K up to isomorphism
-with this Milnor middle term.
-7. For j<a and j>b+1 both outer Milnor terms vanish. At j=b+1, the right term is
-zero and proposition-milnor-sequence--3 kills R^1 lim H^b(K_n), since its transitions are
-epimorphic. Exactness gives the asserted vanishing in every remaining degree. -/
+of its residue reduction, tested after restriction to every small-site object. -/
 theorem complete_residue_cohomology_bounds
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

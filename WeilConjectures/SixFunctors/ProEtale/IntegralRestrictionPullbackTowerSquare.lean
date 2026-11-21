@@ -8,7 +8,12 @@ public import WeilConjectures.SixFunctors.ProEtale.IntegralReductionPullbackNorm
 import all WeilConjectures.SixFunctors.ProEtale.DerivedCompletion
 import all WeilConjectures.SixFunctors.ScalarSixDerivedPullbackNormalization
 
-/-! # Coherence of pullback with consecutive integral scalar restrictions -/
+/-! # Coherence of pullback with consecutive integral scalar restrictions
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -194,19 +199,7 @@ private def ordinaryComp (Z : Scheme.{u}) (n : ℕ) :
 attribute [-instance] scalarMapMon CondensedRing.scalarSixRing_comm
   CondensedRing.scalarSixMap_isMonHom
 
-/-- Pullback respects the compositor for two consecutive quotient restrictions.
-Source: blueprint integral open direct image, Completeness paragraph; Stacks 06YY.
-
-Proof: pull the two quotient ring maps from the point to U and X. Their composite is
-exactly the smaller quotient map. On ordinary internal modules, the restriction
-compositor is the identity on the underlying object. The pullback/restriction
-comparison is the mate of the identity-on-underlying-sheaves direct-image comparison.
-Pasting the two ordinary squares therefore equals the square for the composite ring
-map. Apply the termwise derived localization, preserving the composition isomorphisms,
-and replace the ordinary restriction compositor by the published restrictComp. This
-is the derived restriction tower square, evaluated at M. No flatness is used because
-restriction and geometric inverse image are exact. The argument includes n=0, zero
-complexes, empty schemes, and unbounded complexes. -/
+/-- Pullback respects the compositor for two consecutive quotient restrictions. -/
 theorem integral_restriction_pullback_tower_square (n : ℕ)
     (M : AdicCompletion.FiniteDerived l E X n) :
     (CondensedRing.upperStar (DerivedNakayama.integerRing l E) j).mapDerivedCategory.map

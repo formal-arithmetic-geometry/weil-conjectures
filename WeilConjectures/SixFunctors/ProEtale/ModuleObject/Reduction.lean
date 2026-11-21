@@ -27,9 +27,8 @@ a morphism of coefficient ring objects `𝒪_{E,X} ⟶ 𝔽_{E,X}`
 (`ProEtale.padicIntegersToResidueField`). The residue field `𝔽_E` acts on every module object over
 `𝔽_{E,X}` through the constant global sections, so that such a module object is a pro-étale sheaf
 of `𝔽_E`-modules (`ProEtale.residueFieldModuleSheaf`). The *first derived reduction*
-`K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}` of blueprint `definition-derived-adic-completeness`, as a complex of
-pro-étale sheaves of `𝔽_E`-modules, is `ProEtale.derivedReduction`.
-
+`K₁ = K ⊗ᴸ_{𝒪_{E,X}} 𝔽_{E,X}`, as a complex of pro-étale sheaves of `𝔽_E`-modules, is
+`ProEtale.derivedReduction`.
 -/
 @[expose] public section
 

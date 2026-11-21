@@ -6,11 +6,13 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.SchemeRefinementTree
 import Mathlib.Data.Fintype.Sort
-
 /-!
+
 # Numbering the vertices of a finite scheme refinement tree
 
-Source: the finite binary tree underlying Stacks Project, Topology, Tag 09Y4.
+## References
+
+* [Stacks, Tag 09Y4](https://stacks.math.columbia.edu/tag/09Y4)
 -/
 
 @[expose] public section
@@ -366,25 +368,6 @@ private theorem transport_mem {ι : Type} (V : ι → Scheme.{u})
   exact hx
 
 /-- A recursive finite splitting tree can be numbered in parent-before-child order.
-
-Source: Stacks Project, Topology, Tag 09Y4, finite refinement tree bookkeeping.
-
-Proof: Recursively count one vertex for a tip and one plus the two child counts for a node.
-Use preorder numbering: the root is zero, left subtree labels follow it, and right subtree
-labels follow the entire left subtree. Transport schemes, structural maps, and branch maps
-along these finite-index injections. At a tip choose both children and its parent to be
-itself and the two unused edges to be identities. At a node set its two children to the
-roots of the numbered subtrees. The parent of every other vertex is its subtree parent,
-except at the two child roots where it is the new root. Index inequalities follow from
-these offsets, and the leaf characterization follows by induction on the tree. The
-root isomorphism is the identity. Vertex and branch properties and admissibility are
-stored in the recursive constructors and transport to these labels. For covering, lift
-a point into one of the complementary child images and apply that subtree's covering
-induction hypothesis. Leaves in distinct subtrees have disjoint images by the disjoint
-child ranges; within one subtree use its disjointness and injectivity of the child
-immersion. Structural maps commute by associativity. Finally `AllLeaves P` transfers
-the predicate at each tip to its numerical label. This also handles a single tip and
-empty schemes without making a nonemptiness assumption.
 -/
 theorem exists_fin_encoding
     {W : Scheme.{u}}

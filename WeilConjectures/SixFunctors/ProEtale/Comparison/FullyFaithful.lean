@@ -14,23 +14,17 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 Let `S` be a scheme and `A` a Grothendieck abelian category. We show that the unit
 `F ⟶ ν_* ν^* F` of the comparison adjunction `ν^* ⊣ ν_*` between `A`-valued sheaves on the
 small étale and the small pro-étale site of `S` is an isomorphism, so that
-`ν^* : Sh(S_ét, A) ⥤ Sh(S_proét, A)` is fully faithful (Bhatt–Scholze, Corollary 5.1.6;
-Stacks, Lemma 099T).
-
-The proof follows the `Ab`-valued argument of the `proetale` package: on an object
-`U = limᵢ Uᵢ` of the affine pro-étale site the presheaf pullback of an étale sheaf `F` is
-the filtered colimit `colimᵢ F(Uᵢ)`
-(`AlgebraicGeometry.Scheme.ProEt.preservesRelativeFilteredColimits_lan_toProEt`), so the
-presheaf pullback is already a sheaf on the affine pro-étale site
-(`AlgebraicGeometry.Scheme.ProEt.isSheaf_lan_toProEt`): this uses that filtered colimits are
-exact in `A`. Since the affine pro-étale site is a dense subsite of the pro-étale site,
-sheafification does not change the sections over affine étale `S`-schemes, which is what the
-unit compares.
+`ν^* : Sh(S_ét, A) ⥤ Sh(S_proét, A)` is fully faithful.
 
 ## Main results
 
 - `AlgebraicGeometry.ProEtale.isIso_comparisonAdjunction_unit_of_isGrothendieckAbelian`:
   the unit of `ν^* ⊣ ν_*` is an isomorphism.
+
+## References
+
+* [Bhatt–Scholze, *The pro-étale topology for schemes*, Corollary 5.1.6]
+* [Stacks, Tag 099T](https://stacks.math.columbia.edu/tag/099T)
 -/
 
 @[expose] public section
@@ -190,15 +184,7 @@ lemma comparisonAdjunction_unit_app_hom (X : Scheme.{u}) (F : Sheaf X.smallEtale
     Adjunction.map_restrictFullyFaithful_unit_app]
   simp
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
-
-*Full faithfulness, in the form the chapter uses.* The unit `id ⟶ ν_* ν^*` of the comparison
-adjunction is an isomorphism; this is the assertion `id ≅ Rν_{T*} ν_T^*` of the blueprint, and
-it is strictly stronger than the existence of some isomorphism between the two functors.
-
-Detection of isomorphisms is by covering families and on the affine ind-étale basis, not by
-geometric points: geometric-point stalks are *not* conservative on all pro-étale sheaves, and
-no argument of the purity chapter uses them off the étale-origin objects. -/
+/-- The unit `id ⟶ ν_* ν^*` of the comparison adjunction is an isomorphism. -/
 theorem isIso_comparisonAdjunction_unit (X : Scheme.{u}) :
     IsIso (comparisonAdjunction A X).unit := by
   rw [NatTrans.isIso_iff_isIso_app]
@@ -221,16 +207,12 @@ theorem isIso_comparisonAdjunction_unit (X : Scheme.{u}) :
     exact h2 (Opposite.op ((AffineEtale.toAffineProEt X).obj U.unop))
   infer_instance
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
-
-*Fullness.* The comparison pullback is full. -/
+/-- The comparison pullback is full. -/
 instance full_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Full :=
   have := isIso_comparisonAdjunction_unit A X
   (comparisonAdjunction A X).full_L_of_isSplitEpi_unit_app
 
-/-- Blueprint `theorem-bounded-below-cohomology-comparison`: The pro-étale comparison
-
-*Faithfulness.* The comparison pullback is faithful. -/
+/-- The comparison pullback is faithful. -/
 instance faithful_comparisonUpperStar (X : Scheme.{u}) : (comparisonUpperStar A X).Faithful :=
   have := isIso_comparisonAdjunction_unit A X
   (comparisonAdjunction A X).faithful_L_of_mono_unit_app

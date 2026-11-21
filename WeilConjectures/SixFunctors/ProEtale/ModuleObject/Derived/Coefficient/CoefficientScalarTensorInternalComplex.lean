@@ -14,6 +14,10 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Coefficient.Coe
 
 The counit characterization of the existing total left derived tensor comparison
 provides its signed-total-complex representative.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
 -/
 
 @[expose] public noncomputable section
@@ -53,14 +57,7 @@ private theorem paste_scalar_complex_faces {C : Type*} [Category C]
 attribute [local irreducible] coefficientInternalScalarComplex
 
 -- Compare the complex and homotopy localization tensor structures.
-/-- The internal scalar tensor comparison on complex representatives.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
-The complex localization tensorator is the homotopy localization tensorator: the
-homotopy quotient is strict monoidal and its comparison with complex localization
-has identity components. The fixed complex scalar comparison is the derived-functor
-counit, by its factorization property. Substitute these two identifications into the
-characterizing counit equation of the total left derived tensor comparison. This
-identifies the map of the signed ordinary total tensor with the derived tensor map. -/
+/-- The internal scalar tensor comparison on complex representatives. -/
 theorem coefficientScalarTensor_internalComplex (Z : Scheme.{u})
     (P Q : CochainComplex (ModuleRingedComparison.internalModules R Z) ℤ) :
     let := internalScalarMonoidal a Z

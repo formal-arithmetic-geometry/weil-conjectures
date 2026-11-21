@@ -13,6 +13,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IhomComp
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.UpperShriekCompatibilityProper
 
+/-! # Biduality comparison for scalar extension of constructible sheaves
+
+## References
+
+* Bhatt--Scholze, Lemmas 6.7.13 and 6.7.18, Proposition 6.8.14 and Remark 6.8.15
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -140,20 +147,7 @@ private lemma integral_qbar_biduality_comparison_bounded
   have := hβ ((ihom L).obj W)
   exact exists_biduality_comparison T w.hom L
 
-/-- The actual scalar-extension double-dual comparison, including its evaluation equation.
-
-Source: Bhatt--Scholze, Lemmas 6.7.13 and 6.7.18, Proposition 6.8.14 and Remark
-6.8.15; latest blueprint `det-prop-sf-biduality-general.proof.md`.
-Proof in words: compose integral rationalization with extension from E to the
-finite-subextension-valued condensed Qbar coefficient.  Exceptional coefficient
-change identifies the scalar extension of the integral dualizing object with the
-chosen bounded exceptional pullback of the Qbar unit, by uniqueness of right
-adjoints and its counit.  The two internal-Hom coefficient comparisons give the
-displayed isomorphism of double duals.  Uncurry each comparison: it is scalar
-extension of evaluation, with the scalar tensorator.  Naturality and symmetry
-therefore give the stated equation for the canonical evaluation transpose.  These
-comparisons can be checked after algebraic closure and descended conservatively;
-no claim of invertibility of either biduality arrow is part of this statement. -/
+/-- The actual scalar-extension double-dual comparison, including its evaluation equation. -/
 theorem integral_qbar_biduality_comparison
     [IsIso S.hom] (a : X ⟶ S)
     (E : PadicAlgCl.FiniteIntermediateField ℓ)

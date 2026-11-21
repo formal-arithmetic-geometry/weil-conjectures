@@ -16,6 +16,10 @@ This packages specified data, without choosing an isomorphism or an equivalence.
 The forward functor is fixed to section-action followed by restriction along the
 inverse ring isomorphism. The comparison theorem normalizes the ring isomorphism
 against every finite quotient. No existence assertion is part of this definition.
+
+## References
+
+* [Stacks, Tag 06YY](https://stacks.math.columbia.edu/tag/06YY)
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +38,7 @@ namespace AlgebraicGeometry.ProEtale.IntegralPresentation
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u})
 
-/-- Specified coefficient relabelling and its concrete section-action equivalence.
-Source: Stacks 06YY; blueprint integral-criterion-reductions, final sentence. -/
+/-- Specified coefficient relabelling and its concrete section-action equivalence. -/
 structure Encoding where
   /-- The isomorphism from reconstructed section rings to completed coefficients. -/
   ringIso : InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}

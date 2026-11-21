@@ -16,8 +16,7 @@ On the affine ind-étale basis `B_Z` of `Z_proét`, formed by the objects
 (`Algebra.ClosedLift`), the inverse image `i^* F` of a pro-étale sheaf of modules `F` is the
 sheafification of the presheaf `P_F(V) = F(v(V))`: the map `P_F ⟶ i^* F`, given by the unit of
 `i^* ⊣ i_*`, is locally surjective and locally injective on the basis
-(`AlgebraicGeometry.ProEtale.closedInverseImage_formula`, blueprint
-`proposition-extension-zero-restriction-closed-subscheme`).
+(`AlgebraicGeometry.ProEtale.closedInverseImage_formula`).
 -/
 
 @[expose] public section
@@ -93,19 +92,11 @@ lemma closedLiftBasisIso_hom_comp_map {C C' : Type u} [CommRing C] [Algebra (A �
 variable {R : Type (u + 1)} [Ring R] {U : Scheme.{u}} (j : U ⟶ Spec A) [IsOpenImmersion j]
   [QuasiCompact j]
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme` (subsection
-`proposition-extension-zero-restriction-closed-subscheme`): let `i : Z = Spec (A ⧸ I) ⟶ X = Spec A`
-be a closed immersion with quasi-compact open complement `j`, and `F` a pro-étale sheaf of modules
-on `X`. On the affine ind-étale basis of `Z_proét`, `i^* F` is the sheafification of the presheaf
-`P_F(V) = F(v(V))`, `v(V) = Spec H_A(C̄)` for `V = Spec C̄ ≅ v(V) ×_X Z`: the map
-`P_F(V) ⟶ (i^* F)(V)` given by the unit of `i^* ⊣ i_*` is locally surjective and locally
-injective. Explicitly, every basis object `V = Spec C̄` has a covering `Spec φ : V' ⟶ V` by a basis
-object `V' = Spec C̄'` (with `C̄'` w-contractible) such that every section of `i^* F` over `V`
-restricts to a section coming from `P_F(V')`, and every section of `P_F(V)` mapping to zero in
-`(i^* F)(V)` restricts to zero in `P_F(V')`.
-
-On w-contractible `V'` the map `P_F(V') ⟶ (i^* F)(V')` is even bijective
-(`AlgebraicGeometry.ProEtale.bijective_unit_app_closedLiftSpec`). -/
+/-- Let `i : Z = Spec (A ⧸ I) ⟶ X = Spec A` be a closed immersion with quasi-compact open
+complement `j`, and `F` a pro-étale sheaf of modules on `X`. On the affine ind-étale basis of
+`Z_proét`, `i^* F` is the sheafification of the presheaf `P_F(V) = F(v(V))`, where
+`v(V) = Spec H_A(C̄)` for `V = Spec C̄ ≅ v(V) ×_X Z`: the map `P_F(V) ⟶ (i^* F)(V)` given by the
+unit of `i^* ⊣ i_*` is locally surjective and locally injective. -/
 theorem closedInverseImage_formula
     (hij : IsCompl (Set.range (closedSpecι I).base) (Set.range j.base))
     (F : Sheaf (ProEt.topology (Spec A)) (ModuleCat.{u + 1} R))

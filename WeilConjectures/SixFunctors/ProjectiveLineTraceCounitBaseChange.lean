@@ -302,28 +302,7 @@ private theorem counit_of_trace_exchange_transport
     L L' l τ τ' htrace K F G hF hG β c hb hc ε ε' hε hε'
   exact h
 
-/-- Pullback preserves the constructed projective-line counit as an actual morphism.
-Source: blueprint sec-six-functors-basics/sk-prop-sf-cbc/
-prop-asd-smooth-base-change.proof.md, second paragraph, trace and projection squares;
-sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md, counit square.
-
-Proof: first take the standard projective-space square. The supplied splitting
-base-change property gives the trace square by its second clause. The ordered proper
-projection commutes with exchange: conjugate the usual right-coefficient projection
-square by tensor symmetries. Naturality of the projection in the finite-line comparison
-then gives the square with the canonical twisted inverse-image comparison. Invert the
-projection isomorphisms, append the trace square and the inverse-image unit constraint,
-and cancel the proper direct-image comparisons. This is the displayed equation for
-the constructed counits. For a general presentation, the pullback universal property
-identifies its square with the standard one. The trace transport uses the adjunction
-unit of the presentation isomorphism and derived composition; exchange pasting and
-composition of the projection maps transport the standard equality to this square.
-The compatibility of the two presentations with the horizontal morphism
-identifies this transport with the specified twist comparison, using functoriality
-of the normalized line comparisons. Proper coincidence respects exchange, giving
-the stated compact-support exchange. All identities are natural-transformation
-identities on unbounded categories, without detection of derived arrows by stalks.
-Identity pullback, zero coefficients and the empty base cause no exception. -/
+/-- Pullback preserves the constructed projective-line counit as an actual morphism. -/
 theorem presentedFiniteP1Counit_baseChange
     (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N)
     (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)

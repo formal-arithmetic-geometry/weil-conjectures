@@ -14,8 +14,12 @@ import all WeilConjectures.TraceFormula.Compact.CompactSupportFiniteCoefficientP
 
 /-! # Quotient coherence of the finite perfect-projection comparisons
 
-Source: Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.21;
-Stacks 0941, 0944 and 099N.
+## References
+
+* [Stacks, Tag 0941](https://stacks.math.columbia.edu/tag/0941)
+* [Stacks, Tag 0944](https://stacks.math.columbia.edu/tag/0944)
+* [Stacks, Tag 099N](https://stacks.math.columbia.edu/tag/099N)
+* Zheng, Construction 4.1, Lemma 4.10, Proposition 4.21
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +43,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- The finite comparison from reduction of completed direct image to actual
 system direct image. Its factors are the given reduction evaluations, the
 canonical perfect-quotient projection arrow and the given direct-image evaluation.
-No choices of objects or morphisms are made here.
-Source: Stacks 0944; Zheng Construction 4.1. -/
+No choices of objects or morphisms are made here. -/
 def systemDirectImageFiniteComparison
     (S : CoefficientDerivedSystemCalculus l E X)
     (T : CoefficientDerivedSystemCalculus l E Y)
@@ -63,27 +66,7 @@ def systemDirectImageFiniteComparison
 /-- The specified finite comparison arrows commute with every actual quotient
 transition, in the finite coefficient derived category before completed restriction.
 This is solely an equality of the specified arrows; it asserts neither their
-invertibility nor normalization of either system.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941, 0944 and 099N.
-
-Proof: first identify the normalized restriction functor with the native scalar
-restriction functor. Their horizontal transformations have the same section
-formula. Localization and the derived factorization equations identify their
-actual derived transitions. The reduction unit/projection equation then shows
-that reduction evaluations carry these transitions to scalar-adjunction quotient
-mates. Changing the restriction presentation changes these mates by precisely
-the derived comparison isomorphism.
-
-The section-normalized finite direct-image square pastes with the two completed
-restriction comparisons. Its arbitrary-resolution normalization identifies this
-pasting with the derived square for every pair of quotient levels. Taking scalar
-adjunction mates, and using the two unit equations, shows that the canonical
-projection arrows commute with quotient mates. Finally the normalized system
-direct-image evaluation square intertwines actual transitions. Compose these
-three equalities, use naturality of the finite restriction comparison, and cancel
-the inverse evaluation factors. Every equality is in the finite derived category;
-no faithfulness of derived restriction is used. Equal indices, n = 0, zero
-complexes and empty schemes use exactly the same formulas. -/
+invertibility nor normalization of either system. -/
 theorem systemDirectImageFiniteComparison_transitions
     (S : CoefficientDerivedSystemCalculus l E X)
     (T : CoefficientDerivedSystemCalculus l E Y)

@@ -239,9 +239,6 @@ private lemma resolution_conjugate_zero
 set_option linter.unusedVariables false in
 -- The supplied section family subsumes the retained scalar-continuity hypothesis.
 /-- Realize a sectionwise exact lifted resolution as a short exact point-module complex.
-
-Source: the sectionwise short-exact criterion, finite-coordinate biproduct comparison, and
-pointwise normalization of the scalar map.
 -/
 theorem integralFinitePointResolution_continuous_realization
     (ell : ℕ) [Fact ell.Prime] (E : PadicAlgCl.FiniteIntermediateField ell)

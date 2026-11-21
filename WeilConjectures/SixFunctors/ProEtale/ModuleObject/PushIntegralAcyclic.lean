@@ -47,8 +47,7 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u})
 
 /-- Pullback from the coefficient point is additive, since it is the composite of two
-left adjoints between abelian sheaf categories.
-Source: inverse image of abelian sheaves. -/
+left adjoints between abelian sheaf categories. -/
 instance additive_upperStarFromPoint : (upperStarFromPoint X).Additive :=
   have adj : upperStarFromPoint X ⊣ _ := pointUpperStarLowerStarAdjunction.comp
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ X))

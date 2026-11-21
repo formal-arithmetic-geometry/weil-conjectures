@@ -12,8 +12,10 @@ import WeilConjectures.AlgebraicGeometry.Finite.FiniteDiscreteSchemeRingSuppleme
 
 /-! # Realization of finite discrete coefficient sheaves and exchange steps
 
-Source: Bhatt--Scholze, Proposition 5.3.2, Lemmas 5.4.1 and 5.4.3;
-Stacks Project, Tag 09AK.
+
+## References
+
+* Bhatt--Scholze, Proposition 5.3.2, Lemmas 5.4.1 and 5.4.3
 -/
 
 @[expose] public section
@@ -49,14 +51,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 /-- Deriving the coefficient equivalence realizes constructible single complexes
-and the exchange steps.
-Source: Bhatt--Scholze, Proposition 5.3.2 and Lemmas 5.4.1 and 5.4.3.
-
-Proof. Identify the condensed coefficient ring by the finite clopen fibre cover.
-Use the coefficient realization and apply its sheaf origin isomorphisms to single
-complexes. The constructed realization is full by bounded below site comparison,
-commutes with shifts, and is triangulated because both constituent functors are
-exact. Its exchange-step comparisons are those of the coefficient realization. -/
+and the exchange steps. -/
 theorem finiteDiscreteExchange_stepRealization [DiscreteTopology B] [Finite B]
     (hB : (ℓ : B) = 0) (sq : CommSq g' f' f g)
     (hEncoding : ∀ T : Scheme.{u},

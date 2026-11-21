@@ -13,6 +13,10 @@ import all Mathlib.Algebra.Homology.Localization
 
 The strict monoidal homotopy quotient and its identity-component comparison with
 complex localization identify the two tensor maps on complex representatives.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 06YU
 -/
 
 @[expose] public noncomputable section
@@ -24,12 +28,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Algebr
 open scoped CategoryTheory.Obj ChangeOfRings
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
-/-- Complex and homotopy localization have the same tensorator on complex objects.
-Source: Stacks Project, Cohomology on Sites, Tag 06YU.
-The homotopy quotient tensorator is the identity. The comparison of its composite
-with homotopy localization and complex localization also has identity components.
-Expand the transported tensorator, then remove the identity factors. This gives
-exactly the homotopy localization tensorator. -/
+/-- Complex and homotopy localization have the same tensorator on complex objects. -/
 private theorem coefficientScalarTensor_complexLocalization_private
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

@@ -15,12 +15,13 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 /-!
 # Canonical shifts and compositors of derived module functors
 
-Source: Stacks, derived.tex, Tags 014X, 015F and 05SE; blueprint
-`proposition-proper-direct-image-constructible-complexes`, proof paragraph (3).
-
 The pullback shifts are transported from exact termwise pullback by the canonical
 counit comparison. The pushforward shifts are the published K-injective shifts.
 All comparisons use the actual specified module-object functors and compositors.
+
+## References
+
+* Stacks Project, Tags 014X, 015F and 05SE
 -/
 
 @[expose] public noncomputable section
@@ -37,26 +38,22 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The canonical exact comparison for the specified K-flat module pullback.
-Source: Stacks Tag 015F and `def-sfb-left-derived-exact`. -/
+/-- The canonical exact comparison for the specified K-flat module pullback. -/
 def modulePullbackExactComparison :
     (moduleObjectDerivedPullback Λ f) ≅ (upperStar Λ f).mapDerivedCategory :=
   (upperStar Λ f).leftDerivedExactComparison
     (upperStar Λ f).leftDerivedFunctor (upperStar Λ f).leftDerivedFunctorCounit
 
-/-- The specified integer shifts on derived module pullback, transported along `c_f`.
-Source: Stacks Tags 014X and 015F; node proof step 1. -/
+/-- The specified integer shifts on derived module pullback, transported along `c_f`. -/
 instance modulePullbackDerivedCommShift : (moduleObjectDerivedPullback Λ f).CommShift ℤ :=
   Functor.CommShift.ofIso (modulePullbackExactComparison Λ f).symm ℤ
 
-/-- The published K-injective shifts on the named derived module pushforward.
-Source: Stacks Tag 05SE and `lem-pc-right-derived-functor-triangulated`. -/
+/-- The published K-injective shifts on the named derived module pushforward. -/
 instance modulePushforwardDerivedCommShift :
     (moduleObjectDerivedPushforward Λ f).CommShift ℤ :=
   inferInstanceAs ((lowerStar Λ f).rightDerivedFunctor.CommShift ℤ)
 
-/-- The comparison on actual complexes, using localization and exact termwise pullback.
-Source: Stacks Tags 014X and 015F; node proof steps 1 and 3. -/
+/-- The comparison on actual complexes, using localization and exact termwise pullback. -/
 def modulePullbackComplexComparison :
     DerivedCategory.Q ⋙ (moduleObjectDerivedPullback Λ f) ≅
       (upperStar Λ f).mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q :=
@@ -64,20 +61,7 @@ def modulePullbackComplexComparison :
     (upperStar Λ f).mapDerivedCategoryFactors
 
 /-- Exactness with precisely the transported pullback shifts and the fixed K-injective
-pushforward shifts; compatibility of `c_f` and the termwise comparison with every shift.
-Source: Stacks Tags 014X, 015F and 05SE.
-
-Proof: (1) `prose-03-02` makes module pullback exact.
-`situation-conventions` gives the triangulated termwise functor
-and its shift-compatible localization comparison. Transport its shift along the canonical
-`def-sfb-left-derived-exact` comparison. Images of distinguished triangles are isomorphic
-through this comparison, including the connecting arrow, so remain distinguished by TR1
-of `def-weil-triangulated-category`. (2) Apply `lem-pc-right-derived-functor-triangulated`
-to the additive full module pushforward. Its shifts come from K-injective resolutions:
-`lem-weil-pbc-kinjective-shift` permits shifting the resolution itself, and termwise
-additivity gives the same differential sign. (3) The counit-compatible exact comparison
-commutes with shifts by transport; compose with the shift-compatible termwise
-factorization, using `lem-weil-pbc-commshift-nattrans-comp-whisker`. -/
+pushforward shifts; compatibility of `c_f` and the termwise comparison with every shift. -/
 theorem module_derived_functors_exact_and_comparison_shifts :
     (moduleObjectDerivedPullback Λ f).IsTriangulated ∧
       (moduleObjectDerivedPushforward Λ f).IsTriangulated ∧
@@ -97,8 +81,7 @@ theorem module_derived_functors_exact_and_comparison_shifts :
 
 variable (g : Y ⟶ Z)
 
-/-- The specified derived compositor, with the named module-functor interfaces.
-Source: `prop-sfb-module-left-derived-upper-star-comp`. -/
+/-- The specified derived compositor, with the named module-functor interfaces. -/
 def modulePullbackDerivedCompositor :
     moduleObjectDerivedPullback Λ (f ≫ g) ≅
       moduleObjectDerivedPullback Λ g ⋙ moduleObjectDerivedPullback Λ f :=
