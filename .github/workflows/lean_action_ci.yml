@@ -36,19 +36,16 @@ env:
   LAKE_CACHE_REPO: formal-arithmetic-geometry/weil-conjectures
 
 jobs:
-  # Where to build: the self-hosted `big-server` runner (256 cores, 600 GB; Bin Wu's server)
-  # unless it is already busy, else GitHub's hosted runners. Actions has no "prefer A, else B"
-  # for `runs-on`, so this looks first: big-server is busy if a job of this repository that
-  # targets it is running or queued. That needs only `actions: read` on GITHUB_TOKEN (the
-  # runners API itself would need an admin token). An offline big-server is not detected: the
-  # build then waits for it, as "always prefer big-server" asks.
-  # Pull requests from forks always build on GitHub's runners: the repository is public, and a
-  # self-hosted runner would execute an outsider's code (Lean runs code while compiling).
+  # Where to build: always the self-hosted `big-server` runners (Bin Wu's servers). When they
+  # are all busy, the build queues for the next free one instead of falling back to GitHub's
+  # hosted runners: a hosted runner (4 cores, 2 Lean threads) needs hours for a pull request that
+  # touches widely imported files, where big-server takes minutes.
+  # Pull requests from forks are the one exception and build on GitHub's runners: the
+  # repository is public, and a self-hosted runner would execute an outsider's code (Lean runs
+  # code while compiling).
   pick-runner:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    permissions:
-      actions: read
     outputs:
       runner: ${{ steps.pick.outputs.runner }}
       threads: ${{ steps.pick.outputs.threads }}
@@ -56,12 +53,9 @@ jobs:
     steps:
       - id: pick
         env:
-          GH_TOKEN: ${{ github.token }}
           FORK: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
-          UPLOAD: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
           # How many self-hosted runners carry the big-server label (repository variable, default 1).
-          # A PR build goes to big-server while fewer jobs than this use it, and each build gets an
-          # equal share of the machine's 64 threads.
+          # Each build gets an equal share of the machine's 64 threads.
           SLOTS: ${{ vars.BIG_SERVER_SLOTS || '1' }}
         run: |
           set -uo pipefail
@@ -69,27 +63,8 @@ jobs:
           big='["self-hosted","big-server"]'; gh='"ubuntu-latest"'
           if [ "$FORK" = true ]; then
             choice=gh why="pull request from a fork"
-          elif [ "$UPLOAD" = true ]; then
-            # Master builds are uploaded, which needs the artifact cache on during the build: Lake
-            # then files ~23 GB of restored outputs again (17 min on big-server, over an hour on a
-            # 2-thread hosted runner). So master always waits for big-server.
-            choice=big why="master build (uploads): always big-server"
           else
-            # Jobs on big-server: queued or in progress, in any active run of this repository.
-            n=0 ok=true
-            for st in in_progress queued; do
-              ids=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?status=$st&per_page=100" \
-                      --jq '.workflow_runs[].id') || { ok=false; break; }
-              for id in $ids; do
-                c=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$id/jobs?filter=latest&per_page=100" \
-                      --jq '[.jobs[] | select(.status == "in_progress" or .status == "queued")
-                             | select(any(.labels[]; . == "big-server"))] | length') || { ok=false; break; }
-                n=$((n + c))
-              done
-            done
-            if [ "$ok" != true ]; then choice=big why="status query failed; preferring big-server"
-            elif [ "$n" -lt "$SLOTS" ]; then choice=big why="big-server has a free slot ($n of $SLOTS in use)"
-            else choice=gh why="big-server busy ($n job(s) on $SLOTS slot(s))"; fi
+            choice=big why="always big-server (queues while all big-server runners are busy)"
           fi
           if [ "$choice" = big ]; then
             { echo "runner=$big"; echo "threads=$((64 / SLOTS))"; echo "hosted=false"; } >> "$GITHUB_OUTPUT"
