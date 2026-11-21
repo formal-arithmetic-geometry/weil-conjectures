@@ -293,8 +293,8 @@ instance ProEtale.openImmersionRestriction_additive :
 namespace ProEtale
 
 /-- Extension by zero: the lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for
-the small pro-étale sites. Its value at `V ⟶ X` is `M(V ⟶ U)` if `V ⟶ X` factors through `U` and
-zero otherwise. -/
+the small pro-étale sites. It is the sheafification of the presheaf whose value at `V ⟶ X` is
+`M(V ⟶ U)` if `V ⟶ X` factors through `U` and zero otherwise. -/
 noncomputable def openImmersionLowerShriek :
     Sheaf (Scheme.ProEt.topology U) A ⥤ Sheaf (Scheme.ProEt.topology X) A :=
   ProEtale.localizationLowerShriek A j inferInstance

@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 For composable morphisms `f : W ⟶ X`, `g : X ⟶ Y`, `h : Y ⟶ Z` of separated `k`-schemes of finite
 type, the two identifications of `R(f ≫ g ≫ h)_!` with `Rf_! ⋙ Rg_! ⋙ Rh_!` on bounded
 constructible `ℚ̄_ℓ`-sheaves built from the composition isomorphisms agree
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_assoc').
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekComp_padicAlgCl_assoc'`).
 
 The proof computes the four composition isomorphisms through the four triangles of
 compactifications of a staircase of cartesian squares

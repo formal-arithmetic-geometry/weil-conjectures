@@ -20,7 +20,7 @@ with `g` and `g'` proper. This file shows that the compact-support base change
 adjunctions `Lg'^* ⊣ Rg'_!` and `Lg^* ⊣ Rg_!` (the adjunctions `Lg^* ⊣ Rg_*` transported along
 `Rg_! ≅ Rg_*`), of the composition isomorphism
 `Rg'_! ⋙ Rf_! ≅ R(g' ≫ f)_! = R(f' ≫ g)_! ≅ Rf'_! ⋙ Rg_!`
-(`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv').
+(`ProEtale.CondensedRing.boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv'`).
 
 The proof computes everything through a compactification `X ⟶[i] Z ⟶[p] Y` of `f` and a
 compactification `X' ⟶[i'] Z' ⟶[p'] Y'` of `f'` lying over it along `h : Z' ⟶ Z`: the two

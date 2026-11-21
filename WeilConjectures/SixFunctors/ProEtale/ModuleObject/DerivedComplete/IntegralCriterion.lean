@@ -229,7 +229,7 @@ lemma isZero_homology_derivedReductionComap_obj₁ (m : ℕ)
 (for instance the truncation triangle `τ^{≤ b - 1} K ⟶ K ⟶ τ^{≥ b} K ⟶`). Let `K` be derived
 complete with `K₁ = 𝔽_{E,X} ⊗ᴸ K` bounded constructible, with cohomology in degrees
 `[b - (m + 1), b]`. Then `K` is bounded constructible, assuming the statement for complexes with
-cohomology in `m` degrees. -/
+cohomology in `[b - m, b]` for every `b`. -/
 lemma boundedConstructible_of_derivedCompleteIntegers_of_triangle [IsNoetherian X] (m : ℕ)
     (ih : ∀ (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (b : ℤ),
@@ -260,7 +260,7 @@ lemma boundedConstructible_of_derivedCompleteIntegers_of_triangle [IsNoetherian 
     hK
 
 /-- The inductive step of the integral criterion for a derived complete complex `K` whose first
-derived reduction is bounded constructible, with cohomology in `m + 1` degrees. -/
+derived reduction is bounded constructible, with cohomology in `[b - (m + 1), b]`. -/
 lemma boundedConstructible_of_derivedCompleteIntegers_succ [IsNoetherian X] (m : ℕ)
     (ih : ∀ (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
         (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X))) (b : ℤ),

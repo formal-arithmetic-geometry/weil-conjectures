@@ -96,7 +96,7 @@ noncomputable def sectionArrow {X Y U P : Scheme.{u}} (f : X ⟶ Y) (j : U ⟶ Y
 /-- The sectionwise form of the comparisons, with the canonical open-slice coordinates explicitly
 normalized. All maps are module maps for the existing scalar-extension functors. Bijectivity
 identifies the open pullback with sheaf inverse image carrying the action transported by alpha
-open pullback with sheaf inverse image carrying the action transported by alpha inverse. -/
+inverse. -/
 def Sectionwise (β : Comparisons Λ) : Prop :=
   (∀ {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]
     (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))
