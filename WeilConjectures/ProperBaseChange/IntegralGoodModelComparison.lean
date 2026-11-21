@@ -10,7 +10,6 @@ public import WeilConjectures.ProperBaseChange.ProperIntegralOrdinaryData
 /-! # Ordinary comparison on good integral representatives
 
 Source: Bhatt--Scholze Remark 6.8.15; Stacks 06YY.
-(blueprint: lem-weil-pbc-integral-good-model-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -84,14 +83,7 @@ private theorem ordinaryGoodComparison_hom_app
 /-- Compose the ordinary pullback computation and exact coefficient transport
 on good representatives, retaining their prescribed components.
 
-Source: Bhatt--Scholze Remark 6.8.15; Stacks 06YY.
-(blueprint: lem-weil-pbc-integral-good-model-comparison).
-
-Proof: whisker the published ordinary good-model comparison by detailed transport.
-Then whisker its exact coefficient factorization by the strict pullback complex
-functor. Explicit functor associators put both factors in the same association.
-Their components are identities, so the resulting component is exactly the
-composite of the two published comparison components. -/
+Source: Bhatt--Scholze Remark 6.8.15; Stacks 06YY. -/
 theorem pbc_integral_good_model_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :

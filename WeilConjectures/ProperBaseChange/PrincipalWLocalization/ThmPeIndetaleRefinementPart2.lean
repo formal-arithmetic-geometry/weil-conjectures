@@ -8,9 +8,6 @@ module
 public import WeilConjectures.ProperBaseChange.PrincipalWLocalization.ThmPeIndetaleRefinementPart1Supplement3
 
 /-! # Evaluation of the principal w-localization at a prime
-
-Source: blueprint order 1223, proof step 6
-(blueprint: lem-weil-pbc-principal-w-localization-evaluation).
 -/
 
 @[expose] public section
@@ -23,51 +20,41 @@ namespace PrincipalWLocalization
 
 variable {A : Type u} [CommRing A]
 
-/-- The unique part containing a prime. The partition property determines this choice uniquely.
-Source: blueprint order 1223, steps 3 and 6
-(blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+/-- The unique part containing a prime. The partition property determines this choice uniquely. -/
 noncomputable def partAt (i : Index A) (x : PrimeSpectrum A) : i.parts :=
   (i.partition x).choose
 
-/-- The chosen part contains the prime, by the partition property.
-Source: blueprint order 1223 (blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+/-- The chosen part contains the prime, by the partition property. -/
 theorem mem_partAt (i : Index A) (x : PrimeSpectrum A) : x ∈ (partAt i x).val :=
   (i.partition x).choose_spec.1
 
-/-- Uniqueness identifies the part containing the prime.
-Source: blueprint order 1223 (blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+/-- Uniqueness identifies the part containing the prime. -/
 theorem partAt_eq (i : Index A) (x : PrimeSpectrum A) (E : i.parts)
     (h : x ∈ E.val) : partAt i x = E :=
   ((i.partition x).choose_spec.2 E h).symm
 
-/-- The selected part of a refinement has as parent the selected original part.
-Source: blueprint order 1223 (blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+/-- The selected part of a refinement has as parent the selected original part. -/
 theorem parent_partAt {i j : Index A} (h : i ≤ j) (x : PrimeSpectrum A) :
     parent h (partAt j x) = partAt i x := by
   apply (partAt_eq i x _ _).symm
   exact (Classical.choose_spec (h (partAt j x))).1 (mem_partAt j x)
 
 /-- The canonical map from the localization at a part's denominator to the localization at a
-prime in that part. Its denominator is outside the prime, hence becomes a unit.
-Source: blueprint order 1223, step 6
-(blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+prime in that part. Its denominator is outside the prime, hence becomes a unit. -/
 noncomputable def partToLocal (i : Index A) (x : PrimeSpectrum A) :
     Localization.Away (i.denominator (partAt i x)) →ₐ[A] Localization.AtPrime x.asIdeal :=
   IsLocalization.Away.liftAlgHom _ (f := Algebra.ofId A _)
     ((IsLocalization.AtPrime.isUnit_to_map_iff _ x.asIdeal _).mpr
       (i.nonvanishing (partAt i x) (mem_partAt i x)))
 
-/-- Evaluate a stage on its unique part containing the prime.
-Source: blueprint order 1223, step 6
-(blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+/-- Evaluate a stage on its unique part containing the prime. -/
 noncomputable def stageEvaluation (i : Index A) (x : PrimeSpectrum A) :
     Stage i →ₐ[A] Localization.AtPrime x.asIdeal :=
   (partToLocal i x).comp
     (Pi.evalAlgHom A (fun E : i.parts ↦ Localization.Away (i.denominator E)) (partAt i x))
 
 /-- Evaluation commutes with refinement: the child containing the point has as its parent
-precisely the old part containing the point, and localization maps are unique on `A`.
-Source: blueprint order 1223 (blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+precisely the old part containing the point, and localization maps are unique on `A`. -/
 theorem stageEvaluation_transition {i j : Index A} (h : i ≤ j)
     (x : PrimeSpectrum A) :
     (stageEvaluation j x).comp (transition h) = stageEvaluation i x := by
@@ -95,9 +82,7 @@ theorem stageEvaluation_transition {i j : Index A} (h : i ≤ j)
     (partToLocal i x)
 
 /-- The cocone of stage evaluations. It is concrete and uses only the localization universal
-property, rather than a choice of a map from an existence statement.
-Source: blueprint order 1223, step 6
-(blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+property, rather than a choice of a map from an existence statement. -/
 noncomputable def evaluationCocone (x : PrimeSpectrum A) : Cocone (diagram (A := A)) where
   pt := CommAlgCat.of A (Localization.AtPrime x.asIdeal)
   ι :=
@@ -106,23 +91,18 @@ noncomputable def evaluationCocone (x : PrimeSpectrum A) : Cocone (diagram (A :=
         apply CommAlgCat.hom_ext
         exact stageEvaluation_transition h.le x }
 
-/-- The canonical evaluation map to `A_x`, induced by the explicit stage maps.
-Source: blueprint order 1223, step 6
-(blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+/-- The canonical evaluation map to `A_x`, induced by the explicit stage maps. -/
 noncomputable def evaluation (x : PrimeSpectrum A) :
     algebra A →ₐ[A] Localization.AtPrime x.asIdeal :=
   (colimit.desc diagram (evaluationCocone x)).hom
 
-/-- Evaluation on a colimit representative is evaluation at its selected coordinate.
-Source: blueprint order 1223 (blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+/-- Evaluation on a colimit representative is evaluation at its selected coordinate. -/
 theorem evaluation_ι (x : PrimeSpectrum A) (i : Index A) (b : Stage i) :
     evaluation x ((colimit.ι diagram i).hom b) = stageEvaluation i x b :=
   DFunLike.congr_fun (congrArg CommAlgCat.Hom.hom (colimit.ι_desc (evaluationCocone x) i)) b
 
 /-- The partition by a constructible set and its complement, omitting empty parts. The chosen
-set has denominator `f`, and its complement has denominator one.
-Source: blueprint order 1223, steps 5 and 6
-(blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+set has denominator `f`, and its complement has denominator one. -/
 noncomputable def cutIndex (E : Set (PrimeSpectrum A)) (hE : Topology.IsConstructible E)
     (f : A) (hf : E ⊆ PrimeSpectrum.basicOpen f) : Index A := by
   classical
@@ -167,9 +147,7 @@ noncomputable def cutIndex (E : Set (PrimeSpectrum A)) (hE : Topology.IsConstruc
 
 /-- The evaluation map is onto. Write an element of `A_x` as `a/s`, cut by `D(s)` and its
 complement, and put that fraction on `D(s)`; the other coordinate is immaterial. Evaluation
-takes this tuple to the required fraction. The denominator may vary with the index.
-Source: blueprint order 1223, proof step 6
-(blueprint: lem-weil-pbc-principal-w-localization-evaluation). -/
+takes this tuple to the required fraction. The denominator may vary with the index. -/
 theorem evaluation_surjective (x : PrimeSpectrum A) : Function.Surjective (evaluation x) := by
   classical
   intro z

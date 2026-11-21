@@ -196,10 +196,8 @@ import Mathlib.Analysis.Normed.Field.TransferInstance
 /-!
 # Realization of rationalized integral coefficients in condensed E-module objects
 
-Source: Bhatt--Scholze, Lemmas 4.2.12--4.2.13, Proposition 6.8.14(2), Remark 6.8.15,
-and the archived module-object definitions (blueprint: lem-weil-pbc-condensed-e-realization).
-The auxiliary records retain the coefficient maps and every comparison, including the
-normalization of the ordered completed exchange. No exchange is asserted to be invertible.
+Source: Bhatt--Scholze, Lemmas 4.2.12--4.2.13, Proposition 6.8.14(2), Remark 6.8.15, and the
+archived module-object definitions.
 -/
 
 @[expose] public noncomputable section
@@ -243,8 +241,7 @@ open AlgebraicGeometry.ProEtale.CondensedRing
 namespace WeilConjectures.CondensedERealization
 
 /-- Packaging of the geometric hypotheses, without a choice of coefficient object.
-Source: Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2). -/
 structure Base (k : Type u) [Field k] where
   scheme : Scheme.{u}
   [«over» : scheme.Over (Spec (.of k))]
@@ -254,28 +251,23 @@ structure Base (k : Type u) [Field k] where
 
 attribute [instance] Base.«over» Base.finiteType Base.quasiCompact Base.separated
 
-/-- The same geometric datum as a bundled scheme over its base field.
-Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The same geometric datum as a bundled scheme over its base field. -/
 abbrev Base.model {k : Type u} [Field k] (T : Base k) : Over (Spec (.of k)) :=
   Over.mk (T.scheme ↘ Spec (.of k))
 
-/-- Finite type of the same bundled structural morphism.
-Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- Finite type of the same bundled structural morphism. -/
 instance Base.modelFinite {k : Type u} [Field k] (T : Base k) :
     LocallyOfFiniteType T.model.hom := T.finiteType
 
-/-- Quasi-compactness of the same bundled structural morphism.
-Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- Quasi-compactness of the same bundled structural morphism. -/
 instance Base.modelQuasiCompact {k : Type u} [Field k] (T : Base k) :
     QuasiCompact T.model.hom := T.quasiCompact
 
-/-- Separatedness of the same bundled structural morphism.
-Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- Separatedness of the same bundled structural morphism. -/
 instance Base.modelSeparated {k : Type u} [Field k] (T : Base k) :
     IsSeparated T.model.hom := T.separated
 
-/-- The same base-preserving morphism in the bundled over category.
-Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The same base-preserving morphism in the bundled over category. -/
 def Base.map {k : Type u} [Field k] (T U : Base k)
     (h : T.scheme ⟶ U.scheme) [h.IsOver (Spec (.of k))] : T.model ⟶ U.model :=
   Over.homMk h (comp_over h (Spec (.of k)))
@@ -285,42 +277,32 @@ variable (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E]
 
 /-- The recorded integral full subcategory; only notation is shortened here.
-Source: Bhatt--Scholze, Definition 6.8.8
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Definition 6.8.8. -/
 abbrev Integral (T : Scheme.{u}) := PbcBoundedConstructibleComplete T (pbcIntegralDatum l E)
 
 /-- The recorded raw scalar localization, with no idempotent completion.
-Source: Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2). -/
 abbrev Rational (T : Scheme.{u}) :=
   PbcRationalCategory T (pbcIntegralDatum l E) (pbcUniformizer l E)
 
-/-- The original continuous condensed coefficient object in the scheme universe.
-Source: archived ModuleObject/Basic.lean
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The original continuous condensed coefficient object in the scheme universe. -/
 abbrev Coefficient (T : Scheme.{u}) :=
   condensedRingObj (Profinite.continuousCoefficientRingObj E) T
 
-/-- The archived ambient derived category, before imposing constructibility.
-Source: archived ProEtaleModule/DerivedCategory.lean
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The archived ambient derived category, before imposing constructibility. -/
 abbrev Ambient (T : Scheme.{u}) :=
   DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (Coefficient E T))
 
-/-- The archived bounded constructible category, retaining its local presentation condition.
-Source: archived ProEtaleModule/DerivedCategory.lean
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The archived bounded constructible category, retaining its local presentation condition. -/
 abbrev Constructible (T : Scheme.{u}) := BoundedConstructible (Coefficient E T)
 
 /-- The reconstructed section ring of the actual internal coefficient object.
-Source: Stacks Tag 00YV
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Stacks Tag 00YV. -/
 abbrev SectionRing (T : Scheme.{u}) :=
   InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (ProEt.topology T) (Coefficient E T)
 
 /-- Constant continuous E-valued functions give the canonical scalar sections.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 def fieldScalarSections (T : Scheme.{u}) :
     E →+* RingCat.sectionsSubring
       ((rationalCoefficientSheaf l T E).obj ⋙ forget₂ CommRingCat RingCat) := by
@@ -333,8 +315,7 @@ def fieldScalarSections (T : Scheme.{u}) :
       map_add' := fun _ _ ↦ rfl }
 
 /-- Scalar multiplication on sectionwise continuous E-module sheaves is pointwise.
-Source: Bhatt--Scholze, Definition 6.8.1
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Definition 6.8.1. -/
 instance fieldModuleLinear (T : Scheme.{u}) :
     Linear E (pbcModules T (rationalCoefficientSheaf l T E)) :=
   letI : Linear (RingCat.sectionsSubring
@@ -349,15 +330,13 @@ instance fieldModuleLinear (T : Scheme.{u}) :
       Linear.comp_smul M N P f (fieldScalarSections l E T a) g }
 
 /-- The derived E-action is inherited from pointwise scalar multiplication on sheaves.
-Source: Bhatt--Scholze, Section 6.8
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Section 6.8. -/
 instance fieldDerivedLinear (T : Scheme.{u}) :
     Linear E (DerivedCategory (pbcModules T (rationalCoefficientSheaf l T E))) := inferInstance
 
 /-- Encode the internal module action and transport along the given coefficient isomorphism.
 Both functors are the existing explicit sectionwise equivalences.
-Source: Stacks Tag 00YV
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Stacks Tag 00YV. -/
 def moduleEncoding (T : Scheme.{u})
     (e : SectionRing E T ≅ rationalCoefficientSheaf l T E) :
     Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) (Coefficient E T) ≌
@@ -375,8 +354,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 /-- Coefficient and scalar-extension data at one scheme. All auxiliary coefficient maps
 are normalized on functions or on the generating constant sections of finite quotients;
 the equivalence is required to be induced by the actual derived scalar extension.
-Source: Bhatt--Scholze, Lemmas 4.2.12--4.2.13 and Proposition 6.8.14(2)
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Lemmas 4.2.12--4.2.13 and Proposition 6.8.14(2). -/
 structure At (T : Scheme.{u}) where
   coefficientIso : Mon.mk (Coefficient E T) ≅
     Mon.mk ((sheafCompose (ProEt.topology T) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
@@ -526,17 +504,7 @@ private lemma leftAdjoint_of_coefficientIso (F : PadicAlgCl.FiniteIntermediateFi
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The actual bounded continuous-E inverse image has a constructible right adjoint,
-including finite extensions represented in the scheme universe.
-Source: BS 6.8.14(2), 6.8.15 (blueprint: lem-weil-pbc-condensed-e-realization).
-Proof: choose a small normed-field representative of the finite-dimensional extension
-E/Q_l. The coefficient-ring isomorphism gives equivalences of module categories and
-their derived categories, preserving the local finite presentation condition. For the
-small representative, the continuous coefficient constructor supplies the finiteness
-class, and derived direct image preserves constructibility for separated finite-type
-schemes over k. Transport its inverse-image/direct-image adjunction back through these
-coefficient equivalences. Inverse image commutes with coefficient transport, so its
-left adjoint is exactly the displayed existing inverse image. The transported counit
-is the ordinary ambient counit; thus its right adjoint is uniquely determined. -/
+including finite extensions represented in the scheme universe. -/
 theorem fieldUpperStar_isLeftAdjoint (T U : Base k) (h : T.scheme ⟶ U.scheme)
     [h.IsOver (Spec (.of k))] :
     (boundedConstructibleUpperStar (Profinite.continuousCoefficientRingObj E) l
@@ -606,8 +574,7 @@ theorem fieldUpperStar_isLeftAdjoint (T U : Base k) (h : T.scheme ⟶ U.scheme)
     infer_instance
   exact leftAdjoint_of_coefficientIso l k F a T U h
 
-/-- Continuous-E direct image, specified up to unique adjunction-compatible iso.
-Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- Continuous-E direct image, specified up to unique adjunction-compatible iso. -/
 @[irreducible]
 def fieldLowerStar (T U : Base k) (h : T.scheme ⟶ U.scheme)
     [h.IsOver (Spec (.of k))] : Constructible E T.scheme ⥤ Constructible E U.scheme :=
@@ -616,8 +583,7 @@ def fieldLowerStar (T U : Base k) (h : T.scheme ⟶ U.scheme)
       (X := T.model) (Y := U.model)
       (Base.map T U h)) (fieldUpperStar_isLeftAdjoint l E k T U h)
 
-/-- The canonical adjunction determining continuous-E direct image.
-Source: BS 6.8.14(2) (blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The canonical adjunction determining continuous-E direct image. -/
 @[irreducible]
 def fieldAdjunction (T U : Base k) (h : T.scheme ⟶ U.scheme)
     [h.IsOver (Spec (.of k))] :
@@ -635,8 +601,7 @@ def fieldAdjunction (T U : Base k) (h : T.scheme ⟶ U.scheme)
 of the specified completed pullback and ordinary direct image. Their adjunction is
 normalized by the ambient tensor unit and counit. Rational operations are their tensor
 extensions, and both adjunctions retain their actual units and counits.
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15. -/
 structure Along (T U : Base k) (h : T.scheme ⟶ U.scheme)
     [h.IsOver (Spec (.of k))] (rT : At l E T.scheme) (rU : At l E U.scheme) where
   pull : Integral l E U.scheme ⥤ Integral l E T.scheme
@@ -712,17 +677,13 @@ structure Along (T U : Base k) (h : T.scheme ⟶ U.scheme)
 
 attribute [instance] Along.pullAdditive Along.pullLinear Along.pushAdditive Along.pushLinear
 
-/-- The canonical rational pullback is the dependency's tensor extension of integral pullback.
-Source: blueprint rational transport
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The canonical rational pullback is the dependency's tensor extension of integral pullback. -/
 abbrev Along.rationalPull {T U : Base k} {h : T.scheme ⟶ U.scheme}
     [h.IsOver (Spec (.of k))] {rT : At l E T.scheme} {rU : At l E U.scheme}
     (a : Along l E k T U h rT rU) : Rational l E U.scheme ⥤ Rational l E T.scheme :=
   ScalarLocalization.transport (PbcIntegralRing l E) (pbcUniformizer l E) a.pull
 
-/-- The canonical rational direct image is the dependency's tensor extension of integral image.
-Source: blueprint rational transport
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The canonical rational direct image is the dependency's tensor extension of integral image. -/
 abbrev Along.rationalPush {T U : Base k} {h : T.scheme ⟶ U.scheme}
     [h.IsOver (Spec (.of k))] {rT : At l E T.scheme} {rU : At l E U.scheme}
     (a : Along l E k T U h rT rU) : Rational l E T.scheme ⥤ Rational l E U.scheme :=
@@ -744,9 +705,7 @@ attribute [local irreducible] AdicCoefficientDatum.completedPull
 /-- A simultaneous realization over all separated finite-type schemes and all morphisms.
 The composition and identity isomorphisms are normalized by the specified completed
 comparisons and tensor formulas, and the completed exchange is compared as an arrow.
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15, and the blueprint's
-unit--square--counit comparison obligation
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15, and the. -/
 structure Data where
   atObject : ∀ T : Base k, At l E T.scheme
   along : ∀ (T U : Base k) (h : T.scheme ⟶ U.scheme) [h.IsOver (Spec (.of k))],
@@ -839,9 +798,7 @@ variable [g'.IsOver (Spec (.of k))] [f'.IsOver (Spec (.of k))]
   [f.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))]
 
 /-- Regard a rational pullback as a function of a bundled morphism over k, so that
-proof irrelevance supplies the canonical transport along an equality of morphisms.
-Source: blueprint, comparison of the pullback square
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+proof irrelevance supplies the canonical transport along an equality of morphisms. -/
 def Data.pullOnOverHom (T U : Base k)
     (h : { h : T.scheme ⟶ U.scheme // h.IsOver (Spec (.of k)) }) :
     Rational l E U.scheme ⥤ Rational l E T.scheme :=
@@ -849,9 +806,7 @@ def Data.pullOnOverHom (T U : Base k)
   (D.along T U h.val).rationalPull
 
 /-- The rational pullback square uses only the specified composition isomorphisms
-and the equality of the two scheme composites, with no Cartesian hypothesis.
-Source: blueprint, comparison of the pullback square
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+and the equality of the two scheme composites, with no Cartesian hypothesis. -/
 def Data.square (sq : CommSq g' f' f g) :
     (D.along Y' Y g).rationalPull ⋙ (D.along X' Y' f').rationalPull ≅
       (D.along X Y f).rationalPull ⋙ (D.along X' X g').rationalPull :=
@@ -863,9 +818,7 @@ def Data.square (sq : CommSq g' f' f g) :
         { h : X'.scheme ⟶ Y.scheme // h.IsOver (Spec (.of k)) })) sq.w.symm)) ≪≫
       D.rationalComp X' X Y g' f
 
-/-- The actual rational unit--square--counit mate, before any invertibility assertion.
-Source: blueprint, last paragraph
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+/-- The actual rational unit--square--counit mate, before any invertibility assertion. -/
 def Data.mate (sq : CommSq g' f' f g) :
     (D.along X Y f).rationalPush ⋙ (D.along Y' Y g).rationalPull ⟶
       (D.along X' X g').rationalPull ⋙ (D.along X' Y' f').rationalPush :=
@@ -873,7 +826,7 @@ def Data.mate (sq : CommSq g' f' f g) :
     (TwoSquare.mk _ _ _ _ (Data.square l E k D sq).hom))
 
 /-- The continuous-E pullback square uses the existing normalized composition iso.
-Source: Stacks 0D6G (blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Stacks 0D6G. -/
 def fieldSquare (sq : CommSq g' f' f g) :
     boundedConstructibleUpperStar (Profinite.continuousCoefficientRingObj E) l
       (X := Y'.model) (Y := Y.model)
@@ -897,7 +850,7 @@ def fieldSquare (sq : CommSq g' f' f g) :
         (Base.map X' X g') (Base.map X Y f)
 
 /-- The continuous-E exchange is the actual unit-square-counit mate.
-Source: Stacks 0D6G (blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Stacks 0D6G. -/
 def fieldBaseChange (sq : CommSq g' f' f g) :
     fieldLowerStar l E k X Y f ⋙
       boundedConstructibleUpperStar (Profinite.continuousCoefficientRingObj E) l
@@ -913,9 +866,7 @@ def fieldBaseChange (sq : CommSq g' f' f g) :
 `completedExchange` is definitionally the ordered `completedBaseChangeMap` on every
 complete input with any permitted choice of finite-origin witnesses. The rational
 exchange is fixed as a mate, and its integral tensor formula is an equality of arrows.
-Source: blueprint, ordered completed exchange and its comparison obligation;
-Bhatt--Scholze, Proposition 6.8.14(2)
-(blueprint: lem-weil-pbc-condensed-e-realization). -/
+Source: Bhatt--Scholze, Proposition 6.8.14(2). -/
 structure Exchange where
   integral : ∀ (X' X Y' Y : Base k)
       (g' : X'.scheme ⟶ X.scheme) (f' : X'.scheme ⟶ Y'.scheme)

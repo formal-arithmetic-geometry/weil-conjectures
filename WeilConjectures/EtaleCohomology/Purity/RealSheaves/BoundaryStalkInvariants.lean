@@ -242,8 +242,7 @@ strictly henselian neighbourhood of the boundary point `z` with closed point `x`
 degree zero of the Weil group and a Frobenius lift `σ_F` mapping to an element of degree `deg x`,
 there is an injective linear map from the boundary stalk `(j_* F)_x̄` to the Weil fundamental
 representation `F_t`, with image the invariants of the image of `I`, intertwining the Frobenius of
-the stalk with the image of `σ_F`.
-(blueprint: `lemma-boundary-stalk--1`) -/
+the stalk with the image of `σ_F`. -/
 theorem exists_linearMap_stalk_directImage_fundamentalRep_of_neighbourhood
     (B₀ : BasePointData (ofFundamentalGroup (U ↘ Spec (.of K)) sU GU))
     (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
@@ -328,8 +327,7 @@ theorem exists_linearMap_stalk_directImage_fundamentalRep_of_neighbourhood
 neighbourhood of the boundary point `z` with closed point `x`, there is an injective linear map
 from the boundary stalk `(j_* F)_x̄` to the Weil fundamental representation `F_t` (at the base
 point data adapted to the geometric generic point), with image the invariants of the inertia
-group `I_z`, intertwining the Frobenius of the stalk with the residue Frobenius lift at `z`.
-(blueprint: `lemma-boundary-stalk--1`) -/
+group `I_z`, intertwining the Frobenius of the stalk with the residue Frobenius lift at `z`. -/
 theorem exists_linearMap_stalk_directImage_fundamentalRep
     (B₀ : BasePointData (ofFundamentalGroup (U ↘ Spec (.of K)) sU GU))
     (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)
@@ -386,8 +384,7 @@ point `x` for the inertia group of a translate `γ • Q` of the chosen point `Q
 conjugate `γ σ_F γ⁻¹` of the residue Frobenius lift, `γ` mapping to `T` in the Weil group, there
 is an injective linear map from the boundary stalk `(j_* F)_x̄` to the Weil fundamental
 representation `F_t`, with image the vectors fixed by `T I_z T⁻¹`, intertwining the Frobenius of
-the stalk with `T Frob_z T⁻¹`.
-(blueprint: `lemma-boundary-stalk--1`) -/
+the stalk with `T Frob_z T⁻¹`. -/
 theorem exists_linearMap_stalk_directImage_fundamentalRep_conj
     (B₀ : BasePointData (ofFundamentalGroup (U ↘ Spec (.of K)) sU GU))
     (ξ : Spec (.of Ω) ⟶ UniversalCover.cover B₀.t)

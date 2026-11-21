@@ -14,8 +14,7 @@ import all WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingE
 
 /-! # Identification of the integral comparison with the normalized comparison
 
-Source: Stacks Project, Tag 0GMX; blueprint main-20261015
-(blueprint: stage3-derived-automorphism-continuation-a-integral-comparison-identification).
+Source: Stacks Project, Tag 0GMX.
 -/
 
 @[expose] public noncomputable section
@@ -172,17 +171,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The normalized comparison is the evaluation-defined partial comparison.
 
-Source: Stacks Project, Tag 0GMX, proof Steps 8--11.  The normalized integral
-comparison is characterized by its completion-unit equation.  Expand the
-completion-unit normalization and use the defining transposition of
-`podIntegralClosed`; parameter naturality and the tensor comparison identify its
-transpose with the inverse-transpose formula defining
-`podPartialHomComparison`.  Since each closed transposition is an additive
-equivalence, equality of these transposes gives equality of the arrows.
-
-(blueprint: stage3-derived-automorphism-continuation-a-integral-comparison-identification).
-Proof: expand the normalization, compare inverse transposes, and apply injectivity
-of the closed additive equivalence. -/
+Source: Stacks Project, Tag 0GMX, proof Steps 8--11.  The normalized integral comparison is
+characterized by its completion-unit equation.  Expand the completion-unit normalization and use
+the defining transposition of `podIntegralClosed`. -/
 theorem podIntegralHomComparison_eq_integralComparison :
     ∀ P : (constructibleIntegralHomPairs l E Y).FullSubcategory,
       podPartialHomComparison (podIntegralClosed l E Y) (podIntegralClosed l E X)

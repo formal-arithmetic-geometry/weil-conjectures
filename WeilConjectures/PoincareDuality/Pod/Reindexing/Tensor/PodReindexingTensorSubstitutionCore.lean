@@ -15,7 +15,6 @@ import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientRealizationCompar
 This isolates the construction of the completed-operation model and all its
 comparison, substitution, and structural laws. The tensor model and canonical
 normalization remain supplied by `PodCompletedTensorReindex.Laws`.
-(blueprint: lem-pod-reindexing-tensor-substitution-core)
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +36,7 @@ canonical closed tensor realization to the two integral completed tensors, and
 prove the primitive comparison, substitution, and structural laws by the
 whole-system counit and expression induction. The two tensor-normalization
 fields are deliberately omitted and are supplied by the tensor laws of `T`.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-substitution-core). -/
+Source: Stacks 07A4, 0941. -/
 structure PodReindexingTensorSubstitutionCoreData
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -78,8 +76,7 @@ The proof is the construction described in the declaration above. Its remaining
 work is strictly below `PodReindexSubstitution`: it constructs the fixed model,
 its realization identifications and all three expression laws, while leaving the
 already supplied tensor `Model` and `Canonical` assertions to the caller.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-substitution-core). -/
+Source: Stacks 07A4, 0941. -/
 theorem podReindexingTensorSubstitutionCore
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

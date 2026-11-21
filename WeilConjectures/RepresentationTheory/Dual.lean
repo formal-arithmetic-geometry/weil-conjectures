@@ -54,8 +54,7 @@ variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V
 
 /-- **The dual filtration.** If `ρ` has a finite filtration with graded pieces equivalent to the
 `τ i`, then the annihilators of the filtration form a finite filtration of the contragredient
-`ρ^∨` whose graded pieces are equivalent to the contragredients `τ i ^∨`.
-(blueprint: part L3 of `lemma-tensor-exterior-powers-filtered-representations--3`) -/
+`ρ^∨` whose graded pieces are equivalent to the contragredients `τ i ^∨`. -/
 theorem dual (h : HasGradedPieces ρ fun i ↦ EquivTo (τ i)) :
     HasGradedPieces ρ.dual fun i ↦ EquivTo (τ i).dual := by
   obtain ⟨m, F, e, hF, h0, hl, hP⟩ := h
@@ -75,16 +74,14 @@ variable {k : Type*} [Field k] {W : Type*} [Group W] {V : Type*} [AddCommGroup V
   {ρ : Representation k W V}
 
 /-- The annihilators of a composition series of `ρ` form a filtration of the contragredient whose
-graded pieces are the contragredients of the composition factors.
-(blueprint: part L3 of `lemma-tensor-exterior-powers-filtered-representations--3`) -/
+graded pieces are the contragredients of the composition factors. -/
 theorem hasGradedPieces_dual (s : ρ.CompositionSeries) :
     HasGradedPieces ρ.dual fun i : Fin s.length ↦ EquivTo (s.factor i).dual :=
   s.hasGradedPieces.dual
 
 /-- **Composition factors of the contragredient.** For a finite-dimensional representation `ρ`,
 the composition factors of any composition series `c` of the contragredient `ρ^∨` are, with
-multiplicities, the contragredients of the composition factors of a composition series `s` of `ρ`.
-(blueprint: part L3 of `lemma-tensor-exterior-powers-filtered-representations--3`) -/
+multiplicities, the contragredients of the composition factors of a composition series `s` of `ρ`. -/
 theorem exists_equiv_dual [FiniteDimensional k V] (s : ρ.CompositionSeries)
     (c : ρ.dual.CompositionSeries) :
     ∃ e : Fin c.length ≃ Fin s.length, ∀ j, Nonempty ((c.factor j).Equiv (s.factor (e j)).dual) :=
@@ -100,8 +97,7 @@ variable {k : Type*} [Field k] {W : Type*} [Group W] {V V' : Type*} [AddCommGrou
 
 /-- **Constituents of contragredients.** If every constituent of the finite-dimensional
 representation `ρ` is a constituent of `σ`, then every constituent of the contragredient `ρ^∨` is
-a constituent of `σ^∨`. (blueprint: part L3 of
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+a constituent of `σ^∨`. -/
 theorem dual [FiniteDimensional k V] (h : ConstituentsLE ρ σ) : ConstituentsLE ρ.dual σ.dual := by
   obtain ⟨s⟩ := ρ.exists_compositionSeries
   -- the contragredient of a composition factor `S' / U'` of `σ` is the subquotient

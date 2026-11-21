@@ -11,7 +11,6 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingTenso
 import all WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCoherenceData
 
 /-! The explicit tensor comparison on the K-flat presentation.
-(blueprint: lem-pod-reindexing-tensor-presentation-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +46,7 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] podReindexingDerivedFunctor podReindexingDerivedFactors
 
 /-- The actual complex reindexing functor restricted to K-flat complexes.
-Its object property is the existing resolution-preservation theorem.
-(blueprint: lem-pod-reindexing-tensor-presentation-comparison). -/
+Its object property is the existing resolution-preservation theorem. -/
 def tensorKFlatReindexing {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -72,13 +70,6 @@ private theorem iso_composite_with_components {C₁ C₂ D : Type*}
   ⟨a ≪≫ b ≪≫ c, fun _ _ ↦ rfl⟩
 
 /-- The explicit comparison on K-flat representatives, before localization descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 2.
-(blueprint: lem-pod-reindexing-tensor-presentation-comparison).
-
-Proof: first apply the localization factorization to the total complex, then the
-localized natural chain comparison, and finally the recorded target tensor model.
-The chain comparison is natural by its pure normalization. Evaluating this
-composite gives exactly the stated formula. All constructions are explicit.
 -/
 theorem tensor_presentation_comparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

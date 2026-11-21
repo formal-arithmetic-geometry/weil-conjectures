@@ -15,8 +15,7 @@ public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # Degree-zero cochains and invariants
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG,
-label section-continuous-group-cohomology (blueprint: lem-exc-continuous-cochains-invariants-zero).
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, label.
 -/
 
 @[expose] public section
@@ -187,22 +186,8 @@ lemma iCycles_cyclesMap_apply {A : Type v} [Ring A] {ι : Type*} {c : ComplexSha
 set_option linter.unusedVariables false in
 /-- Degree-zero continuous cochain homology is the left exact invariant functor.
 
-Proof: A continuous map from the singleton `Fin 0 → G` is a constant coefficient.
-The degree-zero differential is the function `g ↦ ρ(g)m - m`, so its kernel is exactly
-`⨅ g, ker (ρ(g) - id)`. There are no incoming boundaries in degree zero; the homology
-kernel description therefore gives a linear equivalence to this invariant submodule.
-Postcomposition commutes with evaluation and with the kernel inclusion, making the
-identifications natural. Define the invariant functor on maps by restriction of the
-underlying equivariant linear map. Restriction preserves identities, compositions and
-addition. This construction is data, independent of any existence choice. Finally the
-forgetful functor detects module kernels and finite products by
-`lem-exc-discrete-modules-abelian`; taking invariant elements commutes with both kernels
-and finite products. Thus the constructed invariant functor preserves finite limits.
-The degree-zero equivalences assemble into the asserted natural isomorphism.
-
-Source: Stacks Project, Etale Cohomology, Tag 0DVG,
-label section-continuous-group-cohomology, degree-zero differential and invariants.
-(blueprint: lem-exc-continuous-cochains-invariants-zero). -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, label , degree-zero differential and
+invariants. -/
 theorem continuousCochains_invariants_zero
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

@@ -57,9 +57,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Identification of scalar pullback realization maps
 
-Source: blueprint, trace-definition coefficient-category identification;
-Stacks Tags 0941 and 099N(5)
-(blueprint: lem-fd-scalar-pullback-realization-identification).
+Source: Stacks Tags 0941 and 099N(5).
 -/
 
 @[expose] public noncomputable section

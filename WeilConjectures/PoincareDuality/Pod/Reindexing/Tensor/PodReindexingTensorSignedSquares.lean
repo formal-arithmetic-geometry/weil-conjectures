@@ -57,18 +57,10 @@ private theorem goodRepresentative (W : Scheme.{u})
 
 set_option linter.unusedVariables false in
 /-- The two tensor-factor shift squares for generator/model normalized signed shifts.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-signed-shift-squares-r3).
+Source: Stacks 07A4, 0941.
 
 The generator and representative-model laws are necessary: the underlying shift
-structure alone permits independent sign changes of its derived isomorphisms.
-
-Proof: choose good representatives for M and N using the existing localization.
-Present M' and N' by their shifted representatives, using a and b. The separate
-Roos normalizations compute each derived path from its strict tower map with a
-common prefix and suffix. The strict tower squares identify these maps, since
-reindexing preserves degrees and the second-slot Koszul sign. Substitute these
-equalities and cancel the reindexed tensor presentation isomorphism. -/
+structure alone permits independent sign changes of its derived isomorphisms. -/
 theorem podReindexingTensorSignedShifts_tensorSquares
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

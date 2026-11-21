@@ -16,7 +16,7 @@ public import WeilConjectures.RingTheory.HenselianDVRExtension
 Let `R` be a henselian discrete valuation ring with separably closed residue field `k`,
 `F` its fraction field, `Ω` a separable closure of `F` and `G = Gal(Ω/F)`. Let `ℓ` be a prime
 invertible in `k`. Then `Hᵠ(G, M) = 0` for `q > 1` and every `ℓ`-primary discrete `G`-module
-`M`, and `H⁰(G, M)`, `H¹(G, M)` are finite for finite `M` (blueprint `lem-exc-dvr-galois`).
+`M`, and `H⁰(G, M)`, `H¹(G, M)` are finite for finite `M`.
 
 Choose a uniformizer `π` of `R` and compatible `ℓ ^ m`-th roots `π_m ∈ Ω` of `π`. As `F`
 contains the `ℓ ^ m`-th roots of unity (Hensel's lemma), the Kummer character
@@ -29,7 +29,7 @@ integral closure are `ℓ ^ b`-th powers
 (`IsDiscreteValuationRing.exists_pow_eq_algebraMap_of_dvd_finrank`); hence `π_b ∈ E` and the
 image of `K` in `Gal(E/F)` lies in `Gal(E/F(π_b))`, of order prime to `ℓ`. The cohomology is then
 computed by `DiscreteModule.IsEllAdicQuotient`: it is given by the two-term complex
-`[Mᴷ --τ-1--> Mᴷ]` (blueprint `lem-exc-procyclic-two-term`).
+`[Mᴷ --τ-1--> Mᴷ]`.
 
 ## Main statements
 
@@ -277,7 +277,7 @@ theorem finite_H_one_galois_of_natCast_ne_zero (hℓ : (ℓ : ResidueField R) �
 
 
 variable (R) in
-/-- Blueprint `lem-exc-dvr-galois`: The prime-to-characteristic local Galois calculation.
+/-- The prime-to-characteristic local Galois calculation.
 
 Let `R` be a discrete valuation ring which is strictly henselian, with separably closed
 residue field of characteristic `p > 0`; put `F = Frac(R)`, `G = Gal(Ω/F)` for a separable
@@ -297,8 +297,8 @@ theorem subsingleton_H_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime
   subsingleton_H_galois_of_natCast_ne_zero R (natCast_ne_zero_of_ne hp hℓp) M hM hq
 
 variable (R) in
-/-- Blueprint `lem-exc-dvr-galois`: The prime-to-characteristic local Galois calculation,
-finiteness of `H¹` (see `IsDiscreteValuationRing.subsingleton_H_galois`). -/
+/-- The prime-to-characteristic local Galois calculation, finiteness of `H¹` (see
+`IsDiscreteValuationRing.subsingleton_H_galois`). -/
 theorem finite_H_one_galois {p : ℕ} [CharP (ResidueField R) p] (hp : p.Prime) (hℓp : ℓ ≠ p)
     (M : DiscreteModule.{w} Gal(Ω/F)) (hM : DiscreteModule.IsPrimary ℓ M) [Finite M.obj.V] :
     Finite (DiscreteModule.H Gal(Ω/F) M 1) :=

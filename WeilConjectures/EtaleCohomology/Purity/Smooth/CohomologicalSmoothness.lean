@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 # Cohomological smoothness
 
 For `f : X ⟶ Y` smooth separated of pure relative dimension `d` and a finite coefficient ring
-`Λ` whose exponent is invertible on `X` (`proposition-exceptional-inverse-image-smooth-morphism`):
+`Λ` whose exponent is invertible on `X`:
 the dualizing complex `ω_f = Rf^! Λ_Y` is ⊗-invertible, `Rf^! K ≅ Lf^* K ⊗^L ω_f` for every
 `K ∈ D^b_{ctf}(Y, Λ)`, and the formation of `Rf^!` commutes with base change.
 
@@ -51,7 +51,7 @@ compactification), so these hypotheses are omitted.
   `AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension`
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek`
 - `AlgebraicGeometry.Etale.nonempty_dualizingComplex_iso_constantComplex_of_etale`: `ω_e ≅ Λ_X`
-  for `e` étale (`lem-pur-co-smooth-etale-locality`), hence `Re^! K ≅ Le^* K`
+  for `e` étale, hence `Re^! K ≅ Le^* K`
   (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_of_etale`).
 -/
 
@@ -75,7 +75,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness
+/-- Cohomological smoothness
 
 *Clause (a).* For `f` smooth separated of pure relative dimension `d` the dualizing complex
 `ω_f = Rf^! Λ_Y` is ⊗-invertible: it is a lisse rank-one object, twisted and shifted. This is
@@ -89,7 +89,7 @@ theorem isInvertible_dualizingComplex :
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness
+/-- Cohomological smoothness
 
 *Clause (b), the tensor formula.* For `f` smooth separated of pure relative dimension `d` and
 `K ∈ D^b_{ctf}(Y, Λ)`,
@@ -111,7 +111,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedTensor
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness
+/-- Cohomological smoothness
 
 *Clause (b), the tensor formula, canonical form.* For `f` smooth of pure relative dimension `d`,
 the mate of the projection formula, `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K`
@@ -123,7 +123,7 @@ theorem isIso_dualizingComplexTensorMap_of_smoothOfRelativeDimension
 
 omit [HasTateTwist Λ] [IsSeparated f] in
 include d in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness
+/-- Cohomological smoothness
 
 *Clause (c), smooth base change for `R^!`.* In the cartesian square
 
@@ -154,7 +154,7 @@ theorem nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek [QuasiSep
   nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar Λ f d sq
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-etale locality, without derived descent
+/-- Source-etale locality, without derived descent
 
 *Étale morphisms.* Every étale morphism `e : X ⟶ Y` is cohomologically smooth, with trivial
 dualizing complex `ω_e = Re^! Λ_Y ≅ Λ_X`. -/
@@ -172,7 +172,7 @@ omit [HasTateTwist Λ] in
 /-- For `e : X ⟶ Y` étale and `K ∈ D^b_{ctf}(Y, Λ)`, the exceptional inverse image is the
 ordinary one, `Re^! K ≅ Le^* K`: this is the tensor formula of
 `proposition-exceptional-inverse-image-smooth-morphism` (b) for `e`, smooth of relative dimension
-zero, together with `ω_e ≅ Λ_X` (`lem-pur-co-smooth-etale-locality`). -/
+zero, together with `ω_e ≅ Λ_X`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_of_etale {X Y : Scheme.{u}} (e : X ⟶ Y)
     [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] [HasInvertibleExponent Λ X]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

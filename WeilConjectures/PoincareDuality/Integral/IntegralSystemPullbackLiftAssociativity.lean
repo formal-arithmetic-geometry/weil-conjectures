@@ -9,9 +9,7 @@ public import WeilConjectures.SmoothPurity.Integral.IntegralPullbackSystemCompar
 
 /-! # Associativity of a fully faithful integral lift
 
-Source: Stacks Project, Tag 0D6D and the naturality calculation in step 6 of
-lem-pod-integral-pullback-composition
-(blueprint: lem-pod-integral-system-pullback-lift-associativity).
+Source: Stacks Project, Tag 0D6D and the naturality calculation in step 6 of.
 -/
 
 @[expose] public noncomputable section
@@ -91,21 +89,7 @@ private theorem comparisonTransport
 
 /-- Any lift satisfying the defining whole-system equation is associative.
 This concerns a fixed lift; it asserts neither existence nor a reduction formula.
-Source: Stacks Tag 0D6D; original integral composition proof step 6
-(blueprint: lem-pod-integral-system-pullback-lift-associativity).
-
-Proof: apply faithful coherent reduction to the two integral composites. Postcompose
-both with beta_j at F_h F_k K, then U_j(beta_h), then U_j U_h(beta_k).
-These are invertible. Naturality of beta_j and the defining equation for (h,k)
-turn the first composite into beta_(j,hk) followed by a_(j,hk) and U_j(a_(h,k)).
-For the second composite, the defining equation for (j,h), naturality of a_(j,h)
-at beta_k, and the defining equation for (jh,k) give beta_(jh,k) followed by
-a_(jh,k) and a_(j,h) at U_k(RK). Naturality with respect to the equality
-(j >> h) >> k = j >> (h >> k) transports beta across the displayed eqToHom.
-The whole-system associativity clause of finiteSystemPullbackCoherence identifies
-the two resulting maps. Cancel the common invertible postcomposition and use
-integralSystemReduction_fullyFaithful to reflect their equality. No equality of
-derived maps is inferred merely from their separate finite evaluations. -/
+Source: Stacks Tag 0D6D. -/
 theorem integralSystemPullbackLift_associativity
     (β : ∀ {X Y : Scheme.{u}}
       [∀ x : X, Invertible (l : X.residueField x)]

@@ -125,11 +125,11 @@ variable [Finite Λ] [HasTateTwist Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)}
 
 namespace TateOrientation
 
-/-- **Degreewise Poincaré duality over a self-injective coefficient ring** (finite level of
-blueprint `theorem-poincare-duality--9`). Let `k` be separably closed, `Λ` a finite self-injective
-cogenerating ring (e.g. `ℤ/ℓᵐ`) whose characteristic is invertible on `X`, and `γ` a Tate
-orientation of `a : X ⟶ Spec k`. For every `K ∈ D(X_ét, Λ)` and `i + j = 2d`, the degreewise
-Poincaré pairing `H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ End(Λ_s)` is nondegenerate on both sides.
+/-- **Degreewise Poincaré duality over a self-injective coefficient ring**. Let `k` be separably
+closed, `Λ` a finite self-injective cogenerating ring (e.g. `ℤ/ℓᵐ`) whose characteristic is
+invertible on `X`, and `γ` a Tate orientation of `a : X ⟶ Spec k`. For every `K ∈ D(X_ét, Λ)` and
+`i + j = 2d`, the degreewise Poincaré pairing `H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ End(Λ_s)` is
+nondegenerate on both sides.
 
 The derived Poincaré pairing is perfect
 (`AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_poincarePairing_of_finite`), so its

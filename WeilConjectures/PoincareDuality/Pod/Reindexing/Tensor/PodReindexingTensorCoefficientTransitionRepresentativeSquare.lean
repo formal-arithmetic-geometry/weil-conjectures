@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexin
 
 /-! # Completed tensor square for scalar/reindexing transitions
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-representative-square).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -92,10 +91,7 @@ private theorem exactSquareFactors
   repeat' erw [Category.assoc]
 
 /-- A representative step of the scalar/reindexing tensor descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-tensor-representative-square).
-Proof: Apply the exact-derived composition and natural-isomorphism factor equations separately in
-    both variables. Product extensionality gives the square. -/
+Source: Stacks 05RU, 0941. -/
 theorem podTensorCoefficientRepresentativeSquare
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

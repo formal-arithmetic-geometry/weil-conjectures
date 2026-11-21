@@ -106,7 +106,7 @@ section Tate
 variable (Λ : Type (u + 1)) [CommRing Λ] [HasTateTwist Λ] {X : Scheme.{u}}
   [HasInvertibleExponent Λ X]
 
-/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
+/-- Strict Weil data and the Tate datum.
 
 The *Tate datum* `τ_r : Lg^* Λ_X(r) ≅ Λ_X(r)` on the Tate twist `Λ_X(r)` for an endomorphism
 `g` of `X` (for `g = g_{X,γ}` the geometric-Frobenius automorphism): the identification
@@ -149,8 +149,7 @@ private lemma map_twistObjectAddIso_zero_zero :
     ← Category.assoc, HasTateTwist.leftDerivedUpperStar_map_twistObjectAddIso]
   simp only [Category.assoc]
 
-/-- Blueprint `definition-weil-structure`: the canonical Weil structure `φ_Λ` of `Λ_T` is the Tate
-datum `τ_0`.
+/-- The canonical Weil structure `φ_Λ` of `Λ_T` is the Tate datum `τ_0`.
 
 For every morphism `f : X ⟶ Y` the identification `Lf^* Λ_Y(0) ≅ Λ_X(0)` of the twist datum
 corresponds to the canonical identification `ε : Lf^* Λ_Y ≅ Λ_X`
@@ -176,10 +175,10 @@ namespace WeilComplex
 variable {Λ} [Finite Λ] (g : X ≅ X)
 
 variable (Λ) in
-/-- Blueprint `definition-weil-structure`: the *Tate line* `(Λ_X(r), τ_r)` as a strict Weil
-complex, for an automorphism `g` of `X` (for `g = g_{X,γ}` the geometric-Frobenius
-automorphism): the Tate twist `Λ_X(r) ∈ Dctf(X, Λ)` with its canonical Weil structure, the Tate
-datum `τ_r : Lg^* Λ_X(r) ≅ Λ_X(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`). -/
+/-- The *Tate line* `(Λ_X(r), τ_r)` as a strict Weil complex, for an automorphism `g` of `X` (for
+`g = g_{X,γ}` the geometric-Frobenius automorphism): the Tate twist `Λ_X(r) ∈ Dctf(X, Λ)` with
+its canonical Weil structure, the Tate datum `τ_r : Lg^* Λ_X(r) ≅ Λ_X(r)`
+(`AlgebraicGeometry.Etale.tateWeilDatum`). -/
 noncomputable def tate (r : ℤ) : WeilComplex (ModuleCat.{u + 1} Λ) g where
   obj := ⟨tateObject Λ X r, boundedConstructibleFiniteTor_tateObject Λ X r⟩
   frobenius := ObjectProperty.isoMk _ (tateWeilDatum Λ g.hom r)
@@ -192,7 +191,7 @@ lemma tate_frobenius_hom_hom (r : ℤ) :
 variable {g} {k : Type u} [Field k] [IsAlgClosed k] (aX : X ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX]
 
-/-- Blueprint `theorem-poincare-duality-frobenius--1`: Dual and Tate Weil data.
+/-- Dual and Tate Weil data.
 
 The *twisted dual* `(K^∨(r), φ_{K^∨(r)})` of a strict Weil complex `(K, φ_K)`: the coefficient
 dual `K^∨ = RHom(K, Λ_X)` with the contragredient datum `φ_{K^∨}`
@@ -214,7 +213,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   {gY : Y ⟶ Y}
 
 variable (d) in
-/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
+/-- Strict Weil data and the Tate datum.
 
 The datum `φ^pur_{f,K}` induced on the source `Lf^* K(d)[2d]` of smooth purity by a strict Weil
 datum `φ_K : Lg_Y^* K ≅ K` (more generally by any Weil datum `φ_K : Lg_Y^* K ⟶ K`), for a
@@ -237,7 +236,7 @@ noncomputable def smoothPurityWeilDatum (sq : CommSq gX f f gY)
   (leftDerivedUpperStarTwistShiftBaseChangeIso Λ d f sq K).hom ≫
     (twistShift Λ X d).map ((L((f)^*[ModuleCat.{u + 1} Λ])).map φ)
 
-/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
+/-- Strict Weil data and the Tate datum.
 
 The datum `φ^!_{f,K}` induced on the exceptional inverse image `Rf^! K` by a strict Weil datum
 `φ_K : Lg_Y^* K ≅ K` (more generally by any Weil datum `φ_K : Lg_Y^* K ⟶ K`), for a cartesian

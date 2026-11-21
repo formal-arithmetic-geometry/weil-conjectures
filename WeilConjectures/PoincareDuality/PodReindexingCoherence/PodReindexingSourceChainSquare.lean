@@ -9,9 +9,8 @@ public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexi
 
 /-! # Signed source reindexing of the Hom chain comparison
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-The square is proved for any two source reindexings satisfying LeftFormula.
-(blueprint: lem-pod-reindexing-source-chain-square)
+Source: Stacks 0A8X and 08JA. The square is proved for any two source reindexings satisfying
+LeftFormula.
 -/
 
 @[expose] public noncomputable section
@@ -188,11 +187,7 @@ private lemma source_chain_leftFormula
 
 
 /-- The signed source reindexings commute with the fixed sectionwise chain comparison.
-Source: Stacks 0A8X, 08JA and blueprint dual-Tate compatibility, Step 4.
-Proof: project to every source degree and evaluate the resulting local Hom family.
-The two LeftFormula identities give the same sign and chain_projection identifies
-both remaining families, including their restrictions to every object over U.
-(blueprint: lem-pod-reindexing-source-chain-square) -/
+Source: Stacks 0A8X, 08JA. -/
 theorem source_chain_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

@@ -85,8 +85,7 @@ lemma fourierTransformPi_const_mul (ψ : AddChar K R) (c : R) (f : (ι → L) �
 `f : L → R` on a finite field `L`, with respect to the additive character `ψ ∘ Tr_{L/K}` of `L`
 induced by an additive character `ψ` of a subfield `K`. For `L = 𝔽_{qⁿ}` over `K = 𝔽_q` this
 is the transform with respect to the character `ψₙ` of `𝔽_{qⁿ}`. It is the transform on `L^ι`
-for `ι` with one element (`FiniteField.fourierTransformPi_unique`).
-(sketch blueprint: `definition-trace-function`) -/
+for `ι` with one element (`FiniteField.fourierTransformPi_unique`). -/
 noncomputable def fourierTransform (ψ : AddChar K R) (f : L → R) (y : L) : R :=
   ∑ x, f x * ψ (Algebra.trace K L (x * y))
 
@@ -120,8 +119,7 @@ variable [FiniteDimensional K L] [Algebra.IsSeparable K L] [IsDomain R]
 
 /-- **Additive orthogonality on `L^ι`.** For a nontrivial additive character `ψ` of `K`,
 `∑_{y ∈ L^ι} ψ_L(⟨x - x', y⟩) = #L ^ #ι` if `x = x'` and `0` otherwise: the sum is the product
-over `ι` of the orthogonality relations on `L`.
-(blueprint: `corollary-plancherel--1`; sketch blueprint: `corollary-plancherel--1`) -/
+over `ι` of the orthogonality relations on `L`. -/
 theorem sum_compTrace_sum_sub_mul [DecidableEq L] {ψ : AddChar K R} (hψ : ψ ≠ 1) (x x' : ι → L) :
     ∑ y : ι → L, ψ.compTrace L (∑ i, (x i - x' i) * y i) =
       if x = x' then (Fintype.card L : R) ^ Fintype.card ι else 0 := by
@@ -141,7 +139,7 @@ theorem sum_compTrace_sum_sub_mul [DecidableEq L] {ψ : AddChar K R} (hψ : ψ �
 
 /-- **Classical Fourier inversion on `L^ι`.** For a nontrivial additive character `ψ` of `K`,
 the transform with respect to `ψ⁻¹` of the transform with respect to `ψ` is `#L ^ #ι` times
-the identity. (sketch blueprint: `det-prop-double-trace`, proof) -/
+the identity. -/
 theorem fourierTransformPi_inv_fourierTransformPi {ψ : AddChar K R} (hψ : ψ ≠ 1)
     (f : (ι → L) → R) (y : ι → L) :
     fourierTransformPi ψ⁻¹ (fourierTransformPi ψ f) y =
@@ -165,8 +163,7 @@ theorem fourierTransformPi_inv_fourierTransformPi {ψ : AddChar K R} (hψ : ψ �
 /-- **Classical Fourier inversion.** For a nontrivial additive character `ψ` of `K`, the
 transform with respect to `ψ⁻¹` of the transform with respect to `ψ` is `#L` times the
 identity: `∑_x (∑_z f(z) ψ_L(z x)) ψ_L(-x y) = #L · f(y)`. It is the case `ι = Unit` of
-`FiniteField.fourierTransformPi_inv_fourierTransformPi`.
-(sketch blueprint: `det-prop-double-trace`, proof) -/
+`FiniteField.fourierTransformPi_inv_fourierTransformPi`. -/
 theorem fourierTransform_inv_fourierTransform {ψ : AddChar K R} (hψ : ψ ≠ 1) (f : L → R)
     (y : L) :
     fourierTransform ψ⁻¹ (fourierTransform ψ f) y = Fintype.card L * f y := by
@@ -191,8 +188,7 @@ lemma conj_ringHom_compTrace [Finite K] (j : R →+* ℂ) (ψ : AddChar K R) (t 
 
 /-- **Classical Plancherel identity on `L^ι`.** For a nontrivial additive character `ψ` of a
 finite field `K`, a finite extension `L / K` and a ring homomorphism `j : R →+* ℂ`,
-`∑_y |j f̂(y)|² = #L ^ #ι ∑_x |j f(x)|²`.
-(sketch blueprint: `corollary-plancherel`, proof) -/
+`∑_y |j f̂(y)|² = #L ^ #ι ∑_x |j f(x)|²`. -/
 theorem sum_norm_sq_fourierTransformPi [Finite K] (j : R →+* ℂ) {ψ : AddChar K R} (hψ : ψ ≠ 1)
     (f : (ι → L) → R) :
     ∑ y, ‖j (fourierTransformPi ψ f y)‖ ^ 2 =
@@ -230,8 +226,7 @@ theorem sum_norm_sq_fourierTransformPi [Finite K] (j : R →+* ℂ) {ψ : AddCha
 /-- **Classical Plancherel identity.** For a nontrivial additive character `ψ` of a finite field
 `K`, a finite extension `L / K` and a ring homomorphism `ι : R →+* ℂ`,
 `∑_y |ι f̂(y)|² = #L ∑_x |ι f(x)|²`. It is the case `ι = Unit` of
-`FiniteField.sum_norm_sq_fourierTransformPi`.
-(sketch blueprint: `corollary-plancherel`, proof) -/
+`FiniteField.sum_norm_sq_fourierTransformPi`. -/
 theorem sum_norm_sq_fourierTransform [Finite K] (ι : R →+* ℂ) {ψ : AddChar K R} (hψ : ψ ≠ 1)
     (f : L → R) :
     ∑ y, ‖ι (fourierTransform ψ f y)‖ ^ 2 = Fintype.card L * ∑ x, ‖ι (f x)‖ ^ 2 := by

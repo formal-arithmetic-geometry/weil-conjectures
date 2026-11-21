@@ -12,8 +12,7 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Presentations for the reduction/reindexing tensor square
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: def-pod-reduction-reindex-representatives)
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -35,7 +34,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   CategoryTheory.Functor.mapDerivedCategoryFactors
 
 /-- Rebuild a localization factor componentwise after an isomorphism of functors.
-Source: naturality of a composite of natural isomorphisms; Stacks 05RU. -/
+Source: Stacks 05RU. -/
 def reductionFactorOfIso
     {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
     (q : C₀ ⥤ C) (r : D₀ ⥤ D) (F₀ : C₀ ⥤ D₀)
@@ -45,7 +44,7 @@ def reductionFactorOfIso
     (fun f ↦ (Functor.isoWhiskerLeft q e.symm ≪≫ a).hom.naturality f)
 
 /-- Component equation for the componentwise localization factor.
-Source: its defining components; Stacks 05RU. -/
+Source: Stacks 05RU. -/
 theorem reductionFactorOfIso_hom
     {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
     (q : C₀ ⥤ C) (r : D₀ ⥤ D) (F₀ : C₀ ⥤ D₀)
@@ -54,7 +53,7 @@ theorem reductionFactorOfIso_hom
       e.inv.app (q.obj P) ≫ a.hom.app P := rfl
 
 /-- Transport a localization factor with both its ordinary and derived functors.
-Source: composition of natural isomorphisms; Stacks 05RU. -/
+Source: Stacks 05RU. -/
 def reductionSystemFactorOfIso
     {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
     (q : C₀ ⥤ C) (r : D₀ ⥤ D) (F₀ G₀ : C₀ ⥤ D₀)
@@ -66,7 +65,7 @@ def reductionSystemFactorOfIso
       Functor.isoWhiskerRight e₀ r).hom.naturality f)
 
 /-- Component equation for transport of the ordinary and derived functors.
-Source: its defining components; Stacks 05RU. -/
+Source: Stacks 05RU. -/
 theorem reductionSystemFactorOfIso_hom
     {C₀ D₀ C D : Type*} [Category C₀] [Category D₀] [Category C] [Category D]
     (q : C₀ ⥤ C) (r : D₀ ⥤ D) (F₀ G₀ : C₀ ⥤ D₀)
@@ -113,16 +112,14 @@ theorem derived_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
   congr 1
 
 /-- The existing sequence localization, with its source and target fixed explicitly.
-Source: Stacks 05RU
-(blueprint: def-pod-reduction-reindex-representatives). -/
+Source: Stacks 05RU. -/
 def systemQ (W : Scheme.{u}) :
     CochainComplex (coefficientSequenceModules l E W) ℤ ⥤ coefficientSequenceDerived l E W :=
   letI := coefficientSequenceHasDerived l E W
   DerivedCategory.Q
 
 /-- The localization factor of the fixed system pullback presentation.
-Source: its derived-functor construction; Stacks 05RU.
-(blueprint: def-pod-reduction-reindex-representatives). -/
+Source: Stacks 05RU. -/
 def rawSystemFactor {X Y : Scheme.{u}} (g : X ⟶ Y) :
     systemQ l E Y ⋙ pullbackTensorSequenceDerived l E g ≅
       (pullbackTensorSequenceInverse l E g).mapHomologicalComplex (.up ℤ) ⋙ systemQ l E X :=
@@ -132,8 +129,7 @@ def rawSystemFactor {X Y : Scheme.{u}} (g : X ⟶ Y) :
 The factor is transported from the fixed pullback presentation on both sides of
 localization. Its components retain the ordinary coefficient-map equality, so no
 comparison of two presentations of the derived-category instance is needed.
-Source: Stacks 05RU, 0941
-(blueprint: def-pod-reduction-reindex-representatives). -/
+Source: Stacks 05RU, 0941. -/
 def systemFactor {X Y : Scheme.{u}} (g : X ⟶ Y) :
     systemQ l E Y ⋙ integralComparisonDerivedSequencePullback l E g ≅
       I[g] ⋙ systemQ l E X :=
@@ -153,8 +149,7 @@ def systemChain {X Y : Scheme.{u}} (g : X ⟶ Y) :
     Functor.isoWhiskerRight (NatIso.prod e e) _
 
 /-- The ordinary comparison is fixed on scalar generators at every quotient level.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03EL, 0941.
-(blueprint: def-pod-reduction-reindex-representatives). -/
+Source: Stacks 03EL, 0941. -/
 def Generators {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (P : CochainComplex (scalarReductionSource l E Y) ℤ)
     (β : (I[g]).obj ((R[Y]).obj P) ≅ (R[X]).obj ((F[g]).obj P)) : Prop :=

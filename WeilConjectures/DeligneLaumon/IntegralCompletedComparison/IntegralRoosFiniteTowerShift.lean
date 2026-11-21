@@ -25,7 +25,6 @@ set_option linter.privateModule false
 /-! # Shift compatibility of a counit-normalized integral Roos comparison
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0941, and derived.tex, Tag 014E.
-(blueprint: lem-a1-integral-roos-finite-tower-shift).
 -/
 
 @[expose] public noncomputable section

@@ -13,7 +13,6 @@ import WeilConjectures.DeligneLaumon.IntegralCompositionCoefficientSquare
 
 The scalar square in step 7 of the field shriek composition argument, before descent.
 Source: Stacks 0F7J and Bhatt--Scholze, Definition 6.7.6.
-(blueprint: lem-zl-field-shriek-composition-coefficient-square).
 -/
 
 @[expose] public noncomputable section

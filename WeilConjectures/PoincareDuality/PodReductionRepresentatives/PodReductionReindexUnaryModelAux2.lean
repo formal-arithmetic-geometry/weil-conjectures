@@ -15,8 +15,7 @@ Equal exact functors have the same localization factors up to the equality
 transports, and the coefficient-normalized reindexing functor is the ordinary
 relabelling functor.
 
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 05RU and 03CO.
-(blueprint: lem-pod-reduction-reindex-unary-model).
+Source: Stacks 05RU and 03CO.
 -/
 
 @[expose] public noncomputable section
@@ -155,8 +154,7 @@ local notation "F[" g "]" => podReindexingComplexFunctor l E g none
 
 -- The representative assembles several large localized and sectionwise comparisons.
 /-- The whole-system reduction mate has an ordinary quotient representative.
-Source: blueprint dual-Tate compatibility Steps 1, 2 and 4; Stacks 03EL, 07A6, 0941.
-(blueprint: lem-pod-reduction-reindex-unary-model). -/
+Source: Stacks 03EL, 07A6, 0941. -/
 theorem unary_model_core {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

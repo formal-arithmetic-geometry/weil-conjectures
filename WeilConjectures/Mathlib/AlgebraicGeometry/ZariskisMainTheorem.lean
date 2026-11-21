@@ -224,7 +224,7 @@ theorem isClosedImmersion_of_injective_of_le_map_maximalIdeal {k : Type u} [Fiel
 
 end ClosedImmersion
 
-/-- **Quasi-finite = locally quasi-finite + quasi-compact** (blueprint `pqf-lem-qf-locqf-qc`). A
+/-- **Quasi-finite = locally quasi-finite + quasi-compact**. A
 morphism is quasi-finite in the sense of blueprint `pqf-def-quasifinite` (of finite type, with
 every point isolated in its fibre) if and only if it is locally quasi-finite (locally of finite
 type and quasi-finite at every point) and quasi-compact. -/

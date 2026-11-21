@@ -10,7 +10,6 @@ public import WeilConjectures.DeligneLaumon.FieldShriekCompositionNormalization
 /-! # Invertibility of the completed proper/open tower map
 
 Source: Stacks 0F7J; Bhatt--Scholze Definition 6.7.6 and Lemmas 6.7.7, 6.1.13.
-(blueprint: lem-zl-completed-composition-tower-is-iso).
 -/
 
 @[expose] public noncomputable section
@@ -35,21 +34,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 include hl in
 /-- The actual proper/open map on one tower is invertible on integral inputs.
-Source: Stacks 0F7J and Bhatt--Scholze Definition 6.7.6, Lemmas 6.7.7 and 6.1.13
-(blueprint: lem-zl-completed-composition-tower-is-iso).
-
-Proof: extension by zero is fully faithful, so the open unit is invertible.
-Proper base change for the cartesian square e.isPullback_restrict identifies
-Lambda with the restriction exchange followed by this inverse unit. On the
-strict derived reduction system its components are the finite proper/open
-isomorphisms on the bounded constructible etale origins of K. Derived-complete
-conservativity makes Lambda invertible. Its inverse open adjunct Gamma has those
-same finite proper/open reductions. Open extension and proper direct image keep
-the completed constructible domain, so the cone of Gamma is complete; its zero
-reductions make it zero. Thus Gamma is invertible. The remaining factors of
-sfCompletedCompositionOnTower are functorial images of the canonical proper and
-open compositors and the equality e.restrict_i_fst. All are invertible, so their
-composite is invertible. This includes zero inputs and empty schemes. -/
+Source: Stacks 0F7J and Bhatt--Scholze Definition 6.7.6, Lemmas 6.7.7 and 6.1.13. -/
 theorem sfCompletedCompositionOnTower_isIso
     (d : Compactification g) (e : Compactification (f ≫ d.i))
     (K : sfIntegralConstructibleCategory l E X) :

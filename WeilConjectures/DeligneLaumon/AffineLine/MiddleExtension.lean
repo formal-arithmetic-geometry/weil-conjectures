@@ -64,7 +64,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 /-- A lisse Weil sheaf `M` on `U₀` is *nonexceptional* if none of its geometric irreducible
 constituents is a linear Artin–Schreier sheaf `ℒ_{ψ(a x)}|_U`, for any `a` in the algebraic
 closure of `k₀`, the value `a = 0` included; for `a = 0` the excluded constituent is the trivial
-rank-one sheaf. (blueprint: `proposition-fourier-transform-middle-extension`) -/
+rank-one sheaf. -/
 def IsNonexceptional {U : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
     (F : WeilSheaf k₀ l U) (ψ : AddChar k₀ (PadicAlgCl l)) (j : U ⟶ affineLine k₀)
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
@@ -77,16 +77,14 @@ constant Weil twist) nor the Artin–Schreier sheaf `ℒ_{ψ(a x)}` for any `a �
 The condition is phrased on `U`, using `j^* j_* M = M` and `j_*(ℒ|_U) = ℒ` for `ℒ` lisse on the
 whole line: `M_k̄` is not constant, and it is not isomorphic to `ℒ_{ψ(a x)}|_U`. The latter
 isomorphism is phrased as "`M_k̄` is irreducible and `ℒ_{ψ(a x)}|_U` is a constituent of it",
-which is equivalent since the Artin–Schreier sheaves are irreducible.
-(blueprint: `def-fd-nonexceptional`) -/
+which is equivalent since the Artin–Schreier sheaves are irreducible. -/
 def LisseOnDenseOpen.IsFourierNonexceptional (ψ : AddChar k₀ (PadicAlgCl l))
     (D : LisseOnDenseOpen k₀ l) : Prop :=
   ¬ D.IsGeometricallyConstant ∧ ∀ a : AlgebraicClosure k₀,
     ¬ (D.sheaf.IsGeometricallyIrreducible ∧ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j)
 
 /-- `D'` is a *Fourier partner* of `D` if the Fourier transform of the curve perverse middle
-extension `(j_*M)[1]` of `D` is the middle extension `(j'_*M')[1]` of `D'`.
-(blueprint: `proposition-fourier-transform-middle-extension`) -/
+extension `(j_*M)[1]` of `D` is the middle extension `(j'_*M')[1]` of `D'`. -/
 def LisseOnDenseOpen.IsFourierPartner (ψ : AddChar k₀ (PadicAlgCl l))
     (D D' : LisseOnDenseOpen k₀ l) : Prop :=
   Nonempty ((fourierTransform ψ).obj D.middleExtension ≅ D'.middleExtension)
@@ -98,8 +96,7 @@ variable (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
 /-- **Constituent-nonexceptional implies Fourier-nonexceptional.** If no geometric constituent
 of the irreducible lisse sheaf `M` is a linear character `ℒ_{ψ(a x)}|_U`, then `M_k̄` is neither
 constant, since a nonzero constant sheaf has the trivial constituent `ℒ_{ψ(0 · x)}`, nor
-isomorphic to some `ℒ_{ψ(a x)}|_U`, which would be its constituent.
-(blueprint: `lem-a1-constituent-nonexceptional-comparison`, part 1) -/
+isomorphic to some `ℒ_{ψ(a x)}|_U`, which would be its constituent. -/
 theorem isFourierNonexceptional_of_isNonexceptional (hD : D.sheaf.IsIrreducibleLisse)
     (h : D.sheaf.IsNonexceptional ψ D.j) : D.IsFourierNonexceptional ψ :=
   ⟨fun hc ↦ h 0 (D.hasLinearArtinSchreierConstituent_zero_of_isGeometricallyConstant ψ hD.2.1 hc),
@@ -107,7 +104,7 @@ theorem isFourierNonexceptional_of_isNonexceptional (hD : D.sheaf.IsIrreducibleL
 
 /-- **For geometrically irreducible sheaves the two notions coincide.** If `M_k̄` is
 irreducible, its only geometric constituent is `M_k̄` itself, so a constituent `ℒ_{ψ(a x)}|_U`
-would be isomorphic to `M_k̄`. (blueprint: `lem-a1-constituent-nonexceptional-comparison`) -/
+would be isomorphic to `M_k̄`. -/
 theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducibleLisse)
     (hirr : D.sheaf.IsGeometricallyIrreducible) :
     D.sheaf.IsNonexceptional ψ D.j ↔ D.IsFourierNonexceptional ψ :=
@@ -118,8 +115,7 @@ theorem isNonexceptional_iff_isFourierNonexceptional (hD : D.sheaf.IsIrreducible
 a subquotient of a constant sheaf there, while the inertia group at `∞` acts on `ℒ_{ψ(a x)}`
 through the nontrivial character `ψ`
 (the primed variant, `not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity'`,
-which needs no irreducibility). (blueprint: `lemma-unramified-at-infinity-no-linear-characters`,
-case `a ≠ 0`) -/
+which needs no irreducibility). -/
 theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity (hψ : ψ ≠ 1)
     (_hD : D.sheaf.IsIrreducibleLisse) (hinf : D.IsUnramifiedAtInfinity)
     {a : AlgebraicClosure k₀} (ha : a ≠ 0) :
@@ -131,8 +127,7 @@ transform of `(j_*M)[1]` is not a sheaf of finite support in degree `0`: otherwi
 transform gives `(j_*M)[1](-1) ≅ FT_{ψ⁻¹}(G)`, whose underlying geometric sheaf is a sum of
 linear characters `ℒ_{ψ(a x)}` over the geometric points of the support of `G`, so that `M_k̄`
 would surject onto some `ℒ_{ψ(a x)}|_U`
-(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_hasLinearArtinSchreierConstituent_of_iso`).
-(blueprint: `proposition-fourier-transform-middle-extension--1`, Steps 2 and 3) -/
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_hasLinearArtinSchreierConstituent_of_iso`). -/
 theorem isEmpty_iso_fourierTransform_middleExtension_toComplex (hψ : ψ ≠ 1)
     (hD : D.sheaf.IsIrreducibleLisse) (hne : D.sheaf.IsNonexceptional ψ D.j)
     (G : WeilSheaf k₀ l (affineLine k₀)) (hG : (WeilSheaf.support G).Finite) :
@@ -167,8 +162,7 @@ simple there. A lisse `M` with `[Simple M]` is irreducible lisse by
 
 The object `(j_*M)[1]` is simple in the curve perverse heart, hence so is its transform; a simple
 perverse object is punctual or a middle extension, and the punctual case is excluded by
-nonexceptionality. (blueprint: `proposition-fourier-transform-middle-extension`,
-`proposition-fourier-transform-middle-extension--1`) -/
+nonexceptionality. -/
 theorem exists_middleExtension_fourierTransform (hψ : ψ ≠ 1)
     (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hne : D.sheaf.IsNonexceptional ψ D.j) :
@@ -187,8 +181,7 @@ theorem exists_middleExtension_fourierTransform (hψ : ψ ≠ 1)
 infinity and not geometrically constant is nonexceptional: the nonzero linear characters are
 excluded by their ramification at infinity, and a geometric constant constituent of an
 irreducible Weil representation forces geometric constancy. Only arithmetic irreducibility is
-used. (blueprint: `proposition-fourier-transform-middle-extension`,
-`lemma-unramified-at-infinity-no-linear-characters`) -/
+used. -/
 theorem isNonexceptional_of_isUnramifiedAtInfinity (hψ : ψ ≠ 1)
     (D : WeilSheaf.LisseOnDenseOpen k₀ l) (hD : D.sheaf.IsIrreducibleLisse)
     (hinf : D.IsUnramifiedAtInfinity) (hconst : ¬ D.IsGeometricallyConstant) :

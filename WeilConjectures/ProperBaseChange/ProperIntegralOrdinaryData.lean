@@ -30,8 +30,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Normalized data for ordinary integral inputs
 
-Source: Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.9, Remark 6.8.15
-(blueprint: def-weil-pbc-proper-integral-ordinary-data).
+Source: Bhatt--Scholze, Proposition 6.6.11, Lemma 6.5.9, Remark 6.8.15.
 
 The auxiliary predicates package clauses of this node. Coefficients, operations,
 completeness, and constructibility are the published constructions. The pullback
@@ -56,8 +55,7 @@ namespace WeilConjectures
 
 /-- Coefficient, exactness, inverse-image and adjunction clauses for one edge.
 The inverse-image identification sends a section to its tensor with 1.
-Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 03D3 and 04JC
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Bhatt--Scholze, Lemma 6.5.9; Stacks 03D3 and 04JC. -/
 def PbcProperIntegralEdgeInputs {A : Type (u + 1)} [CommRing A]
     (d : AdicCoefficientDatum A) {U T : Scheme.{u}} (h : U ⟶ T) : Prop :=
   IsIso (completedCoefficientMap h d) ∧
@@ -82,8 +80,7 @@ def PbcProperIntegralEdgeInputs {A : Type (u + 1)} [CommRing A]
 
 /-- The canonical localization factorization for the published coefficient transport.
 Its exactness instances are supplied by the recorded scalar-restriction theorem.
-Source: Bhatt--Scholze, Definition 6.5.1; Stacks 06YY
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Bhatt--Scholze, Definition 6.5.1; Stacks 06YY. -/
 def pbcIntegralDetailedTransportFactors (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :=
   letI := (integralDetailedCoefficientRestriction_exact T l E).1
@@ -95,8 +92,7 @@ def pbcIntegralDetailedTransportFactors (T : Scheme.{u}) (l : ℕ) [Fact l.Prime
 coefficient presentations. Module components preserve the actual adjunction-unit sections;
 derived components preserve the universal counits on every flat-term K-flat complex.
 These conditions fix the identification, rather than merely comparing its endpoints.
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03D3 and 06YY
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03D3 and 06YY. -/
 structure PbcProperIntegralPullbackIdentification (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {U T : Scheme.{u}} (h : U ⟶ T) where
@@ -134,22 +130,19 @@ structure PbcProperIntegralPullbackIdentification (l : ℕ) [Fact l.Prime]
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex moduleIso.hom (.up ℤ)).app P.obj)
 
 /-- The existing scalar restriction on modules, with its quotient-normalized ring map.
-Source: Bhatt--Scholze, Definition 6.5.1
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Bhatt--Scholze, Definition 6.5.1. -/
 abbrev pbcIntegralTransportModules (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :=
   SheafOfModules.restrictScalars.{u + 1} (integralDetailedCoefficientComparison T l E).hom
 
 /-- Termwise restriction along the same coefficient comparison.
-Source: Bhatt--Scholze, Definition 6.5.1
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Bhatt--Scholze, Definition 6.5.1. -/
 abbrev pbcIntegralTransportComplex (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :=
   (pbcIntegralTransportModules T l E).mapHomologicalComplex (.up ℤ)
 
 /-- The actual pulled-back strict reduction tower of a transported representative.
-Source: Stacks 099N(5); the node's proof step 6
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Stacks 099N(5). -/
 def pbcIntegralActualTower (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {U T : Scheme.{u}} (h : U ⟶ T)
@@ -160,8 +153,7 @@ def pbcIntegralActualTower (l : ℕ) [Fact l.Prime]
 
 /-- The actual computation map from derived pulled-back reductions to that strict tower.
 It uses only the coefficient-localization factor and the two universal derived counits.
-Source: Stacks 06YY and 099N(5); the node's proof step 6
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Stacks 06YY and 099N(5). -/
 def pbcIntegralActualTowerCounit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {U T : Scheme.{u}} (h : U ⟶ T)
@@ -182,8 +174,7 @@ def pbcIntegralActualTowerCounit (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] pbcIntegralActualTowerCounit
 
 /-- Actual quotient augmentation after ordinary ambient module pullback.
-Source: Stacks 099N(5); the node's proof step 6
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Stacks 099N(5). -/
 def pbcIntegralActualTowerAugmentation (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {U T : Scheme.{u}} (h : U ⟶ T)
@@ -197,8 +188,7 @@ def pbcIntegralActualTowerAugmentation (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] pbcIntegralActualTowerAugmentation
 
 /-- Countable products in the actual completed coefficient module category.
-Source: Bhatt--Scholze, Proposition 4.2.8
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Bhatt--Scholze, Proposition 4.2.8. -/
 instance pbcIntegralActualProducts (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     HasCountableProducts (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))) :=
@@ -206,8 +196,7 @@ instance pbcIntegralActualProducts (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (pbcAdicCompletion T (pbcIntegralDatum l E))).1
 
 /-- Both cone coordinates of coefficient transport, with the given strict tower map.
-Source: Stacks 0941; the node's proof step 7
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Stacks 0941. -/
 def PbcIntegralRoosTransportCoordinates (U : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (C : ℕᵒᵖ ⥤ CochainComplex
@@ -250,8 +239,7 @@ quotient-unit generators; both coordinates pin transport of the Roos cone. On ev
 good representative and every entire-tower K-injective resolution, b is the composite
 Cone(r') followed by the inverse (0,iota) inclusion and the universal Rlim computation.
 Neither eta nor gamma occurs in these conditions.
-Source: Stacks 0941, 099N(5); the node's proof steps 6--7
-(blueprint: def-weil-pbc-proper-integral-ordinary-data). -/
+Source: Stacks 0941, 099N(5). -/
 def PbcProperIntegralModelMatching (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     {U T : Scheme.{u}} (h : U ⟶ T)

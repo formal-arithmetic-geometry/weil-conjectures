@@ -17,14 +17,14 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 
 Let `Λ` be a finite commutative ring.
 
-- `AlgebraicGeometry.Etale.isIso_constantSheafToLowerStar_of_isOpenImmersion` (blueprint
-  `lem-fin-normal-constant-open-image`): on a locally Noetherian normal integral scheme `Y`, the
-  map `M_Y ⟶ v_* M_V` is an isomorphism for every nonempty open immersion `v : V ⟶ Y`.
-- `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_constantSheaf_of_isFinite` (blueprint
-  `lem-fin-finite-constant-pushforward`): finite direct images of finite constant sheaves over a
-  base of finite type over a field are constructible.
-- `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isFiniteLocallyConstantSheaf`
-  (blueprint `lem-fin-normal-open-lisse-image`): for a nonempty normal open `k : V ⟶ X` of an
+- `AlgebraicGeometry.Etale.isIso_constantSheafToLowerStar_of_isOpenImmersion`: on a locally
+Noetherian normal integral scheme `Y`, the map `M_Y ⟶ v_* M_V` is an isomorphism for every
+nonempty open immersion `v : V ⟶ Y`.
+- `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_constantSheaf_of_isFinite`: finite
+direct images of finite constant sheaves over a base of finite type over a field are
+constructible.
+- `AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isFiniteLocallyConstantSheaf`:
+for a nonempty normal open `k : V ⟶ X` of an
   integral scheme of finite type over a field and a finite locally constant sheaf `L` on `V`, the
   direct image `k_* L` is constructible. A connected finite étale cover `p : P ⟶ V` trivializes
   `L` (`AlgebraicGeometry.Scheme.exists_isConstant_upperStar_of_connectedSpace`), so that `k_* L`
@@ -49,7 +49,7 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `lem-fin-normal-constant-open-image`: A constant sheaf across a dense normal open.
+/-- A constant sheaf across a dense normal open.
 
 Let `Y` be a locally Noetherian normal integral scheme (integral, with integrally closed local
 rings), `v : V ⟶ Y` an open immersion with `V` nonempty and `M` a module. The canonical map
@@ -83,7 +83,7 @@ lemma isConstructibleSheaf_constantSheaf {V : Scheme.{u}} (M : ModuleCat.{u + 1}
       ((ModuleCat.isFinitelyGenerated_iff M).2 inferInstance))⟩
   exact IsFiniteLocallyConstantSheaf.isConstructibleSheaf {}
 
-/-- Blueprint `lem-fin-finite-constant-pushforward`: Finite pushforwards of constant sheaves.
+/-- Finite pushforwards of constant sheaves.
 
 Let `g : V ⟶ S` be finite with `S` of finite type over a field `k`, and `M` a finite module over
 the finite ring `Λ` (e.g. a finite abelian group, `Λ = ℤ/N`). Then `g_* M_V` is constructible
@@ -97,8 +97,7 @@ theorem isConstructibleSheaf_lowerStar_constantSheaf_of_isFinite {k : Type u} [F
   have := isConstructibleSheaf_constantSheaf (V := V) M
   exact (isConstructibleSheaf_lowerStar_of_isFinite aS g _).1
 
-/-- Blueprint `lem-fin-normal-open-lisse-image`: A lisse sheaf on a normal open has constructible
-direct image.
+/-- A lisse sheaf on a normal open has constructible direct image.
 
 Let `X` be an integral scheme of finite type over a field `k`, `kV : V ⟶ X` an open immersion with
 `V` nonempty and normal (its local rings are integrally closed), and `L` a finite locally

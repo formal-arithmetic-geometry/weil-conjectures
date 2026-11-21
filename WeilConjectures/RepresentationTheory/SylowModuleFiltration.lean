@@ -25,7 +25,9 @@ universe u v
 
 namespace Rep
 
-/-- Blueprint: theorem-cohomology-curves. -/
+/-- For a finite discrete `ℓ`-primary module `M` over a profinite group `G`, there are an open
+subgroup `H` of index prime to `ℓ` and a finite `H`-stable filtration of `M` whose graded pieces
+are killed by `ℓ` and have trivial `H`-action. -/
 theorem exists_openSubgroup_primary_module_filtration
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

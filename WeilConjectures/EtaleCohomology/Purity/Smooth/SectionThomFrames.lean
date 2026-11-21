@@ -111,7 +111,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_tateObject_of_section [HasKummerCla
     (hasThomFrames_of_section Λ c g s hs aB) (hasRegularZariskiFrames_of_section c g s hs)
     (g ≫ aB)
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
+/-- Section invariant
 
 **The section invariant of a section of a smooth morphism.** For `g : V ⟶ B` smooth of relative
 dimension `c` with a closed section `s`, `B` separated and locally of finite type over a field,

@@ -62,7 +62,7 @@ transported to the base point along a path, which carries the geometric Frobeniu
 the Frobenius element `Frob_x` of `W(C₀)`); the equivalence is compatible with duals (it is a
 tensor equivalence); and the global sections `H⁰(C̄, ℱ)` are the invariants `V ^ {π₁(C)}` with
 the Frobenius `ρ (γ)`, which is `lemma-degree-zero-top-cohomology--1` for `U₀ = C₀`. The last clause
-is a consequence of the equivalence in the blueprint (`lemma-degree-zero-top-cohomology--1`); it is
+is a consequence of the equivalence in the blueprint; it is
 recorded with it here because the functor, being existentially quantified, can only be described
 through its properties.
 -/
@@ -186,11 +186,10 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
-/-- Blueprint `definition-weil-representation--1` (subsection
-`definition-weil-representation--1`): The lisse sheaf–representation equivalence.
+/-- The lisse sheaf–representation equivalence.
 
 The functor `ℱ ↦ (V, ρ) = (ℱ_η̄, ρ_ℱ)`, sending a lisse Weil sheaf on the curve `C₀` to its Weil
-fundamental representation (`situation-weil`), is an exact tensor
+fundamental representation, is an exact tensor
 equivalence between lisse Weil sheaves on `C₀` and lisse representations of `W(C₀)`
 (`AlgebraicGeometry.WeilGroup.isLisseRep`). The functor `e.functor` is the Weil fundamental
 representation:
@@ -331,9 +330,8 @@ theorem exists_equivalence_isLisse_of_lisseMonodromy
       .mk (f _) fun g ↦ LinearMap.ext (hf _ g)
     exact ⟨(fT.trans b).trans (Representation.Equiv.tprodCongr fF.symm fG.symm)⟩
 
-/-- Blueprint `definition-weil-representation--1` (subsection
-`definition-weil-representation--1`): The lisse sheaf–representation equivalence, for
-some monodromy of lisse sheaves on the geometric curve and some base point data; see
+/-- The lisse sheaf–representation equivalence, for some monodromy of lisse sheaves on the
+geometric curve and some base point data; see
 `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_of_lisseMonodromy` for the properties. -/
 theorem exists_equivalence_isLisse :
     ∃ e : ObjectProperty.FullSubcategory (fun F : WeilSheaf K l C ↦ F.IsLisse) ≌

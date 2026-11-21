@@ -16,8 +16,7 @@ import WeilConjectures.SmoothPurity.Pullback.PullbackTensorIntegralUnitCoherence
 
 /-! # Tensor constraints for a normalized reindexing family
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4 and 0941
-(blueprint: lem-pod-reindexing-tensor-family-tensor-constraints).
+Source: Stacks 07A4 and 0941.
 
 This statement isolates the strict tensor-generator calculation from the identity
 and composition construction. It is used only after those two comparisons have been
@@ -258,8 +257,7 @@ paths are the same map, the two braiding paths carry the same Koszul sign, and t
 coefficient unit is preserved. Tensor-model descent and naturality extend these
 equalities to all constructible objects. The zero and empty-scheme cases are
 included by the same generator formulas.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941 (blueprint: lem-pod-reindexing-tensor-family-tensor-constraints).
+Source: Stacks 07A4, 0941.
 -/
 theorem podReindexingTensorFamilyTensorConstraints
     (completion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]

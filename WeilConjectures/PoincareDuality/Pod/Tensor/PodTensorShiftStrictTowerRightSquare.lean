@@ -56,8 +56,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- Keep the original tower interface while reducing to the generator calculation.
 /-- The right tensor-shift square commutes on the entire strict quotient tower.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-shift-strict-tower-right-square-t6).
+Source: Stacks 011G and 07A4.
 
 Precompose with the inverse normalized tensor comparison and evaluate at a quotient
 and a degree. Finite tensor extensionality tests unit reduction generators. The

@@ -21,10 +21,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Index
 
 /-! # Exact isomorphism transport at integral and field coefficient stages
 
-Source: main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, sentence 1, through prose-10-20,
-first paragraph (blueprint: def-pod-isomorphism-field-transport-clauses).
-
 All functors, coefficient maps, scalar comparisons and quotient Hom constructors
 below are the published constructions. The clause records specify comparisons,
 rather than selecting arbitrary inverse equivalences.
@@ -55,8 +51,7 @@ open GeneralAlgebraicallyClosedCoefficients (ofHom inclusion)
 
 /-- Clauses at one finite field, retaining the normalized lambda and epsilon and
 localizing the latter on every rational object. Source: the integral and rational
-paragraphs of the inverse automorphism argument
-(blueprint: def-pod-isomorphism-field-transport-clauses). -/
+paragraphs of the inverse automorphism argument. -/
 structure IsomorphismFieldTransportStage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -125,9 +120,7 @@ structure IsomorphismFieldTransportStage
     HEq (rationalEpsilon.hom.app K)
       ((sfRationalConstructibleLocalization l E Y).map (epsilon.hom.app K.obj))
 
-/-- The scalar inverse equation for the prescribed completed scalar/pullback maps.
-Source: scalar paragraph, inverse automorphism argument
-(blueprint: def-pod-isomorphism-field-transport-clauses). -/
+/-- The scalar inverse equation for the prescribed completed scalar/pullback maps. -/
 def isomorphismFieldTransportScalarLaw
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -148,9 +141,7 @@ def isomorphismFieldTransportScalarLaw
         (pullbackIdentityEpsilon l E g K).hom)
 
 /-- Localization of the inverse/scalar equation on every rational object. Naturality
-of the natural isomorphisms ranges over all localized arrows.
-Source: rational and scalar paragraphs, inverse automorphism argument
-(blueprint: def-pod-isomorphism-field-transport-clauses). -/
+of the natural isomorphisms ranges over all localized arrows. -/
 def isomorphismFieldTransportRationalScalarLaw
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -174,8 +165,7 @@ def isomorphismFieldTransportRationalScalarLaw
       (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).map (SE.rationalEpsilon.hom.app K)
 
 /-- Common-stage clauses use the actual quotient arrows and inclusion of the localized
-finite-stage epsilon. Source: final common-stage paragraphs, inverse automorphism argument
-(blueprint: def-pod-isomorphism-field-transport-clauses). -/
+finite-stage epsilon. Source: final common-stage paragraphs, inverse automorphism argument. -/
 structure IsomorphismFieldTransportCommon
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

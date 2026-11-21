@@ -102,11 +102,7 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # The normalized Roos and intrinsic Koszul units agree
 
-Source: Stacks Project, Tags 099M and 0941; Bhatt--Scholze, Proposition 3.5.1
-(blueprint: lem-a1-roos-intrinsic-unit-comparison).
-The maps are specified on chain coordinates, including the zero shifted components.
-A total derived limit is evaluated on any K-injective strict-tower resolution; its
-comparison is normalized by the actual ordinary-limit inclusion, not just its projections.
+Source: Stacks Project, Tags 099M and 0941; Bhatt--Scholze, Proposition 3.5.1.
 -/
 
 @[expose] public noncomputable section
@@ -126,13 +122,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (W : AlgebraicGeometry.Scheme.{t})
 
 /-- The actual strict quotient tensor tower, assembled in the tower category.
-Source: Stacks 099M (blueprint: lem-a1-roos-intrinsic-unit-comparison). -/
+Source: Stacks 099M. -/
 abbrev quotientTower (P : CochainComplex (Modules l E W) ℤ) :
     CochainComplex (ℕᵒᵖ ⥤ Modules l E W) ℤ :=
   koszulTowerComplex (completedIntegralCommRingSheafUnrestricted l E W) (targetTower l E W P)
 
 /-- The independent quotient unit, obtained by tensoring the specified limit projection.
-Source: Stacks 099M (blueprint: lem-a1-roos-intrinsic-unit-comparison). -/
+Source: Stacks 099M. -/
 def quotientUnit (P : CochainComplex (Modules l E W) ℤ) (n : ℕ) :
     P ⟶ (targetTower l E W P).obj (op n) :=
   (tensorUnit l E W P).inv ≫ (tensorWith l E W P).map

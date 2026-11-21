@@ -185,8 +185,8 @@ noncomputable def torsionByIsoTor (M : ModuleCat.{u + 1} Λ) :
   (ModuleCat.torOneQuotSpanSingletonIso (pow_mem hϖ n) M).symm ≪≫
     ((Tor (ModuleCat.{u + 1} Λ) 1).obj M).mapIso (quotSpanPowLinearEquiv n).toModuleIso
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: the universal coefficient sequence of a
-triangulated `Λ`-linear functor `Φ : D(X_ét, Λ) ⥤ D(Λ)`,
+/-- The universal coefficient sequence of a triangulated `Λ`-linear functor
+`Φ : D(X_ét, Λ) ⥤ D(Λ)`,
 
 `Hⁱ(Φ K) ⊗_Λ Λ/(ϖ)ⁿ ⟶ Hⁱ(Φ K_n) ⟶ Tor₁^Λ(Hⁱ⁺¹(Φ K), Λ/(ϖ)ⁿ)`,
 
@@ -217,14 +217,14 @@ lemma reductionSequence_X₃ (i : ℤ) :
         (Φ.obj K))).obj (ModuleCat.of Λ (Λ ⧸ Ideal.span {ϖ} ^ n)) :=
   rfl
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: the universal coefficient sequence
+/-- The universal coefficient sequence
 `0 ⟶ Hⁱ(Φ K) ⊗ Λ/(ϖ)ⁿ ⟶ Hⁱ(Φ K_n) ⟶ Tor₁(Hⁱ⁺¹(Φ K), Λ/(ϖ)ⁿ) ⟶ 0` of a triangulated `Λ`-linear
 functor `Φ` is short exact. -/
 theorem shortExact_reductionSequence (i : ℤ) : (reductionSequence hϖ n Φ K i).ShortExact :=
   (_root_.DerivedCategory.universalCoefficientSequence_shortExact _ _ _ _).transport _ _ _
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: if `Hⁱ⁺¹(Φ K)` is flat (for example finite
-projective), the Tor term vanishes and `Hⁱ(Φ K) ⊗ Λ/(ϖ)ⁿ ⟶ Hⁱ(Φ K_n)` is an isomorphism. -/
+/-- If `Hⁱ⁺¹(Φ K)` is flat (for example finite projective), the Tor term vanishes and
+`Hⁱ(Φ K) ⊗ Λ/(ϖ)ⁿ ⟶ Hⁱ(Φ K_n)` is an isomorphism. -/
 theorem isIso_reductionSequence_f (i : ℤ)
     (hflat : Module.Flat Λ
       ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) (i + 1)).obj
@@ -242,8 +242,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}} {ϖ : Λ}
   (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) (a : X ⟶ Y) [HasCompactification a]
   (K : DerivedCategoryModule Λ X)
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: the universal coefficient sequence of
-compactly supported cohomology,
+/-- The universal coefficient sequence of compactly supported cohomology,
 
 `Hⁱ_c(X, K) ⊗_Λ Λ/(ϖ)ⁿ ⟶ Hⁱ_c(X, K_n) ⟶ Tor₁^Λ(Hⁱ⁺¹_c(X, K), Λ/(ϖ)ⁿ)`,
 
@@ -268,8 +267,7 @@ lemma compactlySupportedReductionSequence_X₃ (i : ℤ) :
         (ModuleCat.of Λ (Λ ⧸ Ideal.span {ϖ} ^ n)) :=
   rfl
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: Integral degreewise form (the first
-variable).
+/-- Integral degreewise form (the first variable).
 
 For a nonzerodivisor `ϖ` of `Λ` (a uniformizer of `𝒪_E`, `A_{E,n} = Λ/(ϖ)ⁿ`) and
 `K ∈ D(X_ét, Λ)`, the universal coefficient sequence
@@ -281,8 +279,8 @@ theorem shortExact_compactlySupportedReductionSequence (i : ℤ) :
     (compactlySupportedReductionSequence hϖ n a K i).ShortExact :=
   shortExact_reductionSequence hϖ n _ K i
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: if `Hⁱ⁺¹_c(X, K)` is flat (for example finite
-projective), the Tor term vanishes and `Hⁱ_c(X, K) ⊗_Λ A_{E,n} ≅ Hⁱ_c(X, K_n)`. -/
+/-- If `Hⁱ⁺¹_c(X, K)` is flat (for example finite projective), the Tor term vanishes and
+`Hⁱ_c(X, K) ⊗_Λ A_{E,n} ≅ Hⁱ_c(X, K_n)`. -/
 theorem isIso_compactlySupportedReductionSequence_f (i : ℤ)
     (hflat : Module.Flat Λ ((H_c(a)[ModuleCat.{u + 1} Λ](i + 1)).obj K)) :
     IsIso (compactlySupportedReductionSequence hϖ n a K i).f :=
@@ -295,8 +293,8 @@ section Ordinary
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}} {ϖ : Λ}
   (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) (L : DerivedCategoryModule Λ X)
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: the universal coefficient sequence of
-ordinary cohomology, for the second variable `L = K^∨(d)` of the Poincaré pairing,
+/-- The universal coefficient sequence of ordinary cohomology, for the second variable `L = K^∨(d)`
+of the Poincaré pairing,
 
 `Hʲ(X, L) ⊗_Λ Λ/(ϖ)ⁿ ⟶ Hʲ(X, L_n) ⟶ Tor₁^Λ(Hʲ⁺¹(X, L), Λ/(ϖ)ⁿ)`. -/
 noncomputable abbrev cohomologyReductionSequence (j : ℤ) : ShortComplex (ModuleCat.{u + 1} Λ) :=
@@ -320,8 +318,7 @@ lemma cohomologyReductionSequence_X₃ (j : ℤ) :
         (ModuleCat.of Λ (Λ ⧸ Ideal.span {ϖ} ^ n)) :=
   rfl
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: Integral degreewise form (the second
-variable).
+/-- Integral degreewise form (the second variable).
 
 For the second variable `L = K^∨(d)` of the Poincaré pairing (or any `L ∈ D(X_ét, Λ)`), the
 universal coefficient sequence
@@ -333,8 +330,8 @@ theorem shortExact_cohomologyReductionSequence (j : ℤ) :
     (cohomologyReductionSequence hϖ n L j).ShortExact :=
   shortExact_reductionSequence hϖ n _ L j
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: if `Hʲ⁺¹(X, L)` is flat (for example finite
-projective), the Tor term vanishes and `Hʲ(X, L) ⊗_Λ A_{E,n} ≅ Hʲ(X, L_n)`. -/
+/-- If `Hʲ⁺¹(X, L)` is flat (for example finite projective), the Tor term vanishes and
+`Hʲ(X, L) ⊗_Λ A_{E,n} ≅ Hʲ(X, L_n)`. -/
 theorem isIso_cohomologyReductionSequence_f (j : ℤ)
     (hflat : Module.Flat Λ ((cohomology (ModuleCat.{u + 1} Λ) X (j + 1)).obj L)) :
     IsIso (cohomologyReductionSequence hϖ n L j).f :=
@@ -363,8 +360,7 @@ noncomputable def cohomologyIsoHomologyShift (L : DerivedCategoryModule Λ X) (i
       (((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).commShiftIso
         (2 * d : ℤ)).app _).symm
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: Integral degreewise form (the degreewise
-duality, non-canonical form).
+/-- Integral degreewise form (the degreewise duality, non-canonical form).
 
 Let `k` be separably closed, `Λ` a commutative ring (the integral stage `𝒪_E`),
 `γ : T[2d] ≅ Ra^! Λ` a purity isomorphism, for any right adjoint `Ra^!` of `Ra_!` (for
@@ -414,7 +410,7 @@ theorem integralDegreewiseDuality (adj : R(a)_![ModuleCat.{u + 1} Λ] ⊣ G)
     Module.Finite.equiv (M := Module.Dual Λ ((H_c(a)[ModuleCat.{u + 1} Λ](i)).obj K))
       e.toLinearEquiv.symm, ⟨e⟩⟩
 
-/-- Blueprint `prop-pod-integral-degreewise-form`: Integral degreewise form (the adjoint maps).
+/-- Integral degreewise form (the adjoint maps).
 
 In the situation of `AlgebraicGeometry.Etale.integralDegreewiseDuality`, without any
 projectivity assumption: the dual `RΓ_c(X, K)^∨` has universal coefficient sequences

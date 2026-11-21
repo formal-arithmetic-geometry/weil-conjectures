@@ -25,11 +25,7 @@ variable {C D : Type*} [Category* C] [Category* D]
 square `α : e.functor ⋙ QC.ι ≅ PC.ι ⋙ F`. If `P ≤ PC`, `Q ≤ QC`, `Q` is closed under
 isomorphisms and an object `K` with `PC K` satisfies `P` iff `F.obj K` satisfies `Q`, then
 there is an equivalence `d : P.FullSubcategory ≌ Q.FullSubcategory` with
-`d.functor ⋙ Q.ι ≅ P.ι ⋙ F`.
-
-Proof: the functor `P.FullSubcategory ⥤ Q.FullSubcategory` induced by `F` is fully faithful,
-being identified with the restriction of `e.functor`, and every object of `Q` is the image of
-its `e`-preimage, which satisfies `P`. -/
+`d.functor ⋙ Q.ι ≅ P.ι ⋙ F`. -/
 theorem exists_equivalence_of_le
     (P PC : ObjectProperty C) (Q QC : ObjectProperty D)
     (F : C ⥤ D) (e : PC.FullSubcategory ≌ QC.FullSubcategory)

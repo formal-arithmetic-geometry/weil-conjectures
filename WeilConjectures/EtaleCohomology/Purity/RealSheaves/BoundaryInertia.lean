@@ -635,7 +635,7 @@ theorem ker_restrictionHom_eq_boundaryInertia :
   obtain rfl : w' = w := Subtype.ext (Prod.ext hw' (hw'deg.trans hdeg.symm))
   exact hw'M
 
-/-- Blueprint `lemma-boundary-stalk--1`: Boundary extension and inertia.
+/-- Boundary extension and inertia.
 
 **The boundary datum of an open subcurve**: the restriction of Weil groups
 `AlgebraicGeometry.WeilGroup.restrictionOfPath`, with the inertia group at a boundary point `z`

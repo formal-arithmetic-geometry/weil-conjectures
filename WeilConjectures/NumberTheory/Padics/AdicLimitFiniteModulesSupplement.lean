@@ -21,9 +21,7 @@ import WeilConjectures.RingTheory.FiniteModuleComplete
 /-!
 # Adic systems of finite modules over p-adic coefficient rings
 
-Source: Stacks Project, Tags 09B8, 031D, 031B and 00MA;
-blueprint `proposition-lattices-representations-normal-scheme`, steps 6, 7, 9 and 10
-(blueprint: lem-pod-adic-limit-finite-modules).
+Source: Stacks Project, Tags 09B8, 031D, 031B and 00MA.
 
 Indices `n : ℕ` denote the positive exponent `n + 1`. A module over the coefficient
 quotient is represented by its underlying module over the valuation ring, annihilated
@@ -161,15 +159,7 @@ private theorem compatible_sections {R : Type u} [CommRing R]
 
 /-- Reconstruction of an adic system of finite coefficient modules.
 
-Source: Stacks Tags 09B8 and 031D (blueprint: lem-pod-adic-limit-finite-modules), part 1.
-Proof: apply lem-pod-adic-tower-reconstruction to the principal uniformizer ideal.
-The sections submodule is the inverse limit. Its projections are surjective with
-kernel the indicated ideal power, and identify its product-subspace topology with
-its maximal-ideal-adic topology. By lem-weil-l-adic-extension-complete the coefficient
-field is complete; its closed unit ball is complete too. The limit is separated and
-its first reduction is finite, so lem-weil-pbc-finite-over-complete-ring (031D) makes
-it finitely generated. Surjectivity and the kernel equality give the canonical
-quotient isomorphisms by the first isomorphism theorem. -/
+Source: Stacks Tags 09B8 and 031D. -/
 theorem adicLimit_finite_modules (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     let R := coefficientExtensionIntegers l E
@@ -245,18 +235,7 @@ theorem adicLimit_finite_modules (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Completeness, quotient towers, and Hom comparison for finite integral modules.
 
-Source: Stacks Tags 031B, 09B8 and 00MA
-(blueprint: lem-pod-adic-limit-finite-modules), part 2.
-Proof: the valuation ring is Noetherian since it is a DVR and complete by
-lem-weil-l-adic-extension-complete and the closed-unit-ball argument above.
-Apply lem-weil-pbc-finite-module-complete-over-complete-noetherian to any finite
-module. The canonical quotient transitions are surjective, with the stated kernels,
-and the quotients are finite coefficient modules. A linear map preserves every ideal
-power times the module and hence is continuous. Its reductions are compatible.
-For a compatible family of reductions, send an element to the family of its images
-in the target quotients, then use completeness of the target to reconstruct the
-unique linear map. Separatedness gives uniqueness. The final unique-existence
-clause is precisely bijectivity of the reduction map to the inverse limit of Hom. -/
+Source: Stacks Tags 031B, 09B8 and 00MA. -/
 theorem finite_module_adic_complete_and_hom (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     let R := coefficientExtensionIntegers l E

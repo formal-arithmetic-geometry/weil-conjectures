@@ -19,8 +19,7 @@ public import Mathlib.Algebra.Ring.Hom.InjSurj
 /-!
 # Complete-intersection models of finitely generated fields
 
-Source: Stacks Project, Algebra, proof of Tag 07BV, and More on Algebra, proof of Tag 07E1
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+Source: Stacks Project, Algebra, proof of Tag 07BV, and More on Algebra, proof of Tag 07E1.
 -/
 
 @[expose] public section
@@ -31,21 +30,7 @@ namespace FieldTheory
 
 /-- A finitely generated extension with a transcendence basis of size `d` is the fraction
 field of a quotient of a polynomial ring in `n` variables by a regular sequence of length
-`c`, with `n - c = d`. Source: Stacks Project, proof of Tag 07BV, as used in Tag 07E1
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Proof:
-1. `exists_triangularFieldModel_presentation` carries out the tower-of-minimal-polynomials
-   construction, clearing denominators and presenting the embedded subalgebra by the
-   explicit equations `h T - 1` followed by triangular monic equations. It also proves
-   that every element of `K` is a fraction of elements of this quotient.
-2. `triangularFieldModelEquations_isWeaklyRegular` proves successive injectivity of
-   multiplication by these equations. The quotient admits a unital map to the nonzero
-   field `K`, so its defining ideal is proper. Thus the sequence is regular.
-3. The explicit list has length `r + 1`; set `n = d + 1 + r` and `c = r + 1`.
-4. Pull back the domain structure along the injective map. Mathlib's fraction-ring lift
-   is an injective algebra homomorphism. The fraction representations prove it surjective,
-   and its formula on localization constructors gives the stated algebra equivalence. -/
+`c`, with `n - c = d`. Source: Stacks Project, proof of Tag 07BV, as used in Tag 07E1. -/
 theorem exists_completeIntersection_fractionField_model
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (hfg : ∃ (m : ℕ) (b : Fin m → K), IntermediateField.adjoin k (Set.range b) = ⊤)

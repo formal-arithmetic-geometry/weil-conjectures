@@ -10,10 +10,6 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientRealizationsUnique
 
 /-! # Transport of normalized primitive realizations between reduction calculi
-
-Source: the normalization of whole-system quotient presentations in the blueprint
-operations construction; the canonical uniqueness isomorphism of left adjoints
-(blueprint: lem-pod-primitive-quotient-realizations-transport).
 -/
 
 @[expose] public noncomputable section
@@ -150,23 +146,7 @@ private theorem presentation_transport
 /-- Normalized primitive realizations commute with the canonical comparison of
 reduction left adjoints. The conclusion compares whole derived quotient systems.
 
-Source: blueprint operations construction, normalized primitive quotient models;
-Mathlib's uniqueness of left adjoints
-(blueprint: lem-pod-primitive-quotient-realizations-transport).
-
-Proof: let a compare S and T. Injectivity of each finite reduction adjunction,
-together with the unit-projection equations, identifies its evaluated maps.
-Thus every strict quotient presentation for S transports to T by a inverse.
-The whole-system coherence equation transports by the left-adjoint unit equation.
-Transport the two T-models back to S by postcomposing their realizations with
-L(O(a inverse)). Their original strict quotient witnesses still satisfy the
-generator equations and the Roos realization equations, so these transported
-models are normalized. Primitive uniqueness identifies any supplied S-model
-with the transported one. Postcompose with L(O(a)) and cancel the two canonical
-left-adjoint comparisons. This proves both assertions with no assumption on
-finite quotient flatness, completeness, or the scheme morphism. For S = T the
-comparison is the identity; zero objects and identity coefficient maps are
-included without an additional case. -/
+Source: Mathlib's uniqueness of left adjoints. -/
 theorem realizations_transport
     {V W : AlgebraicGeometry.Scheme.{u}} (f : V ⟶ W)
     (S T : CoefficientDerivedSystemCalculus l E W)

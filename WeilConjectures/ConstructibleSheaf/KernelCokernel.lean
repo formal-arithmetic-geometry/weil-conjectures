@@ -35,8 +35,6 @@ For a finite ring `Λ`, an extension of finite locally constant sheaves is finit
 constant (`IsFiniteLocallyConstantSheaf.of_shortExact`): étale locally the outer terms are
 constant, a presentation of the quotient lifts to the extension, and the extension is the
 constant sheaf at the pushout of the presentation, by the five lemma.
-(blueprint: `lemma:constructible-hom-constant-locally`, `lemma:constructible-flc-serre`)
-
 -/
 
 @[expose] public section
@@ -212,8 +210,7 @@ variable {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
 /-- **The kernel and cokernel of a morphism between finite locally constant sheaves of modules
 are locally constant**: on a common trivialising cover `φ` is a morphism of constant sheaves
 with finitely generated values, which is étale-locally induced by a linear map `f`, so that the
-kernel and cokernel are étale-locally the constant sheaves at `ker f` and `coker f`.
-(blueprint: `lemma:constructible-hom-constant-locally`, `lemma:constructible-flc-serre`) -/
+kernel and cokernel are étale-locally the constant sheaves at `ker f` and `coker f`. -/
 theorem IsLocallyConstantSheaf.kernel_and_cokernel
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F] [IsLocallyConstantSheaf G] :
@@ -349,7 +346,7 @@ theorem IsFiniteSheaf.cokernel
         hπ)).of_iso e.symm
 
 /-- **The kernel of a morphism between finite locally constant sheaves of modules over a
-noetherian ring is finite locally constant.** (blueprint: `lemma:constructible-flc-serre`) -/
+noetherian ring is finite locally constant.** -/
 theorem IsFiniteLocallyConstantSheaf.kernel [IsNoetherianRing Λ]
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
@@ -361,7 +358,7 @@ theorem IsFiniteLocallyConstantSheaf.kernel [IsNoetherianRing Λ]
   toIsFiniteSheaf := IsFiniteSheaf.kernel φ
 
 /-- **The cokernel of a morphism between finite locally constant sheaves of modules is finite
-locally constant.** (blueprint: `lemma:constructible-flc-serre`) -/
+locally constant.** -/
 theorem IsFiniteLocallyConstantSheaf.cokernel
     [IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
@@ -603,8 +600,7 @@ lemma exists_isConstant_over_of_shortExact [Finite Λ]
     exact hP g hg f hf hV⟩
 
 
-/-- Blueprint `lemma-constructible-flc-serre`: Kernels, cokernels and extensions of finite
-locally constant sheaves.
+/-- Kernels, cokernels and extensions of finite locally constant sheaves.
 
 **The extension clause.** For a finite ring `Λ`, the middle term of a short exact sequence of
 sheaves of `Λ`-modules whose outer terms are finite locally constant is finite locally constant.
@@ -702,8 +698,7 @@ variable {X : Scheme.{u}} {Λ : Type (u + 1)} [Ring Λ]
 
 /-- **The kernel of a morphism between constructible sheaves of modules over a noetherian ring
 is constructible**: on the common refinement of witnessing stratifications, the pullback of the
-kernel to a stratum is the kernel of a morphism between finite locally constant sheaves.
-(blueprint: `thm:constructible-serre`) -/
+kernel to a stratum is the kernel of a morphism between finite locally constant sheaves. -/
 theorem IsConstructibleSheaf.kernel [IsNoetherianRing Λ]
     [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
@@ -726,8 +721,7 @@ theorem IsConstructibleSheaf.kernel [IsNoetherianRing Λ]
     (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
     (PreservesKernel.iso (Etale.upperStar (ModuleCat.{u + 1} Λ) ((S.inter T).immersion k)) φ).symm
 
-/-- **The cokernel of a morphism between constructible sheaves of modules is constructible.**
-(blueprint: `thm:constructible-serre`) -/
+/-- **The cokernel of a morphism between constructible sheaves of modules is constructible.** -/
 theorem IsConstructibleSheaf.cokernel
     [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
@@ -770,7 +764,7 @@ theorem IsConstructibleSheaf.of_retract [IsNoetherianRing Λ] {S : Sheaf X.small
 variable (F G) in
 /-- **The direct sum of two constructible sheaves of modules is constructible**: on the common
 refinement of witnessing stratifications, the pullback of `F ⊞ G` to a stratum is the direct sum
-of two finite locally constant sheaves. (blueprint: `lemma:constructible-flc-biproduct`) -/
+of two finite locally constant sheaves. -/
 theorem IsConstructibleSheaf.biprod
     [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
       (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) F]
@@ -799,7 +793,7 @@ theorem IsConstructibleSheaf.biprod
 /-- **The middle term of a short exact sequence of sheaves of modules over a finite ring whose
 outer terms are constructible is constructible**: on the common refinement of witnessing
 stratifications, the pullback of the sequence to a stratum is a short exact sequence of finite
-locally constant sheaves. (blueprint: `thm:constructible-serre`) -/
+locally constant sheaves. -/
 theorem IsConstructibleSheaf.of_shortExact [Finite Λ]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     [IsConstructibleSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)

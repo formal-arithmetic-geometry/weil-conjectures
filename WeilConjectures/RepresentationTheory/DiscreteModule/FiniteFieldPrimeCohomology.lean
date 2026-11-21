@@ -13,9 +13,6 @@ import WeilConjectures.RepresentationTheory.DiscreteModule.ProfiniteIntegerSmoot
 
 /-!
 # Degree two with prime coefficients over a finite field
-
-Source: the finite cyclic quotient argument in `sk-lem-base-field-cd-finite-field`.
-(blueprint: lem-sfb-finite-field-prime-degree-two)
 -/
 
 @[expose] public section
@@ -77,24 +74,7 @@ private theorem H_two_of_coker_generator_surjective
     (subsingleton_H_coind₁ _ 1) (H_one_of_generator_surjective τ hd (coker₁ X) hsurj)
 
 /-- The degree-two continuous cohomology of a finite field with trivial prime
-coefficients prime to the characteristic vanishes.
-
-Source: blueprint `sk-lem-base-field-cd-finite-field.proof.md`, paragraphs
-Finite modules and Consequences; `lemma-cohomological-dimension-base-field`, clause (3), and
-`lemma-cohomological-dimension-base-field--2`, final clause.
-(blueprint: lem-sfb-finite-field-prime-degree-two)
-
-Proof: The absolute Galois group of K is the profinite completion of the integers,
-with Frobenius corresponding to one. Continuous cochains with the finite trivial
-coefficient group Z/ℓ factor through finite cyclic quotients. Their second cohomology
-is therefore the filtered colimit of the second cohomology of these quotients along
-inflation. A representative at the cyclic quotient of order n becomes zero at the
-quotient of order ℓ*n: cyclic inflation in degree two multiplies by ℓ in the periodic
-resolution and the coefficient group is killed by ℓ. Every element of the colimit
-vanishes. The equivalence of continuous cochain cohomology with Ext from the trivial
-integer module gives the stated vanishing. This includes the quotient of order one
-and requires no roots of unity in K. The characteristic-primary case is handled
-separately by Artin–Schreier in the importing module. -/
+coefficients prime to the characteristic vanishes. -/
 theorem subsingleton_H_two_trivialZMod_of_finiteField
     (K Ks : Type u) [Field K] [Finite K] [Field Ks] [Algebra K Ks]
     [IsSepClosure K Ks] (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : (ℓ : K) ≠ 0) :

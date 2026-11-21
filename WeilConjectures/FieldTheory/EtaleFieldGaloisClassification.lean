@@ -14,7 +14,7 @@ import WeilConjectures.FieldTheory.OpenSubgroupFixedField
 /-!
 # Finite separable extensions and finite continuous Galois sets
 
-Source: Stacks Project, Tags 03SF and 03QR (blueprint: lem-exc-etale-field-galois-classification).
+Source: Stacks Project, Tags 03SF and 03QR.
 -/
 
 @[expose] public section
@@ -115,16 +115,7 @@ private theorem transitive_actions_equiv
 
 /-- Finite separable extensions of a field are classified by finite continuous Galois sets.
 
-Source: Stacks Project, Tags 03SF and 03QR (blueprint: lem-exc-etale-field-galois-classification).
-The proof first identifies geometric points with algebra embeddings. Embeddings exist by
-extension to the separable closure and are finite because their values on a finite basis
-are roots of minimal polynomials. Extend an isomorphism between two images to an
-endomorphism of the separable closure; algebraicity makes it invertible, proving
-transitivity. Stabilizers are fixing subgroups, which are open for finite subextensions.
-For a nonempty transitive continuous discrete action, the stabilizer of a point is open;
-its fixed field is finite separable and its embedding action has the same homogeneous
-G-set. Finally, an equivariant map is determined by one embedding. The fixed-field
-identity factors its image through that embedding and gives the unique field map.
+Source: Stacks Project, Tags 03SF and 03QR.
 -/
 theorem finite_separable_extension_galois_classification
     (K : Type u) (Ksep : Type v) [Field K] [Field Ksep] [Algebra K Ksep]

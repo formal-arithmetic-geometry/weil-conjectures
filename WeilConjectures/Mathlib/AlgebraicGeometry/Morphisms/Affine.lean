@@ -42,9 +42,7 @@ namespace AlgebraicGeometry
 `f : X ⟶ Y` the following are equivalent:
 1. `f` is affine;
 2. the preimage of every affine open of `Y` is affine;
-3. there is a cover of `Y` by affine opens whose preimages are affine.
-(blueprint: `pqf-lem-affine-local-target`; the definition `pqf-def-affine-morphism` is
-`AlgebraicGeometry.IsAffineHom`) -/
+3. there is a cover of `Y` by affine opens whose preimages are affine. -/
 @[stacks 01S8]
 theorem isAffineHom_tfae {X Y : Scheme.{u}} (f : X ⟶ Y) :
     List.TFAE [IsAffineHom f, ∀ U : Y.Opens, IsAffineOpen U → IsAffineOpen (f ⁻¹ᵁ U),

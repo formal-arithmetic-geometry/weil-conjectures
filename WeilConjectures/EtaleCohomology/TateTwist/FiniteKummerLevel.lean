@@ -245,7 +245,7 @@ variable {R : Type (u + 1)} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R
   (hϖ : Irreducible ϖ) {ℓ : ℕ} (hℓ : ℓ.Prime) {e : ℕ} (he : 0 < e)
   (hℓe : Associated (ℓ : R) (ϖ ^ e)) (N : ℕ)
 
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
+/-- Finite Kummer level of the Tate twist
 
 Let `R = 𝒪_E` be a discrete valuation ring with uniformizer `ϖ` and ramification index `e ≥ 1`
 over the prime `ℓ`, i.e. `ℓ = (unit) · ϖ^e`, and let `n = e N`, so that `N = n / e = n v_ℓ(ϖ)`.

@@ -12,7 +12,7 @@ set_option linter.privateModule false
 
 /-! # The prescribed finite scalar tensor comparison on arbitrary K-flat inputs
 
-Source: blueprint dual-Tate compatibility, Step 5; Stacks 07A4 and 08J9.
+Source: Stacks 07A4 and 08J9.
 -/
 
 @[expose] public noncomputable section

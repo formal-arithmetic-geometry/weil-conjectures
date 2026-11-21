@@ -15,11 +15,6 @@ import WeilConjectures.SixFunctors.Integral.IntegralOperationsPreserveConstructi
 
 /-! # Counit scalar comparison in normalized word coordinates
 
-Source: blueprint main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, first sentence, through prose-10-20,
-first paragraph; extracted common-model and counit-word calculation
-(blueprint: lem-pod-counit-scalar-word-coordinates).
-
 All comparisons below are morphisms of entire derived quotient systems.
 The supplied primitive models retain the generator and K-injective normalization
 on every simultaneous flat-term K-flat presentation.
@@ -41,9 +36,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
 
 /-- Read the very same simultaneous system as the published word-model interface.
-No reduction, counit, Roos comparison or primitive model is changed.
-Source: blueprint sec-Weil-complexes, common-model calculation
-(blueprint: lem-pod-counit-scalar-word-coordinates). -/
+No reduction, counit, Roos comparison or primitive model is changed. -/
 def podCounitWordModels (D : IntegralComparisonSystem.{u} l) : Models.{u} l where
   system a := (D.coefficient a.coefficient.carrier).system a.scheme
   roos a := (D.coefficient a.coefficient.carrier).roos a.scheme
@@ -57,9 +50,7 @@ variable (D : IntegralComparisonSystem.{u} l)
   [∀ y : Y, Invertible (l : Y.residueField y)] (g : X ⟶ Y)
 
 /-- The source coordinate is S-hat(b_U) followed by r_S at U(R(K));
-r is the recorded primitive b followed by L(O(e)), with the actual whole counit.
-Source: blueprint sec-Weil-complexes, extracted word-coordinate calculation
-(blueprint: lem-pod-counit-scalar-word-coordinates). -/
+r is the recorded primitive b followed by L(O(e)), with the actual whole counit. -/
 def podCounitScalarBetaA (K : DerivedCategory (scalarReductionSource l E.carrier Y)) :
     (integralScalarExtensionOfUniverses l E.carrier L.carrier ι X).obj
         ((integralDerivedPullback l E.carrier g).obj K) ⟶
@@ -73,9 +64,7 @@ def podCounitScalarBetaA (K : DerivedCategory (scalarReductionSource l E.carrier
       ((integralComparisonDerivedSequencePullback l E.carrier g).obj
         (((D.coefficient E.carrier).system Y).reduction.obj K))
 
-/-- The target coordinate is U-hat(b_S) followed by r_U at S(R(K)).
-Source: blueprint sec-Weil-complexes, extracted word-coordinate calculation
-(blueprint: lem-pod-counit-scalar-word-coordinates). -/
+/-- The target coordinate is U-hat(b_S) followed by r_U at S(R(K)). -/
 def podCounitScalarBetaB (K : DerivedCategory (scalarReductionSource l E.carrier Y)) :
     (integralDerivedPullback l L.carrier g).obj
         ((integralScalarExtensionOfUniverses l E.carrier L.carrier ι Y).obj K) ⟶
@@ -90,9 +79,7 @@ def podCounitScalarBetaB (K : DerivedCategory (scalarReductionSource l E.carrier
         (((D.coefficient E.carrier).system Y).reduction.obj K))
 
 /-- The three asserted properties of each of the five intermediate systems:
-normalization, constructible-complete realization, and invertible actual counit.
-Source: blueprint sec-Weil-complexes, common effective models
-(blueprint: lem-pod-counit-scalar-word-coordinates). -/
+normalization, constructible-complete realization, and invertible actual counit. -/
 def IsPodCounitEffectiveSystem (F : Coefficient.{u} l) (W : Scheme.{u})
     (C : coefficientSequenceDerived l F.carrier W) : Prop :=
   IsNormalizedCoefficientSequence l F.carrier W C ∧
@@ -104,9 +91,7 @@ attribute [local irreducible] IsPodCounitEffectiveSystem
 /-- The precise two-word assertion, including naturality on the intrinsic full category.
 The comparison in the square is the specified lambda/mu construction, not a comparison
 chosen by conjugation. All primitive models test every K-flat representative; their
-Roos models compute on every K-injective tower, retaining transition homotopies.
-Source: blueprint sec-Weil-complexes, extracted counit-word Steps 1--6
-(blueprint: lem-pod-counit-scalar-word-coordinates). -/
+Roos models compute on every K-injective tower, retaining transition homotopies. -/
 structure PodCounitScalarWordCoordinates : Prop where
   /-- C = R(K) is normalized and effective. -/
   initial : ∀ K : sfIntegralConstructibleCategory l E.carrier Y,
@@ -343,9 +328,6 @@ private theorem betaB_eq_mu (K : sfIntegralConstructibleCategory l E.carrier Y) 
   exact coordinate_eq _ _ _ _ _ _ _
 
 /-- Simultaneous normalized models give the scalar/pullback word-coordinate identity.
-Source: main-20261015, prop-weil-operations.proof.md, first sentence, through
-lem-fix-weil-operations.proof.md, first paragraph; agent-extracted normalization lemma
-(blueprint: lem-pod-counit-scalar-word-coordinates).
 
 Proof, following the DAG:
 1. Apply lem-trf-effective-comparison-realization-models with M=L. Its primitive

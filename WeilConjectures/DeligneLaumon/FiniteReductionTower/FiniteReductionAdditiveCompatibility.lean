@@ -12,7 +12,6 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 /-! # Additive compatibility of the actual finite pullback tower
 
 Source: Stacks, Tags 014E, 0FNH, 06XN.
-(blueprint: lem-a1-finite-reduction-additive-compatibility)
 -/
 
 @[expose] public noncomputable section

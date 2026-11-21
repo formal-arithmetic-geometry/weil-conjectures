@@ -173,10 +173,7 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
-Source: Stacks Project, Modules on Sites, Tag 0GMX; the derived and completed
-normalization is the enhancement in the node's sixteen proof steps, supplying
-main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation).
+Source: Stacks Project, Modules on Sites, Tag 0GMX.
 
 Finite inputs are unbounded. Integral inputs have exactly the recorded
 Hom-constructibility condition. Completed inverse image is constructed from
@@ -218,9 +215,8 @@ attribute [-instance] isoReductionAbSheafify isoReductionAbBijective isoReductio
 with actual system evaluation and transposition. The signed shift, composition,
 completion-unit, reduction and argument-first clauses are the companion
 statements in this module, all listed in the owning node's declaration record.
-Source: Stacks 0GMX and the agent-formulated derived/completed enhancement in
-main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation).
+Source: Stacks 0GMX and the agent-formulated derived/completed enhancement in main-20261015 
+Steps 1, 2, 4 and 5.
 
 Proof, following the node's complete sixteen-step construction:
 

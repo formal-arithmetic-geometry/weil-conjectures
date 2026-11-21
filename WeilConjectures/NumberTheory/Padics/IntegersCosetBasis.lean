@@ -24,15 +24,6 @@ namespace Padic
 
 parent node lem-sfb-integers-profinite-tower, proof step 1
 (auxiliary; not a blueprint node).
-
-Proof: Let r be the absolute value of the chosen uniformizer. The DVR theorem gives
-0 < r < 1. An integral element belongs to the nth uniformizer ideal exactly when its
-absolute value is at most r^n: divide by the nonzero uniformizer power and use the
-characterization of the integer ring as the closed unit ball. By the ultrametric
-inequality, each such coset is open, since it contains a ball of radius r^n around
-each of its points. It is a neighbourhood of its centre. Conversely r^(n+1) tends to
-zero, so every metric neighbourhood of the centre contains one of these cosets.
-This proves the asserted filter basis, including at the first positive exponent.
 -/
 theorem coefficientExtension_integers_coset_basis (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :

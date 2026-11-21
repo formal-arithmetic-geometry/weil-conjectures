@@ -16,8 +16,6 @@ import WeilConjectures.AlgebraicGeometry.Projection.ProjectionCompactification
 import WeilConjectures.Algebra.Homology.OpenDerivedMatePresentation
 
 /-! # Framework open exchange in its own coefficient presentation
-Source: thm-cbc-qbar.proof.md, integral strict quotient construction
-(blueprint: def-zl-framework-open-exchange).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -35,14 +33,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Ordinary pullback with the framework completed coefficient sheaf.
-Source: Stacks 099N(5) (blueprint: def-zl-framework-open-exchange). -/
+Source: Stacks 099N(5). -/
 abbrev frameworkModulePull {U T : Scheme.{u}} (h : U ⟶ T) :=
   proEtaleRingModulePullback h ((completed l E).ring T)
     ((completed l E).ring U) ((completed l E).pull h)
 
 /-- The canonical quotient-unit/Roos normalization. It specifies every first-coordinate
 projection on inverse-image generators and the entire shifted coordinate as zero.
-Source: Stacks 099N(5), 08TC (blueprint: def-zl-framework-open-exchange). -/
+Source: Stacks 099N(5), 08TC. -/
 def FrameworkPullChainSpec {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ)
     (ξ : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
@@ -109,12 +107,7 @@ private theorem frameworkPullChain_ext {U T : Scheme.{u}} (h : U ⟶ T)
   exact coconeDegree_ext _ ξ η i hfi hs
 
 /-- The quotient-unit comparison is uniquely determined before localization.
-Source: Stacks 099N(5), 08TC (blueprint: def-zl-framework-open-exchange).
-Proof: apply inverse image to the quotient augmentation x maps to 1 tensor x at
-all levels simultaneously. These maps commute with quotient transitions, so the
-first-coordinate product map and zero shifted coordinate form a chain map to Roos.
-The inverse-image generators generate after sheafification. Product projections
-and the two cocone coordinates therefore determine the chain map uniquely. -/
+Source: Stacks 099N(5), 08TC. -/
 theorem frameworkPullChain_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) :
     ∃! ξ : ((frameworkModulePull l E h).mapHomologicalComplex (.up ℤ)).obj P ⟶
@@ -149,20 +142,14 @@ theorem frameworkPullChain_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
   exact ⟨ξ, hξ, fun η hη ↦ frameworkPullChain_ext l E h P η ξ hη hξ⟩
 
 /-- The specified whole quotient-diagram augmentation into its Roos realization.
-Source: Stacks 099N(5), 08TC (blueprint: def-zl-framework-open-exchange). -/
+Source: Stacks 099N(5), 08TC. -/
 def frameworkPullChain {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) :=
   (frameworkPullChain_existsUnique l E h P).exists.choose
 
 /-- Open inverse image preserves the completed constructible realization, with the
 whole quotient-unit normalization. No PBC presentation or comparison enters this type.
-Source: Stacks 099N(5), 09BQ (blueprint: def-zl-framework-open-exchange).
-Proof: open inverse image is exact and preserves products. Apply it to the strict
-quotient diagram of a flat K-flat representative. The quotient-unit map just
-constructed becomes its canonical completion augmentation. Complete constructible
-inputs have invertible augmentation; the Roos product and shifted coordinates
-identify it with the defining integral pullback realization. Descent from good
-representatives supplies naturality and uniqueness with this equation. -/
+Source: Stacks 099N(5), 09BQ. -/
 theorem frameworkOpenPullRealization_existsUnique {U T : Scheme.{u}} (h : U ⟶ T)
     [IsOpenImmersion h] [QuasiCompact h]
     [∀ x : U, Invertible (l : U.residueField x)]
@@ -178,7 +165,7 @@ theorem frameworkOpenPullRealization_existsUnique {U T : Scheme.{u}} (h : U ⟶ 
   sorry
 
 /-- The framework pullback realization fixed by quotient and shifted Roos coordinates.
-Source: Stacks 099N(5) (blueprint: def-zl-framework-open-exchange). -/
+Source: Stacks 099N(5). -/
 def frameworkOpenPullRealization {U T : Scheme.{u}} (h : U ⟶ T)
     [IsOpenImmersion h] [QuasiCompact h]
     [∀ x : U, Invertible (l : U.residueField x)]

@@ -18,8 +18,7 @@ For morphisms `f : X ⟶ Y` and `g : Y ⟶ Z` of schemes, the derived projection
 `PF^*_{f ≫ g}` of `L(f ≫ g)^* ⊣ R(f ≫ g)_*` is the composite of `PF^*_g` and `Rg_* PF^*_f`, read
 through the composition isomorphisms `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*` and its conjugate
 (`ProEtale.CondensedRing.properProjectionMorphism_comp`). This is the proper part of the
-composition clause of the coherence of the projection formula (blueprint `prop-sf-pf-coherence`).
-
+composition clause of the coherence of the projection formula.
 -/
 
 @[expose] public section
@@ -78,8 +77,7 @@ lemma leftDerivedUpperStarComp_δ
   simp only [Functor.OplaxMonoidal.comp_δ, δ_leftDerivedUpperStar]
   exact leftDerivedUpperStarTensor_comp Λ f g K M
 
-/-- **The proper projection morphism of a composite** (blueprint `prop-sf-pf-coherence`,
-composition clause, for the pullback–pushforward adjunctions). -/
+/-- **The proper projection morphism of a composite**. -/
 lemma properProjectionMorphism_comp
     (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))
     (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Z) Ab.{u + 1})
@@ -99,8 +97,7 @@ section Open
 variable {U V : Scheme.{u}} (i : U ⟶ V) (i' : V ⟶ X) [IsOpenImmersion i] [IsOpenImmersion i']
 
 -- instantiating the abstract statement in the derived categories of module objects
-/-- **The open projection comparison of a composite** (blueprint `prop-sf-pf-coherence`,
-composition clause, for the extensions by zero along open immersions). -/
+/-- **The open projection comparison of a composite**. -/
 lemma openImmersionProjectionComparison_comp
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)))
     (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

@@ -12,7 +12,6 @@ public import WeilConjectures.ConstructibleSheaf.TorsorAssociatedModule
 # The representation on sections over a torsor
 
 Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
-(blueprint: def-weil-pbc-torsor-section-representation)
 -/
 
 @[expose] public section
@@ -27,20 +26,17 @@ variable {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
   (F : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))
 
 /-- The torsor as an object of the small etale site. 
-(blueprint: def-weil-pbc-torsor-section-representation)
 -/
 abbrev sectionObject : V.Etale :=
   have := c.etale
   Etale.mk c.π
 
 /-- Deck transformations acting on the site object. 
-(blueprint: def-weil-pbc-torsor-section-representation)
 -/
 def sectionDeck (g : P) : c.sectionObject ⟶ c.sectionObject :=
   MorphismProperty.Over.homMk (c.smul ⟨g⟩) (c.smul_π ⟨g⟩)
 
 /-- The sections over the cover, with scalars transported to the unlifted field. 
-(blueprint: def-weil-pbc-torsor-section-representation)
 -/
 noncomputable abbrev sectionModule : ModuleCat.{u + 1} (ZMod ℓ) :=
   (ModuleCat.restrictScalars
@@ -50,8 +46,7 @@ noncomputable abbrev sectionModule : ModuleCat.{u + 1} (ZMod ℓ) :=
 /-- The canonical representation on sections over the torsor. A group element acts by
 restriction along its inverse deck transformation. Thus this is a left action, with the
 same convention as equivariant functions in `associatedModuleFunctor`.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R.
-(blueprint: def-weil-pbc-torsor-section-representation) -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6 and 0A3R. -/
 noncomputable def sectionRepresentation : Rep.{u + 1} (ZMod ℓ) P :=
   Rep.of (X := c.sectionModule ℓ F)
     { toFun g := ((ModuleCat.restrictScalars
@@ -72,7 +67,6 @@ noncomputable def sectionRepresentation : Rep.{u + 1} (ZMod ℓ) P :=
         rfl }
 
 /-- The coefficient-lifted equivariant section presheaf for the canonical representation. 
-(blueprint: def-weil-pbc-torsor-section-representation)
 -/
 noncomputable abbrev sectionRepresentationPresheaf :
     V.Etaleᵒᵖ ⥤ ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)) :=
@@ -82,7 +76,6 @@ noncomputable abbrev sectionRepresentationPresheaf :
 
 /-- The diagonal normalization of the evaluation map: a section over the torsor evaluates
 at each diagonal point to itself. 
-(blueprint: def-weil-pbc-torsor-section-representation)
 -/
 def SectionEvaluationNormalized
     (α : F.obj ⟶ c.sectionRepresentationPresheaf ℓ F) : Prop :=

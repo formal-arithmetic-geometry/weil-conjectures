@@ -615,8 +615,7 @@ variable {ℓ} (M : DiscreteModule.{w} (Multiplicative ℤ_[ℓ]))
 noncomputable abbrev padicIntTauSubOne : M.obj.V →+ M.obj.V :=
   (M.obj.ρ (.ofAdd 1)).asHom.hom - AddMonoidHom.id _
 
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-vanishing part.
+/-- A two-term computation for a procyclic group, vanishing part.
 
 Let `M` be an `ℓ`-primary (e.g. killed by `ℓ ^ s`) discrete continuous module over
 `G = ℤ_ℓ` (written multiplicatively), with topological generator `τ = 1`. Its continuous
@@ -634,8 +633,7 @@ lemma mem_ker_id_iff {k : Multiplicative ℤ_[ℓ]} :
     k ∈ (ContinuousMonoidHom.id (Multiplicative ℤ_[ℓ])).toMonoidHom.ker ↔ k = 1 := by
   simp [MonoidHom.mem_ker]
 
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-degree zero: `H⁰(ℤ_ℓ, M) = ker(τ - 1)`. -/
+/-- A two-term computation for a procyclic group, degree zero: `H⁰(ℤ_ℓ, M) = ker(τ - 1)`. -/
 noncomputable def HZeroPadicIntAddEquiv :
     H (Multiplicative ℤ_[ℓ]) M 0 ≃+ (padicIntTauSubOne M).ker :=
   (H_zero_addEquiv M).trans
@@ -657,8 +655,8 @@ noncomputable def fixedAddSubgroupIdAddEquiv :
   right_inv _ := rfl
   map_add' _ _ := rfl
 
-/-- Blueprint `lem-exc-procyclic-two-term`: A two-term computation for a procyclic group,
-degree one: `H¹(ℤ_ℓ, M) ≃ M / (τ - 1) M` for `ℓ`-primary `M`. -/
+/-- A two-term computation for a procyclic group, degree one: `H¹(ℤ_ℓ, M) ≃ M / (τ - 1) M` for
+`ℓ`-primary `M`. -/
 noncomputable def HOnePadicIntAddEquiv (hM : IsPrimary ℓ M) :
     H (Multiplicative ℤ_[ℓ]) M 1 ≃+ M.obj.V ⧸ (padicIntTauSubOne M).range :=
   ((isEllAdicQuotient_id ℓ).HOneAddEquiv hM).trans <|

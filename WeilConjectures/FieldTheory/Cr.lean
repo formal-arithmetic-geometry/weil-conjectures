@@ -51,8 +51,7 @@ open MvPolynomial
 
 /-- Let `r ≥ 0`. A field `K` has *property `Cᵣ`* if every homogeneous polynomial form
 `F ∈ K[x₁, …, x_N]` of degree `d > 0` in `N > d ^ r` variables has a nontrivial zero in
-`K ^ N`, that is, there is `x : Fin N → K` with `x ≠ 0` and `F(x) = 0`.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+`K ^ N`, that is, there is `x : Fin N → K` with `x ≠ 0` and `F(x) = 0`. -/
 class IsCField (K : Type*) [Field K] (r : ℕ) : Prop where
   /-- A homogeneous form of degree `d > 0` in `N > d ^ r` variables has a nontrivial zero. -/
   exists_ne_zero_and_eval_eq_zero {N d : ℕ} (F : MvPolynomial (Fin N) K)
@@ -71,8 +70,7 @@ theorem IsCField.mono {r s : ℕ} (hrs : r ≤ s) [h : IsCField K r] : IsCField 
     h.exists_ne_zero_and_eval_eq_zero F hF hd ((Nat.pow_le_pow_right hd hrs).trans_lt hN)
 
 /-- An algebraically closed field is `C₀`: a homogeneous form of positive degree in at least two
-variables has a nontrivial zero.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+variables has a nontrivial zero. -/
 instance IsAlgClosed.isCField_zero [IsAlgClosed K] : IsCField K 0 where
   exists_ne_zero_and_eval_eq_zero {N d} F hF hd hN := by
     rw [pow_zero] at hN
@@ -125,8 +123,7 @@ instance IsAlgClosed.isCField_zero [IsAlgClosed K] : IsCField K 0 where
     rw [← hq, hqeq]
     simp [hd.ne']
 
-/-- An algebraically closed field is quasi-algebraically closed, since `C₀` implies `C₁`.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+/-- An algebraically closed field is quasi-algebraically closed, since `C₀` implies `C₁`. -/
 instance IsAlgClosed.isQuasiAlgClosed [IsAlgClosed K] : IsQuasiAlgClosed K :=
   IsCField.mono zero_le_one
 
@@ -158,8 +155,7 @@ theorem IsCField.of_ringEquiv {L : Type*} [Field L] {r : ℕ} (e : K ≃+* L) [I
 
 /-- A finite extension of a quasi-algebraically closed field is quasi-algebraically closed: the
 norm of a form of degree `d` in `N > d` variables over `L` is a form of degree `[L : K] d` in
-`[L : K] N` variables over `K`, and it only vanishes where the original form does.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+`[L : K] N` variables over `K`, and it only vanishes where the original form does. -/
 @[stacks 03RC]
 theorem IsQuasiAlgClosed.of_finiteDimensional (K L : Type*) [Field K] [Field L] [Algebra K L]
     [FiniteDimensional K L] [IsQuasiAlgClosed K] : IsQuasiAlgClosed L where
@@ -233,8 +229,7 @@ theorem IsQuasiAlgClosed.of_isAlgebraic (K L : Type*) [Field K] [Field L] [Algeb
 
 /-- A finite-dimensional central division algebra over a quasi-algebraically closed field `K`
 is `K` itself: its reduced norm is a form of degree `d` in `d ^ 2` variables without nontrivial
-zero, so `d = 1`.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+zero, so `d = 1`. -/
 theorem IsQuasiAlgClosed.finrank_eq_one_of_isCentral (K D : Type*) [Field K] [IsQuasiAlgClosed K]
     [DivisionRing D] [Algebra K D] [Algebra.IsCentral K D] [FiniteDimensional K D] :
     Module.finrank K D = 1 := by
@@ -246,8 +241,7 @@ theorem IsQuasiAlgClosed.finrank_eq_one_of_isCentral (K D : Type*) [Field K] [Is
     exact absurd hPy (hP0 y hy)
 
 /-- The Brauer group of a quasi-algebraically closed field vanishes: every central simple
-algebra over `K` is a matrix algebra over `K`.
-(blueprint: `lemma-cohomology-multiplicative-group--7`) -/
+algebra over `K` is a matrix algebra over `K`. -/
 theorem IsQuasiAlgClosed.subsingleton_brauerGroup (K : Type u) [Field K] [IsQuasiAlgClosed K] :
     Subsingleton (BrauerGroup.{u, u} K) := by
   let one : CSA.{u, u} K := ⟨.of K K⟩

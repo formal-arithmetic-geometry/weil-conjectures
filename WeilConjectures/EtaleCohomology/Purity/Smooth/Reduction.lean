@@ -13,8 +13,8 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 Let `Λ, Λ'` be finite coefficient rings with Tate twist data, for instance `A_{E,n}` and
 `A_{E,m}` with `m ≤ n`, and let `Ψ : D(-, Λ) ⥤ D(-, Λ')` be a change of coefficients, such as
 the finite reduction `K ↦ K ⊗ᴸ_{A_{E,n}} A_{E,m}`. For `f : X ⟶ Y` smooth separated of relative
-dimension `d` the smooth purity map `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` is compatible with `Ψ`
-(blueprint `proposition-compatibility-purity-change-coefficients`): the square
+dimension `d` the smooth purity map `γ_{f,K} : Lf^* K(d)[2d] ≅ Rf^! K` is compatible with `Ψ`:
+the square
 
 ```
 Ψ(Lf^* K(d)[2d]) ──Ψ γ_{f,K}──▶ Ψ(Rf^! K)
@@ -73,7 +73,7 @@ section Purity
 
 variable {X Y : Scheme.{u}} {d : ℕ} (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: Finite reduction of purity
+/-- Finite reduction of purity
 
 **The purity map is compatible with a change of coefficients.** Let `Ψ_X : D(X, Λ) ⥤ D(X, Λ')`
 and `Ψ_Y : D(Y, Λ) ⥤ D(Y, Λ')` be a change of coefficients, `K ∈ D(Y, Λ)`, and let the
@@ -138,7 +138,7 @@ theorem map_smoothPurityIso_hom_comp (ΨX : 𝐃(X, Λ) ⥤ 𝐃(X, Λ')) (ΨY :
   rw [reassoc_of% hμ, reassoc_of% hP, ← Functor.map_comp_assoc, hθ', Functor.map_comp_assoc,
     ← reassoc_of% htw]
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: Finite reduction of purity
+/-- Finite reduction of purity
 
 **The smooth traces reduce.** Let `Ψ` be a change of coefficients commuting with `Rf_!`
 through `ψ : Rf_! ⋙ Ψ_Y ≅ Ψ_X ⋙ Rf_!`, and let `vS : Ψ(Rf^! K) ≅ Rf^!(Ψ K)` be compatible with the

@@ -14,7 +14,6 @@ import all WeilConjectures.DeligneLaumon.CommonStageOpenHeartAdjunction
 /-! # Realization of open extension on represented Weil ind-sheaves
 
 Source: SGA 4, XVII, §5.1; Bhatt--Scholze, Definition 6.7.6 and Lemma 6.7.7.
-(blueprint: lem-zl-ind-open-realization).
 -/
 
 @[expose] public noncomputable section

@@ -46,12 +46,7 @@ attribute [local irreducible] podTensorSignedShiftLeftTower
   podTensorFiniteShiftLeft integralOperationsTensorLevel
 
 /-- The fixed strict left tensor shift is natural on pairs of good complexes.
-Source: Stacks 011G and 07A4; finite signed tensor-shift naturality.
-(blueprint: lem-pod-tensor-left-shift-naturality).
-
-Proof: evaluate the naturality square at every tower level. Its components are
-the fixed finite comparisons, and the tower functor acts levelwise. Each square
-is therefore the corresponding finite-shift naturality equation. -/
+Source: Stacks 011G and 07A4. -/
 theorem podTensorSignedShiftLeftTower_naturality (W : Scheme.{u})
     {P Q : (integralOperationsGoodComplex l E W).FullSubcategory ×
       (integralOperationsGoodComplex l E W).FullSubcategory} (f : P ⟶ Q) (r : ℤ) :
@@ -73,8 +68,7 @@ theorem podTensorSignedShiftLeftTower_naturality (W : Scheme.{u})
     (Prod.mkHom f.1.hom f.2.hom) r).1
 
 /-- Shift a good representative using its existing shift-stability theorem.
-Source: Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-left-shift-naturality). -/
+Source: Stacks 011G and 07A4. -/
 abbrev podTensorGoodShiftFunctor (W : Scheme.{u}) (r : ℤ) :
     (integralOperationsGoodComplex l E W).FullSubcategory ⥤
       (integralOperationsGoodComplex l E W).FullSubcategory :=
@@ -83,20 +77,19 @@ abbrev podTensorGoodShiftFunctor (W : Scheme.{u}) (r : ℤ) :
       (fun P ↦ podTensorGoodShift l E W P r)
 
 /-- The existing tensor tower restricted to pairs of good representatives.
-Source: Stacks 07A4 (blueprint: lem-pod-tensor-left-shift-naturality). -/
+Source: Stacks 07A4. -/
 abbrev podTensorTowerOnGood (W : Scheme.{u}) :=
   ((integralOperationsGoodComplex l E W).ι.prod
     (integralOperationsGoodComplex l E W).ι) ⋙ integralOperationsTensorTowerFunctor l E W
 
 /-- Shift every complex in a strict tower.
-Source: Stacks 011G (blueprint: lem-pod-tensor-left-shift-naturality). -/
+Source: Stacks 011G. -/
 abbrev podTensorTowerShift {A : Type*} [Category A] [Preadditive A] (r : ℤ) :
     (ℕᵒᵖ ⥤ CochainComplex A ℤ) ⥤ (ℕᵒᵖ ⥤ CochainComplex A ℤ) :=
   (whiskeringRight _ _ _).obj (shiftFunctor _ r)
 
 /-- Package the fixed left strict shift as a natural isomorphism.
-Source: Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-left-shift-naturality). -/
+Source: Stacks 011G and 07A4. -/
 def podTensorStrictShiftLeftIso (W : Scheme.{u}) (r : ℤ) :
     ((podTensorGoodShiftFunctor l E W r).prod (𝟭 _)) ⋙
         podTensorTowerOnGood l E W ≅
@@ -105,8 +98,7 @@ def podTensorStrictShiftLeftIso (W : Scheme.{u}) (r : ℤ) :
     (fun P ↦ podTensorSignedShiftLeftTower l E W P.1 P.2 r)
     (fun f ↦ podTensorSignedShiftLeftTower_naturality l E W f r)
 
-/-- The natural left comparison retains the specified strict tower map.
-Source: construction (blueprint: lem-pod-tensor-left-shift-naturality). -/
+/-- The natural left comparison retains the specified strict tower map. -/
 theorem podTensorStrictShiftLeftIso_hom_app (W : Scheme.{u}) (r : ℤ)
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
     (podTensorStrictShiftLeftIso l E W r).hom.app (P, Q) =

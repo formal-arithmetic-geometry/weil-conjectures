@@ -13,8 +13,7 @@ import all WeilConjectures.TraceFormula.Isomorphism.IsomorphismRoosUnitCancellat
 
 /-! # Reindexing reduction on strict quotient models
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindex-reduction-quotient-normalization).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -339,22 +338,7 @@ private theorem transpose_reindex
   rw [← reassoc_of% hn]
 
 /-- The normalized reindexing reduction map is its ordinary quotient comparison.
-Source: Stacks 03EL, 06YY, 0941; blueprint dual-Tate compatibility Steps 1 and 5.
-(blueprint: lem-pod-reindex-reduction-quotient-normalization).
-
-Proof: apply the target reduction/total-limit adjunction to both arrows. The unit
-law for D identifies the transpose of D.reduction inverse with the reindexing of
-the source reduction unit followed by D.limit. The Hom normalization of DY and DX
-expresses their transposes as ordinary quotient units followed by the canonical
-right-derived limit unit. The generator normalization of beta identifies the
-ordinary quotient-unit maps after reindexing. Its compatibility with the genuine
-horizontal quotient maps follows because beta is a map of whole sequence modules.
-D.RestrictedGenerators fixes its restriction comparison to this same map, and
-D.LimitModel identifies D.limit with its two-coordinate Roos realization. Naturality
-of the canonical limit unit now equates the transposes. Injectivity of the adjunction
-Hom equivalence gives the displayed equality. This is a single-coefficient assertion;
-no scalar extension or coefficient-transition datum appears. Zero complexes, empty
-sites and the identity isomorphism require no additional assumption. -/
+Source: Stacks 03EL, 06YY, 0941. -/
 theorem podReindexReduction_quotient_normalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

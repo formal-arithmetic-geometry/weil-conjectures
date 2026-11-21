@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.PodCompletionReindexCoefficien
 
 /-! # Limit square component of the normalized coefficient transition
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-limit).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -64,18 +63,7 @@ private theorem scalarLimitMate
         (S.realization.hom.app ((coefficientSequenceLimit l E W).obj N)) ≫ f) hn
 
 /-- The normalized limit square component of a coefficient transition.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-limit).
-Proof: the scalar limit and reduction maps are mates under the reduction/limit
-adjunction: expanding their common completion-realization arrow leaves exactly
-naturality of the counit. Apply the target L adjunction hom equivalence to the
-desired equation. The mate identity at X, naturality of scalar reduction and the
-counit law for D rewrite its left side. Naturality of the system scalar/pullback
-comparison permits applying hred. The mate identity at Y and naturality of D′'s
-inverse reduction comparison then leave precisely the counit law for D′.
-Injectivity of the adjunction hom equivalence gives the result. This calculation
-works for every ambient derived system, without completeness or constructibility
-assumptions on that system.
+Source: Stacks 03EL, 06YY, 0941.
 -/
 theorem podReindexingTensorCoefficientTransition_limit
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

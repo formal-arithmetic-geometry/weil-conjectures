@@ -34,8 +34,7 @@ variable {X : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- **The tensor product of finite sheaves of modules is finite**: for sheaves `F` and `G` of
 `Λ`-modules on the small étale site with finitely generated geometric stalks, the geometric
-stalks of `F ⊗ G` are `F_s ⊗ G_s`, finitely generated.
-(blueprint: `lem-weil-pbc-flc-tensor-finite-part`) -/
+stalks of `F ⊗ G` are `F_s ⊗ G_s`, finitely generated. -/
 theorem IsFiniteSheaf.tensorObj (hF : IsFiniteSheaf F) (hG : IsFiniteSheaf G) :
     IsFiniteSheaf (F ⊗ G) where
   isFinitelyGenerated_sheafFiber Ω _ _ s := by

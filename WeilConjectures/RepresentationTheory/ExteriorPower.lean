@@ -421,8 +421,7 @@ theorem toGraded_comp_map (s : V ⧸ P.toSubmodule →ₗ[k] V) (hs : ∀ x, P.t
 
 /-- **The graded pieces of the exterior power of a representation.** For a subrepresentation `P`
 of a finite-dimensional representation `ρ`, the `j`-th graded piece `F_j ⧸ F_{j+1}` of the
-filtration of `⋀ⁿ V` is equivalent to `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P)`, `j + l = n`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`) -/
+filtration of `⋀ⁿ V` is equivalent to `⋀ʲ P ⊗ ⋀ˡ (V ⧸ P)`, `j + l = n`. -/
 noncomputable def exteriorPowerGradedEquiv [FiniteDimensional k V] {j l : ℕ} (h : j + l = n) :
     ((P.toRepresentation.exteriorPower j).tprod (P.quotient.exteriorPower l)).Equiv
       ((P.exteriorPowerFiltration n j).subquotient (P.exteriorPowerFiltration n (j + 1))) :=
@@ -493,7 +492,7 @@ namespace ConstituentsLE
 variable {V'' : Type*} [AddCommGroup V''] [Module k V''] {τ : Representation k W V''}
 
 /-- The constituents of `⋀ⁿ V` are constituents of the pieces `⋀ʲ P ⊗ ⋀ⁿ⁻ʲ (V ⧸ P)`, for a
-subrepresentation `P`. (blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`) -/
+subrepresentation `P`. -/
 theorem exteriorPower_of_tprod [FiniteDimensional k V] (P : Subrepresentation ρ) (n : ℕ)
     (h : ∀ j ≤ n, ConstituentsLE
       ((P.toRepresentation.exteriorPower j).tprod (P.quotient.exteriorPower (n - j))) τ) :
@@ -528,9 +527,7 @@ theorem exteriorPower_of_subrepresentation [FiniteDimensional k V] [FiniteDimens
 
 /-- The constituents of the exterior powers of a representation with a finite filtration
 `0 = c₀ ≤ c₁ ≤ ⋯ ≤ c_t = A` only depend on the graded pieces: if `d` is another such filtration
-of `B ⊆ V'` with equivalent graded pieces, every constituent of `⋀ⁿ A` is one of `⋀ⁿ B`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+of `B ⊆ V'` with equivalent graded pieces, every constituent of `⋀ⁿ A` is one of `⋀ⁿ B`. -/
 theorem exteriorPower_of_chain [FiniteDimensional k V] [FiniteDimensional k V'] {t : ℕ}
     (c : Fin (t + 1) → Subrepresentation ρ) (d : Fin (t + 1) → Subrepresentation σ)
     (hc : ∀ i : Fin t, c i.castSucc ≤ c i.succ) (hd : ∀ i : Fin t, d i.castSucc ≤ d i.succ)
@@ -659,9 +656,7 @@ private theorem exteriorPower_ge_of_eq_top {V' : Type*} [AddCommGroup V'] [Modul
   exact ConstituentsLE.of_equiv (Subrepresentation.topEquiv.exteriorPower n)
 
 /-- **The exterior powers of a representation and of its semisimplification have the same
-constituents**, one direction: every constituent of `⋀ⁿ V` is a constituent of `⋀ⁿ V^ss`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+constituents**, one direction: every constituent of `⋀ⁿ V` is a constituent of `⋀ⁿ V^ss`. -/
 theorem constituentsLE_exteriorPower_semisimplification (n : ℕ) :
     ConstituentsLE (ρ.exteriorPower n) (s.semisimplification.exteriorPower n) := by
   have h := ConstituentsLE.exteriorPower_of_chain s.series
@@ -672,9 +667,7 @@ theorem constituentsLE_exteriorPower_semisimplification (n : ℕ) :
     (exteriorPower_ge_of_eq_top (directSumFiltration_eq_top _) n))
 
 /-- **The exterior powers of a representation and of its semisimplification have the same
-constituents**, the other direction: every constituent of `⋀ⁿ V^ss` is a constituent of `⋀ⁿ V`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--2`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+constituents**, the other direction: every constituent of `⋀ⁿ V^ss` is a constituent of `⋀ⁿ V`. -/
 theorem constituentsLE_exteriorPower_semisimplification' (n : ℕ) :
     ConstituentsLE (s.semisimplification.exteriorPower n) (ρ.exteriorPower n) := by
   have h := ConstituentsLE.exteriorPower_of_chain

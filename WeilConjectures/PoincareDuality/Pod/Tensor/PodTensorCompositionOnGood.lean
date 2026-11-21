@@ -14,8 +14,7 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Tensor composition from localized Roos models
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941. -/
+Source: Stacks 07A4, 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -56,15 +55,7 @@ attribute [local irreducible] isoSectionwiseModuleInverseImage
 
 -- Keep the three coefficient reindexings together while checking the model squares.
 /-- Tensor composition on good representatives follows from the localized Roos equation.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4, 0941
-(blueprint: lem-pod-tensor-composition-on-good).
-Proof: apply the three Model squares. Transport constructibility across the
-factor isomorphisms to apply the intermediate tensor Naturality law. Naturality
-of the representative tensor comparison supplies the final square, while
-compatibility of the exact derived-functor factors supplies the two input squares.
-The assumed localized Roos equation supplies the output square. Cancel the
-invertible comparison at the output; the resulting equation is the tensor
-composition equation on these two good representatives. -/
+Source: Stacks 015F, 07A4, 0941. -/
 theorem podTensorCompositionOnGood
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

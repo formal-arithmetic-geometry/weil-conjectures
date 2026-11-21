@@ -10,10 +10,6 @@ public import Mathlib.Analysis.Complex.Polynomial.Basic
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 /-! # A root-free boundary polynomial bounds logarithmic weights
-
-Source: latest blueprint, sec-purity-real-sheaves/sk-p-real-semi/sk-p-real-semi.proof.md,
-paragraph 6: roots of 1-alpha*T^d and the preliminary a+2 bound.
-(blueprint: lem-wf-boundary-root-weight-bound).
 -/
 
 @[expose] public section
@@ -24,9 +20,7 @@ open AlgebraicGeometry
 namespace PowerSeries
 
 /-- A d-th root of the inverse eigenvalue is a zero of its determinant factor, hence lies
-outside the disc. Taking logarithms converts its modulus estimate to the weight bound.
-Source: latest blueprint, sk-p-real-semi.proof.md, paragraph 6
-(blueprint: lem-wf-boundary-root-weight-bound). -/
+outside the disc. Taking logarithms converts its modulus estimate to the weight bound. -/
 theorem boundary_weight_le_add_two_of_no_zero
     {E : Type*} [Field E] (ι : E →+* ℂ) (q d : ℕ) (hq : 1 < q) (hd : 0 < d)
     (α : E) (hα : α ≠ 0) (a : ℝ) (B : Polynomial ℂ)

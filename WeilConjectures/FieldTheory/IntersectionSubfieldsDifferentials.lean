@@ -15,9 +15,7 @@ import WeilConjectures.FieldTheory.IntersectionSubfieldsDifferentialsPowers
 
 /-! # Intersection of subfields and differentials
 
-Source: Stacks Project, More on Algebra, Tag 07P4 (`lemma-intersection-subfields`),
-`literature/stacks-project/more-algebra.tex`.
-(blueprint: lem-weil-pbc-intersection-subfields-differentials)
+Source: Stacks Project, More on Algebra, Tag 07P4, `literature/stacks-project/more-algebra.tex`.
 -/
 
 @[expose] public section
@@ -30,17 +28,15 @@ universe u v w
 namespace FieldTheory
 
 /-- The prime-field algebra structure used in Stacks Project, More on Algebra, Tag 07P4.
-This registers Mathlib's existing `ZMod.algebra` locally.
-(blueprint: lem-weil-pbc-intersection-subfields-differentials) -/
+This registers Mathlib's existing `ZMod.algebra` locally. -/
 local instance zmodAlgebra (p : ℕ) (K : Type u) [Field K] [CharP K p] :
     Algebra (ZMod p) K := ZMod.algebra (R := K) p
 
 /-- A directed intersection of subfields between `K^p` and `K` detects differentials and
-p-th powers in finite extensions. Source: Stacks Project, More on Algebra, Tag 07P4
-(`lemma-intersection-subfields`). The subfields of `K` are written as intermediate fields
+p-th powers in finite extensions. Source: Stacks Project, More on Algebra, Tag 07P4.
+The subfields of `K` are written as intermediate fields
 over the prime field `ZMod p` (every subfield contains it), and the map
 `Ω[K⁄ZMod p] → Ω[K⁄Kα]` with `da ↦ da` is Mathlib's `KaehlerDifferential.map`.
-(blueprint: lem-weil-pbc-intersection-subfields-differentials)
 
 Proof (five steps):
 

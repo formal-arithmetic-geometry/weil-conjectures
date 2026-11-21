@@ -45,7 +45,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {ι : PadicAlgCl l →+* ℂ} {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The constant Weil sheaf `ℚ̄_ℓ` is punctually `ι`-pure of weight `0`: its local Frobenius is
-the identity (blueprint: `corollary-purity-cohomology-smooth-proper-variety`). -/
+the identity. -/
 theorem isPunctuallyPureOfWeight_adicConstant :
     (adicConstant k₀ l X).IsPunctuallyPureOfWeight ι 0 := by
   intro x α hα
@@ -142,8 +142,7 @@ theorem nontrivial_globalSections_of_not_isZero {F : WeilSheaf k₀ l X} (hF : �
 /-- **Weil sheaves on a quasi-finite scheme are mixed.** Every Weil sheaf on a separated
 `k₀`-scheme quasi-finite over `k₀` is `ι`-mixed: split off the image of `ℚ̄_ℓ(β) ⟶ F` for a
 Frobenius eigenvector of `Γ(X̄, F)`, which is punctually pure, and induct on the total dimension
-of the stalks (blueprint: `theorem-real-constructible-sheaves-are-mixed--1`, the dimension-zero
-case: "a Jordan filtration of each invertible Frobenius operator gives pure factors"). -/
+of the stalks. -/
 theorem isMixed_of_locallyQuasiFinite (ι : PadicAlgCl l →+* ℂ) (F : WeilSheaf k₀ l X) :
     F.IsMixed ι := by
   have : Finite X :=

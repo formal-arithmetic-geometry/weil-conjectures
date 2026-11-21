@@ -18,8 +18,7 @@ public import WeilConjectures.ConstructibleSheaf.ModuleConstantOfSetPullback
 Let `Λ` be a finite commutative ring and `L` a finite locally constant sheaf of `Λ`-modules on
 the small étale site of a connected scheme `X`. Then there is a connected finite étale cover
 `p : P ⟶ X` such that `p^* L` is the constant sheaf of a finite `Λ`-module
-(`AlgebraicGeometry.Scheme.exists_isConstant_upperStar_of_connectedSpace`, blueprint
-`fin2-lem-lisse-trivialized-finite-etale`).
+(`AlgebraicGeometry.Scheme.exists_isConstant_upperStar_of_connectedSpace`).
 
 The underlying sheaf of sets of `L` is represented by a finite étale `X`-scheme `E`
 (`AlgebraicGeometry.Scheme.FiniteEtale.toFLC`). A Galois object `A` of the Galois category of
@@ -223,8 +222,7 @@ lemma IsFiniteLocallyConstantSheaf.isFiniteLocallyConstantSheafOfTypes_sheafForg
     rw [ConcreteCategory.isFinitelyGenerated_iff_finite]
     exact @Finite.of_equiv _ _ this e.symm.toEquiv
 
-/-- Blueprint `fin2-lem-lisse-trivialized-finite-etale`: Finite etale trivialization of a lisse
-sheaf, connected case.
+/-- Finite etale trivialization of a lisse sheaf, connected case.
 
 Let `X` be a connected scheme, `Λ` a finite commutative ring and `L` a finite locally constant
 sheaf of `Λ`-modules on `X_ét`. There is a finite étale surjective morphism `p : P ⟶ X` with `P`
@@ -276,8 +274,7 @@ theorem exists_isConstant_upperStar_of_connectedSpace {X : Scheme.{u}} [Connecte
   exact Module.finite_of_finite Λ
 
 
-/-- Blueprint `fin2-lem-lisse-trivialized-finite-etale`: Finite etale trivialization of a lisse
-sheaf.
+/-- Finite etale trivialization of a lisse sheaf.
 
 Let `X` be a Noetherian scheme (for instance of finite type over a field), `Λ` a finite
 commutative ring and `L` a finite locally constant sheaf of `Λ`-modules on `X_ét`. There are

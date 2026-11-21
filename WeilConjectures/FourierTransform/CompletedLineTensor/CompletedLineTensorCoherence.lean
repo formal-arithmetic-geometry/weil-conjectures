@@ -79,9 +79,7 @@ import WeilConjectures.SmoothPurity.Supporting.Tensor.ExactTensorCoefficientLine
 
 /-! # Completed scalar extension and compatible coefficient lines
 
-Source: Bhatt--Scholze, Definitions 3.4.10 and 3.5.2, Lemma 3.4.12,
-Proposition 3.5.1; blueprint sk-def-sp-tate-twist-locally-free, Proof (3).
-(blueprint: lem-pur-completed-line-tensor-coherence)
+Source: Bhatt--Scholze, Definitions 3.4.10 and 3.5.2, Lemma 3.4.12, Proposition 3.5.1.
 
 ## Main definitions and statements
 
@@ -130,16 +128,7 @@ variable (G : Type u) [Field G] [Algebra ℚ_[l] G] [FiniteDimensional ℚ_[l] G
   (j : F →ₐ[ℚ_[l]] G)
 
 /-- Existence and uniqueness of all ordinary signed-line comparisons with their
-representative formulas. Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: tensor powers of b use the canonical binary comparison, including its
-multiplication unitor at zero. The negative map is uniquely determined by evaluation
-and becomes an isomorphism after trivializing the line. Define the ordinary comparison
-on pure tensors by ((x tensor a) tensor s) mapped to (x tensor s) tensor b_m(a tensor 1).
-Balancedness and sheafification give an isomorphism natural in the module. A line is
-flat; tensor with it preserves flat-term K-flat complexes. Apply the K-flat localization
-equivalence, using the specified universal counits. The displayed equation fixes the
-derived comparison uniquely and proves independence from the representative. -/
+representative formulas. Source: Stacks 03EL, 03EO, 06YY; blueprint Proof (3). -/
 theorem pairData_existsUnique (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -148,8 +137,7 @@ theorem pairData_existsUnique (L : integralTowerModules l E X) [L.IsFiniteLocall
   obtain ⟨d, hd, -⟩ := pairData_exists l E X F ι L N b
   exact ⟨d, hd, fun d' hd' ↦ pairData_unique l E X F ι L N b hd' hd⟩
 
-/-- The unique normalized ordinary signed-line comparison package.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The unique normalized ordinary signed-line comparison package. -/
 def pairData (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -157,8 +145,7 @@ def pairData (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
   (pairData_existsUnique l E X F ι L N b).exists.choose
 
 /-- The specified chi, viewed as an isomorphism only at a derived-complete input.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+Source: Bhatt--Scholze, Proposition 3.5.1. -/
 def chi (K : DerivedCategory (integralTowerModules l E X))
     (hK : IsDerivedCompleteUnrestricted l E X K) :
     (completedDerivedScalarExtension l E F ι X).obj K ≅
@@ -168,8 +155,7 @@ def chi (K : DerivedCategory (integralTowerModules l E X))
 
 /-- The completed comparison beta is exactly the specified conjugation by chi.
 This construction uses no inverse chain map to completion.
-Source: Bhatt--Scholze, Proposition 3.5.1; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+Source: Bhatt--Scholze, Proposition 3.5.1. -/
 def beta (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (b : SheafOfModules.changeOfRingsOfUniverses.{t, t + 1, max u (t + 1), max u (t + 1)}
@@ -194,11 +180,7 @@ private theorem complete_of_iso
   exact isDerivedCompleteUnrestricted_of_iso l E X e hK
 
 /-- Completed extension preserves completeness on complete inputs.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the finite-free comparison makes ordinary extension complete and identifies
-it with the specified strict completion. Transport its augmented Roos triangle through
-that isomorphism, with the canonical quotient legs. -/
+Source: Bhatt--Scholze, Proposition 3.5.1. -/
 theorem extension_complete (K : DerivedCategory (integralTowerModules l E X))
     (hK : IsDerivedCompleteUnrestricted l E X K) :
     IsDerivedCompleteUnrestricted l F X
@@ -210,8 +192,7 @@ attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   completedIntegralCommRingSheafUnrestricted
 
 /-- The completed associator is ordinary associativity conjugated by the specified chi.
-Source: Bhatt--Scholze, Proposition 3.5.1; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+Source: Bhatt--Scholze, Proposition 3.5.1. -/
 def associator (K : DerivedCategory (integralTowerModules l E X))
     (hK : IsDerivedCompleteUnrestricted l E X K) :
     (integralScalarExtensionOfUniverses l F G j X).obj
@@ -245,8 +226,6 @@ private theorem conjugate_evaluation {A D : Type*} [Category A] [Category D]
   simpa only [← Category.assoc, Iso.hom_inv_id, Category.id_comp] using hc
 
 /- Naturality and compatibility with evaluation for exactly the conjugated beta.
-Source: blueprint Proof (3), completed line/scalar coherence
-(blueprint: lem-pur-completed-line-tensor-coherence).
 Proof: every factor defining beta is natural and invertible on complete inputs;
 completeness of all intermediate twists follows from complete. To check evaluation,
 precompose by chi at T_-m T_m K. Substitute beta*chi_T = T(chi)*bar-beta twice.
@@ -255,13 +234,7 @@ are multiplication by the evaluated line scalar, by the negative clause of
 IsPairNormalized. Naturality
 of chi identifies this with C(epsilon)*chi. Cancel the invertible chi. The proof
 includes zero, positive and negative m and never inverts a chain completion map. -/
-/-- The evaluation component of beta compatibility, isolated from naturality.
-Source: blueprint Proof (3), completed line/scalar coherence
-(blueprint: new-lem-pur-beta-evaluation-compatibility).
-Proof: expand both conjugated beta maps and the derived evaluation. Naturality
-of chi cancels the completion comparisons. The normalized pairing equation in
-`IsPairNormalized` identifies the remaining ordinary pure-tensor map; the
-localization comparison then gives the displayed equality. -/
+/-- The evaluation component of beta compatibility, isolated from naturality. -/
 theorem beta_evaluation_compatibility (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -429,8 +402,7 @@ theorem beta_natural_evaluation (L : integralTowerModules l E X)
   · exact beta_evaluation_compatibility l E X F ι L N b
 
 /-- The completed identity comparison is the unitor conjugated by chi.
-Source: Bhatt--Scholze, Proposition 3.5.1
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+Source: Bhatt--Scholze, Proposition 3.5.1. -/
 def unit (K : DerivedCategory (integralTowerModules l E X))
     (hK : IsDerivedCompleteUnrestricted l E X K) :
     (integralScalarExtensionOfUniverses l E E (AlgHom.id ℚ_[l] E) X).obj K ≅ K :=
@@ -456,12 +428,7 @@ private theorem line_unit_conjugation
 
 /-- The inverse completed unit is exactly the natural completeness map, including
 its zero shifted-product component, and is natural on complete inputs.
-Source: Bhatt--Scholze, Definition 3.5.2; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the finite-free comparison identifies chi with the chain multiplication
-followed by the directly constructed quotient augmentation. Substitute the unitor's
-normalization and cancel multiplication. This gives the displayed representative
-formula. Naturality follows from the naturality of chi and ordinary multiplication. -/
+Source: Bhatt--Scholze, Definition 3.5.2. -/
 theorem unit_normalization :
     (∀ (P : (integralOperationsGoodComplex l E X).FullSubcategory)
       (hP : IsDerivedCompleteUnrestricted l E X (DerivedCategory.Q.obj P.obj)),
@@ -505,16 +472,14 @@ theorem unit_normalization :
         ((ordinaryUnit l E X).hom.naturality f)
 
 /-- Conjugating the image of a morphism by the components of a natural comparison
-recovers its image under the target functor.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+recovers its image under the target functor. -/
 private theorem conj_map {A B : Type*} [Category A] [Category B] {C C' : A ⥤ B}
     (χ : C ⟶ C') {K M : A} (eK : C.obj K ≅ C'.obj K) (eM : C.obj M ≅ C'.obj M)
     (hK : eK.hom = χ.app K) (hM : eM.hom = χ.app M) (f : K ⟶ M) :
     eK.inv ≫ C.map f ≫ eM.hom = C'.map f := by
   rw [hM, χ.naturality, ← hK, Iso.inv_hom_id_assoc]
 
-/-- The inverse form of `conj_map`.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The inverse form of `conj_map`. -/
 private theorem conj_map_inv {A B : Type*} [Category A] [Category B] {C C' : A ⥤ B}
     (χ : C ⟶ C') {K M : A} (eK : C.obj K ≅ C'.obj K) (eM : C.obj M ≅ C'.obj M)
     (hK : eK.hom = χ.app K) (hM : eM.hom = χ.app M) (f : K ⟶ M) :
@@ -522,10 +487,7 @@ private theorem conj_map_inv {A B : Type*} [Category A] [Category B] {C C' : A �
   rw [Iso.comp_inv_eq, Category.assoc, conj_map χ eK eM hK hM f]
 
 /-- A pentagon for associators conjugated by comparison isomorphisms follows from the
-pentagon of the original associators.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: move the outer comparison inside by naturality, cancel the inverse pairs and
-apply the original pentagon and naturality of the third associator. -/
+pentagon of the original associators. -/
 private theorem conj_pentagon {A B C D : Type*} [Category A] [Category B] [Category C]
     [Category D] {F₁ : A ⥤ B} {F₂ : B ⥤ C} {F₃ F₃' : C ⥤ D} {F₁₂ : A ⥤ C} {F₂₃ : B ⥤ D}
     {F₁₂₃ : A ⥤ D} (χ₃ : F₃ ⟶ F₃')
@@ -553,10 +515,7 @@ private theorem conj_pentagon {A B C D : Type*} [Category A] [Category B] [Categ
         reassoc_of% hp, reassoc_of% hc, Iso.hom_inv_id_assoc]
 
 /-- A tower identity for line comparisons conjugated by comparison isomorphisms follows
-from the original tower identity.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: move the outer comparison inside by naturality, use naturality of the second line
-comparison, cancel the inverse pairs and apply the original tower identity. -/
+from the original tower identity. -/
 private theorem conj_tower {A B C : Type*} [Category A] [Category B] [Category C]
     {T₀ : A ⥤ A} {T₁ : B ⥤ B} {T₂ : C ⥤ C} {F₁ : A ⥤ B} {F₂ F₂' : B ⥤ C} {F₁₂ : A ⥤ C}
     (χ₂ : F₂ ⟶ F₂') (o₁ : T₀ ⋙ F₁ ⟶ F₁ ⋙ T₁) (o₂ : T₁ ⋙ F₂ ⟶ F₂ ⋙ T₂)
@@ -589,16 +548,7 @@ private theorem conj_tower {A B C : Type*} [Category A] [Category B] [Category C
         Iso.hom_inv_id_assoc]
 
 /-- Both unit laws and the scalar associativity pentagon on derived-complete inputs.
-Source: Stacks 06YY, 07A4; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: ordinary associators multiply the scalar factors. For three transitions both
-routes send u tensor (t tensor (s tensor x)) to u*k(t)*k(j(s)) tensor x. Multiplication
-units obey both unit laws. These identities descend from pure tensors through
-sheafification and K-flat localization. Conjugating by successive chi maps identifies
-the completed and ordinary composites. Expand each completed edge, move intermediate
-chi maps by naturality and cancel inverse pairs. This reduces the completed pentagon
-and both unit equations to the ordinary ones. Repeated fields use the actual unit
-isomorphisms, including their natural completeness maps, and no strict equality C_ii=1. -/
+Source: Stacks 06YY, 07A4. -/
 theorem scalar_coherence :
     (∀ (K : DerivedCategory (integralTowerModules l E X))
       (hK : IsDerivedCompleteUnrestricted l E X K),
@@ -657,8 +607,7 @@ theorem scalar_coherence :
       (chi l F X H (k.comp j) _ (extension_complete l E X F ι K hK)) rfl rfl
       (associatorData_derived_pentagon l E X F ι G j H k K)
 
-/-- The chosen ordinary comparison package is normalized.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The chosen ordinary comparison package is normalized. -/
 private theorem pairData_normalized (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (N : integralTowerModules l F X)
     [N.IsFiniteLocallyFreeOfRank 1]
@@ -668,17 +617,7 @@ private theorem pairData_normalized (L : integralTowerModules l E X)
   unfold pairData
   exact (pairData_existsUnique l E X F ι L N b).exists.choose_spec
 
-/-- The completed line comparison commutes with a compatible three-field tower.
-Source: blueprint Proof (3), final sentence
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the signed-power scalar maps are compatible with composition: for positive
-powers use the normalized binary associator square, for negative powers evaluate on
-positive powers and use the dual formula. On ordinary pure tensors, both tower paths
-send ((x tensor a) tensor s) tensor t to (x tensor j(s)t) tensor b_20,m(a tensor 1).
-For the completed square precompose by chi_21,C_10 * B_21(chi_10) at T_0,m K.
-Substitute the definitions of beta and associator. Naturality moves intermediate chi
-maps next to their inverses, which cancel, leaving the ordinary tower equality.
-All objects at which chi is inverted are complete. Cancel the initial isomorphism. -/
+/-- The completed line comparison commutes with a compatible three-field tower. -/
 theorem tower (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (N : integralTowerModules l F X) [N.IsFiniteLocallyFreeOfRank 1]
     (P : integralTowerModules l G X) [P.IsFiniteLocallyFreeOfRank 1]
@@ -786,15 +725,13 @@ attribute [local irreducible] sfIntegralConstructible
 
 variable (Y : AlgebraicGeometry.Scheme.{u})
 
-/-- Precisely the conditional constructible-preservation hypothesis in the node.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Precisely the conditional constructible-preservation hypothesis in the node. -/
 def PreservesConstructible (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1] :
     Prop := ∀ (m : ℤ) (K : DerivedCategory (integralTowerModules l E Y)),
   sfIntegralConstructible l E Y K →
     sfIntegralConstructible l E Y ((tensor l E Y L m).obj K)
 
-/-- Restriction of the actual line tensor to the recorded integral constructible category.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Restriction of the actual line tensor to the recorded integral constructible category. -/
 def integralTwist (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
     (hL : PreservesConstructible l E Y L) (m : ℤ) :
     sfIntegralConstructibleCategory l E Y ⥤ sfIntegralConstructibleCategory l E Y :=
@@ -809,12 +746,7 @@ section IntegralTwistLinearProof
 attribute [local semireducible] sfIntegralCoefficientLinear sfIntegralConstructibleLinear
 
 /-- The restriction is additive and linear for the recorded constant-section scalar action.
-Source: Stacks 03EL; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: ordinary tensor maps scalar multiplication to the same scalar on pure tensors.
-Sheafification and the exact derived localization preserve this equality. The full
-subcategory inherits exactly the ambient Hom actions, so the same identities hold
-for integralTwist. Additivity follows in the same way from tensor additivity. -/
+Source: Stacks 03EL. -/
 theorem integralTwist_linear (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
     (hL : PreservesConstructible l E Y L) (m : ℤ) :
     (integralTwist l E Y L hL m).Additive ∧
@@ -857,14 +789,12 @@ theorem integralTwist_linear (L : integralTowerModules l E Y) [L.IsFiniteLocally
 
 end IntegralTwistLinearProof
 
-/-- Additivity inherited by integral line tensor.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- Additivity inherited by integral line tensor. -/
 instance integralTwistAdditive (L : integralTowerModules l E Y)
     [L.IsFiniteLocallyFreeOfRank 1] (hL : PreservesConstructible l E Y L) (m : ℤ) :
     (integralTwist l E Y L hL m).Additive := (integralTwist_linear l E Y L hL m).1
 
-/-- The constant-section coefficient action is preserved by integral line tensor.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The constant-section coefficient action is preserved by integral line tensor. -/
 instance integralTwistLinear (L : integralTowerModules l E Y)
     [L.IsFiniteLocallyFreeOfRank 1] (hL : PreservesConstructible l E Y L) (m : ℤ) :
     (integralTwist l E Y L hL m).Linear (Padic.coefficientExtensionIntegers l E) :=
@@ -872,9 +802,7 @@ instance integralTwistLinear (L : integralTowerModules l E Y)
 
 attribute [local instance 5000] integralTwistAdditive integralTwistLinear
 
-/-- The actual raw scalar-localized line tensor, with unchanged objects and tensor Hom maps.
-Source: blueprint Proof (3); rationalization definition
-(blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The actual raw scalar-localized line tensor, with unchanged objects and tensor Hom maps. -/
 def rationalTwist (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
     (hL : PreservesConstructible l E Y L) (m : ℤ) :
     sfRationalConstructibleCategory l E Y ⥤ sfRationalConstructibleCategory l E Y :=
@@ -893,12 +821,7 @@ attribute [local semireducible] sfIntegralConstructible
 attribute [local semireducible] integralTwist
 
 /-- Intrinsic integral objects satisfy the recorded augmented quotient-tower completeness.
-Source: Bhatt--Scholze, Definition 3.5.2
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the intrinsic predicate contains its canonical augmented reduction triangle.
-The standard derived restriction and K-flat counits identify its legs with those of
-the unrestricted reduction tower. This transports the same distinguished triangle;
-the auxiliary finite-field presentation in the old predicate is immaterial. -/
+Source: Bhatt--Scholze, Definition 3.5.2. -/
 theorem intrinsic_complete (K : sfIntegralConstructibleCategory l E Y) :
     IsDerivedCompleteUnrestricted l E Y K.obj := by
   set_option backward.isDefEq.respectTransparency false in
@@ -920,11 +843,7 @@ theorem intrinsic_complete (K : sfIntegralConstructibleCategory l E Y) :
       omega
     exact ⟨D, hlD, (sfDerivedComplete_iff_legacy l E Y D hlD K.obj).mp K.property.1⟩
 
-/-- Restriction of evaluation, fixed on every integral object by the ambient evaluation.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: preservation by both signed tensors puts both endpoints in the full subcategory.
-Full faithfulness restricts the evaluation and its inverse uniquely. Its naturality
-and inverse identities are inherited from epsilon. -/
+/-- Restriction of evaluation, fixed on every integral object by the ambient evaluation. -/
 theorem integralEpsilon_existsUnique (L : integralTowerModules l E Y)
     [L.IsFiniteLocallyFreeOfRank 1] (hL : PreservesConstructible l E Y L) (m : ℤ) :
     ∃! e : integralTwist l E Y L hL m ⋙ integralTwist l E Y L hL (-m) ≅ 𝟭 _,
@@ -947,19 +866,13 @@ theorem integralEpsilon_existsUnique (L : integralTowerModules l E Y)
     apply (sfIntegralConstructible l E Y).ι.map_injective
     exact he' K
 
-/-- The restricted evaluation is uniquely fixed by the ambient sheaf evaluation.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The restricted evaluation is uniquely fixed by the ambient sheaf evaluation. -/
 def integralEpsilon (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
     (hL : PreservesConstructible l E Y L) (m : ℤ) :
     integralTwist l E Y L hL m ⋙ integralTwist l E Y L hL (-m) ≅ 𝟭 _ :=
   (integralEpsilon_existsUnique l E Y L hL m).exists.choose
 
-/-- Rationalized evaluation, with components equal to the localization of the integral ones.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: apply localization to both integral evaluation components. Naturality on a pure
-Hom tensor is integral naturality multiplied by its scalar; extend over sums. The
-integral inverse equations remain inverse equations after localization. Every raw
-rational object is an integral representative, proving uniqueness. -/
+/-- Rationalized evaluation, with components equal to the localization of the integral ones. -/
 theorem rationalEpsilon_existsUnique (L : integralTowerModules l E Y)
     [L.IsFiniteLocallyFreeOfRank 1] (hL : PreservesConstructible l E Y L) (m : ℤ) :
     ∃! e : rationalTwist l E Y L hL m ⋙ rationalTwist l E Y L hL (-m) ≅ 𝟭 _,
@@ -992,8 +905,7 @@ theorem rationalEpsilon_existsUnique (L : integralTowerModules l E Y)
     intro e' he'
     exact hu e' (fun K ↦ heq_of_eq (he' K.obj))
 
-/-- The actual scalar-localized evaluation.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The actual scalar-localized evaluation. -/
 def rationalEpsilon (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
     (hL : PreservesConstructible l E Y L) (m : ℤ) :
     rationalTwist l E Y L hL m ⋙ rationalTwist l E Y L hL (-m) ≅ 𝟭 _ :=
@@ -1003,11 +915,7 @@ variable (p : ℕ) (hl : l ≠ p)
 
 attribute [local semireducible] integralScalarExtensionOfUniverses
 
-/-- Restricting the completed beta to the full constructible subcategories.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: both line twists preserve the subcategories by hypothesis and completed scalar
-extension preserves them by its constructibility theorem. Full faithfulness restricts
-beta and its inverse uniquely, with their inherited naturality equations. -/
+/-- Restricting the completed beta to the full constructible subcategories. -/
 theorem integralBeta_existsUnique (L : integralTowerModules l E Y)
     [L.IsFiniteLocallyFreeOfRank 1] (hL : PreservesConstructible l E Y L)
     (N : integralTowerModules l F Y) [N.IsFiniteLocallyFreeOfRank 1]
@@ -1041,8 +949,7 @@ theorem integralBeta_existsUnique (L : integralTowerModules l E Y)
     apply (sfIntegralConstructible l F Y).ι.map_injective
     exact eq_of_heq (he' K)
 
-/-- The unique restriction of beta, retaining its ambient components.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The unique restriction of beta, retaining its ambient components. -/
 def integralBeta (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
     (hL : PreservesConstructible l E Y L)
     (N : integralTowerModules l F Y) [N.IsFiniteLocallyFreeOfRank 1]
@@ -1054,13 +961,7 @@ def integralBeta (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1
     sfConstructibleIntegralScalarExtension p l hl E F ι Y ⋙ integralTwist l F Y N hN m :=
   (integralBeta_existsUnique l E F ι Y p hl L hL N hN b m).exists.choose
 
-/-- The rational beta on the recorded scalar extensions, fixed by integral localization.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: localize each restricted component and its inverse. On every pure tensor in
-Hom, naturality is the integral naturality equation tensored with the image scalar;
-additivity extends it to all morphisms. Localization preserves inverse equations.
-Objects of the raw rationalization are precisely integral representatives. HEq only
-transports the object equalities in the recorded scalar functor's specification. -/
+/-- The rational beta on the recorded scalar extensions, fixed by integral localization. -/
 theorem rationalBeta_existsUnique (L : integralTowerModules l E Y)
     [L.IsFiniteLocallyFreeOfRank 1] (hL : PreservesConstructible l E Y L)
     (N : integralTowerModules l F Y) [N.IsFiniteLocallyFreeOfRank 1]
@@ -1112,8 +1013,7 @@ theorem rationalBeta_existsUnique (L : integralTowerModules l E Y)
     intro e' he'
     exact hu e' (fun K ↦ he' K.obj)
 
-/-- The normalized rational scalar/line comparison.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+/-- The normalized rational scalar/line comparison. -/
 def rationalBeta (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
     (hL : PreservesConstructible l E Y L)
     (N : integralTowerModules l F Y) [N.IsFiniteLocallyFreeOfRank 1]
@@ -1125,8 +1025,7 @@ def rationalBeta (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1
   (rationalBeta_existsUnique l E F ι Y p hl L hL N hN b m).exists.choose
 
 /-- Two conjugated associators agree when the ordinary associators correspond under
-comparisons of the ordinary models compatible with the completion maps.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+comparisons of the ordinary models compatible with the completion maps. -/
 private theorem conj_compare {A B C : Type*} [Category A] [Category B] [Category C]
     {D₁ C₁ : A ⥤ B} {D₂ C₂ C₂' : B ⥤ C} {D₁₂ C₁₂ C₁₂' : A ⥤ C}
     (e₁ : D₁ ≅ C₁) (e₂ : D₂ ≅ C₂) (e₁₂ : D₁₂ ≅ C₁₂)
@@ -1155,8 +1054,7 @@ private theorem conj_compare {A B C : Type*} [Category A] [Category B] [Category
     Category.comp_id]
 
 /-- Two conjugated unitors agree when the ordinary unitors correspond under a comparison of
-the ordinary models compatible with the completion maps.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence). -/
+the ordinary models compatible with the completion maps. -/
 private theorem conj_compare_unit {A : Type*} [Category A]
     {D C C' : A ⥤ A} (e : D ≅ C) (ou : C ≅ 𝟭 A) (du : D ≅ 𝟭 A)
     (hu : e.hom ≫ ou.hom = du.hom) {K : A}
@@ -1167,10 +1065,7 @@ private theorem conj_compare_unit {A : Type*} [Category A]
   rw [← hu]
   simp
 
-/-- The normalized ordinary-to-completed comparison is the scalar completion map.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: the isomorphism with components the scalar completion map satisfies the
-normalization characterizing the comparison. -/
+/-- The normalized ordinary-to-completed comparison is the scalar completion map. -/
 private theorem sfIntegralOrdinaryComparison_hom_app (K : sfIntegralConstructibleCategory l E Y) :
     (sfIntegralOrdinaryComparison l E F ι Y).hom.app K =
       (scalarCompletion l E F ι Y).app K.obj := by
@@ -1189,15 +1084,7 @@ private theorem sfIntegralOrdinaryComparison_hom_app (K : sfIntegralConstructibl
     exact congrArg (fun a ↦ a.hom.app K) h
 
 /-- The associator and unit restrict to the recorded canonical integral comparisons;
-the recorded rational comparisons are their localizations.
-Source: blueprint Proof (3); scalar-extension composition construction
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: both ordinary constructions are fixed by balanced scalar multiplication on
-K-flat representatives, so their unique counit-compatible comparisons identify them.
-Their normalized chi maps are fixed by the same quotient-cone maps with zero shifted
-component. The conjugated associator and unitor therefore agree on all complete inputs.
-Full faithfulness gives the integral equalities. The specification of the recorded
-rational associator and unit says exactly that they localize those integral components. -/
+the recorded rational comparisons are their localizations. -/
 theorem canonical_restriction :
     (∀ K : sfIntegralConstructibleCategory l E Y,
       HEq ((sfIntegralScalarComp l E F ι Y p hl G j).hom.app K).hom
@@ -1250,12 +1137,7 @@ theorem canonical_restriction :
     · exact (sfRationalScalarComp_existsUnique l E F ι Y p hl G j).exists.choose_spec _
     · exact (sfRationalScalarUnit_existsUnique l E Y p hl).exists.choose_spec _
 
-/-- Evaluation compatibility after rationalization, with exactly the integral components.
-Source: blueprint Proof (3) (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: restrict the ambient evaluation square by full faithfulness. Rationalization
-sends both integral composites to the corresponding composites. The normalized
-component equations for rationalBeta and rationalEpsilon identify these images
-with the displayed square, including all morphisms tensored with arbitrary scalars. -/
+/-- Evaluation compatibility after rationalization, with exactly the integral components. -/
 theorem rational_evaluation (L : integralTowerModules l E Y) [L.IsFiniteLocallyFreeOfRank 1]
     (hL : PreservesConstructible l E Y L)
     (N : integralTowerModules l F Y) [N.IsFiniteLocallyFreeOfRank 1]

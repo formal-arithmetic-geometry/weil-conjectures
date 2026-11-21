@@ -10,8 +10,6 @@ import all WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLoc
 import Mathlib.CategoryTheory.Localization.Predicate
 
 /-! # Descent of the fixed integral scalar comparison
-
-Source: trace-definition coefficient-category sentence, raw localization steps 1--3.
 -/
 
 @[expose] public noncomputable section
@@ -142,19 +140,7 @@ private theorem rawIsoOriginal_app {E L : Padic.FiniteCoefficientFields l Ω} (h
   rw [← Category.assoc]
   exact comp_eqToHom_heq _ _
 
-/-- Localize the inverse integral scalar comparison before coefficient-presentation transport.
-Source: assigned raw scalar-descent proof, first step
-(blueprint: lem-fd-raw-localized-comparison-exists).
-
-Proof: The stage tensor formula at scalar one identifies Q followed by the supplied
-rational functor with I followed by the PBC localization. The scalar tensor formula
-at one identifies Q followed by rational scalar extension with U followed by Q.
-Whisker the inverse of b by the final localization and compose with these
-identifications and the inverse ordinary-scalar comparison. The source Q is a
-localization, so lift this natural isomorphism with Localization.liftNatIso.
-Its integral component formula cancels the identity associators and equality
-transports, giving exactly the two arrows below. This constructs the isomorphism
-and its naturality and inverse equations; no shift or coherence assertion is used. -/
+/-- Localize the inverse integral scalar comparison before coefficient-presentation transport. -/
 theorem rawLocalizedComparisonExists {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L)
     (b : I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L) :
     ∃ e : sfRationalScalarExtension l (pbcFiniteField.{u} l Ω E) T 0

@@ -302,7 +302,7 @@ lemma boundedConstructibleUpperStarComp_refinement_hom_app {p₁ : Z₁ ⟶ Y} {
 factorizations `f = i ≫ p` and `f = i₁ ≫ p₁` into open immersions followed by morphisms and a
 refinement `h` (`i ≫ h = i₁` cartesian, `h ≫ p₁ = p`), the comparison
 `ρ : i₁_! ⋙ Rp₁_* ≅ i_! ⋙ Rp_*` carries the exceptional projection morphism of `(i₁, p₁)` to that
-of `(i, p)` (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). -/
+of `(i, p)`. -/
 theorem boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp
     (sq : IsPullback (𝟙 X) i i₁ h) {p₁ : Z₁ ⟶ Y} {p : Z ⟶ Y} (wp : h ≫ p₁ = p) {f : X ⟶ Y}
     (hf : i ≫ p = f) (hf₁ : i₁ ≫ p₁ = f)
@@ -382,7 +382,7 @@ lemma ι_map_eqToIso_trans_upperStarComp_inv_app_compactification (c : Compactif
     c.overI_overG B
 
 /-- **The comparison along a refinement of compactifications intertwines the exceptional
-projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2). -/
+projection morphisms**. -/
 theorem boundedConstructibleLowerShriekRefinementIso_hom_app_whiskerRight_comp_compactification
     {c d : Compactification f.left} (r : Compactification.OverRefinement d c)
     [IsIso (boundedConstructibleOpenImmersionLowerShriekRefinementPushforward ℓ r.isPullback)]
@@ -552,7 +552,7 @@ theorem boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_hom_app_
   rw [← h₂', ← Category.assoc, h₁', Category.assoc]
 
 /-- **The comparison of the lower shrieks of two compactifications intertwines the exceptional
-projection morphisms** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2): through
+projection morphisms**: through
 `Rf_!^{c₁} ≅ Rf_!^{c₂}`, the exceptional projection morphism of `c₁` is that of `c₂`. -/
 theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_hom_app_whiskerRight_comp
     (c₁ c₂ : Compactification f.left) (K : Dᵇc(X.left)⟦𝐐⟧) (B : Dᵇc(Y.left)⟦𝐐⟧) :
@@ -657,7 +657,7 @@ variable {U X : Over (Spec (.of k))}
   [QuasiCompact X.hom] [IsSeparated X.hom] (j : U ⟶ X) [IsOpenImmersion j.left]
 
 /-- **The projection formula of an open immersion is the adjoint of the monoidal structure of the
-pullback** (blueprint `prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2 and 5.1.2): for an open
+pullback**: for an open
 immersion `j`, through the identification `Rj_! ≅ j_!` with the extension by zero, the projection
 morphism `PF_j : Rj_! K ⊗ B ⟶ Rj_! (K ⊗ Lj^* B)` is the inverse of the projection comparison
 `j_! (K ⊗ Lj^* B) ⟶ j_! K ⊗ B` of the adjunction `j_! ⊣ Lj^*`, the adjoint of the tensor

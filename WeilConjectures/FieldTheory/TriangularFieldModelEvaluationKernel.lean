@@ -16,9 +16,8 @@ import WeilConjectures.FieldTheory.TriangularFieldModelNormalForm
 /-!
 # The evaluation kernel of a triangular algebraic tower
 
-Source: Stacks Project, Algebra, proof of Tag 07BV, first assertion, and the
-localization presentation of Tag 08JZ
-(blueprint: lem-weil-pbc-triangular-field-model-evaluation-kernel).
+Source: Stacks Project, Algebra, proof of Tag 07BV, first assertion, and the localization
+presentation of Tag 08JZ.
 -/
 
 @[expose] public section
@@ -29,10 +28,8 @@ namespace FieldTheory
 
 /-- Any finite family in a field algebraic over `k(x)` has triangular monic relations
 whose ideal is exactly the kernel of evaluation. The family need not generate `K`.
-Source: Stacks Project, proof of Tag 07BV (lemma-colimit-syntomic), the minimal
-polynomial construction and denominator clearing; Tag 08JZ
-(localization presentation), the kernel of that presentation
-(blueprint: lem-weil-pbc-triangular-field-model-evaluation-kernel).
+Source: Stacks Project, proof of Tag 07BV, the minimal polynomial construction and denominator
+clearing; Tag 08JZ (localization presentation), the kernel of that presentation.
 
 Proof (the first four steps are supplied by `exists_triangularFieldModel_data`;
 the monic quotient coordinates in step 5 are supplied by

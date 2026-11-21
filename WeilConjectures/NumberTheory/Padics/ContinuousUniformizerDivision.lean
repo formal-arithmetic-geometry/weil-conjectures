@@ -9,9 +9,6 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionFinite
 /-!
 # Continuous division by a uniformizer power
 
-Source: Hemo–Richarz–Scholbach, proof of Theorem 6.12(2), finite `E` case,
-pp. 18–19 (auxiliary; not a blueprint node).
-
 The statement records the continuous integral division and the local unit
 inversion used in the continuous Smith elimination argument. The valuation topology
 of `E` is the metric topology of the recorded absolute value
@@ -31,18 +28,8 @@ its image, and divisible continuous functions admit a unique continuous quotient
 If the value at a point is a unit multiple of that power, the quotient is locally
 unit-valued and its inverse is continuous there.
 
-Source: Hemo–Richarz–Scholbach, proof of Theorem 6.12(2), finite `E` case,
-pp. 18–19 (auxiliary; not a blueprint node).
-
 The quotient is unique among all continuous `q'` with `π^e q' = f`, independently
 of the local unit clause.
-
-Proof: multiplication by a nonzero uniformizer power is a homeomorphism of the
-ambient valued field, and restriction to the valuation ring gives the first
-clause. Compose a continuous divisible function with the inverse restriction to
-obtain the unique quotient. Cancellation proves the value at the chosen point.
-The unit locus is open in the valuation topology, and inversion is continuous on
-the ambient field's nonzero locus, giving the final local assertion.
 -/
 theorem continuous_uniformizer_division
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

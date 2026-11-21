@@ -10,8 +10,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeOpenImmersion
 
 /-! # Naturality of normalized integral shriek components
 
-Source: Stacks Project, Tag 0F7J, and Bhatt--Scholze Definition 6.7.6
-(blueprint: lem-zl-field-shriek-integral-component-naturality).
+Source: Stacks Project, Tag 0F7J, and Bhatt--Scholze Definition 6.7.6.
 -/
 
 @[expose] public noncomputable section
@@ -34,19 +33,7 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))
 
 /-- Normalized integral composition components commute with an arbitrary input map.
-Source: Stacks 0F7J, naturality of the proper/open construction; Bhatt--Scholze
-Definition 6.7.6 (blueprint: lem-zl-field-shriek-integral-component-naturality).
-
-Proof: express both normalized components on a single compatible tower refining the
-three supplied compactifications. The open unit, restriction exchange, proper counit
-and their adjunct Gamma are natural in the input, as are the proper and open
-compositors. Each normalized refinement comparison is natural because transposition
-under its open adjunction turns its naturality square into naturality of the proper
-counit and open unit. Finally the Roos realization comparisons are natural on all
-morphisms, including derived roofs. Paste these squares, cancel the intermediate
-isomorphisms, and apply faithfulness of the integral constructible inclusion. The
-result is the displayed equation for the original arbitrary input morphism. No
-faithfulness assertion for finite derived evaluations is used. -/
+Source: Stacks 0F7J, naturality of the proper/open construction; Bhatt--Scholze Definition 6.7.6. -/
 theorem sfFieldShriekCompositionIntegral_component_naturality
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {K L : sfIntegralConstructibleCategory l E X}

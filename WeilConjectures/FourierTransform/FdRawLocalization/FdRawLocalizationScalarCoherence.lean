@@ -9,9 +9,6 @@ public import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizati
 import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizationScalarDescent
 
 /-! # Raw localization of the specified scalar comparisons
-
-Source: trace-definition coefficient-category sentence, extracted raw localization
-argument, steps 7--8 (blueprint: lem-fd-raw-localization-scalar-coherence).
 -/
 
 @[expose] public noncomputable section
@@ -32,32 +29,6 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- Exact semilinear raw localization of the specified inverse integral comparison,
 with its actual integral lift, normalized units and both four-field contractions.
-Source: trace-definition final coefficient-category sentence, extracted proof steps 7--8
-(blueprint: lem-fd-raw-localization-scalar-coherence).
-
-Proof:
-1. Ordinary and strict scalar extension are semilinear over the coefficient inclusion.
-The source uniformizer becomes invertible in the final field. Apply semilinear scalar
-localization to b inverse and b. The raw functors fix objects and their Hom maps are
-fixed on pure tensors, identifying the endpoints with the specified S, P and J. The
-components are exactly Q(b inverse); no replacement of the integral lift is made.
-The localized inverse equations and shift squares prove the exact natural isomorphism.
-2. Localize the assumed integral inverse cocycle at the final field. Localization
-preserves composition and both whiskerings, while the canonical integral associators
-localize to the specified rational ones. This gives the three-field equation.
-3. At equal fields the assumed integral unit equation identifies b inverse with
-inverse completeness after ordinary multiplication. Localizing gives the normalized
-identity value. Substituting an identity in either position of the cocycle and using
-the two scalar unit laws gives both unit equations; completeness is never set to identity.
-4. Expand D. For its first contraction use the cocycle for h,k, then naturality of
-j at the inner framework associator, then the cocycle for h.trans k,m. The result is
-J of the left framework contraction followed by j for the total extension.
-5. For the other contraction, naturality of the PBC associator moves j h across it.
-Use the cocycle for k,m at S h K, then for h,k.trans m. The result is J of the right
-framework contraction followed by the same total j.
-6. The framework pentagon equates the two contractions. The PBC pentagon equates
-their target contraction maps as well. No step uses a strict inclusion, so identity,
-partially repeated and fully repeated fields and all their unit degeneracies remain.
 -/
 theorem rawLocalizationScalarCoherence
     (_D : FiniteFieldDatum.{d}) (_hl : l ≠ _D.p)

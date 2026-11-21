@@ -40,9 +40,9 @@ variable {X : Scheme.{u}} {A : Type u'} [Category.{u + 1} A] [Abelian A]
 def puncturedOpens (U : X.Opens) (x : X) (hx : IsClosed ({x} : Set X)) : X.Opens :=
   U ⊓ ⟨{x}ᶜ, hx.isOpen_compl⟩
 
-/-- **Lisse on a punctured neighbourhood** (blueprint `lemma-tangent-cones-on-cover` (i), first
-step): on an irreducible noetherian scheme of dimension at most one, finitely many constructible
-sheaves are finite locally constant on a punctured open neighbourhood of a closed point `x`. -/
+/-- **Lisse on a punctured neighbourhood**: on an irreducible noetherian scheme of dimension at
+most one, finitely many constructible sheaves are finite locally constant on a punctured open
+neighbourhood of a closed point `x`. -/
 theorem exists_isFiniteLocallyConstantSheaf_punctured [IrreducibleSpace X] [NoetherianSpace X]
     (hX : topologicalKrullDim X ≤ 1) {x : X} (hx : IsClosed ({x} : Set X)) {ι : Type*}
     [Finite ι] (F : ι → Sheaf X.smallEtaleTopology A) [∀ i, IsConstructibleSheaf (F i)] :

@@ -10,9 +10,7 @@ import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 
 /-! # Transposition under the integral pullback Hom comparison
 
-Source: Stacks Project, Tag 0GMX; blueprint main-20261015
-theorem-poincare-duality-frobenius--2, Steps 8--11
-(blueprint: stage3-derived-automorphism-continuation-a-integral-transpose).
+Source: Stacks Project, Tag 0GMX.
 
 The transpose field of `podIntegralHomComparison_laws`, proved from parameter
 naturality of the closed data and naturality of the canonical integral
@@ -34,14 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
 /-- Transposition component of the integral pullback Hom compatibility.
-Source: Stacks 0GMX; node lem-pod-derived-automorphism-hom-evaluation, steps 8--11.
-Proof: put `t = transpose_Y f`. By definition `c_P = transpose_X (μ⁻¹ ≫ F ev_P)`,
-so parameter naturality turns `F t ≫ c_P` into the transpose of
-`T(F t, 1) ≫ μ⁻¹ ≫ F ev_P`. The canonical comparison `μ` is the component of a
-natural isomorphism (`derivedPullbackTensorIso`), so
-`T(F t, 1) ≫ μ⁻¹ = μ⁻¹ ≫ F(T(t, 1))`. Finally `T(t,1) ≫ ev_P` is the inverse
-transpose of `t`, that is `f`, by parameter naturality on `Y`.
-(blueprint: stage3-derived-automorphism-continuation-a-integral-transpose). -/
+Source: Stacks 0GMX. -/
 theorem podIntegralHomComparison_transpose :
     ∀ (L : sfIntegralConstructibleCategory l E Y)
       (P : (constructibleIntegralHomPairs l E Y).FullSubcategory)

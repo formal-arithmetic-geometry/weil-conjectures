@@ -426,24 +426,7 @@ private theorem diagonal_rank_locus_generic
       ((Matrix.rank_mul_le_right _ _).trans (hrank t.val))
 
 /-- Near a specified Smith diagonal, a continuous matrix of rank at most its number
-of nonzero diagonal entries is continuously equivalent to that same diagonal.
-
-Source: Hemo--Richarz--Scholbach, proof of Theorem 6.12(2), finite extension case,
-continuous integral division and pivot argument; agent rank-locus variant.
-(auxiliary; not a blueprint node)
-
-Proof: On an open congruence neighbourhood, divide the error in pivot column k by
-its nonzero diagonal entry to form B, extending by zero in the remaining columns.
-Cancellation in principal-ideal neighbourhood bases proves that these quotients are
-continuous. At the centre B=0, so M=1+B is invertible on an open neighbourhood;
-its inverse is continuous by the determinant-adjugate formula. The first r columns
-of G=M inverse times F are precisely those of D. Each extra column is divisible by
-every pivot. Divide its first r entries by the corresponding pivots to form q,
-supported at rows below r and columns at least r. Then q squared is zero, and
-R=1-q, with inverse 1+q, clears those entries. Any nonzero remaining entry would
-produce a nonzero diagonal minor of size r+1, contradicting the rank bound.
-Thus G R=D. Transport the open neighbourhood to T. The same formulas include
-zero rank, empty dimensions and unit pivots. -/
+of nonzero diagonal entries is continuously equivalent to that same diagonal. -/
 theorem continuous_integral_diagonal_rank_locus
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

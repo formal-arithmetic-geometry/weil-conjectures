@@ -10,8 +10,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 import all WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLocalization
 
 /-! # Descent of the fixed integral scalar comparison
-
-Source: trace-definition coefficient-category sentence, raw localization steps 1--3.
 -/
 
 @[expose] public noncomputable section
@@ -530,25 +528,7 @@ private theorem jTriangulated (family : RationalFamily l Ω T stage)
     (family.identity E) (family.shift_identity E) (stage E).exact
 
 
-/-- A component-normalized raw comparison preserves the prescribed shifts and exactness.
-Source: raw localization scalar-descent step 1, specified shift and exactness clause
-(blueprint: lem-fd-raw-normalized-comparison-shift).
-
-Proof: Precompose both endpoint functors with the integral localization. The stage
-comparison's tensor formula identifies Q followed by J with I followed by the PBC
-localization. Its shift_normalization identifies their shift data. The coefficient
-owner's transition shift is normalized at degree one by the localized integral shift;
-the zero and addition axioms extend this identification to every integer, including
-negative integers by inversion. The PBC scalar comparison has its specified localized
-shift. Thus the component formula identifies the prewhiskered comparison with the
-composite of these shift-compatible identifications and the localization of b inverse.
-The assumed shift square for b proves the square after precomposition; localization
-is essentially surjective, so it proves the square on every rational object. The
-inverse square follows by cancellation. Each J is the supplied exact stage comparison
-with exactly its specified shift, by family.identity and family.shift_identity.
-Both scalar transitions are exact with their prescribed shifts, so composition gives
-the two endpoint exactness assertions. No faithful localization, proper inclusion,
-nonzero object, or nonempty scheme is used. -/
+/-- A component-normalized raw comparison preserves the prescribed shifts and exactness. -/
 theorem rawNormalizedComparisonShift
     (b : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L)

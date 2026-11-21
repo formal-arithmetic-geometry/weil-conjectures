@@ -16,10 +16,7 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 
 /-! # Data for the natural finite pullback comparison of strict reduction towers
 
-Source: Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH
-(blueprint: def-a1-finite-pullback-comparison-data).
-The positive exponent n+1 is indexed by n : ℕ. The zigzag lives in strict diagrams
-before localization. Its two isomorphisms are fixed on tensor generators.
+Source: Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH.
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The canonical total-tensor generator, in the existing direct-sum totalization.
-Source: Stacks 03EK, 06YM
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 03EK, 06YM. -/
 def tensorGenerator (W : Scheme.{t}) (P Q : CochainComplex (Modules l E W) ℤ)
     (p q k : ℤ) (hpq : p + q = k) (U : W.ProEtᵒᵖ)
     (x : (P.X p).val.obj U) (y : (Q.X q).val.obj U) :
@@ -49,8 +45,7 @@ def tensorGenerator (W : Scheme.{t}) (P Q : CochainComplex (Modules l E W) ℤ)
     (completedIntegralCommRingSheafUnrestricted l E W) P Q p q k hpq U x y
 
 /-- The degree-zero generator of S_n[0], including restriction along pi_n.
-Source: Stacks 099N(5)
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 099N(5). -/
 def residueGenerator (W : Scheme.{t}) (n : ℕ) (U : W.ProEtᵒᵖ)
     (z : (integralCoefficientSheaf l E W n).obj.obj U) :
     (((CochainComplex.singleFunctor (Modules l E W) 0).obj
@@ -59,8 +54,7 @@ def residueGenerator (W : Scheme.{t}) (n : ℕ) (U : W.ProEtᵒᵖ)
     (PrincipalKoszulStrictReplacement.residue l E W n)).inv.val.app U) z
 
 /-- The cone's degree-zero free generator, fixed by the standard cone inclusion.
-Source: Stacks 0A0E
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 0A0E. -/
 def koszulZero (W : Scheme.{t}) (n : ℕ) :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E W) ⟶
       (PrincipalKoszulStrictReplacement.koszul l E W n).X 0 :=
@@ -71,8 +65,7 @@ def koszulZero (W : Scheme.{t}) (n : ℕ) :
           (PrincipalKoszulStrictReplacement.multiplication l E W n))).f 0
 
 /-- The cone's degree-minus-one free generator, with the usual Koszul sign convention.
-Source: Stacks 0A0E
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 0A0E. -/
 def koszulMinusOne (W : Scheme.{t}) (n : ℕ) :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E W) ⟶
       (PrincipalKoszulStrictReplacement.koszul l E W n).X (-1) :=
@@ -83,13 +76,11 @@ def koszulMinusOne (W : Scheme.{t}) (n : ℕ) :
           (PrincipalKoszulStrictReplacement.multiplication l E W n))).v 0 (-1) (by decide)
 
 /-- The two actual Koszul degrees, without excluding either summand.
-Source: Stacks 0A0E
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 0A0E. -/
 def koszulDegree (negative : Bool) : ℤ := if negative then -1 else 0
 
 /-- The actual Koszul free basis in either of its two degrees.
-Source: Stacks 0A0E
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 0A0E. -/
 def koszulBasis (W : Scheme.{t}) (n : ℕ) (negative : Bool) :
     SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E W) ⟶
       (PrincipalKoszulStrictReplacement.koszul l E W n).X (koszulDegree negative) :=
@@ -98,8 +89,7 @@ def koszulBasis (W : Scheme.{t}) (n : ℕ) (negative : Bool) :
   | false => koszulZero l E W n
 
 /-- The tensor-reduction tower P tensor S_n with actual quotient transitions.
-Source: Stacks 099N(5)
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 099N(5). -/
 def tensorReduction (W : Scheme.{t}) (P : CochainComplex (Modules l E W) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (Modules l E W) ℤ :=
   PrincipalKoszulStrictReplacement.targetTower l E W P
@@ -107,56 +97,48 @@ def tensorReduction (W : Scheme.{t}) (P : CochainComplex (Modules l E W) ℤ) :
 variable {X Y : Scheme.{t}} (g : X ⟶ Y)
 
 /-- Ordinary G on cochain complexes, with no exactness assumption.
-Source: Stacks 03D2
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 03D2. -/
 def G : CochainComplex (Modules l E Y) ℤ ⥤ CochainComplex (Modules l E X) ℤ :=
   (pull l E g).mapHomologicalComplex (.up ℤ)
 
 /-- The canonical generator of ordinary pullback, fixed by its adjunction unit.
-Source: Stacks 03D2
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 03D2. -/
 def generator (M : Modules l E Y) (V : Y.ProEt) (x : M.val.obj (op V)) :
     ((pull l E g).obj M).val.obj (op ((Scheme.proEtaleBaseChange g).obj V)) :=
   ((adjunction l E g).unit.app M).val.app (op V) x
 
 /-- B_g^0 is the existing strict finite pullback tower, transposed degreewise.
-Source: Stacks 099N(5), 06YY
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 099N(5), 06YY. -/
 def finiteComplex : CochainComplex (Modules l E Y) ℤ ⥤
     CochainComplex (Towers l E X) ℤ :=
   integralOperationsPullbackTowerFunctor l E g ⋙ transpose l E X
 
 /-- V_g composed with the specified derived strict reduction.
-Source: Stacks 099N(5)
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 099N(5). -/
 def pulledReduction : DerivedCategory (Modules l E Y) ⥤ DerivedCategory (Towers l E X) :=
   (reductionPair l E Y).functor ⋙ derivedPull l E g
 
 /-- The strict replacement H(P) with transitions id_P tensor (t,1).
-Source: Stacks 0A0E
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 0A0E. -/
 def H (W : Scheme.{t}) (P : CochainComplex (Modules l E W) ℤ) :
     ℕᵒᵖ ⥤ CochainComplex (Modules l E W) ℤ :=
   PrincipalKoszulStrictReplacement.sourceTower l E W P
 
 /-- The specified augmentation H(P) to P tensor S_n as a strict natural transformation.
-Source: Stacks 093M
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 093M. -/
 def augmentation (W : Scheme.{t}) (P : CochainComplex (Modules l E W) ℤ) :
     H l E W P ⟶ tensorReduction l E W P :=
   PrincipalKoszulStrictReplacement.comparison l E W P
 
 /-- Pull a diagram back term by term, retaining all maps of the diagram.
-Source: Stacks 099N(5)
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 099N(5). -/
 def diagramPull : (ℕᵒᵖ ⥤ CochainComplex (Modules l E Y) ℤ) ⥤
     (ℕᵒᵖ ⥤ CochainComplex (Modules l E X) ℤ) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj (G l E g)
 
 /-- Normalization of P tensor S_n to the recorded ordinary scalar extension.
 Both maps are balanced and the inverse inserts 1. This equation fixes all tensors.
-Source: Stacks 03EK
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 03EK. -/
 def ReductionNormalization (W : Scheme.{t}) (P : CochainComplex (Modules l E W) ℤ)
     (e : tensorReduction l E W P ≅ ((reductionComplex l E W).obj P).asFunctor) : Prop :=
   ∀ (n : ℕ) (i : ℤ) (U : W.ProEtᵒᵖ) (x : (P.X i).val.obj U)
@@ -171,8 +153,7 @@ def ReductionNormalization (W : Scheme.{t}) (P : CochainComplex (Modules l E W) 
 /-- Normalization of G(P tensor Q_n) to GP tensor Q'_n on both Koszul summands.
 The scalar b stays in the first factor. Thus the map uses the actual structural
 ring map, respects the unit, and has the inverse inserting 1.
-Source: Stacks 03EL, 07A4
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 03EL, 07A4. -/
 def KoszulNormalization (P : CochainComplex (Modules l E Y) ℤ)
     (e : (diagramPull l E g).obj (H l E Y P) ≅ H l E X ((G l E g).obj P)) : Prop :=
   ∀ (n : ℕ) (negative : Bool) (p k : ℤ)
@@ -198,8 +179,7 @@ def KoszulNormalization (P : CochainComplex (Modules l E Y) ℤ)
 /-- Balanced normalization of GP tensor S'_n to Res_n g_n^*(P tensor S_n).
 It sends (x tensor b) tensor a to x tensor pi_n(b)*a. The equation on a=1,
 and linearity over R', determine all a locally because pi_n is locally surjective.
-Source: Stacks 03EK, 03EL
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 03EK, 03EL. -/
 def BalancedNormalization (P : CochainComplex (Modules l E Y) ℤ)
     (e : tensorReduction l E X ((G l E g).obj P) ≅
       ((finiteComplex l E g).obj P).asFunctor) : Prop :=
@@ -223,40 +203,35 @@ def BalancedNormalization (P : CochainComplex (Modules l E Y) ℤ)
             (unrestrictedIntegralTensorSection l E Y n (P.X i) (op V) 1 x)))
 
 /-- The ordinary reduction at level n, retaining its completed coefficient action.
-Source: Stacks 06YY
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 06YY. -/
 def reductionLevelModules (W : Scheme.{t}) (n : ℕ) :=
   unrestrictedIntegralReductionFunctor l E W n ⋙
     SheafOfModules.restrictScalars
       (limit.π (integralCoefficientSheafSystem l E W) (op n))
 
 /-- The existing additive structure on ordinary reduction followed by restriction.
-Source: Stacks 06YY
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 06YY. -/
 instance reductionLevelModules_additive (W : Scheme.{t}) (n : ℕ) :
     (reductionLevelModules l E W n).Additive := by
   unfold reductionLevelModules
   infer_instance
 
 /-- The module functor whose termwise lift is the nth finite pullback level.
-Source: Stacks 03D2
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 03D2. -/
 def finiteLevelModules (n : ℕ) :=
   unrestrictedIntegralReductionFunctor l E Y n ⋙ integralOperationsLevelPullback l E g n ⋙
     SheafOfModules.restrictScalars
       (limit.π (integralCoefficientSheafSystem l E X) (op n))
 
 /-- Additivity inherited from reduction, finite inverse image and restriction.
-Source: Stacks 03D2
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 03D2. -/
 instance finiteLevelModules_additive (n : ℕ) : (finiteLevelModules l E g n).Additive := by
   have := integralOperationsLevelPullback_additive l E g n
   unfold finiteLevelModules
   infer_instance
 
 /-- A shift on the reduction complex is the standard termwise shift at every level.
-Source: Stacks 014E, 0FNH
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 014E, 0FNH. -/
 def ReductionShiftNormalization (W : Scheme.{t})
     (c : (reductionComplex l E W).CommShift ℤ) : Prop :=
   ∀ (P : CochainComplex (Modules l E W) ℤ) (r i : ℤ) (n : ℕ),
@@ -265,8 +240,7 @@ def ReductionShiftNormalization (W : Scheme.{t})
       (((reductionLevelModules l E W n).mapCochainComplexShiftIso r).hom.app P).f i
 
 /-- A shift on B_g^0 is the exact finite termwise shift, without a free automorphism.
-Source: Stacks 014E, 0FNH
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 014E, 0FNH. -/
 def FiniteShiftNormalization (c : (finiteComplex l E g).CommShift ℤ) : Prop :=
   ∀ (P : CochainComplex (Modules l E Y) ℤ) (r i : ℤ) (n : ℕ),
     (((Functor.commShiftIso (finiteComplex l E g) (self := c) r).hom.app P).f i).app
@@ -275,8 +249,7 @@ def FiniteShiftNormalization (c : (finiteComplex l E g).CommShift ℤ) : Prop :=
 
 /-- The canonical derived shift is fixed by its counit on actual representatives.
 This equation makes sense even where that counit is not invertible.
-Source: Stacks 06XN, 05SE
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 06XN, 05SE. -/
 def ShiftDescent {A : Type a} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     {D : Type a'} [Category.{v'} D] [Abelian D] [HasDerivedCategory.{w'} D]
     (F : CochainComplex A ℤ ⥤ CochainComplex D ℤ)
@@ -292,8 +265,7 @@ def ShiftDescent {A : Type a} [Category.{v} A] [Abelian A] [HasDerivedCategory.{
         (DerivedCategory.Q.commShiftIso r).hom.app (F.obj P)
 
 /-- The composite reduction/tower-pullback shift s^V, with both factors specified.
-Source: Stacks 05SE, 06XN
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 05SE, 06XN. -/
 def pulledShift (cR : (reductionPair l E Y).functor.CommShift ℤ)
     (cV : (derivedPull l E g).CommShift ℤ) (r : ℤ)
     (K : DerivedCategory (Modules l E Y)) :
@@ -309,8 +281,7 @@ set_option genInjectivity false
 /-- All clauses of the strict comparison, with its prescribed maps and computation.
 The natural isomorphism is on entire derived categories; naturality therefore
 includes roofs and inverse quasi-isomorphisms, with no choice of representatives.
-Source: Stacks 099N(5), 0G7E, 06XN, 03EL and 0FNH
-(blueprint: def-a1-finite-pullback-comparison-data). -/
+Source: Stacks 099N(5), 0G7E, 06XN, 03EL and 0FNH. -/
 structure Comparison where
   B : DerivedPair l E Y X (finiteComplex l E g)
   b : pulledReduction l E g ≅ B.functor

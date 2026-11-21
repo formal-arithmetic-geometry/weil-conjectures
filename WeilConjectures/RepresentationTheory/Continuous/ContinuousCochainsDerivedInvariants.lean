@@ -20,8 +20,7 @@ import WeilConjectures.RepresentationTheory.Continuous.ContinuousCochainsInvaria
 /-!
 # Continuous inhomogeneous cochains compute derived invariants
 
-Source: Stacks Project, Etale Cohomology, Section 59.58, Tag 0DVG
-(blueprint: lem-exc-cochains-derived-invariants).
+Source: Stacks Project, Etale Cohomology, Section 59.58, Tag 0DVG.
 -/
 
 @[expose] public section
@@ -86,23 +85,22 @@ differential; thus it is the usual complex up to natural termwise linear equival
 The term of the sum indexed by `Fin.last n` omits the last argument; the other terms
 multiply adjacent arguments. In degree zero the formula is `g • m - m`.
 
-Proof, following the DAG: degreewise exactness
-(`lem-exc-continuous-cochains-short-exact`), the long exact homology sequence
-(`lem-weil-pbc-complex-ses-homology-long-exact`) and its naturality
-(`lem-weil-pbc-complex-ses-long-exact-naturality`) give a cohomological delta-functor
-(`def-weil-pbc-delta-functor`). Its zeroth term is invariants; invariants are additive
+Proof, following the DAG: degreewise exactness,
+the long exact homology sequence
+ and its naturality
+ give a cohomological delta-functor.
+Its zeroth term is invariants; invariants are additive
 and left exact by `lem-exc-discrete-modules-abelian`. The embedding into continuous
-coinduction (`lem-exc-coinduced-discrete-embedding`) and its positive-degree acyclicity
-(`lem-exc-coinduced-continuous-acyclic`) efface every positive-degree cochain cohomology.
+coinduction and its positive-degree acyclicity
+ efface every positive-degree cochain cohomology.
 Apply `lem-weil-pbc-effaceable-delta-functor-universal`. Enough injectives and
 `lem-weil-pbc-right-derived-universal-delta-functor` give universality of derived
 invariants. The two universal delta-functors extend the identity in degree zero in
 both directions; uniqueness makes their composites identities, giving natural
 isomorphisms in every degree.
 
-Source: Stacks Project, Etale Cohomology, Section 59.58, Tag 0DVG, displayed
-inhomogeneous differential and final profinite comparison
-(blueprint: lem-exc-cochains-derived-invariants). -/
+Source: Stacks Project, Etale Cohomology, Section 59.58, Tag 0DVG, displayed inhomogeneous
+differential and final profinite comparison. -/
 theorem continuousCochains_derived_invariants
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

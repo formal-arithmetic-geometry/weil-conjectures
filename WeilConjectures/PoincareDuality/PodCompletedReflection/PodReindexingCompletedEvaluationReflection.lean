@@ -26,9 +26,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexingDeriv
 
 /-! # Completed evaluation by reflection and its normalized reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 2 and 4;
-Stacks Tags 099B, 0A0E and 099M
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection).
+Source: Stacks Tags 099B, 0A0E and 099M.
 -/
 
 @[expose] public noncomputable section
@@ -47,30 +45,25 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The recorded ambient completed-ring category, without a constructibility restriction.
-Source: Stacks 08J7
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 08J7. -/
 abbrev D (W : Scheme.{u}) := podReindexingDerived l E W none
 
 /-- The existing ordinary closed calculus, with the K-injective internal Hom.
-Source: Stacks 08J9
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 08J9. -/
 abbrev closed (W : Scheme.{u}) := (podReindexCalculus l E W).integralClosed
 
 /-- Its existing K-flat total-tensor normalization.
-Source: Stacks 07A4
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 07A4. -/
 abbrev models (W : Scheme.{u}) := (podReindexCalculus l E W).integralTensorModel
 
 /-- The recorded ambient internal Hom, at the completed coefficient stage.
-Source: Stacks 08J7
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 08J7. -/
 abbrev hom (W : Scheme.{u}) (M N : D l E W) :=
   (podReindexingDerivedHom l E W none).obj (op M, N)
 
 /-- The actual ordinary-to-quotient-tower tensor unit, written using the published
 reduction adjunction, its tensor comparison and its normalized Roos realization.
-Source: Stacks 099M; blueprint dual-Tate compatibility, Step 2
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 099M. -/
 abbrev unit (W : Scheme.{u}) (M L : D l E W) :
     (closed l E W).tensor.obj (M, L) ⟶ (integralCompletedTensor l E W).obj (M, L) :=
   (podReindexCalculus l E W).adjunction.unit.app _ ≫
@@ -80,8 +73,7 @@ abbrev unit (W : Scheme.{u}) (M L : D l E W) :
 
 /-- Ordinary M-first currying uses the recorded signed braiding, followed by the
 ordinary Hom-first adjunction. Thus the Koszul symmetry is fixed, rather than chosen.
-Source: Stacks 08J9; blueprint dual-Tate compatibility, Step 2
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 08J9. -/
 def ordinaryTranspose (W : Scheme.{u}) (M L N : D l E W) :
     ((closed l E W).tensor.obj (M, L) ⟶ N) ≃ (L ⟶ hom l E W M N) :=
   ((pullbackTensorBraiding (ProEt.topology W)
@@ -89,14 +81,7 @@ def ordinaryTranspose (W : Scheme.{u}) (M L N : D l E W) :
     ((closed l E W).transpose L M N)
 
 /-- The two projection-normalized inverse-image presentations agree as functors.
-Source: blueprint dual-Tate compatibility, Steps 1--2; Stacks 03CO
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection).
-
-Proof: the finite coefficient maps in the Hom resolution model are the constant
-maps. Every completed projection therefore agrees with isoReductionCompletedMap.
-Uniqueness of the inverse-limit map identifies the ring maps. Substitution in
-isoSectionwiseModuleInverseImage identifies the exact module functors, and their
-identical termwise localizations give the displayed equality. -/
+Source: Stacks 03CO. -/
 theorem reindex_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g := by
   have hπ (W : Scheme.{u}) (n : ℕ) :
@@ -164,8 +149,7 @@ private theorem adjunction_unit_bijective
 
 /-- The first bijection is precomposition with precisely the published tensor unit.
 No assumption says the ordinary tensor is complete or M is perfect.
-Source: Stacks 099B, 0A0E and 099M; blueprint dual-Tate compatibility, Step 2
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection).
+Source: Stacks 099B, 0A0E and 099M.
 
 Proof (node Step 1): the strict balanced comparison identifies the quotient tower of
 ordinary tensor with the two-reduction tensor tower, including the augmentation.
@@ -209,15 +193,14 @@ theorem precompose_bijective (W : Scheme.{u})
   rfl
 
 /-- The canonical first Hom equivalence; its inverse is the unique reflector extension.
-Source: Stacks 099B (blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 099B. -/
 def reflectorEquiv (W : Scheme.{u}) (M L N : sfIntegralConstructibleCategory l E W) :
     ((integralCompletedTensor l E W).obj (M.obj, L.obj) ⟶ N.obj) ≃
       ((closed l E W).tensor.obj (M.obj, L.obj) ⟶ N.obj) :=
   Equiv.ofBijective _ (precompose_bijective l E W M L N)
 
 /-- The composite of the two specified bijections, in the node's M-first order.
-Source: Stacks 099B, 08J9
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 099B, 08J9. -/
 def transpose (W : Scheme.{u}) (M L N : sfIntegralConstructibleCategory l E W) :
     ((integralCompletedTensor l E W).obj (M.obj, L.obj) ⟶ N.obj) ≃
       (L.obj ⟶ hom l E W M.obj N.obj) :=
@@ -225,29 +208,26 @@ def transpose (W : Scheme.{u}) (M L N : sfIntegralConstructibleCategory l E W) :
 
 /-- Completed evaluation is the unique completion-unit extension of ordinary evaluation.
 The Hom-constructibility hypothesis is used only to form its constructible tensor input.
-Source: blueprint dual-Tate compatibility, Step 2; Stacks 099B
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 099B. -/
 def evaluation (W : Scheme.{u}) (M N : sfIntegralConstructibleCategory l E W)
     (hH : sfIntegralConstructible l E W (hom l E W M.obj N.obj)) :
     (integralCompletedTensor l E W).obj (M.obj, hom l E W M.obj N.obj) ⟶ N.obj :=
   (transpose l E W M ⟨hom l E W M.obj N.obj, hH⟩ N).symm (𝟙 _)
 
 /-- The projection-fixed identification of the two ordinary inverse-image interfaces.
-Source: Stacks 03CO (blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 03CO. -/
 def reindexIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     podReindexingDerivedFunctor l E g none ≅ podOrdinaryReindex l E g :=
   eqToIso (reindex_eq l E g)
 
 /-- The normalized ordinary comparison data of the recorded evaluation lemma.
-Source: Stacks 0GMX (blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 0GMX. -/
 abbrev Comparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :=
   PodReindexingCoherence.Comparison l E g none
     (closed l E X) (closed l E Y) (models l E X) (models l E Y)
 
 /-- The ambient c⁰, transported only through equality of the projection-fixed functors.
-It has no constructibility hypothesis on its two unbounded inputs.
-Source: blueprint dual-Tate compatibility, Steps 1 and 4
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+It has no constructibility hypothesis on its two unbounded inputs. -/
 def homComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (c : Comparison l E g) (M N : D l E Y) :
     (podOrdinaryReindex l E g).obj (hom l E Y M N) ≅
@@ -258,7 +238,7 @@ def homComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
       (((reindexIso l E g).app M).symm.op.prod ((reindexIso l E g).app N))
 
 /-- The same projection-fixed transport of the ordinary tensor comparison μ⁰.
-Source: Stacks 07A4 (blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 07A4. -/
 def tensorComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (c : Comparison l E g) (M L : D l E Y) :
     (podOrdinaryReindex l E g).obj ((closed l E Y).tensor.obj (M, L)) ≅
@@ -363,8 +343,7 @@ private theorem ordinary_naturality (W : Scheme.{u})
 
 /-- Naturality of both bijections, in the parameter and both internal-Hom variables,
 and unique extension of evaluation along the actual completion unit.
-Source: Stacks 099B, 08J9; blueprint dual-Tate compatibility, Step 2
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection).
+Source: Stacks 099B, 08J9.
 
 Proof (node Steps 1--2 and 6): naturality of the reduction unit and tensor comparison
 makes precomposition natural. Compose with ordinary signed currying. Its naturality
@@ -421,8 +400,6 @@ theorem reflection_laws (W : Scheme.{u}) :
       (h.trans he.symm)
 
 /-- The ambient isomorphism restricts to the actual constructible integral category.
-Source: blueprint dual-Tate compatibility, Step 4
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection).
 
 Proof (node Step 3): T.constructible puts FM, FN and FHom(M,N) in the integral
 subcategory with their complete uniform finite reductions. The ambient Hom
@@ -443,9 +420,7 @@ theorem constructible_hom {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (homComparison l E g c M.obj N.obj)
     (T.constructible ⟨hom l E Y M.obj N.obj, hH⟩)
 
-/-- The restricted c⁰ has exactly the ambient isomorphism as its underlying arrow.
-Source: blueprint dual-Tate compatibility, Step 4
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+/-- The restricted c⁰ has exactly the ambient isomorphism as its underlying arrow. -/
 def restrictedComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -459,8 +434,7 @@ def restrictedComparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   ObjectProperty.isoMk _ (homComparison l E g c M.obj N.obj)
 
 /-- The completed evaluation and transpose equations for these very normalized maps.
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 099B
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection). -/
+Source: Stacks 099B. -/
 def ReindexingLaws {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -534,8 +508,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 /-- Completed evaluation, its tensor-Hom transpose, and the exact ordinary equation
 obtained by precomposition with the normalized tensor unit.
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 099B, 0A0E
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection).
+Source: Stacks 099B, 0A0E.
 
 Proof (node Steps 4--5): the normalized tensor-augmentation square gives the first
 law. Its inverse form identifies unit_X followed by the inverse completed tensor
@@ -638,8 +611,7 @@ end
 
 /-- Both signed Hom shifts are the existing ordinary shifts. Their completion transport
 uses the same signed tensor maps and both actual Roos coordinates.
-Source: blueprint dual-Tate compatibility, Steps 4--5; Stacks 011G, 0A8X, 099B
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection).
+Source: Stacks 011G, 0A8X, 099B.
 
 Proof (node Step 6): on Hom degree r the double shift reindexes its source by a
 and multiplies by (-1)^(a*r), exactly as in the ordinary evaluation lemma.
@@ -786,18 +758,7 @@ end CoherenceTransport
 
 /-- A single normalized completion family supplies the stated reflection transport
 for every scheme isomorphism, with no additional geometric or perfection hypotheses.
-Source: blueprint dual-Tate compatibility, Steps 2, 4--5; Stacks 099B, 0A0E, 099M
-(blueprint: lem-pod-reindexing-completed-evaluation-reflection).
-
-Proof: apply the unit/tensor reindexing theorem once to obtain its coherent family.
-At every isomorphism use the ordinary evaluation lemma with the recorded closed
-calculus and K-flat models to obtain c⁰. Node Steps 1--2 give precompose_bijective
-and reflection_laws, Step 3 gives constructible_hom and restrictedComparison,
-Steps 4--5 give reindexing_laws, and Step 6 gives signed_shifts and
-identity_composition. All maps are the original maps fixed by quotient projections,
-Hom-product projections and tensor generators; fullness only restricts them.
-Consequently the same completion-unit extensions preserve both normalized Roos
-coordinates. Empty schemes, zero objects and arbitrary signed shifts are included. -/
+Source: Stacks 099B, 0A0E, 099M. -/
 theorem podReindexingCompletedEvaluationReflection :
     ∃ A : PodReindexFamily l E,
       A.Relabelling l E ∧ A.Identity l E ∧ A.Composition l E ∧

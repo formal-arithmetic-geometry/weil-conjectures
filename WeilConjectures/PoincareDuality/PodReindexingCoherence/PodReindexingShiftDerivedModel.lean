@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingDeriv
 
 /-! # Representative model part of the derived signed shift square
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: lem-pod-reindexing-signed-shifts).
+Source: Stacks 0A8X, 08JA.
 
 This module isolates the equation on localized representatives.  The remaining
 localization descent is recorded separately.
@@ -84,10 +83,7 @@ private theorem paste_shift_squares {C D : Type*} [Category C] [Category D]
 set_option linter.unusedVariables false in
 /-- The signed shift equation on K-injective localized representatives.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-Proof: expand the chosen K-injective representatives in `Comparison.derived_model`,
-transport the signed reindexing through the chain shift isomorphisms, and use the
-fixed product projections to identify both composites degree by degree. -/
+Source: Stacks 0A8X, 08JA. -/
 theorem derived_shift_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

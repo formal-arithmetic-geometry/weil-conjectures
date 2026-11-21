@@ -306,7 +306,7 @@ theorem tateFrobeniusScalar_specGeometricFrobenius_mul_natCard :
 theorem isUnit_natCard_of_hasInvertibleExponent : IsUnit (Nat.card k : Λ) :=
   isUnit_iff_exists_inv'.2 ⟨_, tateFrobeniusScalar_specGeometricFrobenius_mul_natCard Λ k⟩
 
-/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum.
+/-- Strict Weil data and the Tate datum.
 
 The Tate datum `τ_r : Lg^* Λ(r) ≅ Λ(r)` (`AlgebraicGeometry.Etale.tateWeilDatum`) of the Tate
 twist, for `g` the geometric Frobenius of `Spec k̄` over the finite field `k` with `q` elements, is

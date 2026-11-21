@@ -40,7 +40,7 @@ false, already for `Λ = ℤ/p` over a base of characteristic `p`. The remaining
 ## Implementation notes
 
 The Tate twist is the one place where a genuinely missing object had to be named. Its
-blueprint home is the framework chapter (`def:coefficient-twists`), not this block, and the
+blueprint home is the framework chapter, not this block, and the
 sheaf of roots of unity `μ_n` it is built from belongs to the Kummer block. It is therefore
 taken as a *parameter*: `AlgebraicGeometry.Etale.HasTateTwist` bundles the twisting objects
 `Λ_X(m)` with the identifications `Λ_X(0) ≅ Λ_X`, `Λ_X(m) ⊗ Λ_X(m') ≅ Λ_X(m + m')` and
@@ -101,7 +101,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Purity conventions and the rank-one datum
 
 A *Tate twist datum* for the coefficient ring `Λ`: for every scheme `X` and every `m : ℤ` a
 ⊗-invertible twisting object `Λ_X(m) ∈ D(X_ét, Λ)`, together with identifications
@@ -155,7 +155,7 @@ class HasTateTwist where
   boundedConstructibleFiniteTor_twistObject (X : Scheme.{u}) [HasInvertibleExponent Λ X]
       (m : ℤ) :
     DerivedCategory.boundedConstructibleFiniteTor Λ X (twistObject X m)
-  /-- Every twisting object is locally constant of rank one (`definition-tate-twists`):
+  /-- Every twisting object is locally constant of rank one:
   `Λ_X(m)` is a locally constant sheaf `L` of `Λ`-modules placed in degree zero, every stalk of
   which at a geometric point is free of rank one. In the concrete model
   `L = (μ_{ℓ^N} ⊗ Λ)^{⊗ m}`, respectively its `Λ`-dual for `m < 0`. -/
@@ -262,7 +262,7 @@ theorem boundedConstructibleFiniteTor_tateObject [HasInvertibleExponent Λ X] (m
     DerivedCategory.boundedConstructibleFiniteTor Λ X (tateObject Λ X m) :=
   HasTateTwist.boundedConstructibleFiniteTor_twistObject X m
 
-/-- Blueprint `def-pur-conventions`: Purity coefficient conventions
+/-- Purity coefficient conventions
 
 The Tate twist `(m) : D(X_ét, Λ) ⥤ D(X_ét, Λ)`, `K(m) = K ⊗^L_{Λ_X} Λ_X(m)`, tensoring with the
 twisting object `Λ_X(m)`.
@@ -349,7 +349,7 @@ noncomputable def compactificationConstantComplexIso (f : X ⟶ Y) [HasCompactif
 
 variable (Λ X)
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
+/-- Section invariant
 
 Part of blueprint `sk-def-purity-conv`. The *section invariant*
 `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` of a morphism `g : V ⟶ B` together with a section

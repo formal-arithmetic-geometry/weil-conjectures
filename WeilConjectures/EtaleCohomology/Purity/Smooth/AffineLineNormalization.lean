@@ -275,7 +275,7 @@ noncomputable def kummerClassAffineLineDirectImage :
   ShiftedHom.map (kummerClassAdjoint Λ (AffineSpace.coord B (ULift.up 0)))
     (R((𝔸(ULift.{u} (Fin 1); B) ↘ B)_*[ModuleCat.{u + 1} Λ]))
 
-/-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
+/-- Rank-one orientation: the fundamental class of the zero section
 
 *The proof from `sk-prop-a1-kummer`.* For a rank-one datum, suppose that, with
 `p : 𝔸¹_B ⟶ B`, `j : 𝔾_{m,B} ⟶ 𝔸¹_B` and `π = p ∘ j`,

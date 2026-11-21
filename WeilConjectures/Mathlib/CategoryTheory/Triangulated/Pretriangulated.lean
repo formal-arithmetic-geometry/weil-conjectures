@@ -265,8 +265,7 @@ iff its rotation is; (TR3) a commutative square between the bases of two disting
 triangles extends to a morphism of triangles. A triangulated category
 (`CategoryTheory.IsTriangulated`) satisfies moreover the octahedral axiom, and an exact functor
 is a functor commuting with the shift and preserving distinguished triangles
-(`CategoryTheory.Functor.IsTriangulated`, see `Functor.isTriangulated_iff_map_distinguished`).
-(blueprint: `def-weil-triangulated-category`) -/
+(`CategoryTheory.Functor.IsTriangulated`, see `Functor.isTriangulated_iff_map_distinguished`). -/
 theorem tr1_tr2_tr3 :
     (∀ T₁ T₂ : Triangle C, (T₁ ≅ T₂) → T₂ ∈ distTriang C → T₁ ∈ distTriang C) ∧
     (∀ X : C, contractibleTriangle X ∈ distTriang C) ∧

@@ -98,9 +98,7 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Constant.ProEtaleConstantRingM
 
 /-! # Common strict towers for the two completed pullbacks
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence; Stacks 099N(2),(5) and 0941
-(blueprint: lem-fd-pullback-common-strict-tower-models).
+Source: Stacks 099N(2),(5) and 0941.
 
 The helper definitions retain the actual reduction tower, derived counits and
 coefficient identity. `FdCommonStrictTowerModels` packages its strict comparisons,
@@ -127,8 +125,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The actual PBC strict quotient tower on the fixed coefficient presentation.
-Source: Stacks 099N(5), trace-definition final sentence
-(blueprint: lem-fd-pullback-common-strict-tower-models). -/
+Source: Stacks 099N(5), trace-definition final sentence. -/
 def fdCommonStrictTower {U T : Scheme.{u}} (h : U ⟶ T) :
     CochainComplex (integralTowerModules l E T) ℤ ⥤
       CochainComplex (pbcTowers U (pbcAdicCompletion U (pbcIntegralDatum l E))) ℤ :=
@@ -137,8 +134,7 @@ def fdCommonStrictTower {U T : Scheme.{u}} (h : U ⟶ T) :
       (completedTowerModulePullback h (pbcIntegralDatum l E)).mapHomologicalComplex (.up ℤ)
 
 /-- The fixed endomorphism of the framework strict quotient tower.
-Source: Stacks 099N(5), trace-definition final sentence
-(blueprint: lem-fd-pullback-common-strict-tower-models). -/
+Source: Stacks 099N(5), trace-definition final sentence. -/
 def fdCommonFrameworkEnd {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) :
     (∏ᶜ (fun n ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P).obj (op n))) ⟶
@@ -148,8 +144,7 @@ def fdCommonFrameworkEnd {U T : Scheme.{u}} (h : U ⟶ T)
     (integralOperationsTowerStep ((integralOperationsPullbackTowerFunctor l E h).obj P))
 
 /-- The fixed unshifted quotient projection of the framework cone.
-Source: Stacks 099N(5), trace-definition final sentence
-(blueprint: lem-fd-pullback-common-strict-tower-models). -/
+Source: Stacks 099N(5), trace-definition final sentence. -/
 def fdCommonFrameworkProjection {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) (i : ℤ) (n : ℕ) :
     ((integralOperationsPullbackComplexFunctor l E h).obj P).X i ⟶
@@ -158,8 +153,7 @@ def fdCommonFrameworkProjection {U T : Scheme.{u}} (h : U ⟶ T)
     (Pi.π (fun k ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P).obj (op k)) n).f i
 
 /-- The shifted quotient projection of the framework cone.
-Source: Stacks 099N(5), trace-definition final sentence
-(blueprint: lem-fd-pullback-common-strict-tower-models). -/
+Source: Stacks 099N(5), trace-definition final sentence. -/
 def fdCommonFrameworkShiftedProjection {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) (p : ℤ) (n : ℕ) :
     ((integralOperationsPullbackComplexFunctor l E h).obj P).X (p + 1) ⟶
@@ -169,8 +163,7 @@ def fdCommonFrameworkShiftedProjection {U T : Scheme.{u}} (h : U ⟶ T)
       (Pi.π (fun k ↦ ((integralOperationsPullbackTowerFunctor l E h).obj P).obj (op k)) n).f p
 
 /-- The canonical unit generator in the actual strict quotient tower.
-Source: Stacks 099N(5), trace-definition final sentence
-(blueprint: lem-fd-pullback-common-strict-tower-models). -/
+Source: Stacks 099N(5), trace-definition final sentence. -/
 def fdCommonStrictGenerator {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) (i : ℤ) (n : ℕ) (V : T.ProEt)
     (x : ((fdCoefficientTransport l E T).obj (P.X i)).val.obj (op V)) :

@@ -15,8 +15,7 @@ The reference strict tower comparison of the coherent system tensor and the fini
 tower sends the restricted generator of two unit-inserted reduced sections to the total
 tensor of the unit-inserted sections.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 03EK, 07A4, 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+Source: Stacks 03EK, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section

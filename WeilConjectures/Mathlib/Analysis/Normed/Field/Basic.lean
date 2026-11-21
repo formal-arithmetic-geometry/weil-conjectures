@@ -18,7 +18,7 @@ This generalizes `Complex.norm_eq_one_of_pow_eq_one`.
 
 variable {α : Type*} [NormedDivisionRing α]
 
-/-- Blueprint `corollary-rank-one-weights`: Modulus of a root of unity.
+/-- Modulus of a root of unity.
 
 A root of unity in a normed division ring has norm `1`: `‖ζ‖ ^ n = ‖ζ ^ n‖ = 1`. Applied to
 `ℚ̄_ℓ` and to the image of `ζ` under a field embedding `ι : ℚ̄_ℓ → ℂ` this gives both halves of

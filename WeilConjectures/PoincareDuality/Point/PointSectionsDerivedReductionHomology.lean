@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Point.PointSectionsDerivedReductio
 import WeilConjectures.PoincareDuality.Point.PointSectionsDerivedReductionIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! Intermediate proof components for point sections derived reduction.
-(blueprint: lem-pod-point-sections-derived-reduction) -/
+/-! Intermediate proof components for point sections derived reduction. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,9 +24,7 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The homology and exact-sections component of integral reduction.
-Source: Stacks Tags 0946, 010N and 06YY; blueprint `lem-pod-point-sections-derived-reduction`.
-Exact point sections applied to the comparison give this component in every degree.
-(blueprint: lem-pod-point-sections-derived-reduction-homology)
+Source: Stacks Tags 0946, 010N and 06YY.
 -/
 theorem point_sections_derived_reduction_homology (_hl : l ≠ D.p) (n : ℕ) :
     ∀ r : ℤ, Nonempty

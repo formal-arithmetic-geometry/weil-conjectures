@@ -142,7 +142,7 @@ theorem exists_frobeniusOperator_tateWeilDatum_eq_smul (r : ℤ) :
 Frobenius operator of `τ_r : Lh^* Λ(r) ≅ Λ(r)` on `H⁰(Spec k, Λ(r)) = Hom(Λ, Λ(r))`, a free
 `Λ`-module of rank one, is the multiplication by `c_r`
 (`AlgebraicGeometry.Etale.frobeniusOperator_tateWeilDatum_eq_smul`). For the geometric Frobenius
-of `k̄` over `𝔽_q` it is `q^{-r}` (`prose-10-21`). -/
+of `k̄` over `𝔽_q` it is `q^{-r}`. -/
 noncomputable def tateFrobeniusScalar (r : ℤ) : Λ :=
   (exists_frobeniusOperator_tateWeilDatum_eq_smul Λ h r).choose
 
@@ -244,10 +244,9 @@ theorem tateFrobeniusScalar_eq_zpow (r : ℤ) :
     rw [zpow_sub_one, Units.val_mul, h₁, mul_assoc, ← Units.val_mul, mul_inv_cancel,
       Units.val_one, mul_one]
 
-/-- Blueprint `definition-weil-structure--1` (the formal part of the twist normalization of
-`prose-10-21`): over a separably closed field, the Frobenius operator
-of the Tate datum `τ_r` on `H⁰(Spec k, Λ(r))` is the multiplication by `c_1 ^ r`, for the unit
-`c_1` by which it acts on `Λ(1)`. -/
+/-- Over a separably closed field, the Frobenius operator of the Tate datum `τ_r` on
+`H⁰(Spec k, Λ(r))` is the multiplication by `c_1 ^ r`, for the unit `c_1` by which it acts on
+`Λ(1)`. -/
 theorem frobeniusOperator_tateWeilDatum_eq_zpow_smul (r : ℤ)
     (x : 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ tateObject Λ _ r) :
     frobeniusOperator h (tateWeilDatum Λ h r).hom x =

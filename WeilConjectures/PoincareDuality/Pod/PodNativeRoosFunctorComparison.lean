@@ -34,10 +34,7 @@ universe a b t u v w s
 variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 
 /-- The explicit cofiber and cone constructions give the same strict Roos map.
-Source: Stacks 0941 and the two-coordinate Roos calculation.
-(blueprint: lem-pod-native-roos-functor-comparison-s8).
-Proof: both shifted cone maps induce the componentwise product map on each
-coordinate. Extensionality for maps out of the cofiber proves equality. -/
+Source: Stacks 0941 and the two-coordinate Roos calculation. -/
 theorem podNativeRoosMap_eq
     {N N' : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (f : N ⟶ N') :
     integralOperationsRoosFunctor.map
@@ -54,8 +51,7 @@ theorem podNativeRoosMap_eq
       (roosPmap f) (roosPmap f) (roosU_natural f))
 
 /-- Identity on Roos objects, identifying the two induced strict maps.
-Source: Stacks 0941, the explicit shifted cone model
-(blueprint: lem-pod-native-roos-functor-comparison-s8). -/
+Source: Stacks 0941, the explicit shifted cone model. -/
 def podNativeRoosIso : HomologicalComplex.complexOfFunctorsToFunctorToComplex ⋙
     integralOperationsRoosFunctor (A := A) ≅ roosF :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
@@ -185,8 +181,7 @@ private theorem roosShift_eq (S S' : PodSignedRoosShift A)
 /-- The additive structure already captured by canonical derived shifts.
 This explicit choice avoids expanding module-sheaf operations when specializing
 cochain shift formulas. It is registered only locally in the proof modules.
-Source: Mathlib's abelian instance for module sheaves
-(blueprint: lem-pod-native-roos-functor-comparison-s8). -/
+Source: Mathlib's abelian instance for module sheaves. -/
 abbrev podSheafCanonicalPreadditive
     {T : Type v} [Category.{w} T] {J : GrothendieckTopology T}
     (M : Sheaf J RingCat.{s})

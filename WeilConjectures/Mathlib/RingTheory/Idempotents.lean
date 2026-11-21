@@ -44,7 +44,7 @@ lemma IsIdempotentElem.eq_zero_or_one_of_isLocalRing {R : Type*} [CommRing R]
 
 /-- Idempotents are determined modulo the Jacobson radical: two idempotents whose difference
 lies in the Jacobson radical are equal, since `e (1 - e')` and `e' (1 - e)` are idempotents in
-the Jacobson radical. (blueprint: `lem-weil-pbc-idempotents-determined-modulo-radical`) -/
+the Jacobson radical. -/
 lemma IsIdempotentElem.eq_of_sub_mem_jacobson_bot {R : Type*} [CommRing R] {e e' : R}
     (he : IsIdempotentElem e) (he' : IsIdempotentElem e')
     (h : e - e' ∈ Ideal.jacobson (⊥ : Ideal R)) : e = e' := by

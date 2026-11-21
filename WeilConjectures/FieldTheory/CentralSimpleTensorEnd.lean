@@ -18,7 +18,6 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 # The enveloping algebra of a central simple algebra
 
 Source: Stacks Project, Tag 074I, Lemma 11.4.10.
-(blueprint: lem-sc-central-simple-tensor-end).
 -/
 
 @[expose] public section
@@ -30,15 +29,7 @@ namespace Field
 /-- Left and right multiplication identify the enveloping algebra of a finite-dimensional
 central simple algebra with its linear endomorphisms.
 
-Proof: the opposite algebra is again central simple, and the tensor product of two
-finite-dimensional central simple algebras is simple (Stacks Tags 074G and 074I).
-The unital algebra homomorphism `a ⊗ op(b) ↦ (v ↦ a * v * b)` is therefore injective:
-its kernel is a two-sided ideal, and cannot be the whole ring because it preserves one.
-Both the tensor product and the endomorphism algebra have dimension `(dim_K A)^2`.
-An injective linear map between finite-dimensional spaces of equal dimension is
-surjective. This proves bijectivity of the explicitly constructed map.
-Source: Stacks Project, Tag 074I, Lemma 11.4.10.
-(blueprint: lem-sc-central-simple-tensor-end). -/
+Source: Stacks Project, Tag 074I, Lemma 11.4.10. -/
 theorem centralSimple_mulLeftRight_bijective (K : Type u) [Field K] (A : CSA.{u, u} K) :
     Function.Bijective (AlgHom.mulLeftRight K A) := by
   have hi := centralSimple_mulLeftRight_injective K A

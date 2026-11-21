@@ -21,7 +21,6 @@ import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 # Descending a splitting with a genuine Galois matrix cocycle
 
 Source: Stacks Project, Tag 03R7, injectivity via general-linear descent.
-(blueprint: lem-sc-galois-matrix-cocycle-descent)
 -/
 
 @[expose] public section
@@ -97,8 +96,7 @@ private def matrixConjugation (K : Type u) [Field K] (n : ℕ)
       inv_mul_cancel, Units.val_one, one_mul]
 
 /-- The descent construction produces a bijective algebra homomorphism over the base.
-The proof is the matrix Hilbert 90 and finite Galois descent argument from Stacks Tag 03R7.
-(blueprint: lem-sc-galois-matrix-cocycle-descent) -/
+The proof is the matrix Hilbert 90 and finite Galois descent argument from Stacks Tag 03R7. -/
 theorem exists_algHom_matrix_of_galois_cocycle (K : Type u) [Field K]
     (D : Type u) [Ring D] [Algebra K D] (n : ℕ)
     (e : (SeparableClosure K ⊗[K] D) ≃ₐ[SeparableClosure K]

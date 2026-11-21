@@ -49,7 +49,7 @@ supports.
   normalized) orientation the trace sends every point class to `1`. It rests on
   `AlgebraicGeometry.Etale.pointClass_eq` (all `k`-points have the same class) and
   `AlgebraicGeometry.Etale.isIso_traceMap_pointClass` (the trace of a point class is invertible).
-- `AlgebraicGeometry.Etale.traceIsomorphism` (`corollary-cup-product-pairing--1`): the trace
+- `AlgebraicGeometry.Etale.traceIsomorphism`: the trace
 isomorphism
   `H^{2d}(X, Λ) ≅ Λ(-d)` and the normalization of the trace by point classes.
 
@@ -386,7 +386,7 @@ theorem exists_tateOrientation_traceMap_pointClass [Module.Injective Λ Λ] :
     simp
   · exact ⟨θ.symm, fun x _ hx ↦ (h ⟨x, ‹_›, hx⟩).elim⟩
 
-/-- Blueprint `corollary-cup-product-pairing--1`: The trace isomorphism.
+/-- The trace isomorphism.
 
 Let `X` be smooth, proper and geometrically connected of pure dimension `d` over the
 algebraically closed field `k`, and let `Λ` be a self-injective finite coefficient ring whose

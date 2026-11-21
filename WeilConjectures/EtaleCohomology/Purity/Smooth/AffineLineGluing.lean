@@ -133,8 +133,7 @@ lemma isInvertible_of_leftDerivedUpperStar_iso_tateTwist [Finite Λ] [HasTateTwi
     (((isInvertible_tateTwist_singleFunctor_obj L hL m).shift n).of_iso e.symm)
 
 /-- If `Lu^* K` is a sheaf placed in one degree `-n`, for a surjective étale `u`, then so is `K`:
-the shift `K⟦-n⟧` is a sheaf placed in degree zero
-(`lem-pur-concentrated-complex-shift`). -/
+the shift `K⟦-n⟧` is a sheaf placed in degree zero. -/
 lemma exists_iso_shift_singleFunctor_obj_of_leftDerivedUpperStar_iso {U T : Scheme.{u}}
     (u : U ⟶ T) [Etale u] [Surjective u]
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

@@ -266,18 +266,7 @@ private theorem integralScalarConjugation_eq
       convert hc using 1)
   exact H.trans (integralScalarConjugation_hom_app eE eL χY χX b K).symm
 
-/-- The integral scalar comparison preserves the supplied integral pullback shifts.
-Source: the final automorphism sentence in the current blueprint proof of constructible
-truncations, and steps 1--2 of `lem-pod-isomorphism-pullback-scalar-shift`.
-(blueprint: lem-pod-isomorphism-pullback-scalar-integral-shift).
-
-Proof: uniqueness identifies the restricted ordinary-to-completed scalar comparison with
-scalarCompletion. The normalization of integral scalar shifts gives its shift equation.
-The ordinary derived inverse-image tensor comparison commutes with shifts. Conjugate it
-by the supplied eE and eL and the ordinary-to-completed comparisons. The existing scalar
-compatibility square and naturality of scalarCompletion identify the result with alpha
-on underlying derived objects. Faithfulness of the constructible inclusion reflects the
-shift equation. All shifts and components remain the ones supplied in the statement. -/
+/-- The integral scalar comparison preserves the supplied integral pullback shifts. -/
 theorem isomorphismPullbackScalarIntegralShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

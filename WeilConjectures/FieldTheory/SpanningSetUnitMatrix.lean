@@ -15,8 +15,7 @@ import Mathlib.LinearAlgebra.Matrix.Basis
 universe u
 namespace Matrix
 /-- A spanning set in F^n contains the columns of a unit matrix.
-Source: Stacks Project, Tag 03R7, extraction of an invariant basis.
-(blueprint: lem-sc-spanning-set-unit-matrix) -/
+Source: Stacks Project, Tag 03R7, extraction of an invariant basis. -/
 theorem exists_unit_matrix_columns_mem (F : Type u) [Field F] (n : ℕ)
     (s : Set (Fin n → F)) (hs : Submodule.span F s = ⊤) :
     ∃ t : GeneralLinearGroup (Fin n) F, ∀ j, (fun i ↦ t.val i j) ∈ s := by

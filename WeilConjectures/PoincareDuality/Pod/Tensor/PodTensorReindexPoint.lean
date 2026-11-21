@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorReindexChain
 
 /-! # Explicit tensor Roos chain maps and their localizations
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941. -/
+Source: Stacks 07A4, 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -49,9 +48,7 @@ section TensorModelSpecialization
 attribute [local irreducible] isoSectionwiseModuleInverseImage
 
 /-- Localization of the explicit tensor Roos chain map, including the exact-functor factor.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4
-(blueprint: def-pod-tensor-reindex-point).
-A named record sharing the localized map and its defining equation. -/
+Source: Stacks 015F, 07A4. -/
 structure PodTensorReindexDerivedDatum
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [(isoReductionIntegralInverse l E g).Additive]
@@ -72,8 +69,7 @@ structure PodTensorReindexDerivedDatum
     DerivedCategory.Q.map (podTensorReindexChain l E g D T P Q)
 
 /-- The explicit datum described by `PodTensorReindexDerivedDatum`.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4
-(blueprint: def-pod-tensor-reindex-point). -/
+Source: Stacks 015F, 07A4. -/
 @[irreducible] def podTensorReindexDerivedData
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [(isoReductionIntegralInverse l E g).Additive]

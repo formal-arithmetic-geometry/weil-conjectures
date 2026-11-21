@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.CategoryTheory.ProperBaseChange.ResolvingRepresentativeWhiskeringSupplement
 
 /-! Tensor-side component data for the core reindexing comparison.
-(blueprint: lem-pod-reindexing-comparison-core-tensor-data).
 -/
 
 @[expose] public noncomputable section
@@ -188,8 +187,7 @@ structure ComparisonCoreTensorData {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
       SX.tensor
 
 /-- The tensor-side fields can be chosen simultaneously.
-Source: blueprint dual-Tate compatibility, Steps 1 and 2; Stacks 03EL and 07A4
-(blueprint: lem-pod-reindexing-comparison-core-tensor-data).
+Source: Stacks 03EL and 07A4.
 -/
 theorem comparison_core_tensor_data_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

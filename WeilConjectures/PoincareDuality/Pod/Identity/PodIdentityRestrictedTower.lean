@@ -10,8 +10,7 @@ import all WeilConjectures.TraceFormula.Integral.IntegralComparisonRealizationMo
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 and 0941.
+Source: Stacks 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -107,16 +106,7 @@ private theorem identity_restriction_section (W : Scheme.{u})
       (M.val.congr_map_apply hpair x)
 
 /-- The restricted-system identity agrees with the ordinary degreewise relabelling.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03D6 and 0941 (blueprint: lem-pod-identity-restricted-tower).
-
-Proof: on each restricted section generator, RestrictedGenerators and the unit
-formula for integralComparisonSequenceUnit identify the composite tower map with
-the degreewise ordinary identity relabelling. This identifies every component and
-transition of the strict tower. Naturality of the
-ordinary identity comparison identifies its component on each restricted module.
-Extensionality in the tower index and cochain degree gives the displayed equality,
-including zero complexes. No Roos complex or derived comparison is involved. -/
+Source: Stacks 03D6 and 0941. -/
 theorem podIdentityRestrictedTower
     (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
     (D : PodCompletionReindex l E (𝟙 W))

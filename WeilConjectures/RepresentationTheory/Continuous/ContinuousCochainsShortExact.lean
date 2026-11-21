@@ -19,8 +19,7 @@ import Mathlib.Topology.Algebra.ConstMulAction
 /-!
 # Short exact sequences of continuous inhomogeneous cochains
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, section continuous-group-cohomology
-(blueprint: lem-exc-continuous-cochains-short-exact).
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, section continuous-group-cohomology.
 -/
 
 @[expose] public section
@@ -182,20 +181,8 @@ complex terms with continuous maps, and specify both differentials and postcompo
 The final term of the sum, indexed by `Fin.last n`, omits the last argument; the other terms
 multiply adjacent arguments. At `n = 0` the formula is `g • m - m`.
 
-Proof: (1) Underlying module exactness follows from `lem-exc-discrete-modules-abelian`.
-Postcomposition with the injection is injective. A cochain in the kernel has a unique
-pointwise preimage, continuous since inverse images of singletons are open. A set-theoretic
-section of the surjection is continuous between discrete modules and lifts every cochain.
-(2) Projections, adjacent multiplication and the action are continuous; the displayed
-alternating sum therefore defines a continuous linear differential. Expanding two successive
-differentials cancels all terms in pairs, using associativity and the action law, including
-in degree zero. (3) Equivariant linear maps commute with each term of the differential,
-so postcomposition gives cochain maps. Degreewise exactness gives short exactness of complexes
-by `lem-weil-pbc-cochain-complexes-degreewise-exact`.
-
 Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed differential and paragraph
-beginning "However, a short exact sequence of discrete G-modules"
-(blueprint: lem-exc-continuous-cochains-short-exact). -/
+beginning "However, a short exact sequence of discrete G-modules". -/
 theorem continuousCochains_shortExact
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

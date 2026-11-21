@@ -10,10 +10,7 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorIso
 
 /-! # Coherence of the specified ordinary reindexing comparisons
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-coherence).
-All equations below refer to the displayed family's own reduction, limit and tensor maps.
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- One family of the actual normalized reindexing data, so identity and composition
-compare the same choices, rather than unrelated existence statements.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-coherence). -/
+compare the same choices, rather than unrelated existence statements. -/
 structure PodReindexFamily where
   /-- Ambient comparisons on every isomorphism. -/
   completion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]
@@ -66,12 +62,12 @@ namespace PodReindexFamily
 variable (A : PodReindexFamily l E)
 
 /-- Localize the specified identity relabelling.
-Source: Stacks 015F (blueprint: def-pod-completion-reindex-coherence). -/
+Source: Stacks 015F. -/
 def identityDerived (W : Scheme.{u}) : podOrdinaryReindex l E (𝟙 W) ≅ 𝟭 _ :=
   Functor.mapDerivedCategoryNatIso (A.identity W) ≪≫ Functor.mapDerivedCategoryIdIso _
 
 /-- Localize the same section-normalized relabelling compositor.
-Source: Stacks 015F (blueprint: def-pod-completion-reindex-coherence). -/
+Source: Stacks 015F. -/
 def compositionDerived {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V)
     [IsIso h] [IsIso f] : podOrdinaryReindex l E (h ≫ f) ≅
       podOrdinaryReindex l E f ⋙ podOrdinaryReindex l E h :=
@@ -79,8 +75,7 @@ def compositionDerived {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V)
     (Functor.mapDerivedCategoryCompIso (isoReductionIntegralInverse l E f)
       (isoReductionIntegralInverse l E h)).symm
 
-/-- Ordinary reindexing on the actual complete constructible full subcategories.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-coherence). -/
+/-- Ordinary reindexing on the actual complete constructible full subcategories. -/
 def constructible {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)] :
@@ -90,7 +85,7 @@ def constructible {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]
     (A.tensor f).constructible
 
 /-- Identity and compositor are fixed on every original local section.
-Source: Stacks 03D6, 0D6D (blueprint: def-pod-completion-reindex-coherence). -/
+Source: Stacks 03D6, 0D6D. -/
 def Relabelling : Prop :=
   (∀ (W : Scheme.{u}) (M : scalarReductionSource l E W) (U : W.ProEt)
     (x : M.val.obj (op ((proEtaleIsoPostcompose (𝟙 W)).obj U))),
@@ -104,8 +99,7 @@ def Relabelling : Prop :=
       M.val.map ((MorphismProperty.Over.mapComp (Q := ⊤)
         (inferInstance : WeaklyEtale h) (inferInstance : WeaklyEtale f)).inv.app U).op x)
 
-/-- All identity equations, for these reduction, limit and tensor maps.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-coherence). -/
+/-- All identity equations, for these reduction, limit and tensor maps. -/
 def Identity : Prop :=
   ∀ (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)],
   (∀ K : DerivedCategory (scalarReductionSource l E W),
@@ -124,8 +118,7 @@ def Identity : Prop :=
       (A.identityDerived l E W).hom.app ((integralCompletedTensor l E W).obj (M.obj,N.obj)))
 
 /-- Successive relabelling commutes with reduction, total limit and completed tensor,
-using the actual strict-system compositor and the section-normalized ordinary compositor.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-coherence). -/
+using the actual strict-system compositor and the section-normalized ordinary compositor. -/
 def Composition : Prop :=
   ∀ {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]
     [∀ v : V, Invertible (l : V.residueField v)]
@@ -158,8 +151,7 @@ def Composition : Prop :=
         ((A.compositionDerived l E h f).hom.app N.obj)))
 
 /-- Associativity and Koszul symmetry for this family's own tensor comparison.
-Source: Stacks 07A4, blueprint Steps 1 and 5
-(blueprint: def-pod-completion-reindex-coherence). -/
+Source: Stacks 07A4. -/
 def TensorConstraints {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]
     [∀ v : V, Invertible (l : V.residueField v)]
     [∀ w : W, Invertible (l : W.residueField w)] : Prop :=

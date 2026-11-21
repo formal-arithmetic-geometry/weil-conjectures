@@ -11,8 +11,7 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Proved calculations for tensor-shift path normalization
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-presented-model-t5).
+Source: Stacks 011G, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -63,8 +62,7 @@ attribute [local irreducible] integralOperationsRoos
 /-- The normalized tensor model holds for arbitrary constructible presentations.
 Transport constructibility along the presentations, apply Model and Naturality, and cancel
 the adjacent tensor and exact-derived comparison isomorphisms.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-presented-model-t5). -/
+Source: Stacks 011G, 07A4, 0941. -/
 theorem tensor_model_presented
     (D : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g D)
     (hT : PodCompletedTensorReindex.Laws l E g D T)

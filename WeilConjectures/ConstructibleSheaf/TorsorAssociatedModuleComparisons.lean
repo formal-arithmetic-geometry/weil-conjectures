@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 # Pullback and coefficient comparisons for associated module sheaves
 
 Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: lem-weil-pbc-torsor-associated-module-comparisons)
 -/
 
 @[expose] public section
@@ -29,27 +28,7 @@ open Etale
 set_option backward.isDefEq.respectTransparency false in
 /-- Evaluation along a local torsor section trivializes the associated module sheaf
 upstairs. The trivial coefficient representation descends to the coefficient sheaf.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
-(blueprint: lem-weil-pbc-torsor-associated-module-comparisons)
-
-Proof:
-1. Over the pullback of the torsor to its total space, use the diagonal section. An
-   equivariant locally constant section is determined by evaluation at this section;
-   conversely extend a locally constant section by the representation action on each
-   translate of the diagonal. The torsor isomorphism identifies these translates with
-   all of the pulled-back torsor. These inverse formulas are linear and commute with
-   etale restrictions and intertwining maps. The equivariant section presheaf is a
-   sheaf: glue on the induced etale cover of the total space, and use uniqueness of
-   gluing to preserve equivariance. Thus sheafification does not change its sections.
-   The evaluation formulas give the natural pullback comparison, including the scalar
-   restriction in the definition of the associated functor.
-2. For the trivial representation the equivariance condition is invariance. On an
-   etale cover admitting a torsor section, an invariant locally constant function on
-   the torsor is a unique locally constant function downstairs. Changing the section
-   translates it by a group element, so invariance identifies the resulting functions
-   on overlaps. Glue them downstairs. Pullback and this descent are inverse linear
-   maps, natural in the etale object, giving the coefficient comparison. Neither
-   argument imposes finite generation on the module. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS. -/
 theorem Scheme.GaloisCover.associatedModuleFunctor_comparisons
     {V : Scheme.{u}} [ConnectedSpace V] (ℓ : ℕ) [Fact ℓ.Prime]
     (P : Type u) [Group P] [Finite P]

@@ -61,7 +61,7 @@ isomorphism is made.
 
 ## Main statements
 
-- The decomposition map is an isomorphism (blueprint `lemma-cohomology-projective-line-trace`):
+- The decomposition map is an isomorphism:
   `AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`, in
   `WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineCohomology`.
 -/
@@ -165,9 +165,9 @@ immersion `i' = i ≫ (V ⊆ X)` of the adjoint `Λ_Z ⟶ Ri^! Λ_V(1)[2]` of th
 
 `Λ_X ⟶ Λ_X(1)[2]`.
 
-No excision isomorphism is chosen. It is the blueprint's class `cl(Z)` of a divisor
-(`lemma-cycle-class-cartier-divisor`), which forgets supports to `c₁(𝒪_X(-Z)) = -c₁(𝒪_X(Z))`
-(`lemma-cycle-class-cartier-divisor` (b)), not to `c₁(𝒪_X(Z))`. -/
+No excision isomorphism is chosen. It is the blueprint's class `cl(Z)` of a divisor,
+which forgets supports to `c₁(𝒪_X(-Z)) = -c₁(𝒪_X(Z))`,
+not to `c₁(𝒪_X(Z))`. -/
 noncomputable def chartBoundaryClass : constantComplex Λ X ⟶ (tateObject Λ X 1)⟦(2 : ℤ)⟧ :=
   haveI : HasInvertibleExponent Λ V := .of_hom V.ι
   gysinClass Λ (V.toScheme.zeroLocusSubschemeι {V.topIso.inv s} ≫ V.ι) _ 2

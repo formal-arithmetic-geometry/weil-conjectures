@@ -20,7 +20,6 @@ import Mathlib.RingTheory.SimpleRing.Matrix
 # An algebra with a matrix form is central simple
 
 Source: Stacks Project, Tag 03R2, implication (4) to (1), generalized to a field extension.
-(blueprint: lem-sc-matrix-form-central-simple).
 -/
 
 @[expose] public section
@@ -33,17 +32,8 @@ namespace Field
 
 /-- An algebra split by a field extension into a nonempty matrix algebra is a CSA.
 
-Proof: finite generation descends along the faithfully flat field extension.
-For a proper two-sided ideal I of A, A/I and L tensor_K (A/I) are nontrivial.
-The scalar-extended quotient map has simple source (the matrix algebra), hence
-is injective. Faithful flatness reflects its injectivity, so I is zero.
-For x in the center of A, 1 tensor x is central after scalar extension, hence
-is l tensor 1 for some l in L. Choose a K-linear functional f on L with f(1)=1.
-Applying f tensor id yields x=f(l) times 1, so x is in the image of K.
-
-Source: Stacks Project, Tag 03R2, implication (4) to (1), generalized to an arbitrary
-field extension; the contraction and faithful-flatness arguments are expanded here.
-(blueprint: lem-sc-matrix-form-central-simple). -/
+Source: Stacks Project, Tag 03R2, implication (4) to (1), generalized to an arbitrary field
+extension. -/
 theorem centralSimple_of_matrix_form (K : Type u) [Field K]
     (L : Type v) [Field L] [Algebra K L]
     (A : Type w) [Ring A] [Algebra K A]

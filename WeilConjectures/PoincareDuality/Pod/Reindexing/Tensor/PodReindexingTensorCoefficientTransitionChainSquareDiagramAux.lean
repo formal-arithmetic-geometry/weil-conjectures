@@ -14,8 +14,7 @@ import all WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTe
 
 Auxiliary module for `PodReindexingTensorCoefficientTransitionChainSquareDiagram`: the finite
 level square, the Roos comparisons and the resulting chain square before the diagram wrappers.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-chain-square-diagram).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -221,8 +220,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
 
 /-- The derived chain square of the scalar/reindexing tensor transition on fixed good
 representatives, before the diagram wrappers are unfolded.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: lem-pod-tensor-chain-square-diagram). -/
+Source: Stacks 03EL, 07A4, 0941. -/
 theorem podTensorMixedChainSquareCore
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

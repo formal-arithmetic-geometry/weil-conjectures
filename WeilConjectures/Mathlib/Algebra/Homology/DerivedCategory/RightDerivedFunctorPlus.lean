@@ -231,7 +231,7 @@ noncomputable instance rightDerivedFunctorPlusCommShift : F.rightDerivedFunctorP
 enough injectives) is triangulated, for the shift isomorphism transported along
 `Functor.rightDerivedFunctorPlusIsoInjectiveObject` from `F` applied termwise to complexes of
 injectives. In particular so is the derived direct image `Ru_*` on bounded below derived
-categories of étale sheaves. (blueprint: `lem-weil-pbc-derived-direct-image-triangulated`) -/
+categories of étale sheaves. -/
 instance isTriangulated_rightDerivedFunctorPlus : F.rightDerivedFunctorPlus.IsTriangulated := by
   have := Functor.CommShift.ofIso_compatibility F.rightDerivedFunctorPlusIsoInjectiveObject.symm ℤ
   exact Functor.isTriangulated_of_iso F.rightDerivedFunctorPlusIsoInjectiveObject.symm

@@ -47,7 +47,7 @@ field `k((t))` at infinity, where the inertia group acts:
 `LaurentSeries.exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single`. It is not stated for
 `AlgebraicGeometry.WeilSheaf.IsUnramifiedAtInfinity` (extension to a lisse sheaf across `∞`):
 relating that condition to the inertia action at `∞` needs the fundamental representation of a
-lisse Weil sheaf (`situation-weil`), which does not exist yet, and a direct
+lisse Weil sheaf, which does not exist yet, and a direct
 proof would need the triviality of lisse `ℓ`-adic sheaves on `ℙ¹_k̄`.
 
 ## Main statements
@@ -217,7 +217,7 @@ closed point `s` of `C₀` outside `U₀`, there is a Frobenius-equivariant perf
 
 It is exhibited as a linear isomorphism of `(j_*F^∨)_s̄` onto the `ℚ̄_ℓ`-dual of `(R¹j_*F)_s̄`
 which intertwines the two local Frobenius actions up to the factor `q_s` coming from the Tate
-twist. (blueprint: `lemma-local-duality-point-c-u--1`)
+twist.
 -/
 theorem exists_linearEquiv_dual_stalk_higherDirectImage
     {U C : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
@@ -423,8 +423,7 @@ Hence there are Frobenius-equivariant maps forming an exact sequence
 
 `H_c^0(Z, i^*j_*F) → H_c^1(U, F) → H_c^1(C, j_*F) → 0`,
 
-and a Frobenius-equivariant injection `H_c^0(U, F) ↪ H_c^0(C, j_*F)`.
-(blueprint: `lemma-extreme-degrees-affine-curve`) -/
+and a Frobenius-equivariant injection `H_c^0(U, F) ↪ H_c^0(C, j_*F)`. -/
 theorem exists_exact_compactlySupportedCohomology_boundary
     {U C Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))] [C.Over (Spec (CommRingCat.of k₀))]
     [Z.Over (Spec (CommRingCat.of k₀))]

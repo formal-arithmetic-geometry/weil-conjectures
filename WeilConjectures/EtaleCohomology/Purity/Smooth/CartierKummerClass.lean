@@ -569,7 +569,7 @@ attribute [local instance] HasInvertibleExponent.opens
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] {T D : Scheme.{u}}
   [HasInvertibleExponent Λ T] (i : D ⟶ T) [IsRegularImmersion 1 i]
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`: A Cartier divisor gives a supported Kummer map
+/-- A Cartier divisor gives a supported Kummer map
 
 The *class of an effective Cartier divisor* `i : D ⟶ T` (a regular closed immersion of
 codimension one), `c_D ∈ H²_D(T, Λ(1)) = Hom(Λ_T, Ri_! Ri^! (Λ_T(1)[2]))`: the Kummer boundaries
@@ -582,7 +582,7 @@ noncomputable def cartierKummerClass (hP : SupportedTatePure Λ 1 i) :
       ((R(i)^![Λ]).obj ((tateObject Λ T 1)⟦2 * ((1 : ℕ) : ℤ)⟧)) :=
   pureFundamentalClass Λ 1 i hP
 
-/-- Blueprint `lemma-cycle-class-cartier-divisor`: A Cartier divisor gives a supported Kummer map
+/-- A Cartier divisor gives a supported Kummer map
 
 The *supported Kummer map* `Λ_D ⟶ Ri^! (Λ_T(1)[2])` of an effective Cartier divisor
 `i : D ⟶ T`, the adjoint (`AlgebraicGeometry.Etale.supportedClassMap`) of its class

@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.PodCompletionReindex.PodCompletion
 
 /-! # Normalized completed tensor reindexing models
 
-Source: blueprint theorem-poincare-duality-frobenius--2 Steps 1 and 5;
-Stacks 07A4, 0941 (blueprint: def-pod-completion-tensor-reindex-models).
+Source: Stacks 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -40,7 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- Relabel the actual good representatives using preservation of flat terms and K-flatness.
-Source: Stacks 07A4 (blueprint: def-pod-completion-tensor-reindex-models). -/
+Source: Stacks 07A4. -/
 def podGoodReindex (D : PodCompletionReindex l E g) :
     (integralOperationsGoodComplex l E Y).FullSubcategory ⥤
       (integralOperationsGoodComplex l E X).FullSubcategory :=
@@ -55,8 +54,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The completed tensor comparison on constructible complete inputs, retaining its
 strict tensor-summand map, inverse, complete Roos realization, and canonical-arrow equality.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-completion-tensor-reindex-models). -/
+Source: Stacks 07A4, 0941. -/
 structure PodCompletedTensorReindex {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -84,8 +82,7 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   (D : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g D)
 
 /-- The forward map on every total tensor generator in every degree and quotient.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-tensor-reindex-models). -/
+Source: Stacks 03EL, 07A4, 0941. -/
 def Generators : Prop :=
   ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)
     (n : ℕ) (p q : ℤ) (U : X.ProEt)
@@ -102,8 +99,7 @@ def Generators : Prop :=
           ((((D.quotient Q.obj Q.property n).hom.f q).val.app (op U)) y)
 
 /-- The inverse is precisely reverse relabelling on the same tensor generators.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-tensor-reindex-models). -/
+Source: Stacks 03EL, 07A4, 0941. -/
 def InverseGenerators : Prop :=
   ∀ (P Q : (integralOperationsGoodComplex l E Y).FullSubcategory)
     (n : ℕ) (p q : ℤ) (U : X.ProEt)
@@ -120,8 +116,7 @@ def InverseGenerators : Prop :=
         (op ((proEtaleIsoPostcompose g).obj U)) x y
 
 /-- Coherent naturality on entire strict towers, including all their transitions.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-tensor-reindex-models). -/
+Source: Stacks 03EL, 07A4, 0941. -/
 def TowerNaturality : Prop :=
   ∀ (P Q P' Q' : (integralOperationsGoodComplex l E Y).FullSubcategory)
     (a : P ⟶ P') (b : Q ⟶ Q'),
@@ -133,8 +128,7 @@ def TowerNaturality : Prop :=
           ((podGoodReindex l E g D).map b).hom)
 
 /-- Naturality for all derived morphisms of both inputs.
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-tensor-reindex-models). -/
+Source: Stacks 03EL, 07A4, 0941. -/
 def Naturality : Prop :=
   ∀ (M N M' N' : sfIntegralConstructibleCategory l E Y)
     (a : M ⟶ M') (b : N ⟶ N'),

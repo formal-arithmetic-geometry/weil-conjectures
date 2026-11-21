@@ -142,8 +142,7 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
 
 /-- For an adjunction `F ⊣ G` with unit `η` and counit `ε`, and morphisms `φ : F A ⟶ B`,
 `ψ : A ⟶ G B`, one has `ψ = η_A ≫ G φ` if and only if `F ψ ≫ ε_B = φ`. In particular the adjunct
-`η_A ≫ G φ` of `φ` gives back `φ` after applying `F` and composing with the counit.
-(blueprint: `situation-conventions`) -/
+`η_A ≫ G φ` of `φ` gives back `φ` after applying `F` and composing with the counit. -/
 theorem eq_unit_comp_map_iff_map_comp_counit (adj : F ⊣ G) {A : C} {B : D} (φ : F.obj A ⟶ B)
     (ψ : A ⟶ G.obj B) : ψ = adj.unit.app A ≫ G.map φ ↔ F.map ψ ≫ adj.counit.app B = φ :=
   adj.eq_unit_comp_map_iff φ ψ
@@ -152,8 +151,7 @@ theorem eq_unit_comp_map_iff_map_comp_counit (adj : F ⊣ G) {A : C} {B : D} (φ
 `Ψ : (F X ⟶ Y) ≃ (X ⟶ G Y)` natural in `X` and `Y` (a `CoreHomEquiv F G`) defines the
 adjunction `mkOfHomEquiv Ψ : F ⊣ G` with hom bijection `Ψ`, unit `η_X = Ψ (𝟙 (F X))` and counit
 `ε_Y = Ψ⁻¹ (𝟙 (G Y))`; the formulas `Ψ a = η_X ≫ G a` and `Ψ⁻¹ b = F b ≫ ε_Y` are then
-`Adjunction.homEquiv_unit` and `Adjunction.homEquiv_counit`.
-(blueprint: `lem-weil-pbc-adjunction-of-natural-bijection`) -/
+`Adjunction.homEquiv_unit` and `Adjunction.homEquiv_counit`. -/
 theorem mkOfHomEquiv_homEquiv_unit_counit (adj : CoreHomEquiv F G) :
     (∀ X Y, (mkOfHomEquiv adj).homEquiv X Y = adj.homEquiv X Y) ∧
       (∀ X, (mkOfHomEquiv adj).unit.app X = adj.homEquiv X _ (𝟙 (F.obj X))) ∧

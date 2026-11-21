@@ -12,8 +12,7 @@ import Mathlib.Tactic.CategoryTheory.Slice
 
 /-! # Pasting normalized Roos comparisons on arbitrary towers
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindex-roos-pasting).
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -72,13 +71,7 @@ private theorem roos_tensor_pasting
   slice_lhs 2 4 => rw [← R.map_comp, ← R.map_comp, ht, R.map_comp]
 
 /-- Roos realization pastes a compatible square of arbitrary strict towers.
-Source: blueprint Steps 1 and 5; Stacks 07A4 and 0941
-(blueprint: lem-pod-reindex-roos-pasting).
-Proof: use composition of the normalized Roos comparisons on C. RoosNaturality
-moves the first tower map across the second comparison. The assumed tower
-square and functoriality of Roos identify the remaining maps. Substitute the
-three supplied equations for the named chain maps. Both cone coordinates are
-retained by normalized Roos composition; no tensor or localization is used. -/
+Source: Stacks 07A4 and 0941. -/
 theorem podReindexRoosPasting
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

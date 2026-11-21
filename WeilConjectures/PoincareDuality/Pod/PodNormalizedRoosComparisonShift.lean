@@ -45,8 +45,7 @@ variable {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{u})
 /-- The canonical derived limit shift, in the constant-tower notation.
-Source: Stacks 011G and 0941
-(blueprint: lem-pod-normalized-roos-comparison-shift-s8). -/
+Source: Stacks 011G and 0941. -/
 instance podNormalizedConstantLimitShift :
     (coefficientConstantTowerLimit l E W).CommShift ℤ := by
   dsimp only [coefficientConstantTowerLimit]
@@ -151,17 +150,7 @@ private theorem derivedUnit_iso
   exact (Category.assoc _ _ _).symm
 
 /-- The K-injective-normalized comparison commutes with the integer shift.
-Source: Stacks 0941 and 011G.
-(blueprint: lem-pod-normalized-roos-comparison-shift-s8).
-Proof: on a K-injective tower I, the canonical derived unit is the inverse
-of its right-derived comparison. The prescribed normalization of ρ therefore
-gives η(I) ≫ ρ(I) = Q(augmentation I). The augmentation is the limit tuple
-in the first Roos coordinate and zero in the second. The hypothesis on cs
-says that these augmentations commute with shifts; the canonical derived unit
-also commutes with shifts. Cancel its invertible value on shifted K-injectives
-to obtain the comparison shift equation there. For any complex choose a
-K-injective quasi-isomorphism. Both functors invert it, so naturality and
-cancellation transport that equation to the original complex. -/
+Source: Stacks 0941 and 011G. -/
 theorem podNormalizedRoosComparisonCommShift
     (ρ : IntegralComparisonRoosModel l E W)
     (cs : (roosF (A := scalarReductionSource l E W)).CommShift ℤ)

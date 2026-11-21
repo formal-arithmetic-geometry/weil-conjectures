@@ -15,8 +15,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
 /-!
 # Inseparable elements and nilpotents after algebraic-closure base change
 
-Source: Stacks Project, Algebra, Lemma Tags 030V and 030W
-(blueprint: lem-pc-inseparable-tensor-nilpotent).
+Source: Stacks Project, Algebra, Lemma Tags 030V and 030W.
 -/
 
 @[expose] public section
@@ -29,16 +28,7 @@ namespace FieldTheory
 nonzero nilpotent in `K ⊗[k] kbar` for an algebraic closure `kbar` of `k`, so this tensor
 product is not reduced.
 
-Source: Stacks Project, Algebra, Lemma Tags 030V and 030W
-(blueprint: lem-pc-inseparable-tensor-nilpotent).
-The minimal-polynomial quotient isomorphism identifies `AdjoinRoot (minpoly k α)`
-with `k(α)`, giving an injection into `K`. Flatness over `k` preserves this injection
-after tensoring with `kbar`. Base change for `AdjoinRoot` identifies its tensor product
-with `kbar[T]/(P.map (algebraMap k kbar))`.
-If `K ⊗[k] kbar` were reduced, this quotient would be reduced. Its defining polynomial
-would then be radical, hence squarefree since it is nonzero, hence separable over the
-perfect field `kbar`. Separability descends to `k`, contradicting the hypothesis.
-Finally, failure of reducedness gives a nonzero nilpotent by definition.
+Source: Stacks Project, Algebra, Lemma Tags 030V and 030W.
 -/
 theorem inseparable_tensorProduct_algebraicClosure_not_isReduced
     (k K kbar : Type*) [Field k] [Field K] [Field kbar] [Algebra k K] [Algebra k kbar]

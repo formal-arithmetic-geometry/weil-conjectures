@@ -14,8 +14,7 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 /-!
 # Functorial injective embeddings for group-ring modules
 
-Source: Stacks Project, Injectives, Section G-modules, paragraph before Tag 04JF
-(blueprint: lem-exc-rg-group-algebra-functorial-injective-embeddings).
+Source: Stacks Project, Injectives, Section G-modules, paragraph before Tag 04JF.
 -/
 
 @[expose] public section
@@ -28,14 +27,7 @@ namespace ModuleCat
 
 /-- For a group `G` and a ring `R`, left modules over `R[G]` admit a functorial
 monomorphism into injective modules (Stacks, Injectives, Section G-modules,
-paragraph before Tag 04JF) (blueprint: lem-exc-rg-group-algebra-functorial-injective-embeddings).
-
-Proof: The group ring `R[G]` is a ring. Its module category is Grothendieck
-abelian by the module-category theorem
-`lem-weil-pbc-ring-modules-grothendieck-abelian`. Apply
-`lem-weil-pbc-grothendieck-functorial-injective-embedding` to this category.
-The resulting functor and natural transformation have monic components and
-injective values. -/
+paragraph before Tag 04JF). -/
 theorem groupAlgebra_functorialInjectiveEmbeddings
     {G : Type v} [Group G] (R : Type u) [Ring R] :
     ∃ (J : ModuleCat.{max u v} (MonoidAlgebra R G) ⥤

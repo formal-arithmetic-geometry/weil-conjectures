@@ -389,8 +389,8 @@ end Adjoin
 variable {k W V : Type*} [Field k] [IsAlgClosed k] [Group W] [AddCommGroup V] [Module k V]
   [FiniteDimensional k V]
 
-/-- **Geometric constituents after a constant extension**
-(blueprint: `lemma-geometric-constituents-after-constant-extension--1`). Let `ρ` be a
+/-- **Geometric constituents after a constant extension**.
+Let `ρ` be a
 finite-dimensional representation of `W` over an algebraically closed field, `P` a normal subgroup
 of `W` and `F ∈ W`. There are `m ≥ 1` and a finite chain of subspaces `0 = U₀ < U₁ < ⋯ < Uₙ = V`,
 each stable under `P` and under `ρ (F ^ m)`, such that every successive quotient `Uᵢ₊₁ / Uᵢ` is

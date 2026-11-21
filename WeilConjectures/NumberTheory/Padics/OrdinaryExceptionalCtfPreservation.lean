@@ -20,8 +20,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 # Constructibility of the ordinary proper exceptional adjoint
 
 Source: Zheng, Six operations and Lefschetz--Verdier formula for Deligne--Mumford stacks,
-Propositions 3.16(2) and 2.29(2); Bhatt--Scholze, The pro-etale topology for schemes,
-Lemma 6.7.18 (blueprint: lem-sfb-ordinary-exceptional-ctf-preservation).
+Propositions 3.16(2) and 2.29(2); Bhatt--Scholze, The pro-etale topology for schemes, Lemma
+6.7.18.
 
 This is the finite-coefficient preservation step of the third proof sentence of
 `theorem-exceptional-inverse-image--16` in the current blueprint. The categories
@@ -41,10 +41,7 @@ open CategoryTheory
 namespace Padic
 
 /-- The literal quotient `O_E / ell^r O_E`. This uses the recorded ring of integers
-and Mathlib's principal-ideal quotient, rather than replacing `ell` by a uniformizer.
-Source: Zheng, Propositions 3.16(2), 2.29(2), with the coefficient convention of
-`def-weil-l-adic-coefficient-extension`
-(blueprint: lem-sfb-ordinary-exceptional-ctf-preservation). -/
+and Mathlib's principal-ideal quotient, rather than replacing `ell` by a uniformizer. -/
 abbrev coefficientExtensionEllQuotient (ell : ℕ) [Fact ell.Prime]
     (E : Type v) [Field E] [Algebra ℚ_[ell] E] [FiniteDimensional ℚ_[ell] E] (r : ℕ) :=
   coefficientExtensionIntegers ell E ⧸

@@ -18,7 +18,6 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 # Injectives and left exact invariants for discrete integer representations
 
 Source: Stacks Project, Injectives, Tag 04JF; Etale Cohomology, Tag 0DVG.
-(blueprint: lem-sc-discrete-integer-invariants-infrastructure).
 -/
 
 @[expose] public section
@@ -32,19 +31,8 @@ namespace Rep
 /-- Discrete integer representations have enough injectives, and their invariant functor
 preserves finite limits, after transport along any equivalence of categories.
 
-Source: Stacks Project, Injectives, Tag 04JF; Etale Cohomology, Tag 0DVG,
-final profinite comparison.
-(blueprint: lem-sc-discrete-integer-invariants-infrastructure).
-
-Proof: The functorial injective-embedding theorem for arbitrary rings gives a monomorphism
-M to J(M), with J(M) injective, in the discrete representation category. These are
-injective presentations. EnoughInjectives.of_equivalence transports them across E.
-The functor giving a module its trivial action lands in discrete representations, since
-every element is fixed by the whole group. Restrict the Mathlib trivial-action/invariants
-adjunction along the fully faithful inclusion of the discrete subcategory. Consequently
-its invariants functor is a right adjoint and preserves limits. The equivalence E and
-the underlying additive-group functor also preserve limits, so their composite preserves
-finite limits. Neither compactness nor an abelian structure on A is needed here. -/
+Source: Stacks Project, Injectives, Tag 04JF; Etale Cohomology, Tag 0DVG, final profinite
+comparison. -/
 theorem discreteInteger_invariants_infrastructure
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (A : Type v) [Category.{w} A]

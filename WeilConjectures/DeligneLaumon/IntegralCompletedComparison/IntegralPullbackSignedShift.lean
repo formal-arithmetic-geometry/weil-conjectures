@@ -16,7 +16,6 @@ set_option linter.privateModule false
 /-! # Signed shifts for integral pullback
 
 Source: Stacks Project, Tags 011G, 014E, 06YS, 06YT and 0941.
-(blueprint: lem-a1-integral-pullback-signed-shift).
 -/
 
 @[expose] public noncomputable section

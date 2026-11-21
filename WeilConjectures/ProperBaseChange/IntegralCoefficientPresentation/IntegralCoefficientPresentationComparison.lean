@@ -37,9 +37,8 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-! # Projection-normalized integral coefficient presentation comparison
 
-Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1,
-Lemma 4.2.12 and Lemma 6.8.2(1)
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison).
+Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1, Lemma 4.2.12 and Lemma
+6.8.2(1).
 
 The existing constants-to-functions comparison is reused. The quotient isomorphisms e_n
 and the completed comparison e_T are the unique ones with the node's normalizations:
@@ -68,16 +67,14 @@ namespace WeilConjectures.IntegralCoefficientPresentation
 attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
 
 /-- The restricted derived finite reduction for a specified quotient projection.
-Source: Bhatt--Scholze, Section 6.5; Stacks 06YY
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison). -/
+Source: Bhatt--Scholze, Section 6.5; Stacks 06YY. -/
 abbrev reduction {T : Scheme.{u}} {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (π : R ⟶ S) := pbcDerivedExtend π ⋙ pbcDerivedRestrict π
 
 /-- The canonical restricted map from a larger quotient to a smaller quotient.
 It is the adjoint of the smaller quotient unit, using the normalized scalar-restriction
 composition. On K-flat models it sends b tensor x to q(b) tensor x.
-Source: Bhatt--Scholze, Section 6.5; Stacks 06YY
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison). -/
+Source: Bhatt--Scholze, Section 6.5; Stacks 06YY. -/
 def transition {T : Scheme.{u}}
     {R S B : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (π : R ⟶ S) (q : S ⟶ B) (π' : R ⟶ B) (h : π ≫ q = π')
@@ -87,8 +84,7 @@ def transition {T : Scheme.{u}}
     (pbcDerivedRestrictComp π q π' h).hom.app ((pbcDerivedExtend π').obj K)
 
 /-- Derive an identity-on-sections comparison of the two composite restrictions.
-Source: Stacks 03DA and 015F
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison). -/
+Source: Stacks 03DA and 015F. -/
 def derivedSquare {T : Scheme.{u}}
     {R S Rn Sn : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (e : R ≅ S) (b : Rn ≅ Sn) (π : R ⟶ Rn) (ρ : S ⟶ Sn)
@@ -100,8 +96,7 @@ def derivedSquare {T : Scheme.{u}}
       (Functor.mapDerivedCategoryCompIso (pbcRestrict ρ) (pbcRestrict e.hom)).symm
 
 /-- The finite comparison after restriction to the completed coefficient ring.
-Source: Bhatt--Scholze, Section 6.5; Stacks 06YY
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison). -/
+Source: Bhatt--Scholze, Section 6.5; Stacks 06YY. -/
 def restrictedComparison {T : Scheme.{u}}
     {R S Rn Sn : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (e : R ≅ S) (b : Rn ≅ Sn) (π : R ⟶ Rn) (ρ : S ⟶ Sn)
@@ -116,8 +111,7 @@ def restrictedComparison {T : Scheme.{u}}
 
 /-- Compatibility of the two product Roos arrows, with the product comparison fixed
 by every projection. Product existence is supplied separately, not assumed of a complex.
-Source: Bhatt--Scholze, Propositions 3.1.10--3.1.11; Stacks 08TC
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison). -/
+Source: Bhatt--Scholze, Propositions 3.1.10--3.1.11; Stacks 08TC. -/
 def RoosCompatible {C : Type v} [Category.{w} C] [Preadditive C]
     {D : Type v} [Category.{w} D] [Preadditive D] (F : C ⥤ D)
     (K : C) (P : ℕ → D) (Q : ℕ → C)
@@ -483,8 +477,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The commutative finite coefficient comparison ē_n = e_n ∘ κ_n⁻¹ for a family q of
 quotient isomorphisms; the theorem applies it to the uniquely normalized family.
-Source: Bhatt--Scholze, Section 6.5, Lemma 4.2.12
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison). -/
+Source: Bhatt--Scholze, Section 6.5, Lemma 4.2.12. -/
 def level (q : ∀ n : ℕ, PbcIntegralRing l E ⧸ (pbcIntegralDatum l E).ideal ^ (n + 1) ≃+*
       ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
     (n : ℕ) : (pbcAdicRings T (pbcIntegralDatum l E)).obj (op n) ≅
@@ -493,8 +486,7 @@ def level (q : ∀ n : ℕ, PbcIntegralRing l E ⧸ (pbcIntegralDatum l E).ideal
     (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).mapIso (q n).toCommRingCatIso
 
 /-- The actual detailed finite coefficient diagram, retaining commutativity.
-Source: Bhatt--Scholze, Section 6.5
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison). -/
+Source: Bhatt--Scholze, Section 6.5. -/
 def detailedSystem : ℕᵒᵖ ⥤ Sheaf (ProEt.topology T) CommRingCat.{u + 1} :=
   Functor.ofOpSequence (X := fun n ↦ integralCoefficientCommRingSheaf l E T n) (fun n ↦
     (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
@@ -507,8 +499,7 @@ def detailedSystem : ℕᵒᵖ ⥤ Sheaf (ProEt.topology T) CommRingCat.{u + 1} 
 The section formula on r prevents substitution of an arbitrary restriction comparison.
 The unit equation then fixes the derived tensor comparison. The transition equation is
 for every quotient arrow, including the identity. RoosCompatible uses the actual 1-s.
-Source: Bhatt--Scholze, Section 6.5; Stacks 06YY and 08TC
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison). -/
+Source: Bhatt--Scholze, Section 6.5; Stacks 06YY and 08TC. -/
 def DerivedCompatible
     (q : ∀ n : ℕ, PbcIntegralRing l E ⧸ (pbcIntegralDatum l E).ideal ^ (n + 1) ≃+*
       ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))
@@ -588,31 +579,8 @@ def DerivedCompatible
               (completedIntegralCommRingProjectionUnrestricted l E T n) (r n) (α n) K) hP hQ)
 
 /-- Projection-normalized comparison of the two completed integral coefficient presentations.
-Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1,
-Lemma 4.2.12 and Lemma 6.8.2(1)
-(blueprint: lem-weil-pbc-integral-coefficient-presentation-comparison).
-The family q and the completed comparison e are quantified under their normalizations,
-whose existence and uniqueness are the first and the ∃! conjuncts; so the remaining
-clauses are about e_n and e_T themselves.
-
-Proof: Descend the lift ring equivalence through the power ideals. Quotient
-representatives give uniqueness and every transition identity. Reuse the normalized
-constants-to-functions isomorphism and its naturality. The induced natural isomorphism
-of inverse systems gives the completed comparison, uniquely fixed by its projections.
-Restriction along a ring isomorphism has inverse restriction along its inverse, using
-the canonical sectionwise composition and identity comparisons. Exact-functor descent
-therefore gives inverse derived equivalences, preserving and reflecting homology bounds.
-For each finite projection, take the left mate of the identity-on-sections restriction
-square. The adjunction bijections and full faithfulness of both equivalences show this
-mate is invertible; its defining equation is the required adjunction-unit equation.
-The ordinary restriction squares commute with quotient composition on every section.
-Exact-derived-square coherence descends that identity. Applying the adjunction bijection
-to the two candidate transition maps proves their equality, for every quotient arrow.
-Exact countable products on the pro-etale module categories give CountableAB4Star and
-hence countable products in the derived categories. The product comparison induced by
-the equivalence and the finite-level mates has the stated projection formula. Checking
-projections proves compatibility with the augmentation and the shift; additivity gives
-compatibility with the difference 1-s. -/
+Source: Bhatt--Scholze, Section 6.5, convention before Definition 6.5.1, Lemma 4.2.12 and Lemma
+6.8.2(1). -/
 theorem comparison :
     (∀ n : ℕ, ∃! q : PbcIntegralRing l E ⧸ (pbcIntegralDatum l E).ideal ^ (n + 1) ≃+*
         ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)),

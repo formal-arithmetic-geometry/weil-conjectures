@@ -160,9 +160,7 @@ compact-support base change of `Rp₂,!` along `ξ`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`), followed by the
 pullback of the Fourier integrand to `V_ξ`: `Lg^*` is monoidal and
 `g^* 𝒦_ψ ≅ ℒ_{ψ(b(x, ξ))}`. For `T = Spec Ω` a geometric point this is the stalk of the
-transform at `ξ`; see `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk`.
-(sketch blueprint: `proposition-base-change-fourier-inversion--3`; blueprint:
-`proposition-base-change-fourier-inversion--3`) -/
+transform at `ξ`; see `AlgebraicGeometry.Etale.nonempty_iso_fourierTransform_geometricStalk`. -/
 noncomputable def fourierTransformStalkIso [Finite Λ] [HasCompactification π]
     [QuasiCompact π] :
     fourierTransform Λ π π' Ψ b r ⋙ D((ξ)^*[ModuleCat.{u + 1} Λ]) ≅
@@ -205,9 +203,7 @@ naturally in `K`. Here `V_ξ` sits in the square
 ```
 
 Class: torsion; decided by compact-support base change of `Rp₂,!` along `ξ`, which needs
-`[Finite Λ]`. The isomorphism is `AlgebraicGeometry.Etale.fourierTransformStalkIso`.
-(sketch blueprint: `proposition-base-change-fourier-inversion--3`; blueprint:
-`proposition-base-change-fourier-inversion--3`) -/
+`[Finite Λ]`. The isomorphism is `AlgebraicGeometry.Etale.fourierTransformStalkIso`. -/
 theorem nonempty_iso_fourierTransform_geometricStalk [Finite Λ]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification π] [QuasiCompact π]
     (Ψ : AddChar (ZMod p) Λ) (b : Γ(pullback π π', ⊤)) (r : ℤ)

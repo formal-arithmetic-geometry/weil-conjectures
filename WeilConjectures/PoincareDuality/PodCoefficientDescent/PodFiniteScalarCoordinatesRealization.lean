@@ -82,9 +82,8 @@ import WeilConjectures.Algebra.Homology.PoincareDuality.ExactScalarDerivedPair
 
 /-! # Realizing the normalized finite-scalar coordinate interface
 
-Source: blueprint dual-Tate compatibility, Step 5; Stacks 08J9 and 08JA.
-This complete, already proved specialization is compiled separately from its caller
-for the single-file runtime limit. No unfinished statement is introduced.
+Source: Stacks 08J9 and 08JA. This complete, already proved specialization is compiled separately
+from its caller for the single-file runtime limit. No unfinished statement is introduced.
 -/
 
 @[expose] public noncomputable section

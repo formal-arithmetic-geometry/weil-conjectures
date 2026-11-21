@@ -12,8 +12,7 @@ import all WeilConjectures.SmoothPurity.Supporting.IsomorphismReductionTower
 
 Keep the full-limit comparison fixed and transport its adjunction to construct
 its compatible reduction comparison. In particular this preserves the strict
-Roos normalization used by the assembled five-law package.
-(blueprint: lem-pod-reindexing-derived-core-unit) -/
+Roos normalization used by the assembled five-law package. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -41,18 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-- Construct the reduction comparison compatible with the supplied full-limit map.
-
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5.
-STATEMENT-DISPUTED (old statement, repaired): independent raw reduction and limit
-isomorphisms need not satisfy Unit; negating only the reduction changes its left side.
-Keep the given limit, including its full Roos normalization, and take its left mate
-under the two reduction/limit adjunctions. The ordinary and whole-system reindexing
-functors are equivalences, so `adjointSquare` makes this mate invertible and supplies
-its unit equation. Use its inverse as the reduction comparison and cancel the inverse
-pair after applying the target limit functor. No finite-evaluation conservativity is
-used, so empty sites, zero objects and unbounded complexes are included.
-(blueprint: lem-pod-reindexing-derived-core-unit) -/
+/-- Construct the reduction comparison compatible with the supplied full-limit map. -/
 theorem podReindexingDerivedCoreData_unit
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

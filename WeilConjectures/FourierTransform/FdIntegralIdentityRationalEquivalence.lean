@@ -23,10 +23,7 @@ import Mathlib.CategoryTheory.Shift.Localization
 
 /-! # The integral identity and its raw rationalization
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence; Bhatt--Scholze, Section 6.5,
-Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 05R6
-(blueprint: lem-fd-integral-identity-rational-equivalence).
+Source: Bhatt--Scholze, Section 6.5, Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 05R6.
 
 The comparison uses the existing finite-stage datum, strengthened explicitly by
 integral linearity, exactness, inverse formulas and normalized finite reductions.
@@ -647,9 +644,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 /-- The common integral identity induces inverse exact linear equivalences on the
 integral categories and their raw rationalizations, with the prescribed finite reductions.
-Source: trace-definition final sentence, auxiliary subclaim from comparison proof steps 1--2;
-Bhatt--Scholze, Section 6.5, Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 05R6
-(blueprint: lem-fd-integral-identity-rational-equivalence).
+Source: Bhatt--Scholze, Section 6.5, Definition 6.5.1 and Proposition 6.8.11(3); Stacks Tag 05R6.
 
 Proof (the four steps of the DAG node):
 1. Apply lem-weil-pbc-integral-coefficient-presentation-comparison. Its unique quotient

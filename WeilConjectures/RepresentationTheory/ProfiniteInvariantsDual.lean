@@ -80,12 +80,11 @@ lemma map_discreteAverage_of_mem_invariants
     cosetSum_of_mem_invariants (fun g ↦ by simp), ← Nat.cast_smul_eq_nsmul A, smul_smul,
     IsUnit.val_inv_mul, one_smul]
 
-/-- **Duality commutes with invariants under a pro-`p` group** (blueprint
-`lemma-duality-invariants-pro-p--1`, module level). Let `G` be a compact group in which the index of
-every open normal subgroup is invertible in `A`, `ρ` a discrete representation of `G` on `E` and `ω`
-an `A`-module with trivial action. Then restriction to the invariants is an isomorphism
-`Hom_A(E, ω)^G ≃ Hom_A(E^G, ω)` for the contragredient action on `Hom_A(E, ω)`; its inverse is
-precomposition with the averaging retraction `Representation.discreteAverage`. -/
+/-- **Duality commutes with invariants under a pro-`p` group**. Let `G` be a compact group in which
+the index of every open normal subgroup is invertible in `A`, `ρ` a discrete representation of
+`G` on `E` and `ω` an `A`-module with trivial action. Then restriction to the invariants is an
+isomorphism `Hom_A(E, ω)^G ≃ Hom_A(E^G, ω)` for the contragredient action on `Hom_A(E, ω)`; its
+inverse is precomposition with the averaging retraction `Representation.discreteAverage`. -/
 noncomputable def invariantsDualEquiv
     (hA : ∀ U : OpenNormalSubgroup G, IsUnit ((U.toSubgroup.index : ℕ) : A))
     (hρ : ρ.IsDiscrete) :

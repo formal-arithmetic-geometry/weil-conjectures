@@ -13,8 +13,7 @@ import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionR
 The system localization factor uses the same equality transport as the system
 tensor comparison; it is a specified natural isomorphism, not a chosen witness.
 
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03EL, 07A4 and 0941.
-(blueprint: lem-pod-reduction-reindex-unary-model).
+Source: Stacks 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -44,26 +43,7 @@ set_option hygiene false in
 local notation "F[" g "]" => podReindexingComplexFunctor l E g none
 /-- The whole-system reduction mate has an ordinary quotient representative.
 This is a unary assertion; it contains no tensor comparison or binary square.
-Source: blueprint dual-Tate compatibility Steps 1, 2 and 4; Stacks 03EL, 07A6, 0941.
-(blueprint: lem-pod-reduction-reindex-unary-model).
-
-Proof: on ordinary modules identify reindexing of scalar extension with scalar
-extension of reindexing. The adjunction units specify the map on b tensor x as
-reindex(b) tensor x. Sheafification gives an isomorphism, since reverse reindexing
-constructs its inverse. Apply the maps in each degree. Naturality makes them
-commute with differentials; quotient naturality makes them a map of the entire
-sequence site. This gives beta with precisely the stated Generators equation.
-Reindexing is an exact equivalence and preserves the ordinary tensor generator
-maps; transport the acyclic tensor tests and flatness tests along its inverse.
-Thus the reindexed P is again flat-term K-flat. To obtain the derived equation,
-transpose under the target reduction/limit adjunction. The Unit law for A and
-the adjunction-normalized reduction models replace both sides by reindexing of
-the ordinary quotient unit followed by the total-limit comparison. LimitModel
-and RestrictedGenerators identify this comparison as the actual strict Roos map;
-RoosFst and RoosSnd identify both cone coordinates. The transposed maps agree,
-so injectivity of the adjunction Hom equivalence gives the equation before any
-finite derived evaluation. This proof applies to arbitrary good P, including
-zero complexes and the empty site. -/
+Source: Stacks 03EL, 07A6, 0941. -/
 theorem unary_model {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

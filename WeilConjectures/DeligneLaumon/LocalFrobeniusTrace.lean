@@ -27,9 +27,7 @@ import WeilConjectures.PointCount
 /-!
 # Local Frobenius on the derived point fibre and its alternating trace
 
-Source: Weil blueprint, sec-poincare-duality/sk-lem-finite,
-Local Frobenius and local alternating trace; Deligne, Weil II, (1.1.7)--(1.1.10)
-(blueprint: definition-trace-function).
+Source: Deligne, Weil II, (1.1.7)--(1.1.10).
 
 The rational composition comparison below is the localization of the specified integral
 comparison. Object equalities only identify the unchanged objects of raw rationalization.
@@ -46,8 +44,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Identify the prescribed rational pullback object with its integral model.
-Source: blueprint rational pullback convention (blueprint: definition-trace-function). -/
+/-- Identify the prescribed rational pullback object with its integral model. -/
 def localPullbackObjectIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -57,8 +54,7 @@ def localPullbackObjectIso {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((constructibleIntegralPullback l E f).obj K.obj) :=
   eqToIso ((rationalDerivedPullback_existsUnique l E f).exists.choose_spec.2.1 K)
 
-/-- The specified composition comparison, localized from the integral comparison.
-Source: blueprint composition convention (blueprint: definition-trace-function). -/
+/-- The specified composition comparison, localized from the integral comparison. -/
 def localPullbackComposition {X Y Z : Scheme.{u}} (h : X ⟶ Y) (k : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -78,8 +74,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Derived pullback of the underlying Weil complex at an arbitrary geometric point.
-Source: blueprint K_xbar (blueprint: definition-trace-function). -/
+/-- Derived pullback of the underlying Weil complex at an arbitrary geometric point. -/
 def localDerivedStalk (K : sfWeilComplex D l hl Y₀ E)
     (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) :
     sfRationalConstructibleCategory l E (Spec (.of D.k)) :=
@@ -87,8 +82,7 @@ def localDerivedStalk (K : sfWeilComplex D l hl Y₀ E)
   letI := sfWeilPrimeInvertible D l hl Y₀
   (rationalDerivedPullback l E x).obj K.carrier
 
-/-- The bounded finite-dimensional rational point complex C_xbar.
-Source: blueprint point-fibre clause (blueprint: definition-trace-function). -/
+/-- The bounded finite-dimensional rational point complex C_xbar. -/
 def localPointComplex (K : sfWeilComplex D l hl Y₀ E)
     (x : Spec (.of D.k) ⟶ (D.geometricFiber Y₀).left) :
     (DerivedCategory.pointFiniteDimensional E).FullSubcategory :=

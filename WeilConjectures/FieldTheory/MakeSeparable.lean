@@ -15,8 +15,7 @@ import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
 /-!
 # Making a finitely generated field extension separable
 
-Source: Stacks Project, Algebra, Lemma 030R (lemma-make-separable), first assertion
-(blueprint: lem-weil-pbc-make-separable).
+Source: Stacks Project, Algebra, Lemma 030R, first assertion.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace Algebra
 
 /-- A finitely generated field extension becomes separable after finite purely inseparable
 extensions of the base and of the extension field.
-Source: Stacks Project, Algebra, Lemma 030R, first assertion
-(blueprint: lem-weil-pbc-make-separable).
+Source: Stacks Project, Algebra, Lemma 030R, first assertion.
 
 Proof outline (the proof is deferred): apply
 `lem-weil-pbc-make-separably-generated` to the finitely generated extension.  It supplies

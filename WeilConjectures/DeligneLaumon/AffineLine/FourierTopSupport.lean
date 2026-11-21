@@ -405,11 +405,10 @@ theorem exists_isNegCoordOver_ne_zero_of_mem_support (ψ : AddChar k₀ (PadicAl
     rw [hi, Scheme.Opens.range_ι] at hmem
     simpa [V] using hmem
 
-/-- **The top cohomology sheaf of the transform of a complex `≤ m` has finite support** (step 1(a)
-of blueprint `proposition-fourier-transform-perverse-heart--1`). Let `K ≤ m`, so that
-`FT_ψ(K) ≤ m + 1`, and let `N = 𝓗^m(K(-1))`, lisse on a dense open `U`. Each closed point `x` in the
-support of `𝓗^{m+1} FT_ψ(K)` gives a nonzero morphism from `N|_Ū` to a linear character
-`ℒ_{ψ(a x)}|_Ū`, with `-a` the coordinate of a geometric point over `x`
+/-- **The top cohomology sheaf of the transform of a complex `≤ m` has finite support**. Let
+`K ≤ m`, so that `FT_ψ(K) ≤ m + 1`, and let `N = 𝓗^m(K(-1))`, lisse on a dense open `U`. Each
+closed point `x` in the support of `𝓗^{m+1} FT_ψ(K)` gives a nonzero morphism from `N|_Ū` to a
+linear character `ℒ_{ψ(a x)}|_Ū`, with `-a` the coordinate of a geometric point over `x`
 (`AlgebraicGeometry.exists_isNegCoordOver_ne_zero_of_mem_support`). Distinct points give distinct
 irreducible characters, so there are at most `rank N|_U` of them
 (`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.le_finrank_of_ne_zero`). -/

@@ -25,13 +25,10 @@ of a constructible sheaf on `Z` and the extension by zero `j_! G` of a construct
 `U` are constructible (`IsConstructibleSheaf.lowerStar_of_isClosedImmersion`,
 `IsConstructibleSheaf.openImmersionLowerShriek`): their pullbacks to the other member of the
 pair vanish, and a zero sheaf is constructible (`IsConstructibleSheaf.of_isZero`).
-(blueprint: `prop:constructible-open-closed`, `lemma:constructible-lowerStar-closed`,
-`lemma:constructible-lowerShriek-open`)
 
 When the complement of an open immersion `j` is a finite set of closed points, the range of
 `j` and these points form a stratification of `X`
 (`AlgebraicGeometry.Scheme.Stratification.ofOpenImmersion`).
-
 -/
 
 @[expose] public section
@@ -260,8 +257,8 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
 include hij in
-/-- Blueprint `prop-constructible-open-closed`: **A sheaf is constructible if and only if its
-restrictions to the members of a complementary pair `(j, i)` are**, for `j` quasi-compact (see
+/-- **A sheaf is constructible if and only if its restrictions to the members of a complementary
+pair `(j, i)` are**, for `j` quasi-compact (see
 `AlgebraicGeometry.Scheme.Stratification.openClosed`). -/
 theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
     IsConstructibleSheaf F ↔
@@ -289,7 +286,7 @@ theorem isConstructibleSheaf_iff_upperStar (F : Sheaf X.smallEtaleTopology A) :
 include hij in
 /-- **The extension by zero of a constructible sheaf along an open immersion is
 constructible**: its restriction to `U` is the sheaf itself, and its restriction to the
-complement `Z` vanishes. (blueprint: `lemma:constructible-lowerShriek-open`) -/
+complement `Z` vanishes. -/
 theorem IsConstructibleSheaf.openImmersionLowerShriek (G : Sheaf U.smallEtaleTopology A)
     [IsConstructibleSheaf G] : IsConstructibleSheaf ((j)_!open[A].obj G) := by
   rw [isConstructibleSheaf_iff_upperStar j i hij]
@@ -308,7 +305,7 @@ variable [(CategoryTheory.forget A).ReflectsIsomorphisms]
 include hij hJ in
 /-- **The pushforward of a constructible sheaf along a closed immersion is constructible**:
 its restriction to `Z` is the sheaf itself, and its restriction to the complement `U`
-vanishes. (blueprint: `lemma:constructible-lowerStar-closed`) -/
+vanishes. -/
 theorem IsConstructibleSheaf.lowerStar_of_isClosedImmersion (G : Sheaf Z.smallEtaleTopology A)
     [IsConstructibleSheaf G] : IsConstructibleSheaf ((i)_*[A].obj G) := by
   rw [isConstructibleSheaf_iff_upperStar j i hij]

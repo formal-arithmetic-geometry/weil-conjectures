@@ -12,9 +12,8 @@ public import WeilConjectures.DeligneLaumon.Reduction.AffineCurve
 # The top compactly supported cohomology of a lisse sheaf on a smooth affine curve
 
 If `C₀` is a smooth affine curve and `G` is a lisse Weil sheaf on `C₀`, punctually `ι`-pure of
-weight `w`, then `H_c^2(C, G)` has weights at most `w + 2` (blueprint
-`lemma-degree-zero-top-cohomology--6`). It follows from the purity of `H_c^2` on a smooth affine
-curve which need not be geometrically connected
+weight `w`, then `H_c^2(C, G)` has weights at most `w + 2`. It follows from the purity of `H_c^2`
+on a smooth affine curve which need not be geometrically connected
 (`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine`), after a
 constant twist.
 
@@ -47,9 +46,8 @@ namespace WeilSheaf
 /-- If `G` is a lisse Weil sheaf on a smooth affine curve `C₀`, punctually `ι`-pure of weight `v`,
 and `b` is a unit with `|ι b| = q ^ (-v / 2)`, then `H_c^2(C, G)` is `ι`-pure of weight `v + 2`:
 the constant twist `G ⊗ 𝓑_b` is punctually pure of weight `0`, so its `H_c^2` is pure of weight
-`2` (`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine`, blueprint
-`theorem-pure-lisse-sheaves-over-relative`), and it is `H_c^2(C, G)` with the Frobenius multiplied
-by `b`.
+`2` (`AlgebraicGeometry.isPureOfWeightOver_compactlySupportedCohomology_two_of_isAffine`), and it
+is `H_c^2(C, G)` with the Frobenius multiplied by `b`.
 -/
 theorem isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq
     (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {v : ℝ}
@@ -81,13 +79,12 @@ The blueprint proof splits `C₀` into its connected components, and a connected
 field of constants `k₁ = 𝔽_{q^d}` into the `d` geometrically connected curves over `k₁` which make
 up its geometric fibre, permuted cyclically by the Frobenius. Weil sheaves over a finite extension
 `k₁` of `k₀` are not available, so we use instead the purity of `H_c^2` of a sheaf punctually pure
-of weight zero on a smooth affine curve, not necessarily geometrically connected (blueprint
-`theorem-pure-lisse-sheaves-over-relative`), after a constant twist normalizing the weight to zero
+of weight zero on a smooth affine curve, not necessarily geometrically connected, after a
+constant twist normalizing the weight to zero
 (`AlgebraicGeometry.WeilSheaf.isPureOfWeightOver_compactlySupportedCohomology_two_of_norm_eq`).
 If `G` has no local Frobenius eigenvalue at all, it is punctually pure of the weights `0` and
 `-2` at once, so `H_c^2(C, G)` is pure of the weights `2` and `0` at once and has no Frobenius
-eigenvalue.
-(blueprint: `lemma-degree-zero-top-cohomology--6`) -/
+eigenvalue. -/
 theorem WeilSheaf.hasWeightsAtMostOver_compactlySupportedCohomology_two
     (ι : PadicAlgCl l →+* ℂ) (G : WeilSheaf k₀ l C) (hG : G.IsLisse) {w : ℝ}
     (hw : G.IsPunctuallyPureOfWeight ι w) :

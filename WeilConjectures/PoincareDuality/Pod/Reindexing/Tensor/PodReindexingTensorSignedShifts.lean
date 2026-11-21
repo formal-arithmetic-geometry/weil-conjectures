@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Signed shifts of fixed normalized tensor reindexing
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-signed-shifts). -/
+Source: Stacks 07A4, 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,25 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Signed shifts of the same quotient-normalized completion and tensor maps.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 011G, 07A4, 0941 (blueprint: lem-pod-reindexing-tensor-signed-shifts).
-
-Proof: construct left and right tensor-shift comparisons by relabeling the total
-tensor summands on flat-term K-flat representatives. The right comparison has
-the Koszul factor (-1)^(pr); the left comparison has its prescribed sign.
-The signed total differentials verify these are chain isomorphisms for every
-integer shift, and the quotient transitions commute with them. Localize these
-maps to get SY and SX with their Generators laws. Apply the same two-coordinate
-Roos realization used in T.Model to obtain their Model laws. On a shifted Roos
-complex the second coordinate is multiplied by (-1)^r, while the first is the
-projection-defined shift/product comparison. D.shiftSource.Laws and
-D.shiftTarget.Laws fix exactly these maps. D.LimitModel therefore supplies the
-two PodLimitSignedShift identities. On the coherent reduction system, shifting
-commutes with the quotient tensor generator map, proving CommShift of
-D.reduction.hom; the diagonal Roos equation proves CommShift of D.limit.hom.
-Finally reindexing preserves degrees and integer signs, so both tensor-shift
-squares agree on all homogeneous summands and descend through T.Model.
-This verifies negative shifts, shift zero, empty schemes and zero inputs too. -/
+Source: Stacks 011G, 07A4, 0941. -/
 theorem podReindexingTensorSignedShifts
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

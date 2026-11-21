@@ -49,8 +49,7 @@ namespace Scheme.EtaleTorsor
 
 open FiniteEtale
 
-/-- Blueprint `proposition-no-fixed-class-degree-one--1`: No Frobenius-fixed compatible class
-on an open normal curve.
+/-- No Frobenius-fixed compatible class on an open normal curve.
 
 Let `U₀` be a normal geometrically connected curve of pure dimension one over a finite field
 `K = 𝔽_q` (its local rings are integrally closed domains and `dim U₀ = 1`), let
@@ -100,8 +99,7 @@ theorem eq_one_of_conj_invariant_of_isIntegrallyClosed_stalk
   have := IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk p hC hdim
   W.eq_one_of_conj_invariant b hb
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: Finite geometric image of a
-rank-one Weil character on a curve.
+/-- Finite geometric image of a rank-one Weil character on a curve.
 
 Let `C₀ / 𝔽_q` be normal, geometrically connected, separated, of finite type and pure of
 dimension one. A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` has finite geometric image: there is
@@ -113,8 +111,7 @@ theorem exists_pow_eq_one_of_continuous_of_isIntegrallyClosed_stalk
   have := IsCurve.smoothOfRelativeDimension_one_of_isIntegrallyClosed_stalk p hC hdim
   W.exists_pow_eq_one_of_continuous χ hχ
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: Finite geometric image of a
-rank-one Weil character on a curve.
+/-- Finite geometric image of a rank-one Weil character on a curve.
 
 Let `C₀ / 𝔽_q` be normal, geometrically connected, separated, of finite type and pure of
 dimension one. A continuous character `χ : W(C₀) → ℚ̄_ℓˣ` takes finitely many values on

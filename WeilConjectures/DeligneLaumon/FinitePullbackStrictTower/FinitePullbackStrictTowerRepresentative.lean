@@ -9,10 +9,7 @@ public import WeilConjectures.DeligneLaumon.FinitePullbackStrictTower.FinitePull
 
 /-! # Data for the natural finite pullback comparison of strict reduction towers
 
-Source: Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH
-(blueprint: def-a1-finite-pullback-representative-data).
-The positive exponent n+1 is indexed by n : ℕ. The zigzag lives in strict diagrams
-before localization. Its two isomorphisms are fixed on tensor generators.
+Source: Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH.
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 variable {X Y : Scheme.{t}} (g : X ⟶ Y)
 
 /-- The normalized comparison before the integer-shift assertions.
-Source: Stacks 099N(5), 03EL and 06XN.
-(blueprint: def-a1-finite-pullback-representative-data). -/
+Source: Stacks 099N(5), 03EL and 06XN. -/
 structure RepresentativeComparison where
   B : DerivedPair l E Y X (finiteComplex l E g)
   b : pulledReduction l E g ≅ B.functor

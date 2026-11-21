@@ -34,27 +34,19 @@ namespace WeilConjectures.NormalizedScalar
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
   [NormedAlgebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : Scheme.{u})
 
-/-- The actual pulled-back integral coefficient ring.
-Source: the unit-ball condensed ring and inverse image.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- The actual pulled-back integral coefficient ring. -/
 abbrev integralRing := condensedRingObj
   (Profinite.continuousCoefficientRingObj (integers l E)) T
 
-/-- The actual pulled-back field coefficient ring.
-Source: continuous field coefficients and inverse image.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- The actual pulled-back field coefficient ring. -/
 abbrev fieldRing (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E]
     [NormedAlgebra ℚ_[l] E] (T : Scheme.{u}) :=
   condensedRingObj (Profinite.continuousCoefficientRingObj E) T
 
-/-- The pulled-back integral inclusion.
-Source: inverse image of postcomposition by the inclusion.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- The pulled-back integral inclusion. -/
 abbrev inclusion := coefficientMap (scalarMap (l := l) (E := E)) T
 
-/-- Exactness of this coefficient map.
-Source: normalized coefficient transport.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- Exactness of this coefficient map. -/
 instance inclusion_exact : PreservesFiniteLimits (Mod.extendScalars (inclusion l E T)) :=
   scalar_exact T
 
@@ -65,28 +57,20 @@ def ScalarExactData : Prop :=
 theorem scalar_exact_data : ScalarExactData l E T := by
   exact inclusion_exact l E T
 
-/-- Ordinary bounded constructible integral complexes.
-Source: bounded constructible internal module objects.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- Ordinary bounded constructible integral complexes. -/
 abbrev Integral := BoundedConstructible (integralRing l E T)
 
-/-- Ordinary bounded constructible field complexes.
-Source: bounded constructible internal module objects.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- Ordinary bounded constructible field complexes. -/
 abbrev Rational := BoundedConstructible (fieldRing l E T)
 
-/-- The restriction of the actual total left derived extension of scalars.
-Source: exact scalar extension preserves bounded constructibility.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- The restriction of the actual total left derived extension of scalars. -/
 def boundedExtension : Integral l E T ⥤ Rational l E T :=
   (boundedConstructible (fieldRing l E T)).lift
     ((boundedConstructible (integralRing l E T)).ι ⋙
       (Mod.extendScalars (inclusion l E T)).leftDerivedFunctor)
     (fun K ↦ boundedConstructible_leftDerivedExtendScalars_obj _ _ _ K.obj K.property)
 
-/-- The specified restriction agrees with the ambient actual derived extension.
-Source: the full-subcategory lift comparison.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- The specified restriction agrees with the ambient actual derived extension. -/
 def boundedExtensionCompatibility :
     boundedExtension l E T ⋙ (boundedConstructible (fieldRing l E T)).ι ≅
       (boundedConstructible (integralRing l E T)).ι ⋙
@@ -95,12 +79,7 @@ def boundedExtensionCompatibility :
 
 attribute [local instance] modulesLinear
 
-/-- Scalar balancing gives the integral-to-field scalar identity for ordinary tensor.
-Source: linearity of adjoints and compatibility of actual constant sections.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar).
-Proof: restriction is linear for the two integral constant-section actions, so
-its left adjoint is linear. The target integral action is the restriction of its
-field constant-section action along the actual inclusion. -/
+/-- Scalar balancing gives the integral-to-field scalar identity for ordinary tensor. -/
 theorem extension_scalar (a : integers l E)
     (M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (integralRing l E T)) :
     (Mod.extendScalars (inclusion l E T)).map (a • 𝟙 M) =
@@ -140,17 +119,13 @@ instance integralShiftLinear (n : ℤ) :
     (integers l E)
   exact CategoryTheory.ObjectProperty.linear_shiftFunctor_fullSubcategory _ n
 
-/-- Exact derived extension has its coherent termwise integer shifts.
-Source: exact-functor factorization.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- Exact derived extension has its coherent termwise integer shifts. -/
 @[instance_reducible] instance derivedExtensionShift :
     (Mod.extendScalars (inclusion l E T)).leftDerivedFunctor.CommShift ℤ :=
   CategoryTheory.Functor.CommShift.ofIso
     (Mod.extendScalars (inclusion l E T)).leftDerivedFunctorIsoMapDerivedCategory.symm ℤ
 
-/-- Exact derived extension is triangulated.
-Source: invariance under the exact termwise comparison.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- Exact derived extension is triangulated. -/
 instance derivedExtensionTriangulated :
     (Mod.extendScalars (inclusion l E T)).leftDerivedFunctor.IsTriangulated := by
   have := CategoryTheory.Functor.CommShift.ofIso_compatibility
@@ -158,16 +133,12 @@ instance derivedExtensionTriangulated :
   exact CategoryTheory.Functor.isTriangulated_of_iso
     (Mod.extendScalars (inclusion l E T)).leftDerivedFunctorIsoMapDerivedCategory.symm
 
-/-- Integer shifts restrict to the bounded constructible extension.
-Source: the inherited shifts of a full triangulated subcategory.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- Integer shifts restrict to the bounded constructible extension. -/
 instance boundedExtensionShift : (boundedExtension l E T).CommShift ℤ := by
   unfold boundedExtension
   infer_instance
 
-/-- The bounded constructible restriction preserves distinguished triangles.
-Source: the inherited distinguished triangles of the full subcategories.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+/-- The bounded constructible restriction preserves distinguished triangles. -/
 instance boundedExtensionTriangulated : (boundedExtension l E T).IsTriangulated := by
   unfold boundedExtension
   infer_instance
@@ -182,12 +153,7 @@ private lemma map_scalar_identity_of_iso
   rw [e.hom.naturality, h]
   simp only [Linear.comp_smul, Linear.smul_comp, Category.id_comp, Category.comp_id]
 
-/-- Derived scalar extension preserves each integral scalar identity with its actual value.
-Source: termwise scalar balancing.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar).
-Proof: pass the ordinary scalar identity through the exact derived factorization,
-then use its canonical isomorphism with total left derived extension. The full
-subcategory has the inherited scalar action, so its inclusion detects the equality. -/
+/-- Derived scalar extension preserves each integral scalar identity with its actual value. -/
 theorem boundedExtension_scalar (a : integers l E) (K : Integral l E T) :
     (boundedExtension l E T).map (a • 𝟙 K) =
       (a : E) • 𝟙 ((boundedExtension l E T).obj K) := by
@@ -204,20 +170,13 @@ theorem boundedExtension_scalar (a : integers l E) (K : Integral l E T) :
   exact he
 
 /-- The normalized assertion used in the scalar-functor assembly.
-Source: the corresponding coefficient or Verdier universal property.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar). -/
+Source: the corresponding coefficient or Verdier universal property. -/
 def ForwardData : Prop :=
   ForwardFunctorData (Submonoid.powers (l : integers l E)) E (boundedExtension l E T)
 
 /-- The forward functor on the ordinary Verdier rationalization, with the same
 shift-compatible comparison and fraction equation.
-Source: the universal property of Verdier rationalization.
-(blueprint: lem-weil-pbc-normalized-bounded-scalar).
-Proof: scalar extension is triangulated and sends each integral scalar identity
-to its actual field scalar identity. The normalized Verdier lift therefore applies.
-Its linearity gives the fraction equation for every field scalar, hence for every
-inverse power of ell. The localization is at powers of ell in the integer ring,
-so its torsion objects are exactly the objects annihilated by a power of ell. -/
+Source: the universal property of Verdier rationalization. -/
 theorem bounded_forward_exists : ForwardData l E T := by
   let H := boundedExtension l E T
   have hH : ∀ (r : integers l E) (X : Integral l E T),

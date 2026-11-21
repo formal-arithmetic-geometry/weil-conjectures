@@ -25,8 +25,7 @@ prime to `ℓ`: if `E / k` is finite of degree `ℓ ^ b n'` with `ℓ ∤ n'`, t
 image of `ker χ` in `Gal(E/k)` lies in `Gal(E/k_{ℓ ^ b})`, of order `n'`.
 
 Hence `(G, χ, φ)` is an `ℓ`-adic procyclic quotient (`DiscreteModule.IsEllAdicQuotient`), and
-`Hᵠ(G, M) = 0` for `q ≥ 2` and every `ℓ`-primary discrete `G`-module `M`, for every prime `ℓ`
-(blueprint `lemma-cohomological-dimension-base-field`).
+`Hᵠ(G, M) = 0` for `q ≥ 2` and every `ℓ`-primary discrete `G`-module `M`, for every prime `ℓ`.
 
 ## Main statements
 

@@ -20,8 +20,7 @@ public import WeilConjectures.WeilSheaf.StalkUpperStar
 A Weil sheaf on the relative affine line `𝔸¹_S`, punctually pure of weight `w`, is built by
 finitely many open–closed decompositions of the source from pieces which are either separated
 quasi-finite over `S`, or open in a relative affine line `𝔸¹_V` over an immersion `V ⟶ S`, with
-surjective projection to `V`, and carry a lisse sheaf
-(blueprint: `proposition-relative-affine-line--1`).
+surjective projection to `V`, and carry a lisse sheaf.
 
 ## Main definitions
 
@@ -110,10 +109,7 @@ decompositions `U ↪ X ↩ Z` of the source, from pieces of the following two k
 
 ```
 X --- v ---> 𝔸¹_V --- ↘ ---> V --- c ---> S
-```
-
-(blueprint: `proposition-relative-affine-line--1`, the finite stratifications of source and target
-refined to open–closed filtrations). -/
+``` -/
 inductive WeilSheaf.HasRelativeLineStratification :
     ∀ {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
       [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] (h : X ⟶ S)
@@ -351,7 +347,7 @@ line `𝔸¹_S`, punctually `ι`-pure of weight `w`. Then `F` has a relative-lin
 `S` with pure pieces of weight `w`: there are finite stratifications of source and target, refined
 to open–closed filtrations, such that each source stratum is either separated quasi-finite over
 its target stratum, or open in its relative affine line with surjective projection and carries a
-lisse restriction of `F` (blueprint: `proposition-relative-affine-line--1`).
+lisse restriction of `F`.
 
 Over an integral affine open `Spec B` of `S`, the complement of the lissity locus of `F` is cut
 out by an ideal of `B[T]` containing a nonzero polynomial; over the principal open of its leading

@@ -78,9 +78,7 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # Signed integral pullback shift coordinates and descent
 
-Source: Stacks Project, derived.tex, Tag 014E, and sites-cohomology.tex,
-Tag 0941; trace-definition auxiliary whole-tower comparison, shift clause
-(blueprint: def-fd-integral-pullback-shift-coordinates).
+Source: Stacks Project, derived.tex, Tag 014E, and sites-cohomology.tex, Tag 0941.
 
 These are the existing finite-level and product shift maps, the actual Roos
 endomorphism, and predicates fixing its signed cochain shift and derived descent.
@@ -102,14 +100,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Pin the existing countable-product structure to the actual coefficient universe.
-Source: Bhatt--Scholze 4.2.8
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+Source: Bhatt--Scholze 4.2.8. -/
 instance (priority := 2500) products (T : Scheme.{u}) :
     HasCountableProducts (integralTowerModules.{u, u} l E T) :=
   integralOperationsCountableProducts.{u, u} l E T
 
 /-- Termwise products of integral complexes in the fixed coefficient universe.
-Source: Stacks 0941 (blueprint: def-fd-integral-pullback-shift-coordinates). -/
+Source: Stacks 0941. -/
 instance (priority := 2500) complexProducts (T : Scheme.{u}) :
     HasCountableProducts (CochainComplex (integralTowerModules.{u, u} l E T) ℤ) where
   out J := by
@@ -121,8 +118,7 @@ instance (priority := 2500) complexProducts (T : Scheme.{u}) :
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
 /-- The canonical finite-level termwise shift comparison.
-Source: Stacks 014E, 099N(5)
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+Source: Stacks 014E, 099N(5). -/
 def levelShift (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r : ℤ) (n : ℕ) :
     (integralOperationsPullbackLevel.{u, u} l E g n).obj (P⟦r⟧) ≅
       ((integralOperationsPullbackLevel.{u, u} l E g n).obj P)⟦r⟧ :=
@@ -137,8 +133,7 @@ def levelShift (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r :
           |>.mapCochainComplexShiftIso r).app P
 
 /-- The product of the canonical finite-level shift comparisons.
-Source: Stacks 014E, 0941
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+Source: Stacks 014E, 0941. -/
 def productShift (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r : ℤ) :
     (∏ᶜ fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj
       (P⟦r⟧)).obj (op n)) ≅
@@ -152,7 +147,7 @@ def productShift (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r
       (fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj P).obj (op n))).symm
 
 /-- The endomorphism whose mapping cocone defines integral pullback on a representative.
-Source: Stacks 0941 (blueprint: def-fd-integral-pullback-shift-coordinates). -/
+Source: Stacks 0941. -/
 abbrev roosEnd (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) :=
   towerTransitionEndomorphism
     (K := fun n : ℕ ↦ ((integralOperationsPullbackTowerFunctor.{u, u} l E g).obj P).obj (op n))
@@ -160,8 +155,7 @@ abbrev roosEnd (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) :=
 
 /-- Shift on the actual Roos complex is (x,y) mapped to (x,(-1)^r y) in
 mapping-cocone coordinates, equivalently (y,x) mapped to ((-1)^r y,x).
-Source: Stacks 014E, 0941; the whole-tower comparison shift clause
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+Source: Stacks 014E, 0941. -/
 def ShiftCoordinates
     (c : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ) : Prop :=
   ∀ (P : CochainComplex (integralTowerModules.{u, u} l E Y) ℤ) (r : ℤ),
@@ -187,8 +181,7 @@ def ShiftCoordinates
             r j (j + r) rfl).inv))
 
 /-- The integral derived shift is the descent of the specified representative shift.
-Source: Stacks 014E, 0941, resolving-class localization
-(blueprint: def-fd-integral-pullback-shift-coordinates). -/
+Source: Stacks 014E, 0941, resolving-class localization. -/
 def ShiftDescent
     (c : (integralOperationsPullbackComplexFunctor.{u, u} l E g).CommShift ℤ)
     (d : (integralDerivedPullback.{u, u} l E g).CommShift ℤ) : Prop :=

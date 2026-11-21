@@ -17,8 +17,7 @@ tensor comparison, followed by the reduction comparisons, with the localization 
 chain map: the transported system cochain tensor comparison followed by the two unary chain
 models.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 03EL, 07A4, 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -43,7 +42,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The coefficient identification of the Hom resolution model is the completed reduction
 coefficient map.
-Source: Stacks 03CO; uniqueness of maps into an inverse limit. -/
+Source: Stacks 03CO. -/
 theorem podReindexingCoefficient_none_eq {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     (sheafCompose (ProEt.topology X)
       (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).mapIso
@@ -155,8 +154,7 @@ theorem systemFactor_hom_app_eq {X Y : Scheme.{u}} (g : X ⟶ Y)
   exact Functor.mapDerivedCategoryFactors_congr _ _ (PodReductionRepresentatives.inverse_eq l E g)
     (PodReductionRepresentatives.derived_eq l E g) _
 
-/-- The categorical pasting behind the chain-level model of the system tensor comparison.
-Source: naturality of the system tensor comparison. -/
+/-- The categorical pasting behind the chain-level model of the system tensor comparison. -/
 theorem systemTensorChain_paste {DY DX : Type*} [Category* DY] [Category* DX]
     (G : DY ⥤ DX) (TY : DY × DY ⥤ DY) (TX : DX × DX ⥤ DX)
     (w : TY ⋙ G ≅ G.prod G ⋙ TX)
@@ -202,7 +200,7 @@ local notation "S[" W "]" => coefficientTotalTensor.{u, u + 1, u}
 /-- The coherent system tensor comparison, followed by the two reduction comparisons, is the
 localization of the transported system cochain tensor comparison followed by two unary chain
 models, provided these models localize the unary reduction comparisons.
-Source: Stacks 03EL, 07A4, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+Source: Stacks 03EL, 07A4, 0941. -/
 theorem podReindexing_systemTensor_chainModel
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (A : PodCompletionReindex l E g)
@@ -337,7 +335,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The unary reduction model of a good representative, transported to the ordinary
 reindexed complex, localizes the reduction comparison followed by the ordinary localization
 factor.
-Source: Stacks 05RU, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+Source: Stacks 05RU, 0941. -/
 theorem podReductionUnary_transport {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (A : PodCompletionReindex l E g)
     (h : podReindexingDerivedFunctor l E g none = podOrdinaryReindex l E g)

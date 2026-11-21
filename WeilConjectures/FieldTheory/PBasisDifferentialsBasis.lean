@@ -15,8 +15,8 @@ import WeilConjectures.FieldTheory.PIndependentEvaluationKernel
 /-!
 # Differentials of a p-basis
 
-Source: Stacks Project, More on Algebra, Definition 07P1 and Lemma 07P2, implication
-(a) implies (b) (blueprint: lem-weil-pbc-p-basis-differentials-basis).
+Source: Stacks Project, More on Algebra, Definition 07P1 and Lemma 07P2, implication (a) implies
+(b).
 -/
 
 @[expose] public section
@@ -25,27 +25,9 @@ universe u v w
 
 namespace KaehlerDifferential
 
-/-- Source: Stacks Project, Tags 07P1 and 07P2, implication (a) implies (b).
-(blueprint: lem-weil-pbc-p-basis-differentials-basis)
+/--Source: Stacks Project, Tags 07P1 and 07P2, implication (a) implies (b).
 
-The differentials of a p-basis form a basis of the relative differentials.
-
-Proof:
-1. Every k-derivation kills B = kK^p: use the p-th power rule and induction on
-   the field adjunction, including the inverse rule. The universal derivation
-   therefore kills B. Leibniz shows that the differential of every monomial
-   lies in the K-span of the dt_i. Expanding every element in the given
-   monomial basis proves that these differentials span all of Ω[K/k].
-2. The same basis expansion proves evaluation B[X_i] → K is surjective.
-3. The bounded monomials are independent. Apply
-   `MvPolynomial.aeval_pderiv_eq_zero_of_pIndependent` to show that each partial
-   derivative preserves the evaluation kernel. Descend it along evaluation
-   using `Derivation.liftOfSurjective`, and restrict scalars to k. This gives
-   derivations δ_i with δ_i(t_j) = 1 for i = j and 0 otherwise.
-4. The universal property of Ω[K/k] turns the δ_i into K-linear forms dual to
-   the dt_i. Hence the dt_i are linearly independent. Combine independence
-   and spanning with `Module.Basis.mk`. The argument uses finite supports
-   throughout and includes both infinite and empty I. -/
+The differentials of a p-basis form a basis of the relative differentials. -/
 theorem exists_basis_differentials_of_pBasis
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]
     (p : ℕ) [Fact p.Prime] [CharP k p] [CharP K p]

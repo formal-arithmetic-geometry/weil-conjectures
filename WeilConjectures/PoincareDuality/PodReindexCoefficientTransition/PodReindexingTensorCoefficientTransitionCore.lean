@@ -12,8 +12,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Core scalar/reindexing transition data
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core).
+Source: Stacks 03EL, 06YY, 0941.
 
 This is the normalized transition construction through the pure-tensor, reduction,
 and limit squares.  The completed tensor square is isolated in the next theorem.
@@ -45,15 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The normalized coefficient transition through its pure, reduction and limit squares.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core).
-
-Proof: retain the supplied normalized completion data at both coefficient fields.
-The finite-free scalar extension comparison is assembled on the actual quotient
-systems; balanced tensor associativity fixes the pure-tensor map and its inverse.
-The same strict-system map descends through the normalized Roos realizations, so
-its reduction and limit squares are the displayed counit formulas.  The remaining
-completed tensor square is proved separately from these normalized data.
+Source: Stacks 03EL, 06YY, 0941.
 -/
 def PodReindexCoefficientTransition.Core
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -100,15 +91,7 @@ def PodReindexCoefficientTransition.Core
             ((integralComparisonDerivedSequenceScalar l E L ι Y).obj N))
 
 /-- The normalized core transition exists through the pure, reduction, and limit squares.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core).
-
-Proof: construct the ordinary scalar/reindexing isomorphism as the mate of the
-restriction-of-scalars square, with its pure section formula, and choose normalized
-primitive quotient scalar models. Apply the reduction-square component to this
-transition. The limit square follows from reduction by the reduction/limit
-adjunction and the counit laws of the supplied reindexing data. Package these
-three clauses into Core. -/
+Source: Stacks 03EL, 06YY, 0941. -/
 theorem podReindexingTensorCoefficientTransition_core
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

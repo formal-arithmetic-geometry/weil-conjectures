@@ -14,8 +14,7 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Tensor normalization of the reindexing composition
 
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 09A5, 07A4, 0FPI.
-(blueprint: lem-pod-reindexing-tensor-compositor).
+Source: Stacks 09A5, 07A4, 0FPI.
 -/
 
 @[expose] public noncomputable section
@@ -561,17 +560,7 @@ private theorem tensor_on_representatives {X Y Z : Scheme.{u}}
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 attribute [-instance] GrothendieckTopology.hasSheafify_proEtTopology in
 /-- The canonical site and localized tensor composition comparison.
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 09A5, 07A4, 0FPI
-(blueprint: lem-pod-reindexing-tensor-compositor).
-
-Proof: For a module M and a pro-etale object U of Z, define the ordinary comparison by the
-restriction of M along (siteComp g h).inv.app U. Define its inverse using siteComp.hom. The two
-composites are identities by functoriality of restriction and the site isomorphism identities.
-These section maps commute with restriction by naturality of siteComp. They are linear: the
-coefficient restriction along this site map is the identity on the finite-stage constant
-coefficients; at the completed stage the same assertion holds after every quotient projection,
-which jointly detect equality. Thus these maps assemble to the ordinary natural module isomorphism
-and give the required sections field.
+Source: Stacks 09A5, 07A4, 0FPI.
 
 For each cochain complex P use this ordinary comparison in degree i. Naturality with respect to
 P.d proves commutation with the differential. The degree field is then the defining equation, and

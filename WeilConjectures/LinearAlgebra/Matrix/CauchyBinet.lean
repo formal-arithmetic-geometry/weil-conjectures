@@ -15,8 +15,7 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 /-!
 # The Cauchy–Binet formula
 
-Source: Stacks Project, Algebra, Section 00AR, item 0F0K
-(blueprint: lem-weil-pbc-cauchy-binet).
+Source: Stacks Project, Algebra, Section 00AR, item 0F0K.
 -/
 
 @[expose] public section
@@ -26,21 +25,10 @@ universe u
 namespace Matrix
 
 /-- The Cauchy–Binet formula, including its empty-sum and zero-size cases.
-Source: Stacks Project, Algebra, Section 00AR, item 0F0K
-(blueprint: lem-weil-pbc-cauchy-binet).
+Source: Stacks Project, Algebra, Section 00AR, item 0F0K.
 
 The subsets of size `m` are enumerated once each. For each subset, `orderEmbOfFin` lists
-its indices in increasing order, and the same list selects columns of `A` and rows of `B`.
-
-Proof: use the standard basis of `R^n` and its induced basis on the `m`th exterior
-power. The coordinate of the exterior product of the columns of `B` at an `m`-element
-subset is the determinant of the corresponding rows of `B` (up to transpose).
-Apply the alternating linear form determined by the rows of `A` to this basis expansion.
-Its value on the column product is `det (A * B)` (up to transpose), and on each basis
-vector is the corresponding column minor of `A` (up to transpose). Linearity gives the
-sum of products of minors. If `n < m`, no subset of size `m` exists, so the sum and
-hence the product determinant vanish. If `m = 0`, the product determinant is one,
-and the main equality gives the same value for the sum. -/
+its indices in increasing order, and the same list selects columns of `A` and rows of `B`. -/
 theorem cauchy_binet {R : Type u} [CommRing R] (m n : ℕ)
     (A : Matrix (Fin m) (Fin n) R) (B : Matrix (Fin n) (Fin m) R) :
     let minors : R := ∑ S : {S : Finset (Fin n) // S.card = m},

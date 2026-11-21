@@ -19,7 +19,6 @@ import Mathlib.Algebra.BigOperators.Fin
 # LocallyConstantCochainsInvariantsZero
 
 Source: Stacks Project, Etale Cohomology, Tag 0DVG.
-(blueprint: lem-sc-locally-constant-cochains-invariants-zero).
 -/
 
 @[expose] public section
@@ -32,20 +31,7 @@ namespace Rep
 
 /-- Degree-zero locally constant integer cochain homology is naturally invariants.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, degree-zero differential;
-step 3 of lem-sc-locally-constant-cochains-effaceable.
-
-Proof: Fin 0 to G is a singleton. Evaluation identifies its locally constant maps
-additively with E(M). The displayed differential for n=0 evaluates to rho(g)m-m,
-since contractNth at the sole index drops the argument and the sign is -1.
-Its kernel is precisely the invariant submodule. There is no incoming differential
-in the N-indexed cochain complex at zero, so homology is this kernel. Compose the
-coordinate equivalence, evaluation, and the kernel identification to obtain an
-isomorphism in AddCommGrpCat. The coefficient equation makes evaluation commute with
-every map of A; restriction to kernels gives naturality. The inverse sends an invariant
-element to the constant zero-degree cocycle. These maps are inverse pointwise,
-and assemble into the claimed natural isomorphism.
-(blueprint: lem-sc-locally-constant-cochains-invariants-zero). -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, degree-zero differential. -/
 theorem locallyConstantCochains_invariants_zero
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

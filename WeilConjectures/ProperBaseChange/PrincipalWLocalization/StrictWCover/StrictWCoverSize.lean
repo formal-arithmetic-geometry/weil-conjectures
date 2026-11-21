@@ -14,8 +14,8 @@ import WeilConjectures.ProperBaseChange.PrincipalWLocalization.Retained.Retained
 /-!
 # Cardinality of the strict w-local cover
 
-Source: Stacks Project, Tags 0976, 097S, 0984 (first three stages), and the first
-paragraph of the proof of Tag 097X (blueprint: lem-weil-pbc-strict-w-cover-size).
+Source: Stacks Project, Tags 0976, 097S, 0984 (first three stages), and the first paragraph of
+the proof of Tag 097X.
 -/
 
 @[expose] public section
@@ -25,8 +25,8 @@ universe u v
 namespace PrincipalWLocalization.StrictWCover
 
 /-- The strict w-local cover has cardinality at most any infinite cardinal bounding the base.
-Source: Stacks Project, Tags 0976, 097S, 0984 (first three stages), and the first
-paragraph of the proof of Tag 097X (blueprint: lem-weil-pbc-strict-w-cover-size).
+Source: Stacks Project, Tags 0976, 097S, 0984 (first three stages), and the first paragraph of
+the proof of Tag 097X.
 
 Proof plan:
 1. Use `lem-weil-pbc-finite-list-cardinality` to encode finite lists, finite nested lists,
@@ -34,8 +34,7 @@ Proof plan:
 2. For any ring `R` of size at most `κ`, encode constructible subsets by finite Boolean
    expressions in principal opens and closed sets. Encode finite partitions and their chosen
    denominators this way; there are at most `κ` indices in
-   `theorem-existence-contractible-covers--1`. Common refinement makes these indices directed
-   (`definition-w-local-w-strictly-local--2`).
+   `theorem-existence-contractible-covers--1`. Common refinement makes these indices directed.
 3. Elements of each finite product of principal localizations are finite tuples of fractions.
    Their codes and the index codes have size at most `κ`. Every colimit element has a stage
    representative by `lem-pc-filtered-colimit-commrings-elementwise`, so `|R^w| ≤ κ`.

@@ -97,8 +97,7 @@ private theorem tensor_map_unit_section (W : Scheme.{u}) (n : ℕ)
 
 -- The tensor and restricted-scalar section types require substantial elaboration.
 /-- The left square agrees on every unit reduction tensor generator.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-shift-strict-tower-left-generator-t6).
+Source: Stacks 011G and 07A4.
 
 The inverse tensor normalization reduces the input to a tensor on Y. Quotient
 normalization sends 1 tensor x to 1 tensor x because the coefficient ring map

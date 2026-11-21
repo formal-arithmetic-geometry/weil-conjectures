@@ -121,7 +121,7 @@ instance : Finite ((forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1}).obj
 
 variable [IsAlgClosed k]
 
-/-- **The affine line is acyclic** (blueprint `thm-pur-kummer-affine-line` (1)):
+/-- **The affine line is acyclic**:
 `Hᵠ(𝔸¹_k, Λ) = 0` for `q ≠ 0`, for `k` algebraically closed and `Λ` finite with invertible
 exponent. -/
 theorem isZero_cohomology_affineLine (q : ℤ) (hq : q ≠ 0) :
@@ -136,7 +136,7 @@ theorem isZero_cohomology_affineLine (q : ℤ) (hq : q ≠ 0) :
       (AffineSpace.subsingleton_sheafH_constantSheaf_line _ hn hA q (by exact_mod_cast hq))
 
 omit [Finite Λ] in
-/-- **Cohomological dimension of `𝔾_{m,k}`** (blueprint `thm-pur-kummer-affine-line` (2)):
+/-- **Cohomological dimension of `𝔾_{m,k}`**:
 `Hᵠ(𝔾_{m,k}, Λ) = 0` for `q ∉ {0, 1}`. -/
 theorem isZero_cohomology_multiplicativeGroup {G : Scheme.{u}}
     (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsOpenImmersion j]

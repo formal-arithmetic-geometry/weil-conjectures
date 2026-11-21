@@ -23,8 +23,6 @@ import all WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.
 import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.DerivedCompositionFactors
 
 /-! # Forward coherence of the integral scalar comparison
-
-Source: trace-definition coefficient-category comparison, integral steps 1--6.
 -/
 
 @[expose] public noncomputable section
@@ -57,32 +55,6 @@ private theorem ordinaryComparison_heq (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
 
 /-- Forward scalar associativity and the multiplication/completeness unit for
 an integral comparison characterized by its good-representative completion lift.
-Source: trace-definition coefficient comparison, integral steps 4--6
-(blueprint: lem-fd-integral-scalar-presentation-forward).
-
-Proof: Choose the normalized ScalarCompletionAssociatorData. On a good K-flat
-representative the lift equation identifies b with the actual chi map after
-ordinary coefficient-presentation transport: cancel the scalar-representative
-comparison and the coefficient-transport factor in that equation. The generator
-normalization of ordinary identifies its derived transport with
-fdIntegralOrdinaryPresentation. Naturality along resolving isomorphisms extends
-this identification to every integral object. Apply the forward equation of
-fdIntegralInverseScalarCocycle to these same chi maps. Naturality of chi for the
-second extension at the first chi map replaces chi at the ordinary extension
-followed by completed extension of chi with ordinary extension of chi followed
-by chi at the completed extension. Under coefficient transport,
-fdIntegralOrdinaryBalancing identifies ordinary balancing with pbcAmbientScalarComp.
-The specified framework associator is normalized by the same completion maps,
-as recorded by integralPullbackComparisonRealization. Insert the stage
-integral_identity casts; direct versus composite field embeddings are identified
-by coefficientInclusion_laws. Map the requested equation through the faithful
-PBC integral inclusion. These identifications turn it into that forward equation,
-so faithfulness proves it. For an equal-field inclusion use
-fdIntegralInverseScalarUnits: chi is ordinary multiplication followed by inverse
-completeness. Ordinary generator transport preserves multiplication. Cancel the
-completion unit to obtain b followed by I of integralUnit equal to
-pbcIntegralScalarUnit. This argument includes zero objects and repeated fields;
-no strict-inclusion assumption is used.
 -/
 theorem fdIntegralScalarPresentationForward
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

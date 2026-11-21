@@ -18,13 +18,13 @@ the untwisted, line-valued pairing satisfies
 ## Main statements
 
 - `AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_poincarePairing`,
-  `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator`
-  (`theorem-poincare-duality-frobenius` (a)): `β_K` is a morphism of Weil objects, and the
+  `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator`:
+`β_K` is a morphism of Weil objects, and the
   degreewise pairing is Frobenius invariant.
-- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator_eq`
-  (`theorem-poincare-duality-frobenius--3`): `⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = ⟨x, y⟩_i`.
-- `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing_frobeniusOperator`
-  (`theorem-poincare-duality-frobenius--4`): the untwisted similitude with factor `q^d`.
+- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator_eq`:
+`⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = ⟨x, y⟩_i`.
+- `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing_frobeniusOperator`:
+the untwisted similitude with factor `q^d`.
 -/
 
 @[expose] public section
@@ -51,8 +51,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
-/-- Blueprint `theorem-poincare-duality-frobenius`: Frobenius: equivariance, similitudine,
-reciprocity (a).
+/-- Frobenius: equivariance, similitudine, reciprocity (a).
 
 **The derived Poincaré pairing is a morphism of Weil objects.** Let `φ` be a Weil datum on `K`,
 `τ` one on `Λ_X(d)` for which the smooth trace `Ra_!(Λ_X(d)[2d]) ⟶ Λ_Y` is a morphism of Weil
@@ -77,8 +76,7 @@ theorem isWeilPairing_poincarePairing (sq : IsPullback g a a h) (γ : TateOrient
   Etale.isWeilPairing_poincarePairing sq γ.dualizingComplexIso φ τ ψ hψ hTr
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
-/-- Blueprint `theorem-poincare-duality-frobenius`: Frobenius: equivariance, similitudine,
-reciprocity (a).
+/-- Frobenius: equivariance, similitudine, reciprocity (a).
 
 **Frobenius equivariance of the degreewise pairing**, in the form
 `⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = F(⟨x, y⟩_i)` with `F` the Frobenius of the canonical datum on
@@ -110,9 +108,8 @@ theorem degreewisePoincarePairing_frobeniusOperator (sq : IsPullback g a a h)
     frobeniusOperator_shiftWeilDatum_comp_shiftFunctorZero']
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
-/-- Blueprint `theorem-poincare-duality-frobenius--3`: Equivariance of the twisted
-pairing. This is also blueprint `theorem-poincare-duality-frobenius`: Frobenius: equivariance,
-similitudine, reciprocity (a).
+/-- Equivariance of the twisted pairing. This is also blueprint
+`theorem-poincare-duality-frobenius`: Frobenius: equivariance, similitudine, reciprocity (a).
 
 **Frobenius invariance of the degreewise pairing**: `⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = ⟨x, y⟩_i`,
 when every endomorphism of `Λ_Y` is a scalar (as for `Y = Spec k`, `k` separably closed), so
@@ -142,8 +139,7 @@ theorem degreewisePoincarePairing_frobeniusOperator_eq (sq : IsPullback g a a h)
   rw [degreewisePoincarePairing_frobeniusOperator sq γ φ τ ψ hψ hTr,
     frobeniusOperator_unit_eq_self h hY]
 
-/-- Blueprint `theorem-poincare-duality-frobenius`: Frobenius: equivariance, similitudine,
-reciprocity (a).
+/-- Frobenius: equivariance, similitudine, reciprocity (a).
 
 **The untwisted derived Poincaré pairing is a morphism of Weil objects.** Let `φ` be a Weil
 datum on `K`, `ψ` the contragredient datum on `K^∨`, characterised by the Frobenius equivariance
@@ -167,7 +163,7 @@ theorem isWeilPairing_untwistedPoincarePairing (sq : IsPullback g a a h)
       (γ.untwistedPoincarePairing K) :=
   isWeilPairing_poincarePairingOfTrace sq φ ψ hψ (2 * d) _ τ hTr
 
-/-- Blueprint `theorem-poincare-duality-frobenius--4`: Untwisted similitude.
+/-- Untwisted similitude.
 
 **The untwisted similitude.** With the hypotheses of
 `AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_untwistedPoincarePairing`, and if
@@ -203,7 +199,7 @@ theorem untwistedDegreewisePoincarePairing_frobeniusOperator (sq : IsPullback g 
     (isWeilPairing_untwistedPoincarePairing sq γ φ ψ hψ τ hTr).degreewisePairing_frobeniusOperator,
     frobeniusOperator_shiftWeilDatum_comp_shiftFunctorZero', hτ]
 
-/-- Blueprint `theorem-poincare-duality-frobenius--4`: Untwisted similitude.
+/-- Untwisted similitude.
 
 **The untwisted similitude for the constant complex.** Let `K = Λ_X` with its canonical datum,
 `ψ` the contragredient datum on `Λ_X^∨`, and `ι : Λ_X ⟶ Λ_X^∨` a morphism of Weil objects from

@@ -10,10 +10,7 @@ public import WeilConjectures.SmoothPurity.CompletedOperations.CompletedOperatio
 
 /-! # Coherence of the specified ordinary reindexing comparisons
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-substitution).
-All equations below refer to the displayed family's own reduction, limit and tensor maps.
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -42,8 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- The two locations occupied by the item's own source and target systems.
-Source: blueprint Steps 1 and 5 (blueprint: def-pod-completion-reindex-substitution). -/
+/-- The two locations occupied by the item's own source and target systems. -/
 def podReindexLocations (X Y : Scheme.{u}) : Bool → Scheme.{u} :=
   fun b ↦ if b then X else Y
 
@@ -51,8 +47,7 @@ def podReindexLocations (X Y : Scheme.{u}) : Bool → Scheme.{u} :=
 The closed-tensor comparison preserves the common internal-Hom adjunction; the
 left-adjoint comparison preserves the common total-limit adjunction. These are
 isomorphisms of presentations, rather than equalities of chosen tensor functors.
-Source: Stacks 07A4, 08J9, 0941; uniqueness of adjoints
-(blueprint: def-pod-completion-reindex-substitution). -/
+Source: Stacks 07A4, 08J9, 0941. -/
 def podReindexTensorCodomainComparison {S : Type s} {W : S → Scheme.{u}}
     (C : CompletedOperations.Models l E W) (a : S) :
     ((C.calculus a).reduction.prod (C.calculus a).reduction) ⋙
@@ -76,8 +71,7 @@ expression laws, both calculi, completion augmentations, Roos models and the
 pullback realization are the ones in D. The primitive limit equation involves
 D.limit itself. The tensor transport to the slice presentation is fixed by the same
 strict tower used in T.Model, whose canonical comparison is T.Canonical.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-completion-reindex-substitution). -/
+Source: Stacks 07A4, 0941. -/
 def PodReindexSubstitution {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

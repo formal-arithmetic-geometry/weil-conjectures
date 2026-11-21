@@ -102,8 +102,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType 
 `v_{A,B} : RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)`, the transpose of the
 reduction of the evaluation (`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), is an
 isomorphism: the restriction to bounded constructible complexes of
-`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction` (blueprint
-`proposition-six-operations-change-coefficients--7`). -/
+`ProEtale.CondensedRing.isIso_ihomComparison_leftDerivedIntegersModPowReduction`. -/
 theorem isIso_ihomComparison_integersModPowReduction
     (A B : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
     IsIso ((Functor.LaxMonoidal.ihomComparison
@@ -115,8 +114,7 @@ omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] i
 /-- **Reduction modulo `ℓⁿ` detects zero objects** (`n ≠ 0`): a bounded constructible
 `𝒪_E`-complex `K` whose reduction `K ⊗ᴸ 𝒪_E ⧸ ℓⁿ` vanishes is zero. By the reduction triangle
 `ℓⁿ` acts invertibly on `K`, hence on its first derived reduction, where `ℓ` acts by zero; so the
-first derived reduction vanishes and `K = 0` by derived Nakayama (blueprint
-`lemma-reduction-derived-nakayama`). This is the argument of
+first derived reduction vanishes and `K = 0` by derived Nakayama. This is the argument of
 `ProEtale.CondensedRing.isZero_of_isZero_etaleReduction`. -/
 theorem isZero_of_isZero_integersModPowReductionAmbient_obj (hn : n ≠ 0)
     {K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧}
@@ -130,9 +128,8 @@ theorem isZero_of_isZero_integersModPowReductionAmbient_obj (hn : n ≠ 0)
   exact isZero_of_isIso_pow_zsmul_id X.left ℓ E.1 hn hK
 
 omit [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [IsSeparated X.hom] in
-/-- **Derived Nakayama for the reduction modulo `ℓⁿ`** (blueprint
-`lemma-reduction-derived-nakayama`): for `n ≠ 0`, a morphism `f` of bounded constructible
-`𝒪_E`-complexes whose reduction modulo `ℓⁿ` is an isomorphism is an isomorphism. -/
+/-- **Derived Nakayama for the reduction modulo `ℓⁿ`**: for `n ≠ 0`, a morphism `f` of bounded
+constructible `𝒪_E`-complexes whose reduction modulo `ℓⁿ` is an isomorphism is an isomorphism. -/
 theorem isIso_of_isIso_integersModPowReductionAmbient_map (hn : n ≠ 0)
     {K L : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧} (f : K ⟶ L)
     (h : IsIso ((integersModPowReductionAmbient ℓ E n X).map f)) : IsIso f := by
@@ -162,10 +159,9 @@ noncomputable def leftDerivedIntegersModPowReductionBraided :
   (Mod.extendScalars (integersModPowReduction X.left ℓ E.1 n)).leftDerivedFunctorBraided
     (Mod.extendScalars_map_braiding_hom_δ (integersModPowReduction X.left ℓ E.1 n))
 
-/-- **Biduality along the reduction modulo `ℓⁿ`** (blueprint `theorem-verdier-biduality`,
-(ii)): for `n ≠ 0`, the double-dual morphism `δ_{K₀}` of a bounded constructible `𝒪_E`-complex is
-an isomorphism as soon as the double-dual morphism of its reduction `R K₀`, relative to the
-reduction `R ω_{X, 𝒪_E}` of the dualizing complex, is one. -/
+/-- **Biduality along the reduction modulo `ℓⁿ`**: for `n ≠ 0`, the double-dual morphism `δ_{K₀}`
+of a bounded constructible `𝒪_E`-complex is an isomorphism as soon as the double-dual morphism of
+its reduction `R K₀`, relative to the reduction `R ω_{X, 𝒪_E}` of the dualizing complex, is one. -/
 theorem isIso_verdierBiduality_of_isIso_toIhomIhom_reduction (hn : n ≠ 0)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧)
     (h : IsIso (toIhomIhom

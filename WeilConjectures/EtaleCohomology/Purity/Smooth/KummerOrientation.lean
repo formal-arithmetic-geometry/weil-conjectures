@@ -247,7 +247,7 @@ lemma unit_comp_rightDerivedLowerStar_map_unit {X Y G : Scheme.{u}} (p : X ⟶ Y
 set_option maxRecDepth 20000 in
 -- the composites of derived functors between the derived categories of the two bases are large
 include aY in
-/-- The global orientation (`thm-pur-affine-line-orientation`) for a rank-one datum whose Kummer
+/-- The global orientation for a rank-one datum whose Kummer
 class of the coordinate generates over every algebraically closed field, given the cohomology of
 `𝔸¹_k` and `𝔾_{m,k}`: the adjoint `Λ_{V(t)} ⟶ Rs^!(Λ(1)[2])` of the Kummer boundary `∂κ(t)` is
 an isomorphism. -/

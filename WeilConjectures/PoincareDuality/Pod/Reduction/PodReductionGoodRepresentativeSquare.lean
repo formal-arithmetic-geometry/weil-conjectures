@@ -18,8 +18,7 @@ import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionR
 
 /-! # The reduction tensor square on good representatives
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: lem-pod-reduction-good-representative-square)
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -95,10 +94,8 @@ attribute [local irreducible] podReindexingDerivedFunctor podReindexingDerivedFa
 open PodReindexingCoherence
 
 /-- The reduction/reindexing tensor square on flat-term K-flat representatives.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 07A4 and 0941.
-The proof pastes the unary models with the strict tensor identity and cancels the
-model isomorphisms. No finite-evaluation faithfulness is used.
-(blueprint: lem-pod-reduction-good-representative-square). -/
+Source: Stacks 07A4 and 0941. The proof pastes the unary models with the strict tensor identity
+and cancels the model isomorphisms. No finite-evaluation faithfulness is used. -/
 theorem podReduction_representative_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

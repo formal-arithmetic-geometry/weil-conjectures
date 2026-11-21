@@ -19,7 +19,6 @@ import WeilConjectures.FieldTheory.MatrixFormCentralSimple
 # Descent of a locally constant projective matrix action
 
 Source: Stacks Project, the construction preceding Theorem 03R7.
-(blueprint: lem-sc-projective-matrix-descent).
 -/
 
 @[expose] public section
@@ -31,18 +30,6 @@ namespace Field
 open scoped TensorProduct
 
 /-- A locally constant matrix conjugation action descends to a central simple algebra.
-
-Proof: on the matrix algebra put T_g(M) = b(g) * g(M) * b(g)^(-1).
-The two action hypotheses give T_1 = id and T_g T_h = T_(gh). Each T_g is a
-semilinear algebra automorphism by its displayed conjugation formula. Construct
-A as the K-subalgebra of matrices fixed by every T_g, rather than choosing an
-unspecified algebra. Local constancy on the compact Galois group gives finite
-image for b. Choose an open normal subgroup N such that b is constant on its
-cosets, and shrink N to fix all entries of its finitely many values. Let L be
-its finite Galois fixed field. The identity hypothesis implies that b(1) commutes
-with every matrix, hence is scalar. For g in N, b(g) = b(1), hence T_g is entrywise
-g-action. Thus A lies in Matrix (Fin n) (Fin n) L and is exactly the invariants
-of the induced semilinear action of Gamma = Gal(L/K).
 
 For any vector v in that matrix space and a in L, the sum of g(a)T_g(v) over
 Gamma is invariant, by reindexing the sum. If an L-linear functional kills all
@@ -61,9 +48,7 @@ b(g) * g(e(1 tensor a)) * b(g)^(-1) = e(1 tensor a); multiplying by the inverses
 gives exactly the displayed descent equation. This also handles n = 1 and
 unnormalized scalar lifts, without any division by the order of Gamma.
 
-Source: Stacks Project, the construction preceding Theorem 03R7; the averaging
-and independence argument for finite Galois descent is expanded here.
-(blueprint: lem-sc-projective-matrix-descent). -/
+Source: Stacks Project, the construction preceding Theorem 03R7. -/
 theorem exists_CSA_of_matrix_descent_action (K : Type u) [Field K]
     (n : ℕ) (hn : n ≠ 0)
     (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →

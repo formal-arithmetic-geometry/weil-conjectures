@@ -9,10 +9,6 @@ public import WeilConjectures.Mathlib.Analysis.Analytic.ConvergenceRadius
 import Mathlib.Analysis.Normed.Ring.InfiniteSum
 
 /-! # Polynomial evaluation excludes boundary cancellation
-
-Source: latest blueprint, sec-purity-real-sheaves/sk-p-real-semi/sk-p-real-semi.proof.md,
-paragraphs 5--6: evaluate B N = D L on the open disc.
-(blueprint: lem-wf-boundary-polynomial-evaluation).
 -/
 
 @[expose] public section
@@ -42,9 +38,7 @@ private theorem polynomial_mul_evaluation (L : PowerSeries ℂ) (P : Polynomial 
   ring
 
 /-- Evaluate the polynomial-series identity using absolute convergence. A product with
-nonzero factors on the right cannot have a zero boundary factor on the left.
-Source: latest blueprint, sk-p-real-semi.proof.md, polynomial identity on the weight disc
-(blueprint: lem-wf-boundary-polynomial-evaluation). -/
+nonzero factors on the right cannot have a zero boundary factor on the left. -/
 theorem boundary_polynomial_ne_zero
     (B N D : Polynomial ℂ) (L : PowerSeries ℂ) (z : ℂ)
     (hidentity : (B * N : Polynomial ℂ) = (D : PowerSeries ℂ) * L)

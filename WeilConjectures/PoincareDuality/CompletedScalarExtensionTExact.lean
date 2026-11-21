@@ -62,10 +62,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Completed integral scalar extension is t-exact
 
-Source: main-20261015 blueprint, prop-constructible-truncations, proof, sentence
-"Being characterized by the vanishing of cohomology sheaves"; the corrected integral
-argument extracted in (blueprint: lem-pod-completed-scalar-extension-texact).
-
 The restricted functor below is the published strict-tower functor. The auxiliary
 integer l+1 only fills an unused characteristic argument of its existing interface;
 no characteristic condition on the scheme is introduced.
@@ -127,26 +123,14 @@ private theorem ordinary_exact :
   exact ⟨inferInstance, h.2⟩
 
 /-- Ordinary completed-coefficient extension preserves finite limits.
-Source: Bhatt--Scholze Lemma 6.8.2(1), finite-free coordinate argument, and the
-integral paragraph of prop-constructible-truncations
-(blueprint: lem-pod-completed-scalar-extension-texact).
-Proof: the finite-free completed coefficient comparison gives an R-basis of S.
-After restriction of scalars, M tensor_R S is the finite direct sum of copies of M.
-The inverse coordinate formulas commute with restrictions and sheafification.
-Consequently kernels are computed coordinatewise. Restriction of scalars detects
-exactness on underlying abelian sheaves. Additivity then gives finite limits.
-This is step 2 of the node and uses no flatness of M. -/
+Source: Bhatt--Scholze Lemma 6.8.2(1), finite-free coordinate argument, and the integral
+paragraph of. -/
 @[instance] theorem podCompletedOrdinaryScalarExtension_preservesFiniteLimits :
     PreservesFiniteLimits (completedOrdinaryScalarExtension.{u, u} l E L ι Y) := by
   exact (ordinary_exact l E L ι Y).1
 
 /-- Ordinary completed-coefficient extension preserves finite colimits.
-Source: Bhatt--Scholze Lemma 6.8.2(1), and prop-constructible-truncations
-(blueprint: lem-pod-completed-scalar-extension-texact).
-Proof: in the same finite-free coordinates as step 2, sectionwise cokernels and
-sheafification commute with the finite direct sum. Thus the functor preserves
-cokernels; its already recorded additivity gives preservation of finite colimits.
-Equivalently ordinary sheafified extension is left adjoint to restriction. -/
+Source: Bhatt--Scholze Lemma 6.8.2(1). -/
 @[instance] theorem podCompletedOrdinaryScalarExtension_preservesFiniteColimits :
     PreservesFiniteColimits (completedOrdinaryScalarExtension.{u, u} l E L ι Y) := by
   exact (ordinary_exact l E L ι Y).2

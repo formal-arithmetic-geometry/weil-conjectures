@@ -12,10 +12,7 @@ public import WeilConjectures.PoincareDuality.Integral.IntegralPullbackCompariso
 
 /-! # Coherence of the specified ordinary reindexing comparisons
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941
-(blueprint: def-pod-completion-reindex-coefficient-transition).
-All equations below refer to the displayed family's own reduction, limit and tensor maps.
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -50,7 +47,7 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L
 
 /-- Reduction of the specified scalar completion arrow, then the whole-system counit.
 This fixes the scalar comparison before evaluating any finite quotient.
-Source: Stacks 06YY, 0941 (blueprint: def-pod-completion-reindex-coefficient-transition). -/
+Source: Stacks 06YY, 0941. -/
 def podScalarReduction (W : Scheme.{u}) (ρ : IntegralComparisonRoosModel l L W)
     (S : IntegralComparisonScalarModel l E L ι W (podReindexCalculus l E W) ρ) :
     integralOrdinaryDerivedScalar l E L ι W ⋙ (podReindexCalculus l L W).reduction ⟶
@@ -61,7 +58,7 @@ def podScalarReduction (W : Scheme.{u}) (ρ : IntegralComparisonRoosModel l L W)
 
 /-- The scalar/limit comparison is the same scalar completion and coherent counit formula.
 Its definition applies to ambient systems, without asserting invertibility there.
-Source: Stacks 06YY, 0941 (blueprint: def-pod-completion-reindex-coefficient-transition). -/
+Source: Stacks 06YY, 0941. -/
 def podScalarLimit (W : Scheme.{u}) (ρ : IntegralComparisonRoosModel l L W)
     (S : IntegralComparisonScalarModel l E L ι W (podReindexCalculus l E W) ρ)
     (N : coefficientSequenceDerived l E W) :
@@ -76,8 +73,7 @@ def podScalarLimit (W : Scheme.{u}) (ρ : IntegralComparisonRoosModel l L W)
 
 /-- Canonical scalar/pullback transports for the very selected D and T at E and L.
 The ordinary map is fixed by the local balanced-tensor formula in Laws.
-Source: blueprint Step 5; Stacks 03EL, 06YY, 0941
-(blueprint: def-pod-completion-reindex-coefficient-transition). -/
+Source: Stacks 03EL, 06YY, 0941. -/
 structure PodReindexCoefficientTransition {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -102,7 +98,7 @@ variable {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
   (S : PodReindexCoefficientTransition l E L ι g D D')
 
 /-- The derived comparison is the localization of that same ordinary map.
-Source: Stacks 015F (blueprint: def-pod-completion-reindex-coefficient-transition). -/
+Source: Stacks 015F. -/
 def derived : podOrdinaryReindex l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
     integralOrdinaryDerivedScalar l E L ι Y ⋙ podOrdinaryReindex l L g :=
   Functor.mapDerivedCategoryCompIso (isoReductionIntegralInverse l E g)
@@ -113,8 +109,7 @@ def derived : podOrdinaryReindex l E g ⋙ integralOrdinaryDerivedScalar l E L �
 
 /-- Coefficient transition is fixed on pure tensors and commutes with the item's
 own reduction, limit and tensor identifications. Identity embeddings are included.
-Source: blueprint Step 5; Stacks 03EL, 06YY, 0941
-(blueprint: def-pod-completion-reindex-coefficient-transition). -/
+Source: Stacks 03EL, 06YY, 0941. -/
 def Laws : Prop :=
   (∀ (M : scalarReductionSource l E Y) (U : X.ProEt)
     (x : M.val.obj (op ((proEtaleIsoPostcompose g).obj U)))

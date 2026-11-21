@@ -24,7 +24,6 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-! # Exact extension by zero on the common-stage constructible heart
 
 Source: SGA 4, XVII, §5; Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
-(blueprint: lem-zl-common-stage-open-heart-adjunction).
 -/
 
 @[expose] public noncomputable section

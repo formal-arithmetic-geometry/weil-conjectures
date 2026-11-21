@@ -14,8 +14,7 @@ The coherent tensor comparison is identified, on good representatives, with the 
 Roos map of a tower comparison, given a chain-level model `σ` of the coherent system tensor
 comparison and the induced strict tower equation.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 08TC, 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+Source: Stacks 07A4, 08TC, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -35,8 +34,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- A bifunctor applied to a pair of threefold composites, the middle one a product map.
-Source: functoriality of a bifunctor. -/
+/-- A bifunctor applied to a pair of threefold composites, the middle one a product map. -/
 theorem bifunctor_map_mkHom_comp₃ {C D B : Type*} [Category* C] [Category* D] [Category* B]
     (T : C × C ⥤ D) (R : B ⥤ C) {P₀ P₃ Q₀ Q₃ : C} {P₁ P₂ Q₁ Q₂ : B}
     (a : P₀ ⟶ R.obj P₁) (a' : Q₀ ⟶ R.obj Q₁) (b : P₁ ⟶ P₂) (b' : Q₁ ⟶ Q₂)
@@ -55,7 +53,7 @@ attribute [local irreducible] integralOperationsRoos in
 comparison is localized from an actual chain map `σ`, and the tower map induced by `σ`
 is the strict tower map `τ`, then the coherent tensor comparison is the strict Roos map
 of `τ`.
-Source: Stacks 07A4, 08TC, 0941 (blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+Source: Stacks 07A4, 08TC, 0941. -/
 theorem podReindexing_tensor_roos_of_strict
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (A : PodCompletionReindex l E g) (hA : PodCompletionReindex.Laws l E g A)

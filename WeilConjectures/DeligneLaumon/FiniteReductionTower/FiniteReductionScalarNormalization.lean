@@ -18,7 +18,6 @@ set_option linter.privateModule false
 /-! # Scalar normalization of the strict finite reduction tower
 
 Source: Stacks, Tags 03EK, 06YT and 06YU.
-(blueprint: lem-a1-finite-reduction-scalar-normalization)
 -/
 
 @[expose] public noncomputable section

@@ -16,9 +16,7 @@ import Mathlib.RingTheory.RingHom.Smooth
 
 /-! # Ind-smoothness transported from a separable field extension
 
-Source: Stacks Project, Algebra, Lemma 07BV; Smoothing Ring Maps,
-Lemma 07FE (lemma-resolve-special), final residue-field argument.
-(blueprint: lem-weil-pbc-separable-ind-smooth-transport).
+Source: Stacks Project, Algebra, Lemma 07BV.
 -/
 
 @[expose] public section
@@ -68,20 +66,8 @@ private noncomputable def algebraIsColimitOfForget
 
 /-- Compatible ring identifications with a separable field extension give ind-smoothness.
 
-Source: Stacks Project, Algebra, Lemma 07BV, and Smoothing Ring Maps,
-Lemma 07FE (lemma-resolve-special), final residue-field argument.
-(blueprint: lem-weil-pbc-separable-ind-smooth-transport).
-
-Proof: The finitely generated smooth k-subalgebras of K form a nonempty directed
-cover by Lemma 07BV. Pull each scalar action back along R ≃ k and lift its carrier
-to the joint universe. Inclusions remain R-algebra maps. Smoothness is preserved
-because R → k is an isomorphism and smooth maps compose. Their cocone to ULift K
-is a colimit: every element is in a subalgebra, and equality of two elements from
-one subalgebra is detected by its injective inclusion. The forgetful functor to
-types reflects this filtered colimit. Lift the indexing category to the same universe.
-Finally the compatible target ring equivalence is an R-algebra equivalence to
-ULift K, so transport the colimit presentation along its inverse. No finite-degree
-or algebraicity assumption on K/k is used. -/
+Source: Stacks Project, Algebra, Lemma 07BV, and Smoothing Ring Maps, Lemma 07FE, final
+residue-field argument. -/
 theorem ind_smooth_of_separable_ringEquivs
     {k : Type u} {K : Type w} [Field k] [Field K] [Algebra k K]
     {R : Type u} {S : Type (max u v w)}

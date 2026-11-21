@@ -16,8 +16,7 @@ import WeilConjectures.RepresentationTheory.RepresentationLiftedGroupAlgebraEqui
 /-!
 # Functorial injective embeddings of discrete continuous representations
 
-Source: Stacks Project, Injectives, Tag 04JF, Lemma 19.3.1
-(blueprint: lem-exc-rg-discrete-modules-functorial-injective-embeddings).
+Source: Stacks Project, Injectives, Tag 04JF, Lemma 19.3.1.
 -/
 
 @[expose] public section
@@ -52,18 +51,10 @@ private theorem transferEmbeddings
   exact (adj.injectivePresentationOfMap X
     { J := J.obj (V.obj X), f := j.app (V.obj X) }).mono
 
-/-- (blueprint: lem-exc-rg-discrete-modules-functorial-injective-embeddings)
+/--
 For any ring `R` and topological group `G`, the category of discrete continuous
 representations has functorial injective embeddings. Source: Stacks Project,
-Injectives, Tag 04JF, Lemma 19.3.1.
-
-Proof: first use functorial injective embeddings for modules over the group ring `R[G]`
-(`lem-exc-rg-group-algebra-functorial-injective-embeddings`). The fully faithful inclusion
-of the open-stabilizer subcategory preserves monomorphisms and has the open-stabilizer
-submodule functor as its right adjoint (`lem-exc-rg-open-stabilizer-adjoint`). Apply
-`lem-exc-rg-adjoint-transfer-functorial-injectives` to these functors and the group-ring
-embedding functor. It gives an endofunctor `J`, a natural transformation from the identity,
-monic components, and injective values, as asserted. -/
+Injectives, Tag 04JF, Lemma 19.3.1. -/
 theorem discreteContinuousRep_functorialInjectiveEmbeddings_of_topologicalGroup
     (R : Type u) [Ring R] (G : Type v) [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] :

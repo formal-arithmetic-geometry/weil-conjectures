@@ -9,9 +9,7 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 /-! # Uniqueness of the rational normalized partial closed datum
 
-Source: Stacks Project, Tag 08J9; the rational localization step in the
-blueprint `lem-pod-derived-automorphism-hom-evaluation`.
-(blueprint: lem-pod-rational-closed-uniqueness)
+Source: Stacks Project, Tag 08J9.
 
 Pure tensors generate the localized Hom groups. Equality on the prescribed
 pure-tensor inverse transposes therefore determines every transpose, and
@@ -50,15 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Two rational partial closed data satisfying the pure-tensor normalization
 are equal. This is the uniqueness part of `podRationalClosed_existsUnique`.
-Source: Stacks Project, Tag 08J9; the assigned localization normalization in
-`lem-pod-derived-automorphism-hom-evaluation` (agent refinement of coefficient transport).
-Proof: the recorded rational Hom object equals the unchanged integral Hom
-object. Transport along this equality and induct on its tensor-product Hom
-module. The normalization makes the two inverse transposes equal on every
-pure tensor; additivity gives equality on zero and sums. Injectivity of the
-inverse equivalences then gives equality of the forward transposes. Apply
-`podPartialClosed_ext`; its naturality fields are propositions.
-(blueprint: lem-pod-rational-closed-uniqueness). -/
+Source: Stacks Project, Tag 08J9. -/
 theorem podRationalClosed_unique
     (S S' : PodPartialClosed (rationalDerivedTensor l E W)
       (constructibleRationalHomPairs l E W) (rationalDerivedInternalHom l E W))

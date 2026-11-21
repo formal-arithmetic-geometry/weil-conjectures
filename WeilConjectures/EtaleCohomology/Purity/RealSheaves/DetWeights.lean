@@ -15,9 +15,8 @@ public import WeilConjectures.RepresentationTheory.CompositionFactors
 
 Let `W` be the Weil group of a smooth geometrically connected curve `C₀ / 𝔽_q`, `ℓ ≠ p`, and
 `ι : ℚ̄_ℓ →+* ℂ`. The determinant line `det ρ = ⋀^{rank ρ} ρ` of a lisse Weil representation is
-a rank-one lisse sheaf, hence punctually `ι`-pure of a unique weight `a` (rank-one purity,
-`theorem-rank-one-sheaves-have-finite`), and the *determinant weight* of `ρ` is
-`dw_ι(ρ) = a / rank ρ` (blueprint subsection `definition-determinant-weight--1`).
+a rank-one lisse sheaf, hence punctually `ι`-pure of a unique weight `a`, and the *determinant
+weight* of `ρ` is `dw_ι(ρ) = a / rank ρ`.
 
 This file defines `dw_ι` (`AlgebraicGeometry.WeilGroup.detWeight`) as the weight read off from
 the chosen Frobenius lift, `wt_{ι, q}(det ρ(γ)) / rank ρ`, and proves that it is the unique
@@ -67,7 +66,7 @@ variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime] {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) W.carrier V)
   (ι : PadicAlgCl l →+* ℂ)
 
-/-- Blueprint `definition-determinant-weight--1`: Determinantal weight.
+/-- Determinantal weight.
 
 The determinant weight `dw_ι(ρ) = a / r` of a Weil representation `ρ` of rank `r`, where
 `a = wt_{ι, q}(det ρ(γ)) = 2 log |ι det ρ(γ)| / log q` for the chosen Frobenius lift `γ` of
@@ -75,7 +74,7 @@ degree one. For a lisse `ρ`, `a` is the unique weight of which the determinant 
 punctually `ι`-pure (`AlgebraicGeometry.WeilGroup.existsUnique_isPunctuallyPure_detLine` and
 `AlgebraicGeometry.WeilGroup.isPunctuallyPure_detLine_iff_eq_mul_detWeight`), which is the
 definition of the blueprint; it involves no choice of a coefficient field, the coefficients
-being `ℚ̄_ℓ` throughout (compare `corollary-determinant-weights--2`). For `V = 0`
+being `ℚ̄_ℓ` throughout. For `V = 0`
 it is the junk value `0`. -/
 noncomputable def detWeight : ℝ :=
   frobeniusWeight ι (Nat.card K) (LinearMap.det (ρ W.frobeniusLift)) /
@@ -136,8 +135,7 @@ theorem nonempty_finitePoints (W : WeilGroup p) : Nonempty C.finitePoints := by
   obtain ⟨x, hx⟩ := p.exists_mem_finitePoints
   exact ⟨⟨x, hx⟩⟩
 
-/-- Blueprint `corollary-determinant-weights--2`: The determinant weight does not
-depend on the coefficient field.
+/-- The determinant weight does not depend on the coefficient field.
 
 Let `ρ` be a representation of the Weil group defined over a field `E`, and `E'` an extension
 of `E` with an embedding `ι : E' →+* ℂ`. The local eigenvalue of the determinant line of `ρ`
@@ -173,7 +171,7 @@ theorem IsLisse.continuous_det_apply (hρ : W.IsLisse l ρ) :
   simpa only [Representation.coe_detCharacter_apply, LinearMap.det_toMatrix] using h.matrix_det
 
 /-- The determinant line of a lisse Weil representation is punctually `ι`-pure of weight
-`wt_{ι, q}(det ρ(γ))`, by rank-one purity (`corollary-rank-one-weights--1`). -/
+`wt_{ι, q}(det ρ(γ))`, by rank-one purity. -/
 theorem IsLisse.isPunctuallyPure_detLine (hρ : W.IsLisse l ρ) :
     W.IsPunctuallyPure l (W.detLine l ρ) ι
       (frobeniusWeight ι (Nat.card K) (LinearMap.det (ρ W.frobeniusLift))) := by
@@ -182,7 +180,7 @@ theorem IsLisse.isPunctuallyPure_detLine (hρ : W.IsLisse l ρ) :
   rw [← Representation.coe_detCharacter_apply, ← Representation.coe_detCharacter_apply]
   exact W.frobeniusWeight_eq_of_continuous ρ.detCharacter hρ.continuous_det_apply ι x
 
-/-- Blueprint `corollary-determinant-weights--1`: Purity of the determinant line.
+/-- Purity of the determinant line.
 
 The determinant line `det ρ` of a lisse Weil sheaf `ρ` on the curve is punctually `ι`-pure of
 exactly one real weight `a`: it is a rank-one lisse sheaf, with finite geometric image, hence
@@ -230,8 +228,7 @@ theorem HasDetWeight.detWeight_eq [Nontrivial V] (hρ : W.IsLisse l ρ) {γ : �
   exact mul_left_cancel₀ (Nat.cast_ne_zero.mpr Module.finrank_pos.ne')
     (((hρ.hasDetWeight_detWeight ι) x₀).symm.trans (h x₀))
 
-/-- Blueprint `corollary-determinant-weights--1`: Rank-one purity discharges the
-finite-determinant hypotheses.
+/-- Rank-one purity discharges the finite-determinant hypotheses.
 
 A lisse Weil sheaf `ρ` has finite geometric determinant in the sense of
 `definition-determinant-weight--1` (the determinant character takes finitely many values on `π₁(C)`,
@@ -252,7 +249,7 @@ section Multiset
 variable [FiniteDimensional (PadicAlgCl l) V]
 
 variable (W l ρ) in
-/-- Blueprint `definition-determinant-weight--2`: Determinantal-weight multiset.
+/-- Determinantal-weight multiset.
 
 The multiset of the determinant weights `dw_ι(S)` of the composition factors `S` of a
 finite-dimensional Weil representation `ρ`, with one entry for every factor. These factors are
@@ -289,8 +286,7 @@ theorem mem_detWeightMultiset_iff {a : ℝ} :
     exact ⟨i, Finset.mem_univ_val i, detWeight_of_equiv ι e⟩
 
 variable (W l ρ) in
-/-- Blueprint `theorem-purity-real-sheaves-curves`: Rank-counted determinant weights and weight
-blocks.
+/-- Rank-counted determinant weights and weight blocks.
 
 The *rank-counted list* of determinant weights of `ρ` (item 2): the multiset in which the
 determinant weight `dw_ι(S)` of every composition factor `S` of `ρ` is repeated `rank S` times.
@@ -347,8 +343,7 @@ theorem rankDetWeightMultiset_eq_add (A : Subrepresentation ρ) :
     rw [Fin.val_natAdd, e.symm.finrank_eq, detWeight_of_equiv ι e.symm]
 
 variable (W l ρ) in
-/-- Blueprint `theorem-purity-real-sheaves-curves`: Rank-counted determinant weights and weight
-blocks.
+/-- Rank-counted determinant weights and weight blocks.
 
 The rank `N_γ` above the weight `γ` (item 3): the number of entries `> γ` of the rank-counted
 list of determinant weights. For a semisimple `ρ = ⨁ V_a` it is `∑_{dw_ι(V_a) > γ} rank V_a`
@@ -357,8 +352,7 @@ noncomputable def rankAbove (γ : ℝ) : ℕ :=
   Multiset.card ((W.rankDetWeightMultiset l ρ ι).filter (γ < ·))
 
 variable (W l ρ) in
-/-- Blueprint `theorem-purity-real-sheaves-curves`: Rank-counted determinant weights and weight
-blocks.
+/-- Rank-counted determinant weights and weight blocks.
 
 The weight sum `B_γ` above the weight `γ` (item 3): the sum of the entries `> γ` of the
 rank-counted list of determinant weights. For a semisimple `ρ = ⨁ V_a` it is
@@ -367,8 +361,7 @@ noncomputable def weightSumAbove (γ : ℝ) : ℝ :=
   ((W.rankDetWeightMultiset l ρ ι).filter (γ < ·)).sum
 
 variable (W l ρ) in
-/-- Blueprint `theorem-purity-real-sheaves-curves`: Rank-counted determinant weights and weight
-blocks.
+/-- Rank-counted determinant weights and weight blocks.
 
 The *weight block* `ρ(γ)` of weight `γ` (item 3): the sum of all irreducible subrepresentations
 of determinant weight `γ`. For a semisimple `ρ = ⨁ V_a` with `V_a` irreducible it is

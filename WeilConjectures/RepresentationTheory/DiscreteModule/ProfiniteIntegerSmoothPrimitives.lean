@@ -12,9 +12,6 @@ import Mathlib.GroupTheory.SpecificGroups.Cyclic
 
 /-!
 # Smooth primitives on the profinite completion of the integers
-
-Source: the cyclic refinement argument of `sk-lem-base-field-cd-finite-field.proof.md`.
-(blueprint: lem-sfb-profinite-integer-smooth-primitives)
 -/
 
 @[expose] public section
@@ -37,20 +34,7 @@ private theorem sum_periods {A : Type v} [AddCommGroup A] (F : ℕ → A) (n : �
     simp only [hF]
 
 /-- Summation on a cyclic quotient, refined by the coefficient exponent, gives a smooth
-primitive for translation by a topological generator.
-
-Source: blueprint `sk-lem-base-field-cd-finite-field.proof.md`, finite modules paragraph;
-the summation construction in `DiscreteModule.IsEllAdicQuotient.exists_mul_sub_eq`.
-(blueprint: lem-sfb-profinite-integer-smooth-primitives)
-
-Proof: Take an open normal subgroup on whose right cosets f is constant, and let n be the
-order of the generator in that finite quotient. Refine to the cyclic quotient of order
-n*ell. The quotient map to the original quotient is the homomorphism sending generator
-to generator; equality with the original projection follows on dense generator powers.
-Set h(x) to the sum of f(tau^i) for i below the least residue of x modulo n*ell. The full
-sum is ell times a sum over n terms and hence zero. Incrementing the residue gives the
-required difference, including at the wraparound. The kernel of the refined quotient
-fixes h on the right, so h is smooth. -/
+primitive for translation by a topological generator. -/
 theorem exists_smooth_primitive_of_cyclic_residues
     {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

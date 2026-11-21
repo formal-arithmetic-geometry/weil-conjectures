@@ -14,9 +14,8 @@ import all WeilConjectures.SmoothPurity.GeneralAlgebraicallyClosedCoefficients.G
 
 /-! # Locally constructible adic sheaves as compatible local heart objects
 
-Source: Bhatt--Scholze, Section 6.8, Definitions 6.8.6 and 6.8.8,
-Propositions 6.8.4(5) and 6.8.14, and Remark 6.8.15
-(blueprint: def-dl-a1-locally-constructible-adic-heart).
+Source: Bhatt--Scholze, Section 6.8, Definitions 6.8.6 and 6.8.8, Propositions 6.8.4(5) and
+6.8.14, and Remark 6.8.15.
 
 On a locally finite-type k0-scheme, separated finite-type opens form a basis.
 A locally constructible sheaf is specified on this basis, with the canonical completed

@@ -65,7 +65,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [HasInvertibleExponent Λ Y] [NeZero 
 instance : HasInvertibleExponent Λ (multiplicativeGroup Y).toScheme :=
   .of_hom ((multiplicativeGroup Y).ι ≫ 𝔸(ULift.{u} (Fin 1); Y) ↘ Y)
 
-/-- Blueprint `def-pur-affine-line-datum`: The affine-line datum
+/-- The affine-line datum
 
 The *Kummer class of the coordinate* `κ(t) ∈ H¹(𝔾_{m,Y}, Λ(1)) = Hom(Λ, Λ(1)[1])`: the boundary of
 the global unit `t ∈ Γ(𝔾_{m,Y}, 𝔾ₘ)` (`AlgebraicGeometry.Etale.multiplicativeGroupCoord`) in the
@@ -87,7 +87,7 @@ lemma isUnit_ringChar_multiplicativeGroup :
   rw [Nat.cast_mul] at hu
   exact isUnit_of_mul_isUnit_left hu
 
-/-- Blueprint `def-pur-affine-line-datum`: The affine-line datum
+/-- The affine-line datum
 
 The torsor form of `κ(t)`: the `ℓ^N`-th root of the coordinate defines the Kummer cover
 `𝒯_t = Spec 𝒪_{𝔾_{m,Y}}[T₀]/(T₀^{ℓ^N} - t) ⟶ 𝔾_{m,Y}`, a finite étale `𝔾_{m,Y}`-scheme: the
@@ -99,7 +99,7 @@ noncomputable def affineLineKummerCover : (multiplicativeGroup Y).toScheme.Finit
     (isUnit_ringChar_multiplicativeGroup Y Λ) (Units.isUnit _)
 
 omit [HasInvertibleExponent Λ Y] in
-/-- Blueprint `def-pur-affine-line-datum`: The affine-line datum
+/-- The affine-line datum
 
 The Kummer cover `𝒯_t ⟶ 𝔾_{m,Y}` has degree `ℓ^N`: its algebra `Γ(𝔾_{m,Y})[T₀]/(T₀^{ℓ^N} - t)` is
 free of rank `ℓ^N` over `Γ(𝔾_{m,Y})`, with basis `1, T₀, …, T₀^{ℓ^N - 1}`. -/

@@ -42,8 +42,7 @@ variable {k : Type u} [Field k] {W : Type*} [Group W] {V : Type u} [AddCommGroup
 /-- A *tensor construction* on a representation `ρ` of `W` on `V`: a representation obtained from
 `ρ` and its contragredient `ρ^∨` by finitely many tensor products, (binary) direct sums, exterior
 powers and subquotients `S ⧸ U` by `W`-stable subspaces `U ≤ S`, up to equivalence of
-representations.
-(blueprint: `definition-tensor-construction`, `definition-tensor-construction--1`) -/
+representations. -/
 inductive IsTensorConstruction (ρ : Representation k W V) :
     {U : Type u} → [AddCommGroup U] → [Module k U] → Representation k W U → Prop
   /-- `ρ` itself is a tensor construction on `ρ`. -/

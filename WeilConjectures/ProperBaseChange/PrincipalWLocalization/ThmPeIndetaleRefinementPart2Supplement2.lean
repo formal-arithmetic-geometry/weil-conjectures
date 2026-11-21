@@ -9,9 +9,6 @@ public import WeilConjectures.ProperBaseChange.PrincipalWLocalization.ThmPeIndet
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Prime charts of the principal w-localization
-
-Source: blueprint order 1223, proof steps 1–7
-(blueprint: lem-weil-pbc-principal-w-localization-prime-charts).
 -/
 
 @[expose] public section
@@ -25,9 +22,7 @@ namespace PrincipalWLocalization
 variable {A : Type u} [CommRing A]
 
 /-- The prime over `(x,y)` is the inverse image of the prime of `A_x` contracting to `y`.
-This uses the explicit evaluation map and the localization prime correspondence.
-Source: blueprint order 1223, step 3
-(blueprint: lem-weil-pbc-principal-w-localization-prime-charts). -/
+This uses the explicit evaluation map and the localization prime correspondence. -/
 noncomputable def pairPoint (p :
     {p : PrimeSpectrum A × PrimeSpectrum A // p.2.asIdeal ≤ p.1.asIdeal}) :
     PrimeSpectrum (algebra A) :=
@@ -279,31 +274,7 @@ private theorem pairPoint_injective : Function.Injective (pairPoint (A := A)) :=
   exact not_iff_not.mp hh
 
 /-- The prime-pair correspondence, its contraction, the continuous patch coordinate, and the
-closed affine charts of its fibres.
-
-Source: blueprint order 1223, proof steps 1–7
-(blueprint: lem-weil-pbc-principal-w-localization-prime-charts).
-Proof:
-1. A prime of each finite product selects exactly one factor, by the finite-product spectrum
-bijection. Compatibility of the colimit injections makes the selected parts refine each other.
-2. The selected constructible parts are closed in the compact patch space. They form a directed
-nonempty family, so they have a common point `x`.
-3. For `f` outside `x`, use the cut by `D(f)` with denominator `f`. The selected factor inverts
-`f`, so the contracted prime `y` does not contain `f`. Thus `y` is contained in `x`.
-4. The prime over `(x,y)` is obtained from the explicit evaluation to `A_x` and the localization
-prime correspondence. Its selected part at each stage is the part containing `x`. Two primes
-with the same selected parts and the same contraction coincide, since localization primes are
-determined by contraction and every colimit element has a stage representative.
-5. The characteristic tuple of any constructible set evaluates to one at its points and zero
-elsewhere. Thus it distinguishes the first coordinates. Contraction distinguishes the second,
-so the correspondence is bijective.
-6. The preimage of a constructible set under the first-coordinate map is the basic open of its
-characteristic element. In particular the preimages of the patch subbasis are open, proving
-continuity.
-7. The evaluation map to `A_x` is surjective by `evaluation_surjective`, so its spectrum map is a
-closed immersion. The prime correspondence identifies its range exactly with first coordinate
-`x`, by the localization prime correspondence. This includes the zero ring: then no prime is
-present and the statements about individual fibres are vacuous. -/
+closed affine charts of its fibres. -/
 theorem primeCharts (A : Type u) [CommRing A] :
     ∃ e : PrimeSpectrum (algebra A) ≃
       {p : PrimeSpectrum A × PrimeSpectrum A // p.2.asIdeal ≤ p.1.asIdeal},

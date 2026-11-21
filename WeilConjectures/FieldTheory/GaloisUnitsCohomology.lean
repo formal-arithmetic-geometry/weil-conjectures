@@ -16,7 +16,6 @@ public import Mathlib.RepresentationTheory.Rep.Basic
 
 The coefficient group is discrete, and the Galois group has its Krull topology.
 Source: Stacks Project, Tags 04JP, 04JR, 0DVG and 03QQ.
-(blueprint: def-sc-galois-units-cohomology).
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ local instance : DiscreteTopology ((Rep.ofAlgebraAutOnUnits K (SeparableClosure 
 written additively. Each automorphism is continuous on the discrete coefficient group.
 The group itself retains the Krull topology. The action is jointly continuous because
 each unit lies in a finite extension, whose fixing subgroup is open in the Krull topology.
-Source: Stacks Project, Example 03QV (2).
-(blueprint: def-sc-galois-units-cohomology). -/
+Source: Stacks Project, Example 03QV (2). -/
 noncomputable def galoisUnitsTopRep : TopRep ℤ (SeparableClosure K ≃ₐ[K] SeparableClosure K) :=
   TopRep.of
     ⟨{ toFun := fun g ↦
@@ -54,8 +52,7 @@ noncomputable def galoisUnitsTopRep : TopRep ℤ (SeparableClosure K ≃ₐ[K] S
 /-- The second continuous Galois cohomology of the discrete units of a separable closure.
 Mathlib's homogeneous continuous cochains are used, with the Krull topology on the group
 and the discrete topology on the coefficients. This is not abstract group cohomology of
-the underlying group. Source: Stacks Project, Tags 04JR, 0DVG, and 03QQ.
-(blueprint: def-sc-galois-units-cohomology). -/
+the underlying group. Source: Stacks Project, Tags 04JR, 0DVG, and 03QQ. -/
 noncomputable abbrev GaloisUnitsH2 : Type u := continuousCohomology 2 (galoisUnitsTopRep K)
 
 end Field

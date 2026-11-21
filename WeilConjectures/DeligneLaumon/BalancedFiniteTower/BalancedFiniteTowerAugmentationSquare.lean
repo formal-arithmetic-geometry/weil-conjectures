@@ -11,7 +11,6 @@ import WeilConjectures.DeligneLaumon.BalancedFiniteTower.BalancedFiniteTowerAugm
 /-! # Augmentation square for a normalized Koszul comparison
 
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4 and sites-modules.tex, Tag 03EL.
-(blueprint: lem-a1-balanced-finite-tower-augmentation-square).
 
 The proof is the two-generator calculation on the degree minus one and degree
 zero free summands, followed by sheafification and total-complex extensionality. -/

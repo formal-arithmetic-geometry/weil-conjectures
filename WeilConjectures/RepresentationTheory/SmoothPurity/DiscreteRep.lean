@@ -17,8 +17,8 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-!
 # Abelian structure on discrete modules with a continuous group action
 
-Source: Stacks Project, Etale Cohomology, Definition 04JP and the following paragraph,
-in Section 0A2H (blueprint: lem-exc-discrete-modules-abelian-structure).
+Source: Stacks Project, Etale Cohomology, Definition 04JP and the following paragraph, in Section
+0A2H.
 -/
 
 @[expose] public section
@@ -59,8 +59,7 @@ the open stabilizers of representatives. The usual universal properties are equi
 Addition of maps is equivariant; mono and epi coincide with injective and surjective maps,
 respectively. These calculations give the abelian-category criterion of `def-sp-abelian`.
 The image and kernel computed in this category are the underlying module image and kernel,
-so exactness at each term is exactly underlying module exactness.
-(blueprint: lem-exc-discrete-modules-abelian-structure) -/
+so exactness at each term is exactly underlying module exactness. -/
 theorem discreteRep_abelian_structure (A : Type u) [Ring A] [Finite A]
     (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] :

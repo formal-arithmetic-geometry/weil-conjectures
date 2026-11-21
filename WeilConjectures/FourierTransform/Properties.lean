@@ -67,8 +67,8 @@ twist compatibilities only assert that an isomorphism *exists*. Later uses, such
 transporting `t`-structures, will need specific isomorphisms that are coherent with one
 another, which `Classical.choice` cannot provide.
 
-The stalk formula and base change are compact-support base change for `Rp₂,!`
-(sketch blueprint: `sk-prop-sf-cbc`), along `ξ` for the stalk formula and along the induced
+The stalk formula and base change are compact-support base change for `Rp₂,!`,
+along `ξ` for the stalk formula and along the induced
 cartesian square `W ×_{S'} W' ⟶ V ×_S V'` for base change. For the stalk formula it is
 followed by the pullback of the kernel to `V_ξ`, which is formal (`Lξ^*` is monoidal); no
 smooth base change is needed. In both cases the result is compared with `Rp₂,!` computed
@@ -96,6 +96,5 @@ in `WeilConjectures.FourierTransform.Properties.BaseLinear`.
 
 The `sk-*` labels quoted below are block names of the *sketch* blueprint, a separate
 repository; they are not labels of `blueprint/src` and so are not checked by the build.
-
 -/
 

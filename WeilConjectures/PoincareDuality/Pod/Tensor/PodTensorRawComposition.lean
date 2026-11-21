@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorTowerCompositi
 
 /-! # Composition of normalized strict tensor tower maps
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +45,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- A functorial composition square, with its final arrow given explicitly.
-Source: blueprint Steps 1 and 5; Stacks 015F, 07A4
-(blueprint: def-pod-tensor-raw-composition). -/
+Source: Stacks 015F, 07A4. -/
 def PodCompositionEquation
     {C D : Type*} [Category C] [Category D]
     (G : C ⥤ D) {A B : C} {A' K L : D}
@@ -56,9 +54,7 @@ def PodCompositionEquation
   a ≫ G.map cf ≫ cg = cc ≫ d
 
 /-- The categorical equation underlying a Roos composition square.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-tensor-raw-composition).
-Naming the equation keeps the same composites shared during kernel checking. -/
+Source: Stacks 07A4, 0941. -/
 def PodRoosCompositionEquation
     {C D T : Type*} [Category C] [Category D] [Category T]
     (G : C ⥤ D) (R : T ⥤ D)
@@ -68,9 +64,7 @@ def PodRoosCompositionEquation
   PodCompositionEquation G a cf cg cc (R.map u)
 
 /-- The exact equation for the explicit Roos composites of the tensor tower maps.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-tensor-raw-composition).
-This names the equation before substitution of the named chain maps. -/
+Source: Stacks 07A4, 0941. -/
 def PodTensorRawComposition
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

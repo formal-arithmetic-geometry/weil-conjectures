@@ -13,7 +13,6 @@ public import WeilConjectures.Compactification.Refinement
 
 The completed-ring arrows and the integral normalization predicate from Stacks 0F7J.
 These definitions are shared by construction and coefficient compatibility.
-(blueprint: def-zl-field-shriek-composition-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +28,7 @@ variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The pullback square comparison made from the canonical completed compositors.
-Source: Stacks 0F7J, proper/open square
-(blueprint: lem-zl-field-shriek-composition-qcqs). -/
+Source: Stacks 0F7J, proper/open square. -/
 def sfCompositionPullSquare {V T Y S : Scheme.{u}}
     (b : V ⟶ T) (r : V ⟶ Y) (p : T ⟶ S) (i : Y ⟶ S)
     (w : b ≫ p = r ≫ i) :
@@ -42,8 +40,7 @@ def sfCompositionPullSquare {V T Y S : Scheme.{u}}
 
 /-- The open restriction comparison: geometric exchange, then the inverse open unit.
 The unit proof is supplied by the statement, rather than assumed as a geometric
-hypothesis. Source: Stacks 0F7J, proper/open comparison
-(blueprint: lem-zl-field-shriek-composition-qcqs). -/
+hypothesis. Source: Stacks 0F7J, proper/open comparison. -/
 def sfCompositionLambda {V T Y S : Scheme.{u}}
     (b : V ⟶ T) (r : V ⟶ Y) (p : T ⟶ S) (i : Y ⟶ S)
     [IsOpenImmersion b] (w : b ≫ p = r ≫ i)
@@ -63,7 +60,7 @@ def sfCompositionLambda {V T Y S : Scheme.{u}}
         @inv _ _ _ _ ((openDerivedAdjunction (completed l E) b).unit.app N) hη)
 
 /-- The proper/open map is the specified open adjunct of inverse restriction.
-Source: Stacks 0F7J and 0F7B (blueprint: lem-zl-field-shriek-composition-qcqs). -/
+Source: Stacks 0F7J and 0F7B. -/
 def sfCompositionGamma {V T Y S : Scheme.{u}}
     (b : V ⟶ T) (r : V ⟶ Y) (p : T ⟶ S) (i : Y ⟶ S)
     [IsOpenImmersion b] [IsOpenImmersion i] (w : b ≫ p = r ≫ i)
@@ -78,7 +75,7 @@ def sfCompositionGamma {V T Y S : Scheme.{u}}
     (@inv _ _ _ _ (sfCompositionLambda l E b r p i w N hη) hLambda)
 
 /-- The normalized open compositor, conjugate to composition of open restriction.
-Source: Stacks 0F7J (blueprint: lem-zl-field-shriek-composition-qcqs). -/
+Source: Stacks 0F7J. -/
 def sfCompositionOpenComp {X V T : Scheme.{u}} (c : X ⟶ V) (b : V ⟶ T)
     [IsOpenImmersion c] [IsOpenImmersion b] :
     (openExtension (completed l E) c).mapDerivedCategory ⋙
@@ -90,7 +87,7 @@ def sfCompositionOpenComp {X V T : Scheme.{u}} (c : X ⟶ V) (b : V ⟶ T)
     (geometricPullComposition (completed l E) c b (completedPull_comp l E c b)).symm
 
 /-- Equality transport for exact completed open extension.
-Source: Stacks 0F7J, a=bc (blueprint: lem-zl-field-shriek-composition-qcqs). -/
+Source: Stacks 0F7J, a=bc. -/
 def sfCompositionOpenCongr {X T : Scheme.{u}} {a b : X ⟶ T}
     [IsOpenImmersion a] [IsOpenImmersion b] (w : a = b) :
     (openExtension (completed l E) a).mapDerivedCategory ≅
@@ -100,8 +97,7 @@ def sfCompositionOpenCongr {X T : Scheme.{u}} {a b : X ⟶ T}
 
 /-- The actual compatible-tower composition, before rationalizing any Hom group.
 The factors are Rq_* Gamma c_!, proper composition, and open composition a=bc.
-Source: Stacks 0F7J, the displayed four equalities
-(blueprint: lem-zl-field-shriek-composition-qcqs). -/
+Source: Stacks 0F7J, the displayed four equalities. -/
 def sfCompletedCompositionOnTower {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (d : Compactification g) (e : Compactification (f ≫ d.i))
     (K : DerivedCategory (scalarReductionSource l E X))
@@ -124,8 +120,7 @@ def sfCompletedCompositionOnTower {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ 
 
 /-- Normalization of a compactification-refinement comparison. The open adjunct is
 fixed by the proper counit and the open unit, and its inverse is pushed forward
-using the canonical proper compositor. Source: Stacks 0F7J, independence of choices
-(blueprint: lem-zl-field-shriek-composition-qcqs). -/
+using the canonical proper compositor. Source: Stacks 0F7J, independence of choices. -/
 def SfCompletedRefinementSpec {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (K : DerivedCategory (scalarReductionSource l E X))

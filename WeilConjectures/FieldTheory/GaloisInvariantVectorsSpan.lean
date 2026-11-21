@@ -20,23 +20,7 @@ universe u
 namespace Field
 /-- The invariant vectors span over the separable closure.
 
-Proof: an open normal right stabilizer of b and the normal Krull neighbourhood basis
-provide a finite Galois intermediate field L such that b depends only on restriction to L.
-Write q for restriction and choose lifts s of its automorphisms. Let T_g(v)=b(g)g(v).
-The cocycle law gives T_g T_h=T_(gh) and b(1)=1. On each standard vector e_i, T_g(e_i)
-depends only on q(g). For a in L form A(a,i)=sum_sigma sigma(a) T_(s sigma)(e_i).
-Semilinearity, the cocycle law and reindexing by left multiplication by q(g) show that
-A(a,i) is fixed by every T_g. Let W be the S-span of fixed vectors, where S is the
-separable closure. If e_i is not in W, take an S-linear functional f vanishing on W but
-not on e_i. The equality f(A(a,i))=0 for every a in L is a linear relation among the
-distinct embeddings of L into S. Their independence forces each coefficient to vanish.
-At the identity this coefficient is f(e_i), a contradiction. Thus all standard vectors
-belong to W and W is top. The argument includes n=0 and uses no division by group order.
-The finite-factorization and weighted-averaging proof is adapted from
-Field.matrixDescentInvariants_span in WeilConjectures.FieldTheory.MatrixDescentInvariantsSpan;
-the vector action here is left multiplication rather than matrix conjugation.
-Source: Stacks Project, Tag 03R7, injectivity via invariant-basis descent.
-(blueprint: lem-sc-galois-invariant-vectors-span) -/
+Source: Stacks Project, Tag 03R7, injectivity via invariant-basis descent. -/
 theorem galois_invariant_vectors_span (K : Type u) [Field K] (n : ℕ)
     (b : Gal(SeparableClosure K/K) →
       Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))

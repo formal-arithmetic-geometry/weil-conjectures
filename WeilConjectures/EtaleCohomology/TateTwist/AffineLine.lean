@@ -69,7 +69,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [NeZero (ringChar Λ)]
 attribute [local instance] HasInvertibleExponent.opens
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+/-- The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 The proposition `sk-prop-a1-kummer`, clauses (a)–(c), for the concrete Tate twist
 `Λ(1) = μₙ ⊗ Λ`, with the generator `κ(t)` of clause (b) made explicit. Write
@@ -108,7 +108,7 @@ theorem affineLine_multiplicativeGroup_homology_tateObject :
     isZero_homology_rightDerivedLowerStar_tateObject_basicOpen_of_field Λ B aB⟩
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+/-- The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 *(a), twisted.* For the projection `p : 𝔸¹_B ⟶ B`, `R^m p_* Λ(1) = 0` for `m > 0`: the affine
 line is acyclic, and `Λ(1)` is pulled back from `B`, so by the projection formula the twisted
@@ -120,7 +120,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_pos (n : 
   (affineLine_multiplicativeGroup_homology_tateObject Λ B aB).1 n hn
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+/-- The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 *(b), degree zero.* For the open complement `j : 𝔾_{m,B} ⟶ 𝔸¹_B` of the zero section, the
 restriction `R⁰p_* Λ(1) ⟶ R⁰π_* Λ(1)` is an isomorphism (`p^*` is an isomorphism onto
@@ -134,7 +134,7 @@ theorem isIso_homology_zero_map_unit_multiplicativeGroup :
   (affineLine_multiplicativeGroup_homology_tateObject Λ B aB).2.1
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+/-- The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 *(b), degree one: the Kummer generator.* `R¹π_* Λ(1)` is free of rank one on the Kummer class
 `κ(t)` of the coordinate: the section `κ(t) : Λ_B ⟶ (Rπ_* Λ(1))[1]`
@@ -146,7 +146,7 @@ theorem isIso_shiftMap_kummerClassAffineLineDirectImage :
   (affineLine_multiplicativeGroup_homology_tateObject Λ B aB).2.2.1
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+/-- The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 *(c).* `R^m π_* Λ(1) = 0` for `m ≥ 2`, by the cohomological dimension of affine curves over an
 algebraically closed field. -/
@@ -167,7 +167,7 @@ instance isGE_tateObject (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m : ℤ)
   DerivedCategory.TStructure.t.isGE_of_iso (tateTwistObjectIsoSingleFunctor Λ X m).symm 0
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+/-- The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 `Rp_* Λ(1)` has cohomology only in degree zero. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine (n : ℤ) (hn : n ≠ 0) :
@@ -181,7 +181,7 @@ theorem isZero_homology_rightDerivedLowerStar_tateObject_affineLine (n : ℤ) (h
   · exact isZero_homology_rightDerivedLowerStar_tateObject_affineLine_of_pos Λ B aB n hn
 
 include aB in
-/-- Blueprint `sk-prop-a1-kummer`: The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
+/-- The affine line and `𝔾ₘ` with `Λ(1)`-coefficients
 
 `Rπ_* Λ(1)` has cohomology only in degrees zero and one. -/
 theorem isZero_homology_rightDerivedLowerStar_tateObject_basicOpen (n : ℤ)

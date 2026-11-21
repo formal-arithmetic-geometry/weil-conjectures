@@ -222,20 +222,7 @@ private theorem continuous_coefficient_function
 
 -- Finite-field model transport compares the full scalar-restriction and tensor structures.
 /-- Continuous finite-dimensional representations over the p-adic algebraic closure
-are exactly the representations with a continuous finite coefficient model.
-
-Source: blueprint `proposition-lattices-representations-normal-scheme`, clause (5).
-(blueprint: lisse-qlbar-continuous-finite-model)
-
-Proof: choose a finite basis and apply compact-matrix coefficient descent to the
-matrix monoid homomorphism. Its entries lie in one finite intermediate field E.
-The inclusion E into the algebraic closure is isometric for the spectral norms,
-so the entry functions remain continuous in E. The coordinate representation on
-E^n has continuous action by its finite-sum formula. Its image under the basis map
-is an actual invariant E-subspace, and the basis base-change equivalence gives
-exactly the required tensor map. Conversely a finite model has continuous matrix
-entries in an extended basis; compose these entries with the isometric field
-inclusion and use the finite-sum action formula. The argument includes dimension zero. -/
+are exactly the representations with a continuous finite coefficient model. -/
 theorem isLAdic_iff_continuous
     (l : ℕ) [Fact l.Prime] (G : ProfiniteGrp.{v})
     (V : Type w) [AddCommGroup V] [Module (PadicAlgCl l) V]

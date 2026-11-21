@@ -15,8 +15,7 @@ Let `χ : W(C₀) → Eˣ` be a character of the Weil group of a curve over a fi
 in a finite extension `E / ℚ_ℓ`, continuous on the geometric fundamental group `π₁(C) = ker deg`.
 Since `π₁(C)` is compact, some power `χ ^ N` maps `π₁(C)` into the principal units
 `1 + ℓ² 𝒪_E`, and `λ(g) = log (χ(g) ^ N)` is a continuous additive character of `π₁(C)` that is
-invariant under conjugation by any element of `W(C₀)`, in particular by a degree-one element
-(blueprint `theorem-rank-one-sheaves-have-finite`).
+invariant under conjugation by any element of `W(C₀)`, in particular by a degree-one element.
 
 ## Main statements
 
@@ -37,8 +36,7 @@ variable (W : WeilGroup p) {l : ℕ} [Fact l.Prime] {E : Type*} [Field E]
   [Algebra E (PadicAlgCl l)] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
   [FiniteDimensional ℚ_[l] E]
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite`: A multiplicative curve character produces an
-invariant additive character.
+/-- A multiplicative curve character produces an invariant additive character.
 
 Let `χ : W(C₀) → Eˣ` be a character with values in a finite extension `E / ℚ_ℓ` inside `ℚ̄_ℓ`,
 continuous on `Π = π₁(C) = ker deg`, and let `s ∈ W(C₀)` (for instance of degree one). There is

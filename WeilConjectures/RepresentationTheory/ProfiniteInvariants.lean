@@ -268,12 +268,10 @@ lemma discreteAverage_comp_subtype (hρ : ρ.IsDiscrete) :
   ext v
   exact discreteAverage_apply_of_mem_invariants hA hρ v.2
 
-/-- **Invariants are exact on discrete representations** (blueprint
-`prose-E-10`, used in Gabber's Künneth formula for nearby cycles, Illusie,
-*Autour du théorème de monodromie locale*, 4.7). Let `G` be a compact group such that the index of
-every open normal subgroup is invertible in `A` (e.g. a pro-`p` group with `p` invertible in `A`).
-If `π : E → E'` is a surjective equivariant map and `ρ` is discrete, then `π` maps the
-invariants of `ρ` onto the invariants of `ρ'`. -/
+/-- **Invariants are exact on discrete representations**. Let `G` be a compact group such that the
+index of every open normal subgroup is invertible in `A` (e.g. a pro-`p` group with `p`
+invertible in `A`). If `π : E → E'` is a surjective equivariant map and `ρ` is discrete, then `π`
+maps the invariants of `ρ` onto the invariants of `ρ'`. -/
 theorem IsDiscrete.map_invariants_eq
     (hA : ∀ U : OpenNormalSubgroup G, IsUnit ((U.toSubgroup.index : ℕ) : A))
     {E' : Type*} [AddCommGroup E'] [Module A E']
@@ -325,12 +323,10 @@ lemma invariantsTensorToInvariants_bijective
       hU U le_rfl, cosetSum_of_mem_invariants y.2, ← Nat.cast_smul_eq_nsmul A, smul_smul,
       IsUnit.val_inv_mul, one_smul]
 
-/-- **Invariants commute with tensor products** (blueprint `prose-E-10`,
-used in Gabber's Künneth formula for nearby cycles, Illusie, *Autour du théorème de monodromie
-locale*, 4.7). Let `G` be a compact group such that the index of every open normal subgroup is
-invertible in `A` (e.g. a pro-`p` group with `p` invertible in `A`), `ρ` a discrete
-representation of `G` on `E` and `B` an `A`-module with trivial action. Then the natural map
-`ρ.invariants ⊗[A] B → (E ⊗[A] B)^G` is an isomorphism. -/
+/-- **Invariants commute with tensor products**. Let `G` be a compact group such that the index of
+every open normal subgroup is invertible in `A` (e.g. a pro-`p` group with `p` invertible in
+`A`), `ρ` a discrete representation of `G` on `E` and `B` an `A`-module with trivial action. Then
+the natural map `ρ.invariants ⊗[A] B → (E ⊗[A] B)^G` is an isomorphism. -/
 noncomputable def invariantsTensorEquiv (hρ : ρ.IsDiscrete) :
     ρ.invariants ⊗[A] B ≃ₗ[A] (ρ.tprod (trivial A G B)).invariants :=
   LinearEquiv.ofBijective (invariantsTensorToInvariants ρ)

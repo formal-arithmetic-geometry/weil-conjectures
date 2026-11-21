@@ -22,11 +22,6 @@ import WeilConjectures.DeligneLaumon.IsomorphismFieldTransport
 
 /-! # Semilinear Frobenius transport and field-operation lifts
 
-Source: blueprint main-20261015, sec-poincare-duality/sk-lem-finite,
-prop-weil-operations.proof.md, sentence 1; sec-six-functors/sk-rem-sf-pf-done,
-lem-fix-weil-operations.proof.md, first paragraph
-(blueprint: lem-pod-semilinear-field-operation-lifts).
-
 The fixed-pair functors are the existing IsoAlgebra transports. The specifications
 record their object, structure and arrow formulas. Partial internal Hom retains
 its precise permitted-pair domain. Exactness refers to underlying derived functors.
@@ -49,8 +44,7 @@ open scoped TensorProduct
 namespace WeilConjectures
 
 /-- The tensor lift uses the existing product of fixed pairs and the existing
-transport. Source: blueprint sec-Weil-complexes, proof sentence 1
-(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+transport. Source: blueprint sec-Weil-complexes, proof sentence 1. -/
 def PodTensorWeilLiftSpec
     {C : Type a} [Category.{b} C] (P : C ⥤ C) (T : C × C ⥤ C)
     (μ : T ⋙ P ≅ P.prod P ⋙ T) : Prop :=
@@ -63,16 +57,12 @@ def PodTensorWeilLiftSpec
     ((IsoAlgebra.prod ⋙ IsoAlgebra.mapOfNatIso μ).map (Prod.mkHom u v)).hom.f =
       T.map (Prod.mkHom u.hom.f v.hom.f)
 
-/-- Retain exactly the original partial internal-Hom domain on underlying objects.
-Source: blueprint sec-Weil-complexes, proof sentence 1, internal-Hom qualification
-(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+/-- Retain exactly the original partial internal-Hom domain on underlying objects. -/
 def podWeilHomPairs {C : Type a} [Category.{b} C] (P : C ⥤ C)
     (J : ObjectProperty (Cᵒᵖ × C)) : ObjectProperty ((IsoAlgebra P)ᵒᵖ × IsoAlgebra P) :=
   fun KL ↦ J (op KL.1.unop.carrier, KL.2.carrier)
 
-/-- Forget structures on a permitted pair, retaining its actual domain witness.
-Source: blueprint sec-Weil-complexes, proof sentence 1
-(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+/-- Forget structures on a permitted pair, retaining its actual domain witness. -/
 def podWeilHomPairForget {C : Type a} [Category.{b} C] (P : C ⥤ C)
     (J : ObjectProperty (Cᵒᵖ × C)) :
     (podWeilHomPairs P J).FullSubcategory ⥤ J.FullSubcategory :=
@@ -81,8 +71,7 @@ def podWeilHomPairForget {C : Type a} [Category.{b} C] (P : C ⥤ C)
 
 /-- The Hom structure is H(theta_M inverse,theta_N) after the canonical comparison.
 The functor is defined only on the original permitted pairs, and forgetting fixes
-its entire object and arrow action. Source: blueprint sec-Weil-complexes, sentence 1
-(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+its entire object and arrow action. Source: blueprint sec-Weil-complexes, sentence 1. -/
 def PodHomWeilLiftSpec
     {C : Type a} [Category.{b} C] (P : C ⥤ C) (J : ObjectProperty (Cᵒᵖ × C))
     (H : J.FullSubcategory ⥤ C)
@@ -103,17 +92,7 @@ def PodHomWeilLiftSpec
 
 /-- The tensor and partial-Hom formulas define functors with the stipulated variances.
 The input J can retain any already-proved finite-Tor or site-perfect restriction;
-only its preservation by P is used, and no larger Hom domain is asserted.
-Source: blueprint sec-Weil-complexes, sentence 1, node proof steps 7--9
-(blueprint: lem-pod-semilinear-field-operation-lifts).
-Proof: tensor uses IsoAlgebra.prod followed by mapOfNatIso. Bifunctoriality,
-the two arrow equations and naturality of mu give the tensor arrow equation.
-For Hom, send a pair to the permitted underlying pair with structure
-(theta_M inverse).op times theta_N; the arrow equation follows by multiplying
-the first arrow equation by both inverses. Apply mapOfNatIso to kappa.
-The output structure is kappa followed by H(theta_M inverse,theta_N).
-Identities and composition are the bifunctor laws, including the reversed
-first variable. Forgetting recovers the original tensor and partial Hom. -/
+only its preservation by P is used, and no larger Hom domain is asserted. -/
 theorem pod_tensor_hom_field_operation_lifts
     {C : Type a} [Category.{b} C] (P : C ⥤ C) (T : C × C ⥤ C)
     (μ : T ⋙ P ≅ P.prod P ⋙ T) (J : ObjectProperty (Cᵒᵖ × C))
@@ -168,9 +147,7 @@ attribute [local irreducible] sfIntegralConstructible Linear.homModule
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
-/-- The rational Frobenius square component through the canonical compositors.
-Source: blueprint sec-Weil-complexes, sentence 1, proof step 4
-(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+/-- The rational Frobenius square component through the canonical compositors. -/
 def podRationalSquarePullbackComponent
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [_root_.Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] {X Y : Scheme.{u}}
@@ -185,8 +162,7 @@ def podRationalSquarePullbackComponent
     pullbackTensorRationalComposition l E gY f K
 
 /-- The same square component in the actual common-stage category, through the
-canonical common-stage compositors. Source: blueprint sec-Weil-complexes, sentence 1
-(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+canonical common-stage compositors. Source: blueprint sec-Weil-complexes, sentence 1. -/
 def podCommonSquarePullbackComponent
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {X Y : Scheme.{u}}
@@ -219,9 +195,7 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   [LocallyOfFiniteType T₀.hom] [QuasiCompact T₀.hom]
 
 /-- Integral and rational Frobenius transport, using the existing prime-invertibility
-data, canonical inverse-image realization, and the actual inverse scheme map.
-Source: blueprint sec-Weil-complexes, sentence 1
-(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+data, canonical inverse-image realization, and the actual inverse scheme map. -/
 def PodRationalFrobeniusTransportSpec
     (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : Prop :=
   letI := fun x ↦ sfWeilPrimeInvertible D l hl T₀ x
@@ -267,9 +241,7 @@ def PodRationalFrobeniusTransportSpec
 
 /-- Both coefficient stages use the actual inverse scheme map, and their underlying
 pullbacks are exact equivalences. Tensor and Hom comparisons below are fixed to
-the recorded canonical transport maps, rather than arbitrary isomorphisms.
-Source: blueprint sec-Weil-complexes, sentence 1, node proof steps 2--3 and 7--8
-(blueprint: lem-pod-semilinear-field-operation-lifts). -/
+the recorded canonical transport maps, rather than arbitrary isomorphisms. -/
 def PodFieldOperationTransportSpec
     (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] : Prop :=
@@ -412,8 +384,6 @@ private theorem pod_field_transport
 and internal-Hom lifts on both models. The covariant lifts, including the specified
 Ex_* and Ex_!, are `pod_supplied_field_operation_lifts`; their explicit object and
 arrow calculation is `pod_covariant_field_operation_lift`.
-Source: blueprint main-20261015, prop-weil-operations.proof.md, sentence 1
-(blueprint: lem-pod-semilinear-field-operation-lifts).
 
 Proof (the original nine steps, with existing field-transport records reused):
 1. Apply lem-weil-frobenius-square-cartesian to the geometric scalar extension.
@@ -421,12 +391,11 @@ The upper structure map is g_T followed by a_T. Commutativity and f being over k
 make the left vertical arrow a map between precisely those restructured corners;
 no k-linearity of g_T is asserted, including when a model is nonseparated.
 2. The exact inverse-image equivalence on completed modules identifies integral
-pullback with termwise transport (lem-weil-proetale-isomorphism-inverse-image and
-lem-weil-isomorphism-derived-pullback). Compose lambda for g and its inverse
-with the inverse-image counit to obtain the normalized epsilon and its reverse.
+pullback with termwise transport. Compose lambda for g and its inverse with the inverse-image
+counit to obtain the normalized epsilon and its reverse.
 3. Localize the integral inverse equations linearly on Hom tensor E. At common
 stages represent an arrow over one finite field. Scalar compatibility of the
-inverse identities (lem-pod-pullback-identities-scalar-extension) and the specified
+inverse identities and the specified
 operation scalar comparisons turn its naturality square into that finite-stage
 square. Identity extensions and tower cocycles preserve its class. Exactness
 comes from the exact module transport, integral triangles and common-stage triangles.

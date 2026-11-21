@@ -43,8 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] podTensorFiniteShiftLeft podTensorFiniteShiftRight
 
 /-- A tower isomorphism can be assembled from its components and adjacent squares.
-Source: Mathlib's NatTrans.ofOpSequence and NatIso.ofComponents
-(blueprint: def-pod-tensor-signed-shift-towers). -/
+Source: Mathlib's NatTrans.ofOpSequence and NatIso.ofComponents. -/
 def podTowerIsoOfAdjacent {C : Type a} [Category.{b} C] {F G : ℕᵒᵖ ⥤ C}
     (e : ∀ n : ℕ, F.obj (op n) ≅ G.obj (op n))
     (he : ∀ n : ℕ, F.map (homOfLE (n.le_add_right 1)).op ≫ (e n).hom =
@@ -55,7 +54,7 @@ def podTowerIsoOfAdjacent {C : Type a} [Category.{b} C] {F G : ℕᵒᵖ ⥤ C}
 /-- Assemble the sign-free finite comparisons into a comparison of strict towers.
 The naturality proof uses only adjacent quotient squares; all components are the
 explicit finite comparisons.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+Source: Stacks 011G and 07A4. -/
 def podTensorSignedShiftLeftTower (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (r : ℤ) :
     (integralOperationsTensorTowerFunctor l E W).obj (P.obj⟦r⟧, Q.obj) ≅
@@ -68,7 +67,7 @@ def podTensorSignedShiftLeftTower (W : Scheme.{u})
         using (podTensorFiniteShiftTransitions l E W).1 n P.obj Q.obj r)
 
 /-- Assemble the signed finite comparisons into a comparison of strict towers.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+Source: Stacks 011G and 07A4. -/
 def podTensorSignedShiftRightTower (W : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) (r : ℤ) :
     (integralOperationsTensorTowerFunctor l E W).obj (P.obj, Q.obj⟦r⟧) ≅
@@ -81,14 +80,14 @@ def podTensorSignedShiftRightTower (W : Scheme.{u})
         using (podTensorFiniteShiftTransitions l E W).2 n P.obj Q.obj r)
 
 /-- The type of the derived first-factor shift fields, kept separate from strict data.
-Source: Stacks 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+Source: Stacks 07A4. -/
 abbrev PodTensorDerivedShiftLeft (W : Scheme.{u}) :=
   ∀ (M N M' : sfIntegralConstructibleCategory l E W) (r : ℤ) (_e : M'.obj ≅ M.obj⟦r⟧),
     (integralCompletedTensor l E W).obj (M'.obj, N.obj) ≅
       ((integralCompletedTensor l E W).obj (M.obj, N.obj))⟦r⟧
 
 /-- The type of the derived second-factor shift fields.
-Source: Stacks 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+Source: Stacks 07A4. -/
 abbrev PodTensorDerivedShiftRight (W : Scheme.{u}) :=
   ∀ (M N N' : sfIntegralConstructibleCategory l E W) (r : ℤ) (_e : N'.obj ≅ N.obj⟦r⟧),
     (integralCompletedTensor l E W).obj (M.obj, N'.obj) ≅
@@ -96,7 +95,7 @@ abbrev PodTensorDerivedShiftRight (W : Scheme.{u}) :=
 
 /-- Combine the constructed strict data with supplied derived shift fields.
 Every non-proof field is explicit or is a parameter.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+Source: Stacks 011G and 07A4. -/
 def podTensorSignedShiftOfDerived (W : Scheme.{u})
     (L : PodTensorDerivedShiftLeft l E W) (R : PodTensorDerivedShiftRight l E W) :
     PodTensorSignedShift l E W where
@@ -107,7 +106,7 @@ def podTensorSignedShiftOfDerived (W : Scheme.{u})
   right := R
 
 /-- The strict generator formulas are unaffected by the derived fields supplied later.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-signed-shift-towers). -/
+Source: Stacks 011G and 07A4. -/
 theorem podTensorSignedShiftOfDerived_generators (W : Scheme.{u})
     (L : PodTensorDerivedShiftLeft l E W) (R : PodTensorDerivedShiftRight l E W) :
     (podTensorSignedShiftOfDerived l E W L R).Generators l E := by

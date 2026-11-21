@@ -10,7 +10,7 @@ public import Mathlib.SetTheory.Cardinal.Basic
 
 /-! # Cardinality of retained localization
 
-Source: Stacks Project, Tag 0984 (blueprint: lem-weil-pbc-retained-localization-size).
+Source: Stacks Project, Tag 0984.
 -/
 
 @[expose] public section
@@ -22,15 +22,7 @@ open Cardinal CategoryTheory CategoryTheory.Limits
 namespace PrincipalWLocalization.Retained
 
 /-- Retained localization is a quotient of the principal w-localization, hence no larger.
-Source: Stacks Project, Tag 0984 (blueprint: lem-weil-pbc-retained-localization-size).
-
-Proof: every selector is idempotent. The map to its principal localization is therefore
-surjective. Every element of the filtered colimit comes from one such localization. Lift it
-to the base ring and use that the colimit inclusion is an algebra homomorphism to identify
-its image with the structural map from the base. This proves surjectivity of that map;
-cardinality decreases under surjections. This includes the empty closed subset and the
-empty spectrum, since the localization and filtered-colimit arguments require neither
-to be nonempty. -/
+Source: Stacks Project, Tag 0984. -/
 theorem cardinalMk_le (R : Type u) [CommRing R]
     (T : Set (PrimeSpectrum R)) (hT : IsClosed T) :
     #(algebra T hT) ≤ #(PrincipalWLocalization.algebra R) := by

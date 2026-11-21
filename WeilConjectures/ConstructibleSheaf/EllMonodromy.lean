@@ -12,8 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 /-!
 # Complexes with finite `ℓ`-group monodromy
 
-The local calculation of the trace formula (blueprint
-`lemma-cohomology-near-two-transverse-divisors`, `lemma-vanishing-restrictions-after-blowing-up--1`)
+The local calculation of the trace formula
+
 is carried out for "a bounded complex `E` of `A`-modules with finite locally constant cohomology
 whose monodromy factors through a finite `ℓ`-group".
 
@@ -43,9 +43,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {U : Scheme.{u}}
 /-- A complex `E` of étale sheaves of `Λ`-modules on `U` *has finite `ℓ`-group monodromy*: it is
 bounded, and each of its cohomology sheaves is trivialized by a finite étale Galois cover
 `c : P ⟶ U` whose group is a finite `ℓ`-group: its pullback to `P` is the constant sheaf on a
-finite `Λ`-module (blueprint `lemma-cohomology-near-two-transverse-divisors`: "a bounded complex of
-`A`-modules on `Z - (X ∪ Y)` with finite locally constant cohomology whose monodromy factors through
-a finite `ℓ`-group"). -/
+finite `Λ`-module. -/
 def HasFiniteEllMonodromy (ℓ : ℕ)
     (E : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : Prop :=
   (∃ a b : ℤ, E.IsGE a ∧ E.IsLE b) ∧ ∀ n : ℤ,

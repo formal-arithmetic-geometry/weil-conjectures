@@ -19,7 +19,7 @@ corresponding lisse Weil sheaf. This file records how the notions of `definition
 `definition-weil-representation` behave under this operation: lisse sheaves restrict to
 lisse sheaves, the local eigenvalues at a closed point of `U₀` are those at its image, so reality,
 determinant weights and punctual purity are inherited, and since `R.restrict` is surjective,
-constituents restrict to constituents (`lemma-boundary-stalk--2`).
+constituents restrict to constituents.
 
 Every Weil group `W` of a smooth geometrically connected curve receives a restriction from some
 Weil group of any nonempty geometrically connected open
@@ -235,7 +235,7 @@ theorem frobeniusWeight_eq_of_isPunctuallyPure_comp {w : ℝ}
   exact h x α hα
 
 omit [FiniteDimensional (PadicAlgCl l) V] in
-/-- Restriction to `U₀` preserves constituents (`lemma-boundary-stalk--2`): the restriction of Weil
+/-- Restriction to `U₀` preserves constituents: the restriction of Weil
 groups is surjective, so `j^*` does not change the invariant subspaces. -/
 theorem isConstituent_comp {V' : Type u} [AddCommGroup V'] [Module (PadicAlgCl l) V']
     {σ : Representation (PadicAlgCl l) WC.carrier V'} (hσ : σ.IsConstituent ρ) :

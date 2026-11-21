@@ -203,17 +203,7 @@ private theorem normalization_native_square
   exact h'
 
 /-- The K-injective-normalized Roos comparison has the prescribed signed shift.
-Source: Stacks 0941, the shifted K-injective calculation, and 011G, signed shifts
-(blueprint: lem-pod-limit-signed-shift-normalization-s8).
-
-Proof: the two coordinate equations uniquely determine the signed Roos map.
-On a K-injective tower, the comparison is the inverse derived-unit comparison
-followed by the limit tuple with zero in the second coordinate. The tuple
-inclusion commutes with the signed shift because that second coordinate is zero.
-The canonical derived unit commutes with shifts. Cancel it on K-injectives,
-then use naturality along a K-injective replacement to obtain the equation on
-every complex. Compose with exact restriction and its canonical shift comparison.
-No boundedness, completeness or constructibility is used. -/
+Source: Stacks 0941, the shifted K-injective calculation, and 011G, signed shifts. -/
 theorem podLimitSignedShiftNormalization
     (ρ : IntegralComparisonRoosModel l E W)
     (S : PodSignedRoosShift (scalarReductionSource l E W)) (hS : S.Laws) :

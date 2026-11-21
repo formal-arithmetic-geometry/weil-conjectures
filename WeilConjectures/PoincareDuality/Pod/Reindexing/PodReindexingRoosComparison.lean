@@ -13,7 +13,7 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # The diagonal Roos comparison of an exact equivalence
 
-Source: Stacks 0941 (blueprint: lem-pod-reindexing-roos-comparison).
+Source: Stacks 0941.
 -/
 
 @[expose] public noncomputable section
@@ -39,11 +39,7 @@ private def coconeCoordinates {K L : CochainComplex A ℤ} (φ : K ⟶ L) (i : �
     apply biprod.hom_ext' <;> apply biprod.hom_ext <;> simp
 
 /-- Both coordinates of the additive Roos map, expressed through the product comparison.
-Source: Stacks 0941 (blueprint: lem-pod-reindexing-roos-comparison).
-
-Proof: compose the defining equations of scalarRoosMap with every product projection.
-The product comparison has exactly the images of those projections. Their joint
-monicity identifies the first coordinate and every degree of the second coordinate. -/
+Source: Stacks 0941. -/
 theorem podReindexingRoosCoordinates (F : A ⥤ B) [F.Additive]
     (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
     scalarRoosMap F C ≫ mappingCocone.fst
@@ -101,12 +97,7 @@ theorem podReindexingRoosCoordinates (F : A ⥤ B) [F.Additive]
   exact ⟨hf, hs⟩
 
 /-- Naturality of the diagonal Roos comparison on arbitrary strict towers.
-Source: Stacks 0941 (blueprint: lem-pod-reindexing-roos-comparison).
-
-Proof: naturality of the product comparison follows after every product projection.
-Compose both proposed maps with the first and second cocone coordinates. The defining
-coordinate equations for the diagonal map and for the tower map reduce both equations
-to this product naturality. The two coordinates jointly determine each degree. -/
+Source: Stacks 0941. -/
 theorem podReindexingRoosNaturality (F : A ⥤ B) [F.Additive]
     {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (a : C ⟶ C') :
     (F.mapHomologicalComplex (.up ℤ)).map (integralOperationsRoosMap a) ≫
@@ -164,16 +155,7 @@ theorem podReindexingRoosNaturality (F : A ⥤ B) [F.Additive]
 
 /-- The projection-normalized Roos map of an additive product-preserving equivalence
 is an isomorphism on arbitrary strict towers.
-Source: Stacks 0941, blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
-(blueprint: lem-pod-reindexing-roos-comparison).
-
-Proof: use scalarRoosMap, which is uniquely specified by both cocone coordinates
-and every product projection. Its degree-i coordinate matrix is the direct sum
-of the product comparisons in degrees i and i-1. Those comparisons are invertible
-because an equivalence preserves products. The additive functor preserves the
-biproduct decomposition of the source cocone, so the displayed matrix proves
-invertibility in every degree. A chain map invertible in every degree is an
-isomorphism of complexes. No acyclicity, boundedness, or completeness is needed. -/
+Source: Stacks 0941. -/
 theorem podReindexingRoosComparison (F : A ⥤ B) [F.Additive] [F.IsEquivalence]
     (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) : IsIso (scalarRoosMap F C) := by
   let G := F.mapHomologicalComplex (.up ℤ)

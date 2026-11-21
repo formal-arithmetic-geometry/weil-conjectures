@@ -46,8 +46,7 @@ public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 import WeilConjectures.ProEtaleCoefficients.SingleWContractibleCover
 
-/-! Formal finite-family hypercovers by w-contractible spectra.
-(blueprint: det-pe-hypercover-formal-wcontractible) -/
+/-! Formal finite-family hypercovers by w-contractible spectra. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -58,14 +57,6 @@ open scoped Simplicial
 
 /-- A qcqs pro-etale object admits a finite formal-family hypercover by w-contractible spectra.
 Source: Stacks Project, Tag 09A1, using Hypercoverings Tags 094K and 0DAV.
-(blueprint: det-pe-hypercover-formal-wcontractible)
-
-Proof: take the full qcqs subsite and the basis of literal spectra of w-contractible rings.
-The singleton covering theorem supplies a finite basis cover of each object. Affines are
-qcqs, so the sources lie in that subsite. Its finite precoverage permits adjoining each
-prescribed degeneracy arrow. Apply the existing finite-basis hypercover theorem, retaining
-its proper-face limiting cones, all projection identities, and the component covering
-families. Empty index families and the empty base are allowed by that construction.
 -/
 theorem exists_formal_wContractible_hypercover (X : Scheme.{u}) (U : X.ProEt)
     (hUqc : CompactSpace U.left) (hUqs : QuasiSeparatedSpace U.left) :

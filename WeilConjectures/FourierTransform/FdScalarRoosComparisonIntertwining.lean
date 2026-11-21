@@ -164,9 +164,7 @@ import WeilConjectures.AlgebraicGeometry.ExactProductFunctorRoosCompatibility
 
 /-! # Scalar transport of the normalized Roos pullback comparison
 
-Source: trace-definition coefficient-category comparison, extracted whole-tower proof
-steps 9--10; Stacks Tag 0941, lemma-derived-limit-is-ok
-(blueprint: lem-fd-scalar-roos-comparison-intertwining).
+Source: Stacks Tag 0941.
 
 The comparison is the recorded normalized Roos comparison, and the scalar-limit map
 is its actual constant-tower/derived-limit adjunct. Rational categories are raw

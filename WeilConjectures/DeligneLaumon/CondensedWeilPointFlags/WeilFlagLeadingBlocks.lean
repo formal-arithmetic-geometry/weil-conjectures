@@ -9,10 +9,6 @@ public import Mathlib.LinearAlgebra.Matrix.Block
 public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
 /-! # Invertible leading blocks in an upper triangular Weil matrix
-
-Source: latest blueprint, thm-zl-real-mixed-by-curves.proof.md, dimension-zero
-Jordan-filtration sub-step
-(blueprint: lem-zl-condensed-point-weil-flags-leading-blocks).
 -/
 
 @[expose] public section
@@ -20,15 +16,7 @@ set_option autoImplicit false
 universe u
 namespace WeilConjectures.CondensedWeilPointFlags
 
-/-- All leading blocks of an upper triangular matrix with unit diagonal are invertible.
-Source: latest blueprint, thm-zl-real-mixed-by-curves.proof.md, dimension-zero
-Jordan-filtration sub-step
-(blueprint: lem-zl-condensed-point-weil-flags-leading-blocks).
-
-Proof: restricting both indices to the first j coordinates preserves upper
-triangularity. The determinant of the restriction is the product of the first j
-diagonal entries, all nonzero, and so is nonzero. Over a field this makes the
-restriction invertible. For j = 0 this is the empty product 1. -/
+/-- All leading blocks of an upper triangular matrix with unit diagonal are invertible. -/
 theorem leading_blocks_isUnit {K : Type u} [Field K] {d : ℕ}
     (C : Matrix (Fin d) (Fin d) K) (hC : C.IsUpperTriangular)
     (hdiag : ∀ i, IsUnit (C i i)) (j : ℕ) (hj : j ≤ d) :

@@ -21,8 +21,7 @@ import Mathlib.Algebra.CharP.CharAndCard
 /-! # Constructible pullback comparison data
 
 The unchanged comparison structures and scalar predicate, separated from their proofs
-for compilation. Source: Bhatt--Scholze 6.8.11(3), 6.8.14(2), 6.8.15
-(blueprint: def-a1-constructible-pullback-comparison-data).
+for compilation. Source: Bhatt--Scholze 6.8.11(3), 6.8.14(2), 6.8.15.
 -/
 
 @[expose] public noncomputable section

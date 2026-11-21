@@ -80,24 +80,8 @@ private theorem exists_scalar_denominator_lifts
 
 /-- Monic triangular polynomials over k(x) lift to k[X,T] after inverting one
 nonzero polynomial in X; evaluation of every lifted coefficient is preserved.
-Source: Stacks Project, proof of Tag 07BV, the choice of a common denominator h;
-Tag 08JZ, the localization presentation with T mapping to inverse h
-(blueprint: lem-weil-pbc-triangular-relations-denominator-lift).
-
-Proof: Algebraic independence identifies k[X] with the subalgebra k[x]. Every
-coefficient in k(x) is a quotient of two elements of k[x] with nonzero denominator.
-There are finitely many scalar coefficients among all coefficients of all q_i.
-Choose polynomial numerators and nonzero polynomial denominators for them, and
-let h be the product of these denominators (one for the empty set). Since k[X] is
-a domain, h is nonzero. For a denominator s dividing h, write h = s t; then the
-fraction a/s is represented by a(X)t(X)T. More generally a/h^n is represented by
-a(X)T^n. Replace every scalar coefficient in every nonleading coefficient of q_i
-by such a polynomial, and shift each preceding variable j to d+1+j. Keep the
-leading coefficient exactly one. This constructs a monic p_i of unchanged degree.
-For every assignment z with first coordinates x and coordinate d equal to inverse
-h(x), each scalar lift evaluates to its original fraction. The preceding variables
-evaluate to z(d+1+j), so coefficientwise polynomial evaluation gives the stated
-map equality. For d=0 the rational function field is k; for m=0 use h=1. -/
+Source: Stacks Project, proof of Tag 07BV, the choice of a common denominator h; Tag 08JZ, the
+localization presentation with T mapping to inverse h. -/
 theorem exists_triangularRelations_denominatorLift
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (d : ℕ) (x : Fin d → K) (hx : AlgebraicIndependent k x)

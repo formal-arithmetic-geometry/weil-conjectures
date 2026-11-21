@@ -13,9 +13,7 @@ import WeilConjectures.FourierTransform.FdCoefficientScalarCompletionIdentificat
 
 /-! # Integral scalar coherence for fixed normalized pullback components
 
-Source: trace-definition auxiliary whole-tower argument, as recorded in the parent
-comparison node; Stacks 0941 and 099N
-(blueprint: lem-fd-normalized-pullback-integral-scalar). -/
+Source: Stacks 0941 and 099N. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false

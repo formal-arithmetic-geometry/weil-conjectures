@@ -129,10 +129,7 @@ public import WeilConjectures.SixFunctors.Supporting.DerivedAutomorphismHomEvalu
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 
-Source: Stacks Project, Modules on Sites, Tag 0GMX; the derived and completed
-normalization is the enhancement in the node's sixteen proof steps, supplying
-main-20261015 theorem-poincare-duality-frobenius--2 Steps 1, 2, 4 and 5.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation).
+Source: Stacks Project, Modules on Sites, Tag 0GMX.
 
 Finite inputs are unbounded. Integral inputs have exactly the recorded
 Hom-constructibility condition. Completed inverse image is constructed from
@@ -177,9 +174,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 /-- The canonical reduction/reindexing map: the actual reduction/limit adjunct
-of exact inverse image of the unit, followed by the inverse limit comparison.
-Source: node proof steps 8 and 13
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+of exact inverse image of the unit, followed by the inverse limit comparison. -/
 def podReductionReindexingMap (K : DerivedCategory (integralTowerModules l E Y)) :
     (pullbackTensorCalculus l E X).reduction.obj
         ((podCompletedDerivedInverseImage l E g).obj K) ⟶
@@ -191,15 +186,7 @@ def podReductionReindexingMap (K : DerivedCategory (integralTowerModules l E Y))
       (podLimitReindexing l E g).inv.app ((pullbackTensorCalculus l E Y).reduction.obj K))
 
 /-- The canonical reduction adjunct is invertible and natural for every ambient
-complex, without asserting invertibility of the completion unit.
-Source: node proof steps 8 and 13.
-Proof: the two reduction functors are ordinary quotient systems on a flat-term
-K-flat representative. Reindexing commutes with every quotient and strict
-transition. Their identity-on-sections map is the displayed adjunct, by the
-actual reduction unit and projection equations. Inverse reindexing gives an
-inverse system map before localization. Naturality holds on representatives
-and descends to every derived arrow.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+complex, without asserting invertibility of the completion unit. -/
 theorem podReductionReindexingMap_laws :
     (∀ K, IsIso (podReductionReindexingMap l E g K)) ∧
     ∀ (K L : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ L),
@@ -251,15 +238,13 @@ theorem podReductionReindexingMap_laws :
   · rw [hmap, hmap]
     exact e.hom.naturality f
 
-/-- The reduction comparison is the isomorphism of that very canonical adjunct.
-Source: node proof step 13 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The reduction comparison is the isomorphism of that very canonical adjunct. -/
 def podReductionReindexing (K : DerivedCategory (integralTowerModules l E Y)) :=
   @asIso _ _ _ _ (podReductionReindexingMap l E g K)
     ((podReductionReindexingMap_laws l E g).1 K)
 
 /-- Exact inverse image to tower pullback: inverse image of the actual completion
-unit, the inverse total-limit comparison, and the inverse recorded Roos model.
-Source: node proof step 8 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+unit, the inverse total-limit comparison, and the inverse recorded Roos model. -/
 def podCompletedToTower (K : DerivedCategory (integralTowerModules l E Y)) :
     (podCompletedDerivedInverseImage l E g).obj K ⟶ (integralDerivedPullback l E g).obj K :=
   (podCompletedDerivedInverseImage l E g).map
@@ -273,14 +258,7 @@ attribute [local irreducible] pullbackTensorCalculus
   scalarReductionExistence scalarReductionDerivedExistence
 
 /-- The identification with tower-defined pullback is natural, and is invertible
-on exactly the complete constructible inputs used here.
-Source: node proof step 8.
-Proof: all three factors are natural. For a constructible complete K, the
-canonical quotient-tower unit is invertible by the finite-free completed
-scalar theorem for E/E. The other two factors are isomorphisms already.
-The total-limit comparison's resolution and projection equations imply
-commutation with every reduction projection.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+on exactly the complete constructible inputs used here. -/
 theorem podCompletedToTower_laws :
     (∀ (K L : DerivedCategory (integralTowerModules l E Y)) (f : K ⟶ L),
       (podCompletedDerivedInverseImage l E g).map f ≫ podCompletedToTower l E g L =
@@ -319,8 +297,7 @@ theorem podCompletedToTower_laws :
     dsimp only [podCompletedToTower]
     infer_instance
 
-/-- The canonical complete-input identification, retaining its specified map.
-Source: node proof step 8 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- The canonical complete-input identification, retaining its specified map. -/
 def podCompletedToTowerIso (K : sfIntegralConstructibleCategory l E Y) :=
   @asIso _ _ _ _ (podCompletedToTower l E g K.obj) ((podCompletedToTower_laws l E g).2 K)
 
@@ -388,13 +365,7 @@ private theorem podCompletedRingMap_eq_inverseImage {V W : Scheme.{u}} (k : V �
   rfl
 
 /-- Composition of exact completed inverse image is fixed on all local sections.
-Source: node proof steps 1 and 7, Stacks 00WX.
-Proof: composition of the two postcomposition functors agrees with postcomposition
-by the composite, using associativity of scheme arrows. The identity on the
-unchanged local sections is linear because both coefficient transports have
-identical finite projections. It is a natural isomorphism; pointwise equality
-on all local sections proves uniqueness.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+Source: node proof steps 1 and 7, Stacks 00WX. -/
 theorem podCompletedModuleComp_existsUnique :
     ∃! e : podCompletedModuleInverseImage l E (h ≫ g) ≅
         podCompletedModuleInverseImage l E g ⋙ podCompletedModuleInverseImage l E h,
@@ -446,12 +417,10 @@ theorem podCompletedModuleComp_existsUnique :
       (presheafOfModules_map_heq_of_eq M.val (d.inv.app U.unop).op (hd U.unop) x).symm)
 
 /-- The unique identity-on-sections completed composition comparison.
-Source: Stacks 00WX (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+Source: Stacks 00WX. -/
 def podCompletedModuleComp := (podCompletedModuleComp_existsUnique l E g h).exists.choose
 
-/-- Derive that same ordinary comparison, using the fixed exact factorizations.
-Source: node proof steps 2 and 7
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Derive that same ordinary comparison, using the fixed exact factorizations. -/
 def podCompletedDerivedComp : podCompletedDerivedInverseImage l E (h ≫ g) ≅
     podCompletedDerivedInverseImage l E g ⋙ podCompletedDerivedInverseImage l E h :=
   letI := podCompletedModuleAdditive l E g
@@ -471,13 +440,7 @@ variable [∀ x : X, Invertible (l : X.residueField x)]
   [∀ y : Y, Invertible (l : Y.residueField y)]
   [∀ z : Z, Invertible (l : Z.residueField z)]
 
-/-- Published integral tower composition has the actual completion-unit normalization.
-Source: node proof steps 7--8.
-Proof: conjugate the derived identity-on-sections composition by the three
-complete-input identifications. Their maps are fixed by completion units and
-total-limit reindexing. Hence this is the canonical tower composition, natural
-by their naturality. Its component formula determines it uniquely.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+/-- Published integral tower composition has the actual completion-unit normalization. -/
 theorem podIntegralPullbackComp_normalization
     (M : sfIntegralConstructibleCategory l E Y) :
     HEq (((pullbackTensorIntegralComposition l E g h).hom.app M).hom)

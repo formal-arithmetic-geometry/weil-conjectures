@@ -260,8 +260,7 @@ theorem finrank_fixedPointsSubmodule_le [FiniteDimensional k V] (F : V →ₚ[k,
   Module.finrank_le_of_rank_le (rank_fixedPointsSubmodule_le F)
 
 
-/-- Blueprint `proposition-p-torsion-smooth-proper-curve--4`: Fixed points of `p`-linear maps are
-finite.
+/-- Fixed points of `p`-linear maps are finite.
 
 Let `k` be a field of characteristic `p > 0`, let `V` be a finite-dimensional `k`-vector space
 and let `F : V →ₛₗ[frobenius k p] V` be `p`-linear. Then the fixed points of `F` form a finite
@@ -274,8 +273,7 @@ instance finite_fixedPoints [FiniteDimensional k V] (F : V →ₚ[k, p] V) :
   have := Module.finite_of_finite (⊥ : Subfield k) (M := fixedPointsSubmodule F)
   .of_equiv _ (fixedPointsEquivSubmodule F).symm
 
-/-- Blueprint `proposition-p-torsion-smooth-proper-curve--4`: Fixed points of `p`-linear maps are
-finite.
+/-- Fixed points of `p`-linear maps are finite.
 
 The `𝔽_p`-subspace of fixed points of a `p`-linear endomorphism `F` of a finite-dimensional
 `k`-vector space `V` has `𝔽_p`-dimension at most `Module.finrank k V`; equivalently, it has at
@@ -363,7 +361,7 @@ theorem exists_submodule_sub_id_surjOn [IsAlgClosed k] [FiniteDimensional k V]
     obtain ⟨x, hx⟩ := exists_sub_id_eq_of_iterate_eq F v a c ha.symm
     exact ⟨_, hS.mpr ⟨x, rfl⟩, hx⟩
 
-/-- Blueprint `proposition-p-torsion-smooth-proper-curve--3`: Lang–Steinberg for `p`-linear maps.
+/-- Lang–Steinberg for `p`-linear maps.
 
 Let `k` be an algebraically closed field of characteristic `p > 0`, let `V` be a
 finite-dimensional `k`-vector space and let `F : V →ₛₗ[frobenius k p] V` be `p`-linear. Then
@@ -423,9 +421,7 @@ theorem existsUnique_baseChange (F : V →ₚ[k, p] V) :
     | add x y hx hy => simp only [map_add, hx, hy]
 
 
-/-- Blueprint `proposition-p-torsion-smooth-proper-curve--4` (proved as
-`proposition-p-torsion-smooth-proper-curve--4`): Fixed points are unchanged by algebraically closed
-base change.
+/-- Fixed points are unchanged by algebraically closed base change.
 
 Let `k ⊆ k'` be an extension of algebraically closed fields of characteristic `p > 0`, let `V`
 be a finite-dimensional `k`-vector space and let `F : V →ₛₗ[frobenius k p] V` be `p`-linear. If

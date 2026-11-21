@@ -41,26 +41,20 @@ open AlgebraicGeometry.ProEtale.CondensedRing CategoryTheory.MonObj
 
 namespace WeilConjectures.NormalizedScalar
 
-/-- The regular integral coefficient module on X.
-Source: the displayed sequence in the blueprint localization lemma
-(blueprint: lem-weil-pbc-normalized-coefficient-localization). -/
+/-- The regular integral coefficient module on X. -/
 abbrev regularIntegral (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] :=
   Mod.regular (condensedRingObj (Profinite.continuousCoefficientRingObj (integers ℓ E)) X)
 
-/-- The existing coefficient ring E_X as an integral module along the specified inclusion φ.
-Source: the blueprint localization lemma, first and last sentences
-(blueprint: lem-weil-pbc-normalized-coefficient-localization). -/
+/-- The existing coefficient ring E_X as an integral module along the specified inclusion φ. -/
 abbrev restrictedField (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] :=
   (Mod.comap (coefficientMap (scalarMap (l := ℓ) (E := E)) X)).obj
     (Mod.regular (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))
 
-/-- The sequence of regular integral modules with transition multiplication by ℓ.
-Source: the displayed sequence in the blueprint localization lemma
-(blueprint: lem-weil-pbc-normalized-coefficient-localization). -/
+/-- The sequence of regular integral modules with transition multiplication by ℓ. -/
 abbrev ellSequence (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] :
@@ -92,10 +86,7 @@ private theorem scalar_colimit_hom_ext
       ← Preadditive.nsmul_comp, ← F.map_nsmul, hs]
     exact ih
 
-/-- Multiplication by ell is invertible on actual field-coefficient modules.
-Source: the nonzero constant field scalar ell.
-(blueprint: lem-weil-pbc-normalized-coefficient-localization).
-Proof: use multiplication by its inverse as the inverse endomorphism. -/
+/-- Multiplication by ell is invertible on actual field-coefficient modules. -/
 theorem field_nsmul_isIso (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -115,9 +106,7 @@ theorem field_nsmul_isIso (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
   rw [← he]
   exact e.isIso_hom
 
-/-- Localization of a ring object at an integer, stated by its initial map.
-Source: the universal property of inverting a central integer.
-(blueprint: lem-weil-pbc-normalized-coefficient-localization). -/
+/-- Localization of a ring object at an integer, stated by its initial map. -/
 def RingLocalizationAt {C : Type*} [Category C] [Preadditive C] [MonoidalCategory C]
     (p : ℕ) {A B : C} [MonObj A] [MonObj B] (φ : A ⟶ B) : Prop :=
   IsIso (p • 𝟙 B) ∧
@@ -125,20 +114,14 @@ def RingLocalizationAt {C : Type*} [Category C] [Preadditive C] [MonoidalCategor
     IsMonHom g → ∃! f : B ⟶ D, IsMonHom f ∧ φ ≫ f = g
 
 /-- The coefficient inclusion is the initial map of A_T[1/ell].
-Source: sheaf localization, Bhatt--Scholze Lemma 6.8.2.
-(blueprint: lem-weil-pbc-normalized-coefficient-localization). -/
+Source: sheaf localization, Bhatt--Scholze Lemma 6.8.2. -/
 def CoefficientLocalization (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] : Prop :=
   RingLocalizationAt ℓ (coefficientMap (scalarMap (l := ℓ) (E := E)) X)
 
 /-- The ordinary regular coefficient telescope, transported to the original
-finite normed field and its actual unit ball.
-Source: the regular coefficient telescope and isometric coefficient transport.
-(blueprint: lem-weil-pbc-normalized-coefficient-localization).
-Proof: restrict the small-field telescope along the inverse integral coefficient
-isomorphism. The field comparison identifies the target module. Colimit
-preservation and the commuting coefficient square give the specified zeroth leg. -/
+finite normed field and its actual unit ball. -/
 theorem regular_telescope (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] :
@@ -219,15 +202,7 @@ private theorem ring_localization_of_telescope
 
 /-- The actual field coefficient sheaf is the ring localization of the integral
 coefficient sheaf at ell, with initial map the pulled-back inclusion.
-Source: Bhatt--Scholze Lemma 6.8.2 and the regular coefficient telescope.
-(blueprint: lem-weil-pbc-normalized-coefficient-localization).
-Proof: the telescope determines additive extensions by dividing its nth leg by
-ell^n. Ring units are preserved because the initial inclusion preserves them.
-For multiplication, tensor preserves the telescope colimit in either variable;
-check the equality on its zeroth legs using the initial ring map. Uniqueness is
-colimit uniqueness, since ell is invertible in the target. This is the ring
-localization universal property, and hence fixes the localization isomorphism
-and its initial map independently of every choice of localization representative. -/
+Source: Bhatt--Scholze Lemma 6.8.2 and the regular coefficient telescope. -/
 theorem coefficient_localization (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] : CoefficientLocalization X ℓ E := by
@@ -265,9 +240,7 @@ private theorem ring_localization_iso
   exact ⟨Mon.mkIso e (IsMonHom.one_hom f) (IsMonHom.mul_hom f), hfj⟩
 
 /-- The normalized comparison A_T[1/ell] ≅ E_T for every representative of the
-ring localization. Its restriction to the initial term is the actual inclusion.
-Source: uniqueness of localization with its specified initial map.
-(blueprint: lem-weil-pbc-normalized-coefficient-localization). -/
+ring localization. Its restriction to the initial term is the actual inclusion. -/
 def CoefficientLocalizationComparison (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] : Prop :=
@@ -278,11 +251,7 @@ def CoefficientLocalizationComparison (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Pri
           Mon.mk (condensedRingObj (Profinite.continuousCoefficientRingObj E) X),
         j ≫ e.hom.hom = coefficientMap (scalarMap (l := ℓ) (E := E)) X
 
-/-- The coefficient localization comparison preserves the initial inclusion.
-Source: the universal property just proved.
-(blueprint: lem-weil-pbc-normalized-coefficient-localization).
-Proof: the two localization universal properties give mutually inverse ring maps.
-Their composites are identities by uniqueness with the specified initial map. -/
+/-- The coefficient localization comparison preserves the initial inclusion. -/
 theorem coefficient_localization_comparison (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
     [FiniteDimensional ℚ_[ℓ] E] : CoefficientLocalizationComparison X ℓ E := by

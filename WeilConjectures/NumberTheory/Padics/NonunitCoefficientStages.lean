@@ -13,7 +13,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 
 /-! # Coefficient stages for an arbitrary nonzero nonunit
 
-Source: Zheng, Construction 4.1, printed p. 21; Serre, Local Fields, Chapter II, §2.
+Source: Serre, Local Fields, Chapter II, §2.
 -/
 
 @[expose] public section
@@ -23,15 +23,7 @@ namespace Padic
 
 /-- Nonzero nonunits define finite, prime-power-torsion coefficient stages and a complete
 adic topology. Unlike a choice of uniformizer, the parameter may have any positive valuation.
-Source: Zheng, Construction 4.1, printed p. 21; Serre, Local Fields, Chapter II, §2
-(blueprint: lem-pur-nonunit-coefficient-stages).
-
-Proof: write t as a unit times a positive power of a uniformizer pi. Its principal ideal
-is therefore a positive power of the maximal ideal. Finite residue fields and induction on
-ideal powers give finite quotients. Since l belongs to the maximal ideal, l to the power
-r(n+1) belongs to (t)^(n+1). All quotient transitions are surjective on representatives.
-The maximal-adic topology is complete by the finite-module completeness theorem applied
-to O itself. A positive ideal power defines the same topology, so it remains complete. -/
+Source: Serre, Local Fields, Chapter II, §2. -/
 theorem nonunit_coefficient_stages
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E]

@@ -19,8 +19,7 @@ compared with the sequence inverse image of the quotient system. The comparison
 is the left-adjoint mate of the whole-tower tensor-unit isomorphism, and it is
 fixed on every quotient unit generator.
 
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03EL, 07A4 and 0941.
-(blueprint: lem-pod-reduction-reindex-unary-model).
+Source: Stacks 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -240,8 +239,7 @@ private theorem unitSection_eqToHom (W : Scheme.{u}) (M : CompletionUnit.Ordinar
 
 /-- The ordinary quotient system commutes with reindexing along an isomorphism, by a
 comparison fixed on every quotient unit generator.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03D6, 03EL and 0941.
-(blueprint: lem-pod-reduction-reindex-unary-model). -/
+Source: Stacks 03D6, 03EL and 0941. -/
 theorem reindexNormalized_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (MY : CompletionUnit.OrdinaryModel l E Y) (MX : CompletionUnit.OrdinaryModel l E X) :
     ∃ β : MY.tensor ⋙ integralComparisonSequencePullback l E g ≅

@@ -46,9 +46,7 @@ attribute [local irreducible] map IntegralAmbient.tensorOperationUnit
   IntegralOnSlice.roosUnit IntegralAmbient.tensorTowerIso
   integralOperationsTotalTensorSection unrestrictedIntegralTensorSection
 
-/-- The prescribed pure-tensor product coordinates and zero shifted coordinate.
-Source: rational purity proof Step 1
-(blueprint: lem-pur-strict-tensor-augmentation-normalization). -/
+/-- The prescribed pure-tensor product coordinates and zero shifted coordinate. -/
 def Normalized (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u})
@@ -119,13 +117,7 @@ private theorem normalized_unique (l : ℕ) [Fact l.Prime]
   · intro i
     exact (h.2 P Q i).trans (h'.2 P Q i).symm
 
-/-- There is exactly one natural strict tensor map with these two coordinates.
-Source: rational purity proof Step 1
-(blueprint: lem-pur-strict-tensor-augmentation-normalization).
-Proof: the constructed quotient unit has the prescribed coordinates. Compare two
-normalized maps on pure generators in every degree and every product projection.
-Pure-tensor and product extensionality identify the first coordinates; the second
-coordinates vanish. Mapping-cocone and natural-transformation extensionality finish. -/
+/-- There is exactly one natural strict tensor map with these two coordinates. -/
 theorem existsUnique_normalized (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) :

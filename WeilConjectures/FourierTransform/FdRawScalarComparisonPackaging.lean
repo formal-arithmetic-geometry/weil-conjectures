@@ -8,9 +8,6 @@ module
 public import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizationScalarData
 
 /-! # Packaging raw scalar comparisons on the specified stage systems
-
-Source: trace-definition coefficient-category comparison, localization step 7
-(blueprint: lem-fd-raw-scalar-comparison-packaging).
 -/
 
 @[expose] public noncomputable section
@@ -248,23 +245,6 @@ private def packageInverseComparison
 /-- Convert an already coherent raw inverse comparison into a morphism of the specified
 stage systems. This is only presentation transport and inversion of the integral-lift square;
 existence of the integral comparison and existence of the raw comparison are inputs.
-Source: trace-definition final coefficient-category sentence, localization step 7
-(blueprint: lem-fd-raw-scalar-comparison-packaging).
-
-Proof: The specification of GeneralAlgebraicallyClosedCoefficients.stageSystem identifies
-its transition functors and associators with scalar and assoc. Transport j inverse along
-these equalities. This defines beta with the arrow direction required by StageSystem.Morphism;
-its finite functors are family.functor. Precompose the raw inverse cocycle with the two beta
-components and cancel j against beta to obtain Morphism.coh. Transport family.shift using
-its shift_identity; the stage transition shift is the canonical equality transport of the
-specified scalar shift, so both beta shift squares follow from the given j shift squares.
-The finite functors and their shifts agree with the supplied stage equivalences, hence are
-exact. Transport the raw unit equation to beta inverse. Finally invert the supplied
-integral-lift equation: localization preserves inverses and composition, so the inverse of
-Q(b inverse) followed by the inverse scalar-integral comparison is the scalar-integral
-comparison followed by Q(b). The supplied rational object normalizations identify the
-endpoints; only their canonical equality casts occur. This gives the required forward lift.
-No pentagon or four-field assertion is assumed or concluded here.
 -/
 theorem fdRawScalarComparisonPackaging
     (l : ℕ) [Fact l.Prime]

@@ -54,8 +54,7 @@ theorem nonempty_iso_quotient_obj {K I J : CochainComplex C ℤ} (s : K ⟶ I) (
 of a cochain complex `K` and `G` is an additive functor, then `Hᵠ(G(I)) ≅ Hᵠ(G(J))` for every
 `q`: the two resolutions are homotopy equivalent, and `G` preserves homotopies. For
 `G = Γ(T, -)` and `K = F[0]` this says that the étale cohomology groups `Hᵠ(T_ét, F)` do not
-depend on the chosen K-injective resolution of `F`.
-(blueprint: `prop-weil-pbc-cohomology-resolution-independent`) -/
+depend on the chosen K-injective resolution of `F`. -/
 theorem nonempty_homology_iso {D : Type*} [Category* D] [Abelian D] (G : C ⥤ D) [G.Additive]
     {K I J : CochainComplex C ℤ} (s : K ⟶ I) (t : K ⟶ J) [QuasiIso s] [QuasiIso t]
     [I.IsKInjective] [J.IsKInjective] (q : ℤ) :

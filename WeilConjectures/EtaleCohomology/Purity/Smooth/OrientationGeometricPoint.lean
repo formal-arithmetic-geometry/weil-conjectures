@@ -47,8 +47,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {Y : Scheme.{u}} [HasInve
 
 set_option maxRecDepth 4000 in
 -- rewriting inside the derived-category terms of the statement is deep
-/-- Blueprint `thm-pur-affine-line-orientation`: Global orientation and its normalization (the
-normalization at the geometric points, for classes with supports).
+/-- Global orientation and its normalization (the normalization at the geometric points, for
+classes with supports).
 
 For a geometric point `ȳ : Spec Ω ⟶ Y`, the restriction of the Kummer boundary
 `∂κ(t) ∈ H²_{s(Y)}(𝔸¹_Y, Λ(1))` along the base change `𝔸¹_ȳ : 𝔸¹_Ω ⟶ 𝔸¹_Y` of the zero section
@@ -75,8 +75,7 @@ theorem supportCohomologyAffineLineLinearEquiv_restrictSupportedClass_kummerBoun
 
 set_option maxRecDepth 4000 in
 -- rewriting inside the derived-category terms of the statement is deep
-/-- Blueprint `thm-pur-affine-line-orientation`: Global orientation and its normalization (the
-normalization at the geometric points).
+/-- Global orientation and its normalization (the normalization at the geometric points).
 
 For a geometric point `ȳ : Spec Ω ⟶ Y` (`Ω` algebraically closed), the restriction of the global
 orientation `pur_s : Λ_{V(t)} ⟶ Rs^! Λ(1)[2]` along the base change `𝔸¹_ȳ : 𝔸¹_Ω ⟶ 𝔸¹_Y`

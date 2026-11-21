@@ -84,7 +84,7 @@ noncomputable abbrev WeilSheaf.fourierKernelTensor (F : WeilSheaf k₀ l (affine
 
 /-- The compactly supported direct image `Rpr₂!(𝒦_ψ ⊗ pr₁^* F)` is the transform of `F` shifted
 by `-1`: the transform is `Rpr₂!(𝒦_ψ ⊗ pr₁^* -)[1]`, and the pullback and the tensor product
-with the lisse kernel are exact. (blueprint: `sec-Fourier-inversion`) -/
+with the lisse kernel are exact. -/
 noncomputable def WeilSheaf.derivedLowerShriekFourierKernelTensorIso
     (F : WeilSheaf k₀ l (affineLine k₀)) :
     (WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀)).obj

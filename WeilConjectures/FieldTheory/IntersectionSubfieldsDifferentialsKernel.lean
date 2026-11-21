@@ -19,7 +19,6 @@ import WeilConjectures.FieldTheory.PIndependentDifferentialsIndependent
 /-! # Differential kernel detection
 
 Source: Stacks Project, More on Algebra, Tag 07P4.
-(blueprint: lem-weil-pbc-intersection-subfields-differentials-kernel)
 -/
 
 @[expose] public section
@@ -100,11 +99,7 @@ private theorem independent_adjoin_of_subset
   exact hz.restrict_scalars' (⊥ : IntermediateField k K)
 
 /-- Differential kernel detection.
-Source: Stacks Project, More on Algebra, Tag 07P4 (`lemma-intersection-subfields`),
-`literature/stacks-project/more-algebra.tex`.
-(blueprint: lem-weil-pbc-intersection-subfields-differentials-kernel)
-
-Proof:
+Source: Stacks Project, More on Algebra, Tag 07P4, `literature/stacks-project/more-algebra.tex`.
 
 1. Frobenius is an injective ring homomorphism, so `K^p` and `L^p` are subfields, and the
 prime field lies in `K^p`. Choose a p-basis `x_i` of `K` over the prime field using

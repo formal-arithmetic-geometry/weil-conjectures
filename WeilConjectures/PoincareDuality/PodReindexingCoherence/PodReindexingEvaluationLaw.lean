@@ -74,8 +74,7 @@ import all WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorCurry
 
 /-! # Evaluation law for a normalized reindexing comparison
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0GMX, 0A8X, 08J9.
-(blueprint: lem-pod-reindexing-evaluation-law).
+Source: Stacks 0GMX, 0A8X, 08J9.
 -/
 
 @[expose] public noncomputable section
@@ -496,15 +495,7 @@ private theorem evaluation_representatives {X Y : Scheme.{u}} (g : X ⟶ Y) [IsI
 Every normalized comparison satisfies the evaluation equation.  This is the
 representative evaluation step, with the comparison itself supplied as input.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0GMX, 0A8X and 08J9
-(blueprint: lem-pod-reindexing-evaluation-law).
-
-Proof: choose flat-term K-flat and K-injective representatives.  The chain
-transpose identifies evaluation on a pure tensor with application of the Hom
-map.  The `chain_projection` and `tensorChain_pure` equations identify the two
-reindexed maps on every pure generator.  Extensionality after sheafification,
-then localization and naturality along resolutions, gives the displayed law for
-all derived objects.
+Source: Stacks 0GMX, 0A8X and 08J9.
 -/
 theorem comparison_evaluation_law {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

@@ -25,8 +25,7 @@ commutation of `Ψ` with the derived pullbacks with `LΔ^* Lp₂^* ≅ 𝟭`. He
 orientation `ω_f ≅ Λ_X(d)[2d]` is compatible with `Ψ` as soon as the frame classes of the
 diagonal (`hframe`), the composition isomorphisms `RΔ^! ω_{p₁} ≅ Λ_X` (`hε`) and the section
 invariant construction (`hL`) are
-(`AlgebraicGeometry.Etale.map_dualizingComplexTwistShiftIso_reduction`, blueprint
-`proposition-compatibility-purity-change-coefficients`).
+(`AlgebraicGeometry.Etale.map_dualizingComplexTwistShiftIso_reduction`).
 -/
 
 @[expose] public section

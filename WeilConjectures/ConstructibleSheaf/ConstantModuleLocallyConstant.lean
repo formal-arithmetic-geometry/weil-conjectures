@@ -145,21 +145,7 @@ private theorem constantToLocallyConstantSheaf_isIso (X : Scheme.{u})
 
 /-- Locally constant module functions give the constant module sheaf, naturally
 in the coefficient module.
-Source: Stacks Project, Tags 0A3R, 04TR and 04TS.
-(blueprint: lem-weil-pbc-constant-module-locally-constant)
-
-Proof: Give the coefficient module the discrete topology. Locally constant
-functions are the same as continuous functions. Compatible continuous functions
-on an etale covering glue uniquely because the covering is jointly surjective
-and its maps are open; pointwise module operations commute with gluing. The map
-from the constant presheaf sends a coefficient to its constant function. It is
-locally surjective: restrict a locally constant function to each of its open
-fibers, which are etale objects and cover the source. It is locally injective:
-two constant functions agreeing on a nonempty object have equal coefficients;
-on an empty object the empty family is a covering. Thus the map becomes an
-isomorphism after sheafification. The comparison commutes with every linear map,
-since constant functions, restriction, and sheafification are natural in the
-coefficient module. This also handles the zero module and the empty scheme. -/
+Source: Stacks Project, Tags 0A3R, 04TR and 04TS. -/
 theorem locallyConstantModulePresheafFunctor_iso_constantSheaf
     (X : Scheme.{u}) (R : Type (u + 1)) [Ring R] :
     Nonempty (locallyConstantModulePresheafFunctor X R ≅

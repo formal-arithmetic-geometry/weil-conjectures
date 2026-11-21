@@ -18,15 +18,15 @@ the directed union of its finite separable subextensions, so that `ks` is their 
 ## Main statements
 
 - `IsSepClosure.exists_intermediateField_mem`: every element of a separable closure lies in a
-  finite separable subextension (blueprint `def-pd-separable-closure`).
+  finite separable subextension.
 - `IsSepClosed.instInfinite`: a separably closed field is infinite.
 - `RingHom.exists_comp_eq_of_isSepClosed`: an embedding of a separable extension into a field
   extension of a separably closed field `L` lands in `L`.
 - `IsSepClosed.iff_exists_root`, `IsSepClosed.iff_forall_finrank_eq_one`: a field is separably
   closed iff every nonconstant separable polynomial has a root iff it has no nontrivial finite
-  separable extension (blueprint `def-pc-separably-closed`).
+  separable extension.
 - `IsSepClosed.finrank_eq_one_of_isSeparable`: separable extensions of a separably closed field
-  are trivial (blueprint `lem-pc-sepclosed-finite-sep-trivial`).
+  are trivial.
 -/
 
 @[expose] public section
@@ -39,9 +39,7 @@ open IntermediateField
 separable closure of `k`. Every `x ∈ ks` lies in a subextension `K` of `ks/k` that is finite and
 separable over `k`, namely `k⟮x⟯`; hence `ks = colim K` over the finite separable subextensions.
 
-The separable closure itself is Mathlib's `IsSepClosure`.
-
-(blueprint: `def-pd-separable-closure`) -/
+The separable closure itself is Mathlib's `IsSepClosure`. -/
 theorem IsSepClosure.exists_intermediateField_mem (k : Type u) {ks : Type v} [Field k] [Field ks]
     [Algebra k ks] [IsSepClosure k ks] (x : ks) :
     ∃ K : IntermediateField k ks, FiniteDimensional k K ∧ Algebra.IsSeparable k K ∧ x ∈ K := by
@@ -104,9 +102,7 @@ variable (k : Type u) [Field k]
 
 /-- **Separably closed fields.** A field `k` is separably closed (Mathlib's `IsSepClosed k`, every
 separable polynomial splits) if and only if every nonconstant separable polynomial over `k` has a
-root in `k`.
-
-(blueprint: `def-pc-separably-closed`) -/
+root in `k`. -/
 theorem iff_exists_root :
     IsSepClosed k ↔ ∀ p : k[X], p.degree ≠ 0 → p.Separable → ∃ x, p.IsRoot x :=
   ⟨fun _ p hp hsep ↦ exists_root p hp hsep, fun h ↦ of_exists_root k fun _ _ hirr hsep ↦
@@ -114,9 +110,7 @@ theorem iff_exists_root :
 
 /-- **A separably closed field has no nontrivial separable extension.** If `k` is separably
 closed, every separable field extension `K / k`, in particular every finite one, is trivial:
-`[K : k] = 1`.
-
-(blueprint: `lem-pc-sepclosed-finite-sep-trivial`) -/
+`[K : k] = 1`. -/
 theorem finrank_eq_one_of_isSeparable [IsSepClosed k] (K : Type v) [Field K] [Algebra k K]
     [Algebra.IsSeparable k K] : Module.finrank k K = 1 :=
   ((AlgEquiv.ofBijective (Algebra.ofId k K) (algebraMap_bijective k K)).toLinearEquiv.finrank_eq
@@ -126,9 +120,7 @@ theorem finrank_eq_one_of_isSeparable [IsSepClosed k] (K : Type v) [Field K] [Al
 only if it has no nontrivial finite separable field extension. One direction is
 `IsSepClosed.finrank_eq_one_of_isSeparable`; conversely, for a separable irreducible polynomial `p`
 with a root `α` in an algebraic closure, `k⟮α⟯` is a finite separable extension of degree
-`deg p`, so `deg p = 1` and `p` has a root in `k`.
-
-(blueprint: `rem-ptr-pc-separably-closed-1`, `def-pc-separably-closed`) -/
+`deg p`, so `deg p = 1` and `p` has a root in `k`. -/
 theorem iff_forall_finrank_eq_one :
     IsSepClosed k ↔ ∀ (K : Type u) [Field K] [Algebra k K] [FiniteDimensional k K]
       [Algebra.IsSeparable k K], Module.finrank k K = 1 := by

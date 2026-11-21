@@ -12,7 +12,7 @@ import WeilConjectures.FieldTheory.TensorOppositeMatrixLifts
 /-!
 # Tensor lifts with the quotient scalar defect
 
-Source: Stacks Project, Tag 03R7, injectivity argument; Section 0DVG.
+Source: Stacks Project, Tag 03R7, injectivity argument.
 -/
 
 @[expose] public section
@@ -25,22 +25,7 @@ open scoped TensorProduct
 
 /-- Tensoring projective lifts with inverse transposes gives the quotient scalar defect.
 
-Proof: unpack both scalar-defect realizations, retaining their actual homogeneous
-cocycles z and w and their projection equations. The transpose anti-isomorphism identifies
-matrices opposite with matrices. Combine it with the second splitting, commute opposite
-with scalar extension, and use the first splitting and the Kronecker matrix isomorphism
-to split the tensor product over the separable closure. Reindex Fin n × Fin m as Fin (n*m).
-For its lifts take the Kronecker product of the first lifts with the inverse transpose
-of the second lifts. Inverse transpose is a group homomorphism on invertible matrices,
-commutes with coefficient automorphisms, and sends scalar u to scalar u inverse.
-Thus the two defect identities multiply to the displayed quotient identity. The
-conjugation identity holds on pure tensors by the two original identities, hence on the
-whole algebra by bilinearity. Local constancy follows by composing the two locally
-constant lifts with inverse transpose and the Kronecker map. The size n*m is nonzero
-because both original sizes are nonzero. This step uses no equality of cohomology classes
-and supplies only a splitting over the separable closure, not a splitting over K.
-Source: Stacks Project, Tag 03R7, direct computation with tensor cocycles.
-(blueprint: lem-sc-brauer-scalar-defect-tensor-lifts). -/
+Source: Stacks Project, Tag 03R7, direct computation with tensor cocycles. -/
 theorem exists_tensor_opposite_scalarDefect_lifts (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y) :

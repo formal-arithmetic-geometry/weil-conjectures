@@ -18,10 +18,6 @@ import all WeilConjectures.CategoryTheory.ScalarLocalization.SemilinearScalarLoc
 
 /-! # Canonical source transports for smooth purity
 
-Source: main-20261015, prop-weil-operations.proof.md, sentences 3--4;
-proposition-sp-rational, Steps 1--2, and thm-pur-adic-reconstruction
-(blueprint: def-pur-canonical-purity-source-transports).
-
 The source functors retain the actual localization, coefficient and shift
 comparisons. Completed-to-ordinary tensor is fixed on strict Roos representatives.
 -/
@@ -60,9 +56,7 @@ attribute [local irreducible] rationalDerivedPullback rationalDerivedTensor
   commonStageDerivedPullback commonStageDerivedTensor
   integralCompletedTensor integralCompletedTensorComparison sfRationalScalarExtension
 /-- The actual rational twisted-pullback functor. The even shift is on the line;
-canonical symmetry and shift constraints identify this with Lf*(-)(d)[2d].
-Source: rational purity statement
-(blueprint: def-pur-canonical-purity-source-transports). -/
+canonical symmetry and shift constraints identify this with Lf*(-)(d)[2d]. -/
 def rationalSource (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -206,21 +200,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
   (a : E →ₐ[Padic l] L)
 
-/-- The integral scalar shift inherited from the normalized ordinary comparison.
-Source: rational purity proof Step 2, scalar compatibility
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The integral scalar shift inherited from the normalized ordinary comparison. -/
 def integralScalarShift (T : Scheme.{u}) (n : ℤ) :=
   letI := (GeneralAlgebraicallyClosedCoefficients.integralScalarCommShift_existsUnique
     l E L a T).exists.choose
   (sfConstructibleIntegralScalarExtension 0 l (Fact.out : l.Prime).ne_zero E L a T).commShiftIso n
 
-/-- The rational scalar shift is uniquely determined by its integral degree-one components.
-Source: rational purity proof Step 2, scalar compatibility
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: localize integralScalarShift and its inverse. Naturality on integral arrows
-extends to all fractions. The integral zero and addition identities localize too.
-The shift and localization are pinned at one. Coherence determines every integer
-comparison, and the degree-one component formula gives uniqueness. -/
+/-- The rational scalar shift is uniquely determined by its integral degree-one components. -/
 theorem scalarShift_existsUnique (T : Scheme.{u}) :
     ∃! c : (sfRationalScalarExtension l E T 0 (Fact.out : l.Prime).ne_zero L a).CommShift ℤ,
       (fun [h : (sfRationalScalarExtension l E T 0
@@ -294,9 +280,7 @@ theorem scalarShift_existsUnique (T : Scheme.{u}) :
   apply eq_of_heq
   exact (hc' K).trans (hc K).symm
 
-/-- The scalar shift fixed by localization of the ordinary integral comparison.
-Source: rational purity proof Step 2
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The scalar shift fixed by localization of the ordinary integral comparison. -/
 @[instance_reducible]
 def scalarShift (T : Scheme.{u}) :
     (sfRationalScalarExtension l E T 0 (Fact.out : l.Prime).ne_zero L a).CommShift ℤ :=
@@ -304,9 +288,7 @@ def scalarShift (T : Scheme.{u}) :
 
 /-- Scalar transport of the degree-zero line in ambient derived coordinates.
 Every factor is fixed by completion, single-complex descent, and the signed root-line
-scalar comparison; it is not a new line trivialization.
-Source: rational purity proof Step 2, finite coefficient extension
-(blueprint: def-pur-canonical-purity-source-transports). -/
+scalar comparison; it is not a new line trivialization. -/
 def lineScalarAmbient (T : Scheme.{u}) [∀ x : T, Invertible (l : T.residueField x)]
     (m : ℤ) :=
   (scalarCompletionIso l E L a T (sfIntegralTwistingObject l E T m)
@@ -315,13 +297,7 @@ def lineScalarAmbient (T : Scheme.{u}) [∀ x : T, Invertible (l : T.residueFiel
       (integralTwistLine l E T m) ≪≫
     (DerivedCategory.singleFunctor _ 0).mapIso (twistLineScalarIso l E T L a m)
 
-/-- The line scalar comparison in intrinsic integral representatives retains that map.
-Source: rational purity proof Step 2
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: the rational scalar functor's object clause is the literal completed integral
-scalar extension. The preceding ambient comparison therefore has these underlying
-objects. Lift it through the full subcategory inclusion. Faithfulness and the displayed
-underlying hom condition give uniqueness. -/
+/-- The line scalar comparison in intrinsic integral representatives retains that map. -/
 theorem lineScalarIntegral_existsUnique (T : Scheme.{u})
     [∀ x : T, Invertible (l : T.residueField x)] (m : ℤ) :
     ∃! e : ((sfRationalScalarExtension l E T 0 (Fact.out : l.Prime).ne_zero L a).obj
@@ -344,18 +320,14 @@ theorem lineScalarIntegral_existsUnique (T : Scheme.{u})
   apply ObjectProperty.hom_ext
   exact eq_of_heq he
 
-/-- The rational scalar comparison on the coefficient line.
-Source: rational purity proof Step 2
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The rational scalar comparison on the coefficient line. -/
 def lineScalar (T : Scheme.{u}) [∀ x : T, Invertible (l : T.residueField x)] (m : ℤ) :
     (sfRationalScalarExtension l E T 0 (Fact.out : l.Prime).ne_zero L a).obj
       (sfRationalTwistingCoefficient l E T m) ≅ sfRationalTwistingCoefficient l L T m :=
   (sfRationalConstructibleLocalization l L T).mapIso
     (lineScalarIntegral_existsUnique l E L a T m).exists.choose
 
-/-- The canonical pullback/tensor/line/shift comparison for finite scalar extension.
-Source: rational purity proof Step 2
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The canonical pullback/tensor/line/shift comparison for finite scalar extension. -/
 def sourceScalar {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (d : ℕ)
@@ -387,18 +359,14 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The shifted coefficient line as a literal pair at the least finite stage.
-This is the canonical stage presentation of the existing Qbar Tate line and its shift.
-Source: rational purity proof Step 2, common-stage presentation
-(blueprint: def-pur-canonical-purity-source-transports). -/
+This is the canonical stage presentation of the existing Qbar Tate line and its shift. -/
 def commonShiftedLine (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
     (d : ℕ) : generalAlgebraicallyClosedConstructibleCategory l Ω X :=
   ⟨Padic.finiteCoefficientBase l Ω,
     (sfRationalTwistingCoefficient l (Coefficient.{u} l Ω
       (Padic.finiteCoefficientBase l Ω)) X (d : ℤ))⟦2*(d : ℤ)⟧⟩
 
-/-- The actual common-stage tensor and pullback with that shifted coefficient line.
-Source: rational purity statement, Qbar source
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The actual common-stage tensor and pullback with that shifted coefficient line. -/
 def commonSource {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (d : ℕ) :=
@@ -407,24 +375,16 @@ def commonSource {X Y : Scheme.{u}} (f : X ⟶ Y)
       commonStageDerivedTensor l Ω X
 
 set_option linter.unusedSectionVars false in
-/-- The least coefficient stage is contained in every finite stage.
-Source: rational purity proof Step 2, the coefficient directed set
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: the underlying field of finiteCoefficientBase is bottom, so the inclusion
-is bottom_le. The subtype order is the underlying intermediate-field order. -/
+/-- The least coefficient stage is contained in every finite stage. -/
 theorem base_le (L : Index l Ω) : Padic.finiteCoefficientBase l Ω ≤ L := by
   exact (bot_le : (⊥ : IntermediateField (Padic l) Ω) ≤ L.val)
 
-/-- The normalized self-transition unitor in the actual stage-system presentation.
-Source: rational purity proof Step 2, common-stage identity normalization
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The normalized self-transition unitor in the actual stage-system presentation. -/
 def selfStageUnit (X : Scheme.{u}) (L : Index l Ω) :
     (stageSystem l Ω X).T (le_rfl : L ≤ L) ≅ 𝟭 (Stage l Ω X L) :=
   operationStageTransitionIso l Ω X L L le_rfl ≪≫ unitor l Ω X L
 
-/-- Scalar transport of the shifted root line to a finite stage.
-Source: rational purity proof Step 2, canonical line comparisons
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- Scalar transport of the shifted root line to a finite stage. -/
 def shiftedLineToStage (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueField x)]
     (d : ℕ) (L : Index l Ω) :
     (commonShiftedLine l Ω X d).toStage (base_le l Ω L) ≅
@@ -441,9 +401,7 @@ def shiftedLineToStage (X : Scheme.{u}) [∀ x : X, Invertible (l : X.residueFie
       (lineScalar l (Coefficient.{u} l Ω (Padic.finiteCoefficientBase l Ω))
         (Coefficient.{u} l Ω L) (coefficientInclusion l Ω _ L (base_le l Ω L)) X (d : ℤ))
 
-/-- The literal tensor-stage object of the common source.
-Source: rational purity proof Step 2
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The literal tensor-stage object of the common source. -/
 def commonSourceObject {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (d : ℕ)
@@ -451,11 +409,7 @@ def commonSourceObject {X Y : Scheme.{u}} (f : X ⟶ Y)
   commonStageTensorObject l Ω X (commonShiftedLine l Ω X d)
     (commonStagePullbackObject l Ω f K)
 
-/-- Both selected operation functors retain their specified literal object formulas.
-Source: rational purity proof Step 2
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: use the object clauses of commonStageDerivedPullback_existsUnique and
-commonStageDerivedTensor_existsUnique. Substitution gives precisely commonSourceObject. -/
+/-- Both selected operation functors retain their specified literal object formulas. -/
 theorem commonSource_obj {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (d : ℕ)
@@ -474,11 +428,7 @@ theorem commonSource_obj {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((commonStageDerivedTensor_existsUnique l Ω X).exists.choose_spec.1
       (commonShiftedLine l Ω X d) (commonStagePullbackObject l Ω f K))
 
-/-- The compositum with the least coefficient field is contained in K's own stage.
-Source: rational purity proof Step 2, one-stage presentation
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: the two tensor inputs have stages bottom and K.stage, respectively.
-Their compositum is the supremum. Apply sup_le with bottom_le and le_rfl. -/
+/-- The compositum with the least coefficient field is contained in K's own stage. -/
 theorem commonSource_stage {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (d : ℕ)
@@ -488,9 +438,7 @@ theorem commonSource_stage {X Y : Scheme.{u}} (f : X ⟶ Y)
   exact sup_le bot_le le_rfl
 
 /-- The source represented over the object's own finite field, with all scalar
-associators, root-line comparisons, and self-transition unitors retained.
-Source: rational purity proof Step 2
-(blueprint: def-pur-canonical-purity-source-transports). -/
+associators, root-line comparisons, and self-transition unitors retained. -/
 def commonSourceStageComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (d : ℕ)
@@ -503,9 +451,7 @@ def commonSourceStageComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
       (Iso.prod (shiftedLineToStage l Ω X d K.stage)
         ((selfStageUnit l Ω X K.stage).app _))
 
-/-- Canonical identification of common-source objects with their rational stage.
-Source: rational purity proof Step 2
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- Canonical identification of common-source objects with their rational stage. -/
 def commonSourceComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (d : ℕ)
@@ -525,9 +471,7 @@ end RationalSmoothPurityCanonical
 
 namespace RationalSmoothPurityCanonical
 
-/-- The ordinary K-flat total tensor, before completion.
-Source: rational purity proof, integral representatives
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The ordinary K-flat total tensor, before completion. -/
 def ordinaryTotal (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) :
     CochainComplex (integralTowerModules l E T) ℤ ×
@@ -536,9 +480,7 @@ def ordinaryTotal (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   coefficientTotalTensor.{u, u + 1, u} (ProEt.topology T)
     (completedIntegralCommRingSheafUnrestricted l E T)
 
-/-- The two strict Roos coordinates specifying the tensor augmentation.
-Source: rational purity proof Step 1, completed tensor convention
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The two strict Roos coordinates specifying the tensor augmentation. -/
 def TensorAugmentationNormalized (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     (eta : ordinaryTotal l E T ⟶ integralOperationsTensorComplexFunctor l E T) : Prop :=
@@ -582,14 +524,7 @@ attribute [local implicit_reducible] ordinaryTotal integralOperationsTensorCompl
 
 /-- The ordinary-to-completed tensor map is the strict quotient augmentation.
 Its product component is fixed on all pure total tensors, and its second cone
-component is zero. This specifies the full Roos map before localization.
-Source: rational purity proof Step 1, completed tensor convention
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: send x tensor y to the tensor of their images in each positive quotient.
-Balanced tensors and total-summand injections extend this to a chain map to the
-product tower. Compatibility with quotient transitions annihilates 1-s.
-The mapping-cocone lift with second component zero exists and is unique.
-The generator equations and zero second component prove naturality and uniqueness. -/
+component is zero. This specifies the full Roos map before localization. -/
 theorem tensorAugmentation_existsUnique (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) :
     ∃! eta : ordinaryTotal l E T ⟶ integralOperationsTensorComplexFunctor l E T,
@@ -599,9 +534,7 @@ theorem tensorAugmentation_existsUnique (l : ℕ) [Fact l.Prime] (E : Type u) [F
 
 end TensorAugmentationProof
 
-/-- The fixed tensor augmentation, including both strict cone components.
-Source: rational purity proof Step 1
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The fixed tensor augmentation, including both strict cone components. -/
 def tensorAugmentation (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) :
     ordinaryTotal l E T ⟶ integralOperationsTensorComplexFunctor l E T :=
@@ -653,13 +586,7 @@ private theorem ordinary_model_from_comparison (T : Scheme.{u})
     ((CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat Q.obj).2 Q.property.1)))
 
 /-- The ordinary tensor model belonging to the recorded coherent coefficient calculus.
-Its representative is fixed by that calculus's ordinary total-tensor comparison.
-Source: rational purity proof, projection-formula transpose
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: restrict the calculus's K-flat comparison to flat-term K-flat complexes.
-The ordinary totals in the two interfaces are the same signed direct-sum total;
-transport across that definitional presentation equality. This produces a natural
-isomorphism and fixes it uniquely at every pair of representatives. -/
+Its representative is fixed by that calculus's ordinary total-tensor comparison. -/
 theorem ordinaryModel_existsUnique (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) :
     ∃! a : ProEtaleTensorModel T (completedIntegralCommRingSheafUnrestricted l E T),
@@ -696,9 +623,7 @@ theorem ordinaryModel_existsUnique (l : ℕ) [Fact l.Prime] (E : Type u) [Field 
   exact ordinary_model_from_comparison T R S.tensor
     (CoefficientTensorModels.comparison.{u, u + 1, u, u + 2} M)
 
-/-- The ordinary derived tensor with its fixed representative data.
-Source: rational purity proof, tensor transpose
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The ordinary derived tensor with its fixed representative data. -/
 def ordinaryModel (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) :
     ProEtaleTensorModel T (completedIntegralCommRingSheafUnrestricted l E T) :=
@@ -706,11 +631,7 @@ def ordinaryModel (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] ordinaryModel
 
-/-- The two existing K-flat encodings agree for the fixed ordinary module tensor.
-Source: rational purity proof, K-flat representatives
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: unfold both K-flat predicates. Their test functors are the same signed total
-tensor with the same sheaf monoidal structure; the flat-term conjunct is identical. -/
+/-- The two existing K-flat encodings agree for the fixed ordinary module tensor. -/
 theorem goodOrdinary (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     (P : CochainComplex (integralTowerModules l E T) ℤ)
@@ -754,13 +675,7 @@ private theorem isIso_map_comp_map_iso
 -- `flatConstantModulesAbelian` (universes `max u v`) leaves a universe metavariable unsolved.
 attribute [-instance] CategoryTheory.flatConstantModulesAbelian in
 /-- On the constructible finite-Tor domain the ordinary tensor is already complete.
-The map asserted invertible is the fixed strict quotient augmentation.
-Source: rational purity proof, completed tensor on integral representatives
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: choose bounded flat models on a finite constructible stratification. Tensor
-with each bounded finite-projective term preserves derived completeness and the
-common Tor bounds. Glue the strata by the localization triangles. The strict Roos
-augmentation is the completion unit, hence a quasi-isomorphism. -/
+The map asserted invertible is the fixed strict quotient augmentation. -/
 theorem tensorAugmentation_isIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E T) ℤ)
@@ -799,9 +714,7 @@ theorem tensorAugmentation_isIso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 end TensorAugmentationIsoProof
 
-/-- The completion comparison on good finite-Tor representatives.
-Source: rational purity proof, projection transpose
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The completion comparison on good finite-Tor representatives. -/
 def tensorToOrdinaryOnGood (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E T) ℤ)
@@ -976,13 +889,7 @@ private theorem finiteTor_of_iso (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (hL.map (fun j ↦ j ≪≫ ((scalarReductionDerivedExtension l E T n).mapIso e).symm))
     f hf hP A i hi
 
-/-- Completion-to-ordinary tensor is fixed on every pair of good representatives.
-Source: rational purity proof, tensor transpose
-(blueprint: def-pur-canonical-purity-source-transports).
-Proof: use flat K-flat resolutions of M and N and the preceding strict augmentation.
-Naturality of that augmentation and the representative comparisons makes the result
-independent of both resolutions and their isomorphisms. Every pair admits such
-resolutions. This proves existence and uniqueness with the displayed normalization. -/
+/-- Completion-to-ordinary tensor is fixed on every pair of good representatives. -/
 theorem tensorToOrdinary_existsUnique (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     (M N : finiteTorConstructibleIntegralCategory l E T) :
@@ -1015,9 +922,7 @@ theorem tensorToOrdinary_existsUnique (l : ℕ) [Fact l.Prime] (E : Type u) [Fie
     (fun e h ↦ finiteTor_of_iso l E T e h) (tensorAugmentation_isIso l E T)
     M.obj N.obj M.property N.property
 
-/-- The uniquely normalized comparison from completed to ordinary tensor.
-Source: rational purity proof, tensor transpose
-(blueprint: def-pur-canonical-purity-source-transports). -/
+/-- The uniquely normalized comparison from completed to ordinary tensor. -/
 def tensorToOrdinary (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     (M N : finiteTorConstructibleIntegralCategory l E T) :=

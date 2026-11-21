@@ -15,12 +15,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Identity
 # The section invariant from the purity of a section
 
 Let `g : V ⟶ B` be smooth of pure relative dimension `c`, with a closed section `s : B ⟶ V`.
-The section invariant `𝒞(g, s) = Ls^* ω_g` (blueprint `lemma-section-normal-bundle--1`) is
+The section invariant `𝒞(g, s) = Ls^* ω_g` is
 determined by the purity of the section: an isomorphism `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` yields
 `𝒞(g, s) ≅ Λ_B(c)[2c]`.
 
 The dualizing complex `ω_g` is ⊗-invertible (cohomological smoothness), so by the co-projection
-formula for `Rs^!` (blueprint `lem-pur-coprojection`)
+formula for `Rs^!`
 
 `Rs^!(Λ_V(c)[2c]) ⊗ Ls^* ω_g ≅ Rs^!(Λ_V(c)[2c] ⊗ ω_g) ≅ Rs^!(ω_g ⊗ Λ_V(c)[2c])
   ≅ Rs^! ω_g ⊗ Ls^*(Λ_V(c)[2c])`,
@@ -68,14 +68,14 @@ theorem nonempty_rightDerivedUpperShriek_dualizingComplex_iso_of_comp_eq_id {V B
 
 variable [HasTateTwist Λ]
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
+/-- Section invariant
 
 For `g : V ⟶ B` smooth of pure relative dimension `c` with a closed section `s`, purity of
 the section `Rs^!(Λ_V(c)[2c]) ≅ Λ_B` determines the section invariant:
 `𝒞(g, s) = Ls^* ω_g ≅ Λ_B(c)[2c]`.
 
-The dualizing complex `ω_g` is invertible (`proposition-exceptional-inverse-image-smooth-morphism`),
-and so is `Λ_V(c)[2c]`; the co-projection formula for `Rs^!` (`lem-pur-coprojection`) moves either
+The dualizing complex `ω_g` is invertible,
+and so is `Λ_V(c)[2c]`; the co-projection formula for `Rs^!` moves either
 factor of `Λ_V(c)[2c] ⊗ ω_g` out of `Rs^!`, and `Rs^! ω_g ≅ Λ_B` since `s ≫ g = 𝟙 B`. -/
 theorem nonempty_iso_sectionInvariant_twistShift_of_iso {V B : Scheme.{u}} {c : ℕ}
     (g : V ⟶ B) [SmoothOfRelativeDimension c g] [HasCompactification g] (s : B ⟶ V)

@@ -13,9 +13,9 @@ import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 # The Euler product of a middle extension on an affine curve
 
 Let `X₀` be a smooth geometrically connected affine curve over `𝔽_q`, `j : U₀ ↪ X₀` a dense open
-and `ℱ` a lisse Weil sheaf on `U₀`. The middle extension `j_* ℱ` (`definition-middle-extension`) is
+and `ℱ` a lisse Weil sheaf on `U₀`. The middle extension `j_* ℱ` is
 a constructible Weil sheaf on `X₀`, and its `L`-function is the graded form of its compactly
-supported cohomology (`proposition-weights-j-boundary-points`):
+supported cohomology:
 
 `∏_{x ∈ |X₀|} det (1 - F_x T ^ {e_x} ∣ (j_* ℱ)_x̄)⁻¹ = det (1 - F T ∣ H_c¹) / det (1 - F T ∣ H_c²)`.
 
@@ -62,8 +62,7 @@ theorem _root_.FrobeniusModule.localPolynomial_eq_one {K : Type*} [Field K]
   rw [FrobeniusModule.localPolynomial, LinearMap.charpolyRev,
     LinearMap.charpoly_eq_one_of_subsingleton, ← Polynomial.C_1, Polynomial.reverse_C]
 
-/-- Blueprint `proposition-weights-j-boundary-points`: Graded Euler-product identity for a
-middle extension.
+/-- Graded Euler-product identity for a middle extension.
 
 Let `X₀` be a smooth geometrically connected affine curve, `j : U₀ ↪ X₀` a dense open
 immersion and `ℱ` a lisse Weil sheaf on `U₀`. Then, as power series in `T`,

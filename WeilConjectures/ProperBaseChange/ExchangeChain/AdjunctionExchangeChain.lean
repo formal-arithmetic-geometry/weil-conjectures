@@ -11,7 +11,6 @@ public import Mathlib.CategoryTheory.Adjunction.Mates
 
 The three arrows are the actual unit insertion, square transport and counit contraction.
 Their four endpoints are given directly, without identity or association functor wrappers.
-(blueprint: def-weil-pbc-adjunction-exchange-chain)
 -/
 
 @[expose] public section

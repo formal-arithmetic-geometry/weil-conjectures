@@ -11,7 +11,6 @@ public import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerived
 /-! # The generator formula of the transported system tensor comparison
 
 Source: Stacks 03EL and 07A4.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
 -/
 
 @[expose] public noncomputable section

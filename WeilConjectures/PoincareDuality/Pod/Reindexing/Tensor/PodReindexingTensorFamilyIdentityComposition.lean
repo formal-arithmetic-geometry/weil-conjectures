@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Composition.PodReindexingC
 
 /-! # Identity and composition laws for a normalized tensor family
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL and 07A4
-(blueprint: lem-pod-reindexing-tensor-family-identity-composition).
+Source: Stacks 03EL and 07A4.
 
 This is the identity/composition part of the fixed-family coherence argument. The
 remaining tensor associator, braiding and unitor equations are isolated in the
@@ -246,8 +245,7 @@ therefore both are module isomorphisms. Localization gives the reduction and lim
 equations, while the tensor generator formula gives the tensor equation. Naturality
 and inverse laws follow from the site isomorphism identities. Empty sites and zero
 objects are covered by the same formulas.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 (blueprint: lem-pod-reindexing-tensor-family-identity-composition).
+Source: Stacks 03EL, 07A4.
 -/
 theorem podReindexingTensorFamilyIdentityComposition
     (completion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]

@@ -50,9 +50,7 @@ attribute [local irreducible] integralOperationsRoos
 
 -- Keep sharing in the dependent coefficient-category expressions.
 /-- The left-slot source path formula, proved from its model law.
-Use the arbitrary-presentation path calculation.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-shift-left-paths-t5). -/
+Use the arbitrary-presentation path calculation. -/
 theorem podTensorShift_leftSourcePath
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

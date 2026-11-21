@@ -10,9 +10,7 @@ import Mathlib.RingTheory.Ideal.Quotient.Index
 /-!
 # Finiteness interface for finite p-adic coefficient extensions
 
-Source: Weil blueprint, `def-weil-finite-field-fiber`, order 411;
-Serre, Local Fields, Chapter II, §2
-(auxiliary; not a blueprint node).
+Source: Serre, Local Fields, Chapter II, §2 (auxiliary.
 
 The coefficient constructions are imported unchanged; this supplies their finite-ring
 interface at positive levels.
@@ -26,17 +24,7 @@ namespace Padic
 
 /-- The coefficient ring at a finite level is finite.
 
-Source: Weil conjectures blueprint, node `def-weil-finite-field-fiber`,
-order 411; Serre, Local Fields, Chapter II, §2
-(auxiliary; not a blueprint node).
-
-Proof: Apply `Padic.extension_integers_dvr` to the spectral absolute value to obtain
-that the recorded integer ring is a DVR with finite residue field. Its recorded
-uniformizer generates the recorded maximal ideal. Thus the ideal defining the level
-`n` ring is the `n`th power of that maximal ideal. Each successive ideal quotient
-is a finite-dimensional vector space over the finite residue field, and induction
-on `n` gives the finiteness of the ring quotient. Equivalently apply
-`Ideal.finite_quotient_pow` in the Noetherian integer ring after identifying ideals.
+Source: Serre, Local Fields, Chapter II, §2 (auxiliary.
 -/
 theorem finite_coefficientExtensionRing
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]

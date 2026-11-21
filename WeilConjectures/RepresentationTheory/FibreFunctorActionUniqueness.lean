@@ -10,9 +10,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.Algebra.Group.TypeTags.Basic
 
 /-! # Comparing representation functors on a common additive fibre
-
-Source: the ordinary intertwiner and scalar-linearity argument for a fibre functor.
-(blueprint: lem-dl-a1-fibre-action-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -21,13 +18,7 @@ universe uC vC uR uV uW
 open CategoryTheory
 namespace Representation
 
-/-- Agreement of two transported actions in nonnegative degree implies agreement everywhere.
-Source: the inverse identity for a group representation.
-(blueprint: lem-dl-a1-fibre-action-comparison).
-
-Proof: negative-degree elements have positive-degree inverses. Apply the given
-identity to the inverse, the moved first vector, and its unique matching second
-vector. Cancel the inverse actions using their group law. -/
+/-- Agreement of two transported actions in nonnegative degree implies agreement everywhere. -/
 theorem fibre_action_of_nonnegative
     {R : Type uR} [Semiring R] {W : Type uW} [Group W]
     {V U : Type uV} [AddCommMonoid V] [AddCommMonoid U] [Module R V] [Module R U]
@@ -53,12 +44,7 @@ theorem fibre_action_of_nonnegative
     exact hz.symm
 
 /-- Geometric-kernel and positive-return formulas determine the transported action.
-Source: Weil II (1.1.10), generation by the degree kernel and positive elements.
-(blueprint: lem-dl-a1-fibre-action-comparison).
-
-Proof: degree zero means membership in the geometric image. A strictly positive
-integer is uniquely n+1 for a natural n. Apply these two formulas in nonnegative
-degree, then use inversion for negative degree. No degree-one lift is assumed. -/
+Source: Weil II (1.1.10), generation by the degree kernel and positive elements. -/
 theorem fibre_action_of_geometric_positive
     {R : Type uR} [Semiring R] {W : Type uW} [Group W]
     {V U : Type uV} [AddCommMonoid V] [AddCommMonoid U] [Module R V] [Module R U]
@@ -85,16 +71,7 @@ theorem fibre_action_of_geometric_positive
       omega
     exact hpos w n hd v u hvu
 
-/-- Linearity and equality of transported actions lift a natural additive fibre comparison.
-Source: fibre-functor uniqueness by linear intertwining maps.
-(blueprint: lem-dl-a1-fibre-action-comparison).
-
-Proof: compose the first fibre isomorphism with the inverse of the second. The
-common scalar formula makes each component linear, and its bijectivity makes it
-a linear equivalence. The action identity says it is a representation equivalence.
-The original additive naturality squares give naturality of these intertwiners;
-faithfulness of the inclusions and the underlying-vector-space functor detects
-the required equations. -/
+/-- Linearity and equality of transported actions lift a natural additive fibre comparison. -/
 theorem functor_iso_of_fibre_action
     {C : Type uC} [Category.{vC} C]
     {R : Type uR} [CommRing R] {W : Type uW} [Group W]

@@ -22,22 +22,7 @@ attribute [local irreducible] constructibleIntegralPullback rationalDerivedPullb
   sfRationalTriangulationDatum
 
 /-- Localization of an already linear triangulated integral pullback, with its
-prescribed rational degree-one shift normalization.
-Source: current blueprint sec-poincare-duality/sk-thm-frobenius,
-prop-constructible-truncations.proof.md, final automorphism sentence; parent step 6.
-(blueprint: lem-pod-isomorphism-pullback-rational-exact).
-
-Proof: apply semilinear scalar localization with the identity map of the coefficient
-integers. Its coefficient map is the identity by uniqueness. The extension functor has
-exactly the object and pure-tensor formulas of rationalDerivedPullback, so uniqueness
-identifies them. Use the two published raw scalar-localization triangulation data:
-their degree-one shifts are the integral shifts tensored with one, their localization
-shift comparisons are identities, and their distinguished triangles are precisely
-isomorphic images of integral distinguished triangles. The extension_exact theorem
-therefore provides the displayed rational shift and exactness. This fixes the connecting
-arrow as well as the first two triangle arrows. It does not assert integral exactness,
-construct an inverse-image comparison, preserve standard halves, or compare coefficients.
-Zero objects, torsion maps and empty schemes cause no exception. -/
+prescribed rational degree-one shift normalization. -/
 theorem isomorphismPullbackRationalExact
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

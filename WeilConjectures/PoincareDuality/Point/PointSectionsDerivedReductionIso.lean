@@ -17,8 +17,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-! # Point sections commute with derived principal reduction
 
 The coefficient sequence, flat-resolution comparison and localization descent follow
-steps 1--10 of the original proof. No point-reduction normalization theorem is used.
-(blueprint: lem-pod-point-sections-derived-reduction-iso) -/
+steps 1--10 of the original proof. No point-reduction normalization theorem is used. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -54,8 +53,7 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Exact point sections commute with derived principal reduction.
-Source: Stacks Tags 06Y6 and 06YY; original blueprint steps 1--10.
-(blueprint: lem-pod-point-sections-derived-reduction-iso) -/
+Source: Stacks Tags 06Y6 and 06YY. -/
 theorem point_sections_derived_reduction_iso (_hl : l ≠ D.p) (n : ℕ) :
     Nonempty (pointReductionTensorSections D l E n ≅ pointReductionSectionsTensor D l E n) := by
   let T := Spec (.of D.k)

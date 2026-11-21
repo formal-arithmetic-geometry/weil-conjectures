@@ -24,7 +24,7 @@ X --f---> S
 ```
 be a cartesian square, `P = X ×_S Y`, with structure map `h = p₁ ≫ f`. For bounded constructible
 `ℚ̄_ℓ`-complexes `K` on `X` and `L` on `Y`, write `K ⊠_S L = Lp₁^* K ⊗ Lp₂^* L`. The *Künneth
-isomorphism* (blueprint `lemma-kunneth-formula-compact-supports`) is the composite
+isomorphism* is the composite
 ```
 Rh_! (Lp₁^* K ⊗ Lp₂^* L) ≅ Rf_! (K ⊗ Rp₁_! Lp₂^* L) ≅ Rf_! (K ⊗ Lf^* Rg_! L) ≅ Rf_! K ⊗ Rg_! L
 ```
@@ -38,13 +38,13 @@ compact-support base change is
 ## Main definitions
 
 - `ProEtale.CondensedRing.compactSupportKunnethProjectionIso`: the first isomorphism, the
-  projection formula for `p₁` (blueprint `lemma-kunneth-formula-compact-supports--1`).
+  projection formula for `p₁`.
 - `ProEtale.CondensedRing.compactSupportKunnethBaseChangeIso`: the second isomorphism, induced by
-  compact-support base change (blueprint `lemma-kunneth-formula-compact-supports--2`).
+  compact-support base change.
 - `ProEtale.CondensedRing.compactSupportKunnethProjectionIso'`: the third isomorphism, the
-  projection formula for `f` (blueprint `lemma-kunneth-formula-compact-supports--3`).
+  projection formula for `f`.
 - `ProEtale.CondensedRing.compactSupportKunnethIso`: the Künneth isomorphism
-  `Rh_! (K ⊠_S L) ≅ Rf_! K ⊗ Rg_! L` (blueprint `lemma-kunneth-formula-compact-supports`).
+  `Rh_! (K ⊠_S L) ≅ Rf_! K ⊗ Rg_! L`.
 
 ## Implementation notes
 
@@ -77,12 +77,10 @@ variable {X Y S P : Over (Spec (.of k))}
   [IsSeparated S.hom] [LocallyOfFiniteType P.hom] [QuasiCompact P.hom] [IsSeparated P.hom]
   {f : X ⟶ S} {g : Y ⟶ S} {p₁ : P ⟶ X} {p₂ : P ⟶ Y}
 
-/-- **The projection formula for `p₁` in the Künneth formula** (blueprint
-`lemma-kunneth-formula-compact-supports--1`): for a morphism `p₁ : P ⟶ X` followed by
-`f : X ⟶ S`, the isomorphism
-`R(p₁ ≫ f)_! (Lp₁^* K ⊗ M) ≅ Rf_! (K ⊗ Rp₁_! M)`, the composite of the composition isomorphism
-`R(p₁ ≫ f)_! ≅ Rp₁_! ⋙ Rf_!`, the symmetry of `⊗`, the inverse of the projection morphism
-`Rp₁_! M ⊗ K ⟶ Rp₁_! (M ⊗ Lp₁^* K)`, which is an isomorphism
+/-- **The projection formula for `p₁` in the Künneth formula**: for a morphism `p₁ : P ⟶ X`
+followed by `f : X ⟶ S`, the isomorphism `R(p₁ ≫ f)_! (Lp₁^* K ⊗ M) ≅ Rf_! (K ⊗ Rp₁_! M)`, the
+composite of the composition isomorphism `R(p₁ ≫ f)_! ≅ Rp₁_! ⋙ Rf_!`, the symmetry of `⊗`, the
+inverse of the projection morphism `Rp₁_! M ⊗ K ⟶ Rp₁_! (M ⊗ Lp₁^* K)`, which is an isomorphism
 (`isIso_boundedConstructibleExceptionalProjectionMorphism`), and the symmetry again. In the
 Künneth formula `M = Lp₂^* L`. -/
 noncomputable def compactSupportKunnethProjectionIso (f : X ⟶ S) (p₁ : P ⟶ X)
@@ -97,8 +95,7 @@ noncomputable def compactSupportKunnethProjectionIso (f : X ⟶ S) (p₁ : P ⟶
       ((boundedConstructibleLowerShriek ℓ p₁).mapIso (β_ _ _) ≪≫
         (asIso (boundedConstructibleExceptionalProjectionMorphism ℓ p₁ M K)).symm ≪≫ β_ _ _)
 
-/-- **Compact-support base change in the Künneth formula** (blueprint
-`lemma-kunneth-formula-compact-supports--2`): for a cartesian square `sq` with sides
+/-- **Compact-support base change in the Künneth formula**: for a cartesian square `sq` with sides
 `p₁ : P ⟶ X`, `p₂ : P ⟶ Y` over `f : X ⟶ S`, `g : Y ⟶ S`, the compact-support base-change
 morphism `Ex_! : Rg_! ⋙ Lf^* ⟶ Lp₂^* ⋙ Rp₁_!` is an isomorphism
 (`isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl`), and its inverse induces
@@ -117,11 +114,9 @@ noncomputable def compactSupportKunnethBaseChangeIso (sq : IsPullback p₂ p₁ 
     (whiskerLeftIso K
       ((asIso (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq)).symm.app L))
 
-/-- **The projection formula for `f` in the Künneth formula** (blueprint
-`lemma-kunneth-formula-compact-supports--3`): the inverse
+/-- **The projection formula for `f` in the Künneth formula**: the inverse
 `Rf_! (K ⊗ Lf^* B) ≅ Rf_! K ⊗ B` of the exceptional projection morphism, which is an isomorphism
-(`isIso_boundedConstructibleExceptionalProjectionMorphism`). In the Künneth formula
-`B = Rg_! L`. -/
+(`isIso_boundedConstructibleExceptionalProjectionMorphism`). In the Künneth formula `B = Rg_! L`. -/
 noncomputable def compactSupportKunnethProjectionIso' (f : X ⟶ S)
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(S.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -129,8 +124,7 @@ noncomputable def compactSupportKunnethProjectionIso' (f : X ⟶ S)
       (boundedConstructibleLowerShriek ℓ f).obj K ⊗ B :=
   (asIso (boundedConstructibleExceptionalProjectionMorphism ℓ f K B)).symm
 
-/-- **The Künneth formula for compact supports** (blueprint
-`lemma-kunneth-formula-compact-supports`): for a cartesian square `sq` with sides
+/-- **The Künneth formula for compact supports**: for a cartesian square `sq` with sides
 `p₁ : P ⟶ X`, `p₂ : P ⟶ Y` over `f : X ⟶ S`, `g : Y ⟶ S`, and bounded constructible
 `ℚ̄_ℓ`-complexes `K` on `X` and `L` on `Y`, the *Künneth isomorphism*
 `Rh_! (K ⊠_S L) = Rh_! (Lp₁^* K ⊗ Lp₂^* L) ≅ Rf_! K ⊗ Rg_! L`, `h = p₁ ≫ f`. It is the composite

@@ -74,8 +74,7 @@ local instance localInstance_Transport_1 (X : Scheme.{u}) : EssentiallySmall.{u 
   essentiallySmall_of_small_of_locallySmall _
 
 omit [IsSeparated f] in
-/-- Blueprint `theorem-smooth-purity-all-admissible-coefficients`: Smooth purity over `𝒪_E`, `E` and
-`ℚ̄_ℓ`
+/-- Smooth purity over `𝒪_E`, `E` and `ℚ̄_ℓ`
 
 **`Rf^!` preserves derived completeness.** Let `f : X ⟶ Y` be smooth separated of pure
 relative dimension `d` and let `Λ = 𝒪_E` be the integral coefficient stage. Then `Rf^!`

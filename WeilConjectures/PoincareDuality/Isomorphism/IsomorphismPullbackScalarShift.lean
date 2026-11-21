@@ -96,24 +96,7 @@ private theorem localization_shift_obj (l : ℕ) [Fact l.Prime]
     J⟦(1 : ℤ)⟧ = (sfRationalConstructibleLocalization l E W).obj (J.obj⟦(1 : ℤ)⟧) :=
   Functor.congr_obj (sfRationalTriangulationDatum l E W).choose_spec.choose_spec.1 J
 
-/-- The specified scalar comparison preserves the normalized integral and rational shifts.
-Source: current blueprint sec-poincare-duality/sk-thm-frobenius,
-prop-constructible-truncations.proof.md, final automorphism sentence;
-steps 4, 5 and 7 of lem-pod-isomorphism-pullback-texact-coefficients.
-(blueprint: lem-pod-isomorphism-pullback-scalar-shift).
-
-Proof: identify each ordinary-to-completed scalar comparison with scalarCompletionIso
-using its normalization. Its shift equation is exactly the defining normalization of
-the integral scalar transition. The derived sectionwise inverse-image tensor comparison
-preserves the termwise shifts. The published inverse-image scalar compatibility square
-expresses the specified alpha as the conjugate of these shift-compatible maps through
-eE and eL. Whisker with the fully faithful constructible inclusion and cancel to get
-the integral shift square. The specified rational comparison has components Q_L(alpha).
-The given degree-one normalizations of rational pullback and the corresponding fixed
-normalization of rational scalar extension transfer the integral shift square through
-localization. Its degree-one equation implies the equations for every integer shift:
-iterate for positive shifts and use inverses for negative shifts. No new comparison or
-shift is selected, and all morphisms in the raw rationalized categories are retained. -/
+/-- The specified scalar comparison preserves the normalized integral and rational shifts. -/
 theorem isomorphismPullbackScalarShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

@@ -33,9 +33,8 @@ cartesian square of separated `k`-schemes of finite type
 ```
 
 The ordinary Künneth formula with an identity factor
-(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`, blueprint
-`lemma-kunneth-one-identity-factor--1`) computes the direct image along `pr` of a complex pulled
-back from `Y`:
+(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`) computes the
+direct image along `pr` of a complex pulled back from `Y`:
 
 `Rpr_* Lpr^* Q ≅ Lc^* Rf_* Λ_X ⊗ᴸ Q`
 

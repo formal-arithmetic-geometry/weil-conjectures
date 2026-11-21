@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Group.Equiv.Defs
 
 For a finite coefficient ring `Λ` of characteristic `n` which is free as a `ℤ/n`-module, the
 natural map `Λ ⊗ Hᵠ(X, μₙ) ⟶ Hᵠ(X, μₙ ⊗ Λ)` is an isomorphism, compatibly with the Kummer
-boundary maps (blueprint `lem-pur-kummer-coefficient-base-change`).
+boundary maps.
 
 Over an algebraically closed field `μₙ ≅ ℤ/n`, and the comparison reduces to the additivity of
 cohomology: `μₙ ⊗ Λ` is the constant sheaf on `Λ ⊗ ℤ/n ≅ (ℤ/n)ʳ`, through the unit
@@ -481,7 +481,7 @@ theorem bijective_kummerCoefficientTensorMap (f : X ⟶ Spec (.of k))
   rw [this]
   exact (AddEquiv.bijective _).comp ((AddEquiv.bijective _).comp (hT.comp C.bijective))
 
-/-- Blueprint `lem-pur-kummer-coefficient-base-change`: Base change of the Kummer coefficients.
+/-- Base change of the Kummer coefficients.
 
 Let `k` be an algebraically closed field, `Λ` a finite coefficient ring of characteristic `n`
 invertible in `k` which is free over `ℤ/n` (the blueprint's `A`, free over `ℤ/ℓᴺ`), and `X` a

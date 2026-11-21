@@ -11,7 +11,6 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 import all WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCoherenceData
 
 /-! Naturality of the pure-normalized reindexing comparison on total tensor complexes.
-(blueprint: lem-pod-reindexing-tensor-chain-naturality).
 -/
 
 @[expose] public noncomputable section
@@ -44,15 +43,6 @@ attribute [local irreducible] podReindexingCoefficient podReindexingHomModel
   CoefficientClosedStructure.tensor
 
 /-- The pure-normalized tensor-chain comparison is natural in both inputs.
-Source: blueprint dual-Tate compatibility, Steps 1 and 2.
-(blueprint: lem-pod-reindexing-tensor-chain-naturality).
-
-Proof: cancel the invertible chain comparison and test each degree on every
-pure-tensor summand. Its inverse sends a target generator to the corresponding
-source generator, by the stated pure normalization. Mapping that source generator
-and then applying the comparison gives the same generator as first applying the
-comparison and then mapping the two factors. Total-tensor generator extensionality
-finishes the equation. This also covers zero complexes and empty sites.
 -/
 theorem tensor_chain_naturality {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt]

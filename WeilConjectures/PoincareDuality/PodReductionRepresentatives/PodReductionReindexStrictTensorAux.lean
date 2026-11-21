@@ -13,7 +13,6 @@ public import WeilConjectures.PoincareDuality.StrictTensorAugmentation.StrictTen
 /-! # Extensionality and generator formulas for the strict reduction tensor equation
 
 Source: Stacks 03EK, 03EL, 07A4 and 0941.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
 -/
 
 @[expose] public noncomputable section

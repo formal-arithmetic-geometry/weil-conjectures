@@ -24,9 +24,8 @@ import WeilConjectures.CategoryTheory.ScalarLocalization.PbcRationalTransport
 
 /-! # Canonical compact-support composition with field coefficients on qcqs schemes
 
-Source: Stacks Project, Tag 0F7J, lemma-shriek-composition; Bhatt--Scholze,
-Definition 6.7.6 and Lemmas 6.7.7 and 6.1.13, followed by raw rationalization
-and common finite-stage descent (blueprint: lem-zl-field-shriek-composition-qcqs).
+Source: Stacks Project, Tag 0F7J; Bhatt--Scholze, Definition 6.7.6 and Lemmas 6.7.7 and 6.1.13,
+followed by raw rationalization and common finite-stage descent.
 -/
 
 @[expose] public noncomputable section

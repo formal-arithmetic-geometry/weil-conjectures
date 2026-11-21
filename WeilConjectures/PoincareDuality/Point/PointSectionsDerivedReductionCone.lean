@@ -15,8 +15,7 @@ The coefficient calculation is isolated from the transport along a chosen model 
 This avoids restating the whole target as an intermediate theorem: the core lemma below has
 an arbitrary module complex as input, while the exported clause only transports it along the
 supplied isomorphism.  The coefficient calculation is the two-term free resolution of the
-principal quotient; its small torsion-freeness input is recorded separately.
-(blueprint: lem-pod-point-sections-derived-reduction-cone) -/
+principal quotient; its small torsion-freeness input is recorded separately. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -34,9 +33,8 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
 Source: Stacks Tags 05RT and 06Y6.  Choose a flat-term K-flat representative of `C`; the
 universal mixed-tensor counit identifies the derived quotient with its termwise tensor by the
 principal quotient.  The two-term free resolution `[R --t--> R]` and
-`DerivedCategory.reductionIso` then identify that tensor with the displayed multiplication
-cone.  Exactness of the quotient sequence uses the normalized quotient-kernel formula.
-(blueprint: lem-pod-point-sections-derived-reduction-cone) -/
+`DerivedCategory.reductionIso` then identify that tensor with the displayed multiplication cone. 
+Exactness of the quotient sequence uses the normalized quotient-kernel formula. -/
 theorem point_sections_derived_reduction_module_cone (_hl : l ≠ D.p) (n : ℕ)
     (C : CochainComplex (ModuleCat.{u + 1}
       (ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E))) ℤ) :

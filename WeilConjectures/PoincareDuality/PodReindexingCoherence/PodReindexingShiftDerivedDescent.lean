@@ -24,8 +24,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Localization descent for the derived signed shift square
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: lem-pod-reindexing-signed-shifts).
+Source: Stacks 0A8X, 08JA.
 
 The representative equation is extended from K-injective localized objects to
 all objects of the derived category.
@@ -96,13 +95,7 @@ set_option linter.unusedVariables false in
 open SheafOfModules in
 /-- Descent of the representative signed-shift equation through localization.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-Proof: resolve the target object by a K-injective complex and represent the
-source by a localized complex.  Apply naturality of the comparison and the
-K-injective factorization in `Comparison.derived_model`; the representative
-hypothesis supplies the signed square on the resulting pair.  Cancel the
-isomorphisms from the chosen resolutions and use essential surjectivity of the
-localization to obtain the equation for arbitrary derived objects. -/
+Source: Stacks 0A8X, 08JA. -/
 theorem derived_shift_descent {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

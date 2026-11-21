@@ -14,10 +14,8 @@ import WeilConjectures.NumberTheory.Padics.ExtensionIntegersDvrFactorizationUniq
 /-!
 # The ring of integers of a finite extension of the p-adic numbers
 
-Source: Weil conjectures blueprint, `chap-Nagata-compactification-and-Chows-lemma`,
-`proposition-dense-compactifications-form-cofiltered-category`, `def-weil-finite-field-fiber`, order
-411; Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1
-(auxiliary; not a blueprint node).
+Source: Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1
+(auxiliary.
 -/
 
 @[expose] public section
@@ -32,26 +30,8 @@ finite residue field. Uniformizers attain the largest nonzero value in the maxim
 exist, and differ by units; every nonzero field element has a unique unit-times-integer-power
 expression for a fixed uniformizer.
 
-Source: blueprint `def-weil-finite-field-fiber`, order 411; Serre, Local Fields, Chapter II,
-§2, Proposition 3 and Chapter I, §1, Proposition 1.
-(auxiliary; not a blueprint node)
-
-Proof: (1) By lem-weil-l-adic-extension-absolute-value the extending absolute value is
-nonarchimedean. Equip `E` with its normed and valued field structures. The finite-dimensional
-properness theorem lem-weil-l-adic-extension-proper, applied over the proper field `ℚ_[l]`,
-makes `E` proper. (2) Apply lem-weil-l-adic-extension-dvr-finite-residue to obtain the DVR
-and finite residue field. Its integer ring and maximal ideal have exactly the indicated
-membership conditions. (3) The ultrametric inequality and multiplicativity give subring
-and ideal closure. An integer is a unit exactly when its value is one, by considering its
-inverse. Thus the ideal is the unique maximal ideal; every field element or its inverse
-is integral, giving the fraction field. (4) Choose a generator of the nonzero maximal ideal
-using def-sc-discrete-valuation-ring. By lem-weil-pbc-dvr-unit-times-uniformizer-power every
-nonzero integer is a unit times a nonnegative power of this generator. Units have value one,
-so the nonzero values in the maximal ideal are its value to positive integer powers. The
-largest is its value; an integer generates the ideal precisely when its exponent is one.
-Writing a nonzero field element as a quotient of integers gives an integer exponent.
-Comparison of absolute values gives uniqueness of the exponent, and cancellation gives
-uniqueness of the unit. In particular, any two generators differ by a unit. -/
+Source: Serre, Local Fields, Chapter II, §2, Proposition 3 and Chapter I, §1, Proposition 1.
+(auxiliary. -/
 theorem extension_integers_dvr (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (abv : AbsoluteValue E ℝ)
     (h_ext : ∀ a : ℚ_[l], abv (algebraMap ℚ_[l] E a) = ‖a‖) :

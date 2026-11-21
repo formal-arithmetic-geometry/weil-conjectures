@@ -20,17 +20,7 @@ attribute [local implicit_reducible] integralOperationsRoos
   CochainComplex.mappingCocone
 
 /-- A normalized additive Roos comparison respects any compositor of additive functors.
-Source: Stacks 0941; blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-composition-roos-map).
-
-Proof: project the product comparison to every tower level. Naturality of the
-compositor makes its product component followed by the two successive product maps
-equal the single product map followed by the levelwise compositor. The first and
-second Roos coordinates reduce the desired equality to this product identity and
-naturality of the compositor at each coordinate. The mapping-cocone identity
-expresses every degree as the sum of the two coordinate inclusions, so equality of
-both coordinates gives equality of the entire cochain maps. This works for arbitrary
-towers, including zero towers, and requires no preservation or derived hypotheses. -/
+Source: Stacks 0941. -/
 theorem podCompositionRoosMap
     {A B D : Type*} [Category A] [Category B] [Category D]
     [Abelian A] [Abelian B] [Abelian D]

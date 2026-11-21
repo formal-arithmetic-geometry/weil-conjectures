@@ -89,7 +89,6 @@ import WeilConjectures.ProperBaseChange.CompletedPullbackStrictNormalization
 /-! # Actual completion unit in Roos coordinates
 
 Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks Tags 0941 and 099N(5).
-(blueprint: lem-weil-pbc-integral-actual-unit-roos-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -332,27 +331,7 @@ any chain augmentation with quotient first coordinates and zero second coordinat
 This concerns only the actual completed coefficients; no ordinary integral model
 comparison or pullback identification is an input.
 
-Source: Stacks 0941, proof of lemma-derived-limit-is-ok, and 099N(5);
-Bhatt--Scholze, Lemma 6.5.9(4).
-(blueprint: lem-weil-pbc-integral-actual-unit-roos-normalization).
-
-Proof: transport P by the quotient-normalized coefficient equivalence, which
-preserves flat terms and K-flatness. Expand completedPullbackComparison into the
-constant-derived-limit unit and the pulled strict quotient augmentation. Apply
-the representative normalizations of completedPullbackConstantIso and
-completedReductionTowerUnit, retaining their universal counits. Naturality of
-the tower pullback counit identifies their composite with the actual module
-quotient augmentation. The constant/limit adjunction sends this strict
-augmentation followed by r to its compatible-family lift into the termwise
-limit of I. Naturality of the right-derived unit and its computation on I
-therefore give the left side as ordinary pullback's computation counit followed
-by the localized compatible-family lift and localized iota. The first
-coordinates of this chain composite are augmentation_n followed by r_n; its
-second coordinate is zero. The same equations hold for c followed by the Roos
-map of r, by diagonal functoriality of the mapping cocone. Product and cocone
-extensionality identify the chain maps. Localize to get the displayed formula.
-The argument uses whole strict towers; equality of derived level projections
-alone is not used. Zero complexes and empty schemes obey the same formulas. -/
+Source: Stacks 0941, proof of , and 099N(5); Bhatt--Scholze, Lemma 6.5.9(4). -/
 theorem pbc_integral_actual_unit_roos_normalization
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)

@@ -19,9 +19,8 @@ the defining opens cover `q.maximalOpen P`, so `P` glues over them
 
 The instance `P = MorphismProperty.isomorphisms Scheme` is the **maximal isomorphism
 open** `AlgebraicGeometry.Scheme.Hom.maximalIsomorphismOpen` used by the modification
-layer of the Nagata compactification proof
-(blueprint: `def:nagata-maximal-isomorphism-open`,
-`lemma:nagata-maximal-isomorphism-open`); other instances of interest are the flat
+layer of the Nagata compactification proof;
+other instances of interest are the flat
 locus and the open-immersion locus.
 
 We also record that a target-local property restricts to smaller opens
@@ -75,8 +74,7 @@ lemma Scheme.Hom.restrict_maximalOpen [IsZariskiLocalAtTarget P] :
       (morphismRestrictRestrict q _ _ ≪≫ morphismRestrictEq q himg)).mpr W.2
 
 /-- The **maximal isomorphism open** of a morphism `q : Z ⟶ X`: the union of all opens
-`W ⊆ X` such that `q` restricts to an isomorphism over `W`.
-(Blueprint: `def:nagata-maximal-isomorphism-open`.) -/
+`W ⊆ X` such that `q` restricts to an isomorphism over `W`. -/
 def Scheme.Hom.maximalIsomorphismOpen : X.Opens :=
   q.maximalOpen (MorphismProperty.isomorphisms Scheme)
 
@@ -92,8 +90,7 @@ variable (q)
 
 /-- **The maximal isomorphism open is an isomorphism locus**: `q` restricts to an
 isomorphism over `q.maximalIsomorphismOpen`. This is
-`AlgebraicGeometry.Scheme.Hom.restrict_maximalOpen` for the isomorphisms.
-(Blueprint: `lemma:nagata-maximal-isomorphism-open`.) -/
+`AlgebraicGeometry.Scheme.Hom.restrict_maximalOpen` for the isomorphisms. -/
 lemma Scheme.Hom.isIso_restrict_maximalIsomorphismOpen :
     IsIso (q ∣_ q.maximalIsomorphismOpen) :=
   q.restrict_maximalOpen (MorphismProperty.isomorphisms Scheme)

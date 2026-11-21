@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorChainCompositionRaw
 
 /-! # Composition of normalized strict tensor tower maps
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -61,13 +60,7 @@ private theorem roos_equation_congr
 
 -- Check the three specified coefficient transports together.
 /-- Realizing the strict tensor-tower composition square gives the full Roos square.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-tensor-chain-composition).
-Proof: apply normalized Roos composition for arbitrary compatible strict towers
-with the three prescribed tensor tower maps. The assumed tower equation supplies
-the compatibility hypothesis. The resulting maps are precisely the explicitly
-constructed tensor Roos maps. Both cone coordinates were retained in the general
-Roos composition theorem. No localization or derived tensor map occurs. -/
+Source: Stacks 07A4, 0941. -/
 theorem podTensorChainComposition
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

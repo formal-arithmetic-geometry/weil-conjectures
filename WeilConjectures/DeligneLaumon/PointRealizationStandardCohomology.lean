@@ -18,9 +18,7 @@ public import WeilConjectures.SmoothPurity.Sf.SfIntegralStandardTruncations
 
 /-! # Standard cohomology of the specified point realization
 
-Source: Bhatt--Scholze, Propositions 6.8.11(3), 6.8.14 and Section 4.1;
-the exact-sections, localization and coherence argument of the DAG
-(blueprint: lem-a1-point-realization-standard-cohomology).
+Source: Bhatt--Scholze, Propositions 6.8.11(3), 6.8.14 and Section 4.1.
 
 The ordinary target is viewed through its full embedding in D(E), and the
 common-stage target through its fully faithful realization in D(Ω). Thus its
@@ -35,8 +33,7 @@ namespace WeilConjectures
 
 /-- The canonical truncation comparisons together with exactness and t-exactness.
 The equations fix both comparisons by the truncation counit and unit.
-Source: the DAG proof, Steps 2--4, using BBD 1.3.3
-(blueprint: lem-a1-point-realization-standard-cohomology). -/
+Source: the DAG proof, Steps 2--4, using BBD 1.3.3. -/
 structure PointRealizationComparison
     {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
@@ -56,8 +53,7 @@ structure PointRealizationComparison
       (s.truncGEπ j).app (F.obj K)
 
 /-- Compose the counit- and unit-characterized comparisons, then commute the shift.
-This is the truncation-induced δ, rather than an arbitrary cohomology isomorphism.
-Source: DAG proof, Step 4 (blueprint: lem-a1-point-realization-standard-cohomology). -/
+This is the truncation-induced δ, rather than an arbitrary cohomology isomorphism. -/
 def PointRealizationComparison.delta
     {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
     [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]

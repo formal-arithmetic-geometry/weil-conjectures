@@ -11,8 +11,7 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Proved calculations for tensor-shift path normalization
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-naturality-t5).
+Source: Stacks 011G, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -47,8 +46,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The projection-defined product shift is natural. Test each product projection.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-naturality-t5). -/
+Source: Stacks 011G, 07A4, 0941. -/
 private theorem product_shift_naturality
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     {C C' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (f : C ⟶ C') (r : ℤ) :
@@ -83,8 +81,7 @@ attribute [local implicit_reducible] integralOperationsRoos
 
 /-- The signed Roos shift is natural. Use product naturality in both cocone coordinates,
 with the same sign in the second coordinate, then the cocone coordinate identity.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-naturality-t5). -/
+Source: Stacks 011G, 07A4, 0941. -/
 theorem signed_roos_naturality
     {A : Type a} [Category.{b} A] [Abelian A] [HasCountableProducts A]
     (S : PodSignedRoosShift A) (hS : S.Laws)
@@ -140,8 +137,7 @@ attribute [local irreducible] integralOperationsRoos
 
 /-- Reindexing a compatible shifted presentation gives the canonical target presentation.
 Cancel the target shift identification and use naturality and CommShift of the comparison.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-naturality-t5). -/
+Source: Stacks 011G, 07A4, 0941. -/
 theorem reindexed_shift_presentation
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     [HasShift A ℤ] [HasShift B ℤ] [HasShift C ℤ] [HasShift D ℤ]

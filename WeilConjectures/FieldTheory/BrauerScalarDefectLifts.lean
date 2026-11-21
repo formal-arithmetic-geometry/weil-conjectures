@@ -13,7 +13,6 @@ import Mathlib.Topology.Algebra.MulAction
 # Locally constant matrix lifts
 
 Source: Stacks Project, Lemma 03R6, construction before Theorem 03R7, and Section 0DVG.
-(blueprint: lem-sc-brauer-scalar-defect-lifts).
 -/
 
 @[expose] public section
@@ -32,24 +31,8 @@ private theorem locallyConstant_galois_eval (K : Type u) [Field K]
   exact (IsLocallyConstant.iff_continuous _).mpr (continuous_id.smul continuous_const)
 
 /-- Finite Galois descent supplies locally constant matrix lifts satisfying conjugation.
-Proof: fix a finite K-basis of A and collect the matrix entries of the images of its
-basis vectors under e. For each entry x, its Galois stabilizer is open in the Krull
-topology because x is integral over K. Equip the separable closure with the discrete
-topology temporarily; the open-stabilizer criterion makes its Galois action continuous,
-so evaluation at x is locally constant. The finite tuple q of all the transformed
-entries is therefore locally constant. Equality of two such tuples implies equality
-of the K-linear maps a ↦ g(e(1 ⊗ a)), by equality on the chosen basis.
-For each tuple in the range of q choose a representative automorphism. The proved
-Skolem--Noether lemma `Algebra.IsCentral.exists_unit_map_eq_conj` supplies a conjugating
-unit for this representative; invert it to obtain the orientation required here.
-Choose a unit for each tuple using that proved existence statement. Composing this
-choice with q gives a locally constant function b. The equality of K-linear maps just
-proved transports the conjugation identity from the representative to every g in its
-fiber. This proves the identity for all a. No finite Galois extension or choice from
-an unproved theorem is needed.
 
-Source: Stacks Project, Lemma 03R6 and the construction preceding Theorem 03R7.
-(blueprint: lem-sc-brauer-scalar-defect-lifts). -/
+Source: Stacks Project, Lemma 03R6 and the construction preceding Theorem 03R7. -/
 theorem exists_locallyConstant_brauer_lift (K : Type u) [Field K] (A : CSA.{u, u} K)
     (n : ℕ) (_hn : n ≠ 0)
     (e : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]

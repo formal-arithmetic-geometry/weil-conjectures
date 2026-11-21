@@ -99,7 +99,7 @@ lemma rootsOfUnityModuleSheafHomEquiv_unit_comp {S : Scheme.{u}}
       ((extendScalarsAlongAdjunction Λ (ZMod.castHom (dvd_refl n) Λ) S).homEquiv _ _ k) := by
   rw [← rootsOfUnityModuleSheafHomEquiv_naturality, Adjunction.homEquiv_unit]
 
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
+/-- Finite Kummer level of the Tate twist
 
 **Compatibility with base change.** The identification `Λ ⊗_ℤ μₙ ≅ μₙ ⊗_{ℤ/n} Λ` commutes with the
 base change maps along any `g : X ⟶ Y`: the square
@@ -149,7 +149,7 @@ theorem upperStar_map_extendScalarsIsoExtendScalarsAlong_hom :
     Adjunction.homEquiv_unit, Functor.map_comp, Category.assoc]
 
 omit [CharP Λ n] in
-/-- Blueprint `lem-pur-finite-kummer-level`: Finite Kummer level of the Tate twist
+/-- Finite Kummer level of the Tate twist
 
 Compatibility with base change, for the Tate sheaf `Λ(1) = μₙ ⊗ Λ`, `n` the characteristic of `Λ`:
 the identification `Λ(1) ≅ μₙ ⊗_{ℤ/n} Λ` commutes with the base change maps

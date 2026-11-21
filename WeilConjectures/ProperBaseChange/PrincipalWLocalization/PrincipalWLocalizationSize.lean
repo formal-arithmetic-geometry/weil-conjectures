@@ -13,7 +13,7 @@ import Mathlib.RingTheory.Localization.Cardinality
 
 /-! # Cardinality of the principal w-localization
 
-Source: Stacks Project, Tag 0976 (blueprint: lem-weil-pbc-principal-w-localization-size).
+Source: Stacks Project, Tag 0976.
 -/
 
 @[expose] public section
@@ -130,14 +130,7 @@ private theorem index_bound (R : Type u) [CommRing R] (κ : Cardinal.{u})
   exact mul_le_of_le hκ (constructible_bound R κ hκ hR) hR
 
 /-- Principal w-localization preserves any infinite cardinal bound.
-Source: Stacks Project, Tag 0976 (blueprint: lem-weil-pbc-principal-w-localization-size).
-
-Proof: constructible sets are finite unions of basic constructible sets, encoded by a ring
-coefficient and a finite list of coefficients. An index is a finite constructible partition
-with one denominator per part. Finite products of its principal localizations have the same
-infinite bound, since localization does not increase cardinality. Every element of the
-filtered colimit is represented at a stage. The disjoint union of stages therefore surjects
-onto the colimit and has the required bound. -/
+Source: Stacks Project, Tag 0976. -/
 theorem cardinalMk_le (R : Type u) [CommRing R] (κ : Cardinal.{u})
     (hκ : ℵ₀ ≤ κ) (hR : #R ≤ κ) : #(algebra R) ≤ κ := by
   have hstage (i : Index R) : #(Stage i) ≤ κ :=

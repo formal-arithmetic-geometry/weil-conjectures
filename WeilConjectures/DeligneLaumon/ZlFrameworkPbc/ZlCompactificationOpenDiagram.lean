@@ -12,8 +12,6 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
 
 /-! # Compactification diagrams with open restriction
-Source: thm-cbc-qbar.proof.md, common-stage descent
-(blueprint: def-zl-compactification-open-diagram).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,9 +24,7 @@ namespace WeilConjectures.ZlFrameworkPbc
 
 /-- The geometric inputs of the comparison, retaining the chosen Cartesian squares.
 No structure morphism is required to be separated. The invertibility certificates
-are the usual consequences of being over k with l different from its characteristic.
-Source: thm-cbc-qbar.proof.md, common-stage descent
-(blueprint: def-zl-compactification-open-diagram). -/
+are the usual consequences of being over k with l different from its characteristic. -/
 structure OpenDiagram (D : FiniteFieldDatum.{u}) (l : ℕ) where
   X : Scheme.{u}
   Y : Scheme.{u}
@@ -101,9 +97,7 @@ attribute [instance] OpenDiagram.overX OpenDiagram.overY OpenDiagram.overU OpenD
   OpenDiagram.openV OpenDiagram.compactOpenV OpenDiagram.openU OpenDiagram.compactOpenU
   OpenDiagram.noethT OpenDiagram.noethT' OpenDiagram.dimT OpenDiagram.dimT'
 
-/-- Use the actual universal pullback isomorphism to choose a Cartesian square.
-Source: thm-cbc-qbar.proof.md, identity and iterated open restriction
-(blueprint: def-zl-compactification-open-diagram). -/
+/-- Use the actual universal pullback isomorphism to choose a Cartesian square. -/
 def chosenSquare {A B C T : Scheme.{u}} {a : A ⟶ B} {b : A ⟶ C}
     {c : B ⟶ T} {d : C ⟶ T} (h : IsPullback a b c d) :
     ChosenCartesianSquare a b c d where
@@ -112,9 +106,7 @@ def chosenSquare {A B C T : Scheme.{u}} {a : A ⟶ B} {b : A ⟶ C}
   hom_fst := h.isoPullback_hom_fst
   hom_snd := h.isoPullback_hom_snd
 
-/-- The identity open restriction of an actual compactification diagram.
-Source: thm-cbc-qbar.proof.md, identity and iterated open restriction
-(blueprint: def-zl-compactification-open-diagram). -/
+/-- The identity open restriction of an actual compactification diagram. -/
 def OpenDiagram.identity {D : FiniteFieldDatum.{u}} {l : ℕ}
     (G : OpenDiagram D l) : OpenDiagram D l where
   X := G.X
@@ -133,9 +125,7 @@ def OpenDiagram.identity {D : FiniteFieldDatum.{u}} {l : ℕ}
     isOpenImmersion := inferInstance
     isOpenImmersion' := inferInstance }
 
-/-- One further actual open restriction of G, with the shared compactification fixed.
-Source: thm-cbc-qbar.proof.md, identity and iterated open restriction
-(blueprint: def-zl-compactification-open-diagram). -/
+/-- One further actual open restriction of G, with the shared compactification fixed. -/
 structure FurtherOpen {D : FiniteFieldDatum.{u}} {l : ℕ} (G : OpenDiagram D l) where
   U : Scheme.{u}
   V : Scheme.{u}
@@ -179,9 +169,7 @@ attribute [instance] FurtherOpen.overU FurtherOpen.overV
   FurtherOpen.openU FurtherOpen.compactOpenU FurtherOpen.openV FurtherOpen.compactOpenV
   FurtherOpen.noethT FurtherOpen.dimT
 
-/-- The second open diagram, whose source is literally the first restricted diagram.
-Source: thm-cbc-qbar.proof.md, identity and iterated open restriction
-(blueprint: def-zl-compactification-open-diagram). -/
+/-- The second open diagram, whose source is literally the first restricted diagram. -/
 def FurtherOpen.second {D : FiniteFieldDatum.{u}} {l : ℕ}
     {G : OpenDiagram D l} (H : FurtherOpen G) : OpenDiagram D l where
   X := G.U
@@ -198,9 +186,7 @@ def FurtherOpen.second {D : FiniteFieldDatum.{u}} {l : ℕ}
   properSquare := H.properSquare
   openSquare := H.openSquare
 
-/-- The outer diagram uses the actual composite open maps and pasted Cartesian squares.
-Source: thm-cbc-qbar.proof.md, identity and iterated open restriction
-(blueprint: def-zl-compactification-open-diagram). -/
+/-- The outer diagram uses the actual composite open maps and pasted Cartesian squares. -/
 def FurtherOpen.outer {D : FiniteFieldDatum.{u}} {l : ℕ}
     {G : OpenDiagram D l} (H : FurtherOpen G) : OpenDiagram D l where
   X := G.X

@@ -18,7 +18,6 @@ import WeilConjectures.SmoothPurity.CompletedOperations.NormalizedCompletedOpera
 
 The finite composition, associator and braiding constructions, extracted from
 the higher constraints module to keep single-file checking within its time limit.
-(blueprint: lem-pur-derived-pullback-tensor-constraints).
 -/
 
 @[expose] public noncomputable section
@@ -138,8 +137,7 @@ variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
 
 /-- The canonical completed composition family, normalized by every finite reduction.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def pullbackTensorIntegralComposition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -151,11 +149,7 @@ def pullbackTensorIntegralComposition {X Y Z : Scheme.{u}}
   (integralPullbackComposition l E).choose h f
 
 /-- The canonical rational composition comparison on unchanged integral objects.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: localize the specified integral
-composition
-  map and conjugate by the object equalities in rationalDerivedPullback_existsUnique. This fixes
-  every component and its inverse, so the required isomorphism exists uniquely. -/
+Source: Stacks 07A4, 0941. -/
 theorem pullbackTensorRationalComposition_existsUnique {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -184,8 +178,7 @@ theorem pullbackTensorRationalComposition_existsUnique {X Y Z : Scheme.{u}}
     rfl
 
 /-- Rationalization of the finite-reduction-normalized integral composition.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def pullbackTensorRationalComposition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -201,8 +194,7 @@ attribute [local irreducible] commonStagePullbackCompComponent
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Existence half of the normalized constraint; uniqueness is proved by the parent theorem.
-Source: Stacks 06YS, 07A4, 0941.
-(blueprint: lem-pur-derived-pullback-tensor-constraints-common-composition-existence). -/
+Source: Stacks 06YS, 07A4, 0941. -/
 theorem pullbackTensorCommonComposition_exists {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -243,12 +235,7 @@ end CommonCompositionProof
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Common-stage composition, specified at every larger finite coefficient field.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: represent the rational
-composition at the
-  stage of M. Conjugate by the three prescribed transition/pullback comparisons. Their scalar
-  cocycles identify these representatives at every enlargement. The rational inverse gives an
-  inverse class; the representative at the original stage determines the class uniquely. -/
+Source: Stacks 07A4, 0941. -/
 theorem pullbackTensorCommonComposition_existsUnique {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -280,8 +267,7 @@ theorem pullbackTensorCommonComposition_existsUnique {X Y Z : Scheme.{u}}
   exact eq_of_heq ((hd M.stage le_rfl).trans (he M.stage le_rfl).symm)
 
 /-- The composition isomorphism represented by the prescribed rational comparison.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def pullbackTensorCommonComposition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -294,8 +280,7 @@ attribute [local irreducible] pullbackTensorIntegralComposition
   pullbackTensorRationalComposition pullbackTensorCommonComposition
 
 /-- Composition equation on the actual canonical integral comparison, with both transports.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def canonicalIntegralPullbackTensor_composition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -318,8 +303,7 @@ def canonicalIntegralPullbackTensor_composition {X Y Z : Scheme.{u}}
           N)).hom
 
 /-- Composition equation on the actual canonical rational comparison, with both transports.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def canonicalRationalPullbackTensor_composition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -340,8 +324,7 @@ def canonicalRationalPullbackTensor_composition {X Y Z : Scheme.{u}}
           E _ _ _ X Y f hX hY)).obj N)).hom
 
 /-- Composition equation on the actual canonical commonstage comparison, with both transports.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def canonicalCommonStagePullbackTensor_composition {X Y Z : Scheme.{u}}
     (f : X ⟶ Y) (h : Z ⟶ X)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
@@ -362,8 +345,7 @@ def canonicalCommonStagePullbackTensor_composition {X Y Z : Scheme.{u}}
           (((@commonStageDerivedPullback l _ Ω _ _ _ X Y f hX hY)).obj N)).hom
 
 /-- Reduction of the actual completed tensor via its fixed Roos realization and counit.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def pullbackTensorIntegralReductionTensor (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N : sfIntegralConstructibleCategory l E W) :
@@ -383,8 +365,7 @@ def pullbackTensorIntegralReductionTensor (W : Scheme.{u})
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Reduction of completed pullback via its actual normalized Roos model and counit.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def pullbackTensorIntegralReductionPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -399,8 +380,7 @@ def pullbackTensorIntegralReductionPullback {X Y : Scheme.{u}} (f : X ⟶ Y)
     asIso ((pullbackTensorCalculus l E X).adjunction.counit.app _)
 
 /-- The actual integral comparison reduces to the same coherent comparison at all levels.
-Source: Stacks 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 07A4, 0941. -/
 def canonicalIntegralPullbackTensor_reduction {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -506,12 +486,7 @@ attribute [local irreducible] pullbackTensorIntegralReductionTensor
   pullbackTensorIntegralReductionPullback
 
 /-- The integral associator is uniquely fixed in the coherent reduction category.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Reduction is fully faithful on
-  derived-complete constructible objects: its unit is invertible by normalized DVR effectivity.
-  Conjugate the specified coherent tensor associator by the actual reduction/tensor comparisons and
-  lift along that fully faithful functor. Lift the inverse too; faithfulness gives the inverse
-  identities and uniqueness. -/
+Source: Stacks 06YS, 07A4, 0941. -/
 theorem pullbackTensorIntegralAssociator_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : sfIntegralConstructibleCategory l E W) :
@@ -556,18 +531,14 @@ theorem pullbackTensorIntegralAssociator_existsUnique (W : Scheme.{u})
         (Iso.prod (Iso.refl _) (pullbackTensorIntegralReductionTensor l E W N P)))
 
 /-- The canonical completed associator, fixed by its coherent reduction.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 06YS, 07A4, 0941. -/
 def pullbackTensorIntegralAssociator (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : sfIntegralConstructibleCategory l E W) :=
   ((@pullbackTensorIntegralAssociator_existsUnique l _ E _ _ _ W hW) M N P).exists.choose
 
 /-- The rational associator is the actual localization of the integral map.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Use the object equalities in
-  rationalDerivedTensor_existsUnique to identify the endpoints. Localize the preceding integral
-  isomorphism and its inverse. The displayed equality fixes its hom, so the isomorphism is unique.
+Source: Stacks 06YS, 07A4, 0941.
 -/
 theorem pullbackTensorRationalAssociator_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
@@ -592,20 +563,14 @@ theorem pullbackTensorRationalAssociator_existsUnique (W : Scheme.{u})
       rfl
 
 /-- The localized integral associator.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 06YS, 07A4, 0941. -/
 def pullbackTensorRationalAssociator (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N P : sfRationalConstructibleCategory l E W) :=
   ((@pullbackTensorRationalAssociator_existsUnique l _ E _ _ _ W hW) M N P).exists.choose
 
 /-- The integral braiding is uniquely fixed in the coherent reduction category.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Reduction is fully faithful on
-  derived-complete constructible objects: its unit is invertible by normalized DVR effectivity.
-  Conjugate the specified coherent tensor Koszul symmetry by the actual reduction/tensor comparisons
-  and lift along that fully faithful functor. Lift the inverse too; faithfulness gives the inverse
-  identities and uniqueness. -/
+Source: Stacks 06YS, 07A4, 0941. -/
 theorem pullbackTensorIntegralBraiding_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N : sfIntegralConstructibleCategory l E W) :
@@ -640,18 +605,14 @@ theorem pullbackTensorIntegralBraiding_existsUnique (W : Scheme.{u})
       (pullbackTensorIntegralReductionTensor l E W N M)
 
 /-- The canonical completed braiding, fixed by its coherent reduction.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 06YS, 07A4, 0941. -/
 def pullbackTensorIntegralBraiding (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N : sfIntegralConstructibleCategory l E W) :=
   ((@pullbackTensorIntegralBraiding_existsUnique l _ E _ _ _ W hW) M N).exists.choose
 
 /-- The rational braiding is the actual localization of the integral map.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). Proof: Use the object equalities in
-  rationalDerivedTensor_existsUnique to identify the endpoints. Localize the preceding integral
-  isomorphism and its inverse. The displayed equality fixes its hom, so the isomorphism is unique.
+Source: Stacks 06YS, 07A4, 0941.
 -/
 theorem pullbackTensorRationalBraiding_existsUnique (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
@@ -669,8 +630,7 @@ theorem pullbackTensorRationalBraiding_existsUnique (W : Scheme.{u})
         (pullbackTensorIntegralBraiding l E W M.obj N.obj))
 
 /-- The localized integral braiding.
-Source: Stacks 06YS, 07A4, 0941; blueprint coefficient conventions
-(blueprint: lem-pur-derived-pullback-tensor-constraints). -/
+Source: Stacks 06YS, 07A4, 0941. -/
 def pullbackTensorRationalBraiding (W : Scheme.{u})
     [hW : ∀ w : W, Invertible (l : W.residueField w)]
     (M N : sfRationalConstructibleCategory l E W) :=

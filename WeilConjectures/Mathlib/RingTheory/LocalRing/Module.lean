@@ -23,8 +23,7 @@ A finitely generated flat module over a local ring is free. This is mathlib's
 
 namespace Module
 
-/-- A finitely generated flat module `P` over a local ring `R` is free.
-(blueprint: `lem-weil-pbc-finite-flat-local-free`) -/
+/-- A finitely generated flat module `P` over a local ring `R` is free. -/
 @[stacks 00NZ]
 theorem free_of_finite_of_flat_of_isLocalRing (R P : Type*) [CommRing R] [IsLocalRing R]
     [AddCommGroup P] [Module R P] [Module.Finite R P] [Flat R P] : Free R P :=

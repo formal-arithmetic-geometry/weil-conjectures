@@ -63,10 +63,9 @@ theorem isReduced_of_smooth {K : Type u} [Field K] {X : Scheme.{u}} (f : X ⟶ S
     exact (affine_isReduced_iff _).mpr (Algebra.Smooth.isReduced_of_field K _)
   exact IsReduced.of_openCover X X.affineCover
 
-/-- **Smooth morphisms have geometrically reduced fibres** (blueprint
-`sbc-lem-smooth-geometrically-reduced`). For a field `K` and `Spec K ⟶ S`, the base change
-`X ×_S Spec K` is smooth over `Spec K` (Stacks `01VB`), hence reduced (Stacks `056T`, here
-`AlgebraicGeometry.isReduced_of_smooth`). -/
+/-- **Smooth morphisms have geometrically reduced fibres**. For a field `K` and `Spec K ⟶ S`, the
+base change `X ×_S Spec K` is smooth over `Spec K` (Stacks `01VB`), hence reduced (Stacks `056T`,
+here `AlgebraicGeometry.isReduced_of_smooth`). -/
 instance Smooth.geometricallyReduced {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
     GeometricallyReduced f := by
   rw [geometricallyReduced_iff, geometrically_iff_of_isClosedUnderIsomorphisms]

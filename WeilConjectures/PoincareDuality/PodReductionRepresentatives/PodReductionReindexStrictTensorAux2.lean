@@ -14,7 +14,6 @@ public import WeilConjectures.SmoothPurity.Coefficient.CoefficientTotalTensorMap
 /-! # The pure-tensor formula of the strict reduction tensor map
 
 Source: Stacks 03EK, 07A4 and 0941.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
 -/
 
 @[expose] public noncomputable section

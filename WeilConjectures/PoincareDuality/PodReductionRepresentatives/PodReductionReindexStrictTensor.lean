@@ -13,8 +13,7 @@ public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodRed
 
 /-! # The strict reduction/reindexing tensor equation
 
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03EL, 07A4 and 0941.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
+Source: Stacks 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -152,23 +151,7 @@ private theorem reducedUnitSection_map (W : Scheme.{u}) (n : ℕ)
 /-- Scalar-generator normalization implies the tensor equation before localization.
 There are no derived-category maps, adjunction mates, or completion data in this
 assertion. The three beta maps are tested independently by their unary formulas.
-Source: blueprint dual-Tate compatibility Steps 2 and 4; Stacks 03EL, 07A4, 0941.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
-
-Proof: apply the sequence inverse-image adjunction to the proposed equality.
-Check each degree and each total summand on scalar pure tensors. The finite
-component formula for tensorReductionStrictMap sends b tensor (x tensor y) to
-(b tensor x) tensor (1 tensor y). The systemChain unit formula sends a tensor
-to the tensor of its two inverse-image units. The three Generators hypotheses
-send the scalar to its reindexed scalar and leave x and y as the same sections
-at the postcomposed object. Finally hPure sends x tensor y to that same tensor
-at the reindexed object. Both composites therefore give the same two reduced
-factors, with reindex(b) on the first and 1 on the second. The scalar balancing
-relations, sheafification universal property and total-summand injections extend
-the equality to every section and every degree. These are equalities of maps on
-the sequence site, so they already contain every horizontal quotient transition.
-No faithfulness of finite derived evaluations is invoked. The equations still
-hold for zero factors and the empty site. -/
+Source: Stacks 03EL, 07A4, 0941. -/
 theorem strict_tensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (P Q : CochainComplex (scalarReductionSource l E Y) ℤ)
     (t : (F[g]).obj ((T[Y]).obj (P, Q)) ≅

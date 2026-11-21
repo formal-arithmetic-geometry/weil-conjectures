@@ -16,18 +16,17 @@ Let `j : U₀ ↪ C₀` be a nonempty open of a smooth geometrically connected c
 a boundary datum, and let `ℱ` be a lisse Weil sheaf on `U₀` with punctual weights at most `β`.
 This file proves that the middle extension `j_* ℱ` has punctual weights at most `β` at every
 boundary point `s`: every eigenvalue `α` of the residue Frobenius `F_s` on the boundary stalk
-`V ^ (I_s)` satisfies `|ι α| ^ 2 ≤ q_s ^ β` (`proposition-weights-j-boundary-points--1`).
+`V ^ (I_s)` satisfies `|ι α| ^ 2 ≤ q_s ^ β`.
 
 The argument is analytic. On an affine neighbourhood `X'₀` of `s`, with `U'₀ = U₀ ∩ X'₀`:
 
 * the inverse of the Euler series `L (U'₀, ℱ, T)` has radius of convergence at least
   `R = q ^ (-(β / 2 + 1))`, because the closed points of `U'₀` of degree `e` number at most
-  `A q ^ e` (`lemma-point-count-bound--1`), so that the coefficients of the inverse are
+  `A q ^ e`, so that the coefficients of the inverse are
   dominated by those of `∏_x (1 + q_x ^ (β / 2) T ^ e_x) ^ r`;
 * the eigenvalues of the geometric Frobenius on `H_c² = V_{π₁(U)} (-1)`
-(`lemma-degree-zero-top-cohomology--2`)
   have absolute value at most `q ^ (β / 2 + 1)`;
-* the Euler product identity for `j_* ℱ` (`proposition-weights-j-boundary-points`), the
+* the Euler product identity for `j_* ℱ`, the
   Grothendieck–Lefschetz trace formula, then forces the boundary polynomials
   `det (1 - F_s T ^ e_s ∣ V ^ (I_s))` to have no zero in the disc `|T| < R`,
 
@@ -87,7 +86,7 @@ section TopCohomology
 
 Since `π₁(U)` acts trivially on the coinvariants, a local Frobenius `F_x` of degree `e` acts on
 them as `γ ^ e`. If `μ` is an eigenvalue of `q γ`, then `(μ / q) ^ e` is an eigenvalue of `F_x` on
-the quotient `V_{π₁(U)}` of `V`, hence of `F_x` on `V` (`lemma-filtrations-spectra--2`), so it has
+the quotient `V_{π₁(U)}` of `V`, hence of `F_x` on `V`, so it has
 weight at most `β`. -/
 theorem norm_le_of_hasEigenvalue_compactTopFrobenius {β : ℝ} (hw : W.HasWeightsAtMost l ρ ι β)
     (x : C.finitePoints) {μ : PadicAlgCl l}
@@ -633,7 +632,7 @@ On an affine neighbourhood `X'₀` of `s`, the inverse of the Euler series of `�
 `U'₀ = U₀ ∩ X'₀` and `P / ι det (1 - F T ∣ H_c²)` converge on the disc of radius
 `R = q ^ (-(β / 2 + 1))` (`AlgebraicGeometry.WeilGroup.le_radius_inv_tprod_eulerFactor`,
 `AlgebraicGeometry.WeilGroup.norm_le_of_hasEigenvalue_compactTopFrobenius`); by the Euler product
-identity (`proposition-weights-j-boundary-points`) so does the inverse of the product of the
+identity so does the inverse of the product of the
 boundary polynomials, which therefore has no zero in that disc. The zero `z` with
 `z ^ e_s = (ι α)⁻¹` gives `|ι α| ^ (-1 / e_s) ≥ R`. -/
 theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
@@ -762,8 +761,7 @@ theorem frobeniusWeight_le_add_two [SmoothOfRelativeDimension 1 p] [Geometricall
   nlinarith
 
 /-- If `α` is an eigenvalue of the boundary Frobenius of `ℱ` at `s`, then `α ^ 2` is one of
-`ℱ ⊗ ℱ`: for an invariant eigenvector `v`, the vector `v ⊗ v` is an invariant eigenvector
-(`lemma-filtrations-spectra`). -/
+`ℱ ⊗ ℱ`: for an invariant eigenvector `v`, the vector `v ⊗ v` is an invariant eigenvector. -/
 theorem hasEigenvalue_boundaryFrobenius_tprod_self
     {ρ : Representation (PadicAlgCl l) WU.carrier V} {s : ↥((Set.range j.base)ᶜ)}
     {α : PadicAlgCl l} (hα : (D.boundaryFrobenius l ρ s).HasEigenvalue α) :
@@ -844,7 +842,7 @@ theorem frobeniusWeight_le_of_hasEigenvalue_boundaryFrobenius [SmoothOfRelativeD
     linarith
   linarith
 
-/-- Boundary semicontinuity of weights on a curve (`proposition-weights-j-boundary-points--1`), on
+/-- Boundary semicontinuity of weights on a curve, on
 the representation side and conditional on the Euler-product hypothesis `hD`.
 
 Let `j : U₀ ↪ C₀` be a dense open of a smooth geometrically connected curve over `𝔽_q` with
@@ -893,7 +891,7 @@ theorem hasEigenvalue_boundaryFrobenius_of_forall_inertia
     simp [boundaryFrobenius, hv.apply_eq_smul]
   · exact fun h ↦ hv.2 (congrArg Subtype.val h)
 
-/-- Purity at an unramified boundary point (first part of `corollary-unramified-boundary-point--2`),
+/-- Purity at an unramified boundary point,
 conditional on the Euler-product hypothesis `hD`.
 
 Let `ℱ` be lisse and punctually `ι`-pure of weight `w` on `U₀`, and let `s` be a boundary point

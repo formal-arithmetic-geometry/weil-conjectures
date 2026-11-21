@@ -46,7 +46,7 @@ fundamental class is the purity map followed by `Ri^!(ρ)`: the classes reduce c
   adjoint of the reduced fundamental class is the purity map followed by `Ri^!(ρ)`.
 - `AlgebraicGeometry.Etale.reductionModIdealUnit_app_comp_fundamentalClassMapModIdeal`: the
   reduced purity map `cl_i mod J` is compatible with the reduction maps `ρ` and the purity map
-  `cl_i` (blueprint `prop-pur-regular-immersion-purity-compatibilities`, item 4).
+  `cl_i`.
 
 The unit comparisons of the derived pullback and the right unitality of the projection map used
 here are in `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Unit`.
@@ -194,8 +194,7 @@ noncomputable def fundamentalClassMapModIdeal (aX : X ⟶ Spec (.of k)) [Smooth 
       (leftDerivedUpperStarSingleConstantSheafIso _ i (ModuleCat.of Λ (Λ ⧸ J))).inv ≫
     rightDerivedUpperShriekDerivedTensorMap Λ i _ _
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
+/-- Compatibilities of purity for regular immersions
 
 **Finite reduction** (item 4), on the level of classes. For an ideal `J` of `Λ` (for
 `Λ = A_{E,n}` and `J = ϖ^{n-1}` this is the reduction `A_{E,n} ⟶ A_{E,n-1}`), the reduction
@@ -213,8 +212,7 @@ theorem supportedClassMap_fundamentalClass_reductionModIdealUnit (aX : X ⟶ Spe
         ((reductionModIdealUnit Λ X J).app ((tateObject Λ X c)⟦2 * (c : ℤ)⟧)) :=
   supportedClassMap_comp_map_rightDerivedUpperShriek Λ i _ _
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
+/-- Compatibilities of purity for regular immersions
 
 Item 4, finite reduction `A_{E,n} → A_{E,n-1}`: reducing the coefficients modulo `J` commutes
 with the purity map `cl_i`. The square

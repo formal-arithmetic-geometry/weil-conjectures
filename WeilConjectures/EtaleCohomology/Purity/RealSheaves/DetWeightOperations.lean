@@ -16,17 +16,17 @@ public import WeilConjectures.RepresentationTheory.TensorPower
 Let `ρ` be a nonzero lisse Weil sheaf on a smooth geometrically connected curve `C₀ / 𝔽_q`, with
 determinantal-weight multiset `α₁, …, αₙ` (`AlgebraicGeometry.WeilGroup.detWeightMultiset`). By
 rank-one purity every lisse sheaf has finite geometric determinant and its determinant weight
-`dw_ι` is the determinant weight `dw_{λ_ι}` for the real weight character `λ_ι`
-(`corollary-determinant-weights--1`), so the representation-theoretic weight rules of
+`dw_ι` is the determinant weight `dw_{λ_ι}` for the real weight character `λ_ι`,
+so the representation-theoretic weight rules of
 `chap-Algebraic-groups-in-characteristic-zero` apply. This file deduces from the two-factor tensor
-rule (`proposition-determinant-weights-tensor-operations--1`) that the determinant weights of the
+rule that the determinant weights of the
 constituents of the tensor power `ρ^{⊗ k}` are exactly the sums `α_{i₁} + ⋯ + α_{i_k}`.
 
 ## Main statements
 
 - `AlgebraicGeometry.WeilGroup.IsLisse.tensorPower`: tensor powers of lisse sheaves are lisse.
 - `AlgebraicGeometry.WeilGroup.detWeight_subquotient_tensorPower`: the determinant weights of
-  the constituents of `ρ^{⊗ k}` (blueprint `proposition-determinant-weights-tensor-operations--1`).
+  the constituents of `ρ^{⊗ k}`.
 - `AlgebraicGeometry.WeilGroup.isGreatest_detWeight_subquotient_tensorPower`: the largest one is
   `k β` for the largest determinant weight `β` of `ρ`.
 -/
@@ -59,7 +59,7 @@ theorem IsLisse.tensorPower (hρ : W.IsLisse l ρ) {n : ℕ} (hn : 1 ≤ n) :
 
 /-- The power sums of the complex local eigenvalues of the tensor power `ρ^{⊗ k}`, `k ≥ 1`, are
 the `k`-th powers of those of `ρ`: the local eigenvalues of `ρ^{⊗ k}` are the `k`-fold products
-of local eigenvalues of `ρ` (`lemma-filtrations-spectra`). -/
+of local eigenvalues of `ρ`. -/
 theorem sum_map_pow_localEigenvalues_tensorPower (x : C.finitePoints) (n : ℕ) {k : ℕ}
     (hk : 1 ≤ k) :
     (((W.localEigenvalues l (ρ.tensorPower k) x).map ι).map (· ^ n)).sum =
@@ -89,7 +89,7 @@ theorem IsReal.tensorPower (hρ : W.IsReal l ρ ι) {k : ℕ} (hk : 1 ≤ k) :
       localEigenvalues_tprod, Multiset.map_map_product_mul, Multiset.map_map_product_mul, ih,
       hρ.map_conj_localEigenvalues]
 
-/-- Blueprint `lemma-positivity-euler-factors--1`: Even tensor powers of a real sheaf are positive.
+/-- Even tensor powers of a real sheaf are positive.
 
 If `ℱ` is `ι`-real and `k ≥ 1` is even, then every inverse local factor
 `ι P_x (ℱ^{⊗ k}, T ^ e_x)⁻¹` has nonnegative real coefficients (its constant term is `1` by
@@ -113,8 +113,7 @@ theorem IsReal.hasNonnegCoeffs_eulerFactor_tensorPower (hρ : W.IsReal l ρ ι)
 variable [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p] [Fact (ringChar K ≠ l)]
   [W.IsEtaleQuotient]
 
-/-- Blueprint `proposition-determinant-weights-tensor-operations--1`: Determinant weights of a
-finite tensor power.
+/-- Determinant weights of a finite tensor power.
 
 Let `ρ` be a lisse Weil sheaf, with determinantal-weight multiset `α₁, …, αₙ`, and `k ≥ 1`.
 Every constituent `S / U` of the tensor power `ρ^{⊗ k}` has determinant weight
@@ -194,8 +193,7 @@ theorem detWeight_subquotient_tensorPower (hρ : W.IsLisse l ρ) {n : ℕ} (hn :
         detWeight_eq_detWeight_weightCharacter, heq, detWeight_eq_detWeight_weightCharacter,
         detWeight_eq_detWeight_weightCharacter, add_comm]
 
-/-- Blueprint `proposition-determinant-weights-tensor-operations--1`: Determinant weights of a
-finite tensor power.
+/-- Determinant weights of a finite tensor power.
 
 If `β` is the largest determinant weight of the lisse Weil sheaf `ρ`, then the largest
 determinant weight of a constituent of `ρ^{⊗ k}`, `k ≥ 1`, is `k β`. -/

@@ -16,7 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 # Co-projection for a closed immersion
 
 For a closed immersion `i : Z ⟶ X`, an invertible tensor factor passes through `Ri^!` at the
-cost of restricting it: `Ri^! (K ⊗^L L) ≅ Ri^! K ⊗^L Li^* L` (blueprint `sk-lem-coprojection`).
+cost of restricting it: `Ri^! (K ⊗^L L) ≅ Ri^! K ⊗^L Li^* L`.
 This is the input that moves twists through the exceptional inverse image of a zero section in
 the model purity (`WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace`) and in purity
 for regular closed immersions (`WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion`).
@@ -29,12 +29,11 @@ compactification.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`: the co-projection
-  `Rf^! (- ⊗^L L) ≅ Rf^! (-) ⊗^L Lf^* L` for `L` invertible (blueprint `lem-pur-coprojection`).
+  `Rf^! (- ⊗^L L) ≅ Rf^! (-) ⊗^L Lf^* L` for `L` invertible.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_of_isInvertible`:
   the subsection statement `sk-lem-coprojection`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject`:
-  the case of the Tate twists, `Ri^! (K ⊗^L Λ(m)[2m]) ≅ Ri^! K ⊗^L Λ(m)[2m]`
-  (blueprint `lem-pur-immersion-twist`).
+  the case of the Tate twists, `Ri^! (K ⊗^L Λ(m)[2m]) ≅ Ri^! K ⊗^L Λ(m)[2m]`.
 -/
 
 @[expose] public section
@@ -102,7 +101,7 @@ section Coprojection
 variable {Y : Scheme.{u}}
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `lem-pur-coprojection`: Co-projection for a closed immersion
+/-- Co-projection for a closed immersion
 
 For a morphism `f : X ⟶ Y` admitting a compactification and an object `L` of `D(Y_ét, Λ)` with
 a two-sided tensor inverse `M` (`e : M ⊗^L L ≅ Λ_Y`, `e' : L ⊗^L M ≅ Λ_Y`), the co-projection
@@ -131,7 +130,7 @@ noncomputable def derivedTensorRightCompRightDerivedUpperShriekIso (f : X ⟶ Y)
 end Coprojection
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `sk-lem-coprojection`: Co-projection for a closed immersion
+/-- Co-projection for a closed immersion
 
 For a closed immersion `i : Z ⟶ X`, a complex `K ∈ D^b_{ctf}(X, Λ)` and an object `L` of
 `D^b_{ctf}(X, Λ)` that is *invertible*, the canonical co-projection
@@ -142,8 +141,8 @@ is an isomorphism: an invertible tensor factor passes through `i^!` at the cost 
 it. Testing against an arbitrary `A ∈ D^b_{ctf}(Z, Λ)` and using `Ri_! = Ri_*`, the projection
 formula for `Ri_*` and invertibility of `L`, the two Hom-functors agree naturally in `A`, so
 Yoneda gives the isomorphism. Here it is the component at `K` of the co-projection
-`AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`
-(blueprint `lem-pur-coprojection`), which needs neither that `i` is a closed immersion nor that
+`AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`,
+which needs neither that `i` is a closed immersion nor that
 `K` and `L` lie in `D^b_{ctf}`.
 
 Taking `L = Λ_X(m)[2m]`, whose restriction is `Λ_Z(m)[2m]`, this reads
@@ -248,7 +247,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_leftDerivedUpperStar_
 
 end Consequences
 
-/-- Blueprint `lem-pur-immersion-twist`: The co-projection for the twist
+/-- The co-projection for the twist
 
 For `i : Z ⟶ X` admitting a compactification (in the blueprint: a closed immersion of separated
 finite-type `k`-schemes), `K ∈ D(X_ét, Λ)` and `m ∈ ℤ`,
@@ -256,7 +255,7 @@ finite-type `k`-schemes), `K ∈ D(X_ét, Λ)` and `m ∈ ℤ`,
 `Ri^! (K ⊗^L Λ_X(m)[2m]) ≅ Ri^! K ⊗^L Λ_Z(m)[2m]`.
 
 This is the co-projection `AlgebraicGeometry.Etale.derivedTensorRightCompRightDerivedUpperShriekIso`
-(blueprint `lem-pur-coprojection`) for the invertible object `L = Λ_X(m)[2m]`, followed by the
+ for the invertible object `L = Λ_X(m)[2m]`, followed by the
 identification `Li^* (Λ_X(m)[2m]) ≅ Λ_Z(m)[2m]` of the Tate twist datum. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor_shiftTateObject (i : Z ⟶ X)
     [HasCompactification i] [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Z]

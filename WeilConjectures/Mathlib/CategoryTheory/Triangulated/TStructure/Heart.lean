@@ -141,8 +141,8 @@ lemma hasFiniteProducts_heart : HasFiniteProducts H :=
   have := t.hasZeroObject_heart H
   hasFiniteProducts_of_has_binary_and_terminal
 
-/-- Blueprint `lemma-perverse-sheaves-curve--1`: the heart of a t-structure on a triangulated
-category is an abelian category ([BBD, Théorème 1.3.6]). -/
+/-- The heart of a t-structure on a triangulated category is an abelian category ([BBD, Théorème
+1.3.6]). -/
 @[instance_reducible]
 noncomputable def abelianHeart : Abelian H :=
   have := t.hasFiniteProducts_heart H
@@ -150,8 +150,7 @@ noncomputable def abelianHeart : Abelian H :=
     (t.admissibleMorphism_ιHeart_eq_top H)
 
 include t in
-/-- Blueprint `lemma-perverse-sheaves-curve--1`: the heart of a t-structure is idempotent complete,
-since it is abelian. -/
+/-- The heart of a t-structure is idempotent complete, since it is abelian. -/
 theorem isIdempotentComplete_heart : IsIdempotentComplete H := by
   let := t.abelianHeart H
   rw [Idempotents.isIdempotentComplete_iff_idempotents_have_kernels]

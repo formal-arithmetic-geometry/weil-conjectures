@@ -21,10 +21,8 @@ field of coefficients `Λ` whose characteristic `ℓ` is invertible on `X`
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.TateOrientation.globalDuality_and_identification_and_degreewiseDuality`
-  (`sk-rem-feeds`).
-- `AlgebraicGeometry.Etale.TateOrientation.globalDuality_and_isPerfectPairing_and_degreewiseDuality`
-  (`rem-feeds`).
+- `AlgebraicGeometry.Etale.TateOrientation.globalDuality_and_identification_and_degreewiseDuality`.
+- `AlgebraicGeometry.Etale.TateOrientation.globalDuality_and_isPerfectPairing_and_degreewiseDuality`.
 -/
 
 @[expose] public section
@@ -41,7 +39,7 @@ variable {k : Type u} [Field k] [IsSepClosed k] {Λ : Type (u + 1)} [CommRing Λ
   [Finite Λ] [HasTateTwist Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)} [HasCompactification a]
   [LocallyOfFiniteType a] {d : ℕ}
 
-/-- Blueprint `sk-rem-feeds`: Where this feeds, and what remains.
+/-- Where this feeds, and what remains.
 
 Let `k` be separably closed, `Λ` a finite field whose characteristic `ℓ` is invertible on `X`
 (so `ℓ ≠ p`: the `p`-primary case in characteristic `p` is excluded), `a : X ⟶ Spec k` smooth of
@@ -74,7 +72,7 @@ theorem globalDuality_and_identification_and_degreewiseDuality [HasInvertibleExp
     nonempty_iso_rightDerivedLowerStar_coefficientDual_of_orientation Λ a γ.toOrientation hKd,
     fun i ↦ γ.degreewise_duality hK hKd i⟩
 
-/-- Blueprint `rem-feeds`: Where this feeds, and what remains.
+/-- Where this feeds, and what remains.
 
 Let `k` be separably closed, `Λ` a finite field whose characteristic `ℓ` is invertible on `X`
 (so `ℓ ≠ p`: the `p`-primary case in characteristic `p` is excluded), `γ` a Tate orientation of

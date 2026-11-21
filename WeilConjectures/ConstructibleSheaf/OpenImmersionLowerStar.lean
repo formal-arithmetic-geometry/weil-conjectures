@@ -18,10 +18,9 @@ public import WeilConjectures.SixFunctors.OpenClosed.SupportedSections
 Let `Λ` be a finite commutative ring, `X` a scheme of finite type over a field and
 `j : U ⟶ X` an open immersion. For a constructible sheaf `F` of `Λ`-modules on `U_ét` the
 direct image `j_* F` is constructible on `X_ét`
-(`AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isOpenImmersion`, blueprint
-`thm-fin-open-degree-zero`), and so is the boundary sheaf `i^* j_* F` on the closed complement
-`i : Z ⟶ X` (`AlgebraicGeometry.Etale.isConstructibleSheaf_upperStar_lowerStar_of_isOpenImmersion`,
-blueprint `lemma-extreme-degrees-affine-curve`).
+(`AlgebraicGeometry.Etale.isConstructibleSheaf_lowerStar_of_isOpenImmersion`), and so is the
+boundary sheaf `i^* j_* F` on the closed complement `i : Z ⟶ X`
+(`AlgebraicGeometry.Etale.isConstructibleSheaf_upperStar_lowerStar_of_isOpenImmersion`).
 
 The proof is a Noetherian induction on the closed subset of `X` underlying a closed subscheme.
 Given `j : U ⟶ Z`, choose a nonempty open `V ⊆ U` of `Z` on which `F` is finite locally constant
@@ -275,7 +274,7 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux {k : Type u} [Fiel
     (fun S hS h₁ h₃ ↦ by have := h₁; have := h₃; exact IsConstructibleSheaf.of_shortExact hS)
     (KernelFork.mapIsLimit _ (kernelIsKernel η) (j)_*[ModuleCat.{u + 1} Λ]) ‹_› ‹_›
 
-/-- Blueprint `thm-fin-open-degree-zero`: Constructibility of the degree-zero open direct image.
+/-- Constructibility of the degree-zero open direct image.
 
 Let `X` be of finite type over a field `k`, `j : U ⟶ X` an open immersion and `F` a
 constructible sheaf of modules over a finite commutative ring `Λ` on `U_ét`. Then `j_* F` is
@@ -289,7 +288,7 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion {k : Type u} [Field k]
     IsConstructibleSheaf ((j)_*[ModuleCat.{u + 1} Λ].obj F) :=
   isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux aX ⊤ (𝟙 X) (Set.subset_univ _) j F
 
-/-- Blueprint `lemma-extreme-degrees-affine-curve`: Boundary sheaf of an open immersion.
+/-- Boundary sheaf of an open immersion.
 
 Let `X` be of finite type over a field `k`, `j : U ⟶ X` an open immersion, `i : Z ⟶ X` a
 closed immersion onto the closed complement of `U`, and `F` a constructible sheaf of

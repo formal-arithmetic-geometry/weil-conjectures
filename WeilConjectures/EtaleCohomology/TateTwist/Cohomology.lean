@@ -15,7 +15,7 @@ Let `Λ` be a finite coefficient ring, in the blueprint `A_{E,n} = 𝒪_E / ϖ_E
 on which the characteristic of `Λ` is invertible. Following blueprint
 `def-weil-ordinary-compact-cohomology`, the cohomology with coefficients in the Tate twist
 `Λ(m)` is the cohomology of the twisting object `Λ_Y(m) = Λ_Y ⊗ᴸ Λ(m)_Y`
-(`AlgebraicGeometry.Etale.tateTwistObject`, blueprint `definition-tate-twists`):
+(`AlgebraicGeometry.Etale.tateTwistObject`):
 
 `Hⁱ(Y, Λ(m)) = Hⁱ(RΓ(Y, Λ_Y(m)))` (`AlgebraicGeometry.Etale.cohomologyTateTwist`), and, along
 a morphism `a : Y ⟶ s` admitting a compactification,
@@ -37,8 +37,7 @@ namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [NeZero (ringChar Λ)]
 
-/-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
-cohomology, finite stage `Λ = A_{E,n}`, with a Tate twist.
+/-- Ordinary and compactly supported cohomology, finite stage `Λ = A_{E,n}`, with a Tate twist.
 
 The cohomology `Hⁱ(Y, Λ(m)) = Hⁱ(RΓ(Y, Λ_Y(m)))` of a scheme `Y` with coefficients in the Tate
 twist `Λ(m)`: the étale cohomology (`AlgebraicGeometry.Etale.cohomology`) of the twisting object
@@ -49,8 +48,7 @@ noncomputable def cohomologyTateTwist (Y : Scheme.{u}) [HasInvertibleExponent Λ
     ModuleCat.{u + 1} Λ :=
   (cohomology (ModuleCat.{u + 1} Λ) Y i).obj (tateTwistObject Λ Y m)
 
-/-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
-cohomology, finite stage `Λ = A_{E,n}`, with a Tate twist.
+/-- Ordinary and compactly supported cohomology, finite stage `Λ = A_{E,n}`, with a Tate twist.
 
 The compactly supported cohomology `Hⁱ_c(Y, Λ(m)) = Hⁱ(RΓ(s, Ra_! Λ_Y(m)))` along a morphism
 `a : Y ⟶ s` admitting a compactification: the compactly supported cohomology

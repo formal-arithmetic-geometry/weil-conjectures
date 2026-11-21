@@ -18,7 +18,6 @@ import WeilConjectures.FieldTheory.FrobeniusBasisCompositum
 /-! # Finite-extension p-power intersection
 
 Source: Stacks Project, More on Algebra, Tag 07P4.
-(blueprint: lem-weil-pbc-intersection-subfields-differentials-powers)
 -/
 
 @[expose] public section
@@ -30,13 +29,7 @@ local instance zmodAlgebraPowers (p : ℕ) (K : Type u) [Field K] [CharP K p] :
     Algebra (ZMod p) K := ZMod.algebra (R := K) p
 
 /-- Finite-extension p-power intersection.
-Source: Stacks Project, More on Algebra, Tag 07P4 (`lemma-intersection-subfields`),
-`literature/stacks-project/more-algebra.tex`.
-(blueprint: lem-weil-pbc-intersection-subfields-differentials-powers)
-
-Proof:
-For an empty family, the intersection hypothesis makes Frobenius surjective on K.
-Thus K is perfect, and its finite extension L is perfect too, giving L^p = L.
+Source: Stacks Project, More on Algebra, Tag 07P4, `literature/stacks-project/more-algebra.tex`.
 
 For a nonempty family, choose a finite K-basis e_i and put b_i = e_i^p. Applying
 Frobenius to basis expansions identifies L^p with the K^p-span of the b_i. Choosing

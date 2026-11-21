@@ -9,9 +9,7 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 /-! # Naturality of the integral pullback Hom comparison
 
-Source: Stacks Project, Tag 0GMX; blueprint main-20261015
-theorem-poincare-duality-frobenius--2, Steps 8--11
-(blueprint: stage3-derived-automorphism-continuation-a-integral-naturality).
+Source: Stacks Project, Tag 0GMX.
 
 The naturality field of `podIntegralHomComparison_laws`, left as a statement.
 -/
@@ -185,19 +183,7 @@ private theorem integralEvaluation_naturality
   simp only [AddEquiv.apply_symm_apply, Category.comp_id]
 
 /-- Naturality component of the integral pullback Hom compatibility.
-Source: Stacks 0GMX; node lem-pod-derived-automorphism-hom-evaluation, steps 8--11.
-Proof: both sides are maps into `H_X(FQ)`; compare their inverse transposes. The
-transposition of `podIntegralClosed` is the completion-unit precomposition
-followed by the ordinary tensor-Hom adjunction
-(lem-pod-reindexing-completed-evaluation-reflection), hence natural in the
-permitted pair as well as in the parameter, so evaluation is dinatural:
-`T(H(a,b),1) ≫ ev_Q = T(1,a) ≫ ev_P ≫ b` for `(a,b) : P ⟶ Q`. With the
-naturality of `μ` (lem-pur-derived-pullback-tensor-iso) the inverse transpose of
-the left side becomes `T(1,Fa) ≫ μ⁻¹ ≫ F(ev_P) ≫ F b`. The right side gives
-`T(1,Fa) ≫ T(c_P,1) ≫ ev ≫ F b` by the same dinaturality on `X`, and
-`T(c_P,1) ≫ ev = μ⁻¹ ≫ F(ev_P)` is the evaluation equation. The transposes
-agree, so the maps agree.
-(blueprint: stage3-derived-automorphism-continuation-a-integral-naturality). -/
+Source: Stacks 0GMX. -/
 theorem podIntegralHomComparison_naturality :
     ∀ (P Q : (constructibleIntegralHomPairs l E Y).FullSubcategory) (f : P ⟶ Q),
       (constructibleIntegralPullback l E g).map

@@ -9,9 +9,7 @@ public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexi
 
 /-! # Right-route normalization of the source-shift square
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-This computes the right composite on K-injective Hom models.
-(blueprint: lem-pod-reindexing-source-right-normalization)
+Source: Stacks 0A8X and 08JA. This computes the right composite on K-injective Hom models.
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +23,7 @@ open AlgebraicGeometry.Scheme
 namespace WeilConjectures.PodReindexingCoherence
 
 /-- Naturality and shift compatibility transport a normalized model composite.
-Source: the functorial localization calculation in Stacks 08JA.
-(blueprint: lem-pod-reindexing-source-right-normalization) -/
+Source: the functorial localization calculation in Stacks 08JA. -/
 private theorem right_model_calculus
     {CY DY CX DX : Type*} [Category CY] [Category DY] [Category CX] [Category DX]
     [HasShift CY ℤ] [HasShift DY ℤ] [HasShift CX ℤ] [HasShift DX ℤ]
@@ -60,9 +57,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The right route of the source-shift square on localized Hom models.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-
-Proof:
+Source: Stacks 0A8X and 08JA.
 
 1. Write F,K,Q,alpha,beta,kappa as in the model-factor definitions. Apply the source-site
 LeftNormalization at source QP with representative P and identity representative isomorphism.
@@ -81,8 +76,7 @@ along eY.inv. Finally naturality of Q shift(-a) along c.chain(P,I) moves Q shift
 The remaining composite is localizationFactors(Hom(P[a],I)), Q of K(eY.inv) followed by
 complexShift(-a) followed by c.chain(P,I)[-a], and Q shift(-a) at Hom(KP,KI), as claimed.
 
-This calculates one route, independently of the chain square and of the other route.
-(blueprint: lem-pod-reindexing-source-right-normalization) -/
+This calculates one route, independently of the chain square and of the other route. -/
 theorem source_right_normalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

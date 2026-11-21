@@ -11,8 +11,7 @@ public import Mathlib.Basic.Logic.Lemmas
 /-! Raw comparison data for the derived reindexing core.
 
 The record contains the comparison maps while leaving their five normalization laws
-as separate obligations.  It is used to decompose the core existence theorem.
-(blueprint: def-pod-reindexing-derived-core-data) -/
+as separate obligations.  It is used to decompose the core existence theorem. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -103,8 +102,7 @@ namespace PodReindexingDerivedCoreData
 
 variable (Q : PodReindexingDerivedCoreData l E g)
 
-/-- Assemble raw comparison maps into the existing completion-reindex interface.
-(blueprint: def-pod-reindexing-derived-core-data) -/
+/-- Assemble raw comparison maps into the existing completion-reindex interface. -/
 def assemble
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

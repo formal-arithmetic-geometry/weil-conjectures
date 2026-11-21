@@ -25,8 +25,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Target-shift square for normalized reindexing
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-target-shift)
+Source: Stacks 0A8X, 08JA.
 -/
 
 @[expose] public noncomputable section
@@ -334,8 +333,7 @@ Hom-product projection after unsigned target reindexing.  The fixed
 and localization yield the displayed equation.  This is the representative
 step of the target-shift argument; the passage to arbitrary objects is a
 separate descent theorem.
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-target-shift).
+Source: Stacks 0A8X, 08JA.
 -/
 private theorem derived_target_shift_model
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
@@ -405,18 +403,7 @@ private theorem derived_target_shift_model
 
 /-- Reindexing respects the normalized target shift of derived internal Hom.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-target-shift).
-
-Proof: represent the source by a complex and resolve the target by a K-injective
-complex. Its target shift is again K-injective. Expand `Comparison.derived_model`
-at the two pairs. The `RightNormalization` characterization of `homCommShift`
-identifies the vertical arrows with unsigned target reindexing on Hom products.
-The `chain_projection` field makes these maps commute with sectionwise
-reindexing on each factor; product extensionality proves their chain square.
-Localize and use naturality of the localization factors. Cancel the comparison
-isomorphisms and transport along the representative isomorphisms to obtain the
-square for arbitrary M and N. -/
+Source: Stacks 0A8X, 08JA. -/
 theorem derived_target_shift_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

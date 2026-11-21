@@ -108,9 +108,7 @@ end LocalGeneratorsData
 exist local generators satisfying `IsInvertibleData`.
 
 The isomorphism classes of invertible `𝒪_X`-modules on a scheme `X` form the Picard group
-`AlgebraicGeometry.Scheme.Pic`.
-
-(blueprint: `def-sc-invertible-module`) -/
+`AlgebraicGeometry.Scheme.Pic`. -/
 class IsInvertible (M : SheafOfModules.{u} R) : Prop where
   exists_isInvertibleData : ∃ q : LocalGeneratorsData.{u₁} M, q.IsInvertibleData
 

@@ -12,7 +12,6 @@ public import Mathlib.Topology.NoetherianSpace
 /-! Geometric factorization used by the topological locally closed extension.
 The conclusion is the scheme level open--closed factorization; coefficient transport
 and module exactness are handled by the parent theorem.
-(blueprint: lem-sfb-topological-locally-closed-extension)
 -/
 
 @[expose] public section

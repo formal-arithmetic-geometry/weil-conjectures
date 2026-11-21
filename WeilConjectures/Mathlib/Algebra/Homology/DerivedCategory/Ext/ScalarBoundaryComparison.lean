@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ScalarUnitExtComparison
 public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorExtension
 import all WeilConjectures.AlgebraicGeometry.ScalarUnitExtComparison
 import all WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorExtension
-/-! # Comparison of scalar adjunct boundary equations
-(blueprint: lem-sp-scalar-boundary-comparison).
+/-! # Comparison of scalar adjunct boundary equations.
 -/
 
 @[expose] public noncomputable section
@@ -34,12 +33,7 @@ attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimi
 the class d under given source comparison isomorphisms. If the degree-one Kummer classes κ and
 κprime commute with the target comparison and with a map on unit sheaves, then the V-scalar adjunct
 of d is the transported boundary composed with κprime [def-weil-abstract-derived-category].
-Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (blueprint: lem-sp-scalar-boundary-comparison).
-Proof: Apply the exact comparison functor to the scalar-adjunct equation. Use the square isomorphism
-naturality on Ext, the source comparison identity and the Kummer compatibility. Reassociate Yoneda
-products and cancel the invertible source map. The remaining terms are exactly the transported
-source generator and boundary; no faithfulness of forgetting scalars is used. -/
+Source: Stacks 0152, 06YY and 0GLZ. -/
 theorem scalar_boundary_comparison
     (τ : U ⋙ G ≅ F ⋙ V) {P Q : C} {X Y : B} {X' Y' : E} {P' : D}
     (η : X ⟶ U.obj P) (s : G.obj X ≅ X') (a : F.obj P ≅ P')

@@ -53,12 +53,7 @@ private theorem product_projection {A : Type*} [Category A]
   simp only [Category.assoc, Pi.map_π, Pi.lift_comp_π_assoc]
 
 /-- The product coordinates are the tensors of quotient units, and the second coordinate
-is zero. Source: Stacks 03EL, 07A4 and 0941
-(blueprint: lem-pur-strict-tensor-augmentation-coordinates).
-Proof: project the coordinate equation for tensorOperationUnit to the nth factor.
-The slice augmentation sends z to 1 tensor z. The normalized tensorTowerIso sends
-1 tensor (x tensor y) to (1 tensor x) tensor (1 tensor y). Its Roos image preserves
-both coordinates and therefore preserves the identically zero second coordinate. -/
+is zero. Source: Stacks 03EL, 07A4 and 0941. -/
 theorem coordinates (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) :
@@ -134,9 +129,7 @@ theorem coordinates (l : ℕ) [Fact l.Prime]
     exact (IntegralAmbient.tensorOperationUnit_coordinates.{u, u} l E T P Q).2 i (i - 1) (by omega)
 
 /-- Pure total tensors determine a morphism from the ordinary total tensor.
-Source: Stacks 03EK and 06YN
-(blueprint: lem-pur-strict-tensor-augmentation-coordinates).
-Proof: first use the direct-sum universal property, then tensor extensionality. -/
+Source: Stacks 03EK and 06YN. -/
 theorem total_hom_ext (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u})
     (P Q : CochainComplex (integralTowerModules l E T) ℤ) (k : ℤ)
@@ -168,8 +161,7 @@ theorem total_hom_ext (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   exact h p q hpq U x y
 
 /-- Both coordinates determine a morphism into the Roos mapping cocone.
-Source: Stacks 08TC (blueprint: lem-pur-strict-tensor-augmentation-coordinates).
-Proof: the sum of the two coordinate projection-inclusion composites is the identity. -/
+Source: Stacks 08TC. -/
 theorem mappingCocone_hom_ext {A : Type*} [Category A] [Abelian A]
     {K L M : CochainComplex A ℤ} (φ : K ⟶ L)
     {f g : M ⟶ CochainComplex.mappingCocone φ}

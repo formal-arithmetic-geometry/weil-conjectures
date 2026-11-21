@@ -19,19 +19,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
 # Cohomologically smooth morphisms
 
 A morphism `f : X ⟶ Y` admitting a compactification is *cohomologically smooth*
-(blueprint `proposition-exceptional-inverse-image-smooth-morphism`) if its dualizing complex
+ if its dualizing complex
 `ω_f = Rf^! Λ_Y` is ⊗-invertible, the canonical map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an
 isomorphism for every `K ∈ D^b_{ctf}(Y, Λ)`, and the canonical base change map `Lg'^* ω_f ⟶ ω_{f'}`
 is an isomorphism for every cartesian square. This file proves the structural results of the
 blueprint subsection `proposition-exceptional-inverse-image-smooth-morphism` about this notion:
 
-* smooth morphisms are cohomologically smooth
-(`proposition-exceptional-inverse-image-smooth-morphism`), and the
+* smooth morphisms are cohomologically smooth,
+and the
   dualizing complexes of smooth morphisms are multiplicative under composition;
 * `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g` for cohomologically smooth `g`, and a composite of
-  cohomologically smooth morphisms is cohomologically smooth (`lem-pur-co-smooth-composition`);
+  cohomologically smooth morphisms is cohomologically smooth;
 * étale morphisms are cohomologically smooth with `ω_u ≅ Λ`, and cohomological smoothness
-  descends along surjective étale morphisms (`lem-pur-co-smooth-etale-locality`).
+  descends along surjective étale morphisms.
 
 ## Implementation notes
 
@@ -40,11 +40,10 @@ The canonical maps are `AlgebraicGeometry.Etale.dualizingComplexTensorMap` and
 compact-support base change `Ex_!`, which is only constructed for a quasi-compact base change
 `f'`; the third clause of the definition is asked for such squares.
 
-The composition law for the canonical maps (`lem-pur-co-smooth-composition`) and their descent
-along surjective étale maps (`lem-pur-co-smooth-etale-locality`) compare the canonical maps of
+The composition law for the canonical maps and their descent
+along surjective étale maps compare the canonical maps of
 `f`, `g` and `f ≫ g` through a composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` compatible
-with the projection maps and with `Ex_!` (`proposition-composition-base-change-rf-shriek--1`,
-`proposition-composition-base-change-rf-shriek--1`, `sk-thm-sf-package`), recorded in
+with the projection maps and with `Ex_!`, recorded in
 `AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`; the computations are in
 `WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsComposition`. Descent along
 `u` uses that `u` is itself cohomologically smooth with `θ_u` invertible everywhere, so that
@@ -85,7 +84,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness.
+/-- Cohomological smoothness.
 
 A morphism `f : X ⟶ Y` admitting a compactification is *cohomologically smooth* if
 1. its dualizing complex `ω_f = Rf^! Λ_Y` is ⊗-invertible;
@@ -166,7 +165,7 @@ theorem nonempty_iso_dualizingComplex_comp_of_isInvertible {X Y Z : Scheme.{u}} 
 
 variable {Λ}
 
-/-- Blueprint `lem-pur-co-smooth-composition`: Composition.
+/-- Composition.
 
 For cohomologically smooth `g : Y ⟶ Z` and any `f : X ⟶ Y` admitting a compactification,
 `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g`. -/
@@ -178,7 +177,7 @@ theorem IsCohomologicallySmooth.nonempty_iso_dualizingComplex_comp {X Y Z : Sche
         ((L((f)^*[ModuleCat.{u + 1} Λ])).obj (dualizingComplex Λ g))) :=
   nonempty_iso_dualizingComplex_comp_of_isInvertible Λ f g _ rfl hg.isInvertible_dualizingComplex
 
-/-- Blueprint `lem-pur-co-smooth-composition`: Composition.
+/-- Composition.
 
 If `f : X ⟶ Y` and `g : Y ⟶ Z` are cohomologically smooth, the dualizing complex
 `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g` of `f ≫ g` is invertible, as a tensor product of invertible
@@ -192,7 +191,7 @@ theorem IsCohomologicallySmooth.isInvertible_dualizingComplex_comp {X Y Z : Sche
   exact .of_iso e.symm (hf.isInvertible_dualizingComplex.derivedTensor
     (hg.isInvertible_dualizingComplex.leftDerivedUpperStar f))
 
-/-- Blueprint `lem-pur-co-smooth-composition`: Composition.
+/-- Composition.
 
 If `f : X ⟶ Y` and `g : Y ⟶ Z` are cohomologically smooth, then so is `f ≫ g`:
 * `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g` is invertible
@@ -243,8 +242,7 @@ theorem IsCohomologicallySmooth.comp {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y �
 
 variable (Λ)
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`: Smooth base change for the
-exceptional inverse image.
+/-- Smooth base change for the exceptional inverse image.
 
 For a cartesian square
 
@@ -274,8 +272,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app
   have := isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension Λ f d sq
   inferInstance
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`: Smooth base change for the
-exceptional inverse image.
+/-- Smooth base change for the exceptional inverse image.
 
 The form of `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app`
 as an abstract isomorphism `Lu^* Rf^! K ≅ Rf'^! Lv^* K`, under the same hypotheses (`Y`
@@ -292,8 +289,7 @@ theorem nonempty_iso_leftDerivedUpperStar_obj_rightDerivedUpperShriek_obj {X Y X
   obtain ⟨e⟩ := nonempty_iso_leftDerivedUpperStar_comp_rightDerivedUpperShriek Λ (d := d) f sq
   exact ⟨e.app K⟩
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness of
-smooth morphisms.
+/-- Cohomological smoothness of smooth morphisms.
 
 A smooth morphism `f : X ⟶ Y` of pure relative dimension `d` admitting a compactification, with
 the exponent of `Λ` invertible on `X` and `Y` quasi-separated, is cohomologically smooth:
@@ -315,8 +311,7 @@ theorem isCohomologicallySmooth_of_smoothOfRelativeDimension {X Y : Scheme.{u}} 
     rw [isIso_dualizingComplexBaseChangeMap_iff]
     infer_instance
 
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness of
-smooth morphisms.
+/-- Cohomological smoothness of smooth morphisms.
 
 *Composition.* For smooth `f : X ⟶ Y` and `g : Y ⟶ Z`, `ω_{f ≫ g} ≅ ω_f ⊗ᴸ Lf^* ω_g`. Only the
 invertibility of `ω_g` is used. -/
@@ -344,7 +339,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_of_etale {U X : Scheme.{u}} (u : U 
     Functor.isoWhiskerRight (rightDerivedUpperShriekIdIso Λ X) _ ≪≫
     Functor.leftUnitor _⟩
 
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality.
+/-- Source-étale locality.
 
 Every étale morphism `u` admitting a compactification, with the exponent of `Λ` invertible on
 `U` and `X` quasi-separated, is cohomologically smooth: it is smooth of relative dimension `0`
@@ -357,7 +352,7 @@ theorem isCohomologicallySmooth_of_etale {U X : Scheme.{u}} (u : U ⟶ X) [Etale
 
 variable {Λ}
 
-/-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality.
+/-- Source-étale locality.
 
 Let `u : U ⟶ X` be a surjective étale morphism and `f : X ⟶ Y`. If `u ≫ f` is cohomologically
 smooth, then so is `f`. The étale `u` is cohomologically smooth with `θ_u` an isomorphism at every

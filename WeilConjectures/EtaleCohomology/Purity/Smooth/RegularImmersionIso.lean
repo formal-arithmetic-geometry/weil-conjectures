@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 Let `i : Z ⟶ X` be a regular closed immersion of pure codimension `c`, with `X` smooth over a
 perfect field `k` and `Z` regular. The morphism `cl_i : Λ_Z ⟶ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`,
 adjoint to the fundamental class (`AlgebraicGeometry.Etale.fundamentalClassMap`), is an
-isomorphism (clause (c) of blueprint `lemma-class-of-point--1`); in particular `[Z ⊂ X]` generates
+isomorphism; in particular `[Z ⊂ X]` generates
 the cohomology sheaf `𝓗⁰(Ri^! Λ_X(c)[2c])` at every geometric point (clause (b)).
 
 This is Step 4 of the proof. The question is étale-local on `Z`. Near every point of `Z` there
@@ -62,13 +62,13 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 
 attribute [local instance] HasInvertibleExponent.opens
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
+/-- Purity for regular closed immersions
 
 *Step 4, locally.* Every point of `Z` lies in the zero locus of a Zariski frame `F` of `i` on
 which `cl_i` restricts to an isomorphism: `F` is chosen with an étale map `u : F.U ⟶ 𝔸^c_B`
 pulling the coordinates back to the frame functions, the frame class is the restriction of the
-class of the zero section of `𝔸^c_B`, whose adjoint is an isomorphism
-(`proposition-purity-vector-bundles`), and the restriction of supports along the étale maps `u` and
+class of the zero section of `𝔸^c_B`, whose adjoint is an isomorphism,
+and the restriction of supports along the étale maps `u` and
 `F.U ⟶ X` is invertible. -/
 theorem exists_etaleFrame_isIso_leftDerivedUpperStar_map_fundamentalClassMap
     (aX : X ⟶ Spec (.of k)) [Smooth aX] (hZ : ∀ z : Z, IsRegularLocalRing (Z.presheaf.stalk z))
@@ -108,7 +108,7 @@ theorem exists_etaleFrame_isIso_leftDerivedUpperStar_map_fundamentalClassMap
     (isIso_supportedClassMap_restrictSupportedClass_iff Λ F.e _ _ _ F.isPullback _ _ _ _ hψe).1
       h₂⟩
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
+/-- Purity for regular closed immersions
 
 **(c) `cl_i` is an isomorphism**, `cl_i : Λ_Z ≅ Ri^! (Λ_X(c)[2c])`, `1 ↦ [Z ⊂ X]`. Its
 restrictions to the members of a Zariski cover of `Z` are isomorphisms
@@ -136,7 +136,7 @@ theorem isIso_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [Smooth aX]
     (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
       (D(((F z).toZ)^*[ModuleCat.{u + 1} Λ]).map (fundamentalClassMap Λ c i aX hZ)))
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
+/-- Purity for regular closed immersions
 
 **(b) The fundamental class generates.** `[Z ⊂ X]` generates `𝓗⁰(Ri^! Λ_X(c)[2c])` at every
 geometric point: the map of sheaves `Λ_Z ⟶ 𝓗⁰(Ri^! Λ_X(c)[2c])` induced by `cl_i` is an
@@ -147,8 +147,7 @@ theorem isIso_homology_zero_map_fundamentalClassMap (aX : X ⟶ Spec (.of k)) [S
   have := isIso_fundamentalClassMap Λ c i aX hZ
   inferInstance
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
+/-- Compatibilities of purity for regular immersions
 
 **Finite reduction** (item 4). Reduction of coefficients along a quotient `Λ ⟶ Λ / J`
 (`AlgebraicGeometry.Etale.reductionModIdeal`, `K ↦ K ⊗ᴸ (Λ / J)`; for `Λ = A_{E,n}` and

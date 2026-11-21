@@ -15,7 +15,6 @@ import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 # Linear independence of invariant matrices survives scalar extension
 
 Source: Stacks Project, Tag 03R6, coefficient uniqueness in finite Galois descent.
-(blueprint: lem-sc-matrix-descent-invariants-linear-independent).
 -/
 
 @[expose] public section
@@ -27,20 +26,7 @@ namespace Field
 /-- A base-field independent family of twisted invariant matrices remains independent
 in the ambient matrix space over the separable closure.
 
-Proof: it suffices to treat finite subfamilies. Induct on their size. If the last
-vector is in the separable-closure span of the previous ones, its coefficients
-are unique by the inductive independence hypothesis. Apply each twisted Galois
-map to this expansion. Every vector is fixed, and semilinearity applies the
-Galois automorphism to each coefficient, so uniqueness says the coefficients
-are fixed by every automorphism. The fixed field of the separable closure is K.
-The expansion therefore has coefficients in K, contradicting the original
-K-linear independence. The empty family is independent; the argument also
-applies to the zero matrix space when n=0. No local constancy or action law for
-b is needed: only invertibility of each b(g) and invariance of these vectors.
-
-Source: Stacks Project, Tag 03R6, coefficient uniqueness argument of step 4 of
-lem-sc-matrix-descent-scalar-map-bijective.
-(blueprint: lem-sc-matrix-descent-invariants-linear-independent). -/
+Source: Stacks Project, Tag 03R6, coefficient uniqueness argument of step 4 of. -/
 theorem matrixDescentInvariants_linearIndependent (K : Type u) [Field K] (n : ℕ)
     (b : (SeparableClosure K ≃ₐ[K] SeparableClosure K) →
       Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))

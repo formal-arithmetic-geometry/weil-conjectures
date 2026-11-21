@@ -17,8 +17,7 @@ import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
 /-!
 # Maximal p-independent supersets
 
-Source: Stacks Project, More on Algebra, Lemma Tag 07P2, third proof paragraph
-(blueprint: lem-weil-pbc-p-independent-maximal-superset).
+Source: Stacks Project, More on Algebra, Lemma Tag 07P2, third proof paragraph.
 -/
 
 @[expose] public section
@@ -68,18 +67,8 @@ private theorem pIndependent_iff_supported
   rfl
 
 /-- Every p-independent subset lies in a maximal p-independent subset.
-Source: Stacks Project, More on Algebra, Definition Tag 07P1 and Lemma Tag 07P2,
-third proof paragraph (blueprint: lem-weil-pbc-p-independent-maximal-superset).
-
-Proof:
-1. Order the p-independent subsets containing S by inclusion. S belongs to this order.
-2. For a nonempty chain, take its union. A finite relation among bounded monomials
-   uses only finitely many generators. Successive comparison in the chain puts all
-   these generators in a single member. Restrict the exponent functions to that member;
-   they retain their products and remain distinct. Its independence kills the relation.
-   For the empty chain take S itself as upper bound.
-3. Apply zorn_subset to this order. The resulting T is maximal even among all
-   p-independent subsets, since every superset of T still contains S.
+Source: Stacks Project, More on Algebra, Definition Tag 07P1 and Lemma Tag 07P2, third proof
+paragraph.
 -/
 theorem exists_maximal_pIndependent_superset
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]

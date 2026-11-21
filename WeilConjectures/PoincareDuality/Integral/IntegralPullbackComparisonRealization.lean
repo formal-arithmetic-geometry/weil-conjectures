@@ -76,10 +76,7 @@ import WeilConjectures.TraceFormula.Supporting.SimultaneousIntegralPullbackCompa
 /-!
 # Realization of integral pullback comparisons
 
-Source: Stacks Project, Tags 099N(2),(5), 0D6D, 06YY and 0941; blueprint
-`sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md`,
-final common-stage transport paragraph
-(blueprint: lem-trf-integral-pullback-comparison-realization).
+Source: Stacks Project, Tags 099N(2),(5), 0D6D, 06YY and 0941.
 
 The sequence site retains the whole quotient diagram. Its pullback is the left
 adjoint of the actual sectionwise direct image. Scalar change is the universal
@@ -107,10 +104,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The strict-system realization of integral pullback comparisons, including
 the normalized counit construction, finite reductions, and all coherence laws.
-Source: Stacks Project, Tags 099N(2),(5), 0D6D, 06YY and 0941; blueprint
-`sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md`,
-final common-stage transport paragraph
-(blueprint: lem-trf-integral-pullback-comparison-realization).
+Source: Stacks Project, Tags 099N(2),(5), 0D6D, 06YY and 0941.
 
 Proof (the DAG proof plan):
 

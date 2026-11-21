@@ -22,10 +22,7 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 /-!
 # Strict principal reduction and its compatible cone comparisons
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-`sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md`,
-Cones paragraph; Stacks Tag 014E, definition-cone
-(blueprint: lem-pe-principal-reduction-cone-calculus).
+Source: Stacks Tag 014E.
 
 Positive level n+1 is indexed by n : ℕ, as in AdicCompletion. Cone coordinates
 are ordered target, shifted source. The comparison is one natural family,

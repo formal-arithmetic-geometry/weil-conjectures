@@ -10,8 +10,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Completed tensor square for scalar/reindexing transitions
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-scalar-normalization-diagram).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -64,10 +63,7 @@ private theorem associatorComponent
     (Functor.associator F G H).hom.app K ≫ f = f := by
   exact Category.id_comp f
 
-/-- The hβ compatibility for the named tensor descent diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-scalar-normalization-diagram).
-Proof: Use the defining unique normalization of scalarTensorOrdinary on the chosen good pair. -/
+/-- The hβ compatibility for the named tensor descent diagram. -/
 theorem podTensorScalarRepresentativeNormalizationDiagram
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

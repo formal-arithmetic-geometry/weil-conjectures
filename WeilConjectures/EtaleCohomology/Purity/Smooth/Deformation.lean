@@ -30,9 +30,9 @@ Given a deformation datum `g̃ : 𝒟_s V ⟶ 𝔸¹_B` with section `s̃`
 `F = Ls̃^* ω_{g̃}`. The blueprint argument has three steps:
 
 * étale-locally on `B` the family is the standard family `a^* 𝒞(𝔸^d, 0)`, so `F` and `𝒞(g, s)`
-  are shifts and twists of lisse rank-one sheaves (`lem-pur-concentrated-complex-shift`);
-* the normalized local comparisons `F ≅ La^* 𝒞(g, s)` glue, by `𝔸¹`-invariance
-  (`lemma-section-normal-bundle--1`), to a global one, for the projection `a : 𝔸¹_B ⟶ B`;
+  are shifts and twists of lisse rank-one sheaves;
+* the normalized local comparisons `F ≅ La^* 𝒞(g, s)` glue, by `𝔸¹`-invariance,
+to a global one, for the projection `a : 𝔸¹_B ⟶ B`;
 * restricting to `t = 0` gives `𝒞(g, s) ≅ 𝒞(π_N, 0_N)`, the fibres of `F` at `t = 1` and
   `t = 0` being the two section invariants by base change for the cohomologically smooth `g̃`.
 
@@ -40,11 +40,11 @@ Given a deformation datum `g̃ : 𝒟_s V ⟶ 𝔸¹_B` with section `s̃`
 
 The deformation space is carried as data, not constructed (see
 `WeilConjectures.AlgebraicGeometry.DeformationToNormalCone`). Its étale-local coordinates
-(`prose-09-12` (2), (4), (5)) are a field of the datum; from them,
+ are a field of the datum; from them,
 `AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.exists_etale_nonempty_iso_familyObject`
 computes the family object over an étale cover of `B` as the one of the standard pair
 `(𝔸^d → B, 0)`, pulled back from the base. The sheaf-theoretic inputs are base change for the
-smooth `g̃` and `Re^! ≅ e^*` for an étale `e` (`lem-pur-co-smooth-etale-locality`).
+smooth `g̃` and `Re^! ≅ e^*` for an étale `e`.
 
 The family comparison `κ : F ≅ La^* 𝒞(g, s)` is pinned down by its restriction `θ` at `t = 1`
 (`AlgebraicGeometry.Scheme.Hom.DeformationToNormalConeData.existsUnique_familyObject_iso`), so
@@ -111,7 +111,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
 omit [Finite Λ] in
-/-- Blueprint `lem-pur-concentrated-complex-shift`: Complexes with cohomology in a single degree
+/-- Complexes with cohomology in a single degree
 
 *Shifts and twists of lisse rank-one sheaves are detected on an étale cover.* Let
 `u : U ⟶ T` be surjective and étale and `K ∈ D(T_ét, Λ)` with `Lu^* K ≅ Λ_U(m)[2m]`. Then
@@ -152,13 +152,13 @@ theorem exists_nonempty_iso_twistShift_of_leftDerivedUpperStar_iso {U T : Scheme
     ((pointSmallEtale x').uliftSheafFiberIso _).symm.app _ ≪≫ sheafFiberUnitIso _ x'⟩
 
 omit [HasTateTwist Λ] in
-/-- Blueprint `prose-09-12`: Geometry of the deformation
+/-- Geometry of the deformation
 
 *Base change of section invariants*, the input of the two fibre identifications
 `i₁^* F ≅ 𝒞(g, s)` and `i₀^* F ≅ 𝒞(π_N, 0_N)` of clause (1). In a cartesian square with
 `f : X ⟶ Y` smooth and separated and sections `s` of `f` and `s'` of its base change `f'`
 compatible with `g' : X' ⟶ X`, base change for the cohomologically smooth `f`
-(`proposition-exceptional-inverse-image-smooth-morphism` (c)) gives `Lg^* 𝒞(f, s) ≅ 𝒞(f', s')`.
+ gives `Lg^* 𝒞(f, s) ≅ 𝒞(f', s')`.
 Smooth base change needs the base `Y` to be quasi-separated and `f'` to be quasi-compact. -/
 theorem nonempty_iso_leftDerivedUpperStar_sectionInvariant {X Y X' Y' : Scheme.{u}} {d : ℕ}
     (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] [HasCompactification f]
@@ -184,7 +184,7 @@ a quasi-compact open immersion and `c : W ⟶ 𝔸^d_T` a quasi-compact étale m
   ≅ Lσ^* Lc^* ω_π`,
 
 by `Rj^! ≅ j^*` for the open immersion `j`, the composition of exceptional inverse images, and
-`Rc^! ≅ Lc^*` on `D^b_{ctf}` for the étale `c` (`lem-pur-co-smooth-etale-locality`). -/
+`Rc^! ≅ Lc^*` on `D^b_{ctf}` for the étale `c`. -/
 theorem nonempty_iso_sectionInvariant_of_etale_chart {X W T : Scheme.{u}} {d : ℕ}
     (g' : X ⟶ T) [HasCompactification g'] (j : W ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (c : W ⟶ 𝔸(ULift.{u} (Fin d); T)) [_root_.AlgebraicGeometry.Etale c] [QuasiCompact c]
@@ -224,7 +224,7 @@ open _root_.AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}} {d : ℕ}
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
 
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section
+/-- Deformation space of a closed section
 
 The *family object* `F = Ls̃^* ω_{g̃}` on `𝔸¹_B` of a deformation datum: the section invariant
 of the deformation `g̃ : 𝒟_s V ⟶ 𝔸¹_B` and its section `s̃`. -/
@@ -243,7 +243,7 @@ theorem hasInvertibleExponent_scheme : HasInvertibleExponent Λ D.scheme :=
 
 omit [HasTateTwist Λ] in
 /-- The family object is ⊗-invertible: `ω_{g̃}` is by cohomological smoothness of the smooth
-separated `g̃` (`proposition-exceptional-inverse-image-smooth-morphism` (a)), and derived pullback
+separated `g̃`, and derived pullback
 along `s̃` preserves invertibility. -/
 theorem isInvertible_familyObject :
     Etale.DerivedCategory.isInvertible Λ 𝔸(ULift.{u} (Fin 1); B) (D.familyObject Λ) :=
@@ -254,8 +254,8 @@ theorem isInvertible_familyObject :
 variable [HasCompactification g]
 
 omit [HasTateTwist Λ] in
-/-- The fibre of the family at `t = 1` is the section invariant of `(g, s)`
-(`prose-09-12` (1)): `Li₁^* F ≅ 𝒞(g, s)`, by base change for `g̃` along the
+/-- The fibre of the family at `t = 1` is the section invariant of `(g, s)`:
+`Li₁^* F ≅ 𝒞(g, s)`, by base change for `g̃` along the
 unit section. -/
 theorem nonempty_iso_leftDerivedUpperStar_oneSection_familyObject [QuasiSeparatedSpace B]
     [QuasiCompact g] :
@@ -271,7 +271,7 @@ variable {k : Type u} [Field k] (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [Loca
 
 omit [HasCompactification g] in
 include aB in
-/-- Blueprint `prose-09-12`: Geometry of the deformation
+/-- Geometry of the deformation
 
 *Clauses (2), (4) and (5): the family is étale-locally the standard family.* There is a
 surjective étale `u : B' ⟶ B`, with `B'` separated of finite type over `k`, over which
@@ -284,11 +284,10 @@ and an étale `c : W ⟶ 𝔸^d_{𝔸¹_{B'}}` over `𝔸¹_{B'}` carrying `σ` 
 
 `F|_{𝔸¹_{B'}} ≅ Lσ^* Lj^* ω_{g'} ≅ Lσ^* Rj^! ω_{g'} ≅ Lσ^* Rc^! ω_π ≅ Lσ^* Lc^* ω_π ≅ L0^* ω_π`,
 
-by base change for `g̃` (`proposition-exceptional-inverse-image-smooth-morphism` (c)), `Rj^! ≅ j^*`
+by base change for `g̃`, `Rj^! ≅ j^*`
 for the open immersion `j`, the composition of exceptional inverse images along `j ≫ g' = c ≫ π`,
-and `Rc^! ≅ c^*` for the étale `c` (`lem-pur-co-smooth-etale-locality`). Both `L0^* ω_π` and
-`a'^* 𝒞(𝔸^d_{B'} → B', 0)` are `Λ(d)[2d]` by affine-space purity
-(`proposition-purity-vector-bundles`). -/
+and `Rc^! ≅ c^*` for the étale `c`. Both `L0^* ω_π` and
+`a'^* 𝒞(𝔸^d_{B'} → B', 0)` are `Λ(d)[2d]` by affine-space purity. -/
 theorem exists_etale_nonempty_iso_familyObject [HasTateTwist.IsNormalized Λ]
     [QuasiCompact D.proj] :
     ∃ (B' : Scheme.{u}) (u : B' ⟶ B), _root_.AlgebraicGeometry.Etale u ∧ Surjective u ∧
@@ -314,7 +313,6 @@ theorem exists_etale_nonempty_iso_familyObject [HasTateTwist.IsNormalized Λ]
   obtain ⟨e₁⟩ := nonempty_iso_leftDerivedUpperStar_sectionInvariant Λ (d := d) D.proj
     (IsPullback.of_hasPullback D.proj v₁) D.sect (σ ≫ j) ((Category.assoc _ _ _).trans hσj)
   -- `𝒞(g', σ ≫ j) ≅ 𝒞(𝔸^d_T → T, 0)` through the chart, with `ω_π ≅ Λ(d)[2d]`
-  -- (`proposition-purity-vector-bundles`)
   obtain ⟨ω⟩ := nonempty_iso_dualizingComplex_affineSpace Λ d T (T ↘ B' ≫ v ≫ aB)
   obtain ⟨e₂⟩ := nonempty_iso_sectionInvariant_of_etale_chart Λ (pullback.snd D.proj v₁) j c hjc
     σ hσc ((boundedConstructibleFiniteTor_tateObject Λ _ d).shift (2 * d))
@@ -334,7 +332,7 @@ include aB in
 /-- The étale-local data of the family used by `lemma-section-normal-bundle--1`: over the cover
 `u : B' ⟶ B` of `prose-09-12` (2), with `v₁ : 𝔸¹_{B'} ⟶ 𝔸¹_B` its base
 change, the family is `Lv₁^* F ≅ La'^* 𝒞₀` for the standard section invariant
-`𝒞₀ = 𝒞(𝔸^d_{B'} → B', 0) ≅ Λ_{B'}(d)[2d]` (`proposition-purity-vector-bundles`), and restricting at
+`𝒞₀ = 𝒞(𝔸^d_{B'} → B', 0) ≅ Λ_{B'}(d)[2d]`, and restricting at
 `t = 1` gives `φ : Lu^* 𝒞(g, s) ≅ 𝒞₀`, related to the base change `θ : Li₁^* F ≅ 𝒞(g, s)` by
 `Li₁'^* e = (Li₁'^* Lv₁^* F ≅ Lu^* Li₁^* F) ≫ Lu^* θ ≫ φ` up to `Li₁'^* La'^* ≅ 𝟭`. -/
 theorem exists_etale_familyObject_data [QuasiCompact D.proj]
@@ -377,13 +375,12 @@ theorem exists_etale_familyObject_data [QuasiCompact D.proj]
   exact (Iso.hom_inv_id_assoc (dF ≪≫ (L((u)^*[ModuleCat.{u + 1} Λ])).mapIso θ) _).symm
 
 include D aB in
-/-- Blueprint `lemma-section-normal-bundle--1`: The deformation family is constant along the
-affine line
+/-- The deformation family is constant along the affine line
 
 *Clause (1) for the section invariant.* There is a finite locally constant sheaf `L₁` on `B`,
 free of rank one at every geometric point, with `𝒞(g, s) ≅ L₁(d)[2d]`: over the étale cover of
-`prose-09-12` (2) it is the standard section invariant `Λ(d)[2d]`
-(`proposition-purity-vector-bundles`), and `lem-pur-concentrated-complex-shift` applies. -/
+`prose-09-12` (2) it is the standard section invariant `Λ(d)[2d]`,
+and `lem-pur-concentrated-complex-shift` applies. -/
 theorem exists_nonempty_iso_sectionInvariant_twistShift [QuasiCompact D.proj] :
     ∃ L : Sheaf B.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsFiniteLocallyConstantSheaf L ∧
       (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ B),
@@ -397,13 +394,12 @@ theorem exists_nonempty_iso_sectionInvariant_twistShift [QuasiCompact D.proj] :
   exact exists_nonempty_iso_twistShift_of_leftDerivedUpperStar_iso Λ u d _ (φ ≪≫ c)
 
 include aB in
-/-- Blueprint `lemma-section-normal-bundle--1`: The deformation family is constant along the
-affine line
+/-- The deformation family is constant along the affine line
 
 *Clause (1), the family is a shift of a lisse line.* There is a finite locally constant sheaf
 `L_F` on `𝔸¹_B`, free of rank one at every geometric point, with `F ≅ L_F(d)[2d]`: over the
 étale cover of `prose-09-12` (2) the family is the pullback of the standard
-section invariant `Λ(d)[2d]` (`proposition-purity-vector-bundles`), and
+section invariant `Λ(d)[2d]`, and
 `lem-pur-concentrated-complex-shift` applies. The same statement for `𝒞(g, s)` is
 `exists_nonempty_iso_sectionInvariant_twistShift`. -/
 theorem exists_nonempty_iso_familyObject_twistShift [QuasiCompact D.proj] :
@@ -433,8 +429,7 @@ theorem exists_nonempty_iso_familyObject_twistShift [QuasiCompact D.proj] :
       (twistShift Λ _ d).mapIso (leftDerivedUpperStarConstantComplexIso Λ _))
 
 include aB in
-/-- Blueprint `lemma-section-normal-bundle--1`: The deformation family is constant along the
-affine line
+/-- The deformation family is constant along the affine line
 
 *Clause (2), constancy along the affine line.* For the projection `a : 𝔸¹_B ⟶ B` there is an
 isomorphism
@@ -446,8 +441,7 @@ so that the family object is the pullback of its own fibre `𝒞(g, s)` at `t = 
 Over the étale cover `u : B' ⟶ B` of `prose-09-12` (2) the family is
 `La'^* 𝒞₀` for the standard section invariant `𝒞₀ ≅ Λ(d)[2d]`, which gives the local shape
 and, through the fibre `φ : Lu^* 𝒞(g, s) ≅ 𝒞₀` at `t = 1`, a comparison
-`κ' : Lv₁^* F ≅ La'^* Lu^* 𝒞(g, s)` normalized at `t = 1`. These glue by `𝔸¹`-invariance
-(`lemma-section-normal-bundle--1`). -/
+`κ' : Lv₁^* F ≅ La'^* Lu^* 𝒞(g, s)` normalized at `t = 1`. These glue by `𝔸¹`-invariance. -/
 theorem nonempty_iso_familyObject_leftDerivedUpperStar [QuasiCompact D.proj] :
     Nonempty (D.familyObject Λ ≅
       (L((𝔸(ULift.{u} (Fin 1); B) ↘ B)^*[ModuleCat.{u + 1} Λ])).obj (sectionInvariant Λ g s)) := by
@@ -489,8 +483,7 @@ theorem nonempty_iso_familyObject_leftDerivedUpperStar [QuasiCompact D.proj] :
   exact ⟨κ⟩
 
 include aB in
-/-- Blueprint `lemma-section-normal-bundle--1`: The deformation family is constant along the
-affine line
+/-- The deformation family is constant along the affine line
 
 *Clause (3), normalization and uniqueness.* For every identification
 `θ : i₁^* F ≅ 𝒞(g, s)` of the fibre of the family at `t = 1` (for instance the base change
@@ -501,8 +494,7 @@ there is a unique isomorphism `κ : F ≅ La^* 𝒞(g, s)` restricting to `θ` a
 
 Existence: twist any comparison of clause (2) by the automorphism of `𝒞(g, s)` measuring its
 failure to restrict to `θ`. Uniqueness: `F` is invertible, and a comparison between an
-invertible complex on `𝔸¹_B` and a pullback from `B` is determined at `t = 1`
-(`lemma-section-normal-bundle--1`). -/
+invertible complex on `𝔸¹_B` and a pullback from `B` is determined at `t = 1`. -/
 theorem existsUnique_familyObject_iso [QuasiCompact D.proj]
     (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).obj
       (D.familyObject Λ) ≅ sectionInvariant Λ g s) :
@@ -531,8 +523,7 @@ theorem existsUnique_familyObject_iso [QuasiCompact D.proj]
   exact hκ.trans ((key κ₀ ψ).trans hψ).symm
 
 omit [HasTateTwist.IsNormalized Λ] in
-/-- Blueprint `lemma-section-normal-bundle--1`: The deformation family is constant along the
-affine line
+/-- The deformation family is constant along the affine line
 
 *Clause (4), base change.* The normalized comparison commutes with arbitrary base change
 `u : B' ⟶ B`, in particular with étale localization on `B`. Let `κ : F ≅ La^* 𝒞(g, s)` restrict
@@ -611,18 +602,17 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {V B : Scheme.{u}}
 
-/-- Blueprint `lemma-section-normal-bundle`: DNC invariance of the section dualizing line
+/-- DNC invariance of the section dualizing line
 
 Let `g : V ⟶ B` be smooth of pure relative dimension `d` with a closed section `s`, over a base
 `B` separated of finite type over a field, let `N_s ⟶ B` be its normal cone with zero section
-`0_N`, and let `g̃ : 𝒟_s V ⟶ 𝔸¹_B` be a deformation to the normal cone (the situation of
-`prose-09-12`). There is an isomorphism
+`0_N`, and let `g̃ : 𝒟_s V ⟶ 𝔸¹_B` be a deformation to the normal cone. There is an isomorphism
 
 `𝒞(g, s) ≅ 𝒞(π_N, 0_N)`
 
 between the two section invariants. It is `i₀^*` of the comparison `κ : F ≅ La^* 𝒞(g, s)` of
-`lemma-section-normal-bundle--1` (2), the fibre `i₀^* F` being `𝒞(π_N, 0_N)` by base change
-(`prose-09-12` (1)). This is also blueprint `lemma-section-normal-bundle--1`. -/
+`lemma-section-normal-bundle--1` (2), the fibre `i₀^* F` being `𝒞(π_N, 0_N)` by base change.
+This is also blueprint `lemma-section-normal-bundle--1`. -/
 -- The normalization in coordinates and the uniqueness are
 -- `AlgebraicGeometry.Etale.existsUnique_iso_sectionInvariant_normalCone`.
 theorem nonempty_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d : ℕ)
@@ -645,11 +635,11 @@ theorem nonempty_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] 
     (L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) B)^*[ModuleCat.{u + 1} Λ])).mapIso κ.symm ≪≫
     e₀⟩
 
-/-- Blueprint `lemma-section-normal-bundle`: DNC invariance of the section dualizing line
+/-- DNC invariance of the section dualizing line
 
 *Existence, compatibly with every base change.* Fix identifications `θ₁ : i₁^* F ≅ 𝒞(g, s)` and
-`θ₀ : i₀^* F ≅ 𝒞(π_N, 0_N)` of the two fibres of the family object
-(`prose-09-12` (1)). There is an isomorphism `Ψ : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)` such
+`θ₀ : i₀^* F ≅ 𝒞(π_N, 0_N)` of the two fibres of the family object.
+There is an isomorphism `Ψ : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)` such
 that for every base change `u : B' ⟶ B` and every `e : Lv₁^* F ≅ La'^* C₀` carrying the
 restricted family to one pulled back from `C₀` on `B'`, reading `e` at `t = 1` and at `t = 0` as
 `φ₁ : Lu^* 𝒞(g, s) ≅ C₀` and `φ₀ : Lu^* 𝒞(π_N, 0_N) ≅ C₀`, one has `Lu^* Ψ = φ₁ ≫ φ₀⁻¹`.
@@ -728,11 +718,11 @@ theorem exists_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized Λ] (d
   ext
   simp
 
-/-- Blueprint `lemma-section-normal-bundle`: DNC invariance of the section dualizing line
+/-- DNC invariance of the section dualizing line
 
 *Normalization in coordinates and uniqueness.* Fix identifications `θ₁ : i₁^* F ≅ 𝒞(g, s)` and
-`θ₀ : i₀^* F ≅ 𝒞(π_N, 0_N)` of the two fibres of the family object
-(`prose-09-12` (1)). Let `u : B' ⟶ B` be surjective and
+`θ₀ : i₀^* F ≅ 𝒞(π_N, 0_N)` of the two fibres of the family object.
+Let `u : B' ⟶ B` be surjective and
 `e : Lv₁^* F ≅ La'^* C₀` coordinates over `B'` carrying the family to a standard one, pulled back
 from `C₀` on `B'` (for instance those of `prose-09-12` (2), (4), with
 `C₀ = 𝒞(𝔸^d_{B'}, 0)`). Reading `e` at `t = 1` and at `t = 0` gives `φ₁ : Lu^* 𝒞(g, s) ≅ C₀` and
@@ -777,7 +767,7 @@ theorem existsUnique_iso_sectionInvariant_normalCone [HasTateTwist.IsNormalized 
         CategoryTheory.Functor.map_id])
   exact Iso.ext ((Iso.comp_inv_eq_id _).mp this)
 
-/-- Blueprint `lemma-section-normal-bundle`: DNC invariance of the section dualizing line
+/-- DNC invariance of the section dualizing line
 
 *Compatibility with étale localization and arbitrary base change in `B`.* Let
 `Ψ : 𝒞(g, s) ≅ 𝒞(π_N, 0_N)` be the DNC isomorphism, normalized as in
@@ -786,8 +776,8 @@ Then for every base change `u' : B'' ⟶ B` (for instance an étale localization
 identification `e' : Lv₁'^* F ≅ La''^* C₀'` of the restricted family with one pulled back from
 `B''`, `Lu'^* Ψ` is the isomorphism `φ₁' ≫ φ₀'⁻¹` read off from `e'` at `t = 1` and `t = 0`.
 
-For `e'` the comparison `κ'` of the restricted family normalized against `Lu'^* θ₁`
-(`lemma-section-normal-bundle--1` (4)), this says that `Lu'^* Ψ` is the DNC isomorphism of the
+For `e'` the comparison `κ'` of the restricted family normalized against `Lu'^* θ₁`,
+this says that `Lu'^* Ψ` is the DNC isomorphism of the
 family restricted to `B''`. -/
 theorem leftDerivedUpperStar_mapIso_iso_sectionInvariant_normalCone
     [HasTateTwist.IsNormalized Λ] (d : ℕ)

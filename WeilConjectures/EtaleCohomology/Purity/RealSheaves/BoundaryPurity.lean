@@ -14,14 +14,12 @@ public import Mathlib.LinearAlgebra.Matrix.FiniteDimensional
 
 Let `𝒢` be a lisse Weil sheaf on a smooth geometrically connected curve `C₀` over `𝔽_q`, and
 `U₀ ⊆ C₀` a nonempty open on which `𝒢` is punctually `ι`-pure of weight `w`. Then `𝒢` is
-punctually `ι`-pure of weight `w` on all of `C₀` (the consequence in
-`corollary-unramified-boundary-point--2`, and the second assertion of
-`proposition-weights-j-boundary-points`).
+punctually `ι`-pure of weight `w` on all of `C₀`.
 
 The argument is the one of `proposition-weights-j-boundary-points--1`, for the lisse sheaf
-`𝒢 = j_* j^* 𝒢` (`lemma-boundary-stalk--2`), whose boundary stalks are its own stalks. On an affine
+`𝒢 = j_* j^* 𝒢`, whose boundary stalks are its own stalks. On an affine
 neighbourhood `X'₀` of a closed point `s`, the Euler product of `𝒢`
-(`theorem-trace-formula-euler-product--4`) splits into the Euler series over the closed points of
+ splits into the Euler series over the closed points of
 `X'₀ ∩ U₀` and the finitely many local factors at the points of `X'₀ \ U₀`:
 
 `L (X'₀ ∩ U₀, 𝒢, T) · ι det (1 - F T ∣ H_c²) = P · ∏_{s ∈ X'₀ \ U₀} ι P_s (𝒢, T ^ e_s)`.
@@ -282,7 +280,7 @@ Let `C₀` be a smooth geometrically connected affine curve, `ℱ` lisse on `C�
 closed points with finite complement, containing some point `x₀`, at which `ℱ` has weights at
 most `β`. Then every local eigenvalue of `ℱ`, at any closed point, has weight at most `β + 2`.
 
-By the Euler product of `ℱ` (`theorem-trace-formula-euler-product--4`), split into the Euler product
+By the Euler product of `ℱ`, split into the Euler product
 over `T` and the local factors at the points outside `T`
 (`AlgebraicGeometry.WeilGroup.eulerSeries_eq_tprod_mul_prod`), the product `B` of the local
 polynomials outside `T` satisfies `L (T, ℱ, T) · ι det (1 - F T ∣ H_c²) = P · B`. The eigenvalues
@@ -497,8 +495,8 @@ theorem hasWeightsAtMost_of_forall_mem_range [SmoothOfRelativeDimension 1 p]
   exact frobeniusWeight_le_of_isAffine W' l (ρ.comp R.restrict) ι (R.isLisse_comp l hρ) hT hx₀
     hw' _ α hα
 
-/-- Blueprint `corollary-unramified-boundary-point--2`: Purity at an unramified boundary point, the
-consequence. Also the second assertion of `proposition-weights-j-boundary-points`.
+/-- Purity at an unramified boundary point, the consequence. Also the second assertion of
+`proposition-weights-j-boundary-points`.
 
 A lisse Weil sheaf `𝒢` on a smooth geometrically connected curve `C₀` which is punctually
 `ι`-pure of weight `w` at the closed points of a nonempty open `U₀` is punctually `ι`-pure of

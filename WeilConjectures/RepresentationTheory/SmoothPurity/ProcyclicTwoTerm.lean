@@ -22,9 +22,6 @@ import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Two-term continuous cohomology of the additive l-adic integers
-
-Source: blueprint, sec-smooth-purity/sk-prop-a1-kummer/lem-exc-procyclic-two-term,
-statement and proof (blueprint: lem-exc-procyclic-two-term).
 -/
 
 -- After pruning, this module only keeps private declarations.

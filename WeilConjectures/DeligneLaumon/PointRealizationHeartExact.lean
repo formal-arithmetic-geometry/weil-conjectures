@@ -11,7 +11,7 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Exact restriction of point comparison data to full hearts
 
-Source: BBD 1.3.3--1.3.6 (blueprint: lem-a1-point-realization-heart-exact).
+Source: BBD 1.3.3--1.3.6.
 -/
 
 @[expose] public noncomputable section

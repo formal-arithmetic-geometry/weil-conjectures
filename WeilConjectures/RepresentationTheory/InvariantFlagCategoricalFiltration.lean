@@ -59,21 +59,7 @@ private theorem cokernel_inclusion_iso_quotient
 /-- Realize a stable vector-space flag with trivial rank-one factors as categorical
 monomorphisms and cokernels. This is independent of the existence of a Sylow cover.
 
-Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R
-(`lemma-pullback-filtered`), the representation-filtration step.
-(blueprint: lemma-reduction-unipotent-local-system--1)
-
-Proof: Put n = dim M and replace F i by F (min i n). These spaces are stable,
-since their indices are at most n. Equip each with the restricted representation.
-For i < n use the inclusion F i → F (i+1); thereafter use identities. The initial
-representation is zero because F 0 = 0, and the final representation is M because
-F n = M. The cokernel of an inclusion is the quotient representation
-F (i+1)/F i. Its dimension is one: induction using the given dimensions shows
-that dim F i = i, including the base dim F 0 = 0. The condition g*x-x ∈ F i
-makes its action trivial. Choose a basis of this one-dimensional quotient to
-identify it with the trivial representation ULift (ZMod ℓ). The cokernel universal
-property in Rep is the equivariant linear-map universal property of this quotient.
-For n = 0 use the zero representation throughout; there are no quotient conditions. -/
+Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R, the representation-filtration step. -/
 theorem exists_categorical_filtration_of_invariant_flag
     (ℓ : ℕ) [Fact ℓ.Prime] (P : Type u) [Group P]
     (M : Rep.{v} (ZMod ℓ) P) [FiniteDimensional (ZMod ℓ) M.V]

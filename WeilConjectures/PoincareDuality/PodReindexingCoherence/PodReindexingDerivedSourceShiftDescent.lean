@@ -24,9 +24,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Naturality descent of the source-shift square
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-A representative square descends through localization and K-injective resolutions.
-(blueprint: lem-pod-reindexing-source-shift-descent)
+Source: Stacks 0A8X and 08JA. A representative square descends through localization and
+K-injective resolutions.
 -/
 
 @[expose] public noncomputable section
@@ -73,14 +72,7 @@ set_option linter.unusedVariables false in
 open SheafOfModules in
 /-- Localization descent for the normalized source-shift square.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-Proof: represent the source by a localized complex and the target by a
-K-injective resolution.  Naturality of `c.derived` transports the square to
-the chosen representatives; cancel the resolution and localization
-isomorphisms, then use essential surjectivity of the localization.  The
-premise is the representative theorem, so this statement is strictly weaker
-than proving the representative calculation itself.
-(blueprint: lem-pod-reindexing-source-shift-descent) -/
+Source: Stacks 0A8X, 08JA. -/
 theorem derived_source_shift_descent
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

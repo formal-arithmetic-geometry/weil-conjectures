@@ -16,8 +16,7 @@ field `k₀`. For every boundary point `z` with closed point `x`, some conjugate
 chosen point `Q_z` over `z`, by an element `σ ∈ Gal(Ω / k(C))` lying in the Weil group, is
 compatible with the geometric point `x̄`, and hence gives a strictly henselian neighbourhood of
 the boundary point for the conjugated inertia group and residue Frobenius lift
-(`AlgebraicGeometry.WeilGroup.exists_boundaryNeighbourhood_conj`, blueprint
-`lemma-boundary-stalk--1`).
+(`AlgebraicGeometry.WeilGroup.exists_boundaryNeighbourhood_conj`).
 
 * The constant field of `k(C)` is `k₀`: for a finite extension `F / k₀`, the ring
   `Γ(C₀, W) ⊗_{k₀} F` is a domain, `C₀ ×_{k₀} F` being connected and regular
@@ -393,13 +392,13 @@ private lemma nonempty_boundaryChart_conjugate (x : C.finitePoints) (hz : x.1 �
       ← AlgEquiv.mul_apply, (Commute.pow_pow_self Φ n _).eq, mul_assoc, mul_inv_cancel, mul_one]
 
 omit [IsCurve (U ↘ Spec (.of K))] in
-/-- **Strictly henselian neighbourhoods of boundary points exist** (blueprint
-`lemma-boundary-stalk--1`). For a boundary point `z` with closed point `x`, there is
-`σ ∈ Gal(Ω / k(C))` whose image in `π₁(U₀)` lies in the Weil group (with some degree `n`) such that
-the conjugate `σ • Q_z` of the chosen point `Q_z` over `z` gives a strictly henselian
-neighbourhood of the boundary point, for its inertia group `σ I_z σ⁻¹` and the conjugate
-`σ σ_F σ⁻¹` of the residue Frobenius lift. The element `σ` acts on `k̄ ⊆ Ω` by a power of the
-geometric Frobenius, chosen so that `σ • Q_z` induces on `κ(x)` the embedding of `x̄`. -/
+/-- **Strictly henselian neighbourhoods of boundary points exist**. For a boundary point `z` with
+closed point `x`, there is `σ ∈ Gal(Ω / k(C))` whose image in `π₁(U₀)` lies in the Weil group
+(with some degree `n`) such that the conjugate `σ • Q_z` of the chosen point `Q_z` over `z` gives
+a strictly henselian neighbourhood of the boundary point, for its inertia group `σ I_z σ⁻¹` and
+the conjugate `σ σ_F σ⁻¹` of the residue Frobenius lift. The element `σ` acts on `k̄ ⊆ Ω` by a
+power of the geometric Frobenius, chosen so that `σ • Q_z` induces on `κ(x)` the embedding of
+`x̄`. -/
 theorem exists_boundaryNeighbourhood_conj (z : ↥((Set.range j.base)ᶜ)) (x : C.finitePoints)
     (hx : x.1 = z.1) :
     ∃ (σ : Gal(Ω/C.functionField)) (n : ℤ),

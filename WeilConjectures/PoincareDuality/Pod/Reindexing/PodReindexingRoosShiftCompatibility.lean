@@ -11,8 +11,7 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # The diagonal Roos map respects signed shifts
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-roos-shift-compatibility).
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -194,18 +193,7 @@ private theorem genericRoosShift
     (hleft.symm.trans (hright.trans (Category.comp_id _)))
 
 /-- The projection-normalized diagonal Roos map commutes with the signed cocone shift.
-Source: Stacks 011G, 0941, blueprint Steps 1 and 5
-(blueprint: lem-pod-reindexing-roos-shift-compatibility).
-
-Proof: compose each side with the shifted first cocone coordinate and with the
-second cocone coordinate in every degree. For the first coordinate, the diagonal
-Roos equations and the two prescribed shift equations reduce the assertion to
-naturality of the product comparison with shift. Verify that equality after each
-product projection, where the termwise shift comparison has identity components.
-For the second coordinate the same calculation has the scalar (-1)^r on both
-sides. Additivity transports this scalar, and the identity components of the
-termwise shift comparison leave it unchanged. The two coordinates jointly
-identify each component of the proposed chain maps. No boundedness is used. -/
+Source: Stacks 011G, 0941. -/
 theorem podReindexingRoosShiftCompatibility
     (SY : PodSignedRoosShift (scalarReductionSource l E Y))
     (SX : PodSignedRoosShift (scalarReductionSource l E X))

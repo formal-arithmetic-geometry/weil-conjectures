@@ -58,7 +58,7 @@ namespace AddCommGroup
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (M : Type u) [AddCommGroup M]
 
-/-- Blueprint `definition-tate-module`: Integral and rational Tate modules.
+/-- Integral and rational Tate modules.
 
 The *Tate module* `T_ℓ M` of an abelian group `M` at a prime `ℓ` is the subgroup of the product
 `∀ n : ℕ, M` consisting of the compatible systems `t` of `ℓ ^ n`-torsion points, that is, those
@@ -122,7 +122,7 @@ theorem appr_zsmul_coe_eq (t : tateModule ℓ M) (a : ℤ_[ℓ]) {n : ℕ} {x : 
     (a.appr n : ℤ) • (t : ∀ _ : ℕ, M) n = x • (t : ∀ _ : ℕ, M) n :=
   zsmul_coe_congr (dvd_sub_of_intCast_eq (by rw [Int.cast_natCast, natCast_appr, h]))
 
-/-- Blueprint `definition-tate-module`: Integral and rational Tate modules.
+/-- Integral and rational Tate modules.
 
 The Tate module `T_ℓ M` is a module over the ring `ℤ_[ℓ]` of `ℓ`-adic integers, acting
 coordinatewise: an `ℓ`-adic integer acts on the `n`-th coordinate through its reduction modulo
@@ -303,7 +303,7 @@ theorem nonempty_linearEquiv_of_natCard_eq (hdiv : ∀ x : M, ∃ y : M, (ℓ : 
 
 end tateModule
 
-/-- Blueprint `definition-tate-module`: Integral and rational Tate modules.
+/-- Integral and rational Tate modules.
 
 The *rational Tate module* `V_ℓ M = ℚ_[ℓ] ⊗_{ℤ_[ℓ]} T_ℓ M`. -/
 def rationalTateModule : Type u :=
@@ -327,8 +327,7 @@ theorem injective_one_tmul :
   exact (smul_eq_zero.mp hc).resolve_left (nonZeroDivisors.ne_zero c.2)
 
 variable {ℓ M} in
-/-- Blueprint `definition-tate-module`: rescaling a fraction. The fraction `ℓ ^ (-b) t`
-equals `ℓ ^ (-(b + c)) (ℓ ^ c t)` in `V_ℓ M`. -/
+/-- Rescaling a fraction. The fraction `ℓ ^ (-b) t` equals `ℓ ^ (-(b + c)) (ℓ ^ c t)` in `V_ℓ M`. -/
 theorem inv_pow_tmul_eq_inv_pow_add_tmul (b c : ℕ) (t : tateModule ℓ M) :
     ((ℓ : ℚ_[ℓ]) ^ b)⁻¹ ⊗ₜ[ℤ_[ℓ]] t =
       ((ℓ : ℚ_[ℓ]) ^ (b + c))⁻¹ ⊗ₜ[ℤ_[ℓ]] ((ℓ : ℤ_[ℓ]) ^ c • t) := by
@@ -340,7 +339,7 @@ theorem inv_pow_tmul_eq_inv_pow_add_tmul (b c : ℕ) (t : tateModule ℓ M) :
   ring
 
 variable {ℓ M} in
-/-- Blueprint `definition-tate-module`: Tate module of an abelian group.
+/-- Tate module of an abelian group.
 
 `V_ℓ M = T_ℓ M [1 / ℓ]`: every element of the rational Tate module is a fraction `ℓ ^ (-b) t`
 with `t ∈ T_ℓ M`. -/
@@ -359,7 +358,7 @@ theorem exists_eq_inv_pow_tmul (v : ℚ_[ℓ] ⊗[ℤ_[ℓ]] tateModule ℓ M) :
       inv_pow_tmul_eq_inv_pow_add_tmul c b, add_comm c b]
 
 variable {ℓ M} in
-/-- Blueprint `definition-tate-module`: Tate module of an abelian group.
+/-- Tate module of an abelian group.
 
 Equality of fractions in `V_ℓ M = T_ℓ M [1 / ℓ]`: `ℓ ^ (-b) t = ℓ ^ (-c) u` if and only if
 `ℓ ^ d (ℓ ^ c t - ℓ ^ b u) = 0` for some `d ≥ 0`. -/
@@ -397,7 +396,7 @@ theorem map_tmul (f : M →+ N) (a : ℚ_[ℓ]) (t : tateModule ℓ M) :
   rfl
 
 variable (ℓ) in
-/-- Blueprint `definition-tate-module`: Tate module of an abelian group.
+/-- Tate module of an abelian group.
 
 The fixed submodule `(V_ℓ M)^s` of an endomorphism `s` of `M` (in the blueprint an
 automorphism), which acts on `V_ℓ M` coordinatewise and on fractions through

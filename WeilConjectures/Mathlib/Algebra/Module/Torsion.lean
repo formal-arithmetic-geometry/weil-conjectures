@@ -57,15 +57,13 @@ variable (R) (M : Type*) [AddCommMonoid M] [Module R M]
 
 /-- The `a`-power-torsion submodule `Γ_(a)(M)` of an `R`-module `M`: the elements killed
 by some power of `a`. It is the `S`-torsion submodule for `S` the monoid of powers of `a`,
-so it is a submodule by construction.
-(Blueprint: `def:nagata-power-torsion`, `lemma:nagata-power-torsion-submodule`.) -/
+so it is a submodule by construction. -/
 def powTorsion (a : R) : Submodule R M :=
   torsion' R M (Submonoid.powers a)
 
 variable {R M} {a : R}
 
-/-- Membership in the power-torsion submodule.
-(Blueprint: `lemma:nagata-mem-power-torsion`.) -/
+/-- Membership in the power-torsion submodule. -/
 lemma mem_powTorsion_iff {m : M} : m ∈ powTorsion R M a ↔ ∃ n : ℕ, a ^ n • m = 0 := by
   rw [powTorsion, mem_torsion'_iff]
   constructor
@@ -85,8 +83,7 @@ theorem torsion'_eq_ker (S : Submonoid R) (f : M →ₗ[R] N) [IsLocalizedModule
   ext m
   rw [LinearMap.mem_ker, IsLocalizedModule.eq_zero_iff S, mem_torsion'_iff]
 
-/-- The power-torsion submodule is the kernel of the localization map `M → M_a`.
-(Blueprint: `lemma:nagata-power-torsion-kernel-localization`.) -/
+/-- The power-torsion submodule is the kernel of the localization map `M → M_a`. -/
 theorem powTorsion_eq_ker_localization (f : M →ₗ[R] N)
     [IsLocalizedModule (Submonoid.powers a) f] :
     powTorsion R M a = LinearMap.ker f :=
@@ -117,8 +114,7 @@ theorem localized'_torsion' (S : Submonoid R) (f : M →ₗ[R] N) [IsLocalizedMo
 
 /-- Localization of power torsion, the case `S = Submonoid.powers a` of
 `Submodule.localized'_torsion'`: the localization of `Γ_(a)(M)` is the power torsion of
-the localized module at the image of `a`.
-(Blueprint: `lemma:nagata-power-torsion-localization`.) -/
+the localized module at the image of `a`. -/
 theorem localized'_powTorsion (f : M →ₗ[R] N) [IsLocalizedModule p f] :
     (powTorsion R M a).localized' S' p f = powTorsion S' N (algebraMap R S' a) := by
   rw [powTorsion, localized'_torsion', powTorsion, Submonoid.map_powers]
@@ -155,13 +151,11 @@ theorem isSMulRegular_quotient_torsion' {s : R} (hs : s ∈ S) :
 
 variable (a : R)
 
-/-- The power-torsion quotient has no exceptional torsion.
-(Blueprint: `lemma:nagata-power-torsion-quotient-torsionfree`.) -/
+/-- The power-torsion quotient has no exceptional torsion. -/
 theorem powTorsion_quotient_eq_bot : powTorsion R (M ⧸ powTorsion R M a) a = ⊥ :=
   torsion'_quotient_eq_bot R M _
 
-/-- Multiplication by `a` is injective on the power-torsion quotient.
-(Blueprint: `lemma:nagata-power-torsion-quotient-torsionfree`.) -/
+/-- Multiplication by `a` is injective on the power-torsion quotient. -/
 theorem isSMulRegular_quotient_powTorsion :
     IsSMulRegular (M ⧸ powTorsion R M a) a :=
   isSMulRegular_quotient_torsion' R M (Submonoid.mem_powers a)
@@ -251,12 +245,10 @@ open Submodule
 variable {C B S : Type*} [CommRing C] [CommRing B] [CommRing S] [Algebra C S] {a : C}
   [IsLocalization.Away a S]
 
-/-- **Affine scheme-image saturation** (blueprint:
-`lemma:nagata-scheme-image-affine-saturation`). Let `f : C → B` be a ring map with kernel
-`K` (so that `C ⧸ K → B` is injective), and let `a : C` map to a unit of `B`. Then the
-kernel of the factorization `C → C[1/a] → B` is the `a`-saturation
-`{c | ∃ n, a ^ n * c ∈ K}` of `K`, and it is the inverse image of the `a`-power torsion
-`Γ_(a)(C ⧸ K)` under `C → C ⧸ K`.
+/-- **Affine scheme-image saturation**. Let `f : C → B` be a ring map with kernel `K` (so that
+`C ⧸ K → B` is injective), and let `a : C` map to a unit of `B`. Then the kernel of the
+factorization `C → C[1/a] → B` is the `a`-saturation `{c | ∃ n, a ^ n * c ∈ K}` of `K`, and it is
+the inverse image of the `a`-power torsion `Γ_(a)(C ⧸ K)` under `C → C ⧸ K`.
 
 On a blow-up chart this says that the scheme-theoretic image is the quotient by the
 `a`-power torsion, i.e. the strict-transform chart; the global form of that consequence is

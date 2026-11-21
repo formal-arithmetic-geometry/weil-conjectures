@@ -23,9 +23,9 @@ is one after `Li^*` (where `Li^* Ri_* ≅ 𝟭`) and after the restriction to th
 Together with the identifications `Ψ Λ_X ≅ Λ'_X` pulled back from the terminal scheme and a
 compatible family of identifications `Ψ(Λ_X(m)[2m]) ≅ Λ'_X(m)[2m]`
 (`AlgebraicGeometry.Etale.DerivedExtendScalarsTateShiftData`), this makes `Ψ` a change of
-coefficients with supports (`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange`,
-blueprint `proposition-compatibility-purity-change-coefficients`), to which
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso` applies.
+coefficients with supports (`AlgebraicGeometry.Etale.reductionSupportedCoefficientChange`), to
+which `AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`
+applies.
 
 ## Main definitions
 
@@ -262,8 +262,7 @@ structure DerivedExtendScalarsTateShiftData where
 
 variable [Finite Λ] [Finite Λ']
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
+/-- Change of coefficients in purity
 
 **The reduction of coefficients as a change of coefficients with supports.** For a surjective
 morphism `ρ : Λ →+* Λ'` of finite coefficient rings with principal kernel (for instance

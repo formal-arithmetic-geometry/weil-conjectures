@@ -118,8 +118,7 @@ theorem Etale.isIso_ihomComparison_constantSheaf_app (P Q : ModuleCat.{u + 1} Λ
     (constantSheafAdj X.smallEtaleTopology (ModuleCat.{u + 1} Λ) terminalIsTerminal).isLeftAdjoint
   exact ModuleCat.isIso_ihomComparison_app_of_finitePresentation _ P Q
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Rigidity of morphisms of finite locally
-constant sheaves
+/-- Rigidity of morphisms of finite locally constant sheaves
 
 *The Hom sheaf*, clause (1): for `Λ` noetherian, the internal hom `[L, M]` of two finite
 locally constant sheaves of `Λ`-modules on `X_ét` is finite locally constant. On a common

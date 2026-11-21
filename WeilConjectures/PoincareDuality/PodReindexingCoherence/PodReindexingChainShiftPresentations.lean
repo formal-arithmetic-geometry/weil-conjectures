@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexi
 
 /-! # Existence of the signed chain shift presentations
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: new-pod-reindexing-chain-shift-presentations).
+Source: Stacks 0A8X, 08JA.
 
 This is the presentation part of the chain-shift argument.  The remaining
 reindexing square is recorded separately in
@@ -90,8 +89,7 @@ The construction uses the product projections of the Hom complex.  In degree
  differential, so the projectionwise maps form chain isomorphisms.  This
 statement is the first, strictly smaller part of Step 4.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: new-pod-reindexing-chain-shift-presentations). -/
+Source: Stacks 0A8X, 08JA. -/
 theorem chain_shift_presentations
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

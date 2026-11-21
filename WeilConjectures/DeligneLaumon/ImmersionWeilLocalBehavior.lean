@@ -40,10 +40,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Immersion operations on constructible Weil pairs
 
-Source: blueprint main-20261015, sec-deligne-laumon-general/sk-l-dl-general-excision,
-lem-zl-morphism-open-closed-reduction.proof.md, Restriction and Part 2
-(blueprint: lem-zl-immersion-weil-local-behavior).
-
 The clause packages retain the canonical underlying comparisons. Weil complexes are
 fixed pairs, and no triangulated structure on their category is asserted.
 
@@ -76,9 +72,7 @@ variable (E : Type u) [Field E] [_root_.Algebra (Padic l) E] [FiniteDimensional 
 variable (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 include prime hl in
-/-- The geometric-fibre map is over the algebraic closure by its second projection.
-Source: blueprint base change convention
-(blueprint: lem-zl-immersion-weil-local-behavior). -/
+/-- The geometric-fibre map is over the algebraic closure by its second projection. -/
 instance immersionWeilFiberMap_isOver (j₀ : W₀ ⟶ X₀) :
     (((Over.pullback
         (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀).left).IsOver

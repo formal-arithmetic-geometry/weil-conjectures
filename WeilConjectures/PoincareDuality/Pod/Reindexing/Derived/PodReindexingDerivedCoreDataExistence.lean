@@ -18,8 +18,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingGoodComplex
 /-! Existence of the raw comparison maps for the derived reindexing core.
 
 The construction assembles the strict quotient, finite evaluation, and normalized
-Roos-limit comparisons.  The five normalization laws are separate obligations.
-(blueprint: lem-pod-reindexing-derived-core-data-existence) -/
+Roos-limit comparisons.  The five normalization laws are separate obligations. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -76,8 +75,7 @@ calculus nodes: take the induced derived reduction, finite evaluation and
 restriction maps, the normalized total-limit comparison, and the two normalized
 Roos models, together with the induced pullback comparison.  No normalization
 law is asserted here; those five laws are the separate split obligations used by
-the core theorem.
-(blueprint: lem-pod-reindexing-derived-core-data-existence) -/
+the core theorem. -/
 theorem podReindexingDerivedCoreData_exists
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

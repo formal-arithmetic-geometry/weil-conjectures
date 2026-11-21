@@ -13,11 +13,10 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator
 # The cohomology of `𝔸¹` and `𝔾ₘ` over an algebraically closed field, in the form used
 
 This file packages the Kummer computations of
-`WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator` (blueprint
-`thm-pur-kummer-affine-line`) in the form in which the relative statements over a base consume
-them: the model `𝔾_{m,k}` is the basic open of the coordinate
-(`AlgebraicGeometry.Etale.multiplicativeGroupModel`), and `H¹(𝔾_{m,k}, Λ) ≅ Λ` as a
-`Λ`-module (`AlgebraicGeometry.Etale.nonempty_iso_cohomology_one_multiplicativeGroup`).
+`WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClassGenerator` in the form in which the
+ relative statements over a base consume them: the model `𝔾_{m,k}` is the basic open of the
+ coordinate (`AlgebraicGeometry.Etale.multiplicativeGroupModel`), and `H¹(𝔾_{m,k}, Λ) ≅ Λ` as a
+ `Λ`-module (`AlgebraicGeometry.Etale.nonempty_iso_cohomology_one_multiplicativeGroup`).
 -/
 
 @[expose] public section

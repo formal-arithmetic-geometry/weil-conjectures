@@ -38,7 +38,7 @@ instance bot : (⊥ : Ideal A).IsHopfIdeal R where
   antipode_mem x hx := by simp_all
 
 /-- The convolution product of two algebra homomorphisms vanishing on a Hopf ideal vanishes on
-it. (blueprint: `det-d-geometry`) -/
+it. -/
 theorem convMul_apply_eq_zero {I : Ideal A} [I.IsHopfIdeal R] {f g : A →ₐ[R] B}
     (hf : ∀ a ∈ I, f a = 0) (hg : ∀ a ∈ I, g a = 0) {a : A} (ha : a ∈ I) :
     (toConv f * toConv g) a = 0 := by

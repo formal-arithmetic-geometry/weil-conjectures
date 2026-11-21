@@ -15,8 +15,7 @@ import all WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientScalarModelEx
 
 /-! # Reduction square component of the normalized coefficient transition
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-reduction).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -283,23 +282,7 @@ attribute [local irreducible] podReindexCalculus integralComparisonSequenceScala
 attribute [local irreducible] integralComparisonSystemScalarPullback podScalarReduction
 
 /-- The reduction square component of a normalized coefficient transition.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-reduction).
-Proof: choose a flat-term K-flat representative P of K and its whole-system
-coherent quotient presentation. The quotient-generator and quotient-transition
-laws for D and D′ identify their finite reindexing maps with the actual maps on
-these quotients. The formula hpure identifies the two scalar/reindexing routes on
-scalar-unit tensor generators. Balancedness extends this to all tensors, and
-sheafification gives equality of the maps of module sheaves. Apply this degreewise
-to P, retaining the actual quotient transition maps, to obtain equality of strict
-systems. The scalar model normalization identifies its cochain scalar counit with
-this same generator map, and its realization with the selected Roos comparison.
-Thus applying the whole-system counit to the equality of strict maps gives the
-claimed equality on P. The good-complex localization and naturality transport it
-along a K-flat resolution to K. Expanding podScalarReduction gives the displayed
-order of scalar completion, scalar realization, and counit. No choice of a new
-completion reindexing family is made: the quotient and realization laws identify
-the maps of the supplied D and D′ themselves.
+Source: Stacks 03EL, 06YY, 0941.
 
 Edge cases: for identity reindexing or identity scalar extension this is the
 corresponding normalized identity square. The generator and localization argument

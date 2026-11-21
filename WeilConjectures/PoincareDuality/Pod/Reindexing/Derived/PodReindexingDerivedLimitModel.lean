@@ -13,8 +13,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingLimitComplexM
 
 Raw comparison data do not normalize the limit map. We construct its replacement
 by descending the specified natural strict Roos comparison, while keeping the
-other raw fields and the completion comparisons fixed.
-(blueprint: lem-pod-reindexing-derived-core-limit-model) -/
+other raw fields and the completion comparisons fixed. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -53,16 +52,12 @@ private theorem descendIso {A B C : Type*} [Category* A] [Category* B] [Category
 
 /-- Construct the limit comparison by descending the full strict Roos map.
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 0941. STATEMENT-DISPUTED (old statement, repaired): the assertion for an
-arbitrary raw limit map was false: its sign
-could be changed independently. Here that map is replaced by the descent of the
-specified Roos comparison. The restricted generator law identifies the strict
-restriction comparison with the natural inverse-image unit. Compose this natural
-isomorphism with both normalized Roos models and the exact-functor localization
-comparisons. Fully faithful precomposition with the localization functor descends
-it uniquely; its component formula gives the full-limit-model equation.
-(blueprint: lem-pod-reindexing-derived-core-limit-model) -/
+Source: Stacks 0941. STATEMENT-DISPUTED (old statement, repaired): the assertion for an arbitrary
+raw limit map was false: its sign could be changed independently. Here that map is replaced by
+the descent of the specified Roos comparison. The restricted generator law identifies the strict
+restriction comparison with the natural inverse-image unit. Compose this natural isomorphism with
+both normalized Roos models and the exact-functor localization comparisons. Fully faithful
+precomposition with the localization functor descends it uniquely. -/
 theorem podReindexingDerivedCoreData_limitModel
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

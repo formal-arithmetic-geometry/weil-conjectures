@@ -167,8 +167,8 @@ variable {O E K G V ι : Type*} [CommRing O] [IsNoetherianRing O] [IsLocalRing O
   [Field E] [Algebra O E] [IsFractionRing O E] [Field K] [IsAlgClosed K] [Algebra E K]
   [Group G] [AddCommGroup V] [Module E V] [Fintype ι] [DecidableEq ι]
 
-/-- **Absolute irreducibility has a finite matrix witness**
-(blueprint: `lemma-detecting-irreducibility-finite-quotient--1`). Let `ρ` be a representation of `G`
+/-- **Absolute irreducibility has a finite matrix witness**.
+Let `ρ` be a representation of `G`
 on an `E`-vector space `V` with basis `b`, in which the matrices of `ρ` have entries in `O`, and
 assume that `ρ` is irreducible over an algebraically closed field `K ⊇ E`. Then there is
 `N ≥ 1` such that every subgroup `H ≤ G` whose matrices are congruent modulo `𝔪ᴺ` to all the

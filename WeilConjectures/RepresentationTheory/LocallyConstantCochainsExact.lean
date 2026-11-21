@@ -21,7 +21,6 @@ import WeilConjectures.RepresentationTheory.LocallyConstantCochainsDegreewiseExa
 # LocallyConstantCochainsExact
 
 Source: Stacks Project, Etale Cohomology, Tag 0DVG.
-(blueprint: lem-sc-locally-constant-cochains-exact).
 -/
 
 @[expose] public section
@@ -34,26 +33,7 @@ namespace Rep
 
 /-- The locally constant integer cochain complex is additive and degreewise exact.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed inhomogeneous
-cochain differential; steps 1 and 2 of lem-sc-locally-constant-cochains-effaceable.
-
-Proof: Give LC(G^n,E(M)) its pointwise additive group structure. Precomposition by
-projections and adjacent multiplication preserves local constancy. For the action face,
-a locally constant cochain has finitely many values since G^n is compact. Intersect the
-open stabilizers of these values: on each fiber and a sufficiently small coset the action
-face is constant. Thus the displayed sum is a locally constant additive differential.
-The face identities pair each summand in d squared with its negative, so d squared is
-zero, including n=0. Equivariant coefficient maps commute with the action and the other
-faces, hence give chain maps; identity, composition and addition hold pointwise.
-Use these actual terms and differentials to construct C and take identity coordinate
-maps, transporting along E. Equivalences preserve short exact sequences. Kernels and
-cokernels of discrete representations are the underlying module kernels and cokernels:
-submodules inherit open stabilizers and quotient stabilizers contain those of lifts.
-A locally constant cochain on compact G^n has finite image and clopen fibers. Choose a
-lift of each image value through a coefficient surjection and use it on that fiber.
-This is a locally constant lift. The kernel equation is pointwise, proving exactness
-and monicity of the first map in every degree. No finiteness of the ring is used.
-(blueprint: lem-sc-locally-constant-cochains-exact). -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, displayed inhomogeneous cochain differential. -/
 theorem exists_locallyConstantCochains_exact
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

@@ -23,10 +23,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Higher compact-support images in the actual common-stage Weil heart
 
-Source: blueprint main-20261015, chap-The-Deligne-Laumon-theorem-in-general,
-sk-l-dl-general-composition, lem-zl-composition-weight-bound.proof.md,
-first paragraph; SGA 4, XVII, §5--6; Bhatt--Scholze 6.7.6--6.7.7
-(blueprint: def-zl-weil-compact-support-cohomology).
+Source: SGA 4, XVII, §5--6; Bhatt--Scholze 6.7.6--6.7.7.
 
 Extend by zero first, and then derive the proper direct image in the ambient
 category of all equivariant ind-sheaves. Representability returns the result to
@@ -54,16 +51,12 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
 variable (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The middle scheme of a compactification, with its inherited k₀-structure.
-Source: SGA 4, XVII, compact-support construction
-(blueprint: def-zl-weil-compact-support-cohomology). -/
+Source: SGA 4, XVII, compact-support construction. -/
 def zlCompactificationMiddle {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) : Over (Spec (.of D.k₀)) :=
   Over.mk (c.g ≫ Y₀.hom)
 
-/-- The middle scheme is finite type over k₀ because its proper map has that property.
-Source: blueprint compactification construction
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: a proper map is finite type, and finite type is stable under composition. -/
+/-- The middle scheme is finite type over k₀ because its proper map has that property. -/
 @[instance]
 theorem zlCompactificationMiddle_finiteType {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType Y₀.hom] (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
@@ -71,10 +64,7 @@ theorem zlCompactificationMiddle_finiteType {X₀ Y₀ : Over (Spec (.of D.k₀)
   change LocallyOfFiniteType (c.g ≫ Y₀.hom)
   infer_instance
 
-/-- The middle scheme is quasi-compact over k₀ by properness and composition.
-Source: blueprint compactification construction
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: proper morphisms are quasi-compact, as are their composites. -/
+/-- The middle scheme is quasi-compact over k₀ by properness and composition. -/
 @[instance]
 theorem zlCompactificationMiddle_quasiCompact {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
@@ -82,10 +72,7 @@ theorem zlCompactificationMiddle_quasiCompact {X₀ Y₀ : Over (Spec (.of D.k�
   change QuasiCompact (c.g ≫ Y₀.hom)
   infer_instance
 
-/-- The open part, over k₀, of the given compactification.
-Source: blueprint compactification construction
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: the equality f₀.left = c.i ≫ c.g and f₀.w show the structure-map equality. -/
+/-- The open part, over k₀, of the given compactification. -/
 theorem zlCompactificationOpen_w {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
     c.i ≫ (zlCompactificationMiddle D f₀ c).hom = X₀.hom := by
@@ -93,18 +80,13 @@ theorem zlCompactificationOpen_w {X₀ Y₀ : Over (Spec (.of D.k₀))}
   rw [← Category.assoc, ← c.comm]
   exact f₀.w
 
-/-- The open part as an arrow of k₀-schemes.
-Source: blueprint compactification construction
-(blueprint: def-zl-weil-compact-support-cohomology). -/
+/-- The open part as an arrow of k₀-schemes. -/
 def zlCompactificationOpen {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
     X₀ ⟶ zlCompactificationMiddle D f₀ c :=
   Over.homMk c.i (zlCompactificationOpen_w D f₀ c)
 
-/-- The open part has its specified open-immersion property.
-Source: blueprint compactification construction
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: its underlying map is c.i, an open immersion by the compactification data. -/
+/-- The open part has its specified open-immersion property. -/
 @[instance]
 theorem zlCompactificationOpen_isOpenImmersion {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
@@ -112,26 +94,19 @@ theorem zlCompactificationOpen_isOpenImmersion {X₀ Y₀ : Over (Spec (.of D.k�
   change IsOpenImmersion c.i
   infer_instance
 
-/-- The proper part as an arrow of k₀-schemes.
-Source: blueprint compactification construction
-(blueprint: def-zl-weil-compact-support-cohomology). -/
+/-- The proper part as an arrow of k₀-schemes. -/
 def zlCompactificationProper {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left) :
     zlCompactificationMiddle D f₀ c ⟶ Y₀ :=
   Over.homMk c.g
 
-/-- The geometric fibre has its specified structure over the chosen algebraic closure.
-Source: blueprint finite-field geometric-fibre convention
-(blueprint: def-zl-weil-compact-support-cohomology). -/
+/-- The geometric fibre has its specified structure over the chosen algebraic closure. -/
 instance zlGeometricFiberOver (X₀ : Over (Spec (.of D.k₀)))
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
     (D.geometricFiber X₀).left.Over (Spec (.of D.k)) :=
   ⟨(D.geometricFiber X₀).hom⟩
 
-/-- The base-changed map respects the specified geometric structure maps.
-Source: blueprint geometric-fibre convention
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: this is the Over.w equation of the image of f₀ under Over.pullback. -/
+/-- The base-changed map respects the specified geometric structure maps. -/
 @[instance]
 theorem zlFiberMap_isOver {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
@@ -141,10 +116,7 @@ theorem zlFiberMap_isOver {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).w⟩
 
 /-- Separatedness survives geometric base change.
-Source: Stacks 01L4; blueprint compact-support geometric fibre
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: the square of f₀ with its geometric-fibre map is Cartesian. Base change
-preserves closed diagonals, which characterize separatedness. -/
+Source: Stacks 01L4. -/
 @[instance]
 theorem zlFiberMap_separated {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] : IsSeparated (zlFiberMap D f₀) := by
@@ -152,10 +124,7 @@ theorem zlFiberMap_separated {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) f₀ inferInstance
 
 /-- Local finite type survives geometric base change.
-Source: Stacks 01T6; blueprint compact-support geometric fibre
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: f₀.left and zlFiberMap D f₀ form the base-change square of the two
-structure-map pullbacks. Apply locally finite type stability under base change. -/
+Source: Stacks 01T6. -/
 @[instance]
 theorem zlFiberMap_finiteType {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) [LocallyOfFiniteType f₀.left] :
@@ -164,9 +133,7 @@ theorem zlFiberMap_finiteType {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) f₀ inferInstance
 
 /-- Quasi-compactness survives geometric base change.
-Source: Stacks 01K0; blueprint compact-support geometric fibre
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: use the same Cartesian square and quasi-compact base-change stability. -/
+Source: Stacks 01K0. -/
 @[instance]
 theorem zlFiberMap_quasiCompact {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (f₀ : X₀ ⟶ Y₀) [QuasiCompact f₀.left] : QuasiCompact (zlFiberMap D f₀) := by
@@ -174,12 +141,7 @@ theorem zlFiberMap_quasiCompact {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) f₀ inferInstance
 
 include hl in
-/-- The coefficient prime is a unit in the closure field itself.
-Source: blueprint finite-field coefficient convention
-(blueprint: def-zl-weil-compact-support-cohomology).
-Proof: D.card_base and D.cardinality_eq give characteristic D.p in D.k₀ and
-hence D.k. The prime l differs from D.p, so its image in that field is nonzero,
-and therefore invertible. -/
+/-- The coefficient prime is a unit in the closure field itself. -/
 theorem zlClosurePrimeUnit : IsUnit (l : D.k) := by
   let := Fintype.ofFinite D.k₀
   let : Fact D.p.Prime := ⟨D.prime⟩

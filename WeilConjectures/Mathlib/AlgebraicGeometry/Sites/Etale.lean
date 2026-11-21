@@ -80,8 +80,7 @@ def Hom.Etale (f : X ⟶ Y) : Y.Etale ⥤ X.Etale :=
 
 /-- The base change functor `f.Etale : Y.Etale ⥤ X.Etale`, `W ↦ W ×_Y X`, preserves finite
 limits. The small étale sites have finite limits (`MorphismProperty.Over.hasFiniteLimits`):
-the identity is a terminal object and fibre products are computed in schemes.
-(blueprint: `situation-conventions`) -/
+the identity is a terminal object and fibre products are computed in schemes. -/
 instance Hom.preservesFiniteLimits_etale (f : X ⟶ Y) : PreservesFiniteLimits f.Etale :=
   inferInstanceAs <|
     PreservesFiniteLimits (MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ f)
@@ -287,8 +286,7 @@ namespace AlgebraicGeometry.Scheme
 `X.Etale` is a sheaf (an object of `Sheaf X.smallEtaleTopology (Type w)`) if and only if for
 every étale `U` over `X` and every family `gᵢ : Vᵢ ⟶ U` of étale `X`-morphisms that is jointly
 surjective, the diagram `P(U) → ∏ᵢ P(Vᵢ) ⇉ ∏ᵢⱼ P(Vᵢ ×_U Vⱼ)` is an equalizer: every family of
-sections agreeing on the fibre products `Vᵢ ×_U Vⱼ` glues to a unique section on `U`.
-(blueprint: `situation-conventions`) -/
+sections agreeing on the fibre products `Vᵢ ×_U Vⱼ` glues to a unique section on `U`. -/
 theorem isSheaf_smallEtaleTopology_iff {X : Scheme.{u}} (P : X.Etaleᵒᵖ ⥤ Type v) :
     Presheaf.IsSheaf X.smallEtaleTopology P ↔
       ∀ (U : X.Etale) (ι : Type (u + 1)) (V : ι → X.Etale) (g : ∀ i, V i ⟶ U),

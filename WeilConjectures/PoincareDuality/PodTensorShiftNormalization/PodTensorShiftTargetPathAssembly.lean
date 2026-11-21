@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.PodTensorShiftNormalization.PodTensorShif
 
 /-! # Proved calculations for tensor-shift path normalization
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-target-path-assembly-t5).
+Source: Stacks 011G, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -79,8 +78,7 @@ variable [(isoReductionIntegralInverse l E g).Additive]
 /-- Normalize a target path whose input presentation factors through strict good-complex maps.
 Substitute the presented tensor model, factor the product presentation, use the target
 model formula and naturality of the tensor comparison, and cancel its inverse.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-target-path-assembly-t5). -/
+Source: Stacks 011G, 07A4, 0941. -/
 theorem target_path
     (D : PodCompletionReindex l E g) (T : PodCompletedTensorReindex l E g D)
     (hT : PodCompletedTensorReindex.Laws l E g D T)

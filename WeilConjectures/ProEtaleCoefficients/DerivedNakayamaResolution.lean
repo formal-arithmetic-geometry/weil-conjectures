@@ -54,10 +54,6 @@ import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
 /-!
 # The two-term resolution of the finite coefficient sheaves
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-`sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.md`
-(blueprint: lemma-reduction-derived-nakayama--1).
-
 All coefficients are continuous condensed rings pulled back from the point. A natural
 cone is expressed using the standard cone functor on complexes, with its standard maps.
 The comparison with a functor on the derived category also asserts its descent and naturality.

@@ -14,7 +14,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineTraceB
 /-!
 # The two integrals of the diagonal class
 
-Blueprint `lemma-class-diagonal-projective-line` (and `det-sp-p1-trace` (3)). Let `P = ℙ¹_S` and
+Blueprint `lemma-class-diagonal-projective-line`. Let `P = ℙ¹_S` and
 `W = ℙ¹_P`, which is `P ×_S P` (`AlgebraicGeometry.ProjectiveSpace.isPullback_map`) with first
 projection `p₁ = W ↘ P` and second projection `p₂ = map (P ↘ S)`. The diagonal
 `Δ : P ⟶ W` (`AlgebraicGeometry.ProjectiveSpace.diagonal`) is an effective Cartier divisor; given
@@ -288,8 +288,8 @@ theorem leftDerivedUpperStar_lineInfinityι_map_diagonalIntegral
     Adjunction.homEquiv_unit, reassoc_of% hC,
     reassoc_of% hD, Iso.hom_inv_id]
 
-/-- Blueprint `lemma-class-diagonal-projective-line` (`lemma-class-diagonal-projective-line--1`
-(3)), *the first integral of the diagonal class*: for `P = ℙ¹_S`, `W = ℙ¹_P ≅ P ×_S P` with first
+/-- Blueprint `lemma-class-diagonal-projective-line`,
+*the first integral of the diagonal class*: for `P = ℙ¹_S`, `W = ℙ¹_P ≅ P ×_S P` with first
 projection `p : W ⟶ P`, and the diagonal `Δ : P ⟶ W` satisfying the purity hypothesis, the composite
 
 `Λ_P ⟶ Rp_* Lp^* Λ_P ≅ Rp_* Λ_W ⟶ Rp_*(Λ_W(1)[2]) ⟶ Λ_P`
@@ -334,8 +334,8 @@ theorem cartierKummerCycleClass_diagonalSwap
   rw [restrictSupportedClass_cartierKummerClass Λ _ hP _ _ _ hsq hP] at h₁
   exact h₁.symm
 
-/-- Blueprint `lemma-class-diagonal-projective-line` (`lemma-class-diagonal-projective-line--1`
-(3)), *the second integral of the diagonal class*. The second projection `p₂ = map (P ↘ S) : W ⟶ P`
+/-- Blueprint `lemma-class-diagonal-projective-line`,
+*the second integral of the diagonal class*. The second projection `p₂ = map (P ↘ S) : W ⟶ P`
 of `W = ℙ¹_P ≅ P ×_S P` is the first projection `p₁ = W ↘ P` composed with the exchange `σ` of the
 factors (`AlgebraicGeometry.ProjectiveSpace.diagonalSwap`), an isomorphism of `P`-schemes
 `(W, p₂) ≅ (W, p₁)`. Transported along `σ`, the trace of `p₂` is the trace of `p₁` and the cycle

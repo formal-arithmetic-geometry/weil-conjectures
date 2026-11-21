@@ -16,7 +16,6 @@ public import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensi
 
 The two-field integral step of the normalized compact-support composition argument.
 Source: Stacks 0F7J and Bhatt--Scholze Definition 6.7.6.
-(blueprint: lem-zl-integral-composition-coefficient-square).
 -/
 
 @[expose] public noncomputable section

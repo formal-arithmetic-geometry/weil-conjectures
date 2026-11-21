@@ -21,8 +21,7 @@ Let `ρ : Λ →+* Λ'` be a surjective morphism of commutative rings with princ
 compatible with the derived pullbacks
 (`AlgebraicGeometry.Etale.derivedExtendScalarsTateShiftIsoOfPullback_hom_pullback`). Taking for
 `S` the universal base `Spec ℤ[1/n]` on which the characteristic `n` of `Λ` is invertible, this
-is a Tate shift datum of `Ψ` (`AlgebraicGeometry.Etale.DerivedExtendScalarsTateShiftData.ofBase`,
-blueprint `proposition-compatibility-purity-change-coefficients`).
+is a Tate shift datum of `Ψ` (`AlgebraicGeometry.Etale.DerivedExtendScalarsTateShiftData.ofBase`).
 -/
 
 @[expose] public section

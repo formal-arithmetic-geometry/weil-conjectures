@@ -59,8 +59,7 @@ which extend over `z` (`AlgebraicGeometry.WeilGroup.weilLocalKernel`) acts trivi
 The elements of the geometric part acting trivially form a closed normal subgroup `N` of
 `W(U₀)`, since `ρ` is continuous on the geometric part. Its image in `π₁(U₀)` is compact, hence
 closed, and normal since the Weil group is dense; it contains the inertia group, hence the local
-kernel (`AlgebraicGeometry.WeilGroup.localKernel_le_topologicalClosure_normalClosure`).
-(blueprint: `corollary-unramified-boundary-point--2`) -/
+kernel (`AlgebraicGeometry.WeilGroup.localKernel_le_topologicalClosure_normalClosure`). -/
 theorem apply_eq_self_of_mem_weilLocalKernel
     {ρ : Representation (PadicAlgCl l) (weilGroup pU sU GU) V}
     (hρ : (ofFundamentalGroup pU sU GU).IsLisse l ρ) (z : ↥((Set.range j.base)ᶜ))
@@ -263,8 +262,7 @@ extends to a lisse Weil sheaf `G` on `V₀`
 (`AlgebraicGeometry.WeilSheaf.exists_isLisse_upperStar_iso_of_rep_eq_self`), which is pure of
 weight `w` since its restriction to `U₀` is
 (`AlgebraicGeometry.WeilSheaf.IsLisse.isPunctuallyPureOfWeight_of_upperStar`), and
-`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄` (`lemma-boundary-stalk--2`).
-(blueprint: `corollary-unramified-boundary-point--2`) -/
+`(j_* F)_z̄ = ((U₀ ⟶ V₀)_* F)_z̄ = G_z̄`. -/
 theorem isPureOfWeight_stalk_directImage_of_rep_eq_self (z : ↥((Set.range j.base)ᶜ))
     {F : WeilSheaf K l U} (hF : F.IsLisse)
     (t : Spec (.of (AlgebraicClosure K)) ⟶ (U ↘ Spec (.of K)).geometricFiber)

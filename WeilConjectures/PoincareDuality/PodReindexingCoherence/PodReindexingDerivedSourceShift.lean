@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingDeriv
 
 /-! # Source-shift square for normalized reindexing
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-source-shift)
+Source: Stacks 0A8X, 08JA.
 -/
 
 @[expose] public noncomputable section
@@ -30,18 +29,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Reindexing respects the signed source shift of derived internal Hom.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: lem-pod-reindexing-derived-source-shift).
-
-Proof: represent the source by a complex and resolve the target by a K-injective
-complex. Apply `Comparison.derived_model` to the source and its shift. The
-normalization `LeftNormalization` for `sourceShift` expresses both vertical maps
-as localizations of signed source reindexing. Apply each Hom-product projection:
-both routes reindex the factor by the source shift and multiply degree r by
-(-1)^(a*r), while `chain_projection` identifies their unshifted factors.
-Product extensionality proves the chain equality. Localize it and cancel the
-Hom-model and localization factor isomorphisms. Naturality along the chosen
-resolution and source presentation gives the square for M and N. -/
+Source: Stacks 0A8X, 08JA. -/
 theorem derived_source_shift_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

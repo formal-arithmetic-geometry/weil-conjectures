@@ -11,7 +11,7 @@ public import WeilConjectures.FieldTheory.BrauerScalarDefect
 /-!
 # Scalar coboundaries of equal homogeneous classes
 
-Source: Stacks Project, Tag 03R7, injectivity argument; Section 0DVG.
+Source: Stacks Project, Tag 03R7, injectivity argument.
 -/
 
 @[expose] public section
@@ -67,16 +67,7 @@ private theorem exists_homogeneous_boundary (K : Type u) [Field K]
 set_option backward.isDefEq.respectTransparency false in
 /-- Equal homogeneous classes have a locally constant multiplicative coboundary ratio.
 
-Proof: the homogeneous cohomology is the kernel of d2 modulo the image of d1.
-Equality of the projections therefore supplies an invariant continuous homogeneous
-one-cochain F whose differential is z-w. Evaluate at (1,g) and put a(g)=F(1,g).toMul.
-The coefficient topology is discrete, so continuity makes a locally constant.
-Homogeneous equivariance gives F(g,g*h)=g(F(1,h)), while the degree-one differential
-at (1,g,g*h) is F(g,g*h)-F(1,g*h)+F(1,g). Translating this additive equality to units
-gives c_z/c_w=a(g)*g(a(h))/a(g*h), with precisely the sign shown below.
-No normalization of either representative is required.
-Source: Stacks Project, Section 0DVG, degree-one differential.
-(blueprint: lem-sc-galois-units-scalar-coboundary). -/
+Source: Stacks Project, Section 0DVG, degree-one differential. -/
 theorem exists_scalar_cochain_of_galoisUnits_class_eq (K : Type u) [Field K]
     (z w : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2)
     (hzw : (ContinuousCohomology.π (galoisUnitsTopRep K) 2).hom z =

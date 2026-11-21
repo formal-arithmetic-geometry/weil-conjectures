@@ -14,10 +14,8 @@ import Mathlib.Topology.Compactness.Compact
 /-!
 # Continuity of the coinduced contracting operator
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0DVG,
-label section-continuous-group-cohomology, final profinite comparison.
-The explicit contraction is an agent-written proof ingredient
-(blueprint: lem-exc-coinduced-homotopy-continuous).
+Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, label , final profinite comparison. The
+explicit contraction is an agent-written proof ingredient.
 -/
 
 @[expose] public section
@@ -33,23 +31,7 @@ function at the identity defines a linear map between continuous cochains.
 topology on that whole module, rather than a compact-open topology.
 The index `n + 1` ranges over all positive degrees, including degree one at `n = 0`.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 0DVG,
-label section-continuous-group-cohomology, final profinite comparison
-(blueprint: lem-exc-coinduced-homotopy-continuous).
-
-Proof: (1) The setup of `lem-exc-discrete-modules-abelian` and
-`lem-exc-coinduced-discrete-embedding` supplies the discrete module and the pointwise
-module structure on its continuous function module with right translation.
-Evaluation at one and substitution in the first variable are linear pointwise.
-(2) For fixed remaining variables, the function of `x` obtained by this formula is
-continuous into the discrete module: insertion of `x` is continuous, and evaluation
-at one is continuous from the discrete function module. For any fixed tuple of
-remaining variables, joint continuity supplies product neighborhoods where the
-value is constant. Compactness of `G` gives a finite cover in the `x` variable.
-Intersect the finitely many neighborhoods of the remaining tuple. On this
-intersection all `x` values agree with the original function, so the resulting
-function-valued map is locally constant into the discrete coinduced module.
-Thus it is a continuous cochain; pointwise linearity gives the asserted linear map. -/
+Source: Stacks Project, etale-cohomology.tex, Tag 0DVG, label , final profinite comparison. -/
 theorem exists_coinduced_continuous_contraction
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

@@ -64,7 +64,7 @@ theorem Topology.IsConstructible.exists_isOpen_inter_subset_or {X : Type*} [Topo
   | compl s _ h => simpa only [compl_compl, or_comm] using h
 
 /-- A constructible set `s` dense in an irreducible closed set `t` contains a nonempty open subset
-of `t`. (blueprint: `det-i-geometry`)
+of `t`.
 
 The Noetherian hypothesis is not needed for the proof. -/
 theorem exists_isOpen_inter_subset_of_isConstructible {X : Type*} [TopologicalSpace X]

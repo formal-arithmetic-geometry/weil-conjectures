@@ -10,9 +10,6 @@ public import WeilConjectures.SixFunctors.Supporting.SixFunctorOperationDatumSta
 /-!
 # Six-functor operation datum
 
-Source: blueprint master, sec-smooth-purity/sk-def-sf-operations,
-def-fix-six-functor-datum (blueprint: def-fix-six-functor-datum), order 1491.
-
 The datum is construction data, including the comparisons, rather than a choice
 from an unnormalized existence assertion.
 -/
@@ -37,8 +34,7 @@ open AlgebraicallyClosedCoefficients (Coefficient)
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- All coefficient levels with the finite, completed, localized and common-stage
-normalizations. Source: all five clauses of def-fix-six-functor-datum
-(blueprint: def-fix-six-functor-datum). -/
+normalizations. Source: all five clauses of def-fix-six-functor-datum. -/
 structure SixFunctorOperationDatum
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
@@ -55,8 +51,7 @@ structure SixFunctorOperationDatum
      comparison modules; the datum records the comparison isomorphisms above. -/
 
 /-- Verdier dual at this coefficient level is the recorded derived internal Hom
-into the exceptional image of its coefficient unit, including the morphism action.
-Source: clause (5) (blueprint: def-fix-six-functor-datum). -/
+into the exceptional image of its coefficient unit, including the morphism action. -/
 def SixFunctorOperationDatum.finiteVerdier
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -67,8 +62,7 @@ def SixFunctorOperationDatum.finiteVerdier
   S.finiteDuality.verdier (sixFunctorFiniteHom D C E n hn) X c
 
 /-- Verdier dual at this coefficient level is the recorded derived internal Hom
-into the exceptional image of its coefficient unit, including the morphism action.
-Source: clause (5) (blueprint: def-fix-six-functor-datum). -/
+into the exceptional image of its coefficient unit, including the morphism action. -/
 def SixFunctorOperationDatum.integralVerdier
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -79,8 +73,7 @@ def SixFunctorOperationDatum.integralVerdier
   S.higher.integralDuality.verdier (fun X ↦ constructibleIntegralHom C.l E X.obj.left) X c
 
 /-- Verdier dual at this coefficient level is the recorded derived internal Hom
-into the exceptional image of its coefficient unit, including the morphism action.
-Source: clause (5) (blueprint: def-fix-six-functor-datum). -/
+into the exceptional image of its coefficient unit, including the morphism action. -/
 def SixFunctorOperationDatum.rationalVerdier
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -91,8 +84,7 @@ def SixFunctorOperationDatum.rationalVerdier
   S.higher.rationalDuality.verdier (fun X ↦ rationalDerivedInternalHom C.l E X.obj.left) X c
 
 /-- The finite tensor on the finite-Tor category. It is the recorded derived tensor,
-not another bifunctor chosen as data.
-Source: clause (1) (blueprint: def-fix-six-functor-datum). -/
+not another bifunctor chosen as data. -/
 abbrev SixFunctorOperationDatum.finiteTensor
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -101,8 +93,7 @@ abbrev SixFunctorOperationDatum.finiteTensor
     (X : SixFunctorSpace D) := S.finiteTensorDomainStage X
 
 /-- The finite-Tor domain is the recorded predicate, restricted to the bounded
-constructible category. Source: the initial domains
-(blueprint: def-fix-six-functor-datum). -/
+constructible category. Source: the initial domains. -/
 def SixFunctorOperationDatum.finiteTorDomain
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]
@@ -111,8 +102,7 @@ def SixFunctorOperationDatum.finiteTorDomain
     (X : SixFunctorSpace D) : ObjectProperty (sixFunctorFiniteCategory D C E n hn X) :=
   fun K ↦ finiteTorConstructible C.l E n hn X.obj.left K.obj
 
-/-- The integral finite-Tor domain is the recorded uniform finite-reduction condition.
-Source: the initial domains (blueprint: def-fix-six-functor-datum). -/
+/-- The integral finite-Tor domain is the recorded uniform finite-reduction condition. -/
 def SixFunctorOperationDatum.integralFiniteTorDomain
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     {E : Type u} [Field E] [Algebra (Padic C.l) E]

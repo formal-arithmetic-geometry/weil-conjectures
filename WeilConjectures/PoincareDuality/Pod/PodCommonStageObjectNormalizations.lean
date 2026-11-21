@@ -8,9 +8,6 @@ module
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 
 /-! # Object formulas for the recorded common-stage operations
-
-Source: the common-stage operation specifications in the current blueprint, Step 5.
-(blueprint: lem-pod-common-stage-operation-object-normalizations).
 -/
 
 @[expose] public section
@@ -26,13 +23,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
-/-- The chosen common-stage functors retain their specified literal object formulas.
-Source: blueprint Step 5 and the object clauses of the common-stage operation
-specifications (blueprint: lem-pod-common-stage-operation-object-normalizations).
-Proof: each functor is the choice from its unique normalized existence theorem.
-Unfold that choice and project the object clause of its specification, separately
-for pullback, tensor and internal Hom. This also covers zero objects and empty
-schemes: no argument depends on a section or a nonempty coefficient basis. -/
+/-- The chosen common-stage functors retain their specified literal object formulas. -/
 theorem podCommonStageObjectNormalizations :
     (∀ {X Y : Scheme.{u}} (g : X ⟶ Y)
       [∀ x : X, Invertible (l : X.residueField x)]

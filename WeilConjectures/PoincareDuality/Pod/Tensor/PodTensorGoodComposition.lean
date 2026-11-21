@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorDerivedComposi
 
 /-! # Tensor composition from localized Roos models
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941. -/
+Source: Stacks 07A4, 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -46,9 +45,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The completed tensor composition equation on fixed good representatives.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: def-pod-tensor-good-composition).
-This names the exact equation on the localizations of the supplied complexes. -/
+Source: Stacks 07A4, 0941. -/
 def PodTensorGoodComposition
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

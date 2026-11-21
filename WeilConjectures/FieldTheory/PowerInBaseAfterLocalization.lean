@@ -13,11 +13,6 @@ import Mathlib.FieldTheory.PurelyInseparable.Exponent
 
 /-!
 # Powers in the base after localization
-
-Source: literature/stacks-project/algebra.tex, Algebra, Section 0BR5
-(section-universal-homeomorphism), denominator-clearing input to Lemma 0BR8
-(lemma-powers) for a finite purely inseparable extension
-(blueprint: lem-weil-pbc-power-in-base-after-localization).
 -/
 
 @[expose] public section
@@ -31,8 +26,6 @@ open scoped TensorProduct
 namespace RingTheory
 
 /--
-Source: literature/stacks-project/algebra.tex, Section 0BR5, the denominator-clearing
-argument used in Lemma 0BR8; step 1 of lem-weil-pbc-power-in-base-after-localization.
 
 Choose finitely many A'-module generators of E. The finite purely inseparable field
 extension has a uniform exponent N, by Mathlib's `hasExponent_of_finiteDimensional`.
@@ -43,7 +36,6 @@ is a unit in A'[1/s], since it divides s. Map the equality in E to the tensor pr
 and multiply by the image of this unit's inverse to obtain the required base element.
 This works also when q=1 and N=0. Empty products are 1; no normality assumption on A'
 is used.
-(blueprint: lem-weil-pbc-power-in-base-after-localization)
 -/
 private theorem localized_generator_powers
     (A' : Type u) (K' : Type v) (E : Type w) (L : Type z)
@@ -139,9 +131,6 @@ private theorem powers_from_generators
     rw [hm, mul_pow]
 
 /--
-Source: literature/stacks-project/algebra.tex, Algebra, Section 0BR5
-(section-universal-homeomorphism), denominator-clearing input to Lemma 0BR8
-(lemma-powers) for a finite purely inseparable extension.
 
 Proof, following the node's steps:
 1. By `def-weil-finite-integral-morphism`, choose finitely many module generators
@@ -160,7 +149,6 @@ Proof, following the node's steps:
    each summand is in the base. Thus x^(p^N) is in the base, allowing n = N.
 4. Since s is nonzero and the maps are compatible, localization preserves
    the fraction fields K' and L. This establishes both characteristic clauses.
-(blueprint: lem-weil-pbc-power-in-base-after-localization)
 -/
 theorem power_in_base_after_localization
     (A' : Type u) (K' : Type v) (E : Type w) (L : Type z)

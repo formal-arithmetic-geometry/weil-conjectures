@@ -12,9 +12,7 @@ public import WeilConjectures.DeligneLaumon.CommonStagePullbackCompComponentAux
 import WeilConjectures.TraceFormula.Integral.IntegralPullbackCompositionScalarRational
 import all Mathlib.Logic.Small.Defs
 
-/-! # Common-stage pullback composition component
-
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
+/-! # Common-stage pullback composition component -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -151,13 +149,7 @@ private theorem stage_square_cancel {C D : Type*} [Category* C] [Category* D] (G
     Iso.inv_hom_id_map_assoc, reassoc_of% h]
 
 /-- The conjugated fixed-stage square underlying common-stage naturality.
-Source: Stacks 099N(5), finite-stage cancellation after coefficient compatibility.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative).
-This is the stage-category equality obtained after inserting the three pullback
-comparison isomorphisms; the common-stage wrapper is handled by the parent theorem.
-Proof: cancel the inner comparison of `f ≫ g` at `Q` and the comparison of `f` at the
-pullback of `P`, expand the pullback of the composite map by functoriality, and apply the
-fixed-stage rational naturality. -/
+Source: Stacks 099N(5), finite-stage cancellation after coefficient compatibility. -/
 theorem commonStagePullbackCompComponent_stage_square
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -351,20 +343,7 @@ private theorem commonStagePullbackCompComponent_stage_transport
 
 
 /-- The selected common-stage component is represented at every larger coefficient stage.
-Source: Stacks 099N(5), coefficient-compatibility argument in residue-compatible pullback.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative).
-This is the scalar-extension transport of the chosen integral compositor; it is the
-finite-stage calculation used by the naturality proof.
-Proof: by the object representation both sides are arrows of the pair category between the
-same literal objects. The left side is represented at `P.stage` by the localized integral
-compositor at `P.stage`, i.e. by the fixed-stage rational compositor. Enlarging that
-representative to `L` applies the coefficient transition `P.stage ≤ L`
-(StageSystem.ι_map_eq). The recorded transitions are the rational scalar extensions, and
-rationalPullbackComposition_scalar_transport (from integralPullbackComposition_scalar: the
-compositor is pinned by its system-level reduction, on which scalar extension acts
-compatibly) carries the `P.stage` compositor to the `L` compositor conjugated by exactly the
-three `commonStagePullbackComparison` factors; the literal equality transports cancel by
-proof irrelevance. -/
+Source: Stacks 099N(5), coefficient-compatibility argument in residue-compatible pullback. -/
 theorem commonStagePullbackCompComponent_stage_representation
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]

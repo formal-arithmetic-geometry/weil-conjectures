@@ -162,14 +162,7 @@ private theorem representative_equivalence
 representatives. No naturality of the independently supplied derived tensor family
 is assumed, so the conclusion concerns actual localized representatives only.
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindexing-tensor-roos-model-iff-canonical).
-
-Proof: the representative square identifies the localized strict Roos arrow,
-transported through the two representative comparisons and the completion maps,
-with the canonical completed tensor arrow. The completion maps on constructible
-inputs are invertible by CompleteUnit. Cancel their tensor and the representative
-comparison to obtain the equivalence, independently for each pair of representatives.
+Source: Stacks 07A4 and 0941.
 
 STATEMENT-DISPUTED: the old generator and tower naturality laws do not
 constrain T.tensor. In particular they cannot imply the global Canonical equation.

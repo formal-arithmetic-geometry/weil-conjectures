@@ -11,8 +11,7 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Composition of normalized Roos reindexing comparisons
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindex-roos-composition).
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -205,14 +204,7 @@ attribute [local irreducible] integralOperationsRoos isoSectionwiseModuleInverse
 attribute [local implicit_reducible] podReindexProduct integralOperationsRoosFunctor
 
 /-- The normalized Roos reindexing comparisons compose on an arbitrary strict tower.
-Source: blueprint Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindex-roos-composition).
-Proof: apply all product projections and naturality of the ordinary compositor.
-The composite product comparison is the single product comparison followed by
-the product of compositor components. The RoosFst and RoosSnd formulas identify
-both coordinates of the corresponding cone maps. The mapping-cocone identity
-decomposition detects the full chain map, including the shifted coordinate.
-No tensor or localization is involved. -/
+Source: Stacks 07A4, 0941. -/
 theorem podReindexRoosComposition
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

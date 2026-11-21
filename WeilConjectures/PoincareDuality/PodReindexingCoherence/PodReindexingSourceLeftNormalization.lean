@@ -10,9 +10,7 @@ import all WeilConjectures.CategoryTheory.RingedHomUniverses.RingedInternalHomSh
 
 /-! # Left-route normalization of the source-shift square
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-This computes the left composite on K-injective Hom models.
-(blueprint: lem-pod-reindexing-source-left-normalization)
+Source: Stacks 0A8X and 08JA. This computes the left composite on K-injective Hom models.
 -/
 
 @[expose] public noncomputable section
@@ -111,9 +109,7 @@ attribute [local irreducible] podReindexingHomModel podReindexingCoefficient
 -- The explicit model transports require many dependent functor-map equalities.
 /-- The left route of the source-shift square on localized Hom models.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X and 08JA.
-
-Proof:
+Source: Stacks 0A8X and 08JA.
 
 1. Write F for the derived reindexing, K for its complex functor, Q for localization, alpha for
 sourceModelInput, beta for sourceModelOutput, and kappa for the recorded Hom model. Alpha is F of
@@ -138,8 +134,7 @@ pairs and beta. What remains, in order, is localizationFactors(Hom(P[a],I)), Q o
 followed by Hom((complexShift(a)).inv,id) followed by eX.inv, and Q shift(-a) at Hom(KP,KI). This
 is the asserted left normal form.
 
-This calculates one route, independently of the chain square and of the other route.
-(blueprint: lem-pod-reindexing-source-left-normalization) -/
+This calculates one route, independently of the chain square and of the other route. -/
 theorem source_left_normalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

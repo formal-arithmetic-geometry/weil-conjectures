@@ -245,9 +245,7 @@ theorem IrreducibleCloseds.eq_of_le_of_topologicalKrullDim_le_zero
 
 /-- **Zero-dimensional closed subsets are finite.** A closed subset `Z` of dimension at most zero
 of a noetherian `T₀` space is a finite set of closed points. This applies to the underlying space
-of a scheme of finite type over a field, which is noetherian.
-
-(blueprint: `lem-sc-dim0-finite`) -/
+of a scheme of finite type over a field, which is noetherian. -/
 theorem IsClosed.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero
     [NoetherianSpace X] [T0Space X] {Z : Set X} (hZ : IsClosed Z)
     (h : topologicalKrullDim Z ≤ 0) : Z.Finite ∧ ∀ z ∈ Z, IsClosed {z} := by

@@ -25,10 +25,6 @@ import Mathlib.CategoryTheory.Equivalence
 
 /-! # Exact linear common-stage comparison descent
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final sentence; extracted comparison subclaim
-(blueprint: lem-fd-common-stage-comparison-descent).
-
 The functors and transformations below are the existing literal-pair constructions.
 The beta maps are the inverses of the scalar comparisons denoted by j in the source.
 -/

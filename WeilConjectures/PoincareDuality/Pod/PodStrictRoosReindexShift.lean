@@ -224,7 +224,7 @@ private abbrev scalarRoosFunctor (W : Scheme.{u}) :
   canonicalSheafRoosFunctor _
 
 /-- Completed relabelling is additive on module sheaves.
-Source: Stacks 015F (blueprint: lem-pod-strict-roos-reindex-shift-s8). -/
+Source: Stacks 015F. -/
 instance podReindexIntegralInverseAdditive
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     (isoReductionIntegralInverse l E g).Additive :=
@@ -301,13 +301,7 @@ private theorem restricted_shift
       exact restricted_shift_f l E g D hgen C r n i) C r
 
 /-- The strict Roos reindexing square commutes with the specified signed shifts.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941 and 011G
-(blueprint: lem-pod-strict-roos-reindex-shift-s8).
-Proof: the restricted generator formula identifies the component in degree i+r
-before and after shifting. Apply the Roos functor to that restriction square.
-The coordinate laws uniquely determine the target signed Roos map, which is
-therefore natural. Paste its naturality square with RoosNaturality and RoosShift;
-associativity gives the displayed five-factor identity. -/
+Source: Stacks 0941 and 011G. -/
 theorem podStrictRoosReindexShift
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (D : PodCompletionReindex l E g)

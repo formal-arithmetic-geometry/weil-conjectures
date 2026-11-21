@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Coherence of fixed normalized completion and tensor families
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-family-coherence). -/
+Source: Stacks 07A4, 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,26 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Section-normalized identity and composition for fixed normalized comparisons.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL and 07A4 (blueprint: lem-pod-reindexing-tensor-family-coherence).
-
-Proof: use Over.mapId and Over.mapComp on each original local section to define
-identity and composition of ordinary relabelling. These are module maps because
-the completed coefficient maps agree after every quotient projection; limit
-extensionality gives their coefficient equality. Reverse site transports give
-the inverses. Thus the displayed Relabelling equations hold by construction.
-On strict quotient complexes, both reduction routes send p tensor b to the same
-relabeled generator. The limit routes are the same diagonal maps on both Roos
-coordinates, by the coordinate and restricted-system laws of completion.
-Localize these equalities to obtain the reduction and limit parts of Identity
-and Composition. For tensors apply Generators and Model: on homogeneous triples
-both associator paths send (x tensor y) tensor z to x tensor (y tensor z), and
-both symmetry paths multiply Fy tensor Fx by (-1)^(pq). The coefficient unit is
-sent to the coefficient unit; multiplication on tensors gives both unitors.
-These are equalities of full strict systems and of both Roos coordinates.
-Naturality and the representative models descend them to the specified derived
-maps. No choice of new completion or tensor comparisons occurs. The identity,
-empty-scheme and zero-input cases use the same section formulas. -/
+Source: Stacks 03EL and 07A4. -/
 theorem podReindexingTensorFamilyCoherence
     (completion : ∀ {V W : Scheme.{u}} (f : V ⟶ W) [IsIso f]
       [∀ v : V, Invertible (l : V.residueField v)]

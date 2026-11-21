@@ -8,9 +8,7 @@ module
 public import WeilConjectures.TraceFormula.Integral.IntegralPullbackComposition
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 
-/-! # Common-stage pullback composition data
-
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
+/-! # Common-stage pullback composition data -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,9 +21,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
-/-- The prescribed pullback object on an arbitrary literal common-stage pair.
-Source: blueprint common-stage pullback convention
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
+/-- The prescribed pullback object on an arbitrary literal common-stage pair. -/
 theorem commonStagePullbackIntegralObject {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -41,8 +37,7 @@ theorem commonStagePullbackIntegralObject {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((rationalDerivedPullback_existsUnique l _ f).exists.choose_spec.2.1 P.obj)
 
 /-- The component obtained from the specified integral compositor and object equalities.
-Source: Stacks 099N(5), blueprint common-stage composition convention
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
+Source: Stacks 099N(5). -/
 def commonStagePullbackCompComponent {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -66,10 +61,7 @@ def commonStagePullbackCompComponent {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y �
 section
 attribute [local irreducible] ScalarLocalization.category
 
-/-- Object representation for the selected common-stage pullback functor.
-Source: the defining universal property of common-stage pullback.
-Proof: the object clause of `commonStageDerivedPullback_existsUnique`.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative). -/
+/-- Object representation for the selected common-stage pullback functor. -/
 theorem commonStageDerivedPullback_object_representation
     {V W : Scheme.{u}} (k : V ⟶ W)
     [∀ v : V, Invertible (l : V.residueField v)]
@@ -78,10 +70,7 @@ theorem commonStageDerivedPullback_object_representation
     (commonStageDerivedPullback l Ω k).obj M = commonStagePullbackObject l Ω k M :=
   (commonStageDerivedPullback_existsUnique l Ω k).exists.choose_spec.1 M
 
-/-- Map representation for a common-stage pullback on one stage representative.
-Source: the defining universal property of common-stage pullback.
-Proof: the representative clause of `commonStageDerivedPullback_existsUnique`.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative). -/
+/-- Map representation for a common-stage pullback on one stage representative. -/
 theorem commonStageDerivedPullback_map_representation
     {V W : Scheme.{u}} (k : V ⟶ W)
     [∀ v : V, Invertible (l : V.residueField v)]
@@ -106,9 +95,7 @@ end
 attribute [local irreducible] commonStagePullbackCompComponent
   commonStageDerivedPullback constructibleIntegralPullback
 
-/-- The component arrow is exactly the localized integral compositor up to object equality.
-Source: blueprint normalized composition convention
-(blueprint: lem-zl-common-stage-pullback-comp-naturality). -/
+/-- The component arrow is exactly the localized integral compositor up to object equality. -/
 theorem commonStagePullbackCompComponent_heq {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -133,8 +120,7 @@ theorem commonStagePullbackCompComponent_heq {X Y Z : Scheme.{u}} (f : X ⟶ Y) 
 
 /-- The rational pullback compositor at a fixed coefficient stage, obtained by
 transporting the selected integral compositor through the canonical pullback objects.
-Source: Stacks 099N(5), finite-stage representative convention.
-(blueprint: lem-zl-common-stage-pullback-comp-naturality-representative). -/
+Source: Stacks 099N(5), finite-stage representative convention. -/
 def commonStagePullbackRationalComposition
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [∀ x : X, Invertible (l : X.residueField x)]

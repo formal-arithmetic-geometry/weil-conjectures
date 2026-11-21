@@ -17,7 +17,7 @@ An isomorphism of finite extensions of `ℚ_[l]` preserves the spectral absolute
 identifies the valuation rings and their uniformizer ideals. Every finite extension has an
 isomorphic model in any universe.
 
-Source: Serre, Local Fields, Chapter II, §2 (auxiliary; not a blueprint node).
+Source: Serre, Local Fields, Chapter II, §2 (auxiliary.
 -/
 
 @[expose] public noncomputable section

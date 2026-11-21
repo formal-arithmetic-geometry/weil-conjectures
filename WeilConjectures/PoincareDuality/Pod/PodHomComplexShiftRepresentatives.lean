@@ -135,9 +135,6 @@ import Mathlib.Algebra.Homology.Functor
 /-! # Signed Hom-complex shifts and K-injective representatives
 
 Source: Stacks Project, Tags 08JA and 0A95.
-(blueprint: stage3-pod-hom-complex-shift-representatives).
-These existing constructions are separated from the automorphism companions
-so that each file stays within the single-file compilation limit.
 -/
 
 @[expose] public noncomputable section
@@ -158,17 +155,12 @@ variable {C : Type s} [Category.{t} C] (J : GrothendieckTopology C)
   (A : Sheaf J CommRingCat.{max s t r})
 
 /-- Modules in the existing independent-universe coefficient convention.
-Source: Stacks 08J9 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+Source: Stacks 08J9. -/
 abbrev PodModules := SheafOfModules.{max s t r}
   ((sheafCompose J (forget₂ CommRingCat.{max s t r} RingCat.{max s t r})).obj A)
 
 /-- The canonical signed Hom-complex shift, fixed by every product projection.
-Source: node proof step 6, Stacks 08JA.
-Proof: reindex the product from p to p+m and multiply degree k by (-1)^(m*k).
-The adjacent-degree signs compensate the shifted differential. The inverse
-reindexes by -m with the inverse sign, so the map is an isomorphism. Product
-projections are jointly monic, proving uniqueness, including negative shifts.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+Source: node proof step 6, Stacks 08JA. -/
 theorem podHomComplexShift_existsUnique
     (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) (m n : ℤ) :
     ∃! e : (homComplex.{s, t, max s t r, max s t r} (R := A) K I)⟦n - m⟧ ≅
@@ -233,14 +225,14 @@ theorem podHomComplexShift_existsUnique
   exact (he' k p q h (by omega)).trans (he k p q h (by omega)).symm
 
 /-- The unique signed product-reindexing map.
-Source: Stacks 08JA (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+Source: Stacks 08JA. -/
 def podHomComplexShift (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) (m n : ℤ) :=
   (podHomComplexShift_existsUnique.{r, s, t} J A K I m n).exists.choose
 
 variable [HasDerivedCategory.{w} (PodModules.{r, s, t} J A)]
 
 /-- The actual augmentation of the chosen Hom target resolution.
-Source: Stacks 0A95 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+Source: Stacks 0A95. -/
 def podHomAugmentation (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) :
     homComplex.{s, t, max s t r, max s t r} (R := A) K I ⟶
       homComplex.{s, t, max s t r, max s t r} (R := A) K
@@ -252,12 +244,7 @@ def podHomAugmentation (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) :
     ((CochainComplex.toKInjectiveResolution _).app I)
 
 /-- The K-injective representative model is fixed by the actual augmentation.
-Source: Stacks 0A95, node proof steps 3 and 6.
-Proof: for K-injective I, its augmentation to the fixed resolution is a homotopy
- equivalence between K-injectives. Hom(K,-) preserves its homotopy inverse.
-Localize and invert that map in the recorded resolution factorization. The
-normalization determines the isomorphism uniquely by cancellation.
-(blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+Source: Stacks 0A95, node proof steps 3 and 6. -/
 theorem podKInjectiveHomModel_existsUnique
     (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) [I.IsKInjective] :
     ∃! e : (derivedInternalHomOfUniverses.{s, t, r, w} J A).obj
@@ -287,7 +274,7 @@ theorem podKInjectiveHomModel_existsUnique
     simpa using he
 
 /-- Canonical K-injective representative comparison.
-Source: Stacks 0A95 (blueprint: lem-pod-derived-automorphism-hom-evaluation). -/
+Source: Stacks 0A95. -/
 def podKInjectiveHomModel
     (K I : CochainComplex (PodModules.{r, s, t} J A) ℤ) [I.IsKInjective] :=
   (podKInjectiveHomModel_existsUnique.{r, s, t, w} J A K I).exists.choose

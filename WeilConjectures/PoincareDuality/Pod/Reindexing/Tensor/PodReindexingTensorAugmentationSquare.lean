@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Tensor augmentation under normalized reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 2 and 4;
-Stacks 07A4, 08J9, 099B and 099M (blueprint: lem-pod-reindexing-tensor-augmentation-square).
+Source: Stacks 07A4, 08J9, 099B and 099M.
 -/
 
 @[expose] public noncomputable section
@@ -130,22 +129,7 @@ end FixedAugmentation
 
 /-- Ordinary-to-completed tensor augmentation commutes with the two normalized
 reindexing tensor maps. The parameter η is fixed by its displayed defining equation.
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 099M
-(blueprint: lem-pod-reindexing-tensor-augmentation-square).
-
-Proof: take simultaneous flat-term K-flat representatives of M and L. The ordinary
-reindexing tensor map sends each homogeneous x tensor y to Fx tensor Fy. Reduction
-sends this generator to its two quotient reductions, and the completed tensor map
-has exactly this formula by Generators and Model. The tensor augmentation is the
-actual reduction adjunction unit, followed by reductionTensor and the normalized
-Roos tensor comparison. The Unit law transports its first factor; the quotient
-formulas transport its second factor. On both Roos product coordinates the two
-composites are the same diagonal relabelling, by RoosFst and RoosSnd. Thus the
-augmentation square commutes on representatives, including all quotient arrows.
-The representative localizations and their naturality descend this equality to
-M and L. The equality h only identifies the two projection-fixed presentations;
-equality proofs give the same eqToIso by proof irrelevance. No completeness of
-the ordinary tensor or finite Tor dimension is used. -/
+Source: Stacks 07A4, 099M. -/
 theorem podReindexing_tensor_augmentation_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

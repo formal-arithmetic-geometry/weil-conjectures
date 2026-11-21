@@ -12,8 +12,7 @@ import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 /-!
 # Profinite connected-component quotient of a spectral space
 
-Source: Stacks Project, `topology.tex`, Tag 0906, lemma-spectral-pi0
-(blueprint: lem-pe-spectral-components-profinite).
+Source: Stacks Project, `topology.tex`, Tag 0906.
 -/
 
 @[expose] public section
@@ -25,11 +24,10 @@ open Topology
 /-- The connected-component quotient of a spectral space is compact Hausdorff and totally
 disconnected, hence profinite in the topological sense.
 
-Source: Stacks Project, `topology.tex`, Tag 0906, lemma-spectral-pi0
-(blueprint: lem-pe-spectral-components-profinite).
+Source: Stacks Project, `topology.tex`, Tag 0906.
 
 Proof for stage 3.  Write `q : T → ConnectedComponents T` for the surjective quotient map.
-1. Spectrality supplies compactness (`def-weil-spectral-space`). Pull an open cover back
+1. Spectrality supplies compactness. Pull an open cover back
 along `q`, take a finite subcover of `T`, and use surjectivity to obtain a finite subcover
 of the quotient.
 2. For distinct quotient points choose representatives `x, y` in different components.

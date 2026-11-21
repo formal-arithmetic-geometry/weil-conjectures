@@ -305,7 +305,7 @@ variable {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsO
   [HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Spec (.of k))]
 
 include hj in
-/-- Blueprint `thm-pur-kummer-affine-line`: Kummer computations on the line and the punctured line.
+/-- Kummer computations on the line and the punctured line.
 
 Let `k` be an algebraically closed field and `Λ` a finite coefficient ring whose exponent is
 invertible in `k`, with Tate twist `Λ(1) = μₙ ⊗ Λ` (`n` the characteristic of `Λ`). Let

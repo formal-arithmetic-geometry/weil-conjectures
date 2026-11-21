@@ -29,24 +29,8 @@ universe u v
 namespace FieldTheory
 
 /-- The triangular quotient has injective coordinates over k(x) compatible with evaluation.
-Source: Stacks Project, Algebra, proof of Tag 07BV, successive monic division,
-and Tag 08JZ, localization presentation
-(blueprint: lem-weil-pbc-triangular-field-model-normal-form).
-
-Proof: Put R = k[X] and D = R[1/h]. Algebraic independence embeds R into
-F = k(x), and nonzero h lets this embedding extend to D. The presentation
-R[T]/(hT-1) is D. Adjoining each new variable and quotienting by the lifted
-monic p_i gives a free module with power basis of length e_i over the preceding
-quotient. Basis.smulTower combines these to a D-basis indexed by the tuples of
-exponents below e_i. Take the basis coordinate map and include every coefficient
-of D into F. This is an injective k-linear map. Evaluation annihilates all
-relations by hzero, so the expansion evaluates to the sum of the coordinate
-coefficients times the products of b_i, using hyx, hyt and hyb. This proves the
-compatibility formula for every polynomial. This theorem requires no independence
-or algebraicity of b; those hypotheses belong to other steps. For m = 0 the
-coordinate space has one coordinate and the quotient is D. A degree-zero monic
-relation makes the quotient zero; hzero is then impossible in the field K, so
-that case satisfies the theorem vacuously. -/
+Source: Stacks Project, Algebra, proof of Tag 07BV, successive monic division, and Tag 08JZ,
+localization presentation. -/
 theorem triangularFieldModel_normal_form
     (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K]
     (d : ℕ) (x : Fin d → K) (hx : AlgebraicIndependent k x)

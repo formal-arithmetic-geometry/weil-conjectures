@@ -257,26 +257,7 @@ private theorem rationalStandardClass_pullback
 
 end CoefficientProof
 
-/-- Normalized exact and t-exact pullback at a single finite coefficient field.
-Source: current blueprint sec-poincare-duality/sk-thm-frobenius,
-prop-constructible-truncations.proof.md, final automorphism sentence;
-steps 1--3 and 6 of lem-pod-isomorphism-pullback-texact-coefficients.
-(blueprint: lem-pod-isomorphism-pullback-raw-stage).
-
-Proof: the pro-etale isomorphism reindexes sheaves and their completed coefficient
-rings. At each quotient it fixes constant coefficients, hence also at their inverse
-limit. The induced exact functor on modules is integral-linear on complexes and
-therefore on derived morphisms. The normalized reconstruction unit and comparison
-identify its derived functor with completed integral pullback on constructible inputs.
-Transport its termwise shift through this comparison and the fully faithful inclusion.
-This preserves distinguished triangles. Exact inverse image commutes with homology,
-so it preserves the vanishing conditions for both integral standard halves in every
-degree. Apply semilinear scalar localization to this linear exact functor. Its object
-and pure-tensor formulas uniquely identify it with the prescribed rational pullback;
-the induced degree-one shift has the displayed normalization. Every rational half is
-the isomorphism closure of the corresponding integral half, so its preservation follows
-by applying pullback to an integral representative and its witnessing isomorphism.
-The argument includes the zero object, torsion morphisms and empty schemes. -/
+/-- Normalized exact and t-exact pullback at a single finite coefficient field. -/
 theorem isomorphismPullbackRawStage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

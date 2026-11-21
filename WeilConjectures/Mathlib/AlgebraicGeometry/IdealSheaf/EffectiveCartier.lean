@@ -53,8 +53,7 @@ variable {X Z : Scheme.{u}}
 `J` on `X` and an isomorphism `α : Z ≅ Spec_X(𝒪_X/J)` over `X`.
 
 `Spec_X(𝒪_X/J)` is `Scheme.IdealSheafData.subscheme`, and `IsEffectiveCartierCenter z` forces
-`z` to be a closed immersion; see `IsEffectiveCartierCenter.isClosedImmersion`.
-(blueprint: `def:nagata-invertible-ideal-effective-cartier`, (MLCI1)) -/
+`z` to be a closed immersion; see `IsEffectiveCartierCenter.isClosedImmersion`. -/
 def IsEffectiveCartierCenter (z : Z ⟶ X) : Prop :=
   ∃ J : X.IdealSheafData, J.IsInvertible ∧ ∃ α : Z ≅ J.subscheme, α.hom ≫ J.subschemeι = z
 
@@ -67,8 +66,7 @@ lemma IsEffectiveCartierCenter.isClosedImmersion {z : Z ⟶ X} (hz : IsEffective
 
 /-- The closed subscheme cut out by an invertible ideal is an effective Cartier centre. This
 is the direction used in practice: an invertibility statement about an ideal upgrades for
-free to a statement about the closed immersion it defines.
-(blueprint: part of `lemma:nagata-invertible-ideal-effective-cartier`) -/
+free to a statement about the closed immersion it defines. -/
 lemma Scheme.IdealSheafData.IsInvertible.isEffectiveCartierCenter {J : X.IdealSheafData}
     (hJ : J.IsInvertible) : IsEffectiveCartierCenter J.subschemeι :=
   ⟨J, hJ, Iso.refl _, Category.id_comp _⟩
@@ -82,8 +80,7 @@ immersions and quasi-coherent ideals.
 The forward direction holds because the kernel does not change under precomposition with an
 isomorphism, and the kernel of `J.subschemeι` is `J`. The backward direction produces the
 isomorphism from the universal property of closed immersions: `z` and `z.ker.subschemeι` are
-two closed immersions with the same kernel, hence canonically isomorphic over `X`.
-(blueprint: final assertion of `lemma:nagata-invertible-ideal-effective-cartier`) -/
+two closed immersions with the same kernel, hence canonically isomorphic over `X`. -/
 lemma isEffectiveCartierCenter_iff_isInvertible_ker {z : Z ⟶ X} [IsClosedImmersion z] :
     IsEffectiveCartierCenter z ↔ z.ker.IsInvertible := by
   refine ⟨fun ⟨J, hJ, α, hα⟩ ↦ ?_, fun h ↦ ⟨z.ker, h, ?_, ?_⟩⟩

@@ -14,7 +14,6 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientStrictTowerComparison
 /-! # Strict coefficient comparison before derived-limit descent
 
 Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tags 03D3, 06YY and 099N(5).
-(blueprint: lem-weil-pbc-integral-strict-model-chain-transport).
 -/
 
 @[expose] public noncomputable section
@@ -106,8 +105,7 @@ private def chainTripleMapIso
         exact e.hom.naturality (f.f i))
 
 /-- The functor of actual pulled reduction towers, using the published module functors.
-Source: Stacks 099N(5).
-(blueprint: lem-weil-pbc-integral-strict-model-chain-transport). -/
+Source: Stacks 099N(5). -/
 def pbcIntegralActualTowerFunctor
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T) :
@@ -219,23 +217,7 @@ on good representatives.
 This is entirely a statement about complexes; it does not construct a derived
 natural comparison or assert its formula on resolutions.
 
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03D3, 06YY and 099N(5).
-(blueprint: lem-weil-pbc-integral-strict-model-chain-transport).
-
-Proof: restrict the coefficient isomorphisms to each finite quotient. At level n,
-the balanced tensor map takes b tensor (m tensor q) to pi_n(b) times
-(1 tensor (m tensor q)), using the normalized coefficient identifications. Its
-inverse inserts 1 in the completed scalar factor. The coefficient projection
-square makes these maps balanced and proves their inverse identities. Sheafify
-the maps and apply them degreewise. The maps commute with differentials and
-with maps of input modules because the tensor associators do. Quotient transition
-maps take q to its image in the smaller quotient; both composites on pure tensors
-therefore coincide. Sheafification uniqueness proves the strict transition and
-naturality squares. Thus the level comparisons form the natural tower isomorphism t.
-Both augmentations send an adjunction-unit generator m to 1 tensor (m tensor 1).
-The module_unit equation for a identifies these generators on the two presentations.
-Linearity, restriction compatibility, and generation by the adjunction-unit
-sections prove the required augmentation equality on the entire source. -/
+Source: Bhatt--Scholze, Remark 6.8.15; Stacks 03D3, 06YY and 099N(5). -/
 theorem pbc_integral_strict_model_chain_transport
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)

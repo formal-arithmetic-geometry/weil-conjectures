@@ -18,8 +18,7 @@ This is the ring-theoretic and finite-residue-field portion of
 `Padic.extension_integers_dvr`; the uniformizer association and factorization clauses
 are supplied separately.
 
-Source: Serre, Local Fields, Chapter II, §2, Proposition 3.
-(auxiliary; not a blueprint node)
+Source: Serre, Local Fields, Chapter II, §2, Proposition 3. (auxiliary.
 -/
 
 @[expose] public section
@@ -33,12 +32,6 @@ uniformizer factorization.  This theorem is a strict substatement of
 `extension_integers_dvr` and is intended as its ring-theoretic core.
 
 Source: Serre, Local Fields, Chapter II, §2, Proposition 3.
-Proof: Equip the finite extension with the extending nonarchimedean norm, apply the
-properness criterion for valued fields, and identify the resulting integer ring and
-maximal ideal with the absolute-value inequalities.  The DVR and finite-residue-field
-properties, together with the elementary unit and fraction-field arguments, give exactly
-the displayed conjunction.
-(auxiliary; not a blueprint node)
 -/
 theorem extension_integers_dvr_core (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (abv : AbsoluteValue E ℝ)

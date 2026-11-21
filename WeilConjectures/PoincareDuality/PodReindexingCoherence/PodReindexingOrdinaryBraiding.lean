@@ -11,8 +11,7 @@ import all WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingE
 
 /-! # Signed braiding under normalized reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 2 and 4;
-Stacks 07A4, 08J9, 099B and 099M (blueprint: lem-pod-reindexing-ordinary-braiding).
+Source: Stacks 07A4, 08J9, 099B and 099M.
 -/
 
 @[expose] public noncomputable section
@@ -136,14 +135,7 @@ private theorem ordinary_braiding_base {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
         ((congrArg QX.map hchain).trans (QX.map_comp _ _)))
 
 /-- The specified signed braiding commutes with the normalized tensor comparison.
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 08J9
-(blueprint: lem-pod-reindexing-ordinary-braiding).
-
-Proof: compute both paths on simultaneous K-flat representatives. The chain tensor
-comparison sends x tensor y to Fx tensor Fy and both braidings exchange the factors
-with the same sign. Tensor model compatibility descends this chain equality. Choose
-K-flat resolutions of both arbitrary inputs, then use naturality and cancel their
-localization isomorphisms. No boundedness or constructibility is needed. -/
+Source: Stacks 07A4, 08J9. -/
 theorem podReindexingOrdinaryBraiding {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [EssentiallySmall.{u + 1} X.ProEt] [EssentiallySmall.{u + 1} Y.ProEt] (s : Option ℕ)
     (SX : Closed l E X s) (SY : Closed l E Y s)

@@ -68,8 +68,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
   [HasKummerClass.IsNormalized Λ] {X Z : Scheme.{u}} [HasInvertibleExponent Λ X] {k : Type u}
   [Field k] [PerfectField k] (c : ℕ) (i : Z ⟶ X) [IsRegularImmersion c i]
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
+/-- Compatibilities of purity for regular immersions
 
 **Base change of the fundamental class to a regular immersion of the same codimension**,
 `[Z' ⊂ X'] = e^* [Z ⊂ X]`: for any `e : X' ⟶ X` with `X'` smooth over `k` whose base change

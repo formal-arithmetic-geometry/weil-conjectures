@@ -190,8 +190,7 @@ theorem exists_eval_sub_self_eq_of_derivative_eq_zero {P : k[X]} (hP : derivativ
     simp [hP] at this
   exact ⟨y, by simpa [sub_eq_zero] using hy⟩
 
-/-- Blueprint `proposition-p-torsion-smooth-proper-curve--2`: Artin–Schreier on algebraically closed
-fields.
+/-- Artin–Schreier on algebraically closed fields.
 
 Over an algebraically closed field `k` of characteristic `p > 0`, the Artin–Schreier map
 `x ↦ x ^ p - x` is surjective, since `X ^ p - X - a` has derivative `-1`. Its kernel is the prime
@@ -204,9 +203,7 @@ theorem surjective_pow_sub_self (p : ℕ) [CharP k p] :
 
 /-- **Finite extensions of an algebraically closed field are trivial.** If `Ω` is algebraically
 closed and `K / Ω` is a finite field extension, then `algebraMap Ω K` is bijective, i.e.
-`K = Ω`.
-
-(blueprint: `lem-pc-finite-extension-alg-closed`) -/
+`K = Ω`. -/
 theorem algebraMap_bijective_of_finite {K : Type*} [Field K] [Algebra k K] [Module.Finite k K] :
     Function.Bijective (algebraMap k K) :=
   algebraMap_bijective_of_isIntegral

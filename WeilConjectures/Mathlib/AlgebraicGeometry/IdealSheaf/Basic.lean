@@ -35,8 +35,7 @@ namespace AlgebraicGeometry.Scheme.IdealSheafData
 
 variable {X : Scheme.{u}} (I : X.IdealSheafData)
 
-/-- On an affine open disjoint from the support, the ideal is the unit ideal.
-(blueprint: `lemma:nagata-ideal-unit-off-support`) -/
+/-- On an affine open disjoint from the support, the ideal is the unit ideal. -/
 lemma ideal_eq_top_of_disjoint_support {U : X.affineOpens}
     (hU : Disjoint (U.1 : Set X) (I.support : Set X)) : I.ideal U = ⊤ := by
   have hsub : X.zeroLocus (U := U.1) (I.ideal U) ∩ U.1 ⊆ (∅ : Set X) := fun x hx ↦

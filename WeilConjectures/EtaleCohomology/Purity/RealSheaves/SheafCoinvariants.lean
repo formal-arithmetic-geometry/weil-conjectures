@@ -18,10 +18,9 @@ Let `C₀` be a smooth geometrically connected curve over the finite field `K` w
 `V_{π₁(C)}`, with the Frobenius induced by the degree-one lift `γ`
 (`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_geometricCoinvariants`). Hence, for an
 affine curve, `H_c² (C, ℱ) ≅ V_{π₁(C)} (-1)` Frobenius-equivariantly
-(`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_compactlySupportedCohomology_two`,
-blueprint `lemma-degree-zero-top-cohomology--2`), and the eigenvalues `α` of the geometric Frobenius
-on `H_c² (C, ℱ)` give determinant weights `wt (α q⁻¹)` of `ℱ`
-(blueprint `proposition-bound-largest-determinant-weight`).
+(`AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_compactlySupportedCohomology_two`), and
+the eigenvalues `α` of the geometric Frobenius on `H_c² (C, ℱ)` give determinant weights
+`wt (α q⁻¹)` of `ℱ`.
 
 ## Main statements
 
@@ -204,7 +203,7 @@ theorem _root_.FrobeniusModule.exists_linearEquiv_of_equiv_tateTwist_neg_one {k 
 
 variable [IsAffine C]
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--2`: Description of `H_c²` on an affine curve.
+/-- Description of `H_c²` on an affine curve.
 
 Let `C₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `C₀` with
 Weil fundamental representation `(V, ρ)` (the lisse sheaf–representation equivalence
@@ -237,8 +236,7 @@ theorem exists_equivalence_isLisse_compactlySupportedCohomology_two :
   exact FrobeniusModule.exists_linearEquiv_of_equiv_tateTwist_neg_one
     (Nat.cast_ne_zero.2 Nat.card_pos.ne') e₂ f hf
 
-/-- Blueprint `proposition-bound-largest-determinant-weight`: Eigenvalues of `H_c²` are determinant
-weights.
+/-- Eigenvalues of `H_c²` are determinant weights.
 
 Let `C₀` be a smooth geometrically connected affine curve and `ℱ` a lisse Weil sheaf on `C₀` with
 Weil fundamental representation `(V, ρ)`. If `α` is an eigenvalue of the geometric Frobenius on

@@ -48,8 +48,8 @@ enters, as elsewhere in the repository, through the predicate
 `AlgebraicGeometry.Scheme.Hom.IsFrobenius`, which determines it.
 
 The comparisons `κ_X`, `κ_Y` are those of blueprint `lemma-scheme-frobenius-geometric-frobenius--1`,
-built from the canonical trivialization `LF_X^* ≅ id` of the absolute Frobenius pullback
-(`lemma-scheme-frobenius-geometric-frobenius--1`). Neither is formalised, so the comparisons are
+built from the canonical trivialization `LF_X^* ≅ id` of the absolute Frobenius pullback.
+Neither is formalised, so the comparisons are
 fields of the datum, subject to their compatibility with `f`.
 -/
 

@@ -144,7 +144,6 @@ import WeilConjectures.ProperBaseChange.RealizationScalarFunctor
 /-! # Normalized continuous field realization system
 
 Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15.
-(blueprint: lem-weil-pbc-condensed-e-system)
 -/
 
 @[expose] public noncomputable section

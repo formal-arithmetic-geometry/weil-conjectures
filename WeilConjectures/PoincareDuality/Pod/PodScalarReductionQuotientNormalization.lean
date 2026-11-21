@@ -14,8 +14,7 @@ import WeilConjectures.SmoothPurity.ScalarExtensionTower.ScalarCompletionQuotien
 
 /-! # Scalar reduction on strict quotient models
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-scalar-reduction-quotient-normalization).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -138,22 +137,7 @@ private theorem scalar_quotient_unit_ext (W : Scheme.{u})
   exact h n U x
 
 /-- The scalar counit on a good complex is the ordinary balanced quotient comparison.
-Source: Stacks 06YY, 0941, and the scalar-normalization step of the blueprint
-theorem-poincare-duality-frobenius--2, Steps 1 and 5.
-(blueprint: lem-pod-scalar-reduction-quotient-normalization).
-
-Proof: the derived model DE gives a coherent presentation of P by its ordinary
-quotient complex. Apply scalarCompletionQuotientPresentation to this presentation.
-Its resulting presentation of ordinary scalar extension has unit generators given
-by nested unit tensors. The inverse strict comparison has precisely the generator
-formula prescribed for alpha. The coherent quotient model comparison with DL identifies the
-resulting presentation with DL.reductionComparison followed by Q(alpha inverse).
-The final equation of scalarCompletionQuotientPresentation is the claimed equation
-after expanding podScalarReduction and combining the two reduction images.
-The comparison takes place in the whole derived sequence category. No finite
-quotient evaluation is assumed faithful. No reindexing, completeness or geometric
-invertibility is used. Identity embeddings, ramified embeddings and zero complexes
-use the same balanced tensor unit formula. -/
+Source: Stacks 06YY, 0941, and the scalar-normalization step of the. -/
 theorem podScalarReduction_quotient_normalization (W : Scheme.{u})
     (ρ : IntegralComparisonRoosModel l L W)
     (S : IntegralComparisonScalarModel l E L ι W (podReindexCalculus l E W) ρ)

@@ -49,9 +49,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasKummerClass Λ]
 
 attribute [local instance] HasInvertibleExponent.opens
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: base change of the fundamental
-class of a closed immersion with Thom frames, `[Z' ⊂ X'] = e^* [Z ⊂ X]`, along any morphism
-`e : X' ⟶ X` such that the base change `i'` of `i` has Thom frames and regular Zariski frames. -/
+/-- Base change of the fundamental class of a closed immersion with Thom frames,
+`[Z' ⊂ X'] = e^* [Z ⊂ X]`, along any morphism `e : X' ⟶ X` such that the base change `i'` of `i`
+has Thom frames and regular Zariski frames. -/
 theorem restrictSupportedClass_thomFundamentalClass (hT : HasThomFrames Λ c i)
     (hR : HasRegularZariskiFrames c i) {k k' : Type u} [Field k] [Field k']
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] {X' Z' : Scheme.{u}}

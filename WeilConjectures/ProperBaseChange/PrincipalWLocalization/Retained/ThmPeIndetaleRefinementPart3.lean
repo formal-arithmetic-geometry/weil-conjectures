@@ -11,9 +11,6 @@ import WeilConjectures.ProperBaseChange.PrincipalWLocalization.ThmPeIndetaleRefi
 import WeilConjectures.RingTheory.ProperBaseChange.IndEtaleStability
 
 /-! # Properties of the retained localization
-
-Source: blueprint, proper base change, order 1225, Properties of the retained localization
-(blueprint: theorem-existence-contractible-covers--1).
 -/
 
 @[expose] public section
@@ -24,8 +21,7 @@ namespace PrincipalWLocalization.Retained
 
 variable {R : Type u} [CommRing R]
 
-/-- The canonical composite `R → R^w → R_[T]`.
-Source: blueprint order 1225 (blueprint: theorem-existence-contractible-covers--1). -/
+/-- The canonical composite `R → R^w → R_[T]`. -/
 noncomputable def structuralMap (T : Set (PrimeSpectrum R)) (hT : IsClosed T) :
     R →+* algebra T hT :=
   (algebraMap (PrincipalWLocalization.algebra R) (algebra T hT)).comp
@@ -408,34 +404,6 @@ private theorem closedPoints_homeomorph_of_range
 /-- The retained localization is ind-Zariski, has the listed prime pairs and canonical local
 rings, and under the closed-point hypothesis is w-local with patch closed-point space `T`.
 The quotient assertion concerns the canonical map, not merely an abstract ring equivalence.
-Source: blueprint order 1225 (blueprint: theorem-existence-contractible-covers--1).
-
-Proof:
-1. Express the retained algebra as the filtered colimit of the single principal selector
-localizations. Compose this ind-principal-Zariski presentation with that of `R^w` using
-lemma-stability.
-2. Construct the evaluation map `R^w → R_x` directly from the finite product stages. Every
-fraction comes from the stage with partition `D(s), V(s)` and denominators `s, 1`, so this
-map is surjective. It sends the selector of `E` to one or zero according as `x ∈ E`.
-Its closed point lies in the component with first coordinate `x`. Since the selector basic
-open is clopen, it is constant on that component. Thus a selector avoids the prime `(x,y)`
-exactly when `x ∈ E` (theorem-existence-contractible-covers--1).
-3. Each idempotent localization map is surjective, so the map from `R^w` to the retained
-algebra is surjective. Its spectrum is a closed subspace, consisting exactly of primes
-avoiding every selector: for the converse, map the colimit to the ambient prime localization.
-The intersection of all constructible supersets of `T` is `T`: for `x ∉ V(I)`, choose
-`f ∈ I` outside `x`, and use `V(f)`. Restrict the ambient prime-pair equivalence to obtain
-the stated retained pairs. Filtered colimits of finite products of principal localizations
-are bijective on stalks, giving the canonical local-ring assertion.
-4. W-locality descends along the surjection from `R^w`. Restrict the ambient homeomorphism
-from the patch spectrum to its closed-point set along the retained closed embedding; its
-range calculation gives the required homeomorphism and diagonal compatibility.
-5. When `T=V(J)` consists of closed points, a quotient prime has `J ≤ y ≤ x`, so maximality
-forces `y=x`. The canonical quotient spectrum map is therefore bijective. Bijectivity on
-stalks descends to quotient maps, and the source library's
-`RingHom.BijectiveOnStalks.bijective_of_bijective` then proves that the canonical quotient
-ring map is bijective. No compact Hausdorff argument is needed. All constructions also
-apply to the empty retained subset and to the zero ring.
 -/
 theorem properties (T : Set (PrimeSpectrum R)) (hT : IsClosed T) :
     @Algebra.IsIndPrincipalZariski R (algebra T hT) _ _ (structuralMap T hT).toAlgebra ∧

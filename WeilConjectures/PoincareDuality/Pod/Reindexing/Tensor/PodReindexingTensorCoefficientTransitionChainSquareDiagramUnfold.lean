@@ -11,8 +11,7 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexin
 
 The chains and transitions of the fixed tensor diagram, rewritten as the explicit derived maps
 of their representative chain maps.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: def-pod-tensor-descent-diagram).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -68,9 +67,7 @@ attribute [local implicit_reducible] podTensorDiagramReindexFunctor
   podTensorDiagramDerivedTransition podTensorDiagramPairTransition
 
 
-/-- The scalar functor of the diagram acts by the derived scalar extension.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The scalar functor of the diagram acts by the derived scalar extension. -/
 theorem podTensorDiagramScalarFunctor_map
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -89,9 +86,7 @@ theorem podTensorDiagramScalarFunctor_map
     (podTensorDiagramScalarFunctor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).map x =
       (integralOrdinaryScalar l E L ι X).mapDerivedCategory.map x := rfl
 
-/-- The reindexing chain of the diagram on a pair of representatives.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The reindexing chain of the diagram on a pair of representatives. -/
 theorem podTensorDiagramReindexChain_unfold
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -113,9 +108,7 @@ theorem podTensorDiagramReindexChain_unfold
         ((integralOperationsTensorComplexFunctor l E Y).obj (P.1.obj.obj, P.2.obj.obj)) ≫
       DerivedCategory.Q.map (podReindexTensorChain l E g D T P.1.obj P.2.obj) := rfl
 
-/-- The scalar chain of the diagram on the reindexed pair of representatives.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The scalar chain of the diagram on the reindexed pair of representatives. -/
 theorem podTensorDiagramScalarChain_unfold
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -142,9 +135,7 @@ theorem podTensorDiagramScalarChain_unfold
       DerivedCategory.Q.map (scalarTensorChain l E L ι X ((podGoodReindex l E g D).obj P.1.obj).obj
         ((podGoodReindex l E g D).obj P.2.obj).obj) := rfl
 
-/-- The target representative of the pair of good coefficient transitions.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The target representative of the pair of good coefficient transitions. -/
 theorem podTensorDiagramTargetRepresentative_map_transition
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -169,9 +160,7 @@ theorem podTensorDiagramTargetRepresentative_map_transition
         ((S.complex l E g L ι D D').hom.app P.1.obj.obj)
         ((S.complex l E g L ι D D').hom.app P.2.obj.obj))) := rfl
 
-/-- The derived transition of the diagram at a source representative.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The derived transition of the diagram at a source representative. -/
 theorem podTensorDiagramDerivedTransition_app_source
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -200,9 +189,7 @@ theorem podTensorDiagramDerivedTransition_app_source
             ((integralOperationsTensorComplexFunctor l E Y).obj (P.1.obj.obj, P.2.obj.obj))) :=
   rfl
 
-/-- The mixed chain of the diagram on a pair of representatives.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The mixed chain of the diagram on a pair of representatives. -/
 theorem podTensorDiagramMixedChain_unfold
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

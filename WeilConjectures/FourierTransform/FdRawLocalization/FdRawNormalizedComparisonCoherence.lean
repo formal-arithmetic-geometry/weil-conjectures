@@ -9,8 +9,6 @@ public import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizati
 import WeilConjectures.FourierTransform.FdRawLocalization.FdRawNormalizedComparisonShift
 
 /-! # Descent of the fixed integral scalar comparison
-
-Source: trace-definition coefficient-category sentence, raw localization steps 1--3.
 -/
 
 @[expose] public noncomputable section
@@ -490,28 +488,7 @@ private theorem assoc_rightUnit {E L : Padic.FiniteCoefficientFields l Ω} (h : 
   eq_of_heq (assoc_rightUnit_heq l Ω T h K)
 
 
-/-- Integral cocycle and unit equations descend for a component-normalized comparison.
-Source: raw localization scalar-descent steps 2 and 3
-(blueprint: lem-fd-raw-normalized-comparison-coherence).
-
-Proof: Every raw rational object is the image of its underlying integral object.
-Evaluate the desired three-field identity on that object and substitute hcomponents
-for each comparison. Naturality of pbcScalarIntegralComparison moves the localized
-inverse b component through the PBC scalar functor. The defining normalization of
-pbcScalarAssociator cancels its adjacent integral comparisons and identifies the
-remaining associator with Q of pbcIntegralScalarAssociator. The framework associator
-is sfRationalScalarComp followed by coefficient-inclusion equality transport; its
-normalization identifies it with Q of integralAssoc. The stage tensor formula moves
-this last map through J. What remains is Q applied to hcocycle, followed by the same
-invertible scalar comparison on both sides; preservation of composition gives the
-equality. At equal fields the PBC transition is literally the identity. Its integral
-comparison is the localization of the actual integral unit, so hunit gives the
-identity value after the framework unit normalization. Finally specialize the
-three-field identity to an identity inclusion in the first and second position.
-The balanced-tensor left and right unit equations for sfRationalScalarComp, including
-the coefficient-inclusion equality transports, turn those two specializations into
-the displayed unit equations. These normalizations retain the actual completeness
-map. All arguments include repeated fields, zero objects, and the empty scheme. -/
+/-- Integral cocycle and unit equations descend for a component-normalized comparison. -/
 theorem rawNormalizedComparisonCoherence
     (b : ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       I l Ω T stage E ⋙ C l Ω T h ≅ U l Ω T h ⋙ I l Ω T stage L)

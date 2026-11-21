@@ -20,7 +20,6 @@ import Mathlib.Tactic.Abel
 # LocallyConstantCochainsAcyclicEmbedding
 
 Source: Stacks Project, Etale Cohomology, Tag 0DVG.
-(blueprint: lem-sc-locally-constant-cochains-acyclic-embedding).
 -/
 
 @[expose] public section
@@ -106,22 +105,7 @@ cochains with values in a right-translation function module. The coefficient gro
 arbitrary; in particular it need not be finite or torsion. Both the additive map and its
 value are uniquely determined by the displayed evaluation formula.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, final profinite comparison;
-explicit evaluation contraction in the parent acyclic-embedding node.
-
-Proof: Define h_n(F)(g)(x) = F(cons x g)(1). Insertion is continuous and postcomposition
-by evaluation preserves local constancy, so this is locally constant in x. For fixed g,
-joint local constancy on G times G^n gives product neighborhoods on which the value
-is constant. A finite subcover in the compact x variable and intersection of the
-corresponding g neighborhoods makes the whole function of x constant near g.
-This proves local constancy into the discrete function module. Evaluation and insertion
-commute with addition, giving an additive h_n. Expand d_n h_n F at g,x: its first term
-is F(cons (x*g_0) (tail g))(1). Expand h_(n+1) d_(n+1) F using the differential at
-cons x g and evaluate at one: the action term is F(g)(x), and its first merged term
-is the negative of the preceding first term. The remaining merged terms and the
-last deletion terms cancel pairwise because their signs differ by one exponent.
-Hence the sum is F(g)(x). Extensionality gives the asserted identity, including n=0.
-(blueprint: lem-sc-locally-constant-cochains-acyclic-embedding). -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, final profinite comparison. -/
 private theorem integerCoinduced_contraction
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] (V : Type s) [AddCommGroup V]
@@ -269,32 +253,7 @@ private theorem integerOrbitMap_mono (G : Type u) [Group G] [TopologicalSpace G]
 /-- Every object embeds in one whose locally constant integer cochain complex is
 exact in all positive degrees.
 
-Source: Stacks Project, Etale Cohomology, Tag 0DVG, final profinite comparison;
-step 4 of lem-sc-locally-constant-cochains-effaceable (explicit contraction).
-
-Proof: Construct D(E(M)) as LC(G,E(M)) with pointwise integer module structure and
-right translation rho(h)f(x)=f(x*h). Every function has a finite clopen partition.
-Compactness and continuity of multiplication give a common identity neighborhood
-preserving that partition under right translation. A compact Hausdorff totally
-disconnected group has an open subgroup inside that neighborhood. Thus stabilizers
-are open and D(E(M)) is a discrete representation. The orbit map m to (x to rho(x)m)
-is locally constant, integer-linear and equivariant; evaluation at 1 is its left
-inverse, so it is monic. Take N=E.inverse.obj D(E(M)) and transport the orbit map via
-the unit and counit of E. These are specified constructions, not arbitrary existence
-choices. Transport the coordinates of C(N) through the counit to cochains with values
-in LC(G,E(M)). For a degree n+1 cochain F put h_n(F)(g)(x)=F(x,g)(1).
-This is locally constant in x. For local constancy in g with the whole function of x
-fixed, cover the compact x factor by finitely many product neighborhoods on which F
-is constant and intersect their g neighborhoods. The contraction is additive.
-Expand d_n h_n F and h_(n+1) d_(n+1) F at g,x using the differential equation.
-The action face uses right translation. Their sum is F(g)(x): the merged first face
-cancels the extra translation term, each interior merged face cancels with the
-opposite sign, and the final deletion terms cancel. This includes n=0.
-Consequently every positive-degree cocycle F is d(h(F)), and conversely every boundary
-is a cocycle. The coordinate equivalences transport this equality of kernel and image
-to exactness of C(N) in every positive degree. The coefficient equation identifies
-transport under the counit. The orbit map remains monic under the equivalence.
-(blueprint: lem-sc-locally-constant-cochains-acyclic-embedding). -/
+Source: Stacks Project, Etale Cohomology, Tag 0DVG, final profinite comparison. -/
 theorem locallyConstantCochains_acyclic_embedding
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

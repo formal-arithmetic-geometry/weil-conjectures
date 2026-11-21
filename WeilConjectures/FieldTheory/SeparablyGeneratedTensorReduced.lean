@@ -14,8 +14,7 @@ import WeilConjectures.Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 /-!
 # Tensoring a reduced algebra with a separably generated field extension
 
-Source: Stacks Project, Algebra, Lemma 10.43.6 (Tag 030U), separably generated case
-(blueprint: lem-weil-pbc-separably-generated-tensor-reduced).
+Source: Stacks Project, Algebra, Lemma 10.43.6 (Tag 030U), separably generated case.
 -/
 
 @[expose] public section
@@ -43,23 +42,7 @@ private theorem isReduced_tensorProduct_of_separable_algebraic
 
 /-- Tensoring a reduced commutative `k`-algebra with a separably generated field extension
 of `k` gives a reduced ring. Source: Stacks Project, Algebra, Lemma 10.43.6 (Tag 030U),
-separably generated case (blueprint: lem-weil-pbc-separably-generated-tensor-reduced).
-
-Proof:
-1. Put `E = k(s)` for the given separating transcendence basis. For each residue field
-   of `S`, the source library's
-   `isReduced_tensorProduct_adjoin_of_algebraicIndependent` proves reducedness after
-   tensoring with `E`, by identifying it with a localization of a polynomial ring.
-   `isReduced_tensorProduct_of_forall_residueField` gives reducedness of `S ⊗[k] E`.
-2. A separable algebraic extension preserves reducedness: reduce the reduced algebra
-   to its residue fields, and the extension to its finitely generated subalgebras using
-   `IsReduced.tensorProduct_of_flat_of_forall_fg`. Each such subalgebra is a field,
-   separable and of finite type, hence formally unramified. After base change to a
-   residue field it is reduced by `Algebra.FormallyUnramified.isReduced_of_field`.
-   This argument is proved in the private helper above.
-3. Apply step 2 to `K/E` and the reduced `E`-algebra `E ⊗[k] S`. The tensor
-   base-change equivalence identifies the result with `K ⊗[k] S`. Reducedness
-   transports through this equivalence. -/
+separably generated case. -/
 theorem isReduced_tensorProduct_of_isSeparablyGenerated
     (k : Type u) (K : Type v) (S : Type w)
     [Field k] [Field K] [CommRing S] [Algebra k K] [Algebra k S] [IsReduced S]

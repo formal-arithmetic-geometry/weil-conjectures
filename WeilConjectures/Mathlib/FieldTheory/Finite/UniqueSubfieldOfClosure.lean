@@ -11,10 +11,6 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 /-!
 # The unique finite subfield of an algebraic closure
-
-Source: Weil conjectures blueprint, `chap-Nagata-compactification-and-Chows-lemma`,
-`sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md`, order 411
-(blueprint: lem-weil-unique-subfield-of-closure).
 -/
 
 @[expose] public section
@@ -28,9 +24,6 @@ form its unique subfield with `q ^ n` elements. The image of the base field is t
 root subfield for `n = 1`, is the unique subfield with `q` elements, and lies in every
 such subfield. The final ring homomorphism is the corestriction of the base-field map;
 via `RingHom.toAlgebra` it supplies the claimed base-field algebra structure.
-
-Source: blueprint `def-weil-finite-field-fiber.md`, order 411
-(blueprint: lem-weil-unique-subfield-of-closure).
 
 Proof plan (Lang, Algebra, Ch. V, §5, Theorem 5.1, wanted but not obtained;
 the six-step argument is recorded in the DAG):

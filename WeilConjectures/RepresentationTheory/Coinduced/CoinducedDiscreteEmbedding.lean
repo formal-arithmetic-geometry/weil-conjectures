@@ -13,10 +13,8 @@ import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
 /-!
 # Coinduced embeddings of discrete continuous modules
 
-Source: Stacks Project, etale-cohomology.tex, Tag 04JP,
-label definition-G-module-continuous; Tag 0DVG, label section-continuous-group-cohomology.
-The coinduced embedding is the agent-written comparison ingredient
-(blueprint: lem-exc-coinduced-discrete-embedding).
+Source: Stacks Project, etale-cohomology.tex, Tag 04JP, label definition-G-module-continuous; Tag
+0DVG, label . The coinduced embedding is the agent-written comparison ingredient.
 -/
 
 @[expose] public section
@@ -148,21 +146,8 @@ continuous functions with right translation. `LocallyConstant G M.obj.V` is exac
 `Cont(G, M)` with discrete codomain, and its module operations are pointwise.
 The linear equivalences identify the coinduced objects with those function modules.
 
-Source: Stacks Project, etale-cohomology.tex, Tag 04JP,
-label definition-G-module-continuous; Tag 0DVG, label section-continuous-group-cohomology
-(blueprint: lem-exc-coinduced-discrete-embedding).
-
-Proof: (1) Pointwise operations give the function module, and precomposition by right
-multiplication gives a linear left action: translating successively by `k` then `h`
-evaluates at `x * h * k`, and translation by one is the identity.
-(2) `lem-exc-coinduced-functions-open-stabilizer` supplies an open normal subgroup
-under whose right translations any continuous function is invariant. Its stabilizer
-contains that subgroup, so is open; hence the coinduced object belongs to
-`DiscreteContinuousRep`, the category used in `lem-exc-discrete-modules-abelian`.
-(3) The orbit map is locally constant on the open left cosets of each element's
-stabilizer. It is linear pointwise and equivariant since `(x * h) m = x (h m)`.
-Evaluation at one proves injectivity. Equivariant linear maps commute with the orbit
-maps pointwise, giving naturality; on functions the coinduced map is postcomposition. -/
+Source: Stacks Project, etale-cohomology.tex, Tag 04JP, label definition-G-module-continuous; Tag
+0DVG, label. -/
 theorem exists_coinduced_discrete_embedding
     (G : Type u) [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

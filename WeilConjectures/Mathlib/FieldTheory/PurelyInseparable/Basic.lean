@@ -25,9 +25,9 @@ connected (Stacks, Algebra, Lemma 10.48.4).
   closed, `A` has no nontrivial idempotents and `L` is a `k`-domain, then `A ⊗[k] L` has no
   nontrivial idempotents.
 - `IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable`: an algebraic extension of a
-  separably closed field is purely inseparable (blueprint `lemma-representability-picard-functor`).
+  separably closed field is purely inseparable.
 - `isPurelyInseparable_iff_exists_algebraMap_eq_pow`: `E / F` is purely inseparable iff every
-  `α ∈ E` has `α ^ (q ^ n) ∈ F` for some `n` (blueprint `def-pc-field-tower`).
+  `α ∈ E` has `α ^ (q ^ n) ∈ F` for some `n`.
 -/
 
 @[expose] public section
@@ -155,9 +155,7 @@ variable (k : Type u) [Field k]
 /-- **The algebraic closure of a separably closed field is purely inseparable.** Let `k` be
 separably closed of exponential characteristic `p` and `K / k` algebraic (for instance
 `K = k̄`). Every `α ∈ K` has a power `α ^ p ^ n` which is separable over `k` (it even lies in
-`k`), hence `K / k` is purely inseparable.
-
-(blueprint: `lemma-representability-picard-functor`) -/
+`k`), hence `K / k` is purely inseparable. -/
 theorem IsSepClosed.exists_isSeparable_pow_and_isPurelyInseparable [IsSepClosed k] (p : ℕ)
     [ExpChar k p] (K : Type v) [Field K] [Algebra k K] [Algebra.IsAlgebraic k K] :
     (∀ α : K, ∃ n : ℕ, IsSeparable k (α ^ p ^ n)) ∧ IsPurelyInseparable k K := by
@@ -179,9 +177,7 @@ In characteristic `0` we have `q = 1`, and this says `E = F`. This is
 
 The other notions of the blueprint definition are those of Mathlib: `Module.Finite F E`
 (finite), `Algebra.IsAlgebraic F E` (algebraic), `Algebra.IsSeparable F E` (separable), and
-`IsAlgClosure F E` (algebraic closure: `E` is algebraically closed and algebraic over `F`).
-
-(blueprint: `def-pc-field-tower`) -/
+`IsAlgClosure F E` (algebraic closure: `E` is algebraically closed and algebraic over `F`). -/
 theorem isPurelyInseparable_iff_exists_algebraMap_eq_pow :
     IsPurelyInseparable F E ↔ ∀ α : E, ∃ n : ℕ, ∃ a : F, algebraMap F E a = α ^ q ^ n :=
   isPurelyInseparable_iff_pow_mem F q

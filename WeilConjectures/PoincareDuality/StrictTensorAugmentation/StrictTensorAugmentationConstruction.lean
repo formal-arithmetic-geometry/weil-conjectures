@@ -41,8 +41,7 @@ attribute [local implicit_reducible] IntegralOnSlice.ring IntegralOnSlice.restri
   IntegralOnSlice.topology IntegralOnSlice.Site IntegralOnSlice.roos IntegralAmbient.tensorTower
 
 /-- Naturality of the fixed quotient completion unit.
-Source: Stacks 08TC (blueprint: lem-pur-strict-tensor-augmentation-construction).
-Proof: the product augmentation is natural and the second coordinate vanishes. -/
+Source: Stacks 08TC. -/
 theorem unit_naturality (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) {P Q : IntegralOnSlice.Cx.{u, u} l E T none} (f : P ⟶ Q) :
@@ -52,7 +51,7 @@ theorem unit_naturality (l : ℕ) [Fact l.Prime]
   IntegralOnSlice.sliceRoosUnit_natural.{u, u} l E T none f
 
 /-- The natural quotient completion unit.
-Source: Stacks 08TC (blueprint: lem-pur-strict-tensor-augmentation-construction). -/
+Source: Stacks 08TC. -/
 def unit (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) :
@@ -61,8 +60,7 @@ def unit (l : ℕ) [Fact l.Prime]
   naturality _ _ f := unit_naturality l E T f
 
 /-- The strict ordinary-to-completed tensor map built from the normalized quotient tower.
-Source: Stacks 03EL, 07A4 and 0941
-(blueprint: lem-pur-strict-tensor-augmentation-construction). -/
+Source: Stacks 03EL, 07A4 and 0941. -/
 def map (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) :
@@ -82,8 +80,7 @@ def map (l : ℕ) [Fact l.Prime]
 attribute [local irreducible] IntegralOnSlice.roosUnit IntegralAmbient.tensorTowerIso
 
 /-- The constructed transformation has the recorded strict augmentation as each component.
-Source: Stacks 03EL and 08TC
-(blueprint: lem-pur-strict-tensor-augmentation-construction). -/
+Source: Stacks 03EL and 08TC. -/
 theorem map_app (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (T : Scheme.{u}) (P Q : CochainComplex (integralTowerModules.{u, u} l E T) ℤ) :

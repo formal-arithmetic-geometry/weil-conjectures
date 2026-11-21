@@ -16,7 +16,6 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 /-! # Strict tower model comparison before completion units
 
 Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks Tags 0941 and 099N(5).
-(blueprint: lem-weil-pbc-integral-strict-model-matching).
 -/
 
 @[expose] public noncomputable section
@@ -238,36 +237,7 @@ attribute [local irreducible] integralOperationsRoos integralDerivedPullbackComp
 completion maps. Its equations specify the strict tower, both Roos coordinates,
 and its value after every entire-tower K-injective resolution.
 
-Source: Stacks 0941 and 099N(5); Bhatt--Scholze, Remark 6.8.15.
-(blueprint: lem-weil-pbc-integral-strict-model-matching).
-
-Proof: fix the given ordinary pullback identification a. On a flat-term K-flat
-representative P, balance scalar tensors with each finite quotient to identify the
-actual pulled reduction tower with the ordinary finite-pullback tower. Quotient
-transition maps commute with these identifications on pure tensors, so these are
-an isomorphism t of entire strict towers. Both quotient augmentations take the
-unit generator to the unit generator tensored with 1; the module_unit condition
-on a proves the required augmentation equation. Restriction along the coefficient
-isomorphism preserves products and finite biproducts. Transport the mapping cocone
-of 1-s through these product comparisons to obtain z; checking its first and
-second coordinates against every product projection proves exactly the two Roos
-coordinate equations. The reduction counit is invertible on P by its K-flat
-computation property. The completed coefficient inverse-image map is an
-isomorphism, so ordinary module pullback is exact. Its levelwise tower functor
-is exact as well. Thus its derived counit is invertible even on the reduction
-tower, whose quotient terms need not be flat over the completed ring. Together
-with exact scalar transport this proves invertibility of the actual tower counit.
-Exact countable products imply that the Roos functor preserves quasi-isomorphisms.
-For any K-injective resolution r with injective tower terms, the split transitions
-make 1-s degreewise epic with kernel the ordinary limit. Include this kernel in
-the mapping cocone with zero shifted coordinate. The short exact sequence of
-complexes shows that this inclusion is a quasi-isomorphism. The strict Roos
-comparison identifies its inverse with the universal derived-limit computation;
-naturality of that universal unit proves the displayed formula for every r.
-Together with z and the actual tower counit this defines a natural isomorphism
-on the good representatives. Descend that isomorphism along the good-complex
-localization to obtain b. Its defining formula and the coordinate calculations
-are precisely PbcProperIntegralModelMatching l E h a b. -/
+Source: Stacks 0941 and 099N(5); Bhatt--Scholze, Remark 6.8.15. -/
 theorem pbc_integral_strict_model_matching_exists
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] {U T : Scheme.{u}} (h : U ⟶ T)

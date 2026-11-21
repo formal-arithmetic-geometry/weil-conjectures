@@ -13,7 +13,7 @@ public import WeilConjectures.EtaleCohomology.TateTwist.AffineLine
 For the Kummer classes of the Tate twist `Λ(1) = μₙ ⊗ Λ` (`AlgebraicGeometry.Etale.hasKummerClass`),
 the Kummer boundary `∂κ(t)` of the coordinate `t` of `𝔸¹_B` is the fundamental class of the zero
 section: its adjoint `Λ_{V(t)} ⟶ Rs^! (Λ(1)[2])` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord`, blueprint `sk-prop-a1`).
+(`AlgebraicGeometry.Etale.isIso_supportedClassMap_kummerBoundary_coord`).
 Hence the rank-one datum is normalized (`AlgebraicGeometry.Etale.hasKummerClass_isNormalized`).
 -/
 
@@ -31,7 +31,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [NeZero (ringChar Λ)]
 
-/-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section.
+/-- Rank-one orientation: the fundamental class of the zero section.
 
 For `B` separated and locally of finite type over a field, on which the characteristic `n` of `Λ`
 is invertible, let `t` be the coordinate of `𝔸¹_B` and `s : V(t) ⟶ 𝔸¹_B` the zero section. For the

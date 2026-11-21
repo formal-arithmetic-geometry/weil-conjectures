@@ -10,8 +10,7 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 
 /-! # Completed tensor square for scalar/reindexing transitions
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-mixed-normalization).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -74,11 +73,7 @@ private theorem pasteNormalization
   simp only [Category.assoc]
 
 /-- A representative step of the scalar/reindexing tensor descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-tensor-mixed-normalization).
-Proof: Apply the scalar normalization on the source. Scalar localization factors preserve
-    constructibility. Apply the target-field tensor Model law, and use tensor naturality to move
-    both scalar factors. Paste these three equalities. -/
+Source: Stacks 05RU, 0941. -/
 theorem podTensorMixedRepresentativeNormalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

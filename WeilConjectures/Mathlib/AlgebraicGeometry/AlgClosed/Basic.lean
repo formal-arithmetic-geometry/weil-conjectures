@@ -36,8 +36,7 @@ universe u
 
 variable {X Y : Scheme.{u}} {K : Type u} [Field K] [IsAlgClosed K]
 
-/-- Blueprint `corollary-torsion-jacobian-field-extension--3`: Finite schemes over algebraically
-closed fields.
+/-- Finite schemes over algebraically closed fields.
 
 A nonempty finite scheme `X` over an algebraically closed field `K` has a `K`-point: a closed
 point of `X` has residue field `K`. -/
@@ -47,8 +46,7 @@ theorem exists_comp_eq_id_of_isFinite (f : X ⟶ Spec (.of K)) [IsFinite f] [Non
   obtain ⟨x, -, hx⟩ := isClosed_univ.exists_closed_singleton (X := X) Set.univ_nonempty
   exact ⟨pointOfClosedPoint f x hx, pointOfClosedPoint_comp f x hx⟩
 
-/-- Blueprint `corollary-torsion-jacobian-field-extension--3`: Finite flat surjections are
-surjective on `K`-points.
+/-- Finite flat surjections are surjective on `K`-points.
 
 Let `f : X ⟶ Y` be finite and surjective and `K` algebraically closed. Then every `K`-point
 `y : Spec K ⟶ Y` lifts to a `K`-point of `X`: the fibre `X ×_Y Spec K` is a nonempty finite

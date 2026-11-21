@@ -51,8 +51,7 @@ the kernel transform of the convolution
 `FT_{ψ⁻¹} FT_ψ` is the kernel transform with kernel `𝒦_{ψ⁻¹} ∗ 𝒦_ψ` and shift `2r`.
 
 Class: torsion; decided by compact-support base change and the projection formula for `Rf_!`
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_comp`), which need `[Finite Λ]`.
-(sketch blueprint: `proposition-fourier-inversion`; blueprint: `proposition-fourier-inversion`) -/
+(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_comp`), which need `[Finite Λ]`. -/
 theorem nonempty_iso_fourierTransform_comp [Finite Λ]
     [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [CharP Γ(pullback π π', ⊤) p] [CharP Γ(pullback π' π'', ⊤) p]

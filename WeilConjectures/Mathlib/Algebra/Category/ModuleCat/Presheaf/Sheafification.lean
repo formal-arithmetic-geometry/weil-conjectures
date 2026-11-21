@@ -99,8 +99,7 @@ from a presheaf of modules `P` to (the restriction of scalars of) a sheaf of mod
 uniquely through the unit `P ⟶ P^#` of the sheafification adjunction
 `PresheafOfModules.sheafificationAdjunction`: the sheafification functor is left adjoint to the
 inclusion of sheaves of modules into presheaves of modules. On underlying abelian presheaves,
-`P^#` is the sheafification of `P` (`PresheafOfModules.sheafificationCompToSheaf`).
-(blueprint: `def-weil-presheaf-modules-sheafification`) -/
+`P^#` is the sheafification of `P` (`PresheafOfModules.sheafificationCompToSheaf`). -/
 theorem existsUnique_sheafification_unit_comp (P : PresheafOfModules.{v} R₀)
     (F : SheafOfModules.{v} R)
     (f : P ⟶ (restrictScalars α).obj ((SheafOfModules.forget _).obj F)) :

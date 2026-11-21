@@ -14,8 +14,7 @@ public import Mathlib.FieldTheory.TranscendentalSeparable
 /-!
 # Separably generated and separable field extensions
 
-Source: Stacks Project, Algebra, Definition 10.42.1 (Tag 030O)
-(blueprint: def-weil-pbc-separable-field-extension).
+Source: Stacks Project, Algebra, Definition 10.42.1 (Tag 030O).
 
 ## Main definitions
 
@@ -31,8 +30,7 @@ namespace Algebra
 
 /-- A field extension `K/k` is separable if every intermediate field finitely generated as a
 field over `k` is separably generated over `k`.
-Source: Stacks Project, Algebra, Definition 10.42.1 (2), Tag 030O
-(blueprint: def-weil-pbc-separable-field-extension). -/
+Source: Stacks Project, Algebra, Definition 10.42.1 (2), Tag 030O. -/
 def IsSeparableExtension (k : Type u) (K : Type v) [Field k] [Field K] [Algebra k K] :
     Prop :=
   ∀ F : IntermediateField k K, F.FG → IsSeparablyGenerated k F

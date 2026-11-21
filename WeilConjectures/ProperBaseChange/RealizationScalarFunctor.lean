@@ -249,7 +249,6 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
 /-! # Actual scalar extension on raw integral rationalizations
 
 Source: Bhatt--Scholze, Lemma 6.8.2 and Propositions 6.8.11(3), 6.8.14(2).
-(blueprint: lem-weil-pbc-realization-scalar-functor)
 
 The coefficient encodings are the published constructions. The record below retains
 only the scalar functor and its normalization; it contains no equivalence assertion.

@@ -22,19 +22,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Restricted generator comparisons respect the normalized ordinary compositor.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL
-(blueprint: lem-pod-composition-restricted-tower).
-
-Proof: the ordinary compositor is invertible, so its stated forward section
-formula determines the inverse section formula by cancellation. Test the tower
-maps at every tower index, complex degree, and original local section. The
-restricted-generator equations replace each comparison by its actual adjunction
-unit. Restricted-section naturality moves the inverse compositor to the original
-section. The strict sequence compositor sends a unit generator to two successive
-unit generators. Their site naturality then moves all arrows to the final sheaf,
-where functoriality combines them. The actual comma-arrow composition identity
-identifies the two resulting arrows, proving the section equality and hence the
-entire tower-map equality. Zero sections and empty sites obey the same equations. -/
+Source: Stacks 03EL. -/
 theorem podCompositionRestrictedTower
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]
     [∀ v : V, Invertible (l : V.residueField v)]

@@ -10,7 +10,6 @@ public import WeilConjectures.DeligneLaumon.FinitePullbackStrictTower.FinitePull
 /-! # Naturality of the localized strict-tower zigzag
 
 Source: Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH.
-(blueprint: lem-a1-finite-pullback-localized-zigzag).
 -/
 
 @[expose] public noncomputable section

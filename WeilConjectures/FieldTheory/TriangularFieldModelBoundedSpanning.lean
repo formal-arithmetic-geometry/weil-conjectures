@@ -183,21 +183,7 @@ private theorem triangularFieldModel_bounded_mul
   exact stable j.val j rfl (v a) (Submodule.subset_span ⟨a, rfl⟩)
 
 /-- Bounded monomials span the triangular quotient.
-Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ.
-(blueprint: lem-weil-pbc-triangular-field-model-bounded-spanning).
-
-Proof: Identify the quotient by hT-1 with D=k[X][1/h] via the localization
-presentation. Agreement on k[X] identifies psi with its canonical map. Split
-off the last tower variable and identify the simultaneous quotient with the
-successive monic quotients by the universal maps fixing every variable. Divide
-an arbitrary representative by the mapped last monic polynomial. Its remainder
-has degree below e_i, and represents the same quotient class. Inductively
-expand each remainder coefficient in earlier bounded monomials. Collecting
-coefficients gives the displayed expansion indexed by all bounded exponent
-tuples. The base case m=0 is the localization presentation and its single
-coefficient. If h=0 both rings are zero. If some e_i=0, monicity makes p_i=1,
-so the quotient is zero; its zero element is represented by the unique function
-on the empty exponent set. The argument needs no field evaluation. -/
+Source: Stacks Project, Algebra, proofs of Tags 07BV and 08JZ. -/
 theorem triangularFieldModel_bounded_spanning
     (k : Type u) [Field k] (d m : ℕ) (h : MvPolynomial (Fin d) k)
     (p : (i : Fin m) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k))

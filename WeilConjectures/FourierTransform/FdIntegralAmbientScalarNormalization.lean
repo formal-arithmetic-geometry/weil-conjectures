@@ -10,8 +10,6 @@ public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiber
 import WeilConjectures.FourierTransform.FdCoefficientScalarLiftNormalization
 
 /-! # Ambient normalization in the canonical coefficient presentation
-
-Source: trace-definition coefficient-category comparison, integral steps 1--6.
 -/
 
 @[expose] public noncomputable section
@@ -24,15 +22,6 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures
 
 /-- Ambient scalar normalization in the canonical datum-free transition presentation.
-Source: trace-definition coefficient comparison, ambient normalization step
-(blueprint: lem-fd-integral-ambient-scalar-normalization).
-
-Proof: use fdCoefficientScalarLift_normalization. The redundant characteristic
-parameter in the constructibility preservation proof changes neither the objects
-nor the morphisms of the restricted completed extension: unfold its restriction
-and discard the proof field by proof irrelevance. Thus its comparison has exactly
-the canonical integralTransition target, and retains the same representative
-normalization without changing any map.
 -/
 theorem fdIntegralAmbientScalarNormalization
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)

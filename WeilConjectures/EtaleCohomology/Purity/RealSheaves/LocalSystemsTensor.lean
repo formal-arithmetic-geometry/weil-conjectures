@@ -38,7 +38,7 @@ the terminal sheaf of sets (`AlgebraicGeometry.Scheme.unitSection`).
 ## Main results
 
 - `AlgebraicGeometry.Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor`: the Galois
-  correspondence (`proposition-lattices-representations-normal-scheme`) as a tensor equivalence.
+  correspondence as a tensor equivalence.
 -/
 
 @[expose] public noncomputable section
@@ -467,8 +467,7 @@ lemma Scheme.galoisRepFunctorUnitIso_hom_hom_apply
 end Unit
 
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: Galois correspondence for finite
-local systems, with its tensor structure.
+/-- Galois correspondence for finite local systems, with its tensor structure.
 
 Let `Y` be a connected scheme, `s` a geometric point, `Λ` a finite ring and `G = π₁(Y, s)` a
 fundamental group of the fibre functor at `s`. The geometric stalk at `s` is an equivalence `e`
@@ -510,8 +509,7 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_tensor_of_isFunda
   ext w
   rfl
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: Galois correspondence for finite
-local systems, as an exact *tensor* equivalence.
+/-- Galois correspondence for finite local systems, as an exact *tensor* equivalence.
 
 For a connected scheme `Y`, a geometric point `s` and a finite ring `Λ`, there is a profinite
 group `G` (the étale fundamental group `π₁(Y, s)`) and an equivalence `e` between finite locally

@@ -67,8 +67,7 @@ constant `ℓ`-adic sheaf `ℚ̄_ℓ`. Its Frobenius module may still be nontriv
 components of `Ū` are open, for instance when `U` is of finite type over `k₀`, this says that
 `F` is constant on each connected component of `Ū`. For `Ū` connected, as for `U` an open of
 `𝔸¹_{k₀}`, it is the constancy of `F` on `Ū`, which motivates the definition: the geometric
-fundamental group `π₁(Ū)` acts trivially on the stalks of `F`.
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
+fundamental group `π₁(Ū)` acts trivially on the stalks of `F`. -/
 def IsGeometricallyConstant (F : WeilSheaf k₀ l U) : Prop :=
   ∀ V : (U ↘ Spec (CommRingCat.of k₀)).geometricFiber.Opens, ConnectedSpace V →
     ∃ n : ℕ, Nonempty ((V.ι)^*ᵃ[l].obj F.obj.carrier ≅
@@ -89,8 +88,7 @@ the point `∞`, and the extension is a lisse Weil sheaf `G` on an open `W ⊆ �
 ```
 The choice of chart does not matter: two open immersions `𝔸¹ ↪ ℙ¹` of `k₀`-schemes differ by
 a `k₀`-automorphism of `ℙ¹`. This condition is equivalent to the inertia group at `∞` acting
-trivially on the geometric generic fiber of `F`.
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
+trivially on the geometric generic fiber of `F`. -/
 def IsUnramifiedAtInfinity (F : WeilSheaf k₀ l U) (j : U ⟶ affineLine k₀) [IsOpenImmersion j]
     [j.IsOver (Spec (CommRingCat.of k₀))] : Prop :=
   let ι := ProjectiveLine.affineChart (Spec (CommRingCat.of k₀))

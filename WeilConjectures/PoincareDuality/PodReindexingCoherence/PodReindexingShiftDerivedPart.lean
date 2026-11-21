@@ -10,8 +10,7 @@ import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingShift
 
 /-! # Derived part of signed shift laws for reindexing comparisons
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: lem-pod-reindexing-signed-shifts).
+Source: Stacks 0A8X, 08JA.
 
 The localization square is isolated from the representative chain square.
 -/
@@ -49,15 +48,7 @@ def DerivedShiftPart {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
 
 /-- Prove the normalized derived square for supplied chain shift presentations.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: lem-pod-reindexing-signed-shifts).
-
-Proof: shifted K-injective complexes remain K-injective by transporting a
-null-homotopy through the shift. Apply the comparison's `derived_model` to
-these representatives. The projection characterization of the normalized
-source and target shifts identifies the localized chain square with the
-specified `signedShift`; naturality along resolutions extends the identity to
-arbitrary derived objects. -/
+Source: Stacks 0A8X, 08JA. -/
 theorem derived_shift_part {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

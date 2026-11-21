@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 # Constancy of a representable inverse image from exhaustive sections
 
 Source: Stacks Project, Section 03SF and Tags 03P5, 0DV6.
-(blueprint: lem-weil-pbc-representable-pullback-constant-evaluation)
 -/
 
 @[expose] public section
@@ -31,20 +30,7 @@ namespace AlgebraicGeometry.Scheme.FiniteEtale
 
 /-- If all points of a finite etale fibre are represented uniquely by maps from a
 connected cover, the representable sheaf becomes constant on that cover.
-Source: Stacks Project, Section 03SF and Tags 03P5, 0DV6.
-(blueprint: lem-weil-pbc-representable-pullback-constant-evaluation)
-
-Proof: each map A -> P gives its graph as a section of A times_U P -> A. Form the map
-from the coproduct of copies of A indexed by Hom_U(A,P) to A times_U P, using these
-sections. This index set is finite because A is connected. On the geometric fibre
-at the point a of A this map is the evaluation map in the hypothesis, so it is a
-bijection. The fibre functor on finite etale A-schemes reflects isomorphisms; hence
-this map is an isomorphism. The sheaf represented by a coproduct of copies of A is
-the constant sheaf with value ULift Hom_U(A,P): maps into it are locally constant
-choices of a summand. The inverse-image/representable comparison identifies the
-sheaf represented by A times_U P with the inverse image in the conclusion.
-If P has empty fibre, the index set and the coproduct are empty and the same argument
-identifies the inverse image with the constant empty sheaf. -/
+Source: Stacks Project, Section 03SF and Tags 03P5, 0DV6. -/
 theorem representable_pullback_isConstant_of_evaluation_bijective
     {U : Scheme.{u}} [ConnectedSpace U]
     {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ U)

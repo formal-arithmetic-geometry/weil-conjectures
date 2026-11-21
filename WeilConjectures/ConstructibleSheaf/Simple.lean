@@ -24,7 +24,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 Let `X` be a scheme whose underlying space is Noetherian and `Λ` a Noetherian ring. This file
 classifies the simple objects of the abelian category of constructible sheaves of `Λ`-modules on
-the small étale site of `X` (blueprint `lem-trf-simple-constructible`): they are the sheaves
+the small étale site of `X`: they are the sheaves
 `i_{x!} M`, where `x` is a point with `{x}` locally closed, `i_{x!}` is the extension by zero
 along `Spec κ(x) ⟶ X`, and `M` is a simple constructible sheaf on `Spec κ(x)`, that is a simple
 finite `Λ`-module with a continuous action of the absolute Galois group of `κ(x)`. On a scheme
@@ -363,7 +363,7 @@ lemma isConstructibleSheaf_openImmersionLowerShriek_lowerStar [TopologicalSpace.
   exact IsConstructibleSheaf.openImmersionLowerShriek W.ι W.closedComplement
     (range_closedComplement_eq_compl_range_ι W) _
 
-/-- Blueprint `lem-trf-simple-constructible`: simple constructible sheaves.
+/-- Simple constructible sheaves.
 
 Let `X` be a scheme with Noetherian underlying space and `Λ` a Noetherian ring. Every simple
 object `F` of the abelian category of constructible sheaves of `Λ`-modules on `X_ét` is of the

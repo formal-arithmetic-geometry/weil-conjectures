@@ -13,7 +13,7 @@ public import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
 
 Let `L` and `M` be finite locally constant sheaves of `Λ`-modules on the small étale site of a
 scheme `T`. A morphism `φ : L ⟶ M` whose stalk vanishes at one geometric point of every
-connected component of `T` is zero (blueprint `lemma-section-normal-bundle--1`, clause (2)):
+connected component of `T` is zero:
 the image of `φ` is locally constant, so the set of points at which its stalks vanish is open
 and closed (`AlgebraicGeometry.Etale.isClopen_stalkZeroLocus`); it meets every connected
 component, hence is everything.
@@ -53,8 +53,7 @@ lemma isZero_sheafFiber_image_of_map_eq_zero (χ : L ⟶ M) {Ω : Type u} [Field
     exact IsIso.of_isIso_comp_right _ (PreservesCokernel.iso F χ).hom
   exact (isZero_kernel_of_mono _).of_iso (PreservesKernel.iso F (cokernel.π χ))
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Rigidity of morphisms of finite locally
-constant sheaves
+/-- Rigidity of morphisms of finite locally constant sheaves
 
 *Rigidity of sections*, clause (2). Let `φ : L ⟶ M` be a morphism of finite locally constant
 sheaves of `Λ`-modules on `X_ét`. If every connected component of `X` contains the image of a
@@ -84,8 +83,7 @@ theorem eq_zero_of_sheafFiber_map_eq_zero
   rw [← kernel.lift_ι (cokernel.π φ) φ (cokernel.condition φ),
     hI.eq_of_tgt (kernel.lift _ φ _) 0, zero_comp]
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Rigidity of morphisms of finite locally
-constant sheaves
+/-- Rigidity of morphisms of finite locally constant sheaves
 
 The final assertion of clause (2): two morphisms of finite locally constant sheaves which agree
 at one geometric point of every connected component agree; in particular, on a connected

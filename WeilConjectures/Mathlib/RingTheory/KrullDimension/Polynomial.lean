@@ -85,10 +85,10 @@ theorem ringKrullDim_quotient_lt_of_ne_bot {R : Type*} [CommRing R] [IsDomain R]
     (Ideal.Quotient.factor_surjective (bot_le (a := I)))) fun h ↦ hI ?_
   exact Ideal.eq_of_le_of_ringKrullDim_quotient_eq (hIJ := bot_le) (hI := Ideal.isPrime_bot) hR h
 
-/-- Blueprint `lem-wf-affine-dimension-drop`: let `A` be the coordinate algebra of an irreducible
-affine variety over a field `k`, i.e. a reduced finitely generated `k`-algebra with irreducible
-spectrum. Then `A` is a domain (`PrimeSpectrum.isDomain_of_irreducibleSpace`), and a proper closed
-subset `V(I)`, i.e. one with `I ≠ 0`, has strictly smaller dimension: `dim (A ⧸ I) < dim A`.
+/-- Let `A` be the coordinate algebra of an irreducible affine variety over a field `k`, i.e. a
+reduced finitely generated `k`-algebra with irreducible spectrum. Then `A` is a domain
+(`PrimeSpectrum.isDomain_of_irreducibleSpace`), and a proper closed subset `V(I)`, i.e. one with
+`I ≠ 0`, has strictly smaller dimension: `dim (A ⧸ I) < dim A`.
 
 The dimension of `A` is finite (`ringKrullDim_ne_top_of_finiteType`), and the strict drop is
 `ringKrullDim_quotient_lt_of_ne_bot`. -/
@@ -122,8 +122,7 @@ theorem MvPolynomial.height_eq_of_isMaximal {k : Type*} [Field k] :
     norm_cast
 
 /-- For a field `k` and a maximal ideal `M` of `P = k[X₁, …, Xₙ]`, the localization `P_M` has
-Krull dimension `n` (Stacks `00OP`): its dimension is the height of `M`, which is `n`.
-(blueprint: `lem-weil-pbc-polynomial-ring-maximal-localization-dimension`) -/
+Krull dimension `n` (Stacks `00OP`): its dimension is the height of `M`, which is `n`. -/
 theorem MvPolynomial.ringKrullDim_localization_atPrime_of_isMaximal {k : Type*} [Field k]
     (n : ℕ) (M : Ideal (MvPolynomial (Fin n) k)) [M.IsMaximal] :
     ringKrullDim (Localization.AtPrime M) = n := by

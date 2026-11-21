@@ -47,8 +47,7 @@ Stacks Project Tag 00EV.
 
 If `U ≤ V` are opens of a scheme `X` with `U` quasi-compact, a quasi-compact subset of `X`
 disjoint from `closure (V ∖ U)` is contained in a quasi-compact open which meets `V` exactly
-in `U`. This is the second opening reduction of Conrad's Theorem 2.4, Case 3 (blueprint:
-`lemma:nagata-conrad-case3-smaller-base`).
+in `U`. This is the second opening reduction of Conrad's Theorem 2.4, Case 3.
 
 The underlying topology is that the carrier of a scheme is a prespectral space, so a
 quasi-compact subset of an open subset is contained in a quasi-compact open subset of it
@@ -58,7 +57,6 @@ quasi-compact subset of an open subset is contained in a quasi-compact open subs
 
 * `AlgebraicGeometry.exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff`: the
   quasi-compact open meeting `V` in `U`.
-
 -/
 
 @[expose] public section
@@ -251,8 +249,7 @@ namespace AlgebraicGeometry
 /-- **A quasi-compact open meeting `V` exactly in `U`.** If `U ≤ V` are opens of a scheme
 `X` with `U` quasi-compact and `S` is a quasi-compact subset of `X` disjoint from
 `closure (V ∖ U)`, then there is a quasi-compact open `X₀` containing `S` and `U` with
-`X₀ ⊓ V = U`.
-(Blueprint: `lemma:nagata-conrad-case3-smaller-base`.) -/
+`X₀ ⊓ V = U`. -/
 theorem exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff
     {X : Scheme.{u}} {U V : X.Opens} (hUV : U ≤ V) (hU : IsCompact (U : Set X))
     {S : Set X} (hS : IsCompact S)

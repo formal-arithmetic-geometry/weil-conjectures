@@ -13,8 +13,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 
 A quasi-compact scheme with finitely many irreducible components admits a finite
 affine open cover whose total intersection contains every generic point, and is
-therefore dense (Stacks Project Tag 01ZX, simplified for the finite-components case;
-blueprint `lemma:nagata-dense-affine-cover-exists`):
+therefore dense (Stacks Project Tag 01ZX, simplified for the finite-components case):
 
 - `AlgebraicGeometry.exists_isAffineOpen_mem_and_genericPoints_subset`: every point
   has an affine open neighbourhood containing all generic points, obtained as the
@@ -48,8 +47,7 @@ containing every generic point. The neighbourhood is the disjoint union of an af
 open `W ∋ x` avoiding the components not through `x` — which automatically contains
 the generic points of the components through `x` — with, for each remaining generic
 point, a small affine open around it avoiding `closure W` and all other components.
-(Stacks Project Tag 01ZX, simplified for the finite-components case; blueprint
-`lemma:nagata-dense-affine-cover-exists`.) -/
+(Stacks Project Tag 01ZX, simplified for the finite-components case) -/
 theorem exists_isAffineOpen_mem_and_genericPoints_subset
     (hX : (irreducibleComponents X).Finite) (x : X) :
     ∃ U : X.Opens, IsAffineOpen U ∧ x ∈ U ∧ genericPoints X ⊆ ↑U := by
@@ -166,8 +164,7 @@ theorem exists_isAffineOpen_mem_and_genericPoints_subset
 /-- **Dense affine covers exist**: a quasi-compact scheme with finitely many
 irreducible components admits a finite affine open cover whose total intersection
 contains every generic point, and is therefore dense.
-(Stacks Project Tag 01ZX, simplified for the finite-components case; blueprint
-`lemma:nagata-dense-affine-cover-exists`.) -/
+(Stacks Project Tag 01ZX, simplified for the finite-components case) -/
 theorem exists_isAffineOpen_iSup_eq_top_and_genericPoints_subset_iInter
     (X : Scheme.{u}) [CompactSpace X] (hX : (irreducibleComponents X).Finite) :
     ∃ (n : ℕ) (U : Fin n → X.Opens), (∀ i, IsAffineOpen (U i)) ∧ iSup U = ⊤ ∧

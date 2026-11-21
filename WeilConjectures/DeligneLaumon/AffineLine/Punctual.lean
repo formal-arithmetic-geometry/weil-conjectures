@@ -17,8 +17,7 @@ A Weil sheaf on the affine line is *punctual* if its support, a set of closed po
 The direct image `j_*M` of a lisse Weil sheaf on a dense open has no nonzero punctual subsheaf:
 every morphism from a punctual sheaf to it vanishes
 (`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.eq_zero_of_support_finite`). This is Step 0 of
-the description of the perverse t-structure on a smooth curve (blueprint
-`lemma-perverse-sheaves-curve`).
+the description of the perverse t-structure on a smooth curve.
 -/
 
 @[expose] public section
@@ -57,8 +56,7 @@ at the closed points of `V₀` vanishing. The adjoint `j̄^* G ⟶ M` of the mor
 vanishes on `Ū ∩ V̄₀`, and every point of `Ū` specializes from a point of `Ū ∩ V̄₀`, namely from
 the generic point of the irreducible geometric line, which lies over `V₀` since the affine line
 is not a single closed point. A morphism into the lisse `M` vanishing there vanishes
-(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_adicUpperStar_map_eq_zero`).
-(blueprint: `lemma-perverse-sheaves-curve`, Step 0) -/
+(`AlgebraicGeometry.ProEtale.IsAdicLisseSheaf.eq_zero_of_adicUpperStar_map_eq_zero`). -/
 theorem LisseOnDenseOpen.eq_zero_of_support_finite (D : LisseOnDenseOpen k₀ l)
     {G : WeilSheaf k₀ l (affineLine k₀)} (hG : G.support.Finite) (i : G ⟶ D.directImage) :
     i = 0 := by

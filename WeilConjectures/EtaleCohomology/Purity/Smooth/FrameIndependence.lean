@@ -227,8 +227,8 @@ variable [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ S]
 /-- **Universal frame independence.** On `𝔸^c_{GL_{c,S}}`, with coordinates `t` and universal
 matrix `A`, the frames `t` and `A t` of the zero section have the same class: restricting
 `∂κ(At₁) ∪ ⋯` to the support `V(t)` gives `∂κ(t₁) ∪ ⋯`. Both adjoints differ by an endomorphism
-`h` of `Λ` on `V(t) ≅ GL_{c,S}`, the adjoint of the latter being an isomorphism
-(`proposition-purity-vector-bundles`); along the identity section both classes become the coordinate
+`h` of `Λ` on `V(t) ≅ GL_{c,S}`, the adjoint of the latter being an isomorphism;
+along the identity section both classes become the coordinate
 class of `𝔸^c_S`, so `h` is the identity along the identity section, hence everywhere, the fibres of
 `GL_{c,S} ⟶ S` being connected. -/
 theorem restrictSupportedClass_kummerBoundaryProduct_glMatrix

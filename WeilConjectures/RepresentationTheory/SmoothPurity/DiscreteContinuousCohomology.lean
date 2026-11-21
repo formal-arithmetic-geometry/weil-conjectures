@@ -10,8 +10,7 @@ public import WeilConjectures.RepresentationTheory.Continuous.ContinuousCochains
 /-!
 # Continuous cohomology of discrete profinite modules
 
-Source: the blueprint, chapter `chap-Cohomology-of-torsion-sheaves-on-curves`, unit `sk-prop-h2`,
-(blueprint: def-exc-continuous-cohomology); Stacks Project, Tags 04JP, 04JR and 0DVG.
+Source: Stacks Project, Tags 04JP, 04JR and 0DVG.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ continuous inhomogeneous cochain complex, with the usual differential and discre
 coefficient topology. Choosing data from that theorem postpones the existence and comparison
 proofs, not the definition's data. No finiteness condition is imposed on the modules.
 
-Source: blueprint `sec-curve-estimates/sk-prop-h2/def-exc-continuous-cohomology`;
-Stacks Project, Tags 04JP, 04JR and 0DVG (blueprint: def-exc-continuous-cohomology). -/
+Source: Stacks Project, Tags 04JP, 04JR and 0DVG. -/
 noncomputable def discreteContinuousCohomologyFunctor
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

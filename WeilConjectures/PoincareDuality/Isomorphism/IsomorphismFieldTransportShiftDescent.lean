@@ -355,25 +355,6 @@ private theorem normalized_scalar_shift (E L : Index l Ω) (h : E ≤ L) :
 end StageShifts
 
 /-- The prescribed finite shifts descend and commute with a normalized inclusion comparison.
-Source: current blueprint sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, inverse automorphism paragraph;
-step 1 and the shift part of step 3 of the common-stage transport argument.
-(blueprint: lem-pod-isomorphism-field-transport-shift-descent).
-
-Proof: invert the supplied lambda comparisons. Their component normalization is
-exactly inverseImagePullbackComparisonDerived, and the lambda shift square also
-holds for the inverse comparison. Apply isomorphismPullbackScalarShift to these
-comparisons and the given integral and rational shifts. This shows that the
-normalized rational scalar comparisons commute with the supplied shifts. The
-published stage transitions and their shifts are transports of those scalar
-functors and shifts along equality, so their transition identifications also
-commute with shifts. Descend each finite shift at the object's own field.
-On an arbitrary representative, the two scalar shift equations and finite
-naturality give naturality of the descended comparison. Descend the finite zero
-and addition equations to obtain CommShift. Both restrictions to a finite stage
-have its finite shift component, so the identity-normalized inclusion comparison
-commutes with shifts. All such comparisons agree componentwise by hc. No inverse
-family, equivalence, triangle preservation, or dimension hypothesis is needed.
 -/
 theorem isomorphismFieldTransportShiftDescent
     (l : ℕ) [Fact l.Prime]

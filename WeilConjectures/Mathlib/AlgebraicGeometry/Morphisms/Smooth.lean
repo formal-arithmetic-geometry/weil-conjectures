@@ -156,7 +156,7 @@ theorem Scheme.Hom.exists_etale_to_affineSpace_of_isStandardSmoothOfRelativeDime
     ← CommRingCat.ofHom_comp, hψC, Scheme.isoSpec_hom_naturality_assoc, Iso.hom_inv_id,
     Category.comp_id]
 
-/-- The étale-local normal form (blueprint `sk-prop-normal-form`).
+/-- The étale-local normal form.
 Let `g : X ⟶ Y` be smooth of relative dimension `d` and let `x : X`. After replacing
 `X` and `Y` by affine open neighbourhoods `V ∋ x` and `U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U`,
 the morphism `g` factors as an étale morphism `e : V ⟶ 𝔸(d; U)` followed by the projection
@@ -182,11 +182,10 @@ theorem Smooth.exists_etale_to_affineSpace {X Y : Scheme.{u}} (g : X ⟶ Y) (d :
     g.exists_etale_to_affineSpace_of_isStandardSmoothOfRelativeDimension hU hV hVU H
   exact ⟨U, V, hU, hV, hVU hx, hx, hVU, e, he, hge⟩
 
-/-- The étale-local normal form of a morphism smooth at a point (blueprint
-`proposition-exceptional-inverse-image-smooth-morphism`). Let `g : X ⟶ Y` be locally of finite
-presentation and smooth at `x : X`. Then there are `d : ℕ` and affine open neighbourhoods `V ∋ x`
-and `U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U` such that `g.resLE U V hVU` factors as an étale morphism
-`e : V ⟶ 𝔸(d; U)` followed by the projection `𝔸(d; U) ↘ U`:
+/-- The étale-local normal form of a morphism smooth at a point. Let `g : X ⟶ Y` be locally of
+finite presentation and smooth at `x : X`. Then there are `d : ℕ` and affine open neighbourhoods
+`V ∋ x` and `U ∋ g.base x` with `V ≤ g ⁻¹ᵁ U` such that `g.resLE U V hVU` factors as an étale
+morphism `e : V ⟶ 𝔸(d; U)` followed by the projection `𝔸(d; U) ↘ U`:
 
 ```
 V --e--> 𝔸(d; U)
@@ -360,7 +359,7 @@ theorem topologicalKrullDim_eq_of_smoothOfRelativeDimension {K : Type u} [Field 
 
 open Limits in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- **Affine space is smooth** (blueprint `sbc-lem-affine-space-smooth`). The affine space
+/-- **Affine space is smooth**. The affine space
 `𝔸(n; S)` over `S` in finitely many variables is smooth of relative dimension `#n` over `S`.
 
 The affine space of blueprint `def-sbc-affine-space` is Mathlib's `AlgebraicGeometry.AffineSpace`,
@@ -525,10 +524,9 @@ theorem topologicalKrullDimAt_eq_of_smoothOfRelativeDimension {K : Type u} [Fiel
   exact topologicalKrullDim_eq_of_smoothOfRelativeDimension (U.ι ≫ f) n
 
 open Limits in
-/-- **Local constancy of the relative dimension** (blueprint
-`lemma-smooth-morphisms-locally-constant-sheaves`). For a smooth morphism `f : X ⟶ Y`, the
-function `x ↦ dim_x (X_{f(x)})`, the local dimension at `x` of the fibre of `f` through `x`, is
-locally constant on `X`.
+/-- **Local constancy of the relative dimension**. For a smooth morphism `f : X ⟶ Y`, the function
+`x ↦ dim_x (X_{f(x)})`, the local dimension at `x` of the fibre of `f` through `x`, is locally
+constant on `X`.
 
 Near `x`, the morphism `f` restricts to a morphism `V ⟶ U` of open subschemes which is smooth
 of some relative dimension `d`; for `x' ∈ V` the open subscheme `V ∩ X_{f(x')}` of the fibre

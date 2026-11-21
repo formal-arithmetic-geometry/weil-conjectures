@@ -11,8 +11,7 @@ public import Mathlib.LinearAlgebra.PiTensorProduct.Basis
 
 /-! # Tensor presentations by monic equations
 
-Source: Stacks Project, Morphisms, Tag 03HW, proof of lemma-massage-finite
-(blueprint: lem-weil-pbc-monic-tensor-presentation).
+Source: Stacks Project, Morphisms, Tag 03HW, proof of.
 -/
 
 @[expose] public section
@@ -70,11 +69,9 @@ noncomputable def basis (P : ι → R[X]) (hP : ∀ i, (P i).Monic) :
   Basis.piTensorProduct (fun i ↦ (AdjoinRoot.powerBasis' (hP i)).basis)
 
 /-- Algebra generators lift along the tensor presentation map.
-Source: Stacks Project, Tag 03HW, the surjection from the monic presentation algebra.
-The image contains each chosen generator since evaluation of its distinguished tensor root
-is that generator. The algebraic span of the generators is therefore contained in the image;
-by the generation hypothesis this is the whole target algebra.
-(blueprint: lem-weil-pbc-monic-tensor-presentation). -/
+Source: Stacks Project, Tag 03HW, the surjection from the monic presentation algebra. The image
+contains each chosen generator since evaluation of its distinguished tensor root is that
+generator. The algebraic span of the generators is therefore contained in the image. -/
 theorem presentationMap_surjective (P : ι → R[X]) (x : ι → S)
     (hx : ∀ i, aeval (x i) (P i) = 0)
     (hgen : Algebra.adjoin R (Set.range x) = ⊤) :

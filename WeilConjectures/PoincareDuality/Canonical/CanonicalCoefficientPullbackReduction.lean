@@ -20,8 +20,7 @@ import all WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure
 /-!
 # Canonical coefficient pullback and its finite quotient projections
 
-Source: Stacks Tags 03D6 and 08TC; blueprint prop-cohomological-finiteness, Step 7
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction).
+Source: Stacks Tags 03D6 and 08TC.
 
 The sectionwise inverse image used by the specified kappa is compared with the
 normalized constant Weil structure through the actual regular-module coefficient

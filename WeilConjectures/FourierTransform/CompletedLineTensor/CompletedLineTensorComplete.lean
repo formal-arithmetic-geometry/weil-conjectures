@@ -14,8 +14,7 @@ import all WeilConjectures.SixFunctors.Supporting.RoosIntrinsicCompletenessEquiv
 
 /-! # Tensor by a signed line preserves derived completeness
 
-Source: Bhatt--Scholze, Definition 3.5.2; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
+Source: Bhatt--Scholze, Definition 3.5.2.
 -/
 
 @[expose] public noncomputable section
@@ -33,10 +32,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Tensor with a fixed right factor commutes with multiplication by a global section.
-Source: Stacks, Section 03EK (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: on sectionwise pure tensors `(s • x) ⊗ y = s • (x ⊗ y)`. The sheafification unit
-commutes with multiplication by `s`, and maps out of a sheafification are determined
-by their composite with the unit. -/
+Source: Stacks, Section 03EK. -/
 theorem siteSheafTensorRight_map_sectionsSMul
     (N M : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     (s : RingCat.sectionsSubring (A.obj ⋙ forget₂ CommRingCat RingCat)) :
@@ -93,16 +89,14 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : AlgebraicGeometry.Scheme.{t})
 
 /-- The uniformizer sections, as a compatible family of global sections.
-Source: Stacks 0A0E (blueprint: lem-pur-completed-line-tensor-coherence). -/
+Source: Stacks 0A0E. -/
 private def uniformizerSection :
     RingCat.sectionsSubring
       ((completedIntegralCommRingSheafUnrestricted l E X).obj ⋙ forget₂ CommRingCat RingCat) :=
   ⟨fun U ↦ integralCompletionScalarValue l E X U, fun f ↦ integralScalar_natural l E X f⟩
 
 /-- Tensor by a signed line commutes with multiplication by the uniformizer on complexes.
-Source: Stacks 03EK, 0A0E (blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: in every degree the uniformizer endomorphism is multiplication by a global
-section, and sheaf tensor commutes with such multiplications. -/
+Source: Stacks 03EK, 0A0E. -/
 theorem complex_map_koszulScalar (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) (P : CochainComplex (integralTowerModules l E X) ℤ)
     (q : ℤ) (U : X.ProEtᵒᵖ) (x : ((((complex l E X L m).obj P).X q).val.obj U)) :
@@ -123,7 +117,7 @@ theorem complex_map_koszulScalar (L : integralTowerModules l E X)
   rfl
 
 /-- Signed line tensor is an equivalence, so it preserves countable products.
-Source: Stacks 03EO (blueprint: lem-pur-completed-line-tensor-coherence). -/
+Source: Stacks 03EO. -/
 theorem sheaf_preservesProducts (L : integralTowerModules l E X)
     [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     PreservesLimitsOfShape (Discrete ℕ) (sheaf l E X L m) := by
@@ -135,14 +129,7 @@ theorem sheaf_preservesProducts (L : integralTowerModules l E X)
   infer_instance
 
 /-- Tensor by a signed line preserves the specified augmented quotient-tower completeness.
-Source: Bhatt--Scholze, Definition 3.5.2; blueprint Proof (3)
-(blueprint: lem-pur-completed-line-tensor-coherence).
-Proof: choose a representative P of K, and let mu be multiplication by the uniformizer.
-Completeness of K makes the principal completion unit of mu a quasi-isomorphism. The exact
-tensor functor sends it to an isomorphism, commutes with the cone tower and countable
-products (it is an equivalence), and sends mu to multiplication by the uniformizer.
-So the twist of K is isomorphic to a principal completion, which is locally complete
-by the local criterion; the datum-independent Roos equivalence concludes. -/
+Source: Bhatt--Scholze, Definition 3.5.2. -/
 theorem complete (L : integralTowerModules l E X) [L.IsFiniteLocallyFreeOfRank 1]
     (m : ℤ) (K : DerivedCategory (integralTowerModules l E X))
     (hK : IsDerivedCompleteUnrestricted l E X K) :

@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.IsomorphismScalarTensor.IsomorphismScal
 
 /-! # Preservation of good complexes under coefficient-normalized reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-good-complex).
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -42,7 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
 /-- The two completed coefficient maps coincide because every finite projection agrees.
-Source: Stacks 03CO (blueprint: lem-pod-reindexing-good-complex). -/
+Source: Stacks 03CO. -/
 theorem podCompletedCoefficientMap_eq :
     (isoReductionCompletedMap l E g).hom = inverseImageCompletedCoefficientMap l E g := by
   apply limit.hom_ext
@@ -55,14 +54,7 @@ theorem podCompletedCoefficientMap_eq :
       inverseImageCompletedCoefficientComponent, inverseImageFiniteCoefficientMap])
 
 /-- Relabelling preserves the flat-term K-flat representatives used by reduction.
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and Stacks 03EL
-(blueprint: lem-pod-reindexing-good-complex).
-
-Proof: identify the two completed coefficient maps by composing with every finite
-projection. They then induce the identical sectionwise module inverse image.
-Specialize the existing coefficient-compatible K-flat model theorem to the identity
-extension of E. Its first preservation assertion gives exactly the result, without
-any bound on the complex or any completeness hypothesis. -/
+Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), and Stacks 03EL. -/
 theorem podReindexingGoodComplex
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

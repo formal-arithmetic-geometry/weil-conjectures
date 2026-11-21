@@ -318,12 +318,9 @@ theorem pfBaseChange_boundedConstructibleExceptionalProjection_of_factorisation
 
 end Paste
 
-/-- **The projection formula is compatible with base change** (blueprint
-`proposition-composition-base-change-rf-shriek--1`, section `chap-The-six-operations-on-Dbctf`, the
-clause "it is compatible with base change: for a Cartesian square `(f', g', f, g)` [...] the square
-[...] commutes"; SGA 4, Exposé XVII, §5.2): for a cartesian square, the exceptional projection
-morphisms of `f` and `f'` are compatible with compact-support base change `Ex_!` and the pullback
-comparison `Lf'^* Lg^* ≅ Lg'^* Lf^*`. -/
+/-- **The projection formula is compatible with base change**: for a cartesian square, the
+exceptional projection morphisms of `f` and `f'` are compatible with compact-support base change
+`Ex_!` and the pullback comparison `Lf'^* Lg^* ≅ Lg'^* Lf^*`. -/
 theorem pfBaseChange_boundedConstructibleExceptionalProjection (sq : IsPullback g' f' f g) :
     ProjectionBaseChange.PFBaseChange (boundedConstructibleUpperStar _ ℓ g)
       (boundedConstructibleUpperStar _ ℓ g')

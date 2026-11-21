@@ -26,10 +26,6 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtension
 /-!
 # Finite p-adic coefficient extensions
 
-Source: Weil conjectures blueprint, `def-weil-finite-field-fiber`, order 411;
-slopmaster2, Definition `def:weil-finite-coefficient-datum`
-(blueprint: def-weil-l-adic-coefficient-extension).
-
 The absolute value is the spectral absolute value. The ring of integers, its maximal
 ideal, and one uniformizer are selected from `Padic.extension_integers_dvr`.
 The claims about these data are the separately cited dependency theorems.
@@ -41,10 +37,7 @@ universe u
 
 namespace Padic
 
-/-- The finite residue field `k_E = 𝒪_E / 𝔪_E`.
-
-Source: blueprint `def-weil-finite-field-fiber`, order 411, and slopmaster2 Definition
-`def:weil-finite-coefficient-datum` (blueprint: def-weil-l-adic-coefficient-extension). -/
+/-- The finite residue field `k_E = 𝒪_E / 𝔪_E`. -/
 @[reducible]
 noncomputable def coefficientExtensionResidueField (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

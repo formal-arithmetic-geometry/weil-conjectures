@@ -76,7 +76,6 @@ import Mathlib.CategoryTheory.Localization.Prod
 import all WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingCoherenceData
 
 /-! Tensor model normalization for the core reindexing comparison.
-(blueprint: lem-pod-reindexing-comparison-core-tensor-model).
 -/
 
 @[expose] public noncomputable section
@@ -197,15 +196,7 @@ private theorem descend_tensor_square {C D A : Type*}
 
 /-- The derived tensor comparison is chosen by descent of the pure-tensor chain
 comparison, rather than independently of it.
-Source: blueprint dual-Tate compatibility, Steps 1 and 2; Stacks 07A4.
-(blueprint: lem-pod-reindexing-comparison-core-tensor-model).
-
-Proof: pure tensors determine the natural chain comparison. Reindexing preserves
-K-flatness. Conjugate this chain comparison by the two fixed K-flat tensor models
-and the localization factorization. The product of the K-flat localizations is a
-localization, so full faithfulness of precomposition descends this isomorphism.
-Its preimage equation, after cancelling the three model isomorphisms, is exactly
-the tensor model normalization.
+Source: Stacks 07A4.
 -/
 theorem comparison_core_tensor_model_exists {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

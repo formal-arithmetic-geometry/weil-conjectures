@@ -98,8 +98,7 @@ instance [∀ n, Finite (G n)] (n : ℕ) : Finite (TowerPartialSolution φ y n) 
 /-- *Mittag-Leffler vanishing*: for a tower `φₙ : Gₙ₊₁ → Gₙ` of finite abelian groups the map
 `∏ₙ Gₙ → ∏ₙ Gₙ, (xₙ) ↦ (xₙ - φₙ(xₙ₊₁))` is surjective, that is, `lim¹ Gₙ = 0`. The partial
 solutions form an inverse system of nonempty finite sets, which has a section by Kőnig's lemma
-(`nonempty_sections_of_finite_inverse_system`).
-(blueprint: `lem-weil-pbc-mittag-leffler`) -/
+(`nonempty_sections_of_finite_inverse_system`). -/
 theorem exists_sub_map_succ_eq_of_finite [∀ n, Finite (G n)] :
     ∃ x : ∀ n, G n, ∀ n, x n - φ n (x (n + 1)) = y n := by
   have : ∀ n : ℕᵒᵖ, Finite ((towerPartialSolutions φ y).obj n) := fun n ↦

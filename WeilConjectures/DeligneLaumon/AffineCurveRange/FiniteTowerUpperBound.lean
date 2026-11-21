@@ -11,10 +11,6 @@ import Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory
 
 /-!
 # Passing an upper bound through a finite-cohomology derived inverse limit
-
-Source: latest blueprint, `sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/`
-`lem-zl-affine-curve-range.proof.md`, final lattice paragraph.
-Finiteness one degree earlier handles the possible extra top cohomology group.
 -/
 
 @[expose] public noncomputable section
@@ -76,16 +72,6 @@ private theorem roosMap_epi_of_finite (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u})
 
 /-- A specified derived inverse limit has zero cohomology in degree i if every
 level does and the level cohomology in degree i-1 is finite.
-
-Source: latest blueprint, `lem-zl-affine-curve-range.proof.md`, Mittag--Leffler
-passage in the lattice paragraph (blueprint: lem-zl-finite-tower-upper-bound).
-
-Proof: use the Milnor short exact sequence. Finiteness in degree i-1 kills its
-first term by the finite Mittag--Leffler theorem. The last term, the limit of
-the level-i cohomology, is zero because each object of that diagram is zero.
-Exactness between two zero objects makes the middle term zero. This includes
-the degree immediately above the finite-level upper bound; no surjectivity of
-the cohomology transition maps is assumed.
 -/
 theorem finiteTower_homology_isZero [HasDerivedCategory.{v} AddCommGrpCat.{u}]
     (K : ℕᵒᵖ ⥤ DerivedCategory AddCommGrpCat.{u})

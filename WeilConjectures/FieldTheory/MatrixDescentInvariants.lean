@@ -12,7 +12,6 @@ public import Mathlib.FieldTheory.IsSepClosed
 # The invariant matrix algebra and its scalar-extension map
 
 Source: Stacks Project, Lemma 03R6, preceding Theorem 03R7.
-(blueprint: def-sc-matrix-descent-invariants).
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ variable (K : Type u) [Field K] (n : ℕ)
 
 /-- The actual subalgebra of matrices invariant under twisted Galois conjugation.
 Its carrier is specified directly, including for scalar lifts with `b 1 ≠ 1`.
-Source: Stacks Project, construction preceding Theorem 03R7.
-(blueprint: def-sc-matrix-descent-invariants). -/
+Source: Stacks Project, construction preceding Theorem 03R7. -/
 noncomputable def matrixDescentInvariants :
     Subalgebra K (Matrix (Fin n) (Fin n) (SeparableClosure K)) where
   carrier := {M | ∀ g, (b g).val * M.map g * ((b g)⁻¹).val = M}
@@ -56,15 +54,14 @@ noncomputable def matrixDescentInvariants :
     simp [mul_assoc]
 
 /-- Scalar extension of the invariant subalgebra, explicitly `l ⊗ a ↦ l • a`.
-Source: Stacks Project, construction preceding Theorem 03R7.
-(blueprint: def-sc-matrix-descent-invariants). -/
+Source: Stacks Project, construction preceding Theorem 03R7. -/
 noncomputable def matrixDescentScalarMap :
     (SeparableClosure K ⊗[K] matrixDescentInvariants K n b) →ₐ[SeparableClosure K]
       Matrix (Fin n) (Fin n) (SeparableClosure K) :=
   Algebra.TensorProduct.lift (Algebra.ofId _ _) (matrixDescentInvariants K n b).val
     (fun l a ↦ Algebra.commutes l (a : Matrix (Fin n) (Fin n) (SeparableClosure K)))
 
-/-- (blueprint: def-sc-matrix-descent-invariants) -/
+/-- The scalar map sends `1 ⊗ a` to `a`. -/
 @[simp] theorem matrixDescentScalarMap_one_tmul (a : matrixDescentInvariants K n b) :
     matrixDescentScalarMap K n b (1 ⊗ₜ[K] a) = a := by
   simp [matrixDescentScalarMap]

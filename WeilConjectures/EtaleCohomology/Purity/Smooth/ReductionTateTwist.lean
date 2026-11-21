@@ -30,8 +30,7 @@ Let `ρ : Λ →+* Λ'` be a surjective morphism of commutative rings of positiv
   (`AlgebraicGeometry.Etale.derivedExtendScalarsTateShiftIso`).
 
 Pulled back from the universal base `Spec ℤ[1/n]`, these identifications form the Tate shift
-datum of `Ψ` (`AlgebraicGeometry.Etale.reductionTateShiftData`, blueprint
-`proposition-compatibility-purity-change-coefficients`).
+datum of `Ψ` (`AlgebraicGeometry.Etale.reductionTateShiftData`).
 -/
 
 @[expose] public section

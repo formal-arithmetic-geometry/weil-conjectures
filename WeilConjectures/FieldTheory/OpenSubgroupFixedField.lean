@@ -16,15 +16,14 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-!
 # Open subgroups and finite separable fixed fields
 
-Source: Stacks Project, Tags 03QR and 03SF, with the Galois correspondence in Tag 0BML
-(blueprint: lem-exc-etale-open-subgroup-fixed-field).
+Source: Stacks Project, Tags 03QR and 03SF, with the Galois correspondence in Tag 0BML.
 -/
 
 @[expose] public section
 
 universe u v w
 
-/-- (blueprint: lem-exc-etale-open-subgroup-fixed-field) Stacks, Tags 03QR and 0BML.
+/-- Stacks, Tags 03QR and 0BML.
 For an open subgroup of the absolute Galois group, the fixed field is finite and separable,
 and its fixing subgroup is the original subgroup. The quotient is finite and discrete;
 its left translation action is continuous. Conversely, a point in a finite transitive

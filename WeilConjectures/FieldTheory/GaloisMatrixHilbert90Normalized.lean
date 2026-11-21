@@ -12,8 +12,7 @@ public import Mathlib.Topology.LocallyConstant.Basic
 import WeilConjectures.FieldTheory.GaloisInvariantVectorsSpan
 import WeilConjectures.FieldTheory.SpanningSetUnitMatrix
 
-/-! Normalized locally constant matrix cocycles; the nontrivial finite-descent step remains.
-(blueprint: lem-sc-galois-matrix-hilbert90-normalized) -/
+/-! Normalized locally constant matrix cocycles; the nontrivial finite-descent step remains. -/
 @[expose] public section
 universe u
 namespace Field
@@ -23,8 +22,7 @@ Galois translates of each vector. The cocycle law makes these sums invariant. Li
 independence of distinct field automorphisms shows that the invariant sums span: a linear
 functional killing them would have all coefficients zero, including its coefficient at the
 identity, hence would itself be zero. Extracting a basis of invariant vectors and putting
-its vectors into columns gives the required invertible matrix.
-(blueprint: lem-sc-galois-matrix-hilbert90-normalized) -/
+its vectors into columns gives the required invertible matrix. -/
 theorem exists_galois_matrix_invariant_basis_normalized (K : Type u) [Field K] (n : ℕ)
     (b : Gal(SeparableClosure K/K) →
       Matrix.GeneralLinearGroup (Fin n) (SeparableClosure K))

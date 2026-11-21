@@ -14,8 +14,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosShiftComp
 
 /-! # Strict quotient and Roos reindexing before localization
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-strict-comparisons).
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {X Y : Scheme.{t}} (g : X ⟶ Y) [IsIso g]
 
-/-- Strict Roos and restricted-tower comparisons before localization.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-strict-comparisons). -/
+/-- Strict Roos and restricted-tower comparisons before localization. -/
 structure PodReindexingStrictData where
   /-- The same natural Roos map on all strict towers, including incomplete inputs. -/
   roos : ∀ C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ,
@@ -58,7 +56,7 @@ structure PodReindexingStrictData where
         (((integralComparisonSequencePullback l E g).mapHomologicalComplex (.up ℤ)).obj C)
 
 /-- Good representatives are preserved by the existing K-flat model theorem.
-Source: Bhatt--Scholze 6.5.9(4) (blueprint: lem-pod-reindexing-good-complex). -/
+Source: Bhatt--Scholze 6.5.9(4). -/
 theorem PodReindexingStrictData.good (_D : PodReindexingStrictData l E g)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -67,8 +65,7 @@ theorem PodReindexingStrictData.good (_D : PodReindexingStrictData l E g)
     integralOperationsGoodComplex l E X ((isoReductionIntegralComplex l E g).obj P) :=
   podReindexingGoodComplex l E g P hP
 
-/-- First cone coordinate of the strict comparison.
-Source: blueprint Step 1 (blueprint: lem-pod-reindexing-strict-comparisons). -/
+/-- First cone coordinate of the strict comparison. -/
 def PodReindexingStrictData.RoosFst (D : PodReindexingStrictData l E g) : Prop :=
   ∀ C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ,
     (D.roos C).hom ≫ CochainComplex.mappingCocone.fst
@@ -76,8 +73,7 @@ def PodReindexingStrictData.RoosFst (D : PodReindexingStrictData l E g) : Prop :
       (isoReductionIntegralComplex l E g).map
         (CochainComplex.mappingCocone.fst (podRoosBoundary C)) ≫ podReindexProduct l E g C
 
-/-- Second cone coordinate, with its shifted degree retained.
-Source: blueprint Step 1 (blueprint: lem-pod-reindexing-strict-comparisons). -/
+/-- Second cone coordinate, with its shifted degree retained. -/
 def PodReindexingStrictData.RoosSnd (D : PodReindexingStrictData l E g) : Prop :=
   ∀ (C : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ) (i : ℤ),
     (D.roos C).hom.f i ≫ (CochainComplex.mappingCocone.snd
@@ -86,8 +82,7 @@ def PodReindexingStrictData.RoosSnd (D : PodReindexingStrictData l E g) : Prop :
         ((CochainComplex.mappingCocone.snd (podRoosBoundary C)).v
           i (i - 1) (by omega)) ≫ (podReindexProduct l E g C).f (i - 1)
 
-/-- Naturality on entire strict towers.
-Source: blueprint Step 1 (blueprint: lem-pod-reindexing-strict-comparisons). -/
+/-- Naturality on entire strict towers. -/
 def PodReindexingStrictData.RoosNaturality (D : PodReindexingStrictData l E g) : Prop :=
   ∀ (C C' : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ)
     (a : C ⟶ C'),
@@ -95,8 +90,7 @@ def PodReindexingStrictData.RoosNaturality (D : PodReindexingStrictData l E g) :
         (D.roos C').hom =
       (D.roos C).hom ≫ integralOperationsRoosMap ((podReindexTower l E g).map a)
 
-/-- Compatibility with the signed mapping-cocone shift.
-Source: blueprint Step 5 (blueprint: lem-pod-reindexing-strict-comparisons). -/
+/-- Compatibility with the signed mapping-cocone shift. -/
 def PodReindexingStrictData.RoosShift (D : PodReindexingStrictData l E g)
     (SY : PodSignedRoosShift (scalarReductionSource l E Y))
     (SX : PodSignedRoosShift (scalarReductionSource l E X)) : Prop :=
@@ -109,7 +103,7 @@ def PodReindexingStrictData.RoosShift (D : PodReindexingStrictData l E g)
           (integralOperationsRoos C) ≫ (D.roos C).hom⟦r⟧')
 
 /-- The actual inverse-image unit on every restricted section.
-Source: Stacks 03D6 (blueprint: lem-pod-reindexing-strict-comparisons). -/
+Source: Stacks 03D6. -/
 def PodReindexingStrictData.RestrictedGenerators (D : PodReindexingStrictData l E g) : Prop :=
   ∀ (C : CochainComplex (coefficientSequenceModules l E Y) ℤ)
     (n : ℕ) (i : ℤ) (U : X.ProEt)
@@ -124,8 +118,7 @@ def PodReindexingStrictData.RestrictedGenerators (D : PodReindexingStrictData l 
           (integralComparisonSequenceGenerator l E g (C.X i) n
             ((proEtaleIsoPostcompose g).obj U) x))
 
-/-- The strict comparisons are fixed by all quotient generators and both cone coordinates.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-strict-comparisons). -/
+/-- The strict comparisons are fixed by all quotient generators and both cone coordinates. -/
 def PodReindexingStrictData.Laws (D : PodReindexingStrictData l E g)
     (SY : PodSignedRoosShift (scalarReductionSource l E Y))
     (SX : PodSignedRoosShift (scalarReductionSource l E X)) : Prop :=
@@ -134,26 +127,7 @@ def PodReindexingStrictData.Laws (D : PodReindexingStrictData l E g)
   D.RestrictedGenerators l E g
 
 /-- Strict reindexing on simultaneous quotient towers and the native Roos complexes.
-Source: blueprint theorem-poincare-duality-frobenius--2, proof Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-strict-comparisons).
-
-Proof: transport modules along the projection-normalized completed and quotient
-coefficient isomorphisms. The resulting exact inverse equivalences preserve flat
-terms and K-flatness: apply the inverse tensor comparison to test acyclicity.
-The quotient comparisons are handled separately by isomorphismReductionTower.
-Define the product comparison by the actual projections. Exactness and preservation of countable
-products identify the image of 1-s with 1-s on the image tower. Applying the
-additive functor to the mapping cocone and using this square gives the diagonal
-Roos comparison. Both its coordinate formulas follow from the mapping-cocone
-map formulas. Naturality follows by product extensionality and the two cone
-coordinates. Apply the signed mapping-cocone shift to the product-shift comparison;
-the unshifted coordinate is the inverse projection comparison and the shifted
-coordinate has the factor (-1)^r. The same two coordinates prove that reindexing
-commutes with this signed shift. Finally identify sequence pullback along the
-site equivalence with sectionwise relabelling by the inverse-image adjunction.
-The adjunction unit supplies the displayed section formula; its coefficient
-projection square gives a map of the entire restricted tower. All constructions
-are on unbounded complexes before localization and also apply to empty sites. -/
+Source: Stacks 03EL, 07A4, 0941. -/
 theorem podReindexingStrictComparisons
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

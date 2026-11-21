@@ -13,8 +13,7 @@ import WeilConjectures.PoincareDuality.Pod.Identity.PodIdentityTensorTowerInvers
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 and 0941.
+Source: Stacks 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -59,17 +58,7 @@ attribute [local irreducible] integralOperationsTotalTensorSection
 
 -- Comparing sheafified total-tensor generators requires substantial instance elaboration.
 /-- Identity relabelling agrees with the strict completed-tensor construction.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-identity-tensor-tower).
-
-Proof: the quotient-generator equation identifies the identity quotient comparison
-with scalar reduction of the ordinary identity relabelling. Apply Generators to
-all homogeneous pure tensors. These generate the direct-sum total tensor before
-sheafification, so the tower map followed by the tensor of the two ordinary
-relabellings equals the ordinary identity on each strict quotient. The equations
-retain every transition. Equality of these whole strict tower maps follows from
-extensionality in the quotient index and degree. No Roos realization, localization,
-finite derived evaluation faithfulness or choice of resolutions is used. -/
+Source: Stacks 07A4 and 0941. -/
 theorem podIdentityTensorTower
     (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
     (D : PodCompletionReindex l E (𝟙 W))

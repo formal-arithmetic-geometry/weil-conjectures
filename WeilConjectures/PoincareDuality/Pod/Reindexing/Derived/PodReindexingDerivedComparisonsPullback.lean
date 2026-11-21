@@ -10,8 +10,7 @@ import WeilConjectures.TraceFormula.Primitive.PrimitiveQuotientPullbackModelExis
 
 /-! Pullback normalization for the derived reindexing package.
 
-Source: blueprint Steps 1 and 5; Stacks 03EL, 07A4, 0941.
-(blueprint: lem-pod-reindexing-derived-comparisons-pullback)
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -44,16 +43,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Every derived-data witness can be given the normalized completed-pullback realization.
 The other fields are unchanged.
-Source: blueprint Steps 1 and 5; Stacks 099N(2),(5), 0941.
-Proof: `primitiveQuotientPullbackModelExistence` for `g`, the source calculus
-`podReindexCalculus l E Y` and the target Roos model `R.targetRoos` gives a pullback
-model: a realization of the completed pullback with the representative normalization
-`IsIntegralComparisonPullbackNormalized`. Replace the `pullback` field of `R` by this
-realization. Then `PullbackNormalization` of the assembled package is that
-normalization. Here `l` is invertible on `X` and `Y` by the `Invertible` instances.
-An arbitrary `R.pullback` need not be normalized: the normalized realization is unique
-(`primitiveQuotientRealizations_unique`), so the field is replaced, not kept.
-(blueprint: lem-pod-reindexing-derived-comparisons-pullback) -/
+Source: Stacks 099N(2),(5), 0941. -/
 theorem podReindexingDerivedComparisonsPullback
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

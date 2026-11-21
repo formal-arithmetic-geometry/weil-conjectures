@@ -20,10 +20,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Pr
 open scoped CategoryTheory.Obj
 namespace WeilConjectures.CondensedWeil
 
-/-- The semilinear module return from the specified compositors and return equation.
-Source: latest blueprint, second proof paragraph of theorem-pure-lisse-sheaves-over-relative;
-the local Frobenius operator uses precisely these maps before scalar evaluation
-(blueprint: def-zl-condensed-module-return). -/
+/-- The semilinear module return from the specified compositors and return equation. -/
 @[irreducible] def moduleReturnMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -38,10 +35,7 @@ the local Frobenius operator uses precisely these maps before scalar evaluation
       (CondensedRing.upperStarComp Λ z a).hom.app M ≫
         (CondensedRing.upperStar Λ z).map θ
 
-/-- Apply a specified point insertion, then evaluate a semilinear return.
-Source: latest blueprint local Frobenius convention; insertion precedes the
-geometric evaluation of the module return
-(blueprint: def-zl-condensed-module-return). -/
+/-- Apply a specified point insertion, then evaluate a semilinear return. -/
 @[irreducible] def evaluateModuleReturn
     {C E : Type*} [Category C] [Category E] (F : C ⥤ E) (T : C ⥤ C)
     (ι : F ⟶ T ⋙ F) (M : C) (r : T.obj M ⟶ M) : End (F.obj M) :=

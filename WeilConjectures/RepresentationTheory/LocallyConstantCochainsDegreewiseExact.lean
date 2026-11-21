@@ -18,29 +18,12 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-!
 # Degreewise exactness of locally constant cochains
 Source: Stacks Project, Tag 0DVG.
-(blueprint: lem-sc-locally-constant-cochains-degreewise-exact).
 -/
 @[expose] public section
 universe u v w s
 open CategoryTheory
 namespace Rep
-/-- Source: Stacks Project, Tag 0DVG, proof of degreewise exactness.
-(blueprint: lem-sc-locally-constant-cochains-degreewise-exact).
-Proof: The open-stabilizer adjunction of Stacks Tag 04JF makes the inclusion
-into representations a left adjoint preserving monomorphisms. Compose it with
-E and the forgetful functors to integer modules and abelian groups. This
-composite preserves finite colimits and monomorphisms, hence homology by
-Mathlib. It is additive because it preserves zero morphisms and binary
-biproducts. Thus the underlying coefficient sequence is short exact.
-The first cochain map is injective pointwise. Its image equals the kernel of
-the second: choose a preimage through the first map at each value in that
-kernel. For surjectivity of the second cochain map, choose a lift of each
-value of a locally constant cochain through the coefficient surjection.
-Postcomposition with this set-theoretic choice preserves local constancy,
-since a cochain is constant on an open neighborhood of every point.
-The coefficient-map formula hm and the additive equivalences e transport
-these three assertions to the evaluation of S.map C in AddCommGrpCat.
-Thus the resulting short complex is short exact in every degree. -/
+/--Source: Stacks Project, Tag 0DVG, proof of degreewise exactness. -/
 theorem locallyConstantCochains_degreewise_exact
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     (A : Type v) [Category.{w} A] [Abelian A]

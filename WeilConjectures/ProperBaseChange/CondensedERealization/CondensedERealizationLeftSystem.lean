@@ -10,7 +10,6 @@ public import WeilConjectures.ProperBaseChange.CondensedERealization.CondensedER
 /-! # Integral operations and left realization comparisons
 
 Source: Bhatt--Scholze, Proposition 6.8.14(2), Remark 6.8.15.
-(blueprint: def-weil-pbc-condensed-e-left-system)
 
 The records omit the rational adjunction and the right realization comparison.
 Those are constructed by tensor extension and taking mates.
@@ -33,8 +32,7 @@ variable (E : Type u) [NormedField E] [NormedAlgebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E]
 variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)]
 
-/-- Integral restrictions with their ambient adjunction normalization and a left comparison.
-Source: BS 6.8.14(2), 6.8.15 (blueprint: def-weil-pbc-condensed-e-left-system). -/
+/-- Integral restrictions with their ambient adjunction normalization and a left comparison. -/
 structure LeftAlong (T U : Base k) (h : T.scheme ⟶ U.scheme)
     [h.IsOver (Spec (.of k))] (rT : At l E T.scheme) (rU : At l E U.scheme) where
   pull : Integral l E U.scheme ⥤ Integral l E T.scheme
@@ -76,8 +74,7 @@ structure LeftAlong (T U : Base k) (h : T.scheme ⟶ U.scheme)
 attribute [instance] LeftAlong.pullAdditive LeftAlong.pullLinear
   LeftAlong.pushAdditive LeftAlong.pushLinear
 
-/-- Tensor extension of the integral inverse image.
-Source: BS 6.8.15 (blueprint: def-weil-pbc-condensed-e-left-system). -/
+/-- Tensor extension of the integral inverse image. -/
 abbrev LeftAlong.rationalPull {T U : Base k} {h : T.scheme ⟶ U.scheme}
     [h.IsOver (Spec (.of k))] {rT : At l E T.scheme} {rU : At l E U.scheme}
     (a : LeftAlong l E k T U h rT rU) :=

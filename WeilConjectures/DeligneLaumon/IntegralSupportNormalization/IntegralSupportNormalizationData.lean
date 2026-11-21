@@ -28,9 +28,7 @@ import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdju
 
 The existing definitions are shared by the separate open and closed support proofs.
 Their public names, signatures and bodies agree with the original theorem module.
-Source: smooth-purity localization integral and rational support paragraphs;
-Stacks 09AA, 09BM, 09BN, 0GL1, 0A07, 04C4 and 095R
-(blueprint: def-sf-integral-support-normalization-data).
+Source: Stacks 09AA, 09BM, 09BN, 0GL1, 0A07, 04C4 and 095R.
 -/
 
 @[expose] public noncomputable section
@@ -49,13 +47,12 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Ordinary open extension with the recorded completed coefficient identifications.
-Source: Stacks 03DI--03DJ
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03DI--03DJ. -/
 abbrev ordinaryOpen {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   (PurCompactSupport.openExtension (PurCompactSupport.completed l E) j).mapDerivedCategory
 
 /-- The identity base change preserves constant sections, by naturality of sheafification.
-Source: Stacks 03D8; (blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03D8. -/
 private theorem constantDirectImageId (X : Scheme.{u}) (A : CommRingCat.{u + 1}) :
     proEtaleConstantDirectImageMap (𝟙 X) CommRingCat.{u + 1} A =
       (AlgebraicGeometry.ProEtale.lowerStarId CommRingCat.{u + 1} X).inv.app
@@ -76,7 +73,7 @@ private theorem constantDirectImageId (X : Scheme.{u}) (A : CommRingCat.{u + 1})
   exact (Category.id_comp _).symm.trans h
 
 /-- Finite quotient projections identify the completed identity coefficient map uniquely.
-Source: Stacks 03CO; (blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03CO. -/
 private theorem completedDirectImageId (X : Scheme.{u}) :
     sfCompletedCoefficientMap l E (𝟙 X) =
       (AlgebraicGeometry.ProEtale.lowerStarId CommRingCat.{u + 1} X).inv.app
@@ -90,7 +87,7 @@ private theorem completedDirectImageId (X : Scheme.{u}) :
       (completedIntegralCommRingProjectionUnrestricted l E X n)).symm
 
 /-- Taking the adjoint of the prescribed completed pullback recovers that identity map.
-Source: Stacks 03D8; (blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03D8. -/
 private theorem ringDirectImageId (X : Scheme.{u}) :
     proEtaleRingDirectImageMap (𝟙 X) ((PurCompactSupport.completed l E).ring X)
         ((PurCompactSupport.completed l E).ring X) ((PurCompactSupport.completed l E).pull
@@ -102,7 +99,7 @@ private theorem ringDirectImageId (X : Scheme.{u}) :
   rw [PurCompactSupport.completedPullMap, Equiv.apply_symm_apply, completedDirectImageId]
 
 /-- Identity-site module transport, with the coefficient sheaf kept abstract.
-Source: Stacks 03D8; (blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03D8. -/
 @[irreducible] private def moduleSiteIdentity (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) RingCat.{u + 1})
     (ψ : R ⟶ ((proEtaleBaseChange (𝟙 X)).sheafPushforwardContinuous
@@ -132,7 +129,7 @@ private theorem moduleSiteIdentity_sections (X : Scheme.{u})
   rfl
 
 /-- Explicit identity comparison obtained by the site identity and coefficient equality.
-Source: Stacks 03D8; (blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03D8. -/
 @[irreducible] private def identityModuleCandidate (X : Scheme.{u}) :
     proEtaleRingModuleDirectImage (𝟙 X)
       ((PurCompactSupport.completed l E).ring X)
@@ -190,11 +187,7 @@ private theorem identityIso_ext (X : Scheme.{u})
   exact h M V.unop
 
 /-- Identity direct image, uniquely fixed on every section by the identity base change.
-Source: Stacks 03D8; localization proof, compactification (j,id)
-(blueprint: lem-sf-integral-support-functor-normalization).
-Proof: pull sections across V times_X X = V. The coefficient structure map has the
-same finite projections as this pullback. Thus the section map is linear, natural,
-and invertible. Sections determine module maps, so they determine this iso uniquely. -/
+Source: Stacks 03D8. -/
 theorem identityModuleImage_existsUnique (X : Scheme.{u}) :
     ∃! e : proEtaleRingModuleDirectImage (𝟙 X)
         ((PurCompactSupport.completed l E).ring X)
@@ -212,13 +205,11 @@ theorem identityModuleImage_existsUnique (X : Scheme.{u}) :
   exact (he' M V x).trans (identityModuleCandidate_sections l E X M V x).symm
 
 /-- The section-normalized identity direct image.
-Source: Stacks 03D8
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03D8. -/
 def identityModuleImage (X : Scheme.{u}) := (identityModuleImage_existsUnique l E X).exists.choose
 
 /-- Derive the section-normalized identity and identify the derived identity termwise.
-Source: Stacks 015F, 03D8
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 015F, 03D8. -/
 def identityImage (X : Scheme.{u}) :
     proEtaleRingDerivedDirectImage (𝟙 X)
         ((PurCompactSupport.completed l E).ring X)
@@ -231,16 +222,14 @@ def identityImage (X : Scheme.{u}) :
       Functor.mapDerivedCategoryIdIso _
 
 /-- Remove the proper identity factor in the actual compactification (j,id).
-Source: localization integral paragraph; Stacks 03DI
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03DI. -/
 def openIdentity {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     PurCompactSupport.image (PurCompactSupport.completed l E)
         (Compactification.ofIsOpenImmersion j) ≅ ordinaryOpen l E j :=
   isoWhiskerLeft (ordinaryOpen l E j) (identityImage l E X) ≪≫ Functor.rightUnitor _
 
 /-- The whole-system pullback/reduction arrow, including the actual reduction counit.
-Source: Stacks 0941, 099N; localization proof Step 3
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 0941, 099N. -/
 def closedReduction {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (C : SfOrdinaryIntegralComparison l E i) :
     sfOrdinaryDerivedPull l E i ⋙ FrobeniusExchange.reduction l E Z ⟶
@@ -254,8 +243,7 @@ def closedReduction {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 /-- The direct-image/strict-limit comparison is the canonical right-adjunction conjugate.
 The input iso is the specified quotient comparison, not an arbitrary comparison of values.
-Source: Stacks 0A07, 07A6
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 0A07, 07A6. -/
 def closedLimit {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (C : SfOrdinaryIntegralComparison l E i) [IsIso (closedReduction l E i C)] :
     coefficientSequenceLimit l E Z ⋙ sfCompletedDerivedDirectImage l E i ≅
@@ -268,8 +256,7 @@ def closedLimit {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (asIso (closedReduction l E i C)).symm
 
 /-- The canonical alpha is ordinary image of the actual completion unit, then closedLimit.
-Source: Stacks 0A07; localization proof Step 3
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 0A07. -/
 def closedAlpha {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
     (C : SfOrdinaryIntegralComparison l E i) [IsIso (closedReduction l E i C)] :
     (sfIntegralConstructible l E Z).ι ⋙ sfCompletedDerivedDirectImage l E i ⟶
@@ -280,23 +267,20 @@ def closedAlpha {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
         whiskerLeft (FrobeniusExchange.reduction l E Z) (closedLimit l E i C).hom)
 
 /-- The ordinary open pullback in the same completed coefficient presentation.
-Source: Stacks 03DI, 03D2
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03DI, 03D2. -/
 abbrev ordinaryOpenPull {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   proEtaleRingDerivedPullback j ((PurCompactSupport.completed l E).ring X)
     ((PurCompactSupport.completed l E).ring U) ((PurCompactSupport.completed l E).pull j)
 
 /-- The ordinary derived open adjunction, with its termwise units and counits.
-Source: Stacks 015F, 03DI
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 015F, 03DI. -/
 def ordinaryOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     ordinaryOpen l E j ⊣ ordinaryOpenPull l E j :=
   SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction
     (PurCompactSupport.openAdjunction (PurCompactSupport.completed l E) j)
 
 /-- Identity on systems is fixed by the actual pullback identity and its right adjunction.
-Source: Stacks 03D8, 0941
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 03D8, 0941. -/
 def systemDirectId (X : Scheme.{u}) :
     FrobeniusExchange.systemDirect l E (𝟙 X) ≅ 𝟭 (coefficientSequenceDerived l E X) :=
   Adjunction.rightAdjointUniq
@@ -304,29 +288,25 @@ def systemDirectId (X : Scheme.{u}) :
       (integralComparisonSystemUnit l E X)) Adjunction.id
 
 /-- Total inverse limit has the shift induced by exact scalar restriction and derived limit.
-Source: Stacks 0941
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 0941. -/
 instance limitShift (T : Scheme.{u}) : (coefficientSequenceLimit l E T).CommShift ℤ := by
   unfold coefficientSequenceLimit coefficientConstantTowerLimit
   infer_instance
 
 /-- Reduction has the left-adjoint shift of the specified total inverse limit.
-Source: Stacks 0941, 099N
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 0941, 099N. -/
 instance reductionShift (T : Scheme.{u}) : (FrobeniusExchange.reduction l E T).CommShift ℤ :=
   ((FrobeniusExchange.models l E).system T).adjunction.leftAdjointCommShift ℤ
 
 /-- Direct image uses the whole-system shift followed by the signed total-limit shift.
-Source: Stacks 0941, 0A07
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 0941, 0A07. -/
 instance directShift {Z X : Scheme.{u}} (i : Z ⟶ X) :
     (FrobeniusExchange.integralDirectImage l E i).CommShift ℤ := by
   unfold FrobeniusExchange.integralDirectImage FrobeniusExchange.realize
   infer_instance
 
 /-- Inverse of the normalized finite evaluation mate for direct image.
-Source: Zheng 4.10; Stacks 0941
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 0941. -/
 def directEvaluationIso {Z X : Scheme.{u}} (i : Z ⟶ X) (n : ℕ) :=
   letI := FrobeniusExchange.systemDirectEvaluation_isIso l E i n
   asIso (FrobeniusExchange.systemDirectEvaluation l E i n)
@@ -335,8 +315,7 @@ def directEvaluationIso {Z X : Scheme.{u}} (i : Z ⟶ X) (n : ℕ) :=
 All inherited geometric properties are outputs, not additional hypotheses. The closed
 comparison uses the actual unit and the strict-limit conjugate defined above. The open
 comparison is the fixed compact-support realization followed by identity direct image.
-Source: localization integral and rational paragraphs; Stacks 09AA, 09BM, 0GL1, 0A07
-(blueprint: lem-sf-integral-support-functor-normalization). -/
+Source: Stacks 09AA, 09BM, 0GL1, 0A07. -/
 structure Normalization (D : FiniteFieldDatum.{u})
     {Z U X : Scheme.{u}} [X.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]

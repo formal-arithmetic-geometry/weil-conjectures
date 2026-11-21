@@ -11,9 +11,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 /-!
 # Field extensions and towers
 
-Source: blueprint `sec-picard-framework/sk-thm-picard-rr/def-pc-field-tower.md`
-(blueprint: def-pc-field-tower); Stacks Project, Fields, Tags 09FV, 09GC, 09H1,
-09HE, and 09GS.
+Source: Stacks Project, Fields, Tags 09FV, 09GC, 09H1, 09HE, and 09GS.
 
 ## Main definitions
 
@@ -31,7 +29,7 @@ universe u v
 
 namespace FieldExtension
 
-/-- (blueprint: def-pc-field-tower) The degree `[K : k]`, equal to `∞` when `K` is not
+/-- The degree `[K : k]`, equal to `∞` when `K` is not
 finite-dimensional over `k`.
 
 This is `Module.finrank k K` in the finite-dimensional case and `⊤` otherwise.

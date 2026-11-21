@@ -11,9 +11,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 set_option linter.privateModule false
 
 /-! # Derived composition normalization
-
-Source: blueprint dual-Tate compatibility, Step 6; localization universal property
-(blueprint: lem-pod-reindexing-derived-composition-normalization).
 -/
 
 @[expose] public section

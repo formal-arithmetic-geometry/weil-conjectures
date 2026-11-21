@@ -70,8 +70,7 @@ records the basic geometry of this pushout:
   graph `U ⟶ X ×_S Y` is a closed immersion) separatedness of the glued morphism.
 
 These are the raw ingredients for the intermediate schemes `Wᵢ = U ⊔_{Uᵢ} Xᵢ°` of the
-two-open compactification theorem (blueprint chapter "Nagata compactification",
-`def:nagata-two-open-intermediate-schemes`).
+two-open compactification theorem.
 -/
 
 @[expose] public section

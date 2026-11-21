@@ -241,16 +241,7 @@ private theorem podReindexingStrictNativeShift {X Y : Scheme.{u}} (g : X ⟶ Y) 
 
 -- The calculation pastes several strict and localized shift squares.
 /-- The normalized whole-tower limit reindexing commutes with integer shifts.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941 and 011G
-(blueprint: lem-pod-reindexing-limit-signed-shift-s8).
-
-Proof: the restricted generator formula gives the same termwise map in degree i+r
-before and after shifting; hence its restriction comparison commutes with shift.
-Use naturality and the RoosShift law to paste this strict-tower square with the
-source and target signed Roos comparisons. The two normalized limit-to-Roos
-identities then turn LimitModel into the shift square for D.limit at Q(C).
-Cancel the invertible Roos and localization comparisons. Finally the essential
-surjectivity of Q and naturality extend the identity to all derived objects. -/
+Source: Stacks 0941 and 011G. -/
 theorem podReindexingLimitSignedShift
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (D : PodCompletionReindex l E g)

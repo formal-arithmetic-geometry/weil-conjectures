@@ -11,8 +11,6 @@ import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulated
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Exactness of the supplied integral stage comparison
-
-Source: trace-definition coefficient-category comparison, integral steps 1--6.
 -/
 
 @[expose] public noncomputable section
@@ -47,15 +45,6 @@ private theorem commShift_eqToIso
   infer_instance
 
 /-- The supplied integral identity equivalence is exact for its normalized shift.
-Source: trace-definition coefficient comparison, integral identity step
-(blueprint: lem-fd-integral-stage-exact).
-
-Proof: the full intrinsic integral inclusion and the exact coefficient restriction
-induce an exact derived composite J. The supplied integral_identity identifies I
-followed by the PBC inclusion with J. Equality elimination and the supplied
-integral_shift_normalization identify their two integer-shift structures, so this
-identity is an exact natural isomorphism. The target full inclusion is exact and
-fully faithful; reflection of distinguished triangles gives exactness of I.
 -/
 theorem fdIntegralStageExact
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)

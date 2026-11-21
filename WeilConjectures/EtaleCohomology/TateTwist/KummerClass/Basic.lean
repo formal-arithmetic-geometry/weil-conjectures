@@ -246,7 +246,7 @@ noncomputable def tateTwistObjectOneIso :
     (DerivedCategory.singleFunctor _ 0).mapIso (tateTwistSheafOneIso X Λ)
 
 variable (X) in
-/-- Blueprint `def-pur-affine-line-datum`: The affine-line datum.
+/-- The affine-line datum.
 
 The *Kummer class* `κ(u) ∈ H¹(X, Λ(1)) = Hom(Λ_X, Λ_X(1)[1])` of a unit `u` of `X`: the
 connecting morphism of the Kummer sequence `0 ⟶ μₙ ⟶ 𝔾ₘ ⟶ 𝔾ₘ ⟶ 0` pulled back along

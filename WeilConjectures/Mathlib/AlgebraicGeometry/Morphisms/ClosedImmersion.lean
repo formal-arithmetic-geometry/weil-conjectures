@@ -27,8 +27,8 @@ its defining factorization (`lift_fac`) and an invertibility criterion (`isIso_l
 the two remaining clauses of the universal property: that the lift is itself a closed
 immersion when both morphisms are, and that it is the *unique* morphism over the target.
 Together with `Scheme.Hom.toImage_imageι` these give the universal property of the
-scheme-theoretic image in the form stated in the Nagata blueprint
-(`lemma:nagata-scheme-image-universal`), and its packaging as a minimality statement:
+scheme-theoretic image in the form stated in the Nagata blueprint,
+and its packaging as a minimality statement:
 the scheme-theoretic image is the smallest closed subscheme of the target through which
 the morphism factors.
 
@@ -199,8 +199,7 @@ lemma Scheme.range_base_subset_of_closedPoint_mem {K : Type u} [Field K]
   rwa [Subsingleton.elim p (IsLocalRing.closedPoint K)]
 
 /-- A morphism from the spectrum of a field whose unique point lies in the range of a closed
-immersion `i` factors uniquely through `i`.
-(blueprint: `lemma:openclosed-point-factors`) -/
+immersion `i` factors uniquely through `i`. -/
 theorem IsClosedImmersion.existsUnique_fac_of_field {K : Type u} [Field K] (i : Z ⟶ Y)
     [IsClosedImmersion i] (s : Spec (CommRingCat.of K) ⟶ Y)
     (hs : s.base (IsLocalRing.closedPoint K) ∈ Set.range i.base) :

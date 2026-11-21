@@ -8,10 +8,6 @@ module
 public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorConstraints
 
 /-! # Naturality of the prescribed common-stage pullback compositor
-
-Source: blueprint dual-Tate compatibility, Step 5, coefficient-stage descent.
-The proof follows the existing formal argument in SemilinearFieldOperationLifts,
-without importing that consumer of the coefficient-descent interface.
 -/
 
 @[expose] public section
@@ -162,15 +158,7 @@ private theorem pod_ofHom_square
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The prescribed common-stage pullback compositor is natural in every arrow.
-Source: blueprint dual-Tate compatibility, Step 5: rational and common-stage descent.
-(blueprint: lem-pod-common-stage-compositor-naturality).
-Proof: on a pure tensor the rational equation is the integral compositor's
-naturality equation tensored with the scalar; tensor induction extends it to
-all localized arrows. Represent a common-stage arrow over one coefficient field.
-The prescribed operation and compositor formulas conjugate the rational equation
-by the pullback comparison isomorphisms. Cancel adjacent inverse comparisons and
-apply the common-stage class map. No faithfulness of transition functors is used. -/
+/-- The prescribed common-stage pullback compositor is natural in every arrow. -/
 theorem commonStagePullbackComposition_naturality
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [_root_.Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {X Y Z : Scheme.{u}}

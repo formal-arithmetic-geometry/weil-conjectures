@@ -139,9 +139,8 @@ import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
 /-! # Ordinary pullback of the principal Koszul tower
 
-Source: Stacks Project, sites-cohomology.tex, Tags 0G7E and 07A4;
-sites-modules.tex, Tag 03EL; homology.tex, Tag 02MZ
-(blueprint: lem-a1-pulled-koszul-tower-chain-comparison).
+Source: Stacks Project, sites-cohomology.tex, Tags 0G7E and 07A4; sites-modules.tex, Tag 03EL;
+homology.tex, Tag 02MZ.
 
 The natural number n denotes the positive exponent n+1. The normalization is the
 existing equation on both Koszul basis vectors and every local coefficient b.

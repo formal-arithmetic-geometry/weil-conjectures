@@ -14,9 +14,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 /-!
 # Normalized evaluation as the constant-sheaf coordinates upstairs
 
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS;
-lem-weil-pbc-torsor-section-evaluation-local, steps 1 and 3.
-(blueprint: lem-weil-pbc-torsor-normalized-graph-evaluation)
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS.
 -/
 
 @[expose] public section
@@ -28,25 +26,7 @@ open Etale
 
 /-- Constant coordinates for a sheaf trivialized by a connected torsor, with a
 pointwise local description by restrictions of global sections upstairs.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS;
-lem-weil-pbc-torsor-normalized-graph-evaluation, step 1.
-(blueprint: lem-weil-pbc-torsor-normalized-graph-evaluation)
-
-Proof:
-The comparison between inverse image and localization on the small etale site identifies
-F restricted to c.P with the supplied constant module sheaf A. The constant module sheaf
-on a scheme is the sheaf of locally constant A-valued functions: its constant presheaf
-maps into locally constant functions and this map is both locally injective and locally
-surjective, by covering with open fibres of a locally constant function. Sheafification
-therefore gives the comparison isomorphism. Since c.P is connected and nonempty, every
-locally constant A-valued function on c.P has a unique constant value. Evaluation of this
-isomorphism at c.P identifies A with F(c.P). Apply the coefficient equivalence pointwise
-to get the equivalence gamma on W, regarding W as etale over c.P via f. For s and w,
-take the open fibre of gamma(s) through w. Its open subscheme U, with inclusion i and
-point z over w, is etale over V. On U the coordinate function is constantly x, so the
-restricted section equals the restriction of x in F(c.P), as asserted. If W is empty
-there is no point w and the local assertion is vacuous; both section sets are singletons.
-The zero module also gives singleton section sets, so the same argument applies. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS. -/
 private theorem Scheme.GaloisCover.constantCoordinates_localRestriction
     {V : Scheme.{u}} [ConnectedSpace V] (ℓ : ℕ) [Fact ℓ.Prime]
     (P : Type u) [Group P] [Finite P]
@@ -182,25 +162,7 @@ private theorem Scheme.GaloisCover.constantCoordinates_localRestriction
 
 /-- The value of an ordinary normalized evaluation on the graph of f gives the
 constant-sheaf coordinates on W. No equivariance of the evaluation is assumed.
-Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS;
-lem-weil-pbc-torsor-section-evaluation-local, steps 1 and 3.
-(blueprint: lem-weil-pbc-torsor-normalized-graph-evaluation)
-
-Proof:
-Use the etale inverse-image/localization comparison to identify the restriction of F
-to c.P with the given constant sheaf A. A morphism between etale V-objects is etale,
-so f makes W an object of the small etale site of c.P. Its sections on an etale object T are locally
-constant functions on T with value A. Since c.P is connected and nonempty, constant
-functions identify A with F(c.P); restriction of a global section x is the constant
-function x. This gives a canonical bijection gamma between F(W) and locally constant
-functions on W with value F(c.P), where W is regarded as etale over c.P using f.
-For a point of W and a section s, take an open neighborhood on which gamma(s) is the
-constant value x. On that neighborhood s is the restriction of x along f. Naturality
-of beta then identifies its value on the graph with beta at c.P evaluated on the
-diagonal at f(w), which equals x by normalization. Thus graph evaluation after beta
-is gamma, pointwise, and is bijective. On an empty W both the sheaf sections and locally
-constant functions have a unique element by the empty covering. No torsor splitting
-or extension of equivariant functions is used in this argument. -/
+Source: Stacks Project, Tags 0DV5 (3), 0DV6, 0A3R, 04TR and 04TS. -/
 theorem Scheme.GaloisCover.ordinaryGraphEvaluation_bijective
     {V : Scheme.{u}} [ConnectedSpace V] (ℓ : ℕ) [Fact ℓ.Prime]
     (P : Type u) [Group P] [Finite P]

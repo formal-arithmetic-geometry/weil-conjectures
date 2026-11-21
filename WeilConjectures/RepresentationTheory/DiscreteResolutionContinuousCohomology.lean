@@ -18,7 +18,6 @@ public import WeilConjectures.RepresentationTheory.HomogeneousInhomogeneousConti
 # Continuous cohomology from a transported injective resolution
 
 Source: Stacks Project, Etale Cohomology, Section 0DVG.
-(blueprint: lem-sc-discrete-resolution-continuous-cohomology).
 -/
 
 @[expose] public section
@@ -33,31 +32,7 @@ namespace Rep
 resolution and homogeneous continuous cohomology, with all coefficient modules in the same
 universe.
 
-Source: Stacks Project, Etale Cohomology, Section 0DVG, profinite comparison.
-(blueprint: lem-sc-discrete-resolution-continuous-cohomology).
-
-Proof: An equivalence of abelian categories preserves injective objects and exactness,
-so E carries the given resolution to an injective resolution in discrete representations.
-Continuous inhomogeneous cochains are exact on short exact sequences: a continuous map
-from a compact finite power of G to a discrete module has finite image, and finitely many
-lifts through a surjection give a continuous lifting. Their degree-zero cohomology is
-invariants. For a discrete module M, the orbit map m maps to (x maps to x*m) embeds M
-into locally constant functions G to M with right translation. Each locally constant
-function has open stabilizer: compactness gives a finite clopen partition, and continuity
-of multiplication gives a common open subgroup stabilizing this partition. The insertion
-operator h(F)(g1,...,g(n-1))(x) = F(x,g1,...,g(n-1))(1) satisfies dh+hd=1 in positive
-degrees; it is continuous by the compact-open exponential law and finite clopen partitions.
-This effaces positive continuous cohomology. The cohomological delta-functor is therefore
-universal, and agrees with derived invariants in degree zero; extending the identity in
-both directions and using uniqueness gives inverse comparisons in every degree.
-The compact-open exponential law identifies iterated maps with jointly continuous maps.
-Homogeneous equivariant cochains evaluate at (1,g1,g1*g2,...) to inhomogeneous cochains;
-the inverse sends c to (g0,...,gn maps to g0*c(g0^-1*g1,...,g(n-1)^-1*gn)). Expanding
-alternating omission proves compatibility with the differential. Postcomposition with
-the equivariant coefficient equivalence identifies the complexes for E(F) and N.
-Taking kernel modulo image, which computes underlying TopModuleCat homology, completes
-the comparison with the invariant complex of the given resolution. This uses integer
-modules and does not require a finite coefficient ring. -/
+Source: Stacks Project, Etale Cohomology, Section 0DVG, profinite comparison. -/
 noncomputable def invariantResolutionHomologyAddEquivContinuousCohomology
     (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

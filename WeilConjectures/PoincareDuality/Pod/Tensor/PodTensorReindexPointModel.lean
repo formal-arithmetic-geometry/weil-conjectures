@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Tensor.PodTensorReindexPoint
 
 /-! # Explicit tensor Roos chain maps and their localizations
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4, 0941. -/
+Source: Stacks 07A4, 0941. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -49,11 +48,7 @@ section TensorModelSpecialization
 attribute [local irreducible] isoSectionwiseModuleInverseImage
 
 /-- The tensor Model law in terms of the named localized Roos map.
-Source: blueprint Steps 1 and 5; Stacks 07A4
-(blueprint: lem-pod-tensor-reindex-derived-model).
-Proof: unfold the two explicitly constructed chain and localized maps; the
-assertion is exactly the supplied Model equation, retaining its heterogeneous
-form so no coefficient or category structure has to be changed. -/
+Source: Stacks 07A4. -/
 theorem podTensorReindexDerived_model
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [(isoReductionIntegralInverse l E g).Additive]

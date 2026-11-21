@@ -35,8 +35,8 @@ the Poincaré pairing (`theorem-poincare-duality-frobenius--3`,
 ## Implementation notes
 
 The blueprint also asserts that the identification `𝔻_X K ≅ K^∨(d)[2d]` is an isomorphism of
-Weil objects. It rests on the Weil equivariance of purity and of the trace
-(`proposition-purity-trace-commute-frobenius`), which is not formalised: the Frobenius files
+Weil objects. It rests on the Weil equivariance of purity and of the trace,
+which is not formalised: the Frobenius files
 take the equivariance of the smooth trace as a hypothesis, and no Weil datum on `𝔻_X K` is
 defined. That clause is therefore omitted, and so is the transport clause (finite reduction,
 adic normalization, rationalization, coefficient extension, idempotent splitting): Weil data are
@@ -71,7 +71,7 @@ instance isIso_tensorWeilDatum {A B : DerivedCategoryModule Λ X}
   unfold tensorWeilDatum
   infer_instance
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
+/-- Compatibility of the dual and Tate data.
 
 **The evaluation is a morphism of Weil objects**: for a Weil datum `φ : Lg^* K ≅ K`, the
 coefficient evaluation `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` is a Weil pairing for `φ`, the contragredient
@@ -82,7 +82,7 @@ theorem isWeilPairing_coefficientEvaluation (φ : L((g)^*[ModuleCat.{u + 1} Λ])
       (DerivedCategory.coefficientEvaluation K) :=
   map_coefficientEvaluation_comp_leftDerivedUpperStarUnitIso_hom _ g φ
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
+/-- Compatibility of the dual and Tate data.
 
 **The twisted dual is a Weil object**: for a Weil datum `φ : Lg^* K ≅ K` on a perfect `K` and
 a Weil datum `τ : Lg^* T ≅ T` (for `T = Λ_X(r)`, the Tate datum `τ_r`), the datum
@@ -94,7 +94,7 @@ theorem isIso_tensorWeilDatum_contragredientWeilDatum
   have := isIso_contragredientWeilDatum _ g φ hK
   infer_instance
 
-/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data.
+/-- Compatibility of the dual and Tate data.
 
 **The twisted evaluation is a morphism of Weil objects**: for a Weil datum `φ : Lg^* K ≅ K` and
 a Weil datum `τ` on `T` (for `T = Λ_X(r)`, the Tate datum `τ_r`), the twisted evaluation
@@ -115,8 +115,7 @@ section Equivariance
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {a : X ⟶ Y} [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
 
-/-- Blueprint `theorem-poincare-duality-frobenius`: Frobenius: equivariance, similitudine,
-reciprocity (a).
+/-- Frobenius: equivariance, similitudine, reciprocity (a).
 
 **The derived Poincaré pairing is a morphism of Weil objects**, for the contragredient twisted
 datum: `AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_poincarePairing` with the datum
@@ -135,8 +134,7 @@ theorem isWeilPairing_poincarePairing_of_iso (sq : IsPullback g a a h)
       (leftDerivedUpperStarUnitIso _ h).hom (γ.poincarePairing K) :=
   isWeilPairing_poincarePairing sq γ φ.hom τ _ (isWeilPairing_twistedEvaluation g φ τ) hTr
 
-/-- Blueprint `theorem-poincare-duality-frobenius--3`: Equivariance of the twisted
-pairing.
+/-- Equivariance of the twisted pairing.
 
 **Frobenius invariance of the degreewise pairing** `⟨F_{c,K} x, F_{K^∨(d)} y⟩_i = ⟨x, y⟩_i`, for
 a Weil datum `φ : Lg^* K ≅ K`, the Frobenius `F_{K^∨(d)}` being that of the twisted
@@ -144,7 +142,7 @@ contragredient datum `φ_{K^∨(d)} = φ_{K^∨} ⊗ τ` of `theorem-poincare-du
 `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator_eq` with the
 equivariance of the twisted evaluation supplied by `theorem-poincare-duality-frobenius--2`
 (`AlgebraicGeometry.Etale.isWeilPairing_twistedEvaluation`). The equivariance `hTr` of the
-smooth trace (`proposition-purity-trace-commute-frobenius`) remains a hypothesis. -/
+smooth trace remains a hypothesis. -/
 theorem degreewisePoincarePairing_frobeniusOperator_eq_of_iso (sq : IsPullback g a a h)
     (γ : TateOrientation Λ a d) {K : DerivedCategoryModule Λ X}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
@@ -164,7 +162,7 @@ theorem degreewisePoincarePairing_frobeniusOperator_eq_of_iso (sq : IsPullback g
   degreewisePoincarePairing_frobeniusOperator_eq sq γ φ.hom τ _
     (isWeilPairing_twistedEvaluation g φ τ) hTr hY i j hij x y
 
-/-- Blueprint `theorem-poincare-duality-frobenius--4`: Untwisted similitude.
+/-- Untwisted similitude.
 
 **The untwisted similitude** `⟨F_{c,K} x, F_{K^∨} y⟩^{untw}_i = q^d ⟨x, y⟩^{untw}_i`, for a
 Weil datum `φ : Lg^* K ≅ K`, the Frobenius `F_{K^∨}` being that of the contragredient datum of

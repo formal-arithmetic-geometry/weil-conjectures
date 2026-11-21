@@ -99,8 +99,7 @@ import all WeilConjectures.SixFunctors.Coefficient.CoefficientReductionTensorEva
 
 /-! # Representative comparison models for reduction descent
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: def-pod-reduction-representative-models)
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -305,8 +304,7 @@ private theorem total_good (W : Scheme.{u})
   exact ⟨ht.1, ht.2.1⟩
 
 /-- Conjugate a tensor comparison componentwise along a functor isomorphism.
-Source: naturality of composition of natural isomorphisms, Stacks 05RU.
-(blueprint: def-pod-reduction-representative-models). -/
+Source: naturality of composition of natural isomorphisms, Stacks 05RU. -/
 @[irreducible] def reductionObjectConjugate {C D : Type*} [Category C] [Category D]
     (T : C × C ⥤ C) (U : D × D ⥤ D) (F G : C ⥤ D) (e : F ≅ G)
     (c : T ⋙ F ≅ F.prod F ⋙ U) : T ⋙ G ≅ G.prod G ⋙ U :=
@@ -321,8 +319,7 @@ Source: naturality of composition of natural isomorphisms, Stacks 05RU.
       NatIso.prod, NatTrans.prod, Iso.prod_hom, Functor.mapIso_hom] using hn)
 
 /-- The ordinary tensor comparison with its objectwise equality transport.
-Source: the canonical normalized tensor arrow, Stacks 07A4.
-(blueprint: def-pod-reduction-representative-models). -/
+Source: the canonical normalized tensor arrow, Stacks 07A4. -/
 @[irreducible] def reductionOrdinaryTensorRaw {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (c : PodReindexingCoherence.Comparison l E g none
       (podReindexCalculus l E X).integralClosed (podReindexCalculus l E Y).integralClosed
@@ -334,8 +331,7 @@ Source: the canonical normalized tensor arrow, Stacks 07A4.
     (podReindexingDerivedFunctor l E g none) (podOrdinaryReindex l E g) (eqToIso h) c.tensor
 
 /-- The transported comparison has the original normalized ordinary tensor component.
-Source: the component construction, Stacks 07A4.
-(blueprint: def-pod-reduction-representative-models). -/
+Source: the component construction, Stacks 07A4. -/
 theorem reductionOrdinaryTensorRaw_hom {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -351,8 +347,7 @@ theorem reductionOrdinaryTensorRaw_hom {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g
   rfl
 
 /-- Retain an isomorphism inverse while fixing its hom by a proved equality.
-Source: the isomorphism laws, Stacks 05RU.
-(blueprint: def-pod-reduction-representative-models). -/
+Source: the isomorphism laws, Stacks 05RU. -/
 def reductionIsoWithHom {C : Type*} [Category C] {X Y : C}
     (e : X ≅ Y) (f : X ⟶ Y) (h : f = e.hom) : X ≅ Y where
   hom := f
@@ -361,8 +356,7 @@ def reductionIsoWithHom {C : Type*} [Category C] {X Y : C}
   inv_hom_id := by rw [h]; exact e.inv_hom_id
 
 /-- Componentwise ordinary tensor comparison, with the canonical arrow as its hom.
-Source: equality transport and naturality, Stacks 07A4 and 05RU.
-(blueprint: def-pod-reduction-representative-models). -/
+Source: equality transport and naturality, Stacks 07A4 and 05RU. -/
 @[irreducible] def reductionOrdinaryTensor {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

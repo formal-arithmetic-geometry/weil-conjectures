@@ -242,7 +242,7 @@ instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).EssSu
 
 instance (Y : Scheme.{u}) : (Scheme.FiniteEtale.toFiniteLocallyConstant Y).IsEquivalence where
 
-/-- **Sheaves and covers** (the first step of `proposition-lattices-representations-normal-scheme`):
+/-- **Sheaves and covers**:
 finite étale `Y`-schemes are equivalent to finite locally constant étale sheaves of sets, by
 `P ↦ Hom_Y(-, P)`.
 -/
@@ -1288,9 +1288,9 @@ instance : (Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).IsEquivalenc
 
 end GaloisRepEquivalence
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: Galois correspondence for finite
-local systems. Also blueprint `proposition-lattices-representations-normal-scheme`: Lisse sheaves
-and continuous representations.
+/-- Galois correspondence for finite local systems. Also blueprint
+`proposition-lattices-representations-normal-scheme`: Lisse sheaves and continuous
+representations.
 
 The steps *sheaves and covers* and *linear structure* of the proof, for a named fundamental
 group: let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point, `Λ` a finite ring
@@ -1319,8 +1319,7 @@ theorem Scheme.exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalG
   exact ⟨(Scheme.galoisRepFunctorFiniteContinuous s (Λ := Λ) G).asEquivalence,
     ⟨Scheme.galoisRepFunctorCompForget₂Iso s G⟩⟩
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: Galois correspondence for finite
-local systems.
+/-- Galois correspondence for finite local systems.
 
 Let `Y` be a connected scheme, `s : Spec Ω ⟶ Y` a geometric point and `Λ` a finite ring.
 Then there is a profinite group `G` — the étale fundamental group `π₁(Y, s)`, a fundamental
@@ -1367,8 +1366,7 @@ variable {K : Type u} [Field K] [Finite K] {C U : Scheme.{u}} {p : C ⟶ Spec (.
 
 namespace WeilGroup
 
-/-- Blueprint `definition-weil-representation--1`: The lisse sheaf–representation
-equivalence.
+/-- The lisse sheaf–representation equivalence.
 
 The property of an object of `Rep ℚ̄_ℓ W(C₀)` of being a *lisse Weil representation*: the
 underlying `ℚ̄_ℓ`-vector space is finite dimensional and the geometric subgroup `π₁(C)`
@@ -1381,8 +1379,7 @@ def isLisseRep (W : WeilGroup p) (l : ℕ) [Fact l.Prime] :
 
 variable (W : WeilGroup p) (l : ℕ) [Fact l.Prime]
 
-/-- Blueprint `definition-weil-representation--1`: The lisse sheaf–representation
-equivalence.
+/-- The lisse sheaf–representation equivalence.
 
 A subrepresentation of a lisse Weil representation is again lisse: it is finite dimensional,
 and every coefficient `g ↦ φ (ρ g v)` of it is a coefficient of the ambient representation,
@@ -1400,8 +1397,7 @@ instance isLisseRep.isClosedUnderSubobjects :
     have hψ' (x : X.V) : ψ (f.hom x) = x := LinearMap.congr_fun hψ x
     simpa [← Rep.hom_comm_apply, hψ'] using hρ.continuous_apply (φ ∘ₗ ψ) (f.hom v)
 
-/-- Blueprint `definition-weil-representation--1`: The lisse sheaf–representation
-equivalence.
+/-- The lisse sheaf–representation equivalence.
 
 A quotient of a lisse Weil representation is again lisse: it is finite dimensional, and every
 coefficient `g ↦ φ (ρ g (f v))` of it is the coefficient `g ↦ (φ ∘ f) (ρ g v)` of the source. -/
@@ -1416,8 +1412,7 @@ instance isLisseRep.isClosedUnderQuotients :
     obtain ⟨v, rfl⟩ := hf w
     simpa [Rep.hom_comm_apply] using hρ.continuous_apply (φ ∘ₗ f.hom.toLinearMap) v
 
-/-- Blueprint `definition-weil-representation--1`: The lisse sheaf–representation
-equivalence.
+/-- The lisse sheaf–representation equivalence.
 
 Lisse Weil representations are closed under kernels, so a subobject of a lisse Weil
 representation is again lisse. -/
@@ -1425,8 +1420,7 @@ instance isLisseRep.isClosedUnderKernels :
     ObjectProperty.IsClosedUnderKernels (W.isLisseRep l) :=
   inferInstance
 
-/-- Blueprint `definition-weil-representation--1`: The lisse sheaf–representation
-equivalence.
+/-- The lisse sheaf–representation equivalence.
 
 Lisse Weil representations are closed under cokernels, so a quotient of a lisse Weil
 representation is again lisse. -/
@@ -1455,7 +1449,7 @@ theorem isLisseRep_shortExact_iff (S : ShortComplex (Rep.{u} (PadicAlgCl l) W.ca
 
 variable {W l}
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: Integral models.
+/-- Integral models.
 
 Let `ρ` be a lisse Weil representation on `V` over `ℚ̄_ℓ` and let `R` be a restriction of Weil
 groups along a nonempty open subscheme `j : U₀ ⊆ C₀`. Then, after replacing the coefficient
@@ -1517,7 +1511,7 @@ theorem IsLisse.exists_lattice {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : T
   exact ⟨E, hE, PadicAlgCl.exists_lattice_of_forall_mem l b σ E hσE' C
     fun g i j ↦ hC (i, j) g⟩
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--1`: Global sections as invariants.
+/-- Global sections as invariants.
 
 The global sections `H⁰(U, F|_U)` of the lisse sheaf `F` with geometric generic stalk
 `(V, ρ)`, rendered as in the proof sketch: a global section is a morphism from the constant
@@ -1537,7 +1531,7 @@ variable {l : ℕ} [Fact l.Prime] {W : WeilGroup p} {V : Type u} [AddCommGroup V
   [Module (PadicAlgCl l) V] (ρ : Representation (PadicAlgCl l) W.carrier V) {j : U ⟶ C}
   [IsOpenImmersion j] [Nonempty U] {WU : WeilGroup pU} (R : Restriction j WU W)
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--1`: Global sections as invariants.
+/-- Global sections as invariants.
 
 The geometric Frobenius `F = ρ (res γ)` preserves the invariants `V ^ (π₁(U))`, because
 `π₁(U)` is normal in `W(U₀)`. -/
@@ -1555,7 +1549,7 @@ theorem frobeniusLift_mem_invariants (v : V)
   conv_rhs => rw [← this]
   simp [← Module.End.mul_apply, ← map_mul]
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--1`: Global sections as invariants.
+/-- Global sections as invariants.
 
 The geometric Frobenius `F = ρ (res γ)` acts on global sections by post-composition: `π₁(U)`
 is normal in `W(U₀)`, so post-composing an equivariant map with `F` gives an equivariant

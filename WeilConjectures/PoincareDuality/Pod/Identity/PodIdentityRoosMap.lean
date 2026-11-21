@@ -10,8 +10,7 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 and 0941.
+Source: Stacks 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -20,14 +19,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace WeilConjectures
 
 /-- Naturality of the projection-normalized Roos map with an ordinary identity relabelling.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5; Stacks 0941
-(blueprint: lem-pod-identity-roos-map).
-
-Proof: the product comparison followed by the product of the identity components
-is the identity component on the product, by each product projection and naturality.
-Apply the two coordinate equations of the Roos comparison and of RoosMap. Both
-coordinates become those of the identity component, by naturality in each degree.
-The mapping-cocone decomposition of the identity makes the coordinates jointly monic. -/
+Source: Stacks 0941. -/
 theorem podIdentityRoosMap
     {A : Type*} [Category A] [Abelian A] [HasCountableProducts A]
     (F : A ⥤ A) [F.Additive] (a : F ≅ 𝟭 A)

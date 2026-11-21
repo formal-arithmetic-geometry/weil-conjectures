@@ -286,8 +286,7 @@ theorem dualAnnihilatorToDualSubquotient_surjective {U S : Subrepresentation ρ}
   exact ⟨⟨g, hgU⟩, Submodule.linearMap_qext _ hg⟩
 
 /-- **The contragredient of a subquotient.** For subrepresentations `U ≤ S`, the subquotient
-`U^⊥ / S^⊥` of the contragredient representation is the contragredient of the subquotient `S / U`.
-(blueprint: part L3 of `lemma-tensor-exterior-powers-filtered-representations--3`) -/
+`U^⊥ / S^⊥` of the contragredient representation is the contragredient of the subquotient `S / U`. -/
 noncomputable def subquotientDualEquiv {U S : Subrepresentation ρ} (h : U ≤ S) :
     (U.dualAnnihilator.subquotient S.dualAnnihilator).Equiv (S.subquotient U).dual :=
   .mk ((Submodule.quotEquivOfEq _ _ (ker_dualAnnihilatorToDualSubquotient U S).symm).trans
@@ -710,9 +709,7 @@ open TensorProduct
 /-- Peeling off the first factor of a tensor product, for a subrepresentation `A`: every
 irreducible subquotient of `A ⊗ σ` is equivalent to a subquotient of `(SV / UV) ⊗ σ` for an
 irreducible subquotient `SV / UV` of `ρ`. The proof runs along a composition series of `A`,
-using the right exactness of `- ⊗ σ`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--1`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+using the right exactness of `- ⊗ σ`. -/
 theorem exists_subquotient_tprod_equiv_of_subrepresentation [FiniteDimensional k V]
     (A : Subrepresentation ρ) {U S : Subrepresentation (A.toRepresentation.tprod σ)}
     (hirr : (S.subquotient U).IsIrreducible) :
@@ -774,9 +771,7 @@ theorem exists_subquotient_tprod_equiv_of_subrepresentation [FiniteDimensional k
 
 /-- Peeling off the first factor of a tensor product: every irreducible subquotient of `ρ ⊗ σ`,
 for a finite-dimensional `ρ`, is equivalent to a subquotient of `(SV / UV) ⊗ σ` for an irreducible
-subquotient `SV / UV` of `ρ`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--1`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+subquotient `SV / UV` of `ρ`. -/
 theorem exists_subquotient_tprod_left_equiv [FiniteDimensional k V]
     {U S : Subrepresentation (ρ.tprod σ)} (hirr : (S.subquotient U).IsIrreducible) :
     ∃ UV SV : Subrepresentation ρ, UV < SV ∧ (SV.subquotient UV).IsIrreducible ∧
@@ -793,9 +788,7 @@ theorem exists_subquotient_tprod_left_equiv [FiniteDimensional k V]
 
 /-- The irreducible subquotients of a tensor product: every irreducible subquotient `Q` of
 `ρ ⊗ σ`, for finite-dimensional `ρ` and `σ`, is equivalent to a subquotient of `V_i ⊗ E_j` for
-irreducible subquotients `V_i = SV / UV` of `ρ` and `E_j = SE / UE` of `σ`.
-(blueprint: `lemma-tensor-exterior-powers-filtered-representations--1`,
-`lemma-tensor-exterior-powers-filtered-representations--3`) -/
+irreducible subquotients `V_i = SV / UV` of `ρ` and `E_j = SE / UE` of `σ`. -/
 theorem exists_subquotient_tprod_equiv [FiniteDimensional k V] [FiniteDimensional k V']
     {U S : Subrepresentation (ρ.tprod σ)} (hirr : (S.subquotient U).IsIrreducible) :
     ∃ UV SV : Subrepresentation ρ, ∃ UE SE : Subrepresentation σ, UV < SV ∧ UE < SE ∧

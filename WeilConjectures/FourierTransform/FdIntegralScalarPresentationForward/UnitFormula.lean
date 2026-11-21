@@ -20,8 +20,6 @@ import WeilConjectures.FourierTransform.FdIntegralScalarPresentationForward.Good
 import all WeilConjectures.FourierTransform.FdIntegralOrdinaryScalarModel.FdIntegralOrdinaryScalarModel
 
 /-! # Units of the normalized derived ordinary square
-
-Source: trace-definition coefficient-category comparison, integral steps 1--6.
 -/
 
 @[expose] public noncomputable section

@@ -76,28 +76,6 @@ a finite discrete set factors uniquely through every sufficiently high positive 
 
 Stacks Tags 08ZU, 0ET8, 08ZY and 08ZZ
 (auxiliary; not a blueprint node).
-
-Proof: (1) By lem-weil-l-adic-extension-integers-dvr the uniformizer has absolute value
-`r` with `0 < r < 1`, and units have value one. Nonarchimedeanness from
-lem-weil-l-adic-extension-absolute-value gives membership in its nth ideal power exactly
-when the absolute value is at most `r ^ n`. These cosets are clopen and form a neighbourhood
-basis. Lem-weil-valued-dvr-finite-quotients supplies finite quotients and surjective
-transitions. (2) Compatible reductions define a ring homomorphism. If two elements have
-the same reductions, their difference has value at most every `r ^ n`, hence is zero.
-(3) Representatives of a compatible family are Cauchy by the same estimate. Completeness
-from lem-weil-l-adic-extension-complete gives a limit in the closed unit ball. Each of
-its reductions is the specified coordinate. This proves surjectivity and hence the ring
-isomorphism. (4) Coordinate cylinders form a basis on the inverse limit: dominate the
-finitely many restricted coordinates by their maximum. Their inverse images are exactly
-the coset basis, proving continuity in both directions. (5) Properness from
-lem-weil-l-adic-extension-proper makes the closed unit ball compact. (6) The metric is
-Hausdorff; distinct points have distinct reductions, so a clopen coset separates them.
-Thus every connected subset has at most one point. (7) The open fibres of the finite discrete
-map contain coset neighbourhoods. Compactness gives finitely many of them covering the
-integers. Their maximum exponent ensures that the map is constant on every coset at
-that level, defining its factorization. The cover is nonempty since it covers zero.
-(8) Surjectivity of reduction makes the factor unique. Composing with reduction from
-any higher level gives its factorization there, again unique by surjectivity.
 -/
 theorem coefficientExtension_integers_profinite_tower (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :

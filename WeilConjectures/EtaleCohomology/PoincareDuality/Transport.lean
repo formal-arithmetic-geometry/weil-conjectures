@@ -83,7 +83,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : Scheme.{u}}
   {a : X ⟶ Y} [HasCompactification a] {d : ℕ}
 
-/-- Blueprint `theorem-poincare-duality--9`: Transport through the coefficient stages.
+/-- Transport through the coefficient stages.
 
 **The duality is compatible with finite reduction.** For an ideal `J` of the finite
 coefficient ring `Λ`, a Tate orientation `γ` and `K ∈ D(X_ét, Λ)`, the derived Poincaré pairing

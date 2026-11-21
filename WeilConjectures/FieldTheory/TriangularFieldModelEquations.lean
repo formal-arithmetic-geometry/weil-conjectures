@@ -13,8 +13,7 @@ public import Mathlib.Data.List.OfFn
 /-!
 # Equations for a triangular field model
 
-Source: Stacks Project, Algebra, proof of Tag 07BV, and the presentation in Tag 08JZ
-(blueprint: def-weil-pbc-triangular-field-model-equations).
+Source: Stacks Project, Algebra, proof of Tag 07BV, and the presentation in Tag 08JZ.
 -/
 
 @[expose] public section
@@ -27,8 +26,7 @@ namespace FieldTheory
 The first `d` variables are the transcendence variables, variable `d` is `T`, and
 variable `d + 1 + i` is the new variable of `p i`. Its coefficients involve only
 preceding variables. This is a real polynomial construction; no witnesses are chosen.
-Source: Stacks Project, proof of Tags 07BV and 08JZ
-(blueprint: def-weil-pbc-triangular-field-model-equations). -/
+Source: Stacks Project, proof of Tags 07BV and 08JZ. -/
 noncomputable def triangularFieldModelEquations
     (k : Type u) [CommRing k] (d r : ℕ) (h : MvPolynomial (Fin d) k)
     (p : (i : Fin r) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k)) :
@@ -43,8 +41,7 @@ noncomputable def triangularFieldModelEquations
         (MvPolynomial.X ⟨d + 1 + i.val, by omega⟩) (p i))
 
 /-- The localization equation contributes one entry and each tower generator one entry.
-Source: Stacks Project, proof of Tag 07BV
-(blueprint: def-weil-pbc-triangular-field-model-equations). -/
+Source: Stacks Project, proof of Tag 07BV. -/
 @[simp] theorem triangularFieldModelEquations_length
     (k : Type u) [CommRing k] (d r : ℕ) (h : MvPolynomial (Fin d) k)
     (p : (i : Fin r) → Polynomial (MvPolynomial (Fin (d + 1 + i.val)) k)) :

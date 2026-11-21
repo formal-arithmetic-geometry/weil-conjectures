@@ -83,7 +83,7 @@ theorem boundedConstructibleFiniteTor_dualizingComplex (g : V ⟶ B)
   exact ⟨(DerivedCategory.boundedConstructible _ V).prop_of_iso e.symm hL₂.1,
     (DerivedCategory.finiteTorAmplitude _ V).prop_of_iso e.symm hL₂.2⟩
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
+/-- Section invariant
 
 For `g : V ⟶ B` smooth of pure relative dimension `d` and admitting a compactification, and a
 section `s` of `g`, the section invariant `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` is an object of
@@ -98,7 +98,7 @@ theorem isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant
     constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) s
       (boundedConstructibleFiniteTor_dualizingComplex Λ d g)⟩
 
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section
+/-- Deformation space of a closed section
 
 For `g : V ⟶ B` smooth of pure relative dimension `d` and a closed section `s` of `g`, the family
 object `F = Ls̃^* ω_{g̃}` of the deformation to the normal cone of `s` is an object of
@@ -153,8 +153,7 @@ lemma quasiCompact_of_noetherianSpace {Y Z : Scheme.{u}} [TopologicalSpace.Noeth
   ⟨fun _ _ _ ↦ TopologicalSpace.NoetherianSpace.isCompact _⟩
 
 variable (Λ) in
-/-- Blueprint `proposition-exceptional-inverse-image-smooth-morphism`: Cohomological smoothness,
-clause 1, for a smooth morphism whose relative dimension may vary.
+/-- Cohomological smoothness, clause 1, for a smooth morphism whose relative dimension may vary.
 
 For `g : V ⟶ B` smooth with a compactification, on a source with noetherian underlying space,
 the dualizing complex `ω_g = Rg^! Λ_B` is ⊗-invertible and lies in `D^b_{ctf}(V, Λ)`: on each
@@ -225,7 +224,7 @@ theorem isInvertible_and_boundedConstructibleFiniteTor_dualizingComplex_of_smoot
     (by have := le_abs_self (b k); linarith) (hab k)
 
 variable (Λ) in
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
+/-- Section invariant
 
 For `g : V ⟶ B` smooth (of locally constant relative dimension) admitting a compactification,
 on a source with noetherian underlying space, and a section `s` of `g`, the section invariant
@@ -243,7 +242,7 @@ theorem isInvertible_and_boundedConstructibleFiniteTor_sectionInvariant_of_smoot
     constructibleFiniteTor_leftDerivedUpperStar (ModuleCat.{u + 1} Λ) s h.2⟩
 
 variable (Λ) in
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section
+/-- Deformation space of a closed section
 
 For `g : V ⟶ B` smooth (of locally constant relative dimension) and quasi-compact over a
 noetherian base, and a closed section `s` of `g`, the family object `F = Ls̃^* ω_{g̃}` of the

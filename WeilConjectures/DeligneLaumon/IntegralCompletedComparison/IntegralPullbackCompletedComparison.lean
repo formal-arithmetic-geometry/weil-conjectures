@@ -29,8 +29,7 @@ set_option linter.privateModule false
 
 /-! # Integral and strict-tower completed pullback
 
-Source: Stacks Project, proetale.tex, Tag 099N(5), with sites-cohomology.tex,
-Tag 0941 (blueprint: lem-a1-integral-pullback-completed-comparison).
+Source: Stacks Project, proetale.tex, Tag 099N(5), with sites-cohomology.tex, Tag 0941.
 
 The coefficient transport is the existing projection-normalized ring isomorphism.
 Finite comparisons below are fixed on inverse-image generators; the integral

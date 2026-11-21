@@ -126,33 +126,7 @@ private theorem insep_lt_of_new_separable_element
 -- The existing existential instance binders are used implicitly; keep its signature unchanged.
 set_option linter.unusedVariables false in
 /-- One coefficient-root construction strictly decreases the inseparable degree.
-Source: Stacks Project, Algebra, Tag 04KM, the induction step (steps 4--9 of
-`lem-weil-pbc-make-separably-generated`).
-
-Proof. Put E = k(s) and let K_s be its relative separable closure in K. Since
-[K : K_s] is not one, the extension is not separable. In characteristic zero this
-is impossible, so k has prime characteristic p. Choose beta outside K_s with
-alpha = beta^p in K_s by taking the penultimate power in a shortest Frobenius
-chain. The minimal polynomial P of alpha over E is separable. Write its
-coefficients as f_j(s)/g_j(s), and put h_j = f_j g_j^(p-1). In an algebraic closure
-of K, IntermediateField.adjoin to k the p-th roots of the finitely many coefficients of the h_j,
-forming l. Put E_1 = l(s^(1/p)) and L = K E_1. Frobenius shows that each
-coefficient of P is a p-th power in E_1. The elements whose p-th powers lie in
-k (respectively K) form a subfield; hence l/k and L/K are purely inseparable.
-They are finite because only finitely many algebraic roots were adjoined.
-The rooted tuple is algebraically independent over l: raising a polynomial
-relation to the p-th power gives a nonzero relation over k among s, since
-l^p lies in k. The compositum degree bound makes L/E_1 finite, so the rooted
-tuple is a finite transcendence basis t of L/l; L/l is finitely generated.
-Let L_s be the relative separable closure of E_1 in L. Separable polynomials
-remain separable after extending the base, so K_s lies in L_s. Apply Fields
-Tag 031V (2) to P over E_1 in L_s: alpha has a p-th root in L_s, which by
-injectivity of Frobenius equals beta. Thus K_s(beta) lies in L_s. Since
-K L_s = L, the compositum bound gives [L : L_s] <= [K : K_s(beta)]. The tower
-law and beta outside K_s give [K : K_s(beta)] < [K : K_s]. This is the asserted
-strict decrease. All fields here are subfields of an algebraic closure of K,
-so remain in Type w. Their inclusions give the two scalar towers.
-(blueprint: lem-weil-pbc-inseparable-degree-drop) -/
+Source: Stacks Project, Algebra, Tag 04KM, the induction step (steps 4--9 of). -/
 theorem exists_inseparableDegree_drop
     (k K : Type w) [Field k] [Field K] [Algebra k K]
     (hfg : (⊤ : IntermediateField k K).FG) (s : Finset K)

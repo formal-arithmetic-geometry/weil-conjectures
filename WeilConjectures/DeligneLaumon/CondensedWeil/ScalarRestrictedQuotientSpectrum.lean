@@ -18,15 +18,7 @@ universe v
 
 namespace WeilConjectures.CondensedWeil
 
-/-- A local quotient detects the norm of every eigenvalue of a linear operator.
-Source: latest blueprint, lem-a1-affine-hc2-pure.proof.md, the local-point argument
-(blueprint: lem-zl-scalar-restricted-quotient-spectrum).
-
-Proof: normalize the nonzero eigenvector's eigenvalue by q.
-Its d-th power is an eigenvalue of the normalized operator's d-th power, hence of
-its finite-dimensional local cover by the equivariant quotient lemma. The local
-norm hypothesis and d>0 imply that the normalized eigenvalue has norm one. Multiply
-back by the positive integer q. No diagonalizability assumption is used. -/
+/-- A local quotient detects the norm of every eigenvalue of a linear operator. -/
 theorem norm_eigenvalue_of_scalar_restricted_local_quotient
     {K : Type*} [Field K] [CharZero K]
     (H : Type v) [AddCommGroup H] [Module K H]

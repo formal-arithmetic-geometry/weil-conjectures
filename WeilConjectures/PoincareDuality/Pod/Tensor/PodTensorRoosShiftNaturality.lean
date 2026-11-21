@@ -63,9 +63,7 @@ private theorem signedRoos_unique (ρ σ : PodSignedRoosShift A)
     (hleft.symm.trans (hright.trans (Category.comp_id _)))
 
 /-- The two prescribed cone-coordinate laws force naturality of the Roos shift.
-Source: Stacks 011G and 0941 (blueprint: lem-pod-tensor-roos-shift-naturality).
-Proof: identify the supplied maps with the native mapping-cocone comparison by
-its two coordinates, then apply the native Roos commShift naturality. -/
+Source: Stacks 011G and 0941. -/
 theorem podTensorSignedRoosShift_naturality (ρ : PodSignedRoosShift A) (hρ : ρ.Laws)
     {C D : ℕᵒᵖ ⥤ CochainComplex A ℤ} (f : C ⟶ D) (r : ℤ) :
     integralOperationsRoosFunctor.map (whiskerRight f (shiftFunctor _ r)) ≫
@@ -118,7 +116,7 @@ theorem podTensorSignedRoosShift_naturality (ρ : PodSignedRoosShift A) (hρ : �
   exact h
 
 /-- The supplied signed Roos comparison gives a natural shift isomorphism.
-Source: Stacks 011G and 0941 (blueprint: lem-pod-tensor-roos-shift-naturality).
+Source: Stacks 011G and 0941.
 -/
 def podTensorRoosShiftIso {A : Type a} [Category.{b} A] [Abelian A]
     [HasCountableProducts A] (ρ : PodSignedRoosShift A) (hρ : ρ.Laws) (r : ℤ) :

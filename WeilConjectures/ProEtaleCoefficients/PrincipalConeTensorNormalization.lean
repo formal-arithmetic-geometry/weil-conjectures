@@ -16,9 +16,6 @@ import WeilConjectures.CategoryTheory.Monoidal.Closed.UnitEnd
 import Mathlib.CategoryTheory.Center.Linear
 
 /-! # Signed principal cones and derived tensor
-
-Source: blueprint, derived Nakayama resolution, On X paragraph.
-(blueprint: lem-pe-principal-cone-tensor-normalization).
 -/
 
 @[expose] public noncomputable section

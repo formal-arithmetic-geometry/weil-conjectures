@@ -14,8 +14,7 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 /-!
 # The open-stabilizer right adjoint
 
-Source: Stacks Project, Injectives, Tag 04JF, proof of Lemma 19.3.1
-(blueprint: lem-exc-rg-open-stabilizer-adjoint).
+Source: Stacks Project, Injectives, Tag 04JF, proof of Lemma 19.3.1.
 -/
 
 @[expose] public section
@@ -26,7 +25,7 @@ open CategoryTheory
 
 namespace ModuleCat
 
-/-- (blueprint: lem-exc-rg-open-stabilizer-adjoint) Stacks, Tag 04JF.
+/-- Stacks, Tag 04JF.
 The functor forgetting the open-stabilizer condition. -/
 noncomputable abbrev forgetDiscreteGModule (R : Type u) (G : Type v) [Ring R] [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] :
@@ -175,7 +174,7 @@ private def openAdjunction (R : Type u) (G : Type v) [Ring R] [Group G]
       ext x
       rfl }
 
-/-- (blueprint: lem-exc-rg-open-stabilizer-adjoint) Stacks, Tag 04JF.
+/-- Stacks, Tag 04JF.
 The full inclusion of discrete `R`-linear `G`-modules in all `R[G]`-modules is fully faithful
 and preserves monomorphisms. The right adjoint sends a module to its open-stabilizer submodule:
 the counit is injective and its image consists exactly of the elements with open stabilizer.

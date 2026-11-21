@@ -144,8 +144,7 @@ character `ψ` and `a ≠ 0`, the Artin–Schreier sheaf `ℒ_{ψ(a x)}` on `�
 to a lisse sheaf on a neighbourhood of `∞` in `ℙ¹`: otherwise it would be constant on the
 punctured disc at `∞`
 (`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
-while the inertia group at `∞` acts on it through `ψ`.
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
+while the inertia group at `∞` acts on it through `ψ`. -/
 theorem not_isUnramifiedAtInfinity_artinSchreier (hψ : ψ ≠ 1) {a : k₀} (ha : a ≠ 0) :
     ¬ (artinSchreier ψ a).IsUnramifiedAtInfinity (𝟙 (affineLine k₀)) := by
   intro h
@@ -165,8 +164,7 @@ variable (D : LisseOnDenseOpen k₀ l)
 `a ≠ 0`: on the punctured disc at `∞` the sheaf becomes constant
 (`AlgebraicGeometry.WeilSheaf.exists_iso_upperStar_biproduct_unit_of_isUnramifiedAtInfinity`),
 so a geometric constituent becomes a subquotient of a constant sheaf, which `ℒ_{ψ(a x)}` is not
-(`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`).
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters`, case `a ≠ 0`) -/
+(`AlgebraicGeometry.affineLine.not_epi_upperStar_laurentPoint_artinSchreierImage`). -/
 theorem not_hasLinearArtinSchreierConstituent_of_isUnramifiedAtInfinity' (hψ : ψ ≠ 1)
     (hinf : D.IsUnramifiedAtInfinity) {a : AlgebraicClosure k₀} (ha : a ≠ 0) :
     ¬ D.sheaf.HasLinearArtinSchreierConstituent ψ a D.j := by

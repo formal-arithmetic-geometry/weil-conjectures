@@ -37,15 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Core construction of signed tensor shifts, including the Roos and representative laws.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4, 0941
-(blueprint: lem-pod-reindexing-tensor-signed-shifts-core).
-
-Proof: construct the two signed total-tensor relabellings on flat-term K-flat
-representatives, localize them through the prescribed Roos models, and verify the
-reduction and limit shift equations by the two coordinate Roos comparison. The
-quotient generator formulas and representative-model equations descend from the
-same relabelling calculation. This is the first part of the signed-shift argument;
-the two reindexing tensor squares are supplied separately below. -/
+Source: Stacks 07A4, 0941. -/
 theorem podReindexingTensorSignedShifts_core
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

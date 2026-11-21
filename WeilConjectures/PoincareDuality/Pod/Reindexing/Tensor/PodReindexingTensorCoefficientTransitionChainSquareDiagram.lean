@@ -13,8 +13,7 @@ import all WeilConjectures.SmoothPurity.Supporting.AdditiveRoosHorizontal
 
 /-! # Completed tensor square for scalar/reindexing transitions
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-chain-square-diagram).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -83,21 +82,7 @@ attribute [local implicit_reducible] podTensorDiagramReindexFunctor
 
 -- The diagram wrappers involve several large exact-derived comparison types.
 /-- The mixed tensor square on the fixed good Roos representative diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 07A4, 0941
-(blueprint: lem-pod-tensor-chain-square-diagram).
-
-Proof: on each finite quotient and homogeneous tensor summand, scalar extension
-sends a tensor generator a tensor (x tensor y) to (a tensor x) tensor (1 tensor y).
-Reindexing relabels the section object. The pure-tensor clause for S and the
-generator clauses for T and T' identify the two paths. Balancing gives equality
-on each tensor summand. Their signed total differentials and quotient-transition
-maps agree. The two product-coordinate equations of the Roos comparisons then
-give the chain equation before localization. Apply podCoefficientExactSquareChain:
-naturality moves its localization factors through the chain maps, and the
-exact-derived comparison formula identifies the initial factor with S.derived.
-Unfolding the named representative maps and the tensor functor's map of the
-termwise S comparison gives the displayed equation. This is the representative
-chain square, before any tensor normalization or faithful descent is applied. -/
+Source: Stacks 03EL, 07A4, 0941. -/
 theorem podTensorMixedRepresentativeChainSquareDiagram
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

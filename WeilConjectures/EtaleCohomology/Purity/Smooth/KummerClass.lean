@@ -17,7 +17,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Supports
 # Kummer classes and their boundaries
 
 The cohomological constructions out of which the fundamental class of a regular closed
-immersion is glued (`lemma-class-of-point--1`):
+immersion is glued:
 
 * the *Kummer class* `κ(u) ∈ H¹(X, Λ(1))` of a unit `u`, the rank-one datum of
   `sk-def-purity-conv`, supplied by `AlgebraicGeometry.Etale.HasKummerClass`;
@@ -82,7 +82,7 @@ instance hasInvertibleExponent_affineSpace {Λ : Type (u + 1)} [CommRing Λ] {n 
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Purity conventions and the rank-one datum
 
 The *rank-one datum*: on top of a Tate twist datum, the *Kummer class*
 `κ(u) ∈ H¹(X, Λ(1)) = Hom(Λ_X, Λ_X(1)[1])` of every unit `u ∈ Γ(X, 𝒪_X)ˣ`, natural under
@@ -126,7 +126,7 @@ section Kummer
 
 variable {X Y : Scheme.{u}}
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Purity conventions and the rank-one datum
 
 The *Kummer class* `κ(u) ∈ H¹(X, Λ(1)) = Hom(Λ_X, Λ_X(1)[1])` of a unit `u ∈ Γ(X, 𝒪_X)ˣ`,
 from the rank-one datum `AlgebraicGeometry.Etale.HasKummerClass`. In the concrete model,
@@ -215,7 +215,7 @@ noncomputable def supportedClassMap (i : Z ⟶ X) [IsClosedImmersion i]
     rightDerivedLowerShriekTranspose (ModuleCat.{u + 1} Λ) i γ
 
 omit [HasKummerClass Λ] in
-/-- Blueprint `sk-prop-a1`: Rank-one orientation: the fundamental class of the zero section
+/-- Rank-one orientation: the fundamental class of the zero section
 
 *Classes with supports are morphisms out of the constant complex of the support.* For a closed
 immersion `i : Z ⟶ X` and `L ∈ D(X_ét, Λ)`, the adjoint `γ ↦ (Λ_Z ⟶ Ri^! L)`
@@ -238,7 +238,7 @@ theorem supportedClassMap_bijective (i : Z ⟶ X) [IsClosedImmersion i]
   ext γ
   simp [E, supportedClassMap, rightDerivedLowerShriekTranspose]
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Purity conventions and the rank-one datum
 
 The *rank-one normalisation* of the Kummer classes. For every scheme `B` separated and locally
 of finite type over a field, on which the exponent of `Λ` is invertible, let `t` be the
@@ -346,7 +346,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Purity conventions and the rank-one datum
 
 A Tate twist datum is *normalized* if it underlies a normalized rank-one datum: Kummer classes on
 it whose boundary for the coordinate of `𝔸¹_B` is the fundamental class of the zero section

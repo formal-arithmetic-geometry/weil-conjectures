@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexin
 
 /-! # Completed tensor square for scalar/reindexing transitions
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-reindex-normalization).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -57,10 +56,7 @@ attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   podTensorTensorScalarDerivedChain podTensorTensorMixedDerivedChain
 
 /-- A representative step of the scalar/reindexing tensor descent.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 05RU, 0941
-(blueprint: lem-pod-tensor-reindex-normalization).
-Proof: Apply the tensor Model law to the chosen good constructible pair. The localization and
-    reindexing factors are the specified ones. Reassociate the fixed comparison maps. -/
+Source: Stacks 05RU, 0941. -/
 theorem podTensorReindexRepresentativeNormalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

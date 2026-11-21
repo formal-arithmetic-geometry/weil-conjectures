@@ -35,11 +35,11 @@ the composition pairing `Hom(Λ_s, E) × Hom(E, Λ_s) ⟶ End(Λ_s) = Λ` is per
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`
-  (`corollary-degreewise-duality-over-fields--1`, `corollary-degreewise-duality-over-fields`): the
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`:
+the
   degreewise pairings are perfect.
-- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing_of_isProper`
-  (`theorem-poincare-duality--8`): the same for `a` proper, with `H^i(X, K)` in place of
+- `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing_of_isProper`:
+the same for `a` proper, with `H^i(X, K)` in place of
   `H^i_c(X, K)`.
 -/
 
@@ -87,9 +87,8 @@ variable [HasTateTwist Λ] {X : Scheme.{u}} {a : X ⟶ Spec (.of k)} [HasCompact
 
 namespace TateOrientation
 
-/-- Blueprint `corollary-degreewise-duality-over-fields--1`: Degreewise perfectness over a
-field (finite-field case). This is also the degreewise part of blueprint
-`corollary-degreewise-duality-over-fields`.
+/-- Degreewise perfectness over a field (finite-field case). This is also the degreewise part of
+blueprint `corollary-degreewise-duality-over-fields`.
 
 Let `k` be separably closed, `Λ` a finite field (a finite domain) whose characteristic is
 invertible on `X`, `γ` a Tate orientation of `a : X ⟶ Spec k` of relative dimension `d`, with
@@ -133,8 +132,7 @@ theorem isPerfPair_degreewisePoincarePairing (γ : TateOrientation Λ a d)
   rfl
 
 omit [LocallyOfFiniteType a] in
-/-- Blueprint `theorem-poincare-duality--8`: Proper Poincaré duality (degreewise form,
-finite-field case).
+/-- Proper Poincaré duality (degreewise form, finite-field case).
 
 In the situation of
 `AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`, if moreover `a`

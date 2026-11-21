@@ -19,24 +19,22 @@ import WeilConjectures.AlgebraicGeometry.IrreducibleStratificationRefinement
 Let `Λ` be a finite commutative ring and `X` a Noetherian scheme. This file collects the
 stalkwise criteria for constructible étale sheaves of `Λ`-modules on `X`:
 
-- `AlgebraicGeometry.Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf` (blueprint
-  `lem-weil-pbc-lisse-generic-kernel`): on an irreducible scheme, a morphism out of a locally
-  constant sheaf which is injective on the stalk at a geometric generic point is a monomorphism.
+- `AlgebraicGeometry.Etale.mono_of_mono_sheafFiber_of_isLocallyConstantSheaf`: on an irreducible
+scheme, a morphism out of a locally constant sheaf which is injective on the stalk at a geometric
+generic point is a monomorphism.
 - `AlgebraicGeometry.Etale.exists_isConstructible_sheafFiber_map_eq_zero`: a morphism into a
   constructible sheaf whose stalk at a point vanishes has vanishing stalks on a constructible
   neighbourhood of that point.
-- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_stratification_isIrreducible`
-  (blueprint `lem-weil-pbc-irreducible-lisse-strata`): a constructible sheaf is finite locally
+- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.exists_stratification_isIrreducible`:
+a constructible sheaf is finite locally
   constant on the strata of a stratification by irreducible strata.
-- `AlgebraicGeometry.Etale.exists_finset_mono_pi_lift` (blueprint
-  `lem-weil-pbc-constructible-noetherian-finite-selection`): finitely many maps out of a
-  constructible sheaf jointly detect the nonzero stalk elements detected by a family of maps.
-- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_mono` (blueprint
-  `lem-weil-pbc-constructible-subobjects-noetherian`): subsheaves of constructible sheaves are
-  constructible.
-- `AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_isConstructible_card` (blueprint
-  `proposition-proper-direct-image-finite-coefficients`): a sheaf with finite stalks is
-  constructible if and only if the loci where its stalks have a given cardinality are constructible.
+- `AlgebraicGeometry.Etale.exists_finset_mono_pi_lift`: finitely many maps out of a constructible
+sheaf jointly detect the nonzero stalk elements detected by a family of maps.
+- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_mono`: subsheaves of constructible sheaves
+are constructible.
+- `AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_isConstructible_card`: a sheaf with finite
+stalks is constructible if and only if the loci where its stalks have a given cardinality are
+constructible.
 
 The blueprint states these for abelian étale sheaves; a constructible abelian sheaf on a
 Noetherian scheme has finite stalks and finitely many strata, hence is killed by some `N`, so it
@@ -62,8 +60,7 @@ open Scheme
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `lem-weil-pbc-lisse-generic-kernel`: A generic stalk detects kernels in a locally
-constant sheaf.
+/-- A generic stalk detects kernels in a locally constant sheaf.
 
 Let `S` be an irreducible scheme and `s` a geometric point of `S` lying over its generic point.
 Let `F` be a locally constant sheaf of `Λ`-modules and `φ : F ⟶ G` a morphism of sheaves. If the
@@ -203,7 +200,7 @@ theorem Etale.exists_isConstructible_sheafFiber_map_eq_zero {T : Scheme.{u}} [Is
 
 variable [Finite Λ]
 
-/-- Blueprint `lem-weil-pbc-irreducible-lisse-strata`: Irreducible lisse strata.
+/-- Irreducible lisse strata.
 
 Let `X` be Noetherian and `F` a constructible sheaf of `Λ`-modules on `X_ét`. Then there is a
 stratification of `X` all of whose strata are (nonempty) irreducible and on each of which `F` is
@@ -226,8 +223,7 @@ theorem Scheme.IsConstructibleSheaf.exists_stratification_isIrreducible {X : Sch
     (IrreducibleSpace.isIrreducible_univ (T.domain i)).image
       (T.immersion i) (T.immersion i).continuous.continuousOn
 
-/-- Blueprint `lem-weil-pbc-constructible-noetherian-finite-selection`: Noetherian finite
-selection of stalk tests.
+/-- Noetherian finite selection of stalk tests.
 
 Let `X` be Noetherian, `F` a constructible sheaf of `Λ`-modules and `(φ_l : F ⟶ G_l)_{l ∈ L}` a
 family of morphisms to arbitrary sheaves. Assume that at every point `x` of `X` every nonzero
@@ -326,8 +322,7 @@ theorem Etale.exists_finset_mono_pi_lift {X : Scheme.{u}} [IsNoetherian X]
   rw [← Functor.map_comp, ← Functor.map_comp]
   exact congrArg (P z).map hab
 
-/-- Blueprint `lem-weil-pbc-constructible-subobjects-noetherian`: Subsheaves of a constructible
-sheaf on a Noetherian scheme.
+/-- Subsheaves of a constructible sheaf on a Noetherian scheme.
 
 Let `T` be Noetherian. Every subsheaf of a constructible sheaf of `Λ`-modules on `T_ét` is
 constructible. -/
@@ -438,8 +433,7 @@ theorem Scheme.IsConstructibleSheaf.of_mono {T : Scheme.{u}} [IsNoetherian T]
     IsConstructibleSheaf.cokernel (Limits.kernel.ι (d (T₀.sup S)))
   exact IsConstructibleSheaf.of_iso (asIso (Abelian.factorThruCoimage (d (T₀.sup S))))
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients`: Constructibility from the
-cardinalities of finite stalks.
+/-- Constructibility from the cardinalities of finite stalks.
 
 Let `X` be Noetherian and `F` a sheaf of `Λ`-modules on `X_ét` with finite geometric stalks. For
 `n ≥ 1` let `C_n` be the set of points `x` with `|F_x̄| = n`. Then `F` is constructible if and

@@ -160,8 +160,7 @@ abelian sheaves every global section of `Q` lifts to a global section of `E`, th
 In torsor language: the fibre of `E → Q` over a global section of `Q` is an `F`-torsor, which
 is trivial exactly when the section lifts; every class in `H¹(F) = Ext¹(ℤ, F)` arises this way
 from an embedding of `F` into an injective sheaf. This is the half of the classification of
-`H¹` by torsors that is needed for vanishing results.
-(blueprint: `lemma-cohomology-multiplicative-group--3`, vanishing direction) -/
+`H¹` by torsors that is needed for vanishing results. -/
 theorem Sheaf.subsingleton_H_one_of_surjective (F : Sheaf J AddCommGrpCat.{w}) {T : C}
     (hT : IsTerminal T)
     (h : ∀ ⦃E Q : Sheaf J AddCommGrpCat.{w}⦄ (ι : F ⟶ E) (π : E ⟶ Q) (w : ι ≫ π = 0),
@@ -255,8 +254,7 @@ with the cokernel of `d_T : Γ(I) → Γ(Q)`.
 The blueprint takes for `I` the Godement sheaf of `F`, which is flasque; here `I` is an
 injective sheaf, which has the same two properties used later: it is acyclic, and every
 equivariant map from a torsor into it exists (see
-`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`).
-(blueprint: `lem-galois-flasque`) -/
+`CategoryTheory.Sheaf.Torsor.exists_quotientEquiv_H_one`). -/
 theorem Sheaf.exists_shortExact_injective_addEquiv_H_one (hT : IsTerminal T)
     [EnoughInjectives (Sheaf J AddCommGrpCat.{w})] (F : Sheaf J AddCommGrpCat.{w}) :
     ∃ (I Q : Sheaf J AddCommGrpCat.{w}) (ι : F ⟶ I) (d : I ⟶ Q) (w : ι ≫ d = 0),

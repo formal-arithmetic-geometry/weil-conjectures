@@ -77,8 +77,7 @@ import all WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexingC
 
 /-! # Tensor normalization of the reindexing identity
 
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 09A5, 07A4, 0FPI.
-(blueprint: lem-pod-reindexing-tensor-identity).
+Source: Stacks 09A5, 07A4, 0FPI.
 -/
 
 @[expose] public noncomputable section
@@ -391,16 +390,7 @@ private theorem identity_tensor_representative (X : Scheme.{u})
     (k.model P) (k.model Q) (k.model (B.obj (P, Q))) hm hd
 
 /-- The canonical site and localized tensor identity comparison.
-Source: blueprint dual-Tate compatibility, Steps 1, 2 and 4; Stacks 09A5, 07A4, 0FPI
-(blueprint: lem-pod-reindexing-tensor-identity).
-
-Proof: For a module M and an object U of the pro-etale site, use M.val.map ((siteId X).inv.app
-U).op as the ordinary comparison. Its inverse is restriction along siteId.hom. Functoriality of M
-and the site isomorphism identities prove the two inverse laws, while naturality of siteId proves
-compatibility with restriction. The coefficient action is unchanged on finite-stage constants;
-equality after every finite quotient proves the same assertion for completed coefficients. Hence
-the section maps are linear and define the required natural ordinary module isomorphism, with
-precisely the sections field of Identity.
+Source: Stacks 09A5, 07A4, 0FPI.
 
 On a cochain complex take these ordinary maps in every degree. Their naturality with respect to
 the differentials gives a chain isomorphism; its degree field is the defining formula. The chain

@@ -13,8 +13,7 @@ import all WeilConjectures.TraceFormula.Integral.IntegralComparisonSequenceSyste
 The ordinary scalar/reindexing cube on a single completed module, checked on scalar-one
 tensors of unit generators.
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-ordinary-quotient-transition-cube).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

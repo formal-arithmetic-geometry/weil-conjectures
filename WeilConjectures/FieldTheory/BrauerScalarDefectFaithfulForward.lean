@@ -33,8 +33,7 @@ Changing a lift by the resulting scalar one-cochain changes its homogeneous
 two-cocycle by the corresponding coboundary.  Thus the two representatives have
 the same image under `ContinuousCohomology.π`, and hence `x = y`.  This is the
 comparison calculation in Stacks Project, Theorem 03R7, with the homogeneous to
-inhomogeneous conversion from Section 0DVG.
-(blueprint: lem-sc-brauer-scalar-defect-faithful-forward). -/
+inhomogeneous conversion from Section 0DVG. -/
 theorem brauerScalarDefect_eq_of_brauerEquivalent (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y)

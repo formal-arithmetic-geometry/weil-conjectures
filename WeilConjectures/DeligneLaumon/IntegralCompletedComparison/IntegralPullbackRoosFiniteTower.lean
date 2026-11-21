@@ -16,7 +16,6 @@ set_option linter.privateModule false
 /-! # Integral Roos realization through the finite-tower derived pair
 
 Source: Stacks Project, sites-cohomology.tex, Tag 0941, and proetale.tex, Tag 099N(5).
-(blueprint: lem-a1-integral-roos-finite-tower-realization).
 -/
 
 @[expose] public noncomputable section

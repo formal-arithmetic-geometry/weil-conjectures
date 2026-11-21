@@ -62,9 +62,7 @@ noncomputable def SpectralSequence.pageInfinity (E : E₂CohomologicalSpectralSe
 cohomological spectral sequence `E`: a decreasing filtration of each `H n` by subobjects, which
 is exhaustive (`F⁰ = ⊤`) and separated in the strong first quadrant sense (`Fⁿ⁺¹ = ⊥`), whose
 successive quotients are the `E∞`-terms of total degree `n`. This is the filtration that the
-image filtration on the total complex of a first quadrant double complex produces.
-
-(blueprint: `det-def-groth-ss`) -/
+image filtration on the total complex of a first quadrant double complex produces. -/
 structure SpectralSequence.Abutment (E : E₂CohomologicalSpectralSequenceNat C) (H : ℕ → C) where
   /-- The `p`-th step of the decreasing filtration of `H n`. -/
   filtration (n p : ℕ) : Subobject (H n)
@@ -122,9 +120,7 @@ variable {κ : Type*} {c : ℤ → ComplexShape κ} {r₀ : ℤ}
 
 /-- **Page induction.** A morphism of spectral sequences which is an isomorphism on the first
 page `r₀` is an isomorphism on every page: the `(r + 1)`-th page is the homology of the `r`-th
-one, compatibly with the morphism.
-
-(blueprint: `lem-sp-page-induction`) -/
+one, compatibly with the morphism. -/
 theorem SpectralSequence.Hom.isIso_hom {E E' : SpectralSequence C c r₀} (φ : E ⟶ E')
     (h : IsIso (φ.hom r₀)) (r : ℤ) (hr : r₀ ≤ r) : IsIso (φ.hom r) := by
   induction r, hr using Int.leInduction with
@@ -140,9 +136,7 @@ theorem SpectralSequence.Hom.isIso_hom {E E' : SpectralSequence C c r₀} (φ : 
     exact HomologicalComplex.Hom.isIso_of_components _
 
 /-- **Page induction for `E∞`.** A morphism of first quadrant spectral sequences which is an
-isomorphism on the `E₂`-page is an isomorphism on the `E∞`-terms.
-
-(blueprint: `lem-sp-page-induction`) -/
+isomorphism on the `E₂`-page is an isomorphism on the `E∞`-terms. -/
 theorem SpectralSequence.Hom.isIso_pageInfinity {E E' : E₂CohomologicalSpectralSequenceNat C}
     (φ : E ⟶ E') (h : IsIso (φ.hom 2)) (pq : ℕ × ℕ) :
     IsIso ((φ.hom (pq.1 + pq.2 + 2 : ℕ) (by lia)).f pq) := by

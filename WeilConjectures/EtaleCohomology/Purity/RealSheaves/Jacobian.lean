@@ -53,7 +53,7 @@ itself is `AlgebraicGeometry.WeilGroup.tateLine`.
 
 - `AlgebraicGeometry.JacobianTorsionDatum.nonempty_tateModuleEquiv`
 - `AlgebraicGeometry.exists_jacobian_galoisAction`: the semilinear Galois action on the geometric
-  Jacobian, preserving the group law (blueprint `proposition-jacobian-over-ground-field--5`).
+  Jacobian, preserving the group law.
 - `AlgebraicGeometry.JacobianTorsionDatum.exists_equivTorsion_eq_restrict`: a Jacobian torsion
   datum whose comparison isomorphisms are induced by the representing isomorphism.
 -/
@@ -68,13 +68,11 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {C : Scheme.{u}}
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module`: Jacobian torsion data and Kummer
-coefficients.
+/-- Jacobian torsion data and Kummer coefficients.
 
 A Jacobian torsion datum for a proper smooth geometrically integral curve `p : C₀ ⟶ Spec K`
 over a finite field and a prime `l` consists of an abelian variety `J₀` over `K` representing the
-degree-zero relative Picard functor `Pic⁰_{C₀/K}` (blueprint
-`theorem-picard-scheme-jacobian-over-separably--3`), together with a compatible system of
+degree-zero relative Picard functor `Pic⁰_{C₀/K}`, together with a compatible system of
 isomorphisms
 
 `J₀(K̄)[lⁿ] ≃ Pic(C)[lⁿ]`
@@ -135,8 +133,7 @@ variable [Finite K] {p : C ⟶ Spec (.of K)} [IsCurve p] [Smooth p] [IsProper p]
   [GeometricallyIntegral p] {l : ℕ} [Fact l.Prime]
 
 variable (l) in
-/-- Blueprint `proposition-kummer-duality-integral-tate-module`: Jacobian torsion data and Kummer
-coefficients.
+/-- Jacobian torsion data and Kummer coefficients.
 
 The Tate module `T_l J = lim_n J₀(K̄)[lⁿ]` of the abelian variety of a Jacobian torsion datum,
 the compatible systems of `lⁿ`-torsion geometric points under multiplication by `l`
@@ -166,8 +163,7 @@ theorem equivTorsion_symm_zsmul (d : JacobianTorsionDatum p l) (n : ℕ)
     Subtype.ext h.symm
   rw [h', AddEquiv.symm_apply_apply]
 
-/-- Blueprint `proposition-kummer-duality-integral-tate-module`: Jacobian torsion data and Kummer
-coefficients.
+/-- Jacobian torsion data and Kummer coefficients.
 
 The comparison isomorphisms `J₀(K̄)[lⁿ] ≃ Pic(C)[lⁿ]` are compatible with the transition maps,
 so they identify the Tate module `T_l J` of the datum with the Tate module
@@ -203,8 +199,7 @@ theorem nonempty_tateModuleEquiv (d : JacobianTorsionDatum p l) :
     exact Subtype.ext (AddCommGroup.tateModule.zsmul_coe_succ t n)
 
 variable (p l) in
-/-- Blueprint `proposition-jacobian-over-ground-field`: The Jacobian over a general base field, by
-Galois descent.
+/-- The Jacobian over a general base field, by Galois descent.
 
 Every proper smooth geometrically connected curve over a finite field admits a Jacobian torsion
 datum: the descended Jacobian `J₀` of `AlgebraicGeometry.exists_jacobian_descent` with its
@@ -292,8 +287,8 @@ theorem nonempty [SmoothOfRelativeDimension 1 p] : Nonempty (JacobianTorsionDatu
     rw [hzsmul]
 
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector`: arithmetic Frobenius has no fixed vector on
-the Jacobian Tate module, on the rational Tate module.
+/-- Arithmetic Frobenius has no fixed vector on the Jacobian Tate module, on the rational Tate
+module.
 
 Let `d` be a Jacobian torsion datum of a proper smooth geometrically integral curve `C₀` over a
 finite field `K`, with abelian variety `J₀`. The arithmetic Frobenius `σ : z ↦ z ^ q` of
@@ -310,8 +305,7 @@ theorem eq_zero_of_map_frobenius_eq_self [Fintype K] (d : JacobianTorsionDatum p
   AddCommGroup.rationalTateModule.eq_zero_of_map_eq_self _
     (IsAbelianVariety.finite_setOf_frobenius_fixed d.J) hv
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector`: arithmetic Frobenius has no fixed vector on
-the Jacobian Tate module, `(T_l J)^{σ = 1} = 0`.
+/-- Arithmetic Frobenius has no fixed vector on the Jacobian Tate module, `(T_l J)^{σ = 1} = 0`.
 
 The arithmetic Frobenius `σ : z ↦ z ^ q` of `Gal(K̄ / K)` acts on `T_l J` through the Galois
 representation of the abelian variety `J₀` of a Jacobian torsion datum, i.e. by coordinates on
@@ -324,8 +318,8 @@ theorem eq_zero_of_galoisRepresentation_frobenius_eq_self [Fintype K]
     t = 0 :=
   IsAbelianVariety.eq_zero_of_galoisRepresentation_frobenius_eq_self l d.J ht
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector`: for `l` invertible in `K`, `σ - 1` is an
-automorphism of the rational Tate module `V_l J`, `σ` the arithmetic Frobenius.
+/-- For `l` invertible in `K`, `σ - 1` is an automorphism of the rational Tate module `V_l J`, `σ`
+the arithmetic Frobenius.
 
 `V_l J` is finite dimensional, of dimension `2 dim J₀`
 (`AlgebraicGeometry.IsAbelianVariety.nonempty_linearEquiv_rationalTateModule_of_natCast_ne_zero`)
@@ -339,8 +333,8 @@ theorem bijective_rationalTateModuleGaloisMap_frobenius_sub_id [Fintype K]
         LinearMap.id (R := ℚ_[l]) (M := IsAbelianVariety.rationalTateModule l d.J)) :=
   IsAbelianVariety.bijective_rationalTateModuleGaloisMap_frobenius_sub_id l d.J hl
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector`: for `l` invertible in `K`, `σ - 1` as a
-linear automorphism of the rational Tate module `V_l J`, `σ` the arithmetic Frobenius
+/-- For `l` invertible in `K`, `σ - 1` as a linear automorphism of the rational Tate module
+`V_l J`, `σ` the arithmetic Frobenius
 (`AlgebraicGeometry.IsAbelianVariety.frobeniusSubOneLinearEquiv`). -/
 noncomputable def frobeniusSubOneLinearEquiv [Fintype K] (d : JacobianTorsionDatum p l)
     (hl : (l : K) ≠ 0) :
@@ -348,8 +342,7 @@ noncomputable def frobeniusSubOneLinearEquiv [Fintype K] (d : JacobianTorsionDat
       IsAbelianVariety.rationalTateModule l d.J :=
   IsAbelianVariety.frobeniusSubOneLinearEquiv l d.J hl
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector`: arithmetic Frobenius has no fixed vector on
-the Jacobian Tate module.
+/-- Arithmetic Frobenius has no fixed vector on the Jacobian Tate module.
 
 Let `C₀` be a proper smooth geometrically integral curve over a finite field `K`, `C` its
 geometric fibre and `l` a prime. The arithmetic Frobenius `σ : z ↦ z ^ q` of `Gal(K̄ / K)` acts
@@ -498,8 +491,7 @@ theorem _root_.AddSubgroup.exists_addEquiv_torsionBy_of_injective {M N : Type*}
   exact y.2
 
 variable (K) in
-/-- Blueprint `proposition-jacobian-over-ground-field--5`: Canonical semilinear Galois action on
-the geometric Jacobian.
+/-- Canonical semilinear Galois action on the geometric Jacobian.
 
 Let `C₀` be a smooth proper geometrically connected curve over a field `K` (given by
 `p : C₀ ⟶ Spec K`) and `C = C₀ ×_K K̄` its geometric fiber. There is an abelian variety (a

@@ -80,7 +80,7 @@ theorem frobeniusWeight_pow (qx : ℕ) (α : E) (n : ℕ) :
   ring
 
 /-- The weight of an inverse is the negative of the weight; in particular duality negates
-weights (blueprint `proposition-weights-under-usual-operations`). -/
+weights. -/
 theorem frobeniusWeight_inv (qx : ℕ) (α : E) :
     frobeniusWeight ι qx α⁻¹ = -frobeniusWeight ι qx α := by
   simp only [frobeniusWeight, map_inv₀, norm_inv, Real.log_inv]
@@ -105,9 +105,9 @@ theorem frobeniusWeight_prod (qx : ℕ) {ι' : Type*} (s : Finset ι') {f : ι' 
   · simp only [Multiset.mem_map, not_exists, not_and]
     exact fun i hi h ↦ hf i hi h
 
-/-- Blueprint `definition-determinant-weight--1`: the real weight character `a ↦ wt_{ι, q}(a)` of
-`definition-determinant-weight--1`, whose determinant weights (`Representation.detWeight`) are the
-determinant weights `dw_ι` of `definition-determinant-weight--1`. -/
+/-- The real weight character `a ↦ wt_{ι, q}(a)` of `definition-determinant-weight--1`, whose
+determinant weights (`Representation.detWeight`) are the determinant weights `dw_ι` of
+`definition-determinant-weight--1`. -/
 noncomputable def weightCharacter (q : ℕ) : Representation.RealCharacter E where
   toFun a := Multiplicative.ofAdd (frobeniusWeight ι q (a : E))
   map_one' := by simp [frobeniusWeight]
@@ -275,8 +275,8 @@ theorem zero_notMem_map_localEigenvalues (x : C.finitePoints) :
   rintro α hα rfl
   exact zero_notMem_localEigenvalues x hα
 
-/-- Blueprint `definition-weights`: an `ι`-real representation has a conjugation-stable
-multiset of complex local eigenvalues at every closed point. -/
+/-- An `ι`-real representation has a conjugation-stable multiset of complex local eigenvalues at
+every closed point. -/
 theorem IsReal.map_conj_localEigenvalues (h : W.IsReal l ρ ι) (x : C.finitePoints) :
     ((W.localEigenvalues l ρ x).map ι).map (starRingEnd ℂ) =
       (W.localEigenvalues l ρ x).map ι := by
@@ -293,8 +293,8 @@ theorem IsReal.map_conj_localEigenvalues (h : W.IsReal l ρ ι) (x : C.finitePoi
     Polynomial.roots_multiset_prod_one_sub_C_mul_X hM] at this
   exact Multiset.map_injective inv_injective this
 
-/-- Blueprint `definition-weights`: a representation whose multisets of complex local
-eigenvalues are stable under complex conjugation is `ι`-real. -/
+/-- A representation whose multisets of complex local eigenvalues are stable under complex
+conjugation is `ι`-real. -/
 theorem isReal_of_map_conj_localEigenvalues
     (h : ∀ x, ((W.localEigenvalues l ρ x).map ι).map (starRingEnd ℂ) =
       (W.localEigenvalues l ρ x).map ι) :
@@ -305,10 +305,9 @@ theorem isReal_of_map_conj_localEigenvalues
     rw [map_localPolynomial, Polynomial.map_multiset_prod_one_sub_C_mul_X, h x]
   simpa [Polynomial.coeff_map] using congrArg (Polynomial.coeff · n) h₁
 
-/-- Blueprint `proposition-weights-under-usual-operations`: if the local characteristic polynomials
-of `σ` are those of an `ι`-real representation `ρ`, then every exterior power of `σ` is `ι`-real:
-its local eigenvalues are the products of the `s`-element sub-multisets of those of `ρ`, by
-`LinearMap.charpoly_roots_exteriorPower`. -/
+/-- If the local characteristic polynomials of `σ` are those of an `ι`-real representation `ρ`,
+then every exterior power of `σ` is `ι`-real: its local eigenvalues are the products of the
+`s`-element sub-multisets of those of `ρ`, by `LinearMap.charpoly_roots_exteriorPower`. -/
 theorem IsReal.exteriorPower_of_charpoly_eq {σ : Representation (PadicAlgCl l) W.carrier V'}
     (hreal : W.IsReal l ρ ι)
     (h : ∀ x, (σ (W.frobenius x)).charpoly = (ρ (W.frobenius x)).charpoly) (s : ℕ) :
@@ -331,11 +330,11 @@ theorem IsReal.exteriorPower_of_charpoly_eq {σ : Representation (PadicAlgCl l) 
     exact Multiset.map_congr rfl fun t _ ↦ map_multiset_prod (starRingEnd ℂ) t
   rw [hE, hmap, hconj, hreal.map_conj_localEigenvalues ι x]
 
-/-- Blueprint `proposition-weights-under-usual-operations--4`: Weight of the linear dual.
+/-- Weight of the linear dual.
 
 The dual of a sheaf punctually pure of weight `w` is punctually pure of weight `-w`: the
-local eigenvalues of the dual are the inverses of those of `ρ` (`lemma-filtrations-spectra`), and
-inverses have the negative weight (`proposition-weights-under-usual-operations--3`). -/
+local eigenvalues of the dual are the inverses of those of `ρ`, and
+inverses have the negative weight. -/
 theorem IsPunctuallyPure.dual {w : ℝ} (h : W.IsPunctuallyPure l ρ ι w) :
     W.IsPunctuallyPure l ρ.dual ι (-w) := by
   intro x γ hγ

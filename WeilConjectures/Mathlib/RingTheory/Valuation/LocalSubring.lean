@@ -31,8 +31,7 @@ variable {K L : Type*} [Field K] [Field L]
 /-- **Intersection with a dominating valuation ring** (consequence of Stacks Project
 Tag 052K): if a valuation subring `B` of a field extension `L` of `K` dominates a
 valuation subring `A ⊆ K` — that is, `A ≤ B.comap f` in the domination order of local
-subrings of `K` — then `K ∩ B = A`, i.e. `B.comap f = A`.
-(Blueprint: `lemma:nagata-valuation-intersection`.) -/
+subrings of `K` — then `K ∩ B = A`, i.e. `B.comap f = A`. -/
 @[stacks 052K]
 theorem comap_eq_of_toLocalSubring_le {f : K →+* L} {A : ValuationSubring K}
     {B : ValuationSubring L} (h : A.toLocalSubring ≤ (B.comap f).toLocalSubring) :

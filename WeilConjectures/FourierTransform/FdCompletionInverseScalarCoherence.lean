@@ -14,10 +14,6 @@ import WeilConjectures.FourierTransform.FdRawScalarComparisonPackaging
 
 /-! # Coherence of the completion-inverse scalar comparisons
 
-Source: blueprint main-20261015, sec-fourier-transform/sk-def-trace,
-`def-fd-trace-function.md`, final coefficient-category sentence; extracted comparison
-argument, steps 3--4 (blueprint: lem-fd-completion-inverse-scalar-coherence).
-
 The integral and rational identities are inputs. The conclusion retains the ordinary
 transport, the quotient-normalized integral lift, and its rationalized inverse.
 -/
@@ -44,9 +40,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 namespace WeilConjectures
 
 /-- The inverse cocycle and both four-field contractions, written in the existing
-stage-system language. This is a predicate on the specified comparisons, not new scalar data.
-Source: trace-definition final sentence, comparison proof steps 5 and 8
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+stage-system language. This is a predicate on the specified comparisons, not new scalar data. -/
 def FdInverseScalarCoherence
     {I : Type w} [Preorder I]
     {C : I → Type u} [∀ i, Category.{v} (C i)]
@@ -142,8 +136,7 @@ private theorem inverseScalarCoherence
   rw [← P.cocycle h k m ((F.Φ E).obj K)]
   exact hleft
 
-/-- The existing ordinary family, named to share its type across structure declarations.
-Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing ordinary family, named to share its type across structure declarations. -/
 def FdCompletionOrdinaryFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -154,8 +147,7 @@ def FdCompletionOrdinaryFamily
   ∀ {E L : Padic.FiniteCoefficientFields l Ω} (h : E ≤ L),
       FdOrdinaryScalarTransport l Ω T h
 
-/-- The existing comparison family, named to share its type across structure declarations.
-Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing comparison family, named to share its type across structure declarations. -/
 def FdCompletionAmbientFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -171,8 +163,7 @@ def FdCompletionAmbientFamily
           (sfIntegralConstructible l (pbcFiniteField.{u} l Ω L) T).ι ⋙
             integralDetailedTransport T l (pbcFiniteField.{u} l Ω L)
 
-/-- The existing integral family, named to share its type across structure declarations.
-Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing integral family, named to share its type across structure declarations. -/
 def FdCompletionIntegralFamily
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -186,8 +177,7 @@ def FdCompletionIntegralFamily
           (stage L).integral.functor
 
 /-- The existing quotient-cocone equation, named to keep generated structure recursors
-from repeatedly expanding the derived coefficient presentations.
-Source: the chi field below (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+from repeatedly expanding the derived coefficient presentations. -/
 def FdCompletionChi
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -218,8 +208,7 @@ attribute [local irreducible] FdCompletionChi
 
 attribute [local irreducible] AlgebraicGeometry.Scheme.integralDetailedTransport
 
-/-- The original ambient restriction equation.
-Source: integral comparison data (blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The original ambient restriction equation. -/
 def FdCompletionRestriction
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -238,9 +227,7 @@ attribute [local irreducible] FdCompletionRestriction FdCompletionOrdinaryFamily
 
 /-- The quotient-normalized integral comparison retained by the scalar-coherence theorem.
 This records exactly the tensor transport and chi lift of the coefficient datum, without
-its downstream rational or pair-category conclusions.
-Source: trace-definition final sentence, comparison steps 1--3
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+its downstream rational or pair-category conclusions. -/
 structure FdCompletionIntegralComparison
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -257,9 +244,7 @@ structure FdCompletionIntegralComparison
 attribute [local semireducible] FdCompletionOrdinaryFamily FdCompletionAmbientFamily
   FdCompletionIntegralFamily
 
-/-- The existing finite_functor predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing finite_functor predicate, shared by the constructor and projections. -/
 def FdCompletionFiniteFunctor
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -276,9 +261,7 @@ def FdCompletionFiniteFunctor
 
 attribute [local irreducible] FdCompletionFiniteFunctor
 
-/-- The existing finite_shift_normalization predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing finite_shift_normalization predicate, shared by the constructor and projections. -/
 def FdCompletionShiftNormalization
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -297,9 +280,7 @@ def FdCompletionShiftNormalization
 
 attribute [local irreducible] FdCompletionShiftNormalization
 
-/-- The existing scalar_lift predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing scalar_lift predicate, shared by the constructor and projections. -/
 def FdCompletionScalarLift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -324,9 +305,7 @@ def FdCompletionScalarLift
 
 attribute [local irreducible] FdCompletionScalarLift
 
-/-- The existing scalar_shift predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing scalar_shift predicate, shared by the constructor and projections. -/
 def FdCompletionScalarShift
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -345,9 +324,7 @@ def FdCompletionScalarShift
 
 attribute [local irreducible] FdCompletionScalarShift
 
-/-- The existing exact predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing exact predicate, shared by the constructor and projections. -/
 def FdCompletionExact
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -365,9 +342,7 @@ def FdCompletionExact
 
 attribute [local irreducible] FdCompletionExact
 
-/-- The existing unit predicate, shared by the constructor and projections.
-Source: the corresponding scalar-comparison field
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+/-- The existing unit predicate, shared by the constructor and projections. -/
 def FdCompletionUnit
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -390,9 +365,7 @@ attribute [local irreducible] FdCompletionUnit
 
 /-- Coherence data for the specified integral comparison and its rationalized inverse.
 The stage-system components are identified with the supplied raw identity equivalences;
-only presentation transport is expressed by heterogeneous equality.
-Source: trace-definition final sentence, comparison steps 1--8
-(blueprint: lem-fd-completion-inverse-scalar-coherence). -/
+only presentation transport is expressed by heterogeneous equality. -/
 structure FdCompletionScalarComparison
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
@@ -418,8 +391,6 @@ structure FdCompletionScalarComparison
 /-- The specified completion map restricts to an integral isomorphism, and its inverse
 rationalizes to an exact scalar comparison satisfying shifts, units, the cocycle and
 four-field compatibility, including repeated fields.
-Source: blueprint main-20261015, trace-definition final sentence, expanded comparison
-argument (blueprint: lem-fd-completion-inverse-scalar-coherence).
 
 Proof, following the eight steps of the DAG node:
 1. The stratified-perfect characterization identifies the integral categories after the

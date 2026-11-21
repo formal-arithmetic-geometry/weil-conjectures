@@ -91,16 +91,6 @@ private theorem scalar_mul_conjugation {ι : Type*} [Fintype ι] [DecidableEq ι
 set_option linter.unusedVariables false in
 /-- A prescribed continuous cocycle gives splitting and scalar-defect data.
 
-Proof: write `G = Gal(Ksep/K)` and `c(g,h) = z(1,g,g*h)`. Equivariance and the
-homogeneous cycle equation give
-`c(g,h) * c(g*h,j) = g(c(h,j)) * c(g,h*j)`.
-Since G is profinite, uncurry the iterated continuous cochain by the exponential law
-for compact Hausdorff spaces. Its values are discrete, so c is locally constant with
-finite image. A finite clopen cover gives an open normal subgroup N such that c is
-constant on pairs of N-cosets. Shrink N to fix every value of c. Its fixed field L is
-finite Galois over K, and c is inflated from a cocycle on Gamma = Gal(L/K) with values
-in L-units.
-
 On the L-space with basis indexed by Gamma define the monomial matrix B(g) by
 `B(g) e_j = c(g,j) e_(g*j)`. Its nonzero coefficients are units, so it is invertible.
 The cocycle equation gives `B(g) * g(B(h)) = c(g,h) * B(g*h)` on each basis vector.
@@ -125,10 +115,8 @@ through Gamma. The monomial identity is exactly the required scalar-defect equat
 For a in A, invariance reads `g(e(1 tensor a)) = B(g)^(-1) * e(1 tensor a) * B(g)`,
 which is the required descent equation. All objects are constructed from c.
 
-Source: Stacks Project, Theorem 03R7, surjectivity argument, and Section 0DVG.
-The explicit monomial matrices and descent argument fill in the construction omitted
-by that sketch; this proof is given here.
-(blueprint: new-crossed-product-for-cocycle). -/
+Source: Stacks Project, Theorem 03R7, surjectivity argument, and Section 0DVG. The explicit
+monomial matrices and descent argument fill in the construction omitted by that sketch. -/
 theorem exists_crossedProduct_data_for_cocycle (K : Type u) [Field K]
     (z : ContinuousCohomology.cocycles (galoisUnitsTopRep K) 2) :
     ∃ (A : CSA.{u, u} K) (n : ℕ) (hn : n ≠ 0)

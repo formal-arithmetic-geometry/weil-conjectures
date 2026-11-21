@@ -9,9 +9,6 @@ public import WeilConjectures.CategoryTheory.StageSystem.Basic
 
 /-! # Descending stagewise isomorphisms to the pair category
 
-Source: blueprint dual-Tate compatibility, Step 5, coefficient-stage descent
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-
 A family of stagewise isomorphisms between the representatives of two functors into
 the pair category of a stage system descends to a unique natural isomorphism, provided
 the family is compatible with transport to larger stages and with representatives of
@@ -29,9 +26,7 @@ namespace CategoryTheory.StageSystem
 variable {I : Type w} [Preorder I] [IsDirectedOrder I] {C : I → Type u}
   [∀ i, Category.{v} (C i)] {S : StageSystem C} {D : Type u'} [Category.{v'} D]
 
-/-- A transport-compatible family of stagewise isomorphisms represents one class.
-Source: blueprint common-stage descent
-(blueprint: lem-pod-reindexing-hom-coefficient-descent). -/
+/-- A transport-compatible family of stagewise isomorphisms represents one class. -/
 theorem mkHom_eq_of_tr {X Y : S.PairCategory} (s : I) (hX : X.stage ≤ s) (hY : Y.stage ≤ s)
     (d : ∀ (L : I) (h : s ≤ L), X.toStage (hX.trans h) ⟶ Y.toStage (hY.trans h))
     (htr : ∀ (L : I) (h : s ≤ L) (M : I) (k : L ≤ M), S.tr k (d L h) = d M (h.trans k))
@@ -41,13 +36,7 @@ theorem mkHom_eq_of_tr {X Y : S.PairCategory} (s : I) (hX : X.stage ≤ s) (hY :
   rw [← PairCategory.mkHom_tr h (d s le_rfl), htr s le_rfl L h]
 
 /-- Stagewise isomorphisms, compatible with transport and with representatives of
-the image arrows, descend to a unique natural isomorphism of pair-category functors.
-Source: blueprint common-stage descent
-(blueprint: lem-pod-reindexing-hom-coefficient-descent).
-Proof: the class of the representative is independent of the stage by transport
-compatibility. Its inverse class is represented by the inverse isomorphisms.
-Naturality is checked at a common stage of a representative of the image arrows.
-Every component is prescribed, which gives uniqueness. -/
+the image arrows, descend to a unique natural isomorphism of pair-category functors. -/
 theorem natIso_existsUnique_of_stage (A B : D ⥤ S.PairCategory) (s : D → I)
     (hA : ∀ P, (A.obj P).stage ≤ s P) (hB : ∀ P, (B.obj P).stage ≤ s P)
     (d : ∀ (P : D) (L : I) (h : s P ≤ L),

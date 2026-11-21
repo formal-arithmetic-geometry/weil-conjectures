@@ -19,8 +19,7 @@ flat, and flatness of `𝒪_{X',x'}` over `𝒪_{S,f(x)}` descends to `𝒪_{X,x
 
 ## Main results
 
-- `AlgebraicGeometry.Flat.of_comp_of_flat_of_surjective` (blueprint
-`theorem-hilbert-schemes-points-smooth-curve--1`).
+- `AlgebraicGeometry.Flat.of_comp_of_flat_of_surjective`.
 
 ## Implementation notes
 
@@ -40,16 +39,12 @@ namespace AlgebraicGeometry
 
 /-- **Every morphism to a field is flat.** For a field `k`, every morphism `X ⟶ Spec k` is flat:
 every `k`-module is free, hence flat. This is Mathlib's low-priority instance for morphisms to an
-integral one-point scheme.
-
-(blueprint: `lem-pc-flat-field`) -/
+integral one-point scheme. -/
 theorem Flat.of_field (k : Type u) [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) : Flat f :=
   inferInstance
 
 /-- **Flatness descends along a flat surjection on the source.** If `u : X' ⟶ X` is flat and
-surjective and `u ≫ f` is flat, then `f` is flat.
-
-(blueprint: `theorem-hilbert-schemes-points-smooth-curve--1`) -/
+surjective and `u ≫ f` is flat, then `f` is flat. -/
 theorem Flat.of_comp_of_flat_of_surjective {X' X S : Scheme.{u}} (u : X' ⟶ X) (f : X ⟶ S)
     [Flat u] [Surjective u] [Flat (u ≫ f)] : Flat f := by
   refine Flat.of_stalkMap f fun x ↦ ?_

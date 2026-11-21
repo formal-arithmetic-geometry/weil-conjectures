@@ -156,8 +156,7 @@ lemma fundamentalClass_congr [HasInvertibleExponent Λ X] {Z : Scheme.{u}} (c : 
   subst h
   rfl
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
+/-- Compatibilities of purity for regular immersions
 
 **Transverse intersections: the intersection formula.** Let `i₁ : Y₁ ⟶ X` and `i₂ : Y₂ ⟶ X` be
 regular closed immersions of codimensions `c₁` and `c₂` meeting transversally: their
@@ -234,7 +233,7 @@ theorem fundamentalClass_eq_cupWithSupportsTateObject_of_isPullback [HasInvertib
         Scheme.range_zeroLocusSubschemeι_union]) _ _ _ hp₁ hp₂, e₁, e₂]
   exact kummerBoundaryProduct_append Λ f₁ f₂
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
+/-- Purity for regular closed immersions
 
 Blueprint `prop-pur-regular-immersion-purity-compatibilities` (item 3, cup products).
 

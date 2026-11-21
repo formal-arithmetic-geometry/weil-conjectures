@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 /-!
 # Cover and filtration
 
-Source: Stacks Project, etale-cohomology.tex, Lemma 0A3R (lemma-pullback-filtered).
+Source: Stacks Project, etale-cohomology.tex, Lemma 0A3R.
 -/
 
 @[expose] public section
@@ -35,23 +35,7 @@ open Etale
 The coefficient field is `ULift.{u + 1} (ZMod ℓ)`, a universe lift of the prime field
 `ℤ/ℓℤ`.
 
-Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R
-(`lemma-pullback-filtered`), statement and proof; Lemma 0DV5
-(`lemma-locally-constant-on-connected`) and Remark 0DV6
-(`remark-functorial-locally-constant-on-connected`).
-(blueprint: split-locally-constant-cover-filtration)
-
-Proof: A connected space is nonempty. Choose a geometric point of U.
-The exact equivalence between finite locally constant module sheaves and finite continuous
-representations identifies G with a finite-dimensional vector space M over ℤ/ℓℤ with
-continuous fundamental-group action. Its image Q in GL(M) is finite. A Sylow ℓ-subgroup
-P of Q has index d prime to ℓ. The inverse image H of P in the fundamental group is open,
-and the transitive finite coset set π₁(U)/H corresponds to a connected finite étale cover
-v : V ⟶ U. Its fibre at the chosen point has d elements. A finite étale morphism is finite
-locally free; its fibre dimension is locally constant, hence constant on connected U.
-Base change preserves this dimension. Over any separably closed field, the fibre algebra
-is a product of copies of that field, so its dimension equals both the number of points
-and the number of lifts of the geometric point. Thus every geometric fibre has d elements.
+Source: Stacks Project, `etale-cohomology.tex`, Lemma 0A3R, statement and proof.
 
 On V the action on M factors through P. A finite ℓ-group in characteristic ℓ has nonzero
 invariants in every nonzero finite-dimensional representation. Choose a one-dimensional

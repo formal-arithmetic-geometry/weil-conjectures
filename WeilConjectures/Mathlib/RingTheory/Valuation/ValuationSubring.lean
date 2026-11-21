@@ -88,7 +88,7 @@ theorem mem_or_inv_mem_comapResidueSubring (x : K) :
 
 /-- **The composite of two valuation rings**: the preimage in a valuation subring
 `A ⊆ K` of a valuation subring `A''` of the residue field of `A` is a valuation subring
-of `K`. (Blueprint: `lemma:nagata-composite-valuation-ring`.) -/
+of `K`. -/
 def comapResidue : ValuationSubring K where
   __ := A.comapResidueSubring A''
   mem_or_inv_mem' := A.mem_or_inv_mem_comapResidueSubring A''

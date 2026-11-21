@@ -11,8 +11,7 @@ import all WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarTensorLeve
 
 /-! # Composition of normalized strict tensor tower maps
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -62,21 +61,7 @@ attribute [local irreducible] integralOperationsTotalTensorSection
 
 -- The sectionwise tensor calculation keeps three coefficient transports explicit.
 /-- Composition of the strict tensor-tower maps, before Roos realization.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-composition-tensor-tower).
-
-Proof: at every positive quotient, apply the tensor generator formula to a
-homogeneous pure tensor. The two factors are carried by the quotient comparisons.
-Their coefficient-generator formulas and the section formula for the compositor
-identify the successive restrictions with the composite restriction. Pure tensors
-generate the presheaf tensor, the maps respect the sheafification units, and the
-direct-sum inclusions generate each total degree. These facts give equality of the
-whole degreewise maps. Every map is already a natural transformation of strict
-towers. Extensionality in quotient level and degree gives the displayed natural
-transformation equation, retaining every strict arrow. This is entirely before
-products, cones, localization,
-representative comparisons and the derived completed tensor. Zero complexes and
-empty schemes satisfy the same generator argument. -/
+Source: Stacks 07A4 and 0941. -/
 theorem podCompositionTensorTower
     (A : PodReindexFamily l E)
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]

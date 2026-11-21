@@ -12,8 +12,7 @@ import WeilConjectures.PoincareDuality.PodTensorShiftNormalization.PodTensorShif
 
 /-! # Proved calculations for tensor-shift path normalization
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-path-assembly-t5).
+Source: Stacks 011G, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -77,8 +76,7 @@ variable [(isoReductionIntegralInverse l E g).Additive]
 /-- Normalize the source-shift path from its model formula.
 Move the presentation past the ordinary shift comparison, substitute the presented tensor
 model, and apply the Roos transport calculation.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-path-assembly-t5). -/
+Source: Stacks 011G, 07A4, 0941. -/
 theorem source_path
     (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)
     (T : PodCompletedTensorReindex l E g D)

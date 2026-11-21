@@ -18,8 +18,8 @@ multiplicities.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap`,
-  `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`
-  (`theorem-poincare-duality-frobenius--6`, `theorem-poincare-duality-frobenius` (b)): conjugacy and
+  `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`:
+conjugacy and
   reciprocal eigenvalues.
 -/
 
@@ -46,7 +46,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y : 
   [HasCompactification a] [QuasiCompact a] {d : ℕ} {g : X ⟶ X} {h : Y ⟶ Y}
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
-/-- Blueprint `theorem-poincare-duality-frobenius--6`: Reciprocal eigenvalues.
+/-- Reciprocal eigenvalues.
 
 **The Frobenius of the dual is conjugate to `q^d` times the inverse transpose.** If `Λ` is a
 field, then with the hypotheses of
@@ -85,7 +85,7 @@ theorem conj_frobeniusOperator_eq_smul_inverse_dualMap (sq : IsPullback g a a h)
     untwistedDegreewisePoincarePairing_frobeniusOperator sq γ φ ψ hψ τ hTr q hτ, map_smul,
     smul_eq_mul]
 
-/-- Blueprint `theorem-poincare-duality-frobenius--6`: Reciprocal eigenvalues.
+/-- Reciprocal eigenvalues.
 
 **Reciprocal eigenvalues.** With the hypotheses of
 `AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap`, the

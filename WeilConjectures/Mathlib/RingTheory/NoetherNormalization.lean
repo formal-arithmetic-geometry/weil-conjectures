@@ -66,8 +66,7 @@ universe u
 
 open MvPolynomial TensorProduct
 
-/-- Blueprint `lemma-point-count-bound`: the number of Noether coordinates is the
-Krull dimension.
+/-- The number of Noether coordinates is the Krull dimension.
 
 If `K[T₁, …, T_d] → B` is an injective `K`-algebra map over which `B` is a finite module, then
 `dim B = d`: the extension is integral, so `dim B = dim K[T₁, …, T_d] = d`. -/
@@ -104,7 +103,7 @@ theorem exists_finite_inj_algHom_mvPolynomial_of_ringKrullDim_eq
     exact_mod_cast (ringKrullDim_eq_of_finite_inj_algHom_mvPolynomial g hg hfin).symm.trans hB
   exact ⟨g, hg, hfin⟩
 
-/-- Blueprint `lemma-point-count-bound`: One-dimensional Noether normalization.
+/-- One-dimensional Noether normalization.
 
 A finitely generated algebra `B` of Krull dimension one over a field `K` admits an injective
 `K`-algebra map from the polynomial ring `K[T]` making `B` a finite module.
@@ -124,25 +123,22 @@ theorem exists_finite_inj_algHom_polynomial_of_ringKrullDim_eq_one
 
 /-- A proper closed subset of an irreducible affine variety has strictly smaller dimension: for a
 finitely generated domain `A` over a field and a nonzero prime `P` of `A`,
-`dim (A ⧸ P) < dim A`. (blueprint: `det-i-geometry`) -/
+`dim (A ⧸ P) < dim A`. -/
 theorem ringKrullDim_quotient_lt_of_finiteType (k A : Type*) [Field k] [CommRing A] [IsDomain A]
     [Algebra k A] [Algebra.FiniteType k A] (P : Ideal A) [P.IsPrime] (hP : P ≠ ⊥) :
     ringKrullDim (A ⧸ P) < ringKrullDim A :=
   ringKrullDim_quotient_lt_of_irreducibleSpace k A hP
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial in
-/-- Blueprint `lemma-relative-noether-normalization-over-stratification--1`: spreading Noether
-normalization to a principal open.
+/-- Spreading Noether normalization to a principal open.
 
 Let `A` be a domain and `B` a finitely generated `A`-algebra. Then there are `0 ≠ s₀ ∈ A`,
 `d ≥ 0` and `t₁, …, t_d ∈ B` such that for the localizations `A_s = A[1/s]` and `B_s = B[1/s]`, the
-algebra map `A_s[T₁, …, T_d] → B_s`, `Tᵢ ↦ tᵢ` (the map of blueprint
-`lemma-relative-noether-normalization-over-stratification--1` on rings) makes `B_s` a finite module.
-If moreover `A → B` is injective, this map is injective as well.
+algebra map `A_s[T₁, …, T_d] → B_s`, `Tᵢ ↦ tᵢ` makes `B_s` a finite module. If moreover `A → B`
+ is injective, this map is injective as well.
 
 The blueprint statement is the case `s = s₀`; we allow any nonzero multiple `s` of `s₀`, as
-localizing further preserves finiteness (this is used in
-`lemma-relative-noether-normalization-over-stratification--1`).
+localizing further preserves finiteness.
 
 Following the blueprint, apply Noether normalization (`exists_finite_inj_algHom_of_fg`) to the
 generic fibre `B ⊗_A Frac A`, rescale the coordinates so that they come from `B`, and clear the
@@ -420,9 +416,7 @@ theorem ringKrullDim_eq_of_isLocalization_away {K : Type*} {A B : Type u} [Field
 /-- **Base change along a field extension preserves dimension.** For a finitely generated
 algebra `A` over a field `k` and a field `K` over `k`, `dim (A ⊗[k] K) = dim A`: a Noether
 normalization `k[T₁, …, Tₙ] → A` base changes to an injective (as `K` is flat over `k`) integral
-map `K[T₁, …, Tₙ] → A ⊗[k] K`, so both rings have dimension `n`.
-
-(blueprint: `lem-pc-dim-base-change`) -/
+map `K[T₁, …, Tₙ] → A ⊗[k] K`, so both rings have dimension `n`. -/
 theorem ringKrullDim_tensorProduct_of_finiteType (k A K : Type*) [Field k] [CommRing A]
     [Algebra k A] [Algebra.FiniteType k A] [Field K] [Algebra k K] :
     ringKrullDim (A ⊗[k] K) = ringKrullDim A := by

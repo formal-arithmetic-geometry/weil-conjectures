@@ -253,8 +253,7 @@ attribute [local instance] HasInvertibleExponent.opens
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ X]
   {k : Type u} [Field k] [PerfectField k] (c : ℕ) (i : Z ⟶ X) [IsRegularImmersion c i]
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
+/-- Compatibilities of purity for regular immersions
 
 **Flat base change of the fundamental class**, `[Z' ⊂ X'] = e^* [Z ⊂ X]`: for a flat
 `e : X' ⟶ X` with `X'` smooth over `k` and the base change `i' : Z' ⟶ X'` of `i` with `Z'`
@@ -319,8 +318,7 @@ theorem restrictSupportedClass_fundamentalClass_of_flat (aX : X ⟶ Spec (.of k)
       hab.symm i _ _ F.toZ F.isPullback m hm (m ≫ F.toZ) hout, hF]
     exact restrictSupportedClass_kummerBoundaryProduct Λ a F.f f' (fun _ ↦ rfl) m hm
 
-/-- Blueprint `prop-pur-regular-immersion-purity-compatibilities`: Compatibilities of purity for
-regular immersions
+/-- Compatibilities of purity for regular immersions
 
 **Smooth base change of the fundamental class**, `[Z' ⊂ X'] = e^* [Z ⊂ X]` for a smooth
 `e : X' ⟶ X` and the base change `i' : Z' ⟶ X'` of `i`

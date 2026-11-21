@@ -172,14 +172,8 @@ attribute [local irreducible] finiteTensorShift podTensorFiniteShiftLeft podTens
   integralOperationsTensorLevel
 
 /-- The fixed finite tensor shift maps are natural in both input complexes.
-Source: Mathlib's `mapBifunctorShift₁Iso` and `mapBifunctorShift₂Iso`, their
-naturality lemmas, and Stacks 011G and 07A4.
-(blueprint: lem-pod-tensor-finite-shift-naturality).
-
-Proof: package the native tensor shift in each variable as a natural isomorphism
-on pairs. Whisker with ordinary coefficient reduction and scalar restriction,
-using their shift comparisons. The resulting components are definitionally the
-specified finite shifts, so their naturality equations are the desired ones. -/
+Source: Mathlib's `mapBifunctorShift₁Iso` and `mapBifunctorShift₂Iso`, their naturality lemmas,
+and Stacks 011G and 07A4. -/
 theorem podTensorFiniteShift_naturality (W : Scheme.{u}) (n : ℕ)
     {P Q : CochainComplex (integralTowerModules l E W) ℤ ×
       CochainComplex (integralTowerModules l E W) ℤ} (f : P ⟶ Q) (r : ℤ) :

@@ -44,8 +44,7 @@ variable (k A : Type*) [Field k] [IsAlgClosed k] [CommRing A] [Algebra k A]
   [Algebra.FiniteType k A]
 
 /-- Over an algebraically closed field `k`, every maximal ideal of a finitely generated
-`k`-algebra is the kernel of a `k`-algebra map to `k`: closed points have residue field `k`.
-(blueprint: `det-i-geometry`) -/
+`k`-algebra is the kernel of a `k`-algebra map to `k`: closed points have residue field `k`. -/
 theorem exists_algHom_ker_eq_of_isMaximal (𝔪 : Ideal A) [𝔪.IsMaximal] :
     ∃ φ : A →ₐ[k] k, RingHom.ker φ = 𝔪 := by
   let : Field (A ⧸ 𝔪) := Ideal.Quotient.field 𝔪
@@ -55,8 +54,7 @@ theorem exists_algHom_ker_eq_of_isMaximal (𝔪 : Ideal A) [𝔪.IsMaximal] :
   simp [RingHom.mem_ker, Ideal.Quotient.eq_zero_iff_mem]
 
 /-- The vanishing principle: over an algebraically closed field `k`, an element of a finitely
-generated `k`-algebra vanishing at every `k`-point is nilpotent.
-(blueprint: `det-i-geometry`) -/
+generated `k`-algebra vanishing at every `k`-point is nilpotent. -/
 theorem iInf_ker_algHom_eq_nilradical :
     (⨅ φ : A →ₐ[k] k, RingHom.ker φ) = nilradical A := by
   have : IsJacobsonRing A := isJacobsonRing_of_finiteType (A := k)
@@ -99,10 +97,10 @@ theorem existsUnique_comp_mkₐ_eq_of_forall_algHom {B : Type*} [CommRing B] [Al
 
 
 open TensorProduct in
-/-- Blueprint `lem-wf-affine-product-reduced`: let `A` and `B` be reduced finitely generated
-algebras over an algebraically closed field `k`, the coordinate algebras of affine varieties `X`
-and `Y`. The `k`-points of `X × Y = Spec (A ⊗[k] B)` are the pairs `(φ, ψ)` of `k`-points, and a
-function on `X × Y` vanishing at all of them is zero.
+/-- Let `A` and `B` be reduced finitely generated algebras over an algebraically closed field `k`,
+the coordinate algebras of affine varieties `X` and `Y`. The `k`-points of
+`X × Y = Spec (A ⊗[k] B)` are the pairs `(φ, ψ)` of `k`-points, and a function on `X × Y`
+vanishing at all of them is zero.
 
 Evaluating the first factor at a `k`-point `φ` of `X` sends `t` to a function on `Y`, which
 vanishes at every `k`-point of `Y` and hence is zero by the vanishing principle for `B`. As the

@@ -15,7 +15,6 @@ public import Mathlib.Algebra.BigOperators.Finsupp.Basic
 # Nonconstant p-basis coefficients of an element with zero differential
 
 Source: Stacks Project, More on Algebra, Tags 07P1 and 07P2.
-(blueprint: lem-weil-pbc-p-basis-zero-differential-coefficients).
 -/
 
 @[expose] public section
@@ -56,27 +55,7 @@ private theorem euler_monomial
 
 /-- If the differential of an element vanishes, all its nonconstant p-basis coordinates
 vanish when the differentials of the p-basis form the given basis.
-Source: Stacks Project, More on Algebra, Tag 07P2, proof of (2) implies (1), and
-step 4 of lem-weil-pbc-differential-zero-iff-pth-power.
-(blueprint: lem-weil-pbc-p-basis-zero-differential-coefficients)
-
-Proof:
-Put B = kK^p and choose i with E i > 0. Compose the universal derivation with
-the i-th coordinate of the given differential basis to get a k-derivation d_i
-with d_i(t_j) = delta_ij. It kills B: it kills k and p-th powers, and the
-Leibniz and inverse rules show that the killed elements are closed under the
-operations used to generate B. Therefore L_i(x) = t_i * d_i(x) is B-linear.
-Induction on the finite support of F, using Leibniz, proves the Euler identity
-L_i(t^F) = (F i) * t^F. This is the source's partial-derivative calculation
-multiplied by t_i, so no reindexing of reduced monomials is necessary.
-Evaluate the B-linear maps coord_E composed with L_i and (E i) * coord_E on
-every monomial basis vector: both give (E i) times the E-th coordinate.
-Basis extensionality makes these maps equal. Since D(a) = 0, L_i(a) = 0,
-hence (E i) * coord_E(a) = 0. The scalar E i is nonzero because 0 < E i < p
-and K has characteristic p; cancel it to obtain coord_E(a) = 0.
-The argument works for infinite I because monomials have finite support.
-For empty I, no nonzero E exists, so the assertion is vacuous. No perfection
-hypothesis on k is needed: every k-derivation kills B. -/
+Source: Stacks Project, More on Algebra, Tag 07P2, proof of (2) implies (1), and step 4 of. -/
 theorem pBasis_repr_eq_zero_of_D_eq_zero
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]
     (p : ℕ) [Fact p.Prime] [CharP k p] [CharP K p]

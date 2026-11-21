@@ -17,14 +17,7 @@ universe uA uB vA vB wA wB wR wS
 open CategoryTheory CategoryTheory.Limits
 namespace WeilConjectures.NormalizedScalar
 
-/-- Exact derivation preserves a specified semilinear scalar-identity equation.
-Source: exact termwise factorization and essential surjectivity of localization.
-(blueprint: lem-weil-pbc-normalized-semilinear-derived).
-
-Proof: on a complex the equation holds degree by degree. The exact-factorization
-comparison transports it to its image in the derived category. Every derived
-object is isomorphic to such an image, and scalar identity morphisms are invariant
-under conjugation. Thus the same equation holds on every derived object. -/
+/-- Exact derivation preserves a specified semilinear scalar-identity equation. -/
 theorem mapDerivedCategory_scalar
     {R : Type wR} [CommRing R] {S : Type wS} [CommRing S] (φ : R →+* S)
     {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{wA} A] [Linear R A]

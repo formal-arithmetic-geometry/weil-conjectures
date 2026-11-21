@@ -191,14 +191,7 @@ private theorem finiteShiftRight_generators (W : Scheme.{u}) (n : ℕ)
 /-- The two explicit finite tensor shifts have their prescribed homogeneous
 section formulas for every integer shift.
 
-Source: Stacks 011G, 07A4; more-algebra.tex, item-shift-tensor
-(blueprint: lem-pod-tensor-finite-signed-shift-laws).
-
-Proof: apply the two Mathlib total-tensor summand formulas after the ordinary
-reduction shift comparison, whose components are identities. Restriction of
-scalars leaves the section maps unchanged. The first formula has no sign;
-the second retains (-1)^(p * r). Transport along the equality of total-degree
-indices yields the stated heterogeneous equalities. -/
+Source: Stacks 011G, 07A4. -/
 theorem podTensorFiniteSignedShiftGenerators (W : Scheme.{u}) :
     PodTensorFiniteShiftGenerators l E W := by
   constructor

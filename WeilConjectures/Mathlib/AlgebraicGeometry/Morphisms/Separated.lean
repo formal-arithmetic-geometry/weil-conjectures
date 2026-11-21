@@ -204,11 +204,10 @@ theorem IsSeparated.of_openCover (𝒰 : W.OpenCover)
   exact (MorphismProperty.arrow_mk_iso_iff @IsClosedImmersion
     (diagonalRestrictChartArrowIso w (𝒰.f i) (𝒰.f j))).mpr (hd i j)
 
-/-- **Separatedness from a two-open cover** (Stacks Project Tag 0F3U; blueprint:
-`lemma:nagata-separated-two-open-cover`): let `W = T₁ ∪ T₂` be a union of two open
-subschemes over `S` such that each `Tᵢ ⟶ S` is separated and the canonical overlap
-morphism `T₁ ×_W T₂ ⟶ T₁ ×_S T₂` is a closed immersion. Then `W ⟶ S` is separated.
-This is the two-element case of `AlgebraicGeometry.IsSeparated.of_openCover`. -/
+/-- **Separatedness from a two-open cover** (Stacks Project Tag 0F3U): let `W = T₁ ∪ T₂` be a union
+of two open subschemes over `S` such that each `Tᵢ ⟶ S` is separated and the canonical overlap
+morphism `T₁ ×_W T₂ ⟶ T₁ ×_S T₂` is a closed immersion. Then `W ⟶ S` is separated. This is the
+two-element case of `AlgebraicGeometry.IsSeparated.of_openCover`. -/
 theorem IsSeparated.of_two_open_cover
     (hcov : Set.range j₁ ∪ Set.range j₂ = Set.univ)
     [IsSeparated (j₁ ≫ w)] [IsSeparated (j₂ ≫ w)]

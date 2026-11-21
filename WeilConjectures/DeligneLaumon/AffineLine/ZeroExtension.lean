@@ -69,8 +69,7 @@ noncomputable def boundaryShortComplex : ShortComplex (WeilSheaf k₀ l (affineL
     (cokernel.condition _)
 
 /-- The sequence `0 → j_!M → j_*M → B → 0` is short exact: `j_!M → j_*M` is a monomorphism
-(`AlgebraicGeometry.WeilSheaf.mono_extensionByZeroToDirectImage_app`) and `B` is its cokernel.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+(`AlgebraicGeometry.WeilSheaf.mono_extensionByZeroToDirectImage_app`) and `B` is its cokernel. -/
 lemma shortExact_boundaryShortComplex : D.boundaryShortComplex.ShortExact :=
   ShortComplex.ShortExact.mk' (ShortComplex.exact_of_g_is_cokernel _ (cokernelIsCokernel _))
     (WeilSheaf.mono_extensionByZeroToDirectImage_app D.j D.sheaf)
@@ -85,15 +84,13 @@ lemma boundaryTriangle_mor₂ :
     D.boundaryTriangle.mor₂ = -D.shiftedExtensionByZeroToMiddleExtension :=
   rfl
 
-/-- The rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` is distinguished.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+/-- The rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` is distinguished. -/
 lemma boundaryTriangle_distinguished : D.boundaryTriangle ∈ distTriang _ :=
   rot_of_distTriang _ (rot_of_distTriang _
     (WeilSheaf.singleTriangle_distinguished D.shortExact_boundaryShortComplex))
 
 /-- The Fourier transform of the rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` is
-distinguished, the transform being a triangulated functor. (blueprint:
-`lemma-fourier-transform-boundary-sequence`) -/
+distinguished, the transform being a triangulated functor. -/
 lemma fourierTransform_mapTriangle_boundaryTriangle_distinguished :
     (fourierTransform ψ).mapTriangle.obj D.boundaryTriangle ∈ distTriang _ :=
   (fourierTransform ψ).map_distinguished _ D.boundaryTriangle_distinguished
@@ -124,7 +121,7 @@ rotated triangle `B → j_!M[1] → j_*M[1] → B[1]` and not, say, a split one.
 for the middle arrow of the rotated triangle only: the first arrow `B → j_!M[1]` is the connecting
 morphism of `0 → j_!M → j_*M → B → 0`, whose formation needs `j_!M → j_*M` to be a
 monomorphism, and comparing whole triangles needs a shift-compatibility of the transform; the
-square already determines the sequence. (blueprint: `lemma-fourier-transform-boundary-sequence`)
+square already determines the sequence.
 -/
 structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
   /-- The short exact sequence `0 → B' → G → j'_*M' → 0` on the dual line. -/
@@ -149,8 +146,7 @@ structure FourierCorrection (D D' : LisseOnDenseOpen k₀ l) where
       isoExtensionByZero.hom ≫ (WeilSheaf.toComplex.map seq.g)⟦(1 : ℤ)⟧'
 
 /-- **Steps 1–3 of `lemma-fourier-transform-boundary-sequence`.** The transform of the boundary
-sheaf `B = j_*M / j_!M` is `B'[1]` for a Weil sheaf `B'` on the dual line which is lisse.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+sheaf `B = j_*M / j_!M` is `B'[1]` for a Weil sheaf `B'` on the dual line which is lisse. -/
 theorem exists_isLisse_iso_fourierTransform_boundarySheaf (D : LisseOnDenseOpen k₀ l) :
     ∃ B' : WeilSheaf k₀ l (affineLine k₀), B'.IsLisse ∧
       Nonempty ((fourierTransform ψ).obj (WeilSheaf.toComplex.obj D.boundarySheaf) ≅
@@ -354,8 +350,7 @@ end Construction
 
 /-- For an irreducible nonexceptional `M` and a Fourier partner `D'` of `D`, the zero-extension
 comparison datum exists. Only the hypothesis on the Fourier partner `D'` enters the argument:
-irreducibility and nonexceptionality serve to guarantee that a Fourier partner exists.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+irreducibility and nonexceptionality serve to guarantee that a Fourier partner exists. -/
 theorem nonempty_fourierCorrection (_hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k₀ l)
     (_hD : D.sheaf.IsIrreducibleLisse)
     (_hne : D.sheaf.IsNonexceptional ψ D.j) (hFT : D.IsFourierPartner ψ D') :
@@ -365,8 +360,7 @@ theorem nonempty_fourierCorrection (_hψ : ψ ≠ 1) (D D' : LisseOnDenseOpen k�
 
 /-- The correction sheaf `B'` is lisse on the entire dual line: it is a sum of finite direct
 images of Artin–Schreier kernels. It is `𝓗⁻¹ FT_ψ(B)`, as is the sheaf of
-`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_isLisse_iso_fourierTransform_boundarySheaf`.
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.exists_isLisse_iso_fourierTransform_boundarySheaf`. -/
 theorem FourierCorrection.isLisse {D D' : LisseOnDenseOpen k₀ l}
     (c : FourierCorrection ψ D D') : c.seq.X₁.IsLisse := by
   obtain ⟨B', hB', ⟨eB⟩⟩ := D.exists_isLisse_iso_fourierTransform_boundarySheaf ψ
@@ -375,8 +369,7 @@ theorem FourierCorrection.isLisse {D D' : LisseOnDenseOpen k₀ l}
 /-- The correction sheaf `B'` has weights at most `w` when `M` is punctually `ι`-pure of weight
 `w`: semicontinuity of weights at the boundary points, together with the weight zero of the
 Artin–Schreier kernel
-(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_of_iso_fourierTransform`).
-(blueprint: `lemma-fourier-transform-boundary-sequence`) -/
+(`AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.hasWeightsAtMost_of_iso_fourierTransform`). -/
 theorem FourierCorrection.hasWeightsAtMost (ι : PadicAlgCl l →+* ℂ)
     {D D' : LisseOnDenseOpen k₀ l} (c : FourierCorrection ψ D D') {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) : c.seq.X₁.HasWeightsAtMost ι w :=

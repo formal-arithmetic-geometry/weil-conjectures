@@ -87,7 +87,7 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] {C : Scheme.{u}}
 
-/-- Blueprint `definition-weil-representation--1`: Weil sheaves and their representations.
+/-- Weil sheaves and their representations.
 
 The Weil group of a curve `p : C₀ ⟶ Spec 𝔽_q`. It is the preimage of the integer powers of
 the geometric Frobenius under `π₁(C₀, s) → Gal(k / 𝔽_q)`, and comes with the exact degree
@@ -198,7 +198,7 @@ theorem toFundamentalGroup_apply (g : W.carrier) :
     W.toFundamentalGroup g = (W.weilGroupEquiv g).1.1 :=
   rfl
 
-/-- Blueprint `lemma-boundary-stalk--2`: Boundary stalks and restriction to an open.
+/-- Boundary stalks and restriction to an open.
 
 The restriction of Weil groups along a nonempty open immersion `j : U₀ ↪ C₀` of curves over
 `𝔽_q`: the homomorphism `W(U₀) → W(C₀)` induced by the restriction functor
@@ -211,7 +211,7 @@ map.
 
 The remaining fields are theorems about the map so defined: it is continuous and preserves
 degrees, it is surjective because `π₁(U) → π₁(C)` is for a nonempty open of a connected
-normal curve (`lemma-boundary-stalk--2`), and it carries the local Frobenius at a closed point of
+normal curve, and it carries the local Frobenius at a closed point of
 `U₀` into the Frobenius conjugacy class at its image. -/
 structure Restriction {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] (j : U ⟶ C)
     [IsOpenImmersion j] [Nonempty U] (WU : WeilGroup pU) (WC : WeilGroup p) where
@@ -243,7 +243,7 @@ structure Restriction {U : Scheme.{u}} {pU : U ⟶ Spec (.of K)} [IsCurve pU] (j
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- Blueprint `definition-weil-representation--1`: Weil sheaves and their representations.
+/-- Weil sheaves and their representations.
 
 A `ℚ̄_ℓ`-representation of the Weil group is *lisse* if the geometric subgroup `π₁(C)` acts
 continuously, i.e. the matrix coefficients of the restricted representation are continuous in
@@ -290,7 +290,7 @@ theorem IsLisse.of_continuous_apply {V : Type u} [AddCommGroup V] [Module (Padic
   continuous_toMatrix b i j := by
     simpa [LinearMap.toMatrix_apply] using h (b.coord i) (b j)
 
-/-- Blueprint `definition-weil-representation--1`: Weil sheaves and their representations.
+/-- Weil sheaves and their representations.
 
 Continuity of the matrix coefficients in *one* basis of a finite-dimensional `V` implies
 continuity in every basis: a change of basis is a fixed invertible matrix, so it acts on the
@@ -313,8 +313,8 @@ theorem isLisse_iff_exists_basis {V : Type u} [AddCommGroup V] [Module (PadicAlg
   exact continuous_finsetSum _ fun i _ ↦ continuous_const.mul <|
     continuous_finsetSum _ fun j _ ↦ (hb i j).mul continuous_const
 
-/-- Blueprint `definition-weil-representation`: Operations, constituents and coinvariants.
-Blueprint `proposition-twisting-weight-zero-adding-dual--2`: Constant Weil twist.
+/-- Operations, constituents and coinvariants. Blueprint
+`proposition-twisting-weight-zero-adding-dual--2`: Constant Weil twist.
 
 The constant Weil line `B_b`: the one-dimensional representation of `W(C₀)` on which `g`
 acts by `b ^ deg g`; it is trivial on `π₁(C) = ker deg`. Tensoring with it,
@@ -331,7 +331,7 @@ noncomputable def constLine (b : (PadicAlgCl l)ˣ) :
     ext
     simp [smul_smul, mul_comm]
 
-/-- Blueprint `definition-weil-representation`: Operations, constituents and coinvariants.
+/-- Operations, constituents and coinvariants.
 
 The Tate line `ℚ̄_ℓ(n) = B_{q ^ (-n)}`, on which the geometric Frobenius acts by `q ^ (-n)`. -/
 noncomputable def tateLine (n : ℤ) :

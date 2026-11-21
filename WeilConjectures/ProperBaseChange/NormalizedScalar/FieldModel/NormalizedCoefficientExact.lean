@@ -38,9 +38,7 @@ namespace WeilConjectures.NormalizedScalar
 
 variable {l : ℕ} [Fact l.Prime] {E : Type u} [NormedField E] [NormedAlgebra ℚ_[l] E]
 
-/-- The integral coefficient comparison pulled back to the actual scheme.
-Source: pullback of the normalized coefficient presentation.
-(blueprint: lem-weil-pbc-normalized-coefficient-exact). -/
+/-- The integral coefficient comparison pulled back to the actual scheme. -/
 def FieldModel.integerIso (m : FieldModel l E) (T : Scheme.{u}) :
     condensedRingObj (integralCoeff l m.carrier) T ≅
       condensedRingObj (Profinite.continuousCoefficientRingObj (integers l E)) T :=
@@ -48,9 +46,7 @@ def FieldModel.integerIso (m : FieldModel l E) (T : Scheme.{u}) :
     ((sheafCompose (coherentTopology Profinite.{u})
       (forget₂ RingCat.{u + 1} Ab.{u + 1})).mapIso m.pointIntegerIso)
 
-/-- The field coefficient comparison pulled back to the actual scheme.
-Source: pullback of the normalized coefficient presentation.
-(blueprint: lem-weil-pbc-normalized-coefficient-exact). -/
+/-- The field coefficient comparison pulled back to the actual scheme. -/
 def FieldModel.fieldIso (m : FieldModel l E) (T : Scheme.{u}) :
     condensedRingObj (Profinite.continuousMapRingObj m.carrier) T ≅
       condensedRingObj (Profinite.continuousCoefficientRingObj E) T :=
@@ -70,10 +66,7 @@ instance (m : FieldModel l E) (T : Scheme.{u}) : IsMonHom (m.fieldIso T).hom := 
     ((sheafCompose (coherentTopology Profinite.{u})
       (forget₂ RingCat.{u + 1} Ab.{u + 1})).map m.pointFieldIso.hom)
 
-/-- The scalar square remains the specified coefficient square after pullback.
-Source: functoriality of inverse image.
-(blueprint: lem-weil-pbc-normalized-coefficient-exact).
-Proof: apply inverse image to the pointwise square of the presentation. -/
+/-- The scalar square remains the specified coefficient square after pullback. -/
 theorem FieldModel.scalar_square_scheme (m : FieldModel l E) (T : Scheme.{u}) :
     (m.integerIso T).hom ≫ coefficientMap (scalarMap (l := l) (E := E)) T =
       coefficientMap (integralScalarMap l m.carrier) T ≫ (m.fieldIso T).hom := by
@@ -90,14 +83,7 @@ private theorem exact_iso {T : Scheme.{u}}
   preservesFiniteLimits_of_natIso (Mod.extendScalarsIsoComapInv a).symm
 
 /-- Exactness of the actual extension from the unit ball to the given field.
-Source: Bhatt--Scholze, Lemma 6.8.2.
-(blueprint: lem-weil-pbc-normalized-coefficient-exact).
-
-Proof: the isometric small presentation gives an invertible coefficient square.
-Factor the large-field scalar map through the inverse integral comparison, the
-small scalar map, and the field comparison. Extension along the two isomorphisms
-is exact restriction along their inverses. The middle extension is the proved
-continuous integral scalar extension. Composition therefore gives exactness. -/
+Source: Bhatt--Scholze, Lemma 6.8.2. -/
 theorem scalar_exact [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) :
     PreservesFiniteLimits
       (Mod.extendScalars (coefficientMap (scalarMap (l := l) (E := E)) T)) := by
@@ -156,13 +142,7 @@ private theorem bounded_comap_iff {T : Scheme.{u}}
 
 /-- Ordinary bounded constructible integral complexes form a triangulated subcategory
 for a finite normed extension in the scheme universe.
-Source: the integral constructible Serre theorem and coefficient transport.
-(blueprint: lem-weil-pbc-normalized-coefficient-exact).
-
-Proof: exact restriction along the integral coefficient isomorphism preserves
-boundedness and identifies constructibility in both directions. Thus the property
-is the inverse image of the small coefficient's triangulated property under a
-triangulated functor. Inverse images of triangulated properties are triangulated. -/
+Source: the integral constructible Serre theorem and coefficient transport. -/
 theorem integral_triangulated [FiniteDimensional ℚ_[l] E] (T : Scheme.{u})
     [TopologicalSpace.NoetherianSpace T] :
     ObjectProperty.IsTriangulated (boundedConstructible

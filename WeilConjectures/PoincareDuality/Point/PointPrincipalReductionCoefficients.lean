@@ -11,8 +11,7 @@ import all WeilConjectures.AlgebraicGeometry.Completed.CompletedIntegralFiniteQu
 import Mathlib.CategoryTheory.Abelian.ShortExact
 import Mathlib.Algebra.Homology.ShortComplex.Ab
 
-/-! # The principal coefficient sequence at a pro-etale point
-(blueprint: lem-pod-point-principal-reduction-coefficients) -/
+/-! # The principal coefficient sequence at a pro-etale point -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -58,15 +57,7 @@ local instance pointPrincipalAbLocallyBijective (k : Type u) [Field k] :
 /-- The completed integral coefficient projection is the cokernel of the indicated
 uniformizer power, which is injective on every object's sections.
 
-Proof: restriction of a constant scalar remains that same scalar. The finite projection
-kills its (n+1)st power. Its kernel consists exactly of multiples of that power by
-completedIntegralProjection_divisible. Injectivity follows by testing finite projections
-at levels r+n+1, where multiplication identifies the rth quotient with a submodule.
-The constant quotient map is sectionwise surjective and factors through completion,
-so the completed projection is sectionwise surjective as well. Objectwise exactness
-then implies exactness of presheaves and hence of sheaves.
-Source: Stacks Tags 093J--093M and 06YY; original blueprint step 1.
-(blueprint: lem-pod-point-principal-reduction-coefficients) -/
+Source: Stacks Tags 093J--093M and 06YY. -/
 theorem pointPrincipalReductionCoefficients (k : Type u) [Field k]
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :

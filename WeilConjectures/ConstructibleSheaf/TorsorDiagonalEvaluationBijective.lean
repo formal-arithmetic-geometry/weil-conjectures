@@ -126,19 +126,7 @@ private theorem graphHomeo_action (W : c.P.Etale) (g h : P) (x : W.left) :
   rw [graphHomeo_mk, graphHomeo_mk, sectionAction_mul, Scheme.Hom.comp_apply]
 
 /-- Graph evaluation is bijective on each etale object upstairs.
-Source: Stacks Project, Tags 0DV5 (3) and 0DV6.
-(blueprint: lem-weil-pbc-torsor-diagonal-evaluation-bijective)
-
-Proof: Base change the torsor isomorphism to W. It identifies W times_V c.P
-with the disjoint union of the translates of the graph W to c.P, indexed by P.
-On the g-th translate extend a locally constant function t by rho(g)(t(w)).
-Each translate is open, so these functions define a locally constant function
-on the disjoint union and hence on W times_V c.P. The action law rho(hg) =
-rho(h) rho(g) proves equivariance. On the graph g = 1, the value is t(w), so
-extension is a right inverse to evaluation. Equivariance forces the value on
-each other translate from the graph value, making it also a left inverse.
-The same argument applies to an empty W and to the zero module. Restriction
-of scalars changes neither underlying functions nor bijectivity. -/
+Source: Stacks Project, Tags 0DV5 (3) and 0DV6. -/
 theorem diagonalEvaluation_bijective (ℓ : ℕ)
     (N : Rep.{u + 1} (ZMod ℓ) P) (W : c.P.Etale) :
     Function.Bijective (c.diagonalEvaluation ℓ N W) := by

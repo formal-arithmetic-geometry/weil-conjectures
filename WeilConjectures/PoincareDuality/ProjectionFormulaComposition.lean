@@ -312,7 +312,7 @@ private lemma whiskerLeft_eq_comp_eqToHom (T : Dᵇc(X.left)⟦𝐐⟧) (M : D�
 
 -- Comparing the two compactification triangles unfolds the lower shriek definitions.
 /-- **The exceptional projection morphism is compatible with the composition isomorphism attached
-to compactifications** (blueprint `prop-sf-pf-coherence`): for the chosen compactifications of
+to compactifications**: for the chosen compactifications of
 `f` and `g` and a compactification `d` of `p ≫ j` with cartesian square, through the
 composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` attached to them, the exceptional projection
 morphism of `f ≫ g` is that of `g` followed by `Rg_!` of that of `f`. -/
@@ -394,10 +394,9 @@ theorem boundedConstructibleExceptionalProjectionMorphism_comp_of_compactificati
   · exact_by_kernel exceptionalProjection_fst_eq_shriekProjection_comp_eqToHom ℓ f g d hd T M
 
 omit d hd in
-/-- **The exceptional projection morphism is compatible with composition** (blueprint
-`prop-sf-pf-coherence`; SGA 4, Exposé XVII, 5.2.2): through the composition isomorphisms
-`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, the exceptional projection morphism of
-`f ≫ g` is that of `g` followed by `Rg_!` of that of `f`. -/
+/-- **The exceptional projection morphism is compatible with composition**: through the composition
+isomorphisms `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` and `L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`, the exceptional
+projection morphism of `f ≫ g` is that of `g` followed by `Rg_!` of that of `f`. -/
 theorem boundedConstructibleExceptionalProjectionMorphism_comp_whiskerLeft
     (T : Dᵇc(X.left)⟦𝐐⟧) (M : Dᵇc(Z.left)⟦𝐐⟧) :
     boundedConstructibleExceptionalProjectionMorphism ℓ (f ≫ g) T M ≫

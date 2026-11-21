@@ -10,10 +10,6 @@ public import Mathlib.LinearAlgebra.Eigenspace.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-! Descent of a punctual bound from a positive Frobenius power.
-
-Source: `lemma-weight-bound-constant-extension`, used in proof step 6 of
-`theorem-pure-lisse-sheaves-over-relative--1` (blueprint:
-theorem-pure-lisse-sheaves-over-relative--1).
 -/
 
 @[expose] public noncomputable section
@@ -24,13 +20,6 @@ open CategoryTheory
 namespace WeilConjectures.RelativeCurve
 
 /-- A bound for a positive power of an operator descends to the operator.
-Source: the power-descent step of `theorem-pure-lisse-sheaves-over-relative--1`
-(blueprint: lem-zl-relative-curve-power-descent).
-
-Proof: alpha^e is an eigenvalue of A^e. The embedding and norm preserve powers.
-Commuting real powers identifies the right side with the e-th power of q^(b/2).
-Both bases are nonnegative, so monotonicity of a positive integral power gives the bound.
-This also covers zero eigenvalues and q=0.
 -/
 theorem power_bound_descent {K : Type u} [Field K]
     (V : ModuleCat K) (A : Module.End K V) (ι : K →+* ℂ)

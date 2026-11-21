@@ -10,10 +10,7 @@ public import WeilConjectures.NumberTheory.Padics.CoefficientExtensionSupplement
 /-!
 # Inverting a coefficient-field uniformizer
 
-Source: Weil conjectures blueprint, `sec-smooth-purity/sk-def-sf-operations`,
-`def-weil-rationalization-karoubi`, the displayed Hom tensor E formula;
-Stacks Project, Tags 00CO and 00CX
-(blueprint: lem-weil-l-adic-integers-localization-uniformizer).
+Source: Stacks Project, Tags 00CO and 00CX.
 -/
 
 @[expose] public section
@@ -30,22 +27,7 @@ clause are specified on pure tensors: the left action is transported using `φ.s
 the right action is multiplication on the field factor. The additive equivalence `F`
 intertwines these actions, which states precisely that it is an E-linear isomorphism.
 
-Source: blueprint `def-weil-rationalization-karoubi`, displayed Hom tensor E formula;
-Stacks Project, Tags 00CO and 00CX
-(blueprint: lem-weil-l-adic-integers-localization-uniformizer).
-
-Proof: Define the fraction map x/π^n ↦ x π^(-n). Cross multiplication and cancellation
-in E show that it is well defined, preserves ring operations and is injective. By
-`lem-weil-l-adic-extension-integers-dvr`, π is nonzero and every nonzero field element
-is a unit times an integer power of π. Nonnegative powers lie in the integer ring;
-negative powers give fractions with denominator π^n. Zero is the image of 0/1.
-This proves surjectivity and the localization assertion. For every module M, the
-bilinear universal property of `def-weil-pbc-module-tensor-product` gives the maps
-m ⊗ t ↦ m ⊗ φ(t) and m ⊗ e ↦ m ⊗ φ.symm(e). They respect balancing since φ fixes
-the integers, and their composites fix all pure tensors, hence are identities.
-Transport multiplication by e to multiplication by φ.symm(e) on the left localization factor.
-On pure tensors the forward map intertwines this action with multiplication by e
-on the right field factor; generation by pure tensors proves E-linearity. -/
+Source: Stacks Project, Tags 00CO and 00CX. -/
 theorem coefficientExtension_localization_uniformizer (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
     IsLocalization.Away (coefficientExtensionUniformizer l E) E ∧

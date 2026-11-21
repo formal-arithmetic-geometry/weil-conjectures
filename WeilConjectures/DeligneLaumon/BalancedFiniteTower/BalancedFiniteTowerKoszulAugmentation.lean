@@ -12,7 +12,6 @@ import WeilConjectures.DeligneLaumon.BalancedFiniteTower.BalancedFiniteTowerAugm
 /-! # Koszul generator comparison and augmentation compatibility
 
 Source: Stacks Project, Tags 03EK, 03EL and 07A4.
-(blueprint: lem-a1-balanced-finite-tower-koszul-augmentation).
 -/
 
 @[expose] public noncomputable section

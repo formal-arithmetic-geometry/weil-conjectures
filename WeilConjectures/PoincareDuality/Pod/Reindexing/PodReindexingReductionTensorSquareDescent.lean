@@ -18,8 +18,7 @@ import all WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Descent of the strict reduction/tensor representative square
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent)
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -131,8 +130,7 @@ uses the quotient-generator and transition laws of `A`, the normalized system
 comparison, and full faithfulness of the product localization.  It is stated
 separately so that the representative calculation is not hidden in the derived
 square theorem.
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent).
+Source: Stacks 07A4 and 0941.
 -/
 theorem podReindexing_reduction_tensor_square_descent
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

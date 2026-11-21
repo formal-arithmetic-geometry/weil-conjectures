@@ -9,9 +9,7 @@ public import WeilConjectures.PoincareDuality.Derived.DerivedAutomorphismHomEval
 
 /-! # Evaluation square of the integral pullback Hom comparison
 
-Source: Stacks Project, Tag 0GMX; blueprint main-20261015
-theorem-poincare-duality-frobenius--2, Steps 8--11
-(blueprint: stage3-derived-automorphism-continuation-a-integral-evaluation).
+Source: Stacks Project, Tag 0GMX.
 
 The evaluation field of `podIntegralHomComparison_laws`. It is formal: the
 comparison is defined as a transpose, and evaluation is the inverse transpose
@@ -33,13 +31,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [∀ y : Y, Invertible (l : Y.residueField y)]
 
 /-- Evaluation component of the integral pullback Hom compatibility.
-Source: Stacks 0GMX; node lem-pod-derived-automorphism-hom-evaluation, steps 8--11.
-Proof: for any `f : L ⟶ H(Q)`, parameter naturality of the transposition gives
-`transpose (T(f,1) ≫ ev_Q) = f ≫ transpose ev_Q = f`, so `T(f,1) ≫ ev_Q` is the
-inverse transpose of `f`. Apply this to `c_P`, which is by definition the
-transpose of `μ⁻¹ ≫ F(ev_P)`: then `T(c_P,1) ≫ ev = μ⁻¹ ≫ F(ev_P)`, and
-precomposing with `μ` cancels `μ⁻¹`.
-(blueprint: stage3-derived-automorphism-continuation-a-integral-evaluation). -/
+Source: Stacks 0GMX. -/
 theorem podIntegralHomComparison_evaluation :
     ∀ P : (constructibleIntegralHomPairs l E Y).FullSubcategory,
       (canonicalIntegralPullbackTensor l E g

@@ -70,8 +70,7 @@ over a scheme `S` admits an immersion into a relative affine space `𝔸(Fin n; 
   `r`-fold relative affine line over `S` and its projection to `S`, the composition of the `r`
   affine-line projections.
 - `AlgebraicGeometry.Scheme.Hom.toIteratedAffineLine`: the morphism to the iterated affine line
-  with prescribed coordinates (blueprint
-  `lemma-relative-noether-normalization-over-stratification--1`).
+  with prescribed coordinates.
 - `AlgebraicGeometry.AffineSpace.range_zeroSection`: the image of the zero section is the common
   zero locus of the coordinates.
 - `AlgebraicGeometry.AffineSpace.isAffine_fiber_of_isOpenImmersion`: the fibres of an open
@@ -423,20 +422,17 @@ variable {X S : Scheme.{u}} (π : X ⟶ S) [X.IsQuasiAffine] [LocallyOfFiniteTyp
 
 /-- The dimension `n` of the chosen immersion `ι_X : X ⟶ 𝔸ⁿ_S` of a quasi-affine scheme `X`
 locally of finite type over `S` (selected by
-`AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`).
-(blueprint: `lemma-affine-covers-dense-intersection--2`) -/
+`AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`). -/
 noncomputable def Scheme.Hom.affineSpaceImmersionDim : ℕ :=
   (exists_immersion_affineSpace_of_quasiAffine π).choose
 
 /-- **The chosen immersion** `ι_X : X ⟶ 𝔸ⁿ_S` over `S` of a quasi-affine scheme `X` locally of
-finite type over `S` (selected by `AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`).
-(blueprint: `lemma-affine-covers-dense-intersection--2`) -/
+finite type over `S` (selected by `AlgebraicGeometry.exists_immersion_affineSpace_of_quasiAffine`). -/
 noncomputable def Scheme.Hom.affineSpaceImmersion :
     X ⟶ 𝔸(ULift.{u} (Fin π.affineSpaceImmersionDim); S) :=
   (exists_immersion_affineSpace_of_quasiAffine π).choose_spec.choose
 
-/-- **The chosen morphism `ι_X : X ⟶ 𝔸ⁿ_S` is an immersion over `S`.**
-(blueprint: `lemma-affine-covers-dense-intersection--2`) -/
+/-- **The chosen morphism `ι_X : X ⟶ 𝔸ⁿ_S` is an immersion over `S`.** -/
 theorem Scheme.Hom.affineSpaceImmersion_spec :
     π.affineSpaceImmersion ≫ 𝔸(ULift.{u} (Fin π.affineSpaceImmersionDim); S) ↘ S = π ∧
       IsImmersion π.affineSpaceImmersion :=
@@ -840,7 +836,7 @@ lemma AffineSpace.zeroSection_comp_over (n : Type u) (S : Scheme.{u}) :
     AffineSpace.zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
   AffineSpace.homOfVector_over _ _
 
-/-- Blueprint `lemma-section-normal-bundle--1`: The affine line over a base.
+/-- The affine line over a base.
 
 The affine line `𝔸¹_Y` over `Y` is `𝔸(ULift (Fin 1); Y)`, with coordinate
 `AffineSpace.coord Y 0`, projection `𝔸(ULift (Fin 1); Y) ↘ Y`, zero section

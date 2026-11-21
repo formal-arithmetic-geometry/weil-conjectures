@@ -44,19 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Reindexing commutes with the two signed tensor shifts on entire strict towers.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-shift-strict-tower-squares-c3).
-
-Proof: evaluate each natural transformation at a quotient n, each cochain degree,
-and each pro-etale object. Direct-sum extensionality reduces equality to a homogeneous
-pure tensor of bidegree (p,q). For the first slot, both composites relabel its factors
-without a sign. For the second slot, both multiply the relabelled tensor by (-1)^(pr).
-The quotient comparison is fixed on generators by D.QuotientGenerators; its shifted
-version has the same component in each relabelled degree. T.Generators and the two
-shift generator laws therefore give equality on all pure tensors. Sheafified tensor
-extensionality, followed by direct-sum, complex and natural-transformation
-extensionality, gives equality of the entire tower maps, including transitions.
-This works for zero and negative shifts and for zero complexes and empty sites. -/
+Source: Stacks 011G and 07A4. -/
 theorem podTensorShift_strictTowerSquares
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

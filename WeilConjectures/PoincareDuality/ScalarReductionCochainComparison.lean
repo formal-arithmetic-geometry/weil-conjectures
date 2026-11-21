@@ -82,8 +82,7 @@ import all WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvi
 import all WeilConjectures.CategoryTheory.RingedSiteModules
 import all Mathlib.CategoryTheory.Limits.Final
 
-/-! # Independence of the cochain and homotopy presentations of scalar reduction
-(blueprint: lem-pod-scalar-reduction-cochain-comparison) -/
+/-! # Independence of the cochain and homotopy presentations of scalar reduction -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -104,13 +103,7 @@ local instance scalarCochainAbLocallyBijective (Y : AlgebraicGeometry.Scheme.{u}
 /-- The cochain universal model and the prescribed homotopy-category scalar reduction
 are the same derived functor up to natural isomorphism.
 
-Proof: both ordinary functors have the specified sheafified tensor objects and maps,
-so the object identifications give a natural isomorphism. Precompose the homotopy
-universal counit with the full, essentially surjective homotopy quotient and transport
-through the localization comparison. This is a pointwise right Kan extension on
-cochains. Uniqueness of left derived functors now identifies the two derived functors.
-Source: Stacks Tags 05SV and 06YY.
-(blueprint: lem-pod-scalar-reduction-cochain-comparison) -/
+Source: Stacks Tags 05SV and 06YY. -/
 theorem scalarReductionCochainModel_iso (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
     (Y : AlgebraicGeometry.Scheme.{u}) (n : ℕ)

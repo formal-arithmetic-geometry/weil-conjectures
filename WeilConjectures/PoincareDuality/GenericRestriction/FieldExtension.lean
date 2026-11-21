@@ -314,12 +314,10 @@ theorem isIso_ihomUpperStarComparison_of_fieldExtension_of_range_subset (X : Ove
       N hN (ih _ hlt _ (i ≫ c) subset_rfl (isPullback_fieldExtension_of_isPullback i sqZ sqW) _ _
         (boundedConstructible_leftDerivedUpperStar_obj _ ℓ i ⟨K, hK⟩) hN)
 
-/-- **Internal homs commute with a change of the base field** (blueprint
-`lemma-restriction-geometric-generic-fibre` (2), for the change of the base field `k ⟶ L`): for a
-separated `k`-scheme of finite type `X`, its base change `π : X_L ⟶ X` and bounded constructible
-`ℚ̄_ℓ`-complexes `K` and `M` on `X`, the comparison
-`Lπ^* RHom(K, M) ⟶ RHom(Lπ^* K, Lπ^* M)` is an isomorphism. The extension `L / k` may be
-transcendental and inseparable. -/
+/-- **Internal homs commute with a change of the base field**: for a separated `k`-scheme of finite
+type `X`, its base change `π : X_L ⟶ X` and bounded constructible `ℚ̄_ℓ`-complexes `K` and `M` on
+`X`, the comparison `Lπ^* RHom(K, M) ⟶ RHom(Lπ^* K, Lπ^* M)` is an isomorphism. The extension
+`L / k` may be transcendental and inseparable. -/
 theorem isIso_ihomUpperStarComparison_of_fieldExtension (X : Over (Spec (.of k)))
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     {X' : Scheme.{u}} {π : X' ⟶ X.left} {a' : X' ⟶ Spec (.of L)}

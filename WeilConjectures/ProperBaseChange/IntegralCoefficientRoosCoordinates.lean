@@ -12,7 +12,6 @@ import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperation
 /-! # Normalized coefficient comparison of Roos complexes
 
 Source: Stacks 0941 and 08TC; Bhatt--Scholze Remark 6.8.15.
-(blueprint: lem-weil-pbc-integral-coefficient-roos-coordinates).
 -/
 
 @[expose] public noncomputable section
@@ -139,15 +138,7 @@ private theorem coefficientRoosCoordinatesNative
 /-- Coefficient restriction transports the Roos complex naturally, with both
 coordinates normalized after every strict tower isomorphism.
 
-Source: Stacks 0941 and 08TC; Bhatt--Scholze Remark 6.8.15.
-(blueprint: lem-weil-pbc-integral-coefficient-roos-coordinates).
-
-Proof: the scalar comparison of products is invertible because restriction is an
-equivalence. Transporting the mapping cocone of one minus transition gives the
-natural isomorphism gamma. Compose gamma with Roos of the inverse strict tower
-map. Naturality of the first and shifted coordinates, followed by the product
-projection identities of scalarRoosMap, gives the two displayed coordinate laws.
-Any z with that same hom has those laws as well. -/
+Source: Stacks 0941 and 08TC; Bhatt--Scholze Remark 6.8.15. -/
 theorem pbc_integral_coefficient_roos_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (U : Scheme.{u})

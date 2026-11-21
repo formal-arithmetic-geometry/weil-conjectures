@@ -38,34 +38,34 @@ them.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`
-  (`corollary-degreewise-duality-over-fields--1`): `⟨-, -⟩_i`.
+- `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing`:
+`⟨-, -⟩_i`.
 - `AlgebraicGeometry.Etale.TateOrientation.untwistedPoincarePairing`,
-  `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing`
-  (`corollary-degreewise-duality-over-fields--1`): the untwisted pairing
+  `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing`:
+the untwisted pairing
   `Ra_! K ⊗ᴸ (Ra_* K^∨)[2d] ⟶ Λ_Y(-d)` and its degreewise form.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.TateOrientation.isWeilPairing_poincarePairing`,
-  `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator`
-  (`theorem-poincare-duality-frobenius` (a)): `β_K` is a morphism of Weil objects, and the
+  `AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing_frobeniusOperator`:
+`β_K` is a morphism of Weil objects, and the
   degreewise pairing is Frobenius invariant.
-- `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing_frobeniusOperator`
-  (`theorem-poincare-duality-frobenius--4`): the untwisted similitude with factor `q^d`.
+- `AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing_frobeniusOperator`:
+the untwisted similitude with factor `q^d`.
 - `AlgebraicGeometry.Etale.TateOrientation.conj_frobeniusOperator_eq_smul_inverse_dualMap`,
-  `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`
-  (`theorem-poincare-duality-frobenius--6`, `theorem-poincare-duality-frobenius` (b)): conjugacy and
+  `AlgebraicGeometry.Etale.TateOrientation.roots_map_charpoly_frobeniusOperator`:
+conjugacy and
   reciprocal eigenvalues.
 
 ## Implementation notes
 
 The Tate twist `Λ(d)` is a datum (`AlgebraicGeometry.Etale.HasTateTwist`) and the orientation
 `γ` is arbitrary, so the Frobenius structures on the twists and the Frobenius equivariance of
-the smooth trace (`proposition-purity-trace-commute-frobenius`) are hypotheses: a Weil datum
+the smooth trace are hypotheses: a Weil datum
 `τ` on `Λ_X(d)` for which the smooth trace is a morphism of Weil objects, and a Weil datum on
-`Λ_Y(-d)` on whose sections Frobenius acts by `q^d`
-(`prose-10-21`). The contragredient datum on `K^∨` (resp. `K^∨(d)`) is
+`Λ_Y(-d)` on whose sections Frobenius acts by `q^d`.
+The contragredient datum on `K^∨` (resp. `K^∨(d)`) is
 characterised by the Frobenius equivariance of the evaluation `K ⊗ᴸ K^∨ ⟶ Λ_X` (resp. of the
 twisted evaluation `K ⊗ᴸ K^∨(d) ⟶ Λ_X(d)`), which determines it when `K` is dualizable.
 

@@ -15,12 +15,11 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.SheafSections
 The two subsection statements of the real-sheaves chapter about the lisse sheaf–representation
 equivalence on a smooth geometrically connected curve `C₀` over a finite field:
 
-- `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_shortExact` (blueprint
-  `definition-weil-representation--1`): `ℱ ↦ (ℱ_η̄, ρ_ℱ)` is an exact tensor equivalence
-  between lisse Weil sheaves on `C₀` and lisse representations of `W(C₀)`;
-- `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_globalSections_upperStar` (blueprint
-  `lemma-degree-zero-top-cohomology--1`): for a nonempty open `U₀ ⊆ C₀`,
-  `H⁰(U, ℱ|_U) = V ^ {π₁(U)}`, compatibly with the Frobenius.
+- `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_tensor_shortExact`: `ℱ ↦ (ℱ_η̄, ρ_ℱ)`
+is an exact tensor equivalence between lisse Weil sheaves on `C₀` and lisse representations of
+`W(C₀)`;
+- `AlgebraicGeometry.WeilGroup.exists_equivalence_isLisse_globalSections_upperStar`: for a
+nonempty open `U₀ ⊆ C₀`, `H⁰(U, ℱ|_U) = V ^ {π₁(U)}`, compatibly with the Frobenius.
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K
   [GeometricallyConnected (C ↘ Spec (.of K))] (W : WeilGroup (C ↘ Spec (.of K))) (l : ℕ)
   [Fact l.Prime] [Fact (ringChar K ≠ l)]
 
-/-- Blueprint `definition-weil-representation--1`: lisse Weil sheaves are lisse
-representations of the Weil group.
+/-- Lisse Weil sheaves are lisse representations of the Weil group.
 
 The functor `ℱ ↦ (ℱ_η̄, ρ_ℱ)` is an exact tensor equivalence between lisse Weil sheaves on `C₀`
 and the lisse representations of `W(C₀)`: there is an equivalence `e` which is, naturally in
@@ -72,8 +70,7 @@ theorem exists_equivalence_isLisse_tensor_shortExact :
   obtain ⟨M, B, e, η, τ, hτ, h1⟩ := W.exists_equivalence_isLisse_tensor l
   exact ⟨M, B, e, η, τ, hτ, h1, isLisse_shortExact_iff (e := e)⟩
 
-/-- Blueprint `lemma-degree-zero-top-cohomology--1`: global sections over an open subcurve are
-invariants.
+/-- Global sections over an open subcurve are invariants.
 
 There is an equivalence `e` between lisse Weil sheaves on `C₀` and lisse representations of
 `W(C₀)`, identifying the stalk of `ℱ` at every closed point `x` with `V = e ℱ`, Frobenius `F_x`

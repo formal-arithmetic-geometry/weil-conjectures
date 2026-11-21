@@ -47,8 +47,7 @@ variable {k M : Type*} [Field k] [CharZero k] [AddCommGroup M] [Module k M]
 
 /-- **Cartan's trace criterion.** Let `A` be a Lie algebra of endomorphisms of a
 finite-dimensional vector space `M` over a field of characteristic zero. If `tr (X Y) = 0` for all
-`X ∈ ⁅A, A⁆` and `Y ∈ A`, then `A` is solvable.
-(blueprint: `lemma-cartan-s-criterion--1`) -/
+`X ∈ ⁅A, A⁆` and `Y ∈ A`, then `A` is solvable. -/
 theorem isSolvable_of_trace_mul_eq_zero (A : LieSubalgebra k (Module.End k M))
     (h : ∀ X ∈ derivedSeries k A 1, ∀ Y : A,
       LinearMap.trace k M ((X : Module.End k M) * Y) = 0) :
@@ -81,8 +80,7 @@ variable (k L : Type*) [Field k] [CharZero k] [LieRing L] [LieAlgebra k L] [Modu
 
 /-- The Killing form of a finite-dimensional Lie algebra with trivial radical over a field of
 characteristic zero is non-degenerate. This is Cartan's criterion for semisimplicity,
-`LieAlgebra.HasTrivialRadical.instIsKilling`.
-(blueprint: `lemma-killing--1`) -/
+`LieAlgebra.HasTrivialRadical.instIsKilling`. -/
 theorem killingForm_nondegenerate [HasTrivialRadical k L] : (killingForm k L).Nondegenerate :=
   IsKilling.killingForm_nondegenerate k L
 

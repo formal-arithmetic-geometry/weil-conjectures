@@ -14,9 +14,7 @@ set_option linter.privateModule false
 /-!
 # The unit and Roos augmentation for canonical coefficient pullback
 
-Source: Stacks Tags 03D6 and 08TC; the regular-unit and Roos APIs in
-`WeilConjectures.SmoothPurity.Supporting.ConstantWeilStructure`.
-(blueprint: lem-pod-canonical-coefficient-pullback-reduction).
+Source: Stacks Tags 03D6 and 08TC.
 
 This module contains proved comparison results and private helpers for the coefficient comparison.
 -/

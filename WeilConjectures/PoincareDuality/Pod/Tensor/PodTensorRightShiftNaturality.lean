@@ -46,12 +46,7 @@ attribute [local irreducible] podTensorSignedShiftRightTower
   podTensorFiniteShiftRight integralOperationsTensorLevel
 
 /-- The fixed strict right tensor shift is natural on pairs of good complexes.
-Source: Stacks 011G and 07A4; finite signed tensor-shift naturality.
-(blueprint: lem-pod-tensor-right-shift-naturality).
-
-Proof: evaluate the naturality square at every tower level. Its components are
-the fixed finite comparisons, and the tower functor acts levelwise. Each square
-is therefore the corresponding finite-shift naturality equation. -/
+Source: Stacks 011G and 07A4. -/
 theorem podTensorSignedShiftRightTower_naturality (W : Scheme.{u})
     {P Q : (integralOperationsGoodComplex l E W).FullSubcategory ×
       (integralOperationsGoodComplex l E W).FullSubcategory} (f : P ⟶ Q) (r : ℤ) :
@@ -73,8 +68,7 @@ theorem podTensorSignedShiftRightTower_naturality (W : Scheme.{u})
     (Prod.mkHom f.1.hom f.2.hom) r).2
 
 /-- Package the fixed right strict shift as a natural isomorphism.
-Source: Stacks 011G and 07A4
-(blueprint: lem-pod-tensor-right-shift-naturality). -/
+Source: Stacks 011G and 07A4. -/
 def podTensorStrictShiftRightIso (W : Scheme.{u}) (r : ℤ) :
     ((𝟭 _).prod (podTensorGoodShiftFunctor l E W r)) ⋙
         podTensorTowerOnGood l E W ≅
@@ -83,8 +77,7 @@ def podTensorStrictShiftRightIso (W : Scheme.{u}) (r : ℤ) :
     (fun P ↦ podTensorSignedShiftRightTower l E W P.1 P.2 r)
     (fun f ↦ podTensorSignedShiftRightTower_naturality l E W f r)
 
-/-- The natural right comparison retains the specified strict tower map.
-Source: construction (blueprint: lem-pod-tensor-right-shift-naturality). -/
+/-- The natural right comparison retains the specified strict tower map. -/
 theorem podTensorStrictShiftRightIso_hom_app (W : Scheme.{u}) (r : ℤ)
     (P Q : (integralOperationsGoodComplex l E W).FullSubcategory) :
     (podTensorStrictShiftRightIso l E W r).hom.app (P, Q) =

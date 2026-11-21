@@ -30,8 +30,8 @@ Both proofs write `𝔸^{c+1}_B = 𝔸¹_{B'}` with `B' = 𝔸^c_B`
 composite of the zero sections of `𝔸^c_B` and of `𝔸¹_{B'}`, and the projection is the
 composite of the projections. The composition law for `R(-)^!`
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`) reduces each step to the
-affine line, where the input is `sk-prop-a1` (for clause (i)) and affine-line purity
-(`lemma-affine-space-etale-localization--1`, for clause (ii)). For clause (i) the twist pulled back
+affine line, where the input is `sk-prop-a1` (for clause (i)) and affine-line purity.
+For clause (i) the twist pulled back
 from `B'` is moved through `Rs'^!` by the co-projection formula for the closed immersion `s'`.
 
 ## Main statements
@@ -132,7 +132,7 @@ end Twists
 
 /-- Blueprint `proposition-purity-vector-bundles`, Step 1: twists pulled back from the base pass
 through the zero section `s : Y ↪ 𝔸¹_Y`. With `Λ(1 + m)[2(1 + m)] = Λ(1)[2] ⊗ Λ(m)[2m]`, the
-co-projection formula for the closed immersion `s` and `Rs^! Λ(1)[2] ≅ Λ_Y` (`sk-prop-a1`),
+co-projection formula for the closed immersion `s` and `Rs^! Λ(1)[2] ≅ Λ_Y`,
 
 `Rs^! Λ_{𝔸¹_Y}(1 + m)[2(1 + m)] ≅ Rs^! Λ(1)[2] ⊗ Ls^* Λ(m)[2m] ≅ Λ_Y(m)[2m]`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero_shiftTateObject
@@ -214,8 +214,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_succ (c : ℕ) (B :
           (show ((c + 1 : ℕ) : ℤ) = 1 + c by push_cast; ring))))⟩
 
 /-- The `Rz^!`-form of the model purity with the twisting object in place of the twisted
-constant complex: `Rz^! Λ(c)[2c] ≅ Λ_B`, by induction on `c` (`proposition-purity-vector-bundles`,
-Step 1). -/
+constant complex: `Rz^! Λ(c)[2c] ≅ Λ_B`, by induction on `c`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
     [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k] (c : ℕ)
     (B : Scheme.{u}) (aB : B ⟶ Spec (.of k)) [IsSeparated aB] [LocallyOfFiniteType aB]
@@ -243,7 +242,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineSpaceZero_shiftTateObject
     exact ⟨t ≪≫
       (R(AffineSpace.zeroSection (ULift.{u} (Fin c)) B)^![Λ]).mapIso w ≪≫ ih⟩
 
-/-- Blueprint `proposition-purity-vector-bundles`: `𝔸¹ ⇒ 𝔸ⁿ`: the model purity
+/-- `𝔸¹ ⇒ 𝔸ⁿ`: the model purity
 
 **(i) The `Rz^!`-form.** For the zero section `z : B ↪ 𝔸^c_B` of relative affine `c`-space,
 

@@ -44,12 +44,6 @@ set_option linter.privateModule false
 
 /-!
 # Completed scalar extension and cochain shifts
-
-Source: the blueprint of the Weil conjectures, `lemma-perfect-complexes-geometric-point`,
-final equivalence display (blueprint: lem-weil-point-completed-scalar-shift).
-The representative sign calculation uses Stacks Project Tags 011G, 014E and 08TC.
-The coordinates below are mapping-cocone coordinates: the first is detected by
-`mappingCocone.fst` and the second by `mappingCocone.snd`.
 -/
 
 @[expose] public section

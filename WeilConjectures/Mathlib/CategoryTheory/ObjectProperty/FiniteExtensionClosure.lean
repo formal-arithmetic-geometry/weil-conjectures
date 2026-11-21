@@ -10,8 +10,7 @@ public import Mathlib.CategoryTheory.Triangulated.Generators
 
 /-! # Finite extension presentations of thick envelopes
 
-Source: Stacks, Tags 0FX1 and 0FX2, and blueprint scalar-six-ctf (1).
-(blueprint: lem-sfb-thick-envelope-finite-extensions).
+Source: Stacks, Tags 0FX1 and 0FX2.
 -/
 
 @[expose] public section
@@ -28,16 +27,7 @@ variable {C : Type*} [Category C] [HasZeroObject C] [HasShift C ℤ] [Preadditiv
 /-- Finite sums and intermediate retracts in a thick envelope can be collected into
 finite extension products followed by one final retract.
 
-Source: Stacks, Tags 0FX1 and 0FX2; blueprint scalar-six-ctf (1), finite generators.
-(blueprint: lem-sfb-thick-envelope-finite-extensions).
-
-Proof: Let Q be the union of the retract closures of the iterated extension products
-of the shift closure of P. Retracts compose, and shifts preserve the same iteration.
-For an extension of objects in iterations p and q, the retract-extension lemma moves
-both splittings outside the triangle, and associativity gives iteration (p+1)+q.
-Thus Q is extension closed. A nonempty generator gives an object in Q; the rotation
-of its identity triangle gives zero in Q. Consequently Q is thick, and the universal
-property of the thick envelope gives the claimed inclusion. -/
+Source: Stacks, Tags 0FX1 and 0FX2. -/
 theorem triangEnvelope_le_finiteExtensions (P : ObjectProperty C) [P.Nonempty] :
     P.triangEnvelope ≤ fun K ↦ ∃ n : ℕ,
       ((P.shiftClosure ℤ).extensionProductIter n).retractClosure K := by

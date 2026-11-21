@@ -16,10 +16,6 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.Comp
 /-!
 # Exact kernel invariants and comparison of continuous cohomology
-
-Source: blueprint main-20261015, `lem-exc-dvr-galois.proof.md`, third paragraph;
-DAG proof steps 3--5 of `lem-exc-dvr-galois`.
-(blueprint: lem-exc-kernel-invariants-cohomology)
 -/
 
 @[expose] public section

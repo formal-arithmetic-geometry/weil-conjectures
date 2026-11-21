@@ -48,8 +48,7 @@ def tensorOppositeMatrixLift {R : Type*} [CommRing R] {n m : ℕ}
 /-- The matrix lift respects coefficient maps, multiplication, and scalar matrices.
 
 These are the elementary matrix identities used in the tensor-lift construction.
-Source: Mathlib matrix Kronecker and reindexing identities.
-(blueprint: lem-sc-tensor-opposite-matrix-properties). -/
+Source: Mathlib matrix Kronecker and reindexing identities. -/
 theorem tensorOppositeMatrixLift_properties {R S : Type*} [CommRing R] [CommRing S]
     {n m : ℕ} (f : R →+* S)
     (a a' : Matrix.GeneralLinearGroup (Fin n) R)
@@ -125,18 +124,7 @@ private def tensorBaseChangeEquiv (K S A B : Type*) [CommRing K] [CommRing S]
 
 /-- The tensor/opposite splitting has the conjugation datum of the explicit tensor lifts.
 
-Proof: commute scalar extension with the tensor product and with opposite algebras.
-Apply the two given matrix splittings, transpose the opposite of the second matrix
-algebra, and apply the Kronecker algebra equivalence. Reindex the product of the two
-finite index sets using finProdFinEquiv. On a pure tensor the coefficient action on
-its image is the Kronecker product of the coefficient actions on its two factors.
-Use the two conjugation hypotheses. Transposition reverses the second conjugation,
-so that its conjugator is the inverse transpose of the second lift. The Kronecker
-multiplication formula gives precisely conjugation by tensorOppositeMatrixLift.
-Extend from pure tensors by additivity and scalar linearity; coefficient automorphisms
-fix the base field, so this extension respects the tensor relations.
-Source: Stacks Project, Tag 03R7, tensor computation in the injectivity argument.
-(blueprint: lem-sc-tensor-opposite-matrix-conjugation). -/
+Source: Stacks Project, Tag 03R7, tensor computation in the injectivity argument. -/
 theorem exists_tensor_opposite_matrix_conjugation (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (n m : ℕ)
     (eA : (SeparableClosure K ⊗[K] A) ≃ₐ[SeparableClosure K]

@@ -14,7 +14,6 @@ import WeilConjectures.ProperBaseChange.IntegralCoefficientCompletenessTransport
 /-! # Coefficient comparison for augmented strict integral towers
 
 Source: Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 03EL and 099N(5).
-(blueprint: lem-weil-pbc-integral-coefficient-strict-tower-comparison).
 -/
 
 @[expose] public noncomputable section
@@ -120,16 +119,7 @@ private theorem sliceAugmentation_component
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
 
 /-- The canonical completed/ordinary coefficient comparison of augmented strict towers.
-Source: Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 03EL and 099N(5).
-(blueprint: lem-weil-pbc-integral-coefficient-strict-tower-comparison).
-
-Proof: the completed coefficient comparison and its finite-level versions commute with
-quotient projections. Scalar restriction along each coefficient isomorphism is an
-equivalence. The adjunction square for extension and restriction therefore gives an
-isomorphism between the two reductions preserving their tensor units. Lift it degreewise
-to cochain complexes. Quotient units are epimorphisms, so their normalization forces both
-tower-transition compatibility and naturality in the input complex. The resulting strict
-tower isomorphism satisfies the displayed degreewise augmentation formula. -/
+Source: Bhatt--Scholze Remark 6.8.15; Stacks 03D3, 03EL and 099N(5). -/
 theorem integralCoefficientStrictTowerComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (W : Scheme.{u}) :

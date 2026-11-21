@@ -133,8 +133,7 @@ namespace CategoryTheory.Presheaf
 /-- A presheaf `P` with values in a concrete category `A` whose forgetful functor preserves
 limits and reflects isomorphisms — for instance abelian groups or commutative rings — is a
 sheaf if and only if its underlying presheaf of sets `P ⋙ forget A` is a sheaf of sets. This
-is `CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget` for `s = forget A`.
-(blueprint: `situation-conventions`) -/
+is `CategoryTheory.Presheaf.isSheaf_iff_isSheaf_forget` for `s = forget A`. -/
 theorem isSheaf_iff_isSheaf_comp_forget {C : Type u₁} [Category.{v₁} C]
     (J : GrothendieckTopology C) {A : Type u₂} [Category.{max v₁ u₁} A] {FA : A → A → Type*}
     {CA : A → Type (max v₁ u₁)} [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory A FA]

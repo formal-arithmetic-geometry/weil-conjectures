@@ -12,8 +12,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindex.PodReindexDerivedFactors
 
 /-! # Exact derived-functor factors and the ordinary compositor
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-reindex-derived-pasting).
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -49,11 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Localization of three supplied chain maps with their defining equations.
-Source: blueprint Steps 1 and 5; Stacks 015F
-(blueprint: lem-pod-reindex-derived-pasting).
-Proof: substitute the supplied equations, move the first chain map past the
-second exact-functor factor by naturality, then apply factor composition and
-functoriality of localization to the supplied chain square. -/
+Source: Stacks 015F. -/
 theorem podReindexDerivedPastingMaps
     {C₀ C₁ C₂ : Type*} [Category C₀] [Category C₁] [Category C₂]
     [Abelian C₀] [Abelian C₁] [Abelian C₂]

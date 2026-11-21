@@ -133,8 +133,7 @@ lemma of_isPullback_of_mem_fpqcTopology {T Z : Scheme.{u}} {S : Sieve T}
 set_option backward.isDefEq.respectTransparency.types false in
 /-- **Descent of properties of morphisms along fpqc coverings**, for a covering family
 `{g i : T' i ⟶ T}`: if `P` is moreover stable under base change and the base changes `b i` of
-`f` along the `g i` have `P`, then `f` has `P`.
-(blueprint: `lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent`) -/
+`f` along the `g i` have `P`, then `f` has `P`. -/
 lemma of_isPullback_of_ofArrows_mem_fpqcTopology [P.IsStableUnderBaseChange] {T Z : Scheme.{u}}
     {ι : Type*} {T' : ι → Scheme.{u}} {g : ∀ i, T' i ⟶ T}
     (hg : Sieve.ofArrows T' g ∈ fpqcTopology T) (f : Z ⟶ T) {Z' : ι → Scheme.{u}}
@@ -314,9 +313,7 @@ lemma etaleTopology_le_fppfTopology : etaleTopology.{u} ≤ fppfTopology :=
 /-- **Zariski coverings are fppf coverings.** A family of open immersions covering a scheme `T` is
 an fppf covering of `T`: open immersions are flat and locally of finite presentation (on the level
 of covering families this is Mathlib's `zariskiPrecoverage_le_fppfPrecoverage`), so every Zariski
-covering sieve is an fppf covering sieve.
-
-(blueprint: `lem-pc-zariski-coverings-are-fppf`) -/
+covering sieve is an fppf covering sieve. -/
 lemma zariskiTopology_le_fppfTopology : zariskiTopology.{u} ≤ fppfTopology :=
   Precoverage.toGrothendieck_mono zariskiPrecoverage_le_fppfPrecoverage
 

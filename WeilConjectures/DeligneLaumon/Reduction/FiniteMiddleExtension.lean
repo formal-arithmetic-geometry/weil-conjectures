@@ -24,8 +24,8 @@ public import WeilConjectures.WeilSheaf.MiddleExtension
 Let `C` be a smooth affine curve over `k₀`, not necessarily geometrically connected, let
 `f : C ⟶ 𝔸¹_{k₀}` be a finite morphism over `k₀` and `E` a lisse Weil sheaf on `C`. By generic
 lissity `f_* E` is lisse on a dense open `j : V ⟶ 𝔸¹`. The preimage `f⁻¹V` is dense in `C`
-because `C` has no isolated points, so `E ≅ j'_* j'^* E` for the inclusion `j' : f⁻¹V ⟶ C`
-(blueprint: `lemma-boundary-stalk--2`), and with `f' : f⁻¹V ⟶ V` the restriction of `f`,
+because `C` has no isolated points, so `E ≅ j'_* j'^* E` for the inclusion `j' : f⁻¹V ⟶ C`,
+and with `f' : f⁻¹V ⟶ V` the restriction of `f`,
 
 `f_* E ≅ f_* j'_* j'^* E ≅ (f ∘ j')_* j'^* E = (j ∘ f')_* j'^* E ≅ j_* f'_* j'^* E`.
 
@@ -141,7 +141,7 @@ noncomputable def lowerStarCongrObjIso {φ φ' : X ⟶ Y} (h : φ = φ')
   exact Iso.refl _
 
 /-- For a proper morphism `φ` the degree-zero direct image with compact support `R⁰φ₀! F` is
-the direct image `φ_* F` (blueprint: `prop-functor-package`, clause 3). -/
+the direct image `φ_* F`. -/
 noncomputable def higherLowerShriekZeroObjIsoLowerStar (φ : X ⟶ Y)
     [φ.IsOver (Spec (CommRingCat.of k₀))] [IsProper φ]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
@@ -157,8 +157,7 @@ Let `C` be a smooth affine curve over `k₀`, `f : C ⟶ 𝔸¹_{k₀}` a finite
 a lisse Weil sheaf on `C`. There are a dense open `V ⊆ 𝔸¹` and a lisse Weil sheaf `H` on `V` with
 `f_* E ≅ j_* H` for the inclusion `j : V ⟶ 𝔸¹`; if `E` is punctually `ι`-pure of weight `w`, then
 so is `H`. Here `V` is a lisse locus of `f_* E`, and `H = f'_* j'^* E` for the restriction
-`f' : f⁻¹V ⟶ V` of `f` and the inclusion `j' : f⁻¹V ⟶ C`, using `E ≅ j'_* j'^* E`
-(blueprint: `lemma-boundary-stalk--2`). -/
+`f' : f⁻¹V ⟶ V` of `f` and the inclusion `j' : f⁻¹V ⟶ C`, using `E ≅ j'_* j'^* E`. -/
 theorem exists_lowerStar_iso_directImage_of_isFinite {C : Scheme.{u}}
     [C.Over (Spec (CommRingCat.of k₀))] [IsAffine C]
     [SmoothOfRelativeDimension 1 (C ↘ Spec (CommRingCat.of k₀))]

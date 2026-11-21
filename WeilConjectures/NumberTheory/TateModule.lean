@@ -61,10 +61,9 @@ vectors, so the arithmetic and the geometric Frobenius give the same statement. 
 `M = A₀(k)` with `σ` the arithmetic Frobenius, the hypothesis `hfin` says that the fixed subgroup
 `A^σ = A₀(k₀)` is finite, which is the only input the geometric proof uses.
 
-Proof (blueprint `proposition-no-frobenius-fixed-vector`): all `t n` lie in the finite group `M^σ`,
+Proof: all `t n` lie in the finite group `M^σ`,
 of order `N` say; the order of `t (n + N)` is a power `ℓ ^ j` of `ℓ` dividing `N`, so `j ≤ N` and
-`t n = ℓ ^ N • t (n + N) = 0`.
-(blueprint: `proposition-no-frobenius-fixed-vector`) -/
+`t n = ℓ ^ N • t (n + N) = 0`. -/
 theorem eq_zero_of_mem_tateModule_of_forall_fixed {l : ℕ} [Fact l.Prime] {M : Type*}
     [AddCommGroup M] (s : M ≃+ M) (hfin : {x : M | s x = x}.Finite) {t : ℕ → M}
     (ht : t ∈ tateModule l M) (hst : ∀ n, s (t n) = t n) : t = 0 := by
@@ -104,8 +103,8 @@ theorem eq_zero_of_mem_tateModule_of_forall_symm_fixed {l : ℕ} [Fact l.Prime] 
 
 namespace rationalTateModule
 
-/-- Blueprint `proposition-no-frobenius-fixed-vector`: an automorphism `σ` of an abelian group `M`
-whose fixed subgroup is finite fixes no nonzero vector of the rational Tate module `V_ℓ M`.
+/-- An automorphism `σ` of an abelian group `M` whose fixed subgroup is finite fixes no nonzero
+vector of the rational Tate module `V_ℓ M`.
 
 Write `v = ℓ ^ {-b} t` with `t ∈ T_ℓ M`; since `T_ℓ M → V_ℓ M` is injective, `σ t = t`, so
 `t = 0` by `AddCommGroup.eq_zero_of_mem_tateModule_of_forall_fixed`. -/
@@ -147,8 +146,7 @@ used). The group
 the `ℓ`-th power maps, and `ℤ_ℓ(1)` is the group of compatible systems `(u n)` with
 `u n ∈ μ_{ℓ^n}(K)` and `u (n + 1) ^ ℓ = u n`: that is, the Tate module of the abelian group
 `Kˣ`, written additively. The rational cyclotomic Tate module `ℚ_ℓ(1)` is the localisation
-`ℤ_ℓ(1)[1/ℓ]`; it is not defined separately here.
-(blueprint: `definition-tate-twists--8`) -/
+`ℤ_ℓ(1)[1/ℓ]`; it is not defined separately here. -/
 def cyclotomicTateModule (K : Type*) [CommMonoid K] (l : ℕ) [Fact l.Prime] :
     AddSubgroup (ℕ → Additive Kˣ) :=
   AddCommGroup.tateModule l (Additive Kˣ)

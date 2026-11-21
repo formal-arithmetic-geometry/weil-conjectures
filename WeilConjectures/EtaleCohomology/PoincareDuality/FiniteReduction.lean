@@ -13,13 +13,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.PoincareReduction
 Let `Λ, Λ'` be coefficient rings, for instance `A_n = 𝒪_E/ϖⁿ` and `A_m = 𝒪_E/ϖᵐ` with
 `m ≤ n`, and let `G : D(Y, Λ) ⥤ D(Y, Λ')` be a lax monoidal change of coefficients, such as the
 derived reduction `K ↦ K ⊗ᴸ_{A_n} A_m`. The finite reduction of the Poincaré pairing
-(blueprint `theorem-poincare-duality--9`,
-`AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp`) assumes that the reduction of the
+ assumes that the reduction of the
 derived Poincaré pairing `β_{K_n}` is the pairing `β_{K_m}` of the reduction. This file reduces
 that hypothesis to the constituent squares of the blueprint proof: the reduction of the cup
-product, evaluation and shift part of the pairing
-(`proposition-six-operations-change-coefficients`), and of the orientation and of the counit of
-`Ra_! ⊣ Ra^!` (`proposition-compatibility-purity-change-coefficients`).
+product, evaluation and shift part of the pairing,
+and of the orientation and of the counit of
+`Ra_! ⊣ Ra^!`.
 
 ## Main statements
 
@@ -132,7 +131,7 @@ of coefficients on the base (for instance `- ⊗ᴸ_{A_n} A_m`), `K ∈ D(X, A)`
 support) and `c_Y : G(Ra_*(K^∨ ⊗ᴸ T)[2d]) ⟶ Ra_*(K'^∨ ⊗ᴸ T')[2d]` (ordinary global sections).
 If the cup product, evaluation and shift part of the pairing reduces (`hE`,
 `proposition-six-operations-change-coefficients`), and so do the orientation (`hγ`) and the counit
-(`hS`) (`proposition-compatibility-purity-change-coefficients`), then `G(β_K)` is `β_{K'}` read
+(`hS`), then `G(β_K)` is `β_{K'}` read
 through `c_X`, `c_Y` and `e`. This is the hypothesis of the finite reduction
 `AlgebraicGeometry.Etale.map_inv_curry_poincarePairing_comp`. -/
 theorem map_poincarePairing (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A')) (G : 𝐃(Y, A) ⥤ 𝐃(Y, A'))

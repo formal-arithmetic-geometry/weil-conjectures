@@ -19,7 +19,7 @@ invariant `ℱ = Ls̃^* ω_{g̃}` of the pair `(g̃, s̃)`
 deformation space of a section constructed in
 `WeilConjectures.AlgebraicGeometry.DeformationToNormalCone` it is pulled back from the base over
 the punctured line, and constant for the standard pair: this is smooth base change for `R^!`
-(`proposition-exceptional-inverse-image-smooth-morphism` (c)) applied to the cartesian squares of
+ applied to the cartesian squares of
 the deformation.
 
 ## Main statements

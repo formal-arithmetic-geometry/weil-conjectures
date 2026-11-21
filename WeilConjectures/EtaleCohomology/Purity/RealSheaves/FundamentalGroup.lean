@@ -56,8 +56,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 namespace WeilGroup
 
 open Scheme.FiniteEtale in
-/-- Blueprint `situation-weil`: the Weil group of a curve, its link with the étale
-fundamental group.
+/-- The Weil group of a curve, its link with the étale fundamental group.
 
 An identification of the geometric part `W.geometric = ker deg` of a Weil group with the étale
 fundamental group of the geometric curve `C = C₀ ×_K K̄`, compatible with the Frobenius. It
@@ -105,8 +104,7 @@ attribute [instance] EtaleQuotientData.group
   EtaleQuotientData.compactSpace EtaleQuotientData.mulAction
   EtaleQuotientData.isFundamentalGroup
 
-/-- Blueprint `situation-weil`: the Weil group of a curve, its link with the étale
-fundamental group.
+/-- The Weil group of a curve, its link with the étale fundamental group.
 
 The geometric part of the Weil group `W` is, Frobenius-equivariantly, the étale fundamental
 group of the geometric curve (`AlgebraicGeometry.WeilGroup.EtaleQuotientData`). -/
@@ -158,13 +156,13 @@ theorem conj_invariant_of_conj_invariant_frobeniusLift {A : Type*} [CommGroup A]
     group
   rw [hh, map_mul, map_mul, map_inv, mul_inv_cancel_comm, hpow n g k rfl]
 
-/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: the cohomological step.
+/-- The cohomological step.
 
 Let `W` be the Weil group of a smooth geometrically connected curve `C₀ / 𝔽_q`, linked to the
 étale fundamental group (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`), and `ℓ ≠ char 𝔽_q`.
 A continuous homomorphism `b : π₁(C) → ℤ_ℓ` invariant under conjugation by the Frobenius lift
 is trivial. Its reductions modulo `ℓⁿ` are classes in `H¹(C, ℤ / ℓⁿ) = Hom_cont(π₁(C), ℤ / ℓⁿ)`
-(blueprints `lemma-invariant-additive-characters`) which are fixed
+ which are fixed
 by the Frobenius and compatible in `n`; by blueprint `proposition-no-fixed-class-degree-one--1`
 they vanish. -/
 theorem eq_one_of_conj_invariant [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]

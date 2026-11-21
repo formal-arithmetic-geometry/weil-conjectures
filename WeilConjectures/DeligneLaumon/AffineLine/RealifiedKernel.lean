@@ -33,8 +33,8 @@ under complex conjugation: `𝒦` is `ι`-real.
 ## Main declarations
 
 - `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.realifiedKernel`: the realified kernel.
-- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isReal_realifiedKernel`
-  (`lemma-twisted-envelope--1`): it is `ι`-real.
+- `AlgebraicGeometry.WeilSheaf.LisseOnDenseOpen.isReal_realifiedKernel`:
+it is `ι`-real.
 - `AlgebraicGeometry.WeilSheaf.exists_trace_frobeniusEnd_pow_stalk_fourierKernelTensor`: the
   traces of the local Frobenius of `𝒦_ψ ⊗ pr₁^* F` are `ψ(c) ^ (r n) tr (Fₓ ^ (e n))`.
 - `WeilSheaf.IsPunctuallyPureOfWeight.map_trace_frobeniusEnd_pow_stalk_constantTwist_dual`:
@@ -162,7 +162,7 @@ noncomputable def twistedDual (D : LisseOnDenseOpen k₀ l) (b : (PadicAlgCl l)�
     lisse := isLisse_constantTwist.2 (D.lisse.dual) }
 
 /-- The *realified kernel* `pr₁^*(j_!M) ⊗ 𝒦_ψ ⊕ pr₁^*(j_!M†) ⊗ 𝒦_{ψ⁻¹}` on the Fourier square,
-`M† = M^∨ ⊗ 𝓑_b` being the twisted dual. (blueprint: `lemma-twisted-envelope--1`) -/
+`M† = M^∨ ⊗ 𝓑_b` being the twisted dual. -/
 noncomputable def realifiedKernel (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseOnDenseOpen k₀ l)
     (b : (PadicAlgCl l)ˣ) : WeilSheaf k₀ l (affinePlane k₀) :=
   fourierKernelTensor ψ D.extensionByZero ⊞
@@ -170,8 +170,7 @@ noncomputable def realifiedKernel (ψ : AddChar k₀ (PadicAlgCl l)) (D : LisseO
 
 /-- **The twisted dual has the conjugate traces.** If `M` is punctually `ι`-pure of weight `w`
 and `ι b = q ^ w`, then at every closed point `x` of the line the traces of the powers of the
-local Frobenius of `j_!M† = j_!(M^∨ ⊗ 𝓑_b)` are the complex conjugates of those of `j_!M`.
-(blueprint: `lemma-twisted-envelope--1`, step 1) -/
+local Frobenius of `j_!M† = j_!(M^∨ ⊗ 𝓑_b)` are the complex conjugates of those of `j_!M`. -/
 theorem map_trace_frobeniusEnd_pow_stalk_extensionByZero_twistedDual
     (ι : PadicAlgCl l →+* ℂ) (D : LisseOnDenseOpen k₀ l) {w : ℝ}
     (hw : D.sheaf.IsPunctuallyPureOfWeight ι w) {b : (PadicAlgCl l)ˣ}
@@ -204,7 +203,7 @@ theorem map_trace_frobeniusEnd_pow_stalk_extensionByZero_twistedDual
 /-- **The realified kernel is `ι`-real.** If `M` is punctually `ι`-pure of weight `w` and
 `ι b = q ^ w`, then the realified kernel `pr₁^*(j_!M) ⊗ 𝒦_ψ ⊕ pr₁^*(j_!M†) ⊗ 𝒦_{ψ⁻¹}` is
 `ι`-real: at every closed point its local eigenvalues are stable under complex conjugation.
-Only the purity of `M` is used. (blueprint: `lemma-twisted-envelope--1`) -/
+Only the purity of `M` is used. -/
 theorem isReal_realifiedKernel (ψ : AddChar k₀ (PadicAlgCl l)) (ι : PadicAlgCl l →+* ℂ)
     (D : LisseOnDenseOpen k₀ l) {w : ℝ} (hw : D.sheaf.IsPunctuallyPureOfWeight ι w)
     {b : (PadicAlgCl l)ˣ} (hb : ι b = (((Nat.card k₀ : ℝ) ^ w : ℝ) : ℂ)) :

@@ -29,8 +29,7 @@ algebraically closed one) and let `n` be invertible in `k`. Then `xⁿ - 1` has 
 distinct roots in `k`, and there is a primitive `n`-th root of unity `ζ ∈ k`. Its image in any
 field extension `k → K` is again a primitive `n`-th root of unity, which is the compatibility of
 the trivialization `θ_ζ` (`IsPrimitiveRoot.zmodAddEquivRootsOfUnity`) with extension of the base
-field.
-(blueprint: `lem-sc-primitive-root`) -/
+field. -/
 theorem IsSepClosed.exists_isPrimitiveRoot (k : Type*) [Field k] [IsSepClosed k] (n : ℕ)
     [NeZero (n : k)] :
     (nthRoots n (1 : k)).Nodup ∧ (nthRootsFinset n (1 : k)).card = n ∧

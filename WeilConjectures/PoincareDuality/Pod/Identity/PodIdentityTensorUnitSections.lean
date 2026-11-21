@@ -10,8 +10,7 @@ import all WeilConjectures.SmoothPurity.Integral.Reduction.IntegralReductionTowe
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 and 0941.
+Source: Stacks 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -135,15 +134,7 @@ private theorem total_unit_restrict (W : Scheme.{u}) (n : ℕ)
       (reduction_section_restrict l E W n (Q.X q) f y))
 
 /-- Ordinary identity relabelling preserves total tensors of unit reduction sections.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 07A4 and 0941 (blueprint: lem-pod-identity-tensor-unit-sections).
-
-Proof: the given section equation for ordinary identity relabelling is restriction
-along Over.mapId. Naturality of the reduction sheafification unit sends 1 tensor x
-to 1 tensor the restriction of x, since restriction preserves one. Naturality of
-the tensor sheafification unit and of the total-summand injection sends a total
-pure tensor to the total tensor of its restrictions. Combining these equations
-with the section equation gives the result in every pair of degrees. -/
+Source: Stacks 07A4 and 0941. -/
 theorem podIdentityTensorUnitSections (W : Scheme.{u}) (n : ℕ)
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (p q : ℤ) (U : W.ProEt)
     (a : isoReductionIntegralInverse l E (𝟙 W) ≅ 𝟭 _)

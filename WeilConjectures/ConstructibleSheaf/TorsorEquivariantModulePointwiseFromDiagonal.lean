@@ -14,7 +14,6 @@ import WeilConjectures.ConstructibleSheaf.TorsorDiagonalEvaluationBijective
 # Propagation of diagonal formulas
 
 Source: Stacks Project, Tags 0DV5 (3), 0DV6, 04TR and 04TS.
-(blueprint: lem-weil-pbc-torsor-equivariant-module-pointwise-from-diagonal)
 -/
 
 @[expose] public section
@@ -26,25 +25,8 @@ namespace AlgebraicGeometry.Scheme.GaloisCover
 
 /-- A uniform linear formula on diagonal values over the torsor propagates to
 all etale objects by naturality. Connectedness is not needed for propagation.
-Source: Stacks Project, etale-cohomology.tex Tags 0DV5 (3), 0DV6 (context);
-sites.tex Tags 04TR and 04TS (descent context).
-(blueprint: lem-weil-pbc-torsor-equivariant-module-pointwise-from-diagonal)
-
-Proof: Fix W, s and a point x of T = W times_V c.P, with projections a0
-and b0. Diagonal evaluation is surjective, so choose q over the torsor whose
-value at the diagonal of b0(x) is s(x). Pull its diagonal values back to T
-along b0. Intersect the open fibers of this locally constant function and s
-at s(x); the resulting open O contains x. Regard O first as an etale object B
-over c.P, then as U over V. Its maps a to W and b to c.P define a graph k
-into U times_V c.P. Pullback identities show that restriction along a on
-this graph is O's inclusion into T, and restriction along b is the diagonal
-of b. The two restricted sections thus have equal graph values on O.
-Injectivity of diagonalEvaluation on B identifies the restrictions. Naturality
-of eta along a and b, evaluated at k(x), identifies eta_W(s)(x) with the
-value of eta_torsor(q) at the diagonal of b0(x). The hypothesis hf and the
-chosen diagonal value of q give eta_W(s)(x) = f(s(x)). The witness q is used
-only in this proof. Empty W gives a vacuous conclusion; the trivial group
-and zero coefficients satisfy the same argument. -/
+Source: Stacks Project, etale-cohomology.tex Tags 0DV5 (3), 0DV6 (context); sites.tex Tags 04TR
+and 04TS (descent context). -/
 theorem equivariantModulePresheaf_pointwise_of_diagonal
     {V : Scheme.{u}} (ℓ : ℕ) {P : Type u} [Group P] [Finite P]
     (c : Scheme.GaloisCover (ULift.{u + 1} P) V)

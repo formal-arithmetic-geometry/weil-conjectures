@@ -15,7 +15,6 @@ The restricted-scalars theorem below is the single retained implementation;
 the companion compatibility module only imports this declaration.
 
 Source: Stacks Project, Tags 04TR, 04TS and 0DV5 (3).
-(blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
 -/
 
 @[expose] public section
@@ -104,24 +103,6 @@ private theorem equivarianceSubfunctor_isSheaf
 Equivariant locally constant functions satisfy etale sheaf gluing before
 sheafification, including after transport of the coefficient ring.
 Source: Stacks Project, Tags 04TR, 04TS and 0DV5 (3).
-(blueprint: lem-weil-pbc-torsor-equivariant-presheaf-sheaf)
-
-Proof:
-Let an etale covering family of W and a compatible family of equivariant locally
-constant functions on its pullbacks of the torsor be given. Base change gives an
-etale surjective covering family of W times_V Y. A compatible locally constant
-function glues uniquely on an etale cover: choose its value at a lift of each point.
-Two lifts have a common lift on the fiber product after a residue field extension,
-so compatibility makes the value independent of this choice. The etale covering
-maps are open, hence the glued function is locally constant. The equivariance
-identity holds after restriction to the covering family, and therefore holds
-pointwise for the glued function. Thus gluing lands in the equivariant submodule.
-Uniqueness also follows on that cover. Addition and scalar multiplication glue
-pointwise, proving the module-valued sheaf condition. Restricting scalars along
-ULift.ringEquiv preserves this condition since its underlying sets and maps are
-unchanged. Empty covering objects and the zero module satisfy the same argument.
-
-(blueprint: lem-weil-pbc-torsor-equivariant-module-is-sheaf)
 -/
 theorem Scheme.GaloisCover.equivariantModulePresheaf_isSheaf
     {V : Scheme.{u}} (ℓ : ℕ) (P : Type u) [Group P] [Finite P]

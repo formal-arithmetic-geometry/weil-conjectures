@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.PodReindexingCoherence.PodReindexi
 
 /-! # Reindexing square for supplied signed chain shifts
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA
-(blueprint: new-pod-reindexing-chain-shift-square).
+Source: Stacks 0A8X, 08JA.
 -/
 
 @[expose] public noncomputable section
@@ -123,8 +122,7 @@ extensionality then gives the displayed equality of chain morphisms.  This is
 strictly smaller than the existence theorem because the two shift structures
 are fixed as hypotheses.
 
-Source: blueprint dual-Tate compatibility, Step 4; Stacks 0A8X, 08JA.
-(blueprint: new-pod-reindexing-chain-shift-square). -/
+Source: Stacks 0A8X, 08JA. -/
 theorem chain_shift_reindexing_square
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

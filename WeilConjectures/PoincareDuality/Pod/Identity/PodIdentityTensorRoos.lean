@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.Pod.Identity.PodIdentityRoosMap
 
 /-! # Compatibility of normalized ordinary reindexing
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4 and 0941.
+Source: Stacks 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -45,14 +44,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] integralOperationsTensorTowerFunctor integralOperationsRoos
 attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
 
-/-- The strict tensor-tower identity determines the identity on its whole Roos complex.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5
-(blueprint: lem-pod-identity-tensor-roos).
-
-Proof: the strict tensor-tower equation and functoriality identify the tower-map
-part of the composite. Apply the proved generic Roos identity, using the two
-coordinate formulas of the completion datum. This identifies the entire cochain
-map, including its shifted coordinate. -/
+/-- The strict tensor-tower identity determines the identity on its whole Roos complex. -/
 theorem podIdentityTensorRoos
     (W : Scheme.{u}) [∀ w : W, Invertible (l : W.residueField w)]
     (D : PodCompletionReindex l E (𝟙 W))

@@ -16,8 +16,7 @@ import Mathlib.RingTheory.Flat.Basic
 # Descent of finite purely inseparable field extensions
 
 Source: Stacks Project, Tag 07QG, the finite purely inseparable extension asserted in its proof;
-Tag 09HE for purely inseparable extensions
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
+Tag 09HE for purely inseparable extensions.
 -/
 
 @[expose] public section
@@ -31,23 +30,7 @@ open scoped TensorProduct
 namespace Algebra.TensorProduct
 
 /-- A finite purely inseparable field extension descends along extension of scalars.
-Source: Stacks Project, Tag 07QG (implicit in its proof), and Tag 09HE
-(blueprint: theorem-finite-etale-covers-proper-henselian--2).
-
-Proof:
-1. Mathlib's `Module.finrank_baseChange` gives the finrank equality. The tensor
-   product is nontrivial and finite dimensional, so its finrank is positive;
-   the equality and `Module.finite_of_finrank_pos` give finiteness of `B`.
-2. `includeRight_injective` embeds `B` into the tensor-product field. Therefore
-   `B` is a domain, and `fieldOfFiniteDimensional K B` makes it a field.
-3. Choose a `K`-linear functional `f : L →ₗ[K] K` with `f 1 = 1` using
-   `Module.Projective.exists_dual_eq_one`. Tensoring `f` with the identity and
-   applying `TensorProduct.lid` gives a map sending `l ⊗ b` to `f l • b`.
-4. Choose the exponential characteristic `q` of `K`, also that of `L`.
-   Pure inseparability gives `(1 ⊗ b)^(q^n) = l ⊗ 1`. Apply the linear map
-   from step 3 to obtain `b^(q^n) = f l • 1`, in the image of `K`.
-   `isPurelyInseparable_iff_pow_mem` proves the remaining conclusion. For
-   characteristic zero, `q = 1`, so the same argument applies. -/
+Source: Stacks Project, Tag 07QG (implicit in its proof), and Tag 09HE. -/
 theorem finite_purelyInseparable_of_tensorProduct
     (K : Type u) (L : Type v) (B : Type w)
     [Field K] [Field L] [Algebra K L] [CommRing B] [Algebra K B]

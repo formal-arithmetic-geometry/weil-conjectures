@@ -20,9 +20,7 @@ the derived extension of scalars). We show that a monoidal change of coefficient
 section invariant construction `Ls^* ω ≅ Ls^* T`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfRightDerivedUpperShriekIso`), which is the
 hypothesis `hL` of
-`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`
-(blueprint `proposition-relative-dualizing-complex--1`,
-`proposition-compatibility-purity-change-coefficients`).
+`AlgebraicGeometry.Etale.SupportedCoefficientChange.map_dualizingComplexTwistShiftIso`.
 
 ## Main definitions
 
@@ -119,8 +117,7 @@ end TensorMap
 variable (Λ Λ' : Type (u + 1)) [CommRing Λ] [Finite Λ] [CommRing Λ'] [Finite Λ']
   [HasTateTwist Λ] [HasTateTwist Λ']
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
+/-- Change of coefficients in purity
 
 A *monoidal* change of coefficients: a change of coefficients with comparisons with `Le^*`,
 `Ri_!` and `Ri^!` (`AlgebraicGeometry.Etale.SupportedCoefficientChange`) together with natural
@@ -261,8 +258,7 @@ lemma map_rightDerivedUpperShriekTensorMap_comp {M N : 𝐃(V, Λ)} {M' N' : �
     ← rightDerivedUpperShriekTensorMap_naturality_left_assoc,
     ← rightDerivedUpperShriekTensorMap_naturality_right, NatTrans.naturality_assoc]
 
-/-- Blueprint `proposition-compatibility-purity-change-coefficients`: change of coefficients in
-purity
+/-- Change of coefficients in purity
 
 **A monoidal change of coefficients preserves the section invariant construction.** For a
 closed immersion `s : B ⟶ V`, identifications `vω : Ψ ω ≅ ω'`, `vT : Ψ T ≅ T'` of invertible

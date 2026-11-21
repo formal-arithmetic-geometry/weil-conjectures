@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.OpenDvrRingedI
 
 /-! Quasi-compact open extension preserves derived completeness.
 Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J.
-(blueprint: lem-qcqs-compact-support-image-complete-open).
 -/
 
 @[expose] public noncomputable section
@@ -43,12 +42,7 @@ set_option linter.unusedSectionVars false in
 /-- The completed extension by a quasi-compact open immersion preserves the
 completion unit. This is the open factor of the proper/open compact-support
 completeness argument.
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J.
-Proof: transport the completion unit through the normalized quotient tower for
-quasi-compact open extension. Exactness and preservation of countable products
-identify the target Roos triangle with the image of the source triangle, and the
-unit equation then gives the required derived completeness.
-(blueprint: lem-qcqs-compact-support-image-complete-open). -/
+Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.1.13; Stacks Tags 0E8I and 0F7J. -/
 theorem sfQcqsCompactSupport_open_complete
     (K : sfIntegralConstructibleCategory l E X) :
     IsSfDerivedComplete l E c.Z

@@ -12,8 +12,6 @@ import WeilConjectures.FourierTransform.FdRawLocalization.FdRawNormalizedCompari
 import WeilConjectures.FourierTransform.FdRawLocalization.FdRawNormalizedComparisonCoherence
 
 /-! # Descent of the fixed integral scalar comparison
-
-Source: trace-definition coefficient-category sentence, raw localization steps 1--3.
 -/
 
 @[expose] public noncomputable section
@@ -115,28 +113,7 @@ private theorem comparison_exists {E L : Padic.FiniteCoefficientFields l Ω} (h 
     ((suppliedFamily l Ω T stage).identity E).symm e
 
 set_option linter.unusedVariables false in
-/-- Localization of the fixed inverse integral comparison, before four-field contraction.
-Source: trace-definition final coefficient-category sentence, raw localization argument,
-steps 1--3 of lem-fd-raw-localization-scalar-coherence
-(blueprint: lem-fd-raw-localization-scalar-descent).
-
-Proof: Ordinary tensor extension and strict-tower extension are semilinear for the
-coefficient inclusion. The source uniformizer is nonzero in the final field, hence
-invertible there. Apply semilinear scalar localization to the hom and inverse of b.
-The tensor formula and the supplied stage comparison identify the localized functors
-with S followed by J, and J followed by P. On integral objects the component is
-Q(b inverse) followed by the inverse of pbcScalarIntegralComparison, exactly as
-stated. Integral naturality on pure tensors and additivity give naturality on every
-rational arrow. The localized inverse equations give an isomorphism; the specified
-shift squares and integral exactness give its shift compatibility and exactness.
-Localize hcocycle over its final field. Preservation of composition and whiskering,
-and the tensor-normalized integral-to-rational associator comparisons, give the
-three-field equation. Localizing hunit gives the displayed identity value. Substitute
-an identity extension in hcocycle in each position and use the two specified scalar
-unit laws to obtain the two unit equations. Completeness is retained through its
-actual unit, never replaced by an identity. All arguments allow repeated fields,
-the zero object and the empty scheme; no strict inclusion or faithful localization
-is required. This statement contains no four-field compatibility assertion. -/
+/-- Localization of the fixed inverse integral comparison, before four-field contraction. -/
 theorem rawLocalizationScalarDescent
     (_D : FiniteFieldDatum.{d}) (_hl : l ≠ _D.p)
     (hI : ∀ E : Padic.FiniteCoefficientFields l Ω, (I l Ω T stage E).IsTriangulated)

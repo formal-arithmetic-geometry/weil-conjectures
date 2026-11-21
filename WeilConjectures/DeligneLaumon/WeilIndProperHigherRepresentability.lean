@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusEx
 /-! # Higher proper images of represented ind-sheaves
 
 Source: SGA 4, XVII, §5; Bhatt--Scholze, §6.7--6.8.
-(blueprint: lem-zl-ind-proper-higher-representability).
 -/
 
 @[expose] public noncomputable section

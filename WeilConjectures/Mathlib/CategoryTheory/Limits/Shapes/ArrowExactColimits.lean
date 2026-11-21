@@ -9,9 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Mathlib.CategoryTheory.Limits.Comma
 
-/-! # Kernels and cokernels commute with exact colimits
-Source: blueprint proposition-ind-constructible-sheaves, final paragraph.
-(blueprint: lem-sfb-arrow-exact-colimits) -/
+/-! # Kernels and cokernels commute with exact colimits -/
 
 @[expose] public section
 
@@ -25,19 +23,7 @@ namespace CategoryTheory.Limits
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Kernels and cokernels of diagrams of arrows commute with exact colimits.
-Source: blueprint sk-prop-ind-heart-kernels-cokernels.proof.md, final paragraph.
-(blueprint: lem-sfb-arrow-exact-colimits)
-
-Proof: write a diagram of arrows as a natural transformation between its source and
- target diagrams. Its pointwise kernel is a kernel in the functor category, by the
- pointwise limit universal property. Exactness of colimits says that the colimit
- functor preserves that kernel. The source and target colimit universal properties
- identify the colimit arrow, and the resulting kernel comparison is the canonical
- comparison on every leg. Thus ker maps any colimit cocone to a colimit cocone.
- For cokernels, the same argument uses the pointwise cokernel and the fact that
- colimits preserve colimits. No filteredness or smallness beyond existence and
- exactness of the specified colimits is needed. -/
+/-- Kernels and cokernels of diagrams of arrows commute with exact colimits. -/
 theorem arrow_exact_colimits (M : Type u) [Category.{v} M] [Abelian M]
     (J : Type j) [Category.{h} J] [HasColimitsOfShape J M]
     [HasExactColimitsOfShape J M] :

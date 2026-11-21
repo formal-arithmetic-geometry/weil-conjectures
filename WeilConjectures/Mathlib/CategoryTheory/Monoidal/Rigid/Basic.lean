@@ -367,8 +367,7 @@ lemma ihomTensorToIhom_comp_ihomCurry (K A Z N : C) :
   rw [key, whiskerLeft_curry_ihom_ev_app]
   monoidal
 
-/-- Blueprint `theorem-poincare-duality--2`: Internal Hom with an invertible twist (the
-categorical core).
+/-- Internal Hom with an invertible twist (the categorical core).
 
 In a monoidal closed category, for every invertible object `N` the canonical map
 `(ihom X).obj Z ⊗ N ⟶ (ihom X).obj (Z ⊗ N)` is an isomorphism, for all `X` and `Z`. Since

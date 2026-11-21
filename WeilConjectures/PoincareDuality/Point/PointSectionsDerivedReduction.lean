@@ -10,8 +10,7 @@ import WeilConjectures.PoincareDuality.Point.PointSectionsDerivedReductionIso
 import WeilConjectures.PoincareDuality.Point.PointSectionsDerivedReductionCone
 import WeilConjectures.PoincareDuality.Point.PointSectionsDerivedReductionHomology
 
-/-! # Point sections and derived integral reduction
-(blueprint: lem-pod-point-sections-derived-reduction) -/
+/-! # Point sections and derived integral reduction -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,9 +27,7 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
 /-- Point sections commute naturally with derived reduction in the quotient-module
 category. After forgetting quotient scalars the left side is the multiplication cone,
 and its cohomology is sections of the reduced cohomology sheaf in every integer degree.
-Source: blueprint `prop-cohomological-finiteness`, integral-to-finite comparison;
-Stacks Tags 093M, 06YS, 06YY, 05RT, 064L and 06Y6
-(blueprint: lem-pod-point-sections-derived-reduction).
+Source: Stacks Tags 093M, 06YS, 06YY, 05RT, 064L and 06Y6.
 
 Proof (the ten steps of the node):
 1. O_E is a DVR, hence Noetherian. The two-term free resolution

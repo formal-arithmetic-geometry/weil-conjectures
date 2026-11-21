@@ -16,10 +16,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Transpose of the strict normalized Hom numerator
 
-Source: Stacks Project, sites-cohomology.tex, Tag 08J9, and the strict numerator
-calculation in the node (blueprint: lem-sfb-hom-strict-numerator-transpose).
-The records below package chain maps and their full representative normalizations;
-they do not replace the recorded tensor, Hom, or resolution constructions.
+Source: Stacks Project, sites-cohomology.tex, Tag 08J9, and the strict numerator calculation in
+the node.
 -/
 
 @[expose] public section
@@ -38,7 +36,7 @@ variable {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
   (R : Sheaf J CommRingCat.{max u v r})
 
 /-- Total-tensor map with its two source and target objects explicit.
-Source: Stacks 06YN (blueprint: lem-sfb-hom-strict-numerator-transpose). -/
+Source: Stacks 06YN. -/
 noncomputable def numeratorTotalMap
     {X Y P Q : CochainComplex (Modules.{u, v, r} J R) ℤ}
     (f : X ⟶ Y) (g : P ⟶ Q) :

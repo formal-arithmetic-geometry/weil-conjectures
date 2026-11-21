@@ -165,8 +165,7 @@ For `k` an algebraic closure of `k₀` and `t = 1 / x` the coordinate at `∞ �
 the inertia group at infinity, and `u^q - u = a / t` is the Artin–Schreier cover `u^q - u = a x`
 defining `ℒ_{ψ(a x)}`. An element `σ` with `σ u = u + c` acts on the geometric generic stalk of
 `ℒ_{ψ(a x)}` by `ψ(±c)`, so for nontrivial `ψ` inertia at infinity acts nontrivially: a
-nonzero linear Artin–Schreier sheaf is ramified at infinity.
-(blueprint: `lemma-unramified-at-infinity-no-linear-characters--1`) -/
+nonzero linear Artin–Schreier sheaf is ramified at infinity. -/
 theorem exists_algEquiv_apply_eq_add_C_of_pow_sub_eq_single {k₀ : Type*} [Field k₀] [Finite k₀]
     [Algebra k₀ k] {a : k₀} (ha : a ≠ 0) (L : Type*) [Field L] [Algebra (LaurentSeries k) L]
     [IsAlgClosure (LaurentSeries k) L] {u : L}

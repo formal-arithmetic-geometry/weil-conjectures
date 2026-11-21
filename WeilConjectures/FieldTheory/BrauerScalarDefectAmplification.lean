@@ -13,7 +13,6 @@ import Mathlib.LinearAlgebra.TensorProduct.Pi
 # Matrix amplification of scalar-defect realizations
 
 Source: Stacks Project, the scalar-defect construction preceding Tag 03R7.
-(blueprint: lem-sc-brauer-scalar-defect-amplification).
 -/
 
 @[expose] public section
@@ -118,26 +117,8 @@ private theorem amplify_scalar (K : Type u) [Field K] (n d : ℕ)
 
 /-- A positive matrix amplification realizes the original scalar-defect class.
 
-Proof: unpack the realization of `A` into a positive size `d`, a splitting `e`,
-a locally constant lift `b`, and its homogeneous cocycle `z`. Extend the given
-isomorphism `f : C ≃ Mat_n(A)` to the separable closure, commute scalar extension
-with the finite matrix algebra entry by entry, apply `e` entry by entry, and flatten
-`Mat_n(Mat_d(Ks))` to `Mat_(n*d)(Ks)`. Both factors are positive, so the new size is
-positive. These are explicit algebra equivalences, giving a splitting of `C`.
-Replace each lift `b(g)` by the Kronecker product `I_n ⊗ b(g)`, reindexed to the
-flattened matrix indices. This is invertible, with inverse `I_n ⊗ b(g)⁻¹`, and is
-locally constant because it is a fixed function of `b(g)`.
-For every entry of an element of `Mat_n(A)`, the original descent identity gives
-its amplified identity; matrix multiplication and flattening preserve it.
-The Kronecker product preserves products, entrywise Galois action, and scalar
-matrices. Applying it to the original defect equation gives exactly the new
-multiplication-defect equation with the same unit-valued cocycle `z`.
-The homology image of `z` remains `x`. These explicit witnesses satisfy the
-scalar-defect relation for `C`; no new cocycle or arbitrary algebra is chosen.
-
-Source: Stacks Project, scalar-defect construction following Lemma 03R6 and the
-well-defined Brauer-class map preceding Theorem 03R7.
-(blueprint: lem-sc-brauer-scalar-defect-amplification). -/
+Source: Stacks Project, scalar-defect construction following Lemma 03R6 and the well-defined
+Brauer-class map preceding Theorem 03R7. -/
 theorem hasBrauerScalarDefect_of_matrix_algEquiv (K : Type u) [Field K]
     (A C : CSA.{u, u} K) (x : GaloisUnitsH2 K) (n : ℕ) (hn : n ≠ 0)
     (f : C ≃ₐ[K] Matrix (Fin n) (Fin n) A)

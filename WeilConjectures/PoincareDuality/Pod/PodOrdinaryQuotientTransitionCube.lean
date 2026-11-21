@@ -10,8 +10,7 @@ import WeilConjectures.PoincareDuality.Pod.PodOrdinaryQuotientTransitionCubeAux3
 
 /-! # Ordinary quotient scalar and reindexing cube
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-ordinary-quotient-transition-cube).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -41,24 +40,7 @@ variable (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L
   (ι : E →ₐ[ℚ_[l]] L)
 
 /-- The normalized quotient associators satisfy the ordinary scalar/reindexing cube.
-Source: Stacks 03EL, 06YY, 0941; blueprint dual-Tate compatibility Steps 1 and 5.
-(blueprint: lem-pod-ordinary-quotient-transition-cube).
-
-Proof: construct alpha at X and Y by associating the two quotient scalar tensors;
-its inverse inserts a unit. Construct beta at E and L by reindexing quotient tensors,
-using the coefficient-map projection square. The inverse reverses the relabelling.
-These maps preserve all horizontal transitions and vertical restrictions, so they
-are isomorphisms of sequence-module functors. Their unit formulas are the four
-normalizations in the conclusion. To compare the two routes, evaluate a local
-generator with scalar coefficient one and module section x. The four unit formulas,
-the ordinary sequence scalar/pullback generator formula, and hb identify both
-images with the same quotient of the scalar unit tensor. Linearity extends this to
-all scalar coefficients and sheafification extends it to all sections. Thus the
-ordinary natural transformations agree. Apply their cochain functors degreewise
-to obtain the stated chain-map identity, including every quotient transition.
-This statement has no derived functor, reduction calculus, Roos realization, scalar
-completion or completeness assumption. Zero modules, the empty scheme, identity
-maps, n=0 and ramified coefficient embeddings use the same balanced identities. -/
+Source: Stacks 03EL, 06YY, 0941. -/
 theorem podOrdinaryQuotientTransitionCube
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (MEY : CompletionUnit.OrdinaryModel l E Y) (MEX : CompletionUnit.OrdinaryModel l E X)

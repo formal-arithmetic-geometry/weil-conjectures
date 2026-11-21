@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingLimitComplexComparison
 
-/-! # Component equation of the specified comparison
-
-(blueprint: lem-pod-reindexing-limit-complex-model) -/
+/-! # Component equation of the specified comparison -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -39,14 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-- Cancel the target model and localization factors in the specified comparison.
-
-Source: blueprint theorem-poincare-duality-frobenius--2, Step 5. Expand the six
-factors of the comparison. Compose with the target localization factor and the
-target Roos model. Their inverse pairs cancel, leaving the source Roos model,
-the integral reindexing localization map, and the two strict Roos and restricted
-tower maps. This is an equality of the full maps, not only of finite projections.
-(blueprint: lem-pod-reindexing-limit-complex-model) -/
+/-- Cancel the target model and localization factors in the specified comparison. -/
 theorem podReindexingLimitComparisonOnComplexes_model (S : PodReindexingStrictData l E g)
     (hS : S.RoosNaturality l E g)
     (ρY : IntegralComparisonRoosModel l E Y) (ρX : IntegralComparisonRoosModel l E X)

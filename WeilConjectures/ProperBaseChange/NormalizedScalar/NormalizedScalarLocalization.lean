@@ -29,14 +29,7 @@ variable {R : Type w} [CommRing R] (M : Submonoid R)
   {D : Type u₂} [Category.{v₂} D] [Preadditive D] [Linear A D] [HasZeroObject D]
   [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
 
-/-- The existing Verdier lift is linear over the localized coefficient ring.
-Source: localization of modules, applied to each Hom group.
-(blueprint: lem-weil-pbc-normalized-scalar-localization).
-
-Proof: the lift preserves scalar endomorphisms for elements of R by the standard
-formula on QX. Hence it is R-linear. Its Hom maps extend uniquely to A-linear
-maps because both Hom groups are A-modules. The quotient's A-action restricts
-to its R-action by the defining scalar normalization. -/
+/-- The existing Verdier lift is linear over the localized coefficient ring. -/
 theorem lift_linear (H : C ⥤ D) [H.CommShift ℤ] [H.IsTriangulated]
     (hH : ∀ (r : R) (X : C), H.map (r • 𝟙 X) = algebraMap R A r • 𝟙 (H.obj X)) :
     (CategoryTheory.Rationalization.lift M A H hH).Linear A := by
@@ -63,8 +56,7 @@ theorem lift_linear (H : C ⥤ D) [H.CommShift ℤ] [H.IsTriangulated]
 
 /-- An additive linear triangulated forward lift with a shift-compatible comparison
 and its scalar naturality equation.
-Source: Verdier localization and scalar localization of Hom modules.
-(blueprint: lem-weil-pbc-normalized-scalar-localization). -/
+Source: Verdier localization and scalar localization of Hom modules. -/
 def ForwardFunctorData (H : C ⥤ D) [H.CommShift ℤ] : Prop :=
   ∃ (J : CategoryTheory.Rationalization M C ⥤ D) (_ : J.Additive)
     (_ : J.Linear A) (_ : J.CommShift ℤ)
@@ -75,13 +67,7 @@ def ForwardFunctorData (H : C ⥤ D) [H.CommShift ℤ] : Prop :=
         e.hom.app X ≫ (a • H.map f)
 
 /-- A normalized forward functor through the ordinary Verdier rationalization.
-Source: Verdier localization and scalar localization of Hom modules.
-(blueprint: lem-weil-pbc-normalized-scalar-localization).
-
-Proof: use the existing triangulated Verdier lift, not an inverse of an asserted
-realization equivalence. Its standard comparison commutes with every integer
-shift. The previous lemma supplies A-linearity. Naturality of that same comparison,
-multiplied by any a in A, gives the fraction equation, including a=1 and a=0. -/
+Source: Verdier localization and scalar localization of Hom modules. -/
 theorem forward_exists (H : C ⥤ D) [H.CommShift ℤ] [H.IsTriangulated]
     (hH : ∀ (r : R) (X : C), H.map (r • 𝟙 X) = algebraMap R A r • 𝟙 (H.obj X)) :
     ∃ (J : CategoryTheory.Rationalization M C ⥤ D) (_ : J.Additive)

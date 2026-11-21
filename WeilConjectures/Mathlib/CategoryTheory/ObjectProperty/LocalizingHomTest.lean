@@ -12,9 +12,7 @@ import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
 
 /-! # Shifted generators detect isomorphisms on their localizing closure
 
-Source: the blueprint, `sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation`,
-closed-adjoint uniqueness and final restriction paragraphs; Stacks Project, Derived Categories,
-Tags 0145, 0146, 0149, 0FXC and 05QR (blueprint: lem-sf-localizing-hom-test).
+Source: Stacks Project, Derived Categories, Tags 0145, 0146, 0149, 0FXC and 05QR.
 
 The class of generators is an arbitrary object property. The localizing closure is the existing
 intersection of replete triangulated subcategories closed under coproducts indexed in the Hom
@@ -32,15 +30,12 @@ namespace CategoryTheory.ObjectProperty
 /-- A morphism between objects of the localizing closure of an arbitrary class is invertible
 if postcomposition induces bijections on Hom from every integer shift of every generator.
 
-Source: the blueprint, `theorem-f-shriek-finite-coefficients`, closed-adjoint uniqueness and final
-restriction paragraphs; Stacks Project, Derived Categories, Tags 0145, 0146, 0149, 0FXC and 05QR
-(blueprint: lem-sf-localizing-hom-test).
+Source: Stacks Project, Derived Categories, Tags 0145, 0146, 0149, 0FXC and 05QR.
 
 Proof plan:
 1. Complete `α : B ⟶ G` to a distinguished triangle `B ⟶ G ⟶ K ⟶ B[1]`. Every replete
    triangulated coproduct-closed subcategory containing the generators contains `B` and `G`,
-   hence `K` by rotation and extension closure. Thus `K` belongs to the localizing closure
-   (`def-weil-triangulated-category`, `def-weil-triangulated-subcategory`).
+   hence `K` by rotation and extension closure. Thus `K` belongs to the localizing closure.
 2. For a shifted generator `W = X[n]`, injectivity of postcomposition by `α[1]` follows from
    the hypothesis for `X[n-1]`. If `f : W ⟶ K`, consecutive composites in the triangle give
    `f ≫ δ ≫ α[1] = 0`, so injectivity gives `f ≫ δ = 0`. Hom-exactness gives `f = g ≫ p`;

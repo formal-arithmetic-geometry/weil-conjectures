@@ -13,9 +13,8 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # The kernel of exterior localization
 
-Source: Stacks Project, Tag 0C6F, Lemma 10.13.6 (localization of tensor, symmetric,
-and exterior algebras), restricted to the homogeneous part of degree n.
-(blueprint: new-v2-exterior-localization-kernel-torsion). -/
+Source: Stacks Project, Tag 0C6F, Lemma 10.13.6 (localization of tensor, symmetric, and exterior
+algebras), restricted to the homogeneous part of degree n. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -116,24 +115,6 @@ end
 /-- The kernel of the map on exterior powers induced by localization is S-torsion.
 
 Source: Stacks Project, Tag 0C6F, Lemma 10.13.6, the injectivity part in degree n.
-(blueprint: new-v2-exterior-localization-kernel-torsion).
-
-Proof: Let L=A tensor exteriorPower R n M and let l be its canonical
-localization map. Extend the alternating map l composed with the pure wedge map
-from M to N one coordinate at a time. Currying separates one coordinate;
-IsLocalizedModule.map extends its linear map to N; induction handles the remaining
-coordinates. The extension agrees with the original map on tuples coming from M.
-To prove alternation, choose one fraction representative for each element of N.
-Equal coordinates have equal representatives. Multiply all denominators and use
-multilinearity; the resulting tuple lies in the image of f and its original wedge
-vanishes. The product denominator acts invertibly on L, so the extension vanishes.
-Every R-linear coordinate map between A-modules is A-linear because A is a
-localization. The exterior universal property therefore gives an A-linear map h
-from the exterior power of N to L. The pure-wedge formula proves h composed with
-g equals l, since pure wedges span. If g(x)=0 then l(x)=0, and the equality criterion
-for module localization gives s in S with s*x=0. The induction starts with empty
-tuples in degree zero. No injectivity of f, finiteness, freeness, or restriction on
-characteristic is used.
 -/
 theorem exists_smul_eq_zero_of_localized_wedge
     {R : Type u} {A : Type v} [CommRing R] [CommRing A] [Algebra R A]

@@ -13,8 +13,7 @@ import WeilConjectures.SmoothPurity.Integral.Scalar.IntegralScalarExtensionConst
 
 /-! # Pure section component of the normalized coefficient transition
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-pure).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -140,18 +139,7 @@ private theorem transitionOrdinary {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
 end
 
 /-- The pure-tensor section law for a normalized coefficient transition.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-core-pure).
-Proof: the completed coefficient maps commute with reindexing because their
-composites with every finite quotient projection do, by naturality of the constant
-sheaf functor. Transport of restriction of scalars therefore gives a square whose
-components are identity maps on sections. Its mate under extension/restriction
-adjunction is an isomorphism, since both reindexing functors are equivalences.
-The adjunction units are pure tensors with coefficient one, so their mate identity
-proves the desired formula for coefficient one. Linearity and the inverse
-coefficient isomorphism give the formula for every coefficient. Finally use the
-normalized primitive quotient scalar models at X and Y. Constructibility follows
-from completed scalar extension and the completion isomorphism on a complete input.
+Source: Stacks 03EL, 06YY, 0941.
 -/
 theorem podReindexingTensorCoefficientTransition_pure
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

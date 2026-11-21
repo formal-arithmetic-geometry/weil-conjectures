@@ -11,8 +11,7 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexi
 
 The proof constructs the corresponding normalized comparison law from the strict
 quotient, evaluation, and Roos-limit calculations.  This is a strictly smaller
-obligation than the assembled five-law package.
-(blueprint: lem-pod-reindexing-derived-core-limit-projection) -/
+obligation than the assembled five-law package. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -42,13 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-- Limit projection law for raw derived comparison data.
-
-Source: the strict quotient, evaluation, and Roos-limit descent calculation
-from the proof of lem-pod-reindexing-derived-comparisons-core.  The statement
-records one conjunct of the assembled core package; its proof is intentionally
-split off so it can be proved independently.
-(blueprint: lem-pod-reindexing-derived-core-limit-projection) -/
+/-- Limit projection law for raw derived comparison data. -/
 theorem podReindexingDerivedCoreData_limitProjection
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

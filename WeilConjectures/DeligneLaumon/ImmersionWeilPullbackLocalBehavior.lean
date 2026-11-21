@@ -36,9 +36,6 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Pullback and finite descent for constructible Weil pairs
 
-Source: blueprint main-20261015, Restriction in
-`lem-zl-immersion-weil-local-behavior`.
-
 This is the unchanged pullback and descent interface extracted from
 `ImmersionWeilLocalBehavior`. It depends on pullback and local Frobenius, so its
 consumers can use it before the separate compact-support interface is restored.
@@ -61,17 +58,13 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [prime : Fact l.Prime] (hl : l ≠
   [hftW : LocallyOfFiniteType W₀.hom] [hqcW : QuasiCompact W₀.hom] [hsepW : IsSeparated W₀.hom]
   (h₀ : W₀ ⟶ X₀) [himm : IsImmersion h₀.left]
 
-/-- The finite-type structure on the actual geometric fibre is inherited by base change.
-Source: blueprint geometric-base-change convention
-(blueprint: lem-zl-immersion-weil-local-behavior). -/
+/-- The finite-type structure on the actual geometric fibre is inherited by base change. -/
 instance immersionWeilOverPullback_locallyOfFiniteType {B T : Scheme.{u}} (f : T ⟶ B)
     (Y : Over B) [LocallyOfFiniteType Y.hom] :
     LocallyOfFiniteType (((Over.pullback f).obj Y).left ↘ T) :=
   inferInstanceAs (LocallyOfFiniteType (pullback.snd Y.hom f))
 
-/-- Quasi-compactness on a geometric fibre is inherited by base change.
-Source: blueprint geometric-base-change convention
-(blueprint: lem-zl-immersion-weil-local-behavior). -/
+/-- Quasi-compactness on a geometric fibre is inherited by base change. -/
 instance immersionWeilOverPullback_quasiCompact {B T : Scheme.{u}} (f : T ⟶ B)
     (Y : Over B) [QuasiCompact Y.hom] :
     QuasiCompact (((Over.pullback f).obj Y).left ↘ T) :=

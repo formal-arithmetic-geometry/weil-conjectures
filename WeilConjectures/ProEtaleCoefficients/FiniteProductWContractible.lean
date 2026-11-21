@@ -7,8 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 
-/-! Finite products of w-contractible rings.
-(blueprint: det-pe-hypercover-product-wcontractible) -/
+/-! Finite products of w-contractible rings. -/
 
 @[expose] public section
 
@@ -172,19 +171,6 @@ end
 /-- Finite products, including the empty product, preserve w-contractibility.
 
 Source: Stacks Project, Tag 09A1, finite-disjoint-union argument.
-(blueprint: det-pe-hypercover-product-wcontractible)
-
-Proof: Mathlib's `PrimeSpectrum.sigmaToPiHomeo` identifies the spectrum of the product
-with the disjoint union of the factor spectra. Closed singletons are detected in each
-summand, and the continuous index map to the discrete index type shows that every
-specialization stays in its summand. Hence the disjoint union, and then the product
-spectrum, is w-local. Every maximal ideal of the product comes from a maximal ideal
-of a factor. Its localization is isomorphic to that factor localization by
-`Localization.AtPrime.mapPiEvalRingHom_bijective`, so it is strictly henselian.
-The closed-point space of the disjoint union is the disjoint union of the closed-point
-spaces. In a w-local space the closed-point space is homeomorphic to the component
-space. Thus extremal disconnectedness follows from the sigma-space instance and
-homeomorphism invariance. The empty index type satisfies the same argument.
 -/
 theorem isWContractibleRing_pi_of_finite
     (I : Type u) [Finite I] (D : I → Type u) [∀ i, CommRing (D i)]

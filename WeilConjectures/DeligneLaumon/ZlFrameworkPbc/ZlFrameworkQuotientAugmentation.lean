@@ -13,7 +13,6 @@ import WeilConjectures.SixFunctors.Integral.IntegralReductionTowerWellDefinedUnr
 /-! # Compatible quotient augmentations before taking the Roos complex
 
 Source: Stacks Project, Tags 03EK, 099N(5), and 08TC.
-(blueprint: lem-zl-framework-quotient-augmentation).
 -/
 
 @[expose] public noncomputable section
@@ -153,23 +152,7 @@ private theorem quotientChainMap_transition {U T : Scheme.{u}} (h : U ⟶ T)
   exact he.trans (quotientModuleMap_generator l E h P n i V.unop x).symm
 
 /-- The finite quotient-unit maps commute with every consecutive quotient transition.
-Source: Stacks Project, Tags 03EK and 099N(5), quotient-unit construction
-(blueprint: lem-zl-framework-quotient-augmentation).
-
-Proof: in degree i, compose the ordinary quotient unit x ↦ 1 tensor x with
-inverse image. Identify the pulled quotient coefficients with the target quotient
-coefficients using the constant-section coefficient comparison. Equivalently, take
-its transpose under the completed module pullback/direct-image adjunction: it is
-the finite pullback unit applied to the ordinary quotient unit. The coefficient
-square with the completed projections makes this transpose linear over the
-completed coefficient ring. The adjunction supplies the required module map.
-Naturality of both units gives its chain condition. On inverse-image generators
-its value is precisely the finite unit on 1 tensor x, as displayed below.
-The quotient transition takes this generator to the next quotient generator,
-since the quotient homomorphism takes 1 to 1. The defining transition equation
-and uniqueness of adjuncts therefore give the consecutive compatibility equation.
-This constructs one compatible family of chain maps, before any product or Roos
-complex is formed. No completeness or flatness assumption is needed. -/
+Source: Stacks Project, Tags 03EK and 099N(5), quotient-unit construction. -/
 theorem frameworkQuotientAugmentation_exists {U T : Scheme.{u}} (h : U ⟶ T)
     (P : CochainComplex (integralTowerModules l E T) ℤ) :
     ∃ γ : ∀ n : ℕ,

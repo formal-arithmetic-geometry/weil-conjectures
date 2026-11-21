@@ -18,7 +18,6 @@ set_option linter.privateModule false
 /-! # Coefficient transport of the published completed pullback tower
 
 Source: Stacks Project, sites-modules.tex, Tags 03EK/03EL; proetale.tex, Tag 099N(5).
-(blueprint: lem-a1-completed-integral-finite-tower-transport).
 -/
 
 @[expose] public noncomputable section

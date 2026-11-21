@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteness
 Let `k` be an algebraically closed field, `ℓ` different from its characteristic, and `X` a
 separated scheme of finite type over `k`. For a pro-étale complex `K` on `X` with constructible
 `ℓ`-adic cohomology sheaves, the complexes `RΓ(X, K)` and `RΓ_c(X, K)`, and their duals, are
-perfect complexes of `ℚ̄_ℓ`-vector spaces (blueprint `lemma-perfect-complexes-geometric-point`, the
-`ℚ̄_ℓ` stage of `WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect`):
+perfect complexes of `ℚ̄_ℓ`-vector spaces:
 
 - `AlgebraicGeometry.ProEtale.isPerfect_compactlySupportedGlobalSections_adic`,
   `AlgebraicGeometry.ProEtale.isPerfect_rightDerivedGlobalSections_adic`,
@@ -51,8 +50,7 @@ variable (l : ℕ) [Fact l.Prime] {k : Type u} [Field k] [IsAlgClosed k] [Fact (
   [HasCompactification aX]
 
 omit [IsSeparated aX] [LocallyOfFiniteType aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
-at the point.
+/-- Finiteness: the global sections are perfect at the point.
 
 **`RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of the
 algebraically closed field `k`. For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the compactly supported cohomology
@@ -98,8 +96,7 @@ theorem isPerfect_compactlySupportedGlobalSections_adic
         ((c.g)_*[WeilCoefficients.{u} l]).rightDerivedFunctor.mapIso e₁.symm))
 
 omit [HasCompactification aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
-at the point.
+/-- Finiteness: the global sections are perfect at the point.
 
 **`RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** Let `ℓ` be different from the characteristic of the
 algebraically closed field `k`. For `K ∈ D^b_c(X, ℚ̄_ℓ)`, the cohomology `RΓ(X, K)` is a
@@ -125,8 +122,7 @@ theorem isPerfect_rightDerivedGlobalSections_adic [QuasiCompact aX]
         (globalSectionsLowerStarIso (WeilCoefficients.{u} l) aX)).app _)
 
 omit [IsSeparated aX] [LocallyOfFiniteType aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
-at the point.
+/-- Finiteness: the global sections are perfect at the point.
 
 **The dual of `RΓ_c(X, K)` is perfect at `ℚ̄_ℓ`.** -/
 theorem isPerfect_ihom_compactlySupportedGlobalSections_adic
@@ -138,8 +134,7 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections_adic
   (isPerfect_compactlySupportedGlobalSections_adic l aX K hK).ihom_unit
 
 omit [HasCompactification aX] in
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Finiteness: the global sections are perfect
-at the point.
+/-- Finiteness: the global sections are perfect at the point.
 
 **The dual of `RΓ(X, K)` is perfect at `ℚ̄_ℓ`.** -/
 theorem isPerfect_ihom_rightDerivedGlobalSections_adic [QuasiCompact aX]
@@ -151,8 +146,7 @@ theorem isPerfect_ihom_rightDerivedGlobalSections_adic [QuasiCompact aX]
   (isPerfect_rightDerivedGlobalSections_adic l aX K hK).ihom_unit
 
 
-/-- Blueprint `lemma-perfect-complexes-geometric-point`: Point perfectness of global sections, the
-stage `ℚ̄_ℓ`.
+/-- Point perfectness of global sections, the stage `ℚ̄_ℓ`.
 
 For `ℓ` different from the characteristic of `k` and `K ∈ D^b_c(X, ℚ̄_ℓ)`, the four complexes
 `RΓ(X, K)`, `RΓ_c(X, K)` and their duals are perfect complexes of `ℚ̄_ℓ`-vector spaces: bounded

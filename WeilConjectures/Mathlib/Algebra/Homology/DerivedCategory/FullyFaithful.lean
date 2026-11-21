@@ -99,7 +99,7 @@ universe w v u
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
-/-- Blueprint `lem-pur-concentrated-complex-shift`: Complexes with cohomology in a single degree
+/-- Complexes with cohomology in a single degree
 
 *Concentration in one degree.* If the homology objects `H^i(K)` vanish for every `i ≠ n`, then
 the truncation triangles identify `K` with `H^n(K)[-n]`, the object `H^n(K)` placed in

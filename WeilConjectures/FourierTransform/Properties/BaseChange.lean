@@ -85,8 +85,7 @@ computed with a chosen compactification. The same comparison is why
 `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap` needs the base changed
 morphism `f' = pullback.snd ρ ρ'` to be quasi-compact, because it goes through
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso`, and `f'` is quasi-compact as a base change
-of `pullback.snd π π'` (`MorphismProperty.of_isPullback`).
-(sketch blueprint: `proposition-base-change-fourier-inversion--1`) -/
+of `pullback.snd π π'` (`MorphismProperty.of_isPullback`). -/
 theorem nonempty_iso_fourierTransform_baseChange [Finite Λ]
     [CharP Γ(pullback π π', ⊤) p] [HasCompactification (pullback.snd π π')]
     [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')]

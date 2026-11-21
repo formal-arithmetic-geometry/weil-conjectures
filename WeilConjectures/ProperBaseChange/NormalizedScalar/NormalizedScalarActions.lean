@@ -26,9 +26,7 @@ open AlgebraicGeometry AlgebraicGeometry.ProEtale AlgebraicGeometry.ProEtale.Con
 
 namespace WeilConjectures.NormalizedScalar
 
-/-- The actual inverse image from the point is additive.
-Source: it is a composite of two left adjoints.
-(blueprint: lem-weil-pbc-normalized-scalar-actions). -/
+/-- The actual inverse image from the point is additive. -/
 theorem pullback_additive (T : Scheme.{u}) : (upperStarFromPoint T).Additive := by
   have adj : upperStarFromPoint T ⊣ _ := pointUpperStarLowerStarAdjunction.comp
     (ProEtale.upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ T))
@@ -45,8 +43,7 @@ attribute [local instance] pullback_additive
 variable (B : Type u) [CommRing B] [TopologicalSpace B] [IsTopologicalRing B]
 
 /-- Constant continuous functions in the original coefficient universe.
-Source: Bhatt--Scholze's condensed coefficient convention.
-(blueprint: lem-weil-pbc-normalized-scalar-actions). -/
+Source: Bhatt--Scholze's condensed coefficient convention. -/
 def constantSections (S : Profinite.{u}ᵒᵖ) :
     B →+* (Profinite.continuousCoefficientRingSheaf B).obj.obj S where
   toFun b := ULift.up (ContinuousMap.const _ b)
@@ -55,23 +52,17 @@ def constantSections (S : Profinite.{u}ᵒᵖ) :
   map_zero' := rfl
   map_add' _ _ := rfl
 
-/-- The constant global sections of the condensed coefficient ring.
-Source: the constant-function map into continuous coefficients.
-(blueprint: lem-weil-pbc-normalized-scalar-actions). -/
+/-- The constant global sections of the condensed coefficient ring. -/
 def pointConstants : B →+* Γ (Profinite.continuousCoefficientRingObj B) :=
   Sheaf.ringHomΓSheafCompose (coherentTopology Profinite.{u})
     (Profinite.continuousCoefficientRingSheaf B) (constantSections B) fun _ _ ↦ rfl
 
-/-- The constant sections after the specified inverse image from the point.
-Source: the pulled-back coefficient convention.
-(blueprint: lem-weil-pbc-normalized-scalar-actions). -/
+/-- The constant sections after the specified inverse image from the point. -/
 def constants (T : Scheme.{u}) :
     B →+* Γ (condensedRingObj (Profinite.continuousCoefficientRingObj B) T) :=
   (Γ.mapFunctor (upperStarFromPoint T)).comp (pointConstants B)
 
-/-- Modules are linear through these actual constant sections.
-Source: the action of global sections on internal modules.
-(blueprint: lem-weil-pbc-normalized-scalar-actions). -/
+/-- Modules are linear through these actual constant sections. -/
 @[instance_reducible] def modulesLinear (T : Scheme.{u}) :
     Linear B (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1})
       (condensedRingObj (Profinite.continuousCoefficientRingObj B) T)) :=
@@ -79,11 +70,7 @@ Source: the action of global sections on internal modules.
 
 variable {l : ℕ} [Fact l.Prime] {E : Type u} [NormedField E] [NormedAlgebra ℚ_[l] E]
 
-/-- The actual inclusion takes each constant integral scalar to the same field scalar.
-Source: functoriality of constant sections.
-(blueprint: lem-weil-pbc-normalized-scalar-actions).
-Proof: the sectionwise map is postcomposition with the inclusion. Naturality of
-sheafification and inverse image gives the equality of global sections. -/
+/-- The actual inclusion takes each constant integral scalar to the same field scalar. -/
 theorem scalar_constants (T : Scheme.{u}) (a : integers l E) :
     Γ.map (coefficientMap (scalarMap (l := l) (E := E)) T)
       (constants (B := integers l E) T a) = constants (B := E) T (a : E) := by
@@ -100,11 +87,7 @@ theorem scalar_constants (T : Scheme.{u}) (a : integers l E) :
     CategoryTheory.Functor.LaxMonoidal.ε (upperStarFromPoint T) ≫
     (upperStarFromPoint T).map b.hom) h
 
-/-- Integral scalar restriction is linear for the constant-section actions.
-Source: tensor balancing and naturality of constant sections.
-(blueprint: lem-weil-pbc-normalized-scalar-actions).
-Proof: the scalar compatibility just proved is exactly the hypothesis of
-linearity of restriction along a morphism of internal rings. -/
+/-- Integral scalar restriction is linear for the constant-section actions. -/
 theorem comap_linear (T : Scheme.{u}) :
     letI := modulesLinear (B := integers l E) T
     letI := Mod.linearOfRingHom ((constants (B := E) T).comp (integers l E).subtype)

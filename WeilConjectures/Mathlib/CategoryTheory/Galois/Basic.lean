@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.FintypeCat
 # Consequences of the axioms of a Galois category
 
 Let `C` be a pre-Galois category with a fibre functor `F : C ⥤ FintypeCat`. This file records
-the elementary consequences of the axioms (blueprint `lem-galois-axioms`), most of which are in
+the elementary consequences of the axioms, most of which are in
 Mathlib:
 
 - `F` is faithful;
@@ -40,29 +40,26 @@ section Pre
 variable {C : Type u₁} [Category.{u₂} C] [PreGaloisCategory C] (F : C ⥤ FintypeCat.{w})
   [FiberFunctor F]
 
-/-- A fibre functor is faithful. (blueprint: `lem-galois-axioms`) -/
+/-- A fibre functor is faithful. -/
 theorem faithful_of_fiberFunctor : F.Faithful :=
   inferInstance
 
-/-- A morphism is a monomorphism if and only if it is injective on fibres.
-(blueprint: `lem-galois-axioms`) -/
+/-- A morphism is a monomorphism if and only if it is injective on fibres. -/
 theorem mono_iff_injective_map {X Y : C} (f : X ⟶ Y) : Mono f ↔ Function.Injective (F.map f) := by
   rw [← ConcreteCategory.mono_iff_injective_of_preservesPullback]
   exact ⟨fun _ ↦ inferInstance, fun _ ↦ F.mono_of_mono_map ‹_›⟩
 
-/-- A morphism is an epimorphism if and only if it is surjective on fibres.
-(blueprint: `lem-galois-axioms`) -/
+/-- A morphism is an epimorphism if and only if it is surjective on fibres. -/
 theorem epi_iff_surjective_map {X Y : C} (f : X ⟶ Y) : Epi f ↔ Function.Surjective (F.map f) := by
   refine ⟨fun _ ↦ surjective_on_fiber_of_epi F f, fun h ↦ ?_⟩
   have : Epi (F.map f) := ConcreteCategory.epi_of_surjective _ h
   exact F.epi_of_epi_map this
 
-/-- An object is initial if and only if its fibre is empty. (blueprint: `lem-galois-axioms`) -/
+/-- An object is initial if and only if its fibre is empty. -/
 theorem nonempty_isInitial_iff_isEmpty (X : C) : Nonempty (IsInitial X) ↔ IsEmpty (F.obj X) :=
   initial_iff_fiber_empty F X
 
-/-- An object is terminal if and only if its fibre is a singleton.
-(blueprint: `lem-galois-axioms`) -/
+/-- An object is terminal if and only if its fibre is a singleton. -/
 theorem nonempty_isTerminal_iff_card_eq_one (X : C) :
     Nonempty (IsTerminal X) ↔ Nat.card (F.obj X) = 1 := by
   have hT : Nat.card (F.obj (⊤_ C)) = 1 := by
@@ -87,26 +84,24 @@ theorem nonempty_isTerminal_iff_card_eq_one (X : C) :
     exact ⟨terminalIsTerminal.ofIso (asIso (terminal.from X)).symm⟩
 
 include F in
-/-- Every morphism between connected objects is an epimorphism.
-(blueprint: `lem-galois-axioms`) -/
+/-- Every morphism between connected objects is an epimorphism. -/
 theorem epi_of_isConnected {X A : C} [IsConnected X] [IsConnected A] (f : X ⟶ A) : Epi f :=
   epi_of_nonempty_of_isConnected F f
 
-/-- Two morphisms out of a connected object which agree at one point of the fibre are equal.
-(blueprint: `lem-galois-axioms`) -/
+/-- Two morphisms out of a connected object which agree at one point of the fibre are equal. -/
 theorem eq_of_map_apply_eq {X Y : C} [IsConnected X] {a b : X ⟶ Y} (x : F.obj X)
     (h : F.map a x = F.map b x) : a = b :=
   evaluation_injective_of_isConnected F X Y x h
 
 /-- For a connected object `X` and `x ∈ F(X)`, the evaluation `Aut X → F(X)`, `g ↦ F(g)(x)` is
-injective, so `#Aut X ≤ #F(X)`. (blueprint: `lem-galois-axioms`) -/
+injective, so `#Aut X ≤ #F(X)`. -/
 theorem injective_evaluation_aut_and_card_le (X : C) [IsConnected X] (x : F.obj X) :
     Function.Injective (fun g : Aut X ↦ F.map g.asIso.hom x) ∧
       Nat.card (Aut X) ≤ Nat.card (F.obj X) :=
   ⟨evaluation_aut_injective_of_isConnected F X x, card_aut_le_card_fiber_of_connected F X⟩
 
 /-- A connected object `X` is Galois if and only if `Aut X` acts transitively on `F(X)`, if and
-only if `#Aut X = #F(X)`. (blueprint: `lem-galois-axioms`) -/
+only if `#Aut X = #F(X)`. -/
 theorem isGalois_iff_pretransitive_and_card {C : Type u₁} [Category.{u₂} C] [GaloisCategory C]
     (F : C ⥤ FintypeCat.{w}) [FiberFunctor F] (X : C) [IsConnected X] :
     (IsGalois X ↔ MulAction.IsPretransitive (Aut X) (F.obj X)) ∧
@@ -142,8 +137,7 @@ variable {C : Type u₁} [Category.{u₂} C] [GaloisCategory C] (F : C ⥤ Finty
   [FiberFunctor F]
 
 include F in
-/-- A morphism from a connected object into a coproduct factors through one of the summands.
-(blueprint: `lem-galois-axioms`) -/
+/-- A morphism from a connected object into a coproduct factors through one of the summands. -/
 theorem exists_comp_sigmaι_of_isConnected {ι : Type*} [Finite ι] {X : C} [IsConnected X]
     (Y : ι → C) (f : X ⟶ ∐ Y) : ∃ (j : ι) (g : X ⟶ Y j), g ≫ Sigma.ι Y j = f := by
   obtain ⟨x⟩ := nonempty_fiber_of_isConnected F X
@@ -164,8 +158,7 @@ theorem exists_comp_sigmaι_of_isConnected {ι : Type*} [Finite ι] {X : C} [IsC
 
 include F in
 /-- If `X = ∐ᵢ Xᵢ` and `Y = ∐ⱼ Yⱼ` are finite coproducts of connected objects, every morphism
-`X ⟶ Y` is given by a map of index sets `α` and morphisms `Xᵢ ⟶ Y_{α(i)}`.
-(blueprint: `lem-galois-axioms`) -/
+`X ⟶ Y` is given by a map of index sets `α` and morphisms `Xᵢ ⟶ Y_{α(i)}`. -/
 theorem exists_sigma_desc_eq {ι κ : Type*} [Finite ι] [Finite κ] (X : ι → C) (Y : κ → C)
     [∀ i, IsConnected (X i)] (f : ∐ X ⟶ ∐ Y) :
     ∃ (α : ι → κ) (g : ∀ i, X i ⟶ Y (α i)), ∀ i, Sigma.ι X i ≫ f = g i ≫ Sigma.ι Y (α i) := by

@@ -22,7 +22,7 @@ namespace Submodule
 
 variable {R M : Type*} [Semiring R] [AddCommMonoid M] [Module R M]
 
-/-- **Vector subspaces of a sequence space** (blueprint `def-weil-sequence-subspace`): a subset
+/-- **Vector subspaces of a sequence space**: a subset
 `s` of a module, for instance of the sequence space `ℕ → K` with coordinatewise addition and
 scalar multiplication, is a vector subspace, i.e. the carrier of a `Submodule`, if and only if it
 contains the zero vector and is closed under addition and scalar multiplication. -/

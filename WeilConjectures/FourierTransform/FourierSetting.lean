@@ -11,9 +11,6 @@ public import Mathlib.RingTheory.RootsOfUnity.Basic
 /-!
 # The coefficient setting for the Fourier--Deligne transform
 
-Source: blueprint `sec-fourier-transform/def-fourier-set/def-fourier-set.md`
-(blueprint: def-fourier-set).
-
 The fixed finite-field datum and the finite coefficient extension used for the
 Fourier--Deligne transform are bundled.  The six operations, compact supports,
 cohomology, and Tate twists are the published six-functor constructions; this
@@ -36,10 +33,7 @@ closure `Qbar` of `ℚ_ℓ`.  The intermediate field `extension` is the finite
 extension `E / ℚ_ℓ`; `rootsOfUnity_mem` is the standing assumption
 `μ_p ⊆ E`, so additive characters with values in `μ_p` are `E`-valued.
 The bounded constructible adic category and its six operations are the
-published constructions on separated finite-type schemes over `k₀`.
-
-Source: blueprint `sec-fourier-transform/def-fourier-set/def-fourier-set.md`
-(blueprint: def-fourier-set). -/
+published constructions on separated finite-type schemes over `k₀`. -/
 structure FourierSetting where
   field : FiniteFieldDatum.{u}
   coefficients : field.CoefficientDatum

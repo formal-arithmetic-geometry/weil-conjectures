@@ -85,7 +85,7 @@ def withSheaf (D : LisseOnDenseOpen k₀ l) (G : WeilSheaf k₀ l D.U) (hG : G.I
 variable (ι : PadicAlgCl l →+* ℂ)
 
 -- Instance search for the structures over `Spec k₀` of the affine line is slow.
-/-- **Reduction to irreducible factors** (Step 3 of `theorem-weight-bound-affine-line`). Let
+/-- **Reduction to irreducible factors**. Let
 `F = D.sheaf` be punctually `ι`-pure of weight `w` on the dense open `U₀` of the affine line,
 and let `F ≅ j'^* G` for a lisse Weil sheaf `G` on a `k₀`-scheme `W` with irreducible geometric
 fiber. If `H_c^1(𝔸¹, j_*(j'^* M))` has weights at most `w + 1` for every irreducible lisse sheaf

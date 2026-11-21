@@ -12,8 +12,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import WeilConjectures.CategoryTheory.SimplicialMatchingObject
 public import WeilConjectures.RingTheory.ProEtale.WContractible
 
-/-! Transporting a hypercover to spectrum representatives.
-(blueprint: det-pe-hypercover-spectrum-replacement) -/
+/-! Transporting a hypercover to spectrum representatives. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -45,15 +44,6 @@ private theorem singleton_comp_cover {C : Type*} [Category C]
 set_option backward.isDefEq.respectTransparency false in
 /-- Replace the terms of a hypercover by specified spectra.
 Source: Stacks Project, Tag 09A1 (2), final finite-disjoint-union step.
-(blueprint: det-pe-hypercover-spectrum-replacement)
-
-Proof: choose the supplied spectrum isomorphisms and give each spectrum the transported
-structure map and augmentation. Conjugate every simplicial operator by these isomorphisms.
-The inverse pairs cancel, proving the functor laws. Transport each proper-face cone along
-the induced isomorphism of diagrams, keeping its vertex. Compose the old matching map with
-the source isomorphism. The projection identities follow from naturality; the transported
-cone is limiting. Isomorphisms are singleton covers and covers compose, so the matching
-and augmentation arrows remain covers. This includes empty spectra and the zero ring.
 -/
 theorem hypercover_spectrum_replacement (X : Scheme.{u}) (U : X.ProEt)
     (V : SimplicialObject (Over U))

@@ -598,9 +598,7 @@ variable {A B : CommRingCat.{u}} [Algebra A B] (M : Type u) [AddCommGroup M] [Mo
 `B`-module and `a ∈ A`. The open subscheme `Spec (B ⊗_A A_a)` of `Spec B` is the basic open
 `D(a)`, and the sections of the associated quasi-coherent sheaf `M~` over it are canonically
 `A`-linearly isomorphic to `A_a ⊗_A M`, compatibly with `m ↦ 1 ⊗ m`
-(`tildeSectionsBasicOpenTensorEquiv_apply`).
-
-(blueprint: `pqf-lem-associated-sections-localize`) -/
+(`tildeSectionsBasicOpenTensorEquiv_apply`). -/
 noncomputable def tildeSectionsBasicOpenTensorEquiv (a : A) :
     (ModuleCat.restrictScalars (algebraMap A B)).obj
         ((modulesSpecToSheaf.obj (tilde (ModuleCat.of B M))).presheaf.obj

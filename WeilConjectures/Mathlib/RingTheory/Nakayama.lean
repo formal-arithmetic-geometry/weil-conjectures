@@ -138,8 +138,7 @@ theorem Submodule.eq_top_of_top_le_sup_smul_of_isNilpotent (hI : IsNilpotent I)
   exact top_le_iff.mp this
 
 /-- **Nakayama's lemma for a nilpotent ideal**: a linear map `u : N → M` which is surjective
-modulo a nilpotent ideal `I` (i.e. `M = u(N) + I M`) is surjective. No finiteness is assumed.
-(blueprint: `lem-weil-pbc-nakayama-nilpotent`) -/
+modulo a nilpotent ideal `I` (i.e. `M = u(N) + I M`) is surjective. No finiteness is assumed. -/
 theorem LinearMap.surjective_of_isNilpotent_of_range_sup_smul {N : Type*} [AddCommGroup N]
     [Module R N] (hI : IsNilpotent I) (u : N →ₗ[R] M)
     (h : LinearMap.range u ⊔ I • ⊤ = ⊤) : Function.Surjective u :=

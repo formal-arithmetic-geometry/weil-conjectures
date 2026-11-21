@@ -12,7 +12,7 @@ import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodReductionR
 
 /-! # The strict Roos normalization of the coherent tensor comparison
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 08TC and 0941.
+Source: Stacks 07A4, 08TC and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +34,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The natural comparison constructed from the coherent system tensor and limit maps.
 It uses no chosen completed tensor reindexing comparison.
-Source: Stacks 07A4 and 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+Source: Stacks 07A4 and 0941. -/
 @[irreducible] def podReindexingLimitTensorComparisonHom
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (A : PodCompletionReindex l E g) (hA : PodCompletionReindex.Laws l E g A)
@@ -50,26 +49,7 @@ Source: Stacks 07A4 and 0941
 This is a calculation before descent: there is no constructibility assumption and
 neither `T.tensor`, its Model law, nor its derived naturality occurs in the equation.
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4, 08TC, 0941.
-Proof: expand the representative normalizations of the two tensor realizations.
-Their reduction models identify the coherent system tensor with the total tensor of
-the two ordinary quotient complexes, and their strict tower comparisons identify
-its restriction with the finite tensor tower. Apply A's LimitModel equation to
-this coherent total tensor. The naturality of its Roos comparison moves the strict
-tower identifications across that equation. The whole-system unit law fixes
-A.reduction as the mate of A.limit. The FiniteModel and QuotientGenerators laws
-therefore identify its two quotient factors with A.quotient on every scalar-tensor
-generator. The normalized system tensor comparison takes a total-tensor generator
-to the tensor of its two inverse images. Consequently the induced tower arrow
-agrees with T.tower by hGenerators: use the balanced tensor universal property on
-each summand, the total direct-sum universal property in each degree, and then
-natural-transformation extensionality on the tower. These are equalities of entire
-chain maps; quotient transitions are retained. Applying the Roos functor and Q,
-and cancelling the intermediate realization isomorphisms, gives the displayed
-identity. The target factor is the ordinary inverse-image localization comparison
-on each of P and Q, followed by the specified tensor realization. The argument
-also applies to zero complexes and the empty scheme.
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos). -/
+Source: Stacks 07A4, 08TC, 0941. -/
 theorem podReindexing_tensor_roos_normalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

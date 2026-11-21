@@ -15,8 +15,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Derived.PodReindexingDeriv
 
 /-! # Localization of the normalized strict reindexing comparisons
 
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5;
-Stacks 03EL, 07A4, 0941 (blueprint: lem-pod-reindexing-derived-comparisons).
+Source: Stacks 03EL, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -48,12 +47,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
 /-! # Core data and normalized laws for derived reindexing comparisons
-
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons).
 -/
 
-/-- Quotient normalization on local scalar-tensor generators.
-Source: blueprint Step 1 (blueprint: lem-pod-reindexing-derived-comparisons). -/
+/-- Quotient normalization on local scalar-tensor generators. -/
 def podReindexingQuotientGenerators
     (β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ),
       integralOperationsGoodComplex l E Y P → ∀ n : ℕ,
@@ -74,8 +70,7 @@ def podReindexingQuotientGenerators
           (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).hom.app
             (op U) a) x
 
-/-- Compatibility with each consecutive quotient arrow.
-Source: blueprint Step 1 (blueprint: lem-pod-reindexing-derived-comparisons). -/
+/-- Compatibility with each consecutive quotient arrow. -/
 def podReindexingQuotientTransition
     (β : ∀ (P : CochainComplex (scalarReductionSource l E Y) ℤ),
       integralOperationsGoodComplex l E Y P → ∀ n : ℕ,
@@ -93,8 +88,7 @@ def podReindexingQuotientTransition
         ((isoReductionIntegralComplex l E g).obj P) n).f i).val.app (op U))
           ((((β P hP (n + 1)).hom.f i).val.app (op U)) z)
 
-/-- The derived comparisons to be descended from the strict comparisons.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons). -/
+/-- The derived comparisons to be descended from the strict comparisons. -/
 structure PodReindexingDerivedData where
   /-- Reindex the strict coherent reduction system. -/
   reduction : (podReindexCalculus l E Y).reduction ⋙
@@ -123,8 +117,7 @@ structure PodReindexingDerivedData where
   pullback : integralDerivedPullback l E g ≅ (podReindexCalculus l E Y).reduction ⋙
     integralComparisonDerivedSequencePullback l E g ⋙ coefficientSequenceLimit l E X
 
-/-- Assemble the strict chain maps and the derived comparisons without choosing any data.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons). -/
+/-- Assemble the strict chain maps and the derived comparisons without choosing any data. -/
 def PodReindexingDerivedData.assemble
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)] (S : PodReindexingStrictData l E g)
@@ -155,7 +148,6 @@ def PodReindexingDerivedData.assemble
   pullback := R.pullback
 
 /-- The localization assertions except pullback normalization.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons).
 -/
 def PodReindexingDerivedData.CoreLaws
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -177,7 +169,6 @@ def PodReindexingDerivedData.CoreLaws
   PodCompletionReindex.LimitModel l E g D
 
 /-- The full localization assertions, including pullback normalization.
-Source: blueprint Steps 1 and 5 (blueprint: lem-pod-reindexing-derived-comparisons).
 -/
 def PodReindexingDerivedData.Laws
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -199,9 +190,7 @@ def PodReindexingDerivedData.Laws
   PodCompletionReindex.LimitModel l E g D ∧
   PodCompletionReindex.PullbackNormalization l E g D
 
-/-- The core package of derived comparisons, omitting only pullback normalization.
-Source: blueprint Steps 1 and 5; strict quotient, evaluation and Roos-limit descent.
-(blueprint: lem-pod-reindexing-derived-comparisons-core) -/
+/-- The core package of derived comparisons, omitting only pullback normalization. -/
 theorem podReindexingDerivedComparisonsCore
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]

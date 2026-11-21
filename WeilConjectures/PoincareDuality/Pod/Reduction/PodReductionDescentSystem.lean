@@ -14,8 +14,7 @@ import all WeilConjectures.SixFunctors.Coefficient.CoefficientReductionTensorEva
 
 /-! # Descent of the strict reduction/tensor representative square
 
-Source: blueprint dual-Tate compatibility, Steps 2 and 4; Stacks 07A4 and 0941.
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent)
+Source: Stacks 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -64,15 +63,13 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The two presentations use the same sequence inverse image.
-Source: Stacks 03D2 and 0941
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+Source: Stacks 03D2 and 0941. -/
 theorem podReindexing_sequence_pullback_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
     pullbackTensorSequenceDerived l E g = integralComparisonDerivedSequencePullback l E g := by
   exact PodReductionRepresentatives.derived_eq l E g
 
 /-- The existing system tensor comparison, transported only by equality of its functor.
-Source: Stacks 07A4 and 0941
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+Source: Stacks 07A4 and 0941. -/
 def podReindexingSystemTensor {X Y : Scheme.{u}} (g : X ⟶ Y) :
     (podReindexCalculus l E Y).systemClosed.tensor ⋙
         integralComparisonDerivedSequencePullback l E g ≅
@@ -102,8 +99,7 @@ private theorem systemTensor_eq {X Y : Scheme.{u}} (g : X ⟶ Y) :
   rfl
 
 /-- The normalized ordinary tensor arrow, with its construction kept behind one name.
-Source: Stacks 07A4
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+Source: Stacks 07A4. -/
 @[irreducible] def podReindexingIntegralTensorHom
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -125,8 +121,7 @@ Source: Stacks 07A4
             (((eqToIso h).app M).prod ((eqToIso h).app N))).hom)
 
 /-- The defining equation of the normalized ordinary tensor arrow.
-Source: Stacks 07A4
-(blueprint: lem-pod-reindexing-reduction-tensor-square-descent). -/
+Source: Stacks 07A4. -/
 theorem podReindexingIntegralTensorHom_eq
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

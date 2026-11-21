@@ -26,9 +26,6 @@ set_option linter.privateModule false
 
 /-!
 # Testing finite Tor amplitude at the residue field
-
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-trace-perfectness/
-`lem-exc-residue-tor-test.md` (blueprint: theorem-f-shriek-finite-coefficients--1).
 -/
 
 @[expose] public section

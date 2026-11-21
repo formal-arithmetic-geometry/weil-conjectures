@@ -13,8 +13,7 @@ import WeilConjectures.FieldTheory.PBasisExtension
 
 /-! # The differentials of a p-independent family are linearly independent
 
-Source: literature/stacks-project/more-algebra.tex, Definition Tag 07P1 and
-Lemma Tag 07P2 (blueprint: lem-weil-pbc-p-independent-differentials-independent).
+Source: literature/stacks-project/more-algebra.tex, Definition Tag 07P1 and Lemma Tag 07P2.
 -/
 
 @[expose] public section
@@ -29,7 +28,7 @@ namespace FieldTheory
 /-- The differentials of a p-independent family are linearly independent.
 Source: Stacks Project, More on Algebra, Tags 07P1 and 07P2, implication (1) implies (2).
 
-Proof (blueprint: lem-weil-pbc-p-independent-differentials-independent):
+Proof:
 1. Extend the given p-independent family to a p-basis by
    `lem-weil-pbc-p-independent-extends-to-p-basis`.
 2. Apply `lem-weil-pbc-p-basis-differentials-basis` to obtain a basis of

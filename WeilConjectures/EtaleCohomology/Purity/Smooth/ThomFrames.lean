@@ -98,7 +98,7 @@ def HasThomFrames [HasInvertibleExponent Λ X] : Prop :=
 
 /-- A closed immersion `i : Z ⟶ X` *has regular Zariski frames* of codimension `c`: every point
 of `Z` lies in the zero locus of a Zariski frame of `i` given by a weakly regular sequence of
-`c` functions on an affine open of `X` (blueprint `lemma-class-of-point--1`). -/
+`c` functions on an affine open of `X`. -/
 def HasRegularZariskiFrames : Prop :=
   ∀ z : Z, ∃ F : i.EtaleFrame c, IsOpenImmersion F.e ∧ z ∈ Set.range F.toZ ∧ IsAffine F.U ∧
     RingTheory.Sequence.IsWeaklyRegular Γ(F.U, ⊤) (List.ofFn F.f)
@@ -163,7 +163,7 @@ theorem HasThomFrames.of_isPullback [HasInvertibleExponent Λ X] (hT : HasThomFr
 
 attribute [local instance] HasInvertibleExponent.opens
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
+/-- Purity for regular closed immersions
 
 **(a) Concentration in degree zero, for closed immersions with Thom frames.** If `i` has Thom
 frames, then `Ri_! Ri^! (Λ_X(c)[2c])` has no cohomology sheaves outside degree `0`. Off `Z` it
@@ -223,7 +223,7 @@ theorem HasThomFrames.isZero_homology_rightDerivedLowerShriek [HasInvertibleExpo
   exact (isZero_zero _).of_iso
     (asIso (0 : (_root_.DerivedCategory.homologyFunctor _ n).obj M ⟶ 0))
 
-/-- Blueprint `lemma-class-of-point--1`: Purity for regular closed immersions
+/-- Purity for regular closed immersions
 
 For a closed immersion with Thom frames, classes with supports `H^{2c}_Z(X, Λ(c))` are sections
 of a sheaf: `Ri_! Ri^! (Λ_X(c)[2c])` is a sheaf placed in degree zero

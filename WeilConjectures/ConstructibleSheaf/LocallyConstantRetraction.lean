@@ -16,8 +16,7 @@ import Mathlib.Algebra.Field.ZMod
 /-!
 # Finite étale trace splitting
 
-Source: Stacks Project, etale-cohomology.tex, Section 03SH (section-trace-method),
-Definition 03SE (definition-trace-map).
+Source: Stacks Project, etale-cohomology.tex, Section 03SH, Definition 03SE.
 -/
 
 @[expose] public section
@@ -36,22 +35,8 @@ open Etale
 The coefficient field is `ULift.{u + 1} (ZMod ℓ)`, a universe lift of the prime field
 `ℤ/ℓℤ`.
 
-Source: Stacks Project, `etale-cohomology.tex`, Section 03SH (`section-trace-method`),
-the characterization and restriction/trace composite immediately after Definition 03SE
-(`definition-trace-map`).
-(blueprint: split-locally-constant-retraction)
-
-Proof: Finite étale covers split étale locally as finite disjoint unions of copies of the
-base. At a geometric point the number of summands is the cardinality of the geometric
-fibre, hence d by the hypothesis. On a split cover the unit sends a section to the diagonal
-d-tuple, and the trace sums its entries. These maps are coefficient-linear. The trace is
-unchanged by a permutation of the summands, so the local trace maps agree on overlaps
-and glue to a morphism v_*v*G ⟶ G of coefficient-module sheaves. The composite of the unit
-and trace is multiplication by d on every splitting neighbourhood, hence globally by
-sheaf separatedness. Since ℓ is prime and does not divide d, the scalar d is nonzero and
-invertible in ℤ/ℓℤ and in its universe lift. Multiply the trace by its inverse to obtain r.
-Coefficient-linearity gives unit ≫ r = d⁻¹d times the identity, which is the identity.
-This construction applies also to the zero sheaf and to the degree-one cover. -/
+Source: Stacks Project, `etale-cohomology.tex`, Section 03SH, the characterization and
+restriction/trace composite immediately after Definition 03SE. -/
 theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction
     {U V : Scheme.{u}} (ℓ : ℕ) [Fact ℓ.Prime]
     (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))))

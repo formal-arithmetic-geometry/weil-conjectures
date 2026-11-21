@@ -39,9 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Good representatives remain good under every integer shift.
-Source: Stacks 06YN and 011G (blueprint: def-pod-tensor-finite-signed-shifts).
-The tensor with a shifted complex is the shift of its tensor; acyclicity is
-stable under shifts. The terms are just reindexed flat terms. -/
+Source: Stacks 06YN and 011G. -/
 theorem podTensorGoodShift (W : Scheme.{u})
     (P : (integralOperationsGoodComplex l E W).FullSubcategory) (r : ℤ) :
     integralOperationsGoodComplex l E W (P.obj⟦r⟧) := by
@@ -66,7 +64,7 @@ theorem podTensorGoodShift (W : Scheme.{u})
 attribute [local instance] integralOperationsFiniteHasMap
 
 /-- The sign-free first-factor finite tensor shift, before taking the strict tower.
-Source: Stacks 011G, 07A4 (blueprint: def-pod-tensor-finite-signed-shifts). -/
+Source: Stacks 011G, 07A4. -/
 def podTensorFiniteShiftLeft (W : Scheme.{u}) (n : ℕ)
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (r : ℤ) :
     (integralOperationsTensorLevel l E W n).obj (P⟦r⟧, Q) ≅
@@ -93,7 +91,7 @@ def podTensorFiniteShiftLeft (W : Scheme.{u}) (n : ℕ)
       (MonoidalCategory.curriedTensor _) r) ≪≫ (R.commShiftIso r).app (B.obj (F.obj P, F.obj Q))
 
 /-- The second-factor finite tensor shift, with the native Koszul sign.
-Source: Stacks 011G, 07A4 (blueprint: def-pod-tensor-finite-signed-shifts). -/
+Source: Stacks 011G, 07A4. -/
 def podTensorFiniteShiftRight (W : Scheme.{u}) (n : ℕ)
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) (r : ℤ) :
     (integralOperationsTensorLevel l E W n).obj (P, Q⟦r⟧) ≅
@@ -120,7 +118,7 @@ def podTensorFiniteShiftRight (W : Scheme.{u}) (n : ℕ)
       (MonoidalCategory.curriedTensor _) r) ≪≫ (R.commShiftIso r).app (B.obj (F.obj P, F.obj Q))
 
 /-- Quotient-transition compatibility of the two explicitly constructed finite maps.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-finite-signed-shifts). -/
+Source: Stacks 011G and 07A4. -/
 def PodTensorFiniteShiftTransitions (W : Scheme.{u}) : Prop :=
   (∀ (n : ℕ) (P Q : CochainComplex (integralTowerModules l E W) ℤ) (r : ℤ),
     (integralOperationsTensorTransition l E W n).app (P⟦r⟧, Q) ≫
@@ -134,7 +132,7 @@ def PodTensorFiniteShiftTransitions (W : Scheme.{u}) : Prop :=
       ((integralOperationsTensorTransition l E W n).app (P, Q))⟦r⟧')
 
 /-- Homogeneous sections of the explicit finite maps, including the second-factor sign.
-Source: Stacks 011G and 07A4 (blueprint: def-pod-tensor-finite-signed-shifts). -/
+Source: Stacks 011G and 07A4. -/
 def PodTensorFiniteShiftGenerators (W : Scheme.{u}) : Prop :=
   (∀ (P Q : CochainComplex (integralTowerModules l E W) ℤ)
     (n : ℕ) (p q r : ℤ) (U : W.ProEtᵒᵖ)

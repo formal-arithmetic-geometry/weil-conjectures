@@ -214,7 +214,7 @@ theorem exists_basis_torsionBy (D : Type*) [AddCommGroup D] (ℓ : ℕ) [Fact �
     rfl
   exact ⟨e, fun i ↦ (Submodule.mem_torsionBy_iff _ _).1 (b i).2, he, he'⟩
 
-/-- Blueprint `proposition-integral-tate-module--1`: The torsion of a divisible group.
+/-- The torsion of a divisible group.
 
 This is also the blueprint lemma `proposition-integral-tate-module--1`.
 
@@ -360,8 +360,7 @@ variable {G : Type*} [AddCommGroup G]
 /-- **Torsion in a quotient of a divisible group.** Let `Λ` be a subgroup of an abelian group
 `G` on which multiplication by `n` is surjective. Then there is a short exact sequence
 `0 → G[n] / Λ[n] → (G / Λ)[n] → Λ / nΛ → 0`, whose second map sends the class of `g` with
-`n • g ∈ Λ` to the class of `n • g`.
-(blueprint: `proposition-cohomology-smooth-affine-curve--3`) -/
+`n • g ∈ Λ` to the class of `n • g`. -/
 theorem exists_exact_torsionBy_quotient (Λ : AddSubgroup G) (n : ℤ)
     (hG : Function.Surjective (zsmulAddGroupHom (α := G) n)) :
     ∃ (α : G[n] ⧸ Λ.addSubgroupOf G[n] →+ (G ⧸ Λ)[n])

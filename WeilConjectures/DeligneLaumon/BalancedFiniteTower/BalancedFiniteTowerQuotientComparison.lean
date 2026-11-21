@@ -10,7 +10,6 @@ public import WeilConjectures.DeligneLaumon.FinitePullbackStrictTowerData.Finite
 /-! # Quotient comparison and its ordinary finite evaluations
 
 Source: Stacks Project, Tags 03EK, 03EL and 07A4.
-(blueprint: lem-a1-balanced-finite-tower-quotient-comparison).
 -/
 
 @[expose] public noncomputable section

@@ -8,8 +8,6 @@ module
 public import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizationScalarData
 
 /-! # The normalized representative equation for integral scalar comparison
-
-Source: trace-definition coefficient-category comparison, integral steps 1--6.
 -/
 
 @[expose] public noncomputable section
@@ -24,9 +22,7 @@ namespace WeilConjectures
 
 /-- The good-representative normalization of an integral scalar comparison.
 This predicate is exactly the displayed lift equation, including the integral
-identity cast; it introduces no replacement comparison or additional assumption.
-Source: trace-definition integral comparison, representative-lift clause
-(blueprint: def-fd-integral-scalar-lift-property). -/
+identity cast; it introduces no replacement comparison or additional assumption. -/
 def fdIntegralScalarLiftProperty
     (l : ℕ) [Fact l.Prime]
     (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]

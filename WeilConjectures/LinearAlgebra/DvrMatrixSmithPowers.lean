@@ -21,22 +21,9 @@ namespace Matrix
 /-- A rectangular matrix over a DVR has a two-sided Smith presentation by sorted
 uniformizer powers. The number of nonzero entries is its module rank.
 
-Source: Mathlib's `Submodule.smithNormalForm` and
-`Submodule.exists_smith_normal_form_of_le`; Stacks Project, Algebra, Tag 00PD
-for the DVR characterization. Agent passage to a rectangular matrix.
-(auxiliary; not a blueprint node)
-
-Proof: Apply scalar Smith form to the image of the matrix map in the finite free
-codomain. Its diagonal coefficients are nonzero, since the image basis is linearly
-independent. The image is free. Lift its basis to the source to split the surjection
-onto the image. The kernel is a finite free submodule over the PID, so a kernel basis
-and the lifted image basis give a source basis. In these bases the matrix is rectangular
-diagonal. Every nonzero coefficient is a unit times a unique nonnegative power of the
-uniformizer. Absorb the units into the codomain basis and simultaneously permute the
-first image coordinates in source and target to sort the exponents. The number of
-image basis vectors equals the rank of the matrix and is bounded by both dimensions.
-With empty image or either matrix dimension zero the same construction uses empty
-bases and the zero diagonal. -/
+Source: Mathlib's `Submodule.smithNormalForm` and `Submodule.exists_smith_normal_form_of_le`;
+Stacks Project, Algebra, Tag 00PD for the DVR characterization. Agent passage to a rectangular
+matrix. (auxiliary. -/
 theorem exists_smith_pow {A : Type u} [CommRing A] [IsDomain A]
     [IsDiscreteValuationRing A] (π : A)
     (hπ : IsLocalRing.maximalIdeal A = Ideal.span {π}) (m n : ℕ)

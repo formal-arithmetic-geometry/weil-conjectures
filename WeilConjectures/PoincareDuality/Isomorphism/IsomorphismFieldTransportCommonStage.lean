@@ -113,32 +113,6 @@ attribute [local irreducible] rationalDerivedPullback commonStageDerivedPullback
   ObjectProperty.FullSubcategory.category
 
 /-- Descent of the exact finite-field family and its normalized inverse.
-Source: current blueprint sec-six-functors/sk-rem-sf-pf-done/
-lem-fix-weil-operations.proof.md, inverse automorphism paragraph;
-steps 5 and 6 of lem-pod-isomorphism-field-transport.
-(blueprint: lem-pod-isomorphism-field-transport-common-stage).
-
-Proof: invert the supplied normalized integral lambda comparisons and apply
-isomorphismPullbackScalarShift directly to the prescribed shifts. Their scalar
-comparisons therefore commute with those shifts, without identifying them with a
-separately chosen coefficient-exactness family.
-Use the actual rational scalar comparisons as the transition comparisons
-for the two finite-stage pullback families. Their normalized tower equations give
-coherent pair functor descent. Its representative formula agrees with the specified
-commonStageDerivedPullback by uniqueness, so the object and arrow clauses are its
-published formulas. The inclusion comparison is the identity at its own stage.
-The assumed scalar inverse squares make the finite-stage epsilon components a
-compatible transformation to the identity family. Descend it to the actual quotient;
-its component at a pair is the inclusion of epsilon at that pair's own stage.
-Descend its inverse in the same way, and apply the argument to the opposite family.
-This proves the two inverse-composition isomorphisms and the equivalence. Descend
-the prescribed finite-stage shifts; the scalar/shift squares give the inclusion
-shift equation. Each distinguished triangle is represented over a common finite
-field. Its image is isomorphic, through the scalar comparisons, to the image of
-that finite-stage triangle. Finite-stage exactness and the shift square prove that
-it is distinguished, including its connecting map. Additivity follows from triangulatedness.
-Identity inclusions, zero objects,
-empty schemes, and arbitrary common fields are covered by the same equations.
 -/
 theorem isomorphismFieldTransportCommonStage
     (l : ℕ) [Fact l.Prime]

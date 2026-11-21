@@ -51,18 +51,7 @@ private theorem normalized_roos_eq
 
 section
 /-- The composition square before localization, on every restricted strict complex.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 0941
-(blueprint: lem-pod-composition-restricted-roos).
-
-Proof: the two coordinate normalizations identify every supplied Roos comparison
-with the canonical additive Roos map, since the mapping-cocone identity is the
-sum of its two coordinate inclusions. The restricted-tower composition theorem
-identifies the composite restricted map with the two successive maps. Naturality
-of the additive Roos map moves the first restricted map past the second Roos
-comparison; composition of additive Roos comparisons then yields the single Roos
-comparison followed by the ordinary compositor on the tower. Functoriality of
-the strict Roos construction and the restricted-tower equation identify the
-remaining maps. Every step holds for all complexes, including zero complexes. -/
+Source: Stacks 0941. -/
 theorem podCompositionRestrictedRoos
     {V W Z : Scheme.{u}} (h : Z ⟶ W) (f : W ⟶ V) [IsIso h] [IsIso f]
     [∀ v : V, Invertible (l : V.residueField v)]

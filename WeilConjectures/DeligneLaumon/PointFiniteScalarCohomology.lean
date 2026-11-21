@@ -10,8 +10,7 @@ public import WeilConjectures.SmoothPurity.Common.CommonStageInternalHomData
 
 /-! # Point cohomology along the recorded finite-stage transitions
 
-Source: Bhatt--Scholze 6.8.14(2), with the normalized point-realization scalar square
-(blueprint: lem-a1-point-finite-scalar-cohomology).
+Source: Bhatt--Scholze 6.8.14(2), with the normalized point-realization scalar square.
 -/
 
 @[expose] public noncomputable section

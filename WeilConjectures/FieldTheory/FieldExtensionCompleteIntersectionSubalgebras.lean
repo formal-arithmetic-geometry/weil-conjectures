@@ -17,8 +17,7 @@ import Mathlib.Tactic.FieldSimp
 /-!
 # Complete-intersection subalgebras in field extensions
 
-Source: Stacks Project, Algebra, Lemma 07BV (blueprint:
-`lem-weil-pbc-field-extension-complete-intersection-subalgebras`).
+Source: Stacks Project, Algebra, Lemma 07BV.
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ private theorem exists_common_denominator
       field_simp
 
 /-- Every finite subset of a field extension is contained in an affine complete
-intersection subalgebra.  This is the first assertion of Stacks, Tag 07BV
-(blueprint: lem-weil-pbc-field-extension-complete-intersection-subalgebras).
+intersection subalgebra.  This is the first assertion of Stacks, Tag 07BV.
 
 Proof plan from the node:
 1. Form the subfield `L = k(E)` and choose a finite transcendence basis, using

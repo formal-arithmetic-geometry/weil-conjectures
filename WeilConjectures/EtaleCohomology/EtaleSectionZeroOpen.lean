@@ -9,7 +9,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSectionsEqualOpenEtaleCriterion
 
 /-! # The zero locus of an étale section is Zariski open
 
-Source: Stacks Project, Tag 04FR (auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 04FR (auxiliary.
 -/
 
 @[expose] public section
@@ -21,29 +21,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor AlgebraicGeomet
 namespace AlgebraicGeometry.Scheme
 
 /-- The zero locus theorem for a section of an abelian sheaf on the small étale site.
-Source: Stacks Project, Tag 04FR, clauses (1)--(3) (auxiliary; not a blueprint node).
-
-Proof:
-1. Form the union of the open subschemes where `s` restricts to zero. Open immersions
-are étale by `definition-torsion-sheaves--3`, so these are site objects.
-The sheaf condition (`situation-conventions`) gives zero on this union,
-including an empty union; maximality follows from the construction.
-2. Every site arrow is étale by cancellation. Its image is open by
-`lem-weil-pbc-etale-morphism-open-map`, and the map onto that image is a singleton
-étale cover. Sheaf separatedness descends vanishing to the image. Conversely,
-containment in the union gives factorization and hence zero restriction.
-3. Compute the geometric stalk (`def-weil-pbc-geometric-stalks`) using a small
-cofinal family of affine pointed neighbourhoods. Representatives exist by
-`lem-weil-pbc-affine-etale-essentially-small-cover`; an affine open around the lifted
-point refines any neighbourhood. Cofilteredness follows from
-`definition-torsion-sheaves--3`, and
-`lem-weil-pbc-colimit-initial-full-subcategory` identifies the small colimit and its
-coprojections with the stalk. Restrict `s` to a pointed affine refinement of `V`.
-4. If the germ is zero, regard the abelian groups as integer modules and apply
-`lem-weil-pbc-filtered-colimit-modules-elementwise`: some pointed refinement has zero
-restriction. Its image lies in the union by step 2, so the geometric point lies there.
-5. Conversely, a geometric point in the union factors through its open immersion.
-The stalk coprojections identify the germ of `s` with that of its zero restriction.
+Source: Stacks Project, Tag 04FR, clauses (1)--(3) (auxiliary.
 -/
 theorem etale_section_zero_open
     (T : Scheme.{u})

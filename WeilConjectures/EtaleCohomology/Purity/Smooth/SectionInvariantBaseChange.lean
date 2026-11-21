@@ -15,8 +15,8 @@ In a cartesian square `g' ≫ f = f' ≫ g` with sections `s` of `f` and `s'` of
 with `g'`, the canonical base change map of dualizing complexes `Lg'^* ω_f ⟶ ω_{f'}`
 (`AlgebraicGeometry.Etale.dualizingComplexBaseChangeMap`) induces
 `Lg^* 𝒞(f, s) ≅ 𝒞(f', s')` on section invariants when it is invertible, which is the case for
-`f` smooth (`proposition-exceptional-inverse-image-smooth-morphism` (c)). These are the fibre
-identifications of the deformation to the normal cone (`prose-09-12` (1)).
+`f` smooth. These are the fibre
+identifications of the deformation to the normal cone.
 
 ## Main definitions
 

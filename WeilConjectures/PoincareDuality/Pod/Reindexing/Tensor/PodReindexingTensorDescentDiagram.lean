@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexin
 
 /-! # Completed tensor square for scalar/reindexing transitions
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: def-pod-tensor-descent-diagram).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -56,9 +55,7 @@ attribute [local implicit_reducible] podOrdinaryReindex podGoodReindex
   podTensorTensorReindexDerivedChain
   podTensorTensorScalarDerivedChain podTensorTensorMixedDerivedChain
 
-/-- The InputInclusion component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The InputInclusion component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramInputInclusion
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -75,9 +72,7 @@ def podTensorDiagramInputInclusion
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := (sfIntegralConstructible l E Y).ι
 
-/-- The ReindexFunctor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ReindexFunctor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramReindexFunctor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -94,9 +89,7 @@ def podTensorDiagramReindexFunctor
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := podOrdinaryReindex l E g
 
-/-- The ScalarFunctor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ScalarFunctor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramScalarFunctor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -113,9 +106,7 @@ def podTensorDiagramScalarFunctor
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := integralOrdinaryDerivedScalar l E L ι X
 
-/-- The MixedFunctor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The MixedFunctor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramMixedFunctor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -132,9 +123,7 @@ def podTensorDiagramMixedFunctor
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := integralOrdinaryDerivedScalar l E L ι Y ⋙ podOrdinaryReindex l L g
 
-/-- The SourceLocalization component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The SourceLocalization component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramSourceLocalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -151,9 +140,7 @@ def podTensorDiagramSourceLocalization
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := podTensorGoodConstructibleLocalization l E Y
 
-/-- The ReindexLocalization component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ReindexLocalization component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramReindexLocalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -170,9 +157,7 @@ def podTensorDiagramReindexLocalization
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := integralOperationsGoodLocalization l E X
 
-/-- The TargetLocalization component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The TargetLocalization component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramTargetLocalization
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -189,9 +174,7 @@ def podTensorDiagramTargetLocalization
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := integralOperationsGoodLocalization l L X
 
-/-- The GoodInclusion component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The GoodInclusion component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramGoodInclusion
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -208,9 +191,7 @@ def podTensorDiagramGoodInclusion
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := (podTensorGoodConstructible l E Y).ι
 
-/-- The GoodReindex component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The GoodReindex component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramGoodReindex
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -229,9 +210,7 @@ def podTensorDiagramGoodReindex
       podGoodReindex
       l E g D
 
-/-- The GoodScalar component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The GoodScalar component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramGoodScalar
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -248,9 +227,7 @@ def podTensorDiagramGoodScalar
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := podTensorScalarGoodFunctor l E L ι X
 
-/-- The GoodMixed component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The GoodMixed component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramGoodMixed
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -268,9 +245,7 @@ def podTensorDiagramGoodMixed
     := (podTensorDiagramGoodInclusion l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore) ⋙
       podTensorScalarGoodFunctor l E L ι Y ⋙ podGoodReindex l L g D'
 
-/-- The GoodTransition component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The GoodTransition component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramGoodTransition
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -291,9 +266,7 @@ def podTensorDiagramGoodTransition
     isoWhiskerLeft (podTensorDiagramGoodInclusion l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)
       (podTensorGoodCoefficientTransition l E g L ι D D' S)
 
-/-- The PairReindex component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The PairReindex component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramPairReindex
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -313,9 +286,7 @@ def podTensorDiagramPairReindex
         ((podTensorDiagramInputInclusion l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore) ⋙
           (podTensorDiagramReindexFunctor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore))
 
-/-- The PairScalar component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The PairScalar component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramPairScalar
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -333,9 +304,7 @@ def podTensorDiagramPairScalar
     := (podTensorDiagramScalarFunctor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore).prod
       (podTensorDiagramScalarFunctor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)
 
-/-- The PairMixed component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The PairMixed component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramPairMixed
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -355,9 +324,7 @@ def podTensorDiagramPairMixed
         ((podTensorDiagramInputInclusion l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore) ⋙
           (podTensorDiagramMixedFunctor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore))
 
-/-- The DerivedTransition component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The DerivedTransition component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramDerivedTransition
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -374,9 +341,7 @@ def podTensorDiagramDerivedTransition
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := S.derived l E L ι g D D'
 
-/-- The PairTransition component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The PairTransition component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramPairTransition
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -401,9 +366,7 @@ def podTensorDiagramPairTransition
         _hD' T'
                   _hT' S _hcore))
 
-/-- The SourceTensor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The SourceTensor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramSourceTensor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -422,9 +385,7 @@ def podTensorDiagramSourceTensor
       (podTensorDiagramInputInclusion l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)) ⋙
         integralCompletedTensor l E Y
 
-/-- The ReindexTensor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ReindexTensor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramReindexTensor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -441,9 +402,7 @@ def podTensorDiagramReindexTensor
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := integralCompletedTensor l E X
 
-/-- The TargetTensor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The TargetTensor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramTargetTensor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -460,9 +419,7 @@ def podTensorDiagramTargetTensor
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := integralCompletedTensor l L X
 
-/-- The SourceRepresentative component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The SourceRepresentative component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramSourceRepresentative
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -481,9 +438,7 @@ def podTensorDiagramSourceRepresentative
       (podTensorDiagramGoodInclusion l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)) ⋙
         integralOperationsTensorOnGood l E Y
 
-/-- The ReindexRepresentative component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ReindexRepresentative component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramReindexRepresentative
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -500,9 +455,7 @@ def podTensorDiagramReindexRepresentative
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := integralOperationsTensorOnGood l E X
 
-/-- The TargetRepresentative component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The TargetRepresentative component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramTargetRepresentative
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -519,9 +472,7 @@ def podTensorDiagramTargetRepresentative
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := integralOperationsTensorOnGood l L X
 
-/-- The SourceComparison component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The SourceComparison component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramSourceComparison
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -544,9 +495,7 @@ def podTensorDiagramSourceComparison
       _hcore).prod (podTensorDiagramGoodInclusion l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore))
         (integralCompletedTensorComparison l E Y)
 
-/-- The ReindexComparison component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ReindexComparison component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramReindexComparison
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -567,9 +516,7 @@ def podTensorDiagramReindexComparison
           (podTensorDiagramReindexRepresentative l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore) :=
             integralCompletedTensorComparison l E X
 
-/-- The TargetComparison component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The TargetComparison component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramTargetComparison
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -590,9 +537,7 @@ def podTensorDiagramTargetComparison
           (podTensorDiagramTargetRepresentative l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore) :=
             integralCompletedTensorComparison l L X
 
-/-- The ReindexFactor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ReindexFactor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramReindexFactor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -610,9 +555,7 @@ def podTensorDiagramReindexFactor
     := isoWhiskerLeft (podTensorDiagramGoodInclusion l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore)
       (podTensorReindexGoodComparison l E g D)
 
-/-- The PairReindexFactor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The PairReindexFactor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramPairReindexFactor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -640,9 +583,7 @@ def podTensorDiagramPairReindexFactor
         ι D'
                       _hD' T' _hT' S _hcore)
 
-/-- The ScalarFactor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ScalarFactor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramScalarFactor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -659,9 +600,7 @@ def podTensorDiagramScalarFactor
     (_hcore : PodReindexCoefficientTransition.Core l E g L ι D D' S)
     := podTensorScalarGoodComparison l E L ι X
 
-/-- The PairScalarFactor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The PairScalarFactor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramPairScalarFactor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -689,9 +628,7 @@ def podTensorDiagramPairScalarFactor
         _hD'
                       T' _hT' S _hcore)
 
-/-- The MixedFactor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The MixedFactor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramMixedFactor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -719,9 +656,7 @@ def podTensorDiagramMixedFactor
         podTensorScalarGoodFunctor l E L ι Y) (podTensorReindexGoodComparison l
         L g D')
 
-/-- The PairMixedFactor component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The PairMixedFactor component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramPairMixedFactor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -749,9 +684,7 @@ def podTensorDiagramPairMixedFactor
         _hD'
                       T' _hT' S _hcore)
 
-/-- The ReindexChain component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ReindexChain component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramReindexChain
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -775,9 +708,7 @@ def podTensorDiagramReindexChain
               fun P ↦
     podTensorTensorReindexDerivedChain l E g D T P.1.obj P.2.obj
 
-/-- The ScalarChain component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ScalarChain component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramScalarChain
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -802,9 +733,7 @@ def podTensorDiagramScalarChain
               P ↦
     podTensorTensorScalarDerivedChain l E L ι X P.1 P.2
 
-/-- The MixedChain component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The MixedChain component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramMixedChain
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -829,9 +758,7 @@ def podTensorDiagramMixedChain
               P ↦
     podTensorTensorMixedDerivedChain l E g L ι D' T' P.1.obj P.2.obj
 
-/-- The ReindexComparisonIso component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ReindexComparisonIso component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramReindexComparisonIso
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -857,9 +784,7 @@ def podTensorDiagramReindexComparisonIso
           T' _hT' S _hcore)) ≪≫
       podTensorTensorReindexIso l E g D T _hT.2.2.2.1
 
-/-- The ScalarComparisonIso component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The ScalarComparisonIso component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramScalarComparisonIso
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]
@@ -880,9 +805,7 @@ def podTensorDiagramScalarComparisonIso
           (podTensorDiagramTargetTensor l E g D _hD T _hT L ι D' _hD' T' _hT' S _hcore) :=
             scalarTensorOrdinary l E L ι X
 
-/-- The MixedComparisonIso component of the fixed scalar/reindexing tensor diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: def-pod-tensor-descent-diagram). -/
+/-- The MixedComparisonIso component of the fixed scalar/reindexing tensor diagram. -/
 def podTensorDiagramMixedComparisonIso
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

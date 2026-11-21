@@ -24,12 +24,11 @@ over the boundary point and `η : Spec Ω ⟶ Spec A` lies over the generic geom
 The inertia group `I = {σ ∈ Gal(Ω / K) | σ ≡ id mod Q}` acts on the geometric generic stalk `F_η`
 of a sheaf `F` on `U`.
 
-For `F` finite locally constant (blueprint `lemma-boundary-stalk--1`, at a finite
-coefficient level), the specialization map
-`(j_* F)_x̄ ⟶ F_η` (`AlgebraicGeometry.Etale.boundarySpecialization`) is injective with image the
-inertia invariants `F_η^I`, and it intertwines the action of an element `σ` of the decomposition
-group (the stabiliser of `Q`) on `F_η` with the action on `(j_* F)_x̄` of the automorphism of the
-geometric point `x̄` induced by the residue automorphism of `σ`
+For `F` finite locally constant, the specialization map `(j_* F)_x̄ ⟶ F_η`
+(`AlgebraicGeometry.Etale.boundarySpecialization`) is injective with image the inertia invariants
+`F_η^I`, and it intertwines the action of an element `σ` of the decomposition group (the
+stabiliser of `Q`) on `F_η` with the action on `(j_* F)_x̄` of the automorphism of the geometric
+point `x̄` induced by the residue automorphism of `σ`
 (`AlgebraicGeometry.Etale.boundaryStalkMap_comp_boundarySpecialization`). In particular
 `(j_* F)_x̄ ≅ F_η^I` (`AlgebraicGeometry.Etale.boundaryStalkLinearEquiv`).
 
@@ -314,8 +313,8 @@ def inertiaInvariants :
   smul_mem' c x hx σ hσ := by rw [map_smul, hx σ hσ]
 
 include hϖ hWU m in
-/-- Blueprint `lemma-boundary-stalk--1`: the image of the specialization map is the
-module of inertia invariants of the geometric generic stalk. -/
+/-- The image of the specialization map is the module of inertia invariants of the geometric
+generic stalk. -/
 theorem range_boundarySpecialization [Finite Λ] [ConnectedSpace U]
     (hint : ∀ Y : U.FiniteEtale, PreGaloisCategory.IsConnected Y → IsIntegral Y.obj.left)
     [IsFiniteLocallyConstantSheaf F] :

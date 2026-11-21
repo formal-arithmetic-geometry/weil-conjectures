@@ -8,8 +8,6 @@ module
 public import WeilConjectures.FourierTransform.FdRawLocalization.FdRawLocalizationScalarData
 
 /-! # The supplied rational stage family in the named presentation
-
-Source: the presentation clause of raw localization scalar-descent step 1.
 -/
 
 @[expose] public noncomputable section
@@ -82,16 +80,7 @@ private def familyPresentation : RationalFamily l Ω T stage := by
 
 attribute [local irreducible] familyPresentation
 
-/-- The supplied stage functors and their entire shifts admit the named stage presentation.
-Source: presentation-transport clause of the assigned raw scalar-descent argument
-(blueprint: lem-fd-raw-rational-family-exists).
-
-Proof: The named stage category and shift are the original raw category and shift,
-with only their coefficient presentation changed. Record those equalities once.
-Transport each supplied functor and its coherent shift along these equalities.
-The transport fixes the whole functor and each shift isomorphism by HEq. Assemble
-them into RationalFamily. The construction uses no scalar comparison or coherence
-hypotheses and does not choose a replacement shift structure. -/
+/-- The supplied stage functors and their entire shifts admit the named stage presentation. -/
 theorem rawRationalFamilyExists : Nonempty (RationalFamily l Ω T stage) :=
   ⟨familyPresentation l Ω T stage⟩
 

@@ -10,10 +10,10 @@ public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
 /-!
 # The finite-level twist does not depend on the Kummer level
 
-Blueprint `sk-def-purity-conv`: the finite-level twist `A(1) = μ_{ℓ^N} ⊗ A` of a finite
-coefficient ring `A` is defined with any `N ≥ 1` such that `ℓ^N A = 0`, and does not depend on
-the choice of `N`. In this repository `A(1)` is built with `N` minimal, `ℓ^N` being the
-characteristic `n` of `A` (`AlgebraicGeometry.Etale.tateTwistSheaf`, `≅ μₙ ⊗ A` by
+The finite-level twist `A(1) = μ_{ℓ^N} ⊗ A` of a finite coefficient ring `A` is defined with any
+`N ≥ 1` such that `ℓ^N A = 0`, and does not depend on the choice of `N`. In this repository
+`A(1)` is built with `N` minimal, `ℓ^N` being the characteristic `n` of `A`
+(`AlgebraicGeometry.Etale.tateTwistSheaf`, `≅ μₙ ⊗ A` by
 `AlgebraicGeometry.Etale.tateTwistSheafOneIso`). For every multiple `m = n d` of `n` which is
 invertible on `X`, the power map `μ_m ⟶ μ_n`, `u ↦ u^d`
 (`AlgebraicGeometry.Scheme.rootsOfUnityPow`), becomes an isomorphism after extending the
@@ -184,7 +184,7 @@ theorem isIso_extendScalars_map_rootsOfUnityPow (n d : ℕ) (hn : (n : Λ) = 0)
   have : Mono (F.map (rootsOfUnityPow n d (n * d) rfl)) := hex.mono_g h0
   exact isIso_of_mono_of_epi _
 
-/-- Blueprint `sk-def-purity-conv`: Purity conventions and the rank-one datum
+/-- Purity conventions and the rank-one datum
 
 *The finite-level twist does not depend on the Kummer level.* Let `Λ` be a ring of
 characteristic `n ≠ 0` (for `Λ = A_{E,n}`, `n = ℓ^N` with `N` minimal) and `X` a scheme on which

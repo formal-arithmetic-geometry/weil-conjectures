@@ -14,8 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 
 For a morphism `g : V ⟶ B` smooth of pure relative dimension `d` with a section `s`, the
 *section invariant* `𝒞(g, s) = Ls^* ω_g` (`AlgebraicGeometry.Etale.sectionInvariant`) is an
-invertible object of `D(B_ét, Λ)`, since `ω_g` is
-(`proposition-exceptional-inverse-image-smooth-morphism` (a)).
+invertible object of `D(B_ét, Λ)`, since `ω_g` is.
 
 For a closed section `s`, the deformation to the normal cone of the section is the scheme
 `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` (`AlgebraicGeometry.Scheme.IdealSheafData.deformationSpace`), the
@@ -48,23 +47,22 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} (d : ℕ)
 
-/-- Blueprint `lemma-section-normal-bundle--1`: Section invariant
+/-- Section invariant
 
 For `g : V ⟶ B` smooth of pure relative dimension `d` and a section `s` of `g`, the section
 invariant `𝒞(g, s) = Ls^* ω_g = Ls^* Rg^! Λ_B` is an invertible object of `D(B_ét, Λ)`: the
-dualizing complex `ω_g` is invertible by cohomological smoothness
-(`proposition-exceptional-inverse-image-smooth-morphism`,
-`proposition-exceptional-inverse-image-smooth-morphism` (a)), and derived pullback preserves
+dualizing complex `ω_g` is invertible by cohomological smoothness,
+and derived pullback preserves
 invertible objects. -/
 theorem isInvertible_sectionInvariant (g : V ⟶ B) [SmoothOfRelativeDimension d g]
     [HasCompactification g] [HasInvertibleExponent Λ V] (s : B ⟶ V) :
     DerivedCategory.isInvertible Λ B (sectionInvariant Λ g s) :=
   DerivedCategory.isInvertible.leftDerivedUpperStar s (isInvertible_dualizingComplex Λ (d := d) g)
 
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section
+/-- Deformation space of a closed section
 
 The *family object* `F = Ls̃^* ω_{g̃} ∈ D(𝔸¹_B, Λ)` of the deformation to the normal cone of a
-section `s` of `g : V ⟶ B`: the section invariant (`lemma-section-normal-bundle--1`) of the
+section `s` of `g : V ⟶ B`: the section invariant of the
 deformation `g̃ : D_s V ⟶ 𝔸¹_B` (`AlgebraicGeometry.Scheme.Hom.deformationSpaceProj`) and its
 section `s̃ : 𝔸¹_B ⟶ D_s V` (`AlgebraicGeometry.Scheme.Hom.deformationSpaceSection`). Here
 `D_s V = Spec_V 𝒪_V[t, I t⁻¹]` is the extended Rees algebra form of
@@ -81,7 +79,7 @@ noncomputable def deformationFamilyObject (g : V ⟶ B) (s : B ⟶ V)
       (Sheaf 𝔸(ULift.{u} (Fin 1); B).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   sectionInvariant Λ (Scheme.Hom.deformationSpaceProj g s) s.deformationSpaceSection
 
-/-- Blueprint `definition-deformation-normal-bundle`: Deformation space of a closed section
+/-- Deformation space of a closed section
 
 The family object `F = Ls̃^* ω_{g̃}` of the deformation to the normal cone of a closed section `s`
 of a morphism `g` smooth of pure relative dimension `d` is an invertible object of

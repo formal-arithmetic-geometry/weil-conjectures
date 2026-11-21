@@ -10,7 +10,6 @@ public import WeilConjectures.DeligneLaumon.FieldShriekCompositionNormalization
 /-! # Common-refinement equality for completed tower components
 
 Source: Stacks 0F7J, the six-square comparison of two compactification towers.
-(blueprint: lem-zl-completed-composition-tower-independence).
 -/
 
 @[expose] public noncomputable section
@@ -27,7 +26,7 @@ variable (l : ℕ) [Fact l.Prime]
 
 /-- Transport of a single completed tower map to three specified compactifications.
 Every factor is supplied explicitly; no choice of an unproved witness is made.
-Source: Stacks 0F7J (blueprint: lem-zl-completed-composition-tower-independence). -/
+Source: Stacks 0F7J. -/
 def sfCompletedCompositionTransport
     {X Y Z : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ Z}
     (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))
@@ -61,22 +60,7 @@ include hl in
 /-- The transported completed arrows agree, conditional on the local normalizations.
 This asserts an equality of already constructed morphisms, with no existence or
 invertibility conclusion for a compositor.
-Source: Stacks 0F7J, independence-of-choices proof
-(blueprint: lem-zl-completed-composition-tower-independence).
-
-Proof: take a common refining compatible tower and equalize parallel refinement
-arrows. In its comparison with either original tower label the six proper/open
-squares A,B,C,D,E,F as in Stacks 0F7J. Horizontal pasting gives the comparison for E
-from F and A; vertical pasting gives the equality for B,F and C,D. Naturality of B
-moves the A comparison through the middle proper/open map. Insert the canonical
-proper and open compositors, use their associativity, and cancel adjacent inverse
-refinement factors. These equalities hold on strict systems before realization.
-The normalized completed realization preserves those equations and identifies each
-refinement factor with the one in SfCompletedRefinementSpec: transpose under the
-open adjunction, where its normalization fixes the map, then use faithfulness.
-Consequently both displayed transported arrows equal the transported map of the
-common tower. No faithfulness of finite derived evaluation is used. Identical
-towers with different normalized witnesses are included in the argument. -/
+Source: Stacks 0F7J, independence-of-choices proof. -/
 theorem sfCompletedCompositionTransport_independent
     (cf : Compactification f) (cg : Compactification g) (cfg : Compactification (f ≫ g))
     (K : sfIntegralConstructibleCategory l E X)

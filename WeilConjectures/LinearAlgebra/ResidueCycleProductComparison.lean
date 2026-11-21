@@ -11,22 +11,13 @@ import Mathlib.LinearAlgebra.Projection
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-! # Extension of residue cycle comparisons to product terms
 Source: Stacks Project, Tag 0BF2, linear algebra of the Picard comparison.
-(blueprint: lem-sc-residue-cycle-product-comparison)
 -/
 @[expose] public section
 set_option autoImplicit false
 open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme
 /-- Extend cycle comparison homomorphisms along tensorized coordinate projections.
-Source: Stacks Project, Tag 0BF2, linear algebra of the Picard comparison.
-(blueprint: lem-sc-residue-cycle-product-comparison)
-
-Proof: Choose a complement of every cycle subspace over the residue field and project
-onto that subspace. Compose with each comparison and the tensorized coordinate
-projection, then take their product. Tensor base change respects composition, so
-the coordinate of every admissible image is its stated cycle. The projection fixes
-that cycle and the given comparison identity proves the product identity. For an
-empty index type the identity is the equality of the unique empty functions. -/
+Source: Stacks Project, Tag 0BF2, linear algebra of the Picard comparison. -/
 theorem residue_cycle_product_comparison
     {R κ : Type*} [CommRing R] [Field κ] [Algebra R κ]
     {ι : Type*} {V : Type*} [AddCommGroup V] [Module R V]

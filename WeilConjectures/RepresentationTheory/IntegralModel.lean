@@ -56,7 +56,7 @@ namespace PadicAlgCl
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: the first step of the proof.
+/-- The first step of the proof.
 
 The matrix coefficients of a continuous matrix representation `φ` of a compact group over
 `ℚ̄_ℓ` all lie in a single finite extension `E` of `ℚ_ℓ`. -/
@@ -128,7 +128,7 @@ theorem exists_finiteDimensional_forall_mem {G : Type*} [Group G] [TopologicalSp
       hXmono (Finset.union_subset_union_right Finset.subset_union_right)⟩)
   exact ⟨F (s ∪ t), hF _, fun g i j ↦ (ht (Set.mem_univ g) i j).1⟩
 
-/-- Blueprint `proposition-lattices-representations-normal-scheme`: the second step of the proof.
+/-- The second step of the proof.
 
 Let `σ` be a representation of a group `G` on a `ℚ̄_ℓ`-vector space `V` with basis `b`, whose
 matrix coefficients lie in a finite extension `E` of `ℚ_ℓ` and are bounded. Then the

@@ -124,9 +124,7 @@ augmented Čech complex of the injective sheaf `I^q` is exact (Stacks `03F6`, `0
 
 The groups `I^q(V)` are only `v`-small, so `D` lives in `AddCommGrpCat.{v}`; this is why the
 covering is indexed by `ι : Type v` and the cohomology is computed in `AddCommGrpCat.{v}`. See
-`Sheaf.exists_cechDoubleComplex_uliftFunctor` for other universes.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, Steps 1 to 3 of the proof) -/
+`Sheaf.exists_cechDoubleComplex_uliftFunctor` for other universes. -/
 theorem Sheaf.exists_cechDoubleComplex [HasExt.{v} (Sheaf J AddCommGrpCat.{v})]
     [EnoughInjectives (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type v} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
@@ -202,9 +200,7 @@ quadrant double complex `D` in `AddCommGrpCat.{max v w}` such that
 * the total complex of `D` computes the universe lift of `H^n(X, F)`.
 
 As in `Sheaf.exists_cechDoubleComplex`, it is `D^{p, q} = C^p(𝔘, I^q)` for an injective
-resolution `F → I^•`, where `I^q` is lifted to `AddCommGrpCat.{max v w}`.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, Steps 1 to 3 of the proof) -/
+resolution `F → I^•`, where `I^q` is lifted to `AddCommGrpCat.{max v w}`. -/
 theorem Sheaf.exists_cechDoubleComplex_uliftFunctor [EssentiallySmall.{v} C]
     [HasExt.{w} (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :
@@ -288,9 +284,7 @@ The `E₂`-term is the `p`-th cohomology of the Čech complex of the family `fun
 of objects of `Over X` with coefficients in the restriction of `ℋ^q(F)` to `Over X`.
 
 The site is assumed essentially small, as are the sites of the Stacks project: this provides
-injective resolutions of abelian sheaves, which need not exist on a large site.
-
-(blueprint: `lemma-coherent-base-change-invertible-sheaves--1`, `lem-sc-cech-spectral`) -/
+injective resolutions of abelian sheaves, which need not exist on a large site. -/
 theorem Sheaf.exists_cechToDerivedSpectralSequence [EssentiallySmall.{v} C]
     [HasExt.{w} (Sheaf J AddCommGrpCat.{v})] (F : Sheaf J AddCommGrpCat.{v}) (X : C)
     {ι : Type w} {U : ι → C} (π : ∀ i, U i ⟶ X) (hπ : Sieve.ofArrows U π ∈ J X) :

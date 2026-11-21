@@ -184,7 +184,7 @@ open CategoryTheory
 K-injective complex `I`, the localization functor `Qh : K(C) ⥤ D(C)` induces bijections
 `Hom_K(N, I) ≃ Hom_D(N, I)` for every complex `N`; the same holds in the bounded below derived
 category for bounded below `N` and `I`; and a quasi-isomorphism between K-injective complexes is
-a homotopy equivalence. (blueprint: `lem-weil-pbc-kinjective-hom-derived`) -/
+a homotopy equivalence. -/
 theorem Qh_map_bijective_and_plus {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C] :
     (∀ (N : HomotopyCategory C (ComplexShape.up ℤ)) (I : CochainComplex C ℤ) [I.IsKInjective],
       Function.Bijective (DerivedCategory.Qh.map :

@@ -9,8 +9,7 @@ public import WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingCohere
 
 /-! # Generator formulas for the chain-level system tensor model
 
-Source: Stacks 03D2, 03EK, 03EL, 07A4 and 0941
-(blueprint: stage3-pod-reindexing-coherent-tensor-roos).
+Source: Stacks 03D2, 03EK, 03EL, 07A4 and 0941.
 -/
 
 @[expose] public noncomputable section

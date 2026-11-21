@@ -49,10 +49,9 @@ open Scheme
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] (n : ℕ)
   (X : Scheme.{u})
 
-/-- **Reduction modulo `ℓⁿ` commutes with internal homs** (blueprint
-`proposition-six-operations-change-coefficients--7`): for `A, B ∈ D(Mod_{𝒪_{E,X}})`, the comparison
-`RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)` of the derived reduction, monoidal
-through `Functor.leftDerivedFunctorMonoidal`, is an isomorphism. -/
+/-- **Reduction modulo `ℓⁿ` commutes with internal homs**: for `A, B ∈ D(Mod_{𝒪_{E,X}})`, the
+comparison `RHom(A, B) ⊗ᴸ 𝒪_E ⧸ ℓⁿ ⟶ RHom(A ⊗ᴸ 𝒪_E ⧸ ℓⁿ, B ⊗ᴸ 𝒪_E ⧸ ℓⁿ)` of the derived
+reduction, monoidal through `Functor.leftDerivedFunctorMonoidal`, is an isomorphism. -/
 theorem isIso_ihomComparison_leftDerivedIntegersModPowReduction
     (A B : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})
       (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X))) :

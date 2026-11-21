@@ -13,8 +13,7 @@ import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 /-!
 # An inseparable element in a finite nonseparable field extension
 
-Source: Stacks Project, Algebra, Definition 10.42.1 (Tag 030O), applied to a finite extension
-(blueprint: lem-pc-finite-inseparable-element).
+Source: Stacks Project, Algebra, Definition 10.42.1 (Tag 030O), applied to a finite extension.
 -/
 
 @[expose] public section
@@ -23,7 +22,7 @@ universe u v
 
 namespace FieldExtension
 
-/-- (blueprint: lem-pc-finite-inseparable-element) A finite field extension that is not
+/-- A finite field extension that is not
 separable has an element whose minimal polynomial is inseparable.
 
 For the contrapositive, assume every element has a separable minimal polynomial. Each

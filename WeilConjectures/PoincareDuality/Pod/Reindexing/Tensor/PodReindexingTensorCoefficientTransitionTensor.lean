@@ -16,8 +16,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Completed tensor square for scalar/reindexing transitions
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-tensor).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -111,14 +110,7 @@ private theorem associatorComponent
   exact Category.id_comp f
 
 /-- The normalized completed tensor square of a coefficient transition.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-reindexing-tensor-coefficient-transition-tensor).
-
-Proof: on simultaneous flat quotient resolutions, both routes send every
-homogeneous pure tensor to the same scalar tensor by balanced associativity.
-The formula commutes with quotient transitions and with the signed total
-differential.  Applying the full Roos realization and the normalized tensor
-comparisons gives the displayed derived equality for all constructible inputs.
+Source: Stacks 03EL, 06YY, 0941.
 -/
 theorem podReindexingTensorCoefficientTransition_tensor
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]

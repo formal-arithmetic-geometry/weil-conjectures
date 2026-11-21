@@ -10,7 +10,6 @@ public import WeilConjectures.PoincareDuality.PodReductionRepresentatives.PodRed
 /-! # Naturality of reduced unit sections and transport along the pro-etale equivalence
 
 Source: Stacks 03D2, 06YY, 09A5 and 0941.
-(blueprint: lem-pod-reduction-reindex-strict-tensor).
 -/
 
 @[expose] public noncomputable section

@@ -11,8 +11,7 @@ import WeilConjectures.PoincareDuality.PodTensorShiftNormalization.PodTensorShif
 
 /-! # Proved calculations for tensor-shift path normalization
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-roos-transport-t5).
+Source: Stacks 011G, 07A4, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -54,8 +53,7 @@ attribute [local irreducible] integralOperationsRoos
 -- Share the normalized categorical expressions without unfolding coefficient constructions.
 /-- Transport a source signed Roos shift through reindexing and a tower morphism.
 Use comparison naturality and CommShift, RoosNaturality, RoosShift, and signed-shift naturality.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 011G, 07A4, 0941
-(blueprint: lem-pod-tensor-shift-roos-transport-t5). -/
+Source: Stacks 011G, 07A4, 0941. -/
 theorem roos_path_shift
     (D : PodCompletionReindex l E g) (hD : PodCompletionReindex.Laws l E g D)
     {C C' : ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E Y) ℤ}

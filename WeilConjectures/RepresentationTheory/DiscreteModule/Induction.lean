@@ -54,8 +54,7 @@ end CategoryTheory.Abelian.Ext
 namespace DiscreteModule
 
 /-- If `r` kills a discrete `G`-module `M`, then `r` kills its cohomology `Hⁿ(G, M)`. In
-particular the cohomology of a module over `ℤ/r` is a `ℤ/r`-module.
-(blueprint: `def-exc-continuous-cohomology`) -/
+particular the cohomology of a module over `ℤ/r` is a `ℤ/r`-module. -/
 lemma zsmul_eq_zero_of_forall_zsmul_eq_zero {G : Type u} [Group G] [TopologicalSpace G]
     [IsTopologicalGroup G] {M : DiscreteModule.{w} G} {r : ℤ} (hM : ∀ m : M.obj.V, r • m = 0)
     {n : ℕ} (x : H G M n) : r • x = 0 := by

@@ -77,8 +77,7 @@ composite
 
 of the coevaluation, `f ⊗ 𝟙`, the braiding and the evaluation. For the symmetric monoidal
 category `(Perf R, ⊗ᴸ_R, R)` of perfect complexes over a commutative ring `R` this is
-`tr_R(f | P)`, an element of `End (𝟙_ C) = R`
-(blueprint: `definition-categorical-trace--2`). -/
+`tr_R(f | P)`, an element of `End (𝟙_ C) = R`. -/
 noncomputable def trace {X : C} [HasRightDual X] (f : X ⟶ X) : 𝟙_ C ⟶ 𝟙_ C :=
   η_ X Xᘁ ≫ f ▷ Xᘁ ≫ (β_ X Xᘁ).hom ≫ ε_ X Xᘁ
 
@@ -320,8 +319,7 @@ lemma IsPerfectPairing.evaluation_exactPairing {X Y : C} (hX : IsDualizable X)
     ε_ Y X = b :=
   uncurry_curry b
 
-/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
-`definition-perfect-pairing--1`): perfectness of a pairing is symmetric in the two variables.
+/-- Perfectness of a pairing is symmetric in the two variables.
 
 If `X` is dualizable and the pairing `b : X ⊗ Y ⟶ 𝟙_ C` is perfect, `Y ≅ [X, 𝟙_ C]`, then the
 swapped pairing `Y ⊗ X ⟶ X ⊗ Y ⟶ 𝟙_ C` is perfect as well, `X ≅ [Y, 𝟙_ C]`: `b` is the
@@ -336,8 +334,7 @@ theorem IsPerfectPairing.braiding_hom_comp {X Y : C} (hX : IsDualizable X)
     rfl
   exact ⟨hε ▸ isIso_curry_evaluation X Y⟩
 
-/-- Blueprint `rem-ptr-pod-perfect-derived-pairing-6` (pointer to the properties of
-`definition-perfect-pairing--1`): perfectness of a pairing is symmetric in the two variables.
+/-- Perfectness of a pairing is symmetric in the two variables.
 
 In a symmetric monoidal closed category, a pairing `b : X ⊗ Y ⟶ 𝟙_ C` of dualizable objects
 (for instance perfect point complexes) is perfect, `Y ≅ [X, 𝟙_ C]`, if and only if the swapped

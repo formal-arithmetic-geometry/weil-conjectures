@@ -87,8 +87,7 @@ theorem map_radical_le {f : L →ₗ⁅R⁆ L'} (hf : Function.Surjective f) :
 
 /-- **The solvable radical is characteristic.** An isomorphism of Lie algebras `e : L ≃ L'` maps
 the radical of `L` onto the radical of `L'`; in particular every automorphism of `L` preserves
-its radical.
-(blueprint: `rem-ptr-wf-lie-radical-centre-3`) -/
+its radical. -/
 theorem map_radical (e : L ≃ₗ⁅R⁆ L') : (radical R L).map (e : L →ₗ⁅R⁆ L') = radical R L' := by
   refine le_antisymm (map_radical_le e.surjective) fun y hy ↦ ?_
   have h := map_radical_le (R := R) (f := (e.symm : L' →ₗ⁅R⁆ L)) e.symm.surjective

@@ -23,7 +23,7 @@ with the opposite of `B` is an endomorphism algebra.  The central-simple-algebra
 criterion for a split tensor product then gives isomorphic positive matrix
 amplifications of `A` and `B`, namely `IsBrauerEquivalent A B`.  This is the
 injectivity argument in Stacks Project, Theorem 03R7; the cocycle convention is
-that of Section 0DVG. (blueprint: lem-sc-brauer-scalar-defect-faithful-backward). -/
+that of Section 0DVG.. -/
 theorem brauerEquivalent_of_brauerScalarDefect_eq (K : Type u) [Field K]
     (A B : CSA.{u, u} K) (x y : GaloisUnitsH2 K)
     (hx : HasBrauerScalarDefect K A x) (hy : HasBrauerScalarDefect K B y)

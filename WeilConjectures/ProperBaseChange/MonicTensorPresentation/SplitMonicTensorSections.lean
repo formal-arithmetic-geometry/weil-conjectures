@@ -10,8 +10,7 @@ public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-! # Closed sections of a split monic tensor presentation
 
-Source: Stacks Project, Morphisms, Tag 03HW, final paragraph of lemma-massage-finite
-(blueprint: lem-weil-pbc-split-monic-tensor-sections).
+Source: Stacks Project, Morphisms, Tag 03HW, final paragraph of.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ zero there, so at least one factor is zero. Choose one such factor for each equa
 at the resulting root tuple, followed by the structural map to the domain quotient, agrees with
 the quotient map on every tensor factor, hence everywhere. Taking kernels identifies the given
 prime as the inverse image of its contraction along this evaluation map. The finite set of all
-root tuples supplies all the sections, including the empty tuple when there are no equations.
-(blueprint: lem-weil-pbc-split-monic-tensor-sections). -/
+root tuples supplies all the sections, including the empty tuple when there are no equations. -/
 theorem exists_cover (R : Type u) [CommRing R] {ι : Type v} [Finite ι]
     (P : ι → R[X]) (hP : ∀ i, (P i).Monic) (hsp : ∀ i, (P i).Splits) :
     ∃ (n : ℕ) (e : Fin n → Tensor P →ₐ[R] R),

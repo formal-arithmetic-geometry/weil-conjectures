@@ -9,9 +9,6 @@ public import WeilConjectures.DeligneLaumon.ConstructiblePointComparisonData
 public import WeilConjectures.DeligneLaumon.PointRealizationStandardCohomology
 
 /-! # Normalization of the finite point scalar component
-
-Source: the point coefficient convention, blueprint order 1509
-(blueprint: lem-a1-point-scalar-beta-normalization).
 -/
 
 @[expose] public noncomputable section

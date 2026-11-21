@@ -18,9 +18,7 @@ of condensed `Λ`-module objects: the comparison `Φ` of the two finite-coeffici
 (`ProEtale.finiteCoefficientDerivedEquivalence`) followed by `Rν_*`. On bounded constructible
 complexes it is `ProEtale.CondensedRing.finiteEtaleReading`.
 
-This file proves that `ρ_X` commutes with internal homs out of bounded constructible complexes
-(blueprint `theorem-verdier-biduality`, proof of (i): the comparison is an equivalence
-compatible with tensor products, hence with internal homs):
+This file proves that `ρ_X` commutes with internal homs out of bounded constructible complexes:
 ```
 ρ_X RHom(A, B) ≅ RHom(ρ_X A, ρ_X B),
 ```

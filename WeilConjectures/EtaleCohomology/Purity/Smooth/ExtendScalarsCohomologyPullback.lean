@@ -393,7 +393,7 @@ theorem leftDerivedUpperStar_map_chernClass (L : Y.Pic) :
   rfl
 
 omit [CompactSpace X] [QuasiSeparatedSpace X] [HasInvertibleExponent Λ X] in
-/-- Blueprint `proposition-purity-vector-bundles`: Kummer additivity.
+/-- Kummer additivity.
 
 For a line bundle `L` on a quasi-compact quasi-separated scheme `Y` (for instance a separated
 finite-type `k`-scheme) on which the exponent of `Λ` is invertible, let

@@ -11,9 +11,7 @@ import all WeilConjectures.SmoothPurity.Supporting.IsomorphismReductionTower
 
 /-! # Quotient coherence of the unit-normalized restriction comparison
 
-Source: Stacks Project, Tags 03D6 and 0941; the ordinary comparison in Step 8
-of `lem-pod-derived-automorphism-hom-evaluation`.
-(blueprint: lem-pod-restriction-reindexing-transition)
+Source: Stacks Project, Tags 03D6 and 0941.
 -/
 
 @[expose] public noncomputable section
@@ -38,21 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       completedIntegralCoefficientSheafUnrestricted l E X) [IsIso c]
 
 /-- The finite unit-normalized comparisons assemble across every coefficient arrow.
-Source: Stacks 03D6, 0941; ordinary restriction/reindexing in node proof Step 8.
-Proof: identify c with the projection-normalized completed coefficient map by
-joint monicity of its projections. Exact sectionwise inverse image therefore
-reindexes the whole restricted tower. At each finite level compare its component
-with the displayed composite. The inverse-image/evaluation mate preserves the
-sequence adjunction unit, the finite/intrinsic comparison preserves the finite
-unit, and r takes that unit to restriction along the site counit. Evaluate on a
-section over gU, then restrict along U to g*(gU). The adjunction triangle makes
-this precisely the original section over U. The sequence unit and restriction
-maps are natural for every quotient arrow, so the two component routes agree
-on these sections. They generate all sections because the site and coefficient
-maps are equivalences. Extensionality of module-sheaf maps gives the equation.
-This argument retains all quotient transitions and uses no limit or derived
-limit, and no equality detection in a derived category.
-(blueprint: lem-pod-restriction-reindexing-transition). -/
+Source: Stacks 03D6, 0941. -/
 theorem podRestrictionReindexingTransition
     (r : ∀ n : ℕ,
       sfIntrinsicPullback (finiteCoefficientRing l E (n + 1)) g ⋙

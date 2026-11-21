@@ -69,8 +69,7 @@ private theorem transportShiftIso_hom
   simpa only [Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom] using
     transportShiftIso S H T i e f f' a.hom h
 
-/-- Shift either derived input of the completed tensor.
-Source: construction (blueprint: lem-pod-tensor-shift-family-model). -/
+/-- Shift either derived input of the completed tensor. -/
 abbrev podTensorDerivedShiftFamily (W : Scheme.{u}) :=
   ∀ (r : ℤ) (right : Bool),
     podTensorRepresentativePairOf
@@ -78,9 +77,7 @@ abbrev podTensorDerivedShiftFamily (W : Scheme.{u}) :=
         integralCompletedTensor l E W ≅
       integralCompletedTensor l E W ⋙ shiftFunctor _ r
 
-/-- Representative normalization of a derived tensor shift family.
-Source: blueprint dual-Tate Steps 1 and 5
-(blueprint: lem-pod-tensor-shift-family-model). -/
+/-- Representative normalization of a derived tensor shift family. -/
 def podTensorDerivedShiftFamilyNormalization (W : Scheme.{u})
     (ρ : PodSignedRoosShift (scalarReductionSource l E W)) (hρ : ρ.Laws)
     (i : podTensorDerivedShiftFamily l E W) : Prop :=
@@ -149,14 +146,7 @@ private theorem normalization_comp {C : Type*} [Category C]
   simp only [Category.assoc]
 
 /-- A normalized natural shift family determines both fields of the signed model.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 07A4 and 011G
-(blueprint: lem-pod-tensor-shift-family-model).
-
-Proof: precompose each natural comparison with the tensor image of the given
-input identification and the identity. The presentation equation replaces that
-composite by the canonical localization shift followed by the shifted unprimed
-presentation. Apply naturality of the family and its representative normalization.
-The representative component formula yields exactly the two Model equations. -/
+Source: Stacks 07A4 and 011G. -/
 theorem podTensorDerivedShiftFamily_model (W : Scheme.{u})
     (ρ : PodSignedRoosShift (scalarReductionSource l E W)) (hρ : ρ.Laws)
     (i : podTensorDerivedShiftFamily l E W)

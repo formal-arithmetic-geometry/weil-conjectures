@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in several independent groups.
 
-
 ## Basic characterizations
 
 - `AlgebraicGeometry.isSchemeTheoreticallyDominant_iff_isIso_imageι`: a morphism is
@@ -34,8 +33,7 @@ Complements to Mathlib's `IsSchemeTheoreticallyDominant`, in several independent
 
 ## Flat base change for scheme-theoretic images
 
-Formation of scheme-theoretic images commutes with flat base change (blueprint:
-`lemma:nagata-scheme-image-flat-base-change`; Stacks Project Tag 081I):
+Formation of scheme-theoretic images commutes with flat base change:
 
 - `AlgebraicGeometry.Scheme.Hom.ker_pullback_snd` and
   `AlgebraicGeometry.Scheme.Hom.ker_of_isPullback`: for `q : Y' ⟶ Y` flat, the kernel of
@@ -49,8 +47,7 @@ Formation of scheme-theoretic images commutes with flat base change (blueprint:
   `AlgebraicGeometry.Scheme.Hom.image.isPullback_imageι` is the same statement in the
   form of a cartesian square;
 - `AlgebraicGeometry.Scheme.Hom.ker_morphismRestrict`: the special case of the
-  restriction to an open subscheme of the target
-  (blueprint: `lemma:nagata-scheme-image-restrict-open`);
+  restriction to an open subscheme of the target;
 - `AlgebraicGeometry.Scheme.Hom.preimage_subset_range_toImage_of_isClosed`: the
   set-theoretic form of the same statement over an open in which the range of the
   morphism is already closed — there the scheme-theoretic image adds no points.
@@ -78,13 +75,10 @@ inclusion `U.ι` is scheme-theoretically dominant:
 
 `AlgebraicGeometry.ext_of_isSchemeTheoreticallyDominant`: two `S`-morphisms `a b : T ⟶ Y`
 into a scheme `Y` separated over `S` are equal as soon as they agree after composing with
-a scheme-theoretically dominant morphism `v : V ⟶ T` (blueprint:
-`lem:chow-agree-on-dense-open`; Stacks Project Tag 01RH). Taking `v = V.ι` for a
-scheme-theoretically dense open `V ⊆ T` gives the form in which the statement is usually
-quoted, and combining it with
-`AlgebraicGeometry.IsSchemeTheoreticallyDominant.homOfLE` lets one test equality of
-morphisms defined on an intermediate open `W` on a scheme-theoretically dense open
-`V ≤ W`.
+a scheme-theoretically dominant morphism `v : V ⟶ T`. Taking `v = V.ι` for a scheme-theoretically
+dense open `V ⊆ T` gives the form in which the statement is usually quoted, and combining it with
+`AlgebraicGeometry.IsSchemeTheoreticallyDominant.homOfLE` lets one test equality of morphisms
+defined on an intermediate open `W` on a scheme-theoretically dense open `V ≤ W`.
 
 ## Functoriality of the scheme-theoretic image
 
@@ -167,8 +161,8 @@ instance : IsSchemeTheoreticallyDominant
 
 variable {A K} {Z : Scheme.{u}}
 
-/-- **Factorization through a closed subscheme over the spectrum of a domain**
-(blueprint: `lemma:nagata-valuation-factor-closed`): let `A` be a domain with fraction
+/-- **Factorization through a closed subscheme over the spectrum of a domain**:
+let `A` be a domain with fraction
 field `K`, let `ι : Z ⟶ Y` be a closed immersion and `γ : Spec A ⟶ Y` a morphism whose
 restriction to the generic point `Spec K` factors through `Z`. Then `γ` factors
 through `Z`. -/
@@ -190,10 +184,7 @@ variable (g : T ⟶ Y) [QuasiCompact g] {Y' : Scheme.{u}} (q : Y' ⟶ Y) [Flat q
 
 /-- Flat base change for scheme-theoretic images, in kernel ideal sheaf form: for a
 quasi-compact morphism `g : T ⟶ Y` and a flat morphism `q : Y' ⟶ Y`, the kernel of the
-base change `T ×_Y Y' ⟶ Y'` is the pullback of the kernel of `g`.
-(blueprint: `lemma:nagata-scheme-image-flat-base-change`; Stacks Project Tag 081I. The
-blueprint and the Stacks Project assume `g` quasi-separated as well, but Mathlib's
-kernel ideal sheaf theory only needs quasi-compactness.) -/
+base change `T ×_Y Y' ⟶ Y'` is the pullback of the kernel of `g`. -/
 theorem Scheme.Hom.ker_pullback_snd : (pullback.snd g q).ker = g.ker.comap q := by
   have w : pullback.snd g q ≫ q = (pullback.fst g q ≫ g.toImage) ≫ g.imageι := by
     rw [Category.assoc, g.toImage_imageι, pullback.condition]
@@ -222,7 +213,7 @@ theorem Scheme.Hom.ker_of_isPullback {T' : Scheme.{u}} {p₁ : T' ⟶ T} {p₂ :
 /-- Restriction of a scheme-theoretic image to an open subscheme of the target: the
 kernel of `g ∣_ U` is the restriction of the kernel of `g`. This is the special case of
 `AlgebraicGeometry.Scheme.Hom.ker_of_isPullback` for the open immersion `U.ι`, which is
-flat. (blueprint: `lemma:nagata-scheme-image-restrict-open`) -/
+flat. -/
 theorem Scheme.Hom.ker_morphismRestrict (U : Y.Opens) :
     (g ∣_ U).ker = g.ker.comap U.ι :=
   g.ker_of_isPullback U.ι (isPullback_morphismRestrict g U).flip
@@ -385,7 +376,7 @@ The equaliser of `a` and `b` is the base change of the diagonal `Y ⟶ Y ×[S] Y
 `(a, b) : T ⟶ Y ×[S] Y`, hence a *closed* subscheme of `T` because `Y ⟶ S` is separated.
 As `v` factors through it, its kernel ideal sheaf is contained in the kernel of `v`, which
 is trivial; so the closed immersion is an isomorphism, in particular an epimorphism, and
-`a = b`. (blueprint: `lem:chow-agree-on-dense-open`) -/
+`a = b`. -/
 @[stacks 01RH]
 theorem ext_of_isSchemeTheoreticallyDominant {V T Y S : Scheme.{u}} (g : Y ⟶ S)
     [IsSeparated g] {a b : T ⟶ Y} (h : a ≫ g = b ≫ g) (v : V ⟶ T)
@@ -492,7 +483,7 @@ the range of a quasi-compact morphism `g` is closed in an open `W` of the target
 every point of the scheme-theoretic image of `g` lying over `W` is in the range of the
 canonical morphism `g.toImage`, so over `W` the scheme-theoretic image adds nothing to the
 range. In the application `g` is proper over an open of the base, so its range is closed
-there. (blueprint: `lemma:nagata-scheme-image-restrict-open`.) -/
+there. -/
 theorem Scheme.Hom.preimage_subset_range_toImage_of_isClosed {V Y : Scheme.{u}} (g : V ⟶ Y)
     [QuasiCompact g] {W : Y.Opens} (hW : IsClosed (⇑W.ι ⁻¹' Set.range ⇑g)) :
     ⇑g.imageι ⁻¹' (W : Set Y) ⊆ Set.range ⇑g.toImage := by
@@ -523,8 +514,7 @@ i.e. the sheaf map `𝒪_Y ⟶ f_* 𝒪_X` is injective.
 For a quasi-compact open immersion `j : U ⟶ X` this is the blueprint's definition of a
 scheme-theoretically dense open (`𝒪_X → j_* 𝒪_U` injective). The project uses Mathlib's
 `IsSchemeTheoreticallyDominant` (kernel ideal sheaf `⊥`) as the definition, and this
-lemma identifies it with the blueprint's formulation.
-(blueprint: `definition-compactification-refinement--2`) -/
+lemma identifies it with the blueprint's formulation. -/
 theorem isSchemeTheoreticallyDominant_iff_app_injective {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] :
     IsSchemeTheoreticallyDominant f ↔ ∀ U : Y.Opens, Function.Injective (f.app U) := by

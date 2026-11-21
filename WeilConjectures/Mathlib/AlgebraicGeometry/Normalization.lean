@@ -66,7 +66,7 @@ end OpenImmersion
 /-- The relative normalization of `Y` in an integral scheme `X` with integrally closed local
 rings has integrally closed local rings. Over an affine open `V` of `Y` it is the spectrum of
 the integral closure of `Γ(Y, V)` in the integrally closed domain `Γ(X, f⁻¹ V)`, which is
-again an integrally closed domain. (blueprint: `lem-weil-pbc-normalization-normal-stalks`) -/
+again an integrally closed domain. -/
 theorem isIntegrallyClosed_stalk_normalization [QuasiCompact f] [QuasiSeparated f]
     [IsIntegral X] (hX : ∀ x : X, IsIntegrallyClosed (X.presheaf.stalk x))
     (y : f.normalization) : IsIntegrallyClosed (f.normalization.presheaf.stalk y) := by
@@ -180,13 +180,12 @@ variable (X : Scheme.{u}) [IsIntegral X]
 /-- The *normalization* `X^ν` of an integral scheme `X` in its function field `K = k(X)`: the
 relative normalization `Spec_X(𝒪̃_X)` of `X` in the generic point `Spec K ⟶ X`, where `𝒪̃_X` is
 the integral closure of `𝒪_X` in the constant sheaf `K`. Finiteness of `X^ν ⟶ X` is a separate
-property, `AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType`.
-(blueprint: `lemma-proper-smooth-model--1`) -/
+property, `AlgebraicGeometry.Scheme.isFinite_fromNormalization_of_locallyOfFiniteType`. -/
 noncomputable abbrev normalization : Scheme.{u} :=
   X.fromSpecFunctionField.normalization
 
 /-- The canonical morphism `ν : X^ν ⟶ X` from the normalization of an integral scheme `X` in its
-function field. (blueprint: `lemma-proper-smooth-model--1`) -/
+function field. -/
 noncomputable abbrev fromNormalization : X.normalization ⟶ X :=
   X.fromSpecFunctionField.fromNormalization
 
@@ -196,7 +195,7 @@ instance isDominant_fromNormalization : IsDominant X.fromNormalization :=
   .of_comp X.fromSpecFunctionField.toNormalization _
 
 /-- The normalization `ν : X^ν ⟶ X` of an integral scheme in its function field is surjective:
-it is integral, hence closed, and dominant. (blueprint: `lemma-proper-smooth-model--1`) -/
+it is integral, hence closed, and dominant. -/
 instance surjective_fromNormalization : Surjective X.fromNormalization :=
   have : UniversallyClosed X.fromNormalization :=
     (IsIntegralHom.iff_universallyClosed_and_isAffineHom.mp inferInstance).1
@@ -247,8 +246,7 @@ theorem isIso_fromNormalization_app {V : X.Opens} (hV : IsAffineOpen V) [Nonempt
 /-- **The normalization over the normal locus.** For every open `U` of an integral scheme `X`
 whose local rings are integrally closed, the normalization `ν : X^ν ⟶ X` restricts to an
 isomorphism `ν⁻¹ U ⟶ U`: over an affine open `Spec A ⊆ U` the ring `A` is an integrally closed
-domain, hence equal to its integral closure in `k(X)`.
-(blueprint: `lemma-proper-smooth-model--1`) -/
+domain, hence equal to its integral closure in `k(X)`. -/
 theorem isIso_fromNormalization_restrict (U : X.Opens)
     (hU : ∀ x ∈ U, IsIntegrallyClosed (X.presheaf.stalk x)) :
     IsIso (X.fromNormalization ∣_ U) := by
@@ -299,13 +297,12 @@ field `K`: the relative normalization of `X` in `Spec L ⟶ X`, that is the rela
 the integral closure of `𝒪_X` in `L`. Over an affine open `Spec B` of `X` it is
 `Spec B'` with `B'` the integral closure of `B` in `L`. For `L = K` this is
 `AlgebraicGeometry.Scheme.normalization`. Finiteness of `X^L ⟶ X` is not part of the
-definition; it is `AlgebraicGeometry.Scheme.isFinite_fromNormalizationIn`.
-(blueprint: `def-fin-normalization-extension`) -/
+definition; it is `AlgebraicGeometry.Scheme.isFinite_fromNormalizationIn`. -/
 noncomputable abbrev normalizationIn : Scheme.{u} :=
   (X.fromSpecOfAlgebraFunctionField L).normalization
 
 /-- The canonical morphism `X^L ⟶ X` from the normalization of an integral scheme `X` in a field
-extension `L` of its function field. (blueprint: `def-fin-normalization-extension`) -/
+extension `L` of its function field. -/
 noncomputable abbrev fromNormalizationIn : X.normalizationIn L ⟶ X :=
   (X.fromSpecOfAlgebraFunctionField L).fromNormalization
 
@@ -313,8 +310,7 @@ noncomputable abbrev fromNormalizationIn : X.normalizationIn L ⟶ X :=
 locally of finite type over a field `k` and `L` a finite extension of its function field `K`.
 Then the normalization `X^L ⟶ X` of `X` in `L` is finite: over an affine open `Spec B`, the
 integral closure of the finitely generated `k`-domain `B` in `L` is a finite `B`-module
-(E. Noether's finiteness theorem, Stacks `0359`; `L / K` need not be separable).
-(blueprint: `lem-fin-normalization-extension-finite`) -/
+(E. Noether's finiteness theorem, Stacks `0359`; `L / K` need not be separable). -/
 theorem isFinite_fromNormalizationIn {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] [FiniteDimensional X.functionField L] :
     IsFinite (X.fromNormalizationIn L) := by
@@ -467,7 +463,7 @@ end FiniteExtension
 field `k`, the normalization `ν : X^ν ⟶ X` in the function field is finite: over an affine open
 `Spec A`, the integral closure of the finitely generated `k`-domain `A` in its fraction field is a
 finite `A`-module by E. Noether's finiteness theorem. In particular `X^ν` is proper over `k` if
-`X` is. (blueprint: `lemma-proper-smooth-model--1`) -/
+`X` is. -/
 theorem isFinite_fromNormalization_of_locallyOfFiniteType {k : Type u} [Field k]
     (q : X ⟶ Spec (.of k)) [LocallyOfFiniteType q] : IsFinite X.fromNormalization := by
   have h : X.fromSpecOfAlgebraFunctionField X.functionField = X.fromSpecFunctionField := by
@@ -480,7 +476,7 @@ theorem isFinite_fromNormalization_of_locallyOfFiniteType {k : Type u} [Field k]
 
 /-- **The normalization is birational.** For an integral scheme `X` locally of finite type over
 a field `k`, the normalization `ν : X^ν ⟶ X` is an isomorphism over a nonempty, hence dense,
-open subscheme of `X`. (blueprint: `lemma-proper-smooth-model--1`) -/
+open subscheme of `X`. -/
 theorem exists_isIso_fromNormalization_restrict {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] :
     ∃ U : X.Opens, (U : Set X).Nonempty ∧ IsIso (X.fromNormalization ∣_ U) := by
@@ -519,8 +515,7 @@ theorem exists_isIso_fromNormalization_restrict {k : Type u} [Field k] (q : X �
 
 /-- **The normalization preserves dimension.** For an integral scheme `X` locally of finite type
 over a field `k`, `dim X^ν = dim X`: the finite surjective morphism `ν` lifts chains of
-specializations, and identifies no two distinct points one of which specializes to the other.
-(blueprint: `lemma-proper-smooth-model--1`) -/
+specializations, and identifies no two distinct points one of which specializes to the other. -/
 theorem topologicalKrullDim_normalization {k : Type u} [Field k] (q : X ⟶ Spec (.of k))
     [LocallyOfFiniteType q] : topologicalKrullDim X.normalization = topologicalKrullDim X := by
   have := X.isFinite_fromNormalization_of_locallyOfFiniteType q

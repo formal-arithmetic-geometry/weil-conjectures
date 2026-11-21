@@ -15,7 +15,6 @@ import WeilConjectures.DeligneLaumon.FinitePullbackStrictTower.FinitePullbackStr
 /-! # Natural finite pullback comparison of strict reduction towers
 
 Source: Stacks Project, Tags 099N(5), 0G7E, 06XN, 03EL and 0FNH.
-(blueprint: lem-a1-finite-pullback-strict-tower-comparison).
 -/
 
 @[expose] public noncomputable section

@@ -12,10 +12,7 @@ import WeilConjectures.DeligneLaumon.BalancedFiniteTower.BalancedFiniteTowerKosz
 
 /-! # Normalized ordinary pullback of the principal Koszul tower
 
-Source: Stacks Project, sites-modules.tex, Tag 03EL, and sites-cohomology.tex,
-Tag 07A4; the scalar and adjacent-transition calculation of steps 2--4 of
-lem-a1-pulled-koszul-tower-chain-comparison.
-(blueprint: lem-a1-pulled-koszul-tower-normalized-iso).
+Source: Stacks Project, sites-modules.tex, Tag 03EL, and sites-cohomology.tex, Tag 07A4.
 -/
 
 @[expose] public noncomputable section

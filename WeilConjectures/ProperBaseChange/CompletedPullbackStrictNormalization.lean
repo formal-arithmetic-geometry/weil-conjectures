@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Completed.Pullback.CompletedPullbackRed
 /-! # Strict representative normalization of completed pullback
 
 Source: Bhatt--Scholze, Lemma 6.5.9(4), Remark 6.8.15; Stacks Tags 0941 and 099N(5).
-(blueprint: lem-weil-pbc-completed-pullback-strict-normalization).
 -/
 
 @[expose] public noncomputable section
@@ -165,16 +164,7 @@ private theorem pullbackUnit_tower
 /-- Compute the completed pullback comparison by the strict quotient augmentation
 on a K-flat representative, followed by any map to a K-injective strict tower.
 
-Source: Stacks Tag 0941, proof of lemma-derived-limit-is-ok; Tag 099N(5).
-(blueprint: lem-weil-pbc-completed-pullback-strict-normalization).
-
-Proof: normalize the reduction unit and the constant/pullback comparison on the
-K-flat complex. Naturality of the pullback counit identifies their composite
-with the strict module augmentation. Naturality then transports the equation
-along e. The representative formula for the constant/Rlim unit cancels the
-constant-tower localization factors. Naturality of the universal right-derived
-unit and its computation on K-injective I identify the result with the localized
-constant/limit adjunct of the augmentation followed by r. -/
+Source: Stacks Tag 0941, proof of; Tag 099N(5). -/
 theorem completedPullbackComparison_strict_normalization
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
     {U T : Scheme.{u}} (h : U ⟶ T)

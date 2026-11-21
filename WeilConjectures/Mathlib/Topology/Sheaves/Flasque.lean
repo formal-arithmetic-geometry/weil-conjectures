@@ -94,7 +94,7 @@ theorem isFlasque_of_injective [Injective F] : Presheaf.IsFlasque F.obj where
 variable [HasExt.{u} (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
   [EnoughInjectives (CategoryTheory.Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})]
 
-/-- Blueprint `lemma-uniform-bounds-pro-etale-affines`: Flasque sheaves are acyclic.
+/-- Flasque sheaves are acyclic.
 
 **Flasque sheaves are acyclic** (flasque in the sense of blueprint
 `lemma-uniform-bounds-pro-etale-affines`, Mathlib's `TopCat.Sheaf.IsFlasque`): a flasque abelian

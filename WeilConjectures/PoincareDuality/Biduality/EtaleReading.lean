@@ -167,11 +167,10 @@ lemma bijective_pre_app_integersModPowReduction
       (integersModPowReductionIhomIso ℓ E n K (PadicIntegersRingObj.dualizingComplex ℓ E.1 X))
       (integersModPowReductionIhomIso ℓ E n L (PadicIntegersRingObj.dualizingComplex ℓ E.1 X)))
 
-/-- **Finite-coefficient biduality on the reductions of integral complexes** (blueprint
-`theorem-verdier-biduality`, (i)): if étale Verdier biduality holds on `Dctf(X_ét, Λ)`,
-`Λ = 𝒪_E ⧸ ℓⁿ`, then for every bounded constructible `𝒪_E`-complex `K₀` the double-dual morphism
-of its reduction `R K₀`, relative to the reduction `R ω_{X, 𝒪_E}` of the integral dualizing
-complex, is an isomorphism. -/
+/-- **Finite-coefficient biduality on the reductions of integral complexes**: if étale Verdier
+biduality holds on `Dctf(X_ét, Λ)`, `Λ = 𝒪_E ⧸ ℓⁿ`, then for every bounded constructible
+`𝒪_E`-complex `K₀` the double-dual morphism of its reduction `R K₀`, relative to the reduction
+`R ω_{X, 𝒪_E}` of the integral dualizing complex, is an isomorphism. -/
 theorem isIso_toIhomIhom_integersModPowReductionAmbient_of_etale
     (hét : ∀ {M : DerivedCategory (Sheaf X.left.smallEtaleTopology
         (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E.1 n)))},

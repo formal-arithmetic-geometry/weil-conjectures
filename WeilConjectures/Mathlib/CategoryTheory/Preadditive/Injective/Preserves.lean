@@ -29,9 +29,7 @@ variable {C D : Type*} [Category* C] [Category* D]
 limits (e.g. `u` is an exact functor between abelian categories) and admits a right adjoint `u'`,
 then `u'` sends injective objects to injective objects. Indeed, by adjunction, injectivity of
 `u' I` amounts to the surjectivity of `Hom(u M', I) ⟶ Hom(u M, I)` for monomorphisms `M ⟶ M'`,
-which holds since `u` preserves monomorphisms and `I` is injective.
-
-(blueprint: `lem-sp-right-adjoint-preserves-injectives`) -/
+which holds since `u` preserves monomorphisms and `I` is injective. -/
 theorem Adjunction.preservesInjectiveObjects_of_preservesFiniteLimits {u : C ⥤ D} {u' : D ⥤ C}
     (adj : u ⊣ u') [PreservesFiniteLimits u] : u'.PreservesInjectiveObjects :=
   Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms adj

@@ -20,8 +20,7 @@ spaces over a field `K`, indexed by `n : ℤ` and zero for all but finitely many
 endomorphisms `aₙ`, `bₙ`, `cₙ` commuting with the maps. Then
 `∑ₙ (-1)ⁿ (tr bₙ - tr aₙ - tr cₙ) = 0`
 (`LinearMap.finsum_negOnePow_smul_trace_sub_trace_sub_trace_eq_zero`). This is the linear algebra
-behind the additivity of the categorical trace along distinguished triangles over a field
-(blueprint `proposition-properties-trace`, items (2) and (4)).
+behind the additivity of the categorical trace along distinguished triangles over a field.
 
 The proof splits each term along the kernels and images: with `xₙ = tr(aₙ | im fₙ)`,
 `yₙ = tr(bₙ | im gₙ)` and `zₙ = tr(cₙ₊₁ | im δₙ₊₁)` one has `tr aₙ = zₙ + xₙ`,

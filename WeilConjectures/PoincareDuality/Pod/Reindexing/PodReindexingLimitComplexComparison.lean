@@ -7,9 +7,7 @@ module
 
 public import WeilConjectures.PoincareDuality.PodReindexingStrictData.PodReindexingStrictComparisons
 
-/-! # The specified limit comparison on complexes
-
-(blueprint: def-pod-reindexing-limit-complex-comparison) -/
+/-! # The specified limit comparison on complexes -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -39,9 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (SY : PodSignedRoosShift (scalarReductionSource l E Y))
   (SX : PodSignedRoosShift (scalarReductionSource l E X))
 
-/-- The supplied normalized Roos model after coefficient restriction.
-Source: blueprint theorem-poincare-duality-frobenius--2, Step 5.
-(blueprint: def-pod-reindexing-limit-complex-comparison) -/
+/-- The supplied normalized Roos model after coefficient restriction. -/
 def podReindexingLimitRoosIso (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel l E W) :
     DerivedCategory.Q ⋙ coefficientSequenceLimit l E W ≅
       ((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ) ⋙
@@ -53,9 +49,7 @@ def podReindexingLimitRoosIso (W : Scheme.{t}) (ρ : IntegralComparisonRoosModel
       isoWhiskerLeft ((coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ))
         ρ.comparison
 
-/-- The strict Roos maps assembled using their specified naturality.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5.
-(blueprint: def-pod-reindexing-limit-complex-comparison) -/
+/-- The strict Roos maps assembled using their specified naturality. -/
 def podReindexingStrictRoosIso (S : PodReindexingStrictData l E g)
     (hS : S.RoosNaturality l E g) :
     integralOperationsRoosFunctor (A := scalarReductionSource l E Y) ⋙
@@ -66,10 +60,7 @@ def podReindexingStrictRoosIso (S : PodReindexingStrictData l E g)
     intro C C' f
     exact hS C C' f)
 
-/-- Paste the normalized source and target Roos models with strict reindexing.
-Source: blueprint theorem-poincare-duality-frobenius--2, Steps 1 and 5.
-Each factor is specified: no witness of an existence theorem is chosen.
-(blueprint: def-pod-reindexing-limit-complex-comparison) -/
+/-- Paste the normalized source and target Roos models with strict reindexing. -/
 def podReindexingLimitComparisonOnComplexes (S : PodReindexingStrictData l E g)
     (hS : S.RoosNaturality l E g)
     (ρY : IntegralComparisonRoosModel l E Y) (ρX : IntegralComparisonRoosModel l E X)

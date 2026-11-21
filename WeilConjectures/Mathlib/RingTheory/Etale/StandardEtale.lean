@@ -330,8 +330,7 @@ let `L` be an `R`-algebra. Then
    `χ : P.Ring → L` with `χ x = b`;
 2. every `R`-algebra map `χ : P.Ring → L` satisfies `f(χ x) = 0` and `g(χ x)` is a unit, and is
    determined by `χ x`.
-This is mathlib's `StandardEtalePair.homEquiv`.
-(blueprint: `lem-weil-pbc-standard-etale-pair-maps`) -/
+This is mathlib's `StandardEtalePair.homEquiv`. -/
 @[stacks 00UB]
 theorem existsUnique_algHom_and_hasMap {R : Type*} [CommRing R] (P : StandardEtalePair R)
     (L : Type*) [CommRing L] [Algebra R L] :
@@ -347,16 +346,14 @@ end StandardEtalePair
 `R[X]/(Xⁿ - t)` is etale over `R`: it is the standard etale algebra of the pair `(Xⁿ - t, 1)`,
 the derivative `nXⁿ⁻¹` of `Xⁿ - t` being invertible modulo `Xⁿ - t`.
 
-This is the unramifiedness step of the proof of exactness of the Kummer sequence
-(blueprint: `proposition-smooth-proper-curves-torsion-prime`). -/
+This is the unramifiedness step of the proof of exactness of the Kummer sequence. -/
 theorem AdjoinRoot.etale_X_pow_sub_C {n : ℕ} {t : R} (hn₀ : n ≠ 0) (hn : IsUnit (n : R))
     (ht : IsUnit t) : Algebra.Etale R (AdjoinRoot (X ^ n - C t)) :=
   Algebra.Etale.of_equiv (StandardEtalePair.ofXPowSubCRingEquiv hn₀ hn ht)
 
 variable (S) in
-/-- Blueprint `lemma-openclosed-standard-etale-lift`: Lifting a standard étale algebra along a
-quotient. Every standard etale algebra over a quotient `R ⧸ I` is the base change of a standard
-etale algebra over `R`. -/
+/-- Lifting a standard étale algebra along a quotient. Every standard etale algebra over a quotient
+`R ⧸ I` is the base change of a standard etale algebra over `R`. -/
 theorem Algebra.IsStandardEtale.exists_algEquiv_quotient_tensor (I : Ideal R)
     [Algebra (R ⧸ I) S] [Algebra.IsStandardEtale (R ⧸ I) S] :
     ∃ (T : Type u) (_ : CommRing T) (_ : Algebra R T),

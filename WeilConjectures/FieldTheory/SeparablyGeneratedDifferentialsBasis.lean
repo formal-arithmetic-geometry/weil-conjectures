@@ -17,8 +17,7 @@ import Mathlib.LinearAlgebra.TensorProduct.Basis
 /-!
 # Differential basis for a separably generated field extension
 
-Source: Stacks Project, Algebra, proof of Tag 031W, expanded using Tags 00RX,
-00RT, and 090W (blueprint: new-separably-generated-differentials-basis).
+Source: Stacks Project, Algebra, proof of Tag 031W, expanded using Tags 00RX, 00RT, and 090W.
 -/
 
 @[expose] public section
@@ -27,20 +26,7 @@ namespace KaehlerDifferential
 /-- The basis-existence part of the separably generated differential theorem.
 
 Source: Stacks Project, Algebra, the computation in the proof of Tag 031W,
-expanded using Tags 00RX, 00RT, and 090W.
-
-Proof: Set P = k[X_i], A = k[x_i], and F = k(x_i). Algebraic independence
-identifies P with A through evaluation. Mathlib's intermediate-field fraction-ring
-instance identifies F as the fraction field of A, and this transfers to P.
-Thus P → F is formally étale, as a localization. The hypothesis hxs makes F → K
-separable algebraic, hence formally étale by Tag 090W, without any finiteness
-assumption. Composition makes P → K formally étale. The canonical differential
-base-change isomorphism K ⊗[P] Ω[P/k] ≃ Ω[K/k] therefore carries the scalar extension
-of the polynomial basis dX_i (Tag 00RX) to a K-basis. Its i-th vector is D(x_i),
-by the formula for the differential base-change map and evaluation of X_i.
-This also applies when r = 0. Both hfg and hsep are redundant in this argument;
-they are retained unchanged to match the original statement.
-(blueprint: new-separably-generated-differentials-basis) -/
+expanded using Tags 00RX, 00RT, and 090W. -/
 theorem exists_basis_differentials_of_separating_transcendenceBasis_basis
     {k : Type u} {K : Type v} [Field k] [Field K] [Algebra k K]
     (hfg : (⊤ : IntermediateField k K).FG)

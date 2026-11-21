@@ -13,7 +13,6 @@ import Mathlib.Tactic.Abel
 # Explicit continuous two-cocycles with separable-closure unit coefficients
 
 Source: Stacks Project, Etale Cohomology, Section 0DVG, inhomogeneous differential.
-(blueprint: def-sc-galois-units-two-cocycle-classes).
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ variable (K : Type u) [Field K]
 
 /-- Continuous inhomogeneous two-cocycles for the absolute Galois action.
 The displayed equation is exactly `d₂ c = 0`, written without a finite sum.
-Source: Stacks Project, Section 0DVG, displayed inhomogeneous differential.
-(blueprint: def-sc-galois-units-two-cocycle-classes). -/
+Source: Stacks Project, Section 0DVG, displayed inhomogeneous differential. -/
 def GaloisUnitsTwoCocycle : Type u :=
   { c : (Gal(SeparableClosure K/K) × Gal(SeparableClosure K/K)) →
       (galoisUnitsTopRep K) //
@@ -36,8 +34,7 @@ def GaloisUnitsTwoCocycle : Type u :=
         c (g, h * i) - c (g, h) = 0 }
 
 /-- Two continuous cocycles differ by a continuous one-cochain coboundary.
-Source: Stacks Project, Section 0DVG, the degree-one inhomogeneous differential.
-(blueprint: def-sc-galois-units-two-cocycle-classes). -/
+Source: Stacks Project, Section 0DVG, the degree-one inhomogeneous differential. -/
 def galoisUnitsTwoCocycleRel (c d : GaloisUnitsTwoCocycle K) : Prop :=
   ∃ b : Gal(SeparableClosure K/K) → (galoisUnitsTopRep K),
     Continuous b ∧ ∀ g h,
@@ -46,8 +43,7 @@ def galoisUnitsTwoCocycleRel (c d : GaloisUnitsTwoCocycle K) : Prop :=
 
 /-- The continuous-coboundary relation is an equivalence relation. Negating a one-cochain
 reverses a coboundary and adding two one-cochains composes coboundaries.
-Source: Stacks Project, Section 0DVG.
-(blueprint: def-sc-galois-units-two-cocycle-classes). -/
+Source: Stacks Project, Section 0DVG. -/
 def galoisUnitsTwoCocycleSetoid : Setoid (GaloisUnitsTwoCocycle K) where
   r := galoisUnitsTwoCocycleRel K
   iseqv := {
@@ -77,8 +73,7 @@ def galoisUnitsTwoCocycleSetoid : Setoid (GaloisUnitsTwoCocycle K) where
 /-- Continuous two-cocycles modulo continuous coboundaries. This explicit quotient uses
 jointly continuous functions on `G × G` and the usual inhomogeneous differential; it does
 not use etale sheaf cohomology or Mathlib's homogeneous continuous cohomology.
-Source: Stacks Project, Section 0DVG.
-(blueprint: def-sc-galois-units-two-cocycle-classes). -/
+Source: Stacks Project, Section 0DVG. -/
 def GaloisUnitsTwoCocycleClasses : Type u := Quotient (galoisUnitsTwoCocycleSetoid K)
 
 end Field

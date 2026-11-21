@@ -10,8 +10,7 @@ import WeilConjectures.PoincareDuality.Pod.Reindexing.Tensor.PodReindexingTensor
 
 /-! # Completed tensor square for scalar/reindexing transitions
 
-Source: blueprint dual-Tate compatibility, Steps 1 and 5; Stacks 03EL, 06YY, 0941
-(blueprint: lem-pod-tensor-mixed-normalization-diagram).
+Source: Stacks 03EL, 06YY, 0941.
 -/
 
 @[expose] public noncomputable section
@@ -104,12 +103,7 @@ private theorem associatorComponent
     (Functor.associator F G H).hom.app K ≫ f = f := by
   exact Category.id_comp f
 
-/-- The hγ compatibility for the named tensor descent diagram.
-Source: blueprint dual-Tate compatibility, Steps 1 and 5
-(blueprint: lem-pod-tensor-mixed-normalization-diagram).
-Proof: Apply the scalar normalization on the source. Scalar localization factors preserve
-  constructibility. Apply the target-field tensor Model law, and use tensor naturality to move
-    both scalar factors. Paste these three equalities and cancel the associator component. -/
+/-- The hγ compatibility for the named tensor descent diagram. -/
 theorem podTensorMixedRepresentativeNormalizationDiagram
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     [∀ x : X, Invertible (l : X.residueField x)]

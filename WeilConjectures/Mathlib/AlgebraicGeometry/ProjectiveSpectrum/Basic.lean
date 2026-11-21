@@ -73,9 +73,7 @@ graded localisation maps (`AlgebraicGeometry.Proj.basicOpenIsoSpec`, `Proj.away�
 
 Projective space `ℙⁿ_k` is used through `AlgebraicGeometry.ProjectiveSpace`, the base change of
 `Proj ℤ[x₀, …, xₙ]` (`AlgebraicGeometry.Proj.projectiveSpaceOverAffine`), whose standard opens
-`D₊(xᵢ)` are affine spaces (`AlgebraicGeometry.ProjectiveSpace.standardOpenIso`).
-
-(blueprint: `def-pc-proj`) -/
+`D₊(xᵢ)` are affine spaces (`AlgebraicGeometry.ProjectiveSpace.standardOpenIso`). -/
 theorem Proj.isAffineOpen_basicOpen_and_nonempty_iso {f : A} {m : ℕ} (f_deg : f ∈ 𝒜 m)
     (hm : 0 < m) : IsAffineOpen (Proj.basicOpen 𝒜 f) ∧
       Nonempty ((Proj.basicOpen 𝒜 f).toScheme ≅ Spec (.of (Away 𝒜 f))) :=

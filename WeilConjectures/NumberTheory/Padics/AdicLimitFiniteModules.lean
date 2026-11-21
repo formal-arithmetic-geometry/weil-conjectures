@@ -21,9 +21,7 @@ set_option linter.privateModule false
 /-!
 # Adic systems of finite modules over p-adic coefficient rings
 
-Source: Stacks Project, Tags 09B8, 031D, 031B and 00MA;
-blueprint `proposition-lattices-representations-normal-scheme`, steps 6, 7, 9 and 10
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 09B8, 031D, 031B and 00MA.
 
 Indices `n : ℕ` denote the positive exponent `n + 1`. A module over the coefficient
 quotient is represented by its underlying module over the valuation ring, annihilated

@@ -15,12 +15,12 @@ The open–closed dévissage of `WeilConjectures.ConstructibleSheaf.OpenClosed` 
 complementary pair `(j, i)` of an open and a closed immersion. Here the second member of the
 pair is constructed:
 
-- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.openImmersionLowerShriek_of_quasiCompact`
-  (blueprint `proposition-six-operations-dctf--6`): the extension by zero `j_! F` of a constructible
+- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.openImmersionLowerShriek_of_quasiCompact`:
+the extension by zero `j_! F` of a constructible
   sheaf along a quasi-compact open immersion `j` is constructible; the complement is the closed
   complement `j.closedComplement`.
-- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact`
-  (blueprint `proposition-proper-direct-image-finite-coefficients`, sheaf part): the pushforward
+- `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isClosedImmersion_of_quasiCompact`:
+the pushforward
   `i_* G` of a constructible sheaf along a closed immersion `i` with quasi-compact open complement
   is constructible.
 
@@ -49,7 +49,7 @@ variable {X : Scheme.{u}}
   {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
 
-/-- Blueprint `proposition-six-operations-dctf--6`: Extension by zero preserves constructibility.
+/-- Extension by zero preserves constructibility.
 
 Let `j : U ⟶ X` be an open immersion and `F` a constructible sheaf on `U_ét`. Then `j_! F` is
 constructible on `X_ét`. The open immersion is assumed quasi-compact, which is automatic on a

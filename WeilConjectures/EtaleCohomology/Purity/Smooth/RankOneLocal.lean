@@ -94,8 +94,8 @@ noncomputable def rightDerivedLowerShriekConstantComplexIso :
     ((i)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategory.mapIso (constantComplexIsoSingleFunctor Λ Z) ≪≫
     (((i)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategorySingleFunctor 0).app _
 
-/-- Blueprint `lem-pur-gysin-structure`: Structure of the exceptional inverse image of the zero
-section (the identification of cohomology with supports with morphisms into `Ri^!`).
+/-- Structure of the exceptional inverse image of the zero section (the identification of
+cohomology with supports with morphisms into `Ri^!`).
 
 For a closed immersion `i : Z ⟶ X`, the cohomology with supports is
 `H^a_Z(X, K) ≅ Hom(Λ_Z, Ri^!(K[a]))`. -/
@@ -155,9 +155,8 @@ lemma derivedSupportCohomologyAddEquiv_smul
   rw [hx, derivedSupportCohomologyAddEquiv_map, Functor.map_smul,
     CategoryTheory.Functor.map_id, Linear.comp_smul, Category.comp_id]
 
-/-- Blueprint `lem-pur-gysin-structure`: Structure of the exceptional inverse image of the zero
-section (the identification of cohomology with supports with morphisms into `Ri^!`,
-`Λ`-linearly).
+/-- Structure of the exceptional inverse image of the zero section (the identification of
+cohomology with supports with morphisms into `Ri^!`, `Λ`-linearly).
 
 For a closed immersion `i : Z ⟶ X`, the `Λ`-linear isomorphism
 `H^a_Z(X, K) ≅ Hom(Λ_Z, Ri^!(K[a]))` underlying

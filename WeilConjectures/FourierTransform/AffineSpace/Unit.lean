@@ -278,8 +278,7 @@ for `Λ = 𝔽_ℓ × 𝔽_ℓ` and `Ψ = (ψ₀, 1)` the transform has the triv
 factor.
 
 Class: torsion; decided by the cohomology of `𝔸^r`, `H_c^*(𝔸^r, Λ) ≅ Λ(-r)[-2r]`, which needs
-`[Finite Λ] [HasInvertibleExponent Λ S]`.
-(sketch blueprint: `lemma-fourier-transform-constant-sheaf`) -/
+`[Finite Λ] [HasInvertibleExponent Λ S]`. -/
 theorem nonempty_iso_affineFourierTransform_unit [Finite Λ] [HasInvertibleExponent Λ S]
     [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] (Ψ : AddChar (ZMod p) Λ)
     (hΨ : IsUnit (Ψ 1 - 1)) :

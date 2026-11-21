@@ -8,7 +8,6 @@ public import WeilConjectures.DeligneLaumon.FinitePullbackStrictTower.FinitePull
 
 /-! # Shifts of the normalized strict finite tower comparison
 Source: Stacks 05SE, 06XN, 0FNH.
-(blueprint: lem-a1-finite-pullback-strict-tower-shifts).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false

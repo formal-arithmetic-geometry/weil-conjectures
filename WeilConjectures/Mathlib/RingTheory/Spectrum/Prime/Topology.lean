@@ -55,8 +55,7 @@ theorem mem_genericPoints_iff {p : PrimeSpectrum R} :
   change closure ({p} : Set (PrimeSpectrum R)) ∈ irreducibleComponents (PrimeSpectrum R) ↔ _
   rw [closure_singleton, zeroLocus_ideal_mem_irreducibleComponents, p.2.radical]
 
-/-- A reduced ring whose spectrum is irreducible is a domain: the nilradical `⊥` is prime.
-(blueprint: `lem-wf-affine-dimension-drop`, first claim) -/
+/-- A reduced ring whose spectrum is irreducible is a domain: the nilradical `⊥` is prime. -/
 theorem isDomain_of_irreducibleSpace (R : Type*) [CommRing R] [IsReduced R]
     [IrreducibleSpace (PrimeSpectrum R)] : IsDomain R := by
   have := irreducibleSpace_iff_isPrime_nilradical.mp ‹_›

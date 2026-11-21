@@ -16,10 +16,7 @@ public import WeilConjectures.DeligneLaumon.ZlFrameworkPbc.ZlFrameworkOpenExchan
 
 /-! # Normalized Weil open unit and the empty geometric fibre
 
-Source: latest blueprint, chap-The-Deligne-Laumon-theorem-in-general,
-lem-zl-morphism-open-closed-reduction.proof.md, Part 2, extension-by-zero sentence;
-Stacks 09BN, 09BP and 099N
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre).
+Source: Stacks 09BN, 09BP and 099N.
 
 The adjunction-transpose equation fixes the comparison as an actual mate. The
 integral unit is normalized by the published Roos realization and ordinary open
@@ -53,8 +50,7 @@ namespace WeilConjectures.ZlOpenUnit
 
 /-- The normalized equation and its adjunction transpose, with invertible open unit.
 These are clauses about specified functors, not alternative coefficient categories.
-Source: Part 2, normalized open unit; Stacks 03DI, 09BN
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 03DI, 09BN. -/
 structure OpenData {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     (J : A ⥤ B) (P : B ⥤ A) (GU : A ⥤ A) (GX : B ⥤ B)
     (alpha : P ⋙ GU ≅ GX ⋙ P) where
@@ -69,9 +65,7 @@ structure OpenData {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} 
       (GU.map (adj.unit.app K) ≫ alpha.hom.app (J.obj K))
 
 /-- Coefficient compatibility of the actual unit and beta; inversion gives the same
-square for inverse units. All four edge comparisons are the specified scalar maps.
-Source: Part 2; proposition-six-operations-change-coefficients
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+square for inverse units. All four edge comparisons are the specified scalar maps. -/
 def ScalarLaws
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     {A' : Type uA'} {B' : Type uB'} [Category.{vA'} A'] [Category.{vB'} B']
@@ -89,8 +83,7 @@ def ScalarLaws
     TX.map (N.beta.hom.app K) ≫ b.hom.app (GU.obj K) ≫ J'.map (gU.hom.app K) =
       gX.hom.app (J.obj K) ≫ GX'.map (b.hom.app K) ≫ N'.beta.hom.app (TU.obj K))
 
-/-- Transport a scalar square through fixed identifications of its two transitions.
-Source: coefficient passage (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Transport a scalar square through fixed identifications of its two transitions. -/
 def transportScalarSquare
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     {A' : Type uA'} {B' : Type uB'} [Category.{vA'} A'] [Category.{vB'} B']
@@ -102,8 +95,7 @@ def transportScalarSquare
 
 attribute [local irreducible] transportScalarSquare
 
-/-- Change the names of the finite operations in a fixed coefficient square.
-Source: coefficient passage (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Change the names of the finite operations in a fixed coefficient square. -/
 def transportOperationSquare
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     {A' : Type uA'} {B' : Type uB'} [Category.{vA'} A'] [Category.{vB'} B']
@@ -113,8 +105,7 @@ def transportOperationSquare
   (eqToIso (congrArg (fun F ↦ F ⋙ TX) hJ)).symm ≪≫ b ≪≫
     eqToIso (congrArg (fun F ↦ TU ⋙ F) hJ')
 
-/-- Change the finite operation name in its fixed inclusion comparison.
-Source: coefficient passage (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Change the finite operation name in its fixed inclusion comparison. -/
 def transportInclusionSquare
     {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
     {A' : Type uA'} {B' : Type uB'} [Category.{vA'} A'] [Category.{vB'} B']
@@ -310,44 +301,41 @@ variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (j₀ : U₀ ⟶ X₀) [IsOpenImmersion j₀.left]
 
 /-- The inherited open-immersion structure on the existing geometric-fibre map.
-Source: Stacks 01JU (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 01JU. -/
 instance fiberOpen : IsOpenImmersion (zlFiberMap D j₀) :=
   MorphismProperty.overPullbackMap (P := @IsOpenImmersion)
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) j₀ inferInstance
 
 /-- The canonical finite-type structure on a geometric fibre.
-Source: Stacks 01T3 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 01T3. -/
 instance fiberFiniteType : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
   MorphismProperty.pullback_snd X₀.hom
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) inferInstance
 
 /-- The canonical quasi-compact structure on a geometric fibre.
-Source: Stacks 01KJ (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 01KJ. -/
 instance fiberQuasiCompact : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
   MorphismProperty.pullback_snd X₀.hom
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) inferInstance
 
-/-- Finite type on the explicit Over.pullback presentation, before folding geometricFiber.
-Source: geometric base change (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Finite type on the explicit Over.pullback presentation, before folding geometricFiber. -/
 instance overPullFiniteType {B T : Scheme.{u}} (f : T ⟶ B) (Y : Over B)
     [LocallyOfFiniteType Y.hom] :
     LocallyOfFiniteType (((Over.pullback f).obj Y).left ↘ T) :=
   MorphismProperty.pullback_snd Y.hom f inferInstance
 
-/-- Quasi-compactness on the explicit Over.pullback presentation.
-Source: geometric base change (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Quasi-compactness on the explicit Over.pullback presentation. -/
 instance overPullQuasiCompact {B T : Scheme.{u}} (f : T ⟶ B) (Y : Over B)
     [QuasiCompact Y.hom] : QuasiCompact (((Over.pullback f).obj Y).left ↘ T) :=
   MorphismProperty.pullback_snd Y.hom f inferInstance
 
-/-- The fibre morphism is over k by the actual second projection.
-Source: base change convention (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- The fibre morphism is over k by the actual second projection. -/
 instance fiberOver : (zlFiberMap D j₀).IsOver (Spec (.of D.k)) :=
   ⟨Over.w ((Over.pullback
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map j₀)⟩
 
 /-- Every open in the finite-type geometric target is quasi-compact.
-Source: Stacks 01T1 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 01T1. -/
 instance fiberMapQuasiCompact : QuasiCompact (zlFiberMap D j₀) :=
   letI : IsLocallyNoetherian (D.geometricFiber U₀).left :=
     LocallyOfFiniteType.isLocallyNoetherian ((D.geometricFiber U₀).left ↘ Spec (.of D.k))
@@ -358,9 +346,7 @@ instance fiberMapQuasiCompact : QuasiCompact (zlFiberMap D j₀) :=
     (D.geometricFiber X₀).left inferInstance (zlFiberMap D j₀)
 
 /-- Integral compact support for the compactification (j,id), with its recorded action.
-Only the geometric Noetherian instance is supplied here.
-Source: Part 2; compact-support definition
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Only the geometric Noetherian instance is supplied here. -/
 def integralJ (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :
     sfIntegralConstructibleCategory l E (D.geometricFiber U₀).left ⥤
@@ -370,9 +356,7 @@ def integralJ (E : Type u) [Field E] [Algebra ℚ_[l] E]
   sfCompactSupportFiniteIntegralFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl)
     (Compactification.ofIsOpenImmersion (zlFiberMap D j₀)) E
 
-/-- Rational compact support is the specified raw scalar extension of that action.
-Source: Part 2; compact-support definition
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Rational compact support is the specified raw scalar extension of that action. -/
 def rationalJ (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :
     sfRationalConstructibleCategory l E (D.geometricFiber U₀).left ⥤
@@ -382,41 +366,33 @@ def rationalJ (E : Type u) [Field E] [Algebra ℚ_[l] E]
   sfCompactSupportFiniteFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl)
     (Compactification.ofIsOpenImmersion (zlFiberMap D j₀)) E
 
-/-- The literal normalized coefficient action, with the same open compactification.
-Source: Part 2; def-weil-compact-support-coefficient-action
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- The literal normalized coefficient action, with the same open compactification. -/
 abbrev Action (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] :=
   letI : IsLocallyNoetherian (D.geometricFiber X₀).left :=
     LocallyOfFiniteType.isLocallyNoetherian ((D.geometricFiber X₀).left ↘ Spec (.of D.k))
   SfCompactSupportCoefficientAction l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) Ω
     (Compactification.ofIsOpenImmersion (zlFiberMap D j₀))
 
-/-- Integral pullback with the inherited prime-invertibility structures.
-Source: Part 2; recorded integral operations
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Integral pullback with the inherited prime-invertibility structures. -/
 abbrev integralP (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
   @constructibleIntegralPullback l _ E _ _ _ _ _ (zlFiberMap D j₀)
     (sfWeilPrimeInvertible D l hl U₀) (sfWeilPrimeInvertible D l hl X₀)
 
-/-- Integral Frobenius pullback, without a k-linearity hypothesis.
-Source: Part 2; recorded integral operations
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Integral Frobenius pullback, without a k-linearity hypothesis. -/
 abbrev integralG (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
   @constructibleIntegralPullback l _ E _ _ _ _ _ (D.geometricFrobenius X₀).asIso.hom
     (sfWeilPrimeInvertible D l hl X₀) (sfWeilPrimeInvertible D l hl X₀)
 
-/-- Rational open restriction, on the recorded coefficient category.
-Source: Part 2 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Rational open restriction, on the recorded coefficient category. -/
 abbrev rationalP (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
   @rationalDerivedPullback l _ E _ _ _ _ _ (zlFiberMap D j₀)
     (sfWeilPrimeInvertible D l hl U₀) (sfWeilPrimeInvertible D l hl X₀)
 
 /-- The integral square is the actual pullback-composition comparison.
-Source: Part 2; Stacks 099N(5)
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 099N(5). -/
 def integralAlpha (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :
     integralP D l hl X₀ U₀ j₀ E ⋙ integralG D l hl U₀ E ≅
@@ -436,9 +412,7 @@ def integralAlpha (E : Type u) [Field E] [Algebra ℚ_[l] E]
       zlIntegralPullComp l E (zlFiberMap D j₀) (D.geometricFrobenius X₀).asIso.hom
 
 /-- Component of the rational pullback-composition square, localized from the
-specified integral compositors.
-Source: Part 2; local Frobenius composition convention
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+specified integral compositors. -/
 def rationalAlphaComponent (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]
     (K : sfRationalConstructibleCategory l E (D.geometricFiber X₀).left) :
@@ -462,12 +436,7 @@ def rationalAlphaComponent (E : Type u) [Field E] [Algebra ℚ_[l] E]
 
 set_option linter.unusedSectionVars false in
 /-- Naturality of the specified comparison alpha.
-Source: Part 2; Stacks 099N(5)
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre).
-Proof: integral pullback composition is a natural isomorphism. Localizing its
-components preserves its naturality on integral arrows and on pure Hom tensors;
-additivity gives all arrows. The equality comparison is natural by equality
-elimination. Compose these three naturality squares. -/
+Source: Stacks 099N(5). -/
 theorem rationalAlpha_natural (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]
     {K L : sfRationalConstructibleCategory l E (D.geometricFiber X₀).left} (a : K ⟶ L) :
@@ -484,8 +453,7 @@ theorem rationalAlpha_natural (E : Type u) [Field E] [Algebra ℚ_[l] E]
       (zlFrobenius_naturality D j₀) (sfWeilPrimeInvertible D l hl U₀)
       (sfWeilPrimeInvertible D l hl X₀) K L a
 
-/-- Alpha with the normalized components and their naturality.
-Source: Part 2 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Alpha with the normalized components and their naturality. -/
 def rationalAlpha (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :
     rationalP D l hl X₀ U₀ j₀ E ⋙ sfWeilFrobeniusPullback D l hl U₀ E ≅
@@ -496,16 +464,14 @@ def rationalAlpha (E : Type u) [Field E] [Algebra ℚ_[l] E]
 attribute [local irreducible] integralAlpha rationalAlpha rationalAlphaComponent
   sfWeilFrobeniusPullback
 
-/-- The integral clauses concern the recorded functor and the actual completed pullback.
-Source: Part 2 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- The integral clauses concern the recorded functor and the actual completed pullback. -/
 abbrev IntegralData (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
   OpenData (integralJ D l hl X₀ U₀ j₀ E) (integralP D l hl X₀ U₀ j₀ E)
     (integralG D l hl U₀ E) (integralG D l hl X₀ E)
       (integralAlpha D l hl X₀ U₀ j₀ E)
 
-/-- The rational clauses concern the raw localized functor.
-Source: Part 2 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- The rational clauses concern the raw localized functor. -/
 abbrev RationalData (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :=
   OpenData (rationalJ D l hl X₀ U₀ j₀ E) (rationalP D l hl X₀ U₀ j₀ E)
@@ -514,8 +480,7 @@ abbrev RationalData (E : Type u) [Field E] [Algebra ℚ_[l] E]
 
 /-- The published Roos-normalized identification with ordinary extension by zero.
 The proper identity factor is removed using its section-normalized derived comparison.
-Source: Part 2; Stacks 09BN, 099N
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 09BN, 099N. -/
 def integralOpenRealization (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] :
     integralJ D l hl X₀ U₀ j₀ E ⋙ (sfIntegralConstructible l E (D.geometricFiber X₀).left).ι ≅
@@ -530,8 +495,7 @@ def integralOpenRealization (E : Type u) [Field E] [Algebra ℚ_[l] E]
 
 /-- The integral adjunction unit is exactly the ordinary open unit under the actual
 quotient-unit-normalized restriction comparison and the recorded support realization.
-Source: Part 2; Stacks 09BN, 099N(5)
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 09BN, 099N(5). -/
 def IntegralUnitNormalization (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (N : IntegralData D l hl X₀ U₀ j₀ E) : Prop :=
   letI : ∀ x : (D.geometricFiber U₀).left,
@@ -551,9 +515,7 @@ def IntegralUnitNormalization (E : Type u) [Field E] [Algebra ℚ_[l] E]
       (PurCompactSupport.openDerivedAdjunction (PurCompactSupport.completed l E)
         (zlFiberMap D j₀)).unit.app K.obj
 
-/-- Integral-to-rational passage retains the actual unit and beta, including inverses.
-Source: Part 2, coefficient passage
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Integral-to-rational passage retains the actual unit and beta, including inverses. -/
 def Rationalization (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E]
     (N : IntegralData D l hl X₀ U₀ j₀ E) (R : RationalData D l hl X₀ U₀ j₀ E) : Prop :=
@@ -571,9 +533,7 @@ def Rationalization (E : Type u) [Field E] [Algebra ℚ_[l] E]
 variable (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
 
 /-- The specified rational pullback scalar square with stage transition notation.
-This is just conjugation by the recorded transition identification.
-Source: coefficient passage, proposition-six-operations-change-coefficients
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+This is just conjugation by the recorded transition identification. -/
 def rationalStageScalar {X Y : Scheme.{u}} (f : X ⟶ Y)
     [hX : ∀ x : X, Invertible (l : X.residueField x)]
     [hY : ∀ y : Y, Invertible (l : Y.residueField y)]
@@ -591,8 +551,7 @@ def rationalStageScalar {X Y : Scheme.{u}} (f : X ⟶ Y)
       (AlgebraicallyClosedCoefficients.Coefficient l Ω L)
       (AlgebraicallyClosedCoefficients.coefficientInclusion l Ω E L h) f)
 
-/-- Frobenius scalar change with the recorded stage-transition functors.
-Source: coefficient passage (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- Frobenius scalar change with the recorded stage-transition functors. -/
 def rationalFrobeniusStageScalar
     (E L : AlgebraicallyClosedCoefficients.Index l Ω) (h : E ≤ L) :
     sfWeilFrobeniusPullback D l hl X₀
@@ -607,8 +566,7 @@ def rationalFrobeniusStageScalar
 
 attribute [local irreducible] rationalFrobeniusStageScalar
 
-/-- The common-stage clauses use precisely the specified action on literal pairs.
-Source: Part 2 (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- The common-stage clauses use precisely the specified action on literal pairs. -/
 abbrev CommonData (S : Action D l hl X₀ U₀ j₀ Ω) :=
   OpenData S.system.functor (zlPull D l hl Ω j₀)
     (sfCommonStageWeilFrobeniusPullback D l hl U₀ Ω)
@@ -618,8 +576,7 @@ abbrev CommonData (S : Action D l hl X₀ U₀ j₀ Ω) :=
 /-- Stalk vanishing in every coefficient category, including arbitrary complexes
 and all coefficient cohomology degrees of the specified point fibre.
 The natural zero comparison is unique since each target object is zero.
-Source: Part 2, outside-open sentence; Stacks 099N
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+Source: Stacks 099N. -/
 def EmptyFibre (S : Action D l hl X₀ U₀ j₀ Ω)
     (R : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
       RationalData D l hl X₀ U₀ j₀ E)
@@ -662,9 +619,7 @@ def EmptyFibre (S : Action D l hl X₀ U₀ j₀ Ω)
 attribute [local irreducible] rationalStageScalar sfIntegralConstructible
 
 /-- Actual scalar-unit and Frobenius-comparison equations at every pair of finite
-coefficient fields, using the action's specified integral and rational comparisons.
-Source: Part 2, common finite-field coefficient passage
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+coefficient fields, using the action's specified integral and rational comparisons. -/
 def FiniteScalarCompatibility (S : Action D l hl X₀ U₀ j₀ Ω)
     (I : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
       IntegralData D l hl X₀ U₀ j₀ E)
@@ -761,8 +716,7 @@ def FiniteScalarCompatibility (S : Action D l hl X₀ U₀ j₀ Ω)
         (rationalFrobeniusStageScalar D l hl U₀ Ω E L h)
         (rationalFrobeniusStageScalar D l hl X₀ Ω E L h)
 
-/-- The object equation of the recorded common-stage pullback.
-Source: coefficient descent (blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+/-- The object equation of the recorded common-stage pullback. -/
 def pullbackStageIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ y : Y, Invertible (l : Y.residueField y)]
@@ -779,9 +733,7 @@ def pullbackStageIso {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- Inclusion of every literal finite stage preserves the actual unit and beta.
 The pullback edges are the canonical object identifications of the recorded
-common-stage construction; the support edge is the given coefficient action.
-Source: Part 2, common-stage passage
-(blueprint: lem-zl-open-weil-unit-and-empty-fibre). -/
+common-stage construction; the support edge is the given coefficient action. -/
 def CommonStageCompatibility (S : Action D l hl X₀ U₀ j₀ Ω)
     (R : ∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E],
       RationalData D l hl X₀ U₀ j₀ E)

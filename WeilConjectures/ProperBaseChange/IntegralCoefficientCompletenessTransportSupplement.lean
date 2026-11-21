@@ -17,8 +17,7 @@ public import WeilConjectures.AlgebraicGeometry.IntegralCoefficientCompletenessT
 
 These coefficient equivalences and completeness comparisons are independent of
 bounded constructibility and the stratified-perfect characterization.
-Source: Stacks 099N; Bhatt--Scholze, Section 6.5
-(blueprint: def-pur-completed-coefficient-presentation-transport).
+Source: Stacks 099N; Bhatt--Scholze, Section 6.5.
 -/
 
 @[expose] public noncomputable section
@@ -38,34 +37,29 @@ variable (W : Scheme.{u})
 end CoefficientPresentation
 
 /-- The actual coefficient transport on ordinary module sheaves.
-Source: Stacks 03DA (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+Source: Stacks 03DA. -/
 abbrev purOrdinaryCoefficientModel (W : Scheme.{u}) :
     pbcModules W (pbcAdicCompletion W (pbcIntegralDatum l E)) ⥤
       integralTowerModules.{u, u} l E W :=
   pbcRestrict (purCoefficientIso l E W).inv
 
 /-- Additivity of the specified exact coefficient restriction.
-Source: Stacks 03DA (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+Source: Stacks 03DA. -/
 instance purOrdinaryCoefficientModel_additive (W : Scheme.{u}) :
     (purOrdinaryCoefficientModel l E W).Additive := pbcRestrict_additive _
 
 /-- Exactness of the specified coefficient restriction on finite limits.
-Source: Stacks 03DA (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+Source: Stacks 03DA. -/
 instance purOrdinaryCoefficientModel_limits (W : Scheme.{u}) :
     PreservesFiniteLimits (purOrdinaryCoefficientModel l E W) := pbcRestrict_limits _
 
 /-- Exactness of the specified coefficient restriction on finite colimits.
-Source: Stacks 03DA (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+Source: Stacks 03DA. -/
 instance purOrdinaryCoefficientModel_colimits (W : Scheme.{u}) :
     PreservesFiniteColimits (purOrdinaryCoefficientModel l E W) := pbcRestrict_colimits _
 
 /-- The ordinary restriction round trip is the identity on every section.
-Source: Stacks 03DA, 099N
-(blueprint: def-pur-completed-coefficient-presentation-transport).
-Proof: the CommRing lift forgets to the landed ring isomorphism. Restricting along
-its inverse and then its forward map restores the same scalar action. Identity
-section functions are linear and natural, with identity inverses. Sections detect
-module morphisms, so this normalization determines the isomorphism uniquely. -/
+Source: Stacks 03DA, 099N. -/
 theorem purOrdinaryCoefficientRoundTrip_existsUnique (W : Scheme.{u}) :
     ∃! e : purOrdinaryCoefficientModel l E W ⋙
         SheafOfModules.restrictScalars.{u + 1}
@@ -100,7 +94,7 @@ theorem purOrdinaryCoefficientRoundTrip_existsUnique (W : Scheme.{u}) :
     rw [he', hc, hd]
 
 /-- The uniquely section-normalized ordinary restriction round trip.
-Source: Stacks 03DA (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+Source: Stacks 03DA. -/
 def purOrdinaryCoefficientRoundTrip (W : Scheme.{u}) :=
   (purOrdinaryCoefficientRoundTrip_existsUnique l E W).exists.choose
 
@@ -148,12 +142,7 @@ private theorem restrictionEquivalence_unit (c : R ≅ S)
 end RestrictionEquivalence
 
 /-- The landed integralDetailedTransport is an equivalence.
-Source: Stacks 03DA, 099N
-(blueprint: def-pur-completed-coefficient-presentation-transport).
-Proof: restriction along the inverse coefficient ring isomorphism is an exact
-inverse to the landed restriction functor. Both ordinary round trips are identity
-on sections. Termwise round trips descend through derived localization, proving
-full faithfulness and essential surjectivity of the existing functor. -/
+Source: Stacks 03DA, 099N. -/
 @[instance] theorem purDetailedTransport_isEquivalence (W : Scheme.{u}) :
     (integralDetailedTransport W l E).IsEquivalence := by
   have := restriction_isEquivalence (integralDetailedCoefficientComparison W l E)
@@ -162,8 +151,7 @@ full faithfulness and essential surjectivity of the existing functor. -/
   exact Functor.isEquivalence_mapDerivedCategory _
 
 /-- The exact restriction round trip, descended by the published localization API.
-Source: Stacks 03DA, 099N
-(blueprint: def-pur-completed-coefficient-presentation-transport). -/
+Source: Stacks 03DA, 099N. -/
 def purDerivedCoefficientRoundTrip (W : Scheme.{u}) :
     pbcDerivedRestrict (purCoefficientIso l E W).inv ⋙
       integralDetailedTransport W l E ≅
@@ -179,7 +167,7 @@ def purDerivedCoefficientRoundTrip (W : Scheme.{u}) :
 /-- Reuse the inverse of the landed transport. changeFunctor gives its explicit
 CommRing restriction model via the identity-on-sections round trip; the inverse
 functor remains exactly integralDetailedTransport.
-Source: Stacks 099N (blueprint: def-pur-completed-coefficient-presentation-transport). -/
+Source: Stacks 099N. -/
 def purCoefficientModel (W : Scheme.{u}) :
     PbcCompletedDerived W (pbcIntegralDatum l E) ≌
       DerivedCategory (integralTowerModules.{u, u} l E W) :=
@@ -189,12 +177,7 @@ def purCoefficientModel (W : Scheme.{u}) :
       (purDerivedCoefficientRoundTrip l E W) ≪≫ Functor.leftUnitor _).symm)
 
 /-- Completeness alone is invariant under the existing coefficient transport.
-Source: Stacks 099N, Bhatt--Scholze 6.5
-(blueprint: def-pur-completed-coefficient-presentation-transport).
-Proof: normalized coefficient projections identify the finite reductions and
-quotient units. Exact restriction preserves the product and Roos descriptions of
-the completion unit, so its being invertible is unchanged. The recorded intrinsic
-and slice completeness predicates test this same unit, without geometric bounds. -/
+Source: Stacks 099N, Bhatt--Scholze 6.5. -/
 theorem purCoefficientModel_predicates (W : Scheme.{u})
     (K : PbcCompletedDerived W (pbcIntegralDatum l E)) :
     (PbcIsIntrinsicallyComplete W (pbcIntegralDatum l E) K ↔
@@ -308,11 +291,7 @@ private theorem complete_of_iso (W : Scheme.{u})
     exact ((sfDerivedReductionUnit l E W n).naturality e.hom).symm
 
 /-- Completeness for the forward normalized integral transport.
-Source: Stacks 099N; Bhatt--Scholze, Section 6.5
-(blueprint: lem-weil-pbc-integral-coefficient-completeness-transport).
-Proof: apply the completeness comparison to the transported complex and use the
-counit of the coefficient equivalence. An isomorphism of augmented reduction
-towers transports the defining Roos triangle in either direction. -/
+Source: Stacks 099N; Bhatt--Scholze, Section 6.5. -/
 theorem purDetailedTransport_complete_iff (W : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource.{u, u} l E W)) :
     IsSfDerivedComplete l E W K ↔ PbcIsIntrinsicallyComplete W
