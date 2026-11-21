@@ -2954,6 +2954,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Flasque
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatAffineSectionRingTensor
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatAffineTensorReassociation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatBaseChange
+public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatBaseChangeNaturality
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatBaseChangeSheaf
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyAffineSections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
@@ -4056,6 +4057,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparisonCore
 public import WeilConjectures.AlgebraicGeometry.Curve.SepClosedComparisonCurve
 public import WeilConjectures.AlgebraicGeometry.Curve.SeparatingFunction
 public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+public import WeilConjectures.AlgebraicGeometry.Curve.SerreDualityBaseChange
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothCalculations
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothConstantLowerShriekLocalization
 public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
@@ -10071,6 +10073,7 @@ public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseMo
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSingleMapComposition
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseSourceCoherence
 public import WeilConjectures.AlgebraicGeometry.Picard.Termwise.PicardTermwiseTargetCoherence
+public import WeilConjectures.AlgebraicGeometry.Picard.TranslateCover
 public import WeilConjectures.AlgebraicGeometry.Picard.TwistedDescent
 public import WeilConjectures.AlgebraicGeometry.Picard.UnionBoundedAboveModel
 public import WeilConjectures.AlgebraicGeometry.Picard.UniversalAdjointSection
