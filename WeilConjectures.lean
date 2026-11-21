@@ -18379,6 +18379,7 @@ public import WeilConjectures.NumberTheory.Padics.FiniteSumLattice
 public import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 public import WeilConjectures.NumberTheory.Padics.IntegersApproximation
 public import WeilConjectures.NumberTheory.Padics.IntegersCosetBasis
+public import WeilConjectures.NumberTheory.Padics.IntegersDvdPow
 public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 public import WeilConjectures.NumberTheory.Padics.IntegersLocalizationUniformizer
 public import WeilConjectures.NumberTheory.Padics.IntegersMap
@@ -23040,6 +23041,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Subfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldPushCocycle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldUpperShriekCompatibility
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClAdditive
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClLowerStarHom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
@@ -25353,8 +25355,12 @@ public import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelC
 public import WeilConjectures.TraceFormula.Integral.IntegralScalarOrdinaryModelComparison
 public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageFactors
 public import WeilConjectures.TraceFormula.Integral.IntegralTowerInverseImageUnit
+public import WeilConjectures.TraceFormula.IntegralCoefficientComparison
+public import WeilConjectures.TraceFormula.IntegralCompactPullback
 public import WeilConjectures.TraceFormula.IntegralFrobeniusNotInvertible
 public import WeilConjectures.TraceFormula.IntegralPointThickening
+public import WeilConjectures.TraceFormula.IntegralTraceFormula
+public import WeilConjectures.TraceFormula.IntegralTraceTransport
 public import WeilConjectures.TraceFormula.InvariantClosedPiece
 public import WeilConjectures.TraceFormula.InvariantOpenPiece
 public import WeilConjectures.TraceFormula.InvariantPieceAdditivity
