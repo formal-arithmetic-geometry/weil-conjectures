@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Monoidal.Cartesian.Grp
 public import Mathlib.CategoryTheory.Monoidal.Skeleton
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
@@ -87,17 +88,17 @@ private lemma toSkeleton_overPullback_one (A : Over (Spec (.of K))) [GrpObj A]
   exact toSkeleton_eq_toSkeleton_iff.2
     ⟨(Scheme.Modules.pullback _).mapIso e ≪≫ pullbackObjUnitIso _⟩
 
-/-- Blueprint `sk-prop-av-cube`: The theorem of the cube.
+/-- Blueprint `theorem-theorem-cube`: The theorem of the cube.
 
 Let `A` be an abelian variety over a field `K` and let `L` be an invertible `𝒪_A`-module. For
 `1 ≤ i₁ < ⋯ < i_t ≤ 3` let `m_{i₁…i_t} : A × A × A ⟶ A` be the partial sum map
 `(x₁, x₂, x₃) ↦ x_{i₁} + ⋯ + x_{i_t}`. Then
 `m₁₂₃^* L ⊗ m₁^* L ⊗ m₂^* L ⊗ m₃^* L ≅ m₁₂^* L ⊗ m₁₃^* L ⊗ m₂₃^* L`.
 
-This is also blueprint `thm-sc-theorem-of-cube`. The proof applies the general theorem of the
-cube `AlgebraicGeometry.nonempty_iso_of_nonempty_iso_overPullback_slices` with `X = Y = Z = A`
-and the unit as rational point: on each of the slices `{e} × A × A`, `A × {e} × A` and
-`A × A × {e}` both sides restrict to `n₁₂^* L ⊗ n₁^* L ⊗ n₂^* L`, since `e^* L` is trivial. -/
+This is also blueprint `proposition-pullback-multiplication-n--1`. The proof applies the general
+theorem of the cube `AlgebraicGeometry.nonempty_iso_of_nonempty_iso_overPullback_slices` with
+`X = Y = Z = A` and the unit as rational point: on each of the slices `{e} × A × A`, `A × {e} × A`
+and `A × A × {e}` both sides restrict to `n₁₂^* L ⊗ n₁^* L ⊗ n₂^* L`, since `e^* L` is trivial. -/
 theorem nonempty_iso_cube (A : Over (Spec (.of K))) [GrpObj A] [IsAbelianVariety A]
     (L : A.left.Modules) [L.IsInvertible] :
     Nonempty
@@ -157,16 +158,15 @@ private lemma toSkeleton_tensorPow {X : Scheme.{u}} (M : X.Modules) (m : ℕ) :
   | zero => rfl
   | succ m ih => rw [tensorPow_succ, Skeleton.toSkeleton_tensorObj, ih, pow_succ']
 
-/-- Blueprint `sk-prop-av-mult-n-pullback`: Pullback of symmetric modules under multiplication
-by `n`.
+/-- Pullback of symmetric modules under multiplication by `n`.
 
 Let `A` be an abelian variety over `K` and let `N` be an invertible `𝒪_A`-module which is
 *symmetric*, that is `[-1]^* N ≅ N`. Then `[n]^* N ≅ N^{⊗ n²}` for every `n`.
 
-This is also blueprint `lem-sc-mult-n-pullback`. The proof compares isomorphism classes in the
-commutative monoid `Skeleton A.left.Modules`, in which the class of `N` is a unit since `N` is
-invertible. Pulling back the theorem of the cube `AlgebraicGeometry.nonempty_iso_cube` along
-`x ↦ (x, x, -x)` gives `[2]^* N ≅ N^{⊗ 4}`, and along `x ↦ (x, x, [n] x)` gives
+This is also blueprint `proposition-pullback-multiplication-n--2`. The proof compares isomorphism
+classes in the commutative monoid `Skeleton A.left.Modules`, in which the class of `N` is a unit
+since `N` is invertible. Pulling back the theorem of the cube `AlgebraicGeometry.nonempty_iso_cube`
+along `x ↦ (x, x, -x)` gives `[2]^* N ≅ N^{⊗ 4}`, and along `x ↦ (x, x, [n] x)` gives
 `[n + 2]^* N ⊗ N^{⊗ 2} ⊗ [n]^* N ≅ [2]^* N ⊗ ([n + 1]^* N)^{⊗ 2}`, from which the claim follows
 by induction on `n`. -/
 theorem nonempty_iso_overPullback_npow_id (A : Over (Spec (.of K))) [GrpObj A]

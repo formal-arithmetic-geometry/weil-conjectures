@@ -12,7 +12,8 @@ import WeilConjectures.SixFunctors.Etale.Derived.ClopenTransfer
 
 /-! # Restriction of the canonical exceptional base-change mate
 
-Source: blueprint `prop-asd-smooth-base-change`, coherences (i) and (iii).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, coherences (i) and
+(iii).
 -/
 
 @[expose] public section
@@ -27,7 +28,8 @@ attribute [local irreducible] openRestrictionGraphIso openRestrictionCompactSupp
 set_option maxRecDepth 100000
 
 /-- Restriction to an open of the original base preserves the canonical base-change square.
-Source: blueprint `prop-asd-smooth-base-change`, proof, coherences (i) and (iii).
+Source: blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`, proof, coherences (i)
+and (iii).
 
 Proof: write D(T) for the ordinary unbounded etale derived category, L for exact
 inverse image, F for compact support, and R for its right adjoint. Restrict the chosen
@@ -107,9 +109,9 @@ theorem isIso_leftDerivedUpperStar_map_baseChange_of_open_restriction
   dsimp only [aa, aa', aj, aj'] at hc
   rw [mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso,
     mateEquiv_derivedOpenImmersionLowerShriekBaseChangeIso] at hc
-  have hk := congrArg (fun t ↦ t.natTrans.app K) hc
+  have hk := congrArg (fun t ↦ t.app K) hc
   dsimp only [TwoSquare.whiskerTop, TwoSquare.whiskerBottom, TwoSquare.hComp,
-    TwoSquare.natTrans, TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
+    TwoSquare.mk, NatTrans.comp_app, Functor.whiskerLeft_app,
     Functor.whiskerRight_app, Functor.associator_hom_app,
     Functor.associator_inv_app, Functor.comp_obj] at hk
   simp only [Category.id_comp, Category.comp_id, Category.assoc] at hk

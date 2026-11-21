@@ -18,7 +18,12 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ProperOpenClopenProjector
 import all WeilConjectures.AlgebraicGeometry.StrictTower.ConstantNormalization.ConstantTowerDirectImageNormalization
 
-/-! # Exact localization calculations for clopen mate comparisons -/
+/-! # Exact localization calculations for clopen mate comparisons
+
+## References
+
+* Stacks Project, Tags 015F and 07A7
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -80,9 +85,7 @@ private def localize
     _ _ F.mapDerivedCategory G.mapDerivedCategory
     (Functor.whiskerRight (NatTrans.mapHomologicalComplex a (.up ℤ)) DerivedCategory.Q)
 
-/-- Localize a square comparison and insert exactly the standard composition isomorphisms.
-Source: Stacks 015F, 07A7
-(blueprint: lem-sf-ambient-exact-clopen-comparison-localization). -/
+/-- Localize a square comparison and insert exactly the standard composition isomorphisms. -/
 private def localizeSquare
     {C : Type v₁} [Category.{h₁} C] [Abelian C] [HasDerivedCategory.{w₁} C]
     {D : Type v₂} [Category.{h₂} D] [Abelian D] [HasDerivedCategory.{w₂} D]
@@ -205,20 +208,20 @@ private theorem inverse_mate_localized
       G.map (a₁.unit.app M) ≫ d.hom.app (L₁.obj M)) :
     ((mateEquiv (exactLocalizationDerivedAdjunction a₁)
       (exactLocalizationDerivedAdjunction a₂)).symm
-      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)).natTrans =
+      (TwoSquare.mk _ _ _ _ (Functor.mapDerivedCategorySquareIso d).hom)) =
       (Functor.mapDerivedCategorySquareIso β).hom := by
-  have he : ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans = β.hom := by
+  have he : ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)) = β.hom := by
     apply NatTrans.ext
     funext M
     apply (a₂.homEquiv _ _).injective
     rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
     exact (unit_mateEquiv_symm a₁ a₂ (TwoSquare.mk _ _ _ _ d.hom) M).symm.trans
       (hβ M).symm
-  have : IsIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans := by
+  have : IsIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)) := by
     rw [he]
     infer_instance
   have hh := (exact_localization_inverse_mate a₁ a₂ d).2.1
-  have hi : asIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)).natTrans = β :=
+  have hi : asIso ((mateEquiv a₁ a₂).symm (TwoSquare.mk _ _ _ _ d.hom)) = β :=
     Iso.ext he
   rw [hi] at hh
   exact hh
@@ -275,8 +278,8 @@ private theorem inverse_mate_heq
     (δ : R₁ ⋙ G ⟶ H ⋙ R₂) (δ' : R₁' ⋙ G' ⟶ H' ⋙ R₂')
     (e₁ : L₁ = L₁') (e₂ : R₁ = R₁') (e₃ : L₂ = L₂') (e₄ : R₂ = R₂')
     (e₅ : G = G') (e₆ : H = H') (ha : HEq a a') (hb : HEq b b') (hδ : HEq δ δ') :
-    HEq ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ δ)).natTrans
-      ((mateEquiv a' b').symm (TwoSquare.mk _ _ _ _ δ')).natTrans := by
+    HEq ((mateEquiv a b).symm (TwoSquare.mk _ _ _ _ δ))
+      ((mateEquiv a' b').symm (TwoSquare.mk _ _ _ _ δ')) := by
   subst L₁'
   subst R₁'
   subst L₂'
@@ -333,7 +336,7 @@ private theorem inverse_mate_app
     {L₁ : A ⥤ B} {R₁ : B ⥤ A} {L₂ : C ⥤ D} {R₂ : D ⥤ C}
     {G : A ⥤ C} {H : B ⥤ D} (a : L₁ ⊣ R₁) (b : L₂ ⊣ R₂)
     (δ : TwoSquare R₁ H G R₂) (M : A) :
-    ((mateEquiv a b).symm δ).natTrans.app M = (b.homEquiv _ _).symm
+    ((mateEquiv a b).symm δ).app M = (b.homEquiv _ _).symm
       (G.map (a.unit.app M) ≫ δ.app (L₁.obj M)) := by
   apply (b.homEquiv (G.obj M) (H.obj (L₁.obj M))).injective
   calc
@@ -372,13 +375,7 @@ private theorem left_comp_unique
   exact (left_comp_unit a b c η M).symm
 
 /-- Exact localization carries the left-adjoint composition comparison to the
-composition comparison of the exact localized adjunctions.
-Source: Stacks Project, Tags 015F and 07A7.
-(blueprint: lem-sf-exact-localization-open-compositor).
-Proof: evaluate the unit of the composite adjunction on cochain complexes.
-The componentwise unit equation characterizes the ordinary left-adjoint comparison.
-Normalized adjunction composition and uniqueness carry that equation through the
-localization. Full faithfulness on natural transformations gives the asserted equality. -/
+composition comparison of the exact localized adjunctions. -/
 theorem open_comp_localized
     {A B D : Type v₁} [Category.{h₁} A] [Category.{h₁} B] [Category.{h₁} D]
     [Abelian A] [Abelian B] [Abelian D]
@@ -856,8 +853,8 @@ private theorem mate_heq
     (δ : G ⋙ L₂ ⟶ L₁ ⋙ H) (δ' : G' ⋙ L₂' ⟶ L₁' ⋙ H')
     (e₁ : L₁ = L₁') (e₂ : R₁ = R₁') (e₃ : L₂ = L₂') (e₄ : R₂ = R₂')
     (e₅ : G = G') (e₆ : H = H') (ha : HEq a a') (hb : HEq b b') (hδ : HEq δ δ') :
-    HEq (mateEquiv a b (TwoSquare.mk _ _ _ _ δ)).natTrans
-      (mateEquiv a' b' (TwoSquare.mk _ _ _ _ δ')).natTrans := by
+    HEq (mateEquiv a b (TwoSquare.mk _ _ _ _ δ))
+      (mateEquiv a' b' (TwoSquare.mk _ _ _ _ δ')) := by
   subst L₁'
   subst R₁'
   subst L₂'

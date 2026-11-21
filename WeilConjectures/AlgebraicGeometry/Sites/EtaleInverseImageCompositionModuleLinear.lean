@@ -12,8 +12,16 @@ import WeilConjectures.AlgebraicGeometry.Etale.EtaleInverseImageCompositionModul
 /-!
 # Linearity of the composition comparisons on constant-ring etale modules
 
-Source: Stacks Project, Modules on Sites, Tags 03D8 and 03D7
-(blueprint: lem-weil-pbc-inverse-image-composition-module-linear).
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D8 and 03D7
+
+## Implementation details
+
+In `etaleInverseImageCompositionModuleLinear`, the gamma maps are characterized by constant
+sections, and the inverse images, comparison maps and adjunctions are the data of
+`etaleInverseImageModulesExact`; the hom-equivalence equations say that these are the module
+adjunctions with the underlying abelian adjunctions.
 -/
 
 @[expose] public section
@@ -24,33 +32,33 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-set_option maxHeartbeats 800000 in
--- The dependent core application exceeds the default heartbeat limit.
+/-- The unit equation uniquely determines an isomorphism of left adjoints. -/
+private theorem exists_comparison_with_unique_unit
+    {C D : Type*} [Category C] [Category D]
+    {L L' : C ⥤ D} {P P' : D ⥤ C} (a : L ⊣ P) (a' : L' ⊣ P')
+    (p : (P' ≅ P) → Prop) (q : (L ≅ L') → Prop)
+    (h : ∃ (d : P' ≅ P) (c : L ≅ L'), p d ∧ q c ∧
+      ∀ G, a.unit.app G ≫ P.map (c.hom.app G) =
+        a'.unit.app G ≫ d.hom.app (L'.obj G)) :
+    ∃ (d : P' ≅ P) (c : L ≅ L'), p d ∧ q c ∧
+      (∀ G, a.unit.app G ≫ P.map (c.hom.app G) =
+        a'.unit.app G ≫ d.hom.app (L'.obj G)) ∧
+      (∀ c' : L ≅ L',
+        (∀ G, a.unit.app G ≫ P.map (c'.hom.app G) =
+          a'.unit.app G ≫ d.hom.app (L'.obj G)) → c' = c) := by
+  obtain ⟨d, c, hd, hc, hu⟩ := h
+  refine ⟨d, c, hd, hc, hu, ?_⟩
+  intro c' hc'
+  apply Iso.ext
+  apply NatTrans.ext
+  funext G
+  apply (a.homEquiv G (L'.obj G)).injective
+  rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
+  exact (hc' G).trans (hu G).symm
+
 set_option backward.defeqAttrib.useBackward true in
 /-- The abelian composition comparisons lift to module isomorphisms, uniquely for inverse
-image with the specified unit equation. Source: Stacks Project, Tags 03D8 and 03D7
-(blueprint: lem-weil-pbc-inverse-image-composition-module-linear).
-
-The lambda-bound ring sheaves, forgetful functors and module direct images below are
-immediately applied to their actual definitions. The gamma maps are characterized by
-constant sections. The inverse images, comparison maps and adjunctions are the data of
-`etaleInverseImageModulesExact`; the hom-equivalence equations specify that these are
-precisely the module adjunctions with the underlying abelian adjunctions.
-
-Proof:
-1. The constant-section characterization of gamma and the universal property of the
-constant sheaf show that gamma for the composite agrees with successive gamma maps,
-after the abelian direct-image composition comparison. This uses
-lem-weil-pbc-constant-sheaf-maps-global-sections.
-2. The direct-image comparison is restriction along the pullback-pasting isomorphism.
-Restrictions are semilinear, so step 1 makes this comparison linear over the target ring.
-3. The two module hom-equivalences restrict the abelian ones, by
-prop-weil-pbc-inverse-image-modules-exact. Their composite takes linear maps to linear maps.
-4. The abelian inverse-image comparison is adjoint to the direct-image comparison after
-the composite-map unit, by lem-weil-pbc-inverse-image-composition. Steps 2 and 3 make it linear.
-5. Inverses of linear bijections are linear; abelian naturality gives module naturality.
-The unit equation is inherited from the abelian comparison. Injectivity of the composite
-adjunction hom-equivalence gives uniqueness, component by component. -/
+image with the specified unit equation. -/
 theorem etaleInverseImageCompositionModuleLinear
     (X Y Z : Scheme.{u}) (uMap : Y ⟶ X) (vMap : Z ⟶ Y) (R : CommRingCat.{u + 1}) :
     (fun (RX : Sheaf (X.smallGrothendieckTopology @Etale) CommRingCat.{u + 1})
@@ -190,18 +198,9 @@ theorem etaleInverseImageCompositionModuleLinear
       (toSheafify (Y.smallGrothendieckTopology @Etale) ((Functor.const Y.Etaleᵒᵖ).obj R))
       (toSheafify (Z.smallGrothendieckTopology @Etale) ((Functor.const Z.Etaleᵒᵖ).obj R))
  := by
-  dsimp
   intros gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
-  obtain ⟨d, c, hd, hc, hu⟩ :=
-    etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
-      gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV
-  refine ⟨d, c, hd, hc, hu, ?_⟩
-  intro c' hc'
-  apply Iso.ext
-  apply NatTrans.ext
-  funext G
-  apply ((aU.comp aV).homEquiv G (LUV.obj G)).injective
-  rw [Adjunction.homEquiv_apply, Adjunction.homEquiv_apply]
-  exact (hc' G).trans (hu G).symm
+  exact exists_comparison_with_unique_unit (aU.comp aV) aUV _ _
+    (etaleInverseImageCompositionModuleLinearCore X Y Z uMap vMap R
+      gammaU gammaV gammaUV hU hV hUV LU eU aU hLU LV eV aV hLV LUV eUV aUV hLUV)
 
 end AlgebraicGeometry

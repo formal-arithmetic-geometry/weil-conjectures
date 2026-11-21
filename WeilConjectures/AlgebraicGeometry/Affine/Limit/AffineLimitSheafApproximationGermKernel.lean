@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Eventual vanishing in the kernel of an approximation counit
 
-Source: blueprint `lem-sc-cd-affine-limit`, proof step 1, injectivity argument.
+Source: blueprint `lemma-uniform-bounds-pro-etale-affines`, proof step 1, injectivity argument.
 (blueprint: lem-sc-affine-limit-sheaf-approximation-germ-kernel). -/
 
 @[expose] public section

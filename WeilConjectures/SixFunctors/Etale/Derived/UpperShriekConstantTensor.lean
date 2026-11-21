@@ -23,14 +23,14 @@ map `θ_{a, N} : ω_X ⊗ᴸ La^* N_k ⟶ Ra^! N_k`
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_constantSingle_of_field`). In other
 words `Ra^!` commutes with tensoring by a constant finitely generated coefficient.
 
-Following the blueprint (`lem-coef-finite-dualizing`), the statement is local on `X`
-(`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_jointlySurjective`); on an affine
-open, `a` factors as a closed immersion `i` into an affine space `𝔸ⁿ_k` followed by the smooth
-projection `p`. The map `θ_p` is invertible by smooth duality
+Following the blueprint (`lemma-change-coefficients-exceptional-inverse-image--1`), the statement is
+local on `X` (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_jointlySurjective`); on an
+affine open, `a` factors as a closed immersion `i` into an affine space `𝔸ⁿ_k` followed by the
+smooth projection `p`. The map `θ_p` is invertible by smooth duality
 (`AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor`), and the tensor map of the
 closed immersion at a constant coefficient is invertible by the closed-support triangle and the
 projection formula for the complementary open immersion with a finitely generated constant
-coefficient (`lem-coef-finite-closed-shriek`,
+coefficient (`lemma-change-coefficients-exceptional-inverse-image--1`,
 `isIso_rightDerivedUpperShriekTensorMap_constantSingle_of_isClosedImmersion`).
 -/
 
@@ -65,9 +65,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 -- definitions of the derived tensor product.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Blueprint `lem-coef-finite-closed-shriek`: for a closed immersion `i : Z ⟶ Y` into a scheme
-of finite type over a field, `M ∈ D(Y_ét, Λ)` bounded above and a finitely generated `Λ`-module
-`N`, the tensor map `Ri^! M ⊗ᴸ Li^* N_Y ⟶ Ri^!(M ⊗ᴸ N_Y)` is an isomorphism.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image--1`: for a closed immersion
+`i : Z ⟶ Y` into a scheme of finite type over a field, `M ∈ D(Y_ét, Λ)` bounded above and a finitely
+generated `Λ`-module `N`, the tensor map `Ri^! M ⊗ᴸ Li^* N_Y ⟶ Ri^!(M ⊗ᴸ N_Y)` is an isomorphism.
 
 By the closed-support triangle it suffices that `Rj_* Lj^* M ⊗ᴸ N_Y` receives no maps from
 objects supported on `Z`, `j` the open complement
@@ -164,10 +164,10 @@ theorem isIso_dualizingComplexTensorMap_constantSingle_of_isAffine {V : Scheme.{
   exact isIso_lowerShriekRightAdjointTensorMap_of_iso_right _
     (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) p N).symm
 
-/-- Blueprint `lem-coef-finite-dualizing`, in the form of the coefficient comparison: for a
-morphism `a : X ⟶ Spec k` of finite type admitting a compactification, `Λ` finite with exponent
-invertible on `k`, and a finitely generated `Λ`-module `N`, the canonical map
-`θ_{a, N} : ω_X ⊗ᴸ La^* N_k ⟶ Ra^! N_k` is an isomorphism.
+/-- Blueprint `lemma-change-coefficients-exceptional-inverse-image--1`, in the form of the
+coefficient comparison: for a morphism `a : X ⟶ Spec k` of finite type admitting a compactification,
+`Λ` finite with exponent invertible on `k`, and a finitely generated `Λ`-module `N`, the canonical
+map `θ_{a, N} : ω_X ⊗ᴸ La^* N_k ⟶ Ra^! N_k` is an isomorphism.
 
 The statement is local on `X`
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexTensorMap_of_jointlySurjective`), and holds on

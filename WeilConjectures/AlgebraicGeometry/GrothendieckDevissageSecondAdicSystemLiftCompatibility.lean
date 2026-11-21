@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.CategoryTheory.Functor.OfSequence
 import all WeilConjectures.AlgebraicGeometry.GrothendieckExistenceSupportedHom
 import all WeilConjectures.AlgebraicGeometry.IdealPowerProductRestrictionZero
 

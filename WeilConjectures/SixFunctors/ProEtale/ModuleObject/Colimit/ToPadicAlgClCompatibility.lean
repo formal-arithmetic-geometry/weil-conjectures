@@ -19,16 +19,17 @@ Let `ℓ` be a prime, `E ⊆ ℚ̄_ℓ` a finite subextension of `ℚ_ℓ`, and 
 for the extension of scalars `ℚ̄_ℓ,X ⊗ᴸ_{E_X} -` on bounded constructible complexes
 (`ProEtale.CondensedRing.boundedConstructibleToPadicAlgCl`, the functor
 `ProEtale.constructibleToPadicAlgCl` typed on the categories `Dᵇc(X)⟦Λ⟧`). This file gives the
-coefficient comparisons of blueprint `sk-prop-scalar-six` for `E ⟶ ℚ̄_ℓ` that do not involve
-`f^!`:
+coefficient comparisons of blueprint `proposition-six-operations-change-coefficients` for `E ⟶ ℚ̄_ℓ`
+that do not involve `f^!`:
 
 * **(Pull)** on bounded constructible complexes:
   `Lf^*_E ⋙ T_X ≅ T_Y ⋙ Lf^*_{ℚ̄_ℓ}`
   (`ProEtale.CondensedRing.boundedConstructibleUpperStarToPadicAlgClIso`), the restriction of
   `ProEtale.CondensedRing.derivedPullIso`.
-* **(Push)** for a proper `g`: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`
-  (`ProEtale.CondensedRing.boundedConstructibleLowerStarToPadicAlgClIso`), the restriction of
-  `ProEtale.CondensedRing.derivedPushHom`, an isomorphism at bounded below complexes.
+* **(Push)** for a proper `g`: the comparison `Rg_*^E ⋙ T_Y ⟶ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`
+  (`ProEtale.CondensedRing.boundedConstructibleLowerStarToPadicAlgClHom`), the restriction of
+  `ProEtale.CondensedRing.derivedPushHom`, is an isomorphism at bounded below complexes
+  (`ProEtale.CondensedRing.boundedConstructibleLowerStarToPadicAlgClIso`).
 * **(Shriek)** for an open immersion `j`: `j_!^E ⋙ T_X ≅ T_U ⋙ j_!^{ℚ̄_ℓ}`
   (`ProEtale.CondensedRing.boundedConstructibleOpenImmersionLowerShriekToPadicAlgClIso`), and the
   exchange `j^*_E ⋙ T_U ⟶ T_X ⋙ j^*_{ℚ̄_ℓ}`, an isomorphism
@@ -60,9 +61,9 @@ at `d`, the mate is the unit of `L₂ ⊣ R₂`, then `R₂` of the isomorphism,
 counit `ε_d` of `L₁ ⊣ R₁`; and `R₂ H ε_d ≅ G R₁ ε_d` (by `e`) is an isomorphism, `R₁ ε_d` being
 the inverse of a unit. -/
 theorem isIso_mateEquiv_of_isIso_unit [IsIso adj₁.unit] [IsIso adj₂.unit]
-    (α : TwoSquare G L₁ L₂ H) [IsIso α.natTrans] (e : H ⋙ R₂ ≅ R₁ ⋙ G) :
-    IsIso (mateEquiv adj₁ adj₂ α).natTrans := by
-  have (d : B) : IsIso ((mateEquiv adj₁ adj₂ α).natTrans.app d) := by
+    (α : TwoSquare G L₁ L₂ H) [IsIso α] (e : H ⋙ R₂ ≅ R₁ ⋙ G) :
+    IsIso (mateEquiv adj₁ adj₂ α) := by
+  have (d : B) : IsIso ((mateEquiv adj₁ adj₂ α).app d) := by
     have : IsIso (R₁.map (adj₁.counit.app d)) := by
       have : IsIso (adj₁.unit.app (R₁.obj d) ≫ R₁.map (adj₁.counit.app d)) := by
         rw [adj₁.right_triangle_components]
@@ -76,7 +77,7 @@ theorem isIso_mateEquiv_of_isIso_unit [IsIso adj₁.unit] [IsIso adj₂.unit]
       Functor.comp_map]
     dsimp only [Functor.comp_obj]
     simp only [Category.id_comp]
-    have : IsIso (α.natTrans.app (R₁.obj d)) := inferInstance
+    have : IsIso (α.app (R₁.obj d)) := inferInstance
     have : IsIso (𝟙 (R₂.obj (H.obj d))) := inferInstance
     exact IsIso.comp_isIso
   exact NatIso.isIso_of_isIso_app _
@@ -205,15 +206,35 @@ variable {Z Y : Over (Spec (.of k))}
   (g : Z ⟶ Y) [IsProper g.left]
 
 /-- **(Push)** on bounded constructible complexes, for the inclusion `E ⟶ ℚ̄_ℓ` and a proper
-morphism `g`: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the restriction of
-`ProEtale.CondensedRing.derivedPushHom`, which is an isomorphism at bounded below complexes
-(`ProEtale.CondensedRing.isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl`). -/
-noncomputable def boundedConstructibleLowerStarToPadicAlgClIso :
+morphism `g`: the comparison `Rg_*^E ⋙ T_Y ⟶ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the restriction of
+`ProEtale.CondensedRing.derivedPushHom` along the inclusions of the bounded constructible
+complexes. -/
+noncomputable def boundedConstructibleLowerStarToPadicAlgClHom :
     ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g ⋙
-        boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
+        boundedConstructibleToPadicAlgCl Y.left ℓ E ⟶
       boundedConstructibleToPadicAlgCl Z.left ℓ E ⋙
         boundedConstructibleLowerStar ℓ g :=
-  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
+  ((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimage
+    ((Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility Y.left ℓ E).hom ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight
+        (ContinuousMapRingObj.boundedConstructibleLowerStarCompatibility ℓ E g).hom _ ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _
+        (derivedPushHom (Profinite.padicSubfieldRingObjToPadicAlgCl ℓ E) g.left) ≫
+      (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (boundedConstructibleToPadicAlgClCompatibility Z.left ℓ E).inv _ ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ g).inv ≫
+      (Functor.associator _ _ _).inv)
+
+/-- **(Push) is an isomorphism** for `E ⟶ ℚ̄_ℓ` on bounded constructible complexes: these are
+bounded below, where `derivedPushHom` is invertible
+(`ProEtale.CondensedRing.isIso_whiskerLeft_ι_derivedPushHom_padicSubfieldRingObjToPadicAlgCl`). -/
+instance isIso_boundedConstructibleLowerStarToPadicAlgClHom :
+    IsIso (boundedConstructibleLowerStarToPadicAlgClHom ℓ E g) :=
+  (((ObjectProperty.fullyFaithfulι _).whiskeringRight _).preimageIso
     (Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (boundedConstructibleToPadicAlgClCompatibility Y.left ℓ E) ≪≫
       (Functor.associator _ _ _).symm ≪≫
@@ -226,7 +247,17 @@ noncomputable def boundedConstructibleLowerStarToPadicAlgClIso :
       Functor.isoWhiskerRight (boundedConstructibleToPadicAlgClCompatibility Z.left ℓ E).symm _ ≪≫
       Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarCompatibility ℓ g).symm ≪≫
-      (Functor.associator _ _ _).symm)
+      (Functor.associator _ _ _).symm)).isIso_hom
+
+/-- **(Push)** on bounded constructible complexes, for the inclusion `E ⟶ ℚ̄_ℓ` and a proper
+morphism `g`: `Rg_*^E ⋙ T_Y ≅ T_Z ⋙ Rg_*^{ℚ̄_ℓ}`, the comparison
+`boundedConstructibleLowerStarToPadicAlgClHom`, which is an isomorphism. -/
+noncomputable def boundedConstructibleLowerStarToPadicAlgClIso :
+    ContinuousMapRingObj.boundedConstructibleLowerStar ℓ E g ⋙
+        boundedConstructibleToPadicAlgCl Y.left ℓ E ≅
+      boundedConstructibleToPadicAlgCl Z.left ℓ E ⋙
+        boundedConstructibleLowerStar ℓ g :=
+  asIso (boundedConstructibleLowerStarToPadicAlgClHom ℓ E g)
 
 end LowerStar
 

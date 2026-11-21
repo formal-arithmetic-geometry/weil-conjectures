@@ -74,7 +74,7 @@ private theorem quotientTowerComparison
     (ha : ∀ n, QuasiIso (a n))
     (hs : ∀ n, CochainComplex.PrincipalCone.step μ n ≫ a n =
       a (n + 1) ≫ t n)
-    (hu : ∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)) ≫ a n = u n) :
+    (hu : ∀ n, CochainComplex.mappingCone.inr (μ ^ (n + 1)).asHom ≫ a n = u n) :
     ∃ c : DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion μ) ≅
         DerivedCategory.Q.obj (CochainComplex.mappingCocone (towerTransitionEndomorphism t)),
       DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit μ) ≫ c.hom =
@@ -159,33 +159,33 @@ resolution quasi-isomorphism. The zero complex and empty scheme give zero object
 theorem internal_quotient_principal_cone_comparison
     (d : End (Mod.regular (DerivedNakayama.integerRing l E)))
     (hd : ∀ (S : Profinite.{u}ᵒᵖ) (f : (DerivedNakayama.integerRing l E).obj.obj S)
-      (s : S.unop), ((d.hom.hom.app S) f).down s =
+      (s : S.unop), ((d.asHom.hom.hom.app S) f).down s =
         Padic.coefficientExtensionUniformizer l E * f.down s)
     (P : CochainComplex (Modules l E X) ℤ)
     (hP : (HomologicalComplex.quasiIso (Modules l E X) (.up ℤ)).kFlat P) :
     ∃ c : DerivedCategory.Q.obj (CochainComplex.PrincipalCone.completion
-        (DerivedNakayama.scalarOnComplex l E X d P)) ≅
+        (End.of (DerivedNakayama.scalarOnComplex l E X d P))) ≅
         DerivedCategory.Q.obj (roos l E X P),
       DerivedCategory.Q.map (CochainComplex.PrincipalCone.unit
-        (DerivedNakayama.scalarOnComplex l E X d P)) ≫ c.hom =
+        (End.of (DerivedNakayama.scalarOnComplex l E X d P))) ≫ c.hom =
         DerivedCategory.Q.map (augmentation l E X P) := by
   classical
-  let μ : End P := DerivedNakayama.scalarOnComplex l E X d P
+  let μ : End P := .of (DerivedNakayama.scalarOnComplex l E X d P)
   choose a ha hc using fun n ↦ internal_principal_cone_level_augmentation l E X d hd P hP n
   have hc' (n : ℕ) (q : ℤ) : (a n).f q =
-      (CochainComplex.mappingCone.snd (μ ^ (n + 1))).v q q (add_zero q) ≫
+      (CochainComplex.mappingCone.snd (μ ^ (n + 1)).asHom).v q q (add_zero q) ≫
         (levelUnit l E X P n).f q := hc n q
   have hs (n : ℕ) : CochainComplex.PrincipalCone.step μ n ≫ a n =
       a (n + 1) ≫ levelStep l E X P n := by
     apply HomologicalComplex.hom_ext
     intro q
-    apply CochainComplex.mappingCone.ext_from (μ ^ (n + 1 + 1)) (q + 1) q rfl
+    apply CochainComplex.mappingCone.ext_from (μ ^ (n + 1 + 1)).asHom (q + 1) q rfl
     · simp [HomologicalComplex.comp_f, hc', CochainComplex.PrincipalCone.step,
         CochainComplex.mappingCone.map]
     · have h := congrArg (fun k ↦ k.f q) (levelUnit_step l E X P n)
       simpa [HomologicalComplex.comp_f, hc', CochainComplex.PrincipalCone.step,
         CochainComplex.mappingCone.map, Category.assoc] using h.symm
-  have hu (n : ℕ) : CochainComplex.mappingCone.inr (μ ^ (n + 1)) ≫ a n =
+  have hu (n : ℕ) : CochainComplex.mappingCone.inr (μ ^ (n + 1)).asHom ≫ a n =
       levelUnit l E X P n := by
     ext q
     simp only [HomologicalComplex.comp_f, hc',

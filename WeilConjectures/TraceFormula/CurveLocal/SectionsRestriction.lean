@@ -18,7 +18,7 @@ Let `e : X' ⟶ X` be a morphism of schemes, `V` an étale `X`-scheme, `W` an é
 RΓ(V, K) ⟶ RΓ(W, e^* K)
 ```
 (`AlgebraicGeometry.Etale.sectionsRestriction`). All the restriction maps of the local calculation
-on curves (blueprint `sk-lem-tf-curve-restriction-zero`) are of this form: the restriction of
+on curves (blueprint `lemma-vanishing-local-term-zero-stalk`) are of this form: the restriction of
 `RΓ(T ∖ G, P)` to the punctured diagonal, its factorization through `RΓ(T ∖ (G ∪ V), P)`, and the
 pullbacks along the finite covers. They compose
 (`AlgebraicGeometry.Etale.sectionsRestriction_comp`), and the third component of the morphism of

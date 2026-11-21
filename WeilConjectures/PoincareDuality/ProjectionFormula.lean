@@ -9,6 +9,7 @@ public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocalizingInputs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.ProperProjectionFormula
 
 /-!
 
@@ -80,8 +81,9 @@ direction is chosen so that the Verdier exchange morphism can be defined from it
 `Λ = ℚ̲̄_ℓ`, `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B` (Input 2.1
 of `WeilConjectures/PoincareDuality/Verdier_Poincare_Maps_ProEtale_Condensed_EN.tex`). Its first
 factor `PF^*_g` is an isomorphism by the proper projection formula
-(`ProEtale.CondensedRing.properDirectImage_baseChange_projectionFormula_padicAlgClRingObj`,
-blueprint `det-thm-sfb-proper-base-change-rational`), since `Di_! K` is bounded constructible.
+(`ProEtale.CondensedRing.properDirectImage_baseChange_projectionFormula_padicAlgClRingObj`),
+since `Di_! K` is bounded
+constructible.
 
 -/
 
@@ -433,11 +435,11 @@ private lemma isIso_homMk_of_isIso {C : Type*} [Category* C] {P : ObjectProperty
   have : IsIso (P.ι.map (P.homMk g)) := ‹IsIso g›
   isIso_of_fully_faithful P.ι _
 
-set_option maxHeartbeats 1000000 in
 -- unifying the two forms of the projection morphism unfolds the monoidal structure of `Lp^*`
 /-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
-constructible `ℚ̄_ℓ`-complexes: the proper projection formula (blueprint
-`det-thm-sfb-proper-base-change-rational`). -/
+constructible `ℚ̄_ℓ`-complexes: the proper projection formula on `Dᵇc`
+(`ProEtale.CondensedRing.isIso_projectionMorphism_boundedConstructible_padicAlgCl`), read in the
+ambient derived category through the fully faithful inclusion. -/
 lemma isIso_properProjectionMorphism_padicAlgCl {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (p : Z ⟶ Y)
     [IsProper p.left]
@@ -448,16 +450,23 @@ lemma isIso_properProjectionMorphism_padicAlgCl {Z : Over (Spec (.of k))}
     (hA : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Z.left) A)
     (hB : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left) B) :
     IsIso ((derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ)
-      p.left).projectionMorphism A B) :=
-  (properDirectImage_baseChange_projectionFormula_padicAlgClRingObj ℓ (X' := Z) (Y' := Y)
-    p).2.2 A B hA hB
+      p.left).projectionMorphism A B) := by
+  have h := Adjunction.ι_map_projectionMorphism_restrictFullyFaithful
+    (derivedUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) p.left)
+    (fun K ↦ boundedConstructible_leftDerivedUpperStar_obj _ ℓ p K)
+    (fun K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ p K) ⟨A, hA⟩ ⟨B, hB⟩
+  have : IsIso ((boundedConstructible _).ι.map
+      ((boundedConstructibleUpperStarLowerStarAdjunction ℓ p).projectionMorphism ⟨A, hA⟩
+        ⟨B, hB⟩)) :=
+    inferInstance
+  erw [h] at this
+  exact this
 
 /-- **The derived projection formula for `Rf_!`** on bounded constructible `ℚ̄_ℓ`-sheaves: the
 exceptional projection morphism `PF^!_{f,K,B}` is an isomorphism. For the chosen
 compactification `X ⟶[i] Z ⟶[g] Y` it is the projection morphism `PF^*_g` at `Di_! K`, an
-isomorphism by the proper projection formula (blueprint `det-thm-sfb-proper-base-change-rational`,
-`Di_! K` being bounded constructible), followed by the inverse of the isomorphism `q_i` and an
-identification. -/
+isomorphism by the proper projection formula (`Di_! K` being bounded constructible), followed by
+the inverse of the isomorphism `q_i` and an identification. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
@@ -639,8 +648,7 @@ lemma boundedConstructibleExceptionalProjection_app_app
   rfl
 
 /-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
-constructible `E`-complexes: the proper projection formula (blueprint
-`det-thm-sfb-proper-base-change-rational`). -/
+constructible `E`-complexes: the proper projection formula. -/
 lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (p : Z ⟶ Y)
     [IsProper p.left]
@@ -659,9 +667,8 @@ lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
 /-- **The derived projection formula for `Rf_!`** (`E`-coefficient): the exceptional projection
 morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. For the chosen
 compactification `X ⟶[i] Z ⟶[g] Y` it is the projection morphism `PF^*_g` at `Di_! K`, an
-isomorphism by the proper projection formula (blueprint `det-thm-sfb-proper-base-change-rational`,
-`Di_! K` being bounded constructible), followed by the inverse of the isomorphism `q_i` and an
-identification. -/
+isomorphism by the proper projection formula (`Di_! K` being bounded constructible), followed by
+the inverse of the isomorphism `q_i` and an identification. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.continuousMapRingObj E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.continuousMapRingObj E⟧) :
@@ -831,11 +838,9 @@ lemma boundedConstructibleExceptionalProjection_app_app
       boundedConstructibleExceptionalProjectionMorphism ℓ E f K B :=
   rfl
 
-set_option maxHeartbeats 1000000 in
 -- unifying the two forms of the projection morphism unfolds the monoidal structure of `Lp^*`
 /-- The projection morphism `PF^*_p` of a proper morphism `p` is an isomorphism on bounded
-constructible `𝒪_E`-complexes: the proper projection formula (blueprint
-`det-thm-sfb-proper-base-change-integral`). -/
+constructible `𝒪_E`-complexes: the proper projection formula. -/
 lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
     [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] (p : Z ⟶ Y)
     [IsProper p.left]
@@ -853,9 +858,8 @@ lemma isIso_properProjectionMorphism {Z : Over (Spec (.of k))}
 /-- **The derived projection formula for `Rf_!`** (`𝒪_E`-coefficient): the exceptional projection
 morphism `PF^!_{f,K,B}` is an isomorphism for bounded constructible `K` and `B`. For the chosen
 compactification `X ⟶[i] Z ⟶[g] Y` it is the projection morphism `PF^*_g` at `Di_! K`, an
-isomorphism by the proper projection formula (blueprint `det-thm-sfb-proper-base-change-integral`,
-`Di_! K` being bounded constructible), followed by the inverse of the isomorphism `q_i` and an
-identification. -/
+isomorphism by the proper projection formula (`Di_! K` being bounded constructible), followed by
+the inverse of the isomorphism `q_i` and an identification. -/
 instance isIso_boundedConstructibleExceptionalProjectionMorphism
     (K : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E⟧)
     (B : Dᵇc(Y.left)⟦Profinite.padicIntegersRingObj ℓ E⟧) :

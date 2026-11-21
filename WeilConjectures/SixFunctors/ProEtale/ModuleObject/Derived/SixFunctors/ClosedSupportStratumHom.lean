@@ -28,7 +28,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
 Source: blueprint main-20261015, sec-smooth-purity/sk-prop-sf-localization,
 sk-lem-formal-closed-support-stratum-hom.md
-(blueprint: det-lem-formal-closed-support-stratum-hom).
+(blueprint: lemma-sections-support-closed-subscheme--3).
 
 The global Hom functor is derived into abelian groups, rather than internal Hom.
 All coefficient modules and derived categories are the existing module-object categories.

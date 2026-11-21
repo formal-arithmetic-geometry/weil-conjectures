@@ -205,9 +205,9 @@ public import Mathlib.RingTheory.DedekindDomain.Dvr
 /-!
 # Finite coefficient descent and the rational coefficient two-colimit
 
-Source: Weil blueprint main-20261015, sec-six-functors-basics,
+Source: Weil blueprint main-20261015, chap-Construction-of-f,
 sk-thm-sfb-qlbar-two-colimit/_section.md, assertions (1)--(4)
-(blueprint: sk-thm-sfb-qlbar-two-colimit).
+(blueprint: lemma-descent-finite-coefficient-field).
 
 The shifted Hom-colimit isomorphism is expressed by its representative and eventual
 equality conditions. We write the shifted target as T(D[r]); exact scalar extension
@@ -230,8 +230,8 @@ attribute [local irreducible] Functor.leftDerivedFunctorIsoMapDerivedCategory
   Functor.CommShift.ofIso Functor.leftDerivedFunctor Functor.mapDerivedCategory
 
 /-- The canonical derived scalar comparison for three finite coefficient fields.
-Source: blueprint sk-thm-sfb-qlbar-two-colimit, definition of C_F and proof (4),
-tensor transitivity (blueprint: sk-thm-sfb-qlbar-two-colimit).
+Source: blueprint lemma-descent-finite-coefficient-field, definition of C_F and proof (4),
+tensor transitivity (blueprint: lemma-descent-finite-coefficient-field).
 This is the existing exact-functor comparison applied to the ordinary tensor comparison.
 -/
 def finiteDescentDerivedComp (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
@@ -242,8 +242,8 @@ def finiteDescentDerivedComp (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     Functor.leftDerivedFunctorCompIso _ _
 
 /-- Evaluate a finite-field derived Hom representative in the algebraic closure.
-Source: blueprint sk-thm-sfb-qlbar-two-colimit, displayed isomorphism (2)
-(blueprint: sk-thm-sfb-qlbar-two-colimit). -/
+Source: blueprint lemma-descent-finite-coefficient-field, displayed isomorphism (2)
+(blueprint: lemma-descent-finite-coefficient-field). -/
 def finiteDescentDerivedHomToAlgCl (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F)
     {C D : DerivedCategory
@@ -257,8 +257,8 @@ def finiteDescentDerivedHomToAlgCl (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
       (derivedExtendScalarsCompIso X ℓ h).hom.app D
 
 /-- The transition between finite-field Hom representatives, using tensor transitivity.
-Source: blueprint sk-thm-sfb-qlbar-two-colimit, displayed colimit (2) and proof (4)
-(blueprint: sk-thm-sfb-qlbar-two-colimit). -/
+Source: blueprint lemma-descent-finite-coefficient-field, displayed colimit (2) and proof (4)
+(blueprint: lemma-descent-finite-coefficient-field). -/
 def finiteDescentDerivedHomTransition (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     {E F H : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ F) (a : F ≤ H)
     {C D : DerivedCategory
@@ -404,12 +404,125 @@ attribute [local irreducible] finiteCoefficientDerivedHomEquiv finiteCoefficient
   finiteDescentDerivedHomToAlgCl finiteDescentDerivedHomTransition
   coefficientDescentHomToAlgCl coefficientDescentHomTransition
 
-set_option maxHeartbeats 400000 in
--- The four-clause assembly elaborates several derived functor and zero-shift interfaces.
+/-- The equality part of clause (4) of `finiteCoefficientDescentTwoColimit` on its own: for a
+finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ` and a noetherian qcqs scheme `X`, the constant-model
+bounded constructible complexes with `E`-coefficients are the bounded constructible ones (the
+clause also carries the compatibilities under extension of scalars, which stay in the bundle).
+Every user of the descent bundle needs only this equality. -/
+theorem constantModelBoundedConstructible_eq_boundedConstructible_subfield
+    (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] [TopologicalSpace.NoetherianSpace X] :
+    constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
+      boundedConstructible (padicSubfieldRingObj X ℓ E) :=
+  constantModel_eq_of_localFree _ (finite_lf ℓ E) X
+
+/-- The equality part of clause (4) of `finiteCoefficientDescentTwoColimit` on its own: for a
+noetherian qcqs scheme `X`, the constant-model bounded constructible complexes with
+`ℚ̄_ℓ`-coefficients are the bounded constructible ones. -/
+theorem constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl
+    (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u})
+    [CompactSpace X] [QuasiSeparatedSpace X] [TopologicalSpace.NoetherianSpace X] :
+    constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
+      boundedConstructible (padicAlgClRingObj X ℓ) :=
+  constantModel_eq_of_localFree _ (algcl_lf ℓ) X
+
+/-- `constantModelBoundedConstructible_eq_boundedConstructible_subfield` for a scheme of finite
+type over a field, the form the six-functor files use. -/
+theorem constantModelBoundedConstructible_eq_boundedConstructible_subfield_of_finiteType
+    (k : Type u) [Field k] (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :
+    constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
+      boundedConstructible (padicSubfieldRingObj X ℓ E) := by
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  let : IsNoetherian X := {}
+  exact constantModelBoundedConstructible_eq_boundedConstructible_subfield ℓ E X
+
+/-- `constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl` for a scheme of finite
+type over a field, the form the six-functor files use. -/
+theorem constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl_of_finiteType
+    (k : Type u) [Field k] (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] :
+    constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
+      boundedConstructible (padicAlgClRingObj X ℓ) := by
+  let : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  let : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  let : IsNoetherian X := {}
+  exact constantModelBoundedConstructible_eq_boundedConstructible_padicAlgCl ℓ X
+
+/-- Ordinary derived Hom descent, with the degree-zero comparison normalized once. -/
+private lemma finiteDescentDerivedHom_bijective
+    (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] [Fact p.Prime] [Fact ℓ.Prime]
+    (hpℓ : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] (E : PadicAlgCl.FiniteIntermediateField ℓ)
+    (C D : BoundedConstructible (padicSubfieldRingObj X ℓ E)) :
+    (∀ ψ : (derivedExtendScalarsToPadicAlgCl X ℓ E).obj C.obj ⟶
+        (derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj,
+      ∃ (F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F)
+        (f : (derivedExtendScalarsSubfield X ℓ h).obj C.obj ⟶
+          (derivedExtendScalarsSubfield X ℓ h).obj D.obj),
+        finiteDescentDerivedHomToAlgCl X ℓ h f = ψ) ∧
+    (∀ (F G : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (a : E ≤ G)
+      (f : (derivedExtendScalarsSubfield X ℓ h).obj C.obj ⟶
+        (derivedExtendScalarsSubfield X ℓ h).obj D.obj)
+      (g : (derivedExtendScalarsSubfield X ℓ a).obj C.obj ⟶
+        (derivedExtendScalarsSubfield X ℓ a).obj D.obj),
+      finiteDescentDerivedHomToAlgCl X ℓ h f = finiteDescentDerivedHomToAlgCl X ℓ a g →
+      ∃ (H : PadicAlgCl.FiniteIntermediateField ℓ) (b : F ≤ H) (c : G ≤ H),
+        finiteDescentDerivedHomTransition X ℓ h b f =
+          finiteDescentDerivedHomTransition X ℓ a c g) := by
+  have hh := (coefficient_finite_descent_hom X ℓ (k := k) p hpℓ E C D 0).2.2.2.2.2
+  have hs := hh.1
+  have hi := hh.2
+  constructor
+  · intro ψ
+    obtain ⟨F, h, f, hf⟩ := hs
+      (ψ ≫ (shiftFunctorZero _ ℤ).inv.app
+        ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj))
+    refine ⟨F, h, f ≫ (shiftFunctorZero _ ℤ).hom.app
+      ((derivedExtendScalarsSubfield X ℓ h).obj D.obj), ?_⟩
+    have hz := finiteDescentDerivedHomToAlgCl_zero X ℓ h C.obj D.obj
+      (f ≫ (shiftFunctorZero _ ℤ).hom.app
+        ((derivedExtendScalarsSubfield X ℓ h).obj D.obj))
+    have hz' : coefficientDescentHomToAlgCl X ℓ h C.obj D.obj 0 f ≫
+        (shiftFunctorZero _ ℤ).hom.app
+          ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj) =
+        finiteDescentDerivedHomToAlgCl X ℓ h
+          (f ≫ (shiftFunctorZero _ ℤ).hom.app
+            ((derivedExtendScalarsSubfield X ℓ h).obj D.obj)) := by
+      simpa only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id] using hz
+    exact hz'.symm.trans
+      ((congrArg (fun q ↦ q ≫ (shiftFunctorZero _ ℤ).hom.app
+        ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj)) hf).trans (by
+        simp only [Category.assoc, Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]))
+  · intro F G h a f g heq
+    have heq' : coefficientDescentHomToAlgCl X ℓ h C.obj D.obj 0
+        (f ≫ (shiftFunctorZero _ ℤ).inv.app
+          ((derivedExtendScalarsSubfield X ℓ h).obj D.obj)) =
+      coefficientDescentHomToAlgCl X ℓ a C.obj D.obj 0
+        (g ≫ (shiftFunctorZero _ ℤ).inv.app
+          ((derivedExtendScalarsSubfield X ℓ a).obj D.obj)) := by
+      apply (cancel_mono ((shiftFunctorZero _ ℤ).hom.app
+        ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj))).mp
+      simpa only [finiteDescentDerivedHomToAlgCl_zero] using heq
+    obtain ⟨H, b, c, he⟩ := hi F G h a
+      (f ≫ (shiftFunctorZero _ ℤ).inv.app
+        ((derivedExtendScalarsSubfield X ℓ h).obj D.obj))
+      (g ≫ (shiftFunctorZero _ ℤ).inv.app
+        ((derivedExtendScalarsSubfield X ℓ a).obj D.obj)) heq'
+    refine ⟨H, b, c, ?_⟩
+    have he' := congrArg (fun q ↦ q ≫ (shiftFunctorZero _ ℤ).hom.app
+      ((derivedExtendScalarsSubfield X ℓ (h.trans b)).obj D.obj)) he
+    simpa only [finiteDescentDerivedHomTransition_zero] using he'
+
 /-- All four finite coefficient descent assertions, including the rational identification
 and the ordinary-category filtered two-colimit.
-Source: blueprint main-20261015, sk-thm-sfb-qlbar-two-colimit, assertions (1)--(4)
-(blueprint: sk-thm-sfb-qlbar-two-colimit).
+Source: blueprint main-20261015, lemma-descent-finite-coefficient-field, assertions (1)--(4)
+(blueprint: lemma-descent-finite-coefficient-field).
 
 Proof: finite type and quasi-compactness make X Noetherian. On each Noetherian
 stratum, finite constant models are locally finitely presented, and the finite-field
@@ -479,10 +592,10 @@ theorem finiteCoefficientDescentTwoColimit
       constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X =
         boundedConstructible (padicSubfieldRingObj X ℓ E) := by
     intro E
-    exact constantModel_eq_of_localFree _ (finite_lf ℓ E) X
+    exact constantModel_eq_of_localFree (Profinite.continuousMapRingObj E) (finite_lf ℓ E) X
   have hΩ : constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X =
       boundedConstructible (padicAlgClRingObj X ℓ) := by
-    exact constantModel_eq_of_localFree _ (algcl_lf ℓ) X
+    exact constantModel_eq_of_localFree (Profinite.padicAlgClRingObj ℓ) (algcl_lf ℓ) X
   refine ⟨(coefficient_finite_descent_lisse X ℓ).1, ?_,
     (coefficient_finite_descent_objects k p ℓ hp hpℓ X).1, ?_⟩
   · intro E C D r
@@ -493,37 +606,7 @@ theorem finiteCoefficientDescentTwoColimit
     let D' : BoundedConstructible (padicSubfieldRingObj X ℓ E) :=
       ⟨D.obj⟦r⟧, (boundedConstructible _).le_shift r D.obj
         ((congrFun (hE E) D.obj).mp D.property)⟩
-    have hh := coefficient_finite_descent_hom X ℓ (k := k) p hpℓ E C' D' 0
-    dsimp only [C', D'] at hh
-    have hs := hh.2.2.2.2.2.1
-    have hi := hh.2.2.2.2.2.2
-    constructor
-    · intro ψ
-      obtain ⟨F, h, f, hf⟩ := hs (ψ ≫ (shiftFunctorZero _ ℤ).inv.app _)
-      refine ⟨F, h, f ≫ (shiftFunctorZero _ ℤ).hom.app _, ?_⟩
-      have hz := finiteDescentDerivedHomToAlgCl_zero X ℓ h C.obj (D.obj⟦r⟧)
-        (f ≫ (shiftFunctorZero _ ℤ).hom.app _)
-      have hz' : coefficientDescentHomToAlgCl X ℓ h C.obj (D.obj⟦r⟧) 0 f ≫
-          (shiftFunctorZero _ ℤ).hom.app _ =
-            finiteDescentDerivedHomToAlgCl X ℓ h
-              (f ≫ (shiftFunctorZero _ ℤ).hom.app _) := by
-        simpa only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id] using hz
-      exact hz'.symm.trans
-        ((congrArg (fun q ↦ q ≫ (shiftFunctorZero _ ℤ).hom.app _) hf).trans (by
-          simp only [Category.assoc, Iso.inv_hom_id_app, Functor.id_obj, Category.comp_id]))
-    · intro F G h a f g heq
-      have heq' : coefficientDescentHomToAlgCl X ℓ h C.obj (D.obj⟦r⟧) 0
-          (f ≫ (shiftFunctorZero _ ℤ).inv.app _) =
-        coefficientDescentHomToAlgCl X ℓ a C.obj (D.obj⟦r⟧) 0
-          (g ≫ (shiftFunctorZero _ ℤ).inv.app _) := by
-        apply (cancel_mono ((shiftFunctorZero _ ℤ).hom.app _)).mp
-        simpa only [finiteDescentDerivedHomToAlgCl_zero] using heq
-      obtain ⟨H, b, c, he⟩ := hi F G h a
-        (f ≫ (shiftFunctorZero _ ℤ).inv.app _)
-        (g ≫ (shiftFunctorZero _ ℤ).inv.app _) heq'
-      refine ⟨H, b, c, ?_⟩
-      have he' := congrArg (fun q ↦ q ≫ (shiftFunctorZero _ ℤ).hom.app _) he
-      simpa only [finiteDescentDerivedHomTransition_zero] using he'
+    exact finiteDescentDerivedHom_bijective k p ℓ hpℓ X E C' D'
   · refine ⟨?_, ?_, constructibleCocone_isFilteredTwoColimit X ℓ⟩
     · intro E
       refine ⟨hE E, ?_⟩

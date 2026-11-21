@@ -26,14 +26,14 @@ Frobenius acts as the identity on the étale topos
 κ_X : LΦ_X^* ≅ Lg_X^*
 ```
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarGeometricFiberFrobeniusIso`, blueprints
-`prop-trf-scheme-galois-comparison` and `def-pur-scheme-geometric-frobenius`), and the
+`lemma-scheme-frobenius-geometric-frobenius--1` and `sec-Weil-complexes`), and the
 comparison isomorphisms are compatible with pullback along the base change `f : X ⟶ Y` of a
 morphism `f₀ : X₀ ⟶ Y₀` over `k`: `Lf^* κ_Y = κ_X Lf^*`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_leftDerivedUpperStarGeometricFiberFrobeniusIso`).
 
 The *scheme-Frobenius form* of a strict geometric-Weil datum `φ_K : Lg_Y^* K ≅ K` is
 `u_K = φ_K ∘ κ_{Y,K} : LΦ_Y^* K ⟶ K` (`AlgebraicGeometry.Etale.schemeFrobeniusForm`, blueprint
-`def-pur-tate-datum`).
+`definition-weil-structure--1`).
 -/
 
 @[expose] public section
@@ -61,12 +61,12 @@ Frobenius, is the scheme Frobenius: `Fr_X^{(q)} ≫ g_X = Φ_X`. -/
 lemma iterateFrobenius_geometricFiber_comp_geometricGaloisFrobenius_hom :
     f.geometricFiber.iterateFrobenius (FiniteField.ringChar_prime k)
         f.isOfCharacteristic_geometricFiber (FiniteField.frobeniusExponent k) ≫
-      f.geometricGaloisFrobenius.hom = f.geometricFiberFrobenius := by
+      f.geometricGaloisFrobenius.asIso.hom = f.geometricFiberFrobenius := by
   rw [Scheme.Hom.iterateFrobenius_geometricFiber_eq, Category.assoc, Iso.inv_hom_id,
     Category.comp_id]
 
-/-- Blueprint `def-pur-scheme-geometric-frobenius`: Scheme and geometric Frobenius of the purity
-datum (the comparison isomorphism `κ_X`, blueprint `prop-trf-scheme-galois-comparison`).
+/-- Blueprint `sec-Weil-complexes`: Scheme and geometric Frobenius of the purity
+datum (the comparison isomorphism `κ_X`, blueprint `lemma-scheme-frobenius-geometric-frobenius--1`).
 
 The comparison `κ_X : LΦ_X^* ≅ Lg_X^*` between the derived pullbacks along the scheme Frobenius
 `Φ_X` and along the geometric Galois Frobenius `g_X = g_{X,γ}` of the geometric fibre `X`: the
@@ -76,7 +76,7 @@ and `κ_X` is the composite
 `LΦ_X^* ≅ Lg_X^* ⋙ L(Fr_X^{(q)})^* ≅ Lg_X^* ⋙ L(𝟙)^* ≅ Lg_X^*`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfFactor`). -/
 noncomputable def leftDerivedUpperStarGeometricFiberFrobeniusIso :
-    L((f.geometricFiberFrobenius)^*[A]) ≅ L((f.geometricGaloisFrobenius.hom)^*[A]) :=
+    L((f.geometricFiberFrobenius)^*[A]) ≅ L((f.geometricGaloisFrobenius.asIso.hom)^*[A]) :=
   leftDerivedUpperStarIsoOfFactor A
     (iterateFrobenius_geometricFiber_comp_geometricGaloisFrobenius_hom f)
     (leftDerivedUpperStarIterateFrobeniusIso A (FiniteField.ringChar_prime k)
@@ -84,7 +84,7 @@ noncomputable def leftDerivedUpperStarGeometricFiberFrobeniusIso :
 
 variable {Y₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f)
 
-/-- Blueprint `def-pur-scheme-geometric-frobenius`: Scheme and geometric Frobenius of the purity
+/-- Blueprint `sec-Weil-complexes`: Scheme and geometric Frobenius of the purity
 datum (compatibility `Lf^* κ_Y = κ_X Lf^*`).
 
 The comparison isomorphisms `κ` are compatible with pullback along the base change
@@ -101,10 +101,10 @@ theorem leftDerivedUpperStar_map_leftDerivedUpperStarGeometricFiberFrobeniusIso
     (K : _root_.DerivedCategory (Sheaf g.geometricFiber.smallEtaleTopology A)) :
     L((Hom.geometricFiberMap φ h)^*[A]).map
         ((leftDerivedUpperStarGeometricFiberFrobeniusIso A g).hom.app K) ≫
-        (leftDerivedUpperStarComp A (Hom.geometricFiberMap φ h) g.geometricGaloisFrobenius.hom
-          (f.geometricGaloisFrobenius.hom ≫ Hom.geometricFiberMap φ h)
+        (leftDerivedUpperStarComp A (Hom.geometricFiberMap φ h) g.geometricGaloisFrobenius.asIso.hom
+          (f.geometricGaloisFrobenius.asIso.hom ≫ Hom.geometricFiberMap φ h)
           (Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).inv.app K ≫
-          (leftDerivedUpperStarComp A f.geometricGaloisFrobenius.hom
+          (leftDerivedUpperStarComp A f.geometricGaloisFrobenius.asIso.hom
             (Hom.geometricFiberMap φ h) _ rfl).hom.app K =
       (leftDerivedUpperStarComp A (Hom.geometricFiberMap φ h) g.geometricFiberFrobenius
           (f.geometricFiberFrobenius ≫ Hom.geometricFiberMap φ h)
@@ -123,7 +123,8 @@ theorem leftDerivedUpperStar_map_leftDerivedUpperStarGeometricFiberFrobeniusIso
 
 section SchemeFrobeniusForm
 
-/-- Blueprint `def-pur-tate-datum`: Strict Weil data and the Tate datum (scheme-Frobenius form).
+/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum (scheme-Frobenius
+form).
 
 The *scheme-Frobenius form* `u_K = φ_K ∘ κ_{Y,K} : LΦ_Y^* K ≅ K` of a strict geometric-Weil datum
 `φ_K : Lg_Y^* K ≅ K` on the geometric fibre `Y` of `g : Y₀ ⟶ Spec k`, `κ_Y` being the comparison
@@ -131,13 +132,13 @@ The *scheme-Frobenius form* `u_K = φ_K ∘ κ_{Y,K} : LΦ_Y^* K ≅ K` of a str
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarGeometricFiberFrobeniusIso`). -/
 noncomputable def schemeFrobeniusForm
     {K : _root_.DerivedCategory (Sheaf g.geometricFiber.smallEtaleTopology A)}
-    (φK : L((g.geometricGaloisFrobenius.hom)^*[A]).obj K ≅ K) :
+    (φK : L((g.geometricGaloisFrobenius.asIso.hom)^*[A]).obj K ≅ K) :
     L((g.geometricFiberFrobenius)^*[A]).obj K ≅ K :=
   (leftDerivedUpperStarGeometricFiberFrobeniusIso A g).app K ≪≫ φK
 
 lemma schemeFrobeniusForm_hom
     {K : _root_.DerivedCategory (Sheaf g.geometricFiber.smallEtaleTopology A)}
-    (φK : L((g.geometricGaloisFrobenius.hom)^*[A]).obj K ≅ K) :
+    (φK : L((g.geometricGaloisFrobenius.asIso.hom)^*[A]).obj K ≅ K) :
     (schemeFrobeniusForm A φK).hom =
       (leftDerivedUpperStarGeometricFiberFrobeniusIso A g).hom.app K ≫ φK.hom :=
   rfl
@@ -146,9 +147,9 @@ lemma schemeFrobeniusForm_hom
 geometric-Weil data `φ_K`, `φ_L` is compatible with their scheme-Frobenius forms `u_K`, `u_L`. -/
 lemma map_comp_schemeFrobeniusForm_hom
     {K L : _root_.DerivedCategory (Sheaf g.geometricFiber.smallEtaleTopology A)}
-    (φK : L((g.geometricGaloisFrobenius.hom)^*[A]).obj K ≅ K)
-    (φL : L((g.geometricGaloisFrobenius.hom)^*[A]).obj L ≅ L) (h : K ⟶ L)
-    (hh : L((g.geometricGaloisFrobenius.hom)^*[A]).map h ≫ φL.hom = φK.hom ≫ h) :
+    (φK : L((g.geometricGaloisFrobenius.asIso.hom)^*[A]).obj K ≅ K)
+    (φL : L((g.geometricGaloisFrobenius.asIso.hom)^*[A]).obj L ≅ L) (h : K ⟶ L)
+    (hh : L((g.geometricGaloisFrobenius.asIso.hom)^*[A]).map h ≫ φL.hom = φK.hom ≫ h) :
     L((g.geometricFiberFrobenius)^*[A]).map h ≫ (schemeFrobeniusForm A φL).hom =
       (schemeFrobeniusForm A φK).hom ≫ h := by
   rw [schemeFrobeniusForm_hom, schemeFrobeniusForm_hom, Category.assoc, ← hh,

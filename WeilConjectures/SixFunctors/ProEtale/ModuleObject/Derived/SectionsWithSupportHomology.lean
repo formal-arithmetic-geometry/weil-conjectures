@@ -29,7 +29,7 @@ The cohomology sheaves of the last two terms, evaluated on module objects placed
 commute with `u + 1`-small filtered colimits: for `j_* j^*` because the higher direct images of
 abelian pro-étale sheaves along a quasi-compact quasi-separated morphism do
 (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`, blueprint
-`det-pe-bounded-continuity-direct-image`), and the underlying abelian sheaves of the derived
+`corollary-continuity-cohomology--2`), and the underlying abelian sheaves of the derived
 pushforward of module objects are the derived pushforward of the underlying abelian sheaves
 (`ProEtale.CondensedRing.rightDerivedLowerStarCompMapDerivedCategoryForgetIso`).
 -/

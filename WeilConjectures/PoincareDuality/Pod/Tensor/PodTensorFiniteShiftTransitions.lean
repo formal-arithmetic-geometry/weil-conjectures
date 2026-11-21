@@ -107,7 +107,7 @@ private theorem shift_apply_heq {W : Scheme.{u}}
 adjacent quotient transition.
 
 Source: Stacks 011G, 07A4; more-algebra.tex, item-shift-tensor; blueprint
-prop-pod-dual-tate-data-compatibility, Steps 1 and 5
+theorem-poincare-duality-frobenius--2, Steps 1 and 5
 (blueprint: lem-pod-tensor-finite-shift-transitions).
 
 Proof: in each total degree test both composites on a homogeneous pure tensor

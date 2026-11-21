@@ -137,7 +137,6 @@ private theorem finite_comparison_app {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
   unfold finitePullbackTensorConstructionIso finitePullbackTensorConstruction
   rfl
 
-set_option maxHeartbeats 800000 in
 -- The pasted cube uses several chosen derived models with large implicit types.
 /-- Transport the K-flat evaluation squares through the canonical finite comparison.
 Source: Stacks, sites-cohomology.tex, Tags 07A4, 0941 and 03D2

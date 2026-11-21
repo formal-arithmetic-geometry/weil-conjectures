@@ -12,7 +12,7 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 /-! # Uniqueness of the normalized signed pullback comparison
 
 Source: Stacks Project, Tags 03EL, 0GMX, 0FNY and 07A4; the current blueprint,
-Powers and duals in det-prop-sfb-cartesian-coefficients-twists.
+Powers and duals in lemma-inverse-image-coefficient-sheaves--2.
 (blueprint: lem-pur-signed-line-pullback-unique)
 -/
 

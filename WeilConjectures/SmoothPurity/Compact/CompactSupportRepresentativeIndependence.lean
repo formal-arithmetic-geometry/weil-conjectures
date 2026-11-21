@@ -358,7 +358,6 @@ attribute [local irreducible] compactSupportRestrictedTransition sfCompactSuppor
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-set_option maxHeartbeats 800000 in
 -- The coherence proof unfolds the restricted transitions at every finite level.
 /-- Specified rational identifications induce coherent compact-support comparisons.
 The compactification c is fixed at every finite coefficient level, exactly as in

@@ -104,7 +104,6 @@ section Point
 
 variable (k : Type u) [Field k] [Fact (ringChar k ≠ ℓ)]
 
-set_option synthInstance.maxHeartbeats 80000 in
 -- the ring structure on `End (𝟙_ Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧)` is found by a long instance search
 /-- The endomorphisms of the unit of `Dᵇc(Spec k)⟦ℚ̲̄_ℓ⟧` are `H⁰(Spec k, ℚ̄_ℓ)`, the continuous
 functions on the one-point space `Spec k` with values in a finite subextension of
@@ -125,10 +124,10 @@ theorem exists_bijective_unitEnd_point :
   have : F.Faithful := Functor.Faithful.of_iso e
   have hF : Function.Bijective
       (F.mapEndRingHom (Mod.regular (condensedRingObj Λ (point k).left))) :=
-    (Functor.FullyFaithful.ofFullyFaithful F).map_bijective _ _
+    ((Functor.FullyFaithful.ofFullyFaithful F).mulEquivEnd _).bijective
   have hι : Function.Bijective
       ((ObjectProperty.ι _).mapEndRingHom (𝟙_ (Dᵇc((point k).left)⟦Λ⟧))) :=
-    (ObjectProperty.fullyFaithfulι _).map_bijective _ _
+    ((ObjectProperty.fullyFaithfulι _).mulEquivEnd _).bijective
   have : IsIso (Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := A))) :=
     inferInstanceAs (IsIso (𝟙 _))
   have : CompactSpace (point k).left := inferInstanceAs (CompactSpace (Spec (.of k)))
@@ -172,15 +171,18 @@ theorem traitSpecialization_map_eq_zero_iff
     (f : 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ 𝟙_ _) :
     (traitSpecialization k k' (ℓ := ℓ)).map f = 0 ↔ f = 0 := by
   refine ⟨fun h ↦ ?_, fun h ↦ ?_⟩
-  · rcases eq_zero_or_isUnit_unitEnd_point k f with hf | ⟨u, rfl⟩
-    · exact hf
+  · rcases eq_zero_or_isUnit_unitEnd_point k (End.of f) with hf | hf
+    · exact congrArg End.asHom hf
+    have : IsIso f := (isUnit_iff_isIso (End.of f)).1 hf
     exfalso
     have hid : 𝟙 ((traitSpecialization k k' (ℓ := ℓ)).obj (𝟙_ _)) = 0 := by
-      rw [← CategoryTheory.Functor.map_id, ← End.one_def, ← u.mul_inv, End.mul_def,
+      rw [← CategoryTheory.Functor.map_id, ← IsIso.inv_hom_id f,
         Functor.map_comp, h, comp_zero]
     have := isIso_traitSpecializationUnit k k' (ℓ := ℓ)
     have h1 : (1 : End (𝟙_ (Dᵇc((point k').left)⟦Profinite.padicAlgClRingObj ℓ⟧))) = 0 := by
-      rw [End.one_def, ← IsIso.hom_inv_id (traitSpecializationUnit k k' (ℓ := ℓ)),
+      apply End.ext
+      rw [End.one_asHom, End.zero_asHom,
+        ← IsIso.hom_inv_id (traitSpecializationUnit k k' (ℓ := ℓ)),
         ← Category.id_comp (inv _), hid, zero_comp, comp_zero]
     exact one_ne_zero h1
   · subst h

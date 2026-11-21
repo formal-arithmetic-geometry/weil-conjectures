@@ -14,9 +14,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Smooth purity on the condensed finite-Tor categories
-
-Source: current blueprint, sk-thm-purity-transport (2026-10-25 correction).
-(blueprint: def-pur-transport-adjunction-restrictions).
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,28 +27,22 @@ namespace AlgebraicGeometry.ProEtale.PurityTransport
 
 variable (ell : ℕ) [Fact ell.Prime]
 
-/-- The actual object property defining Dctf, reusing its recorded owner.
-Source: sk-def-sfb-constructible (blueprint: def-pur-transport-adjunction-restrictions). -/
+/-- The object property defining Dctf: bounded constructible with finite Tor amplitude. -/
 abbrev property (c : Coefficient ell) (X : Scheme.{u}) :
     ObjectProperty (c.derived ell X) :=
   constantModelBoundedConstructible (c.obj ell) X ⊓
     (fun K ↦ _root_.DerivedCategory.finiteTorAmplitude _ K)
 
-/-- The same localizing closure on which the published Brown adjoint is defined.
-Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+/-- The localizing closure of the constructible objects on the pro-étale site of `X`. -/
 abbrev localizing (c : Coefficient ell) (X : Scheme.{u}) :=
   localizingClosureProEtale (c.obj ell) X
 
-/-- The canonical full inclusion into the localizing constructible closure.
-Only its object-membership proof uses the closure universal property.
-Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+/-- The canonical full inclusion into the localizing constructible closure. -/
 def inclusion (c : Coefficient ell) (X : Scheme.{u}) :
     c.ctf ell X ⥤ (localizing ell c X).FullSubcategory :=
   ObjectProperty.ιOfLE (fun K hK _P _hP hS ↦ hS K hK)
 
-/-- The compact-support functor is precisely Rp_* j_!, with its membership
-proof supplied separately; neither its objects nor its maps are chosen.
-Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+/-- The compact-support functor `Rp_* j_!` restricted to Dctf. -/
 def support (c : Coefficient ell) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (compactification : Compactification f)
     (preserves : ∀ K, property ell c X K → property ell c Y
@@ -63,17 +54,15 @@ def support (c : Coefficient ell) {X Y : Scheme.{u}} {f : X ⟶ Y}
       CondensedRing.rightDerivedLowerShriekOfCompactification (c.obj ell) compactification)
     (fun K ↦ preserves K.obj K.property)
 
-/-- Restrict the literal twisted and shifted inverse image to Dctf.
-Source: the displayed gamma source (blueprint: def-pur-transport-adjunction-restrictions). -/
+/-- Restrict the literal twisted and shifted inverse image to Dctf. -/
 def source (c : Coefficient ell) {X Y : Scheme.{u}} (f : X ⟶ Y) (d : ℕ)
     (preserves : ∀ K, property ell c Y K → property ell c X
       ((c.smoothSource ell f d).obj K)) : c.ctf ell Y ⥤ c.ctf ell X :=
   (property ell c X).lift ((property ell c Y).ι ⋙ c.smoothSource ell f d)
     (fun K ↦ preserves K.obj K.property)
 
-/-- The exceptional inverse image is the restriction of the actual localizing
-right adjoint, through the canonical full inclusion.
-Source: sk-prop-sf-existence (blueprint: def-pur-transport-adjunction-restrictions). -/
+/-- The exceptional inverse image: the restriction of a localizing right adjoint to Dctf,
+through the canonical full inclusion. -/
 def exceptional (c : Coefficient ell) {X Y : Scheme.{u}}
     (G : (localizing ell c Y).FullSubcategory ⥤ (localizing ell c X).FullSubcategory)
     (preserves : ∀ K : c.ctf ell Y,
@@ -82,8 +71,7 @@ def exceptional (c : Coefficient ell) {X Y : Scheme.{u}}
   (property ell c X).lift
     (inclusion ell c Y ⋙ G ⋙ (localizing ell c X).ι) preserves
 
-/-- The counit equation selecting gamma, in Lean's diagrammatic order.
-Source: the uniqueness clause (blueprint: def-pur-transport-adjunction-restrictions). -/
+/-- The counit equation selecting gamma, in Lean's diagrammatic order. -/
 def CounitCompatible {A B : Type (u + 2)} [Category A] [Category B]
     {F : A ⥤ B} {J G : B ⥤ A} (a : F ⊣ J) (b : F ⊣ G)
     (gamma : J ≅ G) : Prop :=

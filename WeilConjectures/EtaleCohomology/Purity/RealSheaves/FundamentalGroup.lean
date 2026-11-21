@@ -16,8 +16,8 @@ An `AlgebraicGeometry.WeilGroup` is presented through the étale fundamental gro
 `π₁(C₀, s)` of the curve `C₀` over `K`, and its geometric part `ker deg` is the kernel of
 `π₁(C₀, s) → Gal(K̄ / K)`. That this kernel is the étale fundamental group of the *geometric*
 curve `C = C₀ ×_K K̄` is the homotopy exact sequence. The rank-one purity statements of
-`sk-p-real-rankone` use the geometric curve: they compare Frobenius-fixed classes in
-`H¹(C, ℤ / ℓⁿ)` with homomorphisms on `ker deg`.
+`theorem-rank-one-sheaves-have-finite` use the geometric curve: they compare Frobenius-fixed classes
+in `H¹(C, ℤ / ℓⁿ)` with homomorphisms on `ker deg`.
 
 This file states that identification as `AlgebraicGeometry.WeilGroup.IsEtaleQuotient`: the
 geometric part of `W` is isomorphic, as a topological group, to a fundamental group
@@ -56,7 +56,7 @@ variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of
 namespace WeilGroup
 
 open Scheme.FiniteEtale in
-/-- Blueprint `def-wf-weil-group`: the Weil group of a curve, its link with the étale
+/-- Blueprint `situation-weil`: the Weil group of a curve, its link with the étale
 fundamental group.
 
 An identification of the geometric part `W.geometric = ker deg` of a Weil group with the étale
@@ -89,11 +89,11 @@ structure EtaleQuotientData (W : WeilGroup p) where
   /-- The identification `π₁(C, s) ≃ W.geometric`. -/
   toGeometric : G ≃ₜ* W.geometric
   /-- The transport of the fibre functor along the geometric Galois Frobenius of `C`. -/
-  frobeniusTransport : mapIso p.geometricGaloisFrobenius ⋙ fiber point ≅ fiber point
+  frobeniusTransport : mapIso p.geometricGaloisFrobenius.asIso ⋙ fiber point ≅ fiber point
   /-- The action of the Frobenius on `π₁(C, s)` induced by the transport. -/
   frobeniusConj : G → G
   frobeniusTransport_smul (P : p.geometricFiber.FiniteEtale) (g : G)
-    (x : (fiber point).obj ((mapIso p.geometricGaloisFrobenius).obj P)) :
+    (x : (fiber point).obj ((mapIso p.geometricGaloisFrobenius.asIso).obj P)) :
     frobeniusTransport.hom.app P (g • x) = frobeniusConj g • frobeniusTransport.hom.app P x
   /-- On `W.geometric`, the Frobenius action is conjugation by an element of degree `± 1`. -/
   exists_conj : ∃ w : W.carrier,
@@ -105,7 +105,7 @@ attribute [instance] EtaleQuotientData.group
   EtaleQuotientData.compactSpace EtaleQuotientData.mulAction
   EtaleQuotientData.isFundamentalGroup
 
-/-- Blueprint `def-wf-weil-group`: the Weil group of a curve, its link with the étale
+/-- Blueprint `situation-weil`: the Weil group of a curve, its link with the étale
 fundamental group.
 
 The geometric part of the Weil group `W` is, Frobenius-equivariantly, the étale fundamental
@@ -158,14 +158,14 @@ theorem conj_invariant_of_conj_invariant_frobeniusLift {A : Type*} [CommGroup A]
     group
   rw [hh, map_mul, map_mul, map_inv, mul_inv_cancel_comm, hpow n g k rfl]
 
-/-- Blueprint `thm-wf-rank-one-finite-geometric-image-curve`: the cohomological step.
+/-- Blueprint `theorem-rank-one-sheaves-have-finite--1`: the cohomological step.
 
 Let `W` be the Weil group of a smooth geometrically connected curve `C₀ / 𝔽_q`, linked to the
 étale fundamental group (`AlgebraicGeometry.WeilGroup.IsEtaleQuotient`), and `ℓ ≠ char 𝔽_q`.
 A continuous homomorphism `b : π₁(C) → ℤ_ℓ` invariant under conjugation by the Frobenius lift
 is trivial. Its reductions modulo `ℓⁿ` are classes in `H¹(C, ℤ / ℓⁿ) = Hom_cont(π₁(C), ℤ / ℓⁿ)`
-(blueprints `lem-wf-finite-constant-h1-pi1`, `lem-wf-additive-characters-h1`) which are fixed
-by the Frobenius and compatible in `n`; by blueprint `prop-wf-open-curve-h1-no-frobenius-fixed`
+(blueprints `lemma-invariant-additive-characters`) which are fixed
+by the Frobenius and compatible in `n`; by blueprint `proposition-no-fixed-class-degree-one--1`
 they vanish. -/
 theorem eq_one_of_conj_invariant [SmoothOfRelativeDimension 1 p] [GeometricallyConnected p]
     [Fact (ringChar K ≠ l)] [W.IsEtaleQuotient] (b : W.geometric →ₜ* Multiplicative ℤ_[l])
@@ -195,7 +195,7 @@ theorem eq_one_of_conj_invariant [SmoothOfRelativeDimension 1 p] [GeometricallyC
         ((t n).monodromy D.point D.G g).toAdd.down := by
     rw [ht, ht]
     exact ((PadicInt.continuousMonoidHomEquiv l D.G b').2 n g)
-  have hfix (n : ℕ) : ((t n).mapIso p.geometricGaloisFrobenius).IsIsomorphic (t n) := by
+  have hfix (n : ℕ) : ((t n).mapIso p.geometricGaloisFrobenius.asIso).IsIsomorphic (t n) := by
     refine Scheme.EtaleTorsor.isIsomorphic_of_monodromy_eq D.point D.G ?_
     ext g
     rw [Scheme.EtaleTorsor.monodromy_mapIso D.point D.G _ D.frobeniusTransport D.frobeniusConj

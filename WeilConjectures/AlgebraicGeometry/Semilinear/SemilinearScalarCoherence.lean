@@ -12,8 +12,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Scalar coherence for derived systems
 
-Source: Zheng, Construction 4.1 and Proposition 4.17; Stacks Tags 06YY,
-07A4, 07A6 and 08J9 (blueprint: lem-coef-semilinear-scalar-coherence).
+## References
+
+* Zheng, Construction 4.1 and Proposition 4.17
+* Stacks Tags 06YY, 07A4, 07A6 and 08J9
+* Zheng Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -37,9 +40,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   (B : ℕ → Sheaf J CommRingCat.{max c v r})
   (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
 
-/-- The scalar adjunctions and their two composition compatibilities.
-Source: Zheng Construction 4.1; Stacks 06YY and 07A6
-(blueprint: lem-coef-semilinear-scalar-coherence). -/
+/-- The scalar adjunctions and their two composition compatibilities. -/
 structure SystemScalarCoherence where
   /-- Actual derived scalar extension for every composite coefficient homomorphism. -/
   scalar : ∀ {m n : ℕ} (h : n ≤ m),
@@ -269,21 +270,7 @@ private theorem derived_cocycle {l m n : ℕ} (h : n ≤ m) (k : m ≤ l)
   exact (Iso.eq_comp_inv ((restrictionComposition J B τ h k).app
     ((e J B τ n).obj M))).2 (by simpa only [Iso.app_hom, Category.assoc] using hh)
 
-/-- Normalized scalar adjunctions and the reduction cocycle, without tensor or Hom data.
-Source: Zheng Construction 4.1; Stacks 06YY and 07A6
-(blueprint: lem-coef-semilinear-scalar-coherence).
-Proof: for each composite coefficient map, form ordinary extension by the
-sectionwise tensor product and sheafification, with unit x mapped to 1 tensor x.
-The K-flat resolving class constructs its everywhere-defined left derived
-functor. Exact scalar restriction is its own right derived functor; derive the
-ordinary adjunction, retaining its Hom equivalence on K-flat complexes.
-For two extensions compare the left adjoints of the same composite restriction.
-The identity-on-sections restriction-composition isomorphism uniquely specifies
-this comparison and gives the stated transpose equation. On a strict system,
-restricting from l to m and then to n is restriction from l to n. Localizing
-this equality and applying the two adjunction Hom equivalences gives the
-reduction cocycle with exactly that left-adjoint comparison. Identity indices
-use the identity restrictions, and zero coefficient rings need no exception. -/
+/-- Normalized scalar adjunctions and the reduction cocycle, without tensor or Hom data. -/
 theorem systemScalarCoherence_nonempty :
     Nonempty (SystemScalarCoherence.{c, v, r} J B τ) := by
   classical

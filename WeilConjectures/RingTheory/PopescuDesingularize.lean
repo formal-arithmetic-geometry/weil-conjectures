@@ -38,7 +38,7 @@ Source: Stacks Project, Smoothing Ring Maps, Lemma Tag 07CR and its proof
 
 Proof (the twelve steps of the node):
 1. Choose the finite presentation and integer `c` supplied by strictly standardness
-(def-weil-pbc-strictly-standard-element, def-weil-pbc-finitely-presented-algebra).
+(theorem-finite-etale-covers-proper-henselian--2, def-weil-pbc-finitely-presented-algebra).
 2. Translate each variable by a lift of its image under `ρ`. Translation commutes with
 partial derivatives and preserves the two strictly standard conditions. The new variables
 map to zero under `ρ` and to `π⁴λᵢ` under `α` (def-weil-pbc-polynomial-partial-derivative,

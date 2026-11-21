@@ -15,7 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 ## Main statements
 
 - `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_leftDerivedUpperStar_derivedHom`
-  (`sk-thm-sf-internal-hom-pullback`, `thm-trf-internal-hom-pullback`): the internal hom with
+  (`theorem-poincare-duality-frobenius--1`): the internal hom with
   a dualizable first variable commutes with pullback.
 -/
 
@@ -41,8 +41,8 @@ namespace Etale.DerivedCategory
 
 variable {A X}
 
-/-- Blueprint `sk-thm-sf-internal-hom-pullback`: Internal Hom versus pullback for a
-site-perfect first variable. This is also blueprint `thm-trf-internal-hom-pullback`.
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: Internal Hom versus pullback for a
+site-perfect first variable. This is also blueprint `theorem-poincare-duality-frobenius--1`.
 
 For a morphism of schemes `g : Y' ⟶ X`, a dualizable `M` and any `N` in `D(X_ét)`, the
 canonical comparison

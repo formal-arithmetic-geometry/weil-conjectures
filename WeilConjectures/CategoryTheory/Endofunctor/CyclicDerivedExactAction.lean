@@ -214,7 +214,7 @@ hypothesis enters this calculation.
 
 Source: the action calculation in step 7 of the parent node; the termwise structure
 equation of def-weil-endofunctor-fixed-pair-category, localized by
-lem-sf-exact-functor-derived-triangulated. This algebraic expansion is agent-written;
+situation-conventions. This algebraic expansion is agent-written;
 Stacks derived.tex, Tag 0152 supplies the surrounding canonical-boundary construction.
 (blueprint: lem-sf-cyclic-derived-exact-action). -/
 theorem cyclicDerivedHomTransport_exact_action

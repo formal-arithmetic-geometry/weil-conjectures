@@ -81,7 +81,7 @@ native Weil complex. -/
 noncomputable def nativeOfCondensedCarrier
     (C : DerivedCategory (Endofunctor.IsoAlgebra
       (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)))
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)))
     (hC : boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)
@@ -98,7 +98,7 @@ Frobenius datum. -/
 noncomputable def nativeOfCondensedCarrierIso
     (C : DerivedCategory (Endofunctor.IsoAlgebra
       (CondensedRing.lowerStar (Profinite.padicAlgClRingObj l)
-        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)))
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.asIso.inv)))
     (hC : boundedConstructible
       (condensedRingObj (Profinite.padicAlgClRingObj l)
         (X ↘ Spec (CommRingCat.of k₀)).geometricFiber)

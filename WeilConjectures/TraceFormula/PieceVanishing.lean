@@ -18,8 +18,8 @@ Let `j : U ⟶ X` be an open immersion and `x` a rational point of `X` not in th
 For `B` on `U` and `A` on the point, the open and closed pieces `K' = j_! B` and `K'' = Rx_* A`
 (for instance `K' = j_! Lj^* K` and `K'' = Rx_* Lx^* K`) have disjoint supports. This file proves
 the vanishing of the morphism groups on `X ⨯ X` used by the additivity of trace classes along the
-open–closed triangle `K' ⟶ K ⟶ K'' ⟶` (blueprint `lem-trf-trace-triangle-compatibility`,
-`sk-i-additivity`):
+open–closed triangle `K' ⟶ K ⟶ K'' ⟶` (blueprint `proposition-additivity-trace-classes--2`,
+`proposition-additivity-trace-classes`):
 
 * `K' ⊗ D_X K'' = 0`, so the corner `K' ⊠ D_X K''` (supported on `U ⨯ {x}`) has no morphism to
   `RΔ_* ω_X` in any degree (`ProEtale.CondensedRing.eq_zero_of_externalProduct_shift_to_diag`);
@@ -164,7 +164,7 @@ lemma isZero_upperStar_verdierDual_lowerStar :
   exact (isZero_ihom_obj_of_isZero
     (isZero_boundedConstructibleUpperStar_obj_lowerStar_obj ℓ j x hjx A) _).of_iso
     (asIso ((Functor.LaxMonoidal.ihomComparison (boundedConstructibleUpperStar _ ℓ j)
-      ((boundedConstructibleLowerStar ℓ x).obj A)).natTrans.app _))
+      ((boundedConstructibleLowerStar ℓ x).obj A)).app _))
 
 /-- The tensor product of the open piece with the dual of the closed piece vanishes:
 `j_! B ⊗ D_X (Rx_* A) = 0`, by the projection formula for `j_!` and

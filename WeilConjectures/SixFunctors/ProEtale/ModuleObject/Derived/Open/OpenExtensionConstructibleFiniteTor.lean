@@ -119,7 +119,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Open extension preserves constructibility and specified Tor bounds
 
-Source: blueprint main-20261015, sec-six-functors-basics,
+Source: blueprint main-20261015, chap-Construction-of-f,
 sk-thm-sf-comp-composition/det-sf-comp-composition-interchange.proof.md, proof (3)
 (blueprint: lem-sfb-open-extension-zero-constructible-finite-tor).
 

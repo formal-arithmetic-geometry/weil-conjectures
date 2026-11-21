@@ -43,7 +43,6 @@ namespace NearbyCyclesModel.Hom
 
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k' : Type u} [Field k']
 
-set_option maxHeartbeats 400000 in
 -- the derived categories of module objects are slow to elaborate
 /-- `NearbyCyclesModel.Hom.isIso_baseChangeMap_commSq_i_app_lowerStar` with the source model
 only assumed to have noetherian total space and geometric generic fibre, closed special fibre and

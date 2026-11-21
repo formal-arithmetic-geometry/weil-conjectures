@@ -88,7 +88,7 @@ of the cohomology of a complex of finite free modules is upper semicontinuous in
 lower semicontinuity of the ranks of its differentials
 (`AlgebraicGeometry.Scheme.Modules.exists_finrank_homology_pullback_le`).
 
-(blueprint: `det-thm-picard-semicon`, `thm-pc-semicontinuity-base-change`) -/
+(blueprint: `lemma-triviality-fibres--2`) -/
 theorem upperSemicontinuous_hFiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) :
     UpperSemicontinuous (ℱ.hFiber f q) := by
   intro t m hm
@@ -136,7 +136,7 @@ Near `t` the higher direct images are computed by a bounded complex `P` of finit
 sections of `R^q (f_t)_* ℱ_t`, which are `H^q(X_t, ℱ_t)`, are the cohomology of the complex
 `P ⊗ κ(t)` of finite dimensional vector spaces.
 
-(blueprint: `thm-pc-semicontinuity-base-change`, part (1)) -/
+(blueprint: `lemma-triviality-fibres--2`, part (1)) -/
 theorem finiteDimensional_H_fiber (hℱ : ℱ.IsFlatOver f) (q : ℕ) (t : T) :
     letI := f.fiberOverSpecResidueField t
     FiniteDimensional (T.residueField t) (((Modules.pullback (f.fiberι t)).obj ℱ).H q) := by
@@ -171,7 +171,7 @@ the rank at a point being the fibre dimension there.
 The rank is only attached to a neighbourhood of each point, not to `T` as a whole: on a
 disconnected base the fibre dimension can be locally constant without being constant.
 
-(blueprint: `det-thm-picard-semicon`) -/
+(blueprint: `lemma-triviality-fibres--2`) -/
 theorem exists_isFiniteLocallyFreeOfRank_higherDirectImage_of_isLocallyConstant [IsReduced T]
     (hℱ : ℱ.IsFlatOver f) (q : ℕ) (hq : IsLocallyConstant (ℱ.hFiber f q)) (t : T) :
     ∃ U : T.Opens, t ∈ U ∧
@@ -255,7 +255,7 @@ modules of `AlgebraicGeometry.Scheme.Modules.exists_isFiniteFreeComplex_higherDi
 `X_{t'} ⟶ Spec κ(t')`, whose global sections are `H^q(X_{t'}, ℱ_{t'})`; it vanishes in degrees
 `q > d`.
 
-(blueprint: `lem-pc-flat-rf-open`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves--3`) -/
 theorem exists_forall_hFiber_eq_zero (hℱ : ℱ.IsFlatOver f) (t : T) :
     ∃ (U : T.Opens) (d : ℕ), t ∈ U ∧ ∀ t' ∈ U, ∀ q, d < q → ℱ.hFiber f q t' = 0 := by
   obtain ⟨U, P, d, htU, hP, hbc⟩ := exists_isFiniteFreeComplex_higherDirectImage f ℱ hℱ t
@@ -303,7 +303,7 @@ Near a point `t`, the fibre cohomology vanishes in degrees `q > d`
 by the finitely many conditions `h^q < 1` for `q ≤ d`, `q ≠ i`, and `h^i < r + 1`, each of which is
 open by upper semicontinuity (`AlgebraicGeometry.Scheme.Modules.upperSemicontinuous_hFiber`).
 
-(blueprint: `sk-thm-picard-perfect`) -/
+(blueprint: `lemma-coherent-base-change-invertible-sheaves`) -/
 theorem isOpen_setOf_hFiber_le (hℱ : ℱ.IsFlatOver f) (i r : ℕ) :
     IsOpen {t ∈ ℱ.perfectLocus f i | ℱ.hFiber f i t ≤ r} := by
   have hopen (q n : ℕ) : IsOpen {t | ℱ.hFiber f q t < n} :=

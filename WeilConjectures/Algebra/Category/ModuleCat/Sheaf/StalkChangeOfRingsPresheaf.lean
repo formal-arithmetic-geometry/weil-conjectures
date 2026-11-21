@@ -8,6 +8,7 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.Topology.PresheafModuleStalkFunctor
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
 /-! # Stalks of sectionwise extension of scalars
 

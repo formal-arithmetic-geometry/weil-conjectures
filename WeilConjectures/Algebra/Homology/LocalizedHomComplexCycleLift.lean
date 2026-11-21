@@ -29,8 +29,6 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 1400000 in
--- Evaluated Hom projections compare composed functors and scalar-restriction structures.
 /-- A localized chain map lifts to a sectionwise degree-zero cycle.
 Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
 (blueprint: lem-pur-localized-hom-complex-cycle-lift)
@@ -116,7 +114,7 @@ theorem localizedHomComplex_cycle_lift
     intro ⟨p⟩
     change ((π L I 1 p (p + 1) rfl).val.app (op U)) (S.d 0 1 x) =
       ((π L I 1 p (p + 1) rfl).val.app (op U)) 0
-    rw [map_zero]
+    refine Eq.trans ?_ (((π L I 1 p (p + 1) rfl).val.app (op U)).hom.map_zero.symm)
     have hd := (Classical.choose_spec (Classical.choose_spec
       (homComplex_exists.{u, v, max u v, max u v} (J := J) (R := R)))).2.1
       L I 0 1 p (p + 1) p (p + 1) rfl rfl (add_zero p) (add_zero (p + 1))
@@ -158,7 +156,8 @@ theorem localizedHomComplex_cycle_lift
   change S.iCycles 0 ((S.sc 0).abCyclesIso.inv ⟨x, hk⟩) = x at hz
   change (((π L I 0 p p (add_zero p)).val.app (op U))
     (S.iCycles 0 ((S.sc 0).abCyclesIso.inv ⟨x, hk⟩))).app W = (g.f p).val.app W
-  rw [hz, hx]
-  rfl
+  -- Transport the section equalities without rewriting the dependent projection types.
+  exact congrArg (fun y ↦ y.app W)
+    ((congrArg ((π L I 0 p p (add_zero p)).val.app (op U)) hz).trans (hx p))
 
 end CategoryTheory

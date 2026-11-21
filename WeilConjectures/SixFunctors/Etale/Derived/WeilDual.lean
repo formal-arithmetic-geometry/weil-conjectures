@@ -40,7 +40,7 @@ lax monoidal endofunctor `F`, an isomorphism `φ : F K ≅ K` and a map `u : F �
 `K ⊗ F [K, 𝟙] ⟶ F K ⊗ F [K, 𝟙] ⟶ F (K ⊗ [K, 𝟙]) ⟶ F 𝟙 ⟶ 𝟙`. -/
 lemma whiskerLeft_ihomComparison_comp_pre_comp_ev {K : C} (φ : F.obj K ≅ K)
     (u : F.obj (𝟙_ C) ⟶ 𝟙_ C) :
-    K ◁ ((ihomComparison F K).natTrans.app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
+    K ◁ ((ihomComparison F K).app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
         (pre φ.inv).app (𝟙_ C)) ≫ (ihom.ev K).app (𝟙_ C) =
       φ.inv ▷ _ ≫ μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u := by
   rw [MonoidalCategory.whiskerLeft_comp_assoc, MonoidalCategory.whiskerLeft_comp_assoc,
@@ -54,7 +54,7 @@ monoidal endofunctor `F`, an isomorphism `φ : F K ≅ K` and a map `u : F M ⟶
 @[reassoc]
 lemma whiskerLeft_ihomComparison_comp_map_comp_pre_comp_ev {K M : C} (φ : F.obj K ≅ K)
     (u : F.obj M ⟶ M) :
-    K ◁ ((ihomComparison F K).natTrans.app M ≫ (ihom (F.obj K)).map u ≫
+    K ◁ ((ihomComparison F K).app M ≫ (ihom (F.obj K)).map u ≫
         (pre φ.inv).app M) ≫ (ihom.ev K).app M =
       φ.inv ▷ _ ≫ μ F K _ ≫ F.map ((ihom.ev K).app M) ≫ u := by
   rw [MonoidalCategory.whiskerLeft_comp_assoc, MonoidalCategory.whiskerLeft_comp_assoc,
@@ -74,7 +74,7 @@ lemma map_ev_comp_eq_δ_comp_ihomComparison_comp_pre {K : C} (φ : F.obj K ≅ K
     (u : F.obj (𝟙_ C) ⟶ 𝟙_ C) :
     F.map ((ihom.ev K).app (𝟙_ C)) ≫ u =
       (OplaxMonoidal.δ F K _ ≫ φ.hom ▷ _ ≫
-        K ◁ ((ihomComparison F K).natTrans.app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
+        K ◁ ((ihomComparison F K).app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
           (pre φ.inv).app (𝟙_ C))) ≫ (ihom.ev K).app (𝟙_ C) := by
   rw [Category.assoc, Category.assoc, whiskerLeft_ihomComparison_comp_pre_comp_ev,
     hom_inv_whiskerRight_assoc, Monoidal.δ_μ_assoc]
@@ -83,9 +83,9 @@ lemma map_ev_comp_eq_δ_comp_ihomComparison_comp_pre {K : C} (φ : F.obj K ≅ K
 `φ : F K ≅ K` and an isomorphism `u : F 𝟙 ⟶ 𝟙` is an isomorphism when `K` has a left dual. -/
 lemma isIso_ihomComparison_comp_pre {Y K : C} [ExactPairing Y K] (φ : F.obj K ≅ K)
     (u : F.obj (𝟙_ C) ⟶ 𝟙_ C) [IsIso u] :
-    IsIso ((ihomComparison F K).natTrans.app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
+    IsIso ((ihomComparison F K).app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
       (pre φ.inv).app (𝟙_ C)) := by
-  have e : (ihomComparison F K).natTrans.app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
+  have e : (ihomComparison F K).app (𝟙_ C) ≫ (ihom (F.obj K)).map u ≫
       (pre φ.inv).app (𝟙_ C) =
         MonoidalClosed.curry (φ.inv ▷ _ ≫ μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u) := by
     rw [eq_comm, curry_eq_iff, uncurry_eq, whiskerLeft_ihomComparison_comp_pre_comp_ev]
@@ -108,7 +108,7 @@ identification `𝟙 ≅ [𝟙, 𝟙]` intertwines `φ` and its contragredient. 
 lemma map_curry_leftUnitor_comp_ihomComparison_comp_pre (φ : F.obj (𝟙_ C) ≅ 𝟙_ C)
     (hφ : OplaxMonoidal.δ F (𝟙_ C) (𝟙_ C) ≫ φ.hom ▷ F.obj (𝟙_ C) ≫ (λ_ (F.obj (𝟙_ C))).hom =
       F.map (λ_ (𝟙_ C)).hom) :
-    F.map (MonoidalClosed.curry (λ_ (𝟙_ C)).hom) ≫ (ihomComparison F (𝟙_ C)).natTrans.app (𝟙_ C) ≫
+    F.map (MonoidalClosed.curry (λ_ (𝟙_ C)).hom) ≫ (ihomComparison F (𝟙_ C)).app (𝟙_ C) ≫
         (ihom (F.obj (𝟙_ C))).map φ.hom ≫ (pre φ.inv).app (𝟙_ C) =
       φ.hom ≫ MonoidalClosed.curry (λ_ (𝟙_ C)).hom := by
   apply uncurry_injective
@@ -130,7 +130,7 @@ lemma map_hom_comp_eq_ihomComparison_comp_map_comp_pre_comp {K M T D : C} (φ : 
     (θ : (ihom K).obj M ≅ D) (E : K ⊗ D ⟶ T)
     (hE : K ◁ θ.hom ≫ E = (ihom.ev K).app M ≫ γ.inv) (ψ : F.obj D ⟶ D)
     (hψ : F.map E ≫ τ = (OplaxMonoidal.δ F K D ≫ φ.hom ▷ F.obj D ≫ K ◁ ψ) ≫ E) :
-    F.map θ.hom ≫ ψ = ((ihomComparison F K).natTrans.app M ≫ (ihom (F.obj K)).map χ ≫
+    F.map θ.hom ≫ ψ = ((ihomComparison F K).app M ≫ (ihom (F.obj K)).map χ ≫
         (pre φ.inv).app M) ≫ θ.hom := by
   have hγ' : F.map γ.inv ≫ τ = χ ≫ γ.inv := by
     rw [← cancel_epi (F.map γ.hom), ← F.map_comp_assoc, Iso.hom_inv_id, F.map_id,
@@ -237,7 +237,7 @@ section Datum
 variable [UpperStarPreservesFlat A] {X : Scheme.{u}} (g : X ⟶ X)
   {K : DerivedCategory (Sheaf X.smallEtaleTopology A)}
 
-/-- Blueprint `def-pod-dual-tate-datum`: Dual and Tate Weil data.
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: Dual and Tate Weil data.
 
 The *contragredient datum* `φ_{K^∨} : Lg^* K^∨ ⟶ K^∨` on the coefficient dual
 `K^∨ = RHom(K, Λ_X)` of a complex `K` with a Weil datum `φ_K : Lg^* K ≅ K`, the typed composite
@@ -277,7 +277,7 @@ lemma derivedTensor_map_contragredientWeilDatum_comp_coefficientEvaluation
   rw [← leftDerivedUpperStarMonoidal_μ]
   exact Functor.LaxMonoidal.whiskerLeft_ihomComparison_comp_pre_comp_ev _ φ _
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data
 (Step 1).
 
 The contragredient datum `φ_{K^∨} : Lg^* K^∨ ⟶ K^∨` of a Weil datum `φ_K : Lg^* K ≅ K` on a
@@ -290,7 +290,7 @@ theorem isIso_contragredientWeilDatum (φ : L((g)^*[A]).obj K ≅ K) (hK : IsDua
   let := leftDerivedUpperStarMonoidal A g
   exact Functor.LaxMonoidal.isIso_ihomComparison_comp_pre _ (Y := Kᘁ) φ _
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data
 (Step 2).
 
 The coefficient evaluation `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` intertwines the tensor product datum
@@ -307,7 +307,7 @@ theorem map_coefficientEvaluation_comp_leftDerivedUpperStarUnitIso_hom
   rw [← leftDerivedUpperStarMonoidal_δ]
   exact Functor.LaxMonoidal.map_ev_comp_eq_δ_comp_ihomComparison_comp_pre _ φ _
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data
 (Step 3).
 
 For a Weil datum `τ : Lg^* T ⟶ T` on an object `T` (for `T = Λ_X(r)`, the Tate datum `τ_r`),
@@ -333,8 +333,8 @@ theorem map_twistedEvaluation_comp (φ : L((g)^*[A]).obj K ≅ K)
       rfl)
     hu
 
-/-- Blueprint `def-pod-dual-tate-datum`: Dual and Tate Weil data (the datum on an internal
-hom).
+/-- Blueprint `theorem-poincare-duality-frobenius--1`: Dual and Tate Weil data (the datum on an
+internal hom).
 
 The datum `Lg^* RHom(K, M) ⟶ RHom(K, M)` on the internal hom of a complex `K` with a Weil datum
 `φ_K : Lg^* K ≅ K` into a complex `M` with a datum `χ : Lg^* M ⟶ M`, the typed composite
@@ -357,7 +357,7 @@ lemma contragredientWeilDatum_eq_derivedHomWeilDatum (φ : L((g)^*[A]).obj K ≅
       derivedHomWeilDatum A g φ (leftDerivedUpperStarUnitIso A g).hom :=
   rfl
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: the contragredient datum of a perfect
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: the contragredient datum of a perfect
 complex as an isomorphism `φ_{K^∨} : Lg^* K^∨ ≅ K^∨`
 (`AlgebraicGeometry.Etale.isIso_contragredientWeilDatum`). -/
 noncomputable def contragredientWeilDatumIso (φ : L((g)^*[A]).obj K ≅ K) (hK : IsDualizable K) :
@@ -366,7 +366,7 @@ noncomputable def contragredientWeilDatumIso (φ : L((g)^*[A]).obj K ≅ K) (hK 
   haveI := isIso_contragredientWeilDatum A g φ hK
   asIso (contragredientWeilDatum A g φ)
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+/-- Blueprint `theorem-poincare-duality-frobenius--2`: Compatibility of the dual and Tate data
 (Step 4).
 
 Let `γ : T ≅ ω_X` be an isomorphism from an invertible complex `T` (for an orientation,
@@ -374,8 +374,8 @@ Let `γ : T ≅ ω_X` be an isomorphism from an invertible complex `T` (for an o
 object `ω_X`), which is a morphism of Weil objects for data
 `τ : Lg^* T ⟶ T` and `χ : Lg^* ω_X ⟶ ω_X` (for the purity isomorphism and the
 geometric-Frobenius data this is the Weil equivariance of purity,
-`thm-pur-weil-equivariance-of-purity-and-trace`). Then the identification
-`θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` of `thm-sf-dual-perfect`
+`proposition-purity-trace-commute-frobenius`). Then the identification
+`θ_K : 𝔻_X K ≅ K^∨ ⊗ᴸ T` of `theorem-poincare-duality--2`
 (`AlgebraicGeometry.Etale.verdierDualIsoCoefficientDualTensor`) is an isomorphism of Weil
 objects, for the datum on `𝔻_X K = RHom(K, ω_X)` induced by `φ_K` and `χ`
 (`AlgebraicGeometry.Etale.derivedHomWeilDatum`) and the twisted contragredient datum

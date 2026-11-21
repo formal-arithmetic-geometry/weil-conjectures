@@ -98,7 +98,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.lazyProjDelta false in
 set_option backward.isDefEq.lazyWhnfCore false in
-set_option maxHeartbeats 500000 in
 -- Matching the composite homotopy functors unfolds the sheaf scalar restrictions.
 /-- Equality transport of a single right-derived unit across the ordinary square.
 Source: Stacks Project, Tags 08HY and 0D5T.

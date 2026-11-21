@@ -16,6 +16,7 @@ public import Mathlib.Algebra.Category.Grp.AB
 import WeilConjectures.Topology.NoetherianOpenClosedCohomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
 import WeilConjectures.Topology.ClosedImmersionPushforwardCohomology
+public import Mathlib.Algebra.Category.Grp.Zero
 
 /-! # Gluing universal vanishing over two closed subsets
 

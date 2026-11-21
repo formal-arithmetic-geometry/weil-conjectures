@@ -31,8 +31,8 @@ private theorem inverse_conjugate_shift
     (a₁ : L₁ ⊣ R₁) (a₂ : L₂ ⊣ R₂) [a₁.CommShift ℤ] [a₂.CommShift ℤ]
     (δ : R₁ ⟶ R₂) [NatTrans.CommShift δ ℤ] :
     NatTrans.CommShift ((conjugateEquiv a₁ a₂).symm δ) ℤ := by
-  dsimp [conjugateEquiv, mateEquiv, Iso.homCongr, TwoSquare.equivNatTrans,
-    TwoSquare.natTrans, TwoSquare.mk]
+  dsimp [conjugateEquiv, mateEquiv, Iso.homCongr,
+    TwoSquare.mk]
   infer_instance
 
 private theorem restriction_shift {Z W : Scheme.{u}} {q : Z ⟶ W}
@@ -52,7 +52,7 @@ private theorem restriction_shift {Z W : Scheme.{u}} {q : Z ⟶ W}
   let := hb0
   have hb : NatTrans.CommShift b.inv ℤ := inferInstance
   let := hb
-  let m := (mateEquiv as' ar (TwoSquare.mk _ _ _ _ b.inv)).natTrans
+  let m := (mateEquiv as' ar (TwoSquare.mk _ _ _ _ b.inv))
   have hm : NatTrans.CommShift m ℤ := NatTrans.CommShift.mateEquiv as' ar _
   have heq : m = (proEtaleRingRestrictionDerivedDirectImage q
       R.target S.target R.source S.source a.target a.source
@@ -66,7 +66,7 @@ private theorem restriction_shift {Z W : Scheme.{u}} {q : Z ⟶ W}
     simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_comp,
       Adjunction.right_triangle_components, CategoryTheory.Functor.map_id,
       Category.id_comp] at h
-    simpa only [m, ar, as', b, mateEquiv_apply, TwoSquare.mk, TwoSquare.natTrans,
+    simpa only [m, ar, as', b, mateEquiv_apply, TwoSquare.mk,
       NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app,
       Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,

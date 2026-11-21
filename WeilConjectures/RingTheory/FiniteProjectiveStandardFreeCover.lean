@@ -27,7 +27,7 @@ namespace Module
 Source: Stacks Project, Lemma Tag 00NX, (3)⇒(7), and Definition Tag 00NW
 (blueprint: lem-weil-pbc-finite-projective-standard-free-cover).
 Proof, step 1: a direct summand of a finite free module is finite projective.
-For each prime p, `lem-weil-pbc-finite-projective-prime-local-free` gives an element
+For each prime p, `proposition-projective-line-rational-coefficients--1` gives an element
 fₚ outside p such that M localized away from fₚ is finite free.
 Step 2: these principal opens cover Spec A. Apply quasi-compactness and the
 principal-open/unit-ideal criterion in

@@ -14,6 +14,7 @@ public import Mathlib.RingTheory.Artinian.Module
 import Mathlib.RingTheory.HopkinsLevitzki
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.FlatUnramifiedFormallyEtale
+public import Mathlib.RingTheory.Noetherian.Nilpotent
 
 /-! # Artinian test-diagram lifting from infinitesimal étaleness
 

@@ -13,8 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 
 Let `Λ` be a commutative condensed ring and `c = (X ⟶[j] X̄ ⟶[p] Y)` a compactification of
 `f : X ⟶ Y` such that `Rf_!(c)⟦Λ⟧` has the properties `LowerShriekLocalizingHypotheses` of blueprint
-`det-sf-comp-coherence-single`; in particular it maps `Dᵇc(X)⟦Λ⟧` into `Dᵇc(Y)⟦Λ⟧`, and so
-restricts to a functor `Rf_!(c) : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧`
+`proposition-construction-independence-rf-shriek`; in particular it maps `Dᵇc(X)⟦Λ⟧` into
+`Dᵇc(Y)⟦Λ⟧`, and so restricts to a functor `Rf_!(c) : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧`
 (`AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekBoundedConstructible`).
 
 If this restriction has a right adjoint, then every right adjoint `f^!` of
@@ -23,8 +23,9 @@ If this restriction has a right adjoint, then every right adjoint `f^!` of
 for `N ∈ Dᵇc(Y)⟦Λ⟧`, the value `f^!_b N` of the right adjoint on `Dᵇc` represents
 `A ↦ Hom(Rf_! A, N)` on `Dᵇc(X)⟦Λ⟧`, and the objects of `Dᵇc(X)⟦Λ⟧` detect isomorphisms of
 `Loc(Dᵇc(X)⟦Λ⟧)` (`CategoryTheory.ObjectProperty.isIso_homEquiv_of_bijective_localizingClosure`),
-so `f^! N ≅ f^!_b N`. This is the last step of the proofs of blueprints `sk-thm-restriction` and
-`sk-thm-int-restriction`, with the existence of the right adjoint on `Dᵇc` as input.
+so `f^! N ≅ f^!_b N`. This is the last step of the proofs of blueprints
+`theorem-f-shriek-ell-adic-coefficients` and `sk-thm-int-restriction`, with the existence of the
+right adjoint on `Dᵇc` as input.
 -/
 
 @[expose] public section
@@ -44,7 +45,7 @@ variable {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj Λ] [I
 
 /-- The compact-support direct image `Rf_!(c) : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible
 complexes, for a compactification `c` with the properties of blueprint
-`det-sf-comp-coherence-single`: the restriction of `Rf_!(c)⟦Λ⟧`. -/
+`proposition-construction-independence-rf-shriek`: the restriction of `Rf_!(c)⟦Λ⟧`. -/
 noncomputable abbrev rightDerivedLowerShriekBoundedConstructible
     (hc : LowerShriekLocalizingHypotheses Λ c) :
     (boundedConstructible (condensedRingObj Λ X)).FullSubcategory ⥤

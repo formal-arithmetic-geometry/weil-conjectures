@@ -206,7 +206,7 @@ private def inverseEvaluation {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
       (coefficientSequenceTopology (ProEt.topology Y))
       (coefficientSequenceTopology (ProEt.topology X)) :=
     integralComparisonSequenceBaseChange_continuous f
-  have : IsIso ((mateEquiv adj adjn).symm d.hom).natTrans :=
+  have : IsIso ((mateEquiv adj adjn).symm d.hom) :=
     SequenceModuleEvaluation.sequenceModulePullbackEvaluation_isIso
       (ProEt.topology Y) (ProEt.topology X) (proEtaleBaseChange f)
       ((sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)}
@@ -224,7 +224,7 @@ private def inverseEvaluation {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
           (CommRingCat.of (ULift.{t + 1} (finiteCoefficientRing l E (n + 1))))))
       (integralComparisonSequencePullback l E f) (integralOperationsLevelPullback l E f n)
       adj adjn d
-  exact asIso ((mateEquiv adj adjn).symm d.hom).natTrans
+  exact asIso ((mateEquiv adj adjn).symm d.hom)
 
 private theorem inverseEvaluation_hom {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
     (inverseEvaluation l E f n).hom =
@@ -232,7 +232,7 @@ private theorem inverseEvaluation_hom {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ)
         (Adjunction.ofIsRightAdjoint (integralComparisonSequenceDirectImage l E f))
         (coefficientProEtaleModuleAdjunction.{t, u} f
           (CommRingCat.of (ULift.{t + 1} (finiteCoefficientRing l E (n + 1)))))).symm
-            (directEvaluation l E f n).hom).natTrans := rfl
+            (directEvaluation l E f n).hom) := rfl
 
 private theorem evaluation_section_heq {X : Scheme.{t}}
     (N : coefficientSequenceModules l E X) (n : ℕ) (U : X.ProEtᵒᵖ)

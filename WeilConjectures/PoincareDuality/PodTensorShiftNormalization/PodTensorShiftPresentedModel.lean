@@ -59,7 +59,6 @@ variable [(isoReductionIntegralInverse l E g).Additive]
 
 attribute [local irreducible] integralOperationsRoos
 
-set_option maxHeartbeats 600000 in
 -- Share the normalized categorical expressions without unfolding coefficient constructions.
 /-- The normalized tensor model holds for arbitrary constructible presentations.
 Transport constructibility along the presentations, apply Model and Naturality, and cancel

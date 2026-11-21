@@ -309,7 +309,6 @@ private theorem locallyDerivedRingedIdealComplete_of_iso
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency false in
-set_option maxHeartbeats 1200000 in
 -- The localization comparison contains both product variables and resolution functors.
 set_option backward.isDefEq.respectTransparency false in
 private theorem ringedDerivedHomUnit_Q_obj
@@ -386,7 +385,6 @@ private theorem ringedDerivedHomUnit_Q_obj
     rfl
   exact (hu (Q.obj M)).trans (hd M)
 
-set_option maxHeartbeats 800000 in
 -- Computing the unit unfolds the product localization and its chosen resolution.
 set_option backward.isDefEq.respectTransparency false in
 private theorem ringedCechCompletionUnit_Q_obj

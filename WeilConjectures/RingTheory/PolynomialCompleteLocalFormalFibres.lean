@@ -42,8 +42,8 @@ regular (lem-weil-pbc-completion-regular-local), and so are its localizations.
 5. Characteristic 0, r₀ = 0: the fibre is a localization of C₀, hence regular, and
 geometrically regular as there are no nontrivial purely inseparable extensions.
 6. Characteristic 0, r₀ ≠ 0: r₀K₀[x] = (f), the fibre is R/fR with R a localization of
-C₀; d/dx extends (lem-weil-pbc-derivation-extends) with D(f) = f' a unit mod f, so R/fR
-is regular (lem-weil-pbc-hypersurface-derivation-regular).
+C₀; d/dx extends (theorem-finite-etale-covers-proper-henselian--2) with D(f) = f' a unit mod f, so
+R/fR is regular (lem-weil-pbc-hypersurface-derivation-regular).
 7. Characteristic p: A₀ ≅ k[[X₁, …, X_d]]; r₀ = 0 by lem-weil-pbc-helper-g-ring-char-p,
 r₀ ≠ 0 by lem-weil-pbc-another-helper-g-ring. Steps 3, 2, 1 conclude. -/
 theorem isRegular_algebraMap_adicCompletion_localization

@@ -9,9 +9,18 @@ public import WeilConjectures.AlgebraicGeometry.Lisse.Tower.LisseTowerLocalizati
 
 /-! # Normalized transitions for localized actual realizations
 
-This is the transition-equation part of the actual localized realization argument.
-Source: Stacks Project, Tags 03CY, 03DA and 06YY.
-(blueprint: lem-weil-pbc-lisse-tower-localized-actual-normalized).
+This is the transition-equation part of the actual localized realization.
+
+## Implementation details
+
+An arbitrary family of level isomorphisms need not commute with transitions, so
+`lisseTower_localized_actual_normalized` is stated for the composites of `cmp.level`, the
+inverse images of `e`, and `cmp.base`.
+
+## References
+
+* Stacks Project, Tags 03CY, 03DA and 06YY
+* Stacks Project, Tags 03CY, 03DA and 0D6D
 -/
 
 @[expose] public noncomputable section
@@ -55,22 +64,7 @@ private theorem transfer_normalized_square
         congrArg (fun r ↦ b ≫ T.map e' ≫ r) htarget
 
 /-- The localized comparisons constructed from one coherent functor comparison satisfy
-normalized transition compatibility.
-
-STATEMENT-DISPUTED (original statement): an arbitrary family of level isomorphisms
-need not commute with transitions. The corrected statement uses the composites of
-`cmp.level`, the inverse images of `e`, and `cmp.base`. The parent's existential
-statement is unchanged.
-
-Source: Stacks Project, Tags 03CY, 03DA and 0D6D.
-(blueprint: lem-weil-pbc-lisse-tower-localized-actual-normalized).
-
-Proof: use the source face of the localization comparison cube. Naturality of its
-scalar comparison moves the supplied e_n across the scalar face. Functoriality and
-hdelta replace the resulting composite by e_(n+1) followed by the actual transition
-on U. The target face of the cube identifies this transition with the restricted
-transition on W. Recombine the three factors of each constructed level comparison.
--/
+normalized transition compatibility. -/
 theorem lisseTower_localized_actual_normalized
     (X Y : Scheme.{u}) (g : Y ⟶ X)
     {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) (M : AdicTower X d)

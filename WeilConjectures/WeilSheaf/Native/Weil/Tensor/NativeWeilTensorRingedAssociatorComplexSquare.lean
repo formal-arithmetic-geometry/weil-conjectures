@@ -37,7 +37,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
   (A : NativeWeilRingedTensorComplexes b T adj)
 
 set_option linter.style.haveILetI false in
-set_option synthInstance.maxHeartbeats 200000 in
 -- The ringed cochain monoidal structure needs a deep search for its graded tensor instances.
 /-- The explicit preimage associator satisfies its defining ringed model square.
 Source: Stacks 0FPQ (blueprint: lem-sf-native-weil-ringed-associator-complex-square).

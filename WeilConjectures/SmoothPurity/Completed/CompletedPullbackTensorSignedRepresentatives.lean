@@ -106,7 +106,6 @@ private theorem normalizedSignedSquare
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-set_option maxHeartbeats 800000 in
 -- The section calculation elaborates the tensor sheafification and adjunction models.
 private theorem coherentSignedTotal {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ) :
@@ -213,7 +212,6 @@ private theorem coherentSignedTotal {X Y : Scheme.{u}} (f : X ⟶ Y)
     unfold pullbackTensorSignedTotal
     exact hσX p q k hpq _ _ _
 
-set_option maxHeartbeats 800000 in
 -- The normalization square retains both unbounded K-flat tensor models.
 /-- Signed exchange for the coherent comparison on K-flat representatives.
 Source: Stacks 07A4, the total tensor construction, and the symmetry sign rule

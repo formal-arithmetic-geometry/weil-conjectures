@@ -19,7 +19,8 @@ invariant `ℱ = Ls̃^* ω_{g̃}` of the pair `(g̃, s̃)`
 deformation space of a section constructed in
 `WeilConjectures.AlgebraicGeometry.DeformationToNormalCone` it is pulled back from the base over
 the punctured line, and constant for the standard pair: this is smooth base change for `R^!`
-(`sk-prop-cohsm` (c)) applied to the cartesian squares of the deformation.
+(`proposition-exceptional-inverse-image-smooth-morphism` (c)) applied to the cartesian squares of
+the deformation.
 
 ## Main statements
 
@@ -49,7 +50,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {V B : Scheme.{u}} {d : �
   {g : V ⟶ B} {s : B ⟶ V} {N : NormalConeData d s} (D : DeformationToNormalConeData d g s N)
   [HasInvertibleExponent Λ B]
 
-/-- Blueprint `sk-lem-geometry` (1), the fibre over `t = 0`: the restriction of the family
+/-- Blueprint `prose-09-12` (1), the fibre over `t = 0`: the restriction of the family
 object along the zero section is the section invariant of the normal cone with its zero
 section,
 
@@ -76,7 +77,7 @@ variable {d : ℕ} (g : V ⟶ B) [IsSeparated g] [SmoothOfRelativeDimension d g]
   [HasCompactification g] [HasInvertibleExponent Λ V] (s : B ⟶ V) [IsClosedImmersion s]
 
 include d in
-/-- Blueprint `sk-lem-geometry` (3), the punctured trivialisation: over the punctured line
+/-- Blueprint `prose-09-12` (3), the punctured trivialisation: over the punctured line
 `j : 𝔾_{m,B} ⊆ 𝔸¹_B` the family object `ℱ = Ls̃^* ω_{g̃}` of the deformation space of `s` is
 pulled back from the base,
 
@@ -120,7 +121,7 @@ variable (n : Type u) (B : Scheme.{u}) {d : ℕ} [IsSeparated (𝔸(n; B) ↘ B)
   [HasInvertibleExponent Λ 𝔸(n; B)]
 
 include d in
-/-- Blueprint `sk-lem-geometry` (4), the family object of the standard pair: for the zero section
+/-- Blueprint `prose-09-12` (4), the family object of the standard pair: for the zero section
 `0` of `𝔸^n_B ⟶ B`, the deformation space is `𝔸^n_{𝔸¹_B}`
 (`AlgebraicGeometry.Scheme.Hom.isIso_deformationSpaceToAffineSpace`), so the family object is
 pulled back from the base,
@@ -156,7 +157,7 @@ theorem nonempty_iso_familyObject_standardPair
   exact ⟨e.symm⟩
 
 end StandardPair
-/-- Blueprint `sk-lem-geometry` (4), the family object of the standard pair, made explicit: for
+/-- Blueprint `prose-09-12` (4), the family object of the standard pair, made explicit: for
 the zero section of `𝔸^c_B ⟶ B` over a separated scheme of finite type over a field, the
 family object is the constant Tate twist,
 

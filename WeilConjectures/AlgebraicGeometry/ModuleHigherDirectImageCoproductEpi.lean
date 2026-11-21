@@ -51,7 +51,6 @@ private theorem addHom_eq_of_directSum_surjective
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-set_option maxHeartbeats 400000 in
 -- The restriction and derived-functor comparisons require substantial elaboration.
 /-- Ordinary higher direct image sends a module-sheaf coproduct cofan to a jointly
 surjective family. No quasi-coherence hypothesis is needed.

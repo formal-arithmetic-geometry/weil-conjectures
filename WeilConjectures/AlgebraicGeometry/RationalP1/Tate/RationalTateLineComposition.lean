@@ -421,31 +421,7 @@ private theorem abelianComparison_comp (l : ℕ) [Fact l.Prime]
 
 attribute [local irreducible] abelianComparison
 
-/-- The prescribed unshifted Tate-line comparison preserves composition.
-
-Source: Cartesian coefficients, integral/rational/colimit paragraphs, and the
-canonical-map compatibilities in the second rational projective-line triangle.
-
-Proof: transpose the two linear maps under the module pullback adjunction and
-forget the actions. The characterization in `linePull_existsUnique` reduces this
-to composition of the prescribed abelian comparisons. For integral coefficients,
-postcompose with every finite root projection. The normalization in
-`spIntegralComparison_existsUnique` reduces the equality to composition of the
-coefficient map and restriction of roots of unity. Both are the canonical pullback
-maps, so functoriality of restriction proves the equality. Uniqueness of the map
-to the inverse limit then gives the integral equation. For a finite rational
-field, precompose with the scalar-extension quotient and use `rational_scalar`;
-monoidality of the inverse-image compositor and the integral equation identify
-the two maps on pure tensors. The scalar-extension adjunction makes this
-precomposition injective on linear maps. For the closure, precompose with every
-finite-field coprojection and use `qbar_coprojection`; the rational equations
-identify the composites, and the colimit universal property gives equality.
-The module compositor is the one obtained by conjugating the pushforward
-compositor, so its adjunct is exactly the iterated adjunct used in this argument.
-Faithfulness of forgetting actions and the adjunction bijection finish the proof.
-Identity morphisms are covered by the same formulas; no properness or base-change
-invertibility is used.
-(blueprint: lem-sfb-rational-tate-line-comparison-composition) -/
+/-- The prescribed unshifted Tate-line comparison preserves composition. -/
 theorem lineComparison_comp
     (l : ℕ) [Fact l.Prime] (c : Option (PadicAlgCl.FiniteIntermediateField l))
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

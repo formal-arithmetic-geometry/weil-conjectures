@@ -15,14 +15,14 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
   sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md,
   statement, conditions (1) and (2), and final integral-criterion assertion
-  (blueprint: det-prop-integral-criterion-reductions).
+  (blueprint: lemma-bounds-finite-reductions).
 
 The integral category `D(X_proet, O_E)` is `AdicCompletion.Modules l E X`, internal
 modules over the pulled-back condensed integer ring `DerivedNakayama.integerRing l E`;
 `AdicCompletion.derivedReduction l E X n` is the derived reduction `K_{n+1}` modulo
 `pi_E^(n+1)`. Bounded constructibility over `O_E` and over `O_E/pi_E^n` is the single
 finite-constant-model predicate `constantModelBoundedConstructible` of
-sk-def-sfb-constructible, applied to the respective condensed rings.
+definition-constructible-sheaves, applied to the respective condensed rings.
 -/
 
 @[expose] public noncomputable section
@@ -43,13 +43,13 @@ condition holds (second conjunct, the final assertion of the source).
 Source: literature/blueprint/latest/blueprint/sec-six-functors-basics/
   sk-thm-sfb-proper-base-change/sk-prop-integral-criterion-reductions.md,
   conditions (1), (2), and final sentence
-  (blueprint: det-prop-integral-criterion-reductions).
+  (blueprint: lemma-bounds-finite-reductions).
 
 Proof (node steps 1-4).
 1. (2) ⇒ (1): the case `n = 1` of (2).
 2. Put `Λ_j = O_E/pi_E^j`, a finite ring (def-weil-l-adic-coefficient-extension (4)).
    By lem-pe-finite-coefficient-model-comparison, constructibility in the sense of
-   sk-def-sfb-constructible agrees with def-weil-proetale-constructible-sheaf, with the
+   definition-constructible-sheaves agrees with def-weil-proetale-constructible-sheaf, with the
    same cohomological intervals. For `n > 1`,
    lem-pe-derived-reduction-coefficient-triangle gives the distinguished triangle
    `Res K_{n-1} → K_n → Res K_1 → Res K_{n-1}[1]` in `D((Λ_n)_X)`.
@@ -58,7 +58,8 @@ Proof (node steps 1-4).
    in `D_bc(X, Λ_n)` with `H^q(Res L) = Res H^q(L)`, vanishing outside `[r,s]`;
    lem-weil-proetale-dbc-triangulated gives `K_n ∈ D_bc(X, Λ_n)`, and the long exact
    sequence (lem-sf-derived-homology-long-exact) gives `H^q(K_n) = 0` off `[r,s]`.
-4. Final assertion. def-pe-derived-complete and sk-def-pe-derived-completion use the
+4. Final assertion. definition-derived-adic-completeness--1 and definition-derived-adic-completeness
+use the
    same completion map. If (2) holds, then (1) holds by step 1 and
    lem-sfb-internal-integral-criterion-reverse gives `K ∈ D_bc(X, O_E)`. Conversely,
    for `K ∈ D_bc(X, O_E)` apply lem-sfb-degreewise-bounded-devissage with the property

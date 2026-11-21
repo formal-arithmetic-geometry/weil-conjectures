@@ -83,7 +83,6 @@ private theorem localized_hom_evaluation
   rfl
 
 set_option backward.isDefEq.respectTransparency true in
-set_option maxHeartbeats 800000 in
 -- The scheme/module comparison has several nested functor types.
 /-- A natural unit-Hom identification descends to the derived category together
 with K-injective comparisons compatible with every map out of the unit.
@@ -147,19 +146,24 @@ theorem derived_single_hom_evaluation (Y : Scheme.{u})
   have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
   let T := CochainComplex.kInjectiveResolutionFunctor.{u} A
   let η := CochainComplex.toKInjectiveResolution.{u} A
-  obtain ⟨d⟩ := derivedInternalHom_comparison.{u, wY}
+  -- Elaborate the comparisons before unpacking their witnesses.
+  have hd := derivedInternalHom_comparison.{u, wY}
     (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf T η
     (fun M ↦ ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
       CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩)
+  obtain ⟨d⟩ := hd
   have hη (M : CochainComplex A ℤ) : IsIso (DerivedCategory.Q.map (η.app M)) := by
     have : QuasiIso (η.app M) :=
       (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
     infer_instance
-  obtain ⟨j, hj⟩ := localized_hom_evaluation DerivedCategory.Q
+  have h := localized_hom_evaluation
+    (C := CochainComplex A ℤ) (E := DerivedCategory A) (DerivedCategory.Q (C := A))
     (HomologicalComplex.quasiIso A (.up ℤ))
     (homComplexFunctor (R := Y.toRingedSpace.sheaf))
     (derivedInternalHom (Opens.grothendieckTopology Y) Y.toRingedSpace.sheaf)
-    T η _ e d hη
+    T η ((CochainComplex.singleFunctor A 0).obj
+      (SheafOfModules.unit Y.ringCatSheaf)) e d hη
+  obtain ⟨j, hj⟩ := h
   refine ⟨j, ?_⟩
   intro B k I hI
   have : I.IsKInjective := hI

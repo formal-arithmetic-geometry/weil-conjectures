@@ -101,7 +101,8 @@ theorem eq_of_map_apply_eq {X Y : C} [IsConnected X] {a b : X ⟶ Y} (x : F.obj 
 /-- For a connected object `X` and `x ∈ F(X)`, the evaluation `Aut X → F(X)`, `g ↦ F(g)(x)` is
 injective, so `#Aut X ≤ #F(X)`. (blueprint: `lem-galois-axioms`) -/
 theorem injective_evaluation_aut_and_card_le (X : C) [IsConnected X] (x : F.obj X) :
-    Function.Injective (fun g : Aut X ↦ F.map g.hom x) ∧ Nat.card (Aut X) ≤ Nat.card (F.obj X) :=
+    Function.Injective (fun g : Aut X ↦ F.map g.asIso.hom x) ∧
+      Nat.card (Aut X) ≤ Nat.card (F.obj X) :=
   ⟨evaluation_aut_injective_of_isConnected F X x, card_aut_le_card_fiber_of_connected F X⟩
 
 /-- A connected object `X` is Galois if and only if `Aut X` acts transitively on `F(X)`, if and
@@ -116,22 +117,22 @@ theorem isGalois_iff_pretransitive_and_card {C : Type u₁} [Category.{u₂} C] 
   have hinj := evaluation_aut_injective_of_isConnected F X x
   constructor
   · intro h
-    have hsurj : Function.Surjective (fun g : Aut X ↦ F.map g.hom x) := fun y ↦
+    have hsurj : Function.Surjective (fun g : Aut X ↦ F.map g.asIso.hom x) := fun y ↦
       MulAction.exists_smul_eq (Aut X) x y
     exact Nat.card_eq_of_bijective _ ⟨hinj, hsurj⟩
   · intro h
-    have hb : Function.Bijective (fun g : Aut X ↦ F.map g.hom x) := by
+    have hb : Function.Bijective (fun g : Aut X ↦ F.map g.asIso.hom x) := by
       rw [Nat.bijective_iff_injective_and_card]
       exact ⟨hinj, h⟩
     refine ⟨fun y z ↦ ?_⟩
     obtain ⟨g, hg⟩ := hb.2 y
     obtain ⟨g', hg'⟩ := hb.2 z
     refine ⟨g' * g⁻¹, ?_⟩
-    change F.map (g' * g⁻¹).hom y = z
+    change F.map (g' * g⁻¹).asIso.hom y = z
     rw [← hg, ← hg', ← FintypeCat.comp_apply, ← F.map_comp]
-    change F.map (g.hom ≫ (g' * g⁻¹).hom) x = F.map g'.hom x
+    change F.map (g.asIso.hom ≫ (g' * g⁻¹).asIso.hom) x = F.map g'.asIso.hom x
     congr 2
-    simp [Aut.Aut_mul_def, Aut.Aut_inv_def]
+    simp [Aut.mul_asIso, Aut.inv_asIso]
 
 end Pre
 

@@ -80,10 +80,11 @@ private theorem scalar_slice (o : Operations l E j)
 
 private theorem scalar_extension (o : Operations l E j)
     (P : IntegralOnSlice.Cx l E U none) :
-    ((extension l E j o).mapHomologicalComplex (.up ℤ)).map
-      (integralKoszulScalar l E U P) =
+    End.of (((extension l E j o).mapHomologicalComplex (.up ℤ)).map
+      (integralKoszulScalar l E U P).asHom) =
     integralKoszulScalar l E X
       (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj P) := by
+  apply End.ext
   apply HomologicalComplex.hom_ext
   intro i
   let L := SheafOfModules.localizedSystemExtension.{t+1, t, max u (t+1)}
@@ -100,42 +101,42 @@ private theorem scalar_extension (o : Operations l E j)
         ((sheafCompose _ (forget₂ CommRingCat.{max u (t+1)} RingCat.{max u (t+1)})).map
           o.completedMap)) :
       ∀ (V : (Over (openObject j))ᵒᵖ) (x : (F.obj (P.X i)).val.obj V),
-        (F.map ((integralKoszulScalar l E U P).f i)).val.app V x =
+        (F.map ((integralKoszulScalar l E U P).asHom.f i)).val.app V x =
           integralCompletionScalarValue l E X (op V.unop.left) • x := by
     subst F
     intro V x
     let x₀ : (P.X i).val.obj ((sliceSite j).op.obj V) := x
-    change ((integralKoszulScalar l E U P).f i).val.app
+    change ((integralKoszulScalar l E U P).asHom.f i).val.app
         ((sliceSite j).op.obj V) x₀ =
       o.completedMap.hom.app V
         (integralCompletionScalarValue l E X (op V.unop.left)) • x₀
     have hs := (integralKoszulScalar_existsUnique l E U P).exists.choose_spec
       i ((sliceSite j).op.obj V) x₀
-    change ((integralKoszulScalar l E U P).f i).val.app
+    change ((integralKoszulScalar l E U P).asHom.f i).val.app
       ((sliceSite j).op.obj V) x₀ = _ at hs
     exact hs.trans (congrArg (fun z ↦ z • x₀) (scalar_slice l E j o V)).symm
   have hF := hF' o.integral.functor o.integralFunctor
-  change L.map (o.integral.functor.map ((integralKoszulScalar l E U P).f i)) = _
+  change L.map (o.integral.functor.map ((integralKoszulScalar l E U P).asHom.f i)) = _
   apply (adj.homEquiv M (L.obj M)).injective
   rw [adj.homEquiv_unit, adj.homEquiv_unit]
   change adj.unit.app M ≫ (L ⋙ R).map _ = _
   rw [← adj.unit.naturality (o.integral.functor.map
-    ((integralKoszulScalar l E U P).f i))]
+    ((integralKoszulScalar l E U P).asHom.f i))]
   apply SheafOfModules.hom_ext
   apply PresheafOfModules.hom_ext
   intro V
   ext x
   change (adj.unit.app M).val.app V
-      ((o.integral.functor.map ((integralKoszulScalar l E U P).f i)).val.app V x) =
+      ((o.integral.functor.map ((integralKoszulScalar l E U P).asHom.f i)).val.app V x) =
     ((integralKoszulScalar l E X
-      (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj P)).f i).val.app
+      (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj P)).asHom.f i).val.app
         (op V.unop.left) ((adj.unit.app M).val.app V x)
   rw [hF]
   have hs := (integralKoszulScalar_existsUnique l E X
     (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj P)).exists.choose_spec
       i (op V.unop.left) ((adj.unit.app M).val.app V x)
   change ((integralKoszulScalar l E X
-    (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj P)).f i).val.app
+    (((extension l E j o).mapHomologicalComplex (.up ℤ)).obj P)).asHom.f i).val.app
       (op V.unop.left) ((adj.unit.app M).val.app V x) = _ at hs
   exact (((adj.unit.app M).val.app V).hom.map_smul _ _).trans hs.symm
 
@@ -178,7 +179,7 @@ private theorem extension_complete_principal [QuasiCompact j]
   have hμ : QuasiIso (CochainComplex.PrincipalCone.unit μ) :=
     (complete_iff_principalUnit p l hpl E U P).mp hP
   have : QuasiIso (G.map (CochainComplex.PrincipalCone.unit μ)) := inferInstance
-  have hscalar : G.map μ = integralKoszulScalar l E X (G.obj P) :=
+  have hscalar : End.of (G.map μ.asHom) = integralKoszulScalar l E X (G.obj P) :=
     scalar_extension l E j o P
   let a : DerivedCategory.Q.obj (G.obj P) ≅ DerivedCategory.Q.obj
       (CochainComplex.PrincipalCone.completion (integralKoszulScalar l E X (G.obj P))) :=

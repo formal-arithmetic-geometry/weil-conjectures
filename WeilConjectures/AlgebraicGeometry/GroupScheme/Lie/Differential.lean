@@ -151,7 +151,7 @@ theorem differential_injective (f : G ⟶ H) [IsMonHom f] [Mono f] :
 /-- If the commutators of the points of `H` with values in `k[ε, δ]/(ε², δ²)` factor through the
 subgroup scheme `f : G ⟶ H`, then the brackets of tangent vectors of `H` are tangent to `G`: the
 bracket is the mixed term of the commutator of the points `1 + εx` and `1 + δy`.
-(blueprint: `sk-i-restriction`) -/
+(blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem lie_mem_range_differential_of_commutator_mem (f : G ⟶ H) [IsMonHom f] [Mono f]
     (hf : ∀ a b : points H (DualNumber (DualNumber k)),
       ⁅a, b⁆ ∈ (IsMonHom.monoidHom f _).range)
@@ -183,7 +183,7 @@ theorem lie_mem_range_differential_of_commutator_mem (f : G ⟶ H) [IsMonHom f] 
   rw [tangentMul, ← kerPost_tangentMap, ← tangentMul, hu, hc, tangentMul_tangentBracket]
 
 /-- If the subgroup scheme `f : G ⟶ H` contains the commutators of `H`, then the brackets of
-tangent vectors of `H` are tangent to `G`. (blueprint: `sk-i-restriction`) -/
+tangent vectors of `H` are tangent to `G`. (blueprint: `lemma-restriction-normal-subgroup`) -/
 theorem lie_mem_range_differential_of_containsCommutators (f : G ⟶ H) [IsMonHom f] [Mono f]
     [IsMonHom.ContainsCommutators f] (x y : Lie H) : ⁅x, y⁆ ∈ (differential f).range :=
   lie_mem_range_differential_of_commutator_mem f (fun a b ↦ MonoidHom.mem_range.2
@@ -191,7 +191,8 @@ theorem lie_mem_range_differential_of_containsCommutators (f : G ⟶ H) [IsMonHo
 
 /-- The tangent vectors of a central subgroup scheme `f : G ⟶ H` are central in `Lie(H)`: for
 `x ∈ Lie(G)` and `y ∈ Lie(H)` the points `1 + εx` and `1 + δy` commute over `k[ε, δ]/(ε², δ²)`,
-so the mixed term `⁅df(x), y⁆` of their commutator vanishes. (blueprint: `sk-p-comparison`) -/
+so the mixed term `⁅df(x), y⁆` of their commutator vanishes. (blueprint:
+`lemma-stable-subspaces-center`) -/
 theorem range_differential_le_center (f : G ⟶ H) [IsMonHom f]
     (hf : ∀ (X : Over (Spec (.of k))) (a : X ⟶ G) (b : X ⟶ H), (a ≫ f) * b = b * (a ≫ f)) :
     (differential f).range ≤ (LieAlgebra.center k (Lie H) : LieSubalgebra k (Lie H)) := by

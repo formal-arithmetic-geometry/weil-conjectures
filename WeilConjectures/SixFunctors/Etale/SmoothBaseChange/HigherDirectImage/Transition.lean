@@ -53,7 +53,7 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `sbc-lem-higher-direct-image-limit`: Higher direct images and limits of schemes.
+/-- Blueprint `lemma-reduction-field`: Higher direct images and limits of schemes.
 
 Let `W ⟶ S` be a morphism of schemes, `G` a sheaf of `Λ`-modules on `W_ét`, and
 `T = lim T_i` a cofiltered limit of schemes over `W` with affine transition morphisms, all

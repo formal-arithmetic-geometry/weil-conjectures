@@ -178,7 +178,8 @@ set_option hygiene false in
 local notation "𝐒" => Spec (CommRingCat.of k₀)
 
 set_option hygiene false in
-local notation "Fr[" T "]" => Scheme.Hom.geometricGaloisFrobenius (T ↘ Spec (CommRingCat.of k₀))
+local notation "Fr[" T "]" =>
+  (Scheme.Hom.geometricGaloisFrobenius (T ↘ Spec (CommRingCat.of k₀))).asIso
 
 set_option hygiene false in
 local notation "bc[" f "]" =>

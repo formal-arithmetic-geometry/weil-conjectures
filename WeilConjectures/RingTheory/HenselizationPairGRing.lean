@@ -53,8 +53,8 @@ Proof (the five steps of the node):
    over the base residue field; localizing retains the relevant factors.
 4. The completion isomorphism and finite product decomposition identify the
    chosen completed fibre as a direct factor of the base completed fibre.
-   By def-weil-pbc-g-ring the latter is geometrically regular over the base
-   residue field, hence so is its direct factor. Apply
+   By theorem-finite-etale-covers-proper-henselian--2 the latter is geometrically regular over the
+   base residue field, hence so is its direct factor. Apply
    lem-weil-pbc-geometric-regularity-separable-extension (Algebra Tag 07QH) to
    transfer this regularity to the chosen separable algebraic residue field.
 5. All maximal local completion maps thus have geometrically regular fibres.

@@ -35,8 +35,6 @@ def ordinaryPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-set_option maxHeartbeats 600000 in
--- The component statement unfolds the mapped cochain comparison and needs extra heartbeats.
 /-- The degreewise component of the ordinary cochain pullback evaluation transition square.
 Source: Zheng Construction 4.1 and Lemma 4.10; Stacks Tags 03D2 and 0941.
 (blueprint: lem-sf-integral-pull-evaluation-cochain-square-component).
@@ -77,7 +75,7 @@ theorem integralPullEvaluation_cochainSquare_component {X Y : Scheme.{u}} (f : X
         ((mateEquiv
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1)))
             (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 2)))).symm
-          (TwoSquare.mk _ _ _ _ r₀.inv)).natTrans (.up ℤ)).app
+          (TwoSquare.mk _ _ _ _ r₀.inv)) (.up ℤ)).app
         (((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ)).obj P)).f i  := by
   simpa only [ordinaryPullEvaluationComplex] using
     (integralPullEvaluation_cochainSquare_component_core_expanded l E f n r₀ hr₀ P i)

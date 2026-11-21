@@ -72,7 +72,7 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # The periodic resolution for an exact square-zero divisor
 
-Source: Weil conjectures blueprint, main-20261015, sec-proetale-coefficients,
+Source: Weil conjectures blueprint, main-20261015, chap-The-pro-etale-site,
 sk-def-localizing-closure-ctf-equals-bc.proof.md, "The examples", periodic resolution;
 Stacks Project, Tags 064K, 06YQ, 093J and 03CY.
 (blueprint: lem-sfb-square-zero-periodic-tensor).
@@ -305,7 +305,7 @@ private def periodicDerivedTensorIso [HasDerivedCategory.{w} (ModuleCat.{r} R)]
     (tensorRight F).mapIso (P.cochainComplexXIso (-(q : ℤ)) q rfl) ≪≫ λ_ F
 
 /-- The multiplication-by-`t` resolution and its self-tensor calculation.
-Source: blueprint main-20261015, sec-proetale-coefficients,
+Source: blueprint main-20261015, chap-The-pro-etale-site,
 sk-def-localizing-closure-ctf-equals-bc.proof.md, "The examples"; Stacks Tag 064K.
 (blueprint: lem-sfb-square-zero-periodic-tensor).
 

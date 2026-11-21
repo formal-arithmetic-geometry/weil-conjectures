@@ -30,8 +30,6 @@ local instance localInst_TensorHomRestrictionScalar_1
         (M.val.obj (op W))) :=
   inferInstanceAs (SMul (X.sheaf.obj.obj (op W)) (M.val.obj (op W)))
 
-set_option maxHeartbeats 600000 in
--- Normalizing the slice and scheme restriction comparisons requires extra elaboration fuel.
 set_option backward.isDefEq.respectTransparency false in
 /-- Transposition sends a local scalar multiple of a Hom section to multiplication
 followed by the local morphism. No coherence or ideal-power hypothesis is required.
@@ -87,24 +85,19 @@ theorem tensorHom_restriction_of_local_scalar
   have hW : W ≤ U := by
     rintro x ⟨y, hy, rfl⟩
     exact y.property
+  -- Compute the restriction comparison once, before the sectionwise calculation.
+  change β.app W (tmulSection a g) =
+    (s.app (op (Over.mk (homOfLE hW)))) ((ι ▷ H ≫ (λ_ H).hom).app W (tmulSection a g))
   have hb := hβ W a g
   change β.app W (tmulSection a g) = _ at hb
   erw [hb]
   rw [hα W hW a]
-  change (((show X.sheaf.obj.obj (op W) from ι.app W a) •
-    PresheafOfModules.restrictOverMap (homOfLE hW) s).app
-    (op (Over.mk (𝟙 W)))) g = _
-  rw [PresheafOfModules.smul_app]
-  erw [ModuleCat.comp_apply, PresheafOfModules.sectionsSMul_app_apply,
-    PresheafOfModules.overSections_coe_apply]
-  have hid (r : X.sheaf.obj.obj (op W)) :
-      X.sheaf.obj.map (𝟙 (op W)) r = r := by simp
-  erw [hid]
+  change X.sheaf.obj.map (𝟙 (op W)) (show Γ(X, W) from ι.app W a) •
+    (s.app (op (Over.mk (homOfLE hW)))) g = _
+  rw [X.sheaf.obj.map_id]
   change (show Γ(X, W) from ι.app W a) • (s.app (op (Over.mk (homOfLE hW)))) g = _
-  have hm : ((restrictFunctor U.ι).map (ι ▷ H ≫ (λ_ H).hom)).app V
-      (tmulSection (M := A) (N := H) (U := W) a g) =
-        (show Γ(X, W) from ι.app W a) • (show Γ(H, W) from g) := by
-    change (ι ▷ H ≫ (λ_ H).hom).app W (tmulSection a g) = _
+  have hm : (ι ▷ H ≫ (λ_ H).hom).app W (tmulSection a g) =
+      (show Γ(X, W) from ι.app W a) • (show Γ(H, W) from g) := by
     rw [Hom.comp_app, ConcreteCategory.comp_apply,
       whiskerRight_app_tmulSection]
     exact leftUnitor_hom_app_tmulSection' (M := H) (ι.app W a) g

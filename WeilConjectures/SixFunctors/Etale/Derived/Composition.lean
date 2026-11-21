@@ -57,7 +57,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A] {X Y S : Scheme.{u}}
 
 omit [HasSmallSiteSheafify A] in
-/-- Blueprint `sk-prop-sf-comp-proper`: Proper coincidence
+/-- Blueprint `proposition-forgetting-supports-composition--3`: Proper coincidence
 
 **Proper coincidence.** For `f : X ⟶ Y` proper the identity is a compactification of `f`, and
 the resulting canonical identification
@@ -86,12 +86,13 @@ theorem nonempty_iso_rightDerivedLowerShriek_rightDerivedLowerStar (f : X ⟶ Y)
     rightDerivedLowerStarCongr A c.comm.symm⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
-/-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
+/-- Blueprint `proposition-composition-open-restriction-compactifications-f--1`: Mate calculus for a
+pasted adjunction
 
 Clause (b), étale form: for composable `f : X ⟶ Y` and `g : Y ⟶ S` admitting compactifications
 and torsion coefficients, there is a composition isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
-(`sk-thm-sf-comp-composition`) whose mate `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` under the adjunctions
-`Rf_! ⊣ Rf^!` on the unbounded derived categories of the small étale sites carries the
+(`proposition-composition-base-change-rf-shriek--1`) whose mate `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` under the
+adjunctions `Rf_! ⊣ Rf^!` on the unbounded derived categories of the small étale sites carries the
 adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` to the composite adjunction `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`:
 the unit and counit of the composite adjunction are the pasted ones. The mate statement is
 formal (`CategoryTheory.Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv`); the
@@ -112,13 +113,15 @@ theorem exists_rightDerivedUpperShriekAdjunction_comp_eq (f : X ⟶ Y) (g : Y �
   exact ⟨e, Adjunction.ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv _ _ e⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
-/-- Blueprint `sk-lem-sf-mate`: Mate calculus for a pasted adjunction
+/-- Blueprint `proposition-composition-open-restriction-compactifications-f--1`: Mate calculus for a
+pasted adjunction
 
 **The mate of the composition isomorphism.** For composable `f : X ⟶ Y` and `g : Y ⟶ S` and
 torsion coefficients,
 
 ```
-  R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!           (left adjoints, sk-thm-sf-comp-composition)
+  R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!           (left adjoints,
+  proposition-composition-base-change-rf-shriek--1)
         ⊣              ⊣
   R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!           (right adjoints, the mate)
 ```
@@ -129,12 +132,12 @@ composite of the right adjoints. The composition isomorphism of the lower shriek
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, which needs torsion
 coefficients.
 
-This is clause (b) of `sk-lem-sf-mate` in its étale form, for morphisms admitting a
-compactification (`sk-prop-sf-existence`(a)); that it is the mate, with the pasted unit and
-counit, is `AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq`. Clause
-(a), the pro-étale ambient form, is the theorem
-`ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv` in the namespace
-`AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint`.
+This is clause (b) of `proposition-composition-open-restriction-compactifications-f--1` in its étale
+form, for morphisms admitting a compactification (`theorem-existence-exceptional-inverse-image`(a));
+that it is the mate, with the pasted unit and counit, is
+`AlgebraicGeometry.Etale.exists_rightDerivedUpperShriekAdjunction_comp_eq`. Clause (a), the
+pro-étale ambient form, is the theorem `ofNatIsoLeft_ofNatIsoRight_conjugateIsoEquiv` in the
+namespace `AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint`.
 The hypothesis `HasCompactification (f ≫ g)` is redundant over a quasi-compact
 quasi-separated base, by Nagata's theorem; it is kept because no composition instance for
 `HasCompactification` is available in general. -/

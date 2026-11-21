@@ -201,12 +201,12 @@ theorem mono_frobAut_comp_pullbackStalkHom
     {F : WeilSheaf K l X} (hF : F.IsLisse) {H : AdicSheaf l X} (hH : IsAdicLisseSheaf H)
     (e : F.obj.carrier ≅ ((X ↘ Spec (.of K)).geometricFiberProj)^*ᵃ[l].obj H)
     (hstr : F.adicFrobStr.hom ≫ e.hom =
-      ((X ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map e.hom ≫
-        (adicUpperStarComp l (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom
+      ((X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map e.hom ≫
+        (adicUpperStarComp l (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom
           (X ↘ Spec (.of K)).geometricFiberProj).inv.app H ≫
         (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
           (X ↘ Spec (.of K)))).hom.app H) :
-    (M₀.mono B.frobAut).hom.app ⟨H, hH⟩ ≫ B.pullbackStalkHom hF hH e =
+    (M₀.mono B.frobAut.asIso).hom.app ⟨H, hH⟩ ≫ B.pullbackStalkHom hF hH e =
       B.pullbackStalkHom hF hH e ≫ (frobStalkIso M B F hF).hom :=
   mono_pullbackPathIso_comp_upperStarStalkIso _ _ _ hc B.frobPath
     (by rw [Category.assoc, Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj])
@@ -240,8 +240,8 @@ theorem pullbackStalkEquiv_fundamentalRep
     {F : WeilSheaf K l X} (hF : F.IsLisse) {H : AdicSheaf l X} (hH : IsAdicLisseSheaf H)
     (e : F.obj.carrier ≅ ((X ↘ Spec (.of K)).geometricFiberProj)^*ᵃ[l].obj H)
     (hstr : F.adicFrobStr.hom ≫ e.hom =
-      ((X ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map e.hom ≫
-        (adicUpperStarComp l (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom
+      ((X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map e.hom ≫
+        (adicUpperStarComp l (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom
           (X ↘ Spec (.of K)).geometricFiberProj).inv.app H ≫
         (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
           (X ↘ Spec (.of K)))).hom.app H) (w : B.WeilGroup)
@@ -257,13 +257,13 @@ theorem pullbackStalkEquiv_fundamentalRep
     have hg : B.weilData.fundamentalRep M F hF (SemidirectProduct.inl g) =
         M.rep B.t (F.toLisse hF) g := B.weilData.fundamentalRep_geomEquiv M F hF g
     rw [MonoidHom.comp_apply, arithHom_inl, hg, geomAut_apply]
-    have h₁ := (M.mono g).hom.naturality
+    have h₁ := (M.mono g.asIso).hom.naturality
       (ObjectProperty.isoMk _ e.symm : LisseSheaf.upperStar l
         (X ↘ Spec (.of K)).geometricFiberProj (⟨H, hH⟩ : LisseSheaf l X) ≅ F.toLisse hF).hom
-    have h₂ := hc g ⟨H, hH⟩
-    have key : (M₀.mono (pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj g)).hom.app
+    have h₂ := hc g.asIso ⟨H, hH⟩
+    have key : (M₀.mono (pullbackPathIso (X ↘ Spec (.of K)).geometricFiberProj g.asIso)).hom.app
         ⟨H, hH⟩ ≫ B.pullbackStalkHom hF hH e = B.pullbackStalkHom hF hH e ≫
-          (M.mono g).hom.app (F.toLisse hF) := by
+          (M.mono g.asIso).hom.app (F.toLisse hF) := by
       rw [pullbackStalkHom, reassoc_of% h₂]
       exact congrArg _ h₁.symm
     have := congrArg (fun φ ↦ ((WeilCoefficients.toModuleCat l).map φ).hom v) key
@@ -287,9 +287,9 @@ noncomputable def geometricFiberPullbackCarrierIso {H : AdicSheaf l X} (hH : IsA
 lemma adicFrobStr_geometricFiberPullback {H : AdicSheaf l X} (hH : IsAdicLisseSheaf H) :
     (WeilSheaf.geometricFiberPullback (k₀ := K) hH).adicFrobStr.hom ≫
         (geometricFiberPullbackCarrierIso hH).hom =
-      ((X ↘ Spec (.of K)).geometricGaloisFrobenius.hom)^*ᵃ[l].map
+      ((X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom)^*ᵃ[l].map
           (geometricFiberPullbackCarrierIso hH).hom ≫
-        (adicUpperStarComp l (X ↘ Spec (.of K)).geometricGaloisFrobenius.hom
+        (adicUpperStarComp l (X ↘ Spec (.of K)).geometricGaloisFrobenius.asIso.hom
           (X ↘ Spec (.of K)).geometricFiberProj).inv.app H ≫
         (adicUpperStarCongr l (Scheme.Hom.geometricGaloisFrobenius_hom_comp_geometricFiberProj
           (X ↘ Spec (.of K)))).hom.app H := by

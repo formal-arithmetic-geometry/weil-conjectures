@@ -13,8 +13,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Ope
 
 Let `S` be an algebra over a noetherian commutative ring `R` and `j : U ⟶ X` an open immersion.
 Derived scalar extension `Ψ = - ⊗ᴸ_R S` commutes with the exact extension by zero `j_!`:
-`Ψ (j_! K) ≅ j_! (Ψ K)` (blueprint `thm-trf-finite-coefficient-map`). The isomorphism is the
-conjugate, along the adjunctions `Ψ ⊣ Res` and `j_! ⊣ Lj^*`, of the commutation
+`Ψ (j_! K) ≅ j_! (Ψ K)` (blueprint `theorem-grothendieck-lefschetz-trace-formula--7`). The
+isomorphism is the conjugate, along the adjunctions `Ψ ⊣ Res` and `j_! ⊣ Lj^*`, of the commutation
 `Lj^* (Res K) ≅ Res (Lj^* K)` of restriction of scalars with the derived pullback; equivalently,
 its mate along `j_! ⊣ Lj^*` is the commutation `Lj^* Ψ ≅ Ψ Lj^*` of `Ψ` with the derived pullback
 (`AlgebraicGeometry.ProEtale.mateEquiv_openImmersionLowerShriekExtendScalarsIso_inv`).
