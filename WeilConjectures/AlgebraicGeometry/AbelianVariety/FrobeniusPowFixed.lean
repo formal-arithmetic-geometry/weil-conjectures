@@ -61,8 +61,7 @@ theorem finite_setOf_geometricFrobenius_pow_fixed {m : ℕ} (hm : m ≠ 0) :
   set S := {P | geometricPointsAddEquiv (A := A)
     (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ m) P = P}
   have hfix (P : S) :
-      ((show End (Spec (.of (AlgebraicClosure K))) from (geometricFrobeniusField K).hom) ^ m) ≫
-        P.1.toMul.left = P.1.toMul.left := by
+      (End.of (geometricFrobeniusField K).hom ^ m).asHom ≫ P.1.toMul.left = P.1.toMul.left := by
     have h := congrArg (fun Q ↦ Q.toMul.left) P.2
     simp only [geometricPointsAddEquiv_apply, toMul_ofMul, Over.comp_left,
       Scheme.specAlgebraicClosureMap_left, hF] at h
@@ -74,7 +73,9 @@ theorem finite_setOf_geometricFrobenius_pow_fixed {m : ℕ} (hm : m ≠ 0) :
     obtain ⟨φ, hφ⟩ := Spec.map_surjective (g P ≫ A.hom)
     rw [← hφ]
     have h := Over.w P.1.toMul
-    rw [← hg P, Category.assoc, ← hφ, ← Spec.map_comp] at h
+    rw [← hg P] at h
+    change (Spec.map _ ≫ g P) ≫ A.hom = _ at h
+    rw [Category.assoc, ← hφ, ← Spec.map_comp] at h
     have h' := congrArg CommRingCat.Hom.hom (Spec.map_injective h)
     congr 1
     ext a
