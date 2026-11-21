@@ -4110,7 +4110,9 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupGlobalSec
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupModel
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Compactification
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.EtaleMapOfPairs
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalCone
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalConeBaseChange
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalConeMap
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.NormalConeMapPullback
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.PowMap
@@ -17160,6 +17162,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineRelative
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineStrictlyLocal
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineStrictlyLocalHigher
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineStrictlyLocalSections
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineTrace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpacePurity
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceTrace
@@ -17249,8 +17252,10 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionRedu
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariant
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantCtf
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantEtale
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTransport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionInvariantTwist
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionNormalBundleEtale
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionPurityTransport
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionThomFrames
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.SectionTwistShiftTransport
