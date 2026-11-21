@@ -76,7 +76,7 @@ private lemma isGE_obj_of_adjunction {C D : Type*} [Category C] [Category D] [Ab
 section ClosedSupport
 
 variable {Z V X S : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
-  [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) 
+  [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
 include hij
 
 omit [IsCommMonObj Λ] in
