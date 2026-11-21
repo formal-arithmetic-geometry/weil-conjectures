@@ -5104,6 +5104,7 @@ public import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedTensor
 public import WeilConjectures.AlgebraicGeometry.Etale.Derived.EtaleDerivedTensorStalk
 public import WeilConjectures.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleAmbientAdjointLocality
+public import WeilConjectures.AlgebraicGeometry.Etale.EtaleAmbientAdjointLocalityComp
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleAmbientLeftComparisonBaseChange
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleCohomologyClassDescent
 public import WeilConjectures.AlgebraicGeometry.Etale.EtaleCohomologyContinuity
@@ -14251,6 +14252,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.TowerTransitionTransport
 public import WeilConjectures.CategoryTheory.Adjunction.UniqueAdjointComparison
 public import WeilConjectures.CategoryTheory.Adjunction.UnitBiproductDesc
 public import WeilConjectures.CategoryTheory.Adjunction.UnitIsIsoTransfer
+public import WeilConjectures.CategoryTheory.Adjunction.UnitOfCounitSquare
 public import WeilConjectures.CategoryTheory.Adjunction.UnitProjection
 public import WeilConjectures.CategoryTheory.Adjunction.UniversalArrowMate
 public import WeilConjectures.CategoryTheory.AdjunctionReconstruction.AdjunctionReconstructionMate
@@ -15574,6 +15576,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.PrescribedMonoidal
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChange
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionBaseChangeComp
 public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMap
+public import WeilConjectures.CategoryTheory.Monoidal.ProjectionMapTraceCounit
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Biproduct
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.BraidedTrace
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.FiniteBiproductUnit
@@ -21040,6 +21043,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.DoubleDual
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Duality
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.InternalHomGeneric
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Restriction
+public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.SeparatedDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricBidualityInduction
@@ -21210,6 +21215,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStarClopen
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStarShift
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTraceCounitTensorRight
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
@@ -21306,6 +21312,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.LowerShrie
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunctionBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunctionCoefficientChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunctionUnitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineDiagonalGysin
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineDiagonalGysinSwap
@@ -21313,6 +21321,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelAssembly
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineKernelBraiding
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothChart
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.TensorMapBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.TraceCounitLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
@@ -22997,6 +23006,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsCover
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsFreeDescent
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsIhom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPull
@@ -23004,6 +23014,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoeffici
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsPullMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsRegular
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsUnit
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficientsUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientLinear
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.CoefficientRingSections
@@ -23032,6 +23043,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Integral
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionRestrictConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionRestrictConstructibleProof
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralReductionTriangleNatural
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralToPadicAlgClUpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralUpperShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.LisseDescent
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.LisseDescentFiniteSubfield
@@ -23042,6 +23054,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Subfield
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldExtendRestrictBiproduct
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldFiniteFree
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLinear
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldLowerShriekCompatibility
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldPushCocycle
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldRestrictScalars
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.SubfieldUpperShriekCompatibility
@@ -23627,6 +23640,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UnitTran
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UniversalHomeomorphism
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekBoundedConstructibleAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingRestriction
@@ -25495,6 +25509,7 @@ public import WeilConjectures.TraceFormula.ShriekTraceFunctionAffineLine
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionBaseCases
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionDevissage
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionFibre
+public import WeilConjectures.TraceFormula.ShriekTraceFunctionFieldPoints
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionFiniteEtale
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionInduction
 public import WeilConjectures.TraceFormula.ShriekTraceFunctionOpenImmersion
@@ -25955,6 +25970,7 @@ public import WeilConjectures.TraceFormula.TransverseBoundary.Boundary
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerConnected
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerConstant
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerRestriction
+public import WeilConjectures.TraceFormula.TransverseBoundary.CornerRestrictionDerived
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerStrictLocalization
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerVanishing
 public import WeilConjectures.TraceFormula.TransverseBoundary.CornerVanishingConstant
