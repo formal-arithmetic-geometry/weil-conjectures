@@ -18,8 +18,7 @@ composition isomorphisms `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_paste_vert`, once the composition
 isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` (built from the chosen
 compactifications) is identified with the inverse of
-`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso`
-(`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso_tower`), and the equality
+`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso` (by definition), and the equality
 `Δ ≫ p₁ = 𝟙` is transported (`AlgebraicGeometry.Etale.exchangeCompCompatible_of_eq`).
 -/
 
@@ -39,32 +38,19 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 section Comp
 
-variable {X Y Z : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
-  (f : X ⟶ Y) (g : Y ⟶ Z)
-  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-  [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
-  [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-  [QuasiCompact (f ≫ g)]
+variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
+  [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact f] [QuasiCompact (f ≫ g)]
 
 /-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` is the inverse of
 `AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso`. -/
 theorem rightDerivedLowerShriekCompIso_eq_symm :
     rightDerivedLowerShriekCompIso Λ f g = (unboundedEtaleLowerShriekCompIso Λ f g).symm := by
-  have h := unboundedEtaleLowerShriekCompIso_tower Λ f g (HasCompactification.compactification g)
-    ((HasCompactification.compactification (f ≫ g)).ofComp
-      (HasCompactification.compactification g))
-  have hrefl : rightDerivedLowerShriekIso Λ (HasCompactification.compactification g) =
-      Iso.refl _ :=
-    (unboundedEtaleCompactSupport_comparison_coherence Λ g).1 _
   refine Iso.ext ?_
-  rw [Iso.symm_hom, Iso.hom_eq_inv, h, hrefl]
-  ext K
-  simp only [rightDerivedLowerShriekCompIso, Iso.trans_inv, Iso.symm_inv,
-    Functor.isoWhiskerRight_inv, NatTrans.comp_app, NatTrans.hcomp_app, Functor.whiskerRight_app,
-    Iso.refl_inv, NatTrans.id_app, Category.assoc]
-  -- the identity is stated at `R(g)_!`, the composite at `Rg_!(c)`
-  erw [Category.id_comp]
+  dsimp only [rightDerivedLowerShriekCompIso, unboundedEtaleLowerShriekCompIso, Iso.trans,
+    Iso.symm]
+  simp only [Category.assoc]
+  rfl
 
 end Comp
 
@@ -78,15 +64,10 @@ of two stacked cartesian squares and of their pasting are compatible with the co
 isomorphisms `AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_paste_vert`). -/
 theorem exchangeCompCompatible_of_paste_vert
-    [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Z]
-    [IsNoetherian X'] [IsNoetherian Y'] [IsNoetherian Z']
-    [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
-    [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g]
-    [IsSeparated f'] [LocallyOfFiniteType f'] [QuasiCompact f']
-    [IsSeparated g'] [LocallyOfFiniteType g'] [QuasiCompact g']
+    [QuasiCompact f] [QuasiCompact (f ≫ g)] [QuasiCompact f'] [QuasiCompact g']
+    [QuasiCompact (f' ≫ g')]
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [HasCompactification f'] [HasCompactification g'] [HasCompactification (f' ≫ g')]
-    [QuasiCompact (f ≫ g)] [QuasiCompact (f' ≫ g')]
     (sqf : IsPullback vX f' f vY) (sqg : IsPullback vY g' g vZ)
     (sqgf : IsPullback vX (f' ≫ g') (f ≫ g) vZ) :
     Adjunction.ExchangeCompCompatible (rightDerivedLowerShriekBaseChangeMap Λ sqf)
@@ -146,8 +127,7 @@ lemma isPullback_diagonal_fst :
   IsPullback.of_horiz_isIso ⟨by simp⟩
 
 variable (Λ) [IsSeparated f] [IsSeparated f'] [HasCompactification f] [HasCompactification f']
-  [IsNoetherian X] [IsNoetherian X'] [IsNoetherian (pullback f f)] [IsNoetherian (pullback f' f')]
-  [LocallyOfFiniteType f] [LocallyOfFiniteType f'] [QuasiCompact f] [QuasiCompact f']
+  [QuasiCompact f']
 
 /-- **The law `H1`** of `AlgebraicGeometry.Etale.IsoSquare.compEqId_baseChange`: for an
 isomorphism of squares, the compactly supported base change maps of the squares of `Δ`, `p₁` and
