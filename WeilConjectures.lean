@@ -10707,6 +10707,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleTensorPullbackModels
 public import WeilConjectures.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 public import WeilConjectures.AlgebraicGeometry.ProEtaleTorAmplitude
 public import WeilConjectures.AlgebraicGeometry.ProEtaleTorLocalGlobal
+public import WeilConjectures.AlgebraicGeometry.ProEtaleTorsorClassical
 public import WeilConjectures.AlgebraicGeometry.ProEtaleUniformModelEtaleCover
 public import WeilConjectures.AlgebraicGeometry.ProEtaleUnitsComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtaleUnitsSheaf
@@ -16266,6 +16267,7 @@ public import WeilConjectures.CategoryTheory.Sites.GaloisDescentTrace
 public import WeilConjectures.CategoryTheory.Sites.GeometricFreeModuleHomEquivalence
 public import WeilConjectures.CategoryTheory.Sites.GeometricInverseImageExact
 public import WeilConjectures.CategoryTheory.Sites.GeometricMorphism
+public import WeilConjectures.CategoryTheory.Sites.GrpTorsor
 public import WeilConjectures.CategoryTheory.Sites.HomSheafAcyclic
 public import WeilConjectures.CategoryTheory.Sites.InjectiveCocycle
 public import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
