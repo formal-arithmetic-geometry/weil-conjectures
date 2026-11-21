@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.KunnethStructureSheaf.Homology
+public import WeilConjectures.Algebra.Homology.HomologyMapOneProd
 public import WeilConjectures.AlgebraicGeometry.Cohomology.KunnethStructureSheaf.IdealCocycle
 
 /-!
@@ -55,7 +55,8 @@ lemma bijective_homologyMap_cechComplex_slices {α β : Type u} [Finite α] [Fin
     (hj : IsPullback j (Y ↘ Spec (.of K)) (prodFst K X Y) x)
     (hi₁ : i ≫ prodFst K X Y = 𝟙 X) (hj₂ : j ≫ prodSnd K X Y = 𝟙 Y) :
     Function.Bijective fun c : ((TopCat.Presheaf.cechComplex
-        (fun p : α × β ↦ prodOpen K X Y (Ux p.1) (Vy p.2))).obj (prod K X Y).unitPresheaf).homology 1 ↦
+        (fun p : α × β ↦ prodOpen K X Y (Ux p.1) (Vy p.2))).obj
+          (prod K X Y).unitPresheaf).homology 1 ↦
       (HomologicalComplex.homologyMap ((TopCat.Presheaf.cechComplex
           (fun p : α × β ↦ prodOpen K X Y (Ux p.1) (Vy p.2))).map
           ((SheafOfModules.toSheaf _).map

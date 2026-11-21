@@ -81,32 +81,15 @@ noncomputable abbrev pushforwardUnitPresheaf {X Z : Scheme.{u}} (i : X ⟶ Z) :
 
 variable {X Y Z : Scheme.{u}} {ι : Type u} (W : ι → Z.Opens)
 
+/-- Membership in a finite infimum of opens. -/
 lemma mem_iInf_fin_iff {k : ℕ} (V : Fin (k + 1) → Z.Opens) (z : Z) :
     z ∈ ⨅ l, V l ↔ ∀ l, z ∈ V l := by
   rw [← SetLike.mem_coe, Opens.coe_iInf, Set.mem_iInter]
   rfl
 
-/-- The map `i^♯ : 𝒪_Z → i_* 𝒪_X` on Čech cochains is `i^♯` on each component. -/
-lemma cechComplex_map_unitToPushforwardObjUnit_f_apply (i : X ⟶ Z) (k : ℕ)
-    (c : TopCat.Presheaf.CechCochain W Z.unitPresheaf k) (y : Fin (k + 1) → ι) :
-    ((TopCat.Presheaf.cechComplex W).map ((SheafOfModules.toSheaf Z.ringCatSheaf).map
-      (SheafOfModules.unitToPushforwardObjUnit i.toRingCatSheafHom)).hom).f k c y =
-      i.app _ (c y) :=
-  rfl
-
-lemma unitPresheaf_map_apply {V V' : Z.Opensᵒᵖ} (f : V ⟶ V') (t : Z.unitPresheaf.obj V) :
-    Z.unitPresheaf.map f t = Z.presheaf.map f t :=
-  rfl
-
-lemma pushforwardUnitPresheaf_map_apply (i : X ⟶ Z) {V V' : Z.Opens} (h : V' ≤ V)
-    (t : (pushforwardUnitPresheaf i).obj (op V)) :
-    (pushforwardUnitPresheaf i).map (homOfLE h).op t =
-      X.presheaf.map (homOfLE (i.preimage_mono h)).op t :=
-  rfl
-
 /-- For `f = 𝟙`, `f.appLE` is a restriction map. -/
 lemma Hom.appLE_eq_map_of_eq_id {f : X ⟶ X} (hf : f = 𝟙 X) (U V : X.Opens) (h : V ≤ f ⁻¹ᵁ U) :
-    f.appLE U V h = X.presheaf.map (homOfLE (h.trans (by rw [hf]; exact le_rfl))).op := by
+    f.appLE U V h = X.presheaf.map (homOfLE (h.trans (hf ▸ le_rfl))).op := by
   subst hf
   simp only [Hom.appLE, Hom.id_app]
   exact Category.id_comp _
@@ -118,6 +101,7 @@ noncomputable def pushforwardUnitPresheafComap (i : X ⟶ Z) (π : Z ⟶ X) {V V
     (pushforwardUnitPresheaf i).obj (op V) ⟶ Z.unitPresheaf.obj (op V') :=
   AddCommGrpCat.ofHom (π.appLE (i ⁻¹ᵁ V) V' h).hom.toAddMonoidHom
 
+/-- `pushforwardUnitPresheafComap` commutes with restriction in the source. -/
 lemma map_pushforwardUnitPresheafComap (i : X ⟶ Z) (π : Z ⟶ X) {V₁ V₂ V' : Z.Opens}
     (h₁ : V₂ ≤ V₁) (h₂ : V' ≤ π ⁻¹ᵁ i ⁻¹ᵁ V₂) :
     (pushforwardUnitPresheaf i).map (homOfLE h₁).op ≫ pushforwardUnitPresheafComap i π h₂ =
@@ -125,6 +109,7 @@ lemma map_pushforwardUnitPresheafComap (i : X ⟶ Z) (π : Z ⟶ X) {V₁ V₂ V
   ext t
   exact ConcreteCategory.congr_hom (Hom.map_appLE π h₂ (homOfLE (i.preimage_mono h₁)).op) t
 
+/-- `pushforwardUnitPresheafComap` commutes with restriction in the target. -/
 lemma pushforwardUnitPresheafComap_map (i : X ⟶ Z) (π : Z ⟶ X) {V V'₁ V'₂ : Z.Opens}
     (h₁ : V'₁ ≤ π ⁻¹ᵁ i ⁻¹ᵁ V) (h₂ : V'₂ ≤ V'₁) :
     pushforwardUnitPresheafComap i π h₁ ≫ Z.unitPresheaf.map (homOfLE h₂).op =
@@ -156,6 +141,7 @@ lemma pushforwardUnitPresheafComap_map_apply (i : X ⟶ Z) (π : Z ⟶ X) {V V'�
       pushforwardUnitPresheafComap i π (h₂.trans h₁) t := by
   rw [← ConcreteCategory.comp_apply, pushforwardUnitPresheafComap_map]
 
+/-- If `i (π z) ∈ W (s q)` for `z ∈ W q`, the same holds for finite intersections. -/
 lemma le_preimage_preimage_iInf (i : X ⟶ Z) (π : Z ⟶ X) (s : ι → ι)
     (hs : ∀ q, ∀ z ∈ W q, i (π z) ∈ W (s q)) {k : ℕ} (y : Fin (k + 1) → ι) :
     ⨅ l, W (y l) ≤ π ⁻¹ᵁ i ⁻¹ᵁ ⨅ l, W (s (y l)) := by
