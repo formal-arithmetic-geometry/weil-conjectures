@@ -19,22 +19,6 @@ constructs the canonical natural transformation
 
 from the lower shriek to the pushforward on étale sheaves.
 
-The construction proceeds through the adjoint triple `i_! ⊣ i^* ⊣ i_*` of the open
-immersion `i`:
-
-- Since `i` is a monomorphism, the localization functor `MorphismProperty.Over.map` of
-  the small étale sites along `i` is fully faithful
-  (`CategoryTheory.MorphismProperty.Over.full_map`), so the unit of the site-level
-  adjunction `MorphismProperty.Over.mapPullbackAdj` is an isomorphism, and hence so is
-  the counit of the induced sheaf-level adjunction `i^* ⊣ i_*`
-  (`CategoryTheory.Adjunction.isIso_sheafPushforwardContinuous_counit`); this expresses
-  that the restriction of a pushforward along an open immersion is the original sheaf.
-- Inverting this counit and contracting with the counit of `i_! ⊣ i^*` yields the
-  canonical map `i_! ⟶ i_*` (`Etale.openImmersionLowerShriekToLowerStar`).
-- Pushing forward along `g` and composing with the composition isomorphism
-  `Etale.lowerStarComp` gives `ι_f : f_! = g_* ∘ i_! ⟶ g_* ∘ i_* ≅ f_*`
-  (`Etale.lowerShriekToLowerStar`).
-
 For a proper morphism `f`, the comparison `ι_f` is an isomorphism; that statement needs the
 vanishing of both sides off the range of `i`, which is where closedness of that range and
 `HasZeroObject A` enter, and is proved downstream in
@@ -57,6 +41,24 @@ vanishing of both sides off the range of `i`, which is where closedness of that 
   determined by such transposes.
 - `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso`: the formal reduction of
   the comparison for `f` to the comparison for the open immersion of its compactification.
+
+## Implementation details
+
+The construction proceeds through the adjoint triple `i_! ⊣ i^* ⊣ i_*` of the open
+immersion `i`:
+
+- Since `i` is a monomorphism, the localization functor `MorphismProperty.Over.map` of
+  the small étale sites along `i` is fully faithful
+  (`CategoryTheory.MorphismProperty.Over.full_map`), so the unit of the site-level
+  adjunction `MorphismProperty.Over.mapPullbackAdj` is an isomorphism, and hence so is
+  the counit of the induced sheaf-level adjunction `i^* ⊣ i_*`
+  (`CategoryTheory.Adjunction.isIso_sheafPushforwardContinuous_counit`); this expresses
+  that the restriction of a pushforward along an open immersion is the original sheaf.
+- Inverting this counit and contracting with the counit of `i_! ⊣ i^*` yields the
+  canonical map `i_! ⟶ i_*` (`Etale.openImmersionLowerShriekToLowerStar`).
+- Pushing forward along `g` and composing with the composition isomorphism
+  `Etale.lowerStarComp` gives `ι_f : f_! = g_* ∘ i_! ⟶ g_* ∘ i_* ≅ f_*`
+  (`Etale.lowerShriekToLowerStar`).
 -/
 
 @[expose] public section
@@ -94,9 +96,8 @@ noncomputable def Etale.openImmersionLowerShriekToLowerStar :
 
 set_option backward.isDefEq.respectTransparency false in
 omit [HasSmallSiteSheafify A] in
-/-- The components of the comparison `j_! ⟶ j_*`: the unitors and the associator in its
-definition are identities, so at `F` it is `j_!` of the inverted counit of `j^* ⊣ j_*`,
-followed by the counit of `j_! ⊣ j^*` at `j_* F`. -/
+/-- The components of the comparison `j_! ⟶ j_*`: at `F` it is `j_!` of the inverted counit of
+`j^* ⊣ j_*`, followed by the counit of `j_! ⊣ j^*` at `j_* F`. -/
 lemma Etale.openImmersionLowerShriekToLowerStar_app (F : Sheaf U.smallEtaleTopology A) :
     (Etale.openImmersionLowerShriekToLowerStar A j).app F =
       (j)_!open[A].map
@@ -110,12 +111,7 @@ lemma Etale.openImmersionLowerShriekToLowerStar_app (F : Sheaf U.smallEtaleTopol
 
 set_option backward.isDefEq.respectTransparency false in
 /-- **`j^*` of the comparison `j_! ⟶ j_*` is an isomorphism**, for any open immersion `j`
-and with no hypothesis on the range of `j`.
-
-Both factors of `Etale.openImmersionLowerShriekToLowerStar_app` become invertible after
-applying `j^*`: the first is `j_!` of an isomorphism, and the second is
-`Etale.isIso_openImmersionRestriction_map_lowerShriekAdjunction_counit`, which holds because
-`j_!` is fully faithful along an open immersion. -/
+and with no hypothesis on the range of `j`. -/
 instance Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar
     (F : Sheaf U.smallEtaleTopology A) :
     IsIso ((Etale.openImmersionRestriction A j).map
@@ -203,10 +199,7 @@ noncomputable def Etale.lowerShriekToLowerStar :
 
 omit [HasSmallSiteSheafify A] in
 /-- The comparison `ι_f` is an isomorphism as soon as the comparison for the open immersion
-`i` of the chosen compactification is: the remaining two factors of `ι_f` are an isomorphism
-and an `eqToHom` by construction, and whiskering preserves isomorphisms.
-
-This step is purely formal; it uses nothing about `f`. -/
+`i` of the chosen compactification is. -/
 lemma Etale.isIso_lowerShriekToLowerStar_of_isIso
     (h : IsIso (Etale.openImmersionLowerShriekToLowerStar A
       (HasCompactification.compactification f).i)) :

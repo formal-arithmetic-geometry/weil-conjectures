@@ -140,7 +140,7 @@ noncomputable def unitSheafHomLinearEquiv
     ModuleCat.homSelfLinearEquiv Λ _
 
 /-- Over a separably closed field `k`, the morphisms `Λ[-j] ⟶ Y` in `D((Spec k)_ét, Λ)` are the
-global sections of the `j`-th cohomology sheaf of `Y`: the constant sheaf `Λ` is projective. -/
+global sections of the `j`-th cohomology sheaf of `Y`. -/
 noncomputable def homSingleLinearEquiv
     (Y : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (j : ℤ) :
@@ -283,8 +283,7 @@ lemma bijective_milnorMap_unitSingle
 omit [IsSepClosed k] [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] in
 include hI in
 /-- For a derived complete `K` whose Milnor maps are injective, `Hom(Λ[-j], K)` is
-`ϖ`-adically separated: an element divisible by every `ϖⁿ` maps to zero in every
-`Hom(Λ[-j], Kₙ)`, which is killed by `ϖⁿ`. -/
+`ϖ`-adically separated. -/
 lemma isHausdorff_hom_unitSingle
     {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))} {j : ℤ}
     (hM : Function.Injective (milnorMap (_root_.DerivedCategory.derivedCompletionCone
@@ -320,11 +319,7 @@ lemma exists_eq_smul_of_comp_derivedCompletionCone_eq_zero
 
 include hϖ hI in
 /-- Over a separably closed field `k`, an object of the integral stage `Dᵇc(Spec k, Λ)` is
-bounded constructible. Writing `K = R lim Kₙ` for its reductions `Kₙ = K ⊗ᴸ Λ/Iⁿ`, the Milnor
-sequence identifies `Hom(Λ[-j], K)` with the inverse limit of the finite groups
-`Hom(Λ[-j], Kₙ)`, which vanish outside the common Tor amplitude interval of the `Kₙ`; and
-`Hom(Λ[-j], K)` is `ϖ`-adically separated with `Hom(Λ[-j], K)/ϖ` embedded in `Hom(Λ[-j], K₁)`,
-hence finitely generated. -/
+bounded constructible. -/
 theorem boundedConstructible_of_boundedConstructibleIntegral [IsPrecomplete I Λ]
     {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) K) :

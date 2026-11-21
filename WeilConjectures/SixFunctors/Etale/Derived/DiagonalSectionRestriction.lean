@@ -21,11 +21,7 @@ restricting along `j_y` turns a morphism `α : Lp₁^* N ⟶ Lp₂^* La^* Q` int
 
 The restriction is independent of the section `y` as soon as the unit `Q ⟶ Ra_* La^* Q` is an
 epimorphism onto `Q` in the weak sense that `h ↦ η_Q ≫ h` is injective on `Hom(Ra_* La^* Q, Q)`
-(`AlgebraicGeometry.Etale.pullbackLiftSectionRestrict_eq`). By proper base change
-`La^* Ra_* ≅ Rp₁_* Lp₂^*`, every `α` is `Lp₁^* φ` followed by `Lp₂^*` of the counit of
-`La^* ⊣ Ra_*`, and its restriction along `j_y` is `φ ≫ La^*(ψ_y)` for the restriction
-`ψ_y : Ra_* La^* Q ⟶ Q` of global sections to the point `y`. Each `ψ_y` is a retraction of the
-unit `η_Q`, so the `ψ_y` all agree.
+(`AlgebraicGeometry.Etale.pullbackLiftSectionRestrict_eq`).
 
 ## Main definitions
 
@@ -224,10 +220,7 @@ lemma pullbackLiftSectionRestrict_eq_comp (y : S ⟶ X) (hy : y ≫ a = 𝟙 S)
 
 /-- **Independence of the section.** For proper `a : X ⟶ S` and `Q ∈ D(S)` such that
 `h ↦ η_Q ≫ h` is injective on `Hom(Ra_* La^* Q, Q)`, restriction along the sections
-`j_x = (𝟙, a ≫ x)` and `j_y = (𝟙, a ≫ y)` of `X ×_S X ⟶ X` agree: both are
-`φ ≫ La^*(ψ)` for the restriction `ψ` of global sections to a point
-(`AlgebraicGeometry.Etale.pullbackLiftSectionRestrict_eq_comp`), and these restrictions are
-retractions of `η_Q`. -/
+`j_x = (𝟙, a ≫ x)` and `j_y = (𝟙, a ≫ y)` of `X ×_S X ⟶ X` agree. -/
 theorem pullbackLiftSectionRestrict_eq (x y : S ⟶ X) (hx : x ≫ a = 𝟙 S) (hy : y ≫ a = 𝟙 S)
     {N : DerivedCategoryModule Λ X} {Q : DerivedCategoryModule Λ S}
     (hQ : Function.Injective (fun h : (R((a)_*[ModuleCat.{u + 1} Λ])).obj

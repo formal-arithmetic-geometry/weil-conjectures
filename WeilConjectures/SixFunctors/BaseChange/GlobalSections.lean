@@ -143,9 +143,7 @@ v v
 Z --i--> T
 ```
 pulling a section back along `u` and then along `a` agrees with restricting it along `i` and
-then pulling back along `b`, under the square isomorphism `b^* i^* G ≅ a^* u^* G`. It follows
-from `AlgebraicGeometry.Etale.globalSectionsUpperStarMap_comp` applied to the two equal
-composites `a ≫ u = b ≫ i`. -/
+then pulling back along `b`, under the square isomorphism `b^* i^* G ≅ a^* u^* G`. -/
 @[reassoc]
 lemma globalSectionsUpperStarMap_comp_squareUpperStarIso {Z' T' Z T : Scheme.{u}}
     {a : Z' ⟶ T'} {b : Z' ⟶ Z} {u : T' ⟶ T} {i : Z ⟶ T} (sq : CommSq a b u i)

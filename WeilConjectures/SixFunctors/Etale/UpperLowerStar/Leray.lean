@@ -38,10 +38,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- **The étale dictionary for the Grothendieck spectral sequence.** For morphisms
 `f : X ⟶ Y` and `h : Y ⟶ Z`, the étale direct images `(f_*, h_*)` on sheaves with values in a
-Grothendieck abelian category `A` form a composable pair with acyclicity: `f_*` is right adjoint
-to the exact pullback `f^*`, hence sends injective sheaves to injective, so `h_*`-acyclic,
-sheaves.
- -/
+Grothendieck abelian category `A` form a composable pair with acyclicity. -/
 theorem isAcyclicComposablePair_lowerStar {X Y Z : Scheme.{u}} (f : X ⟶ Y) (h : Y ⟶ Z) :
     (lowerStar A f).IsAcyclicComposablePair (lowerStar A h) :=
   (upperStarLowerStarAdjunction A f).isAcyclicComposablePair _

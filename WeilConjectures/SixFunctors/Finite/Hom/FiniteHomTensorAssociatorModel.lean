@@ -55,8 +55,7 @@ private abbrev calculus := (coefficientDerivedSystemEvaluationCalculus.{u, u} l 
 abbrev finiteHomTensorExtensionComplex {n m : ℕ} (h : m ≤ n) :=
   (coefficientFiniteQuotientExtension.{u, u} l E X h).mapHomologicalComplex (.up ℤ)
 
-/-- The localization comparison for the exact counit fixed by the quotient calculus.
- -/
+/-- The localization comparison for the exact counit fixed by the quotient calculus. -/
 def finiteHomTensorComparison {n m : ℕ} (h : m ≤ n) :=
   finiteHomTensorRepresentativeComparison (coefficientFiniteQuotientExtension.{u, u} l E X h)
     (coefficientFiniteQuotientDerived.{u, u} l E X h)
@@ -143,8 +142,7 @@ def finiteHomTensorRestrictionComp {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
       ((integralCoefficientSheafSystem.{u, u} l E X).map_comp
         (homOfLE h).op (homOfLE k).op).symm)
 
-/-- The ordinary chain associator, formed from the prescribed ordinary adjunctions.
- -/
+/-- The ordinary chain associator, formed from the prescribed ordinary adjunctions. -/
 def finiteHomTensorChainAssoc {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
     finiteHomTensorExtensionComplex l E X h ⋙ finiteHomTensorExtensionComplex l E X k ≅
       finiteHomTensorExtensionComplex l E X (k.trans h) :=
@@ -166,8 +164,7 @@ private theorem chainAssoc_transpose {n m r : ℕ} (h : m ≤ n) (k : r ≤ m)
           ((finiteHomTensorExtensionComplex l E X (k.trans h)).obj P)) := by
   exact complexAssoc_transpose _ _ _ _ P
 
-/-- The prescribed derived associator is computed by its ordinary adjunction mate.
- -/
+/-- The prescribed derived associator is computed by its ordinary adjunction mate. -/
 theorem finiteHomTensor_associatorModel {n m r : ℕ} (h : m ≤ n) (k : r ≤ m)
     (P : CochainComplex (normalizedDVRModules.{u, u} l E X n) ℤ) :
     (finiteHomIntrinsicAssoc l E X h k).hom.app (DerivedCategory.Q.obj P) ≫

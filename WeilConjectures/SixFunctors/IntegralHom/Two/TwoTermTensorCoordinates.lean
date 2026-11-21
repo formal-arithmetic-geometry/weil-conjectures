@@ -9,8 +9,13 @@ public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReduc
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # Coordinates for a tensor with a two-term coefficient complex
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7.
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YL]
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 08J7]
 -/
 
 @[expose] public noncomputable section
@@ -57,8 +62,7 @@ local instance twoTermTensorCoordinatesLocal6 (K L : CochainComplex (Modules.{t,
   @HasColimitsOfShape.has_colimit _ _ _ _
     ((countableColimits.{t, u} Y R).has_colimits_of_shape _) _
 
-/-- The inclusions jointly detect maps out of a total tensor term.
-Source: the coproduct universal property, Stacks 06YL. -/
+/-- The inclusions jointly detect maps out of a total tensor term. -/
 theorem totalTensor_hom_ext (N : Modules.{t, u} Y R) (n : ℤ)
     (f g : (((totalTensor Y R).obj A).obj Q).X n ⟶ N)
     (h : ∀ (a b : ℤ) (hab : a + b = n),
@@ -68,8 +72,7 @@ theorem totalTensor_hom_ext (N : Modules.{t, u} Y R) (n : ℤ)
   exact h
 
 /-- Deleting zero summands in a two-term total tensor. The inverse is the two coproduct
-inclusions, so this construction imposes no condition on the differential.
-Source: Stacks 06YL and the finite-free calculation in the blueprint. -/
+inclusions, so this construction imposes no condition on the differential. -/
 def twoTermTensorRawIso (n : ℤ) :
     (((totalTensor Y R).obj A).obj Q).X n ≅
       (((ordinaryTensor Y R).obj (A.X (n + 1))).obj (Q.X (-1))) ⊞
@@ -132,8 +135,7 @@ theorem twoTermTensorRawIso_inr_inv (n : ℤ) :
       CochainComplex.ιMapBifunctor A Q (ordinaryTensor Y R) n 0 n (by simp) := by
   exact biprod.inr_desc _ _
 
-/-- The two surviving rank-one coefficients identify the total term with two terms of A.
-Source: Stacks 03EK, unitors, and the blueprint finite-free calculation. -/
+/-- The two surviving rank-one coefficients identify the total term with two terms of A. -/
 def twoTermTensorIso
     (eNeg : Q.X (-1) ≅ (𝟙_ (Modules.{t, u} Y R)))
     (eZero : Q.X 0 ≅ (𝟙_ (Modules.{t, u} Y R))) (n : ℤ) :

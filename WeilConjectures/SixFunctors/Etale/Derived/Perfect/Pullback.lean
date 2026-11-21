@@ -14,9 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_leftDerivedUpperStar_derivedHom`
-  (`theorem-poincare-duality-frobenius--1`): the internal hom with
-  a dualizable first variable commutes with pullback.
+- `AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_leftDerivedUpperStar_derivedHom`: the
+  internal hom with a dualizable first variable commutes with pullback.
 -/
 
 @[expose] public section
@@ -41,18 +40,12 @@ namespace Etale.DerivedCategory
 
 variable {A X}
 
-/-- Blueprint `theorem-poincare-duality-frobenius--1`: Internal Hom versus pullback for a
-site-perfect first variable. This is also blueprint `theorem-poincare-duality-frobenius--1`.
-
-For a morphism of schemes `g : Y' ⟶ X`, a dualizable `M` and any `N` in `D(X_ét)`, the
-canonical comparison
+/-- Internal Hom versus pullback for a dualizable first variable: for a morphism of schemes
+`g : Y' ⟶ X`, a dualizable `M` and any `N` in `D(X_ét)`, the canonical comparison
 
 `Lg^* RHom_Λ(M, N) ⟶ RHom_Λ(Lg^* M, Lg^* N)`
 
-is an isomorphism. Writing `M^∨` for a left dual of `M`, this is the chain
-`Lg^* RHom(M, N) ≅ Lg^*(M^∨ ⊗ᴸ N) ≅ Lg^* M^∨ ⊗ᴸ Lg^* N ≅ RHom(Lg^* M, Lg^* N)`, the last step
-because the monoidal functor `Lg^*` sends the duality between `M^∨` and `M` to a duality
-between `Lg^* M^∨` and `Lg^* M`. -/
+is an isomorphism. -/
 theorem nonempty_iso_leftDerivedUpperStar_derivedHom [Etale.UpperStarPreservesFlat A]
     {Y' : Scheme.{u}} (g : Y' ⟶ X)
     {M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hM : IsDualizable M)

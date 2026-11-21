@@ -60,7 +60,11 @@ import WeilConjectures.CategoryTheory.Scalar.ScalarInternalHomDataSupplement
 
 /-! # Evaluation of the normalized reduction tensor square
 
-Source: Stacks 06YS, 07A4 and 0941.
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -295,25 +299,7 @@ private theorem evaluation_on_representatives
   · exact hf
   · exact hρ
 
-/-- The three representative tensor normalizations imply the reduction/evaluation law.
-Source: Stacks 07A4, proof of lemma-pullback-tensor-product; 0941,
-compatibility of the strict reduction model with finite evaluation.
-
-Proof: restrict both natural transformations in the claimed equation to pairs of
-flat-term K-flat integral complexes; this restriction is faithful by cochain tensor
-model rigidity. Choose the three simultaneous presentations and strict tensor map
-from hR. Evaluate its final system-derived square at n. Use naturality of the
-exact evaluation/localization comparison on the strict tensor map, followed by hE,
-to express the evaluated tensor square on the evaluated representatives. Compose
-with the finite identifications of the three presentations. Naturality of the
-finite tensor-model comparison moves these identifications across its square.
-The finite-component identity for the strict tensor map then replaces the middle
-composite by the ordinary scalar tensor map. The three presentation equations
-identify its outer maps with reductionEvaluation and the prescribed finite
-reduction models. Apply hF to the resulting scalar tensor square. Cancel the
-integral tensor-model isomorphism and the two finite reduction-model isomorphisms.
-This proves the desired equality on representatives, and faithfulness gives it
-for arbitrary derived inputs. No faithfulness of level evaluation is asserted. -/
+/-- The three representative tensor normalizations imply the reduction/evaluation law. -/
 theorem coefficientReductionTensorEvaluation_of_normalizations
     (R : CoefficientDerivedSystemReduction l E W)
     (hR : CoefficientReductionTensorNormalization l E W R)

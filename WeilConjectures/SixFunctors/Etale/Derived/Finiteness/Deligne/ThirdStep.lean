@@ -21,6 +21,8 @@ is a nonempty open of `S` over which `Rj_* F` is bounded constructible and commu
 base change from a noetherian scheme
 (`AlgebraicGeometry.Etale.exists_hasDirectImageBaseChangeOnPlus_of_dense_smooth`).
 
+## Implementation details
+
 Over a nonempty open `U ⊆ S`, the second step applies to `v` and to `v ≫ j`. Over `U`, complete
 the unit `F ⟶ Rv_* v^* F` to a distinguished triangle `F ⟶ Rv_* v^* F ⟶ Δ ⟶`. Then `Δ` is
 supported on the closed complement `W` of `V`, whose generic fibre has dimension `< n`, so the

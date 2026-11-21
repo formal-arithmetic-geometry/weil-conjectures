@@ -90,7 +90,10 @@ import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Normalized completion of one ordinary pullback
 
-Source: Stacks 099N, 07A4; fix-prop-coherence, pullback-model step.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -217,20 +220,7 @@ private theorem ringedPullTower_generators {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 attribute [-instance] IntegralOnSlice.abSheafify IntegralOnSlice.abLocallyBijective in
 /-- The completion presentation of one geometric pullback. No tensor or open
-comparison is asserted.
-Source: Stacks 099N, 07A4; fix-prop-coherence, pullback-model step.
-
-Proof: ordinary inverse image and the specified coefficient isomorphism preserve
-flat terms and K-flat complexes, hence the good classes in Pull. Associate the
-scalar tensors before taking the Roos construction. On every quotient level this
-identifies pullback of the quotient tensor with quotient tensor of pullback,
-using b tensor (1 tensor x) mapped to 1 tensor (b tensor x). Balancing and
-naturality of scalar units show compatibility with every transition, giving the
-strict tower isomorphism and its generators equation. Apply the Roos functor to
-that isomorphism and descend along good-complex localization. This gives the
-comparison from completion of ordinary pullback to integralDerivedPullback.
-The descent equation is exactly Pull.model. Assemble these data into Pull.
-The identity, empty scheme and zero complex satisfy the same formulas. -/
+comparison is asserted. -/
 theorem integralRingedPullCompletion {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Nonempty (OpenFactorCoherence.Pull l E f) := by
   let G := integralOperationsGoodComplex l E Y

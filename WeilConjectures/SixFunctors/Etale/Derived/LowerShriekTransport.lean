@@ -10,7 +10,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceU
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 
 /-!
-
 # Transport of the derived lower shriek along isomorphisms of schemes
 
 Let `f : X ⟶ Y` and `f' : X' ⟶ Y'` be morphisms of schemes and `eX : X ≅ X'`, `eY : Y ≅ Y'`
@@ -20,10 +19,9 @@ are intertwined by the pullbacks along the isomorphisms:
 
 `Rf'_!(c.transport) ⋙ D(eY^*) ≅ D(eX^*) ⋙ Rf_!(c)`.
 
-This only uses that `eX` and `eY` are isomorphisms: the pushforward along an isomorphism `e`
-is an exact equivalence, so `R(e_*) ≅ D(e_*)` is inverse to `D(e^*)`. Combined with the
-independence of `Rf_!` of the compactification, this is what transports a Frobenius
-structure through `Rf_!` when the Frobenius does not act on the chosen compactification.
+Combined with the independence of `Rf_!` of the compactification, this is what transports a
+Frobenius structure through `Rf_!` when the Frobenius does not act on the chosen
+compactification.
 
 ## Main definitions
 
@@ -33,6 +31,11 @@ structure through `Rf_!` when the Frobenius does not act on the chosen compactif
   `R(e_*) ⋙ D(e^*) ≅ 𝟭`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationTransportIso`:
   `Rf'_!(c.transport) ⋙ D(eY^*) ≅ D(eX^*) ⋙ Rf_!(c)`.
+
+## Implementation details
+
+Only the fact that `eX` and `eY` are isomorphisms is used: the pushforward along an isomorphism
+`e` is an exact equivalence, so `R(e_*) ≅ D(e_*)` is inverse to `D(e^*)`.
 -/
 
 @[expose] public section

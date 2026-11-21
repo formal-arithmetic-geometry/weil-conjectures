@@ -58,9 +58,7 @@ b a
 v v
 X ------p------> S
 ```
-
-When `S` is separated the base change `a : S' ⟶ S` is affine, see
-`AlgebraicGeometry.Etale.FieldFailure.isAffineHom_a`. -/
+-/
 structure Etale.FieldFailure (q : ℤ) where
   /-- the affine base of the counterexample -/
   S' : Scheme.{u}
@@ -94,8 +92,7 @@ structure Etale.FieldFailure (q : ℤ) where
   not_isIso : ¬ IsIso (Etale.baseChangeHomologyMap Λ isPullback_fibre q F)
 
 variable {Λ p} in
-/-- Blueprint `lemma-reduction-field--1` (last clause): if `S` is separated, the base change
-`S' ⟶ S` of a counterexample over a field is affine, since `S'` is affine. -/
+/-- If `S` is separated, the base change `S' ⟶ S` of a counterexample over a field is affine. -/
 lemma Etale.FieldFailure.isAffineHom_a [S.IsSeparated] {q : ℤ} (F : Etale.FieldFailure Λ p q) :
     IsAffineHom F.a :=
   have := F.isAffine

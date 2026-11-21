@@ -51,7 +51,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Flatness of the normalized integral-to-native coefficient map
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -276,27 +278,6 @@ private theorem rational_exact (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (extension_iso_exact e) (internal_exact X A (abRing l X) a)
 
 /-- Ordinary extension along the normalized integral coefficient map preserves finite limits.
-
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
-
-Proof in words: extension along C.integral.inv is an equivalence. The normalization
-of C.integralInclusion identifies its section maps with the continuous integral-to-field
-inclusions. The clopen partition according as the norm is at most one or greater than
-one supplies an integral nowhere-zero denominator for every continuous field-valued
-function. Thus these section maps are localizations and flat. Continuous ULift ring
-isomorphisms retain flatness. Sectionwise extension followed by sheafification preserves
-finite limits; its scalar adjunction identifies it with pbcExtend C.integralInclusion.
-For the rational inclusion, take the finite intermediate field which is the range of i.
-The unique extended p-adic norm makes i.equivFieldRange an isometry. Postcomposition
-therefore identifies the rational coefficient sheaf with continuous functions into this
-field. The continuous chart and the normalized locally finite coefficient realization
-transport the proved flat finite-subfield inclusion to the native coefficient ring.
-The section-action equivalences identify restriction along the reconstructed section
-map, so uniqueness of scalar left adjoints transports this exact extension to ordinary
-module sheaves. The pointwise normalization of C.rationalInclusion identifies the map.
-Finally pbcRestrictComp and uniqueness of left adjoints identify the composite of the
-three exact extensions with extension along C.integralMap. Empty schemes and zero
-modules satisfy the same function and adjunction identities.
 -/
 theorem nativeIntegralCoefficient_flat
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]

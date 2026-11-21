@@ -44,28 +44,23 @@ Verdier dual, and proves that the structure maps are equivariant.
 - `AlgebraicGeometry.Etale.upperShriekMateWeilDatum`,
   `AlgebraicGeometry.Etale.dualizingComplexWeilDatum`,
   `AlgebraicGeometry.Etale.verdierDualWeilDatum`,
-  `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback`
-.
+  `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isWeilMorphism_counit_upperShriekMateWeilDatum`,
   `AlgebraicGeometry.Etale.isWeilMorphism_unit_upperShriekMateWeilDatum`,
   `AlgebraicGeometry.Etale.isWeilEquivariant_verdierDual_evaluation`,
-  `AlgebraicGeometry.Etale.isWeilEquivariant_verdierDual_curry`
-.
+  `AlgebraicGeometry.Etale.isWeilEquivariant_verdierDual_curry`.
 
-## Implementation notes
+## Implementation details
 
 The statements hold for any finite coefficient ring `Λ` on the small étale site (the dual Weil
 datum for any coefficient category, its monoidal structures being the generic ones: specialising
 them to `ModuleCat Λ` before building the datum makes the kernel compare two instance paths of
 the derived monoidal structure, which does not terminate in reasonable time); they only use
 the compact-support base change isomorphism, the adjunction `Rf_! ⊣ Rf^!`, the monoidality of
-`Lg^*` and the closed structure, and no integral lattice of the Weil structure. The biduality
-`K ⟶ 𝔻 𝔻 K` is the adjoint of the evaluation composed with the symmetry, so its equivariance
-additionally needs the compatibility of the monoidal structure of `Lg^*` with the symmetry, which
-is not formalised.
+`Lg^*` and the closed structure, and no integral lattice of the Weil structure.
 -/
 
 @[expose] public section
@@ -199,20 +194,13 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] leftDerivedUpperStarMonoidal
 
-/-- The *dual Weil datum* on the Verdier dual
-`𝔻_X K = RHom(K, ω_X)` of a strict Weil datum `φ : Lg^* K ≅ K` and a Weil datum
-`φ_ω : Lg^* ω_X ⟶ ω_X` on the dualizing complex (in the application, the dualizing Weil datum
-`AlgebraicGeometry.Etale.dualizingComplexWeilDatum`; see
-`AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback`): the tensor-hom adjoint of
+/-- The *dual Weil datum* on the Verdier dual `𝔻_X K = RHom(K, ω_X)` of a strict Weil datum
+`φ : Lg^* K ≅ K` and a Weil datum `φ_ω : Lg^* ω_X ⟶ ω_X` on the dualizing complex: the
+tensor-hom adjoint of
 ```
-K ⊗ᴸ Lg^* 𝔻 K ──φ⁻¹ ⊗ 1──▶ Lg^* K ⊗ᴸ Lg^* 𝔻 K ≅ Lg^*(K ⊗ᴸ 𝔻 K) ──Lg^* ev──▶ Lg^* ω ──φ_ω──▶ ω,
+K ⊗ᴸ Lg^* 𝔻 K ──φ⁻¹ ⊗ 1──▶ Lg^* K ⊗ᴸ Lg^* 𝔻 K ≅ Lg^*(K ⊗ᴸ 𝔻 K) ──Lg^* ev──▶ Lg^* ω ──φ_ω──▶ ω.
 ```
-which for an automorphism `g` is `Lg^* 𝔻 K ≅ RHom(Lg^* K, Lg^* ω) ⟶ RHom(Lg^* K, ω) ⟶ 𝔻 K`
-(`CategoryTheory.MonoidalClosed.dualWeilDatum`). Only `φ` and its inverse enter; no integral
-lattice is used.
-
-The statements are made for a finite coefficient ring `Λ`; the monoidal structures of `D(X_ét)`
-and of `Lg^*` are those of the generic constructions. -/
+-/
 noncomputable def verdierDualWeilDatum {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology
     (ModuleCat.{u + 1} Λ))}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)
@@ -251,12 +239,10 @@ theorem isWeilEquivariant_verdierDual_curry
   MonoidalClosed.isWeilEquivariant_curry _ φ ψ φω hb
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory' in
-/-- **Biduality is Weil equivariant**. For a
-strict Weil datum `φ` on `K` and a Weil datum `φ_ω` on `ω_X` such that the dual Weil datum on
-`𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualWeilDatum`) is invertible (for instance an
-automorphism `g` and an invertible `φ_ω`), the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is a
-morphism of Weil objects from `φ` to the dual of the dual datum. This uses that `Lg^*` is
-braided (`AlgebraicGeometry.Etale.leftDerivedUpperStar_μ_map_braiding_hom`). -/
+/-- **Biduality is Weil equivariant**. For a strict Weil datum `φ` on `K` and a Weil datum `φ_ω`
+on `ω_X` such that the dual Weil datum on `𝔻_X K` (`AlgebraicGeometry.Etale.verdierDualWeilDatum`)
+is invertible (for instance an automorphism `g` and an invertible `φ_ω`), the double-dual map
+`δ_K : K ⟶ 𝔻_X 𝔻_X K` is a morphism of Weil objects from `φ` to the dual of the dual datum. -/
 theorem isWeilEquivariant_verdierDualDoubleDual
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ :
         (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ≅ K)

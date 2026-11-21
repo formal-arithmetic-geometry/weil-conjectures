@@ -22,8 +22,8 @@ A complex `C` of `Λ`-modules on `X_proét` whose restriction to `X ∖ S` vanis
 cohomology `Rp_* C` vanishes is zero
 (`ProEtale.CondensedRing.isZero_of_isZero_leftDerivedUpperStar_finsetComplOpens_of_isZero`).
 No constructibility or boundedness of `C` is assumed: this is the finite-support step of
-Deligne's proof of the invariance of nearby cycles under change of trait (SGA 4½, [Th. finitude],
-proof of 3.7), applied there to a cone not yet known to be constructible. The version on the
+Deligne's proof of the invariance of nearby cycles under change of trait, applied there to a cone
+not yet known to be constructible. The version on the
 special fibre of a model over a trait with separably closed residue field is
 `NearbyCyclesModel.isZero_of_isZero_leftDerivedUpperStar_finsetComplOpens_of_isZero`, and the
 form for morphisms (the cone of a morphism) is
@@ -32,17 +32,9 @@ form for morphisms (the cone of a morphism) is
 The bounded constructible `ℚ̄_ℓ` case is
 `ProEtale.CondensedRing.isZero_of_isZero_upperStar_finsetComplOpens`.
 
-## Proof
+## References
 
-This is the skyscraper decomposition. Let `i : Z ⟶ X` be the reduced closed subscheme on `S`:
-it is finite over `k`, being quasi-compact and quasi-finite over a field
-(`AlgebraicGeometry.IsFinite.of_finite_of_locallyOfFiniteType`). As `C` vanishes on the open
-complement, the unit `C ⟶ Ri_* Li^* C` is an isomorphism, so
-`R(i ≫ p)_* Li^* C ≅ Rp_* C = 0`. Derived pushforward along the finite morphism `i ≫ p` to a
-separably closed point is conservative
-(`ProEtale.CondensedRing.isIso_of_isIso_map_rightDerivedLowerStar_of_isFinite`: on the finite
-discrete scheme `Z`, a module is the direct sum of the pushforwards from its points, and the
-pushforward between separably closed points is an equivalence), so `Li^* C = 0` and `C = 0`.
+* [SGA 4½], [Th. finitude], proof of 3.7
 -/
 
 @[expose] public section
@@ -71,8 +63,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 locally of finite type, `k` separably closed, and `S` a finite set of closed points of `X`. A
 complex `C` of `Λ`-modules on `X_proét`, for any coefficient ring `Λ`, whose restriction to
 `X ∖ S` vanishes and with `Rp_* C = 0` is zero. Neither boundedness nor constructibility of `C` is
-needed: `C ≅ Ri_* Li^* C` for the finite closed subscheme `i : Z ⟶ X` on `S`, and the derived
-pushforward along the finite morphism `i ≫ p` to a separably closed point is conservative. -/
+needed. -/
 theorem isZero_of_isZero_leftDerivedUpperStar_finsetComplOpens_of_isZero (S : Finset X)
     (hS : ∀ x ∈ S, IsClosed {x})
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -114,9 +105,7 @@ theorem isZero_of_isZero_leftDerivedUpperStar_finsetComplOpens_of_isZero (S : Fi
 /-- **Isomorphisms away from finitely many closed points, detected on cohomology**: let
 `p : X ⟶ Spec k` be locally of finite type, `k` separably closed, and `S` a finite set of closed
 points of `X`. A morphism `a : K ⟶ L` of complexes of `Λ`-modules on `X_proét` which is an
-isomorphism on `X ∖ S` and such that `Rp_* a` is an isomorphism is an isomorphism: its cone
-satisfies the hypotheses of
-`ProEtale.CondensedRing.isZero_of_isZero_leftDerivedUpperStar_finsetComplOpens_of_isZero`. -/
+isomorphism on `X ∖ S` and such that `Rp_* a` is an isomorphism is an isomorphism. -/
 theorem isIso_of_isIso_leftDerivedUpperStar_finsetComplOpens_map (S : Finset X)
     (hS : ∀ x ∈ S, IsClosed {x})
     {K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -132,9 +121,7 @@ theorem isIso_of_isIso_leftDerivedUpperStar_finsetComplOpens_map (S : Finset X)
       ((R((p)_*⟦Λ⟧)).map_distinguished _ hT)).2 hΓ
 
 omit [IsSepClosed k] [LocallyOfFiniteType p] in
-/-- A complex vanishes on an open `U` as soon as all its cohomology sheaves do: the derived
-pullback along the open immersion is computed levelwise by the exact functor `U.ι^*`, which
-commutes with cohomology. -/
+/-- A complex vanishes on an open `U` as soon as all its cohomology sheaves do. -/
 lemma isZero_leftDerivedUpperStar_obj_of_forall_isZero_upperStar_homology (U : X.Opens)
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X)))
@@ -171,8 +158,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
   {X X' : Scheme.{u}} {M : NearbyCyclesModel X X'} {q : M.total ⟶ Spec (.of R)}
   [LocallyOfFiniteType q] {p : X' ⟶ Spec (.of κ)}
 
-/-- **The finite-support criterion on the special fibre of a model** (SGA 4½, [Th. finitude],
-proof of 3.7): let `M` be a model locally of finite type over `Spec R` along `q`, whose special
+/-- **The finite-support criterion on the special fibre of a model**: let `M` be a model locally
+of finite type over `Spec R` along `q`, whose special
 fibre `p : X' ⟶ Spec κ` is the base change of `q` along `b : R ⟶ κ`, `κ` separably closed (for
 instance the residue field of a strictly henselian trait). A complex `C` of `Λ`-modules on the
 special fibre `X'` which vanishes away from a finite set `S` of closed points and has no
@@ -190,9 +177,7 @@ theorem isZero_of_isZero_leftDerivedUpperStar_finsetComplOpens_of_isZero
 /-- **The finite-support criterion on the special fibre of a model, for morphisms**: in the
 situation of `NearbyCyclesModel.isZero_of_isZero_leftDerivedUpperStar_finsetComplOpens_of_isZero`,
 a morphism `a` of complexes on the special fibre `X'` which is an isomorphism away from a finite
-set of closed points and such that `Rp_* a` is an isomorphism is an isomorphism. This is the form
-in which Deligne's induction applies it, to the base change morphism of a change of trait
-restricted to the special fibre. -/
+set of closed points and such that `Rp_* a` is an isomorphism is an isomorphism. -/
 theorem isIso_of_isIso_leftDerivedUpperStar_finsetComplOpens_map
     (hMi : IsPullback M.i p q (Spec.map (CommRingCat.ofHom b))) (S : Finset X')
     (hS : ∀ x ∈ S, IsClosed {x})

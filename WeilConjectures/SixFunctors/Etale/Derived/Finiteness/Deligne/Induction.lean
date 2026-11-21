@@ -10,12 +10,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Third
 /-!
 # The induction step of Deligne's generic constructibility
 
-Granting the smooth case `lemma-smooth-morphisms-locally-constant-sheaves`
-(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`), the induction statement in generic dimension
+Granting the smooth case (`AlgebraicGeometry.Etale.SmoothGenericDirectImage`), the induction
+statement in generic dimension
 `< n` implies it in generic dimension `< n + 1`
 (`AlgebraicGeometry.Etale.deligneStatement_succ`). Hence Deligne's generic constructibility
 theorem follows from the smooth case
 (`exists_hasConstructibleDirectImageBaseChangeOn_of_smoothGenericDirectImage`).
+
+## Implementation details
 
 For the induction step, after shrinking `S` to a nonempty open `U₀`, a finite, surjective and
 radicial base change `π : S' ⟶ U₀` with `S'` integral makes the reduction of `X' = X ×_S S'`
@@ -174,10 +176,9 @@ theorem deligneStatement_succ (hsm : SmoothGenericDirectImage Λ) {n : ℕ}
   obtain ⟨x, hx⟩ := hW'
   exact ⟨U₀.ι (π x), π x, ⟨x, hx, rfl⟩, rfl⟩
 
-/-- **Deligne's generic constructibility from the smooth case**: granting
-`lemma-smooth-morphisms-locally-constant-sheaves`
-(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`),
-`theorem-generic-constructibility-base-change-rj` holds. -/
+/-- **Deligne's generic constructibility from the smooth case**: granting the smooth case
+(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`), Deligne's generic constructibility theorem
+holds for open immersions. -/
 theorem exists_hasConstructibleDirectImageBaseChangeOn_of_smoothGenericDirectImage
     (hsm : SmoothGenericDirectImage Λ) {k : Type u} [Field k]
     {S X Y : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]

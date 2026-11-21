@@ -16,8 +16,13 @@ import WeilConjectures.SmoothPurity.Completed.CompletedPullbackTowerCore
 
 /-! # Section-normalized models for strict-system operations
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0941, 03DI, 07A7;
-blueprint fix-prop-coherence, strict-system realization.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 03D8]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -176,38 +181,7 @@ private def compositors (o : Operations l E) : Compositors l E o where
     (pullbackTensorSequenceInverse l E (f ≫ g)) (ordinaryPullComp l E f g) P
 
 /-- Existence of the ordinary/derived operation models, without proper/open
-pasting or a tensor composition assertion.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI, 03D8, 0941;
-strict-system realization steps 1 and 2 of fix-prop-coherence.
-
-Proof: on the ringed sequence site, derive the ordinary direct image by K-injective
-resolutions. Its exact left adjoint descends with the standard complex factorization;
-localization uniqueness identifies it with pull. Finite left extension to a level is
-left adjoint to evaluation. Derive this extension using flat-term K-flat
-resolutions on the sequence site; evaluation is exact and hence is its derived
-right adjoint. Exact pullback commutes with the derived extension by the quotient
-pure-tensor formula (zero above that level). This requires no flatness of quotient
-rings: use derived scalar extension in the finite left extension. Transposing
-this isomorphism of derived left adjoints gives direct evaluation,
-its unit and counit equations. Naturality for adjacent quotient maps gives the
-restricted direct comparison and the transition equation in DirectEvaluation.
-For an open immersion construct ordinary extension by zero on the sequence site;
-it is additive and exact, with adjunction to the specified inverse image. Localize
-this adjunction. The inverse-image evaluation comparison has an invertible open
-mate by the slice extension formula, giving OpenEvaluation and Operations.
-Ordinary direct-image composition is restriction of sections along pullbackComp.
-Its inverse is restriction along the inverse scheme isomorphism. Take its ordinary
-adjoint conjugate, then localize complexes, obtaining Compositors including its
-representative equation. The identity on sections identifies the ordinary direct
-image with the intrinsic semilinear presentation and gives CanonicalBridge.
-The open unit is invertible by restriction of extension by zero. For a cartesian
-open square the slice extension comparison is invertible; take its inverse to be
-the displayed open-unit transpose. The slice tensor formula likewise gives the
-projection isomorphism with the displayed inverse transpose. For a clopen immersion,
-extension by zero is direct image, with map the direct-image transpose of the
-inverse open unit. These are exactly the fields of OpenComparisons. All formulas
-include the empty open and zero complexes. No proper/open pasting or tensor
-composition coherence is assumed in this construction. -/
+pasting or a tensor composition assertion. -/
 theorem integralSystemOperationModels :
     ∃ (o : Operations l E) (c : Compositors l E o),
       Nonempty (OpenComparisons l E o c) ∧ Nonempty (CanonicalBridge l E o) := by

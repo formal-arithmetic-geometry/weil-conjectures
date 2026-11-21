@@ -25,7 +25,7 @@ torsion conditions entering the statement of the proper base change theorem:
   field, induces a point of the small étale site (`Scheme.pointSmallEtale`), and the
   stalk of `F` is its fiber `CategoryTheory.GrothendieckTopology.Point.sheafFiber` at
   this point. Since the geometric points form a conservative family, this stalkwise
-  condition agrees with the classical definition [Stacks 03SA] that `F` is the filtered
+  condition agrees with the classical definition that `F` is the filtered
   union of its `n`-torsion subsheaves.
   The bridge `AlgebraicGeometry.Scheme.isTorsionModuleSheaf_iff_isTorsion` identifies it with the
   local condition `CategoryTheory.Sheaf.IsTorsion` (every section is locally torsion) on the
@@ -46,10 +46,12 @@ torsion conditions entering the statement of the proper base change theorem:
 
 Torsion refers throughout to the underlying abelian group, not to the `Λ`-module
 structure: for `Λ = ℤ` the definition specializes to torsion abelian sheaves, the
-setting of the classical proper base change theorem [Stacks 0DDE], and for a coefficient
+setting of the classical proper base change theorem, and for a coefficient
 ring `Λ` which is torsion as an additive group — in particular for the finite rings
 `Λ = ℤ/ℓⁿℤ` of the `ℓ`-adic formalism — every sheaf of `Λ`-modules is torsion
 (`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf.of_isTorsion`).
+
+## Implementation details
 
 The design follows `AlgebraicGeometry.Scheme.IsFiniteSheaf` of
 `WeilConjectures.ConstructibleSheaf.Defs` (stalkwise condition at geometric points) and
@@ -65,6 +67,11 @@ points of the small étale site nevertheless have fibers in `ModuleCat.{u + 1} �
 `u`-indexed filtered colimits computing them being obtained by shrinking from the
 `u + 1`-indexed ones, see
 `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasColimitsOfSize`.
+
+## References
+
+* [Stacks, Tag 03SA]
+* [Stacks, Tag 0DDE]
 -/
 
 @[expose] public section
@@ -87,10 +94,7 @@ section TorsionSheaf
 of `F` at every geometric point of `X` is a torsion abelian group, i.e. every element of
 every geometric stalk is killed by a positive integer. Torsion refers to the underlying
 abelian group of the stalk, not to its `Λ`-module structure; for `Λ = ℤ` this is the
-classical notion of a torsion abelian sheaf [Stacks 03SA].
-
-This is the notion of torsion sheaf of blueprint `definition-torsion-sheaves--1`, phrased with
-geometric stalks, which the blueprint notes is equivalent to local killing of sections. -/
+classical notion of a torsion abelian sheaf. -/
 class Scheme.IsTorsionModuleSheaf {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
   isTorsion_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
@@ -126,8 +130,7 @@ lemma Scheme.isTorsionModuleSheaf_iff_isTorsion {Λ : Type (u + 1)} [CommRing Λ
 
 /-- If the coefficient ring `Λ` is torsion as an additive group — in particular if `Λ`
 is finite, e.g. `Λ = ℤ/ℓⁿℤ` — then every sheaf of `Λ`-modules on the small étale site is
-torsion: every stalk is a `Λ`-module, and is killed elementwise by the additive order of
-`1 : Λ`. -/
+torsion. -/
 lemma Scheme.IsTorsionModuleSheaf.of_isTorsion {Λ : Type (u + 1)} [CommRing Λ]
     (hΛ : IsAddTorsion Λ) {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -155,8 +158,7 @@ lemma Scheme.IsTorsionModuleSheaf.of_epi {Λ : Type (u + 1)} [CommRing Λ] {X : 
     exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, by rw [← map_nsmul, hy, map_zero]⟩
 
 open Etale in
-/-- The pullback of a torsion sheaf of `Λ`-modules is torsion: the stalk of `f^* F` at a
-geometric point `s` is the stalk of `F` at `s ≫ f`. -/
+/-- The pullback of a torsion sheaf of `Λ`-modules is torsion. -/
 instance isTorsionModuleSheaf_upperStar {Λ : Type (u + 1)} [CommRing Λ] {X Y : Scheme.{u}}
     (f : X ⟶ Y) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionModuleSheaf F] :
     IsTorsionModuleSheaf ((f)^*[ModuleCat.{u + 1} Λ].obj F) where
@@ -198,9 +200,7 @@ lemma Scheme.IsTorsionModuleSheaf.of_isTorsionSheafOfInvertibleOrder
 
 /-- A sheaf `F` of `Λ`-modules on the small étale site of `X` is *`P`-torsion*, for a set `P`
 of primes, if every element of every geometric stalk of `F` is killed by a positive integer all
-of whose prime divisors lie in `P`. This is the condition on the cohomology sheaves in the
-categories with allowable torsion of blueprint `theorem-smooth-base-change-classical-torsion-2`
-and `definition-constructible-sheaves`. -/
+of whose prime divisors lie in `P`. -/
 class Scheme.IsTorsionSheafOfPrimes (P : Set ℕ) {Λ : Type (u + 1)} [CommRing Λ]
     {X : Scheme.{u}} (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) : Prop where
   exists_nsmul_eq_zero (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
@@ -217,13 +217,7 @@ lemma Scheme.IsTorsionModuleSheaf.of_isTorsionSheafOfPrimes (P : Set ℕ) {Λ : 
     exact isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨n, hn, hx⟩
 
 /-- A torsion sheaf `F` of `Λ`-modules is the point of a colimit cocone over a filtered diagram
-of sheaves, each of which is killed by some positive integer.
-
-This is blueprint `definition-torsion-sheaves--3`: `F` is the colimit of its
-`n`-torsion subsheaves `F[n] = ker (n : F ⟶ F)` over the positive integers ordered by
-divisibility, because every local section of `F` is, locally, killed by a positive integer;
-this lemma only records the existence of some such diagram, which is the form in which it is
-used. -/
+of sheaves, each of which is killed by some positive integer. -/
 theorem Scheme.IsTorsionModuleSheaf.exists_isColimit
     (Λ : Type (u + 1)) [CommRing Λ] {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Scheme.IsTorsionModuleSheaf F] :
@@ -328,9 +322,7 @@ private lemma dvd_invertibleOrderProd (S : Scheme.{u}) {d k : ℕ} (hd : 0 < d) 
   exact Finset.dvd_prod_of_mem _ (Finset.mem_filter.2 ⟨Finset.mem_range.2 (by omega), hd, hS⟩)
 
 /-- A morphism `φ : G ⟶ F` from a sheaf killed by a positive integer `n` to a sheaf which is
-torsion of orders invertible on `S` is killed by `invertibleOrderProd S n`: on a geometric
-stalk, the additive order of an element of the image of `φ` divides `n` and an integer
-invertible on `S`, so it is a positive integer `≤ n` invertible on `S`. -/
+torsion of orders invertible on `S` is killed by `invertibleOrderProd S n`. -/
 private lemma invertibleOrderProd_nsmul_eq_zero {Λ : Type (u + 1)} [CommRing Λ]
     (S : Scheme.{u}) {T : Scheme.{u}} {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     [IsTorsionSheafOfInvertibleOrder S F] (φ : G ⟶ F) {n : ℕ} (hn : 0 < n)
@@ -362,15 +354,7 @@ private lemma invertibleOrderProd_nsmul_eq_zero {Λ : Type (u + 1)} [CommRing Λ
 
 /-- A sheaf `F` of `Λ`-modules which is torsion of orders invertible on `S` is the point of a
 colimit cocone over a filtered diagram of sheaves, each of which is killed by some positive
-integer `n` invertible on `S`.
-
-This is blueprint `definition-torsion-sheaves--3` for the integers invertible on `S`.
-The diagram is the chain of the `N_k`-torsion subsheaves `F[N_k]`, `k ∈ ℕ`, where `N_k` is the
-product of the positive integers `d ≤ k` invertible on `S`. Its colimit maps monomorphically
-to `F`, filtered colimits of sheaves being exact. It maps epimorphically too: by
-`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf.exists_isColimit`, `F` is a filtered colimit of
-sheaves `D_j` killed by integers `n_j`, and on geometric stalks the image of `D_j` in `F` is
-killed by `N_{n_j}`, so `D_j ⟶ F` factors through `F[N_{n_j}]`. -/
+integer `n` invertible on `S`. -/
 theorem Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit
     (Λ : Type (u + 1)) [CommRing Λ] (S : Scheme.{u}) {T : Scheme.{u}}
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -443,11 +427,8 @@ section TorsionHomology
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- `ℤ`-indexed colimits of `Λ`-modules are exact: `ℤ` is a filtered category, and
-`ModuleCat.{u + 1} Λ` is Grothendieck abelian, hence satisfies `AB5` for shapes of size
-`u + 1`; `AB5OfSize_of_univLE` brings that down to the shapes of size `0` in which `ℤ`
-lives. It is not an instance in mathlib because in that generality instance search would
-climb the universes. -/
+/-- `ℤ`-indexed colimits of `Λ`-modules are exact. This is not an instance in mathlib because in
+that generality instance search would climb the universes. -/
 instance : HasExactColimitsOfShape ℤ (ModuleCat.{u + 1} Λ) := by
   have : AB5OfSize.{0, 0} (ModuleCat.{u + 1} Λ) :=
     AB5OfSize_of_univLE.{0, 0, u + 1, u + 1} (ModuleCat.{u + 1} Λ)
@@ -474,8 +455,7 @@ lemma Etale.DerivedCategory.Plus.moduleTorsionHomology_of_isTorsion (hΛ : IsAdd
     Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X K :=
   fun _ ↦ .of_isTorsion hΛ _
 
-/-- A torsion sheaf placed in degree `0` has torsion cohomology: its cohomology sheaf in
-degree `0` is the sheaf itself, and all its other cohomology sheaves vanish. -/
+/-- A torsion sheaf placed in degree `0` has torsion cohomology. -/
 lemma Etale.DerivedCategory.Plus.moduleTorsionHomology_singleFunctor_obj
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsTorsionModuleSheaf I] :
     Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X
@@ -507,9 +487,7 @@ lemma Etale.DerivedCategory.Plus.torsionHomologyOfPrimes_le_moduleTorsionHomolog
       Etale.DerivedCategory.Plus.moduleTorsionHomology Λ X :=
   fun _ hK n ↦ have := hK n; .of_isTorsionSheafOfPrimes P _
 
-/-- Ambient categories and small subcategories.
-
-The ambient category `D⁺_P-tor(X, Λ)` of bounded below complexes of étale sheaves of
+/-- The ambient category `D⁺_P-tor(X, Λ)` of bounded below complexes of étale sheaves of
 `Λ`-modules whose cohomology sheaves have `P`-torsion geometric stalks, for a set `P` of primes,
 as a full subcategory of `D⁺(X_ét, Λ)`. -/
 noncomputable def Etale.DerivedCategoryPlusTorsionOfPrimes (P : Set ℕ) : Type _ :=

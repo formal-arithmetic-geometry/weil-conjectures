@@ -12,6 +12,10 @@ import all WeilConjectures.AlgebraicGeometry.ProperBaseChange.WitnessCompatibili
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 
 /-! # Finite coefficient change for internal Hom
+
+## References
+
+* [Stacks, Tag 00YV]
 -/
 
 @[expose] public noncomputable section
@@ -296,8 +300,7 @@ private theorem finiteHomRestrictionCandidate_mapGeneral
   simp only [finiteHomRestrictionCandidateGeneral, Functor.fullyFaithfulCancelRight_hom_app,
     Functor.map_preimage]
 
-/-- Identity-on-generators normalization for comparison and scalar restriction.
- -/
+/-- Identity-on-generators normalization for comparison and scalar restriction. -/
 private def FiniteHomNuRestrictionNormalizationGeneral
     (σ : ProEtale.finiteCoefficientIntrinsicComparison X B ⋙ SheafOfModules.restrictScalars f ≅
       Sheaf.restrictScalars X.smallEtaleTopology φ ⋙
@@ -435,8 +438,7 @@ attribute [local instance] finiteHomCommSheafify finiteHomAbSheafify
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- The actual comparison on module sheaves, with finite coefficients supplied.
- -/
+/-- The actual comparison on module sheaves, with finite coefficients supplied. -/
 def finiteHomNuOrdinary (n : ℕ) :
     Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) ⥤
@@ -444,16 +446,14 @@ def finiteHomNuOrdinary (n : ℕ) :
   @ProEtale.finiteCoefficientIntrinsicComparison X (Padic.coefficientExtensionRing l E (n + 1))
     inferInstance
 
-/-- Additivity of the published intrinsic comparison, at the positive finite stage.
- -/
+/-- Additivity of the published intrinsic comparison, at the positive finite stage. -/
 instance finiteHomNuOrdinary_additive (n : ℕ) : (finiteHomNuOrdinary l E X n).Additive :=
   letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
     Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)
   inferInstanceAs (ProEtale.finiteCoefficientIntrinsicComparison X
     (Padic.coefficientExtensionRing l E (n + 1))).Additive
 
-/-- Exact comparison preserves finite limits.
- -/
+/-- Exact comparison preserves finite limits. -/
 instance finiteHomNuOrdinary_limits (n : ℕ) :
     PreservesFiniteLimits (finiteHomNuOrdinary l E X n) :=
   letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
@@ -461,8 +461,7 @@ instance finiteHomNuOrdinary_limits (n : ℕ) :
   inferInstanceAs (PreservesFiniteLimits (ProEtale.finiteCoefficientIntrinsicComparison X
     (Padic.coefficientExtensionRing l E (n + 1))))
 
-/-- Exact comparison preserves finite colimits.
- -/
+/-- Exact comparison preserves finite colimits. -/
 instance finiteHomNuOrdinary_colimits (n : ℕ) :
     PreservesFiniteColimits (finiteHomNuOrdinary l E X n) :=
   letI : Finite (Padic.coefficientExtensionRing l E (n + 1)) :=
@@ -470,13 +469,11 @@ instance finiteHomNuOrdinary_colimits (n : ℕ) :
   inferInstanceAs (PreservesFiniteColimits (ProEtale.finiteCoefficientIntrinsicComparison X
     (Padic.coefficientExtensionRing l E (n + 1))))
 
-/-- The exact derived inverse image nu_X^* in the intrinsic constant-ring presentation.
- -/
+/-- The exact derived inverse image nu_X^* in the intrinsic constant-ring presentation. -/
 def finiteHomNu (n : ℕ) : finiteHomEtale l E X n ⥤ normalizedDVRDerived l E X n :=
   (finiteHomNuOrdinary l E X n).mapDerivedCategory
 
-/-- A section mapped by the comparison unit and the associated-module-sheaf unit.
-Source: blueprint site formula; Stacks 00YV. -/
+/-- A section mapped by the comparison unit and the associated-module-sheaf unit. -/
 def finiteHomNuSection (n : ℕ)
     (M : Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))
@@ -550,8 +547,7 @@ private def finiteHomRestrictionCandidate {n m : ℕ} (h : m ≤ n) :
   finiteHomRestrictionCandidateGeneral X _ _ (finiteHomQuotient l E h)
     (normalizedDVRQuotient l E X h) (finiteHomScalarUnit_naturality l E X h)
 
-/-- Identity-on-generators normalization for comparison and scalar restriction.
- -/
+/-- Identity-on-generators normalization for comparison and scalar restriction. -/
 def FiniteHomNuRestrictionNormalization {n m : ℕ} (h : m ≤ n)
     (σ : finiteHomNuOrdinary l E X m ⋙ normalizedDVRModuleRes l E X h ≅
       Sheaf.restrictScalars X.smallEtaleTopology (finiteHomQuotient l E h) ⋙
@@ -591,8 +587,7 @@ private theorem finiteHomRestriction_unique {n m : ℕ} (h : m ≤ n)
   exact finiteHomRestriction_uniqueGeneral X _ _ (finiteHomQuotient l E h)
     (normalizedDVRQuotient l E X h) σ τ hσ hτ
 
-/-- Restriction commutes canonically with inverse image, fixing every local generator.
- -/
+/-- Restriction commutes canonically with inverse image, fixing every local generator. -/
 theorem finiteHomNuRestriction_existsUnique {n m : ℕ} (h : m ≤ n) :
     ∃! σ, FiniteHomNuRestrictionNormalization l E X h σ := by
   exact ⟨finiteHomRestrictionCandidate l E X h,
@@ -600,8 +595,7 @@ theorem finiteHomNuRestriction_existsUnique {n m : ℕ} (h : m ≤ n) :
     fun σ hσ ↦ finiteHomRestriction_unique l E X h σ _ hσ
       (finiteHomRestrictionCandidate_normalized l E X h)⟩
 
-/-- The uniquely normalized ordinary scalar-restriction comparison.
- -/
+/-- The uniquely normalized ordinary scalar-restriction comparison. -/
 def finiteHomNuRestriction {n m : ℕ} (h : m ≤ n) :
     finiteHomNuOrdinary l E X m ⋙ normalizedDVRModuleRes l E X h ≅
       Sheaf.restrictScalars X.smallEtaleTopology (finiteHomQuotient l E h) ⋙
@@ -632,8 +626,7 @@ private theorem finiteHomRestriction_encoding {n m : ℕ} (h : m ≤ n)
   exact finiteHomRestrictionCandidate_encodingGeneral X _ _ (finiteHomQuotient l E h)
     (normalizedDVRQuotient l E X h) (finiteHomScalarUnit_naturality l E X h) M
 
-/-- Exact descent of the canonical scalar-restriction comparison.
- -/
+/-- Exact descent of the canonical scalar-restriction comparison. -/
 def finiteHomNuDerivedRestriction {n m : ℕ} (h : m ≤ n) :
     finiteHomNu l E X m ⋙ normalizedDVRRes l E X h ≅
       Sheaf.derivedRestrictScalars X.smallEtaleTopology (finiteHomQuotient l E h) ⋙
@@ -642,8 +635,7 @@ def finiteHomNuDerivedRestriction {n m : ℕ} (h : m ≤ n) :
     Functor.mapDerivedCategoryNatIso (finiteHomNuRestriction l E X h) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Beta is the canonical left-adjoint mate of identity-on-sections scalar restriction.
- -/
+/-- Beta is the canonical left-adjoint mate of identity-on-sections scalar restriction. -/
 def finiteHomSiteBeta {n m : ℕ} (h : m ≤ n) :
     finiteHomNu l E X n ⋙ coefficientFiniteQuotientDerived l E X h ⟶
       finiteHomEtaleReduction l E X h ⋙ finiteHomNu l E X m :=
@@ -952,8 +944,7 @@ private instance finiteHomScalarEncodingMate_isIso {n m : ℕ} (h : m ≤ n) :
       (Sheaf.derivedRestrictScalars (ProEt.topology X) (finiteHomQuotient l E h)))
     (finiteHomDerivedEncodingRestriction l E X h)
 
-/-- The specified beta mate is invertible on every ambient object.
- -/
+/-- The specified beta mate is invertible on every ambient object. -/
 @[instance] theorem finiteHomSiteBeta_isIso {n m : ℕ} (h : m ≤ n) :
     IsIso (finiteHomSiteBeta l E X h) := by
   let a := Adjunction.ofIsRightAdjoint

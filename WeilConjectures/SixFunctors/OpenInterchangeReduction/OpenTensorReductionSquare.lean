@@ -8,12 +8,10 @@ public import WeilConjectures.SixFunctors.OpenInterchangeReduction.OpenInterchan
 import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAdjunctionReductionSquares
 import WeilConjectures.SixFunctors.GeneratorReduction.GeneratorReductionData
 
-/-! # The coefficient square for the open tensor projection formula
-Source: the open-adjunction and clopen expansion of the coherence proof.
--/
+/-! # The coefficient square for the open tensor projection formula -/
 @[expose] public noncomputable section
 
--- After pruning, this module only keeps private declarations.
+-- This module only keeps private declarations.
 set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

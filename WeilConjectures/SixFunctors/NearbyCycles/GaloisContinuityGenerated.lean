@@ -23,14 +23,6 @@ then an open subgroup of `Gal(Ω/L)` acts trivially on it: there is a finite Gal
 (`NearbyCyclesModel.exists_forall_homology_galoisLayerAction_eq_id_of_isGenerated`), and similarly
 for finitely many degrees at once
 (`NearbyCyclesModel.exists_forall_mem_finset_homology_galoisLayerAction_eq_id_of_isGenerated`).
-
-This is the argument of `NearbyCyclesModel.exists_forall_homology_galoisLayerAction_eq_id`, with
-the noetherianity of `Hᵠ(Ψ_{N_Ω} C)` (which fails for pro-étale sheaves in general) replaced by
-finite generation: by continuity
-(`NearbyCyclesModel.nonempty_isColimit_homology_nearbyCycles_galoisTower`), `Hᵠ(Ψ_{N_Ω} C)` is the
-filtered colimit of the cohomology sheaves of the finite layers, and the colimit is attained at
-some level `L'` (`CategoryTheory.IsGeneratedByFinitelyPresentable.exists_epi_ι`), on which `σ`
-acts through its restriction to `L'`, i.e. trivially.
 -/
 
 @[expose] public section

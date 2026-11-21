@@ -18,8 +18,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 /-!
 # Strata of a flat constructible sheaf and generation of `Dctf` by `a_! L`
 
-Let `X` be a Noetherian scheme and `Λ` a finite commutative ring. This file proves blueprint
-`lemma-flat-models-generators--2`:
+Let `X` be a Noetherian scheme and `Λ` a finite commutative ring. This file proves:
 
 1. a flat constructible sheaf `F` of `Λ`-modules on `X_ét` has a finite chain of opens
    `∅ = V₀ ⊆ V₁ ⊆ ⋯ ⊆ V_m = X` such that `F` restricted to each locally closed stratum
@@ -35,7 +34,7 @@ Let `X` be a Noetherian scheme and `Λ` a finite commutative ring. This file pro
 
 A finite locally constant sheaf is flat if and only if its stalks are finite projective
 `Λ`-modules (`AlgebraicGeometry.Etale.flat_iff_forall_projective_sheafFiber`), so the generators
-are the `a_! L` with `L` locally constant with finite projective stalks, as in the blueprint.
+are the `a_! L` with `L` locally constant with finite projective stalks.
 -/
 
 @[expose] public section
@@ -61,8 +60,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 section Flat
 
 /-- A sheaf of `Λ`-modules on `X_ét` is flat as soon as its restrictions to an open `U` and to
-the complementary closed subscheme `Z` are flat: flatness is checked on stalks, and every
-geometric point of `X` factors through `U` or through `Z`. -/
+the complementary closed subscheme `Z` are flat. -/
 theorem flat_of_flat_upperStar {U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j]
     [IsClosedImmersion i] (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -76,8 +74,7 @@ theorem flat_of_flat_upperStar {U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [I
   · exact ObjectProperty.prop_of_iso _ ((upperStarCompUliftSheafFiberIso _ i t).app G)
       ((flat_iff_forall_flat_sheafFiber_obj _).1 hi t)
 
-/-- Extension by zero along an open immersion preserves flatness: `j_! L` restricts to `L` on
-`U` and to `0` on the closed complement. -/
+/-- Extension by zero along an open immersion preserves flatness. -/
 theorem flat_openImmersionLowerShriek_obj {U : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     {L : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hL : ObjectProperty.flat L) :
     ObjectProperty.flat ((j)_!open[ModuleCat.{u + 1} Λ].obj L) := by
@@ -88,8 +85,7 @@ theorem flat_openImmersionLowerShriek_obj {U : Scheme.{u}} (j : U ⟶ X) [IsOpen
   · exact ObjectProperty.flat_of_isZero (isZero_upperStar_openImmersionLowerShriek_of_disjoint_range
       _ j i (disjoint_range_of_range_eq_compl j i hi) L)
 
-/-- The pushforward along a closed immersion preserves flatness: `i_* L` restricts to `L` on
-`Z` (`i^* i_* ≅ 𝟭`) and to `0` on the open complement. -/
+/-- The pushforward along a closed immersion preserves flatness. -/
 theorem flat_lowerStar_obj_of_isClosedImmersion {Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] {L : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (hL : ObjectProperty.flat L) :
@@ -114,8 +110,7 @@ theorem flat_lowerStar_openImmersionLowerShriek {U Ubar : Scheme.{u}} (j : U ⟶
 
 /-- Over a finite ring `Λ`, a finite sheaf of `Λ`-modules on `X_ét` (one with finitely generated
 stalks, for instance a finite locally constant sheaf) is flat if and only if all its stalks at
-geometric points are (finite) projective `Λ`-modules: a finite flat module over the Noetherian
-ring `Λ` is finitely presented and flat, hence projective. -/
+geometric points are (finite) projective `Λ`-modules. -/
 theorem flat_iff_forall_projective_sheafFiber [Finite Λ]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteSheaf F] :
     ObjectProperty.flat F ↔ ∀ {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
@@ -145,13 +140,11 @@ section Strata
 
 variable [Finite Λ]
 
-/-- Blueprint `lemma-flat-models-generators--2`, part (1): strata of a flat constructible sheaf.
-
-Let `X` be Noetherian and `F` a flat constructible sheaf of `Λ`-modules on `X_ét`. There is a
-finite chain of opens `∅ = V₀ ⊆ V₁ ⊆ ⋯ ⊆ V_m = X` such that, for every locally closed stratum
-`S_r = V_{r+1} \ V_r` and every immersion `a : Y ⟶ X` with image `S_r`, the restriction `a^* F`
-is finite locally constant and flat, with finite projective stalks. The closed subsets
-`X \ V_r` are the `X_{≥ r}` of the blueprint, and `S_r` is open in `X \ V_r`. -/
+/-- **Strata of a flat constructible sheaf.** Let `X` be Noetherian and `F` a flat constructible
+sheaf of `Λ`-modules on `X_ét`. There is a finite chain of opens `∅ = V₀ ⊆ V₁ ⊆ ⋯ ⊆ V_m = X` such
+that, for every locally closed stratum `S_r = V_{r+1} \ V_r` and every immersion `a : Y ⟶ X`
+with image `S_r`, the restriction `a^* F` is finite locally constant and flat, with finite
+projective stalks. -/
 theorem exists_chain_opens_flat_isFiniteLocallyConstantSheaf [IsNoetherian X]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
     (hF : ObjectProperty.flat F) :
@@ -188,13 +181,10 @@ section Generators
 variable [Finite Λ]
 
 variable (Λ) in
-/-- Blueprint `lemma-flat-models-generators--2`, part (2): the generators lie in `Dctf`.
-
-Let `X` be Noetherian, `a = j ≫ g : U ⟶ X` a locally closed immersion (an open immersion
+/-- Let `X` be Noetherian, `a = j ≫ g : U ⟶ X` a locally closed immersion (an open immersion
 `j : U ⟶ Ū` followed by a closed immersion `g : Ū ⟶ X`) and `L` a flat finite locally constant
 sheaf of `Λ`-modules on `U`. Then `a_! L = g_* j_! L` is a flat constructible sheaf, the derived
-`Rg_* j_! L` (with `j_!` the exact extension by zero) is `a_! L` placed in degree `0`, and it
-lies in `Dctf(X, Λ)` (Tor amplitude `[0, 0]`). -/
+`Rg_* j_! L` is `a_! L` placed in degree `0`, and it lies in `Dctf(X, Λ)`. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar_openImmersionLowerShriek [IsNoetherian X]
     {U Ubar : Scheme.{u}} (j : U ⟶ Ubar) [IsOpenImmersion j]
     (g : Ubar ⟶ X) [IsClosedImmersion g]
@@ -240,8 +230,8 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_openImmersionLowerShriek [I
       torAmplitudeIn_singleFunctor_obj_of_flat Λ _ hf⟩⟩
 
 variable (Λ) in
-/-- Blueprint `lemma-flat-models-generators--2`, part (2): every generator of `ctfGenerators` (an
-object `Rg_* j_! L ≅ a_! L`) lies in `Dctf(X, Λ)`, for `X` Noetherian. -/
+/-- Every generator of `ctfGenerators` (an object `Rg_* j_! L ≅ a_! L`) lies in `Dctf(X, Λ)`,
+for `X` Noetherian. -/
 theorem constructibleFiniteTor_of_ctfGenerators [IsNoetherian X]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : ctfGenerators Λ X K) : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K := by
@@ -251,13 +241,9 @@ theorem constructibleFiniteTor_of_ctfGenerators [IsNoetherian X]
 
 variable (Λ) in
 omit [Finite Λ] in
-/-- Blueprint `lemma-flat-models-generators--2`, part (2): a flat constructible sheaf `F` on a
-Noetherian `X` is an iterated extension of the sheaves `a_! L` of its strata, in the form: every
-triangulated property of objects of `D(X_ét, Λ)`, closed under isomorphisms and holding for the
-generators `Rg_* j_! L ≅ a_! L` (`L` lisse and flat on a stratum), holds for `F` placed in
-degree `0`. This is the Noetherian induction on the open–closed sequences
-`0 ⟶ j_!(F|_U) ⟶ F ⟶ i_* i^* F ⟶ 0` of
-`AlgebraicGeometry.Etale.prop_rightDerivedLowerStar_of_flat`. -/
+/-- Every triangulated property of objects of `D(X_ét, Λ)`, closed under isomorphisms and
+holding for the generators `Rg_* j_! L ≅ a_! L` (`L` lisse and flat on a stratum), holds for a
+flat constructible sheaf `F` on a Noetherian `X` placed in degree `0`. -/
 theorem prop_singleFunctor_of_flat [IsNoetherian X]
     (P : ObjectProperty
       (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
@@ -273,23 +259,12 @@ theorem prop_singleFunctor_of_flat [IsNoetherian X]
       ⊤ (𝟙 X) (by simp) F hF)
 
 variable (Λ) in
-/-- Blueprint `lemma-flat-models-generators--2`: Strata of a flat constructible sheaf and
-generation by `a_! L`, part (3).
-
-Let `X` be a Noetherian scheme and `Λ` a finite commutative ring. Then `Dctf(X, Λ)` is the
-smallest full subcategory of `D(X_ét, Λ)` containing the objects `a_! L` and closed under
-shifts, extensions (cones) and direct summands (`ObjectProperty.triangEnvelope`). Here
-`a = j ≫ g` is a locally closed immersion of a stratum `U` of a stratification of `X`, with
-`j : U ⟶ Ū` open and `g : Ū ⟶ X` the closed immersion of the closure, `a_! L = Rg_* j_! L`
-with `j_!` the extension by zero (as in the notes, no compactification of `j` is used),
-and `L` is locally constant and flat, equivalently with finite projective stalks
-(`AlgebraicGeometry.Etale.flat_iff_forall_projective_sheafFiber`); these are the objects of
-`AlgebraicGeometry.Etale.ctfGenerators`.
-
-The generators lie in `Dctf(X, Λ)` (`constructibleFiniteTor_of_ctfGenerators`), which is thick;
-conversely an object of `Dctf(X, Λ)` has a bounded flat constructible model, whose stupid
-truncations reduce it to its terms, each an iterated extension of sheaves `a_! L`
-(`AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_openImmersionLowerShriek`). -/
+/-- **Generation of `Dctf` by `a_! L`.** Let `X` be a Noetherian scheme and `Λ` a finite
+commutative ring. Then `Dctf(X, Λ)` is the smallest full subcategory of `D(X_ét, Λ)` containing
+the objects of `AlgebraicGeometry.Etale.ctfGenerators` and closed under shifts, extensions and
+direct summands (`ObjectProperty.triangEnvelope`). These are the `a_! L = Rg_* j_! L` for
+`a = j ≫ g` the locally closed immersion of a stratum, `j_!` the extension by zero, and `L`
+locally constant and flat. -/
 theorem constructibleFiniteTor_eq_triangEnvelope_ctfGenerators_of_isNoetherian
     (X : Scheme.{u}) [IsNoetherian X] :
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X = (ctfGenerators Λ X).triangEnvelope := by

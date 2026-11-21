@@ -19,17 +19,7 @@ every finitely generated `Λ`-module `N`, the projection map
 `Rj_* K ⊗ᴸ N_T ⟶ Rj_*(K ⊗ᴸ Lj^* N_T) ≅ Rj_*(K ⊗ᴸ N_U)`
 
 is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat`,
-blueprint `proposition-open-direct-image-preserves-finite`).
-
-As a functor of `N ∈ D(Λ)`, through the constant complex functor `D(Λ) ⥤ D(T_ét, Λ)`
-(`AlgebraicGeometry.Etale.constantFunctor`), the projection map is a natural transformation
-between triangulated functors which preserve countable coproducts: the constant complex functor
-is left adjoint to derived global sections, the derived tensor product and `Lj^*` are left
-adjoints, and `Rj_*` preserves them by hypothesis. It is an isomorphism at the free modules of
-finite rank, so at every finitely generated module
-(`DerivedCategory.isIso_app_singleFunctor_obj_of_finite`), along the telescope of the stupid
-truncations of a finite free resolution.
+(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat`).
 -/
 
 @[expose] public section
@@ -48,9 +38,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The constant complex functor `D(Λ) ⥤ D(X_ét, Λ)` preserves coproducts: it is left adjoint to
-the derived global sections, the constant sheaf functor being an exact left adjoint of the global
-sections functor. -/
+/-- The constant complex functor `D(Λ) ⥤ D(X_ét, Λ)` preserves coproducts. -/
 instance preservesColimitsOfShape_constantFunctor (X : Scheme.{u}) (J : Type*) :
     PreservesColimitsOfShape (Discrete J) (constantFunctor Λ X) :=
   haveI : PreservesFiniteColimits (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
@@ -63,22 +51,11 @@ instance preservesColimitsOfShape_constantFunctor (X : Scheme.{u}) (J : Type*) :
     (isTerminalEtaleTerminal X)).mapDerivedCategoryRightDerivedAdjunction
       ).leftAdjoint_preservesColimits.preservesColimitsOfShape
 
-/-- Constant coefficient tensor
-comparison.
-
-Let `Λ` be a noetherian ring (in the blueprint: a finite ring) and `j : U ⟶ T` a morphism of
-schemes (in the blueprint: an open immersion) such that `Rj_*` on the unbounded derived categories
-of étale sheaves of `Λ`-modules preserves countable coproducts. For every `K ∈ D(U_ét, Λ)` and
-every finitely generated `Λ`-module `N`, the projection map
-`Rj_* K ⊗ᴸ N_T ⟶ Rj_*(K ⊗ᴸ Lj^* N_T)` is an isomorphism; its target is `Rj_*(K ⊗ᴸ N_U)`, as
-`Lj^* N_T ≅ N_U` (`AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`).
-
-The projection map, composed with the constant complex functor, is a natural transformation of
-coproduct-preserving triangulated functors out of `D(Λ)` which is an isomorphism at the free
-modules of finite rank
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMapApp_constantSingle_pi`);
-`DerivedCategory.isIso_app_singleFunctor_obj_of_finite` concludes, along a finite free resolution
-of `N` and the telescope of its stupid truncations. -/
+/-- Constant coefficient tensor comparison: let `Λ` be a noetherian ring and `j : U ⟶ T` a
+morphism of schemes such that `Rj_*` on the unbounded derived categories of étale sheaves of
+`Λ`-modules preserves countable coproducts. For every `K ∈ D(U_ét, Λ)` and every finitely
+generated `Λ`-module `N`, the projection map `Rj_* K ⊗ᴸ N_T ⟶ Rj_*(K ⊗ᴸ Lj^* N_T)` is an
+isomorphism. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantSingle_of_nat
     [IsNoetherianRing Λ] {U T : Scheme.{u}} (j : U ⟶ T)
     [PreservesColimitsOfShape (Discrete ℕ) (R((j)_*[ModuleCat.{u + 1} Λ]))]

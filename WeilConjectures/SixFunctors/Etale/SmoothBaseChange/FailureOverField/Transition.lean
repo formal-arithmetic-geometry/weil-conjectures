@@ -115,10 +115,7 @@ lemma Etale.lowerStarPlusTransition_eq_baseChange {X Y Y' : Scheme.{u}} (a : Y' 
 `p` along `g`, a morphism `π : T' ⟶ T` and a square `sq'` on `p` along `π ≫ g` covering `π`
 through `a`, the derived base-change map of `sq` followed by the transition map of the targets
 is the pullback along `p` of the transition map of the sources followed by the derived
-base-change map of `sq'`. Both composites are the derived base-change map of the square with
-sides `e' ≫ π`, `h'`, `g` and `p`, by the pasting law, once the transition maps are written as
-base-change maps of degenerate squares
-(`AlgebraicGeometry.Etale.lowerStarPlusTransition_eq_baseChange`). -/
+base-change map of `sq'`. -/
 theorem Etale.baseChange_app_comp_lowerStarPlusTransition (sq : CommSq e h g p) (π : T' ⟶ T)
     {e' : Y' ⟶ T'} {h' : Y' ⟶ X} (sq' : CommSq e' h' (π ≫ g) p) (a : Y' ⟶ Y)
     (wa : a ≫ e = e' ≫ π) (wh : a ≫ h = h')

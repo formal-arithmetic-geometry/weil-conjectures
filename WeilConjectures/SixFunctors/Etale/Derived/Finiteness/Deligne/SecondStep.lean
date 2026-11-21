@@ -15,9 +15,11 @@ import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Transport
 Let `j : X ⟶ Y` be an immersion of finite type `S`-schemes with `X` smooth over `S`, and
 `F` a finite locally constant sheaf on `X`, with generic fibre of dimension `≤ n`. Granting
 the generic constructibility theorem in generic dimension `< n` and the smooth case
-`lemma-smooth-morphisms-locally-constant-sheaves`, there is a nonempty open of `S` over which
+(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`), there is a nonempty open of `S` over which
 `Rj_* F` is bounded constructible and commutes with every base change from a noetherian scheme
 (`AlgebraicGeometry.Etale.exists_hasDirectImageBaseChangeOnPlus_of_smooth`).
+
+## Implementation details
 
 The question being local on `Y`, cover `Y` by finitely many affine opens, embed each into a
 projective space over `S` and pass to the scheme-theoretic closure `Ȳ` of `X`. By the first step,
@@ -110,9 +112,7 @@ theorem exists_hasDirectImageBaseChangeOnPlus_of_isClosedImmersion {n : ℕ}
 
 /-- **The second step for an affine target**: as
 `AlgebraicGeometry.Etale.exists_hasDirectImageBaseChangeOnPlus_of_isClosedImmersion`, for an
-immersion `j : X ⟶ Y` into an affine `S`-scheme `Y` of finite type: embed `Y` into a projective
-space over `S`, apply the second step to the scheme-theoretic closure of `X`, then compose with
-the closed immersion into the closure of `Y`, and restrict to the open `Y` of that closure. -/
+immersion `j : X ⟶ Y` into an affine `S`-scheme `Y` of finite type. -/
 theorem exists_hasDirectImageBaseChangeOnPlus_of_smooth_of_isAffine {n : ℕ}
     (hQ : DeligneStatement Λ n) (hsm : SmoothGenericDirectImage Λ) {k : Type u} [Field k]
     {S X Y : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]

@@ -26,15 +26,13 @@ the preservation clauses for `Rf^!`:
 
 ## Main statements
 
-- `Etale.preservation_rightDerivedUpperShriek_of_openComplementBound_constructible`
-  (`theorem-f-shriek-finite-coefficients`, constructibility clause).
-- `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_unconditional`
-  (`theorem-f-shriek-finite-coefficients--1`): the open-complement condition holds with
-  `c_U = 2 (d_U + dim Y)` over a separably closed field.
-- `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_class`
-  (`theorem-f-shriek-finite-coefficients--1`): `Rf^!` sends `D_c^[a, b]` into
-  `D_c^[a - 2D, b + 2 dim Y + 1]`, with the same Tor bound, at every finite coefficient ring at
-  once.
+- `Etale.preservation_rightDerivedUpperShriek_of_openComplementBound_constructible`: the
+  constructibility clause.
+- `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_unconditional`: the
+  open-complement condition holds with `c_U = 2 (d_U + dim Y)` over a separably closed field.
+- `AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_class`: `Rf^!` sends
+  `D_c^[a, b]` into `D_c^[a - 2D, b + 2 dim Y + 1]`, with the same Tor bound, at every finite
+  coefficient ring at once.
 -/
 
 @[expose] public section
@@ -84,9 +82,7 @@ open _root_.DerivedCategory in
 /-- **Dévissage for the direct image under the open-complement condition.** Under the
 open-complement condition with constant `e`, the direct image of a complex with constructible
 homology concentrated in `[a, a + m - 1]` is bounded constructible and concentrated in
-`[a, a + m - 1 + e]`: by induction on `m`, along the truncation triangle
-`τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶` with `b = a + m - 1`, whose third term is `Hᵇ K` placed in
-degree `b`. -/
+`[a, a + m - 1 + e]`. -/
 lemma boundedConstructible_rightDerivedLowerStar_of_openComplementBound_aux
     {V T : Scheme.{u}} {j : V ⟶ T} {e : ℕ} (hj : OpenComplementBound Λ j e) (m : ℕ) :
     ∀ (a : ℤ) (K : _root_.DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
@@ -202,8 +198,7 @@ section ClosedImmersion
 
 /-- Let `i : Z ⟶ T` be a closed immersion whose open complement `j : U ⟶ T` satisfies the
 open-complement condition with constant `e`. Then `Ri^!` sends `D_c^[a, b](T)` into
-`D_c^[a, b + e + 1](Z)`: the localization triangle `Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` bounds
-`Ri_! Ri^! K`, `Rj_* j^* K` lying in `D_c^[a, b + e]`. -/
+`D_c^[a, b + e + 1](Z)`. -/
 theorem boundedConstructible_rightDerivedUpperShriek_of_isClosedImmersion_of_openComplementBound
     {Z T U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
     (j : U ⟶ T) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ) {e : ℕ}
@@ -268,11 +263,9 @@ variable {k : Type u} [Field k]
 
 /-- **The chart step.** Let `v : V ⟶ Y` be an affine open of a finite-type `k`-scheme `Y`, and
 `c : U ⟶ 𝔸ⁿ_V` a closed immersion whose open complement `W` satisfies the open-complement
-condition with constant `e`. Then `R(c ≫ π ≫ v)^! ≅ Rc^! ∘ Rπ^! ∘ Rv^!` sends `D_c^[a, b](Y)` into
-`D_c^[a - 2n, b - 2n + e + 1](U)`: the open immersion `v` preserves the interval, the smooth
-projection `π` shifts it by `-2n`, and the closed immersion `c` widens it by `e + 1`. The same
-holds with Tor amplitudes, as soon as the direct image along `W ⟶ 𝔸ⁿ_V` moves the Tor amplitude
-by at most `e`. -/
+condition with constant `e`. Then `R(c ≫ π ≫ v)^!` sends `D_c^[a, b](Y)` into
+`D_c^[a - 2n, b - 2n + e + 1](U)`. The same holds with Tor amplitudes, as soon as the direct
+image along `W ⟶ 𝔸ⁿ_V` moves the Tor amplitude by at most `e`. -/
 theorem preservation_rightDerivedUpperShriek_chart {U V Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [HasInvertibleExponent Λ Y] (v : V ⟶ Y) [IsOpenImmersion v] [IsAffine V] {n : ℕ}
@@ -340,10 +333,7 @@ finitely many affine charts covering `X`, over affine opens `V i ⊆ Y`, present
 subschemes `c i : U i ⟶ 𝔸^{n i}_{V i}` whose open complements satisfy the open-complement
 condition with constants `e i`. If `n i ≤ D` and `e i + 1 + 2 (D - n i) ≤ C` for all `i`, then
 `Rf^!` sends `D_c^[a, b](Y)` into `D_c^[a - 2D, b - 2D + C](X)`; and with Tor amplitudes as soon
-as the direct images along the open complements move the Tor amplitude by at most `e i`.
-
-Both conditions are local on `X`, and on the chart `U i` the restriction of `Rf^!` is
-`R(c i ≫ π ≫ v)^!` (`AlgebraicGeometry.Etale.preservation_rightDerivedUpperShriek_chart`). -/
+as the direct images along the open complements move the Tor amplitude by at most `e i`. -/
 theorem preservation_rightDerivedUpperShriek_of_charts {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]

@@ -11,8 +11,15 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Strict quotient-unit presentations for reduction representatives
 
-Source: Stacks 06YS, 06YY, 07A6 and 0941. These predicates depend on the reduction
-functor, its adjunction and finite comparisons, independently of the closed tensor data.
+These predicates depend on the reduction functor, its adjunction and finite comparisons,
+independently of the closed tensor data.
+
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -38,9 +45,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local semireducible] DerivedCategory DerivedCategory.Q DerivedCategory.Qh
   _root_.instCategoryDerivedCategory HomologicalComplex.instPreadditive in
 /-- The whole reduction adjunction is computed by the strict quotient-unit map.
-Finite derived evaluations do not fix this equality of system morphisms. The second
-clause fixes the ordinary unit at every degree and coefficient level.
-Source: Stacks 06YY, 07A6 and 0941, deriving the ordinary quotient/limit adjunction. -/
+The second clause fixes the ordinary unit at every degree and coefficient level. -/
 def CoefficientStrictReductionUnitPresentation
     (reduction : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adjunction : reduction ⊣ coefficientSequenceLimit l E W)
@@ -81,8 +86,7 @@ def CoefficientStrictReductionUnitPresentation
 attribute [local irreducible] CoefficientStrictReductionUnitPresentation
 
 /-- A tensor representative retains the finite and horizontal laws as its first two
-projections, followed by its strict whole-system adjunction normalization.
-Source: Stacks 06YS, 06YY, 07A6, 0941. -/
+projections, followed by its strict whole-system adjunction normalization. -/
 structure CoefficientStrictReductionTensorPresentation
     (reduction : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adjunction : reduction ⊣ coefficientSequenceLimit l E W)

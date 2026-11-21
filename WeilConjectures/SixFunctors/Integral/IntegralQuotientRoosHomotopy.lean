@@ -13,7 +13,11 @@ import WeilConjectures.CategoryTheory.Strict.StrictRoosHomotopyFunctor
 
 /-! # The augmented quotient Roos functor before deriving
 
-Source: Stacks Project, Tags 014E, 011G and 08TC.
+## References
+
+* [Stacks, Tag 014E]
+* [Stacks, Tag 011G]
+* [Stacks, Tag 08TC]
 -/
 
 @[expose] public section
@@ -496,26 +500,7 @@ end QuotientRoosProof
 end
 
 /-- The ordinary quotient Roos construction descends to an exact functor on the
-homotopy category, with its zero-second-coordinate augmentation.
-
-Source: Stacks Project, Tags 014E, 011G and 08TC; signed Roos cone calculus.
-
-Proof: Assemble ordinary quotient extension and scalar restriction into an
-additive module-valued tower functor. Its degreewise extension preserves
-homotopies and commutes with shifts and mapping cones, including their
-inclusions and negative projections. Identify its complex-valued tower with
-IntegralOnSlice.tower by the pure-tensor characterization of transition.
-The signed Roos cone calculus preserves compatible homotopies and gives a
-coherent shift comparison and a cone comparison preserving the last arrow.
-Consequently localization of Roos descends through the homotopy quotient,
-and sends every distinguished homotopy triangle to a distinguished derived
-triangle. The module units give an augmentation into the tower. Its Roos
-augmentation has zero second coordinate, so the signed shift comparison
-fixes that augmentation. Descend this natural transformation through the
-full homotopy quotient. Uniqueness of the termwise quotient units and the
-mapping-cocone lift identifies its components with roosUnit. This is all
-before deriving: no K-flat resolution, quasi-isomorphism inversion, derived
-completion functor or completeness assertion is used. -/
+homotopy category, with its zero-second-coordinate augmentation. -/
 theorem integralQuotientRoos_homotopy
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

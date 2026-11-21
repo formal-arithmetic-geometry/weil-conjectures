@@ -18,11 +18,7 @@ locally constant sheaves. Then:
 - `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_upperStar_higherDirectImageQuotPowTower`:
   every level `j^* Hᵏ(Rg_* (Λ ⧸ Iⁿ))` of the restricted tower
   (`AlgebraicGeometry.Etale.higherDirectImageQuotPowTower`), for all `n : ℕ` and `k : ℤ`, is a
-  finite locally constant sheaf of `Λ`-modules. This is the long exact sequence of the
-  triangles attached to `0 ⟶ Λ ⧸ I ⟶ Λ ⧸ Iⁿ⁺¹ ⟶ Λ ⧸ Iⁿ ⟶ 0`, the extension property of finite
-  locally constant sheaves killed by `Iⁿ⁺¹`
-  (`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_shortExact_of_smul_eq_zero`) and
-  the vanishing in negative degrees;
+  finite locally constant sheaf of `Λ`-modules;
 - `AlgebraicGeometry.Etale.isSetFLC_upperStar_higherDirectImageQuotPowTower_obj_of_flcProperty_one`:
   hence these levels are `IsSetFLC`, the hypothesis of the integral identification on a stratum
   (`AlgebraicGeometry.ProEtale.nonempty_iso_homologyUpperStar_integersStratum`);

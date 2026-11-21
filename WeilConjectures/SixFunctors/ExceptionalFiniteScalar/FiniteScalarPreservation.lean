@@ -15,16 +15,7 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 open scoped CategoryTheory.Functor
 namespace WeilConjectures.ExceptionalFiniteScalar
 
-/-- Scalar extension preserves finite-Tor constructibility at a finite coefficient stage.
-Source: Stacks 06YY and 09AL; finite scalar construction, step 1.
-
-Proof in words. A finite-Tor constructible object has a bounded constructible etale-origin
-model with a bounded flat constructible representative. Tensor this representative termwise
-with the target finite coefficient ring. Flatness is preserved by restriction of scalars,
-and finite coefficient changes preserve constructibility of each term and of its cohomology.
-The derived change-of-rings comparison identifies this tensor complex with the pro-etale scalar
-extension, so the resulting object satisfies the target finite-Tor constructibility predicate.
--/
+/-- Scalar extension preserves finite-Tor constructibility at a finite coefficient stage. -/
 theorem finiteScalar_preserves
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E L : Type u) [Field E] [Field L] [Algebra (Padic l) E] [Algebra (Padic l) L]

@@ -40,7 +40,7 @@ morphism
 `BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
 
 of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs` is an isomorphism. No
-hypothesis is imposed on `g`. This is [SGA 4, Exp. XII, Thm 5.1] and Stacks Project, Tag 0DDE.
+hypothesis is imposed on `g`.
 
 The theorem is proved for sheaves of modules over an arbitrary coefficient ring `Λ`, with
 torsion referring to the underlying abelian groups
@@ -88,7 +88,7 @@ variable {X Y X' Y' : Scheme.{u}}
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 /-- A sheaf of `Λ`-modules on the small étale site is torsion if and only if its underlying
-abelian sheaf is: both conditions say that every section is locally torsion. -/
+abelian sheaf is. -/
 lemma Scheme.isTorsionSheaf_sheafCompose_forget₂_obj_iff
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsTorsionSheaf
@@ -136,10 +136,7 @@ whose cohomology sheaves are torsion, the derived base-change morphism
 
 `BC_sq(K) : Lg^*(Rf_* K) ⟶ Rf'_*(Lg'^* K)`
 
-is an isomorphism in `D⁺(Y'_ét, Ab)`. No hypothesis is imposed on `g`. This is
-[SGA 4, Exp. XII, Thm 5.1]. It is deduced from
-`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology` for `Λ = ULift ℤ`,
-through the equivalence between sheaves of `ULift ℤ`-modules and abelian sheaves. -/
+is an isomorphism in `D⁺(Y'_ét, Ab)`. No hypothesis is imposed on `g`. -/
 @[stacks 0DDE]
 theorem Etale.isIso_baseChange_of_isProper [IsProper f] (sq : IsPullback g' f' f g)
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology Ab.{u + 1}))
@@ -181,9 +178,7 @@ open ZeroObject
 
 /-- **Geometric points detect zero sheaves**: an étale sheaf of `Λ`-modules on `Y` whose
 pullbacks to all the geometric points `Spec Ω ⟶ Y`, `Ω` the algebraic closure of a residue
-field of `Y`, vanish is zero
-(`AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective` applied to
-`M ⟶ 0`). -/
+field of `Y`, vanish is zero. -/
 theorem Etale.isZero_of_forall_isZero_upperStar_algClosurePoint {T : Scheme.{u}}
     (M : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (H : ∀ t : T, IsZero ((T.algClosurePoint t)^*[ModuleCat.{u + 1} Λ].obj M)) :
@@ -203,13 +198,7 @@ theorem Etale.isZero_of_forall_isZero_upperStar_algClosurePoint {T : Scheme.{u}}
 `Λ` which is torsion as an additive group: for `f : X ⟶ Y` proper and a point `y` of `Y`, there
 is `d` such that `t^* R^q f_* G = 0` for every `q > d` and every étale sheaf `G` of `Λ`-modules on
 `X`, where `t : Spec Ω ⟶ Y` is the geometric point at `y` and `R^q f_*` is the classical right
-derived functor.
-
-By proper base change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`)
-`t^* R^q f_* G ≅ R^q h_* (G|)` for the geometric fibre `h : X ×_Y Spec Ω ⟶ Spec Ω`, which is
-proper over the algebraically closed field `Ω`, hence of some finite dimension `e`
-(`AlgebraicGeometry.exists_topologicalKrullDim_le`); one takes `d = 2e`
-(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`). -/
+derived functor. -/
 theorem Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper (hΛ : IsAddTorsion Λ)
     {S T : Scheme.{u}} (p : S ⟶ T) [IsProper p] (t : T) :
     ∃ d : ℕ, ∀ (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
@@ -247,18 +236,7 @@ change map
 `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*`
 
 on the unbounded derived categories `D(-_ét, Λ)` is an isomorphism. This is the unbounded
-upgrade of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`.
-
-At each geometric point of `Y'` the higher direct images along the proper map `f'` vanish above
-twice the dimension of the fibre
-(`AlgebraicGeometry.Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper`), so `f'_*`
-sends exact complexes of `f'_*`-acyclic sheaves to exact complexes. Representing an object by a
-K-injective complex `J` with injective terms, `g'^* J` is a complex of `f'_*`-acyclic sheaves by
-the bounded below theorem, and the derived base change map at `J` is the termwise underived base
-change map (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isIso_baseChangeMap`), an
-isomorphism by `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isProper`.
-
-This is blueprint `theorem-results-from-etale-theory--1` (for `Λ` torsion, i.e. a `ℤ/n`-algebra). -/
+upgrade of `AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`. -/
 theorem Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring (hΛ : IsAddTorsion Λ)
     [IsProper f] (sq : IsPullback g' f' f g) :
     IsIso (Etale.derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq) := by

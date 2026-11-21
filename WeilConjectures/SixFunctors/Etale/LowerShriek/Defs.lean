@@ -29,10 +29,9 @@ open immersion, `g` proper), the lower shriek on small étale sites is the compo
 ## Main results
 
 - `AlgebraicGeometry.Etale.preservesFiniteLimits_lowerShriek`: the lower shriek `f_!` with
-  values in an abelian category is left exact. This one needs sheafification to be *exact*,
-  not merely to exist.
+  values in an abelian category is left exact.
 
-## Implementation notes
+## Implementation details
 
 - The pushforward `g_*` of `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` is
   defined along the base change functor, which exists for an *arbitrary* morphism `g` — in
@@ -44,6 +43,9 @@ open immersion, `g` proper), the lower shriek on small étale sites is the compo
   `AlgebraicGeometry.Etale.of_isOpenImmersion`, so the extension by zero along it is
   available; the Kan extension it needs exists because an open immersion is a monomorphism.
   Hence `f_!` carries no hypotheses beyond the standing assumptions on `A`.
+- The extension by zero is sheafification composed with a left Kan extension, so left
+  exactness of `f_!` needs left exactness of sheafification; this is why `HasSheafify`
+  appears in addition to the `HasWeakSheafify` that defines `f_!`.
 -/
 
 @[expose] public section
@@ -92,21 +94,13 @@ lemma lowerShriek_eq :
   rfl
 
 /-- The lower shriek `f_!` on étale sheaves with values in a preadditive category is
-additive, being the composition of the extension by zero along the open immersion of the
-chosen compactification with the pushforward along its proper structure morphism. -/
+additive. -/
 instance lowerShriek_additive : (lowerShriek A f).Additive := by
   rw [lowerShriek_eq]
   infer_instance
 
 /-- The lower shriek `f_!` on étale sheaves with values in an abelian category is left
-exact, being the composition of the exact extension by zero along the open immersion of
-the chosen compactification with the left exact pushforward along its proper structure
-morphism.
-
-The extension by zero is sheafification composed with a left Kan extension, so left
-exactness of sheafification is needed here; see
-`AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek`. This is why
-`HasSheafify` appears in addition to the `HasWeakSheafify` that defines `f_!`. -/
+exact. -/
 instance preservesFiniteLimits_lowerShriek :
     PreservesFiniteLimits (lowerShriek A f) := by
   rw [lowerShriek_eq]

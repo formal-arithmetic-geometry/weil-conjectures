@@ -24,9 +24,7 @@ bottom face `X' ⟶ X`, `Y' ⟶ Y`:
 with `a : W ⟶ Z`, `a' : W' ⟶ Z'`, `e : X ⟶ Y`, `e' : X' ⟶ Y'`. The derived base change maps
 `Ex_*` of the four vertical faces paste in two ways to a map
 `Lg'^* Le^* Rp_* ⟶ Rb'_* La'^* Lgb^*`, and the two composites agree
-(`AlgebraicGeometry.Etale.derivedBaseChangeMap_cube`). The proof transposes along
-`Lb'^* ⊣ Rb'_*` and reduces to the coherence of the composition isomorphisms of the derived
-pullbacks (`AlgebraicGeometry.Etale.derivedSquareUpperStarIso_cube`).
+(`AlgebraicGeometry.Etale.derivedBaseChangeMap_cube`).
 -/
 
 @[expose] public section
@@ -54,8 +52,7 @@ variable {W W' X X' Y Y' Z Z' : Scheme.{u}} {a : W ⟶ Z} {b : W ⟶ X} {p : Z �
 -- a long chain of rewritings with the associativity of the composition isomorphisms
 /-- **Coherence of the square isomorphisms of a cube**: the two composites
 `Lb'^* Lg'^* Le^* ≅ La'^* Lgb^* Lp^*` of square isomorphisms of the derived pullbacks along the
-faces of a commutative cube agree. Both are identified with the composite of the composition
-isomorphisms along the diagonal `W' ⟶ Y`. -/
+faces of a commutative cube agree. -/
 lemma derivedSquareUpperStarIso_cube (S1 : CommSq a b p e) (S2 : CommSq gb p' p g)
     (S3 : CommSq h b' b g') (S4 : CommSq a' b' p' e') (S0 : CommSq g' e' e g)
     (S5 : CommSq h a' a gb) (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :

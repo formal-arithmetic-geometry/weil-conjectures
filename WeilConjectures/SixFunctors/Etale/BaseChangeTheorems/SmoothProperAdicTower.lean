@@ -22,18 +22,10 @@ finitely generated `Λ`-module, and there is `c` such that `L / ℓᵐ ⟶ (Rʲf
 and `(Rʲf_* Gₘ₊꜀)_s ⟶ (Rʲf_* Gₘ)_s` factors through it
 (`AlgebraicGeometry.Etale.exists_artinRees_sheafFiber_homology_rightDerivedLowerStar`).
 
-The stalks are finite by the smooth proper base change theorem
-(`Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper`) and
-the coefficient change `AlgebraicGeometry.Etale.homologyRightDerivedLowerStarRestrictScalarsIso`;
-the long exact sequences of `Rf_*` applied to `0 ⟶ Gₙ ⟶ Gₙ₊ₘ ⟶ Gₘ ⟶ 0` give the data of
-`CategoryTheory.AdicTowerStructure.exists_artinRees`.
-
 The constant `c` can be chosen independently of `s`
-(`AlgebraicGeometry.Etale.exists_forall_sheafFiber_exists_eval_eq_homology_rightDerivedLowerStar`):
-at the sheaf level, the tower `(Rʲf_* Gₘ)ₘ` is uniformly Mittag-Leffler, the image of
-`Rʲf_* Gₘ₊꜀ ⟶ Rʲf_* Gₘ` being contained in that of `Rʲf_* G_k ⟶ Rʲf_* Gₘ` for all `k ≥ m + c`
-(`Etale.exists_imageSubobject_le_homology_rightDerivedLowerStar_of_smooth_of_isProper`),
-as the stalkwise constants at finitely many points suffice.
+(`AlgebraicGeometry.Etale.exists_forall_sheafFiber_exists_eval_eq_homology_rightDerivedLowerStar`),
+and at the sheaf level the tower `(Rʲf_* Gₘ)ₘ` is uniformly Mittag-Leffler
+(`Etale.exists_imageSubobject_le_homology_rightDerivedLowerStar_of_smooth_of_isProper`).
 -/
 
 @[expose] public section
@@ -131,13 +123,7 @@ theorem Etale.exists_artinRees_sheafFiber_homology_rightDerivedLowerStar
 Mittag-Leffler.** In the situation of
 `AlgebraicGeometry.Etale.exists_artinRees_sheafFiber_homology_rightDerivedLowerStar`, there is `c`
 such that for every `m` and `k ≥ m + c`, the image of `Rʲf_* G_{m+c} ⟶ Rʲf_* Gₘ` is contained in
-the image of `Rʲf_* G_k ⟶ Rʲf_* Gₘ`: the tower `(Rʲf_* Gₘ)ₘ` is Artin-Rees isomorphic to the tower
-of its stable images `Eₘ = im(Rʲf_* G_{m+c} ⟶ Rʲf_* Gₘ)`, whose stalk at a geometric point `s`
-is `L_s / ℓᵐ` for the finitely generated limit `L_s` of the stalks
-(`AlgebraicGeometry.Etale.exists_artinRees_sheafFiber_homology_rightDerivedLowerStar`).
-
-The constant `c` is obtained from the stalkwise constants at finitely many points
-(`AlgebraicGeometry.Etale.exists_imageSubobject_le_of_forall_range_sheafFiber_eq`). -/
+the image of `Rʲf_* G_k ⟶ Rʲf_* Gₘ`. -/
 theorem Etale.exists_imageSubobject_le_homology_rightDerivedLowerStar_of_smooth_of_isProper
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (f : X ⟶ Y) [Smooth f] [IsProper f] (ℓ : ℕ) [IsNoetherianRing Λ]

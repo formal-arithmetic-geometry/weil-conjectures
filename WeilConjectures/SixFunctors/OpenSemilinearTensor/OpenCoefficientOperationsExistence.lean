@@ -12,7 +12,12 @@ import Mathlib.CategoryTheory.Sites.Equivalence
 
 /-! # Coefficient transport for the ordinary open operations
 
-Source: Stacks Project, Tags 03DI, 03DJ, 0941 and 098K.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 098K]
 -/
 
 @[expose] public noncomputable section
@@ -519,28 +524,7 @@ private theorem evaluationComparison_sections (n : ℕ)
 
 /-- Transport the quotient tower and its completed ring to the literal open slice.
 This constructs only the coefficient/module transports; it asserts no tensor or
-scalar projection formula.
-Source: Stacks 03DI, 03DJ, 0941 and 098K.
-
-Proof: identify `cbcSliceFunctor` with the concrete slice equivalence supplied by
-weakly-etale localization. Continuous precomposition along this equivalence commutes
-with ring sheafification. Apply its unit comparison to each constant quotient ring,
-oriented from the ambient restricted sheaf to the precomposition of the open sheaf.
-The unit equation is `finiteConstants`. Naturality in the quotient ring maps gives
-the transition squares, first for consecutive indices and then by composition.
-Take the limit of this diagram of isomorphisms. Restriction and equivalence
-precomposition preserve limits, so the resulting completed map is invertible and
-satisfies `projections`. For both completed and finite rings use the two inverse
-site functors and inverse ring maps in `pushforwardPushforwardEquivalence`; its
-forward functor is the prescribed pushforward, and addition of morphisms is
-sectionwise. On the product with the coefficient index category, the transition
-squares define `systemMap` with exactly the finite maps as its components. The
-product site equivalence is continuous because covers are vertical covers, and
-the same module pushforward construction gives `systems`. Evaluation commutes with
-this pushforward by the identity on every underlying section and morphism. These
-identity identifications are `transportEvaluation` and `transportSections`.
-Finally insert the supplied localization as `openSystems`; no property of its
-chosen adjunction or evaluation is needed for this coefficient construction. -/
+scalar projection formula. -/
 theorem openCoefficientOperationsExistence
     (sections : SemilinearDerivedSectionsData.{t + 1, t, max u (t + 1)}
       (ProEt.topology X) (IntegralOpenReduction.rings l E X)

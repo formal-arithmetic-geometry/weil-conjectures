@@ -13,6 +13,12 @@ public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.Exceptio
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 
 /-! # Finite coefficient change for internal Hom
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +33,7 @@ namespace WeilConjectures
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Signed total tensor with its object and map data kept explicit before specialization.
-Source: Stacks 06YN. -/
+/-- Signed total tensor with its object and map data kept explicit before specialization. -/
 def finiteHomCochainTensorGeneral
     (C : Type a) [Category.{b} C] [Preadditive C] [HasZeroObject C]
     [HasColimitsOfSize.{0, 0} C] [MonoidalCategory C] [MonoidalPreadditive C] :
@@ -59,8 +64,7 @@ def finiteHomCochainTensorGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Native tensor and its localization map, shared as a single real construction.
-Source: Stacks 07A4. -/
+/-- Native tensor and its localization map, shared as a single real construction. -/
 structure FiniteHomNativeTensorData
     (C : Type a) [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [hD : HasDerivedCategory.{w} C]
@@ -78,8 +82,7 @@ attribute [local instance] FiniteHomNativeTensorData.cochainCategory
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The published derived tensor together with the published localization tensorator.
-Source: Stacks 07A4. -/
+/-- The published derived tensor together with the published localization tensorator. -/
 def finiteHomNativeTensorDataGeneral
     (C : Type a) [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [hD : HasDerivedCategory.{w} C]
@@ -94,8 +97,7 @@ def finiteHomNativeTensorDataGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The native localization tensorator projected from its shared tensor data.
-Source: Stacks 07A4. -/
+/-- The native localization tensorator projected from its shared tensor data. -/
 def finiteHomLocalizationTensorModelGeneral
     (C : Type a) [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [hD : HasDerivedCategory.{w} C]
@@ -106,8 +108,7 @@ def finiteHomLocalizationTensorModelGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The native tensor functor projected from its shared tensor data.
-Source: Stacks 07A4. -/
+/-- The native tensor functor projected from its shared tensor data. -/
 def finiteHomDerivedTensorGeneral
     (C : Type a) [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [hD : HasDerivedCategory.{w} C]
@@ -117,8 +118,7 @@ def finiteHomDerivedTensorGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The native complex, localization and tensor data before coefficient specialization.
-Source: Stacks 06YN, 07A4. -/
+/-- The native complex, localization and tensor data before coefficient specialization. -/
 def finiteHomEtaleNativeTensorDataGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -130,8 +130,7 @@ def finiteHomEtaleNativeTensorDataGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Source category, signed tensor and localization kept in one real record.
-Source: Stacks 06YN, 07A4. -/
+/-- Source category, signed tensor and localization kept in one real record. -/
 structure FiniteHomTensorSourceData (D : Type a) [Category.{b} D] where
   cochain : Type c
   [cochainCategory : Category.{b} cochain]
@@ -142,8 +141,7 @@ attribute [local instance] FiniteHomTensorSourceData.cochainCategory
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The native etale source data, sharing its category before coefficient specialization.
-Source: Stacks 06YN, 07A4. -/
+/-- The native etale source data, sharing its category before coefficient specialization. -/
 def finiteHomEtaleTensorSourceGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -157,8 +155,7 @@ def finiteHomEtaleTensorSourceGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The same cochain category, projected before coefficient specialization.
-Source: Stacks 06YN. -/
+/-- The same cochain category, projected before coefficient specialization. -/
 abbrev finiteHomEtaleCochainGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -167,8 +164,7 @@ abbrev finiteHomEtaleCochainGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The native category on the shared cochain type.
-Source: Stacks 06YN. -/
+/-- The native category on the shared cochain type. -/
 @[instance_reducible] def finiteHomEtaleCochainCategoryGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -180,8 +176,7 @@ attribute [instance] finiteHomEtaleCochainCategoryGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The same signed total tensor, projected before coefficient specialization.
-Source: Stacks 06YN. -/
+/-- The same signed total tensor, projected before coefficient specialization. -/
 def finiteHomEtaleTotalObjectGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -191,8 +186,7 @@ def finiteHomEtaleTotalObjectGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The native derived tensor functor shared before coefficient specialization.
-Source: Stacks 07A4. -/
+/-- The native derived tensor functor shared before coefficient specialization. -/
 def finiteHomEtaleDerivedTensorGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -202,8 +196,7 @@ def finiteHomEtaleDerivedTensorGeneral
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The same small etale localization tensorator before coefficient specialization.
-Source: Stacks 07A4. -/
+/-- The same small etale localization tensorator before coefficient specialization. -/
 def finiteHomEtaleLocalizationTensorModelGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -211,8 +204,7 @@ def finiteHomEtaleLocalizationTensorModelGeneral
     (W : Scheme.{u}) (P Q : finiteHomEtaleCochainGeneral A W) :=
   (finiteHomEtaleNativeTensorDataGeneral A W).model P Q
 
-/-- Right-tensor adjunction obtained from the published internal Hom and braiding.
- -/
+/-- Right-tensor adjunction obtained from the published internal Hom and braiding. -/
 def finiteHomRightAdjunction {C : Type a} [Category.{b} C] [MonoidalCategory C]
     [BraidedCategory C] [MonoidalClosed C] (P : C) :
     tensorRight P ⊣ Prod.sectR (op P) C ⋙
@@ -223,8 +215,7 @@ def finiteHomRightAdjunction {C : Type a} [Category.{b} C] [MonoidalCategory C]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Naturality of the right-tensor evaluation obtained by symmetry.
- -/
+/-- Naturality of the right-tensor evaluation obtained by symmetry. -/
 theorem finiteHomEvaluation_naturality
     {C : Type a} [Category.{b} C] [MonoidalCategory C] [BraidedCategory C]
     [MonoidalClosed C] (P P' Q : C) (f : P' ⟶ P) :
@@ -249,8 +240,7 @@ theorem finiteHomEvaluation_naturality
   rw [Category.assoc, MonoidalClosed.id_tensor_pre_app_comp_ev]
   rw [← Category.assoc, ← BraidedCategory.braiding_inv_naturality_right, Category.assoc]
 
-/-- The existing closed structure, with Hom tensor P evaluation order.
- -/
+/-- The existing closed structure, with Hom tensor P evaluation order. -/
 def finiteHomClosed {C : Type a} [Category.{b} C] [MonoidalCategory C]
     [BraidedCategory C] [MonoidalClosed C] :
     CoefficientClosedStructure (Functor.uncurry.obj (MonoidalClosed.internalHom (C := C))) where
@@ -261,25 +251,21 @@ def finiteHomClosed {C : Type a} [Category.{b} C] [MonoidalCategory C]
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- The actual positive-level etale category.
- -/
+/-- The actual positive-level etale category. -/
 abbrev finiteHomEtale (n : ℕ) :=
   Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X
 
-/-- The etale derived category uses the published small morphism universe.
- -/
+/-- The etale derived category uses the published small morphism universe. -/
 @[instance_reducible] def finiteHomEtaleCategory (n : ℕ) :
     Category.{u + 1} (finiteHomEtale l E X n) := inferInstance
 
 attribute [instance] finiteHomEtaleCategory
 
-/-- Canonical quotient A_(n + 1) to A_(m + 1).
- -/
+/-- Canonical quotient A_(n + 1) to A_(m + 1). -/
 abbrev finiteHomQuotient {n m : ℕ} (h : m ≤ n) :=
   Scheme.flatModelReductionCoefficientMap l E (m + 1) (n + 1) (Nat.add_le_add_right h 1)
 
-/-- The published Koszul isomorphism, computed before coefficient specialization.
-Source: Stacks 07A4. -/
+/-- The published Koszul isomorphism, computed before coefficient specialization. -/
 def finiteHomKoszulIso (C : Type a)
     [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [HasDerivedCategory.{w} C]
@@ -309,11 +295,7 @@ private theorem finiteHomBraided_ext {C : Type a} [Category.{b} C]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The braid structure is fixed componentwise by the actual Koszul isomorphism.
-Source: Stacks 07A4.
-Proof: use the published derived braiding, whose components are these isomorphisms.
-Naturality and the hexagons descend from complexes. Equality of all components
-and proof irrelevance give uniqueness. -/
+/-- The braid structure is fixed componentwise by the actual Koszul isomorphism. -/
 theorem finiteHomDerivedBraiding_existsUnique (C : Type a)
     [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [HasDerivedCategory.{w} C]
@@ -333,8 +315,7 @@ theorem finiteHomDerivedBraiding_existsUnique (C : Type a)
     apply finiteHomBraided_ext
     exact h
 
-/-- The uniquely normalized Koszul braid structure.
-Source: Stacks 07A4. -/
+/-- The uniquely normalized Koszul braid structure. -/
 @[instance_reducible] def finiteHomDerivedBraiding (C : Type a)
     [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [HasDerivedCategory.{w} C]
@@ -342,8 +323,7 @@ Source: Stacks 07A4. -/
     [Abelian.HasFunctorialFlatResolution C] :=
   (finiteHomDerivedBraiding_existsUnique C).choose
 
-/-- The prescribed right-tensor adjunction before specializing the category.
- -/
+/-- The prescribed right-tensor adjunction before specializing the category. -/
 def finiteHomDerivedRightAdjunctionGeneral
     (C : Type a) [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [HasDerivedCategory.{w} C]
@@ -352,8 +332,7 @@ def finiteHomDerivedRightAdjunctionGeneral
   letI := finiteHomDerivedBraiding C
   finiteHomRightAdjunction P
 
-/-- The native derived internal Hom before choosing an etale coefficient category.
- -/
+/-- The native derived internal Hom before choosing an etale coefficient category. -/
 def finiteHomDerivedInternalHomGeneral
     (C : Type a) [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [HasDerivedCategory.{w} C]
@@ -361,8 +340,7 @@ def finiteHomDerivedInternalHomGeneral
     [Abelian.HasFunctorialFlatResolution C] :=
   Functor.uncurry.obj (MonoidalClosed.internalHom (C := DerivedCategory C))
 
-/-- The prescribed native derived closed normalization, with all data shared.
- -/
+/-- The prescribed native derived closed normalization, with all data shared. -/
 def FiniteHomDerivedClosedNormalization
     (C : Type a) [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [HasDerivedCategory.{w} C]
@@ -373,7 +351,7 @@ def FiniteHomDerivedClosedNormalization
   ∀ P : DerivedCategory C, HEq (S.adjunction P) (finiteHomDerivedRightAdjunctionGeneral C P)
 
 /-- The published etale internal Hom, with its category data shared before
-specializing the coefficient category. Source: blueprint derived Hom. -/
+specializing the coefficient category. -/
 def finiteHomEtaleInternalHomGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -381,8 +359,7 @@ def finiteHomEtaleInternalHomGeneral
     (W : Scheme.{u}) :=
   finiteHomDerivedInternalHomGeneral (Sheaf W.smallEtaleTopology A)
 
-/-- The closed record has the published tensor and the specified right adjunction.
- -/
+/-- The closed record has the published tensor and the specified right adjunction. -/
 def FiniteHomEtaleClosedNormalization
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -437,8 +414,7 @@ private theorem finiteHomDerivedClosed_normalized
   let := finiteHomDerivedBraiding C
   exact finiteHomClosed_normalized
 
-/-- Existence and uniqueness of the normalized closed record.
- -/
+/-- Existence and uniqueness of the normalized closed record. -/
 theorem finiteHomEtaleClosed_existsUnique
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -448,21 +424,18 @@ theorem finiteHomEtaleClosed_existsUnique
 
 end ClosedProof
 
-/-- The uniquely normalized etale closed structure, before specializing coefficients.
- -/
+/-- The uniquely normalized etale closed structure, before specializing coefficients. -/
 def finiteHomEtaleClosedGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
     [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
     (W : Scheme.{u}) := (finiteHomEtaleClosed_existsUnique A W).choose
 
-/-- Closed etale structure for an arbitrary coefficient ring.
- -/
+/-- Closed etale structure for an arbitrary coefficient ring. -/
 def finiteHomEtaleClosedRing (R : Type (u + 1)) [CommRing R] (W : Scheme.{u}) :=
   finiteHomEtaleClosedGeneral (ModuleCat.{u + 1} R) W
 
-/-- Shared closed and tensor data for the positive coefficient quotient diagram.
- -/
+/-- Shared closed and tensor data for the positive coefficient quotient diagram. -/
 structure FiniteHomQuotientClosedData
     (C : ℕ → Type a) [∀ n : ℕ, Category.{b} (C n)]
     (H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n)
@@ -471,8 +444,7 @@ structure FiniteHomQuotientClosedData
   tensor : ∀ {n m : ℕ} (h : m ≤ n),
     (closed n).tensor ⋙ F h ≅ (F h).prod (F h) ⋙ (closed m).tensor
 
-/-- The canonical transpose within shared quotient data.
- -/
+/-- The canonical transpose within shared quotient data. -/
 def FiniteHomQuotientClosedData.comparison
     {C : ℕ → Type a} [∀ n : ℕ, Category.{b} (C n)]
     {H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n}
@@ -480,19 +452,16 @@ def FiniteHomQuotientClosedData.comparison
     (S : FiniteHomQuotientClosedData C H F) {n m : ℕ} (h : m ≤ n) :=
   coefficientBaseChangeHom (S.closed n) (S.closed m) (F h) (S.tensor h)
 
-/-- The published etale Hom, with its contravariant first input.
- -/
+/-- The published etale Hom, with its contravariant first input. -/
 abbrev finiteHomEtaleInternalHom (n : ℕ) :=
   finiteHomEtaleInternalHomGeneral (ModuleCat.{u + 1}
     (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) X
 
-/-- Derived scalar extension in the recorded etale presentation.
- -/
+/-- Derived scalar extension in the recorded etale presentation. -/
 abbrev finiteHomEtaleReduction {n m : ℕ} (h : m ≤ n) :=
   Etale.scalarExtension (finiteHomQuotient l E h) X
 
-/-- A closed family is fixed by its canonical records, with all category data shared.
- -/
+/-- A closed family is fixed by its canonical records, with all category data shared. -/
 def FiniteHomClosedFamilyNormalizationAux
     {C : ℕ → Type a} [∀ n : ℕ, Category.{b} (C n)]
     {H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n}
@@ -501,8 +470,7 @@ def FiniteHomClosedFamilyNormalizationAux
     {V : ℕ → Type (max a b)} (v : ∀ n : ℕ, V n) : Prop :=
   ∀ n : ℕ, HEq (S.closed n) (v n)
 
-/-- A scalar tensor family is fixed by its published isomorphisms.
- -/
+/-- A scalar tensor family is fixed by its published isomorphisms. -/
 def FiniteHomTensorFamilyNormalizationAux
     {C : ℕ → Type a} [∀ n : ℕ, Category.{b} (C n)]
     {H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n}
@@ -512,24 +480,20 @@ def FiniteHomTensorFamilyNormalizationAux
     (v : ∀ {n m : ℕ} (h : m ≤ n), V h) : Prop :=
   ∀ (n m : ℕ) (h : m ≤ n), HEq (S.tensor h) (v h)
 
-/-- The canonical derived closed record, specialized without changing its data.
- -/
+/-- The canonical derived closed record, specialized without changing its data. -/
 def finiteHomEtaleClosedWitnessRing (R : Type (u + 1)) [CommRing R] (W : Scheme.{u}) :=
   finiteHomEtaleClosedRing R W
 
-/-- The canonical closed record at every positive coefficient level.
- -/
+/-- The canonical closed record at every positive coefficient level. -/
 def finiteHomEtaleClosedWitness (n : ℕ) :=
   finiteHomEtaleClosedWitnessRing
     (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X
 
-/-- The published tensor isomorphism at every positive quotient.
- -/
+/-- The published tensor isomorphism at every positive quotient. -/
 abbrev finiteHomEtaleTensorWitness {n m : ℕ} (h : m ≤ n) :=
   Etale.ExceptionalCoefficients.tensorIso (finiteHomQuotient l E h) X
 
-/-- The canonical normalization fixes every data field of the coefficient diagram.
- -/
+/-- The canonical normalization fixes every data field of the coefficient diagram. -/
 structure FiniteHomEtaleDataNormalization
     (S : FiniteHomQuotientClosedData (finiteHomEtale l E X)
       (finiteHomEtaleInternalHom l E X) (finiteHomEtaleReduction l E X)) : Prop where
@@ -599,8 +563,7 @@ private theorem finiteHomQuotientData_normalized
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The coefficient diagram has uniquely normalized closed and tensor data.
- -/
+/-- The coefficient diagram has uniquely normalized closed and tensor data. -/
 theorem finiteHomEtaleData_existsUnique :
     ∃! S, FiniteHomEtaleDataNormalization l E X S := by
   have hc (n : ℕ) : (finiteHomEtaleClosedWitness l E X n).tensor =
@@ -621,26 +584,22 @@ end
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The canonical etale coefficient diagram, with every data field fixed.
- -/
+/-- The canonical etale coefficient diagram, with every data field fixed. -/
 def finiteHomEtaleData := (finiteHomEtaleData_existsUnique l E X).choose
 
-/-- The canonical closed structure at one coefficient level.
- -/
+/-- The canonical closed structure at one coefficient level. -/
 def finiteHomEtaleClosed (n : ℕ) :
     CoefficientClosedStructure (finiteHomEtaleInternalHom l E X n) :=
   (finiteHomEtaleData l E X).closed n
 
-/-- The published canonical scalar tensor comparison.
- -/
+/-- The published canonical scalar tensor comparison. -/
 def finiteHomEtaleTensor {n m : ℕ} (h : m ≤ n) :
     (finiteHomEtaleClosed l E X n).tensor ⋙ finiteHomEtaleReduction l E X h ≅
       (finiteHomEtaleReduction l E X h).prod (finiteHomEtaleReduction l E X h) ⋙
         (finiteHomEtaleClosed l E X m).tensor :=
   (finiteHomEtaleData l E X).tensor h
 
-/-- The etale arrow is exactly the closed transpose of reduced evaluation.
- -/
+/-- The etale arrow is exactly the closed transpose of reduced evaluation. -/
 abbrev etaleFiniteHomCanonical {n m : ℕ} (h : m ≤ n)
     (K M : finiteHomEtale l E X n) :
     (finiteHomEtaleReduction l E X h).obj
@@ -652,13 +611,11 @@ abbrev etaleFiniteHomCanonical {n m : ℕ} (h : m ≤ n)
     (finiteHomEtaleClosed l E X m) (finiteHomEtaleReduction l E X h)
     (finiteHomEtaleTensor l E X h) K M
 
-/-- The intrinsic pro-etale arrow is the published normalized quotient transpose.
- -/
+/-- The intrinsic pro-etale arrow is the published normalized quotient transpose. -/
 abbrev proEtaleFiniteHomCanonical {n m : ℕ} (h : m ≤ n)
     (K M : normalizedDVRDerived l E X n) := finiteIntrinsicReductionHom l E X h K M
 
-/-- The canonical reassociation of intrinsic scalar extensions, as a left-adjoint mate.
- -/
+/-- The canonical reassociation of intrinsic scalar extensions, as a left-adjoint mate. -/
 def finiteHomIntrinsicAssoc {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :=
   Adjunction.leftAdjointCompIso
     ((coefficientDerivedSystemEvaluationCalculus l E X).choose.quotientCalculus.adjunction h)
@@ -679,39 +636,31 @@ private theorem finiteHomLift_comp
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Quotient maps compose as the actual quotient factor homomorphisms.
- -/
+/-- Quotient maps compose as the actual quotient factor homomorphisms. -/
 theorem finiteHomQuotient_comp {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :
     finiteHomQuotient l E (k.trans h) =
       (finiteHomQuotient l E k).comp (finiteHomQuotient l E h) := by
   apply finiteHomLift_comp
 
-/-- The canonical etale scalar associator, with quotient-factor equality.
- -/
+/-- The canonical etale scalar associator, with quotient-factor equality. -/
 def finiteHomEtaleAssoc {n m r : ℕ} (h : m ≤ n) (k : r ≤ m) :=
   ProEtale.pbcFixedScalarExtensionComp X.smallEtaleTopology
     (finiteHomQuotient l E h) (finiteHomQuotient l E k)
     (finiteHomQuotient l E (k.trans h)) (finiteHomQuotient_comp l E h k)
 
-/-- Small coproducts of etale module sheaves, exposed before totalizing complexes.
-Source: Stacks 06YN. -/
+/-- Small coproducts of etale module sheaves, exposed before totalizing complexes. -/
 instance finiteHomEtaleSmallColimits (R : Type (u + 1)) [CommRing R] (W : Scheme.{u}) :
     HasColimitsOfSize.{0, 0} (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
   hasColimitsOfSizeShrink _
 
-/-- Every pair of etale module complexes has its signed total tensor product.
-Source: Stacks 06YN.
-Proof: module-valued sheaves have small coproducts. In each integer degree the
-required coproduct is indexed by the set of pairs of integers with prescribed sum,
-which is small. These coproducts provide HasMapBifunctor and hence HasTensor. -/
+/-- Every pair of etale module complexes has its signed total tensor product. -/
 @[instance] theorem finiteHomEtaleHasTensor
     (R : Type (u + 1)) [CommRing R] (W : Scheme.{u})
     (P Q : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} R)) ℤ) :
     HomologicalComplex.HasTensor P Q := by
   infer_instance
 
-/-- The ordinary sheaf tensor generator before deriving.
-Source: blueprint pure-tensor comparison; Stacks 03EK. -/
+/-- The ordinary sheaf tensor generator before deriving. -/
 def finiteHomEtaleTensorSection (n : ℕ)
     (M N : Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))))
@@ -721,8 +670,7 @@ def finiteHomEtaleTensorSection (n : ℕ)
     (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) M N).app (op U))
       (x ⊗ₜ y)
 
-/-- Inclusion of one signed-total-tensor summand with shared monoidal data.
-Source: Stacks 06YN. -/
+/-- Inclusion of one signed-total-tensor summand with shared monoidal data. -/
 def finiteHomTensorInclusionGeneral
     {C : Type a} [Category.{b} C] [Preadditive C] [MonoidalCategory C]
     [MonoidalPreadditive C] (P Q : CochainComplex C ℤ) [HomologicalComplex.HasTensor P Q]
@@ -730,8 +678,7 @@ def finiteHomTensorInclusionGeneral
     P.X p ⊗ Q.X q ⟶ (HomologicalComplex.tensorObj P Q).X k :=
   HomologicalComplex.ιTensorObj P Q p q k h
 
-/-- Signed-total inclusion with its shared native tensor object as codomain.
-Source: Stacks 06YN. -/
+/-- Signed-total inclusion with its shared native tensor object as codomain. -/
 def finiteHomNativeTensorInclusionGeneral
     (C : Type a) [Category.{b} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
     [HasColimitsOfSize.{0, 0} C] [hD : HasDerivedCategory.{w} C]
@@ -743,8 +690,7 @@ def finiteHomNativeTensorInclusionGeneral
       ((finiteHomNativeTensorDataGeneral C (hD := hD)).cochainTensor.obj (P, Q)).X k :=
   finiteHomTensorInclusionGeneral P Q p q k h
 
-/-- The same native summand inclusion before specializing the coefficient category.
-Source: Stacks 06YN. -/
+/-- The same native summand inclusion before specializing the coefficient category. -/
 def finiteHomEtaleTensorInclusionGeneral
     (A : Type a) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -756,21 +702,18 @@ def finiteHomEtaleTensorInclusionGeneral
     (hD := inferInstanceAs (HasDerivedCategory.{u + 1}
       (Sheaf W.smallEtaleTopology A))) P Q p q k h
 
-/-- Localization in the published small etale derived category.
- -/
+/-- Localization in the published small etale derived category. -/
 abbrev finiteHomEtaleQ (n : ℕ) :=
   (finiteHomEtaleTensorSourceGeneral (ModuleCat.{u + 1}
     (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) X).localization
 
-/-- Localization in the recorded intrinsic standard derived category.
- -/
+/-- Localization in the recorded intrinsic standard derived category. -/
 def finiteHomIntrinsicQ (n : ℕ) :
     CochainComplex (normalizedDVRModules l E X n) ℤ ⥤ normalizedDVRDerived l E X n :=
   letI := HasDerivedCategory.standard (normalizedDVRModules l E X n)
   DerivedCategory.Q
 
-/-- Tensor representatives with all category and functor data kept shared.
- -/
+/-- Tensor representatives with all category and functor data kept shared. -/
 structure FiniteHomQuotientClosedData.Representatives
     {C : ℕ → Type a} [∀ n : ℕ, Category.{b} (C n)]
     {H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n}
@@ -783,8 +726,7 @@ structure FiniteHomQuotientClosedData.Representatives
   model : ∀ (n : ℕ) (P R : A n),
     (S.closed n).tensor.obj ((Q n).obj P, (Q n).obj R) ⟶ (Q n).obj (T n P R)
 
-/-- Representative fields from a family of shared tensor source records.
-Source: Stacks 06YN, 07A4. -/
+/-- Representative fields from a family of shared tensor source records. -/
 abbrev FiniteHomQuotientClosedData.Representatives.fromSources
     {C : ℕ → Type a} [∀ n : ℕ, Category.{b} (C n)]
     {H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n}
@@ -795,8 +737,7 @@ abbrev FiniteHomQuotientClosedData.Representatives.fromSources
   S.Representatives (fun n ↦ (N n).cochain) (fun n ↦ (N n).localization)
     (fun n P Q ↦ (N n).cochainTensor.obj (P, Q)) I V
 
-/-- Pointwise normalization of representative generators and model maps.
-Source: Stacks 06YN, 07A4. -/
+/-- Pointwise normalization of representative generators and model maps. -/
 structure FiniteHomQuotientClosedData.Representatives.Normalization
     {C : ℕ → Type a} [∀ n : ℕ, Category.{b} (C n)]
     {H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n}
@@ -810,8 +751,7 @@ structure FiniteHomQuotientClosedData.Representatives.Normalization
   generator : ∀ i, HEq (R.generator i) (v i)
   model : ∀ n P Z, HEq (R.model n P Z) (t n P Z)
 
-/-- A local pair of sections in a prescribed total-tensor degree.
- -/
+/-- A local pair of sections in a prescribed total-tensor degree. -/
 structure FiniteHomEtaleTensorSectionInput where
   n : ℕ
   P : finiteHomEtaleCochainGeneral (ModuleCat.{u + 1}
@@ -826,23 +766,20 @@ structure FiniteHomEtaleTensorSectionInput where
   x : (P.X p).obj.obj (op U)
   y : (Q.X q).obj.obj (op U)
 
-/-- The actual total tensor object of two etale cochain complexes.
-Source: Stacks 06YN. -/
+/-- The actual total tensor object of two etale cochain complexes. -/
 abbrev finiteHomEtaleTotalObject (n : ℕ)
     (P Q : finiteHomEtaleCochainGeneral (ModuleCat.{u + 1}
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) X) :=
   finiteHomEtaleTotalObjectGeneral _ X P Q
 
-/-- The carrier in which a prescribed total-tensor generator lies.
-Source: Stacks 06YN. -/
+/-- The carrier in which a prescribed total-tensor generator lies. -/
 abbrev finiteHomEtaleTensorSectionCarrier (i : FiniteHomEtaleTensorSectionInput l E X) :
     Type (u + 1) :=
   ((finiteHomEtaleTotalObject l E X i.n i.P i.Q).X i.k).obj.obj (op i.U)
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The total-summand generator before specializing the coefficient ring.
- -/
+/-- The total-summand generator before specializing the coefficient ring. -/
 def finiteHomEtaleCanonicalTensorSectionGeneral
     (B : Type (u + 1)) [CommRing B] (W : Scheme.{u})
     (P Q : finiteHomEtaleCochainGeneral (ModuleCat.{u + 1} B) W)
@@ -854,14 +791,12 @@ def finiteHomEtaleCanonicalTensorSectionGeneral
     (((Functor.LaxMonoidal.μ (sheafToPresheaf W.smallEtaleTopology
       (ModuleCat.{u + 1} B)) (P.X p) (Q.X q)).app (op U)).hom' (x ⊗ₜ y))
 
-/-- The prescribed total-summand generator, with its carrier shared explicitly.
- -/
+/-- The prescribed total-summand generator, with its carrier shared explicitly. -/
 def finiteHomEtaleCanonicalTensorSection (i : FiniteHomEtaleTensorSectionInput l E X) :
     finiteHomEtaleTensorSectionCarrier l E X i :=
   finiteHomEtaleCanonicalTensorSectionGeneral _ X i.P i.Q i.p i.q i.k i.h i.U i.x i.y
 
-/-- Canonical generators and localization tensorators in the recorded etale categories.
- -/
+/-- Canonical generators and localization tensorators in the recorded etale categories. -/
 abbrev FiniteHomEtaleRepresentativeData :=
   FiniteHomQuotientClosedData.Representatives.fromSources (finiteHomEtaleData l E X)
     (fun n ↦ finiteHomEtaleTensorSourceGeneral (ModuleCat.{u + 1}
@@ -872,8 +807,7 @@ set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Both representative maps are fixed by existing tensor constructions.
- -/
+/-- Both representative maps are fixed by existing tensor constructions. -/
 abbrev FiniteHomEtaleRepresentativeNormalization
     (S : FiniteHomEtaleRepresentativeData l E X) : Prop :=
   S.Normalization (finiteHomEtaleCanonicalTensorSection l E X)
@@ -919,14 +853,7 @@ private theorem finiteHomRepresentatives_normalized
   cases ht'
   rfl
 
-/-- The local generators and localization tensorator determine the representative data.
-Source: Stacks 06YN, 07A4.
-Proof: define totalSection by the ordinary sheaf tensor generator followed by the
-actual total-summand inclusion. The closed normalization identifies its tensor
-with the published derived tensor. Transport the localization tensorator along
-that equality to define tensorModel. These constructions give the stated
-heterogeneous equalities. Each equality fixes a field value; function and record
-extensionality therefore prove uniqueness of the entire representative family. -/
+/-- The local generators and localization tensorator determine the representative data. -/
 theorem finiteHomEtaleRepresentativeData_existsUnique :
     ∃! S, FiniteHomEtaleRepresentativeNormalization l E X S := by
   let : ∀ n : ℕ, Category.{u + 1} (finiteHomEtaleCochainGeneral (ModuleCat.{u + 1}
@@ -948,13 +875,11 @@ theorem finiteHomEtaleRepresentativeData_existsUnique :
 
 end RepresentativeProof
 
-/-- The uniquely specified local generators and localization tensorator.
- -/
+/-- The uniquely specified local generators and localization tensorator. -/
 def finiteHomEtaleRepresentativeData :=
   (finiteHomEtaleRepresentativeData_existsUnique l E X).choose
 
-/-- The actual localization tensorator with the normalized closed-tensor endpoint.
-Source: Stacks 07A4. -/
+/-- The actual localization tensorator with the normalized closed-tensor endpoint. -/
 def finiteHomEtaleTensorModel (n : ℕ)
     (P Q : finiteHomEtaleCochainGeneral (ModuleCat.{u + 1}
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) X) :=

@@ -79,8 +79,11 @@ import WeilConjectures.CategoryTheory.Monoidal.Dualizable
 
 /-! # A dualizable coefficient model for restricted integral reduction
 
-Source: the two-term coefficient resolution in the integral Hom reduction proof,
-paragraph 1; Stacks Project, Tags 06YY, 07A4 and 08J7.
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08J7]
 -/
 
 @[expose] public section
@@ -99,14 +102,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 -- Elaborating the independent coefficient universes needs extra definitional-equality steps.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Restricted reduction is tensor with a dualizable coefficient object.
-Source: Stacks 06YY, 07A4, 08J7; integral Hom reduction, paragraph 1.
-Proof: take the two-term resolution of the restricted quotient unit. Its two
-nonzero terms are units, hence dualizable, and the other terms are zero, hence
-dualizable. Bounded termwise duality descends through K-flat localization in the
-independent derived universe. The resolution comparison computes restricted
-reduction on all complexes. Compose it with the one-K-flat native tensor
-comparison and descend this natural isomorphism through localization. -/
+/-- Restricted reduction is tensor with a dualizable coefficient object. -/
 theorem integralReduction_dualizable_coefficient (n : ℕ) :
     let R := completedIntegralCommRingSheaf l E Y D hl
     letI : MonoidalCategory (completedIntegralDerivedCategory l E Y D hl) :=

@@ -16,7 +16,10 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 
 /-! # Associativity on simultaneous resolving representatives
 
-Source: Stacks 07A4 and 0FPT.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0FPT]
 -/
 
 @[expose] public noncomputable section
@@ -247,8 +250,8 @@ include cB cA hε hU hκ hμ
 attribute [local irreducible] coefficientTotalTensor SheafOfModules.monoidalCategory
 
 -- Paste the four model squares without unfolding localization constructions.
-/-- Paste four binary representative squares and the ordinary associativity equation.
-Source: Stacks 07A4 and 0FPT. -/
+/-- On simultaneous K-flat, termwise flat resolving representatives, a tensor comparison
+`μ` is compatible with the associators of the two monoidal structures. -/
 theorem coefficientTensorAssociativityOnRepresentatives
     (P Q N : CochainComplex (RingedTensorModules.{c, v, r} J R) ℤ)
     (hP : P.IsKFlatIndependentCoefficients)

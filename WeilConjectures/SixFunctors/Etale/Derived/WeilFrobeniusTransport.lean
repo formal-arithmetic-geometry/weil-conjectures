@@ -59,11 +59,9 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {Y : Scheme.{u}} {h Φ : Y ⟶ Y}
   {ψM : (L((h)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M}
   {ψN : (L((h)^*[ModuleCat.{u + 1} Λ])).obj N ⟶ N}
 
-/-- Scheme-Frobenius forms of Weil equivariance, for an invertible comparison.
-
-For an isomorphism `κ : LΦ^* ≅ Lh^*` (the comparison `κ_Y` of
-`sec-Weil-complexes`), a square is equivariant for the geometric-Frobenius data
-`ψ` if and only if it is equivariant for the scheme-Frobenius data `κ ≫ ψ`. -/
+/-- Scheme-Frobenius forms of Weil equivariance, for an invertible comparison: for an isomorphism
+`κ : LΦ^* ≅ Lh^*`, a square is equivariant for the geometric-Frobenius data `ψ` if and only if it
+is equivariant for the scheme-Frobenius data `κ ≫ ψ`. -/
 theorem isWeilMorphism_precomp_iff
     (κ : L((Φ)^*[ModuleCat.{u + 1} Λ]) ≅ L((h)^*[ModuleCat.{u + 1} Λ])) {f : M ⟶ N} :
     IsWeilMorphism Φ (κ.hom.app M ≫ ψM) (κ.hom.app N ≫ ψN) f ↔ IsWeilMorphism h ψM ψN f := by
@@ -106,13 +104,9 @@ variable {M N : DerivedCategoryModule Λ Y}
   {ψM : (L((h)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M}
   {ψN : (L((h)^*[ModuleCat.{u + 1} Λ])).obj N ⟶ N}
 
-/-- Compatibilities of Weil equivariance, for a non-invertible exchange.
-
-An operation `F` with an exchange `e : Lh'^* ∘ F ⟶ F ∘ Lh^*` carries equivariance squares to
+/-- An operation `F` with an exchange `e : Lh'^* ∘ F ⟶ F ∘ Lh^*` carries equivariance squares to
 equivariance squares: if `u : M ⟶ N` is a morphism of Weil objects for `ψ_M` and `ψ_N`, then
-`F u` is one for the transported data (`AlgebraicGeometry.Etale.exchangeTransportWeilDatum`).
-For an invertible exchange this is `CategoryTheory.IsWeilEquivariant.map`. The proof is the
-naturality of `e`. -/
+`F u` is one for the transported data (`AlgebraicGeometry.Etale.exchangeTransportWeilDatum`). -/
 theorem IsWeilMorphism.transport {f : M ⟶ N} (hf : IsWeilMorphism h ψM ψN f) :
     IsWeilMorphism h' (exchangeTransportWeilDatum F e ψM) (exchangeTransportWeilDatum F e ψN)
       (F.map f) := by
@@ -139,9 +133,8 @@ section Exchange
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} {a : X ⟶ Y}
   [HasCompactification a] {g : X ⟶ X} {h : Y ⟶ Y}
 
-/-- The compact-support transport `AlgebraicGeometry.Etale.lowerShriekWeilDatum` of
-`prose-10-20` is the transport of Weil data along `Ra_!` with the
-exchange `Ex_!`. -/
+/-- The compact-support transport `AlgebraicGeometry.Etale.lowerShriekWeilDatum` is the transport
+of Weil data along `Ra_!` with the exchange `Ex_!`. -/
 lemma lowerShriekWeilDatum_eq_exchangeTransportWeilDatum [QuasiCompact a]
     (sq : IsPullback g a a h) {K : DerivedCategoryModule Λ X}
     (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :

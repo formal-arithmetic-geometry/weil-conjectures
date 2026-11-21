@@ -64,7 +64,7 @@ the adjoint triple `Etale.localizationAdjunctionTriple` below.
   `AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overMap` of
   `WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension`.
 
-## Implementation notes
+## Implementation details
 
 - `j_{f!}` is defined as the left Kan extension along `(MorphismProperty.Over.map ⊤ h).op`
   on presheaves followed by sheafification; this holds definitionally, see
@@ -113,8 +113,7 @@ end LowerShriek
 section Restriction
 
 /-- The restriction functor `j_f^*` along an étale `f : V ⟶ U`, given objectwise by
-`(j_f^* G)(T → V) = G(T → V → U)`. The continuity of the localization functor is the
-`P = Q = @Etale` case of `AlgebraicGeometry.Scheme.isContinuous_overMap`. -/
+`(j_f^* G)(T → V) = G(T → V → U)`. -/
 def Etale.localizationRestriction :
     Sheaf U.smallEtaleTopology A ⥤ Sheaf V.smallEtaleTopology A :=
   (MorphismProperty.Over.map ⊤ h).sheafPushforwardContinuous A
@@ -170,17 +169,14 @@ section UpperStar
 open Etale
 
 /-- Restriction along the localization functor is left adjoint to the pushforward `f_*`:
-this is the right half of the triple `j_{f!} ⊣ j_f^* ⊣ f_*`. It is induced by the
-adjunction `MorphismProperty.Over.mapPullbackAdj` between the two site functors, and in
-particular requires neither Kan extensions nor sheafification. -/
+this is the right half of the triple `j_{f!} ⊣ j_f^* ⊣ f_*`. -/
 noncomputable def Etale.localizationRestrictionLowerStarAdjunction :
     Etale.localizationRestriction A f h ⊣ (f)_*[A] :=
   (MorphismProperty.Over.mapPullbackAdj @Etale ⊤ f h _root_.trivial).sheafPushforwardContinuous
     (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale)
 
 /-- For an étale `f`, the pullback `f^*` is computed by restriction along the localization
-functor: both are left adjoint to `f_*`. In particular `f^*` needs no sheafification in this
-case, and its sections are given by `Etale.localizationRestriction_obj_val_obj`. -/
+functor. -/
 noncomputable def Etale.upperStarIsoLocalizationRestriction :
     (f)^*[A] ≅ Etale.localizationRestriction A f h :=
   (Etale.upperStarLowerStarAdjunction A f).leftAdjointUniq
@@ -268,8 +264,7 @@ noncomputable def Etale.openImmersionRestrictionLowerStarAdjunction :
 
 /-- The counit of the adjunction `j^* ⊣ j_*` along an open immersion `j` is an
 isomorphism: the restriction of a pushforward along an open immersion is the original
-sheaf. This holds since `j` is a monomorphism, so the unit of the site-level adjunction
-`MorphismProperty.Over.mapPullbackAdj` is an isomorphism. -/
+sheaf. -/
 instance Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit :
     IsIso (Etale.openImmersionRestrictionLowerStarAdjunction A j).counit :=
   Adjunction.isIso_sheafPushforwardContinuous_counit A
@@ -288,11 +283,8 @@ instance Etale.openImmersionRestriction_linear (Λ : Type*) [Semiring Λ] [Linea
 
 namespace Etale
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--7`: Extension by zero for
-open immersions
-
-The lower shriek `j_!` along an open immersion `j : U ⟶ X` on sheaves for the small
-étale sites: the left adjoint of the restriction `j^*`
+/-- Extension by zero for open immersions: the lower shriek `j_!` along an open immersion
+`j : U ⟶ X` on sheaves for the small étale sites, the left adjoint of the restriction `j^*`
 (`AlgebraicGeometry.Etale.localizationLowerShriek`). Its geometric stalks are those of `F` at
 points of `U` (`AlgebraicGeometry.Etale.openImmersionLowerShriekCompUliftSheafFiberIso`) and
 zero elsewhere (`AlgebraicGeometry.Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj`). -/
@@ -319,26 +311,18 @@ instance : (Etale.openImmersionRestriction A j).IsRightAdjoint :=
   (Etale.openImmersionLowerShriekAdjunction A j).isRightAdjoint
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in a
-preadditive category is additive, being left adjoint to the additive restriction `j^*`. -/
+preadditive category is additive. -/
 instance Etale.openImmersionLowerShriek_additive : (j)_!open[A].Additive :=
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_additive
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in a
-`Λ`-linear category is `Λ`-linear, being left adjoint to the `Λ`-linear restriction `j^*`. -/
+`Λ`-linear category is `Λ`-linear. -/
 instance Etale.openImmersionLowerShriek_linear (Λ : Type*) [Semiring Λ] [Linear Λ A] :
     (j)_!open[A].Linear Λ :=
   (Etale.openImmersionLowerShriekAdjunction A j).left_adjoint_linear
 
 /-- The extension by zero `j_!` along an open immersion on étale sheaves with values in an
-abelian category is exact. This is the left exactness half.
-
-`j_!` is the presheaf-level left Kan extension followed by sheafification, and both factors
-are left exact: the first by
-`AlgebraicGeometry.Etale.preservesFiniteLimits_op_lan_overMap`, the second by
-the left exactness of sheafification, which is the content of `HasSheafify` beyond the
-`HasWeakSheafify` needed to define `j_!`; both are provided for the Grothendieck abelian
-coefficient category `A`, the second by the instance of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`. -/
+abelian category is exact. This is the left exactness half. -/
 instance Etale.preservesFiniteLimits_openImmersionLowerShriek :
     PreservesFiniteLimits (j)_!open[A] := by
   have heq : (j)_!open[A] =
@@ -358,8 +342,7 @@ example : PreservesFiniteColimits (j)_!open[A] :=
 
 /-- For an open immersion `j`, the pullback `j^*` of
 `WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs` is computed by restriction along the
-localization functor: both are left adjoint to `j_*`. In particular its sections are given
-by `Etale.openImmersionRestriction_obj_val_obj`. -/
+localization functor. -/
 noncomputable def Etale.upperStarIsoOpenImmersionRestriction :
     (j)^*[A] ≅ Etale.openImmersionRestriction A j :=
   Etale.upperStarIsoLocalizationRestriction A j inferInstance

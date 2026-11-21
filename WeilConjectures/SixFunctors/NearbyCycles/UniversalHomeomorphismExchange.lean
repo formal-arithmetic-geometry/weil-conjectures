@@ -15,13 +15,16 @@ public import WeilConjectures.SixFunctors.NearbyCycles.CartesianModelUnit
 
 A morphism of models which is the identity on total spaces and special fibres and a universal
 homeomorphism on geometric generic fibres has an invertible pullback exchange
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism_generic`): the exchange
-is `Li^* Rj_*` of the unit of `Lg^* ⊣ Rg_*`
-(`NearbyCyclesModel.Hom.pullbackExchange_app_of_total_eq_id`), which is invertible for a universal
-homeomorphism `g` by topological invariance. The file also records two consequences of the square
-and composition laws of pullback exchanges
+(`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism_generic`). The file
+also records two consequences of the square and composition laws of pullback exchanges
 (`NearbyCyclesModel.Hom.isIso_map_pullbackExchange_app_of_square_of_isIso`,
 `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_comp`).
+
+## Implementation details
+
+The exchange is `Li^* Rj_*` of the unit of `Lg^* ⊣ Rg_*`
+(`NearbyCyclesModel.Hom.pullbackExchange_app_of_total_eq_id`), which is invertible for a universal
+homeomorphism `g` by topological invariance.
 -/
 
 @[expose] public section
@@ -57,9 +60,7 @@ theorem Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism_generic (N : Near
 identified schemes.** Let `ρ : M ⟶ N` be a morphism of models over `f` and the identity of special
 fibres, where `M` has the total space and special fibre of `N`, generic fibre `G` with
 `j_M = r ≫ j_N` for a universal homeomorphism `r : G ⟶ 𝒳_{N,η̄}`, and `ρ` is the identity on total
-spaces and `r` on generic fibres. Then the pullback exchange of `ρ` is invertible: `ρ` factors
-through the model with `ε = r ≫ ε_N` by a morphism with invertible components and
-`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isUniversalHomeomorphism_generic`. -/
+spaces and `r` on generic fibres. Then the pullback exchange of `ρ` is invertible. -/
 theorem Hom.isIso_pullbackExchange_app_of_isUniversalHomeomorphism' {Z : Scheme.{u}}
     (N : NearbyCyclesModel X X') (r : G ⟶ N.generic) [IsUniversalHomeomorphism r]
     {j' : G ⟶ N.total} (hj : j' = r ≫ N.j) {ε' : G ⟶ Z} {f : Z ⟶ X}
@@ -124,8 +125,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 fibre map**: for a commutative square of morphisms of models `φ₀ : P ⟶ M`, `ψ : M ⟶ M₁`,
 `ψ' : P ⟶ P₁`, `φ₁ : P₁ ⟶ M₁`, if the pullback exchanges of `ψ` at `C`, of `ψ'` at `Le^* C` and
 of `φ₀` at `Lg^* C` are invertible, then the pullback of the exchange of `φ₁` at `C` along the
-special fibre map `k'` of `ψ'` is invertible. This is the square law
-(`NearbyCyclesModel.Hom.pullbackExchange_square`). -/
+special fibre map `k'` of `ψ'` is invertible. -/
 theorem Hom.isIso_map_pullbackExchange_app_of_square_of_isIso (φ₀ : P.Hom M f₀ f₀')
     (ψ : M.Hom M₁ g g') (ψ' : P.Hom P₁ k k') (φ₁ : P₁.Hom M₁ e e')
     (htot : φ₀.total ≫ ψ.total = ψ'.total ≫ φ₁.total)

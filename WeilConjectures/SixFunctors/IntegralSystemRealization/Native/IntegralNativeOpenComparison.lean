@@ -10,7 +10,13 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Native.IntegralNati
 import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.Normalization.ExactClopenNormalization
 import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 
-/-! # Normalized comparison with the native system operation -/
+/-! # Normalized comparison with the native system operation
+
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -228,8 +234,7 @@ private theorem derivedFiniteOpen_unit {U X : Scheme.{u}} (j : U ⟶ X)
   rw [← he] at h
   exact h
 
-/-- The native open comparison is fixed by uniqueness of the left adjoint to pull.
-Source: Stacks 03DI, 0941. -/
+/-- The native open comparison is fixed by uniqueness of the left adjoint to pull. -/
 def integralNativeOpenIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (a : Open l E j) :
     a.derived ≅ ProEtale.VaryingRing.J (compactSupportSystemLevel l E)
@@ -238,28 +243,7 @@ def integralNativeOpenIso {U X : Scheme.{u}} (j : U ⟶ X)
     (ProEtale.VaryingRing.jAdj (compactSupportSystemLevel l E)
       (compactSupportSystemQuotient l E) j)
 
-/-- Compare exact open extension on whole systems, with its prescribed finite evaluations.
-Source: Stacks 03DI, 0941; blueprint fix-prop-coherence, coefficient comparisons
-of adjunction units and counits.
-
-Proof: the ordinary sequence direct image and VaryingRing.push have identical sections
-and scalar maps, by the constant-section normalization of their ring maps. The identity
-on sections is therefore a natural isomorphism. Ordinary left-adjoint uniqueness gives
-the corresponding inverse-image comparison. Localize this exact comparison to obtain
-pull isomorphic to VaryingRing.G. Transport a.adj by this isomorphism and compare its
-left adjoint with VaryingRing.J using VaryingRing.jAdj. This constructs the whole-system
-isomorphism alpha. The ordinary evaluation/direct-image square is identity on sections;
-transposing under the ordinary adjunctions identifies the inverse-image evaluation
-square with pullbackTensorSequenceInverseEvaluation and the native moduleEvalG.
-Exact localization, with the cochain normalization of pullbackTensorDerivedEvaluation,
-retains this square. Transpose it under the open adjunctions. The transpose equation of
-ea fixes ea.evaluation.inv, and native evalJ.inv is the inverse mate of evalG.hom.
-The finite change of coordinates is compactSupportOpenModel, itself defined by the
-same open-adjunction uniqueness. Thus mate naturality identifies the inverse of the
-displayed equality; invert to obtain the equality. This construction is on entire
-systems, so it retains horizontal maps and uses no faithfulness of derived evaluation.
-For the empty open both extensions are zero; identity opens and zero inputs use the
-same unit identities. The argument applies to arbitrary derived systems. -/
+/-- Compare exact open extension on whole systems, with its prescribed finite evaluations. -/
 theorem integralNativeOpenComparison {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (a : Open l E j) (ea : OpenEvaluation l E a) :
     ∀ (M : System l E U) (n : ℕ),

@@ -9,7 +9,9 @@ public import WeilConjectures.SixFunctors.ConstructibleTensorModel.Constructible
 
 /-! # Normalized ordinary-to-completed tensor comparison
 
-Source: Bhatt--Scholze, Lemma 6.5.5, pp. 49--50.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and Lemma 6.5.5
 -/
 
 @[expose] public noncomputable section
@@ -34,13 +36,7 @@ attribute [local irreducible] IntegralOnSlice.duality IntegralOnSlice.roosUnit
   IntegralAmbient.tensorTowerIso IntegralAmbient.tensorOperationUnit
 
 /-- Descend the canonical chain augmentation to ordinary derived tensor. The comparison
-is invertible whenever the canonical completion unit is invertible.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5.
-
-Proof: compose the canonical completion unit with the existing normalized isomorphism
-from completion of ordinary tensor to completed tensor. Its representative equation
-is the recorded normalization, after cancelling the representative isomorphism.
-Invertibility follows by composition of the unit and that isomorphism. -/
+is invertible whenever the canonical completion unit is invertible. -/
 theorem tensorCompletionComparison
     [∀ w : W, Invertible (l : W.residueField w)] :
     ∃ τ : ordinaryTensor l E W ⟶ integralCompletedTensor l E W,

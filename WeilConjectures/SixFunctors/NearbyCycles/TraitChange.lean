@@ -35,36 +35,23 @@ This is the common input of the trait-change step of Gabber's Künneth formula (
 `Spec K⟦t⟧ ⟶ S'`, `S'` the strict localization of `𝔸¹_S` at the generic point of its special
 fibre).
 
-## Proof outline (Deligne, loc. cit., 3.7–3.9)
-
-By a limit argument and Zariski localization one may assume `N` affine, then projective over
-`S₁`, and one argues by induction on the dimension `n` of the generic fibre. Let `C` be the cone
-of `α`.
-* (A) The cohomology sheaves of `C` have local sections with finite support: on the geometric
-  generic fibres of the coordinate projections `X_s ⟶ 𝔸¹_s`, the nearby cycles are the
-  invariants under a pro-`p` group of the nearby cycles over the strict localizations of `𝔸¹`
-  (Th. finitude, Lemme 3.4), and the induction hypothesis applies to the slices, of dimension
-  `n - 1`, over these strict localizations.
-* (B) `RΓ(X_{s₂}, C) = 0`: by properness both sides compute the cohomology of the geometric generic
-  fibres (proper base change), which is invariant under the extension `Ω₁ ⟶ Ω₂` of algebraically
-  closed fields.
-A complex with cohomology sheaves of finite support and no global cohomology on a proper scheme
-vanishes, so `C = 0`.
-
-## Coefficients
+## Implementation details
 
 The theorem is deduced from its case with coefficients `𝔽_E = 𝒪_E/ϖ`
 (`NearbyCyclesModel.Hom.isIso_map_exchangeRight_app_of_isPullback_trait_residueField`), the
 statement proved by Deligne for torsion coefficients. The pullback exchange is invertible once the
 base change morphism of `Rj_*`, restricted to the special fibre, is; an integral model of the
 `ℚ̄_ℓ`-complex reduces this to `𝒪_E`-coefficients, and derived Nakayama (the complexes involved are
-derived `ϖ`-complete, PR #1792) to `𝔽_E`-coefficients
+derived `ϖ`-complete) to `𝔽_E`-coefficients
 (`ProEtale.CondensedRing.isIso_map_baseChangeMap_app_padicAlgCl_of_integral`).
 
-The case of `𝔽_E`-coefficients is Deligne's induction above
-(`NearbyCyclesModel.traitChangeInvariance`), which needs the change of trait to be unramified
-(`𝔪_{R₂} = 𝔪_{R₁} R₂`) and the geometric generic points to be algebraic, for the slicing
-argument.
+The case of `𝔽_E`-coefficients is `NearbyCyclesModel.traitChangeInvariance`, which needs the
+change of trait to be unramified (`𝔪_{R₂} = 𝔪_{R₁} R₂`) and the geometric generic points to be
+algebraic, for the slicing argument.
+
+## References
+
+* SGA 4½, [Th. finitude], 3.7–3.9
 -/
 
 @[expose] public section
@@ -231,8 +218,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 /-- **Changing the special fibre of the target**: the base change morphism
 `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic fibres, restricted to the special
 fibre of `M`, is invertible at `K` if the pullback exchange of
-`φ.toGenericWithSpecial i f'' h` is: it only involves the geometric generic fibres and the special
-fibre of `M`. -/
+`φ.toGenericWithSpecial i f'' h` is. -/
 theorem isIso_map_exchangeRight_app_of_isIso_pullbackExchange_toGenericWithSpecial
     (φ : M.Hom N f f') (i : Z ⟶ N.total) (f'' : X' ⟶ Z) (h : f'' ≫ i = M.i ≫ φ.total)
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
@@ -268,13 +254,7 @@ situation of `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isPullback_tra
 change morphism `Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` of the square of geometric generic fibres with
 `𝔽_E`-coefficients, restricted to the special fibre of `M`, is invertible at the reduction
 `𝔽_E ⊗ᴸ K₀` of every bounded constructible `𝒪_E`-complex `K₀` on the geometric generic fibre of
-`N`. This is Deligne's theorem for torsion coefficients prime to the residue characteristic, the
-statement proved in loc. cit. The change of trait is assumed unramified and the geometric generic
-points algebraic, as needed by Deligne's slicing argument.
-
-It is deduced from `NearbyCyclesModel.traitChangeInvariance`, with coefficients `𝔽_E` and the
-chart dimension of `N`, after replacing the special fibre of `N` by its fibre over `κ₂`, which
-does not affect the base change morphism. -/
+`N`. The change of trait is assumed unramified and the geometric generic points algebraic. -/
 theorem isIso_map_exchangeRight_app_of_isPullback_trait_residueField [IsLocalHom ι]
     (hι : Function.Injective ι) (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
     (ha₁ : Function.Injective a₁) (ha₂ : Function.Injective a₂)
@@ -339,23 +319,14 @@ theorem isIso_map_exchangeRight_app_of_isPullback_trait_residueField [IsLocalHom
 /-- **Invariance of nearby cycles under change of strictly henselian trait** (SGA 4½,
 [Th. finitude], Prop. 3.7). Let `ι : R₁ ⟶ R₂` be an unramified (`𝔪_{R₂} = 𝔪_{R₁} R₂`)
 injective local homomorphism of strictly henselian discrete valuation rings, with compatible maps
-`aᵢ : Rᵢ ⟶ Ωᵢ` to algebraically closed fields algebraic over `Rᵢ` (`c ∘ a₁ = a₂ ∘ ι`; these
-assumptions are needed by Deligne's slicing argument) and maps `bᵢ : Rᵢ ⟶ κᵢ` with kernel the
-maximal ideal to separably closed fields, `ℓ` invertible in `κ₁`. Let `N` be a model separated
-and of finite type over `S₁ = Spec R₁` along `q₁` (generic fibre over `Spec Ω₁`, special fibre
-over `Spec κ₁`), `M` a model over `S₂ = Spec R₂` along `q₂`, and `φ : M ⟶ N` a morphism of models
-whose square of total spaces over `Spec ι` is cartesian and whose map of generic fibres lies over
-`Spec c`. Then the pullback exchange `α : Lf'^* Ψ_N B ⟶ Ψ_M (Lf^* B)` is an isomorphism for every
-`B` whose restriction `Lε^* B` to the geometric generic fibre of `N` is bounded constructible.
-
-It is deduced from the case of torsion coefficients
-(`NearbyCyclesModel.Hom.isIso_map_exchangeRight_app_of_isPullback_trait_residueField`): the
-pullback exchange is invertible once the base change morphism of `Rj_*` restricted to the special
-fibre is (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_isIso_map_exchangeRight_app`);
-an integral model `K₀` of `Lε^* B` reduces the question to `𝒪_E`-coefficients
-(`ProEtale.CondensedRing.isIso_map_baseChangeMap_app_padicAlgCl_of_integral`), and derived
-Nakayama, for the derived complete `K₀`, to `𝔽_E`-coefficients
-(`ProEtale.CondensedRing.isIso_map_baseChangeMap_app_padicIntegers_of_residueField`). -/
+`aᵢ : Rᵢ ⟶ Ωᵢ` to algebraically closed fields algebraic over `Rᵢ` (`c ∘ a₁ = a₂ ∘ ι`) and maps
+`bᵢ : Rᵢ ⟶ κᵢ` with kernel the maximal ideal to separably closed fields, `ℓ` invertible in `κ₁`.
+Let `N` be a model separated and of finite type over `S₁ = Spec R₁` along `q₁` (generic fibre over
+`Spec Ω₁`, special fibre over `Spec κ₁`), `M` a model over `S₂ = Spec R₂` along `q₂`, and
+`φ : M ⟶ N` a morphism of models whose square of total spaces over `Spec ι` is cartesian and whose
+map of generic fibres lies over `Spec c`. Then the pullback exchange
+`α : Lf'^* Ψ_N B ⟶ Ψ_M (Lf^* B)` is an isomorphism for every `B` whose restriction `Lε^* B` to the
+geometric generic fibre of `N` is bounded constructible. -/
 theorem isIso_pullbackExchange_app_of_isPullback_trait [IsLocalHom ι]
     (hι : Function.Injective ι) (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
     (ha₁ : Function.Injective a₁) (ha₂ : Function.Injective a₂)

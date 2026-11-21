@@ -15,15 +15,12 @@ For a finite ring `Λ` killed by an integer invertible in a field `k`, this file
 every projective morphism `f` between schemes of finite type over `k` satisfies `𝒞(f)`: its
 higher direct images preserve constructibility.
 
-- `AlgebraicGeometry.Etale.hasConstructibleDirectImages_projectiveLine`
-: the projective line `ℙ¹_S ⟶ S`, by
-  resolving a constructible sheaf by finite pushforwards of constant sheaves and using the case of
-  curves;
-- `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_projectiveLine`
-: from the projective line to all
-  projective morphisms, through `(ℙ¹_S)ⁿ ⟶ ℙⁿ_S` (finite and surjective) and composition;
-- `AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isClosedImmersion`
-.
+- `AlgebraicGeometry.Etale.hasConstructibleDirectImages_projectiveLine`: the projective line
+  `ℙ¹_S ⟶ S`;
+- `AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_projectiveLine`: from the projective
+  line to all projective morphisms;
+- `AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isClosedImmersion`: all projective
+  morphisms.
 
 A morphism `f : X ⟶ S` is projective if it is the composite of a
 closed immersion `X ⟶ ℙ(N; S)`, for a finite type `N` of homogeneous coordinates, with the
@@ -53,7 +50,7 @@ instance ProjectiveSpace.isProper_projectiveLinePowProj (n : ℕ) (S : Scheme.{u
 
 /-- **Geometric fibres of a finite cover of the projective line.** For `h : Y ⟶ ℙ¹_S` finite and
 a point `s : Spec Ω ⟶ S` with values in a field, the fibre `Y ×_S Spec Ω` of `h ≫ π` has
-dimension at most one: it is finite over the fibre `ℙ¹_Ω` of `π : ℙ¹_S ⟶ S`. -/
+dimension at most one. -/
 lemma ProjectiveSpace.topologicalKrullDim_pullback_comp_projectiveLine_le_one
     {S Y : Scheme.{u}} (h : Y ⟶ ProjectiveLine S) [IsFinite h] (Ω : Type u) [Field Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -70,12 +67,8 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 
-/-- The case of an affine base of `proposition-proper-direct-image-finite-coefficients`: every
-constructible sheaf `Q` on `ℙ¹_S` embeds into a finite direct sum `G = ⨁ᵢ (hᵢ)_* Mᵢ` of direct
-images of constant sheaves with finite values along finite morphisms `hᵢ : Yᵢ ⟶ ℙ¹_S`. Each `Yᵢ` is
-projective over the affine scheme `S`, with geometric fibres of dimension at most one, so the
-direct images `Rᵠ(hᵢ ≫ π)_* Mᵢ = Rᵠπ_*((hᵢ)_* Mᵢ)` are constructible by the case of curves
-`proposition-proper-direct-image-finite-coefficients`; the resolution principle concludes. -/
+/-- **Constructible coefficients on the projective line over an affine base.** For `S` affine,
+the projection `π : ℙ¹_S ⟶ S` satisfies `𝒞(π)`. -/
 theorem hasConstructibleDirectImages_projectiveLine_of_isAffine
     [HasInvertibleExponent Λ (Spec (.of k))] {S : Scheme.{u}} [IsAffine S]
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] :
@@ -106,8 +99,7 @@ theorem hasConstructibleDirectImages_projectiveLine_of_isAffine
   exact isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf Λ aS _ j hj
     (fun Ω _ _ s ↦ topologicalKrullDim_pullback_comp_projectiveLine_le_one (h i) Ω s) (M i) q
 
-/-- Constructible coefficients on
-the projective line.
+/-- **Constructible coefficients on the projective line.**
 
 Let `S` be of finite type over a field `k`, and let `Λ` be a finite ring killed by an integer
 invertible in `k`. For every constructible sheaf `F` of `Λ`-modules on `ℙ¹_S`, every higher
@@ -137,15 +129,14 @@ theorem hasConstructibleDirectImages_projectiveLine [HasInvertibleExponent Λ (S
     (hasConstructibleDirectImages_projectiveLine_of_isAffine (U.1.ι ≫ aS))
 
 /-- **`𝒞` for finite morphisms.** A finite morphism `f : X ⟶ S` with Noetherian target
-satisfies `𝒞(f)`: `f_*` is exact and preserves constructible sheaves. -/
+satisfies `𝒞(f)`. -/
 theorem hasConstructibleDirectImages_of_isFinite {X S : Scheme.{u}} [IsNoetherian S]
     (f : X ⟶ S) [IsFinite f] : HasConstructibleDirectImages Λ f := fun F _ ↦
   (boundedConstructible_rightDerivedLowerStar_of_isFinite Λ f
     (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)).2
 
 /-- **`𝒞` for the tower of projective lines.** If `𝒞(ℙ¹_T ⟶ T)` holds for every scheme `T` of
-finite type over `k`, then `𝒞((ℙ¹_S)ⁿ ⟶ S)` holds for every `S` of finite type over `k`, the
-projection being a composite of projective lines over successive bases of finite type. -/
+finite type over `k`, then `𝒞((ℙ¹_S)ⁿ ⟶ S)` holds for every `S` of finite type over `k`. -/
 theorem hasConstructibleDirectImages_projectiveLinePowProj
     (h : ∀ (T : Scheme.{u}) (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT],
       HasConstructibleDirectImages Λ (ProjectiveLine T ↘ T))
@@ -159,8 +150,7 @@ theorem hasConstructibleDirectImages_projectiveLinePowProj
     exact hasConstructibleDirectImages_of_isFinite (𝟙 S)
   | succ n ih => exact (h _ (projectiveLinePowProj n S ≫ aS)).comp ih
 
-/-- Projective constructibility
-from projective-line constructibility.
+/-- **Projective constructibility from projective-line constructibility.**
 
 Suppose `𝒞(ℙ¹_T ⟶ T)` holds for every scheme `T` of finite type over `k`. Then `𝒞(f)` holds for
 every projective morphism `f : X ⟶ S` with `S` of finite type over `k`: here `f` is the
@@ -190,8 +180,7 @@ theorem HasConstructibleDirectImages.of_projectiveLine
   subst he
   exact (hasConstructibleDirectImages_of_isFinite e).comp hP
 
-/-- Projective direct-image
-constructibility.
+/-- **Projective direct-image constructibility.**
 
 Let `Λ` be a finite ring killed by an integer invertible in the field `k`. Every projective
 morphism `f : X ⟶ S` with `S` of finite type over `k` (so `f` is the composite of a closed

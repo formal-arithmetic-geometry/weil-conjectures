@@ -127,12 +127,15 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Residue cohomology of a finite integral reduction
 
-Source: Weil blueprint, `lemma-bounds-finite-reductions--2`, proof step 2;
-Stacks Project, Cohomology on Sites, Tags 06YY and 0D6D.
-
 The proof compares universal derived scalar extensions, then computes the finite
 residue extension on its given K-flat representative. Exact restriction detects
 zero cohomology, so no identification of the two coefficient categories is needed.
+
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0D6D]
 -/
 
 @[expose] public section
@@ -605,30 +608,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Iterated reduction to the residue ring and direct level-one reduction have
 vanishing cohomology in exactly the same degrees. No constructibility, completeness
-or cohomological bound is assumed.
-
-Source: blueprint `lemma-bounds-finite-reductions--2`, proof, first sentence;
-Stacks Project, Cohomology on Sites, Tags 06YS and 06YY.
-Proof:
-1. Ordinary scalar extensions with the prescribed objects and maps are naturally
-isomorphic. Uniqueness of universal left derived functors identifies the recorded
-integral reductions with the presentations in successive derived quotient normalization.
-That normalization and the inverse-limit cone equations identify extension of the
-finite reduction to the first quotient with the direct first reduction.
-2. The quotient of A_(n+1) by the image of the uniformizer is the first quotient:
-apply the quotient-of-quotient equivalence to (uniformizer)^(n+1) ≤ (uniformizer).
-The equivalence respects the quotient maps. Its constant-sheaf image identifies
-the two residue regular modules after restricting them to A_(n+1).
-3. On the given K-flat resolution P, the universal counit computes extension to
-the first quotient. Tensor cancellation with the regular target module identifies
-its restriction with tensor by the restricted regular module, naturally in P.
-Symmetry and the tensor-with-single-complex isomorphism identify this with the
-chosen `derivedTensorRing` model. The coefficient-module isomorphism of step 2
-compares that model with the displayed residue quotient tensor.
-4. Restriction of scalars is exact and faithful, since it leaves underlying
-abelian sheaves unchanged. The homology comparison for exact functors therefore
-preserves and reflects zero cohomology. Apply it to the isomorphism of step 1
-and the model comparisons of step 3, in each degree i. -/
+or cohomological bound is assumed. -/
 theorem integralReduction_residue_homology_zero_iff
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : AlgebraicGeometry.Scheme.{u})

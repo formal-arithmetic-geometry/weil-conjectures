@@ -32,18 +32,26 @@ shifts `Λ_s[r]` of the constant complex therefore detect isomorphisms.
 - `AlgebraicGeometry.Etale.isIso_iff_bijective_comp_of_isSepClosed`: a
   morphism `u : P ⟶ Q` of the point category is an isomorphism if and only if
   `Hom(Λ_s[r], u)` is bijective for every `r : ℤ`.
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual`
-: evaluation at the point carries the dual `RHom_s(C, Λ_s)` of
-  an object of `D^b_c(s, Λ)` to the dual `RHom_Λ(RΓ(s, C), Λ)`.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual`: evaluation
+  at the point carries the dual `RHom_s(C, Λ_s)` of an object of `D^b_c(s, Λ)` to the dual
+  `RHom_Λ(RΓ(s, C), Λ)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence`
   : the same for any coefficient category `A` and scheme `X` for which the constant sheaf functor
   `A ⥤ Sheaf X_ét A` is an equivalence of categories.
-- `AlgebraicGeometry.Etale.isEquivalence_rightDerivedGlobalSections_of_isSepClosed`
-: evaluation at the point `RΓ(s, -)` is an equivalence of
-  categories.
-- `AlgebraicGeometry.Etale.homSingleShiftEquivOfIsSepClosed`:
-morphisms
+- `AlgebraicGeometry.Etale.isEquivalence_rightDerivedGlobalSections_of_isSepClosed`: evaluation
+  at the point `RΓ(s, -)` is an equivalence of categories.
+- `AlgebraicGeometry.Etale.homSingleShiftEquivOfIsSepClosed`: morphisms
   `Λ_s[-r] ⟶ C` are the global sections of the `r`-th cohomology sheaf of `C`.
+
+## Implementation details
+
+The essential smallness of the small étale site is registered as a local instance, since
+instance search does not find it in the presence of the imports of this file.
+
+The duality statement is first made for a general coefficient category `A`: in this generality
+the monoidal structures on the derived categories are the ones of
+`AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`, which keeps kernel checks of its
+instances cheap.
 -/
 
 @[expose] public section
@@ -103,17 +111,10 @@ theorem exists_ne_zero_of_not_isZero_homology_of_isSepClosed
   exact (cancel_epi (((DerivedCategory.singleFunctors _).shiftIso (-n) n 0 (by omega)).hom.app
     _)).1 (h0.trans comp_zero.symm)
 
-/-- Detection of isomorphisms at the point.
-
-Let `k` be a separably closed field and `s = Spec k`. A morphism `u : P ⟶ Q` of the point
-category `D(s_ét, Λ)` is an isomorphism if and only if `Hom(Λ_s[r], u)` is bijective for every
-`r : ℤ`, where `Λ_s` is the constant sheaf `Λ` placed in degree `0`.
-
-The blueprint deduces this from the equivalence of the point category with complexes of
-`Λ`-modules. Here the cone `C` of `u` is shown to be zero directly: `Hom(Λ_s[r], C) = 0` for all
-`r` by the long exact sequence, and a nonzero cohomology sheaf `H^n(C)` would give a nonzero
-morphism `Λ_s[-n] ⟶ C`, since an étale sheaf on `Spec k` is determined by its global sections
-(`AlgebraicGeometry.Etale.exists_ne_zero_of_not_isZero_homology_of_isSepClosed`). -/
+/-- Detection of isomorphisms at the point. Let `k` be a separably closed field and
+`s = Spec k`. A morphism `u : P ⟶ Q` of the point category `D(s_ét, Λ)` is an isomorphism if and
+only if `Hom(Λ_s[r], u)` is bijective for every `r : ℤ`, where `Λ_s` is the constant sheaf `Λ`
+placed in degree `0`. -/
 theorem isIso_iff_bijective_comp_of_isSepClosed
     {P Q : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (u : P ⟶ Q) :
@@ -158,8 +159,7 @@ theorem isIso_iff_bijective_comp_of_isSepClosed
 section GlobalSections
 
 /-- Over a separably closed field `k`, the global sections functor on étale sheaves of
-`Λ`-modules on `Spec k` preserves epimorphisms: an epimorphism of sheaves is surjective on
-sections over the terminal object, every covering sieve of which is maximal. -/
+`Λ`-modules on `Spec k` preserves epimorphisms. -/
 instance preservesEpimorphisms_Γ_of_isSepClosed :
     (Sheaf.Γ (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesEpimorphisms where
   preserves {F G} φ _ := by
@@ -187,7 +187,7 @@ instance preservesFiniteColimits_Γ_of_isSepClosed :
 
 /-- Over a separably closed field `k`, the cohomology of the derived global sections of an
 object `L` of `D(Spec(k)_ét, Λ)` is the global sections of its cohomology sheaves:
-`Hⁿ(RΓ(Spec k, L)) ≅ Γ(Spec k, Hⁿ(L))`, the global sections functor being exact. -/
+`Hⁿ(RΓ(Spec k, L)) ≅ Γ(Spec k, Hⁿ(L))`. -/
 noncomputable def homologyRightDerivedGlobalSectionsIsoOfIsSepClosed (n : ℤ) :
     rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k)) ⋙
         DerivedCategory.homologyFunctor _ n ≅
@@ -196,8 +196,7 @@ noncomputable def homologyRightDerivedGlobalSectionsIsoOfIsSepClosed (n : ℤ) :
   (Functor.rightDerivedFunctorHomologyFunctorIso _ n).symm
 
 /-- Over a separably closed field `k`, the global sections of an étale sheaf of `Λ`-modules on
-`Spec k` inject into its stalk at any geometric point: a section vanishing on an étale
-neighbourhood of the point vanishes, as that neighbourhood has a `k`-point. -/
+`Spec k` inject into its stalk at any geometric point. -/
 lemma injective_toPresheafFiber_etalePoint_of_isSepClosed
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Spec (.of k))
@@ -219,8 +218,7 @@ lemma injective_toPresheafFiber_etalePoint_of_isSepClosed
     CategoryTheory.Functor.map_id, ConcreteCategory.id_apply] using this
 
 /-- Over a separably closed field `k`, the global sections of a constructible étale sheaf of
-modules over a noetherian ring `Λ` on `Spec k` form a finite `Λ`-module: they inject into the
-stalk at the geometric point `𝟙 : Spec k ⟶ Spec k`, which is finite. -/
+modules over a noetherian ring `Λ` on `Spec k` form a finite `Λ`-module. -/
 lemma finite_Γ_of_isConstructibleSheaf [IsNoetherianRing Λ]
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf F] :
@@ -239,11 +237,9 @@ lemma finite_Γ_of_isConstructibleSheaf [IsNoetherianRing Λ]
     ((injective_toPresheafFiber_etalePoint_of_isSepClosed F _ x).comp
       ((ConcreteCategory.bijective_of_isIso e.hom).1))
 
-/-- Over a separably closed field `k`, the global sections of an étale sheaf of `Λ`-modules on
-`Spec k` are its stalk at the geometric point `𝟙 : Spec k ⟶ Spec k`: the canonical map is
-injective by `AlgebraicGeometry.Etale.injective_toPresheafFiber_etalePoint_of_isSepClosed`,
-and surjective since every étale neighbourhood of this point has a `k`-point through which the
-point factors. -/
+/-- Over a separably closed field `k`, the canonical map from the global sections of an étale
+sheaf of `Λ`-modules on `Spec k` to its stalk at the geometric point `𝟙 : Spec k ⟶ Spec k` is
+bijective. -/
 lemma bijective_toPresheafFiber_etalePoint_of_isSepClosed
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (x : (pointSmallEtale (𝟙 (Spec (.of k)))).fiber.obj (etalePoint k)) :
@@ -285,8 +281,7 @@ section Flat
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
+/-- The small étale site of a scheme is essentially small. -/
 local instance instEssentiallySmallEtale_point
     (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -294,7 +289,7 @@ local instance instEssentiallySmallEtale_point
   essentiallySmall_of_small_of_locallySmall _
 
 /-- Over a separably closed field `k`, the global sections of a flat étale sheaf of
-`Λ`-modules on `Spec k` form a flat `Λ`-module: they are its stalk at a geometric point. -/
+`Λ`-modules on `Spec k` form a flat `Λ`-module. -/
 lemma flat_Γ_of_isSepClosed {F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (hF : ObjectProperty.flat F) :
     ObjectProperty.flat
@@ -305,9 +300,7 @@ lemma flat_Γ_of_isSepClosed {F : Sheaf (Spec (.of k)).smallEtaleTopology (Modul
     (((pointSmallEtale (𝟙 (Spec (.of k)))).ulift.{u + 1}).flat_sheafFiber_obj hF)
 
 /-- Over a separably closed field `k`, an object of `D(Spec(k)_ét, Λ)` of Tor amplitude in
-`[a, b]` has derived global sections of Tor amplitude in `[a, b]`: it is represented by a
-complex of flat sheaves in degrees `[a, b]`, and the global sections functor is exact and
-preserves flatness (`AlgebraicGeometry.Etale.flat_Γ_of_isSepClosed`). -/
+`[a, b]` has derived global sections of Tor amplitude in `[a, b]`. -/
 lemma torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed {a b : ℤ}
     {L : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hL : _root_.DerivedCategory.torAmplitudeIn _ a b L) :
@@ -330,14 +323,10 @@ lemma torAmplitudeIn_rightDerivedGlobalSections_of_isSepClosed {a b : ℤ}
 
 end Flat
 
-/-- Blueprint `theorem-global-verdier-duality` (cohomology at the point):
-`H^r(-) = Hom_s(Λ[-r], -)`.
-
-Let `k` be a separably closed field and `s = Spec k`. For an object `C` of the point category
-and `r : ℤ`, morphisms `Λ_s[-r] ⟶ C` correspond to elements of the fibre at the geometric point
-(the global sections) of the `r`-th cohomology sheaf of `C`. The constant sheaf `Λ_s` is
-projective, so morphisms `Λ_s[-r] ⟶ C` are morphisms `Λ_s ⟶ H^r(C)`
-(`DerivedCategory.homSingleEquivOfProjective`), and those are global sections of `H^r(C)`. -/
+/-- Cohomology at the point, `H^r(-) = Hom_s(Λ[-r], -)`: for a separably closed field `k`,
+`s = Spec k`, an object `C` of the point category and `r : ℤ`, morphisms `Λ_s[-r] ⟶ C`
+correspond to elements of the fibre at the geometric point (the global sections) of the `r`-th
+cohomology sheaf of `C`. -/
 noncomputable def homSingleShiftEquivOfIsSepClosed
     (C : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (r : ℤ) :
@@ -361,8 +350,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   (X : Scheme.{u}) [(constantSheaf X.smallEtaleTopology A).IsEquivalence]
 
 /-- If the constant sheaf functor `F : A ⥤ Sheaf X_ét A` is an equivalence of categories, the
-global sections functor is a quasi-inverse of `F`, hence exact, and the derived global sections
-`RΓ(X, -)` are the functor induced by `F⁻¹` on derived categories. -/
+derived global sections `RΓ(X, -)` are the functor induced by `F⁻¹` on derived categories. -/
 noncomputable def rightDerivedGlobalSectionsIsoMapDerivedCategoryInv :
     rightDerivedGlobalSections A X ≅
       (constantSheaf X.smallEtaleTopology A).inv.mapDerivedCategory :=
@@ -391,14 +379,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 /-- If the constant sheaf functor `A ⥤ Sheaf X_ét A` is an equivalence of categories (as it is
 for `X` the spectrum of a separably closed field), then the derived global sections carry the
 coefficient dual `RHom(C, Λ_X)` of a complex of étale sheaves to the dual of its derived global
-sections: `RΓ(X, RHom(C, Λ_X)) ≅ RHom(RΓ(X, C), 𝟙)`.
-
-The global sections functor is then the quasi-inverse of the monoidal equivalence
-`constantSheaf`, so its derived functor commutes with derived internal homs
-(`DerivedCategory.mapDerivedCategoryInvIhomUnitIso`). The statement is made for a general
-coefficient category `A`: in this generality the monoidal structures on the derived categories
-are the ones of `AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`, which keeps kernel
-checks of its instances cheap. -/
+sections: `RΓ(X, RHom(C, Λ_X)) ≅ RHom(RΓ(X, C), 𝟙)`. -/
 theorem nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence
     (C : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     Nonempty ((rightDerivedGlobalSections A X).obj
@@ -412,32 +393,20 @@ end
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- The point, evaluated (evaluation at the point is an
-equivalence).
-
-Let `k` be a separably closed field and `s = Spec k`. Evaluation at the geometric point, the
+/-- Let `k` be a separably closed field and `s = Spec k`. Evaluation at the geometric point, the
 derived global sections `RΓ(s, -) : D(s_ét, Λ) ⥤ D(Λ)`, is an equivalence of categories; in
-particular it is conservative. It restricts to the equivalence `Fib_s` of the blueprint between
-the point category `D^b_c(s, Λ)` and the bounded derived category of finite `Λ`-modules. -/
+particular it is conservative. -/
 instance isEquivalence_rightDerivedGlobalSections_of_isSepClosed :
     (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).IsEquivalence :=
   isEquivalence_rightDerivedGlobalSections_of_isEquivalence _ _
 
-/-- The point, evaluated (the duality part).
-
-Let `k` be a separably closed field, `s = Spec k` and `Λ` a coefficient ring. For every
-object `C` of the point category `D^b_c(s, Λ)`, the dual `RHom_s(C, ω_s)`, where
-`ω_s = Ra_s^! Λ = Λ_s` is the unit (`AlgebraicGeometry.Etale.DerivedCategory.coefficientDual`),
-is computed after evaluation at the point by the dual over `Λ`:
+/-- Let `k` be a separably closed field, `s = Spec k` and `Λ` a coefficient ring. For every
+object `C` of the point category, the dual `RHom_s(C, Λ_s)` is computed after evaluation at
+the point by the dual over `Λ`:
 
 `RΓ(s, RHom_s(C, Λ_s)) ≅ RHom_Λ(RΓ(s, C), Λ)`.
 
-Evaluation at the geometric point is the derived global sections `RΓ(s, -)`. Over a separably
-closed field the constant sheaf functor `ModuleCat Λ ⥤ Sheaf s_ét (ModuleCat Λ)` is a monoidal
-equivalence (`AlgebraicGeometry.Scheme.isEquivalence_constantSheaf_of_isSepClosed`) with
-quasi-inverse the global sections, so this is
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_coefficientDual_of_isEquivalence`.
-Neither the finiteness of `Λ` nor the constructibility of `C` is used. -/
+Neither the finiteness of `Λ` nor the constructibility of `C` is assumed. -/
 theorem nonempty_iso_rightDerivedGlobalSections_coefficientDual
     {C : DerivedCategoryModule Λ (Spec (.of k))}
     (_hC : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) C) :

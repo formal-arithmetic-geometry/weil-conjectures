@@ -14,15 +14,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.MinimalCoho
 Let `K` be a separably closed field, `X` a scheme locally of finite type over `K`, and
 `Q ∈ D(X_ét, Λ)` a complex whose cohomology sheaves have vanishing stalks at all non-closed
 points of `X`. If `Q` is bounded below, then `Q = 0` if and only if `H^i(X_ét, Q) = 0` for all
-`i`: if `i` is minimal with
-`ℋ^i(Q) ≠ 0`, then `H^i(X_ét, Q) = Γ(X, ℋ^i(Q))` (`corollary-open-direct-image-over-field--2`), and
-the globally generated sheaf `ℋ^i(Q)` (`corollary-open-direct-image-over-field--2`) has a nonzero
-global section.
+`i`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections_of_isGE`
-  (`corollary-open-direct-image-over-field--2`, bounded below case).
+- `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections_of_isGE`.
 -/
 
 @[expose] public section
@@ -39,16 +35,11 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **detection of objects supported at
-closed points** (bounded below case). Let `K` be a separably closed field, `X` a scheme locally of
-finite type over `K` (structure morphism `p`), and `Q ∈ D(X_ét, Λ)` bounded below (`Q ∈ D^{≥ m}`)
-such that the stalks of all cohomology sheaves `ℋ^q(Q)` at the geometric points over non-closed
-points of `X` vanish. Then `Q = 0` if and only if `H^i(X_ét, Q) = 0` for all `i`.
-
-By induction `Q ∈ D^{≥ m + k}` for all `k`: if `Q ∈ D^{≥ n}`, then
-`H^n(X_ét, Q) ≅ Γ(X, ℋ^n(Q))` (`corollary-open-direct-image-over-field--2`), so `ℋ^n(Q)` has no
-nonzero global sections, and being globally generated (`corollary-open-direct-image-over-field--2`)
-it vanishes. -/
+/-- **Detection of objects supported at closed points** (bounded below case). Let `K` be a
+separably closed field, `X` a scheme locally of finite type over `K` (structure morphism `p`),
+and `Q ∈ D(X_ét, Λ)` bounded below (`Q ∈ D^{≥ m}`) such that the stalks of all cohomology
+sheaves `ℋ^q(Q)` at the geometric points over non-closed points of `X` vanish. Then `Q = 0` if
+and only if `H^i(X_ét, Q) = 0` for all `i`. -/
 theorem isZero_iff_forall_isZero_homology_rightDerivedGlobalSections_of_isGE {K : Type u}
     [Field K] [IsSepClosed K] {X : Scheme.{u}} (p : X ⟶ Spec (.of K)) [LocallyOfFiniteType p]
     (Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (m : ℤ)

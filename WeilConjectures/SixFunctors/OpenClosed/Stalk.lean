@@ -59,9 +59,7 @@ variable {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 /-- The presheaf form of `AlgebraicGeometry.Etale.lowerStarCompSheafFiberIso`: restricting an
 `A`-valued presheaf on the small étale site of `Z` along base change by a closed immersion
 `i : Z ⟶ X` and taking the fibre at the geometric point `s ≫ i` of `X` gives the fibre at
-`s`. Both sides are colimits over categories of pointed étale neighbourhoods, and the
-comparison is `AlgebraicGeometry.Scheme.initial_pointSmallEtaleElementsBaseChange` read
-through `CategoryTheory.Functor.Final.colimIso`. -/
+`s`. -/
 noncomputable def Etale.lowerStarCompPresheafFiberIso :
     (Functor.whiskeringLeft _ _ A).obj i.Etale.op ⋙ (pointSmallEtale (s ≫ i)).presheafFiber ≅
       (pointSmallEtale s).presheafFiber :=
@@ -97,13 +95,10 @@ lemma Etale.toPresheafFiber_lowerStarCompPresheafFiberIso_hom_app (P : Z.Etale�
     ((Functor.Elements.π (pointSmallEtale s).fiber).op ⋙ P)
     (op (Functor.elementsMk _ V y))
 
-/-- Blueprint `lemma-finite-direct-images--1`: **The stalk of a pushforward along a closed
-immersion.** For a closed immersion
-`i : Z ⟶ X` and a geometric point `s : Spec Ω ⟶ Z`, the stalk of `i_* H` at the geometric
-point `s ≫ i` of `X` is the stalk of `H` at `s`, naturally in the sheaf `H`.
-
-On underlying presheaves `(i)_*[A]` *is* restriction along base change, so this is
-`AlgebraicGeometry.Etale.lowerStarCompPresheafFiberIso` restricted to sheaves. -/
+/-- **The stalk of a pushforward along a closed immersion.**
+For a closed immersion `i : Z ⟶ X` and a geometric point `s : Spec Ω ⟶ Z`, the stalk of
+`i_* H` at the geometric point `s ≫ i` of `X` is the stalk of `H` at `s`, naturally in the
+sheaf `H`. -/
 noncomputable def Etale.lowerStarCompSheafFiberIso :
     (i)_*[A] ⋙ (pointSmallEtale (s ≫ i)).sheafFiber ≅ (pointSmallEtale s).sheafFiber :=
   Functor.isoWhiskerLeft (sheafToPresheaf _ A) (Etale.lowerStarCompPresheafFiberIso A i s)

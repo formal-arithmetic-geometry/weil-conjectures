@@ -15,14 +15,8 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 open scoped CategoryTheory.Functor
 namespace WeilConjectures.ExceptionalFiniteScalar
 
-/-- The finite operation package exists for every finite coefficient stage.
-Source: Zheng, Proposition 2.23; Stacks 09AL and 07A4.
-
-This is the operation portion of the eight-step proof: the compact-support and
-exceptional functors are restricted to the full finite-Tor categories, their
-adjunction is normalized on etale-origin witnesses, and the inherited shift data
-is retained. The remaining scalar compatibility is stated separately below.
--/
+/-- The finite operation package exists for every finite coefficient stage: compact-support and
+exceptional functors on the finite-Tor categories, with their adjunction and shift data. -/
 theorem finiteScalarOperation_exists
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

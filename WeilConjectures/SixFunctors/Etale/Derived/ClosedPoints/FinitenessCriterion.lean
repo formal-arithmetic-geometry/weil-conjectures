@@ -18,27 +18,12 @@ sheaves of `Λ`-modules on `X` is bounded constructible as soon as its pullbacks
 cohomology `Rp_* G` are bounded constructible
 (`AlgebraicGeometry.Etale.boundedConstructible_of_upperStar_of_rightDerivedLowerStar_of_isProper`).
 
-This is the form of Deligne's argument (SGA 4½, [Th. finitude], proof of 3.2) used for the
-finiteness of nearby cycles, the `hᵢ` being the geometric generic fibres of the coordinates of
-the charts of the special fibre of `ℙⁿ`.
+This is the form of Deligne's argument used for the finiteness of nearby cycles, the `hᵢ` being
+the geometric generic fibres of the coordinates of the charts of the special fibre of `ℙⁿ`.
 
-## Proof
+## References
 
-Let `F = ℋ^q(G)`. By Deligne's approximation
-(`AlgebraicGeometry.Etale.exists_mono_isConstructibleSheaf_isZero_sheafFiber_cokernel`) it has a
-constructible subsheaf `F₀` with `F / F₀` supported at closed points; for `q` larger than the
-amplitudes of the `Lhᵢ^* G`, `F` itself is supported at closed points.
-* By induction on `q` from below, `τ^{≤ q} G` is bounded constructible: if `τ^{< q} G` is, so is
-  its cohomology (`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper`),
-  hence `H^q(X, τ^{≥ q} G) = Γ(X, F)` is finite
-  (`AlgebraicGeometry.Etale.nonempty_homology_rightDerivedGlobalSections_obj_iso_of_isGE`);
-  then `Γ(X, F / F₀)` is finite, as `H¹(X, F₀)` is, so `F / F₀` is constructible
-  (`AlgebraicGeometry.Etale.isConstructibleSheaf_of_isZero_sheafFiber_of_finite`), and so is `F`.
-* For `N` beyond the amplitudes, `τ^{≥ N} G` has cohomology sheaves supported at closed points,
-  which are acyclic
-  (`AlgebraicGeometry.Etale.isZero_homology_rightDerivedGlobalSections_of_isZero_sheafFiber`), so
-  `H^q(X, τ^{≥ N} G) = Γ(X, ℋ^q(G))` vanishes for large `q`, and `ℋ^q(G) = 0` for large `q`
-  (`AlgebraicGeometry.Etale.isZero_of_isZero_sheafFiber_of_subsingleton`).
+* Deligne, SGA 4½, [Th. finitude], proof of 3.2
 -/
 
 @[expose] public section
@@ -99,8 +84,7 @@ lemma exists_isZero_sheafFiber_homology_of_upperStar {X : Scheme.{u}} {ι : Type
         G)))
 
 /-- Under the hypotheses of Deligne's criterion, all the cohomology sheaves of `G` are
-constructible, by induction from below
-(`AlgebraicGeometry.Etale.isConstructibleSheaf_homology_of_forall_lt`). -/
+constructible. -/
 lemma isConstructibleSheaf_homology_of_upperStar_of_rightDerivedLowerStar {X : Scheme.{u}}
     (p : X ⟶ Spec (.of k)) [IsProper p] {ι : Type*} [Finite ι] {W : ι → Scheme.{u}}
     [∀ i, IsNoetherian (W i)] (h : ∀ i, W i ⟶ X)
@@ -135,8 +119,7 @@ lemma isConstructibleSheaf_homology_of_upperStar_of_rightDerivedLowerStar {X : S
           (m + n)).app G).symm
 
 /-- If the cohomology sheaves of `G` are constructible, supported at closed points above `N`, and
-`Rp_* G` is bounded constructible, then `G` is bounded above: above `N`, `H^q(X, τ^{≥ N + 1} G)`
-is `Γ(X, ℋ^q(G))`, and it vanishes for large `q`. -/
+`Rp_* G` is bounded constructible, then `G` is bounded above. -/
 lemma exists_isLE_of_isZero_sheafFiber_homology {X : Scheme.{u}} (p : X ⟶ Spec (.of k))
     [IsProper p] (G : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (m : ℤ) [G.IsGE m] (N : ℤ)
@@ -189,11 +172,11 @@ lemma exists_isLE_of_isZero_sheafFiber_homology {X : Scheme.{u}} (p : X ⟶ Spec
   exact ModuleCat.isZero_iff_subsingleton.1 ((h₂.of_iso e'.symm).of_iso
     ((Sheaf.ΓNatIsoSheafSections _ _ (isTerminalEtaleTerminal X)).app _).symm)
 
-/-- **Deligne's finiteness criterion at closed points** (SGA 4½, [Th. finitude], proof of 3.2).
-Over a separably closed field `k`, let `p : X ⟶ Spec k` be proper and `hᵢ : Wᵢ ⟶ X` finitely many
-morphisms from Noetherian schemes whose images contain the non-closed points of `X`. A bounded
-below complex `G` of étale sheaves of modules over a finite ring with invertible exponent is
-bounded constructible as soon as the pullbacks `Lhᵢ^* G` and the direct image `Rp_* G` are. -/
+/-- **Deligne's finiteness criterion at closed points.** Over a separably closed field `k`, let
+`p : X ⟶ Spec k` be proper and `hᵢ : Wᵢ ⟶ X` finitely many morphisms from Noetherian schemes
+whose images contain the non-closed points of `X`. A bounded below complex `G` of étale sheaves
+of modules over a finite ring with invertible exponent is bounded constructible as soon as the
+pullbacks `Lhᵢ^* G` and the direct image `Rp_* G` are. -/
 theorem boundedConstructible_of_upperStar_of_rightDerivedLowerStar_of_isProper {X : Scheme.{u}}
     (p : X ⟶ Spec (.of k)) [IsProper p] {ι : Type*} [Finite ι] {W : ι → Scheme.{u}}
     [∀ i, IsNoetherian (W i)] (h : ∀ i, W i ⟶ X)

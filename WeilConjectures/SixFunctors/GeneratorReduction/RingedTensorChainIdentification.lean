@@ -12,7 +12,10 @@ import WeilConjectures.PoincareDuality.StrictTensorAugmentation.StrictTensorAugm
 
 /-! # The canonical ringed tensor chain is the strict quotient augmentation
 
-Source: the full-coordinate uniqueness of the strict tensor augmentation.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08TC]
 -/
 
 @[expose] public noncomputable section
@@ -31,12 +34,7 @@ attribute [local implicit_reducible] integralOperationsTensorComplexFunctor
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The supplied ringed tensor chain is determined by its two canonical coordinates.
-Source: strict tensor augmentation full-coordinate uniqueness, Stacks 07A4 and 08TC.
-Proof: its first canonical clause gives the pure-tensor coordinate in every product
-projection, and its second gives the zero shifted coordinate. These are exactly
-StrictTensorAugmentation.Normalized. The constructed strict augmentation satisfies
-the same clauses. The proved uniqueness theorem identifies the transformations. -/
+/-- The supplied ringed tensor chain is determined by its two canonical coordinates. -/
 theorem ringedTensorChain_eq_strictAugmentation
     (ringed : IntegralSystemRealization.RingedModels l E) (X : Scheme.{u}) :
     (ringed.tensor X).chain = StrictTensorAugmentation.map l E X := by

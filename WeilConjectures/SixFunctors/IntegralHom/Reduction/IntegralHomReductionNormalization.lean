@@ -12,6 +12,11 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionNor
 
 This is the sectionwise and derived counit square required by
 `ReductionPresentation.normalization`..
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public section
@@ -34,14 +39,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] reductionCounit reductionUnit integralDerivedReduction
   integralReductionChangeOfRings
 
-/-- A normalized comparison exists for a fixed target.
-
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
-Proof: apply scalar extension and restriction to K-flat representatives. The
-ordinary unit is `x ↦ 1 ⊗ x`; balanced tensor associativity gives the invertible
-chain comparison and its pure-tensor equation. The derived counit square follows
-from the left-derived universal property and the canonical tensor pullback.
--/
+/-- A normalized comparison exists for a fixed target. -/
 theorem reduction_normalization_exists
     (a : TensorPresentation.{t, u} Y
       (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ)

@@ -24,7 +24,9 @@ immersions of the total spaces with cartesian squares of geometric generic fibre
 `Π_{Lρ_M^* A, Lρ_N^* B}` of the restrictions is invertible, then `Π_{A,B}` is invertible
 (`NearbyCyclesModel.isIso_kunnethMap_of_forall_exists_restriction`).
 
-Indeed the pullback exchanges of open immersions are invertible
+## Implementation details
+
+The pullback exchanges of open immersions are invertible
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isOpenImmersion`), so the compatibility of the
 Künneth map with pullbacks (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`) identifies
 `Π_{A,B}|_W` with `Π_{Lρ_M^* A, Lρ_N^* B}` up to isomorphisms; and a morphism of the derived
@@ -146,14 +148,7 @@ morphisms of models `ρ_M : M' ⟶ M`, `ρ_N : N' ⟶ N`, `ρ_P : P' ⟶ P` comp
 `φ₁ : P ⟶ M`, `φ₂ : P ⟶ N` and `φ₁' : P' ⟶ M'`, `φ₂' : P' ⟶ N'`, whose pullback exchanges
 `α_{ρ_M}`, `α_{ρ_N}`, `α_{ρ_P}` are invertible at `A`, `B` and `A ⊠ B`, the pullback
 `Lρ'^* Π_{A,B}` of the Künneth map is invertible if and only if the Künneth map
-`Π_{Lρ_M^* A, Lρ_N^* B}` is.
-
-Besides restrictions to opens
-(`NearbyCyclesModel.isIso_map_kunnethMap_iff_of_isKunnethRestriction`),
-this is the formal part of the generic-slicing step of Gabber's Künneth formula (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "the composition compatibility in (2)"), where
-`ρ` is the base change to the generic slice of a coordinate and `α_ρ` the slicing identification (2)
-(SGA 4½, [Th. finitude], §3). -/
+`Π_{Lρ_M^* A, Lρ_N^* B}` is. -/
 theorem isIso_map_kunnethMap_iff_of_isIso_pullbackExchange {φ₁ : P.Hom M f₁ f₁'}
     {φ₂ : P.Hom N f₂ f₂'} {φ₁U : PU.Hom MU e₁ e₁'} {φ₂U : PU.Hom NU e₂ e₂'}
     {ρM : MU.Hom M r₁ r₁'} {ρN : NU.Hom N r₂ r₂'} {ρP : PU.Hom P r r'}

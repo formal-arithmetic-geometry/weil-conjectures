@@ -19,13 +19,24 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 /-!
 # Künneth and the projection formula in ordinary étale cohomology
 
-The Künneth formula and the projection formula in ordinary étale cohomology
-(`proposition-ordinary-external-kunneth--1`).
+The Künneth formula and the projection formula in ordinary étale cohomology.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_kunneth`
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper`
+
+## Implementation details
+
+The Künneth formula needs the schemes to be quasi-compact: for `X` the disjoint union of
+countably many copies of `Spec k`, `Y = Spec k`, `Λ = 𝔽_ℓ`, `E = Λ` and `K` a vector space `V`
+in degree `0`, the left-hand side is `(∏ 𝔽_ℓ) ⊗ V` and the right-hand side is `∏ V`, which
+differ for `dim V = ℶ_ω`. It also needs the square to be cartesian: for `W = ∅` and
+`X = Y = Spec k` the right-hand side is `0` and the left-hand side is `Λ`.
+
+## References
+
+* [Stacks, Tag 0F1P]
 -/
 
 @[expose] public section
@@ -51,10 +62,7 @@ variable [Finite Λ] {k : Type u} [Field k] [IsSepClosed k]
   [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y]
 
 omit [HasInvertibleExponent Λ Y] in
-/-- Blueprint `proposition-ordinary-external-kunneth--1`: Künneth and the projection formula in
-ordinary étale cohomology
-
-**Künneth.** Let `k` be separably closed, let the exponent of `Λ` be invertible on `X` and `Y`
+/-- **Künneth.** Let `k` be separably closed, let the exponent of `Λ` be invertible on `X` and `Y`
 and let `X`, `Y` be finite-type `k`-schemes. For the cartesian square
 
 ```
@@ -71,15 +79,7 @@ exhibiting `W = X ×_k Y`, the exterior-product map
 `RΓ(X, E) ⊗^L RΓ(Y, K) ≅ RΓ(X ×_k Y, Lp₁^* E ⊗^L Lp₂^* K)`
 
 is an isomorphism for all `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)` — unbounded, and with no
-properness hypothesis. Without the cartesian hypothesis the statement is false: for `W = ∅`
-and `X = Y = Spec k` the right-hand side is `0` and the left-hand side is `Λ`.
-
-The schemes have to be quasi-compact, as in Stacks 0F1P, which asks for `X` and `Y` of finite type: for `X` the
-disjoint union of countably many copies of `Spec k`, `Y = Spec k`, `Λ = 𝔽_ℓ`, `E = Λ` and `K` a
-vector space `V` in degree `0`, the left-hand side is `(∏ 𝔽_ℓ) ⊗ V` and the right-hand side is
-`∏ V`; for `dim V = ℶ_ω` the second has dimension `ℶ_ω ^ ℵ₀ > ℶ_ω`, the dimension of the first. It
-is `AlgebraicGeometry.Etale.nonempty_iso_kunneth_of_isSepClosed` when `X` is nonempty; when `X`
-is empty both sides vanish. -/
+properness hypothesis. -/
 theorem nonempty_iso_kunneth [QuasiCompact aX] [QuasiCompact aY] {W : Scheme.{u}} (p₁ : W ⟶ X)
     (p₂ : W ⟶ Y) (sq : IsPullback p₁ p₂ aX aY)
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -106,18 +106,10 @@ theorem nonempty_iso_kunneth [QuasiCompact aX] [QuasiCompact aY] {W : Scheme.{u}
     exact nonempty_iso_kunneth_of_isSepClosed Λ aX aY p₁ p₂ sq E K
 
 omit [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] in
-/-- Blueprint `proposition-ordinary-external-kunneth--1`: Künneth and the projection formula in
-ordinary étale cohomology
-
-**The projection formula for a proper morphism.** For `f : X ⟶ Y` proper between finite-type
+/-- **The projection formula for a proper morphism.** For `f : X ⟶ Y` proper between finite-type
 `k`-schemes and all `E ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
 
-`Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)`.
-
-The isomorphism is the projection map `AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`,
-an isomorphism by `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_isProper`
-(`proposition-proper-direct-image-constructible-complexes--9`); the invertibility of the exponent of
-`Λ` is not needed. -/
+`Rf_* E ⊗^L L ≅ Rf_*(E ⊗^L Lf^* L)`. -/
 theorem nonempty_iso_derivedTensor_rightDerivedLowerStar_of_isProper (f : X ⟶ Y) [IsProper f]
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

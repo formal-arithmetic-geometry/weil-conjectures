@@ -22,12 +22,6 @@ subextension `L'` such that every `σ` fixing `L'` pointwise acts as the identit
 (`NearbyCyclesModel.exists_forall_homology_galoisLayerAction_eq_id`), and similarly for finitely
 many degrees at once
 (`NearbyCyclesModel.exists_forall_mem_finset_homology_galoisLayerAction_eq_id`).
-
-Indeed by continuity (`NearbyCyclesModel.nonempty_isColimit_homology_nearbyCycles_galoisTower`)
-`Hᵠ(Ψ_{N_Ω} C)` is the filtered colimit of the cohomology sheaves of the finite layers; since it is
-noetherian, the colimit is attained at some level `L'`
-(`CategoryTheory.exists_epi_ι_of_isNoetherianObject`), on which `σ` acts through its restriction
-to `L'`, i.e. trivially.
 -/
 
 @[expose] public section

@@ -82,14 +82,8 @@ private theorem identityFunctorObject_heq
   subst F'
   rfl
 
-/-- The finite-stage representative formula is the remaining input to the
-normalization argument for `ComparisonCompatible`.
-
-Proof: expand the two normalized tensorators and pullback comparisons, evaluate
-at the chosen finite coefficient stage, and cancel the scalar-unit and transition
-isomorphisms using the representative equation supplied by `hrep`.
-This is the categorical normalization bridge; its only mathematical input is
-the strictly pointwise finite-stage representative formula. -/
+/-- Given the finite-stage representative formula `hrep`, the normalized tensorators and
+pullback comparisons satisfy the normalization equation for `ComparisonCompatible`. -/
 private theorem normalizedProjectionPullbackTensor_heq
     {A : Type v} [Category.{w} A] {B : Type v'} [Category.{w'} B]
     {F F₀ : B ⥤ A} {TX TX₀ : A ⥤ A ⥤ A} {TY TY₀ : B ⥤ B ⥤ B}
@@ -135,13 +129,8 @@ set_option allowUnsafeReducibility true in
 attribute [local irreducible] projectionTransportTensorComparison
   canonicalRationalPullbackTensor canonicalCommonStagePullbackTensor
 
-/-- The normalization and finite-stage cancellation for one input pair.
-
-The proof expands both curried tensorators at the common stage E, replaces the
-supplied pullback comparisons by their canonical maps, and cancels the scalar
-unit and transition isomorphisms against the finite-stage representative
-formula. This is one pointwise component of the comparison-compatible square;
-it is strictly smaller than the universally quantified bridge theorem. -/
+/-- One pointwise component of the comparison-compatible square, deduced from the
+finite-stage representative formula. -/
 theorem projectionTensorComparisonCompatible_component_of_representative_formula
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

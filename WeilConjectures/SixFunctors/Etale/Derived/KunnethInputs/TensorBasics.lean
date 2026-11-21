@@ -20,8 +20,7 @@ instance `A = ModuleCat Λ`).
 
 - `AlgebraicGeometry.Etale.nonempty_derivedTensor_symmetry`.
 - `AlgebraicGeometry.Etale.isIso_derivedTensor_unit_constraints`.
-- `AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_tensor_comparison`
-.
+- `AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_tensor_comparison`.
 -/
 
 @[expose] public section
@@ -44,9 +43,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The derived tensor product on `D(X_ét)` is symmetric: there
 is an isomorphism `K ⊗ᴸ M ≅ M ⊗ᴸ K`, natural in both `K` and `M`, i.e. an isomorphism between the
-bifunctor `- ⊗ᴸ -` and its flip. It is the braiding of the symmetric monoidal structure on
-`D(X_ét)` (`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`), obtained by deriving the
-symmetry of the tensor product of complexes on K-flat replacements. -/
+bifunctor `- ⊗ᴸ -` and its flip. -/
 theorem nonempty_derivedTensor_symmetry (X : Scheme.{u}) :
     Nonempty (derivedTensor A X ≅ (derivedTensor A X).flip) :=
   nonempty_iso_derivedTensor_flip A X
@@ -61,9 +58,7 @@ noncomputable def singleFunctorObjTensorUnitIso (X : Scheme.{u}) :
 
 /-- For `E ∈ D(X_ét)`, the two canonical unit constraints
 `E ⊗ᴸ Λ_X ⟶ E` and `Λ_X ⊗ᴸ E ⟶ E` are isomorphisms, where `Λ_X` is the constant sheaf (the
-monoidal unit of étale sheaves) placed in degree `0`. The constraints are the unitors of the
-monoidal structure of `D(X_ét)` composed with the identification of `Λ_X[0]` with its unit
-(`AlgebraicGeometry.Etale.singleFunctorObjTensorUnitIso`). -/
+monoidal unit of étale sheaves) placed in degree `0`. -/
 theorem isIso_derivedTensor_unit_constraints {X : Scheme.{u}}
     (E : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     IsIso (((derivedTensor A X).obj E).map (singleFunctorObjTensorUnitIso A X).hom ≫
@@ -77,10 +72,7 @@ variable [Etale.UpperStarPreservesFlat A]
 /-- For a morphism of schemes `g : Z ⟶ Y`, the
 derived pullback is monoidal for the derived tensor product: the canonical comparison
 `Lg^*(K ⊗ᴸ L) ⟶ Lg^*K ⊗ᴸ Lg^*L` (`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison`,
-natural in `K` and `L`) is an isomorphism. The blueprint's comparison
-`Lg^*K ⊗ᴸ Lg^*L ⟶ Lg^*(K ⊗ᴸ L)` is its inverse
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso`). Here `A` is assumed to be such that
-the pullbacks preserve flat sheaves, as is the case for `A = ModuleCat Λ`. -/
+natural in `K` and `L`) is an isomorphism, assuming the pullbacks preserve flat sheaves. -/
 theorem isIso_leftDerivedUpperStar_tensor_comparison {Z Y : Scheme.{u}} (g : Z ⟶ Y)
     (K L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     IsIso (((leftDerivedUpperStarTensorComparison A g).app K).app L) :=

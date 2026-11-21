@@ -13,6 +13,10 @@ import WeilConjectures.SmoothPurity.Qcqs.QcqsCompactSupportFiniteComparison
 This module isolates the transported functors and comparison maps from the
 reconstruction and integral realization choices. It is the strictly smaller
 assembly package used by `TransportCorePostData`.
+
+## References
+
+* Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26
 -/
 
 @[expose] public noncomputable section
@@ -23,9 +27,7 @@ namespace WeilConjectures.ExceptionalIntegralScalar
 open ConstructibleExceptionalCoefficients
 
 /-- The transported functors and comparison fields, with the reconstruction and
-integral realization choices supplied as parameters.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24 and 5.26.
--/
+integral realization choices supplied as parameters. -/
 structure TransportCorePostFunctorData
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -132,15 +134,9 @@ private def integralLeftEvaluation
         Functor.isoWhiskerLeft (RX.equivalence.functor ⋙ RX.evaluation n) leftB.symm)
 
 set_option linter.unusedVariables false in
-/-- The strict-system transport and normalized reconstruction calculus produce
-all transported functors, adjunctions, evaluations, and the integral-left
-comparison once the reconstruction and realization choices are fixed.
-The proof is the construction in Zheng, Constructions 4.1 and 5.25,
-Lemma 5.22 and Propositions 5.24 and 5.26: transport the strict adjunction,
-conjugate it through the two reconstruction equivalences, identify finite left
-evaluations, and construct their right comparisons by the mates correspondence.
-The unit and counit identities are part of this explicit construction.
--/
+/-- Once the reconstruction and realization choices are fixed, strict-system transport
+produces all transported functors, adjunctions, evaluations, and the integral-left
+comparison. -/
 theorem exists_exceptional_transport_post_functor_data
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
@@ -192,10 +188,7 @@ theorem exists_exceptional_transport_post_functor_data
 
 set_option linter.unusedVariables false in
 /-- The coherent integral realization supplies the remaining integral-left
-comparison for each field stage. This is the one-field remainder of the
-transport package isolated above.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26.
--/
+comparison for each field stage. -/
 theorem exists_exceptional_transport_integral_left
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

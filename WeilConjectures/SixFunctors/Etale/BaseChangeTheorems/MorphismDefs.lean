@@ -50,25 +50,20 @@ is transported under `R` on the left and `R'` on the right (with the reassociati
   `Etale.baseChangeCounitStep`: the three steps of the construction.
 - `AlgebraicGeometry.Etale.baseChange`: the derived base-change morphism `BC_sq`.
 
-## Implementation notes (@Edison Xie)
+## Implementation details
 
-The component lemmas of `Etale.baseChangeSquareStep` are obtained from the component lemmas
-of `Functor.squareTransport`, which are stated for arbitrary functors. A direct `simp` proof
-on the unfolded concrete transformation elaborates quickly but produces a proof term whose
-kernel check does not terminate in practice, because the kernel normalises the composite
-transformation through the concrete derived functors `rightDerivedFunctorPlus` and
+The component lemmas of `Etale.baseChangeSquareStep` are obtained from those of
+`Functor.squareTransport`, which are stated for arbitrary functors. A direct `simp` proof on the
+unfolded concrete transformation produces a proof term whose kernel check does not terminate in
+practice, because the kernel normalises the composite through `rightDerivedFunctorPlus` and
 `mapDerivedCategoryPlus` into the localised category.
 
-The isomorphism-level lemma `Etale.baseChangeSquareStep_app` is proved by `simp`: its
-left-hand side is headed by the ordinary definition `Iso.app`, for which the kernel compares
-arguments first, so nothing is unfolded. The morphism-level lemmas
-`Etale.baseChangeSquareStep_hom_app` and `Etale.baseChangeSquareStep_inv_app` are instead
-derived from it by `congrArg`. Instantiating `Functor.squareTransport_hom_app` at the
-concrete functors directly (by `simp`, `rw` or `exact`) produces a syntactically matching
-equation, but its kernel check was observed not to terminate: its left-hand side is headed by
-the projection functions `NatTrans.app` and `Iso.hom`, which the kernel reduces by fully
-normalising the underlying structure `squareTransport …` rather than by comparing
-arguments.
+The isomorphism-level lemma `Etale.baseChangeSquareStep_app` is proved by `simp`: its left-hand
+side is headed by `Iso.app`, for which the kernel compares arguments first. The morphism-level
+lemmas `Etale.baseChangeSquareStep_hom_app` and `Etale.baseChangeSquareStep_inv_app` are derived
+from it by `congrArg`; instantiating `Functor.squareTransport_hom_app` directly leads to a
+non-terminating kernel check, since `NatTrans.app` and `Iso.hom` force the kernel to normalise
+`squareTransport …`.
 -/
 
 @[expose] public section
@@ -209,10 +204,8 @@ lemma Etale.baseChange_app (sq : CommSq g' f' f g)
       (baseChangeSquareStep A sq).hom.app K ≫ (baseChangeCounitStep A f f' g').app K := by
   simp [Etale.baseChange_def]
 
-/-- Blueprint `lemma-naturality-pasting-comparison--1`: the derived base-change map is natural in
-the complex: for `u : K ⟶ K'` the square formed by `BC_sq(K)`, `BC_sq(K')`, `g^* Rf_*(u)` and
-`Rf'_* g'^*(u)` commutes, since `AlgebraicGeometry.Etale.baseChange` is a natural
-transformation, being a composite of a unit, a natural isomorphism and a counit. -/
+/-- The derived base-change map is natural in the complex: for `u : K ⟶ K'` the square formed by
+`BC_sq(K)`, `BC_sq(K')`, `g^* Rf_*(u)` and `Rf'_* g'^*(u)` commutes. -/
 lemma Etale.baseChange_naturality (sq : CommSq g' f' f g)
     {K K' : DerivedCategory.Plus (Sheaf X.smallEtaleTopology A)} (u : K ⟶ K') :
     ((g)^*[A]).mapDerivedCategoryPlus.map (R+((f)_*[A]).map u) ≫

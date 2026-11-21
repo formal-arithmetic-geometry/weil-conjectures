@@ -19,24 +19,24 @@ Inputs of the ordinary Künneth formula about the derived global sections
 `RΓ(X, -) : D(X_ét) ⥤ D(A)` on the *unbounded* derived category and the composition of derived
 direct images.
 
-In this development `RΓ(X, -)` is the total right derived functor
-`AlgebraicGeometry.Etale.rightDerivedGlobalSections`, computed with K-injective resolutions,
-which exist in the Grothendieck abelian category of étale sheaves. The direct images `f_*`
-preserve K-injective complexes (being right adjoint to the exact `f^*`), so the Leray
-isomorphism `RΓ(Y, Rf_* E) ≅ RΓ(X, E)` holds on the whole unbounded derived category, for every
-morphism `f`, without the finiteness hypotheses of the blueprint.
-
 ## Main definitions and results
 
 - `AlgebraicGeometry.Etale.rightDerivedGlobalSectionsObjQIso`.
-- `AlgebraicGeometry.Etale.isIso_Q_map_globalSections_of_quasiIso`
-.
-- `AlgebraicGeometry.Etale.rightDerivedGlobalSectionsPlusCompatibility`
-.
+- `AlgebraicGeometry.Etale.isIso_Q_map_globalSections_of_quasiIso`.
+- `AlgebraicGeometry.Etale.rightDerivedGlobalSectionsPlusCompatibility`.
 - `AlgebraicGeometry.Etale.isGE_rightDerivedLowerStar_obj'`.
 - `AlgebraicGeometry.Etale.rightDerivedPlusLowerStarCompGlobalSectionsIso`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerStarCompGlobalSectionsIso`.
 - `AlgebraicGeometry.Etale.rightDerivedCompIsoOfIsFinite`.
+
+## Implementation details
+
+`RΓ(X, -)` is the total right derived functor
+`AlgebraicGeometry.Etale.rightDerivedGlobalSections`, computed with K-injective resolutions,
+which exist in the Grothendieck abelian category of étale sheaves. The direct images `f_*`
+preserve K-injective complexes (being right adjoint to the exact `f^*`), so the Leray
+isomorphism `RΓ(Y, Rf_* E) ≅ RΓ(X, E)` holds on the whole unbounded derived category, for every
+morphism `f` and every coefficient category, without finiteness hypotheses.
 -/
 
 @[expose] public section
@@ -52,14 +52,8 @@ namespace AlgebraicGeometry.Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A]
 
-/-- For `K ∈ D(X_ét)` choose a K-injective resolution
-`K ⟶ I` and put `RΓ(X_ét, K) = Γ(X_ét, I)`, `H^q(X_ét, K) = H^q(RΓ(X_ét, K))`.
-
-In this development `RΓ(X, -)` is the total right derived functor
-`AlgebraicGeometry.Etale.rightDerivedGlobalSections` of `Γ(X, -)` on the unbounded derived
-category (and `H^q(X, -)` is `AlgebraicGeometry.Etale.cohomology`); this isomorphism records that
-it is computed by applying `Γ(X, -)` termwise to a K-injective complex `I`:
-`RΓ(X, I) ≅ Γ(X, I)`. -/
+/-- For a K-injective complex `I` of étale sheaves on `X`, the derived global sections are
+computed by applying `Γ(X, -)` termwise: `RΓ(X, I) ≅ Γ(X, I)`. -/
 noncomputable def rightDerivedGlobalSectionsObjQIso (X : Scheme.{u})
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [I.IsKInjective] :
     (rightDerivedGlobalSections A X).obj (DerivedCategory.Q.obj I) ≅
@@ -70,9 +64,7 @@ omit [HasSmallSiteSheafify A] in
 /-- If `I` and `J` are K-injective complexes
 of étale sheaves and `φ : I ⟶ J` is a quasi-isomorphism (for instance a comparison of two
 K-injective resolutions of the same complex), then `Γ(X, φ) : Γ(X, I) ⟶ Γ(X, J)` is an
-isomorphism in `D(A)`. Consequently `RΓ(X, K)` does not depend, up to canonical isomorphism, on
-the chosen K-injective resolution: `Γ(X, φ)` is identified with `RΓ(X, φ)` by the unit of the
-right derived functor, and `φ` is an isomorphism in `D(X_ét)`. -/
+isomorphism in `D(A)`. -/
 lemma isIso_Q_map_globalSections_of_quasiIso {X : Scheme.{u}}
     {I J : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ} [I.IsKInjective] [J.IsKInjective]
     (φ : I ⟶ J) [QuasiIso φ] :
@@ -95,7 +87,7 @@ lemma isIso_Q_map_globalSections_of_quasiIso {X : Scheme.{u}}
 /-- On the bounded below derived category, the
 unbounded derived global sections `RΓ(X, -)` (computed with K-injective resolutions) agree
 canonically with the bounded below derived functor `R⁺Γ(X, -)` (computed with injective
-resolutions, the `Γ(X, Kinj(K))` of the blueprint's `def-weil-pbc-etale-cohomology`). -/
+resolutions). -/
 noncomputable def rightDerivedGlobalSectionsPlusCompatibility (X : Scheme.{u}) :
     (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctorPlus ⋙ DerivedCategory.Plus.ι ≅
       DerivedCategory.Plus.ι ⋙ rightDerivedGlobalSections A X :=
@@ -112,10 +104,7 @@ lemma isGE_rightDerivedLowerStar_obj' {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The Leray isomorphism on the bounded below derived
 categories: for a morphism of schemes `f : X ⟶ Y`, `R⁺Γ(Y, R⁺f_* E) ≅ R⁺Γ(X, E)`, naturally in
-`E ∈ D⁺(X_ét)`. It is the composition of right derived functors for
-`Γ(Y, -) ∘ f_* = Γ(X, -)`, valid since `f_*` preserves injective objects (it is right adjoint to
-the exact `f^*`); compare the unbounded version
-`AlgebraicGeometry.Etale.rightDerivedLowerStarCompGlobalSectionsIso`. -/
+`E ∈ D⁺(X_ét)`. -/
 noncomputable def rightDerivedPlusLowerStarCompGlobalSectionsIso {X Y : Scheme.{u}}
     (f : X ⟶ Y) :
     ((f)_*[A]).rightDerivedFunctorPlus ⋙ (Sheaf.Γ Y.smallEtaleTopology A).rightDerivedFunctorPlus ≅
@@ -125,14 +114,8 @@ noncomputable def rightDerivedPlusLowerStarCompGlobalSectionsIso {X Y : Scheme.{
       (Etale.upperStarLowerStarAdjunction A f)
   Functor.rightDerivedFunctorPlusCompIso' _ _ (lowerStarCompGlobalSectionsIso A f)
 
-/-- The Leray isomorphism `RΓ(Y, Rf_* E) ≅ RΓ(X, E)` for every
-`E` in the *unbounded* derived category `D(X_ét)`, naturally in `E`.
-
-The blueprint assumes `f` quasi-compact quasi-separated of finite cohomological dimension and
-coefficients `ℤ/n`, as needed for its spectral sequence argument. Here `RΓ` and `Rf_*` are
-computed with K-injective resolutions and `f_*` preserves K-injective complexes, so the
-isomorphism holds for every morphism `f` and every coefficient category `A`
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso`). -/
+/-- The Leray isomorphism `RΓ(Y, Rf_* E) ≅ RΓ(X, E)` for every morphism `f` and every
+`E` in the *unbounded* derived category `D(X_ét)`, naturally in `E`. -/
 noncomputable def rightDerivedLowerStarCompGlobalSectionsIso {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R((f)_*[A]) ⋙ rightDerivedGlobalSections A Y ≅ rightDerivedGlobalSections A X :=
   rightDerivedLowerStarCompRightDerivedGlobalSectionsIso A f
@@ -143,9 +126,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Let `π : X' ⟶ X` be a finite morphism and `h : Z ⟶ X'`
 any morphism of schemes. For every étale sheaf `G` of `Λ`-modules on `Z` and every `q ≥ 0`,
-`R^q(π ∘ h)_* G ≅ π_* R^q h_* G`: the direct image `π_*` is exact
-(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), so
-`R(π ∘ h)_* = Rπ_* ∘ Rh_* = π_* ∘ Rh_*` commutes with taking cohomology sheaves. -/
+`R^q(π ∘ h)_* G ≅ π_* R^q h_* G`. -/
 noncomputable def rightDerivedCompIsoOfIsFinite {Z X' X : Scheme.{u}} (h : Z ⟶ X')
     (π : X' ⟶ X) [IsFinite π] (G : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (q : ℕ) :

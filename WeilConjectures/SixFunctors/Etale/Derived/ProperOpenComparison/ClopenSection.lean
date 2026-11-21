@@ -12,14 +12,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Def
 
 Let `s : X ⟶ V` be an open immersion with closed range. Then the canonical map
 `ι_s : s_! ⟶ Rs_*` of `D⁺(X_ét, Λ)`
-(`AlgebraicGeometry.Etale.openImmersionLowerShriekToLowerStarPlus`) is an isomorphism: `V` is
-the disjoint union of the two open subschemes `s(X)` and `V \ s(X)`, on the first `ι_s`
-restricts to an isomorphism, and on the second both sides vanish.
+(`AlgebraicGeometry.Etale.openImmersionLowerShriekToLowerStarPlus`) is an isomorphism.
 
 Consequently, if moreover `s` is a section of a morphism `p : V ⟶ X`, then
 
-`Rp_* s_! K ≅ Rp_* Rs_* K ≅ R(s ≫ p)_* K = R(𝟙)_* K ≅ K`
-.
+`Rp_* s_! K ≅ Rp_* Rs_* K ≅ R(s ≫ p)_* K = R(𝟙)_* K ≅ K`.
 
 ## Main statements
 
@@ -48,9 +45,7 @@ namespace Etale
 variable {X V : Scheme.{u}} (s : X ⟶ V) [IsOpenImmersion s]
 
 /-- For an open immersion `s` with closed range, the canonical map `ι_s : s_! K ⟶ Rs_* K` is an
-isomorphism. On the open complement `W` of the range of `s` both sides vanish (`Rs_* K` by
-étale base change, the fibre product `X ×_V W` being empty); on the closed complement of `W`,
-which lies inside the range of `s`, it is `s^*` of `ι_s`. -/
+isomorphism. -/
 theorem isIso_openImmersionLowerShriekToLowerStarPlus_app_of_isClosed_range
     (hs : IsClosed (Set.range s.base))
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -114,15 +109,10 @@ lemma isIso_openImmersionLowerShriekToLowerStarPlus_of_isClosed_range
 
 variable {X V : Scheme.{u}} (p : V ⟶ X) (s : X ⟶ V) [IsOpenImmersion s]
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Direct image from an open and
-closed section. Let `p : V ⟶ X` be a morphism and `s : X ⟶ V` an open immersion with closed range
-and `s ≫ p = 𝟙 X`. Restriction to the component `s(X)` gives a canonical isomorphism
-
-`Rp_* s_! K ≅ K`
-
-on `D⁺(X_ét, Λ)`: the inverse of `ι_s : s_! K ≅ Rs_* K`
-(`isIso_openImmersionLowerShriekToLowerStarPlus_app_of_isClosed_range`) followed by the
-composition isomorphism `Rp_* Rs_* ≅ R(s ≫ p)_* = R(𝟙)_*` and `R(𝟙)_* ≅ 𝟭`. -/
+/-- **Direct image from an open and closed section.** Let `p : V ⟶ X` be a morphism and
+`s : X ⟶ V` an open immersion with closed range and `s ≫ p = 𝟙 X`. This is the canonical
+isomorphism `Rp_* s_! K ≅ K` on `D⁺(X_ét, Λ)`: the inverse of `ι_s : s_! K ≅ Rs_* K` followed by
+the composition isomorphism `Rp_* Rs_* ≅ R(s ≫ p)_* = R(𝟙)_*` and `R(𝟙)_* ≅ 𝟭`. -/
 noncomputable def clopenSectionDirectImageIso (hs : IsClosed (Set.range s.base))
     (h : s ≫ p = 𝟙 X) :
     D+((s)_!open[ModuleCat.{u + 1} Λ]) ⋙ ((p)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus ≅

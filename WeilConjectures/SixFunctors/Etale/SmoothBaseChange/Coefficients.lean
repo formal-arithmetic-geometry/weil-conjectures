@@ -20,18 +20,6 @@ are torsion of orders invertible on the base, while the base-change property
 `AlgebraicGeometry.Etale.BaseChangeProperty` is indexed by a fixed coefficient ring. This file
 contains the passage between the two.
 
-- In negative degrees both sides of the base-change map vanish, the pullbacks being exact and
-  the derived pushforwards preserving complexes concentrated in nonnegative degrees.
-- *Filtered torsion*: `F` is the filtered colimit of subsheaves killed by integers `n`
-  invertible on `S`
-  (`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit`); the source
-  `p⁻¹ R^q g_*` and the target `R^q h_* e⁻¹` of the base-change map commute with filtered
-  colimits (`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`, and `p⁻¹`,
-  `e⁻¹` are left adjoints), so it suffices to treat sheaves killed by one such `n`.
-- *Change of rings*: a sheaf of `Λ`-modules killed by `n` is a sheaf of `Λ/nΛ`-modules, and
-  its base-change map is the one computed over `Λ/nΛ`, so the base-change property over the
-  ring `Λ/nΛ`, in which `n = 0`, applies to it.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isZero_baseChangeSourceFunctor_obj_of_neg`,
@@ -44,6 +32,20 @@ contains the passage between the two.
   sheaves killed by an integer invertible on `S`.
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero`: the change of rings
   `Λ ↝ Λ/nΛ`.
+
+## Implementation details
+
+- In negative degrees both sides of the base-change map vanish, the pullbacks being exact and
+  the derived pushforwards preserving complexes concentrated in nonnegative degrees.
+- *Filtered torsion*: `F` is the filtered colimit of subsheaves killed by integers `n`
+  invertible on `S`
+  (`AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder.exists_isColimit`); the source
+  `p⁻¹ R^q g_*` and the target `R^q h_* e⁻¹` of the base-change map commute with filtered
+  colimits (`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`, and `p⁻¹`,
+  `e⁻¹` are left adjoints), so it suffices to treat sheaves killed by one such `n`.
+- *Change of rings*: a sheaf of `Λ`-modules killed by `n` is a sheaf of `Λ/nΛ`-modules, and
+  its base-change map is the one computed over `Λ/nΛ`, so the base-change property over the
+  ring `Λ/nΛ`, in which `n = 0`, applies to it.
 -/
 
 @[expose] public section
@@ -108,17 +110,13 @@ lemma Etale.isIso_baseChangeHomologyMap_of_neg (sq : IsPullback e h g p) {q : �
   ⟨0, (Etale.isZero_baseChangeSourceFunctor_obj_of_neg Λ p g hq F).eq_of_src _ _,
     (Etale.isZero_baseChangeTargetFunctor_obj_of_neg Λ e h hq F).eq_of_src _ _⟩
 
-/-- The base-change property holds in negative degrees for every morphism `p`: the derived
-pushforward of a sheaf placed in degree `0` has no cohomology in negative degrees, so both
-`p⁻¹ R^q g_* F` and `R^q h_* e⁻¹ F` vanish for `q < 0`
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_neg`). -/
+/-- The base-change property holds in negative degrees for every morphism `p`. -/
 theorem Etale.baseChangeProperty_of_neg (p : X ⟶ S) {q : ℤ} (hq : q < 0) :
     Etale.BaseChangeProperty Λ p q := by
   intro T Y g e h _ _ sq F
   exact Etale.isIso_baseChangeHomologyMap_of_neg Λ sq hq F
 
-/-- The base-change property holds universally in negative degrees, by
-`AlgebraicGeometry.Etale.baseChangeProperty_of_neg` applied to every base change of `p`. -/
+/-- The base-change property holds universally in negative degrees. -/
 theorem Etale.universalBaseChangeProperty_of_neg (p : X ⟶ S) {q : ℤ} (hq : q < 0) :
     Etale.UniversalBaseChangeProperty Λ p q :=
   fun _ _ _ _ p' _ ↦ Etale.baseChangeProperty_of_neg Λ p' hq
@@ -149,12 +147,7 @@ variable {Λ} {Λ' : Type (u + 1)} [CommRing Λ'] (φ : Λ →+* Λ')
 /-- Restriction of scalars along `φ : Λ →+* Λ'` and the derived base-change morphism: if the
 degree-`q` homology of the base-change morphism over `Λ'` is an isomorphism at a complex `K`,
 then so is the degree-`q` homology of the base-change morphism over `Λ` at the restriction of
-scalars of `K`. Restriction of scalars commutes with `p^*`, `e^*`
-(`AlgebraicGeometry.Etale.upperStarRestrictScalars`), with the derived direct images
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarRestrictScalars`) and with the underived
-base-change map (`AlgebraicGeometry.Etale.baseChangeMap_restrictScalars`); the pasting and
-naturality laws of the base change morphisms of right derived functors identify the two
-derived base-change morphisms up to these isomorphisms. -/
+scalars of `K`. -/
 lemma Etale.isIso_homologyMap_baseChange_restrictScalars (sq : IsPullback e h g p) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ')))
     (hK : IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
@@ -292,14 +285,9 @@ private lemma isIso_quotientCounit (n : ℕ)
   have : IsIso ((sheafToPresheaf _ _).map c) := NatIso.isIso_of_isIso_app c.hom
   exact isIso_of_reflects_iso c (sheafToPresheaf _ _)
 
-/-- The change of rings `Λ ↝ Λ/nΛ` for the base-change map.
-
-Let `F` be a sheaf of `Λ`-modules on `T_ét` killed by `n`. Then `F` is a sheaf of
-`Λ/nΛ`-modules, restriction of scalars along `Λ ⟶ Λ/nΛ` commutes with `p^*`, `e^*` and with the
-derived pushforwards (the cohomology of a sheaf of modules does not depend on the coefficient
-ring), and identifies the base-change map of `F` over `Λ` with the one over `Λ/nΛ`. Hence the
-base-change property `BC(p, Λ/nΛ, q)` makes the base-change map of `F` an isomorphism.
--/
+/-- The change of rings `Λ ↝ Λ/nΛ` for the base-change map: if `F` is a sheaf of `Λ`-modules on
+`T_ét` killed by `n`, the base-change property `BC(p, Λ/nΛ, q)` makes the base-change map of `F`
+an isomorphism. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero (sq : IsPullback e h g p)
     [QuasiCompact g] [QuasiSeparated g] (q : ℤ) (n : ℕ)
     (hp : Etale.BaseChangeProperty (Λ ⧸ Ideal.span {(n : Λ)}) p q)
@@ -338,10 +326,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero (sq : IsPullback e h 
 
 /-- *Filtered torsion*: to prove that the base-change map is an isomorphism at a sheaf which is
 torsion of orders invertible on `S`, it suffices to do so at the sheaves killed by a single
-positive integer `n` invertible on `S`. Such a sheaf is a filtered colimit of sheaves of that
-kind, the source and the target of the base-change map commute with filtered colimits, and a
-natural transformation between colimit-preserving functors which is an isomorphism on a
-diagram is an isomorphism at its colimit. -/
+positive integer `n` invertible on `S`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_forall_nsmul_eq_zero (sq : IsPullback e h g p)
     [QuasiCompact g] [QuasiSeparated g] (q : ℤ)
     (H : ∀ n : ℕ, 0 < n → IsUnit (n : Γ(S, ⊤)) →

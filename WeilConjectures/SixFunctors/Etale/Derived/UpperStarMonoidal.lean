@@ -30,14 +30,6 @@ the total left derived functors of `(A, B) ↦ g^*A ⊗ g^*B` and `(A, B) ↦ g^
 respectively. Deriving the oplax monoidal structure of `g^*`, we obtain the comparison
 `Lg^*(K ⊗ᴸ M) ⟶ Lg^*K ⊗ᴸ Lg^*M`, which is an isomorphism since `g^*` is strong monoidal.
 
-Since `g^*` is exact, the counit of `Lg^*` is an isomorphism everywhere, so
-`Lg^*(K ⊗ᴸ M)` is computed with the K-flat left derivability structure on `K(Y_ét)`.
-This does not suffice for `Lg^*K ⊗ᴸ Lg^*M`, since `g^*` need not send K-flat complexes to
-K-flat complexes. We use instead, for the second factor, the complexes whose pullback by `g`
-is K-flat (`AlgebraicGeometry.Etale.kFlatUpperStar`). They contain the functorial flat
-resolutions when `g^*` preserves flat sheaves, so they form a left derivability structure by
-`HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism`.
-
 ## Main definitions and results
 
 - `AlgebraicGeometry.Etale.kFlatUpperStar g`: the complexes on `Y_ét` whose pullback by `g`
@@ -69,19 +61,18 @@ resolutions when `g^*` preserves flat sheaves, so they form a left derivability 
   `AlgebraicGeometry.Etale.isZero_derivedTensor_obj_obj_of_isZero_right`: `K ⊗ᴸ M` vanishes
   when `K` or `M` does.
 
+## Implementation details
+
+Since `g^*` is exact, the counit of `Lg^*` is an isomorphism everywhere, so
+`Lg^*(K ⊗ᴸ M)` is computed with the K-flat left derivability structure on `K(Y_ét)`.
+This does not suffice for `Lg^*K ⊗ᴸ Lg^*M`, since `g^*` need not send K-flat complexes to
+K-flat complexes. We use instead, for the second factor, the complexes whose pullback by `g`
+is K-flat (`AlgebraicGeometry.Etale.kFlatUpperStar`). They contain the functorial flat
+resolutions when `g^*` preserves flat sheaves, so they form a left derivability structure by
+`HomotopyCategory.isLeftDerivabilityStructure_quasiIsoLocalizerMorphism`.
+
 The results depend on `sorryAx` through `AlgebraicGeometry.Etale.derivedTensor` and
 `AlgebraicGeometry.Etale.isLeftDerivedFunctor₂_derivedTensor`.
-
-## TODO
-
-- Nothing here is specific to étale sheaves: the same statements hold for an exact functor
-  `F` between abelian monoidal categories with functorial flat resolutions, `F` preserving flat
-  objects. They should be proved in that generality and specialised here. This includes the
-  comparison `leftDerivedUpperStarTensorComparison`, which only uses the oplax monoidal
-  structure of `F`, and `leftDerivedUpperStarTensorNatIso`, which uses that `F` is strong
-  monoidal.
-
-## File structure
 
 This module only imports its parts:
 - `WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.KFlat`: the complexes whose
@@ -92,4 +83,13 @@ This module only imports its parts:
   bifunctors;
 - `WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison`: the tensor and unit
   comparisons.
+
+## TODO
+
+- Nothing here is specific to étale sheaves: the same statements hold for an exact functor
+  `F` between abelian monoidal categories with functorial flat resolutions, `F` preserving flat
+  objects. They should be proved in that generality and specialised here. This includes the
+  comparison `leftDerivedUpperStarTensorComparison`, which only uses the oplax monoidal
+  structure of `F`, and `leftDerivedUpperStarTensorNatIso`, which uses that `F` is strong
+  monoidal.
 -/

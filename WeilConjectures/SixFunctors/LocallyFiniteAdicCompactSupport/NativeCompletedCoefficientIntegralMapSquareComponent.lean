@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.LocallyFiniteAdicCompactSupportData
 import WeilConjectures.AlgebraicGeometry.Continuous.ContinuousCoefficientCompletionSupplement
 
-/-! # Components of the normalized integral presentation pullback square -/
+/-! # Components of the normalized integral presentation pullback square
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and Section 6.8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -159,13 +164,6 @@ end
 
 /--
 The component at each pro-etale test object of the normalized integral-map square.
-
-Proof source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8. The finite constant and
-residue formulas identify the completed direct-image map with continuous integral
-precomposition, conjugated by the supplied presentations. Apply the sheaf adjunction
-and cancel the integral presentation isomorphism. The integral and rational inclusion
-normalizations and the native pullback normalization then identify both maps pointwise.
-Taking their components gives the displayed equality of ring homomorphisms.
 -/
 theorem coefficient_presentation_integralMap_pull_square_component
     [G : NativeGeometry.{u} l]

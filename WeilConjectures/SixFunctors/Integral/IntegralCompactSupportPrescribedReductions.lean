@@ -109,6 +109,10 @@ for the canonical coefficient maps, which are their tensor/restriction adjoints.
 The result applies to every realization of that defining derived limit, including
 its chosen value, and imposes no extra condition on the input. Natural index n
 always denotes the positive exponent n+1.
+
+## References
+
+* [Stacks, Tag 07KC]
 -/
 
 @[expose] public section
@@ -128,8 +132,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
 
 /-- Countable products for the defining compact-support tower, obtained from the
-recorded completed-coefficient derived products, with no extra existence assumption.
-Source: blueprint order 2135, Proof paragraph 2; Stacks Tag 07KC. -/
+recorded completed-coefficient derived products, with no extra existence assumption. -/
 noncomputable instance coefCompactSupportHasProduct
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) :
     HasProduct (sfCompactSupportTerm l E c K) := by

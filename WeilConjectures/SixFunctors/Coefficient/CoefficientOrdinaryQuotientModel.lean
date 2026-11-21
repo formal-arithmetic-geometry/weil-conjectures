@@ -16,12 +16,19 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # The ordinary quotient-system tensor and its inverse-limit adjunction
 
-Source: Stacks 03D7, 03EK, 0940 and 0941.
-
 The strict quotient system of a completed-coefficient module is the system of its
 scalar extensions to the finite quotients. It is left adjoint to restriction of
 coefficients followed by inverse limit. This file records that ordinary adjunction
 together with its normalizations, independently of any derived coefficient calculus.
+
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 0940]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +39,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 /-! ### Generic scalar-extension transition comparisons
 
 The following auxiliary statements are the generic transition comparison for the
-sequence-site scalar models (Stacks 03D7, 03EK).
+sequence-site scalar models.
 -/
 
 attribute [-instance] CategoryTheory.hasSheafCompose_of_preservesMulticospan
@@ -137,13 +144,7 @@ private theorem module_iso_inv_hom_sections
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- Scalar-extension adjoint comparisons preserve a transition which preserves unit tensors.
-Source: Stacks 03D7 and 03EK.
-Proof: precompose with the inverse model comparison. Scalar-extension Hom
-extensionality reduces equality to unit tensors. Both left-adjoint uniqueness
-comparisons preserve the adjunction units. The defining quotient mate has the
-same unit equation, and scalar restriction leaves every underlying section map
-unchanged. The two maps therefore agree on all local generators. -/
+/-- Scalar-extension adjoint comparisons preserve a transition which preserves unit tensors. -/
 private theorem systemScalarTransitionComparison
     {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C)
@@ -436,20 +437,17 @@ namespace WeilConjectures.OrdinaryQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Exact restriction of a system complex to its completed-coefficient tower.
-Source: Stacks 0941. -/
+/-- Exact restriction of a system complex to its completed-coefficient tower. -/
 abbrev tower := (coefficientSequenceRestriction l E W).mapHomologicalComplex (.up ℤ)
 
-/-- The ordinary sequence direct image: restriction of rings followed by inverse limit.
-Source: Stacks 07A6, 0941. -/
+/-- The ordinary sequence direct image: restriction of rings followed by inverse limit. -/
 abbrev ordinaryLimit := coefficientSequenceRestriction l E W ⋙
   (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤ scalarReductionSource l E W)
 
 /-- The quotient-system tensor functor with its ordinary adjunction and actual tensor
 unit. The evaluation isomorphisms identify its components with the recorded scalar
 extension, and `transition` fixes the strict quotient maps at all levels.
-`unit_tensor` fixes the adjunction itself on sections.
-Source: Stacks 03EK, 07A6, 0941. -/
+`unit_tensor` fixes the adjunction itself on sections. -/
 structure OrdinaryModel where
   tensor : scalarReductionSource l E W ⥤ coefficientSequenceModules l E W
   [additive : tensor.Additive]
@@ -478,8 +476,7 @@ structure OrdinaryModel where
 
 attribute [instance] OrdinaryModel.additive
 
-/-- The strict quotient system of a complex is the termwise ordinary tensor functor.
-Source: Stacks 06YY, 0941. -/
+/-- The strict quotient system of a complex is the termwise ordinary tensor functor. -/
 abbrev OrdinaryModel.quotient (M : OrdinaryModel l E W) :=
   M.tensor.mapHomologicalComplex (.up ℤ)
 
@@ -654,10 +651,7 @@ private theorem presheaf_function_eq {C : Type*} [Category C]
 
 set_option backward.isDefEq.respectTransparency true in
 set_option backward.isDefEq.respectTransparency.types true in
-/-- The actual horizontal map, retaining the two literal section carriers.
-Source: Stacks 0941.
-Proof: remove the source and target additive-group transports in the defining
-transition equation. Forgetting linearity does not change the underlying function. -/
+/-- The actual horizontal map, retaining the two literal section carriers. -/
 private theorem coefficientSequenceTransition_function_heq (N : coefficientSequenceModules l E W)
     {m n : ℕ} (h : n ≤ m) (V : W.ProEtᵒᵖ) :
     HEq (fun x : ((coefficientSequenceEvaluation l E W m).obj N).val.obj V ↦
@@ -893,7 +887,7 @@ private theorem ordinary_unit_tensor
 
 section CanonicalComparisons
 
-/-- The cone of ordinary inverse-limit projections in each degree. Source: Stacks 0941. -/
+/-- The cone of ordinary inverse-limit projections in each degree. -/
 def termwiseLimitCone
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) : Cone Z.asFunctor where
   pt := ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
@@ -907,14 +901,14 @@ def termwiseLimitCone
           limit.π (Z.X p) n ≫ (Z.X p).map f
         exact (Category.id_comp _).trans (limit.w (Z.X p) f).symm }
 
-/-- Limits of complexes are computed degreewise. Source: Stacks 0941. -/
+/-- Limits of complexes are computed degreewise. -/
 def termwiseLimitConeIsLimit
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
     IsLimit (termwiseLimitCone l E W Z) :=
   HomologicalComplex.isLimitOfEval Z.asFunctor (termwiseLimitCone l E W Z)
     (fun p ↦ limit.isLimit (Z.X p))
 
-/-- The degreewise limit comparison at one complex. Source: Stacks 0941. -/
+/-- The degreewise limit comparison at one complex. -/
 def termwiseLimitComparisonComponent
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) :
     ((lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
@@ -922,15 +916,14 @@ def termwiseLimitComparisonComponent
         limit Z.asFunctor :=
   (termwiseLimitConeIsLimit l E W Z).conePointUniqueUpToIso (limit.isLimit _)
 
-/-- Projections of the degreewise limit comparison. Source: Stacks 0941. -/
+/-- Projections of the degreewise limit comparison. -/
 theorem termwiseLimitComparisonComponent_projection
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (n : ℕ) :
     (termwiseLimitComparisonComponent l E W Z).hom ≫ limit.π Z.asFunctor (op n) =
       (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app Z :=
   IsLimit.conePointUniqueUpToIso_hom_comp _ _ _
 
-/-- The termwise inverse limit of a complex of towers is the limit of complexes.
-Source: Stacks 0941. -/
+/-- The termwise inverse limit of a complex of towers is the limit of complexes. -/
 def termwiseLimitComparison :
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
       scalarReductionSource l E W).mapHomologicalComplex (.up ℤ) ≅
@@ -952,8 +945,7 @@ def termwiseLimitComparison :
     ext p : 1
     exact limMap_π (f.f p) n)
 
-/-- The termwise limit comparison has the ordinary limit projections in each degree.
-Source: Stacks 0941. -/
+/-- The termwise limit comparison has the ordinary limit projections in each degree. -/
 theorem termwiseLimitComparison_projection
     (Z : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) (n : ℕ) (p : ℤ) :
     ((termwiseLimitComparison l E W).hom.app Z ≫ limit.π Z.asFunctor (op n)).f p =
@@ -963,14 +955,7 @@ theorem termwiseLimitComparison_projection
 end CanonicalComparisons
 
 /-- The ordinary quotient tensor and limit admit the prescribed sectionwise adjunction.
-This statement involves no derived coefficient calculus or derived comparison.
-
-Source: Stacks 03D7 and 0941.
-
-Proof: apply the sequence-site constant/limit construction to the completed ring and
-its tower of quotients. Identify the level tensors with the recorded scalar extension
-by uniqueness of left adjoints; this preserves units and hence the quotient mates.
-Limits of complexes are computed degreewise. -/
+This statement involves no derived coefficient calculus or derived comparison. -/
 theorem ordinaryModel_exists : Nonempty (OrdinaryModel l E W) := by
   refine ⟨{
     tensor := ordinaryExtension l E W

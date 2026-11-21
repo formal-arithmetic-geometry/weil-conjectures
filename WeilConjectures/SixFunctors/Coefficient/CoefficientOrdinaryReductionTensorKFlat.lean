@@ -10,12 +10,16 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSections
 
 /-! # The ordinary quotient system preserves K-flat complexes
 
-Source: Stacks 06YN, 07A4 and 0941.
-
 K-flatness on the ringed sequence site is tested on finite evaluations: evaluation is
 exact, commutes with the total tensor product, and exactness on the sequence site is
 detected by the finite evaluations. The finite evaluations of the ordinary quotient
 system of a K-flat complex are its finite scalar extensions, which are K-flat.
+
+## References
+
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -35,7 +39,7 @@ attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExi
   coefficientScalarTensorIso
 
 /-- Exactness of a short complex on the ringed sequence site is detected by the finite
-evaluations. Source: Stacks 0941. -/
+evaluations. -/
 theorem coefficientSequence_exact_iff_evaluations
     (s : ShortComplex (coefficientSequenceModules l E W)) :
     s.Exact ↔ ∀ n : ℕ, (s.map (coefficientSequenceEvaluation l E W n)).Exact := by
@@ -44,8 +48,7 @@ theorem coefficientSequence_exact_iff_evaluations
     (coefficientSequenceCommRingTransition l E W)).some.systems
   exact D.componentwise s
 
-/-- A complex on the ringed sequence site is K-flat once all its finite evaluations are.
-Source: Stacks 06YN, 0941. -/
+/-- A complex on the ringed sequence site is K-flat once all its finite evaluations are. -/
 theorem coefficientSequence_isKFlat_of_evaluations
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (hC : ∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients
@@ -67,8 +70,7 @@ theorem coefficientSequence_isKFlat_of_evaluations
     exact (hZ j).map (coefficientSequenceEvaluation l E W n)
   exact ((hC n _ hZn) i).of_iso (coefficientEvaluationTensorIso l E W n Z C).symm
 
-/-- K-flatness is invariant under isomorphism of complexes.
-Source: Stacks 06YN. -/
+/-- K-flatness is invariant under isomorphism of complexes. -/
 theorem coefficientIsKFlat_of_iso {n : ℕ}
     {C D : CochainComplex (normalizedDVRModules l E W n) ℤ} (e : C ≅ D)
     (hD : CochainComplex.IsKFlatIndependentCoefficients
@@ -81,8 +83,7 @@ theorem coefficientIsKFlat_of_iso {n : ℕ}
 
 namespace OrdinaryQuotient
 
-/-- The ordinary quotient system of a flat-term K-flat complex is K-flat.
-Source: Stacks 06YN, 07A4 and 0941. -/
+/-- The ordinary quotient system of a flat-term K-flat complex is K-flat. -/
 theorem OrdinaryModel.quotient_isKFlat (M : OrdinaryModel l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ)
     (hP : P.IsKFlatIndependentCoefficients)

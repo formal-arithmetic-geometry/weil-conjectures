@@ -8,7 +8,16 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralReconstruction.ExceptionalIntegralReconstructionInterfaces
 
 /-! # Realization of the reconstructed exceptional adjunction
-Source: Zheng, Section 5; integral reconstruction, steps 3--9.
+
+## Implementation details
+
+The transport record is rebuilt on the same ordinary adjoint, site maps and proper/open
+comparison, using their localized cochain shifts: an arbitrary transport record does not
+assert that its shift fields have this normalization.
+
+## References
+
+* Zheng, Section 5, Construction 5.25 and Proposition 5.24
 -/
 
 @[expose] public noncomputable section
@@ -24,54 +33,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Realize a specified normalized system adjunction by the actual integral
-proper/open comparisons, choosing compatible transport shifts on its same functors.
-Source: Zheng, Construction 5.25 and Proposition 5.24; integral reconstruction,
-steps 3--9, especially the single proper/open word and its primitive comparisons.
-
-Proof: choose the canonical system operations and their ordinary-limit comparison
-model. Rebuild only the transport record on the same ordinary adjoint, site maps
-and proper/open comparison, using their localized cochain shifts. Its geometric
-and evaluation equations are unchanged; exactness and the signed cochain models
-supply the new shift fields. This choice is necessary because an arbitrary
-transport record does not assert that its shift fields have this normalization.
-Coordinate change, the site inverse image and the ordinary proper/open construction
-give systemLeft. Its evaluation square is the scalar-unit, site,
-etale compact-support and proper/open mate composite supportProjection: this
-identifies the map itself, before using any finite-level conservativity.
-The finite-operation bounds, transported by the evaluation comparisons, give
-leftBounds and rightBounds independently of the positive coefficient exponent.
-Exact open extension retains the input intervals at the intermediate object, so
-the single proper/open word has the required finite-Tor realization domain.
-
-The two reconstruction equivalences and the normalized system adjunction give
-integralAdjunction by composition. K-flat reduction is additive and exact, while
-the K-injective total limit is additive and exact. Restrict their coherent shifts
-to the full finite-Tor subcategories and paste with the transported system shifts.
-The reduction/limit unit and counit shift equations make the composed unit and
-counit shift compatible. Give the right adjoint its adjoint shift; uniqueness
-identifies it with the composite right shift, and the triangulated adjoint theorem
-makes it exact. This gives the exactness fields and rightShift_adjoint.
-
-For the left realization, follow leftComposite by total limit of systemLeft,
-the projection-normalized proper direct-image/limit comparison, and the inverse
-open-adjunction mate of reduction pullback followed by the inverse completion
-unit. The open reduction theorem makes that unit invertible. This defines the
-isomorphism realization and proves primitive in its written order. The direct
-and recursive realization comparisons for the one proper/open word agree.
-Consequently the prescribed reduction-tower functor lands in the finite-Tor
-subcategory. Full faithfulness of its inclusion lifts the composite realization
-followed by prescribedRealization inverse to identification, proving normalization
-on actual integral maps. This uses whole towers and quotient transitions, and
-never asserts faithfulness of finite evaluation on derived morphisms.
-
-Finally the exact open, proper derived, termwise quotient and signed Roos-cone
-shift comparisons paste on this same word. They give systemLeftShift,
-leftCompositeShift, rightCompositeShift, realizationShift and
-prescribedRealizationShift. Transport the latter shift to the finite-Tor lift;
-its inclusion comparison and identification then commute with shifts by faithful
-inclusion. Cochain signs multiply under addition of all integer shifts, including
-negative shifts. The empty source has zero functors; for the identity word the
-normalization is the reconstruction triangle identity. -/
+proper/open comparisons, choosing compatible transport shifts on its same functors. -/
 theorem exceptionalIntegralRealizationAssembly
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}}

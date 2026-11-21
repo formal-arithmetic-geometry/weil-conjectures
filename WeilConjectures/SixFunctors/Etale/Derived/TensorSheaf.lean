@@ -24,10 +24,6 @@ comparison of the derived pullback with the derived tensor product is
 `AlgebraicGeometry.Etale.leftDerivedTensorRightUpperStarMap_app_comp`, in
 `WeilConjectures.SixFunctors.Etale.Derived.TensorSheafUpperStar`.
 
-The constructions are made for a general coefficient category `A`: for a concrete category such
-as `ModuleCat R`, the kernel is slow to check terms involving the tensor product of the homotopy
-category.
-
 This is the étale counterpart of
 `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf`.
 
@@ -38,6 +34,12 @@ This is the étale counterpart of
   `Lg^* (K ⊗ᴸ c_Y) ⟶ Lg^* K ⊗ᴸ c_Z` induced by `κ`.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedSingleMap`: the morphism
   `Lg^* c_Y ⟶ c_Z` in `D(Z_ét)` induced by `κ`.
+
+## Implementation details
+
+The constructions are made for a general coefficient category `A`: for a concrete category such
+as `ModuleCat R`, the kernel is slow to check terms involving the tensor product of the homotopy
+category.
 -/
 
 @[expose] public section

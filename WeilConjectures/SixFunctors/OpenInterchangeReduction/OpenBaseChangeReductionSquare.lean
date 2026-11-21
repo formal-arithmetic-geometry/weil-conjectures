@@ -8,9 +8,7 @@ public import WeilConjectures.SixFunctors.OpenInterchangeReduction.OpenInterchan
 import all WeilConjectures.SixFunctors.GeneratorReduction.GeneratorKind.TensorAdjunctionReductionSquares
 import WeilConjectures.SixFunctors.GeneratorReduction.GeneratorReductionData
 
-/-! # The coefficient square for cartesian open base change
-Source: the open-adjunction and clopen expansion of the coherence proof.
--/
+/-! # The coefficient square for cartesian open base change -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

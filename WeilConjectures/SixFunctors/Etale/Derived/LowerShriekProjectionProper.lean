@@ -29,9 +29,6 @@ projection formula is the direct-image projection formula
 (`AlgebraicGeometry.Etale.isIso_projectionMapOfCompactification_app_app_iff_of_isProper`); for
 `f = 𝟙 X` the latter holds for any coefficients
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_id_app_app`).
-
-These are the identity and proper clauses of blueprint
-`proposition-composition-base-change-rf-shriek--1`.
 -/
 
 @[expose] public section
@@ -55,8 +52,7 @@ namespace Etale
 section Identity
 
 /-- The projection map `R(𝟙 X)_* M ⊗ᴸ L ⟶ R(𝟙 X)_*(M ⊗ᴸ L(𝟙 X)^* L)` of the identity is an
-isomorphism, for any coefficients: the derived pullback `L(𝟙 X)^* ≅ 𝟭` is an equivalence and
-its tensor comparison is invertible. -/
+isomorphism, for any coefficients. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_id_app_app (X : Scheme.{u})
     (M L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     IsIso (((rightDerivedLowerStarProjectionMap A (𝟙 X)).app M).app L) := by
@@ -85,8 +81,8 @@ noncomputable def compactificationForgetSupports : Rf_!(c)[A] ⟶ R((f)_*[A]) :=
   Functor.whiskerRight (derivedOpenImmersionLowerShriekToLowerStar A c.i) R((c.g)_*[A]) ≫
     rightDerivedLowerStarCompHom A c.i c.g f c.comm
 
-/-- For a proper `f`, the forget-supports map of any compactification of `f` is an isomorphism:
-the open immersion `i` is then also a closed immersion. -/
+/-- For a proper `f`, the forget-supports map of any compactification of `f` is an
+isomorphism. -/
 instance isIso_compactificationForgetSupports [IsProper f] :
     IsIso (compactificationForgetSupports A c) := by
   have := c.isClosedImmersion_openImmersion ‹_›

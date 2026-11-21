@@ -7,13 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackSiteData
 
-/-! Finite-stage component of ambient coefficient pullback.
-Source: Stacks 03CB and 03D3.
+/-! # Finite-stage component of ambient coefficient pullback
 
-The proof compares the chosen ringed-site adjunction with the constant-sheaf
-adjunction on the pro-etale terminal object. The two left adjoints are uniquely
-isomorphic, and the defining constant-section equation identifies that comparison
-with `ringMap`; its component is therefore invertible.
+## References
+
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 03D3]
 -/
 
 @[expose] public noncomputable section

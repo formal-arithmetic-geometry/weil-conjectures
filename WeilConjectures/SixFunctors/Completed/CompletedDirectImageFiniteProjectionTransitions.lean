@@ -16,8 +16,12 @@ import all WeilConjectures.TraceFormula.Compact.CompactSupportFiniteCoefficientP
 
 /-! # Quotient compatibility of the completed direct-image projection formula
 
-Source: Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.21;
-Stacks 0941, 0944 and 099N.
+## References
+
+* Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.21
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0944]
+* [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -128,14 +132,7 @@ private theorem finite_restriction_pasting {m n : ℕ} (h : n ≤ m)
 
 omit [(integralComparisonSequenceDirectImage l E f).Additive]
   [Abelian.HasKInjectiveResolutions (coefficientSequenceModules l E X)] in
-/-- The canonical perfect-quotient projection arrows commute with scalar quotient maps.
-Source: Zheng Proposition 4.21, equation (4.21.1); Lemma 4.10; Stacks 0944.
-
-Proof: the section-normalized finite direct-image restriction square pastes with
-both completed restriction comparisons. Apply the derived triangle identity to
-this sectionwise equation. Taking scalar-adjunction mates, use naturality of the
-comparison and both adjunction unit equations to obtain precisely the displayed
-finite-category equality. No restriction functor is assumed faithful. -/
+/-- The canonical perfect-quotient projection arrows commute with scalar quotient maps. -/
 theorem completedDirectImageFiniteProjection_transitions {m n : ℕ} (h : n ≤ m)
     (a₀ : normalizedDVRModuleRes l E X h ⋙ compactSupportLevelDirectImage l E f m ≅
       compactSupportLevelDirectImage l E f n ⋙ normalizedDVRModuleRes l E Y h)

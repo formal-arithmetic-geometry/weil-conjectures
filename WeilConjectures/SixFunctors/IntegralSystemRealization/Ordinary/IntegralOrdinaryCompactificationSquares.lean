@@ -384,16 +384,7 @@ private theorem compact_projection_square
     ringedCompactificationProjection, CategoryTheory.Functor.map_comp, Category.assoc,
     L, H, M, N, q, r, qJ, rg, rf, α, β, A, C, D, qA, qC, qD, qJC, qJD] using! h
 
-/-- Ordinary coefficient squares for the fixed open/proper compactification words.
-
-Proof: the exchange clause is ordinaryCompactificationExchangeSquare. For projection,
-expand the three factors: proper projection, proper image of open projection, and
-open/proper image of the inverse pull compositor with the actual cf.comm equation.
-Specialize the primitive proper-projection square to formal variables and insert
-both child coefficients by naturality. Invert the prescribed open projection square;
-use naturality of inverse open reduction to lift the inverse pull-composition square.
-Whisker these equalities by proper image and paste them using paste_three. This
-proves the projection clause completely, with no new projection obligation. -/
+/-- Ordinary coefficient squares for the fixed open/proper compactification words. -/
 theorem ordinaryCompactificationSquares
     (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {I : Type u} {X : I → Over B}

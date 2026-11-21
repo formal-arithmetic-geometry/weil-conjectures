@@ -16,7 +16,7 @@ Let `g` be an automorphism of a scheme `X` lying over an automorphism `h` of the
 has a *global Frobenius operator* `F_c(φ) = RΓ_c(X, φ) ∘ g_c^*` on compact cohomology
 (`AlgebraicGeometry.Etale.globalOperator`) and, at a point `x̄` fixed by `(g, h)`, a *local
 Frobenius operator* `F_x̄(φ) = φ_x̄ ∘ τ_x̄` on the geometric stalk
-(`AlgebraicGeometry.Etale.localOperator`), blueprint `definition-frobenius-operator--1`.
+(`AlgebraicGeometry.Etale.localOperator`).
 
 A *compatible system of Frobenius coefficient morphisms* on a normalized adic system `L_•`
 (`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem`) is a family `ψ_n : Lg^* L_n ⟶ L_n` reducing
@@ -48,23 +48,26 @@ of the lifts are the limits of the levelwise traces.
   their local versions: the operators lift to the realizations, equivariantly for the
   realization isomorphisms, and the traces of the lifts are the limits of the levelwise traces.
 
-## Implementation notes
+## Implementation details
 
-The blueprint writes Frobenius coefficient morphisms `ψ : LΦ^* K ⟶ K` with respect to the
-`q`-power scheme Frobenius `Φ`, and their global operators as the action of the graph
-correspondence of `(𝟙, Φ^m)`. By blueprint `lemma-scheme-frobenius-geometric-frobenius--3` (general
-clause), that action is `RΓ_c(X, v) ∘ g_{γ,c}^{m,*}` for the morphism `v = ψ_m ∘ (κ^{(m)})⁻¹`
-attached to the geometric Frobenius `g_γ` through the comparison `κ^{(m)} : LΦ^{m*} ≅ Lg_γ^{m*}` of
-`lemma-scheme-frobenius-geometric-frobenius--1`. Here the data are taken directly relative to
-`g = g_γ` (as for the strict Weil complexes `AlgebraicGeometry.Etale.WeilComplex` of
-`definition-weil-structure`), and the operators are defined by that formula, with the
-compact-support base change `g_c^*` of `AlgebraicGeometry.Etale.compactPullback`.
+Frobenius coefficient morphisms are taken directly relative to the geometric Frobenius `g = g_γ`
+(as for the strict Weil complexes `AlgebraicGeometry.Etale.WeilComplex`) rather than relative to
+the `q`-power scheme Frobenius `Φ`; the global operator is defined by the formula
+`RΓ_c(X, φ) ∘ g_c^*`, with the compact-support base change
+`AlgebraicGeometry.Etale.compactPullback`, which agrees with the action of the graph
+correspondence of `(𝟙, Φ^m)` through the comparison `LΦ^{m*} ≅ Lg_γ^{m*}`.
 
 The compatibility of the operators with the coefficient change comes from the compatibility of
 the coefficient comparisons with pullback (`AlgebraicGeometry.Etale.IsCompactPullbackCompatible`,
 `AlgebraicGeometry.Etale.IsStalkPullbackCompatible`), which the coefficient comparisons of
 `AlgebraicGeometry.Etale.AdicSystem.exists_compactSupportTower` and
 `AlgebraicGeometry.Etale.AdicSystem.exists_stalkTower` satisfy.
+
+In `AlgebraicGeometry.Etale.adicRealization` the coefficient identifications are only asserted to
+exist; the canonical comparisons
+(`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsRestrictScalarsIso` and
+`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) satisfy the hypotheses, and any two
+choices give isomorphic towers.
 -/
 
 @[expose] public section
@@ -83,7 +86,7 @@ section Operators
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X s : Scheme.{u}} {g : X ⟶ X} {h : s ⟶ s}
 
-/-- Blueprint `definition-frobenius-operator--1` (1): the *global Frobenius operator*
+/-- The *global Frobenius operator*
 `F_c(φ) = RΓ_c(X, φ) ∘ g_c^*` on `RΓ_c(X, K)` of a Weil datum `φ : Lg^* K ⟶ K`, for an
 automorphism `g` of `X` over an automorphism `h` of the base, `g_c^*` being the compact-support
 base change `AlgebraicGeometry.Etale.compactPullback`. The datum `φ` need not be invertible. -/
@@ -95,7 +98,7 @@ noncomputable def globalOperator [Finite Λ] {a : X ⟶ s} [QuasiCompact a]
       (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).obj K :=
   (compactPullback Λ sq).app K ≫ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a).map φ
 
-/-- Blueprint `definition-frobenius-operator--1` (2): the *local Frobenius operator*
+/-- The *local Frobenius operator*
 `F_x̄(φ) = φ_x̄ ∘ τ_x̄` on the geometric stalk `K_x̄` of a Weil datum `φ : Lg^* K ⟶ K`, at a point
 `x̄` fixed by the pair `(g, h)`, `τ_x̄` being the stalk transport
 `AlgebraicGeometry.Etale.stalkPullback`. -/
@@ -212,9 +215,7 @@ lemma endIterate_comp_of_comp {X s : Scheme.{u}} {g : X ⟶ X} {h : s ⟶ s} {x 
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}} (g : X ⟶ X)
 
-/-- Blueprint `definition-frobenius-correspondences-their-operators` (2),
-`definition-frobenius-correspondences-their-operators--4`: the
-*iterates* `φ^{[m]} : L(g^m)^* K ⟶ K` of a Weil datum `φ : Lg^* K ⟶ K`, defined by
+/-- The *iterates* `φ^{[m]} : L(g^m)^* K ⟶ K` of a Weil datum `φ : Lg^* K ⟶ K`, defined by
 `φ^{[0]} = (L(𝟙)^* K ≅ K)` and
 `φ^{[m+1]} : L(g ≫ g^m)^* K ≅ Lg^* L(g^m)^* K ──Lg^* φ^{[m]}──▶ Lg^* K ──φ──▶ K`. -/
 noncomputable def iterateWeilDatum
@@ -254,15 +255,13 @@ namespace FrobeniusSystem
 variable {S} {g : X ⟶ X} (F : S.FrobeniusSystem g)
 
 /-- A compatible system of Frobenius coefficient morphisms is a *compatible tower of Weil pairs* if
-every `ψ_n` is invertible: a strict Weil structure `Lg^* L_n ≅ L_n` at every level
-, compatible with the transitions. -/
+every `ψ_n` is invertible: a strict Weil structure `Lg^* L_n ≅ L_n` at every level, compatible
+with the transitions. -/
 def IsWeil : Prop :=
   ∀ n, IsIso (F.coeff n)
 
 /-- The iterated system `ψ_n^{[m]} : L(g^m)^* L_n ⟶ L_n` of a compatible system of Frobenius
-coefficient morphisms is again compatible: the composition isomorphisms of the derived pullback
-are compatible with restriction of scalars
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso_comp_hom_app`). -/
+coefficient morphisms, again a compatible system. -/
 noncomputable def iterate (m : ℕ) : S.FrobeniusSystem (endIterate g m) where
   coeff n := iterateWeilDatum _ g (F.coeff n) m
   comm n := by
@@ -495,31 +494,11 @@ and `L_•` a normalized system of complexes `L_n ∈ Dᵇctf(X, A_n)`
    complexes (for suitable coefficient identifications `α`), whose realization
    `R lim_n RΓ_c(X, L_n)` is represented by a bounded complex of finite free `R`-modules and
    reduces to the levels. For every compatible system `ψ_•` of Frobenius coefficient morphisms
-   relative to an automorphism `g` of `X` over an automorphism `h` of `Spec k` (for instance a
-   compatible tower of Weil pairs for the geometric Frobenius), and every `m`, the global
-   operators `F_{c,m}(ψ_n)` lift to an endomorphism of the realization for which the realization
-   isomorphisms are equivariant.
+   relative to an automorphism `g` of `X` over an automorphism `h` of `Spec k`, and every `m`,
+   the global operators `F_{c,m}(ψ_n)` lift to an endomorphism of the realization for which the
+   realization isomorphisms are equivariant.
 3. *(ii) Geometric stalks.* Likewise for the geometric stalks `(L_n)_x̄` at every geometric point
-   `x̄`, with the local operators `F_{x̄,m}(ψ_n)` at points fixed by `(g^m, h^m)`.
-
-The coefficient identifications `α` and `β` are only asserted to exist, whereas the blueprint
-uses the canonical comparisons; this is harmless, since the canonical comparisons
-(`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsRestrictScalarsIso` and
-`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) satisfy the hypotheses and any two
-choices give isomorphic towers, unit twists lifting level by level.
-
-At the integral stage, compact cohomology and stalks are defined levelwise on the normalized
-systems, so that `RΓ_c(X, K_R) = R lim_n RΓ_c(X, L_n)` and
-`(K_R)_x̄ = R lim_n (L_n)_x̄`. The traces of the lifts are computed by
-`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_trace_eq_globalOperatorFamily` and
-`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.exists_trace_eq_localOperatorFamily`.
-Item (iii), rationalization and coefficient-field extension, is
-`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRationalHomEquiv`,
-`AlgebraicGeometry.Etale.DerivedCategory.exists_iso_of_boundedConstructibleRational`,
-`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational_exists_eq_inv_pow_smul`,
-`AlgebraicGeometry.Etale.DerivedCategory.isEquivalence_toKaroubi_boundedConstructibleRational`,
-`AlgebraicGeometry.Etale.DerivedCategory.rationalization_transport` and, for the stage `ℚ̄_ℓ`,
-`CategoryTheory.StageSystem.exists_stage_representation`. -/
+   `x̄`, with the local operators `F_{x̄,m}(ψ_n)` at points fixed by `(g^m, h^m)`. -/
 theorem adicRealization (hϖ : ϖ ∈ nonZeroDivisors R) (hϖm : ϖ ∈ IsLocalRing.maximalIdeal R)
     (hI : I = Ideal.span {ϖ}) :
     (∀ c : Cone (S.restrict ⋙

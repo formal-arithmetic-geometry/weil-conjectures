@@ -20,16 +20,13 @@ The Koszul braiding of `D(X_ét, Λ)` is trivial on `Λ_X(m) ⊗ᴸ Λ_X(m)`, an
 hypothesis on the braiding of `La^* Lq^* τ` in
 `AlgebraicGeometry.Etale.exists_projectiveLineAdjunction_of_class`.
 
-* `Λ_X(m) ⊗ᴸ Λ_X(m) ≅ Λ_X(2m)` is a sheaf placed in degree zero, so its endomorphisms are
-  determined at the geometric points
-  (`AlgebraicGeometry.Etale.hom_ext_of_leftDerivedUpperStar_map_eq`).
-  The derived pullback is braided, and at a geometric point `x : Spec Ω ⟶ X` the twist is
-  trivial, `Lx^* Λ_X(m) ≅ Λ_{Spec Ω}(m) ≅ Λ`, whose self-braiding is the identity
-  (`AlgebraicGeometry.Etale.braiding_tateObject_self`).
-* The braiding of `K[n] ⊗ᴸ K[n]` is the shift of the braiding of `K ⊗ᴸ K` with the sign
-  `(-1) ^ (n * n)` (`CategoryTheory.MonoidalCategory.braiding_shift_self_eq_id`).
-* Braided functors preserve trivial self-braidings
-  (`CategoryTheory.Functor.braiding_obj_self_eq_id`).
+## Implementation details
+
+`Λ_X(m) ⊗ᴸ Λ_X(m) ≅ Λ_X(2m)` is a sheaf in degree zero, so its endomorphisms are determined at
+the geometric points (`AlgebraicGeometry.Etale.hom_ext_of_leftDerivedUpperStar_map_eq`), where the
+twist is trivial. Shifts and braided functors are handled by
+`CategoryTheory.MonoidalCategory.braiding_shift_self_eq_id` and
+`CategoryTheory.Functor.braiding_obj_self_eq_id`.
 -/
 
 @[expose] public section
@@ -73,8 +70,7 @@ lemma nonempty_tateObject_iso_tensorUnit_of_isSepClosed (Ω : Type u) [Field Ω]
     (unitIsoSingleFunctorConstantSheaf Λ _).symm⟩
 
 /-- **The self-braiding of a Tate twist is trivial.** The braiding of `Λ_X(m) ⊗ᴸ Λ_X(m)` is the
-identity: this object is the sheaf `Λ_X(2m)` placed in degree zero, so it suffices to check it
-at the geometric points, where the twist is trivial. -/
+identity. -/
 theorem braiding_tateObject_self (X : Scheme.{u}) [HasInvertibleExponent Λ X] (m : ℤ) :
     (β_ (tateObject Λ X m) (tateObject Λ X m)).hom = 𝟙 _ := by
   obtain ⟨L, -, -, ⟨e⟩⟩ :=

@@ -82,10 +82,6 @@ import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorCurryNorm
 
 /-! # The evaluation-defined integral Hom reduction comparison
 
-Source: Weil blueprint, `sec-six-functors/sk-prop-sf-biduality-general`,
-`proposition-six-operations-change-coefficients--7`, order 2134; Stacks Project, Tags 08J7, 06YY and
-0A90.
-
 Tensor models below are normalized on K-flat representatives. Their Hom adjunctions
 are normalized by the actual Hom-complex evaluation. Thus the mate is the canonical
 comparison, independently of the equivalent choices of models.
@@ -99,6 +95,18 @@ comparison, independently of the equivalent choices of models.
 ## Main statements
 
 - `integralHomReductionTensorData_exists`: existence of the normalized models.
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 05RU]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 098K]
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 0A90]
 -/
 
 @[expose] public section
@@ -115,42 +123,36 @@ namespace WeilConjectures
 
 open SheafOfModules
 
-/-- Locally bijective maps describe this same sheafification.
-Source: Stacks 03DA. -/
+/-- Locally bijective maps describe this same sheafification. -/
 noncomputable instance (priority := 2000) homReductionLocallyBijective
     (X : AlgebraicGeometry.Scheme.{u}) :
     (AlgebraicGeometry.Scheme.ProEt.topology X).WEqualsLocallyBijective
       AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} X
 
-/-- The site is essentially small at this coefficient size.
-Source: Stacks 098K. -/
+/-- The site is essentially small at this coefficient size. -/
 noncomputable instance (priority := 2000) homReductionSmall
     (X : AlgebraicGeometry.Scheme.{u}) :
     EssentiallySmall.{u + 1} (AlgebraicGeometry.Scheme.ProEt X) :=
   essentiallySmallSelf.{0, u, u + 1} _
 
-/-- Module sheaves for a commutative coefficient sheaf on the small pro-etale site.
-Source: Stacks 03DA. -/
+/-- Module sheaves for a commutative coefficient sheaf on the small pro-etale site. -/
 noncomputable abbrev homReductionModules {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}) :=
   SheafOfModules.{u + 1} ((sheafCompose _
     (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
 
-/-- The standard localization of these module complexes.
-Source: Stacks 05RU. -/
+/-- The standard localization of these module complexes. -/
 noncomputable instance homReductionDerived {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}) :
     HasDerivedCategory (homReductionModules R) := HasDerivedCategory.standard _
 
-/-- The recorded K-injective internal Hom, with the actual two site universes.
-Source: Stacks 08J7. -/
+/-- The recorded K-injective internal Hom, with the actual two site universes. -/
 noncomputable abbrev homReductionHom {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}) :=
   derivedInternalHomOfUniverses.{u + 1, u, u, u + 2} (AlgebraicGeometry.Scheme.ProEt.topology X) R
 
-/-- The signed direct-sum total tensor on complexes; the tensor is the existing sheaf tensor.
-Source: Stacks 0A90. -/
+/-- The signed direct-sum total tensor on complexes; the tensor is the existing sheaf tensor. -/
 noncomputable def homReductionTotal {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P Q : CochainComplex (homReductionModules R) ℤ) :
@@ -162,8 +164,7 @@ noncomputable def homReductionTotal {X : AlgebraicGeometry.Scheme.{u}}
   CochainComplex.mapBifunctor P Q (curriedTensor _)
 
 /-- The canonical map from the Hom complex to its derived internal Hom.
-It is the Hom of the K-injective augmentation followed by the localization factorization.
-Source: Stacks 08J7. -/
+It is the Hom of the K-injective augmentation followed by the localization factorization. -/
 noncomputable def homReductionHomUnit {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P I : CochainComplex (homReductionModules R) ℤ) :
@@ -191,8 +192,7 @@ noncomputable def homReductionHomUnit {X : AlgebraicGeometry.Scheme.{u}}
           _ M).2, CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u + 1}
             _ M⟩)) Qpair).inv.app (op P, I)
 
-/-- Inclusion of a pure tensor into the signed total tensor complex.
-Source: Stacks 0A90. -/
+/-- Inclusion of a pure tensor into the signed total tensor complex. -/
 noncomputable def homReductionTensorElement {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P Q : CochainComplex (homReductionModules R) ℤ) (a b : ℤ)
@@ -208,24 +208,21 @@ noncomputable def homReductionTensorElement {X : AlgebraicGeometry.Scheme.{u}}
       ((CategoryTheory.toSheafify (AlgebraicGeometry.Scheme.ProEt.topology X)
         ((P.X a).val ⊗ (Q.X b).val).presheaf).app U (x ⊗ₜ[R.obj.obj U] y)))
 
-/-- The recorded projection family, selected before specializing the site.
-Source: Stacks 0A8X. -/
+/-- The recorded projection family, selected before specializing the site. -/
 noncomputable def homReductionHomProjection
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
     (R : Sheaf J CommRingCat.{r}) :=
   (CategoryTheory.homComplex_projections_exists.{c, v, w, r} (R := R)).choose
 
-/-- The product projection of the recorded Hom complex.
-Source: Stacks 0A8X. -/
+/-- The product projection of the recorded Hom complex. -/
 noncomputable def homReductionProjection {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P I : CochainComplex (homReductionModules R) ℤ) (a b c : ℤ) (h : b + a = c) :
     (homComplex (R := R) P I).X a ⟶ SheafOfModules.homObj (R := R) (P.X b) (I.X c) :=
   homReductionHomProjection R P I a b c h
 
-/-- Currying means the literal evaluation equation on every localized section and summand.
-Source: Stacks 0A90. -/
+/-- Currying means the literal evaluation equation on every localized section and summand. -/
 def IsHomReductionCurry {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
     (P Q I : CochainComplex (homReductionModules R) ℤ)
@@ -238,8 +235,7 @@ def IsHomReductionCurry {X : AlgebraicGeometry.Scheme.{u}}
 
 /-- A model of derived tensor and its *normalized* adjunction to the recorded internal Hom.
 The representative comparisons and the sectionwise currying equation determine all data
-up to the unique compatible isomorphism; no arbitrary tensor or adjunction is admitted.
-Source: Stacks 06YS, 0A90 and 08J7. -/
+up to the unique compatible isomorphism; no arbitrary tensor or adjunction is admitted. -/
 structure HomReductionTensorModel {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1}) where
   tensor : DerivedCategory (homReductionModules R) ×
@@ -374,20 +370,17 @@ variable (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
   (X : AlgebraicGeometry.Scheme.{u}) (n : ℕ)
 
-/-- Additivity at the fixed common coefficient size.
-Source: Stacks 06YY. -/
+/-- Additivity at the fixed common coefficient size. -/
 noncomputable instance (priority := 2000) homReductionExtensionAdditive :
     (integralReductionChangeOfRings l E X D hl n).Additive :=
   integralReductionChangeOfRingsAdditive.{d, u, u} l E X D hl n
 
-/-- The same scalar extension preserves zero morphisms.
-Source: Stacks 06YY. -/
+/-- The same scalar extension preserves zero morphisms. -/
 noncomputable instance (priority := 2000) homReductionExtensionZero :
     (integralReductionChangeOfRings l E X D hl n).PreservesZeroMorphisms :=
   inferInstance
 
-/-- The left-derived counit transported from homotopy complexes to the complex localization.
-Source: Stacks 06YY. -/
+/-- The left-derived counit transported from homotopy complexes to the complex localization. -/
 noncomputable def homReductionComplexComparison
     (P : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ) :
     (integralDerivedReduction l E X D hl n).obj (DerivedCategory.Q.obj P) ⟶
@@ -406,8 +399,7 @@ noncomputable def homReductionComplexComparison
 /-- Normalized tensor-Hom models and scalar tensor comparison for the actual projection.
 The unit is `m ↦ 1 ⊗ m`. The total comparison is specified on these generating sections.
 Its derived comparison is specified on all pairs of K-flat representatives by the counit
-square. The source and target currying are specified by literal Hom-complex evaluation.
-Source: Stacks 03EK, 06YY, 0A90, 08J7; blueprint order 2134. -/
+square. The source and target currying are specified by literal Hom-complex evaluation. -/
 structure IntegralHomReductionTensorData where
   source : HomReductionTensorModel (completedIntegralCommRingSheaf l E X D hl)
   target : HomReductionTensorModel (integralCoefficientCommRingSheaf l E X n)
@@ -488,24 +480,7 @@ private theorem homReductionComplexComparison_eq_scalar
 This does not assert invertibility of the Hom comparison. The tensor, its representative
 comparisons, currying, scalar unit, total comparison and derived tensor comparison are
 fixed up to their unique compatible isomorphisms by the displayed universal properties
-and normalization equations, so selecting this witness does not select an arbitrary map.
-Source: Stacks 06YS, 06YY, 0A90, 08J7; blueprint order 2134.
-Proof:
-1. Resolve both tensor factors by K-flat complexes. Tensoring quasi-isomorphisms between
-K-flat complexes preserves quasi-isomorphisms, by applying K-flatness to their acyclic
-cones. Localize this total tensor bifunctor, retaining its representative comparisons.
-2. Resolve the Hom target by a K-injective complex. Sectionwise currying on every slice
-is exactly the displayed evaluation equation. It respects the total and Hom differentials;
-localization gives the adjunction and its normalization. K-flat resolutions and K-injective
-resolutions show that these normalized data are unique up to compatible isomorphism.
-3. Ordinary scalar extension has unit 1 tensor m. Its tensor comparison sends the image
-of x tensor y to the tensor of their two unit images. These generating-section formulas
-respect restrictions, balancing and differentials, so sheafification and totalization
-supply scalarUnit and total. The balanced tensor associativity proves extension_flat.
-4. Apply the universal property of the left-derived reduction in both K-flat variables.
-The counit square in normalize defines the resulting tensor comparison uniquely.
-The ordinary tensor comparison and its inverse are isomorphisms, so their descended
-comparisons are inverse. This proves existence of the stated normalized models. -/
+and normalization equations, so selecting this witness does not select an arbitrary map. -/
 theorem integralHomReductionTensorData_exists :
     Nonempty (IntegralHomReductionTensorData D l hl E X n) := by
   classical
@@ -549,8 +524,7 @@ theorem integralHomReductionTensorData_exists :
 
 /-- The canonical comparison is the transpose of reduced evaluation, using the inverse
 canonical tensor comparison. The defining model is fixed by its universal properties
-and its sectionwise and K-flat normalizations, not by an unconstrained isomorphism.
-Source: blueprint order 2134; Stacks 08J7 and 06YY. -/
+and its sectionwise and K-flat normalizations, not by an unconstrained isomorphism. -/
 noncomputable def integralHomReductionComparison
     (K L : completedIntegralDerivedCategory l E X D hl) :
     (integralDerivedReduction l E X D hl n).obj

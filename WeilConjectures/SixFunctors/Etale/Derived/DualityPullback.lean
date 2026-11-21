@@ -26,35 +26,26 @@ natural in `K` and `N`, combined with `Rf^! ω_Y ≅ ω_X`. For `f` smooth of pu
 dimension `d` with an orientation, substituting smooth purity `Rf^! ≅ Lf^*(-)(d)[2d]` gives
 `𝔻_X Lf^* K ≅ (Lf^* 𝔻_Y K)(d)[2d]`.
 
-As the blueprint remark `rem-sf-kv-formal` explains, given biduality the first statement turns
-the Künneth–Verdier theorem into the statement that Verdier duality commutes with external
-products, `𝔻_{X×Y}(M ⊠ N) ≅ 𝔻_X M ⊠ 𝔻_Y N`, which is not formal.
-
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso`
-  (`lemma-internal-adjunction-two-exchange-formulas--3`):
+- `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso`:
   `Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`, for a general coefficient category in which the
   projection formula holds.
-- `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite`
-  (`lemma-internal-adjunction-two-exchange-formulas--3`): the same at finite coefficients.
-- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar`
-  (`lemma-internal-adjunction-two-exchange-formulas--3`): `𝔻_X Lf^* ≅ Rf^! 𝔻_Y` as functors on
-  `D(Y_ét, Λ)ᵒᵖ`.
-- `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_leftDerivedUpperStar`
-  (`lemma-internal-adjunction-two-exchange-formulas--3`): `𝔻_X Lf^* K ≅ (Lf^* 𝔻_Y K)(d)[2d]` for an
-  oriented smooth `f`.
+- `AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite`: the same
+  at finite coefficients.
+- `AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar`:
+  `𝔻_X Lf^* ≅ Rf^! 𝔻_Y` as functors on `D(Y_ét, Λ)ᵒᵖ`.
+- `AlgebraicGeometry.Etale.Orientation.nonempty_iso_verdierDual_leftDerivedUpperStar`:
+  `𝔻_X Lf^* K ≅ (Lf^* 𝔻_Y K)(d)[2d]` for an oriented smooth `f`.
 
-## Implementation notes
+## Implementation details
 
-The blueprint obtains `𝔻_X Lf^* ≅ Rf^! 𝔻_Y` by passing to right adjoints in the Verdier
-exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`, using biduality to see that `𝔻_Y` is its own adjoint. Here the
-same mate calculus is applied one step earlier, to the projection formula itself: the
-internal-Hom form is the conjugate of `PF : Rf_! M ⊗ᴸ K ≅ Rf_!(M ⊗ᴸ Lf^* K)` under the
-adjunctions `K ⊗ᴸ Rf_!(-) ⊣ Rf^! RHom(K, -)` and `Rf_!(Lf^* K ⊗ᴸ -) ⊣ RHom(Lf^* K, Rf^! -)`,
-exactly as the tensor–Hom exchange (`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`)
-is. This avoids biduality, so the isomorphism holds on all of `D(Y_ét, Λ)` and not only on
-`Dᵇctf`. Its naturality in `f` is not recorded.
+The internal-Hom form is the conjugate of the projection formula
+`PF : Rf_! M ⊗ᴸ K ≅ Rf_!(M ⊗ᴸ Lf^* K)` under the adjunctions `K ⊗ᴸ Rf_!(-) ⊣ Rf^! RHom(K, -)`
+and `Rf_!(Lf^* K ⊗ᴸ -) ⊣ RHom(Lf^* K, Rf^! -)`, as for the tensor–Hom exchange
+(`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`). This avoids biduality, so the
+isomorphism holds on all of `D(Y_ét, Λ)` and not only on `Dᵇctf`. Its naturality in `f` is not
+recorded.
 
 The symmetry of `⊗ᴸ` is only available as `Nonempty`
 (`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`), so the isomorphisms are asserted
@@ -89,21 +80,9 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--3`: Duality against pullback,
-internal-Hom form.
-
-Let `f : X ⟶ Y` admit a compactification, and assume the projection formula for `f`
-(axiom (A3) of `def-sf-datum`). Then
-
-`Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`,
-
-naturally in `K` and `N`, i.e. as bifunctors `D(Y_ét)ᵒᵖ ⥤ D(Y_ét) ⥤ D(X_ét)`.
-
-The bifunctor `(K, M) ↦ K ⊗ᴸ Rf_! M` is left adjoint, with the parameter `K`, to
-`(K, N) ↦ Rf^! RHom_Y(K, N)`, and `(K, M) ↦ Rf_!(Lf^* K ⊗ᴸ M)` is left adjoint to
-`(K, N) ↦ RHom_X(Lf^* K, Rf^! N)`. The projection formula, together with the symmetry of
-`⊗ᴸ`, identifies the two left adjoints, and the isomorphism is the conjugate
-(`CategoryTheory.ParametrizedAdjunction.conjugateIso`). -/
+/-- Duality against pullback, internal-Hom form: for `f : X ⟶ Y` admitting a compactification
+and satisfying the projection formula, `Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)` naturally in
+`K` and `N`, i.e. as bifunctors `D(Y_ét)ᵒᵖ ⥤ D(Y_ét) ⥤ D(X_ét)`. -/
 theorem nonempty_rightDerivedUpperShriek_derivedHom_iso [IsIso (projectionMap (ModuleCat.{u + 1} Λ)
     f)] :
     Nonempty (RHom(Y)[ModuleCat.{u + 1} Λ] ⋙ (Functor.whiskeringRight _ _ _).obj R(f)^![Λ] ≅
@@ -137,17 +116,9 @@ section Finite
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
   [HasCompactification f]
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--3`: Duality against pullback,
-internal-Hom form.
-
-For a morphism `f : X ⟶ Y` admitting a compactification and a finite coefficient ring `Λ`,
-
-`Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`,
-
-naturally in `K` and `N`. This is
-`AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso` at
-`A = ModuleCat Λ`, the projection formula holding at finite coefficients
-(`AlgebraicGeometry.Etale.isIso_projectionMap_of_finite`). -/
+/-- Duality against pullback, internal-Hom form: for `f : X ⟶ Y` admitting a compactification
+and a finite coefficient ring `Λ`, `Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)` naturally in `K`
+and `N`. -/
 theorem nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite :
     Nonempty (RHom(Y)[ModuleCat.{u + 1} Λ] ⋙
         (Functor.whiskeringRight _ _ _).obj R(f)^![Λ] ≅
@@ -158,25 +129,9 @@ theorem nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite :
 
 variable {S : Scheme.{u}} (aY : Y ⟶ S) [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--3`: Duality against pullback.
-
-Let `f : X ⟶ Y` be a morphism over a base `S`, with structure morphisms `a_Y : Y ⟶ S` and
-`a_X = f ≫ a_Y`, all admitting a compactification, and let `Λ` be a finite coefficient ring.
-Then the Verdier duals `𝔻_Y = RHom_Y(-, ω_Y)` and `𝔻_X = RHom_X(-, ω_X)` satisfy
-
-`𝔻_X Lf^* ≅ Rf^! 𝔻_Y`
-
-as functors `D(Y_ét, Λ)ᵒᵖ ⥤ D(X_ét, Λ)`.
-
-The blueprint deduces this from the Verdier exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X`
-(`lemma-internal-adjunction-two-exchange-formulas--2`) by passing to right adjoints, using biduality
-to identify the adjoint of `𝔻_Y` with `𝔻_Y`, and so states it on `Dᵇctf`. The same mate calculus
-applied to the projection formula gives the internal-Hom form
-`Rf^! RHom_Y(K, N) ≅ RHom_X(Lf^* K, Rf^! N)`
-(`AlgebraicGeometry.Etale.nonempty_rightDerivedUpperShriek_derivedHom_iso_of_finite`) without
-biduality; at `N = ω_Y`, with `Rf^! ω_Y ≅ ω_X`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_dualizingComplex`), it is the
-statement, on all of `D(Y_ét, Λ)`. -/
+/-- Duality against pullback: let `f : X ⟶ Y` be a morphism over a base `S`, with structure
+morphisms `a_Y : Y ⟶ S` and `a_X = f ≫ a_Y`, all admitting a compactification, and let `Λ` be a
+finite coefficient ring. Then `𝔻_X Lf^* ≅ Rf^! 𝔻_Y` as functors `D(Y_ét, Λ)ᵒᵖ ⥤ D(X_ét, Λ)`. -/
 theorem nonempty_iso_verdierDual_leftDerivedUpperStar :
     Nonempty (L((f)^*[ModuleCat.{u + 1} Λ]).op ⋙ verdierDual _ (f ≫ aY) ≅
       verdierDual _ aY ⋙ R(f)^![Λ]) := by
@@ -194,21 +149,9 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [HasTateTwist Λ] {X Y S 
   [HasInvertibleExponent Λ X] {d : ℕ} {f : X ⟶ Y} [HasCompactification f] (aY : Y ⟶ S)
   [HasCompactification aY] [HasCompactification (f ≫ aY)]
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--3`: Duality against pullback,
-oriented smooth case.
-
-Let `Y` be a scheme over a base `S`, let `Λ` be a finite coefficient ring whose exponent is
-invertible on `X`, and let `f : X ⟶ Y` be smooth of pure relative dimension `d`, with an
-orientation `o`. Then for every `K ∈ D(Y_ét, Λ)` (the blueprint takes `K ∈ Dᵇctf(Y, Λ)` over a
-perfect field)
-
-`𝔻_X Lf^* K ≅ (Lf^* 𝔻_Y K)(d)[2d]`.
-
-As in the blueprint, this substitutes the orientation into
-`𝔻_X Lf^* K ≅ Rf^! 𝔻_Y K` (`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_leftDerivedUpperStar`):
-the tensor formula `Rf^! L ≅ Lf^* L ⊗ᴸ ω_f` of
-`proposition-exceptional-inverse-image-smooth-morphism`, applied to `L = 𝔻_Y K`, and the orientation
-`ω_f ≅ Λ_X(d)[2d]`. -/
+/-- Duality against pullback, oriented smooth case: for `Λ` a finite coefficient ring whose
+exponent is invertible on `X` and `f : X ⟶ Y` smooth of pure relative dimension `d` with an
+orientation `o`, `𝔻_X Lf^* K ≅ (Lf^* 𝔻_Y K)(d)[2d]` for every `K ∈ D(Y_ét, Λ)`. -/
 theorem Orientation.nonempty_iso_verdierDual_leftDerivedUpperStar (o : Orientation Λ f d)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((verdierDual _ (f ≫ aY)).obj (op ((L((f)^*[ModuleCat.{u + 1} Λ])).obj K)) ≅

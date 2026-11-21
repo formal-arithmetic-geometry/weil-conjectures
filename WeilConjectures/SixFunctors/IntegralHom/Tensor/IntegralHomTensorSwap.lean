@@ -8,7 +8,11 @@ public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReduc
 public import WeilConjectures.SixFunctors.Integral.IntegralHomReductionComparison
 public import WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraintsSupplement
 /-! # The actual Koszul swap between tensor representatives
-Source: Stacks Tags 06YU and 0FPQ.
+
+## References
+
+* [Stacks, Tag 06YU]
+* [Stacks, Tag 0FPQ]
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -18,15 +22,13 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.IntegralHom
 variable {X : AlgebraicGeometry.Scheme.{u}}
   (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})
-/-- The native complex braiding, with the presentation's two tensor spellings.
-Source: Stacks 0FPQ. -/
+/-- The native complex braiding, with the presentation's two tensor spellings. -/
 noncomputable def tensorRepresentativeSwap
     (P Q : CochainComplex (Modules.{u, u} X R) ℤ) :
     ((totalTensor.{u, u} X R).obj P).obj Q ≅ homReductionTotal R Q P := by
   exact CategoryTheory.BraidedCategory.braiding P Q
 
-/-- The swap has the usual Koszul formula on the actual tensor generators.
-Source: Stacks 0FPQ. Proof: specialize the proved complex-constraint formula. -/
+/-- The swap has the usual Koszul formula on the actual tensor generators. -/
 theorem tensorRepresentativeSwap_pure
     (P Q : CochainComplex (Modules.{u, u} X R) ℤ)
     (i j k : ℤ) (hij : i + j = k) (hji : j + i = k)

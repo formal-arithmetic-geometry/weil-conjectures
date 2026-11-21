@@ -61,10 +61,16 @@ import WeilConjectures.PoincareDuality.Integral.IntegralPullbackComparisonRealiz
 /-!
 # Coefficient compatibility: the tensor isomorphism under inverse image
 
-Source: Bhatt--Scholze, Section 6.5, Lemma 6.5.9(4), pp. 50--51.
 The actual tensor isomorphism b on sheaves and the maps α and β of the comparison square.
+
+## Implementation details
+
 Split from `WeilConjectures.SixFunctors.Isomorphism.IsomorphismComparisonScalarExtension`
 for compile time.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.9(4)
 -/
 
 @[expose] public noncomputable section
@@ -622,13 +628,7 @@ attribute [-instance] integralOperationsAbSheafify
   integralOperationsAbLocallyBijective integralOperationsSiteSmall in
 /-- The sectionwise tensor comparison is uniquely fixed on every local pure tensor.
 Here U maps to (U,g∘u), so the underlying section y is literally y₀, and the target
-scalar c_L(g⁻¹a₀) is the displayed completed coefficient map applied to a₀.
-Source: inverse-image tensor comparison and Bhatt--Scholze 6.5.9(4).
-Proof: inverse-image tensor compatibility sends the transported pure tensor to the
-same tensor on (U,g∘u). The coefficient projection equations make it balanced over
-R_E, and c_L gives its R_L-linearity. The reverse tensor rule is its inverse.
-Restrictions and module maps commute with the formula. Sheafification extends
-these maps; local generation by pure tensors proves uniqueness. -/
+scalar c_L(g⁻¹a₀) is the displayed completed coefficient map applied to a₀. -/
 theorem isomorphismScalarTensor_existsUnique
     {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y) [IsIso g] :
     ∃! b : inverseImageIntegralModules l E g ⋙ integralOrdinaryScalar l E L ι X ≅
@@ -707,14 +707,12 @@ theorem isomorphismScalarTensor_existsUnique
 
 end TensorComparison
 
-/-- The actual tensor isomorphism b on sheaves, fixed by its local tensor rule.
-Source: Bhatt--Scholze 6.5.9(4). -/
+/-- The actual tensor isomorphism b on sheaves, fixed by its local tensor rule. -/
 def isomorphismScalarTensor {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] :=
   (isomorphismScalarTensor_existsUnique l E L ι g).exists.choose
 
-/-- Exact inverse image and finite-free extension descend this same tensor isomorphism.
-Source: Bhatt--Scholze 6.5.9(4). -/
+/-- Exact inverse image and finite-free extension descend this same tensor isomorphism. -/
 def isomorphismScalarTensorDerived {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) [IsIso g] :
     inverseImageIntegralDerived l E g ⋙ integralOrdinaryDerivedScalar l E L ι X ≅
@@ -726,15 +724,7 @@ def isomorphismScalarTensorDerived {X Y : AlgebraicGeometry.Scheme.{u}}
       (inverseImageIntegralModules l L g)).symm
 
 /-- Both inputs to the X-side completion comparisons lie in the recorded bounded
-constructible, derived-complete category. Source: Bhatt--Scholze 6.5.9(4), and the
-isomorphism-derived-pullback assertion.
-Proof: the sectionwise inverse-image equivalence transports the coefficient actions,
-finite quotient reductions, and their constructible partitions. Exactness transports
-cohomology and its common finite interval. It commutes with the quotient-unit Roos
-triangle, giving completeness of inverse image. The recorded completed pullback is
-naturally identified with that inverse image on these objects by
-lem-weil-isomorphism-derived-pullback. This identification preserves the constructible
-and completeness predicates, giving the second clause. -/
+constructible, derived-complete category. -/
 theorem isomorphismComparisonInputs_constructible
     {X Y : AlgebraicGeometry.Scheme.{u}} (g : X ⟶ Y) [IsIso g]
     (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -768,8 +758,7 @@ theorem isomorphismComparisonInputs_constructible
 
 /-- α is tensor associativity followed by the strict quotient completion comparisons:
 the recorded `scalarPullbackCompleted` of the scalar-operation lemma, whose completeness
-inputs come from hK and the constructibility theorem above.
-Source: Bhatt--Scholze 6.5.9(4). -/
+inputs come from hK and the constructibility theorem above. -/
 def isomorphismComparisonScalarAlpha {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))
@@ -781,8 +770,7 @@ def isomorphismComparisonScalarAlpha {X Y : AlgebraicGeometry.Scheme.{u}}
   (scalarPullbackCompleted l E L ι g K hK.1
     (isomorphismComparisonInputs_constructible l E g hX hY K hK).2.1).hom
 
-/-- β = G_L(χ_Y) ∘ b ∘ χ_X⁻¹, using the specified completion comparison.
-Source: Bhatt--Scholze 6.5.9(4). -/
+/-- β = G_L(χ_Y) ∘ b ∘ χ_X⁻¹, using the specified completion comparison. -/
 def isomorphismComparisonScalarBeta {X Y : AlgebraicGeometry.Scheme.{u}}
     (g : X ⟶ Y) [IsIso g]
     (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x))

@@ -9,7 +9,10 @@ public import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackS
 
 /-! # Inverse sections of the selected ambient pushforward comparison
 
-Source: Stacks 03D3, 0941 and fibre-product pasting.
+## References
+
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -30,13 +33,8 @@ private theorem moduleRestriction_inverse
   rw [← PresheafOfModules.map_comp_apply, ← op_comp, i.hom_inv_id, op_id, M.map_id]
   rfl
 
-/-- Inverse comparison restricts by the forward fibre-product comparison.
-Source: Stacks 03D3 and 0941.
-Proof: evaluate the specified forward section formula on the inverse image of
-x. The isomorphism inverse law identifies the left side with x. Restrict both
-sides by the forward fibre-product comparison; the presheaf restriction laws and
-the fibre-product inverse law cancel its composite with the inverse comparison.
-The resulting equality is the asserted inverse section formula. -/
+/-- The inverse pushforward composition comparison restricts by the forward fibre-product
+comparison. -/
 theorem pushComp_inverse_sections {V W Z : Scheme.{t}}
     (h : Z ⟶ W) (k : W ⟶ V) (s : Option ℕ) (M : Modules ell E Z s)
     (U : Site V s) (x : ((push ell E h s ⋙ push ell E k s).obj M).val.obj (op U)) :

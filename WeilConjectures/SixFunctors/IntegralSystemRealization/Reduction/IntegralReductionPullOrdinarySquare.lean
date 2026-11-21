@@ -10,7 +10,13 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.Integ
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.FiniteScalarRestrictionDirectSections
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! # Finite scalar pullback in the canonical quotient coordinates -/
+/-! # Finite scalar pullback in the canonical quotient coordinates
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -98,8 +104,7 @@ private def finiteProjection (W : Scheme.{u}) (n : ℕ) :
   Functor.whiskerLeft (coefficientSequenceRestriction l E W) (lim.π (op n)) ≫
     (eqToIso (coefficientSequenceRestriction_evaluation l E W n)).hom
 
-/-- Finite evaluation of the ordinary reduction and pullback mate.
-Source: Stacks Tags 06YY and 0D6E. -/
+/-- Finite evaluation of the ordinary reduction and pullback mate. -/
 theorem integralReductionPullOrdinarySquare (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) (M : integralTowerModules l E Y) :
     (pullbackTensorReductionEvaluation l E X n).hom.app ((integralOrdinaryPull l E f).obj M) ≫
@@ -156,8 +161,7 @@ theorem integralReductionPullOrdinarySquare (a : OrdinaryLimitModel l E)
     exact (heq_of_eq h).trans (finiteScalarRestrictionDirect_sections l E f n
       ((coefficientSequenceEvaluation l E X n).obj Z) V.unop _).symm
 
-/-- Finite evaluation of the ordinary reduction and pullback mate.
-Source: Stacks Tags 06YY and 0D6E. -/
+/-- Finite evaluation of the ordinary reduction and pullback mate, on complexes. -/
 theorem integralReductionPullOrdinaryComplex (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :

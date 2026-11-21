@@ -19,14 +19,11 @@ Let `k` be a field, `X` a scheme of finite type over `k` and `Λ` a finite ring.
 uniform amount: there is `B` with `RHom(K, L) ∈ D^{≤ b + B}` for every `L` with homology in
 `[a, b]` (`AlgebraicGeometry.Etale.exists_isLE_derivedHom_of_constructibleFiniteTor`).
 
-The proof is a dévissage in `K` (`definition-verdier-dual-evaluation--3`): such `K` form a thick
-subcategory, and on the generators `K = Rg_* Rj_! P`, with `g` a closed and `j` an open immersion
-and `P` lisse flat, `RHom(K, L) ≅ Rg_* Rj_* RHom(P, Rj^! Rg^! L)` (as in
-`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_field`). Each functor in this
-composite has bounded amplitude: `Rg^!` by the closed-support triangle
-(`AlgebraicGeometry.Etale.homologyConcentratedIn_rightDerivedUpperShriek`), `Rj^! ≅ Lj^*` is
-exact, `RHom(P, -) ≅ P^∨ ⊗ᴸ -`, and `Rg_*`, `Rj_*` raise degrees by at most twice the dimension
-(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj`).
+## Implementation details
+
+The proof is a dévissage in `K`: such `K` form a thick subcategory, and on the generators
+`K = Rg_* Rj_! P`, with `g` a closed and `j` an open immersion and `P` lisse flat,
+`RHom(K, L) ≅ Rg_* Rj_* RHom(P, Rj^! Rg^! L)`, each functor of which has bounded amplitude.
 -/
 
 @[expose] public section
@@ -96,8 +93,7 @@ instance (X : Scheme.{u}) : (derivedHomBoundedAmplitude Λ X).IsStableUnderRetra
 variable {Λ} {k : Type u} [Field k]
 
 /-- The higher direct images along a morphism `f : X ⟶ Y` of `k`-schemes of finite type with
-`dim X ≤ d`, `k` any field, vanish above `2d`
-(`AlgebraicGeometry.Etale.isZero_rightDerived_lowerStar_of_two_mul_lt`). -/
+`dim X ≤ d`, `k` any field, vanish above `2d`. -/
 lemma isZero_higherDirectImage_of_topologicalKrullDim_le {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) (d : ℕ)
@@ -109,9 +105,7 @@ lemma isZero_higherDirectImage_of_topologicalKrullDim_le {X Y : Scheme.{u}}
       q).symm ≪≫ homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ f F q).symm
 
 /-- The exceptional inverse image along a closed immersion `g : Z ⟶ X` into a scheme of finite
-type over `k` raises the upper bound of bounded complexes by a uniform amount: by the
-closed-support triangle (`AlgebraicGeometry.Etale.homologyConcentratedIn_rightDerivedUpperShriek`),
-as the higher direct images along the open complement vanish above twice its dimension. -/
+type over `k` raises the upper bound of bounded complexes by a uniform amount. -/
 lemma exists_isLE_rightDerivedUpperShriek_of_isClosedImmersion {X Z : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (g : Z ⟶ X)
     [IsClosedImmersion g] [HasCompactification g] :
@@ -211,12 +205,7 @@ lemma derivedHomBoundedAmplitude_rightDerivedLowerStar_rightDerivedLowerShriek
 
 /-- For `K ∈ Dctf(X_ét, Λ)`, `X` of finite type over a field and `Λ` finite, the derived hom
 `RHom(K, -)` raises the upper bound of bounded complexes by a uniform amount: there is `B` such
-that `RHom(K, L)` vanishes above `b + B` whenever `L` has homology in `[a, b]`.
-
-By dévissage
-(`AlgebraicGeometry.Etale.ctf_generated_by_rightDerivedLowerStar_rightDerivedLowerShriek`) it
-suffices to treat the generators `Rg_* Rj_! P`
-(`derivedHomBoundedAmplitude_rightDerivedLowerStar_rightDerivedLowerShriek`). -/
+that `RHom(K, L)` vanishes above `b + B` whenever `L` has homology in `[a, b]`. -/
 theorem derivedHomBoundedAmplitude_of_constructibleFiniteTor {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

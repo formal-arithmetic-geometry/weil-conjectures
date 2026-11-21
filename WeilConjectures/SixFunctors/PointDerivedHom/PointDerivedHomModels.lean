@@ -101,12 +101,25 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
 
 /-! # Derived Hom and evaluation for extension from a pro-etale point
 
-Source: Weil blueprint, main-20261015, sec-six-functors/sk-thm-sf-package,
-lem-pod-point-dualizing-complex.proof.md, second sentence; Stacks Tags 0A8X,
-08J7, 0G7E and 08BJ.
+## Implementation details
 
 All tensors here are ordinary tensors. The site retains object universe t+1 and
 morphism universe t; the coefficient universe is max u (t+1).
+
+## References
+
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 0G7E]
+* [Stacks, Tag 08BJ]
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 03CY]
+* [Stacks, Tag 098H]
+* [Stacks, Tag 03D1]
+* [Stacks, Tag 03CW]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YL]
+* [Stacks, Tag 03CO]
 -/
 
 @[expose] public noncomputable section
@@ -126,58 +139,49 @@ namespace WeilConjectures.PointDerivedHom
 
 variable (k : Type t) [Field k]
 
-/-- Existing sheafification at the coefficient size, transported through a small model.
-Source: Stacks 03DA. -/
+/-- Existing sheafification at the coefficient size, transported through a small model. -/
 instance abSheafify : HasSheafify (Scheme.ProEt.topology (Spec (.of k)))
     AddCommGrpCat.{max u (t + 1)} :=
   integralCoefficientAbSheafify.{t, u} (Spec (.of k))
 
-/-- Existing local bijectivity criterion in the coefficient universe.
-Source: Stacks 03DA. -/
+/-- Existing local bijectivity criterion in the coefficient universe. -/
 instance abLocallyBijective : (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)} :=
   integralCoefficientAbLocallyBijective.{t, u} (Spec (.of k))
 
-/-- The same small-model transport for commutative ring sheafification.
-Source: Stacks 03CY. -/
+/-- The same small-model transport for commutative ring sheafification. -/
 instance ringLocallyBijective : (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective
     CommRingCat.{max u (t + 1)} :=
   letI : EssentiallySmall.{max u (t + 1)} (Scheme.ProEt (Spec (.of k))) :=
     essentiallySmallSelf _
   GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall _
 
-/-- The actual final object of the small pro-etale site.
-Source: Stacks 098H. -/
+/-- The actual final object of the small pro-etale site. -/
 abbrev finalObject := Scheme.ProEt.mk (𝟙 (Spec (.of k)))
 
 variable (R : CommRingCat.{max u (t + 1)})
 
-/-- The recorded constant ring sheaf, at the joint coefficient universe.
-Source: Stacks 03CY. -/
+/-- The recorded constant ring sheaf, at the joint coefficient universe. -/
 abbrev constantRing := (constantSheaf (Scheme.ProEt.topology (Spec (.of k)))
   CommRingCat.{max u (t + 1)}).obj R
 
-/-- Forget commutativity of a coefficient sheaf without changing its sections.
-Source: Stacks 03D1. -/
+/-- Forget commutativity of a coefficient sheaf without changing its sections. -/
 abbrev ring (B : Sheaf (Scheme.ProEt.topology (Spec (.of k)))
     CommRingCat.{max u (t + 1)}) :=
   (sheafCompose _ (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj B
 
-/-- The existing category of modules on the unchanged small site.
-Source: Stacks 03D1. -/
+/-- The existing category of modules on the unchanged small site. -/
 abbrev Modules (B : Sheaf (Scheme.ProEt.topology (Spec (.of k)))
     CommRingCat.{max u (t + 1)}) := SheafOfModules.{max u (t + 1)} (ring.{t, u} k B)
 
-/-- Constant-ring sheafification's actual unit.
-Source: Stacks 03CY. -/
+/-- Constant-ring sheafification's actual unit. -/
 def constantUnit : (Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj
     ((forget₂ CommRingCat RingCat).obj R) ⟶ (ring.{t, u} k (constantRing.{t, u} k R)).obj :=
   Functor.whiskerRight (toSheafify (Scheme.ProEt.topology (Spec (.of k)))
     ((Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj R))
       (forget₂ CommRingCat RingCat)
 
-/-- The existing local injectivity of ring sheafification, with commutativity forgotten.
-Source: Stacks 03CY. -/
+/-- The existing local injectivity of ring sheafification, with commutativity forgotten. -/
 instance constantUnit_injective : Presheaf.IsLocallyInjective
     (Scheme.ProEt.topology (Spec (.of k))) (constantUnit.{t, u} k R) :=
   letI := ringLocallyBijective.{t, u} k
@@ -187,8 +191,7 @@ instance constantUnit_injective : Presheaf.IsLocallyInjective
         ((Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj R))
         (forget CommRingCat.{max u (t + 1)}))))
 
-/-- The existing local surjectivity of ring sheafification.
-Source: Stacks 03CY. -/
+/-- The existing local surjectivity of ring sheafification. -/
 instance constantUnit_surjective : Presheaf.IsLocallySurjective
     (Scheme.ProEt.topology (Spec (.of k))) (constantUnit.{t, u} k R) :=
   letI := ringLocallyBijective.{t, u} k
@@ -198,8 +201,7 @@ instance constantUnit_surjective : Presheaf.IsLocallySurjective
         ((Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj R))
         (forget CommRingCat.{max u (t + 1)}))))
 
-/-- Pull back the existing one-object constant-module presheaf to this site.
-Source: Stacks 03CY. -/
+/-- Pull back the existing one-object constant-module presheaf to this site. -/
 def constantPresheaf : ModuleCat.{max u (t + 1)} R ⥤
     PresheafOfModules.{max u (t + 1)}
       ((Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj (RingCat.of R)) :=
@@ -208,8 +210,7 @@ def constantPresheaf : ModuleCat.{max u (t + 1)} R ⥤
       ((Functor.const (Scheme.ProEt (Spec (.of k)))).obj (Discrete.mk (ULift.up ())))
       ((Functor.const (Discrete (ULift.{max u (t + 1)} Unit))ᵒᵖ).obj (RingCat.of R))
 
-/-- The genuine constant module sheaf, formed by associated-module sheafification.
-Source: Stacks 03CY. -/
+/-- The genuine constant module sheaf, formed by associated-module sheafification. -/
 def constantModules : ModuleCat.{max u (t + 1)} R ⥤ Modules.{t, u} k (constantRing.{t, u} k R) :=
   letI := abSheafify.{t, u} k
   letI := abLocallyBijective.{t, u} k
@@ -217,8 +218,7 @@ def constantModules : ModuleCat.{max u (t + 1)} R ⥤ Modules.{t, u} k (constant
     PresheafOfModules.sheafification.{max u (t + 1), t, max u (t + 1), t + 1}
       (constantUnit.{t, u} k R)
 
-/-- Image of an actual module element under constant-module sheafification.
-Source: Stacks 03CY. -/
+/-- Image of an actual module element under constant-module sheafification. -/
 def constantElement (M : ModuleCat.{max u (t + 1)} R)
     (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) (x : M) :
     ((constantModules.{t, u} k R).obj M).val.obj U :=
@@ -230,29 +230,25 @@ def constantElement (M : ModuleCat.{max u (t + 1)} R)
 variable {R} (B : Sheaf (Scheme.ProEt.topology (Spec (.of k)))
   CommRingCat.{max u (t + 1)}) (α : constantRing.{t, u} k R ⟶ B)
 
-/-- The canonical constant-value scalar map at each site object.
-Source: Stacks 03CY. -/
+/-- The canonical constant-value scalar map at each site object. -/
 def scalar (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) : R →+* B.obj.obj U :=
   (α.hom.app U).hom.comp ((toSheafify (Scheme.ProEt.topology (Spec (.of k)))
     ((Functor.const (Scheme.ProEt (Spec (.of k)))ᵒᵖ).obj R)).app U).hom
 
-/-- Sections with scalars restricted along the canonical constant-value map.
-Source: Stacks 03CW. -/
+/-- Sections with scalars restricted along the canonical constant-value map. -/
 def sections : Modules.{t, u} k B ⥤ ModuleCat.{max u (t + 1)} R :=
   SheafOfModules.forget (ring.{t, u} k B) ⋙
     PresheafOfModules.evaluation (ring.{t, u} k B).obj (op (finalObject k)) ⋙
     ModuleCat.restrictScalars (scalar.{t, u} k B α (op (finalObject k)))
 
-/-- Evaluation and scalar restriction are the existing additive functors.
-Source: Stacks 03CW. -/
+/-- Evaluation and scalar restriction are the existing additive functors. -/
 instance sections_additive : (sections.{t, u} k B α).Additive :=
   inferInstanceAs ((SheafOfModules.forget (ring.{t, u} k B) ⋙
     PresheafOfModules.evaluation (ring.{t, u} k B).obj
     (op (finalObject k)) ⋙ ModuleCat.restrictScalars
       (scalar.{t, u} k B α (op (finalObject k)))).Additive)
 
-/-- The actual local tensor generator of B tensor the constant module.
-Source: Stacks 03EK. -/
+/-- The actual local tensor generator of B tensor the constant module. -/
 def extensionElement (M : ModuleCat.{max u (t + 1)} R)
     (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) (b : B.obj.obj U) (x : M) :
     (SheafOfModules.changeOfRings.{t, t + 1, max u (t + 1)} α
@@ -264,49 +260,41 @@ def extensionElement (M : ModuleCat.{max u (t + 1)} R)
       (b ⊗ₜ[(constantRing.{t, u} k R).obj.obj U, (α.hom.app U).hom]
         constantElement.{t, u} k R M U x)
 
-/-- Termwise application of the specified additive extension or sections functor.
-Source: Stacks 0A8X. -/
+/-- Termwise application of the specified additive extension or sections functor. -/
 abbrev sectionComplex := (sections.{t, u} k B α).mapHomologicalComplex (.up ℤ)
 
-/-- The recorded internal Hom complex, with all module and site universes explicit.
-Source: Stacks 0A8X. -/
+/-- The recorded internal Hom complex, with all module and site universes explicit. -/
 abbrev sheafHom (P I : CochainComplex (Modules.{t, u} k B) ℤ) :=
   homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := B) P I
 
-/-- The recorded product projection evaluated on the identity slice.
-Source: Stacks 0A8X. -/
+/-- The recorded product projection evaluated on the identity slice. -/
 abbrev homValue := IntegralHom.evaluate.{t, u} (Spec (.of k)) B
 
-/-- The recorded ordinary direct-sum total tensor on the same small site.
-Source: Stacks 06YL. -/
+/-- The recorded ordinary direct-sum total tensor on the same small site. -/
 abbrev total (P Q : CochainComplex (Modules.{t, u} k B) ℤ) :=
   ((IntegralHom.totalTensor.{t, u} (Spec (.of k)) B).obj P).obj Q
 
 section
 variable {A : Type r} [CommRing A]
 
-/-- The ordinary module total tensor, using the same totalization convention.
-Source: Stacks 06YL. -/
+/-- The ordinary module total tensor, using the same totalization convention. -/
 abbrev moduleTotal (P Q : CochainComplex (ModuleCat.{r} A) ℤ) :=
   CochainComplex.mapBifunctor P Q (curriedTensor _)
 
 end
 
-/-- Restriction from the final object to an arbitrary object of the small site.
-Source: Stacks 03CW. -/
+/-- Restriction from the final object to an arbitrary object of the small site. -/
 def toFinal (U : Scheme.ProEt (Spec (.of k))) : U ⟶ finalObject k :=
   MorphismProperty.Over.homMk U.hom
 
-/-- The actual extension object, with the coefficient-size sheafification fixed.
-Source: Stacks 03EK. -/
+/-- The actual extension object, with the coefficient-size sheafification fixed. -/
 def extensionObject (M : ModuleCat.{max u (t + 1)} R) : Modules.{t, u} k B :=
   letI := abSheafify.{t, u} k
   letI := abLocallyBijective.{t, u} k
   SheafOfModules.changeOfRings.{t, t + 1, max u (t + 1)} α
     ((constantModules.{t, u} k R).obj M)
 
-/-- Tensor scalar extension of the actual constant-module morphism.
-Source: Stacks 03EK. -/
+/-- Tensor scalar extension of the actual constant-module morphism. -/
 def extensionMorphism {M N : ModuleCat.{max u (t + 1)} R} (f : M ⟶ N) :
     extensionObject.{t, u} k B α M ⟶ extensionObject.{t, u} k B α N :=
   letI := abSheafify.{t, u} k
@@ -319,23 +307,20 @@ variable (L : ModuleCat.{max u (t + 1)} R ⥤ Modules.{t, u} k B)
     L.obj M = extensionObject.{t, u} k B α M)
   (adj : L ⊣ sections.{t, u} k B α)
 
-/-- The specified extension applied termwise; additivity follows from the assumed adjunction.
-Source: Stacks 0A8X. -/
+/-- The specified extension applied termwise; additivity follows from the assumed adjunction. -/
 def extensionComplex : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ ⥤
     CochainComplex (Modules.{t, u} k B) ℤ :=
   letI := adj.left_adjoint_additive
   L.mapHomologicalComplex (.up ℤ)
 
 /-- The local tensor generator in the strictly specified extension functor.
-The equality hobj identifies the actual tensor construction, not an arbitrary isomorphic object.
-Source: Stacks 03EK. -/
+The equality hobj identifies the actual tensor construction, not an arbitrary isomorphic object. -/
 def generator (M : ModuleCat.{max u (t + 1)} R)
     (U : (Scheme.ProEt (Spec (.of k)))ᵒᵖ) (b : B.obj.obj U) (x : M) :
     (L.obj M).val.obj U :=
   (eqToHom (hobj M).symm).val.app U (extensionElement.{t, u} k B α M U b x)
 
-/-- The stated explicit adjunction, in both directions and on every local tensor generator.
-Source: Stacks 03CY and 03EK. -/
+/-- The stated explicit adjunction, in both directions and on every local tensor generator. -/
 def ExplicitAdjunction : Prop :=
   (∀ (M : ModuleCat.{max u (t + 1)} R) (V : Modules.{t, u} k B) (h : L.obj M ⟶ V) (x : M),
     (adj.homEquiv M V h).hom x =
@@ -349,8 +334,7 @@ def ExplicitAdjunction : Prop :=
 variable (c : CochainComplex (ModuleCat.{max u (t + 1)} R) ℤ)
   (I : CochainComplex (Modules.{t, u} k B) ℤ)
 
-/-- The normalization that uniquely specifies q on every homogeneous component.
-Source: Stacks 0A8X. -/
+/-- The normalization that uniquely specifies q on every homogeneous component. -/
 def IsComparison
     (q : (sectionComplex.{t, u} k B α).obj
       (sheafHom.{t, u} k B ((extensionComplex.{t, u} k B α L adj).obj c) I) ≅
@@ -362,8 +346,7 @@ def IsComparison
       homValue.{t, u} k B ((extensionComplex.{t, u} k B α L adj).obj c) I j p (op (finalObject k)) h
         (generator.{t, u} k B α L hobj (c.X p) (op (finalObject k)) 1 x)
 
-/-- Naturality of the normalized comparison under arbitrary maps of both complexes.
-Source: Stacks 0A8X. -/
+/-- Naturality of the normalized comparison under arbitrary maps of both complexes. -/
 def ComparisonNatural
     (q : (sectionComplex.{t, u} k B α).obj
       (sheafHom.{t, u} k B ((extensionComplex.{t, u} k B α L adj).obj c) I) ≅
@@ -396,21 +379,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- false denotes finite coefficients at exponent n, true denotes integral coefficients.
-The ULift changes only size, and imposes no relation between field and coefficient universes.
- -/
+The ULift changes only size, and imposes no relation between field and coefficient universes. -/
 def coefficientRing (n : ℕ) : Bool → CommRingCat.{max u (t + 1)}
   | false => .of (ULift.{t + 1} (Padic.coefficientExtensionRing l E n))
   | true => .of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l E))
 
-/-- The two actual coefficient sheaves of the node: discrete constant or completed integral.
- -/
+/-- The two actual coefficient sheaves: discrete constant or completed integral. -/
 def coefficientSheaf (n : ℕ) : Bool →
     Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{max u (t + 1)}
   | false => constantRing.{t, u} k (coefficientRing.{t, u} l E n false)
   | true => completedIntegralCommRingSheafUnrestricted l E (Spec (.of k))
 
 /-- The constant-to-coefficient map: identity at finite level and the canonical limit lift
-at integral level. Source: blueprint point comparison, Stacks 03CO. -/
+at integral level. -/
 def coefficientMap (n : ℕ) (integral : Bool) :
     constantRing.{t, u} k (coefficientRing.{t, u} l E n integral) ⟶
       coefficientSheaf.{t, u} k l E n integral :=

@@ -12,7 +12,15 @@ import all WeilConjectures.WeilSheaf.Ordinary.OrdinaryIntegralPullbackConstructi
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
-/-! # Identification of the ordinary pullback augmentation -/
+/-! # Identification of the ordinary pullback augmentation
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -137,20 +145,7 @@ private theorem pull_completion_chain {X Y : Scheme.{u}} (f : X ⟶ Y)
     (integralOperationsRoos_square (p.tower.hom.app P)) (b.hom.app P) _ _ hu hv hn
 
 /-- The ordinary completion comparison equals the quotient-unit comparison of every
-normalized strict pullback model.
-
-Source: Stacks 03D2, 06YY, 08TC and 0941.
-
-Proof: identify the two ordinary module pullbacks by uniqueness of their adjunctions.
-This identification preserves adjunction-unit sections. The generator normalization
-of the strict tower therefore identifies its quotient augmentation with the specified
-ordinary augmentation. Their maps to the Roos cones agree: the product coordinate is
-that augmentation and the shifted coordinate is zero. The canonical comparison of
-the derived pullbacks preserves the universal computation maps. On a flat-term K-flat
-representative the defining equations for the completion unit and the strict model,
-together with these identifications, give the same whole-cone map as pullComparison.
-Faithful restriction along the resolving-class localization gives the asserted equality.
-No tensor input, invertibility of l, or constructibility assumption is used. -/
+normalized strict pullback model. -/
 theorem pullComparison_eq_unit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (p : OpenFactorCoherence.Pull l E f) :
     pullComparison l E f = p.unit l E := by

@@ -13,7 +13,14 @@ import WeilConjectures.Algebra.Homology.LineUnbounded.LineUnboundedDerivedTensor
 import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorModelSupplement
 import all WeilConjectures.SmoothPurity.Integral.IntegralTensorReductionTowerComparison
 
-/-! Integral line tensor comparison. -/
+/-! # Integral line tensor comparison
+
+## References
+
+* [Stacks, Tag 06YQ]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -71,25 +78,7 @@ private theorem tensorGenerator_smul
 -- Retain the named witnesses in the original public signature.
 set_option linter.unusedVariables false in
 /-- A line has a K-flat single complex, its tensor with a good complex is good,
-and scalar extension commutes with that total tensor with the specified generators.
-Source: Stacks 06YQ, 06YY and 07A4.
-
-Proof: a rank-one trivialization makes tensor by T the identity on module sheaves.
-Exactness is local, so T is flat. Its degree-zero single complex is bounded above
-with flat terms, hence K-flat. Tensor of two K-flat complexes is K-flat by the
-associativity isomorphism and the acyclic-tensor criterion. Each term of the total
-complex is a direct sum of tensors of flat modules and is therefore flat. This
-proves that the tensor with P belongs to Good. At each quotient, extend scalars on
-the direct-sum total tensor. On the summand in bidegree (p,q), the balanced map is
- a tensor (x tensor y) ↦ (a tensor x) tensor (1 tensor y).
-Its inverse sends (a tensor x) tensor (b tensor y) to ab tensor (x tensor y).
-The balancing relations make both maps well defined and inverse; sheafification
-and the coproduct universal property extend them to all sections and all summands.
-The maps commute with the two differential components because scalar extension
-is additive, and both total differentials have the same sign (-1)^p in the second
-component. They therefore give the asserted chain isomorphism β. Its formula on
-sheafified pure tensors is precisely the displayed equation. The argument includes
-n = 0, whose quotient is the positive first power, and arbitrary unbounded P. -/
+and scalar extension commutes with that total tensor with the specified generators. -/
 theorem integralLineTensorComparison_representative
     (T : Mod l E X none) [T.IsFiniteLocallyFreeOfRank 1]
     (P : (Good l E X none).FullSubcategory) :

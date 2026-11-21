@@ -12,7 +12,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.HomologicalComplexFunctorEquiv
 
 /-! # Clopen restriction of quotient completion before imposing completeness
 
-Source: Stacks Project, derived.tex, Tag 08TC; sites-cohomology.tex, Tag 0941.
+## References
+
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -83,22 +86,7 @@ attribute [local irreducible] restriction_roos IntegralOnSlice.tower
   CategoryTheory.Functor.mapDerivedCategory
 
 /-- Completed pullback to a clopen is exact restriction of quotient completion.
-This is an isomorphism of functors on all complexes, before using a completion unit.
-
-Source: Stacks Project, derived.tex, Tag 08TC; sites-cohomology.tex, Tag 0941;
-steps 1 and 2 of lem-fix-clopen-completed-restriction-comparison.
-
-Proof: the strict clopen pullback-tower comparison identifies ordinary restriction
-of the quotient tower with the specified finite pullback tower on all complexes.
-Ordinary restriction preserves countable products: after forgetting modules and
-sheaves it is precomposition of presheaves, and the forgetful composite reflects
-limits. Its additive product comparison identifies the shifted Roos cones,
-naturally in the input complex. Whisker the strict tower isomorphism through the
-Roos functor. On good representatives compose with completionComparison and the
-exact restriction functor's mapDerivedCategoryFactors. The universal property of
-integralPullbackDescent then gives the natural isomorphism of derived functors.
-No invertibility of the prime or completeness of the input is used. Empty clopens
-use the same comparisons in the zero module category. -/
+This is an isomorphism of functors on all complexes, before using a completion unit. -/
 theorem clopenIntegralCompletionRestriction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

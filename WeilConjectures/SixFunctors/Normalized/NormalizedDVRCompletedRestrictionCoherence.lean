@@ -12,9 +12,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Coherence of completed scalar restriction
 
-Source: the canonical restriction comparisons in def-coef-normalized-dvr-tower,
-and Stacks, Derived Categories, lemma-right-derived-exact-functor;
-Categories, lemma-properties-left-localization.
+## References
+
+* Stacks Project, Derived Categories, right derived functor of an exact functor
+* Stacks Project, Categories, properties of left localization
 -/
 
 @[expose] public section
@@ -119,24 +120,7 @@ private noncomputable instance completedColimits
 
 /-- The unit and associativity equations for the canonical completed restriction
 comparisons. These are equations of the specified comparisons, not merely the
-existence of some coherent comparison isomorphisms.
-
-Source: def-coef-normalized-dvr-tower and the strict representative step in
-lem-coef-integral-dualizing-roos-model; Stacks, Derived Categories,
-lemma-right-derived-exact-functor; Categories, lemma-properties-left-localization.
-
-Proof: for ordinary module sheaves every restriction comparison has the identity
-as its underlying map on every section. The unit and the threefold composition
-squares therefore commute sectionwise. Apply exact restriction to complexes and
-then localize. The canonical composition comparison of mapDerivedCategory is
-characterized by its factorization through Q. Whisker each proposed derived
-identity with Q, replace every comparison by this factorization, and cancel the
-invertible factorization maps. The remaining unit square, respectively the
-threefold composition square, is precisely the identity-on-sections square just
-checked. Faithfulness of precomposition with the localization proves both
-identities on every derived object. Repeated indices cause no exception: their
-quotient maps are identities, so this also proves all degenerate associativity
-cases. The zero sheaf on an empty scheme satisfies the same equalities. -/
+existence of some coherent comparison isomorphisms. -/
 theorem normalizedDVR_completedRestriction_coherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

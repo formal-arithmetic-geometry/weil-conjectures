@@ -74,8 +74,9 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Pure-section normalization of the chain tensor--Hom equivalence
 
-Source: Stacks Tag 08J9 and blueprint `lem-coef-integral-hom-reduction.proof.md`,
-paragraphs 1--2.
+## References
+
+* [Stacks, Tag 08J9]
 -/
 
 @[expose] public section
@@ -95,15 +96,7 @@ variable (Y : AlgebraicGeometry.Scheme.{t})
 attribute [local instance 2000] abSheafify abLocallyBijective
 
 /-- The chain tensor--Hom equivalence evaluates pure tensors without a sign when
-its tensor factors are ordered as parameter first and Hom input second.
-Source: Stacks Tag 08J9 and blueprint `lem-coef-integral-hom-reduction.proof.md`,
-paragraphs 1--2.
-
-Proof: use the constructed chain tensor--Hom equivalence. Its inverse sends a
-map into the Hom complex to evaluation on each homogeneous tensor generator.
-Apply this inverse formula to the image of a chain map; the inverse-image
-identity for an equivalence gives the displayed formula. The Hom-complex sign
-and the braiding sign cancel in this ordering. -/
+its tensor factors are ordered as parameter first and Hom input second. -/
 theorem homComplexTensor_pure_equivalence
     (A L N : CochainComplex (Modules.{t, u} Y R) ℤ) :
     ∃ e : ((((totalTensor.{t, u} Y R).obj A).obj L) ⟶ N) ≃

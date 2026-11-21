@@ -99,9 +99,7 @@ lemma ΓMap_unit_app_eq (M : Sheaf X.smallEtaleTopology A) :
   simp
 
 /-- The global sections of the inclusion `𝒢_Z M ⟶ M` of the sections supported on the closed
-complement `Z` of `j` form a kernel of the restriction `Γ(X, M) ⟶ M(U)`: `Γ` preserves the kernel
-`𝒢_Z M` of `M ⟶ j_* j^* M`, and `Γ(X, M) ⟶ Γ(X, j_* j^* M)` is the restriction `Γ(X, M) ⟶ M(U)`
-followed by an isomorphism (`AlgebraicGeometry.Etale.ΓMap_unit_app_eq`). -/
+complement `Z` of `j` form a kernel of the restriction `Γ(X, M) ⟶ M(U)`. -/
 noncomputable def isLimitΓMapSectionsWithSupportι (M : Sheaf X.smallEtaleTopology A) :
     IsLimit (KernelFork.ofι _ (ΓMap_sectionsWithSupportι_app_comp_ΓRes A j M)) :=
   isKernelOfComp _ _ (KernelFork.mapIsLimit _
@@ -154,8 +152,7 @@ lemma sectionsWithSupportCompΓIso_hom_app_comp (M : Sheaf X.smallEtaleTopology 
   exact h
 
 /-- `Γ_Z(X, M) ≅ Γ(Z, i^! M)`: the sections with support in `Z` are the global sections of the
-exceptional inverse image `i^! M` (`AlgebraicGeometry.Etale.closedUpperShriek`), through
-`Γ(Z, i^! M) ≅ Γ(X, i_* i^! M) ≅ Γ(X, 𝒢_Z M)`. -/
+exceptional inverse image `i^! M` (`AlgebraicGeometry.Etale.closedUpperShriek`). -/
 noncomputable def closedUpperShriekCompΓIso :
     closedUpperShriek A i i.openComplement.ι ⋙ Sheaf.Γ Z.smallEtaleTopology A ≅
       globalSectionsWithSupport A i :=
@@ -201,15 +198,7 @@ noncomputable instance (A : Type u') [Category.{u + 1} A] [Abelian A]
     (rightDerivedSectionsWithSupport A i).CommShift ℤ :=
   inferInstanceAs ((globalSectionsWithSupport A i).rightDerivedFunctor.CommShift ℤ)
 
-/-- The functor `K ↦ Hom_{D(X)}(i_* Λ_Z, K[a])` to abelian groups is `K ↦ H^a_Z(X, K)`:
-
-`Hom(i_* Λ_Z, K[a]) ≅ Hom(Λ_Z, Ri^!(K[a])) ≅ Hom(Λ, RΓ(Z, Ri^!(K[a]))) ≅ Hom(Λ, RΓ_Z(X, K)[a])
-  ≅ H^a(RΓ_Z(X, K))`,
-
-by the adjunctions `i_* ⊣ Ri^!` and `Λ_Z ⊣ RΓ(Z, -)` (both left adjoints being exact), the
-identification `RΓ(Z, Ri^! -) ≅ RΓ_Z(X, -)`
-(`AlgebraicGeometry.Etale.rightDerivedClosedUpperShriekCompIso`), and `Hom(Λ[0], M[a]) ≅ H^a(M)`
-for complexes of `Λ`-modules. -/
+/-- The functor `K ↦ Hom_{D(X)}(i_* Λ_Z, K[a])` to abelian groups is `K ↦ H^a_Z(X, K)`. -/
 noncomputable def shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso (a : ℤ) :
     shiftFunctor (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) a ⋙
         preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor _ 0).obj
@@ -240,7 +229,7 @@ noncomputable def shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso (a : �
     (Functor.associator _ _ _).symm ≪≫
     Functor.isoWhiskerLeft _ (ModuleCat.preadditiveCoyonedaObjSelfIso Λ)
 
-/-- Blueprint `lemma-sections-support-closed-subscheme--1`: Supported cohomology as morphisms
+/-- Supported cohomology as morphisms.
 
 For a closed immersion `i : Z ⟶ X` and a complex `K` of étale sheaves of `Λ`-modules on `X`, the
 cohomology with support has a natural identification

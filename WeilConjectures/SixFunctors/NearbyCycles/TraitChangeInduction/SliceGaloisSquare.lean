@@ -56,8 +56,7 @@ variable {R₁ R Ω₁ Ω : Type u} [CommRing R₁] [CommRing R] [Algebra R₁ R
   (hq : φ.total ≫ q₁ = q ≫ Spec.map (CommRingCat.ofHom (algebraMap R₁ R)))
 
 /-- The pullback exchange of `N₂ ⟶ φ.cartesianModel ⟶ N` is invertible if `φ.total` is weakly
-étale and `Spec(Ω₁ ⊗_{R₁} R)` is a single point: the first map is the identity of total spaces
-and the universal homeomorphism `r₂` on generic fibres, the second is weakly étale base change. -/
+étale and `Spec(Ω₁ ⊗_{R₁} R)` is a single point. -/
 theorem Hom.isIso_pullbackExchange_traitChangeModelHom_comp_fromCartesian
     [Subsingleton (PrimeSpectrum (Ω₁ ⊗[R₁] R))] [WeaklyEtale φ.total]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -109,8 +108,7 @@ noncomputable abbrev sliceTraitGaloisModelHom :
     q g hNj.w (sliceTrait_fst_comp D N cN hcN)).comp
     (sliceTraitGenericHom D N cN hcN hNj hNi).fromCartesian
 
-/-- The pullback exchange of `ψ : N₁ ⟶ N` is invertible: the nilpotent thickening is a universal
-homeomorphism, and the cartesian part is weakly étale base change. -/
+/-- The pullback exchange of `ψ : N₁ ⟶ N` is invertible. -/
 theorem isIso_pullbackExchange_sliceTraitGaloisModelHom
     [Subsingleton (PrimeSpectrum (Ω ⊗[R] D.R))]
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -166,9 +164,8 @@ lemma sliceTraitChangeSpecial_comp_sliceTraitSpecial (κ₁₂ : κ₁ →+* κ�
 
 include hgen in
 /-- **The change of trait on the slice from the change of the Galois-layer models** (SGA 4½,
-[Th. finitude], proof of 3.7): by the square `ψ_N ∘ τ = φ ∘ ψ_M` of morphisms of models, whose
-vertical sides have invertible pullback exchanges, the pullback of the exchange of `φ` at `C`
-to the special fibre of the slice of `M` is invertible once the exchange of `τ` is. -/
+[Th. finitude], proof of 3.7): the pullback of the exchange of `φ` at `C` to the special fibre of
+the slice of `M` is invertible once the exchange of `τ` is. -/
 theorem isIso_map_pullbackExchange_of_sliceTraitGaloisChangeHom
     [Subsingleton (PrimeSpectrum (Ω₁ ⊗[R₁] D₁.R))] [Subsingleton (PrimeSpectrum (Ω₂ ⊗[R₂] D₂.R))]
     (κ₁₂ : κ₁ →+* κ₂) (hp : f' ≫ p₁ = p₂ ≫ Spec.map (CommRingCat.ofHom κ₁₂))

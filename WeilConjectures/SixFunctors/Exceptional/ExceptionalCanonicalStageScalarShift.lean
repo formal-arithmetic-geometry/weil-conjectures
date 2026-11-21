@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
 import all WeilConjectures.SmoothPurity.Scalar.ScalarShiftNormalization
 
-/-! # The canonical scalar square on intrinsic integral stages -/
+/-! # The canonical scalar square on intrinsic integral stages
+
+## References
+
+* Zheng, Constructions 6.2 and 6.6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -67,12 +72,7 @@ variable (l : ℕ) [Fact l.Prime]
   (T : Scheme.{u}) (a b : AlgebraicallyClosedCoefficients.Index l Ω) (h : a ≤ b)
 
 /-- Localization of the canonical intrinsic integral scalar shift agrees with the canonical
-rational scalar shift. Source: Zheng, Constructions 6.2 and 6.6.
-
-Proof: the object and pure tensor formulas identify both composite functors. Their identity
-comparison commutes with shift one: the two localization comparisons are identities, and the
-rational scalar comparison is the localization of the integral one. Integer shift coherence
-extends this equation to all integers. -/
+rational scalar shift. -/
 theorem canonical_stage_scalar_shift :
     let E := AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω a
     let L := AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω b

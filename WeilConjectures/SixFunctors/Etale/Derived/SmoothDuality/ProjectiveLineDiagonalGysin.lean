@@ -116,7 +116,7 @@ noncomputable def projectiveLineDiagonalTateIso :
 (`AlgebraicGeometry.Etale.cartierKummerClass`, read on `RΔ_! ≅ RΔ_*`), followed by
 `RΔ_* RΔ^! ≅ RΔ_! RΔ^! ⟶ 𝟭` and `Λ_W(1)[2] ≅ La^* Lq^* τ`. Its cycle class is the
 forgotten-supports Kummer class `AlgebraicGeometry.Etale.cartierKummerCycleClassAux` of the
-diagonal; the Gysin map of the notes is its negative `projectiveLineDiagonalGysin`. -/
+diagonal; the Gysin map is its negative `projectiveLineDiagonalGysin`. -/
 @[irreducible]
 noncomputable def projectiveLineDiagonalGysinAux :
     (R((𝐝)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ⟶
@@ -129,9 +129,9 @@ noncomputable def projectiveLineDiagonalGysinAux :
       (rightDerivedUpperShriekAdjunction Λ 𝐝).counit.app _ ≫
         (projectiveLineDiagonalTateIso Λ S).hom
 
-/-- **The Gysin map of the diagonal** `c : RΔ_* Λ_P ⟶ La^* Lq^* τ` with the sign of the notes:
-the negative of `projectiveLineDiagonalGysinAux`, so that its cycle class is the cycle class
-`δ = c₁(𝒪(Δ))` of the diagonal (`AlgebraicGeometry.Etale.cartierKummerCycleClass`,
+/-- **The Gysin map of the diagonal** `c : RΔ_* Λ_P ⟶ La^* Lq^* τ`: the negative of
+`projectiveLineDiagonalGysinAux`, so that its cycle class is the cycle class `δ = c₁(𝒪(Δ))` of
+the diagonal (`AlgebraicGeometry.Etale.cartierKummerCycleClass`,
 `unit_app_comp_map_η_comp_projectiveLineDiagonalGysin`). -/
 noncomputable def projectiveLineDiagonalGysin :
     (R((𝐝)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ _) ⟶

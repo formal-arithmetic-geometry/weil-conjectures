@@ -20,7 +20,8 @@ map `α_u` is adjoint, with the composite
 
 `j₂^* Ru_* j₁! K ≅ Rp_* b^* j₁! K ≅ Rp_* s_! K ≅ K`
 
-of the restriction of the derived direct image to the open `X ⊆ T₂`, the restriction of the extension
+of the restriction of the derived direct image to the open `X ⊆ T₂`, the restriction of the
+extension
 by zero to `V` and the direct image from the open and closed section `s`.
 
 ## Main definitions
@@ -55,16 +56,10 @@ namespace Etale
 variable {T S U V : Scheme.{u}} {f : T ⟶ S} {a : U ⟶ S} [IsOpenImmersion a] {b : V ⟶ T}
   {fU : V ⟶ U}
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Derived direct image restricted
-to an open. For a morphism `f : T ⟶ S`, an open immersion `a : U ⟶ S` and the cartesian square
-`V = T ×_S U` with projections `b : V ⟶ T` and `f_U : V ⟶ U`, restriction gives a natural
-isomorphism
-
-`a^* Rf_* L ≅ Rf_{U,*} b^* L`
-
-on `D⁺(T_ét, Λ)`: the derived base change map
-(`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`), which is an isomorphism by étale base
-change (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale`). -/
+/-- **Derived direct image restricted to an open.** For a morphism `f : T ⟶ S`, an open
+immersion `a : U ⟶ S` and the cartesian square `V = T ×_S U` with projections `b : V ⟶ T` and
+`f_U : V ⟶ U`, this is the natural isomorphism `a^* Rf_* L ≅ Rf_{U,*} b^* L` on `D⁺(T_ét, Λ)`
+given by the derived base change map (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus`). -/
 noncomputable def derivedOpenRestrictionIso (sq : IsPullback b fU f a) :
     ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus ⋙ D+((a)^*[ModuleCat.{u + 1} Λ]) ≅
       D+((b)^*[ModuleCat.{u + 1} Λ]) ⋙ ((fU)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlus :=
@@ -143,10 +138,8 @@ lemma upperStarBLowerShriekIso_hom_app_comp
       (D.upperStarBToLowerStar Λ).app K := by
   simp [upperStarBLowerShriekIso]
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--7`: The specified comparison
-isomorphism. The restriction isomorphism `θ_{u,K} : j₂^* Ru_* j₁! K ≅ K` of
-`AlgebraicGeometry.ProperOpenDatum.restrictionIso`, to which the comparison map `α_u` is adjoint
-(`AlgebraicGeometry.ProperOpenDatum.homEquiv_comparison_app`), is the composite of
+/-- The restriction isomorphism `θ_{u,K} : j₂^* Ru_* j₁! K ≅ K` of
+`AlgebraicGeometry.ProperOpenDatum.restrictionIso` is the composite of
 
 * the restriction of the derived direct image to the open `X ⊆ T₂`,
   `j₂^* Ru_* j₁! K ≅ Rp_* b^* j₁! K` (`AlgebraicGeometry.Etale.derivedOpenRestrictionIso`),

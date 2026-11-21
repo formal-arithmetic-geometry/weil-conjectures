@@ -72,7 +72,9 @@ import Mathlib.Data.Matrix.Basic
 
 /-! # The normalized integral chart of completed coefficients
 
-Source: Bhatt--Scholze, Lemma 6.8.2.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2
 -/
 
 @[expose] public noncomputable section
@@ -357,21 +359,7 @@ private theorem integralPresentation_natural (l : ℕ) [Fact l.Prime] [N : Nativ
   exact hleft.symm.trans (h'.symm.trans (hp.trans (hright.trans
     (congrArg (fun z : PadicAlgCl.integers l E.1 ↦ (z : PadicAlgCl l)) hc).symm)))
 
-/-- Completed integral coefficients have the normalized continuous integral chart.
-
-Source: Bhatt--Scholze, Lemma 6.8.2, the integral comparison and its finite quotient
-normalizations; the integral component of lem-sf-native-scalar-ring-model, steps 1 and 3.
-
-Proof in words: take the integral isomorphism of a normalized CoefficientPresentation.
-Transport its continuous functions along Shrink.algEquiv. Uniqueness of the extension
-of the p-adic absolute value shows that this algebra equivalence identifies the integer
-subrings and is an isometry. The inverse of the canonical condensed continuous chart,
-followed by section-ring reconstruction, gives the displayed ring isomorphism. The
-finite constant and residue equations show that the integral comparison is independent
-of the chosen presentation. Its integral and rational inclusions evaluate to the given
-embedding, proving the pointwise equation with a.map by ha. Both completed pullback and
-continuous precomposition have the same finite-quotient projections. Their equality at
-every projection gives the last naturality clause. This works also on empty schemes. -/
+/-- Completed integral coefficients have the normalized continuous integral chart. -/
 theorem exists_nativeScalarIntegralPresentation
     (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]
     (E : Index l (PadicAlgCl l))

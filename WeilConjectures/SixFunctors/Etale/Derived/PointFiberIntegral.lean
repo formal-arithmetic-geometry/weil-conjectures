@@ -29,28 +29,10 @@ are derived complete.
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_iff_boundedConstructible`: on `Spec k`,
   the integral stage consists of the bounded constructible complexes.
 - `AlgebraicGeometry.Etale.pointFiberIntegralEquivalence` and, for `Λ = 𝒪_E`,
-  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`
-  (`lemma-perfect-complexes-geometric-point`, integral stage): `Fib_s : Dᵇc(Spec k, Λ) ≌ Dᵇ_fg(Λ)`.
+  `AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`:
+  `Fib_s : Dᵇc(Spec k, Λ) ≌ Dᵇ_fg(Λ)`.
 - `DerivedCategory.boundedFiniteCohomology_rightOrthogonal`: the objects of `Dᵇ_fg(Λ)` are
   derived complete, i.e. receive no nonzero map from an object on which `ϖ` acts invertibly.
-
-## Proof
-
-If `K` is bounded constructible, the dévissage of bounded complexes reduces the claim to a
-constructible sheaf, the constant sheaf on a finitely generated `Λ`-module, which is a cokernel of
-a map of finite free modules; so it reduces to `Λ` placed in degree `0`. Its reductions are the
-constant sheaves `Λ/Iⁿ⁺¹`, of Tor amplitude in `[-1, 0]` by the triangles `Λ ⟶ Λ ⟶ Λ/Iⁿ⁺¹`; and
-`Λ` is derived complete, being the homotopy limit of the tower `Λ/Iⁿ`, as it is for modules
-(`DerivedCategory.isHomotopyLimit_mapCone_Q_of_epi`).
-
-Conversely, let `K` be derived complete with reductions `Kₙ` of Tor amplitude in `[a, b]` with
-constructible cohomology. Morphisms out of `Λ` placed in degree `j` compute the global sections of
-the cohomology sheaves (`AlgebraicGeometry.Etale.homSingleLinearEquiv`), which for the `Kₙ` are
-finite and vanish outside `[a, b]`. The Milnor sequence of the homotopy limit `K = R lim Kₙ`
-then shows that `M = Hom(Λ[-j], K)` is the inverse limit of the finite groups
-`Hom(Λ[-j], Kₙ)`: it vanishes outside `[a, b]`, it is `ϖ`-adically separated, and `M/ϖM`
-embeds into `Hom(Λ[-j], K₁)`, so `M` is finitely generated
-(`Module.finite_of_isHausdorff_of_ker_le`).
 -/
 
 @[expose] public section
@@ -119,7 +101,7 @@ variable [IsDomain Λ] [IsPrincipalIdealRing Λ]
 
 include hϖ hI in
 /-- The constant sheaf on a finitely generated `Λ`-module `M`, placed in degree `0`, lies in the
-integral stage: `M` is the cokernel of an injective map of finite free modules. -/
+integral stage. -/
 lemma boundedConstructibleIntegral_constSingle (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M] :
     DerivedCategory.boundedConstructibleIntegral I (Spec (.of k)) (constSingle k M) := by
   obtain ⟨s, π, hπ⟩ := Module.Finite.exists_fin' Λ M
@@ -135,8 +117,7 @@ lemma boundedConstructibleIntegral_constSingle (M : ModuleCat.{u + 1} Λ) [Modul
 
 include hϖ hI in
 /-- Over a separably closed field `k`, a bounded constructible object of `D((Spec k)_ét, Λ)` lies
-in the integral stage `Dᵇc(Spec k, Λ)`, by dévissage to constant sheaves on finitely generated
-modules. -/
+in the integral stage `Dᵇc(Spec k, Λ)`. -/
 theorem boundedConstructibleIntegral_of_boundedConstructible
     {K : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k)) K) :
@@ -178,23 +159,11 @@ noncomputable def pointFiberIntegral :
         (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}).choose_spec.1
         (Fact.out : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ}).choose_spec.2 K.property))
 
-/-- Finite coefficient categories over a point
-(integral stage `𝒪_E`).
-
-Let `Λ` be a complete discrete valuation ring with finite residue field and maximal ideal
-`I = (ϖ)` (in the blueprint `Λ = 𝒪_E`, see
-`AlgebraicGeometry.Etale.pointFiberIntegerRingEquivalence`) and `k` a separably closed field. The
-evaluation at the geometric point of `s = Spec k`,
-`Fib_s : Dᵇc(s, Λ) ⥤ Dᵇ_fg(Λ)` (`AlgebraicGeometry.Etale.pointFiberIntegral`), is an equivalence
-from the integral stage `Dᵇc(s, Λ)` (derived complete objects of `D(s_ét, Λ)` whose reductions
-modulo `Iⁿ⁺¹` are bounded constructible of uniformly bounded Tor amplitude,
-`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral`) onto the bounded
-complexes of `Λ`-modules with finitely generated cohomology modules. These complexes are derived
-complete (`DerivedCategory.boundedFiniteCohomology_rightOrthogonal`), so that the target is the
-category `Dᵇ_fg(𝒪_E)` of bounded derived-complete complexes with finitely generated cohomology of
-the blueprint. It is the restriction of the equivalence `D(Γ) : D(s_ét, Λ) ≌ D(Λ)`, the integral
-stage over `s` being the bounded constructible objects
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_iff_boundedConstructible`). -/
+/-- Let `Λ` be a complete discrete valuation ring with finite residue field and maximal ideal
+`I = (ϖ)` and `k` a separably closed field. The evaluation at the geometric point of
+`s = Spec k`, `Fib_s : Dᵇc(s, Λ) ⥤ Dᵇ_fg(Λ)` (`AlgebraicGeometry.Etale.pointFiberIntegral`), is
+an equivalence from the integral stage `Dᵇc(s, Λ)` onto the bounded complexes of `Λ`-modules
+with finitely generated cohomology modules. -/
 noncomputable def pointFiberIntegralEquivalence :
     (DerivedCategory.boundedConstructibleIntegral I (Spec (.of k))).FullSubcategory ≌
       _root_.DerivedCategory.BoundedFiniteCohomology Λ :=
@@ -229,9 +198,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {I : Ideal Λ} {ϖ : Λ} (hϖ : ϖ �
 include hϖ hI in
 /-- The bounded complexes of modules with finitely generated cohomology over a complete discrete
 valuation ring `Λ` with finite residue field and maximal ideal `I = (ϖ)` are derived complete:
-they receive no nonzero morphism from an object on which `ϖ` acts invertibly. They are the
-images under `D(Γ)` of integral objects over a separably closed point, which are derived
-complete. -/
+they receive no nonzero morphism from an object on which `ϖ` acts invertibly. -/
 theorem _root_.DerivedCategory.boundedFiniteCohomology_rightOrthogonal
     {L : _root_.DerivedCategory (ModuleCat.{u + 1} Λ)}
     (hL : _root_.DerivedCategory.boundedFiniteCohomology Λ L)
@@ -285,18 +252,11 @@ instance _root_.PadicAlgCl.finite_quotient_maximalIdealShrink :
     inferInstanceAs (Finite (IsLocalRing.ResidueField (PadicAlgCl.integers l E)))
   Finite.of_equiv _ (Ideal.quotientEquiv _ _ (PadicAlgCl.shrinkRingEquiv l E) rfl).toEquiv
 
-/-- Finite coefficient categories over a point
-(integral stage `𝒪_E`).
-
-For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation at
-the geometric point of `s = Spec k` is an equivalence
+/-- For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and a separably closed field `k`, evaluation
+at the geometric point of `s = Spec k` is an equivalence
 `Fib_s : Dᵇc(s, 𝒪_E) ≌ Dᵇ_fg(𝒪_E)` between the integral stage
 `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleIntegral 𝔪_E s` and the bounded
-complexes of `𝒪_E`-modules with finitely generated cohomology modules (which are derived
-complete, `DerivedCategory.boundedFiniteCohomology_rightOrthogonal`). This is
-`AlgebraicGeometry.Etale.pointFiberIntegralEquivalence` for `Λ = 𝒪_E`, whose maximal ideal is
-generated by a nonzerodivisor (`PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span`).
-The finite stage is `AlgebraicGeometry.Etale.pointFiberEquivalence`. -/
+complexes of `𝒪_E`-modules with finitely generated cohomology modules. -/
 noncomputable def pointFiberIntegerRingEquivalence :
     (DerivedCategory.boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E)
       (Spec (.of k))).FullSubcategory ≌

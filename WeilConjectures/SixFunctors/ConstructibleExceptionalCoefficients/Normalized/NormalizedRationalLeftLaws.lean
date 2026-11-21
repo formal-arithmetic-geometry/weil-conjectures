@@ -22,23 +22,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- Localization transports the normalized integral left coefficient laws.
-Source: exceptional inverse-image coefficient construction, rationalization paragraph;
-the rational-arrow localization argument, Steps 1--4.
-
-Proof: identify the restricted completed scalar functors through their full inclusions.
-The normalization of their realizations identifies the supplied scalar associators and
-unitors with the intrinsic completed associators and unitors. Apply the normalized ring
-compact-support scalar cocycle to the completed coefficient changes. Every intrinsic
-integral constructible object has uniform residue Tor amplitude because l is invertible
-on the geometric finite-field base. Thus its unchanged representative belongs to the
-recorded finite-Tor category. Use the raw-localization argument of
-rational_left_coefficient_localization on the integral functor on these representatives.
-Only its singleton integral-arrow case is needed for the localized associator and unitor;
-localizedAction supplies this directly. The component normalization identifies q with
-the localized integral q. Localization preserves composition and identity, yielding the
-two displayed LEFT laws. This argument includes identities and repeated fields and uses
-no reflection of equality by localization. -/
+/-- Localization transports the normalized integral left coefficient laws. -/
 theorem normalized_rational_left_laws (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

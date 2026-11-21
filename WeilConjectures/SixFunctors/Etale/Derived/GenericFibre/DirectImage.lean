@@ -16,32 +16,23 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 Let `S` be an integral scheme of finite type over a field `k`, let `Λ` be a finite ring whose
 exponent is invertible on `S`, and let `t : T ⟶ S` be a morphism from a noetherian scheme `T`
 lying over the generic point of `S` — for instance a geometric generic point
-`Spec (k(S)^{alg}) ⟶ S`, the case of blueprint `lemma-restriction-geometric-generic-fibre` with
-`S = B` a curve. For an open immersion `j : X ⟶ Y` of finite-type `S`-schemes and its base change
-`j_T : X_T ⟶ Y_T` along `g : Y_T ⟶ Y`, the derived base change map
+`Spec (k(S)^{alg}) ⟶ S`. For an open immersion `j : X ⟶ Y` of finite-type `S`-schemes and its base
+change `j_T : X_T ⟶ Y_T` along `g : Y_T ⟶ Y`, the derived base change map
 
 `Ex_* : g^* Rj_* L ⟶ Rj_{T,*} g'^* L`
 
 (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) is an isomorphism for every bounded
 constructible `L` on `X`.
 
-This is the first comparison of blueprint `lemma-restriction-geometric-generic-fibre`,
-`g_X^* Rh_* L ≅ Rh_{η̄,*} g_T^* L`, for `h` an open immersion; it is the case used by the closed
-support comparison (`WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport`).
+This is the case used by the closed support comparison
+(`WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport`).
 
-## Implementation notes
+## Implementation details
 
-The blueprint proves the comparison by writing the separable closure of `k(B)` as a limit of
-étale neighbourhoods, applying smooth base change at each stage and passing to the limit. Here it
-is instead read off from Deligne's generic base change theorem
-(`AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`,
-`theorem-generic-constructibility-base-change-rj`): for each constructible sheaf `F` the formation
-of `Rj_* F` commutes with every noetherian base change landing in some nonempty open `U ⊆ S`, and
-the generic point lies in every such `U`. A dévissage over the cohomology sheaves
-(`AlgebraicGeometry.Etale.prop_of_boundedConstructible`) passes from sheaves to bounded
-constructible complexes, the locus where `Ex_*` is invertible being a triangulated subcategory
-(`CategoryTheory.NatTrans.isoLocus`). In particular no algebraic closedness of the residue field
-of `T` is needed.
+The comparison is read off from Deligne's generic base change theorem
+(`AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`) rather than from
+smooth base change along a limit of étale neighbourhoods; in particular no algebraic closedness
+of the residue field of `T` is needed.
 
 ## Main statements
 
@@ -69,16 +60,14 @@ lemma genericPoint_mem_of_nonempty {S : Scheme.{u}} [IsIntegral S] (U : S.Opens)
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`, first comparison, for an open immersion.
+/-- **Open direct images commute with generic base change.**
 
 Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose exponent
 is invertible on `S`, and let `t : T ⟶ S` be a morphism from a noetherian scheme lying over the
 generic point of `S` (e.g. a geometric generic point). For an open immersion `j : X ⟶ Y` of
 finite-type `S`-schemes, with base changes `g : Y_T ⟶ Y`, `g' : X_T ⟶ X` and `j_T : X_T ⟶ Y_T`,
 the derived base change map `Ex_* : g^* Rj_* L ⟶ Rj_{T,*} g'^* L` is an isomorphism for every
-bounded constructible complex `L` on `X`. This is Deligne's generic base change
-(`AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`), followed by a
-dévissage over the cohomology sheaves of `L`. -/
+bounded constructible complex `L` on `X`. -/
 theorem isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_generic {k : Type u} [Field k]
     {S : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasInvertibleExponent Λ S] {T : Scheme.{u}} [IsNoetherian T] (t : T ⟶ S)

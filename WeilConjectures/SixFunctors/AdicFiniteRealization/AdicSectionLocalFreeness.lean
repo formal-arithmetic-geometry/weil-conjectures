@@ -11,7 +11,12 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.CoversTop.Basic
 
 /-! # Local finite freeness in the section presentation
-Source: Stacks Project, Tags 00YV, 03DM and 03DO.
+
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 03DM]
+* [Stacks, Tag 03DO]
 -/
 
 @[expose] public noncomputable section
@@ -25,18 +30,7 @@ open scoped CategoryTheory.Obj CategoryTheory.Functor
 namespace WeilConjectures.AdicFiniteRealization
 
 attribute [-instance] hasSheafCompose_of_preservesMulticospan in
-/-- The section equivalence detects finite free trivializations on scheme covers.
-Source: Stacks Project, Tags 00YV, 03DM and 03DO.
-Proof: localize at a weakly etale chart W. The pro-etale site of its source is
-equivalent to the slice site over W, and restriction of the section equivalence
-commutes with this localization. The regular internal module encodes as the unit
-module; finite coproduct preservation identifies its rank n free module with
-SheafOfModules.free on ULift (Fin n). Full faithfulness gives the converse.
-A scheme precover gives a family covering the terminal object. Conversely restrict
-a local generators covering sieve to the terminal object and refine it by a
-pro-etale precover. Pull the free presentations to that refinement and shrink the
-index universe using smallness of the precoverage. This gives a scheme cover of
-the required size. Empty covers and rank zero are allowed throughout. -/
+/-- The section equivalence detects finite free trivializations on scheme covers. -/
 theorem sectionModule_locallyFree_iff (X : Scheme.{u})
     (A : Sheaf (ProEt.topology X) Ab.{u + 1}) [MonObj A] [IsCommMonObj A]
     (P : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) A) :

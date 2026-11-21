@@ -17,8 +17,7 @@ Let `χ : M'' ⟶ M` be the composite of morphisms of models `ρ : M'' ⟶ M₁`
 monomorphism whose idempotent, times `n`, is a sum of natural endomorphisms of the nearby cycles
 of `M''` (the inclusion of the invariants of a finite group), then so is the pullback exchange of
 `χ` (`NearbyCyclesModel.exists_retraction_pullbackExchange_of_comp`). This is the formal part of
-the generic-slicing identification of nearby cycles with invariants (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, "Facts about traits", identification (2)).
+the generic-slicing identification of nearby cycles with invariants.
 -/
 
 @[expose] public section

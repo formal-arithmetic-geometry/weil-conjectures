@@ -19,9 +19,8 @@ two morphisms of étale sheaves whose pullbacks along all geometric points agree
 
 The same holds in the derived category `D(X_ét, Λ)` for morphisms between sheaves placed in a
 single degree: the single-degree functor is fully faithful and commutes with the exact pullback
-along a geometric point. This is the *stalk criterion for the equality of sheaf sections*
- in the form used by the uniqueness of the orientation
-of the zero section.
+along a geometric point. This stalk criterion is used for the uniqueness of the orientation of
+the zero section.
 
 ## Main statements
 
@@ -49,11 +48,7 @@ namespace Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
 /-- Two morphisms of étale sheaves of `Λ`-modules on `X` whose pullbacks along every geometric
-point `x : Spec Ω ⟶ X` agree are equal: the fibre of a morphism at the geometric point `x` is
-the fibre of its pullback `x^*` at the identity point of `Spec Ω`
-(`AlgebraicGeometry.Etale.upperStarCompUliftSheafFiberIso`), and the geometric points jointly
-detect equality of morphisms
-(`AlgebraicGeometry.Scheme.isConservativeFamilyOfPoints_ulift_pointSmallEtale`). -/
+point `x : Spec Ω ⟶ X` agree are equal. -/
 theorem sheafHom_ext_of_upperStar_map_eq {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     {φ ψ : F ⟶ G}
     (h : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ X),
@@ -69,10 +64,7 @@ theorem sheafHom_ext_of_upperStar_map_eq {F G : Sheaf X.smallEtaleTopology (Modu
     h _ (X.algClosurePoint s)]
 
 /-- Two morphisms `F[0] ⟶ G[0]` in `D(X_ét, Λ)` between sheaves placed in degree zero whose
-derived pullbacks along every geometric point `x : Spec Ω ⟶ X` agree are equal. The
-single-degree functor is fully faithful, and the derived pullback of a sheaf in degree zero is
-its pullback in degree zero, so this is `AlgebraicGeometry.Etale.sheafHom_ext_of_upperStar_map_eq`.
--/
+derived pullbacks along every geometric point `x : Spec Ω ⟶ X` agree are equal. -/
 theorem singleFunctor_hom_ext_of_leftDerivedUpperStar_map_eq
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     {φ ψ : (_root_.DerivedCategory.singleFunctor _ 0).obj F ⟶

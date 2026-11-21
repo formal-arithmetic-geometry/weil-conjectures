@@ -58,8 +58,8 @@ theorem exists_flatConstructibleModel_of_boundedConstructibleFiniteTor {X : Sche
   exact ⟨P, ⟨a, b, hP⟩, hPc, he⟩
 
 /-- **Flat constructible models** over a quasi-compact scheme locally of finite type over a
-field: such a scheme is Noetherian, so
-`exists_flatConstructibleModel_of_boundedConstructibleFiniteTor` applies. -/
+field: with finite coefficients, an object of `D^b_{ctf}(X, Λ)` is represented by a bounded
+complex of flat constructible sheaves. -/
 theorem exists_flatConstructibleModel_of_locallyOfFiniteType {k : Type u} [Field k]
     [Finite Λ] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [CompactSpace X]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

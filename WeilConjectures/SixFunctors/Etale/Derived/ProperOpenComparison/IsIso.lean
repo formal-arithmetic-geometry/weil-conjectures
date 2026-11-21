@@ -17,15 +17,6 @@ comparison map `α_u : j₂! K ⟶ Ru_* j₁! K` of
 `WeilConjectures.SixFunctors.Etale.Derived.ProperOpenComparison.Defs` is an isomorphism on
 `D⁺(X_ét, Λ)`.
 
-The proof checks it after restriction to the open `j₂(X)` and to its closed complement
-`i : Z ⟶ T₂`:
-
-* on `j₂(X)`, `j₂^* α_u` is, up to the unit of `j₂! ⊣ j₂^*`, the inverse of the restriction
-  isomorphism `θ_u` (`AlgebraicGeometry.ProperOpenDatum.homEquiv_comparison_app`);
-* on `Z`, both sides vanish: `i^* j₂! K = 0`, and by proper base change for `u`
-  (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`),
-  `i^* Ru_* j₁! K` is computed on `T₁ ×_{T₂} Z`, which does not meet `j₁(X)`.
-
 ## Main statements
 
 - `AlgebraicGeometry.ProperOpenDatum.isIso_comparison_app`
@@ -52,8 +43,7 @@ namespace ProperOpenDatum
 
 variable {X : Scheme.{u}} (D : ProperOpenDatum X)
 
-/-- `j₂^*` of `α_u` is an isomorphism: its transpose under `D⁺j₂! ⊣ D⁺j₂^*` is the inverse of
-the restriction isomorphism `θ_u`, and the unit of `D⁺j₂! ⊣ D⁺j₂^*` is an isomorphism. -/
+/-- `j₂^*` of `α_u` is an isomorphism. -/
 instance isIso_upperStar_map_comparison_app
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (D+((D.j₂)^*[ModuleCat.{u + 1} Λ]).map ((D.comparison Λ).app K)) := by
@@ -81,13 +71,8 @@ lemma disjoint_range_pullback_fst_closedComplement :
 
 variable [Finite Λ]
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Proper pushforward of extension
-by zero. For a finite coefficient ring `Λ`, the comparison map
-`α_{u,K} : j₂! K ⟶ Ru_* j₁! K` is an isomorphism for every `K ∈ D⁺(X_ét, Λ)`. It is checked on
-the open `j₂(X)`, where `j₂^* α_u` is adjoint to `θ_u⁻¹`
-(`isIso_upperStar_map_comparison_app`), and on its closed complement `Z`, where both sides
-vanish: `j₂! K` because `Z` does not meet `j₂(X)`, and `Ru_* j₁! K` by proper base change, the
-fibre product `T₁ ×_{T₂} Z` not meeting `j₁(X)`. -/
+/-- **Proper pushforward of extension by zero.** For a finite coefficient ring `Λ`, the
+comparison map `α_{u,K} : j₂! K ⟶ Ru_* j₁! K` is an isomorphism for every `K ∈ D⁺(X_ét, Λ)`. -/
 instance isIso_comparison_app
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso ((D.comparison Λ).app K) := by

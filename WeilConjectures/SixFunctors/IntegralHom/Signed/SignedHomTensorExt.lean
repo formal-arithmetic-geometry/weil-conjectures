@@ -9,7 +9,10 @@ public import WeilConjectures.SixFunctors.IntegralHom.Two.TwoTermFreeHomTensorCo
 import WeilConjectures.SixFunctors.IntegralHom.Tensor.TensorHomEvaluationExt
 
 /-! # Uniqueness of signed tensor--Hom comparison on arbitrary coefficients
-Source: Stacks Tag 0A8X and the blueprint finite-free coefficient calculation.
+
+## References
+
+* [Stacks, Tag 0A8X]
 -/
 
 @[expose] public section
@@ -31,15 +34,7 @@ attribute [local irreducible] homComplexFunctor SheafOfModules.monoidalCategory
   totalPair pair projection evaluate
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- The local signed formula determines the chain tensor--Hom comparison uniquely.
-Source: paragraph 1 of `lem-coef-integral-hom-reduction.proof.md`, and Stacks
-Tag 0A8X for the product Hom complex.
-
-Proof: total tensor coproduct inclusions reduce equality to each homogeneous tensor
-summand. The chosen Hom product cone is limiting, so its projections detect equality.
-Apply tensorHomEvaluation_ext to each projected pair of maps. Their evaluations on
-all local pure tensors and all source sections agree by the two signed formulas.
-No boundedness, flatness, injectivity or coefficient support is needed. -/
+/-- The local signed formula determines the chain tensor--Hom comparison uniquely. -/
 theorem signedHomTensor_ext
     (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (f g : ((totalTensor.{t, u} Y R).obj

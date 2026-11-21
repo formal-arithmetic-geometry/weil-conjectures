@@ -78,9 +78,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (J : Ideal Λ) {X : Scheme.{u}}
 /-- **Extensions of finite locally constant sheaves killed by an ideal of finite index.** Let `J`
 be an ideal of `Λ` with `Λ ⧸ J` finite and `0 ⟶ F₁ ⟶ F₂ ⟶ F₃ ⟶ 0` a short exact sequence of
 sheaves of `Λ`-modules with `F₁`, `F₃` finite locally constant and `F₂` killed by `J`. Then `F₂`
-is finite locally constant: the sequence is the restriction of scalars of a short exact sequence
-of sheaves of `Λ ⧸ J`-modules, and the extension property holds over the finite ring `Λ ⧸ J`
-(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.of_shortExact`). -/
+is finite locally constant. -/
 theorem IsFiniteLocallyConstantSheaf.of_shortExact_of_smul_eq_zero [Finite (Λ ⧸ J)]
     {S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     (hJ : ∀ r ∈ J, r • 𝟙 S.X₂ = 0)

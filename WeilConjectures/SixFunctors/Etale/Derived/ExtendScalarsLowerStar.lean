@@ -90,11 +90,7 @@ variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S]
 
 /-- **Reduction to the projection formula.** The base change map `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)` is
 an isomorphism at `M` as soon as the mate `L(- ⊗ S_Y) (Rg_* M) ⟶ Rg_* (L(- ⊗ S_Z) M)` of the
-comparison `Lg^* (K ⊗ᴸ S_Y) ⟶ Lg^* K ⊗ᴸ S_Z` is. Indeed, restricted back to `R`, `Ψ` is
-`L(- ⊗ S)` (`AlgebraicGeometry.Etale.leftDerivedSheafExtendScalarsProjection`), compatibly
-with the derived pullback
-(`AlgebraicGeometry.Etale.leftDerivedSheafExtendScalarsProjection_transpose_upperStar`), and
-restriction of scalars reflects isomorphisms. -/
+comparison `Lg^* (K ⊗ᴸ S_Y) ⟶ Lg^* K ⊗ᴸ S_Z` is. -/
 theorem isIso_mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_app_of_isIso_mateEquiv
     [IsNoetherianRing R] (M : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R)))
     [IsIso ((mateEquiv (derivedUpperStarLowerStarAdjunction _ g)
@@ -116,8 +112,7 @@ theorem isIso_mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_app_of_is
 /-- **Derived extension of scalars commutes with `Rg_*` for proper `g`.** For a finite ring `R`,
 an `R`-algebra `S` and a proper `g : Z ⟶ Y`, the base change map `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)`, the
 mate of `AlgebraicGeometry.Etale.leftDerivedUpperStarEtaleSheafExtendScalarsIso`, is an
-isomorphism. Restricted to `R`, it is the projection map `Rg_* M ⊗ᴸ S_Y ⟶ Rg_* (M ⊗ᴸ S_Z)` for
-the sheaf `S_Y`. -/
+isomorphism. -/
 theorem isIso_mateEquiv_leftDerivedUpperStarEtaleSheafExtendScalarsIso_app [Finite R]
     [IsProper g] (M : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} R))) :
     IsIso ((mateEquiv (derivedUpperStarLowerStarAdjunction _ g)

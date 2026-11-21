@@ -15,16 +15,10 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 /-!
 # Change of rings for the derived tensor product
 
-For a ring homomorphism `f : R →+* S`, an `R`-module `M` and an `S`-module `P` we construct the
-natural isomorphism `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P` of `R`-modules
-(`ModuleCat.tensorRestrictScalarsIso`) and deduce, for `M` flat and a complex `N` of `S`-modules,
-`M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` in `D(R)` (`DerivedCategory.changeOfRingsTensorIso`, blueprint
-`lem-kun-change-of-rings-tensor`).
-
 For a homomorphism of commutative rings `f : R →+* S`, a flat `R`-module `M` and a complex `N`
 of `S`-modules, `M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` in `D(R)`
-(`DerivedCategory.changeOfRingsTensorIso`, blueprint `lem-kun-change-of-rings-tensor`). The
-module-level input is `ModuleCat.tensorRestrictScalarsIso`: `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P`.
+(`DerivedCategory.changeOfRingsTensorIso`). The module-level input is
+`ModuleCat.tensorRestrictScalarsIso`: `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P` for an `S`-module `P`.
 -/
 
 @[expose] public section
@@ -54,8 +48,7 @@ lemma tensorRestrictScalarsHom_tmul (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) 
   rfl
 
 set_option backward.isDefEq.respectTransparency.types false in
-/-- `ModuleCat.tensorRestrictScalarsHom` is bijective: it is the composite of the symmetries and
-the inverse of the cancellation `P ⊗_S (S ⊗_R M) ≃ P ⊗_R M`. -/
+/-- `ModuleCat.tensorRestrictScalarsHom` is bijective. -/
 lemma bijective_tensorRestrictScalarsHom (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) :
     Function.Bijective (tensorRestrictScalarsHom f M P) := by
   let := f.toAlgebra
@@ -98,16 +91,10 @@ namespace DerivedCategory
 variable {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S)
   [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} S)]
 
-/-- Change of rings for the derived tensor
-product. Let `f : R →+* S` be a homomorphism of commutative rings, `M` a flat `R`-module and `N`
-a complex of `S`-modules, viewed as a complex of `R`-modules by restriction of scalars. Then
-`M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` canonically in `D(R)`: both derived tensor products are computed
-termwise, `M` and `S ⊗_R M` being flat, and `M ⊗_R N^i ≅ (S ⊗_R M) ⊗_S N^i`
-(`ModuleCat.tensorRestrictScalarsIso`).
-
-The blueprint states the case `R = ℤ/n`, `S = ℤ/ℓ` (`ℓ` a prime dividing `n`) and `N` a complex
-of `R`-modules annihilated by `ℓ`, i.e. a complex of `𝔽_ℓ`-vector spaces; there
-`S ⊗_R M ≅ M/ℓM`. -/
+/-- Change of rings for the derived tensor product. Let `f : R →+* S` be a homomorphism of
+commutative rings, `M` a flat `R`-module and `N` a complex of `S`-modules, viewed as a complex of
+`R`-modules by restriction of scalars. Then `M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` canonically in
+`D(R)`. -/
 noncomputable def changeOfRingsTensorIso (M : ModuleCat.{u} R) [Module.Flat R M]
     (N : CochainComplex (ModuleCat.{u} S) ℤ) :
     (singleFunctor _ 0).obj M ⊗ (ModuleCat.restrictScalars f).mapDerivedCategory.obj (Q.obj N) ≅

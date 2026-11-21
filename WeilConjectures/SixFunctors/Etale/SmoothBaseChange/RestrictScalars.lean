@@ -207,7 +207,7 @@ variable {X : Scheme.{u}}
 
 /-- A sheaf of `Λ`-modules killed by `ϖ` is the restriction of scalars of a sheaf of
 `Λ/ϖ`-modules: the counit `res (coext F) ⟶ F` of restriction and coextension of scalars along
-`Λ ⟶ Λ/ϖ` is an isomorphism, as `Hom_Λ(Λ/ϖ, M) ⟶ M` is bijective when `ϖ M = 0`. -/
+`Λ ⟶ Λ/ϖ` is an isomorphism. -/
 lemma isIso_restrictCoextendScalarsAdj_counit_app (ϖ : Λ)
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ∀ (U : X.Etaleᵒᵖ) (x : F.obj.obj U), ϖ • x = 0) :

@@ -12,7 +12,10 @@ import WeilConjectures.SixFunctors.OpenFactorCoherence.TensorCompletionConstruct
 
 /-! # Existence of a normalized quotient tensor model
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5; Stacks 099N.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and Lemma 6.5.5
+* [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -95,19 +98,7 @@ private theorem comparison_exists [∀ x : X, Invertible (l : X.residueField x)]
   exact Iso.hom_inv_id_assoc
     ((ordinaryModel l E X).representative.app (⟨P, hP⟩, ⟨Q, hQ⟩)) _
 
-/-- A normalized quotient-completion tensor presentation exists.
-Source: Bhatt--Scholze 3.4.10, 6.5.5; constructible tensor completion, step 8.
-Proof: restrict the recorded ordinary tensor representative isomorphism to flat-term
-K-flat complexes, converting their certificates to the integral good class. Construct
-the chain augmentation from the natural quotient Roos unit and tensorTowerIso. The
-operation-unit coordinate theorem, quotient augmentation normalization and strict
-tensor-tower normalization give the prescribed pure-tensor and zero shifted coordinates.
-Apply integralAmbientOperationModels to the identity of X and transport its shared
-operation record along ambientPackage_eq. The resulting tensor comparison satisfies
-the augmentation equation on good representatives. Precompose that equation with the
-ordinary representative isomorphism and cancel its inverse to obtain IsTensorCompletion.
-Package these data and their two normalization assertions into Tensor. The same
-constructions apply to zero complexes and the empty scheme. -/
+/-- A normalized quotient-completion tensor presentation exists. -/
 theorem tensorCompletionModel_nonempty [CompactSpace X] [QuasiSeparatedSpace X]
     [∀ x : X, Invertible (l : X.residueField x)] :
     Nonempty (Tensor l E X) := by

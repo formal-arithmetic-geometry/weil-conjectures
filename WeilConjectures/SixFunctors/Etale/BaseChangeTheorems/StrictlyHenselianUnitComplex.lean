@@ -20,17 +20,10 @@ Let `R` be a strictly henselian local ring, `Y = Spec R` with closed point
 For a bounded below complex `G` of étale sheaves of `Λ`-modules on `Y` all of whose cohomology
 sheaves are constant, the pullback to the closed point of the unit `G ⟶ Rt_* t^* G` is an
 isomorphism (`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_app_of_isConstant_homology`).
-This is the case of a single constant sheaf
-(`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing`)
-extended by dévissage along the truncation triangles
-(`DerivedCategory.Plus.isIso_app_of_forall_homology`); both `s₀^*` and `s₀^* Rt_* t^*` are left
-`t`-exact.
 
 Moreover every bounded below complex on `Spec Ω` is the pullback of such a complex on `Y`
-(`AlgebraicGeometry.Etale.exists_isConstant_homology_iso_upperStar_obj`): sheaves on the
-separably closed point are constant (`constantSheafEquivalenceOfIsSepClosed`), and pullbacks of
-constant sheaves are constant (`AlgebraicGeometry.Etale.constantSheafCompUpperStarIso`). The
-property of having constant cohomology sheaves is stable under pullback
+(`AlgebraicGeometry.Etale.exists_isConstant_homology_iso_upperStar_obj`). The property of having
+constant cohomology sheaves is stable under pullback
 (`AlgebraicGeometry.Etale.isConstant_homology_upperStar_obj`).
 
 In the language of nearby cycles: for a strictly henselian trait `Y` with geometric generic point

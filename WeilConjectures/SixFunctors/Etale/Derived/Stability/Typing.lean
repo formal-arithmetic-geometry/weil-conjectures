@@ -33,7 +33,7 @@ ambient ones, and that the restriction exists is the preservation theorem
 * states the typing rule: each restricted functor, followed by the inclusion, is the inclusion
   followed by the ambient operation (`AlgebraicGeometry.Etale.typingRule`).
 
-## Implementation notes
+## Implementation details
 
 The comparison isomorphisms are all built from `CategoryTheory.ObjectProperty.liftCompιIso` and
 `CategoryTheory.ObjectProperty.liftFullSubcategoryCompιIso`, which are identities on the nose;
@@ -111,11 +111,9 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec 
   {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
   [QuasiCompact aX] [HasCompactification aX]
 
-/-- Clause (vi) of the preservation matrix: for `X` separated of finite type over
-an algebraically closed field `k` and a finite `Λ` whose exponent is invertible on `k`, every
-object `K` of the small category `Dctf(X, Λ)` is isomorphic, inside `Dctf(X, Λ)`, to its double
-Verdier dual `𝔻_X 𝔻_X K`, the Verdier dual being restricted to `Dctf(X, Λ)` by
-`AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`. -/
+/-- For `X` separated of finite type over an algebraically closed field `k` and a finite `Λ`
+whose exponent is invertible on `k`, every object `K` of the small category `Dctf(X, Λ)` is
+isomorphic, inside `Dctf(X, Λ)`, to its double Verdier dual `𝔻_X 𝔻_X K`. -/
 theorem DerivedCategoryFiniteTor.nonempty_iso_verdierDual_verdierDual
     (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
     Nonempty (K ≅ (DerivedCategoryFiniteTor.verdierDual _ aX
@@ -132,9 +130,7 @@ noncomputable def DerivedCategoryFiniteTor.verdierDualEquivalenceFunctorIso :
       fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK :=
   ObjectProperty.isoLiftOfCompιIso _ _ _ (ObjectProperty.liftCompιIso _ _ _)
 
-/-- Clause (vi) of the preservation matrix: the restricted Verdier dual
-`𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is an equivalence, i.e. `𝔻_X` is a contravariant
-anti-equivalence of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.verdierDualEquivalence`). -/
+/-- The restricted Verdier dual `𝔻_X : Dctf(X, Λ)ᵒᵖ ⥤ Dctf(X, Λ)` is an equivalence. -/
 theorem DerivedCategoryFiniteTor.isEquivalence_verdierDual :
     (DerivedCategoryFiniteTor.verdierDual Λ aX
       fun _ hK ↦ constructibleFiniteTor_verdierDual Λ aX hK).IsEquivalence :=
@@ -153,20 +149,11 @@ variable {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec 
   [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f] [QuasiCompact f]
   [HasCompactification f]
 
-/-- The typing rule of this section.
-
-Every operation is defined on the ambient derived categories `D(-_ét, Λ)`, and its version on
-the small categories `Dctf(-, Λ)` is its restriction: for an algebraically closed field `k`, a
-finite `Λ` whose exponent is invertible on `k` and a separated morphism `f : X ⟶ Y` of schemes
-of finite type over `k`,
-with `X` separated over `k`, each of the functors `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!`, `𝔻_X`,
-`K ⊗ᴸ -` and `RHom(K, -)` (for `K ∈ Dctf(X, Λ)`) between the small categories, followed by the
-inclusion, is isomorphic to the inclusion followed by the ambient operation. By
-`CategoryTheory.ObjectProperty.isoLiftOfCompιIso` a functor between the small categories with
-this property is unique up to isomorphism, and by
-`CategoryTheory.ObjectProperty.exists_comp_ι_iso_iff` its existence is equivalent to the
-preservation statements
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_stability`). -/
+/-- **The typing rule.** For an algebraically closed field `k`, a finite `Λ` whose exponent is
+invertible on `k` and a separated morphism `f : X ⟶ Y` of schemes of finite type over `k`, with
+`X` separated over `k`, each of the functors `Lf^*`, `Rf_*`, `Rf_!`, `Rf^!`, `𝔻_X`, `K ⊗ᴸ -`
+and `RHom(K, -)` (for `K ∈ Dctf(X, Λ)`) between the small categories `Dctf`, followed by the
+inclusion, is isomorphic to the inclusion followed by the ambient operation. -/
 theorem typingRule (K : DerivedCategoryFiniteTor (ModuleCat.{u + 1} Λ) X) :
     Nonempty (DerivedCategoryFiniteTor.leftDerivedUpperStar (ModuleCat.{u + 1} Λ) f ⋙
         DerivedCategoryFiniteTor.ι _ X ≅
@@ -211,12 +198,9 @@ variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
 
 include hf
 
-/-- Typing table: ambient definition, small-category
-theorem.
-
-Let `Λ` be a finite ring whose exponent is invertible on an algebraically closed field `k`, and
-`f : X ⟶ Y` a separated morphism of schemes of finite type over `k`, with `X` separated over
-`k`. Each row of the table is a theorem:
+/-- **The typing table.** Let `Λ` be a finite ring whose exponent is invertible on an
+algebraically closed field `k`, and `f : X ⟶ Y` a separated morphism of schemes of finite type
+over `k`, with `X` separated over `k`. Then:
 
 * `Lf^*` maps `Dᵇc(Y) ⥤ Dᵇc(X)` and `Dctf(Y) ⥤ Dctf(X)`, preserving Tor amplitude `[a, b]`;
 * `- ⊗ᴸ -` maps `Dᵇc × Dctf ⥤ Dᵇc` and `Dctf × Dctf ⥤ Dctf`, with `[a, b] + [c, d] ↦
@@ -232,14 +216,7 @@ Let `Λ` be a finite ring whose exponent is invertible on an algebraically close
   `[a, b + 2d + 1]` for a closed immersion `i` into a target of dimension `≤ d`, and to
   `[a - 2D, b + 2 dim Y + 1]` in general;
 * `𝔻_X` maps `Dctf(X) ⥤ Dctf(X)` with `K ≅ 𝔻_X 𝔻_X K`, an anti-equivalence, and
-  `[a, b] ↦ [-b - 2d, -a]` if `dim X ≤ d`.
-
-The row `Rf^×` asserts nothing: it is an ambient functor used nowhere. The statement collects
-`AlgebraicGeometry.Etale.boundedConstructible_preservation`,
-`AlgebraicGeometry.Etale.constructibleFiniteTor_preservation`,
-`AlgebraicGeometry.Etale.torAmplitudeIn_preservation`,
-`AlgebraicGeometry.Etale.boundedConstructible_tensor` and the two shift estimates of the
-exceptional inverse image with finite coefficients. -/
+  `[a, b] ↦ [-b - 2d, -a]` if `dim X ≤ d`. -/
 theorem sixOperations_typing [QuasiCompact f] [HasCompactification f]
     [IsSeparated aX] [HasCompactification aX] [IsAlgClosed k] :
     ((∀ K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)),

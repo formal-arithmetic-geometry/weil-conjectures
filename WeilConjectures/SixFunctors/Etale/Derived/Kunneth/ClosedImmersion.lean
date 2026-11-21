@@ -22,13 +22,11 @@ For closed immersions `i : Z ⟶ X` and `j : W ⟶ Y` over a base `B`, with prod
 
 (`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion_of_flat`).
 
-The proof characterises the objects `ι_* ι^* N` of `D(X_ét)` for a closed immersion `ι` by their
-support: if `φ : N ⟶ M` becomes invertible after `Lι^*` and `M` vanishes on the open
-complement of `ι`, then `M ≅ Rι_* Lι^* N`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_obj_leftDerivedUpperStar_obj`), by
-the open–closed triangle. It is applied to `i ×_B 𝟙` and `𝟙 ×_B j` separately: the open
-complement of `i ×_B 𝟙` is the preimage of the open complement of `i`, on which `Ri_* Li^* K`,
-hence `Ri_* Li^* K ⊠ L`, vanishes; and the unit `K ⟶ Ri_* Li^* K` is invertible after `Li^*`.
+## Implementation details
+
+The objects `ι_* ι^* N` of `D(X_ét)` for a closed immersion `ι` are characterised by their
+support (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_obj_leftDerivedUpperStar_obj`),
+and this is applied to `i ×_B 𝟙` and `𝟙 ×_B j` separately.
 -/
 
 @[expose] public section
@@ -55,7 +53,7 @@ variable {Z X U : Scheme.{u}}
 
 /-- **Objects supported on a closed subscheme.** Let `i : Z ⟶ X` be a closed immersion with open
 complement `j : U ⟶ X`. If `φ : N ⟶ M` becomes invertible after `Li^*` and `Lj^* M = 0`, then
-`Ri_* Li^* N ≅ M`: the open–closed triangle of `M` identifies `M` with `Ri_* i^* M`. -/
+`Ri_* Li^* N ≅ M`. -/
 theorem nonempty_iso_rightDerivedLowerStar_obj_leftDerivedUpperStar_obj (i : Z ⟶ X)
     [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
@@ -72,8 +70,7 @@ theorem nonempty_iso_rightDerivedLowerStar_obj_leftDerivedUpperStar_obj (i : Z �
       (leftDerivedUpperStarIsoMapDerivedCategory A i).app M) ≪≫
     (asIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M)).symm⟩
 
-/-- For a closed immersion `i`, the unit `K ⟶ Ri_* Li^* K` becomes invertible after `Li^*`:
-`Ri_*` is fully faithful, so the counit of `Li^* ⊣ Ri_*` is invertible. -/
+/-- For a closed immersion `i`, the unit `K ⟶ Ri_* Li^* K` becomes invertible after `Li^*`. -/
 lemma isIso_leftDerivedUpperStar_map_unit_of_isClosedImmersion (i : Z ⟶ X)
     [IsClosedImmersion i] (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     IsIso ((L((i)^*[A])).map ((derivedUpperStarLowerStarAdjunction A i).unit.app K)) := by
@@ -370,8 +367,7 @@ theorem nonempty_iso_externalProduct_closedImmersion_right (f : X ⟶ B) (g : Y 
 
 /-- **The closed Künneth formula.** For closed immersions `i : Z ⟶ X` and `j : W ⟶ Y` over `B`,
 with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
-`R(i ×_B j)_* L(i ×_B j)^* (K ⊠ L) ≅ Ri_* Li^* K ⊠ Rj_* Lj^* L`. It is obtained from the
-one-sided formulas, `i ×_B j` being `(Z ×_B j) ≫ (i ×_B Y)`. -/
+`R(i ×_B j)_* L(i ×_B j)^* (K ⊠ L) ≅ Ri_* Li^* K ⊠ Rj_* Lj^* L`. -/
 theorem nonempty_iso_externalProduct_closedImmersion_of_flat (f : X ⟶ B) (g : Y ⟶ B)
     (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))

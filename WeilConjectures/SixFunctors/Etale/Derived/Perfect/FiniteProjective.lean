@@ -13,17 +13,16 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 A sheaf `P` of `Λ`-modules on the small étale site of `X` is a *finite projective
 `Λ_X`-module* if, étale locally on `X`, it is a direct summand of a finite free module
 `Λ_U^{⊕m}` (`AlgebraicGeometry.Etale.IsFiniteProjectiveSheaf`). Placed in degree `0` it is
-perfect on the coefficient site, hence dualizable in `D(X_ét, Λ)`. Consequently the canonical map `P^∨ ⊗ᴸ N ⟶ RHom(P, N)` is an
-isomorphism for every `N`
+perfect on the coefficient site, hence dualizable in `D(X_ét, Λ)`. Consequently the canonical
+map `P^∨ ⊗ᴸ N ⟶ RHom(P, N)` is an isomorphism for every `N`
 (`AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualTensorToDerivedHom`) and the
 biduality map `P ⟶ P^∨∨` is an isomorphism
 (`AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualDoubleDual_app`).
 
-## Implementation notes
+## Implementation details
 
-The blueprint works on the small pro-étale site; as for
-`AlgebraicGeometry.Etale.DerivedCategory.IsSitePerfect`, the statement is made here on the small
-étale site of the étale model.
+As for `AlgebraicGeometry.Etale.DerivedCategory.IsSitePerfect`, the statement is made on the
+small étale site of the étale model rather than on the small pro-étale site.
 -/
 
 @[expose] public section
@@ -55,9 +54,7 @@ namespace IsFiniteProjectiveSheaf
 
 variable {P : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
 
-/-- A finite projective `Λ_X`-module placed in degree `0` is perfect on the coefficient site:
-on each member `u` of a trivializing cover, `Lu^* P ≅ u^* P` is the single complex on a
-direct summand of `(Λ^m)_U`. -/
+/-- A finite projective `Λ_X`-module placed in degree `0` is perfect on the coefficient site. -/
 theorem isSitePerfect (hP : IsFiniteProjectiveSheaf P) :
     DerivedCategory.IsSitePerfect ((DerivedCategory.singleFunctor _ 0).obj P) := by
   obtain ⟨𝒰, h⟩ := hP

@@ -17,12 +17,18 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.MinimalCoho
 Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invertible in `k`, and
 `X` a separated scheme of finite type over `k`. For constructible étale sheaves `F` and `G` of
 `Λ`-modules on `X`, the set of morphisms `F ⟶ G` is finite
-(`AlgebraicGeometry.Etale.finite_hom_of_isConstructibleSheaf`): `F` is a quotient of a finite sum
-of extensions by zero `v_! Λ` along affine étale `v : V ⟶ X` (Stacks 03SA and the stabilization of
-filtered unions of subsheaves of a constructible sheaf), so `F ⟶ G` injects into a finite product
-of the sections `G(V)`, which are finite by the finiteness of `RΓ(V, G)`.
+(`AlgebraicGeometry.Etale.finite_hom_of_isConstructibleSheaf`). In particular a group acting
+on a constructible sheaf acts through a finite quotient.
 
-In particular a group acting on a constructible sheaf acts through a finite quotient.
+## Implementation details
+
+`F` is a quotient of a finite sum of extensions by zero `v_! Λ` along affine étale
+`v : V ⟶ X`, so `F ⟶ G` injects into a finite product of the sections `G(V)`, which are finite
+by the finiteness of `RΓ(V, G)`.
+
+## References
+
+* [Stacks, Tag 03SA]
 -/
 
 @[expose] public section

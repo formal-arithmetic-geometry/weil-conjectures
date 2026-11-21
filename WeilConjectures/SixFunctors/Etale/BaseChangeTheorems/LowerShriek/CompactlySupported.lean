@@ -37,14 +37,6 @@ properness is assumed on `f` itself: the properness enters only through the stru
 morphism `p` of the compactification, which is proper by definition. This is the base
 change theorem for the lower shriek `Compactification.lowerShriek`.
 
-Indeed, in the composite defining `Ex_!^c` the extension-by-zero exchange is an
-isomorphism by construction, and the direct-image exchange `Ex_*` of the proper square
-of the base-changed compactification is an isomorphism by proper base change applied to
-the proper morphism `p`, on complexes with torsion cohomology. For the pointwise
-statement the extension by zero `i_!` must preserve torsion cohomology, which is a
-stalkwise statement recorded separately
-(`Etale.DerivedCategory.Plus.torsionHomology_openImmersionLowerShriek`).
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_lowerShriekBaseChange_of_isAddTorsion_ring`: for a

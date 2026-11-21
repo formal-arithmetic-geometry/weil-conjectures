@@ -24,12 +24,14 @@ layer). This file shows that the Künneth map `Π` of `M ⟵ P ⟶ N` is inverti
 (`NearbyCyclesModel.isIso_kunnethMap_of_isIso_galoisLayer`), given the coinvariant property of the
 projector onto the invariants of `Ψ_{M_Ω}` after tensoring with the second factor.
 
-Indeed `Ψ_M A ⟶ Ψ_{M_Ω} A` and `Ψ_P (A ⊠ B) ⟶ Ψ_{P_Ω} (A ⊠ B)` are the inclusions of the
+## Implementation details
+
+`Ψ_M A ⟶ Ψ_{M_Ω} A` and `Ψ_P (A ⊠ B) ⟶ Ψ_{P_Ω} (A ⊠ B)` are the inclusions of the
 `Gal(Ω/L)`-invariants (SGA 4½, [Th. finitude], Lemme 3.4,
 `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin`), `Π_Ω` is
 equivariant (`NearbyCyclesModel.kunnethMap_autAction`) with the Galois group acting trivially on
 the second factor, and invariants commute with the tensor product with a complex with trivial
-action. This is the projection formula (3) of
+action. This is the projection formula of
 the generic-slicing step of Gabber's Künneth formula, for torsion coefficients.
 -/
 
@@ -78,8 +80,7 @@ variable (T₀ : Type) [TopologicalSpace T₀] [CommRing T₀] [IsTopologicalRin
 
 set_option maxHeartbeats 1600000 in
 -- the Künneth maps of the two product configurations are large terms
-/-- **The Künneth map descends along a Galois layer** (blueprint
-`proposition-external-kunneth-formula-nearby-cycles`, projection formula (3); torsion coefficients).
+/-- **The Künneth map descends along a Galois layer** (torsion coefficients).
 Let `φ₁ : P ⟶ M`, `φ₂ : P ⟶ N` be morphisms of models with the generic fibres of `M`, `P` over `L`,
 and `Ω/L` Galois with degrees invertible in `T₀`. Suppose that `Lε^*` of `A` on `M` and of
 `Lf₁^* A ⊗ Lf₂^* B` on `P` are bounded below of étale origin, and that the exchange

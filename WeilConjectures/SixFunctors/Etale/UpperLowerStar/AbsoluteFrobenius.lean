@@ -16,9 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 Let `X` be a scheme of characteristic `p` and `F_X` its absolute `p ^ n`-power Frobenius
 (`AlgebraicGeometry.Scheme.iterateFrobenius`). For an étale `u : U ⟶ X`, the relative Frobenius
-`U ⟶ U ×_{X, F_X} X` is an isomorphism (Stacks 03SN): it is étale, being a morphism between
-étale `X`-schemes, and a universal homeomorphism, since its composite with the projection to
-`U` is the absolute Frobenius `F_U` and this projection is a base change of `F_X`. Hence base
+`U ⟶ U ×_{X, F_X} X` is an isomorphism. Hence base
 change along `F_X` on the small étale site of `X` is isomorphic to base change along `𝟙 X`, and
 the pushforward and the pullback along `F_X` on étale sheaves are isomorphic to those along
 `𝟙 X`, compatibly with pullback along morphisms of schemes of characteristic `p`.
@@ -38,6 +36,10 @@ it is a universal homeomorphism and, for a weakly étale `u`, an isomorphism
 
 - `AlgebraicGeometry.Etale.upperStarIterateFrobeniusIso_naturality`: the isomorphisms
   `(F_X)^* ≅ (𝟙 X)^*` are compatible with pullback along morphisms `f : Y ⟶ X`.
+
+## References
+
+* [Stacks, Tag 03SN]
 -/
 
 @[expose] public section
@@ -164,12 +166,9 @@ lemma lowerStarIterateFrobeniusIso_hom_app_hom_app (G : Sheaf X.smallEtaleTopolo
       G.obj.map ((overPullbackIterateFrobeniusIso hp hX n).hom.app V.unop).op :=
   rfl
 
-/-- Étale analogue of blueprint `lemma-scheme-frobenius-geometric-frobenius--1` (stated there for
-the small pro-étale site): the absolute Frobenius acts as the identity on
-the étale topos. For a scheme `X` of characteristic `p`, the pullback `(F_X)^*` along the
-absolute `p ^ n`-power Frobenius is isomorphic to the pullback `(𝟙 X)^*` along the identity. It
-is the conjugate of `AlgebraicGeometry.Etale.lowerStarIterateFrobeniusIso` under the
-adjunctions `g^* ⊣ g_*`. -/
+/-- The absolute Frobenius acts as the identity on the étale topos: for a scheme `X` of
+characteristic `p`, the pullback `(F_X)^*` along the absolute `p ^ n`-power Frobenius is
+isomorphic to the pullback `(𝟙 X)^*` along the identity. -/
 noncomputable def upperStarIterateFrobeniusIso :
     (X.iterateFrobenius hp hX n)^*[A] ≅ (𝟙 X)^*[A] :=
   (conjugateIsoEquiv (upperStarLowerStarAdjunction A (𝟙 X))
@@ -292,9 +291,7 @@ isomorphisms `(F_X ≫ f)^* ≅ f^*`
 (F_X ≫ f)^* ≅ F_Y^* ⋙ f^* ≅ (𝟙 Y)^* ⋙ f^* ≅ f^*
 (F_X ≫ f)^* ≅ f^* ⋙ F_X^* ≅ f^* ⋙ (𝟙 X)^* ≅ f^*
 ```
-agree. Both are conjugate to isomorphisms of pushforwards, which are given by restriction maps
-along morphisms into fibre products with the same projections
-(`AlgebraicGeometry.Etale.lowerStarIterateFrobeniusIso_naturality`). -/
+agree. -/
 theorem upperStarIterateFrobeniusIso_naturality :
     upperStarComp A f (Y.iterateFrobenius hp hY n) (X.iterateFrobenius hp hX n ≫ f)
         (comp_iterateFrobenius hp f hY hX n).symm ≪≫

@@ -11,8 +11,12 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Localization of a supplied integral coefficient mate
 
-Source: Zheng, Construction 6.2. Only one change of coefficient field is considered;
-there is no geometric construction or common-field coherence assertion.
+Only one change of coefficient field is considered; there is no geometric construction or
+common-field coherence assertion.
+
+## References
+
+* Zheng, Construction 6.2
 -/
 
 @[expose] public noncomputable section
@@ -131,8 +135,7 @@ attribute [local irreducible] integralScalarExtensionOfUniverses
 
 /-- The scalar localization comparison commutes with every integer shift.
 The comparison is the identity transport on integral representatives; the square
-retains the canonical endpoint rationalization shifts.
-Source: Zheng, Construction 6.2, shift compatibility in coefficient localization. -/
+retains the canonical endpoint rationalization shifts. -/
 @[irreducible]
 def scalarShiftLocalization
     (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier)
@@ -151,25 +154,7 @@ def scalarShiftLocalization
         ((rationalization.{u, v} l Ω E T).obj K)))) ∧
     c.hom.CommShift ℤ
 
-/-- Localize a single supplied counit square on the explicit raw tensor functors.
-Source: Zheng, Construction 6.2, scalar-extension paragraph.
-
-Proof: identify the two scalar localization squares using the published object and
-pure-tensor formulas and the supplied ambient functor equalities. Rationalization
-is a categorical localization after transport along the integral representative
-equivalence. Paste the supplied integral comparisons with the endpoint localization
-isomorphisms and descend the resulting natural isomorphisms by fully faithful
-precomposition. Equip each rational scalar functor with the shift structure induced
-by localization. The pasted comparisons commute with shifts; faithfulness and the
-invertible rationalization shift comparisons imply the descended shift equations.
-The normalized qA and qB components identify the rationalized integral counits.
-On integral representatives, substitute the descended component formulas, cancel
-inverse endpoint comparisons, and use counit naturality and d.counit. Naturality of
-the scalar localization comparison closes the equation. Every rational object has
-an integral representative by the supplied predicate equality. Finally the endpoint
-localization comparisons are identity transports, so their heterogeneous component
-formula gives the asserted normalization of q. The same argument covers identity
-coefficient embeddings and zero categories. -/
+/-- Localize a single supplied counit square on the explicit raw tensor functors. -/
 theorem exists_integral_scalar_mate_localization
     (E L : FieldStage.{max u v} l) (i : E.carrier →ₐ[Padic l] L.carrier)
     (A : Operation.{u, v} l Ω X Y (.integral E))

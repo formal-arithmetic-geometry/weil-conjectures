@@ -15,16 +15,17 @@ restriction of supports (`AlgebraicGeometry.Etale.restrictSupportedClass`) along
 `e : U' ⟶ U`: restricting `α ∪ β` is the cup product of the restrictions of `α` and `β`, provided
 the diagonals used to multiply the classes are compatible with the pullback.
 
-Both sides are classes `K' ⟶ Ri'_! Ri'^! (M' ⊗ N')` built out of lifts through counits, and the
-comparison reduces to the base change of the product of supports
-(`AlgebraicGeometry.Etale.supportedProduct`): two maps out of an object supported on `Z'` into
-`Ri'_! Ri'^! L'` agree as soon as their composites with the counit agree.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_derivedTensor_rightDerivedLowerShriek`
 - `AlgebraicGeometry.Etale.supportedProduct_baseChange`
 - `AlgebraicGeometry.Etale.restrictSupportedClass_cupWithSupports`
+
+## Implementation details
+
+The comparison reduces to the base change of the product of supports
+(`AlgebraicGeometry.Etale.supportedProduct`), by uniqueness of lifts through counits out of an
+object supported on `Z'`.
 -/
 
 @[expose] public section
@@ -49,8 +50,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {U U' W Z₁ Z₂ Z Z₁' Z₂' Z' : Scheme.{u}}
 
 /-- A tensor product `Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N` restricts to zero along every `w : W ⟶ U`
-missing `Z = Z₁ ∩ Z₂`: on the open complement of `Z`, its restrictions to the complements of
-`Z₁` and of `Z₂` vanish, and these two opens cover it. -/
+missing `Z = Z₁ ∩ Z₂`. -/
 lemma isZero_leftDerivedUpperStar_derivedTensor_rightDerivedLowerShriek (i₁ : Z₁ ⟶ U)
     (i₂ : Z₂ ⟶ U) (i : Z ⟶ U) [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
@@ -124,8 +124,6 @@ Le^*(R₁ ⊗ R₂) ──Le^* P──▶ Le^* Ri_! Ri^! (M ⊗ N) ──ψ─�
       ▼ ‖
 Le^* R₁ ⊗ Le^* R₂ ────ψ₁ ⊗ ψ₂────▶ R₁' ⊗ R₂' ─────P'──────▶ Ri'_! Ri'^! (M' ⊗ N')
 ```
-
-Both composites lift `Le^*(ε₁ ⊗ ε₂)` through the counit, and their source is supported on `Z'`.
 -/
 theorem supportedProduct_baseChange (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     (i₁' : Z₁' ⟶ U') (i₂' : Z₂' ⟶ U') (i' : Z' ⟶ U')

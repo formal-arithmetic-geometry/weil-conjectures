@@ -173,9 +173,7 @@ variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} 
 `τ : Lg'^* T ⟶ T'`, and identifications `γ_K : G K ≅ T ⊗ᴸ Lf^* K`,
 `γ'_K : G' K ≅ T' ⊗ᴸ Lf'^* K` compatible with pullback through `φ_K : Lg'^* G K ⟶ G' Lg^* K`, the
 trace counits (`AlgebraicGeometry.Etale.lowerShriekTraceCounit`) are compatible with `Ex_!`:
-`Ex_! ≫ Rf'_! φ_K ≫ ε'_{Lg^* K} = Lg^* ε_K`. This is the projection map commuting with `Ex_!`
-(`AlgebraicGeometry.Etale.projectionMap_rightDerivedLowerShriekBaseChangeMap`) and the
-monoidality of `Lg^*`. -/
+`Ex_! ≫ Rf'_! φ_K ≫ ε'_{Lg^* K} = Lg^* ε_K`. -/
 theorem lowerShriekTraceCounit_baseChange (sq : IsPullback g' f' f g) [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f']
     (T : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

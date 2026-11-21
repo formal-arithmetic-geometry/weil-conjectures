@@ -22,6 +22,8 @@ bounded below of étale origin, if the change of Galois layers `α_{τ'}` is inv
 change of trait `α_τ` (SGA 4½, [Th. finitude], proof of 3.7, 3.8)
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap_of_plusEtaleOrigin_generic`).
 
+## Implementation details
+
 This combines `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap` with the
 projectors onto the Galois invariants
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`)

@@ -16,9 +16,9 @@ Let `u : U ⟶ T` be surjective and étale and let `K ∈ D(T_ét, Λ)`. If `Lu^
 locally constant sheaf placed in degree `r`, then so is `K`: the cohomology sheaves of `K` vanish
 outside degree `r` (`AlgebraicGeometry.Etale.isZero_homology_of_leftDerivedUpperStar_iso`) and
 `H^r(K)` is finite locally constant
-(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_homology_of_leftDerivedUpperStar_iso`).
-Together with `DerivedCategory.nonempty_iso_singleFunctor_obj_homologyFunctor_obj` this is the
-blueprint lemma `lem-pur-concentrated-complex-shift`.
+(`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_homology_of_leftDerivedUpperStar_iso`),
+so `K` is its `r`-th cohomology sheaf placed in degree `r`
+(`DerivedCategory.nonempty_iso_singleFunctor_obj_homologyFunctor_obj`).
 
 ## Main statements
 
@@ -45,12 +45,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {U T : Scheme.{u}} (u : U ⟶ T) [Eta
   {L : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
 
 omit [Etale u] in
-/-- Complexes with cohomology in a single degree
-
-*Vanishing detected on an étale cover.* Let `u : U ⟶ T` be surjective (for instance a surjective
-étale cover). If
-`Lu^* K ≅ L[-r]` for a sheaf `L` on `U`, then `H^i(K) = 0` for every `i ≠ r`: pullback is exact,
-so `u^* H^i(K) ≅ H^i(Lu^* K) = 0`, and `u^*` reflects vanishing, `u` being surjective. -/
+/-- *Vanishing detected on an étale cover.* Let `u : U ⟶ T` be surjective (for instance a
+surjective étale cover). If `Lu^* K ≅ L[-r]` for a sheaf `L` on `U`, then `H^i(K) = 0` for every
+`i ≠ r`. -/
 theorem isZero_homology_of_leftDerivedUpperStar_iso
     (e : (L((u)^*[ModuleCat.{u + 1} Λ])).obj K ≅ (DerivedCategory.singleFunctor _ r).obj L)
     (i : ℤ) (hi : i ≠ r) : IsZero ((DerivedCategory.homologyFunctor _ i).obj K) := by
@@ -67,12 +64,9 @@ theorem isZero_homology_of_leftDerivedUpperStar_iso
   rw [IsZero.iff_id_eq_zero]
   exact ((u)^*[ModuleCat.{u + 1} Λ]).map_injective (by simpa using hu.eq_of_src _ _)
 
-/-- Complexes with cohomology in a single degree
-
-*Local constancy detected on an étale cover.* Let `u : U ⟶ T` be surjective and étale. If
+/-- *Local constancy detected on an étale cover.* Let `u : U ⟶ T` be surjective and étale. If
 `Lu^* K ≅ L[-r]` for a finite locally constant sheaf `L` on `U`, then `H^r(K)` is finite
-locally constant on `T`: its pullback `u^* H^r(K) ≅ H^r(Lu^* K) ≅ L` is, and local constancy
-and finiteness of the stalks descend along `u`. -/
+locally constant on `T`. -/
 theorem isFiniteLocallyConstantSheaf_homology_of_leftDerivedUpperStar_iso
     [IsFiniteLocallyConstantSheaf L]
     (e : (L((u)^*[ModuleCat.{u + 1} Λ])).obj K ≅ (DerivedCategory.singleFunctor _ r).obj L) :

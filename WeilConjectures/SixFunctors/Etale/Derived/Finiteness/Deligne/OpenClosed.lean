@@ -24,7 +24,7 @@ direct images of `v^* K` along `v` and along `v ≫ j`, and the direct image of 
 `i ≫ j`, are bounded constructible and commute with base change, and `i^* Δ` is bounded
 constructible, then the direct image of `K` along `j` is bounded constructible and commutes with
 base change (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_distTriang_unit`). This is
-the third step of the proof of `theorem-generic-constructibility-base-change-rj`, once the second
+the third step of the proof of Deligne's generic constructibility theorem, once the second
 step has been applied to `v` and to `v ≫ j` and the induction hypothesis to `i ≫ j`.
 -/
 
@@ -45,8 +45,7 @@ namespace Etale
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- For an open immersion `v`, the counit `v^* Rv_* ⟶ 𝟭` of the bounded below derived adjunction
-is an isomorphism: on a complex of injective sheaves it is the underived counit `v^* v_* ⟶ 𝟭`,
-an isomorphism for an open immersion. -/
+is an isomorphism. -/
 instance isIso_derivedPlus_counit_of_isOpenImmersion {V X : Scheme.{u}} (v : V ⟶ X)
     [IsOpenImmersion v] :
     IsIso (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) v).derivedPlus.counit := by
@@ -65,7 +64,7 @@ instance isIso_derivedPlus_counit_of_isOpenImmersion {V X : Scheme.{u}} (v : V �
     ((_root_.DerivedCategory.Plus.quotientCompQhIso _).app M ≪≫ e)).1 this
 
 /-- For an open immersion `v`, the pullback `v^*` of the unit `K ⟶ Rv_* v^* K` is an
-isomorphism, by the triangle identity. -/
+isomorphism. -/
 instance isIso_mapDerivedCategoryPlus_map_derivedPlus_unit_app {V X : Scheme.{u}} (v : V ⟶ X)
     [IsOpenImmersion v]
     (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

@@ -11,8 +11,8 @@ public import WeilConjectures.SmoothPurity.Finite.FiniteTorAmplitudeSites
 
 /-! # The projection compactification comparison predicates
 
-Unchanged data interface extracted from FixProjectionCompactificationComparison so that
-single-refinement steps can be stated independently of their common-refinement assembly.
+Data interface for the projection compactification comparison, so that single-refinement
+steps can be stated independently of their common-refinement assembly.
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +29,7 @@ open scoped CategoryTheory.Functor
 namespace WeilConjectures.FixProjectionCompactification
 
 /-- Package a given compactification with the identity base-change square. This selects
-its projection from the recorded exchange/projection family without choosing any new map.
- -/
+its projection from the recorded exchange/projection family without choosing any new map. -/
 def identitySquare {D : FiniteFieldDatum.{u}} {X Y : SixFunctorSpace D}
     (f : X ⟶ Y) (c : Compactification f.hom.left) : SixFunctorCompactifiedSquare D := by
   letI : LocallyOfFiniteType Y.obj.hom := Y.property.1
@@ -62,9 +61,7 @@ def identitySquare {D : FiniteFieldDatum.{u}} {X Y : SixFunctorSpace D}
       squareComm := by simp, properComm := by simp, openComm := by simp }
 
 /-- The displayed compactification comparison equation at a higher coefficient stage.
-The tensor, projection and rho are all taken from the supplied normalized operation datum;
-P is instantiated below with exactly the recorded finite-Tor domain at that stage.
- -/
+The tensor, projection and rho are all taken from the supplied normalized operation datum. -/
 def higherLaw {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)
@@ -79,9 +76,7 @@ def higherLaw {D : FiniteFieldDatum.{u}}
       ((T Y).map ((S.comparison f c₁ c₂).hom.app K)).app L ≫
         (A (identitySquare f c₂)).projectionComponent K L
 
-/-- The local comparison square for one proper refinement. Common refinements are
-assembled from two such squares using the recorded comparison cocycle.
- -/
+/-- The local comparison square for one proper refinement. -/
 def refinementLaw {D : FiniteFieldDatum.{u}}
     {B : SixFunctorSpace D → Type v} [∀ X, Category.{w} (B X)]
     (S : SixFunctorPushStage D B) (T : ∀ X, B X ⥤ B X ⥤ B X)
@@ -97,11 +92,9 @@ def refinementLaw {D : FiniteFieldDatum.{u}}
         (A (identitySquare f d)).projectionComponent K L
 
 /-- The finite-coefficient equation in fixed-scalar coordinates. The common-refinement
-comparison is theta(d,c1) inverse followed by theta(d,c2), exactly as prescribed by
-compactification_coherence. The retained target witness is transported by e; quantifying
-over e keeps every presentation of the tensor object, rather than choosing an antecedent.
-K is bounded constructible, and only L is required to have finite Tor amplitude.
- -/
+comparison is theta(d,c1) inverse followed by theta(d,c2), as prescribed by
+compactification_coherence. K is bounded constructible, and only L is required to have
+finite Tor amplitude. -/
 def finiteLaw (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]
     [FiniteDimensional (Padic C.l) E] (n : ℕ) (hn : 1 ≤ n)

@@ -33,6 +33,8 @@ cycles is multiplicative (`NearbyCyclesModel.galoisLayerAut_autAction_mul`). Thi
   `κ : Li^* Rj_* Rg_* Lg^* Lε^* C ≅ Ψ_{N_{L'}} L(𝟙)^* C`
   (`NearbyCyclesModel.galoisLayerExchangeIso`).
 
+## Implementation details
+
 The proof computes `α` as `Ψ'` of the unit of `Lg^* ⊣ Rg_*` up to canonical isomorphisms
 (`NearbyCyclesModel.Hom.pullbackExchange_app_of_total_eq_id`) and splits that unit by the
 normalized derived Galois trace (`ProEtale.CondensedRing.derivedUnit_comp_normalizedTrace`); the

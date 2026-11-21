@@ -29,12 +29,7 @@ special fibre `Y' ×_𝒳 V`; it maps to `N` by the open immersion of total spac
   invertibility of the pullback exchange of the models of the geometric generic fibres is local on
   the total space**. If every point `x` of the special fibre of `M` has an open neighbourhood `V`
   of `φ(x)` such that the pullback exchange of `φ|_V` is invertible at the restriction of `K`,
-  then the pullback exchange of `φ` is invertible at `K`. Indeed by the square law of the
-  pullback exchanges (`NearbyCyclesModel.Hom.pullbackExchange_square`) and the invertibility of
-  the exchanges of open immersions, the restriction of the exchange of `φ` to the open
-  `M.i⁻¹(φ⁻¹ V)` of the special fibre is identified with the exchange of `φ|_V`
-  (`NearbyCyclesModel.Hom.isIso_leftDerivedUpperStar_map_pullbackExchange_app_of_restrictOpens`),
-  and these opens cover the special fibre.
+  then the pullback exchange of `φ` is invertible at `K`.
 - `NearbyCyclesModel.isPullback_restrictOpens_j`, `NearbyCyclesModel.isPullback_restrictOpens_i`,
   `NearbyCyclesModel.Hom.isPullback_restrictOpens_total`: cartesian squares of fibres over a trait
   and of total spaces over a change of trait restrict to opens.
@@ -54,7 +49,7 @@ open Scheme
 
 /-- A morphism of complexes of module objects is invertible as soon as every point has an open
 neighbourhood, given by an open immersion `u`, such that its derived pullback along `u` is
-invertible: the open immersions form a pro-étale cover. -/
+invertible. -/
 theorem isIso_of_forall_exists_isIso_leftDerivedUpperStar_map_of_isOpenImmersion
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {X : Scheme.{u}} {K K' : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
@@ -165,9 +160,7 @@ private lemma isIso_map_of_comp_eq {C D : Type*} [Category C] [Category D] (F : 
 /-- **The pullback exchange of a restriction**: for any functor `F` on the derived category of the
 special fibre `M.i⁻¹(φ⁻¹ V)` of `M|_{φ⁻¹ V}`, if `F` of the pullback exchange of `φ|_V` (on the
 models of the geometric generic fibres) at the restriction of `K` is invertible, so is `F` of
-the restriction to `M.i⁻¹(φ⁻¹ V)` of the pullback exchange of `φ` at `K`. This is the square law
-of the pullback exchanges (`NearbyCyclesModel.Hom.pullbackExchange_square`) for `φ|_V`, `φ` and
-the open immersions of the restrictions, whose exchanges are invertible. -/
+the restriction to `M.i⁻¹(φ⁻¹ V)` of the pullback exchange of `φ` at `K`. -/
 theorem isIso_map_leftDerivedUpperStar_map_pullbackExchange_app_of_restrictOpens
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
       (condensedRingObj Λ N.generic)))
@@ -219,10 +212,7 @@ theorem isIso_leftDerivedUpperStar_map_pullbackExchange_app_of_restrictOpens
 `x` of the special fibre of `M` has an open neighbourhood `V` of `φ(x)` in the total space of `N`
 such that the pullback exchange of `φ|_V : M|_{φ⁻¹ V} ⟶ N|_V` (on the models of the geometric
 generic fibres) is invertible at the restriction of `K`, then the pullback exchange of `φ` is
-invertible at `K`: its restrictions to the opens `M.i⁻¹(φ⁻¹ V)`, which cover the special fibre,
-are invertible
-(`NearbyCyclesModel.Hom.isIso_leftDerivedUpperStar_fst_map_pullbackExchange_app_of_restrictOpens`).
--/
+invertible at `K`. -/
 theorem isIso_toGeneric_pullbackExchange_app_of_restrictOpens
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
       (condensedRingObj Λ N.generic)))

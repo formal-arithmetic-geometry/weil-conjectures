@@ -50,10 +50,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- **Derived base change from base change in every degree.** For a cartesian square such that
 the degree-`q` base change maps `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` are isomorphisms for all `q` and
-all sheaves `F`, the derived base change map `p^* R⁺g_* ⟶ R⁺h_* e^*` is an isomorphism: in
-degree `0` the underived base change map is an isomorphism, in positive degrees the pullback
-`e^* I` of an injective sheaf is `h_*`-acyclic, and the derived base change map is computed on
-complexes of injectives. -/
+all sheaves `F`, the derived base change map `p^* R⁺g_* ⟶ R⁺h_* e^*` is an isomorphism. -/
 theorem Etale.isIso_derivedBaseChangeMapPlus_of_forall_isIso_baseChangeHomologyMap
     {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
     (sq : IsPullback e h g p)
@@ -120,9 +117,7 @@ variable {S T : Scheme.{u}} (g : T ⟶ S) {I : Type u} [Category.{u} I] (X : I �
 Let `Xᵢ ⟶ S` be a cofiltered system of étale quasi-compact quasi-separated morphisms with affine
 transition maps and limit `X₀ ⟶ S`, `S` quasi-compact and quasi-separated, and `g : T ⟶ S`
 quasi-compact quasi-separated. For every sheaf `F` on `T`, the base-change map of the Cartesian
-square `Y = T ×_S X₀` is an isomorphism in every degree: this is the limit form of base change
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit`) together with étale base
-change at the stages (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale`). -/
+square `Y = T ×_S X₀` is an isomorphism in every degree. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_etale_of_qcqs [IsCofiltered I]
     [QuasiCompact g] [QuasiSeparated g] [CompactSpace S] [QuasiSeparatedSpace S]
     [∀ i, Etale (p.app i)] [∀ i, QuasiCompact (p.app i)] [∀ i, QuasiSeparated (p.app i)]
@@ -181,11 +176,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_etale_of_qcqs [IsCofiltered
 
 end Limit
 
-/-- **Base change along a limit of étale schemes**, for a quasi-compact quasi-separated base `S` and a
-system given as a diagram `D` in `Over S` of étale quasi-compact quasi-separated `S`-schemes with
-affine transition maps: for `g : T ⟶ S` quasi-compact quasi-separated, the base-change maps of the
-Cartesian square `Y = T ×_S lim D` are isomorphisms in every degree and for every sheaf of
-`Λ`-modules. -/
+/-- **Base change along a limit of étale schemes**, for a quasi-compact quasi-separated base `S`
+and a system given as a diagram `D` in `Over S` of étale quasi-compact quasi-separated
+`S`-schemes with affine transition maps: for `g : T ⟶ S` quasi-compact quasi-separated, the
+base-change maps of the Cartesian square `Y = T ×_S lim D` are isomorphisms in every degree and
+for every sheaf of `Λ`-modules. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_etale {S T : Scheme.{u}} (g : T ⟶ S)
     [QuasiCompact g] [QuasiSeparated g] [CompactSpace S] [QuasiSeparatedSpace S]
     {I : Type u} [Category.{u} I] [IsCofiltered I]
@@ -209,10 +204,9 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_etale {S T : Scheme.{u}} (g
 
 /-- **Base change along the base change of a strict localization.** Let `s` be a geometric point
 of a quasi-separated scheme `S`, `f : W ⟶ S` a morphism from a quasi-compact quasi-separated
-scheme and `W' = W ×_S S_(s)`. The projection `W' ⟶ W` is the limit of the étale `W`-schemes
-`W ×_S V` for the affine pointed étale neighbourhoods `(V, v)` of `s`, so the base change maps
-along `W' ⟶ W` of a quasi-compact quasi-separated `g : T ⟶ W` are isomorphisms in every degree
-and for every sheaf of `Λ`-modules. -/
+scheme and `W' = W ×_S S_(s)`. The base change maps along `W' ⟶ W` of a quasi-compact
+quasi-separated `g : T ⟶ W` are isomorphisms in every degree and for every sheaf of
+`Λ`-modules. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isPullback_strictLocalization_of_qcqs
     {S : Scheme.{u}} [QuasiSeparatedSpace S] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ S) {W W' : Scheme.{u}} [CompactSpace W] [QuasiSeparatedSpace W]

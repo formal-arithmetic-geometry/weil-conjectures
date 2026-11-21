@@ -14,7 +14,16 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Limits
 
 /-! # Limit preservation for ordinary qcqs restriction
 
-Source: Stacks Tags 09AA, 09BL and 03CO. -/
+Ordinary restriction preserves small limits and its completed coefficient map is invertible.
+
+## References
+
+* [Stacks, Tag 09AA]
+* [Stacks, Tag 09BL]
+* [Stacks, Tag 09AE]
+* [Stacks, Tag 03CO]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8(1)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -190,23 +199,7 @@ private theorem moduleForget_limits {X : Scheme.{t}}
   exact preservesLimits_of_reflects_of_preserves _ (sheafToPresheaf _ _)
 
 /-- Ordinary restriction preserves all limits indexed by small categories, and its
-specified completed coefficient map is invertible.
-
-Source: Stacks Tags 09AA(1), 09BL, 09AE and 03CO; Bhatt--Scholze Lemma 6.5.8(1).
-Proof: for an immersion inverse image on set sheaves preserves all limits. For a
-weakly etale map it is slice restriction and also preserves all limits. Compose
-the two inverse images, using uniqueness of adjoints to identify the composite
-with the inverse image adjoint to the actual direct image of s ≫ i. The finite
-coefficient maps are the constant-section isomorphisms and commute with every
-quotient transition. Preservation of the inverse limit identifies their limit
-with ordinaryCoefficientMap, by the finite-projection uniqueness of
-ordinaryCompletedRingMap. Thus this map is invertible. Module pullback along an
-invertible coefficient map is inverse image with its transported scalar action.
-The conservative, limit-preserving underlying abelian sheaf functor identifies
-its limits with the limits of inverse image. All constructions may be performed
-on the coefficientProEtaleSiteModel and transported back, so site and coefficient
-universes remain independent. No nonempty-source assumption is needed: over the
-empty scheme the sheaf category and all its diagrams are terminal. -/
+specified completed coefficient map is invertible. -/
 theorem qcqsOrdinaryRestrictionExact
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -26,11 +26,17 @@ satisfy `α_{τ'} ∘ τ'^* α_{σ₁} = α_{σ₂} ∘ σ₂^* α_τ` up to the
 (`NearbyCyclesModel.pullbackExchange_galoisLayerMap_square`). By SGA 4½, [Th. finitude],
 Lemme 3.4, `α_{σᵢ}` is the inclusion of the direct summand `Ψ_{Nᵢ} = (Ψ_{Nᵢ_{Ωᵢ}})^{Pᵢ}` of
 invariants under `Pᵢ = Aut(Ωᵢ/Lᵢ)`. This file proves that if `α_{τ'}` is invertible, `α_τ` is
-invertible: `α_{τ'}` is equivariant along the restriction `P₂ ⟶ P₁`
-(`NearbyCyclesModel.pullbackExchange_galoisLayerMap_app_comp_galoisLayerAction`), and when every
-element of `P₁` is a restriction, it identifies the two invariant summands
+invertible, when every element of `P₁` is a restriction of an element of `P₂`
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap`). This is the step "take the
-invariants under a pro-`p` group" in the induction of Deligne's proof of Th. finitude 3.7 (3.8).
+invariants under a pro-`p` group" in Deligne's proof of Th. finitude 3.7 (3.8).
+
+## Main results
+
+- `NearbyCyclesModel.pullbackExchange_galoisLayerMap_square`: the square of pullback exchanges.
+- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap`: the change of trait is
+  invertible on the invariant summands once it is invertible on the Galois layers.
+
+## Implementation details
 
 The identification of the summands uses that the projector `r₁ ≫ α_{σ₁}` of the first summand is
 the projector onto *all* the invariants, in the form: on cohomology sheaves (after pullback to the
@@ -38,12 +44,6 @@ special fibre of `N₂`), every map out of `Hᵠ(Ψ_{N₁_{Ω₁}})` which is in
 by the projector. Of the second projector, only the invariance `ρ_σ ≫ (r₂ ≫ α_{σ₂}) = r₂ ≫ α_{σ₂}`
 is used. The abstract statement is `CategoryTheory.isIso_of_comp_eq_comp_of_coinvariant`, in a
 category with a jointly conservative family of functors (the cohomology functors).
-
-## Main results
-
-- `NearbyCyclesModel.pullbackExchange_galoisLayerMap_square`: the square of pullback exchanges.
-- `NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap`: the change of trait is
-  invertible on the invariant summands once it is invertible on the Galois layers.
 -/
 
 @[expose] public section

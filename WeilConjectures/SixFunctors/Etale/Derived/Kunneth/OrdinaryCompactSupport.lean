@@ -159,12 +159,7 @@ fibre product of `X` and `Y` over `k` (projections `p₁`, `p₂`), `W̄` that o
 (projections `q₁`, `q₂`), and `J : W ⟶ W̄` the product open immersion. Then for all
 `E ∈ D(X_ét, Λ)` and `K ∈ D(Y_ét, Λ)`, with `RΓ_c(X, E) = RΓ(X̄, j_{X!} E)`,
 
-`RΓ_c(X, E) ⊗ᴸ RΓ_c(Y, K) ≅ RΓ(W̄, J_! (Lp₁^* E ⊗ᴸ Lp₂^* K)) = RΓ_c(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`.
-
-It is the Künneth formula for `X̄` and `Ȳ` (`proposition-ordinary-external-kunneth--1`), applied to
-`j_{X!} E` and `j_{Y!} K`, followed by the identification `Lq₁^* j_{X!} E ⊗ᴸ Lq₂^* j_{Y!} K ≅
-J_! (Lp₁^* E ⊗ᴸ Lp₂^* K)` given by base change and the projection formula for extensions by
-zero. -/
+`RΓ_c(X, E) ⊗ᴸ RΓ_c(Y, K) ≅ RΓ(W̄, J_! (Lp₁^* E ⊗ᴸ Lp₂^* K)) = RΓ_c(W, Lp₁^* E ⊗ᴸ Lp₂^* K)`. -/
 theorem nonempty_iso_kunneth_compactSupport_of_isSepClosed {X Y Xb Yb : Scheme.{u}}
     (jX : X ⟶ Xb) (jY : Y ⟶ Yb) [IsOpenImmersion jX] [IsOpenImmersion jY]
     (bX : Xb ⟶ Spec (.of k)) (bY : Yb ⟶ Spec (.of k)) [IsProper bX] [IsProper bY]

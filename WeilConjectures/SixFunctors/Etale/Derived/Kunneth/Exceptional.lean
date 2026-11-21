@@ -17,28 +17,25 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasP
 
 Over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible in `k`, and for
 compactifiable morphisms `fᵢ : Xᵢ ⟶ Yᵢ` with `Yᵢ` of finite type over `k`, the exceptional
-Künneth isomorphism (`proposition-exceptional-external-kunneth--1`) reads
+Künneth isomorphism reads
 
 `α : Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^!(N₁ ⊠ N₂)`
 
-(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek`).
-
-It is deduced from the one-sided formula
-`R(g × 𝟙_W)^!(N ⊠ M) ≅ Rg^! N ⊠ M`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor`): the base change
-map and the tensor map of `Rh^!` for `h = g × 𝟙_W` are isomorphisms
-(`AlgebraicGeometry.Etale.isExceptionalKunneth`). Writing `f₁ × f₂ = (𝟙 × f₂) ≫ (f₁ × 𝟙)`, the
-composition law for the exceptional inverse image reduces the two-sided formula to two
-one-sided ones.
-
-The formula holds for all objects `Nᵢ`, not only for `Nᵢ ∈ Dctf(Yᵢ, Λ)`.
+(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek`). The formula
+holds for all objects `Nᵢ`, not only for `Nᵢ ∈ Dctf(Yᵢ, Λ)`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor`
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall`
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek`
-  (`proposition-exceptional-external-kunneth--1`)
+
+## Implementation details
+
+The two-sided formula is reduced to the one-sided formula
+`R(g × 𝟙_W)^!(N ⊠ M) ≅ Rg^! N ⊠ M`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedTensor`) by writing
+`f₁ × f₂ = (𝟙 × f₂) ≫ (f₁ × 𝟙)`.
 -/
 
 @[expose] public section
@@ -64,11 +61,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 compactifiable, with `S` and `W` of finite type over `k`, let `P = S ×_k W` with projections
 `q`, `r`, and let `h : Q ⟶ P` be the base change of `g` along `q`, with `q' : Q ⟶ T`. Then for
 all `N ∈ D(S_ét, Λ)` and `M ∈ D(W_ét, Λ)`,
-
-`Rh^!(Lq^* N ⊗ᴸ Lr^* M) ≅ Lq'^* Rg^! N ⊗ᴸ L(h ≫ r)^* M`,
-
-that is `R(g × 𝟙_W)^!(N ⊠ M) ≅ Rg^! N ⊠ M`: through the inverses of the tensor map of `h` and
-of the base change map (`AlgebraicGeometry.Etale.isExceptionalKunneth`). -/
+`Rh^!(Lq^* N ⊗ᴸ Lr^* M) ≅ Lq'^* Rg^! N ⊗ᴸ L(h ≫ r)^* M`, that is
+`R(g × 𝟙_W)^!(N ⊠ M) ≅ Rg^! N ⊠ M`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor {T S W P Q : Scheme.{u}}
     (b : S ⟶ Spec (.of k)) (c : W ⟶ Spec (.of k)) [LocallyOfFiniteType b] [QuasiCompact b]
     [LocallyOfFiniteType c] [QuasiCompact c] {q : P ⟶ S} {r : P ⟶ W} (sqP : IsPullback q r b c)
@@ -172,18 +166,11 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall
     e₂ ≪≫ ((derivedTensor _ _).obj _).mapIso (eqToIso (by rw [h₂])) ≪≫ (β'.app _).app _
   exact ⟨(e₀ ≪≫ (R(φ₂)^![Λ]).mapIso e₁' ≪≫ e₂').symm⟩
 
-/-- Blueprint `proposition-exceptional-external-kunneth--1`: Exceptional Künneth; the `α` map.
-
-Over a field `k`, for a finite coefficient ring `Λ` whose exponent is invertible in `k`, let
-`fᵢ : Xᵢ ⟶ Yᵢ` (`i = 1, 2`) be quasi-compact morphisms admitting compactifications, with `Yᵢ`
-of finite type over `k`, and let `Nᵢ ∈ Dctf(Yᵢ, Λ)`. Then, with the external products over
-`Spec k`,
-
-`Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^!(N₁ ⊠ N₂)`.
-
-The statement is the `exceptional` field of `AlgebraicGeometry.Etale.HasKunnethComparisons`
-over `S = Spec k`; it holds for all `Nᵢ`
-(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek_of_forall`). -/
+/-- **Exceptional Künneth formula.** Over a field `k`, for a finite coefficient ring `Λ` whose
+exponent is invertible in `k`, let `fᵢ : Xᵢ ⟶ Yᵢ` (`i = 1, 2`) be quasi-compact morphisms
+admitting compactifications, with `Yᵢ` of finite type over `k`, and let `Nᵢ ∈ Dctf(Yᵢ, Λ)`.
+Then, with the external products over `Spec k`, `Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^!(N₁ ⊠ N₂)`.
+-/
 theorem nonempty_iso_externalProduct_rightDerivedUpperShriek
     {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ Spec (.of k)) (b₂ : Y₂ ⟶ Spec (.of k))
     [LocallyOfFiniteType b₁] [QuasiCompact b₁] [LocallyOfFiniteType b₂] [QuasiCompact b₂]

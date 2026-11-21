@@ -36,8 +36,13 @@ import Mathlib.CategoryTheory.Localization.Triangulated
 
 /-! # Exactness of normalized integral quotient completion
 
-Source: Stacks Project, Tags 06XN and 05SE; the signed Roos cone calculus,
-Stacks Tags 014A, 014E and 08TC.
+## References
+
+* [Stacks, Tag 06XN]
+* [Stacks, Tag 05SE]
+* [Stacks, Tag 014A]
+* [Stacks, Tag 014E]
+* [Stacks, Tag 08TC]
 -/
 
 @[expose] public section
@@ -89,31 +94,7 @@ private theorem kanUnit_commShift
     (NatTrans.shift_app_comm β n X).symm
 
 /-- The quotient-Roos descent is additive and exact, and its specified quotient
-augmentation commutes with the same exact functor's integer shifts.
-
-Source: Stacks Project, Tags 06XN and 05SE; signed Roos cone and augmentation
-calculus, Tags 014A, 014E and 08TC.
-
-Proof: assemble ordinary reduction followed by restriction of scalars into the
-additive module-valued tower functor. Its degreewise extension to complexes
-preserves homotopies, shifts and mapping-cone triangles. The signed Roos
-comparison preserves cone inclusion and boundary, so its homotopy descent is an
-exact functor. Choose K-flat resolutions with flat terms. Each finite quotient
-functor inverts quasi-isomorphisms between these representatives, and exact
-countable products on the pro-etale site show that Roos also does so. The
-resolving-class left-derived theorem therefore supplies an exact derived functor.
-Its comparison on good representatives identifies it uniquely with
-IntegralOnSlice.completion, by completion_exists. Transfer additivity and its
-coherent shift structure along this normalized isomorphism. At the complex
-level, the quotient augmentation has zero shifted-product coordinate. The Roos
-shift-augmentation identity carries this map to the shifted augmentation; the
-termwise quotient units commute with shifts because they come from a natural
-transformation on modules. The derived counit and its coherent Kan shift
-structure carry this identity to the derived category. The localization of good
-representatives detects equality of natural transformations, so the descended
-augmentation is precisely completionUnit by completionUnit_existsUnique and
-commutes with the transported shifts. Cone compatibility proves exactness for
-these same shifts, rather than an independently chosen exact structure. -/
+augmentation commutes with the same exact functor's integer shifts. -/
 theorem integralQuotientCompletion_exact
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -155,8 +155,7 @@ lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_inv_app (sq 
   congr(Iso.inv $(Etale.derivedPlusOpenImmersionLowerShriekBaseChangeSquareStep_app A sq K))
 
 /-- For a Cartesian square of open immersions, the exchange morphism of the square isomorphism
-for the adjunctions `j_! ⊣ j^*` and `j'_! ⊣ j'^*` is an isomorphism: it is the base change map
-`Etale.openImmersionLowerShriekBaseChangeMap`. -/
+for the adjunctions `j_! ⊣ j^*` and `j'_! ⊣ j'^*` is an isomorphism. -/
 lemma Etale.isIso_exchangeLeft_squareUpperStarIso (sq : IsPullback g' j' j g) :
     IsIso (Adjunction.exchangeLeft (openImmersionLowerShriekUpperStarAdjunction A j)
       (openImmersionLowerShriekUpperStarAdjunction A j')
@@ -255,11 +254,7 @@ lemma Etale.derivedPlusOpenImmersionLowerShriekBaseChange_eq_exchangeLeft (sq : 
   rfl
 
 /-- **Base change for extension by zero**: for a *Cartesian* square with `j` and `j'`
-open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism.
-
-Mathematically, since the square is Cartesian, `X'` is the preimage of the open
-subscheme `X ⊆ Z` under `g`, and on geometric stalks both sides are the pulled-back
-stalk at points of `X'` and vanish outside `X'`. -/
+open immersions, the exchange morphism `Lg'^* ⋙ j'_! ⟶ j_! ⋙ Lg^*` is an isomorphism. -/
 theorem Etale.isIso_derivedPlusOpenImmersionLowerShriekBaseChange (sq : IsPullback g' j' j g) :
     IsIso (Etale.derivedPlusOpenImmersionLowerShriekBaseChange A sq.toCommSq) := by
   have := Etale.isIso_exchangeLeft_squareUpperStarIso A sq

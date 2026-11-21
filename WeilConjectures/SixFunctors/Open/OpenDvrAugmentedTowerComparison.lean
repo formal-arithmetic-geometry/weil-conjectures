@@ -9,7 +9,13 @@ import WeilConjectures.SixFunctors.Open.OpenDvrAugmentedReductionComparison
 
 /-! # The augmented quotient tower under the canonical DVR coefficient comparison
 
-Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 099B]
+* [Stacks, Tag 0A0E]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -24,7 +30,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Projection-normalized transport of quotient towers, before passing to total limit.
-Source: Stacks Tags 07A6, 0D6E and 0941.
 The fields retain the single strict augmentation and the universal limit comparison. -/
 structure OpenDvrAugmentedTowerComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
@@ -107,27 +112,7 @@ structure OpenDvrAugmentedTowerComparison
           rlim.hom.app ((coefficientSequenceDerivedRestriction.{u, u} l E T).obj
             (S.reduction.obj P)) =
       C.derived.functor.map (S.adjunction.unit.app P)
-/-- Canonical coefficient transport identifies the complete strict augmentation.
-Source: Stacks Tags 07A6, 0D6E and 0941.
-
-Proof: the finite coefficient maps and completed projection equations give an isomorphism
-of ringed quotient diagrams. Scalar restriction transports the ordinary quotient tensor
-functors: the tensor universal property fixes the map on generators to identity. The
-comparison commutes with all transition maps since each quotient map preserves one.
-The universal left-derived properties give the natural tower comparison. Scalar
-restriction is an exact equivalence and preserves ordinary limits. The ordinary limit
-comparison is uniquely fixed by all its projections; the right-derived universal
-property extends it and gives the displayed equation on every complex. For a flat-term
-K-flat Q, transpose the actual scalar tensor complex to a complex of strict towers B.
-The tensor comparisons give kappa and tau, carrying the ordinary augmentation to
-x tensor one simultaneously at every level. The reduction counit comparisons give e
-and the displayed tower equation. Apply sequenceTensorAugmentationUnit to the limit
-projections. Its ordinary constant/limit transpose is precisely this augmentation,
-so its total-limit equation is the representative formula displayed here. Derived
-adjunction uniqueness carries this equation to the specified calculus S, preserving
-its unit. Finally, the characterization of reconstructionCompletionUnit on all K-flat
-representatives and localization naturality give the unit equation for every P.
-The argument uses neither completeness of P nor exactness of countable products. -/
+/-- Canonical coefficient transport identifies the complete strict augmentation. -/
 theorem openDvrAugmentedTowerComparison
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)

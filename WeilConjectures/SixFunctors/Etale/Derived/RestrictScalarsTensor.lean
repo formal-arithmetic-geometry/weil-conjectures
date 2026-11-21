@@ -182,10 +182,7 @@ noncomputable def extendScalarsTensorRestrictScalarsComplexIso
 
 include hφ ha in
 /-- **The projection formula for extension and restriction of scalars.** For `L ∈ D(X_ét, Λ)` and
-`N ∈ D(X_ét, Λ')`, `Res((L ⊗ᴸ_Λ Λ') ⊗ᴸ N) ≅ L ⊗ᴸ Res N`: on a K-flat representative `P` of `L`
-and a K-flat representative `M` of `N`, both sides are computed by the complexes
-`Res((Λ' ⊗_Λ P) ⊗ M) ≅ P ⊗ Res M`
-(`AlgebraicGeometry.Etale.extendScalarsTensorRestrictScalarsComplexIso`). -/
+`N ∈ D(X_ét, Λ')`, `Res((L ⊗ᴸ_Λ Λ') ⊗ᴸ N) ≅ L ⊗ᴸ Res N`. -/
 theorem nonempty_iso_derivedRestrictScalars_derivedTensor (L : 𝐃(X, Λ)) (N : 𝐃(X, Λ')) :
     Nonempty ((Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj
         (((derivedTensor (ModuleCat.{u + 1} Λ') X).obj

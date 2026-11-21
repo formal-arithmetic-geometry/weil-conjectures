@@ -18,7 +18,12 @@ import all WeilConjectures.CategoryTheory.Derived.DerivedMateUnitComparison
 
 /-! # Open scalar mates on strict coefficient systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 06YY.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -109,8 +114,7 @@ abbrev sequenceQuotient (n : ℕ) : sequenceRings l E (n + 1) ⟶ sequenceRings 
   CommRingCat.ofHom (Padic.coefficientExtensionTransition l E (n + 1)).ulift
 
 /-- The ordinary restriction/pullback comparison: the inverse-image mate of the
-identity-on-sections restriction/direct-image square.
-Source: Stacks 03D3 and 06YY. -/
+identity-on-sections restriction/direct-image square. -/
 private def sequenceRestrictionPullbackInv {X B : Scheme.{u}} (j : X ⟶ B) :
     sequenceRestriction l E L ι B ⋙ integralComparisonSequencePullback l E j ⟶
       integralComparisonSequencePullback l L j ⋙ sequenceRestriction l E L ι X :=
@@ -380,13 +384,7 @@ private theorem systemScalarPullback_eq_mate {X B : Scheme.{u}} (j : X ⟶ B)
 end Derived
 
 /-- The left mate of the system scalar/pullback comparison along any adjunctions of the
-open restriction functors is invertible.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 06YY.
-Proof: the ordinary scalar/pullback comparison is the scalar mate of the
-restriction/pullback comparison, which is the identity on sections for an open
-immersion. Localizing on K-flat complexes identifies the derived comparison with the
-derived scalar mate of its localization. The iterated mate is then a conjugate of an
-isomorphism. -/
+open restriction functors is invertible. -/
 theorem systemScalarPullback_leftMate_isIso {X B : Scheme.{u}} (j : X ⟶ B)
     [IsOpenImmersion j]
     {JE : coefficientSequenceDerived l E X ⥤ coefficientSequenceDerived l E B}

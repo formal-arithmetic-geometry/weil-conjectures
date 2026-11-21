@@ -16,10 +16,6 @@ import WeilConjectures.SixFunctors.IntegralOpenReduction.IntegralOpenExtensionCo
 /-!
 # Strict reduction and normalized realization of integral open extension
 
-Source: Stacks Project, Tags 0GL1 and 0E8I; blueprint `fix-prop-coherence`,
-open-factor sentence.
-The natural index n denotes exponent n+1. Site and coefficient sizes are independent.
-
 ## Main definitions
 
 - `Coefficients`: constant-section and quotient-normalized transport to the actual open slice.
@@ -29,6 +25,16 @@ The natural index n denotes exponent n+1. Site and coefficient sizes are indepen
 ## Main statements
 
 - `integralOpenReductionComparison`: existence of the specified comparison.
+
+## Implementation details
+
+The natural index n denotes exponent n+1. Site and coefficient sizes are independent.
+
+## References
+
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -252,24 +258,8 @@ private theorem comparisonOfModel
     intro n i
     exact c.components (Q.X i) n
 
-/-- Strict completed open reduction, its inverse-unit realization, and adjunction
-normalization. Source: Stacks 0GL1, 0E8I and 0941; `fix-prop-coherence`, open factor.
-Proof: choose the two reduction/total-limit calculi with their coherence packages.
-Normalize the semilinear open localization on sections using the identity-block
-case of block repetition. The simultaneous open tensor-model theorem then supplies
-the strict reduction comparison on every flat-term K-flat representative, with its
-specified coefficient components and its augmentation. Quasi-compact open extension
-preserves the actual quotient completeness predicate: its exact termwise functor
-preserves countable products and the uniformizer scalar, hence transports the
-principal-completion construction. Normalized reconstruction makes the actual units
-invertible on complete objects and the actual counits invertible on normalized
-systems. The canonical restriction model supplies the inverse extension mate.
-Restriction preserves completeness. Form inverse-unit realizations pointwise;
-naturality makes them natural isomorphisms, and the mate unit/counit identities
-and the adjunction triangle identities give all strict system and realized
-unit/counit equations. Retain these equations in Comparison; obtain its
-StrictModel directly from the same simultaneous tensor-model representatives.
-No equality of derived morphisms is inferred from their finite evaluations. -/
+/-- Existence of the strict completed open reduction comparison, its inverse-unit realization,
+and its adjunction normalization for a quasi-compact open immersion `j`. -/
 theorem integralOpenReductionComparison [QuasiCompact j]
     (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlU : IsUnit (l : Γ(U, ⊤))) :
     ∃ (SX : CoefficientDerivedSystemCalculus l E X)

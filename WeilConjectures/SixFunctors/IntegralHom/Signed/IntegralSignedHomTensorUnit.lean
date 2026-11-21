@@ -11,7 +11,12 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomProjectionNaturality
 import WeilConjectures.SixFunctors.IntegralHom.Evaluation.IntegralHomEvaluationExt
 import all WeilConjectures.SixFunctors.IntegralHom.Tensor.IntegralTensorUnitSections
 
-/-! # The signed Hom-tensor comparison at the coefficient unit -/
+/-! # The signed Hom-tensor comparison at the coefficient unit
+
+## References
+
+* [Stacks, Tag 0A8X]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -158,18 +163,7 @@ private theorem signed_unit
   exact congrArg (fun k ↦ (k.f (p + n)).val.app U (evaluate Y R A I n p U v x))
     ui.inv_hom_id
 
-/-- A signed Hom-tensor map at the coefficient unit is the map fixed by the unitors.
-
-Source: the degree-zero coefficient unit in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks 0A8X.
-
-Proof: cancel the inverse right unitor on the source and test equality on all
-Hom product projections and identity-slice sections. Naturality of Hom projections
-moves postcomposition with the target unitor through evaluation. The inverse
-unitor section formula writes each input as v tensor 1. The signed formula has
-coefficient degree zero, so its sign is one. Transport its total degree to n
-explicitly; the resulting evaluation is exactly the inverse target unitor.
-The target unitors cancel. No injectivity, flatness or boundedness is required. -/
+/-- A signed Hom-tensor map at the coefficient unit is the map fixed by the unitors. -/
 theorem integral_signedHomTensor_unit
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

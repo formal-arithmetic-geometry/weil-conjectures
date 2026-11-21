@@ -39,17 +39,11 @@ is an isomorphism (`AlgebraicGeometry.Etale.isIso_externalProductKunnethMap_of_f
 
 ## Implementation details
 
-`f₁ × f₂` is factored as `X₁ ×_k X₂ ⟶ X₁ ×_k Y₂ ⟶ Y₁ ×_k Y₂` (`𝟙 × f₂` followed by `f₁ × 𝟙`).
-The transposes of the Künneth maps with one identity factor for `f₁`
-(`AlgebraicGeometry.Etale.externalProductRightDerivedLowerStarMap`) and for `f₂`
-(`AlgebraicGeometry.Etale.externalProductRightDerivedLowerStarSndMap`) are computed by
-`AlgebraicGeometry.Etale.map_externalProductRightDerivedLowerStarMap_comp_counit` and
-`AlgebraicGeometry.Etale.map_externalProductRightDerivedLowerStarSndMap_comp_counit`; pasting them
-gives `ε_{f₁} ⊠ ε_{f₂}`, so the Künneth map is their composite with the composition isomorphism of
-direct images. Both factors are tensor base change maps
-(`AlgebraicGeometry.Etale.tensorBaseChangeMap`), invertible by
-`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`. The theorem holds without the hypotheses
-that the schemes are separated and that `Mᵢ` is bounded constructible of finite Tor-dimension.
+`f₁ × f₂` is factored as `X₁ ×_k X₂ ⟶ X₁ ×_k Y₂ ⟶ Y₁ ×_k Y₂` (`𝟙 × f₂` followed by `f₁ × 𝟙`),
+and the Künneth map is the composite of the Künneth maps with one identity factor, which are
+tensor base change maps (`AlgebraicGeometry.Etale.tensorBaseChangeMap`). The theorem holds
+without the hypotheses that the schemes are separated and that `Mᵢ` is bounded constructible of
+finite Tor-dimension.
 -/
 
 @[expose] public section
@@ -90,9 +84,7 @@ lemma isPullback_map_id_snd (c : Z ⟶ S) (b : Y ⟶ S) (f : X ⟶ Y) :
 
 /-- The comparison map `Q ⊠ Rf_* M ⟶ R(𝟙_Z × f)_* (Q ⊠ M)` of the ordinary Künneth formula with
 an identity first factor, for `c : Z ⟶ S`, `b : Y ⟶ S`, `f : X ⟶ Y`, `Q ∈ D(Z_ét)` and
-`M ∈ D(X_ét)`: the tensor base change map for the cartesian square
-`AlgebraicGeometry.Etale.isPullback_map_id_snd`, followed by the composition isomorphism
-`(𝟙 × f)^* p_Z^* ≅ p_Z^*`. -/
+`M ∈ D(X_ét)`. -/
 noncomputable def externalProductRightDerivedLowerStarSndMap [UpperStarPreservesFlat A]
     (c : Z ⟶ S) (b : Y ⟶ S) (f : X ⟶ Y)
     (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A))
@@ -358,16 +350,8 @@ private lemma tensorBaseChangeCounitApp_comp_of_snd [UpperStarPreservesFlat A]
 
 /-- The Künneth map of two commutative squares `h ≫ πᵢ = qᵢ ≫ fᵢ` (`i = 1, 2`) with a common
 edge `h : W ⟶ P`: for `M₁ ∈ D(X₁_ét)` and `M₂ ∈ D(X₂_ét)`, the morphism
-
-`Lπ₁^* Rf₁_* M₁ ⊗ᴸ Lπ₂^* Rf₂_* M₂ ⟶ Rh_* (Lq₁^* M₁ ⊗ᴸ Lq₂^* M₂)`
-
-transpose along `Lh^* ⊣ Rh_*` of the composite
-
-`Lh^*(Lπ₁^* Rf₁_* M₁ ⊗ᴸ Lπ₂^* Rf₂_* M₂) ≅ Lh^* Lπ₁^* Rf₁_* M₁ ⊗ᴸ Lh^* Lπ₂^* Rf₂_* M₂
-  ≅ Lq₁^* Lf₁^* Rf₁_* M₁ ⊗ᴸ Lq₂^* Lf₂^* Rf₂_* M₂ ⟶ Lq₁^* M₁ ⊗ᴸ Lq₂^* M₂`
-
-of the monoidality of `Lh^*`, the composition isomorphisms through `L(h ≫ πᵢ)^* = L(qᵢ ≫ fᵢ)^*`
-and the counits of `Lfᵢ^* ⊣ Rfᵢ_*` (`AlgebraicGeometry.Etale.tensorBaseChangeCounitApp`). -/
+`Lπ₁^* Rf₁_* M₁ ⊗ᴸ Lπ₂^* Rf₂_* M₂ ⟶ Rh_* (Lq₁^* M₁ ⊗ᴸ Lq₂^* M₂)` transpose along
+`Lh^* ⊣ Rh_*` of the tensor product of the counits of `Lfᵢ^* ⊣ Rfᵢ_*`. -/
 noncomputable def kunnethMapOfSquares [UpperStarPreservesFlat A] {W P X₁ X₂ Y₁ Y₂ : Scheme.{u}}
     (h : W ⟶ P) (q₁ : W ⟶ X₁) (q₂ : W ⟶ X₂) (π₁ : P ⟶ Y₁) (π₂ : P ⟶ Y₂) (f₁ : X₁ ⟶ Y₁)
     (f₂ : X₂ ⟶ Y₂) (w₁ : h ≫ π₁ = q₁ ≫ f₁) (w₂ : h ≫ π₂ = q₂ ≫ f₂)
@@ -383,16 +367,8 @@ noncomputable def kunnethMapOfSquares [UpperStarPreservesFlat A] {W P X₁ X₂ 
       ((-⊗ᴸ-(W)[A]).obj _).map (tensorBaseChangeCounitApp A h q₂ π₂ f₂ w₂ M₂))
 
 /-- The Künneth map `Rf₁_* M₁ ⊠ Rf₂_* M₂ ⟶ R(f₁ × f₂)_* (M₁ ⊠ M₂)` for `f₁ : X₁ ⟶ Y₁`,
-`f₂ : X₂ ⟶ Y₂` and `Yᵢ` over `S` through `bᵢ`.
-
-Writing `h = f₁ × f₂ : X₁ ×_S X₂ ⟶ Y₁ ×_S Y₂`, `pᵢ` for the projections of `Y₁ ×_S Y₂` and `qᵢ`
-for those of `X₁ ×_S X₂`, it is the transpose along `Lh^* ⊣ Rh_*` of the composite
-
-`Lh^*(Lp₁^* Rf₁_* M₁ ⊗ᴸ Lp₂^* Rf₂_* M₂) ≅ Lh^* Lp₁^* Rf₁_* M₁ ⊗ᴸ Lh^* Lp₂^* Rf₂_* M₂
-  ≅ Lq₁^* Lf₁^* Rf₁_* M₁ ⊗ᴸ Lq₂^* Lf₂^* Rf₂_* M₂ ⟶ Lq₁^* M₁ ⊗ᴸ Lq₂^* M₂`
-
-of the monoidality of `Lh^*`, the composition isomorphisms through `L(pᵢ ∘ h)^* = L(fᵢ ∘ qᵢ)^*`
-and the counits of `Lfᵢ^* ⊣ Rfᵢ_*` (`AlgebraicGeometry.Etale.kunnethMapOfSquares`). -/
+`f₂ : X₂ ⟶ Y₂` and `Yᵢ` over `S` through `bᵢ`: the transpose of `ε_{f₁} ⊠ ε_{f₂}`
+(`AlgebraicGeometry.Etale.kunnethMapOfSquares`). -/
 noncomputable def externalProductKunnethMap [UpperStarPreservesFlat A] {X₁ X₂ Y₁ Y₂ : Scheme.{u}}
     (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S) (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)
     (M₁ : _root_.DerivedCategory (Sheaf X₁.smallEtaleTopology A))
@@ -507,14 +483,9 @@ theorem isIso_externalProductRightDerivedLowerStarSndMap_of_finite (Λ : Type (u
         ((leftDerivedUpperStarComp _ _ _ _ (by simp)).app Q).symm).app _)))
 
 /-- **Ordinary external Künneth**. Let `k` be a field, `Λ` a finite ring whose exponent
-is invertible in `k`, and `f₁ : X₁ ⟶ Y₁`, `f₂ : X₂ ⟶ Y₂` morphisms of `k`-schemes of finite type
-(with structure morphisms `bᵢ : Yᵢ ⟶ Spec k`, and `Xᵢ` over `k` through `fᵢ ≫ bᵢ`). Then for
-`M₁ ∈ D(X₁,ét, Λ)` and `M₂ ∈ D(X₂,ét, Λ)` the Künneth map
-(`AlgebraicGeometry.Etale.externalProductKunnethMap`, the transpose of `ε_{f₁} ⊠ ε_{f₂}`)
-
-`Rf₁_* M₁ ⊠ Rf₂_* M₂ ⟶ R(f₁ × f₂)_* (M₁ ⊠ M₂)`
-
-is an isomorphism. -/
+is invertible in `k`, and `f₁ : X₁ ⟶ Y₁`, `f₂ : X₂ ⟶ Y₂` morphisms of `k`-schemes of finite type.
+Then for `M₁ ∈ D(X₁,ét, Λ)` and `M₂ ∈ D(X₂,ét, Λ)` the Künneth map
+`Rf₁_* M₁ ⊠ Rf₂_* M₂ ⟶ R(f₁ × f₂)_* (M₁ ⊠ M₂)` is an isomorphism. -/
 theorem isIso_externalProductKunnethMap_of_finite (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {X₁ X₂ Y₁ Y₂ : Scheme.{u}}
     (b₁ : Y₁ ⟶ Spec (.of k)) (b₂ : Y₂ ⟶ Spec (.of k)) (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂)

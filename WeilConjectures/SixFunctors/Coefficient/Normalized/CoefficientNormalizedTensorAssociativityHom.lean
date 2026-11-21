@@ -12,7 +12,11 @@ import WeilConjectures.SixFunctors.Coefficient.Tensor.CoefficientTensorAssociati
 
 /-! # Forward coherence of normalized tensor comparisons
 
-Source: Stacks 07A4 and 08J9; Zheng Construction 4.1.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08J9]
+* Zheng, Construction 4.1
 -/
 
 @[expose] public section
@@ -27,16 +31,8 @@ universe t u a b v w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
 
-/-- The forward tensorator associativity equation.
-Source: Stacks 07A4; this is the strong monoidal coherence equation whose inverse
-form is used by `CoefficientTensorAssociativity`.
-
-Proof: choose simultaneous flat-term K-flat representatives and use the prescribed
-pairwise normalization squares to identify every tensorator with its ordinary
-pure-tensor chain map. The signed total-tensor associator sends each triple pure
-tensor to the same reassociated tensor. Equality on coproduct generators gives the
-chain-map equality, and localization and naturality transport it to all derived
-objects. The same construction applies to every finite coefficient level. -/
+/-- The forward tensorator associativity equation: the strong monoidal coherence
+equation whose inverse form is used by `CoefficientTensorAssociativity`. -/
 def CoefficientTensorHomAssociativity
     {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}

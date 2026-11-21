@@ -12,8 +12,20 @@ import WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.SemilinearProperOp
 
 /-! # Canonical proper/open base-change transport
 
-Source: Stacks 0F7F and blueprint fix-prop-coherence. The cube is transported using
-its six individual face comparisons and the supplied canonical bridge equation.
+The cube is transported using its six individual face comparisons and the supplied canonical
+bridge equation.
+
+## Implementation details
+
+The canonical bridge equation on gamma is needed: an arbitrary gamma need not respect
+base change.
+
+## References
+
+* [Stacks, Tag 0F7C]
+* [Stacks, Tag 0F7D]
+* [Stacks, Tag 0F7F]
+* Zheng, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -626,16 +638,7 @@ private meta partial def transportCongruence (x y : Lean.Expr) : Lean.MetaM Lean
     return ← Lean.Meta.mkHEqOfEq h
   return ← Lean.Meta.mkHEqRefl x
 
-/-- Base-change pasting for a gamma satisfying the canonical bridge equation.
-Source: Stacks 0F7C, 0F7D and 0F7F; Zheng Lemma 4.10.
-
-Proof: the supplied canonical equation identifies the top and bottom gamma maps
-under the bridge. The one-square exchange and open-beta comparisons identify the
-four other faces. Whisker these six equations, use naturality to regroup the
-bridge maps, and paste the equations along both three-arrow paths. The intrinsic
-base-change equation identifies the resulting paths. Cancel the common terminal
-bridge isomorphism. The canonical bridge equation replaces the invalid earlier
-quantifier over arbitrary gamma, which need not respect base change. -/
+/-- Base-change pasting for a gamma satisfying the canonical bridge equation. -/
 theorem integralSystemProperOpenTransportPastingBaseChange
     (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c)

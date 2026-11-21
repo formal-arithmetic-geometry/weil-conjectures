@@ -10,7 +10,10 @@ public import WeilConjectures.SixFunctors.Etale.EtaleFiniteCoefficientHomArrow
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 /-! # Étale localization tensor on K-flat representatives
-Source: Stacks 07A4.
+
+## References
+
+* [Stacks, Tag 07A4]
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -24,8 +27,7 @@ namespace WeilConjectures
 attribute [local irreducible] finiteHomEtaleTensorModel
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
-/-- Representative presentation for an abstract localization and tensor comparison.
-Source: Stacks 07A4. -/
+/-- Representative presentation for an abstract localization and tensor comparison. -/
 def FiniteHomSourceTensorPresentationAux
     {K : Type a} {D : Type b} [Category.{v} K] [Category.{w} D]
     (q : K ⥤ D) (t : K × K ⥤ K) (T : D × D ⥤ D) (P : ObjectProperty K)
@@ -210,20 +212,8 @@ private theorem closed_tensor_congr
     (S T : CoefficientClosedStructure H) (h : S.monoidal = T.monoidal) :
     S.tensor = T.tensor := congrArg (fun M : MonoidalCategory D ↦ @tensor D _ M) h
 
-/-- Localization identifies total tensor with derived tensor on a subcategory of K-flat complexes.
-Source: Stacks, Cohomology on Sites, Tag 07A4.
-
-Proof: The canonical lax tensorator of the homotopy localization is invertible when
-its right argument is K-flat: tensoring with that argument preserves acyclic complexes,
-so this argument computes the left derived tensor. Compose with the strong monoidal
-homotopy quotient to get the same assertion for cochain localization. Naturality of
-the lax tensorator gives a natural transformation on the full subcategory P × P.
-All its components are invertible by the K-flat hypothesis, so invert it to obtain r.
-The chosen etale closed structure has the native monoidal structure, by its defining
-normalization. The chosen representative map equals the localization tensorator by
-FiniteHomEtaleRepresentativeNormalization.model; transport r along these equalities.
-The inverse component equation follows directly. The argument includes zero complexes
-and the empty subcategory, since natural isomorphisms are formed componentwise. -/
+/-- Localization identifies total tensor with derived tensor on a subcategory of K-flat
+complexes. -/
 theorem finiteHomEtaleKFlatTensorPresentation (n : ℕ)
     (P : ObjectProperty (CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u}

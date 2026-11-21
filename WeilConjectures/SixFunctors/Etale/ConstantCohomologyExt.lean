@@ -16,10 +16,8 @@ Let `X` be a quasi-compact quasi-separated scheme and `Λ` a ring. The cohomolog
 constant sheaf `Λ_X` used in the duality theory, morphisms `Λ_X ⟶ Λ_X[n]` in `D(X_ét, Λ)`, are
 the classes of the abelian cohomology `Hⁿ(X_ét, Λ)` of the underlying abelian sheaf
 (`AlgebraicGeometry.Etale.unitShiftAddEquivH`): `Ext^n(Λ_X, Y)` computed with sheaves of
-`Λ`-modules is `Hⁿ(X_ét, Y)` (`AlgebraicGeometry.Etale.bijective_mapExtComp_constantIntToRing`),
-by dimension shifting, injective sheaves of `Λ`-modules being acyclic as abelian sheaves
-(`CategoryTheory.Sheaf.subsingleton_H_succ_forget₂_of_injective`). No flatness of `Λ` over `ℤ`
-is needed, so this applies to `Λ = ℤ/ℓᵐ`.
+`Λ`-modules is `Hⁿ(X_ét, Y)` (`AlgebraicGeometry.Etale.bijective_mapExtComp_constantIntToRing`).
+No flatness of `Λ` over `ℤ` is needed, so this applies to `Λ = ℤ/ℓᵐ`.
 -/
 
 @[expose] public section

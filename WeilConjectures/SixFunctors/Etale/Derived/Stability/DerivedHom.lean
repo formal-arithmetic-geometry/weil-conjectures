@@ -13,13 +13,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
 
 For a finite coefficient ring `Λ` whose exponent is invertible on schemes of finite type over an
 algebraically closed field `k`, the internal hom `RHom(K, M)` of two objects of `Dctf` lies in
-`Dctf`, with the Tor interval of blueprint `sk-thm-sf-hom-ctf`. As in the blueprint, this goes
-through Verdier biduality: `RHom(K, M) ≅ 𝔻(𝔻M ⊗ᴸ K)`
-(`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`).
+`Dctf`, with explicit Tor intervals.
 
-This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
-documentation records the implementation notes. The blueprint states these results over
-`k = 𝔽̄_q`; the algebraic closedness of `k` is used by Verdier biduality.
+## Implementation details
+
+The proof goes through Verdier biduality, `RHom(K, M) ≅ 𝔻(𝔻M ⊗ᴸ K)`
+(`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`), which uses that `k` is algebraically
+closed. This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
+documentation records further implementation details.
 -/
 
 @[expose] public section
@@ -48,15 +49,10 @@ variable [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (a : X ⟶ S
   [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [HasCompactification a]
 
 include a in
-/-- Blueprint `proposition-six-operations-dctf--15`: Internal Hom for arbitrary finite-stage
-constructible complexes.
-
-For `X` separated of finite type over a field `k` with `dim X ≤ d`, a finite coefficient ring `Λ`
-whose exponent is invertible on `k`, and `K, L ∈ Dctf(X, Λ)` with Tor intervals `[p, q]` and
-`[r, s]`, the internal hom `RHom(K, L)` is bounded constructible with Tor amplitude in
-`[r - q - 2d, s - p + 2d]`. As in the blueprint, `RHom(K, L) ≅ 𝔻_X(𝔻_X L ⊗ᴸ K)` by biduality
-(`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`), and `𝔻_X` carries the Tor
-interval `[r, s]` into `[-s - 2d, -r]` (`AlgebraicGeometry.Etale.torAmplitudeIn_verdierDual`). -/
+/-- Internal Hom for arbitrary finite-stage constructible complexes: for `X` separated of finite
+type over a field `k` with `dim X ≤ d`, a finite coefficient ring `Λ` whose exponent is invertible
+on `k`, and `K, L ∈ Dctf(X, Λ)` with Tor intervals `[p, q]` and `[r, s]`, the internal hom
+`RHom(K, L)` is bounded constructible with Tor amplitude in `[r - q - 2d, s - p + 2d]`. -/
 theorem constructibleFiniteTor_derivedHom_of_isSeparated (d : ℕ)
     (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) {p q r s : ℤ}
     {K L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -91,9 +87,7 @@ variable {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [Qu
   {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
 
 include aX in
-/-- Internal Hom with finite Tor amplitude.
-
-For `X` of finite type over `k`, a finite `Λ` whose exponent is invertible on `X` and bounded
+/-- For `X` of finite type over `k`, a finite `Λ` whose exponent is invertible on `X` and bounded
 constructible `K` and `M` on `X_ét` of finite Tor amplitude, the internal hom `RHom(K, M)` is
 bounded constructible. -/
 theorem boundedConstructible_derivedHom
@@ -131,14 +125,8 @@ theorem boundedConstructible_derivedHom
       (constructibleFiniteTor_mapDerivedCategory_upperStar Λ _ ⟨hM, c, d, hMt⟩)).1
 
 include aX hm in
-/-- Internal Hom with finite Tor amplitude.
-
-If `K` and `M` have Tor amplitude in `[a, b]` and `[c, d]` and `dim X ≤ m`, then `RHom(K, M)`
-has Tor amplitude in `[c - b - 2m, d - a + 2m]`. The blueprint derives this from
-`RHom(K, M) ≅ 𝔻_X (K ⊗ᴸ 𝔻_X M)`, the dualizing complex having cohomology in `[-2m, 0]`. The
-statement is local on `X`, and on the separated affine opens it is
-`AlgebraicGeometry.Etale.constructibleFiniteTor_derivedHom_of_isSeparated`
-(`proposition-six-operations-dctf--15`). -/
+/-- If `K` and `M` have Tor amplitude in `[a, b]` and `[c, d]` and `dim X ≤ m`, then `RHom(K, M)`
+has Tor amplitude in `[c - b - 2m, d - a + 2m]`. -/
 theorem torAmplitudeIn_derivedHom
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K)
@@ -183,15 +171,11 @@ theorem torAmplitudeIn_derivedHom
       (hK.mapDerivedCategory_upperStar (U i).ι) hKt'
       (hM.mapDerivedCategory_upperStar (U i).ι) hMt').2
 
--- `aX` and the coefficient hypotheses are part of the blueprint setting, unused by the proof
+-- `aX` and the coefficient hypotheses are unused by the proof
 set_option linter.unusedSectionVars false in
 include aX in
-/-- Internal Hom with finite Tor amplitude.
-
-If moreover `K` is dualizable, the sharper interval `[c - b, d - a]` holds, from the local
-identification `RHom(K, M) ≅ K^∨ ⊗ᴸ M`. It genuinely fails in general: for the origin
-`i : {0} ⟶ 𝔸¹` both `i_* Λ` and `Λ` have Tor amplitude `[0, 0]` while
-`RHom(i_* Λ, Λ) = i_* Λ(-1)[-2]`. -/
+/-- If moreover `K` is dualizable, `RHom(K, M)` has Tor amplitude in the sharper interval
+`[c - b, d - a]`. -/
 theorem torAmplitudeIn_derivedHom_of_isDualizable
     (_hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) (hKd : IsDualizable K)
@@ -202,15 +186,8 @@ theorem torAmplitudeIn_derivedHom_of_isDualizable
   torAmplitudeIn_derivedHom_of_isDualizable_aux _ hKt hKd hMt
 
 include aX in
-/-- Blueprint `proposition-six-operations-dctf--15`: Constructible internal Hom with a site-perfect
-first variable.
-
-If `K ∈ Dctf(X, Λ)` is site-perfect, that is dualizable, and `M` is bounded constructible, then
-`RHom(K, M)` is bounded constructible; in particular every cohomology sheaf of `RHom(K, M)` is
-constructible. Indeed `RHom(K, M) ≅ K^∨ ⊗ᴸ M`, where the coefficient dual `K^∨ = RHom(K, Λ)` is
-bounded constructible (`AlgebraicGeometry.Etale.boundedConstructible_derivedHom`) of Tor
-amplitude `[-b, -a]`, and the tensor product of two bounded constructible complexes, one of
-them of finite Tor amplitude, is bounded constructible. -/
+/-- If `K ∈ Dctf(X, Λ)` is site-perfect, that is dualizable, and `M` is bounded constructible, then
+`RHom(K, M)` is bounded constructible. -/
 theorem boundedConstructible_derivedHom_of_isDualizable
     (hK : boundedConstructible (ModuleCat.{u + 1} Λ) X K)
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) (hKd : IsDualizable K)
@@ -251,9 +228,8 @@ theorem boundedConstructible_derivedHom_of_isDualizable
   exact (boundedConstructible _ X).prop_of_iso e ⟨hb, hc⟩
 
 omit [Finite Λ] [HasInvertibleExponent Λ X] in
-/-- If `K` is dualizable of Tor amplitude in `[a, b]`, then `RHom(K, G[0]) ≅ K^∨ ⊗ᴸ G[0]` is
-concentrated in `[-b, -a]` for every sheaf `G`, the dual `K^∨` having Tor amplitude in
-`[-b, -a]`. -/
+/-- If `K` is dualizable of Tor amplitude in `[a, b]`, then `RHom(K, G[0])` is concentrated in
+`[-b, -a]` for every sheaf `G`. -/
 theorem homologyConcentratedIn_derivedHom_singleFunctor_of_isDualizable
     (hKt : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) (hKd : IsDualizable K)
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -273,14 +249,9 @@ theorem homologyConcentratedIn_derivedHom_singleFunctor_of_isDualizable
   exact homologyConcentratedIn_of_iso _ e h
 
 include aX in
-/-- Blueprint `proposition-six-operations-dctf--15`: Constructible internal Hom with a site-perfect
-first variable.
-
-For a finite locally free sheaf `F`, that is a constructible flat sheaf which is dualizable in
-`D(X_ét, Λ)`, and a constructible sheaf `G`, the sheaves `𝓔xtʳ(F, G) = Hʳ RHom(F, G)` vanish
-for `r ≠ 0`, and `𝓗om(F, G) = H⁰ RHom(F, G)` is constructible: `RHom(F, G)` is bounded
-constructible and concentrated in degree `0`. Indeed `RHom(F, G) ≅ F^∨ ⊗ᴸ G` with `F^∨` of Tor
-amplitude `[0, 0]`. -/
+/-- For a finite locally free sheaf `F` (a constructible flat sheaf which is dualizable in
+`D(X_ét, Λ)`) and a constructible sheaf `G`, `RHom(F, G)` is bounded constructible and
+concentrated in degree `0`. -/
 theorem boundedConstructible_derivedHom_singleFunctor_of_isDualizable
     (F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
     [IsConstructibleSheaf G] (hF : ObjectProperty.flat F)

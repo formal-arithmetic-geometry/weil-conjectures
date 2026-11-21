@@ -11,13 +11,17 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange.BCProperty
 /-!
 # A failure of base change produces an integral normal base
 
-Blueprint `lemma-kunneth-finite-direct-image--1` (Stacks 0F1D): if `BC(f, n, q - 1)` holds and
-`BC(f, n, q)` fails for some `q ≥ 1`, there is a base change of `f` to an affine, integral, normal
-scheme `S'` with algebraically closed function field and an algebraically closed field `K` over the
-function field such that `R^q h_* (ℤ/d) ≠ 0` on the fibre over `Spec K` for some `d ∣ n`. This is
-the failure lemma `AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage` (Stacks
-0F08) of the smooth base change theorem, read in the language of
-`AlgebraicGeometry.Etale.KunnethBaseChangeProperty`.
+If `BC(f, n, q - 1)` holds and `BC(f, n, q)` fails for some `q ≥ 1`, there is a base change of
+`f` to an affine, integral, normal scheme `S'` with algebraically closed function field and an
+algebraically closed field `K` over the function field such that `R^q h_* (ℤ/d) ≠ 0` on the
+fibre over `Spec K` for some `d ∣ n`. This is the failure lemma
+`AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage` of the smooth base
+change theorem, read in the language of `AlgebraicGeometry.Etale.KunnethBaseChangeProperty`.
+
+## References
+
+* [Stacks, Tag 0F1D]
+* [Stacks, Tag 0F08]
 -/
 
 @[expose] public section
@@ -30,10 +34,7 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-/-- Blueprint `lemma-kunneth-finite-direct-image--1`: failure of base change produces an integral
-normal base.
-
-Let `f : X ⟶ S` be a morphism of schemes and `n` an integer invertible on `S`. If for some
+/-- Let `f : X ⟶ S` be a morphism of schemes and `n` an integer invertible on `S`. If for some
 `q ≥ 1` the base change property `BC(f, n, q - 1)` holds but `BC(f, n, q)` does not, there are
 cartesian squares
 ```
@@ -45,11 +46,7 @@ S <-a- S' <--- Spec K
 ```
 with `S'` affine, integral and normal with algebraically closed function field, `K` an
 algebraically closed field over that function field, `Spec K ⟶ S'` the induced map to the
-generic point, and an integer `d ∣ n` with `R^q h_* (ℤ/d) ≠ 0`.
-
-As in Stacks (Tag 0F08, used in the proof of Tag 0F1D), the field `K` is an algebraically closed
-extension of the function field `K'` of `S'`, rather than `K'` itself as in the blueprint
-statement. -/
+generic point, and an integer `d ∣ n` with `R^q h_* (ℤ/d) ≠ 0`. -/
 theorem Etale.exists_isPullback_not_isZero_higherDirectImage_of_kunnethBaseChangeProperty
     {X S : Scheme.{u}} (f : X ⟶ S) (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) (q : ℤ) (hq : 1 ≤ q)
     (hprev : Etale.KunnethBaseChangeProperty f n (q - 1))

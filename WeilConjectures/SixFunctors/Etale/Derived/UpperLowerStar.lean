@@ -159,20 +159,9 @@ lemma rightDerivedLowerStarCongr_inv_app {g₁ g₂ : Z ⟶ Y} (h : g₁ = g₂)
   subst h
   rfl
 
-/-- The composition isomorphism `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*` of the derived direct images.
-It is the conjugate, under the adjunctions `D(g^*) ⊣ Rg_*` of
-`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`, of the composition
-isomorphism `D((g₁ ≫ g₂)^*) ≅ D(g₂^*) ⋙ D(g₁^*)` of the functors induced by the exact
-pullbacks:
-```
-   D((g₁ ≫ g₂)^*) ≅ D(g₂^*) ⋙ D(g₁^*)
-         ⊣ ⊣
-   R(g₁ ≫ g₂)_* ≅ Rg₁_* ⋙ Rg₂_*
-```
-`conjugateIsoEquiv` turns an isomorphism of left adjoints into an isomorphism of right
-adjoints in the opposite direction, so the isomorphism of left adjoints is inverted before
-and the result after. Unlike `AlgebraicGeometry.Etale.leftDerivedUpperStarComp`, this needs no
-monoidal structure on `A`. -/
+/-- The composition isomorphism `Rg₁_* ⋙ Rg₂_* ≅ R(g₁ ≫ g₂)_*` of the derived direct images,
+conjugate, under the adjunctions `D(g^*) ⊣ Rg_*`, to the composition isomorphism
+`D((g₁ ≫ g₂)^*) ≅ D(g₂^*) ⋙ D(g₁^*)`. It needs no monoidal structure on `A`. -/
 noncomputable def rightDerivedLowerStarComp {T S U : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ U) :
     R((g₁)_*[A]) ⋙ R((g₂)_*[A]) ≅ R((g₁ ≫ g₂)_*[A]) :=
   (conjugateIsoEquiv (mapDerivedUpperStarLowerStarAdjunction A (g₁ ≫ g₂))
@@ -249,15 +238,8 @@ namespace Etale
 /-- The total left derived functor `Lg^* : D(Y_ét) ⥤ D(Z_ét)` of the pullback `g^*`
 along an arbitrary morphism `g : Z ⟶ Y` on the unbounded derived categories of étale
 sheaves, defined via the K-flat left derivability structure: `Lg^*` is computed by
-applying `g^*` to a K-flat resolution.
-
-It is not a definition of its own: it is the generic `Functor.leftDerivedFunctor`,
-written `L(-)`, applied to the underived pullback `(g)^*[A]`.
-
-Since `g^*` is exact, the counit `Lg^* ∘ Q ⟶ Q ∘ g^*` is in fact an isomorphism
-everywhere; the construction via the derivability structure is uniform in the functor
-and applies verbatim once `g^*` is replaced by a non-exact functor (e.g. the pullback
-of sheaves of modules over a varying sheaf of rings). -/
+applying `g^*` to a K-flat resolution. It is the generic `Functor.leftDerivedFunctor`,
+written `L(-)`, applied to the underived pullback `(g)^*[A]`. -/
 noncomputable example :
     DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤
       DerivedCategory (Sheaf Z.smallEtaleTopology A) :=

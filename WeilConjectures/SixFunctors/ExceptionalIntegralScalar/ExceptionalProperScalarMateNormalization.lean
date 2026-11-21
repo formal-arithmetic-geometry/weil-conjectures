@@ -9,7 +9,13 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSuppo
 public import WeilConjectures.AlgebraicGeometry.AdicCoefficientDatum.FourCornersSupplement
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalInverseMateInterchange
 
-/-! # The proper scalar comparison in geometric mate coordinates -/
+/-! # The proper scalar comparison in geometric mate coordinates
+
+## References
+
+* [Stacks, Tag 0E46]
+* [Stacks, Tag 0B56]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,14 +27,7 @@ attribute [local irreducible] HasDerivedCategory.standard
 
 -- The chosen derived presentations require an extended conversion budget.
 /-- The scalar-adjunction definition of the proper comparison is the geometric
-adjunction mate of the canonical tensor/pullback comparison.
-Source: Stacks Tags 0E46 and 0B56.
-
-Proof: the restriction/direct-image comparison is the geometric mate of the
-restriction/pullback comparison, by its normalized adjunction equation evaluated
-at the geometric counit. The scalar mate of that same pullback comparison is the
-inverse tensor/pullback comparison. Apply inverse mate interchange, which follows
-from conjugation under the two composite adjunctions. -/
+adjunction mate of the canonical tensor/pullback comparison. -/
 theorem properScalarMate_normalized
     {R S : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R S)
     {U V : Scheme.{u}} (g : U ⟶ V) :

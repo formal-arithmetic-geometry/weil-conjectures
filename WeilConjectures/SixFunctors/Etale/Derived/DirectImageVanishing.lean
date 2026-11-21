@@ -24,34 +24,28 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 Let `k` be a separably closed field, `f : X ⟶ Y` a morphism of finite type between `k`-schemes
 locally of finite type, with `dim X ≤ d`, and `Λ` a finite ring. Then `R^q f_* M = 0` for every
 `q > 2d` and every étale sheaf `M` of `Λ`-modules on `X`
-(`AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`, blueprint
-`theorem-results-from-etale-theory--4`).
-
-The proof follows the blueprint. The sheaf `R^q f_* M` is the sheafification of the presheaf
-`W ↦ H^q(W ×_Y X, M|)` on `Y_ét`
-(`AlgebraicGeometry.Etale.isLocallyBijective_higherDirectImagePresheafToSheaf`),
-so it suffices that these groups vanish for affine `W`. Then `W ×_Y X` is a `k`-scheme of finite
-type, étale over `X`, hence of dimension at most `d`, and its torsion cohomological dimension is
-at most `2d` (`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`, blueprint
-`sk-prop-sf-finiteness`, the case `c = 0` of the bound `cd_tor(X) ≤ 2d + c` of
-`lemma-uniform-bounds-pro-etale-affines`). That bound is stated for abelian sheaves; it is
-transported to sheaves of `Λ`-modules by dimension shifting
-(`AlgebraicGeometry.Etale.subsingleton_ext_freeSheaf_of_subsingleton_H`), using that the
-underlying abelian sheaf of an injective sheaf of `Λ`-modules is acyclic
-(`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`).
+(`AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`).
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.HasUniformDirectImageVanishingLE`: the bound `UDV(f, Λ; N)` of
-  blueprint `definition-cohomological-dimension--2`.
+- `AlgebraicGeometry.Etale.HasUniformDirectImageVanishingLE`: the uniform vanishing bound
+  `UDV(f, Λ; N)` of the higher direct images.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.subsingleton_ext_freeSheaf_of_subsingleton_H`: the cohomology of a
   sheaf of `Λ`-modules over an étale `X`-scheme `V` vanishes in a degree where the abelian
   cohomology of its underlying abelian sheaf restricted to `V` does.
-- `AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`: blueprint
-  `theorem-results-from-etale-theory--4`.
+- `AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`: `UDV(f, Λ; 2d)` holds.
+- `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isPullback_of_isProper`: the same
+  vanishing for base changes of a proper morphism.
+
+## Implementation details
+
+The sheaf `R^q f_* M` is the sheafification of `W ↦ H^q(W ×_Y X, M|)`, so the statement reduces
+to the torsion cohomological dimension bound
+`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`, which is stated for
+abelian sheaves and transported to sheaves of `Λ`-modules by dimension shifting.
 -/
 
 @[expose] public section
@@ -66,12 +60,8 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `definition-cohomological-dimension--2`: Uniform vanishing of the higher direct
-images.
-
-`UDV(f, Λ; N)` holds if the higher direct images of `f` on the small étale sites vanish above
-`N` for every sheaf of `Λ`-modules: `R^q f_* M = 0` for every `q > N` and every étale sheaf `M`
-of `Λ`-modules on `X`. -/
+/-- Uniform vanishing of the higher direct images: `UDV(f, Λ; N)` holds if `R^q f_* M = 0` for
+every `q > N` and every étale sheaf `M` of `Λ`-modules on `X`. -/
 def Etale.HasUniformDirectImageVanishingLE {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ) : Prop :=
   ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ), (N : ℤ) < q →
     IsZero (Etale.higherDirectImage Λ f q M)
@@ -81,11 +71,7 @@ variable {Λ} in
 ring, `V` an étale `X`-scheme and `F` an étale sheaf of `Λ`-modules on `X`. If the underlying
 abelian sheaf of the restriction of `F` to `V` has no cohomology in degree `n + 1`, then
 `Ext^{n + 1}(Λ[V], F) = 0`, that is `H^{n + 1}(V, F|) = 0` computed with sheaves of `Λ`-modules.
-
-This is dimension shifting (`CategoryTheory.Abelian.Ext.subsingleton_of_subsingleton_map`): the
-underlying abelian sheaf of an injective sheaf of `Λ`-modules is acyclic
-(`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`), and in degree one both groups
-measure the failure of sections over `V` to lift. -/
+-/
 theorem Etale.subsingleton_ext_freeSheaf_of_subsingleton_H [Finite Λ] {X : Scheme.{u}}
     (V : X.Etale) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (n : ℕ)
     (hF : Subsingleton (Sheaf.H ((sheafCompose V.left.smallEtaleTopology
@@ -95,20 +81,10 @@ theorem Etale.subsingleton_ext_freeSheaf_of_subsingleton_H [Finite Λ] {X : Sche
   Etale.subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic V F n
     (fun I _ m ↦ Sheaf.subsingleton_H_forget₂_of_injective.{u + 1, u + 1, u, u + 1} Λ I m) hF
 
-/-- Blueprint `theorem-results-from-etale-theory--4`: Vanishing of the higher direct images above
-the dimension.
-
-Let `k` be a separably closed field, `f : X ⟶ Y` a morphism of finite type between `k`-schemes
-locally of finite type with `dim X ≤ d`, and `Λ` a finite ring. Then `R^q f_* M = 0` for every
-`q > 2d` and every étale sheaf `M` of `Λ`-modules on `X`: `UDV(f, Λ; 2d)` holds. Separatedness of
-`f` is not needed.
-
-The blueprint assumes `k` algebraically closed and `Λ` annihilated by an integer invertible in
-`k`; neither is needed for the argument, whose input is the torsion cohomological dimension
-bound `AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`. For an affine
-étale `W ⟶ Y`, the scheme `W ×_Y X` is of finite type over `k` and étale over `X`, hence of
-dimension at most `d`, so its cohomology vanishes above `2d`; and `R^q f_* M` is the
-sheafification of these groups. -/
+/-- Vanishing of the higher direct images above twice the dimension: for `k` separably closed,
+`f : X ⟶ Y` of finite type between `k`-schemes locally of finite type with `dim X ≤ d`, and `Λ` a
+finite ring, `R^q f_* M = 0` for every `q > 2d` and every étale sheaf `M` of `Λ`-modules on `X`,
+that is `UDV(f, Λ; 2d)` holds. -/
 theorem Etale.hasUniformDirectImageVanishingLE_two_mul [Finite Λ] {k : Type u} [Field k]
     [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
@@ -150,16 +126,7 @@ open ZeroObject in
 /-- **Higher direct images of base changes of a proper morphism.** Let `k` be separably closed,
 `p : X' ⟶ Y` a proper morphism of `k`-schemes locally of finite type with `dim X' ≤ d`, and `Λ` a
 finite ring. For the base change `p' : X'' ⟶ Y''` of `p` along an arbitrary `g : Y'' ⟶ Y` and
-every étale sheaf `F` of `Λ`-modules on `X''`, `R^r p'_* F = 0` for `r > 2d`.
-
-This is the étale part of blueprint `sk-prop-sf-fullcd-etale-origin`. Vanishing is tested after
-pullback to the geometric points `t : Spec Ω ⟶ Y''`
-(`AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective`); by proper base
-change (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`)
-`t^* R^r p'_* F ≅ R^r h_* (F|)` for the fibre `h : X'' ×_{Y''} Spec Ω ⟶ Spec Ω`, which is a
-`Ω`-scheme of finite type of dimension at most `d`
-(`AlgebraicGeometry.topologicalKrullDim_pullback_le`), so that
-`AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul` applies. -/
+every étale sheaf `F` of `Λ`-modules on `X''`, `R^r p'_* F = 0` for `r > 2d`. -/
 theorem Etale.isZero_higherDirectImage_of_isPullback_of_isProper [Finite Λ] {k : Type u}
     [Field k] [IsSepClosed k] {X' Y X'' Y'' : Scheme.{u}} (p : X' ⟶ Y) [IsProper p]
     (aX' : X' ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX']

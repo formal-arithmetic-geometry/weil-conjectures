@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Locall
 
 import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
 
-/-! # The finite-Tor integral representative of a scalar transition -/
+/-! # The finite-Tor integral representative of a scalar transition
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,15 +31,7 @@ open scoped Obj
 namespace WeilConjectures.LocallyFiniteAdicCompactSupport
 open AlgebraicallyClosedCoefficients (Index Coefficient)
 
-/-- Integral scalar extension has its prescribed finite-Tor representative.
-Source: Bhatt--Scholze, Proposition 6.8.14, and the integral residue-Tor criterion.
-Proof: the coefficient prime is a unit on X because X is over the finite field of
-characteristic distinct from l. Its image in every residue field is invertible.
-The integral transition already preserves constructibility. The integral residue-Tor
-criterion therefore gives finite Tor amplitude to its underlying integral object.
-Equip that same object with this proof. Its inclusion is the given transition object
-by equality of full-subcategory objects; in particular, this equation determines the
-representative up to equality, rather than selecting arbitrary existence data. -/
+/-- Integral scalar extension has its prescribed finite-Tor representative. -/
 theorem finiteTorScalarObject
     (l : ℕ) [Fact l.Prime] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (X : Scheme.{u}) [X.Over (Spec (.of D.k))]

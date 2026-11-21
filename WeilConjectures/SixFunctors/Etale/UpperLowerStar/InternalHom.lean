@@ -21,6 +21,8 @@ map `g^* [P, Q] ⟶ [g^* P, g^* Q]` (`CategoryTheory.Functor.LaxMonoidal.ihomCom
 isomorphism (`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar`): the internal hom of
 sheaves is local.
 
+## Implementation details
+
 The proof identifies `g^*` with the restriction along the localization functor
 `V_proét ⥤ X_proét` (`AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction`), as
 monoidal functors: both monoidal structures are determined by the adjunctions with `g_*`, and the

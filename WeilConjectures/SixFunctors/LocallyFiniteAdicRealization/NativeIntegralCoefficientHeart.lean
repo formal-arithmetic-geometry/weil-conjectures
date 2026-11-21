@@ -554,7 +554,10 @@ import WeilConjectures.CategoryTheory.InverseMateEquivalence
 
 /-! # Native constructibility of an ordinary integral local model
 
-Source: Bhatt--Scholze, Definitions 6.8.3 and 6.8.10, Proposition 6.8.14(2).
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definitions 6.8.3 and 6.8.10,
+  Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -638,24 +641,6 @@ private theorem stratifiedModels_of_iso
 
 /-- A stratified finitely presented integral module becomes a native constructible
 sheaf under ordinary tensor extension. No assertion about derived objects occurs here.
-
-Source: Bhatt--Scholze, Definitions 6.8.3 and 6.8.10, Proposition 6.8.14(2).
-
-Proof in words: take the finite stratification and the covering sieves in hN.
-Restriction along the normalized completed coefficient isomorphism identifies the
-local models with completed constant realizations of finitely presented valuation-ring
-modules. Tensoring with C.integralMap commutes with the actual-ring inverse images and
-slice restrictions, by the scalar-extension adjunction and its balanced tensor
-associator. On each covering member this gives the native coefficient tensored with the
-scalar module localized to E and then extended along i. A finitely presented module over
-the valuation DVR becomes a finite-dimensional E-vector space after localization;
-torsion becomes zero. Choose a finite basis and extend it to identify the displayed
-tensor with a finite direct sum of native units. The section-module equivalence and
-scalar-forgetting equivalence identify those units and commute with inverse image;
-full faithfulness lifts the trivializations through e. Replace each covering sieve by
-a small pro-etale covering family. Hence the native restriction is lisse on each of the
-same finitely many strata, and is therefore constructible. Empty strata, the empty
-scheme, zero modules and torsion local models all use the permitted rank zero.
 -/
 theorem nativeIntegralCoefficient_heart
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]

@@ -23,12 +23,6 @@ isomorphisms at the same bounded below objects
 (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_ι_obj_iff`), so that the base change
 theorems and the pasting laws available on the bounded below derived categories apply to the
 unbounded derived base change map at bounded below objects.
-
-The proof checks the characterisation `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_ext` of
-the bounded below map on the restriction of the unbounded one: on a bounded below complex both
-are computed by the underived base change map
-(`AlgebraicGeometry.Etale.derivedBaseChangeMap_app_fac`,
-`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app`).
 -/
 
 @[expose] public section

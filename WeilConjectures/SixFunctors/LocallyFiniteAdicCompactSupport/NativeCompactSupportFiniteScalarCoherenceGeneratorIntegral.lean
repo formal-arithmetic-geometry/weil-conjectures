@@ -14,7 +14,12 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegra
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralFiniteTorScalarObject
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
-/-! # Integral finite-Tor generator case of finite scalar coherence -/
+/-! # Integral finite-Tor generator case of finite scalar coherence
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14 and Remark 6.8.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -70,10 +75,8 @@ private theorem reflect_factored_square {C D : Type*} [Category C] [Category D]
     _ = F.map (mi ≫ r) := (F.map_comp _ _).symm
 
 -- The component formulas compare cached finite-stage and native presentations.
-/-- The integral finite-Tor numerator calculation underlying the generator transition.
-Source: Proposition 6.8.14 and Remark 6.8.15, the integral numerator calculation.
-The statement fixes the common-stage object to the rationalization of one finite-Tor
-integral object, which is strictly smaller than the arbitrary-stage generator theorem. -/
+/-- The integral finite-Tor numerator calculation underlying the generator transition: the
+common-stage object is the rationalization of one finite-Tor integral object. -/
 theorem native_compact_support_finite_scalar_coherence_generator_integral
     [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)

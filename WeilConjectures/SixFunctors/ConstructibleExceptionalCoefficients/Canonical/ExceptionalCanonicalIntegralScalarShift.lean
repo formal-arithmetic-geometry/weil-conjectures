@@ -12,7 +12,12 @@ public import WeilConjectures.SmoothPurity.Sf.SfIntegralConstructibleTriangulate
 import WeilConjectures.SixFunctors.Exceptional.ExceptionalOrdinaryCompletedScalarShift
 import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 
-/-! # The normalized integral scalar restriction square -/
+/-! # The normalized integral scalar restriction square
+
+## References
+
+* Zheng, Construction 6.2
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -168,8 +173,7 @@ attribute [local instance 5000] integralTowerHasDerivedCategory
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The finite-Tor inclusion carries the shift lifted from its full realization.
-Source: inherited shifts on full coefficient subcategories. -/
+/-- The finite-Tor inclusion carries the shift lifted from its full realization. -/
 @[irreducible]
 def finiteTorIntegralShift (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
     letI : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
@@ -181,8 +185,7 @@ def finiteTorIntegralShift (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
       (sfIntegralConstructible l E.carrier T).ι ≅
         RingStage.inclusion.{u, v} l Ω T (.integral E) from Iso.refl _) ℤ
 
-/-- The finite-Tor inclusion shift preserves its ambient realization.
-Source: full-subcategory shift lifting. -/
+/-- The finite-Tor inclusion shift preserves its ambient realization. -/
 theorem finiteTorIntegralShift_compatibility
     (E : FieldStage.{max u v} l) (T : Scheme.{max u v}) :
     letI : HasShift (C.{u, v} l Ω T (.integral E)) ℤ := shift l Ω T (.integral E)
@@ -200,10 +203,9 @@ theorem finiteTorIntegralShift_compatibility
   unfold finiteTorIntegralShift
   exact hc
 
-/-- The shift on an integral scalar functor induced by its specified ordinary realization.
-This is an actual fully faithful lift of the ambient scalar shift, independent of any
-shift stored in the scalar record. Source: Zheng, Construction 6.2, and the canonical
-completed scalar comparison. -/
+/-- The shift on an integral scalar functor induced by its specified ordinary realization:
+a fully faithful lift of the ambient scalar shift, independent of any shift stored in the
+scalar record. -/
 @[irreducible]
 def canonicalIntegralScalarShift
     {E L : FieldStage.{max u v} l} {i : E.carrier →ₐ[Padic l] L.carrier}
@@ -223,8 +225,7 @@ by
     PurCompactSupport.scalarCommShift _
   exact Functor.CommShift.ofComp S.realization ℤ
 
-/-- The ordinary realization preserves its induced shift.
-Source: full-faithful shift lifting. -/
+/-- The ordinary realization preserves its induced shift. -/
 theorem canonicalIntegralScalarShift_compatibility
     {E L : FieldStage.{max u v} l} {i : E.carrier →ₐ[Padic l] L.carrier}
     {T : Scheme.{max u v}}
@@ -247,14 +248,7 @@ theorem canonicalIntegralScalarShift_compatibility
   unfold canonicalIntegralScalarShift
   exact hc
 
-/-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift.
-Source: Zheng, Construction 6.2, and the ordinary completed scalar comparison.
-
-Proof: paste the shift-compatible ordinary-model comparison, intrinsic completion comparison,
-and supplied scalar realization, then lift through the fully faithful intrinsic inclusion.
-Faithfulness reflects the shift equation. The object part of the ambient functor equality,
-the realization normalization and the completion identity identify each lifted component
-with identity transport. -/
+/-- The normalized finite-Tor scalar functor embeds with the canonical intrinsic scalar shift. -/
 theorem canonical_integral_scalar_square
     (a b : AlgebraicallyClosedCoefficients.Index l Ω) (h : a ≤ b)
     (T : Scheme.{max u v})

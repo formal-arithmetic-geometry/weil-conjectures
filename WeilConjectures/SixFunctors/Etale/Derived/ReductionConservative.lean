@@ -16,13 +16,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 
 Let `Λ` be a commutative ring and `ϖ ∈ Λ` a nonzerodivisor. On `D(X_ét, Λ)` the reduction
 `K ↦ K ⊗ᴸ (Λ/ϖ)_X` (`AlgebraicGeometry.Etale.reductionModIdeal`) detects the invertibility
-of `ϖ`: tensoring the triangle `Λ ⟶ Λ ⟶ Λ/ϖ ⟶ Λ⟦1⟧` with `K` shows that `ϖ` acts invertibly
-on `K` as soon as `K ⊗ᴸ (Λ/ϖ)_X = 0`. Since a derived complete object on which `ϖ` acts
-invertibly is zero, a morphism between objects which are derived complete for `(ϖ)` is an
-isomorphism as soon as its reduction modulo `ϖ` is.
-
-This is the passage to the limit in the proof of the projection formula at the integral stage
-`𝒪_E`.
+of `ϖ`, and a morphism between objects which are derived complete for `(ϖ)` is an isomorphism as
+soon as its reduction modulo `ϖ` is.
 
 ## Main statements
 
@@ -75,10 +70,7 @@ noncomputable def derivedTensorSingleUnitIso
     derivedTensorRightUnitor (ModuleCat.{u + 1} Λ) X K
 
 /-- **Reduction modulo `ϖ` detects invertibility of `ϖ`.** For a nonzerodivisor `ϖ` of `Λ` and
-`K ∈ D(X_ét, Λ)`, if the reduction `K ⊗ᴸ (Λ/ϖ)_X` vanishes then `ϖ` acts invertibly on `K`:
-tensoring the distinguished triangle `Λ ⟶ Λ ⟶ Λ/ϖ ⟶ Λ⟦1⟧` (the first map being the
-multiplication by `ϖ`) with `K` gives a distinguished triangle `K ⟶ K ⟶ 0 ⟶ K⟦1⟧` whose first
-map is the multiplication by `ϖ`. -/
+`K ∈ D(X_ét, Λ)`, if the reduction `K ⊗ᴸ (Λ/ϖ)_X` vanishes then `ϖ` acts invertibly on `K`. -/
 theorem isIso_smul_id_of_isZero_reductionModIdeal {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsZero ((reductionModIdeal Λ X (Ideal.span {ϖ})).obj K)) :
@@ -108,12 +100,7 @@ theorem isIso_smul_id_of_isZero_reductionModIdeal {ϖ : Λ} (hϖ : ϖ ∈ nonZer
 
 /-- **Reduction modulo `ϖ` is conservative on derived complete objects.** Let `ϖ` be a
 nonzerodivisor of `Λ` and `φ : M ⟶ N` a morphism of `D(X_ét, Λ)` between objects that are
-derived complete for `(ϖ)`. If the reduction `φ ⊗ᴸ (Λ/ϖ)_X` is an isomorphism, so is `φ`.
-
-The cone `C` of `φ` is derived complete, and its reduction vanishes, so `ϖ` acts invertibly on
-`C` (`AlgebraicGeometry.Etale.isIso_smul_id_of_isZero_reductionModIdeal`); a derived complete
-object on which `ϖ` acts invertibly is zero. This is the conservativity of the reduction functors
-on derived-complete complexes used in blueprint `thm-sf-pf-adic`. -/
+derived complete for `(ϖ)`. If the reduction `φ ⊗ᴸ (Λ/ϖ)_X` is an isomorphism, so is `φ`. -/
 theorem isIso_of_derivedComplete_of_isIso_reductionModIdeal {ϖ : Λ}
     (hϖ : ϖ ∈ nonZeroDivisors Λ)
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

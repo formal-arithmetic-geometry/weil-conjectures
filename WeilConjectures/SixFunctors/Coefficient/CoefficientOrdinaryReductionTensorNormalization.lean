@@ -13,12 +13,21 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # Strict presentations of reduction through the ordinary quotient system
 
-Source: Stacks 06YY, 07A4, 07A6 and 0941.
-
 A strict reduction presentation `e : reduction (Q P) ≅ Q C` whose adjunct is the
 localization of a strict map `z : P ⟶ lim C` is the localization of the ordinary
 transpose `g : quotient P ⟶ C` of `z`, composed with the universal comparison `ε`.
 The finite evaluations of `g` are the normalized evaluation isomorphisms.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0011]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YU]
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +48,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- A map out of the ordinary quotient system whose transpose has the finite scalar
-units as projections evaluates to the normalized evaluation isomorphism.
-Source: Stacks 03D7, 0941. -/
+units as projections evaluates to the normalized evaluation isomorphism. -/
 theorem evaluation_map_of_transpose (M : OrdinaryModel l E W)
     {X : scalarReductionSource l E W} {Y : coefficientSequenceModules l E W}
     (g : M.tensor.obj X ⟶ Y) (n : ℕ)
@@ -82,8 +90,7 @@ theorem evaluation_map_of_transpose (M : OrdinaryModel l E W)
   rw [← CategoryTheory.Functor.map_comp, Iso.hom_inv_id_app_assoc]
   exact key
 
-/-- The ordinary adjunction unit followed by a finite projection is the finite scalar unit.
-Source: Stacks 03D7, 0941. -/
+/-- The ordinary adjunction unit followed by a finite projection is the finite scalar unit. -/
 theorem OrdinaryModel.unit_projection (M : OrdinaryModel l E W)
     (X : scalarReductionSource l E W) (n : ℕ) :
     M.adjunction.unit.app X ≫
@@ -102,8 +109,7 @@ theorem OrdinaryModel.unit_projection (M : OrdinaryModel l E W)
     exact (hu V x).symm)
 
 /-- The ordinary transpose of a strict unit presentation evaluates, at every finite level,
-to the normalized evaluation isomorphism of the quotient system.
-Source: Stacks 03D7, 06YY, 0941. -/
+to the normalized evaluation isomorphism of the quotient system. -/
 theorem evaluation_mapHomologicalComplex_transpose (M : OrdinaryModel l E W)
     (P : CochainComplex (scalarReductionSource l E W) ℤ)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ)
@@ -139,7 +145,7 @@ theorem evaluation_mapHomologicalComplex_transpose (M : OrdinaryModel l E W)
     (M.unit_projection l E W (P.X p) n)
 
 /-- The structural limit comparison of the ordinary model is the canonical composite
-comparison. Source: Stacks 0941. -/
+comparison. -/
 theorem OrdinaryModel.limitComparison_termwise (M : OrdinaryModel l E W)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
     M.limitComparison.hom.app C ≫ (termwiseLimitComparison l E W).inv.app ((tower l E W).obj C) =
@@ -160,8 +166,7 @@ theorem OrdinaryModel.limitComparison_termwise (M : OrdinaryModel l E W)
   exact (Category.id_comp _).symm
 
 /-- The system limit unit is the canonical right-derived unit of inverse limit after
-exact restriction, as displayed in strict reduction presentations.
-Source: Stacks 0941, 07A6. -/
+exact restriction, as displayed in strict reduction presentations. -/
 theorem OrdinaryModel.systemLimitUnit_app (M : OrdinaryModel l E W)
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) :
     (systemLimitUnit l E W M (constantLimitUnit l E W)).app C =
@@ -202,8 +207,7 @@ theorem OrdinaryModel.systemLimitUnit_app (M : OrdinaryModel l E W)
 
 /-- A strict unit presentation of a left adjoint of the total limit is the universal
 comparison followed by the localized ordinary transpose of its unit map, whose finite
-evaluations are the normalized evaluation isomorphisms.
-Source: Stacks 03D7, 06YY, 07A6, 0941. -/
+evaluations are the normalized evaluation isomorphisms. -/
 theorem exists_transpose_of_unitPresentation (M : OrdinaryModel l E W)
     (L : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adj : L ⊣ coefficientSequenceLimit l E W)
@@ -271,8 +275,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- Chain maps of strict coefficient systems agree once all their finite evaluations agree.
-Source: Stacks 0941. -/
+/-- Chain maps of strict coefficient systems agree once all their finite evaluations agree. -/
 theorem coefficientSequenceComplex_hom_ext
     {X Y : CochainComplex (coefficientSequenceModules l E W) ℤ} {f g : X ⟶ Y}
     (h : ∀ n : ℕ, ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).map f =
@@ -291,15 +294,13 @@ private theorem eqToHom_surjective {A B : AddCommGrpCat.{w}} (h : A = B) :
   subst B
   exact fun x ↦ ⟨x, rfl⟩
 
-/-- Every evaluated section is the transport of a section of the system.
-Source: Stacks 0941. -/
+/-- Every evaluated section is the transport of a section of the system. -/
 theorem coefficientEvaluationSection_surjective
     (M : coefficientSequenceModules l E W) (n : ℕ) (U : W.ProEtᵒᵖ) :
     Function.Surjective (coefficientEvaluationSection l E W M n U) :=
   eqToHom_surjective (coefficientSequenceEvaluationAb_eq l E W M n U).symm
 
-/-- Evaluation of a map acts on transported sections by the map at that level.
-Source: Stacks 0941. -/
+/-- Evaluation of a map acts on transported sections by the map at that level. -/
 theorem coefficientEvaluationSection_map
     {M N : coefficientSequenceModules l E W} (f : M ⟶ N) (n : ℕ) (U : W.ProEtᵒᵖ)
     (x : M.val.obj (op (n, U.unop))) :
@@ -315,8 +316,7 @@ private theorem cochainIso_inv_section
   (congrArg (fun z ↦ (e.inv.f k).val.app U z) h).symm.trans
     (congrArg (fun z : P ⟶ P ↦ (z.f k).val.app U x) e.hom_inv_id)
 
-/-- The generator formula of the evaluation tensor comparison.
-Source: Stacks 03EK, 0941. -/
+/-- The generator formula of the evaluation tensor comparison. -/
 theorem coefficientEvaluationTensorIso_hom_generator (n : ℕ)
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (p q k : ℤ) (h : p + q = k) (U : W.ProEtᵒᵖ)
@@ -336,8 +336,7 @@ theorem coefficientEvaluationTensorIso_hom_generator (n : ℕ)
         (coefficientEvaluationSection l E W (Q.X q) n U y) :=
   (coefficientEvaluationTensorIso_exists l E W n P Q).choose_spec.1 p q k h U x y
 
-/-- The inverse evaluation tensor comparison on generators.
-Source: Stacks 03EK, 0941. -/
+/-- The inverse evaluation tensor comparison on generators. -/
 theorem coefficientEvaluationTensorIso_inv_generator (n : ℕ)
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (p q k : ℤ) (h : p + q = k) (U : W.ProEtᵒᵖ)
@@ -365,8 +364,7 @@ attribute [local irreducible] coefficientEvaluationTensorIso
   coefficientSequenceEvaluation coefficientSequenceCommRingSheaf
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceTopology SheafOfModules.monoidalCategory in
-/-- The prescribed evaluation tensor isomorphisms are natural in both complexes.
-Source: Stacks 07A4, 03EK. -/
+/-- The prescribed evaluation tensor isomorphisms are natural in both complexes. -/
 theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
     {P P' Q Q' : CochainComplex (coefficientSequenceModules l E W) ℤ}
     (a : P ⟶ P') (b : Q ⟶ Q') :
@@ -434,8 +432,7 @@ theorem coefficientEvaluationTensorIso_naturality (n : ℕ)
           (((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj Q')
           p q k hpq U x y) ha hb).symm.trans ht.symm)))
 
-/-- Composition of product morphisms under a bifunctor.
-Source: Stacks 0011. -/
+/-- Composition of product morphisms under a bifunctor. -/
 theorem bifunctor_map_mkHom_comp {A B : Type*} [Category* A] [Category* B] (T : A × A ⥤ B)
     {X X' X'' Y Y' Y'' : A} (a : X ⟶ X') (a' : X' ⟶ X'') (c : Y ⟶ Y') (c' : Y' ⟶ Y'') :
     T.map (Prod.mkHom a c) ≫ T.map (Prod.mkHom a' c') = T.map (Prod.mkHom (a ≫ a') (c ≫ c')) := by
@@ -445,8 +442,7 @@ theorem bifunctor_map_mkHom_comp {A B : Type*} [Category* A] [Category* B] (T : 
 namespace OrdinaryQuotient
 
 /-- The ordinary tensor comparison of the quotient system evaluates at every finite level
-to the normalized scalar tensor comparison.
-Source: Stacks 03EK, 07A4, 0941. -/
+to the normalized scalar tensor comparison. -/
 def OrdinaryModel.TensorEvaluation (M : OrdinaryModel l E W)
     (b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
@@ -468,8 +464,7 @@ def OrdinaryModel.TensorEvaluation (M : OrdinaryModel l E W)
 
 /-- Strict comparison of tensor presentations: maps out of the quotient system whose finite
 evaluations are the normalized evaluation isomorphisms intertwine the ordinary tensor
-comparison with any strict tensor map having the scalar tensor evaluations.
-Source: Stacks 07A4, 0941. -/
+comparison with any strict tensor map having the scalar tensor evaluations. -/
 theorem OrdinaryModel.tensor_comp_map_eq (M : OrdinaryModel l E W)
     (b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅
@@ -536,8 +531,7 @@ theorem OrdinaryModel.tensor_comp_map_eq (M : OrdinaryModel l E W)
 
 end OrdinaryQuotient
 
-/-- A bifunctor sends a pair of isomorphisms to an isomorphism.
-Source: Stacks 0011. -/
+/-- A bifunctor sends a pair of isomorphisms to an isomorphism. -/
 theorem isIso_bifunctor_map_mkHom {A B : Type*} [Category* A] [Category* B] (T : A × A ⥤ B)
     {X X' Y Y' : A} (f : X ⟶ X') (g : Y ⟶ Y') [IsIso f] [IsIso g] :
     IsIso (T.map (Prod.mkHom f g)) :=
@@ -552,8 +546,7 @@ namespace OrdinaryQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The system K-flat tensor model comparison is natural in both inputs.
-Source: Stacks 06YU. -/
+/-- The system K-flat tensor model comparison is natural in both inputs. -/
 theorem coefficientSystemTensorModelIso_naturality (S : CoefficientDerivedSystemTensors l E W)
     {P Q P' Q' : CochainComplex (coefficientSequenceModules l E W) ℤ}
     (hP : CochainComplex.IsKFlatIndependentCoefficients
@@ -586,8 +579,7 @@ theorem coefficientSystemTensorModelIso_naturality (S : CoefficientDerivedSystem
   exact h
 /-- Transport of a reduction tensor square along strict presentations: if each presentation
 is the comparison `ε` followed by a localized strict map, and the strict maps intertwine the
-strict tensor maps, the square for the presentations gives the square for `ε`.
-Source: Stacks 07A4. -/
+strict tensor maps, the square for the presentations gives the square for `ε`. -/
 theorem tensorComparisonSquare_transport {A B K : Type*} [Category* A] [Category* B]
     [Category* K] (T : A × A ⥤ A) (T' : B × B ⥤ B) (F : A ⥤ B) (Q : K ⥤ B)
     {X Y Z : A} {XP XQ XZ C D Zc N N' : K}
@@ -622,12 +614,7 @@ theorem tensorComparisonSquare_transport {A B K : Type*} [Category* A] [Category
 
 /-- The universal comparison of the ordinary quotient system realizes the binary tensor
 normalization of a derived reduction: on flat-term K-flat inputs, the ordinary tensor
-comparison `b` and the comparison `ε` fit into the normalized reduction tensor square.
-Source: Stacks 07A4, 0941.
-Proof: each presentation of `hR` is `ε` followed by the localized ordinary transpose of its
-strict unit map, whose finite evaluations are the normalized evaluation isomorphisms. These
-transposes intertwine `b` with the strict tensor map of `hR` before localization, and the
-square of `hR` transports along them. -/
+comparison `b` and the comparison `ε` fit into the normalized reduction tensor square. -/
 theorem OrdinaryModel.reductionTensor_normalization (M : OrdinaryModel l E W)
     (R : CoefficientDerivedSystemReduction l E W)
     (hR : CoefficientReductionTensorNormalization l E W R)

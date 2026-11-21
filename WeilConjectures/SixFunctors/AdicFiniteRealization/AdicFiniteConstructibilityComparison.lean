@@ -13,7 +13,10 @@ import Mathlib.Topology.MetricSpace.Ultra.TotallySeparated
 
 /-! # Constructibility in finite adic module presentations
 
-Source: BS Definitions 6.8.1 and 6.8.8; HRS Theorem 7.7 and Lemma 7.9.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definitions 6.8.1 and 6.8.8
+* Hemo–Richarz–Scholbach, *Constructible sheaves on schemes*, Theorem 7.7 and Lemma 7.9
 -/
 
 @[expose] public noncomputable section
@@ -203,32 +206,10 @@ private def finite_closure_data (C : Core l T) (B : ScalarData l T C) :
   have h₁ := congrArg (fun f ↦ f.hom.app U) h₀
   exact ConcreteCategory.congr_hom h₁ s
 
-/-- Actual finite coefficient legs and the four constructibility comparisons.
-Source: finite realization node, step 3; BS Definition 6.8.8; HRS 7.7 and 7.9.
-
-Proof:
-1. The point-adjunction comparison identifies the section ring of the pulled-back
-continuous E-ring with continuous E-valued functions. Compose with the spectral
-coefficient equivalence Shrink.algEquiv to get finiteIso. Its formula on every
-section and point gives finite_normalization. Define leg by finiteIso inverse
-followed by sectionRingMap of the actual finite-subfield inclusion into Omega.
-2. chartComparison naturality for field inclusions and the normalized coefficient
-formula in B.coefficient give coefficient_normalization. SectionRingMap preserves
-composition, so the two finite inclusions into Omega coincide. Cancel finiteIso
-to obtain cocone; leg_normalization holds by its construction.
-3. On each finite locally closed stratum, continuous finite-field lfp modules are
-locally finite free by condensedField local triviality. The finite-subextension
-Omega version is condensedQbar_lfp_locally_free. Conversely a finite free module
-has the presentation with zero relations. Pullback to strata respects these
-coefficient rings. Apply this in every cohomological degree to identify the internal
-constructibility predicates. The bounded standard t-structure gives an ordered
-interval by replacing the lower bound with the minimum of both bounds.
-4. The section-module equivalence preserves underlying sheaves, finite free objects,
-exact sequences and restrictions, hence the local finite free predicates. Its exact
-derived equivalence preserves homology and both degree bounds. The exact equivalence
-of extension along finiteIso preserves those same data. Transporting the preceding
-internal criteria gives finite_sections and closure_sections. Covers allow rank zero
-and the empty scheme; the Omega ring remains finite-subextension-valued throughout. -/
+/-- There are closure data `R` (finite coefficient legs) for which bounded constructibility over
+each finite subfield ring and over the closure ring agrees with the finite-free target
+description, both in internal abelian sheaf modules and, after transport along the section
+presentation and `R.finiteIso`, in ordinary module sheaves. -/
 theorem adic_finite_constructibility_comparison (C : Core l T) (B : ScalarData l T C) :
     ∃ R : ClosureData l T C B,
       (∀ (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) K,

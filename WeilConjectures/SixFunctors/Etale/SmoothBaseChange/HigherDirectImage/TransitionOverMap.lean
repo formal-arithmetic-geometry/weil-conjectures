@@ -19,6 +19,8 @@ For `f : X ⟶ Y` and a morphism `φ : U ⟶ V` of schemes over `X`, the transit
 
 - `AlgebraicGeometry.Etale.higherDirectImageTransition_comp_higherDirectImageOverMap`.
 
+## Implementation details
+
 The proof unfolds `AlgebraicGeometry.Etale.higherDirectImageTransition`, which is expensive for
 the kernel; this module imports only what the proof needs.
 -/

@@ -14,6 +14,8 @@ The right unitor `K ⊗ᴸ Λ_X ≅ K` of the derived tensor product
 (`AlgebraicGeometry.Etale.derivedTensorRightUnitor`), as a natural isomorphism
 `- ⊗ᴸ Λ_X ≅ 𝟭` (`AlgebraicGeometry.Etale.derivedTensorRightUnitorNatIso`).
 
+## Implementation details
+
 It is stated for an arbitrary coefficient category: at a concrete one such as `ModuleCat Λ`,
 the kernel check of the naturality proof unfolds the monoidal structure of the derived category
 and times out, while specializing this general isomorphism is cheap.

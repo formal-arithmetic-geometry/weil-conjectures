@@ -18,7 +18,7 @@ set_option linter.privateModule false
 
 The word evaluations, recursive coefficient arrows and independently normalized
 ringed-site arrows are the published GeneratorReduction definitions. Only the
-structural generators listed in this node are selected below.
+structural generators of the generator statement are selected below.
 -/
 
 @[expose] public noncomputable section

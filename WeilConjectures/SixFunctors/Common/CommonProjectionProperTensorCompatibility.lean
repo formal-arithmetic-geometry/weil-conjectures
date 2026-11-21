@@ -135,35 +135,7 @@ private theorem properProjection_preserved
 set_option backward.isDefEq.respectTransparency false in
 /-- One tensor comparison carries the compact-support projection and the proper counit
 projection through inclusion of a finite coefficient field. The compact-support square
-holds for every f, and the proper square holds for proper f. This compares maps;
-it assumes no compactification, composition, pentagon or proper projection equation.
-
-Proof: normalize the rational and common tensor functors using their recorded tensor
-normalizations. For two included objects use the inverse of the included
-commonStageTensorComparison, then the inverse stage-system isoToStage for their tensor
-at the compositum, with the
-two scalar identity comparisons on the inputs. This constructs the tensor endpoint isomorphism
-at the original field. The representative formula of commonStageDerivedTensor_existsUnique
-and naturality of rationalTensorScalarComparison prove naturality in both inputs; no
-injectivity of a transition functor is needed. The normalization of
-canonicalCommonStagePullbackTensor at every larger finite field identifies the two
-pullback/tensor comparisons with these endpoints. Substitute the common-stage operation
-comparisons, whose model-normalization fields fix their components on included objects.
-For the proper square transpose the counit-defined projection under the common-stage
-pull/direct adjunction. The counit equation of commonStageComparison, tensor naturality
-and the preceding pullback/tensor square identify the transpose with the image of the
-rational transpose, hence give the proper square by the adjunction Hom bijection.
-For compact support, perform the analogous transpose for the open projection using
-openAdjunction and its unit equation; invert the equality of the open tensor
-isomorphisms. Paste it with the proper square for the proper factor. The support
-factorization normalization and pullComposition equation identify the pasted map with
-the specified compact-support component. Its endpoints are exactly source and target.
-The compact-support calculation applies to every f, since its compactification
-has a proper factor and an open factor. The proper square uses the same tensor
-comparison, without deriving it from a compact-support coherence equation.
-The construction includes identity opens, zero objects and empty schemes. The existential
-tensor comparison is eliminated only inside proofs; no data is defined by choosing an
-arbitrary witness, and no faithfulness or projection invertibility is assumed. -/
+holds for every f, and the proper square holds for proper f. -/
 theorem commonProjectionProperTensorCompatibility
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C)

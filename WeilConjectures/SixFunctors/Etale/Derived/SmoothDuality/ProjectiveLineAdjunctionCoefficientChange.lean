@@ -44,7 +44,7 @@ coefficients:
 - `AlgebraicGeometry.Etale.projectiveLineAdjunction_counit_reductionModIdeal`
 - `AlgebraicGeometry.Etale.projectiveLineAdjunction_unit_reductionModIdeal`
 
-## Implementation notes
+## Implementation details
 
 The compatibility of the counit is the general compatibility of trace counits with change of
 coefficients (`AlgebraicGeometry.Etale.lowerShriekTraceCounit_reductionModIdeal`), an instance of

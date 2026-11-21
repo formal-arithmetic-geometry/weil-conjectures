@@ -24,6 +24,11 @@ completing the étale operations, are compared with the finite levels: their red
 - `AlgebraicGeometry.Etale.isZero_reductionModIdeal_of_isIso_smul_id`
 - `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_completionAdjunction_unit_app`: the
   reduction of the unit `K ⟶ K^` of the integral derived completion is an isomorphism.
+
+## Implementation details
+
+Essential smallness of the small étale site is a local instance, since instance search does not
+find it with the imports of this file.
 -/
 
 @[expose] public section
@@ -38,8 +43,7 @@ open Scheme
 
 namespace Etale
 
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
+/-- The small étale site of a scheme is essentially small. -/
 local instance instEssentiallySmallEtale_reduction
     (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -52,7 +56,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
 /-- **Reduction kills the objects on which `ϖ` acts invertibly.** For a nonzerodivisor `ϖ` of
 `Λ`, `n : ℕ` and `K ∈ D(X_ét, Λ)` on which `ϖ` acts invertibly, the reduction
-`K ⊗ᴸ (Λ/ϖⁿ)_X` vanishes: it is the cone of the isomorphism `ϖⁿ : K ⟶ K`. -/
+`K ⊗ᴸ (Λ/ϖⁿ)_X` vanishes. -/
 theorem isZero_reductionModIdeal_of_isIso_smul_id {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (n : ℕ) (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : IsIso (ϖ • 𝟙 K)) :

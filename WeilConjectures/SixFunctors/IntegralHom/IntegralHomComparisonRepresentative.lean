@@ -37,8 +37,12 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # A signed complex representative of integral Hom reduction
 
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2;
-Stacks Tags 093M, 06YQ, 08J7 and 07A6.
+## References
+
+* [Stacks, Tag 093M]
+* [Stacks, Tag 06YQ]
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public section
@@ -59,31 +63,7 @@ set_option linter.unusedVariables false in
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The restricted comparison has the signed Hom--tensor complex representative.
 This asserts its chain-level formula and the normalization square, with no
-invertibility assertion about the representative map or its components.
-
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2,
-finite-free quotient resolution and the evaluation-normalized scalar adjunction;
-Stacks Tags 093M, 06YQ, 08J7 and 07A6.
-
-Proof: the valuation ring of E is a DVR and is Noetherian. Its standard
-resolution of the quotient at exponent n+1 is the free rank-one complex in
-degrees -1,0 with differential multiplication by a uniformizer to power n+1.
-The completed-constant-sheaf reduction comparison base changes this resolution
-to the completed ring sheaf R. It gives Q with the stated support and unit
-terms. Bounded-above flat complexes are K-flat, so Q is K-flat. Choose a K-flat
-representative P of K and a K-injective representative I of L. Tensoring I
-with Q remains K-injective by the bounded split-free tensor lemma. The
-localization tensor comparisons identify restricted reduction of Hom(K,L)
-with Q applied to Hom(P,I) tensor Q. Scalar adjunction, tested on all slices,
-identifies restricted finite Hom with Hom_R(K,Res(F L)), and hence with Q
-applied to Hom(P,I tensor Q). These are s and t. On homogeneous tensors define
-f(v tensor z)(x)=(-1)^(degree(z)*degree(x)) v(x) tensor z. The three differential
-terms involving d_I,d_P,d_Q have signs bp,a+1+bp,a+bp+p on both sides, so f is
-a chain map. Evaluation normalization in a and m and the scalar unit
-x maps to 1 tensor x identify its localized map with the specified comparison.
-Transposing the two candidate maps gives the same reduced evaluation; injectivity
-of the target adjunction proves the displayed square. No finiteness of P or I
-is used. In particular zero inputs, the empty scheme and n=0 are included. -/
+invertibility assertion about the representative map or its components. -/
 theorem comparison_representative
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n)

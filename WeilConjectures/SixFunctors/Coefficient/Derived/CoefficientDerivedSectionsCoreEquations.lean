@@ -10,7 +10,19 @@ import WeilConjectures.SixFunctors.CoefficientSectionsCoreComparison.NormalizedS
 import Mathlib.CategoryTheory.Preadditive.Yoneda.Limits
 
 /-! Equations for the normalized coefficient-sections core data.
-Source: Stacks 079P, 0941, 0D6E and 03CZ.
+
+## Implementation details
+
+`coefficientDerivedSectionsCoreEquations` constructs normalized choices instead of asserting
+the equations for every independent choice of `D`: changing the sign of just one comparison
+preserves its type but not its unit equation.
+
+## References
+
+* [Stacks, Tag 079P]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 03CZ]
 -/
 
 @[expose] public section
@@ -37,13 +49,7 @@ private theorem comparison_eq_unit
     coefficientRightDerivedComparison F K = F.rightDerivedFunctorUnitQ K := by
   rfl
 
-/-- The resolution and projection equations for transported sections data.
-Source: Stacks 079P, 0941 and 0D6E; the simultaneous sections/limit comparison
-and its actual finite projections.
-Proof: apply the normalized sections/limit comparison to the transported pairs,
-then identify each derived projection with the prescribed coefficient projection by
-uniqueness of the corresponding right-derived comparison. The universal-unit
-identity gives the first clause, and the finite projection identity gives the second. -/
+/-- The resolution and projection equations for transported sections data. -/
 def CoefficientDerivedSectionsCoreResolutionEquation
     (R : CoefficientDerivedSystemReduction l E W)
     (D : CoefficientDerivedSectionsCoreData l E W R) : Prop :=
@@ -63,21 +69,7 @@ def CoefficientDerivedSectionsCoreResolutionEquation
         ((coefficientTowerSections l E W).rightDerivedFunctor.map
           ((coefficientSequenceRestriction l E W).mapDerivedCategoryFactors.inv.app K)))
 
-/-- A preliminary package supplies scalar coherence for normalized sections comparisons.
-Source: Stacks 079P, 0941, 0D6E and 03CZ; the normalized coefficient-sections construction.
-
-Proof: use the canonical cochain right-derived pairs for Hom from the integral module
-unit and its termwise tower functor. The normalized constant-tower comparison supplies
-κ and β. Whisker by exact sequence restriction and compose β with the prescribed
-restricted-evaluation isomorphism and the scalar comparison from D. Uniqueness of the
-ordinary comparison identifies it with coefficientSectionsLimitIso. Naturality of κ
-against the exact restriction factorization gives the resolution equation. The
-constant-tower projection equation, whiskered and composed with the same evaluation
-and scalar maps, gives the required actual finite projections.
-
-The former assertion for every independent choice of D was missing normalization:
-changing the sign of just one comparison preserves its type but not its unit equation.
-The conclusion therefore constructs normalized choices, as needed by the parent. -/
+/-- A preliminary package supplies scalar coherence for normalized sections comparisons. -/
 theorem coefficientDerivedSectionsCoreEquations
     (R : CoefficientDerivedSystemReduction l E W)
     (_hF : CoefficientFiniteTensorNormalization l E W R)

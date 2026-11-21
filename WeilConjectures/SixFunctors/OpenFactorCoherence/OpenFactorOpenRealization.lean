@@ -17,8 +17,13 @@ import all WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupport
 
 /-! # Open-factor data in the fixed coefficient presentation
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, open-factor paragraph;
-Bhatt--Scholze 3.4.10, 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 3.4.10, 6.5.5 and 6.5.8
+* [Stacks, Tag 099N]
+* [Stacks, Tag 09BN]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -195,29 +200,7 @@ private theorem reduction_interval {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmer
 
 attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   WeilConjectures.CompletedCoefficientPushforward.hasDerived in
-/-- Transport the normalized slice open operations to the fixed completed coefficients.
-Source: Stacks 099N(2),(5), 09BN and 0E8I; Bhatt--Scholze 6.5.8.
-
-Proof: the finite maps of o preserve constant sections and every quotient projection.
-The completed projections are jointly monic, so o.completedMap is the fixed coefficient
-map on the open slice. Transport the module equivalence through this identification;
-the extension and restriction are then the published ringed open operations. The
-scalar mate, applied termwise to complexes, gives tower and tower_unit, and tensor
-generation gives tower_unique. Transported extension and restriction preserve
-complete objects. The adjunction and the two reflector universal properties then
-construct commutes and unit_commutes: the open extension of the source unit and
-the target unit are both reflections into complete objects. Precomposition with
-the target unit makes this comparison unique. The same strict quotient pullback
-comparison gives Pull and its representative equation. Reflection and restriction
-completeness make its unit invertible on complete inputs. The exact open adjunction's
-unit is invertible; its inverse gives restrictionIso and section_unit, and its Hom
-bijection gives fullyFaithful. Transport c.extensionComplete, c.restrictionComplete
-and q.integralGeometry across the normalized identifications, using equivalence of
-the two published Roos completeness predicates. The scalar comparison gives
-reduction_iso. Finally the finite presentation comparison and exactness of intrinsic
-open extension compute cohomology, giving interval for each individual n; this
-also covers empty intervals without an assumption a ≤ b. Empty opens, identity
-opens and zero complexes obey the same coefficient and unit formulas. -/
+/-- Transport the normalized slice open operations to the fixed completed coefficients. -/
 theorem openFactorOpenRealization
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus l E X)

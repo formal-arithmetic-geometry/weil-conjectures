@@ -11,7 +11,9 @@ public import WeilConjectures.AlgebraicGeometry.SystemProjection.EtaleSystemCofi
 
 /-! # Uniform bounds for ramified left recovery
 
-Source: Zheng, Construction 4.1 and Proposition 5.24; integral scalar mates, step 2.
+## References
+
+* Zheng, Construction 4.1 and Proposition 5.24
 -/
 
 @[expose] public section

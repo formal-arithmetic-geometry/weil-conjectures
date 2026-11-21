@@ -14,18 +14,21 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 # Extensions of perfect fields are separable; perfect closures in an algebraic closure
 
 * `Algebra.isSeparableExtension_of_perfectField`: every field extension of a perfect field is
-  separable in the sense of `Algebra.IsSeparableExtension` (Stacks 030W).
+  separable in the sense of `Algebra.IsSeparableExtension`.
 * `perfectClosure_subset_perfectClosure_algebraicClosure`: for `K ⊆ L` and
   `Ω := AlgebraicClosure L`, the perfect closure of `K` in `Ω` is contained in the perfect
   closure of `L` in `Ω`; `perfectClosureAlgebraicClosureHom` is the resulting `K`-algebra map.
+
+## References
+
+* [Stacks, Tag 030W]
 -/
 
 @[expose] public section
 
 universe u v
 
-/-- Every field extension of a perfect field is separable (Stacks 030W): every finitely
-generated intermediate field is separably generated. -/
+/-- Every field extension of a perfect field is separable. -/
 theorem Algebra.isSeparableExtension_of_perfectField (k : Type u) (K : Type v) [Field k]
     [Field K] [Algebra k K] [PerfectField k] : Algebra.IsSeparableExtension k K := by
   intro F hF

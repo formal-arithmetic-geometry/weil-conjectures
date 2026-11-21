@@ -9,7 +9,17 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.ExceptionalRingOperationsExistence
 import Mathlib.CategoryTheory.Triangulated.Subcategory
 
-/-! # Shift witnesses for exceptional integral transport realizations -/
+/-! # Shift witnesses for exceptional integral transport realizations
+
+## Implementation details
+
+The shift structures of the operations are normalized: shift compatibility is not
+asserted for arbitrary, independently shifted operations and realization isomorphisms.
+
+## References
+
+* Zheng, Construction 5.25 and Proposition 5.26
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,26 +32,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.ExceptionalIntegralScalar
 open ConstructibleExceptionalCoefficients
 
-/-- Exceptional operations admit compact-support realizations compatible with shifts.
-Source: Zheng, Construction 5.25 and Proposition 5.26.
-
-Proof: choose the finite and integral operations and their left realizations. At
-one ring stage write the realization as `r : F ⋙ IY ≅ IX ⋙ H`. The inclusions
-are fully faithful, exact, and compatible with shifts, and the proper/open image
-`H` is exact with its canonical shift. Transport that shift to `F` by `ofComp`;
-its compatibility theorem makes `r` commute with shifts. Reflect exactness along
-`IY`. Give the existing right adjoint its uniquely induced shift, so both
-adjunction maps commute with shifts, and use exactness of a right adjoint.
-Reassemble the operation with these structures and the same functors,
-adjunction, and realization. Choose these normalized operations stagewise.
-This argument includes zero objects and empty schemes, with no nonvanishing
-assumption.
-
-STATEMENT-DISPUTED (former statement): the universal assertion for arbitrary,
-independently shifted operations
-and arbitrary realization isomorphisms is not asserted: compatibility requires
-this normalization of the shift structures.
--/
+/-- Exceptional operations admit compact-support realizations compatible with shifts. -/
 theorem exists_exceptional_transport_left_shifts
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

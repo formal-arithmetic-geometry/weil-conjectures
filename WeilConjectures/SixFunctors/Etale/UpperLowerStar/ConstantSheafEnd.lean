@@ -187,9 +187,7 @@ f_* Λ ⊗ f_* Λ ---mul---> f_* Λ
       v v
 f_* Λ ⊗ f_* Λ ---mul---> f_* Λ
 ```
-
-The unit `ε : Λ ⟶ g_* Λ` is a morphism of monoids, `f_*` preserves these, and the composition
-isomorphism `g_* ⋙ f_* ≅ f_*` is monoidal. -/
+-/
 lemma lowerStarConstantSheafMul_comp_lowerStarConstantSheafEndOfOver {X Y : Scheme.{u}}
     (f : Y ⟶ X) (g : Y ⟶ Y) (h : g ≫ f = f) :
     lowerStarConstantSheafMul (Λ := Λ) f ≫ lowerStarConstantSheafEndOfOver f g h =

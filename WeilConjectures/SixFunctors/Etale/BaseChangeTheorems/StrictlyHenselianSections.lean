@@ -282,8 +282,7 @@ lemma Etale.isIso_app_terminal_of_isIso_upperStar_residue_map (R : Type u) [Comm
 /-- **Degree zero.** Let `R` be a strictly henselian local ring, `t : Spec Ω ⟶ Spec R` with `Ω`
 separably closed and `L ∈ D⁺((Spec R)_ét, Λ)` such that `H⁰` of the unit `L ⟶ Rt_* t^* L` is
 bijective on sections over `Spec R`. Then `Γ(Spec R, H⁰(L)) ⟶ Γ(Spec Ω, t^* H⁰(L))` is an
-isomorphism: both sides are the morphisms from `Λ[0]` to `L`, respectively to `t^* L`, and the map
-between them is `t^*`, which composed with the adjunction is the composition with the unit. -/
+isomorphism. -/
 theorem Etale.isIso_globalSectionsUpperStarMap_homology_zero_of_isIso_unit (R : Type u)
     [CommRing R] [IsStrictlyHenselianLocalRing R] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (t : Spec (.of Ω) ⟶ Spec (.of R))

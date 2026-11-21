@@ -121,19 +121,7 @@ private theorem realize_ordinary_square
     _ = δ ≫ (c.hom ≫ inv χ ≫ r ≫ ψ) := by
       rw [← Category.assoc, hc, IsIso.hom_inv_id_assoc]
 
-/-- The generator case, before closure under expression contexts or composition.
-
-Proof: construct the ordinary coefficient recursion independently of the comparison
-family. Expression induction transposes its primitive reduction arrows and identifies
-the result followed by the recursively prescribed comparison with the actual
-completion map. The ordinary coefficient square follows by cases on BasicPair:
-the forward canonical, proper/open, exchange/projection and compactification
-squares are the four stated diagram lemmas; units and counits are the generic mate
-identities; the inverse square follows by cancellation. Transpose the ordinary
-square under reduction and limit. The source completion is invertible, so the
-normalization equation makes its coefficient transpose invertible as well. Cancel
-that transpose and substitute both completion equations to obtain the displayed
-realization square. No inverse of the target completion or generator is used. -/
+/-- The generator case, before closure under expression contexts or composition. -/
 theorem integralBasicGeneratorSquare (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (o : Operations l E) (a : AmbientModels l E o)
     (comparison : ExpressionRecursion.Comparisons l E D o)

@@ -10,7 +10,12 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.Rin
 
 /-! # Ring proper/open refinement with its integral scalar square
 
-Source: Zheng Section 5 and Stacks 0F7B, 0F7I; normalized exceptional construction. -/
+## References
+
+* Zheng, Section 5 (5.13–5.15)
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 0F7I]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -51,28 +56,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
   (R : CoefficientConstructionRing.{u, v} l Ω D hl (f := f))
 
-/-- The ring part of proper/open refinement, including its integral scalar square.
-Source: Stacks 0F7B and 0F7I; Zheng 5.13--5.15; exceptional construction step 6.
-
-Proof: at finite levels form the open-unit comparison from extension by zero for d
-into proper pushforward of extension by zero for c. Proper base change on the open
-and vanishing on its complement show that this comparison is invertible on bounded
-constructible objects. Compose its inverse with the inverse proper compositor and
-lift through the full finite-Tor inclusions using the given left realizations.
-At integral coefficients form this same word in strict coefficient systems on the
-normalized reduction of the input. Finite-level invertibility and conservative
-system evaluations give an inverse of the actual system word. Take total limit;
-primitive realization identities give the displayed ambient normalization.
-The open-unit word and the proper compositor commute with termwise shifts;
-realization identifies these with Roos shifts. Conjugating by the assumed
-shift-compatible left realizations gives the required shift equations.
-For an integral field extension apply the proper/open scalar square to the strict
-system word, whisker by the proper direct image and invert. A single finite-free
-basis gives compatible coefficient maps on the ramified en subsystem. Cofinal
-realization and the specified scalar and counit normalizations identify this with
-the square below. No equality of system maps is inferred from evaluations.
-Identity refinements and empty inputs use the same open adjunction and zero maps;
-no separatedness of X or Y over the ground field is required. -/
+/-- The ring part of proper/open refinement, including its integral scalar square. -/
 theorem exists_ring_left_refinement
     (hR : ∀ (c : Compactification f) (s : RingStage.{max u v} l),
       letI := (R.operation c (s.stage l)).leftShift

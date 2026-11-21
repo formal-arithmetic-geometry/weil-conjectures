@@ -46,9 +46,8 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Equal morphisms have isomorphic exceptional inverse images. This transports the
-exceptional inverse image along an equation of morphisms, which a rewrite cannot do since the
-functor also depends on the `HasCompactification` instance. -/
+/-- Equal morphisms have isomorphic exceptional inverse images, whatever the instances of
+`HasCompactification`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_of_eq {X Y : Scheme.{u}} {f g : X ⟶ Y}
     [HasCompactification f] [HasCompactification g] (h : f = g) :
     Nonempty (R(f)^![Λ] ≅ R(g)^![Λ]) := by
@@ -62,8 +61,7 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
   [HasSmallSiteSheafify A]
 
 /-- For an isomorphism of schemes `e : X ≅ Y`, the derived lower shriek `Re_!` is a left
-adjoint, for any coefficient category: `Re_! ≅ Re_* ≅ L(e⁻¹)^*`, and `L(e⁻¹)^*` is left adjoint to
-`R(e⁻¹)_*`. -/
+adjoint, for any coefficient category. -/
 instance isLeftAdjoint_rightDerivedLowerShriek_hom {X Y : Scheme.{u}} (e : X ≅ Y) :
     (R(e.hom)_![A]).IsLeftAdjoint :=
   have := (derivedUpperStarLowerStarAdjunction A e.inv).isLeftAdjoint
@@ -72,7 +70,7 @@ instance isLeftAdjoint_rightDerivedLowerShriek_hom {X Y : Scheme.{u}} (e : X ≅
       rightDerivedLowerStarIsoLeftDerivedUpperStarInv A e).symm
 
 /-- For an isomorphism of schemes `e : X ≅ Y`, the exceptional inverse image along `e` is the
-derived pullback, `Re^! ≅ Le^*`: both are right adjoint to `Re_! ≅ Re_* ≅ L(e⁻¹)^*`. -/
+derived pullback, `Re^! ≅ Le^*`. -/
 noncomputable def rightDerivedUpperShriekIsoOfIso {X Y : Scheme.{u}} (e : X ≅ Y) :
     R(e.hom)^![Λ] ≅ L((e.hom)^*[ModuleCat.{u + 1} Λ]) :=
   ((rightDerivedUpperShriekAdjunction Λ e.hom).ofNatIsoLeft
@@ -82,7 +80,7 @@ noncomputable def rightDerivedUpperShriekIsoOfIso {X Y : Scheme.{u}} (e : X ≅ 
       (rightDerivedLowerStarIsoLeftDerivedUpperStarInv (ModuleCat.{u + 1} Λ) e.symm))
 
 /-- For an isomorphism of schemes `f : X ⟶ Y`, the counit `Rf_! Rf^! ⟶ 𝟭` of `Rf_! ⊣ Rf^!` is an
-isomorphism: `Rf^! ⋙ Rf_! ≅ Lf^* ⋙ L(f⁻¹)^* ≅ L(𝟙_Y)^* ≅ 𝟭`. -/
+isomorphism. -/
 theorem isIso_rightDerivedUpperShriekAdjunction_counit_of_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsIso f] [HasCompactification f] :
     IsIso (rightDerivedUpperShriekAdjunction Λ f).counit :=

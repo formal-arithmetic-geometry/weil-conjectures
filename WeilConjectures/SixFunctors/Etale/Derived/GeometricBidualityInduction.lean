@@ -21,10 +21,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 /-!
 # Finite-stage étale Verdier biduality: the dimension induction
 
-This file assembles the proof of blueprint `theorem-verdier-biduality--1`: for a finite
-ring `Λ`, an algebraically closed field `k` on which the exponent of `Λ` is invertible, and `X`
-separated, quasi-compact and locally of finite type over `k`, the double-dual map
-`δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for every `K ∈ Dctf(X, Λ)`.
+This file proves finite-stage étale Verdier biduality: for a finite ring `Λ`, an algebraically
+closed field `k` on which the exponent of `Λ` is invertible, and `X` separated, quasi-compact and
+locally of finite type over `k`, the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an isomorphism for
+every `K ∈ Dctf(X, Λ)`.
 
 ## Main statements
 
@@ -37,12 +37,11 @@ separated, quasi-compact and locally of finite type over `k`, the double-dual ma
   the closed-point step and proper push-forward to the point.
 - `AlgebraicGeometry.Etale.isZero_sheafFiber_homology_of_not_mem_closedPoints`: the cone of `δ_K`
   vanishes at non-closed points, by the induction hypothesis on geometric generic fibres.
-- `AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_leftDerivedUpperStar_iff`: the
-  restriction statement `corollary-verdier-exchange-formulas--5` after any further functor `H`,
-  which compares `Lg^* Lι^* δ_K` with `Lg^* δ_{Lι^* K}` for an open immersion `ι` and a further
-  pullback `g`.
+- `AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_leftDerivedUpperStar_iff`:
+  restriction of biduality to an open, after any further functor `H`, which compares
+  `Lg^* Lι^* δ_K` with `Lg^* δ_{Lι^* K}` for an open immersion `ι` and a further pullback `g`.
 
-## Implementation notes
+## Implementation details
 
 The dimension-zero case needs no separate treatment: if `dim X ≤ 0`, every point is closed, so
 the closed-point step applies directly; in the generic-fibre step the geometric generic fibre is
@@ -61,9 +60,8 @@ namespace CategoryTheory.Adjunction
 
 variable {C D E : Type*} [Category* C] [Category* D] [Category* E]
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5` (auxiliary): whether the unit of an
-adjunction becomes an isomorphism after applying a functor `H` only depends on the left adjoint up
-to isomorphism. -/
+/-- Whether the unit of an adjunction becomes an isomorphism after applying a functor `H` only
+depends on the left adjoint up to isomorphism. -/
 lemma isIso_map_unit_app_iff_of_iso {F₁ F₂ : C ⥤ D} {G₁ G₂ : D ⥤ C} (adj₁ : F₁ ⊣ G₁)
     (adj₂ : F₂ ⊣ G₂) (e : F₁ ≅ F₂) (H : C ⥤ E) (X : C) :
     IsIso (H.map (adj₁.unit.app X)) ↔ IsIso (H.map (adj₂.unit.app X)) := by
@@ -89,11 +87,10 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5`, the extension-by-zero step, after a further
-functor `H`: for an open immersion `j : W ⟶ Y` and a Verdier exchange `e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W`
-(relative to arbitrary objects `ω_Y`, `ω_W`), `H δ_M` is an isomorphism if and only if
-`H (j^* δ_{j_! M})` is. This is the proof of
-`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_iff_lowerShriek` (the case `H = 𝟭`). -/
+/-- Biduality and extension by zero, after a further functor `H`: for an open immersion `j : W ⟶ Y`
+and a Verdier exchange `e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W` (relative to arbitrary objects `ω_Y`, `ω_W`),
+`H δ_M` is an isomorphism if and only if `H (j^* δ_{j_! M})` is. The case `H = 𝟭` is
+`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_iff_lowerShriek`. -/
 theorem isIso_map_verdierDualDoubleDual_app_iff_lowerShriek
     (e : D((j)_!open[A]) ⋙ ((RHom(Y)[A]).flip.obj ωY).rightOp ≅
       ((RHom(W)[A]).flip.obj ωW).rightOp ⋙ (R((j)_*[A])).op)
@@ -118,9 +115,9 @@ theorem isIso_map_verdierDualDoubleDual_app_iff_lowerShriek
   exact h.symm
 
 set_option maxRecDepth 8000 in
-/-- Blueprint `corollary-verdier-exchange-formulas--5`, the cone step, after a further functor `H`:
+/-- Biduality on an open is invariant under maps invertible there, after a further functor `H`:
 if `f : K' ⟶ K` becomes invertible on the open `W`, then `H (j^* δ_K)` is an isomorphism if and
-only if `H (j^* δ_{K'})` is (relative to an arbitrary object `ω_Y`). This is the proof of
+only if `H (j^* δ_{K'})` is (relative to an arbitrary object `ω_Y`). The case `H = 𝟭` is
 `AlgebraicGeometry.Etale.isIso_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso`. -/
 theorem isIso_map_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso
     {FC : A → A → Type*} {CC : A → Type (u + 1)}
@@ -172,8 +169,8 @@ theorem isIso_map_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso
       infer_instance
     exact IsIso.of_isIso_comp_left (H.map (D((j)^*[A]).map f)) _
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5`, after a further functor `H`: for an open
-immersion `j : W ⟶ Y` and a Verdier exchange `e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W` (relative to arbitrary
+/-- Restriction of biduality to an open, after a further functor `H`: for an open immersion
+`j : W ⟶ Y` and a Verdier exchange `e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W` (relative to arbitrary
 objects `ω_Y`, `ω_W`), `H δ_{j^* K}` is an isomorphism if and only if `H (j^* δ_K)` is. -/
 theorem isIso_map_verdierDualDoubleDual_app_mapDerivedCategory_upperStar_iff
     {FC : A → A → Type*} {CC : A → Type (u + 1)}
@@ -206,8 +203,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: the double-dual morphism only depends on the
-structure morphism, not on the (propositional) instances attached to it. -/
+/-- The double-dual morphism only depends on the structure morphism, not on the (propositional)
+instances attached to it. -/
 lemma isIso_map_verdierDualDoubleDual_app_congr {X S : Scheme.{u}} {a b : X ⟶ S} (h : a = b)
     [HasCompactification a] [HasCompactification b] {E : Type*} [Category* E]
     (H : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤ E)
@@ -217,8 +214,7 @@ lemma isIso_map_verdierDualDoubleDual_app_congr {X S : Scheme.{u}} {a b : X ⟶ 
   subst h
   rfl
 
-/-- Blueprint `definition-verdier-dual-evaluation--4`: by naturality of `δ`, whether `H δ_K` is an
-isomorphism only depends on `K` up to isomorphism. -/
+/-- Whether `H δ_K` is an isomorphism only depends on `K` up to isomorphism. -/
 lemma isIso_map_verdierDualDoubleDual_app_iff_of_iso {X S : Scheme.{u}} (a : X ⟶ S)
     [HasCompactification a] {E : Type*} [Category* E]
     (H : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤ E)
@@ -244,7 +240,7 @@ lemma isIso_map_verdierDualDoubleDual_app_iff_of_iso {X S : Scheme.{u}} (a : X �
     exact IsIso.of_isIso_comp_right _
       (H.map (((verdierDual Λ a).rightOp ⋙ verdierDual Λ a).map e.hom))
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5`, after a further functor `H`: for a
+/-- Restriction of biduality to a quasi-compact open, after a further functor `H`: for a
 quasi-compact open immersion `j : W ⟶ Y` and finite coefficients, `H δ_{Lj^* K}` (relative to
 `ω_W = R(j ≫ a)^! Λ`) is an isomorphism if and only if `H (Lj^* δ_K)` is. For `H = 𝟭` this is
 `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_leftDerivedUpperStar_iff`; with `H` a
@@ -270,11 +266,10 @@ theorem isIso_map_verdierDualDoubleDual_app_leftDerivedUpperStar_iff {Y W S : Sc
   refine h.trans ?_
   exact (NatIso.isIso_map_iff (Functor.isoWhiskerRight ι H) _).symm
 
-/-- Blueprint `theorem-verdier-biduality--1`, the induction statement in dimension `d`:
-for every algebraically closed field `k` (in universe `u`) on which the exponent of `Λ` is
-invertible, every separated quasi-compact `X` locally of finite type over `k` with
-`dim X ≤ d`, and every `K ∈ Dctf(X, Λ)`, the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is an
-isomorphism. -/
+/-- Verdier biduality in dimension `d`: for every algebraically closed field `k` (in universe `u`)
+on which the exponent of `Λ` is invertible, every separated quasi-compact `X` locally of finite type
+over `k` with `dim X ≤ d`, and every `K ∈ Dctf(X, Λ)`, the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is
+an isomorphism. -/
 def BidualityInDim (d : ℕ) : Prop :=
   ∀ (k : Type u) [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
@@ -283,23 +278,10 @@ def BidualityInDim (d : ℕ) : Prop :=
     DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K →
     IsIso ((verdierDualDoubleDual Λ aX).app K)
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, third and fourth paragraphs: **the
-cone of `δ_K` vanishes at non-closed points.** Assume biduality in all dimensions `< d`, and let
-`X` be separated of finite type over an algebraically closed `k` with `dim X ≤ d`,
+/-- **The cone of `δ_K` vanishes at non-closed points.** Assume biduality in all dimensions `< d`,
+and let `X` be separated of finite type over an algebraically closed `k` with `dim X ≤ d`,
 `K ∈ Dctf(X, Λ)` and `K ⟶ 𝔻𝔻K ⟶ Δ ⟶ K[1]` a distinguished triangle on `δ_K` with `Δ` bounded
-constructible. Then every cohomology sheaf of `Δ` has zero stalk at every non-closed point `x`.
-
-Choose an affine open `ι : V ⟶ X` containing `x`; `x` is not closed in `V` (`X` is Jacobson).
-A coordinate `p : V ⟶ 𝔸¹_k` sends `x` to the generic point, and factors through a closed
-immersion into `𝔸ⁿ_{𝔸¹_k}`. The geometric generic fibre `g : V' ⟶ V` of `p` has dimension
-`≤ d - 1` (and is nonempty, so `d ≥ 1`), so by induction `δ_{Lg^* Lι^* K}` relative to
-`V' ⟶ Spec \overline{k(t)}` is an isomorphism. By `lemma-double-dual-geometric-generic-fibre--1`
-(`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic`,
-with braidedness `AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`) so is `Lg^* δ_{Lι^* K}`,
-hence by `corollary-verdier-exchange-formulas--5`
-(`AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_leftDerivedUpperStar_iff`) so is
-`Lg^* Lι^* δ_K`, and `Lg^* Lι^* Δ = 0`. The geometric point over `x` factors through `V'`, and
-for the constructible `H^q Δ` vanishing at one geometric point over `x` suffices. -/
+constructible. Then every cohomology sheaf of `Δ` has zero stalk at every non-closed point `x`. -/
 theorem isZero_sheafFiber_homology_of_not_mem_closedPoints (d : ℕ)
     (ih : ∀ d' < d, BidualityInDim Λ d')
     {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
@@ -398,17 +380,9 @@ theorem isZero_sheafFiber_homology_of_not_mem_closedPoints (d : ℕ)
   have hmem := mem_stalkZeroLocus_of_isZero_sheafFiber F _ hs2
   exact hmem _ (X.algClosurePoint x) (by simp [ι, x'])
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, the proper case: assume biduality in
-all dimensions `< d`, and let `a : X ⟶ Spec k` be proper with `k` algebraically closed and
-`dim X ≤ d`. Then `δ_K` is an isomorphism for every `K ∈ Dctf(X, Λ)`.
-
-The cone `Δ` of `δ_K` lies in `Dctf` (`lemma-verdier-duality-preserves-constructibility--1`), and
-its cohomology vanishes at non-closed points
-(`AlgebraicGeometry.Etale.isZero_sheafFiber_homology_of_not_mem_closedPoints`). `Ra_* K` lies in
-`Dctf(Spec k)` (`proposition-six-operations-dctf--2`), so `δ_{Ra_* K}` is an isomorphism
-(`lemma-perfect-complexes-geometric-point--8`), hence so is `Ra_* δ_K`
-(`lemma-internal-adjunction-two-exchange-formulas--4`). The closed-point step
-`AlgebraicGeometry.Etale.isZero_obj₃_of_isIso_rightDerivedLowerStar_map` gives `Δ = 0`. -/
+/-- **Verdier biduality in the proper case.** Assume biduality in all dimensions `< d`, and let
+`a : X ⟶ Spec k` be proper with `k` algebraically closed and `dim X ≤ d`. Then `δ_K` is an
+isomorphism for every `K ∈ Dctf(X, Λ)`. -/
 theorem isIso_verdierDualDoubleDual_app_of_isProper (d : ℕ)
     (ih : ∀ d' < d, BidualityInDim Λ d')
     {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))]
@@ -438,13 +412,9 @@ theorem isIso_verdierDualDoubleDual_app_of_isProper (d : ℕ)
     (fun q x hx ↦ isZero_sheafFiber_homology_of_not_mem_closedPoints Λ d ih aX hd hK g h hT hZ.1
       q x hx) ha
 
-/-- Blueprint `theorem-verdier-biduality--1`, proof, second paragraph: **reduction to the
-proper case.** If biduality holds on every proper `k`-scheme of dimension `≤ d`, it holds on
-every separated quasi-compact `X` locally of finite type over `k` with `dim X ≤ d`. Biduality
-is local (`corollary-verdier-exchange-formulas--5`), so it suffices to treat the affine opens `U` of
-`X`. Such a `U` is a dense open of a proper `Ū` of the same dimension
-(`theorem-nagata-s-compactification-theorem--1`, `AlgebraicGeometry.exists_dense_compactification`),
-`j_! (K|_U) ∈ Dctf(Ū)`, and `δ_{j_! (K|_U)}` restricts to `δ_{K|_U}`. -/
+/-- **Reduction of Verdier biduality to the proper case.** If biduality holds on every proper
+`k`-scheme of dimension `≤ d`, it holds on every separated quasi-compact `X` locally of finite
+type over `k` with `dim X ≤ d`. -/
 theorem isIso_verdierDualDoubleDual_app_of_forall_isProper (d : ℕ)
     {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
     (hprop : ∀ {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [IsProper aY],
@@ -494,8 +464,8 @@ theorem isIso_verdierDualDoubleDual_app_of_forall_isProper (d : ℕ)
   have h₂ := (isIso_verdierDualDoubleDual_app_iff_of_iso _ (j ≫ aY) eN).1 h₁
   exact (isIso_map_verdierDualDoubleDual_app_congr _ hcomm (𝟭 _) M).1 h₂
 
-/-- Blueprint `theorem-verdier-biduality--1`: the dimension induction, simultaneously for
-all algebraically closed fields. -/
+/-- Verdier biduality holds in every dimension `d`, simultaneously for all algebraically closed
+fields. -/
 theorem bidualityInDim (d : ℕ) : BidualityInDim Λ d := by
   induction d using Nat.strong_induction_on with
   | _ d ih =>
@@ -503,7 +473,7 @@ theorem bidualityInDim (d : ℕ) : BidualityInDim Λ d := by
   exact isIso_verdierDualDoubleDual_app_of_forall_isProper Λ d
     (fun aY _ hY _ hN ↦ isIso_verdierDualDoubleDual_app_of_isProper Λ d ih aY hY hN) aX hd hK
 
-/-- Blueprint `theorem-verdier-biduality--1`: **finite-stage étale Verdier biduality.**
+/-- **Finite-stage étale Verdier biduality.**
 Let `Λ` be a finite ring, `k` an algebraically closed field on which the exponent of `Λ` is
 invertible, and `X` separated, quasi-compact and locally of finite type over `k`. For every
 `K ∈ Dctf(X, Λ)` the double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` (relative to `a_X : X ⟶ Spec k`) is

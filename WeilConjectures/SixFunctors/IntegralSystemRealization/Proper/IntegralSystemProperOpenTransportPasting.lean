@@ -10,7 +10,17 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSyst
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenTransportPastingHorizontal
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenTransportPastingBaseChange
 
-/-! Pasting package for intrinsic proper/open coherence. -/
+/-! # Pasting for proper/open transport
+
+Pasting package for intrinsic proper/open coherence.
+
+## References
+
+* [Stacks, Tag 0F7C]
+* [Stacks, Tag 0F7D]
+* [Stacks, Tag 0F7F]
+* Zheng, Lemma 4.10
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,10 +30,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The vertical, horizontal, and base-change equations for a supplied transport gamma.
-Source: Stacks 0F7C, 0F7D and 0F7F; Zheng Lemma 4.10.
-Proof: transport each intrinsic mate-pasting equation through the canonical bridge;
-naturality and inverse cancellation identify the three resulting composites. -/
+/-- The vertical, horizontal, and base-change equations for a supplied transport gamma. -/
 structure ProperOpenTransportPasting (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (gamma : ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)
       (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion k] [IsOpenImmersion i]

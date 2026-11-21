@@ -24,15 +24,6 @@ supported localization triangle `Rs_! Rs^! I ⟶ I ⟶ Rj_* Lj^* I ⟶ [1]` of t
 formalism (`AlgebraicGeometry.Etale.supportedLocalizationTriangle`), by an isomorphism which is the
 identity on `I`. So the first term `s_* s^! I` computes `Rs_* Rs^!`, the third `Rj_* Lj^*`.
 
-The comparison rests on two facts:
-
-* `Lj^*` kills the complex `s_* s^! I` of supported sections;
-* there are no maps from an object `T` with `Lj^* T = 0` to `j_* j^* I`, which computes
-  `Rj_* Lj^* I` since `j^* I` is K-injective.
-
-The first term `Rs_! Rs^! I` of the supported localization triangle has the same two properties,
-and both are the fibre of a map out of `I`, so the two are canonically isomorphic.
-
 We also record the étale base change of the supported localization triangle: for an étale
 `v : X' ⟶ X`, the pullback `Lv^*` carries the triangle of `L` isomorphically onto the triangle of
 `Lv^* L` for the base-changed pair
@@ -45,6 +36,14 @@ We also record the étale base change of the supported localization triangle: fo
   bounded below complex.
 - `AlgebraicGeometry.Etale.exists_triangleHom_supportedLocalizationTriangle`: functoriality.
 - `AlgebraicGeometry.Etale.supportedLocalizationTriangleBaseChangeIso`: étale base change.
+
+## Implementation details
+
+The comparison uses that `Lj^*` kills `s_* s^! I`, and that there are no maps from an object `T`
+with `Lj^* T = 0` to `j_* j^* I`, which computes `Rj_* Lj^* I` since `j^* I` is K-injective.
+The pro-étale forms are
+`AlgebraicGeometry.ProEtale.exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit`
+and `AlgebraicGeometry.ProEtale.shortExact_supportsShortComplex`.
 -/
 
 @[expose] public section
@@ -80,9 +79,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
 omit [HasSmallSiteSheafify A] in
 include hJX hJZ in
 /-- `Lj^*` kills the complex `s_* s^! I` of supported sections of a complex `I` of injective
-sheaves: `Lj^*` carries the support-localization triangle to a distinguished triangle whose second
-map `j^* I ⟶ j^* j_* j^* I` is an isomorphism, `j^*` of the unit of `j^* ⊣ j_*` being invertible.
--/
+sheaves. -/
 lemma isZero_leftDerivedUpperStar_obj_supportsShortComplex_X₁
     (hjs : Set.range s.base = (Set.range j.base)ᶜ)
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)] :
@@ -107,8 +104,7 @@ omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Monoida
   [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)] in
-/-- The complex `j_* j^* I` of a K-injective complex `I` computes `Rj_* Lj^* I`: it is `j_*` of
-the K-injective complex `j^* I`, `j^*` being right adjoint to the exact `j_!`. -/
+/-- The complex `j_* j^* I` of a K-injective complex `I` computes `Rj_* Lj^* I`. -/
 noncomputable def supportsShortComplexX₃Iso (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ)
     [I.IsKInjective] :
     DerivedCategory.Q.obj (supportsShortComplex A j I).X₃ ≅
@@ -133,19 +129,11 @@ lemma subsingleton_hom_Q_obj_supportsShortComplex_X₃
     (DerivedCategory.Q.obj ((((j)^*[A]).mapHomologicalComplex _).obj I))
   exact ((Iso.refl T).homCongr (supportsShortComplexX₃Iso A j I)).subsingleton
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Localization triangle for the exceptional
-inverse image
-
-**Canonicality.** For a K-injective complex `I` of injective étale sheaves on `X`, the
+/-- **Canonicality.** For a K-injective complex `I` of injective étale sheaves on `X`, the
 support-localization triangle `s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ (s_* s^! I)[1]` built from the short
 exact sequence of supported sections is isomorphic to the supported localization triangle
 `Rs_! Rs^! I ⟶ I ⟶ Rj_* Lj^* I ⟶ (Rs_! Rs^! I)[1]` of the exceptional inverse image, by an
-isomorphism which is the identity on `I`. Here `Rs_! = Rs_*` as `s` is proper.
-
-The first term of either triangle is supported on `Z` (it is killed by `Lj^*`), and the third
-term of either triangle receives no maps from objects supported on `Z`. So the inclusion
-`s_* s^! I ⟶ I` factors uniquely through the counit `Rs_! Rs^! I ⟶ I`, the counit factors through
-`s_* s^! I ⟶ I`, and the two factorisations are inverse to each other. -/
+isomorphism which is the identity on `I`. Here `Rs_! = Rs_*` as `s` is proper. -/
 theorem exists_iso_supportLocalizationTriangle (hjs : Set.range s.base = (Set.range j.base)ᶜ)
     [HasCompactification s]
     (I : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) [∀ n, Injective (I.X
@@ -197,19 +185,11 @@ theorem exists_iso_supportLocalizationTriangle (hjs : Set.range s.base = (Set.ra
     (Arrow.isoMk e₁ (Iso.refl _) (by change ψ ≫ ε = u ≫ 𝟙 _; rw [comp_id]; exact hψ))
   exact ⟨e, he₂⟩
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Localization triangle for the exceptional
-inverse image
-
-Let `K` be a bounded below complex of étale sheaves on `X`. Its specified resolution `K ≅ I` by a
-bounded below complex of injective sheaves gives the support-localization triangle
-`s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ (s_* s^! I)[1]`, which is distinguished
-(`AlgebraicGeometry.Etale.supportLocalizationTriangle_distinguished`) and is isomorphic to the
+/-- Let `K` be a bounded below complex of étale sheaves on `X`. Its specified resolution `K ≅ I`
+by a bounded below complex of injective sheaves gives the support-localization triangle
+`s_* s^! I ⟶ I ⟶ j_* j^* I ⟶ (s_* s^! I)[1]`, which is distinguished and is isomorphic to the
 supported localization triangle `s_* Rs^! K ⟶ K ⟶ Rj_* j^* K ⟶ (s_* Rs^! K)[1]`, compatibly with
-the identification `I ≅ K`. As throughout the purity chapter this is
-the étale form; on the pro-étale site the triangle is
-`AlgebraicGeometry.ProEtale.exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit`,
-with the sequence of supported sections
-`AlgebraicGeometry.ProEtale.shortExact_supportsShortComplex`. -/
+the identification `I ≅ K`. -/
 theorem exists_supportLocalizationTriangle_iso_of_isGE
     (hjs : Set.range s.base = (Set.range j.base)ᶜ)
     [HasCompactification s]
@@ -241,13 +221,8 @@ section Functorial
 
 variable {U Z X : Scheme.{u}}
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Localization triangle for the exceptional
-inverse image
-
-**Functoriality.** A morphism `φ : L ⟶ L'` induces the morphism of supported
-localization
-triangles with components `(s_* Rs^! φ, φ, Rj_* Lj^* φ)`, in the sense of
-`def-pur-triangle-meaning`. -/
+/-- **Functoriality.** A morphism `φ : L ⟶ L'` induces a morphism of supported localization
+triangles with components `(s_* Rs^! φ, φ, Rj_* Lj^* φ)`. -/
 theorem exists_triangleHom_supportedLocalizationTriangle
     (s : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion s] [HasCompactification s]
  [IsOpenImmersion j]
@@ -272,8 +247,7 @@ triangle of `L` (for the closed immersion `i` with open complement `j`) to the s
 localization triangle of `L'` (for the base changes `i'`, `j'`), given an identification
 `τ : Le^* L ≅ L'`. Its components are the restriction of supports
 (`AlgebraicGeometry.Etale.supportedRestriction`), `τ`, and the derived base change map
-`Le^* Rj_* ⟶ Rj'_* Le₁^*`; the compatibility with the boundaries is
-`AlgebraicGeometry.Etale.supportedLocalizationBoundary_baseChange`. -/
+`Le^* Rj_* ⟶ Rj'_* Le₁^*`. -/
 noncomputable def supportedLocalizationTriangleBaseChange (e : U ⟶ X) (i : Z ⟶ X) (j : V ⟶ X)
     (i' : Z' ⟶ U) (j' : V' ⟶ U) (g : Z' ⟶ Z) (e₁ : V' ⟶ V)
     [IsClosedImmersion i] [IsOpenImmersion j]
@@ -304,25 +278,11 @@ noncomputable def supportedLocalizationTriangleBaseChange (e : U ⟶ X) (i : Z �
     ((assoc _ _ _).trans ((supportedLocalizationBoundary_baseChange Λ e i j i' j' g e₁ hij hij' hg
       sq L L' τ).trans (assoc _ _ _).symm))
 
-/-- Canonicality, functoriality and etale base change of the
-triangle
-
-**Étale base change of the supported localization triangle.** For an étale morphism
+/-- **Étale base change of the supported localization triangle.** For an étale morphism
 `v : X' ⟶ X`, a closed immersion `s : Z ⟶ X` with open complement `j : U ⟶ X`, their base changes
 `s' : Z' ⟶ X'` and `j' : U' ⟶ X'`, and `L ∈ D(X_ét, Λ)`, the pullback `Lv^*` identifies the
 supported localization triangle `s_* Rs^! L ⟶ L ⟶ Rj_* j^* L ⟶ [1]` with the triangle for
-`Z' = Z ×_X X'`, `U' = U ×_X X'` and `Lv^* L` (through any identification `τ : Lv^* L ≅ L'`).
-
-This is the étale base-change compatibility of the triangle of
-`lemma-local-cohomology-right-adjoint--2`. Its *canonicality* — independence of the injective
-resolution: the triangle of supported sections of any injective resolution is isomorphic to the
-supported localization triangle by an isomorphism which is the identity on the complex — is
-`AlgebraicGeometry.Etale.exists_iso_supportLocalizationTriangle`, and its *functoriality* is
-`AlgebraicGeometry.Etale.exists_triangleHom_supportedLocalizationTriangle`.
-
-The first component is the restriction of supports, an isomorphism along an étale morphism
-(`AlgebraicGeometry.Etale.isIso_supportedRestriction_of_etale`); the second is `τ`; so the third,
-the base change map `Lv^* Rj_* ⟶ Rj'_* Lv₁^*`, is an isomorphism as well. -/
+`Z' = Z ×_X X'`, `U' = U ×_X X'` and `Lv^* L` (through any identification `τ : Lv^* L ≅ L'`). -/
 noncomputable def supportedLocalizationTriangleBaseChangeIso (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ]
     (v : U ⟶ X) [AlgebraicGeometry.Etale v] (s : Z ⟶ X) (j : V ⟶ X)

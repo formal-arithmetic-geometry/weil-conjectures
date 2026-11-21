@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.F
 
 import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 
-/-! # Proved finite coefficient coordinate calculus -/
+/-! # Proved finite coefficient coordinate calculus
+
+## References
+
+* [Stacks, Tag 015F]
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 0D6D]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,8 +38,7 @@ set_option backward.defeqAttrib.useBackward true
 
 attribute [local instance] sfIntrinsicModuleEquivalence_functor_additive
 
-/-- The exact derived square of the ordinary finite inverse-image coordinates.
-Source: Stacks 015F and 03D6. -/
+/-- The exact derived square of the ordinary finite inverse-image coordinates. -/
 def finiteDerivedPullCoordinates
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)
@@ -98,17 +104,7 @@ private theorem finite_pull_coordinate_comp_derived
       (PurCompactSupport.modulePushComposition_existsUnique R h k hc).exists.choose)
     (finite_pull_coordinate_comp_ordinary l E n h k hc) K
 
-/-- Finite inverse-image coordinates commute with the compositor of a triangle.
-Source: compactification-coherence proof, first two paragraphs; Stacks 03D6 and 0D6D.
-
-Proof: the ordinary finite direct-image compositor is the transported intrinsic
-compositor by finiteOrdinaryPushComposition. Conjugate this equality by the
-three adjunctions and apply uniqueness of left adjoints. Combine this with the
-ordinary realization-equivalence composition square, using naturality of the
-middle comparison. Apply exactSquare_comp_inverse to descend the resulting
-ordinary square to every unbounded derived object. Finally eliminate the
-triangle equality and simplify reflexive equality transports. The same equations
-apply to identities, empty schemes and zero coefficient modules. -/
+/-- Finite inverse-image coordinates commute with the compositor of a triangle. -/
 theorem finite_pull_triangle_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

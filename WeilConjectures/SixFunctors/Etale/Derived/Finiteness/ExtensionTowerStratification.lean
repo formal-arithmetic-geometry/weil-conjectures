@@ -67,10 +67,7 @@ schemes locally of finite type over a field with `Y` quasi-compact, and `F : ℕ
 `F n` killed by `Iⁿ⁺¹`, short exact sequences `0 ⟶ F 0 ⟶ F (n + 1) ⟶ F n ⟶ 0` and `F 0` the
 restriction of scalars of a constructible sheaf `F₀` of `Λ ⧸ I`-modules. Then there is a
 stratification of `Y` over whose strata all the `Hᵏ(Rg_* F n)`, `n : ℕ`, `k : ℤ`, are
-`IsSetFLC`: by the finiteness theorem for torsion coefficients `Rg_* F₀` is bounded with
-constructible cohomology sheaves, which are finite locally constant on the strata of a single
-stratification, and finite local constancy propagates along the tower
-(`AlgebraicGeometry.Etale.isSetFLC_upperStar_homology_rightDerived_of_tower`). -/
+`IsSetFLC`. -/
 theorem exists_stratification_isSetFLC_upperStar_of_tower [IsNoetherianRing Λ]
     [∀ n, Finite (Λ ⧸ I ^ n)] [Finite (Λ ⧸ I)] [HasInvertibleExponent (Λ ⧸ I) T]
     [QuasiCompact g] (aT : T ⟶ Spec (.of 𝕜)) (aY : Y ⟶ Spec (.of 𝕜)) [LocallyOfFiniteType aT]

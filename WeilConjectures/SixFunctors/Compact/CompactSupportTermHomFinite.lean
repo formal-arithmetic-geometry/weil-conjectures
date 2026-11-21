@@ -92,8 +92,9 @@ set_option linter.privateModule false
 
 /-! # Finite Hom groups into finite compact-support terms
 
-Source: the finite-coefficient finiteness argument in the integral realization step
-of the constructible exceptional compositor; SGA 4½, Th. finitude, and scalar adjunction.
+## References
+
+* SGA 4½, *Th. finitude*
 -/
 
 @[expose] public section

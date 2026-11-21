@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSuppo
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.FiniteScalarOrdinaryReductionIso
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.FiniteScalarReductionCounitNormalization
 
-/-! # Finite scalar target comparison on a good complex -/
+/-! # Finite scalar target comparison on a good complex
+
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -52,14 +59,7 @@ private theorem derived_iso_model
     Functor.mapDerivedCategoryNatIso_fac]
 
 /-- Normalize the target scalar presentation and geometric presentation on a good complex.
-Source: Stacks Tags 07A6, 06YY and 0D6E.
-Proof: naturality of the derived finite geometric presentation carries the finite
-scalar computation map to its ordinary complex. Its localization factor identifies
-the resulting map with the degreewise geometric presentation. The scalar counit
-normalization replaces the finite scalar presentation followed by that computation
-map by the pbc counit followed by the ordinary scalar presentation. Naturality of
-the geometric localization factor moves the latter presentation to complexes.
-Only the input complex on Y must be good; no condition on its pullback is used. -/
+Only the input complex on Y must be good. -/
 theorem finiteScalarPullReductionComparison {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : (integralOperationsGoodComplex l E Y).FullSubcategory) :
     let := sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f

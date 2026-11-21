@@ -29,7 +29,13 @@ import Mathlib.CategoryTheory.Limits.Preserves.Basic
 import all Mathlib.CategoryTheory.Limits.HasLimits
 /-! # Reduction and augmentation under canonical DVR coefficients
 
-Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 099B]
+* [Stacks, Tag 0A0E]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -44,7 +50,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The reduction-only part of the augmented comparison, relative to the separately
-constructed normalized limit comparison. Source: Stacks 07A6, 0D6E and 0941. -/
+constructed normalized limit comparison. -/
 structure OpenDvrAugmentedReductionComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) (S : CoefficientDerivedSystemCalculus.{u, u} l E T)
@@ -278,22 +284,7 @@ private theorem augmentedUnit_on_flat
     (DerivedCategory.Q.map (C.complexes.map h)) (DerivedCategory.Q.map σ.inv)
     (reconstructionRlimComparison T d (C.towerComplexes.obj B)))
 
-/-- The strict scalar tensor augmentation computes the actual unit after coefficient transport.
-Source: Stacks Tags 07A6, 0D6E and 0941.
-
-Proof: finite constants and completed projections identify the two ringed quotient
-diagrams. On modules the tensor universal property identifies the quotient functors,
-with identity on pure tensors and compatibility with each transition. The universal
-left-derived property gives tower. For a flat-term K-flat representative Q, transpose
-the actual scalar tensor complex to B. The same pure-tensor comparison gives kappa,
-tau and the reduction counit comparison e, including the ordinary augmentation equation.
-Apply sequenceTensorAugmentationUnit to the projection cone: its total-limit equation
-identifies the actual adjunction unit with the localization of the ordinary compatible
-family x tensor one. Uniqueness of derived left adjoints carries this equality to S.
-The supplied limit_model equation transports this representative equation through M.
-Finally the normalized reconstructionCompletionUnit equation on K-flat representatives
-and localization naturality extend the result to every P. No completeness hypothesis,
-regular generator, open immersion or exactness of countable products is used. -/
+/-- The strict scalar tensor augmentation computes the actual unit after coefficient transport. -/
 theorem openDvrAugmentedReductionComparison
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)

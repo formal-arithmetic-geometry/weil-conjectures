@@ -13,6 +13,12 @@ import WeilConjectures.SixFunctors.Supporting.LimitUnitRoosNormalization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 
 /-! # Tensor transpose on good representatives
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -176,26 +182,7 @@ end
 attribute [local irreducible] pullbackTensorReferenceTensorModel pullbackTensorLimitRoos
 
 /-- The scalar-adjunction transpose of the balanced tensor map is the strict
-quotient augmentation, in the published full Roos coordinates.
-Source: current blueprint fix-prop-coherence.proof.md, maps-used sentence;
-Stacks 07A4, 07A6, 0941.
-
-Proof: transport the ordinary tensor representative using
-ringed.tensorRepresentative. Apply reductionTensor_normalization to the good
-complexes P and Q: it supplies simultaneous strict presentations C, D, Z and
-the balanced chain map Z to the total tensor of C and D. On each homogeneous
-pure tensor its finite component reduces each factor. Use the cochain transpose
-formula for the derived reduction/limit adjunction. The unit_projection equations
-identify the transpose with the quotient maps into the product; the strict
-Roos augmentation has zero shifted coordinate. The tensor chain normalization
-has exactly these first coordinates and zero shifted coordinate. Tensor
-sheafification and total-summand injections prove equality of the first coordinate;
-the second coordinate is zero on both sides. Thus the full cochain maps agree.
-Localize this equality and compose with the published reduction and system-tensor
-representative comparisons. Their product is precisely
-pullbackTensorReferenceTensorModel, yielding the displayed equation. This lemma
-only computes a transpose on good complexes; the consumer separately uses
-Tensor.canonical.2 and the global tensor model, then descends to all objects. -/
+quotient augmentation, in the published full Roos coordinates. -/
 theorem tensorQuotientTranspose_onGood
     (ringed : IntegralSystemRealization.RingedModels l E) (X : Scheme.{u})
     (P Q : (integralOperationsGoodComplex l E X).FullSubcategory) :

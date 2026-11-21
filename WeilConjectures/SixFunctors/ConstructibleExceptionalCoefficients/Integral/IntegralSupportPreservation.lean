@@ -18,10 +18,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
 
 /-- Integral compact support preserves the finite-Tor constructible subcategory.
-Source: Zheng, Construction 5.25 and Propositions 5.24 and 5.26;
-coefficient construction step 3.
-Proof: extend by zero and proper direct image on normalized finite systems, then transport
-constructibility and a common Tor interval through strict evaluation and derived completion. -/
+See Zheng, Construction 5.25 and Propositions 5.24 and 5.26. -/
 theorem integral_support_preservation (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

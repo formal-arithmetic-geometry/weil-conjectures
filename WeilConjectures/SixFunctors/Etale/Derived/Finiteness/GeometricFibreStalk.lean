@@ -22,8 +22,7 @@ For a proper morphism `f : X ⟶ S`, a geometric point `x : Spec Ω ⟶ S` (`Ω`
 and a torsion sheaf `F` of `Λ`-modules (for instance any sheaf of modules over a finite ring),
 the stalk at `x` of `Rᵠf_* F` is the étale cohomology `Hᵠ(X_x, F|)` of the geometric fibre
 (`nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_of_isProper`, the
-geometric-fibre formula with torsion coefficients): by proper base change it is the stalk of the
-direct image along `X_x ⟶ Spec Ω`, which is computed by the strict-local exchange. For constant
+geometric-fibre formula with torsion coefficients). For constant
 coefficients `ℤ/ℓ` this gives the stalk criterion used for the constructibility of proper direct
 images with finite coefficients
 (`isConstructibleSheaf_homology_rightDerivedLowerStar_of_sheafH_geometricFibre`).
@@ -47,10 +46,7 @@ section StrictLocal
 /-- **Stalks of higher direct images over a strictly henselian local base.** Let `A` be a
 henselian local ring with separably closed residue field and `h : P ⟶ Spec A`. For an abelian
 étale sheaf `G` on `P`, the stalk of `Rᵠh_* G` at the closed geometric point of `Spec A` is the
-étale cohomology group `Hᵠ(P, G)`. This is the identity case `A = B`, `φ = id` of the
-strict-local exchange
-(`AlgebraicGeometry.Etale.exists_addEquiv_strictLocal_abelian_total_exchange`).
--/
+étale cohomology group `Hᵠ(P, G)`. -/
 theorem nonempty_addEquiv_sheafFiber_homology_rightDerivedFunctorPlus_of_henselian
     {A : Type u} [CommRing A] [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)]
     {P : Scheme.{u}} (h : P ⟶ Spec (.of A)) (G : Sheaf P.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -103,10 +99,7 @@ noncomputable def sheafComposeForget₂RestrictScalarsIso {X : Scheme.{u}}
 
 /-- **Higher direct images of underlying abelian sheaves.** For `h : P ⟶ T` and a sheaf `G` of
 `Λ`-modules on `P`, the underlying abelian sheaf of `Rᵠh_* G` is `Rᵠh_*` of the underlying abelian
-sheaf of `G` (computed through restriction of scalars to `ULift ℤ`,
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`, and the equivalence of
-`ULift ℤ`-module sheaves with abelian sheaves,
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarForget₂`). -/
+sheaf of `G`. -/
 noncomputable def forget₂HomologyRightDerivedFunctorPlusIso {P T : Scheme.{u}} (h : P ⟶ T)
     (G : Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) :
     (sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1})).obj
@@ -295,13 +288,7 @@ theorem natCard_sheafFiber_homology_rightDerivedLowerStar_constantSheaf
 Noetherian, `f : X ⟶ S` proper and `r : ℤ`. Suppose that the groups `Hʳ(X_{s̄}, ℤ/ℓ)` of the
 geometric fibres `X_{s̄} = X ×_S Spec κ(s)‾` are finite, and that for every `n ≥ 1` the set of
 points `s` with `|Hʳ(X_{s̄}, ℤ/ℓ)| = n` is constructible. Then `Rʳf_*(ℤ/ℓ)` is constructible.
-(For `r < 0` the hypotheses concern `H⁰` and the conclusion holds trivially.)
-
-By proper base change the stalks of `Rʳf_*(ℤ/ℓ)` are the groups `Hʳ(X_{s̄}, ℤ/ℓ)`
-(`nonempty_addEquiv_sheafFiber_homology_rightDerivedLowerStar_constantSheaf`),
-and the stalk criterion `AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_isConstructible_card`
-applies. This is the final step of the proof that proper direct images with finite coefficients
-are constructible. -/
+(For `r < 0` the hypotheses concern `H⁰` and the conclusion holds trivially.) -/
 theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_sheafH_geometricFibre
     {X S : Scheme.{u}} [IsNoetherian S] (f : X ⟶ S) [IsProper f] (ℓ : ℕ) [NeZero ℓ] (r : ℤ)
     (hfin : ∀ s : S,

@@ -25,15 +25,13 @@ Frobenius acts as the identity on the étale topos
 ```
 κ_X : LΦ_X^* ≅ Lg_X^*
 ```
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarGeometricFiberFrobeniusIso`, blueprints
-`lemma-scheme-frobenius-geometric-frobenius--1` and `sec-Weil-complexes`), and the
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarGeometricFiberFrobeniusIso`), and the
 comparison isomorphisms are compatible with pullback along the base change `f : X ⟶ Y` of a
 morphism `f₀ : X₀ ⟶ Y₀` over `k`: `Lf^* κ_Y = κ_X Lf^*`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_leftDerivedUpperStarGeometricFiberFrobeniusIso`).
 
 The *scheme-Frobenius form* of a strict geometric-Weil datum `φ_K : Lg_Y^* K ≅ K` is
-`u_K = φ_K ∘ κ_{Y,K} : LΦ_Y^* K ⟶ K` (`AlgebraicGeometry.Etale.schemeFrobeniusForm`, blueprint
-`definition-weil-structure--1`).
+`u_K = φ_K ∘ κ_{Y,K} : LΦ_Y^* K ⟶ K` (`AlgebraicGeometry.Etale.schemeFrobeniusForm`).
 -/
 
 @[expose] public section
@@ -65,16 +63,11 @@ lemma iterateFrobenius_geometricFiber_comp_geometricGaloisFrobenius_hom :
   rw [Scheme.Hom.iterateFrobenius_geometricFiber_eq, Category.assoc, Iso.inv_hom_id,
     Category.comp_id]
 
-/-- Scheme and geometric Frobenius of the purity
-datum (the comparison isomorphism `κ_X`, blueprint `lemma-scheme-frobenius-geometric-frobenius--1`).
-
-The comparison `κ_X : LΦ_X^* ≅ Lg_X^*` between the derived pullbacks along the scheme Frobenius
-`Φ_X` and along the geometric Galois Frobenius `g_X = g_{X,γ}` of the geometric fibre `X`: the
-two differ by the absolute `q`-power Frobenius, `Φ_X = Fr_X^{(q)} ≫ g_X`, which acts as the
-identity on the étale topos (`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateFrobeniusIso`),
-and `κ_X` is the composite
-`LΦ_X^* ≅ Lg_X^* ⋙ L(Fr_X^{(q)})^* ≅ Lg_X^* ⋙ L(𝟙)^* ≅ Lg_X^*`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfFactor`). -/
+/-- The comparison `κ_X : LΦ_X^* ≅ Lg_X^*` between the derived pullbacks along the scheme
+Frobenius `Φ_X` and along the geometric Galois Frobenius `g_X = g_{X,γ}` of the geometric fibre
+`X`: the composite `LΦ_X^* ≅ Lg_X^* ⋙ L(Fr_X^{(q)})^* ≅ Lg_X^* ⋙ L(𝟙)^* ≅ Lg_X^*`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoOfFactor`), using that the absolute `q`-power
+Frobenius acts as the identity on the étale topos. -/
 noncomputable def leftDerivedUpperStarGeometricFiberFrobeniusIso :
     L((f.geometricFiberFrobenius)^*[A]) ≅ L((f.geometricGaloisFrobenius.asIso.hom)^*[A]) :=
   leftDerivedUpperStarIsoOfFactor A
@@ -84,11 +77,9 @@ noncomputable def leftDerivedUpperStarGeometricFiberFrobeniusIso :
 
 variable {Y₀ : Scheme.{u}} {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f)
 
-/-- Scheme and geometric Frobenius of the purity
-datum (compatibility `Lf^* κ_Y = κ_X Lf^*`).
-
-The comparison isomorphisms `κ` are compatible with pullback along the base change
-`φ̄ = φ × 𝟙 : X ⟶ Y` of a morphism `φ : X₀ ⟶ Y₀` over `k`: the square
+/-- **Compatibility `Lf^* κ_Y = κ_X Lf^*`.** The comparison isomorphisms `κ` are compatible
+with pullback along the base change `φ̄ = φ × 𝟙 : X ⟶ Y` of a morphism `φ : X₀ ⟶ Y₀` over `k`:
+the square
 ```
 Lφ̄^* LΦ_Y^* K ──Lφ̄^* κ_Y──▶ Lφ̄^* Lg_Y^* K
       │ ≅ │ ≅
@@ -123,12 +114,9 @@ theorem leftDerivedUpperStar_map_leftDerivedUpperStarGeometricFiberFrobeniusIso
 
 section SchemeFrobeniusForm
 
-/-- Blueprint `definition-weil-structure--1`: Strict Weil data and the Tate datum (scheme-Frobenius
-form).
-
-The *scheme-Frobenius form* `u_K = φ_K ∘ κ_{Y,K} : LΦ_Y^* K ≅ K` of a strict geometric-Weil datum
-`φ_K : Lg_Y^* K ≅ K` on the geometric fibre `Y` of `g : Y₀ ⟶ Spec k`, `κ_Y` being the comparison
-`LΦ_Y^* ≅ Lg_Y^*` of the scheme Frobenius with the geometric Galois Frobenius
+/-- The *scheme-Frobenius form* `u_K = φ_K ∘ κ_{Y,K} : LΦ_Y^* K ≅ K` of a strict geometric-Weil
+datum `φ_K : Lg_Y^* K ≅ K` on the geometric fibre `Y` of `g : Y₀ ⟶ Spec k`, `κ_Y` being the
+comparison `LΦ_Y^* ≅ Lg_Y^*` of the scheme Frobenius with the geometric Galois Frobenius
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarGeometricFiberFrobeniusIso`). -/
 noncomputable def schemeFrobeniusForm
     {K : _root_.DerivedCategory (Sheaf g.geometricFiber.smallEtaleTopology A)}

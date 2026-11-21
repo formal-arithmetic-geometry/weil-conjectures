@@ -10,8 +10,13 @@ public import WeilConjectures.SixFunctors.OpenExchangeRoos.OpenExchangeRoosRestr
 
 /-! # Open-factor data in the fixed coefficient presentation
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, open-factor paragraph;
-Bhatt--Scholze 3.4.10, 6.5.5, 6.5.8; Stacks 099N, 09BN, 0GL1.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 3.4.10, 6.5.5 and 6.5.8
+* [Stacks, Tag 099N]
+* [Stacks, Tag 09BN]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0D6D]
 -/
 
 @[expose] public noncomputable section
@@ -29,27 +34,7 @@ namespace WeilConjectures.OpenFactorCoherence
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Transport the strict completed exchange and its restricted unit square.
-Source: Stacks 099N(2),(5), 09BN and 0D6D; blueprint open-factor steps 10--11.
-
-Proof: the projection-normalized coefficient transport identifies the fixed strict
-pullback towers with the published completed-exchange presentation. Descend the
-same tower isomorphisms to the normalized Pull comparisons, preserving their
-representative equations and quotient units. The finite open inverse-unit
-transpose descends to OrdinaryExchange, with theta given by the fixed ordinary
-pullback compositors. Under these identifications the ordered Rlim exchange in hb
-is exactly beta: first invert the horizontal pull comparison, then complete the
-ordinary exchange, then use the augmentation-normalized open/Rlim comparison,
-then the source pull comparison. The strict pullback square and exact restriction
-Roos comparison exist on all ambient inputs, giving completedSquare. Their two
-augmentation coordinates agree, yielding square_unit. The restriction equation
-of hb gives beta_restriction after these same transports. The extension of the
-completed a-pullback is complete by hb; the reflector universal property makes
-precomposition with the actual horizontal quotient unit injective for this target.
-Transport this injectivity across horizontal.comparison to obtain the final
-clause. Thus no conservativity of separate finite-reduction evaluations is
-assumed. The statements include empty schemes, identity horizontal arrows and
-zero inputs; each follows from the identical strict unit formulas. -/
+/-- Transport the strict completed exchange and its restricted unit square. -/
 theorem openFactorExchangeRealization
     (F : FiniteFieldDatum.{u}) (hl : l ≠ F.p)
     (U' U X' X : Over (Spec (.of F.k)))

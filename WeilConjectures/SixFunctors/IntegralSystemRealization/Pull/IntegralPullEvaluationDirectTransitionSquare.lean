@@ -7,7 +7,16 @@ module
 
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemOperations
 
-/-! The direct-image transition equation underlying the pullback evaluation square. -/
+/-! # Direct-image transition square
+
+The direct-image transition equation underlying the pullback evaluation square.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -206,19 +215,7 @@ private theorem sheaf_square_identity
   exact eq_of_heq ((hf₃ U _).trans
     ((hf₂ U _).trans (hs U x _ (hg₁ U x).symm)))
 
-/-- Direct image and evaluation commute with the adjacent coefficient transition.
-Source: Zheng Construction 4.1, the section calculation preceding Lemma 4.10;
-Stacks Tags 03DI and 0941.
-
-Proof: evaluate both composites at a pro-étale object U and a section x. Each direct
-evaluation comparison is the identity on underlying sections by its normalization.
-Transport hr along the equality between normalizedDVRQuotient and the adjacent
-integralCoefficientSheafTransition. The inverse of r is then the coefficient direct-image
-comparison, also identity on sections. Each coefficient transition is the presheaf
-restriction along the horizontal sequence arrow. The product base-change functor
-sends that arrow to the horizontal arrow at the base-changed object, so both paths
-give the same restriction of x. Extensionality of module-sheaf morphisms concludes.
-This argument also applies when n = 0 and to the zero module. -/
+/-- Direct image and evaluation commute with the adjacent coefficient transition. -/
 theorem integralPullEvaluation_directTransitionSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
         proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅

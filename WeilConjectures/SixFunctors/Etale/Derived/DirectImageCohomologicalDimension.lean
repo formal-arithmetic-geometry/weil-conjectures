@@ -17,18 +17,13 @@ every étale sheaf `F` of `Λ`-modules on `X` and every `q > d`. This file prove
 
 * the scalar projection formula: for every `E ∈ D(X_ét, Λ)` and every complex `C` of
   `Λ`-modules, the projection map `Rf_* E ⊗ᴸ C_Y ⟶ Rf_*(E ⊗ᴸ C_X)` is an isomorphism
-  (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantFunctor_obj`).
-  Both sides are triangulated in `C` and commute with direct sums (`Rf_*` does, by the finite
-  cohomological dimension, `proposition-open-direct-image-preserves-finite`), and the map is an
-  isomorphism for `C = Λ`, which generates `D(Λ)`;
+  (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_constantFunctor_obj`);
 * for a finite ring `Λ`, `Rf_*` moves Tor amplitude from `[a, b]` to `[a, b + d]`
-  (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_cohomologicalDimension`), by
-  the residue test.
+  (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_cohomologicalDimension`).
 
-These are parts (1) and (2) of blueprint `proposition-open-direct-image-preserves-finite`, where `f`
-is an open immersion of schemes of finite type over a separably closed field (so that its
-cohomological dimension is finite, `theorem-results-from-etale-theory--6`). Part (3), on the
-pro-étale site, is in `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability`.
+The main application is to an open immersion of schemes of finite type over a separably closed
+field, whose cohomological dimension is finite. The analogue on the pro-étale site is in
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Stability`.
 -/
 
 @[expose] public section
@@ -61,15 +56,7 @@ lemma hasFiniteCohomologicalDimensionMorphism_of_isZero_rightDerived :
 
 /-- The scalar projection formula along a morphism of finite cohomological dimension: for every
 `E ∈ D(X_ét, Λ)` and every complex `C` of `Λ`-modules, with constant complexes `C_Y` and
-`C_X = Lf^* C_Y`, the projection map `Rf_* E ⊗ᴸ C_Y ⟶ Rf_*(E ⊗ᴸ Lf^* C_Y)` is an isomorphism.
-
-Both sides are triangulated functors of `C ∈ D(Λ)` commuting with direct sums: `Rf_*` does by
-the finite cohomological dimension
-(`AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedLowerStar`,
-`proposition-open-direct-image-preserves-finite`), and so do the derived tensor products, `Lf^*` and
-the constant complex functor. The map is an isomorphism at `C = Λ`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app_tensorUnit`), and
-`Λ[0]` generates `D(Λ)` (`DerivedCategory.isIso_of_isIso_app_singleFunctor_obj_self`). -/
+`C_X = Lf^* C_Y`, the projection map `Rf_* E ⊗ᴸ C_Y ⟶ Rf_*(E ⊗ᴸ Lf^* C_Y)` is an isomorphism. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantFunctor_obj
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (C : _root_.DerivedCategory (ModuleCat.{u + 1} Λ)) :
@@ -109,7 +96,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_app_app_constantFunctor_obj
 
 /-- The scalar projection formula at a module: for every `Λ`-module `M`, of arbitrary
 projective dimension, the projection map `Rf_* E ⊗ᴸ M_Y ⟶ Rf_*(E ⊗ᴸ Lf^* M_Y)` is an
-isomorphism, `f` having finite cohomological dimension. -/
+isomorphism, for `f` of finite cohomological dimension. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constantSingle_of_cohomologicalDimension
     (E : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (M : ModuleCat.{u + 1} Λ) :
@@ -123,14 +110,7 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constantSingle_of_cohomological
 
 /-- For a finite ring `Λ` and a quasi-compact quasi-separated morphism `f` whose higher direct
 images vanish above `d`, `Rf_*` carries complexes of Tor amplitude in `[a, b]` to complexes of
-Tor amplitude in `[a, b + d]`.
-
-Let `κ = Λ ⧸ J`, `J` the Jacobson radical. By the scalar projection formula,
-`Rf_* K ⊗ᴸ κ_Y ≅ Rf_*(K ⊗ᴸ κ_X)`; the complex `K ⊗ᴸ κ_X` has homology in `[a, b]`, so its
-direct image has homology in `[a, b + d]`, `Rf_*` being left t-exact and raising degrees by at
-most `d` (`CategoryTheory.Functor.isLE_rightDerivedFunctor_obj`). The residue test
-(`AlgebraicGeometry.Etale.DerivedCategory.torAmplitudeIn_iff_tensorSingleConcentratedIn`)
-concludes. -/
+Tor amplitude in `[a, b + d]`. -/
 theorem torAmplitudeIn_rightDerivedLowerStar_of_cohomologicalDimension [Finite Λ] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hta : torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b K) :

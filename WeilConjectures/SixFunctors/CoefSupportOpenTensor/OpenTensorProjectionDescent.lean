@@ -29,7 +29,12 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Descent of an ordinary open tensor projection
 
-Source: Stacks 0GL1, 07A4, 06YS and 06YT.
+## References
+
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YT]
 -/
 
 @[expose] public noncomputable section
@@ -214,33 +219,7 @@ end Comparisons
 
 /-- Descend the ordinary projection comparison, with its specified inverse transpose,
 through the supplied tensor models. This constructs only the derived projection and
-its representative equation; the restriction comparison and all ordinary data are inputs.
-Source: Stacks 0GL1, proof of lemma-j-shriek-and-tensor; 07A4 and 06YS--06YT.
-
-Proof: first observe that F preserves flat terms and K-flat complexes. For a flat
-module M, tensor(F M,-) is identified by D.ordinary with the composite of exact
-G, tensor(M,-), and exact F, hence is exact. For a K-flat C and an acyclic test
-P, exact G makes G P acyclic; D.chain identifies tensor(F C,P) with
-F tensor(C,G P), which is acyclic by K-flatness and exactness of F. Tensor
-symmetry gives the acyclicity test in its prescribed order.
-Resolve both inputs by flat-term K-flat complexes. For a K-flat P, the source
-Tot(F C tensor P) computes the ambient tensor even though F C need not be K-flat.
-The target F Tot(C tensor G P) computes the open tensor since G P is K-flat.
-Compose the inverse ambient comparison, Q of D.chain, the exact F factorization,
-and F of the open comparison. Chain naturality and the naturality of both one-flat
-comparisons make this a natural isomorphism on resolving pairs. Two-variable
-localization on flat-term K-flat complexes descends it to gamma. Resolve only C
-and use the two one-flat naturality squares and D.chainNaturality to prove the
-same equation for arbitrary C and flat-term K-flat P; cancel the localized
-resolution maps. To identify the inverse transpose, work first with both inputs
-flat-term K-flat. D.ordinaryInverse and the summand formulas for D.chain and the
-restrictionModel identify its chain adjoint with unit tensor identity followed
-by the inverse restriction comparison. The exact derived adjunction is the
-localization of the chain adjunction, so the same equation holds after Q, with
-the exact-functor factorization isomorphisms inserted. The supplied both-model
-identities identify the simultaneous comparisons used here. Naturality and
-localization then give the inverse equation on all derived inputs. No inference
-from equality after finite evaluations is used. -/
+its representative equation; the restriction comparison and all ordinary data are inputs. -/
 theorem openTensorProjection_descent
     (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
     (restriction : A.tensor ⋙ G.mapDerivedCategory ≅

@@ -93,8 +93,7 @@ lemma boundedFiniteCohomology_rightDerivedGlobalSections_of_isProper
 
 omit [Finite Λ] in
 /-- The stalk of a sheaf `F` at the geometric point over `h w` vanishes as soon as the stalk of
-the pullback `h^* F` at the geometric point over `w` does: the geometric point of `W` over `w`,
-followed by `h`, factors through the geometric point of `X` over `h w`. -/
+the pullback `h^* F` at the geometric point over `w` does. -/
 lemma isZero_sheafFiber_algClosurePoint_apply_of_isZero_sheafFiber_upperStar {X W : Scheme.{u}}
     (h : W ⟶ X) (w : W) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : IsZero ((pointSmallEtale (W.algClosurePoint w)).sheafFiber.obj

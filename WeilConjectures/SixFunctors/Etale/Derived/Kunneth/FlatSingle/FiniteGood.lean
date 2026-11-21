@@ -20,19 +20,15 @@ For a commutative square `h ≫ f' = e ≫ g` and a finite morphism `π' : X'ᵢ
 
 is an isomorphism as soon as the derived base change maps `Lf'^* Rg_* F ⟶ Rh_* Le^* F` and
 `Lπ'^* Rh_* Le^* F ⟶ Rhᵢ_* Lρ^* Le^* F` are
-(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_rightDerivedLowerStar_unit`). This is the
-computation of the finite pushforwards `πᵢ_* Λ` in the proof of blueprint
-`lemma-kunneth-field-coefficients--1`: the projection formula and the base change theorem for the
-finite morphisms `π'` and `ρ` reduce it to the base change theorem along `X'ᵢ ⟶ S'`.
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_rightDerivedLowerStar_unit`).
 
-The proof compares the base change map with the Künneth maps over `X'`: by pasting with a
-degenerate square (`AlgebraicGeometry.Etale.tensorBaseChangeMap_paste`) it becomes the base
-change map of the square `(h, 𝟙, 𝟙, h)`, which is the Künneth map of `(X', Y)` over `X'`
-(`AlgebraicGeometry.Etale.kunnethMap_eq`); the Künneth maps of `(X', Y)` at `Rπ'_* Λ` and of
-`(X'ᵢ, Y)` at `Λ` are compatible with the exchange map of `π'`
-(`AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap`), and the latter Künneth map is the
-base change map at the unit of the square `(hᵢ, ρ, π', h)`
-(`AlgebraicGeometry.Etale.tensorBaseChangeMap_tensorUnit`).
+## Implementation details
+
+By pasting with a degenerate square (`AlgebraicGeometry.Etale.tensorBaseChangeMap_paste`) the
+base change map becomes the Künneth map of `(X', Y)` over `X'`
+(`AlgebraicGeometry.Etale.kunnethMap_eq`), which is compared with the Künneth map of
+`(X'ᵢ, Y)` through the exchange map of `π'`
+(`AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap`).
 -/
 
 @[expose] public section
@@ -85,8 +81,7 @@ lemma isIso_tensorBaseChangeMap_iff_degenerate {X' S' T Y : Scheme.{u}} (h : Y �
     isIso_comp_left_iff]
 
 /-- The base change map of the degenerate square `(h, 𝟙, 𝟙, h)` is an isomorphism if and only if
-the Künneth map of `(X', Y)` over `X'` is: they differ by the projection map of the identity and
-the derived pushforward along the identity. -/
+the Künneth map of `(X', Y)` over `X'` is. -/
 lemma isIso_tensorBaseChangeMap_degenerate_iff_kunnethMap {X' Y : Scheme.{u}} (h : Y ⟶ X')
     (M : DerivedCategory (Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -113,7 +108,7 @@ lemma isIso_kunnethMap_tensorUnit {X' Y X'ᵢ Yᵢ : Scheme.{u}} (h : Y ⟶ X') 
 
 /-- For a finite `π' : X'ᵢ ⟶ X'` with base change `ρ : Yᵢ ⟶ Y` along `h : Y ⟶ X'`, the Künneth map
 of `(X', Y)` over `X'` at `Rπ'_* Λ` is an isomorphism if the Künneth map of `(X'ᵢ, Y)` over `X'`
-at `Λ` is (`AlgebraicGeometry.Etale.kunnethMap_derivedBaseChangeMap`). -/
+at `Λ` is. -/
 lemma isIso_kunnethMap_rightDerivedLowerStar_unit {X' Y X'ᵢ Yᵢ : Scheme.{u}} (h : Y ⟶ X')
     (π' : X'ᵢ ⟶ X') [IsFinite π'] (hᵢ : Yᵢ ⟶ X'ᵢ) (ρ : Yᵢ ⟶ Y) (sq : IsPullback hᵢ ρ π' h)
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

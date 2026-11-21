@@ -41,9 +41,7 @@ variable {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClos
   (s : Spec (.of Ω) ⟶ Y) {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 /-- **The stalk at one geometric point detects isomorphisms of finite locally constant sheaves**
-on a connected scheme: by the Galois correspondence the stalk functor is, on finite locally
-constant sheaves, an equivalence onto finite continuous representations of `π₁` followed by
-the forgetful functor, which reflects isomorphisms. -/
+on a connected scheme. -/
 theorem IsFiniteLocallyConstantSheaf.isIso_of_isIso_sheafFiber_map
     {F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hF : IsFiniteLocallyConstantSheaf F)
     (hG : IsFiniteLocallyConstantSheaf G) (φ : F ⟶ G)
@@ -65,8 +63,7 @@ theorem IsFiniteLocallyConstantSheaf.isIso_of_isIso_sheafFiber_map
   exact inferInstanceAs (IsIso ((ObjectProperty.ι _).map φ'))
 
 omit [ConnectedSpace Y] [Finite Λ] in
-/-- **The image of a morphism of finite locally constant sheaves is finite locally constant**,
-being the kernel of the cokernel. -/
+/-- **The image of a morphism of finite locally constant sheaves is finite locally constant.** -/
 lemma IsFiniteLocallyConstantSheaf.imageSubobject [IsNoetherianRing Λ]
     {F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (f : F ⟶ G)
     [IsFiniteLocallyConstantSheaf F] [IsFiniteLocallyConstantSheaf G] :
@@ -102,9 +99,7 @@ end Stalk
 include s in
 open CategoryTheory.Limits.ArtinianTower in
 /-- **Images stabilise in a tower of finite locally constant sheaves on a connected scheme**,
-for a finite coefficient ring: the stalks at one geometric point of the images form a
-decreasing chain of submodules of a finite module, which stabilises, and an inclusion of finite
-locally constant sheaves which is an isomorphism on that stalk is an isomorphism. -/
+for a finite coefficient ring. -/
 theorem imagesStabilize_of_isFiniteLocallyConstantSheaf
     (G : ℕᵒᵖ ⥤ Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [hG : ∀ n : ℕ, IsFiniteLocallyConstantSheaf (G.obj (op n))] : ImagesStabilize G := by
@@ -162,7 +157,7 @@ theorem isMittagLefflerTower_of_isFiniteLocallyConstantSheaf
 
 include s in
 /-- **The comparison pullback of a tower of finite locally constant sheaves on a connected scheme
-is Mittag-Leffler** on the pro-étale site, `ν^*` being exact. -/
+is Mittag-Leffler** on the pro-étale site. -/
 theorem isMittagLefflerTower_comp_comparisonUpperStar_of_isFiniteLocallyConstantSheaf
     (G : ℕᵒᵖ ⥤ Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [∀ n : ℕ, IsFiniteLocallyConstantSheaf (G.obj (op n))] :
@@ -172,8 +167,7 @@ theorem isMittagLefflerTower_comp_comparisonUpperStar_of_isFiniteLocallyConstant
 
 omit [IsSepClosed Ω] in
 /-- **Towers of finite locally constant sheaves on a connected nonempty scheme are
-Mittag-Leffler** (finite coefficient ring), the geometric point being the algebraic closure of a
-residue field. -/
+Mittag-Leffler** (finite coefficient ring). -/
 theorem isMittagLefflerTower_of_isFiniteLocallyConstantSheaf_of_nonempty [Nonempty Y]
     (G : ℕᵒᵖ ⥤ Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [∀ n : ℕ, IsFiniteLocallyConstantSheaf (G.obj (op n))] : IsMittagLefflerTower G :=

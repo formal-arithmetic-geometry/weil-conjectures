@@ -21,14 +21,11 @@ initial, so the stalk at the tautological point is the module of global sections
 
 - `AlgebraicGeometry.Etale.upperStarCompSectionsIsoSheafFiber`.
 - `AlgebraicGeometry.Etale.sheafFiberHomologyIso`.
-- `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology`
-.
-- `AlgebraicGeometry.Etale.isIso_iff_forall_isIso_leftDerivedUpperStar_map`
-.
+- `AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology`.
+- `AlgebraicGeometry.Etale.isIso_iff_forall_isIso_leftDerivedUpperStar_map`.
 - `AlgebraicGeometry.Etale.exists_comp_eq_sepClosureBaseChange`,
   `AlgebraicGeometry.Etale.isIso_iff_isIso_upperStar_sepClosureBaseChange_map` and
-  `AlgebraicGeometry.Etale.isIso_iff_isIso_leftDerivedUpperStar_sepClosureBaseChange_map`
-.
+  `AlgebraicGeometry.Etale.isIso_iff_isIso_leftDerivedUpperStar_sepClosureBaseChange_map`.
 -/
 
 @[expose] public section
@@ -60,8 +57,7 @@ noncomputable abbrev tautologicalElement :
 
 
 /-- The tautological pointed étale neighbourhood `(Spec Ω, 𝟙)` is initial among the pointed
-étale neighbourhoods of the geometric point `𝟙 : Spec Ω ⟶ Spec Ω`: a pointed neighbourhood
-`(V, x)` receives the unique morphism `x : Spec Ω ⟶ V`. -/
+étale neighbourhoods of the geometric point `𝟙 : Spec Ω ⟶ Spec Ω`. -/
 noncomputable def isInitialTautologicalElement : IsInitial (tautologicalElement (Ω := Ω)) :=
   IsInitial.ofUniqueHom
     (fun Y ↦ ⟨MorphismProperty.Over.homMk Y.2.left (by simpa using Over.w Y.2), by
@@ -108,12 +104,9 @@ section Pullback
 
 variable {Ω : Type u} [Field Ω] [IsSepClosed Ω]
 
-/-- **A stalk is the inverse image to a geometric
-point.** For a geometric point `s : Spec Ω ⟶ T` the stalk of an étale sheaf `F` of
-`Λ`-modules at `s` is the module of global sections of the inverse image `s^* F`, naturally
-in `F`: the stalk of `s^* F` at the tautological point of `Spec Ω` is that of `F` at `s`
-(`AlgebraicGeometry.Etale.upperStarCompSheafFiberIso`), and is the module of global sections
-of `s^* F` (`AlgebraicGeometry.Etale.sectionsIsoSheafFiberTautological`). -/
+/-- **A stalk is the inverse image to a geometric point.** For a geometric point
+`s : Spec Ω ⟶ T` the stalk of an étale sheaf `F` of `Λ`-modules at `s` is the module of global
+sections of the inverse image `s^* F`, naturally in `F`. -/
 noncomputable def upperStarCompSectionsIsoSheafFiber {T : Scheme.{u}}
     (s : Spec (.of Ω) ⟶ T) :
     (s)^*[ModuleCat.{u + 1} Λ] ⋙
@@ -124,11 +117,9 @@ noncomputable def upperStarCompSectionsIsoSheafFiber {T : Scheme.{u}}
     upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) s (𝟙 _) ≪≫
     eqToIso (by rw [Category.id_comp])
 
-/-- **Stalks of cohomology sheaves.** For
-`Q ∈ D(T_ét, Λ)` and a geometric point `s : Spec Ω ⟶ T`, the stalk of `ℋ^q(Q)` at `s` is
-the module of global sections of `ℋ^q(Ls^* Q)`, that is, `ℋ^q(Q)_s ≅ ℋ^q(Q_s)`: the stalk is
-the inverse image, and the exact functor `s^*` commutes with
-`ℋ^q` (`AlgebraicGeometry.Etale.leftDerivedUpperStarHomologyFunctorIso`). -/
+/-- **Stalks of cohomology sheaves.** For `Q ∈ D(T_ét, Λ)` and a geometric point
+`s : Spec Ω ⟶ T`, the stalk of `ℋ^q(Q)` at `s` is the module of global sections of
+`ℋ^q(Ls^* Q)`, that is, `ℋ^q(Q)_s ≅ ℋ^q(Q_s)`. -/
 noncomputable def sheafFiberHomologyIso {T : Scheme.{u}} (s : Spec (.of Ω) ⟶ T)
     (Q : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (q : ℤ) :
     (pointSmallEtale s).sheafFiber.obj ((_root_.DerivedCategory.homologyFunctor _ q).obj Q) ≅
@@ -142,18 +133,16 @@ noncomputable def sheafFiberHomologyIso {T : Scheme.{u}} (s : Spec (.of Ω) ⟶ 
 
 end Pullback
 
-/-- **Objects with vanishing cohomology.** An object
-`E ∈ D(T_ét, Λ)` is zero if and only if all its cohomology sheaves `ℋ^q(E)` are zero. -/
+/-- **Objects with vanishing cohomology.** An object `E ∈ D(T_ét, Λ)` is zero if and only if all
+its cohomology sheaves `ℋ^q(E)` are zero. -/
 theorem isZero_iff_forall_isZero_homology {T : Scheme.{u}}
     (E : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsZero E ↔ ∀ q : ℤ, IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj E) :=
   _root_.DerivedCategory.isZero_iff E
 
-/-- **Stalk faithfulness for derived objects.**
-A morphism `φ` of `D(T_ét, Λ)` is an isomorphism if and only if its derived pullback
-`Ls^* φ` to every geometric point `s : Spec Ω ⟶ T` is an isomorphism. It suffices to test the
-geometric points given by algebraic closures of the residue fields
-(`AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map`). -/
+/-- **Stalk faithfulness for derived objects.** A morphism `φ` of `D(T_ét, Λ)` is an isomorphism
+if and only if its derived pullback `Ls^* φ` to every geometric point `s : Spec Ω ⟶ T` is an
+isomorphism. -/
 theorem isIso_iff_forall_isIso_leftDerivedUpperStar_map {T : Scheme.{u}}
     {M N : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : M ⟶ N) :
@@ -176,9 +165,7 @@ instance surjective_spec_map_algebraMap_separableClosure :
     Surjective (Spec.map (CommRingCat.ofHom (algebraMap K (SeparableClosure K)))) :=
   ⟨fun _ ↦ ⟨default, Subsingleton.elim _ _⟩⟩
 
-/-- Blueprint `lem-kun-sep-closure-conservative` (first part): every geometric point of a
-`K`-scheme `X` factors through `X_{K^sep}`: a separably closed field extension of `K` receives
-a `K`-embedding of `K^sep`. -/
+/-- Every geometric point of a `K`-scheme `X` factors through `X_{K^sep}`. -/
 theorem exists_comp_eq_sepClosureBaseChange {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (s : Spec (.of Ω) ⟶ X) : ∃ t, t ≫ sepClosureBaseChange p = s := by
   let := (Spec.preimage (s ≫ p)).hom.toAlgebra
@@ -190,10 +177,9 @@ theorem exists_comp_eq_sepClosureBaseChange {Ω : Type u} [Field Ω] [IsSepClose
   ext x
   exact (ψ.commutes x).symm
 
-/-- **Conservativity of base change to a
-separable closure, for sheaves.** A morphism of étale sheaves of `Λ`-modules on a `K`-scheme
-`X` is an isomorphism if and only if its pullback to `X_{K^sep}` is: `X_{K^sep} ⟶ X` is
-surjective, being a base change of the surjective `Spec K^sep ⟶ Spec K`. -/
+/-- **Conservativity of base change to a separable closure, for sheaves.** A morphism of étale
+sheaves of `Λ`-modules on a `K`-scheme `X` is an isomorphism if and only if its pullback to
+`X_{K^sep}` is. -/
 theorem isIso_iff_isIso_upperStar_sepClosureBaseChange_map
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : F ⟶ G) :
     IsIso φ ↔ IsIso ((sepClosureBaseChange p)^*[ModuleCat.{u + 1} Λ].map φ) := by
@@ -203,10 +189,8 @@ theorem isIso_iff_isIso_upperStar_sepClosureBaseChange_map
   obtain ⟨y, hy⟩ := (sepClosureBaseChange p).surjective x
   exact ⟨⟨⟩, y, hy⟩
 
-/-- **Conservativity of base change to a
-separable closure, for derived objects.** A morphism of `D(X_ét, Λ)` is an isomorphism if and
-only if its derived pullback to `X_{K^sep}` is: on cohomology sheaves this is the statement
-for sheaves, the pullback being exact. -/
+/-- **Conservativity of base change to a separable closure, for derived objects.** A morphism of
+`D(X_ét, Λ)` is an isomorphism if and only if its derived pullback to `X_{K^sep}` is. -/
 theorem isIso_iff_isIso_leftDerivedUpperStar_sepClosureBaseChange_map
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : M ⟶ N) :

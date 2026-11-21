@@ -102,7 +102,12 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedOpenFlatResolution
 
 /-! # Goodness of completed open extension
 
-Source: Stacks Tags 03DI, 03DJ, 0E8I and 0G7E.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -136,16 +141,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Completed coefficient open extension preserves the K-flat, flat-term class.
-Source: Stacks 03DI, 03DJ, 0E8I and 0G7E; the ringed-slice transport step.
-
-Proof: identify the actual completed coefficient open extension with the literal
-ringed-slice extension using the pro-etale slice presentation. The ringed-slice
-flat-resolution theorem preserves independent-coefficient K-flatness and each
-term's site-flatness; transport these predicates through the presentation
-equivalences and the termwise natural isomorphism. The construction is valid for
-the empty and identity opens and for unbounded complexes.
--/
+/-- Completed coefficient open extension preserves the K-flat, flat-term class. -/
 theorem openExtension_goodComplex_extension {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j]
     (P : (integralOperationsGoodComplex l E X).FullSubcategory) :

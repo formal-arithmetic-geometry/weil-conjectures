@@ -185,12 +185,9 @@ lemma Etale.derivedBaseChangeMapPlus_ext (sq : CommSq g' f' f g)
   rw [hδ K, ← Etale.derivedBaseChangeMapPlus_fac_app]
 
 omit [HasSmallSiteSheafify A] in
-/-- **The derived base change map commutes with the shifts.** On complexes of injective
-sheaves it is computed by the underived base change map and the units of the right derived
-functors (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app`), all of which commute with
-the shifts; every bounded below complex is quasi-isomorphic to a complex of injective sheaves.
-In particular the derived base change map is a morphism of triangulated functors, so it
-induces morphisms of triangles and of the associated long exact sequences of homology. -/
+/-- **The derived base change map commutes with the shifts.** In particular it is a morphism of
+triangulated functors, so it induces morphisms of triangles and of the associated long exact
+sequences of homology. -/
 instance Etale.commShift_derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :
     NatTrans.CommShift (Etale.derivedBaseChangeMapPlus A sq) ℤ := by
   let inj := (InjectiveObject.ι (Sheaf X.smallEtaleTopology A)).mapHomotopyCategoryPlus
@@ -245,8 +242,7 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 
 omit [HasSmallSiteSheafify A] in
 /-- **Derived base change for exact pushforwards**: if `f_*` and `f'_*` are exact and the
-underived base change map is an isomorphism, then so is the derived base change map: no
-resolutions are involved, the units `f_* ⟶ R f_*⁺`, `f'_* ⟶ R f'_*⁺` being isomorphisms. -/
+underived base change map is an isomorphism, then so is the derived base change map. -/
 lemma Etale.isIso_derivedBaseChangeMapPlus_of_isIso_baseChangeMap (sq : CommSq g' f' f g)
     [PreservesFiniteLimits (f)_*[A]] [PreservesFiniteColimits (f)_*[A]]
     [PreservesFiniteLimits (f')_*[A]] [PreservesFiniteColimits (f')_*[A]]

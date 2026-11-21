@@ -25,11 +25,17 @@ strict localizations of `𝔸¹` at the generic points of the special fibres
 surjectivity `P₂ ↠ P₁` used in Deligne's proof of SGA 4½, [Th. finitude], Prop. 3.7, to compare
 the invariant summands of the nearby cycles of the two slices.
 
+## Implementation details
+
 With the Gauss valuation, `Lᵢ` is the inertia field of `Ωᵢ(x)`; an extension of `L₁` of degree
 `p` inside `L₂` would be immediate (residue fields and value groups agree), and it is excluded by
 the defectlessness of `L₁`, the stability theorem of Ohm and Kuhlmann in the residue-transcendental
-case (F.-V. Kuhlmann, *Elimination of ramification I: the generalized stability theorem*,
-Trans. AMS 362 (2010), §4), proved in `SliceTrait.Hom.mem_compositum_of_ΩMap_mem`.
+case, proved in `SliceTrait.Hom.mem_compositum_of_ΩMap_mem`.
+
+## References
+
+* F.-V. Kuhlmann, *Elimination of ramification I: the generalized stability theorem*,
+  Trans. AMS 362 (2010), §4
 -/
 
 @[expose] public section

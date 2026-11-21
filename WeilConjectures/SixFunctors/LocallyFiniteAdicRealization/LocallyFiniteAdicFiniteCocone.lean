@@ -13,7 +13,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite native realization cocones
 
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.11(3),
+  Proposition 6.8.14 and Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +49,7 @@ variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
   [PreservesFiniteLimits (sections l X)] [PreservesFiniteColimits (sections l X)]
 
 /-- A finite-field realization cocone. Every comparison is specified before descent;
-no functor on the pair category, Hom descent, or essential-image assertion is assumed.
-Source: Bhatt--Scholze, Proposition 6.8.14. -/
+no functor on the pair category, Hom descent, or essential-image assertion is assumed. -/
 structure FiniteCoconeData where
   Φ : ∀ E : Index l (PadicAlgCl l),
     GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) X E ⥤
@@ -73,8 +75,7 @@ structure FiniteCoconeData where
       ObjectProperty.ι (sfIntegralConstructible l (Coefficient.{u} l (PadicAlgCl l) E) X) ⋙
         pbcDerivedExtend.{u} ((C.coefficient E).integralMap l X)
 
-/-- The finite-stage completion-map equation, before pair-category descent.
-Source: Bhatt--Scholze, Proposition 6.8.14, Remark 6.8.15. -/
+/-- The finite-stage completion-map equation, before pair-category descent. -/
 @[irreducible] def FiniteCoconeData.normalized (A : FiniteCoconeData l X C) : Prop :=
   ∀ (E L : Index l (PadicAlgCl l)) (h : E ≤ L)
       (K : sfIntegralConstructibleCategory l (Coefficient.{u} l (PadicAlgCl l) E) X),
@@ -97,8 +98,7 @@ Source: Bhatt--Scholze, Proposition 6.8.14, Remark 6.8.15. -/
           ((GeneralAlgebraicallyClosedCoefficients.integralTransition l (PadicAlgCl l) X
             E L h).obj K))
 
-/-- The finite realization data with its completion-map equation.
-Source: Bhatt--Scholze, Proposition 6.8.14. -/
+/-- The finite realization data with its completion-map equation. -/
 structure FiniteCocone extends FiniteCoconeData l X C where
   normalization : toFiniteCoconeData.normalized l X C
 
@@ -174,25 +174,6 @@ private theorem sixfold_reassoc
 -- Keep the named equivalence available when elaborating its shift data.
 set_option cleanup.letToHave false in
 /-- The finite-field tensor realizations form a normalized coherent cocone.
-
-Source: Bhatt--Scholze, Proposition 6.8.11(3), Proposition 6.8.14(2) and Remark 6.8.15;
-native realization proof steps 3--4.
-
-Proof in words: on the integral full subcategory use derived extension along the
-specified integral coefficient map. Its explicit comparison for E ≤ L is inverse
-balanced tensor transitivity followed by the completed scalar comparison. Finite-free
-completion makes this an isomorphism. It respects the normalized integral shifts and
-integral scalar associators. The integral tensor functor inverts the uniformizer,
-hence kills uniformizer-torsion cones and factors through the raw rational localization.
-The localization universal property lifts the integral comparisons uniquely. Their
-component formula, naturality, and the localized integral associator prove the rational
-field-tower equation. The localization counit fixes the shifts, so exactness descends
-from integral-image triangles. Compose with the inverse of the derived native-section
-equivalence to obtain the native functors and comparisons. Its counit supplies the
-integral isomorphisms. Counit naturality and the literal-object transport formula for
-the scalar transitions turn the lifted integral-component formula into exactly the
-required HEq normalization. This constructs only the finite cocone; no common-stage
-quotient or descent functor is used.
 -/
 theorem finiteCocone_exists
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]

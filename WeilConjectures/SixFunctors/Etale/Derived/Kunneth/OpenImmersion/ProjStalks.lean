@@ -20,8 +20,8 @@ the stalk at the image `s ≫ uX`
 (`AlgebraicGeometry.Etale.isIso_sheafFiber_baseChangeHomologyMap_cube_iff`).
 Moreover, whether a morphism of sheaves is an isomorphism on the stalk at a geometric point only
 depends on the underlying point (`AlgebraicGeometry.Etale.isIso_sheafFiber_map_of_apply_eq`).
-These are the inputs for transporting the hypothesis of the projective case of blueprint
-`corollary-open-direct-image-over-field--2` to the base change to a separable closure.
+These are used to transfer the hypothesis of the projective case of base change along open
+immersions to the base change to a separable closure.
 -/
 
 @[expose] public section
@@ -68,9 +68,7 @@ lemma isIso_uliftSheafFiber_map_iff {X : Scheme.{u}} {Ω : Type u} [Field Ω] [I
   rw [isIso_iff_mono_and_epi, hm, he]
 
 /-- Whether a morphism of étale sheaves of `Λ`-modules is an isomorphism on the stalk at a
-geometric point only depends on the underlying point: its kernel and cokernel have vanishing
-stalks at both geometric points simultaneously
-(`AlgebraicGeometry.Etale.isZero_sheafFiber_iff_of_apply_eq`). -/
+geometric point only depends on the underlying point. -/
 lemma isIso_sheafFiber_map_of_apply_eq {X : Scheme.{u}}
     {G H : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (ψ : G ⟶ H)
     {Ω₁ Ω₂ : Type u} [Field Ω₁] [IsSepClosed Ω₁] [Field Ω₂] [IsSepClosed Ω₂]

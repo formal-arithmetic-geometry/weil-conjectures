@@ -21,9 +21,7 @@ finite coefficient ring whose exponent is invertible on `k`. Global Verdier dual
 
 `RΓ_c(X, 𝔻_X K) ≅ RHom_Λ(RΓ(X, K), Λ)`
 
-for `K ∈ Dctf(X, Λ)`. Applying the first isomorphism to `𝔻_X K`, which lies in `Dctf(X, Λ)`, and
-Verdier biduality `𝔻_X 𝔻_X K ≅ K` give `RΓ_c(X, 𝔻_X K)^∨ ≅ RΓ(X, K)`; since `RΓ_c(X, 𝔻_X K)`
-lies in `Dctf` of the point, it is dualizable, hence equal to its double dual.
+for `K ∈ Dctf(X, Λ)`.
 
 ## Main statements
 

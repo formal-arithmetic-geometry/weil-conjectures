@@ -10,7 +10,10 @@ import WeilConjectures.SixFunctors.IntegralHom.Evaluation.IntegralHomEvaluationN
 
 /-! # First-variable naturality of the normalized tensor exchange
 
-Source: Stacks 06YU and 08J7, signed tensor symmetry and normalized evaluation.
+## References
+
+* [Stacks, Tag 06YU]
+* [Stacks, Tag 08J7]
 -/
 
 @[expose] public section
@@ -20,16 +23,7 @@ universe u
 open CategoryTheory Opposite
 namespace WeilConjectures.IntegralHom
 
-/-- The adjunction-defined exchange is natural in the first tensor factor.
-
-Source: Stacks Tags 06YU and 08J7, tensor symmetry and evaluation on representatives;
-the representative-comparison part of the integral Hom normalization proof.
-
-Proof: write inverse transposition as tensoring the supplied map followed by the
-counit. The public evaluation naturality theorem moves a morphism in K across
-that counit. Naturality of the model's curry equivalence identifies the resulting
-transpose with its tensor map. Naturality in the remaining tensor argument was
-already proved directly from the two adjunction equivalences. -/
+/-- The adjunction-defined exchange is natural in the first tensor factor. -/
 theorem tensorAdjunctionExchange_naturality_first
     {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})

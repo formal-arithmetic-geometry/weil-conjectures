@@ -148,8 +148,7 @@ private theorem leftComp_transpose
     ← η.inv.naturality, ← Category.assoc, c.homEquiv_unit]
 
 /-- Localization of a specified counit comparison through the fixed quotient functors.
-This is the literal four-arrow composite used by the finite scalar models.
- -/
+This is the literal four-arrow composite used by the finite scalar models. -/
 def finiteHomTensorRepresentativeComparison
     {A : Type a₁} {B : Type b₁} [Category.{v₁} A] [Abelian A]
     [Category.{v₂} B] [Abelian B] [HasDerivedCategory.{w₁} A] [HasDerivedCategory.{w₂} B]
@@ -198,8 +197,7 @@ private def scalarUnitSection
 
 attribute [local irreducible] scalarUnitSection
 
-/-- The termwise image of the ordinary left-adjoint composition mate.
- -/
+/-- The termwise image of the ordinary left-adjoint composition mate. -/
 def finiteHomTensorComplexAssociator
     {A B C : Type*} [Category A] [Category B] [Category C]
     [Abelian A] [Abelian B] [Abelian C]
@@ -303,8 +301,7 @@ private theorem total_scalar_unit_ext
   exact hh p q hi V x y
 
 attribute [local semireducible] scalarUnitSection in
-/-- The ordinary scalar tensor square, tested on total pure generators.
- -/
+/-- The ordinary scalar tensor square, tested on total pure generators. -/
 theorem finiteHomTensor_chainSquare
     {C : Type a₁} [Category.{v₁} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max a₁ v₁ u}]

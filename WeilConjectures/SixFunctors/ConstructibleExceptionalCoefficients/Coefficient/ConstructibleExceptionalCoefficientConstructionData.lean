@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.ConstructibleExceptionalAdjunctionCoefficientsData
 
-/-! # Normalized coefficient adjunction construction before coherence -/
+/-! # Normalized coefficient adjunction construction before coherence
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14 and Remark 6.8.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,8 +31,7 @@ namespace ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The individual invertible coefficient mate with its defining counit equation.
-Source: coefficient transpose construction. -/
+/-- The individual invertible coefficient mate with its defining counit equation. -/
 structure CounitComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     (A : Operation.{u, v} l Ω X Y s) (B : Operation.{u, v} l Ω X Y t)
     (TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t) (TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t)
@@ -42,8 +46,7 @@ structure CounitComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
 
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
-/-- The counit transpose respects the units, by naturality and the triangles.
-Source: coefficient transpose calculation. -/
+/-- The counit transpose respects the units, by naturality and the triangles. -/
 theorem comparison_unit_of_counit
     {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     (A : Operation.{u, v} l Ω X Y s) (B : Operation.{u, v} l Ω X Y t)
@@ -84,8 +87,7 @@ theorem comparison_unit_of_counit
     _ = 𝟙 _ := q.inv_hom_id_app K
     _ = _ := (B.adjunction.left_triangle_components (TX.obj K)).symm
 
-/-- Complete a counit-normalized invertible mate using the triangle identities.
-Source: the coefficient comparison construction, inverse-transpose argument. -/
+/-- Complete a counit-normalized invertible mate using the triangle identities. -/
 def CounitComparison.complete {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t}
     {TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t} {TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t}
@@ -148,8 +150,7 @@ theorem comparison_right_cocycle_of_left
       rw [d.counit L]
     _ = _ := by rw [← reassoc_of% (hleft (A.G.obj L))]
 
-/-- A counit-normalized field comparison retaining the endpoint shift structures.
-Source: field coefficient comparisons. -/
+/-- A counit-normalized field comparison retaining the endpoint shift structures. -/
 structure CounitFieldComparison {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     (A : Operation.{u, v} l Ω X Y s) (B : Operation.{u, v} l Ω X Y t)
     (TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t) (TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t) where
@@ -177,8 +178,7 @@ def CounitFieldComparison.b {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
   letI := d.shiftY
   d.comparison.b
 
-/-- Complete the field-stage mate while keeping its chosen shift structures.
-Source: the same inverse-transpose argument. -/
+/-- Complete the field-stage mate while keeping its chosen shift structures. -/
 def CounitFieldComparison.complete {X Y : Scheme.{max u v}} {s t : Stage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y s} {B : Operation.{u, v} l Ω X Y t}
     {TX : C.{u, v} l Ω X s ⥤ C.{u, v} l Ω X t} {TY : C.{u, v} l Ω Y s ⥤ C.{u, v} l Ω Y t}
@@ -189,8 +189,7 @@ def CounitFieldComparison.complete {X Y : Scheme.{max u v}} {s t : Stage.{max u 
     shiftY := d.shiftY
     comparison := d.comparison.complete l Ω }
 
-/-- Canonical q normalization before completing its unit equation.
-Source: proper/open scalar mate. -/
+/-- Canonical q normalization before completing its unit equation. -/
 def CounitQNormalized {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactification f)
     {s t : RingStage.{max u v} l}
     {A : Operation.{u, v} l Ω X Y (s.stage l)} {B : Operation.{u, v} l Ω X Y (t.stage l)}
@@ -206,8 +205,7 @@ def CounitQNormalized {X Y : Scheme.{max u v}} {f : X ⟶ Y} (c : Compactificati
         (pbcDerivedExtend (a.map Y)).map (rA.hom.app K) ≫
         (PurCompactSupport.comparison a c).app ((RingStage.inclusion.{u, v} l Ω X s).obj K)
 
-/-- Projection of the constructed scalar mate.
-Source: coefficient comparison. -/
+/-- Projection of the constructed scalar mate. -/
 def Scalar.counitQ {X Y : Scheme.{max u v}} {s t : RingStage.{max u v} l}
     {a : PurCompactSupport.Change (s.coefficients l) (t.coefficients l)}
     {A : Operation.{u, v} l Ω X Y (s.stage l)} {B : Operation.{u, v} l Ω X Y (t.stage l)}
@@ -216,8 +214,7 @@ def Scalar.counitQ {X Y : Scheme.{max u v}} {s t : RingStage.{max u v} l}
     A.F ⋙ SY.functor ≅ SX.functor ⋙ B.F :=
   d.q
 
-/-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph. -/
+/-- The normalized construction before the separate coherence identities. -/
 structure CoefficientConstructionRing (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -306,16 +303,14 @@ structure CoefficientConstructionRing (D : FiniteFieldDatum.{max u v}) (hl : l �
       (h : ∀ T : Scheme.{max u v}, a.map T = 𝟙 _) (ha : Allowed l a) (side : Bool) :
     ScalarIdentity.{u, v} l Ω h (endpoint X Y side) (scalar a ha side)
 
-/-- The action of a localized functor on the unchanged objects and integral arrows.
-Source: raw coefficient localization. -/
+/-- The action of a localized functor on the unchanged objects and integral arrows. -/
 def localizedAction {A B C D : Type*}
     [Category A] [Category B] [Category C] [Category D]
     (Fi : A ⥤ B) (Fr : C ⥤ D) (LX : A ⥤ C) (LY : B ⥤ D) : Prop :=
   (∀ K : A, Fr.obj (LX.obj K) = LY.obj (Fi.obj K)) ∧
   (∀ (K L : A) (h : K ⟶ L), HEq (Fr.map (LX.map h)) (LY.map (Fi.map h)))
 
-/-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph. -/
+/-- The normalized construction before the separate coherence identities. -/
 structure CoefficientConstructionFields (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -356,8 +351,7 @@ structure CoefficientConstructionFields (D : FiniteFieldDatum.{max u v}) (hl : l
     localizedAction (R.operation c (.integral E)).F (R.operation c (.rational E)).F
       (rationalization.{u, v} l Ω E X) (rationalization.{u, v} l Ω E Y)
 
-/-- Coefficient squares determine the action on common representatives.
-Source: common-stage construction on the colimit Hom groups. -/
+/-- Coefficient squares determine the action on common representatives. -/
 def representativeAction
     {A B C D E H : Type*}
     [Category A] [Category B] [Category C] [Category D] [Category E] [Category H]
@@ -372,8 +366,7 @@ def representativeAction
       qi.inv.app K ≫ tauY.inv.app (Fi.obj K) ≫ IYj.map (q.hom.app K) ≫
         IYj.map (Fj.map a) ≫ qj.hom.app L
 
-/-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph. -/
+/-- The normalized construction before the separate coherence identities. -/
 structure CoefficientConstructionCommon (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -409,8 +402,7 @@ structure CoefficientConstructionCommon (D : FiniteFieldDatum.{max u v}) (hl : l
       (commonComparison c i).q (commonComparison c j).q
       (commonTransition l Ω X i j h) (commonTransition l Ω Y i j h)
 
-/-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph. -/
+/-- The normalized construction before the separate coherence identities. -/
 structure CoefficientConstructionRefinements (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -439,8 +431,7 @@ structure CoefficientConstructionRefinements (D : FiniteFieldDatum.{max u v}) (h
       (refinement r .closed).left.hom.app
         ((commonInclusion.{u, v} l Ω X i).obj K)
 
-/-- The normalized construction before the separate coherence identities.
-Source: coefficient construction in the exceptional inverse image paragraph. -/
+/-- The normalized construction before the separate coherence identities. -/
 structure CoefficientConstruction (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -453,8 +444,7 @@ structure CoefficientConstruction (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D
   common : CoefficientConstructionCommon.{u, v} l Ω D hl ring fields
   refinements : CoefficientConstructionRefinements.{u, v} l Ω D hl ring fields common
   /-- Retain the identity comparison of raw localization used in the construction.
-  This prevents independent rescaling of rationalLeft at each coefficient field.
-  Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; raw localization. -/
+  This prevents independent rescaling of rationalLeft at each coefficient field. -/
   localizationIdentity (c : Compactification f) (E : FieldStage.{max u v} l)
       (K : C.{u, v} l Ω X (.integral E)) :
     HEq ((fields.rationalizationComparison c E).q.hom.app K)

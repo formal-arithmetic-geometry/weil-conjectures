@@ -16,9 +16,17 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Augmented restriction descent
 
-Source: Stacks Project, Tags 0E8I, 0GL1, 03DJ, 06YY and 0941.
 This isolates the representative construction, independently of reconstruction or
 realization through total limits.
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -120,32 +128,7 @@ private theorem cancelComparison
   simp only [Category.assoc, ← F.map_comp_assoc, e.inv_hom_id,
     F.map_id, Category.id_comp, d.inv_hom_id, Category.comp_id]
 
-/-- Descent of the strict restriction/tensor isomorphism, before identification with a mate.
-Source: Stacks sites-modules.tex, Tags 03DJ and 0E8I; sites-cohomology.tex,
-Tags 0G7E, 06YY, 0GL1 and 0941; first step of the canonical restriction construction.
-
-Proof: use the ordinary quotient-tensor functor on the ringed sequence site. Its
-augmentation consists of all scalar-adjunction units and its horizontal maps of the
-quotient projections. Restriction to the localized site preserves flat terms and
-K-flatness. Tensor and restriction commute by the sectionwise map keeping both
-factors, and its inverse has the same formula. Transport using o.integral, o.finite
-and o.systems, retaining their actual units and counits. The maps commute with the
-quotient projections and scalar units, so they give one strict system isomorphism
-and one augmented chain isomorphism on every good complex. In each degree its
-finite component is the finite-adjunction transpose of inverse tensor comparison:
-applying extension followed by its counit sends each summand tensor generator to
-the original restricted tensor. The generator normalization of tensor identifies
-this map with the unit/inverse-tensor/counit word displayed below.
-
-Derive the ordinary quotient-tensor/limit adjunction on the sequence site. Uniqueness
-of left adjoints compares its reduction with SU.reduction and SX.reduction. These
-comparisons take scalar units to the augmentations just constructed; the finite
-adjunctions identify their evaluations with the recorded reductionEvaluation maps.
-Conjugate the localized strict chain isomorphism by these comparisons. Naturality
-for chain maps and inverse quasi-isomorphisms descends it along the localization of
-good complexes. Each component has the localized chain inverse, giving s. These
-conjugations are its displayed representative square. This construction uses no
-extension comparison r, no completeness, and includes zero complexes and empty opens. -/
+/-- Descent of the strict restriction/tensor isomorphism, before identification with a mate. -/
 theorem openRestrictionAugmentedDescent
     (tensor : TensorComparison l E j o) :
     ∃ s : star l E j o ⋙ SU.reduction ≅ SX.reduction ⋙ P l E j o,

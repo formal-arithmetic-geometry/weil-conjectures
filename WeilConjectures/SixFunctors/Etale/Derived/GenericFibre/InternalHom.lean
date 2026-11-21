@@ -20,10 +20,9 @@ For a morphism of schemes `g : Y ⟶ X` and a monoidal Grothendieck abelian coef
 `ρ_{K, M} : Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`
 
 (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison`), the transpose of
-`Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`. It is the comparison map of the
-third assertion of blueprint `lemma-restriction-geometric-generic-fibre`, and it is compatible with
-evaluation by construction (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison_ev`): this is
-what identifies `g^* δ_K` with `δ_{g^* K}` in `lemma-double-dual-geometric-generic-fibre--1`.
+`Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`. It is compatible with evaluation
+by construction (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison_ev`), which identifies
+`g^* δ_K` with `δ_{g^* K}` for the double-dual maps on a geometric generic fibre.
 
 This file records the general properties of `ρ` used to prove that it is an isomorphism over a
 geometric generic point
@@ -42,7 +41,7 @@ It also records the isomorphisms `RHom(K, Rf_* N) ≅ Rf_* RHom(Lf^* K, N)`
 (`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerStarIso`) and, for `D` a left dual of `P`,
 `RHom(P, N) ≅ D ⊗ᴸ N` (`AlgebraicGeometry.Etale.derivedHomIsoDerivedTensorOfExactPairing`).
 
-## Implementation notes
+## Implementation details
 
 Everything is stated for a general coefficient category `A`; see the implementation notes of
 `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure` for why statements about the
@@ -67,12 +66,9 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`, the internal-hom comparison: for
-`g : Y ⟶ X`, the canonical map `Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`, the comparison map
-`CategoryTheory.Functor.LaxMonoidal.ihomComparison` of the monoidal functor `Lg^*`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`). It is the transpose of
-`Lg^* K ⊗ᴸ Lg^* RHom(K, M) ≅ Lg^*(K ⊗ᴸ RHom(K, M)) ⟶ Lg^* M`, the pullback of the evaluation
-(`AlgebraicGeometry.Etale.derivedHomUpperStarComparison_ev`). -/
+/-- The internal-hom comparison: for `g : Y ⟶ X`, the canonical map
+`Lg^* RHom(K, M) ⟶ RHom(Lg^* K, Lg^* M)`, the comparison map
+`CategoryTheory.Functor.LaxMonoidal.ihomComparison` of the monoidal functor `Lg^*`. -/
 noncomputable def derivedHomUpperStarComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
     (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (L((g)^*[A])).obj ((RHom(X)[A].obj (op K)).obj M) ⟶
@@ -80,8 +76,7 @@ noncomputable def derivedHomUpperStarComparison {X Y : Scheme.{u}} (g : Y ⟶ X)
   letI := leftDerivedUpperStarMonoidal A g
   (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).app M
 
-/-- The internal-hom comparison preserves
-evaluation. The square
+/-- The internal-hom comparison preserves evaluation. The square
 ```
   Lg^*K ⊗ᴸ Lg^* RHom(K, M) ──1 ⊗ ρ──▶ Lg^*K ⊗ᴸ RHom(Lg^*K, Lg^*M)
             │ μ │ ev
@@ -130,8 +125,7 @@ lemma isIso_derivedHomUpperStarComparison_iff_of_iso_left {X Y : Scheme.{u}} (g 
   Functor.LaxMonoidal.isIso_ihomComparison_app_iff_of_iso_left _ e M
 
 /-- **The site-perfect case.** If `P` has a left dual `D`, the internal-hom comparison
-`Lg^* RHom(P, M) ⟶ RHom(Lg^* P, Lg^* M)` is an isomorphism for every `M`
-(`CategoryTheory.Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing`). -/
+`Lg^* RHom(P, M) ⟶ RHom(Lg^* P, Lg^* M)` is an isomorphism for every `M`. -/
 lemma isIso_derivedHomUpperStarComparison_of_exactPairing {X Y : Scheme.{u}} (g : Y ⟶ X)
     (D P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing D P]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
@@ -140,9 +134,8 @@ lemma isIso_derivedHomUpperStarComparison_of_exactPairing {X Y : Scheme.{u}} (g 
   Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing _ D P M
 
 /-- If `Rf_*` is fully faithful (the counit of `Lf^* ⊣ Rf_*` is invertible), the internal-hom
-comparison `Lf^* RHom(K, Rf_* N) ⟶ RHom(Lf^* K, Lf^* Rf_* N)` is an isomorphism
-(`CategoryTheory.Functor.Monoidal.isIso_ihomComparison_app_rightAdjoint`). This applies to open
-and to closed immersions. -/
+comparison `Lf^* RHom(K, Rf_* N) ⟶ RHom(Lf^* K, Lf^* Rf_* N)` is an isomorphism. This applies
+to open and to closed immersions. -/
 lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar {X Y : Scheme.{u}} (f : Y ⟶ X)
     [IsIso (derivedUpperStarLowerStarAdjunction A f).counit]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -152,8 +145,7 @@ lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar {X Y : Scheme.{u
   Functor.Monoidal.isIso_ihomComparison_app_rightAdjoint
     (derivedUpperStarLowerStarAdjunction A f) K N
 
-/-- The isomorphism `RHom(K, Rf_* N) ≅ Rf_* RHom(Lf^* K, N)`
-(`CategoryTheory.Functor.Monoidal.isIso_ihomRightAdjointComparison`). -/
+/-- The isomorphism `RHom(K, Rf_* N) ≅ Rf_* RHom(Lf^* K, N)`. -/
 noncomputable def derivedHomRightDerivedLowerStarIso {X Y : Scheme.{u}} (f : Y ⟶ X)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -164,8 +156,7 @@ noncomputable def derivedHomRightDerivedLowerStarIso {X Y : Scheme.{u}} (f : Y �
     (derivedUpperStarLowerStarAdjunction A f) K N
   asIso (Functor.Monoidal.ihomRightAdjointComparison (derivedUpperStarLowerStarAdjunction A f) K N)
 
-/-- If `D` is a left dual of `P`, then `RHom(P, N) ≅ D ⊗ᴸ N`
-(`CategoryTheory.MonoidalClosed.ihomObjIsoTensor`). -/
+/-- If `D` is a left dual of `P`, then `RHom(P, N) ≅ D ⊗ᴸ N`. -/
 noncomputable def derivedHomIsoDerivedTensorOfExactPairing {X : Scheme.{u}}
     (D P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) [ExactPairing D P]
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
@@ -179,9 +170,7 @@ variable {T S R : Scheme.{u}} (g₁ : T ⟶ S) (g₂ : S ⟶ R) (g₁₂ : T ⟶
 
 /-- The composition isomorphism `L(g₁ ≫ g₂)^* ≅ Lg₂^* ⋙ Lg₁^*`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarComp`) is a monoidal natural isomorphism, for the
-monoidal structures `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorComparison_comp`,
-`AlgebraicGeometry.Etale.leftDerivedUpperStarComp_hom_app_unit`). -/
+monoidal structures `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`. -/
 lemma isMonoidal_leftDerivedUpperStarComp_hom :
     letI := leftDerivedUpperStarMonoidal A g₁
     letI := leftDerivedUpperStarMonoidal A g₂

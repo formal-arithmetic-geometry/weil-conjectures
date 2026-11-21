@@ -11,7 +11,13 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Proper
 
 /-! # Open support comparisons on strict systems
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 09AE]
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -352,36 +358,7 @@ private theorem clopenComparison_transpose (o : Operations l E) {U X : Scheme.{u
     Adjunction.homEquiv_unit]
   erw [Category.comp_id]
 
-/-- Open support comparisons for the fixed section-normalized system compositors.
-Source: Stacks 03DI, 09AE, 0E8I; blueprint fix-prop-coherence, slice comparisons.
-
-Proof: the finite open extension is fully faithful; exact localization retains
-its invertible unit. The normalized open evaluation mate carries the system unit
-to a composite of this finite unit with isomorphisms. Joint conservativity of
-finite evaluation makes the system unit invertible. The same mate identity for
-counits detects membership in the essential image of system open extension
-from membership at every finite level.
-Finite cartesian open exchange shows that pullback of an extended object has
-this support. Transpose the prescribed pullback of the system unit followed by
-c.square.inv. It is a composite of isomorphisms after the target open counit,
-so is invertible. Naturality of the transpose gives the base-change isomorphism
-and its exact required inverse-transpose equation. No identification between
-c.square and a separately chosen base-change map is needed.
-For tensor support, use the existing native finite open tensor models for the
-fixed calculi. Their gamma isomorphisms, the adjunction-normalized comparison
-from native to intrinsic open extension, and evaluationTensor show that tensor
-of an extended system with any system has the same open support. Transpose the
-specified tensor of the open unit followed by pullbackTensorSystemComparison.inv.
-The open counit and this transpose are invertible, yielding the natural projection
-isomorphism with precisely the requested inverse-transpose equation.
-For clopen j, transport the existing ordinary extension/direct-image isomorphism
-through the canonical intrinsic realizations. Both functors are then exact;
-uniqueness of right adjoints identifies exact localization of direct image with
-its recorded universal right derivation. Finite evaluation of the system direct
-unit at an extended object is therefore invertible. Its composite with direct
-image of the inverse open unit gives the clopen comparison and the stated
-transpose. All uses of evaluation detect invertibility, never equality. Empty
-opens, identity immersions and zero complexes require no separate assumptions. -/
+/-- Open support comparisons for the fixed section-normalized system compositors. -/
 theorem integralSystemOpenComparisons (o : Operations l E) (c : Compositors l E o) :
     Nonempty (OpenComparisons l E o c) := by
   exact ⟨{

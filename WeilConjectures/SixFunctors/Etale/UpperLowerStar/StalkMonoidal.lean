@@ -11,7 +11,6 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-!
-
 # Stalks of étale sheaves commute with the tensor product
 
 Let `A` be a closed braided monoidal Grothendieck abelian category, for example
@@ -20,15 +19,15 @@ scheme `X`. The stalk functor at `s` on `A`-valued étale sheaves is strong mono
 of a tensor product of sheaves is the tensor product of the stalks, `(F ⊗ G)_s ≅ F_s ⊗ G_s`,
 naturally in `F` and `G`, and the stalk of the unit sheaf is the unit of `A`.
 
+## Implementation details
+
 The site-general input is Mathlib's monoidal instance on
 `CategoryTheory.GrothendieckTopology.Point.sheafFiber` (in
-`Mathlib.CategoryTheory.Sites.Point.Monoidal`): the presheaf fibre is a filtered colimit, the
-tensor product of `A` commutes with colimits in each variable (tensoring is a left adjoint,
-as `A` is closed and braided), and the fibre of the sheafification of a presheaf is the
-presheaf fibre. That instance is stated for `CategoryTheory.Sheaf.monoidalCategory`, which is
-what the project's global monoidal structure `AlgebraicGeometry.Etale.sheafMonoidalCategory`
-of `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs` unfolds to, so it
-applies to that structure directly. We use the universe-lifted point
+`Mathlib.CategoryTheory.Sites.Point.Monoidal`). That instance is stated for
+`CategoryTheory.Sheaf.monoidalCategory`, which is what the project's global monoidal structure
+`AlgebraicGeometry.Etale.sheafMonoidalCategory` of
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs` unfolds to, so it applies to
+that structure directly. We use the universe-lifted point
 `(pointSmallEtale s).ulift`, the form of the stalk used with
 `AlgebraicGeometry.Etale.upperStarCompUliftSheafFiberIso` and with the conservative family
 `isConservativeFamilyOfPoints_ulift_pointSmallEtale`.

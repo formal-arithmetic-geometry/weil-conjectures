@@ -33,28 +33,24 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Sc
 
 namespace WeilConjectures.FiniteFieldDatum
 
-/-- The existing scalar extension, for an arbitrary model over the finite base.
-Source: explicit base change. -/
+/-- The existing scalar extension, for an arbitrary model over the finite base. -/
 abbrev purityFrobeniusFiber (D : FiniteFieldDatum.{u})
     (T₀ : Over (Spec (CommRingCat.of D.k₀))) :=
   (Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).obj T₀
 
-/-- The existing base change on model morphisms, without a coefficient parameter.
-Source: the two squares. -/
+/-- The existing base change on model morphisms, without a coefficient parameter. -/
 abbrev purityFrobeniusMap (D : FiniteFieldDatum.{u})
     {S₀ T₀ : Over (Spec (CommRingCat.of D.k₀))} (h₀ : S₀ ⟶ T₀) :=
   ((Over.pullback (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map h₀).left
 
-/-- The existing semilinear geometric Galois map, independently of coefficients.
-Source: geometric Galois automorphisms. -/
+/-- The existing semilinear geometric Galois map, independently of coefficients. -/
 abbrev purityGaloisMap (D : FiniteFieldDatum.{u})
     (T₀ : Over (Spec (CommRingCat.of D.k₀))) :=
   D.galoisMap T₀.hom
     (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
       (Fintype.ofFinite D.k₀) _ _ _)
 
-/-- The base change of the model's absolute q-power Frobenius.
-Source: definition of Phi. -/
+/-- The base change of the model's absolute q-power Frobenius. -/
 def puritySchemeFrobenius (D : FiniteFieldDatum.{u})
     (T₀ : Over (Spec (CommRingCat.of D.k₀))) :
     (D.purityFrobeniusFiber T₀).left ⟶ (D.purityFrobeniusFiber T₀).left :=
@@ -63,7 +59,7 @@ def puritySchemeFrobenius (D : FiniteFieldDatum.{u})
     (D.model_frobenius_over T₀.hom))
 
 /-- Absolute q-power Frobenius on the geometric fibre, with its canonical characteristic
-proof from the model structure map. Source: absolute factor. -/
+proof from the model structure map. -/
 def purityAbsoluteFrobenius (D : FiniteFieldDatum.{u})
     (T₀ : Over (Spec (CommRingCat.of D.k₀))) :
     (D.purityFrobeniusFiber T₀).left ⟶ (D.purityFrobeniusFiber T₀).left :=
@@ -72,18 +68,7 @@ def purityAbsoluteFrobenius (D : FiniteFieldDatum.{u})
       (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ T₀.hom)) D.a
 
 /-- The coefficient independent factorization and the two commuting scheme squares.
-There is no Cartesian hypothesis on the scheme Frobenius square.
-Source: explicit factorization and the displayed squares.
-
-Proof: on a base changed affine chart, absolute Frobenius sends b tensor c to
-b^q tensor c^q. The arithmetic Galois map sends b tensor c to b tensor c^q,
-and Phi sends it to b^q tensor c. Their two composites are equal to absolute
-Frobenius. Cancel the inverse arithmetic action to obtain the geometric
-factorization. Projection uniqueness glues the calculation on arbitrary models.
-For a model morphism, preservation of qth powers gives the Phi square, and
-projection uniqueness gives the Galois square. These are the identical geometric
-calculations of schemeGeometricFrobenius_factorization and its square theorem;
-no finite coefficient ring, absolute finite type or smoothness enters them. -/
+There is no Cartesian hypothesis on the scheme Frobenius square. -/
 theorem purityFrobenius_geometry (D : FiniteFieldDatum.{u}) :
     (∀ T₀ : Over (Spec (CommRingCat.of D.k₀)),
       D.puritySchemeFrobenius T₀ =

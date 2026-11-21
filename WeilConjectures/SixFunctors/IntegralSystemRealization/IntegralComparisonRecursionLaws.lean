@@ -235,26 +235,7 @@ private def comparison (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 /-- Natural comparison recursion for the specified canonical ambient models.
 Only the variable, unary, tensor and chosen compactification formulas are asserted;
-there is no statement about structural-generator maps or finite projections.
-
-Proof: reconstruct the actual unit on complete inputs and the actual counit on
-normalized systems. At a leaf invert that unit. For pullback insert the inverse
-of L P applied to the counit and then the published K-flat comparison; for tensor
-use the pair of counits and the published tensor comparison. Their displayed
-laws follow by inverse cancellation. Proper image uses the given ambient
-right-adjoint conjugate directly. The given open realization is natural: its
-normalization equation is q d u = L r, where q is L J of the counit. The maps q,
-u and L r are natural. Both q and u are invertible: q by normalization of the
-input, and u by the triangle identity on L J M and transport along d. Cancel
-these in the naturality equation to obtain naturality of d.
-
-Recurse on the finite expression tree, restricting each child comparison along
-the full-domain inclusion. Whiskering and composition preserve naturality and
-invertibility, including at repeated variables. Compact support uses the given
-open comparison followed by the given proper comparison, retaining the hidden
-open intermediate and its Good witness. All six laws follow from these exact
-formulas. No constructibility-to-Tor implication, generator square, or finite
-projection assertion is used. -/
+there is no statement about structural-generator maps or finite projections. -/
 theorem integralComparisonRecursionLaws (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (o : Operations l E) (a : AmbientModels l E o) :
     ∃ c : ExpressionRecursion.Comparisons l E D o, Nonempty (RecursionLaws l E D o a c) := by

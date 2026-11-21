@@ -22,9 +22,10 @@ Let `D₁ ⟶ D₂` be a morphism of strict-localization slice traits over a cha
 `R₁ ⟶ R₂`, with composita `Lᵢ = Ωᵢ(Sᵢ(x))`. In characteristic `p > 0`, an Artin–Schreier
 equation over `L₁` which has a root in `L₂` has a root in `L₁`
 (`SliceTrait.Hom.exists_artinSchreier_root_of_charP`). This is the stability theorem of Ohm and
-Kuhlmann for `L₁ = Ω₁(x)^{sh}` in the case needed (F.-V. Kuhlmann, *Elimination of
-ramification I*, Trans. AMS 362 (2010), Prop. 4.14), via the abstract normal form
+Kuhlmann for `L₁ = Ω₁(x)^{sh}` in the case needed, via the abstract normal form
 `exists_artinSchreier_root_of_approx`.
+
+## Implementation details
 
 The inputs are:
 * the approximation of the elements of `L₁` by combinations of lifts of a Frobenius-closed basis
@@ -32,6 +33,11 @@ The inputs are:
 * the residue `x̄` of the coordinate is not a `p`-th power in the residue field of `L₂`
   (`SliceTrait.valuation_coord_sub_pow_eq_one`);
 * Hensel's lemma for Artin–Schreier equations over `L₁` (`SliceTrait.exists_artinSchreier_root`).
+
+## References
+
+* F.-V. Kuhlmann, *Elimination of ramification I: the generalized stability theorem*,
+  Trans. AMS 362 (2010), Proposition 4.14
 -/
 
 @[expose] public section
@@ -56,9 +62,7 @@ local notation "𝒟" => sliceTraitOfStrictLocalization (a₁ := a) (b₁ := b) 
 omit [IsAlgClosed Ω] in
 include ha halg hb in
 /-- **The residue of the coordinate is not a `p`-th power** in the residue field of the
-compositum `L = Ω(S(x))`, `p` the residual characteristic. This reduces to the case of a complete
-`R` (`valuation_a_sub_pow_eq_one_of_complete`) along the morphism of slice traits induced by the
-completion `R ⟶ R̂`. -/
+compositum `L = Ω(S(x))`, `p` the residual characteristic. -/
 theorem valuation_coord_sub_pow_eq_one (p : ℕ) [Fact p.Prime] [CharP (ResidueField R) p]
     {x : (𝒟).R} (hx : (𝒟).b x = traitSliceCoord κ) {z : (𝒟).Ω}
     (hz : letI := a.toAlgebra; z ∈ (𝒟).compositum)

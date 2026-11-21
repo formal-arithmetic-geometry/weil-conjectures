@@ -12,7 +12,14 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSu
 
 /-! # Augmented open reduction descent
 
-Source: Stacks Project, Modules on Sites, Tags 0E8I and 03DI.
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0GL1]
 -/
 
 @[expose] public noncomputable section
@@ -38,19 +45,7 @@ private theorem cancellation
   simp only [Category.assoc, ← F.map_comp_assoc, e.inv_hom_id,
     F.map_id, Category.id_comp, d.inv_hom_id, Category.comp_id]
 
-/-- Descent of an ordinary strict open scalar comparison through augmented computations.
-Source: Stacks 06YS, 06YY, 0941 and 0GL1.
-
-Proof: Compute ordinary quotient tensor simultaneously on flat-term K-flat complexes.
-The scalar-unit maps give a strict augmentation whose transpose under the fixed reduction
-and total-limit adjunction determines the computation comparison uniquely. Exact open
-extension and the K-flat preservation hypothesis supply the same computation on the
-extended complex. Conjugate the localization of the ordinary chain comparison by these
-two computation isomorphisms. Naturality holds first for chain maps, then for inverses of
-quasi-isomorphisms. The localization of flat-term K-flat models is equivalent to the
-ordinary derived category, so this descends uniquely to all derived arrows. Each component
-is an isomorphism, hence the descended transformation is a natural isomorphism. Its
-construction gives the representative square, with the actual scalar-unit augmentation. -/
+/-- Descent of an ordinary strict open scalar comparison through augmented computations. -/
 theorem openSemilinearReductionDescent
     (SX : CoefficientDerivedSystemCalculus l E X)
     (SU : CoefficientDerivedSystemCalculus l E U)

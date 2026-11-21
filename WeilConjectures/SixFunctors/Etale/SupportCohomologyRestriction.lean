@@ -324,8 +324,7 @@ noncomputable def supportRestrictionMap (F : DerivedCategory (Sheaf T.smallEtale
       ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) c.openComplement.ι).unit.app _) ≫
     (supportRestrictionIso₃ Λ b c F).inv
 
-/-- Restriction triangle inside a closed
-support
+/-- Restriction triangle inside a closed support.
 
 Let `b : B ⟶ T`, `c : C ⟶ T` be closed immersions, `v : V ⟶ T` the open complement of `C`, and
 `d : D ⟶ T` a closed immersion onto `B ∩ C`; `B ∩ V` is the closed subscheme `B ×_T V` of `V`.

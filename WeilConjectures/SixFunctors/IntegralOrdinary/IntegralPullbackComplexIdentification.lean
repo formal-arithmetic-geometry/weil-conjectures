@@ -14,7 +14,13 @@ import all WeilConjectures.WeilSheaf.Ordinary.OrdinaryIntegralPullbackConstructi
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 
-/-! # Identification of the ordinary cochain pullback model -/
+/-! # Identification of the ordinary cochain pullback model
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 06YY]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -110,16 +116,7 @@ private theorem pullIso_factor {X Y : Scheme.{u}} (f : X ⟶ Y)
     (F.mapDerivedCategoryFactors.hom.app P)).trans hfac
 
 /-- The ordinary and ringed cochain pullbacks agree, preserving inverse unit sections
-and the derived computation map.
-Source: Stacks 03D2 and 06YY.
-
-Proof: the direct-image ring maps agree, and the resulting pushforward isomorphism
-is identity on sections. Uniqueness of left adjoints therefore identifies module
-pullback and preserves unit sections. Apply it degreewise to complexes. The canonical
-comparison of derived functors preserves their universal computation maps; naturality
-across the cochain-to-homotopy quotient and cancellation of its comparison isomorphisms
-give the displayed factorization. The inverse complex comparison carries ordinary unit
-sections back to ringed unit sections by the inverse identity. -/
+and the derived computation map. -/
 theorem pullbackComplexIdentification {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ b : OpenFactorCoherence.pullCx l E f ≅ ordinaryIntegralPullComplex l E f,
       (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ)

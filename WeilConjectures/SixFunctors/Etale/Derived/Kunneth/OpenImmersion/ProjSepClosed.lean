@@ -15,11 +15,14 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 
 Let `K` be a separably closed field, `j : U ⟶ X` an open immersion of `K`-schemes of finite type,
 `Y` a proper `K`-scheme, `W = X ×_K Y` and `V = U ×_X W`. If the base change maps of a sheaf `F`
-are isomorphisms on the geometric stalks at all non-closed points of `W`, then the cone `Q` of the
-derived base change map `β` at `F` has vanishing stalks at all non-closed points, so `Q = 0` as
-soon as `RΓ(W, Q) = 0`; and `RΓ(W, β)` is an
-isomorphism by the Künneth formula with one proper factor. This is the projective case of the proof of blueprint
-`corollary-open-direct-image-over-field--2`, after the reduction to a separably closed ground field.
+are isomorphisms on the geometric stalks at all non-closed points of `W`, then they are
+isomorphisms (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isProper_of_isSepClosed`).
+
+## Implementation details
+
+The cone `Q` of the derived base change map `β` at `F` has vanishing stalks at all non-closed
+points, so `Q = 0` as soon as `RΓ(W, Q) = 0`; and `RΓ(W, β)` is an isomorphism by the Künneth
+formula with one proper factor.
 -/
 
 @[expose] public section
@@ -60,9 +63,9 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The Künneth input of the projective case:
-over a separably closed field, `RΓ(W, -)` maps the exchange morphism `β : q₁^* Rj_* E ⟶ Rh_* e^* E`
-to an isomorphism, for `Λ` killed by an integer `n ≠ 0`. -/
+/-- Over a separably closed field, `RΓ(W, -)` maps the exchange morphism
+`β : q₁^* Rj_* E ⟶ Rh_* e^* E` to an isomorphism, for `Y` proper and `Λ` killed by an integer
+`n ≠ 0`. -/
 theorem Etale.isIso_rightDerivedGlobalSections_map_unboundedExchange_of_isProper {K : Type u}
     [Field K] [IsSepClosed K] {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K))
     (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsProper aY]
@@ -77,10 +80,9 @@ theorem Etale.isIso_rightDerivedGlobalSections_map_unboundedExchange_of_isProper
     j e h sq E
   rw [nsmul_eq_mul, hΛ, zero_mul]
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`, the projective case over a separably
-closed field: for `K` separably closed and `Y` proper over `K`, if the base change map at `F` is an
-isomorphism on the geometric stalks at all non-closed points of `W = X ×_K Y`, then it is an
-isomorphism. -/
+/-- Base change along open immersions, the projective case over a separably closed field: for `K`
+separably closed and `Y` proper over `K`, if the base change map at `F` is an isomorphism on the
+geometric stalks at all non-closed points of `W = X ×_K Y`, then it is an isomorphism. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isProper_of_isSepClosed {K : Type u}
     [Field K] [IsSepClosed K] {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K))
     (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aX] [QuasiCompact aX] [IsProper aY]

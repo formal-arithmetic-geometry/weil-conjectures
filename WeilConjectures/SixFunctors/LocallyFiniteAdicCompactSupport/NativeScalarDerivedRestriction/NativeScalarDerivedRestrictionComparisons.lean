@@ -10,7 +10,11 @@ public import WeilConjectures.CategoryTheory.EquivalenceCubeTransport.Equivalenc
 
 /-! # Canonical derived comparisons for a scalar presentation
 
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites, Tag 0D6E.
+## References
+
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +40,7 @@ attribute [local instance] nativeScalarModuleClosed nativeScalarModuleSymmetric
   nativeScalarModuleTensorFour nativeScalarModuleGoodTensorLeft nativeScalarModuleGoodTensorRight
   nativeScalarIntegralExact
 
-/-- The two localized restrictions, in the specified order.
-Source: the scalar direct-image proof, exact coefficient restrictions. -/
+/-- The two localized restrictions, in the specified order. -/
 abbrev compositeRestriction (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) (T : Scheme.{u}) :
     DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
@@ -48,8 +51,7 @@ abbrev compositeRestriction (l : ℕ) [Fact l.Prime]
     (Profinite.padicSubfieldRingObjToPadicAlgCl l E) T)).mapDerivedCategory ⋙
     (Mod.comap (padicIntegersToPadicSubfield T l E)).mapDerivedCategory
 
-/-- The positive paste of the two specified condensed comparison isomorphisms.
-Source: Stacks, Cohomology on Sites, Tag 0D6E. -/
+/-- The positive paste of the two specified condensed comparison isomorphisms. -/
 def positiveSquare (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) {U V : Scheme.{u}} (g : U ⟶ V) :
     CondensedRing.moduleObjectDerivedPushforward (Profinite.padicAlgClRingObj l) g ⋙
@@ -72,8 +74,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
         (P.integralEquivalence T).inverse ≅
       (P.closureEquivalence T).inverse ⋙ proEtaleRingRestrictScalars (a.map T))
 
-/-- Localize the ordinary inverse restriction comparison with explicit composition factors.
-Source: exact localization and composition of the two coefficient restrictions. -/
+/-- Localize the ordinary inverse restriction comparison with explicit composition factors. -/
 def inverseRestriction (T : Scheme.{u}) :
     compositeRestriction l E T ⋙ (P.integralEquivalence T).inverse.mapDerivedCategory ≅
       (P.closureEquivalence T).inverse.mapDerivedCategory ⋙
@@ -91,8 +92,7 @@ def inverseRestriction (T : Scheme.{u}) :
         (H := (P.closureEquivalence T).inverse)
         (J := proEtaleRingRestrictScalars (a.map T)) (k T)
 
-/-- The corresponding forward restriction comparison.
-Source: transport through the derived presentation equivalences and their units. -/
+/-- The corresponding forward restriction comparison. -/
 def forwardRestriction (T : Scheme.{u}) :
     (proEtaleRingRestrictScalars (a.map T)).mapDerivedCategory ⋙
         (P.integralEquivalence T).functor.mapDerivedCategory ≅
@@ -104,8 +104,7 @@ def forwardRestriction (T : Scheme.{u}) :
 
 variable {U V : Scheme.{u}} (g : U ⟶ V)
 
-/-- The derived inverse integral direct-image comparison.
-Source: canonical right derivation of the ordinary comparison through equivalences. -/
+/-- The derived inverse integral direct-image comparison. -/
 def inverseIntegralPush
     (x : CondensedRing.lowerStar (Profinite.padicIntegersRingObj l E.1) g ⋙
         (P.integralEquivalence V).inverse ≅
@@ -119,8 +118,7 @@ def inverseIntegralPush
     (proEtaleRingModuleDirectImage g (R.ring V) (R.ring U) (R.pull g))
     (P.integralEquivalence U) (P.integralEquivalence V) x
 
-/-- The derived inverse closure direct-image comparison.
-Source: canonical right derivation of the ordinary comparison through equivalences. -/
+/-- The derived inverse closure direct-image comparison. -/
 def inverseClosurePush
     (y : CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) g ⋙
         (P.closureEquivalence V).inverse ≅
@@ -134,8 +132,7 @@ def inverseClosurePush
     (proEtaleRingModuleDirectImage g (S.ring V) (S.ring U) (S.pull g))
     (P.closureEquivalence U) (P.closureEquivalence V) y
 
-/-- The forward integral direct-image comparison.
-Source: equivalence units applied to inverseIntegralPush. -/
+/-- The forward integral direct-image comparison. -/
 def forwardIntegralPush
     (x : CondensedRing.lowerStar (Profinite.padicIntegersRingObj l E.1) g ⋙
         (P.integralEquivalence V).inverse ≅
@@ -151,8 +148,7 @@ def forwardIntegralPush
     (CondensedRing.lowerStar (Profinite.padicIntegersRingObj l E.1) g).rightDerivedFunctor
     (inverseIntegralPush l E a P g x)
 
-/-- The forward closure direct-image comparison.
-Source: equivalence units applied to inverseClosurePush. -/
+/-- The forward closure direct-image comparison. -/
 def forwardClosurePush
     (y : CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) g ⋙
         (P.closureEquivalence V).inverse ≅

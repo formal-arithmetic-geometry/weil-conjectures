@@ -19,11 +19,7 @@ subset (`AlgebraicGeometry.Etale.toPresheafFiber_eq_zero_iff_mem_vanishingSet`).
 Let `f : X ⟶ Y` be an integral morphism and `y` a geometric point of `Y` with algebraically
 closed residue field. A germ of `f_* G` at `y` all of whose restrictions to the geometric points
 of `X` over `y` vanish is zero
-(`AlgebraicGeometry.Etale.eq_zero_of_forall_stalkRestrict_eq_zero`): the germ is a section `σ`
-of `G` over `U ×_Y X`, the closed complement of the vanishing set of `σ` contains no point
-`(u, t)`, so it disappears over a smaller pointed étale neighbourhood of `y`
-(`AlgebraicGeometry.Scheme.Hom.exists_hom_preimage_eq_bot_of_isIntegralHom`), on which `σ`
-vanishes.
+(`AlgebraicGeometry.Etale.eq_zero_of_forall_stalkRestrict_eq_zero`).
 -/
 
 @[expose] public section

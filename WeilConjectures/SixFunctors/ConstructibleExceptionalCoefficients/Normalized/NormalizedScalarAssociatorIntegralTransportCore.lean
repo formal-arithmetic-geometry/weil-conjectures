@@ -9,7 +9,13 @@ public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.
 public import WeilConjectures.DeligneLaumon.SfScalarExtensionComposition
 import WeilConjectures.SixFunctors.Completed.CompletedScalarCanonicalAssociatorFormula
 
-/-! # Ambient core of integral transport for a normalized scalar associator -/
+/-! # Ambient core of integral transport for a normalized scalar associator
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10, Lemma 3.4.12 and
+  Proposition 3.5.1
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -58,15 +64,9 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
--- The original interface retains hB and hD; the endpoint equalities suffice here.
+-- The interface retains `hB` and `hD`; the endpoint equalities suffice here.
 set_option linter.unusedVariables false in
-/-- Ambient equality underlying integral normalized scalar transport.
-Source: Definition 3.4.10 and Lemma 3.4.12, pp. 22-23; Proposition 3.5.1, p. 24.
-Proof: after applying the faithful finite-Tor integral inclusion, expand the normalized
-associator equation using the three realization equalities and inverse-realization
-normalizations; identify the resulting ordinary balanced tensor map with the unique
-normalized completed integral associator.
--/
+/-- Ambient equality underlying integral normalized scalar transport. -/
 theorem normalized_scalar_associator_integral_transport_core
     (E L M : FieldStage.{max u v} l)
     (i : E.carrier →ₐ[Padic l] L.carrier) (j : L.carrier →ₐ[Padic l] M.carrier)

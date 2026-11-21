@@ -10,7 +10,11 @@ import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearNaturalIsoAssembly
 
 /-! # Natural strict-system assembly of the ordinary open tensor comparison
 
-Source: Stacks Project, Tags 03DJ, 0E8I and 0941.
+## References
+
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -74,15 +78,7 @@ private theorem extensionTransitions
     l E j o AX AU o.openSystems.restrictionSections tensor M h
 
 -- Reconcile the concrete coefficient categories without unfolding chosen scalar functors.
-/-- Assemble the normalized finite extension tensor comparisons as a strict-system iso.
-Source: Stacks 03DJ, 0E8I and 0941.
-
-Proof: use the existing openScalarTransitionCompatibility. Its hypothesis on
-restriction evaluation is precisely o.openSystems.restrictionSections. Thus the
-finite comparisons commute with all coefficient transitions. Apply the proved
-naturalIsoOfEvaluation_exists to assemble them into a natural isomorphism, with
-the exact finite normalization. No invertibility or transition statement is left
-unproved in this assembly. -/
+/-- Assemble the normalized finite extension tensor comparisons as a strict-system iso. -/
 theorem ordinaryExtensionTensorAssembly
     (AX : OpenSemilinearTensor.OrdinaryReduction l E X)
     (AU : OpenSemilinearTensor.OrdinaryReduction l E U)

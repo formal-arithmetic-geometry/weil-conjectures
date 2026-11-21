@@ -17,7 +17,7 @@ For a tower of compactifications `𝒯` of composable morphisms `f`, `g`, `h`
 triangles of `𝒯` agree (`compIso_tower`): this is a pasting identity for the exchange maps of
 the squares of the tower. Combined with the independence of the triangles, it gives the
 associativity of the canonical composition isomorphism `F.lowerShriekCompIso`
-(`lowerShriekCompIso_assoc`, blueprint `proposition-composition-base-change-rf-shriek--1`).
+(`lowerShriekCompIso_assoc`).
 -/
 
 @[expose] public section

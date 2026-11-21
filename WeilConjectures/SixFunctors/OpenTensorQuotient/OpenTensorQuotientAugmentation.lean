@@ -14,12 +14,17 @@ import Mathlib.Algebra.CharP.CharAndCard
 
 /-! # Open reduction and the augmented strict tensor square
 
-Source: Stacks Project, sites-modules.tex Tag 0E8I; sites-cohomology.tex Tag 0GL1;
-Bhatt--Scholze, Lemma 6.5.8(2),(3), p.50.
+## Implementation details
 
 The index n denotes the positive exponent n+1. The square is imposed on strict
 augmented towers of complexes, before applying localization. All total tensors
 are the published signed direct-sum total tensors, including for unbounded inputs.
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8(2),(3), p. 50
 -/
 
 @[expose] public noncomputable section
@@ -85,45 +90,7 @@ private theorem finiteGeometry_proof [IsNoetherian X]
 
 /-- Canonical open reduction and the strict augmented tensor square, with
 constructibility, unchanged intervals and partition compatibility. No finite-Tor
-condition is imposed; all complexes and total tensors are unbounded.
-
-Source: Stacks Project, sites-modules.tex Tag 0E8I; sites-cohomology.tex Tag 0GL1;
-Bhatt--Scholze, Lemma 6.5.8(2),(3), p.50.
-
-Proof:
-1. Choose flat-term K-flat resolutions. Apply
-lem-sf-open-semilinear-tensor-model and lem-sf-open-tensor-normalization: termwise
-open extension computes j_! and its total tensor map is the inverse-open-unit
-transpose. Restriction and coefficient pullback preserve these representatives
-by lem-weil-pbc-ringed-topoi-derived-tensor-pullback.
-2. The simultaneous scalar map sends [x] tensor a to [x tensor a restricted to U].
-It respects every quotient and scalar unit. Its inverse has the prescribed
-open-unit transpose normalization.
-lem-sf-integral-open-reduction-comparison identifies its localization with r_j(K)
-and proves completeness of j_!K.
-3. Scalar restriction retains the same additive sheaves and summand maps before
-and after extension, hence commutes with extension on entire strict systems.
-4. Finite type over k makes X Noetherian and j quasi-compact. Apply
-lem-sf-open-finite-constructibility-interval to every quotient: cohomology
-commutes with exact extension, its same interval works, and add the reduced
-closed complement with zero sheaf to any partition. Intersect partitions with U.
-lem-sf-immersion-completed-pullback-comparison gives restriction completeness
-and the same uniform interval, proving both integral constructibility claims.
-5. Balancing sends (x tensor y) tensor a to (x tensor a) tensor (y tensor 1);
-the inverse multiplies the coefficients. These preserve bidegrees and commute
-with d(x tensor y)=dx tensor y+(-1)^deg(x) x tensor dy and every quotient.
-Thus they compute the canonical tensor change of rings on K-flat representatives.
-6. Compose the finite open tensor map with r on the first factor. Both it and
-reduction of the integral map send ([x] tensor y) tensor a to
-[(x tensor a|_U) tensor (j^*y tensor 1)], before localization, for every quotient.
-Sheafification and total-summand uniqueness give the strict tensor comparison.
-7. Both augmented routes send [x] tensor y to
-[(x tensor 1) tensor (j^*y tensor 1)]. All quotient maps preserve 1, so these are
-equal strict complex-system maps, hence equal after localization. The first
-Roos coordinate is this tensor and the shifted coordinate is zero, exactly as
-in def-sf-tensor-completion-comparison and the normalized strict-limit comparison
-lem-cbc-exact-product-functor-strict-limit. No commutation of j_! with limits or
-faithfulness of separate derived evaluations is used. -/
+condition is imposed; all complexes and total tensors are unbounded. -/
 theorem openTensorQuotientAugmentation (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)
     [U.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (U ↘ Spec (.of D.k))] [QuasiCompact (U ↘ Spec (.of D.k))]

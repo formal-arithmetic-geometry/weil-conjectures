@@ -17,7 +17,7 @@ Integral coefficients impose one Tor interval for all positive finite reductions
 At field coefficients the notation is an alias for the bounded constructible category
 itself, including its common-stage interpretation at algebraically closed coefficients;
 `finiteTorFieldCoefficientCategory` expresses this alias parametrically in that category.
-Triangulated closure is supplied by separate statement nodes, not by these definitions.
+Triangulated closure is proved separately, not by these definitions.
 -/
 
 @[expose] public section
@@ -31,8 +31,7 @@ open CategoryTheory AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
 /-- The finite-level predicate defining `Dᵇ_ctf(Y,A_{E,n})`: bounded constructibility
-and finite Tor amplitude. Its full subcategory is `finiteTorConstructibleCategory`.
- -/
+and finite Tor amplitude. Its full subcategory is `finiteTorConstructibleCategory`. -/
 noncomputable def finiteTorConstructible
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -41,8 +40,7 @@ noncomputable def finiteTorConstructible
   intrinsicFiniteTorsionConstructible l E n hn Y ⊓
     fun K ↦ HasFiniteProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) K
 
-/-- The full finite-level constructible category of finite Tor amplitude.
- -/
+/-- The full finite-level constructible category of finite Tor amplitude. -/
 noncomputable abbrev finiteTorConstructibleCategory
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n)
@@ -51,8 +49,7 @@ noncomputable abbrev finiteTorConstructibleCategory
 
 /-- The integral predicate defining `Dᵇ_ctf(Y,O_E)`: membership in the actual
 bounded constructible derived-complete category and a single ordered Tor interval
-for all reductions. Index `n` denotes exponent `n+1`, so every positive level occurs.
- -/
+for all reductions. Index `n` denotes exponent `n+1`, so every positive level occurs. -/
 noncomputable def finiteTorConstructibleIntegral
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]
@@ -63,8 +60,7 @@ noncomputable def finiteTorConstructibleIntegral
       HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E (n + 1))
         ((scalarReductionDerivedExtension.{u, u} l E Y n).obj K) a b
 
-/-- The full integral finite-Tor subcategory of `Dᵇ_c(Y,O_E)`.
- -/
+/-- The full integral finite-Tor subcategory of `Dᵇ_c(Y,O_E)`. -/
 noncomputable abbrev finiteTorConstructibleIntegralCategory
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E]

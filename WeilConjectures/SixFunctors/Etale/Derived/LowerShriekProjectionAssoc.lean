@@ -18,20 +18,19 @@ For `f : X ⟶ Y` with a compactification `c`, the projection map
 of the derived tensor products: for `K` on `X` and `L, N` on `Y` the square
 ```
 (Rf_!K ⊗ᴸ L) ⊗ᴸ N --PF ▷ N--> Rf_!(K ⊗ᴸ Lf^*L) ⊗ᴸ N --PF--> Rf_!((K ⊗ᴸ Lf^*L) ⊗ᴸ Lf^*N)
-        | α | Rf_! α
-        v v
+        |                                                    | Rf_! α
+        v                                                    v
 Rf_!K ⊗ᴸ (L ⊗ᴸ N) ----PF----> Rf_!(K ⊗ᴸ Lf^*(L ⊗ᴸ N)) --Rf_!(K ◁ δ)--> Rf_!(K ⊗ᴸ (Lf^*L ⊗ᴸ Lf^*N))
 ```
-commutes, where `δ` is the tensor comparison of `Lf^*`
-(`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`).
+commutes, where the left vertical map is the associator `α` and `δ` is the tensor comparison of
+`Lf^*` (`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`).
+
+## Implementation details
 
 This is the associativity of the projection map of a composite
 (`CategoryTheory.Adjunction.compProjectionMap_associativity`) applied to `Rg_*` and the extension
 by zero `i_!`, using the monoidal coherence of their ingredients proved in
 `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionMonoidal`.
-
-It is the formal input of the compatibility of the projection formula with finite reduction
-of the coefficients, blueprint `sk-prop-sf-pf-reduction`.
 -/
 
 @[expose] public section

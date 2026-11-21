@@ -9,7 +9,13 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalI
 
 /-! # The opposite compact-support mate for a regular quotient
 
-Source: Zheng, Lemma 5.22 and Proposition 5.26.
+## References
+
+* Zheng, Lemma 5.22 and Proposition 5.26
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0A70]
+* [Stacks, Tag 0A71]
+* [Stacks, Tag 0GL6]
 -/
 
 @[expose] public noncomputable section
@@ -23,27 +29,7 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The opposite mate of the prescribed left scalar comparison is invertible
-under reverse regular-quotient adjunctions. No exceptional right mate appears here.
-Source: Zheng, Lemma 5.22 and Proposition 5.26; Stacks Tags 07A6, 0A70, 0A71 and 0GL6.
-Proof: identify both reverse adjunctions with shifted restriction using the regular
-Koszul resolution of the actual quotient coefficient sheaf. The algebra-valued dual
-of the quotient is its shift by [-1]; its augmentation and trace fix the reverse
-unit and counit. Left-adjoint uniqueness transports these identifications to ax
-and ay, so changing either presentation conjugates the mate by isomorphisms.
-Transpose the normalized scalar-extension comparison in these Koszul coordinates.
-Its forward scalar transpose is the actual proper/open restriction square, by
-d.q_normalized and the left and scalar realization equations. In the opposite
-transpose, the Koszul tensor/coinduction triangle identities cancel the duality
-identifications. What remains is the inverse restriction square followed by [-1].
-For the open factor this equation is fixed by the open adjunction unit. For the
-proper factor it is fixed on K-injective representatives by the derived unit and
-its ordinary sectionwise identity comparison. Naturality pastes the two equations;
-shift compatibility identifies their composite with the shifted compact-support
-restriction comparison. Each factor is invertible. Faithfulness of the finite-Tor
-full inclusions reflects this invertibility on the restricted categories. Transport
-by left-adjoint uniqueness then proves it for the specified ax and ay. Positivity
-of n+1 ensures the regular resolution also covers n=0; zero objects and empty
-schemes obey the same unit, trace and pasting identities. -/
+under reverse regular-quotient adjunctions. -/
 theorem regularQuotientOppositeCompactSupportMate
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

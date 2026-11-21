@@ -35,7 +35,11 @@ import Mathlib.CategoryTheory.Triangulated.Subcategory
 
 /-! # Completeness of bounded finite-projective completed-coefficient sheaf complexes
 
-Source: Bhatt--Scholze, Lemma 6.5.5, finite-projective devissage.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.5
+* [Stacks, Tag 099I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -68,18 +72,7 @@ private theorem complete_local_iff (K : IntegralOnSlice.D l E T none) :
   exact (roosIntrinsicCompletenessEquivalence p l (by omega) E T d hd K P e).out 1 2
 
 /-- A bounded complex of retracts of finite free completed-coefficient sheaves is
-complete, with no hypothesis on the scheme or its residue characteristics.
-
-Source: Bhatt--Scholze, Lemma 6.5.5; Stacks Tags 099I and 0941.
-
-Proof: use the intrinsic local-Hom criterion for the canonical quotient tower.
-For each localized section, restriction followed by internal Hom is triangulated.
-The free-cell theorem makes its value on every finite free cell zero. A splitting
-into and out of a free module makes the value on a projective term a retract of
-zero, hence zero. Its kernel is a triangulated subcategory. Bounded brutal-truncation
-induction now makes its value on the entire complex zero. Apply the local-Hom
-criterion in reverse. The argument allows rank zero, inverted bounds, arbitrary
-sheaf-linear differentials, the empty scheme and the zero complex. -/
+complete, with no hypothesis on the scheme or its residue characteristics. -/
 theorem boundedProjectiveComplex_complete
     (P : CochainComplex (scalarReductionSource l E T) ℤ)
     (hb : ∃ a b : ℤ, ∀ k : ℤ, k < a ∨ b < k → IsZero (P.X k))

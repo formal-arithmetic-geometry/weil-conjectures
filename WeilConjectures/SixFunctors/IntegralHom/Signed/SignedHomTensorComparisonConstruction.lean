@@ -74,8 +74,10 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Naturality of the uncurried tensor--Hom construction
 
-Source: the finite-free construction in the first paragraph of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 08J9 and 0A8X.
+## References
+
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 0A8X]
 -/
 
 @[expose] public section
@@ -155,11 +157,7 @@ attribute [local instance 5000] signedComplexBraided
 
 omit Y R
 
-/-- The uncurry expression for tensor--Hom exchange is natural in its coefficient object.
-
-Proof: move the coefficient map through the first associator, through the middle
-braiding, and through the inverse associator; interchange it with evaluation
-on the other tensor factor. Each move is a monoidal naturality identity. -/
+/-- The uncurry expression for tensor--Hom exchange is natural in its coefficient object. -/
 theorem braidedTensorExchange_naturality {V : Type a₀} [Category.{b₀} V]
     [MonoidalCategory V] [BraidedCategory V]
     (M P I Q Q' : V) (ev : M ⊗ P ⟶ I) (g : Q ⟶ Q') :

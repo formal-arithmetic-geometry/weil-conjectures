@@ -160,12 +160,8 @@ noncomputable def derivedTensorRightPullback :
         DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
   D((g)^*[A]) ⋙ derivedTensorRightFunctor A Z
 
-/-- The canonical identification `Lg^* Λ_Y ≅ Λ_Z` of the units, the unit comparison asked for
-in the TODO above.
-
-The unit `Λ_Y` is the image in `D(Y_ét)` of the unit sheaf placed in degree `0`. Since `g^*` is
-exact, `Lg^*` is computed by applying `g^*` degreewise, and `g^*` sends the unit sheaf of `Y`
-to that of `Z` because it is strong monoidal. -/
+/-- The canonical identification `Lg^* Λ_Y ≅ Λ_Z` of the units, where `Λ_Y` is the image in
+`D(Y_ét)` of the unit sheaf placed in degree `0`. -/
 noncomputable def leftDerivedUpperStarUnitIso : (L((g)^*[A])).obj (𝟙_ _) ≅ 𝟙_ _ :=
   (leftDerivedUpperStarIsoMapDerivedCategory A g).app _ ≪≫
     D((g)^*[A]).mapIso ((DerivedCategory.quotientCompQhIso _).app
@@ -325,11 +321,7 @@ noncomputable def leftDerivedUpperStarMonoidal : L((g)^*[A]).Monoidal :=
 end Monoidal
 
 /-- The derived pullback `Lg^* : D(Y_ét) ⥤ D(Z_ét)` is a monoidal functor for the derived tensor
-products. This is the monoidality of derived pullback in blueprint
-`prose-03-02` (within `theorem-f-shriek-ell-adic-coefficients--4`).
-
-The monoidal structure is `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`, whose
-tensor comparison is `leftDerivedUpperStarTensorIso`. -/
+products, with monoidal structure `AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`. -/
 theorem nonempty_monoidal_leftDerivedUpperStar [Etale.UpperStarPreservesFlat A] :
     Nonempty (L((g)^*[A])).Monoidal :=
   ⟨leftDerivedUpperStarMonoidal A g⟩

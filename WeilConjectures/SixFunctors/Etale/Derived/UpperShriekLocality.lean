@@ -16,24 +16,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 For torsion coefficients `Λ`, the exceptional inverse image `Rf^!` on the unbounded derived
 categories of étale sheaves is the right adjoint of `Rf_!`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction`). This file proves the two
-lemmas of blueprint `proposition-composition-open-restriction-compactifications-f--1` about its
+(`AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction`). This file proves its
 behaviour under open immersions and compactifications:
 
-* `proposition-composition-open-restriction-compactifications-f`: for a quasi-compact open immersion
-`j`, the extension by
-  zero `Dj_!` is left adjoint to `Dj^*` and `Rj^! ≅ Dj^*` is the unique isomorphism compatible
-  with the adjunctions; consequently `u^* Rf^! ≅ Rf_V^! v^*` for an open `v : V ⟶ Y` with
-  preimage `u : X_V ⟶ X`, and `j^* Rf^! ≅ R(j ≫ f)^!`; and isomorphisms of `D(X_ét, Λ)` are
-  detected on an open covering.
-* `proposition-composition-open-restriction-compactifications-f--6`: for a compactification
-`f = i ≫ p`, the composite
-  `Rp^! ⋙ Di^*` is right adjoint to `Rf_!(c) = Di_! ⋙ Rp_*`, with counit the composite of the
-  two counits, and `Rf^! ≅ Rp^! ⋙ Di^*` is the unique isomorphism compatible with the
-  adjunctions.
+* for a quasi-compact open immersion `j`, the extension by zero `Dj_!` is left adjoint to `Dj^*`
+  and `Rj^! ≅ Dj^*` is the unique isomorphism compatible with the adjunctions; consequently
+  `u^* Rf^! ≅ Rf_V^! v^*` for an open `v : V ⟶ Y` with preimage `u : X_V ⟶ X`, and
+  `j^* Rf^! ≅ R(j ≫ f)^!`; and isomorphisms of `D(X_ét, Λ)` are detected on an open covering;
+* for a compactification `f = i ≫ p`, the composite `Rp^! ⋙ Di^*` is right adjoint to
+  `Rf_!(c) = Di_! ⋙ Rp_*`, with counit the composite of the two counits, and
+  `Rf^! ≅ Rp^! ⋙ Di^*` is the unique isomorphism compatible with the adjunctions.
 
-The blueprint states these on the localizing subcategories `Loc(Dctf)`; on the étale sites
-with finite coefficients they hold on the whole unbounded derived categories.
+These hold on the whole unbounded derived categories, not only on the localizing subcategories
+`Loc(Dctf)`.
 
 ## Main statements
 
@@ -62,11 +57,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 section Conservative
 
-/-- Blueprint `proposition-composition-open-restriction-compactifications-f`, part
-(3): **isomorphisms are detected on an open covering** (more generally, along any jointly surjective
-family `a_i : U_i ⟶ X`): a morphism `φ` of `D(X_ét, Λ)` whose restrictions `D(a_i^*) φ` are all
-isomorphisms is an isomorphism. The pullbacks are exact, so they commute with the cohomology
-sheaves, and the restrictions along a jointly surjective family reflect isomorphisms of sheaves. -/
+/-- **Isomorphisms are detected on an open covering** (more generally, along any jointly
+surjective family `a_i : U_i ⟶ X`): a morphism `φ` of `D(X_ét, Λ)` whose restrictions
+`D(a_i^*) φ` are all isomorphisms is an isomorphism. -/
 theorem isIso_of_isIso_mapDerivedCategoryUpperStar_map_of_jointlySurjective {X : Scheme.{u}}
     {ι : Type u} {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X)
     (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
@@ -103,15 +96,10 @@ noncomputable def rightDerivedUpperShriekOpenImmersionIso :
   (rightDerivedUpperShriekAdjunction _ j).rightAdjointUniq
     (rightDerivedLowerShriekOpenImmersionAdjunction Λ j)
 
-/-- Blueprint `proposition-composition-open-restriction-compactifications-f`, part (1): Open
-immersions and open restriction for `f^!`.
-
-For a quasi-compact open immersion `j : U ⟶ X` and finite `Λ`, the extension by zero
-`Dj_!` is left adjoint to `Dj^*`
-(`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`),
-`Rj_! ≅ Dj_!` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoOfIsOpenImmersion`), and
-there is a unique isomorphism `Rj^! ≅ Dj^*` compatible with the adjunctions `Rj_! ⊣ Rj^!` and
-`Rj_! ⊣ Dj^*`, namely `AlgebraicGeometry.Etale.rightDerivedUpperShriekOpenImmersionIso`. -/
+/-- Open immersions and open restriction for `f^!`: for a quasi-compact open immersion
+`j : U ⟶ X` and finite `Λ`, there is a unique isomorphism `Rj^! ≅ Dj^*` compatible with the
+adjunctions `Rj_! ⊣ Rj^!` and `Rj_! ⊣ Dj^*`, namely
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekOpenImmersionIso`. -/
 theorem existsUnique_rightDerivedUpperShriekOpenImmersionIso :
     ∃! e : R(j)^![Λ] ≅ D((j)^*[ModuleCat.{u + 1} Λ]),
       (rightDerivedUpperShriekAdjunction _ j).ofNatIsoRight e =
@@ -137,12 +125,9 @@ noncomputable def rightDerivedUpperShriekCongr {X Y : Scheme.{u}} {g g' : X ⟶ 
   ((rightDerivedUpperShriekAdjunction _ g).ofNatIsoLeft
     (rightDerivedLowerShriekCongr Λ h)).rightAdjointUniq (rightDerivedUpperShriekAdjunction _ g')
 
-/-- Blueprint `proposition-composition-open-restriction-compactifications-f`, part (2): **`Rf^!`
-commutes with restriction to an open of the target**. Let `v : V ⟶ Y` and `u : X_V ⟶ X` be
-quasi-compact open immersions and `f_V : X_V ⟶ V` with `u ≫ f = f_V ≫ v` (e.g. `X_V = f⁻¹(V)`). Then
-`u^* Rf^! ≅ Rf_V^! v^*`: by the composition law for `R(-)^!`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`) and part (1),
-`u^* Rf^! ≅ Ru^! Rf^! ≅ R(u ≫ f)^! = R(f_V ≫ v)^! ≅ Rf_V^! Rv^! ≅ Rf_V^! v^*`. -/
+/-- **`Rf^!` commutes with restriction to an open of the target**. Let `v : V ⟶ Y` and
+`u : X_V ⟶ X` be quasi-compact open immersions and `f_V : X_V ⟶ V` with `u ≫ f = f_V ≫ v`
+(e.g. `X_V = f⁻¹(V)`). Then `u^* Rf^! ≅ Rf_V^! v^*`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_upperStar {X Y V XV : Scheme.{u}} (f : X ⟶ Y)
     (v : V ⟶ Y) (u : XV ⟶ X) (fV : XV ⟶ V) [IsOpenImmersion u] [IsOpenImmersion v]
     (w : u ≫ f = fV ≫ v) [HasCompactification f] [HasCompactification fV]
@@ -157,9 +142,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_upperStar {X Y V XV : Scheme.{u}} (
     e₁.symm ≪≫ rightDerivedUpperShriekCongr Λ w ≪≫ e₂ ≪≫
     Functor.isoWhiskerRight (rightDerivedUpperShriekOpenImmersionIso Λ v) _⟩
 
-/-- Blueprint `proposition-composition-open-restriction-compactifications-f`, part (2): **`Rf^!`
-commutes with restriction to an open of the source**: for a quasi-compact open immersion
-`j : U ⟶ X`, `j^* Rf^! ≅ Rj^! Rf^! ≅ R(j ≫ f)^!`, by part (1) and the composition law. -/
+/-- **`Rf^!` commutes with restriction to an open of the source**: for a quasi-compact open
+immersion `j : U ⟶ X`, `j^* Rf^! ≅ R(j ≫ f)^!`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_openImmersion {U X Y : Scheme.{u}}
     (j : U ⟶ X) (f : X ⟶ Y) [IsOpenImmersion j] [HasCompactification j] [HasCompactification f]
     [HasCompactification (j ≫ f)] [QuasiCompact j] [QuasiCompact (j ≫ f)] :
@@ -195,9 +179,8 @@ noncomputable def rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction
   (derivedOpenImmersionLowerShriekUpperStarAdjunction _ c.i).comp
     (rightDerivedLowerStarUpperShriekAdjunctionOfIsProper Λ c.g)
 
-/-- Blueprint `proposition-composition-open-restriction-compactifications-f--6`: the counit of
-`Rf_!(c) ⊣ Rp^! ⋙ Di^*` is the composite `Rp_* i_! i^* Rp^! N ⟶ Rp_* Rp^! N ⟶ N` of the
-counits of `Di_! ⊣ Di^*` and `Rp_* ⊣ Rp^!`. -/
+/-- The counit of `Rf_!(c) ⊣ Rp^! ⋙ Di^*` is the composite `Rp_* i_! i^* Rp^! N ⟶ Rp_* Rp^! N ⟶ N`
+of the counits of `Di_! ⊣ Di^*` and `Rp_* ⊣ Rp^!`. -/
 lemma rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction_counit_app
     (N : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction Λ c).counit.app N =
@@ -209,15 +192,10 @@ lemma rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction_counit_app
 
 variable [HasCompactification f] [QuasiCompact f]
 
-/-- Blueprint `proposition-composition-open-restriction-compactifications-f--6`: The exceptional
-inverse image through a compactification.
-
-For finite `Λ`, a quasi-compact `f : X ⟶ Y` and a compactification
-`c = (X ⟶[i] Z ⟶[p] Y)` of `f`, the composite `Rp^! ⋙ Di^*` is right adjoint to
-`Rf_!(c) = Di_! ⋙ Rp_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationUpperShriekAdjunction`,
-whose counit is the composite of the two counits), hence to `R(f)_! ≅ Rf_!(c)`, and there is a
-unique isomorphism `Rf^! ≅ Rp^! ⋙ Di^*` compatible with the adjunctions. -/
+/-- The exceptional inverse image through a compactification: for finite `Λ`, a quasi-compact
+`f : X ⟶ Y` and a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f`, there is a unique
+isomorphism `Rf^! ≅ Rp^! ⋙ Di^*` compatible with the adjunctions `R(f)_! ⊣ Rf^!` and
+`Rf_!(c) ⊣ Rp^! ⋙ Di^*`. -/
 theorem existsUnique_rightDerivedUpperShriekOfCompactificationIso :
     ∃! e : R(f)^![Λ] ≅
         R(c.g)^![Λ] ⋙ D((c.i)^*[ModuleCat.{u + 1} Λ]),

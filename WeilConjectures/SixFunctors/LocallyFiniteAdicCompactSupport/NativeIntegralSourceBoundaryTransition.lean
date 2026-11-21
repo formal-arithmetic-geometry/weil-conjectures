@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralScalarBoundaryConditions
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompactSupportScalarTransitions
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14 and Remark 6.8.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -38,29 +43,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- The initial three-arrow boundary respects a completed finite coefficient change.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; the initial-boundary
-part of the integral numerator calculation.
-
-Proof: first use `P.localizationIdentity` and
-`P.fields.rationalization_normalized` to identify the recorded rationalLeft arrow
-with localization of integralLeft. Naturality of the target integral realization
-and `P.ring.integralLeft_normalized` then identify each boundary with that integral
-realization followed by extension of the recorded ordinary left realization.
-Express the stage transition by `stage.system.β h`. Its scalar normalization and
-`P.fields.rational_normalized` give the localized integral comparison. The target
-realization's `common_field` equation gives its balanced scalar associator and
-completion map. Naturality of the target integral realization moves the localized
-integral comparison into the ordinary derived category. Apply
-`P.ring.comparison_normalized` and replace ordinary scalar realization by its
-prescribed balanced tensor map using `integralScalar_normalized`. Cancel the adjacent
-realization isomorphisms. The resulting composite consists of
-the completed proper/open scalar mate and compact support of the completion map.
-Naturality of the balanced scalar associator moves the ordinary left realization
-past it, giving exactly bi followed by `supportScalarTransition`.
-This calculation uses only the initial three arrows; it contains neither the native
-scalar mate nor the final source-realization boundary. Identity field changes use
-the same normalized tensor unit, so the argument includes `i = E`. -/
+/-- The initial three-arrow boundary respects a completed finite coefficient change. -/
 theorem integralSourceBoundary_transition [G : NativeGeometry.{u} l]
     (target : Realization l Y) (stage : StageAction l D hl P c)
     (i E : Index l (PadicAlgCl l)) (h : i ≤ E)

@@ -32,7 +32,11 @@ morphism of such models (`NearbyCyclesModel.ofOverTraitHom`). For a compactifica
 
 **Reduction to proper models.** If the pullback exchange of `φ̄` is invertible at every complex
 bounded below of étale origin, so is that of `φ`
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_compactification`). Indeed nearby cycles
+(`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_compactification`).
+
+## Implementation details
+
+Nearby cycles
 commute with open restriction (`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_isOpenImmersion`),
 so by the square law of the pullback exchanges the exchange of `φ` at `Lu^* L` is invertible if
 that of `φ̄` at `L` is (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_upperStar_of_square`); and
@@ -70,8 +74,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 morphisms of models `φ₀ : P ⟶ M`, `ψ : M ⟶ M₁`, `ψ' : P ⟶ P₁`, `φ₁ : P₁ ⟶ M₁`, if the pullback
 exchanges of `ψ` at `C` and of `ψ'` at `Le^* C` are invertible (for instance if `ψ` and `ψ'` are
 open immersions of models), then the pullback exchange of `φ₀` is invertible at `Lg^* C` as soon
-as that of `φ₁` is invertible at `C`. This is the square law of the pullback exchanges
-(`NearbyCyclesModel.Hom.pullbackExchange_square`). -/
+as that of `φ₁` is invertible at `C`. -/
 theorem Hom.isIso_pullbackExchange_app_upperStar_of_square (φ₀ : P.Hom M f₀ f₀')
     (ψ : M.Hom M₁ g g') (ψ' : P.Hom P₁ k k') (φ₁ : P₁.Hom M₁ e e')
     (htot : φ₀.total ≫ ψ.total = ψ'.total ≫ φ₁.total)

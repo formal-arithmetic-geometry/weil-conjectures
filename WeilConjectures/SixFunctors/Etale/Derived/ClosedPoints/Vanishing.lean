@@ -12,9 +12,7 @@ public import WeilConjectures.SixFunctors.Finite.GlobalSections
 # Vanishing of cohomology for sheaves supported on closed points
 
 A sheaf of `Λ`-modules on a scheme `X` which vanishes off a finite set of closed points with
-separably closed residue fields has no cohomology in nonzero degrees: it is the direct sum of
-the pushforwards of sheaves on the points, and a separably closed point has no higher
-cohomology.
+separably closed residue fields has no cohomology in nonzero degrees.
 
 ## Main statements
 
@@ -52,9 +50,7 @@ lemma isZero_homology_rightDerivedGlobalSections_lowerStar {X : Scheme.{u}} {k :
 /-- **Sheaves supported on finitely many closed points are acyclic.** Let `U` be an open subset
 of a scheme `X` whose complement is a finite set of closed points with separably closed residue
 fields, and `G` an étale sheaf of `Λ`-modules on `X` whose restriction to `U` vanishes. Then
-`H^q(X, G) = 0` for `q ≠ 0`: `G ≅ ⨁ₓ iₓ_* iₓ^* G`
-(`AlgebraicGeometry.Etale.isIso_biproductLift_unit_of_isZero_upperStar`), and each summand is
-acyclic (`AlgebraicGeometry.Etale.isZero_homology_rightDerivedGlobalSections_lowerStar`). -/
+`H^q(X, G) = 0` for `q ≠ 0`. -/
 theorem isZero_homology_rightDerivedGlobalSections_of_isZero_upperStar {X : Scheme.{u}}
     (U : X.Opens) (hfin : (U : Set X)ᶜ.Finite) (hcl : ∀ x ∉ U, IsClosed ({x} : Set X))
     (hsep : ∀ x ∉ U, IsSepClosed (X.residueField x))

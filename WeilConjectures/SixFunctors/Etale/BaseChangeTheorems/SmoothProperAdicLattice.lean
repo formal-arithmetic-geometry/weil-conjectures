@@ -18,10 +18,7 @@ Let `K` be a field, `Y` of finite type over `K`, `f : X ⟶ Y` smooth and proper
 `Hₙ = Rʲf_* Gₙ`. Then:
 
 - the tower `(Hₙ)` is uniformly Artin-Rees
-  (`AlgebraicGeometry.Etale.isArtinReesTower_homology_rightDerivedLowerStar`): the constants of
-  `Etale.exists_forall_sheafFiber_exists_eval_eq_homology_rightDerivedLowerStar`
-  in degrees `j` and `j - 1`, the latter bounding the torsion of the limits of the stalks of
-  `(Hₙ)` (`CategoryTheory.AdicTowerStructure.pow_smul_eq_zero_of_exists_eval_eq`);
+  (`AlgebraicGeometry.Etale.isArtinReesTower_homology_rightDerivedLowerStar`);
 - hence, when `Λ` is a discrete valuation ring and `Y` is connected, the `ℓ`-adic image tower
   `G'ₘ = ℓᶜ · im(H_{m+2c} ⟶ H_{m+c})` is an exact `ℓ`-adic tower of finite locally constant
   sheaves, étale locally isomorphic to `(Λ / ℓᵐ)ʳ`, and the inclusion `G'ₘ ⟶ H_{m+c}` is a
@@ -101,9 +98,7 @@ lemma Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_obj (j :
 include aY A eG in
 /-- **The torsion of the limits of the stalks of `Rʲf_* Gₙ` is uniformly bounded.** There is `c`
 such that at every geometric point `s` of `Y`, `ℓᶜ` kills the `ℓ`-power torsion of the limit of
-the tower of stalks `((Rʲf_* Gₙ)_s)ₙ`: for `j = 0` it is torsion free, and for `j ≥ 1` the
-constant `c` of the uniform Artin-Rees property in degree `j - 1` works
-(`CategoryTheory.AdicTowerStructure.pow_smul_eq_zero_of_exists_eval_eq`). -/
+the tower of stalks `((Rʲf_* Gₙ)_s)ₙ`. -/
 theorem Etale.exists_pow_smul_eq_zero_sectionsSubmodule_homology_rightDerivedLowerStar (j : ℕ) :
     ∃ c : ℕ, ∀ {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y)
       (y : ModuleCat.sectionsSubmodule (G ⋙ AdicTowerStructure.homologyRightDerived

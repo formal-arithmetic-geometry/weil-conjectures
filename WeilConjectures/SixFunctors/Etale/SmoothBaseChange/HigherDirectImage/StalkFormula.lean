@@ -19,21 +19,23 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 Let `f : X ⟶ S` be quasi-compact and quasi-separated, `F` an étale sheaf of `Λ`-modules on `X`
 and `s : Spec Ω ⟶ S` a geometric point. Then the geometric stalk of `R^q f_* F` at `s` is the
 étale cohomology `H^q(S_(s) ×_S X, F|)` of the base change of `X` to the strict localization
-`S_(s)` of `S` at `s` ([Stacks, Tag 03Q9], blueprint
-`prop-weil-pbc-strict-henselization-stalk-formula`).
-
-The proof follows the blueprint: `R^q f_* F` is the sheafification of the presheaf
-`V ↦ H^q(V ×_S X, F|)`, so its stalk is the colimit of `H^q(V ×_S X, F|)` over the pointed étale
-neighbourhoods `V` of `s`. The affine neighbourhoods are cofinal, `S_(s) ×_S X` is the limit of
-the `V ×_S X` (`AlgebraicGeometry.Scheme.isLimitStrictLocalizationConePullback`) and the
-continuity of étale cohomology
-(`AlgebraicGeometry.Etale.exists_cohomologyRestrictOver_eq_of_isLimit`)
-identifies the colimit of the cohomology groups with the cohomology of the limit.
+`S_(s)` of `S` at `s`.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.nonempty_geometricStalk_higherDirectImage_addEquiv`: the stalk
   formula `(R^q f_* F)_s ≅ H^q(S_(s) ×_S X, F|)`.
+
+## Implementation details
+
+The stalk is computed as the colimit of `H^q(V ×_S X, F|)` over affine pointed étale
+neighbourhoods `V` of `s`, using `AlgebraicGeometry.Scheme.isLimitStrictLocalizationConePullback`
+and the continuity of étale cohomology
+(`AlgebraicGeometry.Etale.exists_cohomologyRestrictOver_eq_of_isLimit`).
+
+## References
+
+* [Stacks, Tag 03Q9]
 -/
 
 @[expose] public section

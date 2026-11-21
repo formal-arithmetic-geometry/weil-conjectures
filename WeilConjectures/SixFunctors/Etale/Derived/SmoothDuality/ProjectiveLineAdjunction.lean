@@ -18,19 +18,16 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 
 Let `S` be a scheme on which the exponent of the finite coefficient ring `Λ` is invertible and
 `q : ℙ¹_S ⟶ S` the projective line. The decomposition `Rq_* Λ(1)[2] ≅ Λ_S(1)[2] ⊕ Λ_S`
-(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`, blueprint
-`lemma-cohomology-projective-line-trace`) defines the trace `t_q : Rq_! Λ(1)[2] ⟶ Λ_S`
-(`AlgebraicGeometry.Etale.projectiveLineLowerShriekTrace`, blueprint
-`lemma-cohomology-projective-line-trace`), and with it the morphisms
+(`AlgebraicGeometry.Etale.isIso_projectiveLineDecompositionMap`) defines the trace
+`t_q : Rq_! Λ(1)[2] ⟶ Λ_S` (`AlgebraicGeometry.Etale.projectiveLineLowerShriekTrace`), and with
+it the morphisms
 
 `ε_K : Rq_!(q^* K(1)[2]) ≅ Rq_!(Λ(1)[2] ⊗ᴸ Lq^* K) ≅ Rq_! Λ(1)[2] ⊗ᴸ K ⟶ Λ_S ⊗ᴸ K ≅ K`
 
 (`AlgebraicGeometry.Etale.projectiveLineCounit`), the inverse of the projection map followed by
-the trace. Blueprint `proposition-adjunction-projective-line` (subsection
-`proposition-adjunction-projective-line`) shows, through the cycle class of the diagonal and the
-triangle identities, that `ε` is the counit of an adjunction `Rq_! ⊣ Lq^*(1)[2]` on the whole
-derived categories. This is recorded here, for the subsection
-`proposition-adjunction-projective-line` to prove it; its compatibility with base change is
+the trace. These are the counit of an adjunction `Rq_! ⊣ Lq^*(1)[2]` on the whole derived
+categories (`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`); its compatibility with
+base change is
 `WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineAdjunctionBaseChange`.
 
 ## Main definitions
@@ -43,9 +40,9 @@ derived categories. This is recorded here, for the subsection
 
 - `AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`
 
-## Implementation notes
+## Implementation details
 
-The blueprint works with `Rq_*`; for the proper `q` it is `Rq_!`
+For the proper `q`, `Rq_*` is `Rq_!`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and the projection
 formula of `Rq_*` is the one of `Rq_!` through this identification
 (`AlgebraicGeometry.Etale.projectionMap_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar`).
@@ -53,7 +50,7 @@ The identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K` is the commutation o
 product with shifts followed by the braiding; the statement that `ε` is a counit does not depend
 on this choice, since a natural automorphism of the right adjoint changes the counit of an
 adjunction into the counit of another one. Likewise, the sign of the trace does not matter
-(`AlgebraicGeometry.Etale.projectiveLineTrace` is the trace `t_q` of the notes, the negative of the
+(`AlgebraicGeometry.Etale.projectiveLineTrace` is the trace `t_q`, the negative of the
 auxiliary `AlgebraicGeometry.Etale.projectiveLineTraceAux`): negating unit and counit of an
 adjunction of additive functors gives an adjunction.
 
@@ -141,10 +138,10 @@ section Counit
 variable [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ] (S : Scheme.{u})
   [HasInvertibleExponent Λ S]
 
-/-- The trace of the projective line
-`q : ℙ¹_S ⟶ S` on the compactly supported direct image, `t_q : Rq_! Λ(1)[2] ⟶ Λ_S`: the trace
-`AlgebraicGeometry.Etale.projectiveLineTrace` of `Rq_*`, the projection onto the summand `Λ_S`
-of the decomposition `Rq_* Λ(1)[2] ≅ Λ_S(1)[2] ⊕ Λ_S`, read through `Rq_! ≅ Rq_*`. -/
+/-- The trace of the projective line `q : ℙ¹_S ⟶ S` on the compactly supported direct image,
+`t_q : Rq_! Λ(1)[2] ⟶ Λ_S`: the trace `AlgebraicGeometry.Etale.projectiveLineTrace` of `Rq_*`,
+the projection onto the summand `Λ_S` of the decomposition `Rq_* Λ(1)[2] ≅ Λ_S(1)[2] ⊕ Λ_S`,
+read through `Rq_! ≅ Rq_*`. -/
 noncomputable def projectiveLineLowerShriekTrace :
     (R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_![ModuleCat.{u + 1} Λ]).obj
         ((tateObject Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)⟦(2 : ℤ)⟧) ⟶ 𝟙_ _ :=
@@ -201,8 +198,7 @@ noncomputable def projectiveLineTwistShiftIso
 
 omit [Finite Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ S] in
 /-- The identification `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K`
-(`AlgebraicGeometry.Etale.projectiveLineTwistShiftIso`) is natural in `K`: it is a component of
-`AlgebraicGeometry.Etale.twistShiftOneIsoTensor`. -/
+(`AlgebraicGeometry.Etale.projectiveLineTwistShiftIso`) is natural in `K`. -/
 theorem projectiveLineTwistShiftIso_hom_naturality
     {K K' : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (g : K ⟶ K') :
@@ -216,7 +212,8 @@ theorem projectiveLineTwistShiftIso_hom_naturality
   (twistShiftOneIsoTensor Λ _).hom.naturality
     ((L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ])).map g)
 
-/-- The candidate counit `ε_K : Rq_!(q^* K(1)[2]) ⟶ K` of the projective-line adjunction: the identification
+/-- The candidate counit `ε_K : Rq_!(q^* K(1)[2]) ⟶ K` of the projective-line adjunction: the
+identification
 `q^* K(1)[2] ≅ Λ(1)[2] ⊗ᴸ Lq^* K` (`AlgebraicGeometry.Etale.projectiveLineTwistShiftIso`), the
 inverse of the projection map `Rq_! Λ(1)[2] ⊗ᴸ K ⟶ Rq_!(Λ(1)[2] ⊗ᴸ Lq^* K)`, the trace
 `AlgebraicGeometry.Etale.projectiveLineLowerShriekTrace` tensored with `K`, and the left
@@ -233,16 +230,10 @@ noncomputable def projectiveLineCounit
       twistShift Λ ℙ(Option (ULift.{u} (Fin 1)); S) 1)
     (projectiveLineTwistShiftIso Λ S) K
 
-/-- Compatibility required from `proposition-adjunction-projective-line` (to be proved there):
-blueprint `proposition-adjunction-projective-line` (with
-`proposition-adjunction-projective-line--1`).
-
-**The projective-line adjunction.** For a scheme `S` on which the exponent of `Λ` is invertible
-and `q : ℙ¹_S ⟶ S`, the morphisms `ε_K : Rq_!(q^* K(1)[2]) ⟶ K` built from the trace
+/-- **The projective-line adjunction.** For a scheme `S` on which the exponent of `Λ` is
+invertible and `q : ℙ¹_S ⟶ S`, the morphisms `ε_K : Rq_!(q^* K(1)[2]) ⟶ K` built from the trace
 (`AlgebraicGeometry.Etale.projectiveLineCounit`) are the counit of an adjunction
-`Rq_! ⊣ Lq^*(1)[2]` on the whole derived categories. In the blueprint the unit is built from the
-cycle class of the diagonal, and the triangle identities follow from the two diagonal integrals
-`lemma-class-diagonal-projective-line`. -/
+`Rq_! ⊣ Lq^*(1)[2]` on the whole derived categories. -/
 theorem exists_projectiveLineAdjunction :
     ∃ adj : R((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣
         L(((ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙

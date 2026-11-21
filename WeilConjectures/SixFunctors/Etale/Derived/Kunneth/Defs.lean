@@ -56,20 +56,9 @@ namespace Etale
 
 variable {B X Y : Scheme.{u}}
 
-/-- The external product of `K ∈ D(X_ét)` and `M ∈ D(Y_ét)` along the fibre-product square
-
-```
-  X ×_B Y --q--> Y
-     | |
-     p g
-     v v
-     X ---f----> B
-```
-
-namely `K ⊠ M = Lp^* K ⊗ᴸ Lq^* M`, an object of `D((X ×_B Y)_ét)`.
-
-The absolute external product over a base scheme `S` is the case where `f` and `g` are the
-structure morphisms of `X` and `Y`. -/
+/-- The external product `K ⊠ M = Lp^* K ⊗ᴸ Lq^* M ∈ D((X ×_B Y)_ét)` of `K ∈ D(X_ét)` and
+`M ∈ D(Y_ét)`, where `p`, `q` are the projections of the fibre product of `f : X ⟶ B` and
+`g : Y ⟶ B`. -/
 noncomputable def externalProduct (f : X ⟶ B) (g : Y ⟶ B)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (M : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :

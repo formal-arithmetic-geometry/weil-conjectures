@@ -142,14 +142,7 @@ private theorem tensor_model_heq_tail
   erw [T.map_id]
   exact Category.id_comp _
 
-/-- The canonical pullback/tensor comparison satisfies the inverse inclusion square.
-
-Proof: identify the two inverse tensorators with their literal finite-stage model
-maps. Compute common pullback of the source model using coherent descent. Evaluate
-the canonical comparison at the input stage, apply rational comparison naturality
-to the two scalar units, and cancel the model comparisons. The pullback coefficient
-unit equation identifies the remaining arrows. Equality transport restores the
-objects prescribed by the common-stage functors. -/
+/-- The canonical pullback/tensor comparison satisfies the inverse inclusion square. -/
 theorem commonStagePullbackTensor_inclusion_inverse
     (l : ℕ) [Fact l.Prime] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {X Y : Scheme.{u}} (f : X ⟶ Y)

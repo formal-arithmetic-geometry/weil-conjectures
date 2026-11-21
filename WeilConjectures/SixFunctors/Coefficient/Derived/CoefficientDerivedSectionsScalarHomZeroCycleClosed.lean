@@ -14,7 +14,13 @@ Naturality of the tensor-Hom transpose of a `CoefficientClosedStructure` in all 
 variables, the action of total-tensor maps on homogeneous generators, and the
 naturality of the degree-zero homology classes of cycles.
 
-Source: Stacks Project, Tags 08J9, 03EK and 08JA.
+## References
+
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 079P]
 -/
 
 @[expose] public section
@@ -29,8 +35,7 @@ namespace CoefficientClosedStructure
 variable {D : Type a} [Category.{b} D] {H : Dᵒᵖ × D ⥤ D}
   (S : CoefficientClosedStructure H)
 
-/-- The inverse transpose is tensoring with the source followed by evaluation.
-Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+/-- The inverse transpose is tensoring with the source followed by evaluation. -/
 theorem transpose_symm_apply (T P Q : D) (g : T ⟶ H.obj (op P, Q)) :
     (S.transpose T P Q).symm g =
       S.tensor.map (Prod.mkHom g (𝟙 P)) ≫ S.evaluation P Q := by
@@ -38,8 +43,7 @@ theorem transpose_symm_apply (T P Q : D) (g : T ⟶ H.obj (op P, Q)) :
   exact ((S.adjunction P).homEquiv_counit T Q g).trans
     (congrArg (· ≫ S.evaluation P Q) (tensorHom_id g P).symm)
 
-/-- The transpose is natural in the tensor factor and in the target.
-Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+/-- The transpose is natural in the tensor factor and in the target. -/
 theorem comp_transpose_comp {T' T P Q Q' : D} (k : T' ⟶ T)
     (f : S.tensor.obj (T, P) ⟶ Q) (g : Q ⟶ Q') :
     k ≫ S.transpose T P Q f ≫ H.map (Prod.mkHom (𝟙 (op P)) g) =
@@ -53,8 +57,7 @@ theorem comp_transpose_comp {T' T P Q Q' : D} (k : T' ⟶ T)
     (S.adjunction P).homEquiv_naturality_right _ g
   rw [← Category.assoc, ← h1, ← h2, hk, Category.assoc]
 
-/-- The transpose is natural in the evaluated variable.
-Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+/-- The transpose is natural in the evaluated variable. -/
 theorem transpose_comp_map_op {T P P' Q : D} (k : P' ⟶ P)
     (f : S.tensor.obj (T, P) ⟶ Q) :
     S.transpose T P Q f ≫ H.map (Prod.mkHom k.op (𝟙 Q)) =
@@ -96,10 +99,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
 
 attribute [local instance] SheafOfModules.cochainModulesMonoidal
 
-/-- Total-tensor maps act on homogeneous generators by applying both input maps.
-Source: Stacks 03EK, 07A4 (auxiliary; not a blueprint node).
-Proof: on the bidegree summand the total map is the tensor product of the two
-components, which acts on sheafified pure tensors componentwise. -/
+/-- Total-tensor maps act on homogeneous generators by applying both input maps. -/
 theorem coefficientTotalTensor_map_tensorGenerator
     {P Q P' Q' : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ}
@@ -128,8 +128,7 @@ theorem coefficientTotalTensor_map_tensorGenerator
 
 end TotalTensor
 
-/-- Degree-zero derived homology classes of cycles are natural in chain maps.
-Source: Stacks 08JA (auxiliary; not a blueprint node). -/
+/-- Degree-zero derived homology classes of cycles are natural in chain maps. -/
 theorem homologyFunctorFactors_inv_homologyπ_naturality
     {X Y : CochainComplex AddCommGrpCat.{w} ℤ} (φ : X ⟶ Y) (z : X.cycles 0) :
     (@DerivedCategory.homologyFunctor AddCommGrpCat.{w} _ _
@@ -158,8 +157,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
     ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
-/-- The image of the unit class under a map out of the unit complex.
-Source: Stacks 08JA, 079P (auxiliary; not a blueprint node). -/
+/-- The image of the unit class under a map out of the unit complex. -/
 theorem coefficientUnitClass_map
     (K : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)

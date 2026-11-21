@@ -208,9 +208,7 @@ section Comp
 variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (e : Y ⟶ Z)
 
 /-- **The proper base change property is stable under composition**: if `f` and `e` satisfy
-`AlgebraicGeometry.Etale.IsBaseChangeIso`, so does `f ≫ e`. Every cartesian square on `f ≫ e`
-is the vertical pasting of the cartesian square on `e` with the same base change and the
-induced cartesian square on `f`, and the derived base change maps paste accordingly. -/
+`AlgebraicGeometry.Etale.IsBaseChangeIso`, so does `f ≫ e`. -/
 lemma Etale.IsBaseChangeIso.comp [Etale.IsBaseChangeIso A f] [Etale.IsBaseChangeIso A e] :
     Etale.IsBaseChangeIso A (f ≫ e) where
   isIso {X' Z'} g' f'' k sq := by

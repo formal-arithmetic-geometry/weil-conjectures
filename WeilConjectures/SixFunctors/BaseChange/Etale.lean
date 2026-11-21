@@ -25,19 +25,11 @@ U --j--> Z
 ```
 
 with `j` and `j'` étale, i.e. `g' ≫ j = j' ≫ g''`. This file proves **étale base change for
-the pushforward** (Stacks 0F4D, SGA 4 VIII): if the square is cartesian, the base change map
+the pushforward**: if the square is cartesian, the base change map
 
 `j^* ∘ g''_* ⟶ g'_* ∘ j'^*`
 
 on sheaves for the small étale sites is an isomorphism.
-
-Along an étale morphism the pullback is computed by restriction along the localization
-functor `Over.map` (`AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction`), so both
-`g''_* ⋙ j^*` and `j'^* ⋙ g'_*` are composition with functors of small étale sites:
-`Over.map j ⋙ Over.pullback g''` sends `T ⟶ U` to `T ×_Z Z' ⟶ Z'`, and
-`Over.pullback g' ⋙ Over.map j'` sends it to `T ×_U U' ⟶ Z'`. The canonical comparison
-`T ×_U U' ⟶ T ×_Z Z'` is `CategoryTheory.MorphismProperty.Over.pullbackMapComparison`, and it
-is an isomorphism when the square is cartesian.
 
 ## Main definitions
 
@@ -56,6 +48,21 @@ is an isomorphism when the square is cartesian.
 - `AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`: **étale base change for
   the pushforward**: for a cartesian square the base change map
   `g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` is an isomorphism.
+
+## Implementation details
+
+Along an étale morphism the pullback is computed by restriction along the localization
+functor `Over.map` (`AlgebraicGeometry.Etale.upperStarIsoLocalizationRestriction`), so both
+`g''_* ⋙ j^*` and `j'^* ⋙ g'_*` are composition with functors of small étale sites:
+`Over.map j ⋙ Over.pullback g''` sends `T ⟶ U` to `T ×_Z Z' ⟶ Z'`, and
+`Over.pullback g' ⋙ Over.map j'` sends it to `T ×_U U' ⟶ Z'`. The canonical comparison
+`T ×_U U' ⟶ T ×_Z Z'` is `CategoryTheory.MorphismProperty.Over.pullbackMapComparison`, and it
+is an isomorphism when the square is cartesian.
+
+## References
+
+* [Stacks, Tag 0F4D]
+* SGA 4, Exposé VIII
 -/
 
 @[expose] public section
@@ -95,8 +102,7 @@ noncomputable def Etale.localizationRestrictionBaseChangeMap (sq : CommSq g' j' 
       (inferInstance : @Etale _ _ j') sq) A
     (U.smallGrothendieckTopology @Etale) (Z'.smallGrothendieckTopology @Etale)
 
-/-- If the square is cartesian, the base change map on restrictions is an isomorphism,
-being induced by an isomorphism of site functors. -/
+/-- If the square is cartesian, the base change map on restrictions is an isomorphism. -/
 lemma Etale.isIso_localizationRestrictionBaseChangeMap_of_isPullback
     (hsq : IsPullback g' j' j g'') :
     IsIso (Etale.localizationRestrictionBaseChangeMap A hsq.toCommSq) :=
@@ -183,9 +189,7 @@ lemma Etale.baseChangeMap_flip_eq (sq : CommSq g' j' j g'') :
   exact (Etale.mateEquiv_localizationRestrictionBaseChangeMap A sq).symm
 
 /-- **Étale base change for the pushforward**: if the square is cartesian, the base change
-map `g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` of the flipped square is an isomorphism. By
-`AlgebraicGeometry.Etale.baseChangeMap_flip_eq` it is induced by an isomorphism of site
-functors. -/
+map `g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` of the flipped square is an isomorphism. -/
 lemma Etale.isIso_baseChangeMap_flip_of_isPullback (hsq : IsPullback g' j' j g'') :
     IsIso (Etale.baseChangeMap A hsq.toCommSq.flip) := by
   have := Etale.isIso_localizationRestrictionBaseChangeMap_of_isPullback A hsq

@@ -21,13 +21,11 @@ derived pullbacks on the étale site. Writing `g_m = g^m` (`AlgebraicGeometry.Pr
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateHomIso`). They are compatible with
 iteration in the sense that `κ_{m+n}` is `Lg_n^* κ_m` followed by `κ_n` at `Lg'_m^*`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateHomIso_add_hom_app`); for `n = 1` and `m = 1`
-these are the two recursions `κ_{m+1} = κ_1 ∘ Lg^* κ_m` and `κ_{m+1} = κ_m ∘ Lg_m^* κ_1` of
-blueprint `lemma-scheme-frobenius-geometric-frobenius`.
+these are the two recursions `κ_{m+1} = κ_1 ∘ Lg^* κ_m` and `κ_{m+1} = κ_m ∘ Lg_m^* κ_1`.
 
 The iterates of a Weil datum `φ : Lg'^* K ⟶ K` on the étale site
 (`AlgebraicGeometry.Etale.weilDatumIterate`, the étale analogue of
-`AlgebraicGeometry.ProEtale.weilDatumIterate`, blueprint
-`definition-frobenius-correspondences-their-operators`) satisfy `(φ ∘ κ)_m = φ_m ∘ κ_m`
+`AlgebraicGeometry.ProEtale.weilDatumIterate`) satisfy `(φ ∘ κ)_m = φ_m ∘ κ_m`
 (`AlgebraicGeometry.Etale.weilDatumIterate_comp`).
 
 For the scheme Frobenius `Φ_X` and the geometric Galois Frobenius `Fr_X` of a geometric fibre, `κ`
@@ -76,9 +74,8 @@ section Iterate
 
 variable {X : Scheme.{u}} {g g' : X ⟶ X}
 
-/-- Blueprint `definition-frobenius-correspondences-their-operators` (iterates, étale site): the
-iterate `φ_m : Lg_m^* K ⟶ K` of a Weil datum `φ : Lg^* K ⟶ K` on the étale site, for the iterate
-`g_m = g^m` (`AlgebraicGeometry.ProEtale.iterateHom`): `φ_0` is the identification
+/-- The iterate `φ_m : Lg_m^* K ⟶ K` of a Weil datum `φ : Lg^* K ⟶ K` on the étale site, for the
+iterate `g_m = g^m` (`AlgebraicGeometry.ProEtale.iterateHom`): `φ_0` is the identification
 `L(𝟙 X)^* K ≅ K` and `φ_{m+1}` is the composite
 ```
 L(g_{m+1})^* K = L(g ≫ g_m)^* K ≅ Lg^* Lg_m^* K --Lg^* φ_m--> Lg^* K --φ--> K.
@@ -103,10 +100,9 @@ lemma weilDatumIterate_succ (φ : L((g)^*[A]).obj K ⟶ K) (m : ℕ) :
         L((g)^*[A]).map (weilDatumIterate φ m) ≫ φ :=
   rfl
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius` (the iterates `κ_m`): an isomorphism
-`κ : Lg^* ≅ Lg'^*` of derived pullbacks along endomorphisms `g, g'` of `X` iterates to
-isomorphisms `κ_m : Lg_m^* ≅ Lg'_m^*` for the iterates `g_m = g^m`, `g'_m = g'^m`: `κ_0` is the
-identity and
+/-- An isomorphism `κ : Lg^* ≅ Lg'^*` of derived pullbacks along endomorphisms `g, g'` of `X`
+iterates to isomorphisms `κ_m : Lg_m^* ≅ Lg'_m^*` for the iterates `g_m = g^m`, `g'_m = g'^m`:
+`κ_0` is the identity and
 ```
 κ_{m+1} : L(g ≫ g_m)^* ≅ Lg^* Lg_m^* --Lg^* κ_m--> Lg^* Lg'_m^* --κ--> Lg'^* Lg'_m^*
   ≅ L(g' ≫ g'_m)^*.
@@ -128,8 +124,8 @@ lemma leftDerivedUpperStarIterateHomIso_zero :
     leftDerivedUpperStarIterateHomIso κ 0 = Iso.refl _ :=
   rfl
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius` (compatibility of `κ_m` with
-iteration, recursive form): `κ_{m+1}` is `Lg^* κ_m` followed by `κ` at `Lg'_m^* K`. -/
+/-- The recursive form of the compatibility of `κ_m` with iteration: `κ_{m+1}` is `Lg^* κ_m`
+followed by `κ` at `Lg'_m^* K`. -/
 lemma leftDerivedUpperStarIterateHomIso_succ_hom_app (m : ℕ) (M : _root_.DerivedCategory
     (Sheaf X.smallEtaleTopology A)) :
     (leftDerivedUpperStarIterateHomIso κ (m + 1)).hom.app M =
@@ -158,16 +154,13 @@ lemma leftDerivedUpperStarIterateHomIso_one_hom_app (M : _root_.DerivedCategory
   erw [Category.id_comp]
   rfl
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius` (compatibility of `κ_m` with
-iteration): under `g_{m+n} = g_n ≫ g_m`, the isomorphism `κ_{m+n}` is `Lg_n^* κ_m` followed by
-`κ_n` at `Lg'_m^* M`:
+/-- **Compatibility of `κ_m` with iteration.** Under `g_{m+n} = g_n ≫ g_m`, the isomorphism
+`κ_{m+n}` is `Lg_n^* κ_m` followed by `κ_n` at `Lg'_m^* M`:
 ```
 L(g_{m+n})^* M ≅ Lg_n^* Lg_m^* M --Lg_n^* κ_m--> Lg_n^* Lg'_m^* M --κ_n--> Lg'_n^* Lg'_m^* M
   ≅ L(g'_{m+n})^* M.
 ```
-For `m = 1` this is the recursion `κ_{n+1} = κ_{n, Lg'^* M} ∘ Lg_n^* κ_1` of the blueprint, and
-for `n = 1` it is the defining recursion
-`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateHomIso_succ_hom_app`. -/
+-/
 theorem leftDerivedUpperStarIterateHomIso_add_hom_app (m n : ℕ)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (leftDerivedUpperStarIterateHomIso κ (m + n)).hom.app M =
@@ -222,9 +215,8 @@ section Datum
 variable {X : Scheme.{u}} {g g' : X ⟶ X} (κ : L((g)^*[A]) ≅ L((g')^*[A]))
   {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius` (`ψ_m = φ_m κ_m`): for an isomorphism
-`κ : Lg^* ≅ Lg'^*` and a Weil datum `φ : Lg'^* K ⟶ K`, the iterates of the Weil datum
-`ψ = φ ∘ κ_K : Lg^* K ⟶ K` are `ψ_m = φ_m ∘ κ_{m,K}`, `κ_m` being the iterates of `κ`
+/-- For an isomorphism `κ : Lg^* ≅ Lg'^*` and a Weil datum `φ : Lg'^* K ⟶ K`, the iterates of the
+Weil datum `ψ = φ ∘ κ_K : Lg^* K ⟶ K` are `ψ_m = φ_m ∘ κ_{m,K}`, `κ_m` being the iterates of `κ`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateHomIso`). -/
 theorem weilDatumIterate_comp (φ : L((g')^*[A]).obj K ⟶ K) (m : ℕ) :
     weilDatumIterate (κ.hom.app K ≫ φ) m =
@@ -243,21 +235,17 @@ section GeometricFiberFrobenius
 
 variable (A) {k : Type u} [Field k] [Finite k] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k))
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius` (the isomorphisms `κ_m`): the
-isomorphisms `κ_m : L(Φ_X^m)^* ≅ L(Fr_X^m)^*` between the derived pullbacks along the iterates
-of the scheme Frobenius `Φ_X` and of the geometric Galois Frobenius `Fr_X` of the geometric
-fibre `X` of `f`, iterating
-`κ_1 = AlgebraicGeometry.Etale.leftDerivedUpperStarGeometricFiberFrobeniusIso`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarIterateHomIso`). They are natural, and compatible
-with iteration by `AlgebraicGeometry.Etale.leftDerivedUpperStarIterateHomIso_add_hom_app`. -/
+/-- The isomorphisms `κ_m : L(Φ_X^m)^* ≅ L(Fr_X^m)^*` between the derived pullbacks along the
+iterates of the scheme Frobenius `Φ_X` and of the geometric Galois Frobenius `Fr_X` of the
+geometric fibre `X` of `f`, iterating
+`κ_1 = AlgebraicGeometry.Etale.leftDerivedUpperStarGeometricFiberFrobeniusIso`. -/
 noncomputable def leftDerivedUpperStarGeometricFiberFrobeniusIterateIso (m : ℕ) :
     L((iterateHom f.geometricFiberFrobenius m)^*[A]) ≅
       L((iterateHom f.geometricGaloisFrobenius.asIso.hom m)^*[A]) :=
   leftDerivedUpperStarIterateHomIso (leftDerivedUpperStarGeometricFiberFrobeniusIso A f) m
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius` (`ψ_m = φ_m κ_m`, for an arbitrary
-morphism `φ`): for a morphism `φ : LFr_X^* K ⟶ K`, the iterates of
-`ψ = φ ∘ κ_{1,K} : LΦ_X^* K ⟶ K` are `ψ_m = φ_m ∘ κ_{m,K}`. -/
+/-- For a morphism `φ : LFr_X^* K ⟶ K`, the iterates of `ψ = φ ∘ κ_{1,K} : LΦ_X^* K ⟶ K` are
+`ψ_m = φ_m ∘ κ_{m,K}`. -/
 theorem weilDatumIterate_comp_geometricFiberFrobenius
     {K : _root_.DerivedCategory (Sheaf f.geometricFiber.smallEtaleTopology A)}
     (φ : L((f.geometricGaloisFrobenius.asIso.hom)^*[A]).obj K ⟶ K) (m : ℕ) :
@@ -266,9 +254,8 @@ theorem weilDatumIterate_comp_geometricFiberFrobenius
         weilDatumIterate φ m :=
   weilDatumIterate_comp _ φ m
 
-/-- Blueprint `lemma-scheme-frobenius-geometric-frobenius` (`ψ_m = φ_m κ_m`): for a Weil
-structure `φ : LFr_X^* K ≅ K`, the iterates of its scheme-Frobenius form `ψ = φ ∘ κ_{1,K}`
-(`AlgebraicGeometry.Etale.schemeFrobeniusForm`) are `ψ_m = φ_m ∘ κ_{m,K}`. -/
+/-- For a Weil structure `φ : LFr_X^* K ≅ K`, the iterates of its scheme-Frobenius form
+`ψ = φ ∘ κ_{1,K}` (`AlgebraicGeometry.Etale.schemeFrobeniusForm`) are `ψ_m = φ_m ∘ κ_{m,K}`. -/
 theorem weilDatumIterate_schemeFrobeniusForm_hom
     {K : _root_.DerivedCategory (Sheaf f.geometricFiber.smallEtaleTopology A)}
     (φ : L((f.geometricGaloisFrobenius.asIso.hom)^*[A]).obj K ≅ K) (m : ℕ) :

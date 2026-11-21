@@ -157,16 +157,13 @@ namespace WeilConjectures.IntegralPointCoefficientAdjunction
 variable (k : Type t) [Field k] (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The existing valuation ring, lifted only into the containing coefficient universe.
- -/
+/-- The existing valuation ring, lifted only into the containing coefficient universe. -/
 abbrev R := coefficientRing.{t, u} l E 1 true
 
-/-- The existing completed integral coefficient sheaf on the unchanged small site.
- -/
+/-- The existing completed integral coefficient sheaf on the unchanged small site. -/
 abbrev B := coefficientSheaf.{t, u} k l E 1 true
 
-/-- The limit lift of the actual constant residue maps, with commutativity retained.
- -/
+/-- The limit lift of the actual constant residue maps, with commutativity retained. -/
 abbrev alpha := coefficientMap.{t, u} k l E 1 true
 
 private theorem finite_transition (n : ℕ)

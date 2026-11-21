@@ -17,8 +17,8 @@ Let `L/K` be a field extension, `S` a scheme over `K` with base change `S' = S �
 bounded below complex `M` on `T` whose cohomology sheaves are torsion of orders invertible in
 `K`, the derived base change map `p^* Rg_* M ⟶ Rh_* e^* M` is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_baseChange_app_of_fieldExtension`). This is the derived form of
-Stacks 0F1C (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_fieldExtension`), obtained
-from the degreewise statement by dévissage on the bounded below complexes.
+the degreewise statement `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_fieldExtension`,
+obtained by dévissage on the bounded below complexes.
 
 For a finite coefficient ring `Λ` killed by an integer invertible in `K`, every bounded below
 complex qualifies; the statement is also given for the unbounded derived base change map
@@ -27,7 +27,7 @@ form used by the closed-support criterion for exceptional inverse images.
 
 ## References
 
-- Stacks Project, Lemma 59.89.4, <https://stacks.math.columbia.edu/tag/0F1C>
+* [Stacks, Tag 0F1C]
 -/
 
 @[expose] public section
@@ -47,9 +47,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {K L : Type u} [Field K] [Field L] [A
   {e : T' ⟶ T} {h : T' ⟶ S'} (sq : IsPullback e h g p)
 
 include σ σ' hS in
-/-- **Derived direct images commute with base change along field extensions** (Stacks 0F1C,
-derived form): for a bounded below complex `M` whose cohomology sheaves are torsion of orders
-invertible in `K`, the derived base change map `p^* Rg_* M ⟶ Rh_* e^* M` is an isomorphism. -/
+/-- **Derived direct images commute with base change along field extensions**: for a bounded
+below complex `M` whose cohomology sheaves are torsion of orders invertible in `K`, the derived
+base change map `p^* Rg_* M ⟶ Rh_* e^* M` is an isomorphism. -/
 theorem isIso_baseChange_app_of_fieldExtension
     (M : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hM : ∀ j, IsTorsionSheafOfInvertibleOrder (Spec (.of K))
@@ -64,9 +64,10 @@ theorem isIso_baseChange_app_of_fieldExtension
     (fun M n _ q hq ↦ isZero_homologyFunctor_baseChangeTarget_obj Λ e h M n q hq) M hM
 
 include σ σ' hS in
-/-- Stacks 0F1C, unbounded derived form for coefficients killed by an integer `N` invertible in
-`K`: the derived base change map `p^* Rg_* M ⟶ Rh_* e^* M` of
-`AlgebraicGeometry.Etale.derivedBaseChangeMap` is an isomorphism at every bounded below `M`. -/
+/-- Derived direct images commute with base change along field extensions, unbounded form for
+coefficients killed by an integer `N` invertible in `K`: the derived base change map
+`p^* Rg_* M ⟶ Rh_* e^* M` of `AlgebraicGeometry.Etale.derivedBaseChangeMap` is an isomorphism at
+every bounded below `M`. -/
 theorem isIso_derivedBaseChangeMap_app_of_fieldExtension (N : ℕ) (hN₀ : N ≠ 0)
     (hN : (N : Λ) = 0)
     (hNK : IsUnit (N : Γ(Spec (.of K), ⊤)))

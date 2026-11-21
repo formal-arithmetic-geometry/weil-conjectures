@@ -18,6 +18,8 @@ Let `k` be a separably closed field, `Λ` a finite ring whose exponent is invert
 étale sheaves of `Λ`-modules on `X`, the set of morphisms `K ⟶ L` in the derived category is finite
 (`AlgebraicGeometry.Etale.finite_hom_of_boundedConstructible`).
 
+## Implementation details
+
 The case of sheaves in degrees `0` and `n`
 (`AlgebraicGeometry.Etale.finite_ext_of_isConstructibleSheaf`, finiteness of `Extⁿ(F, G)`) is
 proved by induction on `n` for all constructible `F` at once: `F` is a quotient of a finite sum of

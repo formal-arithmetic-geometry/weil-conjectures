@@ -38,11 +38,6 @@ isomorphisms which transport Frobenius structures along `φ̄_*`, along `Rφ̄_*
 immersion `φ`, along the extension by zero `φ̄_!`. The matching isomorphisms for the pullbacks
 are in `WeilConjectures.SixFunctors.Etale.UpperLowerStar.GeometricFrobenius`.
 
-The derived isomorphism is obtained from the underived one: the pullbacks along the Frobenii are
-exact, so their derived functors are computed levelwise, and they are equivalences, so they
-preserve K-injective complexes and the composition theorem
-`CategoryTheory.Functor.rightDerivedFunctorCompIso` applies.
-
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.lowerStarGeometricFiberMapCompFrobeniusIso`:
@@ -56,6 +51,13 @@ preserve K-injective complexes and the composition theorem
 
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekToLowerStar_geometricFiberMapCompFrobeniusIso`:
   the comparison `φ̄_! ⟶ φ̄_*` commutes with these exchange isomorphisms.
+
+## Implementation details
+
+The derived isomorphism is obtained from the underived one: the pullbacks along the Frobenii are
+exact, so their derived functors are computed levelwise, and they are equivalences, so they
+preserve K-injective complexes and the composition theorem
+`CategoryTheory.Functor.rightDerivedFunctorCompIso` applies.
 -/
 
 @[expose] public section

@@ -122,17 +122,7 @@ instance (M : Sheaf X.smallEtaleTopology A) : IsIso (M.ΓRes (op (Scheme.Etale.m
   M.isLimitConeΓ.isIso_π_app_of_isInitial _ (Scheme.Etale.isTerminalMkId X).op
 
 /-- If the unit `M ⟶ j_* j^* M` of the restriction along the open immersion `j` is a split
-epimorphism, the restriction `Γ(X, M) ⟶ M(U)` of global sections is a split epimorphism. In the
-square
-
-```
-M(X) ───────────▶ M(U)
- │ η_X │ η_U ≅
- ▼ ▼
-(j_* j^* M)(X) ──≅──▶ (j_* j^* M)(U)
-```
-
-the bottom map and `η_U` are isomorphisms and `η_X` is split by the section of the unit. -/
+epimorphism, the restriction `Γ(X, M) ⟶ M(U)` of global sections is a split epimorphism. -/
 lemma isSplitEpi_ΓRes_of_isSplitEpi_unit (M : Sheaf X.smallEtaleTopology A)
     [IsSplitEpi ((openImmersionRestrictionLowerStarAdjunction A j).unit.app M)] :
     IsSplitEpi (M.ΓRes (op (Scheme.Etale.mk j))) := by
@@ -173,9 +163,7 @@ variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 include hJX hJZ in
 /-- For an injective étale sheaf `I` on `X` and a closed immersion `i : Z ⟶ X` with open
-complement `U`, the restriction `Γ(X, I) ⟶ I(U)` is a split epimorphism: the restriction
-`I ⟶ j_* j^* I` to the open part is a split epimorphism
-(`AlgebraicGeometry.Etale.isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective`). -/
+complement `U`, the restriction `Γ(X, I) ⟶ I(U)` is a split epimorphism. -/
 theorem isSplitEpi_ΓRes_openComplement_of_injective (I : Sheaf X.smallEtaleTopology A)
     [Injective I] : IsSplitEpi (I.ΓRes (op (Scheme.Etale.mk i.openComplement.ι))) := by
   have := isSplitEpi_upperStarLowerStarAdjunction_unit_app_of_injective A i.openComplement.ι i
@@ -203,8 +191,7 @@ noncomputable def sectionsWithSupportShortComplex
 
 include hJX hJZ in
 /-- For a complex `I` of injective sheaves, `0 ⟶ Γ_Z(X, I) ⟶ Γ(X, I) ⟶ Γ(U, I) ⟶ 0` is a short
-exact sequence of complexes: degreewise, `Γ_Z` is the kernel of the restriction, which is a
-split epimorphism (`AlgebraicGeometry.Etale.isSplitEpi_ΓRes_openComplement_of_injective`). -/
+exact sequence of complexes. -/
 theorem shortExact_sectionsWithSupportShortComplex
     (I : CochainComplex (Sheaf X.smallEtaleTopology A) ℤ) [∀ n, Injective (I.X n)] :
     (sectionsWithSupportShortComplex A i I).ShortExact := by

@@ -11,8 +11,7 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 # The derived base change map of the identity square
 
 For the identity square on `f` the derived base change map is the identity, modulo the identity
-isomorphisms of the derived pullbacks (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id`);
-with the horizontal pasting law this is blueprint `lemma-identity-pasting--1`.
+isomorphisms of the derived pullbacks (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_id`).
 The file also records how the composition isomorphisms
 `AlgebraicGeometry.Etale.upperStarCompDerivedPlus` behave on identities.
 
@@ -82,10 +81,8 @@ lemma Etale.baseChangeMap_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
   rw [← reassoc_of% h₁, Functor.comp_map, ← Functor.map_comp, ← h₂,
     Functor.map_comp, Adjunction.right_triangle_components_assoc]
 
-/-- Blueprint `lemma-identity-pasting--1` (identity part): **the derived
-exchange morphism of the identity square is the identity**, modulo the identity isomorphisms
-`D(𝟙 _)^*⁺ ≅ 𝟭` of the derived pullbacks. The composition part of that blueprint lemma is the
-horizontal pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_horiz`. -/
+/-- **The derived exchange morphism of the identity square is the identity**, modulo the
+identity isomorphisms `D(𝟙 _)^*⁺ ≅ 𝟭` of the derived pullbacks. -/
 lemma Etale.derivedBaseChangeMapPlus_id (f : X ⟶ Y) (sq : CommSq (𝟙 X) f f (𝟙 Y)) :
     Etale.derivedBaseChangeMapPlus A sq =
       Functor.whiskerLeft (f)_*[A].rightDerivedFunctorPlus (Etale.upperStarIdDerivedPlus A Y).hom ≫

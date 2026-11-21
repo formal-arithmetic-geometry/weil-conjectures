@@ -24,23 +24,8 @@ compact-support base change isomorphism `Ex_!`) is an isomorphism as soon as the
 change map `Ex_* : g^* Rj_* j^* M ⟶ Rj'_* g_U^* j^* M` is one
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso`). Over the
 generic point of an integral base this applies to every bounded constructible `M`, by
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_generic`: this is
-the second comparison `g_Z^* Ri^! M ≅ Ri_{η̄}^! g_X^* M` of blueprint
-`lemma-restriction-geometric-generic-fibre`
+`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_generic`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_generic`).
-
-## Proof
-
-As in the blueprint, pull back the supported localization triangle
-`i_! Ri^! M ⟶ M ⟶ Rj_* j^* M ⟶` (`AlgebraicGeometry.Etale.supportedLocalizationTriangle`) along
-`g`. Its first term is `g^* i_! Ri^! M ≅ i'_! g_Z^* Ri^! M` by compact-support base change, and
-its third term `g^* Rj_* j^* M ≅ Rj'_* g_U^* j^* M` receives no maps from objects `i'_! Q[n]`
-(`AlgebraicGeometry.Etale.subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`).
-Since `i'_!` is fully faithful
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`), the transpose
-of the first map, which is `β_M` by the mate calculus, is an isomorphism; this is the formal
-statement `CategoryTheory.Pretriangulated.isIso_of_adjunction_triangle`. Only the
-closed-support triangle is used, not boundary duality.
 
 ## Main statements
 
@@ -65,8 +50,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive D] [HasZeroObjec
 /-- Let `L ⊣ R` be an adjunction with `L` fully faithful and target a pretriangulated category,
 let `T` be a distinguished triangle whose first object is `L P` (via `e`) and whose third object
 receives no nonzero maps from the objects `L Q` and `L Q⟦1⟧`. Then the transpose
-`β : P ⟶ R T.obj₂` of `e.hom ≫ T.mor₁ : L P ⟶ T.obj₂` is an isomorphism: by the long exact
-`Hom(L Q, -)`-sequence of `T`, composition with `T.mor₁` is bijective on maps out of `L Q`. -/
+`β : P ⟶ R T.obj₂` of `e.hom ≫ T.mor₁ : L P ⟶ T.obj₂` is an isomorphism. -/
 lemma isIso_of_adjunction_triangle {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R) [L.Full] [L.Faithful]
     (T : Triangle D) (hT : T ∈ distTriang D) {P : C} (e : L.obj P ≅ T.obj₁)
     (h₀ : ∀ Q, Subsingleton (L.obj Q ⟶ T.obj₃))
@@ -113,11 +97,7 @@ complement `j : U ⟶ X`, let `g : X' ⟶ X` be a morphism, and let `i'`, `j'` b
 of `i`, `j` along `g` (with disjoint images). If the derived base change map
 `Ex_* : g^* Rj_* j^* M ⟶ Rj'_* g_U^* j^* M` is an isomorphism, then so is the base change map
 `β_M : g_Z^* Ri^! M ⟶ Ri'^! g^* M` of
-`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`.
-
-This is the closed-support step of blueprint `lemma-restriction-geometric-generic-fibre`: pull back
-the supported localization triangle `i_! Ri^! M ⟶ M ⟶ Rj_* j^* M ⟶` along `g` and use that
-`i'_!` is fully faithful (`CategoryTheory.Pretriangulated.isIso_of_adjunction_triangle`). -/
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso {X X' Z Z' U U' : Scheme.{u}}
     {g : X' ⟶ X} {i : Z ⟶ X} {i' : Z' ⟶ X'} {gZ : Z' ⟶ Z} [IsClosedImmersion i]
     [IsClosedImmersion i'] (sq : IsPullback gZ i' i g) {j : U ⟶ X} {j' : U' ⟶ X'} {gU : U' ⟶ U}
@@ -162,8 +142,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso {X X' Z Z' U U' 
     rw [NatIso.isIso_inv_app] at h
     exact h
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`, second comparison: closed exceptional
-inverse images commute with generic base change.
+/-- **Closed exceptional inverse images commute with generic base change.**
 
 Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose exponent
 is invertible on `S`, and let `t : T ⟶ S` be a morphism from a noetherian scheme lying over the
@@ -172,10 +151,7 @@ with base change `g : X_T ⟶ X`, let `i : Z ⟶ X` be a closed immersion with o
 `j : U ⟶ X`, and let `i'`, `j'` be their base changes along `g`. Then for every bounded
 constructible `M` on `X` the canonical base change map
 `g_Z^* Ri^! M ⟶ Ri'^! g^* M` (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`)
-is an isomorphism: `j^* M` is bounded constructible, so the open direct image comparison
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_generic` applies,
-and `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso`
-concludes. -/
+is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_generic {k : Type u} [Field k]
     {S : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasInvertibleExponent Λ S] {T : Scheme.{u}} [IsNoetherian T] (t : T ⟶ S)

@@ -17,7 +17,13 @@ import all WeilConjectures.SmoothPurity.Normalized.NormalizedDVREffectivity
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import all Mathlib.Algebra.Homology.Localization
 
-/-! Compatibility of the compact-support input reduction with the completed tower. -/
+/-! Compatibility of the compact-support input reduction with the completed tower.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -412,27 +418,7 @@ private def inputNativeTower (W : Scheme.{u})
     exact NatTrans.congr_app h M
 
 /-- Restricting the direct quotient reduction to completed coefficients gives the
-specified integral reduction tower, including its actual arrows.
-Source: blueprint lemma-change-coefficients-compact-support, proof paragraphs 1--2; Stacks
-Tags 06YY and 07A6.
-
-Proof: take the native derived coefficient system obtained by reducing K on the
-ringed sequence site. Its finite evaluations identify with the derived reductions of
-K. Its transitions and compactSupportReductionMap are adjuncts of the same smaller
-reduction unit, under the scalar adjunction; injectivity of its Hom bijection identifies
-them after quotient transport. Restrict this system to completed coefficients using
-the evaluation-transition compatibility of the coefficient sequence calculus.
-The ordinary restriction compositor
-for the sequence quotient equals the direct quotient compositor: both act as the
-identity on every underlying section. This equality passes to exact derived functors.
-For adjacent levels, apply the scalar-extension/restriction Hom bijection. Both the
-restricted quotient map and sfDerivedReductionTransition are adjuncts of the smaller
-reduction unit followed by the inverse completed restriction compositor; their equality
-is the normalized K-flat transition comparison (sectionTransitionAdjoint).
-For equal indices, the native coefficient transition and the tower map are identities.
-Induct on m-n: the native transitions compose by their cocycle, and the tower maps
-compose by functoriality. The adjacent equality therefore identifies every map.
-No boundedness, constructibility, or finite-type hypothesis is used. -/
+specified integral reduction tower, including its actual arrows. -/
 theorem compactSupportInput_completed_tower (W : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource l E W)) :
     ∀ (m n : ℕ) (h : n ≤ m),

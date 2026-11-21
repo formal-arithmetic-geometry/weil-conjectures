@@ -13,7 +13,12 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.Ordina
 
 /-! # Invertibility of the open evaluation mate
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI and 0941.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -139,23 +144,7 @@ private theorem ordinaryMate_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     (ordinaryEvaluation l E j n).hom
 
 /-- The evaluation mate for exact extension by zero is invertible on the full
-sequence-site derived category.
-Source: Zheng Construction 4.1; Stacks 03DI, 03DJ, 0941.
-
-Proof: present an open immersion as localization of the ringed sequence site.
-Ordinary extension by zero is the sheafification of the direct sum over lifts to
-the open. Evaluation at n keeps the n-th summands and their coefficient action;
-there is at most one lift, so this is the finite ordinary extension by zero.
-The resulting evaluation comparison is an isomorphism. Its inverse is the mate
-of the ordinary inverse-image evaluation comparison: on each summand the open
-unit is the identity, so the two adjunction transposes agree. All four functors
-are exact. Applying them termwise to complexes and localizing therefore preserves
-this isomorphism and its mate equation. The fixed cochain normalization of
-pullbackTensorDerivedEvaluation identifies the localized inverse-image comparison
-with the one in the statement. Uniqueness of left adjoints transports the formula
-from the slice extension to any a with its specified adjunction. For an empty
-open all summands vanish, and for an identity open the comparison is the unitor;
-the same argument applies to zero complexes. -/
+sequence-site derived category. -/
 theorem integralSystemOpenEvaluation_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (a : Open l E j) (n : ℕ) :
     IsIso ((mateEquiv a.adj (finiteOpenAdj l E j n)).symm

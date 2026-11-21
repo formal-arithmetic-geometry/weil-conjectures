@@ -18,13 +18,23 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Data for ordinary locally finite adic compact support
 
-Source: current blueprint, prose-10-20, common-field
-comparisons; Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15.
+## Implementation details
 
 The auxiliary coefficient closure in the finite-stage construction is lifted only to
 use its published interface. Every finite field below is a subfield of PadicAlgCl,
 and the descended functor acts on the original, unlifted common-stage category.
 The section presentation fixes the scalar comparison as a mate of actual operations.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Section 6.8, Definition 6.7.6,
+  Proposition 6.8.14 and Remark 6.8.15
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 08BJ]
+* [Stacks, Tag 09T5]
+* [Stacks, Tag 0B65]
 -/
 
 @[expose] public noncomputable section
@@ -50,8 +60,7 @@ open ConstructibleExceptionalCoefficients
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- Native coefficient inverse images, fixed by precomposition of locally finite functions.
-Source: Bhatt--Scholze, Section 6.8. -/
+/-- Native coefficient inverse images, fixed by precomposition of locally finite functions. -/
 class NativeRings where
   [commutative : ∀ T : Scheme.{u}, IsCommMonObj (abRing l T)]
   pull : ∀ {U V : Scheme.{u}} (g : U ⟶ V),
@@ -65,15 +74,13 @@ class NativeRings where
 
 attribute [instance] NativeRings.commutative
 
-/-- The existing ringed coefficient interface, specialized to the native ring sheaf.
-Source: Bhatt--Scholze, Section 6.8. -/
+/-- The existing ringed coefficient interface, specialized to the native ring sheaf. -/
 def nativeCoefficients [N : NativeRings.{u} l] : PurCompactSupport.Coefficients.{u} where
   ring := fun W ↦ ringSheaf l W
   pull := N.pull
 
 /-- Canonical section transport of native operations. Direct image is identity on
-underlying sections; pullback and open extension are its uniquely normalized mates.
-Source: Stacks Tags 03D6, 03D7, 03DI and 0B65. -/
+underlying sections; pullback and open extension are its uniquely normalized mates. -/
 class NativeGeometry extends NativeRings.{u} l where
   [additive : ∀ T : Scheme.{u}, (sections l T).Additive]
   [limits : ∀ T : Scheme.{u}, PreservesFiniteLimits (sections l T)]
@@ -104,28 +111,24 @@ class NativeGeometry extends NativeRings.{u} l where
 attribute [instance] NativeGeometry.additive NativeGeometry.limits NativeGeometry.colimits
   NativeGeometry.equivalence
 
-/-- Additivity in the existing section presentation.
-Source: internal/section module equivalence. -/
+/-- Additivity in the existing section presentation. -/
 noncomputable instance nativeSections_additive [G : NativeGeometry.{u} l]
     (T : Scheme.{u}) : (sections l T).Additive := G.additive T
 
-/-- Additivity of the existing ringed direct image in native coefficients.
-Source: Stacks, Modules on Sites. -/
+/-- Additivity of the existing ringed direct image in native coefficients. -/
 noncomputable instance nativeDirect_additive [G : NativeGeometry.{u} l]
     {U V : Scheme.{u}} (g : U ⟶ V) :
     (proEtaleRingModuleDirectImage g (ringSheaf l V) (ringSheaf l U) (G.pull g)).Additive :=
   proEtaleRingModuleDirectImage_additive g (ringSheaf l V) (ringSheaf l U) (G.pull g)
 
-/-- The actual native compact-support functor, with the specified compactification.
-Source: Bhatt--Scholze, Remark 6.8.15. -/
+/-- The actual native compact-support functor, with the specified compactification. -/
 abbrev actual {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   (ProEtale.adicOpenImmersionLowerShriek l c.i).mapDerivedCategory ⋙
     (ProEtale.adicLowerStar l c.g).rightDerivedFunctor
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The proper transport uses the actual K-injective resolution comparisons.
-Source: Stacks Tags 09T5 and 08BJ. -/
+/-- The proper transport uses the actual K-injective resolution comparisons. -/
 def properTransport [G : NativeGeometry.{u} l] {U V : Scheme.{u}} (g : U ⟶ V) :
     (ProEtale.adicLowerStar l g).rightDerivedFunctor ⋙ (sections l V).mapDerivedCategory ≅
       (sections l U).mapDerivedCategory ⋙
@@ -141,8 +144,7 @@ def properTransport [G : NativeGeometry.{u} l] {U V : Scheme.{u}} (g : U ⟶ V) 
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The canonical ordinary-derived internal/section compact-support comparison.
-Source: Stacks Tags 09T5, 08BJ and 03DI. -/
+/-- The canonical ordinary-derived internal/section compact-support comparison. -/
 def operationTransport [G : NativeGeometry.{u} l]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     actual l c ⋙ (sections l Y).mapDerivedCategory ≅
@@ -154,8 +156,7 @@ def operationTransport [G : NativeGeometry.{u} l]
       (proEtaleRingDerivedDirectImage c.g (ringSheaf l Y) (ringSheaf l c.Z) (G.pull c.g))
 
 /-- The published construction accepts a closure in the scheme universe. This is
-only the canonical size lift of the same algebraic closure.
-Source: Mathlib IsAlgClosed.of_ringEquiv and AlgEquiv.isAlgebraic. -/
+only the canonical size lift of the same algebraic closure. -/
 instance liftedClosure : IsAlgClosure (Padic l) (ULift.{u} (PadicAlgCl l)) where
   isAlgClosed := ⟨fun p ↦ by
     have h := (IsAlgClosed.splits (p.map ULift.ringEquiv.toRingHom)).map
@@ -176,15 +177,14 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (c : Compactification f)
 
 /-- The finite field attached to an unlifted common-stage index, in the published
-finite-operation interface. Source: common finite-field convention. -/
+finite-operation interface. -/
 abbrev finiteField (E : Index l (PadicAlgCl l)) : FieldStage.{u} l where
   carrier := Coefficient.{u} l (PadicAlgCl l) E
 
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem in
 /-- The stage morphism is fixed by the very same construction record as the parent
-adjunction. Its beta is the published scalar q, including identity field extensions.
- -/
+adjunction. Its beta is the published scalar q, including identity field extensions. -/
 structure StageAction where
   system : (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) X).Morphism
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) Y)
@@ -195,8 +195,7 @@ structure StageAction where
       ((P.fields.rationalComparison c (finiteField l E) (finiteField l L)
         (coefficientInclusion l (PadicAlgCl l) E L h)).q)
 
-/-- Normalization by the recorded proper/open scalar mate, on integral representatives.
-Source: Bhatt--Scholze, Remark 6.8.15, blueprint common-field comparison. -/
+/-- Normalization by the recorded proper/open scalar mate, on integral representatives. -/
 def IntegralNormalization [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)
@@ -247,8 +246,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The complete comparison. Integral finite-Tor representatives suffice: integral
 residue Tor supplies every integral constructible object. The displayed equality fixes
 alpha by the proper/open scalar mate on derived arrows; functoriality fixes fractions
-and the StageAction fields fix transitions between coefficient fields.
-Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15. -/
+and the StageAction fields fix transitions between coefficient fields. -/
 structure CompactSupportComparison [G : NativeGeometry.{u} l] where
   source : Realization l X
   target : Realization l Y

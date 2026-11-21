@@ -16,9 +16,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 Let `v : V ⟶ X` be étale with `V` quasi-compact and quasi-separated. The extension by zero
 `v_! Λ` of the constant sheaf `Λ` on `V_ét` is a finitely presentable étale sheaf of
 `Λ`-modules on `X`: `Hom(v_! Λ, G) = Γ(V, v^* G)`, and sections over the quasi-compact
-quasi-separated `V` commute with filtered colimits (Stacks 0738). This is the first half of the
-proof of Stacks 09Z4, constructible sheaves being cokernels of maps between finite sums of such
-sheaves (Stacks 095N).
+quasi-separated `V` commute with filtered colimits.
 
 ## Main statements
 
@@ -27,6 +25,12 @@ sheaves (Stacks 095N).
   quasi-compact quasi-separated scheme is finitely presentable.
 - `AlgebraicGeometry.Etale.isFinitelyPresentable_etaleLowerShriek_constantSheaf`: so is its
   extension by zero along an étale morphism.
+
+## References
+
+* [Stacks, Tag 0738]
+* [Stacks, Tag 095N]
+* [Stacks, Tag 09Z4]
 -/
 
 @[expose] public section
@@ -51,7 +55,7 @@ noncomputable def coyonedaObjSelfIsoForget :
       right_inv n := by simp }
 
 /-- The free module of rank one is finitely presentable, for colimits of `u`-small filtered
-diagrams: `Hom(Λ, -)` is the forgetful functor, which preserves filtered colimits. -/
+diagrams. -/
 theorem isFinitelyPresentable_self : IsFinitelyPresentable.{u} (ModuleCat.of Λ Λ) := by
   rw [isFinitelyPresentable_iff_preservesFilteredColimitsOfSize]
   have : PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
@@ -64,8 +68,7 @@ namespace AlgebraicGeometry
 
 open Scheme Etale
 
-/-- **The constant sheaf on a quasi-compact quasi-separated scheme is finitely presentable.**
-It is left adjoint to the global sections, which commute with filtered colimits. -/
+/-- **The constant sheaf on a quasi-compact quasi-separated scheme is finitely presentable.** -/
 theorem Etale.isFinitelyPresentable_constantSheaf (V : Scheme.{u}) [CompactSpace V]
     [QuasiSeparatedSpace V] :
     IsFinitelyPresentable.{u} ((constantSheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
@@ -83,8 +86,7 @@ theorem Etale.isFinitelyPresentable_constantSheaf (V : Scheme.{u}) [CompactSpace
 
 /-- **Extensions by zero of constant sheaves are finitely presentable.** For an étale
 `v : V ⟶ X` with `V` quasi-compact and quasi-separated, `v_! Λ` is a finitely presentable étale
-sheaf of `Λ`-modules: it is left adjoint to `v^*`, which preserves colimits, applied to the
-finitely presentable constant sheaf `Λ` on `V`. -/
+sheaf of `Λ`-modules. -/
 theorem Etale.isFinitelyPresentable_etaleLowerShriek_constantSheaf {V X : Scheme.{u}}
     (v : V ⟶ X) (h : Etale v) [CompactSpace V] [QuasiSeparatedSpace V] :
     IsFinitelyPresentable.{u} ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h).obj

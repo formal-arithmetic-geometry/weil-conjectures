@@ -16,13 +16,10 @@ Two elementary facts used in the proof of the Künneth formula:
 
 - for an immersion `j : U ⟶ X` which is both open and closed and any `g : Y ⟶ X`, the base
   change map `g⁻¹ j_* F ⟶ h_* p⁻¹ F` is an isomorphism
-  (`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isOpenImmersion_of_isClosedImmersion`,
-  blueprint `lem-kun-base-change-open-closed`). Such a `j` is finite, so this is the finite base
-  change theorem `AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`;
+  (`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isOpenImmersion_of_isClosedImmersion`);
 - for an open immersion `j : U ⟶ X`, `j⁻¹ j_* = id` (the counit of `j^* ⊣ j_*` is an
   isomorphism) and the Leray morphism `RΓ(X, Rj_* K) ⟶ RΓ(U, K)` is an isomorphism
-  (`AlgebraicGeometry.Etale.isOpenImmersion_restriction_lowerStar`, blueprint
-  `lem-kun-open-immersion-restriction`).
+  (`AlgebraicGeometry.Etale.isOpenImmersion_restriction_lowerStar`).
 -/
 
 @[expose] public section
@@ -47,10 +44,8 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [(CategoryTheory.forget A).ReflectsIsomorphisms]
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
 
-/-- Base change for open-closed immersions.
-
-Let `j : U ⟶ X` be both an open and a closed immersion and `g : Y ⟶ X` a morphism, with
-cartesian square
+/-- Base change for open-closed immersions: let `j : U ⟶ X` be both an open and a closed
+immersion and `g : Y ⟶ X` a morphism, with cartesian square
 
 ```
   W --p--> U
@@ -61,10 +56,7 @@ cartesian square
 ```
 
 (`W = Y ×_X U`). Then for every sheaf `F` on `U_ét` the base change map `g⁻¹ j_* F ⟶ h_* p⁻¹ F`
-of `AlgebraicGeometry.Etale.baseChangeMap` is an isomorphism. Since `j` is a closed immersion it
-is finite, and this is the finite base change theorem
-`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`, proved by comparing geometric stalks
-as in the blueprint. -/
+of `AlgebraicGeometry.Etale.baseChangeMap` is an isomorphism. -/
 theorem isIso_baseChangeMap_of_isOpenImmersion_of_isClosedImmersion {U X Y W : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] [IsClosedImmersion j] (g : Y ⟶ X) (p : W ⟶ U)
     (h : W ⟶ Y) [Y.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
@@ -80,13 +72,10 @@ section OpenImmersion
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 omit [HasSmallSiteSheafify A] in
-/-- Inverse image along an open immersion is a
-left inverse of direct image.
-
-For an open immersion `j : U ⟶ X`:
+/-- Inverse image along an open immersion is a left inverse of direct image. For an open
+immersion `j : U ⟶ X`:
 - the counit `j^* j_* F ⟶ F` of `j^* ⊣ j_*` is an isomorphism, i.e. `j⁻¹ j_* = id` on sheaves
-  on `U_ét` (the pushforward along `j` is fully faithful,
-  `AlgebraicGeometry.Etale.fullyFaithfulLowerStarOfIsOpenImmersion`);
+  on `U_ét`;
 - for every `K` in `D(U_ét)` the canonical (Leray) morphism `RΓ(X, Rj_* K) ⟶ RΓ(U, K)` of
   `AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso` is an
   isomorphism. -/

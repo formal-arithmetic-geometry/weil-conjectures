@@ -14,7 +14,11 @@ import Mathlib.Algebra.Category.Grp.Limits
 
 /-! # The ordinary quotient-tower limit of a finite free cell
 
-Source: Stacks Project, Tag 099I; Bhatt--Scholze, Propositions 3.1.9--3.1.10.
+## References
+
+* [Stacks, Tag 099I]
+* [Stacks, Tag 06YL]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Propositions 3.1.9–3.1.10
 -/
 
 @[expose] public noncomputable section
@@ -33,10 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : AlgebraicGeometry.Scheme.{t})
   (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-/-- The actual chain-level quotient units commute with the successor transitions.
-Source: Stacks Tag 06YL.
-Proof: the transition sends 1 tensor x to 1 tensor x, because its coefficient map
-preserves one; the specified tensor-generator formulas therefore give equality. -/
+/-- The actual chain-level quotient units commute with the successor transitions. -/
 theorem completedFreeCellCone_compatibility
     (P : CochainComplex (completedIntegralModuleSheaves l E T D hl) ℤ) (n : ℕ) :
     𝟙 P ≫ integralTowerUnit l E T D hl P n =
@@ -56,8 +57,7 @@ theorem completedFreeCellCone_compatibility
   erw [hunit n i U x, hunit (n + 1) i U x]
   simpa only [map_one] using (hstep n i U 1 x).symm
 
-/-- The explicit cone of the specified quotient-unit chain maps.
-Source: Stacks Tag 06YL. -/
+/-- The explicit cone of the specified quotient-unit chain maps. -/
 def completedFreeCellCone
     (P : CochainComplex (completedIntegralModuleSheaves l E T D hl) ℤ) :
     Cone (Functor.ofOpSequence (X := fun n ↦ integralTowerComplex l E T D hl n P)
@@ -407,27 +407,7 @@ private theorem freeCell_normalized (r : ℕ) (d : ℤ) (n : ℕ) :
     (scalarReductionExtension_adjunction l E T n).choose.unit _ _ e _ he d
 
 /-- Ordinary finite free quotient towers have their specified augmentation as a limit
-cone and epimorphic transitions in every degree.
-
-Source: Stacks Project, algebraization.tex, Tag 099I; Bhatt--Scholze, Propositions
-3.1.9--3.1.10.
-
-Proof: ordinary scalar extension of the unit is the unit of the quotient coefficient
-ring, by the balanced multiplication isomorphism. Its inverse sends a to a tensor 1.
-The specified augmentation is the limit projection under this isomorphism, since it
-sends b to 1 tensor b, hence to its residue. Scalar extension is additive and preserves
-finite biproducts. Thus extension of the product indexed by Fin r is the product of
-r quotient units, coordinate by coordinate, also when r is zero. The comparisons
-commute with all quotient transitions, by their defining pure-tensor formulas.
-A compatible family of r-tuples is r compatible families, so finite products preserve
-the defining limit of the completed coefficient ring. The module forgetful functors
-reflect these limits and preserve the projections. The single-complex functor in any
-integer degree preserves limits, yielding precisely the displayed cone. Quotient ring
-transitions are surjective; their constant sheaf maps are surjective on sections by
-lifting through a set-theoretic section of the ring quotient. They are epimorphic as
-module maps. Finite products are finite biproducts and preserve epimorphisms; placing
-these maps in a single degree gives epimorphisms in every degree, with zero maps between
-zero objects in all other degrees. No derived-limit assertion is assumed here. -/
+cone and epimorphic transitions in every degree. -/
 theorem completedFreeCell_ordinaryLimit (r : ℕ) (d : ℤ) :
     let P := (CochainComplex.singleFunctor (scalarReductionSource l E T) d).obj
       (∏ᶜ fun _ : Fin r ↦

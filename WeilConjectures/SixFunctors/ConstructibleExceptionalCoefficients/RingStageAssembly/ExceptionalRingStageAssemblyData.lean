@@ -11,6 +11,10 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.C
 
 This partial datum contains only finite and integral stages. Field-stage operations,
 localization comparisons and common-field comparisons are constructed separately.
+
+## References
+
+* Zheng, Lemma 5.22 and Proposition 5.24
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +35,7 @@ attribute [local instance] constructionInclusionShift
 
 /-- Finite and integral coefficient operations, with the actual scalar restrictions,
 proper/open normalized counit mates, and shift-compatible ambient realizations.
-There are no rational or closed operations in this datum.
-Source: Zheng, Lemma 5.22 and Proposition 5.24; coefficient construction steps 1--4. -/
+There are no rational or closed operations in this datum. -/
 structure RingStageAssembly (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]
@@ -129,8 +132,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
 /-- Adjoin rational and closed operations to the two ring-stage families.
-This is a case distinction on the existing stage index, with no choice of data.
-Source: the four coefficient stages of the exceptional construction. -/
+This is a case distinction on the existing stage index, with no choice of data. -/
 def RingStageAssembly.extendOperation
     (A : RingStageAssembly.{u, v} l Ω D hl (f := f))
     (rational : ∀ (_c : Compactification f) (E : FieldStage.{max u v} l),
@@ -144,8 +146,7 @@ def RingStageAssembly.extendOperation
   | .closed => closed c
 
 /-- Assemble the ring record from its ring-only fields and the supplied field operations.
-All scalar functors and mates are reused from the ring datum, and none is chosen again.
-Source: coefficient construction steps 1--5. -/
+All scalar functors and mates are reused from the ring datum, and none is chosen again. -/
 def RingStageAssembly.complete
     (A : RingStageAssembly.{u, v} l Ω D hl (f := f))
     (rational : ∀ (_c : Compactification f) (E : FieldStage.{max u v} l),

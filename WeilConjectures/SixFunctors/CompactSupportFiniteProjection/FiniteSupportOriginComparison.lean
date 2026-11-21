@@ -31,8 +31,7 @@ variable {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
   {E : Type u} [Field E] [Algebra (Padic C.l) E]
   [FiniteDimensional (Padic C.l) E] {n : ℕ} {hn : 1 ≤ n}
 
-/-- The existing coefficient realization restricted to bounded constructible objects.
-Source: finite-ring constructible derived origin, applied to the fixed realization. -/
+/-- The existing coefficient realization restricted to bounded constructible objects. -/
 def originInclusion (X : SixFunctorSpace D) :
     sixFunctorFiniteCategory D C E n hn X ⥤
       (DerivedCategory.plusEtaleOrigin
@@ -46,8 +45,7 @@ def originInclusion (X : SixFunctorSpace D) :
         (realization (C := C) (E := E) (n := n) (hn := hn) X).inverse)
       (fun K ↦ finiteRealization_etaleOrigin X K)
 
-/-- Conjugate a functor comparison through the inverse coefficient equivalences.
-Source: equivalence unit and counit cancellation. -/
+/-- Conjugate a functor comparison through the inverse coefficient equivalences. -/
 def inverseConjugation {A B C₀ D₀ : Type*}
     [Category A] [Category B] [Category C₀] [Category D₀]
     (R : A ≌ B) (R' : C₀ ≌ D₀) (F : B ⥤ D₀) (G : A ⥤ C₀)
@@ -163,8 +161,7 @@ private theorem transport_normalization
     R₂.unitIso.inv.app (Q'.obj (Q.obj M)) ≫ z) hnat.symm
 
 /-- Comparison with the canonical origin support, built from the given realization
-and the canonical change of compactification. No new comparison is chosen.
-Source: the prescribed finite support realization and canonical candidate comparison. -/
+and the canonical change of compactification. No new comparison is chosen. -/
 def originSupportComparison (S : SixFunctorFiniteOperations D C E n hn)
     {X Y : SixFunctorSpace D} (f : X ⟶ Y)
     [QuasiCompact f.hom.left] (c : Compactification f.hom.left) :
@@ -652,19 +649,7 @@ private theorem faithful_composition_path
   simpa only [Functor.whiskerRight_comp, whiskerRight_twice_strict,
     whiskerRight_left_strict] using h
 
-/-- The binary operation compositor agrees with the canonical origin compositor.
-
-Proof: fix a bounded constructible input and obtain its bounded etale origin by
-finiteRing_constructibleDerived_origin. Retain this witness in
-finiteCompositionNormalization. Expand the witness-support comparisons and cancel
-its input identification. Naturality of the fixed-scalar support comparison cancels
-the intermediate coefficient counit. The witnessed compositor is the canonical
-origin compositor with the three candidate comparisons, by compact-support site
-coherence and the definition of towerCandidateComparison. The candidate comparisons
-cancel with those in originSupportComparison. The result is the displayed equality
-at every object; natural-transformation extensionality proves the equation. This
-involves two support operations, no tensor, no projection, and no triple coherence.
-Zero objects and identity morphisms use the same cancellations. -/
+/-- The binary operation compositor agrees with the canonical origin compositor. -/
 theorem originSupportComparison_composition (S : SixFunctorFiniteOperations D C E n hn)
     {X Y Z : SixFunctorSpace D} (f : X ⟶ Y) (g : Y ⟶ Z)
     [QuasiCompact f.hom.left] [QuasiCompact g.hom.left]

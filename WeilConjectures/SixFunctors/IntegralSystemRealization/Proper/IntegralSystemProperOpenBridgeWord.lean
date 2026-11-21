@@ -7,7 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Native.IntegralSystemNativeBridgeData
 
-/-! The concrete morphism diagram for bridge pasting. -/
+/-! # Proper/open bridge word
+
+The concrete morphism diagram for bridge pasting. -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -17,8 +19,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralSystemRealization
 
-/-- A five-factor word and the smaller prefix and tail words used to compare it.
- -/
+/-- A five-factor word and the smaller prefix and tail words used to compare it. -/
 structure BridgeWord (C : Type w) [Category.{v} C] where
   A : C
   B : C
@@ -56,8 +57,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The actual cartesian, restriction, clopen, compositor and bridge components.
-Every field is constructed by the given operations; no witness is chosen.
- -/
+Every field is constructed by the given operations; no witness is chosen. -/
 @[irreducible] def properOpenBridgeWord
     (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)

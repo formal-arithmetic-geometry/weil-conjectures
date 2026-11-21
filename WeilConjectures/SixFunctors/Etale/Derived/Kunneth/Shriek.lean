@@ -20,14 +20,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Relative
 
 /-!
-
 # The `!`-Künneth isomorphism on the étale site
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct`
-  (`lemma-external-duality-trace-morphism` (i)): the `!`-Künneth isomorphism
-  `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a finite coefficient ring.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct`:
+  the `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a finite
+  coefficient ring.
 -/
 
 @[expose] public section
@@ -58,13 +57,13 @@ section KunnethShriek
 
 /-! ### The `!`-Künneth isomorphism
 
-Item (i) of `lemma-external-duality-trace-morphism`: for `fᵢ : Xᵢ ⟶ Yᵢ` over `S`, the `!`-Künneth
-isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` is the relative product theorem
+For `fᵢ : Xᵢ ⟶ Yᵢ` over `S`, the `!`-Künneth isomorphism
+`Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` is the relative product theorem
 over `B = Y₁ ×_S Y₂`, using `X₁ ×_S X₂ = (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)`
 (`CategoryTheory.Limits.pullback.mapOverBaseIso`) and compact-support base change. -/
 
 /-- For an isomorphism `e : Y ≅ Y'` of schemes, the derived pushforward `R(e_*)` is the
-derived pullback `L((e⁻¹)^*)`: both are computed by the exact functor `e_* ≅ (e⁻¹)^*`. -/
+derived pullback `L((e⁻¹)^*)`. -/
 noncomputable def rightDerivedLowerStarIsoLeftDerivedUpperStarInv {Y Y' : Scheme.{u}}
     (e : Y ≅ Y') : R((e.hom)_*[A]) ≅ L((e.inv)^*[A]) :=
   have : PreservesFiniteColimits (e.hom)_*[A] :=
@@ -80,10 +79,8 @@ omit [HasSmallSiteSheafify A] in
 /-- Transport of `R(f₁ × f₂)_!` along `pullback.mapOverBaseIso`: for `Z` in
 `D((X₁ ×_S X₂)_ét)`, writing `e : X₁ ×_S X₂ ≅ (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)` with
 `B = Y₁ ×_S Y₂` and `h` for the structure morphism of the fibre product over `B`,
-
 `R(f₁ × f₂)_! Z ≅ Rh_! (L(e⁻¹)^* Z)`, given the composition isomorphism
-`R(f₁ × f₂)_! ≅ Re_! ⋙ Rh_!` (`hcomp`), which holds for torsion coefficients
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`). -/
+`R(f₁ × f₂)_! ≅ Re_! ⋙ Rh_!` (`hcomp`). -/
 theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
     [HasCompactification (pullback.toBase (pullback.snd f₁ (pullback.fst b₁ b₂))
@@ -196,10 +193,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
 /-- The `!`-Künneth isomorphism `Ku_! : R(f₁ × f₂)_! (M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂` for a
 finite coefficient ring, given compact-support base change of `Rfᵢ_! Mᵢ` along the projections
 `Y₁ ×_S Y₂ ⟶ Yᵢ` and the composition isomorphism `R(f₁ × f₂)_! ≅ Re_! ⋙ Rh_!` of
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase`; both hold for torsion
-coefficients. It is the relative product theorem
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` over
-`B = Y₁ ×_S Y₂`, transported along `pullback.mapOverBaseIso`. -/
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_mapOverBase`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_baseChange
     [HasCompactification f₁] [HasCompactification f₂] [QuasiCompact f₁] [QuasiCompact f₂]
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
@@ -247,20 +241,10 @@ theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct_of_base
     ((-⊗ᴸ-(pullback b₁ b₂)[ModuleCat.{u + 1} Λ]).obj _).mapIso e₂.symm⟩
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] in
-/-- Blueprint `lemma-external-duality-trace-morphism` (i), `lemma-external-duality-trace-morphism`
-(i): the `!`-Künneth isomorphism.
-
-Let `fᵢ : Xᵢ ⟶ Yᵢ` be separated of finite type between schemes over `S`, let `Λ` be a finite
-coefficient ring and `Mᵢ` in `Dctf(Xᵢ, Λ)`. Writing `f = f₁ × f₂ : X₁ ×_S X₂ ⟶ Y₁ ×_S Y₂`,
-
-`Ku_! : Rf_!(M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂`.
-
-This is the relative product theorem
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` for the base
-`B = Y₁ ×_S Y₂`, using `X₁ ×_S X₂ = (X₁ ×_{Y₁} B) ×_B (X₂ ×_{Y₂} B)`, together with
-compact-support base change `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekBaseChangeMap`
-along the projections `B ⟶ Yᵢ`. The finiteness of `Λ` is the hypothesis of that base change
-theorem. -/
+/-- The `!`-Künneth isomorphism: let `fᵢ : Xᵢ ⟶ Yᵢ` be separated of finite type between schemes
+over `S`, let `Λ` be a finite coefficient ring and `Mᵢ` in `Dctf(Xᵢ, Λ)`. Writing
+`f = f₁ × f₂ : X₁ ×_S X₂ ⟶ Y₁ ×_S Y₂`, there is an isomorphism
+`Ku_! : Rf_!(M₁ ⊠ M₂) ≅ Rf₁_! M₁ ⊠ Rf₂_! M₂`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct
     [HasCompactification f₁] [HasCompactification f₂] [QuasiCompact f₁] [QuasiCompact f₂]
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]

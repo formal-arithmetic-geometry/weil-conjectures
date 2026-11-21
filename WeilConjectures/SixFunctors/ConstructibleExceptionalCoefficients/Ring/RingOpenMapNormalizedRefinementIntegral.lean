@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.C
 public import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenRestriction
 import WeilConjectures.DeligneLaumon.QcqsCompletedRefinement
 
-/-! # Completed integral normalized refinement comparisons -/
+/-! # Completed integral normalized refinement comparisons
+
+## References
+
+* Zheng, Section 5, Lemma 5.13 and Constructions 5.14–5.15
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 0F7I]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,14 +29,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The completed integral coefficient part of the normalized refinement comparison.
-
-Source: the normalized strict reduction construction in Zheng Section 5, Lemma 5.13
-and Constructions 5.14--5.15 (Stacks Tags 0F7B and 0F7I).
-
-Proof: construct compatible finite-level comparisons on the normalized strict
-reduction system, take the normalized total-limit comparison, and identify its
-transpose with the displayed open unit and restriction. -/
+/-- The completed integral coefficient part of the normalized refinement comparison. -/
 theorem exists_normalized_refinement_iso_integral
     (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}

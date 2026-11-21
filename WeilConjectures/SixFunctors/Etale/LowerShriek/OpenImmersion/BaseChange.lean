@@ -34,35 +34,8 @@ X --k--> D
 
 is cartesian, i.e. `q ⁻¹ (X) = X`.
 
-The comparison is the mate, under the adjunctions `j_! ⊣ j^*`, `k_! ⊣ k^*` and
-`q^* ⊣ q_*`, of the base change map
-
-`q_* ∘ k^* ≅ q_* ∘ q^* ∘ j^* ⟶ j^*`
-
-of the right adjoints, given by the composition isomorphism `Etale.upperStarComp` followed
-by the counit of `q^* ⊣ q_*`. Since a conjugate of an isomorphism is an isomorphism
-(`CategoryTheory.conjugateEquiv_symm_iso`), it is enough to prove that this base change map
-is one.
-
-That in turn is a computation on the small étale sites. Both `q_*` and the pullback along
-an open immersion are composition with a functor of small étale sites, namely base change
-along `q` (`MorphismProperty.Over.pullback`) and the localization functor
-(`MorphismProperty.Over.map`), so that `q_* ∘ k^*` is composition with
-`Over.map k ⋙ Over.pullback q`, which sends `T ⟶ X` étale to `T ×_D C ⟶ C`, while `j^*` is
-composition with `Over.map j`, which sends `T ⟶ X` to `T ⟶ C`. The comparison
-`Etale.overMapPullbackComparison` is the canonical `T ⟶ T ×_D C`, and it is an isomorphism
-when the square above is cartesian, since then `T ×_D C = T ×_X (X ×_D C) = T ×_X X = T`.
-
-Identifying the counit description of the base change map with the one induced by
-`Etale.overMapPullbackComparison` is `Etale.upperStarBaseChange_eq`. Both are mates of
-natural transformations `j_* ⋙ q_* ⟶ k_*`, and `CategoryTheory.mateEquiv` is a bijection,
-so it suffices to identify those two with the composition isomorphism
-`Etale.lowerStarComp`; for the counit description this is formal, and for the site
-description it is a computation with pullbacks of schemes.
-
 The main application is to a refinement `r : c.Refinement d` of compactifications of a
-morphism `f : S ⟶ Y` whose square over `S` is cartesian; this is part of the data of a
-refinement of dense compactifications in the blueprint, and it is the geometric input for
+morphism `f : S ⟶ Y` whose square over `S` is cartesian; it is the geometric input for
 the comparison of the two derived lower shrieks attached to `c` and to `d`.
 
 ## Main definitions
@@ -102,6 +75,14 @@ the comparison of the two derived lower shrieks attached to `c` and to `d`.
 - `AlgebraicGeometry.Compactification.Refinement.openImmersionLowerShriekBaseChange_id` and
   `AlgebraicGeometry.Compactification.Refinement.openImmersionLowerShriekBaseChange_comp`:
   the two laws for the identity refinement and for a composite of refinements.
+
+## Implementation details
+
+The comparison is the mate, under the adjunctions `j_! ⊣ j^*`, `k_! ⊣ k^*` and `q^* ⊣ q_*`, of
+the base change map `q_* ∘ k^* ≅ q_* ∘ q^* ∘ j^* ⟶ j^*` of the right adjoints. That map is
+identified (`Etale.upperStarBaseChange_eq`) with the one induced by the comparison of site
+functors `Etale.overMapPullbackComparison`, the canonical `T ⟶ T ×_D C`, which is an
+isomorphism when the square is cartesian.
 -/
 
 @[expose] public section
@@ -118,8 +99,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
 
 /-- For an étale morphism the localization functor between the small étale sites is
-continuous. This is `CategoryTheory.GrothendieckTopology.isContinuous_overMap_of_le` for
-`P = Q = @Etale`, registered as an instance. -/
+continuous. -/
 instance Etale.isContinuous_overMap {V U : Scheme.{u}} {f : V ⟶ U} (hf : @Etale _ _ f) :
     (MorphismProperty.Over.map ⊤ hf).IsContinuous
       (V.smallGrothendieckTopology @Etale) (U.smallGrothendieckTopology @Etale) :=
@@ -165,8 +145,7 @@ noncomputable def Etale.overMapPullbackComparison :
     · simp
 
 /-- If the square is cartesian, the underlying morphism of schemes of the comparison of
-site functors is an isomorphism: for `T ⟶ X` étale, pasting the cartesian square with the
-trivial square over `T ⟶ X` identifies `T` with `T ×_D C`. -/
+site functors is an isomorphism. -/
 lemma Etale.isIso_overMapPullbackComparisonApp_left (hcart : IsPullback j (𝟙 X) q k)
     (b : X.Etale) :
     IsIso (Etale.overMapPullbackComparisonApp j q k hk b).left := by
@@ -180,9 +159,7 @@ lemma Etale.isIso_overMapPullbackComparisonApp_left (hcart : IsPullback j (𝟙 
   rw [heq]
   infer_instance
 
-/-- If the square is cartesian, the comparison of site functors is an isomorphism: a
-morphism of the small étale site is an isomorphism as soon as the underlying morphism of
-schemes is. -/
+/-- If the square is cartesian, the comparison of site functors is an isomorphism. -/
 lemma Etale.isIso_overMapPullbackComparison (hcart : IsPullback j (𝟙 X) q k) :
     IsIso (Etale.overMapPullbackComparison j q k hk) := by
   have (b : X.Etale) : IsIso ((Etale.overMapPullbackComparison j q k hk).app b) := by
@@ -201,9 +178,8 @@ open Etale
 
 include hk in
 /-- The base change map `q_* ⋙ k^* ⟶ j^*` on étale sheaves, with both pullbacks along the
-open immersions computed as restrictions along the localization functors. All three
-functors involved are composition with a functor of small étale sites, and the map is the
-one induced by `Etale.overMapPullbackComparison`. -/
+open immersions computed as restrictions along the localization functors.
+The map is the one induced by `Etale.overMapPullbackComparison`. -/
 noncomputable def Etale.openImmersionRestrictionBaseChange :
     (q)_*[A] ⋙ Etale.openImmersionRestriction A k ⟶ Etale.openImmersionRestriction A j :=
   Functor.sheafPushforwardContinuousNatTrans (Etale.overMapPullbackComparison j q k hk) A
@@ -211,8 +187,7 @@ noncomputable def Etale.openImmersionRestrictionBaseChange :
 
 include hk in
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] in
-/-- If the square is cartesian, the base change map on restrictions is an isomorphism,
-being induced by an isomorphism of the site functors. -/
+/-- If the square is cartesian, the base change map on restrictions is an isomorphism. -/
 lemma Etale.isIso_openImmersionRestrictionBaseChange (hcart : IsPullback j (𝟙 X) q k) :
     IsIso (Etale.openImmersionRestrictionBaseChange A j q k hk) := by
   have := Etale.isIso_overMapPullbackComparison j q k hk hcart
@@ -289,15 +264,7 @@ set_option backward.defeqAttrib.useBackward true in
 include hk in
 /-- The base change map `q_* ⋙ k^* ⟶ j^*` built from the counit of `q^* ⊣ q_*` agrees with
 the map `Etale.openImmersionRestrictionBaseChange` induced by the comparison of site
-functors.
-
-Both are mates, under the adjunctions `j^* ⊣ j_*` and `k^* ⊣ k_*`, of natural
-transformations `j_* ⋙ q_* ⟶ k_*`, and `CategoryTheory.mateEquiv` is a bijection, so it
-suffices to identify those with the composition isomorphism `Etale.lowerStarComp`. For the
-counit description this is formal: it is `CategoryTheory.iterated_mateEquiv_conjugateEquiv`
-together with the construction of `Etale.upperStarComp` as a conjugate of
-`Etale.lowerStarComp`. For the site description it is a computation on the small étale
-sites, where all functors and both adjunctions come from the sites. -/
+functors. -/
 lemma Etale.upperStarBaseChange_eq :
     Etale.upperStarBaseChange A j q k hk =
       Functor.whiskerLeft (q)_*[A] (Etale.upperStarIsoOpenImmersionRestriction A k).hom ≫
@@ -372,8 +339,7 @@ noncomputable def Etale.openImmersionLowerShriekBaseChange :
 
 include hk in
 /-- **Base change for the extension by zero**: if the square is cartesian, the comparison
-`j_! ⟶ k_! ⋙ q^*` is an isomorphism, being the conjugate of the isomorphism
-`Etale.upperStarBaseChange`. -/
+`j_! ⟶ k_! ⋙ q^*` is an isomorphism. -/
 lemma Etale.isIso_openImmersionLowerShriekBaseChange (hcart : IsPullback j (𝟙 X) q k) :
     IsIso (Etale.openImmersionLowerShriekBaseChange A j q k hk) := by
   have := Etale.isIso_upperStarBaseChange A j q k hk hcart
@@ -389,8 +355,7 @@ variable {X C D E : Scheme.{u}}
 
 omit [HasSmallSiteSheafify A] in
 /-- The composition isomorphism `Etale.upperStarCompIso` is the instance at `k` of the
-generalized composition isomorphism `Etale.upperStarComp`; in this form the unit and
-associativity laws of `Etale.upperStarComp` apply to it. -/
+generalized composition isomorphism `Etale.upperStarComp`. -/
 lemma Etale.upperStarCompIso_eq_upperStarComp (j : X ⟶ C) (q : C ⟶ D) (k : X ⟶ D)
     (hk : j ≫ q = k) :
     Etale.upperStarCompIso A j q k hk = Etale.upperStarComp A j q k hk.symm := by

@@ -12,9 +12,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomCons
 
 For `K, M ∈ Dctf(X_ét, Λ)`, `X` of finite type over a field, `Λ` finite and `N` a finitely
 generated `Λ`-module, the canonical map `RHom(K, M) ⊗ᴸ N_X ⟶ RHom(K, M ⊗ᴸ N_X)` is an
-isomorphism (`AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_constantSingle`), by the way-out
-argument along the first syzygies from the free modules of finite rank
-(`WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomConstantTensor`).
+isomorphism (`AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_constantSingle`).
+
+## Implementation details
+
+The free case and the bounds are in
+`WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHomConstantTensor`.
 -/
 
 @[expose] public section

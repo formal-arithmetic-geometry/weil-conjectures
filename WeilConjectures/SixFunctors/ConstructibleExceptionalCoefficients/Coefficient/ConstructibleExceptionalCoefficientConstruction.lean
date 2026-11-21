@@ -13,7 +13,12 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Construc
 /-! # Normalized coefficient adjunction construction before coherence
 
 The coefficient records retain the literal localization and common representative-arrow
-normalizations supplied by coefficient-stage construction; the assembly preserves them. -/
+normalizations supplied by coefficient-stage construction; the assembly preserves them.
+
+## References
+
+* Zheng, Lemma 5.22
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,39 +36,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- Construct the normalized adjunctions and individual invertible coefficient mates.
-No identity or composition law for these comparisons is asserted here.
-Source: current blueprint exceptional inverse image paragraph, and Zheng, Lemma 5.22;
-steps 1--5 and 7--13 of the constructible coefficient adjunction argument.
-
-Proof: At finite coefficients, open extension preserves the original Tor interval and
-proper pushforward enlarges its upper endpoint by twice a dimension bound of the fixed
-compactification. Restrict the ordinary etale compact-support adjunction to bounded
-constructible finite-Tor objects, using the specified etale-origin Hom equivalence and
-exceptional preservation. Transport the adjunction to the pro-etale site. Endow its right
-adjoint with the adjoint shift structure; the adjunction shift identities and exactness
-of the left functor imply exactness of the right functor. On bounded flat models scalar
-extension preserves the Tor interval. Define q by the scalar-adjunction mate of the
-proper/open restriction square. The etale constant-coefficient projection formula makes
-q invertible; the exceptional constant-tensor theorem makes its counit transpose b
-invertible, even for nonflat quotients. Their shift identities follow from the derived
-adjunction comparisons.
-
-For integral coefficients use the ordinary etale strict-system adjunction of Zheng 5.22,
-including its evaluation comparisons. Transport through system site comparison; joint
-conservativity of evaluations proves invertibility of the system comparisons. The
-reduction--limit equivalence on derived-complete objects and normalized towers descends
-the adjunction: the unit is the actual compatible reduction cone, the counit is normalized
-DVR effectivity, and both sides retain the uniform finite-level bounds above. Finite-free
-completed scalar comparison and cofinality of the ramified en subsequence give the stated
-integral comparisons. Localize these linear Hom bijections to obtain rational adjunctions,
-then take their common finite-field stages for the closed coefficient category. These
-constructions give the displayed realization normalizations and the tensor-normalized
-scalar identity and composition isomorphisms, without asserting their q/b cocycles.
-For each proper compactification refinement use its open-unit/proper-counit normalized
-left comparison and its conjugate right comparison. Conjugation proves both refinement
-adjunction equations and transports shifts. At field stages use the localized and common
-stage maps, yielding refinementRational and refinementCommon. Empty schemes give the
-zero functors and dimension bound zero; no separatedness of X or Y over k is used. -/
+No identity or composition law for these comparisons is asserted here. -/
 theorem exists_coefficient_construction (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} (f : X ⟶ Y)
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

@@ -31,8 +31,8 @@ Suppose the nearby cycles *stabilize* at the level `L'`: the pullback exchange
   averaging over the finite quotient.
 
 This holds for any coefficients in which `|Gal(L'/L)|` is invertible, in particular `ℚ̄_ℓ` for a
-`p`-group: it is the passage from the finite Galois layers (step 1 of the finite-layer route,
-`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_autAction`) to the pro-`p`
+`p`-group: it is the passage from the finite Galois layers
+(`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_autAction`) to the pro-`p`
 Galois layer, given the stabilization, which comes from the continuity of the inertia action on
 nearby cycles (SGA 4½, [Th. finitude], 3.4; SGA 7, Exp. XIII, 1.3).
 -/
@@ -217,13 +217,7 @@ level `L'`). If `|Gal(L'/L)|` is invertible on `Lε^* C`, then:
 * every `σ ∈ Gal(Ω/L')` acts trivially on `Ψ_{N_Ω} (L(𝟙)^* C)`;
 * the pullback exchange `α : L(𝟙)^* Ψ_N C ⟶ Ψ_{N_Ω} (L(𝟙)^* C)` of the projection `N_Ω ⟶ N` has
   a retraction `r` with `|Gal(L'/L)| • (r ≫ α) = ∑_{τ ∈ Gal(L'/L)} τ̃_*`, the sum of the actions
-  of lifts `τ̃ ∈ Gal(Ω/L)` (`τ̃|_{L'} = τ`).
-
-The exchange `α` is the composite of the exchange of the finite layer `N_{L'} ⟶ N`, split by
-the averaged Galois action
-(`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_autAction`), and of the
-invertible exchange of `N_Ω ⟶ N_{L'}`, which intertwines the Galois actions
-(`NearbyCyclesModel.pullbackExchange_galoisLayerRestrict_app_comp_autAction`). -/
+  of lifts `τ̃ ∈ Gal(Ω/L)` (`τ̃|_{L'} = τ`). -/
 theorem exists_retraction_pullbackExchange_galoisLayerHom_of_isIso [FiniteDimensional L L']
     [IsGalois L L']
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

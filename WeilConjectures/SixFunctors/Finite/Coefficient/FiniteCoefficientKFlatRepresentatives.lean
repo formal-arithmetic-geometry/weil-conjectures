@@ -28,7 +28,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # Resolving representatives for finite coefficient inverse image
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4.
+## References
+
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -173,14 +176,7 @@ private theorem comparison_has_kflat_resolutions
     (AlgebraicGeometry.ProEtale.intrinsic_realization_tensor_complex_iso A T) G
 
 /-- Restriction to complexes with intrinsically K-flat inverse image is fully faithful
-on functor categories, also for pairs of representatives.
-Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4.
-Proof: choose the functorial flat resolution on the etale category. Ordinary inverse
-image preserves flatness, and the intrinsic realization is an exact tensor equivalence.
-Thus every complex admits a quasi-isomorphism from a complex in the specified class.
-The same holds in the homotopy category. Resolve the vertices of roofs and common
-refinements to obtain localization on this full subcategory. Localization is fully
-faithful on functor categories, and taking products gives the assertion for pairs. -/
+on functor categories, also for pairs of representatives. -/
 theorem finiteCoefficientKFlatRepresentativesFullyFaithful
     (A : Type u) [CommRing A] [Finite A] (T : AlgebraicGeometry.Scheme.{u})
     [hD : HasDerivedCategory.{s} (Sheaf T.smallEtaleTopology

@@ -22,9 +22,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 * `BC(p')` implies `BC(p)` for the base change `p'` of `p` along a universal homeomorphism
   (`AlgebraicGeometry.Etale.BaseChangeProperty.of_isPullback_of_isUniversalHomeomorphism`),
 
-together with the corresponding statements for the universal base-change property. These are
-the reductions "replace `K` by its perfect closure and `X` by its reduction" of the proof of
-blueprint `lemma-kunneth-field-coefficients--1`.
+together with the corresponding statements for the universal base-change property. These
+justify replacing a field by its perfect closure and a scheme by its reduction.
 -/
 
 @[expose] public section
@@ -44,8 +43,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {X S : Scheme.{u}}
 
 /-- A universal homeomorphism `p` satisfies the base-change property `BC(p, Λ, q)` in every
-degree: the derived base-change map along a universal homeomorphism is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isUniversalHomeomorphism`). -/
+degree. -/
 theorem Etale.baseChangeProperty_of_isUniversalHomeomorphism (p : X ⟶ S)
     [IsUniversalHomeomorphism p] (q : ℤ) : Etale.BaseChangeProperty Λ p q := by
   intro T Y g e h _ _ sq F
@@ -56,12 +54,7 @@ theorem Etale.baseChangeProperty_of_isUniversalHomeomorphism (p : X ⟶ S)
 
 variable {Λ}
 
-/-- If `u` is a universal homeomorphism and `BC(u ≫ p, Λ, q)` holds, then `BC(p, Λ, q)` holds.
-
-The base-change map of a square on `u ≫ p` is the pullback along `u` of the base-change map of
-the square on `p`, followed by the base-change map of a square on `u`, which is an isomorphism;
-and the pullback along a universal homeomorphism is an equivalence, so it reflects
-isomorphisms. -/
+/-- If `u` is a universal homeomorphism and `BC(u ≫ p, Λ, q)` holds, then `BC(p, Λ, q)` holds. -/
 theorem Etale.BaseChangeProperty.of_comp_isUniversalHomeomorphism {X' : Scheme.{u}} {p : X ⟶ S}
     (u : X' ⟶ X) [IsUniversalHomeomorphism u] {q : ℤ}
     (H : Etale.BaseChangeProperty Λ (u ≫ p) q) : Etale.BaseChangeProperty Λ p q := by
@@ -92,9 +85,7 @@ theorem Etale.BaseChangeProperty.of_comp_isUniversalHomeomorphism {X' : Scheme.{
   exact isIso_of_reflects_iso _ ((u)^*[ModuleCat.{u + 1} Λ])
 
 /-- If `p'` is the base change of `p` along a universal homeomorphism `v` and `BC(p', Λ, q)`
-holds, then `BC(p, Λ, q)` holds: `p' ≫ v = u ≫ p` with `u` the base change of `v`, a universal
-homeomorphism, and `BC(p' ≫ v)` holds by composition
-(`AlgebraicGeometry.Etale.BaseChangeProperty.comp`). -/
+holds, then `BC(p, Λ, q)` holds. -/
 theorem Etale.BaseChangeProperty.of_isPullback_of_isUniversalHomeomorphism {S' X' : Scheme.{u}}
     {p : X ⟶ S} {v : S' ⟶ S} {u : X' ⟶ X} {p' : X' ⟶ S'} (hpb : IsPullback u p' p v)
     [IsUniversalHomeomorphism v] {q : ℤ} (H : Etale.BaseChangeProperty Λ p' q) :
@@ -108,11 +99,7 @@ theorem Etale.BaseChangeProperty.of_isPullback_of_isUniversalHomeomorphism {S' X
   intro T Y g e h _ _ sq F
   exact Etale.BaseChangeProperty.of_comp_isUniversalHomeomorphism u H' g e h sq F
 
-/-- The universal form of
-`AlgebraicGeometry.Etale.BaseChangeProperty.of_comp_isUniversalHomeomorphism`: if `u` is a
-universal homeomorphism and `BC(u ≫ p)` holds universally, so does `BC(p)`. A base change of
-`u ≫ p` is the composite of a base change of `u`, again a universal homeomorphism, and the
-corresponding base change of `p`. -/
+/-- If `u` is a universal homeomorphism and `BC(u ≫ p)` holds universally, so does `BC(p)`. -/
 theorem Etale.UniversalBaseChangeProperty.of_comp_isUniversalHomeomorphism {X' : Scheme.{u}}
     {p : X ⟶ S} (u : X' ⟶ X) [IsUniversalHomeomorphism u] {q : ℤ}
     (H : Etale.UniversalBaseChangeProperty Λ (u ≫ p) q) :
@@ -127,10 +114,8 @@ theorem Etale.UniversalBaseChangeProperty.of_comp_isUniversalHomeomorphism {X' :
   exact Etale.BaseChangeProperty.of_comp_isUniversalHomeomorphism
     (pullback.snd u b'') (H t _ _ h₂) g e h sq F
 
-/-- The universal form of
-`AlgebraicGeometry.Etale.BaseChangeProperty.of_isPullback_of_isUniversalHomeomorphism`: if `p'`
-is the base change of `p` along a universal homeomorphism and `BC(p')` holds universally, so
-does `BC(p)`. -/
+/-- If `p'` is the base change of `p` along a universal homeomorphism and `BC(p')` holds
+universally, so does `BC(p)`. -/
 theorem Etale.UniversalBaseChangeProperty.of_isPullback_of_isUniversalHomeomorphism
     {S' X' : Scheme.{u}} {p : X ⟶ S} {v : S' ⟶ S} {u : X' ⟶ X} {p' : X' ⟶ S'}
     (hpb : IsPullback u p' p v) [IsUniversalHomeomorphism v] {q : ℤ}

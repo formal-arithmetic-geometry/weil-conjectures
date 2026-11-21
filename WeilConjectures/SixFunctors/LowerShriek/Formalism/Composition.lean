@@ -18,7 +18,7 @@ proper base change, this file constructs the composition isomorphism
 
 `F.compIso T : F.shriek T.cf ⋙ F.shriek T.cg ≅ F.shriek T.cfg`
 
-of blueprint `proposition-composition-base-change-rf-shriek--1`: it is the exchange isomorphism
+It is the exchange isomorphism
 `(cg.i)_! (cf.g)_* ≅ p_* q_!` of the cartesian square of `T`, followed by the composition
 isomorphisms `(cf.i)_! ⋙ q_! ≅ (cfg.i)_!` and `p_* ⋙ (cg.g)_* ≅ (cfg.g)_*`.
 
@@ -121,7 +121,7 @@ theorem compIso_naturality {T' T : Compactification.Triangle f g} (φ : T'.Hom T
 
 /-- **Independence of the triangle of compactifications**: the composition isomorphisms of two
 triangles `T₁` and `T₂` agree up to the comparison isomorphisms `F.shriekIso` of their
-compactifications. The proof compares both with the common refinement `T₁.inf T₂`. -/
+compactifications. -/
 theorem compIso_hom_eq [QuasiCompact f] [QuasiCompact g] [QuasiCompact (f ≫ g)]
     (T₁ T₂ : Compactification.Triangle f g) :
     (F.compIso T₁).hom =

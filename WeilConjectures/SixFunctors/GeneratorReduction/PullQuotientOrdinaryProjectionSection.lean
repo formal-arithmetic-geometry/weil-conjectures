@@ -9,8 +9,11 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 
 /-! # Sectionwise ordinary projection of the quotient pullback mate
 
-Source: Stacks 03D7 and 0941; primitive coefficient comparisons in
-`fix-prop-coherence.proof.md`.
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -352,21 +355,7 @@ private theorem tower_level {X Y : Scheme.{u}} (f : X ⟶ Y)
   unfold finiteComparison
   rfl
 
-/-- The finite projection identity on one cochain degree and one section.
-
-Source: Stacks Project, Tags 03D7, 03EL and 0941; current blueprint
-`sec-six-functors/sk-thm-sf-compatibility/fix-prop-coherence.proof.md`,
-ordinary projected-section calculation.
-
-Proof: evaluate the ordinary reduction/limit mate at the chosen degree and
-section. The unit identity for the conjugate adjunction identifies its finite
-projection with the scalar adjunction unit. The inverse-image and reduction
-evaluation normalizations cancel the comparison factors in the strict pullback
-tower. The generators equation of the prescribed pull presentation identifies
-the resulting finite unit with the quotient augmentation followed by the tower.
-The argument is purely sectionwise and applies to zero complexes and empty
-sites as well.
--/
+/-- The finite projection identity on one cochain degree and one section. -/
 theorem pullQuotientOrdinaryProjection_section
     (a : IntegralSystemRealization.OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (f : X ⟶ Y) (p : OpenFactorCoherence.Pull l E f)

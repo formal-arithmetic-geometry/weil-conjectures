@@ -19,13 +19,15 @@ on `X`. If the direct image of `K` along the restriction `j⁻¹(G) ⟶ G` and t
 `a = j ≫ b` are bounded constructible and commute with base change, then so is the direct image
 along `j` (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_finite_boundary`).
 
-This is the core of the second step of the proof of
-`theorem-generic-constructibility-base-change-rj`. Over `S`, `Rj_* K` is bounded constructible by
-`lemma-detection-proper-direct-image--1`, its restriction to `G` and its direct image
+This is the core of the second step of the proof of Deligne's generic constructibility theorem.
+
+## Implementation details
+
+Over `S`, `Rj_* K` is bounded constructible, its restriction to `G` and its direct image
 `Rb_* Rj_* K = Ra_* K` being so. After a base change `T ⟶ S`, the derived base change map `c` for
 `j` is an isomorphism over `G_T`, and so is `Rb_{T,*} c`, which proper base change for `b` and the
-composition law identify with the derived base change map for `a`; hence `c` is an isomorphism by
-`lemma-detection-proper-direct-image--2`.
+composition law identify with the derived base change map for `a`; hence `c` is an isomorphism,
+the closed complement being finite.
 -/
 
 @[expose] public section

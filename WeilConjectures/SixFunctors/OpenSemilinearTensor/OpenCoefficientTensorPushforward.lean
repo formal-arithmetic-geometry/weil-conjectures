@@ -12,10 +12,12 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 
 /-! # Tensor comparison for invertible coefficient pushforward
 
-Source: Stacks Project, Tag 03EK.
+## References
+
+* [Stacks, Tag 03EK]
 -/
 
--- After pruning, this module only keeps private declarations.
+-- This module only keeps private declarations.
 set_option linter.privateModule false
 
 

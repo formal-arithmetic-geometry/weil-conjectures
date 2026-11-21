@@ -13,6 +13,15 @@ public import WeilConjectures.SmoothPurity.Derived.DerivedPullbackTensorHom
 
 - `stageTensor_existsUnique`: normalization by the existing common-stage comparison.
 - `stageTensor`: that uniquely specified inclusion tensorator.
+
+## Implementation details
+
+`stageTensorFormula` states its normalization with `HEq`, which retains the literal
+pair-object transports instead of asking elaboration to expand them.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -35,15 +44,7 @@ namespace WeilConjectures.AdicQbarRealization
 variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
 /-- The inclusion tensorator is uniquely the inverse of the displayed common-stage
-comparison at E, followed by the normalized scalar unit on both inputs. HEq retains
-the literal pair-object transports instead of asking elaboration to expand them.
-Source: BS 6.8.15; common-stage tensor convention.
-Proof: the common-stage tensor has its recorded literal object formula. At E the
-compositum E E is contained in E. Apply isoToStage and commonStageTensorComparison,
-then the rational tensor of operationStageTransitionIso followed by the normalized
-scalar unitor on each input. Invert their composite. This has the displayed endpoints.
-Every factor is canonical, so HEq to this fixed composite proves uniqueness; the
-same equality shows existence. This includes identity coefficient extensions. -/
+comparison at E, followed by the normalized scalar unit on both inputs. -/
 def stageTensorFormula (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] [∀ x : X, Invertible (l : X.residueField x)]
     (E : AlgebraicallyClosedCoefficients.Index l Ω)
@@ -73,11 +74,7 @@ def stageTensorFormula (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω]
           (Iso.prod (e.app K) (e.app L)))).symm
 )
 
-/-- The displayed finite-stage normalization has a unique tensorator.
-Source: BS 6.8.15; common-stage tensor convention.
-Proof: use the composite in stageTensorFormula. Its endpoint equality is the literal
-object formula for commonStageDerivedTensor, and HEq to this fixed composite gives
-both existence and uniqueness, including the identity coefficient extension. -/
+/-- The displayed finite-stage normalization has a unique tensorator. -/
 theorem stageTensor_existsUnique (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] [∀ x : X, Invertible (l : X.residueField x)]
     (E : AlgebraicallyClosedCoefficients.Index l Ω)
@@ -95,9 +92,8 @@ theorem stageTensor_existsUnique (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω]
   intro e he
   exact eq_of_heq he
 
-/-- The actual common-stage inclusion tensorator. Its existence theorem fixes the
-entire isomorphism, so its choice introduces no unspecified comparison map.
-Source: BS 6.8.15; common-stage tensor convention. -/
+/-- The actual common-stage inclusion tensorator, the isomorphism fixed by
+`stageTensor_existsUnique`. -/
 def stageTensor (Ω : Type w) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] [∀ x : X, Invertible (l : X.residueField x)]
     (E : AlgebraicallyClosedCoefficients.Index l Ω)

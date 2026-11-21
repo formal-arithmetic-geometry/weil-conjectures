@@ -14,7 +14,15 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.F
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingRestrictionCoordinates
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteCoordinateCalculus
 
-/-! # Proved finite coefficient coordinate calculus -/
+/-! # Proved finite coefficient coordinate calculus
+
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 0D6D]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,26 +44,7 @@ set_option backward.defeqAttrib.useBackward true
 
 /-- Finite coefficient realization conjugates the endomorphism obtained by taking
 an arbitrary open-adjunction transpose and restricting the proper image.
-There is no proper/open comparison or etale-origin witness in this assertion.
-Source: compactification-coherence proof, first two paragraphs; Stacks 00YV,
-03DI, 03D6, 0D6D.
-
-Proof: before deriving, finiteDirectImage_eq identifies the two direct images
-with the same constant-section scalar map. The left-adjoint uniqueness comparison
-finitePullbackIso therefore preserves its unit and counit. By its definition,
-finiteOpenIso is the left-adjoint uniqueness comparison for the resulting open
-adjunction, so it preserves the open unit. The fixed realization comparisons
-cancel the realization unit in inverse image and extension by zero; their direct
-image comparison is its counit-normalized mate. These equations descend to the
-derived categories by the exact localization and right-derived factorization
-identities. The section-normalized ordinary direct-image compositor is the
-conjugate of geometricPullComposition. Consequently the restriction square is
-the pasting of the pullback composition square and the proper counit square.
-Apply the open unit square, naturality to the arbitrary arrow m, the restriction
-square, and then the inverse open unit square. All inner coordinate isomorphisms
-cancel, leaving conjugation by a. This uses no invertibility of m and no
-properness of r. Identity maps, empty opens, and zero coefficients use precisely
-the same unit/counit and inverse-pair identities. -/
+There is no proper/open comparison or etale-origin witness in this assertion. -/
 theorem finiteOpenRestriction_endomorphism_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

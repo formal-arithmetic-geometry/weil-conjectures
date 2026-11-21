@@ -21,25 +21,6 @@ constructs the comparison map
 
 on the bounded below derived categories of étale sheaves of `Λ`-modules.
 
-## The construction
-
-For an open immersion `j` write `ι_j : j_! ⟶ Rj_*` for the canonical map of the adjoint triple
-`j_! ⊣ j^* ⊣ Rj_*` (`AlgebraicGeometry.Etale.openImmersionLowerShriekToLowerStarPlus`). The map
-`α_u` is characterised by
-
-`Ru_* (ι_{j₁}) ∘ α_u = ι_{j₂}` (modulo `Ru_* Rj₁_* ≅ Rj₂_*`)
-
-(`AlgebraicGeometry.ProperOpenDatum.comparison_toLowerStar`). Such a map exists and is unique
-because `j₂^* Ru_* (ι_{j₁})` is an isomorphism
-(`AlgebraicGeometry.ProperOpenDatum.isIso_upperStar_map_toLowerStar_app`): by étale base change
-along the open immersion `j₂` it is `Rp_*` of `b^* (ι_{j₁})`, and `b^* (ι_{j₁})` is an isomorphism
-on `V = T₁ ×_{T₂} X`, being so on the clopen piece `s(X) = j₁(X)` (where `ι_{j₁}` restricts to an
-isomorphism) and on its complement (where both sides vanish).
-
-Correspondingly the restriction isomorphism `θ_u : j₂^* Ru_* j₁! K ≅ K` is `j₂^*` of
-`Ru_* (ι_{j₁})`, followed by the counit `j₂^* Rj₂_* ≅ 𝟭`; `α_u` is adjoint to its inverse
-(`AlgebraicGeometry.ProperOpenDatum.homEquiv_comparison_app`).
-
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekToLowerStarPlus`: `ι_j : D⁺j_! ⟶ R⁺j_*`.
@@ -53,6 +34,14 @@ Correspondingly the restriction isomorphism `θ_u : j₂^* Ru_* j₁! K ≅ K` i
 - `AlgebraicGeometry.ProperOpenDatum.isIso_upperStar_map_toLowerStar_app`
 - `AlgebraicGeometry.ProperOpenDatum.comparison_toLowerStar` and
   `AlgebraicGeometry.ProperOpenDatum.comparison_ext`: the characterisation of `α_u`.
+
+## Implementation details
+
+For an open immersion `j` write `ι_j : j_! ⟶ Rj_*` for the canonical map of the adjoint triple
+`j_! ⊣ j^* ⊣ Rj_*`. The map `α_u` is characterised by `Ru_* (ι_{j₁}) ∘ α_u = ι_{j₂}` (modulo
+`Ru_* Rj₁_* ≅ Rj₂_*`); it is defined as the adjoint of the inverse of the restriction isomorphism
+`θ_u : j₂^* Ru_* j₁! K ≅ K`, which is `j₂^*` of `Ru_* (ι_{j₁})` followed by the counit
+`j₂^* Rj₂_* ≅ 𝟭`.
 -/
 
 @[expose] public section
@@ -200,10 +189,7 @@ instance isEmpty_pullback_complementOpens :
     rw [← Scheme.Pullback.range_fst]; exact Set.mem_range_self x
   exact Set.disjoint_iff.1 D.disjoint_range_complementOpens_ι_comp_b ⟨hx, ⟨_, rfl⟩⟩
 
-/-- `b^*` of `ι_{j₁}` is an isomorphism on `V = T₁ ×_{T₂} X`. On the closed complement of the
-open `W = V \ s(X)`, which lies inside the open `s(X)`, it is `j₁^*` of `ι_{j₁}`; on `W` both
-sides vanish, `j₁! K` because `W` does not meet `j₁(X)`, and `Rj₁_* K` by étale base change, the
-fibre product `X ×_{T₁} W` being empty. -/
+/-- `b^*` of `ι_{j₁}` is an isomorphism on `V = T₁ ×_{T₂} X`. -/
 instance isIso_upperStar_b_map_openImmersionLowerShriekToLowerStarPlus_app
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (D+((D.b)^*[ModuleCat.{u + 1} Λ]).map
@@ -255,9 +241,7 @@ instance isIso_upperStar_b_map_openImmersionLowerShriekToLowerStarPlus_app
     exact (inferInstance : IsIso (DerivedCategory.Plus.ι.map (D+((i)^*[ModuleCat.{u + 1} Λ]).map
       (D+((D.b)^*[ModuleCat.{u + 1} Λ]).map ψ))))
 
-/-- **`j₂^*` of `Ru_* (ι_{j₁})` is an isomorphism.** By étale base change along the open
-immersion `j₂` it is `Rp_*` of `b^* (ι_{j₁})`
-(`isIso_upperStar_b_map_openImmersionLowerShriekToLowerStarPlus_app`). -/
+/-- **`j₂^*` of `Ru_* (ι_{j₁})` is an isomorphism.** -/
 instance isIso_upperStar_map_toLowerStar_app
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso (D+((D.j₂)^*[ModuleCat.{u + 1} Λ]).map ((D.toLowerStar Λ).app K)) := by
@@ -311,14 +295,13 @@ lemma comparisonApp_toLowerStar
   rw [Adjunction.homEquiv_naturality_right, comparisonApp, Equiv.apply_symm_apply, assoc,
     IsIso.inv_hom_id, comp_id]
 
-/-- Blueprint `proposition-construction-independence-rf-shriek--7`: Comparison map for a proper map
-fixing an open. For a proper `u : T₁ ⟶ T₂` and open immersions `j₁, j₂` with `j₁ ≫ u = j₂`, the map
+/-- **Comparison map for a proper map fixing an open.** For a proper `u : T₁ ⟶ T₂` and open
+immersions `j₁, j₂` with `j₁ ≫ u = j₂`, the map
 
 `α_{u,K} : j₂! K ⟶ Ru_* j₁! K`
 
-on `D⁺(X_ét, Λ)`. It is the adjoint, under `j₂! ⊣ j₂^*`, of the inverse of the restriction
-isomorphism `θ_{u,K} : j₂^* Ru_* j₁! K ≅ K` (`homEquiv_comparison_app`), and it is characterised
-by `Ru_* (ι_{j₁}) ∘ α_u = ι_{j₂}` (`comparison_toLowerStar`, `comparison_ext`). -/
+on `D⁺(X_ét, Λ)`, adjoint under `j₂! ⊣ j₂^*` to the inverse of the restriction isomorphism
+`θ_{u,K} : j₂^* Ru_* j₁! K ≅ K`. -/
 noncomputable def comparison :
     D+((D.j₂)_!open[ModuleCat.{u + 1} Λ]) ⟶
       D+((D.j₁)_!open[ModuleCat.{u + 1} Λ]) ⋙

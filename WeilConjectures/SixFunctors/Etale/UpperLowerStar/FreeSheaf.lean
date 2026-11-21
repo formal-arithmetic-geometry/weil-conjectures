@@ -13,12 +13,15 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 For a morphism of schemes `h : Y ⟶ T` and an étale `T`-scheme `W`, the pullback `h^* Λ[W]` of
 the free sheaf of `Λ`-modules `Λ[W] = j_{W!} Λ_W` is the free sheaf `Λ[W ×_T Y]`
 (`AlgebraicGeometry.Etale.upperStarFreeSheafIso`). We show that this isomorphism is the unique
-one which, on the generating sections, is given by the unit of the adjunction `h^* ⊣ h_*`
-[Stacks 03S6].
+one which, on the generating sections, is given by the unit of the adjunction `h^* ⊣ h_*`.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.existsUnique_upperStarFreeSheafIso`
+
+## References
+
+* [Stacks, Tag 03S6]
 -/
 
 @[expose] public section
@@ -43,7 +46,7 @@ lemma upperStarFreeSheafIso_inv_comp
   rw [← Category.id_comp a, Etale.upperStarFreeSheafHomEquiv_comp, Category.id_comp]
   rfl
 
-/-- **Inverse image of free étale sheaves of modules** [Stacks 03S6]: for `h : Y ⟶ T` and an
+/-- **Inverse image of free étale sheaves of modules**: for `h : Y ⟶ T` and an
 étale `T`-scheme `W`, with `W' = W ×_T Y`, there is a unique isomorphism
 `θ : h^* Λ[W] ≅ Λ[W']` of sheaves of `Λ`-modules such that for every sheaf `H` on `T_ét` and
 every section `s ∈ H(W)`, with `φ_s : Λ[W] ⟶ H` the morphism corresponding to `s`, the section

@@ -30,7 +30,7 @@ RΓ_Z'(X', e^*K) ⟶ RΓ(X', e^*K) ⟶ RΓ(U', e^*K) ⟶ RΓ_Z'(X', e^*K)[1]
 
 natural in the bounded below complex `K`
 (`AlgebraicGeometry.Etale.sectionsWithSupportTrianglePullback`). Hence the long exact sequence
-of cohomology with support of blueprint `thm-pur-with-support-exactness` is functorial in the
+of cohomology with support is functorial in the
 pair: the pullback maps commute with all the maps of the long exact sequences
 (`AlgebraicGeometry.Etale.homology_sectionsWithSupportTrianglePullback_comm`), compatibly with
 composition of morphisms of pairs
@@ -329,16 +329,13 @@ lemma sectionsWithSupportPullback_comp :
   ext F
   exact sectionsWithSupportPullbackApp_comp A e i i' h F
 
-/-- Long exact sequence for cohomology with support
-(functoriality in the pair, for arbitrary morphisms of pairs).
+/-- Functoriality in the pair, for arbitrary morphisms of pairs.
 
 For a morphism of schemes `e : X' ⟶ X` and closed immersions `i : Z ⟶ X`, `i' : Z' ⟶ X'` whose
 open complements satisfy `U' ⊆ e⁻¹(U)` (i.e. `e⁻¹(Z) ⊆ Z'`), the pullback maps
 `RΓ_Z(X, K) ⟶ RΓ_{Z'}(X', e^* K)`, `RΓ(X, K) ⟶ RΓ(X', e^* K)` and `RΓ(U, K) ⟶ RΓ(U', e^* K)`
 form a morphism of triangles from `sectionsWithSupportTriangle` of `(X, Z)` to that of
-`(X', Z')` applied to `e^* K`, natural in the bounded below complex `K`. Here `e^*` acts
-termwise on complexes, being exact; it is the derived pullback `Le^*`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`). -/
+`(X', Z')` applied to `e^* K`, natural in the bounded below complex `K`. -/
 noncomputable def sectionsWithSupportTrianglePullback :
     sectionsWithSupportTriangle A i ⟶ D+((e)^*[A]) ⋙ sectionsWithSupportTriangle A i' :=
   ShortComplex.rightDerivedTrianglePullback (e)^*[A]
@@ -348,8 +345,7 @@ noncomputable def sectionsWithSupportTrianglePullback :
     (openComplementSectionsPullback A e i i' h) (sectionsWithSupportPullback_comp A e i i' h).symm
     (ΓPullback_comp_natTransΓRes A e i i' h).symm
 
-/-- Long exact sequence for cohomology with support
-(functoriality of the long exact sequence in the pair).
+/-- Functoriality of the long exact sequence in the pair.
 
 The pullback maps along a morphism of pairs `e : (X', X' ∖ Z') ⟶ (X, X ∖ Z)` commute with all
 the maps of the long exact sequences
@@ -436,8 +432,7 @@ lemma sectionsWithSupportPullback_comp_comp :
 
 attribute [local instance] Limits.comp_preservesFiniteLimits Limits.comp_preservesFiniteColimits
 
-/-- Long exact sequence for cohomology with support
-(compatibility of the functoriality in the pair with composition).
+/-- Compatibility of the functoriality in the pair with composition.
 
 For morphisms of pairs `e : (X', Z') ⟶ (X, Z)` and `e' : (X'', Z'') ⟶ (X', Z')`, the morphism of
 triangles of cohomology with support along `e' ≫ e` is the composite of the morphisms of

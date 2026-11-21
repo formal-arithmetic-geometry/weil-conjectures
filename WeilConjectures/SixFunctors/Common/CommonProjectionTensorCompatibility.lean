@@ -30,36 +30,8 @@ open ProjectionCoefficientTransport
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Inclusion preserves each compact-support projection through one tensor comparison,
-independent of the compactification. This is an individual mate calculation: no
-compactification comparison law, composition law or invertibility of projection is assumed.
-
-Proof: the coefficient prime is invertible on every SixFunctorSpace, since it is
-invertible in the base field. On two objects included from E, use the literal
-common-stage tensor object, its isoToStage at E, commonStageTensorComparison, and
-the two normalized scalar unit isomorphisms at E. The inverse composite gives
-inclusion of the rational tensor isomorphic to the common-stage tensor of the
-inclusions. This construction involves neither a morphism nor a compactification.
-The representative formula of commonStageDerivedTensor and naturality of the
-scalar tensor comparison prove naturality in both inputs. Transport the endpoints
-by the recorded rationalTensorNormalization and commonStageTensorNormalization;
-this yields the family t in the statement.
-
-The canonical common-stage pullback/tensor formula on these same finite models
-identifies each rational proper and open tensor/pullback comparison with its
-included common-stage counterpart. The operation comparison components are the
-prescribed ones: commonStageModelNormalization makes them identity components
-on the chosen finite models. For the proper projection, transpose under the
-recorded pull/direct adjunctions. Its transpose is tensor/pullback followed by the
-counit; the counit square of commonStageComparison and the preceding tensor square
-identify the two transposes. For the open inverse projection, transpose under the
-open adjunctions instead; the unit square and the canonical open tensor/pullback
-normalization identify the transposes. Invert this equality of open isomorphisms.
-Paste the proper and open squares, using the support-factorization normalization
-and the pullComposition equation to identify their final pullback factor. The
-result is the displayed projection square with exactly source and target as
-specified. This argument never uses a rational coherence law and concerns only
-one compactification at a time. Zero inputs, empty schemes and identity opens
-satisfy the same naturality and unit/counit identities. -/
+independent of the compactification. No compactification comparison law, composition law
+or invertibility of projection is assumed. -/
 theorem commonProjectionTensorCompatibility
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C)

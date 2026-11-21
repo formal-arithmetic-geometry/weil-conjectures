@@ -10,7 +10,10 @@ import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenQuotientScalarComparis
 
 /-! # Transition coherence for the open scalar comparison
 
-Source: Stacks Project, Tags 0E8I and 0941.
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -25,13 +28,8 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- The finite comparison maps commute with the successor maps of the unrestricted
-integral quotient complexes. This is the strict transition part of the normalized
-open scalar comparison. It is proved by evaluating both composites on the
-sheafified pure tensors that generate each unrestricted reduction; the generator
-formula for tc.ordinary, the section formula for sc.finite, and naturality of
-extension by zero identify both sides with the same coefficient transition.
-Source: Stacks Tags 0E8I and 0941; degreewise comparison and transition coherence.
--/
+integral quotient complexes: the strict transition part of the normalized open scalar
+comparison. -/
 theorem openQuotientScalarComparisonTransition
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)

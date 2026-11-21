@@ -13,9 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 /-!
 # Smooth duality for the affine line
 
-The affine-line case of blueprint `lemma-affine-space-etale-localization--1`, from the
-projective-line adjunction `Rq_! ⊣ Lq^*(1)[2]` (`proposition-adjunction-projective-line--1`,
-`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`).
+Smooth duality for the affine-line projection `𝔸¹_S ⟶ S`, from the projective-line adjunction
+`Rq_! ⊣ Lq^*(1)[2]` (`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`).
 
 * If `Rf_! ⊣ G` is an adjunction whose counit is a trace counit
   `Rf_!(G K) ≅ Rf_!(T ⊗ᴸ Lf^* K) ≅ Rf_! T ⊗ᴸ K ⟶ K`
@@ -73,9 +72,7 @@ variable {Λ} {X Y : Scheme.{u}} {f : X ⟶ Y} [HasCompactification f]
 
 /-- If the counit of `Rf_! ⊣ G` is the trace counit of `t : Rf_! T ⟶ Λ_Y`
 (`AlgebraicGeometry.Etale.lowerShriekTraceCounit`), then every tensor map
-`G M ⊗ᴸ Lf^* N ⟶ G(M ⊗ᴸ N)` of `Rf_! ⊣ G` is an isomorphism: it is the reassociation
-`(T ⊗ᴸ Lf^* M) ⊗ᴸ Lf^* N ≅ T ⊗ᴸ Lf^*(M ⊗ᴸ N)`
-(`CategoryTheory.Adjunction.isIso_projectionTensorMap_of_counit_eq`). -/
+`G M ⊗ᴸ Lf^* N ⟶ G(M ⊗ᴸ N)` of `Rf_! ⊣ G` is an isomorphism. -/
 theorem isIso_lowerShriekRightAdjointTensorMap_of_counit_eq
     (hε : ∀ K, adj.counit.app K = lowerShriekTraceCounit Λ f T t γ K)
     (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -87,8 +84,7 @@ theorem isIso_lowerShriekRightAdjointTensorMap_of_counit_eq
 
 /-- If `Rf_!` has a right adjoint `G` whose counit is the trace counit of
 `t : Rf_! T ⟶ Λ_Y`, then the canonical tensor map `θ_{f,K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is an
-isomorphism for every `K`: the tensor maps of the two right adjoints `G` and `Rf^!` of `Rf_!`
-agree. -/
+isomorphism for every `K`. -/
 theorem isIso_dualizingComplexTensorMap_of_counit_eq
     (hε : ∀ K, adj.counit.app K = lowerShriekTraceCounit Λ f T t γ K)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -117,10 +113,7 @@ theorem isShiftedRankOneLocalSystem_tateObject_shift [HasTateTwist Λ] (X : Sche
   exact ⟨L, hL, hs, ⟨(shiftFunctor _ n).mapIso e⟩⟩
 
 /-- **Smooth duality for the projective line**: for a scheme `S` on which the exponent of `Λ`
-is invertible, the projection `q : ℙ¹_S ⟶ S` satisfies smooth duality in degree `-2`. The
-projective-line adjunction `Rq_! ⊣ Lq^*(1)[2]` has the trace counit
-(`AlgebraicGeometry.Etale.exists_projectiveLineAdjunction`), so the tensor maps of `q` are
-isomorphisms and `ω_q ≅ Λ(1)[2]`. -/
+is invertible, the projection `q : ℙ¹_S ⟶ S` satisfies smooth duality in degree `-2`. -/
 theorem projectiveLineSmoothDuality [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]
     (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     SatisfiesSmoothDuality Λ (ℙ(Option (ULift.{u} (Fin 1)); S) ↘ S) 2 := by
@@ -133,12 +126,8 @@ theorem projectiveLineSmoothDuality [HasKummerClass Λ] [HasKummerClass.IsNormal
     isIso_dualizingComplexTensorMap_of_counit_eq hε⟩
 
 variable {Λ} in
-/-- **Smooth duality for the affine line** (`lemma-affine-space-etale-localization--1` for `d = 1`):
-the projection `p : 𝔸¹_S ⟶ S` is the open immersion `j : 𝔸¹_S ⟶ ℙ¹_S` followed by `q : ℙ¹_S ⟶ S`.
-Since `j` is étale it satisfies smooth duality in degree `0`
-(`AlgebraicGeometry.Etale.EtaleSmoothDuality`), and `q` satisfies it in degree `-2`
-(`AlgebraicGeometry.Etale.projectiveLineSmoothDuality`); the tensor maps compose and
-`ω_p ≅ Lj^* ω_q`. -/
+/-- **Smooth duality for the affine line**: for a scheme `S` on which the exponent of `Λ` is
+invertible, the projection `p : 𝔸¹_S ⟶ S` satisfies smooth duality in degree `-2`. -/
 theorem affineLineSmoothDuality [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]
     (hE : EtaleSmoothDuality Λ) : AffineLineSmoothDuality Λ := by
   intro S _ _ _

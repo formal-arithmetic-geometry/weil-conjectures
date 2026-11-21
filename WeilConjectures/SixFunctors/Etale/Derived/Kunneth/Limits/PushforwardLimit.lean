@@ -19,10 +19,11 @@ transition maps, `πᵢ : S₀ ⟶ Sᵢ`, and let `f₀ : Z ⟶ S₀` be a morph
 `R^q f₀_* G` as the filtered colimit of the `πᵢ^* R^q(f₀ ≫ πᵢ)_* G`, on every geometric stalk
 (`AlgebraicGeometry.Etale.isStalkColimit_pushforwardStageSystem`).
 
-In degree `0` this is the statement `F = colimᵢ πᵢ^* πᵢ_* F` of blueprint
-`corollary-open-direct-image-over-field--2` for `F = f₀_* G`; the higher degrees follow by dimension
-shifting (`AlgebraicGeometry.Etale.LimitStageSystem.isStalkColimit_of_injective`), since all the
-functors involved send injective sheaves to sheaves without higher cohomology.
+## Implementation details
+
+In degree `0` this is the statement `F = colimᵢ πᵢ^* πᵢ_* F` for `F = f₀_* G`; the higher
+degrees follow by dimension shifting
+(`AlgebraicGeometry.Etale.LimitStageSystem.isStalkColimit_of_injective`).
 -/
 
 @[expose] public section
@@ -75,7 +76,7 @@ variable [IsCofiltered I] (hc : IsLimit c) [∀ {i j : I} (f : i ⟶ j), IsAffin
   [∀ i, CompactSpace (D.obj i)] [∀ i, QuasiSeparatedSpace (D.obj i)]
 
 include hc in
-/-- Degree zero, at injective sheaves: blueprint `corollary-open-direct-image-over-field--2` for
+/-- Degree zero, at injective sheaves: the statement `F = colimᵢ πᵢ^* πᵢ_* F` for
 `F = f₀_* J`. -/
 lemma isStalkColimit_pushforwardStageSystem_zero
     (J : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] :

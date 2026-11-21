@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.LocallyFiniteAdicCompactSupportData
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompletedCoefficientIntegralMapSquare
 
-/-! # Pullback compatibility of normalized completed-to-native maps -/
+/-! # Pullback compatibility of normalized completed-to-native maps
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and Section 6.8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -32,10 +37,6 @@ variable (l : ℕ) [Fact l.Prime]
 /--
 Any family of maps represented by normalized coefficient presentations is compatible
 with inverse image along scheme morphisms.
-
-Proof source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8. Compose both sides with
-every finite quotient projection. The finite constant and residue equations identify
-both composites pointwise, and the inverse-limit projections are jointly monic.
 -/
 theorem native_completed_coefficient_change_square_of_presentation
     [G : NativeGeometry.{u} l]

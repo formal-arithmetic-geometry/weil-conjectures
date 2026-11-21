@@ -18,22 +18,20 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LisseDual
 /-!
 # Objects of `Dctf(X, Λ)` are compact in `D(X_ét, Λ)`
 
-The proof follows the blueprint. Both properties are stable under shifts, extensions and
-retracts (`DerivedCategory.compactBoundedHom`), and are transported along left adjoints whose
-right adjoints preserve coproducts and have bounded amplitude
+On a finite-type scheme `X` over a field of finite cohomological dimension, every object of
+`Dctf(X_ét, Λ)` is compact in `D(X_ét, Λ)` and has bounded morphisms
+(`AlgebraicGeometry.Etale.compactBoundedHom_of_constructibleFiniteTor`).
+
+## Implementation details
+
+Both properties are stable under shifts, extensions and retracts
+(`DerivedCategory.compactBoundedHom`), and are transported along left adjoints whose right
+adjoints preserve coproducts and have bounded amplitude
 (`DerivedCategory.compactBoundedHom_of_adjunction`). By the dévissage
 `AlgebraicGeometry.Etale.constructibleFiniteTor_eq_triangEnvelope_ctfGenerators` it suffices to
-treat the generators `Rg_* j_! L`. Starting from `Λ[0]` in `D(Λ)`, one applies successively:
-
-* the constant sheaf functor at the point `Spec k`, right adjoint `RΓ(Spec k, -)` of finite
-  cohomological dimension;
-* the pullback along `S ⟶ Spec k`, right adjoint the direct image of finite cohomological
-  dimension;
-* the tensor product with the lisse flat sheaf `L`, right adjoint the tensor product with its
-  dual;
-* the extension by zero along the open immersion `j`, right adjoint the exact restriction;
-* the direct image along the closed immersion `g`, right adjoint `Rg^!`
-  (`AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedFunctor_closedUpperShriek`).
+treat the generators `Rg_* j_! L`, obtained from `Λ[0]` in `D(Λ)` by the constant sheaf functor
+at the point, a pullback, a tensor product with a lisse flat sheaf, an extension by zero and a
+direct image along a closed immersion.
 -/
 
 @[expose] public section
@@ -61,8 +59,7 @@ lemma compactBoundedHom_singleFunctor_self :
   exact (isZero_of_isLE G (-1) 0 (by lia)).eq_of_tgt _ _
 
 /-- On a quasi-compact quasi-separated scheme of finite cohomological dimension, the constant
-sheaf `Λ` placed in degree `0` is compact with bounded morphisms in `D(X_ét, Λ)`: it is the
-image of `Λ[0]` under the left adjoint of `RΓ(X, -)`. -/
+sheaf `Λ` placed in degree `0` is compact with bounded morphisms in `D(X_ét, Λ)`. -/
 lemma compactBoundedHom_singleFunctor_constantSheaf (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X) :
     compactBoundedHom (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -97,8 +94,7 @@ lemma compactBoundedHom_unit_spec {k : Type u} [Field k]
     (compactBoundedHom_singleFunctor_constantSheaf Λ (Spec (.of k)) hk)
 
 /-- On a scheme of finite type over a field of finite cohomological dimension, the unit `Λ` of
-`D(S_ét, Λ)` is compact with bounded morphisms: it is the pullback of the unit at the point,
-and the direct image to the point has finite cohomological dimension. -/
+`D(S_ét, Λ)` is compact with bounded morphisms. -/
 lemma compactBoundedHom_unit_of_finiteType (hΛ : IsAddTorsion Λ) {k : Type u} [Field k]
     (hk : HasFiniteCohomologicalDimension Λ (Spec (.of k))) {S : Scheme.{u}}
     (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] [QuasiSeparated aS] :
@@ -124,8 +120,7 @@ lemma isDualizable_of_isFiniteLocallyConstantSheaf [Finite Λ] {S : Scheme.{u}}
   exact ⟨@HasRightDual.mk _ _ _ _ ((ihom L).obj (𝟙_ _)) (BraidedCategory.exactPairing_swap _ _)⟩
 
 /-- If the unit of `D(S_ét, Λ)` is compact with bounded morphisms, so is every finite locally
-constant flat sheaf `L` placed in degree `0`: it is the image of the unit under `L ⊗ -`, whose
-right adjoint `L^∨ ⊗ -` preserves coproducts (being also a left adjoint) and degrees. -/
+constant flat sheaf `L` placed in degree `0`. -/
 lemma compactBoundedHom_singleFunctor_of_isFiniteLocallyConstantSheaf [Finite Λ] {S : Scheme.{u}}
     (hS : compactBoundedHom (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))
       (𝟙_ (_root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)))))
@@ -158,7 +153,7 @@ lemma compactBoundedHom_singleFunctor_of_isFiniteLocallyConstantSheaf [Finite Λ
   simpa using isLE_tensor Y N 0 n
 
 /-- The extension by zero along an open immersion preserves compact objects with bounded
-morphisms: its right adjoint, the restriction, is exact and preserves coproducts. -/
+morphisms. -/
 lemma compactBoundedHom_mapDerivedCategory_openImmersionLowerShriek {U Y : Scheme.{u}}
     (j : U ⟶ Y) [IsOpenImmersion j]
     {K : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -171,8 +166,7 @@ lemma compactBoundedHom_mapDerivedCategory_openImmersionLowerShriek {U Y : Schem
     (fun N n _ ↦ by simpa using ((j)^*[ModuleCat.{u + 1} Λ]).isLE_mapDerivedCategory_obj N n) hK
 
 /-- The direct image along a closed immersion into a finite-type scheme over a field preserves
-compact objects with bounded morphisms: its right adjoint `Rg^!` preserves coproducts and has
-bounded amplitude, the complementary open immersion having finite cohomological dimension. -/
+compact objects with bounded morphisms. -/
 lemma compactBoundedHom_rightDerivedLowerStar_of_isClosedImmersion (hΛ : IsAddTorsion Λ)
     {k : Type u} [Field k] {Z X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
     [QuasiCompact aX] (g : Z ⟶ X) [IsClosedImmersion g]
@@ -193,10 +187,9 @@ lemma compactBoundedHom_rightDerivedLowerStar_of_isClosedImmersion (hΛ : IsAddT
   exact compactBoundedHom_of_adjunction (derivedLowerStarClosedUpperShriekAdjunction g V.ι hij) c
     (fun N n hN ↦ hc N n hN) hK
 
-/-- On a finite-type scheme `X` over a
-field `k` of finite cohomological dimension, every object of `Dctf(X_ét, Λ)` is compact in
-`D(X_ét, Λ)` and has bounded morphisms, for a finite ring `Λ` whose exponent is invertible on
-`X`. -/
+/-- On a finite-type scheme `X` over a field `k` of finite cohomological dimension, every object
+of `Dctf(X_ét, Λ)` is compact in `D(X_ét, Λ)` and has bounded morphisms, for a finite ring `Λ`
+whose exponent is invertible on `X`. -/
 theorem compactBoundedHom_of_constructibleFiniteTor [Finite Λ] {k : Type u} [Field k]
     (hk : HasFiniteCohomologicalDimension Λ (Spec (.of k))) {X : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [QuasiSeparated aX]

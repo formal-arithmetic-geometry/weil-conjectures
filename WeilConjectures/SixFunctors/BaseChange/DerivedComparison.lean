@@ -32,17 +32,16 @@ bounded below derived categories twice:
 
 This file shows that they are equal
 (`AlgebraicGeometry.Etale.baseChange_eq_derivedBaseChangeMapPlus`), so that the pasting laws
-and the computations available for `derivedBaseChangeMapPlus` apply to `baseChange`. The
-proof identifies the derived adjunction used by `baseChange` with `Adjunction.derivedPlus`
-(`Adjunction.derivedAdjunctionPlus_eq_derivedPlus`), computes `θ_sq` on complexes
-(`AlgebraicGeometry.Etale.pullbackSquareComparison_hom_app_factorsh`) and applies the
-general computation of derived mates `Adjunction.derivedPlus_mateEquiv_app_fac`. In particular
-`AlgebraicGeometry.Etale.baseChange` commutes with the shifts
+and the computations available for `derivedBaseChangeMapPlus` apply to `baseChange`. In
+particular `AlgebraicGeometry.Etale.baseChange` commutes with the shifts
 (`AlgebraicGeometry.Etale.commShift_baseChange`).
 
-This is the identification of the base-change map of blueprint
-`definition-derived-base-change-map--1` with the derived exchange morphism of the proper base change
-chapter.
+## Implementation details
+
+The derived adjunction used by `baseChange` is identified with `Adjunction.derivedPlus`
+(`Adjunction.derivedAdjunctionPlus_eq_derivedPlus`), `θ_sq` is computed on complexes
+(`AlgebraicGeometry.Etale.pullbackSquareComparison_hom_app_factorsh`), and the general
+computation of derived mates `Adjunction.derivedPlus_mateEquiv_app_fac` is applied.
 -/
 
 @[expose] public section

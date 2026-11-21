@@ -30,7 +30,13 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorCancellationIndependentCoefficientsSupplement
 
-/-! # A step of strict scalar pullback cone naturality -/
+/-! # A step of strict scalar pullback cone naturality
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YY]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -71,24 +77,7 @@ attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essenti
   WeilConjectures.integralOperationsSiteSmall
   WeilConjectures.integralOperationsCommHasDerivedCategory in
 /-- Finite-free completed scalar extension preserves products, good representatives,
-and computes its derived functor on every complex.
-Source: Stacks, sites-modules.tex, Tag 03EK and sites-cohomology.tex, Tag 06YY;
-Steps 4, 6 and 7 of strict scalar pullback cone naturality.
-
-Proof: use the recorded finite free completed coefficient module S = R^d.
-Restriction of ordinary scalar extension is naturally the finite direct sum
-of d copies of the identity. The projection-defined product comparison has
-inverse given by summing the d tuples of basis coordinates; thus it commutes
-with countable products. Restriction of scalars creates limits and colimits,
-is exact and conservative, so this also proves exactness of extension.
-Change of rings preserves K-flatness. Its tensor-association comparison with
-an arbitrary test module proves flatness of each extended flat term; together
-these give preservation of good representatives. Finally resolve any complex
-by a K-flat complex. Exact ordinary extension sends its quasi-isomorphism to
-a quasi-isomorphism. The universal scalar counit is invertible on the resolution,
-and its naturality square makes it invertible on the original complex by
-three-for-two. This argument concerns completed finite-free coefficients,
-and does not assume flatness of any ramified finite quotient map. -/
+and computes its derived functor on every complex. -/
 theorem finiteFreeScalarCochainProperties (W : AlgebraicGeometry.Scheme.{t}) :
     PreservesLimitsOfShape (Discrete ℕ) (completedOrdinaryScalarExtension l E L ι W) ∧
     (∀ P : (integralOperationsGoodComplex l E W).FullSubcategory,

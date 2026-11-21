@@ -9,7 +9,12 @@ public import WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperat
 
 /-! # Canonical ordinary tensor-completion presentation
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and Lemma 6.5.5
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 06YL]
+* [Stacks, Tag 098K]
 -/
 
 @[expose] public noncomputable section
@@ -33,39 +38,33 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 attribute [local irreducible] IntegralOnSlice.duality IntegralOnSlice.roosUnit
   IntegralAmbient.tensorTowerIso IntegralAmbient.tensorOperationUnit
 
-/-- Fix the coefficient size of the small-site model.
-Source: Stacks 098K. -/
+/-- Fix the coefficient size of the small-site model. -/
 instance (priority := 3100) tensorSiteSmall :
     EssentiallySmall.{u + 1} W.ProEt := essentiallySmallSelf.{0, u, u + 1} _
 
-/-- The locally bijective criterion at that same coefficient universe.
-Source: Stacks 03DA. -/
+/-- The locally bijective criterion at that same coefficient universe. -/
 instance (priority := 3100) tensorAbLocallyBijective :
     (ProEt.topology W).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, u} W
 
-/-- Signed total tensor over the completed coefficient sheaf.
-Source: Stacks 06YL. -/
+/-- Signed total tensor over the completed coefficient sheaf. -/
 abbrev totalTensor := coefficientTotalTensor.{u, u + 1, u} (ProEt.topology W)
   (completedIntegralCommRingSheafUnrestricted l E W)
 
-/-- The ordinary tensor from the recorded K-flat duality model.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
+/-- The ordinary tensor from the recorded K-flat duality model. -/
 @[irreducible] def ordinaryTensor :
     DerivedCategory (integralTowerModules l E W) ×
       DerivedCategory (integralTowerModules l E W) ⥤
         DerivedCategory (integralTowerModules l E W) :=
   (IntegralOnSlice.duality.{u, u} l E W none).closed.tensor
 
-/-- The existing canonical completion, with its native derived-category type.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
+/-- The existing canonical completion, with its native derived-category type. -/
 @[irreducible] def tensorCompletionFunctor :
     DerivedCategory (integralTowerModules l E W) ⥤
       DerivedCategory (integralTowerModules l E W) := by
   with_unfolding_all exact IntegralOnSlice.completion l E W none
 
-/-- The existing canonical unit, with its native derived-category type.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
+/-- The existing canonical unit, with its native derived-category type. -/
 @[irreducible] def tensorCompletionUnit :
     𝟭 (DerivedCategory (integralTowerModules l E W)) ⟶
       tensorCompletionFunctor l E W := by
@@ -73,8 +72,7 @@ Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
   with_unfolding_all exact IntegralOnSlice.completionUnit l E W none
 
 omit [Fact l.Prime] in
-/-- Residue-field invertibility of the prime implies stalkwise invertibility.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
+/-- Residue-field invertibility of the prime implies stalkwise invertibility. -/
 theorem tensorPrime_stalkUnit
     [∀ w : W, Invertible (l : W.residueField w)] (w : W) :
     IsUnit (l : W.presheaf.stalk w) := by
@@ -85,8 +83,7 @@ theorem tensorPrime_stalkUnit
   apply isUnit_of_map_unit (W.residue w).hom
   simpa only [map_natCast] using isUnit_of_invertible (l : W.residueField w)
 
-/-- Restrict the recorded K-flat comparison to flat-term K-flat good complexes.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
+/-- Restrict the recorded K-flat comparison to flat-term K-flat good complexes. -/
 @[irreducible] def tensorRepresentativeIso :
     ((integralOperationsGoodComplex l E W).ι.prod
       (integralOperationsGoodComplex l E W).ι) ⋙ totalTensor l E W ⋙
@@ -103,8 +100,7 @@ Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
   unfold ordinaryTensor
   exact Functor.isoWhiskerLeft (H.prod H) K.comparison
 
-/-- The existing normalized augmentation, with its native representative target.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
+/-- The existing normalized augmentation, with its native representative target. -/
 @[irreducible] def tensorCompletionUnitMap
     (P Q : CochainComplex (integralTowerModules l E W) ℤ) :
     (totalTensor l E W).obj (P, Q) ⟶
@@ -117,8 +113,7 @@ private theorem existsConjRight {A : Sort*} {P Q : A → Prop}
   exact ⟨a, ha⟩
 
 /-- Completion of the recorded ordinary tensor identifies with the specified completed
-tensor, compatibly with the canonical normalized augmentation.
-Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 6.5.5. -/
+tensor, compatibly with the canonical normalized augmentation. -/
 theorem tensorCompletionModel
     [∀ w : W, Invertible (l : W.residueField w)] :
     ∃ β : ordinaryTensor l E W ⋙ tensorCompletionFunctor l E W ≅

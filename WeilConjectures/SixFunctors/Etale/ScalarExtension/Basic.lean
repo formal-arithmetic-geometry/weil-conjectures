@@ -67,7 +67,7 @@ instance additive_sheafComposeRestrictScalars :
     ext U x
     rfl
 
-/-- Extension of scalars of étale sheaves is additive, being a left adjoint. -/
+/-- Extension of scalars of étale sheaves is additive. -/
 instance additive_sheafExtendScalars : (sheafExtendScalars φ X).Additive :=
   (sheafExtendScalarsAdjunction φ X).left_adjoint_additive
 
@@ -75,8 +75,7 @@ end
 
 variable {X Y : Scheme.{u}}
 
-/-- Extension of scalars of étale sheaves commutes with pullback, `g^*(S ⊗_R F) ≅ S ⊗_R g^* F`:
-both functors are left adjoint to `G ↦ g_* G` viewed as a sheaf of `R`-modules. -/
+/-- Extension of scalars of étale sheaves commutes with pullback, `g^*(S ⊗_R F) ≅ S ⊗_R g^* F`. -/
 noncomputable def sheafExtendScalarsCompUpperStarIso (g : Y ⟶ X) :
     sheafExtendScalars φ X ⋙ Etale.upperStar (ModuleCat.{u + 1} S) g ≅
       Etale.upperStar (ModuleCat.{u + 1} R) g ⋙ sheafExtendScalars φ Y :=

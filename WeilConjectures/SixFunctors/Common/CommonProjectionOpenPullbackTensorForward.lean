@@ -8,6 +8,12 @@ module
 public import Mathlib.CategoryTheory.Functor.Currying
 
 /-! # Forward open pullback/tensor square for common-stage inclusion
+
+## Implementation details
+
+The representative compatibility equation is an explicit hypothesis of
+`commonProjectionOpenPullbackTensor_forward`: without it, the forward square fails for
+arbitrary comparisons.
 -/
 
 @[expose] public noncomputable section
@@ -25,19 +31,8 @@ open CategoryTheory
 
 namespace WeilConjectures
 
-/-- The forward form of the open tensor/pullback square.
-
-STATEMENT-DISPUTED (repaired): The original theorem quantified over arbitrary `mu` and `mu'`
-with no compatibility hypothesis. Take all four categories to be `SingleObj (Multiplicative
-Bool)`, all four functors and comparison isomorphisms to be identities, and take `TA` and
-`TB` to be the first projection functor from the product category (likewise `TA'` and
-`TB'`). Then the displayed equation reduces to `mu = mu'`; choosing the two distinct
-endomorphisms `false` and `true` gives a counterexample. A valid forward transport lemma
-needs the canonical compatibility equation (or hypotheses that imply it).
-
-The compatibility equation is now an explicit hypothesis. This is the strictly
-smaller representative equation from which the inverse square follows by cancelling
-the two displayed isomorphisms. -/
+/-- The forward form of the open tensor/pullback square, deduced from the representative
+compatibility equation. -/
 theorem commonProjectionOpenPullbackTensor_forward
     {A : Type v} [Category.{w} A] {B : Type v'} [Category.{w'} B]
     {A' : Type v} [Category.{w} A'] {B' : Type v'} [Category.{w'} B']

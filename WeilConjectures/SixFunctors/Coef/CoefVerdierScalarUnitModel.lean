@@ -9,6 +9,11 @@ import all WeilConjectures.SixFunctors.PurCompactSupport.IntegralScalarTensorIde
 import all WeilConjectures.TraceFormula.Supporting.FiniteFreeCompletedScalarComparison
 import all WeilConjectures.AlgebraicGeometry.Completed.Adic.CompletedAdicCoefficientDatumSupplement
 /-! # Tensor and K-flat models for the scalar identity unit
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -41,8 +46,7 @@ attribute [local instance 100000] PurCompactSupport.coefficientSiteSmall
 
 attribute [local irreducible] PurCompactSupport.ordinaryUnit
 
-/-- The scalar identity unit constructed by the identity restriction adjunction.
-Source: Stacks 03DA. -/
+/-- The scalar identity unit constructed by the identity restriction adjunction. -/
 def identityScalarUnit {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (φ : R ⟶ R) (h : φ = 𝟙 R) :
     pbcExtend φ ≅ 𝟭 _ :=
@@ -132,9 +136,7 @@ private theorem derivedUnit_model {X : Scheme.{u}}
     rfl
   exact hi
 
-/-- The ordinary identity scalar unit has the sectionwise multiplication formula.
-Source: Stacks 03DA; identity extension of scalars.
--/
+/-- The ordinary identity scalar unit has the sectionwise multiplication formula. -/
 private theorem scalar_identity_unit_tensor {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (φ : R ⟶ R) (h : φ = 𝟙 R)
     (M : pbcModules X R) (U : X.ProEtᵒᵖ) (s : R.obj.obj U) (x : M.val.obj U) :
@@ -142,9 +144,7 @@ private theorem scalar_identity_unit_tensor {X : Scheme.{u}}
       @SMul.smul _ _ (M.val.obj U).isModule.toSMul s x := by
   exact scalarUnit_tensor R φ h M U s x
 
-/-- The derived identity scalar unit is the counit followed by the chain unit.
-Source: Stacks 06YY; the K-flat derived identity extension formula.
--/
+/-- The derived identity scalar unit is the counit followed by the chain unit. -/
 private theorem scalar_identity_unit_derived {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (φ : R ⟶ R) (h : φ = 𝟙 R) :
     ∀ (P : CochainComplex (pbcModules X R) ℤ)
@@ -157,13 +157,7 @@ private theorem scalar_identity_unit_derived {X : Scheme.{u}}
   intro P hp
   exact derivedUnit_model R φ h P hp
 
-/-- Tensor and K-flat formulas for the constructed scalar identity units.
-Source: Stacks 03DA and 06YY; the identity clause of theorem-verdier-biduality--3.
-
-Proof: the inverse ordinary adjoint mate multiplies pure tensors, since the
-forward mate inserts 1 and is linear. On flat-term K-flat complexes, cancel
-the inverse derived mate in the derived adjunction unit formula. The chain
-isomorphism inverse equations give the displayed counit formula. -/
+/-- Tensor and K-flat formulas for the constructed scalar identity units. -/
 theorem scalar_identity_unit_model {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (φ : R ⟶ R) (h : φ = 𝟙 R) :
     (∀ (M : pbcModules X R) (U : X.ProEtᵒᵖ) (s : R.obj.obj U) (x : M.val.obj U),

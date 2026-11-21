@@ -9,7 +9,10 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 
 /-! # The finite-Hom monoidality predicate
 
-The predicate is relocated verbatim to let its generic scalar realization compile separately.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0FPT]
 -/
 
 @[expose] public noncomputable section
@@ -19,8 +22,7 @@ open CategoryTheory MonoidalCategory
 namespace WeilConjectures
 
 /-- Strong monoidality for fixed tensor, unit and signed symmetry components.
-Heterogeneous equalities identify the components without changing their data.
-Source: blueprint ambient monoidality clause; Stacks 07A4 and 0FPT. -/
+Heterogeneous equalities identify the components without changing their data. -/
 def FiniteHomDomainMonoidal {C : Type a₁} {C' : Type a₂}
     [Category.{b₁} C] [Category.{b₂} C'] [MonoidalCategory C] [MonoidalCategory C']
     (F : C ⥤ C') {V : C → C → Type b₂} (δ : ∀ U V', V U V')

@@ -26,7 +26,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TriangleShift
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_shift`: shifting the kernel shifts the
   kernel transform.
 
-See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation notes.
+See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation details.
 -/
 
 @[expose] public section
@@ -47,22 +47,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' ⟶ S)
 
 /-- The *kernel transform* `Φ_𝒦(K) = Rp₂,!(p₁^* K ⊗ᴸ 𝒦)[a]` attached to a kernel
-`𝒦 ∈ D((V ×_S V')_ét)` and a shift `a : ℤ`:
-
-```
-              V ×ₛ V'
-             ╱ ╲
-          p₁╱ ╲p₂
-           ▼ ▼
-           V V'
-            ╲ ╱
-            π╲ ╱π'
-              ▼ ▼
-                 S
-```
-
-`K` is pulled back along `p₁`, tensored with `𝒦`, pushed forward with compact support
-along `p₂` and shifted by `a`. -/
+`𝒦 ∈ D((V ×_S V')_ét)` and a shift `a : ℤ`, where `p₁`, `p₂` are the projections of
+`V ×ₛ V'`. -/
 noncomputable def kernelTransform [HasCompactification (pullback.snd π π')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :
     DerivedCategory (Sheaf V.smallEtaleTopology A) ⥤
@@ -70,19 +56,14 @@ noncomputable def kernelTransform [HasCompactification (pullback.snd π π')]
   D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
     R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a
 
-/-- The kernel transform commutes with shifts, as the composite of `D(p₁^*)`, `- ⊗ᴸ 𝒦`, `Rp₂,!`
-and the shift by `a`, each of which does. -/
+/-- The kernel transform commutes with shifts. -/
 noncomputable instance commShiftKernelTransform [HasCompactification (pullback.snd π π')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :
     (kernelTransform A π π' 𝒦 a).CommShift ℤ :=
   inferInstanceAs ((D((pullback.fst π π')^*[A]) ⋙ derivedTensorRight A (pullback π π') 𝒦 ⋙
     R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a).CommShift ℤ)
 
-/-- The kernel transform is a triangulated functor: the pullback `D(p₁^*)`, the derived tensor
-product `- ⊗ᴸ 𝒦`, the compact-support direct image `Rp₂,!` and the shift by `a` are
-triangulated.
-
-Class: general; it holds at every coefficient category `A`. -/
+/-- The kernel transform is a triangulated functor. -/
 instance isTriangulated_kernelTransform [HasCompactification (pullback.snd π π')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a : ℤ) :
     (kernelTransform A π π' 𝒦 a).IsTriangulated :=
@@ -90,14 +71,7 @@ instance isTriangulated_kernelTransform [HasCompactification (pullback.snd π π
     R(pullback.snd π π')_![A] ⋙ shiftFunctor _ a).IsTriangulated)
 
 /-- Shifting the kernel shifts the kernel transform: the kernel transform of `𝒦[a]` with shift
-`c` is the kernel transform of `𝒦` with shift `a + c`.
-
-The shift is moved out of the kernel
-(`AlgebraicGeometry.Etale.derivedTensorRightShiftIso`), past `Rp₂,!` and composed with the shift
-by `c`.
-
-Class: general; decided by formal six-functor yoga (shifts commute with the derived tensor
-product and `Rf_!`), so it holds at every coefficient category `A`. -/
+`c` is the kernel transform of `𝒦` with shift `a + c`. -/
 theorem nonempty_iso_kernelTransform_shift [HasCompactification (pullback.snd π π')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A)) (a c : ℤ) :
     Nonempty (kernelTransform A π π' ((shiftFunctor _ a).obj 𝒦) c ≅
@@ -115,25 +89,8 @@ theorem nonempty_iso_kernelTransform_shift [HasCompactification (pullback.snd π
     (e₁ ≪≫ Functor.isoWhiskerLeft (derivedTensorRight A (pullback π π') 𝒦) e₂)⟩
 
 /-- The convolution `𝒦' ∗ 𝒦 = r₁₃,!(r₁₂^* 𝒦 ⊗ᴸ r₂₃^* 𝒦')` of a kernel `𝒦` on `V ×_S V'`
-with a kernel `𝒦'` on `V' ×_S V''`, a kernel on `V ×_S V''`.
-
-The triple product `V ×_S V' ×_S V''` is realised as `(V ×_S V') ×_{V'} (V' ×_S V'')`, whose
-two projections are `r₁₂` and `r₂₃`; `r₁₃` is
-`CategoryTheory.Limits.pullback.tripleProj₁₃`:
-
-```
-                       𝒦
-    V ×ₛ V' ×ₛ V'' ──r₁₂──▶ V ×ₛ V'
-           │ ╲
-           │ ╲ r₁₃
-        r₂₃│ ╲
-           ▼ ▶ V ×ₛ V''
-      V' ×ₛ V''
-           𝒦'
-```
-
-`𝒦` is pulled back along `r₁₂`, `𝒦'` along `r₂₃`, the two are tensored, and the result is
-pushed forward with compact support along `r₁₃`. -/
+with a kernel `𝒦'` on `V' ×_S V''`, a kernel on `V ×_S V''`. Here `r₁₂`, `r₂₃`, `r₁₃` are the
+projections of the triple product `(V ×_S V') ×_{V'} (V' ×_S V'')`. -/
 noncomputable def kernelConvolution
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     (𝒦 : DerivedCategory (Sheaf (pullback π π').smallEtaleTopology A))

@@ -9,7 +9,11 @@ public import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientCocycleD
 
 /-! # Native constant-coefficient types for integral quotient reductions
 
-Source: the constant finite coefficient convention, Stacks Tags 03DA and 06YY.
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -21,29 +25,25 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The existing integral reduction with its canonical constant-coefficient codomain.
-Source: the finite coefficient definition, Stacks Tag 06YY. -/
+/-- The existing integral reduction with its canonical constant-coefficient codomain. -/
 def compactSupportQuotientNativeLevel (W : Scheme.{u}) (n : ℕ) :
     DerivedCategory (scalarReductionSource.{u, u} l E W) ⥤
       proEtaleDerivedCategory W (Padic.coefficientExtensionRing l E (n + 1)) :=
   scalarReductionDerivedExtension.{u, u} l E W n
 
-/-- Quotient restriction with its canonical constant-coefficient source and target.
-Source: Stacks Tag 03DA. -/
+/-- Quotient restriction with its canonical constant-coefficient source and target. -/
 def compactSupportQuotientNativeRestriction (W : Scheme.{u})
     (m n : ℕ) (h : n ≤ m) :
     proEtaleDerivedCategory W (Padic.coefficientExtensionRing l E (n + 1)) ⥤
       proEtaleDerivedCategory W (Padic.coefficientExtensionRing l E (m + 1)) :=
   compactSupportCoefficientRestriction W (compactSupportLevelQuotient l E m n h)
 
-/-- The original identity comparison in canonical quotient restriction types.
-Source: Stacks Tag 03DA. -/
+/-- The original identity comparison in canonical quotient restriction types. -/
 def compactSupportQuotientNativeResId (W : Scheme.{u}) (n : ℕ) :
     compactSupportQuotientNativeRestriction l E W n n le_rfl ≅ 𝟭 _ :=
   compactSupportQuotientResId l E W n
 
-/-- The original composition comparison in canonical quotient restriction types.
-Source: Stacks Tag 03DA. -/
+/-- The original composition comparison in canonical quotient restriction types. -/
 def compactSupportQuotientNativeResComp (W : Scheme.{u})
     (r m n : ℕ) (hrm : m ≤ r) (hmn : n ≤ m) :
     compactSupportQuotientNativeRestriction l E W m n hmn ⋙
@@ -51,8 +51,7 @@ def compactSupportQuotientNativeResComp (W : Scheme.{u})
       compactSupportQuotientNativeRestriction l E W r n (hmn.trans hrm) :=
   compactSupportQuotientResComp l E W r m n hrm hmn
 
-/-- The original compact-support comparison in canonical quotient restriction types.
-Source: Stacks Tags 03DI and 03DA. -/
+/-- The original compact-support comparison in canonical quotient restriction types. -/
 def compactSupportQuotientNativeComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (m n : ℕ) (h : n ≤ m) :
     compactSupportQuotientNativeRestriction l E X m n h ⋙
@@ -61,8 +60,7 @@ def compactSupportQuotientNativeComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
         compactSupportQuotientNativeRestriction l E Y m n h :=
   compactSupportCoefficientComparison c (compactSupportLevelQuotient l E m n h)
 
-/-- The published normalized quotient arrow in the native constant-ring presentation.
-Source: the integral adjunction unit, Stacks Tag 06YY. -/
+/-- The published normalized quotient arrow in the native constant-ring presentation. -/
 def compactSupportQuotientNativeMap (W : Scheme.{u}) (m n : ℕ) (h : n ≤ m)
     (K : DerivedCategory (scalarReductionSource.{u, u} l E W)) :
     (compactSupportQuotientNativeLevel l E W m).obj K ⟶

@@ -9,7 +9,11 @@ public import WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenSemilinearTen
 
 /-! # Section calculus for the ordinary open-system unit
 
-Source: Stacks Project, Tags 03DI--03DJ and evaluation before 0941.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -91,16 +95,14 @@ private theorem pushforward_naturality_apply
       M.val.presheaf.map (F.map g.unop).op (f.val.app V x) :=
   presheaf_naturality_apply f.val g x
 
-/-- Transport a section through the recorded literal system pushforward.
-Source: Stacks 03DJ. -/
+/-- Transport a section through the recorded literal system pushforward. -/
 def transportedSection (N : coefficientSequenceModules l E U) (n : ℕ)
     (W : Over (IntegralOpenReduction.openObject j))
     (x : N.val.obj (op (n, (IntegralOpenReduction.sliceSite j).obj W))) :
     (o.systems.functor.obj N).val.obj (op (n, W)) :=
   ((eqToHom o.systemsFunctor.symm).app N).val.app (op (n, W)) x
 
-/-- The ordinary open-system adjunction unit applied to a transported section.
-Source: Stacks 03DI--03DJ. -/
+/-- The ordinary open-system adjunction unit applied to a transported section. -/
 def systemUnit (N : coefficientSequenceModules l E U) (n : ℕ)
     (W : Over (IntegralOpenReduction.openObject j))
     (x : N.val.obj (op (n, (IntegralOpenReduction.sliceSite j).obj W))) :
@@ -198,17 +200,7 @@ private theorem finiteSection_map (n : ℕ) {M N : normalizedDVRModules l E U n}
   rw [← ht] at hn
   exact hn.symm
 
-/-- Evaluation of the system unit is the original finite extension summand.
-
-Source: Stacks 03DI--03DJ and sequence-site evaluation before 0941.
-
-Proof: apply the given unit-evaluation equation to the transported section.
-Identity on sections removes restrictionEvaluation. The transportSections equation
-and the sectionwise identity of eqToHom identify transportEvaluation with the
-finite coefficient transport. Naturality of the finite localized adjunction unit
-moves that transport through the unit. Finally its prescribed direct-sum injection
-is precisely finiteExtensionSection. The argument applies to every finite level,
-every slice object and every section, also for the empty open. -/
+/-- Evaluation of the system unit is the original finite extension summand. -/
 theorem systemUnit_evaluation
     (hrestriction : ∀ (n : ℕ) N V x,
       HEq ((((o.openSystems.restrictionEvaluation n).hom.app N).val.app V) x) x)

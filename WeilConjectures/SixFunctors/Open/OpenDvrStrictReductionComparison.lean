@@ -13,7 +13,13 @@ import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFixedCalcul
 import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitCanonicalModels
 /-! # Strict quotient reduction under canonical DVR coefficients
 
-Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 099B]
+* [Stacks, Tag 0A0E]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +33,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] HasDerivedCategory.standard Functor.rightDerivedFunctor
 
-/-- The strict tensor comparisons before total derived coefficient-limit transport.
-Source: Stacks Tags 07A6 and 0941. -/
+/-- The strict tensor comparisons before total derived coefficient-limit transport. -/
 structure OpenDvrStrictReductionComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) (S : CoefficientDerivedSystemCalculus.{u, u} l E T)
@@ -82,36 +87,7 @@ local instance (priority := 10000) sequenceSiteSmall (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} (ℕ × T.ProEt) :=
   coefficientSequenceEssentiallySmall.{u, 0} T
 
-/-- Strict quotient tensor transport and its scalar adjunction normalization.
-Source: Stacks Tags 07A6, 0D6E and 0941.
-
-Proof: choose the existing ordinary quotient model M for S, and its universally
-normalized left-derived comparison epsilon. The ordinary coefficient tensor
-comparison nu identifies the two strict ordinary towers and their augmentations.
-The already proved ring-isomorphism tensor transport preserves K-flatness.
-Construct two natural counits to the same complex-valued functor: completed-adic
-reduction after the exact coefficient equivalence, and epsilon after restriction
-and coefficient transport followed by nu inverse. Both counits are invertible on
-flat-term K-flat complexes, which resolve all complexes. The comparison theorem
-on a resolving class gives the natural derived tower isomorphism and its exact
-representative equation. Cancellation of nu inverse gives the reduction-counit
-square required here.
-
-For a given Q use the actual complex I=M.quotient Q and its restricted tower B.
-Take a to be the ordinary constant/limit adjunct of M.adjunction.unit on Q.
-Take e from epsilon and the exact restriction localization factors, and tau from
-nu on complexes. The ordinary transport gives kappa and both augmentation laws.
-Evaluate the normalized derived Hom formula on the identity of I. After composing
-with the restriction localization factor, its inverse in systemLimitUnit cancels.
-Ordinary limit projections identify M.limitComparison with the canonical termwise
-comparison after the composite-functor comparison. The ordinary Hom equivalence
-identifies a's adjunct with M.adjunction.unit. Cancel the termwise comparison with
-its inverse in the canonical derived-limit unit. This gives the total-limit formula
-before applying C.derived.functor, so functoriality proves the last clause.
-This calculation uses ordinary projections only to identify ordinary limits;
-it never detects equality in a derived limit by its finite projections.
-The construction works for zero complexes and the empty site and uses neither
-flat quotient rings nor boundedness nor exact countable products. -/
+/-- Strict quotient tensor transport and its scalar adjunction normalization. -/
 theorem openDvrStrictReductionComparison
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T)

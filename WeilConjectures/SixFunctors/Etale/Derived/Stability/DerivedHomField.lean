@@ -21,11 +21,12 @@ amplitude `[a, b]` and `[c, e]` is bounded constructible of Tor amplitude
 `[c - b - 2d, e - a + 2d]`
 (`AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_derivedHom_of_field`).
 
+## Implementation details
+
 Over an algebraically closed field this is `AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`
 and `AlgebraicGeometry.Etale.boundedConstructible_derivedHom`. In general we base change to an
-algebraic closure `k̄` of `k`: the internal hom commutes with this base change
-(`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_generic`), the base change does
-not increase the dimension, and bounded constructibility and Tor amplitude descend along the
+algebraic closure `k̄` of `k`
+(`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_generic`) and descend along the
 surjective morphism `X_k̄ ⟶ X`.
 -/
 
@@ -48,9 +49,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- **Bounded constructibility descends along a surjective morphism** of quasi-compact
-quasi-separated schemes, for a finite coefficient ring: boundedness descends since `g^*` is
-faithful and exact, and constructibility of the homology sheaves descends by
-`AlgebraicGeometry.Scheme.isConstructibleEtaleModuleSheaf_iff_surjective_pullback`. -/
+quasi-separated schemes, for a finite coefficient ring. -/
 lemma boundedConstructible_of_leftDerivedUpperStar_of_surjective {X' X : Scheme.{u}}
     [CompactSpace X'] [QuasiSeparatedSpace X'] [CompactSpace X] [QuasiSeparatedSpace X]
     (g : X' ⟶ X) [Surjective g]
@@ -76,11 +75,7 @@ lemma boundedConstructible_of_leftDerivedUpperStar_of_surjective {X' X : Scheme.
 Let `Λ` be a finite ring whose exponent is invertible on a field `k`, and `X` of finite type over
 `k` with `dim X ≤ d`. If `K` and `L` are bounded constructible with Tor amplitude in `[a, b]` and
 `[c, e]`, then `RHom(K, L)` is bounded constructible with Tor amplitude in
-`[c - b - 2d, e - a + 2d]`. Over an algebraic closure `k̄` of `k` this is
-`AlgebraicGeometry.Etale.torAmplitudeIn_derivedHom`; the internal hom commutes with the base
-change `g : X_k̄ ⟶ X`
-(`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_generic`), and both properties
-descend along the surjective `g`. -/
+`[c - b - 2d, e - a + 2d]`. -/
 theorem boundedConstructible_and_torAmplitudeIn_derivedHom_of_field {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] (d : ℕ)

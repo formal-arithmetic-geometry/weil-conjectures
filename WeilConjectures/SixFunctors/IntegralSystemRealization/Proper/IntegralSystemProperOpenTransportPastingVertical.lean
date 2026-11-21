@@ -8,10 +8,21 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompactificationRealizationData
 import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemBridgePushComposition
 
-/-! Vertical pasting for the canonical proper/open transport on integral systems.
+/-! # Vertical proper/open transport pasting
+
+Vertical pasting for the canonical proper/open transport on integral systems.
+
+## Implementation details
 
 The intrinsic data and its bridge are packaged before applying categorical cancellation.
 This keeps comparisons of the two derived-category presentations out of that calculation.
+
+## References
+
+* [Stacks, Tag 0F7C]
+* [Stacks, Tag 0F7D]
+* [Stacks, Tag 0F7F]
+* Zheng, Lemma 4.10
 -/
 
 @[expose] public noncomputable section
@@ -351,12 +362,7 @@ private theorem chosen_canonical (o : Operations l E)
     canonical i r₂ p₂ j h₂ ((Operations.push l E o r₁).obj M)⟩
 
 /-- Vertical proper/open transport pasting for the canonically normalized gamma.
-The bridge equation identifies each supplied component with the intrinsic mate.
-Source: Stacks 0F7C, 0F7D and 0F7F; Zheng Lemma 4.10.
-Proof: the section-normalized bridge intertwines both direct-image compositors.
-Apply the three canonical component equations. Naturality moves the bridge maps
-through the functors, and cancellation of the endpoint isomorphism reduces the claim
-to intrinsic vertical mate pasting. -/
+The bridge equation identifies each supplied component with the intrinsic mate. -/
 theorem integralSystemProperOpenTransportPastingVertical
     (o : Operations l E) (c : Compositors l E o)
     (_a : OpenComparisons l E o c)

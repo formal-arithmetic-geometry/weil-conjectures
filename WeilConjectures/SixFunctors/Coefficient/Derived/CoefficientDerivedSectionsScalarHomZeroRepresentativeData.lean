@@ -17,11 +17,9 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The H-zero map in the representative scalar-normalization calculation.
-It is the image under degree-zero homology of the integral sections of the enriched
-adjunction map, followed by the chosen scalar-sections comparison: the concrete
-composite displayed in the representative transpose theorem.
-Source: Stacks 03CZ, 079P and 08JA. -/
+/-- The H-zero map in the representative scalar-normalization calculation: degree-zero
+homology of the integral sections of the enriched adjunction map, followed by the chosen
+scalar-sections comparison. -/
 noncomputable def coefficientDerivedSectionsScalarHomZeroMap
     (R : CoefficientDerivedSystemReduction l E W)
     (D : CoefficientDerivedSystemScalarCoherence l E W)

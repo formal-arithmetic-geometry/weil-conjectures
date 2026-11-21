@@ -9,7 +9,10 @@ public import WeilConjectures.SixFunctors.Finite.Scalar.Tensor.FiniteScalarTenso
 
 /-! # A shared functor for the signed total tensor
 
-Source: Stacks Tags 06YN and 07A4.
+## References
+
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -20,9 +23,7 @@ open CategoryTheory.Functor
 
 namespace WeilConjectures
 
-/-- The signed total tensor, with a stable functor head in coefficient applications.
-This is the existing raw total construction, with no changed tensor data.
-Source: Stacks Tags 06YN and 07A4. -/
+/-- The signed total tensor, with a stable functor head in coefficient applications. -/
 def finiteScalarRepresentativeTotalTensor
     (C : Type*) [Category.{v} C] [Preadditive C] [MonoidalCategory C] [MonoidalPreadditive C]
     [Limits.HasColimitsOfSize.{0, 0} C] :

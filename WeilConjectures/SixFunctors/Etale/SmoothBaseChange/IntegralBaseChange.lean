@@ -25,16 +25,6 @@ integral:
 - replacing the base `S'` of `p'` by `S''` along an integral `π : S'' ⟶ S'` through which
   `g` factors (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom`).
 
-Both rest on the exactness of the direct image along an integral morphism,
-`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`, and on base change
-along an integral morphism,
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`: in each case the
-direct image along `π` (resp. along its base change `π'`) identifies the two base-change maps,
-which is recorded in `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_lowerStar`
-and `AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_comp`. Both are read off
-from the vertical pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert` of
-the derived base-change maps.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective`:
@@ -42,10 +32,18 @@ the derived base-change maps.
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom`: integral base
   change on the source.
 
+## Implementation details
+
+Both statements rest on the exactness of the direct image along an integral morphism
+(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`) and on base change
+along an integral morphism
+(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`),
+via the vertical pasting law `AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_paste_vert`.
+
 ## References
 
-- Stacks Project, Lemma 59.88.3, <https://stacks.math.columbia.edu/tag/0F04>
-- Stacks Project, Lemma 59.88.4, <https://stacks.math.columbia.edu/tag/0F05>
+* [Stacks, Tag 0F04]
+* [Stacks, Tag 0F05]
 -/
 
 @[expose] public section
@@ -82,16 +80,7 @@ variable {X S T Y T' Y' : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} 
 /-- The direct image along an integral morphism `π : T' ⟶ T` identifies base-change maps:
 for Cartesian squares over `g : T ⟶ S` and over `π ≫ g`, the base-change map of the first
 square at `π_* F'` is isomorphic, as an arrow, to the base-change map of the second square at
-`F'`.
-
-Write `h' = π'' ≫ h` with `π'' : Y' ⟶ Y` the base change of `π`. By the vertical pasting law
-the derived base-change map of the square over `π ≫ g` at `F'` is the one of the square over
-`g` at `Rπ_* F'`, followed by `Rh_*` of the derived base-change map of the square of `π''`
-over `π`, modulo the composition isomorphisms of the derived pushforwards. The latter is an
-isomorphism (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`), and
-`Rπ_* F' = π_* F'` as `π_*` is exact
-(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`). This is the
-identification in the proof of blueprint `lemma-integral-changes-source-base--1`. -/
+`F'`. -/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_lowerStar (sq : IsPullback e h g p)
     (π : T' ⟶ T) [IsIntegralHom π] (sq' : IsPullback e' h' (π ≫ g) p) (q : ℤ)
     (F' : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -122,22 +111,12 @@ theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_lowerStar (sq : IsPullback
   simp only [Functor.map_comp]
   exact (Arrow.isoOfIsIsoComp _ _ _).symm
 
-/-- Blueprint `lemma-integral-changes-source-base--1`: Integral surjective base change on the
-target.
+/-- Integral surjective base change on the target.
 
 Assume `BC(p, Λ, q - 1)` for some `q ≥ 1`. Let `g : T ⟶ S` be quasi-compact and
 quasi-separated, `π : T' ⟶ T` integral and surjective, and consider Cartesian squares over `g`
 and over `π ≫ g`. If the base-change map of the square over `π ≫ g` is an isomorphism at
-`π⁻¹ F`, then the base-change map of the square over `g` is an isomorphism at `F`.
-
-Since `π` is surjective, `F ⟶ π_* π⁻¹ F` is injective
-(`AlgebraicGeometry.Etale.mono_unit_app_of_surjective`), so by
-`AlgebraicGeometry.Etale.mono_cokernelMap` the cokernel of the base-change map at `F` embeds
-into the one at `π_* π⁻¹ F`. The latter vanishes, the base-change map at `π_* π⁻¹ F` being
-identified with the one over `π ≫ g` at `π⁻¹ F` by
-`AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_lowerStar`. The base-change
-map at `F` is therefore surjective, and it is injective by
-`AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`. -/
+`π⁻¹ F`, then the base-change map of the square over `g` is an isomorphism at `F`. -/
 @[stacks 0F04]
 theorem Etale.isIso_baseChangeHomologyMap_of_isIntegralHom_of_surjective (q : ℤ) (hq : 1 ≤ q)
     (hprev : Etale.BaseChangeProperty Λ p (q - 1)) [QuasiCompact g] [QuasiSeparated g]
@@ -171,16 +150,7 @@ variable {X' S' S'' X'' T Y : Scheme.{u}} {p' : X' ⟶ S'} {p'' : X'' ⟶ S''} {
 `π : S'' ⟶ S'` identifies base-change maps: for a Cartesian square over `g' : T ⟶ S''` for
 the base change `p''` of `p'` along `π`, the base-change map of the pasted square over
 `g' ≫ π` is isomorphic, as an arrow, to the image under `π'_*` of the base-change map of the
-square over `g'`.
-
-By the vertical pasting law the derived base-change map of the pasted square over `g' ≫ π` is
-the derived base-change map of the square of `π'` over `π` at `Rg'_* F`, followed by `Rπ'_*` of
-the derived base-change map of the square over `g'`, modulo the composition isomorphisms of the
-derived pushforwards. The former is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isIntegralHom`), and `Rπ'_*`
-commutes with the homology functors as `π'_*` is exact
-(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`). This is the
-identification in the proof of blueprint `lemma-integral-changes-source-base--2`. -/
+square over `g'`. -/
 theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_comp (π : S'' ⟶ S') [IsIntegralHom π]
     (hπ : IsPullback π' p'' p' π) (sq'' : IsPullback e h'' g' p'')
     (sq : IsPullback e (h'' ≫ π') (g' ≫ π) p') (q : ℤ)
@@ -213,19 +183,12 @@ theorem Etale.nonempty_arrowIso_baseChangeHomologyMap_comp (π : S'' ⟶ S') [Is
   rw [← Category.assoc]
   exact Arrow.isoOfIsIsoComp _ _ _
 
-/-- Blueprint `lemma-integral-changes-source-base--2`: Integral base change on the source.
+/-- Integral base change on the source.
 
 Let `π : S'' ⟶ S'` be integral, `p'' : X'' ⟶ S''` the base change of `p' : X' ⟶ S'` along
 `π`, and consider a Cartesian square for `p''` over `g' : T ⟶ S''` and the pasted Cartesian
 square for `p'` over `g' ≫ π`. Then the base-change map of the pasted square at `F` is an
-isomorphism if and only if the base-change map of the square over `g'` is.
-
-The blueprint states the forward implication; the converse is what the proof of blueprint
-`lemma-reduction-curve-over-normal-base--1` uses. By
-`AlgebraicGeometry.Etale.nonempty_arrowIso_baseChangeHomologyMap_comp` the first map is the
-image under `π'_*` of the second, and `π'_*` is conservative
-(`AlgebraicGeometry.Etale.reflectsIsomorphisms_lowerStar_of_isIntegralHom`), `π'` being
-integral as a base change of `π`. -/
+isomorphism if and only if the base-change map of the square over `g'` is. -/
 @[stacks 0F05]
 theorem Etale.isIso_baseChangeHomologyMap_iff_of_isIntegralHom (π : S'' ⟶ S') [IsIntegralHom π]
     (hπ : IsPullback π' p'' p' π) (sq'' : IsPullback e h'' g' p'')

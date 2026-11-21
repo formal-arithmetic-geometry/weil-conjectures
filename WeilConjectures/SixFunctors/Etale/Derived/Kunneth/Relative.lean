@@ -23,7 +23,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.RelativeMap
 
 /-!
-
 # The relative product theorem on the étale site
 
 The ordinary Künneth formula with an identity factor, the relative product theorem for `Rf_!`
@@ -32,22 +31,31 @@ and its variants for complexes supported on closed subschemes, for the external 
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`
-  (`lemma-kunneth-one-identity-factor--1`): `Rf_* M ⊠ Q ≅ R(f × id_Z)_* (M ⊠ Q)`
-  over a field, for a finite coefficient ring of invertible exponent.
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct`
-: `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
+- `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`:
+  `Rf_* M ⊠ Q ≅ R(f × id_Z)_* (M ⊠ Q)` over a field, for a finite coefficient ring of invertible
+  exponent.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct`:
+  `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`.
 - `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct`:
   `L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`.
 - `AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`:
   `(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L` for closed immersions `i`, `j`.
-- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`
-: the relative product theorem for complexes supported
-  on closed subschemes.
-- `AlgebraicGeometry.Etale.nonempty_iso_compactlySupported_externalProduct_closedImmersion`
-: the Künneth formula for `RΓ_c(Z × W, -)` over a field.
+- `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`:
+  the relative product theorem for complexes supported on closed subschemes.
+- `AlgebraicGeometry.Etale.nonempty_iso_compactlySupported_externalProduct_closedImmersion`:
+  the Künneth formula for `RΓ_c(Z × W, -)` over a field.
+
+## Implementation details
 
 See `WeilConjectures.SixFunctors.Etale.Derived.Kunneth` for the implementation notes.
+
+The base of the Künneth formula with an identity factor has to be a field and the exponent of
+`Λ` invertible: over `𝔸¹_k`, with `Z` the origin and `f` the inclusion of `𝔾_m`, the right-hand
+side vanishes while the left-hand side is the stalk of `Rf_* Λ` at the origin; and for
+`Λ = 𝔽_p` in characteristic `p` the Artin–Schreier cohomology of the affine line defeats the
+formula. Similarly the relative product theorem needs torsion coefficients: with coefficients `ℤ`
+proper base change fails for a regular proper curve over a strictly henselian discrete valuation
+ring with nodal special fibre.
 -/
 
 @[expose] public section
@@ -70,15 +78,8 @@ namespace Etale
 
 variable {B X Y : Scheme.{u}}
 
-/-- The square
-```
-  X ×_B Z --f × 𝟙--> Y ×_B Z
-     | |
-    pr pr
-     v v
-     X -------f-------> Y
-```
-is cartesian. -/
+/-- The square formed by `f × 𝟙 : X ×_B Z ⟶ Y ×_B Z`, the first projections and
+`f : X ⟶ Y` is cartesian. -/
 lemma isPullback_mapOverBaseRight_fst {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y) :
     IsPullback (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c) (pullback.fst b c)
       f :=
@@ -87,8 +88,8 @@ lemma isPullback_mapOverBaseRight_fst {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ 
     (pullback.mapOverBaseRight_fst f b c) (IsPullback.of_hasPullback b c).flip
 
 /-- The comparison map `Rf_* M ⊠ Q ⟶ R(f × 𝟙_Z)_* (M ⊠ Q)` of the ordinary Künneth formula
-with an identity factor (`lemma-kunneth-one-identity-factor--1`), for
-`f : X ⟶ Y`, `b : Y ⟶ B`, `c : Z ⟶ B`, `M ∈ D(X_ét)` and `Q ∈ D(Z_ét)`.
+with an identity factor, for `f : X ⟶ Y`, `b : Y ⟶ B`, `c : Z ⟶ B`, `M ∈ D(X_ét)` and
+`Q ∈ D(Z_ét)`.
 
 Writing `p_Y, p'_Z` for the projections of `Y ×_B Z` and `p_X, p_Z` for those of `X ×_B Z`,
 it is the composite
@@ -97,8 +98,7 @@ it is the composite
   ⟶ R(f × 𝟙)_* ((f × 𝟙)^* p'_Z^* Q ⊗ᴸ p_X^* M) ≅ R(f × 𝟙)_* (p_X^* M ⊗ᴸ p_Z^* Q)`
 
 of the braiding of `⊗ᴸ` (`AlgebraicGeometry.Etale.derivedTensorBraiding`),
-the base change map `AlgebraicGeometry.Etale.tensorBaseChangeMap` of
-`lemma-kunneth-field-coefficients--1` for the cartesian square
+the base change map `AlgebraicGeometry.Etale.tensorBaseChangeMap` for the cartesian square
 `AlgebraicGeometry.Etale.isPullback_mapOverBaseRight_fst`, and the composition isomorphism
 `(f × 𝟙)^* p'_Z^* ≅ p_Z^*` followed by the braiding again. -/
 noncomputable def externalProductRightDerivedLowerStarMap [UpperStarPreservesFlat A]
@@ -118,7 +118,7 @@ noncomputable def externalProductRightDerivedLowerStarMap [UpperStarPreservesFla
         ((derivedTensorBraiding A (pullback (f ≫ b) c)).hom.app _).app _)
 
 /-- The comparison map `Rf_* M ⊠ Q ⟶ R(f × 𝟙_Z)_* (M ⊠ Q)` is an isomorphism as soon as the
-base change map of `lemma-kunneth-field-coefficients--1` it is built from is one. -/
+base change map `AlgebraicGeometry.Etale.tensorBaseChangeMap` it is built from is one. -/
 lemma isIso_externalProductRightDerivedLowerStarMap [UpperStarPreservesFlat A]
     {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -134,35 +134,15 @@ variable {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
   [∀ X Y, FunLike (FA X Y) (CA X) (CA Y)] [ConcreteCategory.{u + 1} A FA]
   [HasSmallSiteSheafify A]
 
-/-- Blueprint `lemma-kunneth-one-identity-factor--1` (detailed node
-`lemma-kunneth-one-identity-factor--1`): Ordinary Künneth with an identity factor.
+/-- Ordinary Künneth with an identity factor.
 
 Let `k` be a field, `Λ` a finite coefficient ring whose exponent is invertible in `k` (for
 instance the finite stage `A_{E,n}`), and let `f : X ⟶ Y` be a morphism of separated
 finite-type `k`-schemes, where `Y` has structure morphism `b` and `X` is viewed over `k`
-through `f ≫ b`. Let `c : Z ⟶ Spec k` be a further separated finite-type `k`-scheme, so that
-`f` induces `f × 𝟙_Z` across the square
-
-```
-  X ×_k Z --f × 𝟙--> Y ×_k Z --pr--> Y
-     | | |
-     | | f
-     v v v
-     Z ------c------> Spec k <--b--- Y
-```
-
-For `M` in `Dctf(X, Λ)` and `Q` in `Dctf(Z, Λ)` the canonical comparison
-
-`Rf_* M ⊠ Q ⟶ R(f × id_Z)_* (M ⊠ Q)`
-
-is an isomorphism. Here both external products are taken over `Spec k`. The hypotheses that `M`
-and `Q` lie in `Dctf` are those of the blueprint; the proof (through
-`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`) does not use them.
-
-The base has to be a field and the exponent of `Λ` invertible: over the base `𝔸¹_k`, with
-`Z` the origin and `f` the inclusion of `𝔾_m`, the right-hand side vanishes while the
-left-hand side is the stalk of `Rf_* Λ` at the origin; and for `Λ = 𝔽_p` in characteristic
-`p` the Artin–Schreier cohomology of the affine line already defeats the formula. -/
+through `f ≫ b`. Let `c : Z ⟶ Spec k` be a further separated finite-type `k`-scheme. For `M` in
+`Dctf(X, Λ)` and `Q` in `Dctf(Z, Λ)` the canonical comparison
+`Rf_* M ⊠ Q ⟶ R(f × id_Z)_* (M ⊠ Q)` is an isomorphism, both external products being taken over
+`Spec k`. -/
 theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Z : Scheme.{u}}
     (b : Y ⟶ Spec (.of k)) (c : Z ⟶ Spec (.of k)) (f : X ⟶ Y)
@@ -183,16 +163,11 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar (Λ : Type (u + 1)) [
   have := isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q
   exact ⟨asIso (externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f M Q)⟩
 
-/-- Blueprint `lemma-kunneth-one-identity-factor--1`: Ordinary Kunneth for a general morphism.
-
-The detailed form of `lemma-kunneth-one-identity-factor--1`, at a finite coefficient ring `A` whose
-exponent is invertible in `k` (such as `A_{E,n}`): for a morphism `f : X ⟶ Y` of separated
-finite-type `k`-schemes, an auxiliary separated finite-type `k`-scheme `Z`, `L ∈ Dctf(X, A)` and
-`Q ∈ Dctf(Z, A)`, the canonical comparison `Rf_* L ⊠ Q ⟶ R(f × id_Z)_* (L ⊠ Q)`
-(`AlgebraicGeometry.Etale.externalProductRightDerivedLowerStarMap`) is an isomorphism. It is the
-composite of the base-change map along `Y ×_k Z ⟶ Y`, an isomorphism by
-`lemma-kunneth-field-coefficients--1` (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`), and of
-the projection map of `R(f × id_Z)_*`. -/
+/-- Ordinary Künneth for a general morphism, at a finite coefficient ring `A` whose exponent is
+invertible in `k`: for a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, an auxiliary
+separated finite-type `k`-scheme `Z`, `L ∈ Dctf(X, A)` and `Q ∈ Dctf(Z, A)`, the canonical
+comparison `Rf_* L ⊠ Q ⟶ R(f × id_Z)_* (L ⊠ Q)`
+(`AlgebraicGeometry.Etale.externalProductRightDerivedLowerStarMap`) is an isomorphism. -/
 theorem isIso_externalProductRightDerivedLowerStarMap_of_finite (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Z : Scheme.{u}}
     (b : Y ⟶ Spec (.of k)) (c : Z ⟶ Spec (.of k)) (f : X ⟶ Y)
@@ -210,10 +185,9 @@ theorem isIso_externalProductRightDerivedLowerStarMap_of_finite (Λ : Type (u + 
   exact isIso_externalProductRightDerivedLowerStarMap (ModuleCat.{u + 1} Λ) b c f L Q
 
 omit [HasSmallSiteSheafify A] in
-/-- The assembly step of the ordinary Künneth formula with an identity factor for a morphism
-`p : X ⟶ Y` with base change `p' = p × 𝟙_Z : X ×_S Z ⟶ Y ×_S Z`: base change along the
-projection `Y ×_S Z ⟶ Y` and the projection formula for `p'` give
-`Rp_* M ⊠ Q ≅ Rp'_* (M ⊠ Q)`. -/
+/-- The ordinary Künneth formula with an identity factor for a morphism `p : X ⟶ Y` with base
+change `p' = p × 𝟙_Z : X ×_S Z ⟶ Y ×_S Z`, assuming base change along the projection
+`Y ×_S Z ⟶ Y` and the projection formula for `p'`: `Rp_* M ⊠ Q ≅ Rp'_* (M ⊠ Q)`. -/
 theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_iso [UpperStarPreservesFlat A]
     {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (p : X ⟶ Y)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -234,16 +208,8 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_iso [UpperStarPres
       ((L((pullback.snd b c)^*[A])).obj Q)) ≪≫
     (R((pullback.mapOverBaseRight p b c)_*[A])).mapIso (((derivedTensor A _).obj _).mapIso e')⟩
 
-/-- The ordinary Künneth formula with an identity factor `lemma-kunneth-one-identity-factor--1` for
-a
-*proper* morphism `p : X ⟶ Y` and a finite coefficient ring: `Rp_* M ⊠ Q ≅ R(p × 𝟙_Z)_* (M ⊠ Q)`
-for all `M` and `Q`, by proper base change
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`) and the
-projection formula for the proper morphism `p × 𝟙_Z`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_of_finite`). For a
-compactification `f = g ∘ j` of a general `f` this handles the proper factor `g`; the open
-factor `j` is the non-formal part of
-`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedLowerStar`. -/
+/-- The ordinary Künneth formula with an identity factor for a *proper* morphism `p : X ⟶ Y` and
+a finite coefficient ring: `Rp_* M ⊠ Q ≅ R(p × 𝟙_Z)_* (M ⊠ Q)` for all `M` and `Q`. -/
 theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_isProper (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] {S Z : Scheme.{u}} (b : Y ⟶ S) (c : Z ⟶ S) (p : X ⟶ Y) [IsProper p]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -262,11 +228,10 @@ theorem nonempty_iso_externalProduct_rightDerivedLowerStar_of_isProper (Λ : Typ
     ((asIso (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq)).app M) inferInstance
 
 omit [HasSmallSiteSheafify A] in
-/-- The assembly step of the relative product theorem `lemma-kunneth-formula-compact-supports`: with
-`p`, `q` the projections of `X ×_B Y`, a composition isomorphism
-`R(f ×_B g)_! ≅ Rq_! ⋙ Rg_!`, the projection formula for `q` at `(Lp^*K, M)`, compact-support
-base change `Lg^* Rf_! K ≅ Rq_! Lp^* K` and the projection formula for `g` at `(M, Rf_! K)` give
-`R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`. -/
+/-- The relative product theorem, assuming the needed isomorphisms: with `p`, `q` the projections
+of `X ×_B Y`, a composition isomorphism `R(f ×_B g)_! ≅ Rq_! ⋙ Rg_!`, the projection formula for
+`q` at `(Lp^*K, M)`, compact-support base change `Lg^* Rf_! K ≅ Rq_! Lp^* K` and the projection
+formula for `g` at `(M, Rf_! K)` give `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_iso [UpperStarPreservesFlat A]
     [(CategoryTheory.forget A).ReflectsIsomorphisms]
     [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
@@ -294,12 +259,8 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_iso [UpperStarPr
     ((-⊗ᴸ-(Y)[A]).mapIso e₃.symm).app M ≪≫ (βY.app _).app M) ≪≫
     (asIso (((projectionMap A g).app M).app ((R(f)_![A]).obj K))).symm ≪≫ (βB.app _).app _⟩
 
-/-- The relative product theorem `lemma-kunneth-formula-compact-supports` for a finite coefficient
-ring: `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M` for every `K` and `M`. This is the case of
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` with
-coefficients `ModuleCat Λ`, by the four steps of the blueprint proof: the composition law for
-`f ×_B g = q ≫ g`, the projection formula for `q`, compact-support base change for the
-cartesian square of `f` and `g`, and the projection formula for `g`. -/
+/-- The relative product theorem for a finite coefficient ring:
+`R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M` for every `K` and `M`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f]
     [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
@@ -335,13 +296,7 @@ product over `B` and `f ×_B g : X ×_B Y ⟶ B` for the structure morphism
 
 `R(f ×_B g)_! (K ⊠ M) ≅ Rf_! K ⊗ᴸ Rg_! M`
 
-in `D(B_ét)`. The canonical isomorphism, an explicit composite of the composition law, the
-projection formula, compact-support base change and the symmetry of `⊗ᴸ`, is
-`AlgebraicGeometry.Etale.relativeKunnethIso`. The coefficients are torsion: with coefficients
-`ℤ` the statement fails, proper base change failing for a regular proper curve over a strictly
-henselian discrete valuation ring with nodal special fibre. The `Dctf` hypotheses are those of
-the blueprint; for a finite coefficient ring the isomorphism exists for all `K` and `M`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_of_finite`). -/
+in `D(B_ét)`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] (f : X ⟶ B) (g : Y ⟶ B)
     [HasCompactification f] [HasCompactification g] [QuasiCompact f] [QuasiCompact g]
@@ -363,9 +318,7 @@ over `B`, with product `i ×_B j : Z ×_B W ⟶ X ×_B Y`,
 `L(i ×_B j)^* (K ⊠ L) ≅ Li^* K ⊠ Lj^* L`,
 
 the external product on the right being taken along `i ≫ f` and `j ≫ g`. The pullbacks are
-assumed to preserve flat sheaves (`AlgebraicGeometry.Etale.UpperStarPreservesFlat`, true for
-`ModuleCat Λ`), which is what makes the derived pullback monoidal
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarTensorIso`). -/
+assumed to preserve flat sheaves (`AlgebraicGeometry.Etale.UpperStarPreservesFlat`). -/
 theorem nonempty_iso_leftDerivedUpperStar_externalProduct [UpperStarPreservesFlat A]
     (f : X ⟶ B) (g : Y ⟶ B) {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -394,10 +347,7 @@ immersions `i : Z ⟶ X`, `j : W ⟶ Y` over `B`, with product `i ×_B j : Z ×_
 `(i ×_B j)_* (i ×_B j)^* (K ⊠ L) ≅ i_* i^* K ⊠ j_* j^* L`.
 
 The pullbacks are assumed to preserve flat sheaves
-(`AlgebraicGeometry.Etale.UpperStarPreservesFlat`, true for `ModuleCat Λ`), which makes the
-derived pullback monoidal. This is
-`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion_of_flat`: both sides are
-supported on `Z ×_B W` and agree there. -/
+(`AlgebraicGeometry.Etale.UpperStarPreservesFlat`). -/
 theorem nonempty_iso_externalProduct_closedImmersion [UpperStarPreservesFlat A]
     (f : X ⟶ B) (g : Y ⟶ B)
     {Z W : Scheme.{u}} (i : Z ⟶ X) (j : W ⟶ Y) [IsClosedImmersion i] [IsClosedImmersion j]
@@ -415,18 +365,7 @@ Let `f : X ⟶ B` and `g : Y ⟶ B` be separated of finite type, `h = f ×_B g`,
 `i ×_B j : Z ×_B W ⟶ X ×_B Y`. For `K` and `L` on `X` and `Y` such that `i_* i^* K` and `j_* j^* L`
 lie in `Dctf`,
 
-`Rf_!(i_* i^* K) ⊗ᴸ Rg_!(j_* j^* L) ≅ Rh_!((i ×_B j)_* (i ×_B j)^* (K ⊠ L))`.
-
-This is the relative product theorem
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` for the
-complexes `i_* i^* K` and `j_* j^* L`, rewritten with
-`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_closedImmersion`. Over `B = Spec k` it
-is the Künneth formula for the compactly supported cohomology of `Z ×_k W`.
-
-The hypotheses are on `i_* i^* K` and `j_* j^* L` rather than on `K` and `L`: that `Ri_*` preserves
-`Dctf` is a finiteness theorem for torsion coefficients of exponent invertible on the base
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar`), which in the blueprint's
-setting turns `K, L ∈ Dctf` into these hypotheses. -/
+`Rf_!(i_* i^* K) ⊗ᴸ Rg_!(j_* j^* L) ≅ Rh_!((i ×_B j)_* (i ×_B j)^* (K ⊠ L))`. -/
 theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     (f : X ⟶ B) (g : Y ⟶ B) [HasCompactification f] [HasCompactification g]
@@ -450,23 +389,13 @@ theorem nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion
   obtain ⟨k⟩ := nonempty_iso_rightDerivedLowerShriek_externalProduct Λ f g hK hL
   exact ⟨k.symm ≪≫ (R(pullback.toBase f g)_![ModuleCat.{u + 1} Λ]).mapIso e.symm⟩
 
-/-- Supported product over a relative base.
-
-The Künneth formula with closed supports over a field: for `X`, `Y` separated of finite type
+/-- The Künneth formula with closed supports over a field: for `X`, `Y` separated of finite type
 over a field `k` and closed subschemes `i : Z ⟶ X`, `j : W ⟶ Y`,
 
 `RΓ_c(Z, i^* K) ⊗ᴸ RΓ_c(W, j^* L) ≅ RΓ_c(Z × W, (K ⊠ L)|_{Z × W})`,
 
-written one step earlier, in `D((Spec k)_ét)`, with the structure morphisms `i ≫ f`,
-`j ≫ g` of `Z`, `W` and `Z × W ⟶ Spec k`.
-
-It is the relative product theorem
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct` for `i ≫ f`,
-`j ≫ g` and the complexes `i^* K`, `j^* L`, rewritten with
-`AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_externalProduct`. Comparing it with
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_externalProduct_closedImmersion`
-over `B = Spec k` would also need `R(i ≫ f)_! ≅ Rf_! Ri_*`, the composition of compactly
-supported direct images. -/
+stated in `D((Spec k)_ét)`, with the structure morphisms `i ≫ f`, `j ≫ g` of `Z`, `W` and
+`Z × W ⟶ Spec k`. -/
 theorem nonempty_iso_compactlySupported_externalProduct_closedImmersion
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {k : Type u} [Field k] (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))

@@ -53,7 +53,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The structural squares assumed in the assertion, excluding the open comparisons
-whose squares are the conclusion. Source: blueprint fix-prop-coherence, maps-used sentence. -/
+whose squares are the conclusion. -/
 def Structural {S : Type s} {W : S → Scheme.{u}} {I : Type i} {location : I → S}
     {a : S} {B C : Word W location a} (g : GeneratorKind W location B C) : Prop :=
   match g with
@@ -65,8 +65,7 @@ def Structural {S : Type s} {W : S → Scheme.{u}} {I : Type i} {location : I �
 
 /-- The square for the inverse of a specified isomorphism, using exactly the same
 recursive comparisons at its endpoints. The ambient inverse is only used on the
-admissible domain where the canonical maps are invertible.
- -/
+admissible domain where the canonical maps are invertible. -/
 def InverseAssertion {S : Type s} (W : S → Scheme.{u}) {I : Type i}
     (location : I → S) (o : Operations l E)
     (K : ∀ k : I, DerivedCategory (scalarReductionSource l E (W (location k))))
@@ -77,10 +76,8 @@ def InverseAssertion {S : Type s} (W : S → Scheme.{u}) {I : Type i}
     (inverseOrZero (g.integralMap l E W location o K)) ≫ B.r l E W location o K
 
 /-- Structural-square hypothesis as a family on the stipulated intermediate domain.
-There is no length-three bound here: in particular it applies to the length-four
-intermediates in the clopen factorization. Each instance is a square of the actual
-whole-system maps, not a choice of a lift of an evaluated square.
- -/
+There is no length bound, so it applies to the length-four intermediates in the clopen
+factorization. Each instance is a square of the actual whole-system maps. -/
 def StructuralSquares (D : FiniteFieldDatum.{u}) (o : Operations l E) : Prop :=
   ∀ {S : Type s} (W : S → Scheme.{u}) (_hW : FiniteTypeFamily W D.k)
     {I : Type i} (location : I → S)

@@ -19,16 +19,19 @@ pullback with the derived tensor product
 `Lg^* c_Y ⟶ c_Z`.
 
 This is the étale counterpart of the second half of
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf`. The pro-étale
-lemma `leftDerivedUpperStarTensorComparison_app_app_fac` already has an étale counterpart in
-`WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift`; it is not imported here
-(its imports exceed the memory budget of this file) and is reproved inline where needed.
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorSheaf`.
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.leftDerivedTensorRightUpperStarMap_app_comp`: the identification of
   `leftDerivedTensorRightUpperStarMap` with the comparison of the derived pullback with the
   derived tensor product.
+
+## Implementation details
+
+The pro-étale lemma `leftDerivedUpperStarTensorComparison_app_app_fac` already has an étale
+counterpart in `WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Shift`; it is not
+imported here (its imports exceed the memory budget of this file) and is reproved inline.
 -/
 
 @[expose] public section

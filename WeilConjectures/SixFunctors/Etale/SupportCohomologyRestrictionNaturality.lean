@@ -14,7 +14,8 @@ The two maps of the restriction triangle
 
 `RΓ_{B ∩ C}(T, F) ⟶ RΓ_B(T, F) ⟶ RΓ_{B ∩ V}(V, v^* F) ⟶ RΓ_{B ∩ C}(T, F)[1]`
 
-of `AlgebraicGeometry.Etale.exists_distTriang_supportRestriction` are natural in `F`. Both are built from maps of supported
+of `AlgebraicGeometry.Etale.exists_distTriang_supportRestriction` are natural in `F`. Both are built
+from maps of supported
 terms `Ri_! Ri^! F` which are characterised by their composite with a counit of `Ri_! ⊣ Ri^!`;
 naturality follows from the uniqueness of these factorisations.
 

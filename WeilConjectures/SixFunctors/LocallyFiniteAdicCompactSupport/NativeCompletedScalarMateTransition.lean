@@ -10,7 +10,13 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 import WeilConjectures.CategoryTheory.ArrowHEq.ArrowHEq
 
-/-! # Completed-to-native scalar compatibility for compact support -/
+/-! # Completed-to-native scalar compatibility for compact support
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
+* [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -242,21 +248,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 set_option backward.isDefEq.respectTransparency false in
 omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
-/-- Ordinary completed-to-native scalar mates respect finite completed coefficient change.
-Source: Bhatt--Scholze, Remark 6.8.15; Stacks Tag 07A6, pasting of scalar mates.
-
-Proof: the completed coefficient inclusion followed by the native coefficient map
-agrees with the original native coefficient map at X and Y by `coefficient_scalar`.
-Compatibility with pullback gives the same equation at the intermediate scheme of
-the compactification. Apply the composition equation for the proper/open scalar
-mate, with the balanced ordinary tensor associators. Their normalization agrees with
-`pbcReductionNormalization`, since both are conjugate to identity on restricted
-sections and preserve the scalar adjunction unit. Naturality of the second scalar
-mate moves the ordinary-to-completed comparison through it. Functoriality combines
-this map with the finite completed scalar mate, giving the left side. The direct
-scalar mate and compact support of the same completion map give the right side.
-This is an equality in the ambient ordinary derived category for every M; no stage
-functor, rational comparison, or integral realization boundary occurs. -/
+/-- Ordinary completed-to-native scalar mates respect finite completed coefficient change. -/
 theorem nativeScalarComponent_transition [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (change : ∀ j : Index l (PadicAlgCl l),

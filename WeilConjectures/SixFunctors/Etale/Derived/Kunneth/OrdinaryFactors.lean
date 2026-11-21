@@ -26,12 +26,12 @@ isomorphism, for unbounded complexes:
 * over a separably closed field, the projection formula over the point, which is the instance
   `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_app_app`.
 
-Both statements follow from the base change theorem for a pushforward tensored with a complex
-(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`) and its decomposition
-(`AlgebraicGeometry.Etale.tensorBaseChangeMap_eq_projectionMap`): the base change map
-`M ⊗ᴸ La_Y^* Ra_{X*} F ⟶ Rp₂_*(Lp₂^* M ⊗ᴸ Lp₁^* F)` is `M ⊗ᴸ` the derived base change map
-followed by the projection map of `p₂`. At `M = 𝟙` the projection map is an isomorphism, which
-gives generic base change, and then the projection formula follows by two-out-of-three.
+## Implementation details
+
+The first two statements follow from the base change theorem for a pushforward tensored with a
+complex (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`) and its decomposition
+(`AlgebraicGeometry.Etale.tensorBaseChangeMap_eq_projectionMap`) as `M ⊗ᴸ` the derived base
+change map followed by the projection map of `p₂`.
 -/
 
 @[expose] public section
@@ -56,8 +56,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 /-- For `W = X ×_k Y` over a field `k`, the base change map for a pushforward
 tensored with a complex `M ⊗ᴸ La_Y^* Ra_{X*} F ⟶ Rp₂_*(Lp₂^* M ⊗ᴸ Lp₁^* F)`
 (`AlgebraicGeometry.Etale.tensorBaseChangeMap`) is an isomorphism for all `M ∈ D(Y_ét, Λ)` and
-`F ∈ D(X_ét, Λ)`, unbounded: `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap` for the
-diagram `Y = Y ⟵ W`, `Spec k = Spec k ⟵ X`. -/
+`F ∈ D(X_ét, Λ)`, unbounded. -/
 theorem isIso_tensorBaseChangeMap_of_field (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
     (sq : IsPullback p₁ p₂ aX aY)
     (M : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -76,9 +75,7 @@ theorem isIso_tensorBaseChangeMap_of_field (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
 /-- Generic base change over a field: for `W = X ×_k Y` with `X`, `Y` of finite
 type over a field `k`, the derived base change map
 `La_Y^* Ra_{X*} F ⟶ Rp₂_* Lp₁^* F` (`AlgebraicGeometry.Etale.derivedBaseChangeMap`) is an
-isomorphism for all `F ∈ D(X_ét, Λ)`, unbounded. It is the base change map of
-`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_field` at `M = 𝟙`, up to the
-projection map of `p₂` at the unit, which is an isomorphism. -/
+isomorphism for all `F ∈ D(X_ét, Λ)`, unbounded. -/
 theorem isIso_derivedBaseChangeMap_of_field (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
     (sq : IsPullback p₁ p₂ aX aY)
     (F : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -97,11 +94,7 @@ theorem isIso_derivedBaseChangeMap_of_field (p₁ : W ⟶ X) (p₂ : W ⟶ Y)
 `Y` of finite type over a field `k`, the projection map
 `Rp₂_*(Lp₁^* F) ⊗ᴸ M ⟶ Rp₂_*(Lp₁^* F ⊗ᴸ Lp₂^* M)`
 (`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`) is an isomorphism for all
-`F ∈ D(X_ét, Λ)` and `M ∈ D(Y_ét, Λ)`, unbounded. By
-`AlgebraicGeometry.Etale.tensorBaseChangeMap_eq_projectionMap`, the base change map of
-`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_of_field` is this projection map
-composed with `M ⊗ᴸ` the derived base change map, an isomorphism by
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_field`, and symmetries. -/
+`F ∈ D(X_ét, Λ)` and `M ∈ D(Y_ét, Λ)`, unbounded. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_leftDerivedUpperStar (p₁ : W ⟶ X)
     (p₂ : W ⟶ Y) (sq : IsPullback p₁ p₂ aX aY)
     (F : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

@@ -10,7 +10,12 @@ import all WeilConjectures.SmoothPurity.Integral.Open.IntegralOpenScalarRestrict
 
 /-! # Existence of normalized scalar compatibility data for an open quotient
 
-Source: Stacks Project, Tags 03DI, 03DA, 0E8I and 0941.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -106,15 +111,7 @@ private theorem normalizedFinite (o : IntegralOpenReduction.Operations l E j) (n
     (Iso.hom_inv_id_app e M)
   exact hi
 
-/-- The finite scalar comparisons can be chosen with their generator normalization.
-
-Apply the generic open/scalar comparison to each completed coefficient projection.
-The projection equation of `o` supplies its ring square. Invert the comparison and
-cancel its generator equation with its inverse to obtain the normalized finite maps.
-These are the two fields used to construct the strict quotient-tower comparison and
-prove its scalar-unit equation. Strictness is retained by `ScalarComparison.iso`,
-without an independent comparison on arbitrary coefficient systems.
-Source: Stacks Tags 03DI, 03DA and 0E8I. -/
+/-- The finite scalar comparisons can be chosen with their generator normalization. -/
 theorem openQuotientScalarCompatibilityData
     (o : IntegralOpenReduction.Operations l E j) :
     Nonempty (ScalarCompatibility l E j o) := by

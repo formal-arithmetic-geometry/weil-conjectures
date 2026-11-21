@@ -10,8 +10,11 @@ import all WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeSca
 
 /-! # Ordinary restriction and direct image under a coefficient-ring presentation
 
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites,
-Tag 0D6E; blueprint scalar direct-image proof, Formal properties.
+## References
+
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -104,16 +107,7 @@ private theorem inverseOrdinaryCube (l : ℕ) [Fact l.Prime]
         ((ordinaryCompositeRestriction l E U).obj M)).val.app W z) hb).trans hx)).trans hr
     |>.symm
 
-/-- Ordinary ring presentations transport restriction and direct image in a commuting cube.
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; the ordinary steps 1--2 of
-lem-sf-native-scalar-restriction-cube.
-
-Proof: compose the two restrictions using comapComp and the section-module equivalence.
-Transport the section rings through P.integral and P.closure. Their scalar square makes
-this comparison linear. The naturality fields similarly identify the direct-image
-coefficient maps; the pushforward composition isomorphisms give the two comparisons.
-All comparisons are identity on underlying abelian sections. Evaluating both cube paths
-at a site object and a section therefore proves equality, including on empty objects. -/
+/-- Ordinary ring presentations transport restriction and direct image in a commuting cube. -/
 theorem nativeScalarOrdinaryRestrictionCube
     (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
     {R S : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R S)

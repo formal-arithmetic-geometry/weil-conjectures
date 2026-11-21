@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Locall
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompletedCoefficientChangePresentation
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompletedCoefficientChangeSquare
 
-/-! # Data for the normalized completed-to-native coefficient map -/
+/-! # Data for the normalized completed-to-native coefficient map
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and Section 6.8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,14 +38,7 @@ variable (l : ℕ) [Fact l.Prime]
 /--
 The completed integral coefficient sheaf admits a simultaneously pullback-compatible
 family of maps into the native locally finite coefficient sheaves, and the family is
-represented by normalized coefficient presentations. This is the construction step
-in Bhatt--Scholze, Lemma 6.8.2 and Section 6.8.
-
-Proof source: realize completed coefficients by their finite quotient projections,
-compose with the integral-to-rational map and the specified embedding into the
-algebraic closure, and verify the pullback square pointwise on sections. The finite
-constant and residue normalizations then identify the resulting map with the chosen
-presentation at every scheme.
+represented by normalized coefficient presentations.
 -/
 theorem native_completed_coefficient_change_data
     [G : NativeGeometry.{u} l]

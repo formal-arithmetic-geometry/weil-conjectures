@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralBoundary.NativeIntegralBoundaryRational
 
-/-! Canonical constructions used in normalized integral scalar boundaries. -/
+/-! Canonical constructions used in normalized integral scalar boundaries.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -45,8 +50,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
 
 namespace NativeIntegralBoundary
 
-/-- The first boundary isomorphism before inserting the scalar mate.
-Source: Bhatt--Scholze, Remark 6.8.15; composition of the prescribed realizations. -/
+/-- The first boundary isomorphism before inserting the scalar mate. -/
 def sourceIntegral [G : NativeGeometry.{u} l]
     (target : Realization l Y) (stage : StageAction l D hl P c)
     (E : Index l (PadicAlgCl l)) :
@@ -75,8 +79,7 @@ def sourceIntegral [G : NativeGeometry.{u} l]
         D.k (PurCompactSupport.coefficientPrimeUnit l D hl) c).symm
       (pbcDerivedExtend ((target.coefficient E).integralMap l Y))
 
-/-- The final boundary isomorphism after the scalar mate.
-Source: Bhatt--Scholze, Remark 6.8.15; composition of the prescribed realizations. -/
+/-- The final boundary isomorphism after the scalar mate. -/
 def targetIntegral [G : NativeGeometry.{u} l]
     (source : Realization l X) (E : Index l (PadicAlgCl l)) :
     (sfIntegralConstructible l (Coefficient l (PadicAlgCl l) E) X).ι ⋙
@@ -94,8 +97,7 @@ def targetIntegral [G : NativeGeometry.{u} l]
           (l := l) (Ω := PadicAlgCl l) (Y := X) E ⋙ source.J)
       (operationTransport l c).symm
 
-/-- Component equation of the first boundary, with the localization identity removed.
-Source: Bhatt--Scholze, Remark 6.8.15; evaluation of the natural comparison. -/
+/-- Component equation of the first boundary, with the localization identity removed. -/
 theorem sourceIntegral_hom_app [G : NativeGeometry.{u} l]
     (target : Realization l Y) (stage : StageAction l D hl P c)
     (E : Index l (PadicAlgCl l))
@@ -128,8 +130,7 @@ theorem sourceIntegral_hom_app [G : NativeGeometry.{u} l]
   exact hc.trans (congrArg (fun q ↦ a ≫ q) (Category.id_comp (b ≫ d)))
 
 omit [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] in
-/-- Component equation of the final boundary.
-Source: Bhatt--Scholze, Remark 6.8.15; evaluation of the natural comparison. -/
+/-- Component equation of the final boundary. -/
 theorem targetIntegral_hom_app [G : NativeGeometry.{u} l]
     (source : Realization l X) (E : Index l (PadicAlgCl l))
     (L : sfIntegralConstructibleCategory l (Coefficient l (PadicAlgCl l) E) X) :

@@ -11,7 +11,11 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionTow
 
 /-! # Component comparisons for the integral Hom reduction tower
 
-Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC.
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 08TC]
 -/
 
 @[expose] public section
@@ -46,24 +50,7 @@ private theorem augmentation_of_unit
 
 /-- The finite signed Hom comparisons respect consecutive quotient maps and the quotient
 unit on fixed representatives. No product or completeness assertion occurs here, and
-neither the representative nor its K-flat resolution is chosen by this theorem.
-
-Source: blueprint order 2478, steps 4-8; Stacks Tags 07A6, 08J9 and 08TC.
-
-Proof: Use separate tensor models preserving the two quotient augmentations and
-the specified apex map e. The signed tensor-Hom comparison is natural in the
-coefficient complex. Its components at the two-term free coefficient complexes
-are invertible by the degreewise criterion; localization preserves this. Invert
-that comparison and conjugate by the two model isomorphisms to obtain one
-family of components. On K-flat source and K-injective target models,
-the finite comparison sends f tensor z to the function sending x to
-(-1)^(degree(z)*degree(x)) f(x) tensor z. This formula is natural in the two-term
-quotient complex. Apply it to the quotient chain map whose components are the
-uniformizer and identity to obtain the consecutive-transition square. Apply it
-to the degree-zero quotient unit to obtain the augmentation square. The scalar
-unit and evaluation normalizations identify these with the actual recorded maps.
-Resolution independence transports both squares to the fixed q and q'. This
-uses arbitrary unbounded K and does not require any countable product. -/
+neither the representative nor its K-flat resolution is chosen by this theorem. -/
 theorem reductionTower_components
     (K : completedIntegralDerivedCategory l E Y D hl)
     (P G P' G' : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)

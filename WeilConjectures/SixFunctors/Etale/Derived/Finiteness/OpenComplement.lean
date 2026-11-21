@@ -17,19 +17,15 @@ This file records two finiteness conditions on étale direct images, and proves 
 for schemes of finite type over a field.
 
 * The *direct-image finiteness input over `k`*
-  (`AlgebraicGeometry.Etale.DirectImageFinitenessInput`,
-  blueprint `theorem-results-from-etale-theory`): higher direct images of constructible sheaves
-  along morphisms of finite-type `k`-schemes are constructible, and a finite-type scheme of
-  dimension `≤ d` over a separably closed field has torsion cohomological dimension `≤ 2d`. It holds
-  over every separably closed field (`AlgebraicGeometry.Etale.directImageFinitenessInput`, blueprint
-  `theorem-results-from-etale-theory`).
+  (`AlgebraicGeometry.Etale.DirectImageFinitenessInput`): higher direct images of constructible
+  sheaves along morphisms of finite-type `k`-schemes are constructible, and a finite-type scheme
+  of dimension `≤ d` over a separably closed field has torsion cohomological dimension `≤ 2d`. It
+  holds over every separably closed field (`AlgebraicGeometry.Etale.directImageFinitenessInput`).
 * The *open-complement condition with constant `c`* for a morphism `j : V ⟶ T`
-  (`AlgebraicGeometry.Etale.OpenComplementCondition`, blueprint
-  `theorem-f-shriek-finite-coefficients--1`): `R^q j_*` vanishes above `c` and preserves
-  constructibility. For a quasi-compact open immersion into a scheme of finite type and of dimension
-  `≤ d` over a field it holds with `c = 2d`
-  (`AlgebraicGeometry.Etale.openComplementCondition_two_mul`, blueprint
-  `theorem-f-shriek-finite-coefficients--1`).
+  (`AlgebraicGeometry.Etale.OpenComplementCondition`): `R^q j_*` vanishes above `c` and preserves
+  constructibility. For a quasi-compact open immersion into a scheme of finite type and of
+  dimension `≤ d` over a field it holds with `c = 2d`
+  (`AlgebraicGeometry.Etale.openComplementCondition_two_mul`).
 
 The open-complement condition is what the closed-support statements need from the open
 complement of a closed immersion; for curves the sharper constant `c = 1` is
@@ -53,7 +49,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The classical direct-image finiteness input.
+/-- **The classical direct-image finiteness input.**
 
 Let `k` be a field and `Λ` a coefficient ring. The *direct-image finiteness input over `k`* holds
 if
@@ -63,11 +59,7 @@ if
    on `S_ét` and every `q ≥ 0`, the higher direct image `R^q u_* F` is constructible on `T_ét`;
 2. (*cohomological dimension*) for every separably closed field `K` on which the exponent of `Λ`
    is invertible and every finite-type `K`-scheme `W` of dimension at most `d`, `H^q(W, M) = 0`
-   for every `q > 2d` and every torsion abelian sheaf `M` on `W_ét`.
-
-In the blueprint `Λ` is a finite ring annihilated by an integer `N` prime to the characteristic
-of `k`; in clause (2) the condition that the characteristic of `K` is prime to `N` is the
-invertibility of the exponent of `Λ` on `Spec K`. -/
+   for every `q > 2d` and every torsion abelian sheaf `M` on `W_ét`. -/
 def DirectImageFinitenessInput (k : Type u) [Field k] : Prop :=
   (∀ (S T : Scheme.{u}) (aS : S ⟶ Spec (.of k)) (aT : T ⟶ Spec (.of k))
       [LocallyOfFiniteType aS] [QuasiCompact aS] [LocallyOfFiniteType aT] [QuasiCompact aT]
@@ -79,11 +71,10 @@ def DirectImageFinitenessInput (k : Type u) [Field k] : Prop :=
       ∀ (M : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}), M.IsTorsion →
       ∀ q : ℕ, 2 * d < q → Subsingleton (Sheaf.H M q)
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Open-complement cohomological-dimension
-condition.
+/-- **Open-complement cohomological-dimension condition.**
 
-Let `j : V ⟶ T` be a morphism (in the blueprint: a quasi-compact open immersion), `Λ` a
-coefficient ring (in the blueprint: a finite ring) and `c ∈ ℕ`. The pair `(V, T)` satisfies the
+Let `j : V ⟶ T` be a morphism (typically a quasi-compact open immersion), `Λ` a coefficient ring
+and `c ∈ ℕ`. The pair `(V, T)` satisfies the
 *open-complement condition with constant `c`* if `R^q j_* M = 0` for every sheaf `M` of
 `Λ`-modules on `V_ét` and every `q > c`, and if `R^q j_*` carries constructible sheaves to
 constructible sheaves in every degree. -/
@@ -138,8 +129,7 @@ lemma OpenComplementCondition.isConstructibleSheaf_homology {V T : Scheme.{u}} {
 variable [Finite Λ]
 
 /-- The higher direct images of a constructible sheaf along a morphism of finite-type schemes
-over a field are constructible, if the exponent of `Λ` is invertible on the field. This is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType` for the sheaf placed in degree `0`. -/
+over a field are constructible, if the exponent of `Λ` is invertible on the field. -/
 theorem isConstructibleSheaf_higherDirectImage {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {S T : Scheme.{u}} (aS : S ⟶ Spec (.of k))
     (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] [LocallyOfFiniteType aT]
@@ -150,47 +140,23 @@ theorem isConstructibleSheaf_higherDirectImage {k : Type u} [Field k]
     (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)).2 q
   IsConstructibleSheaf.of_iso (homologyRightDerivedLowerStarSingleIsoHigherDirectImage Λ u F q)
 
-/-- The direct-image finiteness input holds.
+/-- **The direct-image finiteness input holds.**
 
 Let `k` be a separably closed field and `Λ` a finite ring whose exponent is invertible in `k`.
 Then both clauses of the direct-image finiteness input
-(`AlgebraicGeometry.Etale.DirectImageFinitenessInput`) hold over `k`. Clause (1) is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType`
-(`proposition-six-operations-dctf--2`), through
-`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage`; clause (2) is
-`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`, the bound
-`cd_tor(W) ≤ 2d + 0` of `lemma-uniform-bounds-pro-etale-affines` for the separably closed field `K`
-(`lemma-cohomological-dimension-base-field--1`). Separable closedness of `k` is not needed for
-clause (1). -/
+(`AlgebraicGeometry.Etale.DirectImageFinitenessInput`) hold over `k`. -/
 theorem directImageFinitenessInput (k : Type u) [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] : DirectImageFinitenessInput Λ k :=
   ⟨fun _ _ aS aT _ _ _ _ u hu F _ q ↦ isConstructibleSheaf_higherDirectImage aS aT u hu F q,
     fun _ _ _ _ d _ a _ _ hW M hM q hq ↦
       Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed d a hW M hM q hq⟩
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: The open-complement condition from the
-direct-image input.
+/-- **The open-complement condition from the direct-image input.**
 
 Let `k` be a field, `T` a `k`-scheme of finite type and of dimension at most `d`,
 `j : V ⟶ T` a quasi-compact open immersion and `Λ` a finite ring whose exponent is invertible in
 `k`. Then `(V, T)` satisfies the open-complement condition with constant `c = 2d`
-(`AlgebraicGeometry.Etale.OpenComplementCondition`). The blueprint takes for `k` the algebraic
-closure of a finite field and `Λ` killed by a power of a prime `ℓ ≠ char k`.
-
-The constructibility clause is clause (1) of the direct-image finiteness input
-(`AlgebraicGeometry.Etale.isConstructibleSheaf_higherDirectImage`, `thm-dg-finite-type-
-constructibility`). For the vanishing clause, `V` is of finite type over `k` of dimension at most
-`d`, so `R^q j_* M = 0` for `q > 2d` by
-`AlgebraicGeometry.Etale.isZero_rightDerived_lowerStar_of_two_mul_lt`; over a separably closed
-field this is the stalkwise argument of the blueprint, through the cohomological dimension
-bound `lemma-uniform-bounds-pro-etale-affines` on the étale `V`-schemes.
-
-This is also the content of blueprint `rem-pur-assembly-status` (status of the assembly): the
-open-complement condition (`theorem-f-shriek-finite-coefficients--1`) is a theorem, not an
-assumption, and its constant `2d` does not depend on `Λ`. The remaining claims of that remark
-concern the general admissibility theorems `theorem-f-shriek-finite-coefficients` and
-`theorem-f-shriek-finite-coefficients--1`, which are not formalised; for closed immersions see
-`AlgebraicGeometry.Etale.isLeftAdjoint_and_constructibleIn_and_torAmplitudeIn_of_isClosedImmersion`.
+(`AlgebraicGeometry.Etale.OpenComplementCondition`). The constant `2d` does not depend on `Λ`.
 -/
 theorem openComplementCondition_two_mul {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {V T : Scheme.{u}} (aT : T ⟶ Spec (.of k))

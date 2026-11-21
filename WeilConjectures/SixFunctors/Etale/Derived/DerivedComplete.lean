@@ -35,20 +35,26 @@ object of the derived Poincaré pairing at `Λ = 𝒪_E` in the adic category.
 
 The `derivedCompleteIntegral_*` versions are their specialisations to `𝒪_E`.
 
-## Implementation notes
+## Implementation details
 
 The hypotheses on `(Λ, I)` are only used to make each `Λ/Iⁿ` perfect, through
 `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedLowerStar`. For `𝒪_E` the
 ideal `𝔪_E` is principal when `E` is finite over `ℚ_ℓ`
 (`PadicAlgCl.isPrincipal_maximalIdealShrink`), which is why the specialisations assume it.
 
-The blueprint states `theorem-poincare-duality--9` at the three stages `𝒪_E`, `E` and `ℚ̄_ℓ`. Only
-the integral stage `𝒪_E` is stated here, and only its non-formal part: that the operations preserve
-derived completeness. The `E` stage would be the image of these statements under the
+Only the integral stage `𝒪_E` is stated here, and only its non-formal part: that the operations
+preserve derived completeness. The `E` stage would be the image of these statements under the
 rationalization `DerivedCategoryDerivedCompleteRational.fromIntegral`, and the `ℚ̄_ℓ` stage
-their colimit over finite extensions `E/ℚ_ℓ`, a colimit category the repository does not have;
-neither is stated. Which coefficient category carries the `E` and `ℚ̄_ℓ` stages is not decided
-here.
+their colimit over finite extensions `E/ℚ_ℓ`; neither is stated.
+
+Properness cannot be dropped for `Rf_!`: for `j : 𝔸¹ ⟶ ℙ¹` over an algebraically closed field,
+`Λ = ℤ_ℓ` and the derived complete `K = R lim_n (ℤ/ℓⁿ)_{𝔸¹}`, `RΓ_c(𝔸¹, K)` has a non finitely
+generated `H²`, whereas the derived limit of the perfect complexes `RΓ_c(𝔸¹, ℤ/ℓⁿ)` is perfect.
+So on non-proper morphisms the integral `Rf_!` of the `ℓ`-adic formalism is the derived
+completion of the naive one. Likewise the hypothesis that `Λ_X` is derived complete is not
+automatic: if `π₀(X)` is an infinite profinite space, the global sections of `Λ_X` are the
+locally constant functions `π₀(X) → Λ`, whereas those of `lim_n (Λ/Iⁿ)_X` are the continuous
+ones.
 -/
 
 @[expose] public section
@@ -64,10 +70,7 @@ namespace DerivedCategory
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
   {J : GrothendieckTopology C} {R : Type (u + 1)} [CommRing R]
 
-/-- Derived completeness for a principal ideal of a domain is invariant under isomorphism: it is
-right orthogonality to the objects on which a generator acts invertibly
-(`DerivedCategory.derivedComplete_iff_rightOrthogonal`), or holds for every object if the
-ideal is zero. -/
+/-- Derived completeness for a principal ideal of a domain is invariant under isomorphism. -/
 lemma derivedComplete_of_iso [IsDomain R] {I : Ideal R} (hI : I.IsPrincipal)
     {K L : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))} (e : K ≅ L)
     (hK : derivedComplete J I K) : derivedComplete J I L := by
@@ -105,9 +108,7 @@ local notation "Λ_(" X ", " Λ ")" =>
     (ModuleCat.{u + 1} Λ)) 0).obj
       ((constantSheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ))
 
-/-- `Rf_*` preserves the right orthogonal of the objects on which `ϖ` acts invertibly: a map
-`Z ⟶ Rf_* K` is the transpose of a map `Lf^* Z ⟶ K`, and `ϖ` acts invertibly on `Lf^* Z`, the
-derived pullback being `Λ`-linear. -/
+/-- `Rf_*` preserves the right orthogonal of the objects on which `ϖ` acts invertibly. -/
 lemma rightOrthogonal_smulInvertible_rightDerivedLowerStar {Λ : Type (u + 1)} [CommRing Λ]
     (ϖ : Λ) {X Y : Scheme.{u}} (f : X ⟶ Y) (K : 𝐃(X, Λ))
     (hK : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal K) :
@@ -123,9 +124,7 @@ lemma rightOrthogonal_smulInvertible_rightDerivedLowerStar {Λ : Type (u + 1)} [
     Functor.map_zero, Limits.comp_zero]
 
 /-- The coefficient dual `RHom(K, Λ_X)` lies in the right orthogonal of the objects on which `ϖ`
-acts invertibly as soon as `Λ_X` does: a map `Z ⟶ RHom(K, Λ_X)` is the transpose of a map
-`K ⊗ᴸ Z ⟶ Λ_X`, and `ϖ` acts invertibly on `K ⊗ᴸ Z`, the derived tensor product being
-`Λ`-linear. -/
+acts invertibly as soon as `Λ_X` does. -/
 lemma rightOrthogonal_smulInvertible_coefficientDual {Λ : Type (u + 1)} [CommRing Λ]
     (ϖ : Λ) {X : Scheme.{u}}
     (hΛ : (_root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ).rightOrthogonal
@@ -173,17 +172,7 @@ theorem derivedComplete_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (
 /-- **`Rf_!` preserves derived completeness along proper morphisms.** For a principal ideal `I`
 of a domain `Λ` and a proper morphism `f : X ⟶ Y` admitting a compactification, `Rf_!` carries
 objects of `D(X_ét, Λ)` that are derived complete for `I` to derived complete objects of
-`D(Y_ét, Λ)`: for proper `f` one has `Rf_! ≅ Rf_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), and `Rf_*`
-preserves derived completeness (`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerStar`).
-
-Properness cannot be dropped: the extension by zero `j_!` along an open immersion does not
-preserve derived completeness. For `j : 𝔸¹ ⟶ ℙ¹` over an algebraically closed field,
-`Λ = ℤ_ℓ` and the derived complete `K = R lim_n (ℤ/ℓⁿ)_{𝔸¹}`, `j_!` does not commute with the
-derived limit: the stalk at `∞` of `i^* Rj_* K` is `colim_V Hom(π₁(V ∖ ∞), ℤ_ℓ)` over the étale
-neighbourhoods `V` of `∞`, and `RΓ_c(𝔸¹, K)` has a non finitely generated `H²`, whereas the
-derived limit of the perfect complexes `RΓ_c(𝔸¹, ℤ/ℓⁿ)` is perfect. So on non-proper morphisms
-the integral `Rf_!` of the `ℓ`-adic formalism is the derived completion of the naive one. -/
+`D(Y_ét, Λ)`. -/
 theorem derivedComplete_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [IsProper f] (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
@@ -196,11 +185,7 @@ theorem derivedComplete_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- **The coefficient dual preserves derived completeness.** For a principal ideal `I` of a
 domain `Λ` and a scheme `X` on which the constant complex `Λ_X` is derived complete for
 `I`, the coefficient dual `K^∨ = RHom(K, Λ_X)` of an object `K` of `D(X_ét, Λ)` that is derived
-complete for `I` is derived complete.
-
-The hypothesis on `Λ_X` is not automatic: if `π₀(X)` is an infinite profinite space, the global
-sections of `Λ_X` are the locally constant functions `π₀(X) → Λ`, whereas those of
-`lim_n (Λ/Iⁿ)_X` are the continuous ones. -/
+complete for `I` is derived complete. -/
 theorem derivedComplete_coefficientDual {X : Scheme.{u}}
     (hΛ : DerivedCategory.derivedComplete X.smallEtaleTopology I Λ_(X, Λ)) (K : 𝐃(X, Λ))
     (hK : DerivedCategory.derivedComplete X.smallEtaleTopology I K) :
@@ -225,9 +210,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
   [Small.{u + 1} E] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
   [FiniteDimensional ℚ_[l] E]
 
-/-- Blueprint `theorem-poincare-duality--9`: Transport through the coefficient stages.
-
-**`Rf_*` preserves derived completeness at the integral stage.** For `E` finite over `ℚ_ℓ` and
+/-- **`Rf_*` preserves derived completeness at the integral stage.** For `E` finite over `ℚ_ℓ` and
 every morphism `f : X ⟶ Y`, `Rf_*` carries derived-complete objects of `D(X_ét, 𝒪_E)` to
 derived-complete objects of `D(Y_ét, 𝒪_E)`. -/
 theorem derivedCompleteIntegral_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y)
@@ -237,13 +220,9 @@ theorem derivedCompleteIntegral_rightDerivedLowerStar {X Y : Scheme.{u}} (f : X 
       ((R((f)_*[ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))])).obj K) :=
   derivedComplete_rightDerivedLowerStar _ (PadicAlgCl.isPrincipal_maximalIdealShrink l E) f K hK
 
-/-- Blueprint `theorem-poincare-duality--9`: Transport through the coefficient stages.
-
-**`Rf_!` preserves derived completeness at the integral stage, for proper `f`.** For `E` finite
-over `ℚ_ℓ` and a proper `f : X ⟶ Y` admitting a compactification, `Rf_!` carries
-derived-complete objects of `D(X_ét, 𝒪_E)` to derived-complete objects of `D(Y_ét, 𝒪_E)`. For
-non-proper `f` this fails for the naive `Rf_!` (see
-`AlgebraicGeometry.Etale.derivedComplete_rightDerivedLowerShriek`). -/
+/-- **`Rf_!` preserves derived completeness at the integral stage, for proper `f`.** For `E`
+finite over `ℚ_ℓ` and a proper `f : X ⟶ Y` admitting a compactification, `Rf_!` carries
+derived-complete objects of `D(X_ét, 𝒪_E)` to derived-complete objects of `D(Y_ét, 𝒪_E)`. -/
 theorem derivedCompleteIntegral_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [IsProper f]
     (K : 𝐃(X, Shrink.{u + 1} (PadicAlgCl.integers l E)))
@@ -254,9 +233,7 @@ theorem derivedCompleteIntegral_rightDerivedLowerShriek {X Y : Scheme.{u}} (f : 
     hK
 
 attribute [-instance] Shrink.instRing in
-/-- Blueprint `theorem-poincare-duality--9`: Transport through the coefficient stages.
-
-**The dual at the integral stage.** For `E` finite over `ℚ_ℓ` and a scheme `X` on which the
+/-- **The dual at the integral stage.** For `E` finite over `ℚ_ℓ` and a scheme `X` on which the
 constant complex `𝒪_E` is derived complete, the coefficient dual `K^∨ = RHom(K, 𝒪_E)` of a
 derived-complete object of `D(X_ét, 𝒪_E)` is derived complete. -/
 theorem derivedCompleteIntegral_coefficientDual {X : Scheme.{u}}

@@ -12,7 +12,10 @@ import WeilConjectures.Algebra.Homology.OpenTensorNormalization.ExactDerivedAdju
 
 /-! # The canonical clopen comparison
 
-Source: Stacks 03DI, 09AE; fix-prop-coherence, clopen comparison.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 09AE]
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +37,7 @@ attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   SheafOfModules.localizedSystemExtensionColimits SheafOfModules.localizedSystemRestrictionAdditive
   SheafOfModules.localizedSystemRestrictionLimits
   SheafOfModules.localizedSystemRestrictionColimits in
-/-- The actual open unit is invertible on every ambient derived object.
-Source: Stacks 03DI. -/
+/-- The actual open unit is invertible on every ambient derived object. -/
 theorem integralRingedOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : IsIso (ringedOpenAdj l E j).unit := by
   let R := PurCompactSupport.completed l E
@@ -50,8 +52,7 @@ theorem integralRingedOpenUnit_isIso {U X : Scheme.{u}} (j : U ⟶ X)
   let : (ringedOpen l E j).Faithful := Functor.Faithful.of_iso he.symm
   exact (ringedOpenAdj l E j).unit_isIso_of_L_fully_faithful
 
-/-- Transpose of the inverse actual open unit under geometric direct image.
-Source: Stacks 03DI. -/
+/-- Transpose of the inverse actual open unit under geometric direct image. -/
 def integralRingedClopenMap {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
     ringedOpen l E j ⟶ ringedPush l E j := by
   letI := integralRingedOpenUnit_isIso l E j
@@ -155,19 +156,7 @@ attribute [-instance] WeilConjectures.CompletedCoefficientPushforward.modAbelian
   SheafOfModules.localizedSystemExtensionColimits SheafOfModules.localizedSystemRestrictionAdditive
   SheafOfModules.localizedSystemRestrictionLimits
   SheafOfModules.localizedSystemRestrictionColimits in
-/-- On a clopen immersion the inverse-unit transpose is invertible.
-Source: Stacks 03DI, 09AE; fix-prop-coherence, clopen step.
-
-Proof: a clopen immersion partitions every pro-etale test object into its inverse
-image in the open and its complementary clopen piece. Modules supported on the
-open vanish on the complement, so extension by zero and direct image have the
-same sections, coefficient action and restriction maps. The section identity is
-an exact natural isomorphism. Its pullback composite is the inverse open unit;
-transpose under pullback/direct-image adjunction therefore identifies it with
-the displayed map. Exact localization identifies direct image with its right
-derived functor, preserving that adjunction and transpose. Consequently this
-isomorphism is integralRingedClopenMap. For the empty open both functors are zero;
-for the identity open the formula is the inverse-unit transpose as well. -/
+/-- On a clopen immersion the inverse-unit transpose is invertible. -/
 theorem integralRingedClopenMap_isIso {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [IsClosedImmersion j] :
     IsIso (integralRingedClopenMap l E j) := by

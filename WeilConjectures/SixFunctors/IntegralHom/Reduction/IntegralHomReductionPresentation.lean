@@ -11,10 +11,13 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionNor
 
 /-! # One normalized integral reduction presentation
 
-This is the fixed-level coefficient-extension part of
-`lem-sf-integral-hom-models-exist`.
+This is the fixed-level coefficient-extension part of the existence of normalized
+integral tensor-Hom models.
 
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public section
@@ -33,16 +36,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-/-- A normalized reduction presentation exists at each fixed quotient level.
-
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
-
-Proof: ordinary scalar extension and restriction have unit `x ↦ 1 ⊗ x`.
-Balanced tensor associativity identifies the comparison with multiplication of
-coefficient factors. Apply the left-derived universal property to the same
-source tensor presentation; the resulting counit square is the normalization
-field of `ReductionPresentation`.
--/
+/-- A normalized reduction presentation exists at each fixed quotient level. -/
 theorem reduction_presentation_exists_at
     (a : TensorPresentation.{t, u} Y
       (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ) :

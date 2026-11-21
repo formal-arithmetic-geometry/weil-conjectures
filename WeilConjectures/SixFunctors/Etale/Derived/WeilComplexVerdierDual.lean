@@ -16,26 +16,22 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
 Let `k` be an algebraically closed field, `Λ` a finite ring whose exponent is invertible on `k`,
 `X` separated of finite type over `k` with structure morphism `a_X`, and `g : X ≅ X` an
 automorphism lying over an automorphism `h` of `Spec k` (`g ≫ a_X = a_X ≫ h`, a cartesian
-square); in the `ℓ`-adic formalism `g` is the geometric Frobenius of `X = X₀ ×_{k₀} k`. This file
-proves the finite-stage part of blueprint `prose-10-20`: Verdier duality
-preserves the category of strict Weil complexes (`AlgebraicGeometry.Etale.WeilComplex`), and
-biduality is an isomorphism of Weil complexes.
+square); in the `ℓ`-adic formalism `g` is the geometric Frobenius of `X = X₀ ×_{k₀} k`. Verdier
+duality preserves the category of strict Weil complexes (`AlgebraicGeometry.Etale.WeilComplex`),
+and biduality is an isomorphism of Weil complexes.
 
 * For automorphisms the exceptional base change is invertible
   (`AlgebraicGeometry.Etale.isIso_upperShriekBaseChangeMap`), so the dualizing Weil datum is
   invertible and `ω_X` is a strict Weil complex (`AlgebraicGeometry.Etale.WeilComplex.dualizing`).
 * The Verdier dual `𝔻_X K = RHom(K, ω_X)` of a strict Weil complex `(K, φ)`, with the dual Weil
   datum `AlgebraicGeometry.Etale.verdierDualWeilDatumOfIsPullback` of `φ` and of the dualizing
-  Weil datum, is a strict Weil complex (`AlgebraicGeometry.Etale.WeilComplex.verdierDual`): the
-  dual datum is invertible because `Lg^*` is an autoequivalence.
-* The double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is a morphism of Weil complexes, by the Weil
-  equivariance of biduality (`AlgebraicGeometry.Etale.isWeilEquivariant_verdierDualDoubleDual`),
-  and an isomorphism by finite-stage biduality
+  Weil datum, is a strict Weil complex (`AlgebraicGeometry.Etale.WeilComplex.verdierDual`).
+* The double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K` is a morphism of Weil complexes
+  (`AlgebraicGeometry.Etale.WeilComplex.verdierDualDoubleDual`) and an isomorphism
   (`AlgebraicGeometry.Etale.WeilComplex.isIso_verdierDualDoubleDual`).
 
-The rational and `ℚ̄_ℓ` stages of the blueprint statement are not formalised: the Weil category
-is modelled at a finite coefficient ring, as in
-`WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom`.
+The rational and `ℚ̄_ℓ` stages are not formalised: the Weil category is modelled at a finite
+coefficient ring, as in `WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom`.
 -/
 
 @[expose] public section
@@ -61,9 +57,7 @@ variable {X S : Scheme.{u}} {g : X ⟶ X} {h : S ⟶ S} {a : X ⟶ S} [HasCompac
 
 variable (Λ) in
 /-- For automorphisms `g` and `h` forming a cartesian square `g ≫ a = a ≫ h`, the exceptional
-base change `Lg^* Ra^! ⟶ Ra^! Lh^*` is an isomorphism: it is the mate of the inverse of the
-compact-support base change isomorphism, and `Lg^*`, `Lh^*` are equivalences
-(`CategoryTheory.isIso_mateEquiv_of_isEquivalence`). -/
+base change `Lg^* Ra^! ⟶ Ra^! Lh^*` is an isomorphism. -/
 instance isIso_upperShriekBaseChangeMap (sq : IsPullback g a a h) [IsIso g] [IsIso h] :
     IsIso (upperShriekBaseChangeMap Λ sq) := by
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
@@ -114,9 +108,7 @@ lemma dualizing_frobenius_hom_hom :
 
 variable [IsAlgClosed k]
 
-/-- The dual Weil datum on the Verdier dual of a strict Weil complex is invertible: `Lg^*` is an
-autoequivalence and the dualizing Weil datum is invertible
-(`CategoryTheory.MonoidalClosed.isIso_dualWeilDatum`). -/
+/-- The dual Weil datum on the Verdier dual of a strict Weil complex is invertible. -/
 instance isIso_verdierDualWeilDatumOfIsPullback (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     IsIso (verdierDualWeilDatumOfIsPullback sq
       ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius)) := by
@@ -146,9 +138,7 @@ lemma verdierDual_frobenius_hom_hom (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
         ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) :=
   rfl
 
-/-- The double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K`
-is a morphism of strict Weil complexes: biduality is Weil equivariant
-(`AlgebraicGeometry.Etale.isWeilEquivariant_verdierDualDoubleDual`). -/
+/-- The double-dual map `δ_K : K ⟶ 𝔻_X 𝔻_X K`, as a morphism of strict Weil complexes. -/
 noncomputable def verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     K ⟶ verdierDual g aX sq (verdierDual g aX sq K) where
   hom := ObjectProperty.homMk
@@ -161,9 +151,8 @@ noncomputable def verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) 
     exact (isWeilEquivariant_verdierDualDoubleDual Λ aX
       ((DerivedCategoryFiniteTor.ι _ X).mapIso K.frobenius) (dualizingComplexWeilDatum sq)).symm
 
-/-- **Verdier biduality for strict Weil
-complexes.** The double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an isomorphism of strict Weil complexes, by
-finite-stage biduality (`AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app`). -/
+/-- **Verdier biduality for strict Weil complexes.** The double-dual map `K ⟶ 𝔻_X 𝔻_X K` is an
+isomorphism of strict Weil complexes. -/
 instance isIso_verdierDualDoubleDual (K : WeilComplex (ModuleCat.{u + 1} Λ) g) :
     IsIso (verdierDualDoubleDual g aX sq K) := by
   have : IsIso ((DerivedCategoryFiniteTor.ι _ X).map (verdierDualDoubleDual g aX sq K).hom) :=

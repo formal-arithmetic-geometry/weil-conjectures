@@ -29,21 +29,15 @@ radical `J` of the finite ring `Λ`. Consider the degree-`q` base change maps
 
 `τ_q(𝓖) : Hᵠ(Lp^* 𝓖[0] ⊗ᴸ τ^{≤q} N) ⟶ Rᵠh_*(h^* p^* 𝓖 ⊗ e^* 𝓕)`, `N = Lf'^* Rg_* 𝓕[0]`,
 
-natural in the sheaf `𝓖` on `X`. The source is `p^* 𝓖 ⊗ Hᵠ(τ^{≤q} N)`
-(`AlgebraicGeometry.Etale.singleFunctorTensorRightHomologyIso`), a sheaf killed by `J`. If the
-`τ_q` are isomorphisms at the sheaves `π_* Λ / J π_* Λ` for finite morphisms `π`, they are
-isomorphisms at every sheaf `𝓖`
-(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar`):
+natural in the sheaf `𝓖` on `X`. If the `τ_q` are isomorphisms at the sheaves `π_* Λ / J π_* Λ`
+for finite morphisms `π`, they are isomorphisms at every sheaf `𝓖`
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar`).
 
-1. both sides only depend on `𝓖 / J 𝓖`, since they are right exact in `𝓖` and kill `J`;
-2. `𝓖 / J 𝓖` is a filtered colimit of constructible sheaves killed by `J`, and both sides commute with filtered colimits;
-3. a constructible sheaf killed by `J` embeds into a finite sum of sheaves `π_* M` with `M`
-   killed by `J`, retracts of sums of copies of `π_* Λ / J π_* Λ`, with constructible cokernel
-   killed by `J`; on short exact sequences of sheaves killed by `J`, the sources are exact (the
-   tensor product over the semisimple ring `Λ / J`) and the targets form a long exact sequence,
-   so dimension shifting (`CategoryTheory.isIso_app_of_dimensionShift`) applies.
+## Implementation details
 
-This is the `𝔽_ℓ`-vector space case of the proof of blueprint `lemma-kunneth-field-coefficients--1`.
+Both sides only depend on `𝓖 / J 𝓖` and commute with filtered colimits, so one reduces to
+constructible sheaves killed by `J`; these embed into finite sums of sheaves `π_* M`, and
+dimension shifting (`CategoryTheory.isIso_app_of_dimensionShift`) applies.
 -/
 
 @[expose] public section
@@ -59,8 +53,7 @@ section General
 variable {C D : Type*} [Category C] [Category D]
 
 /-- A natural transformation between additive functors which is an isomorphism at an object is an
-isomorphism at the retracts of the finite sums of copies of it. The biproduct is taken with the
-given `HasBiproduct` instance, so that no instance comparison is needed. -/
+isomorphism at the retracts of the finite sums of copies of it. -/
 lemma CategoryTheory.NatTrans.isIso_app_of_retract_biproduct [Preadditive C] [Preadditive D]
     [HasFiniteBiproducts D] {S T : C ⥤ D} [S.Additive] [T.Additive] (τ : S ⟶ T) {A Z : C}
     {m : ℕ} {_ : HasBiproduct (fun _ : Fin m ↦ Z)} (r : Retract A (⨁ fun _ : Fin m ↦ Z))
@@ -69,7 +62,7 @@ lemma CategoryTheory.NatTrans.isIso_app_of_retract_biproduct [Preadditive C] [Pr
   NatTrans.isIso_app_of_retract τ r
 
 /-- Transport `IsIso (τ.app X)` along an equality `X = Y`. Used with `rfl` when `Y` is a
-beta-redex: the kernel then compares the objects, not the components of `τ` at them. -/
+beta-redex, so that the kernel compares the objects, not the components of `τ` at them. -/
 private lemma CategoryTheory.NatTrans.isIso_app_of_isIso_app_of_eq {S T : C ⥤ D} {τ : S ⟶ T}
     {X Y : C} (hX : IsIso (τ.app X)) (h : X = Y) : IsIso (τ.app Y) :=
   h ▸ hX
@@ -371,7 +364,7 @@ lemma shortExact_map_tensorBaseChangeHomologyTargetSheaf
       S.g))
   exact ⟨hS.exact.map_of_epi_of_preservesCokernel _ hS.epi_g inferInstance⟩
 /-- The degree-`q` base change map at a sheaf `𝓖` is an isomorphism if and only if it is one at
-`𝓖 / J 𝓖`: both sides are right exact in `𝓖` and kill the Jacobson radical `J`. -/
+`𝓖 / J 𝓖`, where `J` is the Jacobson radical. -/
 lemma isIso_tensorBaseChangeHomologyMap_app_iff_cokernel_smulDesc
     (h𝓕 : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 𝓕 = 0) (q : ℤ)
     (𝓖 : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

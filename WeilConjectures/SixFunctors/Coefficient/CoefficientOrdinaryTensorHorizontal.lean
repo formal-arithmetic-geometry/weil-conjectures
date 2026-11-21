@@ -11,10 +11,12 @@ import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 /-! # Ordinary tensor horizontality on coefficient-system complexes
 
-Source: Zheng, Construction 4.1 and Proposition 4.17(a); ordinary tensor generators.
-
 The ordinary tensor-adjunct square is checked on every pure total-complex summand.
 This calculation uses no flatness or K-flatness hypothesis.
+
+## References
+
+* Zheng, Construction 4.1 and Proposition 4.17(a)
 -/
 
 @[expose] public section
@@ -326,15 +328,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-/-- Ordinary quotient adjuncts commute with the tensor comparison and finite evaluation.
-Source: Zheng, Construction 4.1 and Proposition 4.17(a).
-
-Proof: transpose the equation through the ordinary scalar-extension adjunction.
-Test the resulting maps on pure total-complex generators. Evaluation identifies each
-finite-level generator with a system-level generator; horizontal restriction takes
-that generator to the tensor of the two horizontal restrictions. The specified unit
-and scalar tensor normalization give exactly the same formula on the other side.
-Pure generators determine each component, hence the complex map. -/
+/-- Ordinary quotient adjuncts commute with the tensor comparison and finite evaluation. -/
 theorem coefficientOrdinaryTensorHorizontal {W : Scheme.{t}}
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (S : CoefficientDerivedSystemTensors l E W)

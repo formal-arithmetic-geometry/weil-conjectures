@@ -28,26 +28,18 @@ is an isomorphism as soon as `Rf_* K` and all the `Rf_*(K ⊗ᴸ Z_X)`, for `Z` 
 lie in degrees `≤ B` for one bound `B`
 (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`). Under
 the uniform vanishing `UDV(f, Λ; N)` of the higher direct images this holds for every `K` of finite
-Tor amplitude (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`,
-blueprint `proposition-open-direct-image-preserves-finite--1`).
-
-## Proof
-
-The projection map is an isomorphism at the constant sheaf of a finite free module, which is
-dualizable. A presentation `0 ⟶ Z ⟶ Λʳ ⟶ M ⟶ 0` gives a distinguished triangle
-`Z_Y ⟶ Λʳ_Y ⟶ M_Y ⟶ Z_Y[1]`, carried by the projection map, which commutes with the shifts, to a
-morphism of distinguished triangles. Both sides vanish in degrees `> B`, and the four and five
-lemmas on the long exact homology sequences show, by descending induction on the degree `n` and
-simultaneously for all finitely generated `M`, first that `Hⁿ` of the projection map is an
-epimorphism, then that it is an isomorphism. This replaces the infinite free resolution and the
-brutal truncations of the blueprint proof: the syzygy `Z` is again finitely generated, and the
-uniform bound `B` is what makes the induction start.
+Tor amplitude (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`).
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf`
-  (`proposition-open-direct-image-preserves-finite--1`).
+
+## Implementation details
+
+Instead of an infinite free resolution, a presentation `0 ⟶ Z ⟶ Λʳ ⟶ M ⟶ 0` is used with a
+descending induction on the degree, simultaneously for all finitely generated `M`: the syzygy `Z`
+is again finitely generated, and the uniform bound `B` is what makes the induction start.
 -/
 
 @[expose] public section
@@ -75,8 +67,7 @@ section Dualizable
 attribute [local instance] Sheaf.monoidalCategory Sheaf.braidedCategory
 
 /-- The constant sheaf of a finite projective `Λ`-module, placed in degree `0`, is dualizable in
-`D(X_ét, Λ)`: the constant sheaf functor is monoidal, and a bounded complex of dualizable sheaves
-is dualizable in the derived category. -/
+`D(X_ét, Λ)`. -/
 lemma isDualizable_constantSingle (X : Scheme.{u}) (M : ModuleCat.{u + 1} Λ) [Module.Finite Λ M]
     [Module.Projective Λ M] : IsDualizable 𝐂(X, M) := by
   let G := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M
@@ -97,13 +88,7 @@ end Dualizable
 `f : X ⟶ Y` a morphism of schemes and `K` an object of `D(X_ét, Λ)` such that `Rf_* K` and all
 the `Rf_*(K ⊗ᴸ Z_X)`, for `Z` a finitely generated `Λ`-module, lie in degrees `≤ B`. Then for
 every finitely generated `Λ`-module `M` the projection map
-`Rf_* K ⊗ᴸ M_Y ⟶ Rf_*(K ⊗ᴸ Lf^* M_Y)` is an isomorphism.
-
-For a presentation `0 ⟶ Z ⟶ Λʳ ⟶ M ⟶ 0` the projection map is an isomorphism at `Λʳ_Y`, which is
-dualizable, and both sides vanish in degrees `> B`. Descending induction on the degree, using the
-four and five lemmas on the homology sequences of the triangle `Z_Y ⟶ Λʳ_Y ⟶ M_Y ⟶ Z_Y[1]`, shows
-first that `Hⁿ` of the projection map is an epimorphism for all `M`, then that it is an
-isomorphism. -/
+`Rf_* K ⊗ᴸ M_Y ⟶ Rf_*(K ⊗ᴸ Lf^* M_Y)` is an isomorphism. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE [IsNoetherianRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (B : ℤ)
@@ -201,23 +186,10 @@ theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE [IsNoethe
   · have := hiso (B + 1 - n).toNat M
     rwa [show B + 1 - ((B + 1 - n).toNat : ℤ) = n by omega] at this
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite--1`: The projection formula with a
-finitely presented constant coefficient.
-
-Let `f : X ⟶ Y` be a morphism of schemes, `Λ` a noetherian commutative ring, and assume
-`UDV(f, Λ; N)`: `Rᵠf_* F = 0` for every sheaf of `Λ`-modules `F` and every `q > N`. Let `K` be
-an object of `D(X_ét, Λ)` of Tor amplitude in `[a, b]` and `M` a finitely generated `Λ`-module.
-Then the projection map `Rf_* K ⊗ᴸ M_Y ⟶ Rf_*(K ⊗ᴸ Lf^* M_Y)` is an isomorphism; its target is
-`Rf_*(K ⊗ᴸ M_X)` by `AlgebraicGeometry.Etale.leftDerivedUpperStarSingleConstantSheafIso`. The map
-is natural in `M`, being a component of the natural transformation
-`AlgebraicGeometry.Etale.rightDerivedLowerStarProjectionMap`.
-
-The blueprint allows any `K ∈ D^-(X_ét, Λ)`; here `K` has finite Tor amplitude, which is the case
-used in `proposition-six-operations-dctf--2` and makes all the complexes `K ⊗ᴸ Z_X` bounded, so
-that `UDV(f, Λ; N)` bounds their direct images
-(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_isZero_higherDirectImage`). The
-proof is `AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarProjectionMap_constantSheaf_of_isLE`
-with the bound `b + N`. -/
+/-- **The projection formula with a finitely presented constant coefficient.** Let `Λ` be
+noetherian and assume `UDV(f, Λ; N)`: `Rᵠf_* F = 0` for every sheaf of `Λ`-modules `F` and every
+`q > N`. For `K ∈ D(X_ét, Λ)` of Tor amplitude in `[a, b]` and `M` a finitely generated
+`Λ`-module, the projection map `Rf_* K ⊗ᴸ M_Y ⟶ Rf_*(K ⊗ᴸ Lf^* M_Y)` is an isomorphism. -/
 theorem isIso_rightDerivedLowerStarProjectionMap_constantSheaf [IsNoetherianRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) (N : ℕ) (hf : HasUniformDirectImageVanishingLE Λ f N)
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))} {a b : ℤ}

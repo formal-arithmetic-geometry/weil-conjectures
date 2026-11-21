@@ -14,7 +14,11 @@ A formal computation: the image of a global element `τ : U ⟶ Hom(P, G M)` und
 enriched adjunction map followed by a sections comparison is the transpose of an explicit
 map out of a tensor product, once the scalar unit is known on the global unit class.
 
-Source: Stacks Project, Tags 08J9 and 07A6.
+## References
+
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08JA]
 -/
 
 @[expose] public section
@@ -36,8 +40,7 @@ theorem _root_.CategoryTheory.Functor.map_comp_apply_addCommGrp {C : Type*} [Cat
     H.map g (H.map f y) = H.map (f ≫ g) y := by
   rw [Functor.map_comp, ConcreteCategory.comp_apply]
 
-/-- The inverse transpose is natural in the target.
-Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+/-- The inverse transpose is natural in the target. -/
 theorem CoefficientClosedStructure.transpose_symm_comp_map {T P Q Q' : A}
     (τ : T ⟶ HA.obj (op P, Q)) (e : Q ⟶ Q') :
     (SA.transpose T P Q').symm (τ ≫ HA.map (Prod.mkHom (𝟙 (op P)) e)) =
@@ -45,8 +48,7 @@ theorem CoefficientClosedStructure.transpose_symm_comp_map {T P Q Q' : A}
   (SA.adjunction P).homEquiv_naturality_right_symm τ e
 
 /-- The base-change map applied to a global element is the transpose of the scalar
-extension of its inverse transpose.
-Source: Stacks 08J9 (auxiliary; not a blueprint node). -/
+extension of its inverse transpose. -/
 theorem coefficientBaseChangeHom_comp {UA P Q : A} {UB Q' : B}
     (m : UB ⟶ F.obj UA) (τ : UA ⟶ HA.obj (op P, Q)) (g : F.obj Q ⟶ Q') :
     m ≫ F.map τ ≫ coefficientBaseChangeHom SA SB F μ P Q ≫
@@ -69,8 +71,7 @@ theorem coefficientBaseChangeHom_comp {UA P Q : A} {UB Q' : B}
   rw [reassoc_of% h2, SA.transpose_symm_apply, F.map_comp, Category.assoc]
 
 /-- The image of a global element under the enriched adjunction map followed by a sections
-comparison, given the image of the global unit class under the adjunction unit.
-Source: Stacks 08J9, 07A6 (auxiliary; not a blueprint node). -/
+comparison, given the image of the global unit class under the adjunction unit. -/
 theorem coefficientEnrichedAdjunctionMap_globalElement {D : Type d} [Category.{r} D]
     (ΓA : A ⥤ D) (ΓB : B ⥤ D) (K : D ⥤ AddCommGrpCat.{c}) (ss : G ⋙ ΓA ⟶ ΓB)
     {UA : A} {UB : B} (uA : K.obj (ΓA.obj UA)) (uB : K.obj (ΓB.obj UB)) (m : UB ⟶ F.obj UA)
@@ -99,8 +100,7 @@ theorem coefficientEnrichedAdjunctionMap_globalElement {D : Type d} [Category.{r
 
 /-- The scalar transpose formula for global elements, from its representative inputs:
 the unit-class equation, the transport of the evaluation of transposes along a model of
-the scalar extension, and the compatibility of the left unitors.
-Source: Stacks 08J9, 07A6, 08JA (auxiliary; not a blueprint node). -/
+the scalar extension, and the compatibility of the left unitors. -/
 theorem coefficientEnrichedAdjunctionMap_homZero {D : Type d} [Category.{r} D]
     (ΓA : A ⥤ D) (ΓB : B ⥤ D) (K : D ⥤ AddCommGrpCat.{c}) (ss : G ⋙ ΓA ⟶ ΓB)
     (eB : ∀ X Y : B, K.obj (ΓB.obj (HB.obj (op X, Y))) → (X ⟶ Y))

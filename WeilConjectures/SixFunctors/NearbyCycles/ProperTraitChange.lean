@@ -28,7 +28,9 @@ of `N` (`NearbyCyclesModel.Hom.isIso_map_pullbackExchange_app_of_isProper_trait`
 compute the cohomology of the geometric generic fibre:
 `RΓ(X_{s₂}, Ψ_M K) = RΓ(X_{η̄₂}, K) = RΓ(X_{η̄₁}, K) = RΓ(X_{s₁}, Ψ_N K)`.
 
-Formally, `φ`, the structure morphisms `N ⟶ S₁`, `M ⟶ S₂` (`NearbyCyclesModel.Hom.toOfTrait`) and
+## Implementation details
+
+`φ`, the structure morphisms `N ⟶ S₁`, `M ⟶ S₂` (`NearbyCyclesModel.Hom.toOfTrait`) and
 the morphism of traits `S₂ ⟶ S₁` (`NearbyCyclesModel.ofTraitHom`) form a commutative square of
 morphisms of models, and the square law of the pushforward exchanges
 (`NearbyCyclesModel.Hom.isIso_map_pullbackExchange_app_of_square`) applies. Its inputs are

@@ -6,7 +6,11 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.ExceptionalRingTransportCoreData
 /-! The evaluated counit equation for exceptional integral transport.
-Source: Zheng, Lemma 5.22 and Proposition 5.24. -/
+
+## References
+
+* Zheng, Lemma 5.22 and Proposition 5.24
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -15,8 +19,7 @@ namespace WeilConjectures.ExceptionalIntegralScalar
 open ConstructibleExceptionalCoefficients
 
 /-- The finite evaluation of the transported adjunction counit satisfies the
-finite-stage adjunction-counit equation. This is the counit clause in the
-strict system transport calculation of Zheng, Lemma 5.22. -/
+finite-stage adjunction-counit equation. -/
 theorem exceptional_transport_core_evaluation_counit
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

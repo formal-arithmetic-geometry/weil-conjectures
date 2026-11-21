@@ -8,7 +8,11 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCor
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreEvaluationUnit
 import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalRingTransportCoreEvaluationCounit
 /-! Finite-evaluation laws for exceptional integral transport.
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26. -/
+
+## References
+
+* Zheng, Lemma 5.22 and Propositions 5.24 and 5.26
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -45,11 +49,7 @@ structure TransportCoreEvaluationLaws
       (operation (.finite E ⟨n + 1, Nat.succ_pos n⟩)).adjunction.counit.app
         (((d.reconstruction E false).evaluation n).obj K) =
       ((d.reconstruction E false).evaluation n).map ((d.adjunction E).counit.app K)
-/-- The finite adjunction equations hold for the supplied compatible right comparison.
-The support comparison is constructed after normalization in `ExceptionalRingTransportCore`;
-it is not a law of arbitrary data.
-Proof: apply the evaluated unit and counit equations at level `n`.
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26. -/
+/-- The finite adjunction equations hold for the supplied compatible right comparison. -/
 theorem exists_exceptional_transport_core_evaluation_laws
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

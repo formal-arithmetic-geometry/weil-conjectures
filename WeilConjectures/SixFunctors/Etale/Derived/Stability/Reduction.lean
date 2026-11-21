@@ -36,7 +36,7 @@ complexes of finite Tor amplitude it commutes with the six operations at the fin
 - `AlgebraicGeometry.Etale.constructibleFiniteTor_stability_reductionModIdeal`: coefficient
   reduction commutes with all six operations on finite-Tor constructible complexes.
 
-## Implementation notes
+## Implementation details
 
 The coefficient change `D(X, A) ⥤ D(X, B)` is not available as a functor for a non-flat
 `A ⟶ B`, so every comparison is stated after restriction of scalars: `RHom_B(K_B, M_B)` restricts
@@ -68,24 +68,17 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (J : Ideal Λ) {k : Type u} [Field k]
 
-/-- The reduction of a tensor product: `(K ⊗ᴸ M)_B ≅ K ⊗ᴸ M_B`, by associativity. -/
+/-- The reduction of a tensor product: `(K ⊗ᴸ M)_B ≅ K ⊗ᴸ M_B`. -/
 noncomputable def reductionModIdealDerivedTensorIso {X : Scheme.{u}}
     (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (reductionModIdeal Λ X J).obj (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj M) ≅
       ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj ((reductionModIdeal Λ X J).obj M) :=
   derivedTensorAssociator _ X K M _
 
-/-- Finite coefficient change for direct image.
-
-Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes and `K` a bounded above complex. The
-canonical
-projection map `(Rf_* K) ⊗ᴸ (Λ/J)_Y ⟶ Rf_*(K ⊗ᴸ (Λ/J)_X)`
+/-- Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes and `K` a bounded above complex.
+The canonical projection map `(Rf_* K) ⊗ᴸ (Λ/J)_Y ⟶ Rf_*(K ⊗ᴸ (Λ/J)_X)`
 (`AlgebraicGeometry.Etale.rightDerivedLowerStarReductionModIdealMap`), that is
-`(Rf_* K)_B ⟶ Rf_*(K_B)` read after restriction of scalars, is an isomorphism. It is natural in
-`K` by construction.
-
-`K` is bounded above, and the projection formula holds for `Rf_*` and a finitely generated
-constant coefficient. -/
+`(Rf_* K)_B ⟶ Rf_*(K_B)` read after restriction of scalars, is an isomorphism. -/
 theorem isIso_rightDerivedLowerStarReductionModIdealMap_app {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
@@ -103,13 +96,10 @@ theorem isIso_rightDerivedLowerStarReductionModIdealMap_app {X Y : Scheme.{u}}
       (leftDerivedUpperStarSingleConstantSheafIso (ModuleCat.{u + 1} Λ) f
         (ModuleCat.of Λ (Λ ⧸ J))))).isIso_hom
 
-/-- Finite coefficient change for internal Hom.
-
-Let `X` be of finite type over `k`, `Λ` a finite ring whose exponent is invertible on `X` and
+/-- Let `X` be of finite type over `k`, `Λ` a finite ring whose exponent is invertible on `X` and
 `B = Λ ⧸ J`. For `K, M ∈ Dctf(X, Λ)` the evaluation-defined map
-`RHom_Λ(K, M) ⊗ᴸ B ⟶ RHom_B(K_B, M_B)` is an isomorphism. Read after restriction of scalars to
-`Λ`, where `RHom_B(K_B, M_B)` becomes `RHom_Λ(K, M ⊗ᴸ (Λ/J)_X)`, the map is the transpose of
-`ev ⊗ (Λ/J)_X`. -/
+`RHom_Λ(K, M) ⊗ᴸ B ⟶ RHom_B(K_B, M_B)`, read after restriction of scalars to `Λ` as a map
+`RHom_Λ(K, M) ⊗ᴸ (Λ/J)_X ⟶ RHom_Λ(K, M ⊗ᴸ (Λ/J)_X)`, is an isomorphism. -/
 theorem isIso_derivedHomTensorMap_reductionModIdeal {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent Λ X]
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -132,11 +122,8 @@ theorem nonempty_iso_reductionModIdeal_derivedHom_of_constructibleFiniteTor {X :
   have := isIso_derivedHomTensorMap_reductionModIdeal Λ J aX hK hM
   ⟨@asIso _ _ _ _ _ this⟩
 
-/-- Finite coefficient change for the dualizing object.
-
-For `a_X : X ⟶ Spec k` separated of finite type and `B = Λ ⧸ J`, there is an isomorphism
-`ω_{X,Λ} ⊗ᴸ B ≅ ω_{X,B}`. Read after restriction of scalars to `Λ`, under which
-`ω_{X,B} = Ra_{X,B}^! B` becomes `Ra_X^! (B_k)`, it is
+/-- For `a_X : X ⟶ Spec k` separated of finite type and `B = Λ ⧸ J`, there is an isomorphism
+`ω_{X,Λ} ⊗ᴸ B ≅ ω_{X,B}`; read after restriction of scalars to `Λ`, it is
 `(Ra_X^! Λ) ⊗ᴸ (Λ/J)_X ≅ Ra_X^! ((Λ/J)_k)`. -/
 theorem nonempty_iso_reductionModIdeal_dualizingComplex [HasInvertibleExponent Λ (Spec (.of k))]
     {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX]
@@ -161,12 +148,9 @@ lemma constructibleFiniteTor_tensorUnit (X : Scheme.{u}) :
 
 variable [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- Finite coefficient change for Verdier duality.
-
-For `X` separated of finite type over `k`, `K ∈ Dctf(X, Λ)` and `B = Λ ⧸ J`, there is an
+/-- For `X` separated of finite type over `k`, `K ∈ Dctf(X, Λ)` and `B = Λ ⧸ J`, there is an
 isomorphism `(𝔻_{X,Λ} K) ⊗ᴸ B ≅ 𝔻_{X,B}(K_B)`; after restriction of scalars to `Λ`,
-`(𝔻_X K)_B ≅ RHom(K, Ra_X^! B)`. It is obtained by applying the internal-hom comparison to the
-dualizing complex and then the comparison for the dualizing object. -/
+`(𝔻_X K)_B ≅ RHom(K, Ra_X^! B)`. -/
 theorem nonempty_iso_reductionModIdeal_verdierDual {X : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -181,16 +165,9 @@ theorem nonempty_iso_reductionModIdeal_verdierDual {X : Scheme.{u}} (aX : X ⟶ 
   obtain ⟨e₂⟩ := nonempty_iso_reductionModIdeal_dualizingComplex Λ J aX
   exact ⟨e₁ ≪≫ (RHom(X)[ModuleCat.{u + 1} Λ].obj (op K)).mapIso e₂⟩
 
-/-- The finite coefficient comparison for the exceptional inverse image.
-
-For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, `L ∈ Dctf(Y, Λ)` and
+/-- For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, `L ∈ Dctf(Y, Λ)` and
 `B = Λ ⧸ J`, there is an isomorphism `(Rf^! L) ⊗ᴸ B ≅ Rf_B^!(L ⊗ᴸ B)`, which after restriction of
-scalars to `Λ` reads `(Rf^! L)_B ≅ Rf^!(L_B)`.
-
-The isomorphism is the exceptional tensor map `Rf^! L ⊗ᴸ Lf^* N ⟶ Rf^!(L ⊗ᴸ N)` for the constant
-sheaf `N = B` on `Y`, which is invertible by the exceptional Künneth formula applied to the
-squares with identity sides over `Y` and over `Spec k`, composed with the identification
-`Lf^* B ≅ B` of constant sheaves. No algebraic closedness of `k` is needed. -/
+scalars to `Λ` reads `(Rf^! L)_B ≅ Rf^!(L_B)`. -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
@@ -243,14 +220,10 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
 variable [IsAlgClosed k]
 
 omit [IsAlgClosed k] in
-/-- Coefficient reduction commutes with the six operations at the finite stage.
-
-Let `k` be a field, `Λ` a finite ring whose exponent is invertible on `k` (the
-finite stage `A = A_{E,n}`), `B = Λ ⧸ J` a finite coefficient quotient and `f : X ⟶ Y` a morphism
-of separated finite-type `k`-schemes. On the finite-Tor constructible domains, the coefficient
-reduction `K ↦ K_B = K ⊗ᴸ (Λ/J)_X` (read after restriction of scalars to `Λ`) commutes with
-pullback, tensor product, both direct images, general internal Hom, Verdier duality and the
-exceptional inverse image:
+/-- **Coefficient reduction commutes with the six operations at the finite stage.** Let `k` be a
+field, `Λ` a finite ring whose exponent is invertible on `k`, `B = Λ ⧸ J` and `f : X ⟶ Y` a
+morphism of separated finite-type `k`-schemes. The reduction `K ↦ K_B = K ⊗ᴸ (Λ/J)_X` (read after
+restriction of scalars to `Λ`) satisfies:
 
 1. `(Lf^* K)_B ≅ Lf^*(K_B)`;
 2. `(K ⊗ᴸ M)_B ≅ K ⊗ᴸ M_B`, the restriction of `K_B ⊗ᴸ_B M_B`;
@@ -258,10 +231,7 @@ exceptional inverse image:
 4. `(Rf_! K)_B ≅ Rf_!(K_B)`;
 5. `RHom(K, M)_B ≅ RHom(K, M_B)`, the restriction of `RHom_B(K_B, M_B)`, for `K, M ∈ Dctf`.
 6. `(𝔻_X K)_B ≅ RHom(K, Ra_X^! B)`, the restriction of `𝔻_{X,B}(K_B)`, for `K ∈ Dctf`.
-7. `(Rf^! L)_B ≅ Rf^!(L_B)` for `L ∈ Dctf`.
-
-The compatibility of these comparisons with evaluation and adjunction maps is not recorded. For
-the integral and rational stages of clause (vii) see the module documentation. -/
+7. `(Rf^! L)_B ≅ Rf^!(L_B)` for `L ∈ Dctf`. -/
 theorem constructibleFiniteTor_stability_reductionModIdeal {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]
@@ -312,18 +282,12 @@ theorem constructibleFiniteTor_stability_reductionModIdeal {X Y : Scheme.{u}}
     fun K hK ↦ nonempty_iso_reductionModIdeal_verdierDual Λ J aX hK,
     fun L hL ↦ nonempty_iso_reductionModIdeal_rightDerivedUpperShriek Λ J aX aY f hf hL⟩
 
-/-- Finite exceptional adjoints and coefficient change.
+/-- For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, `k` algebraically closed,
+and `L ∈ Dctf(Y, Λ)` at a finite stage `Λ`:
 
-For a morphism `f : X ⟶ Y` of separated finite-type `k`-schemes, `k` algebraically closed, and
-`L ∈ Dctf(Y, Λ)` at a finite stage `Λ`:
-
-1. `Rf^! L ≅ 𝔻_X Lf^* 𝔻_Y L`, the exceptional inverse image expressed through Verdier duality;
-2. for a quotient `B = Λ ⧸ J`, `(Rf^! L) ⊗ᴸ B ≅ Rf_B^!(L ⊗ᴸ B)`, read after restriction of scalars
-   to `Λ` as `(Rf^! L)_B ≅ Rf^!(L_B)`
-   (`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_rightDerivedUpperShriek`).
-
-The cocycle condition of the comparisons and their compatibility with units and counits are not
-recorded. -/
+1. `Rf^! L ≅ 𝔻_X Lf^* 𝔻_Y L`;
+2. for a quotient `B = Λ ⧸ J`, `(Rf^! L) ⊗ᴸ B ≅ Rf_B^!(L ⊗ᴸ B)`, read after restriction of
+   scalars to `Λ` as `(Rf^! L)_B ≅ Rf^!(L_B)`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_and_reductionModIdeal {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] [HasCompactification aX]

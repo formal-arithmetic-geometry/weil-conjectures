@@ -11,10 +11,14 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectIma
 /-!
 # Higher direct images along a limit over a fixed base, as a system of stages
 
-The fixed-base limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit` (Stacks 09Z1),
-for a cofiltered system `D` of schemes over `W` mapping to `S` through `k : W ⟶ S`, pulled back
-along any `p : X ⟶ S`, written in the language of systems of stages
+The fixed-base limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`, for a
+cofiltered system `D` of schemes over `W` mapping to `S` through `k : W ⟶ S`, pulled back along
+any `p : X ⟶ S`, written in the language of systems of stages
 (`AlgebraicGeometry.Etale.isStalkColimit_fixedBaseSystem`).
+
+## References
+
+* [Stacks, Tag 09Z1]
 -/
 
 @[expose] public section
@@ -97,7 +101,7 @@ noncomputable def fixedBaseCocone : Cocone (fixedBaseDiagram Λ k G q D) where
           Category.comp_id]
         rw [← Etale.higherDirectImageOverMap_comp, c.w] }
 
-/-- The fixed-base limit theorem (Stacks 09Z1) as a colimit of sheaves. -/
+/-- The fixed-base limit theorem as a colimit of sheaves. -/
 noncomputable def isColimitFixedBaseCocone [IsCofiltered I]
     [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]
     [∀ i, QuasiCompact ((D.obj i).hom ≫ k)] [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]

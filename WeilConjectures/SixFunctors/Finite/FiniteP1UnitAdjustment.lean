@@ -9,8 +9,6 @@ public import Mathlib.CategoryTheory.Monoidal.CoherenceLemmas
 import Mathlib.CategoryTheory.Functor.FullyFaithful
 
 /-! # Adjusting an adjunction coordinate on its coefficient unit
-
-Source: diagonal-tower trace (1), finite coefficient identification.
 -/
 
 @[expose] public noncomputable section
@@ -35,14 +33,7 @@ private theorem extendUnitAutomorphism {D : Type*} [Category D] [MonoidalCategor
   simp only [e, Iso.trans_hom, Iso.symm_hom, Iso.hom_inv_id_assoc]
 
 /-- An equivalence from a monoidal category allows any chosen isomorphism on
-one tensor-unit object to be incorporated into a natural comparison.
-
-Source: diagonal-tower trace (1), choice of coefficient/adjunction coordinates.
-Proof: lift the discrepancy on H(V) through the fully faithful functor H.
-Transport V to the tensor unit, tensor its automorphism with every object,
-and conjugate by the left unitors. At the unit this is the original
-endomorphism by equality of the two unitors. Conjugate back to V and whisker
-with H and P. Naturality at i gives the prescribed component equation. -/
+one tensor-unit object to be incorporated into a natural comparison. -/
 theorem finiteP1_adjust_coordinate_unit
     {C D E : Type*} [Category C] [Category D] [Category E] [MonoidalCategory D]
     (K : C ⥤ E) (P : C ⥤ D) (H : D ⥤ E) [H.IsEquivalence]

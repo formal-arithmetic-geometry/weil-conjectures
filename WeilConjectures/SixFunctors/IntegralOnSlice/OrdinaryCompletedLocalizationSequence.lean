@@ -26,7 +26,11 @@ import Mathlib.CategoryTheory.Adjunction.Triple
 
 /-! # The completed-coefficient module localization sequence
 
-Source: Stacks Project, Pro-etale Cohomology, Tags 09AH, 09AG and 09BM.
+## References
+
+* [Stacks, Tag 09AH]
+* [Stacks, Tag 09AG]
+* [Stacks, Tag 09BM]
 -/
 
 @[expose] public noncomputable section
@@ -294,30 +298,7 @@ private theorem counit_bijective_on_open {X : AlgebraicGeometry.Scheme.{t}}
     (E.map ((overFunctor R U).map (aj.counit.app M)))
 
 /-- The actual slice-extension counit and completed closed-pullback unit give the
-module localization sequence, with independent site and coefficient universes.
-
-Source: Stacks Project, proetale.tex, Tags 09AH,
-09AG, and 09BM
-.
-
-Proof: use the finite-projection characterization of ordinaryCompletedRingMap
-and immersion inverse-image limit preservation to identify the completed closed
-coefficient map with the inverse-image coefficient isomorphism. Its module
-adjunction is therefore the ringed inverse-image/direct-image adjunction.
-The open term is the sheafification of the direct-sum extension presheaf, with
-the counit of localizedSystemAdjunction. Refine an affine pro-etale object by
-w-contractible affines. For a refined affine Spec A with closed fibre Spec A/I,
-choose finitely many elements of I whose distinguished opens cover the given
-quasi-compact open complement. Cover by these opens and the localization at the
-elements invertible modulo I. On each open piece the extension counit is an
-isomorphism and the closed direct image is zero. On the localization piece the
-extension is zero, since every point specializes to the closed fibre, and the
-closed unit is an isomorphism. Thus the displayed sequence is locally an identity
-sequence with one zero end term. Local lifting and sheaf separation imply that
-the first arrow is monic, the second epic, and image equals kernel. The scalar
-actions and unit/counit identifications preserve these calculations. The same
-sheafification and section arguments work in max u (t+1); no coefficient-size
-identification is required. Empty pieces give the same identity sequences. -/
+module localization sequence, with independent site and coefficient universes. -/
 theorem ordinaryCompletedLocalizationSequence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

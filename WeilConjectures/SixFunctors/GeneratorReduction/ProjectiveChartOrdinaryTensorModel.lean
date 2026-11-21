@@ -41,7 +41,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 
 /-! # Bounded finite-projective models for ordinary tensors on a chart
 
-Source: Stacks Tags 07A2, 07A4; Bhatt--Scholze, Lemma 6.5.5.
+## References
+
+* [Stacks, Tag 07A2]
+* [Stacks, Tag 07A4]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.5
 -/
 
 @[expose] public noncomputable section
@@ -305,24 +309,7 @@ private def recordedTensor (W : Scheme.{u}) :
 
 /-- Explicit bounded finite-projective models on a chart give such a model for
 the restriction of the recorded ordinary tensor. This is a K-flat comparison and
-finite totalization assertion; it makes no assertion of derived completeness.
-
-Source: Stacks Tags 07A2 and 07A4, K-flat total tensor and pullback comparison;
-Bhatt--Scholze, proof of Lemma 6.5.5, finite-projective tensor step.
-
-Proof: the two ordinary pullback presentations have the same completed coefficient
-map, as their finite quotient projections agree. Uniqueness of adjoints and left
-derived functors identifies them. The K-flat normalized pullback/tensor comparison
-identifies the restriction of the recorded ordinary tensor with the tensor of the
-two restrictions. Bounded complexes of finite-free summands are K-flat. Transport
-the two supplied model isomorphisms and compute their derived tensor by signed
-direct-sum totalization. Its support is contained in the sum of the two finite
-support intervals. Tensor the specified termwise splittings into finite free
-modules, distribute over finite sums, and use the unitors. Each total degree has
-only finitely many nonzero summands, so summing these splittings gives an actual
-splitting into a finite free module. The K-flat representative comparison supplies
-the displayed derived isomorphism. The construction uses no completeness result,
-no invertibility of ell on the scheme, and covers rank zero and empty support. -/
+finite totalization assertion; it makes no assertion of derived completeness. -/
 theorem projectiveChartOrdinaryTensorModel {X T : Scheme.{u}}
     [CompactSpace T] [QuasiSeparatedSpace T] (f : T ⟶ X)
     (K L : IntegralOnSlice.D.{u, u} l E X none)

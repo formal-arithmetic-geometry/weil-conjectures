@@ -49,8 +49,7 @@ lemma pointSmallEtale_fiber_map_left [IsSepClosed Ω] {U U' : X.Etale} (φ : U �
     ((pointSmallEtale x).fiber.map φ y).left = y.left ≫ φ.left :=
   rfl
 
-/-- The point `(v, x̄)`
- of `V ×_Y X` attached to a point `v` of `V` over `q x̄` by
+/-- The point `(v, x̄)` of `V ×_Y X` attached to a point `v` of `V` over `q x̄` by
 `AlgebraicGeometry.Scheme.pointSmallEtaleFiberEtaleIso` is the morphism `pullback.lift v x̄`. -/
 lemma pointSmallEtaleFiberEtaleIso_inv_app_left (V : Y.Etale)
     (v : (pointSmallEtale (x ≫ q)).fiber.obj V) :

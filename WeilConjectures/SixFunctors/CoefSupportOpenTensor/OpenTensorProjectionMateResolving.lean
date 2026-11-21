@@ -11,7 +11,12 @@ import WeilConjectures.SixFunctors.CoefSupportOpenTensor.OpenTensorProjectionMat
 
 /-! # The projection mate on resolving pairs
 
-Source: Stacks 0GL1, 07A4, 06YS and 06YT.
+## References
+
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YT]
 -/
 
 @[expose] public noncomputable section
@@ -46,25 +51,7 @@ variable {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
 
 /-- The unit-defined projection mate has the expected chain formula on pairs of
 flat-term K-flat complexes. No derived projection isomorphism or formula on
-arbitrary complexes is asserted here.
-Source: Stacks 0GL1, proof of lemma-j-shriek-and-tensor; 07A4 and 06YS--06YT.
-
-Proof: the ordinary projection and exactness of F and G show that F preserves
-flat modules and K-flat complexes. For flatness conjugate tensor with F(M) to
-F composed with tensor with M and G, using the ordinary projection and symmetry.
-For K-flatness test against an acyclic complex P: G(P) is acyclic, the tensor
-with the original K-flat complex is acyclic, and F preserves that acyclicity;
-the chain projection and tensor symmetry identify the required test.
-Consequently restrictionModel.derived applies to F(C) and P. On each signed total
-summand, the adjunct of D.chain.inv is the unit tensor identity followed by
-restrictionModel.chain: this follows from D.ordinaryInverse, hordinary and the
-two summand formulas. Maps out of the total coproduct are determined on these
-summands, so these are equal chain maps. The chain adjunction localizes to the
-specified exactDerivedAdjunction. Insert its standard exact-functor factorization
-isomorphisms and use ambientBoth and openBoth to replace the one-flat comparisons
-by the simultaneous comparisons in restrictionModel.derived. Finally halpha and
-injectivity of the adjunction bijection identify the localized chain map with
-alpha; cancellation of the chain projection gives the displayed square. -/
+arbitrary complexes is asserted here. -/
 theorem openTensorProjection_mate_resolving
     (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
     (restriction : A.tensor ⋙ G.mapDerivedCategory ≅

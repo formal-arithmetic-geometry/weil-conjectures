@@ -15,7 +15,12 @@ import all WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearTensorEvaluati
 
 /-! # Components of normalized coefficient evaluation projection
 
-Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 0941]
+* Zheng, Construction 4.1 and Proposition 4.17(a)
 -/
 
 @[expose] public section
@@ -146,20 +151,7 @@ private noncomputable def evaluationModel
     kernel_exact h
 
 attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbelian in
-/-- Every finite evaluation of the unit-defined normalized projection is invertible.
-This is the componentwise finite-prefix calculation; the remaining joint detection
-of isomorphisms is proved in `coefficientNormalizedEvaluationProjection`.
-Source: Zheng Construction 4.1 and Proposition 4.17(a); Stacks 07A4 and 08J9;
-the component calculation in step 3 of
-`lem-coef-normalized-evaluation-projection`.
-
-Proof: convert coefficient normalization to semilinear normalization using the
-actual transition's sectionwise characterization and the scalar adjunction.
-Identify the canonical total evaluation comparison with the specified coefficient
-comparison, and invert the representative square supplied by `hE` to obtain the
-semilinear comparison model. Apply the existing semilinear Cartesian projection
-theorem to the actual reduction data and adjunction, then map its isomorphism
-by evaluation at `q`. -/
+/-- Every finite evaluation of the unit-defined normalized projection is invertible. -/
 theorem coefficientNormalizedEvaluationProjection_components
     (R : CoefficientDerivedSystemReduction l E W)
     (hE : CoefficientEvaluationTensorNormalization l E W R)

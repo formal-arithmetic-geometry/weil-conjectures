@@ -13,12 +13,14 @@ import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 
 /-! # The regular unit at the identity scalar map
 
-Source: Stacks 07A4 and 0D6D, the tensor clause of the finite-Hom domain calculation.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0D6D]
 -/
 
 @[expose] public noncomputable section
 
--- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 set_option autoImplicit false
 set_option Elab.async false

@@ -6,7 +6,11 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.IntegralHom.Tensor.IntegralHomTensorSwap
 /-! # Scalar compatibility of the signed chain interchange
-Source: Stacks Tags 06YY and 0FPQ.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0FPQ]
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -58,11 +62,7 @@ private theorem unit_eq (b : IntegralHomReductionTensorData D l hl E X n)
   exact (Classical.choose_spec (scalarReductionExtension_adjunction l E X n)) M U x
 
 -- Compare sheafified total generators without unfolding the derived constructions.
-/-- The normalized ordinary comparison commutes with Koszul interchange.
-Source: Stacks 06YY and 0FPQ. Proof: cancel the invertible ordinary comparison
-and transpose each component through ordinary scalar extension. Pure total-tensor
-generators suffice by sheafification and totalization. Naturality of the scalar
-unit and the two normalized formulas give the same Koszul-signed generator. -/
+/-- The normalized ordinary comparison commutes with Koszul interchange. -/
 theorem scalarTensorExchange_chain
     (b : IntegralHomReductionTensorData D l hl E X n)
     (P Q : CochainComplex (completedIntegralModuleSheaves l E X D hl) ℤ)

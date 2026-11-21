@@ -162,7 +162,10 @@ import all WeilConjectures.ConstructibleSheaf.Refinement
 
 /-! # Internal finite-free constructibility criteria
 
-Source: BS Definition 6.8.8; HRS Theorem 7.7 and Lemma 7.9.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 6.8.8
+* Hemo–Richarz–Scholbach, *Constructible sheaves on schemes*, Theorem 7.7 and Lemma 7.9
 -/
 
 @[expose] public noncomputable section
@@ -212,12 +215,7 @@ private theorem internal_criterion
     exact ⟨U, fun j ↦ fp_of_free (hU j)⟩
 
 /-- Finite condensed coefficients have constructible cohomology exactly when it is
-locally finite free on finite strata.
-Source: BS Definition 6.8.8; HRS Theorem 7.7 and Lemma 7.9.
-Proof: on each noetherian stratum apply finite-field local triviality to the finite
-presentations. Conversely finite free modules have finite presentations with no relations.
-The lower boundedness witness may be replaced by the minimum of both bounds, ordering them.
-The same construction includes empty schemes, empty strata and zero rank. -/
+locally finite free on finite strata. -/
 theorem finite_internal_constructibility (l : ℕ) [Fact l.Prime]
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l))
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
@@ -229,13 +227,7 @@ theorem finite_internal_constructibility (l : ℕ) [Fact l.Prime]
     (AlgebraicGeometry.ProEtale.finite_lf l E) K
 
 /-- The native finite-subextension-valued algebraic closure has the same internal
-constructibility criterion.
-Source: BS Definition 6.8.8; HRS Theorem 7.7 and Lemma 7.9.
-Proof: apply the finite-subextension-valued local triviality theorem on each noetherian
-stratum. Finite free modules have finite presentations with no relations. Order the
-cohomological bounds by replacing the lower one by their minimum. No completion of the
-coefficient ring or uniform finite subextension is introduced. Empty covers and rank zero
-are included in both implications. -/
+constructibility criterion. -/
 theorem closure_internal_constructibility (l : ℕ) [Fact l.Prime]
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
       (AlgebraicGeometry.ProEtale.condensedRingObj (Profinite.padicAlgClRingObj l) T))) :

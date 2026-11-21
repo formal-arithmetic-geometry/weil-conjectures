@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.Integral.IntegralReductionTowerWellDef
 public import WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionModels
 
-/-! # Identifying the two canonical scalar-extension augmentation maps -/
+/-! # Identifying the two canonical scalar-extension augmentation maps
+
+## References
+
+* [Stacks, Tag 03EK]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,17 +38,7 @@ attribute [local implicit_reducible] completedIntegralCommRingSheafUnrestricted
   completedIntegralCommRingProjectionUnrestricted integralCoefficientSheaf
   integralCoefficientCommRingSheaf
 
-/-- The slice augmentation at the empty slice datum is the recorded scalar unit.
-
-Source: the quotient unit in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tag 03EK.
-
-Proof: compare chain maps degreewise and compare their sheaf morphisms on every
-local section. The defining unique-existence property of the slice augmentation
-sends x to the specified sheafified pure tensor x tensor 1. The constructed
-unrestricted tower unit has exactly the same formula by its proved condition.
-Equality on all sections proves equality of the chain maps. No K-flatness or
-boundedness is needed; zero inputs and empty sites satisfy the same formula. -/
+/-- The slice augmentation at the empty slice datum is the recorded scalar unit. -/
 theorem integralScalarAugmentation_eq_unrestrictedUnit
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

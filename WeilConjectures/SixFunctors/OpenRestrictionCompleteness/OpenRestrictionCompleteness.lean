@@ -19,8 +19,14 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Completeness of ordinary open restriction
 
-Source: Stacks Project, Tags 08TC and 0941; immersion completed-pullback comparison.
 The statement keeps independent universes for sites and coefficients.
+
+## References
+
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -261,24 +267,7 @@ private theorem scalar_restriction (Q : IntegralOnSlice.Cx l E X none) :
     exact scalar_transport l E j o V.unop
 
 /-- Ordinary open restriction preserves quotient-tower completeness, and its actual
-completion unit is invertible on every such restriction.
-Source: the open case of lem-sf-immersion-completed-pullback-comparison, Stacks
-sites-cohomology.tex Tags 08TC, 0941, 07A4 and 0G7E.
-
-Proof: regard the open immersion as an immersion with identity closed factor.
-Use the fixed coefficient maps and their quotient-projection equations to identify
-ordinary open restriction with the immersion's exact ringed-site pullback. Restrict
-one flat-term K-flat representative: exact restriction preserves its flat terms
-and K-flatness. The quotient tensor identifications commute with every transition
-and the scalar-unit augmentation. Restriction preserves the products in its Roos
-triangle. Consequently the restricted augmented quotient triangle is the target
-quotient triangle, which proves completeness. The completion comparison on this
-good representative identifies its actual completion unit with the quotient
-augmentation into the Roos complex. The distinguished quotient triangle makes
-this map invertible. Transport along the representative isomorphisms by naturality
-of the unit. All identifications use the fixed coefficient-equivalence units and
-counits, so the result holds for the given operations. The empty open has the zero
-module category; the identity open gives the original quotient triangle. -/
+completion unit is invertible on every such restriction. -/
 theorem openRestrictionComplete
     [∀ x : X, Invertible (l : X.residueField x)]
     [∀ x : U, Invertible (l : U.residueField x)] :

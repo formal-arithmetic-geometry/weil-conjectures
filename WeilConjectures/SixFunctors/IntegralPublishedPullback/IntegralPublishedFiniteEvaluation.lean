@@ -11,7 +11,11 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Exact finite evaluation factors for the published pullback
 
-Source: Stacks 08TC, 0941, 099N; the fixed quotient and Roos normalizations.
+## References
+
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -101,9 +105,7 @@ private theorem derived_square_factors
     Category.id_comp, Category.comp_id]
   rfl
 
-/-- Localization factors of exact restriction commute with finite evaluation.
-Source: Stacks 0941. Cancel the derived composition isomorphisms, apply the
-naturality of the localized square, and use the composition-factor equations. -/
+/-- Localization factors of exact restriction commute with finite evaluation. -/
 private theorem restricted_level_factors (W : Scheme.{u})
     (C : CochainComplex (coefficientSequenceModules l E W) ℤ) (n : ℕ) :
     (integralComparisonRestrictedEvaluationFactors l E W C n).hom ≫
@@ -126,10 +128,7 @@ private theorem restricted_level_factors (W : Scheme.{u})
     Functor.mapIso_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv, NatTrans.comp_app,
     Functor.map_comp, Category.assoc] using h
 
-/-- Normalized finite evaluation transported along a finite representative isomorphism.
-Source: Stacks 0941 and 099N. Apply the prescribed derived evaluation normalization,
-use naturality of the exact pullback factors and the intrinsic comparison, and
-cancel that comparison with its inverse. -/
+/-- Normalized finite evaluation transported along a finite representative isomorphism. -/
 theorem finite_evaluation_component {X Y : Scheme.{u}} (f : X ⟶ Y)
     (C : CochainComplex (coefficientSequenceModules l E Y) ℤ) (n : ℕ)
     (A : CochainComplex (normalizedDVRModules l E Y n) ℤ)

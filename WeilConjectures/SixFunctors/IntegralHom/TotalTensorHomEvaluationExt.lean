@@ -9,8 +9,13 @@ public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReduc
 import WeilConjectures.SixFunctors.IntegralHom.Tensor.TensorHomEvaluationExt
 import WeilConjectures.Algebra.Homology.HomComplexComponents
 
-/-! Extensionality for a total tensor mapped into a Hom-complex term.
-Source: Stacks 03EK, 03EO and 0A8X.
+/-! # Extensionality for a total tensor mapped into a Hom-complex term
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 03EO]
+* [Stacks, Tag 0A8X]
 -/
 
 @[expose] public section
@@ -24,12 +29,7 @@ attribute [local irreducible] homComplexFunctor SheafOfModules.monoidalCategory
 variable (Y : AlgebraicGeometry.Scheme.{t})
   (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Hom projections and total tensor inclusions jointly detect maps by local evaluation.
-Source: Stacks 03EK, 03EO and 0A8X.
-Proof: use the coproduct universal property for the total tensor term. Then use
-the product projections of the Hom term. Tensor-to-Hom evaluation extensionality
-reduces each component to pure tensors and evaluation on a section of P^p.
-There are no support, boundedness or freeness hypotheses. -/
+/-- Hom projections and total tensor inclusions jointly detect maps by local evaluation. -/
 theorem totalTensorHomEvaluation_ext
     (A Q P N : CochainComplex (Modules.{t, u} Y R) ℤ) (j : ℤ)
     (f g : (((totalTensor Y R).obj A).obj Q).X j ⟶ (homComplex (R := R) P N).X j)

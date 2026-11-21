@@ -25,18 +25,6 @@ V --jY--> Y
 with `jX`, `jY` open immersions and `v̄` finite. This file constructs the comparison map
 `β : (jY)_! v_* G ⟶ v̄_* (jX)_! G` of étale sheaves and proves that it is an isomorphism.
 
-The map `β` is the transpose under `(jY)_! ⊣ jY^*` of the isomorphism
-`v_* G ≅ v_* jX^* (jX)_! G ≅ jY^* v̄_* (jX)_! G`, made of the unit of `(jX)_! ⊣ jX^*` and the
-inverse of the finite base change isomorphism `jY^* v̄_* ≅ v_* jX^*`
-(`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`).
-
-That `β` is an isomorphism is checked on geometric points `s` of `Y`. If `s` lies in `V`,
-the stalk of `β` at `s` is a stalk of `jY^* β`, which is invertible since it is
-`jY^* (jY)_!` of the isomorphism above followed by `jY^*` of the counit of
-`(jY)_! ⊣ jY^*`. If `s` does not lie in `V`, both `s^* (jY)_! v_* G` and
-`s^* v̄_* (jX)_! G ≅ v̄'_* s'^* (jX)_! G` vanish (finite base change along `s`), since the
-ranges of `s` and `jY`, resp. of `s'` and `jX`, are disjoint.
-
 The extension by zero itself is `AlgebraicGeometry.Etale.openImmersionLowerShriek`,
 `(j)_!open[A]`, of `WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs`, left
 adjoint to `j^*` (`AlgebraicGeometry.Etale.openImmersionLowerShriekUpperStarAdjunction`);
@@ -56,6 +44,13 @@ we add its description on geometric stalks.
 - `AlgebraicGeometry.Etale.isIso_finiteOpenComparison_app`: `β` is an isomorphism at every
   sheaf `G`.
 - `AlgebraicGeometry.Etale.isIso_finiteOpenComparison`: `β` is a natural isomorphism.
+
+## Implementation details
+
+The map `β` is the transpose under `(jY)_! ⊣ jY^*` of the isomorphism
+`v_* G ≅ v_* jX^* (jX)_! G ≅ jY^* v̄_* (jX)_! G`, made of the unit of `(jX)_! ⊣ jX^*` and the
+inverse of the finite base change isomorphism `jY^* v̄_* ≅ v_* jX^*`
+(`AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite`).
 -/
 
 @[expose] public section
@@ -93,8 +88,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 omit [HasSmallSiteSheafify A] in
 /-- **The stalk of the extension by zero inside `U`.** For a geometric point `t` of `U`, the
-stalk of `j_! F` at `t ≫ j` is the stalk of `F` at `t`, naturally in `F`: it is the stalk at
-`t` of `j^* j_! F ≅ F`. -/
+stalk of `j_! F` at `t ≫ j` is the stalk of `F` at `t`, naturally in `F`. -/
 def Etale.openImmersionLowerShriekCompUliftSheafFiberIso {Ω : Type u} [Field Ω]
     [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ U) :
     (j)_!open[A] ⋙ ((pointSmallEtale (t ≫ j)).ulift.{u + 1}).sheafFiber ≅
@@ -107,8 +101,7 @@ def Etale.openImmersionLowerShriekCompUliftSheafFiberIso {Ω : Type u} [Field Ω
 
 omit [HasSmallSiteSheafify A] in
 /-- **The stalk of the extension by zero outside `U` vanishes**: for a geometric point `s`
-of `X` not lying in `U`, the stalk of `j_! F` at `s` is zero. It is the stalk of
-`s^* j_! F`, which vanishes since the ranges of `s` and `j` are disjoint. -/
+of `X` not lying in `U`, the stalk of `j_! F` at `s` is zero. -/
 lemma Etale.isZero_uliftSheafFiber_openImmersionLowerShriek_obj {Ω : Type u} [Field Ω]
     [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
     (hs : s.base (IsLocalRing.closedPoint Ω) ∉ Set.range j.base)
@@ -177,7 +170,7 @@ lemma Etale.isIso_upperStar_map_finiteOpenComparison_app (sq : IsPullback jX v v
   infer_instance
 
 /-- The pullback `s^* β` of the finite-open comparison map to a geometric point `s` of `Y`
-outside `V` is an isomorphism, both sides being zero. -/
+outside `V` is an isomorphism. -/
 lemma Etale.isIso_upperStar_point_map_finiteOpenComparison_app
     (sq : IsPullback jX v vbar jY) (G : Sheaf U.smallEtaleTopology A) {Ω : Type u} [Field Ω]
     (s : Spec (.of Ω) ⟶ Y) (hs : s.base (IsLocalRing.closedPoint Ω) ∉ Set.range jY.base) :
@@ -200,14 +193,7 @@ lemma Etale.isIso_upperStar_point_map_finiteOpenComparison_app
       (asIso ((Etale.baseChangeMap A hsq.toCommSq).app ((jX)_!open[A].obj G)))
   exact ⟨⟨h₂.to_ _, h₁.eq_of_src _ _, h₂.eq_of_src _ _⟩⟩
 
-/-- **The finite-open comparison map is an isomorphism** at every sheaf `G` on `U`. It is
-checked on geometric stalks: at a point of `V` the stalk is a stalk of the isomorphism
-`jY^* β` (`Etale.isIso_upperStar_map_finiteOpenComparison_app`), and at a point `s` outside
-`V` it is a stalk of `s^* β`, a morphism between zero objects
-(`Etale.isIso_upperStar_point_map_finiteOpenComparison_app`).
-
-The blueprint also describes the inverse explicitly on sections and on geometric stalks;
-here only the existence of the inverse is recorded. -/
+/-- **The finite-open comparison map is an isomorphism** at every sheaf `G` on `U`. -/
 lemma Etale.isIso_finiteOpenComparison_app (sq : IsPullback jX v vbar jY)
     (G : Sheaf U.smallEtaleTopology A) :
     IsIso ((Etale.finiteOpenComparison A sq).app G) := by
@@ -226,11 +212,7 @@ lemma Etale.isIso_finiteOpenComparison_app (sq : IsPullback jX v vbar jY)
 
 /-- **Finite pushforward commutes with extension by zero**: for a cartesian square with
 `jX`, `jY` open immersions and `v̄` finite, the comparison map
-`β : (jY)_! v_* ⟶ v̄_* (jX)_!` of `Etale.finiteOpenComparison` is a natural isomorphism;
-naturality in `G` is built into the construction of `β` as a natural transformation.
-
-The compatibilities of `β` with identity and composite finite maps and with base change,
-also part of the blueprint statement, are not formalised here. -/
+`β : (jY)_! v_* ⟶ v̄_* (jX)_!` of `Etale.finiteOpenComparison` is a natural isomorphism. -/
 lemma Etale.isIso_finiteOpenComparison (sq : IsPullback jX v vbar jY) :
     IsIso (Etale.finiteOpenComparison A sq) :=
   have := Etale.isIso_finiteOpenComparison_app A sq

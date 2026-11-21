@@ -11,7 +11,16 @@ import WeilConjectures.AlgebraicGeometry.Constructible.ConstructibleModuleObject
 
 /-! # LocallyFiniteAdicConstructibleSheafSmall
 
-Source: Bhatt--Scholze, Section 6.8; native realization proof.
+## Implementation details
+
+Native constructible sheaves are compared with constructible modules over `abRing` through
+the normalized native encoding `NativeEncoding.encoding`; `encoding_constructible_iff` is
+the constructibility comparison on Noetherian X.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Section 6.8, Definitions 6.8.3, 6.8.6
+  and 6.8.8
 -/
 
 @[expose] public noncomputable section
@@ -36,29 +45,6 @@ open scoped Obj
 namespace WeilConjectures.LocallyFiniteAdicRealization
 
 /-- A small family of native constructible sheaves, before passage to complexes.
-
-Source: native realization proof step 8, constructible-module presentation counting;
-Bhatt--Scholze, Definitions 6.8.3, 6.8.6 and 6.8.8.
-
-Proof in words: forget the constant coefficient action from a native internal module
-to obtain a module in abelian sheaves over abRing. Conversely, restrict its action
-along the constants into the coefficient ring to recover that constant scalar action;
-the unit and balancing identities show these constructions are inverse equivalences,
-on morphisms as well as objects. They preserve restrictions and take the native unit
-to the regular module. Thus a native finite-free local model gives a finite-free, hence
-finitely presented, abelian-sheaf-module model. For a constructible sheaf take a finite
-subcover of its open stratified-lisse neighborhoods. Replace each open by its difference
-with the preceding opens and intersect its strata with this piece. This produces one
-finite locally closed stratification of X and a finite-presentation cover on each
-stratum. The construction uses only quasi-compactness and Noetherianity, not dimension
-or invertibility. In Lean this equivalence is the normalized native encoding
-NativeEncoding.encoding, and encoding_constructible_iff is the constructibility comparison
-on Noetherian X.
-Apply constructibleModuleObjects_essentiallySmall to the resulting
-constructible modules over abRing. A fully faithful functor into that essentially small
-full subcategory makes the native full subcategory essentially small. Equivalently,
-its property has a small family of representatives. The equivalence and finite-cover
-argument include empty schemes, empty strata and rank-zero modules.
 -/
 theorem nativeConstructibleSheaf_essentiallySmall
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X] :

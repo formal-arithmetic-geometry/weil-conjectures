@@ -15,7 +15,9 @@ import WeilConjectures.AlgebraicGeometry.FiniteCompactScalar.FiniteCompactScalar
 import WeilConjectures.AlgebraicGeometry.ProEtale.Intrinsic.ProEtaleIntrinsicExtensionByZeroExact
 /-! # The canonical finite coefficient left comparison
 
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
+## References
+
+* Zheng, Construction 2.26, Proposition 2.29, Lemma 5.22 and Propositions 5.24 and 5.26
 -/
 
 @[expose] public noncomputable section
@@ -44,17 +46,7 @@ private theorem change_eq_of_map {R S : PurCompactSupport.Coefficients.{u}}
 
 -- The chosen derived presentations require an extended conversion budget.
 /-- The proper/open comparison for a finite coefficient map is invertible on its finite-Tor domain.
-Source: Zheng, Lemma 5.22; finite scalar mates, Construction 2.26 and Proposition 2.29.
-
-Proof: finite scalar preservation supplies a bounded etale origin for K and for
-its finite scalar extension. Reflect the cohomological interval through the finite-ring
-site comparison. Exact open extension gives bounded-below models on the proper
-compactification, and its scalar comparison shows that the tensor of the first
-model is also bounded below. Apply the proper etale-origin scalar theorem. The
-inverse mate interchange law identifies its geometric mate with the specified
-properComparison. Transport along the canonical open presentation and site
-isomorphisms, then combine with the invertible openComparison using the proper/open
-factorization. No flatness of the quotient map or absolute separatedness is used. -/
+-/
 theorem finiteScalarLeftComparison_isIso
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

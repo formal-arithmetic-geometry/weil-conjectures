@@ -11,7 +11,12 @@ import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 
 /-! # Goodness after completed open extension and pullback
 
-Source: Stacks Tags 03DI, 03DJ, 0E8I and 0G7E.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -23,14 +28,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Completed coefficient inverse image preserves goodness after open extension.
-Source: Stacks Tag 0G7E, applied to the completed-ring geometric inverse image.
-
-Proof: apply the ringed-topos K-flat pullback theorem to the completed coefficient
-inverse image and the already extended complex. Its two conclusions are precisely
-independent-coefficient K-flatness and flatness of every term. The resulting
-inverse-image functor is definitionally the canonical `integralOrdinaryPull`.
--/
+/-- Completed coefficient inverse image preserves goodness after open extension. -/
 theorem openExtension_goodComplex_pullback {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j]
     (P : (integralOperationsGoodComplex l E X).FullSubcategory) :

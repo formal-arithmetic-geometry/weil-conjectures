@@ -11,12 +11,16 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 
 /-! # Total-limit projections and quotient transitions
 
-Source: Stacks 0940, 0941 and 07A6.
-
 The total-limit projections of a coefficient system are compatible with its quotient
 transitions. Consequently every left adjoint of the total limit whose finite evaluations
 are the derived scalar extensions, compatibly with the projections, takes values in
 normalized coefficient systems.
+
+## References
+
+* [Stacks, Tag 0940]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -429,14 +433,7 @@ private theorem bijective_comp_iso {C : Type*} [Category C] {X Y Z Z' : C}
 
 /-- A left adjoint of the total limit whose finite evaluations are derived scalar
 extension, compatibly with the adjunction units and the total-limit projections, takes
-values in normalized coefficient systems.
-
-Source: Stacks 0941 and 07A6.
-
-Proof: under the finite scalar adjunctions and the evaluation isomorphisms, the map
-`f ↦ τ ≫ Res f` becomes the composition with the restriction comparison
-`Res_m ∘ Res_{m,n} ≅ Res_n`. This uses the unit-projection identity at both levels and
-the compatibility of total-limit projections with the quotient transitions. -/
+values in normalized coefficient systems. -/
 theorem isNormalizedCoefficientSequence_of_unitProjection
     (L : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adj : L ⊣ coefficientSequenceLimit l E W)

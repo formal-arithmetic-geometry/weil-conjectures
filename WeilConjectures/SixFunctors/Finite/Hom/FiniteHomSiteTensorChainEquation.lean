@@ -10,7 +10,14 @@ public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomTensorAssociatorMo
 import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteBetaUnit
 import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteChainGenerators
 
-/-! # The ordinary scalar/site tensor square before localization -/
+/-! # The ordinary scalar/site tensor square before localization
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -35,8 +42,7 @@ attribute [local irreducible] finiteHomEtaleData finiteHomEtaleClosedGeneral
   coefficientFiniteQuotientDerived coefficientFiniteQuotientDerivedExistence
   ProEtale.etaleSheafExtendScalars ProEtale.finiteCoefficientIntrinsicComparison
 
-/-- The route extending the inverse-image tensor map before applying the mate.
-Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site comparison. -/
+/-- The route extending the inverse-image tensor map before applying the mate. -/
 @[irreducible] def finiteHomSiteTensorLeftChain
     {n m : ℕ} (h : m ≤ n)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
@@ -74,8 +80,7 @@ Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final 
               (.up ℤ)).app Q))
 
 -- Keep the concrete termwise and total tensor models in one definition.
-/-- The route applying the mate before the etale scalar and site tensor maps.
-Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site comparison. -/
+/-- The route applying the mate before the etale scalar and site tensor maps. -/
 @[irreducible] def finiteHomSiteTensorRightChain
     {n m : ℕ} (h : m ≤ n)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology
@@ -104,24 +109,7 @@ Source: Stacks 07A4; blueprint lemma-change-coefficients-internal-hom--1, final 
     (finiteHomNuChainTensor l E X m (Fc.obj P) (Fc.obj Q)).hom
 
 -- The adjunction and pure-section reduction crosses the concrete tensor models.
-/-- Balanced scalar association commutes with the ordinary site tensor comparison.
-Source: Stacks 03EK, 06YN, 07A4; blueprint lemma-change-coefficients-internal-hom--1, final site
-paragraph.
-
-Proof: in each total degree transpose the two maps by the ordinary scalar
-adjunction. Extensionality for the inverse image of a tensor reduces their
-transposes to inverse images of pure tensors in individual total summands.
-Naturality moves the scalar unit and the inverse-image section past the summand
-inclusions. The chain comparison normalization sends the latter to intrinsic
-pure total generators. The assumed normalization of e sends the scalar unit
-of each such generator to the tensor of the scalar units of its factors.
-The mate unit formula sends each of those units to the inverse image of the
-etale scalar unit. On the other route the ordinary etale scalar tensorator
-sends the scalar unit of a pure total generator to the corresponding generator
-of the two scalar units, by the monoidal adjunction unit equation. The site
-chain tensorator then gives exactly the same intrinsic generator. Injectivity
-of the scalar adjunction, tensor extensionality and total-summand extensionality
-conclude. Neither K-flatness nor invertibility of the mate is used. -/
+/-- Balanced scalar association commutes with the ordinary site tensor comparison. -/
 theorem finiteHomSiteTensorChainEquation
     {n m : ℕ} (h : m ≤ n)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology

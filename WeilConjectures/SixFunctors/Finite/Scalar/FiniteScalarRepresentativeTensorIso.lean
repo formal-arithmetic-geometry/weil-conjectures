@@ -10,7 +10,10 @@ public import WeilConjectures.SixFunctors.Finite.Scalar.Tensor.FiniteScalarTenso
 
 /-! # Fixed-scalar representatives on the shared signed total functor
 
-Source: Stacks Tags 06YN and 07A4.
+## References
+
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +49,7 @@ namespace WeilConjectures
 
 attribute [local implicit_reducible] finiteScalarRepresentativeTotalTensor
 
-/-- The existing representative isomorphism, assembled by its specified components.
-Source: Stacks Tag 07A4, inversion of the K-flat localization tensorators. -/
+/-- The representative tensor isomorphism, assembled from its specified components. -/
 @[irreducible] def finiteScalarRepresentativeTensorIso
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
     [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
@@ -63,8 +65,7 @@ Source: Stacks Tag 07A4, inversion of the K-flat localization tensorators. -/
     (fun {_Z _W} f ↦
       (finiteScalarFixedTensorRepresentativeForCoefficients B T P hP).hom.naturality f)
 
-/-- The shared representative retains the actual localization tensorator components.
-Source: Stacks Tag 07A4. -/
+/-- The shared representative retains the actual localization tensorator components. -/
 theorem finiteScalarRepresentativeTensorIso_hom_app
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
     [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]

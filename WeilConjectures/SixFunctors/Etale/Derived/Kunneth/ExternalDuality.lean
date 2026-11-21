@@ -20,14 +20,8 @@ cohomological correspondences is identified with the exceptional inverse image o
 `𝓗_c(K) = RHom(c₂^* K, Rc₁^! K) ≅ Rc^! (K ⊠ 𝔻_X K)`
 
 (`AlgebraicGeometry.Etale.nonempty_iso_derivedHom_rightDerivedUpperShriek_externalProduct`).
-It combines the composition isomorphisms for `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`, the exceptional
-inverse image of an internal hom
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_derivedHom`) and the
-Künneth–Verdier isomorphism `K ⊠ 𝔻_X K ≅ RHom(p₂^* K, Rp₁^! K)`
-(`AlgebraicGeometry.Etale.nonempty_iso_kunnethVerdier`).
-
-As for the other results of this chapter at finite coefficients, the statement is the existence
-of an isomorphism.
+As for the other results at finite coefficients, the statement is the existence of an
+isomorphism.
 -/
 
 @[expose] public section
@@ -49,10 +43,8 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- Blueprint `lemma-external-duality-trace-morphism`, second isomorphism, with finite
-coefficients: for a separated `k`-scheme of finite type `X`, `K ∈ Dctf(X, Λ)` and a
-correspondence `c : C ⟶ X ×_k X` with legs `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`,
-
+/-- For a separated `k`-scheme of finite type `X`, `K ∈ Dctf(X, Λ)` and a correspondence
+`c : C ⟶ X ×_k X` with legs `c₁ = c ≫ p₁` and `c₂ = c ≫ p₂`,
 `RHom(c₂^* K, Rc₁^! K) ≅ Rc^! (K ⊠ 𝔻_X K)`. -/
 theorem nonempty_iso_derivedHom_rightDerivedUpperShriek_externalProduct {X C : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]

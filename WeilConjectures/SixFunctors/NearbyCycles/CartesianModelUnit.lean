@@ -42,10 +42,10 @@ and their consequence for a change of geometric generic fibre `g = r₁ ≫ q �
 universal homeomorphisms
 (`NearbyCyclesModel.Hom.isSplitMono_toCart_pullbackExchange_app_of_factor₃`).
 
-These statements were in `TraceFormula.Specialization.NearbySliceInvariants`,
-`NearbySliceInvariantsUnit` and `NearbySliceFactorisationUnit`; they are collected here, below
-the slice step of Deligne's finiteness theorem, so that the invariance of nearby cycles under
-change of trait can use them.
+## Implementation details
+
+These statements are collected here, below the slice step of Deligne's finiteness theorem, so
+that the invariance of nearby cycles under change of trait can use them.
 -/
 
 @[expose] public section

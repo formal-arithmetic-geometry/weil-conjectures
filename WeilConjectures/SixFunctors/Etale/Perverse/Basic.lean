@@ -31,10 +31,9 @@ cut out by the two conditions after the shift by `n`.
   `AlgebraicGeometry.Etale.DerivedCategory.IsPerverseHeartCandidate`: the classes
   `ᵖD^{≤n}`, `ᵖD^{≥n}` and the perverse heart candidate.
 
-## Implementation notes
+## Implementation details
 
-The blueprint works with `ℚ̄_ℓ`-coefficients, which are not available on the étale site; the
-support condition is stated here for an arbitrary coefficient category `A`, as in the rest of
+The support condition is stated for an arbitrary coefficient category `A`, as in the rest of
 `WeilConjectures.SixFunctors.Etale`, sheaves of modules over the finite stages `ℤ/ℓⁿ` being
 the intended ones; the cosupport condition, which needs the exceptional inverse image, is stated
 for a finite coefficient ring `Λ`. The support of a sheaf is taken closed: the complement
@@ -82,8 +81,7 @@ lemma isClosed_sheafSupport (F : Sheaf X.smallEtaleTopology A) : IsClosed (sheaf
   obtain ⟨U, hxU, hU⟩ := hx
   exact ⟨U, fun y hy hy' ↦ hy' U hy hU, U.isOpen, hxU⟩
 
-/-- The support of a pullback `f^* F` lies in the preimage of the support of `F`: if `F`
-vanishes on an open `V`, then `f^* F` vanishes on `f⁻¹(V)`. -/
+/-- The support of a pullback `f^* F` lies in the preimage of the support of `F`. -/
 lemma sheafSupport_upperStar_subset (f : X ⟶ S) (F : Sheaf S.smallEtaleTopology A) :
     sheafSupport (((f)^*[A]).obj F) ⊆ f ⁻¹' sheafSupport F := by
   intro x hx V hxV hV

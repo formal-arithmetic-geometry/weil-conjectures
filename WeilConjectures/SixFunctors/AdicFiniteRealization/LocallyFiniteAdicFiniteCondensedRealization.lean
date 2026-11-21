@@ -18,7 +18,16 @@ import Mathlib.Data.ZMod.Basic
 
 /-! # Finite condensed realizations of the raw rational stages
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2) and Lemma 6.8.2.
+## Implementation details
+
+`finiteSectionScalarComparison` is determined uniquely by the unit equation in
+`scalarAdjunctionCoefficientEquivalence`, so it involves no unspecified scalar automorphism.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2, Definition 6.8.8 and
+  Proposition 6.8.14(2)
+* [Stacks, Tag 03EK]
 -/
 
 @[expose] public noncomputable section
@@ -138,9 +147,8 @@ private theorem finiteCore_exists (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.P
   · intro E K
     exact realization_image l (pbcFiniteField.{u} l (PadicAlgCl l) E) T (realization E) K
 
-/-- Only the finite clauses of the continuous realization data are required.
-No closure essential-image, tower or identity coherence is included.
-Source: BS 6.8.2 and 6.8.14(2). -/
+/-- The finite clauses of the continuous realization data, without closure essential-image,
+tower or identity coherence. -/
 structure FiniteCondensedData (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [IsNoetherian T]
     [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [Fact (∀ x : T, IsUnit (l : T.presheaf.stalk x))] extends Core l T where
@@ -153,9 +161,8 @@ structure FiniteCondensedData (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [IsNoeth
         ((pbcDerivedExtend (closure.finiteIso E).hom).obj
           ((sectionDerived T (ProEtale.padicSubfieldRingObj T l E)).obj K))
 
-/-- The finite realization data require no structure map to an auxiliary finite field.
-The auxiliary datum is used only as a proof parameter in the integral identity theorem.
-Source: BS 6.8.14(2). -/
+/-- Finite realization data exist; they require no structure map to an auxiliary finite
+field. -/
 theorem finiteData_exists (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [IsNoetherian T]
     [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
     [Fact (∀ x : T, IsUnit (l : T.presheaf.stalk x))] : Nonempty (FiniteCondensedData l T) := by
@@ -181,17 +188,15 @@ variable (l : ℕ) [Fact l.Prime] (T : Scheme.{u}) [IsNoetherian T]
   [Fact (∃ n : ℕ, topologicalKrullDim T ≤ n)]
   [Fact (∀ x : T, IsUnit (l : T.presheaf.stalk x))]
 
-/-- Extension along the specified coefficient isomorphism is an equivalence.
-Source: scalar extension/restriction adjunction, BS 6.8.2. -/
+/-- Extension along the specified coefficient isomorphism is an equivalence. -/
 theorem derivedExtendIso_isEquivalence
     {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}} (e : R ≅ S) :
     (pbcDerivedExtend e.hom).IsEquivalence := by
   letI := derivedRestrictIso_isEquivalence e
   exact (pbcDerivedScalarAdjunction e.hom).isEquivalence_left_of_isEquivalence_right
 
-/-- The exact equivalence from internal finite coefficient modules to continuous modules.
-It is section reconstruction followed by extension along the specified coefficient iso.
-Source: BS 6.8.2 and the internal/section equivalence. -/
+/-- The exact equivalence from internal finite coefficient modules to continuous modules,
+given by section reconstruction followed by extension along the specified coefficient iso. -/
 @[irreducible] def finiteCondensedEncoding (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
@@ -206,8 +211,7 @@ Source: BS 6.8.2 and the internal/section equivalence. -/
   e.mapDerivedCategory.trans
     (pbcDerivedExtend (A.closure.finiteIso E).hom).asEquivalence
 
-/-- The forward encoding has the literal section-reconstruction tensor formula.
-Source: the definition of the section encoding, BS 6.8.2. -/
+/-- The forward encoding has the literal section-reconstruction tensor formula. -/
 theorem finiteCondensedEncoding_functor (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     (finiteCondensedEncoding l T A E).functor =
@@ -217,8 +221,7 @@ theorem finiteCondensedEncoding_functor (A : FiniteCondensedData l T)
   rfl
 
 /-- The raw comparison is the specified rational equivalence, with its category
-presentation transported explicitly.
-Source: integral identity, BS 6.8.14(2). -/
+presentation transported explicitly. -/
 theorem finiteRawFunctor_isEquivalence (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     (A.raw.family.Φ E).IsEquivalence := by
@@ -232,8 +235,7 @@ theorem finiteRawFunctor_isEquivalence (A : FiniteCondensedData l T)
     (finiteCategoryHEq l (PadicAlgCl l) T E)
   exact hf E
 
-/-- The finite continuous realization is full and faithful.
-Source: the integral identity and constructible rational Hom comparison, BS 6.8.14(2). -/
+/-- The finite continuous realization is full and faithful. -/
 def finiteFunctor_fullyFaithful (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     (A.raw.family.Φ E ⋙ (A.realization E).J).FullyFaithful := by
@@ -242,8 +244,7 @@ def finiteFunctor_fullyFaithful (A : FiniteCondensedData l T)
   haveI : (A.realization E).J.Faithful := ⟨fun h ↦ (A.fully_faithful E _ _).1 h⟩
   exact Functor.FullyFaithful.ofFullyFaithful _
 
-/-- Finite realization lands in the actual bounded constructible condensed subcategory.
-Source: BS 6.8.8, 6.8.14(2); transport through the specified section encoding. -/
+/-- Finite realization lands in the actual bounded constructible condensed subcategory. -/
 theorem finiteCondensed_constructible (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l))
     (K : GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) T E) :
@@ -258,8 +259,7 @@ theorem finiteCondensed_constructible (A : FiniteCondensedData l T)
     ((finiteCondensedEncoding l T A E).counitIso.app
       ((finiteFunctor l T A.toCore E).obj K)).symm
 
-/-- The finite functor, with its constructibility witness and no new choice of objects.
-Source: BS 6.8.14(2). -/
+/-- The finite functor, with its constructibility witness and no new choice of objects. -/
 def finiteCondensedFunctor (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) T E ⥤
@@ -284,8 +284,7 @@ instance finiteCondensedFunctor_faithful (A : FiniteCondensedData l T)
   unfold finiteCondensedFunctor
   infer_instance
 
-/-- The specified finite functor recovers the original continuous realization.
-Source: BS 6.8.2, the counit of the exact section encoding. -/
+/-- The specified finite functor recovers the original continuous realization. -/
 def finiteCondensedComparison (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     finiteCondensedFunctor l T A E ⋙
@@ -294,10 +293,7 @@ def finiteCondensedComparison (A : FiniteCondensedData l T)
   Functor.isoWhiskerLeft (finiteFunctor l T A.toCore E)
     (finiteCondensedEncoding l T A E).counitIso
 
-/-- Section reconstruction intertwines the specified derived finite scalar adjunctions.
-The unit equation in `scalarAdjunctionCoefficientEquivalence` determines this iso uniquely;
-thus this choice has no unspecified scalar automorphism.
-Source: Stacks 03EK and BS 6.8.2. -/
+/-- Section reconstruction intertwines the specified derived finite scalar adjunctions. -/
 @[irreducible] def finiteSectionScalarComparison
     {E L : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ L) :
     ProEtale.derivedExtendScalarsSubfield T l h ⋙
@@ -331,9 +327,8 @@ Source: Stacks 03EK and BS 6.8.2. -/
     (pbcDerivedScalarAdjunction (ProEtale.CondensedRing.sectionRingMap T φ))
     eE.functor.mapDerivedCategory eL.functor.mapDerivedCategory k).choose
 
-/-- A commuting square of ring sheaves gives the normalized scalar-extension square.
-The comparison is the unique left-adjoint comparison for the literal restriction square.
-Source: change of rings and adjunction uniqueness, Stacks 03EK. -/
+/-- A commuting square of ring sheaves gives the normalized scalar-extension square, the
+unique left-adjoint comparison for the literal restriction square. -/
 @[irreducible] def coefficientExtensionSquare
     {R₀ R₁ R₂ S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}
     (a : R₀ ⟶ R₁) (b : R₁ ⟶ S) (c : R₀ ⟶ R₂) (d : R₂ ⟶ S)
@@ -345,8 +340,7 @@ Source: change of rings and adjunction uniqueness, Stacks 03EK. -/
     ((pbcDerivedScalarAdjunction c).comp (pbcDerivedScalarAdjunction d))
     (derivedRestrictionSquare a b d c h)
 
-/-- The specified coefficient encodings commute with scalar extension.
-Source: BS 6.8.2, tensor transitivity and the normalized coefficient square. -/
+/-- The specified coefficient encodings commute with scalar extension. -/
 @[irreducible] def finiteCondensedScalarEncoding (A : FiniteCondensedData l T)
     {E L : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ L) :
     ProEtale.derivedExtendScalarsSubfield T l h ⋙
@@ -374,10 +368,8 @@ Source: BS 6.8.2, tensor transitivity and the normalized coefficient square. -/
     Functor.isoWhiskerRight (eqToIso (finiteCondensedEncoding_functor l T A E)).symm
       (pbcDerivedExtend (A.scalar.coefficient h).coefficient)
 
-/-- Scalar compatibility for the finite condensed realizations, obtained by cancelling
-its fully faithful ambient section encoding. The comparisons retain the actual tensor
-associators and normalized field inclusions.
-Source: BS 6.8.14(2), finite tensor comparison. -/
+/-- Scalar compatibility for the finite condensed realizations, retaining the actual tensor
+associators and normalized field inclusions. -/
 @[irreducible] def finiteCondensedScalarComparison (A : FiniteCondensedData l T)
     {E L : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ L) :
     finiteCondensedFunctor l T A E ⋙ ProEtale.constructibleExtendScalars T l h ≅
@@ -397,8 +389,7 @@ Source: BS 6.8.14(2), finite tensor comparison. -/
       ((GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) T).T h)
       (finiteCondensedComparison l T A L).symm
 
-/-- The ambient finite realization after scalar extension to the condensed closure.
-Source: BS 6.8.14(2). -/
+/-- The ambient finite realization after scalar extension to the condensed closure. -/
 def finiteCondensedClosureFunctor (A : FiniteCondensedData l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :
     GeneralAlgebraicallyClosedCoefficients.Stage l (PadicAlgCl l) T E ⥤
@@ -407,8 +398,8 @@ def finiteCondensedClosureFunctor (A : FiniteCondensedData l T)
   finiteCondensedFunctor l T A E ⋙ ProEtale.constructibleToPadicAlgCl T l E ⋙
     (ProEtale.boundedConstructible (ProEtale.padicAlgClRingObj T l)).ι
 
-/-- The canonical finite-field transition after extension to the condensed closure.
-Source: BS 6.8.14(2), the finite tensor associator followed by the raw scalar comparison. -/
+/-- The canonical finite-field transition after extension to the condensed closure: the
+finite tensor associator followed by the raw scalar comparison. -/
 def finiteCondensedClosureTransition (A : FiniteCondensedData l T)
     {E L : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ L) :
     finiteCondensedFunctor l T A E ⋙ ProEtale.constructibleToPadicAlgCl T l E ⋙

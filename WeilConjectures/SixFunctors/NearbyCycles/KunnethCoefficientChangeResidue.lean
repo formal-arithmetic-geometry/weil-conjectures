@@ -22,6 +22,8 @@ for bounded below `𝒪_E`-complexes `A₀`, `B₀` such that `Lf₁^* A₀ ⊗�
 (`NearbyCyclesModel.nonempty_arrowIso_map_kunnethMap_residueField`), also after restriction along
 any `h : W ⟶ Z'` (`NearbyCyclesModel.nonempty_arrowIso_map_map_kunnethMap_residueField`).
 
+## Implementation details
+
 The (Push) comparisons are needed at `Lε_M^* A₀`, `Lε_N^* B₀` and `Lε_P^* (Lf₁^* A₀ ⊗ᴸ Lf₂^* B₀)`.
 The first two are bounded below with `A₀` and `B₀`, but the derived tensor product of bounded below
 `𝒪_E`-complexes is not known to be bounded below (this would follow from a finite Tor dimension

@@ -27,22 +27,9 @@ ring `Λ` of exponent invertible in `k`. If `dim X ≤ N`, then the stalk of `R^
 form of Stacks, Lemma 59.95.8 (Tag `0F0X`): `R^q f_*` carries sheaves supported in dimension `≤ N`
 to sheaves supported in dimension `≤ N - q`.
 
-## Proof
+## References
 
-We may replace `Y` by an affine open neighbourhood `U` of `y`. Choose a morphism `p : U ⟶ 𝔸ʳ_k`
-over `k` sending `y` to the generic point `η` of `𝔸ʳ_k`
-(`AlgebraicGeometry.Scheme.exists_hom_mvPolynomial_apply_eq_bot`), and let `s` be the geometric
-point of `𝔸ʳ_k` under `ȳ`. The strict localization of `𝔸ʳ_k` at `s` is the spectrum of a
-separably closed field `K` (`AlgebraicGeometry.Scheme.exists_isSepClosed_strictLocalization_iso`),
-and `T = X_U ×_{𝔸ʳ} Spec K` is a `K`-scheme of finite type of dimension at most that of the
-generic fibre of `X_U ⟶ 𝔸ʳ`, hence at most `N - r`, affine over `Y`. So `R^q (T ⟶ Y)_*` vanishes
-for `q > N - r` (`AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_of_isAffineHom`).
-Writing `T` as the limit of the `X_U ×_{𝔸ʳ} V` over the affine étale neighbourhoods `V` of `s`
-(`AlgebraicGeometry.Etale.higherDirectImage_limit`), every element of the stalk of `R^q f_* G` at
-`ȳ` dies in the stalk of some `R^q (X_U ×_{𝔸ʳ} V ⟶ Y)_*`. But `X_U ×_{𝔸ʳ} V` is the base change
-of `X` along the étale map `U ×_{𝔸ʳ} V ⟶ Y` through which `ȳ` lifts, so the transition map is
-injective on the stalk at `ȳ`
-(`AlgebraicGeometry.Etale.injective_sheafFiber_map_higherDirectImageTransition`).
+* [Stacks, Tag 0F0X]
 -/
 
 @[expose] public section
@@ -227,11 +214,7 @@ theorem Etale.isZero_sheafFiber_higherDirectImage_of_isAffineOpen
 finite type, where `Y` is separated and locally of finite type over a field `k`, let `Λ` be a
 finite ring of exponent invertible in `k` and `G` an étale sheaf of `Λ`-modules on `X`. If
 `dim X ≤ N` and `y ∈ Y` has `dim {y}⁻ = r`, then the stalk of `R^q f_* G` at `y` vanishes for
-`q + r > N`.
-
-This is the stalk form of Stacks, Lemma 59.95.8 (Tag `0F0X`): `R^q f_*` carries sheaves supported
-in dimension `≤ N` to sheaves supported in dimension `≤ N - q`. It is the input to the cosupport
-side of Artin–Gabber. -/
+`q + r > N`. -/
 @[stacks 0F0X]
 theorem Etale.isZero_sheafFiber_higherDirectImage_of_isAffineHom
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsAffineHom f] [LocallyOfFiniteType f]

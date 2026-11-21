@@ -12,8 +12,13 @@ import all WeilConjectures.Algebra.Homology.Coefficient.CoefficientSequenceGloba
 
 /-! # Normalized sections and inverse limit for constant-coefficient towers
 
-Source: Stacks 0941 and 0D6E. The ordinary sections functor may be any additive
-limit-preserving functor to abelian groups.
+The ordinary sections functor may be any additive limit-preserving functor to abelian groups.
+
+## References
+
+* [Stacks, Tag 079P]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +33,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A]
   [HasDerivedCategory.{d} A]
   [Abelian.HasKInjectiveResolutions A]
 
-/-- The existing total right-derived functor with its actual cochain unit.
-Source: Stacks 079P; the universal comparison is invertible on K-injectives. -/
+/-- The existing total right-derived functor with its actual cochain unit. -/
 @[reducible] def standardPair {B : Type*} [Category* B] [Abelian B] [HasDerivedCategory B]
     (F : A ⥤ B) [F.Additive] : SequenceSectionsDerivedPair F where
   functor := F.rightDerivedFunctor
@@ -72,11 +76,7 @@ variable [HasDerivedCategory.{dt} (ℕᵒᵖ ⥤ A)]
   [(lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) ⥤ AddCommGrpCat.{w}).Additive]
   (G : A ⥤ AddCommGrpCat.{w}) [G.Additive] [PreservesLimitsOfShape ℕᵒᵖ G]
 
-/-- The constant-tower sections/limit comparison with its actual universal units.
-Source: Stacks 0941 and 0D6E. Limit preserves K-injectives by the exact constant-tower
-left adjoint. In the other order the sections of a K-injective tower are limit-acyclic
-by the existing split-transition Roos calculation. The two composite universal derived
-pairs are thus isomorphic, with the displayed unit equation, by right-derived uniqueness. -/
+/-- The constant-tower sections/limit comparison with its actual universal units. -/
 theorem comparison_exists :
     ∃ κ : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅
       ((Functor.whiskeringRight ℕᵒᵖ A AddCommGrpCat.{w}).obj G).rightDerivedFunctor ⋙
@@ -124,11 +124,7 @@ omit [Abelian.HasKInjectiveResolutions A]
   [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ AddCommGrpCat.{w})]
   [IsGrothendieckAbelian.{sep} A]
   [(lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) ⥤ AddCommGrpCat.{w}).Additive] in
-/-- A projection characterized on K-injectives satisfies its unit equation on every complex.
-Source: Stacks 079P and 0941. Derive the ordinary projection by the universal property.
-Its unit equation holds on all complexes. On K-injectives, cancellation of the invertible
-unit identifies it with the prescribed projection. Naturality extends equality to all
-objects, since every derived object has a K-injective representative. -/
+/-- A projection characterized on K-injectives satisfies its unit equation on every complex. -/
 theorem projection_unit (n : ℕ)
     (p : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⟶
       ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory)
@@ -163,10 +159,7 @@ omit [Abelian.HasKInjectiveResolutions (ℕᵒᵖ ⥤ AddCommGrpCat.{w})]
   [(lim : (ℕᵒᵖ ⥤ A) ⥤ A).Additive]
   [(lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) ⥤ AddCommGrpCat.{w}).Additive]
   [PreservesLimitsOfShape ℕᵒᵖ G] in
-/-- Derived termwise sections and exact evaluation have normalized comparisons.
-Source: Stacks 0941. Apply the existing normalized tower comparison to the actual
-right-derived pairs. Evaluation preserves K-injectives by its exact left adjoint, and
-uniqueness of the derived comparison gives precisely the displayed normalization. -/
+/-- Derived termwise sections and exact evaluation have normalized comparisons. -/
 theorem evaluation_exists :
     ∃ β : ∀ n : ℕ,
       ((Functor.whiskeringRight ℕᵒᵖ A AddCommGrpCat.{w}).obj G).rightDerivedFunctor ⋙
@@ -192,11 +185,7 @@ theorem evaluation_exists :
   exact ⟨fun n ↦ β (op n), fun n I _ ↦ hβ (op n) I⟩
 
 omit [IsGrothendieckAbelian.{sep} A] in
-/-- Transport the normalized comparison along a morphism of derived towers.
-Source: Stacks 079P and 0941. Compose the unit equation with the image of the
-morphism on the right and use naturality of the comparison to move that image
-across the comparison. Keeping this calculation abstract avoids repeatedly
-unfolding the coefficient site's derived functors. -/
+/-- Transport the normalized comparison along a morphism of derived towers. -/
 theorem comparison_morphism
     (κ : (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅
       ((Functor.whiskeringRight ℕᵒᵖ A AddCommGrpCat.{w}).obj G).rightDerivedFunctor ⋙
@@ -239,12 +228,7 @@ theorem comparison_morphism
   exact hfirst.trans (by simpa only [Functor.comp_obj, Category.assoc] using h)
 
 omit [IsGrothendieckAbelian.{sep} A] in
-/-- Universal-unit normalization determines the actual finite projections.
-Source: Stacks 0941 and 0D6E. On a K-injective tower, precompose with the invertible
-composite unit and postcompose with the exact evaluation factorization. Naturality of
-the derived projection, the evaluation-unit equation, the ordinary limit projection
-equation and the two projection-unit equations reduce both sides to the same map.
-Naturality against K-injective representatives then proves the result on every object. -/
+/-- Universal-unit normalization determines the actual finite projections. -/
 theorem comparison_projection
     (pA : ∀ n : ℕ, (lim : (ℕᵒᵖ ⥤ A) ⥤ A).rightDerivedFunctor ⟶
       ((evaluation ℕᵒᵖ A).obj (op n)).mapDerivedCategory)

@@ -14,10 +14,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Products
 # Direct images of flat sheaves along finite morphisms are flat
 
 For a finite morphism `π : X ⟶ Y` and a flat sheaf `F` of `Λ`-modules on `X_ét`, the direct
-image `π_* F` is flat (`AlgebraicGeometry.Etale.flat_lowerStar_obj_of_isFinite`): its stalk at a
-geometric point of `Y` is the finite product of the stalks of `F` at the geometric points over it
-(`AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi`), and flatness is checked on stalks
-(`CategoryTheory.GrothendieckTopology.flat_of_forall_flat_sheafFiber_obj`).
+image `π_* F` is flat (`AlgebraicGeometry.Etale.flat_lowerStar_obj_of_isFinite`).
+
+## Implementation details
+
+The stalk of `π_* F` at a geometric point of `Y` is the finite product of the stalks of `F` at
+the geometric points over it (`AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi`), and flatness
+is checked on stalks (`CategoryTheory.GrothendieckTopology.flat_of_forall_flat_sheafFiber_obj`).
 -/
 
 @[expose] public section
@@ -50,8 +53,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Degreewise`.
 attribute [local instance 10000] Abelian.toPreadditive SymmetricCategory.toBraidedCategory
 
-/-- The direct image of a flat sheaf along a finite morphism is flat. This is used in the proof
-of blueprint `lemma-kunneth-field-coefficients--1` for the sheaves `π_* Λ`. -/
+/-- The direct image of a flat sheaf along a finite morphism is flat. -/
 theorem flat_lowerStar_obj_of_isFinite {X Y : Scheme.{u}} (π : X ⟶ Y) [IsFinite π]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : ObjectProperty.flat F) :
     ObjectProperty.flat ((π)_*[ModuleCat.{u + 1} Λ].obj F) := by

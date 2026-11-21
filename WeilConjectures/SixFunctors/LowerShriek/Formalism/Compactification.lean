@@ -169,8 +169,8 @@ variable [QuasiCompact f]
 obtained through the common refinement `Compactification.inf c d`. It does not depend on the
 common refinement (`shriekIso_eq`) and satisfies the cocycle condition (`shriekIso_trans`); the
 comparisons along refinements are the identity for identity refinements
-(`refinementComparison_eq_id`) and transitive (`refinementComparison_comp`). This is the abstract
-form of blueprint `proposition-construction-independence-rf-shriek`. -/
+(`refinementComparison_eq_id`) and transitive (`refinementComparison_comp`).
+-/
 noncomputable def shriekIso (c d : Compactification f) : F.shriek c ≅ F.shriek d :=
   asIso (F.refinementComparison (Compactification.infFst c d)
       (Compactification.isPullback_infFst c d)) ≪≫

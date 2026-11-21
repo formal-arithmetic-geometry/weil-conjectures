@@ -24,19 +24,7 @@ integral exceptional adjoint
 `Dᵇc(X, Λ)`, is `Rf^! L`, satisfies the dual formula `G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L` and has the
 expected reduction Tor interval.
 
-## Proof
-
-* The dual formula is the Yoneda argument of `CategoryTheory.Verdier.nonempty_iso_obj_of_adjunction`
-  (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_derivedHom`): biduality
-  `L ≅ 𝔻_Y 𝔻_Y L` (`theorem-verdier-biduality--2`), the projection formula modulo `ϖ`
-, which suffices for morphisms into the derived
-  complete dualizing complex, and the identification `Rf^! ω_Y ≅ ω_X` of the dualizing complexes
-  (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_obj_dualizing`).
-* Constructibility and the Tor interval then follow, as in the blueprint, from integral
-  Verdier duality applied on `Y` and on `X`, the completed pullback being a derived completion
-  of `Lf^* 𝔻_Y L` and the dualizing complexes those of `proposition-sp-integral-adjunction`.
-
-## Implementation notes
+## Implementation details
 
 Statements at `Λ` are phrased with `AlgebraicGeometry.Etale.derivedTensor` and
 `AlgebraicGeometry.Etale.derivedHom`, never with `⊗` or `ihom` found by instance search: the
@@ -70,8 +58,8 @@ local notation "𝐃(" X ", " Λ ")" =>
   _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X) (ModuleCat.{u + 1} Λ))
 
 
-/-- At integral coefficients the exceptional inverse image is a right adjoint `G` of `Rf_!`,
-assumed to exist; it is `Λ`-linear, `Rf_!` being `Λ`-linear. -/
+/-- At integral coefficients the exceptional inverse image, a right adjoint `G` of `Rf_!`
+assumed to exist, is `Λ`-linear. -/
 instance linear_rightAdjoint_rightDerivedLowerShriek {Λ : Type (u + 1)} [CommRing Λ]
     {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] :
@@ -99,8 +87,7 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [(R(f)_![A]).I
 `L ≅ RHom(M, ω_Y)`, and assume that the projection maps
 `PF_{f, K, M} : Rf_! K ⊗ᴸ M ⟶ Rf_!(K ⊗ᴸ Lf^* M)` induce bijections on morphisms into `ω_Y`.
 Given `γ : Rf^! ω_Y ≅ ω_X` and `φ : Lf^* M ⟶ N` inducing bijections
-`Hom(K ⊗ᴸ N, ω_X) ≃ Hom(K ⊗ᴸ Lf^* M, ω_X)`, there is an isomorphism `Rf^! L ≅ RHom(N, ω_X)`
-(`CategoryTheory.Verdier.nonempty_iso_obj_of_adjunction`). -/
+`Hom(K ⊗ᴸ N, ω_X) ≃ Hom(K ⊗ᴸ Lf^* M, ω_X)`, there is an isomorphism `Rf^! L ≅ RHom(N, ω_X)`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_derivedHom
     {L M ωY : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (e : L ≅ ((derivedHom A Y).obj (op M)).obj ωY)
@@ -125,8 +112,7 @@ section Orthogonal
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}} {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
 include hϖ
 
-/-- The reductions modulo `ϖⁿ` of an object on which `ϖ` acts invertibly vanish: the reduction is
-the cone of the multiplication by `ϖⁿ`. -/
+/-- The reductions modulo `ϖⁿ` of an object on which `ϖ` acts invertibly vanish. -/
 lemma isZero_reductionModIdeal_of_smulInvertible (n : ℕ) (K : 𝐃(X, Λ))
     (hK : _root_.DerivedCategory.smulInvertible X.smallEtaleTopology ϖ K) :
     IsZero ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).obj K) := by
@@ -235,8 +221,8 @@ lemma DerivedCategory.isClosedUnderIsomorphisms_boundedConstructibleIntegral
         (DerivedCategory.torAmplitudeIn _ X a b).prop_of_iso
           ((reductionModIdeal Λ X _).mapIso e) (h n).2⟩⟩
 
-/-- The reductions of `Lf^* K` are the pullbacks of the reductions of `K`, so they are bounded
-constructible with the same Tor amplitude as those of `K`. -/
+/-- If the reductions of `K` are bounded constructible with Tor amplitude in `[a, b]`, so are
+those of `Lf^* K`. -/
 lemma boundedConstructible_and_torAmplitudeIn_reductionModIdeal_leftDerivedUpperStar
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (hI : I = Ideal.span {ϖ})
     (f : X ⟶ Y) {K : 𝐃(Y, Λ)} {a b : ℤ} (n : ℕ)
@@ -303,11 +289,7 @@ include hϖ hI in
 /-- **The composition law of the exceptional inverse images on the torsion tower.** For
 composable morphisms `f : X ⟶ Y` and `g : Y ⟶ S` admitting compactifications, the exceptional
 inverse images `R(f ≫ g)^!` and `Rf^! ∘ Rg^!` of `D(-_ét, Λ)` agree on the tower
-`n ↦ Λ ⧸ Iⁿ`, compatibly with the transition maps.
-
-The composition law of the compactly supported direct images fails on `D(-_ét, 𝒪_E)`, but it
-holds up to cones on which `ϖ` acts invertibly, and the objects `Λ ⧸ Iⁿ`, killed by `ϖⁿ`, see no
-such cones (`AlgebraicGeometry.Etale.nonempty_iso_comp_rightDerivedUpperShriek_comp`). -/
+`n ↦ Λ ⧸ Iⁿ`, compatibly with the transition maps. -/
 theorem nonempty_iso_quotPowFunctor_comp_rightDerivedUpperShriek_comp {X Y S : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ S) [HasCompactification f] [HasCompactification g]
     [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)]
@@ -327,9 +309,7 @@ omit [IsDomain Λ] [IsNoetherianRing Λ] in
 include hϖ hI in
 /-- **The dualizing complexes correspond under `Rf^!`.** For `a_X = f ≫ a_Y` and integral
 dualizing complexes `ω_X`, `ω_Y` (points of homotopy limit cones of the towers
-`n ↦ Ra^!(Λ ⧸ Iⁿ)`), there is an isomorphism `Rf^! ω_Y ≅ ω_X`: `Rf^!` preserves homotopy limits,
-being a triangulated right adjoint, and the towers agree by
-`AlgebraicGeometry.Etale.nonempty_iso_quotPowFunctor_comp_rightDerivedUpperShriek_comp`. -/
+`n ↦ Ra^!(Λ ⧸ Iⁿ)`), there is an isomorphism `Rf^! ω_Y ≅ ω_X`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_obj_dualizing {k : Type u} [Field k] {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [QuasiCompact aX] [HasCompactification aX]
     [HasCompactification aY] [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
@@ -366,9 +346,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
 
 /-- The exceptional inverse image `Rf^!` commutes with derived limits of reductions: for a
 derived complete `L ∈ D(Y_ét, Λ)` and a homotopy limit cone `c` of the tower
-`n ↦ Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`, there is an isomorphism `Rf^! L ≅ c.pt` compatible with the legs.
-Indeed `Rf^!` is a triangulated right adjoint, so it carries the Milnor triangle exhibiting
-`L = R lim_n L ⊗ᴸ Λ ⧸ Iⁿ` to a Milnor triangle. -/
+`n ↦ Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`, there is an isomorphism `Rf^! L ≅ c.pt` compatible with the legs. -/
 theorem exists_iso_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.derivedComplete Y.smallEtaleTopology I L)
@@ -398,9 +376,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
 include hϖ hI in
 /-- The dual formula for the integral exceptional adjoint: for integral dualizing
 complexes `ω_X`, `ω_Y` and a completed pullback `φ : Lf^* 𝔻_Y L ⟶ N` (an isomorphism modulo
-`ϖ`), the derived limit `c.pt = G_f L` is `𝔻_X N = RHom(N, ω_X)`. It is
-`nonempty_iso_rightDerivedUpperShriek_obj_derivedHom_of_isIso_reductionModIdeal`
-for `L ≅ 𝔻_Y 𝔻_Y L` (`theorem-verdier-biduality--2`) and `γ : Rf^! ω_Y ≅ ω_X`. -/
+`ϖ`), the derived limit `c.pt = G_f L` is `𝔻_X N = RHom(N, ω_X)`. -/
 theorem nonempty_iso_derivedHom_of_isHomotopyLimit {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
@@ -440,11 +416,7 @@ theorem nonempty_iso_derivedHom_of_isHomotopyLimit {X Y : Scheme.{u}}
 include hϖ hI in
 /-- Constructibility and the Tor interval for the integral exceptional adjoint: the
 derived limit `c.pt = G_f L` lies in `Dᵇc(X, Λ)`, and if the reductions of `L` have Tor amplitude
-in `[a, b]`, those of `G_f L` have Tor amplitude in `[a - 2 dim X, b + 2 dim Y]`. As in the
-blueprint, `G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L`
-(`AlgebraicGeometry.Etale.nonempty_iso_derivedHom_of_isHomotopyLimit`) for the dualizing
-complexes of `proposition-sp-integral-adjunction` and the derived completion of `Lf^* 𝔻_Y L`, and
-integral Verdier duality (`theorem-verdier-biduality--2`) applies twice. -/
+in `[a, b]`, those of `G_f L` have Tor amplitude in `[a - 2 dim X, b + 2 dim Y]`. -/
 theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
@@ -571,7 +543,7 @@ theorem nonempty_iso_derivedHom_of_isHomotopyLimit_of_derivedComplete {X Y : Sch
     hφ₁
 
 include hϖ hI in
-/-- The integral exceptional adjoint on constructible complexes.
+/-- **The integral exceptional adjoint on constructible complexes.**
 
 For a separated finite-type `f : X ⟶ Y` of finite-type `k`-schemes and `L ∈ Dᵇc(Y, Λ)`, put
 `G_f L = R lim_n Res_n Rf_n^! L_n`, the derived limit of the finite exceptional inverse images of
@@ -643,25 +615,22 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
   {k : Type u} [Field k] [IsAlgClosed k] [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
-/-- Preservation results and their actual hypotheses,
-the integral entries (item 5).
+/-- **Preservation results at the integral stage.**
 
 At the integral stage (`Λ` a Noetherian domain complete for `I = (ϖ)`, `Λ ⧸ I` finite of
 exponent invertible on `k`), for a separated finite-type morphism `f : X ⟶ Y` of separated
 finite-type `k`-schemes:
 
 * the internal hom commutes with reduction, both as `RHom(K, L) ⊗ᴸ A_n ≅ RHom(K, L ⊗ᴸ A_n)`
-  and as `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)`, and preserves derived completeness
-  (`proposition-six-operations-change-coefficients--7`), and preserves `Dᵇc(-, Λ)`
-  (`proposition-six-operations-dctf--15`);
+  and as `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)`, and preserves derived completeness and
+  `Dᵇc(-, Λ)`;
 * the derived limit `G_f L` of the reduced exceptional inverse images lies in `Dᵇc(X, Λ)` and
   is identified with `Rf^! L` compatibly with the maps to the `Rf^!(L ⊗ᴸ A_n)`, so that it is
   right adjoint to `Rf_!` on the constructible categories through
   `AlgebraicGeometry.Etale.rightDerivedUpperShriekAdjunction`; its reductions are
   `(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)`;
 * the derived reductions of any object form a normalized tower, and a normalized tower is the
-  tower of reductions of its derived limit, which is derived complete
-  (`lemma-sp-tower-adjunction-foundation--2`). -/
+  tower of reductions of its derived limit, which is derived complete. -/
 theorem preservationMatrix_integral {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]

@@ -11,7 +11,11 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Pull.IntegralPullEv
 
 /-! # The cochain pullback evaluation transition square
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks Tags 03D2 and 0941.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -25,32 +29,14 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The actual comparison of exact cochain functors, before localization.
-Source: Stacks 03D2 and 0941. -/
+/-- The actual comparison of exact cochain functors, before localization. -/
 def integralPullEvaluationComplex {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :=
   (pullbackTensorInverseEvaluationComplex l E f n).symm ≪≫
     Functor.isoWhiskerLeft
       ((coefficientSequenceEvaluation l E Y n).mapHomologicalComplex (.up ℤ))
       (NatIso.mapHomologicalComplex (pullbackTensorLevelIntrinsic l E f n) (.up ℤ))
 
-/-- The pullback transition square already commutes as a square of cochain maps.
-Source: Zheng Construction 4.1, p. 21; the sectionwise calculation preceding
-Lemma 4.10, p. 23; Stacks 03D2 and 0941.
-
-Proof: first work in the abelian categories of modules on the sequence sites.
-The inverse-image/evaluation comparison is the inverse mate of the identity
-comparison for direct image and evaluation. The level intrinsic comparison
-preserves the ordinary adjunction unit. Restriction of scalars and direct image
-commute by the identity on sections. The horizontal transition of a system is
-its restriction map along (n,U) to (n+1,U). Naturality of the system adjunction
-unit in this horizontal arrow and mate pasting identify the two composites:
-both pull back a section and then apply the same coefficient quotient. Check
-this on the generating unit sections; the inverse-image adjunction and
-sheafification determine the resulting module maps. Apply the cochain functor:
-the same equality holds in every degree and respects the differentials.
-The cochain reordering maps in integralPullEvaluationComplex are precisely
-those induced from the ordinary comparison. No derived direct image,
-K-injective representative, flatness or normalization of the input is used. -/
+/-- The pullback transition square already commutes as a square of cochain maps. -/
 theorem integralPullEvaluation_cochainSquare {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r₀ : normalizedDVRModuleRes l E X (Nat.le_succ n) ⋙
         proEtaleConstantModuleDirectImage f (Padic.coefficientExtensionRing l E (n + 2)) ≅

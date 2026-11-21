@@ -11,7 +11,13 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.F
 import all WeilConjectures.AlgebraicGeometry.SemilinearProperOpen.Normalization.ExactClopenNormalization
 import all WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteCoordinateCalculus
 
-/-! # Proved finite coefficient coordinate calculus -/
+/-! # Proved finite coefficient coordinate calculus
+
+## References
+
+* [Stacks, Tag 015F]
+* [Stacks, Tag 03DI]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -56,18 +62,7 @@ private theorem fixed_open_exact_adjunction
     he]
   rfl
 
-/-- The finite open-extension comparison preserves the specified derived open unit.
-Source: compactification-coherence proof, first paragraph; Stacks 03DI and 015F.
-
-Proof: finiteOpenIso is the left-adjoint uniqueness comparison for the ring open
-adjunction transported by finitePullbackIso. The ordinary open_unit_coordinates
-identity therefore gives its unit square in realization coordinates. Compare
-the specified derived open adjunction with exactLocalizationDerivedAdjunction
-using the left-derived factorization and exact_adjunction_eq. Localize the
-ordinary unit square via exact_unit_square. The derived comparison of a composite
-is derived_square_left_comp, which identifies the open comparison with
-finiteFixedOpenIso. The inverse pull square is inverse finiteDerivedPullCoordinates.
-Substitution yields the stated unit equation, including the identity and empty open. -/
+/-- The finite open-extension comparison preserves the specified derived open unit. -/
 theorem finite_open_unit_derived
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Coefficient.ConstructibleExceptionalCoefficientAssemblyData
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 
-/-! # Universe transfer data for endpoint scalar identities -/
+/-! # Universe transfer data for endpoint scalar identities
+
+## References
+
+* Zheng, Lemma 5.22 and Proposition 5.26
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,9 +25,7 @@ variable (l : ℕ) [Fact l.Prime]
 attribute [local instance] constructionInclusionShift
 
 /-- The scalar extension record obtained by reusing the finite and integral
-constructions at the original coefficient universes.
-Source: Zheng, Lemma 5.22 and Proposition 5.26.
--/
+constructions at the original coefficient universes. -/
 def scalarAtClosure
     (Ψ : Type (max u v)) [Field Ψ] [Algebra (Padic l) Ψ] [IsAlgClosure (Padic l) Ψ]
     (W : Scheme.{max u v}) {s t : RingStage.{max u v} l}

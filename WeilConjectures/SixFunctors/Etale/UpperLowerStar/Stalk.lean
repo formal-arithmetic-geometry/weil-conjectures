@@ -62,25 +62,14 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y) {Ω : Type u} [Field Ω] [IsSepClosed 
   (s : Spec (.of Ω) ⟶ X)
 
 /-- All left Kan extensions of `A`-valued presheaves along the opposite of base change
-`f.Etale` exist. This is an instance of
-`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`, restated
-for `AlgebraicGeometry.Scheme.Hom.Etale`; it is what makes the sheaf pullback along
-`f.Etale` available, hence also the fibre functor on sheaves of the point
-`(pointSmallEtale s).comap f.Etale _`. -/
+`f.Etale` exist. -/
 instance Scheme.Hom.hasLeftKanExtension_op_etale (G : Y.Etaleᵒᵖ ⥤ A) :
     f.Etale.op.HasLeftKanExtension G :=
   inferInstance
 
 /-- The stalk of a pullback of étale sheaves is the stalk at the image point: for a morphism
 of schemes `f : X ⟶ Y` and a geometric point `s : Spec Ω ⟶ X`, the stalk of `f^* F` at `s`
-is the stalk of `F` at `s ≫ f`, naturally in the sheaf `F`.
-
-The three steps are the comparison
-`CategoryTheory.Functor.sheafPullbackConstruction.sheafPullbackIso` between `(f)^*[A]` and
-the abstract sheaf pullback along base change, the isomorphism
-`CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso` of the sheaf pullback with
-the fibre functor of the point obtained from `s` by `Point.comap`, and the identification
-`AlgebraicGeometry.Scheme.pointSmallEtaleComapIso` of that point with `s ≫ f`. -/
+is the stalk of `F` at `s ≫ f`, naturally in the sheaf `F`. -/
 noncomputable def Etale.upperStarCompSheafFiberIso :
     (f)^*[A] ⋙ (pointSmallEtale s).sheafFiber ≅ (pointSmallEtale (s ≫ f)).sheafFiber :=
   Functor.isoWhiskerRight

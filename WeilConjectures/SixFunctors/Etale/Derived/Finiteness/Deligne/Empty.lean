@@ -19,8 +19,8 @@ change, so the generic constructibility property holds over the whole base
 of `X` over an irreducible noetherian base `S` is empty, then `X` is empty over a nonempty open of
 `S`, by Chevalley's theorem: the image of `X` is a constructible set missing the generic point
 (`AlgebraicGeometry.Etale.exists_hasDirectImageBaseChangeOnPlus_of_genericPoint_not_mem_range`).
-This is the start of the induction on the generic dimension in the proof of
-`theorem-generic-constructibility-base-change-rj`.
+This is the start of the induction on the generic dimension in the proof of Deligne's generic
+constructibility theorem.
 -/
 
 @[expose] public section

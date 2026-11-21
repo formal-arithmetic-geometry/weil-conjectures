@@ -25,14 +25,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 -- The representative equations compare independently specified derived models.
-/-- The left derived path is the localization of its ordinary cochain path.
-
-Proof: apply naturality to the tensor representative and the reduction model.
-Use the defining representative square for the system tensor on the left, and
-for the ringed tensor on the right. The realization model identifies the input
-and total-tensor reduction/pullback maps. Pasting these naturality and model
-squares gives the displayed factorization. Every change of representative used
-here is an isomorphism; no finite evaluation or conservativity is invoked. -/
+/-- The left derived path is the localization of its ordinary cochain path. -/
 theorem left_on_representatives
     (o : Operations l E) (m : RealizationModel l E o) (d : RingedModels l E)
     {U V : Scheme.{u}} (f : U ⟶ V) (P Q : (good l E V).FullSubcategory) :

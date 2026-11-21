@@ -24,9 +24,7 @@ base, `H^q` of the limit stage at `K` is the elementwise colimit of `H^q` of the
 If the pullbacks of injective sheaves along the maps `w` of the stages are injective (for
 instance if all the `w` are identities), then being a stalkwise colimit in degree `0` at every
 injective sheaf implies being a stalkwise colimit in every degree at every sheaf
-(`AlgebraicGeometry.Etale.LimitStageSystem.isStalkColimit_of_injective`): by dimension shifting
-along `0 ⟶ G ⟶ I ⟶ Q ⟶ 0`, the transition maps being compatible with the connecting maps of
-the long exact sequences since they commute with the shifts.
+(`AlgebraicGeometry.Etale.LimitStageSystem.isStalkColimit_of_injective`).
 -/
 
 @[expose] public section

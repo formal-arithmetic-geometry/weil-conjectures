@@ -36,8 +36,7 @@ section Complex
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
 /-- **The homology of a short complex of constructible sheaves of modules over a noetherian ring
-is constructible**: it is the cokernel of a morphism into the cycles, the kernel of the second
-morphism. -/
+is constructible**. -/
 theorem Scheme.IsConstructibleSheaf.homology [IsNoetherianRing Λ]
     (S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     [IsConstructibleSheaf S.X₁] [IsConstructibleSheaf S.X₂] [IsConstructibleSheaf S.X₃] :
@@ -51,8 +50,7 @@ theorem Scheme.IsConstructibleSheaf.homology [IsNoetherianRing Λ]
     ((cokernelIsCokernel S.toCycles).coconePointUniqueUpToIso S.homologyIsCokernel)
 
 /-- A strictly bounded complex of constructible sheaves of modules over a noetherian ring is
-bounded constructible: its homology sheaves are constructible
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.homology`). -/
+bounded constructible. -/
 theorem Etale.DerivedCategory.boundedConstructible_Q_obj [IsNoetherianRing Λ]
     (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (a b : ℤ)
     [P.IsStrictlyGE a] [P.IsStrictlyLE b] (hP : ∀ n, IsConstructibleSheaf (P.X n)) :
@@ -68,8 +66,7 @@ theorem Etale.DerivedCategory.boundedConstructible_Q_obj [IsNoetherianRing Λ]
     ((DerivedCategory.homologyFunctorFactors _ n).app P).symm
 
 /-- A strictly bounded complex of flat constructible sheaves of modules over a finite ring lies in
-`Dctf(X, Λ)`: it is bounded constructible, and it is its own flat model, so it has finite Tor
-amplitude. -/
+`Dctf(X, Λ)`. -/
 theorem Etale.DerivedCategory.constructibleFiniteTor_Q_obj [Finite Λ]
     (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (a b : ℤ)
     [P.IsStrictlyGE a] [P.IsStrictlyLE b] (hflat : ∀ n, ObjectProperty.flat (P.X n))

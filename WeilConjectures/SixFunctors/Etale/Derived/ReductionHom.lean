@@ -31,17 +31,19 @@ restriction of scalars and monoidal. We deduce:
   scalars restricted back to `Λ`, `K ⊗ᴸ_Λ Λ'` is the derived tensor product of `K` with the
   constant sheaf `Λ ⧸ (a)`.
 - `AlgebraicGeometry.Etale.nonempty_iso_derivedHom_derivedTensor_of_isDerivedBaseChange`: for
-  derived base changes `K'`, `L'` of `K`, `L`, `RHom_Λ(K, L ⊗ᴸ (Λ ⧸ (a))_X) ≅ Res RHom_{Λ'}(K', L')`
-  (used for blueprint `proposition-six-operations-change-coefficients--7`).
+  derived base changes `K'`, `L'` of `K`, `L`,
+  `RHom_Λ(K, L ⊗ᴸ (Λ ⧸ (a))_X) ≅ Res RHom_{Λ'}(K', L')`.
 
-## Implementation notes
+## Implementation details
 
 The monoidal comparison of the derived extension of scalars is obtained from the general
 `CategoryTheory.Functor.leftDerivedTensorIsoOfIsLeftDerivedFunctor`. For the kernel to
 compare its monoidal structures with those inside `AlgebraicGeometry.Etale.derivedTensor` cheaply,
 instance search must produce syntactically the same terms; this is ensured by the local instance
 attributes below (the braiding `SymmetricCategory.toBraidedCategory` of `ModuleCat` and
-`AlgebraicGeometry.Etale.sheafBraidedCategory`).
+`AlgebraicGeometry.Etale.sheafBraidedCategory`). The monoidality is also stated as a `Nonempty`
+(`AlgebraicGeometry.Etale.nonempty_derivedExtendScalarsTensorIso`), since the kernel checks the
+corresponding definition only very slowly.
 -/
 
 @[expose] public section
@@ -93,8 +95,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] {φ : Λ →+* Λ'
 
 include hφ ha in
 /-- Extension of scalars of étale sheaves along a surjective ring morphism with principal kernel
-sends quasi-isomorphisms between K-flat complexes to quasi-isomorphisms: with scalars restricted
-back, it is tensoring with a constant sheaf. -/
+sends quasi-isomorphisms between K-flat complexes to quasi-isomorphisms. -/
 lemma preservesKFlatQuasiIso_extendScalars :
     (Sheaf.extendScalars X.smallEtaleTopology φ).PreservesKFlatQuasiIso where
   quasiIso_map hK hL f _ :=
@@ -153,8 +154,7 @@ lemma nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
   exact ⟨asIso (((derivedExtendScalarsAdjunction hφ ha X).homEquiv K K').symm η)⟩
 
 /-- The derived extension of scalars is monoidal: `(K ⊗ᴸ M) ⊗ᴸ_Λ Λ' ≅ (K ⊗ᴸ_Λ Λ') ⊗ᴸ (M ⊗ᴸ_Λ Λ')`,
-naturally in `M`. (Stated as a `Nonempty`: the kernel checks the corresponding definition only
-very slowly.) -/
+naturally in `M` (existence of such an isomorphism). -/
 theorem nonempty_derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
     Nonempty ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K ⋙ derivedExtendScalars hφ ha X ≅
       derivedExtendScalars hφ ha X ⋙
@@ -174,8 +174,7 @@ noncomputable def derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
   (nonempty_derivedExtendScalarsTensorIso hφ ha X K).some
 
 /-- The extension–restriction adjunction for internal homs:
-`RHom_Λ(K, Res N) ≅ Res RHom_{Λ'}(K ⊗ᴸ_Λ Λ', N)`, naturally in `N`. Both sides are right
-adjoint to `M ↦ (K ⊗ᴸ M) ⊗ᴸ_Λ Λ' ≅ (K ⊗ᴸ_Λ Λ') ⊗ᴸ (M ⊗ᴸ_Λ Λ')`. -/
+`RHom_Λ(K, Res N) ≅ Res RHom_{Λ'}(K ⊗ᴸ_Λ Λ', N)`, naturally in `N`. -/
 noncomputable def derivedHomRestrictScalarsIso (K : 𝐃(X, Λ)) :
     Sheaf.derivedRestrictScalars X.smallEtaleTopology φ ⋙
         (derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K) ≅
@@ -190,8 +189,7 @@ noncomputable def derivedHomRestrictScalarsIso (K : 𝐃(X, Λ)) :
 
 -- the kernel checks the ten isomorphisms of the chain below
 /-- With scalars restricted back to `Λ`, the derived extension of scalars `K ⊗ᴸ_Λ Λ'` is the
-derived tensor product `K ⊗ᴸ (Λ ⧸ (a))_X` with the constant sheaf: on a K-flat complex `P`
-both are computed by the complex `P ⊗ (Λ ⧸ (a))_X`. -/
+derived tensor product `K ⊗ᴸ (Λ ⧸ (a))_X` with the constant sheaf. -/
 lemma nonempty_iso_derivedRestrictScalars_derivedExtendScalars (L : 𝐃(X, Λ)) :
     Nonempty ((Sheaf.derivedRestrictScalars X.smallEtaleTopology φ).obj
         ((derivedExtendScalars hφ ha X).obj L) ≅

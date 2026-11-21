@@ -10,7 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Tensor.ProEtaleTensorPu
 
 /-! # The ordinary scalar inverse-image comparison
 
-Source: Stacks Tags 00YV and 07A6.
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -44,8 +48,7 @@ attribute [local instance 30000] SheafOfModules.instPreadditive
 
 namespace WeilConjectures
 
-/-- The two constant-coefficient direct images are the same functor.
-Source: the adjunction defining the coefficient structure map, Stacks Tag 00YV. -/
+/-- The two constant-coefficient direct images are the same functor. -/
 theorem finiteScalarConstantPushforward_eq
     (R : Type u) [CommRing R] {X Y : Scheme.{u}} (p : X ⟶ Y) :
     proEtaleConstantRingPushforward R p = proEtaleConstantModuleDirectImage p R := by
@@ -60,8 +63,7 @@ theorem finiteScalarConstantPushforward_eq
   rw [hρ]
 
 /-- The inverse mate of the section-normalized ordinary direct-image comparison.
-Its definition fixes the comparison before passing to complexes or derived categories.
-Source: Stacks Tags 00YV and 07A6, uniqueness of adjoints. -/
+Its definition fixes the comparison before passing to complexes or derived categories. -/
 @[irreducible] def finiteScalarOrdinaryPullbackComparison
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (sfIntrinsicModuleEquivalence Y R).functor ⋙
@@ -83,8 +85,7 @@ Source: Stacks Tags 00YV and 07A6, uniqueness of adjoints. -/
   have : IsIso α := isIso_inverseMate_of_equivalences a b r
   exact asIso α
 
-/-- The same comparison degree by degree, retaining the actual chain-map components.
-Source: Stacks Tag 07A6, termwise application of the ordinary comparison. -/
+/-- The same comparison degree by degree, retaining the actual chain-map components. -/
 @[irreducible] def finiteScalarComplexPullbackComparison
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (sfIntrinsicModuleEquivalence Y R).functor.mapHomologicalComplex (.up ℤ) ⋙
@@ -96,9 +97,7 @@ Source: Stacks Tag 07A6, termwise application of the ordinary comparison. -/
         (sfIntrinsicModuleEquivalence X R).functor.mapHomologicalComplex (.up ℤ) :=
   Functor.mapHomologicalComplexCompIso (finiteScalarOrdinaryPullbackComparison R p) (.up ℤ)
 
-/-- The intrinsic complex tensor comparison, with its natural-transformation type fixed.
-The existing descent-data theorem specifies every component and thus determines this map.
-Source: Stacks Tag 07A4, signed-total pullback comparison. -/
+/-- The intrinsic complex tensor comparison, with its natural-transformation type fixed. -/
 @[irreducible] def finiteScalarIntrinsicComplexTensorPullback
     (R : Type u) [CommRing R] {X Y : Scheme.{u}} (p : X ⟶ Y) :
     uncurry.obj ((proEtaleOrdinaryTensor Y (proEtaleConstantRing Y R)).map₂HomologicalComplex
@@ -114,8 +113,7 @@ Source: Stacks Tag 07A4, signed-total pullback comparison. -/
   (Classical.choose (proEtaleTensorPullbackDescentData p (proEtaleConstantRing Y R)
     (proEtaleConstantRing X R) (proEtaleConstantRingComparison p R)).2.2).inv
 
-/-- The wrapper retains precisely the prescribed inverse signed-total comparison.
-Source: Stacks Tag 07A4, the component specification of the descent-data theorem. -/
+/-- The wrapper retains precisely the prescribed inverse signed-total comparison. -/
 theorem finiteScalarIntrinsicComplexTensorPullback_app
     (R : Type u) [CommRing R] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (P Q : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y R)) ℤ) :

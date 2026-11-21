@@ -19,6 +19,8 @@ Let `j : X ⟶ Y` be a morphism of `S`-schemes, `Y` locally of finite type over 
 over `U`, then so is `Rj_* K`
 (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_openCover`).
 
+## Implementation details
+
 After a base change `T ⟶ S`, the restriction of `Rj_{T,*} K_T` to `V_{i,T}` is the direct image
 along the restriction, by étale base change, and both bounded constructibility and the
 invertibility of a morphism can be checked on a finite open cover of a locally noetherian scheme

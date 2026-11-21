@@ -19,9 +19,7 @@ For `K, M ∈ D(X_ét)` the canonical maps
 form a natural transformation in `T`
 (`AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorNatTrans`) between triangulated
 functors, and this natural transformation commutes with the shifts
-(`AlgebraicGeometry.Etale.DerivedCategory.commShift_derivedHomTensorNatTrans`). It is the composite
-of the unit of `K ⊗ᴸ - ⊣ RHom(K, -)`, the inverse associator and the evaluation, each of which
-commutes with the shifts.
+(`AlgebraicGeometry.Etale.DerivedCategory.commShift_derivedHomTensorNatTrans`).
 -/
 
 @[expose] public section
@@ -87,8 +85,7 @@ instance commShift_derivedHomTensorNatTrans
   unfold derivedHomTensorNatTrans
   infer_instance
 
-/-- The derived hom `RHom(K, -)` is triangulated, being right adjoint to the triangulated
-functor `K ⊗ᴸ -`. -/
+/-- The derived hom `RHom(K, -)` is triangulated. -/
 instance isTriangulated_derivedHom_obj
     (K : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ) :
     (RHom(X)[A].obj K).IsTriangulated :=

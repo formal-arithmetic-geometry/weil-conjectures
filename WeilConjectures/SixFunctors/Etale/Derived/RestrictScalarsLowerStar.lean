@@ -17,14 +17,7 @@ Restriction of scalars along `φ` is exact and commutes with the direct image `f
 computed objectwise). It also commutes with the derived direct image on `D⁺`:
 `R⁺f_* ∘ res ≅ res ∘ R⁺f_*` (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`).
 The non-formal input is that an injective sheaf `J` of `Λ'`-modules is `f_*`-acyclic as a sheaf of
-`Λ`-modules (`AlgebraicGeometry.Etale.rightAcyclic_lowerStar_restrictScalars_obj`): embedding `J`
-into an injective sheaf `I` of `Λ`-modules, `J` is a direct summand of the coextension
-`Hom_Λ(Λ', I)`, whose restriction of scalars is the sheaf `Hom_Λ(Λ', I)` of homomorphisms out of
-the `Λ`-module `Λ'`, which is acyclic for `f_*`
-(`CategoryTheory.Sheaf.rightAcyclic_homSheaf_obj`).
-
-This is the commutation of restriction of scalars with `Rf_*` used for the change of coefficients
-in the proof of the proper base change theorem.
+`Λ`-modules (`AlgebraicGeometry.Etale.rightAcyclic_lowerStar_restrictScalars_obj`).
 -/
 
 @[expose] public section
@@ -141,9 +134,7 @@ noncomputable def rightDerivedLowerStarRestrictScalars :
   Functor.rightDerivedFunctorPlusBaseChange (lowerStarCompRestrictScalarsIso φ f).hom
 
 /-- **Restriction of scalars commutes with the derived direct image**: the comparison
-`res(R⁺f_* K) ⟶ R⁺f_*(res K)` is an isomorphism, since restriction of scalars sends injective
-sheaves of `Λ'`-modules to `f_*`-acyclic sheaves of `Λ`-modules
-(`AlgebraicGeometry.Etale.rightAcyclic_lowerStar_restrictScalars_obj`). -/
+`res(R⁺f_* K) ⟶ R⁺f_*(res K)` is an isomorphism. -/
 instance isIso_rightDerivedLowerStarRestrictScalars :
     IsIso (rightDerivedLowerStarRestrictScalars φ f) :=
   Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic _

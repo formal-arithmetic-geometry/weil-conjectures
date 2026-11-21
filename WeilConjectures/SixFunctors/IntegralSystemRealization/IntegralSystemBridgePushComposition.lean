@@ -9,7 +9,15 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemCompositorAssociativity
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.IntegralSystemOrdinaryBridgeComposition
 
-/-! Compatibility of the canonical bridge with direct-image composition. -/
+/-! # Bridge and direct-image composition
+
+Compatibility of the canonical bridge with direct-image composition.
+
+## References
+
+* [Stacks, Tag 03D8]
+* [Stacks, Tag 07A7]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -132,15 +140,7 @@ private theorem pull_bridge_composition (o : Operations l E) (c : Compositors l 
     (ProEtale.SemilinearProperOpen.pullComp (scalarRings l E) (scalarTransitions l E) f g)
     (ordinary_pull_composition l E o c b f g)
 
-/-- The bridge preserves the section-normalized direct-image compositor.
-Source: Stacks 03D8, 07A7; blueprint fix-prop-coherence, strict-system realization.
-Proof: the ordinary direct-image comparisons commute with composition since their
-components are identity on sections and the two compositors restrict along the same
-canonical map of iterated fibre products. Conjugate this ordinary equality through
-the three module adjunctions. Localize the resulting inverse-image equality; the
-complex-factor equation of the supplied compositor identifies its localization.
-Finally conjugate through the derived adjunctions. Conjugation preserves composition
-and whiskering, so the resulting equality is exactly the displayed equation. -/
+/-- The bridge preserves the section-normalized direct-image compositor. -/
 theorem integralSystemBridgePushComposition (o : Operations l E) (c : Compositors l E o)
     (b : CanonicalBridge l E o) {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (M : System l E X) :

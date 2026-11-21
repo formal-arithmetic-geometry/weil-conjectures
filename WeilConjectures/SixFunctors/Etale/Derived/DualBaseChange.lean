@@ -28,10 +28,16 @@ records it as an isomorphism and, for proper `g`, reads it through `Rg_! ≅ Rg_
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso`
-  (`definition-trace-morphism--1`): `Rf^! Rg_* ≅ Rg'_* Rf'^!`.
-- `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerShriekBaseChangeIso`
-  (`definition-trace-morphism--1`): `Rf^! Rg_! ≅ Rg'_! Rf'^!` for proper `g`.
+- `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso`:
+  `Rf^! Rg_* ≅ Rg'_* Rf'^!`.
+- `AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerShriekBaseChangeIso`:
+  `Rf^! Rg_! ≅ Rg'_! Rf'^!` for proper `g`.
+
+## Implementation details
+
+In the proper case both `g` and `g'` are assumed proper, since the instances
+`HasCompactification g` and `HasCompactification g'` entering `Rg_!` and `Rg'_!` are those of
+the properness.
 -/
 
 @[expose] public section
@@ -52,9 +58,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
   {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
   [HasCompactification f] [HasCompactification f'] [QuasiCompact f']
 
-/-- Blueprint `definition-trace-morphism--1`: Dual base change.
-
-For a Cartesian square
+/-- Dual base change: for a Cartesian square
 ```
   X' --g'--> X
   | |
@@ -63,26 +67,17 @@ For a Cartesian square
   Y' --g---> Y
 ```
 and a finite coefficient ring `Λ`, the canonical isomorphism `Rf^! Rg_* ≅ Rg'_* Rf'^!`, the
-right adjoint of the base-change isomorphism `Ex_! : Lg^* Rf_! ≅ Rf'_! Lg'^*`: it is the inverse
-of the conjugate of `Ex_!` along the composite adjunctions `Lg^* ∘ Rf_! ⊣ Rf^! ∘ Rg_*` and
-`Rf'_! ∘ Lg'^* ⊣ Rg'_* ∘ Rf'^!`
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeMap`). -/
+right adjoint of the base-change isomorphism `Ex_! : Lg^* Rf_! ≅ Rf'_! Lg'^*`. -/
 noncomputable def rightDerivedUpperShriekLowerStarBaseChangeIso (sq : IsPullback g' f' f g) :
     R((g)_*[ModuleCat.{u + 1} Λ]) ⋙ R(f)^![Λ] ≅
       R(f')^![Λ] ⋙ R((g')_*[ModuleCat.{u + 1} Λ]) :=
   have := isIso_rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq
   (asIso (rightDerivedUpperShriekLowerStarBaseChangeMap Λ sq)).symm
 
-/-- Blueprint `definition-trace-morphism--1`: Dual base change, the proper case.
-
-For a Cartesian square as in
-`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso` with `g` proper (so that
-`g'` is proper as well; both are assumed, since the instances `HasCompactification g` and
-`HasCompactification g'` entering `Rg_!` and `Rg'_!` are those of the properness), the
-dual base change isomorphism read through the proper coincidences `Rg_! ≅ Rg_*` and
-`Rg'_! ≅ Rg'_*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`):
-
-`Rf^! Rg_! ≅ Rg'_! Rf'^!`. -/
+/-- Dual base change, the proper case: for a Cartesian square as in
+`AlgebraicGeometry.Etale.rightDerivedUpperShriekLowerStarBaseChangeIso` with `g` and `g'`
+proper, the isomorphism `Rf^! Rg_! ≅ Rg'_! Rf'^!`, read through `Rg_! ≅ Rg_*` and
+`Rg'_! ≅ Rg'_*`. -/
 noncomputable def rightDerivedUpperShriekLowerShriekBaseChangeIso [IsProper g] [IsProper g']
     (sq : IsPullback g' f' f g) :
     R(g)_![ModuleCat.{u + 1} Λ] ⋙ R(f)^![Λ] ≅

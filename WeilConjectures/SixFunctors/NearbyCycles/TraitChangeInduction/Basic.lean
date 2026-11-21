@@ -24,23 +24,20 @@ This file proves `NearbyCyclesModel.TraitChangeInvariance T m` for every `m`
 coefficients a finite ring `T`, by induction on the dimension `m` of the affine spaces into
 which the total space locally embeds.
 
-1. **Proper models** (`NearbyCyclesModel.traitChangeInvariance_of_isProper`). The exchange is a
-   morphism of complexes of étale origin on the special fibre `X'`, a scheme of finite type over
-   the separably closed field `κ`. Its global cohomology `Rp₂_*` is invertible by step (B)
-   (`NearbyCyclesModel.Hom.isIso_map_pullbackExchange_app_of_isProper_trait`), and it is invertible
-   after pullback to the slice over the generic point of every coordinate line of every chart
-   (step (A), `NearbyCyclesModel.Hom.exists_isIso_map_pullbackExchange_slice`, using the induction
-   hypothesis). Every non-closed point of `X'` lies over such a generic point
-   (`AlgebraicGeometry.AffineSpace.exists_isGenericPoint_reindex_of_not_isClosed`), so the
-   closed-point criterion
-   (`ProEtale.CondensedRing.isIso_of_isIso_leftDerivedUpperStar_map_of_not_isClosed`) applies.
-2. **Charts** (`NearbyCyclesModel.traitChangeInvariance_of_isImmersion`): a model with an
-   immersion into `𝔸(ι; S₁)` is open in its closure in `ℙ(ι; S₁)`, a proper model locally embedding
-   into `𝔸(ι; S₁)` (`AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`), and the exchange
-   is invertible once it is for the compactification
-   (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_compactification`).
-3. **General models**: invertibility of the exchange is local on the total space
-   (`NearbyCyclesModel.Hom.isIso_toGeneric_pullbackExchange_app_of_restrictOpens`).
+## Main results
+
+- `NearbyCyclesModel.traitChangeInvariance_of_isProper`: the case of proper models.
+- `NearbyCyclesModel.traitChangeInvariance_of_isImmersion`: the case of models with an immersion
+  into an affine space over the trait.
+- `NearbyCyclesModel.traitChangeInvariance`: the general case.
+
+## Implementation details
+
+Some statements about restrictions of morphisms of models
+(`NearbyCyclesModel.Hom.isIso_leftDerivedUpperStar_comp_map_pullbackExchange_app_of_restrictOpens`)
+are restated with the special fibre elaborated as in the type of
+`NearbyCyclesModel.Hom.restrictOpens`: the two elaborations are definitionally equal, but unifying
+them at a concrete coefficient ring times out.
 -/
 
 @[expose] public section
@@ -70,9 +67,7 @@ variable {R₁ R₂ : Type u} [CommRing R₁] [IsDomain R₁] [IsDiscreteValuati
 /-- A restatement of
 `NearbyCyclesModel.Hom.isIso_leftDerivedUpperStar_map_pullbackExchange_app_of_restrictOpens` in
 which the special fibre `M.i⁻¹(φ⁻¹ V)` of the restriction is elaborated as in the type of
-`NearbyCyclesModel.Hom.restrictOpens`, so that it applies syntactically to the outputs of lemmas
-about the restricted morphism of models (the two elaborations are definitionally equal, but
-unifying them at a concrete coefficient ring times out). -/
+`NearbyCyclesModel.Hom.restrictOpens`. -/
 theorem Hom.isIso_leftDerivedUpperStar_comp_map_pullbackExchange_app_of_restrictOpens
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (φ : M.Hom N f f') (V : N.total.Opens)
@@ -90,9 +85,7 @@ of 3.7, step (A)). In the situation of `NearbyCyclesModel.TraitChangeInvariance`
 total space of `N` has an immersion `e : 𝒳_N ⟶ 𝔸(n; S₁)` over `S₁` with `|n| ≤ m`, and the
 invariance in chart dimension smaller than `m`. Every non-closed point `x` of the special fibre
 `X'` of `M` is in the image of a morphism `h : W ⟶ X'` along which the pullback of the exchange
-of `φ.toGeneric` is invertible: the induced immersion `X' ⟶ 𝔸(n; κ)` has a coordinate sending `x`
-to the generic point of `𝔸¹_κ`, and one slices along it
-(`NearbyCyclesModel.Hom.exists_isIso_map_pullbackExchange_slice`). -/
+of `φ.toGeneric` is invertible. -/
 theorem Hom.exists_isIso_map_pullbackExchange_of_isImmersion {m : ℕ}
     (ih : ∀ m' < m, TraitChangeInvariance.{u} T m') (hι : Function.Injective ι)
     (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
@@ -159,11 +152,7 @@ theorem Hom.exists_isIso_map_pullbackExchange_of_isImmersion {m : ℕ}
 step (A)). In the situation of `NearbyCyclesModel.TraitChangeInvariance` in chart dimension `m`,
 assuming it in smaller chart dimension, every non-closed point `x` of the special fibre `X'` of
 `M` is in the image of a morphism `h : W ⟶ X'` along which the pullback of the exchange of
-`φ.toGeneric` is invertible: choose a chart `V ⟶ 𝔸(ι; S₁)` of `N` around the image of `x`, a
-coordinate sending `x` to the generic point of `𝔸¹_κ`
-(`AlgebraicGeometry.AffineSpace.exists_isGenericPoint_reindex_of_not_isClosed`), and slice the
-restriction of `φ` to `V` along it (`NearbyCyclesModel.Hom.exists_isIso_map_pullbackExchange_slice`,
-`NearbyCyclesModel.Hom.isIso_leftDerivedUpperStar_map_pullbackExchange_app_of_restrictOpens`). -/
+`φ.toGeneric` is invertible. -/
 theorem Hom.exists_isIso_map_pullbackExchange_of_not_isClosed {m : ℕ}
     (ih : ∀ m' < m, TraitChangeInvariance.{u} T m') (hι : Function.Injective ι)
     (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
@@ -215,10 +204,7 @@ theorem Hom.exists_isIso_map_pullbackExchange_of_not_isClosed {m : ℕ}
 
 /-- **Proper models** (SGA 4½, [Th. finitude], proof of 3.7). In the situation of
 `NearbyCyclesModel.TraitChangeInvariance` with `q₁` proper, assuming the invariance in smaller
-chart dimension, the exchange is invertible: its global cohomology is invertible by step (B), and
-it is invertible over every non-closed point of the special fibre by step (A)
-(`NearbyCyclesModel.Hom.exists_isIso_map_pullbackExchange_of_not_isClosed`); conclude with the
-closed-point criterion. -/
+chart dimension, the exchange is invertible. -/
 theorem traitChangeInvariance_of_isProper {m : ℕ}
     (ih : ∀ m' < m, TraitChangeInvariance.{u} T m') (hι : Function.Injective ι)
     (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
@@ -266,7 +252,7 @@ theorem traitChangeInvariance_of_isProper {m : ℕ}
     hNj p₁ hNi q₂ g₂ hMj p₂ hMi hφ hgen (by simpa using hs) K hK
 
 /-- The pullback exchange of the morphism of models `NearbyCyclesModel.ofOverTraitHom` is that of
-the induced morphism of the models of the geometric generic fibres: these models have `ε = 𝟙`. -/
+the induced morphism of the models of the geometric generic fibres. -/
 theorem isIso_ofOverTraitHom_pullbackExchange_app_of_toGeneric
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {A₁ A₂ B₁ B₂ C₁ C₂ : Type u} [CommRing A₁] [CommRing A₂] [CommRing B₁] [CommRing B₂]
@@ -289,11 +275,7 @@ theorem isIso_ofOverTraitHom_pullbackExchange_app_of_toGeneric
 /-- **Charts** (SGA 4½, [Th. finitude], proof of 3.7). In the situation of
 `NearbyCyclesModel.TraitChangeInvariance`, assume that the total space of `N` has an immersion
 `e : 𝒳_N ⟶ 𝔸(n; S₁)` over `S₁` with `|n| ≤ m`, and the invariance in chart dimension smaller
-than `m`. Then the exchange is invertible: the closure of `𝒳_N` in `ℙ(n; S₁)` is a proper model
-locally embedding into `𝔸(n; S₁)`
-(`AlgebraicGeometry.Compactification.locallyEmbedsInAffineSpace_ofIsImmersionAffineSpace`), to
-which one reduces (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_compactification`), and
-which is handled by `NearbyCyclesModel.traitChangeInvariance_of_isProper`. -/
+than `m`. Then the exchange is invertible. -/
 theorem traitChangeInvariance_of_isImmersion {m : ℕ}
     (ih : ∀ m' < m, TraitChangeInvariance.{u} T m') (hι : Function.Injective ι)
     (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι)
@@ -337,13 +319,7 @@ theorem traitChangeInvariance_of_isImmersion {m : ℕ}
 
 /-- **Deligne's induction** (SGA 4½, [Th. finitude], Prop. 3.7, coefficients a finite ring): the
 invariance of nearby cycles under change of strictly henselian trait holds in every chart
-dimension. By strong induction on `m`: invertibility is local on the total space
-(`NearbyCyclesModel.Hom.isIso_toGeneric_pullbackExchange_app_of_restrictOpens`), so one may assume
-an immersion `N ⟶ 𝔸(ι; S₁)` with `|ι| ≤ m`; the closure in `ℙ(ι; S₁)` is a proper model locally
-embedding into `𝔸(ι; S₁)` (`AlgebraicGeometry.Compactification.ofIsImmersionAffineSpace`,
-`AlgebraicGeometry.Compactification.locallyEmbedsInAffineSpace_ofIsImmersionAffineSpace`), to
-which one reduces (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_compactification`), and
-the proper case is `NearbyCyclesModel.traitChangeInvariance_of_isProper`. -/
+dimension. -/
 theorem traitChangeInvariance (m : ℕ) : TraitChangeInvariance.{u} T m := by
   induction m using Nat.strong_induction_on with
   | _ m ih =>

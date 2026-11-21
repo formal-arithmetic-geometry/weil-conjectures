@@ -30,8 +30,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- The charts of a morphism locally embedding into affine spaces may be taken on affine opens:
-shrink the chart to an affine open neighbourhood of the point. -/
+/-- The charts of a morphism locally embedding into affine spaces may be taken on affine opens. -/
 lemma Scheme.Hom.LocallyEmbedsInAffineSpace.exists_isAffineOpen {T S : Scheme.{u}}
     {q : T ⟶ S} {m : ℕ} (h : q.LocallyEmbedsInAffineSpace m) (x : T) :
     ∃ (U : T.Opens) (_ : IsAffineOpen U) (_ : x ∈ U) (ι : Type u) (_ : Finite ι)
@@ -44,7 +43,7 @@ lemma Scheme.Hom.LocallyEmbedsInAffineSpace.exists_isAffineOpen {T S : Scheme.{u
 
 /-- **A chart restricts to a cartesian fibre.** If `i : X ⟶ Z` is the base change of `q : Z ⟶ S`
 along `t : S' ⟶ S` and `c : Z ⟶ 𝔸(ι; S)` is an immersion over `S`, then the induced morphism
-`X ⟶ 𝔸(ι; S') = 𝔸(ι; S) ×_S S'` is an immersion, being the base change of `c`. -/
+`X ⟶ 𝔸(ι; S') = 𝔸(ι; S) ×_S S'` is an immersion. -/
 lemma AffineSpace.isImmersion_lift_isPullback_map {X Z S S' : Scheme.{u}} {ι : Type u}
     {i : X ⟶ Z} {p : X ⟶ S'} {q : Z ⟶ S} {t : S' ⟶ S} (h : IsPullback i p q t)
     (c : Z ⟶ 𝔸(ι; S)) [IsImmersion c] (hc : c ≫ 𝔸(ι; S) ↘ S = q) :
@@ -55,7 +54,7 @@ lemma AffineSpace.isImmersion_lift_isPullback_map {X Z S S' : Scheme.{u}} {ι : 
     inferInstance
 
 /-- In a Jacobson scheme, a point of an open subscheme whose image is not closed is not closed in
-the open subscheme: a closed point of an open is locally closed, hence closed. -/
+the open subscheme. -/
 lemma not_isClosed_singleton_of_isOpenImmersion {U X : Scheme.{u}} [JacobsonSpace X]
     (f : U ⟶ X) [IsOpenImmersion f] {x : U} (hx : ¬ IsClosed ({f x} : Set X)) :
     ¬ IsClosed ({x} : Set U) := fun h ↦ hx <| isClosed_singleton_of_isLocallyClosed_singleton <| by

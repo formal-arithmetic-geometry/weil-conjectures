@@ -18,28 +18,24 @@ Let `(A, I)` be a henselian pair, `p : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y`
 over `Spec A/I`. For every abelian étale sheaf `G` on `Y`, the restriction of global sections
 `Γ(Y, G) ⟶ Γ(Y₀, i^* G)` is bijective.
 
-* *Injectivity.* A section whose restriction to `Y₀` vanishes vanishes on an open neighbourhood
-  of `Y₀` (`AlgebraicGeometry.Etale.range_subset_vanishingLocus_of_pullSection_eq_zero`); as
-  every nonempty closed subset of `Y` meets `Y₀`, `p` being closed, it vanishes.
-* *Surjectivity.* A section `t` over `Y₀` is étale locally the restriction of sections `g_k` of
-  `G` over finitely many étale `U_k ⟶ Y` covering `Y₀`. The finite refinement of the surjective
-  étale morphism `∐ U_k ⊔ (Y ∖ Y₀) ⟶ Y` (Stacks 09Z0) gives a finite surjective `r : Y' ⟶ Y`
-  on which the `g_k` pull back to sections on Zariski opens of `Y'`, which agree near the closed
-  fibre `Y'₀`. The spectral shrinking `SpectralSpace.exists_shrink_of_isConnected_inter`
-  (Stacks 09ZG, with the connectedness of the closed fibres of the proper `Y' ⟶ Spec A`,
-  Stacks 0A0B) glues them to a section `σ'` of `r^* G` restricting to `r₀^* t` on `Y'₀`. Its
-  two pullbacks to `Y' ×_Y Y'` have the same restriction to the closed fibre, hence agree by
-  injectivity, and `σ'` descends along the finite surjective `r` (Stacks 09Z3) to a section of
-  `G` restricting to `t`.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.bijective_pullSection_of_henselianRing`: the comparison.
+
+## Implementation details
+
+Surjectivity glues local representatives on a finite surjective refinement of an étale cover
+(using the spectral shrinking `SpectralSpace.exists_shrink_of_isConnected_inter`) and then
+descends along it; injectivity is used for the descent.
 
 ## References
 
 - Stacks Project, Lemma 59.91.2, <https://stacks.math.columbia.edu/tag/0A0C>
 - Stacks Project, Lemma 59.82.2, <https://stacks.math.columbia.edu/tag/09ZF>
+- [Stacks, Tag 09Z0]
+- [Stacks, Tag 09Z3]
+- [Stacks, Tag 09ZG]
+- [Stacks, Tag 0A0B]
 -/
 
 @[expose] public section

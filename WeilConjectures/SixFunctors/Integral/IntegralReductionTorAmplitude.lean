@@ -31,12 +31,7 @@ open CategoryTheory AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
 /-- If the cohomological support of the residue reduction of `K` lies in `[a,b]`, then every
-finite reduction of `K` has Tor amplitude in `[a,b]`. The index `n` denotes exponent `n+1`.
-
-Proof: represent the finite reduction by a cochain complex with a K-flat resolution. The
-coefficient comparison `integralReduction_residue_homology_zero_iff` identifies its residue
-derived tensor cohomology with the cohomology of the residue reduction of `K`, which vanishes
-outside `[a,b]`. The pro-etale residue Tor test gives amplitude `[a,b]`. -/
+finite reduction of `K` has Tor amplitude in `[a,b]`. The index `n` denotes exponent `n+1`. -/
 theorem scalarReductionDerivedExtension_torAmplitude_of_residue_support
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (X : AlgebraicGeometry.Scheme.{u})

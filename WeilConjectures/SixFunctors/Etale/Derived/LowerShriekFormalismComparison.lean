@@ -19,15 +19,8 @@ it is the comparison
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`, built from
 the base change isomorphism of the extension by zero on étale sheaves. Hence the
 comparison isomorphism `CompactSupportFormalism.shriekIso` of the formalism is
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso`, and the coherences of
-blueprint `proposition-construction-independence-rf-shriek` proved for one hold for the other.
-
-The two base change maps are compared through their transposes under the derived adjunction
-`D(c.i)_! ⊣ D(c.i)^*`: both are the unit of `D(d.i)_! ⊣ D(d.i)^*` followed by the composition
-isomorphism `D(d.i)^* ≅ D(r.hom)^* ⋙ D(c.i)^*`
-(`AlgebraicGeometry.Etale.unit_map_refinementLowerShriekBaseChangeDerivedPlusIso_hom_app`), which
-is checked on complexes, where the derived unit is the levelwise unit
-(`CategoryTheory.Adjunction.mapDerivedCategoryPlusAdjunction_unit_app_fac`).
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso`, and the coherences
+proved for one hold for the other.
 
 ## Main results
 
@@ -36,6 +29,15 @@ is checked on complexes, where the derived unit is the levelwise unit
   `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`.
 - `AlgebraicGeometry.Etale.derivedPlusFormalism_shriekIso`: the comparison isomorphism of the
   formalism is `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusIso`.
+
+## Implementation details
+
+The two base change maps are compared through their transposes under the derived adjunction
+`D(c.i)_! ⊣ D(c.i)^*`: both are the unit of `D(d.i)_! ⊣ D(d.i)^*` followed by the composition
+isomorphism `D(d.i)^* ≅ D(r.hom)^* ⋙ D(c.i)^*`
+(`AlgebraicGeometry.Etale.unit_map_refinementLowerShriekBaseChangeDerivedPlusIso_hom_app`), which
+is checked on complexes, where the derived unit is the levelwise unit
+(`CategoryTheory.Adjunction.mapDerivedCategoryPlusAdjunction_unit_app_fac`).
 -/
 
 @[expose] public section

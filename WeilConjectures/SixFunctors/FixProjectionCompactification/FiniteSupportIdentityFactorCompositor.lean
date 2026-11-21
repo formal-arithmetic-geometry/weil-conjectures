@@ -39,23 +39,7 @@ private theorem identityFactor_witness_cancel
 
 /-- The coefficient realization of the witnessed open/proper compositor cancels the
 identity factors. This equation concerns only the canonical coefficient functors and
-an etale-origin witness. It has no supplied finite operations, constructible input,
-operation realization, or integral reduction.
-
-Proof: expand sixFunctorFiniteCompositionComparison, retaining its two inverse
-refinementFixedWitnessIso factors. By naturality of the three coefficient comparisons,
-move those factors to the input and output. The middle coherenceProEtaleCompositor
-is the etale compositor conjugated by the site comparison and the recorded changes
-of compactification. For the identity-proper compactification of i followed by the
-identity-open compactification of p, its etale proper/open construction is extension
-by zero along i followed by proper image along p. The identity direct-image adjunction
-and identity open-extension unit cancel, using the triangle identities. Transport
-these cancellations through sfIntrinsicCompactSupportComparison: the first is exactly
-sixFunctorOpenCandidateIso and the second is sixFunctorProperCandidateIso. Naturality
-of the proper comparison orders the factors as displayed. The retained witness maps
-then cancel against their inverses. The target compactification is the actual pair
-(i,p), so no change-of-compactification map remains. This argument also applies to
-the zero witness, the empty open, and identity i or p, by the same unit laws. -/
+an etale-origin witness. -/
 theorem finiteSupportIdentityFactorCompositor
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]

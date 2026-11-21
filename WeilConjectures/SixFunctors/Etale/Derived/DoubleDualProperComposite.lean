@@ -56,11 +56,9 @@ noncomputable def rightDerivedLowerStarLaxBraided :
     (leftDerivedUpperStar_map_braiding_hom_δ (ModuleCat.{u + 1} Λ) f)
 
 /-- The canonical Verdier exchange morphism `Rf_* 𝔻_X M ⟶ 𝔻_Y Rf_* M` of a proper `f` is an
-isomorphism. For `γ : Rf^! ω_Y ≅ ω_X`, it is the dual comparison
-`Rf_* RHom(M, ω_X) ⟶ RHom(Rf_* M, Rf_* ω_X) ⟶ RHom(Rf_* M, ω_Y)`
-(`CategoryTheory.MonoidalClosed.dualComparison`) through the lax monoidal structure of `Rf_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerStarLaxBraided`) and the trace
-`Rf_* ω_X ≅ Rf_* Rf^! ω_Y ⟶ ω_Y` (the counit of `Rf_* ≅ Rf_! ⊣ Rf^!`). -/
+isomorphism; for `γ : Rf^! ω_Y ≅ ω_X`, it is the dual comparison
+`Rf_* RHom(M, ω_X) ⟶ RHom(Rf_* M, Rf_* ω_X) ⟶ RHom(Rf_* M, ω_Y)` through the trace
+`Rf_* ω_X ≅ Rf_* Rf^! ω_Y ⟶ ω_Y`. -/
 theorem isIso_dualComparison_rightDerivedLowerStar
     (γ : (R(f)^![Λ]).obj (dualizingComplex Λ aY) ≅ dualizingComplex Λ aX)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -94,15 +92,8 @@ theorem isIso_dualComparison_rightDerivedLowerStar
   𝔻_Y 𝔻_Y Rf_* K ──────▶ 𝔻_Y Rf_* 𝔻_X K
              𝔻_Y c_K
 ```
-commutes.
-
-Here `𝔻 = RHom(-, ω)` is written `(ihom -).obj ω`, `δ` is
-`CategoryTheory.MonoidalClosed.toIhomIhom` (`AlgebraicGeometry.Etale.verdierDualDoubleDual_app`),
-`𝔻_Y` on morphisms is `CategoryTheory.MonoidalClosed.pre`, and the exchange `c` is the canonical
-morphism `CategoryTheory.MonoidalClosed.dualComparison` of `Rf_*` and the trace, an isomorphism
-(`AlgebraicGeometry.Etale.isIso_dualComparison_rightDerivedLowerStar`). It goes in the direction
-`Rf_* 𝔻_X ⟶ 𝔻_Y Rf_*`, the inverse direction of the exchange `𝔻_Y Rf_! ≅ Rf_* 𝔻_X` (with
-`Rf_! = Rf_*`). -/
+commutes. Here `c` is the canonical exchange `CategoryTheory.MonoidalClosed.dualComparison` of
+`Rf_*` and the trace. -/
 theorem rightDerivedLowerStar_map_toIhomIhom_comp_dualComparison
     (γ : (R(f)^![Λ]).obj (dualizingComplex Λ aY) ≅ dualizingComplex Λ aX)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

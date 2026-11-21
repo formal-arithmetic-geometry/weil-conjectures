@@ -16,21 +16,17 @@ import WeilConjectures.SixFunctors.Etale.Derived.Supports
 
 Let `b : Y ⟶ S` be proper, let `a : G ⟶ Y` be an open immersion whose closed complement
 `i : Z ⟶ Y` is finite over `S`. A complex on `Y` is then controlled by its restriction to `G`
-and its direct image to `S`: the part supported on `Z` is seen faithfully by `Rb_*`, since
-`Rb_* i_* = R(bi)_*` and the finite direct image `(bi)_*` is exact and conservative. These are
-the two boundary steps of Deligne's generic constructibility theorem
-.
+and its direct image to `S`. These are the two boundary steps of Deligne's generic
+constructibility theorem.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj_of_isFinite`: the direct image along a
   finite morphism detects the zero sheaf.
 - `AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_isIso_rightDerivedLowerStar_map`:
-  a morphism which is an isomorphism over `G` and after `Rb_*` is an isomorphism
-  (`lemma-detection-proper-direct-image--2`).
+  a morphism which is an isomorphism over `G` and after `Rb_*` is an isomorphism.
 - `AlgebraicGeometry.Etale.boundedConstructible_of_upperStar_of_rightDerivedLowerStar`:
-  a complex which is bounded constructible over `G` and after `Rb_*` is bounded constructible
-  (`lemma-detection-proper-direct-image--1`).
+  a complex which is bounded constructible over `G` and after `Rb_*` is bounded constructible.
 -/
 
 @[expose] public section
@@ -49,9 +45,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- **The direct image along a finite morphism detects the zero sheaf**: by the stalk formula,
-the stalk of `f_* G` at a geometric point `y` is the product of the stalks of `G` at the
-geometric points over `y`, and every geometric point `t` of `X` lies over `t ≫ f`. -/
+/-- **The direct image along a finite morphism detects the zero sheaf.** -/
 theorem isZero_of_isZero_lowerStar_obj_of_isFinite {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f]
     {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by
@@ -92,18 +86,12 @@ lemma isZero_of_forall_isZero_homology {X : Scheme.{u}}
   exact _root_.DerivedCategory.TStructure.t.isZero K (-1) 0 (by lia)
 
 open Pretriangulated in
-/-- Blueprint `lemma-detection-proper-direct-image--2`: A proper direct image detects a comparison
-off a finite boundary.
+/-- **A direct image detects a comparison off a finite boundary.**
 
-Let `b : Y ⟶ S` be a morphism (proper, in the blueprint), let `a : G ⟶ Y` be an open immersion
+Let `b : Y ⟶ S` be a morphism (not necessarily proper), let `a : G ⟶ Y` be an open immersion
 with closed complement `i : Z ⟶ Y`, and suppose that `i ≫ b` is finite. Let `c : K ⟶ L` be a
-morphism of complexes of étale sheaves of `Λ`-modules on `Y` (bounded below, in the blueprint;
-neither hypothesis is needed). If the restriction `a^* c` and the direct image `Rb_* c` are
-isomorphisms, then so is `c`.
-
-The cone `M` of `c` vanishes on `G`, so the open–closed triangle identifies it with
-`Ri_* i^* M`, and `0 = Rb_* M = R(bi)_* i^* M = (bi)_* i^* M`; the finite direct image `(bi)_*`
-is exact and detects the zero sheaf, so `i^* M = 0` and `M = 0`. -/
+morphism of complexes of étale sheaves of `Λ`-modules on `Y` (not necessarily bounded below). If
+the restriction `a^* c` and the direct image `Rb_* c` are isomorphisms, then so is `c`. -/
 theorem isIso_of_isIso_upperStar_map_of_isIso_rightDerivedLowerStar_map {S Y G Z : Scheme.{u}}
     (b : Y ⟶ S) (a : G ⟶ Y) [IsOpenImmersion a] (i : Z ⟶ Y) [IsClosedImmersion i]
     (hai : Set.range i = (Set.range a)ᶜ) [IsFinite (i ≫ b)]
@@ -137,8 +125,7 @@ theorem isIso_of_isIso_upperStar_map_of_isIso_rightDerivedLowerStar_map {S Y G Z
   exact (Functor.map_isZero _ hN').of_iso (asIso
     ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).unit.app M))
 
-/-- Blueprint `lemma-detection-proper-direct-image--1`: Recovering constructibility at a finite
-boundary.
+/-- **Recovering constructibility at a finite boundary.**
 
 Let `b : Y ⟶ S` be a proper morphism between schemes of finite type over a field `k`, and let
 `Λ` be a finite ring whose exponent is invertible on `S`. Let `a : G ⟶ Y` be an open immersion

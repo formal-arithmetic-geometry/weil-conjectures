@@ -14,21 +14,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperNoether
 Let `k` be a field, `Λ` a finite ring killed by an integer invertible in `k`, `S` a noetherian
 `k`-scheme and `b : Y ⟶ S` a proper morphism. The derived direct image `Rb_*` preserves bounded
 constructible complexes of étale sheaves of `Λ`-modules
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`,
-blueprint `proposition-proper-direct-image-finite-coefficients--1`): this is the finiteness theorem
-for proper morphisms (SGA 4, Exposé XIV, Théorème 1.1) together with the vanishing of `Rᵠb_*` above
-twice the dimension of the geometric fibres (Stacks, Tag 095U).
+(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`):
+this is the finiteness theorem for proper morphisms together with the vanishing of `Rᵠb_*` above
+twice the dimension of the geometric fibres. For `S` of finite type over a field this is
+`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper`.
 
-For `S` of finite type over a field this is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper`. In general, the
-constructibility of the higher direct images is reduced to that case by Noetherian approximation
-(`AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper_of_isNoetherian`), the
-dimensions of the fibres of `b` are bounded
-(`AlgebraicGeometry.exists_topologicalKrullDim_pullback_le_of_isProper_of_isNoetherian`), so
-that the vanishing holds by
-`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerStar_of_isProper`,
-and we conclude by the dévissage
-`AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`.
+## References
+
+* SGA 4, Exposé XIV, Théorème 1.1
+* [Stacks, Tag 095U]
 -/
 
 @[expose] public section
@@ -49,11 +43,9 @@ open _root_.DerivedCategory
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
-/-- Blueprint `proposition-proper-direct-image-finite-coefficients--1`: for a proper morphism
-`b : Y ⟶ S` to a noetherian scheme over a field `k` in which the exponent of the finite ring `Λ` is
-invertible, `Rb_*` maps
-bounded constructible complexes of étale sheaves of `Λ`-modules to bounded constructible complexes
-(SGA 4, Exposé XIV, Théorème 1.1; Stacks, Tag 095U). -/
+/-- For a proper morphism `b : Y ⟶ S` to a noetherian scheme over a field `k` in which the
+exponent of the finite ring `Λ` is invertible, `Rb_*` maps bounded constructible complexes of
+étale sheaves of `Λ`-modules to bounded constructible complexes. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian {k : Type u}
     [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {Y S : Scheme.{u}} (aS : S ⟶ Spec (.of k))
     [IsNoetherian S] (b : Y ⟶ S) [IsProper b]

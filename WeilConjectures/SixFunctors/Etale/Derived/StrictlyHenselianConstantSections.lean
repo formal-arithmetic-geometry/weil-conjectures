@@ -45,8 +45,7 @@ namespace Scheme
 variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A] (R : Type u) [CommRing R] [IsStrictlyHenselianLocalRing R]
 
-/-- **A locally constant sheaf on a strictly local scheme is constant**: some member of a
-trivializing étale cover contains a point over the closed point, hence has a section. -/
+/-- **A locally constant sheaf on a strictly local scheme is constant.** -/
 theorem isConstant_of_isLocallyConstantSheaf (F : Sheaf (Spec (.of R)).smallEtaleTopology A)
     [IsLocallyConstantSheaf F] : F.IsConstant (Spec (.of R)).smallEtaleTopology := by
   obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
@@ -109,8 +108,7 @@ theorem isIso_globalSectionsUpperStarMap_of_isLocallyConstantSheaf {Ω : Type u}
   exact isIso_globalSectionsUpperStarMap_of_isConstant t F
 
 /-- Over a separably closed field `k`, the restriction of global sections of any sheaf of
-`Λ`-modules on `Spec k` to a geometric point is an isomorphism: every such sheaf is
-constant. -/
+`Λ`-modules on `Spec k` to a geometric point is an isomorphism. -/
 theorem isIso_globalSectionsUpperStarMap_of_isSepClosed {k : Type u} [Field k] [IsSepClosed k]
     {Ω : Type u} [Field Ω] [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of k))
     (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

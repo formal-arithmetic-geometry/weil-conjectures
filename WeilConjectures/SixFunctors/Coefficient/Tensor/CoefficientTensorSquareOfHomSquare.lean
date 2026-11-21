@@ -10,7 +10,9 @@ import all WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSys
 
 /-! # Recovering a tensor comparison from its closed comparison
 
-Source: Stacks 08J9; tensor--Hom adjunction and its naturality.
+## References
+
+* [Stacks, Tag 08J9]
 -/
 
 @[expose] public section
@@ -21,16 +23,7 @@ open CategoryTheory Opposite
 namespace WeilConjectures
 
 /-- A natural isomorphism preserving the evaluation-defined internal-Hom comparisons
-also preserves the tensor comparisons.
-Source: Stacks 08J9, tensor--Hom adjunction.
-
-Proof: for inputs L,M transpose the identity of L tensor M. Apply the closed
-comparison equality to M and L tensor M, and precompose by the image of this
-transpose. Naturality of the given isomorphism and compatibility of base change
-with transposition identify the two sides. Uncurrying gives the inverse tensor
-square, since evaluation after the transposed identity is the identity. Cancel
-the invertible tensor comparisons and the given isomorphism to obtain the forward
-square. No faithfulness, essential surjectivity or nonzero hypothesis is used. -/
+also preserves the tensor comparisons. -/
 theorem coefficientTensorSquareOfHomSquare
     {A : Type a} {B : Type b} [Category.{va} A] [Category.{vb} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
@@ -110,11 +103,7 @@ private theorem baseChange_composite
     simp [τ]) M N
   simpa [τ] using hh.symm
 
-/-- The closed square detects a square between two composite tensor comparisons.
-Source: Stacks 08J9, transposition of the identity tensor map.
-Proof: the evaluation-defined closed comparison of a composite is the composite
-of the two closed comparisons. Substitute these formulas and apply
-coefficientTensorSquareOfHomSquare. -/
+/-- The closed square detects a square between two composite tensor comparisons. -/
 theorem coefficientTensorSquareOfCompositeHomSquare
     {A : Type a} {B : Type b} {C : Type c} {D : Type d}
     [Category.{va} A] [Category.{vb} B] [Category.{vc} C] [Category.{vd} D]

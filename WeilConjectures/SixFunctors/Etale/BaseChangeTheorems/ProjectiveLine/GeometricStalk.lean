@@ -103,20 +103,9 @@ be cartesian, let `F` be a torsion sheaf of `Λ`-modules on `ℙ¹_S` and `q ≥
 `τ : Spec k' ⟶ T` and `σ : Spec k ⟶ S` be geometric points whose fields are algebraic over
 the residue fields of their images — so that `k` and `k'` are the residue fields of the strict
 henselisations of `S` at `σ` and of `T` at `τ` — and let `ι : Spec k' ⟶ Spec k` be compatible
-with `g`. Then the stalk at `τ` of the degree-`q` exchange morphism
-`g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` (`AlgebraicGeometry.Etale.baseChangeHomologyMap`) is, up to
-isomorphisms of its source and target, the pullback map
-`Hᵠ(ℙ¹_k, F|) ⟶ Hᵠ(ℙ¹_{k'}, F|)` along `ℙ¹_{k'} ⟶ ℙ¹_k`.
-
-The source and target stalks are the cohomologies of `ℙ¹` over the strict henselisations of
-`S` and `T` (the strict henselisation stalk formula), which restrict isomorphically to the
-closed fibres (the strictly henselian comparison for `ℙ¹`); expanding the unit, base change
-and counit composite defining the exchange morphism identifies the induced map with the
-field-extension pullback.
-
-**Form of the statement.** The statement asserts the existence of additive
-isomorphisms of the two stalks with closed-fibre cohomology that make the
-exchange square commute.
+with `g`. Then there are additive isomorphisms identifying the stalk at `τ` of the degree-`q`
+exchange morphism `g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` (`AlgebraicGeometry.Etale.baseChangeHomologyMap`)
+with the pullback map `Hᵠ(ℙ¹_k, F|) ⟶ Hᵠ(ℙ¹_{k'}, F|)` along `ℙ¹_{k'} ⟶ ℙ¹_k`.
 -/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
@@ -161,12 +150,7 @@ T ----g----> S
 ```
 
 every torsion sheaf `F` of `Λ`-modules on `ℙ¹_S` and every `q ≥ 0`, the degree-`q` exchange
-morphism `g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` is an isomorphism. By conservativity of the geometric
-stalks it suffices to check this at the geometric points `Spec κ(t)‾ ⟶ T`; there the stalk is
-the pullback map between the cohomologies of the projective lines over two separably closed
-fields (`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`),
-which is bijective because `ℙ¹` is a proper curve
-(`AlgebraicGeometry.IsCurve.bijective_cohomologyMap_of_isSepClosed`). -/
+morphism `g⁻¹ Rᵠp_* F ⟶ Rᵠf'_* g'⁻¹ F` is an isomorphism. -/
 theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
     {S T X' : Scheme.{u}} {g : T ⟶ S} {f' : X' ⟶ T} {g' : X' ⟶ ProjectiveLine S}
     (sq : IsPullback g' f' (ProjectiveLine S ↘ S) g)
@@ -205,11 +189,7 @@ theorem Etale.isIso_baseChangeHomologyMap_projectiveLine
   exact hfun ▸ e₂.symm.bijective.comp (hb.comp e₁.bijective)
 
 /-- **Injective acyclicity of the projective line**: for every scheme `S`, the projection
-`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`. For an injective
-torsion sheaf `I` the higher direct images `Rᵠp_* I` vanish, and after any base change the
-exchange morphism `g⁻¹ Rᵠp_* I ⟶ Rᵠf'_* g'⁻¹ I` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_projectiveLine`), so the target
-vanishes too. -/
+`ℙ¹_S ⟶ S` satisfies `AlgebraicGeometry.Etale.HasInjectiveAcyclicity`. -/
 theorem Etale.hasInjectiveAcyclicity_projectiveLine (S : Scheme.{u}) :
     Etale.HasInjectiveAcyclicity Λ (ProjectiveLine S ↘ S) := by
   intro T X' g f' g' sq I hI _ q hq

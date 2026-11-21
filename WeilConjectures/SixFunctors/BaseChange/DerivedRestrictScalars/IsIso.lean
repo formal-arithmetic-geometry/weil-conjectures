@@ -15,12 +15,9 @@ schemes `g' ≫ f = f' ≫ g`. For an object `K ∈ D⁺(X_ét, Λ')`, the deriv
 is an isomorphism at `res K` if and only if the derived base change map over `Λ'` is one at `K`
 (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_restrictScalars_iff`).
 
-This is deduced from the change of coefficients criterion
-`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_app_mapDerivedCategoryPlus_iff`, using the
-compatibilities of restriction of scalars with the units of the derived pushforwards and with the
-underived base change maps proved in
-`WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars`. The underived parts of the two
-derived base change maps are compared in two steps
+## Implementation details
+
+The underived parts of the two derived base change maps are compared in two steps
 (`AlgebraicGeometry.Etale.isIso_restrictScalars_map_comp_rightDerivedFunctorPlusUnit_iff` and
 `AlgebraicGeometry.Etale.isIso_map_restrictScalars_comp_rightDerivedFunctorPlusUnit_iff`), each
 an instance of a half of the diagram chase
@@ -67,8 +64,7 @@ lemma isIso_restrictScalars_map_comp_rightDerivedFunctorPlusUnit_iff (sq : CommS
 
 /-- The restriction of scalars of the base change map over `Λ'` at `K`, followed by the unit of
 `R⁺f'_*` over `Λ`, is an isomorphism if and only if the underived part
-`g^* f_* K ⟶ f'_* g'^* K ⟶ R⁺f'_*(g'^* K)` of the derived base change map over `Λ'` is one:
-restriction of scalars reflects isomorphisms and commutes with the units. -/
+`g^* f_* K ⟶ f'_* g'^* K ⟶ R⁺f'_*(g'^* K)` of the derived base change map over `Λ'` is one. -/
 lemma isIso_map_restrictScalars_comp_rightDerivedFunctorPlusUnit_iff (sq : CommSq g' f' f g)
     (K : HomotopyCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
     IsIso (DerivedCategory.Plus.Qh.map

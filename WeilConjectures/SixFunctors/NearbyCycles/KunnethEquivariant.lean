@@ -20,6 +20,8 @@ fibres over the generic point of the trait) compatible with `φ₁` and `φ₂`.
 `NearbyCyclesModel.Hom.autAction` of `σ_M`, `σ_N` on the source and of `σ_P` on the target
 (`NearbyCyclesModel.kunnethMap_autAction`).
 
+## Implementation details
+
 This is the compatibility of the Künneth map with pullbacks
 (`NearbyCyclesModel.map_kunnethMap_comp_pullbackExchange`) for the identities, transported along
 the identity isomorphisms `L(𝟙)^* ≅ 𝟭`, which are monoidal

@@ -12,7 +12,10 @@ import WeilConjectures.CategoryTheory.AdjointEquivalenceConjugation.AdjointEquiv
 import WeilConjectures.SixFunctors.ExceptionalScalarTransport.ScalarComparisonTransport
 
 /-! # Whole-system scalar transport before selected finite-level compatibility
-Source: Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26.
+
+## References
+
+* Zheng, Construction 4.1, Lemma 5.22 and Proposition 5.26
 -/
 
 @[expose] public noncomputable section
@@ -361,16 +364,7 @@ private theorem scalarModel_exists
         (transport.reconstruction L side).calculus (A side) (model side)) K)
 
 /-- Construct whole-system scalar transport from the normalized coefficient reduction
-model, before comparing selected ramified levels.
-Source: Zheng, Construction 4.1 and Lemma 5.22.
-Proof: compose the coefficient reduction model with the two reconstruction equalities.
-Transport normalized sequence membership and the original four bounds along the resulting
-isomorphism, and restrict the actual scalar functor. Cancel the full inclusion for reduction.
-Conjugate the integral q and b with reductionF/G and the scalar reduction comparison, then
-descend along the fully faithful reconstruction functor. Inverse-factor cancellation gives
-the two reduction equations. The integral counit equation and both reconstruction counit
-identities imply the new counit on the equivalence image; naturality and its counit iso
-extend it to every sequence. The image reduction map is the specified model up to eqToHom. -/
+model, before comparing selected ramified levels. -/
 theorem exceptionalIntegralSystemScalarCore
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

@@ -9,7 +9,10 @@ public import WeilConjectures.SixFunctors.PointDerivedHom.PointDerivedHomModels
 
 /-! # K-flat extension from a point
 
-Source: Stacks Project, Tags 0G7E and 00WJ.
+## References
+
+* [Stacks, Tag 0G7E]
+* [Stacks, Tag 00WJ]
 -/
 
 @[expose] public noncomputable section

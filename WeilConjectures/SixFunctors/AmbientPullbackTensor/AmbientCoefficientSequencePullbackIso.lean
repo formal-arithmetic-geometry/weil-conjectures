@@ -8,12 +8,12 @@ module
 public import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackSiteData
 import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientCoefficientSequencePullbackIsoApp
 
-/-! Sequence-site component of ambient coefficient pullback.
-Source: Stacks 03CB and 0941.
+/-! # Sequence-site component of ambient coefficient pullback
 
-The product-site inverse image is computed levelwise. The finite-stage
-comparisons assemble to a morphism of compatible families, and the assembled
-inverse is checked componentwise under the evaluation functors.
+## References
+
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section

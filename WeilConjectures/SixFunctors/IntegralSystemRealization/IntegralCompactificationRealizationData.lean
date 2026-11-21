@@ -13,7 +13,15 @@ public import WeilConjectures.Compactification.RefinementCategory
 
 /-! # Data for coherent integral realization of compactification expressions
 
-Source: Stacks 0941; blueprint fix-prop-coherence.
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 099N]
+* [Stacks, Tag 0E48]
+* [Stacks, Tags 0F7B--0F7F]
 -/
 
 @[expose] public noncomputable section
@@ -31,8 +39,7 @@ namespace IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Exchange is exactly the mate of the normalized pullback square.
-Source: Stacks 07A7; def-exchange-projection. -/
+/-- Exchange is exactly the mate of the normalized pullback square. -/
 def properExchange (o : Operations l E) (c : Compositors l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     (h : k ≫ p = r ≫ i) :
@@ -40,8 +47,7 @@ def properExchange (o : Operations l E) (c : Compositors l E o)
   (mateEquiv (o.direct p).adj (o.direct r).adj
     (TwoSquare.mk _ _ _ _ (c.square l E k r p i h).hom))
 
-/-- The proper projection is the published counit-defined right-adjoint projection mate.
-Source: Stacks 0E48; def-exchange-projection. -/
+/-- The proper projection is the published counit-defined right-adjoint projection mate. -/
 def properProjection (o : Operations l E) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Operations.push l E o f ⋙ Functor.curryObj (calculus l E Y).systemClosed.tensor ⟶
       (Functor.postcompose₂.obj (Operations.push l E o f)).obj
@@ -53,8 +59,7 @@ def properProjection (o : Operations l E) {X Y : Scheme.{u}} (f : X ⟶ Y) :
         (calculus l E X).systemClosed.tensor).hom
 
 /-- Compactification exchange uses the recorded supplied-domain composite: proper
-exchange on J, followed by proper image of the canonical open base-change map.
- -/
+exchange on J, followed by proper image of the canonical open base-change map. -/
 def compactificationExchange (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {f' : X' ⟶ Y'} (d : Compactification f) (d' : Compactification f')
@@ -71,8 +76,7 @@ def compactificationExchange (o : Operations l E) (c : Compositors l E o)
     (c.square l E z d'.g d.g y wp) (a.beta x d'.i d.i z wi hi)
 
 /-- Compactification projection is proper projection, open projection, then the
-inverse pullback compositor and the actual compactification equation.
- -/
+inverse pullback compositor and the actual compactification equation. -/
 def compactificationProjection (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (d : Compactification f) (M : System l E X) (N : System l E Y) :
@@ -88,8 +92,7 @@ def compactificationProjection (o : Operations l E) (c : Compositors l E o)
             (Prod.mkHom (𝟙 M) ((c.pullComp d.i d.g).inv.app N ≫
               eqToHom (congrArg (fun g : X ⟶ Y ↦ (pull l E g).obj N) d.comm.symm)))))
 
-/-- The localized ringed-site projection mate, in its explicit curried tensor shape.
-Source: Stacks 0E48; blueprint def-exchange-projection. -/
+/-- The localized ringed-site projection mate, in its explicit curried tensor shape. -/
 def ringedProperProjection (d : RingedModels l E) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ringedPush l E f ⋙ Functor.curryObj (d.tensor Y).ordinary.tensor ⟶
       (Functor.postcompose₂.obj (ringedPush l E f)).obj
@@ -101,8 +104,7 @@ def ringedProperProjection (d : RingedModels l E) {X Y : Scheme.{u}} (f : X ⟶ 
         (d.tensor X).ordinary.tensor).hom
 
 /-- The localized integral compactification exchange is the same recorded
-supplied-domain composite, on the completed coefficient sheaves.
- -/
+supplied-domain composite, on the completed coefficient sheaves. -/
 def ringedCompactificationExchange (d : RingedModels l E)
     (a : RingedOpenComparisons l E d) {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {f' : X' ⟶ Y'} (cf : Compactification f) (cf' : Compactification f')
@@ -117,8 +119,7 @@ def ringedCompactificationExchange (d : RingedModels l E)
     (ringedSquare l E z cf'.g cf.g y wp) (a.beta x cf'.i cf.i z wi hi)
 
 /-- The localized integral compactification projection uses the canonical tensor
-mate, open tensor map, and inverse pullback composition, in the recorded order.
- -/
+mate, open tensor map, and inverse pullback composition, in the recorded order. -/
 def ringedCompactificationProjection (d : RingedModels l E)
     (a : RingedOpenComparisons l E d) {X Y : Scheme.{u}} {f : X ⟶ Y}
     (cf : Compactification f) (M : Integral l E X) (N : Integral l E Y) :
@@ -133,8 +134,7 @@ def ringedCompactificationProjection (d : RingedModels l E)
           (Prod.mkHom (𝟙 M) ((ringedPullComp l E cf.i cf.g).inv.app N ≫
             eqToHom (congrArg (fun g : X ⟶ Y ↦ (ringedPull l E g).obj N) cf.comm.symm)))))
 
-/-- Canonical proper/open interchange and intrinsic pasting equations.
-Source: Stacks 0F7B--0F7F. -/
+/-- Canonical proper/open interchange and intrinsic pasting equations. -/
 structure ProperOpenCoherence (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o) where
   gamma : ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)
@@ -207,32 +207,27 @@ structure ProperOpenCoherence (o : Operations l E) (c : Compositors l E o)
           (Operations.shriek l E o i₁).map ((properExchange l E o c d r₁ r cc wr).app M) ≫
           (gamma k₁ r₁ p₁ i₁ h₁).app ((pull l E d).obj M)
 
-/-- The chosen compactification ambient scheme over the original base.
- -/
+/-- The chosen compactification ambient scheme over the original base. -/
 def compactAmbient {B : Scheme.{u}} {U V : Over B} {f : U ⟶ V}
     (cf : Compactification f.left) : Over B := Over.mk (cf.g ≫ V.hom)
 
-/-- The actual open compactification arrow as a morphism over the base.
- -/
+/-- The actual open compactification arrow as a morphism over the base. -/
 def compactOpen {B : Scheme.{u}} {U V : Over B} {f : U ⟶ V}
     (cf : Compactification f.left) : U ⟶ compactAmbient (f := f) cf :=
   Over.homMk cf.i ((Category.assoc cf.i cf.g V.hom).symm.trans
     ((congrArg (fun g : U.left ⟶ V.left ↦ g ≫ V.hom) cf.comm.symm).trans f.w))
 
-/-- The actual proper compactification arrow as a morphism over the base.
- -/
+/-- The actual proper compactification arrow as a morphism over the base. -/
 def compactProper {B : Scheme.{u}} {U V : Over B} {f : U ⟶ V}
     (cf : Compactification f.left) : compactAmbient (f := f) cf ⟶ V := Over.homMk cf.g rfl
 
-/-- Evaluate the actual system expression at a specified family.
-Source: Stacks 0941. -/
+/-- Evaluate the actual system expression at a specified family. -/
 abbrev Expression.systemObj {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     {W : Over B} (e : Expression B I X W) (o : Operations l E)
     (M : ∀ i, System l E (X i).left) :=
   (e.evaluate (systemInterpretation l E o)).obj M
 
-/-- Evaluate the localized ordinary ringed-site expression at the same typed inputs.
-Source: Stacks 07A6. -/
+/-- Evaluate the localized ordinary ringed-site expression at the same typed inputs. -/
 abbrev Expression.ringedObj {B : Scheme.{u}} {I : Type u} {X : I → Over B}
     {W : Over B} (e : Expression B I X W) (d : RingedModels l E)
     (K : ∀ i, Integral l E (X i).left) :=
@@ -248,7 +243,7 @@ variable (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o
 
 /-- Pairs of the prescribed system and localized ringed-site isomorphisms. The indices
 are the actual arrows, not freely supplied maps. Inverses are included by the arrow
-closure in the next definition. Source: blueprint fix-prop-coherence, generators. -/
+closure in the next definition. -/
 inductive CanonicalIsoPair : {W : Over B} → (e t : Expression B I X W) →
     (e.systemObj l E o M ≅ t.systemObj l E o M) →
     (e.ringedObj l E d K ≅ t.ringedObj l E d K) → Prop where
@@ -313,8 +308,7 @@ inductive CanonicalIsoPair : {W : Over B} → (e t : Expression B I X W) →
       ((b.projection j.left).app (e.ringedObj l E d K, t.ringedObj l E d K))
 
 /-- The basic structural generator pairs have their actual maps as indices.
-There is no constructor for a freely supplied pair of arrows.
- -/
+There is no constructor for a freely supplied pair of arrows. -/
 inductive BasicPair : {W : Over B} → (e t : Expression B I X W) →
     (e.systemObj l E o M ⟶ t.systemObj l E o M) →
     (e.ringedObj l E d K ⟶ t.ringedObj l E d K) → Prop where
@@ -393,8 +387,7 @@ inductive BasicPair : {W : Over B} → (e t : Expression B I X W) →
 
 /-- Canonical integral generators and their finite expression contexts. A basic
 integral map is the recorded localized ringed-site map transported by the recursively
-specified completion units. Whiskering uses the actual Expression constructors.
-Source: Stacks 099N, 07A4, 0E48; blueprint fix-prop-coherence. -/
+specified completion units. Whiskering uses the actual Expression constructors. -/
 inductive CanonicalPair : {W : Over B} → (e t : Expression B I X W) →
     (e.systemObj l E o M ⟶ t.systemObj l E o M) →
     ((e.evaluate (integralInterpretation l E)).obj K ⟶
@@ -460,18 +453,15 @@ inductive CanonicalPair : {W : Over B} → (e t : Expression B I X W) →
 
 end CanonicalPairs
 
-/-- Natural realization comparisons for every finite geometric expression.
-Source: Stacks 0941.
-Proof: strict-system models and expression-tree induction; cited nodes give generator,
-whiskering, and refinement coherence. -/
+/-- Natural realization comparisons for every finite geometric expression. -/
 structure Realizations (D : FiniteFieldDatum.{u}) (o : Operations l E) where
   /-- The proper/open mate, scalar restriction, and normalized pasting package. -/
   compositors : Compositors l E o
   openComparisons : OpenComparisons l E o compositors
   canonicalBridge : CanonicalBridge l E o
   properOpen : ProperOpenCoherence l E o compositors openComparisons canonicalBridge
-  /-- The tensor/square identifications obey the displayed equation of
-      lem-weil-pbc-ringed-exchange-tensor-coherence, before evaluation. -/
+  /-- The tensor/square identifications obey the ringed exchange/tensor coherence
+      equation, before evaluation. -/
   ringedTensorCoherence : ∀ {U V W Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     (h : k ≫ p = r ≫ i) (M : System l E V) (N : System l E Z),

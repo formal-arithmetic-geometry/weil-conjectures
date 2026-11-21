@@ -41,8 +41,8 @@ operations that the Frobenius statements of Poincaré duality are phrased with.
 - `AlgebraicGeometry.Etale.shiftWeilDatum`, `AlgebraicGeometry.Etale.tensorWeilDatum`,
   `AlgebraicGeometry.Etale.lowerShriekWeilDatum`, `AlgebraicGeometry.Etale.lowerStarWeilDatum`:
   the induced Weil data.
-- `AlgebraicGeometry.Etale.frobeniusOperator` (`definition-frobenius-operator--1`): the Frobenius
-  operator of a Weil datum, a `Λ`-linear endomorphism of `Hom(Λ_Y, M)`.
+- `AlgebraicGeometry.Etale.frobeniusOperator`: the Frobenius operator of a Weil datum, a
+  `Λ`-linear endomorphism of `Hom(Λ_Y, M)`.
 - `AlgebraicGeometry.Etale.IsWeilMorphism`, `AlgebraicGeometry.Etale.IsWeilPairing`: morphisms
   and pairings of Weil objects.
 - `AlgebraicGeometry.Etale.degreewisePairing`: the degreewise pairing of a pairing.
@@ -54,12 +54,12 @@ operations that the Frobenius statements of Poincaré duality are phrased with.
 - `AlgebraicGeometry.Etale.isWeilPairing_mixedSupportCupProduct`: the mixed-support cup product
   is a Weil pairing.
 
-## Implementation notes
+## Implementation details
 
 The exchange maps are `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap` and
-`AlgebraicGeometry.Etale.derivedBaseChangeMap` of `sk-def-sf-exchanges`. The compatibilities of
-the derived pullback with the tensor product, the shifts and the exchange maps that the
-equivariance statements need are not formalised yet; they are stated here as separate lemmas.
+`AlgebraicGeometry.Etale.derivedBaseChangeMap`. The compatibilities of the derived pullback with
+the tensor product, the shifts and the exchange maps that the equivariance statements need are
+stated here as separate lemmas.
 -/
 
 @[expose] public section
@@ -99,9 +99,7 @@ noncomputable def tensorWeilDatum {A B : DerivedCategoryModule Λ Y}
   (leftDerivedUpperStarTensorIso _ h A B).hom ≫ ((derivedTensor _ Y).map ψA).app _ ≫
     ((derivedTensor _ Y).obj A).map ψB
 
-/-- Blueprint `definition-frobenius-operator--1`: the Frobenius operators.
-
-The *Frobenius operator* of a Weil datum `ψ : Lh^* M ⟶ M` on `H⁰(Y, M) = Hom(Λ_Y, M)`,
+/-- The *Frobenius operator* of a Weil datum `ψ : Lh^* M ⟶ M` on `H⁰(Y, M) = Hom(Λ_Y, M)`,
 ```
          ε⁻¹ Lh^* x ψ
   Λ_Y ─────────▶ Lh^* Λ_Y ──────────▶ Lh^* M ─────────▶ M
@@ -234,8 +232,7 @@ lemma IsWeilPairing.comp {A B : DerivedCategoryModule Λ Y}
   IsWeilMorphism.comp hQ hf
 
 /-- Shifting the second factor of a Weil pairing: if `Q : A ⊗ᴸ B ⟶ C` is a Weil pairing, then
-so is `A ⊗ᴸ B[n] ≅ (A ⊗ᴸ B)[n] ⟶ C[n]`, for the shifted data. This is the compatibility of
-the tensor isomorphism of `Lh^*` with the shift isomorphisms. -/
+so is `A ⊗ᴸ B[n] ≅ (A ⊗ᴸ B)[n] ⟶ C[n]`, for the shifted data. -/
 lemma IsWeilPairing.shift_right {A B : DerivedCategoryModule Λ Y}
     {ψA : (L((h)^*[ModuleCat.{u + 1} Λ])).obj A ⟶ A}
     {ψB : (L((h)^*[ModuleCat.{u + 1} Λ])).obj B ⟶ B}
@@ -335,8 +332,7 @@ variable {K L : DerivedCategoryModule Λ X}
   {φK : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K}
   {φL : (L((g)^*[ModuleCat.{u + 1} Λ])).obj L ⟶ L}
 
-/-- `Ra_!` carries morphisms of Weil objects to morphisms of Weil objects, by naturality of the
-exchange map. -/
+/-- `Ra_!` carries morphisms of Weil objects to morphisms of Weil objects. -/
 lemma IsWeilMorphism.rightDerivedLowerShriek_map [QuasiCompact a] (sq : IsPullback g a a h)
     {f : K ⟶ L} (hf : IsWeilMorphism g φK φL f) :
     IsWeilMorphism h (lowerShriekWeilDatum sq φK) (lowerShriekWeilDatum sq φL)
@@ -347,8 +343,7 @@ lemma IsWeilMorphism.rightDerivedLowerShriek_map [QuasiCompact a] (sq : IsPullba
   rw [reassoc_of% this, ← Functor.map_comp, hf, Functor.map_comp, Category.assoc]
 
 omit [Finite Λ] [HasCompactification a] in
-/-- `Ra_*` carries morphisms of Weil objects to morphisms of Weil objects, by naturality of the
-exchange map. -/
+/-- `Ra_*` carries morphisms of Weil objects to morphisms of Weil objects. -/
 lemma IsWeilMorphism.rightDerivedLowerStar_map (sq : CommSq g a a h) {f : K ⟶ L}
     (hf : IsWeilMorphism g φK φL f) :
     IsWeilMorphism h (lowerStarWeilDatum sq φK) (lowerStarWeilDatum sq φL)
@@ -359,8 +354,7 @@ lemma IsWeilMorphism.rightDerivedLowerStar_map (sq : CommSq g a a h) {f : K ⟶ 
   rw [reassoc_of% this, ← Functor.map_comp, hf, Functor.map_comp, Category.assoc]
 
 /-- The shift compatibility `(Ra_! K)[n] ≅ Ra_!(K[n])` is a morphism of Weil objects, for the
-data `(Ra_! φ)[n]` and `Ra_!(φ[n])`. This is the compatibility of the exchange map `Ex_!` with
-the shifts. -/
+data `(Ra_! φ)[n]` and `Ra_!(φ[n])`. -/
 lemma isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv [QuasiCompact a]
     (sq : IsPullback g a a h) (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) (n : ℤ) :
     IsWeilMorphism h (shiftWeilDatum h (lowerShriekWeilDatum sq φ) n)
@@ -379,9 +373,7 @@ lemma isWeilMorphism_rightDerivedLowerShriek_commShiftIso_inv [QuasiCompact a]
   simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% hEx, h', Iso.hom_inv_id_app_assoc]
 
-/-- Blueprint `prose-10-20` (the cup product part).
-
-**The mixed-support cup product is a Weil pairing**: for Weil data `φ` on `K` and `ψ` on `M`,
+/-- **The mixed-support cup product is a Weil pairing**: for Weil data `φ` on `K` and `ψ` on `M`,
 `⌣_c : Ra_! K ⊗ᴸ Ra_* M ⟶ Ra_!(K ⊗ᴸ M)` is a morphism of Weil objects for the induced data
 `Ra_! φ`, `Ra_* ψ` and `Ra_!(φ ⊗ ψ)`. -/
 lemma isWeilPairing_mixedSupportCupProduct [QuasiCompact a] (sq : IsPullback g a a h)

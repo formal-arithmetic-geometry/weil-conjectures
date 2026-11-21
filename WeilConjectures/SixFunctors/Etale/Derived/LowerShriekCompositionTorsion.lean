@@ -19,14 +19,17 @@ Let `Λ` be a commutative ring and `ϖ ∈ Λ` a nonzerodivisor with `Λ ⧸ (ϖ
 `Λ = 𝒪_E` and `ϖ` a uniformizer). Proper base change fails on `D(-_ét, Λ)`, but it holds up to
 objects on which `ϖ` acts invertibly: for a cartesian square with `f` proper and `N` with
 `Lg'^* N = 0`, the multiplication by `ϖ` on `Lg^* Rf_* N` is invertible
-(`AlgebraicGeometry.Etale.isIso_smul_id_leftDerivedUpperStar_rightDerivedLowerStar`). The proof
-passes to the finite ring `Λ ⧸ (ϖ)` through the derived coextension of scalars
-`RHom_Λ(Λ ⧸ (ϖ), -)`, which commutes with `Rf_*` and detects the invertibility of `ϖ`.
+(`AlgebraicGeometry.Etale.isIso_smul_id_leftDerivedUpperStar_rightDerivedLowerStar`).
 
 Consequently the exchange map `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` of an extension by zero with a
 proper direct image has cones on which `ϖ` acts invertibly
 (`AlgebraicGeometry.Etale.isIso_smul_id_of_openImmersionLowerShriekLowerStarExchange`), so it
 induces bijections on morphisms into objects killed by a power of `ϖ`.
+
+## Implementation details
+
+The statement is reduced to the finite ring `Λ ⧸ (ϖ)` through the derived coextension of scalars
+`RHom_Λ(Λ ⧸ (ϖ), -)`, which commutes with `Rf_*` and detects the invertibility of `ϖ`.
 -/
 
 @[expose] public section
@@ -139,10 +142,7 @@ variable [Finite (Λ ⧸ Ideal.span {ϖ})]
 
 /-- **Proper base change up to `ϖ`-invertible objects.** For a cartesian square
 `g' ≫ f = f' ≫ g` with `f` proper and `N ∈ D(X_ét, Λ)` with `g'^* N = 0`, the multiplication by
-`ϖ` on `g^* Rf_* N` is invertible. With coefficients `Λ ⧸ (ϖ)` the object `g^* Rf_* N` itself
-vanishes by proper base change, and the derived coextension `RHom_Λ(Λ ⧸ (ϖ), -)` commutes with
-`Rf_*` (`AlgebraicGeometry.Etale.rightDerivedLowerStarCompCoextendScalarsIso`) and detects the
-invertibility of `ϖ` through the coextension triangle. -/
+`ϖ` on `g^* Rf_* N` is invertible. -/
 theorem isIso_smul_id_mapDerivedCategoryUpperStar_rightDerivedLowerStar {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} [IsProper f]
     (sq : IsPullback g' f' f g) (N : 𝐃(X, Λ))
@@ -189,9 +189,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (ϖ : Λ)
 
 /-- A natural transformation `α : F ⟶ G` of functors with values in `D(T_ét, Λ)` *has
 `ϖ`-invertible cones* if every component `α_K` sits in a distinguished triangle
-`F K ⟶ G K ⟶ C ⟶ F K[1]` with `ϖ` acting invertibly on `C`. Such a transformation induces
-bijections on morphisms into objects receiving no nonzero map from `ϖ`-invertible objects, for
-instance objects killed by a power of `ϖ`. -/
+`F K ⟶ G K ⟶ C ⟶ F K[1]` with `ϖ` acting invertibly on `C`. -/
 def HasSmulInvertibleCones {𝒞 : Type*} [Category 𝒞] {T : Scheme.{u}}
     {F G : 𝒞 ⥤ 𝐃(T, Λ)} (α : F ⟶ G) : Prop :=
   ∀ K, ∃ (C : 𝐃(T, Λ)) (b : G.obj K ⟶ C) (c : C ⟶ (F.obj K)⟦(1 : ℤ)⟧),
@@ -271,10 +269,8 @@ include hϖ
 
 /-- **The exchange of an extension by zero with a proper direct image has `ϖ`-invertible
 cones.** For a cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions and `g''`
-proper, the exchange map `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` on `D(-_ét, Λ)` is an isomorphism over
-the open `j` and, over its closed complement, its target is `ϖ`-invertible by proper base
-change up to `ϖ`-invertible objects
-(`AlgebraicGeometry.Etale.isIso_smul_id_mapDerivedCategoryUpperStar_rightDerivedLowerStar`). -/
+proper, the exchange map `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` on `D(-_ét, Λ)` has `ϖ`-invertible
+cones. -/
 theorem hasSmulInvertibleCones_openImmersionLowerShriekLowerStarExchange
     {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
     [IsOpenImmersion j] [IsOpenImmersion j'] [IsProper g''] (hsq : IsPullback g' j' j g'') :
@@ -360,8 +356,7 @@ cones.** The integral analogue of
 `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriekOfCompactification`: with the
 notation there, the functors `Hom(Rf_!(c) -, ·)` and `Hom(Rh_* De_! Rπ_* -, ·)`, post-composed
 with any triangulated `Λ`-linear `H`, agree on objects receiving no nonzero map from
-`ϖ`-invertible objects. The proof is the same, with each exchange isomorphism replaced by the
-exchange map, whose cones are `ϖ`-invertible. -/
+`ϖ`-invertible objects. -/
 theorem nonempty_homFunctorIso_rightDerivedLowerShriekOfCompactification {X Y P' U : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) (π : P' ⟶ Y) [IsProper π] (e : U ⟶ P')
     [IsOpenImmersion e] (h : X ⟶ U) [IsProper h] (fac : h ≫ e ≫ π = f)
@@ -455,9 +450,7 @@ theorem nonempty_homFunctorIso_rightDerivedLowerShriekOfCompactification {X Y P'
 
 /-- **The composition law for `Rf_!` up to `ϖ`-invertible cones.** For composable `f : X ⟶ Y`
 and `g : Y ⟶ T` admitting compactifications, the functors `Hom(R(f ≫ g)_! -, ·)` and
-`Hom(Rg_! Rf_! -, ·)` agree on objects receiving no nonzero map from `ϖ`-invertible objects.
-This is the proof of `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`, with
-each exchange isomorphism replaced by the exchange map, whose cones are `ϖ`-invertible. -/
+`Hom(Rg_! Rf_! -, ·)` agree on objects receiving no nonzero map from `ϖ`-invertible objects. -/
 theorem nonempty_homFunctorIso_rightDerivedLowerShriek_comp {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ S) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] :
     Nonempty (homFunctor P (R(f ≫ g)_![ModuleCat.{u + 1} Λ]) ≅
@@ -536,9 +529,7 @@ theorem nonempty_homFunctorIso_rightDerivedLowerShriek_comp {X Y : Scheme.{u}} (
 `f : X ⟶ Y` and `g : Y ⟶ S` admitting compactifications, with `Rf_!` left adjoints, and a
 functor `P : J ⥤ D(S_ét, Λ)` whose values receive no nonzero map from `ϖ`-invertible objects
 (for instance the tower `n ↦ Λ ⧸ (ϖ)ⁿ`), the exceptional inverse images satisfy
-`P ⋙ R(f ≫ g)^! ≅ P ⋙ Rg^! ⋙ Rf^!` for the chosen right adjoints `Rf^!` of `Rf_!`: by the
-Yoneda lemma, from
-`AlgebraicGeometry.Etale.nonempty_homFunctorIso_rightDerivedLowerShriek_comp`. -/
+`P ⋙ R(f ≫ g)^! ≅ P ⋙ Rg^! ⋙ Rf^!` for the chosen right adjoints `Rf^!` of `Rf_!`. -/
 theorem nonempty_iso_comp_rightDerivedUpperShriek_comp {X Y : Scheme.{u}} (f : X ⟶ Y)
     (g : Y ⟶ S) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(g)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]

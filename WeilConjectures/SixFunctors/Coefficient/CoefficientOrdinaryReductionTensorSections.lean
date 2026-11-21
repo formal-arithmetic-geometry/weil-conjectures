@@ -10,13 +10,19 @@ public import WeilConjectures.SixFunctors.Coefficient.CoefficientOrdinaryReducti
 
 /-! # Tensor presentations of the ordinary quotient system
 
-Source: Stacks 03EK, 07A4 and 0941.
-
 For an ordinary quotient-system model `M`, the finite evaluations of the system tensor
 product of `M.quotient P` and `M.quotient Q` are identified with the finite scalar
 extensions of the total tensor product of `P` and `Q`. These identifications commute
 with the strict transition maps. The section calculation is the generic
 `OrdinaryReductionTensor.tensorPresentation_transition`.
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 06YY]
 -/
 
 @[expose] public section
@@ -50,8 +56,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf
 
 attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
-/-- The strict transition on sections is horizontal restriction.
-Source: Stacks 0941. -/
+/-- The strict transition on sections is horizontal restriction. -/
 theorem coefficientSequenceTransition_section {m n : ℕ} (h : n ≤ m)
     (M : coefficientSequenceModules l E W) (U : W.ProEtᵒᵖ) (x : M.val.obj (op (m, U.unop))) :
     coefficientRestrictionSection (normalizedDVRQuotient l E W h)
@@ -67,15 +72,13 @@ theorem coefficientSequenceTransition_section {m n : ℕ} (h : n ≤ m)
     (coefficientSequenceEvaluationAb_eq l E W M m U)
     (coefficientSequenceEvaluationAb_eq l E W M n U) _ hh x
 
-/-- Evaluation sections exhaust the sections of a finite evaluation.
-Source: Stacks 0941. -/
+/-- Evaluation sections exhaust the sections of a finite evaluation. -/
 theorem coefficientEvaluationSection_surjective (M : coefficientSequenceModules l E W) (n : ℕ)
     (U : W.ProEtᵒᵖ) : Function.Surjective (coefficientEvaluationSection l E W M n U) :=
   OrdinaryReductionTensor.eqToHom_surjective
     (coefficientSequenceEvaluationAb_eq l E W M n U).symm
 
-/-- The strict quotient map is the mate of the composition of restrictions.
-Source: Stacks 03D7, 06YY. -/
+/-- The strict quotient map is the mate of the composition of restrictions. -/
 theorem coefficientOrdinaryQuotient_app_eq {m n : ℕ} (h : n ≤ m)
     (X : scalarReductionSource l E W) :
     (coefficientOrdinaryQuotient l E W h).app X =
@@ -86,8 +89,7 @@ theorem coefficientOrdinaryQuotient_app_eq {m n : ℕ} (h : n ≤ m)
   unfold coefficientOrdinaryQuotient
   exact (coefficientOrdinaryQuotient_exists l E W h).choose_spec.1 X
 
-/-- The completed coefficient projection, with its target the finite coefficient sheaf.
-Source: Stacks 0941. -/
+/-- The completed coefficient projection, with its target the finite coefficient sheaf. -/
 abbrev completedProjection (n : ℕ) :
     SheafOfModules.derivedChangeRingIndependentCoefficients (Scheme.ProEt.topology W)
       (completedIntegralCommRingSheafUnrestricted l E W) ⟶ integralCoefficientSheaf l E W n :=
@@ -95,16 +97,14 @@ abbrev completedProjection (n : ℕ) :
     (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
       (completedIntegralCommRingProjectionUnrestricted l E W n)
 
-/-- The strict quotient map is the mate of the composition of restrictions.
-Source: Stacks 03D7, 06YY. -/
+/-- The strict quotient map is the mate of the composition of restrictions. -/
 theorem coefficientOrdinaryQuotient_mateLaw {m n : ℕ} (h : n ≤ m) :
     OrdinaryReductionTensor.QuotientMateLaw (coefficientOrdinaryScalarAdjunction l E W m)
       (coefficientOrdinaryScalarAdjunction l E W n) (eqToIso (coefficientRestrictionComp l E W h))
       (coefficientOrdinaryQuotient l E W h) :=
   ⟨coefficientOrdinaryQuotient_app_eq l E W h⟩
 
-/-- The strict quotient map sends unit sections to unit sections.
-Source: Stacks 03D7, 06YY. -/
+/-- The strict quotient map sends unit sections to unit sections. -/
 theorem coefficientOrdinaryQuotient_unitLaw {m n : ℕ} (h : n ≤ m) :
     OrdinaryReductionTensor.QuotientUnitLaw
       ((sheafCompose (Scheme.ProEt.topology W)
@@ -121,8 +121,7 @@ theorem coefficientOrdinaryQuotient_unitLaw {m n : ℕ} (h : n ≤ m) :
     (coefficientOrdinaryScalarAdjunction l E W n) (coefficientOrdinaryQuotient l E W h)
     (coefficientOrdinaryQuotient_mateLaw l E W h)
 
-/-- The unit-section formula characterizing the ordinary scalar tensor comparison.
-Source: Stacks 03EK, 07A4. -/
+/-- The unit-section formula characterizing the ordinary scalar tensor comparison. -/
 theorem coefficientScalarTensorIso_generators (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     CoefficientScalarTensorGenerators.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -134,8 +133,7 @@ theorem coefficientScalarTensorIso_generators (n : ℕ)
   unfold coefficientScalarTensorIso coefficientUniqueComparisonChoice
   exact (coefficientScalarTensorIso_exists l E W n P Q).choose_spec.1
 
-/-- The generator formula characterizing the ordinary evaluation tensor comparison.
-Source: Stacks 03EK, 0941. -/
+/-- The generator formula characterizing the ordinary evaluation tensor comparison. -/
 theorem coefficientEvaluationTensorIso_generator (n : ℕ)
     (P Q : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (p q k : ℤ) (h : p + q = k) (U : W.ProEtᵒᵖ)
@@ -154,8 +152,7 @@ theorem coefficientEvaluationTensorIso_generator (n : ℕ)
   unfold coefficientEvaluationTensorIso coefficientUniqueComparisonChoice
   exact (coefficientEvaluationTensorIso_exists l E W n P Q).choose_spec.1 p q k h U x y
 
-/-- The finite presentation of the system tensor product of two ordinary quotient systems.
-Source: Stacks 03EK, 07A4 and 0941. -/
+/-- The finite presentation of the system tensor product of two ordinary quotient systems. -/
 def OrdinaryModel.tensorPresentation (M : OrdinaryModel l E W) (n : ℕ)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) :
     ((coefficientSequenceEvaluation l E W n).mapHomologicalComplex (.up ℤ)).obj
@@ -174,8 +171,7 @@ def OrdinaryModel.tensorPresentation (M : OrdinaryModel l E W) (n : ℕ)
     (coefficientScalarTensorIso l E W n P Q).symm
 
 -- Instantiating the generic calculation checks several large coefficient interfaces.
-/-- The finite presentations of a system tensor product commute with strict transitions.
-Source: Stacks 03EK, 07A4 and 0941. -/
+/-- The finite presentations of a system tensor product commute with strict transitions. -/
 theorem OrdinaryModel.tensorPresentation_transition (M : OrdinaryModel l E W)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) {m n : ℕ} (h : n ≤ m) :
     (NatTrans.mapHomologicalComplex (coefficientSequenceTransition l E W h) (.up ℤ)).app

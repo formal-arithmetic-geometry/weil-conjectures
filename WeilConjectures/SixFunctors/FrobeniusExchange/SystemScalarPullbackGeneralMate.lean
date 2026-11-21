@@ -20,7 +20,11 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralScalarP
 
 /-! # Scalar mates of the system scalar/pullback comparison for arbitrary morphisms
 
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 06YY and 07A6.
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section

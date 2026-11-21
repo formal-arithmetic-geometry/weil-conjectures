@@ -68,14 +68,7 @@ Y' --g---> Y
 ```
 
 with `g` étale, the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on the bounded below derived
-categories of sheaves of `Λ`-modules is an isomorphism. Represent a complex by a bounded below
-complex `I` of injectives: the derived base change map at `I` is computed by the underived one,
-which is an isomorphism by étale base change for the pushforward
-(`AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`), followed by the unit
-`f'_* g'^* I ⟶ Rf'_* g'^* I`, which is an isomorphism since the pullback along the étale
-morphism `g'` preserves injectives (`AlgebraicGeometry.Etale.injective_upperStar_obj_of_etale`).
-This is the compatibility of the higher direct images with étale localisation used in blueprint
-`prose-08-06` (Stacks 0D6G). -/
+categories of sheaves of `Λ`-modules is an isomorphism. -/
 theorem Etale.isIso_derivedBaseChangeMapPlus_of_etale (sq : IsPullback g' f' f g) [Etale g] :
     IsIso (Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
   have : Etale g' := MorphismProperty.of_isPullback sq.flip inferInstance

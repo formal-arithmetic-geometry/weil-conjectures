@@ -108,8 +108,12 @@ import Mathlib.CategoryTheory.Sites.CoverPreserving
 
 /-! # Maps between strict quotient presentations
 
-Source: Stacks Project, Tags 03CZ and 0941. This is an ordinary chain-map
-assembly statement, without a derived category or an open immersion.
+An ordinary chain-map assembly statement, without a derived category or an open immersion.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -323,19 +327,7 @@ private theorem assemble_evaluation (n : ℕ) :
 end Assembly
 
 /-- An integral chain map gives a strict chain-system map between any two
-quotient presentations with their actual horizontal transition equations.
-Source: Stacks Project, Tags 03CZ and 0941; ordinary assembly in step 3 of
-`lem-sf-open-restriction-counit-on-good-complexes`.
-
-Proof: at each degree and coefficient level take kappaC, followed by scalar
-extension of h, followed by kappaD inverse. Naturality of the quotient
-transformation and the two assumed horizontal equations show that these maps
-commute with horizontal restrictions. Their vertical naturality is that of the
-finite module-sheaf maps. Since every arrow of the product site is a horizontal
-arrow followed by a vertical arrow, they assemble to a module-sheaf map on the
-sequence site. The chain-map equations follow from those of h and the kappa
-isomorphisms, checked on ordinary coefficient evaluations, which are jointly
-faithful. Thus these degreewise maps form the required strict chain map. -/
+quotient presentations with their actual horizontal transition equations. -/
 theorem strictReductionPresentationMap
     (Q R : CochainComplex (scalarReductionSource l E W) ℤ)
     (C D : CochainComplex (coefficientSequenceModules l E W) ℤ)

@@ -33,7 +33,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composit
 - `AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal`: the kernel transform of a
   kernel supported on the diagonal is a tensor product.
 
-See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation notes.
+See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation details.
 -/
 
 @[expose] public section
@@ -54,11 +54,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   {S V : Scheme.{u}} (π : V ⟶ S)
 
 /-- The kernel transform of a kernel `Δ_* N` supported on the diagonal, with shift `0`, is
-tensoring with `N`, at a general coefficient category `A`, from the inputs of the six-functor
-formalism it uses: `RΔ_* ≅ RΔ_!` (`hΔ`), the projection formula for `Δ` at `N` (`hpf`) and
-`RΔ_! ⋙ Rp₂,! ≅ 𝟭` (`hcomp`), the composition law of `Rf_!` for `Δ ≫ p₂ = 𝟙`. Then
-`Rp₂,!(p₁^* K ⊗ᴸ Δ_* N) ≅ Rp₂,!(RΔ_!(Δ^* p₁^* K ⊗ᴸ N)) ≅ K ⊗ᴸ N`, using a braiding of the
-derived categories and `Δ ≫ p₁ = 𝟙`. -/
+tensoring with `N`, at a general coefficient category `A`, given `RΔ_* ≅ RΔ_!` (`hΔ`), the
+projection formula for `Δ` at `N` (`hpf`) and `RΔ_! ⋙ Rp₂,! ≅ 𝟭` (`hcomp`). -/
 theorem nonempty_iso_kernelTransform_diagonal_of_nonempty_iso
     [HasCompactification (pullback.snd π π)] [HasCompactification (pullback.diagonal π)]
     (N : DerivedCategory (Sheaf V.smallEtaleTopology A))
@@ -106,24 +103,8 @@ variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' �
 
 /-- The composite of the kernel transform of `𝒦` with shift `a` and the kernel transform of
 `𝒦'` with shift `c` is the kernel transform of the convolution `𝒦' ∗ 𝒦` with shift `a + c`.
-The composite is read on the triple product, in the cartesian square
-
-```
-    V ×ₛ V' ×ₛ V'' ──r₁₂──▶ V ×ₛ V'
-          │ │
-       r₂₃│ │p₂
-          ▼ ▼
-      V' ×ₛ V'' ─────q₁─────▶ V'
-```
-
-with `r₁₃ : V ×ₛ V' ×ₛ V'' ⟶ V ×ₛ V''` the remaining projection and
-`q₂ : V' ×ₛ V'' ⟶ V''` the second projection.
-
-Class: torsion; decided by compact-support base change and the projection formula for `Rf_!`,
-which need `[Finite Λ]`. The composition law of `Rf_!` is applied
-to `r₁₃ ≫ s₂ = r₂₃ ≫ q₂`, `s₂ : V ×ₛ V'' ⟶ V''` being the second projection, which is why that
-composite is assumed to admit a compactification.
-(sketch blueprint: `proposition-fourier-inversion`; blueprint: `proposition-fourier-inversion`) -/
+The composite `r₁₃ ≫ s₂ = r₂₃ ≫ q₂` (with `s₂ : V ×ₛ V'' ⟶ V''` and `q₂ : V' ×ₛ V'' ⟶ V''` the
+second projections) is assumed to admit a compactification. -/
 theorem nonempty_iso_kernelTransform_comp [Finite Λ]
     [LocallyOfFiniteType π] [QuasiCompact π] [LocallyOfFiniteType π'] [QuasiCompact π']
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
@@ -149,29 +130,9 @@ theorem nonempty_iso_kernelTransform_comp [Finite Λ]
       (fun L ↦ hasProjectionFormula_of_finite Λ _ K L)) 𝒦 𝒦' a c
 
 /-- The kernel transform of a kernel `Δ_* N` supported on the diagonal of `V ×_S V`, with
-shift `0`, is tensoring with `N`:
-
-`Rp₂,!(p₁^* K ⊗ᴸ Δ_* N) ≅ K ⊗ᴸ N`,
-
-naturally in `K`, where `Δ` is the diagonal of the separated morphism `π`:
-
-```
-             Δ
-        V ──────▶ V ×ₛ V ──p₂──▶ V
-         ╲ │
-          ╲ 𝟙 │p₁
-           ╲ ▼
-            ──────▶ V
-```
-
-with `Δ ≫ p₁ = 𝟙 = Δ ≫ p₂`. For `N = Λ` this says that `Δ_* Λ` is the identity kernel.
-
-Class: torsion. The blueprint proof is formal: the projection formula for the closed immersion
-`Δ`, `Δ_* = Δ_!` and `Δ ≫ p₂ = 𝟙`
-(`AlgebraicGeometry.Etale.nonempty_iso_kernelTransform_diagonal_of_nonempty_iso`). Here
-`[Finite Λ]` enters through the projection formula and the composition law of `Rf_!`, and
-`[IsSeparated π]` makes `Δ` a closed immersion.
-(sketch blueprint: `sec-Fourier-inversion`, proof) -/
+shift `0`, is tensoring with `N`: `Rp₂,!(p₁^* K ⊗ᴸ Δ_* N) ≅ K ⊗ᴸ N`, naturally in `K`, where
+`Δ` is the diagonal of the separated morphism `π`. For `N = Λ` this says that `Δ_* Λ` is the
+identity kernel. -/
 theorem nonempty_iso_kernelTransform_diagonal [Finite Λ] [IsSeparated π] [QuasiCompact π]
     [HasCompactification (pullback.snd π π)]
     (N : DerivedCategory (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

@@ -18,11 +18,12 @@ import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 For a commutative square `h ≫ f' = e ≫ g` and `M ∈ D(X'_ét, Λ)`, `Λ` a finite ring with Jacobson
 radical `J`, the base change map `M ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* M ⊗ᴸ Le^* 𝓕)` is an isomorphism
 for every sheaf `𝓕` placed in degree `0` as soon as it is for the sheaves killed by `J`
-(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of_smul_eq_zero`): `J` is
-nilpotent, a sheaf `𝓕` killed by `J^{m+1}` is an extension of a sheaf killed by `J^m` by the
-subsheaf `𝓕[J]` killed by `J`, and both sides are triangulated functors of `𝓕`. This is the
-reduction to prime torsion of the proof of blueprint `lemma-kunneth-field-coefficients--1`, for a
-general finite `Λ`.
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of_smul_eq_zero`).
+
+## Implementation details
+
+`J` is nilpotent, and a sheaf `𝓕` killed by `J^{m+1}` is an extension of a sheaf killed by `J^m`
+by the subsheaf `𝓕[J]` killed by `J`.
 -/
 
 @[expose] public section

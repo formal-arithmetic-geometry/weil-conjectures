@@ -34,9 +34,7 @@ namespace AlgebraicGeometry.Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- The extension by zero along an open immersion commutes with forgetting the
-`Λ`-module structure: both composites are left adjoint to the functor sending an abelian
-sheaf `G` on `X` to the coinduced sheaf of `Λ`-modules `Hom_ℤ(Λ, j^* G)` on `U`, as
-restriction along `j` commutes with postcomposition. -/
+`Λ`-module structure. -/
 noncomputable def openImmersionLowerShriekSheafForget₂Iso :
     (j)_!open[ModuleCat.{u + 1} Λ] ⋙ sheafForget₂ Λ X ≅
       sheafForget₂ Λ U ⋙ (j)_!open[AddCommGrpCat.{u + 1}] :=

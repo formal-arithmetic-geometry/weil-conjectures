@@ -23,9 +23,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 Let `S` be an integral scheme of finite type over a field `k`, let `Λ` be a finite ring whose
 exponent is invertible on `S`, let `j : X ⟶ Y` be an open immersion of finite-type `S`-schemes and
 let `F` be a constructible sheaf of `Λ`-modules on `X_ét`. Deligne's generic constructibility
-theorem (SGA 4½, [Th. finitude], Thm. 1.9) says that over a nonempty open `U ⊆ S` the direct
-image `Rj_* F` is bounded constructible and its formation commutes with every base change
-`T ⟶ U` from a noetherian scheme.
+theorem says that over a nonempty open `U ⊆ S` the direct image `Rj_* F` is bounded
+constructible and its formation commutes with every base change `T ⟶ U` from a noetherian
+scheme.
 
 The property "over `U`, the direct image is bounded constructible and commutes with base
 change" is `AlgebraicGeometry.Etale.HasConstructibleDirectImageBaseChangeOn`. It is phrased
@@ -38,20 +38,19 @@ map along the open immersion `Y_U ⟶ Y`, which is an isomorphism.
 
 - `AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn`: Deligne's generic
   constructibility.
-- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field`
-  :
-  over a field, `Rj_* F` is bounded constructible (`corollary-open-direct-image-over-field--1`).
+- `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field`:
+  over a field, `Rj_* F` is bounded constructible.
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective`:
-  descent of the property along a finite, surjective, radicial base change
-  (`lemma-universal-homeomorphism-base--1`).
+  descent of the property along a finite, surjective, radicial base change.
 
-## Implementation notes
+## Implementation details
 
-The blueprint states the theorem and its corollary over a field for `𝔽_ℓ`-coefficients, and
-obtains arbitrary finite coefficients `Λ` by a dévissage
-(`corollary-open-direct-image-over-field--1`). Its
-proof applies verbatim to any finite `Λ` whose exponent is invertible on `S`, and we state it in
-that generality.
+The theorem is stated for any finite `Λ` whose exponent is invertible on `S`, rather than only
+for `𝔽_ℓ`-coefficients; the proof applies verbatim.
+
+## References
+
+* Deligne, SGA 4½, [Th. finitude], Théorème 1.9
 -/
 
 @[expose] public section
@@ -326,18 +325,11 @@ private theorem smooth_prime_property
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- A smooth source with finite locally constant coefficients.
-
-For a separated smooth morphism of finite type `a : X ⟶ S` to an integral scheme of finite type
-over a field on which the exponent of `Λ` is invertible, and a finite locally constant sheaf `F`
-on `X`, there is a nonempty open `U ⊆ S` over which `Ra_* F` is bounded constructible and
-commutes with every base change from a noetherian scheme
-(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`).
-
-This records the form of the node used by the induction for
-`theorem-generic-constructibility-base-change-rj`: the blueprint asks for `𝔽_ℓ`-coefficients and
-finite locally constant cohomology sheaves of `Rf_{U,*} L`, whereas this states bounded
-constructibility (with base change) over any finite ring `Λ` whose exponent is invertible on `S`. -/
+/-- A smooth source with finite locally constant coefficients: for a separated smooth morphism
+of finite type `a : X ⟶ S` to an integral scheme of finite type over a field on which the
+exponent of `Λ` is invertible, and a finite locally constant sheaf `F` on `X`, there is a
+nonempty open `U ⊆ S` over which `Ra_* F` is bounded constructible and commutes with every base
+change from a noetherian scheme (`AlgebraicGeometry.Etale.SmoothGenericDirectImage`). -/
 theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ := by
   intro k _ S X _ aS _ _ _ a _ _ _ F _
   obtain ⟨n, hn, hnΛ, hnu⟩ := HasInvertibleExponent.exists_isUnit_natCast (Λ := Λ) (X := S)
@@ -396,16 +388,12 @@ theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ := by
   change n • x = 0
   rw [← Nat.cast_smul_eq_nsmul Λ, hnΛ, zero_smul]
 
-/-- Generic bounded constructibility
-for an open immersion.
-
-Let `S` be integral and of finite type over a field `k`, let `Λ` be a finite ring whose exponent
-is invertible on `S`, and let `j : X ⟶ Y` be
-an open immersion of finite-type `S`-schemes. For a constructible sheaf `F` of `Λ`-modules on
-`X`, there is a nonempty open `U ⊆ S` such that `Rj_{U,*}(F|_{X_U})` is bounded constructible
-and, for every morphism `T ⟶ U` with noetherian `T`, its base change morphism
-`(Rj_{U,*} F|_{X_U})|_{Y_T} ⟶ Rj_{T,*}(F|_{X_T})` is an isomorphism; see
-`AlgebraicGeometry.Etale.HasConstructibleDirectImageBaseChangeOn` for the formulation. -/
+/-- Generic bounded constructibility for an open immersion: let `S` be integral and of finite
+type over a field `k`, let `Λ` be a finite ring whose exponent is invertible on `S`, and let
+`j : X ⟶ Y` be an open immersion of finite-type `S`-schemes. For a constructible sheaf `F` of
+`Λ`-modules on `X`, there is a nonempty open `U ⊆ S` such that `Rj_{U,*}(F|_{X_U})` is bounded
+constructible and, for every morphism `T ⟶ U` with noetherian `T`, its base change morphism
+`(Rj_{U,*} F|_{X_U})|_{Y_T} ⟶ Rj_{T,*}(F|_{X_T})` is an isomorphism. -/
 theorem exists_hasConstructibleDirectImageBaseChangeOn {k : Type u} [Field k]
     {S X Y : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasInvertibleExponent Λ S] (fY : Y ⟶ S) [LocallyOfFiniteType fY]
@@ -417,14 +405,12 @@ theorem exists_hasConstructibleDirectImageBaseChangeOn {k : Type u} [Field k]
     (Λ := Λ) (smoothGenericDirectImage Λ) aS fY j F
 
 omit [Finite Λ] in
-/-- Blueprint `lemma-universal-homeomorphism-base--1`: Descending the exchange property through a
-universal homeomorphism.
-
-Let `π : S' ⟶ S` be finite, surjective and radicial (universally injective), let `j : X ⟶ Y`
-be an open immersion of `S`-schemes and `F` a sheaf of `Λ`-modules on `X`. Form the base changes
-`Y' = Y ×_S S'` and `X' = X ×_Y Y'`, with the open immersion `j' : X' ⟶ Y'`. If over `S'` the
-direct image `Rj'_*(F|_{X'})` is bounded constructible and its formation commutes with every base
-change from a noetherian scheme, then the same holds over `S`. -/
+/-- Descending the exchange property through a universal homeomorphism: let `π : S' ⟶ S` be
+finite, surjective and radicial, let `j : X ⟶ Y` be an open immersion of `S`-schemes and `F` a
+sheaf of `Λ`-modules on `X`. Form the base changes `Y' = Y ×_S S'` and `X' = X ×_Y Y'`, with the
+open immersion `j' : X' ⟶ Y'`. If over `S'` the direct image `Rj'_*(F|_{X'})` is bounded
+constructible and its formation commutes with every base change from a noetherian scheme, then
+the same holds over `S`. -/
 theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective
     {S S' X Y X' Y' : Scheme.{u}} (π : S' ⟶ S) [IsFinite π] [Surjective π]
     [UniversallyInjective π] (fY : Y ⟶ S) (j : X ⟶ Y) [IsOpenImmersion j] (g : Y' ⟶ Y)
@@ -435,12 +421,9 @@ theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective
     HasConstructibleDirectImageBaseChangeOn Λ fY j F Set.univ :=
   .of_isFinite_of_surjective' π fY j g fY' hY g' j' hX F h
 
-/-- Blueprint `corollary-open-direct-image-over-field--1`: Higher open direct images over a field.
-
-Let `k` be a field, let `Λ` be a finite ring whose exponent is invertible in `k`, let `j : X ⟶ Y` be an open immersion of finite-type
-`k`-schemes and let `F` be a constructible sheaf of `Λ`-modules on `X`. Then `Rj_* F` is
-bounded constructible. This is `theorem-generic-constructibility-base-change-rj` over `S = Spec k`,
-whose only nonempty open is `S` itself. -/
+/-- Higher open direct images over a field: let `k` be a field, `Λ` a finite ring whose exponent
+is invertible in `k`, `j : X ⟶ Y` an open immersion of finite-type `k`-schemes and `F` a
+constructible sheaf of `Λ`-modules on `X`. Then `Rj_* F` is bounded constructible. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field {k : Type u}
     [Field k] [HasInvertibleExponent Λ (Spec (.of k))] {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (j : X ⟶ Y)

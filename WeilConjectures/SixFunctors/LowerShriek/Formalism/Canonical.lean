@@ -16,7 +16,7 @@ compactification of `f`. This file defines the composition isomorphism
 
 `F.lowerShriekCompIso f g : F.lowerShriek f ⋙ F.lowerShriek g ≅ F.lowerShriek (f ≫ g)`
 
-of blueprint `proposition-composition-base-change-rf-shriek--1` and proves that
+and proves that
 
 - it is computed by any triangle of compactifications, up to the comparison isomorphisms
   `F.shriekIso` (`lowerShriekCompIso_hom_eq`): it is independent of all compactification

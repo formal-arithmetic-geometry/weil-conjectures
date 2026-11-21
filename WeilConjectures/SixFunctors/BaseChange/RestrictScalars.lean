@@ -113,9 +113,7 @@ lemma mateEquiv_symm_lowerStarCompCoextendScalarsIso :
   exact (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).left_triangle_components _
 
 /-- **Pullback commutes with restriction of scalars**: the comparison
-`g^*(res G) ⟶ res(g^* G)` is an isomorphism. Its conjugate along the adjunctions
-`res ⊣ coext` is the identification of `g_* ∘ coext` with `coext ∘ g_*`
-(`CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm`). -/
+`g^*(res G) ⟶ res(g^* G)` is an isomorphism. -/
 instance isIso_upperStarRestrictScalars : IsIso (upperStarRestrictScalars φ g) := by
   have h := iterated_mateEquiv_conjugateEquiv_symm
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ') g)

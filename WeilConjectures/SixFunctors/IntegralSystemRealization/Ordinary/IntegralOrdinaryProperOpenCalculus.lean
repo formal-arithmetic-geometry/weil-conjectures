@@ -32,12 +32,7 @@ attribute [local irreducible] pullbackTensorCalculus
   ringedRestrictFactor restrictFactor properOpenLambda ringedProperOpenLambda
   ringedOpenComp Compositors.openComp openCongr ringedOpenCongr ordinaryPushReduction
 
-/-- Conjugation by adjunction preserves a commuting coefficient square.
-
-Proof: apply the mate equivalence to the equality of the two whiskered squares.
-The two vertical-composition identities for conjugate equivalences identify its
-sides. Evaluate the resulting natural-transformation equality at the object X;
-associator and identity components disappear. -/
+/-- Conjugation by adjunction preserves a commuting coefficient square. -/
 theorem ordinaryProperOpenConjugateSquare
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {P P' : A ⥤ B} {Q Q' : B ⥤ A} {F F' : C ⥤ D} {G G' : D ⥤ C}

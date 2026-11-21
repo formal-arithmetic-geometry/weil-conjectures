@@ -9,11 +9,12 @@ public import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackS
 import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientCoefficientPullbackFiniteIso
 import Mathlib.CategoryTheory.Adjunction.Whiskering
 
-/-! Componentwise sequence-site coefficient pullback.
-Source: Stacks 03CB and 0941.
+/-! # Componentwise sequence-site coefficient pullback
 
-The finite-stage comparisons are evaluated on each object of the product site.
-Their compatible inverses give the componentwise inverse of the sequence map.
+## References
+
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -147,14 +148,7 @@ private def pushLevels {X Y : Scheme.{t}} (f : X ⟶ Y)
     rw [CategoryTheory.Functor.map_id]
     simp)
 
-/-- Every component of the sequence coefficient pullback is invertible.
-
-Source: Stacks 03CB and 0941 (finite/sequence coefficient comparison).
-Proof: evaluate the sequence-site adjunction at a product object `(n,U)`. The
-component is the finite-stage coefficient comparison at index `n`; its inverse
-is the finite-stage inverse transported along the product projection. The
-finite inverses commute with all quotient transition maps, so they assemble to
-a morphism on the sequence site and satisfy both inverse equations componentwise. -/
+/-- Every component of the sequence coefficient pullback is invertible. -/
 theorem coefficientPullback_none_isIso_app {X Y : Scheme.{t}}
     (f : X ⟶ Y) (U : Site X none) :
     IsIso ((ringMap ell E f none).hom.app (op U)) := by

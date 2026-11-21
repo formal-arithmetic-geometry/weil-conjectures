@@ -11,7 +11,13 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.RegularQuotientOppo
 
 /-! # Reverse scalar adjunction for a regular finite quotient
 
-Source: Zheng, Lemma 5.22 and Proposition 5.26.
+## References
+
+* Zheng, Lemma 5.22 and Proposition 5.26
+* [Stacks, Tag 0A70]
+* [Stacks, Tag 0A71]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -25,30 +31,7 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- Derived extension along the regular quotient has a reverse adjunction, and
-its opposite compact-support mate is invertible.
-Source: Zheng, Lemma 5.22 and Proposition 5.26; Stacks Tags 0A70, 0A71, 06YY and 07A6.
-Proof: let A be the completed integral coefficient sheaf and let B be its
-quotient by pi^(n+1), identified with the finite constant coefficient sheaf. The Koszul resolution
-[A --pi^(n+1)--> A] of B has dual canonically B[-1]. Consequently derived
-coinduction is derived extension followed by [-1], with the trace induced by the
-Koszul augmentation. Restriction followed by [-1] is therefore left adjoint to
-derived extension. Restriction sends a finite-Tor constructible B-complex to a
-finite-Tor constructible A-complex: tensor the two-term finite-free resolution,
-so its Tor interval enlarges by at most one; finite reduction and constructibility
-are preserved. A bounded complex annihilated by pi^(n+1) is derived complete,
-so the restricted object belongs to the integral category. Both reverse adjunctions
-consequently restrict to the stated
-categories. The proper/open restriction square is sectionwise identity before
-deriving. Open extension is exact, and the separately derived proper square is
-fixed by its K-injective unit normalization. Both commute with the shift.
-Transpose the normalized scalar extension comparison under the two reverse
-adjunctions. The Koszul tensor/coinduction adjunctions use the same augmentation
-and trace; their two triangle identities cancel the duality identifications.
-Thus its transpose is precisely the shifted proper/open restriction square.
-This square is invertible. The normalized scalar realizations and faithful full
-inclusions transport this equation to the specified left comparisons. No choice
-of system evaluation or faithfulness of evaluation is needed. The zero object,
-empty schemes and n = 0 use the same resolution and the same equations. -/
+its opposite compact-support mate is invertible. -/
 theorem exceptionalRegularQuotientReverseAdjunction
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

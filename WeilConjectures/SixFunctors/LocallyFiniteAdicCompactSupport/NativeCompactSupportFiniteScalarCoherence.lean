@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompactSupportFiniteScalarCoherenceGenerator
 import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14 and Remark 6.8.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -39,22 +44,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- Normalized scalar-mate components commute with finite coefficient-stage transitions.
-Source: Bhatt--Scholze, Proposition 6.8.14 and Remark 6.8.15; step 9 of the
-native compact-support finite comparison plan.
-
-Proof: represent the rational input by an integral constructible object. Residue Tor
-makes it an integral finite-Tor input. Insert the two IntegralComponent formulas and
-the source and target common_field formulas. P.fields.rational_normalized identifies
-the StageAction scalar with the localization of the integral scalar comparison.
-The normalized coefficient construction and its rational coherence identify successive
-scalar comparisons, including the identity extension. The completed finite-free scalar
-comparison and tensor associator send b tensor a tensor m to ba tensor m on both paths;
-the tensor units insert one. The pasted-mates counit identity identifies the proper
-factors, and the open tensor map identifies the open factors. Cancel the intervening
-realization isomorphisms to obtain the stated equation. Naturality on integral
-numerators extends the calculation to inverse uniformizer powers. This proves the
-transition equation at finite stages, without descent on arbitrary common-field Homs. -/
+/-- Normalized scalar-mate components commute with finite coefficient-stage transitions. -/
 theorem native_compact_support_finite_scalar_coherence [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

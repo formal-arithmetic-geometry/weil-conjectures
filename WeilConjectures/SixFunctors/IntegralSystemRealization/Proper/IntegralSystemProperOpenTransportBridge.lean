@@ -7,7 +7,16 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenTransportIntrinsicMate
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! Bridge transport formula for the normalized intrinsic mate. -/
+/-! # Bridge transport of the intrinsic mate
+
+Bridge transport formula for the normalized intrinsic mate.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -15,13 +24,7 @@ universe u
 universe u₁ u₂ u₃ u₄ v₁ v₂ v₃ v₄
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 /-- Transport a mate across comparison isomorphisms of the two adjunctions and the
-vertical functors.
-
-Source: Stacks Project, Tags 07A7 and 0F7B; the mate transport calculation used in
-canonical proper/open bridge coordinates.
-Proof: factor the square through the middle comparison square, apply the mate
-whiskering and conjugation identities, then use naturality of the conjugated
-comparison and the inverse/hom cancellation of the vertical isomorphism. -/
+vertical functors. -/
 private theorem mate_transport
     {A : Type u₁} {B : Type u₂} {C : Type u₃} {D : Type u₄}
     [Category.{v₁} A] [Category.{v₂} B] [Category.{v₃} C] [Category.{v₄} D]
@@ -157,10 +160,7 @@ attribute [local irreducible] modelPull modelPush modelShriek modelAdj
 end
 
 set_option linter.unusedVariables false in
-/-- The transported mate satisfies the bridge component equation.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 07A7.
-Proof: apply naturality of the four bridge isomorphisms to the mate transport
-formula, then cancel the adjacent bridge factors. -/
+/-- The transported mate satisfies the bridge component equation. -/
 theorem properOpenTransportMate_bridge
     (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)

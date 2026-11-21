@@ -9,8 +9,11 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 
 /-! # Ordinary restriction and direct image under a coefficient-ring presentation
 
-Source: Stacks, Modules on Sites, Tags 03D6 and 03D7; Cohomology on Sites,
-Tag 0D6E; blueprint scalar direct-image proof, Formal properties.
+## References
+
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -102,8 +105,7 @@ set_option backward.isDefEq.respectTransparency.types true in
         SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange g) φ
   exact transport (proEtaleBaseChange g) (i V).hom (i U).hom φ
     (InternalModuleOperations.coefficientMap Λ g) h
-/-- The two ordinary condensed restrictions in order.
- -/
+/-- The two ordinary condensed restrictions in order. -/
 def ordinaryCompositeRestriction (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) (T : Scheme.{u}) :
     Mod (Sheaf (ProEt.topology T) Ab.{u + 1})
@@ -163,8 +165,7 @@ set_option backward.isDefEq.respectTransparency.types true in
   Functor.isoWhiskerLeft (InternalModuleOperations.equivalence Λ U).functor
     (ringPushforwardOfIso R Λ i hi g)
 
-/-- The composite ordinary restriction/direct-image comparison.
- -/
+/-- The composite ordinary restriction/direct-image comparison. -/
 def ordinaryCompositeSquare (l : ℕ) [Fact l.Prime]
     (E : Index l (PadicAlgCl l)) {U V : Scheme.{u}} (g : U ⟶ V) :
     CondensedRing.lowerStar (Profinite.padicAlgClRingObj l) g ⋙

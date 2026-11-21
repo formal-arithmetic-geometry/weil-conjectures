@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.C
 public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLineTensorCoherence
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.CompletedScalarIdentityUnitNormalization
 
-/-! # Bridge from a normalized scalar identity to the completed unit -/
+/-! # Bridge from a normalized scalar identity to the completed unit
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -108,16 +115,7 @@ private theorem functor_obj_eq {C D : Type*} [Category C] [Category D]
     {F G : C ⥤ D} (h : F = G) (K : C) : F.obj K = G.obj K :=
   congrArg (fun F ↦ F.obj K) h
 
-/-- The normalized restricted identity agrees with the completed tensor unit.
-Source: exceptional coefficient construction, integral identity clause; Stacks Project,
-Tags 03DA, 06YY and 07A6.
-
-Proof: use the normalization equation for `e`. The scalar-object equality supplied by
-`hS` identifies its source with the completed scalar extension. The inverse realization
-hypothesis `hχ` identifies the realization map with the inverse comparison `chi.inv`.
-The ordinary K-flat multiplication computation identifies the transported tensor unit
-with `CompletedLineTensor.unit`; substituting these equalities into `e.normalized`
-gives the displayed heterogeneous equality. -/
+/-- The normalized restricted identity agrees with the completed tensor unit. -/
 theorem normalized_integral_scalar_unit_underlying_bridge
     (l : ℕ) [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

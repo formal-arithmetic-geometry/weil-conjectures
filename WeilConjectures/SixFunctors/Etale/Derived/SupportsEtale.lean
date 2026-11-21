@@ -17,17 +17,16 @@ base change of `i`. The restriction of supports
 `ψ : Le^* (Ri_! Ri^! L) ⟶ Ri'_! Ri'^! L'` (`AlgebraicGeometry.Etale.supportedRestriction`) is an
 isomorphism, generalising `AlgebraicGeometry.Etale.isIso_supportedRestriction_of_isOpenImmersion`.
 
-The proof is the same as for open immersions, with the extension by zero `e_!` along the étale
-morphism `e` (`AlgebraicGeometry.Etale.etaleLowerShriek`) in place of the one along an open
-immersion: for an object `T` of `D(U_ét)` supported on `Z'`, maps `T ⟶ Le^* (Ri_! Ri^! L)` are,
-by the adjunction `e_! ⊣ e^*`, maps `e_! T ⟶ Ri_! Ri^! L`, and these factor uniquely through the
-counit because `e_! T` is supported on `Z`, by base change for `e_!`
-(`AlgebraicGeometry.Etale.etaleLowerShriekBaseChangeIso`).
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_openComplement_obj_etaleLowerShriek`
 - `AlgebraicGeometry.Etale.isIso_supportedRestriction_of_etale`
+
+## Implementation details
+
+The proof is the same as for open immersions, with the extension by zero `e_!` along the étale
+morphism `e` (`AlgebraicGeometry.Etale.etaleLowerShriek`) and its base change
+(`AlgebraicGeometry.Etale.etaleLowerShriekBaseChangeIso`).
 -/
 
 @[expose] public section
@@ -49,10 +48,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {U X Z Z' : Scheme.{u}}
 
 /-- The extension by zero along an étale morphism `e : U ⟶ X` of an object supported on the
-base change `Z'` of a closed immersion `i : Z ⟶ X` is supported on `Z`: its restriction to the
-open complement `V` of `Z` is the extension by zero along `U ×_X V ⟶ V` of the restriction of
-`T` to `U ×_X V`, which lies in the open complement of `Z'` in `U`
-(`AlgebraicGeometry.Etale.etaleLowerShriekBaseChangeIso`). -/
+base change `Z'` of a closed immersion `i : Z ⟶ X` is supported on `Z`. -/
 lemma isZero_leftDerivedUpperStar_openComplement_obj_etaleLowerShriek (e : U ⟶ X)
     [AlgebraicGeometry.Etale e] (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i]
     [IsClosedImmersion i'] (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
@@ -92,11 +88,7 @@ lemma isZero_leftDerivedUpperStar_openComplement_obj_etaleLowerShriek (e : U ⟶
 
 /-- **The restriction of supports along an étale morphism** `e : U ⟶ X`,
 `ψ : Le^* (Ri_! Ri^! L) ⟶ Ri'_! Ri'^! L'` (`AlgebraicGeometry.Etale.supportedRestriction`), is an
-isomorphism. Both sides are supported on `Z'`, and the source has the universal property of the
-target: a map `T ⟶ L'` out of an object `T` supported on `Z'` lifts uniquely to
-`T ⟶ Le^* (Ri_! Ri^! L)`. Under `e_! ⊣ e^*` such lifts are lifts of `e_! T ⟶ L` through the
-counit of `Ri_! ⊣ Ri^!`, which exist uniquely since `e_! T` is supported on `Z`
-(`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_openComplement_obj_etaleLowerShriek`). -/
+isomorphism. -/
 theorem isIso_supportedRestriction_of_etale (e : U ⟶ X) [AlgebraicGeometry.Etale e]
     (i : Z ⟶ X) (i' : Z' ⟶ U) [IsClosedImmersion i] [IsClosedImmersion i'] [Finite Λ]
     (g : Z' ⟶ Z) (hg : IsPullback g i' i e)

@@ -22,12 +22,7 @@ over `X ×_Y V` for a pointed étale neighbourhood `(V, v)` of `ȳ`; restricting
 `AlgebraicGeometry.Etale.stalkToFibreSections : (f_* F)_ȳ ⟶ Γ(X_ȳ, a^* F)`.
 
 For `f` proper and `Ω` algebraically closed this map is bijective
-(`AlgebraicGeometry.Etale.bijective_stalkToFibreSections_of_isProper`): the stalk is the colimit
-of the sections over the `X ×_Y V`, which is the group of sections over `X ×_Y S_(ȳ)` for the
-strict localization `S_(ȳ)` (continuity of sections at inverse limits), which is the group of
-sections over the closed geometric fibre (the degree-zero comparison over the strictly henselian
-local ring of `S_(ȳ)`), which is the group of sections over `X_ȳ` (invariance of sections under
-extension of algebraically closed base fields).
+(`AlgebraicGeometry.Etale.bijective_stalkToFibreSections_of_isProper`).
 
 ## Main definitions
 
@@ -161,11 +156,7 @@ lemma fibreToStrictLocalization_snd :
 set_option backward.isDefEq.respectTransparency false in
 /-- **Sections over the base change to the strict localization are sections over the geometric
 fibre.** For `f` proper and `Ω` algebraically closed, restriction of sections of the pullback of
-`F` along `X_y ⟶ S_(y) ×_Y X` is bijective. The ring of `S_(y)` is strictly henselian, so these
-sections are those over the closed geometric fibre over an algebraic closure `κ̄` of the residue
-field (`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_geometricFibre`),
-and `X_y` is the base change of the closed geometric fibre along an embedding `κ̄ ⟶ Ω`
-(`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_addCommGrpCat_of_isAlgClosed`). -/
+`F` along `X_y ⟶ S_(y) ×_Y X` is bijective. -/
 theorem bijective_restrictAlong_fibreToStrictLocalization [IsProper f] [IsAlgClosed Ω]
     (h : IsPullback a b f y) :
     Function.Bijective (restrictAlong (pullback.snd (Scheme.strictLocalizationToBase y) f) F
@@ -277,12 +268,7 @@ lemma isAffineHom_etale_map_left {V W : Y.Etale} [IsAffine V.left] [IsAffine W.l
 set_option backward.isDefEq.respectTransparency false in
 /-- **Sections over the base change to the strict localization.** For `f` proper, the sections
 of the pullback of `F` to `S_(y) ×_Y X` are the colimit of the sections of `F` over the
-`V ×_Y X`, for the affine pointed étale neighbourhoods `(V, v)` of `y`: every section over
-`S_(y) ×_Y X` is the pullback of a section over some `V ×_Y X`, and a section over `V ×_Y X`
-whose pullback vanishes already vanishes over `V' ×_Y X` for some `(V', v') ⟶ (V, v)`. This is
-the continuity of sections at inverse limits
-(`AlgebraicGeometry.Etale.unitComparison_app_isColimit_of_isLimit`)
-for the cofiltered system of the `V ×_Y X` with `V` refining a fixed affine neighbourhood. -/
+`V ×_Y X`, for the affine pointed étale neighbourhoods `(V, v)` of `y`. -/
 theorem strictLocalizationPullback_sections [IsProper f] :
     (∀ τ : ((pullback.snd (Scheme.strictLocalizationToBase y) f)^*[AddCommGrpCat.{u + 1}].obj
         F).obj.obj (op (Scheme.Etale.mk (𝟙 _))),
@@ -383,16 +369,7 @@ end Neighbourhoods
 /-- **Stalks of a proper direct image are sections over the geometric fibre.** Let
 `f : X ⟶ Y` be proper and `y : Spec Ω ⟶ Y` a geometric point with `Ω` algebraically closed,
 with geometric fibre `a : X_y ⟶ X`. For every abelian étale sheaf `F` on `X`, the comparison map
-`(f_* F)_y ⟶ Γ(X_y, a^* F)` is bijective.
-
-The stalk is the colimit of the sections of `F` over the `V ×_Y X` for the affine pointed étale
-neighbourhoods `(V, v)` of `y`, which is the group of sections over `S_(y) ×_Y X` for the strict
-localization `S_(y)` by continuity of sections at inverse limits
-(`AlgebraicGeometry.Etale.strictLocalizationPullback_sections`); the ring of `S_(y)` is
-strictly henselian, so these are the sections over the closed geometric fibre
-(`AlgebraicGeometry.Etale.bijective_restrictAlong_fibreToStrictLocalization`), which are the
-sections over `X_y` by the invariance of sections under extension of algebraically closed base
-fields. -/
+`(f_* F)_y ⟶ Γ(X_y, a^* F)` is bijective. -/
 @[stacks 0A3S]
 theorem bijective_stalkToFibreSections_of_isProper [IsProper f] [IsAlgClosed Ω]
     (h : IsPullback a b f y) :

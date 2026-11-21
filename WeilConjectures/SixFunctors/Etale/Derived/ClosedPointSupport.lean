@@ -16,11 +16,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 /-!
 # Complexes supported at closed points
 
-A step of the proof of blueprint `theorem-verdier-biduality--1`: each cohomology sheaf of
-the cone `Δ` has constructible support, and a constructible subset of a Noetherian finite type
-`k`-scheme consisting of closed points is finite. Hence all the cohomology of `Δ` is supported
-on a finite set of closed points, which is the underlying set of a closed subscheme finite over
-`k`.
+A bounded constructible complex on a Noetherian finite type `k`-scheme whose cohomology sheaves
+vanish at all non-closed points has all its cohomology supported on a finite set of closed
+points, which is the underlying set of a closed subscheme finite over `k`. This is a step of the
+proof of Verdier biduality.
 
 ## Main statements
 
@@ -46,9 +45,7 @@ open CategoryTheory Limits Topology TopologicalSpace
 open scoped CategoryTheory.Functor
 
 /-- In a Noetherian quasi-sober space, a set of closed points which is closed in the
-constructible topology is finite: it is compact in the constructible topology, in which closed
-points are open (their complements are quasi-compact opens). Used in the proof of blueprint
-`theorem-verdier-biduality--1`. -/
+constructible topology is finite. -/
 theorem Set.Finite.of_isClosed_constructibleTopology {X : Type*} [TopologicalSpace X]
     [NoetherianSpace X] [QuasiSober X] {s : Set X} (hs : IsClosed[constructibleTopology X] s)
     (hs' : s ⊆ closedPoints X) : s.Finite := by
@@ -74,8 +71,7 @@ namespace AlgebraicGeometry
 open Scheme
 
 /-- A closed immersion with finitely many points into a scheme locally of finite type over a
-field `k` is finite over `k`: it is quasi-compact, of finite type and has finite fibres, and
-`Spec k` is Artinian. Used in the proof of blueprint `theorem-verdier-biduality--1`. -/
+field `k` is finite over `k`. -/
 theorem isFinite_comp_of_finite_range {k : Type u} [Field k] {X Z : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] (i : Z ⟶ X) [IsClosedImmersion i]
     (hi : (Set.range i.base).Finite) : IsFinite (i ≫ a) := by
@@ -86,9 +82,7 @@ theorem isFinite_comp_of_finite_range {k : Type u} [Field k] {X Z : Scheme.{u}}
   exact IsFinite.of_locallyQuasiFinite _
 
 /-- A finite set of closed points of a scheme locally of finite type over a field `k` is the
-underlying set of a closed subscheme finite over `k`: the closed complement of the open
-complement. It has finitely many points and is of finite type over `k`, hence finite. Used in
-the proof of blueprint `theorem-verdier-biduality--1`. -/
+underlying set of a closed subscheme finite over `k`. -/
 theorem exists_opens_isFinite_closedComplement {k : Type u} [Field k] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] {S : Set X} (hS : S.Finite)
     (hS' : S ⊆ closedPoints X) :
@@ -107,12 +101,9 @@ namespace Etale
 
 variable {Λ : Type (u + 1)}
 
-/-- Blueprint `theorem-verdier-biduality--1`: let `X` be quasi-compact and locally of
-finite type over a field, and let `F` be a constructible sheaf of `Λ`-modules on `X_ét` whose
-stalks vanish at all non-closed points. Then the support of `F` is a finite set of closed
-points. The support is closed in the constructible topology
-(`AlgebraicGeometry.Etale.isOpen_constructibleTopology_stalkZeroLocus`), and `X` is
-Noetherian. -/
+/-- Let `X` be quasi-compact and locally of finite type over a field, and let `F` be a
+constructible sheaf of `Λ`-modules on `X_ét` whose stalks vanish at all non-closed points. Then
+the support of `F` is a finite set of closed points. -/
 theorem finite_compl_stalkZeroLocus [Ring Λ] {k : Type u} [Field k] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] [CompactSpace X]
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F]
@@ -131,12 +122,11 @@ theorem finite_compl_stalkZeroLocus [Ring Λ] {k : Type u} [Field k] {X : Scheme
   exact @IsOpen.isClosed_compl X (constructibleTopology X) _
     (isOpen_constructibleTopology_stalkZeroLocus F)
 
-/-- Blueprint `theorem-verdier-biduality--1`: let `X` be quasi-compact and locally of
-finite type over a field `k`, with structure morphism `a`, and let `K ∈ D(X_ét, Λ)` be bounded
-with constructible homology sheaves whose stalks vanish at all non-closed points. Then the
-homology of `K` is supported on a finite set of closed points: there are a closed immersion
-`i : Z ⟶ X` with `i ≫ a` finite and an open immersion `j : U ⟶ X` onto the complement of its
-image with `j^* K = 0`. -/
+/-- Let `X` be quasi-compact and locally of finite type over a field `k`, with structure
+morphism `a`, and let `K ∈ D(X_ét, Λ)` be bounded with constructible homology sheaves whose
+stalks vanish at all non-closed points. Then there are a closed immersion `i : Z ⟶ X` with
+`i ≫ a` finite and an open immersion `j : U ⟶ X` onto the complement of its image with
+`j^* K = 0`. -/
 theorem exists_isFinite_isZero_upperStar_of_boundedConstructible [CommRing Λ] {k : Type u}
     [Field k] {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] [CompactSpace X]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

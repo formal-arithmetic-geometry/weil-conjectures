@@ -8,7 +8,13 @@ module
 public import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionOrdinaryModels
 import all WeilConjectures.WeilSheaf.Supporting.CompletedCoefficientRingedCoherence
 
-/-! # Ordinary completed-coefficient module pullback -/
+/-! # Ordinary completed-coefficient module pullback
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 03D7]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -160,18 +166,7 @@ private def ordinaryPushId (X : Scheme.{t}) :
       exact Iso.inv_hom_id_app (ordinaryRingId.{t, u} X) _) ≪≫
       SheafOfModules.pushforwardId _
 
-/-- Identity and composition comparisons for the actual ordinary module pullbacks.
-Source: Stacks, Modules on Sites, Tags 03D2 and 03D7.
-Proof: base change on pro-etale sites has the identity and associativity comparisons
-of fiber products. For each finite constant coefficient sheaf the direct ring maps
-respect these comparisons: both maps send a constant section to that same section.
-The finite quotient maps are jointly monic on the completed ring, so the same
-identities hold for ordinaryCompletedRingMap. Module pushforward therefore respects
-identity and composition, by its sectionwise definition and the ring-map identities.
-Transport these comparisons through ordinaryAdjunction. Uniqueness of left adjoints
-identifies the identity pullback with the identity and the composite pullback with
-successive pullbacks. This argument concerns module sheaves, without deriving or
-completing any module, and also applies to empty schemes. -/
+/-- Identity and composition comparisons for the actual ordinary module pullbacks. -/
 theorem ordinaryCompletedPullCoherence
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :

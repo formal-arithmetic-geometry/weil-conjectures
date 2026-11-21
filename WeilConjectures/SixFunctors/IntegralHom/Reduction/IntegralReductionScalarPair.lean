@@ -8,7 +8,13 @@ module
 public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionModels
 public import WeilConjectures.SixFunctors.Coefficient.CoefficientActualScalarDerivedPair
 
-/-! # Integral interfaces for the actual normalized scalar pair -/
+/-! # Integral interfaces for the actual normalized scalar pair
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -34,11 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
 
-/-- Retain the actual normalized pair with the prescribed integral functor interfaces.
-Source: Stacks 07A4 and 07A6; the integral Hom reduction proof, paragraph 2.
-The existing actual pair supplies all data. Replace its ordinary and derived functor
-fields by their definitionally equal integral reduction interfaces; every property is
-retained. No new existence choice is made. -/
+/-- Retain the actual normalized pair with the prescribed integral functor interfaces. -/
 noncomputable def integralReductionScalarPair (n : ℕ) :
     ScalarDerivedPair.{t + 1, t, max u (t + 1), max (t + 2) (u + 1)}
       (J := AlgebraicGeometry.Scheme.ProEt.topology Y)

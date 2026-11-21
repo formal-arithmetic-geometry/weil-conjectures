@@ -56,8 +56,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 open Scheme in
 /-- After pullback along a smooth `e : Y' ⟶ Y`, the transition map `Rf_* K ⟶ R(π ≫ f)_* π^* K`
-along the base change `π : X' ⟶ X` of `e` is a split monomorphism: by smooth base change it is
-the transition map along `X' ×_Y Y' ⟶ X'` over `Y'`, which has the section `(𝟙, f')`. -/
+along the base change `π : X' ⟶ X` of `e` is a split monomorphism. -/
 theorem Etale.isSplitMono_upperStar_map_lowerStarPlusTransition {X Y Y' X' : Scheme.{u}}
     (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (e : Y' ⟶ Y) [Smooth e]
     (π : X' ⟶ X) (f' : X' ⟶ Y') (sq : IsPullback π f' f e)

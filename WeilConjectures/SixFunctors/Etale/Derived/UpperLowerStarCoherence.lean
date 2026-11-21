@@ -16,10 +16,9 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 
 /-!
-
 # Derived Upper Star and Lower Star
 
-# Main Results
+## Main results
 
 - `AlgebraicGeometry.Etale.rightDerivedLowerStar` : total right derived of lower star, the
   generic `Functor.rightDerivedFunctor` applied to the underived pushforward `(g)_*[A]`,

@@ -24,18 +24,23 @@ public import WeilConjectures.SixFunctors.Constructible.ConstructibleTensorCompl
 public import WeilConjectures.CategoryTheory.SuppliedExchangeProjection.ExchangeProjectionSuppliedDomains
 public import WeilConjectures.AlgebraicGeometry.Completed.Open.CompletedOpenExchangeTransport
 public import WeilConjectures.SmoothPurity.PurCompactSupport.IntegralCompactSupportCoefficientData
--- Existing reduction and open scalar mate: def-sf-open-reduction-coefficient-mate.
+-- Existing reduction and open scalar mate.
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 
 public import WeilConjectures.SixFunctors.OpenFactorCoherence.OpenFactorTensorModel
 
 /-! # Fixed open-factor operations and normalized comparison data
 
-Source: blueprint proposition-composition-base-change-rf-shriek--1, open-factor paragraph;
-Bhatt--Scholze 3.4.10 and 6.5.8; Stacks 099N, 09BN, 0GL1.
+The open-factor definitions used by the realization lemmas and the final assembly theorem.
 
-These are the existing open-factor definitions, extracted unchanged so that the
-three realization lemmas can use their types before the final assembly theorem.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 3.4.10 and 6.5.8
+* [Stacks, Tag 099N]
+* [Stacks, Tag 09BN]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0D6D]
 -/
 
 @[expose] public noncomputable section
@@ -57,9 +62,9 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- Canonical completion/open commutation and all of clauses (1) and (2).
-The strict tower comparison is fixed by the actual quotient augmentation.
-Source: Stacks 099N, 09BN, 0E8I. -/
+/-- Canonical completion/open commutation, together with the open restriction and
+constructibility clauses. The strict tower comparison is fixed by the actual quotient
+augmentation. -/
 structure Open {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] where
   tower : jCx l E j ⋙ IntegralOnSlice.tower.{u, u} l E X none ≅
     IntegralOnSlice.tower.{u, u} l E U none ⋙
@@ -112,8 +117,7 @@ structure Open {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] where
       ((J l E j).obj K)) ⊆ Set.Icc a b
 
 /-- Completion of the actual ambient open tensor map, transported to the recorded
-completed tensor. This is the supplied gamma of def-exchange-projection.
-Source: Stacks 0GL1 and Bhatt--Scholze 3.4.10. -/
+completed tensor. -/
 def gamma {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     (o : Open l E j) (tU : Tensor l E U) (tX : Tensor l E X)
     (K : D l E U) (P : D l E X) :
@@ -125,8 +129,7 @@ def gamma {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     o.commutes.hom.app (tU.ordinary.tensor.obj (K, (star l E j).obj P)) ≫
     (J l E j).map (tU.comparison.hom.app (K, (star l E j).obj P))
 
-/-- The ordinary pullback square, with the published composition normalization.
-Source: Stacks 0D6D. -/
+/-- The ordinary pullback square, with the published composition normalization. -/
 def theta {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} (sq : OpenImmersionSquare a j' j h) :
     star l E h ⋙ star l E j' ≅ star l E j ⋙ star l E a :=
@@ -136,8 +139,7 @@ def theta {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
 
 set_option genSizeOf false in
 set_option genInjectivity false in
-/-- The ambient base-change map is fixed by the inverse open-unit transpose.
-Source: Stacks 09BN. -/
+/-- The ambient base-change map is fixed by the inverse open-unit transpose. -/
 structure OrdinaryExchange {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
     (sq : OpenImmersionSquare a j' j h) where
@@ -148,8 +150,8 @@ structure OrdinaryExchange {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ 
         (theta l E sq).inv.app ((J l E j).obj K)
 
 /-- The strict-reduction completed exchange, expressed through the quotient completion
-comparisons. Pull.model retains the strict finite maps; Open.unit_commutes fixes the
-extension/limit comparison. Source: Stacks 099N and 09BN. -/
+comparisons. `Pull.model` retains the strict finite maps; `Open.unit_commutes` fixes the
+extension/limit comparison. -/
 def beta {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
     {sq : OpenImmersionSquare a j' j h} (b : OrdinaryExchange l E sq)

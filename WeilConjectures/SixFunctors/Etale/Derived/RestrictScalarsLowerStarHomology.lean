@@ -43,8 +43,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ'
 /-- **Higher direct images commute with restriction of scalars**: for an étale sheaf `G` of
 `Λ'`-modules, `res (Rᵠf_* G) ≅ Rᵠf_* (res G)`, the right hand side being computed for sheaves of
 `Λ`-modules. It is the base change morphism of the classical right derived functors
-(`CategoryTheory.Functor.rightDerivedBaseChange`), invertible by
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`. -/
+(`CategoryTheory.Functor.rightDerivedBaseChange`). -/
 noncomputable def rightDerivedLowerStarRestrictScalarsIso (q : ℕ) :
     ((f)_*[ModuleCat.{u + 1} Λ']).rightDerived q ⋙
         Sheaf.restrictScalars Y.smallEtaleTopology φ ≅

@@ -27,25 +27,14 @@ that is, **the dualizing complex commutes with base change along field extension
 (`AlgebraicGeometry.Etale.isIso_dualizingComplexBaseChangeMap_of_fieldExtension`). The extension
 may be transcendental and inseparable.
 
-## Proof
+## Implementation details
 
-* **Closed immersions**
-  (`isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isClosedImmersion_of_fieldExtension`):
-  for a closed immersion `i : Z ⟶ P` into a `K`-scheme of finite type with open complement
-  `j`, the base change map of `Ri^!` is invertible at `M` as soon as the derived base change map
-  of `Rj_*` is invertible at `j^* M`
-  (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso`); for
-  bounded below `M` this is Stacks 0F1C
-  (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_of_fieldExtension`).
-* **Affine space**: the base change map of the projection `𝔸ⁿ_K ⟶ Spec K` is invertible for
-  every base change (`AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`, smooth purity
-  for affine space, an input of the smooth duality section).
-* **Affine `X`**: `X ⟶ Spec K` factors as a closed immersion into `𝔸ⁿ_K` followed by the
-  projection, and base change maps compose
-  (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`); `Rp^! Λ` is
-  bounded constructible.
-* **General `X`**: base change maps descend along the cover of `X` by its affine opens
-  (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_cover`).
+The closed immersion case follows from the closed-support criterion
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso`) and the
+base change of derived direct images along field extensions. For affine `X`, `X ⟶ Spec K`
+factors as a closed immersion into `𝔸ⁿ_K` followed by the projection, whose base change map is
+invertible by smooth purity for affine space; base change maps compose. The general case
+descends along the cover of `X` by its affine opens.
 -/
 
 @[expose] public section
@@ -66,10 +55,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {K L : Type u} [Field K] 
 /-- **Closed exceptional inverse images commute with base change along field extensions.** Let
 `P` be a `K`-scheme of finite type with base change `P' = P ×_K L`, and `i : Z ⟶ P` a closed
 immersion with base change `i' : Z' ⟶ P'`. For bounded below `M`, the base change map
-`g_Z^* Ri^! M ⟶ Ri'^! g^* M` is an isomorphism: by the closed-support criterion
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isIso`) it suffices
-that `Rj_*` of the open complement commutes with the base change at `j^* M`, which is Stacks
-0F1C (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_of_fieldExtension`). -/
+`g_Z^* Ri^! M ⟶ Ri'^! g^* M` is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isClosedImmersion_of_fieldExtension
     {P P' Z Z' : Scheme.{u}} (σ : P ⟶ Spec (.of K)) [LocallyOfFiniteType σ] [QuasiCompact σ]
     {g : P' ⟶ P} (σ' : P' ⟶ Spec (.of L))
@@ -114,13 +100,7 @@ lemma boundedConstructible_unit (X : Scheme.{u}) :
 
 /-- **The dualizing complex of an affine scheme commutes with base change along field
 extensions.** For an affine `X` of finite type over `K` with base change `X' = X ×_K L`, the
-base change map `Lg'^* Rf^! Λ ⟶ Rf'^! Λ` is an isomorphism. Factor `f` as a closed immersion
-`c : X ⟶ 𝔸ⁿ_K` followed by the projection `p`: the base change map of `p` is invertible
-(smooth purity for affine space, `affineSpaceAdjunction_baseChange`), that of
-`c` is invertible at the bounded constructible `Rp^! Λ`
-(`isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isClosedImmersion_of_fieldExtension`),
-and base change maps compose
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`). -/
+base change map `Lg'^* Rf^! Λ ⟶ Rf'^! Λ` is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_unit_of_isAffine_of_fieldExtension
     {X X' : Scheme.{u}} [IsAffine X] (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f]
     {f' : X' ⟶ Spec (.of L)} {g' : X' ⟶ X}
@@ -159,10 +139,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_unit_of_isAffine_of_field
 extensions.** For `f : X ⟶ Spec K` separated and of finite type, with base change
 `f' : X' ⟶ Spec L` along a field extension `L/K`, the base change map
 `Lg'^* Rf^! Λ ⟶ Rf'^! Λ` is an isomorphism. The extension may be transcendental and
-inseparable. By the affine case
-(`isIso_rightDerivedUpperShriekBaseChangeMap_app_unit_of_isAffine_of_fieldExtension`)
-on the affine opens of `X`, whose preimages cover `X'`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_cover`). -/
+inseparable. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_unit_of_fieldExtension
     {X X' : Scheme.{u}} (f : X ⟶ Spec (.of K)) [LocallyOfFiniteType f] [QuasiCompact f]
     [IsSeparated f] {f' : X' ⟶ Spec (.of L)} {g' : X' ⟶ X}

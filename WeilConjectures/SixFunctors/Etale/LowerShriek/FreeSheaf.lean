@@ -37,7 +37,7 @@ open Scheme
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- On the small étale site of a scheme `W`, the presheaf `V ↦ Λ^{(Hom_W(V, W))}` is the
-constant presheaf `Λ`, `Hom_W(V, W)` being a singleton. -/
+constant presheaf `Λ`. -/
 noncomputable def freePresheafTerminalIso (W : Scheme.{u}) :
     uliftYoneda.{u + 1}.obj (Scheme.Etale.mk (𝟙 W)) ⋙ ModuleCat.free Λ ≅
       (Functor.const W.Etaleᵒᵖ).obj (ModuleCat.of Λ Λ) :=

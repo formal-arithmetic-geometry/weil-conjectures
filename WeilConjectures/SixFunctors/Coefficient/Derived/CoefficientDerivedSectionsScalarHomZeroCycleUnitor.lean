@@ -13,7 +13,13 @@ On a K-flat complex, the finite tensor comparison carries the scalar extension o
 left unitor of the total tensor to the left unitor at the finite level, along the
 transported scalar unit of the unit complex.
 
-Source: Stacks Project, Tags 03CZ, 03EK, 07A4 and 06YY.
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YU]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public section
@@ -24,8 +30,7 @@ universe t u c v w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
 
-/-- The K-flat tensor model comparison is natural in chain maps of K-flat complexes.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+/-- The K-flat tensor model comparison is natural in chain maps of K-flat complexes. -/
 theorem CoefficientTensorModels.iso_naturality
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -59,8 +64,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
 
-/-- The finite unit comparison sends `1` to the scalar unit section of `1`.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+/-- The finite unit comparison sends `1` to the scalar unit section of `1`. -/
 theorem coefficientFiniteUnitComparison_apply_one
     (D : CoefficientDerivedSystemScalarCoherence l E W) (n : ℕ) (V : (Scheme.ProEt W)ᵒᵖ) :
     ((coefficientFiniteUnitComparison l E W D n).f 0).val.app V
@@ -92,8 +96,7 @@ theorem coefficientFiniteUnitComparison_apply_one
   exact one_smul _ _
 
 /-- The finite unit comparison sends `1` to the scalar unit section of `1`, as a
-section of the scalar extension.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+section of the scalar extension. -/
 theorem coefficientFiniteUnitComparison_apply_one_unitSection
     (D : CoefficientDerivedSystemScalarCoherence l E W) (n : ℕ) (V : (Scheme.ProEt W)ᵒᵖ) :
     ((coefficientFiniteUnitComparison l E W D n).f 0).val.app V
@@ -104,8 +107,7 @@ theorem coefficientFiniteUnitComparison_apply_one_unitSection
           (completedIntegralCommRingSheafUnrestricted l E W) V 1) :=
   coefficientFiniteUnitComparison_apply_one l E W D n V
 
-/-- Ordinary scalar extension maps scalar unit sections to scalar unit sections.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+/-- Ordinary scalar extension maps scalar unit sections to scalar unit sections. -/
 theorem scalarReductionExtension_map_unitSection (n : ℕ) {M M' : scalarReductionSource l E W}
     (g : M ⟶ M') (U : (Scheme.ProEt W)ᵒᵖ) (x : M.val.obj U) :
     ((scalarReductionExtension l E W n).map g).val.app U
@@ -113,8 +115,7 @@ theorem scalarReductionExtension_map_unitSection (n : ℕ) {M M' : scalarReducti
       coefficientIntegralScalarUnitSection l E W n M' U (g.val.app U x) :=
   scalarReductionExtension_map_unit l E W n g U x
 
-/-- Maps out of an ordinary finite scalar extension are determined on scalar unit sections.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+/-- Maps out of an ordinary finite scalar extension are determined on scalar unit sections. -/
 theorem scalarReductionExtension_hom_ext_unitSection (n : ℕ) {M : scalarReductionSource l E W}
     {N : scalarReductionTarget l E W n}
     (f g : (scalarReductionExtension l E W n).obj M ⟶ N)
@@ -125,10 +126,7 @@ theorem scalarReductionExtension_hom_ext_unitSection (n : ℕ) {M : scalarReduct
   scalarReductionExtension_hom_ext l E W n f g h
 
 /-- The finite tensor comparison carries the scalar extension of the inverse left unitor
-to the inverse left unitor at the finite level, along the transported scalar unit.
-Source: Stacks 03EK, 07A4 (auxiliary; not a blueprint node).
-Proof: both chain maps are determined by their values on scalar unit sections, which
-both send `x` to the generator of the scalar unit sections of `1` and `x`. -/
+to the inverse left unitor at the finite level, along the transported scalar unit. -/
 theorem coefficientUnitLeftUnitor_inv_scalarExtension
     (D : CoefficientDerivedSystemScalarCoherence l E W) (n : ℕ)
     (P : CochainComplex (scalarReductionSource l E W) ℤ) :
@@ -182,12 +180,7 @@ theorem coefficientUnitLeftUnitor_inv_scalarExtension
 
 /-- The finite tensor comparison carries the scalar extension of the derived inverse left
 unitor on a K-flat complex to the finite derived inverse left unitor, along the
-transported scalar unit and the finite reduction models.
-Source: Stacks 07A4, 06YY (auxiliary; not a blueprint node).
-Proof: after the finite reduction models of the two factors, the normalized finite tensor
-comparison is the localized ordinary scalar tensor comparison. Naturality of the reduction
-models and of the K-flat tensor models reduces the claim to the chain-level identity
-`coefficientUnitLeftUnitor_inv_scalarExtension`. -/
+transported scalar unit and the finite reduction models. -/
 theorem coefficientFiniteTensor_unitLeftUnitor
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R)

@@ -38,17 +38,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
 
 /-- The comparison map `f^* (forget₂ G) ⟶ forget₂ (f^* G)` between the pullback of the
 underlying abelian sheaf of an étale sheaf `G` of `Λ`-modules and the underlying abelian sheaf
-of its pullback. It is the mate of the equality `f_* ∘ forget₂ = forget₂ ∘ f_*`: it corresponds
-under `f^* ⊣ f_*` to `forget₂` of the unit `G ⟶ f_* f^* G`, i.e. it is the unique map making
-```
-forget₂ G ------η------> f_* f^* (forget₂ G)
-     \ |
-      \ f_* (comparison)
-       \ v
-        ----forget₂ η----> f_* (forget₂ (f^* G))
-```
-commute (`unit_comp_lowerStar_map_upperStarForget₂Comparison`). It is an isomorphism, see
-`AlgebraicGeometry.Etale.isIso_upperStarForget₂Comparison`. -/
+of its pullback: the mate of the equality `f_* ∘ forget₂ = forget₂ ∘ f_*`. It is an
+isomorphism, see `AlgebraicGeometry.Etale.isIso_upperStarForget₂Comparison`. -/
 noncomputable def upperStarForget₂Comparison
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     (f)^*[AddCommGrpCat.{u + 1}].obj

@@ -14,8 +14,13 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
 /-! # Scalar reduction computed by a coefficient resolution
 
-Source: Stacks Tags 06YY and 07A4; the coefficient resolution in paragraph 1 of
-`lem-coef-integral-hom-reduction.proof.md`.
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08J7]
 -/
 
 @[expose] public section
@@ -56,10 +61,7 @@ private theorem tensorPreadditive : MonoidalPreadditive (Modules.{t, u} Y R) := 
 attribute [local instance] tensorPreadditive
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- Functorial K-flat replacements from the existing reduced flat resolution.
-Source: Stacks Tag 06YS. The flat-resolution colimit theorem gives categorical
-K-flatness. Apply it to zero maps into acyclic complexes to obtain the recorded
-acyclic-tensor predicate. -/
+/-- Functorial K-flat replacements from the existing reduced flat resolution. -/
 private theorem functorialResolution :
     ∃ (F : CochainComplex (Modules.{t, u} Y R) ℤ ⥤
         CochainComplex (Modules.{t, u} Y R) ℤ) (π : F ⟶ 𝟭 _),
@@ -122,22 +124,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Tensor with a K-flat coefficient resolution computes restricted derived reduction,
-without an internal Hom or any tensor presentation as input.
-
-Source: Stacks 06YY, 07A4, 07A6 and 08J7; blueprint
-`lem-coef-integral-hom-reduction.proof.md`, paragraph 1.
-
-Proof: on a K-flat complex A, tensor the supplied augmentation with A. Its
-localization is invertible by K-flatness of A. The ordinary balanced tensor
-comparison identifies tensor with the restricted quotient unit with restriction
-of scalar extension of A. The left-derived counit and the exact-restriction
-factorization identify this with restricted derived reduction of Qloc(A).
-For arbitrary C choose a K-flat resolution A -> C. Tensoring its augmentation
-with the supplied K-flat Q is a quasi-isomorphism, so the preceding isomorphism
-extends to C. Use the existing reduced functorial flat resolution to make this
-choice natural in C. Whisker the counit, ordinary comparison, tensor augmentation,
-and resolution augmentation, then compose their localized natural isomorphisms.
-No boundedness or nonzero hypothesis on Q, C, the ring, or the site is used. -/
+without an internal Hom or any tensor presentation as input. -/
 theorem reduction_tensor_resolution_comparison
     (n : ℕ) (Q : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)
     (hQ : flat.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl) Q)

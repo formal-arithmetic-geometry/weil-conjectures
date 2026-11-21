@@ -132,10 +132,7 @@ noncomputable def derivedTensorShiftIso (K M : DerivedCategory (Sheaf X.smallEta
 
 attribute [local instance] Sheaf.monoidalCategory in
 /-- Tensoring with a shifted complex shifts the tensor product, `M ⊗ᴸ K⟦a⟧ ≅ (M ⊗ᴸ K)⟦a⟧`,
-naturally in `M`. The components are the commutation of `M ⊗ᴸ -` with the shift
-(`AlgebraicGeometry.Etale.commShiftDerivedTensorObj`); they are natural in `M` because the
-derived tensor product commutes with shifts as a bifunctor
-(`DerivedCategory.commShift₂CurriedTensor`). -/
+naturally in `M`. -/
 noncomputable def derivedTensorRightShiftIso
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
     derivedTensorRight A X (K⟦a⟧) ≅ derivedTensorRight A X K ⋙ shiftFunctor _ a :=

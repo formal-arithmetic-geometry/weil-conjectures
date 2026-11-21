@@ -22,16 +22,7 @@ an additive group. Then `R^q f_* M = 0` for every `q > 2d` and every étale shea
 
 This generalises `AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul` of
 `WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing`, which is stated for a finite
-ring `Λ`. Unlike that file, this file does not depend on the proper base change theorem, so that
-it can be used in the proof of its unbounded version.
-
-The argument of `WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing` is run for an
-arbitrary coefficient ring whose injective sheaves have acyclic underlying abelian sheaves
-(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic`). This holds for
-`ULift ℤ`, whose sheaves of modules are just abelian sheaves
-(`AlgebraicGeometry.Etale.subsingleton_H_forget₂_uliftInt_of_injective`). A general torsion
-ring `Λ` is reduced to `ULift ℤ` by restriction of scalars, which commutes with the derived direct
-images (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`).
+ring `Λ`.
 
 ## Main statements
 
@@ -39,11 +30,16 @@ images (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`).
   cohomology of a sheaf of `Λ`-modules over an étale `X`-scheme `V` vanishes in a degree where
   the abelian cohomology of its underlying abelian sheaf restricted to `V` does, provided that
   injective sheaves of `Λ`-modules on `V` have acyclic underlying abelian sheaves.
-- `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_isAffine` (in
-  `WeilConjectures.SixFunctors.Etale.Derived.HigherDirectImageAffine`):
-  `R^q h_* K = 0` as soon as `H^q(W ×_X Y, K|) = 0` for every affine `W` étale over `X`.
 - `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`: the vanishing of `R^q f_*`
   above twice the dimension, for a torsion coefficient ring.
+
+## Implementation details
+
+Unlike `WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing`, this file does not
+depend on the proper base change theorem, so that it can be used in the proof of its unbounded
+version. The argument is run for an arbitrary coefficient ring whose injective sheaves have
+acyclic underlying abelian sheaves; this holds for `ULift ℤ`, and a general torsion ring `Λ` is
+reduced to `ULift ℤ` by restriction of scalars, which commutes with the derived direct images.
 -/
 
 @[expose] public section
@@ -62,13 +58,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 `X`-scheme such that the underlying abelian sheaves of injective sheaves of `Λ`-modules on `V`
 are acyclic, and `F` an étale sheaf of `Λ`-modules on `X`. If the underlying abelian sheaf of the
 restriction of `F` to `V` has no cohomology in degree `n + 1`, then `Ext^{n + 1}(Λ[V], F) = 0`,
-that is `H^{n + 1}(V, F|) = 0` computed with sheaves of `Λ`-modules.
-
-This generalises `AlgebraicGeometry.Etale.subsingleton_ext_freeSheaf_of_subsingleton_H`, which
-assumes `Λ` finite, the acyclicity then being
-`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`. The proof is dimension shifting
-(`CategoryTheory.Abelian.Ext.subsingleton_of_subsingleton_map`); in degree one both groups
-measure the failure of sections over `V` to lift. -/
+that is `H^{n + 1}(V, F|) = 0` computed with sheaves of `Λ`-modules. -/
 theorem Etale.subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic {X : Scheme.{u}}
     (V : X.Etale) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (n : ℕ)
     (hI : ∀ (I : Sheaf V.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] (m : ℕ),
@@ -113,12 +103,7 @@ theorem Etale.subsingleton_ext_freeSheaf_of_subsingleton_H_of_acyclic {X : Schem
 `f : X ⟶ Y` a quasi-compact morphism to an arbitrary scheme `Y`. Let `Λ` be a coefficient ring
 such that, for every étale `X`-scheme `V`, the underlying abelian sheaves of injective sheaves of
 `Λ`-modules on `V` are acyclic. Then `R^q f_* M = 0` for every `q > 2d` and every étale sheaf `M`
-of `Λ`-modules on `X` whose restrictions to étale `X`-schemes are torsion.
-
-For an affine étale `W ⟶ Y`, the scheme `W ×_Y X` is quasi-compact, of finite type over `k` and
-étale over `X`, hence of dimension at most `d`, so its torsion cohomology vanishes above `2d`
-(`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`); and `R^q f_* M` is the
-sheafification of these groups. -/
+of `Λ`-modules on `X` whose restrictions to étale `X`-schemes are torsion. -/
 theorem Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact {k : Type u}
     [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] (d : ℕ)
@@ -161,10 +146,7 @@ closed field, `f : X ⟶ Y` a quasi-compact morphism locally of finite type betw
 locally of finite type with `dim X ≤ d`, and `Λ` a coefficient ring such that, for every étale
 `X`-scheme `V`, the underlying abelian sheaves of injective sheaves of `Λ`-modules on `V` are
 acyclic. Then `R^q f_* M = 0` for every `q > 2d` and every étale sheaf `M` of `Λ`-modules on `X`
-whose restrictions to étale `X`-schemes are torsion.
-
-This is `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact`,
-as `X` is locally of finite type over `k`. -/
+whose restrictions to étale `X`-schemes are torsion. -/
 theorem Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic {k : Type u}
     [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f]
     [QuasiCompact f] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]
@@ -183,9 +165,7 @@ theorem Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic {k : Type u}
     hq
 
 /-- **Injective sheaves of `ULift ℤ`-modules are acyclic.** The underlying abelian sheaf of an
-injective étale sheaf of `ULift ℤ`-modules is injective, taking underlying abelian sheaves being
-an equivalence (`AlgebraicGeometry.Etale.isEquivalence_sheafCompose_forget₂_uliftInt`), hence it
-has no cohomology in positive degrees. -/
+injective étale sheaf of `ULift ℤ`-modules has no cohomology in positive degrees. -/
 theorem Etale.subsingleton_H_forget₂_uliftInt_of_injective {X : Scheme.{u}}
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) [Injective I]
     (n : ℕ) :
@@ -240,16 +220,7 @@ noncomputable def Etale.restrictScalarsHigherDirectImageIso {X Y : Scheme.{u}} (
 Let `k` be a separably closed field, `X` a `k`-scheme locally of finite type with `dim X ≤ d`,
 `f : X ⟶ Y` a quasi-compact morphism to an arbitrary scheme `Y`, and `Λ` a ring which is torsion
 as an additive group. Then `R^q f_* M = 0` for every `q > 2d` and every étale sheaf `M` of
-`Λ`-modules on `X`.
-
-This generalises `AlgebraicGeometry.Etale.hasUniformDirectImageVanishingLE_two_mul`, which
-assumes `Λ` finite. By restriction of scalars to `ULift ℤ`
-(`AlgebraicGeometry.Etale.restrictScalarsHigherDirectImageIso`), which is faithful, this follows
-from the case of `ULift ℤ`-coefficients
-(`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt_of_acyclic_of_quasiCompact`), in
-which injective sheaves are acyclic
-(`AlgebraicGeometry.Etale.subsingleton_H_forget₂_uliftInt_of_injective`)
-and the sheaves considered are killed by the additive order of `1 : Λ`. -/
+`Λ`-modules on `X`. -/
 theorem Etale.isZero_higherDirectImage_of_quasiCompact_of_two_mul_lt (hΛ : IsAddTorsion Λ)
     {k : Type u} [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX] (d : ℕ)
@@ -279,10 +250,7 @@ theorem Etale.isZero_higherDirectImage_of_quasiCompact_of_two_mul_lt (hΛ : IsAd
 Let `k` be a separably closed field, `f : X ⟶ Y` a quasi-compact morphism locally of finite type
 between `k`-schemes locally of finite type with `dim X ≤ d`, and `Λ` a ring which is torsion as
 an additive group. Then `R^q f_* M = 0` for every `q > 2d` and every étale sheaf `M` of
-`Λ`-modules on `X`.
-
-This is `AlgebraicGeometry.Etale.isZero_higherDirectImage_of_quasiCompact_of_two_mul_lt`, as `X`
-is locally of finite type over `k`. -/
+`Λ`-modules on `X`. -/
 theorem Etale.isZero_higherDirectImage_of_two_mul_lt (hΛ : IsAddTorsion Λ) {k : Type u}
     [Field k] [IsSepClosed k] {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f]
     [QuasiCompact f] (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY]

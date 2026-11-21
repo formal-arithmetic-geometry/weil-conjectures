@@ -11,13 +11,23 @@ import all WeilConjectures.CategoryTheory.Ringed.Site.RingedSiteDualityMaps
 
 /-! # Generic transition calculus for tensor presentations of strict systems
 
-Source: Stacks 03CZ, 03EK, 07A4 and 0941.
-
 Given two levels of a strict coefficient system, presentations of two system complexes
 by scalar extensions of completed-coefficient complexes, and the ordinary evaluation and
 scalar tensor comparisons, the induced presentation of the system tensor product is again
-compatible with the strict transition maps. Everything here is stated for arbitrary ring
-sheaves, so that kernel checking never compares the concrete coefficient rings.
+compatible with the strict transition maps.
+
+## Implementation details
+
+Everything here is stated for arbitrary ring sheaves, so that kernel checking never compares
+the concrete coefficient rings.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 03D7]
 -/
 
 @[expose] public section
@@ -35,14 +45,12 @@ namespace OrdinaryReductionTensor
 
 variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
-/-- Forgetting a restriction of scalars on sections is injective.
-Source: Stacks 03CZ. -/
+/-- Forgetting a restriction of scalars on sections is injective. -/
 theorem restrictionSection_injective {A B : Sheaf J RingCat.{r}} (φ : A ⟶ B)
     (N : SheafOfModules.{r} B) (U : Cᵒᵖ) :
     Function.Injective (coefficientRestrictionSection φ N U) := fun _ _ h ↦ h
 
-/-- Sections of a map out of an adjunction unit.
-Source: Stacks 03CZ. -/
+/-- Sections of a map out of an adjunction unit. -/
 theorem unit_comp_section {A B : Sheaf J RingCat.{r}} (p : A ⟶ B)
     {F : SheafOfModules.{r} A ⥤ SheafOfModules.{r} B}
     (a : F ⊣ SheafOfModules.restrictScalars p) {X : SheafOfModules.{r} A}
@@ -52,8 +60,7 @@ theorem unit_comp_section {A B : Sheaf J RingCat.{r}} (p : A ⟶ B)
       φ.val.app U (coefficientRestrictionSection p (F.obj X) U ((a.unit.app X).val.app U x)) :=
   rfl
 
-/-- Restriction of scalars does not change the section map.
-Source: Stacks 03CZ. -/
+/-- Restriction of scalars does not change the section map. -/
 theorem restrict_map_section {A B : Sheaf J RingCat.{r}} (q : A ⟶ B)
     {M N : SheafOfModules.{r} B} (g : M ⟶ N) (U : Cᵒᵖ)
     (w : ((SheafOfModules.restrictScalars q).obj M).val.obj U) :
@@ -61,30 +68,26 @@ theorem restrict_map_section {A B : Sheaf J RingCat.{r}} (q : A ⟶ B)
       g.val.app U (coefficientRestrictionSection q M U w) :=
   rfl
 
-/-- Sections of a composite of module-sheaf maps.
-Source: Stacks 03CZ. -/
+/-- Sections of a composite of module-sheaf maps. -/
 theorem comp_section {R : Sheaf J RingCat.{r}} {M N P : SheafOfModules.{r} R}
     (f : M ⟶ N) (g : N ⟶ P) (U : Cᵒᵖ) (x : M.val.obj U) :
     (f ≫ g).val.app U x = g.val.app U (f.val.app U x) := rfl
 
-/-- The inverse of an isomorphism of complexes undoes it on sections.
-Source: Stacks 03CZ. -/
+/-- The inverse of an isomorphism of complexes undoes it on sections. -/
 theorem iso_inv_hom_section {R : Sheaf J RingCat.{r}}
     {P Q : CochainComplex (SheafOfModules.{r} R) ℤ} (e : P ≅ Q)
     (k : ℤ) (U : Cᵒᵖ) (x : (Q.X k).val.obj U) :
     (e.hom.f k).val.app U ((e.inv.f k).val.app U x) = x :=
   congrArg (fun (f : Q ⟶ Q) ↦ (f.f k).val.app U x) e.inv_hom_id
 
-/-- The inverse of an isomorphism of complexes undoes it on sections.
-Source: Stacks 03CZ. -/
+/-- The inverse of an isomorphism of complexes undoes it on sections. -/
 theorem iso_hom_inv_section {R : Sheaf J RingCat.{r}}
     {P Q : CochainComplex (SheafOfModules.{r} R) ℤ} (e : P ≅ Q)
     (k : ℤ) (U : Cᵒᵖ) (x : (P.X k).val.obj U) :
     (e.inv.f k).val.app U ((e.hom.f k).val.app U x) = x :=
   congrArg (fun (f : P ⟶ P) ↦ (f.f k).val.app U x) e.hom_inv_id
 
-/-- Maps out of a left adjoint are determined by their composites with the unit.
-Source: Stacks 03CZ. -/
+/-- Maps out of a left adjoint are determined by their composites with the unit. -/
 theorem hom_ext_of_unit {X' Y' : Type*} [Category X'] [Category Y'] {F : X' ⥤ Y'}
     {G : Y' ⥤ X'} (a : F ⊣ G) {X : X'} {Y : Y'} {f g : F.obj X ⟶ Y}
     (h : a.unit.app X ≫ G.map f = a.unit.app X ≫ G.map g) : f = g := by
@@ -92,24 +95,21 @@ theorem hom_ext_of_unit {X' Y' : Type*} [Category X'] [Category Y'] {F : X' ⥤ 
   rw [a.homEquiv_unit, a.homEquiv_unit]
   exact h
 
-/-- Sections of the inverse of a threefold composite isomorphism ending in a symmetric one.
-Source: Stacks 03CZ. -/
+/-- Sections of the inverse of a threefold composite isomorphism ending in a symmetric one. -/
 theorem trans_symm_inv_section {R : Sheaf J RingCat.{r}}
     {X Y Z W : CochainComplex (SheafOfModules.{r} R) ℤ} (e₁ : X ≅ Y) (e₂ : Y ≅ Z) (s : W ≅ Z)
     (k : ℤ) (U : Cᵒᵖ) (z : (W.X k).val.obj U) :
     ((e₁ ≪≫ e₂ ≪≫ s.symm).inv.f k).val.app U z =
       (e₁.inv.f k).val.app U ((e₂.inv.f k).val.app U ((s.hom.f k).val.app U z)) := rfl
 
-/-- Sections of a threefold composite isomorphism ending in a symmetric one.
-Source: Stacks 03CZ. -/
+/-- Sections of a threefold composite isomorphism ending in a symmetric one. -/
 theorem trans_symm_hom_section {R : Sheaf J RingCat.{r}}
     {X Y Z W : CochainComplex (SheafOfModules.{r} R) ℤ} (e₁ : X ≅ Y) (e₂ : Y ≅ Z) (s : W ≅ Z)
     (k : ℤ) (U : Cᵒᵖ) (z : (X.X k).val.obj U) :
     ((e₁ ≪≫ e₂ ≪≫ s.symm).hom.f k).val.app U z =
       (s.inv.f k).val.app U ((e₂.hom.f k).val.app U ((e₁.hom.f k).val.app U z)) := rfl
 
-/-- A composite through a restriction of scalars, computed one map at a time on sections.
-Source: Stacks 03CZ. -/
+/-- A composite through a restriction of scalars, computed one map at a time on sections. -/
 theorem comp_restrict_section {Bm Bn : Sheaf J RingCat.{r}} (q : Bm ⟶ Bn)
     {X Y : SheafOfModules.{r} Bm} {Z W : SheafOfModules.{r} Bn}
     (a : X ⟶ Y) (b : Y ⟶ (SheafOfModules.restrictScalars q).obj Z) (g : Z ⟶ W) (U : Cᵒᵖ)
@@ -121,15 +121,13 @@ theorem comp_restrict_section {Bm Bn : Sheaf J RingCat.{r}} (q : Bm ⟶ Bn)
   subst h₁ h₂ h₃
   rfl
 
-/-- An eqToHom of abelian groups is surjective.
-Source: Stacks 0941. -/
+/-- An eqToHom of abelian groups is surjective. -/
 theorem eqToHom_surjective {A B : AddCommGrpCat.{r}} (h : A = B) :
     Function.Surjective (eqToHom h) := by
   subst B
   exact fun x ↦ ⟨x, rfl⟩
 
-/-- Transport of a commuting square along identifications of abelian groups.
-Source: Stacks 0941. -/
+/-- Transport of a commuting square along identifications of abelian groups. -/
 theorem transport_square {A B A' B' : AddCommGrpCat.{r}}
     (hA : A' = A) (hB : B' = B) {f : A' ⟶ B'} {g : A ⟶ B}
     (h : eqToHom hA.symm ≫ f ≫ eqToHom hB = g) (x : A) :
@@ -140,7 +138,7 @@ theorem transport_square {A B A' B' : AddCommGrpCat.{r}}
     ConcreteCategory.id_apply] using congrArg (fun f ↦ f x) h
 
 /-- A section formula for a transformation, transported along identifications of the
-underlying abelian groups. Source: Stacks 0941. -/
+underlying abelian groups. -/
 theorem transported_transition_section {D : Type*} [Category D]
     {R S : Sheaf J RingCat.{r}} (φ : R ⟶ S)
     (Fm : D ⥤ SheafOfModules.{r} R) (Fn : D ⥤ SheafOfModules.{r} S)
@@ -156,8 +154,7 @@ theorem transported_transition_section {D : Type*} [Category D]
   exact transport_square ha hb h x
 
 /-- A strict quotient transformation sends adjunction unit sections to adjunction unit
-sections. Packaging this as a structure keeps kernel checking at the level of its arguments.
-Source: Stacks 03CZ, 03D7. -/
+sections. Packaging this as a structure keeps kernel checking at the level of its arguments. -/
 structure QuotientUnitLaw {R S T : Sheaf J RingCat.{r}} (pm : R ⟶ S) (pn : R ⟶ T)
     {Em : SheafOfModules.{r} R ⥤ SheafOfModules.{r} S}
     {En : SheafOfModules.{r} R ⥤ SheafOfModules.{r} T}
@@ -169,23 +166,20 @@ structure QuotientUnitLaw {R S T : Sheaf J RingCat.{r}} (pm : R ⟶ S) (pn : R �
       (coefficientRestrictionSection pm (Em.obj X) U ((am.unit.app X).val.app U x)))
       (coefficientRestrictionSection pn (En.obj X) U ((an.unit.app X).val.app U x))
 
-/-- A transformation agreeing with the mate of a composite of restrictions.
-Source: Stacks 03D7. -/
+/-- A transformation agreeing with the mate of a composite of restrictions. -/
 structure QuotientMateLaw {A₀ : Type*} {B₀ : Type*} {C₀ : Type*} [Category A₀] [Category B₀]
     [Category C₀] {Em : A₀ ⥤ B₀} {En : A₀ ⥤ C₀} {Gm : B₀ ⥤ A₀} {Gn : C₀ ⥤ A₀} {Tf : C₀ ⥤ B₀}
     (am : Em ⊣ Gm) (an : En ⊣ Gn) (e : Tf ⋙ Gm ≅ Gn) (quot : Em ⟶ En ⋙ Tf) : Prop where
   app_eq : ∀ X, quot.app X = (coefficientQuotientNatTrans am an Tf e).app X
 
-/-- The inverse of an equality of functors into module sheaves is the identity on sections.
-Source: Stacks 03CZ. -/
+/-- The inverse of an equality of functors into module sheaves is the identity on sections. -/
 theorem eqToIso_inv_section_heq {R : Sheaf J RingCat.{r}} {X : Type*} [Category X]
     {F G : X ⥤ SheafOfModules.{r} R} (h : F = G) (N : X) (U : Cᵒᵖ)
     (y : (G.obj N).val.obj U) : HEq (((eqToIso h).inv.app N).val.app U y) y := by
   cases h
   rfl
 
-/-- The mate of an equality of composite restrictions sends unit sections to unit sections.
-Source: Stacks 03CZ, 03D7. -/
+/-- The mate of an equality of composite restrictions sends unit sections to unit sections. -/
 theorem quotientUnitLaw_of_mateLaw {R S T : Sheaf J RingCat.{r}} (f : R ⟶ S) (g : S ⟶ T)
     (h : R ⟶ T)
     (he : SheafOfModules.restrictScalars.{r} g ⋙ SheafOfModules.restrictScalars f =
@@ -210,8 +204,7 @@ section Generators
 variable [HasSheafify J AddCommGrpCat.{max c v r}]
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
 
-/-- The total tensor of a product isomorphism acts factorwise on pure generators.
-Source: Stacks 03EK, 07A4. -/
+/-- The total tensor of a product isomorphism acts factorwise on pure generators. -/
 theorem mapIso_prod_hom_generator {R : Sheaf J CommRingCat.{max c v r}}
     {P P' Q Q' : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ}
@@ -223,8 +216,7 @@ theorem mapIso_prod_hom_generator {R : Sheaf J CommRingCat.{max c v r}}
         ((a.hom.f p).val.app U x) ((b.hom.f q).val.app U y) :=
   CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r} a.hom b.hom p q k h U x y
 
-/-- The total tensor of a product isomorphism acts factorwise on pure generators.
-Source: Stacks 03EK, 07A4. -/
+/-- The total tensor of a product isomorphism acts factorwise on pure generators. -/
 theorem mapIso_prod_inv_generator {R : Sheaf J CommRingCat.{max c v r}}
     {P P' Q Q' : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ}
@@ -236,8 +228,7 @@ theorem mapIso_prod_inv_generator {R : Sheaf J CommRingCat.{max c v r}}
         ((a.inv.f p).val.app U x) ((b.inv.f q).val.app U y) :=
   CategoryTheory.ScalarHomTensor.tensor_generator_map.{c, v, r} a.inv b.inv p q k h U x y
 
-/-- Pure tensor generators are compatible with restriction along the site.
-Source: Stacks 03EK. -/
+/-- Pure tensor generators are compatible with restriction along the site. -/
 theorem generator_presheaf_restrict (R : Sheaf J CommRingCat.{max c v r})
     (P Q : CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ)
@@ -251,8 +242,7 @@ theorem generator_presheaf_restrict (R : Sheaf J CommRingCat.{max c v r})
 
 end Generators
 
-/-- Scalar extension of a map sends unit sections to unit sections.
-Source: Stacks 03CZ. -/
+/-- Scalar extension of a map sends unit sections to unit sections. -/
 theorem unit_map_section {A B : Sheaf J RingCat.{r}} (π : A ⟶ B)
     {F : SheafOfModules.{r} A ⥤ SheafOfModules.{r} B}
     (a : F ⊣ SheafOfModules.restrictScalars π) {X X' : SheafOfModules.{r} A} (φ : X ⟶ X')
@@ -270,7 +260,7 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 -- The section calculation passes through total tensor complexes and scalar restriction.
 /-- Scalar tensor comparisons characterized by the unit-section generator formula are
-natural in both complexes. Source: Stacks 03EK, 07A4. -/
+natural in both complexes. -/
 theorem scalarTensor_naturality {A B : Sheaf J CommRingCat.{max c v r}}
     (π : (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A ⟶
       (sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj B)
@@ -360,8 +350,7 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
 
 -- The section calculation passes through several levels of composite functors.
 /-- The tensor product of two presentations of strict system complexes is again a
-presentation: its finite comparison commutes with the strict transitions.
-Source: Stacks 03EK, 07A4 and 0941. -/
+presentation: its finite comparison commutes with the strict transitions. -/
 theorem tensorPresentation_transition
     {A Bm Bn : Sheaf J CommRingCat.{max c v r}}
     {R : Sheaf (coefficientSequenceTopology J) CommRingCat.{max c v r}}

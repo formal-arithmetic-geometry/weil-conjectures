@@ -13,16 +13,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduct
 Let `c` be a compactification of `f : X ⟶ Y`, `N_Y` a dualizable object of `D(Y_ét)` and
 `a : Lf^*N_Y ≅ N_X`. The reduction `PF_{K, L} ⊗ᴸ N_Y` of the projection map
 `PF_{K, L} : Rf_!K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^*L)` is an isomorphism as soon as the projection map
-`PF_{K ⊗ᴸ N_X, L}` is: by
-`AlgebraicGeometry.Etale.isIso_derivedTensorRight_map_projectionMapOfCompactification_iff` the
-former is invertible if and only if `PF_{K, L ⊗ᴸ N_Y}` is, and by the associativity of the
-projection map (`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`) at
-`(K, N_Y, L)` the latter differs from `PF_{K ⊗ᴸ Lf^*N_Y, L}` by isomorphisms, `PF_{K, N_Y}`
-being invertible for the dualizable `N_Y`.
+`PF_{K ⊗ᴸ N_X, L}` is.
 
 For `N = (Λ/J)` constant this moves the reduction of the coefficients from the second variable
-of the projection map, where it is in the blueprint, to the first
-one, where the object becomes torsion and proper base change applies.
+of the projection map to the first one, where the object becomes torsion and proper base change
+applies.
 
 ## Main statements
 

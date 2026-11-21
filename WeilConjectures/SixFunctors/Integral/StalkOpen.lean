@@ -25,6 +25,8 @@ an affine pointed étale neighbourhood `(U₀, u₀)` of `y' ≫ g`. For a germ 
 with `(u₀, t₀ ≫ g')` on finitely many functions on `U₀ ×_Y X` vanishes as well
 (`AlgebraicGeometry.Etale.exists_finset_stalkRestrict_eq_zero`).
 
+## Implementation details
+
 The germ is a section `σ` of `G` over `V ×_{Y'} X'` for an affine pointed étale neighbourhood
 `(V, v)` of `y'` mapping to `U₀`, the vanishing set of `σ` contains a basic open `D(h)` around
 `(v, t₀)`, and `V ×_{Y'} X' = V ×_{U₀} (U₀ ×_Y X)` so the value of `h` at `(v, t)` only

@@ -36,8 +36,7 @@ open CategoryTheory Limits MonoidalCategory
 
 open scoped CategoryTheory.Functor
 
-/-- Transport tensor compatibility of a square along isomorphisms of its vertical functors.
-The calculation only uses naturality in the first tensor variable. -/
+/-- Transport tensor compatibility of a square along isomorphisms of its vertical functors. -/
 private lemma tensorComparison_square_transport
     {C₁ C₂ D₁ D₂ : Type*} [Category* C₁] [Category* C₂] [Category* D₁] [Category* D₂]
     [MonoidalCategory C₁] [MonoidalCategory C₂] [MonoidalCategory D₁] [MonoidalCategory D₂]
@@ -275,7 +274,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 
 /-- The inverse form of `derivedOpenImmersionLowerShriekProjectionMap_baseChange`, with the
-blueprint's projection map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`. -/
+inverse projection map `j_!K ⊗ᴸ M ⟶ j_!(K ⊗ᴸ Lj^*M)`. -/
 lemma derivedOpenImmersionLowerShriekProjectionIso_inv_baseChange
     (hsq : IsPullback g' j' j g'')
     (K : DerivedCategory (Sheaf U.smallEtaleTopology A))

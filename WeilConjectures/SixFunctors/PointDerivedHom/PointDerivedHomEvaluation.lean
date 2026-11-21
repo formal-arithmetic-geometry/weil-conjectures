@@ -74,7 +74,12 @@ set_option linter.privateModule false
 
 /-! # Derived Hom and evaluation at a pro-etale point
 
-Source: Stacks Project, Tags 0A8X, 08J7, 08BJ and 0G7E.
+## References
+
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 08BJ]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section

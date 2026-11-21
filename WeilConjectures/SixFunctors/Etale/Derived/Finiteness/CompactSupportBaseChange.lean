@@ -21,7 +21,6 @@ constructibility theorem.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_and_isIso`
-.
 -/
 
 @[expose] public section
@@ -40,14 +39,12 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Compact direct images needed by the
-generic argument.
-
-Let `f : X ⟶ S` be a separated finite-type morphism (here: one admitting a compactification)
-between finite-type schemes over a field `k`, and let `Λ` be a finite ring whose exponent is
-invertible in `k`. For `K ∈ Dᵇc(X, Λ)`, the compact direct image `Rf_! K` is bounded
-constructible, and for every morphism `v : S' ⟶ S` from a noetherian scheme, with base change
-`f' : X' ⟶ S'`, the exchange `v^* Rf_! K ⟶ Rf'_! v_X^* K` is an isomorphism. -/
+/-- Compact direct images needed by the generic argument: let `f : X ⟶ S` be a separated
+finite-type morphism (here: one admitting a compactification) between finite-type schemes over
+a field `k`, and let `Λ` be a finite ring whose exponent is invertible in `k`. For
+`K ∈ Dᵇc(X, Λ)`, the compact direct image `Rf_! K` is bounded constructible, and for every
+morphism `v : S' ⟶ S` from a noetherian scheme, with base change `f' : X' ⟶ S'`, the exchange
+`v^* Rf_! K ⟶ Rf'_! v_X^* K` is an isomorphism. -/
 theorem boundedConstructible_rightDerivedLowerShriek_and_isIso {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {X S : Scheme.{u}} (f : X ⟶ S)
     [HasCompactification f] (aX : X ⟶ Spec (.of k)) (aS : S ⟶ Spec (.of k))

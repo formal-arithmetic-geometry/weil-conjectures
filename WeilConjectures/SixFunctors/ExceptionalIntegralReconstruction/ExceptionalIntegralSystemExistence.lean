@@ -14,7 +14,10 @@ import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalProOriginExactLi
 import WeilConjectures.AlgebraicGeometry.Exceptional.ExceptionalOriginAdjunctionEvaluation
 
 /-! # Exceptional system transport in the fixed integral coordinates
-Source: Zheng, Construction 5.25, Lemma 5.22 and Proposition 5.24.
+
+## References
+
+* Zheng, Construction 5.25, Lemma 5.22 and Proposition 5.24
 -/
 
 @[expose] public noncomputable section
@@ -32,22 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The ordinary exceptional system construction and its pro-etale transport exist
-for the lifted valuation ring used by integral reconstruction.
-Source: Zheng, Construction 5.25 and Lemma 5.22; the generic transport argument
-of lem-sf-exceptional-system-transport, with the fixed lifted coefficient ring.
-
-Proof: the lifted valuation ring is complete, its uniformizer is regular, and its
-positive quotients are finite prime-power-torsion rings. Apply the ordinary Brown
-construction with those stages. At X, Y and the compactification obtain the actual
-site adjunctions, and use the proper and open mates to compare compact support.
-On the origin subcategories these comparisons are invertible. Conjugating the
-ordinary adjunction along the site adjunctions therefore gives the displayed
-system adjunction and its transpose equation. Apply the same argument at each
-finite level; the evaluation squares for the original site maps identify their
-units, counits and quotient transitions. Retain the exact, additive and linear
-structures and the normalizedness and lower bound of the transported right
-functor. This is the generic system-transport proof with only the ring coordinates
-changed; no absolute separatedness or faithfulness of finite evaluation is used. -/
+for the lifted valuation ring used by integral reconstruction. -/
 theorem exceptionalIntegralSystemExistence
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}}

@@ -20,8 +20,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 Let `f : X ⟶ Y` be a universal homeomorphism of schemes. Base change along `f` is an
 equivalence of the small étale sites, matching the topologies
 (`AlgebraicGeometry.Scheme.Hom.isDenseSubsite_etale`), so it induces an equivalence of the
-small étale topoi, and hence an isomorphism on étale cohomology in every degree. This is
-[Stacks 03SI].
+small étale topoi, and hence an isomorphism on étale cohomology in every degree.
 
 For arbitrary coefficients the equivalence of topoi is
 `AlgebraicGeometry.Etale.sheafEquivalence`, obtained from
@@ -56,36 +55,25 @@ is an equivalence, and the comparison map is an isomorphism.
   universal homeomorphism are equivalences of categories of étale sheaves;
   `AlgebraicGeometry.Etale.isEquivalence_upperStar_of_thickening` is the case of a thickening.
 - `AlgebraicGeometry.Etale.cohomologyMap_bijective`: **topological invariance of étale
-  cohomology**, [Stacks 03SI]: for a universal homeomorphism the comparison map on étale
-  cohomology is bijective.
+  cohomology**: for a universal homeomorphism the comparison map on étale cohomology is
+  bijective.
 
-## Implementation notes
-
-The general-coefficient statement comes first because it needs nothing on `A`: the
-pushforward is objectwise restriction along base change, hence literally the functor of
-`CategoryTheory.Equivalence.sheafCongr` for the equivalence of sites. The `upperStar`
-statements then follow formally, the pullback being a left adjoint of an equivalence.
-
-The comparison map on cohomology is `CategoryTheory.Sheaf.H.mapFunctor` applied to `f^*`
-and the constant-sheaf comparison; nothing about universal homeomorphisms enters its
-construction. Bijectivity is `CategoryTheory.Sheaf.H.mapFunctor_bijective`. It applies
-because `f^*` is an equivalence, hence fully faithful and exact and preserving injective
-objects, and because the category of étale sheaves on `Y` has enough injective objects,
-being Grothendieck abelian.
+## Implementation details
 
 `Etale.sheafEquivalence` and `Etale.isEquivalence_lowerStar` depend only on
 `AlgebraicGeometry.Scheme.Hom.isEquivalence_etale`, which is why they are stated first, for
 arbitrary coefficients. The `upperStar` and cohomology statements additionally need the
 instances `CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` and
 `CategoryTheory.GrothendieckTopology.isGrothendieckAbelian_sheaf_smallEtaleTopology`, which
-are what make `AlgebraicGeometry.Etale.upperStar` and `CategoryTheory.Sheaf.H` available on
-the small étale site at all; these come from the hypothesis
-`CategoryTheory.HasSmallSiteSheafify A` on the coefficient category and are found by
-instance search.
+come from the hypothesis `CategoryTheory.HasSmallSiteSheafify A` on the coefficient category.
+
+The comparison map on cohomology is `CategoryTheory.Sheaf.H.mapFunctor` applied to `f^*`
+and the constant-sheaf comparison; nothing about universal homeomorphisms enters its
+construction. Bijectivity is `CategoryTheory.Sheaf.H.mapFunctor_bijective`.
 
 ## References
 
-* [Stacks 03SI], Étale Cohomology, Proposition 59.45.4.
+* [Stacks, Tag 03SI]
 -/
 
 @[expose] public section
@@ -103,12 +91,9 @@ section General
 variable (A : Type u') [Category.{u + 1} A] {X Y : Scheme.{u}} (f : X ⟶ Y)
   [IsUniversalHomeomorphism f]
 
-/-- **Topological invariance of the small étale topos**, [Stacks 03SI]: for a universal
+/-- **Topological invariance of the small étale topos**: for a universal
 homeomorphism `f : X ⟶ Y`, restriction along base change is an equivalence between the
-category of `A`-valued sheaves on the small étale site of `X` and that of `Y`.
-
-This is the sheaf-level form of the equivalence of sites
-`AlgebraicGeometry.Scheme.Hom.isDenseSubsite_etale`. -/
+category of `A`-valued sheaves on the small étale site of `X` and that of `Y`. -/
 @[stacks 03SI]
 noncomputable def sheafEquivalence :
     Sheaf X.smallEtaleTopology A ≌ Sheaf Y.smallEtaleTopology A :=
@@ -118,12 +103,11 @@ noncomputable def sheafEquivalence :
   f.etaleEquivalence.symm.sheafCongr X.smallEtaleTopology Y.smallEtaleTopology A
 
 /-- The pushforward along a universal homeomorphism is the functor of
-`AlgebraicGeometry.Etale.sheafEquivalence`: both are restriction along the base change
-functor `AlgebraicGeometry.Scheme.Hom.Etale`. -/
+`AlgebraicGeometry.Etale.sheafEquivalence`. -/
 lemma lowerStar_eq_sheafEquivalence_functor : (f)_*[A] = (sheafEquivalence A f).functor :=
   rfl
 
-/-- **Topological invariance of the small étale topos**, [Stacks 03SI]: the pushforward along
+/-- **Topological invariance of the small étale topos**: the pushforward along
 a universal homeomorphism is an equivalence of categories of étale sheaves. -/
 @[stacks 03SI]
 theorem isEquivalence_lowerStar : ((f)_*[A]).IsEquivalence :=
@@ -137,15 +121,12 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [HasSmallSiteSheafify A]
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsUniversalHomeomorphism f]
 
-/-- The pullback along a universal homeomorphism is the quasi-inverse of the pushforward, by
-uniqueness of left adjoints: `(f)^*[A] ⊣ (f)_*[A]` by
-`AlgebraicGeometry.Etale.upperStarLowerStarAdjunction`, and the inverse of an equivalence is
-left adjoint to it. -/
+/-- The pullback along a universal homeomorphism is the quasi-inverse of the pushforward. -/
 noncomputable def upperStarIsoInverse : (f)^*[A] ≅ (sheafEquivalence A f).inverse :=
   (upperStarLowerStarAdjunction A f).leftAdjointUniq (sheafEquivalence A f).symm.toAdjunction
 
 omit [HasSmallSiteSheafify A] in
-/-- **Topological invariance of the small étale topos**, [Stacks 03SI]: the pullback along a
+/-- **Topological invariance of the small étale topos**: the pullback along a
 universal homeomorphism `f : X ⟶ Y` is an equivalence between the category of `A`-valued
 sheaves on the small étale site of `Y` and that of `X`. -/
 @[stacks 03SI]
@@ -157,8 +138,7 @@ omit [HasSmallSiteSheafify A] in
 
 If `i : T₁ ⟶ T₂` is a thickening, that is, a closed immersion which is surjective on points,
 then pullback along `i` is an equivalence between the categories of `A`-valued étale sheaves
-on `T₂` and on `T₁`. In particular it identifies the étale cohomology of `T₂` and of `T₁`, see
-`AlgebraicGeometry.Etale.cohomologyMap_bijective`. -/
+on `T₂` and on `T₁`. -/
 @[stacks 03SI]
 theorem isEquivalence_upperStar_of_thickening {T₁ T₂ : Scheme.{u}} (i : T₁ ⟶ T₂)
     [IsClosedImmersion i] (hi : Function.Surjective i.base) : ((i)^*[A]).IsEquivalence :=
@@ -211,18 +191,16 @@ variable [IsUniversalHomeomorphism f]
 
 attribute [local instance] isEquivalence_upperStar
 
-/-- **Topological invariance of étale cohomology**, [Stacks 03SI]: for a universal
+/-- **Topological invariance of étale cohomology**: for a universal
 homeomorphism `f : X ⟶ Y` the comparison map `AlgebraicGeometry.Etale.cohomologyMap` on
 étale cohomology is bijective in every degree. -/
 @[stacks 03SI]
 theorem cohomologyMap_bijective : Function.Bijective (cohomologyMap f F n) :=
   Sheaf.H.mapFunctor_bijective _ _ F n
 
-/-- **Topological invariance of étale cohomology**, [Stacks 03SI]: for a universal
+/-- **Topological invariance of étale cohomology**: for a universal
 homeomorphism `f : X ⟶ Y` the pullback induces an isomorphism
-`H^n(Y_ét, F) ≃+ H^n(X_ét, f^* F)` in every degree. This is
-`AlgebraicGeometry.Etale.cohomologyMap`, which is bijective by
-`AlgebraicGeometry.Etale.cohomologyMap_bijective`. -/
+`H^n(Y_ét, F) ≃+ H^n(X_ét, f^* F)` in every degree. -/
 @[stacks 03SI]
 noncomputable def cohomologyEquiv :
     Sheaf.H F n ≃+ Sheaf.H (((f)^*[AddCommGrpCat.{u + 1}]).obj F) n :=

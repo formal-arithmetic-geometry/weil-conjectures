@@ -23,9 +23,6 @@ nonzerodivisor `a`, for instance `Λ ⟶ Λ ⧸ (ϖⁿ)`. For étale sheaves on 
   `[α, β]` over `Λ'`, its restriction of scalars has Tor amplitude in `[α - 1, β]` over `Λ`;
 - `AlgebraicGeometry.Etale.boundedConstructible_derivedRestrictScalars_iff`: for `Λ' = Λ ⧸ J`
   finite, restriction of scalars preserves and reflects bounded constructibility.
-
-These follow from the projection formula
-`AlgebraicGeometry.Etale.nonempty_iso_derivedRestrictScalars_derivedTensor`.
 -/
 
 @[expose] public section
@@ -220,10 +217,7 @@ end General
 
 include hφ ha in
 /-- **Tor amplitude of a derived base change.** If `L ⊗ᴸ (Λ ⧸ ker φ)` has Tor amplitude in
-`[α, β]` over `Λ`, then `L ⊗ᴸ_Λ Λ'` has Tor amplitude in `[α + 1, β]` over `Λ'`. For a sheaf `G`
-of `Λ'`-modules, `Res((L ⊗ᴸ_Λ Λ') ⊗ᴸ G) ≅ L ⊗ᴸ Res G`
-(`AlgebraicGeometry.Etale.nonempty_iso_derivedRestrictScalars_derivedTensor`), and
-`(L ⊗ᴸ Res G) ⊗ᴸ (Λ ⧸ ker φ) ≅ (L ⊗ᴸ Res G) ⊞ (L ⊗ᴸ Res G)⟦1⟧`, `a` killing `Res G`. -/
+`[α, β]` over `Λ`, then `L ⊗ᴸ_Λ Λ'` has Tor amplitude in `[α + 1, β]` over `Λ'`. -/
 theorem torAmplitudeIn_derivedExtendScalars (ha' : a ∈ nonZeroDivisors Λ) {L : 𝐃(X, Λ)}
     {α β : ℤ}
     (hL : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X α β
@@ -250,10 +244,7 @@ theorem torAmplitudeIn_derivedExtendScalars (ha' : a ∈ nonZeroDivisors Λ) {L 
 
 include hφ ha in
 /-- **Tor amplitude of a restriction of scalars.** If `N` has Tor amplitude in `[α, β]` over
-`Λ'`, its restriction of scalars has Tor amplitude in `[α - 1, β]` over `Λ`: for a sheaf `G` of
-`Λ`-modules, `Res N ⊗ᴸ G ≅ Res(N ⊗ᴸ (G ⊗ᴸ_Λ Λ'))`
-(`AlgebraicGeometry.Etale.nonempty_iso_derivedRestrictScalars_derivedTensor`), and
-`G ⊗ᴸ_Λ Λ'` has homology in `[-1, 0]`. -/
+`Λ'`, its restriction of scalars has Tor amplitude in `[α - 1, β]` over `Λ`. -/
 theorem torAmplitudeIn_derivedRestrictScalars (ha' : a ∈ nonZeroDivisors Λ) {N : 𝐃(X, Λ')}
     {α β : ℤ} (hN : DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ') X α β N) :
     DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X (α - 1) β
@@ -287,9 +278,7 @@ theorem torAmplitudeIn_derivedRestrictScalars (ha' : a ∈ nonZeroDivisors Λ) {
     _root_.DerivedCategory.TStructure.t.isLE_of_le _ (β + 0) β (by lia)⟩
 
 /-- For `Λ ⧸ J` finite, restriction of scalars along `Λ ⟶ Λ ⧸ J` preserves and reflects bounded
-constructibility: it commutes with the homology sheaves, is faithful and exact, and preserves
-and reflects constructibility of sheaves
-(`AlgebraicGeometry.Scheme.isConstructibleSheaf_restrictScalars_iff`). -/
+constructibility. -/
 lemma boundedConstructible_derivedRestrictScalars_iff (J : Ideal Λ) [Finite (Λ ⧸ J)]
     (N : 𝐃(X, Λ ⧸ J)) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X

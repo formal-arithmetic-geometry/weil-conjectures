@@ -85,11 +85,7 @@ theorem precompShift_add
     ((shiftFunctorAdd B a b).hom.app (J.obj K)), Iso.inv_hom_id_app,
     Functor.map_id, Category.id_comp, reassoc_of% key]
 
-/-- Assemble a specified natural shift family from coherent restrictions.
-
-Proof: precomposition preserves the zero and addition formulas. At any object,
-choose a literal finite-stage presentation. The corresponding restriction has the
-required laws. Cancel the mapped inclusion isomorphism to obtain the global laws. -/
+/-- Assemble a specified natural shift family from coherent restrictions. -/
 @[instance_reducible] def assembleShift
     {I : Type*} {A : I → Type*} [∀ i, Category (A i)]
     {B C : Type*} [Category B] [Category C]

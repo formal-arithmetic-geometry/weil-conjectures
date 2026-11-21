@@ -14,15 +14,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 
 For a normalized Tate twist and every scheme `S` on which the exponent of `Λ` is invertible, the
 projection `p_d : 𝔸^d_S ⟶ S` satisfies `Rp_{d!} ⊣ Lp_d^*(d)[2d]`
-(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`, blueprint
-`lemma-affine-space-etale-localization--1`, `lemma-affine-space-etale-localization`).
+(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`).
 
-The proof composes *twisted adjunctions* `Rf_! ⊣ Lf^*(a)[2a]`
+The construction composes *twisted adjunctions* `Rf_! ⊣ Lf^*(a)[2a]`
 (`AlgebraicGeometry.Etale.nonempty_adjunction_twistShift_comp`): étale morphisms have one with
-`a = 0` (`Rf_!` is the extension by zero, left adjoint to `Lf^*`), the projective line
-`q : ℙ¹_S ⟶ S` has one with `a = 1` (`proposition-adjunction-projective-line--1`), so the affine
-line, which is the standard chart `𝔸¹_S ⊆ ℙ¹_S` followed by `q`, has one with `a = 1`, and affine
-spaces follow by induction through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`.
+`a = 0`, the projective line `q : ℙ¹_S ⟶ S` has one with `a = 1`, hence so does the affine line,
+the standard chart `𝔸¹_S ⊆ ℙ¹_S` followed by `q`, and affine spaces follow through
+`𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`.
 
 ## Main statements
 
@@ -121,9 +119,7 @@ end NatIso
 section Adjunction
 
 /-- **Twisted adjunctions compose.** If `Rf_! ⊣ Lf^*(a)[2a]` and `Rg_! ⊣ Lg^*(b)[2b]`, then
-`R(f ≫ g)_! ⊣ L(f ≫ g)^*(c)[2c]` for `c = b + a`: compose the adjunctions, identify
-`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`)
-and `Lf^*(Lg^* K(b)[2b])(a)[2a] ≅ L(f ≫ g)^* K(b + a)[2(b + a)]`. -/
+`R(f ≫ g)_! ⊣ L(f ≫ g)^*(c)[2c]` for `c = b + a`. -/
 theorem nonempty_adjunction_twistShift_comp {X Y Z : Scheme.{u}} [HasInvertibleExponent Λ X]
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) (g : Y ⟶ Z) {h : X ⟶ Z} (w : f ≫ g = h)
     [HasCompactification f] [HasCompactification g] [HasCompactification h] {a b c : ℤ}
@@ -148,8 +144,7 @@ theorem nonempty_adjunction_twistShift_comp {X Y Z : Scheme.{u}} [HasInvertibleE
       Functor.isoWhiskerRight (leftDerivedUpperStarComp _ f g).symm _)⟩
 
 /-- **The twisted adjunction of an étale morphism.** For `e` étale admitting a compactification,
-`Re_! ⊣ Le^*(0)[0]`: `Re_!` is the extension by zero
-(`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`), left adjoint to `Le^*`. -/
+`Re_! ⊣ Le^*(0)[0]`. -/
 theorem nonempty_adjunction_twistShift_of_etale {X Y : Scheme.{u}} [HasInvertibleExponent Λ X]
     (e : X ⟶ Y) [_root_.AlgebraicGeometry.Etale e] [HasCompactification e] {m : ℤ}
     (hm : m = 0) :
@@ -173,8 +168,7 @@ theorem nonempty_adjunction_projectiveLine [HasTateTwist.IsNormalized Λ] (S : S
   exact ⟨adj⟩
 
 /-- **The affine-line adjunction** `Rp_! ⊣ Lp^*(1)[2]` for `p : 𝔸¹_S ⟶ S` and a normalized
-Tate twist: `p` is the standard chart `j : 𝔸¹_S ⟶ ℙ¹_S`, an open immersion with
-`Rj_! ⊣ Lj^*`, followed by the projective line `q : ℙ¹_S ⟶ S`, with `Rq_! ⊣ Lq^*(1)[2]`. -/
+Tate twist, over any scheme `S` on which the exponent of `Λ` is invertible. -/
 theorem nonempty_adjunction_affineLine [HasTateTwist.IsNormalized Λ] (S : Scheme.{u})
     [HasInvertibleExponent Λ S] :
     haveI : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); S) := .of_hom (_ ↘ S)
@@ -191,18 +185,11 @@ theorem nonempty_adjunction_affineLine [HasTateTwist.IsNormalized Λ] (S : Schem
     (by norm_num) (nonempty_adjunction_twistShift_of_etale Λ _ rfl)
     (nonempty_adjunction_projectiveLine Λ S)
 
-/-- Blueprint `lemma-affine-space-etale-localization--1`: affine-space ambient adjunction.
+/-- **The affine-space adjunction.** For the projection `p_d : 𝔸^d_S ⟶ S` of relative affine
+space over a scheme `S` on which the exponent of `Λ` is invertible, on the entire derived
+categories of étale sheaves of `Λ`-modules,
 
-For the projection `p_d : 𝔸^d_S ⟶ S` of relative affine space over a scheme `S` on which the
-exponent of `Λ` is invertible, on the entire derived categories of étale sheaves of
-`Λ`-modules,
-
-`Rp_{d!} ⊣ p_d^*(d)[2d]`.
-
-This is also clause 1 of `lemma-affine-space-etale-localization`. For `d = 0` the
-projection is an isomorphism; for `d + 1` it is, through `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, the
-composite of the affine-line projection over `𝔸^d_S` and of `p_d`, and twisted adjunctions
-compose (`AlgebraicGeometry.Etale.nonempty_adjunction_twistShift_comp`). -/
+`Rp_{d!} ⊣ p_d^*(d)[2d]`. -/
 theorem nonempty_rightDerivedLowerShriek_adjunction_affineSpace [HasTateTwist.IsNormalized Λ]
     (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     Nonempty (R((𝔸(ULift.{u} (Fin d); S) ↘ S))_![ModuleCat.{u + 1} Λ] ⊣

@@ -21,7 +21,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 Let `A` be a monoidal Grothendieck abelian coefficient category and let `X` be a scheme.
 The category `Sheaf X.smallEtaleTopology A` of `A`-valued étale sheaves on `X` is then a
 monoidal Grothendieck abelian category, so it has a derived category `D(X_ét)`, and the
-K-flat machinery migrated from mathlib PR #25848 equips `D(X_ét)` with the *derived tensor
+K-flat machinery equips `D(X_ét)` with the *derived tensor
 product* `- ⊗ᴸ -`, the total left derived functor of `- ⊗ -` in two variables.
 
 ## Main definitions
@@ -49,7 +49,7 @@ product* `- ⊗ᴸ -`, the total left derived functor of `- ⊗ -` in two variab
 - `AlgebraicGeometry.Etale.laxMonoidal_Q` : the localization functor
   `Q : C(X_ét) ⥤ D(X_ét)` is lax monoidal.
 
-## Implementation notes
+## Implementation details
 
 The monoidal structure on `Sheaf X.smallEtaleTopology A` is `Sheaf.monoidalCategory`, which
 is a `local instance` in mathlib rather than a global one (it is only available once

@@ -13,7 +13,14 @@ import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientTensorCompositio
 
 /-! # Components of ambient pullback coherence
 
-Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
+## References
+
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0G7E]
+* [Stacks, Tag 04VG]
 -/
 
 @[expose] public noncomputable section
@@ -129,21 +136,7 @@ private theorem compositor_generator {X Y Z : Scheme.{t}}
       simp only [op_comp, PresheafOfModules.map_comp_apply]
       rfl
 
-/-- Coherence of pullback composition with ordinary, chain and derived tensors.
-Source: Stacks 03D3, 03CB, 03EL, 07A4, 0G7E and 04VG.
-
-Proof:
-The three selected tensor bundles satisfy Normalized by tensorData_existsUnique.
-The coefficient maps are invertible by coefficientPullback_isIso, and their
-composition equation is ringMap_composition. The adjunction unit equation is
-unit_conjugateEquiv_symm for the chosen pushforward comparison. Evaluating this
-equation on a section gives its value on an iterated unit. Semilinearity of the
-first unit, naturality of both units and of the compositor, and commutativity of
-the coefficient ring then give the displayed formula on two scalar generators.
-Apply normalizedTensor_composition to these normalized bundles and this formula
-for the ordinary, chain and derived squares. Finally pullback_compositionLaws
-supplies the independent associativity and identity laws. The calculations are
-on the whole ringed sequence site, without an assumption on module transitions. -/
+/-- Coherence of pullback composition with ordinary, chain and derived tensors. -/
 theorem ambientPullbackTensorCoherence
     (k₀ k : Type t) [Field k₀] [Finite k₀] [Field k] [Algebra k₀ k] [IsAlgClosure k₀ k]
     (_hell : ell ≠ ringChar k) {X Y Z : Scheme.{t}}

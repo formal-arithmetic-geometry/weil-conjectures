@@ -14,24 +14,21 @@ For torsion coefficients `Λ`, the compactly supported base change map
 `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*` (`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap`)
 is compatible with pasting cartesian squares, in both directions:
 
-```
-X'' --w'--> X' --v'--> X X' --vX--> X
- | | | | |
-f'' sq₂ f' sq₁ f f' sqf f
- ↓ ↓ ↓ ↓ ↓
-Y'' --w---> Y' --v---> Y Y' --vY--> Y
-                                        | |
-                                        g' sqg g
-                                        ↓ ↓
-                                        Z' --vZ--> Z
-```
-
-- horizontally, `Ex_!` of the outer square is `Lw^*` of `Ex_!(sq₁)` followed by `Ex_!(sq₂)`, up
+- horizontally, for cartesian squares `sq₁ : v' ≫ f = f' ≫ v` and `sq₂ : w' ≫ f' = f'' ≫ w`
+  side by side, `Ex_!` of the outer square is `Lw^*` of `Ex_!(sq₁)` followed by `Ex_!(sq₂)`, up
   to the composition isomorphisms `L(w ≫ v)^* ≅ Lw^* Lv^*` and `L(w' ≫ v')^* ≅ Lw'^* Lv'^*`
   (`AlgebraicGeometry.Etale.leftDerivedUpperStarComp`);
-- vertically, `Ex_!` of the outer square along `f ≫ g` is `Ex_!(sqg)` followed by `Rg'_!` of
-  `Ex_!(sqf)`, up to the composition isomorphisms `Rf_! ⋙ Rg_! ≅ R(f ≫ g)_!` and
+- vertically, for stacked cartesian squares `sqf : vX ≫ f = f' ≫ vY` and
+  `sqg : vY ≫ g = g' ≫ vZ`, `Ex_!` of the outer square along `f ≫ g` is `Ex_!(sqg)` followed by
+  `Rg'_!` of `Ex_!(sqf)`, up to the composition isomorphisms `Rf_! ⋙ Rg_! ≅ R(f ≫ g)_!` and
   `Rf'_! ⋙ Rg'_! ≅ R(f' ≫ g')_!` (`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso`).
+
+## Main statements
+
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_paste_horiz`: horizontal pasting.
+- `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_paste_vert`: vertical pasting.
+
+## Implementation details
 
 Both are transported from the pasting laws of the compact support formalism
 (`AlgebraicGeometry.Etale.unboundedEtaleCompactSupportBaseChange_paste_horiz` and
@@ -39,11 +36,6 @@ Both are transported from the pasting laws of the compact support formalism
 for the derived pullbacks `D(g^*)` induced by the exact functors `g^*`, along the comparison
 isomorphisms `Lg^* ≅ D(g^*)`
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`).
-
-## Main statements
-
-- `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_paste_horiz`: horizontal pasting.
-- `AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap_paste_vert`: vertical pasting.
 -/
 
 @[expose] public section
@@ -171,14 +163,9 @@ theorem rightDerivedLowerShriekBaseChangeMap_paste_horiz
 cartesian squares `sqf : vX ≫ f = f' ≫ vY` and `sqg : vY ≫ g = g' ≫ vZ`, with outer square
 `sqgf` along `f ≫ g`, the exchange map `Ex_!(sqgf)` is `Ex_!(sqg)` followed by `Rg'_!` of
 `Ex_!(sqf)`, up to the composition isomorphisms
-`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso`:
-
-```
-LvZ^* Rg_! Rf_! ⟶ Rg'_! LvY^* Rf_! ⟶ Rg'_! Rf'_! LvX^*
-      ≅ ≅
-LvZ^* R(f ≫ g)_! ----------------> R(f' ≫ g')_! LvX^*
-```
- -/
+`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso`: the composite
+`LvZ^* Rg_! Rf_! ⟶ Rg'_! LvY^* Rf_! ⟶ Rg'_! Rf'_! LvX^*` corresponds to
+`LvZ^* R(f ≫ g)_! ⟶ R(f' ≫ g')_! LvX^*`. -/
 theorem rightDerivedLowerShriekBaseChangeMap_paste_vert
     {X X' Y Y' Z Z' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y ⟶ Z} {g' : Y' ⟶ Z'}
     {vX : X' ⟶ X} {vY : Y' ⟶ Y} {vZ : Z' ⟶ Z}

@@ -9,7 +9,12 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Locall
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompletedCoefficientChangeData
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.CoefficientPresentationIntegralMapIndependence
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and Section 6.8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -29,20 +34,7 @@ open LocallyFiniteAdicRealization
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 open ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
-/-- The normalized finite integral inclusion is compatible with every scheme pullback.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Section 6.8; step 2 of the native
-compact-support finite comparison plan.
-
-Proof: identify the completed coefficient ring with continuous integer-valued functions
-by its finite quotient projections. Compose with the continuous embedding of the
-integer ring into E and the specified embedding of E into the algebraic closure.
-A finite extension is finite dimensional, so these functions are locally finite.
-Precomposition of functions commutes with these inclusions. Taking the inverse-image
-adjoints gives the square required by Change, using the pointwise normalization of
-NativeRings.pull. For any CoefficientPresentation, its finite-constant and residue
-normalizations identify its integral isomorphism with this completion identification:
-the finite projections are jointly monic. Its integral and rational inclusion formulas
-then give the same pointwise inclusion, which proves the displayed equality. -/
+/-- The normalized finite integral inclusion is compatible with every scheme pullback. -/
 theorem native_completed_coefficient_change [G : NativeGeometry.{u} l]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
     (i : E →ₐ[Padic l] PadicAlgCl l) :

@@ -12,8 +12,12 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitTree
 
 /-! # Canonical completion units and finite open--closed locality on qcqs schemes
 
-Source: Stacks Project, Tags 099M, 09BL and 09BM; Bhatt--Scholze Lemma 6.5.8
-and Remark 6.5.10.
+## References
+
+* [Stacks, Tag 099M]
+* [Stacks, Tag 09BL]
+* [Stacks, Tag 09BM]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8 and Remark 6.5.10
 -/
 
 @[expose] public noncomputable section
@@ -27,50 +31,7 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGe
 namespace WeilConjectures.IntegralOnSlice
 
 set_option linter.unusedVariables false in
-/-- Canonical-unit completeness, ordinary restriction, and finite open--closed detection.
-
-Source: Stacks Project, proetale.tex, Tags 099M, 09BL and 09BM; Bhatt--Scholze,
-Lemma 6.5.8 and Remark 6.5.10.
-
-Proof plan:
-1. Apply lem-sf-open-quotient-koszul-completeness to the valuation ring, which is
-   Noetherian with perfect finite quotients. Its quotient augmentation is precisely
-   completionUnit: both come from the strict quotient maps with zero second coordinate.
-   prop-weil-pbc-koszul-reconstruction identifies its specified comparison with the
-   Koszul completion unit. Thus the Roos triangle condition is equivalent to invertibility
-   of this specific unit, rather than of an arbitrary triangulated lift.
-2. For a closed immersion, lem-weil-pbc-proetale-immersion-limit-preservation gives
-   exact inverse image and all-limit preservation. For a weakly etale object use
-   lem-weil-proetale-weakly-etale-localization, exact slice module restriction from
-   lem-pur-site-restriction-module-adjunction-exact, and restriction-preserves-limits.
-   Module limits are sectionwise. prop-weil-pbc-proetale-constant-ring-map identifies
-   every finite coefficient ring by its constant sections. These maps commute with
-   quotient transitions by sheafification. Their limit is the specified coefficient
-   map, whose finite projections determine it uniquely. It is a ring isomorphism.
-   Hence ordinary pullback is exact and preserves countable products.
-3. Apply lem-weil-pbc-reduction-pullback-derived-tower. It identifies the strict
-   reduction towers, including restriction of scalars, all transitions and augmentation
-   maps. Its evaluations are the finite derived tensor comparisons.
-4. Countable products are exact by lem-weil-proetale-countable-products-exact.
-   Apply lem-cbc-exact-product-functor-strict-limit to the product-preserving exact
-   restriction and compose with the strict-tower comparison of step 3. This is a natural
-   comparison of the completions carrying the pulled-back canonical unit to the unit.
-   Both product coordinates use the product comparison, so (c,0) maps to (Fc,0).
-   Step 1 now proves preservation of completeness under ordinary restriction.
-5. At an internal vertex use lem-weil-pbc-proetale-ringed-open-closed with the
-   arbitrary completed ring sheaf. Its exact open--closed sequence and adjunctions
-   satisfy lem-sfb-exact-open-closed-unbounded-calculus. Therefore the two child
-   restrictions jointly reflect derived isomorphisms, without separatedness.
-6. On a nonempty leaf exact restriction commutes with every cohomology sheaf by
-   lem-weil-pbc-exact-functor-complex-cohomology. Use the unbounded cohomology
-   isomorphism criterion and lem-sfb-sheaf-cover-local-isomorphism. Base changes of
-   the chosen pro-etale cover cover every test object. An inverse to an underlying
-   abelian-sheaf module map is linear, so this detects module isomorphisms too.
-7. Induct up the finite tree. Use step 6 at nonempty leaves and step 5 at vertices.
-   On an empty leaf every module sheaf is zero since the empty family covers the
-   terminal object. Step 4 identifies all branch units with the restricted root unit.
-   Step 1 gives the equivalent detection of derived completeness. Height zero, empty
-   children, the zero object and arbitrary unbounded complexes are all included. -/
+/-- Canonical-unit completeness, ordinary restriction, and finite open--closed detection. -/
 theorem qcqsCompletionUnitLocality
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

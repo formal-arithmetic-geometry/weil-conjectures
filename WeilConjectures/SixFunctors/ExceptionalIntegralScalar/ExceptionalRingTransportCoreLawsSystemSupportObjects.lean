@@ -9,8 +9,10 @@ public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCor
 import WeilConjectures.AlgebraicGeometry.Finite.FiniteCtfTriangulated
 
 /-! Object part of the exceptional transport support identity.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26.
+
+## References
+
+* Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24, 5.26
 -/
 
 @[expose] public noncomputable section
@@ -77,13 +79,7 @@ strict lift, `TransportCoreData.normalizeSupport_support` proves the full suppor
 identity from an ambient comparison, deriving preservation from it. The current
 hypotheses do not specify that lift or its object representatives. -/
 
-/--
-The strict-system support comparison on objects at one fixed field stage.
-It is the object component used with the corresponding map component to
-assemble the support functor equality.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26.
--/
+/-- The strict-system support comparison on objects at one fixed field stage. -/
 theorem exceptional_transport_core_system_support_obj
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

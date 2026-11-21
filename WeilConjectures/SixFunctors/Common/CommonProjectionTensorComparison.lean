@@ -28,10 +28,7 @@ open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 open GeneralAlgebraicallyClosedCoefficients
 
-/-- The coefficient prime is invertible on every space over the fixed base field.
-Source: the coefficient convention, l different from the characteristic.
-Proof: compute the characteristic from the finite base field and its algebraic
-closure, then map the resulting unit to each residue field. -/
+/-- The coefficient prime is invertible on every space over the fixed base field. -/
 theorem sixFunctorSpace_coefficient_invertible
     {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum) (X : SixFunctorSpace D) :
     ∀ x : X.obj.left, Nonempty (Invertible (C.l : X.obj.left.residueField x)) := by

@@ -34,7 +34,7 @@ This is the étale counterpart of `WeilConjectures.SixFunctors.ProEtale.ScalarEx
 - `AlgebraicGeometry.Etale.isMonoidal_sheafExtendScalarsCompUpperStarIso_hom`: the
   commutation with `g^*` is monoidal.
 
-## Implementation notes
+## Implementation details
 
 The monoidal structures on étale sheaves are the global instances
 `AlgebraicGeometry.Etale.sheafMonoidalCategory` and `AlgebraicGeometry.Etale.sheafBraidedCategory`,
@@ -94,8 +94,7 @@ noncomputable instance monoidal_sheafExtendScalars :
 
 variable {X} {Y : Scheme.{u}} (g : Y ⟶ X)
 
-/-- Restriction of scalars commutes with the direct image `g_*`: both composites restrict a
-sheaf along base change and forget the `S`-module structure to an `R`-module structure. -/
+/-- Restriction of scalars commutes with the direct image `g_*`. -/
 noncomputable def lowerStarCompSheafComposeRestrictScalarsIso :
     (g)_*[ModuleCat.{u + 1} S] ⋙
         sheafCompose X.smallEtaleTopology (ModuleCat.restrictScalars.{u + 1} φ) ≅
@@ -136,8 +135,7 @@ instance isMonoidal_lowerStarCompSheafComposeRestrictScalarsIso_hom :
   exact this
 
 /-- The isomorphism `g^* (S ⊗_R F) ≅ S ⊗_R g^* F` of
-`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso` is monoidal, being the
-conjugate of the monoidal identification `g_* ⋙ res ≅ res ⋙ g_*`. -/
+`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso` is monoidal. -/
 instance isMonoidal_sheafExtendScalarsCompUpperStarIso_hom :
     NatTrans.IsMonoidal (sheafExtendScalarsCompUpperStarIso φ g).hom := by
   have : NatTrans.IsMonoidal (lowerStarCompSheafComposeRestrictScalarsIso φ g).symm.hom :=

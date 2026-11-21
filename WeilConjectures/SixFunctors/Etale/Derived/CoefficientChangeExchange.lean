@@ -185,9 +185,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ'
 
 /-- The derived extension by zero along an open immersion carries derived base changes to
 derived base changes: if `η : K ⟶ Res K'` exhibits `K'` as `K ⊗ᴸ_Λ Λ'`, then `Dj_! η` followed
-by the comparison `Dj_! Res ≅ Res Dj_!` exhibits `Dj_! K'` as `Dj_! K ⊗ᴸ_Λ Λ'`. The extension by
-zero is left adjoint to the exact restriction `j^*`, which commutes with restriction of
-scalars. -/
+by the comparison `Dj_! Res ≅ Res Dj_!` exhibits `Dj_! K'` as `Dj_! K ⊗ᴸ_Λ Λ'`. -/
 lemma isDerivedBaseChange_openImmersionLowerShriek_map_comp {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j]
     {K : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -233,9 +231,7 @@ lemma derivedRestrictScalarsCompRightDerivedLowerShriekIso_eq (f : X ⟶ Y)
 
 /-- The derived lower shriek along a compactification carries derived base changes to derived
 base changes, through the coefficient comparison
-`AlgebraicGeometry.Etale.compactificationRestrictScalarsIso`: so do the extension by zero
-(`AlgebraicGeometry.Etale.isDerivedBaseChange_openImmersionLowerShriek_map_comp`) and the proper
-direct image (`AlgebraicGeometry.Etale.isDerivedBaseChange_rightDerivedLowerStar_map_comp`). -/
+`AlgebraicGeometry.Etale.compactificationRestrictScalarsIso`. -/
 lemma isDerivedBaseChange_rightDerivedLowerShriekOfCompactification_map_comp
     (c : Compactification f)
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -424,11 +420,9 @@ lemma isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalar
 -- The proof uses neither the surjectivity of `ρ` nor the finiteness of `Λ'`.
 set_option linter.unusedVariables false in
 set_option linter.unusedSectionVars false in
-/-- Blueprint `lemma-sp-reduction--1` (subsection
-`sk-def-sfb-coefficient-comparisons`): for a surjection `ρ : Λ →+* Λ'` of finite rings whose
-exponent is invertible on the separably closed field `k` and a separated finite-type
-`a_X : X ⟶ Spec k`, the canonical coefficient comparison
-`RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')`
+/-- For a surjection `ρ : Λ →+* Λ'` of finite rings whose exponent is invertible on the separably
+closed field `k` and a separated finite-type `a_X : X ⟶ Spec k`, the canonical coefficient
+comparison `RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')`
 (`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsRestrictScalarsIso`) is an
 isomorphism for every `K ∈ Dᵇctf(X, Λ)`. -/
 theorem isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso [IsSeparated aX]
@@ -448,15 +442,13 @@ theorem isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso [
 variable [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
 
 
-/-- Blueprint `lemma-sp-reduction--1` (subsection
-`sk-def-sfb-coefficient-comparisons`):
-compact cohomology commutes with finite-level coefficient reduction, compatibly with pullback.
-For a surjection `ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible on the
-separably closed field `k` and a separated finite-type `a_X : X ⟶ Spec k`, compact cohomology
-commutes with restriction of scalars along `ρ` through a coefficient comparison `α` for which
-`RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')` is an isomorphism for every `K ∈ Dᵇctf(X, Λ)`, and `α`
-is compatible with the compact-support base change along every pair of automorphisms
-(`AlgebraicGeometry.Etale.IsCompactPullbackCompatible`). -/
+/-- Compact cohomology commutes with finite-level coefficient reduction, compatibly with
+pullback. For a surjection `ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible
+on the separably closed field `k` and a separated finite-type `a_X : X ⟶ Spec k`, compact
+cohomology commutes with restriction of scalars along `ρ` through a coefficient comparison `α`
+for which `RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')` is an isomorphism for every
+`K ∈ Dᵇctf(X, Λ)`, and `α` is compatible with the compact-support base change along every pair of
+automorphisms (`AlgebraicGeometry.Etale.IsCompactPullbackCompatible`). -/
 theorem exists_isCoefficientChange_compactlySupportedGlobalSections
     [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ) :
     ∃ α, IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
@@ -468,9 +460,7 @@ theorem exists_isCoefficientChange_compactlySupportedGlobalSections
     fun _ _ sq _ ↦
       isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX sq⟩
 
-/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--7` (subsection
-`theorem-grothendieck-lefschetz-trace-formula--7`), the pullback isomorphism at a geometric point:
-geometric stalks commute with finite-level coefficient reduction, compatibly with the stalk
+/-- Geometric stalks commute with finite-level coefficient reduction, compatibly with the stalk
 transports. For a morphism `ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible
 on `k` and a geometric point `x̄ : Spec k ⟶ X`, the geometric stalk commutes with restriction of
 scalars along `ρ` through a coefficient comparison `β` for which `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is

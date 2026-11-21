@@ -37,9 +37,8 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 
 /-! # Data for the normalized finite Tate-power presentation
 
-The existing finite-power data of the smooth-dualizing construction, extracted
-without changing any declaration's name, signature or body.
-Source: the ordered tensor-power construction in the smooth-dualizing corollary.
+The finite-power data of the smooth-dualizing construction: the ordered tensor powers of
+the finite Tate twist.
 -/
 
 @[expose] public noncomputable section
@@ -55,26 +54,20 @@ namespace AdicSmoothDualizing
 open AlgebraicGeometry.Scheme
 attribute [local irreducible] finiteEtaleTateTensorFamily
 
-/-- Reassociation of the nonnegative etale Tate powers, with the unit at degree zero.
-Source: corollary proof and the detailed coefficient-twist conventions. -/
+/-- Reassociation of the nonnegative etale Tate powers, with the unit at degree zero. -/
 abbrev etalePowerProduct (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (d : ℕ) :=
   letI := Sheaf.monoidalCategory T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)
   finiteEtaleTateTwist T P.diagonalExponent P.Coefficient
     P.diagonalExponent_annihilates d ⊗
       finiteEtaleTateLine T P.diagonalExponent P.Coefficient P.diagonalExponent_annihilates
 
-/-- The underlying sheaf tensor unitor, before endpoint presentation transport.
-Source: corollary, zero-power tensor normalization. -/
+/-- The underlying sheaf tensor unitor, before endpoint presentation transport. -/
 def etalePowerUnitor (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
   letI := Sheaf.monoidalCategory T.smallEtaleTopology (ModuleCat.{u + 1} P.Coefficient)
   λ_ (finiteEtaleTateLine T P.diagonalExponent P.Coefficient
     P.diagonalExponent_annihilates)
 
-/-- The zero power-step has the specified tensor-unitor data.
-Source: corollary, coefficient unit at power zero.
-Proof: the zero finite Tate power and the tensor unit are the same constant regular
-module sheaf, obtained by sheafifying that constant presheaf. Thus the unitor has
-exactly these endpoints. Heterogeneous equality fixes its data uniquely. -/
+/-- The zero power-step has the specified tensor-unitor data. -/
 theorem existsUnique_etalePowerZero (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :
     ∃! e : etalePowerProduct P T 0 ≅
       finiteEtaleTateTwist T P.diagonalExponent P.Coefficient
@@ -84,10 +77,7 @@ theorem existsUnique_etalePowerZero (P : PurityFiniteSetting.{u}) (T : Scheme.{u
   intro e he
   exact eq_of_heq he
 
-/-- A subsequent sheaf tensor power is literally the preceding power tensor the line.
-Source: corollary, positive tensor powers.
-Proof: this is the successor clause of finiteEtaleTateTwist, with the same sheaf
-monoidal structure. Its comparison is identity, so the prescribed data is unique. -/
+/-- A subsequent sheaf tensor power is literally the preceding power tensor the line. -/
 theorem existsUnique_etalePowerPositive (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (d : ℕ) :
     ∃! e : etalePowerProduct P T (d + 1) ≅
@@ -99,8 +89,7 @@ theorem existsUnique_etalePowerPositive (P : PurityFiniteSetting.{u}) (T : Schem
   exact eq_of_heq he
 
 /-- The power-step comparison is exactly the tensor unitor at zero and identity
-thereafter. Its specified data is preserved by the endpoint transports.
-Source: corollary proof, positive tensor powers. -/
+thereafter. Its specified data is preserved by the endpoint transports. -/
 def etalePowerStep (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :
     (d : ℕ) → etalePowerProduct P T d ≅
       finiteEtaleTateTwist T P.diagonalExponent P.Coefficient
@@ -108,11 +97,7 @@ def etalePowerStep (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :
   | 0 => (existsUnique_etalePowerZero P T).exists.choose
   | d + 1 => (existsUnique_etalePowerPositive P T d).exists.choose
 
-/-- Every nonnegative finite Tate power is flat, including the coefficient unit.
-Source: corollary proof and finite Tate descent.
-Proof: the normalized root line is locally free of rank one because ell is invertible.
-Its positive tensor powers remain locally free of rank one; power zero is the unit.
-Tensoring with a locally free rank-one sheaf is locally the identity and hence exact. -/
+/-- Every nonnegative finite Tate power is flat, including the coefficient unit. -/
 theorem etalePowerFlat (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) (d : ℕ) :
     ObjectProperty.flat (finiteEtaleTateTwist T P.diagonalExponent P.Coefficient
@@ -125,28 +110,18 @@ theorem etalePowerFlat (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
   rw [finiteEtaleTateTensorFamily_obj] at h
   exact h
 
-/-- The finite Tate sheaf placed in degree zero.
-Source: the corollary's finite coefficient model. -/
+/-- The finite Tate sheaf placed in degree zero. -/
 abbrev etaleSingle (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) (d : ℕ) :=
   (DerivedCategory.singleFunctor _ 0).obj
     (finiteEtaleTateTwist T P.diagonalExponent P.Coefficient
       P.diagonalExponent_annihilates d)
 
-/-- The existing ordered derived tensor, with its site and coefficients explicit.
-Source: the corollary's ordered tensor convention. -/
+/-- The existing ordered derived tensor, with its site and coefficients explicit. -/
 abbrev etaleTensor (P : PurityFiniteSetting.{u}) (T : Scheme.{u}) :=
   Etale.derivedTensor (ModuleCat.{u + 1} P.Coefficient) T
 
-/-- The comparison family is fixed by the actual tensor map, shift comparison,
-flat single-complex comparison, and sheaf-power step. HEq only transports their
-endpoint presentations; it fixes the data of every factor.
-Source: the corollary's normalized finite powers.
-Proof: at zero use the zero-shift unitor. At the successor tensor the preceding
-comparison with the shifted root line. Move the two shifts outside tensor using
-derivedTensorShiftIso, use singleFunctorObjTensorIso for the flat Tate power,
-then etalePowerStep and PurityFiniteSetting.frameDegreeNext. These maps have the displayed
-endpoints by unfolding the definitions. Induction constructs the family. HEq fixes each factor
-uniquely; induction therefore also proves uniqueness of the whole family. -/
+/-- A normalized finite Tate-power presentation: a comparison family fixed by the actual
+tensor map, shift comparison, flat single-complex comparison, and sheaf-power step. -/
 structure EtalePowerPresentation (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) where
   comparison : (d : ℕ) → P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧
@@ -181,8 +156,8 @@ structure EtalePowerPresentation (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
             eqToIso (congrArg (fun j : ℤ ↦ (etaleSingle P T (d + 1))⟦j⟧)
               (PurityFiniteSetting.frameDegreeNext d))
 
-/-- One normalized successor comparison, using the four prescribed factors and the degree equality.
-Source: ordered finite Tate powers. -/
+/-- One normalized successor comparison, using the four prescribed factors and the degree
+equality. -/
 def etalePowerPresentationNext (P : PurityFiniteSetting.{u}) (T : Scheme.{u})
     (hT : IsUnit (P.diagonalExponent : Γ(T, ⊤))) (d : ℕ)
     (e : P.diagonalTwistEtale T d ≅ (etaleSingle P T d)⟦2 * (d : ℤ)⟧) :

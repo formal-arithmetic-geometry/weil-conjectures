@@ -20,6 +20,13 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.ReductionT
 Shared definitions for `WeilConjectures.SixFunctors.Etale.Derived.PointFiberIntegral`: the
 constant sheaf `Λ` on a geometric point `Spec k`, placed in degree `j`, and the reduction
 triangles `K ⟶ K ⟶ K ⊗ᴸ Λ/Iⁿ`.
+
+## Implementation details
+
+The essential smallness of the small étale site is registered as a local instance, since
+instance search does not find it in the presence of the imports of this file. This single
+instance is used here and in the files `PointFiberIntegral*` importing it, so that all
+statements about derived completeness use the same instance.
 -/
 
 @[expose] public section
@@ -58,10 +65,7 @@ end Point
 
 /-! ### The reduction triangles -/
 
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. This single instance is used throughout this file and
-the files `PointFiberIntegral*` importing it (as a local instance), so that all statements about
-derived completeness use the same instance. -/
+/-- The small étale site of a scheme is essentially small. -/
 local instance essentiallySmall_etale_pointFiberIntegral (X : Scheme.{u}) :
     EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -103,8 +107,7 @@ lemma exists_distTriang_reductionModIdeal
 
 include hϖ hI in
 /-- The terms `K ⊗ᴸ Λ/Iⁿ` of the tower of reductions of `DerivedCategory.derivedCompletionDiagram`
-are the reductions `AlgebraicGeometry.Etale.reductionModIdeal`: both are cones of the
-multiplication by `ϖⁿ` on `K`. -/
+are the reductions `AlgebraicGeometry.Etale.reductionModIdeal`. -/
 lemma nonempty_iso_derivedCompletionDiagram_obj
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℕ) :
     Nonempty ((DerivedCategory.derivedCompletionDiagram X.smallEtaleTopology I K).obj (op n) ≅

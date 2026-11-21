@@ -48,29 +48,19 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
-/-- Derived categories of etale sheaves
-
-The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`: the localization of
+/-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`: the localization of
 the cochain complexes of sheaves of `Λ`-modules on the small étale site at the quasi-isomorphisms
-(`DerivedCategory`). Its subcategories `D⁺(X_ét, Λ)` and `Dᵇ(X_ét, Λ)` are
-`DerivedCategory.Plus` and `DerivedCategory.Bounded`, the objects whose cohomology sheaves
-`DerivedCategory.homologyFunctor _ i` vanish below some degree, resp. outside a finite range
-(`DerivedCategory.isGE_iff`, `DerivedCategory.isLE_iff`). -/
+(`DerivedCategory`). -/
 abbrev DerivedCategoryModule : Type (u + 2) :=
   DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
-/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
-
-The constant complex `Λ_X ∈ D(X_ét, Λ)`: the constant sheaf with value `Λ` placed in degree
-zero, which is the unit of the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`.
-It is the coefficient object every statement of the purity chapter is normalized against. -/
+/-- The constant complex `Λ_X ∈ D(X_ét, Λ)`: the constant sheaf with value `Λ` placed in degree
+zero, which is the unit of the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`. -/
 noncomputable def constantComplex :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
   𝟙_ _
 
-/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
-
-An object `K` of `D(X_ét, Λ)` has *Tor amplitude in `[a, b]`* if for every sheaf `F` of
+/-- An object `K` of `D(X_ét, Λ)` has *Tor amplitude in `[a, b]`* if for every sheaf `F` of
 `Λ`-modules on `X_ét` the derived tensor product `K ⊗^L F` has vanishing cohomology outside
 `[a, b]`. -/
 def DerivedCategory.hasTorAmplitudeIn (a b : ℤ) :
@@ -80,19 +70,15 @@ def DerivedCategory.hasTorAmplitudeIn (a b : ℤ) :
       ((((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K)).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
 
-/-- Blueprint `definition-constructible-sheaves--6`: Coefficients and sites
-
-The category `D^b_{ctf}(X, Λ)` of the purity chapter, as an object property: bounded with
-constructible cohomology sheaves and of finite Tor amplitude. -/
+/-- The category `D^b_{ctf}(X, Λ)`, as an object property: bounded with constructible cohomology
+sheaves and of finite Tor amplitude. -/
 def DerivedCategory.boundedConstructibleFiniteTor :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X ⊓
     DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X
 
 /-- An object `L` of `D(X_ét, Λ)` is *invertible* if it has a two-sided tensor inverse: there
-is an `M` with `L ⊗^L M ≅ Λ_X` and `M ⊗^L L ≅ Λ_X`. A lisse rank-one sheaf placed in any degree
-and twisted by any power of the Tate object is invertible in this sense, and these are the only
-invertible objects that occur in the purity chapter. -/
+is an `M` with `L ⊗^L M ≅ Λ_X` and `M ⊗^L L ≅ Λ_X`. -/
 def DerivedCategory.isInvertible :
     ObjectProperty (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :=
   fun L ↦ ∃ M, Nonempty
@@ -112,15 +98,13 @@ noncomputable def reductionModIdeal (J : Ideal Λ) :
 
 variable {Λ X}
 
-/-- An integer `N` vanishing in `Λ` kills every object of `D(X_ét, Λ)`, the derived category
-being `Λ`-linear. -/
+/-- An integer `N` vanishing in `Λ` kills every object of `D(X_ét, Λ)`. -/
 lemma nsmul_id_eq_zero_of_natCast_eq_zero {N : ℕ} (hN : (N : Λ) = 0)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : N • 𝟙 K = 0 := by
   rw [← Nat.cast_smul_eq_nsmul Λ, hN, zero_smul]
 
 /-- An integer `N` lying in the ideal `J` kills the reduction `K ⊗^L (Λ/J)_X` of every object
-`K` of `D(X_ét, Λ)`: it kills `Λ/J`, hence the constant complex `(Λ/J)_X`, and tensoring with
-`K` is additive. -/
+`K` of `D(X_ét, Λ)`. -/
 lemma nsmul_id_reductionModIdeal {J : Ideal Λ} {N : ℕ} (hN : (N : Λ) ∈ J)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     N • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
@@ -139,8 +123,7 @@ lemma nsmul_id_reductionModIdeal {J : Ideal Λ} {N : ℕ} (hN : (N : Λ) ∈ J)
     Functor.map_zero, Functor.map_zero, Functor.map_zero]
 
 /-- An element `r` of the ideal `J` kills the reduction `K ⊗ᴸ (Λ ⧸ J)_X` of every object `K` of
-`D(X_ét, Λ)`: it kills `Λ ⧸ J`, hence the constant complex `(Λ ⧸ J)_X`, and tensoring with `K`
-is `Λ`-linear. -/
+`D(X_ét, Λ)`. -/
 lemma smul_id_reductionModIdeal {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     r • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by

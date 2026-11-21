@@ -56,9 +56,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z} {g'' : Z' ⟶ Z}
   [IsOpenImmersion j] [IsOpenImmersion j']
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--11`, for complexes: for a
-cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions, the base change map
-`j'_! g'^* ⟶ g''^* j_!` is an isomorphism of functors on cochain complexes of étale sheaves,
+/-- For a cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions, the base change
+map `j'_! g'^* ⟶ g''^* j_!` is an isomorphism of functors on cochain complexes of étale sheaves,
 the four functors acting termwise. -/
 lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap_mapHomologicalComplex
     (hsq : IsPullback g' j' j g'') {ι : Type*} (c : ComplexShape ι) :
@@ -68,8 +67,7 @@ lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap_mapHomologicalComplex
   (NatIso.mapHomologicalComplex
     (asIso (Etale.openImmersionLowerShriekBaseChangeMap A hsq.toCommSq)) c).isIso_hom
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--11`: for an open immersion
-`j : U ⟶ Z` and a cartesian square
+/-- For an open immersion `j : U ⟶ Z` and a cartesian square
 
 ```
 U' --j'--> Z'
@@ -79,12 +77,8 @@ v v
 U --j--> Z
 ```
 
-the extension by zero is exact
-(`AlgebraicGeometry.Etale.preservesFiniteLimits_openImmersionLowerShriek` and
-`PreservesFiniteColimits`),`j'_! g'^* F ≅ g''^* j_! F` for every sheaf `F` on `U_ét`
-(`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap`), and the same holds for
-complexes: this is the induced isomorphism `j'_! g'^* ≅ g''^* j_!` of functors on the derived
-categories `D(U_ét) ⥤ D(Z'_ét)`, all four functors being exact. -/
+the isomorphism `j'_! g'^* ≅ g''^* j_!` of functors on the derived categories
+`D(U_ét) ⥤ D(Z'_ét)` induced by the base change isomorphism on étale sheaves. -/
 noncomputable def Etale.openImmersionLowerShriekDerivedBaseChangeIso
     (hsq : IsPullback g' j' j g'') :
     ((g')^*[A]).mapDerivedCategory ⋙ ((j')_!open[A]).mapDerivedCategory ≅

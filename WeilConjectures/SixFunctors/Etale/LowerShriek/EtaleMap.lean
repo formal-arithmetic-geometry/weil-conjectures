@@ -59,8 +59,7 @@ noncomputable def Etale.etaleLowerShriek :
   Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.map ⊤ h)
     A W.smallEtaleTopology X.smallEtaleTopology
 
-/-- The adjunction `v_! ⊣ v^*` for an étale `v`: maps from the defining presheaf of `v_! M`
-to a sheaf `N` are compatible families of maps `M(V, s) ⟶ N(V)`, that is maps `M ⟶ v^* N`. -/
+/-- The adjunction `v_! ⊣ v^*` for an étale `v`. -/
 noncomputable def Etale.etaleLowerShriekUpperStarAdjunction :
     Etale.etaleLowerShriek A v h ⊣ (v)^*[A] :=
   have : (MorphismProperty.Over.map ⊤ h).IsContinuous W.smallEtaleTopology
@@ -75,11 +74,7 @@ end General
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {W X : Scheme.{u}} (v : W ⟶ X) (h : Etale v)
 
-/-- **Extension by zero along an étale morphism is exact.** Left exactness is the content;
-right exactness holds for every left adjoint. On presheaves, `v_!` sends `M` to
-`V ↦ ⨁_{s ∈ Hom_X(V, W)} M(V, s)`, which is left exact because direct sums of modules are
-exact (`AlgebraicGeometry.SmallSite.preservesFiniteLimits_op_lan_overMap_of_isGrothendieckAbelian`),
-and sheafification is left exact. -/
+/-- **Extension by zero along an étale morphism is exact.** -/
 instance Etale.preservesFiniteLimits_etaleLowerShriek :
     PreservesFiniteLimits (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h) := by
   have heq : Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v h =
@@ -94,9 +89,7 @@ instance Etale.preservesFiniteLimits_etaleLowerShriek :
   exact comp_preservesFiniteLimits _ _
 
 /-- **Étale restriction preserves injectives**: for an étale `v : W ⟶ X`, the pullback `v^*`
-sends injective sheaves of `Λ`-modules to injective sheaves, since it has the exact left
-adjoint `v_!` (`AlgebraicGeometry.Etale.etaleLowerShriekUpperStarAdjunction`,
-`AlgebraicGeometry.Etale.preservesFiniteLimits_etaleLowerShriek`). -/
+sends injective sheaves of `Λ`-modules to injective sheaves. -/
 theorem Etale.injective_upperStar_obj_of_etale [Etale v]
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] :
     Injective ((v)^*[ModuleCat.{u + 1} Λ].obj I) := by

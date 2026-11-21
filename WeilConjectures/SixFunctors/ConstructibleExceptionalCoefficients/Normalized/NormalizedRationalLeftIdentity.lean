@@ -85,13 +85,6 @@ private theorem ring_identity (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
 
 /--
 The normalized rational left comparison satisfies the scalar identity law.
-Source: exceptional inverse-image coefficient construction, rationalization paragraph;
-the rational-arrow localization argument, Steps 1--4.
-
-The proof transports the integral identity equation through the specified rational
-localization. The localized action formula identifies the localized integral unit arrow
-with the displayed rational scalar unit, and localization preserves composition and
-identities.
 -/
 theorem normalized_rational_left_identity (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}

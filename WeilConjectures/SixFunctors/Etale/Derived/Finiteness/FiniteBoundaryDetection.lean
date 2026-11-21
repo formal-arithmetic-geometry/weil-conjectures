@@ -20,9 +20,9 @@ complexes on `Y` is an isomorphism, as soon as this holds over `G` and after `Rb
 
 ## Implementation details
 
-The source takes the closed complement of `G` reduced and coefficients in `𝔽_ℓ`; here any closed
-subscheme structure on the complement and any finite coefficient ring `Λ` whose exponent is
-invertible on `S` are allowed.
+The statement allows any closed subscheme structure on the complement of `G` (not only the
+reduced one) and any finite coefficient ring `Λ` whose exponent is invertible on `S` (not only
+`𝔽_ℓ`).
 -/
 
 @[expose] public section

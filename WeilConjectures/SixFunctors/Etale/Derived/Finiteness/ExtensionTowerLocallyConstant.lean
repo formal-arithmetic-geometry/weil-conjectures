@@ -69,9 +69,7 @@ variable {I : Ideal Λ}
 /-- **Uniform finite local constancy along a tower of extensions.** Let `Λ` be noetherian with all
 `Λ ⧸ Iⁿ` finite and `F : ℕ → Sh(T_ét, Λ)` with `F n` killed by `Iⁿ⁺¹` and short exact sequences
 `0 ⟶ F 0 ⟶ F (n + 1) ⟶ F n ⟶ 0`. If all the `j^* Hᵏ(Rg_* F 0)`, `k : ℤ`, are finite locally
-constant sheaves of `Λ`-modules, then so are all the `j^* Hᵏ(Rg_* F n)`: by the long exact
-sequences of cohomology, `j^* Hᵏ(Rg_* F (n + 1))` is an extension, killed by `Iⁿ⁺²`, of a kernel
-by a cokernel of morphisms of finite locally constant sheaves. -/
+constant sheaves of `Λ`-modules, then so are all the `j^* Hᵏ(Rg_* F n)`. -/
 theorem isFiniteLocallyConstantSheaf_upperStar_homology_rightDerived_of_tower
     [IsNoetherianRing Λ] [∀ n, Finite (Λ ⧸ I ^ n)]
     (F : ℕ → Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -127,9 +125,8 @@ theorem isFiniteLocallyConstantSheaf_upperStar_homology_rightDerived_of_tower
     exact smul_id_upperStarHomologyRightDerived_obj g j hr' k
 
 /-- **The levels of a tower of extensions are `IsSetFLC` on the stratum**, under the hypotheses
-of `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_upperStar_homology_rightDerived_of_tower`:
-`j^* Hᵏ(Rg_* F n)` is killed by `Iⁿ⁺¹`, hence a finite locally constant sheaf of
-`Λ ⧸ Iⁿ⁺¹`-modules, whose underlying sheaf of sets is finite locally constant. -/
+of `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_upperStar_homology_rightDerived_of_tower`.
+-/
 theorem isSetFLC_upperStar_homology_rightDerived_of_tower
     [IsNoetherianRing Λ] [∀ n, Finite (Λ ⧸ I ^ n)]
     (F : ℕ → Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))

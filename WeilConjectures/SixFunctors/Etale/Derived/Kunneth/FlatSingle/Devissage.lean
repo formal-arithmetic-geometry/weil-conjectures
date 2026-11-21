@@ -27,19 +27,18 @@ for sheaves `𝓔` on `X` and `𝓕` on `T` placed in degree `0`. If it is an is
 pushforwards `𝓔 = π_* Λ` along finite morphisms `π : Xᵢ ⟶ X`, it is an isomorphism for every
 flat `𝓔` (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar`).
 
-This is the dévissage of the proof of blueprint `lemma-kunneth-field-coefficients--1`: reduce `𝓕` to
-sheaves killed by the Jacobson radical `J` of `Λ` (long exact sequences, both sides being
-triangulated in `𝓕`), replace `𝓔` by `𝓔 / J𝓔` (the homology sheaves of both sides only depend on it,
-`𝓔` being flat), write it as a filtered colimit of constructible sheaves, embed a constructible sheaf killed
-by `J` into a finite sum of pushforwards `π_* M` along finite morphisms
-(`AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_locallyOfFiniteType`) and shift
-dimensions; the modules `M` killed by `J` are direct summands of free `Λ ⧸ J`-modules.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_lowerStar_unit`: the case `𝓔 = π_* Λ`.
 - `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar`: the
   dévissage.
+
+## Implementation details
+
+`𝓕` is reduced to sheaves killed by the Jacobson radical `J` of `Λ`, and `𝓔` to `𝓔 / J𝓔`, a
+filtered colimit of constructible sheaves; a constructible sheaf killed by `J` embeds into a
+finite sum of pushforwards `π_* M` along finite morphisms
+(`AlgebraicGeometry.Etale.exists_mono_biproduct_lowerStar_of_locallyOfFiniteType`).
 -/
 
 @[expose] public section
@@ -75,9 +74,8 @@ noncomputable def leftDerivedUpperStarSingleFunctorLowerStarUnitIso {X X' Xᵢ X
     asIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sqπ.toCommSq).app (𝟙_ _)) ≪≫
     R((π')_*[ModuleCat.{u + 1} Λ]).mapIso (leftDerivedUpperStarUnitIso _ pᵢ)
 
-/-- The case `𝓔 = π_* Λ`, `π` finite, of blueprint `lemma-kunneth-field-coefficients--1` for single
-sheaves (`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_rightDerivedLowerStar_unit`, with
-blueprint `lemma-kunneth-field-coefficients--1` for `X` and for `Xᵢ`). -/
+/-- The base change map for a pushforward tensored with a flat sheaf is an isomorphism in the
+case `𝓔 = π_* Λ`, `π` finite. -/
 theorem isIso_tensorBaseChangeMap_lowerStar_unit {K : Type u} [Field K]
     [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y : Scheme.{u}}
     (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
@@ -110,9 +108,7 @@ attribute [local instance 10000] Abelian.toPreadditive SymmetricCategory.toBraid
 `Λ`: for `X` of finite type over a field and `h` quasi-compact and quasi-separated, if the base
 change map `Lp^* 𝓔 ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* Lp^* 𝓔 ⊗ᴸ Le^* 𝓕)` is an isomorphism for the
 pushforwards `𝓔 = π_* Λ` along finite morphisms `π`, it is an isomorphism for every flat `𝓔` and
-every sheaf `𝓕` killed by `J`. The homology sheaves of both sides then only depend on `𝓔 / J𝓔`,
-which is a filtered colimit of constructible sheaves killed by `J`, and these embed into finite sums of pushforwards along
-finite morphisms of constant sheaves killed by `J`, direct summands of sums of `π_* (Λ ⧸ J)`. -/
+every sheaf `𝓕` killed by `J`. -/
 theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar_of_smul_eq_zero
     {K : Type u} [Field K]
     {X X' S' T Y : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
@@ -145,12 +141,10 @@ theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar_of_smul_eq_
 
 end
 
-/-- **Dévissage of the flat sheaf** in the proof of blueprint `lemma-kunneth-field-coefficients--1`:
-for `X` of finite type over a field, `h` quasi-compact and quasi-separated, if the base change map
-`Lp^* 𝓔 ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* Lp^* 𝓔 ⊗ᴸ Le^* 𝓕)` is an isomorphism for the
-pushforwards `𝓔 = π_* Λ` along finite morphisms `π` and every sheaf `𝓕`, it is an isomorphism for
-every flat sheaf `𝓔` and every sheaf `𝓕`
-(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of_smul_eq_zero`). -/
+/-- **Dévissage of the flat sheaf**: for `X` of finite type over a field, `h` quasi-compact and
+quasi-separated, if the base change map `Lp^* 𝓔 ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* Lp^* 𝓔 ⊗ᴸ Le^* 𝓕)`
+is an isomorphism for the pushforwards `𝓔 = π_* Λ` along finite morphisms `π` and every sheaf
+`𝓕`, it is an isomorphism for every flat sheaf `𝓔` and every sheaf `𝓕`. -/
 theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar {K : Type u} [Field K]
     {X X' S' T Y : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact h]

@@ -11,8 +11,20 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsOrdinaryQuotientRestricti
 import all WeilConjectures.PoincareDuality.Pod.Reindexing.PodReindexingRoosComparison
 import all WeilConjectures.SmoothPurity.IntegralAmbient.IntegralAmbientOperationModels
 
-/-! Source: Stacks Tags 099M, 09BL and 09BM; blueprint: lem-fix-qcqs-ordinary-restriction-models.
-This is a separately stated component of the locality argument. -/
+/-! # Restriction models for ordinary qcqs restriction
+
+Projection-normalized strict quotient and Roos comparisons for a weakly étale map followed by a
+locally closed immersion. This is a separately stated component of the locality argument.
+
+## References
+
+* [Stacks, Tag 099M]
+* [Stacks, Tag 09BL]
+* [Stacks, Tag 09BM]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -163,20 +175,8 @@ private theorem restrictionRoosModels (F : A ⥤ B) [F.Additive]
 end RoosRestriction
 
 /-- Projection-normalized strict quotient and Roos comparisons for a weakly etale
-map followed by a locally closed immersion.
-
-Source: Stacks Tags 09BL, 09BM, 06YY and 0941; Bhatt--Scholze Lemma 6.5.8.
-Proof: inverse image for an immersion preserves all limits; for a weakly etale map
-it is restriction to a slice. Compose these functors. The finite constant-section
-coefficient maps are isomorphisms and commute with every quotient transition.
-Preservation of their inverse limit identifies the completed ring map. The resulting
-module pullback is exact and preserves countable products. Tensor base change on
-sections identifies each quotient reduction and its augmentation. These comparisons
-commute with quotient transitions on generators, giving tau on the whole strict tower.
-Apply the additive product mapping-cocone comparison and then tau to obtain chi;
-both its product coordinates are the canonical product comparison followed by tau.
-This is a chain-level statement: derived descent and compatibility with the
-specified completion unit are proved separately. -/
+map followed by a locally closed immersion. These are chain-level comparisons; derived
+descent and compatibility with the completion unit are proved separately. -/
 theorem qcqsOrdinaryRestrictionModels
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

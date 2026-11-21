@@ -21,25 +21,30 @@ public import WeilConjectures.Algebra.Homology.Monoidal.ProjectionMap
 /-!
 # Perfect complexes on the coefficient site
 
-A complex `K` of étale sheaves of `Λ`-modules on `X` is *perfect on the coefficient site* if, on the members `U ⟶ X` of some étale cover,
-its restriction `K|_U` is isomorphic to a bounded complex of finite projective `Λ_U`-modules,
-a finite projective module being a direct summand of a finite sum `Λ_U^{⊕m}` of copies of the
-constant sheaf.
-
-## Implementation notes
-
-The blueprint works on the small pro-étale site; the definition is stated here on the small
-étale site of the étale model of the coefficient categories, the restriction to `U` being the
-derived pullback `Lu^*` along the member `u : U ⟶ X` of the cover. A direct summand of
-`Λ_U^{⊕m}` is a retract of the constant sheaf with value `Λ^m`. The coefficient ring is
-arbitrary: for `Λ = A_{E,n}` this is the finite stage of the blueprint, and for `Λ = 𝒪_E` it
-is the integral stage in the étale model. Elsewhere in the repository perfectness is rendered as
-dualizability for the derived tensor product
-(`WeilConjectures.SixFunctors.Etale.Derived.Perfect`).
+A complex `K` of étale sheaves of `Λ`-modules on `X` is *perfect on the coefficient site* if, on
+the members `U ⟶ X` of some étale cover, its restriction `K|_U` is isomorphic to a bounded
+complex of finite projective `Λ_U`-modules, a finite projective module being a direct summand of
+a finite sum `Λ_U^{⊕m}` of copies of the constant sheaf.
 
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.DerivedCategory.IsSitePerfect`: perfectness on the coefficient site.
+
+## Implementation details
+
+The definition is stated on the small étale site of the étale model of the coefficient
+categories rather than on the small pro-étale site, the restriction to `U` being the
+derived pullback `Lu^*` along the member `u : U ⟶ X` of the cover. A direct summand of
+`Λ_U^{⊕m}` is a retract of the constant sheaf with value `Λ^m`. The coefficient ring is
+arbitrary: for `Λ = A_{E,n}` this is the finite stage, and for `Λ = 𝒪_E` it
+is the integral stage in the étale model. Elsewhere in the repository perfectness is rendered as
+dualizability for the derived tensor product
+(`WeilConjectures.SixFunctors.Etale.Derived.Perfect`).
+
+The abbreviations `AlgebraicGeometry.Etale.DerivedCategory.IsDualizableEtale` and
+`AlgebraicGeometry.Etale.IsDualizableSheaf` fix the monoidal structure of a general coefficient
+category, so that statements about `A = ModuleCat Λ` use the same monoidal instance as the
+general results they are deduced from.
 -/
 
 @[expose] public section
@@ -58,9 +63,7 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
-/-- Perfect complexes on the coefficient site.
-
-An object `K` of `D(X_ét, Λ)` is *perfect on the coefficient site* if there is an étale cover
+/-- An object `K` of `D(X_ét, Λ)` is *perfect on the coefficient site* if there is an étale cover
 `{uᵢ : Uᵢ ⟶ X}` such that each restriction `Luᵢ^* K` is isomorphic to (the image in
 `D(Uᵢ, Λ)` of) a bounded complex `P` of sheaves of `Λ`-modules on `Uᵢ` whose terms are finite
 projective, i.e. retracts of the constant sheaf `(Λ^m)_{Uᵢ}` for some `m`. -/
@@ -90,8 +93,7 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [Abelian.HasFunctorialFlatResolution A] {Y : Scheme.{u}}
 
 /-- For a dualizable `K`, the internal hom out of `K` commutes with tensoring by any `T`:
-`RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T`, both sides being `K^∨ ⊗ᴸ M ⊗ᴸ T`
-(`AlgebraicGeometry.Etale.DerivedCategory.nonempty_iso_coefficientDual_tensor`). -/
+`RHom(K, M ⊗ᴸ T) ≅ RHom(K, M) ⊗ᴸ T`. -/
 theorem DerivedCategory.nonempty_iso_derivedHom_derivedTensor_of_isDualizable
     {K : DerivedCategory (Sheaf Y.smallEtaleTopology A)} (hK : IsDualizable K)
     (M T : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
@@ -109,9 +111,7 @@ variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] {Y : Scheme.{u}}
 
-/-- Dualizability in `D(Y_ét)`, with the monoidal structure of a general coefficient category.
-Stated through this abbreviation, statements about `A = ModuleCat Λ` use the same monoidal
-instance as the general results they are deduced from. -/
+/-- Dualizability in `D(Y_ét)`, with the monoidal structure of a general coefficient category. -/
 abbrev DerivedCategory.IsDualizableEtale (K : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     Prop :=
   IsDualizable K
@@ -128,8 +128,7 @@ category (compare `AlgebraicGeometry.Etale.DerivedCategory.IsDualizableEtale`). 
 abbrev IsDualizableSheaf (F : Sheaf Y.smallEtaleTopology A) : Prop :=
   IsDualizable F
 
-/-- A bounded complex of dualizable sheaves is dualizable in `D(Y_ét)`
-(`DerivedCategory.isDualizable_Q_obj`). -/
+/-- A bounded complex of dualizable sheaves is dualizable in `D(Y_ét)`. -/
 theorem DerivedCategory.isDualizableEtale_Q_obj
     (P : CochainComplex (Sheaf Y.smallEtaleTopology A) ℤ) (a b : ℤ) [P.IsStrictlyGE a]
     [P.IsStrictlyLE b] (hP : ∀ n, IsDualizableSheaf (P.X n)) :
@@ -161,9 +160,7 @@ lemma isDualizableSheaf_unit : IsDualizableSheaf (𝟙_ (Sheaf Y.smallEtaleTopol
   isDualizable_unit
 
 /-- An object `K` of `D(Y_ét)` is dualizable as soon as the comparison
-`RHom(K, Λ_Y) ⊗ᴸ K ⟶ RHom(K, K)` is an isomorphism: `RHom(K, Λ_Y)` is then a left dual of `K`
-(`CategoryTheory.MonoidalClosed.exactPairingOfIsIso`), hence also a right dual, the derived
-tensor product being symmetric. -/
+`RHom(K, Λ_Y) ⊗ᴸ K ⟶ RHom(K, K)` is an isomorphism. -/
 theorem DerivedCategory.isDualizable_of_isIso_ihomUnitTensorToIhom
     (K : DerivedCategory (Sheaf Y.smallEtaleTopology A))
     [IsIso (MonoidalClosed.ihomUnitTensorToIhom K K)] : IsDualizable K := by
@@ -181,10 +178,7 @@ variable
 include instF instC instR instP instS
 
 /-- **Restrictions to an étale cover jointly reflect isomorphisms in `D(Y_ét)`**: a morphism
-whose derived pullbacks to the members of an étale cover are isomorphisms is an isomorphism,
-since the pullbacks commute with the cohomology sheaves and restrictions of sheaves along a
-jointly surjective family reflect isomorphisms
-(`AlgebraicGeometry.Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective`). -/
+whose derived pullbacks to the members of an étale cover are isomorphisms is an isomorphism. -/
 theorem DerivedCategory.isIso_of_isIso_leftDerivedUpperStar_map_of_cover
     (𝒰 : Cover.{u} etalePrecoverage Y) {M N : DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (φ : M ⟶ N) (h : ∀ i, IsIso ((L((𝒰.f i)^*[A])).map φ)) : IsIso φ := by
@@ -209,8 +203,7 @@ theorem DerivedCategory.isDualizable_of_cover (K : DerivedCategory (Sheaf Y.smal
 
 end Reduction
 
-/-- The constant sheaf `(Λ^m)_U` is dualizable: it is a finite biproduct of copies of the unit
-sheaf `Λ_U` (`CategoryTheory.IsDualizable.biprod`). -/
+/-- The constant sheaf `(Λ^m)_U` is dualizable. -/
 theorem isDualizableSheaf_constantSheaf_pi {U : Scheme.{u}} (m : ℕ) :
     IsDualizableSheaf ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
       (ModuleCat.of Λ (Fin m → Λ))) := by
@@ -235,8 +228,7 @@ theorem isDualizableSheaf_constantSheaf_pi {U : Scheme.{u}} (m : ℕ) :
     exact IsDualizableSheaf.biprod isDualizableSheaf_unit ih
 
 /-- An object of `D(U_ét, Λ)` isomorphic to a bounded complex of finite projective `Λ_U`-modules
-is dualizable (`CategoryTheory.IsDualizable.of_retract`,
-`AlgebraicGeometry.Etale.isDualizableSheaf_constantSheaf_pi`). -/
+is dualizable. -/
 theorem isDualizableEtale_of_trivialization {U : Scheme.{u}}
     {M : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ) (a b : ℤ)
@@ -494,9 +486,7 @@ theorem isIso_projectionMap_derivedEtaleLowerShriek {U : Scheme.{u}} (f : U ⟶ 
 
 omit [HasSmallSiteSheafify A] in
 /-- For étale `u` and `K` with `Lu^*K` dualizable, `Lu^*` sends the comparison
-`RHom(K, 𝟙) ⊗ᴸ K ⟶ RHom(K, K)` to an isomorphism. By
-`CategoryTheory.Functor.Monoidal.isIso_map_ihomUnitTensorToIhom`, this follows from the derived
-projection formula `isIso_projectionMap_derivedEtaleLowerShriek`. -/
+`RHom(K, 𝟙) ⊗ᴸ K ⟶ RHom(K, K)` to an isomorphism. -/
 theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizableEtale_general
     {U : Scheme.{u}} (f : U ⟶ X) [Etale f] [(f)^*[A].PreservesFlat]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -515,9 +505,7 @@ theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizable
 end Projection
 
 /-- For an étale morphism `u : U ⟶ X` and `K` whose derived pullback `Lu^*K` is dualizable, the
-derived pullback of the comparison `RHom(K, Λ_X) ⊗ᴸ K ⟶ RHom(K, K)` is an isomorphism: for
-étale `u` the derived pullback commutes with the internal hom, and the comparison for the
-dualizable `Lu^*K` is an isomorphism. -/
+derived pullback of the comparison `RHom(K, Λ_X) ⊗ᴸ K ⟶ RHom(K, K)` is an isomorphism. -/
 theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhomEtale_of_isDualizableEtale
     {U : Scheme.{u}} (f : U ⟶ X) [Etale f]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -542,10 +530,7 @@ theorem isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_trivialization
     (isDualizableEtale_of_trivialization P a b ha hb hP e)
 
 /-- A complex which is perfect on the coefficient site is dualizable for the derived tensor
-product: dualizability can be checked on an étale cover
-(`AlgebraicGeometry.Etale.DerivedCategory.isDualizable_of_cover`), and on the members of a
-trivializing cover the comparison map is an isomorphism
-(`isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_trivialization`). -/
+product. -/
 theorem DerivedCategory.IsSitePerfect.isDualizable
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.IsSitePerfect K) : DerivedCategory.IsDualizableEtale K := by
@@ -556,14 +541,9 @@ theorem DerivedCategory.IsSitePerfect.isDualizable
   exact isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_trivialization (𝒰.f i) K P a b
     ha hb hP e
 
-/-- Basic operations and coefficient
-reduction; the internal hom between finite levels.
-
-If the first variable `K` is perfect on the coefficient site, the internal hom commutes with
+/-- If the first variable `K` is perfect on the coefficient site, the internal hom commutes with
 the reduction of the coefficients along `Λ ⟶ Λ/J`, for any ideal `J`:
-`RHom(K, L) ⊗ᴸ (Λ/J)_X ≅ RHom(K, L ⊗ᴸ (Λ/J)_X)`. As in the blueprint, `K` being site-perfect,
-its internal hom is a tensor product with its coefficient dual, which commutes with coefficient
-change. -/
+`RHom(K, L) ⊗ᴸ (Λ/J)_X ≅ RHom(K, L ⊗ᴸ (Λ/J)_X)`. -/
 theorem nonempty_iso_reductionModIdeal_derivedHom_of_isSitePerfect (J : Ideal Λ)
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.IsSitePerfect K)

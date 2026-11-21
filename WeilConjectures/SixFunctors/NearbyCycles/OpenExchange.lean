@@ -24,19 +24,21 @@ generic fibres
 ```
 is cartesian. Then the pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*`
 (`NearbyCyclesModel.Hom.pullbackExchange`) is an isomorphism
-(`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_weaklyEtale`; blueprint
-`prose-E-03` (1), "nearby-cycle open pullback"). Indeed `α_f` is assembled
-from two pullback comparisons, which are isomorphisms, and from the mate of the pullback comparison
-of the square of geometric generic fibres, which is the base change morphism
-`Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` (`NearbyCyclesModel.Hom.baseChangeMap_commSq_j_eq_mateEquiv`),
-invertible by weakly étale base change
-(`ProEtale.CondensedRing.isIso_baseChangeMap_of_weaklyEtale`).
+(`NearbyCyclesModel.Hom.isIso_pullbackExchange_of_weaklyEtale`).
 
 The pullback exchange restricts to bounded constructible complexes
 (`NearbyCyclesModel.Hom.boundedConstructiblePullbackExchange`, defined in
 `WeilConjectures.SixFunctors.NearbyCycles.BoundedConstructibleUnitIdentity`), where it is again an
 isomorphism in the weakly étale case
 (`NearbyCyclesModel.Hom.isIso_boundedConstructiblePullbackExchange_of_weaklyEtale`).
+
+## Implementation details
+
+`α_f` is assembled from two pullback comparisons, which are isomorphisms, and from the mate of the
+pullback comparison of the square of geometric generic fibres, which is the base change morphism
+`Lt^* Rj_{N*} ⟶ Rj_{M*} Lg^*` (`NearbyCyclesModel.Hom.baseChangeMap_commSq_j_eq_mateEquiv`),
+invertible by weakly étale base change
+(`ProEtale.CondensedRing.isIso_baseChangeMap_of_weaklyEtale`).
 -/
 
 @[expose] public section
@@ -120,8 +122,7 @@ theorem isIso_pullbackExchange_of_isIso_baseChangeMap
     (baseChangeMap Λ φ.commSq_j) (φ.baseChangeMap_commSq_j_eq_mateEquiv Λ)
     (pullbackSquareComparison Λ φ.commSq_ε).hom (φ.pullbackExchange Λ) rfl
 
-/-- **Nearby cycles commute with weakly étale pullback** (blueprint
-`prose-E-03` (1), the "nearby-cycle open pullback"): for a morphism of models
+/-- **Nearby cycles commute with weakly étale pullback**: for a morphism of models
 `φ : M ⟶ N` whose morphism of total spaces `t` is weakly étale (for instance an open immersion,
 or étale) and whose square of geometric generic fibres `g ≫ j_N = j_M ≫ t` is cartesian, the
 pullback exchange `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` is an isomorphism, on all complexes. -/

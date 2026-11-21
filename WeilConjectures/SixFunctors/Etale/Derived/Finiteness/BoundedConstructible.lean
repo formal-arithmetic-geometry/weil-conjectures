@@ -49,8 +49,7 @@ lemma boundedConstructible_of_isZero
     fun n ↦ IsConstructibleSheaf.of_isZero (h n)⟩
 
 /-- Extension by zero along a quasi-compact open immersion `j` preserves bounded
-constructibility: `j_!` is exact, and the extension by zero of a constructible sheaf is
-constructible. -/
+constructibility. -/
 lemma boundedConstructible_mapDerivedCategory_openImmersionLowerShriek (j : X ⟶ Y)
     [IsOpenImmersion j] [QuasiCompact j]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -68,8 +67,7 @@ lemma boundedConstructible_mapDerivedCategory_openImmersionLowerShriek (j : X �
 variable [Finite Λ]
 
 /-- The derived direct image along a finite morphism `p : X ⟶ Y` with Noetherian target
-preserves bounded constructibility: `p_*` is exact, so `Rp_*` commutes with the homology sheaves,
-and it preserves constructible sheaves. -/
+preserves bounded constructibility. -/
 lemma boundedConstructible_rightDerivedLowerStar_of_isFinite [IsNoetherian Y] (p : X ⟶ Y)
     [IsFinite p] {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
@@ -99,9 +97,7 @@ lemma boundedConstructible_rightDerivedLowerStar_of_isFinite [IsNoetherian Y] (p
 open _root_.DerivedCategory in
 /-- **Dévissage for bounded constructible complexes.** A triangulated functor
 `Φ : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` which carries every constructible sheaf placed in degree `0` into
-`Dᵇc(Y, Λ)` carries `Dᵇc(X, Λ)` into `Dᵇc(Y, Λ)`: by induction on the length of the range of a
-bounded complex `K`, along the truncation triangle `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶` whose third
-term is `Hᵇ K` placed in degree `b`. -/
+`Dᵇc(Y, Λ)` carries `Dᵇc(X, Λ)` into `Dᵇc(Y, Λ)`. -/
 lemma boundedConstructible_obj_of_forall_singleFunctor
     (Φ : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

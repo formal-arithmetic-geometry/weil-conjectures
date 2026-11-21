@@ -12,7 +12,10 @@ set_option linter.privateModule false
 
 /-! # The Hom-complex adjunction for extension from a point
 
-Source: Stacks Project, Tags 0A8X and 04TT.
+## References
+
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 04TT]
 -/
 
 @[expose] public noncomputable section

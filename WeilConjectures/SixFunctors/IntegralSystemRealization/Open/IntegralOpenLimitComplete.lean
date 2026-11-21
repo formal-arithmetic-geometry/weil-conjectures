@@ -17,6 +17,12 @@ import all WeilConjectures.SixFunctors.Supporting.RoosIntrinsicCompletenessEquiv
 /-! # Completeness of the normalized limit after quasi-compact open extension
 
 This is the completeness part of the open reduction and reconstruction argument.
+
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 09BP]
+* [Stacks, Tag 0A0E]
 -/
 
 @[expose] public noncomputable section
@@ -29,20 +35,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The ringed open extension of a normalized coefficient limit is complete.
-Source: Stacks 0941, 09BP and 0A0E; the completeness paragraph of
-`fix-prop-coherence.proof.md`.
-
-Proof: apply the normalized reconstruction theorem to the source system to obtain
-the intrinsic completeness of its total limit. Choose a DVR model for the completed
-coefficient tower and transport this completeness through the quasi-compact open
-extension by its termwise exact extension and product preserving property. The
-finite coefficient projection and scalar equations identify that DVR extension with
-the actual ringed open functor. Transport the resulting completeness along the
-canonical derived isomorphism, using the isomorphism invariance of the local
-principal-completeness criterion. The argument is coefficient-linear and uses no
-characteristic or unit hypothesis on the schemes.
--/
+/-- The ringed open extension of a normalized coefficient limit is complete. -/
 theorem integralOpenLimitComplete (o : Operations l E)
     {U V : Scheme.{u}} (j : U ⟶ V) [IsOpenImmersion j] [QuasiCompact j]
     (N : System l E U) (hN : Good l E U N)

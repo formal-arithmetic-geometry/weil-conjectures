@@ -13,9 +13,12 @@ public import WeilConjectures.ConstructibleSheaf.Pullback
 The sections of an étale sheaf over an étale `X`-scheme `P` that is the disjoint union of open
 subschemes `Uₛ` are the product of the sections over the `Uₛ`
 (`AlgebraicGeometry.Scheme.Etale.existsUnique_of_pairwise_disjoint`). This generalises the
-two-piece splitting `AlgebraicGeometry.Scheme.Etale.existsUnique_of_isCompl`. It is the first
-step towards computing the pushforward along a trivial finite étale cover `∐ₛ U ⟶ U`, an
-input to the constructibility of extensions by zero along étale maps [Stacks 03SA].
+two-piece splitting `AlgebraicGeometry.Scheme.Etale.existsUnique_of_isCompl`. It is used to
+compute the pushforward along a trivial finite étale cover `∐ₛ U ⟶ U`.
+
+## References
+
+* [Stacks, Tag 03SA]
 -/
 
 @[expose] public section

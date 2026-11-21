@@ -43,13 +43,22 @@ public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTenso
 
 /-! # Canonical DVR quotient and open comparison interfaces
 
-Source: Stacks Tags 0A0E, 093M and 09BP; blueprint fix-prop-coherence,
-strict augmentation comparison and completed open factor.
-
 The coefficient and completion model structures package the canonical comparison
 maps and their normalizations. `openQuotientKoszulCompleteness` asserts their existence,
 the DVR free resolutions, and preservation of quotient completeness by open extension.
-The declarations are reexported unchanged by the original assembly module.
+
+## References
+
+* [Stacks, Tag 0A0E]
+* [Stacks, Tag 093M]
+* [Stacks, Tag 09BP]
+* [Stacks, Tag 09BT]
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 09A5]
+* [Stacks, Tag 05RT]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -61,28 +70,24 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- Fix the additive coefficient size without altering the pro-etale site sizes.
-Source: Stacks Tag 03DA. -/
+/-- Fix the additive coefficient size without altering the pro-etale site sizes. -/
 instance (priority := 2200) openDvrAbSheafify (T : Scheme.{u}) :
     HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
   integralCoefficientAbSheafify.{u, 0} T
 
-/-- Use the existing locally bijective criterion in that same coefficient size.
-Source: Stacks Tag 03DA. -/
+/-- Use the existing locally bijective criterion in that same coefficient size. -/
 instance (priority := 2200) openDvrAbLocallyBijective (T : Scheme.{u}) :
     (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
   integralCoefficientAbLocallyBijective.{u, 0} T
 
-/-- The unchanged small pro-etale site in its natural object universe.
-Source: Stacks 09A5. -/
+/-- The unchanged small pro-etale site in its natural object universe. -/
 instance (priority := 2300) openDvrEssentiallySmall (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0} _
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The two-term complex [R -- t^(n+1) --> R] in degrees -1 and 0.
-Source: Stacks Tag 093M; arithmetic verification in Step 1. -/
+/-- The two-term complex [R -- t^(n+1) --> R] in degrees -1 and 0. -/
 def openDvrResolution (n : ℕ) :
     CochainComplex (ModuleCat (Padic.coefficientExtensionIntegers l E)) ℤ :=
   CochainComplex.mappingCone
@@ -92,8 +97,7 @@ def openDvrResolution (n : ℕ) :
           (Padic.coefficientExtensionUniformizer l E ^ (n + 1)))))
 
 /-- The canonical finite and completed coefficient identifications, with their actions.
-All coefficient comparisons are fixed by constant sections and quotient projections.
-Source: Stacks Tags 093M and 09BT; Steps 1--3. -/
+All coefficient comparisons are fixed by constant sections and quotient projections. -/
 structure OpenDvrCoefficientModel
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (T : Scheme.{u}) where
@@ -130,46 +134,40 @@ structure OpenDvrCoefficientModel
 
 attribute [instance] OpenDvrCoefficientModel.additive OpenDvrCoefficientModel.inverse_additive
 
-/-- The ordinary unbounded derived coefficient equivalence of the canonical ring comparison.
-Source: Stacks Tag 05RT; Step 3. -/
+/-- The ordinary unbounded derived coefficient equivalence of the canonical ring comparison. -/
 abbrev OpenDvrCoefficientModel.derived
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) :
     DerivedCategory (scalarReductionSource.{u, u} l E T) ≌
       DerivedCategory (CompletedAdicModules T d) := C.modules.mapDerivedCategory
 
-/-- Its simultaneous transport of strict towers, before derived inverse limit.
-Source: Stacks Tag 0941; Step 3. -/
+/-- Its simultaneous transport of strict towers, before derived inverse limit. -/
 abbrev OpenDvrCoefficientModel.towers
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) :
     coefficientSequenceRestrictedDerived.{u, u} l E T ⥤ DerivedCategory (CompletedAdicTowers T d) :=
   ((Functor.whiskeringRight ℕᵒᵖ _ _).obj C.modules.functor).mapDerivedCategory
 
-/-- Exact simultaneous scalar transport before localization.
-Source: Stacks Tag 0941. -/
+/-- Exact simultaneous scalar transport before localization. -/
 abbrev OpenDvrCoefficientModel.ordinaryTowers
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) :=
   (Functor.whiskeringRight ℕᵒᵖ _ _).obj C.modules.functor
 
-/-- Scalar transport on one complex.
-Source: Stacks Tag 05RT. -/
+/-- Scalar transport on one complex. -/
 abbrev OpenDvrCoefficientModel.complexes
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) :=
   C.modules.functor.mapHomologicalComplex (.up ℤ)
 
-/-- Scalar transport on a complex of strict towers.
-Source: Stacks Tag 0941. -/
+/-- Scalar transport on a complex of strict towers. -/
 abbrev OpenDvrCoefficientModel.towerComplexes
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) :=
   C.ordinaryTowers.mapHomologicalComplex (.up ℤ)
 
 /-- The simultaneous quotient augmentation and its actual adjunction unit.
-The comparisons live in derived categories of strict towers, not just at evaluations.
-Source: Stacks Tags 0A0E and 0941; Steps 3--7. -/
+The comparisons live in derived categories of strict towers, not just at evaluations. -/
 structure OpenDvrCompletionModel
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) (S : CoefficientDerivedSystemCalculus.{u, u} l E T)
@@ -281,8 +279,7 @@ structure OpenDvrCompletionModel
         (fun _ ↦ Padic.coefficientExtensionUniformizer l E) (C.derived.functor.obj P))
 
 /-- Open coefficient restriction, fixed on finite constant sections and all limit projections.
-The extension is the exact adjoint to actual restriction from the recorded open model.
-Source: Stacks Tags 03DI and 09BP; Step 8. -/
+The extension is the exact adjoint to actual restriction from the recorded open model. -/
 structure OpenDvrOpenModel {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] where
   /-- The finite constant comparison on the open site. -/
   finite : ∀ n : ℕ,
@@ -322,8 +319,7 @@ structure OpenDvrOpenModel {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] 
 
 attribute [instance] OpenDvrOpenModel.additive OpenDvrOpenModel.inverse_additive
 
-/-- Localized extension by zero after the canonical completed coefficient restriction.
-Source: Stacks Tags 03DI and 09BP. -/
+/-- Localized extension by zero after the canonical completed coefficient restriction. -/
 abbrev OpenDvrOpenModel.jShriek {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     (O : OpenDvrOpenModel l E j) :
     DerivedCategory (scalarReductionSource.{u, u} l E U) ⥤
@@ -331,8 +327,7 @@ abbrev OpenDvrOpenModel.jShriek {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersio
   O.modules.mapDerivedCategory.functor ⋙
     O.extension.ordinary.mapDerivedCategory
 
-/-- Use the already normalized reduction/limit calculus, retaining its actual unit.
-Source: Stacks Tags 07A6 and 0941. -/
+/-- Use the already normalized reduction/limit calculus, retaining its actual unit. -/
 abbrev openDvrSystem (T : Scheme.{u}) : CoefficientDerivedSystemCalculus.{u, u} l E T :=
   (coefficientDerivedSystemEvaluationCalculus.{u, u} l E T).choose
 

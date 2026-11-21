@@ -16,11 +16,18 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientRawOutputCompos
 
 /-! # Unit and cocycle for compact-support coefficient quotients
 
-Source: the current blueprint, lem-coef-integral-compact-support.proof.md,
-finite-level coefficient comparison; Stacks Tags 03EK, 06YS, 06YY and 07A6.
+## Implementation details
 
 Index n denotes exponent n+1, so every positive coefficient exponent is included.
 All reduction maps are the published normalized adjuncts of the actual quotient maps.
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -38,18 +45,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
 /-- The specified quotient arrows and their compact-support images satisfy unit and
-composition on arbitrary unbounded objects. No constructibility or Tor bound is assumed.
-Source: blueprint proof paragraph 2; Stacks Tags 03EK, 06YY and 07A6.
-Proof: the twice-transposed final unit is the component of the canonical
-left-adjoint composition isomorphism, so the quotient adjunct is invertible. The
-inverse Hom-equivalence identity gives its displayed unit equation. Apply the input
-quotient identity and composition laws. The normalized identity coefficient square
-transports the input identity to compact support. For composition, map the invertible
-prime in the base field to each stalk, specialize the coefficient composition square
-to the two quotient maps with their direct-quotient equality cast, and use naturality
-to move the middle quotient arrow across the comparison. Combine the compact-support
-maps by functoriality and use the input cocycle. The canonical coefficient presentation
-aliases have exactly the existing maps as values, so these are the stated arrows. -/
+composition on arbitrary unbounded objects. No constructibility or Tor bound is assumed. -/
 theorem compactSupport_quotient_cocycle
     (k : Type u) [Field k] (_hl : IsUnit (l : k))
     {X Y : Scheme.{u}} {f : X ⟶ Y}

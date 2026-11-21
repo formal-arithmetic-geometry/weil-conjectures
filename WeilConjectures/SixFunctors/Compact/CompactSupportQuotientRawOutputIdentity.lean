@@ -73,10 +73,7 @@ private theorem rawIdentity_resId {X Y : Scheme.{u}} {f : X ⟶ Y}
       (Padic.coefficientExtensionRing l E (n + 1)))
   exact eq_of_heq (rawIdentity_app_heq (compactSupportQuotientResId l E Y n).hom he)
 
-/-- The transported identity with exactly the original compact-support expressions.
-Source: identity coefficient normalization and functoriality.
-Proof: rewrite the intrinsic functor to its identical ambient presentation, and
-apply the proved output identity. Every quotient wrapper retains its actual value. -/
+/-- The transported identity with exactly the original compact-support expressions. -/
 theorem compactSupportQuotient_raw_output_identity
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
     (K : DerivedCategory (scalarReductionSource.{u, u} l E X))

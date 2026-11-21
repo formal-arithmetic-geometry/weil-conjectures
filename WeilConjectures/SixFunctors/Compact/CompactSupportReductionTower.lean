@@ -24,14 +24,20 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triang
 /-!
 # Coherent compact-support reduction towers
 
-Source: Weil blueprint, `sk-def-sf-operations`, proof of
-`lem-weil-compact-support-representative-independence`, first sentence;
-Stacks Project, Tags 0940, 0941 and 06YY; Bhatt--Scholze, Definition 6.7.6.
-
 The target is the derived category of strict towers of modules over the completed
 coefficient sheaf. Evaluation comparisons are natural isomorphisms of functors.
+
+## Implementation details
+
 Every pair of positive levels is constrained by the actual quotient map; index n
 means exponent n+1. The proper image is derived separately after open extension.
+
+## References
+
+* [Stacks, Tag 0940]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 06YY]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 6.7.6
 -/
 
 @[expose] public noncomputable section
@@ -468,39 +474,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
 set_option linter.unusedVariables false in
 /-- There is a coherent exact integral-linear compact-support reduction tower functor.
 Its natural evaluation comparisons identify every transition with the canonical
-quotient/direct-image comparison, including adjacent and equal levels.
-Source: blueprint `lem-weil-compact-support-representative-independence`, first
-proof sentence; Stacks Tags 0940, 0941 and 06YY; Bhatt--Scholze, Definition 6.7.6.
-Proof:
-1. Form the ringed sequence site with quotient restriction maps. Its module sheaves
-are semilinear coefficient systems, and it admits simultaneous K-injective resolutions
-by lem-coef-semilinear-derived-sections, lem-weil-pbc-diagram-site-realization and
-prop-pur-kinjective-resolutions-exist.
-2. Derived pullback along the completed-to-system coefficient morphism gives exact
-simultaneous reduction, computed by P tensor A_n on a flat-term K-flat resolution
-.
-The strict chain maps id tensor q compose for all pairs of coefficient levels.
-3. Apply exact open extension at every level, then the separately right-derived
-proper direct image of the entire system. The geometric clauses of
-lem-coef-semilinear-derived-sections identify its evaluations with Rp_* j_!,
-including on all derived morphisms. They apply to arbitrary semilinear sections.
-4. Restrict every level along B_Y to A_n. The projection compatibility makes the
-transitions B_Y-linear. Exact restriction descends to the derived strict-tower
-category by situation-conventions.
-5. Each factor is triangulated; use lem-pc-right-derived-functor-triangulated and
-lem-weil-pbc-triangulated-functor-composite to obtain the composite shift structure.
-6. Evaluation of the coherent system gives precisely the displayed transition:
-apply compact support to the quotient-induced map and then its canonical scalar
-comparison. The proper comparison is normalized on K-injective replacements by
-lem-weil-proetale-direct-image-restriction-of-scalars, without assuming that
-restriction preserves K-injectives; the open comparison is identity on underlying
-abelian sheaves.
-7. Quotient composition holds on K-flat complexes before localization; the
-coefficient comparison cocycle carries it to every pair m>=n and is natural in K.
-8. Compatible constant sections define the two normalized linear structures.
-All four factors preserve these scalars on complexes and their resolution roofs,
-so their composite is R-linear. The derived tower action is induced levelwise,
-not a scalar action chosen after evaluation. -/
+quotient/direct-image comparison, including adjacent and equal levels. -/
 theorem exists_compactSupportReductionTower
     (K₀ : Type u) [Field K₀] (X Y : Scheme.{u})
     [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))]

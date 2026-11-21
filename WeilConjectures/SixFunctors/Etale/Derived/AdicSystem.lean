@@ -44,11 +44,10 @@ limits of the levelwise traces.
   `AlgebraicGeometry.Etale.AdicSystem.stalkTower`: the normalized towers of perfect complexes
   `RΓ_c(X, L_n)` and `(L_n)_x̄`.
 
-## Implementation notes
+## Implementation details
 
 The levels are complexes on the small étale site, where the six functors, the compact-support
-exchange maps and the perfectness of compact cohomology are available
-; their realization
+exchange maps and the perfectness of compact cohomology are available; their realization
 `R lim_n ν^* L_n` is formed on the pro-étale site, where the cohomological range of the levels is
 preserved (`AlgebraicGeometry.Etale.AdicSystem.realization`). Bounded constructible complexes of
 finite Tor amplitude on the pro-étale site are exactly the `ν^* L` with `L ∈ Dᵇctf(X_ét, A_n)`.
@@ -58,19 +57,14 @@ levels goes through restriction of scalars: compact cohomology with `A_{n+1}`-co
 restriction of an `A_n`-complex is identified with the restriction of its compact cohomology
 with `A_n`-coefficients. This identification, the fact that it carries derived base changes
 of constructible complexes of finite Tor amplitude to derived base changes, and its
-compatibility with pullback, are the finite-level coefficient change of compact cohomology
-(`lemma-sp-reduction--1`, subsection `sk-def-sfb-coefficient-comparisons`)
-and of geometric stalks
-(`theorem-grothendieck-lefschetz-trace-formula--7`, subsection
-`theorem-grothendieck-lefschetz-trace-formula--7`), statements recorded here as
+compatibility with pullback, are recorded (together with the analogue for geometric stalks) as
 `AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections` and
 `AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk`. The towers are built from any
 such identifications, so that they are data independent of a choice.
 
-Compact cohomology and geometric stalks are read in `D(A_n)` through the point identification
-of blueprint `lemma-perfect-complexes-geometric-point`: `RΓ_c(X, -)` is
-`AlgebraicGeometry.Etale.compactlySupportedGlobalSections` and the geometric stalk at
-`x̄ : s ⟶ X` is `RΓ(s, Lx̄^* -)`.
+Compact cohomology and geometric stalks are read in `D(A_n)` through the point identification:
+`RΓ_c(X, -)` is `AlgebraicGeometry.Etale.compactlySupportedGlobalSections` and the geometric stalk
+at `x̄ : s ⟶ X` is `RΓ(s, Lx̄^* -)`.
 
 The levels of the system are indexed by `n : ℕ` with coefficients `R ⧸ Iⁿ`, as in
 `DerivedCategory.IsNormalizedTower`; the towers of perfect complexes live over the local rings
@@ -123,8 +117,7 @@ def IsCoefficientChange
       Sheaf.IsDerivedBaseChange η → ModuleCat.IsDerivedBaseChange (Φ.map η ≫ α.hom.app K')
 
 variable (Λ) in
-/-- The geometric stalk `K_x̄ = RΓ(s, Lx̄^* K) ∈ D(Λ)` at a point `x̄ : s ⟶ X`, read in `D(Λ)`
-through the point identification of blueprint `lemma-perfect-complexes-geometric-point`. -/
+/-- The geometric stalk `K_x̄ = RΓ(s, Lx̄^* K) ∈ D(Λ)` at a point `x̄ : s ⟶ X`. -/
 noncomputable abbrev geometricStalk {s : Scheme.{u}} (x : s ⟶ X) :
     DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (ModuleCat.{u + 1} Λ) :=
@@ -149,17 +142,14 @@ noncomputable def globalSectionsTransport (h : s ⟶ s) [IsIso h] :
 
 variable [Finite Λ] {g : X ⟶ X} {h : s ⟶ s} {a : X ⟶ s} [QuasiCompact a] [HasCompactification a]
 
-/-- Blueprint `definition-frobenius-operator--1` (the transport `g_{γ,c}^*`): the compact-support
-base change `RΓ_c(X, K) ⟶ RΓ_c(X, Lg^* K)` along an automorphism `g` of `X` lying over an
-automorphism `h` of the base `s` (`sq : g ≫ a = a ≫ h` cartesian):
+/-- The compact-support base change `RΓ_c(X, K) ⟶ RΓ_c(X, Lg^* K)` along an automorphism `g` of
+`X` lying over an automorphism `h` of the base `s` (`sq : g ≫ a = a ≫ h` cartesian):
 ```
   RΓ(s, Ra_! K) ≅ RΓ(s, Lh^* Ra_! K) ──Ex_!──▶ RΓ(s, Ra_! Lg^* K)
 ```
 the transport of derived global sections along `h`
 (`AlgebraicGeometry.Etale.globalSectionsTransport`) followed by the compact-support exchange map
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap`). For `g = g_γ` the geometric
-Frobenius of `X = X₀ ×_{k₀} k`, the global Frobenius operator of a Weil datum
-`φ : Lg^* K ⟶ K` is `RΓ_c(X, φ) ∘ g_{γ,c}^*` (`AlgebraicGeometry.Etale.globalOperator`). -/
+(`AlgebraicGeometry.Etale.rightDerivedLowerShriekBaseChangeMap`). -/
 noncomputable def compactPullback (sq : IsPullback g a a h) [IsIso h] :
     compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a ⟶
       L((g)^*[ModuleCat.{u + 1} Λ]) ⋙ compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) a :=
@@ -169,8 +159,7 @@ noncomputable def compactPullback (sq : IsPullback g a a h) [IsIso h] :
       (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s) ≫
     (Functor.associator _ _ _).hom
 
-/-- Blueprint `definition-frobenius-operator--1` (2) (the stalk transport `τ_{x,m}`): for a point
-`x̄ : s ⟶ X` fixed by the pair `(g, h)` (`h ≫ x̄ = x̄ ≫ g`), the transport
+/-- For a point `x̄ : s ⟶ X` fixed by the pair `(g, h)` (`h ≫ x̄ = x̄ ≫ g`), the stalk transport
 `K_x̄ ⟶ (Lg^* K)_x̄` of geometric stalks
 ```
   RΓ(s, Lx̄^* K) ≅ RΓ(s, Lh^* Lx̄^* K) ≅ RΓ(s, L(h ≫ x̄)^* K) = RΓ(s, L(x̄ ≫ g)^* K)
@@ -194,16 +183,8 @@ variable {R : Type (u + 1)} [CommRing R] (I : Ideal R) (X : Scheme.{u})
 
 /-- A *normalized `A_•`-system* on `X`, for the rings `A_n = R ⧸ Iⁿ`: complexes
 `L_n ∈ Dᵇctf(X, A_n)` with transitions `L_{n+1} ⟶ Res L_n` compatible with the quotient maps
-`A_{n+1} ⟶ A_n`, exhibiting `L_n` as `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n`. Its realization is the derived
-limit `R lim_n ν^* Res L_n` on the pro-étale site
-(`AlgebraicGeometry.Etale.AdicSystem.realization`).
-
-No Weil structure is part of the datum; the category `Dᵇctf,W,adic(X, 𝒪_E)` of the blueprint
-consists of such systems with a compatible strict Weil structure at every level
-(`AlgebraicGeometry.Etale.AdicSystem.FrobeniusSystem.IsWeil`). Up to the indexing of the levels
-(`R ⧸ Iⁿ` instead of `R ⧸ Iⁿ⁺¹`), the underlying tower is a normalized DVR tower
-(`AlgebraicGeometry.Etale.NormalizedTower`) whose levels are constructible of finite Tor
-amplitude. -/
+`A_{n+1} ⟶ A_n`, exhibiting `L_n` as `L_{n+1} ⊗ᴸ_{A_{n+1}} A_n`. No Weil structure is part of the
+datum. -/
 structure AdicSystem where
   /-- The level `L_n ∈ D(X_ét, R ⧸ Iⁿ)`. -/
   obj (n : ℕ) : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (R ⧸ I ^ n)))
@@ -405,9 +386,7 @@ theorem realization {c : Cone (S.restrict ⋙
   ProEtale.derivedComplete_and_exists_iso_of_isNormalizedTower hϖ hI
     S.isNormalizedTower_restrict hc
 
-/-- The realization `R lim_n ν^* Res L_n` of a normalized system exists: the derived category of
-pro-étale sheaves of `R`-modules has countable products, countable products of pro-étale
-sheaves being exact (`CategoryTheory.derivedCategory_hasCountableProducts`). -/
+/-- The realization `R lim_n ν^* Res L_n` of a normalized system exists. -/
 lemma exists_isHomotopyLimit_realization :
     ∃ c : Cone (S.restrict ⋙
       (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory),

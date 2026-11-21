@@ -13,39 +13,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 /-!
 # The compactly supported base change map
 
-For a cartesian square of schemes
+For a cartesian square `g' ≫ f = f' ≫ g` of schemes, with `f : X ⟶ Y`, `g : Y' ⟶ Y`,
+`X' = X ×_Y Y'`, and a compactification `c = (X ⟶[i] Z ⟶[p] Y)` of `f` (`i := c.i`,
+`p := c.g`; we write `p` since `g` is the base change morphism), the base changed
+compactification `c.ofIsPullback sq = (X' ⟶[i'] Z' ⟶[p'] Y')` of `f'`, with `Z' = Z ×_Y Y'` and
+`g'' = pullback.fst c.g g : Z' ⟶ Z`, gives two stacked cartesian squares: `X' ⟶ X` over
+`Z' ⟶ Z` (via `i'`, `i`) and `Z' ⟶ Z` over `Y' ⟶ Y` (via `p'`, `p`).
 
-```
-  X' --g'--> X
-  | |
-  f' f
-  ↓ ↓
-  Y' --g---> Y
-```
-
-and a compactification `c` of `f`, write `c = (X ⟶[i] Z ⟶[p] Y)`, i.e. `i := c.i` and
-`p := c.g` (we write `p` rather than `g` for the proper map, since `g` is the base change
-morphism). The base changed compactification `c.ofIsPullback sq = (X' ⟶[i'] Z ×_Y Y' ⟶[p'] Y')`
-of `f'` sits in a diagram of two cartesian squares
-
-```
-  X' --g'--> X
-  | |
-  i' i
-  ↓ ↓
-  Z' --g''-> Z
-  | |
-  p' p
-  ↓ ↓
-  Y' --g---> Y
-```
-
-with `Z' = Z ×_Y Y'` and `g'' = pullback.fst c.g g`. Pasting the derived base change map `Ex_*`
-of the bottom square with the derived base change isomorphism of the extension by zero for the
-top square gives the compactly supported base change map `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*`,
-computed with `c` and its base change. Using the chosen compactification of `f` and the
-comparison isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for `f'` gives
-`Ex_!` for the derived lower shrieks `R(f)_!` and `R(f')_!`.
+Pasting the derived base change map `Ex_*` of the bottom square with the derived base change
+isomorphism of the extension by zero for the top square gives the compactly supported base
+change map `Ex_! : Lg^* Rf_! ⟶ Rf'_! Lg'^*`, computed with `c` and its base change. Using the
+chosen compactification of `f` and the comparison isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for `f'` gives `Ex_!` for the derived lower
+shrieks `R(f)_!` and `R(f')_!`.
 
 ## Main definitions
 
@@ -68,9 +48,9 @@ comparison isomorphism `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` for 
   isomorphisms `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationIso`.
 - `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` is only available for torsion
   coefficients, where it rests on unbounded proper base change, so `Ex_!` is defined there
-  only. The blueprint defines `Ex_!` on bounded below derived categories; a version built from
-  `derivedBaseChangeMapPlus` and `rightDerivedLowerShriekOfCompactificationPlusIso` would only
-  need bounded below proper base change.
+  only. A version on bounded below derived categories built from `derivedBaseChangeMapPlus` and
+  `rightDerivedLowerShriekOfCompactificationPlusIso` would only need bounded below proper base
+  change.
 -/
 
 @[expose] public section
@@ -97,24 +77,11 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f`, the natural
 transformation `Lg^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') Lg'^*`, where `c ×_Y Y'` is the base changed
 compactification `c.ofIsPullback sq` of `f'`. Write `i := c.i`, `p := c.g`, and `i'`, `p'` for
-the corresponding maps of `c ×_Y Y'`, so that `Rp_*` is `R((c.g)_*[A])`. Then `Ex_!(c)` is the
-derived base change map `Ex_*` of the cartesian square `Z ×_Y Y' ⟶ Z` over `g`, whiskered by
-`Di_!`, followed by the inverse of the derived base change isomorphism of the extension by
-zero `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekBaseChangeIso` for the cartesian
-square `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback`, whiskered by `Rp'_*`.
-
-```
-  D(X) --Lg'^*--> D(X')
-   | |
-  Di_! ≅ Di'_!
-   ↓ ↓
-  D(Z) --Lg''^*-> D(Z')
-   | |
-  Rp_* ⇓ Ex_* Rp'_*
-   ↓ ↓
-  D(Y) --Lg^*---> D(Y')
-```
- -/
+the corresponding maps of `c ×_Y Y'`. Then `Ex_!(c)` is the derived base change map `Ex_*` of
+the cartesian square `Z ×_Y Y' ⟶ Z` over `g`, whiskered by `Di_!`, followed by the inverse of
+the derived base change isomorphism of the extension by zero
+`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekBaseChangeIso` for the cartesian square
+`AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback`, whiskered by `Rp'_*`. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c.ofIsPullback sq)[A] :=
@@ -129,9 +96,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
 
 set_option backward.isDefEq.respectTransparency false in
 /-- `Ex_!(c)` is an isomorphism if and only if the derived base change map `Ex_*` for the
-proper map `c.g` of the compactification, whiskered by `Di_!`, is one: the other factors of
-`Ex_!(c)` are isomorphisms. In particular proper base change for `c.g` gives compactly
-supported base change for `f`. -/
+proper map `c.g` of the compactification, whiskered by `Di_!`, is one. -/
 theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_iff
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     IsIso (rightDerivedLowerShriekOfCompactificationBaseChangeMap A sq c) ↔
@@ -154,8 +119,7 @@ cartesian square `g' ≫ f = f' ≫ g`, for torsion coefficients: the map
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` for the
 chosen compactification of `f`, followed by the comparison isomorphism
 `AlgebraicGeometry.Etale.rightDerivedLowerShriekIso` between the derived lower shriek of `f'`
-computed with its base change and the one computed with the chosen compactification of `f'`.
-That comparison is an isomorphism by proper base change, hence the torsion coefficients. -/
+computed with its base change and the one computed with the chosen compactification of `f'`. -/
 noncomputable def rightDerivedLowerShriekBaseChangeMap [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) :
     R(f)_![ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ⟶

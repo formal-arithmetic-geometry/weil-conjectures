@@ -206,9 +206,7 @@ private theorem nativeRestriction_map_eq (X : Scheme.{u})
       (fun F ↦ F.map (compactSupportReductionMap l E X m n hmn K))
       (nativeRestriction_eq l E X r m hrm))
 
-/-- The input laws in the original scalar-reduction presentation.
-Source: the specified quotient unit and coefficient comparisons.
-Proof: the native wrappers have exactly the original functors and arrows as values. -/
+/-- The input laws in the original scalar-reduction presentation. -/
 theorem compactSupportQuotient_raw_input
     (X : Scheme.{u}) (K : DerivedCategory (scalarReductionSource.{u, u} l E X))
     (hi :

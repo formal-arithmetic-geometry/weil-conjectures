@@ -42,12 +42,7 @@ over `W`, together with `φ` represents the section of `g^* f_* F` over `V` obta
 restricting along `φ` the image of `s` under the unit of `g^* ⊣ g_*`. The base change map
 sends it to the restriction, along the canonical morphism `ψ : V ×_{Y'} X' ⟶ (W ×_Y X) ×_X X'`
 (characterized by its component to `W`), of the image of `s` under the unit of `g'^* ⊣ g'_*`,
-a section of `g'^* F` over `V ×_{Y'} X'`, that is of `f'_* g'^* F` over `V`. The statement is
-an equality of morphisms out of `F(W ×_Y X)`, so it holds for all sections at once and does not
-depend on the chosen representative.
-This is also the content of the pointer remark `prose-04-05`: the
-sectionwise rule is independent of the representative and agrees with the adjoint description.
--/
+a section of `g'^* F` over `V ×_{Y'} X'`, that is of `f'_* g'^* F` over `V`. -/
 lemma Etale.baseChangeMap_app_sectionwise (sq : CommSq g' f' f g)
     (F : Sheaf X.smallEtaleTopology A) (W : Y.Etale) (V : Y'.Etale)
     (φ : V ⟶ (MorphismProperty.Over.pullback @Etale ⊤ g).obj W)

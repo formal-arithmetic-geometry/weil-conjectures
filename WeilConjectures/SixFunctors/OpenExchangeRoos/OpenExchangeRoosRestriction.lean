@@ -135,16 +135,22 @@ import Mathlib.CategoryTheory.Sites.Abelian
 
 /-! # Restriction of the completed open exchange in strict Roos coordinates
 
-Source: Stacks Project, proetale.tex, Tags 099N (2),(5) and 09BN;
-sites-cohomology.tex, Tag 0D6D; blueprint main-20261015,
-proposition-composition-base-change-rf-shriek--1, base-change paragraph.
+## Implementation details
 
 The integral datum is the existing uniformizer datum. Its completed-ring presentation
 is transported to integral coefficients by the projection-normalized `transport`.
 The strict exchange and completed exchange are the published maps, including their
-endpoint comparisons. No equality is tested by separate derived evaluations.
-The signed coordinates below are `(y,x)`, the order of `strictRoosCoordinates`;
-in these coordinates the augmentation is `(0,gamma)`.
+endpoint comparisons. The signed coordinates below are `(y,x)`, the order of
+`strictRoosCoordinates`; in these coordinates the augmentation is `(0,gamma)`.
+
+## References
+
+* [Stacks, Tag 099N]
+* [Stacks, Tag 09BN]
+* [Stacks, Tag 0D6D]
+* [Stacks, Tag 01T1]
+* [Stacks, Tag 01K5]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 3.5.2
 -/
 
 @[expose] public noncomputable section
@@ -161,36 +167,30 @@ namespace WeilConjectures.OpenExchangeRoos
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The singleton generating tuple for the existing uniformizer ideal.
-Source: Stacks 099N. -/
+/-- The singleton generating tuple for the existing uniformizer ideal. -/
 def generators : Fin 1 → PbcIntegralRing l E := fun _ ↦ pbcUniformizer l E
 
-/-- The tuple generates precisely the recorded ideal; no alternative ideal is used.
-Source: the coefficient DVR in Stacks 099N.
-Proof: Fin 1 is nonempty, so the range of the constant tuple is the singleton
-uniformizer. The ideal field of pbcIntegralDatum is the span of that singleton. -/
+/-- The tuple generates precisely the recorded ideal. -/
 theorem generators_span : Ideal.span (Set.range (generators l E)) =
     (pbcIntegralDatum l E).ideal := by
   unfold generators
   rw [Set.range_const]
   rfl
 
-/-- Roos completeness in the coefficient presentation of the completed-open comparison.
-This is only the recorded predicate composed with the recorded coefficient transport.
-Source: Stacks 099N and Bhatt--Scholze 3.5.2. -/
+/-- Roos completeness in the coefficient presentation of the completed-open comparison:
+the recorded predicate composed with the recorded coefficient transport. -/
 abbrev complete (W : Scheme.{u}) : ObjectProperty ((pbcIntegralDatum l E).derived W) :=
   fun K ↦ IntegralOnSlice.IsComplete l E W none
     ((ImmersionCompletedPullback.transport l E W).obj K)
 
-/-- The section-normalized open unit, on the ordinary derived category.
-Source: Stacks 09BN. -/
+/-- The section-normalized open unit, on the ordinary derived category. -/
 def openUnit {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   @asIso _ _ _ _ (cbcDerivedOpenAdjunction (pbcIntegralDatum l E) j).unit
     (cbcOpenUnit_isIso (pbcIntegralDatum l E) j)
 
 /-- The completed square has the ordinary square's normalization on the actual units.
 The source is the full subcategory of Roos-complete objects, with no boundedness or
-constructibility condition. Source: Stacks 099N and 0D6D. -/
+constructibility condition. -/
 abbrev Square {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (h : X' ⟶ X) :=
   (complete l E X).ι ⋙ (pbcIntegralDatum l E).completedPull h ⋙
@@ -198,8 +198,7 @@ abbrev Square {U' U X' X : Scheme.{u}} (a : U' ⟶ U) (j' : U' ⟶ X')
     (complete l E X).ι ⋙ (pbcIntegralDatum l E).pull j ⋙
       (pbcIntegralDatum l E).completedPull a
 
-/-- Its unit equation uses the ordinary compositor and the recorded quotient unit.
-Source: Stacks 099N(2),(5), 0D6D. -/
+/-- Its unit equation uses the ordinary compositor and the recorded quotient unit. -/
 def SquareUnit {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {h : X' ⟶ X} (sq : OpenImmersionSquare a j' j h)
     (c : Square l E a j' j h) : Prop :=
@@ -212,7 +211,7 @@ def SquareUnit {U' U X' X : Scheme.{u}} {a : U' ⟶ U} {j' : U' ⟶ X'}
 
 /-- The ordinary derived open adjunction used by the constant-coefficient limit model.
 It is the existing module adjunction descended termwise, with its canonical right-derived
-comparison. Source: Stacks 09BN. -/
+comparison. -/
 def constantOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :=
   Adjunction.ofNatIsoRight
     (Adjunction.mapDerivedCategoryRightDerivedAdjunction
@@ -220,12 +219,7 @@ def constantOpenAdjunction {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] 
     (Functor.rightDerivedFunctorIsoMapDerivedCategory
       (ProEtale.StrictTower.modulePullback (PbcIntegralRing l E) j))
 
-/-- Quasi-compactness of an open into a finite-type scheme over the fixed field.
-It is supplied as a consequence, rather than imposed on the theorem's inputs.
-Source: Stacks 01T1 and 01K5; proof Step 1.
-Proof: a field is Noetherian, and a scheme of finite type over its spectrum is
-Noetherian. Every open subset of a Noetherian space is quasi-compact, hence the
-open immersion is quasi-compact. The empty open is included. -/
+/-- An open immersion into a scheme of finite type over the fixed field is quasi-compact. -/
 theorem finiteOpenQC (F : FiniteFieldDatum.{u})
     (U X : Over (Spec (.of F.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
     (j : U ⟶ X) [IsOpenImmersion j.left] : QuasiCompact j.left := by
@@ -238,8 +232,7 @@ theorem finiteOpenQC (F : FiniteFieldDatum.{u})
 
 /-- Clause-by-clause assertion on the fixed completed coefficient presentation.
 The square is uniquely determined by its actual unit equation. Its exchange is the
-specified one, transported to the fixed strict endpoints rather than chosen anew.
-Source: Stacks 099N, 09BN and 0D6D. -/
+specified one, transported to the fixed strict endpoints rather than chosen anew. -/
 def Assertion {U' U X' X : Scheme.{u}}
     (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (h : X' ⟶ X)
     [IsOpenImmersion j] [IsOpenImmersion j'] [qc : QuasiCompact j]
@@ -284,37 +277,7 @@ def Assertion {U' U X' X : Scheme.{u}}
 
 /-- The specified completed exchange is the ordered strict derived limit of its finite
 open exchanges. Its restriction is the finite-composition comparison, and that
-comparison preserves the actual ordinary-to-completed pullback units.
-Source: Stacks 099N (2),(5), 09BN and 0D6D; blueprint main-20261015,
-proposition-composition-base-change-rf-shriek--1, open-factor proof Steps 10--11.
-
-Proof, following the nine steps of the DAG node:
-1. Finite type over the algebraic closure of the finite field gives Noetherian and
-qcqs schemes and quasi-compact opens. The coefficient datum is the recorded DVR
-with its uniformizer ideal. The quotient-augmentation completeness bridge identifies
-Roos completeness with intrinsic completeness and the actual invertible unit.
-2. Exact countable products and the exact ringed-slice adjunction give the normalized
-restriction and extension/Rlim comparisons; only these functors need preserve products.
-3. On a flat-term K-flat representative the canonical open scalar map identifies
-the entire reduction tower of j!K with JQ(K), including the quotient transitions.
-4. Apply finite_restriction to the simultaneous finite open-unit exchange. Its
-scalar comparison is the one of finite-open-exchange-scalars. The square compositor
-is finite pullback composition. The open units leave sections unchanged.
-5. CompletedOpenStrictMateIdentification identifies the specified completed exchange,
-in its fixed endpoints, with Rlim(b) followed by inverse lambda. Its completeness
-assertions and the bridge of Step 1 give precisely the complete endpoints below.
-6. Product_restriction and roos_restriction compute restricted lambda: identity on
-every projection and both signed summands. This also fixes strict augmentations.
-7. Naturality of the normalized restriction/Rlim comparison moves restriction
-past Rlim(b). Substituting Steps 4 and 6 gives the displayed restriction equation
-in the actual completed derived category, without evaluation faithfulness.
-8. On a good representative the two restricted strict augmentations send the same
-local tensor to its reduction, and commute with all quotient transitions. The
-projection-normalized coefficient and universal-counit transports preserve this formula.
-9. The Roos augmentations have equal first coordinates and zero second coordinates
-(in the source's coordinate order). Functorial strict Rlim gives SquareUnit. Its
-completion universal property determines the square uniquely. Apply it to j!K and
-its normalized open unit to give exactly the displayed Theta. -/
+comparison preserves the actual ordinary-to-completed pullback units. -/
 theorem openExchangeRoosRestriction (F : FiniteFieldDatum.{u}) (_hl : l ≠ F.p)
     (U' U X' X : Over (Spec (.of F.k)))
     [LocallyOfFiniteType U'.hom] [QuasiCompact U'.hom]

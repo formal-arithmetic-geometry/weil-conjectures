@@ -190,8 +190,7 @@ private theorem derivedEvaluation_eq {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) 
   · exact (pullbackTensorDerivedEvaluation_existsUnique l E f n).exists.choose_spec
 
 /-- Exact localization of ordinary whole-system left-adjoint uniqueness.
-The specified ordinary direct isomorphism determines this comparison.
-Source: exact localization of adjoint uniqueness. -/
+The specified ordinary direct isomorphism determines this comparison. -/
 def derivedPullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (r : pullbackTensorSequenceDirect l E f ≅
       ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
@@ -207,10 +206,7 @@ def derivedPullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
   Functor.mapDerivedCategoryNatIso
     (ordinaryPullIso l E f r)
 
-/-- Exact localization of the ordinary native comparison preserves finite evaluation.
-Source: the whole-cochain normalization and exact-square factorization.
-Proof: localize the ordinary square, use natural-transformation extensionality and
-its cochain factor equations, then use the normalized derived evaluation uniqueness. -/
+/-- Exact localization of the ordinary native comparison preserves finite evaluation. -/
 theorem derived_pull_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (r : pullbackTensorSequenceDirect l E f ≅
       ProEtale.VaryingRing.push (compactSupportSystemLevel l E)
@@ -272,11 +268,7 @@ theorem derived_pull_square {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     ProEtale.VaryingRing.eval, SemilinearSections.evaluation,
     coefficientSequenceEvaluation] using h
 
-/-- Finite adjoint conjugation is the fixed right-derived direct coordinate change.
-Source: derived unit/counit factor equations and ordinary left-adjoint uniqueness.
-Proof: test right-derived transformations on homotopy inputs. The factor equations
-reduce conjugation to its ordinary formula, checked in each complex degree. Apply
-this to the ordinary finite comparison and invert the resulting isomorphism. -/
+/-- Finite adjoint conjugation is the fixed right-derived direct coordinate change. -/
 theorem finite_derived_conjugate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ) :
     letI := ProEtale.StrictTower.modulePullback_additive (compactSupportSystemLevel l E n) f
     letI := ProEtale.StrictTower.modulePullback_finiteLimits (compactSupportSystemLevel l E n) f

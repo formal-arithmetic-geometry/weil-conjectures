@@ -64,8 +64,7 @@ lemma Etale.lowerStarPlusTransition_naturality {X Y Y' : Scheme.{u}} (a : Y' ⟶
 
 /-- The transition maps `AlgebraicGeometry.Etale.lowerStarPlusTransition` compose: along
 `a₁ : Y₁ ⟶ Y₂` and `a₂ : Y₂ ⟶ Y`, the composite of the two transition maps, followed by the
-composition isomorphism of the pullbacks, is the transition map along `a₁ ≫ a₂`. Both sides are
-derived base-change maps of degenerate squares, which paste horizontally. -/
+composition isomorphism of the pullbacks, is the transition map along `a₁ ≫ a₂`. -/
 lemma Etale.lowerStarPlusTransition_comp {X Y Y₂ Y₁ : Scheme.{u}} (a₂ : Y₂ ⟶ Y)
     (a₁ : Y₁ ⟶ Y₂) (a : Y₁ ⟶ Y) (ha : a₁ ≫ a₂ = a) (h : Y ⟶ X) (h₂ : Y₂ ⟶ X) (h₁ : Y₁ ⟶ X)
     (w₂ : a₂ ≫ h = h₂) (w₁ : a₁ ≫ h₂ = h₁) (w : a ≫ h = h₁)
@@ -102,9 +101,7 @@ lemma Etale.lowerStarPlusTransition_comp {X Y Y₂ Y₁ : Scheme.{u}} (a₂ : Y�
   rw [reassoc_of% hn, reassoc_of% hn', hC]
 
 /-- The derived base-change map of the degenerate square with sides `a`, `h'`, `h` and `𝟙 X` is
-an isomorphism when `a` is a universal homeomorphism. The square is the vertical pasting of the
-square with sides `a`, `a`, `𝟙 Y` and `𝟙 Y`, whose pushforwards are exact (`a_*` is an
-equivalence) and whose underived base-change map is an isomorphism, with an identity square. -/
+an isomorphism when `a` is a universal homeomorphism. -/
 lemma Etale.isIso_baseChange_app_of_isUniversalHomeomorphism {X Y Y' : Scheme.{u}} (a : Y' ⟶ Y)
     [IsUniversalHomeomorphism a] (h : Y ⟶ X) (h' : Y' ⟶ X) (sq : CommSq a h' h (𝟙 X))
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -176,8 +173,7 @@ lemma Etale.baseChangeTargetTransition_eq {X T Y T' Y' : Scheme.{u}} (e : Y ⟶ 
 
 /-- The coherence of the identifications of derived pullbacks entering the composition law
 `AlgebraicGeometry.Etale.targetTransitionPlus_comp`, for two stacked commutative squares
-`a₂ ≫ e = e₂ ≫ π₂` and `a₁ ≫ e₂ = e₁ ≫ π₁`. It follows from three instances of the
-associativity law `AlgebraicGeometry.Etale.upperStarCompDerivedPlus_assoc`. -/
+`a₂ ≫ e = e₂ ≫ π₂` and `a₁ ≫ e₂ = e₁ ≫ π₁`. -/
 lemma Etale.upperStarCompDerivedPlus_coherence {T T₂ T₁ Y Y₂ Y₁ : Scheme.{u}} (e : Y ⟶ T)
     (e₂ : Y₂ ⟶ T₂) (e₁ : Y₁ ⟶ T₁) (π₂ : T₂ ⟶ T) (π₁ : T₁ ⟶ T₂) (π : T₁ ⟶ T)
     (a₂ : Y₂ ⟶ Y) (a₁ : Y₁ ⟶ Y₂) (a : Y₁ ⟶ Y) (ha : a₁ ≫ a₂ = a) (hπ : π₁ ≫ π₂ = π)
@@ -368,11 +364,8 @@ private lemma natTrans_app_comp_map_map_comp_iso_inv_app {𝒜 ℬ ℬ' 𝒞 �
 
 /-- The comparison underlying `AlgebraicGeometry.Etale.survivesBaseChange_comp_iff_of_surjective`,
 for arbitrary Cartesian squares over `T₂` and over `T₁` and a universal homeomorphism
-`i : T₁ ⟶ T₂` whose base change `a'` is a universal homeomorphism. The transitions from `T₂` to
-`T₁` of the sources and of the targets of the base-change maps are isomorphisms, the transition
-from `T` to `T₁` factors through the one to `T₂`, and the base-change maps commute with them, so
-the image of `ξ` lies in the image of the base-change map over `T₁` if and only if it does over
-`T₂`. -/
+`i : T₁ ⟶ T₂` whose base change `a'` is a universal homeomorphism: the image of `ξ` lies in
+the image of the base-change map over `T₁` if and only if it does over `T₂`. -/
 theorem Etale.mem_range_iff_of_isUniversalHomeomorphism {X S T Y T₂ Y₂ T₁ Y₁ : Scheme.{u}}
     {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X} (q : ℤ)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)

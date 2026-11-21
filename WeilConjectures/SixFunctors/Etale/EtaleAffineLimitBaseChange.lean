@@ -13,7 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.LimitBaseChange
 Let `D : I ⥤ Scheme` be a cofiltered diagram with affine étale transition maps and `c` a limit
 cone of `D`. For a stage `i` and an open `V ⊆ Dᵢ`, the projection `c.pt ⊇ πᵢ⁻¹(V) ⟶ V` is the
 limit of the étale `V`-schemes `Dⱼ ⊇ D(j ⟶ i)⁻¹(V)`, `j ⟶ i`
-(`AlgebraicGeometry.isLimitOpensCone`). Smooth base change in the limit form therefore holds along it:
+(`AlgebraicGeometry.isLimitOpensCone`). Smooth base change in the limit form therefore holds along
+it:
 the base change maps `π⁻¹ R^q g_* F ⟶ R^q g'_* F'` are isomorphisms for quasi-compact
 quasi-separated `g : T ⟶ V` and sheaves `F` which are torsion of orders invertible on `V`.
 

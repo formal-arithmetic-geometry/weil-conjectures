@@ -16,16 +16,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProperBaseCha
 Let `k` be a field and `Λ` a finite ring killed by an integer invertible in `k`. For a proper
 morphism `b : Y ⟶ S` with `S` Noetherian over `k`, the higher direct images `Rᵠb_* F` of
 constructible sheaves of `Λ`-modules are constructible
-(`AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper_of_isNoetherian`).
+(`AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper_of_isNoetherian`), by
+reduction to the finite type case through limit arguments.
 
-The question is local on `S`, so `S` may be assumed affine. Then `S` is the limit of the
-spectra `Sᵢ` of the finitely generated `k`-subalgebras of `Γ(S, ⊤)`, which are of finite type
-over `k`. The morphism `b` and a constructible sheaf `F` on `Y` descend to a proper morphism
-`bᵢ : Yᵢ ⟶ Sᵢ` and a constructible sheaf `Fᵢ` on `Yᵢ`
-(`AlgebraicGeometry.Etale.exists_isConstructibleSheaf_isPullback_of_isLimit`; Stacks, Tags 01ZM,
-081F and 09YU). By proper base change `Rᵠb_* F` is the pullback of `Rᵠ(bᵢ)_* Fᵢ`, which is
-constructible by the finite type case
-`AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper`.
+## References
+
+* [Stacks, Tag 01ZM]
+* [Stacks, Tag 081F]
+* [Stacks, Tag 09YU]
 -/
 
 @[expose] public section
@@ -51,7 +49,7 @@ directed inverse system of quasi-compact quasi-separated schemes with affine tra
 limit cone `c`, let `b : Y ⟶ lim Dᵢ` be proper and locally of finite presentation, and let `F` be
 a constructible sheaf of `Λ`-modules on `Y`. Then at some stage `i` there are a proper morphism
 `b' : Y' ⟶ Dᵢ` of which `b` is the base change along `Y ⟶ Y'`, and a constructible sheaf `F'` on
-`Y'` whose pullback to `Y` is `F` (Stacks, Tags 01ZM, 081F and 09YU). -/
+`Y'` whose pullback to `Y` is `F`. -/
 theorem exists_isConstructibleSheaf_isPullback_of_isLimit {I : Type u} [Preorder I]
     [IsDirectedOrder I] [Nonempty I] {D : Iᵒᵖ ⥤ Scheme.{u}}
     [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i, CompactSpace (D.obj i)]
@@ -72,11 +70,7 @@ theorem exists_isConstructibleSheaf_isPullback_of_isLimit {I : Type u} [Preorder
 
 /-- **Proper direct images over an affine base over a field.** Let `Λ` be a finite ring killed
 by an integer invertible in the field `k`. Every proper morphism `b : Y ⟶ S` locally of finite
-presentation, with `S` affine over `k`, satisfies `𝒞(b)`: `b` and a constructible sheaf on `Y`
-descend to a proper morphism to a scheme of finite type over `k`, where
-`AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper` applies, and proper base
-change (`AlgebraicGeometry.Etale.upperStarHomologyRightDerivedLowerStarIsoOfIsProper`)
-identifies the higher direct images. -/
+presentation, with `S` affine over `k`, satisfies `𝒞(b)`. -/
 theorem hasConstructibleDirectImages_of_isProper_of_isAffine {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {Y S : Scheme.{u}} [IsAffine S]
     (aS : S ⟶ Spec (.of k)) (b : Y ⟶ S) [IsProper b] [LocallyOfFinitePresentation b] :
@@ -95,9 +89,7 @@ theorem hasConstructibleDirectImages_of_isProper_of_isAffine {k : Type u} [Field
 
 /-- **Proper direct images over a Noetherian base over a field.** Let `Λ` be a finite ring
 killed by an integer invertible in the field `k`. Every proper morphism `b : Y ⟶ S` with `S`
-Noetherian over `k` satisfies `𝒞(b)`: the question is local on `S`
-(`AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_iSup_eq_top`), and the affine case is
-`AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper_of_isAffine`. -/
+Noetherian over `k` satisfies `𝒞(b)`. -/
 theorem hasConstructibleDirectImages_of_isProper_of_isNoetherian {k : Type u} [Field k]
     [HasInvertibleExponent Λ (Spec (.of k))] {Y S : Scheme.{u}} [IsNoetherian S]
     (aS : S ⟶ Spec (.of k)) (b : Y ⟶ S) [IsProper b] :

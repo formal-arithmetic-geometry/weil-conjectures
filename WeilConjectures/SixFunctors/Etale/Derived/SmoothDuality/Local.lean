@@ -71,9 +71,7 @@ variable {X : Scheme.{u}} {ι : Type u} {U : ι → Scheme.{u}} (u : ∀ i, U i 
 include hu
 
 /-- Isomorphisms of `D(X_ét, Λ)` descend along a jointly surjective family of étale morphisms
-`u_i : U_i ⟶ X`: a morphism `φ` with every `Lu_i^* φ` invertible is invertible. The pullbacks
-are exact, so they commute with the cohomology sheaves, and the pullbacks along a jointly
-surjective family reflect isomorphisms of sheaves. -/
+`u_i : U_i ⟶ X`: a morphism `φ` with every `Lu_i^* φ` invertible is invertible. -/
 theorem isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : M ⟶ N) (h : ∀ i, IsIso ((L((u i)^*[ModuleCat.{u + 1} Λ])).map φ)) : IsIso φ := by
@@ -177,9 +175,7 @@ lemma leftDerivedUpperStar (g : Y ⟶ X) (h : IsShiftedRankOneLocalSystem M n) :
     ⟨(L((g)^*[ModuleCat.{u + 1} Λ])).mapIso e ≪≫ leftDerivedUpperStarShiftSingleIso g L n⟩⟩
 
 /-- Shifted rank-one local systems descend along jointly surjective families of étale
-morphisms: the cohomology sheaves of `M` outside degree `-n` vanish after pullback, hence vanish,
-so `M ≅ L[n]` for a sheaf `L`; the pullbacks of `L` are locally constant with free rank-one
-stalks, hence so is `L`. -/
+morphisms. -/
 theorem of_jointlySurjective {ι : Type u} {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ X)
     [∀ i, _root_.AlgebraicGeometry.Etale (u i)]
     (hu : ∀ x : X, ∃ (i : ι) (y : U i), (u i).base y = x)
@@ -234,8 +230,7 @@ section Composition
 variable [Finite Λ] {X Y Z : Scheme.{u}}
 
 /-- The dualizing complex of a composite `h = a ≫ b`: if `θ_a` is invertible at `ω_b`, then
-`ω_h ≅ Ra^! ω_b ≅ ω_a ⊗ᴸ La^* ω_b`, by the composition law for the exceptional inverse image
-(`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`). -/
+`ω_h ≅ Ra^! ω_b ≅ ω_a ⊗ᴸ La^* ω_b`. -/
 theorem nonempty_dualizingComplex_comp_iso_of_isIso (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
     (ha : IsIso (dualizingComplexTensorMap Λ a (dualizingComplex Λ b))) :
@@ -279,7 +274,7 @@ theorem nonempty_dualizingComplex_comp_iso_of_unit (a : X ⟶ Y) (b : Y ⟶ Z) (
 
 /-- **Composition of the canonical tensor maps.** For `h = a ≫ b` admitting compactifications:
 if `θ_a` is invertible at every object, `ω_b` is invertible and `θ_b` is invertible at `K`, then
-`θ_h` is invertible at `K` (`lem-pur-co-smooth-composition`, for all coefficients `K`). -/
+`θ_h` is invertible at `K`. -/
 theorem isIso_dualizingComplexTensorMap_comp_of_forall (a : X ⟶ Y) (b : Y ⟶ Z) (h : X ⟶ Z)
     (w : a ≫ b = h) [HasCompactification a] [HasCompactification b] [HasCompactification h]
     (ha : ∀ P, IsIso (dualizingComplexTensorMap Λ a P))
@@ -295,9 +290,7 @@ theorem isIso_dualizingComplexTensorMap_comp_of_forall (a : X ⟶ Y) (b : Y ⟶ 
 
 /-- **Descent of the canonical tensor maps.** Let `u_i : U_i ⟶ X` be a jointly surjective family
 of étale morphisms with `θ_{u_i}` invertible at every object and `ω_{u_i}` invertible, and let
-`f : X ⟶ Y`. If every `θ_{u_i ≫ f, K}` is invertible, then so is `θ_{f, K}`: through the
-composition law `θ_{u_i ≫ f, K}` determines `Ru_i^! θ_{f, K}`, hence `Lu_i^* θ_{f, K}`, and
-isomorphisms descend along the family. -/
+`f : X ⟶ Y`. If every `θ_{u_i ≫ f, K}` is invertible, then so is `θ_{f, K}`. -/
 theorem isIso_dualizingComplexTensorMap_of_jointlySurjective {ι : Type u} {U : ι → Scheme.{u}}
     (u : ∀ i, U i ⟶ X) [∀ i, _root_.AlgebraicGeometry.Etale (u i)]
     (hu : ∀ x : X, ∃ (i : ι) (y : U i), (u i).base y = x) [∀ i, HasCompactification (u i)]

@@ -11,7 +11,15 @@ import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientCoefficientSeque
 
 /-! # Components of ambient pullback coherence
 
-Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
+## References
+
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 04VG]
+* [Stacks, Tag 0H7J]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -30,20 +38,7 @@ variable (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
 attribute [local irreducible] pull CategoryTheory.Functor.leftAdjoint
   CategoryTheory.Functor.mapDerivedCategory
 
-/-- Inverse image preserves the actual coefficient ring, on the finite or sequence site.
-Source: Stacks 0H7J, 03CB and 0941.
-Proof: at a finite level identify each coefficient sheaf with the sheafification
-of the constant ring presheaf. The two composites of inverse image and the
-constant-sheaf functor are left adjoint to evaluation of direct image at the
-terminal object; the fibre-product terminal comparison identifies those right
-adjoints. The unique left-adjoint comparison is invertible, and its unit on
-constant sections identifies it with ringMap. On the sequence site, inverse image
-along the product with the identity of the index category is the levelwise
-inverse image. This follows by restricting the levelwise adjunction bijections
-to compatible families; their naturality gives compatibility with all quotient
-maps. Evaluation on ordinary ring sheaves reflects isomorphisms, so the finite
-comparisons prove invertibility on the sequence site as well. No derived
-evaluation, flat transition, nonzero-ring or finiteness hypothesis is used. -/
+/-- Inverse image preserves the actual coefficient ring, on the finite or sequence site. -/
 theorem coefficientPullback_isIso {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     IsIso (ringMap ell E f s) := by
   cases s with

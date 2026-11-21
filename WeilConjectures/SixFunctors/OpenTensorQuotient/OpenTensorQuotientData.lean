@@ -18,12 +18,23 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
 /-! # Open reduction and the augmented strict tensor square
 
-Source: Stacks Project, sites-modules.tex Tag 0E8I; sites-cohomology.tex Tag 0GL1;
-Bhatt--Scholze, Lemma 6.5.8(2),(3), p.50.
+## Implementation details
 
 The index n denotes the positive exponent n+1. The square is imposed on strict
 augmented towers of complexes, before applying localization. All total tensors
 are the published signed direct-sum total tensors, including for unbounded inputs.
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 012Z]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 09AH]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 3.4.10 and Lemma 6.5.8
 -/
 
 @[expose] public noncomputable section
@@ -46,15 +57,15 @@ namespace WeilConjectures.OpenTensorQuotient
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Strict towers, with their genuine quotient transitions. Source: Stacks 0941. -/
+/-- Strict towers, with their genuine quotient transitions. -/
 abbrev Towers (W : Scheme.{u}) := ℕᵒᵖ ⥤ CochainComplex (scalarReductionSource l E W) ℤ
 
-/-- Postcomposition by the actual termwise open extension. Source: Stacks 0GL1. -/
+/-- Postcomposition by the actual termwise open extension. -/
 abbrev extendTower {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) : Towers l E U ⥤ Towers l E X :=
   (Functor.whiskeringRight _ _ _).obj (OpenSemilinearTensor.extensionComplex l E j o)
 
-/-- A pure homogeneous tensor in the existing total complex. Source: Stacks 012Z. -/
+/-- A pure homogeneous tensor in the existing total complex. -/
 def totalSection (W : Scheme.{u})
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (p q : ℤ) (V : W.ProEtᵒᵖ) (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V) :=
@@ -64,8 +75,7 @@ def totalSection (W : Scheme.{u})
       (P.X p) (Q.X q) V x y)
 
 /-- A strict tower of complexes read as a complex of strict towers. This is a real
-transpose construction, so localization is in the category of systems itself.
-Source: Stacks 0941. -/
+transpose construction, so localization is in the category of systems itself. -/
 def transpose (W : Scheme.{u}) : Towers l E W ⥤
     CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ where
   obj T :=
@@ -83,15 +93,14 @@ def transpose (W : Scheme.{u}) : Towers l E W ⥤
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- Functorial form of the existing strict reduction tower. Source: Stacks 06YY. -/
+/-- Functorial form of the existing strict reduction tower. -/
 def reductionTower (W : Scheme.{u}) :
     CochainComplex (scalarReductionSource l E W) ℤ ⥤ Towers l E W :=
   (Functor.ofOpSequence (X := fun n ↦ unrestrictedIntegralComplexFunctor l E W n)
     (unrestrictedIntegralTransition l E W)).flip
 
 /-- The balancing comparison, with its full coefficient formula. The coefficient is
-placed in the first factor and the second receives 1; factors are never exchanged.
-Source: Stacks 03EK, 0GL1. -/
+placed in the first factor and the second receives 1; factors are never exchanged. -/
 structure Balanced (W : Scheme.{u})
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) where
   iso : (reductionTower l E W).obj
@@ -108,14 +117,13 @@ structure Balanced (W : Scheme.{u})
       (unrestrictedIntegralTensorSection l E W n (Q.X q) V 1 y)
 
 /-- The existing signed total tensor before scalar restriction at the positive
-coefficient level. Source: Stacks 012Z, 03EK. -/
+coefficient level. -/
 abbrev finiteTotal (W : Scheme.{u}) (n : ℕ) :=
   Functor.uncurry.obj ((MonoidalCategory.curriedTensor
     (integralOperationsFiniteModules l E W n)).map₂CochainComplex)
 
 /-- The actual tensor quotient augmentation. Naturality is part of the map of strict
-towers; normalization is on all homogeneous sections, not just derived evaluations.
-Source: Stacks 03EK, 0941. -/
+towers; normalization is on all homogeneous sections, not just derived evaluations. -/
 structure Augmentation (W : Scheme.{u})
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) where
   map : (Functor.const ℕᵒᵖ).obj ((OpenSemilinearTensor.total l E W).obj (P, Q)) ⟶
@@ -129,7 +137,7 @@ structure Augmentation (W : Scheme.{u})
       (unrestrictedIntegralTensorSection l E W n (Q.X q) V 1 y)
 
 /-- Equality with the first coordinate of the specified tensor-completion chain map.
-Its zero shifted coordinate is part of Tensor.canonical. Source: Bhatt--Scholze 3.4.10. -/
+Its zero shifted coordinate is part of Tensor.canonical. -/
 def RoosNormalization (W : Scheme.{u}) (t : OpenFactorCoherence.Tensor l E W)
     (P Q : CochainComplex (scalarReductionSource l E W) ℤ) (a : Augmentation l E W P Q) :
     Prop :=
@@ -142,8 +150,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
   (o : IntegralOpenReduction.Operations l E j)
 
 /-- Generator-normalized scalar restriction for finite open extension. The strict quotient
-transitions are recorded separately by `ScalarComparison`, which uses these finite maps.
-Source: Stacks 03DI, 0E8I. -/
+transitions are recorded separately by `ScalarComparison`, which uses these finite maps. -/
 structure ScalarCompatibility where
   finite : ∀ n : ℕ,
     IntegralOpenReduction.finiteExtension l E j o n ⋙ scalarReductionRestriction l E X n ≅
@@ -157,7 +164,7 @@ structure ScalarCompatibility where
       ((scalarReductionRestriction l E U n).obj M) V a x
 
 /-- The original degreewise scalar component equation, named to share its type in
-structure eliminators. Source: Stacks 0E8I, 0GL1. -/
+structure eliminators. -/
 def ScalarComponents (sc : ScalarCompatibility l E j o)
     (tc : IntegralOpenReduction.TensorComparison l E j o)
     (iso : OpenSemilinearTensor.extensionComplex l E j o ⋙ reductionTower l E X ≅
@@ -168,8 +175,7 @@ def ScalarComponents (sc : ScalarCompatibility l E j o)
         (sc.finite n).hom.app ((scalarReductionExtension l E U n).obj (Q.X i))
 
 /-- The strict scalar map is the finite A_n-linear open comparison followed by the
-canonical scalar-restriction identification. This fixes its inverse normalization.
-Source: Stacks 0E8I, 0GL1. -/
+canonical scalar-restriction identification. This fixes its inverse normalization. -/
 structure ScalarComparison (sc : ScalarCompatibility l E j o)
     (tc : IntegralOpenReduction.TensorComparison l E j o) where
   iso : OpenSemilinearTensor.extensionComplex l E j o ⋙ reductionTower l E X ≅
@@ -183,8 +189,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
 
 /-- The tensor augmentation square is an equality of strict chain-system maps.
 Balancing identifies its finite tensor comparison with reduction of the same signed
-open tensor chain isomorphism. Its localization is explicitly in D(strict towers).
-Source: Stacks 0E8I, 0GL1. -/
+open tensor chain isomorphism. Its localization is explicitly in D(strict towers). -/
 structure StrictSquare
     (tc : OpenSemilinearTensor.TotalComparison l E j o)
     (sc : ScalarCompatibility l E j o)
@@ -239,8 +244,7 @@ structure StrictSquare
 
 /-- The finite cohomology, interval and stratification clauses, using exactly the
 published finite extension and locally constant/stalk conventions. The instance lambda
-supplies the existing finiteness and sheafification witnesses without assumptions.
-Source: Bhatt--Scholze 6.5.8; Stacks 09AH. -/
+supplies the existing finiteness and sheafification witnesses without assumptions. -/
 def FiniteGeometry (n : ℕ) (hn : 1 ≤ n) (a b : ℤ)
     (C : proEtaleDerivedCategory U (Padic.coefficientExtensionRing l E n)) : Prop :=
     (fun [_hfin : Finite (Padic.coefficientExtensionRing l E n)]
@@ -332,7 +336,7 @@ def FiniteGeometry (n : ℕ) (hn : 1 ≤ n) (a b : ℤ)
 
 /-- Compatibility of the fixed finite open extension with the intrinsic finite
 constructibility interface. This is a comparison of the same normalized extension,
-not an assumed replacement functor. Source: Stacks 03DI, 09AH. -/
+not an assumed replacement functor. -/
 def FiniteExtensionModel : Prop :=
   ∀ n : ℕ,
     (fun [_hf : Finite (Padic.coefficientExtensionRing l E (n + 1))] ↦
@@ -342,7 +346,7 @@ def FiniteExtensionModel : Prop :=
 
 /-- Restricting any finite constructible partition means taking its scheme-theoretic
 intersection with U. The cartesian witnesses retain the actual immersed strata,
-including empty intersections. Source: Stacks 09AH; Bhatt--Scholze 6.5.8. -/
+including empty intersections. -/
 def RestrictionPartitions : Prop :=
   ∀ S : FiniteLocallyClosedStratification X,
     (∀ k : Fin S.n, Topology.IsConstructible (S.stratum k)) →
@@ -353,7 +357,7 @@ def RestrictionPartitions : Prop :=
         IsPullback p (T.immersion k) (S.immersion (e k)) j
 
 /-- Integral constructibility and the identical uniform quotient intervals are
-preserved by both exact open operations. Source: Bhatt--Scholze 6.5.8(2),(3). -/
+preserved by both exact open operations. -/
 def IntegralGeometry : Prop :=
   (∀ K : DerivedCategory (scalarReductionSource l E U), sfIntegralConstructible l E U K →
     sfIntegralConstructible l E X ((IntegralOpenReduction.shriek l E j o).obj K)) ∧
@@ -376,8 +380,7 @@ def IntegralGeometry : Prop :=
 
 /-- The simultaneous open scalar comparison is exactly the previously specified
 r_j on complete inputs; the tensor square holds on every pair of flat-term K-flat
-representatives and therefore on every pair of represented constructible objects.
-Source: Stacks 0E8I, 0GL1; Bhatt--Scholze 6.5.8. -/
+representatives and therefore on every pair of represented constructible objects. -/
 structure Comparison
     (SX : CoefficientDerivedSystemCalculus l E X)
     (SU : CoefficientDerivedSystemCalculus l E U)

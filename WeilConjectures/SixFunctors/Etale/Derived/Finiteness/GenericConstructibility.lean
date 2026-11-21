@@ -15,16 +15,13 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 Let `X` be a Noetherian scheme and `F` an étale sheaf of `Λ`-modules on `X`. If for every
 integral closed subscheme `i : Z ⟶ X` the restriction of `F` to some nonempty open of `Z` is
 constructible, then `F` is constructible
-(`AlgebraicGeometry.Scheme.isConstructibleSheaf_of_forall_isIntegral`). This is the Noetherian
-induction closing the proof of `proposition-proper-direct-image-finite-coefficients`: the generic
-statement over integral bases spreads to the whole base.
+(`AlgebraicGeometry.Scheme.isConstructibleSheaf_of_forall_isIntegral`). It is used to spread
+generic constructibility statements over integral bases to the whole base.
+
+## Implementation details
 
 The induction runs over the closed subsets of `X`, each with a reduced closed subscheme
-structure. A nonempty reduced Noetherian scheme `Z` has a nonempty open `V` contained in one of
-its irreducible components `C`; the reduced induced structure on `C` is integral, and the open
-`V`, being reduced, maps into it (`AlgebraicGeometry.Scheme.exists_opens_factor_of_isReduced`).
-Finally `F` is constructible as soon as its restriction to the reduction of `X` is
-(`AlgebraicGeometry.Scheme.isConstructibleSheaf_iff_upperStar_of_surjective`).
+structure.
 -/
 
 @[expose] public section
@@ -38,7 +35,7 @@ open scoped AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Scheme
 
 /-- A nonempty Noetherian space has a nonempty open subset contained in an irreducible closed
-subset: the complement of the union of all but one irreducible component. -/
+subset. -/
 lemma _root_.TopologicalSpace.NoetherianSpace.exists_isOpen_subset_isIrreducible {Z : Type*}
     [TopologicalSpace Z] [TopologicalSpace.NoetherianSpace Z] [Nonempty Z] :
     ∃ (C : Set Z) (V : Set Z), IsIrreducible C ∧ IsClosed C ∧ IsOpen V ∧ V.Nonempty ∧ V ⊆ C := by
@@ -59,9 +56,7 @@ lemma _root_.TopologicalSpace.NoetherianSpace.exists_isOpen_subset_isIrreducible
 
 /-- **Opens of a reduced scheme inside an integral closed subscheme.** A nonempty reduced
 Noetherian scheme `Z` has an integral closed subscheme `c : C ⟶ Z` such that every nonempty open
-`W` of `C` contains, up to a morphism `e` over `Z`, a nonempty open `V` of `Z`: take `C` an
-irreducible component with its reduced induced structure and `V` an open of `Z` inside `c(W)`
-missing the other components; `V` is reduced, so it maps into `C`. -/
+`W` of `C` contains, up to a morphism `e` over `Z`, a nonempty open `V` of `Z`. -/
 lemma exists_isIntegral_opens_factor {Z : Scheme.{u}} [IsReduced Z] [IsNoetherian Z]
     [Nonempty Z] :
     ∃ (C : Scheme.{u}) (c : C ⟶ Z) (_ : IsClosedImmersion c) (_ : IsIntegral C),
@@ -113,8 +108,7 @@ lemma exists_isIntegral_opens_factor {Z : Scheme.{u}} [IsReduced Z] [IsNoetheria
 
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
-/-- A sheaf is constructible as soon as its pullback along a surjective closed immersion is: the
-complementary open is empty. -/
+/-- A sheaf is constructible as soon as its pullback along a surjective closed immersion is. -/
 lemma isConstructibleSheaf_of_upperStar_of_surjective {X Z : Scheme.{u}} (i : Z ⟶ X)
     [IsClosedImmersion i] [Surjective i] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (h : IsConstructibleSheaf ((i)^*[ModuleCat.{u + 1} Λ].obj F)) : IsConstructibleSheaf F := by

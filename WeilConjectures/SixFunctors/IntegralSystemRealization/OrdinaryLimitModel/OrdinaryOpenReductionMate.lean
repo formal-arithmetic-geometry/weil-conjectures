@@ -13,7 +13,12 @@ import all WeilConjectures.Algebra.Homology.ProperBaseChange.OpenImmersionTensor
 
 /-! # Ordinary open quotient comparison
 
-Source: Stacks Tags 03DI, 03EK, 0E8I and 0941; fix-prop-coherence, open factor.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +43,7 @@ local instance actualOpen_additive {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmer
     (PurCompactSupport.openExtension (PurCompactSupport.completed l E) j).Additive :=
   (PurCompactSupport.openAdjunction (PurCompactSupport.completed l E) j).left_adjoint_additive
 
-/-- The ordinary quotient/open comparison, with its specified adjunction transpose.
-Source: Stacks 03DI and 0941. -/
+/-- The ordinary quotient/open comparison, with its specified adjunction transpose. -/
 def OrdinaryLimitModel.openReduction (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (o : Open l E j) :
     pullbackTensorOrdinaryReduction l E X ⋙ o.ordinary ⟶
@@ -48,8 +52,7 @@ def OrdinaryLimitModel.openReduction (a : OrdinaryLimitModel l E)
   (mateEquiv (PurCompactSupport.openAdjunction (PurCompactSupport.completed l E) j)
     o.adjunction).symm (a.reductionPull l E j).hom
 
-/-- Degreewise ordinary mate, using the two separate complex functors.
-Source: Stacks 03DI and 0941. -/
+/-- Degreewise ordinary mate, using the two separate complex functors. -/
 def OrdinaryLimitModel.openReductionComplex (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (o : Open l E j)
     (P : CochainComplex (scalarReductionSource l E X) ℤ) :
@@ -105,21 +108,7 @@ private theorem sequence_isIso_of_evaluation (W : Scheme.{u})
   letI : IsIso (T.map f) := NatIso.isIso_of_isIso_app _
   exact isIso_of_reflects_iso f T
 
-/-- The ordinary scalar/open mate is invertible before localization.
-Source: Stacks 03DI, 03EK, 0E8I and 0941; fix-prop-coherence, open-factor sentence.
-
-Proof: finite evaluation of ordinary coherent reduction is quotient tensor, with
-unit x mapped to 1 tensor x. The equations a.projections determine its pullback
-comparison as the usual quotient/pullback map: transpose the projection equation
-under the two ordinary scalar adjunctions. For an open immersion use the slice
-presentation of the site. The open adjunction identifies its inverse mate with
-[x] tensor b mapped to [x tensor b]. Balancing, restriction and sheafification
-respect this formula. The inverse sends [x tensor b] to [x] tensor b; the two
-composites are identity on extension and tensor generators. These maps commute
-with every quotient transition, so they give inverse ordinary system maps.
-Any o is identified with this extension by uniqueness of left adjoints to the
-specified inverse image; that uniqueness preserves the unit and hence the mate.
-This argument includes the empty and identity open and arbitrary modules. -/
+/-- The ordinary scalar/open mate is invertible before localization. -/
 theorem ordinaryOpenReduction_isIso (a : OrdinaryLimitModel l E)
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] (o : Open l E j)
     (M : scalarReductionSource l E X) :

@@ -9,7 +9,9 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 
 /-! # Normalized native realization before descent and smallness
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and Proposition 6.8.14
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +41,7 @@ variable (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
 
 /-- Coefficient presentations and a triangulated common-stage functor with the specified
 integral tensor formula and completion-map normalization. No Hom bijectivity, essential
-image, or smallness is assumed. Those are separate properties to prove.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14, parent proof steps 2--5. -/
+image, or smallness is assumed. Those are separate properties to prove. -/
 structure FunctorData where
   [commutative : IsCommMonObj (abRing l X)]
   [sectionsAdditive : (sections l X).Additive]
@@ -66,8 +67,7 @@ structure FunctorData where
       ObjectProperty.ι (sfIntegralConstructible l (Coefficient.{u} l (PadicAlgCl l) E) X) ⋙
         pbcDerivedExtend.{u} ((coefficient E).integralMap l X)
 
-/-- The completion-map transition equation for the given functor data.
-Source: Bhatt--Scholze, Proposition 6.8.14, parent proof step 5. -/
+/-- The completion-map transition equation for the given functor data. -/
 def FunctorData.commonField (R : FunctorData l X) : Prop :=
   letI := R.commutative
   letI := R.sectionsAdditive
@@ -96,8 +96,7 @@ def FunctorData.commonField (R : FunctorData l X) : Prop :=
           ((GeneralAlgebraicallyClosedCoefficients.integralTransition l (PadicAlgCl l) X
             E L h).obj K))
 
-/-- The functor construction with its specified common-field transition equation.
-Source: Bhatt--Scholze, Proposition 6.8.14, parent proof steps 2--5. -/
+/-- The functor construction with its specified common-field transition equation. -/
 structure NormalizedFunctor extends FunctorData l X where
   common_field : FunctorData.commonField l X toFunctorData
 

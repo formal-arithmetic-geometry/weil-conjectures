@@ -40,9 +40,7 @@ variable {X : Scheme.{u}}
 
 attribute [local instance] Sheaf.monoidalCategory in
 /-- Tensoring with a shifted complex on the left shifts the tensor product,
-`K⟦a⟧ ⊗ᴸ M ≅ (K ⊗ᴸ M)⟦a⟧`, naturally in `M`. The components are the commutation of `- ⊗ᴸ M`
-with the shift; they are natural in `M` because the derived tensor product commutes with shifts
-as a bifunctor (`DerivedCategory.commShift₂CurriedTensor`). -/
+`K⟦a⟧ ⊗ᴸ M ≅ (K ⊗ᴸ M)⟦a⟧`, naturally in `M`. -/
 noncomputable def derivedTensorObjShiftIso
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
     (derivedTensor A X).obj (K⟦a⟧) ≅ (derivedTensor A X).obj K ⋙ shiftFunctor _ a :=
@@ -54,7 +52,7 @@ noncomputable def derivedTensorObjShiftIso
       (NatTrans.shift_app_comm ((derivedTensor A X).flip.map f) a K).symm)
 
 /-- The derived hom out of a shifted complex is the shifted derived hom,
-`RHom(K⟦a⟧, -) ≅ RHom(K, -)⟦-a⟧`: both are right adjoint to `K⟦a⟧ ⊗ᴸ - ≅ K ⊗ᴸ (-)⟦a⟧`. -/
+`RHom(K⟦a⟧, -) ≅ RHom(K, -)⟦-a⟧`. -/
 noncomputable def derivedHomShiftIso
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) (a : ℤ) :
     (RHom(X)[A]).obj (op (K⟦a⟧)) ≅ (RHom(X)[A]).obj (op K) ⋙ shiftFunctor _ (-a) :=

@@ -12,7 +12,12 @@ import all Mathlib.Algebra.Homology.Localization
 
 /-! # Representative factors of the scalar inverse mate
 
-Source: Stacks Tags 00YV and 07A6.
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 04JC]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -46,8 +51,7 @@ attribute [local instance 30000] SheafOfModules.instPreadditive
 
 namespace WeilConjectures
 
-/-- The exact fixed-scalar inverse image computes its total left derived functor.
-Source: Stacks Tag 04JC, localization of exact inverse image. -/
+/-- The exact fixed-scalar inverse image computes its total left derived functor. -/
 @[irreducible] def finiteScalarFixedPullbackFactors
     (R : Type u) [CommRing R] {X Y : Scheme.{u}} (p : X ⟶ Y) :
     DerivedCategory.Q ⋙
@@ -60,20 +64,7 @@ Source: Stacks Tag 04JC, localization of exact inverse image. -/
     (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p).mapDerivedCategoryFactors
 
 /-- The inverse mate on derived categories has the ordinary mate's chain normalization.
-This is a unary statement: it involves no tensor product and no tensor model.
-
-Source: Stacks Tags 07A6 and 0D6E, comparison of derived adjunction Hom bijections.
-
-Proof: write the ordinary comparison as the inverse mate of the section-normalized
-ordinary direct-image isomorphism. Apply the exact-derived mate formula to its
-termwise localization. The inverse derived direct-image comparison obeys the same
-unit equation, first on K-injectives by its definition, and then on every complex
-by naturality along a K-injective resolution. Uniqueness of the derived mate gives
-the displayed formula. The identification of the two constant direct images is
-induced by the coefficient adjunction and is the same in both mate constructions.
-The two exact-functor factor isomorphisms put the formula in complex coordinates.
-There are no boundedness, nonzero-coefficient, or nonempty-site assumptions.
--/
+This is a unary statement: it involves no tensor product and no tensor model. -/
 private theorem exact_factors_eq_counit_local
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]
@@ -107,11 +98,8 @@ private theorem fixedFactors_eq_counit_local
     isoWhiskerLeft_hom, whiskerLeft_app] using exact_factors_eq_counit_local
       (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} R)) p) Z
 
-/-- The expanded mate-normalization equation before the paper-level wrappers are folded.
-Source: Stacks Tags 07A6 and 0D6E.
-
-This is the concrete derived-category square obtained from the normalized inverse mate;
-it is the single mate calculation used by the wrapper theorem below. -/
+/-- The expanded mate-normalization equation: the concrete derived-category square obtained
+from the normalized inverse mate. -/
 private theorem finiteScalarPullback_representative_factors_core
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (P : CochainComplex

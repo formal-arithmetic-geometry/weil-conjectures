@@ -110,10 +110,18 @@ import all WeilConjectures.SixFunctors.Compact.CompactSupportReductionTower
 
 /-! # Normalized realization of the specified compact-support quotient tower
 
-Source: blueprint main-20261015, lemma-change-coefficients-compact-support, proof paragraph 2;
-Stacks Tags 06YS, 0D6D, 07A6 and 05RT.
+## Implementation details
 
 Natural index n always denotes the positive coefficient exponent n+1.
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 0D6D]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 05RT]
 -/
 
 @[expose] public noncomputable section
@@ -126,19 +134,14 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The sequence-system quotient is the direct quotient homomorphism on constant sheaves.
-Source: Stacks Tag 03EK; blueprint input quotient maps.
-Proof: induct on m-n. At equal levels both maps are identities; at consecutive levels
-they are the coefficient transition. Quotient factors compose on every residue class,
-and constant sheafification and forgetting commutativity preserve their compositions. -/
+/-- The sequence-system quotient is the direct quotient homomorphism on constant sheaves. -/
 theorem coefCompactSupportQuotient_eq (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     normalizedDVRQuotient l E W h =
       (sheafCompose (ProEt.topology W) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map
         (compactSupportLevelSheafQuotient l E W m n h) := by
   exact compactSupportQuotient_eq l E W h
 
-/-- Canonical identity transport from the sequence quotient to the direct quotient.
-Source: blueprint quotient maps; Stacks Tag 03DA. -/
+/-- Canonical identity transport from the sequence quotient to the direct quotient. -/
 def coefCompactSupportRestrictionIso (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) :
     normalizedDVRRes l E W h ≅
       (proEtaleCoefficientRestrictScalars W
@@ -153,8 +156,7 @@ def coefCompactSupportRestrictionIso (W : Scheme.{u}) {m n : ℕ} (h : n ≤ m) 
     (eqToIso (congrArg (fun q ↦ SheafOfModules.restrictScalars.{u + 1} q)
       (coefCompactSupportQuotient_eq l E W h)))
 
-/-- The actual input quotient transition in the sequence quotient coordinates.
-Source: blueprint input reductions; Stacks Tag 03EK. -/
+/-- The actual input quotient transition in the sequence quotient coordinates. -/
 def coefCompactSupportInputTau (W : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource l E W)) {m n : ℕ} (h : n ≤ m) :
     (scalarReductionDerivedExtension l E W m).obj K ⟶

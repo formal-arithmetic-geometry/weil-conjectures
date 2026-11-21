@@ -12,7 +12,13 @@ import all WeilConjectures.CategoryTheory.Adjunction.SixFunctors.CompositionAdju
 import all WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoefficientDirectImage
 import WeilConjectures.AlgebraicGeometry.Intrinsic.IntrinsicDirectCompositorCoordinates
 
-/-! # Finite ring-sheaf proper-compositor coordinates -/
+/-! # Finite ring-sheaf proper-compositor coordinates
+
+## References
+
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -205,30 +211,7 @@ private theorem constant_coordinates {U V W : Scheme.{w}} (h : U ⟶ V) (k : V �
 
 /-- Realization preserves the inverse proper compositor in finite ring-sheaf coordinates.
 This concerns three direct-image functors only; there are no open immersions,
-compactifications, etale antecedents, or compact-support objects in the assertion.
-Source: compactification-coherence proof, second paragraph; Stacks 03D6 and 0D6E.
-
-Proof: first eliminate the equality h ≫ k = g by substitution. Before deriving,
-modulePushComposition_existsUnique fixes the ring-sheaf direct-image compositor
-on every section by pullbackComp. finiteDirectImage_eq identifies its structural
-map with the constant-section structural map. The ordinary realization comparison
-sfIntrinsicDirectImageComparison preserves these scalar-unit sections. Therefore
-the pasted ordinary realization comparisons intertwine the two direct-image
-compositors: both sides send a section to its restriction along pullbackComp.
-Faithfulness of underlying module sheaves proves equality of the natural maps.
-Resolve a fixed-scalar input by a K-injective complex. The exact inverse-image
-adjunction makes each first direct image preserve K-injectives, as do the realization
-equivalences. The normalization in sfIntrinsicDerivedDirectImageComparison_existsUnique
-identifies the derived maps with the ordinary maps on that resolution. The conjugate
-of geometricPullComposition is the derived module compositor: its ordinary mate
-is modulePushComposition_existsUnique, and the derived adjunction factorization
-preserves the mate equation. The inverse of finiteDirectImageComposition is the
-same derived compositor in fixed-scalar coordinates. Derive the ordinary equality,
-then invert it and cancel the comparison for h ≫ k. This is the displayed equation
-on K-injective inputs. Naturality and existence of a K-injective resolution extend
-it to every input. Equality transport was removed by substitution, hence is restored
-by the two displayed eqToIso factors. The argument also covers identity maps,
-empty schemes and zero coefficients. -/
+compactifications, etale antecedents, or compact-support objects in the assertion. -/
 theorem finiteFixedPushIso_composition
     {U V W : Scheme.{w}} (h : U ⟶ V) (k : V ⟶ W) (g : U ⟶ W)
     (w : h ≫ k = g)

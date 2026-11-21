@@ -14,8 +14,11 @@ set_option linter.privateModule false
 
 /-! # Inverse tensor-unit maps on local sections
 
-Source: the finite-free quotient resolution in the first paragraph of the current
-blueprint `lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY, 08J7 and 07A6.
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public section

@@ -9,7 +9,23 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralComp
 import WeilConjectures.SixFunctors.IntegralSystemRealization.HorizontalMateTransport
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralSystemOpenCompositorBridge
 
-/-! Horizontal pasting for the canonically transported proper/open mate. -/
+/-! # Horizontal proper/open transport pasting
+
+Horizontal pasting for the canonically transported proper/open mate.
+
+## Implementation details
+
+The canonical bridge equation on gamma is needed: quadratic pasting fails for arbitrary gamma
+(negating the canonical family gives a counterexample on nonzero identity diagrams when 2 is
+nonzero).
+
+## References
+
+* [Stacks, Tag 0F7C]
+* [Stacks, Tag 0F7D]
+* [Stacks, Tag 0F7F]
+* Zheng, Lemma 4.10
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -265,15 +281,9 @@ private theorem chosen_canonical (o : Operations l E)
   exact ⟨hgamma k r p i h₁, hgamma ll p q j h₂,
     hgamma (k ≫ ll) r q (i ≫ j) h⟩
 
-/- STATEMENT-DISPUTED (repaired): the old theorem asserted quadratic pasting for
-arbitrary gamma. Negating the canonical family disproves it on nonzero identity
-diagrams when 2 is nonzero. The added equation fixes the canonical normalization. -/
 
 /-- Horizontal proper/open transport pasting for the canonically normalized gamma.
-The bridge and its componentwise equation are supplied by the existing transport core.
-Source: Stacks 0F7C, 0F7D and 0F7F; Zheng Lemma 4.10.
-Proof: transport the intrinsic equation through the canonical bridge; naturality and
-inverse cancellation identify the resulting composite. -/
+The bridge and its componentwise equation are supplied by the existing transport core. -/
 theorem integralSystemProperOpenTransportPastingHorizontal
     (o : Operations l E) (c : Compositors l E o)
     (_a : OpenComparisons l E o c)

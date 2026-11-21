@@ -10,7 +10,14 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenRestri
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.RingOpenMapNormalizedRefinement
 import WeilConjectures.SixFunctors.PurCompactSupport.RingOpenMapOpenUnit
 
-/-! # Invertibility of the canonical open map on the finite-Tor domain -/
+/-! # Invertibility of the canonical open map on the finite-Tor domain
+
+## References
+
+* Zheng, Section 5, Lemma 5.13 and Constructions 5.14–5.15
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 0F7I]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,28 +30,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
-/-- The canonical inverse-transpose open map is invertible on each finite-Tor input.
-Source: Stacks 0F7B and 0F7I; Zheng Section 5, Lemma 5.13 and Constructions 5.14--5.15;
-the finite and integral cases of lem-sf-ring-open-refinement, steps 1 and 2.
-
-Proof: refinementOpenMap is defined using the inverse of restriction to the clopen
-section and the open adjunction. Its restriction to X is an isomorphism by the
-open-unit and restriction calculation. For finite coefficients the input has bounded
-constructible cohomology and etale origin. Proper base change identifies the image on
-the complement of X with the direct image of zero, hence zero. The cone therefore
-restricts to zero both on X and on its complement; open-closed conservativity makes
-the cone zero. Transport through the canonical constant-ring module equivalence.
-For completed integral coefficients take the normalized strict reduction system of
-the input, whose finite levels satisfy the same origin and common bounds. Apply the
-same open-unit/counit word as an actual semilinear-system map. The finite argument
-makes every evaluation of its cone zero; conservative system evaluations make the
-system map invertible. Its total limit is invertible. Primitive open and proper
-realization and their unit/counit normalization identify this total-limit map with
-refinementOpenMap itself. Thus no equality of integral arrows is deduced from
-agreement of their reductions. All constructions apply to the empty input scheme,
-zero complexes, and identity refinements, and use only relative separatedness of f.
-Naturality, shifts, the normalization equation and the proper pushforward word are
-not part of this assertion: they are proved separately from the explicit formula. -/
+/-- The canonical inverse-transpose open map is invertible on each finite-Tor input. -/
 theorem ringOpenMap_isIso
     (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
     {X Y : Scheme.{max u v}} {f : X ⟶ Y}

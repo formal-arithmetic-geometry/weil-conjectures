@@ -11,7 +11,11 @@ import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitCanonicalMo
 
 /-! # Total-limit normalization of the ordinary scalar augmentation
 
-Source: Stacks Tags 07A6, 0D6E and 0941.
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -29,8 +33,7 @@ local instance (priority := 10000) scalarUnitSequenceSmall (T : Scheme.{u}) :
     EssentiallySmall.{u + 1} (ℕ × T.ProEt) :=
   coefficientSequenceEssentiallySmall.{u, 0} T
 
-/-- The ordinary constant/limit adjunct of the quotient-system unit, on complexes.
-Source: Stacks Tag 07A6. -/
+/-- The ordinary constant/limit adjunct of the quotient-system unit, on complexes. -/
 def openScalarComplexAugmentation (T : Scheme.{u}) (M : CompletionUnit.OrdinaryModel l E T)
     (Q : CochainComplex (scalarReductionSource.{u, u} l E T) ℤ) :
     ((Functor.const ℕᵒᵖ : scalarReductionSource.{u, u} l E T ⥤ _).mapHomologicalComplex
@@ -77,17 +80,7 @@ private theorem openDvrCanonicalLimitFormula (T : Scheme.{u})
     (lim : (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E T) ⥤ _).rightDerivedFunctorUnit Z = _
   exact Category.id_comp _
 
-/-- A normalized derived Hom formula gives the ordinary constant/limit adjunct.
-Source: Stacks Tags 07A6, 0D6E and 0941.
-
-Proof: expand the Hom equivalence as the adjunction unit followed by the right
-adjoint on f, then compose with the exact restriction localization comparison.
-Its inverse in systemLimitUnit cancels. Ordinary limit projections identify the
-model's limitComparison with the composite-functor comparison followed by c.
-The const/limit Hom equivalence takes the explicitly defined augmentation back
-to the ordinary model's unit. Finally hη cancels the termwise comparison in the
-total derived limit. These are equalities of total derived-limit maps; finite
-projections are used only for the ordinary limit identity. -/
+/-- A normalized derived Hom formula gives the ordinary constant/limit adjunct. -/
 theorem openDvrScalarUnitFormula (T : Scheme.{u})
     (S : CoefficientDerivedSystemCalculus.{u, u} l E T)
     (M : CompletionUnit.OrdinaryModel l E T)

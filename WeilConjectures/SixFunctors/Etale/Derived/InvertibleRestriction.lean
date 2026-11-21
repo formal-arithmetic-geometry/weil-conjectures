@@ -42,9 +42,7 @@ namespace CategoryTheory.MonoidalCategory
 
 /-- Let `L : C ⥤ D` be a functor between monoidal categories with `L(K ⊗ M) ≅ L K ⊗ L M`
 naturally, and detecting identities of the unit. An endomorphism `γ` of an invertible object `F`
-with `L γ = 𝟙` is the identity: with `M` an inverse of `F`, `γ ▷ M` is conjugate to an
-endomorphism of the unit mapped to `𝟙` by `L`, hence is `𝟙`, and `γ` is recovered from `γ ▷ M`
-by tensoring with `F` on the right. -/
+with `L γ = 𝟙` is the identity. -/
 lemma eq_id_of_map_eq_id_of_tensorInverse {C D : Type*} [Category C] [MonoidalCategory C]
     [Category D] [MonoidalCategory D] (L : C ⥤ D)
     (τ : (Functor.postcompose₂.obj L).obj (curriedTensor C) ≅
@@ -84,8 +82,7 @@ namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
-/-- A constant sheaf of `Λ`-modules with finitely generated value is finite locally constant:
-it is trivialised by the identity cover, and its stalks are its value. -/
+/-- A constant sheaf of `Λ`-modules with finitely generated value is finite locally constant. -/
 instance isFiniteLocallyConstantSheaf_constantSheaf (N : ModuleCat.{u + 1} Λ)
     [Module.Finite Λ N] :
     IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
@@ -111,7 +108,7 @@ variable {Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 
 include hi in
 /-- An endomorphism of the unit `Λ_X` of `D(X_ét, Λ)` which becomes the identity after `Li^*` is
-the identity: it is a morphism of finite locally constant sheaves placed in degree zero. -/
+the identity. -/
 lemma eq_id_of_leftDerivedUpperStar_map_eq_id
     (δ : 𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) ⟶ 𝟙_ _)
     (hδ : (L((i)^*[ModuleCat.{u + 1} Λ])).map δ = 𝟙 _) : δ = 𝟙 _ := by
@@ -144,10 +141,7 @@ lemma eq_id_of_leftDerivedUpperStar_map_eq_id
 
 include hi in
 /-- An endomorphism `γ` of an invertible object `F` of `D(X_ét, Λ)` with `Li^* γ = 𝟙` is the
-identity: with `M` an inverse of `F`, `γ ▷ M` is conjugate to an endomorphism of the unit which
-becomes the identity after `Li^*`, by monoidality of `Li^*`, and `γ` is recovered from `γ ▷ M`
-by tensoring with `F` (`CategoryTheory.MonoidalCategory.eq_id_of_map_eq_id_of_tensorInverse`).
--/
+identity. -/
 lemma eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible
     {F : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hF : DerivedCategory.isInvertible Λ X F) (γ : F ⟶ F)
@@ -163,8 +157,7 @@ section Surjective
 variable {Z : Scheme.{u}} (π : Z ⟶ X) [Surjective π]
 
 /-- An endomorphism of the unit `Λ_X` of `D(X_ét, Λ)` which becomes the identity after `Lπ^*`
-for a surjective `π` is the identity: it is a morphism of sheaves placed in degree zero, and the
-pullback of sheaves along `π` is faithful. -/
+for a surjective `π` is the identity. -/
 lemma eq_id_of_leftDerivedUpperStar_map_eq_id_of_surjective
     (δ : 𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) ⟶ 𝟙_ _)
     (hδ : (L((π)^*[ModuleCat.{u + 1} Λ])).map δ = 𝟙 _) : δ = 𝟙 _ := by
@@ -194,8 +187,7 @@ lemma eq_id_of_leftDerivedUpperStar_map_eq_id_of_surjective
     _ = 𝟙 _ := by rw [← hδ₀, Category.id_comp, Iso.inv_hom_id]
 
 /-- An endomorphism `γ` of an invertible object `F` of `D(X_ét, Λ)` with `Lπ^* γ = 𝟙` for a
-surjective `π` is the identity, as in
-`AlgebraicGeometry.Etale.eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible`. -/
+surjective `π` is the identity. -/
 lemma eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible_of_surjective
     {F : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hF : DerivedCategory.isInvertible Λ X F) (γ : F ⟶ F)

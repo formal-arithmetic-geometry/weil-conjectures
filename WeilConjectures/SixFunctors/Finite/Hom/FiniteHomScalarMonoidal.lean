@@ -13,6 +13,11 @@ import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.EtaleScalarNorm
 /-! # Generic scalar monoidality with the finite-Hom interface
 
 Share the site-category instances before specializing to finite coefficient quotients.
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0FPT]
 -/
 
 @[expose] public noncomputable section
@@ -40,14 +45,7 @@ private theorem domainMonoidal_of_core
   exact ⟨c, heq_of_eq he, fun U V ↦ heq_of_eq (ht U V),
     β, β', (fun _ _ ↦ HEq.rfl), (fun _ _ ↦ HEq.rfl), hb⟩
 
-/-- The normalized strong monoidal scalar structure in the shared finite-Hom predicate.
-Source: Stacks 07A4 and 0FPT.
-
-Proof: take the already proved canonical scalar CoreMonoidal structure. Replace
-its unit and tensor equalities by heterogeneous equalities, and choose the actual
-Koszul isomorphisms for the two braiding witnesses. Their heterogeneous equalities
-are reflexive and their compatibility is the proved scalar braidedness equation.
-Pair this structure with the proved all-complex normalization equations. -/
+/-- The normalized strong monoidal scalar structure in the shared finite-Hom predicate. -/
 theorem finiteHomScalar_monoidal
     (A B : Type (u + 1)) [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :
     FiniteHomDomainMonoidal (Etale.scalarExtension φ T)

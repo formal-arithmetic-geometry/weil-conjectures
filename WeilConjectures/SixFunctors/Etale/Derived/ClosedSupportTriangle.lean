@@ -13,18 +13,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Localization
 
 Let `i : Z ⟶ X` be a closed immersion with open complement `j : U ⟶ X`, and let `Ri^!` be the
 right adjoint of the direct image `Ri_*` on the unbounded derived categories of étale sheaves of
-modules (`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`, blueprint
-`lemma-local-cohomology-right-adjoint--1`). This file records:
-
-* the closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` for every `K`, deduced from the supported localization
-  triangle `AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization` along
-  `Ri_! ≅ Ri_*` and the uniqueness of right adjoints.
-
-No constructibility is used anywhere.
+modules (`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`). This file
+records the closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1]` for every
+`K`. No constructibility is used anywhere.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_distTriang_closedSupport`
+
+## Implementation details
+
+The triangle is deduced from the supported localization triangle
+`AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization` along `Ri_! ≅ Ri_*` and
+the uniqueness of right adjoints.
 -/
 
 @[expose] public section
@@ -42,8 +43,7 @@ variable {C D : Type*} [Category* C] [Category* D] [HasZeroObject C] [HasShift C
 
 /-- A distinguished triangle whose first morphism is the counit `F G K ⟶ K` of an adjunction
 `F ⊣ G` gives one whose first morphism is the counit `F' G' K ⟶ K` of an adjunction `F' ⊣ G'`
-with `F ≅ F'`, the other morphism being unchanged: the comparison of the right adjoints is
-compatible with the counits (`CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit`). -/
+with `F ≅ F'`, the other morphism being unchanged. -/
 lemma exists_distTriang_of_counit_iso {F F' : D ⥤ C} {G G' : C ⥤ D} (adj : F ⊣ G)
     (adj' : F' ⊣ G') (e : F ≅ F') {K L : C} {v : K ⟶ L}
     {w : L ⟶ (F.obj (G.obj K))⟦(1 : ℤ)⟧} (hw : Triangle.mk (adj.counit.app K) v w ∈ distTriang C) :
@@ -76,23 +76,15 @@ section Triangle
 variable {R : Type (u + 1)} [CommRing R] [Finite R] {Z U X : Scheme.{u}} (i : Z ⟶ X)
   [IsClosedImmersion i] [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- Blueprint `lemma-local-cohomology-right-adjoint--2`: Closed-support triangle before restriction.
-
-Let `i : Z ⟶ X` be a closed immersion with open complement `j : U ⟶ X`, and let `Ri^!` be the
-right adjoint of the direct image `Ri_*` on the unbounded derived categories of étale sheaves of
-modules (`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`, blueprint
-`lemma-local-cohomology-right-adjoint--1`). For every `K` the counit of `Ri_* ⊣ Ri^!` and the unit
-of `Lj^* ⊣ Rj_*` extend to a distinguished triangle
+/-- Closed-support triangle: let `i : Z ⟶ X` be a closed immersion with open complement
+`j : U ⟶ X`, and let `Ri^!` be the right adjoint of the direct image `Ri_*` on the unbounded
+derived categories of étale sheaves of modules
+(`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`). For every `K` the
+counit of `Ri_* ⊣ Ri^!` and the unit of `Lj^* ⊣ Rj_*` extend to a distinguished triangle
 ```
   i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (i_* Ri^! K)[1].
 ```
-No constructibility is assumed of the values of the right adjoint.
-
-Since `i` is proper, `Ri_! ≅ Ri_*`
-(`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar`), so `Ri^!` is also
-right adjoint to `Ri_!`, and the triangle is the supported localization triangle
-(`AlgebraicGeometry.Etale.existsUnique_distTriang_supportedLocalization`) transported along the
-comparison of the two right adjoints, which is compatible with the counits. -/
+-/
 theorem exists_distTriang_closedSupport (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) :
     ∃ w, Triangle.mk ((derivedLowerStarClosedUpperShriekAdjunction i j hij).counit.app K)

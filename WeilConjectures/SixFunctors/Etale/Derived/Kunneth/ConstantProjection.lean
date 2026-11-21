@@ -17,20 +17,21 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 
 Let `X` be a quasi-compact quasi-separated scheme. For `E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the
 canonical map `RΓ(X_ét, E) ⊗ᴸ K ⟶ RΓ(X_ét, E ⊗ᴸ K_X)` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isGE_int`, blueprint
-`corollary-open-direct-image-over-field--2`, [Stacks 0F0E]). More generally this holds over any
-principal ideal domain
-(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isPrincipalIdealRing`). Abelian sheaves are
-sheaves of modules over `ULift ℤ`, and the map is `AlgebraicGeometry.Etale.constantProjectionMap`.
+(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isGE_int`). More generally this holds
+over any principal ideal domain
+(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_isPrincipalIdealRing`), and for any
+commutative ring `Λ` when `E` is bounded below and `K` has Tor amplitude in `[b, ∞)`
+(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_torAmplitudeGE`).
 
-More generally, for any commutative ring `Λ`, the map is an isomorphism for `E` bounded below
-and `K` of Tor amplitude in `[b, ∞)`
-(`AlgebraicGeometry.Etale.isIso_constantProjectionMap_of_torAmplitudeGE`): it is the projection
-map of the adjunction `c_X ⊣ RΓ_X`, which is an isomorphism at flat modules placed in degree `0`
-because `RᵠΓ(X, -)` commutes with filtered colimits on a qcqs scheme, hence at every `K` of Tor
-amplitude bounded below
-(`CategoryTheory.Functor.isIso_mapDerivedCategoryProjectionMap_app_of_torAmplitudeGE`).
-Over a principal ideal domain such as `ℤ`, every `K ∈ D^{≥ b}` has Tor amplitude in `[b - 1, ∞)`.
+## Implementation details
+
+Abelian sheaves are sheaves of modules over `ULift ℤ`, and the map is
+`AlgebraicGeometry.Etale.constantProjectionMap`, the projection map of the adjunction
+`c_X ⊣ RΓ_X`.
+
+## References
+
+* [Stacks, Tag 0F0E]
 -/
 
 @[expose] public section
@@ -46,7 +47,7 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 namespace AlgebraicGeometry.Etale
 
 /-- Replace the natural transformation `σ` in `(σ.app X).app Y` by `τ = σ`, at the level of
-natural transformations: the kernel then compares `σ` and `τ` and not their components. -/
+natural transformations. -/
 private lemma app_app_eq_of_eq {C D E : Type*} [Category* C] [Category* D] [Category* E]
     {F G : C ⥤ D ⥤ E} {τ : F ⟶ G} {X : C} {Y : D} (σ : F ⟶ G) (hσ : σ = τ) :
     (σ.app X).app Y = (τ.app X).app Y :=
@@ -61,10 +62,8 @@ variable (A : Type (u + 2)) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbel
   [Abelian.HasFunctorialFlatResolution A] (W : Scheme.{u})
   [(constantSheaf W.smallEtaleTopology A).PreservesFlat]
 
-/-- The derived tensor comparison of the constant sheaf functor at `M`, `N`. The equation is
-proved at the level of natural transformations: the instance proofs abstracted in
-`AlgebraicGeometry.Etale.leftDerivedConstantSheafTensorComparison` differ from the ones elaborated
-here, and comparing the components directly unfolds the derived tensor comparison. -/
+/-- The defining equation of the derived tensor comparison of the constant sheaf functor at `M`,
+`N`. -/
 lemma leftDerivedConstantSheafTensorComparison_eq (M N : DerivedCategory A) :
     leftDerivedConstantSheafTensorComparison A W M N =
       ((constantSheaf W.smallEtaleTopology A).leftDerivedTensorComparison.app M).app N :=
@@ -109,7 +108,7 @@ theorem isIso_constantProjectionMap_of_torAmplitudeGE
 
 /-- Over a principal ideal domain `Λ`, on a quasi-compact quasi-separated scheme `X`, the
 constant-tensor comparison `RΓ_X E ⊗ᴸ K ⟶ RΓ_X (E ⊗ᴸ c_X K)` is an isomorphism for `E` and `K`
-bounded below: every complex concentrated in degrees `≥ b` has Tor amplitude in `[b - 1, ∞)`. -/
+bounded below. -/
 theorem isIso_constantProjectionMap_of_isPrincipalIdealRing [IsDomain Λ] [IsPrincipalIdealRing Λ]
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (a : ℤ) [E.IsGE a]
     (K : DerivedCategory (ModuleCat.{u + 1} Λ)) (b : ℤ) [K.IsGE b] :
@@ -117,13 +116,9 @@ theorem isIso_constantProjectionMap_of_isPrincipalIdealRing [IsDomain Λ] [IsPri
   isIso_constantProjectionMap_of_torAmplitudeGE Λ X E a K (b - 1)
     (torAmplitudeGE_of_isGE_of_isPrincipalIdealRing K b)
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: tensor with a constant complex over `ℤ`
-([Stacks 0F0E]).
-
-Let `X` be a quasi-compact quasi-separated scheme. For `E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the
+/-- Let `X` be a quasi-compact quasi-separated scheme. For `E ∈ D⁺(X_ét)` and `K ∈ D⁺(ℤ)`, the
 canonical map `RΓ(X_ét, E) ⊗ᴸ_ℤ K ⟶ RΓ(X_ét, E ⊗ᴸ_ℤ K_X)`
-(`AlgebraicGeometry.Etale.constantProjectionMap`) is an isomorphism. Abelian sheaves are
-sheaves of modules over `ULift ℤ`. -/
+(`AlgebraicGeometry.Etale.constantProjectionMap`) is an isomorphism. -/
 theorem isIso_constantProjectionMap_of_isGE_int
     (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))))
     (a : ℤ) [E.IsGE a] (K : DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) (b : ℤ)

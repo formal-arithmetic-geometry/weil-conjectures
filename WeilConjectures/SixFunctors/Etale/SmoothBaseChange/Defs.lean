@@ -31,14 +31,8 @@ base-change morphism `AlgebraicGeometry.Etale.baseChange` of
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs`, evaluated at `F`
 placed in degree `0`; it is `AlgebraicGeometry.Etale.baseChangeHomologyMap`, the component
 at `F` of the natural transformation
-`AlgebraicGeometry.Etale.baseChangeHomologyNatTrans`. The property `BC(p, Λ, q)` of the
-blueprint is that this map is an isomorphism for every such square and every `F`.
-
-The base-change square of the blueprint is a Cartesian square
-recorded as `CategoryTheory.IsPullback e h g p`; the coefficient conventions
-(`sbc-def-coefficient-conventions`) are a commutative ring `Λ` and sheaves of `Λ`-modules on the
-small étale site, `Sheaf T.smallEtaleTopology (ModuleCat Λ)`, with the derived categories of
-`WeilConjectures.SixFunctors.Etale.Derived`.
+`AlgebraicGeometry.Etale.baseChangeHomologyNatTrans`. The property `BC(p, Λ, q)` is that this
+map is an isomorphism for every such square and every `F`.
 
 The coefficient condition of the theorem is
 `AlgebraicGeometry.Scheme.IsTorsionSheafOfInvertibleOrder`, which lives next to the
@@ -46,26 +40,6 @@ torsion condition of proper base change in
 `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf`. A natural number `n`
 is *invertible on `S`* when `IsUnit (n : Γ(S, ⊤))`; no definition is introduced for that,
 it is written out where it is used.
-
-## Implementation notes
-
-The source and the target of the base-change map are the values of the two functors
-`AlgebraicGeometry.Etale.baseChangeSourceFunctor` and
-`AlgebraicGeometry.Etale.baseChangeTargetFunctor`, namely `H^q(p^*(R g_* F[0]))` and
-`H^q(R h_*(e^*(F[0])))`. Since `p⁻¹` and `e⁻¹` are exact these are the sheaves
-`p⁻¹ R^q g_* F` and `R^q h_* e⁻¹ F` of the blueprint, but the two identifications are not
-yet available: the isomorphisms `Etale.leftDerivedUpperStarHomologyFunctorIso` and
-`Etale.singleFunctorCompLeftDerivedUpperStarIso` of
-`WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar` are stated on the unbounded
-derived category, and their bounded below counterparts are not in Mathlib. Recording them
-is the first thing a file connecting these statements to the classical ones needs.
-
-The compatibilities of the base-change map asserted by the blueprint subsection `prose-08-06`
-are proved elsewhere: naturality in `F` is
-`AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality` (and
-`AlgebraicGeometry.Etale.baseChange_naturality` for the derived map), while compatibility with
-the composition of two Cartesian squares and with étale localisation are in
-`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality`.
 
 ## Main definitions
 
@@ -77,9 +51,26 @@ the composition of two Cartesian squares and with étale localisation are in
 - `AlgebraicGeometry.Etale.UniversalBaseChangeProperty`: `BC(p, Λ, q)` for every base change
   of `p`.
 
+## Implementation details
+
+The source and the target of the base-change map are the values of the two functors
+`AlgebraicGeometry.Etale.baseChangeSourceFunctor` and
+`AlgebraicGeometry.Etale.baseChangeTargetFunctor`, namely `H^q(p^*(R g_* F[0]))` and
+`H^q(R h_*(e^*(F[0])))`. Since `p⁻¹` and `e⁻¹` are exact these are the sheaves
+`p⁻¹ R^q g_* F` and `R^q h_* e⁻¹ F`, but the two identifications are not
+yet available: the isomorphisms `Etale.leftDerivedUpperStarHomologyFunctorIso` and
+`Etale.singleFunctorCompLeftDerivedUpperStarIso` of
+`WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar` are stated on the unbounded
+derived category, and their bounded below counterparts are not in Mathlib.
+
+Naturality of the base-change map in `F` is
+`AlgebraicGeometry.Etale.baseChangeHomologyMap_naturality`; compatibility with the composition
+of two Cartesian squares and with étale localisation are in
+`WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality`.
+
 ## References
 
-- Stacks Project, Section 59.88, <https://stacks.math.columbia.edu/tag/0F02>
+* [Stacks, Tag 0F02]
 -/
 
 @[expose] public section
@@ -94,8 +85,7 @@ namespace AlgebraicGeometry
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- The constant sheaf on the small étale site of `Y` with value the `Λ`-module `Λ/dΛ`,
-the coefficients `ℤ/dℤ` of the blueprint read over `Λ`. -/
+/-- The constant sheaf on the small étale site of `Y` with value the `Λ`-module `Λ/dΛ`. -/
 noncomputable def Etale.constantModSheaf (Y : Scheme.{u}) (d : ℕ) :
     Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=
   (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
@@ -170,9 +160,7 @@ noncomputable def Etale.baseChangeHomologyMap (sq : IsPullback e h g p) (q : ℤ
       (Etale.baseChangeTargetFunctor Λ e h q).obj F :=
   (Etale.baseChangeHomologyNatTrans Λ sq q).app F
 
-/-- The base-change map is natural in the coefficient sheaf. This is the naturality
-asserted by the blueprint subsection `prose-08-06`, and the input to the comparison of the
-two long exact sequences in `AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`. -/
+/-- The base-change map is natural in the coefficient sheaf. -/
 lemma Etale.baseChangeHomologyMap_naturality (sq : IsPullback e h g p) (q : ℤ)
     {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (α : F ⟶ G) :
     Etale.baseChangeHomologyMap Λ sq q F ≫ (Etale.baseChangeTargetFunctor Λ e h q).map α =
@@ -198,13 +186,8 @@ X --p--> S
 ```
 
 the base-change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` of
-`AlgebraicGeometry.Etale.baseChangeHomologyMap` is an isomorphism. The coefficient ring `Λ`
-plays the role of `ℤ/nℤ` in the blueprint; the hypothesis that `n` be invertible on `S` is
-not part of the property and is carried separately by the statements that need it.
-
-The Cartesian squares are the base-change squares of blueprint `definition-derived-base-change-map`,
-recorded as `IsPullback e h g p`; following blueprint `sbc-def-coefficient-conventions`, the
-coefficients are sheaves of modules over a commutative ring `Λ` on the small étale sites. -/
+`AlgebraicGeometry.Etale.baseChangeHomologyMap` is an isomorphism. The hypothesis that the
+torsion order be invertible on `S` is not part of the property. -/
 def Etale.BaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
   ∀ {T Y : Scheme.{u}} (g : T ⟶ S) (e : Y ⟶ T) (h : Y ⟶ X)
     [QuasiCompact g] [QuasiSeparated g] (sq : IsPullback e h g p)
@@ -212,8 +195,7 @@ def Etale.BaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
     IsIso (Etale.baseChangeHomologyMap Λ sq q F)
 
 /-- The base-change property `BC(p, Λ, q)` holds *universally* when it holds for every base
-change `p' : X' ⟶ S'` of `p` along a morphism `a : S' ⟶ S`. This is the form of the property
-in which the blueprint subsection `prose-08-06` states it. -/
+change `p' : X' ⟶ S'` of `p` along a morphism `a : S' ⟶ S`. -/
 def Etale.UniversalBaseChangeProperty (p : X ⟶ S) (q : ℤ) : Prop :=
   ∀ ⦃S' X' : Scheme.{u}⦄ (a : S' ⟶ S) (b : X' ⟶ X) (p' : X' ⟶ S'),
     IsPullback b p' p a → Etale.BaseChangeProperty Λ p' q

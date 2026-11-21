@@ -153,8 +153,7 @@ lemma epi_and_exact_homologyFunctor_zero_singleFunctor_tensor (B : Sheaf X.small
 
 /-- **The degree zero homology of the derived tensor product of sheaves** is the tensor product:
 the comparison `H⁰(F[0] ⊗ᴸ B[0]) ⟶ H⁰((F ⊗ B)[0]) = F ⊗ B` is an isomorphism for every sheaf `F`.
-Both sides are right exact in `F` and agree for `F` flat, and every sheaf is a quotient of a flat
-one. -/
+-/
 lemma isIso_homologyFunctor_map_singleFunctorTensorToSingle_app
     (B F : Sheaf X.smallEtaleTopology A) :
     IsIso ((DerivedCategory.homologyFunctor _ 0).map ((singleFunctorTensorToSingle B).app F)) := by

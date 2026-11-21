@@ -53,15 +53,7 @@ def commonStagePullbackTransition {E L : Index l Ω} (h : E ≤ L) :
       (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L h) g ≪≫
     Functor.isoWhiskerRight (operationStageTransitionIso l Ω Y E L h).symm _
 
-/-- The specified quotient pullback is the functor of its normalized coherent stage morphism.
-
-Proof: the existing comparison-data theorem gives coherent transition comparisons.
-Their prescribed components identify them with the scalar comparisons conjugated
-by the recorded transition identifications. Substitute this equality in their tower
-law. The resulting stage-system morphism has the specified object formula, and
-its representative action has exactly the prescribed conjugation formula, by the
-same component identities. Uniqueness of the specified quotient functor identifies
-it with this descended functor. No shift or inverse comparison is needed. -/
+/-- The specified quotient pullback is the functor of its normalized coherent stage morphism. -/
 theorem commonStagePullbackNormalizedDescent :
     ∃ hcoh : StageSystem.pairFunctorCoherent
       (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y)

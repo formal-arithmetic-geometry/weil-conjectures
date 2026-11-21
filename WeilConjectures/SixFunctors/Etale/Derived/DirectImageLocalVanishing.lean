@@ -40,10 +40,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- **Higher direct images vanish when the cohomology vanishes locally.** For `h : Y ⟶ X` and an
 étale sheaf `F` of `Λ`-modules on `Y`, `R^q h_* F = 0` as soon as every point of every étale
-`X`-scheme `W` lies in the image of an étale `X`-scheme `V ⟶ W` with `H^q(V ×_X Y, F|) = 0`.
-A section of `R^q h_* F` is locally a class of the presheaf `V ↦ H^q(V ×_X Y, F|)`
-(`AlgebraicGeometry.Etale.isLocallyBijective_higherDirectImagePresheafToSheaf`), hence locally
-zero. -/
+`X`-scheme `W` lies in the image of an étale `X`-scheme `V ⟶ W` with `H^q(V ×_X Y, F|) = 0`. -/
 theorem Etale.isZero_higherDirectImage_of_forall_exists_subsingleton {X Y : Scheme.{u}}
     (h : Y ⟶ X) (q : ℤ) (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (H : ∀ (W : X.Etale) (x : W.left), ∃ (V : X.Etale) (g : V ⟶ W), x ∈ Set.range g.left ∧
@@ -124,11 +121,7 @@ theorem Etale.isZero_higherDirectImage_of_forall_exists_of_acyclic {X Y : Scheme
 ring which is torsion as an additive group, `f : X ⟶ Y` a morphism of schemes and `c ∈ ℕ`. If
 every point of every étale `Y`-scheme `W` lies in the image of an étale `Y`-scheme `V ⟶ W` such
 that `V ×_Y X` has torsion cohomological dimension at most `c`, then `R^q f_* M = 0` for every
-étale sheaf `M` of `Λ`-modules on `X` and every `q > c`.
-
-By restriction of scalars to `ULift ℤ`, as in
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_quasiCompact_of_two_mul_lt`, this is
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_exists_of_acyclic`. -/
+étale sheaf `M` of `Λ`-modules on `X` and every `q > c`. -/
 theorem Etale.isZero_higherDirectImage_of_forall_exists (hΛ : IsAddTorsion Λ)
     {X Y : Scheme.{u}}
     (f : X ⟶ Y) (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -161,14 +154,7 @@ variable (Λ) in
 /-- **Reduction of the vanishing of higher direct images to separably closed fields.** Let `K` be
 a field and `f : X ⟶ Y` a morphism of `K`-schemes of finite type. If for every separably closed
 field `L` over `K`, with base change `p₁ : X_L ⟶ X`, the higher direct image
-`R^q (p₁ ≫ f)_* (p₁^* F)` vanishes, then so does `R^q f_* F`.
-
-This is the limit argument of
-`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_forall_topologicalKrullDim_le`: by the limit
-theorem `AlgebraicGeometry.Etale.higherDirectImage_limit` the stalks of `R^q (X_L → Y)_* F` over
-the finite subextensions `L` of `K^sep / K` have colimit the stalk of `R^q (X_{K^sep} → Y)_* F`,
-which vanishes by hypothesis, and the transition maps from `R^q f_* F` are monomorphisms
-(`AlgebraicGeometry.Etale.mono_higherDirectImageOverMap`). -/
+`R^q (p₁ ≫ f)_* (p₁^* F)` vanishes, then so does `R^q f_* F`. -/
 theorem Etale.isZero_higherDirectImage_of_forall_isSepClosed {K : Type u} [Field K]
     {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]

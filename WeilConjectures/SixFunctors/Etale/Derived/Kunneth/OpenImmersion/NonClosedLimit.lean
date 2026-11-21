@@ -12,10 +12,9 @@ public import WeilConjectures.AlgebraicGeometry.LimitFiberProduct
 /-!
 # Base change along open immersions: passing to a limit of the factors
 
-This file contains the limit step of the "stalks over points with positive transcendence
-degree" part of the proof of blueprint `corollary-open-direct-image-over-field--2`. Let `L` be a
-field and suppose that the statement of `corollary-open-direct-image-over-field--2` holds for all
-data with `dim X + dim Y < N`.
+This file contains the limit step for the stalks at non-closed points in the base change theorem
+for open immersions over a field. Let `L` be a field and suppose that
+`AlgebraicGeometry.Etale.OpenImmersionBaseChangeBelow Λ N` holds.
 
 * `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_snd`: if `Y' = lim Yᵢ` is a
   cofiltered limit of affine `L`-schemes of finite type with `dim X + dim Yᵢ < N`, then the base
@@ -24,12 +23,13 @@ data with `dim X + dim Y < N`.
 * `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_fst`: if `X' = lim Xᵢ` is a
   cofiltered limit of affine `L`-schemes of finite type with `dim Xᵢ + dim Y < N` and
   `U' ⊆ X'` is a quasi-compact open, then the base change maps of the square
-  `U' ×_{X'} (X' ×_L Y) ⟶ X' ×_L Y` are isomorphisms. The open `U'` descends to an open
-  `Uᵢ ⊆ Xᵢ`.
+  `U' ×_{X'} (X' ×_L Y) ⟶ X' ×_L Y` are isomorphisms.
 
-Both follow from the limit theorem
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall` applied to the systems of fibre products,
-which are limits by the commutation of fibre products with limits.
+## Implementation details
+
+Both results follow from `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_forall`
+applied to the systems of fibre products, which are limits since fibre products commute with
+limits. In the first-factor case the open `U'` descends to an open `Uᵢ ⊆ Xᵢ`.
 -/
 
 @[expose] public section
@@ -164,12 +164,10 @@ lemma quasiSeparatedSpace_of_field {K : Type u} [Field K] {X : Scheme.{u}}
   have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian a
   inferInstance
 
-/-- Proof of blueprint `corollary-open-direct-image-over-field--2`, the limit step over a limit
-`Y' = lim Yᵢ` of the second factor: let `j : U ⟶ X` be an open immersion of schemes of finite type
-over a field `L` and `Y' = lim Yᵢ` a cofiltered limit of affine `L`-schemes of finite type. If the
-statement of `corollary-open-direct-image-over-field--2` holds for all data with `dim X + dim Y < N`
-and `dim X + dim Yᵢ < N` for all `i`, then the base change maps of the square
-`V = U ×_X W ⟶ W = X ×_L Y'` are isomorphisms. -/
+/-- Limit step over the second factor: let `j : U ⟶ X` be an open immersion of schemes of finite
+type over a field `L` and `Y' = lim Yᵢ` a cofiltered limit of affine `L`-schemes of finite type.
+If `Etale.OpenImmersionBaseChangeBelow Λ N` holds and `dim X + dim Yᵢ < N` for all `i`, then the
+base change maps of the square `V = U ×_X W ⟶ W = X ×_L Y'` are isomorphisms. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_snd {L : Type u} [Field L]
     {X U : Scheme.{u}} (aX : X ⟶ Spec (.of L)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     (j : U ⟶ X) [IsOpenImmersion j]
@@ -249,14 +247,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_snd {L : Type u} [Field L]
     exact IH aX (qD.app i) j (pD.app i) ((pullback.snd a' qD).app i) (hX i) (eD.app i)
       (hD.app i) (hsq i) n hn hΛ (hdim i) q G
 
-/-- Proof of blueprint `corollary-open-direct-image-over-field--2`, the limit step over a limit
-`X' = lim Xᵢ` of the first factor: let `X' = lim Xᵢ` be a cofiltered limit of affine schemes of
+/-- Limit step over the first factor: let `X' = lim Xᵢ` be a cofiltered limit of affine schemes of
 finite type over a field `L`, `j : U' ⟶ X'` a quasi-compact open immersion and `Y` a scheme of
-finite type over `L`. If the statement of `corollary-open-direct-image-over-field--2` holds for all
-data with `dim X + dim Y < N` and `dim Xᵢ + dim Y < N` for all `i`, then the base change maps of the
-square `V = U' ×_{X'} W ⟶ W = X' ×_L Y` are isomorphisms. The open `U'` descends to an open `U₀` of
-some `X_{i₀}`, and the square is the limit
-of the squares `U₀ ×_{X_{i₀}} Xᵢ ⟶ Xᵢ` base changed to `Xᵢ ×_L Y`, for `i ⟶ i₀`. -/
+finite type over `L`. If `Etale.OpenImmersionBaseChangeBelow Λ N` holds and `dim Xᵢ + dim Y < N`
+for all `i`, then the base change maps of the square `V = U' ×_{X'} W ⟶ W = X' ×_L Y` are
+isomorphisms. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_fst {L : Type u} [Field L]
     {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of L)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     {I : Type u} [SmallCategory I] [IsCofiltered I] {D : I ⥤ Scheme.{u}} {c : Cone D}

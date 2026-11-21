@@ -60,7 +60,7 @@ variable {FC : A → A → Type (u + 1)} {CC : A → Type (u + 1)}
   [PreservesFiniteLimits (CategoryTheory.forget A)]
 
 /-- For a closed immersion `i`, restricting an extension by zero recovers the complement:
-`D(i^*) (Ri_! Q) ≅ Q`, since `Ri_! = Ri_* = D(i_*)` and `i^* i_* ≅ 𝟭`. -/
+`D(i^*) (Ri_! Q) ≅ Q`. -/
 noncomputable def mapDerivedCategoryUpperStarRightDerivedLowerShriekIso {Z T : Scheme.{u}}
     (i : Z ⟶ T) [IsClosedImmersion i] [HasCompactification i]
     [Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
@@ -74,8 +74,7 @@ noncomputable def mapDerivedCategoryUpperStarRightDerivedLowerShriekIso {Z T : S
 
 omit [HasSmallSiteSheafify A] [PreservesFiniteLimits (CategoryTheory.forget A)] in
 /-- Extension by zero along a closed immersion `i` preserves Tor amplitude: if the projection
-formula holds for `i` at `P` and `P` has Tor amplitude in `[a, b]`, so does `Ri_! P`, since
-`Ri_! P ⊗ᴸ G ≅ Ri_!(P ⊗ᴸ i^* G)` and `Ri_! = D(i_*)` is exact. -/
+formula holds for `i` at `P` and `P` has Tor amplitude in `[a, b]`, so does `Ri_! P`. -/
 lemma torAmplitudeIn_rightDerivedLowerShriek_of_isClosedImmersion [UpperStarPreservesFlat A]
     [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
     {Z T : Scheme.{u}}
@@ -163,9 +162,7 @@ lemma torAmplitudeIn_obj₁ {X : Scheme.{u}}
 /-- **The exceptional inverse image along a closed immersion, from the open complement.**
 Let `i : Z ⟶ T` be a closed immersion with open complement `j`. If `K` lies in `D_c^[a, b]` with
 Tor amplitude in `[a, b]`, and `Rj_* j^* K` in `D_c^[a, e]` with Tor amplitude in `[a, e]`,
-`b ≤ e`, then `Ri^! K` lies in `D_c^[a, e + 1]` with Tor amplitude in `[a, e + 1]`: the
-localization triangle `Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` bounds `Ri_! Ri^! K`, and for the Tor
-amplitude the projection formula identifies `Ri_!(Ri^! K ⊗ᴸ G)` with `Ri_! Ri^! K ⊗ᴸ i_* G`. -/
+`b ≤ e`, then `Ri^! K` lies in `D_c^[a, e + 1]` with Tor amplitude in `[a, e + 1]`. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isClosedImmersion_of_lowerStar
     [UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)] {Z T U : Scheme.{u}}
     [(Etale.constructibleSheaf (ModuleCat.{u + 1} Λ) T).IsClosedUnderKernels]

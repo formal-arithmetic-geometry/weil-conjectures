@@ -16,17 +16,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.LisseDual
 
 Let `Λ` be a finite ring and `X` a noetherian scheme. Every object `K` of `Dctf(X, Λ)` is
 *site-perfect on a dense open*: there is a dense open `V ⊆ X` such that on every open `W ⊆ V` the
-restriction `K|_W` is dualizable in `D(W_ét, Λ)`, with a dual again in `Dctf(W, Λ)`. This is the
-first step of the proof of blueprint `lemma-verdier-duality-preserves-constructibility--1`: on a
-stratum on which the cohomology of `K` is finite locally constant, the finite-Tor restriction is
-site-perfect.
-
-`K` is represented by a bounded complex `P` of flat constructible sheaves
-(`AlgebraicGeometry.Etale.hasTorAmplitudeIn_iff_exists_flatConstructibleModel`). Its finitely
-many nonzero terms are lisse on a dense open `V`. A lisse flat sheaf is dualizable with a lisse
-flat dual (`AlgebraicGeometry.Etale.exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf`,
-`AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_ihom_unit_of_flat`), so `P|_W` is paired in
-`D(W_ét, Λ)` with its termwise dual (`DerivedCategory.nonempty_exactPairing_Q_obj_rightDual`).
+restriction `K|_W` is dualizable in `D(W_ét, Λ)`, with a dual again in `Dctf(W, Λ)`. This is
+used to show that Verdier duality preserves constructibility.
 
 ## Main statements
 
@@ -70,9 +61,7 @@ lemma constructibleFiniteTor_Q_obj_of_flat {X : Scheme.{u}}
 
 /-- **Generic perfectness**: for a finite ring `Λ` and a complex `K` in `Dctf(X, Λ)` on a
 noetherian scheme `X`, there is a dense open `V ⊆ X` such that on every open `W ⊆ V` the
-restriction `K|_W` has a left dual `D` in `D(W_ét, Λ)` lying in `Dctf(W, Λ)`. This is the
-site-perfectness of the finite-Tor restriction of `K` to a stratum on which its cohomology is
-lisse. -/
+restriction `K|_W` has a left dual `D` in `D(W_ét, Λ)` lying in `Dctf(W, Λ)`. -/
 theorem exists_dense_open_exactPairing {X : Scheme.{u}} [IsNoetherian X]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X K) :
@@ -142,7 +131,7 @@ theorem exists_dense_open_exactPairing {X : Scheme.{u}} [IsNoetherian X]
 
 omit [Finite Λ] in
 /-- On a nonempty noetherian scheme with a single point every constructible sheaf is finite
-locally constant: it is so on a dense open, which is the whole scheme. -/
+locally constant. -/
 lemma isFiniteLocallyConstantSheaf_of_isConstructibleSheaf_of_subsingleton {X : Scheme.{u}}
     [IsNoetherian X] [Subsingleton X] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsConstructibleSheaf F] : IsFiniteLocallyConstantSheaf F := by
@@ -158,11 +147,7 @@ lemma isFiniteLocallyConstantSheaf_of_isConstructibleSheaf_of_subsingleton {X : 
   exact IsFiniteLocallyConstantSheaf.of_iso ((Etale.upperStarId _ X).app F)
 
 /-- **Perfectness at a point**: on a nonempty noetherian scheme with a single point (for
-instance the spectrum of a field), every object of `Dctf(X, Λ)` is dualizable. It is
-represented by a bounded complex of flat constructible, hence lisse flat, sheaves, which are
-dualizable (`AlgebraicGeometry.Etale.exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf`). This is
-the geometric form of blueprint `lemma-perfect-complexes-geometric-point--8`: a finite-Tor point
-complex is perfect. -/
+instance the spectrum of a field), every object of `Dctf(X, Λ)` is dualizable. -/
 theorem isDualizable_of_constructibleFiniteTor_of_subsingleton {X : Scheme.{u}} [IsNoetherian X]
     [Subsingleton X]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}

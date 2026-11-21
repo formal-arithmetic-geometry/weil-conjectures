@@ -9,9 +9,14 @@ public import WeilConjectures.SixFunctors.IntegralOpenReduction.IntegralOpenRedu
 
 /-! # Naturality of augmented reduction presentations
 
-Source: Stacks Project, Tags 03CZ, 06YY and 0941. The strict scalar-unit
-augmentations determine the comparison of an ordinary map in the whole derived
-system category.
+The strict scalar-unit augmentations determine the comparison of an ordinary map in the whole
+derived system category.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -93,19 +98,7 @@ private theorem unitPresentation_natural
   simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ G.map κD.inv) hu
 
 /-- An ordinary map between augmented quotient presentations computes reduction
-of the integral map when its finite tensor components do.
-Source: Stacks Project, Tags 03CZ, 06YY and 0941; the augmentation calculation
-in step 1 of `lem-sf-open-restriction-counit-on-good-complexes`.
-
-Proof: transport the strict augmentations through the finite presentation
-isomorphisms. Their components are the scalar-adjunction units. Naturality of
-those units and the assumed finite squares show that the augmentations commute
-with the two chain maps. This is an equality of ordinary tower maps, checked
-sectionwise in every degree and at every level. Localize the equality and use
-naturality of the exact-functor factorization isomorphisms. Transpose along the
-constant-tower/total-limit adjunction and then along the reduction/limit
-adjunction. The two augmentation normalization equations give the stated equality
-in the entire system derived category. -/
+of the integral map when its finite tensor components do. -/
 theorem augmentedReductionNaturality
     (S : CoefficientDerivedSystemCalculus l E W)
     (Q R : CochainComplex (scalarReductionSource l E W) ℤ)

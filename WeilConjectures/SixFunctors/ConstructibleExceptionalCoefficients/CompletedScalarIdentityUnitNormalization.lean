@@ -11,7 +11,13 @@ public import WeilConjectures.FourierTransform.CompletedLineTensor.CompletedLine
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.ScalarIdentityComplexFormula
 
-/-! # Comparison of native and completed ordinary scalar identity units -/
+/-! # Comparison of native and completed ordinary scalar identity units
+
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 06YY]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -26,8 +32,7 @@ universe u v w
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.ConstructibleExceptionalCoefficients
 
-/-- Fix the native small-site universe for the completed scalar identity calculation.
-Source: Mathlib `essentiallySmallSelf`. -/
+/-- Fix the native small-site universe for the completed scalar identity calculation. -/
 local instance (priority := 10000) completedScalarIdentitySiteSmall (T : Scheme.{w}) :
     EssentiallySmall.{w + 1} T.ProEt := essentiallySmallSelf.{0, w, w + 1} _
 
@@ -287,11 +292,7 @@ private theorem scalar_unit_candidate_model (l : ℕ) [Fact l.Prime]
         pbc_unit_candidate l E T ha := by
   rfl
 
-/-- The two ordinary derived scalar-extension presentations use the same universal data.
-Source: Stacks Project Tag 06YY.
-
-Proof: unfold both scalar-change presentations. They select the same derived extension
-from the same universal change-of-rings witness. -/
+/-- The two ordinary derived scalar-extension presentations use the same universal data. -/
 theorem completed_scalar_identity_extension_eq (l : ℕ) [Fact l.Prime]
     (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{w}) :
@@ -300,13 +301,7 @@ theorem completed_scalar_identity_extension_eq (l : ℕ) [Fact l.Prime]
         completedDerivedScalarExtension l E E (AlgHom.id (Padic l) E) T := by
   exact extension_models_eq l E T
 
-/-- The adjunction-normalized scalar identity is the ordinary completed-coefficient unitor.
-Source: Stacks Project Tags 03DA and 06YY.
-
-Proof: the sectionwise multiplication sends 1 tensor x to x. Apply the derived complex
-representative formula. The two scalar-extension presentations select the same universal
-functor and counit; compare this pair before taking components. Uniqueness of the ordinary
-unitor with its prescribed complex representatives then gives the equality. -/
+/-- The adjunction-normalized scalar identity is the ordinary completed-coefficient unitor. -/
 theorem completed_scalar_identity_unit_normalization (l : ℕ) [Fact l.Prime]
     (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{w})
@@ -318,8 +313,7 @@ theorem completed_scalar_identity_unit_normalization (l : ℕ) [Fact l.Prime]
   have hh' := heq_of_eq hh
   exact hh'
 
-/-- The arrow specified by identity scalar normalization, with the cast kept bundled.
-Source: identity coefficient normalization, Stacks Project Tag 06YY. -/
+/-- The arrow specified by identity scalar normalization, with the cast kept bundled. -/
 def normalizedScalarIdentityArrow {D : Type*} [Category D] {F G : D ⥤ D}
     (h : F = G) (v : G ≅ 𝟭 D) (K : D) : F.obj K ⟶ K :=
   (eqToIso h).hom.app K ≫ v.hom.app K
@@ -338,11 +332,7 @@ private theorem normalized_arrow_heq {D : Type*} [Category D] {F F' G : D ⥤ D}
     HEq (normalizedScalarIdentityArrow h v K) (j.hom.app K') := by
   exact unitor_hom_heq hFG (eqToIso h ≪≫ v) j hu K K' hK
 
-/-- The bundled native identity arrow is the completed ordinary unitor component.
-Source: Stacks Project Tag 06YY.
-
-Proof: evaluate the equality of normalized unitors at the same derived object, retaining
-its source transport as heterogeneous equality. -/
+/-- The bundled native identity arrow is the completed ordinary unitor component. -/
 theorem completed_scalar_identity_arrow_normalization (l : ℕ) [Fact l.Prime]
     (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (T : Scheme.{w})

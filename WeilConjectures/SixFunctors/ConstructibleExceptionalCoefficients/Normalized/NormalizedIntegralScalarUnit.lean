@@ -34,16 +34,7 @@ private theorem faithful_heq {A B : Type*} [Category A] [Category B]
   subst Y Z
   exact heq_of_eq (G.map_injective (eq_of_heq ha))
 
-/-- A multiplication-normalized restricted unit localizes to the specified rational unit.
-Source: exceptional coefficient construction, integral-to-rational identity paragraph;
-scalar extension composition, identity clause.
-
-Proof: the integral normalization theorem identifies the underlying unit arrows.
-The functor equality hS identifies their source objects. Full-subcategory faithfulness
-lifts the underlying comparison to the intrinsic integral category. Apply raw
-rational localization, then use the component characterization in
-sfRationalScalarUnit_existsUnique. The integral representative is unchanged,
-including at the zero object. -/
+/-- A multiplication-normalized restricted unit localizes to the specified rational unit. -/
 theorem normalized_integral_scalar_unit
     (E : FieldStage.{max u v} l) (T : Scheme.{max u v})
     (S : Scalar.{u, v} l Ω (s := .integral E) (t := .integral E)

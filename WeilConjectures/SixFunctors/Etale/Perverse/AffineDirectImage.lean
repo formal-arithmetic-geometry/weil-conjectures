@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.Etale.Perverse.AffinePushforward
 
 Let `f : X ⟶ Y` be an affine morphism of finite type to a separated scheme of finite type over a
 field. For a constructible sheaf `G` on `X` whose support has dimension at most `N`, the stalks
-of `Rᵠf_* G` vanish at every point `y` with `q + dim {y}⁻ > N` (Stacks `0F0X`). Combined with the
+of `Rᵠf_* G` vanish at every point `y` with `q + dim {y}⁻ > N`. Combined with the
 dévissage of
 `AlgebraicGeometry.Etale.DerivedCategory.supportCondition_shift_rightDerivedLowerStar_of_stalk`
 this is the support estimate for `Rf_*` entering the cosupport side of Artin–Gabber.
@@ -27,7 +27,7 @@ this is the support estimate for `Rf_*` entering the cosupport side of Artin–G
   bounded constructible `K` with `K[n]` satisfying the support condition, so does
   `(Rf_* K)[n + d]` for every `d ≥ 0`.
 
-## Implementation notes
+## Implementation details
 
 The relative affine vanishing theorem is
 `AlgebraicGeometry.Etale.isZero_sheafFiber_higherDirectImage_of_isAffineHom`, for a source of
@@ -35,6 +35,10 @@ dimension at most `N`. To apply it to `G`, write `G[0] ≅ Ri_* (i^* G)[0]` for 
 immersion `i` of the support of `G` (the open-closed triangle), so that
 `Rf_* G[0] ≅ R(i ≫ f)_* (i^* G)[0]`. Since `Rᵠf_* G` is constructible, a vanishing stalk at
 the geometric point `Y.algClosurePoint y` forces the vanishing at every geometric point over `y`.
+
+## References
+
+* [Stacks, Tag 0F0X]
 -/
 
 @[expose] public section
@@ -52,7 +56,7 @@ open Scheme _root_.DerivedCategory
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   [HasInvertibleExponent Λ (Spec (.of k))]
 
-/-- **Pointwise support estimate for an affine direct image** (Stacks `0F0X`). Let
+/-- **Pointwise support estimate for an affine direct image**. Let
 `f : X ⟶ Y` be an affine morphism of finite type to a separated scheme of finite type over a
 field, `G` a constructible sheaf on `X` and `s : Spec Ω ⟶ Y` a geometric point over `y ∈ Y`. If
 `s^* Rᵠf_* G ≠ 0`, then the support of `G` is nonempty and, whenever it has dimension at most

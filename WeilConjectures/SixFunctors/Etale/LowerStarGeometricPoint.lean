@@ -20,8 +20,7 @@ its global sections. Hence an epimorphism of étale sheaves of `Λ`-modules on `
 surjective on sections over every étale `Spec k`-scheme
 (`AlgebraicGeometry.Scheme.surjective_app_of_epi_of_isSepClosed'`), and the direct image
 `x_*` along a geometric point `x : Spec k ⟶ X` is exact
-(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isSepClosed`): it is computed
-by sections over the étale `Spec k`-schemes `U ×_X Spec k`.
+(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isSepClosed`).
 -/
 
 @[expose] public section
@@ -53,8 +52,7 @@ instance isSepClosed_residueField_spec (x : Spec (.of k)) :
     (Spec.residueFieldIso (.of k) x).commRingCatIsoToRingEquiv.symm)
 
 /-- Let `W` be an étale scheme with a single point over a scheme `S`, with separably closed
-residue field. Every covering sieve of `W` in the small étale site of `S` contains the identity:
-an étale `S`-scheme over `W` hitting its point has a section. -/
+residue field. Every covering sieve of `W` in the small étale site of `S` contains the identity. -/
 lemma id_mem_of_mem_smallEtaleTopology_of_subsingleton {S : Scheme.{u}} {W : S.Etale}
     [Subsingleton W.left] (hsep : ∀ w : W.left, IsSepClosed (W.left.residueField w))
     {R : Sieve W} (hR : R ∈ S.smallEtaleTopology W) (w : W.left) : R.arrows (𝟙 W) := by
@@ -70,8 +68,7 @@ lemma id_mem_of_mem_smallEtaleTopology_of_subsingleton {S : Scheme.{u}} {W : S.E
 variable (Λ : Type (u + 1)) [Ring Λ]
 
 /-- Over a separably closed field `k`, an epimorphism of étale sheaves of `Λ`-modules on
-`Spec k` is surjective on sections over every étale `Spec k`-scheme `V`: `V` is the disjoint
-union of its points, over each of which the sections lift, and the lifts glue. -/
+`Spec k` is surjective on sections over every étale `Spec k`-scheme `V`. -/
 lemma surjective_app_of_epi_of_isSepClosed'
     {F G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)} (p : F ⟶ G) [Epi p]
     (V : (Spec (.of k)).Etaleᵒᵖ) : Function.Surjective (p.hom.app V) := by

@@ -7,7 +7,13 @@ module
 
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingOrdinaryNormalizedCompositor
 
-/-! # Ordinary section-normalized finite direct-image compositor -/
+/-! # Ordinary section-normalized finite direct-image compositor
+
+## References
+
+* [Stacks, Tag 03D1]
+* [Stacks, Tag 03D6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,15 +29,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
   [FiniteDimensional (Padic l) E] (n : ℕ)
 
-/-- The ordinary finite compositor is the transported constant-section compositor.
-Source: Stacks 03D1 and 03D6; compactification-coherence proof, second paragraph.
-
-Proof: the coefficient map adjoint to the specified inverse-image identification
-is the constant-section map, by the adjunction inverse equations. Substitute these
-three scalar-map equalities in the transported ordinary compositor. On sections,
-all equality transports become identities. The intrinsic compositor acts by
-restriction along pullbackComp. The unique section normalization that defines
-modulePushComposition_existsUnique therefore identifies the two isomorphisms. -/
+/-- The ordinary finite compositor is the transported constant-section compositor. -/
 theorem finiteOrdinaryPushComposition {U V W : Scheme.{w}} (h : U ⟶ V) (k : V ⟶ W)
     (hc : (PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).pull (h ≫ k) =
       proEtaleRingCompositeCoefficients h k

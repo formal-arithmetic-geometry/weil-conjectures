@@ -18,20 +18,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 Let `k` be a field, `Λ` a finite ring killed by an integer invertible in `k`, `Y` a scheme of
 finite type over `k`, `f : X ⟶ Y` smooth and proper and `F` a finite locally constant sheaf of
 `Λ`-modules on `X_ét`. Then every higher direct image `Rᵠf_* F` is finite locally constant
-(`Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper`,
-[SGA 4, Exp. XVI, Cor. 2.2]).
-
-The proof follows SGA 4. The sheaf `G = Rᵠf_* F` is constructible, so by the specialization
-criterion it suffices that for every geometric point `s` of `Y`, with strict localization
-`g : Y_(s) ⟶ Y`, and every geometric point `t` of `Y_(s)`, the cospecialization map
-`G_s ⟶ G_{t ≫ g}` is bijective. It is the restriction map
-`Γ(Y_(s), g^* G) ⟶ Γ(Spec Ω', t^* g^* G)`. By proper base change, `g^* G` is the higher direct
-image `Rᵠπ_* F'` along the base change `π : X ×_Y Y_(s) ⟶ Y_(s)`. Over the strictly local base
-the specialization isomorphism says that the restriction to the closed point of
-`Rπ_* F' ⟶ Rπ_* Rh_* h^* F'` is an isomorphism, where `h` is the base change of `t`; by proper
-base change along `t` this is the restriction to the closed point of the unit
-`Rπ_* F' ⟶ Rt_* t^* Rπ_* F'`, which then induces bijections on the global sections of the
-homology sheaves.
+(`Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper`).
 
 ## Main results
 
@@ -44,6 +31,11 @@ homology sheaves.
   point is bijective.
 - `Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper`:
   the theorem.
+
+## References
+
+* [SGA 4, Exp. XVI, Cor. 2.2]
+* [SGA 4½, Arcata, V, Thm. 3.1]
 -/
 
 @[expose] public section
@@ -142,14 +134,7 @@ lemma Etale.isIso_map_unit_app_lowerStar_of_isIso_map_lowerStar_map_unit
 `π : X ⟶ Spec R` be smooth and proper over a strictly henselian local ring, `t : Spec Ω ⟶ Spec R`
 a geometric point, and `F` a locally constant sheaf of modules over a coefficient ring killed by
 an integer `N ≠ 0` invertible in `R`. Then for every `q` the restriction of global sections
-`Γ(Spec R, Rᵠπ_* F) ⟶ Γ(Spec Ω, t^* Rᵠπ_* F)` is an isomorphism.
-
-The restriction to the closed point of `Rπ_* F ⟶ Rπ_* Rh_* h^* F` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_upperStar_map_lowerStar_map_unit_of_smooth_of_isProper`); by
-proper base change along `t` so is the restriction to the closed point of the unit
-`Rπ_* F ⟶ Rt_* t^* Rπ_* F`
-(`AlgebraicGeometry.Etale.isIso_map_unit_app_lowerStar_of_isIso_map_lowerStar_map_unit`), and
-`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_homology_of_isIso_unit` applies. -/
+`Γ(Spec R, Rᵠπ_* F) ⟶ Γ(Spec Ω, t^* Rᵠπ_* F)` is an isomorphism. -/
 theorem Etale.isIso_globalSectionsUpperStarMap_homology_lowerStar_of_smooth_of_isProper
     (R : Type u) [CommRing R] [IsStrictlyHenselianLocalRing R] {Ω : Type u} [Field Ω]
     [IsSepClosed Ω] (t : Spec (.of Ω) ⟶ Spec (.of R)) {X : Scheme.{u}} (π : X ⟶ Spec (.of R))
@@ -173,10 +158,7 @@ Let `f : X ⟶ Y` be smooth and proper, `F` a locally constant sheaf of modules 
 ring killed by an integer `N ≠ 0` invertible on `Y`, `s` a geometric point of `Y` with strict
 localization `g : Y_(s) ⟶ Y` and `t` a geometric point of `Y_(s)`. Then for every `q` the
 restriction of global sections `Γ(Y_(s), g^* Rᵠf_* F) ⟶ Γ(Spec Ω', t^* g^* Rᵠf_* F)` is an
-isomorphism: by proper base change `g^* Rᵠf_* F` is the higher direct image along the base
-change of `f` to the strictly local scheme `Y_(s)`, where
-`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_homology_lowerStar_of_smooth_of_isProper`
-applies. -/
+isomorphism. -/
 theorem Etale.isIso_globalSectionsUpperStarMap_upperStar_homology_of_smooth_of_isProper
     {X Y : Scheme.{u}} (f : X ⟶ Y) [Smooth f] [IsProper f] (N : ℕ) (hN₀ : N ≠ 0)
     (hN : (N : Λ) = 0) (hNY : IsUnit (N : Γ(Y, ⊤)))
@@ -207,21 +189,10 @@ theorem Etale.isIso_globalSectionsUpperStarMap_upperStar_homology_of_smooth_of_i
             ((((pullback.fst f g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor
               0).app F)))) this
 
-/-- **Higher direct images of a smooth proper morphism are finite locally constant**
-([SGA 4, Exp. XVI, Cor. 2.2], [SGA 4½, Arcata, V, Thm. 3.1]). Let `k` be a field, `Λ` a finite
-ring killed by an integer invertible in `k`, `Y` of finite type over `k`, `f : X ⟶ Y` smooth and
-proper and `F` a finite locally constant sheaf of `Λ`-modules on `X_ét`. Then every higher direct
-image `Rᵠf_* F` is finite locally constant.
-
-The sheaf `Rᵠf_* F` is constructible
-(`AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_isProper`),
-so by the specialization criterion
-(`AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_of_bijective_cospecializationMap`) it
-suffices that its cospecialization maps are bijective. These are the restriction maps of
-sections from a strict localization to its geometric points
-(`AlgebraicGeometry.Scheme.bijective_cospecializationMap_of_isIso_globalSectionsUpperStarMap`),
-which are bijective by proper base change and the specialization isomorphism
-(`Etale.isIso_globalSectionsUpperStarMap_upperStar_homology_of_smooth_of_isProper`).
+/-- **Higher direct images of a smooth proper morphism are finite locally constant.** Let `k` be
+a field, `Λ` a finite ring killed by an integer invertible in `k`, `Y` of finite type over `k`,
+`f : X ⟶ Y` smooth and proper and `F` a finite locally constant sheaf of `Λ`-modules on `X_ét`.
+Then every higher direct image `Rᵠf_* F` is finite locally constant.
 -/
 theorem Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smooth_of_isProper
     [Finite Λ] {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]

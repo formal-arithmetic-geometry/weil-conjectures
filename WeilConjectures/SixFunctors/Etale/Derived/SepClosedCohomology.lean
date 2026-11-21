@@ -44,8 +44,7 @@ noncomputable section
 namespace AlgebraicGeometry
 
 /-- Let `Λ` be a finite ring in which the characteristic `p` of a field `Ω` is invertible.
-Then the exponent of `Λ`, its characteristic, is invertible on `Spec Ω`: if `p` divided the
-characteristic `n = p m` of `Λ`, then `m` would vanish in `Λ`, so `n ∣ m` and `p = 1`. -/
+Then the exponent of `Λ`, its characteristic, is invertible on `Spec Ω`. -/
 theorem HasInvertibleExponent.spec_of_charP (Λ : Type*) [CommRing Λ] [Finite Λ]
     {Ω : Type u} [Field Ω] (p : ℕ) [CharP Ω p] [Invertible (p : Λ)] :
     HasInvertibleExponent Λ (Spec (.of Ω)) := by
@@ -133,8 +132,7 @@ variable (K : Type u) [Field K] [IsSepClosed K] (Λ : Type (u + 1)) [CommRing Λ
 
 /-- **Cohomology of a separably closed point.** For an étale sheaf `F` of `Λ`-modules on
 `Spec K`, `K` separably closed, `H^0(Spec K, F) ≅ Γ(Spec K, F)` and `H^q(Spec K, F) = 0` for
-`q ≠ 0`: the global sections functor is exact, so its right derived functor is computed
-termwise. -/
+`q ≠ 0`. -/
 theorem cohomology_singleFunctor_of_isSepClosed
     (F : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Nonempty ((cohomology (ModuleCat.{u + 1} Λ) (Spec (.of K)) 0).obj

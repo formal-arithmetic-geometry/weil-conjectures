@@ -16,9 +16,7 @@ namespace WeilConjectures.ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime]
 
 /-- The restricted integral compact-support lift is a left adjoint once preservation is known.
-Source: Zheng, Construction 5.25 and Propositions 5.24 and 5.26; coefficient construction step 3.
-Proof: transport the normalized finite-system adjunction through strict evaluation and derived
-completion, then use fullness of the ambient inclusion to lift its canonical adjunction. -/
+See Zheng, Construction 5.25 and Propositions 5.24 and 5.26. -/
 theorem integral_support_adjoint_of_preservation (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p)
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

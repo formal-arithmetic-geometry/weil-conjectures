@@ -125,8 +125,14 @@ import all WeilConjectures.AlgebraicGeometry.StrictTower.TowerOpenBetaNormalizat
 
 /-! # Existence of finite native open tensor data
 
-This is the finite coefficient-stage part of the construction in
-[sites-cohomology.tex, Tag 0GL1], separated from the sequence-site datum.
+The finite coefficient-stage part of the construction, separated from the sequence-site datum.
+
+## References
+
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0G7E]
+* [Stacks, Tag 012Z]
 -/
 
 @[expose] public noncomputable section
@@ -222,51 +228,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 -- Preserve the existing existential binder, whose witness is intentionally unrestricted.
 set_option linter.unusedVariables false in
-/-- Every positive finite coefficient stage admits the native open tensor datum.
-Source: Stacks sites-modules.tex 0E8I, sites-cohomology.tex 0GL1 and 0G7E,
-and Homology 012Z.
-
-Proof: localize the ambient pro-etale site at the open object. An object
-of the open site is sent to its composite with j; its inverse is supplied by
-factorization through the open. Covers are unchanged. The constant-ring
-identification is the identity on constant sections, so the coefficient ring
-on the open is the restricted ambient coefficient ring. Transport the
-localized module restriction and extension along these site and ring
-identifications. The direct-sum insertion and sheafification units agree
-with the specified native unit, which identifies the adjunctions. Take right
-to be the native module direct image, with its restriction adjunction.
-
-Restriction takes a pure tensor to the tensor of its restricted sections.
-The balanced tensor universal property, followed by sheafification, gives
-pullTensor and its inverse. Checking on pure tensors proves pullPure and
-pullNaturality. Apply ringed-topos pullback preservation of flat-term K-flat
-complexes to this restriction: its two conclusions give pullKFlat and pullFlat.
-
-For M on the open and N on the ambient site, transpose unit_M tensor identity
-followed by pullTensor inverse under the native extension adjunction. The native
-open unit is invertible, so extension is fully faithful. The localized tensor
-formula of 0E8I shows that extension M tensor N lies in its essential image.
-Its counit is therefore invertible. The transpose is extension of the invertible
-adjunct followed by that counit, hence is itself invertible. Take the inverse
-of this isomorphism as ordinary. The adjunction Hom equivalence proves
-ordinaryInverse. Naturality of the unit and pullTensor, and injectivity of the
-Hom equivalence, give ordinaryNaturality.
-
-In total degree k, take the direct sum over a+b=k of the ordinary comparison.
-Extension preserves these sums because it is a left adjoint. Define the inverse
-by the direct sum of the inverses. Naturality of the ordinary comparison for
-the two differentials shows that these maps commute with d tensor 1 and with
-(-1)^a times 1 tensor d, hence are inverse chain maps. Their definition on
-coproduct insertions proves summand; ordinary naturality on each insertion
-proves chainNaturality. This is the totalization argument of 0GL1/012Z.
-
-Fix n throughout and use the constant sheaf of compactSupportSystemLevel l E n.
-The transported functors are StrictTower.moduleJ and modulePullback, and the
-constant-section identification is StrictTower.constantRingIso. Thus the
-section equation is exactly the one specified by finitePullSection. This
-construction needs neither a sequence-site datum nor compatibility between
-different n. The case n=0 is the first positive quotient, not a zero-th power.
-The empty open and the zero coefficient ring satisfy the same formulas. -/
+/-- Every positive finite coefficient stage admits the native open tensor datum. -/
 theorem nativeOpenTensor_finite_exists {X Z : Scheme.{u}} (j : X ⟶ Z)
     [IsOpenImmersion j] (n : ℕ) :
     ∃ Dn : NativeOpenTensorPrimitives.FiniteOpenCochainsData l E j n, True := by

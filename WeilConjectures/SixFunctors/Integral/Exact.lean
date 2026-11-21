@@ -18,16 +18,6 @@ exact (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralH
 also detects the zero sheaf, hence is conservative, is proved in
 `WeilConjectures.SixFunctors.Integral.StalkRestrict`.
 
-The finite case of the exactness is
-`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`, proved through the
-stalk formula `AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi`. For an integral morphism the
-geometric fibres need no longer be finite, and the exactness is instead proved directly on
-germs: a section of `f_* G'` lifting locally along an epimorphism `G ⟶ G'` lifts, after
-shrinking the étale neighbourhood of the geometric point, on a decomposition of the base change
-into pairwise disjoint opens (`AlgebraicGeometry.Scheme.Hom.Nbhd.exists_hom_disjoint_cover`),
-and there the local lifts glue
-(`AlgebraicGeometry.Etale.surjective_sheafFiber_lowerStar_map_of_isIntegralHom`).
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.surjective_sheafFiber_lowerStar_map_of_isIntegralHom`: the direct
@@ -35,6 +25,14 @@ and there the local lifts glue
   with algebraically closed residue field.
 - `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`: the direct
   image along an integral morphism is exact.
+
+## Implementation details
+
+The finite case `AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite` uses the
+stalk formula `AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi`. For an integral morphism the
+geometric fibres need not be finite, so exactness is proved directly on germs, lifting on a
+decomposition into pairwise disjoint opens
+(`AlgebraicGeometry.Scheme.Hom.Nbhd.exists_hom_disjoint_cover`).
 
 ## References
 
@@ -56,11 +54,7 @@ open Scheme
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIntegralHom f]
 
 /-- **The direct image along an integral morphism is surjective on stalks at geometric points
-with algebraically closed residue field**, on an epimorphism `φ : G ⟶ G'`. A germ of `f_* G'` at
-`y` is a section `z` of `G'` over `U ×_Y X` for a pointed étale neighbourhood `(U, u)`; it lifts
-along `φ` locally on `U ×_Y X`, and after shrinking `(U, u)` this local lifting can be done on
-a decomposition of `U ×_Y X` into pairwise disjoint opens
-(`AlgebraicGeometry.Scheme.Hom.Nbhd.exists_hom_disjoint_cover`), on which the lifts glue. -/
+with algebraically closed residue field**, on an epimorphism `φ : G ⟶ G'`. -/
 lemma Etale.surjective_sheafFiber_lowerStar_map_of_isIntegralHom {Ω : Type u} [Field Ω]
     [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
     {G G' : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
@@ -135,10 +129,7 @@ lemma Etale.surjective_sheafFiber_lowerStar_map_of_isIntegralHom {Ω : Type u} [
   exact h₂
 
 
-/-- **The direct image along an integral morphism preserves epimorphisms.** The geometric points
-`AlgebraicGeometry.Scheme.algClosurePoint s` of `Y` jointly reflect epimorphisms, and `f_* φ` is
-surjective on the stalk at each of them by
-`AlgebraicGeometry.Etale.surjective_sheafFiber_lowerStar_map_of_isIntegralHom`. -/
+/-- **The direct image along an integral morphism preserves epimorphisms.** -/
 theorem Etale.preservesEpimorphisms_lowerStar_of_isIntegralHom :
     (f)_*[ModuleCat.{u + 1} Λ].PreservesEpimorphisms where
   preserves {G G'} φ _ := by
@@ -156,12 +147,8 @@ theorem Etale.preservesEpimorphisms_lowerStar_of_isIntegralHom :
       exact epi_comp _ _
     exact this
 
-/-- Étale direct image is exact for
-integral morphisms.
-
-The direct image `f_*` along an integral morphism `f` is exact on étale sheaves of
-`Λ`-modules: it is left exact for every morphism, and it preserves epimorphisms by
-`AlgebraicGeometry.Etale.preservesEpimorphisms_lowerStar_of_isIntegralHom`. -/
+/-- Étale direct image is exact for integral morphisms: the direct image `f_*` along an
+integral morphism `f` preserves finite colimits of étale sheaves of `Λ`-modules. -/
 @[stacks 04C2]
 theorem Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom :
     PreservesFiniteColimits (f)_*[ModuleCat.{u + 1} Λ] :=
@@ -229,12 +216,7 @@ private lemma surjective_stalkRestrict_of_isIntegralHom {Ω : Type u} [Field Ω]
   erw [(pointSmallEtale t.1).toPresheafFiber_w_apply α p G.obj, hα]
 
 /-- The direct image along an integral morphism detects the zero sheaf: if `f_* G = 0` then
-`G = 0`. This is the conservativity step of the proof of blueprint
-`lemma-integral-changes-source-base--2`. For a geometric point `x` of `X` over the geometric point
-`y` of `Y`, the stalk `G_x` is a colimit of factors of the sections of `G` over the integral base
-change of the strict henselisation at `y`, which is the stalk `(f_* G)_y`; so `G_x` is a quotient of
-`(f_* G)_y`.
--/
+`G = 0`. -/
 theorem Etale.isZero_of_isZero_lowerStar_obj
     {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by
@@ -265,10 +247,7 @@ theorem Etale.isZero_of_isZero_lowerStar_obj
     ((pointSmallEtale s).uliftSheafFiberIso (ModuleCat.{u + 1} Λ)).app G
   exact h.of_iso e
 
-/-- The direct image along an integral morphism is conservative: being exact by
-`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`, it sends the
-kernel and the cokernel of a morphism to those of its image, and it detects their vanishing by
-`AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj`. -/
+/-- The direct image along an integral morphism is conservative. -/
 theorem Etale.reflectsIsomorphisms_lowerStar_of_isIntegralHom :
     (f)_*[ModuleCat.{u + 1} Λ].ReflectsIsomorphisms where
   reflects {G G'} φ _ := by

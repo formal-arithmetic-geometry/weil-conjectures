@@ -29,8 +29,7 @@ kernel the maximal ideal, the pullback exchange `Ld^* Ψ_{S₁} ⟶ Ψ_{S₂} Lc
 traits is invertible at every complex bounded below of étale origin, with coefficients in a finite
 ring `T` (`NearbyCyclesModel.isIso_pullbackExchange_ofTraitHom_app`). This is the trait case of
 SGA 4½, [Th. finitude], Prop. 3.7, and the input to its step (B): both sides compute the
-cohomology of the geometric generic point. It follows from
-`ProEtale.CondensedRing.isIso_map_baseChangeMap_app_of_isStrictlyHenselianLocalRing`.
+cohomology of the geometric generic point.
 -/
 
 @[expose] public section
@@ -153,10 +152,7 @@ local homomorphism of strictly henselian local rings, `aᵢ : Rᵢ ⟶ Ωᵢ` ma
 fields and `bᵢ : Rᵢ ⟶ κᵢ` maps to fields, `b₂` with kernel the maximal ideal, compatible with
 `c : Ω₁ ⟶ Ω₂` and `d : κ₁ ⟶ κ₂`. Then the pullback exchange `Ld^* Ψ_{S₁} ⟶ Ψ_{S₂} Lc^*` of the
 morphism of traits `NearbyCyclesModel.ofTraitHom` is invertible at every complex `L` on
-`Spec Ω₁` bounded below of étale origin, with coefficients in a finite ring `T`: after pullback to
-the special point of `S₂`, the base change morphism of the square of geometric generic points is
-invertible (`ProEtale.CondensedRing.isIso_map_baseChangeMap_app_of_isStrictlyHenselianLocalRing`).
--/
+`Spec Ω₁` bounded below of étale origin, with coefficients in a finite ring `T`. -/
 theorem isIso_pullbackExchange_ofTraitHom_app (a₁ : R₁ →+* Ω₁) (b₁ : R₁ →+* κ₁)
     (a₂ : R₂ →+* Ω₂) (b₂ : R₂ →+* κ₂) (ι : R₁ →+* R₂) [IsLocalHom ι] (c : Ω₁ →+* Ω₂)
     (d : κ₁ →+* κ₂) (hc : c.comp a₁ = a₂.comp ι) (hd : d.comp b₁ = b₂.comp ι)

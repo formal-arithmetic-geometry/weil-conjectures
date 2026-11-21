@@ -115,8 +115,7 @@ variable (G : Sheaf X.smallEtaleTopology A)
 
 /-- The restriction of germs at `y` of `f_* G` to germs at a geometric point `t` of `X` over
 `y`: a section of `G` over `U ×_Y X` is a section over the pointed étale neighbourhood
-`(U ×_Y X, (u, t))` of `t` (the restriction of stalks of blueprint
-`lemma-finite-direct-images--1`). -/
+`(U ×_Y X, (u, t))` of `t`. -/
 def Etale.stalkRestrict :
     (pointSmallEtale y).sheafFiber.obj ((f)_*[A].obj G) ⟶
       (pointSmallEtale t.1).sheafFiber.obj G :=

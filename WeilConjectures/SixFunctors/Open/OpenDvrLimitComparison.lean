@@ -130,7 +130,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # The augmented quotient tower under the canonical DVR coefficient comparison
 
-Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
+Projection-normalized transport of ordinary and derived limits along the canonical DVR
+coefficient comparison.
+
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 099B]
+* [Stacks, Tag 0A0E]
+* [Stacks, Tag 05RR]
 -/
 
 @[expose] public noncomputable section
@@ -144,8 +152,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- Canonical projection-normalized ordinary and derived limit transport.
-Source: Stacks Tags 05RR and 0941. -/
+/-- Canonical projection-normalized ordinary and derived limit transport. -/
 structure OpenDvrLimitComparison
     {d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E)} {T : Scheme.{u}}
     (C : OpenDvrCoefficientModel l E d T) where
@@ -300,16 +307,7 @@ private theorem dvrRlimModel_exists
     simpa only [w, z, Iso.trans_inv, Iso.symm_inv, Functor.mapIso_inv,
       Iso.app_inv, Iso.app_hom, Category.assoc] using h'
 
-/-- Scalar restriction along the canonical coefficient isomorphism transports limits.
-Source: Stacks Tags 05RR and 0941.
-
-Proof: scalar restriction is an exact equivalence. Its ordinary limit comparison is
-preservesLimitNatIso, hence is fixed by all projections. Apply rightDerivedSquare to
-the coefficient equivalence and its pointwise tower equivalence, with the universal
-right-derived pairs. Its factorization equation is the required equation on complexes.
-The localization comparison through the homotopy category is the recorded
-reconstructionRlimComparison. Compose the factorization equation with the inverse
-tower-localization isomorphism and the derived comparison to obtain limit_model. -/
+/-- Scalar restriction along the canonical coefficient isomorphism transports limits. -/
 theorem openDvrLimitComparison
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (T : Scheme.{u}) (C : OpenDvrCoefficientModel l E d T) :

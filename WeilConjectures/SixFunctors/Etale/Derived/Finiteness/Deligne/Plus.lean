@@ -26,8 +26,8 @@ base change maps.
 The property of `K` is stable under isomorphisms, shifts and extensions, so it holds for every
 bounded complex whose cohomology sheaves have it
 (`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_bounded`). This is the dévissage
-along the truncation triangles of the third step of the proof of
-`theorem-generic-constructibility-base-change-rj`.
+along the truncation triangles of the third step of the proof of Deligne's generic
+constructibility theorem.
 -/
 
 @[expose] public section
@@ -232,8 +232,7 @@ lemma HasDirectImageBaseChangeOnPlus.of_distTriang₁
 
 open _root_.DerivedCategory.Plus in
 /-- **Dévissage for the property**: if it holds for each cohomology sheaf of a complex `K` with
-cohomology in `[a, a + n - 1]`, placed in degree `0`, then it holds for `K`. The induction runs
-along the truncation triangles `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶`. -/
+cohomology in `[a, a + n - 1]`, placed in degree `0`, then it holds for `K`. -/
 lemma HasDirectImageBaseChangeOnPlus.of_isGE_of_isLE (n : ℕ) :
     ∀ (a : ℤ) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))),
       K.IsGE a → K.IsLE (a + n - 1) →

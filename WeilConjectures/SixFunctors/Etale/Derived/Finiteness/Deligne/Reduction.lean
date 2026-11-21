@@ -38,8 +38,7 @@ namespace AlgebraicGeometry
 
 open Scheme
 
-/-- An immersion into a reduced scheme whose image is open is an open immersion: it is a
-surjective closed immersion onto that open, which is reduced, hence an isomorphism onto it. -/
+/-- An immersion into a reduced scheme whose image is open is an open immersion. -/
 lemma IsImmersion.isOpenImmersion_of_isOpen_range {V X : Scheme.{u}} [IsReduced X] (v : V ⟶ X)
     [IsImmersion v] (hv : IsOpen (Set.range v)) : IsOpenImmersion v := by
   let O : X.Opens := ⟨_, hv⟩
@@ -168,8 +167,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- **Passing to a surjective closed immersion of the source**, for instance to the reduction: if
 `r : X' ⟶ X` is a surjective closed immersion and `K` a bounded constructible complex on `X`, the
-generic constructibility property of `R(r ≫ j)_* r^* K` implies that of `Rj_* K`, since
-`K ≅ Rr_* r^* K`. -/
+generic constructibility property of `R(r ≫ j)_* r^* K` implies that of `Rj_* K`. -/
 theorem HasDirectImageBaseChangeOnPlus.of_surjective_closedImmersion {S X X' Y : Scheme.{u}}
     {fY : Y ⟶ S} (j : X ⟶ Y) [LocallyOfFiniteType (j ≫ fY)] (r : X' ⟶ X) [IsClosedImmersion r]
     [Surjective r]

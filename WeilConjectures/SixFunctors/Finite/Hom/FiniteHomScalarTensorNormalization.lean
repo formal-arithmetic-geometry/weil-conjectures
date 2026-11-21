@@ -9,6 +9,10 @@ public import WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.Exceptio
 public import WeilConjectures.AlgebraicGeometry.Etale.Hom.EtaleHomComparisonModels
 
 /-! # Normalization of the ordinary scalar tensor comparison
+
+## References
+
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -75,12 +79,7 @@ private theorem tensorNormalization_flat_onSite
   intro P Q _ _ _ _
   exact (hn P Q).symm
 
-/-- The inverse exceptional tensorator is the ordinary scalar tensor comparison.
-Source: Stacks 07A4 and blueprint lemma-change-coefficients-internal-hom--1, evaluation paragraph.
-
-Proof: inverse naturality gives both tensor naturality equations. The exceptional
-normalization is the ordinary tensor model normalization. The unique canonical
-tensor comparison therefore identifies every component with the ordinary one. -/
+/-- The inverse exceptional tensorator is the ordinary scalar tensor comparison. -/
 theorem finiteHom_scalar_tensor_normalization {A B : Type (u + 1)} [CommRing A] [CommRing B]
     (φ : A →+* B) (X : Scheme.{u}) (K L : Etale.DerivedCategoryModule A X) :
     (Etale.ExceptionalCoefficients.tensorIso φ X).inv.app (K, L) =

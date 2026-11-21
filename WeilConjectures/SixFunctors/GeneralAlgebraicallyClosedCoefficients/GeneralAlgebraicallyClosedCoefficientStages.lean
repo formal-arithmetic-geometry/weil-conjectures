@@ -375,14 +375,7 @@ end
 
 set_option linter.unusedVariables false in
 /-- The rational transition shift is uniquely fixed by localizing the normalized integral
-shift. Source: blueprint order 1462, exact transition clause.
-Proof: choose a prime p strictly greater than l and use the concrete datum with base
-field ZMod p. The integral transition and its normalized shift agree with the p=0
-versions by parameter independence and integral normalization uniqueness. Equality
-transport therefore identifies the two rational normalization predicates at shift one.
-Transport the existing finite-field exists-unique theorem along that equality of
-functors and predicates. This proves existence and uniqueness of the full coherent
-integer-shift datum, with precisely the required integral-image normalization. -/
+shift. -/
 theorem transitionCommShift_existsUnique (E L : Index l Ω) (h : E ≤ L) :
     ∃! c : (transition l Ω Y E L h).CommShift ℤ,
       (fun [commInst : (transition l Ω Y E L h).CommShift ℤ] ↦

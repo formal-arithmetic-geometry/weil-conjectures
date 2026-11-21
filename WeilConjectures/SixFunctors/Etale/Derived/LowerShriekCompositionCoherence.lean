@@ -15,24 +15,18 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
 # Coherence of the composition law and the projection formula
 
 Two coherence properties of the compactly supported direct image `Rf_!` on the unbounded
-derived categories of the small étale sites, with finite coefficients, the corresponding
-blueprint nodes of the six-functor chapters:
+derived categories of the small étale sites, with finite coefficients:
 
 * the projection map `PF : Rf_!M ⊗ᴸ N ⟶ Rf_!(M ⊗ᴸ Lf^*N)` is compatible with the associativity
-  of the derived tensor product
-  (`AlgebraicGeometry.Etale.projectionMapAssociativity`,
-  `proposition-composition-base-change-rf-shriek--1`);
-* there is a composition law `Rh_! ≅ Rf_! ⋙ Rg_!` for `h = f ≫ g`
-(`proposition-composition-base-change-rf-shriek--1`)
-  compatible with the projection maps (`proposition-composition-base-change-rf-shriek--1`) and with
-  the compactly supported base change maps `Ex_!` of pasted cartesian squares (`sk-thm-sf-package`
-  (2)) (`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`).
+  of the derived tensor product (`AlgebraicGeometry.Etale.projectionMapAssociativity`);
+* there is a composition law `Rh_! ≅ Rf_! ⋙ Rg_!` for `h = f ≫ g` compatible with the projection
+  maps and with the compactly supported base change maps `Ex_!` of pasted cartesian squares
+  (`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`).
 
 Together with the commutation of the derived pullback along an étale morphism with the derived
 internal hom (`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`, in
 `WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom`), they are the inputs of the
-composition and étale-locality statements for cohomologically smooth
-morphisms.
+composition and étale-locality statements for cohomologically smooth morphisms.
 -/
 
 @[expose] public section
@@ -144,15 +138,10 @@ private theorem projectionMapAssociativity_generic (A : Type*) [Category.{u + 1}
 end ProjectionAssociativityProof
 
 omit [Finite Λ] in
-/-- Blueprint `proposition-composition-base-change-rf-shriek--1`: Coherence of the projection
-formula.
-
-The projection map `PF : Rf_!M ⊗ᴸ N ⟶ Rf_!(M ⊗ᴸ Lf^*N)` is compatible with the associativity of
-the derived tensor product: the two maps
+/-- Coherence of the projection formula: the projection map `PF : Rf_!M ⊗ᴸ N ⟶ Rf_!(M ⊗ᴸ Lf^*N)`
+is compatible with the associativity of the derived tensor product: the two maps
 `(Rf_!M ⊗ᴸ N) ⊗ᴸ N' ⟶ Rf_!(M ⊗ᴸ (Lf^*N ⊗ᴸ Lf^*N'))`, applying the projection map twice or once
-to `N ⊗ᴸ N'` followed by the tensor comparison `Lf^*(N ⊗ᴸ N') ≅ Lf^*N ⊗ᴸ Lf^*N'`, agree. This is
-the identification of "the two tensor reassociations" in the blueprint proof of the coherence of
-the projection formula. -/
+to `N ⊗ᴸ N'` followed by the tensor comparison `Lf^*(N ⊗ᴸ N') ≅ Lf^*N ⊗ᴸ Lf^*N'`, agree. -/
 theorem projectionMapAssociativity {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     ProjectionMapAssociativity (ModuleCat.{u + 1} Λ) f :=
   projectionMapAssociativity_generic (ModuleCat.{u + 1} Λ) f
@@ -178,25 +167,15 @@ private theorem graphCompIso_projection
   subst h
   exact sfGraphCompactSupportCompIso_projection Λ f g
 
-/-- Blueprints `proposition-composition-base-change-rf-shriek--1` and `sk-thm-sf-package` (clause
-(2)): the coherence of the composition law for `Rf_!` with the projection formula and with base
-change.
+/-- Coherence of the composition law for `Rf_!` with the projection formula and with base
+change: there is a composition isomorphism `E f g h w : Rh_! ≅ Rf_! ⋙ Rg_!` for all `f`, `g` and
+`h = f ≫ g` admitting compactifications such that
 
-There is a composition isomorphism `E f g h w : Rh_! ≅ Rf_! ⋙ Rg_!` for all `f`, `g` and
-`h = f ≫ g` admitting compactifications (the composition law itself is
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`) such that
-1. (`proposition-composition-base-change-rf-shriek--1`, the pentagon for composable `f`, `g`,
-compatible with the
-   composition law) the projection maps compose: for `M` on `X` and `N` on `Z`,
-   ```
-   Rh_!M ⊗ᴸ N ──E ▷ N──▶ Rg_!Rf_!M ⊗ᴸ N ──PF_g──▶ Rg_!(Rf_!M ⊗ᴸ Lg^*N)
-          │PF_h │Rg_! PF_f
-          ▼ ▼
-   Rh_!(M ⊗ᴸ Lh^*N) ──E──▶ Rg_!Rf_!(M ⊗ᴸ Lh^*N) ≅ Rg_!Rf_!(M ⊗ᴸ Lf^*Lg^*N)
-   ```
-   commutes;
-2. (`sk-thm-sf-package` (2), the compact-support base change is compatible with the composition
-   law) for cartesian squares `a ≫ f = f' ≫ b` and `b ≫ g = g' ≫ c` with quasi-compact `f'`,
+1. the projection maps compose: for `M` on `X` and `N` on `Z`, the composite
+   `Rh_!M ⊗ᴸ N ⟶ Rg_!Rf_!M ⊗ᴸ N ⟶ Rg_!(Rf_!M ⊗ᴸ Lg^*N) ⟶ Rg_!Rf_!(M ⊗ᴸ Lf^*Lg^*N)` of
+   `E ▷ N`, `PF_g` and `Rg_! PF_f` equals `PF_h` followed by `E` and
+   `Rg_!Rf_!(M ⊗ᴸ Lh^*N) ≅ Rg_!Rf_!(M ⊗ᴸ Lf^*Lg^*N)`;
+2. for cartesian squares `a ≫ f = f' ≫ b` and `b ≫ g = g' ≫ c` with quasi-compact `f'`,
    `g'` and `f' ≫ g'`, the base change map of the pasted square is the pasting of the base
    change maps: `Ex_h ≫ E f' g' = Lc^* (E f g) ≫ Ex_g ≫ Rg'_! Ex_f`. -/
 theorem exists_rightDerivedLowerShriekCompIso :

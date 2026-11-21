@@ -11,8 +11,9 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportQuotientComparisonLaws
 
 /-! # Transport of the input quotient cocycle through compact support
 
-Source: the current blueprint, lem-coef-integral-compact-support.proof.md,
-finite-level coefficient comparison; Stacks Tag 03DA.
+## References
+
+* [Stacks, Tag 03DA]
 -/
 
 @[expose] public noncomputable section

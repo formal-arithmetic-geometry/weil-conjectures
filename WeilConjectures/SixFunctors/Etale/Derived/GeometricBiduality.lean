@@ -12,13 +12,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 /-!
 # Finite-stage étale Verdier biduality: the closed-point step
 
-This file contains the closing argument of the proof of blueprint
-`theorem-verdier-biduality--1`. Let `δ : K ⟶ 𝔻𝔻K` be completed to a distinguished triangle
-`K ⟶ 𝔻𝔻K ⟶ Δ ⟶ K[1]`. If the cohomology sheaves of the bounded constructible `Δ` vanish at every
-non-closed point, then `Δ` is supported on a finite set of closed points
-(`AlgebraicGeometry.Etale.exists_isFinite_isZero_upperStar_of_boundedConstructible`); if moreover
-`Ra_*δ` is an isomorphism, then `Ra_*Δ = 0`, and so `Δ = 0`
-(`AlgebraicGeometry.Etale.isZero_of_isZero_rightDerivedLowerStar_of_isFinite`).
+This file contains the closed-point step of étale Verdier biduality: for a distinguished
+triangle `K ⟶ 𝔻𝔻K ⟶ Δ ⟶ K[1]` completing `δ : K ⟶ 𝔻𝔻K`, if the cohomology sheaves of the
+bounded constructible `Δ` vanish at every non-closed point and `Ra_*δ` is an isomorphism, then
+`Δ = 0` (`AlgebraicGeometry.Etale.isZero_obj₃_of_isIso_rightDerivedLowerStar_map`).
 -/
 
 @[expose] public section
@@ -37,11 +34,10 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `theorem-verdier-biduality--1`, the closed-point step: let
-`a : X ⟶ Spec k` be locally of finite type with `X` quasi-compact, and let `T` be a distinguished
-triangle in `D(X_ét, Λ)` whose third term is bounded constructible with cohomology sheaves
-vanishing at every non-closed point. If `Ra_*` carries the first morphism of `T` to an
-isomorphism, then the third term of `T` is zero. -/
+/-- **The closed-point step of Verdier biduality.** Let `a : X ⟶ Spec k` be locally of finite
+type with `X` quasi-compact, and let `T` be a distinguished triangle in `D(X_ét, Λ)` whose third
+term is bounded constructible with cohomology sheaves vanishing at every non-closed point. If
+`Ra_*` carries the first morphism of `T` to an isomorphism, then the third term of `T` is zero. -/
 theorem isZero_obj₃_of_isIso_rightDerivedLowerStar_map {k : Type u} [Field k] {X : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) [LocallyOfFiniteType a] [CompactSpace X]
     (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))

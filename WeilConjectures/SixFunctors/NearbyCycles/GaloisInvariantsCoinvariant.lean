@@ -14,7 +14,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.GaloisTraceInfin
 # The invariant summand of nearby cycles is the summand of all invariants
 
 Let `N` be a model, `h : N.generic ⟶ Spec L`, `Ω/L` Galois with degrees invertible in a finite
-ring `T₀`, and `Λ = C(-, T₀)`. PR #1818 (SGA 4½, [Th. finitude], Lemme 3.4) shows that the
+ring `T₀`, and `Λ = C(-, T₀)`. The
 exchange `α : Ψ_N ⟶ Ψ_{N_Ω}` of the Galois layer is split by a retraction `r` whose projector
 `r ≫ α` is Galois invariant. This file shows that the projector is the projector onto *all* the
 invariants, on cohomology sheaves: every map out of `Hᵠ(Lf'^* Ψ_{N_Ω})` which is invariant under
@@ -24,22 +24,21 @@ content of `Ψ_N = (Ψ_{N_Ω})^P` beyond the existence of an invariant summand, 
 to compare the invariant summands under a change of trait
 (`NearbyCyclesModel.Hom.isIso_pullbackExchange_app_of_galoisLayerMap`).
 
-The proof is a continuity argument. The retraction is induced by the levelwise normalized trace
-of the Galois tower of `Ω/L`, which on the image of a finite level `L'` is the average over
-`Gal(L'/L)` (`GaloisTower.map_complexTrace_comp_unit_comp_eq_of_invariant`), and the cohomology
-sheaves of the pulled back nearby cycles of the tower are the filtered colimits of those of the
-finite levels
-(`NearbyCyclesModel.nonempty_isColimit_homology_pullback_nearbyCycles_complexCocone`). A map out
-of such a colimit which is invariant under the Galois action is fixed by every average, hence by
-the projector. This argument is carried out on cohomology sheaves: in the derived category the
-colimit is only a homotopy colimit.
-
 ## Main results
 
 - `GaloisTower.map_derivedUnitRetraction_comp_unit_comp_eq_of_invariant`: the derived version,
   after any additive functor carrying the cocone of the finite levels to a colimit.
 - `NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_coinvariant`: the nearby
   cycles statement.
+
+## Implementation details
+
+The argument is carried out on cohomology sheaves: in the derived category the colimit of the
+finite levels is only a homotopy colimit.
+
+## References
+
+* [SGA 4½], [Th. finitude], Lemme 3.4
 -/
 
 @[expose] public section
@@ -409,8 +408,8 @@ private theorem exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_of
     (fun k ↦ pullbackAction_fst h _ specGaloisAction_comp (act k)) hlift (fun j ↦ hdZ j W) φ'
     hφ'
 
-/-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`** (SGA 4½, [Th. finitude],
-Lemme 3.4; torsion coefficients `Λ = C(-, T₀)`). Let `Ω/L` be Galois with degrees invertible in
+/-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`** (torsion
+coefficients `Λ = C(-, T₀)`). Let `Ω/L` be Galois with degrees invertible in
 `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback exchange
 `α : Ψ_N C ⟶ Ψ_{N_Ω} C` of the Galois layer has a retraction `r` such that, on the cohomology
 sheaves of the pullback along any `f' : Z ⟶ X'`, every map invariant under a family `act` of

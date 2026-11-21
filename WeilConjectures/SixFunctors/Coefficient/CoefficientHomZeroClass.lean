@@ -197,14 +197,18 @@ import Mathlib.Algebra.Homology.Functor
 
 /-! # Canonical zero-cycle class in derived global Hom
 
-Source: Stacks Project, Tags 08JA and 079P.
-
 ## Main definitions
 
 - `coefficientGlobalSections`: the recorded total derived section functor.
 - `coefficientHomZeroClass`: the actual zero-cycle class via the derived unit.
 - `coefficientHomZeroEvaluation`: evaluation by the fixed product projections.
 - `coefficientHomZeroEquiv`: the uniquely normalized recorded H⁰ RHom identification.
+
+## References
+
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 0A8X]
 -/
 
 @[expose] public section
@@ -219,9 +223,8 @@ namespace WeilConjectures
 
 attribute [local irreducible] homComplexFunctor
 
-/-- Total derived global sections on the original site and coefficient ring.
-Source: Stacks 08JA.
-This is the derived functor underlying the recorded zeroth hypercohomology. -/
+/-- Total derived global sections on the original site and coefficient ring, the derived
+functor underlying the recorded zeroth hypercohomology. -/
 noncomputable def coefficientGlobalSections
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -241,8 +244,7 @@ noncomputable def coefficientGlobalSections
     ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)))
   F.rightDerivedFunctor
 
-/-- The ordinary global-sections functor, written using Mathlib's module unit.
-Source: Stacks 08JA. -/
+/-- The ordinary global-sections functor, written using Mathlib's module unit. -/
 noncomputable abbrev coefficientOrdinarySections
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -252,8 +254,7 @@ noncomputable abbrev coefficientOrdinarySections
     ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)))
 
 /-- The universal right-derived comparison on complexes, before inverting it on
-K-injectives. It is used to fix global-section comparisons on simultaneous resolutions.
-Source: Stacks 079P. -/
+K-injectives. -/
 noncomputable def coefficientRightDerivedComparison
     {A : Type a} {B : Type b} [Category.{v} A] [Abelian A] [Category.{w} B] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A]
@@ -265,8 +266,7 @@ noncomputable def coefficientRightDerivedComparison
     F.rightDerivedFunctor.map ((DerivedCategory.quotientCompQhIso _).app K).hom
 
 /-- The canonical site-global-sections comparison, with the Grothendieck instance
-at the correct coefficient universe.
-Source: Stacks 079P, 08JA. -/
+at the correct coefficient universe. -/
 noncomputable def coefficientSiteSectionsComparison
     {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{max c v u}]
@@ -631,8 +631,7 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasDerivedCategory.{w} (SheafOfModules.{max c v u}
     ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A))]
 
-/-- Ordinary sections of the fixed representative Hom complex.
-Source: Stacks 08JA. -/
+/-- Ordinary sections of the fixed representative Hom complex. -/
 noncomputable def coefficientHomSectionComplex
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ) :=
@@ -640,8 +639,7 @@ noncomputable def coefficientHomSectionComplex
     (coefficientOrdinarySections.{u, c, v} J A).mapHomologicalComplex (.up ℤ)).obj
       (op L, (coefficientHomResolution.{u, c, v} J A).obj M))
 
-/-- A zero cycle's actual class in the global derived Hom, via the universal derived unit.
-Source: Stacks 08JA. -/
+/-- A zero cycle's actual class in the global derived Hom, via the universal derived unit. -/
 noncomputable def coefficientHomZeroClass
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -657,8 +655,7 @@ noncomputable def coefficientHomZeroClass
       (HasDerivedCategory.standard _) 0).inv.app _
       (((coefficientHomSectionComplex.{u, c, v} J A L M).homologyπ 0) z))
 
-/-- Evaluate a zero cycle on a local section using the actual product projection.
-Source: Stacks 08JA, 0A8X. -/
+/-- Evaluate a zero cycle on a local section using the actual product projection. -/
 noncomputable def coefficientHomZeroEvaluation
     (L M : CochainComplex (SheafOfModules.{max c v u}
       ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ)
@@ -1081,17 +1078,7 @@ private lemma zeroCycleCocycle_evaluation (L M : K)
 attribute [local irreducible] coefficientHomZeroEvaluation derivedInternalHomOfUniverses
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The H⁰ RHom identification is uniquely fixed by taking a cycle to its chain map.
-Source: Stacks 08JA.
-Proof: on a K-flat L and the fixed K-injective replacement I(M), sections of Hom(L,I(M))
-have zero cycles the chain maps and boundaries the null-homotopic maps. The universal
-sections comparison and the actual Hom localization factorization give the displayed
-class. Send it to Q(f) followed by the inverse of Q(M to I(M)). K-injectivity gives an
-additive bijection. K-flat resolutions and localization naturality extend it uniquely to
-all derived inputs, independently of the chosen resolution. Every cycle determines one
-chain map by the product projections, and every derived morphism has such a representative;
-these facts also prove uniqueness. This is the recorded rhom-global-sections comparison
-with its representative normalization made explicit, not a second cohomology notion. -/
+/-- The H⁰ RHom identification is uniquely fixed by taking a cycle to its chain map. -/
 theorem coefficientHomZeroEquiv_exists :
     ∃! e : ∀ P Q : DerivedCategory (SheafOfModules.{max c v u}
         ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)),
@@ -1291,8 +1278,7 @@ theorem coefficientHomZeroEquiv_exists :
       exact ⟨Q.objPreimage P, ⟨Q.objObjPreimageIso P⟩⟩
     · exact hbase
 
-/-- The uniquely normalized version of the recorded H⁰ RHom equivalence.
-Source: Stacks 08JA. -/
+/-- The uniquely normalized version of the recorded H⁰ RHom equivalence. -/
 noncomputable def coefficientHomZeroEquiv :=
   (coefficientHomZeroEquiv_exists.{u, c, v, w} J A).choose
 

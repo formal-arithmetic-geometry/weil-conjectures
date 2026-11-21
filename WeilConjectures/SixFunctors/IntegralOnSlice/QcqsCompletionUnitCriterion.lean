@@ -13,7 +13,10 @@ import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperation
 
 /-! # The specified completion unit detects derived completeness
 
-Source: Stacks Tag 099M and Bhatt--Scholze Definition 3.5.2.
+## References
+
+* [Stacks, Tag 099M]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.5.2
 -/
 
 @[expose] public noncomputable section
@@ -26,15 +29,7 @@ universe t u w
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures.IntegralOnSlice
 /-- The specified quotient/Roos completion unit is invertible precisely on derived
-complete objects, without a finiteness hypothesis on the scheme.
-
-Source: Stacks Tag 099M and Bhatt--Scholze Definition 3.5.2.
-Proof: the principal Koszul replacement theorem supplies an adic datum with ideal
-spanned by the chosen uniformizer. Choose a good representative using essential
-surjectivity of the good-complex localization. Apply the intrinsic Roos/Koszul
-completeness equivalence to this representative: its fifth condition is invertibility
-of this very completion unit, and its first is derived completeness. Its auxiliary
-prime may be chosen as 3 when ell is 2, and as 2 otherwise. -/
+complete objects, without a finiteness hypothesis on the scheme. -/
 theorem canonicalCompletionUnitCriterion
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.Exceptional.ExceptionalOrdinaryCompletedScala
 
 /-! # Shift coherence of the explicit integral comparison
 
-Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2).
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Propositions 3.5.1 and 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -184,20 +186,7 @@ private theorem integralTensorComparison_eq (C : CoefficientSystem l X)
   rw [integralTensorComparison_app]
   simp [intrinsicScalarCompletion, completedTensorComparison]
 
-/-- The explicit inverse-balancing/completion comparison commutes with every integer shift.
-
-Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2); the shift clause of
-`lem-sf-native-integral-tensor-coherence`.
-
-Proof: the ordinary tensor comparison commutes with the degreewise shift of complexes,
-and so does its quotient-completion chain map, since both are defined degreewise.
-The derived scalar-extension counit is compatible with shifts
-, and a shift structure on a scalar
-counit is unique; hence the universal derived
-counits lift the two degreewise squares uniquely. The integral transition's shift
-structure is defined by the same ordinary tensor normalization, so the composite
-inverse-balancing/completion map commutes with the shift by one; compatibility with
-the shift by one and the shift coherence isomorphisms give every integer shift. -/
+/-- The explicit inverse-balancing/completion comparison commutes with every integer shift. -/
 theorem integralTensorComparison_shift (C : CoefficientSystem l X) :
     ∀ {E L : Index l (PadicAlgCl l)} (h : E ≤ L),
       NatTrans.CommShift (integralTensorComparison l X C h) ℤ := by

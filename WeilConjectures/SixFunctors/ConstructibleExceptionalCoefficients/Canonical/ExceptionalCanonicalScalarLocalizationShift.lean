@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.I
 public import WeilConjectures.SixFunctors.GeneralAlgebraicallyClosedCoefficients.GeneralAlgebraicallyClosedCoefficientStages
 import WeilConjectures.SixFunctors.Exceptional.ExceptionalCanonicalStageScalarShift
 
-/-! # Normalization of a single scalar localization square -/
+/-! # Normalization of a single scalar localization square
+
+## References
+
+* Zheng, Constructions 6.2 and 6.6
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -55,17 +60,7 @@ private theorem rationalizationShift_eq
   unfold integralRationalizationShift finiteTorIntegralShift
   rfl
 
-/-- The ordinary-realization shift descends to the published canonical rational scalar shift.
-Source: Zheng, Construction 6.2; the normalized scalar square in Construction 6.6.
-
-Proof: the normalized integral restriction square compares the finite-Tor scalar
-functor with the intrinsic integral scalar functor, using their canonical shifts.
-The intrinsic scalar localization square compares this functor with rational scalar
-extension. Paste the two shift-compatible squares and the associators. Finite-Tor
-rationalization is the intrinsic rationalization composed with the full inclusion.
-Both squares have identity transport components, so their composite has the stated
-normalization. Identity field inclusions and the zero object are included. No geometric
-operation or choice of rational operation shifts occurs in this argument. -/
+/-- The ordinary-realization shift descends to the published canonical rational scalar shift. -/
 theorem canonical_scalar_localization_shift
     (a b : AlgebraicallyClosedCoefficients.Index l Ω) (h : a ≤ b)
     (T : Scheme.{max u v})

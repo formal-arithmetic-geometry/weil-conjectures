@@ -10,7 +10,12 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedT
 
 /-! # Associativity of normalized tensor comparisons
 
-Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 0941]
+* Zheng, Construction 4.1
 -/
 
 @[expose] public section
@@ -22,8 +27,8 @@ universe t u a b v w
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite AlgebraicGeometry
 namespace WeilConjectures
 
-/-- The associativity equation for the inverse tensor comparison.
-Source: Stacks 07A4; the associativity axiom for a strong monoidal functor. -/
+/-- The associativity equation for the inverse tensor comparison: the associativity axiom
+for a strong monoidal functor. -/
 def CoefficientTensorAssociativity
     {A : Type a} {B : Type b} [Category.{v} A] [Category.{w} B]
     {HA : Aᵒᵖ × A ⥤ A} {HB : Bᵒᵖ × B ⥤ B}
@@ -87,21 +92,7 @@ private theorem inverse_associativity_of_hom
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
-/-- The normalized reduction and finite tensor comparisons preserve associators.
-Source: Stacks 07A4; the signed total-tensor
-associator models, and step 3 of lem-coef-normalized-internal-hom-fibers.
-
-Proof: choose flat-term K-flat representatives of the three inputs. The model
-squares hR and hF identify each binary comparison with ordinary scalar tensor
-reassociation. The associator models in hT identify the two associators with
-reassociation of three pure-tensor summands, with no additional sign. Both
-composites send a triple tensor to the same reduced triple tensor. Local tensor
-generators prove equality of chain maps, before localization. In the reduction
-case use the strict system representatives supplied by hR, so this is an equality
-of system maps, not an inference from equality of their evaluated derived maps.
-Localize the equality and cancel the representative isomorphisms. Naturality
-transports it to arbitrary derived objects. The identity quotient and index zero
-use the same formulas; no flatness of a coefficient quotient is required. -/
+/-- The normalized reduction and finite tensor comparisons preserve associators. -/
 theorem coefficientNormalizedTensorAssociativity
     (R : CoefficientDerivedSystemReduction l E W)
     (hT : CoefficientDerivedSystemTensorCoherence l E W R.toCoefficientDerivedSystemTensors)

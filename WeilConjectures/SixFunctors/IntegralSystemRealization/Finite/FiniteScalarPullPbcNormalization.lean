@@ -11,7 +11,14 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.Finit
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.FiniteScalarPullComplexPresentation
 import WeilConjectures.SixFunctors.PurCompactSupport.ScalarPullCoefficientComplexNormalization
 
-/-! # Pbc scalar square on ordinary complexes -/
+/-! # Pbc scalar square on ordinary complexes
+
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -62,13 +69,8 @@ private theorem scalar_pasting
     q ≫ c ≫ d ≫ e ≫ f = a ≫ b ≫ t ≫ v ≫ w := by
   rw [reassoc_of% h, h']
 
-/-- The pbc scalar comparison is compatible with the ordinary finite presentations.
-Source: Stacks Tags 07A6, 06YY and 0D6E.
-Proof: reverse scalarPull_complex_normalization by cancelling its source and target
-isomorphisms. Compose that equation with the geometric pullback of the ordinary
-scalar presentation and the ordinary geometric presentation. The image under Q of
-finiteScalarPullComplexPresentation identifies these final three complex maps.
-The argument applies to every cochain complex, without K-flatness. -/
+/-- The pbc scalar comparison is compatible with the ordinary finite presentations,
+on every cochain complex. -/
 theorem finiteScalarPullPbcNormalization {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (P : CochainComplex (integralTowerModules l E Y) ℤ) :
     let := sfIntrinsicPullback_additive (finiteCoefficientRing l E (n + 1)) f

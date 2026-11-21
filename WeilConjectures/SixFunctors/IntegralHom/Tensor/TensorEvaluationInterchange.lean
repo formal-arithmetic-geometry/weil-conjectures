@@ -75,8 +75,12 @@ import all WeilConjectures.Algebra.Homology.Ringed.RingedTensorComplexConstraint
 
 /-! # Interchanging tensor factors before evaluation
 
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7.
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 0FPQ]
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 08J7]
 -/
 
 @[expose] public section
@@ -253,16 +257,7 @@ private theorem exchange_pure
     _ = sig • t₄ := congrArg (fun w ↦ sig • w) h₄
 
 /-- Interchanging the last two tensor factors before applying a chain map has
-exactly the Koszul sign of their degrees.
-Source: Stacks Tags 03EK and 0FPQ; blueprint
-`lem-coef-integral-hom-reduction.proof.md`, paragraph 1.
-
-Proof: reassociate (H tensor Q) tensor P, apply the braiding from Q tensor P
-to P tensor Q, reassociate back, and apply e tensor the identity of Q. The
-associator formulas preserve pure tensors; the braiding formula contributes
-(-1)^(bp). Tensoring maps acts on the two factors, and linearity carries that
-sign through the remaining maps. This is valid without any boundedness or
-flatness hypotheses. -/
+exactly the Koszul sign of their degrees. -/
 theorem tensorEvaluation_interchange
     (H P I Q : CochainComplex (Modules.{t, u} Y R) ℤ)
     (e : (((totalTensor.{t, u} Y R).obj H).obj P) ⟶ I) :

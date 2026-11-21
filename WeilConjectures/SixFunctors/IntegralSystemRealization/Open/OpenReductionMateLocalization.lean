@@ -10,7 +10,13 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.OpenExtensionG
 
 /-! # Localization formula for the fixed open reduction mate
 
-Source: Stacks Tags 03DI, 06YS, 06YY, 0GL1 and 0941; fix-prop-coherence.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -159,21 +165,7 @@ private theorem openReduction_localization_of_good (system : Operations l E)
   erw [← Category.assoc, hnat, Category.assoc]
   rfl
 
-/-- Localizing the ordinary open mate gives the specified derived mate.
-Source: Stacks 03DI, 06YS, 06YY and 0GL1; fix-prop-coherence, open-factor sentence.
-
-Proof: open extension is exact and preserves flat modules: tensor with an
-extended module is the extension of tensor after restriction, and both open
-functors are exact. Its direct-sum total-tensor comparison shows that extension
-also preserves K-flat complexes. Thus the extended flat-term K-flat complex is
-a good representative. Write the inverse mate as extension of the open unit,
-followed by reductionPull and the system open counit. Localization preserves
-the units and counits of these exact open adjunctions. Apply realization.model
-to the extended good complex; its ordinary comparison is fixed by projections.
-Naturality of the two reduction-model isomorphisms and their augmentation
-normalizations cancel the intervening pullback factors. The triangle identities
-leave precisely the localization of the ordinary mate on the right below.
-This is a calculation of whole-system arrows, before any finite evaluation. -/
+/-- Localizing the ordinary open mate gives the specified derived mate. -/
 theorem openReduction_mate_localization (system : Operations l E)
     (realization : RealizationModel l E system) {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j]

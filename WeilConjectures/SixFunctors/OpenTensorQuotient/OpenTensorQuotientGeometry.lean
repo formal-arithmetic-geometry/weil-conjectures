@@ -16,7 +16,11 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Geometric preservation for compatible open reduction models
 
-Source: Bhatt--Scholze, Lemma 6.5.8(2),(3); Stacks Tags 03DI and 09AH.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8(2),(3)
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 09AH]
 -/
 
 @[expose] public noncomputable section
@@ -105,33 +109,7 @@ private theorem finiteProperties_iso (T : Scheme.{u}) (n : ℕ)
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Finite coefficient identification and integral constructibility for the same open
 operations. This concerns the geometric part of open reduction, independently of tensor
-augmentations and normalized tensor chain maps.
-
-Source: Bhatt--Scholze, Lemma 6.5.8(2),(3), and Stacks Tags 03DI, 09AH.
-
-Proof: at each positive coefficient level identify the ringed-slice open extension
-with intrinsic extension by zero through the constant-coefficient ring comparison.
-Both are left adjoint to the same restriction; their unit on each extension summand
-is insertion into that summand. This gives the finite-model isomorphism, including
-for empty opens and the identity immersion.
-
-For extension use the completeOpen.extensionComplete field. Compute each derived
-reduction on a flat-term K-flat representative using strictOpen.ordinary and its
-scalar-unit normalized comparison. After the finite-model identification this is
-exact intrinsic finite extension of the original reduction. Apply the finite open
-constructibility and interval theorem at every level. Transport constructibility
-and cohomological support through these isomorphisms: the single input interval
-works at every output level. Completeness and these reductions give integral
-constructibility by its definition.
-
-For restriction use completeOpen.restrictionComplete. The completed immersion
-pullback comparison identifies its quotient reductions with exact finite restriction.
-Pull back each constructible partition by the open immersion; the strata are the
-scheme-theoretic intersections and the locally constant models and finite stalks
-pull back to those strata. Exact restriction takes zero cohomology to zero, so
-every specified interval is preserved. Apply this separately to each supplied
-uniform interval, not merely to the interval witnessing constructibility. These
-arguments use arbitrary unbounded representatives and impose no finite-Tor bound. -/
+augmentations and normalized tensor chain maps. -/
 theorem openQuotientModelGeometry [IsNoetherian X] [IsNoetherian U]
     (hlX : IsUnit (l : Γ(X, ⊤))) (hlU : IsUnit (l : Γ(U, ⊤)))
     (C : CompletedOpenTensor.Context l E j) :

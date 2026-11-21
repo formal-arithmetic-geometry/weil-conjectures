@@ -21,25 +21,19 @@ with values in an arbitrary Grothendieck abelian category `A`, that a sheaf `K` 
 isomorphisms. The results of `WeilConjectures.SixFunctors.OpenClosed.Conservative` are the same
 statements proved with stalks, for a concrete `A`.
 
-## The argument
-
-Base change `i.Etale : X.Etale ⥤ Z.Etale` along `i` is cover-dense, locally full and locally
-faithful (`WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion`). By the comparison
-lemma `CategoryTheory.Functor.IsDenseSubsite.sheafEquiv`, the pushforward along it is therefore
-an equivalence between the sheaves on `Z` and the sheaves on `X` for the topology induced by
-`i.Etale`, in which a sieve `S` on `W` covers when its base change covers `W ×_X Z`. A sieve
-`S` covering for this topology, together with the étale `X`-schemes landing in `U`, covers `W`
-in the étale topology. So an étale sheaf `K` vanishing on everything over `U` — which is what
-`j^* K = 0` says — is a sheaf for the induced topology, hence the pushforward of a sheaf on `Z`.
-
-No stalks enter, which is why the coefficient category is arbitrary.
-
 ## Main results
 
 - `AlgebraicGeometry.Etale.mem_essImage_lowerStar_of_isZero_upperStar`: a sheaf `K` with
   `j^* K = 0` is in the essential image of `i_*`.
 - `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar'`: `j^*` and `i^*` jointly
   reflect isomorphisms, for arbitrary Grothendieck abelian coefficients.
+
+## Implementation details
+
+Base change `i.Etale : X.Etale ⥤ Z.Etale` is cover-dense, locally full and locally faithful, so
+by the comparison lemma `CategoryTheory.Functor.IsDenseSubsite.sheafEquiv` the pushforward
+along it is an equivalence onto sheaves for the induced topology; a sheaf vanishing over `U` is
+a sheaf for that topology. No stalks enter, which is why the coefficient category is arbitrary.
 -/
 
 @[expose] public section
@@ -69,8 +63,7 @@ def sieveOfRangeSubset (W : X.Etale) : Sieve W where
 
 /-- Let `i` be a morphism whose range is the complement of the range of `j`. If the base change
 along `i` of a sieve `S` on `W` is an étale covering of `W ×_X Z`, then `S` together with the
-étale `X`-schemes over `W` landing in `U` is an étale covering of `W`: the points of `W` over
-`U` are covered by `W ×_X U`, and those over `Z` by `S`. -/
+étale `X`-schemes over `W` landing in `U` is an étale covering of `W`. -/
 lemma sup_sieveOfRangeSubset_mem (hij : Set.range i.base = (Set.range j.base)ᶜ)
     {W : X.Etale} (S : Sieve W)
     (hS : S.functorPushforward i.Etale ∈ Z.smallEtaleTopology (i.Etale.obj W)) :
@@ -104,10 +97,7 @@ variable {U Z X : Scheme.{u}} {j : U ⟶ X} (i : Z ⟶ X) [IsOpenImmersion j] [I
 
 omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- An étale sheaf `K` on `X` whose sections over every étale `X`-scheme landing in `U` vanish
-is a sheaf for the topology on `X.Etale` induced by base change along `i`. A covering sieve `S`
-for that topology becomes an étale covering after adding the étale `X`-schemes landing in `U`
-(`AlgebraicGeometry.Etale.sup_sieveOfRangeSubset_mem`), and on these `K` vanishes, so the sheaf
-condition for this larger sieve gives the one for `S`. -/
+is a sheaf for the topology on `X.Etale` induced by base change along `i`. -/
 lemma isSheaf_inducedTopology_of_isZero (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (K : Sheaf X.smallEtaleTopology A)
     (hK : ∀ V : X.Etale, Set.range V.hom.base ⊆ Set.range j.base → IsZero (K.obj.obj (op V))) :
@@ -131,8 +121,7 @@ lemma isSheaf_inducedTopology_of_isZero (hij : Set.range i.base = (Set.range j.b
 omit [IsClosedImmersion i] in
 variable {A} in
 /-- A sheaf on `X` whose restriction along the open immersion `j` vanishes has vanishing sections
-over every étale `X`-scheme `V` landing in the range of `j`: such a `V` is the image of an étale
-`U`-scheme under `j`, over which the sections of `K` are those of `j^* K`. -/
+over every étale `X`-scheme `V` landing in the range of `j`. -/
 lemma isZero_obj_of_isZero_upperStar {K : Sheaf X.smallEtaleTopology A}
     (hK : IsZero ((j)^*[A].obj K)) (V : X.Etale) (hV : Set.range V.hom.base ⊆ Set.range j.base) :
     IsZero (K.obj.obj (op V)) := by
@@ -149,12 +138,7 @@ lemma isZero_obj_of_isZero_upperStar {K : Sheaf X.smallEtaleTopology A}
 
 variable {A} in
 /-- **Sheaves supported on `Z` are pushforwards**: a sheaf `K` on `X` whose restriction to the
-open complement `U` of `Z` vanishes is isomorphic to `i_* G` for a sheaf `G` on `Z`.
-
-The sheaf `K` is a sheaf for the topology induced by base change along `i`
-(`AlgebraicGeometry.Etale.isSheaf_inducedTopology_of_isZero`), and for that topology the
-pushforward along `i.Etale` is an equivalence by the comparison lemma, `i.Etale` being
-cover-dense, locally full and locally faithful. -/
+open complement `U` of `Z` vanishes is isomorphic to `i_* G` for a sheaf `G` on `Z`. -/
 theorem mem_essImage_lowerStar_of_isZero_upperStar
     (hij : Set.range i.base = (Set.range j.base)ᶜ) {K : Sheaf X.smallEtaleTopology A}
     (hK : IsZero ((j)^*[A].obj K)) : (i)_*[A].essImage K := by
@@ -171,9 +155,7 @@ theorem mem_essImage_lowerStar_of_isZero_upperStar
       (F.objObjPreimageIso K'))⟩⟩
 
 variable {A} in
-/-- A sheaf on `X` whose restrictions to `U` and to `Z` both vanish is zero: it is `i_* G` by
-`AlgebraicGeometry.Etale.mem_essImage_lowerStar_of_isZero_upperStar`, and
-`G ≅ i^* i_* G` vanishes. -/
+/-- A sheaf on `X` whose restrictions to `U` and to `Z` both vanish is zero. -/
 theorem isZero_of_isZero_upperStar (hij : Set.range i.base = (Set.range j.base)ᶜ)
     {K : Sheaf X.smallEtaleTopology A} (hj : IsZero ((j)^*[A].obj K))
     (hi : IsZero ((i)^*[A].obj K)) : IsZero K := by
@@ -184,13 +166,9 @@ theorem isZero_of_isZero_upperStar (hij : Set.range i.base = (Set.range j.base)�
 
 /-- **Open–closed conservativity, for arbitrary coefficients**: the restrictions `j^*` and `i^*`
 along an open immersion `j` and a closed immersion `i` with complementary ranges jointly
-reflect isomorphisms of sheaves with values in any Grothendieck abelian category. Both are
-exact, so the kernel and the cokernel of a morphism inverted by `j^*` and `i^*` have vanishing
-restrictions to `U` and to `Z`, and vanish by
-`AlgebraicGeometry.Etale.isZero_of_isZero_upperStar`.
-
+reflect isomorphisms of sheaves with values in any Grothendieck abelian category.
 This is `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar` without the
-concreteness assumptions on `A` that its proof through stalks needs. -/
+concreteness assumptions on `A`. -/
 theorem jointlyReflectIsomorphisms_upperStar' (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     JointlyReflectIsomorphisms (pairFunctor ((j)^*[A]) ((i)^*[A])) := by
   refine jointlyReflectIsomorphisms_pairFunctor _ _ fun {F G} φ hj hi ↦ ?_

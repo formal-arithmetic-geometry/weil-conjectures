@@ -30,14 +30,16 @@ of a scheme `T`, and write `K/π^{n+1}` for its finite reductions
 reduction controls all of them:
 
 * `WeilConjectures.residue_constructible_of_reduction`: if some `K/π^{m+1}` is bounded
-  constructible of finite Tor amplitude, then so is the residue reduction `K/π`. Indeed,
-  reducing the triangle `K --π^{m+1}--> K --> K/π^{m+1}` modulo `π` kills the first map, so the
-  cohomology of `K/π` embeds into that of `(K/π^{m+1}) ⊗ᴸ 𝒪_E/π`, with the next cohomology sheaf
-  as cokernel.
+  constructible of finite Tor amplitude, then so is the residue reduction `K/π`.
 * `WeilConjectures.reduction_constructible_of_residue`: if `K/π` is bounded constructible with
-  cohomology in `[a, b]`, then so is every reduction `K/π^{n+1}`. This uses the triangles
-  `K/π^{n+1} --> K/π^{n+2} --> K/π`, obtained from the octahedral axiom applied to
-  `π^{n+2} = π^{n+1} · π`.
+  cohomology in `[a, b]`, then so is every reduction `K/π^{n+1}`.
+
+## Implementation details
+
+The first statement reduces the triangle `K --π^{m+1}--> K --> K/π^{m+1}` modulo `π`,
+which kills the first map. The second uses the triangles
+`K/π^{n+1} --> K/π^{n+2} --> K/π`, obtained from the octahedral axiom applied to
+`π^{n+2} = π^{n+1} · π`.
 -/
 
 @[expose] public noncomputable section

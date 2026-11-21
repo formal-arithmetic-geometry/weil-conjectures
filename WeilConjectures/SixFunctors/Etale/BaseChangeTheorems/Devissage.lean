@@ -65,8 +65,7 @@ instance (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ) : (Etale.baseChangeTargetFunctor 
   infer_instance
 
 /-- The source `F ↦ p⁻¹ Rᵠg_* F` of the exchange map is exact in the middle on short exact
-sequences: it is the composite of the triangulated functors `F ↦ F[0]` (on short exact
-sequences), `Rg_*`, `p^*` with the homological functor `Hᵠ`. -/
+sequences. -/
 theorem Etale.exact_baseChangeSourceFunctor_map_of_shortExact (p : X ⟶ S) (g : T ⟶ S) (q : ℤ)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact) :
     (E.map (Etale.baseChangeSourceFunctor Λ p g q)).Exact :=
@@ -75,8 +74,7 @@ theorem Etale.exact_baseChangeSourceFunctor_map_of_shortExact (p : X ⟶ S) (g :
     DerivedCategory.Plus.homologyFunctor _ q) _ rfl
 
 /-- The target `F ↦ Rᵠh_* e⁻¹ F` of the exchange map is exact in the middle on short exact
-sequences: it is the composite of the triangulated functors `F ↦ F[0]` (on short exact
-sequences), `e^*`, `Rh_*` with the homological functor `Hᵠ`. -/
+sequences. -/
 theorem Etale.exact_baseChangeTargetFunctor_map_of_shortExact (e : Y ⟶ T) (h : Y ⟶ X) (q : ℤ)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact) :
     (E.map (Etale.baseChangeTargetFunctor Λ e h q)).Exact :=
@@ -86,10 +84,7 @@ theorem Etale.exact_baseChangeTargetFunctor_map_of_shortExact (e : Y ⟶ T) (h :
 
 /-- **Five-lemma transfer for the exchange morphism**: for a short exact sequence
 `0 ⟶ F₁ ⟶ F ⟶ F₂ ⟶ 0` of sheaves of `Λ`-modules, if the exchange maps are isomorphisms at `F₁`
-and at `F₂` in every degree, then they are isomorphisms at `F` in every degree. The exchange
-maps form a morphism between the two long exact sequences
-(`AlgebraicGeometry.Etale.exists_connecting_baseChangeHomologyMap`), and in each degree the
-five lemma applies to the five adjacent terms. -/
+and at `F₂` in every degree, then they are isomorphisms at `F` in every degree. -/
 theorem Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact (sq : IsPullback e h g p)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact)
     (h₁ : ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E.X₁))
@@ -135,10 +130,7 @@ theorem Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact (sq : IsPullback e 
 
 /-- **Prime-factor induction for the exchange morphism**: if the exchange maps are
 isomorphisms in every degree at every sheaf killed by a prime, then they are isomorphisms in
-every degree at every sheaf killed by a positive integer `n`. Induct on the number of prime
-factors of `n` using `0 ⟶ F[ℓ] ⟶ F ⟶ ℓF ⟶ 0` for a prime `ℓ ∣ n`
-(`CategoryTheory.ObjectProperty.prop_of_nsmul_id_eq_zero`) and the five-lemma transfer
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_X₂_of_shortExact`. -/
+every degree at every sheaf killed by a positive integer `n`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_id_eq_zero (sq : IsPullback e h g p)
     (hprime : ∀ r : ℕ, r.Prime → ∀ E : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),
       r • 𝟙 E = 0 → ∀ q, IsIso (Etale.baseChangeHomologyMap Λ sq q E))
@@ -152,12 +144,7 @@ theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_id_eq_zero (sq : IsPullback e
 
 /-- **Prime-torsion dévissage for the exchange morphism**: let `g` be quasi-compact and
 quasi-separated. If the exchange maps are isomorphisms in every degree at every sheaf killed by
-a prime, then they are isomorphisms at every torsion sheaf `F`. By the prime-factor induction
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_nsmul_id_eq_zero` they are
-isomorphisms at the sheaves `F[n]` killed by a positive integer; `F` is their filtered colimit
-(`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf.exists_isColimit`), and the source and the target of
-the exchange map commute with filtered colimits
-(`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`). -/
+a prime, then they are isomorphisms at every torsion sheaf `F`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf (sq : IsPullback e h g p)
     [QuasiCompact g] [QuasiSeparated g]
     (hprime : ∀ r : ℕ, r.Prime → ∀ E : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ),

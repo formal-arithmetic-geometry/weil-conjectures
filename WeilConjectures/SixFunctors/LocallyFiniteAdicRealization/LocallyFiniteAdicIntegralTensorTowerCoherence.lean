@@ -9,7 +9,16 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFi
 
 /-! # Field-tower coherence of the explicit integral comparison
 
-Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2), Remark 6.8.15.
+## Implementation details
+
+The associator is a hypothesis `assoc` pinned by `hassoc`, because
+`integralTensorAssociator` and its defining equation `integralTensorAssociator_eq` live in
+`LocallyFiniteAdicIntegralTensorCoherence`, which imports this module.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Propositions 3.5.1 and 6.8.14(2),
+  Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -32,27 +41,7 @@ variable [IsCommMonObj (abRing l X)] [(sections l X).Additive]
 /-- For a tower `E ≤ L ≤ M`, the explicit integral comparisons compose, through the
 integral scalar associator, to the direct comparison. The associator `assoc` is pinned by
 `hassoc` to `sfIntegralScalarComp` followed by equality transport along the
-field-inclusion composition law (this is `integralTensorAssociator` of the item's module
-`WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdicIntegralTensorCoherence`,
-which imports this module, with
-`hassoc` its defining equation `integralTensorAssociator_eq`); for an arbitrary `assoc`
-the equation would be false.
-
-Source: Bhatt--Scholze, Propositions 3.5.1 and 6.8.14(2), Remark 6.8.15; the tower
-clause of `lem-sf-native-integral-tensor-coherence`.
-
-Proof: rewrite `assoc` by `hassoc`. By the canonical completed scalar associator formula
- the integral associator
-`sfIntegralScalarComp` is the ordinary derived balancing associator conjugated by the
-three completion comparisons. Naturality moves the completion comparisons across the
-outer tensor functor `integralTensor l X C M`, and consecutive inverse comparisons cancel.
-What remains is associativity of the balanced derived tensor with the native ring of `C`:
-on a pure triple tensor `c ⊗ b ⊗ x` both maps give `c b ⊗ x`. Check this on ordinary
-tensor units and on K-flat complexes, then descend by the universal derived counit
-. The scalar equations of the coefficient system
- identify the direct ring map `E → M`,
-and the equality transport along `coefficientInclusion_laws` gives exactly the displayed
-associator, including repeated fields. -/
+field-inclusion composition law; for an arbitrary `assoc` the equation would be false. -/
 theorem integralTensorComparison_tower (C : CoefficientSystem l X)
     (assoc : ∀ {E L M : Index l (PadicAlgCl l)} (h : E ≤ L) (k : L ≤ M),
       sfConstructibleIntegralScalarExtension 0 l (Nat.Prime.ne_zero (Fact.out : l.Prime))

@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.ConstructibleExceptionalAdjunctionCoefficientsData
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Normalized.NormalizedScalarAssociatorLocalizationTransport
 
-/-! # Localization of a normalized completed scalar associator -/
+/-! # Localization of a normalized completed scalar associator
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10 and Lemma 3.4.12
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -20,32 +25,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- A finite-Tor scalar associator with the prescribed ordinary realization localizes
-to the intrinsic rational scalar associator.
-Source: exceptional coefficient construction, scalar normalization paragraph; the
-ordinary/completed comparison of Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12.
-
-Proof: identify each supplied scalar functor with the restriction of the completed
-scalar extension using faithfulness of the full inclusion and the three functor
-equalities. The three inverse-realization normalizations identify the supplied sigma
-maps with the quotient-completion comparisons. To compare the ordinary models, choose
-flat-term K-flat resolutions. Both ordinary scalar functors compute change of rings
-along the same completed coefficient map; their tensor sections and adjunction units
-give the comparison. In these models both completion maps have the quotient tensor
-maps as unshifted Roos coordinates and zero shifted coordinate. The uniqueness of
-descent therefore identifies these comparisons with sfIntegralOrdinaryComparison.
-The associator normalization, after cancelling the direct completion comparison,
-now becomes exactly the conjugation formula specifying sfIntegralScalarComp: inverse
-completion for the second map, ordinary extension of inverse completion for the first,
-ordinary balanced associativity, and direct completion. The ordinary associators agree
-because on a double pure tensor both send c tensor (b tensor x) to c*j(b) tensor x;
-the tensor universal property and descent through resolutions prove equality.
-The existing CompletedLineTensor.canonical_restriction also gives the identification
-of this fixed completed associator with the intrinsic one. Faithfulness of the integral
-inclusion identifies the restricted components. Finally
-apply raw localization to this equality. The defining component specification of
-sfRationalScalarComp identifies its component with this localized integral component.
-The argument includes identity embeddings and repeated fields and never reflects
-equality through localization. -/
+to the intrinsic rational scalar associator. -/
 theorem normalized_scalar_associator_localization
     (E L M : FieldStage.{max u v} l)
     (i : E.carrier →ₐ[Padic l] L.carrier) (j : L.carrier →ₐ[Padic l] M.carrier)

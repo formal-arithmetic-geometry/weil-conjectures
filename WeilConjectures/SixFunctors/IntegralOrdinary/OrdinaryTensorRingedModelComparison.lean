@@ -12,7 +12,10 @@ import Mathlib.CategoryTheory.Localization.Prod
 
 /-! # Representative-normalized comparison of ordinary tensor models
 
-Source: Stacks 07A4 and 06YS; fully faithful localization descent.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 06YS]
 -/
 
 @[expose] public noncomputable section
@@ -49,15 +52,7 @@ private theorem compare_localized_models
   exact (congrArg (fun z ↦ a.hom.app P ≫ z) h).trans
     (Iso.hom_inv_id_app_assoc a P _)
 
-/-- Ordinary tensor and the supplied ringed tensor have the same signed total model.
-Source: Stacks 07A4 and 06YS; the product localization universal property.
-
-Proof: restrict the ringed tensor representative to the good complexes. Its source
-is the same signed total tensor as tensorRepresentativeIso. Their composite gives
-an isomorphism after precomposition by the product good localization. Fully faithful
-whiskering lifts that isomorphism and its inverse. The map-preimage equation,
-composed with the first representative, gives the displayed normalization on every
-pair. Empty schemes and zero complexes use the same localization argument. -/
+/-- Ordinary tensor and the supplied ringed tensor have the same signed total model. -/
 theorem tensorRingedModelComparison (X : Scheme.{u})
     (d : IntegralSystemRealization.RingedModels l E) :
     ∃ e : ConstructibleTensorModel.ordinaryTensor l E X ≅ (d.tensor X).ordinary.tensor,

@@ -10,8 +10,14 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSystemG
 
 /-! # Enriched coefficient gamma projection transport
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A6, 08JA, 0D6E and 0941;
-the specialization of `enrichedSequenceProjectionFormula` to the coefficient calculus.
+The specialization of `enrichedSequenceProjectionFormula` to the coefficient calculus.
+
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -30,16 +36,6 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 /--
 The enriched sequence projection theorem, transported through the coefficient
 sequence-site, gives the finite projection identity for `S.gamma`.
-
-Source: Stacks 07A6, 08JA, 0D6E and 0941, together with
-`SheafOfModules.EnrichedSequenceProjection.enrichedSequenceProjectionFormula`.
-Proof: identify the coefficient sequence-site with the strict system presentation;
-apply the enriched projection formula to the actual reduction adjunction and tensor
-comparison; use `D.globalLimit_model`, `D.globalEvaluation_model`, and
-`D.scalarSections_model` to transport the derived sections and limit comparisons.
-Finally use `H.sections_projection` at the internal-Hom system. The resulting
-composition is exactly the displayed `CoefficientGammaProjection` equation,
-including the prescribed first-variable reduction comparison.
 -/
 theorem coefficientDerivedSystemGammaProjectionTransport
     (S : CoefficientDerivedSystemCalculus l E W)

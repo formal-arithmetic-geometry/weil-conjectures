@@ -29,6 +29,10 @@ are the colimit of those of the finite layers (continuity of the inertia action;
 In particular every local section of `Hᵠ Ψ_{N_Ω}` over a quasi-compact quasi-separated object comes
 from a finite layer `L'`, on whose image the subgroup `Gal(Ω/L')` acts trivially
 (`NearbyCyclesModel.Hom.pullbackExchange_app_comp_autAction`).
+
+## References
+
+* [SGA 7 II], Exposé XIII, 1.3
 -/
 
 @[expose] public section

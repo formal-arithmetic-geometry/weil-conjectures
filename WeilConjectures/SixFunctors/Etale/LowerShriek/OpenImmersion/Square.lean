@@ -35,9 +35,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `proposition-extension-zero-restriction-closed-subscheme--11`: Open-immersion square.
-
-A cartesian square `g_U ≫ j = j' ≫ g`
+/-- An open-immersion square: a cartesian square `g_U ≫ j = j' ≫ g`
 ```
 U' --g_U--> U
 | |
@@ -57,7 +55,7 @@ namespace IsOpenImmersionSquare
 variable {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g : X' ⟶ X}
 
 /-- A cartesian square whose right vertical map is an open immersion is an open-immersion
-square: the left vertical map is an open immersion as a base change of one. -/
+square. -/
 lemma of_isPullback (h : IsPullback gU j' j g) [IsOpenImmersion j] :
     IsOpenImmersionSquare gU j' j g where
   toIsPullback := h

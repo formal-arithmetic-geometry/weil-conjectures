@@ -127,9 +127,7 @@ theorem Etale.survivesBaseChange_id (q : ℤ) (sq : IsPullback e h g p)
   rw [← LinearMap.comp_apply, ← ModuleCat.hom_comp, IsIso.inv_hom_id, ModuleCat.hom_id,
     LinearMap.id_apply]
 
-/-- Step (1) of blueprint `lemma-reduction-field--1`: the survival of `ξ` is invariant under
-thickenings. A thickening does not change the étale site,
-so the transition maps along it are isomorphisms compatible with the base-change maps. -/
+/-- The survival of `ξ` is invariant under thickenings. -/
 theorem Etale.survivesBaseChange_comp_iff_of_surjective (q : ℤ) (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
     (ξ : ((X.uliftPointSmallEtale x).sheafFiber.obj
@@ -164,9 +162,7 @@ theorem Etale.survivesBaseChange_comp_iff_of_surjective (q : ℤ) (sq : IsPullba
     hae hah ha)
 
 -- the transition maps are compared through large terms of the derived categories
-/-- Step (2) of blueprint `lemma-reduction-field--1`: the survival of `ξ` passes to cofiltered
-limits along affine transition morphisms. By the limit theorem for higher direct images the stalks over the limit are the colimits
-of the stalks over the stages, on both sides of the base-change map. -/
+/-- The survival of `ξ` passes to cofiltered limits along affine transition morphisms. -/
 theorem Etale.survivesBaseChange_of_isLimit [IsAffine S] (q : ℤ) (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
     (ξ : ((X.uliftPointSmallEtale x).sheafFiber.obj
@@ -357,13 +353,8 @@ theorem Etale.survivesBaseChange_of_isLimit [IsAffine S] (q : ℤ) (sq : IsPullb
       ((ConcreteCategory.isIso_iff_bijective _).1 inferInstance).1 _ (h₂.trans hf)
 
 
-/-- Step (3) of blueprint `lemma-reduction-field--1`: if `ξ` survives over a quasi-compact
-quasi-separated `T'` and `Z ⊆ T'` is closed with quasi-compact complement `V`, then `ξ`
-survives over `V` or over `Z`. Embed `π⁻¹ F` into `j_* J ⊕ i_* i⁻¹ π⁻¹ F` with `J` injective
-on `V`; by `AlgebraicGeometry.Etale.mono_cokernelMap` the image of `ξ` survives in one of the
-summands. For the closed summand use the exactness of `i_*`; for the open summand use the
-universal base-change property in degrees `< q` for the base change of `p` along `T' ⟶ S`,
-the Leray spectral sequence, and `AlgebraicGeometry.Etale.mono_cokernelDesc`. -/
+/-- If `ξ` survives over a quasi-compact quasi-separated `T'` and `Z ⊆ T'` is closed with
+quasi-compact complement `V`, then `ξ` survives over `V` or over `Z`. -/
 theorem Etale.survivesBaseChange_or_of_isClosedImmersion [IsAffine S] (q : ℤ) (hq : 1 ≤ q)
     (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q') (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
@@ -492,8 +483,7 @@ theorem Etale.survivesBaseChange_or_of_isClosedImmersion [IsAffine S] (q : ℤ) 
     rw [← ModuleCat.comp_apply, ← Functor.map_comp, ← Functor.map_comp, biprod.lift_snd] at hB
     exact hB
 
-/-- Step (4) of blueprint `lemma-reduction-field--1`: nothing survives over the empty scheme,
-since there the fibre `T' ×_S X` is empty and `R^q h'_* e'⁻¹ π⁻¹ F` vanishes. -/
+/-- Nothing survives over the empty scheme. -/
 theorem Etale.not_survivesBaseChange_of_isEmpty (q : ℤ) (sq : IsPullback e h g p)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (x : X)
     (ξ : ((X.uliftPointSmallEtale x).sheafFiber.obj

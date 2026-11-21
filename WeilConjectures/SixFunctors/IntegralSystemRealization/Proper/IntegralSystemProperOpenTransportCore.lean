@@ -8,7 +8,16 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompactificationRealizationData
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenTransportCanonical
 
-/-! Core transport package for intrinsic proper/open coherence. -/
+/-! # Core proper/open transport
+
+Core transport package for intrinsic proper/open coherence.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,11 +27,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The gamma, adjunct, and canonical parts of the proper/open transport.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
-Proof: conjugate the intrinsic semilinear gamma through the canonical bridge;
-identify its adjunct by the normalized lambda transpose and cancel the bridge
-isomorphisms in the canonical equation. -/
+/-- The gamma, adjunct, and canonical parts of the proper/open transport. -/
 structure ProperOpenTransportCore (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o) where
   gamma : ∀ {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

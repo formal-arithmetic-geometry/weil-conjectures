@@ -11,6 +11,12 @@ import WeilConjectures.SixFunctors.GeneratorReduction.PullQuotientAugmentationOn
 import WeilConjectures.SixFunctors.GeneratorReduction.FiniteReductionCompletionUnit
 import all WeilConjectures.SmoothPurity.Integral.IntegralOperationsWellDefinedSupplement
 /-! # Quotient augmentations of primitive operations
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -143,24 +149,7 @@ private theorem pull_augmentation_onGood
     IntegralOnSlice.qGood, Functor.comp_obj, ObjectProperty.ι_obj] using
     hu'.trans (pullQuotientTranspose_onGood l E system realization f p P).symm
 
-/-- The normalized ordinary tensor augmentation realizes the reduction-tensor map.
-Source: current blueprint, fix-prop-coherence.proof.md, maps-used sentence;
-Stacks Tags 07A4, 07A6 and 0941.
-
-Proof: first work on good flat-term K-flat complexes. The strict tensor
-transpose calculation identifies the reconstruction composite in the full reference
-Roos coordinates. Tensor.canonical.2 computes the quotient augmentation in those
-same coordinates. The defining global tensor realization and cancellation of the
-ordinary tensor representative identify these maps. For pullback, the strict
-transpose calculation is combined with Pull.model, naturality of completionUnit,
-and its defining good-representative equation. Cancel the full reference pullback
-Roos isomorphism. Both equations are natural transformations, so representative
-isomorphisms from the resolving-class localization extend them to arbitrary objects.
-Finite scalar extension inverts completionUnit. Naturality of reductionEvaluation
-and joint conservativity imply invertibility of its whole reduction. Both primitive
-comparisons are completionUnit followed by the specified comparison isomorphism,
-so their reductions are invertible too. No completeness or boundedness of the
-inputs, or invertibility of l on the schemes, is assumed. -/
+/-- The normalized ordinary tensor augmentation realizes the reduction-tensor map. -/
 theorem primitiveQuotientAugmentations (ringed : IntegralSystemRealization.RingedModels l E)
     (system : IntegralSystemRealization.Operations l E)
     (realization : IntegralSystemRealization.RealizationModel l E system) :

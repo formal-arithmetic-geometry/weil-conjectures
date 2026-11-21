@@ -18,17 +18,13 @@ stage `Λ = 𝒪_E`, `I = 𝔪_E`. The integral stage `Dᵇc(X, 𝒪_E)` is the 
 rational stage `Dᵇc(X, E)` is its rationalization `Dᵇc(X, 𝒪_E)[M⁻¹]` for a submonoid `M` of `Λ`
 (as in `WeilConjectures.SixFunctors.Etale.Derived.LocalizationRational`).
 
-This file gives blueprint `theorem-f-shriek-finite-coefficients` at these two stages, for a
-separated morphism `f : X ⟶ Y` of separated schemes of finite type over `k`.
+This file constructs the exceptional inverse image at these two stages, for a separated
+morphism `f : X ⟶ Y` of separated schemes of finite type over `k`.
 
 * `𝒪_E`: the integral `Rf^! : Dᵇc(Y, 𝒪_E) ⥤ Dᵇc(X, 𝒪_E)`
-  (`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek`) is the derived inverse limit
-  `G_f L = R lim_n Res_n Rf_n^! L_n` of the finite stages. By
-  `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint` this is the
-  restriction of the exceptional inverse image `Rf^!` of `D(-_ét, Λ)`, which carries
-  `Dᵇc(Y, 𝒪_E)` into `Dᵇc(X, 𝒪_E)`
-  (`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`). Its
-  characterizing adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`, `Λ`-linear, is
+  (`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek`), the restriction of the
+  exceptional inverse image `Rf^!` of `D(-_ét, Λ)`. Its characterizing adjunction
+  `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`, `Λ`-linear, is
   `AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriekHomEquiv`; for proper `f`,
   where `Rf_! = Rf_*` preserves `Dᵇc(-, 𝒪_E)`, it is an adjunction of functors on the
   constructible categories
@@ -39,6 +35,14 @@ separated morphism `f : X ⟶ Y` of separated schemes of finite type over `k`.
   `AlgebraicGeometry.Etale.boundedConstructibleRationalUpperShriekHomEquiv`, with `Hom` groups of
   `D(Y_ét, Λ)[M⁻¹]` on the left, and for proper `f` the adjunction
   `AlgebraicGeometry.Etale.boundedConstructibleRationalLowerStarUpperShriekAdjunction`.
+
+## Implementation details
+
+The integral `Rf^!` is the restriction of `Rf^!` on `D(-_ét, Λ)` rather than the derived inverse
+limit `R lim_n Res_n Rf_n^! L_n` of the finite stages; the two agree by
+`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`, and the restriction
+lands in `Dᵇc(X, 𝒪_E)` by
+`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`.
 
 As in `WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral`, the constructions take
 as instance arguments that the lower shrieks on `D(-_ét, Λ)` along `f` and the structure
@@ -57,8 +61,7 @@ open Scheme
 
 namespace Etale
 
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
+/-- The small étale site of a scheme is essentially small. -/
 local instance instEssentiallySmallEtale_boundedConstructibleUpperShriek
     (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
@@ -115,15 +118,8 @@ variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ �
 /-! ### The integral stage `𝒪_E` -/
 
 variable (I) in
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the integral stage `𝒪_E`): the
-exceptional inverse image `Rf^! : Dᵇc(Y, 𝒪_E) ⥤ Dᵇc(X, 𝒪_E)`. The blueprint defines it as the
-derived inverse limit `G_f L = R lim_n Res_n Rf_n^! L_n` of the finite stages; by
-`AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint` this is the
-restriction of the exceptional inverse image `Rf^!` of `D(-_ét, Λ)`, which carries
-`Dᵇc(Y, 𝒪_E)` into `Dᵇc(X, 𝒪_E)`
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegral_rightDerivedUpperShriek`). It is
-characterized by the adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriekHomEquiv`). -/
+/-- The exceptional inverse image `Rf^! : Dᵇc(Y, 𝒪_E) ⥤ Dᵇc(X, 𝒪_E)` at the integral stage, the
+restriction of the exceptional inverse image `Rf^!` of `D(-_ét, Λ)`. -/
 noncomputable abbrev boundedConstructibleIntegralUpperShriek :
     (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory ⥤
       (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory :=
@@ -131,10 +127,8 @@ noncomputable abbrev boundedConstructibleIntegralUpperShriek :
     have ⟨_, hϖ, hI⟩ := hϖI.out
     boundedConstructibleIntegral_rightDerivedUpperShriek hϖ hI aX aY f hf hL
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the integral stage `𝒪_E`, the
-characterizing adjunction): for `K ∈ Dᵇc(X, 𝒪_E)` and `L ∈ Dᵇc(Y, 𝒪_E)`, the
-`Λ`-linear bijection `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`, the adjunction `Rf_! ⊣ Rf^!` on
-constructible complexes. -/
+/-- For `K ∈ Dᵇc(X, 𝒪_E)` and `L ∈ Dᵇc(Y, 𝒪_E)`, the `Λ`-linear bijection
+`Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`, the adjunction `Rf_! ⊣ Rf^!` on constructible complexes. -/
 noncomputable def boundedConstructibleIntegralUpperShriekHomEquiv
     (K : (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory)
     (L : (DerivedCategory.boundedConstructibleIntegral I Y).FullSubcategory) :
@@ -152,10 +146,8 @@ section Proper
 
 variable [IsProper f]
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the integral stage `𝒪_E`, the
-characterizing adjunction for proper `f`): for `f` proper, `Rf_! = Rf_*` preserves
-`Dᵇc(-, 𝒪_E)`, and `Rf_* ⊣ Rf^!` is an adjunction of functors on the constructible categories,
-the restriction of `Rf_! ⊣ Rf^!` along `Rf_! ≅ Rf_*`. -/
+/-- For `f` proper, the adjunction `Rf_* ⊣ Rf^!` of functors on `Dᵇc(-, 𝒪_E)`, the restriction of
+`Rf_! ⊣ Rf^!` along `Rf_! ≅ Rf_*`. -/
 noncomputable def boundedConstructibleIntegralLowerStarUpperShriekAdjunction :
     boundedConstructibleIntegralRightDerivedLowerStar I aY f ⊣
       boundedConstructibleIntegralUpperShriek I aX aY f hf :=
@@ -176,19 +168,15 @@ local notation "𝐃ᵇc(" X ")" =>
   Rationalization M (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory
 
 variable (I) in
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the rational stage `E`): the exceptional
-inverse image `Rf^! : Dᵇc(Y, E) ⥤ Dᵇc(X, E)`, the rationalization of the integral `Rf^!`
-(`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek`). It is characterized by the
-adjunction `Hom(Rf_! K, L) ≅ Hom(K, Rf^! L)`
-(`AlgebraicGeometry.Etale.boundedConstructibleRationalUpperShriekHomEquiv`), the rationalization
-of the integral one. -/
+/-- The exceptional inverse image `Rf^! : Dᵇc(Y, E) ⥤ Dᵇc(X, E)` at the rational stage, the
+rationalization of the integral `Rf^!`
+(`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriek`). -/
 noncomputable abbrev boundedConstructibleRationalUpperShriek : 𝐃ᵇc(Y) ⥤ 𝐃ᵇc(X) :=
   Rationalization.map M (boundedConstructibleIntegralUpperShriek I aX aY f hf)
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the rational stage `E`, the
-characterizing adjunction): for `K ∈ Dᵇc(X, 𝒪_E)` and `L ∈ Dᵇc(Y, 𝒪_E)`, the `Λ`-linear
-bijection `Hom(Rf_! K, L)[M⁻¹] ≅ Hom(K, Rf^! L)[M⁻¹]` between the morphisms of the
-rationalizations, induced by the integral adjunction
+/-- For `K ∈ Dᵇc(X, 𝒪_E)` and `L ∈ Dᵇc(Y, 𝒪_E)`, the `Λ`-linear bijection
+`Hom(Rf_! K, L)[M⁻¹] ≅ Hom(K, Rf^! L)[M⁻¹]` between the morphisms of the rationalizations,
+induced by the integral adjunction
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegralUpperShriekHomEquiv`). -/
 noncomputable def boundedConstructibleRationalUpperShriekHomEquiv
     (K : (DerivedCategory.boundedConstructibleIntegral I X).FullSubcategory)
@@ -209,9 +197,8 @@ section Proper
 
 variable [IsProper f]
 
-/-- Blueprint `theorem-f-shriek-finite-coefficients` (at the rational stage `E`, the
-characterizing adjunction for proper `f`): the adjunction `Rf_* ⊣ Rf^!` on `Dᵇc(-, E)`, the
-rationalization of the integral adjunction
+/-- For `f` proper, the adjunction `Rf_* ⊣ Rf^!` on `Dᵇc(-, E)`, the rationalization of the
+integral adjunction
 (`AlgebraicGeometry.Etale.boundedConstructibleIntegralLowerStarUpperShriekAdjunction`). -/
 noncomputable def boundedConstructibleRationalLowerStarUpperShriekAdjunction :
     boundedConstructibleRationalRightDerivedLowerStar M I aY f ⊣

@@ -11,8 +11,10 @@ import WeilConjectures.SixFunctors.IntegralHom.Tensor.TensorEvaluationInterchang
 
 /-! # The signed Hom--tensor chain map
 
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7.
+## References
+
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 08J7]
 -/
 
 @[expose] public section
@@ -43,16 +45,7 @@ private theorem generator_transport
   subst n
   rfl
 
-/-- The signed exchange exists for arbitrary, possibly unbounded, complexes.
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 0A8X and 08J7.
-
-Proof: transpose the composite which reassociates (Hom(P,I) tensor Q) tensor P,
-interchanges Q and P using the Koszul braiding, reassociates back, and applies
-evaluation tensor the identity of Q. All its factors are chain maps. On degrees
-a,b,p the only interchange contributes (-1)^(bp); normalized evaluation sends
-v tensor x to v(x). Thus the composite has the required local formula.
-No boundedness, flatness or injectivity hypothesis occurs. -/
+/-- The signed exchange exists for arbitrary, possibly unbounded, complexes. -/
 theorem signedHomTensor_exists (P I Q : CochainComplex (Modules.{t, u} Y R) ℤ) :
     ∃ f : ((totalTensor Y R).obj
         (homComplex.{t + 1, t, max u (t + 1), max u (t + 1)} (R := R) P I)).obj Q ⟶

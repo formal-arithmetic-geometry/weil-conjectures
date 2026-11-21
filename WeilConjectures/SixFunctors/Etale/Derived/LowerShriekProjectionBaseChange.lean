@@ -19,6 +19,12 @@ For a cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f`, 
 base change map `Ex_!(c) : Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*`
 (`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationBaseChangeMap`), where `c'` is
 the base changed compactification, and the tensor comparisons of the derived pullbacks.
+
+## Implementation details
+
+`projectionMapOfCompactification_comp_of_forall` is stated generically and then specialised,
+rather than proved directly in special cases, so that the instance terms of the projection maps
+stay identical to those of other generic statements.
 -/
 
 @[expose] public section
@@ -195,8 +201,7 @@ variable [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A]
 
 omit [HasSmallSiteSheafify A] in
 /-- Restating an intertwining property of a morphism `κ : Rf_!(c₁) ⟶ Rf_!(c₂)` with the projection
-maps. Specialising this generic statement, rather than using a specialised proof directly, keeps
-the instance terms of the projection maps identical to those of other generic statements. -/
+maps. -/
 lemma projectionMapOfCompactification_comp_of_forall {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c₁ c₂ : Compactification f) (κ : Rf_!(c₁)[A] ⟶ Rf_!(c₂)[A])
     (h : ∀ (K : DerivedCategory (Sheaf X.smallEtaleTopology A))

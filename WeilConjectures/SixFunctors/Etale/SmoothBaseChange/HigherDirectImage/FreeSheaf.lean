@@ -88,7 +88,7 @@ lemma Etale.etaleLowerShriekFreeSheafHomEquiv_comp {V : Scheme.{u}} (v : V ⟶ Y
   rfl
 
 /-- Extension by zero of a free sheaf along an étale morphism `v : V ⟶ Y` is free:
-`v_! Λ[T] ≅ Λ[T → V → Y]`, both corepresenting the functor `G ↦ G(T → V → Y)`. -/
+`v_! Λ[T] ≅ Λ[T → V → Y]`. -/
 noncomputable def Etale.etaleLowerShriekFreeSheafIso {V : Scheme.{u}} (v : V ⟶ Y) (hv : Etale v)
     (T : V.Etale) :
     (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj ((Etale.freeSheaf Λ V).obj T) ≅
@@ -113,8 +113,7 @@ instance Etale.isLeftAdjoint_etaleLowerShriek :
     (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).IsLeftAdjoint :=
   (Etale.etaleLowerShriekUpperStarAdjunction _ v hv).isLeftAdjoint
 
-/-- The derived adjunction `v_! ⊣ v^*` on bounded below derived categories, for an étale `v`:
-both functors are exact. -/
+/-- The derived adjunction `v_! ⊣ v^*` on bounded below derived categories, for an étale `v`. -/
 noncomputable def Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus :
     (Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlus ⊣
       ((v)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlus :=
@@ -219,9 +218,7 @@ section Acyclicity
 open Presheaf
 
 /-- On a quasi-compact quasi-separated scheme `Z`, the underlying abelian sheaf of an injective
-sheaf of `Λ`-modules has no higher cohomology, by the Čech criterion
-`CategoryTheory.Sheaf.subsingleton_H_succ_of_exactAt_cechComplex` and
-`CategoryTheory.Sheaf.exactAt_cechComplex_forget₂_of_injective`. -/
+sheaf of `Λ`-modules has no higher cohomology. -/
 theorem Etale.subsingleton_H_forget₂_succ_of_injective (Z : Scheme.{u}) [CompactSpace Z]
     [QuasiSeparatedSpace Z] (I : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I]
     (q : ℕ) :
@@ -325,10 +322,7 @@ lemma Etale.extFreeSheafToH_comp_extClass
 
 attribute [local instance] Abelian.Ext.subsingleton_of_injective in
 /-- On a quasi-compact quasi-separated scheme, the cohomology of a sheaf of `Λ`-modules is the
-cohomology of its underlying abelian sheaf: `Extⁿ(Λ_Z, N) ⟶ Hⁿ(Z, N)` is bijective. Both are
-universal δ-functors, as the underlying abelian sheaves of injective sheaves of `Λ`-modules are
-acyclic (`AlgebraicGeometry.Etale.subsingleton_H_forget₂_succ_of_injective`), and in degree `0`
-both are the global sections. -/
+cohomology of its underlying abelian sheaf: `Extⁿ(Λ_Z, N) ⟶ Hⁿ(Z, N)` is bijective. -/
 theorem Etale.bijective_extFreeSheafToH [CompactSpace Z] [QuasiSeparatedSpace Z] (n : ℕ)
     (N : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Function.Bijective (Etale.extFreeSheafToH Λ N n) := by
@@ -382,8 +376,7 @@ section ShiftedHom
 variable {Z : Scheme.{u}}
 
 /-- Shifted morphisms `A[0] ⟶ N[0]⟦n⟧` in the bounded below derived category are
-`Extⁿ(A, N)`, additively: `D⁺` is a full subcategory of the derived category, stable under
-shifts. -/
+`Extⁿ(A, N)`, additively. -/
 noncomputable def Etale.shiftedHomFunctorObjAddEquivExt
     (A N : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (n : ℕ) :
     (Etale.shiftedHomFunctor Λ A n).obj N ≃+ Abelian.Ext.{u + 1} A N n :=
@@ -428,7 +421,7 @@ section FilteredColimit
 variable (Z : Scheme.{u}) [CompactSpace Z] [QuasiSeparatedSpace Z]
 
 /-- On a quasi-compact quasi-separated scheme, the cohomology `Hⁿ(Z, -)` of abelian sheaves
-commutes with filtered colimits, by `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`. -/
+commutes with filtered colimits. -/
 lemma Etale.preservesColimitsOfShape_functorH (n : ℕ) (J : Type (u + 1)) [SmallCategory J]
     [IsFiltered J] :
     PreservesColimitsOfShape J (Sheaf.functorH Z.smallEtaleTopology n) := by
@@ -482,20 +475,10 @@ lemma Etale.isZero_shiftedHomFunctor_obj_of_neg {Z : Scheme.{u}}
 
 end FilteredColimit
 
-/-- Blueprint `lemma-finiteness-small-etale-topoi--2` (subsection
-`lem-sc-second-kummer-divisors`): Filtered colimits of étale cohomology. Let `Z` be a quasi-compact
-and quasi-separated scheme. Then étale cohomology `N ↦ Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` with
+/-- **Filtered colimits of étale cohomology.** Let `Z` be a quasi-compact and quasi-separated
+scheme. Then étale cohomology `N ↦ Hᵠ(Z, N) = Hom(Λ_Z[0], N[0]⟦q⟧)` with
 coefficients in sheaves of `Λ`-modules commutes with filtered colimits:
-`colim Hᵠ(Z, N_a) ≅ Hᵠ(Z, colim N_a)`.
-
-The same statement for abelian sheaves is
-`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered`. As in the blueprint, there is no
-restriction on the size of the filtered category beyond that of the coefficients: it may be any
-filtered category in `Type (u + 1)`, the universe of the sheaves of `Λ`-modules.
-
-The proof identifies the functor with abelian sheaf cohomology of the underlying abelian sheaf
-(`AlgebraicGeometry.Etale.shiftedHomFunctorFreeSheafIso`) in nonnegative degrees; in negative
-degrees it vanishes. -/
+`colim Hᵠ(Z, N_a) ≅ Hᵠ(Z, colim N_a)`, for any filtered category in `Type (u + 1)`. -/
 @[stacks 03Q6]
 theorem Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject (Z : Scheme.{u})
     [CompactSpace Z] [QuasiSeparatedSpace Z] (q : ℤ) (J : Type (u + 1)) [SmallCategory J]
@@ -617,8 +600,7 @@ variable {Y V : Scheme.{u}} (v : V ⟶ Y) (hv : Etale v)
 
 
 
-/-- An exact functor commutes with degree-zero single objects and shifts.
-This is the composition of its single-object and shift comparison isomorphisms. -/
+/-- An exact functor commutes with degree-zero single objects and shifts. -/
 noncomputable def Etale.exactSingleShiftIso
     {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
     [HasDerivedCategory C] [HasDerivedCategory D]
@@ -631,7 +613,7 @@ noncomputable def Etale.exactSingleShiftIso
     Functor.isoWhiskerRight (F.mapDerivedCategoryPlusSingleFunctor 0) (shiftFunctor _ q) ≪≫
     Functor.associator _ _ _
 
-/-- A named copy of pullback used to share its derived-shift comparison instances. -/
+/-- A named copy of the pullback functor. -/
 noncomputable def Etale.upperStarForShift :
     Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ) ⥤
       Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ) :=

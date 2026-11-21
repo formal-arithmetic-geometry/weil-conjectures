@@ -142,8 +142,7 @@ lemma isZero_plus_upperStar_upperStar_openImmersionLowerShriek {U W Z Z' : Schem
     ((upperStarCompDerivedPlus _ i b).app _).symm
 
 /-- **Base change for the extension by zero** in the bounded below étale derived categories:
-the base change map of a cartesian square is an isomorphism. It is checked on the open `l` and on
-its closed complement, by open–closed conservativity. -/
+the base change map of a cartesian square is an isomorphism. -/
 instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasBaseChange where
   isIso_baseChange {U' U Z' Z t l r b} _ _ h := by
     have hdisj' : Disjoint (Set.range (l.closedComplement ≫ b).base) (Set.range r.base) := by
@@ -172,8 +171,7 @@ instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasBaseChange where
 
 omit [Finite Λ] in
 /-- In a cartesian square `t ≫ r = l ≫ b` with `b` proper and torsion coefficients, `b_*` of an
-extension by zero along `l` vanishes on the closed complement of `r`: by proper base change it is
-computed on `b⁻¹` of the closed complement, which does not meet `l`. -/
+extension by zero along `l` vanishes on the closed complement of `r`. -/
 lemma isZero_plus_upperStar_lowerStar_openImmersionLowerShriek (hΛ : IsAddTorsion Λ)
     {U' U Z' Z : Scheme.{u}} {t : U' ⟶ U} {l : U' ⟶ Z'} {r : U ⟶ Z} {b : Z' ⟶ Z}
     [IsOpenImmersion l] [IsOpenImmersion r] [IsProper b] (h : IsPullback t l r b)
@@ -202,10 +200,7 @@ lemma isZero_plus_upperStar_lowerStar_openImmersionLowerShriek (hΛ : IsAddTorsi
 
 /-- **Proper base change for the compactly supported direct image**: in the bounded below étale
 derived categories with finite coefficients, the exchange map `r_! t_* ⟶ b_* l_!` of a cartesian
-square with `b` proper is an isomorphism. On the open `r` this is formal; on its closed complement
-both sides vanish, by proper base change
-(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`,
-blueprint `theorem-proper-base-change-classical-pro`). -/
+square with `b` proper is an isomorphism. -/
 instance : (derivedPlusFormalism (ModuleCat.{u + 1} Λ)).HasProperExchange where
   isIso_exchange {U' U Z' Z t l r b} _ _ _ h := by
     have := CompactSupportFormalism.HasBaseChange.isIso_baseChange

@@ -10,6 +10,12 @@ public import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientSi
 import WeilConjectures.AlgebraicGeometry.TensorPullbackRepresentativeDescent
 import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientSiteTensorPresentation
 /-! # Finite coefficient change for internal Hom
+
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +31,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- Explicit K-flat witness type with the small pro-etale universe fixed.
- -/
+/-- Explicit K-flat witness type with the small pro-etale universe fixed. -/
 abbrev finiteHomKFlat (n : ℕ)
     (P : CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u}
@@ -36,8 +41,7 @@ abbrev finiteHomKFlat (n : ℕ)
     (Scheme.ProEt.topology X) (integralCoefficientCommRingSheaf l E X n)
     ((finiteHomNuComplex l E X n).obj P)
 
-/-- Representative normalization with the category and tensor data shared.
-Source: Stacks 07A4, site-comparison paragraph. -/
+/-- Representative normalization with the category and tensor data shared. -/
 def FiniteHomNuTensorNormalizationAux
     {C : Type a} {D : Type b} {A : Type c} {B : Type d}
     [Category.{e} C] [Category.{f} D] [Category.{g} A] [Category.{w} B]
@@ -153,7 +157,7 @@ private theorem tensorModelSquareDescentOfPresentation
 
 /-- The specified tensorator is characterized on every pair of explicit K-flat
 representatives by the ordinary pure-tensor chain comparison and the intrinsic
-localization comparison. Source: Stacks 00YV, 06YN, 07A4. -/
+localization comparison. -/
 def FiniteHomNuTensorNormalization (n : ℕ)
     (μ : (finiteHomEtaleClosed l E X n).tensor ⋙ finiteHomNu l E X n ≅
       (finiteHomNu l E X n).prod (finiteHomNu l E X n) ⋙
@@ -187,11 +191,7 @@ attribute [local irreducible] coefficientTotalTensor finiteHomNuComplex finiteHo
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The inverse-image tensor comparison is uniquely fixed by the displayed
-K-flat pure-tensor and localization equations. Source: blueprint site-comparison
-proof.
-Proof: inverse image preserves the balanced pure-tensor chain map; localization
-and the intrinsic tensor-model comparison identify its derived image. The
-representative equation determines the natural isomorphism uniquely. -/
+K-flat pure-tensor and localization equations. -/
 theorem finiteHomNuTensor_existsUnique (n : ℕ) :
     ∃! μ, FiniteHomNuTensorNormalization l E X n μ := by
   let : EssentiallySmall.{u + 1, u, u + 1} X.ProEt :=
@@ -219,16 +219,14 @@ theorem finiteHomNuTensor_existsUnique (n : ℕ) :
     (finiteHomEtaleTensorModel l E X n) (finiteHomNuChainTensor l E X n)
     (finiteHomNuTensorPresentation l E X n)
 
-/-- The canonical normalized tensor comparison for nu_X^*.
- -/
+/-- The canonical normalized tensor comparison for nu_X^*. -/
 def finiteHomNuTensor (n : ℕ) :
     (finiteHomEtaleClosed l E X n).tensor ⋙ finiteHomNu l E X n ≅
       (finiteHomNu l E X n).prod (finiteHomNu l E X n) ⋙
         (finiteIntrinsicClosed l E X n).tensor :=
   (finiteHomNuTensor_existsUnique l E X n).choose
 
-/-- The site internal-Hom comparison, the transpose of inverse image of evaluation.
- -/
+/-- The site internal-Hom comparison, the transpose of inverse image of evaluation. -/
 def finiteHomSiteHom (n : ℕ) :=
   coefficientBaseChangeHom (finiteHomEtaleClosed l E X n) (finiteIntrinsicClosed l E X n)
     (finiteHomNu l E X n) (finiteHomNuTensor l E X n)

@@ -73,11 +73,7 @@ instance Scheme.Hom.isCoverDense_etale_of_isClosedImmersion :
     simp
 
 /-- Base change along a closed immersion `i : Z ⟶ X` is locally full for the small étale
-topology of `Z`. Given `f : U ×_X Z ⟶ V ×_X Z` over `Z`, its graph
-`Γ : U ×_X Z ⟶ P ×_X Z`, for `P = U ×_X V`, is a section of the étale base change of the
-projection `p : P ⟶ U`, hence an open immersion. Its range is the trace of an open `W` of `P`,
-because `P ×_X Z ⟶ P` is a closed embedding. Then `W ⟶ P ⟶ V` lifts `W ×_X Z ⟶ U ×_X Z ⟶ V ×_X Z`,
-and `W ×_X Z ⟶ U ×_X Z` is surjective, being split by `Γ`. -/
+topology of `Z`. -/
 instance Scheme.Hom.isLocallyFull_etale_of_isClosedImmersion :
     i.Etale.IsLocallyFull Z.smallEtaleTopology where
   functorPushforward_imageSieve_mem {U V} f := by
@@ -161,11 +157,7 @@ instance Scheme.Hom.isLocallyFull_etale_of_isClosedImmersion :
       rfl
 
 /-- Base change along a closed immersion `i : Z ⟶ X` is locally faithful for the small étale
-topology of `Z`. If `f₁ f₂ : W ⟶ W'` agree after base change to `Z`, they agree on the open
-`E` of `W` where they coincide (`AlgebraicGeometry.FormallyUnramified.eqLocus`, open as `W'`
-is unramified over `X`). The projection `W ×_X Z ⟶ W` factors through `E`, so the base change
-of `E ⟶ W`, which lies in the equalizer sieve, has a section, and the image of the equalizer
-sieve contains the identity of `W ×_X Z`. -/
+topology of `Z`. -/
 instance Scheme.Hom.isLocallyFaithful_etale_of_isClosedImmersion :
     i.Etale.IsLocallyFaithful Z.smallEtaleTopology where
   functorPushforward_equalizer_mem {W W'} f₁ f₂ hf := by

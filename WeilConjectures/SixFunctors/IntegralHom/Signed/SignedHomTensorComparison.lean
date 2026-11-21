@@ -76,8 +76,10 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # The signed tensor--Hom map before passing to derived categories
 
-Source: the finite-free construction in the first paragraph of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 08J9 and 0A8X.
+## References
+
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 0A8X]
 -/
 
 @[expose] public section
@@ -236,24 +238,7 @@ private theorem exchange_generator
 
 /-- The signed tensor--Hom map is natural in an arbitrary coefficient complex.
 This constructs maps only: neither a quotient resolution nor an invertibility
-assertion is part of this statement.
-
-Source: the first paragraph of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`, finite-free construction;
-Stacks Tags 08J9 and 0A8X.
-
-Proof: let H=Hom(P,I), and take evaluation H tensor P to I to be the inverse
-transpose of its identity under the existing normalized chain tensor--Hom
-equivalence. Associate (H tensor Q) tensor P, braid Q past P, reassociate,
-and apply evaluation tensor identity. Curry this map. Associator and braiding
-naturality and tensor interchange give naturality in Q before currying; the
-naturality identities of the equivalence then give a natural transformation.
-On the homogeneous generator (v tensor z) tensor x of degrees (a,b,p), the
-associators contribute no sign and the middle braiding contributes (-1)^(bp).
-Normalized evaluation sends v tensor x to v(x). The resulting formula is
-exactly IsSignedHomTensor, with the degree transport (p+a)+b=p+(a+b).
-No boundedness, flatness or injectivity is used; zero complexes and the empty
-scheme are included. -/
+assertion is part of this statement. -/
 theorem signedHomTensorComparison_exists
     (P I : CochainComplex (Modules.{t, u} Y R) ℤ) :
     ∃ α : (totalTensor.{t, u} Y R).obj

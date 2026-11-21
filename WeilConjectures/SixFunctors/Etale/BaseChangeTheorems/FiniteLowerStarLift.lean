@@ -38,10 +38,7 @@ open Scheme
 /-- **Classes of finite pushforwards of finite constant sheaves lift from the closed fibre.**
 Let `(A, I)` be a henselian pair, `p : X ⟶ Spec A` with closed fibre `ι : X₀ ⟶ X`, and
 `h : V ⟶ X` finite with `V` proper over `A`. For a finite abelian group `M`, restriction
-`H¹(X, h_* M) ⟶ H¹(X₀, ι^* h_* M)` is surjective: by the finite exchange `ι^* h_* = h₀_* ι_V^*` and
-the bijectivity of the Leray edge maps along the finite `h` and `h₀`, it is identified, up to
-an automorphism, with restriction `H¹(V, M) ⟶ H¹(V₀, M)`, which is bijective by the `H¹`
-comparison over a henselian pair. -/
+`H¹(X, h_* M) ⟶ H¹(X₀, ι^* h_* M)` is surjective. -/
 theorem surjective_cohomologyMap_one_lowerStar_constantSheaf {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {X X₀ V V₀ : Scheme.{u}} (p : X ⟶ Spec (.of A))
     (ι : X₀ ⟶ X) (p₀ : X₀ ⟶ Spec (.of (A ⧸ I)))

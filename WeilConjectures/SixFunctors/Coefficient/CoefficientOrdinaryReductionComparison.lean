@@ -37,13 +37,21 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 
 /-! # Derived comparison for the ordinary quotient-system adjunction
 
-Source: Stacks 06YY, 07A6, 09T5, 0941 and 0D6E.
-
 The ordinary quotient-system adjunction of `OrdinaryQuotient.OrdinaryModel` is derived
 on flat-term K-flat complexes and K-injective systems. Its derived left functor is left
 adjoint to `coefficientSequenceLimit`. For every left adjoint of
 `coefficientSequenceLimit` this gives the universal left-derived comparison with the
 strict quotient systems, normalized by the derived Hom formula, and its finite values.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 09T5]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 06YF]
+* [Stacks, Tag 0FND]
 -/
 
 @[expose] public noncomputable section
@@ -144,25 +152,7 @@ private theorem restriction_as_strict :
     rfl
 
 /-- Restriction of a K-injective coefficient system is acyclic for inverse limit.
-Only its limit-acyclicity is asserted, not its K-injectivity.
-
-Source: Stacks sites-cohomology.tex, lemma-derived-pushforward-composition (0D6E),
-lemma-derived-limit-is-ok (0941), and the restriction-acyclicity part of step 1 of
-lem-trf-completion-unit-derived-adjunction-comparison.
-
-Proof: Identify modules on the coefficient sequence site with strict semilinear
-systems using the vertical-slice equivalence. This exact equivalence preserves
-K-injectivity. Under it the specified coefficientSequenceRestriction is the
-strict-system scalar-restriction tower: its objects, horizontal maps and maps of
-systems agree by the three characterizing equations of its unique construction.
-Apply lem-coef-restricted-tower-resolution-acyclicity to the identity resolution of
-I and the given K-injective tower resolution j. Its first conclusion states exactly
-that ordinary inverse limit sends j to a quasi-isomorphism. Transport this conclusion
-through the natural isomorphism of restricted towers and their degreewise limits.
-Equivalently factor the sequence projection through the constant ring sequence and
-apply normalized derived pushforward composition. Exact restriction alone is not
-used to claim that it preserves K-injectives. This works for the empty site and zero
-complexes and uses neither boundedness nor any flatness of finite quotient rings. -/
+Only its limit-acyclicity is asserted, not its K-injectivity. -/
 theorem restricted_limit_acyclic
     (I : CochainComplex (coefficientSequenceModules l E W) ℤ) [I.IsKInjective]
     (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective]
@@ -194,7 +184,7 @@ theorem restricted_limit_acyclic
 /-! ### The constant-tower limit unit -/
 
 /-- The canonical right-derived unit of the constant-tower inverse limit, in the
-termwise-limit coordinates. Source: Stacks 0941, 07A6. -/
+termwise-limit coordinates. -/
 def constantLimitUnit :
     roosLimitFunctor ⋙ DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W := by
@@ -215,8 +205,7 @@ def constantLimitUnit :
       (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso A)
         F.rightDerivedFunctor).hom
 
-/-- The constant-tower limit unit is the inverse termwise comparison on K-injectives.
-Source: Stacks 0941. -/
+/-- The constant-tower limit unit is the inverse termwise comparison on K-injectives. -/
 theorem constantLimitUnit_normalization
     (J : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource l E W) ℤ) [J.IsKInjective] :
     (constantLimitUnit l E W).app J ≫
@@ -245,8 +234,7 @@ theorem constantLimitUnit_normalization
   erw [CategoryTheory.Functor.map_id, Category.id_comp,
     IsIso.hom_inv_id_assoc, Category.comp_id]
 
-/-- The constant-tower limit unit exhibits the right derived inverse limit.
-Source: Stacks 0941, 07A6. -/
+/-- The constant-tower limit unit exhibits the right derived inverse limit. -/
 theorem constantLimitUnit_isRightDerived :
     (coefficientConstantTowerLimit l E W).IsRightDerivedFunctor
       (constantLimitUnit l E W)
@@ -274,8 +262,7 @@ theorem constantLimitUnit_isRightDerived :
 /-! ### The system limit unit -/
 
 
-/-- The actual composite unit for exact scalar restriction followed by total limit.
-Source: Stacks 0D6E. -/
+/-- The actual composite unit for exact scalar restriction followed by total limit. -/
 def systemLimitUnit (M : OrdinaryModel l E W)
     (η : roosLimitFunctor ⋙ DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W) :
@@ -296,7 +283,7 @@ private instance systemKInjectives :
       (coefficientSequenceCommRingSheaf l E W)).1
   infer_instance
 
-/-- The system limit unit is invertible on K-injective systems. Source: Stacks 0D6E. -/
+/-- The system limit unit is invertible on K-injective systems. -/
 theorem systemLimitUnit_isIso
     (M : OrdinaryModel l E W)
     (c : (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
@@ -346,7 +333,7 @@ theorem systemLimitUnit_isIso
     Functor.whiskerLeft_app]
   infer_instance
 
-/-- The derived system evaluations jointly detect isomorphisms. Source: Stacks 0941. -/
+/-- The derived system evaluations jointly detect isomorphisms. -/
 theorem coefficientSequence_isIso_iff_evaluations
     {M N : coefficientSequenceDerived l E W} (f : M ⟶ N) :
     IsIso f ↔ ∀ n : ℕ,
@@ -387,8 +374,7 @@ private theorem tensor_inverts (M : OrdinaryModel l E W)
     (Functor.isoWhiskerLeft (M.quotient l E W)
       (coefficientSequenceEvaluation l E W n).mapDerivedCategoryFactors) f).2 this
 
-/-- Every complex of completed-coefficient modules has a flat-term K-flat resolution.
-Source: Stacks 06YF, 0FND. -/
+/-- Every complex of completed-coefficient modules has a flat-term K-flat resolution. -/
 theorem exists_flatTermKFlatResolution (X : CochainComplex (scalarReductionSource l E W) ℤ) :
     ∃ (Q : CochainComplex (scalarReductionSource l E W) ℤ) (q : Q ⟶ X),
       (Q.IsKFlatIndependentCoefficients ∧ ∀ p : ℤ, (Q.X p).IsFlatOnSite) ∧
@@ -709,16 +695,7 @@ private theorem system_projection
 
 /-- A derived comparison normalized by the ordinary tensor unit has the fixed finite values,
 for any left adjoint of the total limit and any finite comparison `θ` compatible with the
-adjunction units and the total-limit projections.
-
-Source: Stacks 07A6, 0941, 06YY and 09T5.
-
-Proof: apply the injective finite scalar Hom bijection. The unit-projection identity and
-naturality of the projection identify the left side with the projection of the transpose
-of the comparison. The normalization `hunit` computes this transpose by the ordinary
-tensor unit and the system limit unit, whose projection is the ordinary limit projection.
-The ordinary unit is `x ↦ 1 ⊗ x`, which is also the normalized finite scalar unit on a
-K-flat representative. -/
+adjunction units and the total-limit projections. -/
 theorem finiteComparison_of_unitProjection (M : OrdinaryModel l E W)
     (c : (lim : (ℕᵒᵖ ⥤ scalarReductionSource l E W) ⥤
       scalarReductionSource l E W).mapHomologicalComplex (.up ℤ) ≅ roosLimitFunctor)
@@ -785,7 +762,7 @@ end FiniteMate
 /-! ### The derived comparison for an arbitrary left adjoint of the total limit -/
 
 /-- The system limit unit for the constant-tower limit unit exhibits the right derived
-functor of the ordinary sequence limit. Source: Stacks 0D6E, 0941 and 07A6. -/
+functor of the ordinary sequence limit. -/
 theorem systemLimitUnit_isRightDerived (M : OrdinaryModel l E W) :
     (coefficientSequenceLimit l E W).IsRightDerivedFunctor
       (systemLimitUnit l E W M (constantLimitUnit l E W))
@@ -797,12 +774,7 @@ theorem systemLimitUnit_isRightDerived (M : OrdinaryModel l E W) :
   intro I
   exact hsys I.obj I.property
 
-/-- The specified total limit of coefficient systems has a left adjoint.
-Source: Stacks 07A6, 09T5 and 0941.
-
-Proof: derive the ordinary quotient-system adjunction on flat-term K-flat complexes and
-K-injective systems; the derived right adjoint is `coefficientSequenceLimit` by the
-normalized composition with exact restriction. -/
+/-- The specified total limit of coefficient systems has a left adjoint. -/
 theorem leftAdjoint_exists :
     ∃ L : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W,
       Nonempty (L ⊣ coefficientSequenceLimit l E W) := by
@@ -813,15 +785,7 @@ theorem leftAdjoint_exists :
 
 /-- Every left adjoint of the total limit is the left derived functor of the strict
 quotient-system tensor, through a comparison normalized by the derived Hom formula.
-It is invertible on flat-term K-flat complexes.
-
-Source: Stacks 06YY, 07A6, 09T5, 0941 and 0D6E.
-
-Proof: derive the ordinary adjunction on flat-term K-flat complexes and K-injective
-systems. Its derived left functor and `L` are both left adjoint to
-`coefficientSequenceLimit`; transport the universal left-derived comparison along the
-unique adjunction-compatible isomorphism. This preserves the universal property, the
-invertibility on flat-term K-flat complexes and the derived Hom formula. -/
+It is invertible on flat-term K-flat complexes. -/
 theorem reductionComparison_exists (M : OrdinaryModel l E W)
     (L : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adj : L ⊣ coefficientSequenceLimit l E W) :
@@ -859,8 +823,7 @@ theorem reductionComparison_exists (M : OrdinaryModel l E W)
       adj.unit_leftAdjointUniq_hom_app a]
     exact (a.homEquiv_unit _ _ _).symm
 
-/-- The derived Hom formula determines the transpose of the comparison itself.
-Source: Stacks 07A6. -/
+/-- The derived Hom formula determines the transpose of the comparison itself. -/
 theorem reductionComparison_unit (M : OrdinaryModel l E W)
     (η : roosLimitFunctor ⋙ DerivedCategory.Q ⟶
       DerivedCategory.Q ⋙ coefficientConstantTowerLimit l E W)
@@ -891,11 +854,7 @@ theorem reductionComparison_unit (M : OrdinaryModel l E W)
 
 /-- The finite values of the normalized derived comparison, for any left adjoint `L` of
 the total limit and any finite evaluation isomorphisms `ρ` satisfying the
-unit-projection identity.
-
-Source: Stacks 07A6, 0941, 06YY and 09T5.
-
-Proof: apply `finiteComparison_of_unitProjection` to the inverses of `ρ` and cancel. -/
+unit-projection identity. -/
 theorem finiteComparison_of_unit (M : OrdinaryModel l E W)
     (L : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adj : L ⊣ coefficientSequenceLimit l E W)

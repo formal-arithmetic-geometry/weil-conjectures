@@ -25,10 +25,6 @@ The identification is compatible with pullback along a morphism `f : X ⟶ Y` in
 three endomorphisms of `X` with three endomorphisms of `Y`, as soon as the identifications `ε`
 of `X` and of `Y` are
 (`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_leftDerivedUpperStarIsoOfFactor`).
-This is pure coherence of the composition isomorphisms of derived pullbacks: their
-associativity (`AlgebraicGeometry.Etale.leftDerivedUpperStarComp_assoc'_app`) and unit laws
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarComp_id_left_hom_app`,
-`AlgebraicGeometry.Etale.leftDerivedUpperStarComp_id_right_hom_app`).
 -/
 
 @[expose] public section

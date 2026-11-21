@@ -12,7 +12,11 @@ import WeilConjectures.SixFunctors.PurCompactSupport.RefinementOpenScalarSquare
 
 /-! # Scalar naturality of the ordinary proper/open refinement word
 
-Source: Stacks 0F7B and 0F7I; Zheng Section 5, Lemma 5.13 and Constructions 5.14--5.15.
+## References
+
+* Zheng, Section 5, Lemma 5.13 and Constructions 5.14–5.15
+* [Stacks, Tag 0F7B]
+* [Stacks, Tag 0F7I]
 -/
 
 @[expose] public noncomputable section
@@ -253,29 +257,7 @@ private theorem ambient_refinement_scalar
   with_reducible exact hs hc _ _ hδc hδd
 
 /-- Completed scalar extension preserves the normalized proper/open refinement word.
-The input is an ordinary open-unit comparison, before any chosen exceptional operation.
-Source: Zheng 5.13--5.15; Stacks 0F7B and 0F7I, coefficient mate pasting.
-
-Proof: use a finite integral basis for the extension of coefficient fields, with
-its compatible reductions on the ramified en subsystem. On the coefficient-system
-site the proper scalar map is the counit-tensor mate and the open scalar map is
-normalized by the open unit. Pasting these squares with the normalized open
-refinement gives the same open transpose in either order. The adjunction bijection
-makes the system maps equal. Whisker by the outer proper image and paste the proper
-compositor; its counit formula respects these same coefficient squares. Invert the
-open refinement maps. Apply normalized cofinal realization to this equality of
-actual system maps, using the primitive proper, open and generator-map identities.
-This gives the ordinary scalar square with target the scalar extension of K.
-The supplied open comparisons are the constructed ones: open full faithfulness
-makes the unit invertible, and the transpose of an invertible comparison is then
-invertible too. Its normalization forces refinementRestriction to be invertible.
-Postcomposition with that restriction and the Hom adjunction are injective, so
-two normalized components coincide.
-Finally transport that vertex to K' by e: insert e.inv before the refinement and
-e.hom after it, using naturality. Finite-Tor bounds ensure the normalized tower
-realization applies. The argument uses only the relative proper/open refinement;
-absolute separatedness of X or Y is not needed. No equality of system arrows is
-inferred from equality at finite reductions. -/
+The input is an ordinary open-unit comparison, before any chosen exceptional operation. -/
 theorem ring_refinement_scalar_word
   (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   {X Y : Scheme.{max u v}} {f : X ⟶ Y}

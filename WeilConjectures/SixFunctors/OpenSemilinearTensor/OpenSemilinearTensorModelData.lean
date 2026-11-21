@@ -10,13 +10,24 @@ public import WeilConjectures.AlgebraicGeometry.Semilinear.SemilinearDerivedSect
 
 /-! # Simultaneous open tensor comparison before scalar restriction
 
-Source: Stacks Project, sites-modules.tex, Tag 0E8I, and sites-cohomology.tex,
-Tag 0GL1; the simultaneous refinement in the node's seven proof steps.
+## Implementation details
 
 The coefficient index n means exponent n+1. All complexes are unbounded. The existing
 open-operation interfaces are reused; the completeness-restricted comparison theorem
 in their module is not used. Ordinary reduction and its comparison are natural
 transformations of strict semilinear systems, before any localization or forgetting.
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 012Z]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -39,40 +50,33 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The existing ordinary open operations, including their actual adjunctions.
-Source: Stacks 03DI--03DJ, 0E8I. -/
+/-- The existing ordinary open operations, including their actual adjunctions. -/
 abbrev Operations := IntegralOpenReduction.Operations l E j
 
 variable (o : Operations l E j)
 
-/-- Termwise ordinary open extension, without imposing a representative condition.
-Source: Stacks 0GL1. -/
+/-- Termwise ordinary open extension, without imposing a representative condition. -/
 abbrev extensionComplex :=
   (IntegralOpenReduction.extension l E j o).mapHomologicalComplex (.up ℤ)
 
-/-- Termwise ordinary restriction.
-Source: Stacks 0GL1. -/
+/-- Termwise ordinary restriction. -/
 abbrev restrictionComplex :=
   (IntegralOpenReduction.restriction l E j o).mapHomologicalComplex (.up ℤ)
 
-/-- The published total tensor, with its direct sums and signed differential.
-Source: Stacks 012Z. -/
+/-- The published total tensor, with its direct sums and signed differential. -/
 abbrev total (T : Scheme.{t}) := totalTensor.{t + 1, t, max u (t + 1)} (ProEt.topology T)
   (completedIntegralCommRingSheafUnrestricted l E T)
 
-/-- The published ordinary sheaf tensor.
-Source: Stacks 03EK. -/
+/-- The published ordinary sheaf tensor. -/
 abbrev tensor (T : Scheme.{t}) := ordinaryTensor.{t + 1, t, max u (t + 1)}
   (ProEt.topology T) (completedIntegralCommRingSheafUnrestricted l E T)
 
-/-- The recorded summand insertion in the total tensor, with no extra sign.
-Source: Stacks 012Z. -/
+/-- The recorded summand insertion in the total tensor, with no extra sign. -/
 abbrev summand (T : Scheme.{t}) := tensorSummand.{t + 1, t, max u (t + 1)}
   (ProEt.topology T) (completedIntegralCommRingSheafUnrestricted l E T)
 
 /-- Identify a restricted section through the actual slice-equivalence counit.
-This writes the canonical identification, rather than assuming an arbitrary map of sections.
-Source: Stacks 03DJ. -/
+This writes the canonical identification, rather than assuming an arbitrary map of sections. -/
 def restrictedSection (N : scalarReductionSource l E X) (V : X.ProEt)
     (a : V ⟶ IntegralOpenReduction.openObject j)
     (y : ((IntegralOpenReduction.restriction l E j o).obj N).val.obj
@@ -84,16 +88,14 @@ def restrictedSection (N : scalarReductionSource l E X) (V : X.ProEt)
     (((eqToHom o.integralFunctor.symm).app
       ((IntegralOpenReduction.restriction l E j o).obj N)).val.app (op (Over.mk a)) y)
 
-/-- The family of ordinary open tensor isomorphisms.
-Source: Stacks 0E8I, 012Z. -/
+/-- The family of ordinary open tensor isomorphisms. -/
 abbrev OrdinaryTensorComparison :=
   ∀ (M : scalarReductionSource l E U) (N : scalarReductionSource l E X),
     tensor l E X ((IntegralOpenReduction.extension l E j o).obj M) N ≅
       (IntegralOpenReduction.extension l E j o).obj
         (tensor l E U M ((IntegralOpenReduction.restriction l E j o).obj N))
 
-/-- The family of signed total tensor chain isomorphisms.
-Source: Stacks 0E8I, 012Z. -/
+/-- The family of signed total tensor chain isomorphisms. -/
 abbrev TotalTensorComparison :=
   ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ)
     (F : CochainComplex (scalarReductionSource l E X) ℤ),
@@ -101,8 +103,7 @@ abbrev TotalTensorComparison :=
       (extensionComplex l E j o).obj
         ((total l E U).obj (Q, (restrictionComplex l E j o).obj F))
 
-/-- Naturality of the ordinary isomorphism in both module maps.
-Source: Stacks 0E8I, 012Z. -/
+/-- Naturality of the ordinary isomorphism in both module maps. -/
 def OrdinaryNaturality (μ : OrdinaryTensorComparison l E j o) : Prop :=
   ∀ {M M' : scalarReductionSource l E U}
     {N N' : scalarReductionSource l E X} (f : M ⟶ M') (g : N ⟶ N'),
@@ -114,8 +115,7 @@ def OrdinaryNaturality (μ : OrdinaryTensorComparison l E j o) : Prop :=
           (completedIntegralCommRingSheafUnrestricted l E U) f
           ((IntegralOpenReduction.restriction l E j o).map g))
 
-/-- The ordinary comparison on every extension-sheafification generator.
-Source: Stacks 0E8I, 012Z. -/
+/-- The ordinary comparison on every extension-sheafification generator. -/
 def OrdinaryGenerators (μ : OrdinaryTensorComparison l E j o) : Prop :=
   ∀ (M : scalarReductionSource l E U) (N : scalarReductionSource l E X)
     (V : X.ProEt) (a : V ⟶ IntegralOpenReduction.openObject j)
@@ -132,8 +132,7 @@ def OrdinaryGenerators (μ : OrdinaryTensorComparison l E j o) : Prop :=
           (completedIntegralCommRingSheafUnrestricted l E U) M _
           (op ((IntegralOpenReduction.sliceSite j).obj (Over.mk a))) x y)
 
-/-- Each total summand is the displayed ordinary comparison, without extra signs.
-Source: Stacks 0E8I, 012Z. -/
+/-- Each total summand is the displayed ordinary comparison, without extra signs. -/
 def TotalSummands (μ : OrdinaryTensorComparison l E j o)
     (φ : TotalTensorComparison l E j o) : Prop :=
   ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ)
@@ -144,8 +143,7 @@ def TotalSummands (μ : OrdinaryTensorComparison l E j o)
         (IntegralOpenReduction.extension l E j o).map
           (summand l E U Q ((restrictionComplex l E j o).obj F) a b d h)
 
-/-- Naturality in both chain maps of the total comparison.
-Source: Stacks 0E8I, 012Z. -/
+/-- Naturality in both chain maps of the total comparison. -/
 def TotalNaturality (φ : TotalTensorComparison l E j o) : Prop :=
   ∀ {Q Q' : CochainComplex (scalarReductionSource l E U) ℤ}
     {F F' : CochainComplex (scalarReductionSource l E X) ℤ} (f : Q ⟶ Q') (g : F ⟶ F'),
@@ -154,8 +152,7 @@ def TotalNaturality (φ : TotalTensorComparison l E j o) : Prop :=
       (φ Q F).hom ≫ (extensionComplex l E j o).map
         ((total l E U).map (Prod.mkHom f ((restrictionComplex l E j o).map g)))
 
-/-- Ordinary and total comparisons with the generator and summand normalizations.
-Source: Stacks 0E8I, 012Z. -/
+/-- Ordinary and total comparisons with the generator and summand normalizations. -/
 structure TotalComparison where
   ordinary : OrdinaryTensorComparison l E j o
   chain : TotalTensorComparison l E j o
@@ -165,8 +162,7 @@ structure TotalComparison where
   naturality : TotalNaturality l E j o chain
 
 /-- A single ordinary reduction functor, retaining every quotient square before deriving.
-Its evaluation comparisons are natural in modules, not chosen separately for each complex.
-Source: Stacks 06YY, 0941. -/
+Its evaluation comparisons are natural in modules, not chosen separately for each complex. -/
 structure OrdinaryReduction (T : Scheme.{t}) where
   functor : scalarReductionSource l E T ⥤ coefficientSequenceModules l E T
   [additive : functor.Additive]
@@ -180,7 +176,7 @@ structure OrdinaryReduction (T : Scheme.{t}) where
 attribute [instance] OrdinaryReduction.additive
 
 /-- Evaluation on complexes is the termwise ordinary evaluation, with its composition
-comparisons inserted explicitly. Source: Stacks 0941. -/
+comparisons inserted explicitly. -/
 def OrdinaryReduction.complexEvaluation {T : Scheme.{t}} (A : OrdinaryReduction l E T)
     (Q : CochainComplex (scalarReductionSource l E T) ℤ) (n : ℕ) :
     ((coefficientSequenceEvaluation l E T n).mapHomologicalComplex (.up ℤ)).obj
@@ -189,7 +185,7 @@ def OrdinaryReduction.complexEvaluation {T : Scheme.{t}} (A : OrdinaryReduction 
   (NatIso.mapHomologicalComplex (A.evaluation n) (.up ℤ)).app Q
 
 /-- The specified simultaneous computation, with both the quotient equations and the
-actual scalar-unit augmentation. Source: Stacks 06YS, 06YY, 0941. -/
+actual scalar-unit augmentation. -/
 structure Computation {T : Scheme.{t}} (S : CoefficientDerivedSystemCalculus l E T)
     (A : OrdinaryReduction l E T) (Q : CochainComplex (scalarReductionSource l E T) ℤ)
     (hQ : CochainComplex.IsKFlatIndependentCoefficients
@@ -201,8 +197,7 @@ structure Computation {T : Scheme.{t}} (S : CoefficientDerivedSystemCalculus l E
   augmentation : IntegralOpenReduction.AugmentedPresentation l E T S Q _ iso
     (A.complexEvaluation l E Q)
 
-/-- Open extension preserves the actual independent-coefficient K-flat predicate.
-Source: Stacks 0GL1, 06YS, 0941. -/
+/-- Open extension preserves the actual independent-coefficient K-flat predicate. -/
 def KFlatPreservation : Prop :=
   ∀ (Q : CochainComplex (scalarReductionSource l E U) ℤ),
     CochainComplex.IsKFlatIndependentCoefficients
@@ -213,8 +208,7 @@ def KFlatPreservation : Prop :=
         (R := completedIntegralCommRingSheafUnrestricted l E X)
         ((extensionComplex l E j o).obj Q)
 
-/-- The ordinary strict-system isomorphism applied termwise to complexes.
-Source: Stacks 0941. -/
+/-- The ordinary strict-system isomorphism applied termwise to complexes. -/
 def ordinaryChain (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)
     (e : IntegralOpenReduction.extension l E j o ⋙ AX.functor ≅
       AU.functor ⋙ IntegralOpenReduction.systemExtension l E j o)
@@ -225,8 +219,7 @@ def ordinaryChain (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)
   HomologicalComplex.Hom.isoOfComponents (fun i ↦ e.app (Q.X i))
     (fun i k _h ↦ (e.hom.naturality (Q.d i k)).symm)
 
-/-- The strict chain comparison localizes under the canonical augmented computations.
-Source: Stacks 0GL1, 06YS, 0941. -/
+/-- The strict chain comparison localizes under the canonical augmented computations. -/
 def RepresentativeSquare (SX : CoefficientDerivedSystemCalculus l E X)
     (SU : CoefficientDerivedSystemCalculus l E U)
     (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)
@@ -253,8 +246,7 @@ def RepresentativeSquare (SX : CoefficientDerivedSystemCalculus l E X)
 
 /-- The comparison is constructed in the strict system category. Its localization is
 fixed by the representative square on the specified augmented computations, for every
-flat-term K-flat representative, and is natural on the entire derived category.
-Source: Stacks 0GL1, 0E8I, 06YS, 0941. -/
+flat-term K-flat representative, and is natural on the entire derived category. -/
 structure Comparison (SX : CoefficientDerivedSystemCalculus l E X)
     (SU : CoefficientDerivedSystemCalculus l E U)
     (AX : OrdinaryReduction l E X) (AU : OrdinaryReduction l E U)

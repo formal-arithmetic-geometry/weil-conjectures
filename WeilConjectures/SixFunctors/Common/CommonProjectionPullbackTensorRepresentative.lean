@@ -20,12 +20,7 @@ namespace WeilConjectures
 open GeneralAlgebraicallyClosedCoefficients
 
 /-- The canonical common pullback/tensor comparison is represented at every
-finite coefficient stage by `pullbackTensorAtCommonStage`.
-
-Proof: unfold the unique-choice definition of the canonical comparison and apply
-the representative clause of `canonicalCommonStagePullbackTensor_existsUnique`.
-The statement is strictly pointwise at one finite stage and supplies the
-finite-stage equation used by the coefficient comparison square. -/
+finite coefficient stage by `pullbackTensorAtCommonStage`. -/
 theorem canonicalCommonStagePullbackTensor_formula
     {l : ℕ} [Fact l.Prime]
     (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]

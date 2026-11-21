@@ -9,8 +9,9 @@ public import WeilConjectures.SixFunctors.Compact.CompactSupportCoefficientPrese
 
 /-! # The compact-support coefficient square with a prescribed composite
 
-Source: the current blueprint, lem-coef-integral-compact-support.proof.md,
-finite-level coefficient comparison; Stacks Tag 03DA.
+## References
+
+* [Stacks, Tag 03DA]
 -/
 
 @[expose] public noncomputable section
@@ -26,10 +27,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
 
-/-- The compact-support restriction square with a prescribed composite ring map.
-Source: blueprint finite-level coefficient comparison, Stacks Tag 03DA.
-Proof: substitute the composite map equality in the published composition square.
-The inserted identity isomorphisms then simplify to identities. -/
+/-- The compact-support restriction square with a prescribed composite ring map. -/
 theorem compactSupportRestriction_comp_cast (l : ℕ) [Fact l.Prime]
     {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
     [Finite A] [Finite B] [Finite C]

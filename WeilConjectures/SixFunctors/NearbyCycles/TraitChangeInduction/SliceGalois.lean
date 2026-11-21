@@ -96,8 +96,7 @@ noncomputable abbrev sliceTraitToGaloisLayer :
     (sliceTraitStructure D N cN) (pullback.snd _ _) q g hNj.w (sliceTrait_fst_comp D N cN hcN)
     (isPullback_sliceTraitModel_j D N cN).w (hNj.lift_snd _ _ _)
 
-/-- The pullback exchange of `N' ⟶ N₁_{L^sep}` is invertible: it is the identity of total spaces
-and the universal homeomorphism `r₁ : Spec Ω' ⟶ Spec L^sep`, base changed, on generic fibres. -/
+/-- The pullback exchange of `N' ⟶ N₁_{L^sep}` is invertible. -/
 theorem isIso_pullbackExchange_sliceTraitToGaloisLayer
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})
@@ -339,11 +338,8 @@ lemma sliceTraitChangeGeneric_comp_toGaloisLayer_generic :
 
 include hgen in
 /-- **The change of Galois layers from the change of trait of the slices** (SGA 4½,
-[Th. finitude], proof of 3.7): the square `ρ_N ∘ φ' = τ' ∘ ρ_M` of morphisms of models, whose
-vertical sides `ρ` (identity on total spaces, universal homeomorphisms on generic fibres) have
-invertible pullback exchanges, shows that the exchange of the change of Galois layers `τ'` is
-invertible at `C` once the change of trait `φ'` of the slices is invertible at the restriction
-of `C`. -/
+[Th. finitude], proof of 3.7): the exchange of the change of Galois layers `τ'` is invertible
+at `C` once the change of trait `φ'` of the slices is invertible at the restriction of `C`. -/
 theorem isIso_pullbackExchange_sliceTraitGaloisLayerMap
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology N.generic) Ab.{u + 1})

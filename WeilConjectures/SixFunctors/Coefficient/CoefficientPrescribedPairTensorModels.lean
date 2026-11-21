@@ -30,7 +30,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Scalar tensor comparison for independently prescribed tensor models
 
-Source: Stacks 07A4 and 06YY.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 06YY]
 -/
 
 @[expose] public section
@@ -53,13 +56,8 @@ attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
 attribute [local irreducible] SheafOfModules.monoidalCategory
   SheafOfModules.scalarPairComplexComparison CoefficientTensorModels.iso
 
-/-- The scalar tensor descent proof works for two prescribed tensor models,
-without requiring them to belong to the same simultaneous choice family.
-Source: Stacks 07A4, using the existing scalar tensor descent argument.
-Proof: form the ordinary normalized scalar tensor comparison and totalize it.
-Scalar extension preserves K-flat complexes. Descend its natural chain comparison
-through the fully faithful restriction to K-flat pairs and cancel the representative
-isomorphisms. The two tensor models can be prescribed independently throughout. -/
+/-- The scalar tensor comparison exists for two independently prescribed tensor models,
+which need not belong to the same simultaneous choice family. -/
 theorem coefficientPrescribedPairTensorComparison
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{max c v r} C]

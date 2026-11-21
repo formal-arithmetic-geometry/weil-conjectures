@@ -7,7 +7,11 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.ExceptionalRingTransportCoreData
 public import Mathlib.CategoryTheory.Adjunction.Mates
 /-! The evaluated unit equation for exceptional integral transport.
-Source: Zheng, Lemma 5.22 and Proposition 5.24. -/
+
+## References
+
+* Zheng, Lemma 5.22 and Proposition 5.24
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -31,8 +35,7 @@ variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω
 end EvaluationMate
 
 /-- The finite evaluation of the transported adjunction unit satisfies the
-finite-stage adjunction-unit equation. This is the unit clause in the strict
-system transport calculation of Zheng, Lemma 5.22. -/
+finite-stage adjunction-unit equation. -/
 theorem exceptional_transport_core_evaluation_unit
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

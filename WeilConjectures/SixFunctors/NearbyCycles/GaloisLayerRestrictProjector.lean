@@ -21,13 +21,11 @@ change of Galois layers `N_Ω ⟶ N_{L'}` (`NearbyCyclesModel.galoisLayerRestric
 at `L(𝟙)^* C` (`NearbyCyclesModel.isIso_pullbackExchange_galoisLayerRestrict_of_homology`): the
 nearby cycles stabilize at the level `L'`.
 
+## Implementation details
+
 The Galois layer `N_Ω` is identified with the Galois layer `(N_{L'})_Ω` of `N_{L'}` over `L'`
 (`NearbyCyclesModel.galoisLayerTower`, whose exchange is invertible and intertwines the Galois
 actions), through which the change of Galois layers becomes the projection `(N_{L'})_Ω ⟶ N_{L'}`.
-By the projector onto the `Gal(Ω/L')`-invariants
-(`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_plusEtaleOrigin_projector`
-for `N_{L'}`), the exchange of this projection is a split monomorphism whose idempotent is the
-identity on cohomology sheaves, hence an isomorphism.
 -/
 
 @[expose] public section

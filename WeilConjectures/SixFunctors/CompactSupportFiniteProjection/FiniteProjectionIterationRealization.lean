@@ -339,19 +339,7 @@ attribute [local irreducible] Functor.mapDerivedCategory Functor.rightDerivedFun
   Functor.leftDerivedFunctor
 
 /-- Iterating two conjugated projection components realizes the iteration of the
-fixed-scalar components. This contains no support compositor, no composite-map
-projection and no composition-coherence assertion.
-
-Proof: expand the two components as source comparison, realized fixed component,
-and inverse target comparison. Naturality of the outer support realization moves
-its image of the inner component past that realization. The intermediate coefficient
-unit cancels with its inverse. Naturality of the outer fixed projection in its first
-input moves fixedSupportRealization for f to the source. Naturality of the inner
-fixed projection in its second input moves fixedPullRealization for g to the target.
-The remaining target is precisely iterationTensorComparison followed by the two
-support realizations. Functoriality and associativity give the displayed equation.
-The argument uses neither boundedness beyond the stated domains nor invertibility
-of a projection, and applies to zero objects and identity maps without exceptions. -/
+fixed-scalar components. -/
 theorem iteration_realization :
     letI := Padic.finite_coefficientExtensionRing C.l E n hn
     let RX := realization (C := C) (E := E) (n := n) (hn := hn) X

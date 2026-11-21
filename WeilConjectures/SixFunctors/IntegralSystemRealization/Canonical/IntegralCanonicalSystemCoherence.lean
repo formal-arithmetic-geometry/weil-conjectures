@@ -11,6 +11,14 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSyst
 import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemTensorComposition
 
 /-! # Canonical integral model construction steps
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 07A7]
+* [Stacks, Tags 0F7B--0F7F]
 -/
 
 @[expose] public noncomputable section
@@ -146,32 +154,7 @@ private theorem systemTensorSquare (o : Operations l E) (c : Compositors l E o) 
     (systemTensorCongr l E h.symm A B)
 
 /-- Canonical system operations and their left-adjoint tensor square. This statement
-contains no reduction/limit realization or completed ringed models.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 03DI, 0941, 07A7, 0F7B--0F7F;
-blueprint fix-prop-coherence, strict-system realization steps 1--2.
-
-Proof: derive the ordinary sequence-site direct image by K-injective resolution,
-retaining its universal derived comparison and the adjunction transpose on complexes.
-Exact inverse image has its specified factorization. Finite left extension to level
-n is left adjoint to evaluation, so adjunction and Yoneda give direct evaluation;
-transposing the fixed inverse evaluation fixes both adjunction identities. Naturality
-in the quotient ring maps gives restrictedDirect and its transition equation. For an
-open immersion use exact extension by zero on the sequence site; its adjunction to
-inverse image gives Open and its evaluated inverse mate. This constructs Operations.
-Compose ordinary direct images by pullback of sections along pullbackComp. Transpose
-that section map to obtain ordinaryPull, then localize on complexes for pullComp and
-its representative equation. The ordinary direct image is also the identity-section
-presentation of the intrinsic semilinear direct image, giving CanonicalBridge.
-The open-unit isomorphism, open base change, projection and clopen identification
-are the exact slice adjunction comparisons; take their displayed transposes to fix
-OpenComparisons. Transport intrinsic semilinear gamma along the bridge. Adjunction
-transport identifies its transpose with properOpenLambda; the intrinsic vertical,
-horizontal and base-change equations give ProperOpenCoherence. Finally the two
-inverse-image tensor comparisons around any commutative square agree: on flat-term
-K-flat complexes each takes a generalized pure tensor to the same pair of pulled
-back sections. The ordinary section compositor supplies the square identification.
-Tensor generation proves equality on each total summand, and localization gives the
-following equality before any right-adjoint mate or finite evaluation is taken. -/
+contains no reduction/limit realization or completed ringed models. -/
 theorem integralCanonicalSystemCoherence :
     ∃ (o : Operations l E) (c : Compositors l E o)
       (a : OpenComparisons l E o c) (b : CanonicalBridge l E o),

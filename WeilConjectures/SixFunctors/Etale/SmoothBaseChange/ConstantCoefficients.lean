@@ -48,8 +48,7 @@ variable {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
 
 /-- **Prime-factor dévissage for nonvanishing.** Let `Φ` be a functor between abelian categories
 which is exact in the middle on short exact sequences. If `Φ F ≠ 0` for an object `F` killed by
-a positive integer `n`, then `Φ G ≠ 0` for an object `G` killed by a prime `r ∣ n`: use the
-short exact sequence `0 ⟶ F[r] ⟶ F ⟶ rF ⟶ 0` and induct on `n`. -/
+a positive integer `n`, then `Φ G ≠ 0` for an object `G` killed by a prime `r ∣ n`. -/
 theorem exists_prime_dvd_not_isZero_map_of_nsmul_id_eq_zero (Φ : C ⥤ D)
     [Φ.PreservesZeroMorphisms] (hΦ : ∀ S : ShortComplex C, S.ShortExact → (S.map Φ).Exact) :
     ∀ n : ℕ, 0 < n → ∀ F : C, n • 𝟙 F = 0 → ¬ IsZero (Φ.obj F) →
@@ -96,14 +95,13 @@ section RestrictScalars
 
 variable {A A' : Type (u + 1)} [CommRing A] [CommRing A'] (φ : A →+* A')
 
-/-- Restriction of scalars preserves sheafification, being a left adjoint. -/
+/-- Restriction of scalars preserves sheafification. -/
 instance Etale.preservesSheafification_restrictScalars (S : Scheme.{u}) :
     S.smallEtaleTopology.PreservesSheafification (ModuleCat.restrictScalars.{u + 1} φ) :=
   Sheaf.preservesSheafification_of_adjunction _
     (ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ)
 
-/-- Restriction of scalars commutes with `M ↦ R^q h_* (M_Y)`: the constant sheaf, the inclusion
-in degree `0`, the derived direct image and the cohomology sheaves all commute with it. -/
+/-- Restriction of scalars commutes with `M ↦ R^q h_* (M_Y)`. -/
 noncomputable def Etale.restrictScalarsHigherDirectImageConstantIso {X Y : Scheme.{u}}
     (h : Y ⟶ X) (q : ℤ) (N : ModuleCat.{u + 1} A') :
     (Sheaf.restrictScalars X.smallEtaleTopology φ).obj
@@ -141,7 +139,7 @@ section Field
 variable {𝕜 : Type (u + 1)} [Field 𝕜]
 
 /-- A functor out of vector spaces which vanishes at a space `W` vanishes at every space `V`
-admitting an injective linear map `V ⟶ W`, `V` being a retract of `W`. -/
+admitting an injective linear map `V ⟶ W`. -/
 lemma Etale.isZero_obj_of_injective {A : Type*} [Category* A] [Preadditive A]
     (Φ : ModuleCat.{u + 1} 𝕜 ⥤ A) {V W : ModuleCat.{u + 1} 𝕜} (f : V ⟶ W)
     (hf : Function.Injective f) (hW : IsZero (Φ.obj W)) : IsZero (Φ.obj V) := by
@@ -152,7 +150,7 @@ lemma Etale.isZero_obj_of_injective {A : Type*} [Category* A] [Preadditive A]
 
 /-- Over a field `𝕜`, an additive functor `Φ` out of vector spaces vanishing at `𝕜` vanishes
 at every space `V` at whose filtered system of finitely generated subspaces it preserves
-colimits: these subspaces are finite direct sums of copies of `𝕜`. -/
+colimits. -/
 theorem Etale.isZero_obj_of_isZero_obj_self {D : Type*} [Category* D] [Abelian D]
     (Φ : ModuleCat.{u + 1} 𝕜 ⥤ D) [Φ.Additive] (V : ModuleCat.{u + 1} 𝕜)
     [PreservesColimitsOfShape {N : Submodule 𝕜 V // N.FG} Φ]
@@ -180,9 +178,7 @@ theorem Etale.isZero_obj_of_isZero_obj_self {D : Type*} [Category* D] [Abelian D
   exact hz.of_iso (Φ.mapIso (Module.fgSystem.equiv 𝕜 V).toModuleIso.symm)
 
 /-- Over a field `𝕜` and for `h` quasi-compact and quasi-separated, if `R^q h_* (V_Y) ≠ 0` for
-some vector space `V`, then `R^q h_* (𝕜_Y) ≠ 0`: `V` is the filtered colimit of its finite
-dimensional subspaces, which are finite direct sums of copies of `𝕜`, and `R^q h_*` commutes
-with filtered colimits (`AlgebraicGeometry.Etale.preservesColimitsOfShape_higherDirectImage`). -/
+some vector space `V`, then `R^q h_* (𝕜_Y) ≠ 0`. -/
 theorem Etale.not_isZero_higherDirectImageConstantFunctor_self {X Y : Scheme.{u}}
     (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (V : ModuleCat.{u + 1} 𝕜)
     (hV : ¬ IsZero ((Etale.higherDirectImageConstantFunctor 𝕜 h q).obj V)) :
@@ -204,10 +200,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- the linear maps into restrictions of scalars need to unfold `ModuleCat.restrictScalars`
 set_option backward.isDefEq.respectTransparency false in
 /-- Let `r` be a prime and `M` a `Λ`-module killed by `r`. If `R^q h_* (M_Y) ≠ 0` for a
-quasi-compact quasi-separated `h`, then `R^q h_* (Λ/rΛ) ≠ 0`. Indeed `M` and `Λ/rΛ` are modules
-over `Λ₁ = Λ/rΛ`, hence vector spaces over `𝔽_r ⊆ Λ₁`, and `Λ₁ ≠ 0`; the vanishing of
-`R^q h_*` of a constant sheaf does not depend on the coefficient ring, and over `𝔽_r` it
-vanishes at `M` if it vanishes at `𝔽_r`, which is a direct summand of `Λ₁`. -/
+quasi-compact quasi-separated `h`, then `R^q h_* (Λ/rΛ) ≠ 0`. -/
 theorem Etale.not_isZero_higherDirectImage_constantModSheaf_of_smul_eq_zero {X Y : Scheme.{u}}
     (h : Y ⟶ X) [QuasiCompact h] [QuasiSeparated h] (q : ℤ) (r : ℕ) [hr : Fact r.Prime]
     (M : ModuleCat.{u + 1} Λ) (hM : ∀ m : M, (r : Λ) • m = 0)

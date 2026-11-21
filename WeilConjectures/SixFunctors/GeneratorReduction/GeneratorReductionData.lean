@@ -11,6 +11,11 @@ public import WeilConjectures.SixFunctors.Finite.FiniteTorAmplitude
 public import WeilConjectures.Compactification.FiniteFieldDatum.FiniteFieldFiberSupplement
 
 /-! # Canonical coefficient squares for the basic six-functor generators
+
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 07A7]
 -/
 
 @[expose] public noncomputable section
@@ -26,10 +31,9 @@ open WeilConjectures
 
 namespace WeilConjectures
 
-/-! The integral direct-image tower used by the generator statement. This
-construction belongs to the owning item module: the recorded
-`prose-03-02` node keeps its landed common-stage declaration,
-while this item needs the simultaneous strict-system specialization below. -/
+/-! The integral direct-image tower used by the generator statement. It is
+constructed here because the generator statement needs the simultaneous strict-system
+specialization below. -/
 
 /-- The integral direct image is the total limit of the actual strict quotient
 system's total right-derived direct image.
@@ -316,7 +320,7 @@ def GeneratorKind.ringedMap (o : Operations l E)
         k r p j h).hom.app (B.ringedValue l E W location o K)
 
 /-- Invert an actual comparison where invertible; the value elsewhere is irrelevant
-on the theorem's domain. Source: blueprint coherence proof, complete restriction. -/
+on the theorem's domain. -/
 def inverseOrZero {C : Type v} [Category.{w} C] [HasZeroMorphisms C]
     {X Y : C} (f : X ⟶ Y) : Y ⟶ X := by
   classical
@@ -365,15 +369,13 @@ def pushR (o : Operations l E) {X Y : Scheme.{u}} (f : X ⟶ Y)
       ((IntegralSystemRealization.calculus l E X).reduction.obj K))
 
 /-- The specified open coefficient comparison, transported from the recorded
-localized open interface to the same actual functors used by the generators.
-Source: blueprint coherence proof, step 2; Stacks 03DI and 07A7. -/
+localized open interface to the same actual functors used by the generators. -/
 def openR (o : Operations l E) {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] (K : DerivedCategory (scalarReductionSource l E X)) :=
   inverseOrZero ((o.realization.openReduction l E j).app K)
 
 /-- The specified open realization, from the actual mate and reconstruction unit.
-It is a map on the ambient category; its inverse laws are asserted on complete inputs.
-Source: Stacks 03DI, 07A7; blueprint coherence proof, step 2. -/
+It is a map on the ambient category; its inverse laws are asserted on complete inputs. -/
 def openD (o : Operations l E) {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] (K : DerivedCategory (scalarReductionSource l E X)) :=
   (coefficientSequenceLimit l E Y).map ((o.realization.openReduction l E j).app K) ≫
@@ -500,7 +502,7 @@ def Word.admissible {a : S} (o : Operations l E)
 
 /-- Common bounds at every object in the cartesian/clopen factorization of lambda.
 This includes the internal systems on V ×_Z W, independently of the length bound
-on the two generator endpoints. Source: blueprint proof, step 4. -/
+on the two generator endpoints. -/
 def lambdaAdmissible (o : Operations l E) {U V T Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ T) (p : V ⟶ Z) (j : T ⟶ Z)
     [IsOpenImmersion k] [QuasiCompact k] [IsOpenImmersion j] [QuasiCompact j]
@@ -553,8 +555,7 @@ def Assertion (o : Operations l E)
   (IntegralSystemRealization.calculus l E (W a)).reduction.map
     (g.integralMap l E W location o K) ≫ C.r l E W location o K
 
-/-- Finite-type structures over the fixed algebraic closure. Source: blueprint
-coherence proof, step 1. -/
+/-- Finite-type structures over the fixed algebraic closure. -/
 structure FiniteTypeFamily (k : Type u) [CommRing k] where
   structureMap : ∀ a : S, W a ⟶ Spec (CommRingCat.of k)
   locallyFiniteType : ∀ a : S, LocallyOfFiniteType (structureMap a)

@@ -45,9 +45,17 @@ import WeilConjectures.SixFunctors.CanonicalOpenRestriction.OpenRestrictionCouni
 
 /-! # Canonical open restriction on augmented quotient models
 
-Source: Stacks Project, Tags 0E8I, 0GL1, 03DJ, 06YY and 0941.
 This isolates the representative construction, independently of reconstruction or
 realization through total limits.
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -122,24 +130,7 @@ private theorem eq_mate_of_counit_on_good_complexes
 end
 
 /-- The open-adjunction mate of the inverse extension comparison is invertible and
-has one simultaneous augmented restriction model.
-Source: Stacks sites-modules.tex, Tags 03DJ and 0E8I; sites-cohomology.tex,
-Tags 0GL1, 0G7E and 0941; steps 2--4 of the adjunction transport argument.
-
-Proof: restrict one flat-term K-flat representative and each of its quotient tensors
-on the localized site. Restriction commutes with tensor by the identity on the
-sectionwise pure tensors. The quotient maps and scalar-unit maps therefore commute
-before sheafification and in every degree. The fixed coefficient equivalences
-transport these maps to U, using their actual units and counits. They form an
-isomorphism of strict systems, not just a family of derived evaluations. Localize
-on the resolving class to obtain a natural comparison. On an extension summand,
-the adjunct of its component sends [x] tensor a to x tensor a; this is also the
-inverse supplied extension comparison followed by the ordinary counit. The
-normalized strict extension models in the hypothesis identify these maps before
-localization. The termwise open adjunction then identifies the localized comparison
-with mateEquiv applied to r inverse. Naturality removes the representative choices.
-Its good restricted representative, augmented presentations and chain comparison
-are precisely the witnesses in the conclusion. No completeness hypothesis enters. -/
+has one simultaneous augmented restriction model. -/
 theorem canonicalOpenRestrictionModel
     (r : shriek l E j o ⋙ SX.reduction ≅ SU.reduction ⋙ J l E j o)
     (tensor : TensorComparison l E j o)

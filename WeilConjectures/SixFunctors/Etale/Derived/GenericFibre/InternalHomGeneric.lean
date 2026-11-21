@@ -30,38 +30,16 @@ with base change `g : X_T ⟶ X`, the internal-hom comparison
 `ρ_{K, M} : g^* RHom(K, M) ⟶ RHom(g^* K, g^* M)`
 
 is an isomorphism for `K ∈ Dctf(X, Λ)` and `M ∈ Dᵇc(X, Λ)`
-(`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_generic`). This is the third
-assertion of blueprint `lemma-restriction-geometric-generic-fibre`; since `ρ` is the comparison map
-of the monoidal functor `g^*`, it preserves evaluation
+(`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_generic`). Since `ρ` is the
+comparison map of the monoidal functor `g^*`, it preserves evaluation
 (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison_ev`).
 
-## Proof
+## Implementation details
 
-By noetherian induction on the closed subsets of `X`, we may assume the statement on every
-proper closed subscheme. Choose a dense open `j : V ⟶ X` on which `K` has a left dual
-(`AlgebraicGeometry.Etale.exists_dense_open_exactPairing`), with closed complement `i : W ⟶ X`.
-Unlike the blueprint, the dévissage is made in the second variable, along the supported
-localization triangle `i_* Ri^! M ⟶ M ⟶ Rj_* j^* M ⟶`: the comparison maps in the
-first two degrees of a morphism of triangles whose third term has no maps from the first one
-determine the third (`CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton`), so no
-compatibility of `ρ` with connecting morphisms is needed
+The proof is a noetherian induction in which the dévissage is made in the second variable, along
+the supported localization triangle `i_* Ri^! M ⟶ M ⟶ Rj_* j^* M ⟶`, so that no compatibility of
+`ρ` with connecting morphisms is needed
 (`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_isIso_open_closed`).
-
-* On the open piece `Rj_* N` both sides of `ρ` are direct images from `V_T` (the generic open
-  base change
-  `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_app_of_isOpenImmersion_of_generic`,
-  applied to `RHom(j^* K, N) ≅ D ⊗ᴸ N`), so it suffices to check it after `j_T^*`. There, by
-  compatibility of `ρ` with composition, it is the comparison of `V_T ⟶ V` at the dualizable
-  `j^* K`, an isomorphism
-  (`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_generic`).
-* On the closed piece `Ri_* X` both sides are direct images from `W_T` (proper base change), so it
-  suffices to check it after `i_T^*`, where it is the comparison of `W_T ⟶ W` at `(i^* K, X)`,
-  an isomorphism by induction since `X = Ri^! M` is bounded constructible (`AlgebraicGeometry.
-  Etale.isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_isClosedImmersion`).
-
-The comparisons of the open and closed immersions themselves are isomorphisms on direct images
-(`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_rightDerivedLowerStar`), which
-replaces the identity `RHom(Rs_! P, M) ≅ Rs_* RHom(P, Rs^! M)` of the blueprint proof.
 -/
 
 @[expose] public section
@@ -83,8 +61,7 @@ open Etale.DerivedCategory
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 omit [Finite Λ] in
-/-- For an open immersion `j`, the counit of `Lj^* ⊣ Rj_*` is invertible: `Rj_*` is fully
-faithful, since `j_! ⊣ j^* ⊣ Rj_*` and `j_!` is fully faithful. -/
+/-- For an open immersion `j`, the counit of `Lj^* ⊣ Rj_*` is invertible. -/
 lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion
     {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] :
@@ -99,8 +76,7 @@ lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isOpenImmersion
   exact (derivedUpperStarLowerStarAdjunction _ j).counit_isIso_of_R_fully_faithful
 
 omit [Finite Λ] in
-/-- For a closed immersion `i`, the counit of `Li^* ⊣ Ri_*` is invertible: `Ri_*` is fully
-faithful. -/
+/-- For a closed immersion `i`, the counit of `Li^* ⊣ Ri_*` is invertible. -/
 lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion_generic
     {Z X : Scheme.{u}}
     (i : Z ⟶ X) [IsClosedImmersion i] :
@@ -109,11 +85,10 @@ lemma isIso_derivedUpperStarLowerStarAdjunction_counit_of_isClosedImmersion_gene
     (Etale.upperStarLowerStarAdjunction _ i).preservesKInjectiveComplexes
   exact (derivedUpperStarLowerStarAdjunction _ i).counit_isIso_of_R_fully_faithful
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`, internal-hom comparison, open piece. Let
-`j : V ⟶ Z` be an open immersion into a finite-type `S`-scheme, base changed along the generic
-`Z_T ⟶ Z`, and suppose that `j^* K` has a left dual `D ∈ Dctf(V, Λ)`. Then the comparison
-`g^* RHom(K, Rj_* N) ⟶ RHom(g^* K, g^* Rj_* N)` is an isomorphism for every bounded constructible
-`N` on `V`. -/
+/-- **The internal-hom comparison on an open piece.** Let `j : V ⟶ Z` be an open immersion into a
+finite-type `S`-scheme, base changed along the generic `Z_T ⟶ Z`, and suppose that `j^* K` has a
+left dual `D ∈ Dctf(V, Λ)`. Then the comparison `g^* RHom(K, Rj_* N) ⟶ RHom(g^* K, g^* Rj_* N)` is
+an isomorphism for every bounded constructible `N` on `V`. -/
 lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_generic {k : Type u}
     [Field k]
     {S : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
@@ -172,10 +147,9 @@ lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_generic {k : 
   exact (derivedUpperStarLowerStarAdjunction _ j').isIso_of_isIso_map_of_iso_rightAdjoint_obj
     eA eB _
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`, internal-hom comparison, closed piece.
-Let `i : W ⟶ Z` be a closed immersion with base change `i_T : W_T ⟶ Z_T` along `g : Z_T ⟶ Z`. If the
-comparison of `g_W : W_T ⟶ W` is an isomorphism at `(i^* K, X)`, then the comparison of `g` is
-one at `(K, Ri_* X)`. -/
+/-- **The internal-hom comparison on a closed piece.** Let `i : W ⟶ Z` be a closed immersion with
+base change `i_T : W_T ⟶ Z_T` along `g : Z_T ⟶ Z`. If the comparison of `g_W : W_T ⟶ W` is an
+isomorphism at `(i^* K, X)`, then the comparison of `g` is one at `(K, Ri_* X)`. -/
 lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_isClosedImmersion
     {Z Z' W W' : Scheme.{u}} {gZ : Z' ⟶ Z} {i : W ⟶ Z}
     [IsClosedImmersion i] {i' : W' ⟶ Z'} [IsClosedImmersion i'] {gW : W' ⟶ W}
@@ -227,10 +201,7 @@ lemma isIso_derivedHomUpperStarComparison_rightDerivedLowerStar_of_isClosedImmer
 /-- **Dévissage in the second variable.** Let `i : W ⟶ Z` be a closed immersion with open
 complement `j : U ⟶ Z`, and `g : Z' ⟶ Z` a morphism with base change `j'` of `j`, along which
 `Rj_*` commutes with base change at `j^* M`. If the internal-hom comparison of `g` is an
-isomorphism at `(K, Ri_* Ri^! M)` and at `(K, Rj_* j^* M)`, it is one at `(K, M)`: apply
-`RHom(K, -)` and `g^*` to the supported localization triangle, and use that `j'^*` kills the
-first term, so that no maps go from it to the third term
-(`CategoryTheory.Pretriangulated.isIso₂_of_isIso₁₃_of_subsingleton`). -/
+isomorphism at `(K, Ri_* Ri^! M)` and at `(K, Rj_* j^* M)`, it is one at `(K, M)`. -/
 lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Scheme.{u}}
     {gZ : Z' ⟶ Z} {i : W ⟶ Z}
     [IsClosedImmersion i] {j : U ⟶ Z} [IsOpenImmersion j]
@@ -296,15 +267,13 @@ lemma isIso_derivedHomUpperStarComparison_of_isIso_open_closed {Z Z' U U' W : Sc
   exact @Equiv.subsingleton _ _ ((Iso.homCongr (Iso.refl _) eB).trans
     ((derivedUpperStarLowerStarAdjunction _ j').homEquiv _ _).symm) this
 
-/-- Blueprint `lemma-restriction-geometric-generic-fibre`, third assertion: **the internal Hom
-commutes with generic base change.** Let `S` be integral and of finite type over a field `k`, let
-`Λ` be a finite ring whose exponent is invertible on `S`, and let `t : T ⟶ S` be a morphism from a
-noetherian scheme lying over the generic point of `S` (e.g. a geometric generic point). Let `X`
-be of finite type over `S`, with base change `g : X_T ⟶ X`. For `K ∈ Dctf(X, Λ)` and
+/-- **The internal Hom commutes with generic base change.** Let `S` be integral and of finite type
+over a field `k`, let `Λ` be a finite ring whose exponent is invertible on `S`, and let `t : T ⟶ S`
+be a morphism from a noetherian scheme lying over the generic point of `S` (e.g. a geometric generic
+point). Let `X` be of finite type over `S`, with base change `g : X_T ⟶ X`. For `K ∈ Dctf(X, Λ)` and
 `M ∈ Dᵇc(X, Λ)`, the canonical comparison
 `g^* RHom(K, M) ⟶ RHom(g^* K, g^* M)` (`AlgebraicGeometry.Etale.derivedHomUpperStarComparison`)
-is an isomorphism. It preserves evaluation
-(`AlgebraicGeometry.Etale.derivedHomUpperStarComparison_ev`). -/
+is an isomorphism. -/
 theorem isIso_derivedHomUpperStarComparison_of_generic {k : Type u} [Field k]
     {S : Scheme.{u}} [IsIntegral S] (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS]
     [QuasiCompact aS] [HasInvertibleExponent Λ S] {T : Scheme.{u}} [IsNoetherian T] (t : T ⟶ S)

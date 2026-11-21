@@ -17,23 +17,23 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OpenImmersion.Cl
 # Base change for open immersions of schemes of finite type over a field
 
 Let `K` be a field, `j : U ⟶ X` an open immersion of schemes of finite type over `K` and `Y` a
-scheme of finite type over `K`. For the cartesian square
-
-```
-  Y ×_K U --h--> Y ×_K X
-     | |
-     p q
-     v v
-     U ------j----> X
-```
-
-the exchange morphism `q⁻¹ R^i j_* F ⟶ R^i h_* p⁻¹ F` is an isomorphism for every sheaf `F` of
-`Λ`-modules on `U_ét`, where `Λ` is killed by an integer `n` invertible in `K`
+scheme of finite type over `K`. For the cartesian square with `h : U ×_K Y ⟶ X ×_K Y`,
+`p : U ×_K Y ⟶ U` and `q : X ×_K Y ⟶ X`, the exchange morphism
+`q⁻¹ R^i j_* F ⟶ R^i h_* p⁻¹ F` is an isomorphism for every sheaf `F` of `Λ`-modules on `U_ét`,
+where `Λ` is killed by an integer `n` invertible in `K`
 (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isOpenImmersion_of_field`).
+The same holds for separated morphisms of finite type `j`
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`).
+
+## Implementation details
+
+For a general `j`, write `j = i ≫ g` with `i` an open immersion and `g` proper (Nagata
+compactification); the derived exchange morphism of `j` is the pasting of those of `g` (proper
+base change) and `i` (the open-immersion case).
 
 ## References
 
-- Stacks Project, Lemma 0F1H, <https://stacks.math.columbia.edu/tag/0F1H>
+* [Stacks, Tag 0F1H]
 -/
 
 @[expose] public section
@@ -85,21 +85,11 @@ lemma Etale.isIso_baseChangeHomologyMap_congr_of_eq {X S T Y : Scheme.{u}} {p : 
   subst hg hh
   rfl
 
-/-- Base change for an arbitrary separated morphism of finite type between schemes of finite
-type over a field, deduced from the open-immersion case over a field.
-
-Let `K` be a field, `n` an integer invertible in `K` which kills `Λ`, `j : U ⟶ X` a separated
-quasi-compact morphism locally of finite type, `X` and `Y` of finite type over `K`, `W = X ×_K Y`
-and `V = U ×_X W`. Then the exchange morphism `q₁⁻¹ R^i j_* F ⟶ R^i h_* e⁻¹ F` is an isomorphism
-for every sheaf `F` of `Λ`-modules on `U_ét` and every degree `i`.
-
-Write `j = i ≫ g` with `i` an open immersion and `g` proper (Nagata's compactification theorem,
-`AlgebraicGeometry.exists_isDense_compactification`). The derived exchange morphism of the square
-on `j`
-is the vertical pasting of the one for `g`, an isomorphism by proper base change
-(`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring`), and the one for
-`i`, an isomorphism at `F` by the open-immersion case over a field
-(`isIso_baseChangeHomologyMap_of_isOpenImmersion_of_field`). -/
+/-- Base change for a separated morphism of finite type over a field: let `K` be a field, `n` an
+integer invertible in `K` which kills `Λ`, `j : U ⟶ X` a separated quasi-compact morphism locally
+of finite type, `X` and `Y` of finite type over `K`, `W = X ×_K Y` and `V = U ×_X W`. Then the
+exchange morphism `q₁⁻¹ R^i j_* F ⟶ R^i h_* e⁻¹ F` is an isomorphism for every sheaf `F` of
+`Λ`-modules on `U_ét` and every degree `i`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_field {K : Type u} [Field K]
     {X U Y W V : Scheme.{u}} (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]

@@ -23,6 +23,8 @@ natural in `𝓖` (`AlgebraicGeometry.Etale.tensorBaseChangeHomologyMap`). Its s
 functors of `𝓖` which, for `𝓖` killed by the Jacobson radical, are computed by underived tensor
 products, and for `𝓖` flat it is the map induced on `Hᵠ` by the base change map.
 
+## Implementation details
+
 The constructions are carried out for a general coefficient category `A`; instantiating them
 afterwards (for `A = ModuleCat Λ`) is much cheaper than elaborating them for a specific `A`.
 -/
@@ -158,10 +160,9 @@ noncomputable def tensorBaseChangeHomologyComparison (q : ℤ) :
       (Functor.associator _ _ _).hom))
 
 /-- The degree-`q` base change map
-`Hᵠ(Lp^* 𝓖[0] ⊗ᴸ τ^{≤q} N) ⟶ Hᵠ(Rh_*((h^* p^* 𝓖 ⊗ e^* 𝓕)[0]))`, natural in the sheaf `𝓖` on `X`:
-the truncation `τ^{≤q} N ⟶ N`, the base change map
-(`AlgebraicGeometry.Etale.tensorBaseChangeMapLeft`) and the comparison of the derived and the
-underived tensor products (`AlgebraicGeometry.Etale.singleFunctorTensorToSingle`). -/
+`Hᵠ(Lp^* 𝓖[0] ⊗ᴸ τ^{≤q} N) ⟶ Hᵠ(Rh_*((h^* p^* 𝓖 ⊗ e^* 𝓕)[0]))`, natural in the sheaf `𝓖` on `X`,
+composed of the truncation `τ^{≤q} N ⟶ N`, the base change map and the comparison of the derived
+and the underived tensor products. -/
 noncomputable def tensorBaseChangeHomologyMap (q : ℤ) :
     tensorBaseChangeHomologySource A p f' g 𝓕 q ⟶ tensorBaseChangeHomologyTarget A p h e 𝓕 q :=
   tensorBaseChangeHomologyTrunc A p f' g 𝓕 q ≫

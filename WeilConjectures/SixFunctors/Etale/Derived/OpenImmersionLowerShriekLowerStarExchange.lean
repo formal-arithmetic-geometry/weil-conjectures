@@ -18,9 +18,9 @@ For a cartesian square of schemes
 
 ```
   U' --j'--> Z'
-  | |
-  g' g''
-  ↓ ↓
+  |          |
+  g'         g''
+  ↓          ↓
   U --j---> Z
 ```
 
@@ -51,10 +51,6 @@ key step in the proof of the composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!`
   composed with `R(𝟙 X)_* ≅ 𝟭` and `R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`. This first needs
   `AlgebraicGeometry.Etale.refinementLowerShriekBaseChangeDerivedIso` to be restated as a special
   case of `AlgebraicGeometry.Etale.mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso`.
-
-## Blueprint
-
-This file constructs the map of `thm:open-proper-interchange` on unbounded derived categories.
 -/
 
 @[expose] public section
@@ -130,20 +126,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 torsion as an additive group, then for a cartesian square `g' ≫ j = j' ≫ g''` of schemes with
 `j` and `j'` open immersions and `g''` proper, the exchange map
 `Rg'_* ⋙ Dj_! ⟶ Dj'_! ⋙ Rg''_*` on the unbounded derived categories `D(-_ét, Λ)` is an
-isomorphism.
-
-The statement fails for general coefficients, which is why `Λ` is torsion here.
-
-Proof: with `i` the closed complement of `j`, it suffices to check the claim after `D(j^*)` and
-after `D(i^*)` (open–closed conservativity).
-- After `D(j^*)` it is formal: the mate of the exchange map under `j_! ⊣ j^*` and `j'_! ⊣ j'^*`
-  is the conjugate of the base change isomorphism, and the units of `j_! ⊣ j^*` and
-  `j'_! ⊣ j'^*` are isomorphisms (`CategoryTheory.isIso_map_mateEquiv_app_of_isIso`).
-- After `D(i^*)` both sides vanish: the source because `i^* j_! = 0`, and the target by proper
-  base change for `g''` along `i`, which is
-  `AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isProper_of_isAddTorsion_ring`, since
-  the pullback of `j'_!` to the closed complement of `j'` vanishes.
- -/
+isomorphism. -/
 theorem isIso_openImmersionLowerShriekLowerStarExchange_of_isAddTorsion_ring
     (hΛ : IsAddTorsion Λ) [IsProper g''] (hsq : IsPullback g' j' j g'') :
     IsIso (openImmersionLowerShriekLowerStarExchange (ModuleCat.{u + 1} Λ) hsq) := by

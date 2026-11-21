@@ -90,11 +90,16 @@ import WeilConjectures.Algebra.Homology.Site.SitePerfectModelRestrictionSuppleme
 
 /-! # Lifting a prescribed top residue basis
 
-Source: Stacks Project, proetale.tex, Tag 09C3, final induction paragraph.
+## Implementation details
 
 The free cell is the existing single complex in degree b, namely P[-b]. The residue
 identification is normalized by the actual coefficient quotient on its generators.
 The scheme universe t and coefficient universe u are independent.
+
+## References
+
+* [Stacks, Tag 09C3]
+* [Stacks, Tag 06YY]
 -/
 
 @[expose] public noncomputable section
@@ -116,20 +121,17 @@ namespace WeilConjectures.CompleteLiftedTopCell
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : Scheme.{t})
 
-/-- The standard rank-r residue module, including the empty product, which is zero.
-Source: Stacks Tag 09C3. -/
+/-- The standard rank-r residue module, including the empty product, which is zero. -/
 abbrev residueFree (r : ℕ) : scalarReductionTarget l E T 0 :=
   ∏ᶜ fun _ : Fin r ↦ SheafOfModules.unit (integralCoefficientSheaf l E T 0)
 
-/-- The residue free cell in degree b, i.e. k^r[-b].
-Source: Stacks Tag 09C3. -/
+/-- The residue free cell in degree b, i.e. k^r[-b]. -/
 abbrev residueCell (r : ℕ) (b : ℤ) :=
   (DerivedCategory.singleFunctor (scalarReductionTarget l E T 0) b).obj
     (residueFree l E T r)
 
 /-- The coefficient quotient on each standard generator of the finite free module.
-Restriction preserves products; its canonical product comparison identifies the target.
-Source: Stacks Tag 09C3. -/
+Restriction preserves products; its canonical product comparison identifies the target. -/
 def freeQuotient (r : ℕ) :
     (∏ᶜ fun _ : Fin r ↦
       SheafOfModules.unit (completedIntegralCoefficientSheafUnrestricted l E T)) ⟶
@@ -139,8 +141,7 @@ def freeQuotient (r : ℕ) :
     inv (piComparison (scalarReductionRestriction l E T 0)
       (fun _ : Fin r ↦ SheafOfModules.unit (integralCoefficientSheaf l E T 0)))
 
-/-- The canonical free-cell quotient in the completed-coefficient derived category.
-Source: Stacks Tag 09C3. -/
+/-- The canonical free-cell quotient in the completed-coefficient derived category. -/
 def freeCellQuotient (r : ℕ) (b : ℤ) :
     DerivedCategory.Q.obj (CompletedCoefficientFree.freeCell l E T r b) ⟶
       (scalarReductionDerivedRestriction l E T 0).obj (residueCell l E T r b) :=
@@ -151,8 +152,7 @@ def freeCellQuotient (r : ℕ) (b : ℤ) :
     ((scalarReductionRestriction l E T 0).mapDerivedCategorySingleFunctor b).inv.app
       (residueFree l E T r)
 
-/-- The actual top cohomology reduction, with the exact restriction comparison.
-Source: Stacks Tags 06YY and 09C3. -/
+/-- The actual top cohomology reduction, with the exact restriction comparison. -/
 def topReduction (M : DerivedCategory (scalarReductionSource l E T)) (b : ℤ) :
     (DerivedCategory.homologyFunctor (scalarReductionSource l E T) b).obj M ⟶
       (scalarReductionRestriction l E T 0).obj

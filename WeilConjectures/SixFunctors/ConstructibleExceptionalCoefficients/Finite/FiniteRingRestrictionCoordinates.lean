@@ -12,7 +12,13 @@ public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.F
 import all WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteCoordinateCalculus
 import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Finite.FiniteRingCounitCoordinates
 
-/-! # Proved finite coefficient coordinate calculus -/
+/-! # Proved finite coefficient coordinate calculus
+
+## References
+
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 0D6D]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -36,21 +42,7 @@ attribute [local irreducible] ProEtale.upperStar ProEtale.upperStarComp
   PurCompactSupport.geometricPullComposition finiteDerivedPullCoordinates
   proEtaleRingModulePullback sfConstantCoefficientIso
 
-/-- Finite realization preserves the restriction obtained from pull composition and counit.
-Source: compactification-coherence proof, first two paragraphs; Stacks 03D6 and 0D6D.
-
-Proof: derivedUniq identifies the exact derived left-adjoint uniqueness comparison.
-Its counit equation, composed with the realization mate counit equation from
-derived_realization_mate, gives finite_direct_counit_coordinates. Use the triangle
-composition square finite_pull_triangle_coordinates for the open triangle of r.
-Expand the ring restriction, move the inverse direct-image comparison through the
-triangle compositor by naturality, and cancel the first pull comparison. Apply
-the direct counit square and then naturality of the first pull comparison with
-respect to the fixed counit. Substitute the triangle square and expand
-properOpenRestriction. The resulting composite is exactly the claimed equation;
-no properness or etale-origin condition is needed for this restriction calculation.
-The final naturality calculation is the generic restriction_coefficient_mate
-identity, specialized to the counit square and the triangle square just proved. -/
+/-- Finite realization preserves the restriction obtained from pull composition and counit. -/
 theorem finite_restriction_coordinates
     (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)

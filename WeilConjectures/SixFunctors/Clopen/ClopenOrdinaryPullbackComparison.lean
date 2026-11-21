@@ -10,7 +10,11 @@ public import WeilConjectures.SmoothPurity.IntegralAmbient.NormalizedIntegralPul
 
 /-! # Exact open restriction of the strict finite pullback tower
 
-Source: Stacks Project, sites-modules.tex, Tags 03D2 and 03D8.
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 03D8]
 -/
 
 @[expose] public section
@@ -143,16 +147,7 @@ private noncomputable def restrictionAdjunction
     exact Category.comp_id _
   exact SheafOfModules.pushforwardPushforwardAdj a c.hom ψ H₁ H₂
 
-/-- Ordinary normalized open restriction is the ambient integral module pullback.
-
-Source: Stacks Project, sites-modules.tex, Tags 03D2 and 03D7.
-
-Proof: the composition/base-change adjunction on sites transposes the inverse
-finite coefficient isomorphisms to the specified constant-section maps, by
-naturality of sheafification. Projection compatibility and uniqueness identify
-the transpose of the completed coefficient inverse with the ambient coefficient
-map. Apply the ringed-site module adjunction and uniqueness of left adjoints.
-This works for every open immersion, including the empty one. -/
+/-- Ordinary normalized open restriction is the ambient integral module pullback. -/
 theorem clopenOrdinaryPullbackComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

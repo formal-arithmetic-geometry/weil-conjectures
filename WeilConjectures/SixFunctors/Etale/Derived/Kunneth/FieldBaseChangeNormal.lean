@@ -18,15 +18,10 @@ Let `K` be a field, `n` an integer invertible in `K` and killing the coefficient
 `X` a scheme of finite type over `K`. For an affine `K`-scheme `S'`, `X' = X ×_K S'`, a morphism
 `t : T ⟶ S'` from an affine scheme and `Y = X' ×_{S'} T`, the exchange morphism
 `p'⁻¹ R^q t_* F ⟶ R^q h_* e⁻¹ F` is an isomorphism for every sheaf `F` pulled back from
-`Spec K` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`, the general
-form of blueprint `lemma-kunneth-finite-direct-image--1`): writing `Γ(S')` and `Γ(T)` as directed
-unions of finite type `K`-subalgebras, `t` is a cofiltered limit of morphisms of schemes of finite
-type over `K`, and the limit theorem reduces
-the claim to `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`.
+`Spec K` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`).
 
 Taking `T = Spec L` for a separably closed field `L`, the direct images along `t` vanish in
-positive degrees, whence blueprint
-`lemma-kunneth-finite-direct-image--1`:
+positive degrees, whence
 `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed`.
 
 ## Main statements
@@ -37,9 +32,15 @@ positive degrees, whence blueprint
 - `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`
 - `AlgebraicGeometry.Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed`
 
+## Implementation details
+
+Writing `Γ(S')` and `Γ(T)` as directed unions of finite type `K`-subalgebras, `t` is a
+cofiltered limit of morphisms of schemes of finite type over `K`, and the limit theorem reduces
+the claim to `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`.
+
 ## References
 
-- Stacks Project, Lemma 0F1I, <https://stacks.math.columbia.edu/tag/0F1I>
+* [Stacks, Tag 0F1I]
 -/
 
 @[expose] public section
@@ -161,11 +162,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- Base change along a cofiltered limit of morphisms `gᵢ : Tᵢ ⟶ Sᵢ` of schemes of finite type
 over a field `K`, for the base changes `Xᵢ = X ×_K Sᵢ` of a scheme `X` of finite type over `K`.
-
 Let `t : T ⟶ S'` be the limit of the `gᵢ` (with affine transition maps), `X' = X ×_K S'` and
 `Y = X' ×_{S'} T`. Then the exchange morphism `p'⁻¹ R^q t_* F ⟶ R^q h_* e⁻¹ F` is an
-isomorphism for every sheaf `F` pulled back from `Spec K`: by the limit theorem this reduces to the stages, where
-it is `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field`. -/
+isomorphism for every sheaf `F` pulled back from `Spec K`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field {K : Type u} [Field K]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (n : ℕ) (hn : IsUnit (n : K)) (hΛ : (n : Λ) = 0)
@@ -278,9 +277,8 @@ noncomputable def Scheme.isLimitConeSpecOfMonotone (Z : Scheme.{u}) [IsAffine Z]
   exact (Z.isoSpec_inv_toSpecΓ_assoc
     (Spec.map (CommRingCat.ofHom (F i.unop).val.toRingHom))).symm
 
-/-- The general form of blueprint `lemma-kunneth-finite-direct-image--1`, for given `K`-algebra
-structures on `Γ(S')` and `Γ(T)` compatible with `s` and `t`; see
-`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine`. -/
+/-- The version of `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine` for
+given `K`-algebra structures on `Γ(S')` and `Γ(T)` compatible with `s` and `t`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : Type u}
     [Field K] {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (n : ℕ) (hn : IsUnit (n : K)) (hΛ : (n : Λ) = 0)
@@ -349,18 +347,10 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine_of_algebra {K : T
   exact Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field Λ a n hn hΛ g w hS hT s hs t ht
     htc hts b p' hpb sq q G
 
-/-- Blueprint `lemma-kunneth-finite-direct-image--1` (general form): base change for `X ×_K S' ⟶ S'`
-along a morphism of affine schemes.
-
-Let `K` be a field, `n` an integer invertible in `K` and killing `Λ`, `X` a scheme of finite type
-over `K`, `S'` an affine `K`-scheme, `X' = X ×_K S'`, `t : T ⟶ S'` a morphism from an affine
+/-- Let `K` be a field, `n` an integer invertible in `K` and killing `Λ`, `X` a scheme of finite
+type over `K`, `S'` an affine `K`-scheme, `X' = X ×_K S'`, `t : T ⟶ S'` a morphism from an affine
 scheme and `Y = X' ×_{S'} T`. Then the exchange morphism `p'⁻¹ R^q t_* F ⟶ R^q h_* e⁻¹ F` is an
-isomorphism for every sheaf `F` on `T_ét` pulled back from `Spec K`, in every degree `q`.
-
-Write `Γ(S')` and `Γ(T)` as the directed unions of their finite type `K`-subalgebras `B₀ ⊆ C`
-(with `t^♯(B₀) ⊆ C`), so that `t` is the limit of the morphisms `Spec C ⟶ Spec B₀` of schemes of
-finite type over `K` (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isLimit_of_field`).
--/
+isomorphism for every sheaf `F` on `T_ét` pulled back from `Spec K`, in every degree `q`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Field K]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (n : ℕ) (hn : IsUnit (n : K)) (hΛ : (n : Λ) = 0)
@@ -378,17 +368,11 @@ theorem Etale.isIso_baseChangeHomologyMap_of_field_of_isAffine {K : Type u} [Fie
   rw [hK, Spec.map_comp, ← Scheme.toSpecΓ_naturality_assoc, toSpecΓ_SpecMap_ΓSpecIso_inv,
     Category.comp_id]
 
-/-- Blueprint `lemma-kunneth-finite-direct-image--1`: the normal integral case.
-
-Let `K` be a field, `n` an integer invertible in `K` and killing `Λ`, and `X` a scheme of finite
-type over `K`. Let `X' = X ×_K S'` be the base change of `X` to an affine integral scheme `S'`
-with algebraically closed function field, let `L` be an algebraically closed extension of that
-function field, and let `h : Y ⟶ X'` be the fibre of `X' ⟶ S'` over the resulting geometric
-generic point `Spec L ⟶ S'`. Then `R^q h_* (Λ/dΛ) = 0` for all `q ≥ 1` and `d ∣ n`.
-
-The blueprint takes `L` to be the function field itself; the general algebraically closed
-extension is what `AlgebraicGeometry.Etale.exists_isPullback_not_isZero_higherDirectImage`
-produces. -/
+/-- Let `K` be a field, `n` an integer invertible in `K` and killing `Λ`, and `X` a scheme of
+finite type over `K`. Let `X' = X ×_K S'` be the base change of `X` to an affine integral scheme
+`S'` with algebraically closed function field, let `L` be an algebraically closed extension of
+that function field, and let `h : Y ⟶ X'` be the fibre of `X' ⟶ S'` over the resulting geometric
+generic point `Spec L ⟶ S'`. Then `R^q h_* (Λ/dΛ) = 0` for all `q ≥ 1` and `d ∣ n`. -/
 theorem Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed {K : Type u} [Field K]
     {X : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (n : ℕ) (hn : IsUnit (n : K)) (hΛ : (n : Λ) = 0)

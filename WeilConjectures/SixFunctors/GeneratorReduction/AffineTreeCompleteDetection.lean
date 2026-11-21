@@ -24,7 +24,12 @@ import Mathlib.CategoryTheory.Sites.LocalProperties
 
 /-! # Affine and finite open--closed detection of integral completeness
 
-Source: Bhatt--Scholze, Lemma 6.5.8; Stacks Tags 099M, 09BL and 09BM.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.8 and Remark 6.5.10
+* [Stacks, Tag 099M]
+* [Stacks, Tag 09BL]
+* [Stacks, Tag 09BM]
 -/
 
 @[expose] public noncomputable section
@@ -365,27 +370,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Completeness can be detected on finite pro-etale covers of the leaves of a
 finite constructible tree on every affine open. The object is arbitrary; it need
-not be constructible, bounded, or a tensor product.
-
-Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10;
-Stacks Tags 099M, 09BL and 09BM, canonical quotient-completion locality.
-
-Proof: use invertibility of the canonical quotient-completion unit to test
-completeness. Affine open restriction preserves products, finite quotient tensors,
-transitions and the quotient augmentation, so it commutes with this unit. On each
-finite tree, quasi-compact open and constructible closed inverse images also
-preserve these operations, with the coefficient ring identified by its actual
-finite limit projections. On a leaf, exact pro-etale restriction identifies every
-cohomology sheaf of the unit cone with its restriction. The given finite family
-covers on points and has qcqs domains, hence is a pro-etale covering and detects
-vanishing of all those cohomology sheaves. On an empty leaf all sheaves are zero.
-At an internal vertex the open--closed exact sequence makes its two restrictions
-jointly conservative. Induction up the finite tree therefore gives invertibility
-of the unit on that affine open. Affine opens cover the scheme, so exact sheaf
-restriction and the cohomology criterion give its invertibility globally. Convert
-back with the canonical-unit criterion. This argument imposes no invertibility of
-ell on the scheme: it uses only completed coefficient rings and constructible
-restriction, and it includes height-zero trees and the empty scheme. -/
+not be constructible, bounded, or a tensor product. -/
 theorem affineTreeCompleteDetection (X : Scheme.{t})
     (H : IntegralOnSlice.D.{t, u} l E X none)
     (h : ∀ (U : X.Opens), IsAffine U.toScheme →

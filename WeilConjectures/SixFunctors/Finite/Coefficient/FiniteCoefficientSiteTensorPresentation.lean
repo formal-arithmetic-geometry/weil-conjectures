@@ -9,7 +9,11 @@ import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientKFlatRepr
 import WeilConjectures.SixFunctors.Finite.Coefficient.FiniteCoefficientKFlatReflection
 public import WeilConjectures.SixFunctors.Etale.EtaleKFlatTensorPresentation
 /-! # Representatives for the finite coefficient site tensor comparison
-Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4.
+
+## References
+
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -19,8 +23,7 @@ universe u a b c d e f g w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory Opposite
 open AlgebraicGeometry AlgebraicGeometry.Scheme
 namespace WeilConjectures
-/-- Resolving source and chain tensor comparisons with all functor data shared.
-Source: Stacks 06YN and 07A4. -/
+/-- Resolving source and chain tensor comparisons with all functor data shared. -/
 def FiniteHomTensorPresentationAux
     {K : Type a} {L : Type b} {A : Type c} (B : Type d)
     [Category.{e} K] [Category.{f} L] [Category.{g} A] [Category.{w} B]
@@ -54,28 +57,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The site comparison has a resolving tensor presentation before derived descent.
 The assertions concern only restriction to representatives, the source localization
-map, and the ordinary chain comparison; they supply no derived tensor comparison.
-
-Source: Stacks Project, Cohomology on Sites, Tags 06YN and 07A4, and the final
-site-transport paragraph of blueprint lemma-change-coefficients-internal-hom--1.
-
-Proof: Write inverse image as the ordinary etale-to-pro-etale inverse image followed
-by constant-ring module sheafification. This is exact, faithful, and strong monoidal.
-Resolve an etale complex functorially by flat terms; ordinary inverse image preserves
-flatness and direct sums, so its image is K-flat. These resolutions give a resolving
-subcategory consisting of complexes whose inverse images are K-flat. Resolving the
-vertices of roofs and of their common refinements proves full faithfulness of
-restriction on functor categories, also for the product of two such subcategories.
-If the inverse image of P is K-flat, testing against inverse images of acyclic etale
-complexes and reflecting acyclicity shows that P is K-flat. Thus the canonical lax
-tensorator of etale localization is invertible on each pair in this subcategory.
-Its naturality and finiteHomEtaleRepresentativeNormalization.model give the second
-assertion. Finally, inverse image commutes with the balanced tensor and with the
-coproducts defining signed totalization. These maps give a natural chain isomorphism.
-On every displayed local tensor they satisfy FiniteHomNuChainTensorNormalization;
-uniqueness in finiteHomNuChainTensor_existsUnique identifies each component with
-finiteHomNuChainTensor. These arguments include zero complexes and the empty site.
--/
+map, and the ordinary chain comparison; they supply no derived tensor comparison. -/
 theorem finiteHomNuTensorPresentation
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
     [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) (n : ℕ) :

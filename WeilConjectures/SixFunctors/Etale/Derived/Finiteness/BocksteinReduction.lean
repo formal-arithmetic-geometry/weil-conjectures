@@ -63,9 +63,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}} {I : Ideal Λ} {ϖ :
 /-- **Finiteness of the limit along the torsion coefficients, from the reduction modulo `ϖ`.**
 Let `Λ` be noetherian and complete for `I = (ϖ)`, `ϖ` a nonzerodivisor, and
 `H : D(X_ét, Λ) ⥤ Mod_Λ` a `Λ`-linear homological functor. If `H((Λ ⧸ I)_X)` is a finite
-`Λ`-module, then so is `lim_n H((Λ ⧸ Iⁿ⁺¹)_X)`: by the Bockstein sequence of `ϖ`, the
-hypotheses of `AlgebraicGeometry.Etale.finite_limit_quotPowTriangle` are a submodule and a
-quotient of `H((Λ ⧸ I)_X)`. -/
+`Λ`-module, then so is `lim_n H((Λ ⧸ Iⁿ⁺¹)_X)`. -/
 theorem finite_limit_quotPowTriangle_of_finite [IsNoetherianRing Λ]
     [IsAdicComplete (Ideal.span {ϖ}) Λ]
     (H : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ⥤ ModuleCat.{v} Λ)

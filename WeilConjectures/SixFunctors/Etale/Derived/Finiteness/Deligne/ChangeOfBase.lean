@@ -15,11 +15,14 @@ Let `q : B ⟶ S` be of finite type and let `Y` be a `B`-scheme via `fYB : Y ⟶
 `V ⊆ B` the direct image along `j : X ⟶ Y` is bounded constructible and commutes with base change
 (as `B`-schemes), then, over all of `S`, the same holds for the restriction of `j` to the open
 `G = fYB⁻¹(V)` of `Y`, viewed as an `S`-scheme
-(`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.restrict_of_base`): for a noetherian
-`T ⟶ S`, the base change `G_T = G ×_S T` is also `Y ×_B V_T` with `V_T = V ×_S T` open in
-`B ×_S T`, which is noetherian. This is how the first step of the proof of
-`theorem-generic-constructibility-base-change-rj` uses the induction hypothesis over `𝔸¹_S` for a
-coordinate `Y ⟶ 𝔸¹_S`.
+(`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.restrict_of_base`). This is how the
+first step of the proof of Deligne's generic constructibility theorem uses the induction
+hypothesis over `𝔸¹_S` for a coordinate `Y ⟶ 𝔸¹_S`.
+
+## Implementation details
+
+For a noetherian `T ⟶ S`, the base change `G_T = G ×_S T` is also `Y ×_B V_T` with
+`V_T = V ×_S T` open in `B ×_S T`, which is noetherian.
 -/
 
 @[expose] public section

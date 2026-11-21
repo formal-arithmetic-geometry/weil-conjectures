@@ -20,10 +20,7 @@ cohomological dimension. The right adjoint `Ri^!` of `Ri_*` on the unbounded der
 of étale sheaves of modules (`AlgebraicGeometry.Etale.derivedLowerStarClosedUpperShriekAdjunction`)
 
 * commutes with coproducts
-  (`AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedFunctor_closedUpperShriek`): the
-  closed-support triangles `Ri_* Ri^! M ⟶ M ⟶ Rj_* j^* M ⟶` of a family are compared with that of
-  the coproduct; the coproduct of distinguished triangles is distinguished, `Rj_* j^*` commutes
-  with coproducts, and `Ri_*` is fully faithful and left adjoint;
+  (`AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedFunctor_closedUpperShriek`);
 * has bounded amplitude
   (`AlgebraicGeometry.Etale.exists_isLE_rightDerivedFunctor_closedUpperShriek`): it sends objects
   in degrees `≤ n` into degrees `≤ n + d + 1` if `Rj_*` has cohomological dimension `≤ d`.
@@ -48,9 +45,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] {Z U X : Scheme.{u}} (i : Z ⟶ X) [I
   (hij : Set.range i.base = (Set.range j.base)ᶜ)
 
 /-- The closed-support triangle `i_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` for an arbitrary coefficient
-ring `Λ`, as the supported localization triangle of the recollement
-(`CategoryTheory.Pretriangulated.Recollement.exists_distTriang_counit_unit`). For finite `Λ`
-this is `AlgebraicGeometry.Etale.exists_distTriang_closedSupport`. -/
+ring `Λ`, as the supported localization triangle of the recollement. -/
 private lemma exists_distTriang_closedSupport_recollement
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     ∃ w, Triangle.mk ((derivedLowerStarClosedUpperShriekAdjunction i j hij).counit.app K)
@@ -148,9 +143,8 @@ theorem preservesColimitsOfShape_rightDerivedFunctor_closedUpperShriek
 omit [QuasiCompact j] in
 include hij in
 /-- The exceptional inverse image `Ri^!` along a closed immersion has bounded amplitude, when the
-complementary open immersion `j` has finite cohomological dimension: from the closed-support
-triangle `Ri_* Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶`, if `K` lies in degrees `≤ n` then so does
-`Ri_* Ri^! K` up to `d + 1`, and `i_*` is exact and faithful. -/
+complementary open immersion `j` has finite cohomological dimension `≤ d`: it sends objects in
+degrees `≤ n` into degrees `≤ n + d + 1`. -/
 theorem exists_isLE_rightDerivedFunctor_closedUpperShriek
     (hj : HasFiniteCohomologicalDimensionMorphism Λ j) :
     ∃ c : ℤ, ∀ (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

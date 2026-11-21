@@ -32,12 +32,9 @@ namespace AlgebraicGeometry
 namespace Etale
 
 /-- For `X` smooth and separated of pure dimension `d` over a field `k` and a finite coefficient
-ring `Λ` whose exponent is invertible on `X`, smooth purity gives
+ring `Λ` whose exponent is invertible on `X`,
 
-`ω_X = Ra_X^! Λ ≅ Λ_X(d)[2d]`.
-
-This is `AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift` at `aY = 𝟙 _`, stated
-with `tateObject`. -/
+`ω_X = Ra_X^! Λ ≅ Λ_X(d)[2d]`. -/
 theorem nonempty_iso_dualizingComplex_tateObject_shift (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k]
     {X : Scheme.{u}} {d : ℕ} (aX : X ⟶ Spec (.of k)) [IsSeparated aX]

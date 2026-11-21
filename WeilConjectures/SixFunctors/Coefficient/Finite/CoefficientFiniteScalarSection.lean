@@ -10,7 +10,11 @@ public import WeilConjectures.CategoryTheory.Ringed.Finite.RingedFiniteFreeHomBa
 
 /-! # Identification of the prescribed finite scalar unit
 
-Source: Stacks 06YY and 07A4.
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public section
@@ -45,8 +49,7 @@ attribute [local semireducible] scalarReductionExtension
 attribute [local implicit_reducible] scalarReductionExtension
 
 -- Match the recorded adjunction unit with the explicit scalar generator.
-/-- The prescribed finite scalar adjunction unit is the pure scalar section at 1.
-Source: Stacks 03CZ and 06YY. -/
+/-- The prescribed finite scalar adjunction unit is the pure scalar section at 1. -/
 theorem coefficientFiniteScalarSection (n : ℕ)
     (M : scalarReductionSource l E W) (U : W.ProEtᵒᵖ) (x : M.val.obj U) :
     ringedFiniteFreeScalarSection.{t+1, t, u} (Scheme.ProEt.topology W)

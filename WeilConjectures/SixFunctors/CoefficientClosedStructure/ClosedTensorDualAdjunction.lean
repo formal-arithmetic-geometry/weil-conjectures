@@ -11,6 +11,10 @@ public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 import Mathlib.CategoryTheory.HomCongr
 
 /-! # Tensor transposition and contravariant dual adjunction
+
+## References
+
+* [Stacks, Tag 08J9]
 -/
 
 @[expose] public noncomputable section
@@ -24,8 +28,7 @@ namespace WeilConjectures.CoefficientClosedStructure
 variable {C : Type u} [Category.{v} C] {H : Cᵒᵖ × C ⥤ C}
   (S : CoefficientClosedStructure H)
 
-/-- Fixing the target of internal Hom gives the usual contravariant dual functor.
-Source: Stacks 08J9, functoriality of derived internal Hom. -/
+/-- Fixing the target of internal Hom gives the usual contravariant dual functor. -/
 def dual (H : Cᵒᵖ × C ⥤ C) (M : C) : Cᵒᵖ ⥤ C :=
   ((𝟭 Cᵒᵖ).prod' ((Functor.const Cᵒᵖ).obj M)) ⋙ H
 

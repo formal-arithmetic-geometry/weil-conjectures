@@ -69,11 +69,10 @@ lemma derivedSquareUpperStarIso_hom_app_restrictScalars (sq : CommSq g' f' f g)
   rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   rw [h₂]
-/-- **The derived base change map is compatible with restriction of scalars** (statement (A)):
-for a commutative square `g' ≫ f = f' ≫ g` whose vertical morphisms have higher direct images
-vanishing in degrees `> d` and `> d'`, the derived base change map
-`Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` over `Λ` and over `Λ'` are related by the coefficient
-comparisons of `Rf_*`, `Lg^*`, `Lg'^*` and `Rf'_*`. -/
+/-- **The derived base change map is compatible with restriction of scalars**: for a commutative
+square `g' ≫ f = f' ≫ g` whose vertical morphisms have higher direct images vanishing in degrees
+`> d` and `> d'`, the derived base change map `Ex_* : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` over `Λ` and
+over `Λ'` are related by the coefficient comparisons of `Rf_*`, `Lg^*`, `Lg'^*` and `Rf'_*`. -/
 lemma derivedBaseChangeMap_app_restrictScalars (sq : CommSq g' f' f g) (d d' : ℕ)
     (hd : ∀ (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
       IsZero ((((f)_*[ModuleCat.{u + 1} Λ]).rightDerived q).obj F))

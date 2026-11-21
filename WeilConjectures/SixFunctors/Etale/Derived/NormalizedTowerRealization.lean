@@ -15,8 +15,7 @@ A family of isomorphisms `e_n : M_n ≅ N_n` between the levels of two normalize
 isomorphism of normalized systems. Its restriction of scalars is an isomorphism of the towers
 `n ↦ Res M_n` and `n ↦ Res N_n` in `D(X_ét, Λ)`, and it is realized by an isomorphism of the
 derived limits `R lim_n Res M_n ≅ R lim_n Res N_n` whose reduction at every level `n` is `e_n`.
-This is the step of the uniform-tower reconstruction that turns levelwise isomorphisms into an
-isomorphism over the integral coefficients.
+This turns levelwise isomorphisms into an isomorphism over the integral coefficients.
 
 ## Main definitions
 
@@ -27,6 +26,11 @@ isomorphism over the integral coefficients.
 
 - `AlgebraicGeometry.Etale.NormalizedTower.exists_iso_of_isHomotopyLimit`: the realization of a
   levelwise isomorphism of normalized towers.
+
+## Implementation details
+
+The essential smallness of the small étale site is registered as a local instance, since
+instance search does not find it in the presence of the imports of this file.
 -/
 
 @[expose] public section
@@ -41,8 +45,7 @@ open Scheme
 
 namespace Etale
 
-/-- The small étale site of a scheme is essentially small. Instance search does not find this
-in the presence of the imports of this file. -/
+/-- The small étale site of a scheme is essentially small. -/
 local instance localInstance_NormalizedTowerRealization_1 (X : Scheme.{u}) :
     EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=

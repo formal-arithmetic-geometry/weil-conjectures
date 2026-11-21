@@ -8,7 +8,12 @@ module
 public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionModels
 import WeilConjectures.Algebra.Homology.HomComplexComponents
 
-/-! # Naturality for the recorded Hom-complex projections -/
+/-! # Naturality for the recorded Hom-complex projections
+
+## References
+
+* [Stacks, Tag 0A8X]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -30,13 +35,7 @@ private theorem projection_eq_π
         (R := R) A I n p (p + n) rfl) := by
   rfl
 
-/-- Postcomposition on the Hom complex commutes with its recorded projections.
-
-Source: Stacks 0A8X and the product-projection naturality in HomComplexComponents.
-
-Proof: the projection in IntegralHomReductionModels and homComplexπ choose the
-same projection family from homComplex_projections_exists. Identify them and
-apply homComplexFunctor_obj_map_f_π. No boundedness or injectivity is used. -/
+/-- Postcomposition on the Hom complex commutes with its recorded projections. -/
 theorem homProjection_map
     (Y : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})

@@ -9,7 +9,15 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemBridgePushComposition
 import all WeilConjectures.CategoryTheory.SixFunctors.SystemProperOpenLambdaExchange
 
-/-! Transport of the cartesian conjugate through the canonical bridge. -/
+/-! # Cartesian bridge transport
+
+Transport of the cartesian conjugate through the canonical bridge.
+
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -288,12 +296,7 @@ attribute [local irreducible] mateEquiv conjugateIsoEquiv
   cartesianConjugate properExchange
   ProEtale.SemilinearProperOpen.cartesianConjugate ProEtale.SemilinearProperOpen.exchange
 
-/-- The cartesian conjugate is compatible with the canonical bridge.
-Source: Stacks 07A7 and 0F7B; blueprint fix-prop-coherence.
-Proof: compare the two pull-composition paths using pull_bridge_composition and
-naturality of equality transport. The mate-whiskering identities carry that square
-through the pull comparisons and the conjugate push comparisons. The adjunction
-triangle identities identify both cartesian conjugates with those mates. -/
+/-- The cartesian conjugate is compatible with the canonical bridge. -/
 theorem cartesianBridge_transport (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {V W Z : Scheme.{u}} (p : V ⟶ Z) (i : W ⟶ Z) [IsOpenImmersion i]

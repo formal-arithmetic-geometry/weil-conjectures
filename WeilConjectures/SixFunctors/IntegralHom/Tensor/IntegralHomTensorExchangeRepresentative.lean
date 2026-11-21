@@ -8,7 +8,10 @@ public import WeilConjectures.SixFunctors.IntegralHom.Tensor.IntegralHomTensorAd
 public import WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedTensorHomModelSupplement
 /-! # Adjunction exchange on signed tensor representatives
 
-Source: Stacks Tags 08J9 and 06YU.
+## References
+
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 06YU]
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -64,14 +67,7 @@ attribute [local irreducible] homComplexFunctor derivedInternalHomOfUniverses
 
 -- Keep derived Hom opaque during the representative comparison.
 attribute [-instance] derivedCategory in
-/-- Signed interchange on representatives induces the adjunction exchange.
-
-Source: Stacks Tags 08J9 and 06YU. Proof: compose with the inverse model comparison
-and a K-injective resolution of the target tensor. The normalized model curries
-that augmentation to a Hom-complex map. The presentation evaluation is its signed
-uncurrying. The assumed interchange formula makes these chain maps equal on all
-pure generators. Tensor and totalization generation give equality, and cancellation
-of the localized augmentation and representative isomorphisms proves the claim. -/
+/-- Signed interchange on representatives induces the adjunction exchange. -/
 theorem tensorAdjunctionExchange_representative
     {X : AlgebraicGeometry.Scheme.{u}}
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology X) CommRingCat.{u + 1})

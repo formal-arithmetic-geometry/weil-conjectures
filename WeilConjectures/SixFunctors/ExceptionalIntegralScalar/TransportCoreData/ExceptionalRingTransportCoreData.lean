@@ -11,13 +11,18 @@ public import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Data fields for exceptional integral transport
 
 This interface isolates the object, functor, adjunction, and comparison-isomorphism
-fields of the normalized exceptional transport record. The right comparison is
-constructed by uniqueness of right adjoints. The finite right evaluation comparison
-carries its evaluated unit and counit equations. It is constructed by the mates
-correspondence; its inverse is not used. The remaining compatibility equations
-are supplied separately by `ExceptionalRingTransportCoreLaws`.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26.
+fields of the normalized exceptional transport record. The remaining compatibility
+equations are supplied separately by `ExceptionalRingTransportCoreLaws`.
+
+## Implementation details
+
+The right comparison is constructed by uniqueness of right adjoints. The finite right
+evaluation comparison carries its evaluated unit and counit equations; it is constructed
+by the mates correspondence and its inverse is not used.
+
+## References
+
+* Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24, 5.26
 -/
 
 @[expose] public noncomputable section
@@ -69,9 +74,7 @@ structure TransportCoreData
           (PurCompactSupport.coefficientPrimeUnit l D hl) c E.carrier
 
 /-- The canonical right comparison determined by the two specified adjunctions
-and the left comparison. This is an explicit construction, not a freely chosen
-isomorphism: its inverse is the unique adjunction-compatible comparison.
-Source: Zheng, Construction 5.25, with uniqueness of right adjoints. -/
+and the left comparison; its inverse is the unique adjunction-compatible comparison. -/
 def TransportCoreData.realizeG
     {l : ℕ} [Fact l.Prime] {Ω : Type u} [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] {D : FiniteFieldDatum.{u}} {hl : l ≠ D.p}
@@ -106,9 +109,8 @@ variable {l : ℕ} [Fact l.Prime] {Ω : Type u} [Field Ω] [Algebra (Padic l) Ω
   {left : ∀ s : RingStage.{u} l, LeftRealization.{u} l Ω c s (operation s)}
   (d : TransportCoreData l Ω D hl c operation left)
 
-/-- The reduction comparison is the realization comparison followed by the target
-reconstruction counit. It is constructed from these maps, rather than chosen independently.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26. -/
+/-- The reduction comparison: the realization comparison followed by the target
+reconstruction counit. -/
 def TransportCoreData.reductionF (E : FieldStage.{u} l) :
     (operation (.integral E)).F ⋙ (d.reconstruction E false).equivalence.functor ≅
       (d.reconstruction E true).equivalence.functor ⋙ d.F E :=
@@ -116,9 +118,8 @@ def TransportCoreData.reductionF (E : FieldStage.{u} l) :
     Functor.isoWhiskerLeft ((d.reconstruction E true).equivalence.functor ⋙ d.F E)
       (d.reconstruction E false).equivalence.counitIso ≪≫ Functor.rightUnitor _
 
-/-- The right-adjoint reduction comparison uses the realization comparison and the
-source reconstruction counit, with the two endpoints interchanged.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Proposition 5.26. -/
+/-- The right-adjoint reduction comparison: the realization comparison and the
+source reconstruction counit, with the two endpoints interchanged. -/
 def TransportCoreData.reductionG (E : FieldStage.{u} l) :
     (operation (.integral E)).G ⋙ (d.reconstruction E true).equivalence.functor ≅
       (d.reconstruction E false).equivalence.functor ⋙ d.G E :=
@@ -128,13 +129,8 @@ def TransportCoreData.reductionG (E : FieldStage.{u} l) :
 
 end ReductionComparisons
 
-/-- The data fields have the construction described in the transport proof.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26. The strict-system transport, reconstruction equivalences, and integral
-proper/open realization are assembled first; all displayed functors and
-isomorphisms are the resulting data.
-The left realizations are supplied with their integer shift-compatibility witnesses.
--/
+/-- Transport core data exist, assembled from strict-system transport, the reconstruction
+equivalences and integral proper/open realization. -/
 theorem exists_exceptional_transport_core_data
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

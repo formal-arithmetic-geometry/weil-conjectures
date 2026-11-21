@@ -19,17 +19,13 @@ localization triangle
 `Ri_! Ri^! L ⟶ L ⟶ Rj_* Lj^* L ⟶ (Ri_! Ri^! L)[1]`
 
 to the supported localization triangle of `L'` for the pair `(Z', U')` whose middle component is
-`τ` (`AlgebraicGeometry.Etale.existsUnique_triangleHom_supportedLocalizationTriangle`). Indeed the
-pullback of `Ri_! Ri^! L` is supported on `e⁻¹(Z) ⊆ Z'`, so it admits no nonzero maps, even
-after a shift, to `Rj'_* Lj'^* L'`; this pins down the first and the third components.
+`τ` (`AlgebraicGeometry.Etale.existsUnique_triangleHom_supportedLocalizationTriangle`).
 
 Uniqueness makes the morphisms compatible with composition of morphisms of pairs, and for the
 base change pair it is `AlgebraicGeometry.Etale.supportedLocalizationTriangleBaseChange`.
-Applying a homological functor (for instance `Hom(Λ, -)` or `RΓ` followed by cohomology) and
-`CategoryTheory.Functor.homologySequenceδ_naturality`, the long exact sequences of cohomology
-with supports are functorial in the pair; with `RΓ_Z(X, -) ≅ RΓ(X, Ri_! Ri^! -)`
-(`AlgebraicGeometry.Etale.rightDerivedSectionsWithSupportIso`) this is the functoriality in the
-pair of blueprint `thm-pur-with-support-exactness` for arbitrary morphisms of schemes.
+Applying a homological functor and `CategoryTheory.Functor.homologySequenceδ_naturality`, the
+long exact sequences of cohomology with supports are functorial in the pair, with
+`RΓ_Z(X, -) ≅ RΓ(X, Ri_! Ri^! -)` (`AlgebraicGeometry.Etale.rightDerivedSectionsWithSupportIso`).
 -/
 
 @[expose] public section
@@ -53,16 +49,12 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X X' Z Z' U U' : Scheme.{u}}
 
-/-- Long exact sequence for cohomology with support
-(functoriality in the pair, for arbitrary morphisms of pairs).
-
-Let `e : X' ⟶ X` be a morphism mapping the open complement `U'` of the closed immersion
-`i' : Z' ⟶ X'` into the open complement `U` of the closed immersion `i : Z ⟶ X` (so that
-`e⁻¹(Z) ⊆ Z'`). For `L` on `X`, `L'` on `X'` and `τ : Le^* L ⟶ L'`, there is a unique morphism of
-triangles from `Le^*` of the supported localization triangle
-`Ri_! Ri^! L ⟶ L ⟶ Rj_* Lj^* L ⟶ (Ri_! Ri^! L)[1]` to the supported localization triangle of
-`L'` for `(Z', U')` with middle component `τ`. Both triangles are distinguished, so the induced
-maps of long exact sequences are compatible with the connecting maps. -/
+/-- **Functoriality of the supported localization triangle in the pair.** Let `e : X' ⟶ X` be a
+morphism mapping the open complement `U'` of the closed immersion `i' : Z' ⟶ X'` into the open
+complement `U` of the closed immersion `i : Z ⟶ X`. For `L` on `X`, `L'` on `X'` and
+`τ : Le^* L ⟶ L'`, there is a unique morphism of triangles from `Le^*` of the supported
+localization triangle `Ri_! Ri^! L ⟶ L ⟶ Rj_* Lj^* L ⟶ (Ri_! Ri^! L)[1]` to the supported
+localization triangle of `L'` for `(Z', U')` with middle component `τ`. -/
 theorem existsUnique_triangleHom_supportedLocalizationTriangle (e : X' ⟶ X) (i : Z ⟶ X)
     (j : U ⟶ X) (i' : Z' ⟶ X') (j' : U' ⟶ X')
     [IsClosedImmersion i] [IsOpenImmersion j]

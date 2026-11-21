@@ -59,8 +59,7 @@ omit [IsGrothendieckAbelian.{v} C₁] [MonoidalCategory C₁] [MonoidalClosed C�
   [MonoidalPreadditive C₂] [BraidedCategory C₂] [Abelian.HasFunctorialFlatResolution C₂]
   [F.Monoidal] in
 /-- For an additive equivalence `F`, an object `X` of `D(C₁)` whose image `D(F) X` has
-homology concentrated in `[a, b]` has itself homology concentrated in `[a, b]`: `D(F)` commutes
-with homology and `F` reflects zero objects. -/
+homology concentrated in `[a, b]` has itself homology concentrated in `[a, b]`. -/
 lemma homologyConcentratedIn_of_mapDerivedCategory {a b : ℤ} (X : DerivedCategory C₁)
     (hX : homologyConcentratedIn a b (F.mapDerivedCategory.obj X)) :
     homologyConcentratedIn a b X := by
@@ -74,8 +73,7 @@ lemma homologyConcentratedIn_of_mapDerivedCategory {a b : ℤ} (X : DerivedCateg
     (isLE_iff _ b).2 fun q hq ↦ key q ((isLE_iff _ b).1 h₂ q hq)⟩
 
 /-- A monoidal additive equivalence `F` of abelian categories reflects Tor amplitude: if
-`D(F) X` has Tor amplitude in `[a, b]`, so has `X`, since
-`D(F)(X ⊗ᴸ M) ≅ D(F) X ⊗ᴸ F(M)` for every object `M` of `C₁`. -/
+`D(F) X` has Tor amplitude in `[a, b]`, so has `X`. -/
 lemma torAmplitudeIn_of_mapDerivedCategory {a b : ℤ} (X : DerivedCategory C₁)
     (hX : torAmplitudeIn C₂ a b (F.mapDerivedCategory.obj X)) :
     torAmplitudeIn C₁ a b X := fun M ↦
@@ -131,7 +129,7 @@ instance : PreservesFiniteColimits (pointConstantSheaf Λ k).inv :=
   inferInstanceAs (PreservesFiniteColimits (pointConstantSheaf Λ k).asEquivalence.inverse)
 
 /-- A finite étale sheaf `G` on a separably closed point has a finite value
-`F⁻¹ G = Γ(s, G)`: it is the stalk of `G` at the identity geometric point. -/
+`F⁻¹ G = Γ(s, G)`. -/
 lemma moduleFinite_pointConstantSheaf_inv_obj
     (G : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hG : Scheme.IsFiniteSheaf (A := ModuleCat.{u + 1} Λ) G) :

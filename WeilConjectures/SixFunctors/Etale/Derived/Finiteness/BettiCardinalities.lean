@@ -29,7 +29,7 @@ Moreover `dim_k H⁰(Y, 𝒪_Y) = c`.
 Applied to the geometric fibres of a smooth projective family `f : X ⟶ S`, together with the
 constructibility of the geometric fibre dimensions of `𝒪_X`
 (`AlgebraicGeometry.Scheme.Modules.finite_range_and_isConstructible_finrankH_geometricFibre`),
-this gives blueprint `proposition-proper-direct-image-finite-coefficients`.
+this gives the Betti cardinalities of the geometric fibres and their constructibility.
 
 ## Main statements
 
@@ -173,8 +173,7 @@ lemma connectedComponentOpens_facts [IsAlgClosed k]
 
 /-- **`h⁰(Y, 𝒪_Y)` counts connected components.** On a smooth proper scheme `Y` of relative
 dimension one over an algebraically closed field `k`, `dim_k H⁰(Y, 𝒪_Y)` is the number of
-connected components of `Y`: cohomology splits over the components, each of which is a smooth
-proper connected curve with `H⁰(D, 𝒪_D) = k`. -/
+connected components of `Y`. -/
 theorem finrankH_unit_zero_eq_natCard_connectedComponents [IsAlgClosed k] :
     Modules.finrankH k (SheafOfModules.unit Y.ringCatSheaf) 0 =
       Nat.card (_root_.ConnectedComponents Y) := by
@@ -202,8 +201,7 @@ theorem finrankH_unit_zero_eq_natCard_connectedComponents [IsAlgClosed k] :
 proper of relative dimension one over an algebraically closed field `k`, with `c` connected
 components and arithmetic genus `g = dim_k H¹(Y, 𝒪_Y)`, and let `ℓ` be invertible in `k`. Then
 `|H⁰(Y, ℤ/ℓ)| = |H²(Y, ℤ/ℓ)| = ℓ^c`, `|H¹(Y, ℤ/ℓ)| = ℓ^{2g}` and `|Hʳ(Y, ℤ/ℓ)| = 1` for
-`r > 2`. Cohomology splits over the connected components, which are smooth proper connected
-curves, and `g` is the sum of their genera. -/
+`r > 2`. -/
 theorem natCard_sheafH_constantZMod_of_smoothOfRelativeDimension_one [IsAlgClosed k] (ℓ : ℕ)
     (hℓ : (ℓ : k) ≠ 0) :
     Nat.card (Sheaf.H (Y.constantZMod ℓ) 0) = ℓ ^ Nat.card (_root_.ConnectedComponents Y) ∧
@@ -247,22 +245,13 @@ open Scheme
 
 variable {X S : Scheme.{u}}
 
-/-- Betti cardinalities in a smooth
-projective curve family.
-
-Let `S` be Noetherian, `f : X ⟶ S` smooth of relative dimension one and projective
+/-- Betti cardinalities in a smooth projective curve family: let `S` be Noetherian,
+`f : X ⟶ S` smooth of relative dimension one and projective
 (`f = π ∘ i` for a closed immersion `i : X ⟶ ℙ(n; S)`), and `ℓ` a prime invertible on `S`. For a
 point `s` of `S` let `X_{s̄} = X ×_S Spec κ(s)‾` be the geometric fibre, `c_s` the number of its
 connected components and `g_s = dim H¹(X_{s̄}, 𝒪)` its arithmetic genus. Then
 `|H⁰(X_{s̄}, 𝔽_ℓ)| = |H²(X_{s̄}, 𝔽_ℓ)| = ℓ^{c_s}`, `|H¹(X_{s̄}, 𝔽_ℓ)| = ℓ^{2 g_s}` and
-`|Hʳ(X_{s̄}, 𝔽_ℓ)| = 1` for `r > 2`, and `c` and `g` are constructible functions on `S`.
-
-The cardinalities are
-`AlgebraicGeometry.Scheme.natCard_sheafH_constantZMod_of_smoothOfRelativeDimension_one`; since
-`c_s = h⁰(X_{s̄}, 𝒪)` (`AlgebraicGeometry.Scheme.finrankH_unit_zero_eq_natCard_connectedComponents`)
-and `g_s = h¹(X_{s̄}, 𝒪)`, constructibility is the coherent base change statement
-`AlgebraicGeometry.Scheme.Modules.finite_range_and_isConstructible_finrankH_geometricFibre` for
-`𝒢 = 𝒪_X`, which is flat over `S`. -/
+`|Hʳ(X_{s̄}, 𝔽_ℓ)| = 1` for `r > 2`, and `c` and `g` are constructible functions on `S`. -/
 theorem natCard_sheafH_constantZMod_geometricFibre_of_smooth [IsNoetherian S] (f : X ⟶ S)
     [SmoothOfRelativeDimension 1 f] {n : Type u} [Finite n] (i : X ⟶ ℙ(n; S))
     [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f) (ℓ : ℕ) [Fact ℓ.Prime]

@@ -9,7 +9,15 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSuppo
 import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 import WeilConjectures.AlgebraicGeometry.ProEtale.Ring.ProEtaleRingSheafChangeAdjunctionSupplement
 
-/-! # Unit normalization of the finite scalar open comparison -/
+/-! # Unit normalization of the finite scalar open comparison
+
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0D6D]
+* [Stacks, Tag 0E8I]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -290,24 +298,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The finite scalar open comparison preserves the actual open unit.
-This involves only the scalar and geometric adjunctions, with no system model.
-Source: Stacks 03DI, 0E8I, 0D6D and 07A7; fix-prop-coherence, preservation of
-adjunction units by coefficient comparisons.
-
-Proof: first work with the completed and finite ring sheaves before the
-constant-ring presentation isomorphisms. The restriction/pullback square is
-invertible and its geometric mate is the normalized restriction/direct-image
-comparison (proEtaleRingSheafChangeAdjunction). Taking scalar mates therefore
-gives the conjugate of the composite adjunctions used in integralFiniteScalarPull.
-The ordinary inverse open mate of this same restriction/pullback square defines
-openRestrictionMap. Exact localization preserves that mate and its open units.
-Taking its scalar mate defines openComparison. Interchanging these two mate
-operations and cancelling the scalar triangle identities identifies openComparison
-with the inverse open mate of the scalar/pullback comparison. Its unit equation
-is the displayed equality. Finally finiteReductionIso, finitePullbackIso and
-finiteOpenIso are the unique adjoint identifications preserving their units;
-transport the equation through them. This argument allows any integral K,
-including zero, and empty and identity opens, without flatness of the quotient. -/
+This involves only the scalar and geometric adjunctions, with no system model. -/
 theorem integralOpenScalarUnitSquare {X Y : Scheme.{u}} (j : X ⟶ Y)
     [IsOpenImmersion j] (K : Integral l E X) (n : ℕ) :
     letI := (sfIntrinsicExtensionByZero_exact j

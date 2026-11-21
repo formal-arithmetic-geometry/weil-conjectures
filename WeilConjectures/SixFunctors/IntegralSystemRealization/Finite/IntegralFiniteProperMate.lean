@@ -6,7 +6,14 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Finite.IntegralFinitePullbackCoordinates
 
-/-! # Proper finite projection in scalar reduction coordinates -/
+/-! # Proper finite projection in scalar reduction coordinates
+
+## References
+
+* [Stacks, Tag 03D8]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -118,23 +125,7 @@ private theorem transport_mate
     (fun z ↦ P'.map (αY.inv.app (q.obj K)) ≫ e.inv.app (T.obj (q.obj K)) ≫
       θ.app (q.obj K) ≫ z) hnX
 
-/-- The finite proper scalar comparison is the geometric mate of scalar pullback.
-
-Source: Stacks Tags 03D8, 06YY, 07A6; the adjunction normalizations in
-IntegralCompactSupportCoefficientComparison.
-
-Proof: scalarPull is the unique left-adjoint comparison conjugate to the
-restriction/direct-image isomorphism. Its inverse has geometric mate equal to
-properComparison: transpose through the two scalar adjunctions and the two
-geometric adjunctions; both transposes are the inverse of that same restriction
-isomorphism. Injectivity of the composite adjunction Hom bijection proves this
-identity. Transport the left and right sides by finiteReductionIso at X and Y
-and finiteRingPullbackIso/derived finiteDirectImage_eq. These identifications
-preserve units and counits by uniqueness of adjoints and functorial derivation.
-Naturality cancels the inverse endpoint factors, and the mate counit identity
-gives the displayed equation. No coefficient system, realization model,
-constructibility, completeness or properness hypothesis occurs. Zero objects,
-identity morphisms and exponent one obey the same adjunction identities. -/
+/-- The finite proper scalar comparison is the geometric mate of scalar pullback. -/
 theorem integralFiniteProperMate {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (K : Integral l E X) :
     letI := (proEtaleConstantModuleDirectImage_additive_leftExact f

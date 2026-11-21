@@ -7,7 +7,15 @@ module
 
 public import WeilConjectures.SixFunctors.Finite.Hom.FiniteHomSiteTensorChainEquation
 
-/-! # Localization of the two finite scalar/site tensor routes -/
+/-! # Localization of the two finite scalar/site tensor routes
+
+## References
+
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -21,34 +29,7 @@ namespace WeilConjectures
 attribute [local instance 2000] finiteHomTensorSiteSmall
 attribute [local instance] coefficientFiniteQuotientExtensionAdditive
 
-/-- The two derived tensor routes have their specified ordinary chain models.
-Source: Stacks 06YN, 06YY, 07A4, 07A6; blueprint lemma-change-coefficients-internal-hom--1, final
-site-comparison paragraph.
-
-Proof: take e and its generator equation from quotientCalculus.tensor_model on
-nu(P), nu(Q). Reflect their K-flatness to the etale site. Use the etale K-flat
-tensor presentation and nu's chain tensor isomorphism to identify the total
-source with the etale derived tensor. The scalar counit on this K-flat total
-and finiteHomNuFactors give the source isomorphism s. Identify the encoded ordinary
-mate with the proved fixed-ring ordinary scalar
-mate (ordinary_scalar_mate_isIso); the encoding mates are invertible because
-the encodings are equivalences. Transfer invertibility back to the intrinsic
-ordinary mate. Scalar extension preserves the
-intrinsic K-flat models, so the reduced inverse-image complexes are K-flat.
-Their intrinsic tensor model comparison, the etale scalar representative maps,
-and finiteHomNuFactors give the target isomorphism t. These are comparison
-isomorphisms of actual complexes, not arbitrary identifications of objects.
-For the first displayed equation substitute nu's tensor normalization at P,Q,
-quotientCalculus.tensor_model, and the single-representative mate formula at P
-and Q. Naturality moves finiteHomNuFactors through the tensor maps, leaving
-the localization of the first chain route. For the second equation substitute
-the single-representative mate formula on the total tensor, the all-complex
-etale scalar tensor normalization, and nu's tensor normalization on the two
-reduced complexes. Functoriality then gives the localization of the second
-chain route. Cancel only the counits and tensor-model comparisons already
-proved invertible on these K-flat complexes. This proof does not assert that
-the two ordinary routes agree; that is the separate chain-equation lemma.
-The same computations include identity quotients, zero complexes and empty sites. -/
+/-- The two derived tensor routes have their specified ordinary chain models. -/
 theorem finiteHomSiteTensorRouteNormalization
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

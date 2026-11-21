@@ -40,7 +40,8 @@ total left derived functors `L(g^*)` through the isomorphism
   `(Lj^*, Li^*)` jointly reflects isomorphisms, with the two-hypothesis form
   `AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_map` and the levelwise versions
   `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar` and
-  `AlgebraicGeometry.Etale.isIso_of_isIso_mapDerivedCategoryUpperStar_map`. These need a concrete coefficient
+  `AlgebraicGeometry.Etale.isIso_of_isIso_mapDerivedCategoryUpperStar_map`. These need a concrete
+  coefficient
   category; `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'`
   is the levelwise version for arbitrary coefficients, deduced from
   `WeilConjectures.SixFunctors.OpenClosed.Supported`.
@@ -87,17 +88,7 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
 include hJ
 
 /-- **Derived open–closed conservativity**, for the levelwise pullbacks: the pair
-`(D(j^*), D(i^*))` jointly reflects isomorphisms of `D(X_ét)`.
-
-On homology sheaves this is the sheaf-level statement, since `j^*` and `i^*` are exact:
-```
-D(X_ét) --D(g^*)--> D(Y_ét)
-   | |
-  H^n H^n
-   v v
-Sh(X_ét) ---g^*---> Sh(Y_ét)
-```
-commutes up to isomorphism for `g = j, i`. -/
+`(D(j^*), D(i^*))` jointly reflects isomorphisms of `D(X_ét)`. -/
 theorem jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     JointlyReflectIsomorphisms (pairFunctor D((j)^*[A]) D((i)^*[A])) :=
@@ -150,8 +141,7 @@ variable {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X) [IsOpenImmersion j] [I
 /-- **Derived open–closed conservativity, for arbitrary coefficients**: the pair
 `(D(j^*), D(i^*))` jointly reflects isomorphisms of `D(X_ét, A)` for any Grothendieck abelian
 `A`. This is `AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar`
-without concreteness assumptions on `A`, deduced in the same way from the sheaf-level
-`AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_upperStar'`. -/
+without concreteness assumptions on `A`. -/
 theorem jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     JointlyReflectIsomorphisms (pairFunctor D((j)^*[A]) D((i)^*[A])) :=
@@ -176,9 +166,7 @@ lemma isZero_mapDerivedCategoryUpperStar_obj_openImmersionLowerShriek_of_disjoin
       ((DerivedCategory.homologyFunctor _ n).obj K)).of_iso
       ((i)^*[A].mapIso (((j)_!open[A].mapDerivedCategoryHomologyFunctorIso n).symm.app K))
 
-/-- **`j^* (Ri_* N)` vanishes** in `D(U_ét)` when the ranges of `i` and `j` are disjoint.
-Representing `N` by a K-injective complex `I`, `Ri_* N` is `i_* I`, and `j^* i_* I` vanishes
-termwise by `AlgebraicGeometry.Etale.isZero_upperStar_lowerStar_of_disjoint_range`. -/
+/-- **`j^* (Ri_* N)` vanishes** in `D(U_ét)` when the ranges of `i` and `j` are disjoint. -/
 lemma isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_range
     (hij : Disjoint (Set.range j.base) (Set.range i.base))
     (N : DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
@@ -195,17 +183,7 @@ lemma isZero_mapDerivedCategoryUpperStar_obj_rightDerivedLowerStar_of_disjoint_r
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-/-- **`Li^* (j_! K)` vanishes** in `D(Z_ét)` when the ranges of `i` and `j` are disjoint.
-
-The homology sheaves of `Li^* (j_! K)` are the `i^* (j_! (H^n K))`, since
-```
-D(U_ét) --D(j_!)--> D(X_ét) --Li^*--> D(Z_ét)
-   | | |
-  H^n H^n H^n
-   v v v
-Sh(U_ét) ---j_!---> Sh(X_ét) ---i^*---> Sh(Z_ét)
-```
-commutes up to isomorphism, and `i^* j_! = 0` on sheaves. -/
+/-- **`Li^* (j_! K)` vanishes** in `D(Z_ét)` when the ranges of `i` and `j` are disjoint. -/
 lemma isZero_leftDerivedUpperStar_obj_mapDerivedCategory_openImmersionLowerShriek_of_disjoint_range
     (hij : Disjoint (Set.range i.base) (Set.range j.base))
     (K : DerivedCategory (Sheaf U.smallEtaleTopology A)) :
@@ -241,17 +219,7 @@ distinguished triangle
 
 It is the derived form of the open–closed short exact sequence
 `0 ⟶ j_! j^* F ⟶ F ⟶ i_* i^* F ⟶ 0`
-(`AlgebraicGeometry.Etale.shortExact_openClosedShortComplex`).
-
-The proof completes the counit to a distinguished triangle `j_! j^* M ⟶ M ⟶[g] C` and
-identifies `C` with `Ri_* i^* M`. Applying `j^*` kills `C`, the counit becoming invertible;
-applying `i^*` makes `g` invertible, as `i^* j_! = 0`. Hence the unit `C ⟶ Ri_* i^* C` is
-invertible: after `j^*` both ends vanish (`j^* Ri_* = 0`), and after `i^*` it is inverse to the
-counit of `D(i^*) ⊣ Ri_*`, an isomorphism because `Ri_*` is fully faithful
-(`CategoryTheory.Functor.full_rightDerivedFunctor`); so it is invertible by open–closed
-conservativity (`AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'`),
-which holds for arbitrary coefficients. By naturality of the unit, `g` followed by
-`C ≅ Ri_* i^* C ≅ Ri_* i^* M` is the unit at `M`. -/
+(`AlgebraicGeometry.Etale.shortExact_openClosedShortComplex`). -/
 theorem exists_distTriang_openClosed (hij : Set.range i.base = (Set.range j.base)ᶜ)
     (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ∃ w, Pretriangulated.Triangle.mk

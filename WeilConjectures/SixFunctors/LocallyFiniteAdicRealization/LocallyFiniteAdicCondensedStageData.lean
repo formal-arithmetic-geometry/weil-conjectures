@@ -93,7 +93,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Finite tensor comparison with condensed coefficients
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2,
+  Proposition 6.8.14(2) and Remark 6.8.15
 -/
 
 @[expose] public noncomputable section
@@ -115,7 +118,7 @@ open scoped Obj
 namespace WeilConjectures.LocallyFiniteAdicRealization
 
 /-- The actual coefficient comparison: bounded finite-field functions are locally finite
-functions. Source: Bhatt--Scholze, Lemma 6.8.2, via the two published ring comparisons. -/
+functions. -/
 def condensedNativeMap (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
     ProEtale.padicAlgClRingObj X l ⟶ abRing l X :=
   (ProEtale.CondensedQbarCoefficientRealization.globalCoefficientIso l X).hom.hom ≫
@@ -131,8 +134,7 @@ instance condensedNativeMap_isIso (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :
   unfold condensedNativeMap
   infer_instance
 
-/-- Transport native modules to the condensed coefficient, retaining their abelian sheaves.
-Source: Bhatt--Scholze, Lemma 6.8.2; restriction along the specified ring isomorphism. -/
+/-- Transport native modules to the condensed coefficient, retaining their abelian sheaves. -/
 def nativeCondensedModules (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
   ProEtale.AdicSheaf.forgetAb l X ⋙ Mod.comap (condensedNativeMap l X)
 
@@ -148,8 +150,7 @@ instance nativeCondensedModules_additive (l : ℕ) [Fact l.Prime] (X : Scheme.{u
     (nativeCondensedModules l X).Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- The exact derived transport along the same coefficient isomorphism.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+/-- The exact derived transport along the same coefficient isomorphism. -/
 def nativeCondensedDerived (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) :=
   (nativeCondensedModules l X).mapDerivedCategory
 
@@ -161,8 +162,7 @@ instance nativeCondensedDerived_isEquivalence (l : ℕ) [Fact l.Prime] (X : Sche
 open AlgebraicallyClosedCoefficients (Index)
 
 /-- Only finite-stage data: full faithful functors on raw rational stages, scalar comparisons,
-and their action on a representative. No statement about a Hom colimit is included.
-Source: Bhatt--Scholze, Proposition 6.8.14(2) and Remark 6.8.15. -/
+and their action on a representative. No statement about a Hom colimit is included. -/
 structure CondensedStageComparison (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
     (D : NormalizedFunctor l X) where
   finite : ∀ E : Index l (PadicAlgCl l),

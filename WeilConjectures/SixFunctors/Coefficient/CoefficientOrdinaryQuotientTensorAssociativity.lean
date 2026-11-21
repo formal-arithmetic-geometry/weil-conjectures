@@ -11,11 +11,15 @@ import all WeilConjectures.CategoryTheory.Scalar.ScalarHomTensorCoherence
 
 /-! # The quotient-system tensor comparison respects the total associators
 
-Source: Stacks 03EK, 07A4 and 0941.
-
 Chain maps of strict systems are tested on all finite evaluations. There the tensor
 comparison of the ordinary quotient system becomes the normalized scalar tensor
 comparison, whose reassociation is computed in `OrdinaryModel.scalarTensorAssociativity`.
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -43,8 +47,7 @@ attribute [local irreducible] coefficientTotalTensor coefficientTensorGenerator
   coefficientSequenceCommRingPresheaf coefficientSequenceCommRingSystem
   coefficientSequenceTopology SheafOfModules.monoidalCategory
 
-/-- The evaluated associator formula holds on arbitrary finite-level sections, by surjectivity
-of the section transport. Source: Stacks 03EK, 07A4, 0941. -/
+/-- The evaluated associator formula holds on arbitrary finite-level sections. -/
 private theorem evaluatedAssociator_generator_section (n : ℕ)
     (X Y Z : CochainComplex (coefficientSequenceModules l E W) ℤ)
     (b' : (coefficientTotalTensor.{u, t + 1, t}
@@ -100,8 +103,7 @@ private theorem evaluatedAssociator_generator_section (n : ℕ)
 
 attribute [local semireducible] coefficientSequenceEvaluation in
 /-- The scalar-coordinate form of tensor associativity for the quotient system: on unit
-insertions of triple generators both composites are the reassociated generator.
-Source: Stacks 03EK, 07A4, 0941. -/
+insertions of triple generators both composites are the reassociated generator. -/
 theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : ℕ)
     (P Q N : CochainComplex (scalarReductionSource l E W) ℤ)
     (a : (coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -274,8 +276,7 @@ theorem OrdinaryModel.scalarTensorAssociativity (M : OrdinaryModel l E W) (n : �
 
 /-- The ordinary tensor comparison of the quotient system is compatible with the native
 total associators: both composites agree after every finite evaluation, where they become
-the reassociation of the scalar tensor comparisons.
-Source: Stacks 03EK, 07A4, 0941. -/
+the reassociation of the scalar tensor comparisons. -/
 theorem OrdinaryModel.quotientTensor_associativity (M : OrdinaryModel l E W)
     (b : coefficientTotalTensor.{u, t + 1, t} (Scheme.ProEt.topology W)
         (completedIntegralCommRingSheafUnrestricted l E W) ⋙ M.quotient l E W ≅

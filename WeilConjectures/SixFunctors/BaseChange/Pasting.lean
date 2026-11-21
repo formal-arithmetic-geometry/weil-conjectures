@@ -46,16 +46,15 @@ the composition isomorphisms `AlgebraicGeometry.Etale.lowerStarComp` of the push
 the vertical maps (`AlgebraicGeometry.Etale.baseChangeMap_paste_vert`,
 `AlgebraicGeometry.Etale.baseChangeMap_paste_vert_app`).
 
+## Implementation details
+
 Both are instances of the compatibility of the mates correspondence with pasting
 (`CategoryTheory.mateEquiv_vcomp`, `CategoryTheory.mateEquiv_hcomp`), applied to the
 corresponding pasting laws of the square isomorphisms of the pullbacks
 (`AlgebraicGeometry.Etale.squareUpperStarIso_paste_horiz_hom`,
-`AlgebraicGeometry.Etale.squareUpperStarIso_paste_vert_hom`), which in turn are the
-associativity law `AlgebraicGeometry.Etale.upperStarComp_assoc'` of the composition
-isomorphisms of the pullbacks. Since the mates correspondence is taken with respect to the
-vertical adjunctions `f^* ⊣ f_*`, the vertical pasting law also involves the change of
-adjunction `(f ≫ e)^* ⊣ (f ≫ e)_*` versus `f^* ⋙ e^* ⊣ …`, i.e. the conjugation lemma
-`AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`.
+`AlgebraicGeometry.Etale.squareUpperStarIso_paste_vert_hom`). The vertical pasting law also
+involves the change of adjunction `(f ≫ e)^* ⊣ (f ≫ e)_*` versus `f^* ⋙ e^* ⊣ …`, i.e. the
+conjugation lemma `AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`.
 -/
 
 @[expose] public section
@@ -149,10 +148,7 @@ variable {X'' X' X Y'' Y' Y : Scheme.{u}} {g'' : X'' ⟶ X'} {g' : X' ⟶ X} {f'
   {f' : X' ⟶ Y'} {f : X ⟶ Y} {h : Y'' ⟶ Y'} {g : Y' ⟶ Y}
 
 open scoped TwoSquare in
-/-- Cartesian square and chosen pullback
-identification, compatibility with horizontal pasting.
-
-**Horizontal pasting of the square isomorphisms**: the square isomorphism of two squares
+/-- **Horizontal pasting of the square isomorphisms**: the square isomorphism of two squares
 pasted horizontally is the horizontal composite of the two square isomorphisms, modulo the
 composition isomorphisms of the pullbacks along the horizontal maps. -/
 lemma Etale.squareUpperStarIso_paste_horiz_hom (sq₁ : CommSq g' f' f g)
@@ -238,10 +234,7 @@ variable {X' X Y' Y Z' Z : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X �
   {e' : Y' ⟶ Z'} {e : Y ⟶ Z} {k : Z' ⟶ Z}
 
 open scoped TwoSquare in
-/-- Cartesian square and chosen pullback
-identification, compatibility with vertical pasting.
-
-**Vertical pasting of the square isomorphisms**: the square isomorphism of two squares
+/-- **Vertical pasting of the square isomorphisms**: the square isomorphism of two squares
 pasted vertically is the vertical composite of the two square isomorphisms, modulo the
 composition isomorphisms of the pullbacks along the vertical maps. -/
 lemma Etale.squareUpperStarIso_paste_vert_hom (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g e' e k)
@@ -268,9 +261,7 @@ open scoped TwoSquare in
 base change square of two squares pasted vertically is the horizontal composite (in the
 sense of `CategoryTheory.TwoSquare.hComp`: the mates correspondence exchanges the two
 directions) of the two base change squares, whiskered by the composition isomorphisms of the
-pushforwards along the vertical maps. Besides `CategoryTheory.mateEquiv_hcomp`, this uses
-that the composition isomorphisms of the pullbacks and of the pushforwards are conjugate
-(`AlgebraicGeometry.Etale.conjugateIsoEquiv_upperStarComp`). -/
+pushforwards along the vertical maps. -/
 lemma Etale.baseChangeSquare_paste_vert (sq₁ : CommSq g' f' f g) (sq₂ : CommSq g e' e k)
     (sq : CommSq g' (f' ≫ e') (f ≫ e) k) :
     Etale.baseChangeSquare A sq =

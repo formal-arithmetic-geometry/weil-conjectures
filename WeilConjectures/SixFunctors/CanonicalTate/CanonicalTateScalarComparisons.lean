@@ -51,8 +51,7 @@ attribute [local irreducible] IntegralOnSlice.completion
 
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
-/-- The completed scalar comparison on a line, fixed by ordinary scalar extension.
- -/
+/-- The completed scalar comparison on a line, fixed by ordinary scalar extension. -/
 theorem integralScalarLine_existsUnique
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (X : Scheme.{u})
@@ -83,8 +82,7 @@ theorem integralScalarLine_existsUnique
       (sfIntegralTwistingObject l E X (r : ℤ)))).1
     simpa [e, scalarCompletionIso] using he'
 
-/-- The specified completed scalar extension of a Tate line.
- -/
+/-- The specified completed scalar extension of a Tate line. -/
 def integralScalarLine
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (X : Scheme.{u})
@@ -94,8 +92,7 @@ def integralScalarLine
       sfIntegralTwistingCoefficient l L X (r : ℤ) :=
   ObjectProperty.isoMk _ (integralScalarLine_existsUnique l E L ι X r).exists.choose
 
-/-- The rational coefficient-line comparison is the localized completed scalar map.
- -/
+/-- The rational coefficient-line comparison is the localized completed scalar map. -/
 def rationalScalarLine
     (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L]
     (ι : E →ₐ[Padic l] L) (X : Scheme.{u})

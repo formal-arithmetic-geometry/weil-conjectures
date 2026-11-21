@@ -92,9 +92,7 @@ noncomputable def rightDerivedLowerStarConstantSheafAbIso (g : T ⟶ Y) :
 `g : T ⟶ Y` quasi-compact between schemes locally of finite type over a field (`Y`
 quasi-compact), the derived direct image of the constant *abelian* étale sheaf `Λ` is the
 underlying complex of abelian sheaves of a bounded constructible complex of sheaves of
-`Λ`-modules, namely `R⁺g_* Λ` computed with `Λ`-module coefficients
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
-and `AlgebraicGeometry.Etale.moduleAbelianDerivedLowerStarIso`). -/
+`Λ`-modules, namely `R⁺g_* Λ` computed with `Λ`-module coefficients. -/
 theorem exists_boundedConstructible_iso_rightDerivedLowerStar_constantSheaf_ab (g : T ⟶ Y)
     [QuasiCompact g] [HasInvertibleExponent Λ T] (aT : T ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aT] [LocallyOfFiniteType aY] [QuasiCompact aY] (hg : g ≫ aY = aT) :

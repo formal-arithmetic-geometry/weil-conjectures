@@ -55,10 +55,7 @@ instance (X : Scheme.{u}) : (𝟙_ (DerivedCategoryModule Λ X)).IsLE 0 :=
 
 variable (Λ) in
 /-- For a connected scheme `X`, `r ↦ r • 𝟙` is a bijection from `Λ` onto the endomorphisms of
-the unit `Λ_X` of `D(X_ét, Λ)`: `Λ_X` is the constant sheaf `Λ` placed in degree `0`, the
-single functor is fully faithful and `Λ`-linear, and the endomorphisms of the constant sheaf
-`Λ` are its global sections, which are `Λ` since `X` is connected
-(`AlgebraicGeometry.Scheme.bijective_constantSheafAdj_unit_app`). -/
+the unit `Λ_X` of `D(X_ét, Λ)`. -/
 theorem bijective_smul_id_unit (X : Scheme.{u}) [ConnectedSpace X] :
     Function.Bijective (fun r : Λ ↦ r • 𝟙 (𝟙_ (DerivedCategoryModule Λ X))) := by
   let C := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ)
@@ -100,9 +97,7 @@ variable {k : Type u} [Field k] [IsSepClosed k]
 /-- Let `k` be separably closed and `u : Λ_s ⟶ P` a morphism of the point category with
 `P ∈ D^{≥ 0}`, such that `g ↦ g ≫ u` is a bijection `Hom(Λ_s, Λ_s) ≃ Hom(Λ_s, P)`. Then the
 third object `Z` of any distinguished triangle `Λ_s ⟶ P ⟶ Z ⟶ Λ_s[1]` on `u` lies in
-`D^{≥ 1}`: a nonzero cohomology sheaf `Hⁿ(Z)`, `n ≤ 0`, would give a nonzero morphism
-`Λ_s[-n] ⟶ Z`, which the long exact sequence, the vanishing of `Hom(Λ_s, Λ_s[1])` and the
-t-structure rule out. -/
+`D^{≥ 1}`. -/
 theorem isGE_one_of_bijective_comp_of_isSepClosed
     (T : Triangle (DerivedCategoryModule Λ (Spec (.of k)))) (hT : T ∈ distTriang _)
     (e : T.obj₁ ≅ 𝟙_ _) [T.obj₂.IsGE 0]

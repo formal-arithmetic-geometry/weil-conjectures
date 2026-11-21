@@ -94,9 +94,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) {T Y : Scheme.{u}} (g 
 /-- **A stratification for the higher direct images of `Λ ⧸ I`.** Let `g : T ⟶ Y` be a
 quasi-compact morphism of schemes locally of finite type over a field, `Y` quasi-compact, and
 `Λ ⧸ I` finite with exponent invertible on `T`. Then there is a stratification of `Y` over
-whose strata all the higher direct images `Rᵏg_* (Λ ⧸ I)_T` are finite locally constant: they
-are the homology sheaves of the bounded constructible complex `Rg_* (Λ ⧸ I)_T`
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`). -/
+whose strata all the higher direct images `Rᵏg_* (Λ ⧸ I)_T` are finite locally constant. -/
 theorem exists_stratification_flcProperty_rightDerived_constantQuotSheaf [Finite (Λ ⧸ I)]
     [HasInvertibleExponent (Λ ⧸ I) T] [QuasiCompact g] (aT : T ⟶ Spec (.of 𝕜))
     (aY : Y ⟶ Spec (.of 𝕜)) [LocallyOfFiniteType aT] [LocallyOfFiniteType aY] [QuasiCompact aY]

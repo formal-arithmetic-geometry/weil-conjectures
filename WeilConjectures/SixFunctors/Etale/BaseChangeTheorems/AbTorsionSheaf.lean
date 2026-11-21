@@ -15,6 +15,10 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 # Torsion homology of abelian étale sheaves
 
 The abelian coefficient conditions in the proper base change theorem.
+
+## References
+
+* [Stacks, Tag 03SA]
 -/
 
 @[expose] public section
@@ -29,7 +33,7 @@ open Scheme
 
 /-- An abelian sheaf `F` on the small étale site of `X` is *torsion* if the stalk of `F` at
 every geometric point of `X` is a torsion abelian group, i.e. every element of every geometric
-stalk is killed by a positive integer [Stacks 03SA]. -/
+stalk is killed by a positive integer. -/
 class Scheme.IsTorsionSheaf {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology Ab.{u + 1}) : Prop where
   isTorsion_sheafFiber (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :

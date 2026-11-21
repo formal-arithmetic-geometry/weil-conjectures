@@ -17,30 +17,27 @@ Let `W = X ×_S Y` with projections `q : W ⟶ X` and `r : W ⟶ Y`. The base ch
 is the composite of the derived base change map `La_X^* Ra_{Y*} F ⟶ Rq_* Lr^* F`, of the
 symmetry of `⊗ᴸ` and of the projection map of `q`
 (`AlgebraicGeometry.Etale.tensorBaseChangeMap_eq_projectionMap`). Hence the Künneth map
-`κ_{E,K}` (`AlgebraicGeometry.Etale.kunnethMap`) is the composite of the canonical maps of the
-blueprint: the tensor product with a constant complex
-, proper base change
-(`theorem-results-from-etale-theory--1`) and the projection formula for the proper projection
-(`proposition-proper-direct-image-constructible-complexes--9`)
-(`AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`, blueprint
-`corollary-open-direct-image-over-field--2`). In particular, over a separably closed field and with
-torsion coefficients, `κ_{E,K}` is an isomorphism as soon as one factor is proper
-(`corollary-open-direct-image-over-field--2`).
-
-In the blueprint the proper factor is the first one. Here it is the second one, `Y`: with the
-conventions of `AlgebraicGeometry.Etale.kunnethMap`, whose canonical factorisation
-(`AlgebraicGeometry.Etale.kunnethMap_eq`) runs through the projection map of the first factor,
-this avoids composing with the symmetry of `⊗ᴸ` on both sides of `κ_{E,K}`.
+`κ_{E,K}` (`AlgebraicGeometry.Etale.kunnethMap`) is the composite of the canonical maps: the
+tensor product with a constant complex, proper base change and the projection formula for the
+proper projection (`AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`). In particular, over
+a separably closed field and with torsion coefficients, `κ_{E,K}` is an isomorphism as soon as
+one factor is proper.
 
 ## Main statements
 
 - `AlgebraicGeometry.Etale.tensorBaseChangeMap_eq_projectionMap`.
 - `AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`
-(`corollary-open-direct-image-over-field--2`).
 - `AlgebraicGeometry.Etale.isIso_kunnethMap_of_isProper_of_hasFiniteCohomologicalDimension`
-  (`corollary-open-direct-image-over-field--2`).
 - `AlgebraicGeometry.Etale.isIso_kunnethMap_of_isProper`
-(`corollary-open-direct-image-over-field--2`).
+
+## Implementation details
+
+The proper factor is the second one, `Y`: the canonical factorisation of
+`AlgebraicGeometry.Etale.kunnethMap` (`AlgebraicGeometry.Etale.kunnethMap_eq`) runs through the
+projection map of the first factor, so this avoids composing with the symmetry of `⊗ᴸ` on both
+sides of `κ_{E,K}`. The coefficient category is `ModuleCat Λ` for a torsion ring `Λ`, so the
+inputs are available on the unbounded derived categories, at the price of assuming finite
+cohomological dimension of `X`.
 -/
 
 @[expose] public section
@@ -179,24 +176,16 @@ lemma tensorBaseChangeMap_eq_projectionMap (q : W ⟶ X) (r : W ⟶ Y) (aX : X �
     leftDerivedUpperStarComp_inv_app_comp_hom_app_congr_assoc A q aX r aY (q ≫ aX) (r ≫ aY)
       rfl w w.symm rfl]
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: the Künneth map is the composite of the
-canonical maps.
+/-- The Künneth map is the composite of the canonical maps.
 
 For a commutative square `q ≫ a_X = r ≫ a_Y = c` (with `q : W ⟶ X`, `r : W ⟶ Y`), the Künneth map
 `κ_{E,K} : Ra_{X*} E ⊗ᴸ Ra_{Y*} K ⟶ Rc_*(Lq^* E ⊗ᴸ Lr^* K)` is the composite of
 
-* the projection map `Ra_{X*} E ⊗ᴸ Ra_{Y*} K ⟶ Ra_{X*}(E ⊗ᴸ La_X^* Ra_{Y*} K)` (the tensor product
-  with a constant complex, `proposition-open-direct-image-preserves-finite`, over a separably closed
-  field);
-* `Ra_{X*}` of `E ⊗ᴸ` the derived base change map `La_X^* Ra_{Y*} K ⟶ Rq_* Lr^* K` (proper base
-  change, `theorem-results-from-etale-theory--1`, if `a_Y` is proper);
+* the projection map `Ra_{X*} E ⊗ᴸ Ra_{Y*} K ⟶ Ra_{X*}(E ⊗ᴸ La_X^* Ra_{Y*} K)`;
+* `Ra_{X*}` of `E ⊗ᴸ` the derived base change map `La_X^* Ra_{Y*} K ⟶ Rq_* Lr^* K`;
 * `Ra_{X*}` of the projection map `E ⊗ᴸ Rq_* Lr^* K ⟶ Rq_*(Lq^* E ⊗ᴸ Lr^* K)` of `q`, up to the
-  symmetry of `⊗ᴸ` (the projection formula
-  `proposition-proper-direct-image-constructible-complexes--9`, if `q` is proper);
-* the composition isomorphism `Ra_{X*} Rq_* ≅ Rc_*` (the Leray isomorphism).
-
-This is the statement `θ ∘ κ_{E,K} = id` of the blueprint, written as `κ_{E,K} = θ⁻¹`, with the
-roles of the two factors exchanged (the proper factor is `Y`). -/
+  symmetry of `⊗ᴸ`;
+* the composition isomorphism `Ra_{X*} Rq_* ≅ Rc_*`. -/
 lemma kunnethMap_eq_of_isPullback (q : W ⟶ X) (r : W ⟶ Y) (aX : X ⟶ S) (aY : Y ⟶ S)
     (c : W ⟶ S) (hq : q ≫ aX = c) (hr : r ≫ aY = c)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -214,8 +203,7 @@ lemma kunnethMap_eq_of_isPullback (q : W ⟶ X) (r : W ⟶ Y) (aX : X ⟶ S) (aY
   rfl
 
 /-- The Künneth map is an isomorphism as soon as the projection map of `a_X`, the derived base
-change map of the square and the projection map of `q` are isomorphisms
-(`AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`). -/
+change map of the square and the projection map of `q` are isomorphisms. -/
 lemma isIso_kunnethMap_of_isIso (q : W ⟶ X) (r : W ⟶ Y) (aX : X ⟶ S) (aY : Y ⟶ S)
     (c : W ⟶ S) (hq : q ≫ aX = c) (hr : r ≫ aY = c)
     (E : DerivedCategory (Sheaf X.smallEtaleTopology A))
@@ -234,29 +222,14 @@ section Point
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {k : Type u} [Field k] [IsSepClosed k]
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: the Künneth formula with one proper
-factor, for torsion coefficients.
+/-- The Künneth formula with one proper factor, for torsion coefficients.
 
 Let `k` be a separably closed field, `Λ` a ring which is torsion as an additive group, `Y` a
 proper `k`-scheme and `X` a quasi-compact quasi-separated `k`-scheme of finite cohomological
 dimension. For the cartesian square `W = X ×_k Y` with projections `q`, `r`, and all
 `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)` (unbounded), the Künneth map
-
 `κ_{E,K} : Ra_{X*} E ⊗ᴸ Ra_{Y*} K ⟶ Rc_*(Lq^* E ⊗ᴸ Lr^* K)`
-
-of `AlgebraicGeometry.Etale.kunnethMap` is an isomorphism in `D((Spec k)_ét, Λ)` (which is
-`D(Λ)` through `RΓ(Spec k, -)`).
-
-The blueprint works with `ℤ`-coefficients, `E ∈ D⁺(X_ét)` with torsion cohomology and
-`K ∈ D⁺(Y_ét)`, where the tensor product with a constant complex
-(`corollary-open-direct-image-over-field--2`) and the projection formula
-(`corollary-open-direct-image-over-field--2`) hold for bounded below complexes. Here the coefficient
-category is `ModuleCat Λ` for a torsion ring `Λ`; the inputs are then available on the unbounded
-derived categories (`proposition-open-direct-image-preserves-finite`,
-`theorem-results-from-etale-theory--1`,
-`proposition-proper-direct-image-constructible-complexes--9`), at the price of the finite
-cohomological dimension of `X`. As explained in the module docstring, the proper factor is the
-second one. -/
+of `AlgebraicGeometry.Etale.kunnethMap` is an isomorphism in `D((Spec k)_ét, Λ)`. -/
 theorem isIso_kunnethMap_of_isProper_of_hasFiniteCohomologicalDimension
     (hΛ : IsAddTorsion Λ) {X Y W : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
@@ -271,11 +244,9 @@ theorem isIso_kunnethMap_of_isProper_of_hasFiniteCohomologicalDimension
     (isIso_rightDerivedLowerStarProjectionMap_of_isSepClosed Λ aX hX E _) inferInstance
     inferInstance
 
-/-- Blueprint `corollary-open-direct-image-over-field--2` (isomorphism statement): over a separably
-closed field `k`, with torsion coefficients `Λ`, the Künneth map of `X ×_k Y` for `X` of finite type
-and `Y` proper over `k` is an isomorphism, for all `E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)` (unbounded).
-It is the composite of the canonical isomorphisms of
-`AlgebraicGeometry.Etale.kunnethMap_eq_of_isPullback`. -/
+/-- Over a separably closed field `k`, with torsion coefficients `Λ`, the Künneth map of
+`X ×_k Y` for `X` of finite type and `Y` proper over `k` is an isomorphism, for all
+`E ∈ D(X_ét, Λ)`, `K ∈ D(Y_ét, Λ)` (unbounded). -/
 theorem isIso_kunnethMap_of_isProper (hΛ : IsAddTorsion Λ) {X Y W : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [IsProper aY] (q : W ⟶ X) (r : W ⟶ Y) (sq : IsPullback q r aX aY)

@@ -8,8 +8,14 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralSystemCompositorAssociativity
 import all WeilConjectures.AlgebraicGeometry.StrictTower.StrictTowerDirectImageCoherence
 import all WeilConjectures.CategoryTheory.AdjunctionSquareComposition
-/-! Identity normalization data for the system pullback compositor.
-Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence.
+/-! # Identity normalization of the system pullback compositor
+
+Identity normalization data for the system pullback compositor.
+
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0F7C]
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -118,12 +124,7 @@ private theorem ordinary_pull_left_unit {o : Operations l E}
   rfl
 
 /-- The normalized pullback identity and its bridge mate. This is the inverse-image
-part of the identity-pair calculation; direct-image components are not asserted.
-Source: Stacks 07A7, 0F7C; blueprint fix-prop-coherence.
-
-Proof: sectionwise identity normalization determines the ordinary direct-image identity;
-localization and adjoint conjugation produce the displayed pullback unit and bridge mate.
--/
+part of the identity-pair calculation; direct-image components are not asserted. -/
 theorem systemPushIdentityPullUnit (o : Operations l E) (c : Compositors l E o)
     (b : CanonicalBridge l E o) (X : Scheme.{u}) :
     ∃ e : pull l E (𝟙 X) ≅ 𝟭 (System l E X),

@@ -70,11 +70,7 @@ attribute [local irreducible] StageSystem.ι StageSystem.PairCategory.mkHom
 set_option allowUnsafeReducibility true in
 attribute [local irreducible] GeneralAlgebraicallyClosedCoefficients.stageSystem
 
-/-- The finite-stage representative equation for the common-stage open square.
-
-Proof: normalize the rational and common tensorators and pullback comparisons,
-evaluate the canonical common-stage pullback/tensor representative at the included
-pair, and cancel the transition maps and scalar unit. -/
+/-- The finite-stage representative equation for the common-stage open square. -/
 theorem commonProjectionOpenPullbackTensor_forward_compatibility
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C)

@@ -207,7 +207,10 @@ import all WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 
 /-! # Unit-normalized ordinary restriction tensor data
 
-Source: Stacks 03EL and 0G7E.
+## References
+
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 0G7E]
 -/
 
 @[expose] public noncomputable section
@@ -231,17 +234,7 @@ attribute [-instance] SemilinearSections.hasDerived SemilinearSections.moduleAbe
 attribute [local irreducible] SheafOfModules.monoidalCategory Functor.leftAdjoint
 
 /-- Construct the restriction tensorator normalized by the given module-adjunction unit,
-and preserve flat-term K-flat complexes along the same functor.
-Source: Stacks, sites-modules.tex Tag 03EL; sites-cohomology.tex Tag 0G7E.
-
-Proof: compose the given algebraic inverse image with scalar extension along c.
-Its normalized adjunction identifies it with F by uniqueness of left adjoints.
-Transport the normalized tensorator through this isomorphism. Apply the set
-adjunction's unit naturality to the sheaf of pairs of sections and its pure
-pairing. The normalized Hom-equivalence equation identifies scalar insertion
-with the specified module-adjunction unit; the transported pairing therefore
-has exactly the displayed pure formula. Transport the tensorator's naturality,
-and transport flatness and K-flatness along the same functor isomorphism. -/
+and preserve flat-term K-flat complexes along the same functor. -/
 theorem nativeOpenTensor_restriction_exists
     {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]

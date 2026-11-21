@@ -18,15 +18,19 @@ import WeilConjectures.AlgebraicGeometry.ContinuousRational.RationalContinuousFi
 
 /-! # Coherent finite adic realizations
 
-Source: Bhatt--Scholze, Propositions 6.6.11 and 6.8.14(2); HRS Theorem 7.7.
+## Implementation details
 
-The data declarations are reexported from
-`AdicFiniteRealizationData`, allowing the proof steps to have independent modules.
+The data declarations are reexported from `AdicFiniteRealizationData`, so that the individual
+steps can live in independent modules.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Propositions 6.6.11 and 6.8.14(2)
+* Hemo–Richarz–Scholbach, *Constructible sheaves on schemes*, Theorem 7.7
 -/
 
 @[expose] public noncomputable section
 
--- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096

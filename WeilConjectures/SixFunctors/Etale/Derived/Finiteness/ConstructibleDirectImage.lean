@@ -13,23 +13,25 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 # Constructibility of direct images: the predicate `𝒞(f)`
 
 For a coefficient ring `Λ` and a morphism of schemes `f : X ⟶ S`, the predicate
-`AlgebraicGeometry.Etale.HasConstructibleDirectImages Λ f` (the blueprint's `𝒞(f)`,
-`proposition-proper-direct-image-finite-coefficients`) says that every higher direct image `Rᵠf_* F`
-of every constructible sheaf `F` of `Λ`-modules on `X_ét` is constructible on `S_ét`. Here
-`Rᵠf_* F` is the `q`-th homology sheaf of the total derived direct image `Rf_*(F[0])`.
+`AlgebraicGeometry.Etale.HasConstructibleDirectImages Λ f` (written `𝒞(f)`) says that every
+higher direct image `Rᵠf_* F` of every constructible sheaf `F` of `Λ`-modules on `X_ét` is
+constructible on `S_ét`. Here `Rᵠf_* F` is the `q`-th homology sheaf of the total derived direct
+image `Rf_*(F[0])`.
 
 This file proves the formal properties of `𝒞` that need no geometry:
 
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImages.constructibleHomology_obj`: if `𝒞(f)`
   holds, then `Rf_*` sends every bounded complex with constructible homology sheaves to a
-  complex with constructible homology sheaves (dévissage along the truncation triangles);
+  complex with constructible homology sheaves;
 - `AlgebraicGeometry.Etale.HasConstructibleDirectImages.comp`: `𝒞(f)` and `𝒞(g)` imply
   `𝒞(f ≫ g)`.
 
-The blueprint proves the composition lemma with the Grothendieck spectral sequence; we use
-instead that `Hⁿ(Rg_* K)` only depends on the truncation `τ^{≤ n} K` of a complex `K` with
-`K ∈ D^{≥ 0}` (`Rg_*` is left t-exact, `CategoryTheory.Functor.isGE_rightDerivedFunctor_obj`),
-and the dévissage above. Both arguments only use that constructible sheaves form a weak Serre
+## Implementation details
+
+The composition lemma does not use the Grothendieck spectral sequence, but the fact that
+`Hⁿ(Rg_* K)` only depends on the truncation `τ^{≤ n} K` of a complex `K` with `K ∈ D^{≥ 0}`
+(`Rg_*` is left t-exact, `CategoryTheory.Functor.isGE_rightDerivedFunctor_obj`), and dévissage
+along the truncation triangles. Both only use that constructible sheaves form a weak Serre
 class, which holds for a finite coefficient ring.
 -/
 
@@ -51,16 +53,9 @@ open _root_.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Constructibility under direct
-image.
-
-For a morphism `f : X ⟶ S`, the assertion `𝒞(f)`: for every constructible sheaf `F` of
-`Λ`-modules on `X_ét` and every `q`, the higher direct image `Rᵠf_* F` is constructible on
-`S_ét`. Here `Rᵠf_* F` is the `q`-th homology sheaf of the total derived direct image
-`Rf_*(F[0])`; it vanishes for `q < 0`, so asking for all `q : ℤ` is the same as asking for all
-`q ≥ 0`. The blueprint applies the predicate to morphisms between schemes of finite type over a
-field `k` and a finite ring `Λ` killed by an integer invertible in `k`; these assumptions are
-made in the statements using it. -/
+/-- Constructibility under direct image: for a morphism `f : X ⟶ S`, the assertion `𝒞(f)` that
+for every constructible sheaf `F` of `Λ`-modules on `X_ét` and every `q`, the higher direct
+image `Rᵠf_* F` (the `q`-th homology sheaf of `Rf_*(F[0])`) is constructible on `S_ét`. -/
 def HasConstructibleDirectImages {X S : Scheme.{u}} (f : X ⟶ S) : Prop :=
   ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf F →
     Etale.DerivedCategory.constructibleHomology (ModuleCat.{u + 1} Λ) S
@@ -70,9 +65,7 @@ variable {Λ}
 
 /-- **Dévissage of bounded constructible complexes.** A triangulated subcategory `P` of
 `D(X_ét, Λ)`, closed under isomorphisms, containing every constructible sheaf placed in
-degree `0` contains every bounded complex with constructible homology sheaves: by induction
-on the length of the amplitude, along the truncation triangle `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶`
-whose third term is `Hᵇ K` placed in degree `b`. -/
+degree `0` contains every bounded complex with constructible homology sheaves. -/
 lemma prop_of_constructibleHomology {X : Scheme.{u}}
     (P : ObjectProperty (_root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))))
     [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
@@ -166,8 +159,7 @@ lemma HasConstructibleDirectImages.constructibleHomology_obj {X S : Scheme.{u}} 
 
 omit [Finite Λ] in
 /-- **The homology of `Rg_* K` in degree `n` only depends on `τ^{≤ n} K`.** For `K` in
-`D^{≥ a}` and `n : ℤ`, the map `Hⁿ(Rg_* τ^{≤ n} K) ⟶ Hⁿ(Rg_* K)` is an isomorphism, because
-`Rg_* τ^{> n} K` is concentrated in degrees `> n`. -/
+`D^{≥ a}` and `n : ℤ`, the map `Hⁿ(Rg_* τ^{≤ n} K) ⟶ Hⁿ(Rg_* K)` is an isomorphism. -/
 lemma isIso_homologyMap_rightDerivedLowerStar_truncLE {Y S : Scheme.{u}} (g : Y ⟶ S)
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (n : ℤ) :
     IsIso ((homologyFunctor _ n).map ((R((g)_*[ModuleCat.{u + 1} Λ])).map
@@ -184,7 +176,7 @@ lemma isIso_homologyMap_rightDerivedLowerStar_truncLE {Y S : Scheme.{u}} (g : Y 
 
 /-- **`Rg_*` of a bounded below complex with constructible homology.** If `𝒞(g)` holds and `K`
 is bounded below with constructible homology sheaves, then `Rg_* K` has constructible homology
-sheaves: `Hⁿ(Rg_* K) = Hⁿ(Rg_* τ^{≤ n} K)` and `τ^{≤ n} K` is bounded. -/
+sheaves. -/
 lemma HasConstructibleDirectImages.constructibleHomology_obj_of_isGE {Y S : Scheme.{u}}
     {g : Y ⟶ S} (hg : HasConstructibleDirectImages Λ g)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (a : ℤ)
@@ -205,14 +197,8 @@ lemma HasConstructibleDirectImages.constructibleHomology_obj_of_isGE {Y S : Sche
   exact IsConstructibleSheaf.of_iso (asIso ((homologyFunctor _ n).map
     ((R((g)_*[ModuleCat.{u + 1} Λ])).map ((TStructure.t.triangleLEGT n).obj K).mor₁)))
 
-/-- Composition for
-constructibility alone.
-
-If `𝒞(f)` and `𝒞(g)` hold for composable morphisms `f : X ⟶ Y` and `g : Y ⟶ S`, then `𝒞(f ≫ g)`
-holds. Here `Λ` is a finite ring, so that constructible sheaves form a weak Serre class. The
-blueprint uses the Grothendieck spectral sequence; we use `R(f ≫ g)_* ≅ Rf_* ⋙ Rg_*` and
-`AlgebraicGeometry.Etale.HasConstructibleDirectImages.constructibleHomology_obj_of_isGE`, since
-`Rf_*(F[0])` is concentrated in degrees `≥ 0`. -/
+/-- Composition for constructibility: if `𝒞(f)` and `𝒞(g)` hold for composable morphisms
+`f : X ⟶ Y` and `g : Y ⟶ S`, with `Λ` a finite ring, then `𝒞(f ≫ g)` holds. -/
 theorem HasConstructibleDirectImages.comp {X Y S : Scheme.{u}} {f : X ⟶ Y} {g : Y ⟶ S}
     (hf : HasConstructibleDirectImages Λ f) (hg : HasConstructibleDirectImages Λ g) :
     HasConstructibleDirectImages Λ (f ≫ g) := by
@@ -225,12 +211,7 @@ theorem HasConstructibleDirectImages.comp {X Y S : Scheme.{u}} {f : X ⟶ Y} {g 
 /-- **Approximating a sheaf by a resolution, to finite order.** Suppose every constructible
 sheaf `Q` on `X` embeds into a constructible sheaf `G` such that `Rf_*(G[0])` has constructible
 homology. Then for every constructible `F` and every `m : ℕ` there are a constructible `Q` and a
-morphism `Q[-m] ⟶ F[0]` whose cone `B` has `Rf_* B` with constructible homology. Indeed, if
-`Q[-m] ⟶ F[0]` is such a morphism and `0 ⟶ Q ⟶ G ⟶ Q' ⟶ 0` is exact, the cone of the
-morphism `Q'[-1] ⟶ Q` of the corresponding triangle is `G`, so the composition
-`Q'[-m-1] ⟶ Q[-m] ⟶ F[0]` is again such a morphism (the morphisms whose cone lies in a
-triangulated subcategory are stable under composition, by the octahedral axiom). This is the
-truncated form of the resolution `0 ⟶ F ⟶ G⁰ ⟶ G¹ ⟶ ⋯` of the blueprint. -/
+morphism `Q[-m] ⟶ F[0]` whose cone `B` has `Rf_* B` with constructible homology. -/
 lemma exists_trW_of_exists_mono {X S : Scheme.{u}} (f : X ⟶ S)
     (h : ∀ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf Q →
       ∃ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ι : Q ⟶ G), Mono ι ∧
@@ -266,12 +247,7 @@ lemma exists_trW_of_exists_mono {X S : Scheme.{u}} (f : X ⟶ S)
 
 /-- **Constructibility from embeddings into good sheaves.** Suppose every constructible sheaf
 `Q` on `X` embeds into a constructible sheaf `G` such that all `Rᵠf_* G` are constructible.
-Then `𝒞(f)` holds. This is the resolution argument of the blueprint proofs of
-`proposition-proper-direct-image-finite-coefficients` and
-`proposition-proper-direct-image-finite-coefficients`: for a given degree `n`, `Rⁿf_* F` agrees with
-`Hⁿ(Rf_* B)` for the cone `B` of a morphism `Q[-n-2] ⟶ F[0]` given by
-`AlgebraicGeometry.Etale.exists_trW_of_exists_mono`, because `Rf_*(Q[-n-2])` is concentrated in
-degrees `≥ n + 2`. -/
+Then `𝒞(f)` holds. -/
 theorem hasConstructibleDirectImages_of_exists_mono {X S : Scheme.{u}} (f : X ⟶ S)
     (h : ∀ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf Q →
       ∃ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ι : Q ⟶ G), Mono ι ∧

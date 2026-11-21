@@ -11,7 +11,12 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedE
 
 /-! # Projection for normalized coefficient evaluation
 
-Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 0941]
+* Zheng, Construction 4.1 and Proposition 4.17(a)
 -/
 
 @[expose] public section
@@ -41,23 +46,7 @@ private theorem coefficientSequence_isIso_iff_evaluations
       (coefficientSequenceCommRingTransition l E W)
     exact D.systems.detects f hf
 
-/-- The unit-defined finite-prefix projection is invertible on a normalized system.
-This is a tensor assertion, before internal Hom or any transition formula for Hom.
-Source: Zheng Construction 4.1 and Proposition 4.17(a); Stacks 07A4, 08J9;
-step 1 of lem-coef-normalized-internal-hom-fibers.
-
-Proof: identify L with the derived finite-prefix extension by the unique
-unit-compatible isomorphism of left adjoints. Choose flat-term K-flat
-representatives of P and M. Below n the projection is scalar tensor
-reassociation followed by tensor with the actual normalized reduction of M;
-above n both sides are zero. The ordinary comparison is fixed on pure tensors
-by hE. Its cochain comparison is therefore the projection just described.
-Normalization makes its below-n components invertible, independently of which
-normalized scalar adjunction presents those reductions. Evaluation and tensor
-preserve the zero objects above n. Joint detection of isomorphisms makes the
-projection invertible in the system derived category. Transport back along the
-unit-compatible comparison of left adjoints. This includes n=0, zero P or M,
-and the empty site; it assumes no flatness of coefficient quotients. -/
+/-- The unit-defined finite-prefix projection is invertible on a normalized system. -/
 theorem coefficientNormalizedEvaluationProjection
     (R : CoefficientDerivedSystemReduction l E W)
     (hE : CoefficientEvaluationTensorNormalization l E W R)

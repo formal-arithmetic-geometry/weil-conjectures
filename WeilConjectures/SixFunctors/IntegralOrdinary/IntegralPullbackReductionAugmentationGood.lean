@@ -20,6 +20,13 @@ import all WeilConjectures.SixFunctors.IntegralPublishedPullback.IntegralPublish
 This is the representative-level part of the coherent reduction mate. It is
 separated from the localization descent statement so that the construction can
 be proved independently on flat-term K-flat representatives.
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -383,19 +390,7 @@ private theorem completionMate_good_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     IsIso.of_isIso_comp_left e.inv _
   exact IsIso.of_isIso_comp_right (V.map b) (finiteOutput l E f P n).hom
 
-/-- The normalized pullback/reduction adjunct equation on good representatives.
-Source: Stacks 03D2, 07A6, 08TC and 0941; the representative calculation in
-`fix-prop-projection-formula.proof.md`.
-
-Proof: form the natural adjoint mate of the ordinary completion comparison
-followed by the strict Roos realization. On good representatives its finite
-components identify with the ordinary pullback/scalar-reduction isomorphisms:
-the quotient augmentation is their scalar adjunct on generators, and the Roos
-realization preserves these finite projections. Conservative finite evaluation
-makes the mate invertible on good representatives. Fully faithful precomposition
-with the good localization reflects the resulting natural isomorphism. The
-hom-set adjunction unit formula gives the asserted equation.
--/
+/-- The normalized pullback/reduction adjunct equation on good representatives. -/
 theorem pullbackReductionAugmentation_good {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃ a : PurCompactSupport.pull (PurCompactSupport.completed l E) f ⋙
         (pullbackTensorCalculus l E X).reduction ≅

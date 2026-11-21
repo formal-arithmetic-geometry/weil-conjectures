@@ -49,7 +49,10 @@ import all Mathlib.CategoryTheory.Limits.Final
 
 /-! # Monoidality of the fixed finite coefficient tensor comparison
 
-Source: Stacks 06YY and 07A4.
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public section
@@ -172,16 +175,7 @@ private theorem finiteCochainModel_counit (n : ℕ)
   rfl
 
 -- Compare the fixed tensorator through its recorded localization model.
-/-- The fixed finite tensorator is the inverse tensorator of a monoidal functor.
-Source: Stacks 07A4 and 06YY.
-
-Proof: precompose the recorded homotopy universal counit with the full, essentially
-surjective cochain quotient and transport across its localization comparison. This
-is the same cochain universal model, with exactly the recorded finite computation
-map. The scalar tensor comparison from the ringed-site theorem agrees with the
-prescribed comparison by their common local tensor-generator formula. The finite
-normalization hypothesis is therefore precisely the scalar monoidality theorem's
-counit square. Apply that theorem with the two supplied tensor coherence witnesses. -/
+/-- The fixed finite tensorator is the inverse tensorator of a monoidal functor. -/
 theorem coefficientFiniteTensorMonoidal
     (R : CoefficientDerivedSystemReduction l E W)
     (hT : CoefficientDerivedSystemTensorCoherence l E W R.toCoefficientDerivedSystemTensors)

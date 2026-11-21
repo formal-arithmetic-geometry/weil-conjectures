@@ -10,7 +10,9 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicRealization.LocallyFiniteAdi
 
 /-! # Section reconstruction of the finite closure transition
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Proposition 6.8.14(2).
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2 and Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -152,23 +154,6 @@ private theorem internalClosureComp_hom {E L : Index l (PadicAlgCl l)} (h : E �
 
 /-- Section reconstruction carries the condensed closure transition to the inverse
 of the ordinary closure comparison, before restriction to integral objects.
-
-Source: BS 6.8.2 and 6.8.14(2), the section-reconstruction part of the finite
-coefficient comparison.
-
-Proof in words: expand finiteCondensedClosureTransition and its finite scalar
-comparison. The fully faithful encoding cancellation gives the specified scalar
-encoding on applying the finite section equivalence. Naturality of its counit
-cancels the finite reconstruction factors. The finite and closure section scalar
-comparisons are the mates of the identity on underlying sections. Pasting their
-unit equations identifies their composite with the section comparison of the
-internal tensor associator. The actual coefficient square and the closure cocone
-identify the remaining ordinary extension associator. Cancellation of these
-invertible comparisons leaves the inverse of closureComparison. This calculation
-is in the ambient derived category and holds for every raw stage object; it uses
-neither the raw integral lift nor a native coefficient system. The identity field
-inclusion uses the same adjunction unit and multiplication by one. Zero objects
-and the empty scheme satisfy the same naturality equations.
 -/
 theorem finiteCondensedClosureSectionComparison_transition
     (A : FiniteCondensedData l X)

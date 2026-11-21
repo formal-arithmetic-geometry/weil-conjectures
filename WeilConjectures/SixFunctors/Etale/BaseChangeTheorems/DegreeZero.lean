@@ -209,16 +209,7 @@ noncomputable def Etale.projectiveLineClosedFibreRestriction (A : Type u) [CommR
 /-- **Étale henselian restriction in degree zero.** Let `(A, I)` be a henselian pair, let
 `p : Y ⟶ Spec A` be proper, and let `i : Y₀ ⟶ Y` be the closed fibre over `Spec (A ⧸ I)`.
 For every étale sheaf `F` of `Λ`-modules on `Y`, restriction `Γ(Y, F) ⟶ Γ(Y₀, F|_{Y₀})` is an
-isomorphism.
-
-The statement reduces to abelian sheaves
-(`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_iff_forget₂`), where it is
-`AlgebraicGeometry.Etale.bijective_pullSection_of_henselianRing`: the Zariski gluing near the
-closed fibre on the finite covers of `Y`, from the connectedness of the closed fibres
-(`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`) and the spectral
-shrinking `SpectralSpace.exists_shrink_of_isConnected_inter`, and the passage to étale sheaves
-by finite refinement (`AlgebraicGeometry.Scheme.exists_finite_surjective_refinement_of_etale`)
-and descent (`AlgebraicGeometry.Etale.exists_pullSection_eq_of_isFinite_of_surjective`). -/
+isomorphism. -/
 @[stacks 0A0C]
 theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I] {Y Y₀ : Scheme.{u}} (p : Y ⟶ Spec (.of A)) [IsProper p]
@@ -230,10 +221,7 @@ theorem Etale.isIso_globalSectionsUpperStarMap_of_henselianRing {A : Type u} [Co
     isIso_globalSectionsUpperStarMap_iff_bijective_pullSection]
   exact bijective_pullSection_of_henselianRing I p i p₀ h _
 
-/-- The pullback of global sections along a universal homeomorphism is an isomorphism: the
-pullback is then an equivalence of categories of étale sheaves
-(`AlgebraicGeometry.Etale.isEquivalence_upperStar`), so the unit of `f^* ⊣ f_*` is an
-isomorphism. -/
+/-- The pullback of global sections along a universal homeomorphism is an isomorphism. -/
 instance Etale.isIso_globalSectionsUpperStarMap_of_isUniversalHomeomorphism {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsUniversalHomeomorphism f]
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -246,11 +234,7 @@ instance Etale.isIso_globalSectionsUpperStarMap_of_isUniversalHomeomorphism {X Y
 local ring with residue field `κ`, let `s : Spec κ̄ ⟶ Spec A` be the closed geometric point
 given by an algebraic closure `κ̄` of `κ`, and let `p : Z ⟶ Spec A` be proper. For every étale
 sheaf `F` of `Λ`-modules on `Z`, restriction `Γ(Z, F) ⟶ Γ(Z_s, F|_{Z_s})` to the closed
-geometric fibre `Z_s = Z ×_A κ̄` is an isomorphism.
-
-As `κ` is separably closed, `κ̄/κ` is purely inseparable, so `Z_s ⟶ Z₀ = Z ×_A κ` is a universal
-homeomorphism and induces an isomorphism on sections; the comparison for `Z₀` is
-`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing`. -/
+geometric fibre `Z_s = Z ×_A κ̄` is an isomorphism. -/
 theorem Etale.isIso_globalSectionsUpperStarMap_geometricFibre (A : Type u) [CommRing A]
     [HenselianLocalRing A] [IsSepClosed (IsLocalRing.ResidueField A)] {Z : Scheme.{u}}
     (p : Z ⟶ Spec (.of A)) [IsProper p] (F : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :

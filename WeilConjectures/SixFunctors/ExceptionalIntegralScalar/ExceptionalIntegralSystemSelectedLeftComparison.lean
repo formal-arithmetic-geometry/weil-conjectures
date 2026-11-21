@@ -8,7 +8,10 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegralSystemScalarCoreData
 
 /-! # Normalized selected scalar comparison
-Source: Zheng, Construction 4.1, Lemma 5.22, and Proposition 5.26.
+
+## References
+
+* Zheng, Construction 4.1, Lemma 5.22, and Proposition 5.26
 -/
 
 @[expose] public noncomputable section
@@ -88,20 +91,7 @@ private theorem transportSelected {A B N M C D : Type*}
   dsimp only [Functor.comp_obj]
   simp only [Category.id_comp, Category.comp_id, Iso.hom_inv_id_app_assoc]
 
-/-- Construct the selected comparison with its tensor-square normalization.
-Source: Zheng, Construction 4.1, Lemma 5.22, and Proposition 5.26.
-Proof: at each ramified square and endpoint, Mates.finiteScalar_eq identifies the
-two reduction functors and the finite scalar functor, after the full finite-Tor
-inclusion, with the ambient derived scalar composites. Whisker the integral scalar
-realization by the target reduction and compose with PurCompactSupport.tensorSquare;
-lift this through the fully faithful finite-Tor inclusion (fullyFaithfulCancelRight),
-its map being heterogeneously equal to the specified composite. Then precompose with
-reconstruction over E: insert core.reduction inverse, the inverse reduction comparison
-over L, the lifted square, and the reduction comparison over E. Precomposition by the
-reconstruction equivalence is fully faithful, so this composite descends to a selected
-comparison of functors (preimageIso). On reconstructed integral objects the inverse
-factors cancel and the lifted-square equation gives the displayed balanced equation.
-No faithfulness of finite evaluation is used. -/
+/-- Construct the selected comparison with its tensor-square normalization. -/
 theorem exceptionalIntegralSystemSelected
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

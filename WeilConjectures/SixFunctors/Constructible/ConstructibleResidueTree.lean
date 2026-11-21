@@ -42,10 +42,17 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Module.ProEtaleModulePullbackC
 /-!
 # Residue-lisse refinement on qcqs pro-etale objects
 
-Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
+## Implementation details
 
 All restrictions below are ordinary uncompleted derived ringed pullbacks. Coefficient
 index zero is exponent one. Finite products of the unit module are finite direct sums.
+
+## References
+
+* [Stacks, Tag 09C3]
+* [Stacks, Tag 09Y4]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5 and 6.5.8
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.5.10
 -/
 
 @[expose] public section
@@ -256,29 +263,7 @@ private theorem finiteModels_zero
 
 /-- A finite open--closed tree simultaneously makes the residue cohomology of two
 integral constructible complexes finite lisse. The assertion is stable on qcqs
-weakly etale objects of each leaf, with ordinary uncompleted pullback throughout.
-
-Source: Stacks Project, Tags 09Y4 and 09C3; Bhatt--Scholze, Lemma 6.5.8
-and Remark 6.5.10.
-
-Proof: each integral constructible complex has one finite interval containing its
-residue support. For each degree in these two finite intervals choose the finite
-constructibility stratification of its cohomology sheaf. Append these finitely many
-partitions to the given ones and apply the finite open--closed refinement theorem.
-Its scheme-theoretic factorizations retain the original partitions and all the
-new residue strata. Along every branch apply qcqs completion locality at each qc
-open child and its complementary closed child. The closed child's complement is
-qc by the open child's quasi-compactness. Induction gives completeness on every
-vertex and compatibility of ordinary pullback with each finite reduction. Apply
-the same locality theorem once more on any qcqs weakly etale object of a leaf.
-Exact constant coefficient pullback commutes with residue cohomology, preserving
-its vanishing outside the original interval. The factorization through each
-cohomology stratum, pullback composition and locally constant pullback preserve
-the finite residue module models. Finite geometric stalks of the constructible
-sheaves ensure that these local constant models are finite, hence finitely
-generated over the finite residue ring. For degrees outside the interval use
-the zero module model. Empty leaves impose no conditions, and for an empty list
-of original partitions the appended residue partitions give the same argument. -/
+weakly etale objects of each leaf, with ordinary uncompleted pullback throughout. -/
 theorem constructible_residue_tree
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

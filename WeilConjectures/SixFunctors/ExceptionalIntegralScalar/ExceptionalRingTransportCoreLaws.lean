@@ -15,8 +15,10 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.TransportCoreData.E
 This interface supplies the equations and normalization predicates attached to the
 object and functor data of `TransportCoreData`. Together they form the full
 `ExceptionalIntegralScalar.Transported` record.
-Source: Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24,
-5.26.
+
+## References
+
+* Zheng, Constructions 4.1 and 5.25, Lemma 5.22 and Propositions 5.24, 5.26
 -/
 
 @[expose] public noncomputable section
@@ -114,15 +116,8 @@ structure TransportCoreLaws
                 (finiteTorConstructibleIntegral l E.carrier X).ι.map
                   ((d.reconstruction E true).equivalence.unitIso.inv.app K)))
 
-/-- Choose transport data and their laws together, fixing the comparison maps by
-proper/open realization before assembling the law packages. The comparison maps of
-an arbitrary input datum need not satisfy the normalization equations.
-Proof: obtain transport data and their support identity. Replace the integral-left
-and system comparisons by their explicit normalized constructions. Apply the system
-and evaluation law packages to this datum, and use the proved normalization laws.
-Source: Zheng, Constructions 4.1 and 5.25 and Proposition 5.26.
-The left realizations are supplied with their integer shift-compatibility witnesses.
--/
+/-- Transport data and their laws can be chosen together, with the comparison maps fixed by
+proper/open realization (the comparison maps of an arbitrary datum need not be normalized). -/
 theorem exists_exceptional_transport_core_laws
     (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)

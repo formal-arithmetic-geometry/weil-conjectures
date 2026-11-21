@@ -54,19 +54,8 @@ change of `i` with open complement `j' : V' ⟶ U`, and `e₁ : V' ⟶ V` with `
 `L ∈ D(X_ét)` and an identification `τ : Le^* L ≅ L'`, the boundaries `δ_L` and `δ_{L'}` of the
 supported localization triangles are compatible with the restriction of supports
 `ψ = AlgebraicGeometry.Etale.supportedRestriction` and the derived base change map `Ex_*`:
-
-```
-  Le^* Rj_* Lj^* L ──Le^* δ_L──▶ Le^* ((Ri_! Ri^! L)[1]) ≅ (Le^* Ri_! Ri^! L)[1]
-        │ │
-  Ex_*, τ ψ[1]
-        ▼ ▼
-  Rj'_* Lj'^* L' ─────────────δ_{L'}──────────────▶ (Ri'_! Ri'^! L')[1]
-```
-
-The pulled back triangle is distinguished and its first term is supported on `Z'`, so the middle
-map `τ` extends uniquely to a morphism of triangles towards the supported localization triangle
-of `L'` [BBD, 1.1.9]; its outer components are `ψ` and the base change map, both characterized
-by the commutation of the adjacent squares. -/
+`Le^* δ_L` followed by `ψ[1]` (up to the shift isomorphism) equals `Ex_*` and `τ` followed by
+`δ_{L'}`. -/
 theorem supportedLocalizationBoundary_baseChange (e : U ⟶ X) (i : Z ⟶ X) (j : V ⟶ X)
     (i' : Z' ⟶ U) (j' : V' ⟶ U) (g : Z' ⟶ Z) (e₁ : V' ⟶ V)
     [IsClosedImmersion i] [IsOpenImmersion j]
@@ -136,19 +125,10 @@ variable {V₀ V₀' U₀ U₀' : Scheme.{u}} {e₁ : V₀' ⟶ V₀} {j₀' : V
 
 omit [HasSmallSiteSheafify A] in
 /-- **Base change of the adjoint of a degree-one class on an open.** For a commutative square
-`e₁ ≫ j = j' ≫ e` with `j`, `j'` arbitrary, the pullback along `e` of the adjoint
-`K ⟶ Rj_* (M[1]) ≅ (Rj_* M)[1]` of a class `y : Lj^* K ⟶ M[1]`, followed by the derived base
-change map `Ex_*`, is the adjoint of the pulled back class: this combines the compatibility of
-`Ex_*` with the units, its naturality and its compatibility with the shifts.
-
-```
-Le^* K ──Le^*(adjoint of y)──▶ Le^* ((Rj_* M)[1]) ──≅──▶ (Le^* Rj_* M)[1]
-   │ │
- η │ │ Ex_*[1]
-   ▼ ▼
-Rj'_* Lj'^* Le^* K ──Rj'_*(≅ ≫ Le₁^* y ≫ ≅)──▶ Rj'_* ((Le₁^* M)[1]) ──≅──▶ (Rj'_* Le₁^* M)[1]
-```
--/
+`e₁ ≫ j = j' ≫ e`, the pullback along `e` of the adjoint `K ⟶ Rj_* (M[1]) ≅ (Rj_* M)[1]` of a
+class `y : Lj^* K ⟶ M[1]`, followed by the derived base change map `Ex_*[1]`, is the composite of
+the unit `Le^* K ⟶ Rj'_* Lj'^* Le^* K` and the adjoint of the pulled back class
+`Lj'^* Le^* K ≅ Le₁^* Lj^* K ⟶ Le₁^* (M[1]) ≅ (Le₁^* M)[1]`. -/
 lemma leftDerivedUpperStar_map_adjoint_comp_derivedBaseChangeMap (sq : CommSq e₁ j₀' j₀ e₀)
     (K : DerivedCategory (Sheaf U₀.smallEtaleTopology A))
     (M : DerivedCategory (Sheaf V₀.smallEtaleTopology A))
@@ -200,15 +180,7 @@ variable {Z₀ Z₀' X₀ U₁ : Scheme.{u}}
 
 omit [HasSmallSiteSheafify A] in
 /-- The restriction of supports factors the pullback of the counit through the counit:
-
-```
-Le^* (Ri_! Ri^! L) ──ψ──▶ Ri'_! Ri'^! L'
-        │ │
- Le^* ε │ │ ε'
-        ▼ ▼
-     Le^* L ────────τ────────▶ L'
-```
--/
+`ψ ≫ ε' = Le^* ε ≫ τ` as maps `Le^* (Ri_! Ri^! L) ⟶ L'`. -/
 @[reassoc]
 lemma supportedRestriction_comp_counit (e : U₁ ⟶ X₀) (i : Z₀ ⟶ X₀) (i' : Z₀' ⟶ U₁)
     [IsClosedImmersion i] [IsClosedImmersion i']

@@ -16,8 +16,11 @@ residue field and `(U₀, u₀)` an affine pointed étale neighbourhood of `y`. 
 germs `a i` of `f_* G` at `y` and a decomposition `m` of the geometric fibre of `f` over `y`
 which only depends on the values of `(u₀, t)` on finitely many functions on `U₀ ×_Y X`, there is
 a germ of `f_* G` at `y` whose restriction to every geometric point `t` over `y` is that of
-`a (m t)` (`AlgebraicGeometry.Etale.exists_stalkRestrict_eq_of_finset`): after shrinking the
-neighbourhood, `U ×_Y X` decomposes into disjoint opens adapted to `m`
+`a (m t)` (`AlgebraicGeometry.Etale.exists_stalkRestrict_eq_of_finset`).
+
+## Implementation details
+
+After shrinking the neighbourhood, `U ×_Y X` decomposes into disjoint opens adapted to `m`
 (`AlgebraicGeometry.Scheme.Hom.Nbhd.exists_pointed_disjoint_cover`), and the representatives of
 the `a i` glue along this decomposition.
 -/

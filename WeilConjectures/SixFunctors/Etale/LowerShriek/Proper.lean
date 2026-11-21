@@ -16,6 +16,10 @@ For a proper morphism `f : X ⟶ Y` admitting a compactification, the canonical 
 It is deduced from the case of an open immersion with closed range, applied to the open
 immersion of a compactification of `f`.
 
+Properness of `f` enters only through
+`AlgebraicGeometry.Compactification.isClopen_range_openImmersion`: a proper open immersion has
+closed range.
+
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range`: the
@@ -41,16 +45,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 omit [HasSmallSiteSheafify A] in
 /-- **The comparison `j_! ⟶ j_*` is an isomorphism for an open immersion `j` with closed
-range.** The open immersion `j` and the inclusion of the open complement `W` of its range
-cover `X`, so restriction along the two of them is jointly conservative; the comparison
-restricts to an isomorphism along `j` for formal reasons and along `W` because both sides
-vanish there.
-
-```
-        j W.ι
-   U ──────→ X ←────────── W range j ⊔ range W.ι = X
-```
--/
+range.** -/
 theorem Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range
     (hj : IsClosed (Set.range j.base)) :
     IsIso (Etale.openImmersionLowerShriekToLowerStar A j) := by
@@ -82,21 +77,7 @@ section Proper
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [IsProper f]
 
 /-- **For a proper morphism `f`, the canonical comparison `ι_f : f_! ⟶ f_*` is an
-isomorphism.** By `AlgebraicGeometry.Etale.isIso_lowerShriekToLowerStar_of_isIso` this reduces
-to the comparison for the open immersion `i` of the chosen compactification. Properness of `f`
-enters only through `AlgebraicGeometry.Compactification.isClopen_range_openImmersion`: since
-the structure morphism `g` of the compactification is separated, `i` is proper as soon as
-`i ≫ g` is, and a proper open immersion has closed range.
-
-```
-       i
-   X ─────→ P f_! = g_* ∘ i_! ──→ g_* ∘ i_* ≅ f_*
-    ╲ │
-   f ╲ │ g
-      ↘ ↓
-            Y
-```
--/
+isomorphism.** -/
 instance Etale.isIso_lowerShriekToLowerStar :
     IsIso (Etale.lowerShriekToLowerStar A f) :=
   Etale.isIso_lowerShriekToLowerStar_of_isIso A f

@@ -11,22 +11,20 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 /-!
 # The double-dual morphism under restriction and proper push-forward
 
-This file continues `WeilConjectures.SixFunctors.Etale.Derived.DoubleDual` for the blueprint
-nodes `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4`. There the double-dual morphism
-`δ_K : K ⟶ 𝔻 𝔻 K` is the unit of the self-adjunction of `𝔻 = RHom(-, ω)`.
+This file continues `WeilConjectures.SixFunctors.Etale.Derived.DoubleDual` with the
+compatibility of the double-dual morphism `δ_K : K ⟶ 𝔻 𝔻 K` with restriction to open subschemes
+and with proper push-forward. There `δ_K` is the unit of the self-adjunction of
+`𝔻 = RHom(-, ω)`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_leftDerivedUpperStar_iff`
-  (`corollary-verdier-exchange-formulas--5`): for a quasi-compact open immersion `j : W ⟶ Y` and
-  finite coefficients, `δ_{Lj^* K}` (relative to `ω_W = R(j ≫ a)^! Λ`) is an isomorphism if and only
-  if `Lj^* δ_K` is.
-- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_iff_of_openCover`
-  (`corollary-verdier-exchange-formulas--5`): biduality is local, so `δ_K` is an isomorphism if and
-  only if `δ_{Lj_i^* K}` is, for a jointly surjective family of open immersions `j_i`.
-- `AlgebraicGeometry.Etale.map_verdierDualDoubleDual_app_comp_mateEquiv`
-  (`lemma-internal-adjunction-two-exchange-formulas--4`, formal core):
+- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_leftDerivedUpperStar_iff`: for a
+  quasi-compact open immersion `j : W ⟶ Y` and finite coefficients, `δ_{Lj^* K}` (relative to
+  `ω_W = R(j ≫ a)^! Λ`) is an isomorphism if and only if `Lj^* δ_K` is.
+- `AlgebraicGeometry.Etale.isIso_verdierDualDoubleDual_app_iff_of_openCover`: biduality is
+  local, so `δ_K` is an isomorphism if and only if `δ_{Lj_i^* K}` is, for a jointly surjective
+  family of open immersions `j_i`.
+- `AlgebraicGeometry.Etale.map_verdierDualDoubleDual_app_comp_mateEquiv`:
   `Rf_* δ_K ≫ m_{𝔻 K} = δ_{Rf_* K} ≫ 𝔻 α_K` for every square `α : 𝔻_Y Rf_* ⟶ Rf_* 𝔻_X` and its mate
   `m`.
 - `AlgebraicGeometry.Etale.isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv`:
@@ -35,7 +33,7 @@ nodes `corollary-verdier-exchange-formulas--5` and
   finite coefficients, `α` is the Verdier exchange
   `AlgebraicGeometry.Etale.verdierDualRightDerivedLowerStarSquare`.
 
-## Implementation notes
+## Implementation details
 
 The restriction statement avoids any compatibility of `Lj^*` with the braiding. The adjunction
 `j_! ⊣ j^*` composed with the self-adjunction of `𝔻_Y`, and the self-adjunction of `𝔻_W` composed
@@ -44,12 +42,9 @@ with `j^* ⊣ Rj_*`, have left adjoints identified by the Verdier exchange `𝔻
 and `δ_M` up to isomorphisms, are invertible at the same objects. A cone argument replaces
 `j_! j^* K` by `K`.
 
-## Proper push-forward
-
-The conditional push-forward statement below, through the mate of the Verdier exchange, is
-superseded by the unconditional one in
-`WeilConjectures.SixFunctors.Etale.Derived.DoubleDualProper`, which uses the canonical
-comparison `Rf_* 𝔻_X M ⟶ 𝔻_Y Rf_* M` instead.
+The conditional push-forward statement through the mate of the Verdier exchange is complemented
+by the unconditional one in `WeilConjectures.SixFunctors.Etale.Derived.DoubleDualProper`, which
+uses the canonical comparison `Rf_* 𝔻_X M ⟶ 𝔻_Y Rf_* M` instead.
 -/
 
 @[expose] public section
@@ -76,25 +71,15 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5` (auxiliary): for an open immersion `j` the
-counit `D(j^*) Rj_* ⟶ 𝟭` is an isomorphism, `D(j_!) ⊣ D(j^*) ⊣ Rj_*` being an adjoint triple whose
-first unit is invertible. -/
+/-- For an open immersion `j` the counit `D(j^*) Rj_* ⟶ 𝟭` is an isomorphism. -/
 instance isIso_mapDerivedUpperStarLowerStarAdjunction_counit :
     IsIso (mapDerivedUpperStarLowerStarAdjunction A j).counit :=
   (Adjunction.Triple.mk (derivedOpenImmersionLowerShriekUpperStarAdjunction A j)
     (mapDerivedUpperStarLowerStarAdjunction A j)).isIso_unit_iff_isIso_counit.1 inferInstance
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5`: the extension-by-zero step. Let `j : W ⟶ Y`
-be an open immersion and `e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W` an isomorphism (the Verdier exchange,
-`AlgebraicGeometry.Etale.verdierDualLowerShriekIso`). Then `δ_M` is an isomorphism on `W` if and
-only if `j^* δ_{j_! M}` is one on `Y`.
-
-The double-dual morphism is the unit of the self-adjunction of `𝔻`
-(`CategoryTheory.MonoidalClosed.ihomFlipSelfAdjunction`). The composite adjunctions
-`𝔻_Y ∘ j_! ⊣ j^* ∘ 𝔻_Y` and `Rj_* ∘ 𝔻_W ⊣ 𝔻_W ∘ j^*` have isomorphic left adjoints (by `e`), so
-their units are invertible at the same objects
-(`CategoryTheory.Adjunction.isIso_unit_app_iff_of_iso`). These units are `j^* δ_{j_! M}` and
-`δ_M`, up to the invertible unit of `j_! ⊣ j^*` and counit of `j^* ⊣ Rj_*`. -/
+/-- The extension-by-zero step: let `j : W ⟶ Y` be an open immersion and
+`e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W` an isomorphism (the Verdier exchange). Then `δ_M` is an isomorphism
+on `W` if and only if `j^* δ_{j_! M}` is one on `Y`. -/
 theorem isIso_verdierDualDoubleDual_app_iff_lowerShriek
     (e : D((j)_!open[A]) ⋙ ((RHom(Y)[A]).flip.obj ωY).rightOp ≅
       ((RHom(W)[A]).flip.obj ωW).rightOp ⋙ (R((j)_*[A])).op)
@@ -118,10 +103,8 @@ theorem isIso_verdierDualDoubleDual_app_iff_lowerShriek
   exact h.symm
 
 set_option maxRecDepth 8000 in
-/-- Blueprint `corollary-verdier-exchange-formulas--5`: the cone step. If `f : K' ⟶ K` becomes
-invertible on the open `W`, then so does `𝔻_Y 𝔻_Y f`, because restriction to `W` commutes with
-`RHom` (`AlgebraicGeometry.Etale.nonempty_iso_mapDerivedCategory_upperStar_derivedHom`) and kills
-the cone of `f`. By naturality, `j^* δ_K` is then invertible if and only if `j^* δ_{K'}` is. -/
+/-- The cone step: if `f : K' ⟶ K` becomes invertible on the open `W`, then `j^* δ_K` is
+invertible if and only if `j^* δ_{K'}` is. -/
 theorem isIso_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso
     {FC : A → A → Type*} {CC : A → Type (u + 1)}
     [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
@@ -172,10 +155,9 @@ theorem isIso_upperStar_map_verdierDualDoubleDual_app_iff_of_isIso
       infer_instance
     exact IsIso.of_isIso_comp_left (D((j)^*[A]).map f) _
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5`: the double-dual morphism restricts. For an
-open immersion `j : W ⟶ Y` and a Verdier exchange `e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W`, the morphism
-`δ_{j^* K}` on `W` is an isomorphism if and only if `j^* δ_K` is. Apply the extension-by-zero step
-to `M = j^* K` and the cone step to the counit `j_! j^* K ⟶ K`. -/
+/-- The double-dual morphism restricts: for an open immersion `j : W ⟶ Y` and a Verdier exchange
+`e : 𝔻_Y ∘ j_! ≅ Rj_* ∘ 𝔻_W`, the morphism `δ_{j^* K}` on `W` is an isomorphism if and only if
+`j^* δ_K` is. -/
 theorem isIso_verdierDualDoubleDual_app_mapDerivedCategory_upperStar_iff
     {FC : A → A → Type*} {CC : A → Type (u + 1)}
     [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
@@ -208,12 +190,10 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   (ωY : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A))
   (ωW : _root_.DerivedCategory (Sheaf W.smallEtaleTopology A))
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5` and
-`lemma-internal-adjunction-two-exchange-formulas--4`: the Verdier exchange `𝔻_Y ∘ G ≅ Rj_* ∘ 𝔻_W` as
-an isomorphism of functors `D(W) ⥤ D(Y)ᵒᵖ`, for any `G ≅ Rj_!`. It is built from a tensor–Hom
-exchange `χ : Rj_* RHom(M, Rj^! N) ≅ RHom(Rj_! M, N)`
-(`AlgebraicGeometry.Etale.derivedHomRightDerivedLowerShriekIso`, for any functor `Rj^!`) and
-`γ : Rj^! ω_Y ≅ ω_W`, for arbitrary objects `ω_Y`, `ω_W` (the dualizing complexes). -/
+/-- The Verdier exchange `𝔻_Y ∘ G ≅ Rj_* ∘ 𝔻_W` as an isomorphism of functors `D(W) ⥤ D(Y)ᵒᵖ`,
+for any `G ≅ Rj_!`, built from a tensor–Hom exchange
+`χ : Rj_* RHom(M, Rj^! N) ≅ RHom(Rj_! M, N)` and `γ : Rj^! ω_Y ≅ ω_W`, for arbitrary objects
+`ω_Y`, `ω_W`. -/
 noncomputable def verdierDualLowerShriekIso
     {G : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (A)) ⥤
       _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (A))}
@@ -270,9 +250,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {Y W S : Scheme.{u}} (a :
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5`: the double-dual morphism restricts. For a
-quasi-compact open immersion `j : W ⟶ Y` and finite coefficients `Λ`, `δ_{Lj^* K}` (relative to
-`ω_W = R(j ≫ a)^! Λ`) is an isomorphism if and only if `Lj^* δ_K` is. -/
+/-- The double-dual morphism restricts: for a quasi-compact open immersion `j : W ⟶ Y` and finite
+coefficients `Λ`, `δ_{Lj^* K}` (relative to `ω_W = R(j ≫ a)^! Λ`) is an isomorphism if and only
+if `Lj^* δ_K` is. -/
 theorem isIso_verdierDualDoubleDual_app_leftDerivedUpperStar_iff [IsOpenImmersion j]
     [QuasiCompact j]
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -290,8 +270,8 @@ theorem isIso_verdierDualDoubleDual_app_leftDerivedUpperStar_iff [IsOpenImmersio
 
 end Finite
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5` (auxiliary): isomorphisms of `D(X_ét, Λ)` are
-detected after pullback along a jointly surjective family `u_i : U_i ⟶ X`. -/
+/-- Isomorphisms of `D(X_ét, Λ)` are detected after pullback along a jointly surjective family
+`u_i : U_i ⟶ X`. -/
 theorem isIso_of_forall_isIso_leftDerivedUpperStar_map (Λ : Type (u + 1)) [CommRing Λ]
     {X : Scheme.{u}} {ι : Type u} {U : ι → Scheme.{u}} (u : ∀ i, U i ⟶ X)
     (hu : ∀ x : X, ∃ (i : ι) (y : U i), (u i).base y = x)
@@ -308,9 +288,9 @@ theorem isIso_of_forall_isIso_leftDerivedUpperStar_map (Λ : Type (u + 1)) [Comm
     (Functor.map_isIso (_root_.DerivedCategory.homologyFunctor _ n)
       (D((u i)^*[ModuleCat.{u + 1} Λ]).map φ))
 
-/-- Blueprint `corollary-verdier-exchange-formulas--5`: biduality is local. For a jointly surjective
-family of quasi-compact open immersions `j_i : W_i ⟶ Y` and finite coefficients, `δ_K` is an
-isomorphism if and only if every `δ_{Lj_i^* K}` (relative to `ω_{W_i} = R(j_i ≫ a)^! Λ`) is one. -/
+/-- Biduality is local: for a jointly surjective family of quasi-compact open immersions
+`j_i : W_i ⟶ Y` and finite coefficients, `δ_K` is an isomorphism if and only if every
+`δ_{Lj_i^* K}` (relative to `ω_{W_i} = R(j_i ≫ a)^! Λ`) is one. -/
 theorem isIso_verdierDualDoubleDual_app_iff_of_openCover (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] {Y S : Scheme.{u}} (a : Y ⟶ S) [HasCompactification a] {ι : Type u}
     {W : ι → Scheme.{u}} (j : ∀ i, W i ⟶ Y) [∀ i, IsOpenImmersion (j i)]
@@ -334,9 +314,9 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4` (formal core): for any square
-`α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` (components `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_* K`), its mate `m` under the
-self-adjunctions of `𝔻_X` and `𝔻_Y` satisfies `Rf_* δ_K ≫ m_{𝔻_X K} = δ_{Rf_* K} ≫ 𝔻_Y α_K`. -/
+/-- For any square `α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` (components `Rf_* 𝔻_X K ⟶ 𝔻_Y Rf_* K`), its mate
+`m` under the self-adjunctions of `𝔻_X` and `𝔻_Y` satisfies
+`Rf_* δ_K ≫ m_{𝔻_X K} = δ_{Rf_* K} ≫ 𝔻_Y α_K`. -/
 theorem map_verdierDualDoubleDual_app_comp_mateEquiv
     (α : TwoSquare R((f)_*[A]) ((RHom(X)[A]).flip.obj ωX).rightOp ((RHom(Y)[A]).flip.obj ωY).rightOp
       (R((f)_*[A])).op)
@@ -354,12 +334,9 @@ theorem map_verdierDualDoubleDual_app_comp_mateEquiv
     MonoidalClosed.ihomFlipSelfAdjunction_unit_app] at this
   exact this
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4`, conditional form over a general
-coefficient category: if the square `α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` is invertible at `K` and its mate
-is invertible at `𝔻_X K`, then `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is.
-It is stated for arbitrary objects `ω_X`, `ω_Y` in place of the dualizing complexes; for proper
-`f` and finite coefficients the square is
-`AlgebraicGeometry.Etale.verdierDualRightDerivedLowerStarSquare`. -/
+/-- If the square `α : 𝔻_Y ∘ Rf_* ⟶ Rf_* ∘ 𝔻_X` is invertible at `K` and its mate is invertible
+at `𝔻_X K`, then `Rf_* δ_K` is an isomorphism if and only if `δ_{Rf_* K}` is. It is stated over a
+general coefficient category, for arbitrary objects `ω_X`, `ω_Y`. -/
 theorem isIso_map_verdierDualDoubleDual_app_iff_of_isIso_app_mateEquiv
     (α : TwoSquare R((f)_*[A]) ((RHom(X)[A]).flip.obj ωX).rightOp ((RHom(Y)[A]).flip.obj ωY).rightOp
       (R((f)_*[A])).op)
@@ -383,8 +360,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y S : Scheme.{u}} (a :
 
 attribute [local instance] _root_.DerivedCategory.braidedCategory'
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4`: the Verdier exchange
-`𝔻_Y Rf_* ≅ Rf_* 𝔻_X` for proper `f` (`Rf_! ≅ Rf_*`) and finite coefficients, as a square. -/
+/-- The Verdier exchange `𝔻_Y Rf_* ≅ Rf_* 𝔻_X` for proper `f` (`Rf_! ≅ Rf_*`) and finite
+coefficients, as a square. -/
 noncomputable def verdierDualRightDerivedLowerStarSquare :
     TwoSquare R((f)_*[ModuleCat.{u + 1} Λ]) (verdierDual Λ (f ≫ a)).rightOp
       (verdierDual Λ a).rightOp (R((f)_*[ModuleCat.{u + 1} Λ])).op :=
@@ -393,8 +370,7 @@ noncomputable def verdierDualRightDerivedLowerStarSquare :
     (nonempty_iso_rightDerivedUpperShriek_dualizingComplex Λ f a).some
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f)).hom
 
-/-- Blueprint `lemma-internal-adjunction-two-exchange-formulas--4`: the components of the Verdier
-exchange square are isomorphisms. -/
+/-- The components of the Verdier exchange square are isomorphisms. -/
 instance isIso_verdierDualRightDerivedLowerStarSquare_app
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso ((verdierDualRightDerivedLowerStarSquare Λ a f).app K) := by

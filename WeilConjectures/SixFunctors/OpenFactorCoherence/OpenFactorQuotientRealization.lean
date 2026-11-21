@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.OpenTensorQuotient.OpenTensorQuotientD
 import all WeilConjectures.SixFunctors.IntegralOnSlice.OrdinaryQuotientModuleComparison
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 
-/-! # Augmented quotient-tower realization of open extension -/
+/-! # Augmented quotient-tower realization of open extension
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 099N]
+* [Stacks, Tag 09BP]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -282,24 +289,7 @@ private theorem quotientTowerComparison_unique
     (((IntegralOnSlice.augmentation l E X none).app ((extensionCx l E j).obj P)).app n)).mp
   exact (hv P n.unop).trans (quotientComplexComparison_unit l E j n.unop P).symm
 
-/-- The augmented extension tower, before derived localization.
-Source: Stacks 0E8I, 099N, 09BP; blueprint proposition-composition-base-change-rf-shriek--1, open
-factor.
-
-Proof: identify the completed slice coefficients by the constant-section and quotient
-projection equations of o. The scalar compatibility q.scalar and q.strictScalar
-then transport to the published termwise extension. The global slice tower is the
-unrestricted positive-exponent tower, with the same transitions, so this gives t.
-At every degree its map sends the quotient tensor generator to the extended tensor
-generator. The scalar units give ht. The quotient projection is surjective as a
-sheaf map: locally a quotient coefficient lifts to a completed coefficient, which
-can be moved across the balanced tensor. Hence precomposition with each component
-of the quotient augmentation is injective on module maps. Apply this degreewise,
-then natural-transformation extensionality, to obtain uniqueness of t.hom.
-The comparison is constructed on entire strict complex systems; no inference
-from separate derived evaluations is involved. This statement concerns only
-ordinary quotient tensors and their augmentation, and asserts no commutation
-with completion, geometric constructibility or tensor projection formula. -/
+/-- The augmented extension tower, before derived localization. -/
 theorem openFactorQuotientRealization
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (SX : CoefficientDerivedSystemCalculus l E X)

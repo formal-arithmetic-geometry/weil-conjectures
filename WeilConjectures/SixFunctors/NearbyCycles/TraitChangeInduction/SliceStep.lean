@@ -21,7 +21,11 @@ special fibre of the slice of `M` is invertible at every complex bounded below o
 `Lᵢ = Ωᵢ(Sᵢ(x))` have Galois extensions `Lᵢ^sep / Lᵢ` of degrees invertible in the coefficients and
 `L₁` is relatively separably closed in `L₂`.
 
-This is the step (A) of SGA 4½, [Th. finitude], proof of 3.7: the four squares
+This is the step (A) of SGA 4½, [Th. finitude], proof of 3.7.
+
+## Implementation details
+
+The four squares
 ```
 M' ──φ'──→ N' N₂ ──τ──→ N₁
  │ρ_M │ρ_N │ψ_M │ψ_N
@@ -90,8 +94,7 @@ theorem Hom.isIso_pullbackExchange_app_of_heq
   exact hψ
 
 include hNj in
-/-- The open immersion of generic fibres of the Galois-layer model `N₁` of a slice is affine: it is
-the nilpotent thickening `r₂` followed by the base change of `𝒳_{N,η̄} ⟶ 𝒳_N`. -/
+/-- The open immersion of generic fibres of the Galois-layer model `N₁` of a slice is affine. -/
 lemma isAffineHom_sliceTraitGaloisModel_j :
     IsAffineHom (sliceTraitGaloisModel D₁ N cN hcN hNj hNi).j := by
   have : IsAffineHom N.j := MorphismProperty.of_isPullback hNj.flip inferInstance

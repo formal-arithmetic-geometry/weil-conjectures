@@ -10,6 +10,13 @@ import all WeilConjectures.SmoothPurity.Integral.IntegralOperationRoosEffectivit
 import all WeilConjectures.SmoothPurity.IntegralOnSlice.IntegralDerivedOperationsOnSlices
 import all WeilConjectures.TraceFormula.CompletionUnit.CompletionUnitFiniteMateComparison
 /-! # Finite reduction of the actual completion unit
+
+## References
+
+* [Stacks, Tag 099M]
+* [Stacks, Tag 099N]
+* [Stacks, Tag 0941]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 3.5.4–3.5.7
 -/
 
 @[expose] public noncomputable section
@@ -129,22 +136,7 @@ private theorem finiteReduction_roosUnit (X : Scheme.{u})
       (CompletionUnit.finiteModel_unit l E X Q P.property.1 n).symm
   exact finiteExtension_iso_of_projection adj a p s c h hi
 
-/-- Every finite scalar extension inverts the actual quotient-completion unit.
-Source: Stacks 099M, 099N and 0941; Bhatt--Scholze, Lemmas 3.5.4--3.5.7.
-
-Proof: choose a flat-term K-flat representative P of K. Its strict quotient tower
-is normalized: two successive quotients identify with the smaller quotient by
-multiplication of scalars, compatibly with all quotient transitions. The Roos
-finite-reduction effectivity theorem identifies the adjoint of the nth Roos
-projection with an isomorphism onto the nth quotient of P. The actual quotient
-augmentation has first coordinates x mapped to 1 tensor x and shifted coordinate
-zero. Therefore the composite of its nth scalar extension with this projection
-adjoint is the identity of the nth quotient, by the tensor-restriction triangle
-identity. Since the projection adjoint is invertible, the nth scalar extension
-of the augmentation is invertible. The characterizing equation of completionUnit
-identifies this augmentation after Q, and naturality transports the assertion
-along the representative isomorphism to K. There is no completeness assumption
-on K; the zero object and every positive quotient exponent are included. -/
+/-- Every finite scalar extension inverts the actual quotient-completion unit. -/
 theorem finiteReduction_completionUnit (X : Scheme.{u})
     (K : DerivedCategory (scalarReductionSource l E X)) (n : ℕ) :
     IsIso ((coefficientFiniteDerivedExtension l E X n).map

@@ -20,12 +20,11 @@ morphism. If `η : K ⟶ Res K'` exhibits `K'` as the derived base change `K ⊗
 `Rp_* K'` as `Rp_* K ⊗ᴸ_Λ Λ'`
 (`AlgebraicGeometry.Etale.isDerivedBaseChange_rightDerivedLowerStar_map_comp`).
 
+## Implementation details
+
 Write `Ψ = - ⊗ᴸ_Λ Λ'` for the derived extension of scalars, left adjoint to `Res`. The base change
 map `Ψ (Rp_* K) ⟶ Rp_* (Ψ K)` (`AlgebraicGeometry.Etale.rightDerivedLowerStarExtendScalarsMap`)
-is the mate of the commutation `Lp^* Ψ ≅ Ψ Lp^*`; it is the transpose along `Ψ ⊣ Res` of
-`Rp_* η_K` followed by the coefficient comparison, since the commutations of `Lp^*` with `Ψ` and
-with `Res` are mates along `Ψ ⊣ Res` and the coefficient comparison of `Rp_*` is the mate of the
-one of `Lp^*`. For proper `p` the base change map is an isomorphism by the projection formula.
+is defined as the mate of the commutation `Lp^* Ψ ≅ Ψ Lp^*`.
 -/
 
 @[expose] public section
@@ -56,8 +55,7 @@ noncomputable def rightDerivedLowerStarExtendScalarsMap :
     (leftDerivedUpperStarEtaleSheafExtendScalarsIso ρ p).hom
 
 /-- **Derived extension of scalars commutes with `Rp_*` for proper `p`**: for a finite ring `Λ`,
-the base change map `Ψ (Rp_* K) ⟶ Rp_* (Ψ K)` is an isomorphism. Restricted to `Λ`, it is the
-projection map `Rp_* K ⊗ᴸ Λ'_Y ⟶ Rp_* (K ⊗ᴸ Λ'_Z)`. -/
+the base change map `Ψ (Rp_* K) ⟶ Rp_* (Ψ K)` is an isomorphism. -/
 theorem isIso_rightDerivedLowerStarExtendScalarsMap_app [Finite Λ] [IsProper p]
     (K : DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     IsIso ((rightDerivedLowerStarExtendScalarsMap ρ p).app K) := by

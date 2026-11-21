@@ -20,25 +20,6 @@ No hypothesis beyond what is needed to define `j_!` is required — in particula
 hypothesis on the range of `j`, and no condition on the coefficient category `A` beyond
 `HasInitial A` and sheafification on `X`.
 
-## The proof
-
-`j_! ⊣ j^* ⊣ j_*` is an adjoint triple, and in an adjoint triple the two outer functors are
-fully faithful together: the unit of the left adjunction is invertible if and only if the
-counit of the right one is
-(`CategoryTheory.Adjunction.Triple.isIso_unit_iff_isIso_counit`, packaged for this situation
-applied to `AlgebraicGeometry.Etale.openImmersionAdjunctionTriple`). The counit of
-`j^* ⊣ j_*` is *already known* to be invertible —
-`AlgebraicGeometry.Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit`, which
-holds because `j` is a monomorphism, so the unit of the site-level adjunction
-`MorphismProperty.Over.mapPullbackAdj` is an isomorphism.
-
-So the whole statement is a transport across a formal equivalence, and none of the
-sheaf-theoretic work one might expect is needed. In particular this route never has to
-compare `j^*` of a sheafification with the sheafification of a restriction, which is the
-step that makes the direct argument (restrict the presheaf-level Kan extension, then
-sheafify) hard: Mathlib has no "`sheafPullback` along a fully faithful cocontinuous functor
-is fully faithful", and none is needed here.
-
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekAdjunction_unit`: the unit of
@@ -52,6 +33,18 @@ is fully faithful", and none is needed here.
   comparison `j_! ⟶ j_*` consumes; see
   `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_map_lowerShriekToLowerStar` in
   `WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison`.
+
+## Implementation details
+
+`j_! ⊣ j^* ⊣ j_*` is an adjoint triple, and in an adjoint triple the two outer functors are
+fully faithful together: the unit of the left adjunction is invertible if and only if the
+counit of the right one is
+(`CategoryTheory.Adjunction.Triple.isIso_unit_iff_isIso_counit`, packaged for this situation
+applied to `AlgebraicGeometry.Etale.openImmersionAdjunctionTriple`). The counit of
+`j^* ⊣ j_*` is *already known* to be invertible —
+`AlgebraicGeometry.Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit`, which
+holds because `j` is a monomorphism, so the unit of the site-level adjunction
+`MorphismProperty.Over.mapPullbackAdj` is an isomorphism.
 -/
 
 @[expose] public section
@@ -69,11 +62,7 @@ variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 open Etale
 
 /-- **The unit of `j_! ⊣ j^*` is an isomorphism for an open immersion `j`**, i.e.
-`j^* j_! F ≅ F` naturally in `F`.
-
-In the adjoint triple `j_! ⊣ j^* ⊣ j_*` the unit of the left adjunction is invertible
-exactly when the counit of the right one is, and the latter is
-`Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit`. -/
+`j^* j_! F ≅ F` naturally in `F`. -/
 instance Etale.isIso_openImmersionLowerShriekAdjunction_unit :
     IsIso (Etale.openImmersionLowerShriekAdjunction A j).unit :=
   (Etale.openImmersionAdjunctionTriple A j).isIso_unit_iff_isIso_counit.mpr
@@ -90,10 +79,8 @@ instance Etale.full_openImmersionLowerShriek : (j)_!open[A].Full :=
 instance Etale.faithful_openImmersionLowerShriek : (j)_!open[A].Faithful :=
   (Etale.fullyFaithfulOpenImmersionLowerShriek A j).faithful
 
-/-- **The pushforward along an open immersion is fully faithful**, the counit of `j^* ⊣ j_*`
-being an isomorphism by `Etale.isIso_openImmersionRestrictionLowerStarAdjunction_counit`.
-In particular the counit of `Etale.upperStarLowerStarAdjunction` along `j` is an isomorphism,
-i.e. `j^* j_* F ≅ F`. -/
+/-- **The pushforward along an open immersion is fully faithful**. In particular the counit of
+`Etale.upperStarLowerStarAdjunction` along `j` is an isomorphism, i.e. `j^* j_* F ≅ F`. -/
 noncomputable def Etale.fullyFaithfulLowerStarOfIsOpenImmersion : (j)_*[A].FullyFaithful :=
   (Etale.openImmersionRestrictionLowerStarAdjunction A j).fullyFaithfulROfIsIsoCounit
 
@@ -104,8 +91,7 @@ instance Etale.faithful_lowerStar_of_isOpenImmersion : (j)_*[A].Faithful :=
   (Etale.fullyFaithfulLowerStarOfIsOpenImmersion A j).faithful
 
 /-- `j^*` of the unit of `j^* ⊣ j_*` is an isomorphism at every sheaf `G` on `X`, for an open
-immersion `j`: the triangle identity `j^*(η_G) ≫ ε_{j^* G} = 𝟙` exhibits it as the inverse of
-the counit `ε_{j^* G}`, which is an isomorphism since `j_*` is fully faithful. -/
+immersion `j`. -/
 instance Etale.isIso_upperStar_map_upperStarLowerStarAdjunction_unit_of_isOpenImmersion
     (G : Sheaf X.smallEtaleTopology A) :
     IsIso ((j)^*[A].map ((Etale.upperStarLowerStarAdjunction A j).unit.app G)) := by
@@ -115,12 +101,7 @@ instance Etale.isIso_upperStar_map_upperStarLowerStarAdjunction_unit_of_isOpenIm
 
 set_option backward.isDefEq.respectTransparency false in
 /-- `j^*` of the counit of `j_! ⊣ j^*` is an isomorphism at every sheaf `G` on `X`.
-
-This is the triangle identity read backwards: `η_{j^* G} ≫ j^*(ε_G) = 𝟙`, and `η` is an
-isomorphism by `Etale.isIso_openImmersionLowerShriekAdjunction_unit`, so `j^*(ε_G)` is its
-inverse. Note that `ε_G` itself is *not* an isomorphism — `j_! j^* G ⟶ G` is the
-"restriction to the image of `j`, extended by zero" map, which forgets the sections away
-from `j`. -/
+Note that the counit itself is in general not an isomorphism. -/
 instance Etale.isIso_openImmersionRestriction_map_lowerShriekAdjunction_counit
     (G : Sheaf X.smallEtaleTopology A) :
     IsIso ((Etale.openImmersionRestriction A j).map

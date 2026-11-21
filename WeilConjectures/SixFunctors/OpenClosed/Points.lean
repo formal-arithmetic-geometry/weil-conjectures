@@ -39,15 +39,7 @@ namespace AlgebraicGeometry
 /-- A point of `X` with values in a field `K` lies either on the open `U` or on its closed
 complement `Z`, as a factorization of morphisms of schemes: any `s : Spec K ⟶ X` is either of
 the form `t ≫ j` for a unique `t : Spec K ⟶ U`, or of the form `t ≫ i` for a unique
-`t : Spec K ⟶ Z`.
-
-The open half is `AlgebraicGeometry.IsOpenImmersion.lift`, unique because an open immersion is
-a monomorphism; the closed half is
-`AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_field`. What carries the closed half
-is `AlgebraicGeometry.Scheme.IdealSheafData.le_ker_iff_range_subset_support`, whose hypothesis
-on the source is `IsReduced (Spec K)`; the field hypothesis is used beyond that only for
-`Subsingleton (Spec K)`, which upgrades "the closed point of `Spec K` lands in the range of
-`i`" to "the whole range of `s` lands in the range of `i`". -/
+`t : Spec K ⟶ Z`. -/
 theorem existsUnique_fac_or_fac_of_range_eq_compl {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)
     [IsOpenImmersion j] [IsClosedImmersion i]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
@@ -62,8 +54,7 @@ theorem existsUnique_fac_or_fac_of_range_eq_compl {X U Z : Scheme.{u}} (j : U �
 
 /-- **The ranges of a complementary pair are disjoint.** This is the half of the
 complementarity condition `Set.range i.base = (Set.range j.base)ᶜ` that the formal part of
-the open--closed argument uses; the other half, that the two ranges cover `X`, enters only
-through `AlgebraicGeometry.existsUnique_fac_or_fac_of_range_eq_compl`. -/
+the open--closed argument uses. -/
 lemma disjoint_range_of_range_eq_compl {X U Z : Scheme.{u}} (j : U ⟶ X) (i : Z ⟶ X)
     (hij : Set.range i.base = (Set.range j.base)ᶜ) :
     Disjoint (Set.range j.base) (Set.range i.base) := by

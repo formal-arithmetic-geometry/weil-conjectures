@@ -116,10 +116,8 @@ private lemma projectionMap_naturality_left (f : X ⟶ Y) [HasCompactification f
 (`AlgebraicGeometry.Etale.leftDerivedUpperStarDerivedTensorRightIso`). Then the trace counit
 `Rf_! γ_K ≫ p ≫ t ▷ K ≫ λ_K`, tensored with `N_Y`, is the comparison
 `Rf_!(G K) ⊗ᴸ N_Y ⟶ Rf_!(G K ⊗ᴸ N_X)` (the projection map followed by `a`), followed by
-`Rf_! θ` and the trace counit at `K ⊗ᴸ N_Y`. This is the associativity of the projection map
-(`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc`). The trace counits are given
-as morphisms `τ` equal to `t ▷ K ≫ λ_K`, so that the statement applies to any expression of
-them. -/
+`Rf_! θ` and the trace counit at `K ⊗ᴸ N_Y`. The trace counits are given as morphisms `τ` equal
+to `t ▷ K ≫ λ_K`. -/
 theorem traceCounit_derivedTensorRight (f : X ⟶ Y) [HasCompactification f]
     (T : DerivedCategory (Sheaf X.smallEtaleTopology A)) (t : (R(f)_![A]).obj T ⟶ 𝟙_ _)
     {G : DerivedCategory (Sheaf Y.smallEtaleTopology A) ⥤

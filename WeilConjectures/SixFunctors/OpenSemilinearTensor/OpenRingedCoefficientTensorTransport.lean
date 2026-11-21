@@ -13,7 +13,11 @@ import all WeilConjectures.Algebra.Homology.ScalarHomOrdinary.ScalarHomOrdinaryT
 
 /-! # Normalized open tensor transport over abstract coefficient sheaves
 
-Source: Stacks 03DI, 03EK and 0E8I.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -187,18 +191,7 @@ private theorem localTensorTransport_pure (M : scalarModules K S)
 end
 
 -- The composed two-variable isomorphism and its section equation have large dependent types.
-/-- Transport of the normalized slice tensor formula through a coefficient equivalence.
-Source: Stacks 03DI, 03EK and 0E8I.
-
-Proof: the coefficient tensorator is induced by the identity on presheaf pure
-sections and sheafification. Insert the inverse module-equivalence counit in the
-second factor and compose with the tensorator. Apply localized extension to this
-natural isomorphism and compose with the normalized slice projection formula.
-On each original extension summand the slice formula gives the corresponding
-slice pure tensor. The inverse counit cancels the counit in the restricted
-section, the coefficient tensorator preserves the two original sections, and
-extension of a map acts in that same summand. Naturality follows by composition
-of the three natural isomorphisms. -/
+/-- Transport of the normalized slice tensor formula through a coefficient equivalence. -/
 theorem ringedCoefficientTensorTransport :
     let L := I.functor ⋙ localizedSystemExtension.{c, v, r} R W
     let P := localizedSystemRestriction.{c, v, r} R W ⋙ I.inverse

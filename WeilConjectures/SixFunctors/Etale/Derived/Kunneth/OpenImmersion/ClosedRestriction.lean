@@ -11,8 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Locality
 # Étale restriction of the degree-`q` base change map
 
 Two formal facts on the degree-`q` base change map `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F` of a
-Cartesian square, used in the "minimal counterexample" step of blueprint
-`corollary-open-direct-image-over-field--2`:
+Cartesian square, used in the "minimal counterexample" step of base change for open immersions:
 
 * `AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_etale`: it is an isomorphism when `p`
   is étale (étale base change);

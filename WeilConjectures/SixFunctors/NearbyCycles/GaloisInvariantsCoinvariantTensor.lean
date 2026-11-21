@@ -24,10 +24,11 @@ exchange `α : Ψ_N C ⟶ Ψ_{N_Ω} C` of the Galois layer has a retraction `r` 
 (`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_coinvariant_tensor`).
 
 This is the coinvariant property used for the projection formula `(E ⊗ B)^P = E^P ⊗ B` in the
-generic-slicing step of Gabber's Künneth formula. The proof is that of
-`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_coinvariant`, with the
-continuity of the cohomology sheaves of the tensor product along the finite layers
-(`ProEtale.CondensedRing.isColimit_homology_tensorRight_mapCocone`).
+generic-slicing step of Gabber's Künneth formula.
+
+## References
+
+* [SGA 4½], [Th. finitude], Lemme 3.4
 -/
 
 @[expose] public section
@@ -187,7 +188,7 @@ private lemma tensor_coinvariant_pullbackExchange_of_unit
     (fun k ↦ galoisLayerAut_autAction Λ N h Ω (act k) C)
 
 /-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a continuous functor**
-(SGA 4½, [Th. finitude], Lemme 3.4; torsion coefficients). Let `Ω/L` be Galois with degrees
+(torsion coefficients). Let `Ω/L` be Galois with degrees
 invertible in `T₀` and `C` bounded below of étale origin on the generic fibre. The pullback
 exchange `α : Ψ_N C ⟶ Ψ_{N_Ω} C` of the Galois layer has a retraction `r` such that, for every
 additive functor `G` to module objects which carries the cocone of the finite layers of every
@@ -367,8 +368,8 @@ private lemma tensor_coinvariant_property (T₀ : Type)
     DerivedCategory.homologyFunctor _ q)
     (fun K a _ hcab ↦ tensor_coinvariant_isColimit N T₀ T K a hcab f' V b hV q) φ hφ
 
-/-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product** (SGA 4½,
-[Th. finitude], Lemme 3.4; blueprint `prose-E-10`; finite field coefficients).
+/-- **`Ψ_N` is the summand of all the invariants of `Ψ_{N_Ω}`, after a tensor product**
+(finite field coefficients).
 Let `Ω/L` be Galois with degrees invertible in the finite field `T₀` and `C` bounded below of étale
 origin on the generic fibre. The pullback exchange `α : Ψ_N C ⟶ Ψ_{N_Ω} C` of the Galois layer has
 a retraction `r` such that, on the cohomology sheaves of `Lf'^*(-) ⊗ V` for any `f' : Z ⟶ X'` and

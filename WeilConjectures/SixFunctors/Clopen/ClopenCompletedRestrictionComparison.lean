@@ -15,8 +15,12 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitCriterion
 /-!
 # Ordinary restriction of a completed chart to a smaller clopen
 
-Source: Stacks Project, Tags 03D8, 06YY and 08TC; proetale.tex,
-lemma-local-structure-constructible-complex (Tag 09C3).
+## References
+
+* [Stacks, Tag 03D8]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 09C3]
 -/
 
 @[expose] public section
@@ -34,28 +38,7 @@ namespace WeilConjectures
 
 /-- On nested clopens, exact unit-preserving module restriction identifies the
 completed chart of a complete complex with its ordinary restriction to the smaller open.
-The restriction functor is the existing normalized open restriction, with its
-published exactness instances. There is no boundedness, projectivity,
-constructibility or affineness hypothesis.
-
-Source: Stacks Project, Tags 03D8, 06YY and 08TC; the restriction step in
-proetale.tex, lemma-local-structure-constructible-complex (Tag 09C3).
-
-Proof: let j be the inclusion A into U. Restrict sheaves by precomposition with
-composition of pro-etale objects along j. Identify the completed coefficient rings
-by the inverse limit of the constant finite-quotient identifications; their limit
-projection equations fix this scalar identification. This gives a module functor F.
-It is additive and exact because restriction to an open subtopos preserves kernels
-and sheafified cokernels. The coefficient identification identifies F of the unit
-with the local unit. A clopen splits the topos as a product with its complement;
-its restriction is a coordinate projection and preserves all products. Apply it
-to the augmented quotient tower and its Roos triangle. Consequently restriction
-of a complete complex stays complete, and the ordinary-to-completed comparison
-for the inclusion U into V is invertible on the given complex. The ordinary
-derived restriction along j is F.mapDerivedCategory, since F is exact. Apply it
-to this comparison and use the ordinary pullback compositor, first for A into U
-into V and then for A into V into W. These give the asserted derived isomorphism.
-All constructions allow empty clopens and the zero coefficient module. -/
+There is no boundedness, projectivity, constructibility or affineness hypothesis. -/
 theorem clopen_completed_restriction_comparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

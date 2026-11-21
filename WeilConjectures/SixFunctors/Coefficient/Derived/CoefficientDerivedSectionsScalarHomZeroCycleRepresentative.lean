@@ -20,14 +20,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 -- The assembly elaborates several large localized composites at once.
-/-- The scalar transpose formula for one explicit zero-cycle representative.
-Source: Stacks 03CZ, 079P and 08JA.
-Proof: apply the finite tensor comparison square to the fixed Hom-complex
-representative, use the uncurrying models to identify evaluation with the scalar
-extension transpose, and then use the ordinary scalar-section formula. The
-normalized zero-cycle equivalences turn the resulting chain-map equality into the
-displayed derived-category equality.
--/
+/-- The scalar transpose formula for one explicit zero-cycle representative. -/
 theorem coefficientDerivedSectionsScalarHomZero_cycle_representative
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R)

@@ -20,8 +20,8 @@ projection map `PF_{f, K, L}` over `Λ` is, up to isomorphism of arrows, the pro
 `PF_{f, K_n, L_n}` over `Λ ⧸ (ϖ)ⁿ` of the reductions.
 
 The reduction square itself,
-`AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`
-, and the constant
+`AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`,
+and the constant
 `AlgebraicGeometry.Etale.projectionMapApp` are in
 `WeilConjectures.SixFunctors.CoefficientReduction`.
 
@@ -29,10 +29,9 @@ The reduction square itself,
 
 - `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_finite`: if
   `Λ ⧸ (ϖ)ⁿ` is finite, the reduction of `PF_{f, K, L}` modulo `(ϖ)ⁿ` is an isomorphism for all
-  `K` and `L`, by the finite-level projection formula
-  (`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`).
+  `K` and `L`.
 
-## Implementation notes
+## Implementation details
 
 As in `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients`, the reduction
 `K_n ∈ D(X_ét, Λ ⧸ (ϖ)ⁿ)` is characterised by its universal property
@@ -81,11 +80,7 @@ instance isIso_projectionMapApp_of_finite (Λ' : Type (u + 1)) [CommRing Λ'] [F
 /-- **The reduction of the projection map at a finite quotient.** For a nonzerodivisor `ϖ` of
 `Λ` with `Λ ⧸ (ϖ)ⁿ` finite, `f : X ⟶ Y` admitting a compactification, and arbitrary
 `K ∈ D(X_ét, Λ)` and `L ∈ D(Y_ét, Λ)`, the reduction modulo `(ϖ)ⁿ` of the projection map
-`PF_{f, K, L}` is an isomorphism: it is the restriction of scalars of the projection map
-`PF_{f, K_n, L_n}` over the finite ring `Λ ⧸ (ϖ)ⁿ`
-(`AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`),
-which is an isomorphism by the finite-level projection formula
-(`AlgebraicGeometry.Etale.hasProjectionFormula_of_finite`). -/
+`PF_{f, K, L}` is an isomorphism. -/
 theorem isIso_reductionModIdeal_map_projectionMap_of_finite (hϖ : ϖ ∈ nonZeroDivisors Λ)
     (n : ℕ) [Finite (Λ ⧸ Ideal.span {ϖ} ^ n)] (f : X ⟶ Y) [HasCompactification f]
     (K : 𝐃(X, Λ)) (L : 𝐃(Y, Λ)) :

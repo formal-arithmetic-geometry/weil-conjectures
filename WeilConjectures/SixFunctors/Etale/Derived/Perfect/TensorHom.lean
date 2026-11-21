@@ -18,8 +18,7 @@ repository (see `WeilConjectures.SixFunctors.Etale.Derived.Perfect`); a finite p
 `P^∨ ⊗ᴸ N ⟶ RHom(P, N)`
 
 of the tensor–internal-hom adjunction is an isomorphism, natural in `P` and `N`, and the canonical
-biduality map `P ⟶ P^∨∨` is an isomorphism. This is blueprint
-`theorem-poincare-duality--5`.
+biduality map `P ⟶ P^∨∨` is an isomorphism.
 
 ## Main definitions
 
@@ -28,15 +27,15 @@ biduality map `P ⟶ P^∨∨` is an isomorphism. This is blueprint
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualTensorToDerivedHom`
-  (`theorem-poincare-duality--5`): it is an isomorphism for dualizable `P`.
+- `AlgebraicGeometry.Etale.DerivedCategory.isIso_coefficientDualTensorToDerivedHom`: it is an
+  isomorphism for dualizable `P`.
 - `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualTensorToDerivedHom_naturality_left`,
-  `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualTensorToDerivedHom_naturality_right`
-  (`theorem-poincare-duality--5`): it is natural in `P` and `N`.
-- `AlgebraicGeometry.Etale.DerivedCategory.isIso_toIhomIhomUnit_of_isDualizable`
-  (`theorem-poincare-duality--5`): the biduality map `P ⟶ P^∨∨` is an isomorphism.
+  `AlgebraicGeometry.Etale.DerivedCategory.coefficientDualTensorToDerivedHom_naturality_right`:
+  it is natural in `P` and `N`.
+- `AlgebraicGeometry.Etale.DerivedCategory.isIso_toIhomIhomUnit_of_isDualizable`: the biduality
+  map `P ⟶ P^∨∨` is an isomorphism.
 
-## Implementation notes
+## Implementation details
 
 The biduality map `P ⟶ P^∨∨` is built from a braiding
 (`CategoryTheory.MonoidalClosed.toIhomIhomUnit`), and `D(X_ét)` only carries one up to
@@ -87,11 +86,8 @@ noncomputable def coefficientDualTensorToDerivedHom
       (RHom(X)[A].obj (op P)).obj N :=
   ihomUnitTensorToIhom P N
 
-/-- Blueprint `theorem-poincare-duality--5`: Internal Hom with a finite projective
-module.
-
-For a dualizable `P` (perfect over `Λ_X`, e.g. a finite projective `Λ_X`-module) and every `N`,
-the canonical map `P^∨ ⊗ᴸ N ⟶ RHom(P, N)` is an isomorphism. -/
+/-- For a dualizable `P` (perfect over `Λ_X`, e.g. a finite projective `Λ_X`-module) and every
+`N`, the canonical map `P^∨ ⊗ᴸ N ⟶ RHom(P, N)` is an isomorphism. -/
 theorem isIso_coefficientDualTensorToDerivedHom
     {P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (hP : IsDualizable P)
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
@@ -100,8 +96,7 @@ theorem isIso_coefficientDualTensorToDerivedHom
   obtain ⟨_⟩ := nonempty_exactPairing_swap P Pᘁ
   exact isIso_ihomUnitTensorToIhom Pᘁ P N
 
-/-- Blueprint `theorem-poincare-duality--5`: Internal Hom with a finite projective
-module, naturality in `N`. -/
+/-- The canonical map `P^∨ ⊗ᴸ N ⟶ RHom(P, N)` is natural in `N`. -/
 theorem coefficientDualTensorToDerivedHom_naturality_right
     (P : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     {N N' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (f : N ⟶ N') :
@@ -110,8 +105,7 @@ theorem coefficientDualTensorToDerivedHom_naturality_right
       coefficientDualTensorToDerivedHom P N ≫ (RHom(X)[A].obj (op P)).map f := by
   exact whiskerLeft_comp_ihomUnitTensorToIhom P f
 
-/-- Blueprint `theorem-poincare-duality--5`: Internal Hom with a finite projective
-module, naturality in `P`. -/
+/-- The canonical map `P^∨ ⊗ᴸ N ⟶ RHom(P, N)` is natural in `P`. -/
 theorem coefficientDualTensorToDerivedHom_naturality_left
     {P P' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)} (g : P ⟶ P')
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
@@ -124,10 +118,7 @@ theorem coefficientDualTensorToDerivedHom_naturality_left
   rw [associator_inv_naturality_middle_assoc, ← comp_whiskerRight_assoc,
     id_tensor_pre_app_comp_ev, comp_whiskerRight_assoc, associator_inv_naturality_left_assoc]
 
-/-- Blueprint `theorem-poincare-duality--5`: Internal Hom with a finite projective
-module, biduality.
-
-For a dualizable `P` and any braiding of `D(X_ét)`, the canonical biduality map
+/-- For a dualizable `P` and any braiding of `D(X_ét)`, the canonical biduality map
 `P ⟶ P^∨∨ = RHom(RHom(P, Λ_X), Λ_X)` is an isomorphism. -/
 theorem isIso_toIhomIhomUnit_of_isDualizable
     [BraidedCategory (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))]

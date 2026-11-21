@@ -17,6 +17,10 @@ import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Rational
 These helpers implement canonical finite normalization, common left-shift descent,
 and transport back to supplied finite shifts. The public representative theorem
 also exposes the literal object surjectivity used in that transport.
+
+## References
+
+* Zheng, Construction 6.2
 -/
 
 @[expose] public noncomputable section
@@ -302,13 +306,7 @@ private theorem normalizedCommonLeftExact (c : Compactification f)
   exact Functor.isTriangulated_of_precomp_iso (P.localization c E).q.symm
 
 include hl in
-/-- Every rational object has a literal finite-Tor integral representative.
-Source: Zheng, Construction 6.2; residue Tor identifies the two integral predicates.
-
-Proof: apply integralRepresentative to the underlying integral object. Residue Tor
-identifies the constructible and finite-Tor predicates, so this changes only its
-membership proof. Rationalization retains the object literally; proof irrelevance
-therefore identifies the result with the original rational object. -/
+/-- Every rational object has a literal finite-Tor integral representative. -/
 theorem commonRationalizationSurjective (T : Scheme.{max u v})
     [T.Over (Spec (.of D.k))] (E : FieldStage.{max u v} l) :
     Function.Surjective (rationalization.{u, v} l Ω E T).obj := by

@@ -66,7 +66,7 @@ instance preservesFiniteColimits_sheafForget₂ : PreservesFiniteColimits (sheaf
     (sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso _ _)
 
 /-- **Injective étale sheaves of modules are acyclic as abelian sheaves**, on a quasi-compact
-quasi-separated scheme, by the Čech criterion. -/
+quasi-separated scheme. -/
 theorem rightAcyclic_sheafForget₂_obj_of_injective [CompactSpace X] [QuasiSeparatedSpace X]
     (I : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] :
     (sectionsFunctor AddCommGrpCat.{u + 1} X).rightAcyclic ((sheafForget₂ Λ X).obj I) := by

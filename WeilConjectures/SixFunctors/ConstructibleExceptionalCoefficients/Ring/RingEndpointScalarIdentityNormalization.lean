@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Ring.RingEndpointScalarIdentityTransferData
 
-/-! # Normalization transport for endpoint scalar identities -/
+/-! # Normalization transport for endpoint scalar identities
+
+## References
+
+* Zheng, Lemma 5.22 and Proposition 5.26
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -22,13 +27,7 @@ variable (l : ℕ) [Fact l.Prime]
 attribute [local instance] constructionInclusionShift
 
 /-- The normalization equation is invariant under the universe reindexing of a ring-stage
-scalar extension, for an identity isomorphism equal to the certificate isomorphism.
-First replace the coefficient map family by the identity using h and function
-extensionality, so the equality-isomorphism cast reduces. In each finite or integral
-case the categories ignore the closure field. Replace J by I.iso using hJ and apply
-I.normalized K to the unchanged inclusion, realization, and tensor unitor.
-Source: Zheng, Lemma 5.22 and Proposition 5.26, universe bookkeeping.
--/
+scalar extension, for an identity isomorphism equal to the certificate isomorphism. -/
 theorem scalarIdentityNormalizationAtClosure
     (Ψ : Type (max u v)) [Field Ψ] [Algebra (Padic l) Ψ] [IsAlgClosure (Padic l) Ψ]
     (W : Scheme.{max u v}) {s : RingStage.{max u v} l}

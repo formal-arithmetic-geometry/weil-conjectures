@@ -27,7 +27,10 @@ import Mathlib.CategoryTheory.Preadditive.Biproducts
 
 /-! # Slice constant residue bases under normalized clopen restriction
 
-Source: Stacks Project, proetale.tex, Tag 09C3; sites.tex, Tag 00XZ.
+## References
+
+* [Stacks, Tag 09C3]
+* [Stacks, Tag 00XZ]
 -/
 
 @[expose] public section
@@ -50,24 +53,7 @@ private instance (priority := 10000) residueBasesAbLocallyBijective (X : Scheme.
   integralCoefficientAbLocallyBijective.{u, u} X
 
 /-- A constant rank-r model on the slice becomes the actual rank-r free residue
-module sheaf after ordinary restriction to the open subscheme.
-
-Source: Stacks Project, proetale.tex, Tag 09C3, the disjoint-open trivialization;
-sites.tex, Tag 00XZ, localization of sheafification. This is the coefficient and
-module transport in step 2 of lem-sf-residue-lisse-clopen-bases.
-
-Proof: precompose localized module sheaves with the concrete sliceFrom functor to
-restrict to the pro-etale site of U, and transport scalars along d.finite 0. This
-functor is additive and preserves finite limits sectionwise, hence finite
-biproducts. Its canonical map from the local coefficient unit to the restricted
-slice coefficient unit is invertible, since d.finite 0 is a ring isomorphism.
-The constant model k^r is the finite biproduct of r copies of k. The additive
-model-sheafification functor and the constant-unit comparison identify its sheaf
-with the corresponding finite biproduct of slice coefficient units. Apply ordinary
-restriction to the supplied isomorphism and this description. The resulting
-biproduct is the finite coproduct of local coefficient units. Reindex along
-ULift.up to obtain precisely topCellResidueFree r and invert the composite. The
-empty index r=0 gives the zero module; empty opens are allowed throughout. -/
+module sheaf after ordinary restriction to the open subscheme. -/
 theorem sf_clopen_residue_free_restriction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

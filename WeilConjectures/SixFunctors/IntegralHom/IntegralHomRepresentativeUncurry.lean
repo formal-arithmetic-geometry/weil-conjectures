@@ -74,7 +74,10 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Uncurrying on integral Hom representatives
 
-Source: Stacks 07A4 and 08J9; blueprint coefficient-extension paragraph 2.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08J9]
 -/
 
 @[expose] public section
@@ -134,18 +137,7 @@ attribute [local irreducible] totalTensor totalPair pair projection evaluate hom
 open CategoryTheory.RingedDerivedNative
 
 -- Compare the two Hom-complex models without unfolding the derived internal Hom.
-/-- Unsigned representative uncurrying agrees with the normalized right-tensor adjunction.
-
-Source: Stacks Tags 07A4 and 08J9; blueprint coefficient-extension paragraph 2.
-
-Proof: uncurry the chain map by the existing chain tensor-Hom equivalence; its
-product-projection formula is ordinary evaluation, without a sign in the order
-(source of q) tensor (source of Hom). Compose q with the fixed injective-resolution
-augmentation and apply the normalization of T. Pure-tensor generation identifies
-the resulting chain map with uncurrying of the augmented q. Naturality of chain
-uncurrying identifies this map with the original uncurry followed by augmentation.
-After localization, the augmentation followed by its fixed inverse is the identity.
-This gives the comparison equation into the original target complex. -/
+/-- Unsigned representative uncurrying agrees with the normalized right-tensor adjunction. -/
 theorem representative_uncurry_evaluation
     (S : CoefficientClosedStructure
       (derivedInternalHomOfUniverses.{t + 1, t, u, (max u (t + 1)) + 1}

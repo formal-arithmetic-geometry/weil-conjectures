@@ -18,10 +18,22 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.Category
 /-!
 # The closed–open step of the detection of a failure of base change
 
-Step (3) of the blueprint lemma `lemma-reduction-field--1`: if a cokernel element survives over
-`T'` and `Z ⊆ T'` is closed with quasi-compact open complement `V`, then it survives over `V` or
-over `Z` (`AlgebraicGeometry.Etale.survivesBaseChange_or_of_isClosedImmersion`). This file
-provides the ingredients.
+If a cokernel element survives over `T'` and `Z ⊆ T'` is closed with quasi-compact open complement
+`V`, then it survives over `V` or over `Z`
+(`AlgebraicGeometry.Etale.survivesBaseChange_or_of_isClosedImmersion`). This file provides the
+ingredients.
+
+## Main statements
+
+- `CategoryTheory.Functor.mono_homologyFunctor_map_rightDerivedFunctorPlus_map`: a morphism of
+  the bounded below derived category which is an isomorphism on `H^i` for `i < n` and a
+  monomorphism on `H^n` stays a monomorphism on `H^n` after a right derived functor.
+- `AlgebraicGeometry.Etale.exists_baseChangeTargetTransition_comp_eq`: the decomposition of the
+  transition maps along a morphism.
+- `AlgebraicGeometry.Etale.notMem_range_of_isFinite`,
+  `AlgebraicGeometry.Etale.notMem_range_of_baseChangeProperty`: the closed and the open summand.
+
+## Implementation details
 
 For `k : T₁ ⟶ T` and a square `e' ≫ k = a ≫ e`, the transition map of the targets of the
 base-change maps along `k` is computed through the comparison `k_* N[0] ⟶ Rk_*(N[0])`
@@ -36,16 +48,6 @@ cokernel element in `j_* J ⊕ i_* i⁻¹ π⁻¹ F` survives in one of the summ
 (`CategoryTheory.mem_range_of_mono_cokernelMap`, `CategoryTheory.mem_range_of_decomp`), and the
 two summands are handled by `AlgebraicGeometry.Etale.notMem_range_of_baseChangeProperty` and
 `AlgebraicGeometry.Etale.notMem_range_of_isFinite`.
-
-## Main statements
-
-- `CategoryTheory.Functor.mono_homologyFunctor_map_rightDerivedFunctorPlus_map`: a morphism of
-  the bounded below derived category which is an isomorphism on `H^i` for `i < n` and a
-  monomorphism on `H^n` stays a monomorphism on `H^n` after a right derived functor.
-- `AlgebraicGeometry.Etale.exists_baseChangeTargetTransition_comp_eq`: the decomposition of the
-  transition maps along a morphism.
-- `AlgebraicGeometry.Etale.notMem_range_of_isFinite`,
-  `AlgebraicGeometry.Etale.notMem_range_of_baseChangeProperty`: the closed and the open summand.
 -/
 
 @[expose] public section
@@ -108,8 +110,8 @@ lemma unit_app_comp_map_naturality (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' 
 
 /-- The component `S (R N) ⟶ R' (S' N)` of the mate of `s : S ⋙ L' ⟶ L ⋙ S'`: the map adjoint to
 `L' (S (R N)) ⟶ S' (L (R N)) ⟶ S' N`. It is the component at `N` of Mathlib's
-`CategoryTheory.mateEquiv adj adj' s` (`CategoryTheory.Adjunction.mateApp_eq_mateEquiv_app`);
-the separate definition keeps a regular head that the kernel compares argument by argument. -/
+`CategoryTheory.mateEquiv adj adj' s`
+(`CategoryTheory.Adjunction.mateApp_eq_mateEquiv_app`). -/
 def mateApp (S : C ⥤ C') (S' : D ⥤ D') (s : S ⋙ L' ⟶ L ⋙ S') (N : D) :
     S.obj (R.obj N) ⟶ R'.obj (S'.obj N) :=
   adj'.unit.app (S.obj (R.obj N)) ≫ R'.map (s.app (R.obj N) ≫ S'.map (adj.counit.app N))
@@ -253,8 +255,7 @@ lemma mem_range_of_mono_cokernelMap (Φ : 𝒜 ⥤ ModuleCat.{v} R) [PreservesFi
 additive category, with `T` additive, let `Φ` be an additive functor to modules, and let `G` be
 a direct sum of `G₁` and `G₂`, witnessed by `p₁ ≫ i₁ + p₂ ≫ i₂ = 𝟙 G`. An element of
 `Φ (T G)` whose two components are in the ranges of `Φ τ` is in the range of `Φ τ`. The direct
-sum is not required to be a chosen biproduct, so that the lemma applies to any instance of
-zero morphisms on `𝒞`. -/
+sum is not required to be a chosen biproduct. -/
 lemma mem_range_of_decomp {𝒞 : Type*} [Category* 𝒞] [Preadditive 𝒞]
     {ℬ : Type*} [Category* ℬ] [Preadditive ℬ] (Φ : ℬ ⥤ ModuleCat.{v} R) [Φ.Additive]
     {S T : 𝒞 ⥤ ℬ} [T.Additive] (τ : ∀ G, S.obj G ⟶ T.obj G)
@@ -291,7 +292,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 
 /-- Let `c : K ⟶ L` be a morphism of the bounded below derived category which is an
 isomorphism on `H^i` for `i < n` and a monomorphism on `H^n`. Then `R⁺F(c)` is a monomorphism
-on `H^n`: the cone of `c` is cohomologically `≥ n`, hence so is its image under `R⁺F`. -/
+on `H^n`. -/
 theorem mono_homologyFunctor_map_rightDerivedFunctorPlus_map (F : C ⥤ D) [F.Additive]
     {K L : DerivedCategory.Plus C} (c : K ⟶ L) (n : ℤ)
     (h₁ : ∀ i < n, IsIso ((DerivedCategory.Plus.homologyFunctor C i).map c))
@@ -456,8 +457,7 @@ lemma Etale.singleFunctor_map_comp_singleLowerStarComparison {T' T₁ : Scheme.{
     (((k)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).hom a
 
 /-- Postcomposition with the comparison `k_* N [0] ⟶ R k_* (N [0])` is bijective on morphisms out
-of a sheaf placed in degree `0`: both sides are identified with `Hom(k^* A, N)` by the
-adjunctions. -/
+of a sheaf placed in degree `0`. -/
 lemma Etale.bijective_comp_singleLowerStarComparison {T' T₁ : Scheme.{u}} (k : T₁ ⟶ T')
     (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (A : Sheaf T'.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -496,9 +496,7 @@ lemma Etale.bijective_comp_singleLowerStarComparison {T' T₁ : Scheme.{u}} (k :
   exact (Function.Bijective.of_comp_iff _ hs).1 hb
 
 /-- In degree `0`, the comparison `k_* N [0] ⟶ R k_* (N [0])` is an isomorphism, that is,
-`R⁰ k_* N = k_* N`: by the Yoneda lemma, since postcomposition with it is bijective on
-morphisms out of every sheaf placed in degree `0`, and `H⁰` is bijective on morphisms from an
-object `≤ 0` to an object `≥ 0`. -/
+`R⁰ k_* N = k_* N`. -/
 lemma Etale.isIso_homologyFunctor_zero_map_singleLowerStarComparison {T' T₁ : Scheme.{u}}
     (k : T₁ ⟶ T') (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso ((DerivedCategory.Plus.homologyFunctor _ 0).map
@@ -558,8 +556,7 @@ lemma Etale.isIso_singleLowerStarComparison_of_injective {T' T₁ : Scheme.{u}} 
     ((k)_*[ModuleCat.{u + 1} Λ]).isZero_homologyFunctor_rightDerivedFunctorPlus_singleFunctor N
       hq.ne'
 
-/-- For a finite morphism `k`, the comparison `k_* N [0] ⟶ R k_* (N [0])` is an isomorphism:
-`k_*` is exact. -/
+/-- For a finite morphism `k`, the comparison `k_* N [0] ⟶ R k_* (N [0])` is an isomorphism. -/
 lemma Etale.isIso_singleLowerStarComparison_of_isFinite {T' T₁ : Scheme.{u}} (k : T₁ ⟶ T')
     [IsFinite k] (N : Sheaf T₁.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso (Etale.singleLowerStarComparison Λ k N) :=

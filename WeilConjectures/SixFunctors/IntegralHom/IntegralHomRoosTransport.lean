@@ -13,7 +13,11 @@ import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 
 /-! # Canonical augmented reduction products under integral Hom
 
-Source: blueprint order 2478, proof step 8; Stacks Tags 08TC, 0038 and 08JC.
+## References
+
+* [Stacks, Tag 08TC]
+* [Stacks, Tag 0038]
+* [Stacks, Tag 08JC]
 -/
 
 @[expose] public section
@@ -106,12 +110,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
 /-- The Hom functor carries a complete reduction tower to a complete reduction tower.
-The given tensor presentation supplies the right adjunction.
-This is the final Roos-triangle transport step of the blueprint. The proof applies the
-right-adjoint product comparison to the augmented reduction tower and uses the normalized
-finite comparison maps to identify the transition endomorphism componentwise.
-Source: blueprint order 2478, proof step 8; Stacks Tags 08TC and 0038.
--/
+The given tensor presentation supplies the right adjunction. -/
 theorem hom_roosTransport
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (K L : completedIntegralDerivedCategory l E Y D hl)

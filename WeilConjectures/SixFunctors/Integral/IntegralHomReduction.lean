@@ -12,7 +12,12 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRoosTransport
 
 /-! # Integral internal Hom and reduction
 
-Source: blueprint order 2134; Stacks Tags 08J9, 07A6, 07A4 and 08TC.
+## References
+
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08TC]
 -/
 
 @[expose] public section
@@ -34,47 +39,9 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Integral internal Hom commutes with every positive reduction and preserves
 completeness in the second variable, without a condition on the first variable.
 The existential presentations supply, rather than assume, derived tensor and its
-canonical evaluation and coefficient comparisons. Their representative equations
-fix the constructions on local sections. The comparison itself is a defined
-transpose; the following clauses assert its invertibility, its evaluation equation,
-and compatibility with every transpose.
-
-Proof:
-1. The valuation ring is a DVR and hence Noetherian
-. The standard perfect quotient
-   resolution and completed-constant-sheaf reduction identify the restricted
-   quotient with Q_n=[B --t^(n+1)--> B]. It is K-flat by the bounded-flat lemma.
-   The maps Q_m to Q_n are (t^(m-n),1) and preserve the degree-zero unit.
-2. Ringed internal-Hom currying and RHom global sections give tensor-Hom
-   adjunction on each ambient unbounded category. Total tensor on K-flat
-   representatives fixes tensor, and ordinary chain evaluation fixes its counit.
-   These are precisely the TensorPresentation fields, including the Koszul sign.
-3. Apply derived coefficient extension/restriction adjunction and canonical
-   tensor pullback to the limit projection. The ordinary unit is x maps to
-   1 tensor x; the inverse tensor comparison multiplies the coefficient factors.
-   This gives the normalization of ReductionPresentation. Exact restriction is
-   conservative because it leaves the underlying cohomology sheaves unchanged.
-4. Adjunction and Yoneda identify restricted finite internal Hom with
-   H_B(K,U_n N). This uses arbitrary K, not a perfectness assumption.
-5. Represent K by a K-flat complex P and L by a K-injective complex I.
-   Tensor I with Q_n; it is K-injective by the split-perfect tensor lemma.
-   Both H_B(K,L) tensor Q_n and H_B(K,L tensor Q_n) therefore have the
-   Hom-complex models specified in the node's proof.
-6. The chain comparison sends f tensor q to
-   (x maps to (-1)^(degree(q)*degree(x)) f(x) tensor q). It is an isomorphism:
-   only two coefficient degrees interchange with the Hom products. The Hom
-   and total-tensor differentials give equal signs on all three terms.
-   This remains valid for unbounded P and is natural in Q_n and its unit.
-7. The coefficient adjunction identifies the restriction of the defined
-   comparison with that chain map. Conservativity proves invertibility in
-   D(B_n). Its definition as a transpose gives the evaluation equation;
-   naturality of tensor comparison gives the displayed equation for every
-   other transpose, by injectivity of the adjunction bijection.
-8. Apply H_B(K,-), an exact right adjoint, to the actual Roos triangle of L.
-   Right-adjoint preservation of products identifies all projections and hence
-   the endomorphism 1-s. The comparisons from steps 5-6 preserve the quotient
-   units and transitions. Transporting the triangle therefore gives the Roos
-   triangle of H_B(K,L), exactly IsDerivedComplete. K need not be complete. -/
+canonical evaluation and coefficient comparisons. The comparison itself is a defined
+transpose; the clauses assert its invertibility, its evaluation equation,
+and compatibility with every transpose. -/
 theorem integralHomReduction :
     ∃ a : IntegralHom.TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl),
       (∀ K L : completedIntegralDerivedCategory l E Y D hl,

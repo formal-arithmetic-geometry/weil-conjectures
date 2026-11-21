@@ -14,6 +14,13 @@ import WeilConjectures.SmoothPurity.Pur.PurNormalizedReconstructionAdjunctionCal
 import all WeilConjectures.Algebra.Homology.RingedTensorSquare.RingedExchangeTensorCoherence
 
 /-! # Intermediate assembly data for integral realization
+
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 07A7]
+* [Stacks, Tags 0F7B--0F7F]
 -/
 
 @[expose] public noncomputable section
@@ -91,28 +98,7 @@ private theorem properProjection_app (o : Operations l E) {X Y : Scheme.{u}}
   erw [Category.comp_id]
 
 /-- Simultaneous canonical operations, mate-pasting models and open reconstruction.
-This assertion contains no comparison of an arbitrary finite expression.
-Source: Stacks 0941, 03DI, 07A7 and 0F7B--0F7F; blueprint fix-prop-coherence,
-strict-system realization steps 1--2.
-
-Proof: construct total right-derived system image from its ordinary adjunction,
-using K-injective resolutions on the ringed sequence site. Descend exact system
-inverse image and open extension by zero. Evaluation of the inverse image is the
-specified quotient-tensor map; transposing it gives direct-image evaluation and
-its unit, counit and quotient-transition equations. Ordinary direct image on
-sections gives its compositor and the bridge to intrinsic semilinear systems.
-Transpose to obtain the pull and derived direct compositors. Transport the intrinsic
-proper/open lambda and its open adjunct along the bridge; uniqueness of adjuncts
-and semilinear mate pasting give all three recorded pasting equations. Apply the
-ringed exchange/tensor coherence theorem to the same tensor pullback square.
-The ordinary sectionwise limit/push comparison gives the realization model by
-adjunction conjugation and K-flat localization. For an arbitrary good M, invert
-the normalized reconstruction counit and use the open reduction mate followed
-by the inverse reconstruction unit at J(L M). Its normalization follows from
-unit naturality and the triangle identity. Finally use the ordinary completed
-ringed-site tensor and pullback models, and their exact open mates, for the
-ringed models and proper/open adjunct. All choices are fixed by their displayed
-section, localization and adjunction normalizations, including the empty open. -/
+This assertion contains no comparison of an arbitrary finite expression. -/
 theorem integralCanonicalAmbientModels :
     ∃ o : Operations l E, Nonempty (AmbientModels l E o) := by
   classical

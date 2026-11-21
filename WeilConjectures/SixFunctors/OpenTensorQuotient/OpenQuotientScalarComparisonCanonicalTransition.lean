@@ -11,7 +11,13 @@ import all WeilConjectures.Algebra.Homology.OrdinaryCommonQuotientTower.Ordinary
 import all WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenScalarTransitionCompatibility
 import all WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenFiniteScalarComparison
 
-/-! # Canonical level transition for the open scalar comparison -/
+/-! # Canonical level transition for the open scalar comparison
+
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -115,10 +121,7 @@ private theorem canonical_unit
     ((scalarReductionExtension_adjunction l E U n).choose.unit.app (Q.X i)) V a x
   exact ht.trans (hs.trans hm.symm)
 
-/-- The canonical finite-level comparison satisfies successor transition coherence.
-This is the generator calculation for the unrestricted quotient transition: on each
-sheafified pure tensor, both composites apply the same coefficient quotient and the
-same normalized extension section. Source: Stacks Tags 0E8I and 0941. -/
+/-- The canonical finite-level comparison satisfies successor transition coherence. -/
 theorem openQuotientScalarComparisonCanonicalTransition
     (o : IntegralOpenReduction.Operations l E j)
     (tc : IntegralOpenReduction.TensorComparison l E j o)

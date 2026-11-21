@@ -19,7 +19,7 @@ import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSection
 
 Let `(A, I)` be a henselian pair, `p : Y ⟶ Spec A` proper and `i : Y₀ ⟶ Y` the closed fibre
 over `Spec A/I`. For every sheaf of sets `F` on the small étale site of `Y`, restriction
-`Γ(Y, F) ⟶ Γ(Y₀, i^* F)` is bijective, naturally in `F` [Stacks 0A0C].
+`Γ(Y, F) ⟶ Γ(Y₀, i^* F)` is bijective, naturally in `F`.
 
 Global sections are the sections over the terminal étale schemes `Scheme.Etale.mk (𝟙 Y)` and
 `Scheme.Etale.mk (𝟙 Y₀)`, and `i^*` is the inverse image `Scheme.etaleSetPullback i` of
@@ -39,18 +39,17 @@ sheaves of sets.
 
 ## Implementation details
 
-The proof is Gabber's criterion `AlgebraicGeometry.gabber_h0_etale_criterion` [Stacks 09ZF]:
-it suffices that restriction to the closed fibre is bijective on global sections of Zariski
-sheaves of sets on `Y` and on every finite `Y`-scheme `Y'`. These follow from the spectral
-restriction lemma [Stacks 09ZG] (`AlgebraicGeometry.zariski_restriction_universe_transport`),
-since every irreducible closed subset of `Y'`, which is proper over `A`, meets the closed fibre
-in a nonempty connected set (`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`,
-[Stacks 0A0B]).
+The comparison is deduced from Gabber's criterion `AlgebraicGeometry.gabber_h0_etale_criterion`,
+which reduces it to Zariski sheaves of sets on finite `Y`-schemes; these are handled by
+`AlgebraicGeometry.zariski_restriction_universe_transport` and
+`AlgebraicGeometry.Scheme.Hom.isConnected_inter_preimage_zeroLocus`.
 
 ## References
 
 - Stacks Project, Lemma 59.91.2, <https://stacks.math.columbia.edu/tag/0A0C>
 - Stacks Project, Lemma 59.82.2, <https://stacks.math.columbia.edu/tag/09ZF>
+- [Stacks, Tag 09ZG]
+- [Stacks, Tag 0A0B]
 -/
 
 @[expose] public section

@@ -24,16 +24,15 @@ then cartesian
 
 A *Weil object* of `D(X_ét, Λ)` is an object `K` with an isomorphism `θ_K : Lg^* K ≅ K`; they
 form the category `IsoAlgebra (Lg^*)` (`CategoryTheory.Endofunctor.IsoAlgebra`), whose morphisms
-are the morphisms commuting with the `θ`'s. This file carries out the proof of
-`prose-10-20`: the operations carry canonical Weil structures, transported through
-the exchange isomorphisms of the Frobenius square, and the basic maps between them are
-equivariant.
+are the morphisms commuting with the `θ`'s. This file shows that the operations carry canonical
+Weil structures, transported through the exchange isomorphisms of the Frobenius square, and that
+the basic maps between them are equivariant.
 
 * **Pullback.** `Lf^*` is transported through `Lg^* Lf^* ≅ L(g ≫ f)^* = L(f ≫ h)^* ≅ Lf^* Lh^*`
   (`AlgebraicGeometry.Etale.weilUpperStar`).
 * **Direct image.** `Rf_*` is transported through `Ex_* : Lh^* Rf_* ⟶ Rf_* Lg^*`, which is an
-  isomorphism for an automorphism square: it is the mate of an isomorphism along the
-  equivalences `Lg^*` and `Lh^*` (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isIso`,
+  isomorphism for an automorphism square
+  (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMap_of_isIso`,
   `AlgebraicGeometry.Etale.weilLowerStar`).
 * **Compactly supported direct image.** `Rf_!` is transported through `Ex_!`, an isomorphism by
   compact-support base change (`AlgebraicGeometry.Etale.weilLowerShriek`).
@@ -43,8 +42,7 @@ equivariant.
 * **Adjunctions.** The units and counits of `Lf^* ⊣ Rf_*` and `Rf_! ⊣ Rf^!` are equivariant:
   both adjunctions lift to the Weil categories
   (`AlgebraicGeometry.Etale.weilUpperStarLowerStarAdjunction`,
-  `AlgebraicGeometry.Etale.weilLowerShriekUpperShriekAdjunction`). For `Lf^* ⊣ Rf_*` this is
-  the definition of `Ex_*` as a mate.
+  `AlgebraicGeometry.Etale.weilLowerShriekUpperShriekAdjunction`).
 
 ## Main definitions
 
@@ -84,8 +82,7 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 variable (Λ) in
 /-- **The direct-image exchange of an automorphism square is an isomorphism.** For a
 commutative square `g' ≫ f = f' ≫ g` whose horizontal maps `g` and `g'` are isomorphisms, the
-exchange `Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*` is an isomorphism: it is the mate of the isomorphism
-`Lf'^* Lg^* ≅ Lg'^* Lf^*` along the equivalences `Lg^*` and `Lg'^*`. -/
+exchange `Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*` is an isomorphism. -/
 theorem isIso_derivedBaseChangeMap_of_isIso (sq : CommSq g' f' f g) [IsIso g] [IsIso g'] :
     IsIso (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq) :=
   have : IsIso (TwoSquare.mk _ _ _ _
@@ -138,8 +135,8 @@ lemma map_rightDerivedUpperShriekBaseChangeMap_app_counit [HasCompactification f
   mateEquiv_counit _ _ _ M
 
 variable (Λ) in
-/-- The exceptional-inverse-image exchange `Ex^!` of an automorphism square is an isomorphism,
-being the mate of an isomorphism along the equivalences `Lg^*` and `Lg'^*`. -/
+/-- The exceptional-inverse-image exchange `Ex^!` of an automorphism square is an
+isomorphism. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isIso [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] (sq : IsPullback g' f' f g) [IsIso g]
     [IsIso g'] : IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
@@ -183,8 +180,8 @@ noncomputable def weilLowerStar (sq : CommSq g f f h) [IsIso g] [IsIso h] :
 
 variable (Λ) in
 /-- **The adjunction `Lf^* ⊣ Rf_*` is equivariant.** Its unit and counit are morphisms of Weil
-objects, so that it lifts to an adjunction between the Weil pullback and the Weil direct image:
-`Ex_*` is by definition the mate of `Lh^* Lf^* ≅ Lf^* Lg^*`. -/
+objects, so that it lifts to an adjunction between the Weil pullback and the Weil direct
+image. -/
 noncomputable def weilUpperStarLowerStarAdjunction (sq : CommSq g f f h) [IsIso g] [IsIso h] :
     weilUpperStar Λ sq ⊣ weilLowerStar Λ sq :=
   have := isIso_derivedBaseChangeMap_of_isIso Λ sq
@@ -225,7 +222,7 @@ noncomputable def weilUpperShriek [HasCompactification f] [QuasiCompact f]
 variable (Λ) in
 /-- **The adjunction `Rf_! ⊣ Rf^!` is equivariant.** Its unit and counit are morphisms of Weil
 objects, so that it lifts to an adjunction between the Weil compactly supported direct image
-and the Weil exceptional inverse image: `Ex^!` is by definition the mate of `Ex_!⁻¹`. -/
+and the Weil exceptional inverse image. -/
 noncomputable def weilLowerShriekUpperShriekAdjunction [HasCompactification f] [QuasiCompact f]
     (sq : IsPullback g f f h) [IsIso g] [IsIso h] :
     weilLowerShriek Λ sq ⊣ weilUpperShriek Λ sq :=
@@ -258,8 +255,7 @@ noncomputable def upperStarWeilDatum (sq : CommSq g a a h) {M : DerivedCategoryM
   (derivedSquareUpperStarIso _ sq).inv.app M ≫ (L((a)^*[ModuleCat.{u + 1} Λ])).map ψ
 
 /-- **The unit of `La^* ⊣ Ra_*` is equivariant**: for a Weil datum `ψ` on `M`, the unit
-`M ⟶ Ra_* La^* M` is a morphism of Weil objects. This is the unit form of the definition of
-`Ex_*` as a mate. -/
+`M ⟶ Ra_* La^* M` is a morphism of Weil objects. -/
 lemma isWeilMorphism_derivedUpperStarLowerStarAdjunction_unit (sq : CommSq g a a h)
     {M : DerivedCategoryModule Λ Y} (ψ : (L((h)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M) :
     IsWeilMorphism h ψ (lowerStarWeilDatum sq (upperStarWeilDatum sq ψ))
@@ -269,8 +265,7 @@ lemma isWeilMorphism_derivedUpperStarLowerStarAdjunction_unit (sq : CommSq g a a
     Adjunction.unit_naturality]
 
 /-- **The counit of `La^* ⊣ Ra_*` is equivariant**: for a Weil datum `φ` on `K`, the counit
-`La^* Ra_* K ⟶ K` is a morphism of Weil objects. This is the counit form of the definition of
-`Ex_*` as a mate. -/
+`La^* Ra_* K ⟶ K` is a morphism of Weil objects. -/
 lemma isWeilMorphism_derivedUpperStarLowerStarAdjunction_counit (sq : CommSq g a a h)
     {K : DerivedCategoryModule Λ X} (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
     IsWeilMorphism g (upperStarWeilDatum sq (lowerStarWeilDatum sq φ)) φ
@@ -297,7 +292,7 @@ noncomputable def upperShriekBaseChangeWeilDatum (sq : IsPullback g a a h)
   (rightDerivedUpperShriekBaseChangeMap Λ sq).app M ≫ (R(a)^![Λ]).map ψ
 
 /-- **The unit of `Ra_! ⊣ Ra^!` is equivariant**: for a Weil datum `φ` on `K`, the unit
-`K ⟶ Ra^! Ra_! K` is a morphism of Weil objects, `Ex^!` being the mate of `Ex_!⁻¹`. -/
+`K ⟶ Ra^! Ra_! K` is a morphism of Weil objects. -/
 lemma isWeilMorphism_rightDerivedUpperShriekAdjunction_unit (sq : IsPullback g a a h)
     {K : DerivedCategoryModule Λ X} (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
     IsWeilMorphism g φ (upperShriekBaseChangeWeilDatum sq (lowerShriekWeilDatum sq φ))
@@ -308,7 +303,7 @@ lemma isWeilMorphism_rightDerivedUpperShriekAdjunction_unit (sq : IsPullback g a
     Adjunction.unit_naturality]
 
 /-- **The counit of `Ra_! ⊣ Ra^!` is equivariant**: for a Weil datum `ψ` on `M`, the counit
-`Ra_! Ra^! M ⟶ M` is a morphism of Weil objects, `Ex^!` being the mate of `Ex_!⁻¹`. -/
+`Ra_! Ra^! M ⟶ M` is a morphism of Weil objects. -/
 lemma isWeilMorphism_rightDerivedUpperShriekAdjunction_counit (sq : IsPullback g a a h)
     {M : DerivedCategoryModule Λ Y} (ψ : (L((h)^*[ModuleCat.{u + 1} Λ])).obj M ⟶ M) :
     IsWeilMorphism h (lowerShriekWeilDatum sq (upperShriekBaseChangeWeilDatum sq ψ)) ψ

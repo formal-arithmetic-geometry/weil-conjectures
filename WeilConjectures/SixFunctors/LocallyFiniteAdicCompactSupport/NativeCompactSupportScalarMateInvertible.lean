@@ -10,7 +10,14 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeProperS
 import WeilConjectures.SmoothPurity.Sf.SfIntegralStandardTruncations
 import WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 
-/-! # Integral scalar-mate steps for native compact support -/
+/-! # Integral scalar-mate steps for native compact support
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
+* Hemo–Richarz–Scholbach, *Constructible sheaves on schemes*, Lemma 5.3(1)
+* [Stacks, Tag 0GL1]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -95,21 +102,7 @@ include D hl
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedSectionVars false in
-/-- Invertibility of the single completed-to-native compact-support scalar mate.
-Source: Bhatt--Scholze, Remark 6.8.15; Hemo--Richarz--Scholbach, Lemma 5.3(1);
-Stacks Tag 0GL1; steps 3 and 5--7 of the native finite comparison plan.
-
-Proof: the intrinsic standard-truncation theorem makes the underlying integral
-constructible object bounded. Exact open extension preserves its lower bound. Apply
-the bounded-below native proper scalar-mate theorem to this open extension.
-For the open factor, the ordinary inverse restriction/pullback square has invertible
-open-adjunction mate. Exact localization identifies its derived mate with the
-specified open restriction isomorphism. The iterated-mate/conjugation identity then
-identifies the scalar mate with the conjugate of an isomorphism between right
-adjoints, so it is invertible on every input. Finally the proved proper/open
-factorization identifies the compact-support comparison with the proper component
-followed by the direct image of this open component. Both factors are invertible.
-No completeness or Tor assertion about the open extension is needed. -/
+/-- Invertibility of the single completed-to-native compact-support scalar mate. -/
 theorem native_compact_support_scalar_mate_invertible [G : NativeGeometry.{u} l]
     (E : Index l (PadicAlgCl l))
     (a : PurCompactSupport.Change (PurCompactSupport.completed l

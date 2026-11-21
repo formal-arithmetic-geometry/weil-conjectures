@@ -13,7 +13,12 @@ import WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterAdjunction
 /-! # Target and comparison components of an integral reduction presentation
 
 This isolates the target tensor presentation and its derived comparison from the
-normalization field of `ReductionPresentation`..
+normalization field of `ReductionPresentation`.
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public section
@@ -33,16 +38,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   (Y : AlgebraicGeometry.Scheme.{t}) (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)
 
-/-- The finite-level target tensor presentation exists.
-
-Source: Stacks Tags 07A4 and 07A6; blueprint order 2478, proof step 3.
-Proof: obtain the generic closed symmetric monoidal structure, its tensor
-comparison, and its representative Koszul symmetry. The braided left-tensor
-adjunction is natural in its tensor parameter; its counit is the braiding followed
-by the native counit. The finite evaluation argument for exactly that counit gives
-the required sectionwise and derived evaluation equations. These are exactly the
-fields of `TensorPresentation`.
--/
+/-- The finite-level target tensor presentation exists. -/
 theorem reduction_target_exists
     (n : ℕ) :
     Nonempty (TensorPresentation.{t, u} Y

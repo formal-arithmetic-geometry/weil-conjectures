@@ -19,8 +19,13 @@ pullback `Lf^*` and the derived tensor product preserve the constructible finite
 `Dctf(X, A)`, together with the shifts of the Tor amplitude, and reduces the internal hom
 statements to the Verdier dual.
 
+## Implementation details
+
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
-documentation records the implementation notes.
+documentation records the implementation details. Stability of the Tor amplitude under `Lf^*`
+assumes that pullback preserves flat sheaves, which holds for every `f` under
+`AlgebraicGeometry.Etale.UpperStarPreservesFlat A` (for instance for `A = ModuleCat Λ`), and for
+every `A` when `f` is an open immersion or finite étale.
 -/
 
 @[expose] public section
@@ -62,10 +67,7 @@ lemma constructibleTorAmplitudeIn_of_iso {X : Scheme.{u}} {a b : ℤ}
 
 /-! ### The exceptional inverse image -/
 
-/-- For a finite étale `f`, the exceptional inverse image is the pullback, `Rf^! ≅ D(f^*)`:
-`f` is proper, so `Rf_! ≅ Rf_*`; `f_*` is exact, so `Rf_* ≅ D(f_*)`; and `D(f_*) ⊣ D(f^*)`,
-`f_*` being left adjoint to `f^*`
-(`AlgebraicGeometry.Etale.lowerStarUpperStarAdjunctionOfIsFinite`). -/
+/-- For a finite étale `f`, the exceptional inverse image is the pullback, `Rf^! ≅ D(f^*)`. -/
 noncomputable def rightDerivedUpperShriekIsoOfIsFiniteOfEtale {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsFinite f] [_root_.AlgebraicGeometry.Etale f] [HasCompactification f] :
     R(f)^![Λ] ≅ D((f)^*[ModuleCat.{u + 1} Λ]) :=
@@ -77,11 +79,7 @@ noncomputable def rightDerivedUpperShriekIsoOfIsFiniteOfEtale {X Y : Scheme.{u}}
 
 /-! ### Stability of `Dctf` under the six operations -/
 
-/-- Stability of the constructible finite-Tor
-subcategories.
-
-Clause (i), constructibility: the pullback of a bounded constructible complex is bounded
-constructible. -/
+/-- The pullback of a bounded constructible complex is bounded constructible. -/
 theorem boundedConstructible_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
     (hbc : boundedConstructible A Y K) :
@@ -91,16 +89,8 @@ theorem boundedConstructible_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ 
     (hbc.mapDerivedCategory_upperStar f)
 
 omit [HasSmallSiteSheafify A] in
-/-- Stability of the constructible finite-Tor
-subcategories.
-
-Clause (i), amplitude: `Lf^*` preserves the Tor amplitude interval unchanged, the pullback of
-a bounded flat model being a bounded flat model in the same degrees.
-
-The pullback is assumed to preserve flat sheaves, which holds for every `f` under
-`AlgebraicGeometry.Etale.UpperStarPreservesFlat A` (for instance for `A = ModuleCat Λ`), and for
-every `A` when `f` is an open immersion or finite étale. This is no restriction: the statement for
-`a = b = 0` and `K` a flat sheaf in degree `0` says exactly that `f^*` of a flat sheaf is flat. -/
+/-- `Lf^*` preserves the Tor amplitude interval unchanged, provided the pullback preserves flat
+sheaves. -/
 theorem torAmplitudeIn_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
     [(f)^*[A].PreservesFlat] (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
@@ -116,10 +106,7 @@ theorem torAmplitudeIn_leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
     (_root_.DerivedCategory.torAmplitudeIn_Q_obj_of_flat _ a b fun n ↦ ?_)
   exact Functor.PreservesFlat.flat_obj (F := (f)^*[A]) (hP n)
 
-/-- Stability of the constructible finite-Tor
-subcategories.
-
-Clause (i): `Lf^* : Dctf(Y, A) ⥤ Dctf(X, A)` is defined. -/
+/-- `Lf^*` maps `Dctf(Y, A)` into `Dctf(X, A)`. -/
 theorem constructibleFiniteTor_leftDerivedUpperStar [UpperStarPreservesFlat A] {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)}
@@ -129,12 +116,8 @@ theorem constructibleFiniteTor_leftDerivedUpperStar [UpperStarPreservesFlat A] {
   exact ⟨boundedConstructible_leftDerivedUpperStar A f hbc,
     a, b, torAmplitudeIn_leftDerivedUpperStar A f a b hta⟩
 
-/-- Preservation for the exceptional inverse
-image.
-
-Clause (i), finite étale case: for a finite étale `f`, `Rf^!` preserves the constructible
-interval and the Tor amplitude *unchanged*, `Rf^! ≅ D(f^*)` being exact and `f^*` preserving
-flat sheaves. -/
+/-- For a finite étale `f`, `Rf^!` preserves the constructible interval and the Tor amplitude
+unchanged. -/
 theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale
     {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [_root_.AlgebraicGeometry.Etale f]
     [HasCompactification f] (a b : ℤ)
@@ -151,12 +134,7 @@ theorem constructibleTorAmplitudeIn_rightDerivedUpperShriek_of_isFinite_of_etale
       (torAmplitudeIn_leftDerivedUpperStar _ f a b hta)
 
 omit [HasSmallSiteSheafify A] in
-/-- Stability of the constructible finite-Tor
-subcategories.
-
-Clause (ii), amplitude: Tor amplitudes add under the derived tensor product,
-`[a, b], [c, d] ↦ [a + c, b + d]`. This is blueprint `proposition-six-operations-dctf--14` (ii), Tor
-amplitude. -/
+/-- Tor amplitudes add under the derived tensor product: `[a, b], [c, d] ↦ [a + c, b + d]`. -/
 theorem torAmplitudeIn_tensor (X : Scheme.{u}) (a b c d : ℤ)
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hKt : torAmplitudeIn A X a b K) (hMt : torAmplitudeIn A X c d M) :
@@ -218,9 +196,7 @@ theorem constructibleHomology_derivedTensor [PreservesFiniteLimits (CategoryTheo
 
 omit [HasSmallSiteSheafify A] in
 /-- If `K` is dualizable of Tor amplitude in `[a, b]` and `M` has Tor amplitude in `[c, d]`,
-then `RHom(K, M) ≅ K^∨ ⊗ᴸ M` has Tor amplitude in `[c - b, d - a]`, the dual `K^∨` having Tor
-amplitude in `[-b, -a]`
-(`DerivedCategory.torAmplitudeIn_of_exactPairing`). -/
+then `RHom(K, M)` has Tor amplitude in `[c - b, d - a]`. -/
 theorem torAmplitudeIn_derivedHom_of_isDualizable_aux {X : Scheme.{u}} {a b c d : ℤ}
     {K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
     (hKt : torAmplitudeIn A X a b K) (hKd : IsDualizable K) (hMt : torAmplitudeIn A X c d M) :
@@ -246,10 +222,8 @@ variable {FC : A → A → Type*} {CC : A → Type (u + 1)}
   [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
 
 omit [HasSmallSiteSheafify A] in
-/-- **Restriction to an open commutes with the internal hom**, `j^* RHom(K, N) ≅
-RHom(j^* K, j^* N)`: the two sides are right adjoint to `G ↦ K ⊗ᴸ j_! G` and to
-`G ↦ j_!(j^* K ⊗ᴸ G)`, which agree by the projection formula for `j_!` (and the symmetry of the
-derived tensor product). -/
+/-- **Restriction to an open commutes with the internal hom**:
+`j^* RHom(K, N) ≅ RHom(j^* K, j^* N)`. -/
 theorem nonempty_iso_mapDerivedCategory_upperStar_derivedHom {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] [Etale.UpperStarPreservesFlat A]
     [X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
@@ -274,8 +248,7 @@ theorem nonempty_iso_mapDerivedCategory_upperStar_derivedHom {U X : Scheme.{u}} 
 
 end DerivedHomReductions
 
-/-- If `M` is reflexive for the Verdier dual, `RHom(K, M) ≅ 𝔻(𝔻M ⊗ᴸ K)`: currying
-`RHom(𝔻M ⊗ᴸ K, ω) ≅ RHom(K, RHom(𝔻M, ω))`. -/
+/-- If `M` is reflexive for the Verdier dual, `RHom(K, M) ≅ 𝔻(𝔻M ⊗ᴸ K)`. -/
 theorem nonempty_iso_derivedHom_verdierDual {X S : Scheme.{u}} (a : X ⟶ S)
     [HasCompactification a]
     (K M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))

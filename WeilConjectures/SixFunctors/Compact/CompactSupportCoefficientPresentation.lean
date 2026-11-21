@@ -11,7 +11,10 @@ public import WeilConjectures.AlgebraicGeometry.Sf.SfCompactSupportRestrictionOf
 
 /-! # Canonical types for finite coefficient restriction comparisons
 
-Source: the current blueprint finite-level coefficient comparison; Stacks Tag 03DA.
+## References
+
+* [Stacks, Tag 03DA]
+* [Stacks, Tag 03DI]
 -/
 
 @[expose] public noncomputable section
@@ -24,14 +27,12 @@ namespace WeilConjectures
 variable {A B C : Type u} [CommRing A] [CommRing B] [CommRing C]
   [Finite A] [Finite B] [Finite C]
 
-/-- Existing derived restriction with canonical constant-coefficient category types.
-Source: Stacks Tag 03DA. -/
+/-- Existing derived restriction with canonical constant-coefficient category types. -/
 def compactSupportCoefficientRestriction (W : Scheme.{u}) (φ : A →+* B) :
     proEtaleDerivedCategory W B ⥤ proEtaleDerivedCategory W A :=
   (proEtaleCoefficientRestrictScalars W φ).mapDerivedCategory
 
-/-- The specified identity restriction comparison, including a given ring-map equality.
-Source: Stacks Tag 03DA. -/
+/-- The specified identity restriction comparison, including a given ring-map equality. -/
 def compactSupportCoefficientResId (W : Scheme.{u}) (A : Type u)
     [CommRing A] [Finite A] (q : A →+* A) (hq : q = RingHom.id A) :
     compactSupportCoefficientRestriction W q ≅ 𝟭 _ :=
@@ -39,8 +40,7 @@ def compactSupportCoefficientResId (W : Scheme.{u}) (A : Type u)
     (fun q ↦ (proEtaleCoefficientRestrictScalars W q).mapDerivedCategory) hq) ≪≫
       sfOpenDerivedCoefficientRestrictionId W A
 
-/-- The specified composition comparison with its prescribed direct-map equality cast.
-Source: Stacks Tag 03DA. -/
+/-- The specified composition comparison with its prescribed direct-map equality cast. -/
 def compactSupportCoefficientResComp (W : Scheme.{u})
     (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (hχ : ψ.comp φ = χ) :
     compactSupportCoefficientRestriction W ψ ⋙
@@ -50,8 +50,7 @@ def compactSupportCoefficientResComp (W : Scheme.{u})
     eqToIso (congrArg
       (fun q ↦ (proEtaleCoefficientRestrictScalars W q).mapDerivedCategory) hχ)
 
-/-- The existing compact-support coefficient comparison in the same category types.
-Source: Stacks Tags 03DI and 03DA. -/
+/-- The existing compact-support coefficient comparison in the same category types. -/
 def compactSupportCoefficientComparison {X Y : Scheme.{u}} {f : X ⟶ Y}
     (c : Compactification f) (φ : A →+* B) :
     compactSupportCoefficientRestriction X φ ⋙ sfAmbientCompactSupportCandidate A c ≅

@@ -11,7 +11,10 @@ import WeilConjectures.Algebra.Homology.Module.ModuleHomSignedEvaluation
 
 /-! # Signed tensor-Hom evaluation at a point
 
-Source: Stacks Project, Tags 0A8X and 08J7.
+## References
+
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 08J7]
 -/
 
 @[expose] public noncomputable section

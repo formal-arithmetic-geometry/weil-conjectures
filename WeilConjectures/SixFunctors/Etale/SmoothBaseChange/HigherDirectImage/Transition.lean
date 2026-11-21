@@ -38,7 +38,7 @@ in the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit`.
 
 ## References
 
-- Stacks Project, Lemma 59.51.7, <https://stacks.math.columbia.edu/tag/09Z1>
+* [Stacks, Tag 09Z1]
 -/
 
 @[expose] public section
@@ -58,11 +58,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 Let `W ⟶ S` be a morphism of schemes, `G` a sheaf of `Λ`-modules on `W_ét`, and
 `T = lim T_i` a cofiltered limit of schemes over `W` with affine transition morphisms, all
 quasi-compact and quasi-separated over `S`. Then `colim_i R^q g_{i,*} (G|_{T_i}) ≅
-R^q g_* (G|_T)`, where `g_i : T_i ⟶ S` and `g : T ⟶ S` are the structure morphisms. The
-statement is recorded on every geometric stalk, in the form of the two defining properties of
-a filtered colimit of modules: every element at the limit comes from some stage, and an element
-of a stage dying at the limit already dies at a later stage. This is the case of the blueprint
-statement for a system of sheaves pulled back from a fixed scheme.
+R^q g_* (G|_T)`, stated on every geometric stalk: every element at the limit comes from some
+stage, and an element of a stage dying at the limit already dies at a later stage.
 -/
 @[stacks 09Z1]
 theorem Etale.higherDirectImage_limit {W S : Scheme.{u}} (k : W ⟶ S)

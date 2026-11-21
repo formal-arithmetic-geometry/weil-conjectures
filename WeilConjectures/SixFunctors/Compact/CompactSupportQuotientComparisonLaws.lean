@@ -11,7 +11,9 @@ import WeilConjectures.SixFunctors.Compact.CompactSupportFiniteCoefficientCocycl
 
 /-! # Normalized coefficient squares in canonical quotient types
 
-Source: the compact-support coefficient comparison, blueprint Step 5; Stacks Tag 03DA.
+## References
+
+* [Stacks, Tag 03DA]
 -/
 
 @[expose] public noncomputable section
@@ -25,10 +27,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
 
-/-- The normalized identity square with the actual equal-level quotient cast.
-Source: the identity coefficient normalization, Stacks Tag 03DA.
-Proof: specialize the finite identity normalization to the quotient coefficient ring
-and its equal-level factor. The canonical wrappers have the original maps as values. -/
+/-- The normalized identity square with the actual equal-level quotient cast. -/
 theorem compactSupportQuotientNativeComparison_id
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) (n : ℕ)
     (H : proEtaleDerivedCategory X (Padic.coefficientExtensionRing l E (n + 1))) :
@@ -44,10 +43,7 @@ theorem compactSupportQuotientNativeComparison_id
     (compactSupportLevelQuotient l E n n le_rfl)
     (compactSupportQuotient_self l E n) H
 
-/-- The normalized composition square with the actual three-level quotient cast.
-Source: the compact-support coefficient composition square, Stacks Tag 03DA.
-Proof: specialize the specified coefficient square to the two quotient maps and
-their direct composite. The quotient-factor equality is the required cast. -/
+/-- The normalized composition square with the actual three-level quotient cast. -/
 theorem compactSupportQuotientNativeComparison_comp
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]

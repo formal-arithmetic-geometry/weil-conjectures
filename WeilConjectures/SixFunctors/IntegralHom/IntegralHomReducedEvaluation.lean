@@ -12,6 +12,15 @@ import WeilConjectures.SixFunctors.IntegralHom.Scalar.IntegralHomScalarEvaluatio
 import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralReductionTwoTermResolution
 
 /-! # Completed-ring representatives of reduced evaluation
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 0A8X]
 -/
 
 @[expose] public section
@@ -49,27 +58,7 @@ attribute [local irreducible] totalTensor homComplexFunctor homModelMap
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The completed-ring reduction of evaluation is computed by signed chain evaluation.
 This holds for an arbitrary K-flat coefficient resolution, with no boundedness
-assumption on it. It contains no finite-coefficient internal Hom or comparison map.
-
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2,
-finite-free construction and compatibility with actual evaluation; Stacks 06YY,
-07A4, 07A6, 08J7, 08J9 and 0A8X.
-
-Proof: use the scalar tensor-resolution comparison and eI to obtain r.
-Choose the proved two-term free resolution of the restricted quotient. Its
-augmentation and epsilon give a derived isomorphism between Q and that
-resolution. The perfect-coefficient signed-action theorem shows that the
-composite of the localized f and homModelMap is invertible. Transport it by
-eP and r to an isomorphism t into Hom(K, U(F(L))). Independently, the scalar
-finite-coefficient argument shows that the completed-ring transpose g of the
-right-hand side is invertible. Set s = g followed by the inverse of t.
-Then s.hom followed by t is g, by inverse cancellation, and applying the inverse
-Hom-tensor adjunction gives the required equality. The statement only asks
-for the existence of s; it does not prescribe a canonical coefficient-model
-isomorphism. No additional naturality of the family a.adjunction in K is used.
-This reduces the theorem to separate scalar-model and invertibility assertions;
-these three assertions are the remaining named proof obligations. Zero complexes,
-the empty site, n=0 and a zero quotient require no nonvanishing premise. -/
+assumption on it. It contains no finite-coefficient internal Hom or comparison map. -/
 theorem reduced_evaluation_representative
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n)

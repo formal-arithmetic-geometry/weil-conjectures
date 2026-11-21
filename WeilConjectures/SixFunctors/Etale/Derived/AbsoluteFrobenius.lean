@@ -49,11 +49,9 @@ namespace Etale
 
 variable {p : ℕ} (hp : p.Prime) {X : Scheme.{u}} (hX : (p : Γ(X, ⊤)) = 0) (n : ℕ)
 
-/-- Étale analogue of blueprint `lemma-scheme-frobenius-geometric-frobenius--1` (stated there for
-the small pro-étale site), derived form: the absolute Frobenius acts as the
-identity on the derived étale topos. For a scheme `X` of characteristic `p`, the derived pullback
-`L(F_X)^*` along the absolute `p ^ n`-power Frobenius is isomorphic to the derived pullback
-`L(𝟙 X)^*` along the identity: it is the derived functor of
+/-- The absolute Frobenius acts as the identity on the derived étale topos. For a scheme `X` of
+characteristic `p`, the derived pullback `L(F_X)^*` along the absolute `p ^ n`-power Frobenius is
+isomorphic to the derived pullback `L(𝟙 X)^*` along the identity: it is the derived functor of
 `AlgebraicGeometry.Etale.upperStarIterateFrobeniusIso`. -/
 noncomputable def leftDerivedUpperStarIterateFrobeniusIso :
     L((X.iterateFrobenius hp hX n)^*[A]) ≅ L((𝟙 X)^*[A]) :=
@@ -70,8 +68,7 @@ L(F_X ≫ f)^* ≅ LF_Y^* ⋙ Lf^* ≅ L(𝟙 Y)^* ⋙ Lf^* ≅ Lf^*
 L(F_X ≫ f)^* ≅ Lf^* ⋙ LF_X^* ≅ Lf^* ⋙ L(𝟙 X)^* ≅ Lf^*
 ```
 agree. This is the derived form of
-`AlgebraicGeometry.Etale.upperStarIterateFrobeniusIso_naturality`, to which it reduces by
-the functoriality of the derived isomorphisms of exact functors. -/
+`AlgebraicGeometry.Etale.upperStarIterateFrobeniusIso_naturality`. -/
 theorem leftDerivedUpperStarIterateFrobeniusIso_naturality
     (hFf : X.iterateFrobenius hp hX n ≫ f = f ≫ Y.iterateFrobenius hp hY n) :
     leftDerivedUpperStarComp A f (Y.iterateFrobenius hp hY n) (X.iterateFrobenius hp hX n ≫ f)

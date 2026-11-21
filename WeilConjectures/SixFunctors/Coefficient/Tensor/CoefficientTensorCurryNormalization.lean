@@ -10,7 +10,11 @@ import WeilConjectures.Algebra.Homology.HomComplexComponents
 
 /-! # Derived normalization of componentwise tensor currying
 
-Source: Stacks Project, Tags 0A90, 0A95 and 08J7.
+## References
+
+* [Stacks, Tag 0A90]
+* [Stacks, Tag 0A95]
+* [Stacks, Tag 08J7]
 -/
 
 @[expose] public section
@@ -34,8 +38,7 @@ set_option quotPrecheck false in
 local notation "Mod" => SheafOfModules.{max c v u}
   ((sheafCompose J (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj R)
 
-/-- The augmentation into the K-injective replacement used by the recorded Hom.
-Source: Stacks 0A95. -/
+/-- The augmentation into the K-injective replacement used by the recorded Hom. -/
 noncomputable def coefficientHomAugmentation :
     𝟭 (CochainComplex Mod ℤ) ⟶ coefficientHomResolution.{u, c, v} J R :=
   letI :=
@@ -109,21 +112,7 @@ attribute [local irreducible] homComplexFunctor coefficientHomComponent
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
-/-- The representative uncurrying normalization also applies before replacing its target.
-Source: Stacks Project, Tags 0A90, 0A95 and 08J7.
-
-Proof: write eta for the fixed K-injective augmentation I to I(I). Postcompose
-f with eta and c with Hom(Q,eta). Functoriality of the Hom projections shows that
-their evaluation formula remains the same after applying eta. Apply
-CoefficientTensorModels.uncurry_model to this map into Hom(Q,I(I)), obtaining
-psi. Its section formula equals that of f followed by eta. To identify the two
-chain maps, test on each total tensor summand, use the sheafification adjunction,
-and then test the presheaf tensor map on pure tensors. Thus psi = f composed
-with eta. Substitute this into the derived normalization from uncurry_model.
-The image of eta under Q is invertible, and coefficientHomResolutionInverse is
-its inverse, so Q(eta) cancels. Precompose with the inverse representative tensor
-comparison. This is the asserted equality. The proof uses no injectivity of I,
-no boundedness and no termwise flatness beyond the two stated K-flat hypotheses. -/
+/-- The representative uncurrying normalization also applies before replacing its target. -/
 theorem coefficientTensorCurry_normalize
     (S : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, u, w} J R))
     (T : CoefficientTensorModels.{u, c, v, w} J R S)

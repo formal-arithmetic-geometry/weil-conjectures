@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralScalarBoundaryConditions
 
-/-! # The canonical two-arrow formula for the target integral boundary -/
+/-! # The canonical two-arrow formula for the target integral boundary
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -30,10 +35,7 @@ open ConstructibleExceptionalCoefficients
 variable (l : ℕ) [Fact l.Prime] {X Y : Scheme.{u}} {f : X ⟶ Y}
   (c : Compactification f)
 
-/-- The endpoint-recorded last two factors determine the target boundary arrow.
-Source: Bhatt--Scholze, Remark 6.8.15.
-Proof: unpack the two factors and their composite equation, then compose their
-endpoint-recorded comparisons with the canonical prescribed values. -/
+/-- The endpoint-recorded last two factors determine the target boundary arrow. -/
 theorem integralTargetBoundary_formula [G : NativeGeometry.{u} l]
     (source : Realization l X) (E : Index l (PadicAlgCl l))
     (K : finiteTorConstructibleIntegralCategory l (Coefficient.{u} l (PadicAlgCl l) E) X)

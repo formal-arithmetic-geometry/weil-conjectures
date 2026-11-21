@@ -18,6 +18,11 @@ left adjoint, and the pullback `j^*` by `Etale.preservesFiniteLimits_upperStar` 
 with its being a left adjoint. So each of them induces a functor on derived categories by
 applying it levelwise, and the two levelwise functors are again adjoint.
 
+Since `j_!` is fully faithful, the unit of the derived adjunction is an isomorphism:
+`Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit`.
+
+## Implementation details
+
 The adjunction is obtained where the derived formalism provides it, namely between the
 *total* derived functors: `Adjunction.derivedAdjunction` gives
 `(j_!).leftDerivedFunctor ⊣ (j^*).rightDerivedFunctor`, the left one computed by K-flat
@@ -33,9 +38,6 @@ of `WeilConjectures.CategoryTheory.DerivedCategory.Adjunction`.
 In particular the K-flat and K-injective machinery, and with it the coefficient
 hypotheses of the section `DerivedUpperStar`, are still needed even though the final
 statement mentions only levelwise functors.
-
-Since `j_!` is fully faithful, the unit of the derived adjunction is an isomorphism:
-`Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit`.
 -/
 
 @[expose] public section
@@ -63,10 +65,8 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
   [Abelian.HasFunctorialFlatResolution A]
 
 /-- The derived adjunction `j_! ⊣ j^*` along an open immersion `j : U ⟶ X` on the
-unbounded derived categories of étale sheaves: since both `j_!` and `j^*` are exact, their
-total derived functors are the levelwise functors, and the adjunction between the total
-left derived functor of `j_!` and the total right derived functor of `j^*` becomes an
-adjunction between the levelwise functors. -/
+unbounded derived categories of étale sheaves, between the levelwise functors induced by the
+exact functors `j_!` and `j^*`. -/
 noncomputable def Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction :
     D((j)_!open[A]) ⊣ D((j)^*[A]) :=
   (Etale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryAdjunction
@@ -80,9 +80,7 @@ instance Etale.isIso_derivedOpenImmersionLowerShriekUpperStarAdjunction_unit :
 /-- The bounded below version of
 `Etale.derivedOpenImmersionLowerShriekUpperStarAdjunction`: the derived adjunction
 `j_! ⊣ j^*` along an open immersion on the bounded below derived categories of étale
-sheaves, obtained by restricting the unbounded one along the fully faithful inclusions,
-which is legitimate since the exact functors `j_!` and `j^*` preserve bounded below
-objects. -/
+sheaves, restricted from the unbounded one along the fully faithful inclusions. -/
 noncomputable def Etale.derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus :
     D+((j)_!open[A]) ⊣ D+((j)^*[A]) :=
   (Etale.openImmersionLowerShriekUpperStarAdjunction A j).mapDerivedCategoryPlusAdjunction

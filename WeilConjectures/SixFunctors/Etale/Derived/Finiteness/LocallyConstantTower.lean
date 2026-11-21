@@ -18,8 +18,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 Finite locally constant étale sheaves of modules over a finite ring are closed under kernels,
 cokernels and extensions (`WeilConjectures.ConstructibleSheaf.KernelCokernel`). This file deduces
 the closure statement needed for a *uniform* stratification of the higher direct images of the
-torsion coefficients `𝒪_E ⧸ ℓⁿ` (step (6) of the comparison of `ℓ`-adic and torsion direct
-images, `WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`):
+torsion coefficients `𝒪_E ⧸ ℓⁿ`, used in the comparison of `ℓ`-adic and torsion direct images
+(`WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar`):
 
 - `CategoryTheory.ObjectProperty.prop_of_exact_five`: for a property closed under isomorphisms,
   kernels, cokernels and extensions, the middle term of a five-term exact sequence whose outer
@@ -44,8 +44,7 @@ variable {C : Type*} [Category* C] [Abelian C] (P : ObjectProperty C)
 /-- **The middle term of a five-term exact sequence.** Let `P` be a property of objects of an
 abelian category closed under isomorphisms, kernels, cokernels and extensions. For an exact
 sequence `C₀ ⟶ A ⟶ B ⟶ C ⟶ A₁` (exact at `A`, `B` and `C`) whose outer four terms satisfy
-`P`, the middle term `B` satisfies `P`: it is an extension of `ker(C ⟶ A₁)` by
-`coker(C₀ ⟶ A)`. -/
+`P`, the middle term `B` satisfies `P`. -/
 lemma prop_of_exact_five [P.IsClosedUnderIsomorphisms]
     (hker : ∀ {X Y : C} (φ : X ⟶ Y), P X → P Y → P (kernel φ))
     (hcoker : ∀ {X Y : C} (φ : X ⟶ Y), P X → P Y → P (cokernel φ))
@@ -100,10 +99,7 @@ instance : (flcProperty (Λ := Λ) Y).IsClosedUnderIsomorphisms where
 /-- **Finite local constancy of higher direct images in a short exact sequence.** Let `Λ` be a
 finite ring and `0 ⟶ F' ⟶ F ⟶ F'' ⟶ 0` a short exact sequence of étale sheaves of `Λ`-modules
 on `T`. If all the `Rⁱg_* F'` and `Rⁱg_* F''` are finite locally constant, so are all the
-`Rⁱg_* F`: by the long exact sequence, `Rⁱg_* F` is an extension of a kernel by a cokernel of
-morphisms between finite locally constant sheaves, which form a Serre-type subcategory
-(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel`, `.cokernel`,
-`.of_shortExact`). -/
+`Rⁱg_* F`. -/
 theorem flcProperty_rightDerived_lowerStar_X₂ (g : T ⟶ Y)
     {S : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hS : S.ShortExact)
     (h₁ : ∀ i, flcProperty Y (((Etale.lowerStar (ModuleCat.{u + 1} Λ) g).rightDerived i).obj S.X₁))

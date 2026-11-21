@@ -18,10 +18,11 @@ coefficients a finite discrete ring `T` in which the residual characteristic is 
 (`ProEtale.CondensedRing.isIso_pullbackExchange_app_of_isPullback_trait_finite`): for a change of
 strictly henselian traits the pullback exchange `α : Lf'^* Ψ_N B ⟶ Ψ_M (Lf^* B)` is invertible
 at every `B` whose restriction to the geometric generic fibre of `N` is bounded below of étale
-origin. It is `NearbyCyclesModel.traitChangeInvariance` after replacing the special fibre of `N`
-by its fibre over the residue field of the target trait, which does not change the base change
-morphism of `Rj_*` on the special fibre of `M`
-`NearbyCyclesModel.Hom.isIso_map_exchangeRight_app_of_isIso_pullbackExchange_toGenericWithSpecial`.
+origin.
+
+## References
+
+* SGA 4½, [Th. finitude], Proposition 3.7
 -/
 
 @[expose] public section

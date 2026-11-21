@@ -10,7 +10,13 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeIntegralBoundary.NativeIntegralBoundaryIsomorphisms
 
-/-! Natural boundary comparisons for the integral compact-support scalar morphism. -/
+/-! Natural boundary comparisons for the integral compact-support scalar morphism.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 6.7.6,
+  Proposition 6.8.14 and Remark 6.8.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -111,16 +117,7 @@ private theorem native_integral_target_boundary [G : NativeGeometry.{u} l]
   exact NativeIntegralBoundary.targetIntegral_hom_app l c source E L
 
 -- The component formulas compare cached presentations of the coefficient categories.
-/-- Construct the two natural boundary isomorphisms and their prescribed components.
-Source: Bhatt--Scholze, Definition 6.7.6, Proposition 6.8.14 and Remark 6.8.15.
-Proof: on the source boundary, compose the stage inclusion and rationalLeft
-comparisons, localization of the integral action, the target integral realization,
-and derived extension of inverse sfQcqsCompactSupportRealization. On the target
-boundary, compose compact support of the inverse source integral realization with
-inverse operationTransport. Evaluate on each integral finite-Tor object. The stage
-comparison gives the recorded rational arrow; the localization comparison has
-identity components. Functoriality of identities gives the first three arrows and
-the last two arrows, respectively. This construction contains no scalar mate. -/
+/-- Construct the two natural boundary isomorphisms and their prescribed components. -/
 theorem native_integral_scalar_boundaries [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c) (E : Index l (PadicAlgCl l)) :

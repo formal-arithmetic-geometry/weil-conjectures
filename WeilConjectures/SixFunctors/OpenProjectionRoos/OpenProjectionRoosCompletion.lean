@@ -10,7 +10,13 @@ import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionOrdinaryRoos
 import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionCompletedSquare
 import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRestrictionNormalization
 
-/-! # Assembly of the augmented open projection Roos completion -/
+/-! # Assembly of the augmented open projection Roos completion
+
+## References
+
+* [Stacks, Tag 09BP]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5 and 6.5.8, pp. 49–50
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -99,45 +105,7 @@ set_option backward.defeqAttrib.useBackward true
 set_option Elab.async false
 set_option linter.style.haveILetI false
 /-- The augmented open projection square has the specified Roos completion and actual
-completion-unit normalization, naturally on the integral constructible domain.
-
-Source: Stacks 09BP; Bhatt--Scholze 6.5.5, 6.5.8, pp.49--50; the open-factor paragraph
-of prop-sf-pf-coherence.
-
-Proof:
-1. Finite type over the field makes U and X Noetherian, hence qcqs. The structure
-map of X is quasi-separated, so the Nagata quasi-compactness lemma gives qc j.
-The prime l is invertible. No separatedness over k is required.
-2. Apply lem-pur-site-restriction-module-adjunction-exact and
-lem-cbc-ringed-open-extension-products to the completed ring. Countable products
-are exact by lem-weil-proetale-countable-products-exact. The normalized comparison
-lem-cbc-exact-product-functor-strict-limit gives extension, its two coordinate
-identities and preservation of every strict augmentation.
-3. Apply the Roos functor to the single strict isomorphism gamma of
-lem-sf-open-tensor-quotient-augmentation and compose with inverse lambda. Descend
-through the recorded completed-tensor comparisons. This gives gamma and naturality.
-4. The strict augmentation square is equal before localization. In signed Roos
-coordinates both routes have the same first component and zero second component.
-lem-weil-strict-roos-comparison and the augmentation clause of the exact-product
-comparison therefore give equality of the actual induced derived maps.
-5. The two augmentations are the actual chi maps by
-lem-fix-constructible-tensor-completion and def-sf-tensor-completion-comparison.
-Cancel lambda to obtain units, the displayed completion square.
-6. Open extension and restriction preserve integral constructibility by the quotient
-augmentation theorem. Apply constructible tensor completion to both pairs to get
-invertibleUnits, without any finite-Tor condition over the quotient rings.
-7. Restriction is exact and preserves the sectionwise products and quotient rings.
-The same exact-product comparison gives restriction and its augmentation clause.
-8. The canonical open units are invertible. At every finite level restriction of
-the ordinary tensor map is identity through those units. Consequently delta is
-the restriction comparison for the same strict quotient systems. On both Roos
-summands the restricted lambda is the product of the units, as follows after
-each product projection. The representative equations give restriction_identity.
-9. Inverting the two actual chi maps expresses gamma as their conjugate of the
-ordinary map. Its strict finite reductions are exactly z.gamma, with the given
-quotient transitions and augmentation square. Thus this supplies precisely the
-integral open tensor component requested in def-exchange-projection; it asserts
-none of that definition's independent proper or other coefficient-stage data. -/
+completion-unit normalization, naturally on the integral constructible domain. -/
 theorem openProjectionRoosCompletion (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     [U.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))]
     [LocallyOfFiniteType (U ↘ Spec (.of D.k))] [QuasiCompact (U ↘ Spec (.of D.k))]

@@ -12,7 +12,11 @@ import all WeilConjectures.CategoryTheory.Ringed.RingedDerivedClosedSymmetricMon
 
 /-! # Associativity of the normalized reduction tensor strength
 
-Source: Stacks 06YY, 07A4 and 0FPT; integral Hom reduction, paragraphs 1--2.
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0FPT]
 -/
 
 @[expose] public section
@@ -428,23 +432,7 @@ private theorem nativeReductionMonoidal
 -- Comparing the fixed localization models requires many definitional equalities.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- A native tensor comparison transports the normalized scalar tensor mate to
-an associative tensor strength. No invertibility of that mate is asserted here.
-
-Source: Stacks 06YY, 07A4 and 0FPT; integral Hom reduction, paragraphs 1--2.
-Proof: choose the unique tensor comparison whose pullback to the product of
-K-flat localization functors is a.representative inverse followed by the native
-comparison. On three K-flat complexes the normalization field of m identifies
-mu with the balanced scalar tensor map. Its associativity is tested on a local
-homogeneous generator ((x tensor y) tensor z): both routes insert the same scalar
-unit and multiply the two coefficient factors. Sheafification and coproduct
-summands detect equality. The native associator square identifies the localized
-chain reassociation with the derived associator. Transposing by the normalized
-scalar adjunction gives the displayed strength associativity. Resolve the
-restricted scalar extension in its occurrence as a tensor input, cancel the
-quasi-isomorphisms by K-flatness, and descend the equality through the product
-localization. Naturality then extends the equation to arbitrary derived inputs.
-All coefficient and site universes remain independent; zero rings and empty
-sites satisfy the same generator equations. -/
+an associative tensor strength. No invertibility of that mate is asserted here. -/
 theorem reductionTensorStrength_associativity
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n) :

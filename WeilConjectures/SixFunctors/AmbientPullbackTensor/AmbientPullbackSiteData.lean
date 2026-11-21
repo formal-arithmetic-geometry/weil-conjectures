@@ -37,12 +37,26 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Ambient constant-coefficient pullback and tensor coherence
 
-Source: Stacks Project, sites-modules.tex, Tags 03D3 and 03EL; sites.tex, Tag 03CB;
-sites-cohomology.tex, Tags 07A4 and 0G7E.
-
 `some n` denotes the positive finite exponent n+1; `none` denotes the entire
 semilinear system on the ringed sequence site. All system morphisms below live
 on that site, including their horizontal restriction maps.
+
+## References
+
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0G7E]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 09A5]
+* [Stacks, Tag 03D1]
+* [Stacks, Tag 05RU]
+* [Stacks, Tag 0H7J]
+* [Stacks, Tag 00VC]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 015F]
+* [Stacks, Tag 04VG]
 -/
 
 @[expose] public noncomputable section
@@ -59,28 +73,23 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open WeilConjectures.SemilinearSections
 namespace WeilConjectures.AmbientPullbackTensor
 
-/-- The actual finite or sequence site. Source: Stacks 0941 and 09A5. -/
+/-- The actual finite or sequence site. -/
 def Site (X : Scheme.{t}) : Option ℕ → Type (t + 1)
   | some _ => X.ProEt
   | none => ℕ × X.ProEt
 
-/-- The unchanged category structure of the chosen site. Source: Stacks 0941. -/
+/-- The unchanged category structure of the chosen site. -/
 instance siteCategory (X : Scheme.{t}) (s : Option ℕ) : Category.{t} (Site X s) :=
   match s with
   | some _ => inferInstanceAs (Category.{t} X.ProEt)
   | none => inferInstanceAs (Category.{t} (ℕ × X.ProEt))
 
-/-- Vertical covering topology, or the ordinary small pro-etale topology.
-Source: Stacks 0941 and 09A5. -/
+/-- Vertical covering topology, or the ordinary small pro-etale topology. -/
 def topology (X : Scheme.{t}) : (s : Option ℕ) → GrothendieckTopology (Site X s)
   | some _ => Scheme.ProEt.topology X
   | none => coefficientSequenceTopology (Scheme.ProEt.topology X)
 
-/-- The original small site is small relative to the coefficient universe.
-Source: Stacks 0941.
-Proof: the pro-etale site has object universe t+1 and Hom universe t. Its product
-with the countable poset has the same bound; take its small model and enlarge
-only the coefficient universe. -/
+/-- The original small site is small relative to the coefficient universe. -/
 @[instance] theorem siteSmall (X : Scheme.{t}) (s : Option ℕ) :
     EssentiallySmall.{max u (t + 1)} (Site X s) := by
   cases s <;> exact essentiallySmallSelf _
@@ -88,35 +97,28 @@ only the coefficient universe. -/
 variable (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[ell] E] [FiniteDimensional ℚ_[ell] E]
 
-/-- Precisely the recorded quotient ring sheaf or ringed sequence ring sheaf.
-Source: Stacks 0941. -/
+/-- Precisely the recorded quotient ring sheaf or ringed sequence ring sheaf. -/
 def coefficients (X : Scheme.{t}) :
     (s : Option ℕ) → Sheaf (topology X s) CommRingCat.{max u (t + 1)}
   | some n => integralCoefficientCommRingSheaf ell E X n
   | none => coefficientSequenceCommRingSheaf ell E X
 
-/-- Canonical module sheaves, with arbitrary semilinear horizontal restrictions.
-Source: Stacks 03D1 and 0941. -/
+/-- Canonical module sheaves, with arbitrary semilinear horizontal restrictions. -/
 abbrev Modules (X : Scheme.{t}) (s : Option ℕ) :=
   WeilConjectures.SemilinearSections.Mod.{t + 1, t, max u (t + 1)}
     (topology X s) (coefficients ell E X s)
 
-/-- Ordinary unbounded derived category; no completion or cartesian condition.
-Source: Stacks 05RU. -/
+/-- Ordinary unbounded derived category; no completion or cartesian condition. -/
 abbrev Derived (X : Scheme.{t}) (s : Option ℕ) :=
   WeilConjectures.SemilinearSections.D.{t + 1, t, max u (t + 1)}
     (topology X s) (coefficients ell E X s)
 
-/-- Base change acts simultaneously on the entire sequence site.
-Source: Stacks 03CB and 0941. -/
+/-- Base change acts simultaneously on the entire sequence site. -/
 def base {X Y : Scheme.{t}} (f : X ⟶ Y) : (s : Option ℕ) → Site Y s ⥤ Site X s
   | some _ => Scheme.proEtaleBaseChange f
   | none => (𝟭 ℕ).prod (Scheme.proEtaleBaseChange f)
 
-/-- Base change is continuous for vertical covers. Source: Stacks 03CB and 0941.
-Proof: pull back a vertical covering sieve at the same index, using continuity
-of pro-etale base change. This works also on horizontal arrows by stability
-of vertical covers under pullback. -/
+/-- Base change is continuous for vertical covers. -/
 @[instance] theorem baseContinuous {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     (base f s).IsContinuous (topology Y s) (topology X s) := by
   cases s with
@@ -126,8 +128,7 @@ of vertical covers under pullback. -/
     infer_instance
   | none => exact ProEtale.VaryingRing.baseChange_continuous f
 
-/-- The prescribed map on constant-ring sections, at each actual sequence index.
-Source: Stacks 0H7J and 0941. -/
+/-- The prescribed map on constant-ring sections, at each actual sequence index. -/
 def ringComponent {X Y : Scheme.{t}} (f : X ⟶ Y) : (s : Option ℕ) →
     ∀ U : (Site Y s)ᵒᵖ, (coefficients ell E Y s).obj.obj U ⟶
       (coefficients ell E X s).obj.obj ((base f s).op.obj U)
@@ -160,12 +161,7 @@ private theorem constantMap_naturality {X Y : Scheme.{t}} (f : X ⟶ Y)
     ((toSheafification (Scheme.ProEt.topology X) CommRingCat.{max u (t + 1)}).naturality
       ((Functor.const X.ProEtᵒᵖ).map a))
 
-/-- Constant-section maps commute with every vertical and horizontal restriction.
-Source: Stacks 0H7J, 03CB and 0941.
-Proof: vertical naturality is that of the sheafification extension. At a quotient
-transition, both composites send each constant coefficient to its reduced constant
-section. Sheafification uniqueness proves equality. Composite transitions follow
-by composition, with no assumption on a module transition. -/
+/-- Constant-section maps commute with every vertical and horizontal restriction. -/
 theorem ringComponent_naturality {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     {U V : (Site Y s)ᵒᵖ} (a : U ⟶ V) :
     (coefficients ell E Y s).obj.map a ≫ ringComponent ell E f s V =
@@ -210,8 +206,7 @@ theorem ringComponent_naturality {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option �
         (sheafToPresheaf (Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})))
     exact ε.naturality a
 
-/-- The constructed coefficient morphism on the ringed site, before any evaluation.
-Source: Stacks 03D3 and 0941. -/
+/-- The constructed coefficient morphism on the ringed site, before any evaluation. -/
 def ringUnit {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     coefficients ell E Y s ⟶
       ((base f s).sheafPushforwardContinuous CommRingCat (topology Y s)
@@ -219,17 +214,12 @@ def ringUnit {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
   ⟨{ app := ringComponent ell E f s
      naturality := fun {_ _} a ↦ ringComponent_naturality ell E f s a }⟩
 
-/-- Constant-ring direct image on the very same site.
-Source: Stacks 03CB. -/
+/-- Constant-ring direct image on the very same site. -/
 abbrev ringPush {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :=
   (base f s).sheafPushforwardContinuous CommRingCat.{max u (t + 1)}
     (topology Y s) (topology X s)
 
-/-- The ring-sheaf inverse-image adjunction exists without identifying universes.
-Source: Stacks 00VC and 03CB.
-Proof: use left Kan extension followed by sheafification on a coefficient-sized
-small model of the site, and transport the adjunction back to the original site.
-The product sequence site has the same size bound. -/
+/-- The ring-sheaf inverse-image adjunction exists without identifying universes. -/
 @[instance] theorem ringPushRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     (ringPush.{t, u} f s).IsRightAdjoint := by
   have : PreservesFilteredColimitsOfSize.{max u (t + 1), max u (t + 1)}
@@ -251,49 +241,40 @@ The product sequence site has the same size bound. -/
   unfold ringPush
   infer_instance
 
-/-- Canonical inverse image of ring sheaves, with its specified adjunction.
-Source: Stacks 03CB. -/
+/-- Canonical inverse image of ring sheaves, with its specified adjunction. -/
 abbrev ringPull {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :=
   (ringPush.{t, u} f s).leftAdjoint
 
-/-- The actual coefficient morphism c_f, the adjunct of constant sections.
-Source: Stacks 0H7J and 03D3. -/
+/-- The actual coefficient morphism c_f, the adjunct of constant sections. -/
 def ringMap {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     (ringPull.{t, u} f s).obj (coefficients ell E Y s) ⟶ coefficients ell E X s :=
   ((Adjunction.ofIsRightAdjoint (ringPush.{t, u} f s)).homEquiv _ _).symm
     (ringUnit ell E f s)
 
-/-- Underlying ring map for the recorded module-pushforward construction.
-Source: Stacks 03D1. -/
+/-- Underlying ring map for the recorded module-pushforward construction. -/
 def moduleRingUnit {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     ring (topology Y s) (coefficients ell E Y s) ⟶
       ((base f s).sheafPushforwardContinuous RingCat (topology Y s)
         (topology X s)).obj (ring (topology X s) (coefficients ell E X s)) :=
   ⟨Functor.whiskerRight (ringUnit ell E f s).hom (forget₂ CommRingCat RingCat)⟩
 
-/-- Actual sectionwise module direct image, with the canonical scalar action.
-Source: Stacks 03D1. -/
+/-- Actual sectionwise module direct image, with the canonical scalar action. -/
 def push {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     Modules ell E X s ⥤ Modules ell E Y s :=
   SheafOfModules.pushforward (moduleRingUnit ell E f s)
 
-/-- The ordinary adjoint exists on the same ringed site. Source: Stacks 03D7.
-Proof: apply module pullback existence in the coefficient universe containing
-both site universes, using free presentations followed by module sheafification.
-The unit is the usual insertion m ↦ m tensor 1. -/
+/-- The ordinary module direct image has a left adjoint on the same ringed site. -/
 @[instance] theorem pushRightAdjoint {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     (push ell E f s).IsRightAdjoint := by
   exact SheafOfModules.module_pushforward_isRightAdjoint_of_universes.{t + 1, t, u}
     (moduleRingUnit ell E f s)
 
-/-- The recorded module pullback construction applied to the actual ringed site.
-Source: Stacks 03D7. -/
+/-- The recorded module pullback construction applied to the actual ringed site. -/
 def pull {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     Modules ell E Y s ⥤ Modules ell E X s :=
   (push ell E f s).leftAdjoint
 
-/-- The specified insertion-normalized ordinary adjunction.
-Source: Stacks 03D3. -/
+/-- The specified insertion-normalized ordinary adjunction. -/
 def adjunction {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     pull ell E f s ⊣ push ell E f s :=
   Adjunction.ofIsRightAdjoint (push ell E f s)
@@ -416,10 +397,7 @@ private def sequencePullEvaluation {X Y : Scheme.{t}} (f : X ⟶ Y) (n : ℕ) :
 
 attribute [local irreducible] sequencePullEvaluation
 
-/-- Exactness on the entire system category. Source: Stacks 03D3 and 0941.
-Proof: constant coefficient inverse image is exact at every level. Kernels and
-sheafified cokernels of semilinear systems are componentwise, so the simultaneous
-ringed-site pullback is additive and exact without restrictions on transitions. -/
+/-- Exactness of module pullback on the entire system category. -/
 theorem pullExact {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     (pull ell E f s).Additive ∧ PreservesFiniteLimits (pull ell E f s) ∧
       PreservesFiniteColimits (pull ell E f s) := by
@@ -466,39 +444,35 @@ theorem pullExact {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
       exact preservesLimitsOfShape_of_natIso e.symm
     exact preservesFiniteLimits_of_reflects_of_preserves F T
 
-/-- Additivity of the actual module inverse image. Source: Stacks 03D3. -/
+/-- Additivity of the actual module inverse image. -/
 instance pullAdditive {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     (pull ell E f s).Additive := (pullExact ell E f s).1
 
-/-- Left exactness of the actual module inverse image. Source: Stacks 03D3. -/
+/-- Left exactness of the actual module inverse image. -/
 instance pullLimits {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     PreservesFiniteLimits (pull ell E f s) := (pullExact ell E f s).2.1
 
-/-- Right exactness of the actual module inverse image. Source: Stacks 03D3. -/
+/-- Right exactness of the actual module inverse image. -/
 instance pullColimits {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     PreservesFiniteColimits (pull ell E f s) := (pullExact ell E f s).2.2
 
-/-- Exact localization of the specified pullback on unbounded complexes.
-Source: Stacks 015F. -/
+/-- Exact localization of the specified pullback on unbounded complexes. -/
 abbrev derivedPull {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ) :
     Derived ell E Y s ⥤ Derived ell E X s := (pull ell E f s).mapDerivedCategory
 
-/-- Canonical fibre-product comparison on sites, retaining the sequence index.
-Source: Stacks 03CB. -/
+/-- Canonical fibre-product comparison on sites, retaining the sequence index. -/
 def baseComp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) :
     (s : Option ℕ) → base (f ≫ g) s ≅ base g s ⋙ base f s
   | some _ => MorphismProperty.Over.pullbackComp f g
   | none => NatIso.prod (Iso.refl (𝟭 ℕ)) (MorphismProperty.Over.pullbackComp f g)
 
-/-- Canonical direct-image composition for ring sheaves.
-Source: Stacks 03CB. -/
+/-- Canonical direct-image composition for ring sheaves. -/
 def ringPushComp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ) :
     ringPush.{t, u} f s ⋙ ringPush.{t, u} g s ≅ ringPush.{t, u} (f ≫ g) s :=
   Functor.sheafPushforwardContinuousComp' (eFG := (baseComp f g s).symm)
     CommRingCat.{max u (t + 1)} (topology Z s) (topology Y s) (topology X s)
 
-/-- The canonical inverse-image compositor alpha, as an adjunction mate.
-Source: Stacks 03CB. -/
+/-- The canonical inverse-image compositor alpha, as an adjunction mate. -/
 def ringComp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ) :
     ringPull.{t, u} (f ≫ g) s ≅ ringPull.{t, u} g s ⋙ ringPull.{t, u} f s :=
   (Adjunction.leftAdjointCompIso
@@ -572,13 +546,7 @@ private theorem sequenceRing_map_vertical (X : Scheme.{t}) (n : ℕ)
     (integralCoefficientCommRingSheaf ell E X n).obj.map a.op = _
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
-/-- The right-adjoint compositor is fixed by its fibre-product section formula.
-Source: Stacks 03CB and 03D3.
-Proof: the inverse baseComp comparison acts on sections by restriction. Its
-coefficient linearity follows by checking the constant-section maps on constants.
-For systems this includes all quotient restrictions by ringComponent_naturality.
-The inverse restriction gives the inverse natural map. Sectionwise equality gives
-uniqueness, including on the empty site. -/
+/-- The right-adjoint compositor is fixed by its fibre-product section formula. -/
 theorem pushComp_existsUnique {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (s : Option ℕ) :
     ∃! e : push ell E (f ≫ g) s ≅ push ell E f s ⋙ push ell E g s,
@@ -636,20 +604,18 @@ theorem pushComp_existsUnique {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z)
   ext m
   exact (he M U.unop m).trans (hd M U.unop m).symm
 
-/-- The canonical direct-image comparison, uniquely fixed on every section.
-Source: Stacks 03CB. -/
+/-- The canonical direct-image comparison, uniquely fixed on every section. -/
 def pushComp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ) :=
   (pushComp_existsUnique ell E f g s).exists.choose
 
-/-- Its mate under the specified composite adjunction is the module compositor.
-Source: Stacks 03D3. -/
+/-- Its mate under the specified composite adjunction is the module compositor. -/
 def comp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ) :
     pull ell E g s ⋙ pull ell E f s ≅ pull ell E (f ≫ g) s :=
   Adjunction.leftAdjointCompIso (adjunction ell E g s) (adjunction ell E f s)
     (adjunction ell E (f ≫ g) s) (pushComp ell E f g s).symm
 
-/-- The identity direct-image comparison, uniquely fixed as restriction by base-change identity.
-Source: Stacks 03CB. -/
+/-- The identity direct-image comparison, uniquely fixed as restriction by base-change
+identity. -/
 def baseId (X : Scheme.{t}) : (s : Option ℕ) → base (𝟙 X) s ≅ 𝟭 (Site X s)
   | some _ => MorphismProperty.Over.pullbackId (@WeaklyEtale) ⊤ X
   | none => NatIso.prod (Iso.refl (𝟭 ℕ)) (MorphismProperty.Over.pullbackId (@WeaklyEtale) ⊤ X)
@@ -684,10 +650,7 @@ private theorem constantMap_id (X : Scheme.{t}) (A : CommRingCat.{max u (t + 1)}
     exact hn.symm.trans (Category.id_comp _)
   exact congrArg (fun z ↦ z.hom.app U) h
 
-/-- The direct image identity is fixed sectionwise. Source: Stacks 03CB and 03D3.
-Proof: restriction along baseId.inv is linear because the constant ring map on
-an identity sends constants to themselves. It commutes with all restrictions.
-The inverse restriction proves invertibility and uniqueness is sectionwise. -/
+/-- The direct image identity is fixed sectionwise. -/
 theorem pushId_existsUnique (X : Scheme.{t}) (s : Option ℕ) :
     ∃! e : push ell E (𝟙 X) s ≅ 𝟭 (Modules ell E X s),
       ∀ (M : Modules ell E X s) (U : Site X s)
@@ -728,27 +691,25 @@ theorem pushId_existsUnique (X : Scheme.{t}) (s : Option ℕ) :
   ext m
   exact (he M U.unop m).trans (hd M U.unop m).symm
 
-/-- The section-normalized identity direct image. Source: Stacks 03CB. -/
+/-- The section-normalized identity direct image. -/
 def pushId (X : Scheme.{t}) (s : Option ℕ) := (pushId_existsUnique ell E X s).exists.choose
 
-/-- The action unitor as the adjunction mate of the specified identity comparison.
-Source: Stacks 03D3. -/
+/-- The action unitor as the adjunction mate of the specified identity comparison. -/
 def identity (X : Scheme.{t}) (s : Option ℕ) :
     pull ell E (𝟙 X) s ≅ 𝟭 (Modules ell E X s) :=
   Adjunction.leftAdjointIdIso (adjunction ell E (𝟙 X) s) (pushId ell E X s)
 
-/-- The exact-localization compositor. Source: Stacks 015F and 04VG. -/
+/-- The exact-localization compositor. -/
 def derivedComp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ) :
     derivedPull ell E g s ⋙ derivedPull ell E f s ≅ derivedPull ell E (f ≫ g) s :=
   Functor.mapDerivedCategoryCompNatIso (comp ell E f g s)
 
-/-- The exact-localization identity comparison. Source: Stacks 015F and 04VG. -/
+/-- The exact-localization identity comparison. -/
 def derivedIdentity (X : Scheme.{t}) (s : Option ℕ) :
     derivedPull ell E (𝟙 X) s ≅ 𝟭 (Derived ell E X s) :=
   Functor.mapDerivedCategoryNatIso (identity ell E X s) ≪≫ Functor.mapDerivedCategoryIdIso _
 
-/-- A local inverse-image/tensor generator, using the specified adjunction unit.
-Source: Stacks 03D3. -/
+/-- A local inverse-image/tensor generator, using the specified adjunction unit. -/
 def generator {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (M : Modules ell E Y s) (U : Site Y s) (V : Site X s)
     (a : V ⟶ (base f s).obj U) (m : M.val.obj (op U))
@@ -758,8 +719,7 @@ def generator {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (((pull ell E f s).obj M).val.map a.op
       (((adjunction ell E f s).unit.app M).val.app (op U) m))
 
-/-- The image c_f(a) of a local scalar in inverse-image coordinates.
-Source: Stacks 03D3. -/
+/-- The image c_f(a) of a local scalar in inverse-image coordinates. -/
 def scalar {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (U : Site Y s) (V : Site X s) (a : V ⟶ (base f s).obj U)
     (r : (coefficients ell E Y s).obj.obj (op U)) :

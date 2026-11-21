@@ -30,8 +30,10 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # K-injective targets and a two-term free tensor factor
 
-Source: Stacks Project, Tags 08J7 and 070G; the first paragraph of
-`lem-coef-integral-hom-reduction.proof.md`.
+## References
+
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 070G]
 -/
 
 @[expose] public section
@@ -44,19 +46,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.IntegralHom
 
 /-- Tensoring a K-injective complex by a principal two-term free complex preserves
-K-injectivity.
-
-Source: Stacks Project, Tags 08J7 and 070G; the finite-free construction in paragraph 1
-of `lem-coef-integral-hom-reduction.proof.md`.
-
-Proof: total tensor with the cone [R --a^(n+1)--> R] is canonically the cone of
-multiplication by a^(n+1) on I. To check K-injectivity, apply the complex of abelian
-groups of maps from an arbitrary acyclic complex. This takes the finite cone to the
-cone of the induced endomorphism of the mapping complex. Both copies of that mapping
-complex are acyclic by K-injectivity of I, so their cone is acyclic. The total-tensor
-identification uses the unit constraints and the usual signed cone differential.
-No regularity of a, boundedness of I, or flatness of its terms is needed. For a=0
-this is the direct sum I[1] ⊕ I, and the same argument applies to zero inputs. -/
+K-injectivity. -/
 theorem isKInjective_tensor_principalKoszul
     (Y : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})

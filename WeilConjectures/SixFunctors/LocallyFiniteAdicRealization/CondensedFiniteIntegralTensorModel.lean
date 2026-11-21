@@ -20,9 +20,13 @@ import WeilConjectures.AlgebraicGeometry.Condensed.CondensedFlatCoefficientCalcu
 
 /-! # An integral tensor presentation of a finite condensed model
 
-Source: Bhatt--Scholze, Proposition 6.8.14(2), with Lemma 6.8.2.
 Only one finite condensed coefficient model is considered here; no object descent
 from the algebraic closure or normalized functor is part of this assertion.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2, Lemma 6.8.13 and
+  Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section
@@ -394,29 +398,6 @@ set_option synthInstance.maxSize 4096
 
 /-- A constructible complex over a finite condensed coefficient field has an integral
 model whose tensor extension is its native section-module presentation.
-
-Source: Bhatt--Scholze, Proposition 6.8.14(2), Lemma 6.8.13 and Lemma 6.8.2.
-
-Proof in words: use the canonical size transport on the given finite subextension E of
-PadicAlgCl; this is the same index E, with coefficient type Shrink E. Internal-module and
-section-module equivalences, together with the continuous-field local-freeness theorem,
-identify its bounded constructible category with the continuous rational coefficient
-category. Apply finite-field continuous rational derived realization, which is essentially
-surjective by the integral-lattice construction and finite Postnikov induction of
-Proposition 6.8.14(2). The raw rationalization has unchanged objects, so its preimage is an
-actual integral constructible complex L. The integral identity comparison transports L to
-sfIntegralConstructibleCategory. Its integral tensor formula and the normalized coefficient
-presentation identify its extension with the finite condensed realization. Compose with
-flat extension to PadicAlgCl. The balanced tensor associator identifies that composite with
-extension along C.integralMap: the associator sends b tensor (a tensor m) to ba tensor m.
-Finite residue maps determine the integral coefficient map by the inverse-limit property;
-the pointwise normalization determines its rational inclusion. Hence these are the given
-maps of C, rather than arbitrarily chosen ring identifications.
-The specified coefficient isomorphism in NativeEncoding and
-the exact section-module equivalence identify the other side with the displayed inverse
-encoding followed by sections. Thus the tensor associator gives the asserted isomorphism.
-This uses a finite-field model as input; descent of an arbitrary algebraic-closure object
-is separate. Zero complexes and the empty scheme use zero integral representatives.
 -/
 theorem condensedFinite_integralTensor_model
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]

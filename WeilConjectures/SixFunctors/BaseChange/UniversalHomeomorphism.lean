@@ -29,13 +29,10 @@ is the derived base change map `g^* Rf_* ⟶ Rf'_* g'^*` on the bounded below de
 (`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_isUniversalHomeomorphism`), with no
 hypothesis on `f`.
 
+## Implementation details
+
 Both `g^*` and `g'^*` are equivalences of categories of étale sheaves (topological invariance of
-the étale site, `AlgebraicGeometry.Etale.isEquivalence_upperStar`). The adjoint of the base
-change map under `g^* ⊣ g_*` is `f_* ⟶ f_* g'_* g'^* ≅ g_* f'_* g'^*`
-(`AlgebraicGeometry.Etale.unit_map_baseChangeMap_app`), whose first arrow is `f_*` of the unit
-of `g'^* ⊣ g'_*`, an isomorphism. For the derived statement represent an object by a bounded
-below complex `I` of injective sheaves: its pullback `g'^* I` is again a complex of injective
-sheaves, as `g'^*` is an equivalence, so the derived base change map at `I` is the underived one.
+the étale site, `AlgebraicGeometry.Etale.isEquivalence_upperStar`).
 -/
 
 @[expose] public section

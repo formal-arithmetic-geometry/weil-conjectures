@@ -13,7 +13,15 @@ import all WeilConjectures.AlgebraicGeometry.Constant.ConstantOpenRestrictionMod
 import all WeilConjectures.AlgebraicGeometry.VaryingRing.VaryingRingOperations
 import all WeilConjectures.AlgebraicGeometry.ProEtale.ProEtaleOperationsSupplement
 
-/-! # Ordinary coefficient transport for the open factor -/
+/-! # Ordinary coefficient transport for the open factor
+
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 098K]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -237,23 +245,7 @@ private def restrictionToSlice (o : IntegralOpenReduction.Operations l E j) :
     Functor.isoWhiskerRight e T ≪≫ ecomp ≪≫ econgr.symm
 
 set_option linter.unusedVariables false in
-/-- The normalized slice operations and the published ordinary open operations agree.
-Source: Stacks 03DI, 03DJ, 098K, 0941; blueprint proposition-composition-base-change-rf-shriek--1,
-open factor.
-
-Proof: the finite coefficient maps in o are determined by their constant-section
-formulas: sheafification of the constant presheaf is left adjoint to inclusion.
-They are therefore the canonical slice coefficient maps. Compose o.projections with
-each finite quotient. Joint monicity of the projections of the completed coefficient
-limit then identifies o.completedMap with the canonical completed slice map. The
-formula o.integralFunctor now identifies its functor with the concrete pushforward
-along the slice-to-open site equivalence. The published ringed restriction, after
-this equivalence, is ordinary slice restriction; the coefficient identification is
-the same one just proved. This gives the restriction comparison. Both extension
-functors are left adjoint to this restriction, so uniqueness of left adjoints gives
-the extension comparison. These are isomorphisms before applying complexes or localization.
-All constructions remain valid for empty and identity opens, and use no boundedness
-or completeness assumption. -/
+/-- The normalized slice operations and the published ordinary open operations agree. -/
 theorem openFactorOrdinaryTransport
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (o : IntegralOpenReduction.Operations l E j) :

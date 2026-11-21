@@ -15,11 +15,15 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortE
 
 /-! # Strict quotient-system presentations of coefficient reduction
 
-Source: Stacks 06YY, 07A6 and 0941.
-
 For a reduction functor with its normalized adjunction to the total limit, the ordinary
 quotient system of a flat-term K-flat complex is a strict tensor presentation: its
 finite evaluations, horizontal maps and whole-system unit are the prescribed ones.
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -49,8 +53,7 @@ private theorem constantLimitUnit_eq
     Functor.mapHomotopyCategoryFactors]
 
 /-- The ordinary quotient system of a flat-term K-flat complex is a strict tensor
-presentation of any reduction functor which is normalized by the unit projection.
-Source: Stacks 06YY, 07A6 and 0941. -/
+presentation of any reduction functor which is normalized by the unit projection. -/
 theorem strictReductionTensorPresentation (M : OrdinaryModel l E W)
     (L : DerivedCategory (scalarReductionSource l E W) ⥤ coefficientSequenceDerived l E W)
     (adj : L ⊣ coefficientSequenceLimit l E W)

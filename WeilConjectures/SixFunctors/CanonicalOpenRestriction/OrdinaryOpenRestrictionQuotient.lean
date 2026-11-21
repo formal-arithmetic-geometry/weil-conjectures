@@ -14,7 +14,11 @@ import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 
 /-! # Ordinary quotient restriction
 
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I; Tag 0941.
+## References
+
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -62,21 +66,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   (o : Operations l E j)
 
 -- Reconcile the concrete coefficient categories without unfolding chosen scalar functors.
-/-- Ordinary strict quotient restriction and its finite adjunction normalization.
-Source: Stacks, Modules on Sites, Tags 03DJ and 0E8I; Cohomology on Sites, Tag 0941.
-
-Proof: the normalized extension tensor comparison has compatible finite components
-by openScalarTransitionCompatibility. Assemble them, using the model evaluations,
-into a natural isomorphism of strict systems. Take the right mate of its inverse
-under the ordinary integral and system open adjunctions. This is already a map of
-strict systems, so no separate transition compatibility has to be imposed on it.
-The evaluated system counit and naturality identify its finite evaluation with
-the right mate of inverse tensor.ordinary, retaining every coefficient-equivalence
-unit and counit. Each of those finite mates is invertible by the finite slice tensor
-comparison. Joint faithfulness of the ordinary evaluations then detects invertibility
-of the system map. The finite mate's component formula is exactly the displayed
-unit/inverse-tensor/counit word. No equality of derived maps is detected by evaluation.
-The argument includes zero modules, level zero and the empty open. -/
+/-- Ordinary strict quotient restriction and its finite adjunction normalization. -/
 theorem ordinaryRestrictionQuotient
     (tensor : TensorComparison l E j o)
     (MX : CompletionUnit.OrdinaryModel l E X)

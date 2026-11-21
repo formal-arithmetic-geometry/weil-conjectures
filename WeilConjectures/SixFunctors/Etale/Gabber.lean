@@ -29,25 +29,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyFilteredColimit
 
 Let `(A, I)` be a henselian pair (`HenselianRing A I`), `T = Spec A` and `T₀ = Spec (A ⧸ I)`
 with its closed immersion `i : T₀ ⟶ T`. For every torsion étale sheaf `F` on `T` the
-restriction `Hᵠ(T, F) ⟶ Hᵠ(T₀, F|_{T₀})` is bijective for every `q` [Stacks 09ZI].
+restriction `Hᵠ(T, F) ⟶ Hᵠ(T₀, F|_{T₀})` is bijective for every `q`.
 
 The coefficient sheaves are sheaves of `Λ`-modules with torsion geometric stalks
 (`AlgebraicGeometry.Scheme.IsTorsionModuleSheaf`), and `Hᵠ` is the cohomology of the underlying
 abelian sheaf, the restriction map being `AlgebraicGeometry.Etale.cohomologyMap i`.
-
-The proof is by induction on `q`. The degree-zero case is the henselian restriction lemma
-(`AlgebraicGeometry.Etale.bijective_cohomologyMap_zero_of_henselianRing`). In positive degree
-classes are effaced by monomorphisms into torsion sheaves
-(`AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing`), and a diagram chase in
-the long exact cohomology sequences of `0 ⟶ F ⟶ F' ⟶ F'/F ⟶ 0` on `T` and on `T₀` concludes.
-The effacement proof first represents a class by bounded module coefficients using filtered
-colimits. Bounded abelian surjectivity lifts that class to the affine scheme. An injective
-presentation of the bounded module sheaf factors through the kernel of multiplication by
-its annihilating integer; this kernel is torsion and has acyclic underlying abelian
-cohomology. Pushing out this monomorphism along the map to `F` kills the original class.
-The bounded surjectivity remains a separate theorem item; annihilator acyclicity is proved.
-The former follows the finite-coefficient 09ZE/09ZI argument independently of this module.
-The false arbitrary-constructible finite-cover statement has been retired.
 
 ## Main statements
 
@@ -57,6 +43,23 @@ The false arbitrary-constructible finite-cover statement has been retired.
   from a constructible sheaf mapping to `F`.
 - `AlgebraicGeometry.Etale.exists_mono_map_eq_zero_of_henselianRing`: effacement.
 - `AlgebraicGeometry.Etale.bijective_cohomologyMap_of_henselianRing`: Gabber's theorem.
+
+## Implementation details
+
+The proof is by induction on `q`, effacing classes of positive degree by monomorphisms into
+torsion sheaves. The morphism from a constructible sheaf in
+`AlgebraicGeometry.Etale.exists_isConstructibleSheaf_hom_of_henselianRing` cannot in general be
+chosen injective (e.g. for `A = ∏_ℕ 𝔽₂` and a skyscraper sheaf at a non-open closed point).
+Only the pair form of Gabber's theorem is stated: the relative version for affine schemes of
+finite type over `A` is false (Artin–Schreier covers of `𝔸¹_{k⟦t⟧}`).
+
+## References
+
+* [Stacks, Tag 03Q5]
+* [Stacks, Tag 03SA]
+* [Stacks, Tag 09ZE]
+* [Stacks, Tag 09ZH]
+* [Stacks, Tag 09ZI]
 -/
 
 @[expose] public section
@@ -132,10 +135,7 @@ lemma shortExact_map_forget₂ {X : Scheme.{u}}
   exact hS.map_of_exact U
 
 /-- **Henselian restriction in degree zero**: for a henselian pair `(A, I)` and any abelian
-sheaf `G` on `Spec A`, restriction `Γ(Spec A, G) ⟶ Γ(Spec (A ⧸ I), G|)` is bijective
-[Stacks 09ZH]. This is the affine case of the blueprint lemma
-`theorem-comparison-over-henselian-pair-degree--1` (subsection
-`theorem-pbc-injective-acyclicity`). -/
+sheaf `G` on `Spec A`, restriction `Γ(Spec A, G) ⟶ Γ(Spec (A ⧸ I), G|)` is bijective. -/
 theorem bijective_cohomologyMap_zero_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A)
     [HenselianRing A I] (G : Sheaf (Spec (.of A)).smallEtaleTopology AddCommGrpCat.{u + 1}) :
     Function.Bijective
@@ -149,13 +149,7 @@ end Auxiliary
 /-- **Finite-stage killing of a class.** Let `(Dⱼ)` be a cofiltered system of
 quasi-compact quasi-separated schemes over `S` with affine transition maps and limit `X`. If
 the pullback of a class `x ∈ Hᵠ(S, G)` to `X` vanishes, then its pullback to some `Dⱼ`
-vanishes, by the continuity `colimⱼ Hᵠ(Dⱼ, G|) ≅ Hᵠ(X, G|)` of étale cohomology.
-
-The blueprint applies this to the closed fibres `(T_λ)₀` of a system of finite finitely
-presented covers `T_λ ⟶ T` of an affine henselian pair `(T, T₀)` whose limit is an integral
-strictly local cover, and a torsion sheaf; neither the special shape of the system nor the
-torsion hypothesis is used, so they are not assumed here.
--/
+vanishes. -/
 theorem exists_cohomologyMap_eq_zero_of_isLimit {J : Type u} [SmallCategory J] [IsCofiltered J]
     {S : Scheme.{u}} (D : J ⥤ Scheme.{u}) (π : D ⟶ (Functor.const J).obj S)
     [∀ j, CompactSpace (D.obj j)] [∀ j, QuasiSeparatedSpace (D.obj j)]
@@ -181,25 +175,8 @@ theorem exists_cohomologyMap_eq_zero_of_isLimit {J : Type u} [SmallCategory J] [
 
 /-- **Constructible approximation of a class.** Let `(A, I)` be a henselian pair, `Λ` finite
 and `F` a sheaf of `Λ`-modules on `Spec A`. Every class `c ∈ Hᵠ(Spec (A ⧸ I), F|)` comes from
-a constructible sheaf mapping to `F`, as in the first step of the proof of Gabber's affine
-effacement [Stacks 09ZE]: there are a morphism `ι : C ⟶ F` with `C` constructible and a class
-`c'` on the closed fibre with coefficients in `C|` mapping to `c`.
-
-The morphism `ι` cannot be required to be a monomorphism: for `A = ∏_ℕ 𝔽₂`, `I = 0`,
-`F = x_* ℤ/2` the skyscraper sheaf at a closed non-open point `x` (a non-principal
-ultrafilter), `q = 0` and `c = 1`, the only subsheaf of `F` containing `1` is `F` itself, whose
-support `{x}` is not constructible. In the Noetherian case, where `F` is the union of its
-constructible subsheaves, `ι` can be taken injective. In general the statement follows from
-writing `F` as a filtered colimit of constructible sheaves [Stacks 03SA] and from the
-commutation of the cohomology of the quasi-compact quasi-separated closed fibre with filtered
-colimits [Stacks 03Q5].
-
-The blueprint phrases this with a quasi-compact étale neighbourhood `U ⟶ T` and a cocycle
-with values in `C`; since `T` is affine one can take `U = T`, and "the cocycle factors" is
-expressed on cohomology classes. Finiteness of `Λ` makes `F` torsion and guarantees that the
-sheaf generated by finitely many sections has finite stalks (for an infinite `Λ` such as
-`𝐅_p[t]` this fails).
--/
+a constructible sheaf mapping to `F`: there are a morphism `ι : C ⟶ F` with `C`
+constructible and a class `c'` on the closed fibre with coefficients in `C|` mapping to `c`. -/
 theorem exists_isConstructibleSheaf_hom_of_henselianRing [Finite Λ] {A : Type u} [CommRing A]
     (I : Ideal A) [HenselianRing A I]
     (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℕ}
@@ -315,8 +292,7 @@ private theorem bounded_restriction_representative {A : Type u} [CommRing A]
 
 /-- **Affine Gabber effacement.** Let `(A, I)` be a henselian pair and `F` a torsion sheaf of
 `Λ`-modules on `T = Spec A`. Every class `c ∈ Hᵠ(T₀, F|)` of positive degree on
-`T₀ = Spec (A ⧸ I)` is killed by some monomorphism `F ⟶ F'` into a torsion sheaf.
--/
+`T₀ = Spec (A ⧸ I)` is killed by some monomorphism `F ⟶ F'` into a torsion sheaf. -/
 theorem exists_mono_map_eq_zero_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A)
     [HenselianRing A I] (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsTorsionModuleSheaf F] {q : ℕ} (hq : 0 < q)
@@ -364,13 +340,7 @@ theorem exists_mono_map_eq_zero_of_henselianRing {A : Type u} [CommRing A] (I : 
 
 /-- **Gabber's affine comparison theorem.** Let `(A, I)` be a henselian pair and `F` a
 torsion sheaf of `Λ`-modules on `T = Spec A`. The restriction to `T₀ = Spec (A ⧸ I)` induces
-bijections `Hᵠ(T, F) ⟶ Hᵠ(T₀, F|_{T₀})` for all `q`.
-
-The blueprint's "detailed form" also asserts this for affine schemes of finite type over `A`
-in place of `Spec A`; that relative version is false (for `A = k⟦t⟧` and `X = 𝔸¹_A` the class
-of the Artin–Schreier cover `y^p - y = t x` is nonzero on `X` but vanishes on the closed
-fibre), so only the pair form, which is [Stacks 09ZI], is stated.
--/
+bijections `Hᵠ(T, F) ⟶ Hᵠ(T₀, F|_{T₀})` for all `q`. -/
 @[stacks 09ZI]
 theorem bijective_cohomologyMap_of_henselianRing {A : Type u} [CommRing A] (I : Ideal A)
     [HenselianRing A I] (F : Sheaf (Spec (.of A)).smallEtaleTopology (ModuleCat.{u + 1} Λ))

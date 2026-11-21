@@ -26,7 +26,7 @@ the morphism from a model of finite type over the trait to the trait itself exis
 geometric generic fibres, while there need not be a morphism `X ⟶ Spec Ω` from the scheme `X`
 that `ε` identifies the geometric generic fibre with.
 
-## Implementation notes
+## Implementation details
 
 All exchange maps and lax tensor maps factor through the *reduced* versions `ᾱ` and `μ̄`, which
 do not involve `ε`; the comparison is proved for abstract functors

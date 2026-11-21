@@ -37,13 +37,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- The localization of a supplied normalized associator is the localization of the
-canonical integral associator. This is the transport step in the proof of
-`lem-sf-normalized-scalar-associator-localization`: identify the supplied functors with
-the completed scalar extensions using their realization equalities, use the three
-inverse-realization normalizations and the balanced tensor normalization, then apply
-the raw localization functor. The argument is forward transport and does not use
-faithfulness of localization. It also covers identity embeddings and repeated fields.
--/
+canonical integral associator. -/
 theorem normalized_scalar_associator_localization_transport
     (E L M : FieldStage.{max u v} l)
     (i : E.carrier →ₐ[Padic l] L.carrier) (j : L.carrier →ₐ[Padic l] M.carrier)

@@ -48,16 +48,12 @@ namespace AlgebraicGeometry.Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [HasSmallSiteSheafify A]
 
-/-- The derived global sections `RΓ(X, -)` commute with shifts, as every right derived
-functor does. -/
+/-- The derived global sections `RΓ(X, -)` commute with shifts. -/
 noncomputable instance commShiftRightDerivedGlobalSections (X : Scheme.{u}) :
     (rightDerivedGlobalSections A X).CommShift ℤ :=
   inferInstanceAs ((Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctor.CommShift ℤ)
 
-/-- The Leray isomorphism `RΓ(Y, Rf_* K) ≅ RΓ(X, K)` for a morphism `f : X ⟶ Y`: the
-composition of right derived functors applied to `f_* ⋙ Γ_Y ≅ Γ_X`, which is valid since `f_*`
-preserves K-injective complexes (`AlgebraicGeometry.Etale.preservesKInjectiveComplexes_lowerStar`).
--/
+/-- The Leray isomorphism `RΓ(Y, Rf_* K) ≅ RΓ(X, K)` for a morphism `f : X ⟶ Y`. -/
 noncomputable def rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((f)_*[A]).rightDerivedFunctor ⋙ rightDerivedGlobalSections A Y ≅
@@ -65,19 +61,7 @@ noncomputable def rightDerivedLowerStarCompRightDerivedGlobalSectionsIso
   Functor.rightDerivedFunctorCompIso' _ _ (lowerStarCompGlobalSectionsIso A f)
 
 /-- Derived global sections are invariant under the pullback along an isomorphism
-`e : X ≅ Y`: `RΓ(X, e^* K) ≅ RΓ(Y, K)`. It is the composite
-
-```
-            D(e^*) RΓ_X
-  D(Y) ──────────────▶ D(X) ──────────────▶ D(A)
-    │ ≅ R(e^*) ≅ R((e⁻¹)_*) ▲
-    └──────────── R((e⁻¹)_*) ⋙ RΓ_X ≅ RΓ_Y ────┘
-```
-
-of `Functor.rightDerivedFunctorIsoMapDerivedCategory` (the pullback `e^*` is exact), of the
-derived isomorphism `e^* ≅ (e⁻¹)_*` (`AlgebraicGeometry.Etale.upperStarInvIsoLowerStarHom`),
-and of the Leray isomorphism
-`AlgebraicGeometry.Etale.rightDerivedLowerStarCompRightDerivedGlobalSectionsIso` for `e⁻¹`. -/
+`e : X ≅ Y`: `RΓ(X, e^* K) ≅ RΓ(Y, K)`. -/
 noncomputable def upperStarCompRightDerivedGlobalSectionsIso {X Y : Scheme.{u}} (e : X ≅ Y) :
     ((e.hom)^*[A]).mapDerivedCategory ⋙ rightDerivedGlobalSections A X ≅
       rightDerivedGlobalSections A Y :=

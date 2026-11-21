@@ -7,7 +7,12 @@ module
 public import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegralScalarMatesData
 import WeilConjectures.SmoothPurity.Completed.CompletedScalarChainShift
 /-! # Chain shift normalization for exceptional scalar mates
-Source: Stacks Tags 011G, 014E and 08TC.
+
+## References
+
+* [Stacks, Tag 011G]
+* [Stacks, Tag 014E]
+* [Stacks, Tag 08TC]
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -19,12 +24,7 @@ variable (l : ℕ) [Fact l.Prime]
 variable (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} {c : Compactification f}
 /-- The published completed scalar complex satisfies the signed cone shift formula,
-including the comparison from ordinary scalar extension.
-Source: Stacks Tags 011G, 014E and 08TC; the Roos-cone realization of completed scalars.
-Proof: use completedScalarChainShift for the product and level comparisons. Unfold
-the two predicates and their named comparison maps: both express the same first
-coordinate product shift and the second coordinate shift multiplied by the sign.
-The comparison equation is exactly the second conclusion of completedScalarChainShift. -/
+including the comparison from ordinary scalar extension. -/
 theorem exceptionalIntegralCompletedScalarShift
     (E L : FieldStage.{u} l) (i : E.carrier →ₐ[Padic l] L.carrier)
     (side : Bool) :

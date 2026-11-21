@@ -16,10 +16,13 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 Let `e : X ⟶ Y` be étale with a compactification `c`. The comparison
 `Φ_c : De_! ⟶ Rf_!(c)` (`AlgebraicGeometry.Etale.compactificationEtaleComparison`) is an
-isomorphism (`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`): it commutes with
-base change, so it suffices to check it over geometric points of `Y`, where `X` is covered by
-sections of `e`, and it commutes with restriction to these open pieces, over which `e` is an
-isomorphism.
+isomorphism (`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison`).
+
+## Implementation details
+
+The comparison commutes with base change, so it suffices to check it over geometric points of
+`Y`, where `X` is covered by sections of `e`; it commutes with restriction to these open pieces,
+over which `e` is an isomorphism.
 
 ## Main statements
 
@@ -155,9 +158,7 @@ theorem compactificationEtaleComparison_restrictOpen
     unit_map_compactificationEtaleComparison]
 
 /-- **Isomorphy of the comparison is local on `X`**: if `X` is covered by open subschemes
-`v_i : U_i ⟶ X` over which the comparison is an isomorphism, then it is an isomorphism. The
-right adjoints of the comparison are compared along the jointly conservative restrictions
-`Lv_i^*` (`CategoryTheory.conjugateEquiv_whiskerLeft`). -/
+`v_i : U_i ⟶ X` over which the comparison is an isomorphism, then it is an isomorphism. -/
 theorem isIso_compactificationEtaleComparison_of_cover {ι : Type u} {U : ι → Scheme.{u}}
     (w : ∀ i, U i ⟶ X) [∀ i, IsOpenImmersion (w i)]
     (hw : ∀ x : X, ∃ (i : ι) (y : U i), (w i).base y = x)
@@ -199,11 +200,7 @@ section Iso
 variable {X Y : Scheme.{u}} (e : X ⟶ Y) [_root_.AlgebraicGeometry.Etale e]
   (c : Compactification e)
 
-/-- **Over an isomorphism, the comparison `De_! ⟶ Rf_!(c)` is an isomorphism.** The candidate
-unit is invertible: `Lq^* ⟶ Dσ_! Lσ^* Lq^*` is the unit of an adjunction whose left adjoint
-`Lq^* ⋙ Lσ^* ≅ 𝟭` is fully faithful, and `Lq_Z^* Dj_!` lies in the image of `Dσ_!`, the
-projection `q_Z` being an isomorphism; and the counit of `De_! ⊣ Le^*` is invertible, `Le^*`
-being an equivalence. -/
+/-- **Over an isomorphism, the comparison `De_! ⟶ Rf_!(c)` is an isomorphism.** -/
 theorem isIso_compactificationEtaleComparison_of_isIso [IsIso e] :
     IsIso (compactificationEtaleComparison Λ e c) := by
   -- the candidate unit is invertible
@@ -267,12 +264,7 @@ theorem isIso_compactificationEtaleComparison_of_isIso [IsIso e] :
 
 /-- **The compactly supported direct image along an étale morphism is the extension by zero**:
 for an étale `e` with a compactification `c`, the comparison `De_! ⟶ Rf_!(c)` is an
-isomorphism. Isomorphisms are detected by the derived pullbacks to the geometric points of `Y`,
-and the comparison commutes with base change
-(`AlgebraicGeometry.Etale.compactificationEtaleComparison_baseChange`). Over a separably closed
-field, `X` is covered by sections of `e`, which are open immersions over which `e` is an
-isomorphism, and the comparison is local on `X`
-(`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison_of_cover`). -/
+isomorphism. -/
 theorem isIso_compactificationEtaleComparison :
     IsIso (compactificationEtaleComparison Λ e c) := by
   -- over a separably closed field

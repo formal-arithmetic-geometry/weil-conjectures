@@ -22,10 +22,9 @@ Let `f : X ⟶ Y` be a proper morphism of schemes. The following are equivalent
    (`AlgebraicGeometry.Etale.HasInjectiveAcyclicity`).
 
 The equivalence of (1) and (2) holds for every morphism
-(`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_forall_isIso_baseChangeHomologyMap`): a complex
-with torsion cohomology is built from its torsion cohomology sheaves by truncations. For abelian
-sheaves, that is for `Λ = ℤ`, condition (3) is `IA_r(f)` with `𝐅_r`-coefficients for every prime
-`r` (`AlgebraicGeometry.Etale.tfae_hasTorsionBaseChange_int`).
+(`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_forall_isIso_baseChangeHomologyMap`). For
+abelian sheaves, that is for `Λ = ℤ`, condition (3) is `IA_r(f)` with `𝐅_r`-coefficients for
+every prime `r` (`AlgebraicGeometry.Etale.tfae_hasTorsionBaseChange_int`).
 
 ## References
 
@@ -47,9 +46,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
 /-- **The base change property on cohomology sheaves.** A morphism `f : X ⟶ Y` satisfies the base
 change property for torsion coefficients if and only if, for every cartesian square over `f` and
 every torsion sheaf `F` on `X_ét`, the base change maps `g^* Rᵠf_* F ⟶ Rᵠf'_*(g'^* F)` on
-cohomology sheaves are isomorphisms for all `q`. The forward direction places `F` in degree `0`;
-conversely a bounded below complex with torsion cohomology is reached from its cohomology sheaves
-by truncation triangles, both sides of the derived base change map being left `t`-exact. -/
+cohomology sheaves are isomorphisms for all `q`. -/
 theorem Etale.hasTorsionBaseChange_iff_forall_isIso_baseChangeHomologyMap (f : X ⟶ Y) :
     Etale.HasTorsionBaseChange Λ f ↔
       ∀ ⦃Y' X' : Scheme.{u}⦄ ⦃g : Y' ⟶ Y⦄ ⦃f' : X' ⟶ Y'⦄ ⦃g' : X' ⟶ X⦄
@@ -107,8 +104,8 @@ theorem Etale.tfae_hasTorsionBaseChange_of_isAddTorsion (hΛ : IsAddTorsion Λ) 
   tfae_finish
 
 /-- For a proper morphism and two isomorphic coefficient rings which are torsion as additive
-groups, injective acyclicity with the one coefficient ring is injective acyclicity with the other:
-both are the base change property, which transfers along ring homomorphisms. -/
+groups, injective acyclicity with the one coefficient ring is injective acyclicity with the
+other. -/
 theorem Etale.hasInjectiveAcyclicity_iff_of_ringEquiv {Λ' : Type (u + 1)} [CommRing Λ']
     (e : Λ ≃+* Λ') (hΛ : IsAddTorsion Λ) (f : X ⟶ Y) [IsProper f] :
     Etale.HasInjectiveAcyclicity Λ f ↔ Etale.HasInjectiveAcyclicity Λ' f := by

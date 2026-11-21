@@ -10,8 +10,13 @@ import all WeilConjectures.SmoothPurity.Sf.SfCompleteDirectImageReduction
 
 /-! # The perfect-quotient projection formula in the completed coefficient presentation
 
-Source: Zheng, Proposition 4.21; Stacks 0944 and 099N;
-Bhatt--Scholze, Lemma 6.5.11(3).
+## References
+
+* Zheng, Proposition 4.21
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0944]
+* [Stacks, Tag 099N]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.11(3)
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +33,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The canonical projection-formula map, obtained by transposing direct image of
- the actual scalar unit through the normalized restriction comparison.
-Source: Stacks 07A6 and 0944. -/
+the actual scalar unit through the normalized restriction comparison. -/
 def completedDirectImageFiniteProjection {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (K : DerivedCategory (scalarReductionSource l E X)) :
     (scalarReductionDerivedExtension l E Y n).obj
@@ -40,16 +44,7 @@ def completedDirectImageFiniteProjection {X Y : Scheme.{u}} (f : X ⟶ Y) (n : �
         ((scalarReductionDerivedExtension l E X n).obj K))
 
 /-- Each positive quotient is perfect over the completed coefficient ring, so the
-canonical finite projection formula is invertible on every unbounded complex.
-Source: Zheng, Proposition 4.21; Stacks 0944 and 099N;
-Bhatt--Scholze, Lemma 6.5.11(3).
-
-Proof: use the two-term free uniformizer resolution of the quotient. The existing
-completed direct-image proof transports the perfect projection formula across the
-coefficient-presentation isomorphisms, retaining the scalar adjunction and the
-K-injective unit normalization. Its sf_projection_formula proves invertibility of
-exactly the arrow defined here. There is no completeness or boundedness assumption
-on K, and the proof includes n = 0, zero complexes and empty schemes. -/
+canonical finite projection formula is invertible on every unbounded complex. -/
 theorem completedDirectImageFiniteProjection_isIso {X Y : Scheme.{u}}
     (f : X ⟶ Y) (n : ℕ) (K : DerivedCategory (scalarReductionSource l E X)) :
     IsIso (completedDirectImageFiniteProjection l E f n K) := by

@@ -12,8 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.ZModCoefficients
 # Cohomology over the strict localization as a stalk of a higher direct image
 
 Let `f : U ⟶ Z` be quasi-compact and quasi-separated, `s : Spec Ω ⟶ Z` a geometric point with
-`Ω` algebraically closed and `S = Z_(s)` the strict localization. By the stalk formula (Stacks
-03Q9, `AlgebraicGeometry.Etale.strictHenselizationStalkFormula`) the abelian cohomology of the
+`Ω` algebraically closed and `S = Z_(s)` the strict localization. By the stalk formula
+(`AlgebraicGeometry.Etale.strictHenselizationStalkFormula`) the abelian cohomology of the
 pullback of a sheaf `F` of `Λ`-modules to `U ×_Z S` is the stalk at `s` of `R^q f_* F`. For the
 constant sheaf `ℤ/ℓ`:
 
@@ -24,6 +24,10 @@ constant sheaf `ℤ/ℓ`:
 
 - `AlgebraicGeometry.Etale.nonempty_iso_forget₂_sheafFiber_higherDirectImage`
 - `AlgebraicGeometry.Etale.nonempty_addEquiv_sheafH_constantZMod_sheafFiber`
+
+## References
+
+* [Stacks, Tag 03Q9]
 -/
 
 @[expose] public section
@@ -36,7 +40,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale
 
-/-- **The stalk formula, after forgetting `Λ`** (Stacks 03Q9): the stalk at a geometric point
+/-- **The stalk formula, after forgetting `Λ`**: the stalk at a geometric point
 `s` of `R^q f_* F` is, as an abelian group, the cohomology of the pullback of `F` to
 `U ×_Z Z_(s)`. -/
 theorem nonempty_iso_forget₂_sheafFiber_higherDirectImage {Λ : Type (u + 1)} [CommRing Λ]

@@ -34,7 +34,7 @@ Weil category used here.
 - `AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius`.
 - `AlgebraicGeometry.Etale.WeilComplex.internalHom`.
 
-## Implementation notes
+## Implementation details
 
 The constructions are made for an arbitrary coefficient category `A` and only then specialised
 to `A = ModuleCat Λ`; this is for the kernel. Lean replaces the proofs nested in the body of a
@@ -114,8 +114,7 @@ lemma derivedHomFrobenius_hom_naturality_left {K K' : WeilComplex A g} (f : K' �
 
 /-- `AlgebraicGeometry.Etale.WeilComplex.derivedHomFrobenius_hom_naturality_left` with `f`
 written as `f.hom.op.unop.hom`, the form in which it appears after rewriting with
-`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedHom_map_app_hom`. Stating it in this form
-lets the kernel check its use at `ModuleCat Λ` syntactically. -/
+`AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.derivedHom_map_app_hom`. -/
 lemma derivedHomFrobenius_hom_naturality_left_unop {K K' : WeilComplex A g} (f : K' ⟶ K)
     (L : WeilComplex A g) :
     (derivedHomFrobenius K L).hom ≫ (RHom(X)[A].map f.hom.op.unop.hom.op).app L.obj.obj =
@@ -333,13 +332,10 @@ lemma internalHomMap_comp {K K' K'' : WeilComplex (ModuleCat.{u + 1} Λ) g} (f :
   liftBifunctorMap_comp _ _ _ _ f f'
 
 variable (g) in
-/-- The derived internal hom of Weil complexes. With the
-internal-Hom Frobenius `RHom(φ_K⁻¹, φ_L)`
-(`AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius`), the derived internal hom of
-`Dctf(X, Λ)` lifts to a bifunctor `WeilDᵒᵖ × WeilD ⥤ WeilD` on Weil complexes, lying over the
-derived internal hom of `Dctf(X, Λ)` (`AlgebraicGeometry.Etale.WeilComplex.internalHom_obj_obj_obj`,
-`…internalHom_map_app_hom`, `…internalHom_obj_map_hom`), which is triangulated in its second
-variable. -/
+/-- The derived internal hom of Weil complexes: with the internal-Hom Frobenius
+`RHom(φ_K⁻¹, φ_L)` (`AlgebraicGeometry.Etale.WeilComplex.internalHomFrobenius`), the derived
+internal hom of `Dctf(X, Λ)` lifts to a bifunctor `WeilDᵒᵖ × WeilD ⥤ WeilD` on Weil complexes,
+lying over the derived internal hom of `Dctf(X, Λ)`. -/
 noncomputable def internalHom :
     (WeilComplex (ModuleCat.{u + 1} Λ) g)ᵒᵖ ⥤ WeilComplex (ModuleCat.{u + 1} Λ) g ⥤
       WeilComplex (ModuleCat.{u + 1} Λ) g :=

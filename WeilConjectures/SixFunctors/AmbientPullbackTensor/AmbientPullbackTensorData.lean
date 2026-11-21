@@ -14,7 +14,20 @@ import Mathlib.CategoryTheory.Limits.EssentiallySmall
 
 /-! # Components of ambient pullback coherence
 
-Source: Stacks 03CB, 03D3, 03EL, 07A4 and 04VG.
+## References
+
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 03EL]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 04VG]
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 0G7E]
+* [Stacks, Tag 0G7D]
+* [Stacks, Tag 015F]
+* [Stacks, Tag 0B65]
 -/
 
 @[expose] public noncomputable section
@@ -69,27 +82,23 @@ private theorem normalizedTensorBundle.{c, v, r}
       (hod ⟨other.model.ordinary, hother.1, od.flat⟩ trivial)
   exact TensorModelUniqueness.bundled_unique.{c, v, r} J K R S F A B TA TB other data he
 
-/-- Tensor operations use the existing ordinary, K-flat and closed derived models.
-Source: Stacks 03EL and 07A4. -/
+/-- Tensor operations use the existing ordinary, K-flat and closed derived models. -/
 abbrev Tensor (X : Scheme.{t}) (s : Option ℕ) :=
   WeilConjectures.SemilinearSections.Closed.{t + 1, t, u} (topology X s) (coefficients ell E X s)
 
-/-- The representative model fixes the meaning of derived tensor, rather than its coordinates.
-Source: Stacks 07A4. -/
+/-- The representative model fixes the meaning of derived tensor, rather than its coordinates. -/
 abbrev TensorModels (X : Scheme.{t}) (s : Option ℕ) (A : Tensor ell E X s) :=
   WeilConjectures.SemilinearSections.Models.{t + 1, t, u} (topology X s) (coefficients ell E X s) A
 
-/-- Ordinary sheaf tensor, reusing the dependency's monoidal structure.
-Source: Stacks 03EK. -/
+/-- Ordinary sheaf tensor, reusing the dependency's monoidal structure. -/
 abbrev tensor (X : Scheme.{t}) (s : Option ℕ) :=
   ordinaryTensor.{t + 1, t, u} (topology X s) (coefficients ell E X s)
 
-/-- Tensor of module morphisms in the same ordinary tensor.
-Source: Stacks 03EK. -/
+/-- Tensor of module morphisms in the same ordinary tensor. -/
 abbrev tensorHom (X : Scheme.{t}) (s : Option ℕ) :=
   @ordinaryTensorHom.{t + 1, t, u} _ _ (topology X s) _ (coefficients ell E X s)
 
-/-- Actual sheafified pure tensor section. Source: Stacks 03EK. -/
+/-- Actual sheafified pure tensor section. -/
 abbrev pure (X : Scheme.{t}) (s : Option ℕ) :=
   fun (M N : Modules ell E X s) (U : (Site X s)ᵒᵖ)
     (x : M.val.obj U) (y : N.val.obj U) ↦
@@ -97,29 +106,25 @@ abbrev pure (X : Scheme.{t}) (s : Option ℕ) :=
       (topology X s) (coefficients ell E X s) M N U x y :
         (tensor ell E X s M N).val.obj U)
 
-/-- Unbounded total tensor; the second differential has sign (-1)^p.
-Source: Stacks 06YN. -/
+/-- Unbounded total tensor; the second differential has sign (-1)^p. -/
 abbrev total (X : Scheme.{t}) (s : Option ℕ) :=
   totalTensor.{t + 1, t, u} (topology X s) (coefficients ell E X s)
 
-/-- K-flat flat-term representative class, with no condition on coefficient transitions.
-Source: Stacks 06YS and 0G7E. -/
+/-- K-flat flat-term representative class, with no condition on coefficient transitions. -/
 def FlatRepresentative (X : Scheme.{t}) (s : Option ℕ)
     (P : CochainComplex (Modules ell E X s) ℤ) : Prop :=
   CochainComplex.IsKFlatIndependentCoefficients
       (J := topology X s) (R := coefficients ell E X s) P ∧
     flatTerms.{t + 1, t, u} (topology X s) (coefficients ell E X s) P
 
-/-- The comparison and its chain-level computation on the actual ringed site.
-Source: Stacks 03EL and 07A4. -/
+/-- The comparison and its chain-level computation on the actual ringed site. -/
 abbrev TensorData {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (A : Tensor ell E Y s) (B : Tensor ell E X s)
     (TA : TensorModels ell E Y s A) (TB : TensorModels ell E X s B) :=
   BundledTensorComparison.{t + 1, t, u} (topology Y s) (topology X s)
     (coefficients ell E Y s) (coefficients ell E X s) (pull ell E f s) A B TA TB
 
-/-- The normalization determining both the ordinary and derived comparison.
-Source: Stacks 03EL and 07A4. -/
+/-- The normalization determining both the ordinary and derived comparison. -/
 def TensorData.Normalized {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (A : Tensor ell E Y s) (B : Tensor ell E X s)
     (TA : TensorModels ell E Y s A) (TB : TensorModels ell E X s B)
@@ -139,17 +144,7 @@ def TensorData.Normalized {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
   ∀ (P : CochainComplex (Modules ell E Y s) ℤ), FlatRepresentative ell E Y s P →
     FlatRepresentative ell E X s (((pull ell E f s).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- Unique canonical tensor comparison with its full ordinary/total/derived normalization.
-Source: Stacks 03EL, 07A4, 0G7E and 0G7D.
-Proof: on scalar-extension generators send (x tensor y) tensor r to
-(x tensor r) tensor (y tensor 1); the inverse multiplies the two scalars.
-Balancing and sheafification prove uniqueness, naturality and the inverse laws.
-The normalized ordinary maps on each total summand commute with the signed
- differential, so give the unique chain map in TensorComparisonModel. Pullback
-preserves K-flat flat-term representatives by 0G7E. Use their tensor models to
-localize the chain map, and the resolving-subcategory tensor descent theorem to
-extend uniquely to every unbounded pair. Apply this on the sequence site itself,
-so arbitrary transitions are included before any evaluation. -/
+/-- Unique canonical tensor comparison with its full ordinary/total/derived normalization. -/
 theorem tensorData_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (A : Tensor ell E Y s) (B : Tensor ell E X s)
     (TA : TensorModels ell E Y s A) (TB : TensorModels ell E X s B) :
@@ -203,21 +198,18 @@ theorem tensorData_existsUnique {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ
   · intro P hp hf
     exact ho.2.2.2 P ⟨hp, hf⟩
 
-/-- The unique representative-normalized tensor comparison, including its chain model.
-Source: Stacks 07A4. -/
+/-- The unique representative-normalized tensor comparison, including its chain model. -/
 def tensorData {X Y : Scheme.{t}} (f : X ⟶ Y) (s : Option ℕ)
     (A : Tensor ell E Y s) (B : Tensor ell E X s)
     (TA : TensorModels ell E Y s A) (TB : TensorModels ell E X s B) :=
   (tensorData_existsUnique ell E f s A B TA TB).exists.choose
 
-/-- The termwise compositor, constructed by the existing map on complexes.
-Source: Stacks 015F. -/
+/-- The termwise compositor, constructed by the existing map on complexes. -/
 abbrev chainComp {X Y Z : Scheme.{t}} (f : X ⟶ Y) (g : Y ⟶ Z) (s : Option ℕ)
     (P : CochainComplex (Modules ell E Z s) ℤ) :=
   Functor.mapHomologicalComplexCompIsoHomOfIso (comp ell E f g s) P
 
-/-- The ordinary and derived compositor laws, including both identity cases.
-Source: Stacks 03CB and Categories 0B65. -/
+/-- The ordinary and derived compositor laws, including both identity cases. -/
 def CompositionLaws (K : Scheme.{t}) (s : Option ℕ) : Prop :=
   (∀ {W X Y Z : Scheme.{t}} (w : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)
       (aW : W ⟶ K) (aX : X ⟶ K) (aY : Y ⟶ K) (aZ : Z ⟶ K)

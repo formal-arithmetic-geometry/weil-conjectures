@@ -6,7 +6,14 @@ Authors: Bin Wu
 module
 public import WeilConjectures.SixFunctors.IntegralOpenReduction.IntegralOpenReductionDefinitions
 import WeilConjectures.AlgebraicGeometry.System.SystemBlockRepetition
-/-! # Section normalization for semilinear open localization -/
+/-! # Section normalization for semilinear open localization
+
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0941]
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option genInjectivity false
@@ -25,19 +32,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j]
 
-/-- The semilinear calculus can use the literal section identification at the given open.
-Source: Stacks sites-modules.tex, Tags 03DI--03DJ, and sites-cohomology.tex Tag 0941;
-the section-normalized localization in lem-coef-semilinear-derived-sections.
-
-Proof: choose semilinearDerivedSections. Apply blockRepeat_extensionByZero to
-SystemBlockMap.id and the systemBlockRepetition package at that map. Its first
-open-localization package has restriction evaluation equal to the identity on
-sections. Choose this normalized package at every open and replace the localization field
-of the chosen sections calculus by that family, keeping every other field. No field of that
-calculus requires compatibility between localization and its other operations,
-so this is a record update. Its evaluation at the specified open is the
-chosen normalized package. The identity block has finite singleton
-fibers, including index zero. The argument also covers the empty and identity opens. -/
+/-- The semilinear calculus can use the literal section identification at the given open. -/
 theorem normalizedOpenSections :
     ∃ sections : SemilinearSections.SemilinearDerivedSectionsData.{t+1, t, max u (t+1)}
         (ProEt.topology X) (rings l E X) (transitions l E X),

@@ -18,13 +18,13 @@ generated `Λ`-module. For `K, M ∈ Dctf(X_ét, Λ)` the canonical map
 (`AlgebraicGeometry.Etale.DerivedCategory.derivedHomTensorMap`) is an isomorphism
 (`AlgebraicGeometry.Etale.isIso_derivedHomTensorMap_constantSingle`).
 
-As a natural transformation in the coefficient (`derivedHomTensorNatTrans`), it is a morphism of
-triangulated functors commuting with the shifts. It is an isomorphism at `Λ_X`, which is
-invertible, hence at the free modules of finite rank. Both sides vanish above a common degree at
-every `N_X`: `M ⊗ᴸ N_X` has homology in the Tor interval `[c, d]` of `M`, and `RHom(K, -)` raises
-the upper bound of such complexes by a uniform amount
-(`AlgebraicGeometry.Etale.derivedHomBoundedAmplitude_of_constructibleFiniteTor`). The way-out
-argument along the first syzygies (`DerivedCategory.isIso_app_of_exists_distTriang`) concludes.
+## Implementation details
+
+The map is treated as a natural transformation in the coefficient (`derivedHomTensorNatTrans`),
+a morphism of triangulated functors. It is an isomorphism at the free modules of finite rank, and
+both sides vanish above a common degree
+(`AlgebraicGeometry.Etale.derivedHomBoundedAmplitude_of_constructibleFiniteTor`), so the way-out
+argument along the first syzygies (`DerivedCategory.isIso_app_of_exists_distTriang`) applies.
 -/
 
 @[expose] public section

@@ -29,7 +29,7 @@ part of clause (vii) is `AlgebraicGeometry.Etale.boundedConstructibleIntegral_st
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_stability`
 (clause (vii), integral coefficients).
 
-## Implementation notes
+## Implementation details
 
 * The six operations are those of the ambient derived categories `D(-_ét, Λ)`; their restrictions
   to `Dctf` are `AlgebraicGeometry.Etale.DerivedCategoryFiniteTor.leftDerivedUpperStar`, …, and
@@ -67,14 +67,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
   {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
   [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
 
-/-- Clause (v) of the preservation matrix: the exceptional inverse image is
-`Rf^! = 𝔻_X f^* 𝔻_Y` on `Dctf(Y, Λ)`.
-
-For `k` algebraically closed, a finite `Λ` whose exponent is invertible on `k` and `f : X ⟶ Y`
-over `k`, with `Y` separated of finite type over `k`, every `K ∈ Dctf(Y, Λ)` satisfies
-`Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))`: apply the exchange `Rf^! 𝔻_Y ≅ 𝔻_X f^*`
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_verdierDual`) to `𝔻_Y K` and use
-the biduality `K ≅ 𝔻_Y 𝔻_Y K` (`AlgebraicGeometry.Etale.nonempty_iso_verdierDual_verdierDual`). -/
+/-- The exceptional inverse image is `Rf^! = 𝔻_X f^* 𝔻_Y` on `Dctf(Y, Λ)`: for `k` algebraically
+closed, a finite `Λ` whose exponent is invertible on `k` and `f : X ⟶ Y` over `k`, with `Y`
+separated of finite type over `k`, every `K ∈ Dctf(Y, Λ)` satisfies
+`Rf^! K ≅ 𝔻_X (Lf^* (𝔻_Y K))`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_verdierDual_leftDerivedUpperStar
     [IsSeparated aY] [HasCompactification aY] [HasCompactification aX] (f : X ⟶ Y)
     (hf : f ≫ aY = aX) [HasCompactification f]
@@ -276,11 +272,10 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
 include hϖ hI in
-/-- Clause (vii) of the preservation matrix, integral coefficients.
-
-Let `Λ` be a Noetherian domain complete for `I = (ϖ)` with `Λ ⧸ I` finite of exponent invertible
-on the algebraically closed field `k` (the stage `𝒪_E`), and `f : X ⟶ Y` a separated
-finite-type morphism of separated finite-type `k`-schemes. Then:
+/-- Stability at integral coefficients. Let `Λ` be a Noetherian domain complete for `I = (ϖ)`
+with `Λ ⧸ I` finite of exponent invertible on the algebraically closed field `k` (the stage
+`𝒪_E`), and `f : X ⟶ Y` a separated finite-type morphism of separated finite-type `k`-schemes.
+Then:
 
 * `Dᵇc(X, Λ)` is the category of derived complete objects whose reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹` are
   bounded constructible of Tor amplitude in one common interval, i.e. `Dᵇc(X, 𝒪_E) =
@@ -289,10 +284,7 @@ finite-type morphism of separated finite-type `k`-schemes. Then:
   `RHom_Λ(K, L) ⊗ᴸ A_n ≅ RHom_{A_n}(K_n, L_n)`;
 * the derived limit `G_f L` of the finite exceptional inverse images of the reductions of
   `L ∈ Dᵇc(Y, Λ)` lies in `Dᵇc(X, Λ)`, is `Rf^! L` compatibly with the maps to the
-  `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions.
-
-These are the integral entries `AlgebraicGeometry.Etale.preservationMatrix_integral` of the
-preservation matrix. -/
+  `Rf^!(L ⊗ᴸ A_n)`, and has these as its reductions. -/
 theorem boundedConstructibleIntegral_stability {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]

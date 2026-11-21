@@ -8,7 +8,10 @@ public import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.CategoryTheory.Equivalence
 import Mathlib.CategoryTheory.Whiskering
 /-! # Transport of counit-normalized scalar comparisons
-Source: adjunction conjugation in Zheng, Lemma 5.22.
+
+## References
+
+* Zheng, Lemma 5.22
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -161,14 +164,7 @@ variable {A : Type a} [Category.{av} A] {B : Type b} [Category.{bv} B]
 include adj hadj hc hcE hcL
 
 /-- Descend scalar mates through equivalences, preserving both reduction squares and
-counit normalization.
-Source: Zheng, Lemma 5.22, categorical adjunction transport.
-Proof: conjugate q and b with the three given squares and descend along source whiskering,
-which is fully faithful because the source functor is an equivalence. Cancel inverse
-factors to prove the reduction equations. Cancel the invertible left reduction factors
-in the desired counit equation and use naturality and the three given counit identities.
-This proves it on the source equivalence image; naturality and its counit isomorphism
-extend the equation to every target object. -/
+counit normalization. -/
 theorem transportComparisons :
     ∃ (q : F' ⋙ TY ≅ TX ⋙ H') (b : G' ⋙ TX ≅ TY ⋙ I'),
       (∀ N, q.hom.app (G'.obj N) ≫ H'.map (b.hom.app N) ≫

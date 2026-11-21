@@ -15,7 +15,11 @@ import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeScalarI
 
 /-! # Ring diagrams for native scalar transport
 
-Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.8.2, Section 6.8 and
+  Remark 6.8.15
+* [Stacks, Tag 00YV]
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +38,7 @@ open LocallyFiniteAdicRealization
 open AlgebraicallyClosedCoefficients (Index Coefficient)
 open AlgebraicGeometry.ProEtale
 
-/-- The section-ring map for the two actual condensed coefficient inclusions.
-Source: Bhatt--Scholze, Lemma 6.8.2. -/
+/-- The section-ring map for the two actual condensed coefficient inclusions. -/
 def nativeScalarSectionMap (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
     (T : Scheme.{u}) :
     InternalModuleOperations.ring (Profinite.padicIntegersRingObj l E.1) T ⟶
@@ -46,8 +49,7 @@ def nativeScalarSectionMap (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
         coefficientMap (Profinite.padicSubfieldRingObjToPadicAlgCl l E) T))
 
 /-- A ring presentation is natural for the actual adjunct of the inverse-image ring map.
-This is a pointwise equality on sections of the base-change site object.
-Source: Bhatt--Scholze, Section 6.8; Stacks, Modules on Sites. -/
+This is a pointwise equality on sections of the base-change site object. -/
 def NativeScalarRingNaturality (R : PurCompactSupport.Coefficients.{u})
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]
@@ -61,8 +63,7 @@ def NativeScalarRingNaturality (R : PurCompactSupport.Coefficients.{u})
       (InternalModuleOperations.coefficientMap Λ g).hom.app W ((i V).hom.hom.app W s)
 
 /-- An ordinary coefficient-ring diagram. Its fields mention neither complexes nor scalar mates.
-The two ring isomorphisms identify scalar inclusions and precomposition maps.
-Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15. -/
+The two ring isomorphisms identify scalar inclusions and precomposition maps. -/
 structure NativeScalarRingModel (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgCl l))
     {R S : PurCompactSupport.Coefficients.{u}} (a : PurCompactSupport.Change R S) where
   integral : ∀ T : Scheme.{u}, (adicLisseForget T).obj (R.ring T) ≅
@@ -78,8 +79,7 @@ structure NativeScalarRingModel (l : ℕ) [Fact l.Prime] (E : Index l (PadicAlgC
 
 namespace NativeScalarRingModel
 
-/-- The integral module equivalence constructed from the supplied ring isomorphism.
-Source: Stacks, Modules on Sites, Tag 00YV. -/
+/-- The integral module equivalence constructed from the supplied ring isomorphism. -/
 def integralEquivalence {l : ℕ} [Fact l.Prime] {E : Index l (PadicAlgCl l)}
     {R S : PurCompactSupport.Coefficients.{u}} {a : PurCompactSupport.Change R S}
     (P : NativeScalarRingModel l E a) (T : Scheme.{u}) :
@@ -89,8 +89,7 @@ def integralEquivalence {l : ℕ} [Fact l.Prime] {E : Index l (PadicAlgCl l)}
   (CondensedRing.ringModuleEquivalenceOfIso T (P.integral T).symm).trans
     (InternalModuleOperations.equivalence (Profinite.padicIntegersRingObj l E.1) T).symm
 
-/-- The native-to-condensed module equivalence constructed from the supplied ring isomorphism.
-Source: Stacks, Modules on Sites, Tag 00YV. -/
+/-- The native-to-condensed module equivalence constructed from the supplied ring isomorphism. -/
 def closureEquivalence {l : ℕ} [Fact l.Prime] {E : Index l (PadicAlgCl l)}
     {R S : PurCompactSupport.Coefficients.{u}} {a : PurCompactSupport.Change R S}
     (P : NativeScalarRingModel l E a) (T : Scheme.{u}) :
@@ -101,15 +100,14 @@ def closureEquivalence {l : ℕ} [Fact l.Prime] {E : Index l (PadicAlgCl l)}
     (InternalModuleOperations.equivalence (Profinite.padicAlgClRingObj l) T).symm
 
 /-- An equivalence of these abelian categories preserves binary products and zero maps,
-so it is additive. Source: Mathlib's additive_of_preserves_binary_products. -/
+so it is additive. -/
 instance integralEquivalence_additive {l : ℕ} [Fact l.Prime]
     {E : Index l (PadicAlgCl l)} {R S : PurCompactSupport.Coefficients.{u}}
     {a : PurCompactSupport.Change R S} (P : NativeScalarRingModel l E a) (T : Scheme.{u}) :
     (P.integralEquivalence T).functor.Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- Additivity of the closure module equivalence, by preservation of products and zero maps.
-Source: Mathlib's additive_of_preserves_binary_products. -/
+/-- Additivity of the closure module equivalence, by preservation of products and zero maps. -/
 instance closureEquivalence_additive {l : ℕ} [Fact l.Prime]
     {E : Index l (PadicAlgCl l)} {R S : PurCompactSupport.Coefficients.{u}}
     {a : PurCompactSupport.Change R S} (P : NativeScalarRingModel l E a) (T : Scheme.{u}) :
@@ -242,31 +240,7 @@ private theorem nativeScalarChartValue (l : ℕ) [Fact l.Prime] [NativeRings.{u}
   rw [h]
   exact congrArg (fun t : ULift.{u + 1} C(W.unop.left, E.1) ↦ (t.down x : PadicAlgCl l)) hn'
 
-/-- The completed/native coefficient change has a natural ordinary ring presentation.
-
-Source: Bhatt--Scholze, Lemma 6.8.2 and Remark 6.8.15; the coefficient-identification
-steps 1--3 of lem-sf-native-proper-scalar-mate-presentation.
-
-Proof in words:
-1. The normalized continuous integral comparison identifies the completed coefficient
-ring for Coefficient E with continuous functions into its valuation ring. Shrink.algEquiv
-identifies the size model with the original finite subfield. Its algebra linear equivalence
-is bicontinuous over the complete base field; uniqueness of the extending absolute value
-identifies the valuation subrings. Postcomposition gives the continuous integer-ring sheaf
-isomorphism. The pulled condensed integral limit theorem and internal section reconstruction
-then give integral. The finite quotient projections fix this isomorphism uniquely.
-2. Apply the locally finite coefficient-ring realization and reconstruct its section ring.
-Its inverse gives closure. Multiplication and the unit are preserved by the supplied
-IsMonHom, so these are ring isomorphisms, not only abelian-sheaf isomorphisms.
-3. Obtain a normalized CoefficientPresentation from coefficientPresentations_exists.
-The continuous chart comparison commutes with integral inclusion, localization and
-inclusion of the finite subfield into the closure. The normalization of CoefficientPresentation
-therefore identifies the composite with its integralMap. The hypothesis ha identifies it
-with a.map, giving scalar.
-4. Take the inverse-image adjuncts. Both ring comparisons send the given coefficient
-adjuncts to precomposition on continuous functions, by chart naturality and the native
-pull_normalized equation. Equality on every site section proves integral_natural and
-closure_natural. Empty schemes and zero section rings require no separate choice. -/
+/-- The completed/native coefficient change has a natural ordinary ring presentation. -/
 theorem exists_nativeScalarRingModel
     (l : ℕ) [Fact l.Prime] [N : NativeRings.{u} l]
     (E : Index l (PadicAlgCl l))

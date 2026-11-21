@@ -193,26 +193,7 @@ private theorem factor_realization
 
 /-- The finite support realization respects its actual proper/open factorization.
 This is a single finite coefficient ring; no integral reduction or system realization
-is present in the equation.
-
-Source: def-sf-operation-stages, finiteCompositionNormalization,
-finiteOpenNormalization and finiteProperNormalization; prop-sf-pf-coherence.proof.md,
-compatibility of comparisons with counits and j_!.
-
-Proof: expand sixFunctorFactoredSupportIdentification as composition followed by the
-open identification and proper identification. Use a bounded etale-origin witness for
-the finite constructible input in finiteCompositionNormalization. Its origin compositor
-is the canonical open/proper composite for this same compactification. At the open and
-proper compactifications, finiteOpenNormalization cancels the identity proper image and
-finiteProperNormalization cancels the identity open extension. Naturality of the two
-finite realization isomorphisms moves the input comparison through proper image. The
-three retained origin-witness comparisons cancel, leaving finiteSupport on the source
-and finiteDirectImage followed by direct image of finiteOpenExtension on the target.
-The source compositor is inverted in the displayed equation, so the result is the
-inverse factored support identification followed by finiteSupport. All equality
-transports use Q.factorization and the very compactification Q.compactification;
-there is no change of compactification. Zero inputs, identity factors and the empty
-open use the corresponding identity/unit cancellations. -/
+is present in the equation. -/
 theorem finiteSupportFactorRealization
     (D : FiniteFieldDatum.{u}) (C : D.CoefficientDatum)
     (E : Type u) [Field E] [Algebra (Padic C.l) E]

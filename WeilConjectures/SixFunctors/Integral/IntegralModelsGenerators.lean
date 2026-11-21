@@ -756,8 +756,7 @@ set_option backward.isDefEq.respectTransparency true
 
 open scoped CategoryTheory.Obj in
 attribute [-instance] integralModel_coefficientMonObj in
-/-- The common condition that all locally closed lisse extensions lie in `P`.
-Keeping this condition named avoids repeatedly normalizing its derived coefficient data. -/
+/-- The common condition that all locally closed lisse extensions lie in `P`. -/
 @[irreducible] private def integralModel_lisseExtensions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) [IsNoetherian X]
@@ -1822,40 +1821,7 @@ private theorem integralModel_reductions
 /-- Integral locally free models generate the bounded constructible categories using finitely
 many cones and shifts. In the algebraic-closure clause a single finite E is fixed before
 forming the closure. The third clause concerns the specified integral module and all of
-its positive uniformizer-power derived reductions, including their etale origin.
-
-Proof:
-1. Finite type over a field makes X Noetherian. Coefficient-heart generation reduces
-   the finite-extension clause to degree-zero extensions of lisse sheaves.
-2. Apply the lattice-subquotient filtration on each locally closed stratum. Its
-   canonical spectral-norm coefficients are identified with the specified finite
-   coefficient field and its integers, using ULift and equality of the two norms.
-   Transporting the filtration gives integral generators as its successive quotients.
-   Short exact sequences give distinguished triangles; finite induction on the
-   filtration, followed by the heart's cone construction, proves the first clause.
-3. Descend an algebraic-closure object to one finite E. Exact scalar extension sends
-   its cone construction to a cone construction over the algebraic closure, and its
-   values on generators are exactly the specified algebraic-closure generators.
-4. A locally free integral module has finite constant local models. Open extension
-   and closed pushforward preserve the resulting stratified constructibility, hence
-   its extension in degree zero is bounded constructible.
-5. Tensor commutes with normalized inverse image. Joint conservativity of closed
-   and complementary open restriction therefore detects flatness. The unit, counit
-   and off-support zero identities show that open extension and closed pushforward
-   preserve flatness. The extended integral module is flat; its single complex is
-   K-flat, so derived reduction is ordinary reduction. Ordinary scalar extension
-   commutes with both extension functors, again by their support identities.
-6. Scalar extension preserves local freeness, so each reduced extension is bounded
-   constructible. The quotient ring is finite by the maximal-ideal-power quotient theorem.
-   Its quotient topology is discrete because the uniformizer-power ideal contains
-   an open ball. Finite discrete coefficient encoding makes the underlying sheaf
-   constructible. The specified fixed-scalar realization has the same underlying
-   sheaf; finite constructibility transfers along this identification. That
-   realization is exact, as detected by the exact faithful underlying-abelian-sheaf
-   functor. Its derived functor consequently preserves constructible cohomology and
-   bounds. The finite-ring constructible derived-origin theorem now gives etale
-   origin for the precise realization in the statement.
--/
+its positive uniformizer-power derived reductions, including their etale origin. -/
 theorem integral_models_generators
     (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime]
     [CharP k p] (hℓp : ℓ ≠ p) (X : Scheme.{u})

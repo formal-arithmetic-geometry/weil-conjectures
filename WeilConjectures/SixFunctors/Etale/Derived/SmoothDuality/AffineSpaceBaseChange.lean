@@ -13,17 +13,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Projective
 
 For every scheme `S` on which the exponent of `Λ` is invertible, the canonical base change maps
 `Lg'^* Rp^! ⟶ Rp'^! Lg^*` of the projections `ℙ¹_S ⟶ S` and `𝔸¹_S ⟶ S` are isomorphisms, for
-every cartesian square with quasi-compact base change admitting a compactification (the
-elementary case (a) of the proof of blueprint
-`proposition-exceptional-inverse-image-smooth-morphism--6`).
+every cartesian square with quasi-compact base change admitting a compactification.
 
 The projective-line case is the formal consequence
 `AlgebraicGeometry.Etale.projectiveLineBaseChange_of_adjunction` of the compatibility of the
 projective-line adjunction with base change
-(`AlgebraicGeometry.Etale.projectiveLineAdjunctionBaseChange_of_isNormalized`, blueprint
-`proposition-adjunction-projective-line`), applied to the normalized Tate twist `μ_n ⊗ Λ`
-(`AlgebraicGeometry.Etale.hasKummerClass`): the base change map does not depend on a twist. The
-affine line is the standard chart of `ℙ¹_S`
+(`AlgebraicGeometry.Etale.projectiveLineAdjunctionBaseChange_of_isNormalized`), applied to the
+normalized Tate twist `μ_n ⊗ Λ` (`AlgebraicGeometry.Etale.hasKummerClass`). The affine line is
+the standard chart of `ℙ¹_S`
 (`AlgebraicGeometry.Etale.affineLineBaseChange_of_projectiveLineBaseChange`).
 
 ## Main statements
@@ -46,9 +43,8 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 /-- **Base change for the projective line.** For every scheme `S` on which the exponent of `Λ`
 is invertible and every cartesian square of `q : ℙ¹_S ⟶ S` with quasi-compact base change
-admitting a compactification, the base change map `Lg'^* Rq^! ⟶ Rq'^! Lg^*` is an isomorphism:
-it is the mate of the inverse of `Ex_!`, computed through the projective-line adjunctions of the
-normalized twist `μ_n ⊗ Λ`, whose counits commute with base change. -/
+admitting a compactification, the base change map `Lg'^* Rq^! ⟶ Rq'^! Lg^*` is an
+isomorphism. -/
 theorem projectiveLineBaseChange : ProjectiveLineBaseChange Λ := by
   have : NeZero (ringChar Λ) := ⟨CharP.char_ne_zero_of_finite Λ (ringChar Λ)⟩
   let : HasTateTwist Λ := (hasKummerClass Λ).toHasTateTwist
@@ -56,9 +52,8 @@ theorem projectiveLineBaseChange : ProjectiveLineBaseChange Λ := by
   exact projectiveLineBaseChange_of_adjunction
     (projectiveLineAdjunctionBaseChange_of_isNormalized Λ)
 
-/-- **Base change for the affine-line projections**, the elementary case (a) of the proof of
-blueprint `proposition-exceptional-inverse-image-smooth-morphism--6`: the projection `𝔸¹_S ⟶ S` is
-the standard chart `𝔸¹_S ⟶ ℙ¹_S`, a quasi-compact open immersion, followed by `ℙ¹_S ⟶ S`. -/
+/-- **Base change for the affine-line projections**: for every scheme `S` on which the exponent
+of `Λ` is invertible, the base change maps of the projection `𝔸¹_S ⟶ S` are isomorphisms. -/
 theorem affineLineBaseChange : AffineLineBaseChange Λ :=
   affineLineBaseChange_of_projectiveLineBaseChange (projectiveLineBaseChange Λ)
 

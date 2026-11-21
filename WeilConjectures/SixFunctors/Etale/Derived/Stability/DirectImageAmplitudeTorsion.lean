@@ -15,14 +15,14 @@ Let `k` be a field, `f : X ⟶ Y` a morphism of `k`-schemes of finite type with 
 `Λ` an arbitrary commutative ring. The bound `Rf_* D^{≤ n} ⊆ D^{≤ n + 2d}` of
 `AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj` assumes `Λ` torsion. This file proves
 it for bounded complexes killed by a nonzero integer `N`
-(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_nsmul_id_eq_zero`):
+(`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj_of_nsmul_id_eq_zero`).
 
-* a sheaf `F` of `Λ`-modules killed by `N` is the restriction of scalars of a sheaf of
-  `Λ ⧸ N`-modules, and restriction of scalars commutes with `Rf_*`
-  (`AlgebraicGeometry.Etale.restrictScalarsRightDerivedLowerStarSingleIso`); the ring `Λ ⧸ N` is
-  torsion, so `Rf_* F` vanishes above `2d`;
-* a bounded complex killed by `N` has its homology sheaves killed by `N`, and the dévissage
-  `DerivedCategory.isLE_obj_of_isLE_of_homologyProperty` concludes.
+## Implementation details
+
+A sheaf of `Λ`-modules killed by `N` is the restriction of scalars of a sheaf of
+`Λ ⧸ N`-modules, and restriction of scalars commutes with `Rf_*`
+(`AlgebraicGeometry.Etale.restrictScalarsRightDerivedLowerStarSingleIso`). Complexes are handled
+by the dévissage `DerivedCategory.isLE_obj_of_isLE_of_homologyProperty`.
 -/
 
 @[expose] public section
@@ -58,12 +58,7 @@ variable {k : Type u} [Field k] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
 include hf hd in
 /-- **The direct image of a sheaf killed by an integer vanishes above twice the dimension.** Let
 `f : X ⟶ Y` be a morphism of `k`-schemes of finite type with `dim X ≤ d`, and `F` an étale sheaf
-of `Λ`-modules on `X` killed by a nonzero integer `N`. Then `Rf_* F` vanishes above `2d`.
-
-The sheaf `F` is the restriction of scalars of the sheaf `Hom_Λ(Λ ⧸ N, F)` of `Λ ⧸ N`-modules
-(`CategoryTheory.Sheaf.restrictScalarsCoextendScalarsIso`), restriction of scalars commutes with
-`Rf_*`, and `Λ ⧸ N` is torsion, so `AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_obj`
-applies. -/
+of `Λ`-modules on `X` killed by a nonzero integer `N`. Then `Rf_* F` vanishes above `2d`. -/
 theorem isLE_rightDerivedLowerStar_singleFunctor_obj_of_nsmul_id_eq_zero
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (N : ℕ) [NeZero N]
     (hF : N • 𝟙 F = 0) :
@@ -108,9 +103,7 @@ include hf hd in
 /-- **The derived direct image of a complex killed by an integer raises degrees by at most twice
 the dimension.** Let `f : X ⟶ Y` be a morphism of `k`-schemes of finite type with `dim X ≤ d`,
 and `K ∈ D(X_ét, Λ)` a bounded complex killed by a nonzero integer `N`, vanishing above `n`. Then
-`Rf_* K` vanishes above `n + 2d`. The homology sheaves of `K` are killed by `N`, so this is the
-dévissage `DerivedCategory.isLE_obj_of_isLE_of_homologyProperty` from the case of a sheaf,
-`AlgebraicGeometry.Etale.isLE_rightDerivedLowerStar_singleFunctor_obj_of_nsmul_id_eq_zero`. -/
+`Rf_* K` vanishes above `n + 2d`. -/
 theorem isLE_rightDerivedLowerStar_obj_of_nsmul_id_eq_zero
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (hK : _root_.DerivedCategory.TStructure.t.bounded K) (N : ℕ) [NeZero N] (hN : N • 𝟙 K = 0)

@@ -60,20 +60,6 @@ For a quasi-compact quasi-separated morphism `f` of finite cohomological dimensi
 pushforward `Rf_*` on unbounded derived categories of étale sheaves of `Λ`-modules commutes with
 direct sums, and similarly for `RΓ(X, -)`.
 
-The proof follows the blueprint. The higher direct images `R^q f_*` of sheaves commute with
-filtered colimits (`AlgebraicGeometry.Etale.preservesFilteredColimitsOfSize_higherDirectImage`),
-hence with direct sums, which are filtered colimits of finite direct sums. Then the unbounded
-statement follows from the finiteness of the cohomological dimension: the coproduct of
-K-injective complexes with injective components is a complex of `f_*`-acyclic objects, which
-computes `Rf_*` (`CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor`); this
-replaces the hypercohomology spectral sequence of the blueprint.
-
-For `RΓ(X, -)`, the classical derived functors `R^q Γ(X, -)` are identified with
-`N ↦ Hom(Λ_X[0], N[0]⟦q⟧)` (`AlgebraicGeometry.Etale.shiftedHomFunctorFreeSheafFinalObjectIso`),
-using the derived adjunction between the constant sheaf functor and `R⁺Γ(X, -)`; this functor
-commutes with filtered colimits on a quasi-compact quasi-separated scheme
-(`AlgebraicGeometry.Etale.preservesColimitsOfShape_shiftedHomFunctor_freeSheaf_finalObject`).
-
 ## Main definitions
 
 - `AlgebraicGeometry.Etale.constantSheafIsoFreeSheafFinalObject`: `Λ_X ≅ Λ[X]`.
@@ -83,8 +69,13 @@ commutes with filtered colimits on a quasi-compact quasi-separated scheme
 ## Main statements
 
 - `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedLowerStar` and
-  `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedGlobalSections`
-.
+  `AlgebraicGeometry.Etale.preservesCoproducts_rightDerivedGlobalSections`.
+
+## Implementation details
+
+Instead of a hypercohomology spectral sequence, the unbounded statement uses that a coproduct of
+K-injective complexes with injective components is a complex of `f_*`-acyclic objects, which
+computes `Rf_*` (`CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor`).
 -/
 
 @[expose] public section
@@ -104,8 +95,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The higher direct images `R^q f_*` along a quasi-compact quasi-separated morphism commute
-with direct sums of étale sheaves of `Λ`-modules: direct sums are filtered colimits of finite
-direct sums. -/
+with direct sums of étale sheaves of `Λ`-modules. -/
 instance preservesColimitsOfShape_rightDerived_lowerStar {X Y : Scheme.{u}} (f : X ⟶ Y)
     [QuasiCompact f] [QuasiSeparated f] (ι : Type (u + 1)) (q : ℕ) :
     PreservesColimitsOfShape (Discrete ι) (((f)_*[ModuleCat.{u + 1} Λ]).rightDerived q) :=
@@ -117,10 +107,7 @@ instance preservesColimitsOfShape_rightDerived_lowerStar {X Y : Scheme.{u}} (f :
         q)
   preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset ι _
 
-/-- Direct sums and finite cohomological
-dimension.
-
-For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension,
+/-- For a quasi-compact quasi-separated morphism `f` of finite cohomological dimension,
 `Rf_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` commutes with direct sums. -/
 theorem preservesCoproducts_rightDerivedLowerStar {X Y : Scheme.{u}}
     (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
@@ -132,7 +119,7 @@ theorem preservesCoproducts_rightDerivedLowerStar {X Y : Scheme.{u}}
     fun n ↦ inferInstance
 
 /-- Morphisms out of the constant sheaf `Λ` on the small étale site of `X` are morphisms out of
-the free sheaf `Λ[X]` on the final object: both are the global sections of the target. -/
+the free sheaf `Λ[X]` on the final object. -/
 noncomputable def constantSheafHomEquivFreeSheafFinalObject (X : Scheme.{u})
     (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ) ⟶ G) ≃
@@ -156,7 +143,7 @@ lemma constantSheafHomEquivFreeSheafFinalObject_comp (X : Scheme.{u})
       (Equiv.apply_symm_apply (Etale.freeSheafHomEquiv Λ (Etale.finalObject X) G) _).symm)
 
 /-- The constant sheaf `Λ` on the small étale site of `X` is the free sheaf `Λ[X]` on the final
-object: both corepresent the global sections. -/
+object. -/
 noncomputable def constantSheafIsoFreeSheafFinalObject (X : Scheme.{u}) :
     (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ) ≅
       (Etale.freeSheaf Λ X).obj (Etale.finalObject X) :=
@@ -168,8 +155,7 @@ noncomputable def constantSheafIsoFreeSheafFinalObject (X : Scheme.{u}) :
 
 /-- Étale cohomology as shifted maps out of `Λ_X[0]`: the functor `N ↦ Hom(Λ_X[0], N[0]⟦q⟧)` is
 the `q`-th right derived functor `R^q Γ(X, -)` of the global sections, followed by the forgetful
-functor to abelian groups. This follows from the derived adjunction between the constant sheaf
-functor and `R⁺Γ(X, -)`, and the identification `Hom(Λ[0], K⟦q⟧) ≅ H^q(K)` in `D⁺(Λ)`. -/
+functor to abelian groups. -/
 noncomputable def shiftedHomFunctorFreeSheafFinalObjectIso (X : Scheme.{u}) (q : ℕ) :
     Etale.shiftedHomFunctor Λ ((Etale.freeSheaf Λ X).obj (Etale.finalObject X)) q ≅
       (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).rightDerived q ⋙
@@ -197,8 +183,7 @@ noncomputable def shiftedHomFunctorFreeSheafFinalObjectIso (X : Scheme.{u}) (q :
     Functor.isoWhiskerLeft _ (ModuleCat.preadditiveCoyonedaObjSelfIso Λ)
 
 /-- The higher derived functors `R^q Γ(X, -)` of the global sections on a quasi-compact
-quasi-separated scheme commute with direct sums of étale sheaves of `Λ`-modules: étale cohomology
-commutes with filtered colimits, and direct sums are filtered colimits of finite direct sums. -/
+quasi-separated scheme commute with direct sums of étale sheaves of `Λ`-modules. -/
 instance preservesColimitsOfShape_rightDerived_globalSections (X : Scheme.{u}) [CompactSpace X]
     [QuasiSeparatedSpace X] (ι : Type (u + 1)) (q : ℕ) :
     PreservesColimitsOfShape (Discrete ι)
@@ -215,9 +200,8 @@ instance preservesColimitsOfShape_rightDerived_globalSections (X : Scheme.{u}) [
       (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat)
   preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset ι _
 
-/-- Blueprint `proposition-open-direct-image-preserves-finite`, part (2): for a quasi-compact
-quasi-separated scheme `X` of finite cohomological dimension, `RΓ(X, -)` commutes with direct
-sums. -/
+/-- For a quasi-compact quasi-separated scheme `X` of finite cohomological dimension,
+`RΓ(X, -)` commutes with direct sums. -/
 theorem preservesCoproducts_rightDerivedGlobalSections (X : Scheme.{u})
     [CompactSpace X] [QuasiSeparatedSpace X] (hX : HasFiniteCohomologicalDimension Λ X)
     (ι : Type (u + 1)) :

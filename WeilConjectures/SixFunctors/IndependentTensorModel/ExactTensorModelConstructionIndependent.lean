@@ -158,7 +158,11 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 
 /-! # Normalized tensor comparison for varying-ring inverse image
 
-Source: Stacks Project, Tags 06YS, 06YU and 07A4.
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 06YU]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -210,14 +214,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- Totalize a natural ordinary tensor isomorphism and descend it uniquely along
-flat-term K-flat representatives. Source: Stacks 06YS, 06YU and 07A4.
-Proof: totalize the inverse ordinary comparison on every direct-sum summand.
-Naturality verifies the signed differential, and the adjunction preserves the
-coproducts, so the chain map is invertible. Restriction to flat-term K-flat
-representatives is fully faithful by cochain tensor rigidity. The representative
-comparisons of the supplied tensor models therefore descend this chain
-isomorphism to the displayed derived comparison. Cancelling its four invertible
-factors gives precisely the representative equation of TensorComparisonModel. -/
+flat-term K-flat representatives. -/
 theorem modelOfOrdinary
     {C D : Type c} [Category.{v} C] [Category.{v} D]
     [EssentiallySmall.{max c v r} C] [EssentiallySmall.{max c v r} D]

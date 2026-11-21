@@ -18,9 +18,11 @@ commutes with base change: `η_{c'}` at `Lg'^* N` is `Lg'^* η_c` followed by th
 isomorphism `Lg'^* Le^* ≅ Le'^* Lg^*` and `Le'^*` of the compact-support base change `Ex_!(c)`
 (`AlgebraicGeometry.Etale.compactificationEtaleUnit_baseChange`).
 
-The proof: proper base change on the cube of fibre products
-`W' = Z' ×_{Y'} X' ⟶ W = Z ×_Y X` (`AlgebraicGeometry.Etale.derivedBaseChangeMap_cube`) reduces
-it to the compatibility of the "restrict to the graph and extend by zero" maps with base change
+## Implementation details
+
+Proper base change on the cube of fibre products `W' = Z' ×_{Y'} X' ⟶ W = Z ×_Y X`
+(`AlgebraicGeometry.Etale.derivedBaseChangeMap_cube`) reduces the statement to the
+compatibility of the "restrict to the graph and extend by zero" maps with base change
 (`AlgebraicGeometry.Etale.leftDerivedUpperStar_map_clopenTransfer`), and then to the coherence
 of the composition isomorphisms of the derived pullbacks.
 -/

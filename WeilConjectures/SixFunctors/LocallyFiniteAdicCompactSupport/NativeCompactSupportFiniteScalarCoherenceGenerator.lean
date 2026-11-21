@@ -10,7 +10,12 @@ public import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.Native
 import WeilConjectures.SixFunctors.LocallyFiniteAdicCompactSupport.NativeCompactSupportFiniteScalarCoherenceGeneratorIntegral
 import WeilConjectures.SixFunctors.Integral.IntegralResidueTor
 
-/-! # Generator case of finite scalar coherence -/
+/-! # Generator case of finite scalar coherence
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14 and Remark 6.8.15
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,17 +45,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- The finite scalar transition identity on one rationalized finite-Tor generator.
-Source: Proposition 6.8.14 and Remark 6.8.15, the generator calculation in step 9
-of the native compact-support finite comparison plan.
-
-Proof: represent the source object by the prescribed finite-Tor integral object and
-insert the two six-arrow `IntegralComponent` formulas from the finite-stage
-comparison. The coefficient cocycle, finite-free tensor comparison and pasted-mates
-normalizations identify the two composites; cancellation of the realization
-isomorphisms gives the displayed transition equation. The calculation is on one
-integral numerator, before the formal representative reduction to arbitrary stage
-objects. -/
+/-- The finite scalar transition identity on one rationalized finite-Tor generator. -/
  theorem native_compact_support_finite_scalar_coherence_generator [G : NativeGeometry.{u} l]
     (source : Realization l X) (target : Realization l Y)
     (stage : StageAction l D hl P c)

@@ -60,8 +60,7 @@ noncomputable def Etale.etaleLowerShriekAdjunction :
     A V.smallEtaleTopology U.smallEtaleTopology
 
 /-- The extension by zero along an étale morphism is left exact for any Grothendieck abelian
-coefficient category with sheafification: pointwise on presheaves it is a direct sum of
-evaluations, and sheafification is left exact. -/
+coefficient category with sheafification. -/
 instance Etale.preservesFiniteLimits_etaleLowerShriek_of_hasSmallSiteSheafify :
     PreservesFiniteLimits (Etale.etaleLowerShriek A f h) := by
   have : PreservesFiniteLimits ((MorphismProperty.Over.map ⊤ h).op.lan :
@@ -77,8 +76,7 @@ instance : PreservesFiniteColimits (Etale.etaleLowerShriek A f h) :=
 instance : (Etale.etaleLowerShriek A f h).Additive :=
   Functor.additive_of_preserves_binary_products _
 
-/-- The derived adjunction `D(f_!) ⊣ D(f^*)` for an étale morphism `f`, both functors being
-exact. -/
+/-- The derived adjunction `D(f_!) ⊣ D(f^*)` for an étale morphism `f`. -/
 noncomputable def Etale.derivedEtaleLowerShriekUpperStarAdjunction :
     (Etale.etaleLowerShriek A f h).mapDerivedCategory ⊣ D((f)^*[A]) :=
   let _ : CatCommSq ((Etale.etaleLowerShriek A f h).mapHomologicalComplex (ComplexShape.up ℤ))
@@ -101,9 +99,7 @@ variable {V U : Scheme.{u}} {f : V ⟶ U} (h : Etale f)
 /-- **The presheaf-level projection formula for extension by zero along an étale morphism.**
 For presheaves `F` on `V_ét` and `G` on `U_ét`, the projection map
 `Lan(F ⊗ f^*G) ⟶ Lan F ⊗ G` of the left Kan extension along the localization functor is an
-isomorphism: at `W` both sides are `⨁_α F(α) ⊗ G(W)` over the lifts `α` of `W` through `f`
-(`AlgebraicGeometry.SmallSite.exists_final_discrete_costructuredArrow_overMap`,
-`CategoryTheory.Functor.isIso_lanProjectionMap_app`). -/
+isomorphism. -/
 theorem Etale.isIso_lanProjectionMap_overMap (F : V.Etaleᵒᵖ ⥤ A) (G : U.Etaleᵒᵖ ⥤ A) :
     IsIso ((MorphismProperty.Over.map ⊤ h).op.lanProjectionMap F G) := by
   have : HasCoproducts.{u} A := hasCoproducts_shrink.{u, u + 1}
@@ -114,7 +110,7 @@ theorem Etale.isIso_lanProjectionMap_overMap (F : V.Etaleᵒᵖ ⥤ A) (G : U.Et
 variable [HasSmallSiteSheafify A]
 
 /-- Extension by zero commutes with sheafification: `j_!(a P) ≅ a(Lan P)` for presheaves `P` on
-`V_ét`, both functors being left adjoint to the restriction of presheaves. -/
+`V_ét`. -/
 noncomputable def Etale.presheafToSheafCompEtaleLowerShriekIso :
     presheafToSheaf V.smallEtaleTopology A ⋙ Etale.etaleLowerShriek A f h ≅
       (MorphismProperty.Over.map ⊤ h).op.lan ⋙ presheafToSheaf U.smallEtaleTopology A :=
@@ -124,10 +120,7 @@ noncomputable def Etale.presheafToSheafCompEtaleLowerShriekIso :
       (sheafificationAdjunction U.smallEtaleTopology A)).ofNatIsoRight (Iso.refl _))
 
 /-- **The projection formula for extension by zero along an étale morphism**, for sheaves:
-`j_!(F ⊗ f^*G) ≅ j_!F ⊗ G`. It is the sheafification of the presheaf-level projection formula
-(`AlgebraicGeometry.Etale.isIso_lanProjectionMap_overMap`), sheafification being monoidal and
-commuting with extension by zero (`AlgebraicGeometry.Etale.presheafToSheafCompEtaleLowerShriekIso`).
--/
+`j_!(F ⊗ f^*G) ≅ j_!F ⊗ G`. -/
 noncomputable def Etale.etaleLowerShriekTensorIso (F : Sheaf V.smallEtaleTopology A)
     (G : Sheaf U.smallEtaleTopology A) :
     (Etale.etaleLowerShriek A f h).obj (F ⊗ ((f)^*[A]).obj G) ≅
@@ -225,8 +218,7 @@ noncomputable def Etale.tensorLeftEtaleLowerShriekIso (F : Sheaf V.smallEtaleTop
     exact this.symm
 
 attribute [local instance] Sheaf.braidedCategory in
-/-- **Extension by zero along an étale morphism preserves flat sheaves**: for flat `F`, the
-functor `j_!F ⊗ -` is isomorphic to `j_!(F ⊗ f^*(-))`, a composite of exact functors. -/
+/-- **Extension by zero along an étale morphism preserves flat sheaves**. -/
 instance Etale.preservesFlat_etaleLowerShriek :
     (Etale.etaleLowerShriek A f h).PreservesFlat where
   flat_obj {F} hF := by
@@ -246,8 +238,7 @@ instance Etale.preservesFlat_etaleLowerShriek :
 omit [HasSmallSiteSheafify A] in
 /-- **The projection formula for extension by zero along an étale morphism**, as the
 invertibility of the projection map `f_!(f^*G ⊗ F) ⟶ G ⊗ f_!F` of the adjunction `f_! ⊣ f^*`
-(`CategoryTheory.Functor.Monoidal.projectionMap`). It is conjugate to the internal-hom comparison
-of `f^*`, which is an isomorphism (`AlgebraicGeometry.Etale.isIso_ihomComparison_upperStar`). -/
+(`CategoryTheory.Functor.Monoidal.projectionMap`). -/
 theorem Etale.isIso_projectionMap_etaleLowerShriek
     [∀ M : A, PreservesFilteredColimitsOfSize.{u, u + 1} (tensorLeft M)]
     [(U.smallEtaleTopology.W (A := A)).IsMonoidal] [(V.smallEtaleTopology.W (A := A)).IsMonoidal]

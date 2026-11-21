@@ -42,10 +42,7 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Z : Scheme.{u}}
 
 /-- `Ri^!` commutes with the restriction to an open `W ⊆ X`: for the closed immersion
-`i ∣_ W : Z ∩ W ⟶ W`, `j_Z^* Ri^! M ≅ R(i ∣_ W)^! j^* M`. Both sides are the exceptional inverse
-image along `Z ∩ W ⟶ X` (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`),
-and the exceptional inverse image along a quasi-compact open immersion is the restriction
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriekIsoOfIsOpenImmersion`). -/
+`i ∣_ W : Z ∩ W ⟶ W`, `j_Z^* Ri^! M ≅ R(i ∣_ W)^! j^* M`. -/
 theorem nonempty_iso_mapDerivedCategory_upperStar_rightDerivedUpperShriek (i : Z ⟶ X)
     [IsClosedImmersion i] (W : X.Opens) [IsLocallyNoetherian X] [IsLocallyNoetherian Z]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

@@ -19,6 +19,8 @@ geometric generic points `Ωᵢ` of `Sᵢ`. The map `H.ΩMap : Ω'₁ ⟶ Ω'₂
 closures `Lᵢ^sep` (`AlgebraicGeometry.SliceTrait.Hom.compositumSepMap`), compatibly with the maps
 `Spec Lᵢ ⟶ Spec(Ωᵢ ⊗_{Rᵢ} Sᵢ(x))` (`AlgebraicGeometry.SliceTrait.Hom.compositumPoint_comp`).
 
+## Implementation details
+
 The algebra structures of a slice trait are recorded as local instances
 (`AlgebraicGeometry.SliceTrait.algebraR` etc.); the geometric generic point of the base is given
 by an algebra structure `Algebra R₁ Ω₁`.

@@ -7,11 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ConstructibleExceptionalCoefficients.Coefficient.ConstructibleExceptionalCoefficientConstructionData
 
-/-! # Object transport for rational scalar identity
-
-Source: exceptional coefficient construction, integral-to-rational identity paragraph;
-scalar extension composition, identity clause.
--/
+/-! # Object transport for rational scalar identity -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,12 +19,7 @@ variable (l : ℕ) [Fact l.Prime]
   (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
 
 /-- Rational scalar extension maps the localization of an integral object to the
-localization of the corresponding integral scalar functor object.
-Source: rationalization object formula and scalar object comparison in the coefficient
-construction; proof uses `sfRationalScalarExtension_obj` and the supplied functor
-object equality hS. The statement is strictly an object-level part of the rational
-identity argument and has no morphism or normalization conclusion.
--/
+localization of the corresponding integral scalar functor object. -/
 theorem rational_scalar_object_transport
     (E : FieldStage.{max u v} l) (T : Scheme.{max u v})
     (S : C.{u, v} l Ω T (.integral E) ⥤ C.{u, v} l Ω T (.integral E))

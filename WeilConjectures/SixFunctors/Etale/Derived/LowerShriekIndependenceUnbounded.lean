@@ -15,7 +15,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.OpenClosed.Derived
 
 /-!
-
 # Independence of the unbounded derived lower shriek of the compactification
 
 Let `f : X ⟶ Y` be a morphism of schemes. This file is the unbounded counterpart of
@@ -28,24 +27,12 @@ constructs the comparison
 
 of the derived lower shrieks on the unbounded derived categories, from the coarser
 compactification `d` to the finer one `c`, in the same way as its bounded below version
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`: the unit of
-the derived adjunction `D(r.hom)^* ⊣ R(r.hom)_*`, the inverse of the base change isomorphism
-`D(c.i)_! ≅ D(d.i)_! ⋙ D(r.hom)^*`, and the composition isomorphism
-`R(r.hom)_* ⋙ R(d.g)_* ≅ R(c.g)_*`. Since `(r.hom)^*` is exact, the adjunction is
-`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`, and no monoidal structure
-on the coefficient category `A` is needed.
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusComparison`.
 
 When `f` is quasi-compact, passing through the common refinement `Compactification.inf c d`
 gives an isomorphism `Rf_!(c)[A] ≅ Rf_!(d)[A]` for any two compactifications, and in
 particular an isomorphism `Rf_!(c)[A] ≅ R(f)_![A]` with the derived lower shriek defined by
 the chosen compactification.
-
-On bounded below objects, whiskering `rightDerivedLowerShriekOfCompactificationIso c d` by
-`DerivedCategory.Plus.ι` should give the isomorphism
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusιIso c d` built from the
-bounded below comparisons. This is not proved yet: it needs the compatibility of the
-unbounded derived unit, base change and composition isomorphisms with their bounded below
-counterparts.
 
 ## Main definitions
 
@@ -59,7 +46,21 @@ counterparts.
 ## Main results
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekOfCompactificationComparison`: the
-  comparison is an isomorphism. Not proved yet, see its docstring for the missing hypotheses.
+  comparison is an isomorphism for torsion coefficients.
+
+## Implementation details
+
+Since `(r.hom)^*` is exact, the adjunction used is
+`AlgebraicGeometry.Etale.mapDerivedUpperStarLowerStarAdjunction`, and no monoidal structure on
+the coefficient category `A` is needed.
+
+## TODO
+
+On bounded below objects, whiskering `rightDerivedLowerShriekOfCompactificationIso c d` by
+`DerivedCategory.Plus.ι` should give the isomorphism
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusιIso c d` built from the
+bounded below comparisons. This needs the compatibility of the unbounded derived unit, base
+change and composition isomorphisms with their bounded below counterparts.
 -/
 
 @[expose] public section
@@ -83,8 +84,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} {c d : Compactification f} (r : c.Refi
 
 /-- The base change isomorphism `D(c.i)_! ≅ D(d.i)_! ⋙ D(r.hom)^*` on unbounded derived
 categories, induced by `Compactification.Refinement.openImmersionLowerShriekBaseChange` for a
-refinement whose square over `X` is cartesian. This is the unbounded counterpart of
-`refinementLowerShriekBaseChangeDerivedPlusIso`. -/
+refinement whose square over `X` is cartesian. -/
 noncomputable def refinementLowerShriekBaseChangeDerivedIso
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
     D((c.i)_!open[A]) ≅ D((d.i)_!open[A]) ⋙ D((r.hom)^*[A]) :=
@@ -103,9 +103,7 @@ D(d.i)_! ⋙ R(d.g)_* ──η──▶ D(d.i)_! ⋙ Dq^* ⋙ Rq_* ⋙ R(d.g)_*
 
 of the unit `η` of the derived adjunction `Dq^* ⊣ Rq_*`, the inverse of the base change
 isomorphism `refinementLowerShriekBaseChangeDerivedIso`, and the composition isomorphism
-`Rq_* ⋙ R(d.g)_* ≅ R(c.g)_*`. As in the bounded below case
-(`rightDerivedLowerShriekOfCompactificationPlusComparison`), it goes from the coarser
-compactification `d` to the finer one `c`. -/
+`Rq_* ⋙ R(d.g)_* ≅ R(c.g)_*`. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) : Rf_!(d)[A] ⟶ Rf_!(c)[A] :=
   Functor.whiskerRight (Functor.whiskerLeft D((d.i)_!open[A])
@@ -123,13 +121,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 /-- **The unit of `D(q^*) ⊣ Rq_*` at an extension by zero is an isomorphism.** Let
 `r : c.Refinement d` be a refinement of compactifications whose square over `X` is cartesian,
 and write `q = r.hom : c.Z ⟶ d.Z` and `j = d.i`. For torsion coefficients the unit
-`j_! K ⟶ Rq_* q^* j_! K` is an isomorphism. It is checked on the open `X` and on its closed
-complement `i : W ⟶ d.Z`:
-
-* over `X`, `q^* j_! = (c.i)_!` is fully faithful, so the unit is invisible to `j^*`
-  (`CategoryTheory.Adjunction.isIso_map_unit_app_obj`);
-* over `W`, both sides vanish: `i^* j_! K = 0`, and by proper base change for the proper `q`,
-  `i^* Rq_* q^* j_! K` is computed on `q⁻¹(W)`, which does not meet `X`. -/
+`j_! K ⟶ Rq_* q^* j_! K` is an isomorphism. -/
 theorem isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLowerShriek
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -178,10 +170,7 @@ theorem isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLower
 
 /-- **The comparison of unbounded derived lower shrieks along a refinement is an
 isomorphism** for torsion coefficients: for a refinement `r : c.Refinement d` whose square over
-`X` is cartesian, the comparison `Rf_!(d)[Λ] ⟶ Rf_!(c)[Λ]` is an isomorphism. The composition
-and base change factors of the comparison are isomorphisms, and so is the unit factor, by
-`isIso_mapDerivedUpperStarLowerStarAdjunction_unit_app_openImmersionLowerShriek`, which rests
-on proper base change for `r.hom`. This is the unbounded form of `BA43-RHO`. -/
+`X` is cartesian, the comparison `Rf_!(d)[Λ] ⟶ Rf_!(c)[Λ]` is an isomorphism. -/
 instance isIso_rightDerivedLowerShriekOfCompactificationComparison
     (hcart : IsPullback c.i (𝟙 X) r.hom d.i) :
     IsIso (rightDerivedLowerShriekOfCompactificationComparison (ModuleCat.{u + 1} Λ) r hcart) := by

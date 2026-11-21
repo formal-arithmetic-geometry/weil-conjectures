@@ -12,10 +12,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 
 For an étale morphism `u : U ⟶ X` and finite coefficients `Λ`, the comparison
 `Lu^* RHom(M, N) ⟶ RHom(Lu^* M, Lu^* N)` of the monoidal functor `Lu^*` is an isomorphism
-(`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`, blueprint
-`prose-03-02`). It is conjugate to the projection map of the derived
-adjunction `D(u_!) ⊣ Lu^*`, which is an isomorphism by the derived projection formula for étale
-morphisms (`AlgebraicGeometry.Etale.isIso_projectionMap_derivedEtaleLowerShriek`).
+(`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`). It is conjugate
+to the projection map of the derived adjunction `D(u_!) ⊣ Lu^*`, which is an isomorphism by the
+derived projection formula for étale morphisms
+(`AlgebraicGeometry.Etale.isIso_projectionMap_derivedEtaleLowerShriek`).
 -/
 
 @[expose] public section
@@ -39,16 +39,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Derived pullback, tensor product, and
-internal Hom.
-
-For an étale morphism `u : U ⟶ X`, the derived pullback commutes with the derived internal hom:
-the comparison `Lu^* RHom(M, N) ⟶ RHom(Lu^* M, Lu^* N)` of the monoidal functor `Lu^*`
-(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism. The pullback along `u`
-is the restriction to the slice site `X_ét/U`, which has an exact left adjoint `u_!`; the
-comparison is conjugate to the projection map `u_!(Lu^*M ⊗ᴸ T) ⟶ M ⊗ᴸ u_!T` of the derived
-adjunction `D(u_!) ⊣ Lu^*`, an isomorphism by the derived projection formula
-(`AlgebraicGeometry.Etale.isIso_projectionMap_derivedEtaleLowerShriek`). -/
+/-- For an étale morphism `u : U ⟶ X`, the derived pullback commutes with the derived internal
+hom: the comparison `Lu^* RHom(M, N) ⟶ RHom(Lu^* M, Lu^* N)` of the monoidal functor `Lu^*`
+(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism. -/
 theorem isIso_ihomComparison_leftDerivedUpperStar_of_etale {U X : Scheme.{u}}
     (u : U ⟶ X) [Etale u]
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :

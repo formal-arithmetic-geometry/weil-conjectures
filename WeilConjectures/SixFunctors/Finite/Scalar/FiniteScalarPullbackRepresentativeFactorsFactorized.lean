@@ -12,7 +12,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Factorized representative equation for finite scalar pullback
 
-Source: Stacks Tags 07A6 and 0D6E.
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0D6E]
 -/
 
 @[expose] public noncomputable section
@@ -206,15 +209,8 @@ private theorem square_factors
 
 namespace WeilConjectures
 
-/--
-The factorized form of the representative equation. It isolates the ordinary
-termwise comparison and the two exact localization factors; the parent theorem
-obtains the displayed left-derived counit form by the standard counit
-factorization. This is the derived mate calculation before that final rewrite.
-
-Source: Stacks Tags 07A6 and 0D6E; the localization step in the proof of the
-finite scalar inverse-mate representative formula.
--/
+/-- The factorized form of the finite scalar pullback representative equation, in terms of
+the ordinary termwise comparison and the two exact localization factors. -/
 theorem finiteScalarPullback_representative_factors_factorized
     (R : Type u) [CommRing R] [Finite R] {X Y : Scheme.{u}} (p : X ⟶ Y)
     (P : CochainComplex

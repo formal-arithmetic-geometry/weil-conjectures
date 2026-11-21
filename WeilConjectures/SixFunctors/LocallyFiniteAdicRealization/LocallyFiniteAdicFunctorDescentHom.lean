@@ -11,8 +11,9 @@ import WeilConjectures.AlgebraicGeometry.ProperBaseChange.SplitCoefficientDerive
 
 /-! # Hom descent for a normalized locally finite adic functor
 
-Source: Bhatt--Scholze, Proposition 6.8.14(1),(2), using the existing condensed
-filtered two-colimit; native realization proof steps 3 and 6.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(1),(2)
 -/
 
 @[expose] public noncomputable section
@@ -50,18 +51,6 @@ private theorem finiteCondensed_faithful (l : ℕ) [Fact l.Prime] (X : Scheme.{u
 attribute [local irreducible] nativeCondensedDerived nativeCondensedModules
 
 /-- The normalized native functor is fully faithful on derived Hom sets.
-
-Source: Bhatt--Scholze, Proposition 6.8.14(1),(2).
-Proof in words: use the finite coefficient comparisons, which identify a representative
-with its condensed tensor realization. For injectivity represent both arrows at one
-common field. Cancel the object comparisons and tensor associators. The split inclusion
-of the finite coefficient field into the closure makes derived extension faithful;
-finite realization is also faithful, so the representatives agree. For surjectivity
-transport the ambient arrow to condensed modules. Hom-surjectivity of the existing
-condensed two-colimit puts it at a common finite field. Conjugate by the scalar
-comparisons and lift it through the full finite realization. The representative formula
-identifies its native image with the original arrow. This applies to every source pair,
-including shifted objects, without asserting an essential-image or smallness result.
 -/
 theorem normalizedFunctor_descent_hom
     (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X]

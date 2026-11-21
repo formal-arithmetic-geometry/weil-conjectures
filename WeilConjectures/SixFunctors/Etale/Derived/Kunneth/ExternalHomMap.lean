@@ -15,7 +15,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 # The external Hom map
 
 For two complexes `E₁, L₁` on `Z₁` and `E₂, L₂` on `Z₂` over a base `B`, the *external Hom map*
-of `lemma-external-duality-trace-morphism` (iii)
 
 `β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)`
 
@@ -27,8 +26,7 @@ braiding of the derived category) and its signs:
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.externalHomMap` (`lemma-external-duality-trace-morphism` (iii)): the map
-`β`.
+- `AlgebraicGeometry.Etale.externalHomMap`: the map `β`.
 -/
 
 @[expose] public section
@@ -49,16 +47,10 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 namespace Etale
 
-/-- Blueprint `lemma-external-duality-trace-morphism` (iii), `lemma-external-duality-trace-morphism`
-(iii): the external Hom map
-
-`β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)`
-
-for `Eᵢ, Lᵢ ∈ D(Zᵢ_ét)` and `cᵢ : Zᵢ ⟶ B`, the external products being taken over `B`. It is the
-tensor–Hom transpose of the two evaluations
-(`CategoryTheory.MonoidalClosed.externalIhomMap` for the monoidal functors `Lp₁^*`, `Lp₂^*`),
-with the tensor symmetry the Koszul braiding of `D((Z₁ ×_B Z₂)_ét)`
-(`DerivedCategory.braidedCategory'`). -/
+/-- The external Hom map `β : RHom(E₁, L₁) ⊠ RHom(E₂, L₂) ⟶ RHom(E₁ ⊠ E₂, L₁ ⊠ L₂)` for
+`Eᵢ, Lᵢ ∈ D(Zᵢ_ét)` and `cᵢ : Zᵢ ⟶ B`, the external products being taken over `B`: the
+tensor–Hom transpose of the two evaluations, with the tensor symmetry the Koszul braiding of
+`D((Z₁ ×_B Z₂)_ét)`. -/
 noncomputable def externalHomMap {B Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ B) (c₂ : Z₂ ⟶ B)
     (E₁ L₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A))
     (E₂ L₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology A)) :

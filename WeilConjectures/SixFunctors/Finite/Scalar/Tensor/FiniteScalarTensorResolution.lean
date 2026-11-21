@@ -31,8 +31,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-! # Scalar tensor realization on resolving representatives
 
-Source: Stacks Tags 06YS, 07A4 and 04VK.
- -/
+## References
+
+* [Stacks, Tag 06YS]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 04VK]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -99,8 +103,7 @@ private theorem scalarAcyclicMapIff
       (h i))).of_iso ((F.mapHomologicalComplexHomologyIso (.up ℤ) i).app K)
 
 /-- An exact equivalence with the specified ordinary tensor comparison preserves
-acyclic-tensor K-flatness and termwise tensor exactness.
-Source: Stacks 06YS and 07A4. -/
+acyclic-tensor K-flatness and termwise tensor exactness. -/
 theorem finiteScalarRealizationPreservesFlatKFlat
     {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D]
     [Abelian C] [Abelian D]
@@ -159,8 +162,7 @@ theorem finiteScalarRealizationPreservesFlatKFlat
         exact ⟨inferInstance, inferInstance⟩)
     exact hD
 
-/-- The exact tensor realization preserves flat-term K-flat representatives.
-Source: Stacks 06YS and 07A4. -/
+/-- The exact tensor realization preserves flat-term K-flat representatives. -/
 theorem finiteScalarPreservesRepresentatives (T : Scheme.{u}) (R : Type u)
     [CommRing R] [Finite R] (P : CochainComplex
       (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)
@@ -178,16 +180,14 @@ theorem finiteScalarPreservesRepresentatives (T : Scheme.{u}) (R : Type u)
     (SheafOfModules.siteSheafTensorRightIso.{u + 1, u, u + 1}
       (proEtaleConstantRing T R) _).symm (h.2 n)
 
-/-- Extract K-flatness without unfolding the resolving predicate at specialization.
-Source: Stacks 06YS. -/
+/-- Extract K-flatness without unfolding the resolving predicate at specialization. -/
 theorem finiteScalarFlatRepresentatives_kFlat (T : Scheme.{u}) (R : Type u)
     [CommRing R] (P : CochainComplex
       (Sheaf (ProEt.topology T) (ModuleCat.{u + 1} (ULift.{u + 1} R))) ℤ)
     (hP : finiteScalarFlatRepresentatives T R P) :
     (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P := hP.1
 
-/-- Resolving restriction is fully faithful on derived bifunctors.
-Source: Stacks 04VK. -/
+/-- Resolving restriction is fully faithful on derived bifunctors. -/
 theorem finiteScalarRepresentativesFullyFaithful (T : Scheme.{u}) (R : Type u)
     [CommRing R] [Finite R]
     :
@@ -219,8 +219,7 @@ theorem finiteScalarRepresentativesFullyFaithful (T : Scheme.{u}) (R : Type u)
     (NatIso.prod (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso C))
       (isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso C))))⟩
 
-/-- The localization tensorator is invertible on a K-flat right input.
-Source: Stacks 07A4. -/
+/-- The localization tensorator is invertible on a K-flat right input. -/
 theorem finiteScalarLocalizationTensor_isIso
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     [HasDerivedCategory.{w} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -239,8 +238,7 @@ theorem finiteScalarLocalizationTensor_isIso
     (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫ DerivedCategory.Qh.map _) ≫ _)
   infer_instance
 
-/-- Invert the localization tensorator on any specified class of K-flat complexes.
-Source: Stacks 07A4. -/
+/-- Invert the localization tensorator on any specified class of K-flat complexes. -/
 @[irreducible] def finiteScalarFixedTensorRepresentativeOfKFlat
     {A : Type u₁} [Category.{v₁} A] [Abelian A] [IsGrothendieckAbelian.{v₁} A]
     [HasDerivedCategory.{w} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -270,8 +268,7 @@ Source: Stacks 07A4. -/
     exact finiteScalarLocalizationTensor_isIso Z.1.obj Z.2.obj (hP _ Z.2.property)
   exact (asIso v).symm
 
-/-- Specialize the localization tensorator with exactly the published coefficient API.
-Source: Stacks 07A4. -/
+/-- Specialize the localization tensorator with exactly the published coefficient API. -/
 @[irreducible] def finiteScalarFixedTensorRepresentativeForCoefficients
     (B : Type u₁) [Category.{u + 1} B] [Abelian B]
     [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B]

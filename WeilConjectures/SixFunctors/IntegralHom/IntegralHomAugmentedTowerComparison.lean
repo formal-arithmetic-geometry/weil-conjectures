@@ -35,7 +35,11 @@ import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-! # Internal Hom comparison of the augmented reduction towers
 
-Source: blueprint order 2478, proof steps 4-8; Stacks Tags 07A6, 08J9 and 08TC.
+## References
+
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 08TC]
 -/
 
 @[expose] public section
@@ -62,24 +66,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- Hom identifies the actual augmented towers, before imposing any completeness
 condition or taking any product. The isomorphism includes every transition map,
-and its displayed equation includes each canonical augmentation.
-
-Source: blueprint order 2478, steps 4-8; Stacks Tags 07A6, 08J9 and 08TC.
-
-Proof: Choose a complex G' representing Hom(K,Q(G)) and a flat-term K-flat
-resolution q' of G'. For each positive exponent use models_exist and
-comparison_isIso. The coefficient extension/restriction adjunction identifies
-restricted finite Hom with Hom(K,Res(N)); its Hom bijections are tensor-Hom
-adjunction followed by the normalized coefficient tensor comparison. Composing
-with the finite comparison and the canonical resolution computations gives an
-isomorphism Hom(K,F_n) to F'_n. The finite signed chain comparison is natural
-in the two-term quotient complex. Its naturality with the quotient maps gives
-commutation with consecutive transitions, hence with every arrow of the tower.
-Naturality with the degree-zero quotient unit, using the scalar unit x maps to
-1 tensor x and the evaluation normalization, gives exactly the augmentation
-equation below. Assemble the components by NatIso.ofComponents. Independence
-of resolutions transports the equations from the chosen K-flat and K-injective
-models to q and q'. This argument uses neither products nor completeness. -/
+and its displayed equation includes each canonical augmentation. -/
 theorem augmentedTower_comparison
     (K : completedIntegralDerivedCategory l E Y D hl)
     (P G : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ)

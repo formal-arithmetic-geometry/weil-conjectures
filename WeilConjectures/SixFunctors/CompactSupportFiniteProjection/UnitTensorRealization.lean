@@ -7,7 +7,13 @@ module
 
 public import Mathlib.CategoryTheory.Equivalence
 
-/-! # The coefficient unit followed by a tensor comparison -/
+/-! # The coefficient unit followed by a tensor comparison
+
+## Implementation details
+
+The endpoints of `unitTensorRealization` are stated explicitly, so that consumers can use it
+without unfolding a concrete equivalence.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -17,10 +23,7 @@ open CategoryTheory
 
 namespace WeilConjectures.CompactSupportFiniteProjection
 
-/-- Cancel a coefficient equivalence unit, then tensor the specified comparison.
-The explicitly stated endpoints let consumers use this construction without
-unfolding a concrete equivalence.
- -/
+/-- Cancel a coefficient equivalence unit, then tensor the specified comparison. -/
 def unitTensorRealization
     {A B : Type*} [Category A] [Category B] (R : A ≌ B)
     (T : A ⥤ A ⥤ A) (k : A) {a c : A} (e : a ≅ c) :

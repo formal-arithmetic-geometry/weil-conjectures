@@ -42,7 +42,7 @@ composition isomorphisms (`ProEtale.CondensedRing.derivedUnitTransport`); for `p
   of `galoisLayerAut σ` on the nearby cycles, provided the unit transports `u_σ` are the derived
   Galois actions `ProEtale.CondensedRing.derivedGaloisAction` up to a bijection of `Γ`.
 
-## Implementation notes
+## Implementation details
 
 The diagram chases are carried out in abstract categories (`CategoryTheory.unitTransport_comp_aux`,
 `CategoryTheory.pullbackExchange_endo_aux`) and then instantiated. The identification of the

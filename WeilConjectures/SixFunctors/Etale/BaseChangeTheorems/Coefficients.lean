@@ -16,24 +16,17 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars.IsIs
 
 Let `Λ` be a commutative ring and `N` a positive integer, and put `Λ_N = Λ ⧸ NΛ`. Restriction of
 scalars along `Λ ⟶ Λ_N` is exact and conservative, commutes with `g^*` and `f_*`, and commutes
-with `Rf_*`: an injective sheaf of `Λ_N`-modules has no higher cohomology as a sheaf of
-`Λ`-modules. It therefore carries the derived base change map over `Λ_N` to the one over `Λ`.
+with `Rf_*`. It therefore carries the derived base change map over `Λ_N` to the one over `Λ`.
 
 Consequently:
 
 - the base change property with `Λ`-coefficients implies the one with `Λ_N`-coefficients
-  (`AlgebraicGeometry.Etale.HasTorsionBaseChange.quotient`), since a complex of sheaves of
-  `Λ_N`-modules has torsion cohomology as a complex of sheaves of `Λ`-modules;
+  (`AlgebraicGeometry.Etale.HasTorsionBaseChange.quotient`);
 - for a quasi-compact quasi-separated `f`, the base change property with `Λ_p`-coefficients for
   every prime `p` implies the one with `Λ`-coefficients
-  (`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`): by truncation an object of
-  `D⁺` with torsion cohomology is reduced to a torsion sheaf in one degree, a torsion sheaf is a
-  filtered colimit of sheaves killed by integers, which are successive extensions of sheaves
-  killed by primes (`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isTorsionSheaf`),
-  and a sheaf of `Λ`-modules killed by `p` is a sheaf of `Λ_p`-modules.
+  (`AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`).
 
-This is the change of coefficients in the proof of the reduction of proper base change to the
-projective line.
+This is the change of coefficients used to reduce proper base change to the projective line.
 -/
 
 @[expose] public section
@@ -63,7 +56,7 @@ section RestrictScalars
 variable {Λ} {Λ' : Type (u + 1)} [CommRing Λ'] (φ : Λ →+* Λ')
 
 /-- A sheaf of `Λ'`-modules is torsion if and only if its restriction of scalars along
-`φ : Λ →+* Λ'` is: both have the same underlying sheaf of abelian groups. -/
+`φ : Λ →+* Λ'` is. -/
 lemma Scheme.isTorsionModuleSheaf_restrictScalars_obj_iff {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     IsTorsionModuleSheaf ((Sheaf.restrictScalars X.smallEtaleTopology φ).obj F) ↔
@@ -71,8 +64,7 @@ lemma Scheme.isTorsionModuleSheaf_restrictScalars_obj_iff {X : Scheme.{u}}
   rw [isTorsionModuleSheaf_iff_isTorsion, isTorsionModuleSheaf_iff_isTorsion]
   rfl
 
-/-- The restriction of scalars of a complex with torsion cohomology has torsion cohomology: its
-cohomology sheaves are the restrictions of scalars of those of the complex. -/
+/-- The restriction of scalars of a complex with torsion cohomology has torsion cohomology. -/
 lemma Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars {X : Scheme.{u}}
     (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')))
     (hK : Etale.DerivedCategory.Plus.moduleTorsionHomology Λ' X K) :
@@ -119,8 +111,7 @@ lemma Etale.isIso_restrictCoextendScalarsAdj_counit_app_of_nsmul_eq_zero {X : Sc
 
 /-- **Base change property along a change of coefficient rings.** If `f` satisfies the base
 change property with `Λ`-coefficients, then also with `Λ'`-coefficients for every ring
-homomorphism `φ : Λ →+* Λ'`: restriction of scalars along `φ` reflects isomorphisms, preserves
-torsion cohomology, and carries the derived base change map over `Λ'` to the one over `Λ`. -/
+homomorphism `φ : Λ →+* Λ'`. -/
 theorem Etale.HasTorsionBaseChange.of_ringHom {Λ' : Type (u + 1)} [CommRing Λ'] (φ : Λ →+* Λ')
     {X Y : Scheme.{u}} {f : X ⟶ Y} (hf : Etale.HasTorsionBaseChange Λ f) :
     Etale.HasTorsionBaseChange Λ' f := by
@@ -129,9 +120,7 @@ theorem Etale.HasTorsionBaseChange.of_ringHom {Λ' : Type (u + 1)} [CommRing Λ'
   exact hf sq _ (Etale.DerivedCategory.Plus.moduleTorsionHomology_restrictScalars φ K hK)
 
 /-- **Base change property for a quotient coefficient ring.** If `f` satisfies the base change
-property with `Λ`-coefficients, then also with `Λ ⧸ NΛ`-coefficients: restriction of scalars
-along `Λ ⟶ Λ ⧸ NΛ` is conservative, sends complexes of `Λ ⧸ NΛ`-modules to complexes with
-torsion cohomology, and carries the derived base change map over `Λ ⧸ NΛ` to the one over `Λ`. -/
+property with `Λ`-coefficients, then also with `Λ ⧸ NΛ`-coefficients. -/
 theorem Etale.HasTorsionBaseChange.quotient {X Y : Scheme.{u}} {f : X ⟶ Y}
     (hf : Etale.HasTorsionBaseChange Λ f) (N : ℕ) :
     Etale.HasTorsionBaseChange (Λ ⧸ Ideal.span {(N : Λ)}) f := by
@@ -181,11 +170,7 @@ theorem Etale.hasTorsionBaseChange_of_forall_prime {X Y : Scheme.{u}} (f : X ⟶
 
 /-- **Injective acyclicity implies the base change property.** If a proper morphism
 `f : X ⟶ Y` has injective acyclicity with `Λ ⧸ pΛ`-coefficients for every prime `p`, then it
-satisfies the base change property with `Λ`-coefficients: for the torsion rings `Λ ⧸ pΛ` this is
-`AlgebraicGeometry.Etale.hasTorsionBaseChange_iff_hasInjectiveAcyclicity`, and the passage to `Λ`
-is `AlgebraicGeometry.Etale.hasTorsionBaseChange_of_forall_prime`.
-(blueprint: `theorem-pbc-injective-acyclicity--1`, `IA_r(f)` for every prime `r` implies
-`PBC(f)`) -/
+satisfies the base change property with `Λ`-coefficients. -/
 @[stacks 0A4B]
 theorem Etale.hasTorsionBaseChange_of_hasInjectiveAcyclicity {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsProper f]

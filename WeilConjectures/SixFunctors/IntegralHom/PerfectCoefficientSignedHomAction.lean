@@ -126,8 +126,11 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Invertibility of the derived signed action of a perfect coefficient complex
 
-Source: the finite-free calculation in paragraph 1 of
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 08J7, 08J9 and 0A8X.
+## References
+
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 0A8X]
 -/
 
 @[expose] public section
@@ -252,28 +255,7 @@ private theorem homModelMap_naturality
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The signed chain map induces an isomorphism into derived internal Hom when
 its coefficient object is isomorphic to a two-term complex of units. The map
-into derived Hom is essential: the target Hom complex need not compute it by itself.
-
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraph 1;
-Stacks Tags 08J7, 08J9 and 0A8X.
-
-Proof: first take the coefficient complex to be the two-term unit complex Q0.
-Its signed exchange is invertible in every degree by the finite-coordinate
-calculation. Tensoring a K-injective complex with this bounded complex of
-finite free modules is K-injective: its terms are finite sums of shifts and
-its differential is assembled by a mapping cone. Hence homModelMap is an
-isomorphism in this case. For a general K-flat Q with the given derived
-isomorphism to Q0, represent that isomorphism by a roof of quasi-isomorphisms
-between K-flat complexes. Tensoring an arbitrary complex with a
-quasi-isomorphism between K-flat complexes is a quasi-isomorphism: its cone is
-acyclic and K-flat. Thus both source tensoring with Hom(P,I) and target
-tensoring with I descend on this roof. Derived Hom preserves the target
-isomorphisms. The signed formula determines the exchange map uniquely by
-Hom projections and tensor-sheafification descent, so its naturality gives
-a commutative square on each leg of the roof. Transport invertibility from
-Q0 through this square. This proves invertibility of the displayed composite,
-without claiming K-injectivity of I tensor Q or invertibility of f alone.
-The same proof includes zero complexes and the empty site. -/
+into derived Hom is essential: the target Hom complex need not compute it by itself. -/
 theorem perfectCoefficient_signedHomAction_isIso
     (P I Q Q0 : CochainComplex (Modules.{t, u} Y R) ℤ)
     (hP : flat.{t, u} Y R P) (hI : I.IsKInjective)

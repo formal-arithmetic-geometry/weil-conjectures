@@ -20,17 +20,6 @@ on `S`. If every higher direct image `Rᵠf_* 𝔽_ℓ` of the constant sheaf `�
 invertible on `S`, is constructible, then so is every higher direct image `Rᵠf_* M` of the
 constant sheaf with value a finite `Λ`-module `M`
 (`Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmod`).
-This is the dévissage step of the blueprint proof of
-`proposition-proper-direct-image-finite-coefficients`.
-
-The proof first changes the coefficients from `Λ` to `ℤ/N`, `N` the characteristic of `Λ`, by
-restriction of scalars: it commutes with constant sheaves, with the derived direct image and
-with homology, and for finite rings it preserves and reflects constructibility
-(`AlgebraicGeometry.Scheme.isConstructibleSheaf_restrictScalars_iff_of_finite`), constructibility
-only depending on the underlying sheaf of sets. A finite `ℤ/N`-module is then filtered with
-successive quotients `ℤ/ℓ`, `ℓ ∣ N` prime, and the higher direct images of an extension are
-handled by the long exact sequence, i.e. by the triangulated subcategory of complexes with
-constructible homology sheaves.
 
 ## Main statements
 
@@ -38,6 +27,15 @@ constructible homology sheaves.
 - `AlgebraicGeometry.Etale.restrictScalarsHomologyRightDerivedLowerStarIso`
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff`
 - `Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmod`
+
+## Implementation details
+
+The coefficients are first changed from `Λ` to `ℤ/N`, `N` the characteristic of `Λ`, by
+restriction of scalars: it commutes with constant sheaves, with the derived direct image and
+with homology, and for finite rings it preserves and reflects constructibility, constructibility
+only depending on the underlying sheaf of sets. A finite `ℤ/N`-module is then filtered with
+successive quotients `ℤ/ℓ`, `ℓ ∣ N` prime, and extensions are handled by the triangulated
+subcategory of complexes with constructible homology sheaves.
 -/
 
 @[expose] public section
@@ -71,8 +69,7 @@ namespace Scheme
 variable {Y : Scheme.{u}} {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ']
 
 /-- **The underlying sheaf of sets of a finite locally constant sheaf of modules over a finite
-ring is finite locally constant**: forgetting the module structure preserves constant sheaves
-and stalks. -/
+ring is finite locally constant.** -/
 theorem IsFiniteLocallyConstantSheaf.forget [Finite Λ]
     (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [h : IsFiniteLocallyConstantSheaf F] :
     IsFiniteLocallyConstantSheafOfTypes
@@ -95,8 +92,7 @@ theorem IsFiniteLocallyConstantSheaf.forget [Finite Λ]
 
 /-- **Finite local constancy under restriction of scalars between finite rings.** For a
 morphism `φ : Λ →+* Λ'` of finite rings, a sheaf of `Λ'`-modules is finite locally constant if
-and only if its restriction of scalars to `Λ` is: both conditions only depend on the underlying
-sheaf of sets. -/
+and only if its restriction of scalars to `Λ` is. -/
 theorem isFiniteLocallyConstantSheaf_restrictScalars_iff [Finite Λ] [Finite Λ'] (φ : Λ →+* Λ')
     (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     IsFiniteLocallyConstantSheaf ((Sheaf.restrictScalars Y.smallEtaleTopology φ).obj G) ↔
@@ -107,8 +103,7 @@ theorem isFiniteLocallyConstantSheaf_restrictScalars_iff [Finite Λ] [Finite Λ'
 
 /-- **Constructibility under restriction of scalars between finite rings.** For a morphism
 `φ : Λ →+* Λ'` of finite rings, a sheaf of `Λ'`-modules is constructible if and only if its
-restriction of scalars to `Λ` is: pullback to the strata commutes with restriction of scalars
-(`AlgebraicGeometry.Etale.isIso_upperStarRestrictScalars`). -/
+restriction of scalars to `Λ` is. -/
 theorem isConstructibleSheaf_restrictScalars_iff_of_finite [Finite Λ] [Finite Λ']
     (φ : Λ →+* Λ') (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     IsConstructibleSheaf ((Sheaf.restrictScalars Y.smallEtaleTopology φ).obj G) ↔
@@ -138,8 +133,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ']
 
 /-- **Restriction of scalars commutes with the higher direct images.** For `φ : Λ →+* Λ'`, a
 morphism `f : X ⟶ S` and a sheaf `F` of `Λ'`-modules on `X`, the restriction of scalars of
-`Rᵠf_* F` is `Rᵠf_*` of the restriction of scalars of `F`
-(`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`). -/
+`Rᵠf_* F` is `Rᵠf_*` of the restriction of scalars of `F`. -/
 noncomputable def restrictScalarsHomologyRightDerivedLowerStarIso (φ : Λ →+* Λ')
     {X S : Scheme.{u}} (f : X ⟶ S) (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))
     (q : ℤ) :
@@ -164,10 +158,7 @@ noncomputable def restrictScalarsHomologyRightDerivedLowerStarIso (φ : Λ →+*
 /-- **Change of coefficients for constant higher direct images.** For a morphism `φ : Λ →+* Λ'`
 of finite rings, a morphism `f : X ⟶ S` and a `Λ'`-module `M`, the higher direct image
 `Rᵠf_* M` of the constant sheaf `M` is constructible if and only if the one of the constant
-sheaf of `Λ`-modules `M` is: restriction of scalars commutes with constant sheaves
-(`CategoryTheory.constantCommuteCompose`) and higher direct images
-(`AlgebraicGeometry.Etale.restrictScalarsHomologyRightDerivedLowerStarIso`), and preserves and
-reflects constructibility. -/
+sheaf of `Λ`-modules `M` is. -/
 theorem isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff
     [Finite Λ] [Finite Λ'] (φ : Λ →+* Λ') {X S : Scheme.{u}} (f : X ⟶ S)
     (M : ModuleCat.{u + 1} Λ') (q : ℤ) :
@@ -190,10 +181,7 @@ theorem isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff
 
 /-- **Constant direct images of an extension.** For a short exact sequence
 `0 ⟶ M₁ ⟶ M₂ ⟶ M₃ ⟶ 0` of finite modules over a finite ring `Λ`, if all the higher direct images
-of the constant sheaves `M₁` and `M₃` along `f` are constructible, so are those of `M₂`: the
-sequence of constant sheaves is exact (`AlgebraicGeometry.Scheme.constantEtaleSheaf_shortExact`),
-so that `Rf_*` gives a distinguished triangle, and the complexes with constructible homology
-sheaves form a triangulated subcategory. -/
+of the constant sheaves `M₁` and `M₃` along `f` are constructible, so are those of `M₂`. -/
 theorem constructibleHomology_rightDerivedLowerStar_constantSheaf_of_shortExact [Finite Λ]
     {X S : Scheme.{u}} (f : X ⟶ S) {M : ShortComplex (ModuleCat.{u + 1} Λ)}
     [Finite M.X₁] [Finite M.X₂] [Finite M.X₃] (hM : M.ShortExact)
@@ -241,8 +229,7 @@ lemma exists_injective_linearMap_restrictScalars_of_addOrderOf {N ℓ : ℕ} [Ne
 /-- **Dévissage of the coefficients over `ℤ/N`.** Let `f : X ⟶ S` be a morphism and `N ≠ 0`. If
 for every prime `ℓ ∣ N` all the higher direct images `Rᵠf_* 𝔽_ℓ` of the constant sheaf `𝔽_ℓ`
 are constructible, then for every finite `ℤ/N`-module `M` all the higher direct images
-`Rᵠf_* M` are constructible: by induction on the cardinality of `M`, along the extension of
-`M / (ℤ/ℓ) x` by `(ℤ/ℓ) x` for an element `x` of prime order `ℓ` (Cauchy's theorem). -/
+`Rᵠf_* M` are constructible. -/
 theorem constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod {X S : Scheme.{u}}
     (f : X ⟶ S) (N : ℕ) [NeZero N]
     (h : ∀ (ℓ : ℕ) [Fact ℓ.Prime], ℓ ∣ N →
@@ -298,17 +285,11 @@ theorem constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod {X S : Sc
     (fun q ↦ ?_) (ih _ hcard (ModuleCat.of _ (M ⧸ LinearMap.range g)) rfl)
   exact (isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff ψ f _ q).2 (h ℓ hℓN q)
 
-/-- **Dévissage of the coefficients for constant direct images.** This is the dévissage step of
-the blueprint proof of `proposition-proper-direct-image-finite-coefficients`.
-
-Let `f : X ⟶ S` be a morphism of schemes and `Λ` a finite ring whose exponent is invertible on
-`S`. Suppose that for every prime `ℓ` invertible on `S` every higher direct image `Rᵠf_* 𝔽_ℓ`
-of the constant sheaf `𝔽_ℓ` is constructible. Then for every finite `Λ`-module `M` every higher
-direct image `Rᵠf_* M` of the constant sheaf `M` is constructible. Indeed, restriction of
-scalars along `ℤ/N →+* Λ`, `N` the characteristic of `Λ`, reduces this to a finite `ℤ/N`-module
-(`AlgebraicGeometry.Etale.isConstructibleSheaf_homology_constantSheaf_restrictScalars_iff`), which
-has a filtration with successive quotients `𝔽_ℓ` for primes `ℓ ∣ N`
-(`AlgebraicGeometry.Etale.constructibleHomology_rightDerivedLowerStar_constantSheaf_zmod`). -/
+/-- **Dévissage of the coefficients for constant direct images.** Let `f : X ⟶ S` be a morphism
+of schemes and `Λ` a finite ring whose exponent is invertible on `S`. Suppose that for every
+prime `ℓ` invertible on `S` every higher direct image `Rᵠf_* 𝔽_ℓ` of the constant sheaf `𝔽_ℓ`
+is constructible. Then for every finite `Λ`-module `M` every higher direct image `Rᵠf_* M` of
+the constant sheaf `M` is constructible. -/
 theorem isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmod
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X S : Scheme.{u}} (f : X ⟶ S)
     [HasInvertibleExponent Λ S]

@@ -19,6 +19,8 @@ the transition map of a morphism of stages is the underived transition map
 built from the underived base-change map
 (`AlgebraicGeometry.Etale.LimitStage.homology_map_transition_homologyZeroIso`).
 
+## Implementation details
+
 The comparison is made on complexes: the derived transition map, precomposed with the units
 `Qh(π^* g_* w^* K) ⟶ π^* Rg_* w^*(Qh K)`, is the image of the levelwise underived transition
 map (`AlgebraicGeometry.Etale.LimitStage.homotopyUnit_comp_transition`).

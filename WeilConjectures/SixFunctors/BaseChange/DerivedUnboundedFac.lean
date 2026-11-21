@@ -184,11 +184,7 @@ theorem derivedBaseChangeMap_app_fac (sq : CommSq g' f' f g)
 /-- **The unbounded derived base change map is an isomorphism if the underived one is**, provided
 `f'_*` sends exact complexes of `f'_*`-acyclic sheaves to exact complexes (e.g. `f'_*` has
 pointwise finite cohomological dimension) and the pullback `g'^* I` of every injective sheaf `I`
-is `f'_*`-acyclic. Represent an object of `D(X_ét)` by a K-injective complex `J` with injective
-terms: `Rf_*` is computed by `f_*` on `J`, and `Rf'_*` by `f'_*` on the complex `g'^* J` of
-`f'_*`-acyclic sheaves (`Functor.isIso_rightDerivedFunctorUnit_app_of_rightAcyclic_of_map_acyclic`),
-so the derived base change map at `J` is the underived one
-(`AlgebraicGeometry.Etale.derivedBaseChangeMap_app_fac`). -/
+is `f'_*`-acyclic. -/
 theorem isIso_derivedBaseChangeMap_of_isIso_baseChangeMap (sq : CommSq g' f' f g)
     [IsIso (baseChangeMap A sq)]
     (hF : ∀ M : CochainComplex (Sheaf X'.smallEtaleTopology A) ℤ, M.Acyclic →

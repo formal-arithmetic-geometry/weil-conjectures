@@ -37,7 +37,7 @@ the two integrals of the class `c`
 form of the counit `AlgebraicGeometry.Etale.lowerShriekTraceCounit`, through
 `AlgebraicGeometry.Etale.exists_adjunction_lowerShriek_of_traceCounit`.
 
-## Implementation notes
+## Implementation details
 
 The trace `t` and the identification `γ` are parameters, so that
 `AlgebraicGeometry.Etale.exists_projectiveLineAdjunction` can use

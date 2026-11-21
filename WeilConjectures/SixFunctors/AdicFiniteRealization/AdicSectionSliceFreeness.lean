@@ -21,7 +21,12 @@ import all Mathlib.CategoryTheory.Sites.CoverLifting
 import all WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 
 /-! # Finite free modules on sectionwise pro-etale slices
-Source: Stacks Project, Tags 00YV, 03DM and 03DO.
+
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 03DM]
+* [Stacks, Tag 03DO]
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -74,15 +79,7 @@ private theorem free_comap_iso {X : Scheme.{u}}
     exact ⟨n, ⟨E.functor.mapIso en ≪≫ ef n⟩⟩
 
 /-- Sectionwise free presentations on a pro-etale slice correspond to free internal
-inverse images on its scheme. Source: Stacks Project, Tags 00YV, 03DM and 03DO.
-Proof: identify the slice site with the small pro-etale site of the chart. The
-monoidal restriction comparison identifies the internal pullback with restriction
-up to an invertible coefficient map. Reconstructing rings gives the identity on
-sections: the unit and tensor comparison equations prove compatibility with one
-and multiplication. The same tensor equation proves compatibility with module
-actions. The resulting module equivalence preserves the regular module and finite
-coproducts. Both this equivalence and the section equivalence are fully faithful,
-so free presentations transport in both directions, including rank zero. -/
+inverse images on its scheme. -/
 theorem section_slice_free (X : Scheme.{u})
     (A : Sheaf (ProEt.topology X) Ab.{u + 1}) [MonObj A] [IsCommMonObj A]
     (P : Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) A) (W : X.ProEt) :

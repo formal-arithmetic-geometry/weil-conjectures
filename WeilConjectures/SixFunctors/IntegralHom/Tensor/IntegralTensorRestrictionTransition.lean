@@ -14,8 +14,11 @@ import WeilConjectures.SixFunctors.CoefficientClosedStructure.CoefficientRingedT
 
 /-! # Tensoring the restricted quotient tower
 
-Source: Stacks Project, Tags 03CZ, 06YY and 07A4; the coefficient-unit calculation in
-`thm-coef-integral-verdier.proof.md`.
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -111,8 +114,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 /-- The canonical map from tensor with a restricted reduction to reduction of tensor.
 It is constructed by the scalar adjunction, the normalized tensor comparison and its
-inverse; no Hom object or dualizing complex occurs.
-Source: Stacks 03CZ, 06YY and 07A4. -/
+inverse; no Hom object or dualizing complex occurs. -/
 def restrictionTensor
     {a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl)}
     {n : ℕ} (m : ReductionPresentation l E X D hl a n)
@@ -126,24 +128,7 @@ def restrictionTensor
           ((derivedScalarExtensionRestrictionAdjunction.{u, u} l E X n).choose.counit.app
             ((scalarReductionDerivedExtension l E X n).obj V))) ≫ m.mu.inv.app (K, V))
 
-/-- Tensoring the second input commutes with the consecutive quotient transition.
-
-Source: Stacks 03CZ, 06YY and 07A4; coefficient units and quotient maps for
-evaluation-preserving reduction in the integral Verdier proof.
-
-Proof: choose K-flat complexes P and Q representing K and V and a K-flat resolution
-of the restricted finite reduction of Q. Apply the scalar adjunction to the displayed
-map. Its counit multiplies the scalar factor and its tensor comparisons are fixed by
-ReductionPresentation.normalization. Consequently, on a homogeneous tensor it is
-x tensor (b tensor y) maps to b tensor (x tensor y), with b in degree zero. The two
-routes across the consecutive quotient square therefore both send this tensor to
-q(b) tensor (x tensor y), where q is the actual quotient map. Balanced pure tensors
-generate the ordinary sheafified tensors, and the total tensor is a direct sum in
-each degree, so these formulas give equality of chain maps. The representative
-normalization of sfDerivedReductionTransition identifies these maps with the stated
-transitions. Localize the equality and cancel the K-flat resolution and comparison
-isomorphisms. This works in every degree and at n = 0 without boundedness or
-constructibility assumptions. -/
+/-- Tensoring the second input commutes with the consecutive quotient transition. -/
 theorem restrictionTensor_transition
     (a : TensorPresentation.{u, u} X (completedIntegralCommRingSheaf l E X D hl))
     (m : ∀ n : ℕ, ReductionPresentation l E X D hl a n)

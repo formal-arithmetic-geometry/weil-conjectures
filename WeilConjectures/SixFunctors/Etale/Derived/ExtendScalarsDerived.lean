@@ -219,8 +219,7 @@ instance isLeftDerivedFunctor_leftDerivedUpperStarEtaleSheafExtendScalars :
 /-- **Derived extension of scalars commutes with the derived pullback.** For `g : Z ⟶ Y`, the
 isomorphism `Lg^*(K ⊗ᴸ_R S) ≅ (Lg^* K) ⊗ᴸ_R S` of functors `D(Y_ét, R) ⥤ D(Z_ét, S)` induced by
 the isomorphism `g^*(S ⊗_R F) ≅ S ⊗_R g^* F` of
-`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso`: both composites are total
-left derived functors of the two sides. -/
+`AlgebraicGeometry.Etale.sheafExtendScalarsCompUpperStarIso`. -/
 noncomputable def leftDerivedUpperStarEtaleSheafExtendScalarsIso :
     L(sheafExtendScalars φ Y) ⋙ L((g)^*[ModuleCat.{u + 1} S]) ≅
       L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars φ Z) :=

@@ -15,30 +15,22 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatIdeal
 # Direct image and finite Tor amplitude
 
 Let `f : X ⟶ Y` be a morphism of schemes and `Λ` a noetherian commutative ring such that the
-higher direct images of `f` vanish above `N` on every sheaf of `Λ`-modules (`UDV(f, Λ; N)`,
-`definition-cohomological-dimension--2`). Then `Rf_*` sends an object of Tor amplitude in
-`[a, b]` to an object of Tor amplitude in `[a, b + N]`
-(`Etale.torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`).
-
-## Proof
-
-The object `K` is concentrated in `[a, b]`, so `Rf_* K` is concentrated in `[a, b + N]`. Flatness
-of an étale sheaf is tested on the inclusions `I_Y ⟶ Λ_Y` of ideals
-(`AlgebraicGeometry.Etale.flat_of_forall_mono_whiskerLeft`), so by the Tor amplitude test
-`DerivedCategory.torAmplitudeIn_of_forall_isGE` it suffices that every `Rf_* K ⊗ᴸ (Λ/I)_Y` lies
-in degrees `≥ a`. By the projection formula with the finitely generated constant coefficient
-`Λ/I` (`proposition-open-direct-image-preserves-finite--1`) this is `Rf_*(K ⊗ᴸ (Λ/I)_X)`, the direct
-image of an object concentrated in `[a, b]`. This is the residue-field test of the blueprint
-(`theorem-f-shriek-finite-coefficients--1`), with the quotients `Λ/I` in place of the residue field:
-it needs neither the stalks of complexes nor minimal resolutions, and no constructibility.
+higher direct images of `f` vanish above `N` on every sheaf of `Λ`-modules (`UDV(f, Λ; N)`).
+Then `Rf_*` sends an object of Tor amplitude in `[a, b]` to an object of Tor amplitude in
+`[a, b + N]` (`Etale.torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`).
 
 ## Main results
 
 - `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_hasUniformDirectImageVanishingLE`
 - `AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar`
-  (`proposition-six-operations-dctf--2`)
 - `AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_two_mul`
-  (`proposition-six-operations-dctf--2`)
+
+## Implementation details
+
+Flatness of an étale sheaf is tested on the inclusions `I_Y ⟶ Λ_Y` of ideals
+(`AlgebraicGeometry.Etale.flat_of_forall_mono_whiskerLeft`), and the projection formula with the
+finitely generated constant coefficients `Λ/I` reduces the Tor amplitude bound to the vanishing
+bound. This needs neither the stalks of complexes, nor minimal resolutions, nor constructibility.
 -/
 
 @[expose] public section

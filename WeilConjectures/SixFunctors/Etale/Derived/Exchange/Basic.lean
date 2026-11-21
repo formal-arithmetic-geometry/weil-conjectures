@@ -39,8 +39,7 @@ at a sheaf `F` with the degree-`q` base change maps
 - `AlgebraicGeometry.Etale.ι_map_baseChange_app`, with the
   arrow isomorphism `AlgebraicGeometry.Etale.baseChangeArrowIsoUnboundedExchange` and the degree
   zero statement `AlgebraicGeometry.Etale.nonempty_arrowIso_homology_zero_unboundedExchange`.
-- `AlgebraicGeometry.Etale.homologyArrowIsoBaseChangeHomologyMap`
-  (`corollary-open-direct-image-over-field--2`).
+- `AlgebraicGeometry.Etale.homologyArrowIsoBaseChangeHomologyMap`.
 -/
 
 @[expose] public section
@@ -67,9 +66,8 @@ For a commutative (in practice cartesian) square `g' ≫ f = f' ≫ g` and `K` i
 exchange morphism `Ex_K : Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is the mate, under the derived
 adjunctions `Lf^* ⊣ Rf_*` and `Lf'^* ⊣ Rf'_*` on the unbounded derived categories, of the
 composite `Lf'^* Lg^* Rf_* K ≅ Lg'^* Lf^* Rf_* K ⟶ Lg'^* K` of the square isomorphism `θ` and
-`Lg'^*` of the counit `ε_f`. It is `AlgebraicGeometry.Etale.derivedBaseChangeMap`, of which this
-is the component at `K`; its adjoint description is
-`AlgebraicGeometry.Etale.derivedUpperStar_map_unboundedExchange_counit`. -/
+`Lg'^*` of the counit `ε_f`, i.e. the component at `K` of
+`AlgebraicGeometry.Etale.derivedBaseChangeMap`. -/
 noncomputable abbrev unboundedExchange (sq : CommSq g' f' f g)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     (L((g)^*[A])).obj ((R((f)_*[A])).obj K) ⟶ (R((f')_*[A])).obj ((L((g')^*[A])).obj K) :=
@@ -101,9 +99,7 @@ open _root_.DerivedCategory
 /-- On a bounded below object `K` the unbounded
 exchange morphism `Ex_K` is the bounded below derived exchange morphism
 `AlgebraicGeometry.Etale.baseChange` of the square, modulo the identifications `Lg^* ≅ D(g^*)`
-of the derived pullbacks and `R⁺f_* ⋙ ι ≅ ι ⋙ Rf_*` of the derived pushforwards.
-For sheaves placed in degree `0` it is the underived exchange morphism in degree `0`:
-`AlgebraicGeometry.Etale.nonempty_arrowIso_homology_zero_unboundedExchange`. -/
+of the derived pullbacks and `R⁺f_* ⋙ ι ≅ ι ⋙ Rf_*` of the derived pushforwards. -/
 lemma ι_map_baseChange_app (sq : CommSq g' f' f g) (K : Plus (Sheaf X.smallEtaleTopology A)) :
     Plus.ι.map ((Etale.baseChange A sq).app K) =
       D((g)^*[A]).map (((f)_*[A]).rightDerivedFunctorPlusCompatibility.hom.app K) ≫
@@ -149,8 +145,7 @@ variable {X S T Y : Scheme.{u}} {p : X ⟶ S} {g : T ⟶ S} {e : Y ⟶ T} {h : Y
 
 open _root_.DerivedCategory
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: the cohomology of the derived base change
-map. For a cartesian square
+/-- The cohomology of the derived base change map: for a cartesian square
 
 ```
 Y --e--> T
@@ -183,7 +178,7 @@ lemma Etale.isIso_baseChangeHomologyMap_iff_isIso_homology_unboundedExchange
         (Plus.ι.obj ((Plus.singleFunctor _ 0).obj F)))) :=
   (Arrow.isIso_iff_isIso_of_isIso (Etale.homologyArrowIsoBaseChangeHomologyMap Λ sq q F).hom).symm
 
-/-- Blueprint `lem-kun-unbounded-exchange-agrees`, for sheaves: in degree `0` the exchange
+/-- In degree `0` the exchange
 morphism of `AlgebraicGeometry.Etale.unboundedExchange` at a sheaf `F` placed in degree `0` is,
 as an arrow, the underived exchange morphism `p⁻¹ g_* F ⟶ h_* e⁻¹ F` of
 `AlgebraicGeometry.Etale.baseChangeMap`. -/

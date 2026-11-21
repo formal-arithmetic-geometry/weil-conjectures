@@ -41,8 +41,7 @@ variable {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsSepClos
   (s : Spec (.of Ω) ⟶ Y)
 
 /-- **The stalk at one geometric point detects isomorphisms of finite locally constant sheaves of
-sets** on a connected scheme: through the Galois correspondence it is the fibre functor of the
-Galois category of finite étale schemes, which reflects isomorphisms. -/
+sets** on a connected scheme. -/
 theorem FiniteLocallyConstant.isIso_of_bijective_sheafFiber_map {S S' : Y.FiniteLocallyConstant}
     (φ : S ⟶ S') (h : Function.Bijective ((pointSmallEtale s).sheafFiber.map φ.hom)) :
     IsIso φ := by
@@ -88,8 +87,7 @@ lemma FiniteEtale.subsingleton_fiber_terminal :
     ((fiber_left_comp s x').symm.trans (Category.comp_id _)))⟩
 
 /-- **Global sections of a finite locally constant sheaf of sets on a connected scheme are
-determined by their germ at one geometric point**: they are the morphisms from the terminal
-sheaf, whose stalk is a point. -/
+determined by their germ at one geometric point.** -/
 theorem FiniteLocallyConstant.section_ext (S : Y.FiniteLocallyConstant)
     {x x' : S.obj.obj.obj (op (Etale.mk (𝟙 Y)))}
     (h : (pointSmallEtale s).toPresheafFiber (Etale.mk (𝟙 Y)) (Over.homMk s) S.obj.obj x =

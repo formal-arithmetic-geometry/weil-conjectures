@@ -75,19 +75,7 @@ private noncomputable def residueTestDatum (p : ℕ) (hp : p.Prime) : FiniteFiel
 
 /-- Bounds on residue cohomology give the same Tor interval at every finite level,
 and the integral constructible and integral finite-Tor full subcategories coincide.
-This does not identify constructibility with site-perfectness.
-
-Source: blueprint order 2133.
-Proof:
-1. Represent each finite reduction by a cochain complex and choose a K-flat resolution.
-Transport its constructibility along the representative isomorphism. The coefficient
-comparison `integralReduction_residue_homology_zero_iff` identifies its residue cohomology with
-that of the first reduction. The support hypothesis makes it zero outside [a,b].
-The pro-etale residue Tor test gives amplitude [a,b]; transport it to the reduction.
-2. The common cohomology interval in the definition of integral constructibility gives
-one interval for every reduction, exactly the integral finite-Tor condition.
-3. The reverse inclusion is definitional, and extensionality gives equality of predicates.
--/
+This does not identify constructibility with site-perfectness. -/
 theorem integral_residue_tor
     (D : FiniteFieldDatum.{d}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E]

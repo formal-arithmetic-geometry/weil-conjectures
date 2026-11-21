@@ -11,8 +11,11 @@ import all WeilConjectures.AlgebraicGeometry.ExceptionalCoefficients.Exceptional
 
 /-! # The finite site mate on a single K-flat representative
 
-Source: Stacks 07A4 and 07A6; the scalar/site comparison in
-lemma-change-coefficients-internal-hom--1.
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -170,8 +173,7 @@ private theorem exactSquare_inv_fac
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- Ordinary scalar/site comparison: the actual left mate of scalar restriction.
-Source: Stacks 03CZ, 07A4; blueprint lemma-change-coefficients-internal-hom--1. -/
+/-- Ordinary scalar/site comparison: the actual left mate of scalar restriction. -/
 def finiteHomSiteOrdinaryBeta {n m : ℕ} (h : m ≤ n) :
     finiteHomNuOrdinary l E X n ⋙ coefficientFiniteQuotientExtension l E X h ⟶
       ProEtale.etaleSheafExtendScalars (finiteHomQuotient l E h) X ⋙

@@ -22,18 +22,13 @@ constructible complex
 This is the form of the finiteness theorem used at the
 integral coefficient stage `Λ = 𝒪_E`, for the reductions `K ⊗ᴸ Λ ⧸ Iⁿ⁺¹`.
 
-The proof reduces to the finite ring `Λ ⧸ J`:
+## Implementation details
 
-- a constructible sheaf `F` of `Λ`-modules killed by `J` is the restriction of scalars of the
-  constructible sheaf `Hom_Λ(Λ ⧸ J, F)` of `Λ ⧸ J`-modules, and restriction of scalars commutes
-  with `Rf_*` (`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarRestrictScalars`), so the
-  case of `F` placed in degree `0` is the finite-coefficient theorem
-  `AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`;
-- a complex is handled by dévissage along its truncation triangles. Constructible sheaves of
-  `Λ`-modules are only known to be closed under extensions killed by an ideal of finite index
-  (`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`), so the
-  dévissage keeps track of the power of `J` killing each truncation: a complex whose `m` nonzero
-  homology sheaves are killed by `J` is killed by `Jᵐ`.
+Constructible sheaves of `Λ`-modules are only known to be closed under extensions killed by an
+ideal of finite index
+(`AlgebraicGeometry.Etale.DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`), so the
+dévissage along truncation triangles keeps track of the power of `J` killing each
+truncation: a complex whose `m` nonzero homology sheaves are killed by `J` is killed by `Jᵐ`.
 -/
 
 @[expose] public section
@@ -56,9 +51,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ'
   (f : X ⟶ Y)
 
 /-- Restriction of scalars along `φ : Λ →+* Λ'` commutes with the derived direct image of a sheaf
-placed in degree `0`: `Res (Rf_* M) ≅ Rf_* (Res M)`. This is the bounded below comparison
-`AlgebraicGeometry.Etale.rightDerivedLowerStarRestrictScalars`, transported to the unbounded
-derived categories. -/
+placed in degree `0`: `Res (Rf_* M) ≅ Rf_* (Res M)`. -/
 noncomputable def restrictScalarsRightDerivedLowerStarSingleIso
     (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
     (Sheaf.restrictScalars Y.smallEtaleTopology φ).mapDerivedCategory.obj
@@ -83,8 +76,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (J : Ideal Λ) {X Y : Scheme.{u}}
 
 /-- Restriction of scalars along `Λ ⟶ Λ ⧸ J`, for `Λ ⧸ J` finite, carries bounded constructible
 complexes of sheaves of `Λ ⧸ J`-modules to bounded constructible complexes of sheaves of
-`Λ`-modules: it is exact and commutes with the homology sheaves, and it preserves constructible
-sheaves (`AlgebraicGeometry.Scheme.isConstructibleSheaf_restrictScalars_iff`). -/
+`Λ`-modules. -/
 lemma boundedConstructible_mapDerivedCategory_restrictScalars [Finite (Λ ⧸ J)]
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Λ ⧸ J)))}
     (hK : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (Λ ⧸ J)) X K) :
@@ -103,10 +95,7 @@ variable {k : Type u} [Field k]
 
 /-- **Finiteness for a constructible sheaf killed by an ideal of finite index.** Let `F` be a
 constructible sheaf of `Λ`-modules on `X` killed by an ideal `J` with `Λ ⧸ J` finite, whose
-exponent is invertible on `X`. Then `Rf_* F` is bounded constructible: `F` is the restriction of
-scalars of the constructible sheaf `Hom_Λ(Λ ⧸ J, F)` of `Λ ⧸ J`-modules, restriction of scalars
-commutes with `Rf_*`, and the finite-coefficient case is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`. -/
+exponent is invertible on `X`. Then `Rf_* F` is bounded constructible. -/
 lemma boundedConstructible_rightDerivedLowerStar_singleFunctor_of_smul_eq_zero [Finite (Λ ⧸ J)]
     [HasInvertibleExponent (Λ ⧸ J) X] (f : X ⟶ Y) [QuasiCompact f] (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -143,13 +132,9 @@ lemma smul_id_homologyFunctor_obj_eq_zero
   rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul, hK r hr, Functor.map_zero]
 
 open _root_.DerivedCategory in
-/-- The dévissage of `boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero`, by induction
-on the number `m` of degrees in which `K` may have nonzero homology: if the homology sheaves of
-`K` are constructible and killed by `J`, then `Rf_* K` is bounded constructible and `K` is killed
-by `Jᵐ`. Along the truncation triangle `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶`, the third term is a sheaf
-placed in degree `b`, killed by `J`, so `K` is killed by `Jᵐ⁺¹` and so is `Rf_* K`; as
-`Λ ⧸ Jᵐ⁺¹` is finite, `Rf_* K` is then bounded constructible as an extension of bounded
-constructible complexes (`DerivedCategory.boundedConstructible_obj₂_of_smul_eq_zero`). -/
+/-- If `K` has homology concentrated in `m` consecutive degrees, with homology sheaves
+constructible and killed by `J`, then `Rf_* K` is bounded constructible and `K` is killed
+by `Jᵐ`. -/
 lemma boundedConstructible_rightDerivedLowerStar_of_isGE_of_isLE [IsNoetherianRing Λ]
     [Finite (Λ ⧸ J)] [HasInvertibleExponent (Λ ⧸ J) X] (f : X ⟶ Y) [QuasiCompact f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
@@ -227,17 +212,12 @@ lemma boundedConstructible_rightDerivedLowerStar_of_isGE_of_isLE [IsNoetherianRi
     · have : T.obj₁.IsLE (b - 1) := TStructure.t.isLE_truncLT_obj _ _ _ (by lia)
       exact fun r _ ↦ (isZero_of_isLE _ (b - 1) _ (by lia)).eq_of_src _ _
 
-/-- Finiteness and constructibility, for coefficients killed
-by an ideal of finite index.
+/-- **Finiteness and constructibility, for coefficients killed by an ideal of finite index.**
 
 Let `Λ` be a noetherian ring and `J` an ideal of `Λ` with `Λ ⧸ J` finite, whose exponent is
 invertible on `X`, and let `f : X ⟶ Y` be a quasi-compact morphism of `k`-schemes locally of
 finite type, with `Y` quasi-compact. If `K` is a bounded constructible complex of étale sheaves of
-`Λ`-modules on `X` killed by `J`, then `Rf_* K` is bounded constructible. For `J = 0` this is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`; in
-general the homology sheaves of `K` are sheaves of `Λ ⧸ J`-modules, to which the
-finite-coefficient case applies, and `K` is reassembled by dévissage
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isGE_of_isLE`). -/
+`Λ`-modules on `X` killed by `J`, then `Rf_* K` is bounded constructible. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero [IsNoetherianRing Λ]
     [Finite (Λ ⧸ J)] [HasInvertibleExponent (Λ ⧸ J) X] (f : X ⟶ Y) [QuasiCompact f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]

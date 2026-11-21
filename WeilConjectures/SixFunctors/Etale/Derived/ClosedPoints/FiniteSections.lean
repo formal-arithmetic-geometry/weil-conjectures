@@ -16,13 +16,14 @@ public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
 Let `K` be a separably closed field, `X` a Noetherian scheme locally of finite type over `K`,
 `Λ` a finite ring and `Q` an étale sheaf of `Λ`-modules on `X` whose stalks vanish at the
 non-closed points. If `Γ(X, Q)` is finite, then `Q` is constructible
-(`AlgebraicGeometry.Etale.isConstructibleSheaf_of_isZero_sheafFiber_of_finite`): `Q` is globally
-generated (`AlgebraicGeometry.Etale.isGloballyGenerated_of_isZero_sheafFiber`), hence a quotient
-of the finite sum `⊕_{s ∈ Γ(X, Q)} Λ_X` of constant sheaves, and quotients of constructible
-sheaves on a Noetherian scheme are constructible.
+(`AlgebraicGeometry.Etale.isConstructibleSheaf_of_isZero_sheafFiber_of_finite`).
 
-This is the step of Deligne's proof of the finiteness of nearby cycles (SGA 4½, [Th. finitude],
-proof of 3.2) controlling the part of a sheaf supported at closed points by its global sections.
+This is the step of Deligne's proof of the finiteness of nearby cycles controlling the part of a
+sheaf supported at closed points by its global sections.
+
+## References
+
+* Deligne, SGA 4½, [Th. finitude], proof of 3.2
 -/
 
 @[expose] public section
@@ -39,8 +40,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 /-- **Epimorphic images of constructible sheaves are constructible.** On a Noetherian scheme, the
 target of an epimorphism out of a constructible sheaf of modules over a finite ring is
-constructible: it is the coimage of the epimorphism, the cokernel of the inclusion of the kernel,
-which is constructible as a subsheaf (`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_mono`). -/
+constructible. -/
 theorem Scheme.IsConstructibleSheaf.of_epi {X : Scheme.{u}} [IsNoetherian X]
     {F G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : F ⟶ G) [Epi e]
     [IsConstructibleSheaf F] : IsConstructibleSheaf G :=
@@ -53,8 +53,7 @@ namespace Etale
 /-- **A sheaf supported at closed points with finite global sections is constructible.** Let `X`
 be a Noetherian scheme locally of finite type over a separably closed field and `Q` an étale sheaf
 of modules over a finite ring whose stalks at the non-closed points vanish. If `Γ(X, Q)` is
-finite, then `Q` is constructible: being globally generated, it is a quotient of a finite sum of
-constant sheaves. -/
+finite, then `Q` is constructible. -/
 theorem isConstructibleSheaf_of_isZero_sheafFiber_of_finite {K : Type u} [Field K]
     [IsSepClosed K] {X : Scheme.{u}} [IsNoetherian X] (p : X ⟶ Spec (.of K))
     [LocallyOfFiniteType p] (Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))

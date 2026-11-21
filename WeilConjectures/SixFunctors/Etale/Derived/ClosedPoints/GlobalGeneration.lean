@@ -11,20 +11,18 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Support
 # Globally generated étale sheaves
 
 An étale sheaf `F` of `Λ`-modules on a scheme `X` is globally generated
-(`AlgebraicGeometry.Etale.IsGloballyGenerated`, blueprint
-`corollary-open-direct-image-over-field--2`) if its evaluation morphism `⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F` is
-an epimorphism. This file collects the formal properties of this notion.
+(`AlgebraicGeometry.Etale.IsGloballyGenerated`) if its evaluation morphism
+`⊕_{s ∈ Γ(X, F)} Λ_X ⟶ F` is an epimorphism. This file collects the formal properties of this
+notion.
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isGloballyGenerated_iff_forall_epi_sheafFiber_map`
-  (`corollary-open-direct-image-over-field--2`): global generation is stalkwise surjectivity of the
-  evaluation morphism.
+- `AlgebraicGeometry.Etale.isGloballyGenerated_iff_forall_epi_sheafFiber_map`: global generation
+  is stalkwise surjectivity of the evaluation morphism.
 - `AlgebraicGeometry.Etale.isGloballyGenerated_of_epi_sigmaDesc`: a sheaf which is jointly
   covered by globally generated sheaves is globally generated.
-- `AlgebraicGeometry.Etale.isGloballyGenerated_of_isColimit`
-(`corollary-open-direct-image-over-field--2`):
-  colimits of globally generated sheaves are globally generated.
+- `AlgebraicGeometry.Etale.isGloballyGenerated_of_isColimit`: colimits of globally generated
+  sheaves are globally generated.
 - `AlgebraicGeometry.Etale.isZero_of_isGloballyGenerated`: a globally generated sheaf without
   nonzero global sections is zero.
 -/
@@ -50,7 +48,7 @@ noncomputable abbrev terminalSections (X : Scheme.{u}) :
   (sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op (etaleTerminal X))
 
 /-- Every global section of `F` lies in the image of the evaluation morphism on global
-sections: it is the image of the unit section `1` of the summand indexed by it. -/
+sections. -/
 lemma surjective_terminalSections_map_globalSectionsEvaluation (X : Scheme.{u})
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     Function.Surjective ((terminalSections Λ X).map (globalSectionsEvaluation Λ X F)) := by
@@ -70,8 +68,7 @@ lemma surjective_terminalSections_map_globalSectionsEvaluation (X : Scheme.{u})
   exact one_smul Λ s
 
 /-- The evaluation morphisms are natural: for `ψ : G ⟶ F`, the composite of the evaluation
-morphism of `G` with `ψ` factors through the evaluation morphism of `F`, by reindexing the
-summands along `Γ(X, ψ)`. -/
+morphism of `G` with `ψ` factors through the evaluation morphism of `F`. -/
 lemma globalSectionsEvaluation_comp {X : Scheme.{u}}
     {G F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (ψ : G ⟶ F) :
     globalSectionsEvaluation Λ X G ≫ ψ =
@@ -86,8 +83,7 @@ lemma globalSectionsEvaluation_comp {X : Scheme.{u}}
   simp
 
 /-- A sheaf `F` admitting a jointly epimorphic family of morphisms `ψ i : G i ⟶ F` from
-globally generated sheaves is globally generated: the evaluation morphism of each `G i`
-followed by `ψ i` factors through the evaluation morphism of `F`. -/
+globally generated sheaves is globally generated. -/
 theorem isGloballyGenerated_of_epi_sigmaDesc {X : Scheme.{u}} {ι : Type w}
     {G : ι → Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [HasCoproduct G]
     {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (ψ : ∀ i, G i ⟶ F)
@@ -101,10 +97,9 @@ theorem isGloballyGenerated_of_epi_sigmaDesc {X : Scheme.{u}} {ι : Type w}
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i),
     reassoc_of% globalSectionsEvaluation_comp Λ (ψ i), e]
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **colimits of globally generated
-sheaves.** The point of a colimit cocone of a diagram of globally generated étale sheaves of
-`Λ`-modules (for instance a filtered colimit) is globally generated: the legs of a colimit cocone
-are jointly epimorphic. -/
+/-- **Colimits of globally generated sheaves.** The point of a colimit cocone of a diagram of
+globally generated étale sheaves of `Λ`-modules (for instance a filtered colimit) is globally
+generated. -/
 theorem isGloballyGenerated_of_isColimit {X : Scheme.{u}} {J : Type w} [Category J]
     {D : J ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} [HasCoproduct D.obj]
     {c : Cocone D} (hc : IsColimit c) (hD : ∀ j, IsGloballyGenerated Λ X (D.obj j)) :
@@ -113,8 +108,7 @@ theorem isGloballyGenerated_of_isColimit {X : Scheme.{u}} {J : Type w} [Category
     simpa using Sigma.ι _ j ≫= e⟩
   isGloballyGenerated_of_epi_sigmaDesc Λ c.ι.app hD
 
-/-- A globally generated sheaf without nonzero global sections is zero: its evaluation
-morphism vanishes. -/
+/-- A globally generated sheaf without nonzero global sections is zero. -/
 theorem isZero_of_isGloballyGenerated {X : Scheme.{u}}
     {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hF : IsGloballyGenerated Λ X F)
     (h : Subsingleton (F.obj.obj (op (etaleTerminal X)))) : IsZero F := by
@@ -131,12 +125,9 @@ theorem isZero_of_isGloballyGenerated {X : Scheme.{u}}
   refine (IsZero.iff_id_eq_zero _).2 ((cancel_epi (globalSectionsEvaluation Λ X F)).1 ?_)
   rw [h0, zero_comp, comp_zero]
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **global generation is stalkwise
-surjectivity.** An étale sheaf `F` of `Λ`-modules is globally generated if and only if its
-evaluation morphism is surjective on every geometric stalk. The stalk functors preserve
-epimorphisms, being left adjoints; conversely, the cokernel projection of the evaluation
-morphism vanishes on all stalks, hence vanishes
-(`AlgebraicGeometry.Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint`). -/
+/-- **Global generation is stalkwise surjectivity.** An étale sheaf `F` of `Λ`-modules is
+globally generated if and only if its evaluation morphism is surjective on every geometric
+stalk. -/
 theorem isGloballyGenerated_iff_forall_epi_sheafFiber_map {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsGloballyGenerated Λ X F ↔ ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
@@ -171,10 +162,8 @@ noncomputable def lowerStarCompTerminalSectionsIso {Z X : Scheme.{u}} (f : Z ⟶
     lowerStarCompSheafSectionsTerminalIso _ f ≪≫ sectionsTerminalIsoTerminalSections Λ Z
 
 /-- **Pullback of the evaluation morphism to a separably closed point.** Let
-`f : Spec k ⟶ X` with `k` separably closed. If every global section of `f^* G` is the pullback
-of a global section of `G`, that is, if the unit `G ⟶ f_* f^* G` is surjective on global
-sections, then the pullback along `f` of the evaluation morphism of `G` is an epimorphism:
-over `Spec k` epimorphisms are detected on global sections. -/
+`f : Spec k ⟶ X` with `k` separably closed. If the unit `G ⟶ f_* f^* G` is surjective on global
+sections, then the pullback along `f` of the evaluation morphism of `G` is an epimorphism. -/
 lemma epi_upperStar_map_globalSectionsEvaluation {X : Scheme.{u}} {k : Type u} [Field k]
     [IsSepClosed k] (f : Spec (.of k) ⟶ X) (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (h : Function.Surjective ((terminalSections Λ X).map
@@ -206,9 +195,7 @@ lemma epi_upperStar_map_globalSectionsEvaluation {X : Scheme.{u}} {k : Type u} [
 /-- **Sheaves supported on finitely many closed points split.** Let `U` be an open subset of a
 scheme `X` whose complement is a finite set of closed points, and `G` an étale sheaf of
 `Λ`-modules on `X` whose restriction to `U` vanishes. Writing `iₓ : Spec κ(x) ⟶ X` for the
-points `x ∉ U`, the units assemble to an isomorphism `G ≅ ⨁ₓ iₓ_* iₓ^* G`, as can be
-checked after restricting to `U` and to every point `x` (compare
-`AlgebraicGeometry.Etale.subsingleton_H_of_isZero_upperStar`). -/
+points `x ∉ U`, the units assemble to an isomorphism `G ≅ ⨁ₓ iₓ_* iₓ^* G`. -/
 theorem isIso_biproductLift_unit_of_isZero_upperStar {X : Scheme.{u}} (U : X.Opens)
     [Finite {x : X // x ∉ U}]
     [HasFiniteBiproducts (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))]
@@ -284,15 +271,7 @@ theorem isIso_biproductLift_unit_of_isZero_upperStar {X : Scheme.{u}} (U : X.Ope
 /-- **Sheaves supported on finitely many closed points are globally generated.** Let `U` be
 an open subset of a scheme `X` whose complement is a finite set of closed points with separably
 closed residue fields, and `G` an étale sheaf of `Λ`-modules on `X` whose restriction to `U`
-vanishes. Then `G` is globally generated.
-
-Writing `iₓ : Spec κ(x) ⟶ X` for the points `x ∉ U`, the units assemble to an isomorphism
-`G ≅ ⨁ₓ iₓ_* iₓ^* G`
-(`AlgebraicGeometry.Etale.isIso_biproductLift_unit_of_isZero_upperStar`), so each unit
-`G ⟶ iₓ_* iₓ^* G` is a split epimorphism, in particular surjective on global sections.
-The cokernel of the evaluation morphism then vanishes after pullback to `U` (where `G`
-vanishes) and to every `Spec κ(x)`
-(`AlgebraicGeometry.Etale.epi_upperStar_map_globalSectionsEvaluation`), hence vanishes. -/
+vanishes. Then `G` is globally generated. -/
 theorem isGloballyGenerated_of_isZero_upperStar {X : Scheme.{u}} (U : X.Opens)
     (hfin : (U : Set X)ᶜ.Finite) (hcl : ∀ x ∉ U, IsClosed ({x} : Set X))
     (hsep : ∀ x ∉ U, IsSepClosed (X.residueField x))

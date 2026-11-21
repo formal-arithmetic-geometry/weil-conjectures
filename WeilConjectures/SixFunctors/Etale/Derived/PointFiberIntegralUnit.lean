@@ -52,9 +52,7 @@ variable [IsAdicComplete I Λ]
 
 omit [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] in
 include hϖ hI in
-/-- The constant sheaf `Λ` on `Spec k`, placed in degree `0`, is derived complete: it is the
-homotopy limit of the constant sheaves `Λ/Iⁿ`, as `Λ` is for `Λ`-modules
-(`DerivedCategory.isHomotopyLimit_mapCone_Q_of_epi`), and those are killed by `ϖⁿ`. -/
+/-- The constant sheaf `Λ` on `Spec k`, placed in degree `0`, is derived complete. -/
 lemma derivedComplete_unitSingle :
     _root_.DerivedCategory.derivedComplete (Spec (.of k)).smallEtaleTopology I
       (unitSingle Λ k 0) := by
@@ -124,7 +122,7 @@ lemma nonempty_iso_reductionModIdeal_unitSingle (n : ℕ) :
 omit [IsNoetherianRing Λ] [Finite (Λ ⧸ I)] [IsAdicComplete I Λ] in
 include hϖ hI in
 /-- The constant sheaf `Λ/Iⁿ` on `Spec k`, placed in degree `0`, is bounded constructible of
-Tor amplitude in `[-1, 0]`: it is the cone of `ϖⁿ : Λ ⟶ Λ`, and `Λ` is flat. -/
+Tor amplitude in `[-1, 0]`. -/
 lemma boundedConstructible_torAmplitudeIn_single_quot (n : ℕ) :
     DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) (Spec (.of k))
         ((DerivedCategory.singleFunctor _ 0).obj

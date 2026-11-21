@@ -7,7 +7,12 @@ module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
-/-! # Inverse scalar and geometric mates -/
+/-! # Inverse scalar and geometric mates
+
+## References
+
+* [Stacks, Tag 0E46]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -15,14 +20,7 @@ open CategoryTheory
 namespace WeilConjectures.ExceptionalIntegralScalar
 
 /-- Invert a scalar comparison before geometric transposition, or invert its
-geometric mate before scalar transposition: the two arrows agree.
-Source: Stacks Tag 0E46 and the composition law for mates.
-
-Proof: the two successive mates of the original scalar comparison are its
-conjugate under the composite adjunctions. Thus the given direct-image comparison
-is this conjugate. Conjugation sends inverse isomorphisms to inverse isomorphisms.
-The two successive mates of the inverse comparison are consequently the inverse
-direct-image comparison. Cancel the scalar mates equivalence. -/
+geometric mate before scalar transposition: the two arrows agree. -/
 theorem inverseMateInterchange
     {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
     {SX : B ⥤ D} {UX : D ⥤ B} {SY : A ⥤ C} {UY : C ⥤ A}

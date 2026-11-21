@@ -195,10 +195,8 @@ variable {Y Z : Scheme.{u}} (g : Y ⟶ Z)
 
 /-- The derived pullback commutes with restriction of scalars: for `ρ : Λ →+* Λ'` and a
 morphism of schemes `g : Y ⟶ Z`, the canonical isomorphism `Lg^* (Res K) ≅ Res (Lg^* K)` for `K`
-in the derived category of étale sheaves of `Λ'`-modules on `Z`. Both derived pullbacks are
-computed levelwise (`AlgebraicGeometry.Etale.leftDerivedUpperStarIsoMapDerivedCategory`), and
-the isomorphism is induced by `AlgebraicGeometry.Etale.upperStarRestrictScalarsIso`. It is used
-for the compatible systems of Frobenius coefficient morphisms. -/
+in the derived category of étale sheaves of `Λ'`-modules on `Z`, induced by
+`AlgebraicGeometry.Etale.upperStarRestrictScalarsIso`. -/
 noncomputable def leftDerivedUpperStarRestrictScalarsIso :
     Sheaf.derivedRestrictScalars Z.smallEtaleTopology ρ ⋙
         L((g)^*[ModuleCat.{u + 1} Λ]) ≅

@@ -20,18 +20,6 @@ spectrum of a separably closed field. For every `Λ`-module `M`, the pullback al
 unit `M_Y ⟶ Rt_* t^* M_Y` of the derived adjunction `t^* ⊣ Rt_*` at the constant sheaf `M_Y`
 is an isomorphism in `D⁺(Spec κ)`
 (`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing`).
-
-We check this on homology sheaves. A sheaf on `Spec κ` is determined by its global sections, and
-the global sections of `s₀^* G` are those of `G` over `Y`
-(`AlgebraicGeometry.Etale.isIso_globalSectionsUpperStarMap_of_henselianRing`). Over the strictly
-henselian `Y`, the sections over `Y` of a sheafification are those of the presheaf. Hence:
-
-* in degree `q ≠ 0`, the sections over `Y` of `R^q t_* (t^* M_Y)` are
-  `Hom(t^* Λ[Y][0], (t^* M_Y)[0][q]) = 0`, since `t^* Λ[Y]` is a constant sheaf on the
-  separably closed point `Spec Ω`, hence projective;
-* in degree `0`, the sections over `Y` of `H⁰` of an object `L` are `Hom(Λ[Y][0], L)`, and the
-  map induced by the unit is `t^* : Hom(Λ[Y], M_Y) ⟶ Hom(t^* Λ[Y], t^* M_Y)`, which is bijective
-  since the constant sheaf functors on `Y` and on `Spec Ω` are fully faithful.
 -/
 
 @[expose] public section
@@ -171,8 +159,7 @@ section StrictlyHenselian
 variable (R : Type u) [CommRing R] [IsStrictlyHenselianLocalRing R]
 
 /-- Over a strictly henselian local ring `R`, the unit of the adjunction between the constant
-sheaf functor and the sections over `Spec R` is an isomorphism: sheafification does not change
-sections over `Spec R`. -/
+sheaf functor and the sections over `Spec R` is an isomorphism. -/
 instance Etale.isIso_unit_constantSheafAdj_etaleTerminal :
     IsIso (constantSheafAdj (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)
       (Scheme.isTerminalEtaleTerminal R)).unit := by
@@ -326,8 +313,7 @@ variable (R : Type u) [CommRing R] [IsStrictlyHenselianLocalRing R]
 
 /-- Over a strictly henselian local ring `R` and for `t : Spec Ω ⟶ Spec R` with `Ω` separably
 closed, the pullback `t^*` is bijective on morphisms `Λ[Spec R] ⟶ M_{Spec R}` into a constant
-sheaf: `Λ[Spec R]` is constant, and the constant sheaf functors on `Spec R` and `Spec Ω` are
-fully faithful. -/
+sheaf. -/
 lemma Etale.bijective_upperStar_map_freeSheaf_constantSheaf (M : ModuleCat.{u + 1} Λ) :
     Function.Bijective ((t)^*[ModuleCat.{u + 1} Λ].map :
       ((Etale.freeSheaf Λ _).obj (Scheme.etaleTerminal R) ⟶
@@ -381,8 +367,7 @@ lemma Etale.isIso_homologyFunctor_zero_map_unit_app_etaleTerminal (M : ModuleCat
 
 omit [IsStrictlyHenselianLocalRing R] in
 /-- Over a strictly henselian local ring `R` and for `t : Spec Ω ⟶ Spec R` with `Ω` separably
-closed, the pullback `t^* Λ[Spec R]` of the free sheaf on the terminal object is projective: it
-is a constant sheaf on the separably closed point `Spec Ω`. -/
+closed, the pullback `t^* Λ[Spec R]` of the free sheaf on the terminal object is projective. -/
 lemma Etale.projective_upperStar_freeSheaf_etaleTerminal :
     Projective ((t)^*[ModuleCat.{u + 1} Λ].obj
       ((Etale.freeSheaf Λ _).obj (Scheme.etaleTerminal R))) :=
@@ -393,8 +378,7 @@ lemma Etale.projective_upperStar_freeSheaf_etaleTerminal :
       (ModuleCat.projective_of_free (Finsupp.basisSingleOne)))
 
 /-- Positive and negative degrees: for `L ≅ N[0]` in `D⁺(Spec Ω)`, the sheaf `R^q t_* L` on
-`Spec R` has no nonzero sections over `Spec R` when `q ≠ 0`. These sections are those of the
-presheaf `W ↦ Hom(t^* Λ[W][0], L[q])` at `W = Spec R`, and `t^* Λ[Spec R]` is projective. -/
+`Spec R` has no nonzero sections over `Spec R` when `q ≠ 0`. -/
 lemma Etale.subsingleton_homologyFunctor_rightDerivedLowerStar_obj_etaleTerminal
     (N : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (L : DerivedCategory.Plus (Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
@@ -422,14 +406,6 @@ henselian local ring with closed point `s₀ : Spec κ ⟶ Spec R` and let `t : 
 a morphism from the spectrum of a separably closed field. For every `Λ`-module `M`, the
 pullback along `s₀` of the unit `M_Y[0] ⟶ Rt_* t^* M_Y[0]` of the derived adjunction
 `t^* ⊣ Rt_*` at the constant sheaf `M_Y` on `Y = Spec R` is an isomorphism.
-
-On homology sheaves on `Spec κ`, which are determined by their global sections, that is by the
-sections over `Spec R` of the homology sheaves on `Y`
-(`AlgebraicGeometry.Etale.isIso_upperStar_residue_map`): in degree `0` the unit induces the
-bijection `t^* : Hom(Λ_Y, M_Y) ⟶ Hom(Λ_Ω, M_Ω)`
-(`AlgebraicGeometry.Etale.isIso_homologyFunctor_zero_map_unit_app_etaleTerminal`), and in
-degrees `q ≠ 0` both sides vanish
-(`AlgebraicGeometry.Etale.subsingleton_homologyFunctor_rightDerivedLowerStar_obj_etaleTerminal`).
 -/
 theorem Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing
     (R : Type u) [CommRing R] [IsStrictlyHenselianLocalRing R]

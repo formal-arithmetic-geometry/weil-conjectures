@@ -11,15 +11,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 # The derived pushforwards and the derived tensor product are triangulated
 
 The derived functors on the unbounded derived categories of étale sheaves are triangulated, for
-the commutations with shifts of `WeilConjectures.SixFunctors.Etale.Derived.Shift`:
-
-* `Rg_*` is right adjoint to the triangulated functor `D(g^*)` induced by the exact pullback,
-  and its commutation with shifts is the one induced by the adjunction, so it is triangulated
-  by `Adjunction.isTriangulated_rightAdjoint`;
-* `Rf_! = D(i_!) ⋙ Rg_*` for the chosen compactification `(i, g)` is a composite of two
-  triangulated functors;
-* `- ⊗ᴸ K` is the tensor product of the monoidal derived category, which is triangulated in
-  its first variable (`DerivedCategory.isTriangulated_tensorRight`).
+the commutations with shifts of `WeilConjectures.SixFunctors.Etale.Derived.Shift`: the derived
+pushforward `Rg_*`, the derived lower shriek `Rf_!`, the derived pullback `Lg^*` and the derived
+tensor product `- ⊗ᴸ K` in each variable.
 
 ## Main statements
 
@@ -95,9 +89,8 @@ instance isTriangulated_derivedTensor_obj
   inferInstanceAs
     (((curriedTensor (DerivedCategory (Sheaf X.smallEtaleTopology A))).obj K).IsTriangulated)
 
-/-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated. This restates
-`isTriangulated_derivedTensorRight` in the `(derivedTensor A X).flip.obj K` form, so that
-instance search finds it for functors written in that form. -/
+/-- Tensoring on the right with a fixed complex, `M ↦ M ⊗ᴸ K`, is triangulated, stated for the
+functor `(derivedTensor A X).flip.obj K`. -/
 instance isTriangulated_derivedTensor_flip_obj
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
     ((derivedTensor A X).flip.obj K).IsTriangulated :=

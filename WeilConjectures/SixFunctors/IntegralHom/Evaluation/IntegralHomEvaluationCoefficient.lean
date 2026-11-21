@@ -10,7 +10,10 @@ public import WeilConjectures.SixFunctors.Coefficient.CoefficientCochainTensorCu
 
 /-! # Agreement of the two section-evaluation notations
 
-Source: Stacks Tags 0A8X and 03EO.
+## References
+
+* [Stacks, Tag 0A8X]
+* [Stacks, Tag 03EO]
 -/
 
 @[expose] public section
@@ -21,12 +24,7 @@ universe t u
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace WeilConjectures.IntegralHom
 
-/-- The two notations use the same chosen Hom-complex product projection.
-
-Source: Stacks Tags 0A8X and 03EO; blueprint integral-Hom reduction, paragraph 2.
-Proof: unfold evaluation, its projection, the coefficient Hom component and
-section application. Both use the same chosen Hom-complex product projection
-at total degree i+j and evaluate the resulting section at the identity slice. -/
+/-- The two notations use the same chosen Hom-complex product projection. -/
 theorem evaluate_eq_coefficient (Y : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
     (P I : CochainComplex (Modules.{t, u} Y R) ℤ) (j i : ℤ)

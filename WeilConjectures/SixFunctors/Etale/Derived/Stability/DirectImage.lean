@@ -22,13 +22,19 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 # Stability of `Dctf`: direct image and internal hom
 
 For torsion coefficients `Λ` with invertible exponent and schemes of finite type over a field,
-this file proves that the direct image `Rf_*`, the compactly supported direct image `Rf_!`
-preserve the bounded constructible complexes, with the shifts of the Tor amplitude recorded by
-the blueprint, and the local tools for the internal hom; the stability of `Dctf` under the
-internal hom is in `WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom`.
+this file proves that the direct image `Rf_*` and the compactly supported direct image `Rf_!`
+preserve the bounded constructible complexes, with explicit shifts of the Tor amplitude, and
+gives the local tools for the internal hom; the stability of `Dctf` under the internal hom is in
+`WeilConjectures.SixFunctors.Etale.Derived.Stability.DerivedHom`.
+
+## Implementation details
 
 This file is part of `WeilConjectures.SixFunctors.Etale.Derived.Stability`, whose module
-documentation records the implementation notes.
+documentation records further implementation details.
+
+## References
+
+* SGA 4, Exposé XIV, 1.1 (proper finiteness)
 -/
 
 @[expose] public section
@@ -57,15 +63,13 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 /-! ### Torsion coefficients with invertible exponent
 
-The statements of this section are the ones of `sk-thm-sf-direct-image-tor-amplitude`,
-`sk-thm-sf-hom-ctf`, `theorem-f-shriek-finite-coefficients` (ii)–(iv) and
-`proposition-six-operations-dctf` (iii), (v), (vi) whose content is a bound on étale cohomological
-dimension, a constructibility theorem for direct images or purity. They are made in the setting
-of `definition-constructible-sheaves--6`: the coefficients are a finite ring `Λ` whose exponent is
-invertible on the schemes in sight, and the schemes are of finite type over a field `k`. Neither
-hypothesis can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite
-(Artin–Schreier), so `Rf_*` of the constant sheaf along `𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and
-over a general Noetherian base étale cohomology need not vanish above twice the dimension. -/
+The statements of this section rest on a bound on étale cohomological dimension, a
+constructibility theorem for direct images or purity. The coefficients are a finite ring `Λ`
+whose exponent is invertible on the schemes in sight, and the schemes are of finite type over a
+field `k`. Neither hypothesis can be dropped: for `Λ = 𝔽_p` on `𝔸¹` over `𝔽̄_p`,
+`H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier), so `Rf_*` of the constant sheaf along
+`𝔸¹ ⟶ Spec 𝔽̄_p` is not constructible; and over a general Noetherian base étale cohomology need
+not vanish above twice the dimension. -/
 
 section Torsion
 
@@ -74,17 +78,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
 /-! #### Direct image -/
 
 omit [Finite Λ] in
-/-- Finiteness and constructibility.
-
-Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, let `Λ` be a noetherian ring and `J` an
-ideal of `Λ` with `Λ ⧸ J` finite, and let `K` be a bounded constructible complex of étale sheaves
-of `Λ`-modules on `X` killed by `J`, where `J` contains an integer `N` invertible on `Y`. Then
-`Rf_* K` is bounded constructible on `Y_ét`. For a finite `Λ` one may take `J = 0`; the case of an
-infinite `Λ` is used at the integral stage `Λ = 𝒪_E`, for the reductions modulo `Iⁿ⁺¹`. This is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero`.
-
-Each hypothesis is needed. Without torsion the statement fails, `H³(ℙ¹, ℤ)` containing
-`ℚ_ℓ/ℤ_ℓ`; and for `N = p` on `𝔸¹` over `𝔽̄_p`, `H¹(𝔸¹, 𝔽_p)` is infinite (Artin–Schreier). -/
+/-- Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes, `Λ` a noetherian ring and `J` an
+ideal of `Λ` with `Λ ⧸ J` finite, and `K` a bounded constructible complex of étale sheaves of
+`Λ`-modules on `X` killed by `J`, where `J` contains an integer `N` invertible on `Y`. Then
+`Rf_* K` is bounded constructible on `Y_ét`. -/
 theorem boundedConstructible_rightDerivedLowerStar [IsNoetherianRing Λ] (J : Ideal Λ)
     [Finite (Λ ⧸ J)] {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k))
     [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]
@@ -105,20 +102,10 @@ theorem boundedConstructible_rightDerivedLowerStar [IsNoetherianRing Λ] (J : Id
       exact hNJ, by simpa using hNY.map f.appTop.hom⟩
   exact boundedConstructible_rightDerivedLowerStar_of_smul_eq_zero J f aX aY hf hbc hJ
 
-/-- Direct image with finite Tor amplitude.
-
-Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes with `dim X ≤ d`, let `Λ` be a finite
-ring and let `K` be a complex of étale sheaves of `Λ`-modules on `X` of Tor amplitude in
-`[a, b]`. Then `Rf_* K` has Tor amplitude in `[a, b + 2d]`. The shift `2d` is the uniform
-vanishing of `Rᵖf_*` above twice the dimension of the source.
-
-This is `AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_finite`: by the
-projection formula for finitely generated constant coefficients, `Rf_* K ⊗ᴸ κ_Y ≅ Rf_*(K ⊗ᴸ κ_X)`
-for the residue ring `κ` of `Λ`, which has homology in `[a, b + 2d]`, and the residue test
-concludes. The remaining hypotheses of the blueprint statement (`f` separated, `K` bounded
-constructible and killed by an integer `N` invertible on `Y`) are kept for the callers but are
-not needed. For coefficients which are not finite, see
-`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing`. -/
+/-- Let `f : X ⟶ Y` be a morphism of finite-type `k`-schemes with `dim X ≤ d`, `Λ` a finite
+ring and `K` a complex of étale sheaves of `Λ`-modules on `X` of Tor amplitude in `[a, b]`. Then
+`Rf_* K` has Tor amplitude in `[a, b + 2d]`. The hypotheses that `f` is separated and `K` bounded
+constructible and killed by an integer `N` invertible on `Y` are not needed. -/
 theorem torAmplitudeIn_rightDerivedLowerStar
     {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
     [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
@@ -132,17 +119,10 @@ theorem torAmplitudeIn_rightDerivedLowerStar
   torAmplitudeIn_rightDerivedLowerStar_of_finite Λ aX aY f hf d hd a b hta
 
 omit [Finite Λ] in
-/-- The Tor amplitude bound of blueprint `sk-thm-sf-direct-image-tor-amplitude` for Noetherian
-coefficients which need not be finite.
-
-Let `f : X ⟶ Y` be a separated morphism of finite-type `k`-schemes with `dim X ≤ d`, let `Λ` be a
-Noetherian ring, and let `K` be a bounded constructible complex of étale sheaves of `Λ`-modules
-on `X` of Tor amplitude in `[a, b]`, killed by an integer `N` invertible on `Y`. Then `Rf_* K` has
-Tor amplitude in `[a, b + 2d]`. This is used at the integral coefficient stage, for the reductions
-of an `𝒪_E`-complex modulo powers of the maximal ideal. For a finite ring `Λ` it is
-`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`; in general the residue test is
-not available and the proof goes through the geometric stalks, using that the stalks of `Rf_* K`
-are computed by a projection formula with arbitrary constant coefficients. -/
+/-- Let `f : X ⟶ Y` be a separated morphism of finite-type `k`-schemes with `dim X ≤ d`, `Λ` a
+Noetherian ring, and `K` a bounded constructible complex of étale sheaves of `Λ`-modules on `X`
+of Tor amplitude in `[a, b]`, killed by an integer `N` invertible on `Y`. Then `Rf_* K` has
+Tor amplitude in `[a, b + 2d]`. -/
 theorem torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing [IsNoetherianRing Λ]
     {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
     [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
@@ -159,13 +139,8 @@ theorem torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing [IsNoetherianRi
   exact torAmplitudeIn_rightDerivedLowerStar_of_nsmul_id_eq_zero Λ aX aY f hf d hd a b N hN hta
 
 omit [Finite Λ] in
-/-- Finiteness and constructibility.
-
-For a finite `Λ` whose exponent is invertible on `Y` and a morphism `f : X ⟶ Y` of finite-type
-`k`-schemes, `Rf_*` preserves bounded constructibility. This is the finite-coefficient case of
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar`, and is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent`
-once `f` is known to be quasi-compact. -/
+/-- For a finite `Λ` whose exponent is invertible on `Y` and a morphism `f : X ⟶ Y` of
+finite-type `k`-schemes, `Rf_*` preserves bounded constructibility. -/
 theorem boundedConstructible_rightDerivedLowerStar_of_finite [Finite Λ] {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX)
@@ -182,14 +157,8 @@ theorem boundedConstructible_rightDerivedLowerStar_of_finite [Finite Λ] {X Y : 
   have : HasInvertibleExponent Λ X := HasInvertibleExponent.of_hom f
   exact boundedConstructible_rightDerivedLowerStar_of_hasInvertibleExponent Λ f aX aY hf K hbc
 
-/-- Stability of the constructible finite-Tor
-subcategories.
-
-Clause (iii): `Rf_* : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated morphism of
-finite-type `k`-schemes, for a finite `Λ` whose exponent is invertible on `Y`. It is
-`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_finite` together with
-`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`, a finite-type `k`-scheme being
-finite dimensional. -/
+/-- `Rf_*` maps `Dctf(X, Λ)` into `Dctf(Y, Λ)` for every separated morphism of finite-type
+`k`-schemes, for a finite `Λ` whose exponent is invertible on `Y`. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of k))
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY]
     [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsSeparated f] [HasInvertibleExponent Λ Y]
@@ -205,14 +174,9 @@ theorem constructibleFiniteTor_rightDerivedLowerStar {X Y : Scheme.{u}} (aX : X 
   exact ⟨boundedConstructible_rightDerivedLowerStar_of_finite Λ aX aY f hf hbc, a, b + 2 * (d : ℤ),
     torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
 
-/-- **Proper direct image with finite coefficients**, finite-Tor form: for a
-proper morphism `f : X ⟶ Y` of finite-type `k`-schemes and a finite `Λ` whose exponent is
-invertible on `Y`, `Rf_*` carries `Dctf(X, Λ)` into `Dctf(Y, Λ)`. Bounded constructibility is
-proper finiteness
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian`,
-SGA 4 XIV 1.1), not the finiteness theorem for arbitrary `f`; the Tor amplitude bound is
-`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`. This is the proper leg of
-`Rf_! = Rp_* ∘ j_!` in the notes' proof of the results from étale theory. -/
+/-- **Proper direct image with finite coefficients**, finite-Tor form: for a proper morphism
+`f : X ⟶ Y` of finite-type `k`-schemes and a finite `Λ` whose exponent is invertible on `Y`,
+`Rf_*` carries `Dctf(X, Λ)` into `Dctf(Y, Λ)`. -/
 theorem constructibleFiniteTor_rightDerivedLowerStar_of_isProper {X Y : Scheme.{u}}
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
     [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) (hf : f ≫ aY = aX) [IsProper f]
@@ -240,19 +204,9 @@ theorem constructibleFiniteTor_rightDerivedLowerStar_of_isProper {X Y : Scheme.{
     exact ⟨boundedConstructible_rightDerivedLowerStar_of_isProper_of_isNoetherian aY f hbc, a,
       b + 2 * (d : ℤ), torAmplitudeIn_rightDerivedLowerStar _ aX aY f hf d hd a b N hN hNY hbc hta⟩
 
-/-- Stability of the constructible finite-Tor
-subcategories.
-
-Clause (iv): `Rf_! : Dctf(X, Λ) ⥤ Dctf(Y, Λ)` is defined for every separated finite-type `f`
-admitting a compactification, over a finite-type `k`-scheme `Y`, for a finite `Λ` whose exponent
-is invertible on `Y`. For the chosen compactification `X ⟶[j] Z ⟶[g] Y` of `f`, `Rf_!` is
-`Rg_* ∘ j_!`; extension by zero preserves `Dctf`
-(`AlgebraicGeometry.Etale.constructibleTorAmplitudeIn_mapDerivedCategory_openImmersionLowerShriek`)
-and so does the direct image along the proper `g`, by proper finiteness
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_rightDerivedLowerStar_of_isProper`).
-
-Some finiteness hypothesis on `Y` is needed: for `f : ⊔ₙ ℙⁿ_ℂ ⟶ ⊔ₙ Spec ℂ`, which is proper,
-`Rf_! Λ` has `H²ⁿ ≠ 0` on the `n`-th point, so it is not bounded. -/
+/-- `Rf_!` maps `Dctf(X, Λ)` into `Dctf(Y, Λ)` for every separated finite-type `f` admitting a
+compactification, over a finite-type `k`-scheme `Y`, for a finite `Λ` whose exponent is
+invertible on `Y`. -/
 theorem constructibleFiniteTor_rightDerivedLowerShriek {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     [HasInvertibleExponent Λ Y] (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f]

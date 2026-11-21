@@ -46,6 +46,6 @@ cohomology presheaf and its consequences in `...HigherDirectImage.CohomPresheaf`
 
 ## References
 
-- Stacks Project, Lemma 59.51.7, <https://stacks.math.columbia.edu/tag/09Z1>
-- Stacks Project, Lemma 59.51.6, <https://stacks.math.columbia.edu/tag/03Q8>
+* [Stacks, Tag 09Z1]
+* [Stacks, Tag 03Q8]
 -/

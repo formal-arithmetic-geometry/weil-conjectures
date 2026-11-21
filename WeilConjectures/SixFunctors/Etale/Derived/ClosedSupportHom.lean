@@ -17,11 +17,6 @@ Let `i : Z ⟶ X` be a closed immersion with complementary open immersion `j : U
 `K ∈ D(X_ét, A)` the global derived Hom `RΓ(X, RHom(i_* Λ_Z, K))` is the fibre of the
 restriction map `RΓ(X, K) ⟶ RΓ(U, j^* K)`.
 
-The proof applies `RHom(-, K)` to the open–closed triangle `j_! j^* Λ ⟶ Λ ⟶ i_* i^* Λ ⟶`
-(`AlgebraicGeometry.Etale.exists_distTriang_openClosed`) and identifies
-`RHom(j_! j^* Λ, -) ≅ Rj_* j^*` as right adjoints of `j_! j^* Λ ⊗ᴸ - ≅ j_! j^*` (projection
-formula), compatibly with `RHom(Λ, -) ≅ 𝟭` and the unit of `j^* ⊣ Rj_*`.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.exists_distTriang_rightDerivedGlobalSections_derivedHom_closedImmersion`
@@ -118,8 +113,7 @@ section OpenImmersion
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
 
 /-- For an open immersion `j : U ⟶ X`, tensoring with `j_! j^* Λ_X` is `j_! j^*`:
-`j_! j^* Λ_X ⊗ᴸ M ≅ j_!(j^* Λ_X ⊗ᴸ Lj^* M) ≅ j_! j^*(Λ_X ⊗ᴸ M) ≅ j_! j^* M`, by the projection
-formula and the left unitor. -/
+`j_! j^* Λ_X ⊗ᴸ M ≅ j_! j^* M`. -/
 noncomputable def tensorLeftOpenImmersionLowerShriekUpperStarUnitIso
     {FA : A → A → Type (u + 1)} {CA : A → Type (u + 1)}
     [∀ (P Q : A), FunLike (FA P Q) (CA P) (CA Q)] [ConcreteCategory.{u + 1} A FA]

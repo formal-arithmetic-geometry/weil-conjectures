@@ -11,7 +11,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Exceptional finite scalar operation core
 
-Source: Zheng, Propositions 2.23 and 2.29; Stacks 09AL and 07A4.
+## References
+
+* Zheng, Propositions 2.23 and 2.29
+* [Stacks, Tag 09AL]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -62,9 +66,8 @@ private theorem transportRightRealization_hom
     (e.counitIso.app K).inv ≫ e.functor.map (e.inverse.map v) at hc
   rw [← Category.assoc, hc, Category.assoc]
 
-/-- The normalized finite operation package. The former core omitted the relation
-between its right realization and its adjunction, so could not support normalization.
-Source: Zheng, Proposition 2.23; Stacks 09AL. -/
+/-- The normalized finite operation package, relating its right realization to its
+adjunction. -/
 abbrev OperationCore
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)
@@ -72,9 +75,7 @@ abbrev OperationCore
     (c : Compactification f) := Operation l E n c
 
 set_option maxRecDepth 4096 in
-/-- Construction of the core from the existing finite exceptional operations theorem.
-Retain its normalized Hom formula while transporting the right realization back
-through the canonical coefficient equivalence and its counit. -/
+/-- The normalized finite operation core exists, with its normalized Hom formula. -/
 theorem operationCore_exists
     (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

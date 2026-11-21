@@ -17,10 +17,8 @@ coefficients `Λₙ` are the reductions of the single object `Rg_* Λ_T` of `D(Y
 
 `Rg_* (Λₙ)_T ≅ Rg_* Λ_T ⊗ᴸ (Λₙ)_Y`
 
-(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_constantSingle_quotient`). Indeed
-`(Λₙ)_T = Λ_T ⊗ᴸ (Λₙ)_T` is the cone of `ϖⁿ` on `Λ_T` and the triangulated `Λ`-linear functor
-`Rg_*` commutes with such cones
-(`AlgebraicGeometry.Etale.nonempty_iso_map_reductionModIdeal`). In particular the cohomology
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerStar_constantSingle_quotient`).
+In particular the cohomology
 of the stalks of the `Rg_*(Λₙ)` is computed by the Bockstein sequences of one complex, which is
 the input of `ModuleCat.finite_limit_of_exact_tateSubmodule`.
 -/

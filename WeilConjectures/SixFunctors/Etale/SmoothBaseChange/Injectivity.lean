@@ -48,17 +48,14 @@ injectivity statements in `...Injectivity.CriticalMap`; this module imports both
 - `AlgebraicGeometry.Etale.UniversalBaseChangeProperty.mono_baseChangeHomologyMap_and_cokernel`:
   the three statements for every base change of `p`, when `BC(p, Λ, q - 1)` holds universally.
 
-## Implementation notes
+## Implementation details
 
-The proof follows the blueprint: embed `F` in an injective sheaf `I`, compare the long exact
-sequences of `0 ⟶ F ⟶ I ⟶ I / F ⟶ 0` through the base-change maps, and use that the source
-of the degree-`q` map vanishes on `I` and that the degree-`(q - 1)` maps are isomorphisms. The
-long exact sequences are the homology sequences of the images of the distinguished triangle
+The long exact sequences are the homology sequences of the images of the distinguished triangle
 `F₁[0] ⟶ F₂[0] ⟶ F₃[0] ⟶ F₁[1]` under the triangulated functors `p^* ∘ Rg_*` and
 `Rh_* ∘ e^*`; the base-change maps form a morphism between them because the derived
 base-change morphism commutes with the shifts (`AlgebraicGeometry.Etale.commShift_baseChange`).
 
 ## References
 
-- Stacks Project, Lemma 59.88.2, <https://stacks.math.columbia.edu/tag/0F03>
+* [Stacks, Tag 0F03]
 -/

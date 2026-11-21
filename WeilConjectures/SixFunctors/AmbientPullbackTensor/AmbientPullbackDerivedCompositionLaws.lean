@@ -9,13 +9,14 @@ public import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackT
 import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackOrdinaryCompositionLaws
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
-/-! Derived pullback associativity and unit laws.
+/-! # Derived pullback associativity and unit laws
 
-Source: Stacks 015F and 04VG.
+The exact-localization part of the ambient pullback coherence argument.
 
-This is the exact-localization part of the ambient pullback coherence argument.
-The ordinary equations are preserved by the exact termwise functors and their
-localizations; the resulting three equations are recorded here separately.
+## References
+
+* [Stacks, Tag 015F]
+* [Stacks, Tag 04VG]
 -/
 
 @[expose] public noncomputable section
@@ -123,12 +124,7 @@ namespace WeilConjectures.AmbientPullbackTensor
 variable (ell : ℕ) [Fact ell.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[ell] E] [FiniteDimensional ℚ_[ell] E]
 
-/-- Derived associativity and unit laws for the ambient pullback comparisons.
-Source: Stacks 015F and 04VG.
-Proof: apply the exact termwise pullback functors to the ordinary equations,
-then use the localization universal property and the specified factorization
-isomorphisms. This preserves composition, identities and all endpoint
-transports, giving the three displayed derived clauses. -/
+/-- Derived associativity and unit laws for the ambient pullback comparisons. -/
 theorem derived_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
     (∀ {W X Y Z : Scheme.{t}} (w : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)
       (aW : W ⟶ K) (aX : X ⟶ K) (aY : Y ⟶ K) (aZ : Z ⟶ K)

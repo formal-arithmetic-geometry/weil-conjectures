@@ -16,7 +16,15 @@ The finite scalar adjunction unit sends the global unit class of the completed
 coefficients to the global unit class of a finite level, and finite scalar extension
 of K-flat representatives is compatible with the left unitors of the total tensor.
 
-Source: Stacks Project, Tags 03CZ, 079P, 07A4 and 08JA.
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0FPT]
 -/
 
 @[expose] public section
@@ -32,8 +40,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 
 attribute [local irreducible] scalarReductionExistence scalarReductionDerivedExistence
 
-/-- Localization of a termwise adjunction unit agrees in the two quotient coordinates.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- Localization of a termwise adjunction unit agrees in the two quotient coordinates. -/
 theorem localizedUnit_eq
     {A B : Type*} [Category* A] [Category* B] [Abelian A] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B]
@@ -52,8 +59,7 @@ theorem localizedUnit_eq
     Adjunction.mapHomotopyCategory_unit_app_quotient]
   rfl
 
-/-- The finite derived scalar unit on a K-flat complex in cochain coordinates.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+/-- The finite derived scalar unit on a K-flat complex in cochain coordinates. -/
 theorem coefficientFiniteAdjunction_unit_reductionModel
     (Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hQ : CochainComplex.IsKFlatIndependentCoefficients
@@ -110,8 +116,7 @@ theorem coefficientFiniteAdjunction_unit_reductionModel
           ((HomotopyCategory.quotient _ (.up ℤ)).obj Q)) ≫ f) hfac'.symm).trans
       (h.trans hunit)
 
-/-- The finite reduction model is the universal counit on the quotient.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+/-- The finite reduction model is the universal counit on the quotient. -/
 theorem coefficientFiniteReductionModel_hom
     (Q : CochainComplex (scalarReductionSource l E W) ℤ)
     (hQ : CochainComplex.IsKFlatIndependentCoefficients
@@ -135,8 +140,7 @@ theorem coefficientFiniteReductionModel_hom
   simp only [Category.comp_id]
   erw [(coefficientFiniteDerivedExtension l E W n).map_id, Category.id_comp]
 
-/-- The finite reduction models are natural in chain maps of K-flat complexes.
-Source: Stacks 06YY (auxiliary; not a blueprint node). -/
+/-- The finite reduction models are natural in chain maps of K-flat complexes. -/
 theorem coefficientFiniteReductionModel_naturality
     {X Y : CochainComplex (scalarReductionSource l E W) ℤ}
     (hX : CochainComplex.IsKFlatIndependentCoefficients
@@ -163,8 +167,7 @@ theorem coefficientFiniteReductionModel_naturality
   rw [hmodel Y hY, hmodel X hX]
   exact (scalarReductionCounit l E W n).naturality ((HomotopyCategory.quotient _ (.up ℤ)).map g)
 
-/-- Maps out of an ordinary finite scalar extension are determined on unit sections.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+/-- Maps out of an ordinary finite scalar extension are determined on unit sections. -/
 theorem scalarReductionExtension_hom_ext (n : ℕ) {M : scalarReductionSource l E W}
     {N : scalarReductionTarget l E W n}
     (f g : (scalarReductionExtension l E W n).obj M ⟶ N)
@@ -177,8 +180,7 @@ theorem scalarReductionExtension_hom_ext (n : ℕ) {M : scalarReductionSource l 
   ext U x
   exact h U x
 
-/-- Ordinary scalar extension maps unit sections to unit sections.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+/-- Ordinary scalar extension maps unit sections to unit sections. -/
 theorem scalarReductionExtension_map_unit (n : ℕ) {M M' : scalarReductionSource l E W}
     (g : M ⟶ M') (U : (Scheme.ProEt W)ᵒᵖ) (x : M.val.obj U) :
     ((scalarReductionExtension l E W n).map g).val.app U
@@ -187,28 +189,24 @@ theorem scalarReductionExtension_map_unit (n : ℕ) {M M' : scalarReductionSourc
   have hn := (coefficientOrdinaryScalarAdjunction l E W n).unit.naturality g
   exact (congrArg (fun k ↦ k.val.app U x) hn).symm
 
-/-- The completed coefficient ring placed in degree zero.
-Source: Stacks 0FPT (auxiliary; not a blueprint node). -/
+/-- The completed coefficient ring placed in degree zero. -/
 noncomputable abbrev coefficientIntegralUnitComplex :
     CochainComplex (scalarReductionSource l E W) ℤ :=
   coefficientUnitComplex.{u} (Scheme.ProEt.topology W)
     (completedIntegralCommRingSheafUnrestricted l E W)
 
-/-- The finite coefficient ring placed in degree zero.
-Source: Stacks 0FPT (auxiliary; not a blueprint node). -/
+/-- The finite coefficient ring placed in degree zero. -/
 noncomputable abbrev coefficientFiniteUnitComplex (n : ℕ) :
     CochainComplex (normalizedDVRModules l E W n) ℤ :=
   coefficientUnitComplex.{u} (Scheme.ProEt.topology W) (integralCoefficientCommRingSheaf l E W n)
 
-/-- The ordinary scalar unit of the completed unit complex.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+/-- The ordinary scalar unit of the completed unit complex. -/
 noncomputable abbrev coefficientIntegralUnitComplexUnit (n : ℕ) :=
   ((coefficientOrdinaryScalarAdjunction l E W n).mapHomologicalComplex (.up ℤ)).unit.app
     (coefficientIntegralUnitComplex l E W)
 
 /-- The global section of the finite reduction of the unit complex obtained by
-transporting the scalar unit along the ordinary scalar-sections comparison.
-Source: Stacks 03CZ, 08JA (auxiliary; not a blueprint node). -/
+transporting the scalar unit along the ordinary scalar-sections comparison. -/
 noncomputable def coefficientFiniteUnitSection (D : CoefficientDerivedSystemScalarCoherence l E W)
     (n : ℕ) :
     SheafOfModules.unit _ ⟶ (((scalarReductionExtension l E W n).mapHomologicalComplex
@@ -220,8 +218,7 @@ noncomputable def coefficientFiniteUnitSection (D : CoefficientDerivedSystemScal
       (coefficientIntegralUnitComplexUnit l E W n).f 0)
 
 /-- The map from the finite unit complex to the finite reduction of the completed unit
-complex given by the transported scalar unit.
-Source: Stacks 03CZ, 08JA (auxiliary; not a blueprint node). -/
+complex given by the transported scalar unit. -/
 noncomputable def coefficientFiniteUnitComparison
     (D : CoefficientDerivedSystemScalarCoherence l E W) (n : ℕ) :
     coefficientFiniteUnitComplex l E W n ⟶
@@ -233,8 +230,7 @@ noncomputable def coefficientFiniteUnitComparison
     have := coefficientFiniteExtensionAdditive l E W n
     erw [Functor.map_zero, comp_zero])
 
-/-- The ordinary scalar-sections comparison applied termwise to a complex.
-Source: Stacks 03CZ, 08JA (auxiliary; not a blueprint node). -/
+/-- The ordinary scalar-sections comparison applied termwise to a complex. -/
 noncomputable def coefficientScalarSectionsChainMap
     (D : CoefficientDerivedSystemScalarCoherence l E W) (n : ℕ)
     (I : CochainComplex (scalarReductionTarget l E W n) ℤ) :
@@ -247,8 +243,7 @@ noncomputable def coefficientScalarSectionsChainMap
         (ComplexShape.up ℤ)).obj I :=
   (NatTrans.mapHomologicalComplex (D.ordinaryScalarSections n).hom (.up ℤ)).app I
 
-/-- The scalar-sections comparison on complexes, unfolded from the model equation.
-Source: Stacks 079P, 08JA (auxiliary; not a blueprint node). -/
+/-- The scalar-sections comparison on complexes, unfolded from the model equation. -/
 theorem coefficientScalarSections_model_eq (D : CoefficientDerivedSystemScalarCoherence l E W)
     (n : ℕ) (I : CochainComplex (scalarReductionTarget l E W n) ℤ) :
     coefficientSiteSectionsComparison.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -263,8 +258,7 @@ theorem coefficientScalarSections_model_eq (D : CoefficientDerivedSystemScalarCo
         (integralCoefficientCommRingSheaf l E W n) I := by
   exact D.scalarSections_model n I
 
-/-- The finite unit comparison sends the unit section to the transported scalar unit.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+/-- The finite unit comparison sends the unit section to the transported scalar unit. -/
 theorem coefficientFiniteUnitComparison_unit (D : CoefficientDerivedSystemScalarCoherence l E W)
     (n : ℕ) :
     (((coefficientOrdinarySections.{u, t + 1, t} (Scheme.ProEt.topology W)
@@ -283,8 +277,7 @@ theorem coefficientFiniteUnitComparison_unit (D : CoefficientDerivedSystemScalar
     (HomologicalComplex.mkHomFromSingle_f _ _)).trans ?_
   exact Iso.inv_hom_id_assoc _ _
 
-/-- The termwise scalar-sections comparison sends the scalar unit to the transported unit.
-Source: Stacks 03CZ (auxiliary; not a blueprint node). -/
+/-- The termwise scalar-sections comparison sends the scalar unit to the transported unit. -/
 theorem coefficientScalarSectionsChainMap_unit (D : CoefficientDerivedSystemScalarCoherence l E W)
     (n : ℕ) :
     (coefficientScalarSectionsChainMap l E W D n
@@ -318,8 +311,7 @@ private theorem cyclesMap_comp_apply_eq_of_components
   rw [h1, h3, h2, hx, hy]
   exact hf
 
-/-- The global cycles of the transported scalar unit and of the finite unit agree.
-Source: Stacks 03CZ, 08JA (auxiliary; not a blueprint node). -/
+/-- The global cycles of the transported scalar unit and of the finite unit agree. -/
 theorem coefficientFiniteUnitComparison_cycles (D : CoefficientDerivedSystemScalarCoherence l E W)
     (n : ℕ) :
     HomologicalComplex.cyclesMap
@@ -385,12 +377,7 @@ private theorem unitClass_eq_of_scalar_model
   exact (e1 _).symm
 
 /-- The finite scalar adjunction unit followed by the scalar-sections comparison sends
-the completed unit class to the finite unit class, along the transported scalar unit.
-Source: Stacks 03CZ, 079P, 08JA (auxiliary; not a blueprint node).
-Proof: after the finite reduction model, the derived unit is the localized ordinary
-unit. The scalar-sections model turns the global class of its unit cycle into the
-global class of the transported cycle, which is the unit cycle of the finite unit
-complex mapped along the transported scalar unit. -/
+the completed unit class to the finite unit class, along the transported scalar unit. -/
 theorem coefficientFiniteAdjunction_unit_unitClass
     (D : CoefficientDerivedSystemScalarCoherence l E W) (n : ℕ) :
     (@DerivedCategory.homologyFunctor AddCommGrpCat.{max u (t + 1)} _ _

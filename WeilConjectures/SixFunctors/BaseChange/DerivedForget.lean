@@ -175,8 +175,7 @@ noncomputable def rightDerivedLowerStarForget₂ (f : X ⟶ Y) :
       (Φ X).mapDerivedCategoryPlus ⋙ ((f)_*[AddCommGrpCat.{u + 1}]).rightDerivedFunctorPlus :=
   Functor.rightDerivedFunctorPlusBaseChange (lowerStarCompForget₂Iso (ULift.{u + 1} ℤ) f).hom
 
-/-- **Taking underlying abelian sheaves commutes with the derived direct image**, since it sends
-injective sheaves to injective sheaves. -/
+/-- **Taking underlying abelian sheaves commutes with the derived direct image.** -/
 instance isIso_rightDerivedLowerStarForget₂ (f : X ⟶ Y) :
     IsIso (rightDerivedLowerStarForget₂ f) :=
   Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic _

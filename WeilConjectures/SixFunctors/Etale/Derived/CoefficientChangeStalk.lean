@@ -17,14 +17,6 @@ separably closed field `k`, and `x̄ : Spec k ⟶ X` a geometric point. The cano
 comparison `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄`
 (`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) is an isomorphism for every
 `K ∈ Dᵇctf(X, Λ)`.
-
-Both squares of the pasting carry derived base changes to derived base changes, as their
-horizontal functors are computed by exact left adjoints whose right adjoints commute with
-restriction of scalars (`CategoryTheory.Adjunction.bijective_comp_map_of_unit_comp_map`): the
-pullback `x̄^*`, whose right adjoint `x̄_*` is exact as `k` is separably closed
-(`AlgebraicGeometry.Etale.isDerivedBaseChange_leftDerivedUpperStar_map_comp`), and the global
-sections on `Spec k`, an equivalence of categories
-(`AlgebraicGeometry.Etale.isDerivedBaseChange_rightDerivedGlobalSections_map_comp`).
 -/
 
 @[expose] public section
@@ -43,9 +35,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ'
 
 /-- The derived pullback along a geometric point carries derived base changes to derived base
 changes: if `η : K ⟶ Res K'` exhibits `K'` as `K ⊗ᴸ_Λ Λ'`, then `Lx̄^* η` followed by the
-comparison `Lx̄^* Res ≅ Res Lx̄^*` exhibits `Lx̄^* K'` as `Lx̄^* K ⊗ᴸ_Λ Λ'`. The derived pullback
-is induced by the exact `x̄^*`, whose right adjoint `x̄_*` is exact and commutes with restriction
-of scalars. -/
+comparison `Lx̄^* Res ≅ Res Lx̄^*` exhibits `Lx̄^* K'` as `Lx̄^* K ⊗ᴸ_Λ Λ'`. -/
 lemma isDerivedBaseChange_leftDerivedUpperStar_map_comp
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
@@ -111,8 +101,7 @@ noncomputable abbrev constantSheafRestrictScalarsMate :
   mateEquiv (globalSectionsConstantSheafAdjunction Λ') (globalSectionsConstantSheafAdjunction Λ)
     (globalSectionsRestrictScalarsSquare ρ)
 
-/-- The comparison of constant sheaf functors with restriction of scalars is an isomorphism, as
-the mate of an isomorphism along equivalences. -/
+/-- The comparison of constant sheaf functors with restriction of scalars is an isomorphism. -/
 instance isIso_constantSheafRestrictScalarsMate :
     IsIso (constantSheafRestrictScalarsMate ρ (k := k)) := by
   have (M : ModuleCat.{u + 1} Λ') :
@@ -132,7 +121,7 @@ instance isIso_constantSheafRestrictScalarsMate :
 /-- The derived global sections on `Spec k`, for `k` separably closed, carry derived base
 changes to derived base changes: if `θ : M ⟶ Res M'` exhibits `M'` as `M ⊗ᴸ_Λ Λ'`, then
 `RΓ(Spec k, θ)` followed by the comparison `RΓ(Spec k, Res -) ≅ Res RΓ(Spec k, -)` exhibits
-`RΓ(Spec k, M')` as `RΓ(Spec k, M) ⊗ᴸ_Λ Λ'`. The global sections are an equivalence. -/
+`RΓ(Spec k, M')` as `RΓ(Spec k, M) ⊗ᴸ_Λ Λ'`. -/
 lemma isDerivedBaseChange_rightDerivedGlobalSections_map_comp
     {M : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     {M' : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
@@ -173,10 +162,8 @@ lemma isDerivedBaseChange_rightDerivedGlobalSections_map_comp
     ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ (k := k)).app M) hθ').comp_map_iso
     ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ' (k := k)).app M').symm
 
-/-- Blueprint `theorem-grothendieck-lefschetz-trace-formula--7` (subsection
-`theorem-grothendieck-lefschetz-trace-formula--7`), the pullback isomorphism at a geometric point:
-for a morphism `ρ : Λ →+* Λ'` of finite rings whose exponent is invertible on `k`, the canonical
-coefficient comparison `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` of geometric stalks
+/-- For a morphism `ρ : Λ →+* Λ'` of finite rings whose exponent is invertible on `k`, the
+canonical coefficient comparison `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` of geometric stalks
 (`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) is an isomorphism for every
 `K ∈ Dᵇctf(X, Λ)`. -/
 theorem isCoefficientChange_geometricStalkRestrictScalarsIso [Finite Λ] [Finite Λ']

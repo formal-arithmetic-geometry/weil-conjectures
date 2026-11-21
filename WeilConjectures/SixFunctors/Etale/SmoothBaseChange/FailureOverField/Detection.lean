@@ -23,11 +23,11 @@ proof applies the minimal-counterexample lemma
 - `AlgebraicGeometry.Etale.nonempty_fieldFailure`: if `BC(p, Λ, q')` holds universally for
   `q' < q` and `BC(p, Λ, q)` fails, a counterexample over a field exists.
 - `AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`: the same
-  conclusion when `BC(p, Λ, q)` only fails after some base change, as in the blueprint.
+  conclusion when `BC(p, Λ, q)` only fails after some base change.
 
 ## References
 
-- Stacks Project, Lemma 59.88.6, <https://stacks.math.columbia.edu/tag/0F07>
+* [Stacks, Tag 0F07]
 -/
 
 @[expose] public section
@@ -45,11 +45,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 variable {X S : Scheme.{u}} {p : X ⟶ S}
 
 variable {Λ} in
-/-- A failure of `BC(p, Λ, q)` is already a failure over an affine open of `S`: the
-base-change map and the higher direct images are compatible with restriction to an open of
-`S`, which is the pullback along an étale morphism, and being an isomorphism of sheaves is
-local (`AlgebraicGeometry.Etale.BaseChangeProperty.of_etale_cover`, applied to the cover of
-`S` by its affine opens). -/
+/-- A failure of `BC(p, Λ, q)` is already a failure over an affine open of `S`. -/
 theorem Etale.exists_isAffineOpen_not_baseChangeProperty {q : ℤ}
     (hfail : ¬ Etale.BaseChangeProperty Λ p q) :
     ∃ U : S.Opens, IsAffineOpen U ∧ ¬ Etale.BaseChangeProperty Λ (pullback.snd p U.ι) q := by
@@ -64,19 +60,9 @@ theorem Etale.exists_isAffineOpen_not_baseChangeProperty {q : ℤ}
   exact ⟨⟨U, hU⟩, y, hy⟩
 
 variable (p) in
-/-- Blueprint `lemma-reduction-field--1`: A failure is detected on the generic fibre.
-
-If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
-`BC(p, Λ, q)` fails for some `q ≥ 1`, there is a counterexample over a field, that is, an
-`AlgebraicGeometry.Etale.FieldFailure`. Blueprint `lemma-reduction-field--1` only assumes that
-`BC(p, Λ, q)` does not hold universally; that form is
-`AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`.
-
-After restricting to an affine open of `S` the base of the failing square is quasi-compact
-and quasi-separated. The base-change map is injective there
-(`AlgebraicGeometry.Etale.mono_baseChangeHomologyMap`), so some geometric stalk of its target
-contains an element `ξ` outside its image, and the minimal-counterexample lemma applied to the
-survival of `ξ` produces the field. -/
+/-- **A failure is detected on the generic fibre.** If the base-change property `BC(p, Λ, q')` holds
+universally for all `q' < q` while `BC(p, Λ, q)` fails for some `q ≥ 1`, there is a counterexample
+over a field, that is, an `AlgebraicGeometry.Etale.FieldFailure`. -/
 @[stacks 0F07]
 theorem Etale.nonempty_fieldFailure (q : ℤ) (hq : 1 ≤ q)
     (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q')
@@ -125,12 +111,9 @@ theorem Etale.nonempty_fieldFailure (q : ℤ) (hq : 1 ≤ q)
   exact ((ConcreteCategory.isIso_iff_bijective _).1 inferInstance).2 _
 
 variable (p) in
-/-- Blueprint `lemma-reduction-field--1`: A failure of base change is detected over a field.
-
-If the base-change property `BC(p, Λ, q')` holds universally for all `q' < q` while
-`BC(p, Λ, q)` fails after some base change for some `q ≥ 1`, there is a counterexample over
-a field. Apply `AlgebraicGeometry.Etale.nonempty_fieldFailure` to a failing base change of
-`p` and paste the squares. -/
+/-- **A failure of base change is detected over a field.** If the base-change property
+`BC(p, Λ, q')` holds universally for all `q' < q` while `BC(p, Λ, q)` fails after some base change
+for some `q ≥ 1`, there is a counterexample over a field. -/
 @[stacks 0F07]
 theorem Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty (q : ℤ) (hq : 1 ≤ q)
     (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q')

@@ -35,7 +35,15 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 import Mathlib.RingTheory.Flat.CategoryTheory
 
-/-! # K-flat models of the augmented derived DVR reduction tower -/
+/-! # K-flat models of the augmented derived DVR reduction tower
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.5.2
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 06YL]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -81,25 +89,7 @@ private theorem representativeComparison_isIso (n : ℕ)
   infer_instance
 
 /-- The canonical K-flat augmented quotient tower computes the derived reduction
-units and their quotient transitions, for an arbitrary derived object.
-Source: Bhatt--Scholze, Definition 3.5.2; Stacks Tags 03EK, 06YY and 06YL;
-blueprint lemma-sp-tower-adjunction-foundation--2, final proof paragraph.
-
-Proof: choose a complex representing M and a K-flat resolution with flat terms.
-The universal scalar-extension counit, invertible on that resolution, and the exact
-restriction localization comparison give the isomorphisms a. Naturality transports
-them from the representative to M. The normalized derived adjunction identifies its
-unit, followed by this counit, with the localized ordinary tensor unit. This is the
-first equation. For adjacent quotients form the finite-linear tensor map sending
-b tensor x to rho(b) tensor x. Its adjoint is the smaller tensor unit, since rho(1)=1.
-The derived adjunction and its counit compatibility therefore identify this map
-with the displayed adjoint transition. After restriction its localization is exactly
-the recorded integralTowerTransition: both maps have the same pure-tensor formula,
-and uniqueness of sheafification proves their equality. These equations are unchanged
-under the representative isomorphism. The isomorphism e is the localized resolution
-map followed by the representative isomorphism; the comparison composes functor images
-and universal counits.
-Zero objects and the empty scheme obey the same formulas. -/
+units and their quotient transitions, for an arbitrary derived object. -/
 theorem normalizedDVR_kflat_reduction_model
     (adj : ∀ n : ℕ, scalarReductionDerivedExtension l E X n ⊣
       scalarReductionDerivedRestriction l E X n)

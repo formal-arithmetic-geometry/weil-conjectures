@@ -78,8 +78,7 @@ noncomputable def singleFunctorObjIsoQh (F : Sheaf X.smallEtaleTopology A) :
     (DerivedCategory.quotientCompQhIso (Sheaf X.smallEtaleTopology A)).symm.app _
 
 variable (A X) in
-/-- The monoidal unit of `D(X_ét)` is the unit sheaf placed in degree zero: the unit of the
-derived monoidal structure is `Qh` of the unit complex `𝟙[0]`. -/
+/-- The monoidal unit of `D(X_ét)` is the unit sheaf placed in degree zero. -/
 noncomputable def singleFunctorObjUnitIso :
     (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj (𝟙_ _) ≅
       𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
@@ -94,8 +93,7 @@ noncomputable def singleFunctorObjUnitIso :
 
 open Functor.LaxMonoidal in
 /-- For a flat sheaf `L` and any sheaf `F`, the derived tensor product of `L` and `F` placed in
-degree zero is their tensor product placed in degree zero: `L[0]` is K-flat, so
-`L[0] ⊗ᴸ F[0]` is computed by the tensor product of complexes `L[0] ⊗ F[0] = (L ⊗ F)[0]`. -/
+degree zero is their tensor product placed in degree zero, `L[0] ⊗ᴸ F[0] ≅ (L ⊗ F)[0]`. -/
 noncomputable def singleFunctorObjTensorIso (L F : Sheaf X.smallEtaleTopology A)
     (hL : ObjectProperty.flat L) :
     (DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj L ⊗
@@ -123,8 +121,7 @@ noncomputable def singleFunctorObjTensorIso (L F : Sheaf X.smallEtaleTopology A)
       ((HomologicalComplex.singleMapHomologicalComplex (tensorLeft L) (.up ℤ) 0).app F))) ≪≫
     (singleFunctorObjIsoQh (L ⊗ F)).symm
 
-/-- A sheaf `L` with a tensor inverse `L'`, placed in degree zero, is dualizable in `D(X_ét)`:
-both are flat, so `L[0] ⊗ᴸ L'[0] ≅ (L ⊗ L')[0] ≅ 𝟙[0]`, and symmetrically using the braiding. -/
+/-- A sheaf `L` with a tensor inverse `L'`, placed in degree zero, is dualizable in `D(X_ét)`. -/
 theorem isDualizable_singleFunctor_obj_of_tensorIso {L L' : Sheaf X.smallEtaleTopology A}
     (e : L ⊗ L' ≅ 𝟙_ _) :
     IsDualizable ((_root_.DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology A) 0).obj L) :=

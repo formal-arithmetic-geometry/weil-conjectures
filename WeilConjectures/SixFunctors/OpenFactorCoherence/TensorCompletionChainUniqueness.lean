@@ -10,7 +10,9 @@ import all WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonica
 
 /-! # The two quotient coordinates determine the tensor augmentation
 
-Source: Bhatt--Scholze, Definition 3.4.10; the signed Roos mapping-fibre model.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Definition 3.4.10
 -/
 
 @[expose] public noncomputable section
@@ -34,20 +36,7 @@ private theorem two_coordinates {C : Type*} [Category* C] [Preadditive C]
 attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
   SheafOfModules.monoidalCategory
 
-/-- The pure quotient coordinate and zero shifted coordinate determine the chain map.
-Source: Bhatt--Scholze 3.4.10; the explicit Roos augmentation in constructible
-tensor completion, step 8.
-Proof: fix the two input complexes and a total degree. A morphism into the
-mapping cocone is determined by its first and shifted coordinates. The shifted
-coordinates of both maps vanish by the second normalization clause. Project
-the first coordinates onto every factor of the countable product. Their
-restrictions to every homogeneous total-tensor summand agree on all local
-pure tensors by the first clause. Pure tensors generate the presheaf tensor;
-sheafification and the coproduct universal property give equality of these
-restrictions, then of the first coordinates. Mapping-cocone extensionality
-gives equality in every degree, hence equality of the complex morphisms.
-Natural-transformation extensionality gives equality of the chain maps.
-The same extensionality applies when a summand or the site is empty. -/
+/-- The pure quotient coordinate and zero shifted coordinate determine the chain map. -/
 theorem tensorCompletionChain_unique
     (a b : constructibleTensorTotal l E X ⟶
       integralOperationsTensorComplexFunctor.{u, u} l E X)

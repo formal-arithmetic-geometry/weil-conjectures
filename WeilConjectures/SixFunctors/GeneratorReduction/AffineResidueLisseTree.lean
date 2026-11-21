@@ -21,7 +21,11 @@ import WeilConjectures.SixFunctors.GeneratorReduction.AffineConstructibleRestric
 
 /-! # Residue-lisse refinement over an affine open
 
-Source: Bhatt--Scholze, Lemmas 6.5.5--6.5.8; Stacks Tags 09Y4 and 09C3.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5–6.5.8
+* [Stacks, Tag 09Y4]
+* [Stacks, Tag 09C3]
 -/
 
 @[expose] public section
@@ -259,25 +263,7 @@ private theorem partition_tree
   simpa only [Category.comp_id] using hqtree T p hp hn a
 
 /-- Simultaneous residue-lisse stratification of two integral constructible inputs.
-There is no assertion of a projective model, a finite chart family, or a tensor product.
-
-Source: Bhatt--Scholze, Lemmas 6.5.5--6.5.8; Stacks Tags 09Y4 and 09C3.
-
-Proof: restriction to the affine open is the exact over-site restriction and preserves
-products, hence the augmented quotient/Roos triangle and derived completeness. Its
-finite reductions are exact constant-coefficient restrictions, with the original common
-cohomology interval. Choose the constructible stratification of each residue cohomology
-sheaf in each of the two finite intervals. Refine this finite family of partitions by
-successive quasi-compact open/complementary closed cuts, using Tag 09Y4. Build the recursive
-binary pullback tree and forget its ambient structural maps to obtain the actual tree,
-retaining the factorization of each leaf through every original partition. Each nonempty leaf
-factors through one stratum of every chosen partition. Ordinary restriction through
-these constructible cuts preserves the completed coefficient ring and completeness.
-The same holds on every qcqs weakly etale object of a leaf. Exact residue pullback
-commutes with cohomology, preserves the cohomology interval, and pulls the finite
-constant models on the chosen stratum to finite constant models on the object.
-Outside the interval use the zero model. The empty leaf imposes no condition.
-No invertibility assumption on ell is involved in any of these site-local steps. -/
+There is no assertion of a projective model, a finite chart family, or a tensor product. -/
 theorem affineResidueLisseTree
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

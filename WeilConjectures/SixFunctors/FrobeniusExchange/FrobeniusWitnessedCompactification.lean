@@ -20,8 +20,15 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-! # Witnessed finite-coefficient compactification origins
 
-The finite-origin constructions and refinement normalization are retained verbatim
-from coefficient exchange, with the same public names and formulas.
+The finite-origin constructions and refinement normalization, with the same public names
+and formulas as in coefficient exchange.
+
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 099R]
+* Deligne, *La conjecture de Weil II*, (1.1.14)
 -/
 
 @[expose] public noncomputable section
@@ -220,42 +227,36 @@ end CoordinateTransport
 section FiniteGeometry
 variable (A : Type u) [CommRing A] [Finite A]
 
-/-- The published comparison inverse image followed by its canonical realization.
-Source: Stacks 099R; blueprint compact-support etale-origin paragraph. -/
+/-- The published comparison inverse image followed by its canonical realization. -/
 def originUnderlying (X : Scheme.{u}) :=
   ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
     (sfIntrinsicModuleEquivalence X A).functor
 
-/-- Additivity of the specified comparison and realization composite.
-Source: Stacks 099R. -/
+/-- Additivity of the specified comparison and realization composite. -/
 instance originUnderlyingAdditive (X : Scheme.{u}) : (originUnderlying A X).Additive :=
   inferInstanceAs ((ProEtale.comparisonUpperStar
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
       (sfIntrinsicModuleEquivalence X A).functor).Additive)
 
-/-- Exact comparison preserves finite limits.
-Source: Stacks 099R. -/
+/-- Exact comparison preserves finite limits. -/
 instance originUnderlyingLimits (X : Scheme.{u}) :
     PreservesFiniteLimits (originUnderlying A X) :=
   inferInstanceAs (PreservesFiniteLimits (ProEtale.comparisonUpperStar
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
       (sfIntrinsicModuleEquivalence X A).functor))
 
-/-- Exact comparison preserves finite colimits.
-Source: Stacks 099R. -/
+/-- Exact comparison preserves finite colimits. -/
 instance originUnderlyingColimits (X : Scheme.{u}) :
     PreservesFiniteColimits (originUnderlying A X) :=
   inferInstanceAs (PreservesFiniteColimits (ProEtale.comparisonUpperStar
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X ⋙
       (sfIntrinsicModuleEquivalence X A).functor))
 
-/-- The inverse image from the etale site, in the actual intrinsic derived category.
-Source: Stacks 099R. -/
+/-- The inverse image from the etale site, in the actual intrinsic derived category. -/
 def origin (X : Scheme.{u}) := (originUnderlying A X).mapDerivedCategory
 
 /-- An actual retained etale-origin triple, in the intrinsic constant-ring category.
-Its morphisms below will be all ambient morphisms between its underlying objects.
- -/
+Its morphisms below will be all ambient morphisms between its underlying objects. -/
 structure CompactOrigin (X : Scheme.{u}) where
   /-- The original pro-etale object. -/
   K : proEtaleDerivedCategory X A
@@ -265,19 +266,16 @@ structure CompactOrigin (X : Scheme.{u}) where
   /-- The retained comparison, with no new antecedent chosen. -/
   alpha : (origin A X).obj L.obj ≅ K
 
-/-- The induced category retains every ambient map, without requiring a map of witnesses.
- -/
+/-- The induced category retains every ambient map, without requiring a map of witnesses. -/
 abbrev CompactOriginCategory (X : Scheme.{u}) :=
   InducedCategory (proEtaleDerivedCategory X A) (fun O : CompactOrigin A X ↦ O.K)
 
-/-- Forget only the retained witness, and preserve its actual underlying object and map.
- -/
+/-- Forget only the retained witness, and preserve its actual underlying object and map. -/
 def compactOriginForget (X : Scheme.{u}) :
     CompactOriginCategory A X ⥤ proEtaleDerivedCategory X A :=
   inducedFunctor (fun O : CompactOrigin A X ↦ O.K)
 
-/-- Cancel the realization unit in ordinary open extension, before exact descent.
-Source: Stacks 00YV, 03DI. -/
+/-- Cancel the realization unit in ordinary open extension, before exact descent. -/
 def fixedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     (sfIntrinsicModuleEquivalence X A).functor ⋙ sfIntrinsicExtensionByZero j A ≅
       ProEtale.openImmersionLowerShriek
@@ -287,8 +285,7 @@ def fixedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     isoWhiskerRight (sfIntrinsicModuleEquivalence X A).unitIso.symm _ ≪≫
       Functor.leftUnitor _
 
-/-- The exact-derived open model is fixed by the same ordinary realization unit.
-Source: Stacks 00YV, 03DI. -/
+/-- The exact-derived open model is fixed by the same ordinary realization unit. -/
 def fixedDerivedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfIntrinsicDerivedOpen A j ≅
       (ProEtale.openImmersionLowerShriek
@@ -298,16 +295,14 @@ def fixedDerivedOpenModel {X B : Scheme.{u}} (j : X ⟶ B) [IsOpenImmersion j] :
     Functor.mapDerivedCategoryNatIso (fixedOpenModel A j) ≪≫
       (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- The fixed-scalar candidate, using precisely exact open extension then proper image.
- -/
+/-- The fixed-scalar candidate, using precisely exact open extension then proper image. -/
 def fixedCompact {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   (ProEtale.openImmersionLowerShriek
     (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.i).mapDerivedCategory ⋙
       (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c.g).rightDerivedFunctor
 
 /-- The explicit coordinate change is open-unit cancellation followed by the recorded
-section-normalized direct-image comparison. It contains no freely chosen isomorphism.
- -/
+section-normalized direct-image comparison. It contains no freely chosen isomorphism. -/
 def fixedCompactModel {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :
     (sfIntrinsicDerivedEquivalence X A).functor ⋙ sfIntrinsicCompactSupport c A ≅
       fixedCompact A c ⋙ (sfIntrinsicDerivedEquivalence Y A).functor :=
@@ -318,8 +313,7 @@ def fixedCompactModel {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) 
     (Functor.associator _ _ _).symm
 
 /-- The fixed antecedent comparison retains the given alpha and the exact-derived
-composition map, with the canonical realization unit.
- -/
+composition map, with the canonical realization unit. -/
 def fixedOriginWitness (X : Scheme.{u}) (O : CompactOrigin A X) :
     (ProEtale.comparisonUpperStar
       (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj O.L.obj ≅
@@ -331,8 +325,7 @@ def fixedOriginWitness (X : Scheme.{u}) (O : CompactOrigin A X) :
           (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X)
         (sfIntrinsicModuleEquivalence X A).functor).app O.L.obj) ≪≫ O.alpha)
 
-/-- The proper-open comparison conjugated by this very retained witness.
- -/
+/-- The proper-open comparison conjugated by this very retained witness. -/
 def fixedRefinementOpen {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c ⟶ d) (O : CompactOrigin A X) :
     (ProEtale.openImmersionLowerShriek
@@ -353,8 +346,7 @@ def fixedRefinementOpen {X Y : Scheme.{u}} {f : X ⟶ Y}
             (fixedOriginWitness A X O))
 
 /-- The actual refinement isomorphism: proper compositor followed by proper
-pushforward of the inverse proper-open map, transported to intrinsic coordinates.
- -/
+pushforward of the inverse proper-open map, transported to intrinsic coordinates. -/
 def intrinsicRefinement {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c ⟶ d) (O : CompactOrigin A X) :
     (sfIntrinsicCompactSupport c A).obj O.K ≅ (sfIntrinsicCompactSupport d A).obj O.K :=
@@ -375,8 +367,7 @@ def intrinsicRefinement {X Y : Scheme.{u}} {f : X ⟶ Y}
     ((fixedCompactModel A d).app K).symm ≪≫
     (sfIntrinsicCompactSupport d A).mapIso (e.counitIso.app O.K)
 
-/-- The candidate restricted to witnessed objects, with all ambient morphisms.
- -/
+/-- The candidate restricted to witnessed objects, with all ambient morphisms. -/
 def intrinsicOriginCandidate {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) :=
   compactOriginForget A X ⋙ sfIntrinsicCompactSupport c A
 
@@ -598,8 +589,7 @@ variable (K₀ : Type u) [Field K₀]
 
 include hl xo yo xft xqc yft yqc fo fs fft fqc
 /-- The canonical refinement maps are natural, unital and transitive; finite
-families have common refinements and comparisons are independent of all choices.
- -/
+families have common refinements and comparisons are independent of all choices. -/
 theorem intrinsicCompactificationCoherence :
     let A := Padic.coefficientExtensionRing l E n
     letI := Padic.finite_coefficientExtensionRing l E n hn
@@ -644,13 +634,11 @@ variable (A : Type u) [CommRing A] [Finite A]
 section Geometry
 variable (D : FiniteFieldDatum.{u})
 
-/-- The base change of the given model morphism, with the dependency's chosen fibers.
- -/
+/-- The base change of the given model morphism, with the dependency's chosen fibers. -/
 abbrev fiberMap {X₀ Y₀ : Over (Spec (.of D.k₀))} (f₀ : X₀ ⟶ Y₀) :=
   zlFiberMap D f₀
 
-/-- The coefficient action of geometric field Frobenius, including non-finite-type models.
-Source: Deligne, Weil II (1.1.14). -/
+/-- The coefficient action of geometric field Frobenius, including non-finite-type models. -/
 abbrev galois (X₀ : Over (Spec (.of D.k₀))) :=
   D.galoisMap X₀.hom (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
     (Fintype.ofFinite D.k₀) _ _ _)

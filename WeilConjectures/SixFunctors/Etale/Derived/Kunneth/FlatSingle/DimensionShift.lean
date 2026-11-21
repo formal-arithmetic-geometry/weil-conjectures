@@ -16,8 +16,7 @@ Let `S_q, T_q : C ⥤ D` (`q : ℤ`) be families of functors and `τ_q : S_q ⟶
 them half exact on these sequences, that `τ_q` is an isomorphism in negative degrees, and that
 every object `X` of a class `P` embeds, by a sequence of the class, into a good object (at which
 all `τ_q` are isomorphisms) with cokernel in `P`. Then all `τ_q` are isomorphisms at the objects of
-`P` (`CategoryTheory.isIso_app_of_dimensionShift`). This is the dimension shifting argument of the
-proof of blueprint `lemma-kunneth-field-coefficients--1`.
+`P` (`CategoryTheory.isIso_app_of_dimensionShift`).
 -/
 
 @[expose] public section

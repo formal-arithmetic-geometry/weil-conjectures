@@ -13,8 +13,13 @@ import WeilConjectures.SixFunctors.IntegralHom.HomComplexTensorPureEquivalence
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomRepresentativeUncurry
 import all Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.SixFunctors.IntegralHom.IntegralHomParameterAdjunction
-/-! Coherent evaluation for the integral tensor presentation.
- -/
+/-! # Coherent evaluation for the integral tensor presentation
+
+## References
+
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 06YU]
+-/
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -189,13 +194,7 @@ variable [EssentiallySmall.{t + 1} Y.ProEt]
   [(AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
     AddCommGrpCat.{max u (t + 1)}]
 -- The representative square elaborates independent site and coefficient universes.
-/-- The signed representative evaluation uses an adjunction natural in its tensor parameter.
-
-Source: Stacks Tags 08J9 and 06YU; the normalized Koszul exchange construction.
-Proof: transport the native adjunction through the natural Koszul exchange. Its
-counits are coherent by exchange naturality and the native evaluation law.
-Uncurry the representative map and precompose with the signed chain exchange.
-Its pure-section formula and localization square give the stated normalization. -/
+/-- The signed representative evaluation uses an adjunction natural in its tensor parameter. -/
 theorem tensor_presentation_parameter_evaluation
     (S : CoefficientClosedStructure
       (derivedInternalHomOfUniverses (AlgebraicGeometry.Scheme.ProEt.topology Y)

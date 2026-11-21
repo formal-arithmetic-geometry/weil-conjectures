@@ -64,7 +64,7 @@ noncomputable abbrev sectionsGerm (G : Sheaf X.smallEtaleTopology (ModuleCat.{u 
 
 /-- **A finite locally constant sheaf on a connected scheme is constant as soon as its global
 sections map bijectively to one stalk**: the counit `Γ(X, G)_X ⟶ G` of the constant sheaf
-adjunction is then an isomorphism on that stalk, hence an isomorphism. -/
+adjunction is then an isomorphism. -/
 theorem IsFiniteLocallyConstantSheaf.isIso_constantSheafAdj_counit
     {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (hG : IsFiniteLocallyConstantSheaf G)
     (h : Function.Bijective (sectionsGerm s G)) :

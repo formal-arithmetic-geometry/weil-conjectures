@@ -20,30 +20,7 @@ and deduces that `k^*` of the comparison `j_! ⟶ j_*` is an isomorphism.
 Together with the `j^*` half (`j_!` fully faithful for an open immersion, proved in
 `WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful`), this is the
 sheaf-theoretic input to the comparison `j_! ⟶ j_*` being an isomorphism for an open
-immersion with closed range. It is the one place where the zero object of the abelian `A`
-is consumed, and genuinely so: for `A = Type` and `k` with nonempty source, `k^* j_* F` has
-singleton sections `F(∅)` while `k^* j_! F` is empty, so the comparison is not an
-isomorphism there.
-
-## The argument
-
-Everything rests on one geometric fact: for `T` étale over `W`, the fibre product `T ×_X U` is
-**empty**, because the ranges of `j` and `k` are disjoint
-(`AlgebraicGeometry.Scheme.isEmpty_pullback`). A sheaf has terminal sections over an
-object with empty underlying scheme (`AlgebraicGeometry.Scheme.Etale.isTerminalSectionsOfIsEmpty`,
-itself the sheaf condition for the empty covering), and with a zero object in `A` terminal means
-zero. Hence:
-
-- `k^* j_* F` has zero sections, since `(k^* j_* F)(T) = F(T ×_X U) = F(∅)`. A sheaf with zero
-  sections is both initial and terminal.
-- `k^* j_! F` is initial, and this is proved **without computing any of its sections** — `j_!`
-  is a sheafification, which is exactly what makes the naive route hard. Instead, for every `H`,
-  the two adjunctions give
-  `Hom(k^* j_! F, H) ≃ Hom(j_! F, k_* H) ≃ Hom(F, j^* k_* H)`, and `j^* k_* H` has zero sections
-  by the same computation with the roles of `j` and `k` exchanged. So the Hom-set is a singleton.
-
-Both being initial, the comparison between them is *the* map out of an initial object, hence an
-isomorphism.
+immersion with closed range.
 
 ## Main results
 
@@ -53,14 +30,14 @@ isomorphism.
 - `AlgebraicGeometry.Etale.isIso_openImmersionRestriction_openImmersionLowerShriekToLowerStar`:
   `k^*` of the comparison is an isomorphism, for disjoint `j` and `k`.
 
-The geometric input `AlgebraicGeometry.isEmpty_pullback_of_disjoint_range` lives in
-`WeilConjectures.Mathlib.AlgebraicGeometry.OpenImmersion`, and the sheaf-theoretic inputs
-`CategoryTheory.Sheaf.isTerminalOfIsTerminalObj`, `CategoryTheory.Sheaf.isZero_of_isZero_obj`
-and `CategoryTheory.Sheaf.isInitialOfIsZeroObj` — a sheaf whose sections are all terminal (resp.
-zero) is terminal (resp. zero, hence initial), for an arbitrary site and coefficient category —
-in `WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf`. Both are shared with the pro-étale
-counterpart
-`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement`.
+## Implementation details
+
+The zero object of the abelian `A` is genuinely needed: for `A = Type` and `k` with nonempty
+source, `k^* j_* F` has singleton sections `F(∅)` while `k^* j_! F` is empty. The vanishing of
+`k^* j_! F` is proved through Hom-sets, `Hom(k^* j_! F, H) ≃ Hom(F, j^* k_* H)`, without
+computing sections of the sheafification `j_!`. The general sheaf-theoretic inputs live in
+`WeilConjectures.Mathlib.CategoryTheory.Sites.Sheaf` and are shared with the pro-étale
+counterpart `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Complement`.
 -/
 
 @[expose] public section
@@ -84,8 +61,7 @@ open Etale
 omit [IsOpenImmersion j] in
 set_option backward.isDefEq.respectTransparency false in
 /-- For `T` étale over `W`, the fibre product `T ×_X U` is empty when the ranges of `j` and `k`
-are disjoint: `T` maps into the range of `k`, which misses the range of `j`. Only `k` is used
-as an open immersion here; `j` may be an arbitrary morphism. -/
+are disjoint. Only `k` is assumed to be an open immersion; `j` may be an arbitrary morphism. -/
 lemma Scheme.Etale.isEmpty_left_pullback_map
     (hjk : Disjoint (Set.range j.base) (Set.range k.base)) (T : W.Etale) :
     IsEmpty ((MorphismProperty.Over.pullback @Etale ⊤ j).obj
@@ -108,9 +84,8 @@ noncomputable def Etale.isTerminalSections_openImmersionRestriction_lowerStar
 
 set_option backward.isDefEq.respectTransparency false in
 omit [IsGrothendieckAbelian.{u + 1} A] [HasSmallSiteSheafify A] [IsOpenImmersion j] in
-/-- **`k^* j_* F` vanishes.** All its sections are terminal, hence zero. Like
-`AlgebraicGeometry.Scheme.Etale.isEmpty_left_pullback_map` this does not use that `j` is an
-open immersion. -/
+/-- **`k^* j_* F` vanishes**, for `j` an arbitrary morphism whose range is disjoint from that of
+the open immersion `k`. -/
 lemma Etale.isZero_openImmersionRestriction_lowerStar
     (hjk : Disjoint (Set.range j.base) (Set.range k.base)) (F : Sheaf U.smallEtaleTopology A) :
     IsZero ((Etale.openImmersionRestriction A k).obj ((j)_*[A].obj F)) := by
@@ -121,10 +96,7 @@ lemma Etale.isZero_openImmersionRestriction_lowerStar
       HasZeroObject.zeroIsTerminal)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- **`k^* j_! F` is initial**, proved through Hom-sets rather than through sections: the two
-adjunctions turn `Hom(k^* j_! F, H)` into `Hom(F, j^* k_* H)`, and `j^* k_* H` vanishes by
-`AlgebraicGeometry.Etale.isZero_openImmersionRestriction_lowerStar` with the roles of `j` and
-`k` exchanged. -/
+/-- **`k^* j_! F` is initial**, for open immersions `j` and `k` with disjoint ranges. -/
 noncomputable def Etale.isInitial_openImmersionRestriction_openImmersionLowerShriek
     (hjk : Disjoint (Set.range j.base) (Set.range k.base)) (F : Sheaf U.smallEtaleTopology A) :
     IsInitial ((Etale.openImmersionRestriction A k).obj ((j)_!open[A].obj F)) := by
@@ -138,9 +110,7 @@ noncomputable def Etale.isInitial_openImmersionRestriction_openImmersionLowerShr
 
 set_option backward.isDefEq.respectTransparency false in
 omit [HasSmallSiteSheafify A] in
-/-- **The comparison `j_! ⟶ j_*` restricted to a disjoint open is an isomorphism.** Both sides
-are initial, and a morphism out of an initial object is unique, so it agrees with the canonical
-isomorphism between the two. -/
+/-- **The comparison `j_! ⟶ j_*` restricted to a disjoint open is an isomorphism.** -/
 lemma Etale.isIso_openImmersionRestriction_openImmersionLowerShriekToLowerStar
     (hjk : Disjoint (Set.range j.base) (Set.range k.base)) (F : Sheaf U.smallEtaleTopology A) :
     IsIso ((Etale.openImmersionRestriction A k).map

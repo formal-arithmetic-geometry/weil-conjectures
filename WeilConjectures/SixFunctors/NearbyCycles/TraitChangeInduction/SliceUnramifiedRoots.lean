@@ -24,9 +24,7 @@ algebraic over `κ(x̄)` for an element `x ∈ R'` with residue transcendental o
 (`AlgebraicGeometry.SliceTrait.exists_unramified_subfields`) that the field
 `B = Frac(R')(θ i n : i, n) ⊆ Ω'`, which contains `K₀` and `R'`, is still discretely valued with
 the value group of `R'`, and that the residues of its integral elements are sums of products of
-residues of `R'` and of residues of elements of `Ω`: the `p`-basis of `κ` stays `p`-independent in
-the residue field of `R'` (`Field.PowIndependent.map_of_isSeparable`), so that adjoining the
-`θ i n` to `Frac R'` is unramified (`ValuationSubring.unramified_adjoin_roots`).
+residues of `R'` and of residues of elements of `Ω`.
 -/
 
 @[expose] public section

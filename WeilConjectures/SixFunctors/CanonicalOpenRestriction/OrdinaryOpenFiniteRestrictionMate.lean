@@ -10,7 +10,10 @@ import Mathlib.CategoryTheory.Sites.CoverLifting
 
 /-! # The finite ordinary restriction mate
 
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I.
+## References
+
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0E8I]
 -/
 
 @[expose] public noncomputable section
@@ -224,22 +227,19 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
   {U X : Scheme.{t}} (j : U ⟶ X) [IsOpenImmersion j] (o : Operations l E j)
 
-/-- The finite open adjunction, retaining both coefficient-equivalence transformations.
-Source: Stacks 03DJ. -/
+/-- The finite open adjunction, retaining both coefficient-equivalence transformations. -/
 abbrev finiteOpenAdjunction (n : ℕ) := (o.finite n).toAdjunction.comp
   (SheafOfModules.localizedSystemAdjunction.{t+1, t, max u (t+1)}
     (rings l E X n) (openObject j))
 
-/-- The actual mate of inverse extension tensor comparison.
-Source: Stacks 0E8I. -/
+/-- The actual mate of inverse extension tensor comparison. -/
 def finiteRestrictionMate (tensor : TensorComparison l E j o) (n : ℕ) :
     restriction l E j o ⋙ scalarReductionExtension l E U n ⟶
       scalarReductionExtension l E X n ⋙ finiteRestriction l E j o n :=
   (mateEquiv (ordinaryAdjunction l E j o) (finiteOpenAdjunction l E j o n)
     (TwoSquare.mk _ _ _ _ (tensor.ordinary n).inv))
 
-/-- The mate has the prescribed unit, inverse-tensor, counit word.
-Source: Stacks 0E8I. -/
+/-- The mate has the prescribed unit, inverse-tensor, counit word. -/
 theorem finiteRestrictionMate_app (tensor : TensorComparison l E j o) (n : ℕ)
     (N : scalarReductionSource l E X) :
     (finiteRestrictionMate l E j o tensor n).app N =
@@ -252,29 +252,7 @@ theorem finiteRestrictionMate_app (tensor : TensorComparison l E j o) (n : ℕ)
   exact mate_word (ordinaryAdjunction l E j o) (finiteOpenAdjunction l E j o n)
     (TwoSquare.mk _ _ _ _ (tensor.ordinary n).inv) N
 
-/-- The generator-normalized finite restriction mate is invertible.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I,
-lemma-j-shriek-and-tensor; finite part of the ordinary quotient argument.
-
-Proof: the open object is subterminal because j is a monomorphism. On its
-slice the extension presheaf has precisely one summand at each object, naturally
-identified with the original module. Slice restriction commutes with sheafification
-by the cocontinuity of Over.forget. Thus the section-normalized localized unit
-is invertible. Composing with the coefficient equivalences gives invertible
-units for both ordinary open adjunctions.
-
-Let epsilon be the integral counit at N. Its restriction is invertible by the
-right triangle identity and the integral unit. The inverse coefficient equivalence
-reflects isomorphisms, so epsilon is already invertible on the actual slice.
-Sectionwise extension of scalars preserves these slice isomorphisms; the natural
-slice sheafification comparison shows the same after sheafification. Transport
-through the fixed object and map identifications of scalarReductionExtension.
-Consequently finiteRestriction sends scalarReductionExtension(epsilon) to an
-isomorphism. In finiteRestrictionMate_app, the other two factors are the finite
-open unit and the image of tensor.ordinary.inv. Hence every factor is invertible.
-Componentwise invertibility proves the assertion. This uses only the ordinary
-isomorphism of TensorComparison; its generator equation is not needed for
-invertibility. The argument includes n = 0, zero modules and the empty open. -/
+/-- The generator-normalized finite restriction mate is invertible. -/
 theorem finiteRestrictionMate_isIso (tensor : TensorComparison l E j o) (n : ℕ) :
     IsIso (finiteRestrictionMate l E j o tensor n) := by
   have hV (W : X.ProEt) : Subsingleton (W ⟶ openObject j) := by

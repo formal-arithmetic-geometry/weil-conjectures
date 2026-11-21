@@ -10,7 +10,14 @@ import WeilConjectures.SixFunctors.Coefficient.Normalized.CoefficientNormalizedT
 
 /-! # Horizontal compatibility of normalized tensor comparisons
 
-Source: Stacks 07A4, 08J9 and 0941; Zheng Construction 4.1.
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08J9]
+* [Stacks, Tag 0941]
+* Zheng, Construction 4.1
 -/
 
 @[expose] public section
@@ -26,22 +33,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})
 
 /-- Horizontal reduction of a tensor is the tensor of the two reductions.
-There is no cartesianness or internal-Hom hypothesis here.
-Source: Zheng Construction 4.1; Stacks 03EK, 06YY, 07A4 and 0941;
-step 2 of lem-coef-normalized-internal-hom-fibers.
-
-Proof: resolve both systems on the sequence site by flat-term K-flat complexes.
-Their evaluated components are simultaneously K-flat and flat termwise. The
-ordinary horizontal maps send a local pure tensor to the tensor of the two
-horizontal images. Transpose under the ordinary quotient adjunction: the unit
-is 1 tensor x, by Q.ordinary_unit. Thus the two maps are the same balanced
-pure-tensor map, including equal indices. Tensor generators and sheafification
-prove equality of chain maps on the strict systems. Localize this equality.
-Q.unit_model identifies its transposes with the displayed actual transition
-adjoints. The squares hE and Q.tensor_model identify the evaluation and quotient
-tensor maps. Cancel the representative comparisons and use naturality to
-transport the equality to arbitrary unbounded systems. No faithfulness of
-finite derived evaluation and no flatness of quotient rings is used. -/
+There is no cartesianness or internal-Hom hypothesis here. -/
 theorem coefficientNormalizedTensorHorizontal
     (R : CoefficientDerivedSystemReduction l E W)
     (hE : CoefficientEvaluationTensorNormalization l E W R)

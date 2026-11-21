@@ -11,7 +11,11 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.Canonical
 
 /-! # Ordinary reduction and the total tensor pullback square
 
-Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -27,26 +31,8 @@ attribute [local irreducible] pullbackTensorCalculus
   completedIntegralCoefficientSheafUnrestricted completedIntegralCommRingSheafUnrestricted
   HasDerivedCategory.standard SheafOfModules.monoidalCategory
 
-/-- The ordinary reduction/pullback mate preserves the signed total tensor map.
-Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
-
-Proof: the limit comparison is identity on the projected sections by
-OrdinaryLimitModel.projections. Transpose this identity through the ordinary
-reduction/limit and geometric module adjunctions. The resulting mate sends an
-iterated quotient and inverse-image unit to the same iterated unit. Precompose
-both displayed maps in degree k with each tensor summand p+q=k. On an ordinary
-pure tensor their values are (b tensor x) tensor (1 tensor y), with the same
-inverse-image and quotient units on both factors. The finite-component formula
-for tensorReductionStrictMap and the unit formula for pullbackTensorSequenceCochain
-identify the other two sides. Balancing, additivity and the sheafification
-universal property extend this equality to the summand. Inverse image and scalar
-extension preserve coproducts, so the total summand injections determine the
-whole degree map. These maps preserve both input degrees and therefore the
-signed differential. The same finite-component formulas commute with every
-adjacent quotient transition, proving equality of strict system complexes.
-This is an ordinary cochain identity: no derived evaluation or localization is
-used, and neither K-flatness nor flatness is required. Zero complexes and identity
-scheme maps are included in the same generator calculation. -/
+/-- The ordinary reduction/pullback mate preserves the signed total tensor map, as an
+identity of strict system complexes. -/
 theorem canonicalReductionTensorPullComplex
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

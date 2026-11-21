@@ -10,6 +10,14 @@ import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSection
 import WeilConjectures.SixFunctors.Coefficient.Derived.CoefficientDerivedSectionsCoreEquations
 
 /-! A strict subpackage of the normalized coefficient-sections data.
+
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 079P]
+* [Stacks, Tag 08JA]
+* [Stacks, Tag 0D6E]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -70,10 +78,8 @@ structure CoefficientDerivedSectionsCore
         (toCoefficientDerivedSystemScalarCoherence.scalarSections n).hom.app
           ((coefficientSequenceDerivedEvaluation l E W n).obj M)
 
-/-- The construction is the first four fields of the requested package.
-Source: Stacks 03CZ, 079P, 08JA, 0D6E and 0941.
-The proof transports normalized global-sections and limit comparisons through the
-coefficient tower, then records their finite projections. -/
+/-- For a derived system reduction with finite tensor normalization, the core
+coefficient-sections package `CoefficientDerivedSectionsCore` exists. -/
 theorem coefficientDerivedSectionsCore
     (R : CoefficientDerivedSystemReduction l E W)
     (hF : CoefficientFiniteTensorNormalization l E W R) :

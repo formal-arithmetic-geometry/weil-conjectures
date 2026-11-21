@@ -12,7 +12,13 @@ import WeilConjectures.SixFunctors.OpenSemilinearTensor.OpenStrictScalarTranspor
 import WeilConjectures.SmoothPurity.Pur.PurSequenceOrdinaryFactorization
 /-! # Ordinary open scalar comparisons
 
-Source: Stacks Project, Modules on Sites, Tags 0E8I and 03DI.
+## References
+
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -63,18 +69,7 @@ private theorem ordinaryScalarEvaluationComparison_components
         (IntegralOpenReduction.finiteExtension l E j o n).map
           ((AU.evaluation n).hom.app M)) using 1 <;> rfl
 
-/-- The ordinary slice projection and scalar comparisons, retaining strict quotient maps.
-Source: Stacks 0E8I, 03DI, 03DJ, 03EK and 0941.
-
-Proof: use the normalized coefficient transport for the supplied localization.
-Retain the ordinary reductions and all quotient equations from the existing sequence
-factorization on X and U. Transport the normalized slice tensor formula through the
-completed coefficient equivalence, using its actual counit on the restricted factor.
-Apply the strict scalar transport to the two ordinary reductions; the equality of the
-open systems carries the given section normalization to that transport. Define each
-finite tensor comparison by evaluating the strict isomorphism and conjugating by the
-recorded evaluations. Its scalar-unit normalization supplies the generator field.
-Cancelling AX's evaluation with its inverse proves the displayed component equation. -/
+/-- The ordinary slice projection and scalar comparisons, retaining strict quotient maps. -/
 theorem openSemilinearOrdinaryComparison
     (sections : SemilinearDerivedSectionsData.{t + 1, t, max u (t + 1)}
       (ProEt.topology X) (IntegralOpenReduction.rings l E X)

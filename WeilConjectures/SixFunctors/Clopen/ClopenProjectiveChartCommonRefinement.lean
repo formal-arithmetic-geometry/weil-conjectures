@@ -15,10 +15,16 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 /-!
 # Common refinements of completed projective charts
 
-Source: Stacks Project, proetale.tex, Tag 09C3; Bhatt--Scholze, Lemmas 6.5.5 and 6.5.8.
-
 All restrictions below are ordinary uncompleted derived ringed pullbacks. Coefficient
 index zero is exponent one. Finite products of the unit module are finite direct sums.
+
+## References
+
+* [Stacks, Tag 09C3]
+* [Stacks, Tag 03D8]
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 08TC]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemmas 6.5.5 and 6.5.8
 -/
 
 @[expose] public section
@@ -85,28 +91,7 @@ private theorem chart_map_retract
   simp only [Category.assoc, Iso.hom_inv_id_assoc, ← F.map_comp, hιρ, F.map_id]
 
 /-- Finite projective charts for two complete ordinary restrictions admit a common
-clopen refinement, with models for the composite ordinary pullbacks.
-
-Source: Stacks Project, Tag 09C3, common refinement of the local models; Tags 03D8,
-06YY and 08TC for ordinary restriction and completion.
-
-Proof: each finite disjoint open cover is clopen, because the complement of one
-member is the finite union of the others. Intersect the two covers and enumerate
-the product of their finite index sets by Fin c. The intersections are clopen in
-an affine scheme, hence qcqs; their pairwise disjointness and covering follow from
-those of the original covers. On each intersection use the normalized clopen
-coefficient identification to restrict the corresponding complex. This exact
-module functor carries zero terms to zero, identifies the unit sheaf with the
-unit sheaf, and preserves finite products (equivalently finite sums). Apply it
-to the specified inclusion and retraction; functoriality preserves their composite
-identity. The bounded projective complex is K-flat. Its ordinary derived
-restriction is therefore this termwise restriction. A clopen restriction preserves
-the entire quotient tower and its augmented Roos triangle, hence preserves
-completeness; the ordinary-to-completed comparison is consequently invertible
-on each given complete complex. Transport the given completed chart isomorphism
-through this comparison. Finally the ordinary derived pullback compositor
-identifies iterated restriction with pullback along the displayed composite to W.
-Empty members, zero complexes, and empty schemes satisfy the same construction. -/
+clopen refinement, with models for the composite ordinary pullbacks. -/
 theorem clopen_projective_chart_common_refinement
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]

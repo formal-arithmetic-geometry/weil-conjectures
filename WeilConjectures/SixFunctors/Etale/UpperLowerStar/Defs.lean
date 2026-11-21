@@ -225,15 +225,8 @@ namespace Etale
 
 /-- The pullback `g^*` along an arbitrary morphism `g : Z ⟶ Y` on sheaves for the small
 étale sites: left Kan extension on presheaves followed by sheafification, left adjoint to
-`Etale.lowerStar`. The Kan extensions are provided by
-`CategoryTheory.Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize` of
-`WeilConjectures.Mathlib.CategoryTheory.Functor.KanExtension.Pointwise`, and the sheafification by
-`CategoryTheory.GrothendieckTopology.hasSheafify_smallEtaleTopology` of
-`WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify`, which is proved
-through `CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall`. For `g` étale
-the Kan extension hypothesis is automatic by
-`Etale.hasPointwiseLeftKanExtension_op_overPullback`, and `g^*` is computed by restriction,
-see `Etale.upperStarIsoOpenImmersionRestriction`. -/
+`Etale.lowerStar`. For `g` étale, `g^*` is computed by restriction, see
+`Etale.upperStarIsoOpenImmersionRestriction`. -/
 noncomputable def upperStar :
     Sheaf Y.smallEtaleTopology A ⥤ Sheaf Z.smallEtaleTopology A :=
   Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @Etale ⊤ g) A
@@ -258,13 +251,7 @@ instance : (g)^*[A].IsLeftAdjoint :=
   (Etale.upperStarLowerStarAdjunction A g).isLeftAdjoint
 
 /-- The pullback `g^*` on étale sheaves is left exact, hence exact, being also a left
-adjoint: `g^*` is the composite of the inclusion of sheaves into presheaves, which preserves
-finite limits, the left Kan extension along the opposite of base change, and sheafification,
-which is left exact by `HasSheafify`. The left exactness of the Kan extension is
-`Etale.preservesFiniteLimits_op_lan_overPullback` for an étale `g`, and in general
-`Etale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`, the Kan
-extension being a filtered colimit and filtered colimits in the Grothendieck abelian `A`
-being exact. -/
+adjoint. -/
 instance Etale.preservesFiniteLimits_upperStar
     [PreservesFiniteLimits ((MorphismProperty.Over.pullback @Etale ⊤ g).op.lan :
       (Y.Etaleᵒᵖ ⥤ A) ⥤ Z.Etaleᵒᵖ ⥤ A)] :

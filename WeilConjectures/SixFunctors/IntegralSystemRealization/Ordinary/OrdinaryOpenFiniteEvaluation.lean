@@ -13,7 +13,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
 /-! # Finite evaluation of the ordinary system open counit
 
-Source: Stacks 03DI, 03DJ and 0941; ordinary open-factor argument of fix-prop-coherence.
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 03DJ]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -209,21 +213,7 @@ attribute [local implicit_reducible] integralCoefficientSheaf integralCoefficien
   pullbackTensorSequenceInverseEvaluation pullbackTensorSequenceDirectEvaluation
   coefficientSequenceCommRingTransition integralCoefficientSheafTransition
   coefficientProEtaleModuleAdjunction coefficientProEtaleModulePullback in
-/-- Evaluation carries the ordinary open counit to its finite-level counit.
-Source: Stacks 03DI, 03DJ and 0941; fix-prop-coherence, ordinary open-factor argument.
-
-Proof: identify the pro-etale site of the open with the ambient slice. On the sequence
-site this identification is its product with the coefficient index. Extension by zero
-is the direct-sum presheaf followed by module sheafification. Restriction to one index
-commutes with both constructions, since covers are vertical. This gives the finite
-left adjoint and the evaluation isomorphism. On each original extension summand the
-counit is evaluation at the corresponding factorization through the open, so the
-counit square commutes. The inverse-image evaluation comparison is the canonical
-adjoint transpose of identity on direct-image sections, hence is precisely
-pullbackTensorSequenceInverseEvaluation. Sheafification uniqueness proves the square
-for all sections. Finally transport from this extension to the supplied o by uniqueness
-of left adjoints; this transport preserves the counit. Empty opens have empty sums,
-and the identity open has its single identity summand. No module flatness is used. -/
+/-- Evaluation carries the ordinary open counit to its finite-level counit. -/
 theorem ordinaryOpenFiniteEvaluation {X Y : Scheme.{u}}
     (j : X ⟶ Y) [IsOpenImmersion j] (o : Open l E j) (n : ℕ) :
     ∃ (L : normalizedDVRModules l E X n ⥤ normalizedDVRModules l E Y n)

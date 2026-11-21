@@ -22,15 +22,13 @@ subextension `L'` such that the pullback exchange of the change of Galois layers
 is invertible
 (`NearbyCyclesModel.exists_isIso_pullbackExchange_galoisLayerRestrict_of_boundedConstructible`).
 
-The cohomology sheaves of `Ψ_{N_Ω} C` are finitely generated
-(`ProEtale.CondensedRing.isGeneratedByFinitelyPresentable_homology_of_boundedConstructible`), so
-an open subgroup `Gal(Ω/L')` acts trivially on them by continuity
-(`NearbyCyclesModel.exists_forall_mem_finset_homology_galoisLayerAction_eq_id_of_isGenerated`),
-and then the nearby cycles of `N_{L'}` are all of `Ψ_{N_Ω} C`
-(`NearbyCyclesModel.isIso_pullbackExchange_galoisLayerRestrict_of_homology`). This replaces the
-noetherianity hypothesis of
-`NearbyCyclesModel.exists_isIso_pullbackExchange_galoisLayerRestrict_of_isNoetherianObject`,
-which does not hold for pro-étale sheaves in general.
+## Implementation details
+
+Unlike `NearbyCyclesModel.exists_isIso_pullbackExchange_galoisLayerRestrict_of_isNoetherianObject`,
+no noetherianity of the cohomology sheaves is assumed (it does not hold for pro-étale sheaves in
+general): they are finitely generated
+(`ProEtale.CondensedRing.isGeneratedByFinitelyPresentable_homology_of_boundedConstructible`),
+which suffices for the continuity of the Galois action.
 -/
 
 @[expose] public section

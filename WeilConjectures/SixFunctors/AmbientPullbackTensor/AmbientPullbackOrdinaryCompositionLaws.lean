@@ -8,15 +8,15 @@ module
 public import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPullbackTensorData
 import WeilConjectures.SixFunctors.AmbientPullbackTensor.AmbientPushforwardCompositionSections
 
-/-! Ordinary pullback associativity and unit laws.
+/-! # Ordinary pullback associativity and unit laws
 
-Source: Stacks 03CB, 03D3 and 04VG.
+The ordinary part of the ambient pullback coherence argument, before derived localization.
 
-This is the ordinary part of the ambient pullback coherence argument. The
-section-normalized direct-image comparison is pasted over the canonical
-fibre-product comparisons; adjunction mates then give the three displayed
-identities. The proof is split from the derived localization step so that the
-ordinary and derived calculations can be completed independently.
+## References
+
+* [Stacks, Tag 03CB]
+* [Stacks, Tag 03D3]
+* [Stacks, Tag 04VG]
 -/
 
 @[expose] public noncomputable section
@@ -317,10 +317,7 @@ private theorem directImage_leftUnit
   rw [← PresheafOfModules.map_comp_apply, ← op_comp, site_leftUnit]
   rfl
 
-/-- Right-unit part of ordinary ambient pullback coherence.
-Source: Stacks 03D3 and 04VG.
-The section-normalized identity comparison and the adjunction right-unit law give
-this clause. -/
+/-- Right-unit part of ordinary ambient pullback coherence. -/
 theorem ordinary_pullback_rightUnit (K : Scheme.{t}) (s : Option ℕ) :
     ∀ {X Y : Scheme.{t}} (f : X ⟶ Y) (aX : X ⟶ K) (aY : Y ⟶ K)
       [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -345,10 +342,7 @@ theorem ordinary_pullback_rightUnit (K : Scheme.{t}) (s : Option ℕ) :
     Functor.leftUnitor_hom_app, Functor.comp_obj, Functor.id_obj, Category.comp_id,
     eqToIso.hom, eqToHom_app] using hi.symm
 
-/-- Left-unit part of ordinary ambient pullback coherence.
-Source: Stacks 03D3 and 04VG.
-The section-normalized identity comparison and the adjunction left-unit law give
-this clause. -/
+/-- Left-unit part of ordinary ambient pullback coherence. -/
 theorem ordinary_pullback_leftUnit (K : Scheme.{t}) (s : Option ℕ) :
     ∀ {X Y : Scheme.{t}} (f : X ⟶ Y) (aX : X ⟶ K) (aY : Y ⟶ K)
       [LocallyOfFiniteType aX] [QuasiCompact aX]
@@ -373,12 +367,7 @@ theorem ordinary_pullback_leftUnit (K : Scheme.{t}) (s : Option ℕ) :
     Functor.rightUnitor_hom_app, Functor.comp_obj, Functor.id_obj, Category.comp_id,
     eqToIso.hom, eqToHom_app] using hi.symm
 
-/-- Ordinary associativity and unit laws for the ambient pullback comparisons.
-Source: Stacks 03CB, 03D3 and 04VG.
-Proof: paste the section-normalized direct-image comparisons over the canonical
-fibre-product associativity and identity comparisons, then take their specified
-adjunction mates. The three component equations are exactly the associativity,
-right-unit and left-unit clauses below. -/
+/-- Ordinary associativity and unit laws for the ambient pullback comparisons. -/
 theorem ordinary_pullback_compositionLaws (K : Scheme.{t}) (s : Option ℕ) :
     (∀ {W X Y Z : Scheme.{t}} (w : W ⟶ X) (f : X ⟶ Y) (g : Y ⟶ Z)
       (aW : W ⟶ K) (aX : X ⟶ K) (aY : Y ⟶ K) (aZ : Z ⟶ K)

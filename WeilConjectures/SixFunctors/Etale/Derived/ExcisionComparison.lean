@@ -16,14 +16,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBaseChange
 
 For a cartesian square with `f = 𝟙_Y` and `g = g' : Y' ⟶ Y` an open immersion, the base-change
 comparison `Lg'^* Rf^! ⟶ Rf'^! Lg^*` of the exceptional inverse image is an isomorphism, whereas
-the excision comparison `Rf_!(g'_! ⟶ g'_*)`, which is `g_! ⟶ Rg_*`, need not be one. The counterexample is the punctured affine line
-`j : 𝔾_{m,k} ⟶ 𝔸¹_k` over a separably closed field `k`: the stalk of `Rj_* Λ` at the origin is
-nonzero, whereas that of `j_! Λ` vanishes.
+the excision comparison `Rf_!(g'_! ⟶ g'_*)`, which is `g_! ⟶ Rg_*`, need not be one. The
+counterexample is the punctured affine line `j : 𝔾_{m,k} ⟶ 𝔸¹_k` over a
+separably closed field `k`: the stalk of `Rj_* Λ` at the origin is nonzero, whereas
+that of `j_! Λ` vanishes.
 
-## The argument
+## Implementation details
 
-The blueprint reads off the stalk of `j_* Λ` at the origin from the description of direct
-images. Here it is read off from the closed support triangle
+The stalk of `Rj_* Λ` at the origin is read off from the closed support triangle
 `s_* Rs^! Λ_T ⟶ Λ_T ⟶ Rj_* Λ_G ⟶` of the zero section `s`: if `Ls^* Rj_* Λ_G` vanished, then
 `Rs^! Λ_T ≅ Ls^* Λ_T ≅ Λ_k` would have nonzero `𝓗⁰`, whereas `(Rs^! Λ_T)[2] ≅ Λ_k` by purity
 (`Etale.nonempty_iso_shift_rightDerivedUpperShriek_affineLineZero_of_isSepClosed`).
@@ -57,8 +57,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [Nontrivial Λ] [HasTateT
   {G : Scheme.{u}} (j : G ⟶ 𝔸(ULift.{u} (Fin 1); Spec (.of k))) [IsOpenImmersion j]
 
 /-- For the open complement `j : G ⟶ 𝔸¹_k` of the zero section `s` over a separably closed
-field, `Ls^* Rj_* Λ_G ≠ 0`: the closed support triangle `s_* Rs^! Λ ⟶ Λ ⟶ Rj_* Λ_G ⟶` would
-otherwise give `Rs^! Λ ≅ Λ_k`, contradicting `(Rs^! Λ)[2] ≅ Λ_k`. -/
+field, `Ls^* Rj_* Λ_G ≠ 0`. -/
 theorem not_isZero_leftDerivedUpperStar_zeroSection_rightDerivedLowerStar
     (hj : Set.range j.base =
       (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k))).base)ᶜ) :
@@ -104,9 +103,7 @@ theorem not_isZero_leftDerivedUpperStar_zeroSection_rightDerivedLowerStar
 
 /-- For the open complement `j : G ⟶ 𝔸¹_k` of the zero section over a separably closed field,
 the excision comparison `j_! Λ_G ⟶ Rj_* Λ_G`
-(`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekToLowerStar`) is not an isomorphism: its
-source vanishes at the origin, its target does not
-(`AlgebraicGeometry.Etale.not_isZero_leftDerivedUpperStar_zeroSection_rightDerivedLowerStar`). -/
+(`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekToLowerStar`) is not an isomorphism. -/
 theorem not_isIso_derivedOpenImmersionLowerShriekToLowerStar_app_affineLine
     (hj : Set.range j.base =
       (Set.range (AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k))).base)ᶜ) :
@@ -118,10 +115,8 @@ theorem not_isIso_derivedOpenImmersionLowerShriekToLowerStar_app_affineLine
       ((L((AffineSpace.zeroSection (ULift.{u} (Fin 1)) (Spec (.of k)))^*[
         ModuleCat.{u + 1} Λ])).mapIso (@asIso _ _ _ _ _ h).symm))
 
-/-- The excision comparison is not the
-base-change comparison.
-
-Take `f = 𝟙` on the affine line `T = 𝔸¹_k` over a separably closed field `k`, and let
+/-- The excision comparison is not the base-change comparison. Take `f = 𝟙`
+on the affine line `T = 𝔸¹_k` over a separably closed field `k`, and let
 `g = j : G ⟶ T` be the open complement of the origin, so that the square `j ≫ 𝟙 = 𝟙 ≫ j` is
 cartesian. The base-change comparison `Lj^* R𝟙^! ⟶ R𝟙^! Lj^*`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`) is an isomorphism, whereas the

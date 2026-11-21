@@ -129,23 +129,7 @@ private theorem bounds_tor_iso
   intro P Q he f hf hQ M i hi
   exact h.2 P Q (he.map (fun z ↦ z ≪≫ e.symm)) f hf hQ M i hi
 
-/-- Uniform intrinsic exceptional bounds for the specified ambient right functor.
-
-Proof: Choose finite affine target charts, affine source charts over them, and their
-closed affine-space presentations once for f. Discard empty source charts. Apply
-sf_purity_affine_chart_bounds to this presentation at each positive coefficient
-stage. The chart maximum D and target dimension e are geometric, independent of
-E and n. For nonempty source the resulting endpoints are a-2D and b+2e+1;
-for empty source both constants are zero. The purity functor is defined using a
-chosen compactification. Uniqueness of the ordinary etale right adjoint identifies
-it with the right adjoint for the specified c, compatibly with comparison functors.
-Transport the bounds through that isomorphism. The canonical exact coefficient
-realization identifies fixed-module constructibility and Tor amplitude with the
-intrinsic predicates, including the same interval endpoints. The intrinsic output
-is therefore bounded constructible and has finite Tor amplitude. This gives all
-three assertions. An inverted input cohomological interval forces a zero object;
-additivity sends it to zero, so the same support assertion holds without imposing
-a <= b. Positive Tor intervals already include a <= b by definition. -/
+/-- Uniform intrinsic exceptional bounds for the specified ambient right functor. -/
 theorem sfFiniteOperations_intrinsicExceptionalBounds (D : FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

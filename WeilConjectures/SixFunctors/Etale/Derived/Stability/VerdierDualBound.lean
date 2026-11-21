@@ -14,16 +14,15 @@ Let `X` be separated of finite type over an algebraically closed field `k` with 
 `Λ` a finite ring whose exponent is invertible in `k`. If `K ∈ Dᵇc(X, Λ)` has Tor amplitude in
 `[a, b]`, then `𝔻_X K = RHom(K, ω_X)` is bounded constructible with Tor amplitude in
 `[-b - 2d, -a]`
-(`AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed`,
-`lemma-verdier-duality-preserves-constructibility--1`).
+(`AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed`).
+
+## Implementation details
 
 The proof is a noetherian induction on the closed subsets `T ⊆ X`, for all closed subschemes
-`Z ⊆ X` supported in `T`: a reduced `Z` is cut into a dense open `U`, smooth over `k`, on which
-`K` is lisse and where the Verdier dual is computed by
-`AlgebraicGeometry.Etale.exists_boundedConstructible_and_torAmplitudeIn_verdierDual`, and its
-closed complement, handled by induction; the localization step is
+`Z ⊆ X` supported in `T`, using the lisse smooth case
+(`AlgebraicGeometry.Etale.exists_boundedConstructible_and_torAmplitudeIn_verdierDual`) on a dense
+open and the localization step
 `AlgebraicGeometry.Etale.boundedConstructible_and_torAmplitudeIn_verdierDual_of_localization`.
-A non-reduced `Z` is reduced to `Z_red` by the same step, with empty open complement.
 -/
 
 @[expose] public section
@@ -52,12 +51,9 @@ lemma topologicalKrullDim_le_zero_of_isEmpty {V : Type*} [TopologicalSpace V] [I
   rw [topologicalKrullDim, Order.krullDim_eq_bot]
   exact bot_le
 
-/-- Blueprint `lemma-verdier-duality-preserves-constructibility--1`: Constructible preservation
-before biduality, over an algebraically closed field.
-
-Let `X` be separated of finite type over an algebraically closed field `k` with `dim X ≤ d`, and
-`Λ` a finite ring whose exponent is invertible in `k`. If `K` is bounded constructible on `X_ét`
-of Tor amplitude in `[a, b]`, then `𝔻_X K = RHom(K, ω_X)` is bounded constructible of Tor
+/-- Let `X` be separated of finite type over an algebraically closed field `k` with `dim X ≤ d`,
+and `Λ` a finite ring whose exponent is invertible in `k`. If `K` is bounded constructible on
+`X_ét` of Tor amplitude in `[a, b]`, then `𝔻_X K = RHom(K, ω_X)` is bounded constructible of Tor
 amplitude in `[-b - 2d, -a]`. -/
 theorem boundedConstructible_and_torAmplitudeIn_verdierDual_of_isAlgClosed {k : Type u}
     [Field k] [IsAlgClosed k] [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}}

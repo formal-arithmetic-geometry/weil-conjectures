@@ -11,7 +11,10 @@ import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralCompletedDi
 
 /-! # Ordinary direct image and the coefficient limit
 
-Source: Stacks Project, Tags 03D7 and 0941.
+## References
+
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -211,16 +214,7 @@ private theorem model_projections {X Y : Scheme.{u}} (f : X ⟶ Y)
         (ordinaryLimitProjection_heq l E Y
           ((pullbackTensorSequenceDirect l E f).obj M) n V x)).symm)
 
-/-- Direct image commutes with the ordinary coefficient limit, preserving every projection.
-Source: Stacks Project, Tags 03D7 and 0941; primitive realization Step 3.
-
-Proof: at each finite level use the identity-section direct-image/evaluation comparison
-and the identity-section scalar-restriction comparison. The specified horizontal maps
-of coefficientSequenceRestriction show these comparisons form an isomorphism of towers.
-Apply the ordinary limit functor. The completed direct image is a right adjoint, so its
-limit-preservation comparison is invertible. Its projection equation, together with the
-identity-section normalizations of the two finite comparisons, is exactly the required
-sectionwise formula. This uses ordinary module limits only. -/
+/-- Direct image commutes with the ordinary coefficient limit, preserving every projection. -/
 theorem integralOrdinaryLimitModel : Nonempty (OrdinaryLimitModel l E) := by
   refine ⟨⟨fun f ↦ actualComparison l E f, ?_⟩⟩
   intro X Y f M n V x

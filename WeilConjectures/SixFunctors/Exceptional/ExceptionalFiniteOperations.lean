@@ -25,12 +25,13 @@ import WeilConjectures.AlgebraicGeometry.Open.OpenExtensionFiniteTor
 /-!
 # Exact finite-coefficient exceptional adjunctions
 
-Source: Zheng, Propositions 2.23, 2.29, 3.16, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction.
-
 The categories are the published full intrinsic constant-coefficient categories.
 The normalization is expressed in their canonical fixed-module coordinates, using
 exactly the specified-compactification ordinary etale adjunction.
+
+## References
+
+* Zheng, Propositions 2.23, 2.29, 3.16, Lemma 5.22 and Proposition 5.24
 -/
 
 @[expose] public noncomputable section
@@ -45,46 +46,7 @@ namespace WeilConjectures
 
 /-- Choice of exact additive adjunctions on the actual full finite-Tor categories,
 with the specified ambient functors, transported Hom normalization and uniform bounds.
-The right shift is precisely the adjoint of the chosen left shift.
-Source: Zheng, Propositions 2.23, 2.29, 3.16; Section 5, Lemma 5.22 and Proposition 5.24;
-blueprint exceptional inverse-image construction.
-
-Proof:
-1. Properness makes c.g finite type. By finite-type composition c.Z is finite type over k.
-   Finite type over the Noetherian field makes X, Y and c.Z Noetherian. The finite-dimension
-   lemma supplies a nonnegative bound, independent of coefficients; for an empty c.Z use 0.
-   Uses def-weil-proper-morphism, lem-sfb-finite-type-composition-base-change,
-   lem-weil-pbc-finite-type-over-noetherian and lem-kun-dimension-finite-type.
-2. Extend by zero, preserving constructibility and the Tor interval. Apply proper pro-etale
-   direct image with bound 2d to obtain [a,b+2d]. Restrict the actual functor, including its
-   morphisms, to the full categories. The compact-support exact structure and the inherited
-   triangulation give coherent integer shifts. Uses
-   proposition-proper-direct-image-extension-zero--8, proposition-six-operations-dctf--2,
-   proposition-construction-independence-rf-shriek--1 and lem-weil-finite-ctf-triangulated.
-3. Apply theorem-f-shriek-finite-coefficients--1 to the specified comparison-transported
-   exceptional functor. Fix finitely many affine presentations once, independently of E,n.
-   For nonempty X their dimensions give D=max d_U and e=dim Y; the bound is
-   [a-2D,b+2e+1] both cohomologically and for Tor. Empty X gives zero outputs.
-4. Choose the ordinary etale adjunction. Constructible origin writes each input as nu^* K_e.
-   Compose proper/open comparison, nu^* adjoint Rnu_*, the ordinary etale adjunction,
-   comparison full faithfulness and the origin isomorphism. The class-adjoint theorem makes
-   this independent of the origin witness. Both values belong to the full finite-Tor
-   categories by steps 2 and 3. The natural-bijection theorem gives the adjunction, its unit
-   as the transpose of the identity, its counit as the inverse transpose of the identity,
-   and both triangles. Uses theorem-existence-exceptional-inverse-image--1,
-   theorem-comparison-constructible-sheaves, proposition-comparison-immersions--4,
-   theorem-bounded-below-cohomology-comparison, thm-sf-ambient-adjoint-class and
-   lem-weil-pbc-adjunction-of-natural-bijection.
-5. Equip the right adjoint with the unique coherent adjoint shift structure. The shift
-   adjunction theorem gives shift compatibility of both unit and counit. The exact-right-
-   adjoint theorem gives exactness. Additivity follows by applying the inverse Hom bijection
-   to G(u)+G(v) and G(u+v): counit naturality and additivity of F give the same inverse
-   transpose. The zero case is identical. Uses
-   lem-weil-pbc-adjunction-shift-compatibility-unique and lem-sf-triangulated-right-adjoint.
-6. Repeat at every c,E,n, with no coefficient or refinement compatibility imposed here.
-   If c.Z is empty then X is empty and all output objects are zero; d=0 works. The
-   construction includes n=1, zero objects and identity morphisms with the same full sites.
--/
+The right shift is precisely the adjoint of the chosen left shift. -/
 theorem exists_sfFiniteExceptionalOperations (D : FiniteFieldDatum.{u})
     (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p)
     {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))]

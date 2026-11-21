@@ -9,6 +9,12 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralComp
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.ExpressionRecursion.IntegralExpressionRecursion
 
 /-! # Intermediate assembly data for integral realization
+
+## References
+
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -25,16 +31,15 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Canonical simultaneous models before expression realization. This records only
-ambient operations, their normalized mates and open reconstruction.
-Source: Stacks 0941, 07A7, 03DI; blueprint fix-prop-coherence, steps 1--2. -/
+ambient operations, their normalized mates and open reconstruction. -/
 structure AmbientModels (o : Operations l E) where
   /-- The proper/open mate, scalar restriction, and normalized pasting package. -/
   compositors : Compositors l E o
   openComparisons : OpenComparisons l E o compositors
   canonicalBridge : CanonicalBridge l E o
   properOpen : ProperOpenCoherence l E o compositors openComparisons canonicalBridge
-  /-- The tensor/square identifications obey the displayed equation of
-      lem-weil-pbc-ringed-exchange-tensor-coherence, before evaluation. -/
+  /-- The tensor/square identifications obey the ringed exchange/tensor coherence
+      equation, before evaluation. -/
   ringedTensorCoherence : ∀ {U V W Z : Scheme.{u}}
     (k : U ⟶ V) (r : U ⟶ W) (p : V ⟶ Z) (i : W ⟶ Z)
     (h : k ≫ p = r ≫ i) (M : System l E V) (N : System l E Z),
@@ -80,8 +85,7 @@ structure AmbientModels (o : Operations l E) where
   ringedProperOpen : RingedProperOpen l E ringedModels ringedOpenComparisons
 
 /-- The explicit recursion equations for a given comparison family. These equations
-contain neither coefficient normalization nor compatibility with canonical generator maps.
- -/
+contain neither coefficient normalization nor compatibility with canonical generator maps. -/
 structure RecursionLaws (D : FiniteFieldDatum.{u}) (o : Operations l E)
     (a : AmbientModels l E o)
     (comparison : ExpressionRecursion.Comparisons l E D o) : Prop where

@@ -78,8 +78,10 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Signed representatives of the normalized left-adjoint comparison
 
-Source: Stacks 07A4 and 08J9; the tensor-Hom normalization in the coefficient
-Verdier argument.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 08J9]
 -/
 
 @[expose] public noncomputable section
@@ -278,18 +280,7 @@ set_option backward.isDefEq.respectTransparency.types true in
 attribute [local irreducible] totalPair pair projection evaluate in
 attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The normalized comparison of left adjoints is the signed total-tensor exchange
-on K-flat representatives.
-
-Source: Stacks 07A4, 08J9; blueprint theorem-verdier-biduality--3, paragraph 1.
-Proof: take the existing Koszul exchange of total complexes. To identify its
-localization with the comparison of adjoints, postcompose with an injective
-resolution of the target. Every curried morphism into the resulting derived Hom
-is represented by a chain map into the Hom complex, since Hom from a K-flat
-complex into a K-injective complex is K-injective. The signed evaluation of the
-left presentation and the unsigned evaluation of the right presentation then
-agree after the Koszul exchange, on every homogeneous pure tensor. Pure tensors
-generate the total tensor, so the chain maps agree. Uniqueness of the left-adjoint
-comparison preserves uncurrying. Cancel the resolution isomorphism. -/
+on K-flat representatives. -/
 theorem tensorAdjointComparison_representative
     (a : TensorPresentation.{t, u} Y R)
     (S : CoefficientClosedStructure

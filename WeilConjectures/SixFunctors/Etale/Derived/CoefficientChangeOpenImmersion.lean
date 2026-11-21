@@ -17,16 +17,15 @@ Lg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Lg''^*` is compatible with the coefficient comparis
 `AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso` and
 `AlgebraicGeometry.Etale.derivedRestrictScalarsCompOpenImmersionLowerShriekIso`
 (`AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekBaseChangeIso_hom_app_restrictScalars`).
+This is used for the compatible systems of Frobenius coefficient morphisms.
+
+## Implementation details
 
 All these isomorphisms are induced by exact functors, so the statement is deduced from its
 underived counterpart
 `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_app_restrictScalars` by two
-abstract lemmas: the passage to derived categories through `Functor.mapDerivedCategorySquareIso`
-(`AlgebraicGeometry.Etale.mapDerivedCategorySquareIso_hom_app_comp_of_comm`), and the
-replacement of the functors `D(g^*)` by the derived pullbacks `Lg^*`
-(`AlgebraicGeometry.Etale.pasteTwoSquaresIso_hom_app_comp_map_of_comm_of_iso`).
-
-This is used for the compatible systems of Frobenius coefficient morphisms.
+abstract lemmas, `AlgebraicGeometry.Etale.mapDerivedCategorySquareIso_hom_app_comp_of_comm` and
+`AlgebraicGeometry.Etale.pasteTwoSquaresIso_hom_app_comp_map_of_comm_of_iso`.
 -/
 
 @[expose] public section
@@ -157,8 +156,7 @@ variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ'
 cartesian square `g' ≫ j = j' ≫ g''` of schemes with `j`, `j'` open immersions, the base change
 isomorphism `Lg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Lg''^*` is compatible with the coefficient comparisons
 `AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso` and
-`AlgebraicGeometry.Etale.derivedRestrictScalarsCompOpenImmersionLowerShriekIso`. This is an input
-of the compatible systems of Frobenius coefficient morphisms. -/
+`AlgebraicGeometry.Etale.derivedRestrictScalarsCompOpenImmersionLowerShriekIso`. -/
 lemma derivedOpenImmersionLowerShriekBaseChangeIso_hom_app_restrictScalars
     {U' U X' X : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ X'} {j : U ⟶ X} {g'' : X' ⟶ X}
     [IsOpenImmersion j] [IsOpenImmersion j'] (hsq : IsPullback g' j' j g'')

@@ -31,7 +31,16 @@ import Mathlib.Data.Nat.Prime.Infinite
 
 /-! # Quasi-compact open extension preserves intrinsic DVR completeness
 
-Source: Stacks Tags 0941, 099B and 0A0E; canonical coefficient transport.
+Transport of the completed open-preservation theorem across the canonical DVR coefficient
+comparison.
+
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 099B]
+* [Stacks, Tag 0A0E]
+* [Stacks, Tag 03DI]
+* [Stacks, Tag 09BP]
 -/
 
 @[expose] public noncomputable section
@@ -270,22 +279,8 @@ private theorem dvrOpen_complete
   exact (complete_iff_local.{u, u} p l hne E X _).mpr
     (integralLocallyComplete_iso.{u, u} l E X _ b hlocal)
 
-/-- Transport the completed open-preservation theorem across canonical coefficients.
-Source: Stacks Tags 03DI, 09BP and 099B.
-
-Proof: lift the DVR datum into the coefficient universe and compare its quotient
-rings with the lifted quotients, sending the class of a to the lifted class of a.
-The tensor universal property and uniqueness of limits transport the explicit Koszul
-fiber and its degree-zero unit to the completedAdicIntrinsicUnit construction used
-here. Apply completedOpenExchangeComparison to the identity cartesian square with
-horizontal map j. Its first preservation clause gives intrinsic completeness of the
-completed-coefficient extension. Under C_U and C_X, the finite-constant and limit
-projection equations identify its restriction right adjoint with the actual open
-restriction in O. Uniqueness of left adjoints gives an isomorphism from O.jShriek,
-compatible with scalar equivalence. Exact equivalences and this isomorphism transport
-the intrinsic fiber unit, so invertibility of the source unit implies invertibility
-of the displayed target unit. Quasi-compactness is exactly the hypothesis needed for
-completed open preservation; no commutation with arbitrary inverse limits is used. -/
+/-- Extension by zero along a quasi-compact open immersion preserves intrinsic DVR
+completeness, transported across canonical coefficients. -/
 theorem openDvrIntrinsicOpenTransport
     (d : AdicCoefficientDatum (Padic.coefficientExtensionIntegers l E))
     (hd : Ideal.span (Set.range (fun _ : Fin 1 ↦

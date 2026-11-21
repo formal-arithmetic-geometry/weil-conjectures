@@ -14,7 +14,11 @@ import WeilConjectures.SmoothPurity.ProEtale.ProEtaleTotalTensorPullbackGenerato
 
 /-! # Finite-evaluation bridge for the ordinary reduction/tensor pullback component
 
-Source: Stacks 07A4, 07A6 and 0941; proposition-six-operations-change-coefficients, first paragraph.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public section
@@ -277,15 +281,9 @@ private theorem reduction_tensor_generators (W : Scheme.{u})
 
 /--
 The finite-evaluation equations for the strict reduction maps are sufficient for
-one degree of the ordinary reduction/tensor pullback square. This is the
-finite-level bridge used to assemble the degreewise identity; its proof is the
-pure-tensor calculation together with the normalized unit formula for the
-sequence pullback tensor comparison.
-
-Source: Stacks 07A4, 07A6 and 0941; the first paragraph of
-`proposition-six-operations-change-coefficients`, after finite evaluation and before cochain
-extensionality. The two hypotheses are exactly the finite-component
-characterizations of `tensorReductionStrictMap` at the source and target.
+one degree of the ordinary reduction/tensor pullback square. The two hypotheses are
+the finite-component characterizations of `tensorReductionStrictMap` at the source
+and target.
 -/
 theorem canonicalReductionTensorPullComplex_component_bridge
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]

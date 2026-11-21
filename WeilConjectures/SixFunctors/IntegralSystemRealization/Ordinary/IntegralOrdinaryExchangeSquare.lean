@@ -10,9 +10,14 @@ import all WeilConjectures.SixFunctors.IntegralSystemRealization.Ordinary.Integr
 
 /-! # Ordinary coefficient exchange square
 
-The proof is split from the conjunction theorem so that the exchange mate can be
-proved independently by pasting pullback/reduction comparison squares and
-transposing through the proper adjunctions. -/
+The exchange component of the ordinary coefficient mate square, stated separately from the
+conjunction theorem.
+
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0E48]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -31,15 +36,7 @@ attribute [local irreducible] pullbackTensorCalculus
   proEtaleCanonicalTensorComparison ringedPullComp ringedSquare Compositors.square
   mateEquiv ringedAdj Direct.adj
 
-/-- Exchange component of the ordinary coefficient mate square.
-Source: Stacks Tags 07A7 and 0E48; blueprint fix-prop-coherence.
-
-Proof: paste the pullback and reduction comparison squares for the four sides of
-the given square, use composition normalization to identify the boundary with
-`ringedSquare` and the system square, and transpose through the two proper
-adjunctions. Naturality of the resulting mate inserts the coefficient map of
-the expression. The construction uses no cartesianness or invertibility.
--/
+/-- Exchange component of the ordinary coefficient mate square. -/
 theorem ordinaryExchangeSquare
     (o : Operations l E) (a : AmbientModels l E o)
     {B : Scheme.{u}} {I : Type u} {X : I → Over B}

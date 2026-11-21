@@ -9,7 +9,9 @@ public import Mathlib.CategoryTheory.Products.Basic
 
 /-! # Pasting a tensor square through integral coordinates
 
-The proof uses only functoriality, naturality, and cancellation of an isomorphism.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Remark 6.8.15
 -/
 
 @[expose] public section
@@ -17,8 +19,7 @@ set_option autoImplicit false
 open CategoryTheory
 namespace WeilConjectures.AdicQbarRealization
 
-/-- Paste a finite tensor square through coordinate isomorphisms.
-Source: the categorical diagram calculation in BS 6.8.15. -/
+/-- Paste a finite tensor square through coordinate isomorphisms. -/
 theorem pasteIntegralTensorSquare
     {CY CX : Type*} [Category* CY] [Category* CX]
     (F : CY ⥤ CX) (BY : CY × CY ⥤ CY) (BX : CX × CX ⥤ CX)

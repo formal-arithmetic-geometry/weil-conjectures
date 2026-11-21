@@ -23,21 +23,22 @@ finite locally constant cohomology sheaves `H^q(C^∨) ≅ 𝓗om(H^{-q}(C), λ_
 `v : T' ⟶ T` the canonical comparison `Lv^*(C^∨) ⟶ (Lv^* C)^∨`
 (`AlgebraicGeometry.Etale.coefficientDualComparison`) is an isomorphism.
 
-A finite locally constant sheaf `E` over a field is flat and dualizable with dual `[E, λ]`
-(`AlgebraicGeometry.Etale.exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf`), hence so is `E`
-placed in any degree in the derived category; this is the base case. The general case is a
-dévissage along the truncation triangles `τ^{≤m} C ⟶ C ⟶ H^{m+1}(C)[-m-1] ⟶`: the cohomology
-of the duals of the two outer terms lives in disjoint ranges of degrees, so that the long exact
-cohomology sequences split into isomorphisms, without any compatibility of the connecting maps.
-
-The dévissage is carried out for a general coefficient category and a class of dualizable sheaves
-(`AlgebraicGeometry.Etale.DualizableSheafClass`), and only specialised to `ModuleCat λ` at the
-end: see the implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`.
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isFiniteLocallyConstantSheaf_homology_coefficientDual`
 - `AlgebraicGeometry.Etale.isIso_coefficientDualComparison_of_isFiniteLocallyConstantSheaf`
+
+## Implementation details
+
+A finite locally constant sheaf over a field is flat and dualizable with dual `[E, λ]`
+(`AlgebraicGeometry.Etale.exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf`); this is the base
+case. The general case is a dévissage along the truncation triangles
+`τ^{≤m} C ⟶ C ⟶ H^{m+1}(C)[-m-1] ⟶`: the cohomology of the duals of the two outer terms lives in
+disjoint ranges of degrees, so the long exact cohomology sequences split into isomorphisms.
+
+The dévissage is carried out for a general coefficient category and a class of dualizable sheaves
+(`AlgebraicGeometry.Etale.DualizableSheafClass`), and only specialised to `ModuleCat λ` at the
+end: see the implementation notes of `WeilConjectures.SixFunctors.Etale.Derived.TensorStructure`.
 -/
 
 @[expose] public section

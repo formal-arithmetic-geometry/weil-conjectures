@@ -21,23 +21,18 @@ coefficient comparisons
 (`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) on the unbounded derived categories
 of étale sheaves over a separably closed field, and their compatibility with the compact-support
 base change and the stalk transport along automorphism pairs, the inputs of the Frobenius
-compatibility of `WeilConjectures.SixFunctors.Etale.Derived.AdicFrobenius`. From them it deduces
-the coefficient-change statements
+compatibility of `WeilConjectures.SixFunctors.Etale.Derived.AdicFrobenius`.
+
+## Implementation details
+
+The coefficient-change statements
 `AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections` and
 `AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk` used to build the towers of
-`AlgebraicGeometry.Etale.AdicSystem`.
-
-## Remaining inputs
-
-- `isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso`: the canonical
-  comparison is an isomorphism on derived base changes of `Dᵇctf` complexes.
-  The geometric-stalk analogue is proved in
-  `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk`.
-- `derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap`:
-  the compatibility of the comparisons with the compact-support exchange map (the "compatible with
-  pullback" clause of `lemma-sp-reduction--1`). This is a coherence statement
-  for the unbounded derived functors involved; it is proved in
-  `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange`.
+`AlgebraicGeometry.Etale.AdicSystem` are deduced in
+`WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange`, where the compatibility of
+the comparisons with the compact-support exchange map is also proved; the fact that the
+geometric-stalk comparison is an isomorphism on derived base changes of `Dᵇctf` complexes is
+proved in `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk`.
 -/
 
 @[expose] public section
@@ -710,8 +705,7 @@ lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app
 
 
 /-- The compatibility of the coefficient comparison of `RΓ(Spec k, -)` with the transport along
-an automorphism `h` of `Spec k` (part of the compatibility with pullback asserted by blueprint
-`lemma-sp-reduction--1` and `theorem-grothendieck-lefschetz-trace-formula--7`). -/
+an automorphism `h` of `Spec k`. -/
 lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport
     (h : Spec (.of k) ⟶ Spec (.of k)) [IsIso h]
     (M' : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :

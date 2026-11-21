@@ -35,7 +35,7 @@ exchanges of nearby cycles are compatible with composition.
   category, the composition isomorphism of the pushforwards on bounded constructible complexes
   is the conjugate of the composition isomorphism of the derived pullbacks.
 
-## Implementation notes
+## Implementation details
 
 The diagram chases are carried out in abstract categories (the `_aux` lemmas) and then
 instantiated. The composition isomorphisms are transported along equalities `p ≫ q = pq`

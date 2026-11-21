@@ -96,8 +96,8 @@ noncomputable def lowerShriekPullback (h : X ⟶ X) [IsProper h] (ha : h ≫ a =
         (rightDerivedLowerShriekCompIso Λ h a).inv ≫ (rightDerivedLowerShriekCongrIso Λ ha).hom)
 
 /-- The *operator* `T(ψ) = RΓ_c(X, ψ) ∘ h^♯` on `RΓ_c(X, K)` of a cohomological correspondence
-`ψ : Lh^* K ⟶ K` along a proper endomorphism `h` over `s`, for finite coefficients. The correspondence `ψ` need not be
-invertible. -/
+`ψ : Lh^* K ⟶ K` along a proper endomorphism `h` over `s`, for finite coefficients. The
+correspondence `ψ` need not be invertible. -/
 noncomputable def correspondenceOperator (h : X ⟶ X) [IsProper h] (ha : h ≫ a = a)
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (ψ : L((h)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K) :
@@ -106,8 +106,8 @@ noncomputable def correspondenceOperator (h : X ⟶ X) [IsProper h] (ha : h ≫ 
   (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) s).map
     ((lowerShriekPullback Λ h ha).app K ≫ (R(a)_![ModuleCat.{u + 1} Λ]).map ψ)
 
-/-- Blueprint `definition-frobenius-correspondences-their-operators` (the operator, finite
-coefficients): for a Frobenius correspondence `ψ : LΦ^* K ⟶ K` along a proper endomorphism `Φ`
+/-- The operator of a Frobenius correspondence, with finite coefficients: for a Frobenius
+correspondence `ψ : LΦ^* K ⟶ K` along a proper endomorphism `Φ`
 over `s` (for instance the base change `Φ_X` of the scheme Frobenius of a model of `X`) and
 `m : ℕ`, the operator `T_{c_m}(ψ_m) = RΓ_c(X, ψ_m) ∘ (Φ^m)^♯` on `RΓ_c(X, K)` of the iterate
 `ψ_m : L(Φ^m)^* K ⟶ K` (`AlgebraicGeometry.Etale.weilDatumIterate`), the cohomological
@@ -121,13 +121,13 @@ noncomputable def frobeniusCompactOperator (Φ : X ⟶ X) [IsProper Φ] (hΦ : �
     (weilDatumIterate ψ m)
 
 variable {Λ} in
-/-- Blueprint `definition-frobenius-correspondences-their-operators` (the stalk maps, finite
-coefficients): the stalk `ψ_{x̄} : K_x̄ ⟶ K_x̄` of a cohomological correspondence
+/-- The stalk maps of a cohomological correspondence, with finite coefficients: the stalk
+`ψ_{x̄} : K_x̄ ⟶ K_x̄` of a cohomological correspondence
 `ψ : Lh^* K ⟶ K` at a fixed point `x̄ : s ⟶ X` of `h` (`x̄ ≫ h = x̄`), the composite
 ```
 RΓ(s, Lx̄^* K) ≅ RΓ(s, Lx̄^* Lh^* K) --RΓ(s, Lx̄^* ψ)--> RΓ(s, Lx̄^* K).
 ```
-For `h = Φ^m` and the iterate `ψ_m` this is the stalk map `ψ_{m,x̄}` of the blueprint. -/
+For `h = Φ^m` and the iterate `ψ_m` this is the stalk map `ψ_{m,x̄}`. -/
 noncomputable def frobeniusStalkMap {h : X ⟶ X} {x : s ⟶ X} (hx : x ≫ h = x)
     {K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (ψ : L((h)^*[ModuleCat.{u + 1} Λ]).obj K ⟶ K) :

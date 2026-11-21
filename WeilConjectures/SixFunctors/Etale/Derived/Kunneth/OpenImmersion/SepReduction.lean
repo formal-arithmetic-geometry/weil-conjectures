@@ -14,21 +14,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Stalks.Torsion
 
 Let `K` be a field, `j : U ⟶ X` an open immersion of `K`-schemes, `q₁ : W ⟶ X` a morphism and
 `V = U ×_X W`, with projections `e : V ⟶ U` and `h : V ⟶ W`. For a field extension `L / K`
-(for instance a separable closure of `K`), base change along `Spec L ⟶ Spec K` gives a cube
+(for instance a separable closure of `K`), the base change map of this square is an isomorphism
+as soon as the one of its base change along `Spec L ⟶ Spec K` is
+(`AlgebraicGeometry.Etale.isIso_baseChangeHomologyMap_of_isIso_fieldExtension`).
 
-```
-V_L --e_L--> U_L V_L ---> V U_L ---> U
- | | | | | |
-h_L j_L h_L h j_L j
- v v v v v v
-W_L --q_L--> X_L W_L ---> W X_L ---> X
-```
+## Implementation details
 
-By the base change along field extensions the base change maps of
-the two side faces are isomorphisms, so by the compatibility of base change maps with further
-base change and the
-conservativity of the pullback along the surjective morphism `W_L ⟶ W`, the base change map of the original square is an isomorphism
-as soon as the one of the base changed square is.
+Base change along `Spec L ⟶ Spec K` gives a cube whose side faces satisfy base change (base change
+along field extensions). By the compatibility of base change maps with further base change and
+the conservativity of the pullback along the surjective morphism `W_L ⟶ W`, the result follows.
 -/
 
 @[expose] public section
@@ -45,16 +39,11 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Blueprint `corollary-open-direct-image-over-field--2`: **reduction to a separably closed ground
-field.**
-
-Let `K` be a field, `j : U ⟶ X` a quasi-compact open immersion over `K`, `q₁ : W ⟶ X` and
-`V = U ×_X W` with projections `e : V ⟶ U`, `h : V ⟶ W` (the square `sq`). Let `L / K` be a
-field extension (in the blueprint `L = K^sep`) and consider the base change of everything to
-`L`: `X_L = X ×_K L`, `U_L = U ×_X X_L`, `W_L = W ×_X X_L`, `V_L = V ×_W W_L`, with the base
-changed square `sq'`. Let `n` be invertible in `K` and kill `Λ`. If the degree-`i` base change
-map of `sq'` at the pullback `F_L` of `F` is an isomorphism, then so is the degree-`i` base
-change map `q₁⁻¹ R^i j_* F ⟶ R^i h_* e⁻¹ F` of `sq` at `F`. -/
+/-- **Reduction to a separably closed ground field.** Let `j : U ⟶ X` be a quasi-compact open
+immersion over a field `K`, `q₁ : W ⟶ X`, `V = U ×_X W` (the square `sq`), `L / K` a field
+extension and `sq'` the base change of `sq` to `L`. Let `n` be invertible in `K` and kill `Λ`. If
+the degree-`i` base change map of `sq'` at the pullback `F_L` of `F` is an isomorphism, then so is
+the degree-`i` base change map `q₁⁻¹ R^i j_* F ⟶ R^i h_* e⁻¹ F` of `sq` at `F`. -/
 theorem Etale.isIso_baseChangeHomologyMap_of_isIso_fieldExtension {K L : Type u} [Field K]
     [Field L] [Algebra K L] {X U W V X' U' W' V' : Scheme.{u}} (aX : X ⟶ Spec (.of K))
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (q₁ : W ⟶ X) (e : V ⟶ U) (h : V ⟶ W)

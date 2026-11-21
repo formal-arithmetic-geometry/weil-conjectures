@@ -300,28 +300,7 @@ attribute [local irreducible] coefficientTotalTensor
 
 /-- The canonical adjunction-transpose projection identity on resolving pairs.
 The one-flat comparisons agree with the simultaneous K-flat models; both input
-complexes are flat-term K-flat representatives. Source: Stacks 0GL1, 07A4 and
-06YS--06YT.
-
-Proof: first show that F carries flat modules to flat modules. The ordinary
-projection isomorphisms, their naturality, and symmetry identify tensoring with
-F(M) with the composite of exact G, tensoring with the flat M, and exact F.
-For a K-flat complex C, test F(C) against any acyclic complex P: exact G carries
-P to an acyclic complex, K-flatness of C makes its tensor with G(P) acyclic,
-and exact F preserves acyclicity. The chain projection and tensor symmetry
-identify this with the required acyclicity test for F(C). Thus F(C) is K-flat
-with flat terms. D.pullKFlat and D.pullFlat give the same properties for G(P).
-On each signed total summand, D.ordinaryInverse, hordinary, D.summand and
-restrictionModel.summand identify the adjunct of D.chain.inv with the tensor
-of the cochain adjunction unit and identity followed by restrictionModel.chain.
-Coproduct extensionality gives the cochain equality. Localize it using the
-unit equation for exactDerivedAdjunction and the exact-functor factorization
-isomorphisms. Apply restrictionModel.derived to F(C), P; naturality of the
-simultaneous comparison handles the cochain unit. Finally ambientBoth and
-openBoth replace the supplied comparisons by those simultaneous comparisons.
-The defining hom-equivalence formula for canonicalProjectionMate, followed by
-injectivity of that equivalence and cancellation of the chain isomorphism,
-gives the displayed equation. -/
+complexes are flat-term K-flat representatives. -/
 theorem openTensorProjection_mate_canonical
     (D : OpenTensorCochainData.{c, v, r} J R J' R' F G adj H sectionPull)
     (restriction : A.tensor ⋙ G.mapDerivedCategory ≅

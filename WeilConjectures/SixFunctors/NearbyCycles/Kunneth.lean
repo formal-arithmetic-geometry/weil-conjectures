@@ -21,15 +21,14 @@ on the unbounded derived categories of module objects,
 * the *lax tensor map* `μ_Ψ : Ψ A ⊗ Ψ B ⟶ Ψ (A ⊗ B)` of nearby cycles, the restriction to the
   special fibre of `μ_j` (`NearbyCyclesModel.tensorMap`);
 * for two morphisms of models `φ₁ : P ⟶ M` over `f₁` and `φ₂ : P ⟶ N` over `f₂`, the *Künneth
-  map* (`NearbyCyclesModel.kunnethMap`, blueprint
-  `proposition-external-kunneth-formula-nearby-cycles`)
+  map* (`NearbyCyclesModel.kunnethMap`)
   ```
   Π_{A,B} : Lf₁'^* Ψ_M A ⊗ Lf₂'^* Ψ_N B ⟶ Ψ_P (Lf₁^* A ⊗ Lf₂^* B),
   ```
   the tensor product of the pullback exchanges `α_{φ₁}`, `α_{φ₂}` followed by `μ_Ψ`. When `P` is
   the product of `M` and `N` over the trait, `f₁, f₂` and `f₁', f₂'` are the projections and both
-  sides are the external products `Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)`: this is the map `Π_{L,M}` of
-  the blueprint, the restriction to the special fibre of the map
+  sides are the external products `Ψ_M A ⊠ Ψ_N B ⟶ Ψ_P (A ⊠ B)`: this is the map `Π_{L,M}`,
+  the restriction to the special fibre of the map
   `Rj_{X*} L ⊠ Rj_{Y*} M ⟶ Rj_{X × Y *} (L ⊠ M)` defined by the pullback exchanges and the lax
   tensor map of direct image.
 -/

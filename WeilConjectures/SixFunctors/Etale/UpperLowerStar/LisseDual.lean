@@ -139,10 +139,7 @@ noncomputable def exactPairingIhomUnitOfIsFiniteLocallyConstantSheaf
 
 /-- **The internal dual of a lisse flat sheaf is lisse**: for a finite ring `Λ` and a finite
 locally constant flat sheaf `F` of `Λ`-modules on `X_ét`, the dual `[F, Λ_X]` is finite locally
-constant. On a trivialising étale cover, where `F` is the constant sheaf at a finite projective
-module `M`, the pullback of `[F, Λ_X]` is `[M_W, Λ_W]`, the constant sheaf at the dual of `M`;
-its stalks are dualizable modules, hence finitely generated
-(`ModuleCat.finite_of_exactPairing`). -/
+constant. -/
 theorem isFiniteLocallyConstantSheaf_ihom_unit_of_flat
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsFiniteLocallyConstantSheaf F]
     (hF : ObjectProperty.flat F) :

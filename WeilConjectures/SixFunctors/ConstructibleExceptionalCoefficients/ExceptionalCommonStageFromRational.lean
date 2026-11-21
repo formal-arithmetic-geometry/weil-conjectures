@@ -16,6 +16,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 Only the closed operations and their inclusion comparisons are outputs. Rational
 operations and their scalar maps are fixed inputs. The representative-arrow law is
 proved by the consumer from the transition law and naturality.
+
+## References
+
+* Zheng, Construction 6.6
 -/
 
 @[expose] public noncomputable section
@@ -120,8 +124,7 @@ variable (D : FiniteFieldDatum.{max u v}) (hl : l ≠ D.p)
   [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
 
 /-- Closed operations descending the supplied rational family, with its transition law.
-No rational operation or scalar comparison is chosen again by this record.
-Source: Zheng, Construction 6.6; coefficient construction step 5, common-field part. -/
+No rational operation or scalar comparison is chosen again by this record. -/
 structure CommonStageAssembly
     (A : RingStageAssembly.{u, v} l Ω D hl (f := f))
     (P : RationalStageAssembly.{u, v} l Ω D hl A) where
@@ -155,31 +158,7 @@ structure CommonStageAssembly
 attribute [local implicit_reducible] GeneralAlgebraicallyClosedCoefficients.Stage
 
 /-- Descend a fixed normalized rational family to the literal common-field pair category.
-Only closed operations and inclusion comparisons are constructed here. In particular,
-this does not assert the rational-localization existence theorem.
-Source: Zheng, Construction 6.6; `lem-sf-field-stage-completion`, step 4.
-
-Proof: use `P.action`, `P.scalar_normalized`, and the residue-Tor equality to identify
-all rational scalar comparisons with localizations of the supplied integral comparisons.
-The proper/open coefficient projection cocycle and the tensor unit normalization prove
-their balanced composition and identity laws; the counit equations give the same laws
-for right adjoints by transposition. At each common finite coefficient field take exactly
-`P.operation` as stage functor. The published scalar transitions, tensor associators and
-unitors form the actual stage systems. Their cocycle gives morphisms of these systems
-for both adjoints. Apply coherent-pair functor descent: a pair (E,K) goes to (E,F_E K),
-and a representative at a common stage is conjugated by the scalar q comparisons.
-This preserves identity, composition and addition, and is unchanged by enlargement.
-Descend each stage adjunction Hom bijection and its inverse at one common field. The
-mate unit and counit equations make these maps compatible with enlargement. Naturality
-and the two triangles hold on representatives, and hence on their quotient Hom groups.
-They give the closed adjunction. Descend the stage shift isomorphisms; distinguished
-triangles are represented at finite stages, so both closed functors are exact. The
-units and counits commute with shifts already at each stage. Choose inclusion shifts
-from the endpoint coefficient functors, independently of compactification. The left
-inclusion comparison is the identity on the literal pair object, and the right one is
-its invertible counit transpose. Finally the quotient functor's formula on an inverse
-transition gives the displayed transition equation. No absolute separatedness is used;
-identity field extensions use the tensor unit and empty schemes give zero functors. -/
+Only closed operations and inclusion comparisons are constructed here. -/
 theorem exists_common_stage_descent
     (A : RingStageAssembly.{u, v} l Ω D hl (f := f))
     (P : RationalStageAssembly.{u, v} l Ω D hl A) :

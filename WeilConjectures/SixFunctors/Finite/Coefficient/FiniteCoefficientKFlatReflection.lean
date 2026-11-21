@@ -25,7 +25,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-! # K-flatness reflected by finite coefficient inverse image
 
-Source: blueprint site comparison paragraph; Stacks 06YN and 07A4.
+## References
+
+* [Stacks, Tag 06YN]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -125,15 +128,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- The finite-level site inverse image reflects K-flatness of etale complexes.
-Source: blueprint site comparison paragraph; Stacks 06YN and 07A4.
-
-Proof: ordinary etale-to-pro-etale inverse image is exact and faithful, and intrinsic
-realization is an exact equivalence. Their composite therefore reflects acyclicity
-by reflecting zero homology. For each acyclic etale test complex V, apply intrinsic
-K-flatness to its acyclic inverse image. The already specified chain tensor
-comparison identifies this with the image of the etale tensor. Reflect acyclicity
-and use symmetry to obtain both tensor tests in categorical K-flatness. -/
+/-- The finite-level site inverse image reflects K-flatness of etale complexes. -/
 theorem finiteHomNuKFlatReflection (n : ℕ)
     (P : CochainComplex (Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u}

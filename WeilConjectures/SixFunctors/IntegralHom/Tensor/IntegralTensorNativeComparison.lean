@@ -74,7 +74,10 @@ import all WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Comparison of an integral tensor presentation with native derived tensor
 
-Source: Stacks Project, Tags 06YY and 07A4, localization of K-flat tensor models.
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public section
@@ -89,8 +92,7 @@ variable (Y : AlgebraicGeometry.Scheme.{t})
   (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
-/-- K-flat representatives localize to the existing derived category.
-Source: Stacks 06YY; the functorial K-flat resolution localization argument. -/
+/-- K-flat representatives localize to the existing derived category. -/
 theorem tensorPresentationKFlatLocalization :
     (coefficientKFlatInclusion.{u, t + 1, t}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R ⋙ DerivedCategory.Q).IsLocalization
@@ -106,11 +108,7 @@ theorem tensorPresentationKFlatLocalization :
 
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- Every supplied tensor presentation agrees with native tensor on the whole
-product derived category.
-Source: Stacks 06YY and 07A4, uniqueness of localization.
-Proof: the two representative comparisons identify the tensors after restriction
-to the product of K-flat localization functors. Whiskering by this localization
-is fully faithful. Its inverse on isomorphisms therefore gives the comparison. -/
+product derived category. -/
 noncomputable def tensorPresentationNativeIso (a : TensorPresentation.{t, u} Y R) :
     letI := RingedDerivedNative.monoidal.{t + 1, t, u, max u (t + 1) + 1}
       (AlgebraicGeometry.Scheme.ProEt.topology Y) R

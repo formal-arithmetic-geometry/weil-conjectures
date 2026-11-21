@@ -425,24 +425,7 @@ end CoefficientCalculus
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the open projection factor and the final
-support identification, through the same canonical tensorator.
-
-Proof: first compare the inverse open projection. By openProjectionNormalization
-it is open extension applied to the pullback compositor followed by the transpose
-of the tensor of the open unit with identity and the inverse canonical open
-pullback/tensor comparison. The finite representative equation for
-canonicalCommonStagePullbackTensor identifies the two tensor/pullback maps on
-included inputs. The coefficient open-adjunction unit equation and the
-pullComposition equation identify the remaining maps and their prescribed
-operation comparisons. Equality under the open adjunction Hom equivalence gives
-the square for the inverse open projection; conjugating with its inverse gives
-the forward square. Apply proper direct image to this square, using naturality
-of its coefficient comparison. Finally expand the inverse support identification
-as inverse composition, proper and open identifications. The coefficient laws
-for these three maps identify the final support comparison with target, including
-its inner pullback comparison. This proves the displayed square. No proper
-counit projection mate occurs in this argument. Empty opens, zero inputs and
-identity extensions obey the same adjunction and compositor equations. -/
+support identification, through the same canonical tensorator. -/
 theorem commonProjectionOpenFactor
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

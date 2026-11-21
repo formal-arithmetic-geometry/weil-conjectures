@@ -9,7 +9,11 @@ public import WeilConjectures.SixFunctors.Finite.Scalar.FiniteScalarRepresentati
 
 /-! # Typed complex tensor pullback comparisons
 
-Source: Stacks Tags 00YV and 07A6.
+## References
+
+* [Stacks, Tag 00YV]
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public noncomputable section
@@ -45,8 +49,7 @@ namespace WeilConjectures
 
 attribute [local implicit_reducible] finiteScalarRepresentativeTotalTensor
 
-/-- Uncurry the signed-total comparison before specializing the coefficient categories.
-Source: Stacks Tag 07A4, totalization of the ordinary tensor comparison. -/
+/-- Uncurry the signed-total comparison before specializing the coefficient categories. -/
 @[irreducible] def finiteScalarComplexTensorPullbackForFunctor
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]
@@ -66,8 +69,7 @@ Source: Stacks Tag 07A4, totalization of the ordinary tensor comparison. -/
       (F := curriedTensor C) (F' := curriedTensor D) (G₁ := L) (G₂ := L) (G := L)
       (c₁ := .up ℤ) (c₂ := .up ℤ) (Functor.OplaxMonoidal.δNatTrans L) (.up ℤ))
 
-/-- The uncurried total comparison retains the native complex component.
-Source: the two published bifunctor-comparison component equations, Stacks Tag 07A4. -/
+/-- The uncurried total comparison retains the native complex component. -/
 theorem finiteScalarComplexTensorPullbackForFunctor_app
     {C D : Type*} [Category.{u + 1} C] [Category.{u + 1} D]
     [Abelian C] [Abelian D]
@@ -84,8 +86,7 @@ theorem finiteScalarComplexTensorPullbackForFunctor_app
     Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app]
   exact CategoryTheory.Category.id_comp _
 
-/-- Fix the coefficient-category data of the ordinary pullback tensor comparison.
-Source: Stacks Tag 07A4, ordinary inverse image and tensor products. -/
+/-- Fix the coefficient-category data of the ordinary pullback tensor comparison. -/
 @[irreducible] def finiteScalarFixedComplexTensorPullbackForCoefficients
     (B : Type*) [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
     [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]

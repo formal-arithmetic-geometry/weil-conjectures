@@ -12,7 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.Bounded.BoundedConstructibleTowe
 
 /-! # The cochain counit for the two fixed completed scalar models
 
-Source: Stacks Tag 06YY; paragraph 5 of the integral finite-extension proof.
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -27,16 +30,7 @@ attribute [local irreducible] HasDerivedCategory.standard
   completedCoefficientMap completedScalarCounit pbcComplexCounit
 
 -- Normalize the shared scalar witness through the two localization factorizations.
-/-- The canonical cochain counit is the counit of the same completed scalar witness.
-
-Source: Stacks 06YY; paragraph 5 of lem-coef-integral-finite-extension.proof.md.
-
-Proof: both definitions use the universal derived scalar-extension witness of the
-same sheaf map and the standard derived localizations. The two quotient comparison
-isomorphisms and the ordinary functor's homotopy comparison have identity components.
-Their images are identities, so the composite defining pbcComplexCounit reduces to
-the component defining completedScalarCounit. This applies to every complex, without
-flatness or boundedness assumptions, also for the empty scheme and zero complex. -/
+/-- The canonical cochain counit is the counit of the same completed scalar witness. -/
 theorem pbcComplexCounit_eq_completedScalarCounit
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -52,12 +46,7 @@ theorem pbcComplexCounit_eq_completedScalarCounit
     DerivedCategory.Qh.map_id, Category.id_comp, Category.comp_id, Category.comp_id]
   with_unfolding_all rfl
 
-/-- Rewrite a prescribed scalar-comparison square using the canonical cochain counit.
-Source: the cochain counit identification above and paragraph 5 of the finite
-coefficient extension proof, Stacks Tags 06YY and 07A4.
-Proof: replace the canonical counit by the counit of the same completed scalar
-witness, using pbcComplexCounit_eq_completedScalarCounit. The resulting equality
-is exactly the prescribed square he, for this complex. No flatness is needed. -/
+/-- Rewrite a prescribed scalar-comparison square using the canonical cochain counit. -/
 theorem completedScalarCounit_comparison
     (l : ℕ) [Fact l.Prime]
     (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]

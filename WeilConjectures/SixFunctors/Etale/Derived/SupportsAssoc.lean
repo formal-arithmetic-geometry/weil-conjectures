@@ -14,12 +14,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 The product of supports `Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)`
 (`AlgebraicGeometry.Etale.supportedProduct`) is natural in the coefficients `M`, `N`, associative
 along the associator of the derived tensor product, and unital for classes supported everywhere.
-All three statements are proved by the uniqueness of lifts through counits: the two sides are maps
-out of an object supported on `Z`, into `Ri_! Ri^! L`, with the same composite with the counit.
-For associativity, the source `(R₁ ⊗ R₂) ⊗ R₃` is supported on `Z₁ ∩ Z₂ ∩ Z₃`: a tensor product
-of objects supported on `Z₁` and on `Z₂` is supported on `Z₁ ∩ Z₂`
-(`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_derivedTensor_of_disjoint`).
-
 Consequently the cup product with supports (`AlgebraicGeometry.Etale.cupWithSupports`) is
 associative for a coassociative diagonal, and the class supported everywhere lifting the unit is
 a unit for it.
@@ -34,6 +28,12 @@ a unit for it.
 - `AlgebraicGeometry.Etale.cupWithSupports_assoc`
 - `AlgebraicGeometry.Etale.cupWithSupports_liftCounitOfRangeEqUniv`
 - `AlgebraicGeometry.Etale.coassoc_of_comp_derivedTensorLeftUnitor_hom`
+
+## Implementation details
+
+All three statements are proved by the uniqueness of lifts through counits, the sources being
+supported on the relevant intersection
+(`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_derivedTensor_of_disjoint`).
 -/
 
 @[expose] public section
@@ -86,8 +86,7 @@ lemma derivedTensorHom_id_comp_derivedTensorLeftUnitor_hom
   rw [derivedTensorHom_eq_tensorHom, id_tensorHom]
   exact leftUnitor_naturality f
 
-/-- A section `δ : Λ_X ⟶ Λ_X ⊗ Λ_X` of the left unitor is coassociative: it is the inverse of
-the left unitor, and `λ⁻¹ ≫ (λ⁻¹ ⊗ 1) ≫ α = λ⁻¹ ≫ (1 ⊗ λ⁻¹)` by the triangle identity. -/
+/-- A section `δ : Λ_X ⟶ Λ_X ⊗ Λ_X` of the left unitor is coassociative. -/
 lemma coassoc_of_comp_derivedTensorLeftUnitor_hom
     (δ : (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A))) ⟶
       ((derivedTensor A X).obj (𝟙_ _)).obj (𝟙_ _))
@@ -108,8 +107,7 @@ variable {U W Z₁ Z₂ Z : Scheme.{u}}
 /-- **Tensor products of supported objects.** Let `i₁, i₂, i` be closed immersions into `U` with
 `Z = Z₁ ∩ Z₂`, and `K₁`, `K₂` objects of `D(U_ét)` restricting to zero on every scheme over `U`
 missing `Z₁`, respectively `Z₂`. Then `K₁ ⊗ K₂` restricts to zero on every scheme `w : W ⟶ U`
-missing `Z`: on the open complement of `Z`, its restrictions to the complements of `Z₁` and of
-`Z₂` vanish, and these two opens cover it. -/
+missing `Z`. -/
 lemma isZero_leftDerivedUpperStar_derivedTensor_of_disjoint (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U)
     (i : Z ⟶ U) [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
@@ -224,17 +222,10 @@ theorem supportedProduct_naturality (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i :
   rfl
 
 /-- **Associativity of the product of supports.** For closed immersions `i₁, i₂, i₃` into `U`
-and `i₁₂, i₂₃, i` with ranges `Z₁ ∩ Z₂`, `Z₂ ∩ Z₃` and `Z₁ ∩ Z₂ ∩ Z₃`:
-
-```
-(R₁ ⊗ R₂) ⊗ R₃ ──P₁₂ ⊗ 1──▶ R₁₂ ⊗ R₃ ──P──▶ Ri_! Ri^! ((M ⊗ N) ⊗ P)
-      │ α │ α
-      ▼ ▼
-R₁ ⊗ (R₂ ⊗ R₃) ──1 ⊗ P₂₃──▶ R₁ ⊗ R₂₃ ──P──▶ Ri_! Ri^! (M ⊗ (N ⊗ P))
-```
-
-Both composites lift `((ε₁ ⊗ ε₂) ⊗ ε₃) ≫ α = α ≫ (ε₁ ⊗ (ε₂ ⊗ ε₃))` through the counit, and their
-source is supported on `Z`. -/
+and `i₁₂, i₂₃, i` with ranges `Z₁ ∩ Z₂`, `Z₂ ∩ Z₃` and `Z₁ ∩ Z₂ ∩ Z₃`, the composites
+`(R₁ ⊗ R₂) ⊗ R₃ ⟶ R₁₂ ⊗ R₃ ⟶ Ri_! Ri^! ((M ⊗ N) ⊗ P)` and
+`(R₁ ⊗ R₂) ⊗ R₃ ⟶ R₁ ⊗ (R₂ ⊗ R₃) ⟶ R₁ ⊗ R₂₃ ⟶ Ri_! Ri^! (M ⊗ (N ⊗ P))` agree up to the
+associators. -/
 theorem supportedProduct_assoc (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i₃ : Z₃ ⟶ U) (i₁₂ : Z₁₂ ⟶ U)
     (i₂₃ : Z₂₃ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i₃]

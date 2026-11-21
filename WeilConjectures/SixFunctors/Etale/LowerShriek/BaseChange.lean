@@ -13,10 +13,15 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 For a cartesian square with `v` étale, `g^* v_! ≅ v'_! g'^*`
 (`AlgebraicGeometry.Etale.etaleLowerShriekBaseChangeIso`): the two sides are left adjoint to the
-two sides of the degree-zero base change `v^* g_* ≅ g'_* v'^*` along the étale `v`. This is an
-input to the constructibility of extensions by zero along étale maps [Stacks 03SA], where it
+two sides of the degree-zero base change `v^* g_* ≅ g'_* v'^*` along the étale `v`.
+
+This is an input to the constructibility of extensions by zero along étale maps, where it
 identifies the restriction of `v_! Λ` to a stratum with the extension by zero along the base
 change of `v`.
+
+## References
+
+* [Stacks, Tag 03SA]
 -/
 
 @[expose] public section
@@ -42,9 +47,7 @@ g' g
 v v
 W --v---> X
 ```
-with `v` étale, `g^* v_! ≅ v'_! g'^*` on étale sheaves of `Λ`-modules. Both are left adjoint to
-the two sides of the degree-zero base change `v^* g_* ≅ g'_* v'^*`, an isomorphism as `v` is
-étale (`AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`). -/
+with `v` étale, `g^* v_! ≅ v'_! g'^*` on étale sheaves of `Λ`-modules. -/
 noncomputable def Etale.etaleLowerShriekBaseChangeIso (sq : IsPullback v' g' g v) :
     Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v inferInstance ⋙
         (g)^*[ModuleCat.{u + 1} Λ] ≅

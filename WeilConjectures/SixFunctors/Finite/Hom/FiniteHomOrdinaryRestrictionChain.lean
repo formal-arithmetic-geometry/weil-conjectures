@@ -199,8 +199,7 @@ attribute [local irreducible] ProEtale.finiteCoefficientIntrinsicComparison
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E]
 
-/-- The normalized ordinary restriction comparison respects successive coefficient quotients.
- -/
+/-- The normalized ordinary restriction comparison respects successive coefficient quotients. -/
 theorem finiteHomOrdinaryRestriction_chain {n m r : ℕ} (h : m ≤ n) (k : r ≤ m)
     (M : Sheaf X.smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (r + 1))))) :

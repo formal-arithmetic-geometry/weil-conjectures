@@ -18,15 +18,8 @@ of étale sheaves is compatible with restriction of scalars along `ρ`, through 
 `AlgebraicGeometry.Etale.openImmersionLowerShriekRestrictScalarsIso` of the extensions by zero
 (`AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_app_restrictScalars`).
 
-Both sides are compared through their transposes under `j'_! ⊣ j'^*`. The comparison of the
-extensions by zero is the transpose of the restriction of scalars of the unit of `j_! ⊣ j^*`
-(`AlgebraicGeometry.Etale.openImmersionLowerShriekUpperStarAdjunction_unit_app_comp_upperStarMap`),
-and the comparison of the pullbacks is compatible with the square isomorphisms of pullbacks
-(`AlgebraicGeometry.Etale.upperStarRestrictScalarsIso_hom_app_comp_squareUpperStarIso`).
-
 This is the underived input of the compatibility of the derived base change of the extension by
-zero with the coefficient comparisons, used for the compatible systems of Frobenius coefficient
-morphisms.
+zero with the coefficient comparisons.
 -/
 
 @[expose] public section

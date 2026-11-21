@@ -12,7 +12,9 @@ import WeilConjectures.SixFunctors.ExceptionalIntegralScalar.ExceptionalIntegral
 
 /-! # Existence of normalized left integral scalar comparisons
 
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
+## References
+
+* Zheng, Lemma 5.22 and Propositions 5.24 and 5.26
 -/
 
 @[expose] public noncomputable section
@@ -341,18 +343,7 @@ private theorem normalizedIdentityLeft {X Y : Scheme.{u}} {f : X ⟶ Y}
 
 -- The chosen derived presentations require an extended conversion budget.
 /-- Construct scalar extensions, their normalized left proper/open maps, and the
-balanced identity and composition comparisons, before constructing right mates.
-Source: Zheng, Lemma 5.22 and Propositions 5.24 and 5.26.
-Proof: construct the normalized scalar restrictions independently at X and Y.
-The ambient proper/open comparison is invertible on these finite-Tor inputs, by
-induction on allowed coefficient changes. Conjugate this comparison by the scalar
-and supplied left realizations, then lift it through the fully faithful inclusion
-at Y. The ambient normalization determines the resulting left comparison and its
-shift compatibility. Lift tensor associators and unitors in the same way. Apply the
-faithful inclusion to the two sides of each coherence equation, cancel the final
-realization isomorphisms, and use naturality with the ambient comparison composition
-and identity laws. This proves leftCocycle and identityLeft and assembles LeftMates.
-No right scalar mate or cofinal system transport is used. -/
+balanced identity and composition comparisons, before constructing right mates. -/
 theorem exceptionalIntegralLeftScalarMates
     (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     {X Y : Scheme.{u}} {f : X ⟶ Y}

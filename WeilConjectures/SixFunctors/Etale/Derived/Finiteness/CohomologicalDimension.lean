@@ -20,12 +20,15 @@ public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 
 Over an algebraically closed field `k'`, a `k'`-scheme `X` of finite type and dimension at most
 `d` has no cohomology above `2d` with coefficients in a sheaf of modules over a finite ring
-(`AlgebraicGeometry.Etale.subsingleton_H_forget₂_of_two_mul_lt`, blueprint
-`proposition-proper-direct-image-finite-coefficients`). Consequently, for a separated morphism of
-finite type `f : X ⟶ Y` between schemes of finite type over a field whose geometric fibres have
-dimension at most `d`, `Rᵠf_! F = 0` for `q > 2d`
-(`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor_of_two_mul_lt`,
-blueprint `theorem-results-from-etale-theory--5`).
+(`AlgebraicGeometry.Etale.subsingleton_H_forget₂_of_two_mul_lt`). Consequently, for a separated
+morphism of finite type `f : X ⟶ Y` between schemes of finite type over a field whose geometric
+fibres have dimension at most `d`, `Rᵠf_! F = 0` for `q > 2d`
+(`AlgebraicGeometry.Etale.isZero_homology_rightDerivedLowerShriek_singleFunctor_of_two_mul_lt`).
+
+## Implementation details
+
+Neither constructibility of `F` nor invertibility of the exponent of `Λ` is needed: `F` is
+torsion as `Λ` is finite, and proper base change holds for all torsion coefficients.
 -/
 
 @[expose] public section
@@ -74,8 +77,7 @@ theorem isZero_upperStar_rightDerived_lowerStar_of_isProper (hΛ : IsAddTorsion 
           (((Etale.upperStar (ModuleCat.{u + 1} Λ)
             (pullback.fst p x)).mapDerivedCategoryPlusSingleFunctor 0).app G)))
 
-/-- For a closed immersion `k : C ⟶ Z` and any `h : Z ⟶ T`, `Rᵠh_*(k_* H) ≅ Rᵠ(k ≫ h)_* H`, the
-direct image along `k` being exact. -/
+/-- For a closed immersion `k : C ⟶ Z` and any `h : Z ⟶ T`, `Rᵠh_*(k_* H) ≅ Rᵠ(k ≫ h)_* H`. -/
 noncomputable def rightDerivedLowerStarObjLowerStarIsoOfIsFinite {C Z T : Scheme.{u}}
     (k : C ⟶ Z) [IsFinite k] (h : Z ⟶ T) (H : Sheaf C.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (q : ℕ) :
@@ -93,8 +95,7 @@ noncomputable def rightDerivedLowerStarObjLowerStarIsoOfIsFinite {C Z T : Scheme
 /-- **Vanishing above twice the dimension of a support.** Let `h : Z ⟶ Spec K` be quasi-compact
 and locally of finite type, `S₀ ⊆ Z` open of dimension at most `d`, and `M` a sheaf of
 `Λ`-modules on `Z` vanishing on the complement of the closure of `S₀`. Then `Rᵠh_* M = 0` for
-`q > 2d`: `M` is the direct image of a sheaf on the reduced closure `C` of `S₀`, which has
-dimension at most `d` since `S₀` is dense in it. -/
+`q > 2d`. -/
 theorem isZero_rightDerived_lowerStar_of_isZero_upperStar_compl_closure (hΛ : IsAddTorsion Λ)
     {K : Type u} [Field K] {Z : Scheme.{u}} (h : Z ⟶ Spec (.of K)) [LocallyOfFiniteType h]
     [QuasiCompact h] (S₀ : Set Z) (hS₀ : IsOpen S₀) (d : ℕ)
@@ -135,15 +136,10 @@ end ProperFibre
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- Cohomological dimension over an
-algebraically closed field.
-
-Let `k'` be an algebraically closed field, `X` a `k'`-scheme of finite type of dimension at most
-`d`, and `F` an étale sheaf of `Λ`-modules over a finite ring `Λ`. Then `Hᵠ(X_ét, F) = 0` for
-`q > 2d`, cohomology being that of the underlying abelian sheaf. The blueprint assumes `F`
-constructible; this is not needed, since `F` is torsion as `Λ` is finite, and the bound
-`cd_tor(X) ≤ 2d` (`AlgebraicGeometry.Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed`) applies
-to all torsion sheaves. -/
+/-- Cohomological dimension over an algebraically closed field: for `k'` algebraically closed,
+`X` a `k'`-scheme of finite type of dimension at most `d`, and `F` an étale sheaf of
+`Λ`-modules over a finite ring `Λ`, `Hᵠ(X_ét, F) = 0` for `q > 2d`, cohomology being that of the
+underlying abelian sheaf. -/
 theorem subsingleton_H_forget₂_of_two_mul_lt {k' : Type u} [Field k'] [IsAlgClosed k']
     {X : Scheme.{u}} (a : X ⟶ Spec (.of k')) [LocallyOfFiniteType a] [QuasiCompact a] (d : ℕ)
     (hX : topologicalKrullDim X ≤ (d : WithBot ℕ∞))
@@ -158,14 +154,10 @@ theorem subsingleton_H_forget₂_of_two_mul_lt {k' : Type u} [Field k'] [IsAlgCl
   change Fintype.card Λ • y = 0
   rw [← one_smul Λ y, ← smul_assoc, card_nsmul_eq_zero, zero_smul]
 
-/-- Blueprint `theorem-results-from-etale-theory--5`: The compact-support bound uses the original
-fibres.
-
-Let `f : X ⟶ Y` be a separated morphism of finite type (here: one admitting a compactification)
-between schemes of finite type over a field `k`, whose geometric fibres have dimension at most
-`d`, and let `Λ` be a finite ring. Then for every étale sheaf `F` of `Λ`-modules on `X`,
-`Rᵠf_! F = 0` for `q > 2d`. The blueprint also assumes the exponent of `Λ` invertible on `Y`;
-this is not needed, proper base change holding for all torsion coefficients. -/
+/-- The compact-support amplitude bound: let `f : X ⟶ Y` be a separated morphism of finite type
+(here: one admitting a compactification) between schemes of finite type over a field `k`, whose
+geometric fibres have dimension at most `d`, and let `Λ` be a finite ring. Then for every étale
+sheaf `F` of `Λ`-modules on `X`, `Rᵠf_! F = 0` for `q > 2d`. -/
 theorem isZero_homology_rightDerivedLowerShriek_singleFunctor_of_two_mul_lt {k : Type u}
     [Field k] {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]

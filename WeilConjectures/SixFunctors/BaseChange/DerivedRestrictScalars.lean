@@ -24,16 +24,13 @@ From them `WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars.IsIso` 
 an object `K ∈ D⁺(X_ét, Λ')`, the derived base change map over `Λ` is an isomorphism at `res K` if
 and only if the derived base change map over `Λ'` is one at `K`.
 
-The criterion represents `K` by a bounded below complex `I` of injective objects. The derived
-base change maps at `I` and at `R I` are computed by the underived base change maps followed by
-the units of the derived pushforwards (`AlgebraicGeometry.Etale.derivedBaseChangeMapPlus_fac_app`),
-since the terms of `I` are `f_*`-acyclic, and so are those of `R I` (for restriction of scalars,
-`AlgebraicGeometry.Etale.rightAcyclic_lowerStar_restrictScalars_obj`). It is proved for an
-arbitrary exact change of coefficients `R` sending injectives to `f_*`-acyclics; proving it over
-abstract coefficient categories keeps the kernel from unfolding the concrete pullback and
-pushforward functors.
-
 This is the change of coefficients in the proof of the proper base change theorem.
+
+## Implementation details
+
+The criterion is stated for an arbitrary exact change of coefficients `R` sending injectives to
+`f_*`-acyclics; working over abstract coefficient categories keeps the kernel from unfolding the
+concrete pullback and pushforward functors.
 -/
 
 @[expose] public section
@@ -79,9 +76,8 @@ lemma isIso_map_comp_iff_isIso_map_comp {𝒟 ℋ : Type*} [Category* 𝒟] [Cat
   rw [← isIso_comp_left_iff (Q.map σ) (Q.map b ≫ v), eq₂, isIso_comp_right_iff _ z]
 
 /-- A diagram chase deciding when a composite `Q(a₂) ≫ u₂` is an isomorphism, by comparing it
-with a composite `p₁ ≫ u₁` through a functor `R` reflecting isomorphisms. In the application `R`
-is a change of coefficients on derived categories, `a₂` and `p₁` come from base change maps and
-`u₂`, `u₁` are units of derived functors; all the comparison data are isomorphisms. -/
+with a composite `p₁ ≫ u₁` through a functor `R` reflecting isomorphisms, when all the
+comparison data are isomorphisms. -/
 lemma isIso_map_comp_iff_of_reflectsIsomorphisms {𝒟₁ 𝒟₂ ℋ : Type*} [Category* 𝒟₁]
     [Category* 𝒟₂] [Category* ℋ] (R : 𝒟₁ ⥤ 𝒟₂)
     (hR : ∀ {M N : 𝒟₁} (x : M ⟶ N), IsIso (R.map x) ↔ IsIso x) (Q : ℋ ⥤ 𝒟₂)
@@ -232,8 +228,7 @@ end ChangeOfCoefficients
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (φ : Λ →+* Λ')
 
-/-- Restriction of scalars of étale sheaves reflects isomorphisms: it is computed sectionwise,
-and restriction of scalars of modules reflects isomorphisms. -/
+/-- Restriction of scalars of étale sheaves reflects isomorphisms. -/
 instance (X : Scheme.{u}) :
     (Sheaf.restrictScalars X.smallEtaleTopology φ).ReflectsIsomorphisms where
   reflects {A B} a h := by
@@ -246,9 +241,7 @@ instance (X : Scheme.{u}) :
     have : IsIso ((sheafToPresheaf _ _).map a) := NatIso.isIso_of_isIso_app _
     exact isIso_of_reflects_iso _ (sheafToPresheaf _ _)
 
-/-- Restriction of scalars on the bounded below derived categories reflects isomorphisms: it
-commutes with the cohomology sheaves, and restriction of scalars of sheaves reflects
-isomorphisms. -/
+/-- Restriction of scalars on the bounded below derived categories reflects isomorphisms. -/
 lemma isIso_restrictScalars_mapDerivedCategoryPlus_map_iff {X : Scheme.{u}}
     {K L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))}
     (a : K ⟶ L) :

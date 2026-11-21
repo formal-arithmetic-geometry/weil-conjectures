@@ -8,7 +8,13 @@ module
 public import WeilConjectures.SixFunctors.OpenProjectionRoos.OpenProjectionRoosCompletionData
 import WeilConjectures.SixFunctors.SfOpenRoos.SfOpenRoosRestrictionUnit
 
-/-! # Restriction of the completed projection through the actual open unit -/
+/-! # Restriction of the completed projection through the actual open unit
+
+## References
+
+* [Stacks, Tag 09BP]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -40,19 +46,7 @@ attribute [local irreducible] integralOperationsTensorTowerFunctor
   unrestrictedIntegralComplexFunctor scalarReductionExistence unrestrictedIntegralReductionExistence
 
 /-- Restricting the completed representative gives the strict finite restriction
-comparison of the same quotient towers.
-Source: Stacks 09BP and 0941; the open-factor blueprint argument.
-
-Proof: define delta by restricting z.gamma and composing with the inverse module
-unit termwise. Naturality of that unit gives a strict tower isomorphism and the
-stated coordinate formula. Apply the representative equation for gamma and then
-the simultaneous extension/restriction Roos unit identity of restriction_unit.
-Naturality of the restriction comparison moves the restricted Roos map past it.
-Cancel the derived open unit, identified by _unit_hom with unit, and the module
-unit, identified by _moduleUnit_hom with moduleUnit. The result is precisely the
-displayed equation with the canonical restriction isomorphism. The proof retains
-both signed summands; equality is established on chain representatives before
-localization, rather than inferred from derived limit projections. -/
+comparison of the same quotient towers. -/
 theorem openProjectionRestrictionNormalization
     [restrictionLimits : PreservesFiniteLimits (IntegralOpenReduction.restriction l E j o)]
     [restrictionColimits : PreservesFiniteColimits (IntegralOpenReduction.restriction l E j o)]

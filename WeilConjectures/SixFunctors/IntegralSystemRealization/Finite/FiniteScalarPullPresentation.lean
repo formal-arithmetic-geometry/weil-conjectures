@@ -10,7 +10,13 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.ScalarPullCoefficien
 public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSupportCoefficientComparison
 import WeilConjectures.CategoryTheory.Finite.FiniteScalarPullAdjunctionTransport
 
-/-! # Ordinary finite scalar pullback -/
+/-! # Ordinary finite scalar pullback
+
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -57,18 +63,7 @@ private theorem level_intrinsic_uniqueness {X Y : Scheme.{u}} (f : X ⟶ Y) (n :
         (CommRingCat.of (ULift.{u + 1} (finiteCoefficientRing l E (n + 1)))))
       (sfIntrinsicConstantModuleAdjunction f (finiteCoefficientRing l E (n + 1))) M)
 
-/-- The two ordinary scalar/pullback presentations have the same adjunction mate.
-Source: Stacks Tags 06YY and 0D6E.
-
-Proof: transpose both sides through the composite scalar and geometric adjunctions.
-The scalar presentation isomorphisms transfer the transpose by left-adjoint
-uniqueness. The geometric presentation transfers it through finiteDirectImage_eq.
-The unit normalization of pullbackTensorLevelIntrinsic identifies its transpose
-with the identity for the intrinsic adjunction. Both resulting right comparisons
-are finiteScalarRestrictionDirect: the equality transport followed by the identity
-on restriction/direct-image sections. Injectivity of the composite Hom equivalence
-proves the equality. No resolution, derived category, sequence object, or realization
-model is involved. In particular, the argument applies to zero modules and n=0. -/
+/-- The two ordinary scalar/pullback presentations have the same adjunction mate. -/
 theorem finiteScalarPullPresentation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : integralTowerModules l E Y) :
     (PurCompactSupport.scalarPullModule

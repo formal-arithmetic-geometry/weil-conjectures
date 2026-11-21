@@ -115,12 +115,19 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 
 /-! # Coherent finite adic realizations
 
-Source: Bhatt--Scholze, Proposition 6.6.11, Definition 6.8.8 and
-Proposition 6.8.14(2); Hemo--Richarz--Scholbach, Theorem 7.7 and Lemma 7.9.
+## Implementation details
 
-The integral comparison is the published identity on the completed ambient category.
-Its scalar comparison retains the actual quotient-tower augmentation chi. Finite
-realization is composed with that raw comparison, without an idempotent envelope.
+The integral comparison is the identity on the completed ambient category. Its scalar comparison
+retains the actual quotient-tower augmentation `chi`. The finite realization is composed with
+that raw comparison, without an idempotent envelope. `integralNormalization` is packaged as a
+separate irreducible definition to keep structure recursors small.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.6.11, Definitions 6.8.1,
+  6.8.2 and 6.8.8, Proposition 6.8.14(2)
+* Hemo–Richarz–Scholbach, *Constructible sheaves on schemes*, Theorem 7.7 and Lemma 7.9
+* [Stacks, Tag 00YV]
 -/
 
 @[expose] public noncomputable section
@@ -143,8 +150,7 @@ namespace WeilConjectures.AdicFiniteRealization
 variable (l : ℕ) [Fact l.Prime] (T : Scheme.{u})
 
 /-- The locally finite free description of the target, in ordinary module sheaves.
-This predicate only spells out the target clause; it imposes no completeness condition.
-Source: BS Definition 6.8.8. -/
+This predicate only spells out the target clause; it imposes no completeness condition. -/
 def finiteFreeTarget (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
     ObjectProperty (DerivedCategory (pbcModules T A)) := fun K ↦
   (∃ a b : ℤ, a ≤ b ∧ K.IsGE a ∧ K.IsLE b) ∧
@@ -153,8 +159,7 @@ def finiteFreeTarget (A : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :
         ((DerivedCategory.homologyFunctor _ q).obj K)).IsFiniteLocallyFree
 
 /-- The same finite-free condition in internal abelian sheaf modules, using the
-existing stratification, module pullbacks and finite-free objects.
-Source: BS Definition 6.8.8. -/
+existing stratification, module pullbacks and finite-free objects. -/
 def internalFiniteFreeTarget (A : Sheaf (ProEt.topology T) Ab.{u + 1})
     [MonObj A] [IsCommMonObj A] :
     ObjectProperty (DerivedCategory (Mod (Sheaf (ProEt.topology T) Ab.{u + 1}) A)) :=
@@ -174,9 +179,8 @@ variable [IsNoetherian T]
   [iT : Fact (∀ x : T, IsUnit (l : T.presheaf.stalk x))]
 
 /-- The finite realizations and the inverse-completion comparison of raw systems.
-`raw` includes the integral identity, all reductions, pure rational arrows and chi.
-The realization's essential image is the stated full subcategory of ordinary D(E_T).
-Source: BS 6.6.11, 6.8.8, 6.8.14(2). -/
+`raw` includes the integral identity, all reductions, pure rational arrows and `chi`.
+The realization's essential image is the stated full subcategory of ordinary `D(E_T)`. -/
 structure Core where
   stage : ∀ E : Padic.FiniteCoefficientFields l (PadicAlgCl l),
     FdRationalStageComparison l (PadicAlgCl l) T E
@@ -190,14 +194,12 @@ structure Core where
       (pbcFiniteField.{u} l (PadicAlgCl l) E)) K ↔
         ∃ M, Nonempty ((realization E).J.obj M ≅ K)
 
-/-- The actual finite functor, composed from raw identity and continuous realization.
-Source: BS 6.8.14(2). -/
+/-- The finite functor, composed from the raw identity and the continuous realization. -/
 def finiteFunctor (C : Core l T)
     (E : Padic.FiniteCoefficientFields l (PadicAlgCl l)) :=
   C.raw.family.Φ E ⋙ (C.realization E).J
 
-/-- The integral commuting diagram, packaged to keep structure recursors small.
-Source: BS 6.8.14(2). -/
+/-- The integral commuting diagram of the finite realization. -/
 @[irreducible] def integralNormalization (C : Core l T)
     (coefficient : ∀ {E F : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ F),
     RationalRealizationScalarComparison l
@@ -234,8 +236,7 @@ Source: BS 6.8.14(2). -/
           (coefficient h).coefficient) (completed_square h) K.obj).hom
 
 /-- Continuous finite-field comparisons, including their integral normalization.
-The comparison for completed S is subsequently composed with raw.beta inverse.
-Source: BS 6.8.14(2); quotient comparison of the node. -/
+The comparison for completed `S` is subsequently composed with `raw.beta` inverse. -/
 structure ScalarData (C : Core l T) where
   coefficient : ∀ {E F : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ F),
     RationalRealizationScalarComparison l
@@ -254,9 +255,8 @@ structure ScalarData (C : Core l T) where
         (coefficient h).coefficient
   integral : integralNormalization l T C coefficient theta completed_square
 
-/-- The specified comparison j: inverse quotient-completion comparison followed by
-balanced continuous tensor multiplication. This is a composite of actual natural isos.
-Source: BS 6.8.14(2), node scalar normalization. -/
+/-- The specified comparison `j`: the inverse quotient-completion comparison followed by
+balanced continuous tensor multiplication. -/
 @[irreducible] def scalarComparison (C : Core l T) (B : ScalarData l T C)
     {E F : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ F) :
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) T).T h ⋙
@@ -265,8 +265,7 @@ Source: BS 6.8.14(2), node scalar normalization. -/
   Functor.isoWhiskerRight (C.raw.family.β h).symm (C.realization F).J ≪≫
     Functor.isoWhiskerLeft (C.raw.family.Φ E) (B.theta h)
 
-/-- The actual finite scalar associators and multiplication units are intertwined.
-Source: BS 6.8.14(2); normalized balanced tower argument, node step 6. -/
+/-- The finite scalar associators and multiplication units are intertwined. -/
 structure Coherence (C : Core l T) (B : ScalarData l T C) where
   coefficient_comp : ∀ {E F G : Padic.FiniteCoefficientFields l (PadicAlgCl l)}
       (h : E ≤ F) (k : F ≤ G),
@@ -308,15 +307,13 @@ structure Coherence (C : Core l T) (B : ScalarData l T C) where
       ((finiteFunctor l T C E).map
         ((GeneralAlgebraicallyClosedCoefficients.unitor l (PadicAlgCl l) T E).hom.app K))
 
-/-- The native coefficient ring is exactly the section presentation of the pullback
-of finite-subextension-valued continuous functions.
-Source: BS 6.8.1--6.8.2. -/
+/-- The native coefficient ring: the section presentation of the pullback of
+finite-subextension-valued continuous functions. -/
 def closureRing := InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u}
   (ProEt.topology T)
   (AlgebraicGeometry.ProEtale.condensedRingObj (Profinite.padicAlgClRingObj l) T)
 
-/-- The section-module derived equivalence of the fixed internal coefficient.
-Source: Stacks 00YV. -/
+/-- The section-module derived equivalence of the fixed internal coefficient. -/
 @[irreducible] def sectionDerived (A : Sheaf (ProEt.topology T) Ab.{u + 1})
     [MonObj A] [IsCommMonObj A] :=
   let e := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
@@ -325,10 +322,9 @@ Source: Stacks 00YV. -/
   letI := Functor.additive_of_preserves_binary_products e.inverse
   e.mapDerivedCategory.functor
 
-/-- The common coefficient cocone, together with its actual finite-stage ring legs.
+/-- The common coefficient cocone, together with its finite-stage ring legs.
 Only field inclusions and balanced tensor extension are allowed; the component
-normalization tests every scalar function by the specified point adjunction.
-Source: BS 6.8.2; node step 3. -/
+normalization tests every scalar function by the specified point adjunction. -/
 structure ClosureData (C : Core l T) (B : ScalarData l T C) where
   leg : ∀ E : Padic.FiniteCoefficientFields l (PadicAlgCl l),
     rationalCoefficientSheaf l T (pbcFiniteField.{u} l (PadicAlgCl l) E) ⟶ closureRing l T
@@ -357,9 +353,8 @@ structure ClosureData (C : Core l T) (B : ScalarData l T C) where
   cocone : ∀ {E F : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ F),
     (B.coefficient h).coefficient ≫ leg F = leg E
 
-/-- Balanced extension of j to the native coefficient ring. The flattening
-comparison here is the universal K-flat scalar-composition comparison.
-Source: node steps 5--6. -/
+/-- Balanced extension of `j` to the native coefficient ring, using the universal K-flat
+scalar-composition comparison for flattening. -/
 @[irreducible] def closureComparison (C : Core l T) (B : ScalarData l T C) (R : ClosureData l T C B)
     {E F : Padic.FiniteCoefficientFields l (PadicAlgCl l)} (h : E ≤ F) :
     (GeneralAlgebraicallyClosedCoefficients.stageSystem l (PadicAlgCl l) T).T h ⋙
@@ -374,8 +369,7 @@ Source: node steps 5--6. -/
           (R.leg E) (R.cocone h)))
 
 /-- All clauses of the finite-realization cocone, including the constructibility
-comparison in both module presentations and the native scalar tower equations.
-Source: BS 6.6.11, 6.8.8, 6.8.14(2); HRS 7.7 and 7.9. -/
+comparison in both module presentations and the native scalar tower equations. -/
 structure Data extends Core l T where
   scalar : ScalarData l T toCore
   coherence : Coherence l T toCore scalar

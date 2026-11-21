@@ -19,8 +19,9 @@ Let `π : S' ⟶ S` be finite, surjective and radicial (universally injective), 
 its base changes are universal homeomorphisms. If, after base change along `π`, the derived
 direct image along `j : X ⟶ Y` is bounded constructible and commutes with every base change from
 a noetherian scheme, then the same holds over `S`
-(`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective`,
-blueprint `lemma-universal-homeomorphism-base--1`).
+(`AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective`).
+
+## Implementation details
 
 For a noetherian `T` over `S`, the base change `T' = T ×_S S'` is noetherian and
 `a : Y_{T'} ⟶ Y_T` is a universal homeomorphism, along which pullback is an equivalence of the
@@ -50,8 +51,7 @@ namespace Etale
 variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- The derived pullback along a morphism whose underived pullback is an equivalence (e.g. a
-universal homeomorphism) reflects isomorphisms on the bounded below derived categories: an
-equivalence reflects isomorphisms, and the homology functors commute with exact functors. -/
+universal homeomorphism) reflects isomorphisms on the bounded below derived categories. -/
 lemma isIso_of_isIso_mapDerivedCategoryPlus_upperStar_map {Y Y' : Scheme.{u}} (a : Y' ⟶ Y)
     [((a)^*[ModuleCat.{u + 1} Λ]).IsEquivalence]
     {K L : _root_.DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -74,10 +74,7 @@ lemma isIso_of_isIso_mapDerivedCategoryPlus_upperStar_map {Y Y' : Scheme.{u}} (a
   exact isIso_of_reflects_iso _ ((a)^*[ModuleCat.{u + 1} Λ])
 
 /-- **Bounded constructibility descends along a universal homeomorphism** `a : Y' ⟶ Y`: a
-complex `K` on `Y` whose pullback `a^* K` is bounded constructible is bounded constructible.
-The pullback `a^*` is an exact equivalence, so it reflects boundedness, and it commutes with the
-homology sheaves, along which constructibility descends
-(`AlgebraicGeometry.Scheme.IsConstructibleSheaf.of_upperStar_of_isUniversalHomeomorphism`). -/
+complex `K` on `Y` whose pullback `a^* K` is bounded constructible is bounded constructible. -/
 lemma boundedConstructible_of_upperStar_of_isUniversalHomeomorphism {Y Y' : Scheme.{u}}
     (a : Y' ⟶ Y) [IsUniversalHomeomorphism a]
     {K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -129,10 +126,9 @@ lemma isIso_derivedBaseChangeMapPlus_app_paste_horiz_iff {X'' X' X Y'' Y' Y : Sc
     Functor.comp_obj] at e
   rw [e, isIso_comp_left_iff, isIso_comp_right_iff]
 
-/-- Blueprint `lemma-universal-homeomorphism-base--1`: Descending the exchange property through a
-universal homeomorphism, for a bounded below complex.
-
-Let `π : S' ⟶ S` be finite, surjective and radicial (universally injective), let `j : X ⟶ Y` be a
+/-- Descending the exchange property through a universal homeomorphism, for a bounded below
+complex: let `π : S' ⟶ S` be finite, surjective and radicial (universally injective), let
+`j : X ⟶ Y` be a
 morphism of `S`-schemes and `K` a bounded below complex on `X`. Form the base changes
 `Y' = Y ×_S S'` and `X' = X ×_Y Y'`, with `j' : X' ⟶ Y'`. If over `π⁻¹ U` the direct image
 `Rj'_*(K|_{X'})` is bounded constructible and its formation commutes with every base change from a
@@ -219,8 +215,7 @@ theorem HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective
       ((isIso_derivedBaseChangeMapPlus_app_paste_horiz_iff sqT.toCommSq ha'.toCommSq _ K
         inferInstance).1 hI)
 
-/-- Blueprint `lemma-universal-homeomorphism-base--1`: Descending the exchange property through a
-universal homeomorphism, for a sheaf: the case of
+/-- Descending the exchange property through a universal homeomorphism, for a sheaf: the case of
 `AlgebraicGeometry.Etale.HasDirectImageBaseChangeOnPlus.of_isFinite_of_surjective` for a sheaf
 placed in degree `0`. -/
 theorem HasConstructibleDirectImageBaseChangeOn.of_isFinite_of_surjective'

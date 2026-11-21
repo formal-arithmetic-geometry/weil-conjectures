@@ -25,21 +25,6 @@ formula `PF_{f, K, L} : Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` over `Λ` whe
 by a nonzero integer) and bounded below, `K ⊗ᴸ Lf^* L` is bounded below, and `L` is bounded
 constructible. The coefficient ring itself need not be torsion.
 
-The proof is that of the finite projection formula, `sk-thm-sf-pf-finite`, run at the geometric
-points of `Y`:
-
-* geometric points detect isomorphisms
-  (`AlgebraicGeometry.Etale.isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map`);
-* the projection map commutes with compactly supported base change
-  (`AlgebraicGeometry.Etale.projectionMapOfCompactification_baseChange'`), and the base change
-  maps occurring there are invertible by proper base change for bounded below complexes with
-  torsion cohomology (`AlgebraicGeometry.Etale.isIso_baseChange_of_isProper_of_torsionHomology`);
-* on a geometric fibre `Spec Ω` the pullback of `L` is bounded with constructible, hence constant
-  and finitely generated, cohomology sheaves. Over the principal ideal domain `Λ` a finitely
-  generated module is the cokernel of an injective map `Λᵇ ⟶ Λᵃ`, and the constant complexes
-  `(Λᵃ)` are dualizable, so the projection formula holds there by dévissage
-  (`DerivedCategory.prop_of_bounded`).
-
 ## Main statements
 
 - `AlgebraicGeometry.Etale.hasProjectionFormulaOfCompactification_of_forall_algClosurePoint`:
@@ -289,9 +274,7 @@ lemma exists_shortExact_pi [IsPrincipalIdealRing Λ] [IsDomain Λ] (M : ModuleCa
 
 /-- **The projection formula over a separably closed field.** Let `Λ` be a principal ideal
 domain, `Ω` a separably closed field and `c'` a compactification of `f' : X' ⟶ Spec Ω`. The
-projection formula holds at `(E, C)` for every `E` and every bounded constructible `C`: the
-cohomology sheaves of `C` are constant with finitely generated values, built out of the
-dualizable constant complexes `(Λᵃ)` by cones. -/
+projection formula holds at `(E, C)` for every `E` and every bounded constructible `C`. -/
 theorem hasProjectionFormulaOfCompactification_of_isSepClosed [IsPrincipalIdealRing Λ]
     [IsDomain Λ] {Ω : Type u} [Field Ω] [IsSepClosed Ω] {X' : Scheme.{u}}
     {f' : X' ⟶ Spec (.of Ω)} (c' : Compactification f') (E : 𝐃(X')) {C : 𝐃(Spec (.of Ω))}

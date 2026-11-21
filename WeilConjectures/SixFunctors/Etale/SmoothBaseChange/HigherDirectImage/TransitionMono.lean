@@ -20,10 +20,7 @@ along morphisms of schemes over a fixed scheme compose
 The transition map `R^q h_* K ⟶ R^q h₁_* (a^* K)` along `a : Y₁ ⟶ Y` is a monomorphism as soon as,
 after base change along an étale surjective morphism `g : X' ⟶ X` of the base, the projection
 `Y ×_X X' ⟶ Y` factors through `a`
-(`AlgebraicGeometry.Etale.mono_homologyFunctor_map_lowerStarPlusTransition`). Indeed, by the
-pasting law the pullback along `g` of the transition map, followed by a further base-change map,
-is the base-change map of the cartesian square of `h` along `g`, which is an isomorphism by étale
-base change; and the pullback along a surjective morphism is faithful.
+(`AlgebraicGeometry.Etale.mono_homologyFunctor_map_lowerStarPlusTransition`).
 
 ## Main statements
 
@@ -70,16 +67,7 @@ lemma Etale.higherDirectImageOverMap_comp {T S : Scheme.{u}} (g : T ⟶ S)
 /-- **Injectivity of the transition maps.** Let `a : Y₁ ⟶ Y` and `h : Y ⟶ X` with
 `a ≫ h = h₁`, and let `g : X' ⟶ X` be étale and surjective. If the projection
 `pr : Y ×_X X' ⟶ Y` factors through `a`, then the transition map
-`R^q h_* K ⟶ R^q h₁_* (a^* K)` is a monomorphism in every degree `q`.
-
-By the pasting law (`AlgebraicGeometry.Etale.baseChange_app_paste_horiz_of_eq`), the pullback
-along `g` of the transition map, which is a base-change map
-(`AlgebraicGeometry.Etale.lowerStarPlusTransition_eq_baseChange`), followed by the base-change
-map of the square formed by the factorisation of `pr`, is the base-change map of the cartesian
-square of `h` along `g`; the latter is an isomorphism by étale base change
-(`AlgebraicGeometry.Etale.isIso_derivedBaseChangeMapPlus_of_etale`). So the pullback of the
-transition map along `g` is a split monomorphism, and `g^*` is faithful as `g` is surjective
-(`AlgebraicGeometry.Etale.faithful_upperStar_of_surjective`). -/
+`R^q h_* K ⟶ R^q h₁_* (a^* K)` is a monomorphism in every degree `q`. -/
 theorem Etale.mono_homologyFunctor_map_lowerStarPlusTransition {X Y Y₁ X' Y' : Scheme.{u}}
     (a : Y₁ ⟶ Y) (h : Y ⟶ X) (h₁ : Y₁ ⟶ X) (w : a ≫ h = h₁) (g : X' ⟶ X) [Etale g]
     (hg : Function.Surjective g.base) {pr : Y' ⟶ Y} {h' : Y' ⟶ X'}
@@ -141,11 +129,7 @@ and `T = lim T_i` a cofiltered limit of schemes over `W` with affine transition 
 quasi-compact and quasi-separated over `S`. Let `V` be a scheme over `W` receiving a morphism
 from some `T_{i₀}`, such that all the transition maps
 `R^q (V → S)_* (G|_V) ⟶ R^q (T_i → S)_* (G|_{T_i})`
-are monomorphisms. If `R^q (T → S)_* (G|_T) = 0`, then `R^q (V → S)_* (G|_V) = 0`.
-
-On every geometric stalk, an element `y` maps to some `T_{i₀}` and then to zero over `T`, hence
-by the limit theorem `AlgebraicGeometry.Etale.higherDirectImage_limit` it dies at some stage
-`T_j`; the transition map to that stage being injective, `y = 0`. -/
+are monomorphisms. If `R^q (T → S)_* (G|_T) = 0`, then `R^q (V → S)_* (G|_V) = 0`. -/
 theorem Etale.isZero_higherDirectImage_of_isLimit_of_mono {W S : Scheme.{u}} (k : W ⟶ S)
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {I : Type u} [Category.{u} I]
     [IsCofiltered I] (D : I ⥤ Over W) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]

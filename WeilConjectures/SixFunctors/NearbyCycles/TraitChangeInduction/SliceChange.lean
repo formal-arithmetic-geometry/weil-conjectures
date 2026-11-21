@@ -111,8 +111,7 @@ lemma sliceTraitChangeSpecial_snd :
 
 variable {φ cN cM} in
 /-- **The square of total spaces of the change of trait of the slices is cartesian** if that of
-`φ` is: `𝒳_M ×_{𝔸¹_{S₂}} S₂(x) = 𝒳_N ×_{𝔸¹_{S₁}} S₂(x) = (𝒳_N ×_{𝔸¹_{S₁}} S₁(x)) ×_{S₁(x)} S₂(x)`.
--/
+`φ` is. -/
 theorem isPullback_sliceTraitChangeHom_total {q₁ : N.total ⟶ Spec (.of R₁)}
     {q₂ : M.total ⟶ Spec (.of R₂)} (hφ : IsPullback φ.total q₂ q₁ (Spec.map (CommRingCat.ofHom ι)))
     (hcN : cN ≫ 𝔸(ULift.{u} (Fin 1); Spec (.of R₁)) ↘ Spec (.of R₁) = q₁)
@@ -133,7 +132,7 @@ theorem isPullback_sliceTraitChangeHom_total {q₁ : N.total ⟶ Spec (.of R₁)
   exact h₁
 
 /-- A slice trait over an unramified change of trait is unramified over the slice trait of the
-base: the uniformizer of `R₁` is one of `S₁(x)` and of `S₂(x)`. -/
+base. -/
 lemma _root_.AlgebraicGeometry.SliceTrait.Hom.maximalIdeal_eq_map
     (hun : maximalIdeal R₂ = (maximalIdeal R₁).map ι) :
     maximalIdeal D₂.R = (maximalIdeal D₁.R).map H.ψ := by

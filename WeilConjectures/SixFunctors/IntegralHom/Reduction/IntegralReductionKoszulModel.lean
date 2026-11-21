@@ -48,8 +48,11 @@ set_option linter.privateModule false
 
 /-! # Computing integral reduction on an arbitrary representative
 
-Source: the finite-free quotient resolution in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 06YY, 08J7, and 07A6.
+## References
+
+* [Stacks, Tag 06YY]
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 07A6]
 -/
 
 @[expose] public section

@@ -45,7 +45,10 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Descent of ordinary tensor associativity through resolving comparisons
 
-Source: Stacks 07A4 and 0FPT.
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 0FPT]
 -/
 
 @[expose] public noncomputable section
@@ -255,8 +258,7 @@ variable (SB : CoefficientClosedStructure (derivedInternalHomOfUniverses.{c, v, 
 include cB cA hε hU hκ hμ
 
 /-- A natural comparison invertible on resolving complexes descends ordinary tensor
-associativity. The proof pastes four binary squares, cancels model isomorphisms, and
-transports along flat-term K-flat resolutions. Source: Stacks 07A4 and 0FPT. -/
+associativity. -/
 theorem coefficientTensorAssociativityDescent (X Y Z : DerivedCategory
     (RingedTensorModules.{c, v, r} J R)) :
     F.map (SB.monoidal.associator X Y Z).hom ≫

@@ -11,9 +11,10 @@ public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
 /-!
 # Underived sheaf monoidal square for scalar/site comparison
 
-Source: Stacks Project, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback;
-scalar/site specialization and pure-tensor reassociation in the latest blueprint
-lemma-change-coefficients-exceptional-inverse-image--3, paragraph 3.
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 03EL]
 -/
 
 @[expose] public noncomputable section
@@ -34,8 +35,8 @@ attribute [local instance] Sheaf.monoidalCategory
 -- Use the site's direct monoidal sheafification instance, as in ScalarExtensionMonoidal.
 attribute [-instance] instIsMonoidalFunctorOppositeWOfHasSheafComposeForgetOfHasEnoughPoints
 
-/-- The existing sheafified scalar balancing tensorator, specialized to the etale site.
-Source: Stacks 03EK; `composeAndSheafifyOplaxMonoidal`. -/
+/-- The existing sheafified scalar balancing tensorator (`composeAndSheafifyOplaxMonoidal`),
+specialized to the etale site. -/
 -- This is definitionally the project's ordinary scalar tensorator; the local instance
 -- avoids importing derived exceptional-coefficient constructions for an underived square.
 local instance etaleScalarOplax {A B : Type (u + 1)} [CommRing A] [CommRing B]
@@ -49,30 +50,7 @@ local instance etaleScalarOplax {A B : Type (u + 1)} [CommRing A] [CommRing B]
 -- balancing map), the same construction as the pro-etale instance
 -- `AlgebraicGeometry.ProEtale.oplaxMonoidal_sheafExtendScalars`.
 
-/-- The ordinary scalar/site comparison square commutes on module sheaves.
-
-Source: Stacks Project, Modules on Sites, Tag 03EL, lemma-tensor-product-pullback;
-scalar/site specialization and pure-tensor reassociation in the latest blueprint
-lemma-change-coefficients-exceptional-inverse-image--3, paragraph 3.
-
-Proof:
-1. Unpack the ordinary comparison data: `ν^*` on `A`- and `B`-module sheaves, the two
-   sheafified scalar extensions with their normalized tensor maps `μ`, and the scalar/site
-   mate `σ`, the inverse of `etaleSheafExtendScalarsCompComparisonUpperStarIso`. Both
-   composites are maps `S^pro ν_A (M ⊗ N) ⟶ ν_B S^et M ⊗ ν_B S^et N`.
-2. The oplax map `τ` of `ν^*` (Stacks 03EL) carries `ν(x ⊗ y)` to `ν x ⊗ ν y` on étale
-   sections `x`, `y`, naturally in module maps and under restriction.
-3. Compute the mate with unit and counit: `σ = (ε₂ ν_B S^et) ∘ (S^pro β S^et) ∘ (S^pro ν_A η₁)`
-   for the restriction comparison `β`, so `σ (b ⊗ ν_A x) = b • ν_B (1 ⊗ x)`; the normalized
-   scalar tensor map sends `s ⊗ (x ⊗ y)` to `(s ⊗ x) ⊗ (1 ⊗ y)` on both sites.
-4. Transpose under the composite adjunction `S^pro ν_A ⊣ ν_{A,*} R₂`: a map out of
-   `S^pro ν_A (M ⊗ N)` is determined by its values on `1 ⊗ ν_A z`, and by the sheafification
-   universal property on étale pure tensors `z = x ⊗ y`. Both routes send
-   `1 ⊗ ν_A (x ⊗ y)` to `ν_B (1 ⊗ x) ⊗ ν_B (1 ⊗ y)`; by `B`-linearity both send
-   `b ⊗ (m ⊗ n)` to `(b ⊗ m) ⊗ (1 ⊗ n)`.
-This uses no nonzero-ring, flatness, point, or nonempty-site hypothesis, and includes zero
-sheaves and the identity ring map.
--/
+/-- The ordinary scalar/site comparison square commutes on module sheaves. -/
 theorem normalized_stage_site_sheaf_tensor_square
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) (X : Scheme.{u})

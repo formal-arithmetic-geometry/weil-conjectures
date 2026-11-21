@@ -7,7 +7,14 @@ module
 
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenBridgeWord
 
-/-! A factor identity used in proper/open transport. -/
+/-! # Expansion of the intrinsic lambda
+
+A factor identity used in proper/open transport.
+
+## References
+
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -151,8 +158,7 @@ def nativeToSystem (W : Scheme.{u}) :
   map_comp _ _ := rfl
 
 -- State the unfolding for a free equality, so that its proof is never reduced.
-/-- The integral-system equality transport is the image of the native one.
- -/
+/-- The integral-system equality transport is the image of the native one. -/
 theorem nativeREq_eq_native {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g)
     (M : System l E X) :
     nativeREq l E h M = (nativeToSystem l E Y).map
@@ -333,15 +339,7 @@ private meta partial def bridgeCongruence (F : Lean.Expr)
   cache.modify fun m => m.insert (a, b) h
   return h
 
-/-- The chosen and intrinsic lambda components expand into their factors.
-Source: Stacks 0F7B and blueprint fix-prop-coherence.
-
-Proof: Unfold the two lambda definitions. Components of an isomorphism composite are
-the composites of its components. Whiskering on the left is evaluation, and
-whiskering on the right maps the component through the direct functor.
-Associator components are identities. Removing them gives each displayed
-five-factor word. Finally unfold the actual diagram fields. This calculation
-uses no canonical-bridge compatibility square. -/
+/-- The chosen and intrinsic lambda components expand into their factors. -/
 theorem lambdaWord_expansions (o : Operations l E) (c : Compositors l E o)
     (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     {U V W Z : Scheme.{u}} (k : U ⟶ V) (r : U ⟶ W)

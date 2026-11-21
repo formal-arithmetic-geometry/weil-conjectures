@@ -21,7 +21,20 @@ integral categories transport to the rational ones; every object of `Dᵇc(X, E)
 rationalization of an integral object (a lattice), and every morphism is `ϖ⁻ᴺ u` for an integral
 morphism `u`.
 
-## Modelling choices
+## Main results
+
+- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRationalHomEquiv` : the morphisms
+  of `Dᵇc(X, E)` between rationalizations of integral objects are `Hom_{𝒪_E} ⊗_{𝒪_E} E`.
+- `AlgebraicGeometry.Etale.DerivedCategory.exists_iso_of_boundedConstructibleRational` : every
+  object of `Dᵇc(X, E)` is the rationalization of an object of `Dᵇc(X, 𝒪_E)`.
+- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational_exists_eq_inv_pow_smul` :
+  every morphism of `Dᵇc(X, E)` is `ϖ⁻ᴺ u` for an integral morphism `u`.
+- `AlgebraicGeometry.Etale.DerivedCategory.isEquivalence_toKaroubi_boundedConstructibleRational` :
+  `Dᵇc(X, E)` is equivalent to its Karoubi envelope.
+- `AlgebraicGeometry.Etale.DerivedCategory.rationalization_transport` : `𝒪_E`-linear triangulated
+  functors and natural transformations transport to `E`-linear ones on rationalizations.
+
+## Implementation details
 
 * The integral category `Dᵇc(X, 𝒪_E)` is the full subcategory of the category
   `D_comp(X_ét, 𝒪_E)` of derived complete objects (`DerivedCategoryDerivedCompleteIntegral`) cut
@@ -42,23 +55,14 @@ morphism `u`.
   rationalization (`CategoryTheory.Rationalization.tensorHomEquiv`,
   `CategoryTheory.Rationalization.exists_eq_inv_pow_smul_map`), using that `𝒪_E` is a discrete
   valuation ring (`PadicAlgCl.isDiscreteValuationRing_integers`).
-* Idempotent completeness belongs to another part of the blueprint and is only stated here
-  (`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational`).
-  The Karoubi envelope carries no triangulated structure in this repository, so the equivalence
+* Idempotent completeness is reduced to the lattice lemma
+  (`AlgebraicGeometry.Etale.DerivedCategory.exists_boundedConstructibleIntegral_idempotent`),
+  which is not formal: over `R_N = 𝒪_E[u]/(u² - ϖᴺu)` the perfect complexes have all the
+  structure used in this file, but the idempotent `(1, 0)` of `R_N[1/ϖ] = E × E` has no lattice.
+  A proof needs truncations or images on the étale integral stage, or a comparison with the
+  pro-étale model.
+* The Karoubi envelope carries no triangulated structure in this repository, so the equivalence
   with the Karoubi envelope is stated as an equivalence of categories.
-
-## Main results
-
-- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRationalHomEquiv` : the morphisms
-  of `Dᵇc(X, E)` between rationalizations of integral objects are `Hom_{𝒪_E} ⊗_{𝒪_E} E`.
-- `AlgebraicGeometry.Etale.DerivedCategory.exists_iso_of_boundedConstructibleRational` : every
-  object of `Dᵇc(X, E)` is the rationalization of an object of `Dᵇc(X, 𝒪_E)`.
-- `AlgebraicGeometry.Etale.DerivedCategory.boundedConstructibleRational_exists_eq_inv_pow_smul` :
-  every morphism of `Dᵇc(X, E)` is `ϖ⁻ᴺ u` for an integral morphism `u`.
-- `AlgebraicGeometry.Etale.DerivedCategory.isEquivalence_toKaroubi_boundedConstructibleRational` :
-  `Dᵇc(X, E)` is equivalent to its Karoubi envelope.
-- `AlgebraicGeometry.Etale.DerivedCategory.rationalization_transport` : `𝒪_E`-linear triangulated
-  functors and natural transformations transport to `E`-linear ones on rationalizations.
 -/
 
 @[expose] public section
@@ -175,9 +179,7 @@ theorem boundedConstructibleRational_exists_eq_inv_pow_smul
   rw [← h]
   simp
 
-/-- `Dᵇc(X, 𝒪_E)` is stable under retracts in `D(X_ét, 𝒪_E)`: derived completeness, bounded
-constructibility and Tor amplitude are, and the reductions of a retract are retracts of the
-reductions. -/
+/-- `Dᵇc(X, 𝒪_E)` is stable under retracts in `D(X_ét, 𝒪_E)`. -/
 instance isStableUnderRetracts_boundedConstructibleIntegral :
     (boundedConstructibleIntegral (PadicAlgCl.maximalIdealShrink l E) X).IsStableUnderRetracts
     where
@@ -195,22 +197,10 @@ private lemma eq_pow_smul_of_inv_pow_smul {A V : Type*} [Field A] [AddCommGroup 
   simp only [smul_smul, ← mul_pow, mul_inv_cancel₀ ha, one_pow] at h'
   simpa [← mul_assoc, ← mul_pow, mul_inv_cancel₀ ha] using h'
 
-/-- **The lattice lemma** (the non-formal input to idempotent completeness). Let `L ∈ Dᵇc(X, 𝒪_E)`
-and `u : L ⟶ L` with `u ≫ u = ϖᴺ • u`, so that `ϖ⁻ᴺ u` is an idempotent of the rationalization of
-`L`. Then there is another lattice `L'` of the rationalization of `L` in `Dᵇc(X, 𝒪_E)` on which this
-idempotent is integral: an idempotent `ε` of `L'` corresponding to `ϖ⁻ᴺ u`.
-
-In the theory of `ℓ`-adic sheaves this follows from the existence of the rationalized standard
-`t`-structure on `Dᵇc(X, E)` (Ekedahl): the image of `ϖ⁻ᴺ u` has a lattice, and so does its
-complement.
-
-The lemma is equivalent to
-`AlgebraicGeometry.Etale.DerivedCategory.isIdempotentComplete_boundedConstructibleRational` and is
-not formal. Over `R_N = 𝒪_E[u]/(u² - ϖᴺu)` the perfect complexes have all the structure used in
-this file, but the idempotent `(1, 0)` of `R_N[1/ϖ] = E × E` has no lattice. Cones and clearing
-denominators only produce lattices of `A ⊕ A⟦n⟧` (`n ≥ 1`) for the image `A` of `ϖ⁻ᴺ u`. A proof
-needs truncations or images on the étale integral stage for an arbitrary scheme `X`, or a comparison
-with the pro-étale model; neither is available here. -/
+/-- **The lattice lemma.** Let `L ∈ Dᵇc(X, 𝒪_E)` and `u : L ⟶ L` with `u ≫ u = ϖᴺ • u`, so that
+`ϖ⁻ᴺ u` is an idempotent of the rationalization of `L`. Then there is another lattice `L'` of the
+rationalization of `L` in `Dᵇc(X, 𝒪_E)` and an idempotent `ε` of `L'` corresponding to
+`ϖ⁻ᴺ u`. -/
 theorem exists_boundedConstructibleIntegral_idempotent
     {ϖ : Shrink.{u + 1} (PadicAlgCl.integers l E)} (hϖ : Irreducible ϖ)
     {L : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E}
@@ -227,14 +217,7 @@ theorem exists_boundedConstructibleIntegral_idempotent
           (DerivedCategoryDerivedCompleteRational.fromIntegral _ l E).map u) :=
   sorry
 
-/-- The rationalization `Dᵇc(X, E)` of `Dᵇc(X, 𝒪_E)` is idempotent complete.
-
-An idempotent `p` of `K ∈ Dᵇc(X, E)` is `ϖ⁻ᴺ u` for an integral `u` on a lattice `L` of `K`, and
-after multiplying `u` by a power of `ϖ`, `u ≫ u = ϖᴺ • u` holds integrally. By the lattice lemma
-(`AlgebraicGeometry.Etale.DerivedCategory.exists_boundedConstructibleIntegral_idempotent`), `p`
-comes from an idempotent `ε` of another lattice `L'`, which splits in the idempotent complete
-category `D_comp(X_ét, 𝒪_E)`; its image is a retract of `L'`, hence lies in `Dᵇc(X, 𝒪_E)`, and its
-rationalization is an image of `p`. -/
+/-- The rationalization `Dᵇc(X, E)` of `Dᵇc(X, 𝒪_E)` is idempotent complete. -/
 theorem isIdempotentComplete_boundedConstructibleRational :
     IsIdempotentComplete (boundedConstructibleRational l E X).FullSubcategory := by
   obtain ⟨ϖ, hϖ⟩ :=

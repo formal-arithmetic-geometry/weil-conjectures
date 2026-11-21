@@ -14,7 +14,13 @@ import all WeilConjectures.CategoryTheory.DerivedExactSquareComposition
 import all WeilConjectures.CategoryTheory.Exact.ExactLocalizationInverseMate
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Unique
 
-/-! # Proved finite coefficient coordinate calculus -/
+/-! # Proved finite coefficient coordinate calculus
+
+## References
+
+* [Stacks, Tag 03D6]
+* [Stacks, Tag 03DI]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -324,17 +330,7 @@ private theorem restriction_coordinate_square
     Functor.associator_inv_app, Functor.comp_obj, Category.id_comp, QX.map_comp,
     Category.assoc, Iso.app_inv] using ht'
 
-/-- Conjugate an arbitrary restriction endomorphism through compatible coordinate squares.
-Source: Stacks Tags 03D6 and 03DI, the unit-square and counit-square calculation in
-compactification coherence.
-
-Proof: invert the first unit square by cancelling its isomorphisms. Expand the
-image of the inserted composite. Substitute the second unit square, move the
-arbitrary arrow through the inverse pull coordinate by naturality, and move the
-first object comparison through the restriction by naturality. Apply the
-restriction square, cancel the second pull coordinates, and substitute the
-inverse first unit square. Functoriality gives the conjugated endomorphism.
-No nonempty object or nonzero morphism assumption is used. -/
+/-- Conjugate an arbitrary restriction endomorphism through compatible coordinate squares. -/
 theorem restriction_endomorphism_coordinates
     {C D T C' D' T' : Type*}
     [Category C] [Category D] [Category T] [Category C'] [Category D'] [Category T']

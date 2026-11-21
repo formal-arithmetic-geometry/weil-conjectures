@@ -56,10 +56,8 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-/-- Composition.
-
-For `f : X ⟶ Y` and `g : Y ⟶ Z` admitting compactifications, if `ω_g` is invertible, `θ_g` is an
-isomorphism at `K ∈ D^b_{ctf}(Z, Λ)` and `θ_f` is an isomorphism on `D^b_{ctf}(Y, Λ)`, then
+/-- For `f : X ⟶ Y` and `g : Y ⟶ Z` admitting compactifications, if `ω_g` is invertible, `θ_g` is
+an isomorphism at `K ∈ D^b_{ctf}(Z, Λ)` and `θ_f` is an isomorphism on `D^b_{ctf}(Y, Λ)`, then
 `θ_{f ≫ g, K}` is an isomorphism. -/
 theorem isIso_dualizingComplexTensorMap_comp {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
@@ -89,9 +87,7 @@ theorem isIso_of_isIso_rightDerivedUpperShriek_map {U X : Scheme.{u}} (u : U ⟶
       (rightDerivedUpperShriekAdjunction Λ u) hu
       ((isInvertible_iff_exists_derivedTensor _).2 hω) φ h)
 
-/-- Source-étale locality (step 3).
-
-For a surjective étale `u : U ⟶ X` with `θ_u` an isomorphism at every object and `ω_u`
+/-- For a surjective étale `u : U ⟶ X` with `θ_u` an isomorphism at every object and `ω_u`
 invertible, and `f : X ⟶ Y`: if `θ_{u ≫ f, K}` is an isomorphism, then so is `θ_{f, K}`. -/
 theorem isIso_dualizingComplexTensorMap_of_comp {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u]
     [Surjective u] (f : X ⟶ Y) [HasCompactification u] [HasCompactification f]
@@ -122,13 +118,8 @@ theorem DerivedCategory.isInvertible.of_derivedTensor_left {X : Scheme.{u}}
     ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).mapIso e₂).app P ≪≫ derivedTensorLeftUnitor _ X P
 
 omit [Finite Λ] in
-/-- Source-étale locality (step 2).
-
-Invertibility descends along a surjective étale `u : U ⟶ X`: if `Lu^* L` is invertible, then so
-is `L`. The evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` pulls back to the evaluation of the invertible
-`Lu^* L`, the derived pullback commuting with the derived internal hom
-(`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`), and
-isomorphisms descend along `u`. -/
+/-- Invertibility descends along a surjective étale `u : U ⟶ X`: if `Lu^* L` is invertible, then
+so is `L`. -/
 theorem isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale {U X : Scheme.{u}}
     (u : U ⟶ X) [Etale u] [Surjective u]
     {L : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -145,11 +136,8 @@ theorem isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale {U X : Scheme
       (fun φ hφ ↦ isIso_of_isIso_leftDerivedUpperStar_map_of_surjective Λ u φ hφ)
       ((isInvertible_iff_exists_derivedTensor _).2 h))
 
-/-- Source-étale locality (step 2).
-
-For a surjective étale `u : U ⟶ X` with `θ_u` an isomorphism at every object and `ω_u`
-invertible, and `f : X ⟶ Y`: if `ω_{u ≫ f}` is invertible, then so is `ω_f`. Indeed
-`ω_{u ≫ f} ≅ Ru^! ω_f ≅ ω_u ⊗ᴸ Lu^* ω_f`. -/
+/-- For a surjective étale `u : U ⟶ X` with `θ_u` an isomorphism at every object and `ω_u`
+invertible, and `f : X ⟶ Y`: if `ω_{u ≫ f}` is invertible, then so is `ω_f`. -/
 theorem isInvertible_dualizingComplex_of_comp {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u]
     [Surjective u] (f : X ⟶ Y) [HasCompactification u] [HasCompactification f]
     [HasCompactification (u ≫ f)] [QuasiCompact (u ≫ f)]
@@ -219,10 +207,7 @@ attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.ha
 
 /-- **Base change at an invertible object.** For a cartesian square `g' ≫ f = f' ≫ g` with
 quasi-compact `f'`, if the base change map `Lg'^* Rf^! ⟶ Rf'^! Lg^*` is an isomorphism at
-`Λ_Y`, then it is one at every invertible `N`: through the tensor maps of `f` and `f'` it is the
-base change map at `Λ_Y` tensored with `Lg'^* Lf^* N ≅ Lf'^* Lg^* N`, the projection formula
-commuting with base change
-(`AlgebraicGeometry.Etale.projectionMap_rightDerivedLowerShriekBaseChangeMap`). -/
+`Λ_Y`, then it is one at every invertible `N`. -/
 theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isInvertible {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X} (sq : IsPullback g' f' f g)
     [HasCompactification f] [HasCompactification f'] [QuasiCompact f']

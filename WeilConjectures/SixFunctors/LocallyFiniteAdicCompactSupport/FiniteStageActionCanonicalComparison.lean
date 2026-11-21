@@ -9,7 +9,14 @@ public import WeilConjectures.SmoothPurity.ConstructibleExceptionalCoefficients.
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import WeilConjectures.CategoryTheory.ArrowHEq.ArrowHEq
 
-/-! The normalized natural comparison at one raw rational coefficient stage. -/
+/-! # Canonical finite-stage action comparison
+
+The normalized natural comparison at one raw rational coefficient stage.
+
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -33,8 +40,7 @@ private def iso_cast
     {F F' H : A ⥤ B} (h : F = F') (e : F' ≅ H) : F ≅ H :=
   h.symm ▸ e
 
-/-- The canonical comparison of a stage action with a specified finite action.
-Source: Bhatt--Scholze, Proposition 6.8.14; stage inclusion and equality transport. -/
+/-- The canonical comparison of a stage action with a specified finite action. -/
 def finiteStageActionComparison
     (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (X Y : Scheme.{u})
@@ -63,8 +69,7 @@ private theorem map_iso_cast_heq
   subst F'
   exact ArrowHEq.refl _
 
-/-- The canonical stage comparison has the prescribed endpoint-recorded component.
-Source: stage inclusion and equality transport. -/
+/-- The canonical stage comparison has the prescribed endpoint-recorded component. -/
 theorem finiteStageActionComparison_map
     (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] (X Y : Scheme.{u})
@@ -90,8 +95,7 @@ theorem finiteStageActionComparison_map
   exact map_iso_cast_heq (eq_of_heq hh) e
     (GeneralAlgebraicallyClosedCoefficients.inclusion (Y := Y) E ⋙ J) A
 
-/-- Canonical stage comparison with operation-category aliases kept abstract.
-Source: Bhatt--Scholze, Proposition 6.8.14; equality transport of the finite action. -/
+/-- Canonical stage comparison with operation-category aliases kept abstract. -/
 def finiteStageActionComparisonOfOperations
     (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] [IsAlgClosure (Padic l) (ULift.{u} Ω)]
@@ -112,8 +116,7 @@ def finiteStageActionComparisonOfOperations
   dsimp only [C, category] at hh ee ⊢
   exact finiteStageActionComparison l Ω X Y S E (O E).F (H E) hh ee
 
-/-- Endpoint-recorded component formula for the operation-level canonical stage map.
-Source: equality transport and stage inclusion. -/
+/-- Endpoint-recorded component formula for the operation-level canonical stage map. -/
 theorem finiteStageActionComparisonOfOperations_map
     (l : ℕ) [Fact l.Prime] (Ω : Type) [Field Ω] [Algebra (Padic l) Ω]
     [IsAlgClosure (Padic l) Ω] [IsAlgClosure (Padic l) (ULift.{u} Ω)]

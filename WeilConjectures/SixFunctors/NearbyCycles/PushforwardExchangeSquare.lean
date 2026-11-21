@@ -51,8 +51,8 @@ variable {DX DX1 DZ DZ1 SX SX1 SZ SZ1 : Type*} [Category DX] [Category DX1] [Cat
 square of morphisms of models `φ : P ⟶ M`, `ψ_M : M ⟶ M₁`, `ψ_P : P ⟶ P₁`, `φ' : P₁ ⟶ M₁`
 (pullback exchanges `α`, pushforward exchanges `χ` the mates of `α`), with the base change
 morphisms `bc`, `bc'` of the squares of bases and of special fibres,
-`Rk'_*(α_φ) ∘ bc' ∘ e'^*(χ_{ψ_M}) = χ_{ψ_P} ∘ Ψ_{P₁}(bc) ∘ α_{φ'}`. Both sides have the same
-adjoint for `k'^* ⊣ Rk'_*`, by the square law of the pullback exchanges. -/
+`Rk'_*(α_φ) ∘ bc' ∘ e'^*(χ_{ψ_M}) = χ_{ψ_P} ∘ Ψ_{P₁}(bc) ∘ α_{φ'}`.
+-/
 lemma pushforwardExchange_square_aux (ag : g ⊣ Rg) (ak : k ⊣ Rk) (ag' : g' ⊣ Rg')
     (ak' : k' ⊣ Rk') (αφ : ΨM ⋙ f' ⟶ f ⋙ ΨP) (αφ' : ΨM1 ⋙ e' ⟶ e ⋙ ΨP1)
     (αψM : ΨM1 ⋙ g' ⟶ g ⋙ ΨM) (αψP : ΨP1 ⋙ k' ⟶ k ⋙ ΨP)
@@ -106,8 +106,7 @@ variable {X X' X₁ X₁' Z Z' Z₁ Z₁' : Scheme.{u}} {M : NearbyCyclesModel X
 square of morphisms of models `φ₀ : P ⟶ M`, `ψ : M ⟶ M₁`, `ψ' : P ⟶ P₁`, `φ₁ : P₁ ⟶ M₁`, if the
 pushforward exchanges of `ψ` and `ψ'`, the base change morphisms of the squares of bases and of
 special fibres and the pullback exchange of `φ₁` are invertible at the relevant objects, then
-`Rk'_*` of the pullback exchange of `φ₀` is invertible at `A`. This is the square law of the
-pushforward exchanges (`NearbyCyclesModel.pushforwardExchange_square_aux`). -/
+`Rk'_*` of the pullback exchange of `φ₀` is invertible at `A`. -/
 theorem Hom.isIso_map_pullbackExchange_app_of_square (φ₀ : P.Hom M f₀ f₀')
     (ψ : M.Hom M₁ g g') (ψ' : P.Hom P₁ k k') (φ₁ : P₁.Hom M₁ e e')
     (htot : φ₀.total ≫ ψ.total = ψ'.total ≫ φ₁.total)

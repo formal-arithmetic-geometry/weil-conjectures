@@ -15,8 +15,10 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Ordinary tensor contraction for coefficient quotients
 
-Source: Stacks Project, Modules on Sites, Tag 03CZ, and Cohomology on Sites,
-Tag 07A4; the coefficient calculation in the integral Verdier proof.
+## References
+
+* [Stacks, Tag 03CZ]
+* [Stacks, Tag 07A4]
 -/
 
 @[expose] public noncomputable section
@@ -521,23 +523,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- Ordinary total tensor admits the scalar-first contraction for every quotient.
-
-Source: Stacks 03CZ, lemma-adjointness-tensor-restrict, and 07A4,
-lemma-pullback-tensor-product; the coefficient-unit calculation in
-thm-coef-integral-verdier.proof.md.
-
-Proof: in bidegree (i,j) use the balanced map
-x tensor (s tensor y) ↦ s tensor (x tensor y). It is linear over the completed
-coefficient ring and commutes with restriction maps. Sheafify the balanced maps
-and sum over i+j=k. Both differentials act on x and y only; s is in degree zero,
-so the two signed total differentials commute with these maps. This constructs
-b for arbitrary complexes, with the displayed formula. For the last equation,
-precompose with every total summand and both sheafification units. Both routes
-send x tensor (s tensor y) to q(s) tensor (x tensor y), by the defining pure-tensor
-formula of sfReductionTransition. Tensor induction, sheafification adjunction,
-and coproduct extensionality give equality. No flatness or derived category
-occurs, and exponent one, zero complexes, and the empty site cause no exception. -/
+/-- Ordinary total tensor admits the scalar-first contraction for every quotient. -/
 theorem ordinaryTensorQuotient_contractions :
     let R := completedIntegralCommRingSheafUnrestricted l E X
     let F := fun n : ℕ ↦ (sfReductionRestricted l E X n).mapHomologicalComplex (.up ℤ)

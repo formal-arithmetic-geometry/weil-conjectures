@@ -79,11 +79,7 @@ private theorem rawOutput_resComp {X Y : Scheme.{u}} {f : X ⟶ Y}
   exact eq_of_heq (rawOutput_app_heq
     (compactSupportQuotientResComp l E Y r m n hrm hmn).hom he)
 
-/-- The transported composition with exactly the original compact-support expressions.
-Source: the normalized coefficient square and naturality.
-Proof: obtain the transported composition from the proved pair of output laws.
-Rewrite each intrinsic functor to the identical ambient presentation and specialize
-that composition to the three levels. No quotient map or equality cast changes. -/
+/-- The transported composition with exactly the original compact-support expressions. -/
 theorem compactSupportQuotient_raw_output_composition
     (k : Type u) [Field k] (_hl : IsUnit (l : k))
     {X Y : Scheme.{u}} {f : X ⟶ Y}

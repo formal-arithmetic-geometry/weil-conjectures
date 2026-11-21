@@ -23,8 +23,11 @@ import all WeilConjectures.SmoothPurity.Compact.CompactSupportFiniteAction
 
 /-! # Single-operation bounds for completed compact support
 
-Source: Stacks 0941, 0F10 and 0F7J; the common-bound argument in
-lem-sf-completed-shriek-composition-laws, steps 7 and 8.
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0F10]
+* [Stacks, Tag 0F7J]
 -/
 
 @[expose] public noncomputable section
@@ -485,22 +488,7 @@ private theorem nativePush_normalized
   exact Function.Bijective.of_comp_left (f := fun z ↦ z ≫ ε.hom.app P) hb
     (fun a b hab ↦ (cancel_mono (ε.hom.app P)).mp hab)
 
-/-- One proper letter preserves the system domain and integral constructibility.
-Source: Stacks 0F10, 0941; parent proof steps 7 and 8.
-
-Proof: choose a uniform relative fibre-dimension bound for the proper morphism.
-The finite-ring compact-support bound with identity open gives constructibility and
-common cohomology and Tor intervals, which the specified evaluation transports to
-the system image. The existing bound needs no separatedness of the structure maps.
-Identify the specified system image with the native varying-ring image by uniqueness
-of adjoints. Input normalization makes every scalar-adjoint quotient transition an
-isomorphism. Finite compact-support scalar comparison and the native coefficient
-transition square then make the output quotient adjunct an isomorphism, which is
-exactly output normalization. At each output level choose a bounded etale origin;
-full faithfulness lifts the actual transitions and proves both compatibility squares.
-For the independent integral input, identify the ringed image with the canonical
-completed direct image. Integral direct-image constructibility, completeness of
-completed direct image, and its reduction isomorphisms give the assertion. -/
+/-- One proper letter preserves the system domain and integral constructibility. -/
 theorem properSupportStep_bounds (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (o : Operations l E) {X Y : Over (Spec (CommRingCat.of D.k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]

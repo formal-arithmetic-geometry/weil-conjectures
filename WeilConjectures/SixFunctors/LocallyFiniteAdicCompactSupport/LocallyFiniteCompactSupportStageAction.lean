@@ -193,18 +193,7 @@ variable (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
   (P : CoefficientConstruction l (ULift.{u} (PadicAlgCl l)) D hl (f := f))
   (c : Compactification f)
 
-/-- Rational compact support with its prescribed scalar comparisons is a stage morphism.
-
-Proof: at E take the rational operation of P at finiteField E, and for E ≤ L take
-P.fields.rationalComparison along coefficientInclusion. Identify the transition
-functors with GeneralAlgebraicallyClosedCoefficients.transition using the specification
-of stageSystem. The associators are its normalized balanced-tensor associators.
-The composition clause of normalized_rational_left_laws gives the stage morphism equation,
-after identifying the composite coefficient inclusion with the inclusion E ≤ M.
-Transport these functors and comparisons through the specified transition equalities.
-This retains the exact functors and scalar comparisons as heterogeneous equalities,
-including E = L. The coherence proof is a proposition, so introduces no new choices.
-The auxiliary lifted closure does not change the finite coefficient fields. -/
+/-- Rational compact support with its prescribed scalar comparisons is a stage morphism. -/
 theorem locally_finite_compact_support_stage_action :
     Nonempty (StageAction l D hl P c) := by
   obtain ⟨A, ha, hb⟩ := stageAction_exists l (PadicAlgCl l) D hl P c

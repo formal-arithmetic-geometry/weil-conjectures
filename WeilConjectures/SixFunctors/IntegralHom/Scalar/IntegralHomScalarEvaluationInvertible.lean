@@ -11,6 +11,13 @@ import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralReductionDualiz
 import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralReductionTensorAssociativity
 
 /-! # Invertibility of the scalar transpose of reduced evaluation
+
+## References
+
+* [Stacks, Tag 07A4]
+* [Stacks, Tag 07A6]
+* [Stacks, Tag 08J7]
+* [Stacks, Tag 08J9]
 -/
 
 @[expose] public section
@@ -30,25 +37,7 @@ attribute [local irreducible] HasDerivedCategory.standard RingedDerivedNative.mo
 -- Independent coefficient universes require extra elaboration of localization instances.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The completed-ring transpose of scalar-reduced evaluation is invertible.
-This is a scalar assertion with no chosen representatives and no signed chain map.
-
-Source: blueprint `lem-coef-integral-hom-reduction.proof.md`, paragraphs 1--2;
-Stacks Tags 07A4, 07A6, 08J7 and 08J9.
-
-Proof: the two-term resolution of the restricted quotient unit has dualizable
-terms, so its localization is dualizable. The coefficient-resolution comparison
-identifies restricted reduction B=UF with tensor by this coefficient; evaluating
-at the unit shows B(unit) is dualizable. The normalized tensor mate p is an
-invertible associative tensor strength. Its value at (X,unit), followed by the
-right unitor, identifies B with tensor by B(unit), compatibly with p. For a left
-dual D of B(unit), conjugate the associator between the two composites of the
-coefficient-duality and tensor-Hom adjunctions. The resulting right-adjoint
-isomorphism is exactly the evaluation transpose. Transport the tensor-Hom
-adjunction along the constructed native tensor comparison and cancel its inverse
-maps in the counit. Finally scalar-adjunction naturality combines p with B of
-evaluation and gives the displayed map. The middle scalar counit is precisely
-that in the definition of p. No perfection of K or L is used. The zero quotient
-and empty site satisfy the same argument. -/
+This is a scalar assertion with no chosen representatives and no signed chain map. -/
 theorem scalar_reduced_evaluation_transpose_isIso
     (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))
     (n : ℕ) (m : ReductionPresentation l E Y D hl a n)

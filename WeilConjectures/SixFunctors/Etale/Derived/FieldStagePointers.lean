@@ -14,31 +14,28 @@ public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
 /-!
 # Properties of the field coefficient stages
 
-Three remarks of blueprint `theorem-f-shriek-ell-adic-coefficients--4` point to properties of the
-field coefficient stages proved elsewhere in the blueprint:
+Three properties of the field coefficient stages:
 
 * the rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ]` is idempotent complete, so that the
   canonical functor into its Karoubi envelope is an equivalence;
 * the common-stage category `Dᵇc(X, ℚ̄_ℓ)` is idempotent complete, so that the canonical functor
   into its Karoubi envelope is an equivalence;
 * at a field coefficient, every bounded constructible complex has finite Tor amplitude, so that
-  `Dᵇctf = Dᵇc` (`proposition-ctf-equals-bc`, from `proposition-ctf-equals-bc`).
+  `Dᵇctf = Dᵇc`.
 
-## Implementation notes
+## Implementation details
 
-* The Karoubi envelopes carry no triangulated structure in this repository, so "exact
-  equivalence" is rendered as an equivalence of categories.
+* The Karoubi envelopes carry no triangulated structure, so "exact equivalence" is rendered as
+  an equivalence of categories.
 * The stage `ℚ̄_ℓ` is `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleAdic`, the
   Bhatt–Scholze model of the common-stage category.
-* The derived tensor product of the field stages is only available, in this repository, for
-  étale sheaves of modules over a discrete coefficient field `F`; the Tor amplitude statements
-  are made there.
-* The idempotent completeness of `Dᵇc(X, ℚ̄_ℓ)` and the lemma `proposition-ctf-equals-bc` belong
-  to other parts of the blueprint. In the Bhatt–Scholze model, idempotent completeness of
-  `Dᵇc(X, ℚ̄_ℓ)` needs no descent to finite stages: an idempotent of a bounded object of
-  `D(X_proét, ℚ̄_ℓ)` splits (`CategoryTheory.Triangulated.TStructure.isSplit_of_isGE_of_isLE`),
-  and `Dᵇc(X, ℚ̄_ℓ)` is stable under retracts, retracts of constructible sheaves being
-  constructible (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.of_retract`).
+* The derived tensor product of the field stages is only available for étale sheaves of modules
+  over a discrete coefficient field `F`; the Tor amplitude statements are made there.
+* In the Bhatt–Scholze model, idempotent completeness of `Dᵇc(X, ℚ̄_ℓ)` needs no descent to
+  finite stages: an idempotent of a bounded object of `D(X_proét, ℚ̄_ℓ)` splits
+  (`CategoryTheory.Triangulated.TStructure.isSplit_of_isGE_of_isLE`), and `Dᵇc(X, ℚ̄_ℓ)` is
+  stable under retracts, retracts of constructible sheaves being constructible
+  (`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.of_retract`).
 -/
 
 @[expose] public section
@@ -54,9 +51,7 @@ open Pretriangulated
 variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
 
 /-- A triangulated property of objects of `D(C)`, closed under isomorphisms, which holds for
-every object of `C` placed in degree `0` holds for every bounded object: by induction on the
-length of the range of `K`, along the truncation triangle `τ_{< b} K ⟶ K ⟶ τ_{≥ b} K ⟶` whose
-third term is `Hᵇ K` placed in degree `b`. -/
+every object of `C` placed in degree `0` holds for every bounded object. -/
 lemma prop_of_isGE_of_isLE_of_forall_singleFunctor (P : ObjectProperty (DerivedCategory C))
     [P.IsTriangulated] [P.IsClosedUnderIsomorphisms]
     (h : ∀ G : C, P ((singleFunctor C 0).obj G)) (K : DerivedCategory C) (a b : ℤ)
@@ -104,11 +99,8 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _
 
-/-- Pointer to the properties of the rationalization.
-
-The rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ_E]`, in which no idempotent is adjoined, is
-nevertheless idempotent complete, so that the canonical functor into its Karoubi envelope is an
-equivalence. -/
+/-- The rationalization `Dᵇc(X, E) = Dᵇc(X, 𝒪_E)[1/ϖ_E]` is idempotent complete, so that the
+canonical functor into its Karoubi envelope is an equivalence. -/
 theorem Etale.DerivedCategory.isIdempotentComplete_and_isEquivalence_toKaroubi_rational
     (X : Scheme.{u}) :
     IsIdempotentComplete
@@ -124,9 +116,7 @@ section AlgebraicClosure
 
 variable (l : ℕ) [Fact l.Prime]
 
-/-- The common-stage category `Dᵇc(X, ℚ̄_ℓ)` is stable under retracts: the homology sheaves of a
-retract are retracts of constructible sheaves
-(`AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf.of_retract`). -/
+/-- The common-stage category `Dᵇc(X, ℚ̄_ℓ)` is stable under retracts. -/
 instance ProEtale.DerivedCategory.isStableUnderRetracts_boundedConstructibleAdic
     (X : Scheme.{u}) :
     (ProEtale.DerivedCategory.boundedConstructibleAdic l X).IsStableUnderRetracts where
@@ -138,9 +128,7 @@ instance ProEtale.DerivedCategory.isStableUnderRetracts_boundedConstructibleAdic
       fun n ↦ (ProEtale.adicConstructibleSheaf l X).prop_of_retract
         (e.map (_root_.DerivedCategory.homologyFunctor _ n)) (hc n)⟩
 
-/-- Idempotent completeness of the common-stage category.
-
-The common-stage category `Dᵇc(X, ℚ̄_ℓ)` (in its Bhatt–Scholze model
+/-- The common-stage category `Dᵇc(X, ℚ̄_ℓ)` (in its Bhatt–Scholze model
 `AlgebraicGeometry.ProEtale.DerivedCategory.boundedConstructibleAdic`) is idempotent complete. -/
 theorem ProEtale.DerivedCategory.isIdempotentComplete_boundedConstructibleAdic
     (X : Scheme.{u}) :
@@ -156,10 +144,8 @@ theorem ProEtale.DerivedCategory.isIdempotentComplete_boundedConstructibleAdic
     ⟨i, r, hir⟩ K.property⟩, ObjectProperty.homMk i, ObjectProperty.homMk r,
     by cat_disch, by cat_disch⟩
 
-/-- Pointer to the properties of the common-stage category.
-
-The common-stage category `Dᵇc(X, ℚ̄_ℓ)`, in which no idempotent is adjoined, is nevertheless
-idempotent complete, so that the canonical functor into its Karoubi envelope is an equivalence. -/
+/-- The common-stage category `Dᵇc(X, ℚ̄_ℓ)` is idempotent complete, so that the canonical
+functor into its Karoubi envelope is an equivalence. -/
 theorem ProEtale.DerivedCategory.isIdempotentComplete_and_isEquivalence_toKaroubi_adic
     (X : Scheme.{u}) :
     IsIdempotentComplete (ProEtale.DerivedCategory.boundedConstructibleAdic l X).FullSubcategory ∧
@@ -174,19 +160,9 @@ section FieldTorAmplitude
 
 variable (F : Type (u + 1)) [Field F] (X : Scheme.{u})
 
-/-- Finite Tor amplitude at field coefficients.
-
-For a coefficient field `F`, every bounded constructible complex `K` of étale sheaves of
-`F`-modules has finite Tor amplitude: there are `a ≤ b` with `𝓗ʳ(K ⊗ᴸ_F M) = 0` for `r ∉ [a, b]`
-and every sheaf `M` of `F`-modules.
-
-The blueprint node is stated for the rationalized category `Dᵇc(Y, E)` and for the common-stage
-category `Dᵇc(Y, ℚ̄_ℓ)`. In this repository these have no derived tensor product with sheaves, so
-the statement is formalised for étale sheaves of modules over a discrete field `F`.
-
-Every sheaf of `F`-modules is flat (its stalks are `F`-vector spaces), so each sheaf placed in
-degree `0` has Tor amplitude in `[0, 0]`; finite Tor amplitude is a triangulated property, so it
-holds for every bounded complex, by induction along truncation triangles. -/
+/-- Finite Tor amplitude at field coefficients: for a coefficient field `F`, every bounded
+constructible complex `K` of étale sheaves of `F`-modules has finite Tor amplitude, i.e. there
+are `a ≤ b` with `𝓗ʳ(K ⊗ᴸ_F M) = 0` for `r ∉ [a, b]` and every sheaf `M` of `F`-modules. -/
 theorem Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_field
     {K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} F))}
     (hK : Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} F) X K) :
@@ -197,12 +173,8 @@ theorem Etale.DerivedCategory.finiteTorAmplitude_of_boundedConstructible_of_fiel
   exact (Etale.flat_iff_forall_flat_sheafFiber_obj G).2 fun _ ↦
     (ModuleCat.flat_iff_flat _).2 inferInstance
 
-/-- Pointer to the properties of finite Tor
-amplitude.
-
-At a field coefficient `F` the finite-Tor category is the bounded constructible one,
-`Dᵇctf(X, F) = Dᵇc(X, F)`, consistently with the amplitude condition: every bounded constructible
-complex at a field coefficient has finite Tor amplitude. -/
+/-- At a field coefficient `F` the finite-Tor category is the bounded constructible one,
+`Dᵇctf(X, F) = Dᵇc(X, F)`. -/
 theorem Etale.DerivedCategory.constructibleFiniteTor_eq_boundedConstructible_of_field :
     Etale.DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} F) X =
       Etale.DerivedCategory.boundedConstructible (ModuleCat.{u + 1} F) X := by

@@ -17,15 +17,7 @@ inverse image `Ri^!` (the right adjoint of `Ri_! = Ri_*` on `D(T_ét, Λ)`) carr
 homology in `[a, b]` to complexes with homology in `[a, b + c + 1]`
 (`AlgebraicGeometry.Etale.homologyConcentratedIn_rightDerivedUpperShriek`), and under the full
 open-complement condition `D_c^{[a, b]}(T, Λ)` into `D_c^{[a, b + c + 1]}(Z, Λ)`
-(`AlgebraicGeometry.Etale.constructibleIn_rightDerivedUpperShriek`). Together these are blueprint
-`theorem-f-shriek-finite-coefficients--1`.
-
-The proof uses the supported localization triangle
-`Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶ (Ri_! Ri^! K)[1]`
-(`AlgebraicGeometry.Etale.supportedLocalizationTriangle_mem_distTriang`): `Rj_* j^* K` has
-homology in `[a, b + c]`, so `Ri_! Ri^! K` has homology in `[a, b + c + 1]`, and
-`Ri^! K ≅ i^* Ri_! Ri^! K` since `Ri_!` is fully faithful
-(`AlgebraicGeometry.Etale.mapDerivedUpperStarRightDerivedLowerShriekIso`).
+(`AlgebraicGeometry.Etale.constructibleIn_rightDerivedUpperShriek`).
 -/
 
 @[expose] public section
@@ -45,9 +37,7 @@ namespace Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {Z T U : Scheme.{u}}
 
 /-- For a closed immersion `i`, the pullback `i^*` is left inverse to `Ri_!`:
-`i^* Ri_! N ≅ N`. Indeed `Ri_!` is fully faithful
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_app`) and isomorphic to
-`Ri_*`, so the counit of `i^* ⊣ Ri_*` is an isomorphism. -/
+`i^* Ri_! N ≅ N`. -/
 noncomputable def mapDerivedUpperStarRightDerivedLowerShriekIso (i : Z ⟶ T) [IsClosedImmersion i]
     [HasCompactification i]
     (N : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -109,19 +99,10 @@ lemma homologyConcentratedIn_rightDerivedLowerShriek_rightDerivedUpperShriek {c 
     _root_.DerivedCategory.TStructure.t.isLE₂ _ hT (b + c + 1) h₁' h₃'⟩
 
 include hij in
-/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Closed-support amplitude.
-
-Let `i : Z ⟶ T` be a closed immersion with open complement `j : U ⟶ T`, and `Λ` a finite ring.
-Suppose that `R^q j_* M = 0` for every sheaf `M` of `Λ`-modules on `U_ét` and every `q > c`. Then
-the exceptional inverse image `Ri^!` carries `D^{[a, b]}(T_ét, Λ)` into
-`D^{[a, b + c + 1]}(Z_ét, Λ)`. The constructible version is
-`AlgebraicGeometry.Etale.constructibleIn_rightDerivedUpperShriek`.
-
-The supported localization triangle `Ri_! Ri^! K ⟶ K ⟶ Rj_* j^* K ⟶` puts `Ri_! Ri^! K` in
-`[a, b + c + 1]`, as `Rj_* j^* K` lies in `[a, b + c]`
-(`AlgebraicGeometry.Etale.homologyConcentratedIn_rightDerivedLowerShriek_rightDerivedUpperShriek`),
-and the exact `i^*` recovers `Ri^! K ≅ i^* Ri_! Ri^! K`
-(`AlgebraicGeometry.Etale.mapDerivedUpperStarRightDerivedLowerShriekIso`). -/
+/-- Closed-support amplitude: let `i : Z ⟶ T` be a closed immersion with open complement
+`j : U ⟶ T`, and `Λ` a finite ring. Suppose that `R^q j_* M = 0` for every sheaf `M` of
+`Λ`-modules on `U_ét` and every `q > c`. Then the exceptional inverse image `Ri^!` carries
+`D^{[a, b]}(T_ét, Λ)` into `D^{[a, b + c + 1]}(Z_ét, Λ)`. -/
 theorem homologyConcentratedIn_rightDerivedUpperShriek {c : ℕ}
     (hc : ∀ (M : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), c < q →
       IsZero (higherDirectImage Λ j q M))
@@ -145,9 +126,7 @@ theorem homologyConcentratedIn_rightDerivedUpperShriek {c : ℕ}
 
 include hij in
 /-- Under the open-complement condition with constant `c`, the supported term `Ri_! Ri^! K` of
-the supported localization triangle of a bounded constructible `K` is bounded constructible:
-`K` and `Rj_* j^* K` are, by dévissage of `Rj_*` to constructible sheaves
-(`AlgebraicGeometry.Etale.boundedConstructible_obj_of_forall_singleFunctor`). -/
+the supported localization triangle of a bounded constructible `K` is bounded constructible. -/
 lemma boundedConstructible_rightDerivedLowerShriek_rightDerivedUpperShriek {c : ℕ}
     (h : OpenComplementCondition Λ j c)
     {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -171,19 +150,10 @@ lemma boundedConstructible_rightDerivedLowerShriek_rightDerivedUpperShriek {c : 
     (supportedLocalizationTriangle_mem_distTriang Λ i j hij K) hK hC
 
 include hij in
-/-- Blueprint `theorem-f-shriek-finite-coefficients--1`: Closed-support amplitude, constructible
-version.
-
-Let `i : Z ⟶ T` be a closed immersion with open complement `j : U ⟶ T`, and `Λ` a finite ring.
-If `(U, T)` satisfies the open-complement condition with constant `c`
-(`AlgebraicGeometry.Etale.OpenComplementCondition`: `R^q j_*` vanishes above `c` and preserves
-constructibility), then `Ri^!` carries `D_c^{[a, b]}(T, Λ)` into `D_c^{[a, b + c + 1]}(Z, Λ)`.
-
-The amplitude is `AlgebraicGeometry.Etale.homologyConcentratedIn_rightDerivedUpperShriek`. For
-constructibility, the supported term `Ri_! Ri^! K` of the supported localization triangle is
-bounded constructible
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerShriek_rightDerivedUpperShriek`),
-and so is its pullback `i^* Ri_! Ri^! K ≅ Ri^! K`. -/
+/-- Closed-support amplitude, constructible version: let `i : Z ⟶ T` be a closed immersion with
+open complement `j : U ⟶ T`, and `Λ` a finite ring. If `(U, T)` satisfies the open-complement
+condition with constant `c` (`AlgebraicGeometry.Etale.OpenComplementCondition`), then `Ri^!`
+carries `D_c^{[a, b]}(T, Λ)` into `D_c^{[a, b + c + 1]}(Z, Λ)`. -/
 theorem constructibleIn_rightDerivedUpperShriek {c : ℕ} (h : OpenComplementCondition Λ j c)
     {a b : ℤ} {K : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (hK : DerivedCategory.constructibleIn (ModuleCat.{u + 1} Λ) T a b K) :

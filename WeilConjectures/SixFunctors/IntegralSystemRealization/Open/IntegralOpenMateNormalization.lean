@@ -7,7 +7,14 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.IntegralSystemCanonicalBridge
 import WeilConjectures.SixFunctors.GeneratorReduction.OpenReconstructionEffectivity
 
-/-! # Open reduction as the normalized adjunction mate -/
+/-! # Open reduction as the normalized adjunction mate
+
+## References
+
+* [Stacks, Tag 0GL1]
+* [Stacks, Tag 0E8I]
+* [Stacks, Tag 07A7]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -23,20 +30,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The canonical open mate is invertible on complete constructible inputs, and its
-output has invertible reconstruction unit.
-Source: Stacks 0GL1, 0E8I and 07A7; primitive realization Step 4.
-
-Proof: use integralOpenReductionComparison on the actual slice presentation of j.
-Uniqueness of the left adjoints to the fixed reconstruction limit identifies its
-reduction calculus with calculus. Uniqueness of extension by zero as the left adjoint
-to the fixed inverse image identifies its whole-system open operation with o.extension.
-The quotient-complex model equation for m.reductionPull identifies its restriction
-square with the specified slice square before localization. Taking open-adjunction
-mates therefore identifies the theorem's inverse reduction comparison with
-m.openReduction. The theorem proves completeness of the integral open extension and
-invertibility of its actual reconstruction unit. Transport these conclusions through
-the normalized identifications. The empty open and identity open use the same adjoint
-uniqueness and require no nonempty hypothesis. -/
+output has invertible reconstruction unit. -/
 theorem integralOpenMateNormalization (o : Operations l E) (m : RealizationModel l E o)
     {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j] [QuasiCompact j]
     (hX : IsUnit (l : Γ(X, ⊤))) (hY : IsUnit (l : Γ(Y, ⊤)))

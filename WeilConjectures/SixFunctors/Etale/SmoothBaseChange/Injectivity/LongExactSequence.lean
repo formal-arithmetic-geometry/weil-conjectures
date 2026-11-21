@@ -31,7 +31,7 @@ dévissage of `WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Devissage`.
   form a morphism between the two long exact sequences attached to a short exact sequence of
   coefficient sheaves.
 
-## Implementation notes
+## Implementation details
 
 The long exact sequences are the homology sequences of the images of the distinguished triangle
 `F₁[0] ⟶ F₂[0] ⟶ F₃[0] ⟶ F₁[1]` under the triangulated functors `p^* ∘ Rg_*` and
@@ -53,9 +53,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} {p : X ⟶ S}
   {T Y : Scheme.{u}} {g : T ⟶ S} {e : Y ⟶ T} {h : Y ⟶ X}
 
 /-- The source of the base-change map vanishes in nonzero degrees on an injective sheaf `I`:
-the derived pushforward of `I` placed in degree `0` is `g_* I` placed in degree `0`, so
-`p⁻¹ R^q g_* I = 0` for `q ≠ 0`. This is the injective-acyclicity input of the blueprint
-lemma `lemma-injectivity-base-change-map-degree`. -/
+`p⁻¹ R^q g_* I = 0` for `q ≠ 0`. -/
 lemma Etale.isZero_baseChangeSourceFunctor_obj_of_injective (p : X ⟶ S) (g : T ⟶ S) {q : ℤ}
     (hq : q ≠ 0) (I : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective I] :
     IsZero ((Etale.baseChangeSourceFunctor Λ p g q).obj I) := by
@@ -71,7 +69,7 @@ lemma Etale.isZero_baseChangeSourceFunctor_obj_of_injective (p : X ⟶ S) (g : T
 
 /-- For `q ≠ 0` and a morphism `α : F ⟶ G` to an injective sheaf `G`, the composite
 `p⁻¹ R^q g_* F ⟶ R^q h_* e⁻¹ F ⟶ R^q h_* e⁻¹ G` of the base-change map with `R^q h_* e⁻¹ α`
-vanishes: by naturality it factors through `p⁻¹ R^q g_* G`, which is zero. -/
+vanishes. -/
 lemma Etale.baseChangeHomologyMap_comp_map_eq_zero_of_injective (sq : IsPullback e h g p)
     {q : ℤ} (hq : q ≠ 0) {F G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (α : F ⟶ G) [Injective G] :
@@ -99,14 +97,7 @@ p⁻¹ R^{n₀} g_* F₃ --δS--> p⁻¹ R^{n₁} g_* F₁
 R^{n₀} h_* e⁻¹ F₃ --δT--> R^{n₁} h_* e⁻¹ F₁
 ```
 
-of base-change maps commutes.
-
-This is the long exact sequence input of the blueprint lemma
-`lemma-injectivity-base-change-map-degree`. It comes from the
-distinguished triangle of the short exact sequence: its images under the triangulated functors
-`p^* ∘ Rg_*` and `Rh_* ∘ e^*` are distinguished, and the derived base-change morphism
-`AlgebraicGeometry.Etale.baseChange` is a morphism between them since it commutes with the shifts
-(`AlgebraicGeometry.Etale.commShift_baseChange`). -/
+of base-change maps commutes. -/
 theorem Etale.exists_connecting_baseChangeHomologyMap (sq : IsPullback e h g p)
     {E : ShortComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (hE : E.ShortExact)
     (n₀ n₁ : ℤ) (hn : n₀ + 1 = n₁) :

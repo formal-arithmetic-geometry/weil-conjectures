@@ -31,12 +31,6 @@ canonical base change map
 on sheaves for the small étale sites, and proves that it is an isomorphism when the square
 is cartesian.
 
-The map is the conjugate, under `j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`,
-of the base change map `Etale.baseChangeMap A sq.flip : g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` of the
-flipped square. It exists for every commutative square. For a cartesian square it is the
-conjugate of an isomorphism by étale base change for the pushforward
-(`AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`), hence an isomorphism.
-
 For `g' = 𝟙` this recovers `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChange`
 (`AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_id_left`).
 
@@ -54,8 +48,15 @@ For `g' = 𝟙` this recovers `AlgebraicGeometry.Etale.openImmersionLowerShriekB
   base change map is `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChange`.
 - `AlgebraicGeometry.Etale.openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap`: the
   comparison `j_! ⟶ j_*` intertwines this base change map with the base change map
-  `g''^* j_* ⟶ j'_* g'^*` of the pushforward. Both sides are compared through their
-  transposes under `j'_! ⊣ j'^*` and `j'^* ⊣ j'_*`.
+  `g''^* j_* ⟶ j'_* g'^*` of the pushforward.
+
+## Implementation details
+
+The map is the conjugate, under `j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`,
+of the base change map `Etale.baseChangeMap A sq.flip : g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` of the
+flipped square. It exists for every commutative square. For a cartesian square it is the
+conjugate of an isomorphism by étale base change for the pushforward
+(`AlgebraicGeometry.Etale.isIso_baseChangeMap_flip_of_isPullback`), hence an isomorphism.
 -/
 
 @[expose] public section
@@ -99,10 +100,7 @@ Sh(Z) --g''^*--> Sh(Z')
 It is the conjugate of the base change map
 `Etale.baseChangeMap A sq.flip : g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` under the adjunctions
 `j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`.
-
-This map exists for every commutative square, and it runs *against* the direction of the
-exchange map `Ex_!` of the blueprint, which is its inverse for a
-cartesian square (`AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekBaseChangeMap`). -/
+It exists for every commutative square. -/
 noncomputable def Etale.openImmersionLowerShriekBaseChangeMap (sq : CommSq g' j' j g'') :
     (g')^*[A] ⋙ (j')_!open[A] ⟶ (j)_!open[A] ⋙ (g'')^*[A] :=
   (conjugateEquiv ((Etale.openImmersionLowerShriekUpperStarAdjunction A j).comp
@@ -113,8 +111,7 @@ noncomputable def Etale.openImmersionLowerShriekBaseChangeMap (sq : CommSq g' j'
 
 /-- **Base change for the extension by zero along a cartesian square**: if the square
 `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions is cartesian, the base change map
-`j'_! g'^* ⟶ g''^* j_!` is an isomorphism, being the conjugate of the isomorphism
-`Etale.baseChangeMap A hsq.toCommSq.flip`. -/
+`j'_! g'^* ⟶ g''^* j_!` is an isomorphism. -/
 lemma Etale.isIso_openImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :
     IsIso (Etale.openImmersionLowerShriekBaseChangeMap A hsq.toCommSq) :=
   have := Etale.isIso_baseChangeMap_flip_of_isPullback A hsq

@@ -8,7 +8,13 @@ module
 public import WeilConjectures.SixFunctors.IntegralHom.Reduction.IntegralHomReductionModels
 import all WeilConjectures.SixFunctors.IntegralHom.Tensor.TensorHomEvaluationExt
 
-/-! # Equality of Hom-complex maps detected by homogeneous local evaluation -/
+/-! # Equality of Hom-complex maps detected by homogeneous local evaluation
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 03EO]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -20,17 +26,7 @@ namespace WeilConjectures.IntegralHom
 attribute [local implicit_reducible] homComplex evaluate projection
 attribute [local irreducible] homComplexFunctor
 
-/-- Homogeneous evaluations over identity slices detect maps into a Hom complex.
-
-Source: the evaluation argument in paragraph 1 of the current blueprint
-`lem-coef-integral-hom-reduction.proof.md`; Stacks Tags 03EK and 03EO.
-
-Proof: compare the chain maps in each degree. The Hom degree is the product of
-internal Hom objects indexed by the source degree; its product projections are
-jointly injective on morphisms. Compare each projection as a sheaf morphism.
-Identity-slice evaluation detects maps into each internal Hom, since naturality
-recovers every other slice. The hypothesis gives exactly these evaluations.
-This includes zero complexes, all integer degrees and the empty site. -/
+/-- Homogeneous evaluations over identity slices detect maps into a Hom complex. -/
 theorem homComplex_evaluation_ext
     (Y : AlgebraicGeometry.Scheme.{t})
     (R : Sheaf (AlgebraicGeometry.Scheme.ProEt.topology Y) CommRingCat.{max u (t + 1)})

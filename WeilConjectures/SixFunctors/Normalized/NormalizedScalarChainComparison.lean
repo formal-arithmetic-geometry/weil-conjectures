@@ -26,7 +26,13 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
-/-! # Normalized scalar comparison on total cochain tensors -/
+/-! # Normalized scalar comparison on total cochain tensors
+
+## References
+
+* [Stacks, Tag 03EK]
+* [Stacks, Tag 07A4]
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -48,13 +54,7 @@ namespace WeilConjectures
 
 universe c₁ v₁ r w
 
-/-- Scalar extension commutes with total tensor, with its unit normalization.
-Source: Stacks 03EK and 07A4.
-Proof: totalize the inverse ordinary scalar tensor comparison. The left adjunction
-makes scalar extension preserve coproducts, so the totalized map is invertible.
-Its naturality follows on each summand. Unit naturality and the ordinary pure-tensor
-formula identify its inverse on homogeneous generators. Apply the inverse once more
-to obtain the stated formula. -/
+/-- Scalar extension commutes with total tensor, with its unit normalization. -/
 theorem normalizedScalarChainComparison
     {C : Type c₁} [Category.{v₁} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{max c₁ v₁ r} C]

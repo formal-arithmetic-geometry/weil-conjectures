@@ -8,7 +8,16 @@ module
 public import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenTransportAdjunct
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralSystemProperOpenTransportBridge
 
-/-! Canonical part of the intrinsic proper/open transport package. -/
+/-! # Canonical proper/open transport
+
+Canonical part of the intrinsic proper/open transport package.
+
+## References
+
+* Zheng, Construction 4.1 and Lemma 4.10
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0F7B]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -18,11 +27,7 @@ namespace WeilConjectures.IntegralSystemRealization
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
-/-- The canonical bridge compatibility for an adjunct-normalized gamma.
-Source: Zheng Construction 4.1 and Lemma 4.10; Stacks 0F7B and 07A7.
-Proof: substitute the transported gamma and cancel adjacent bridge isomorphisms;
-naturality of the bridge and the intrinsic canonical gamma equation leave the
-stated canonical clause. -/
+/-- The canonical bridge compatibility for an adjunct-normalized gamma. -/
 theorem integralSystemProperOpenTransportCanonical (o : Operations l E)
     (c : Compositors l E o) (a : OpenComparisons l E o c) (b : CanonicalBridge l E o)
     (h₀ : ProperOpenTransportAdjunct l E o c a b) :

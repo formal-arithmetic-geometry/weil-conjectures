@@ -32,25 +32,13 @@ locally on `X`, that is for `X ⟶ S` factored as a closed immersion `i : X ⟶ 
 - `AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic`:
   for `K ∈ Dctf(X, Λ)`, `Lg^* δ_K` is an isomorphism if and only if `δ_{Lg^* K}` is.
 
-## Proof
-
-First, `ω_X ≅ ω_{X/S} ⊗ᴸ (i ≫ p)^* ω_S` with `ω_S` invertible
-(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_comp_of_isInvertible`), and
-`ω_{X/S} ≅ Ri^! ω_p`. Closed-support generic exchange
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_generic`) gives
-`g^* Ri^! ω_p ≅ Ri'^! g_P^* ω_p`, smooth base change gives `g_P^* ω_p ≅ ω_{p'}`, and
-`Ri'^! ω_{p'} ≅ ω_{X_T/T}`. This is the first assertion, with `L = g^* (i ≫ p)^* ω_S`.
-The second follows from the formal statement
-`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff`, the
-internal-hom comparisons at `(K, ω_X)` and `(𝔻_X K, ω_X)` being isomorphisms by the generic
-internal-hom exchange (`AlgebraicGeometry.Etale.isIso_derivedHomUpperStarComparison_of_generic`),
-since `ω_X` is bounded constructible and `𝔻_X K ∈ Dctf(X, Λ)`
-(`AlgebraicGeometry.Etale.constructibleFiniteTor_and_torAmplitudeIn_verdierDual_of_perfectField`).
-
-## Implementation notes
+## Implementation details
 
 The second statement takes the braided axiom `AlgebraicGeometry.Etale.LeftDerivedUpperStarBraided`
-for `g` as a hypothesis; it holds by `AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`.
+for `g` as a hypothesis; it holds by `AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`. In
+the first statement, for `S` smooth over `k` the invertibility hypothesis on `ω_S` is
+`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`, and the quasi-separatedness hypothesis
+on `S` (automatic for `S` of finite type over `k`) is the one of smooth base change for `p`.
 -/
 
 @[expose] public section
@@ -71,8 +59,7 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-/-- First assertion of the double-dual lemma on a geometric generic fibre (Zariski
-locally): **the dualizing complex of a generic fibre.**
+/-- **The dualizing complex of a generic fibre** (Zariski locally on `X`).
 
 Let `S` be integral and of finite type over a field `k`, with invertible dualizing complex
 `ω_S` (e.g. `S = 𝔸¹_k`), let `Λ` be a finite ring whose exponent is invertible on `S`, and let
@@ -85,11 +72,7 @@ possible Zariski locally on `X`), and let `X' = X_T ⟶ P' = P_T ⟶ T` be the b
 
 `Lg^* ω_X ≅ ω_{X'} ⊗ᴸ L`
 
-for an invertible `L`, namely `L = Lg^* L(i ≫ p)^* ω_S` (for `S = 𝔸¹_k`, `ω_S ≅ Λ(1)[2]`).
-For `S` smooth over `k`, the hypothesis `hS` is
-`AlgebraicGeometry.Etale.isInvertible_dualizingComplex`. The hypothesis that `S` be
-quasi-separated, automatic for `S` of finite type over `k`, is that of smooth base change for
-`p`. -/
+for an invertible `L`, namely `L = Lg^* L(i ≫ p)^* ω_S` (for `S = 𝔸¹_k`, `ω_S ≅ Λ(1)[2]`). -/
 theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u} [Field k]
     {S : Scheme.{u}} [IsIntegral S] [QuasiSeparatedSpace S] (aS : S ⟶ Spec (.of k))
     [LocallyOfFiniteType aS]
@@ -157,10 +140,9 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic {k : Type u}
     ((derivedTensor (ModuleCat.{u + 1} Λ) X').mapIso e₅).app _
 
 /-- **The dualizing complex of a generic fibre**, for `S` smooth of relative dimension `rS` over
-`k` (e.g. `S = 𝔸¹_k`): the hypothesis of
-`AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic` that `ω_S` be
-invertible holds by smooth purity
-(`AlgebraicGeometry.Etale.isInvertible_dualizingComplex_of_smoothOfRelativeDimension`). -/
+`k` (e.g. `S = 𝔸¹_k`), so that `ω_S` is invertible: `Lg^* ω_X ≅ ω_{X'} ⊗ᴸ L` with `L`
+invertible, as in
+`AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic`. -/
 theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic_of_smooth {k : Type u}
     [Field k]
     {S : Scheme.{u}} [IsIntegral S] [QuasiSeparatedSpace S] (aS : S ⟶ Spec (.of k))
@@ -184,8 +166,7 @@ theorem exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic_of_smooth {k
     (isInvertible_dualizingComplex_of_smoothOfRelativeDimension Λ aS rS) t ht p r sqP i sqX aX hX
     fT hT
 
-/-- Second assertion of the double-dual lemma on a geometric generic fibre (Zariski
-locally): **the double dual on a geometric generic fibre.**
+/-- **The double dual on a geometric generic fibre** (Zariski locally on `X`).
 
 In the setting of
 `AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_dualizingComplex_of_generic` (`S`
@@ -195,10 +176,7 @@ change `g : X' ⟶ X`), let `X` be separated over `k`. For every `K ∈ Dctf(X, 
 `Lg^* δ_K` of the double-dual map relative to `a_X : X ⟶ Spec k` is an isomorphism if and only
 if the double-dual map `δ_{Lg^* K}` relative to `f_T : X' ⟶ T` is. For `T = Spec` of an
 algebraic closure of the function field of `S`, the latter is the double-dual map of the
-geometric generic fibre over its base field.
-
-The hypothesis `hbr`, that `Lg^*` is braided for the derived braidings, is
-`AlgebraicGeometry.Etale.leftDerivedUpperStarBraided`. -/
+geometric generic fibre over its base field. -/
 theorem isIso_leftDerivedUpperStar_map_verdierDualDoubleDual_app_iff_of_generic {k : Type u}
     [Field k] [PerfectField k] [HasInvertibleExponent Λ (Spec (.of k))]
     {S : Scheme.{u}} [IsIntegral S] [QuasiSeparatedSpace S] (aS : S ⟶ Spec (.of k))

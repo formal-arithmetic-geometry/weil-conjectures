@@ -11,7 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverFiel
 /-!
 # Survival of a cokernel element under cofiltered limits
 
-The ingredients of step (2) of the blueprint lemma `lemma-reduction-field--1`
+The ingredients of the passage to cofiltered limits in the detection of a failure of base change
 (`AlgebraicGeometry.Etale.survivesBaseChange_of_isLimit`): for a cofiltered system of schemes
 `T_i` over `T` with affine transition morphisms, the transition maps of the sources and of the
 targets of the base-change maps over the stages `T_i` form directed systems

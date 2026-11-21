@@ -9,7 +9,13 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Native.Integ
 import all WeilConjectures.SixFunctors.IntegralSystemRealization.IntegralDirectEvaluationMateInvertible
 import WeilConjectures.SmoothPurity.Compact.CompactSupportOrdinaryDirectEvaluationSections
 
-/-! # Ordinary native pullback evaluation -/
+/-! # Ordinary native pullback evaluation
+
+## References
+
+* [Stacks, Tag 03D2]
+* [Stacks, Tag 0941]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -201,14 +207,7 @@ private theorem finitePull_unit (A : Type u) [CommRing A] [Finite A]
   ext V x
   exact (openSquarePullbackModel_existsUnique A f).exists.choose_spec M V.unop x
 
-/-- The ordinary native pullback comparison preserves the normalized finite evaluation.
-Source: Stacks 03D2 and 0941; blueprint fix-prop-coherence, coefficient comparisons.
-
-Proof: the ordinary direct-image comparison and native direct evaluation are identity
-on sections. Uniqueness identifies their composite with the prescribed direct evaluation.
-The native and intrinsic finite pullback coordinates preserve their adjunction units.
-Taking mates and using left-adjoint uniqueness therefore gives the displayed pullback
-square. This works for every scheme map and every module, including zero and n = 0. -/
+/-- The ordinary native pullback comparison preserves the normalized finite evaluation. -/
 theorem integralNativeOrdinaryPullEvaluation {X Y : Scheme.{u}} (f : X ⟶ Y) (n : ℕ)
     (M : coefficientSequenceModules l E Y) :
     (coefficientSequenceEvaluation l E X n).map

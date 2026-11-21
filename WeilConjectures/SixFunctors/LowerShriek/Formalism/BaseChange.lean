@@ -38,8 +38,7 @@ c'.Z --h--> c.Z
 |c'.g |c.g
 Y' --g---> Y
 ```
-(for instance the base change `c.ofIsPullback sq` of `c`, blueprint
-`remark-base-change-compactification--1`), the *compact-support exchange map*
+(for instance the base change `c.ofIsPullback sq` of `c`), the *compact-support exchange map*
 
 `Ex_! : g^* Rf_!(c) ⟶ Rf'_!(c') g'^*`
 

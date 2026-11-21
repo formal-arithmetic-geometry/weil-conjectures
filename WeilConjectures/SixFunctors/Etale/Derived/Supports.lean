@@ -32,31 +32,7 @@ classes:
 
 Both are lifts through the counit `Ri_! Ri^! L ⟶ L` of a morphism whose source `K` is supported
 on `Z`, in the sense that `Lj^* K = 0` for the open complement `j` of `Z`. Such a lift exists
-and is unique by the supported localization triangle, because there are no morphisms from `K`
-or `K[1]` to `Rj_* Lj^* L` (`AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`).
-
-* Every object is supported on a closed subset with empty complement, since the derived
-  category of an empty scheme is zero.
-* An object `Ri_! B` is supported on the range of `i`
-  (`AlgebraicGeometry.Etale.isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint`),
-  and so is its pullback along any morphism, on the preimage.
-* A tensor product `Ri₁_! B₁ ⊗ Ri₂_! B₂` is supported on `Z₁ ∩ Z₂`. On the open complement `V`
-  of `Z₁ ∩ Z₂`, the restriction `T` vanishes on the complements of `Z₁` and of `Z₂`, because
-  pulling back along open immersions commutes with tensor products. So `T` is both of the form
-  `Ri_! B` supported on `Z₁ ∩ V` and of the form `Ri_* B'` on `Z₂ ∩ V`, and as these are
-  disjoint `Hom(T, T) = 0`
-  (`AlgebraicGeometry.Etale.isZero_of_isZero_leftDerivedUpperStar_of_disjoint`).
-
-## Implementation notes
-
-The two lifts, and the lift of a morphism along a surjective closed immersion, are *defined* as
-`Classical.choose` of the corresponding unique existence statements; uniqueness is what makes
-the choices canonical.
-
-The cup product is stated for classes whose degree shift is carried by the coefficients,
-`K ⟶ Ri_! Ri^! (M[a])`; a class `K ⟶ (Ri_! Ri^! M)[a]` of degree `a` is brought into this form
-through the shift compatibility of `Ri_!` and `Ri^!`
-(`AlgebraicGeometry.Etale.shiftSupportedClass`).
+and is unique (`AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`).
 
 ## Main definitions
 
@@ -74,6 +50,19 @@ through the shift compatibility of `Ri_!` and `Ri^!`
 - `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_range_eq_univ`
 - `AlgebraicGeometry.Etale.existsUnique_supportedProduct`
 - `AlgebraicGeometry.Etale.existsUnique_supportedRestriction`
+
+## Implementation details
+
+The two lifts, and the lift of a morphism along a surjective closed immersion, are *defined* as
+`Classical.choose` of the corresponding unique existence statements; uniqueness is what makes
+the choices canonical.
+
+The cup product is stated for classes whose degree shift is carried by the coefficients,
+`K ⟶ Ri_! Ri^! (M[a])`; a class `K ⟶ (Ri_! Ri^! M)[a]` of degree `a` is brought into this form
+through the shift compatibility of `Ri_!` and `Ri^!`
+(`AlgebraicGeometry.Etale.shiftSupportedClass`). A construction of the supported cup product
+through `h_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗ᴸ i₂_* Λ_{Z₂}` is
+`AlgebraicGeometry.Etale.cupSupportCohomology`.
 -/
 
 @[expose] public section
@@ -100,9 +89,7 @@ section Lift
 variable {V W U X Z Z₁ Z₂ U₁ U₂ : Scheme.{u}}
 
 /-- `Lh^* Ri_! B = 0` when `h` factors through an open immersion `j` whose range is disjoint
-from the range of `i`: by adjunction `Lj^* Ri_! B = 0` is `Hom(Ri_! B, Rj_* C) = 0`
-(`AlgebraicGeometry.Etale.subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar`),
-and `Lh^*` factors through `Lj^*`. -/
+from the range of `i`. -/
 lemma isZero_leftDerivedUpperStar_obj_rightDerivedLowerShriek_of_disjoint (i : Z ⟶ X)
     [HasCompactification i] (j : V ⟶ X) [IsOpenImmersion j]
     (hij : Disjoint (Set.range i) (Set.range j)) (h : W ⟶ X) (hh : Set.range h ⊆ Set.range j)
@@ -136,16 +123,7 @@ lemma isZero_derivedCategory_of_isEmpty (E : Scheme.{u}) [IsEmpty E]
 
 /-- **Lifts through the counit.** Let `i : Z ⟶ X` be a closed immersion with open complement
 `j : U ⟶ X`, and let `K` be supported on `Z`, i.e. `Lj^* K = 0`. Every `φ : K ⟶ L` factors
-uniquely through the counit `ε : Ri_! Ri^! L ⟶ L`.
-
-```
-                    K
-              ψ ↙ │ φ
-Ri_! Ri^! L ──ε──→ L ──→ Rj_* Lj^* L ──→ (Ri_! Ri^! L)[1]
-```
-Apply `Hom(K, -)` to the supported localization triangle in the bottom row: by adjunction
-`Hom(K, Rj_* Lj^* L)` and `Hom(K[1], Rj_* Lj^* L)` vanish, which gives existence and
-uniqueness. -/
+uniquely through the counit `ε : Ri_! Ri^! L ⟶ L`. -/
 theorem existsUnique_comp_counit_of_isZero (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
     [IsOpenImmersion j] (hij : Set.range i = (Set.range j)ᶜ)
     {K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -167,17 +145,7 @@ theorem existsUnique_comp_counit_of_isZero (i : Z ⟶ X) (j : U ⟶ X) [IsClosed
 
 /-- **Objects supported on disjoint closed subsets.** Let `c` and `d` be closed immersions into
 `X` with disjoint ranges, and `a`, `b` the open immersions of their complements. An object `T`
-with `La^* T = 0` and `Lb^* T = 0` is zero.
-
-By the supported localization triangles
-```
-Rc_! Rc^! T ──ε──→ T ──→ Ra_* La^* T = 0
-Rd_! Rd^! T ──ε──→ T ──→ Rb_* Lb^* T = 0
-```
-the counits `Rc_! Rc^! T ⟶ T` and `Rd_! Rd^! T ⟶ T` are isomorphisms. With `Rc_! ≅ Rc_*`
-(`c` is proper), `Hom(T, T)` becomes
-`Hom(Rd_! Rd^! T, Rc_* Rc^! T) ≅ Hom(Lc^* Rd_! Rd^! T, Rc^! T)`, which vanishes as
-`Lc^* Rd_! = 0`. -/
+with `La^* T = 0` and `Lb^* T = 0` is zero. -/
 lemma isZero_of_isZero_leftDerivedUpperStar_of_disjoint
     (c : Z₁ ⟶ X) (d : Z₂ ⟶ X) (a : U₁ ⟶ X) (b : U₂ ⟶ X)
     [IsClosedImmersion c] [IsClosedImmersion d] [IsOpenImmersion a] [IsOpenImmersion b]
@@ -234,18 +202,7 @@ section CupProduct
 variable {U Z₁ Z₂ Z : Scheme.{u}}
 
 /-- **Supports on everything.** For a surjective closed immersion `i : Z ⟶ U`, every morphism
-`φ : K ⟶ L` factors uniquely through the counit `ε : Ri_! Ri^! L ⟶ L`:
-
-```
-           K
-       ψ ╱ ╲ φ
-        ▼ ▼
-Ri_! Ri^! L ──ε──▶ L
-```
-
-This is `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero` for the open immersion
-`j : ∅ ⟶ U` of the empty open complement: the derived category of the empty scheme is zero, so
-`Lj^* K = 0`. -/
+`φ : K ⟶ L` factors uniquely through the counit `ε : Ri_! Ri^! L ⟶ L`. -/
 theorem existsUnique_comp_counit_of_range_eq_univ (i : Z ⟶ U) [IsClosedImmersion i]
     (hi : Set.range i.base = Set.univ)
     {K L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : K ⟶ L) :
@@ -257,11 +214,7 @@ theorem existsUnique_comp_counit_of_range_eq_univ (i : Z ⟶ U) [IsClosedImmersi
         _ _) φ
 
 /-- The lift `K ⟶ Ri_! Ri^! L` of a morphism `φ : K ⟶ L` along a surjective closed immersion
-`i`, through the counit of `Ri_! ⊣ Ri^!`.
-
-It is *defined* as `Classical.choose` of
-`AlgebraicGeometry.Etale.existsUnique_comp_counit_of_range_eq_univ`; uniqueness is what makes
-the choice canonical. -/
+`i`, through the counit of `Ri_! ⊣ Ri^!`. -/
 noncomputable def liftCounitOfRangeEqUniv (i : Z ⟶ U) [IsClosedImmersion i]
     (hi : Set.range i.base = Set.univ)
     {K L : DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))} (φ : K ⟶ L) :
@@ -269,22 +222,9 @@ noncomputable def liftCounitOfRangeEqUniv (i : Z ⟶ U) [IsClosedImmersion i]
   (existsUnique_comp_counit_of_range_eq_univ Λ i hi φ).exists.choose
 
 /-- **The product of supports.** Let `i₁ : Z₁ ⟶ U`, `i₂ : Z₂ ⟶ U` and `i : Z ⟶ U` be closed
-immersions with `Z = Z₁ ∩ Z₂`. The tensor product `ε₁ ⊗ ε₂` of the two counits factors uniquely
-through the counit `ε` of `Ri_! ⊣ Ri^!`:
-
-```
-Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ───ψ───▶ Ri_! Ri^! (M ⊗ N)
-                 ╲ │
-           ε₁ ⊗ ε₂ ╲ │ ε
-                     ▼ ▼
-                             M ⊗ N
-```
-
-The source is supported on `Z₁ ∩ Z₂`: its restriction `T` to the open complement `j` of `Z`
-restricts to zero on the complements of `Z₁` and of `Z₂`, since pulling back along open
-immersions commutes with tensor products, and these two complements cover the source of `j`
-(`AlgebraicGeometry.Etale.isZero_of_isZero_leftDerivedUpperStar_of_disjoint`). The
-factorisation is then `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`. -/
+immersions with `Z = Z₁ ∩ Z₂`. The tensor product `ε₁ ⊗ ε₂ : Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶
+M ⊗ N` of the two counits factors uniquely through the counit `ε : Ri_! Ri^! (M ⊗ N) ⟶ M ⊗ N`
+of `Ri_! ⊣ Ri^!`. -/
 theorem existsUnique_supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
@@ -325,11 +265,7 @@ theorem existsUnique_supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i
 
 /-- The *product of supports* `Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)` for closed
 immersions with `Z = Z₁ ∩ Z₂`: the unique factorisation of the tensor product of the counits
-through the counit of `Ri_! ⊣ Ri^!`.
-
-It is *defined* as `Classical.choose` of
-`AlgebraicGeometry.Etale.existsUnique_supportedProduct`; uniqueness is what makes the choice
-canonical. -/
+through the counit of `Ri_! ⊣ Ri^!`. -/
 noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
@@ -341,27 +277,14 @@ noncomputable def supportedProduct (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : 
           U).obj M).obj N)) :=
   (existsUnique_supportedProduct Λ i₁ i₂ i h M N).exists.choose
 
-/-- Cup product with closed supports
-
-The *cup product with supports* of classes `α : K ⟶ Ri₁_! Ri₁^! M` supported on `Z₁` and
+/-- The *cup product with supports* of classes `α : K ⟶ Ri₁_! Ri₁^! M` supported on `Z₁` and
 `β : K ⟶ Ri₂_! Ri₂^! N` supported on `Z₂`, a class supported on `Z = Z₁ ∩ Z₂`:
 
 `α ∪ β : K ⟶ K ⊗ K ⟶ Ri₁_! Ri₁^! M ⊗ Ri₂_! Ri₂^! N ⟶ Ri_! Ri^! (M ⊗ N)`,
 
 where `Δ : K ⟶ K ⊗ K` is a diagonal and the last map is
 `AlgebraicGeometry.Etale.supportedProduct`. For cohomology classes `K` is the unit and `Δ` the
-inverse of the unitor. Degrees are carried by the coefficients: a class of degree `a` is a class
-with coefficients `M[a]`.
-
-This is the blueprint's supported cup product
-`H^a_{Z₁}(U, M) × H^b_{Z₂}(U, N) ⟶ H^{a+b}_{Z₁ ∩ Z₂}(U, M ⊗^L N)` in the model of classes with
-supports as maps `Λ_U ⟶ Ri_! Ri^!(M[a])`. The blueprint reads a class as a map `i_* Λ_Z ⟶ M[a]`
-(`lemma-sections-support-closed-subscheme--1`), which corresponds to its adjoint, and multiplies
-through `i_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗^L i₂_* Λ_{Z₂}`; the product of supports
-`AlgebraicGeometry.Etale.supportedProduct` is the derived counterpart of this identification,
-characterised by its compatibility with the counits. The blueprint's construction itself, through
-`h_* Λ_{Z₁ ∩ Z₂} ≅ i₁_* Λ_{Z₁} ⊗ᴸ i₂_* Λ_{Z₂}`, is
-`AlgebraicGeometry.Etale.cupSupportCohomology`. -/
+inverse of the unitor; a class of degree `a` is a class with coefficients `M[a]`. -/
 noncomputable def cupWithSupports (i₁ : Z₁ ⟶ U) (i₂ : Z₂ ⟶ U) (i : Z ⟶ U)
     [IsClosedImmersion i₁] [IsClosedImmersion i₂] [IsClosedImmersion i]
     (h : Set.range i.base = Set.range i₁.base ∩ Set.range i₂.base)
@@ -394,20 +317,8 @@ variable {U X Z Z' : Scheme.{u}}
 
 /-- **Restriction of supports.** Let `e : U ⟶ X` be a morphism, `i : Z ⟶ X` a closed immersion
 and `i' : Z' ⟶ U` its base change along `e`. For `L ∈ D(X_ét)`, `L' ∈ D(U_ét)` and
-`τ : Le^* L ≅ L'`, the composite `Le^* ε ≫ τ` factors uniquely through the counit `ε'` of
-`Ri'_! ⊣ Ri'^!`:
-
-```
-Le^* (Ri_! Ri^! L) ───ψ───▶ Ri'_! Ri'^! L'
-         │ │
-  Le^* ε │ │ ε'
-         ▼ ▼
-      Le^* L ─────────τ─────────▶ L'
-```
-
-The source `Le^* Ri_! Ri^! L` is supported on `Z'`: its pullback to the open complement `j'` of
-`Z'` is `L(j' ≫ e)^* Ri_! Ri^! L`, which vanishes because `j' ≫ e` misses the range of `i`. The
-factorisation is then `AlgebraicGeometry.Etale.existsUnique_comp_counit_of_isZero`. -/
+`τ : Le^* L ≅ L'`, the composite `Le^* ε ≫ τ : Le^* (Ri_! Ri^! L) ⟶ L'` factors uniquely through
+the counit `ε' : Ri'_! Ri'^! L' ⟶ L'`. -/
 theorem existsUnique_supportedRestriction (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U)
     [IsClosedImmersion i] [IsClosedImmersion i']
  (g : Z' ⟶ Z) (hg : IsPullback g i' i e)
@@ -436,11 +347,7 @@ theorem existsUnique_supportedRestriction (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' �
 
 /-- The *restriction of supports* `Le^* (Ri_! Ri^! L) ⟶ Ri'_! Ri'^! L'` along `e : U ⟶ X`, for
 the base change `i'` of a closed immersion `i` and an identification `τ : Le^* L ≅ L'`: the unique
-factorisation of `Le^* (Ri_! Ri^! L) ⟶ Le^* L ≅ L'` through the counit of `Ri'_! ⊣ Ri'^!`.
-
-It is *defined* as `Classical.choose` of
-`AlgebraicGeometry.Etale.existsUnique_supportedRestriction`; uniqueness is what makes the
-choice canonical. -/
+factorisation of `Le^* (Ri_! Ri^! L) ⟶ Le^* L ≅ L'` through the counit of `Ri'_! ⊣ Ri'^!`. -/
 noncomputable def supportedRestriction (e : U ⟶ X) (i : Z ⟶ X) (i' : Z' ⟶ U)
     [IsClosedImmersion i] [IsClosedImmersion i']
  (g : Z' ⟶ Z) (hg : IsPullback g i' i e)

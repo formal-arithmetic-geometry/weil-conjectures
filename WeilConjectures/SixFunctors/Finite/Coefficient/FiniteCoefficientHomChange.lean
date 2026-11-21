@@ -42,8 +42,7 @@ namespace WeilConjectures
 variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
   [FiniteDimensional ℚ_[l] E] (X : Scheme.{u})
 
-/-- Coherence under composition of coefficient functors, with all three canonical arrows.
- -/
+/-- Coherence under composition of coefficient functors, with all three canonical arrows. -/
 def FiniteHomQuotientCocycleAux
     {A B C : Type a} [Category.{b} A] [Category.{b} B] [Category.{b} C]
     (HA : Aᵒᵖ × A ⥤ A) (HB : Bᵒᵖ × B ⥤ B) (HC : Cᵒᵖ × C ⥤ C)
@@ -55,8 +54,7 @@ def FiniteHomQuotientCocycleAux
     G.map (v K M) ≫ w (F.obj K) (F.obj M) ≫
       HC.map (Prod.mkHom (α.inv.app K).op (α.hom.app M))
 
-/-- The cocycle for canonical transposes, with the quotient diagram's data shared.
- -/
+/-- The cocycle for canonical transposes, with the quotient diagram's data shared. -/
 def FiniteHomQuotientClosedData.Cocycle
     {C : ℕ → Type a} [∀ n : ℕ, Category.{b} (C n)]
     {H : ∀ n : ℕ, (C n)ᵒᵖ × C n ⥤ C n}

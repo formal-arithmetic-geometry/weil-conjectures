@@ -16,7 +16,10 @@ import WeilConjectures.SixFunctors.IntegralOnSlice.QcqsCompletionUnitCriterion
 
 /-! # Completeness of the ordinary tensor of finite-Tor integral inputs
 
-Source: Bhatt--Scholze, Lemma 6.5.5; Stacks Project, Tag 099N.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Lemma 6.5.5
+* [Stacks, Tag 099N]
 -/
 
 @[expose] public noncomputable section
@@ -34,25 +37,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- The ordinary ambient tensor of two complete bounded constructible integral complexes
-with uniform finite Tor amplitude is derived complete.
-Source: Bhatt--Scholze, Lemma 6.5.5, and the tensor argument of Stacks Tag 099N;
-primitive tensor step of lem-sf-primitive-completion-effectivity.
-
-Proof: work on affine open subsets of X and refine the constructible stratifications
-of the two residue complexes simultaneously. On each resulting locally closed
-stratum, pass to a weakly contractible pro-etale affine cover. Derived completeness
-and the uniform finite Tor bounds lift the bounded finite-projective residue models
-to bounded finite-projective models over the completed coefficient sheaf. Their
-ordinary total tensor is again a bounded complex of finite-projective modules.
-The coefficient unit is complete: its surjective quotient tower has its defining
-ordinary limit and no higher limit. Finite sums, summands, shifts and finite cones
-preserve completeness, so the total tensor is complete. The K-flat representative
-comparison identifies this total tensor with the specified ambient tensor. Use the
-open-closed triangles to descend completeness up the finite stratification, and
-sheaf locality to descend from the affine open cover to X. All quotients and their
-augmentations are those of the existing coefficient tower. The argument concerns
-only completeness and introduces no choice of comparison map. Rank zero, empty
-strata, the zero complex, and the empty scheme are included. -/
+with uniform finite Tor amplitude is derived complete. -/
 theorem finiteTorOrdinaryTensorComplete (X : Scheme.{u})
     (K L : DerivedCategory (scalarReductionSource l E X))
     (hK : finiteTorConstructibleIntegral l E X K)

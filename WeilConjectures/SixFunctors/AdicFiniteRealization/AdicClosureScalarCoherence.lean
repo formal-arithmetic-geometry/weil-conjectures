@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 /-! # Scalar coherence after extension to the native closure ring
 
-Source: BS Proposition 6.8.14(2); balanced tensor associativity.
+## References
+
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Proposition 6.8.14(2)
 -/
 
 @[expose] public noncomputable section

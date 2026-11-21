@@ -9,7 +9,11 @@ public import WeilConjectures.SixFunctors.IntegralSystemRealization.Canonical.In
 
 /-! # Normalized completed direct image
 
-Source: Stacks Project, Tags 03D7 and 0941.
+## References
+
+* [Stacks, Tag 03D1]
+* [Stacks, Tag 03D7]
+* [Stacks, Tag 0941]
 -/
 
 @[expose] public noncomputable section
@@ -69,15 +73,7 @@ private theorem functor_eq_sections
   simp only [eqToIso.hom, eqToHom_app]
   exact eqToHom_sections _ _ _
 
-/-- The two completed direct-image presentations have a unique identity-section comparison.
-Source: Stacks Project, Tags 03D1 and 0941; primitive realization Step 3.
-
-Proof: the coefficient map for the specified completed-ring pullback is the
-adjoint transpose of sfCompletedCoefficientMap. Applying the direct-image
-hom-equivalence returns that map. Hence the module direct-image functors are
-equal. The equality gives a natural isomorphism whose component on every section
-is the identity up to heterogeneous equality. Sectionwise extensionality shows
-that this normalization determines the natural isomorphism uniquely. -/
+/-- The two completed direct-image presentations have a unique identity-section comparison. -/
 theorem integralCompletedDirectImageComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : sfCompletedModuleDirectImage l E f ≅
       proEtaleRingModuleDirectImage f ((PurCompactSupport.completed l E).ring Y)

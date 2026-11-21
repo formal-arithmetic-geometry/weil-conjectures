@@ -47,7 +47,8 @@ noncomputable def Etale.rightDerivedFunctorPlusLowerStarSingleIso
   ((f)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.app _ ≪≫
     (((f)_*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor 0).app F
 
-/-- **Higher direct images along a finite morphism vanish**: for a finite morphism `f : X ⟶ Y` and an étale
+/-- **Higher direct images along a finite morphism vanish**: for a finite morphism `f : X ⟶ Y` and
+an étale
 sheaf `F` of `Λ`-modules on `X`, `R^q f_* F = 0` for every `q ≠ 0`, since `f_*` is exact. -/
 theorem Etale.isZero_higherDirectImage_of_isFinite
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {q : ℤ} (hq : q ≠ 0) :

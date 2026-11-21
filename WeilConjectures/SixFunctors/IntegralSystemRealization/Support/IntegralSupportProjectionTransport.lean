@@ -9,7 +9,14 @@ public import WeilConjectures.SixFunctors.PurCompactSupport.IntegralCompactSuppo
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Proper.IntegralProperFiniteProjection
 import WeilConjectures.SixFunctors.IntegralSystemRealization.Open.IntegralOpenFiniteEvaluation
 
-/-! # Projection transport for proper/open realization -/
+/-! # Projection transport for proper/open realization
+
+## References
+
+* [Stacks, Tag 07A7]
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0D6E]
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -128,28 +135,7 @@ private theorem support_finite_factorization
           ((PurCompactSupport.finiteReductionIso l E X n).hom.app K))
 
 /-- The actual total-limit projection commutes with the normalized proper/open
-comparison, before identifying its integral image with the constructible action.
-Source: Stacks 07A7, 0941 and 0D6E; fix-prop-coherence.proof.md, preservation of
-adjunction units and counits; primitive support realization Step 2.
-
-Proof: start with the ordinary sectionwise direct-image/limit comparison in
-model.ordinary. Its projections are exactly the direct-image evaluation maps.
-Its adjoint conjugate gives reductionPull; the whole K-flat model equation of model
-identifies that conjugate with the derived reduction comparison, before evaluation.
-Derive the ordinary projection identity using K-injective resolutions and the
-universal right-derived comparison. Conjugation then gives the proper projection
-identity for model.push. Apply it to the open system of reduction K. The inverse
-open-adjunction mate defining model.openReduction and the transpose equation of
-o.openEvaluation give the open projection identity. The scalar-adjunction triangle
-identities identify its completed-to-finite map with PurCompactSupport.openComparison.
-Compose the proper and open identities, in that order; the reduction model contributes
-reductionEvaluation on the input. Naturality with respect to the actual open-output
-reconstruction unit cancels that unit against its specified inverse. The remaining
-finite scalar-adjunction mate is precisely finiteReductionIso inverse, the geometric
-proper/open comparison, finiteImageIso, and finiteReductionIso on the input. This
-is the displayed equation. This uses only invertibility of the specified unit;
-no constructibility, faithfulness of evaluation, or uniqueness of a triangulated
-limit cone is invoked. It applies equally to zero objects and empty opens. -/
+comparison, before identifying its integral image with the constructible action. -/
 theorem integralSupportProjectionTransport (o : Operations l E)
     (model : RealizationModel l E o)
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)

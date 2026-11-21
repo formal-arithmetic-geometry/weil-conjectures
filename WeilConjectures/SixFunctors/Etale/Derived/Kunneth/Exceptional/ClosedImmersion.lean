@@ -17,19 +17,12 @@ Let `k` be a field, `Λ` a finite ring whose exponent is invertible in `k`, and 
 of finite type over `k`, with product `P = Y ×_k W` and projections `q : P ⟶ Y`, `r : P ⟶ W`.
 For a closed immersion `i : Z ⟶ Y`, with base change `i_W : Z ×_k W ⟶ P` and
 `q_Z : Z ×_k W ⟶ Z`, the two canonical maps of the exceptional inverse image entering the
-exceptional Künneth formula (`proposition-exceptional-external-kunneth--1`) are isomorphisms:
+exceptional Künneth formula are isomorphisms:
 
 * the base change map `Lq_Z^* Ri^! N ⟶ Ri_W^! Lq^* N`
   (`AlgebraicGeometry.Etale.rightDerivedUpperShriekBaseChangeMap`), for every `N`;
 * the tensor map `Ri_W^!(Lq^* N) ⊗ᴸ Li_W^* Lr^* M ⟶ Ri_W^!(Lq^* N ⊗ᴸ Lr^* M)`
   (`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`), for all `N` and `M`.
-
-This is the closed-immersion case of the blueprint proof: by the supported localization triangle
-`Ri_! Ri^! L ⟶ L ⟶ Rj_* Lj^* L ⟶` of the open complement `j : U ⟶ Y`
-(`lemma-local-cohomology-right-adjoint--2`), the cone of the transpose of either map is of the form
-`Rj_W*(-)`, by the base change formula for `Rj_*` tensored with a complex
-(`lemma-kunneth-field-coefficients--1`, `AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`); such
-objects receive no maps from objects supported on `Z ×_k W`, and `Ri_W!` is fully faithful.
 
 ## Main statements
 
@@ -56,7 +49,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Preadditive C] [HasZeroObjec
 /-- Let `F ⊣ G` with `F` fully faithful, and let `T` be a distinguished triangle whose third
 vertex receives no maps from the shifts of objects in the image of `F`. Then a morphism
 `φ : X ⟶ G T₂` whose transpose `F X ⟶ T₂` is, up to an isomorphism `F X ≅ T₁`, the first
-morphism of `T`, is an isomorphism: `Hom(M, X) ≅ Hom(F M, T₁) ≅ Hom(F M, T₂) ≅ Hom(M, G T₂)`. -/
+morphism of `T`, is an isomorphism. -/
 theorem isIso_of_distTriang_of_subsingleton {F : D ⥤ C} {G : C ⥤ D} (adj : F ⊣ G)
     (hF : F.FullyFaithful) {T : Triangle C} (hT : T ∈ distTriang C)
     (h₃ : ∀ (M : D) (n : ℤ), Subsingleton ((F.obj M)⟦n⟧ ⟶ T.obj₃)) {X : D}
@@ -127,9 +120,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 /-- **The tensor map of a closed immersion.** Let `i : Z ⟶ X` be a closed immersion with open
 complement `j : U ⟶ X`. If `Rj_* Lj^* M ⊗ᴸ N` receives no maps from the shifts of objects
-`Ri_! D`, then the tensor map `Ri^! M ⊗ᴸ Li^* N ⟶ Ri^!(M ⊗ᴸ N)` is an isomorphism: its transpose
-is, up to the projection formula, the supported localization triangle of `M` tensored with
-`N`. -/
+`Ri_! D`, then the tensor map `Ri^! M ⊗ᴸ Li^* N ⟶ Ri^!(M ⊗ᴸ N)` is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion {Z X U : Scheme.{u}}
     (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i] [HasCompactification i]
     [IsIso (projectionMap (ModuleCat.{u + 1} Λ) i)] [IsOpenImmersion j]
@@ -177,8 +168,7 @@ variable {Y W P U UW : Scheme.{u}} (b : Y ⟶ Spec (.of k)) (c : W ⟶ Spec (.of
 include sqP sqU
 
 /-- The base change formula for `Rj_*` along the projection `q : Y ×_k W ⟶ Y`, tensored with
-an object pulled back from `W` (`lemma-kunneth-field-coefficients--1`):
-`Lr^* M ⊗ᴸ Lq^* Rj_* F ≅ Rj_W*(Lj_W^* Lr^* M ⊗ᴸ Lq_U^* F)`. -/
+an object pulled back from `W`: `Lr^* M ⊗ᴸ Lq^* Rj_* F ≅ Rj_W*(Lj_W^* Lr^* M ⊗ᴸ Lq_U^* F)`. -/
 theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar
     (M : _root_.DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (F : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -193,7 +183,7 @@ theorem nonempty_iso_derivedTensor_leftDerivedUpperStar_rightDerivedLowerStar
     ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M) F)⟩
 
 /-- The base change formula for `Rj_*` along the projection `q : Y ×_k W ⟶ Y`:
-`Lq^* Rj_* F ≅ Rj_W* Lq_U^* F` (`lemma-kunneth-field-coefficients--1` with `M = Λ_W`). -/
+`Lq^* Rj_* F ≅ Rj_W* Lq_U^* F`. -/
 theorem nonempty_iso_leftDerivedUpperStar_rightDerivedLowerStar
     (F : _root_.DerivedCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     Nonempty ((L((q)^*[ModuleCat.{u + 1} Λ])).obj ((R((j)_*[ModuleCat.{u + 1} Λ])).obj F) ≅

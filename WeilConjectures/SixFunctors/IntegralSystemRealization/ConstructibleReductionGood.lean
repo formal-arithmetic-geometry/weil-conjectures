@@ -15,8 +15,12 @@ import WeilConjectures.ZetaSeries
 
 /-! # Single-operation bounds for completed compact support
 
-Source: Stacks 0941, 0F10 and 0F7J; the common-bound argument in
-lem-sf-completed-shriek-composition-laws, steps 7 and 8.
+## References
+
+* [Stacks, Tag 0941]
+* [Stacks, Tag 0F10]
+* [Stacks, Tag 0F7J]
+* Bhatt–Scholze, *The pro-étale topology for schemes*, 6.5.11 and 6.7.2
 -/
 
 @[expose] public noncomputable section
@@ -172,23 +176,7 @@ private theorem origins_of_bounds (W : Scheme.{u}) (M : System l E W)
     transitionSquare := fixed_eq }⟩
 
 /-- Reduction of an integral constructible object has the common bounds and compatible
-origins required at an input leaf. No finite-type hypothesis on the unused inputs is needed.
-Source: Stacks 0941; Bhatt--Scholze 6.5.11 and 6.7.2; parent proof step 7.
-
-Proof: the K-flat quotient model of the recorded reduction functor gives normalization.
-Use its evaluation comparison to identify the nth level with derived tensor by A_(n+1).
-Integral constructibility gives constructible cohomology and one common cohomology
-interval. The residue-Tor theorem applied to its residue interval gives one common Tor
-interval for all levels. Transport both intervals across the evaluation comparison.
-Each finite constructible bounded reduction has an etale-origin witness by finite-ring
-constructible derived origin. The normalized-origin comparison theorem lifts the actual
-quotient-transition adjuncts between these bounded witnesses. Compose those lifted
-adjuncts with the scalar-extension units to obtain their restriction-of-scalars maps.
-Its compatibility equation identifies their images with the actual system transitions;
-use these maps and the evaluated quotient model to fill originSquare and transitionSquare.
-This constructs Origins for the one specified system, with its actual transitions.
-Zero reductions use the zero witness and interval [0,0]; identity quotients use the
-scalar unit. No equality of derived system morphisms is inferred from evaluation. -/
+origins required at an input leaf. No finite-type hypothesis on the unused inputs is needed. -/
 theorem constructibleReduction_good (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p)
     (X : Over (Spec (CommRingCat.of D.k))) (K : Integral l E X.left)
     (hK : sfIntegralConstructible l E X.left K) :

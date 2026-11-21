@@ -22,11 +22,7 @@ pullback exchange of the change of Galois layers `N_Ω ⟶ N_{L'}` is invertible
 (`NearbyCyclesModel.exists_isIso_pullbackExchange_galoisLayerRestrict_of_isNoetherianObject`).
 
 This is the stabilization input of
-`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_isIso`: an open subgroup
-`Gal(Ω/L')` acts trivially on the cohomology sheaves by continuity
-(`NearbyCyclesModel.exists_forall_mem_finset_homology_galoisLayerAction_eq_id`), and then the
-nearby cycles of `N_{L'}` are all of `Ψ_{N_Ω} C`
-(`NearbyCyclesModel.isIso_pullbackExchange_galoisLayerRestrict_of_homology`).
+`NearbyCyclesModel.exists_retraction_pullbackExchange_galoisLayerHom_of_isIso`.
 -/
 
 @[expose] public section

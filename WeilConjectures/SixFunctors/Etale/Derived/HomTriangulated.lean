@@ -18,13 +18,10 @@ derived internal hom `RHom(-, -)` of `D(X_ét, A)` is exact in each variable:
 
 * for a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` and any `M`, the induced maps
   `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` extend to a distinguished triangle
-  (`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_left`); this is the specialisation of
-  `DerivedCategory.exists_distinguished_ihom_pre`, proved on the model given by the internal hom
-  complex into a K-injective complex;
+  (`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_left`);
 * for a distinguished triangle `M' ⟶ M ⟶ M'' ⟶ M'[1]` and any `K`, the induced maps
   `RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'')` extend to a distinguished triangle
-  (`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_right`), `RHom(K, -)` being a
-  triangulated functor as the right adjoint of the triangulated functor `K ⊗ᴸ -`.
+  (`AlgebraicGeometry.Etale.exists_distTriang_derivedHom_right`).
 
 The corollaries `AlgebraicGeometry.Etale.derivedHom_mem_of_distTriang_left` and
 `AlgebraicGeometry.Etale.derivedHom_mem_of_distTriang_right` are the forms used for dévissage:
@@ -50,10 +47,10 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {X : Scheme.{u}}
 
-/-- Blueprint `definition-verdier-dual-evaluation--3`: Exactness of the internal Hom in each
-variable, first variable. For a distinguished triangle `K' ⟶ K ⟶ K'' ⟶ K'[1]` of `D(X_ét, A)` and
-any `M`, the maps `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` induced by `K ⟶ K''` and `K' ⟶ K` extend
-to a distinguished triangle `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M) ⟶ RHom(K'', M)[1]`. -/
+/-- **Exactness of the internal Hom in the first variable.** For a distinguished triangle
+`K' ⟶ K ⟶ K'' ⟶ K'[1]` of `D(X_ét, A)` and any `M`, the maps
+`RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M)` induced by `K ⟶ K''` and `K' ⟶ K` extend to a
+distinguished triangle `RHom(K'', M) ⟶ RHom(K, M) ⟶ RHom(K', M) ⟶ RHom(K'', M)[1]`. -/
 theorem exists_distTriang_derivedHom_left
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
@@ -62,11 +59,10 @@ theorem exists_distTriang_derivedHom_left
       (((RHom(X)[A]).map T.mor₁.op).app M) w ∈ distTriang _ :=
   DerivedCategory.exists_distinguished_ihom_pre T hT M
 
-/-- Blueprint `definition-verdier-dual-evaluation--3`: Exactness of the internal Hom in each
-variable, second variable. For a distinguished triangle `M' ⟶ M ⟶ M'' ⟶ M'[1]` of `D(X_ét, A)` and
-any `K`, the maps `RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'')` extend to a distinguished triangle
-`RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'') ⟶ RHom(K, M')[1]`: the functor `RHom(K, -)` is
-triangulated, being right adjoint to the triangulated functor `K ⊗ᴸ -`. -/
+/-- **Exactness of the internal Hom in the second variable.** For a distinguished triangle
+`M' ⟶ M ⟶ M'' ⟶ M'[1]` of `D(X_ét, A)` and any `K`, the maps
+`RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'')` extend to a distinguished triangle
+`RHom(K, M') ⟶ RHom(K, M) ⟶ RHom(K, M'') ⟶ RHom(K, M')[1]`. -/
 theorem exists_distTriang_derivedHom_right
     (K : (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A))ᵒᵖ)
     (T : Triangle (_root_.DerivedCategory (Sheaf X.smallEtaleTopology A)))
@@ -76,7 +72,7 @@ theorem exists_distTriang_derivedHom_right
   have := (derivedTensorHomAdjunction A K.unop).isTriangulated_rightAdjoint
   exact ⟨_, ((RHom(X)[A]).obj K).map_distinguished T hT⟩
 
-/-- Blueprint `definition-verdier-dual-evaluation--3`, dévissage in the first variable: if
+/-- Dévissage of the internal Hom in the first variable: if
 `K' ⟶ K ⟶ K'' ⟶ K'[1]` is a distinguished triangle and `RHom(K', M)`, `RHom(K'', M)` lie in a
 subcategory `P` of `D(X_ét, A)` closed under isomorphisms and extensions, then so does
 `RHom(K, M)`. -/
@@ -91,7 +87,7 @@ theorem derivedHom_mem_of_distTriang_left
   obtain ⟨w, hw⟩ := exists_distTriang_derivedHom_left M T hT
   exact P.ext_of_isTriangulatedClosed₂ _ hw h₃ h₁
 
-/-- Blueprint `definition-verdier-dual-evaluation--3`, dévissage in the second variable: if
+/-- Dévissage of the internal Hom in the second variable: if
 `M' ⟶ M ⟶ M'' ⟶ M'[1]` is a distinguished triangle and `RHom(K, M')`, `RHom(K, M'')` lie in a
 subcategory `P` of `D(X_ét, A)` closed under isomorphisms and extensions, then so does
 `RHom(K, M)`. -/

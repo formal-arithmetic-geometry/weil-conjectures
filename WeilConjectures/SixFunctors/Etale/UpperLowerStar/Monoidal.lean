@@ -81,11 +81,7 @@ noncomputable instance Etale.laxBraided_lowerStar : (g)_*[A].LaxBraided := by
     (MorphismProperty.Over.pullback @Etale ⊤ g) A Y.smallEtaleTopology Z.smallEtaleTopology
 
 /-- The pullback `g^*` on étale sheaves is oplax monoidal, being left adjoint to the lax
-monoidal pushforward `g_*`.
-
-When `A` is braided and closed, the monoidal structure used here is the global instance
-`CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall`, by
-`CategoryTheory.GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall_eq`. -/
+monoidal pushforward `g_*`. -/
 noncomputable instance Etale.oplaxMonoidal_upperStar : (g)^*[A].OplaxMonoidal :=
   (Etale.upperStarLowerStarAdjunction A g).leftAdjointOplaxMonoidal
 

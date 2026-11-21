@@ -10,7 +10,14 @@ import WeilConjectures.AlgebraicGeometry.ProEtale.Ringed.ProEtaleRingedOpenExten
 import Mathlib.Data.Nat.Prime.Infinite
 /-! # Completeness of quasi-compact integral open extension
 
-Source: Stacks proetale.tex Tag 09BP and algebraization.tex Tag 0A0E. -/
+Quasi-compact open extension preserves quotient-tower completeness.
+
+## References
+
+* [Stacks, Tag 09BP]
+* [Stacks, Tag 093M]
+* [Stacks, Tag 0A0E]
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
@@ -198,26 +205,7 @@ private theorem extension_complete_principal [QuasiCompact j]
       ((H.mapDerivedCategoryFactors.app P).symm ≪≫ H.mapDerivedCategory.mapIso e) hlocal)
 
 /-- Quasi-compact open extension preserves the actual quotient-tower completeness
-predicate for the fixed section-normalized operations, at independent universes.
-Source: Stacks proetale.tex Tag 09BP, sites-modules.tex Tag 093M,
-and algebraization.tex Tag 0A0E; the open case of completedExtensionZeroComparison.
-
-Proof: the quotient-tower completeness predicate is equivalent to local principal
-completeness for multiplication by the valuation uniformizer. Choose an arbitrary
-complex representing K. Its principal-completion unit is a quasi-isomorphism.
-The ordinary open extension is exact, and quasi-compactness makes it preserve
-countable products. Its termwise functor therefore preserves the unit's
-quasi-isomorphism and commutes with the cone, shift, and product construction of
-principal completion. The completed coefficient projection equations, followed by
-the finite constant-section equations, show that its coefficient transport preserves
-the actual uniformizer section. The localized open adjunction and linearity of its
-unit then show that extension carries the source scalar chain map to the target
-scalar chain map. Thus the target representative is isomorphic in the derived
-category to its principal completion. Principal completion is locally complete;
-transport along this isomorphism and then along the exact-derived computation
-isomorphism proves completeness of extension. Neither equality of the site and
-coefficient universes nor boundedness is used. The same universal properties cover
-the empty open and the identity open. -/
+predicate for the fixed section-normalized operations, at independent universes. -/
 theorem integralOpenExtensionComplete [QuasiCompact j]
     (_hlX : IsUnit (l : Γ(X, ⊤))) (_hlU : IsUnit (l : Γ(U, ⊤))) (o : Operations l E j) :
     ∀ K, complete l E U K → complete l E X ((shriek l E j o).obj K) := by

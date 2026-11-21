@@ -30,7 +30,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Defs
   composition of kernel transforms at a general coefficient category, given the composition
   law of `Rf_!`, compact-support base change and the projection formula.
 
-See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation notes.
+See `WeilConjectures.SixFunctors.Etale.Derived.KernelTransform` for the implementation details.
 -/
 
 @[expose] public section
@@ -55,11 +55,8 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
 variable {S V V' V'' : Scheme.{u}} (π : V ⟶ S) (π' : V' ⟶ S) (π'' : V'' ⟶ S)
 
-/-- Composition of kernel transforms, at a general coefficient category `A`, from the inputs of
-the six-functor formalism it uses: the composition law of `Rf_!` (`hcomp`, which holds for
-torsion coefficients, `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`),
-compact-support
-base change (`hbc`) along the cartesian square
+/-- Composition of kernel transforms at a general coefficient category `A`, given the composition
+law of `Rf_!` (`hcomp`), compact-support base change (`hbc`) along the cartesian square
 
 ```
     V ×ₛ V' ×ₛ V'' ──r₁₂──▶ V ×ₛ V'
@@ -69,17 +66,9 @@ base change (`hbc`) along the cartesian square
       V' ×ₛ V'' ─────q₁─────▶ V'
 ```
 
-and the projection formula for `r₂₃` and `r₁₃` (`hpf₂₃`, `hpf₁₃`). Then the composite of the
+and the projection formula for `r₂₃` and `r₁₃` (`hpf₂₃`, `hpf₁₃`): the composite of the
 kernel transform of `𝒦` with shift `a` and the kernel transform of `𝒦'` with shift `c` is the
-kernel transform of the convolution `𝒦' ∗ 𝒦` with shift `a + c`.
-
-Base change gives `q₁^* Rp₂,! ≅ Rr₂₃,! r₁₂^*`, the projection formula for `r₂₃` moves
-`r₂₃^* 𝒦'` inside, and the composition law turns the composite into
-`R(r₁₃ ≫ s₂)_!(r₁^* K ⊗ᴸ r₁₂^* 𝒦 ⊗ᴸ r₂₃^* 𝒦')`, with `r₁ = r₁₂ ≫ p₁ = r₁₃ ≫ s₁` and `s₁`,
-`s₂` the projections of `V ×ₛ V''`. The projection formula for `r₁₃`, the symmetry of `⊗ᴸ`
-(`AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`) and the composition law turn the
-kernel transform of `𝒦' ∗ 𝒦` into the same expression.
-(sketch blueprint: `proposition-fourier-inversion`; blueprint: `proposition-fourier-inversion`) -/
+kernel transform of the convolution `𝒦' ∗ 𝒦` with shift `a + c`. -/
 theorem nonempty_iso_kernelTransform_comp_of_nonempty_iso
     [HasCompactification (pullback.tripleProj₁₃ π π' π'')]
     [HasCompactification (pullback.snd π π')] [HasCompactification (pullback.snd π' π'')]

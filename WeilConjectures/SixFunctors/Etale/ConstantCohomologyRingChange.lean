@@ -19,11 +19,14 @@ underlying abelian cohomology groups `Hⁿ(X_ét, Λ') ⟶ Hⁿ(X_ét, Λ)` it i
 abelian sheaves `Λ'_X ⟶ Λ_X` (`AlgebraicGeometry.Etale.mapExtComp_extRingChange`).
 
 The map `φ_*` is multiplicative for the Yoneda products
-(`AlgebraicGeometry.Etale.extRingChange_comp`). The proof goes through the restriction of
-scalars `φ^* : Sh(X_ét, Λ) ⥤ Sh(X_ét, Λ')`, an exact functor: `φ_* z` is the unique class `w`
-with `ψ ∘ φ^* w = z ∘ ψ` in `Extⁿ(Λ'_X, φ^* Λ_X)`, where `ψ : Λ'_X ⟶ φ^* Λ_X` is the map of
-constant sheaves (`AlgebraicGeometry.Etale.mk₀_comp_mapExactFunctor_extRingChange`), and this
-characterization is compatible with composition.
+(`AlgebraicGeometry.Etale.extRingChange_comp`).
+
+## Implementation details
+
+`φ_* z` is characterized, via the exact restriction of scalars
+`φ^* : Sh(X_ét, Λ) ⥤ Sh(X_ét, Λ')`, as the unique class `w` with `ψ ∘ φ^* w = z ∘ ψ` in
+`Extⁿ(Λ'_X, φ^* Λ_X)`, where `ψ : Λ'_X ⟶ φ^* Λ_X` is the map of constant sheaves
+(`AlgebraicGeometry.Etale.mk₀_comp_mapExactFunctor_extRingChange`).
 -/
 
 @[expose] public section

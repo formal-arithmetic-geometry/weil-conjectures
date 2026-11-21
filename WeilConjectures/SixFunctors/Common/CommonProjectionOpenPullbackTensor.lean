@@ -99,24 +99,7 @@ It involves only the supplied pullback comparisons and the natural tensorator.
 set_option backward.isDefEq.respectTransparency false in
 /-- Finite-stage inclusion preserves the inverse tensor/pullback comparison for
 an open immersion. This is a square of tensor and pullback maps only: it uses
-neither an open adjunction nor proper image or support identifications.
-
-Proof: supply invertibility of the coefficient prime on Q.X and Q.Z using the
-base-field structure maps. Transport the rational and common tensor functors and
-pullbacks by their normalization equalities. The open tensor/pullback comparisons
-are the canonical ones by rationalOpenTensorPullbackNormalization and
-commonStageOpenTensorPullbackNormalization. Evaluate the representative equation
-of canonicalCommonStagePullbackTensor_existsUnique at the field E on the included
-pair M,L. The tensor comparisons at this stage, followed by the reflexive scalar
-unit, are exactly commonInclusionTensorComparison; the pullback comparisons are
-the prescribed model comparisons, whose components are identities by
-commonStageModelNormalization. Substitute these descriptions in the representative
-formula. The source and target transition isomorphisms cancel with their inverses,
-leaving the forward tensor/pullback square. Conjugate that square by the two
-canonical tensor/pullback isomorphisms to obtain the displayed inverse square.
-All calculations take place at E, so no enlargement or arbitrary representative
-is selected. The same identity-unit and isomorphism cancellation argument applies
-to the empty scheme, zero inputs and identity pullbacks. -/
+neither an open adjunction nor proper image or support identifications. -/
 theorem commonProjectionOpenPullbackTensor
     {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum}
     (H : SixFunctorCommonStages D C) (E : Padic.FiniteCoefficientFields C.l C.Qbar)

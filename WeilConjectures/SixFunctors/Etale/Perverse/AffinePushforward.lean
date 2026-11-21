@@ -25,6 +25,10 @@ This file collects the inputs of Artin–Gabber
 (`AlgebraicGeometry.Etale.DerivedCategory.isPerverseLE_lowerShriek`): the stalk of
 `Rᵠf_! G` at a point `y` vanishes for `q` larger than twice the dimension of the part of the
 support of `G` lying over `y`.
+
+## References
+
+* [Stacks, Tag 0F0X]
 -/
 
 @[expose] public section
@@ -62,11 +66,7 @@ open _root_.DerivedCategory Pretriangulated in
 compactifiable morphism of finite type to a scheme of finite type over a field, `G` a
 constructible sheaf on `X`, and `s : Spec Ω ⟶ Y` a point with values in a field, lying over
 `y ∈ Y`. If the part `supp G ∩ f⁻¹(y)` of the support of `G` over `y` has dimension at most `e`,
-then `s^* Rᵠf_! G = 0` for `q > 2e`; if it is empty, then `s^* Rᵠf_! G = 0` for every `q`.
-Writing `G = i_* i^* G` for the closed immersion `i` of the support, `Rf_! G = R(f ∘ i)_! i^* G`,
-and by compactly supported base change `s^* R(f ∘ i)_! = R(f ∘ i)_{s,!} t^*` for the base change
-`(f ∘ i)_s` of `f ∘ i` along `s`, whose source has dimension at most that of
-`supp G ∩ f⁻¹(y)`. -/
+then `s^* Rᵠf_! G = 0` for `q > 2e`; if it is empty, then `s^* Rᵠf_! G = 0` for every `q`. -/
 theorem isZero_upperStar_homology_rightDerivedLowerShriek_singleFunctor
     {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f]
@@ -187,10 +187,7 @@ open _root_.DerivedCategory in
 /-- **Artin–Gabber**, support side, in the form proved here: for a compactifiable morphism
 `f : X ⟶ Y` of finite type to a scheme of finite type over a field, whose fibres have dimension
 at most `d`, and a bounded constructible `K` with `K[n]` satisfying the support condition,
-`(Rf_! K)[n + d]` satisfies the support condition. Affineness of `f` is not needed. A point `y`
-with nonzero stalk of `Hᵐ(Rf_! K)` has, by dévissage, a nonzero stalk of `Rᵐ⁻ᵇf_! Hᵇ K` for some
-`b`; then `dim {y}⁻ + e ≤ dim supp Hᵇ K ≤ n - b` for some `e ≤ d` with `m - b ≤ 2e`, whence
-`dim {y}⁻ ≤ n + d - m`. -/
+`(Rf_! K)[n + d]` satisfies the support condition. Affineness of `f` is not needed. -/
 theorem DerivedCategory.supportCondition_shift_rightDerivedLowerShriek {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY]
     (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] [HasCompactification f] (d : ℕ)
@@ -248,7 +245,7 @@ theorem DerivedCategory.supportCondition_shift_rightDerivedLowerShriek {X Y : Sc
 open _root_.DerivedCategory in
 /-- The support estimate for the ordinary direct image `Rf_*` along a morphism of finite type
 between schemes of finite type over a field, reduced by dévissage to its pointwise form for a
-constructible sheaf `G` (Stacks `0F0X`): if every geometric point `s` over `y ∈ Y` with
+constructible sheaf `G`: if every geometric point `s` over `y ∈ Y` with
 `s^* Rᵠf_* G ≠ 0` has `q ≤ N` and `dim {y}⁻ ≤ N - q` whenever `dim supp G ≤ N`, then for a
 bounded constructible `K` with `K[n]` satisfying the support condition, `(Rf_* K)[n + d]`
 satisfies it, for every `d ≥ 0`. -/

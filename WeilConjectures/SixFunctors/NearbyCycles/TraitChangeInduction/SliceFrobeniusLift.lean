@@ -23,13 +23,6 @@ package `ValuationSubring.exists_frobeniusLift_package` applied to lifts of a Fr
 `k`-basis of `E` (`FrobeniusClosedBasis.exists_of_subfield`) then gives the approximation package
 used in the proof of the relative separable closedness of the slice composita
 (`AlgebraicGeometry.SliceTrait.exists_frobeniusLift_package`).
-
-The field `D₀ = K₀(x, a₁, …, aₙ)` is generated over the discrete subfield `K₀ ⊆ Ω` with full
-residue field by the coordinate and finitely many elements of `R'`. It is discretely valued
-since it lies in the unramified radical extension `B` of `Frac R'`
-(`AlgebraicGeometry.SliceTrait.exists_unramified_subfields`), its residue field is separable over
-`k(x̄)` for the same reason, and finite over `k(x̄)` by the Gauss valuation on `K₀(x)`
-(`ValuationSubring.residue_mem_adjoin_of_mem_adjoin`), since `R'` is algebraic over `R[x]`.
 -/
 
 @[expose] public section
@@ -51,9 +44,7 @@ variable {R : Type u} [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
 attribute [local instance] algebraFracΩ algebraFrac algebraValuationSubring
   algebraBaseValuationSubring
 
-/-- **The residue of the coordinate is transcendental over the residue field of `Ω`.** The
-residues of the integral elements of `Ω` are purely inseparable over the residue field `κ` of
-`R`, over which the residue `x̄` is transcendental. -/
+/-- **The residue of the coordinate is transcendental over the residue field of `Ω`.** -/
 lemma transcendental_residue_a [FaithfulSMul R Ω] [Algebra.IsAlgebraic R Ω] {x : D.R}
     (htr : Transcendental (ResidueField R) (residue D.R x)) :
     Transcendental (D.valuationSubring.residueSubfield D.ωS.fieldRange)
@@ -79,7 +70,7 @@ lemma transcendental_residue_a [FaithfulSMul R Ω] [Algebra.IsAlgebraic R Ω] {x
 
 /-- **`R'` is algebraic over `K₀(x)`.** If `R'` is algebraic over `R[x]` (via `g`, with `x̄`
 transcendental over `κ`) and `K₀ ⊆ Ω` contains `R`, then every element of `R'` is algebraic
-over `K₀(x)`: the polynomials in `x` over `R` do not vanish in `Ω'`, by the Gauss valuation. -/
+over `K₀(x)`. -/
 lemma isAlgebraic_a_adjoin_coord [FaithfulSMul R Ω] [Algebra.IsAlgebraic R Ω]
     (g : MvPolynomial (ULift.{u} (Fin 1)) R →+* D.R) (hgC : g.comp MvPolynomial.C = D.φ)
     (htr : Transcendental (ResidueField R) (residue D.R (g (MvPolynomial.X ⟨0⟩))))

@@ -13,10 +13,9 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Vanishing
 # The induction step in relative dimension one
 
 For an affine smooth curve `p : X ⟶ S`, if the base-change property holds universally in
-every degree `< q`, it holds universally in degree `q`. This is the point at which the two
-lanes of the proof meet: a failure of the universal base-change property in degree `q` would
-produce, by `AlgebraicGeometry.Etale.exists_curveTestDatum`, a curve-test datum with a
-nonvanishing higher direct image, which
+every degree `< q`, it holds universally in degree `q`. A failure of the universal base-change
+property in degree `q` would produce, by `AlgebraicGeometry.Etale.exists_curveTestDatum`, a
+curve-test datum with a nonvanishing higher direct image, which
 `AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf` forbids.
 
 Strong induction on `q`, starting from
@@ -36,7 +35,7 @@ base-change property universally in every degree.
 
 ## References
 
-- Stacks Project, Section 59.88, <https://stacks.math.columbia.edu/tag/0F02>
+* [Stacks, Section 59.88, Tag 0F02]
 -/
 
 @[expose] public section
@@ -49,26 +48,12 @@ namespace AlgebraicGeometry
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {X S : Scheme.{u}} {p : X ⟶ S}
 
-/-- The induction step in relative
-dimension one.
+/-- The induction step in relative dimension one.
 
 Let `p : X ⟶ S` be affine smooth of relative dimension one with `X` affine, and let `n` be
 invertible on `S` and annihilate the coefficient ring `Λ`. If `BC(p, Λ, q')` holds universally
 (after every base change `S' ⟶ S`) for all `q' < q`, where `q ≥ 1`, then `BC(p, Λ, q)` holds
-universally. The universal, cumulative hypothesis is needed: it is consumed after a
-preliminary base change by
-`AlgebraicGeometry.Etale.nonempty_fieldFailure_of_not_universalBaseChangeProperty`, which a
-fixed-base hypothesis does not supply. The negative degrees in `∀ q' < q` are supplied by
-`AlgebraicGeometry.Etale.universalBaseChangeProperty_of_neg`.
-
-This statement is a recombination of the lemmas of Stacks, Étale Cohomology, Section 59.88
-rather than a single tagged one: it is the contradiction between
-`AlgebraicGeometry.Etale.exists_curveTestDatum` and
-`AlgebraicGeometry.Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf`. These are the
-seams of blueprint `sk-rem-seams` (`rem-seams`): the counterexample lane (Stacks 0F06, 0F07,
-0F08) produces a curve-test datum with `R^q h_* (Λ/dΛ) ≠ 0`, and the curve-test lane, which uses
-the field-extension invariance, the torsor translation and the spreading of Galois covers in
-degree one only, makes it vanish. -/
+universally. -/
 theorem Etale.UniversalBaseChangeProperty.of_forall_lt [IsAffine X] [IsAffineHom p]
     [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤))) (hΛ : (n : Λ) = 0)
     {q : ℤ} (hq : 1 ≤ q) (hprev : ∀ q' < q, Etale.UniversalBaseChangeProperty Λ p q') :
@@ -85,13 +70,11 @@ theorem Etale.UniversalBaseChangeProperty.of_forall_lt [IsAffine X] [IsAffineHom
   exact hne (Etale.CurveTestDatum.isZero_higherDirectImage_constantSheaf Λ
     ⟨S', hnorm, X', p', K, i, Y, e, h, sq, d, hd'⟩ q hq)
 
-/-- The induction step in relative
-dimension one, cumulative form.
+/-- The induction step in relative dimension one, cumulative form.
 
 Let `p : X ⟶ S` be affine smooth of relative dimension one with `X` affine, and let `n` be
 invertible on `S` and annihilate `Λ`. If, for some `q ≥ 1`, `BC(p, Λ, q')` holds universally for
-all `q' ≤ q - 1`, then `BC(p, Λ, q')` holds universally for all `q' ≤ q`. The new degree `q` is
-`AlgebraicGeometry.Etale.UniversalBaseChangeProperty.of_forall_lt`. -/
+all `q' ≤ q - 1`, then `BC(p, Λ, q')` holds universally for all `q' ≤ q`. -/
 theorem Etale.UniversalBaseChangeProperty.forall_le_of_forall_le_sub_one [IsAffine X]
     [IsAffineHom p] [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤)))
     (hΛ : (n : Λ) = 0) {q : ℤ} (hq : 1 ≤ q)
@@ -105,9 +88,7 @@ theorem Etale.UniversalBaseChangeProperty.forall_le_of_forall_le_sub_one [IsAffi
 
 /-- Affine smooth base change in relative dimension one: for `p : X ⟶ S` affine smooth of
 relative dimension one with `X` affine, and `n` invertible on `S` and annihilating `Λ`,
-`BC(p, Λ, q)` holds universally in every degree `q`. This is strong induction on `q` with
-step `AlgebraicGeometry.Etale.UniversalBaseChangeProperty.of_forall_lt`, starting from the
-negative degrees and degree zero. -/
+`BC(p, Λ, q)` holds universally in every degree `q`. -/
 theorem Etale.universalBaseChangeProperty_of_smoothOfRelativeDimension_one [IsAffine X]
     [IsAffineHom p] [SmoothOfRelativeDimension 1 p] (n : ℕ) (hn : IsUnit (n : Γ(S, ⊤)))
     (hΛ : (n : Λ) = 0) (q : ℤ) :

@@ -15,12 +15,18 @@ Let `gᵢ : Tᵢ ⟶ Sᵢ` be a cofiltered system of quasi-compact quasi-separat
 transition maps, with limit `g₀ : T ⟶ S`, the stages `Sᵢ` being quasi-compact and
 quasi-separated, and let `G` be a sheaf on a scheme `W` to which the `Tᵢ` map compatibly. Then
 on every geometric stalk of `S`, `R^q g₀_* (G|_T)` is the filtered colimit of the
-`πᵢ^* R^q gᵢ_* (G|_{Tᵢ})` (`AlgebraicGeometry.Etale.isStalkColimit_varyingBaseSystem`,
-Stacks 0EYM).
+`πᵢ^* R^q gᵢ_* (G|_{Tᵢ})` (`AlgebraicGeometry.Etale.isStalkColimit_varyingBaseSystem`).
 
-The proof combines the fixed-base statement `AlgebraicGeometry.Etale.higherDirectImage_limit`
-(Stacks 09Z1) over each `Sⱼ`, for the system `Tₖ ⟶ Sₖ ⟶ Sⱼ`, with the statement
+## Implementation details
+
+This combines the fixed-base statement `AlgebraicGeometry.Etale.higherDirectImage_limit` over
+each `Sⱼ`, for the system `Tₖ ⟶ Sₖ ⟶ Sⱼ`, with the statement
 `AlgebraicGeometry.Etale.isStalkColimit_pushforwardStageSystem` for `g₀` and the system `Sⱼ`.
+
+## References
+
+* [Stacks, Tag 0EYM]
+* [Stacks, Tag 09Z1]
 -/
 
 @[expose] public section
@@ -103,8 +109,8 @@ lemma isStalkColimit_varyingBaseStarSystem [IsCofiltered I] (hS : IsLimit cS)
     (isStalkColimit_pushforwardStageSystem Λ cS g₀ hS _ q))
 
 include hg₀ hw₀ in
-/-- **Higher direct images along a limit with varying base** (Stacks 0EYM), on geometric
-stalks: `R^q g₀_* (G|_T)` is the filtered colimit of the `πᵢ^* R^q gᵢ_* (G|_{Tᵢ})`. -/
+/-- **Higher direct images along a limit with varying base**, on geometric stalks:
+`R^q g₀_* (G|_T)` is the filtered colimit of the `πᵢ^* R^q gᵢ_* (G|_{Tᵢ})`. -/
 theorem isStalkColimit_varyingBaseSystem [IsCofiltered I] (hS : IsLimit cS) (hT : IsLimit cT)
     [∀ i, QuasiCompact (g.app i)] [∀ i, QuasiSeparated (g.app i)]
     [∀ i, CompactSpace (S.obj i)] [∀ i, QuasiSeparatedSpace (S.obj i)]

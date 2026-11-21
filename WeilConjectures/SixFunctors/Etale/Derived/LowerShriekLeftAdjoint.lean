@@ -21,33 +21,29 @@ right adjoint is the exceptional inverse image `Rf^!` of
 `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek`, where the result is registered as the
 instance `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`.
 
-The proof follows the blueprint:
+## Main statements
 
-* the proper direct image `Rg_*` preserves coproducts:
-  the higher direct images `R^q g_*` commute with direct sums, and at each geometric point of
-  `Y` they vanish above twice the dimension of the geometric fibre
-  (`AlgebraicGeometry.Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper`), so
-  `g_*` sends exact complexes of `g_*`-acyclic sheaves to exact complexes and the unbounded
-  `Rg_*` is computed termwise on complexes of injectives. Only this pointwise bound is used: the
-  fibre dimension of `g` need not be globally bounded, as `Y` is arbitrary;
-* the extension by zero `D(i_!)` is a left adjoint, hence preserves coproducts;
-* Brown representability for the derived category of a Grothendieck abelian category
-  (`DerivedCategory.isLeftAdjoint_of_preservesCoproducts`, Stacks `0F5Y`).
+- `CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor_of_map_acyclic`: `RF`
+  commutes with coproducts if `F` does, `F` sends exact complexes of `F`-acyclic objects to exact
+  complexes, and coproducts of `F`-acyclic objects are `F`-acyclic.
+- `AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedLowerStar_of_isProper`: proper
+  direct image preserves coproducts.
+- `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification`: `Rf_!` is a
+  left adjoint.
+
+## Implementation details
+
+Only the pointwise bound on the cohomological dimension of `Rg_*` at geometric points of `Y` is
+used: the fibre dimension of `g` need not be globally bounded, as `Y` is arbitrary.
 
 The file deliberately does not import the commutation with shifts of `Rf_!`
 (`WeilConjectures.SixFunctors.Etale.Derived.Shift`), which itself imports `UpperShriek`: being a
 left adjoint is a property, so any triangulated structure on `Rf_!` will do, and the one
 induced by the adjunction `D(g^*) ⊣ Rg_*` is rebuilt locally.
 
-## Main statements
+## References
 
-- `CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor_of_map_acyclic`: `RF`
-  commutes with coproducts if `F` does, `F` sends exact complexes of `F`-acyclic objects to exact
-  complexes, and coproducts of `F`-acyclic objects are `F`-acyclic.
-- `AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedLowerStar_of_isProper`
-.
-- `AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification`
-  (`theorem-existence-exceptional-inverse-image--1`).
+* [Stacks, Tag 0F5Y]
 -/
 
 @[expose] public section
@@ -73,12 +69,7 @@ variable {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
 Let `C` be a Grothendieck abelian category and `F : C ⥤ D` a left exact additive functor which
 commutes with coproducts of shape `J`, sends exact (unbounded) complexes of `F`-acyclic objects to
 exact complexes, and such that coproducts of shape `J` of `F`-acyclic objects are `F`-acyclic.
-Then `RF : D(C) ⥤ D(D)` commutes with coproducts of shape `J`.
-
-This is `Functor.preservesColimitsOfShape_rightDerivedFunctor` with the global bound on the
-cohomological dimension replaced by its only consequence used in the proof, so that it applies to
-functors of *pointwise* finite cohomological dimension
-(`HomologicalComplex.Acyclic.map_of_rightAcyclic_of_forall_isZero`). -/
+Then `RF : D(C) ⥤ D(D)` commutes with coproducts of shape `J`. -/
 theorem preservesColimitsOfShape_rightDerivedFunctor_of_map_acyclic
     [PreservesFiniteLimits F] [IsGrothendieckAbelian.{w} C] [HasInjectiveResolutions C]
     [Abelian.HasKInjectiveResolutions D] (J : Type*) [HasColimitsOfShape (Discrete J) C]
@@ -175,16 +166,10 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
-/-- Proper direct image
-preserves arbitrary coproducts.
-
-For a coefficient ring `Λ` which is torsion as an additive group and a proper morphism
-`g : X ⟶ Y`, the derived pushforward `Rg_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` on the unbounded derived
-categories commutes with coproducts. The higher direct images commute with direct sums
-(`AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerived_lowerStar`), and at each
-geometric point of `Y` they vanish in degrees above twice the dimension of the geometric fibre
-(`AlgebraicGeometry.Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper`), so `g_*`
-sends exact complexes of `g_*`-acyclic sheaves to exact complexes. -/
+/-- Proper direct image preserves arbitrary coproducts: for a coefficient ring `Λ` which is
+torsion as an additive group and a proper morphism `g : X ⟶ Y`, the derived pushforward
+`Rg_* : D(X_ét, Λ) ⥤ D(Y_ét, Λ)` on the unbounded derived categories commutes with
+coproducts. -/
 theorem preservesColimitsOfShape_rightDerivedLowerStar_of_isProper (hΛ : IsAddTorsion Λ)
     {X Y : Scheme.{u}} (g : X ⟶ Y) [IsProper g] (ι : Type (u + 1)) :
     PreservesColimitsOfShape (Discrete ι) (R((g)_*[ModuleCat.{u + 1} Λ])) := by
@@ -196,16 +181,9 @@ theorem preservesColimitsOfShape_rightDerivedLowerStar_of_isProper (hΛ : IsAddT
     (fun y ↦ Etale.upperStar (ModuleCat.{u + 1} Λ) (Y.algClosurePoint y))
     (Etale.isZero_of_forall_isZero_upperStar_algClosurePoint Λ) d hd hM'
 
-/-- Blueprint `theorem-existence-exceptional-inverse-image--1`: the ordinary ambient exceptional
-adjoint.
-
-For a finite coefficient ring `Λ` and a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, the
+/-- For a finite coefficient ring `Λ` and a compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, the
 derived lower shriek `Rf_! = D(i_!) ⋙ Rg_*` on the unbounded derived categories of étale sheaves
-of `Λ`-modules is a left adjoint. It is triangulated and preserves coproducts: `D(i_!)` is a
-left adjoint and `Rg_*` preserves coproducts
-(`AlgebraicGeometry.Etale.preservesColimitsOfShape_rightDerivedLowerStar_of_isProper`). Brown
-representability (`DerivedCategory.isLeftAdjoint_of_preservesCoproducts`, Stacks `0F5Y`)
-concludes. -/
+of `Λ`-modules is a left adjoint. -/
 theorem isLeftAdjoint_rightDerivedLowerShriekOfCompactification [Finite Λ] {X Y : Scheme.{u}}
     {f : X ⟶ Y} (c : Compactification f) :
     (Rf_!(c)[ModuleCat.{u + 1} Λ]).IsLeftAdjoint := by

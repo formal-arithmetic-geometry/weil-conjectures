@@ -15,11 +15,10 @@ Let `Λ` be a commutative ring and `K ∈ D(X_ét, Λ)`. If `K ⊗ᴸ M_X` has h
 every finitely generated `Λ`-module `M`, then `K` has Tor amplitude in `[a, b]`
 (`AlgebraicGeometry.Etale.torAmplitudeIn_of_forall_finite_constantSheaf`).
 
-Represent `K` by a K-flat complex `P` of flat sheaves. Exactness of `P ⊗ F` is checked on the
-stalks at the geometric points `x̄`, where it is the exactness of `P_x̄ ⊗ F_x̄`. As `P_x̄` is a
-complex of flat modules, this follows from the exactness of `P_x̄ ⊗ M` for the finitely generated
-submodules `M` of `F_x̄` (`LinearMap.exact_rTensor_of_forall_finite`), and `P_x̄ ⊗ M` is the stalk
-of `P ⊗ M_X`.
+## Implementation details
+
+`K` is represented by a K-flat complex of flat sheaves, and exactness is checked on stalks, where
+it reduces to finitely generated submodules (`LinearMap.exact_rTensor_of_forall_finite`).
 -/
 
 @[expose] public section
@@ -37,8 +36,7 @@ namespace Etale
 variable {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
 
 /-- Let `P` be a complex of flat étale sheaves of `Λ`-modules. If `P ⊗ M_X` is exact in degree
-`q` for every finitely generated `Λ`-module `M`, then so is `P ⊗ F` for every sheaf `F`: on the
-stalks this is `LinearMap.exact_rTensor_of_forall_finite`. -/
+`q` for every finitely generated `Λ`-module `M`, then so is `P ⊗ F` for every sheaf `F`. -/
 lemma exactAt_tensorRight_of_forall_finite_constantSheaf
     (P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ℤ)
     (hP : ∀ n, ObjectProperty.flat (P.X n)) (q : ℤ)
