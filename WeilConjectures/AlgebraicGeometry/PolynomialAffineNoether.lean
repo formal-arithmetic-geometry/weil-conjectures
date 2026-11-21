@@ -114,4 +114,39 @@ theorem exists_isFinite_polyAffineProj (N : ℕ) {Y : Set (polyAffine k (N + 2))
     refine (Scheme.specMap_appTop_ΓSpecIso_inv _ _).trans ?_
     simp [σ.symm_apply_eq.mpr hσX.symm]
 
+/-- **Noether normalisation of a proper closed subset**: for a closed subset `Y ≠ 𝔸^{N+1}_k` of
+`𝔸^{N+1}_k`, there are an automorphism `ψ` of `𝔸^{N+1}_k` and a morphism `a : V ⟶ 𝔸^{N+1}_k` whose
+image contains `Y`, such that `V ⟶ 𝔸^{N+1}_k ⟶ 𝔸^{N+1}_k ⟶ 𝔸^N_k` (the last map forgetting `X₀`)
+is finite. -/
+theorem exists_isFinite_polyAffineProj_of_ne_univ (N : ℕ) {Y : Set (polyAffine k (N + 1)).left}
+    (hY : IsClosed Y) (hne : Y ≠ Set.univ) :
+    ∃ (ψ : polyAffine k (N + 1) ≅ polyAffine k (N + 1)) (V : Scheme.{u})
+      (a : V ⟶ (polyAffine k (N + 1)).left),
+      Y ⊆ Set.range a.base ∧ IsFinite (a ≫ ψ.hom.left ≫ (polyAffineProj k N).left) := by
+  obtain ⟨g, hg, hg0⟩ : ∃ g ∈ PrimeSpectrum.vanishingIdeal Y, g ≠ 0 := by
+    by_contra! H
+    refine hne ?_
+    rw [← hY.closure_eq, ← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure,
+      (Submodule.eq_bot_iff _).2 H]
+    exact PrimeSpectrum.zeroLocus_bot
+  obtain ⟨σ, hσ⟩ := NoetherNormalization.exists_algEquiv_isUnit_leadingCoeff g hg0
+  refine ⟨polyAffineIsoOfAlgEquiv σ.symm, Spec (.of (MvPolynomial (Fin (N + 1)) k ⧸
+    Ideal.span {g})), Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk _)), fun x hx ↦ ?_, ?_⟩
+  · have hx' : x ∈ Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk (Ideal.span {g}))) := by
+      rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker,
+        PrimeSpectrum.zeroLocus_span, PrimeSpectrum.mem_zeroLocus, Set.singleton_subset_iff]
+      exact (PrimeSpectrum.mem_vanishingIdeal _ _).mp hg x hx
+    exact hx'
+  · have hq : (polyAffineProj k N).left =
+        Spec.map (CommRingCat.ofHom (polyAffineProjRingHom k N)) := rfl
+    rw [polyAffineIsoOfAlgEquiv_hom_left, hq, ← Spec.map_comp, ← Spec.map_comp,
+      IsFinite.SpecMap_iff, ← CommRingCat.ofHom_comp, ← CommRingCat.ofHom_comp,
+      CommRingCat.hom_ofHom]
+    have hle : Ideal.span {σ g} ≤ (Ideal.span {g}).comap σ.symm.toRingHom := by
+      rw [Ideal.span_singleton_le_iff_mem, Ideal.mem_comap]
+      simp
+    exact (RingHom.Finite.of_surjective _
+      (Ideal.quotientMap_surjective (H := hle) σ.symm.surjective)).comp
+      (MvPolynomial.finite_quotient_comp_rename_succ _ hσ)
+
 end AlgebraicGeometry

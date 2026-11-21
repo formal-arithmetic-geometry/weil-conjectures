@@ -169,12 +169,6 @@ namespace Hom
 
 variable (φ : M.Hom N f f') {pM : M.total ⟶ X} {pN : N.total ⟶ Y} {πM : X' ⟶ X} {πN : Y' ⟶ Y}
 
-/-- The square of special fibres `π_M ≫ f = f' ≫ π_N` of a morphism of models compatible with
-projections, where `π_M = i_M ≫ p_M` and `π_N = i_N ≫ p_N`. -/
-lemma commSq_specialization (hπM : M.i ≫ pM = πM) (hπN : N.i ≫ pN = πN)
-    (hp : φ.total ≫ pN = pM ≫ f) : CommSq πM f' f πN :=
-  ⟨by rw [← hπM, ← hπN, Category.assoc, ← hp, ← Category.assoc, ← φ.comm_i, Category.assoc]⟩
-
 /-- **Pullback compatibility of the specialization maps**: for a morphism of models `φ : M ⟶ N`
 over `f` and `f'` compatible with projections `p_M`, `p_N`, the pullback exchange
 `α_f : Lf'^* Ψ_N ⟶ Ψ_M Lf^*` carries `Lf'^* σ_N(K)` to `σ_M(Lf^* K)`, up to the pullback
