@@ -103,6 +103,8 @@ This trace is `AlgebraicGeometry.Scheme.residueTrace`, and Serre duality for it 
 - `AlgebraicGeometry.Scheme.degree_eq_genus`: a line bundle with `h^0 = 1` and no higher
   cohomology has degree `g`.
 - `AlgebraicGeometry.Scheme.exists_isInvertible_twist`: the twist lemma.
+- `AlgebraicGeometry.Scheme.Modules.riemannRoch_serreDuality`: Riemann–Roch and Serre duality
+  for a line bundle on a curve, in one statement.
 -/
 
 @[expose] public section
@@ -1463,6 +1465,33 @@ theorem finrankH_zero_eq [GlobalSectionsBijective k X] (ℒ : X.Modules) [ℒ.Is
   rw [Modules.degree, eulerChar_unit_eq, Modules.eulerChar_eq_finrankH_zero_sub_finrankH_one,
     Modules.finrankH_one_eq_zero_of_degree ℒ hd]
   ring
+
+/-- **Riemann–Roch and Serre duality for line bundles on a curve.** Let `ℒ` be a line bundle on
+a smooth proper curve `X` over `k` with `H⁰(X, 𝒪_X) = k`, of genus `g`, and let
+`ω = Ω¹_{X/k}`. Then `χ(ℒ) = deg ℒ + 1 - g`, `H¹(X, ℒ)^∨ ≅ H⁰(X, ω ⊗ ℒ⁻¹)`, `deg ω = 2g - 2`
+and `h⁰(ω) = g`. If moreover `deg ℒ > 2g - 2`, then `H¹(X, ℒ) = 0` and
+`h⁰(ℒ) = deg ℒ + 1 - g`. -/
+theorem Modules.riemannRoch_serreDuality [GlobalSectionsBijective k X] (ℒ : X.Modules)
+    [ℒ.IsInvertible] :
+    ℒ.eulerChar k = ℒ.degree k + 1 - arithmeticGenus k X ∧
+      Nonempty (Module.Dual k (ℒ.H 1) ≃ₗ[k]
+        ((X ↘ Spec (.of k)).relativeDifferentials ⊗ₘ ℒᵛ).H 0) ∧
+      (X ↘ Spec (.of k)).relativeDifferentials.degree k = 2 * (arithmeticGenus k X : ℤ) - 2 ∧
+      Modules.finrankH k (X ↘ Spec (.of k)).relativeDifferentials 0 = arithmeticGenus k X ∧
+      (2 * (arithmeticGenus k X : ℤ) - 2 < ℒ.degree k →
+        Subsingleton (ℒ.H 1) ∧
+          (Modules.finrankH k ℒ 0 : ℤ) = ℒ.degree k + 1 - arithmeticGenus k X) := by
+  refine ⟨Modules.eulerChar_eq_degree_add ℒ, ?_, degree_relativeDifferentials,
+    finrankH_relativeDifferentials_zero_eq_arithmeticGenus, fun hd ↦ ?_⟩
+  · have := Modules.IsInvertible.sheafOfModules_isInvertible ℒ
+    obtain ⟨e⟩ := serreDuality (k := k) (X := X) 0 1 rfl
+    let ℱ : (SheafOfModules.isFiniteLocallyFree X.ringCatSheaf).FullSubcategory :=
+      ⟨ℒ, SheafOfModules.IsInvertible.isFiniteLocallyFree ℒ⟩
+    exact ⟨(e.app (op ℱ)).toLinearEquiv ≪≫ₗ
+      ((Modules.cohomologyFunctor k 0).mapIso (β_ ℒᵛ _)).toLinearEquiv⟩
+  · have hd' : 2 * (arithmeticGenus k X : ℤ) - 1 ≤ ℒ.degree k := by omega
+    exact ⟨Module.finrank_zero_iff.mp (Modules.finrankH_one_eq_zero_of_degree ℒ hd'),
+      finrankH_zero_eq ℒ hd'⟩
 
 /-- **The criterion for very ampleness on a curve.** Let `k` be algebraically closed and `ℳ` a
 line bundle on a smooth proper curve with `H⁰(X, 𝒪_X) = k`. Suppose that twisting by the ideal
