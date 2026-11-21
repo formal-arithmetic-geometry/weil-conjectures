@@ -10,8 +10,9 @@ public import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import WeilConjectures.Algebra.Homology.HomComplexShiftLeft
 
 /-! # Left-argument shift comparison for internal derived Hom
-Source: Stacks Project, Cohomology on Sites, Section 21.34 (Tag 0A8X)
-and Section 21.35 (Tag 08JA); the signed shift calculation is written here.
+## References
+
+* Stacks Project, Section 21.34 (Tag 0A8X) and Section 21.35 (Tag 08JA) of Cohomology on Sites
 -/
 
 @[expose] public section
@@ -22,20 +23,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Shifting the source argument by m shifts internal Hom by -m.
-Proof: Represent P by L and the second variable by a functorial K-injective I.
-The signed reindexing of Hom(L,I)[-m] to Hom(L[m],I) sends the component in
-index p and degree k to (-1)^(m*k) times the component in index p+m.
-The inverse reindexes backwards with the same sign. The differential identity
-follows by comparing the postcomposition and precomposition terms: their
-relative sign is (-1)^m, canceled by the adjacent-degree scalar ratio.
-Postcomposition commutes with reindexing and scalar multiplication. Localize
-this natural chain isomorphism and use the representative comparison for
-internal derived Hom. Quasi-isomorphism invariance descends the comparison
-and its naturality to the derived category. The construction also works for
-negative m and zero objects; m=0 has identity reindexing and signs.
-Source: Stacks Project, sites-cohomology.tex, Sections 21.34 and 21.35,
-Tags 0A8X and 08JA. -/
+/-- Shifting the source argument by m shifts internal Hom by -m. -/
 theorem derivedInternalHom_shift_left
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

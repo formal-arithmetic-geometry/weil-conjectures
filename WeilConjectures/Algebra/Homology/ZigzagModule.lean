@@ -14,7 +14,9 @@ public import Mathlib.LinearAlgebra.Quotient.Basic
 /-!
 # Zig-zag modules of homological double complexes
 
-Source: Stacks Project, Algebra, Lemma Tag 00M1, proof
+## References
+
+* [Stacks Project, Tag 00M1](https://stacks.math.columbia.edu/tag/00M1), proof
 -/
 
 @[expose] public section
@@ -128,17 +130,7 @@ noncomputable def zigzagTotalMap {A B : HomologicalComplex₂ (ModuleCat R) (Com
 
 set_option backward.isDefEq.respectTransparency false in
 open Classical in
-/--
-The componentwise map preserves zig-zags and trivial zig-zags
-(Stacks, Algebra, Tag 00M1, proof and functoriality paragraph).
-
-For a zig-zag `a`, apply `Φ` to each equality `d a = δ a`. Commutation of the
-component maps of `Φ` with both differentials turns this into the corresponding
-equality for `Φ a`, so `Φ a` is a zig-zag. For a boundary `D b`, inspect each
-component: linearity and commutation with `d` and `δ` give
-`Φ (d b + δ b) = d (Φ b) + δ (Φ b)`. Hence `Φ (D b) = D (Φ b)`, including at
-the boundary where the missing term is zero. Thus the image of every boundary
-is a boundary. This is clause (b) of the functoriality node. -/
+/-- The componentwise map preserves zig-zags and trivial zig-zags. -/
 theorem zigzagTotalMap_preserves
     {A B : HomologicalComplex₂ (ModuleCat R) (ComplexShape.down ℕ)
       (ComplexShape.down ℕ)} (Φ : A ⟶ B) (n : ℕ) :

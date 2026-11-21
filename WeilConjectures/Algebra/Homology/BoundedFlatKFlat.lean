@@ -18,7 +18,9 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 /-!
 # Bounded-above flat module complexes are K-flat
 
-Source: Stacks Project, More on Algebra, Lemma 15.59.1 (Tag 064K)
+## References
+
+* Stacks Project, More on Algebra, Lemma 15.59.1 (Tag 064K)
 -/
 
 @[expose] public section
@@ -29,16 +31,9 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-/-- Stacks Project, More on Algebra,
-Lemma 15.59.1 (Tag 064K): a bounded-above cochain complex of flat modules over a
-commutative ring is K-flat. Concretely, tensoring it with every acyclic complex
-and taking the total complex gives an acyclic complex.
-
-Proof: Translate termwise module flatness to categorical flatness with
-`ModuleCat.flat_iff_flat`. Exact filtered colimits and the closed tensor structure
-of modules let `kFlat_of_isStrictlyLE_of_flat` apply. Pass to the homotopy category;
-`kFlat_iff_preserves_acyclic` gives acyclicity of tensoring an arbitrary acyclic
-complex with `P`, and the quotient acyclicity equivalence returns the claim. -/
+/-- A bounded-above cochain complex of flat modules over a commutative ring is K-flat.
+Concretely, tensoring it with every acyclic complex and taking the total complex gives an
+acyclic complex. -/
 theorem acyclic_mapBifunctor_of_boundedAbove_flat
     {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{u} R) ℤ)
     (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))

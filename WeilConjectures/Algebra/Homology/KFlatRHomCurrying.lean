@@ -11,9 +11,12 @@ public import WeilConjectures.Algebra.Homology.KInjectiveHomComplex
 public import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.Algebra.Homology.HomTensorNaturality
 
-/-! # Normalized currying on K-flat complex representatives
+/-!
+# Normalized currying on K-flat complex representatives
 
-Source: Stacks Project, Cohomology on Sites, Tags 08J9, 0A90 and 0A96.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 08J9, 0A90 and 0A96
 -/
 
 @[expose] public noncomputable section
@@ -38,8 +41,7 @@ set_option hygiene false in
 set_option quotPrecheck false in
 local notation "K" => CochainComplex A ℤ
 
-/-- The existing predicate and its full subcategory; no resolution is chosen.
-Source: Stacks 0A96. -/
+/-- The existing predicate and its full subcategory; no resolution is chosen. -/
 abbrev flat : ObjectProperty K := fun P ↦ P.IsKFlatTensor
 
 variable [HasDerivedCategory.{w} A]
@@ -48,20 +50,17 @@ set_option hygiene false in
 set_option quotPrecheck false in
 local notation "Der" => DerivedCategory A
 
-/-- The actual functorial K-injective replacement used by derived internal Hom.
-Source: Stacks 08J9. -/
+/-- The actual functorial K-injective replacement used by derived internal Hom. -/
 abbrev resolution : K ⥤ K :=
   haveI : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
   CochainComplex.kInjectiveResolutionFunctor.{u} A
 
-/-- Its actual coaugmentation.
-Source: Stacks 08J9. -/
+/-- Its actual coaugmentation. -/
 abbrev toResolution : 𝟭 K ⟶ resolution R :=
   haveI : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
   CochainComplex.toKInjectiveResolution.{u} A
 
-/-- The localization factorization, fixing the representative comparison uniquely.
-Source: Stacks 08J9. -/
+/-- The localization factorization, fixing the representative comparison uniquely. -/
 def representativeIso :
     (DerivedCategory.Q.op.prod DerivedCategory.Q) ⋙ derivedInternalHom J R ≅
       (𝟭 Kᵒᵖ).prod (resolution R) ⋙
@@ -73,8 +72,7 @@ def representativeIso :
         CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩))
     (DerivedCategory.Q.op.prod DerivedCategory.Q)
 
-/-- Chain-level currying fixed by evaluation on pure tensors.
-Source: Stacks 0A90. -/
+/-- Chain-level currying fixed by evaluation on pure tensors. -/
 def chainIso (P L M : K) :
     letI := SheafOfModules.monoidalCategory R
     homComplex (R := R) P (homComplex (R := R) L M) ≅
@@ -86,15 +84,13 @@ def chainIso (P L M : K) :
     (fun n ↦ asIso (homTensorDegreewiseMap R P L M n))
     (fun n m _ ↦ homTensorDegreewiseMap_comm R P L M n m)
 
-/-- The actual total tensor bifunctor.
-Source: Stacks 0A90. -/
+/-- The actual total tensor bifunctor. -/
 abbrev total : K × K ⥤ K :=
   letI := SheafOfModules.monoidalCategory R
   Functor.uncurry.obj ((curriedTensor A).map₂HomologicalComplex
     (.up ℤ) (.up ℤ) (.up ℤ))
 
-/-- Iterated derived internal Hom on two K-flat representatives and a derived target.
-Source: Stacks 08J9. -/
+/-- Iterated derived internal Hom on two K-flat representatives and a derived target. -/
 def left : (flat R).FullSubcategoryᵒᵖ × ((flat R).FullSubcategoryᵒᵖ × Der) ⥤ Der :=
   let a := CategoryTheory.Prod.fst (flat R).FullSubcategoryᵒᵖ
     ((flat R).FullSubcategoryᵒᵖ × Der) ⋙ (flat R).ι.op ⋙ DerivedCategory.Q.op
@@ -106,8 +102,7 @@ def left : (flat R).FullSubcategoryᵒᵖ × ((flat R).FullSubcategoryᵒᵖ × 
     ((flat R).FullSubcategoryᵒᵖ × Der) ⋙ CategoryTheory.Prod.snd (flat R).FullSubcategoryᵒᵖ Der
   a.prod' (b.prod' c ⋙ derivedInternalHom J R) ⋙ derivedInternalHom J R
 
-/-- Derived internal Hom from the ordinary total tensor of the representatives.
-Source: Stacks 08J9. -/
+/-- Derived internal Hom from the ordinary total tensor of the representatives. -/
 def right : (flat R).FullSubcategoryᵒᵖ × ((flat R).FullSubcategoryᵒᵖ × Der) ⥤ Der :=
   let a := CategoryTheory.Prod.fst (flat R).FullSubcategoryᵒᵖ
     ((flat R).FullSubcategoryᵒᵖ × Der) ⋙ (flat R).ι.op
@@ -120,15 +115,13 @@ def right : (flat R).FullSubcategoryᵒᵖ × ((flat R).FullSubcategoryᵒᵖ ×
     DerivedCategory.Q.op
   t.prod' c ⋙ derivedInternalHom J R
 
-/-- Restrict the derived target variable to complexes.
-Source: Stacks 08J9. -/
+/-- Restrict the derived target variable to complexes. -/
 abbrev representativeFunctor :
     (flat R).FullSubcategoryᵒᵖ × ((flat R).FullSubcategoryᵒᵖ × K) ⥤
       (flat R).FullSubcategoryᵒᵖ × ((flat R).FullSubcategoryᵒᵖ × Der) :=
   (𝟭 _).prod ((𝟭 _).prod DerivedCategory.Q)
 
-/-- Comparison with an already K-injective target, using the coaugmentation.
-Source: Stacks 08J9. -/
+/-- Comparison with an already K-injective target, using the coaugmentation. -/
 def injectiveRepresentativeIso {S : Type*} [Category S] (G : S ⥤ Kᵒᵖ × K)
     (hG : ∀ X, (G.obj X).2.IsKInjective) :
     G ⋙ (DerivedCategory.Q.op.prod DerivedCategory.Q) ⋙ derivedInternalHom J R ≅
@@ -152,9 +145,7 @@ def injectiveRepresentativeIso {S : Type*} [Category S] (G : S ⥤ Kᵒᵖ × K)
   exact Functor.isoWhiskerLeft G (representativeIso R) ≪≫ (asIso α).symm
 
 omit [HasDerivedCategory A] in
-/-- Naturality of the evaluation-normalized chain currying.
-Source: Stacks 0A90.
-Proof: Apply degreewise naturality and the extensionality of chain maps. -/
+/-- Naturality of the evaluation-normalized chain currying. -/
 theorem chainIso_natural (P P' L L' M M' : K)
     (f : P' ⟶ P) (g : L' ⟶ L) (h : M ⟶ M') :
     letI := SheafOfModules.monoidalCategory R
@@ -177,8 +168,7 @@ theorem chainIso_natural (P P' L L' M M' : K)
 -- Descent combines large tensor and localization comparison terms.
 set_option backward.isDefEq.respectTransparency true in
 /-- The chain-representative comparison before descent in the target variable.
-It is fixed by localization factorization and pure-tensor evaluation.
-Source: Stacks 08J9, 0A90 and 0A96 -/
+It is fixed by localization factorization and pure-tensor evaluation. -/
 @[irreducible] def representativeCurryIso :
     representativeFunctor R ⋙ left R ≅ representativeFunctor R ⋙ right R := by
   let := SheafOfModules.monoidalCategory R
@@ -249,8 +239,7 @@ Source: Stacks 08J9, 0A90 and 0A96 -/
           f.1.unop.hom f.2.1.unop.hom ((resolution R).map f.2.2)))
   exact eLeft ≪≫ Functor.isoWhiskerRight eChain Q ≪≫ eRight.symm
 
-/-- Canonical derived currying, obtained by the fully faithful localization descent.
-Source: Stacks 08J9. -/
+/-- Canonical derived currying, obtained by the fully faithful localization descent. -/
 @[irreducible] def curryIso : left R ≅ right R :=
   (Localization.fullyFaithfulWhiskeringLeft (representativeFunctor R)
     ((MorphismProperty.isomorphisms (flat R).FullSubcategoryᵒᵖ).prod

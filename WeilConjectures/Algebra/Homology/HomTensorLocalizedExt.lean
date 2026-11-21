@@ -13,7 +13,10 @@ import WeilConjectures.Algebra.Homology.HomTensorSummandLocalizedExt
 /-!
 # Localized pure-tensor extensionality
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 0A90](https://stacks.math.columbia.edu/tag/0A90)
 -/
 
 @[expose] public section
@@ -209,19 +212,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 
 -- Transposing the internal Hom unfolds the localized module structures in two universes.
 set_option synthInstance.maxSize 256 in
-/-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors.
-Source: Stacks Project, Cohomology on Sites, Tag 0A90, degreewise construction;
-Modules on Sites, Section 03EK, tensor product universal property.
-
-Proof: Fix a source section over U and regard its images as morphisms on the
-localized site over U. Restrict each such morphism to every total tensor summand.
-The tensor summand is the sheafification of the presheaf tensor. Equality on
-pure tensors gives equality on the presheaf tensor by its bilinear universal
-property. The sheafification adjunction gives equality on the sheaf tensor,
-including after localization, since sheafification commutes with restriction
-to a localized site. The coproduct universal property gives equality on the
-total term. Finally extensionality of internal-Hom sections, linear maps and
-sheaf morphisms gives equality of the two original morphisms. -/
+/-- Maps to the internal Hom out of a total tensor are determined on localized pure tensors. -/
 theorem homTensorLocalized_ext
     (K L : CochainComplex Mod ℤ) (N X : Mod) (p : ℤ) :
     letI := SheafOfModules.monoidalCategory R

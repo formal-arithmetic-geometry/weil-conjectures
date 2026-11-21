@@ -11,7 +11,11 @@ import WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawTransport
 import WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawCompatibility
 
 /-! # Derived counit transport before homology
-Source: Stacks Project, Tags 06Y6 and 05RR. -/
+
+## References
+
+* Stacks Project, Tags 06Y6 and 05RR
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -20,23 +24,7 @@ open CategoryTheory
 open scoped TensorProduct ChangeOfRings
 namespace ModuleCat
 
-/-- Transport of universal scalar-extension counits in the derived category.
-Source: Stacks Project, Tag 06Y6 (independence of choices) and Tag 05RR.
-
-Proof: restriction along each ring equivalence is an exact equivalence with
-inverse restriction along the inverse ring equivalence. Lift the equivalences
-on homotopy categories through localization; this works for both chosen
-morphism universes by localization uniqueness. Let E be the lifted B-restriction
-and q its localization factorization. Transport L₀ through the lifted inverse
-R-restriction. Its counit is obtained by descending t to homotopy categories
-and composing the localization factorizations. Precomposition and
-postcomposition by equivalences preserve the right Kan extension universal
-property: transport a test transformation through the inverse equivalences,
-use h₀ for its unique factorization, and transport back. Thus uniqueness with
-h identifies this transported functor with L followed by E. Whiskering the
-unique isomorphism with complex localization gives a. Its counit compatibility
-is exactly the displayed equation, using q and the descended t. No homology
-functor, degree, or homology factorization enters this statement. -/
+/-- Transport of universal scalar-extension counits in the derived category. -/
 theorem exists_derivedExtension_ringEquiv_raw_counit
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

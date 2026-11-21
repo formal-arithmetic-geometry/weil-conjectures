@@ -13,7 +13,10 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
 
 /-! # Explicit surviving diagonal map
-Source: Stacks Project, Homology, Tag 0133; finite-strip cone refinement, step 3.
+
+## References
+
+* Stacks Project, Tag 0133
 -/
 
 @[expose] public section
@@ -37,8 +40,7 @@ noncomputable def finiteStripSourceInclusion
     (CochainComplex.mappingCone.inl b).v (n + 1) n (by omega)
   else 0
 
-/-- The row cone's source and target inclusions into the ambient cone.
-Source: Stacks, Tag 0133; finite-strip cone refinement, step 3. -/
+/-- The row cone's source and target inclusions into the ambient cone. -/
 noncomputable def finiteStripRowInclusion
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     [K.HasTotal (ComplexShape.up ℤ)] (A : CochainComplex C ℤ)
@@ -53,11 +55,7 @@ noncomputable def finiteStripRowInclusion
       (K.ιTotalOrZero (ComplexShape.up ℤ) (n - p) p n ≫
         (CochainComplex.mappingCone.inr b).f n)
 
-/-- The explicit row inclusion lands in the filtration tail.
-Source: Stacks, Tag 0133; finite-strip cone refinement, step 3.
-Proof: the source generator belongs to the tail at `n+1=p`. The target generator
-has vertical index `p` and belongs to the tail whenever its horizontal index is
-in the strip. Outside the strip its source is zero. Add the two factorizations. -/
+/-- The explicit row inclusion lands in the filtration tail. -/
 theorem finiteStripRowInclusion_factors
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)
@@ -129,8 +127,7 @@ theorem finiteStripStep_image_isIso
   exact isIso_of_mono_of_epi _
 
 /-- The canonical surviving diagonal map to the graded object, constructed by
-factorization through the tail followed by its cokernel projection.
-Source: Stacks, Tag 0133; finite-strip cone refinement, step 3. -/
+factorization through the tail followed by its cokernel projection. -/
 noncomputable def finiteStripGradedMap
     (K : HomologicalComplex₂ C (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     [K.HasTotal (ComplexShape.up ℤ)] (r : ℕ)

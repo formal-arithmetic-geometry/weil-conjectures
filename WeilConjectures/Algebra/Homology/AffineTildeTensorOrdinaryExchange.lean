@@ -16,7 +16,11 @@ import all WeilConjectures.Algebra.Homology.AffineTildeTensorOrdinaryExchangePre
 
 /-! # Ordinary affine exchange in tensor coordinates
 
-Source: Stacks Project, Tags 01I9, 06Y6 and 08HY.
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08HY
+* Stacks Project, Tag 01I9
 -/
 
 @[expose] public section
@@ -51,8 +55,7 @@ local instance ordinaryExchangePullbackAdditive {X Y : Scheme.{u}} (f : X ⟶ Y)
   SingleComplexBaseChange.tensorPullbackAdditive.{u, w} f
 
 /-- The ordinary coefficient map, affine pushforward comparison and derived unit.
-This is a concrete map, independent of any derived scalar-extension model.
-Source: Stacks Project, Tags 06Y6 and 08HY. -/
+This is a concrete map, independent of any derived scalar-extension model. -/
 def affineTildeTensorOrdinaryTargetMap
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B]
@@ -80,26 +83,7 @@ def affineTildeTensorOrdinaryTargetMap
           (((affinePushforwardTilde D).mapHomologicalComplex (.up ℤ)).obj Cg)))
 
 /-- Ordinary exchange, in unit-normalized affine tensor coordinates, followed by
-its right-derived unit. This is independent of any derived tensor model or counit.
-Source: Stacks Project, Tags 01I9, 06Y6 (coefficient map) and 08HY (ordinary exchange).
-
-Proof: on each term, transpose ordinary exchange under tensor pullback along f'.
-The defining ordinary mate is pushforward of the p-pullback unit followed by
-pushforward composition. Both tensor/tilde isomorphisms take the pullback unit
-to 1 tensor q. The canonical affine pushforward comparison is built from the
-same tilde unit, sections restriction and tilde counit. Consequently the
-transposed arrow sends b tensor q to psi(b) tensor q. The hypothesis on k fixes
-exactly these generators; tensor induction gives equality on each term and
-complex extensionality gives equality of chain maps. The commutative spectrum
-square supplies the scalar-compatibility required in this transposition.
-Descend this identity to homotopy and derived categories, respecting the
-composition comparisons in moduleHomotopyBaseChange. Naturality of the
-right-derived unit moves the inverse tensor/tilde comparison across the final
-pushforward unit. This is precisely the displayed equation. The supplied invertible p-counit
-normalizes the target representative: its composite with t.hom is the inverse
-tensor/tilde comparison. No K-flatness, quasi-coherence or cartesian-square
-hypothesis is used here.
-Zero complexes and zero rings are included by the same tensor induction. -/
+its right-derived unit. This is independent of any derived tensor model or counit. -/
 theorem affineTildeTensorOrdinaryExchange
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B]

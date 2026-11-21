@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.TotalFreeFiltrationCokernelOdd
 /-!
 # Splittings and free quotients of the alternating column filtration
 
-Source: Stacks Project, Tag 09KP, filtration construction.
+## References
+
+* Stacks Project, Tag 09KP, filtration construction.
 -/
 
 @[expose] public section
@@ -32,28 +34,7 @@ variable (e : ∀ j : ℕ, (S j).X₂ ≅ K.X (-(j : ℤ)))
 variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
 /-- The explicitly constructed stage inclusions split degreewise, and their
-cokernels are coproducts of single-degree copies of the ring.
-Source: Stacks Project, Tag 09KP, proof, successive quotients.
-
-Proof. The coproduct description of the total terms identifies the even stage
-`2*j` with the direct sum of the complete columns `-i` for `i<j`. The odd stage
-`2*j+1` adds the image of the first arrow in `S j`, transported through `e j`.
-The next even stage adds the complete column `-j`. These decompositions are
-valid also for `j=0`, when the preceding sum is zero. Projection onto preceding
-columns gives a retraction for the even-to-odd map; for the odd-to-even map use
-in addition the degreewise retraction in the chosen splitting of `S j`.
-
-The quotient for an even-to-odd map is the first object of `S j`, reindexed from
-vertical degree `d` to total degree `d-j`. The quotient for the odd-to-even map
-is its third object, reindexed in the same way. Short exactness identifies these
-with the categorical cokernels. The horizontal part of the differential lands
-in preceding columns and is consequently zero in either quotient. The vertical
-part is zero on the two endpoint complexes, since the specified coproducts of
-single-degree complexes have zero differential. Multiplication by the total
-sign therefore has no effect. Reindex each single summand to degree `d-j` to
-obtain the asserted isomorphisms of complexes. Every natural stage is either
-`2*j` or `2*j+1`, so these two cases prove the statement for all stages.
--/
+cokernels are coproducts of single-degree copies of the ring. -/
 theorem quotients
     (h_exact : ∀ j, (S j).ShortExact)
     (h_split : ∀ j (k : ℤ), Nonempty

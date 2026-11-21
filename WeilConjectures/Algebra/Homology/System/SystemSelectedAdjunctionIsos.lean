@@ -10,8 +10,9 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 
 /-! # Isomorphisms in the selected-system adjunction
 
-Source: Zheng, Construction 4.1, and the selected-level calculation in the proof of
-exceptional integral scalar mates.
+## References
+
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section

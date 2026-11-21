@@ -18,7 +18,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Scalar restriction preserves the computation of derived sections
 
-Source: Stacks Project, Sites Cohomology, Tag 0D6E.
+## References
+
+* Stacks Project, Tag 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -227,19 +229,7 @@ private theorem restrictionSectionsOfEquivalence
   exact quasiIso_map_iso FG F eΓ j
 
 /-- A K-injective coefficient complex remains acyclic for the computation of global
-sections after scalar restriction. The restricted complex need not be K-injective.
-Source: Stacks Project, sites-cohomology.tex, Tag 0D6E,
-lemma-derived-pushforward-composition, specialized to scalar restriction and sections
-
-Proof: replace the site by its small model in the coefficient universe and transport
-its topology. Restriction of module sheaves along the site equivalence is an exact
-equivalence, commutes with coefficient restriction, and preserves K-injectivity and
-quasi-isomorphisms. The underlying presheaf limits are canonically unchanged. On the
-small model apply the resolution clause of
-lem-coef-derived-sections-scalar-coherence to I, K and j. The canonical composition
-comparison of Tag 0D6E identifies the resulting map with sections of j and says it is
-a quasi-isomorphism. Transport this conclusion back along the limit comparison.
-The argument applies also to the empty site and the zero coefficient ring. -/
+sections after scalar restriction. The restricted complex need not be K-injective. -/
 theorem coefficientRestrictionSections_quasiIso
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C}

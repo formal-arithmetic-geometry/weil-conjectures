@@ -10,7 +10,11 @@ public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 import WeilConjectures.Algebra.Homology.SecondLocalizationOrdinarySquare
 import WeilConjectures.Algebra.Homology.ScalarExtensionHomologySquare
 /-! # Comparison for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
+
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -78,20 +82,7 @@ variable (R A B Bp D : Type u)
 
 set_option linter.unusedSectionVars false in
 include tRB tAD tBD tApD tBpD tBBpD in
-/-- The localized comparison commutes with the characterized coefficient map.
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-
-Proof: the defining leftDerivedLift factorization identifies the composite of
-secondLocalizationDerivedMap with the target counit with the source counit
-extended to Bp, followed by the ordinary associator. Apply cohomology, exact
-flat homology base change, and cohomologyIso. Substitute comparison_eq for the
-two models. The ordinary associators and ordinaryToLocalized send b tensor x
-to its coefficient image tensor x; their composite to D agrees termwise.
-Use localized_eq and transpose by the extension/restriction adjunction.
-The generator formula for e gives the claimed D-linear square. Every tau in
-the statement equals the ordinary identification because pure tensors generate
-in each degree. The proof works for zero complexes and zero D, and does not
-require flatness of D. -/
+/-- The localized comparison commutes with the characterized coefficient map. -/
 theorem secondLocalization_comparison (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

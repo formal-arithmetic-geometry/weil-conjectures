@@ -22,7 +22,11 @@ import WeilConjectures.Algebra.Homology.UniversalAcyclicModuleKFlat
 /-!
 # K-flatness and stalks of a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tag 0DEN, lemma-check-K-flat-stalks
+A complex of modules on a ringed site is K-flat if and only if its stalks are K-flat.
+
+## References
+
+* [Stacks Project, Cohomology on Sites, Tag 0DEN](https://stacks.math.columbia.edu/tag/0DEN)
 -/
 
 @[expose] public section
@@ -71,36 +75,9 @@ private theorem module_kFlat_of_cone
   exact Q.ext_of_isTriangulatedClosed₂ (mappingCone.triangleh q)
     (HomotopyCategory.mappingCone_triangleh_distinguished q) hP hC
 
-/-- K-flat complexes have K-flat stalks at every topos point, and a specified
-conservative family detects K-flatness. RingedSitePoint fixes the ordinary stalk
-ring, module action and functor on maps by inverse-image operation graphs. Such
-presentations exist for every point, and both assertions hold for every presentation.
-There is no flat-term or boundedness hypothesis, and the family may be empty.
-Source: Stacks 0DEN.
-
-Proof:
-1. The exact module stalk functor commutes with signed total tensor. A conservative
-family of set stalks reflects isomorphisms of module sheaves and therefore detects
-zero homology, including for an empty conservative family.
-2. Choose a K-flat resolution P → K whose stalk is K-flat. Construct P with the
-categorical reduced flat resolution: it is a filtered colimit of bounded-above
-flat complexes. Stalks preserve flat modules and colimits, so its stalk is K-flat.
-3. The cone E of this resolution is acyclic and K-flat. Hence F tensor E is acyclic
-for every complex F, by the proved universal-acyclicity argument for K-flat cones.
-4. For every finitely presented stalk module M, the universal finite matrix
-construction realizes M as a retract of the stalk of a global module sheaf F.
-Stalk exactness and the tensor comparison make F_p[0] tensor E_p acyclic. Tensor
-and homology preserve retracts, so E_p tensor M[0] is acyclic. The finite module
-test criterion makes E_p K-flat. Additive stalks commute with mapping cones, and
-triangulated two-out-of-three then makes K_p K-flat.
-5. Conversely, stalk the tensor of K with an arbitrary acyclic test complex.
-Each stalk is acyclic by the assumed K-flatness. Conservative-family detection
-makes the original tensor acyclic, which is precisely K-flatness of K.
-
-The universal matrix construction avoids replacing the site or transporting
-canonical filtered-colimit stalk rings. The chosen point presentation is used
-throughout, and no flatness of K's individual terms is assumed.
--/
+/-- K-flat complexes have K-flat stalks at every topos point, and a specified conservative
+family of points detects K-flatness. There is no flat-term or boundedness hypothesis, and the
+family may be empty. -/
 theorem ringedSite_kFlat_stalk_criterion
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     (J : Precoverage C)

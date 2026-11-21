@@ -15,11 +15,13 @@ public import Mathlib.Basic.Finite.Sigma
 /-!
 # Finite initial truncation of the simplicial indexing category
 
-Source: Stacks Project, Tag 017K, proof, and Tag 002R
-
-`S.Elements` is the opposite of the category of simplices in the node: a morphism
+`S.Elements` is the opposite of the category of simplices: a morphism
 `(n,s) ⟶ (m,t)` lies over `[m] ⟶ [n]` and satisfies `S(φ)(s) = t`.
 The degree predicate selects the full subcategory directly, without a new definition.
+
+## References
+
+* Stacks Project, Tag 017K, proof, and Tag 002R
 -/
 
 @[expose] public section
@@ -145,29 +147,11 @@ private lemma four_step (S : SSet.{u}) (m : ℕ)
     common_ancestor S m u u' z hu hu' (β ≫ α) (β' ≫ α')
   exact ⟨⟨u, by omega⟩, ⟨a, ha⟩, ⟨u', by omega⟩, β, p, q, β', t, hp, hq⟩
 
-/-- Stacks Project, Tag 017K, proof; limit comparison by Tag 002R.
-
-Proof:
-1. The truncated category has finitely many objects, the union of the finite `S_n`
-   for `n ≤ 2 m₀`, and finite hom sets, subsets of the finite monotone-map sets.
-2. By lem-weil-pbc-simplicial-set-nondegenerate-decomposition, every simplex is the
-   degeneracy of a nondegenerate simplex of degree at most `m₀`. This supplies a
-   morphism from an object of the truncation to each object of `S.Elements`.
-3. Two monotone maps `[k] → [n]`, `[k] → [n']` with `n,n' ≤ m₀` each have at most
-   `m₀` ascents. If `k > 2 m₀`, among the first `2 m₀ + 1` adjacent pairs there
-   is one on which both maps are constant.
-4. By lem-weil-pbc-simplex-degeneracy-factorization the maps factor through that
-   elementary degeneracy. By lem-weil-pbc-simplicial-degeneracy-injective their
-   associated lower-dimensional simplices agree. Induction on `k` supplies a common
-   factor of degree at most `2 m₀` for the two maps.
-5. For arbitrary endpoints in the truncation, first decompose both into simplices
-   of degree at most `m₀`, then apply step 4. In the node's category this gives
-   `y → u ← a → u' ← y'`; in `S.Elements` all four arrows are reversed.
-   The morphisms to the fixed object commute and extend the two given morphisms.
-   A sequence on `ℕ` records its first `2 r + 1` objects; its unused tail can be constant.
-6. Steps 2 and 5 establish initiality. By lem-weil-pbc-initial-functor-limit (002R),
-   restriction preserves and detects existence of limits, and the canonical comparison
-   morphism is an isomorphism whenever the limits exist. -/
+/-- If `S` has finite nonempty levels and all simplices above degree `m₀` are degenerate, then the
+full subcategory of `S.Elements` on objects of degree at most `2 * m₀` is finite with finite
+hom sets, satisfies the zigzag connectedness conditions below, is initial in `S.Elements`, and
+hence restriction along it preserves and detects limits and the comparison map is an
+isomorphism. -/
 theorem simplicialIndex_finite_initial (S : SSet.{u}) [S.Finite]
     (hfinite : ∀ n : ℕ, Finite (S.obj (op ⦋n⦌)))
     (hnonempty : ∀ n : ℕ, Nonempty (S.obj (op ⦋n⦌)))

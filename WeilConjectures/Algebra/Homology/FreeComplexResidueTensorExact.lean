@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Homology.FreeComplexResidueDegreeCancellation
 
 /-! # Residue exactness of a finite free complex is universal in one degree
 
-Source: Stacks Project, More on Algebra, Tags 068U and 068V.
+## References
+
+* Stacks Project, More on Algebra, Tags 068U and 068V
 -/
 
 @[expose] public section
@@ -163,19 +165,7 @@ private theorem exactAt_of_principal_localizations
   exact this
 
 /-- Exactness in one degree of every maximal residue fibre of a termwise finite free
-complex implies exactness in that degree after tensoring with every module.
-
-Source: Stacks Project, More on Algebra, Tag 068U, the matrix cancellation proof,
-and Tag 068V, the maximal-localization argument.
-Proof: At each maximal ideal, identify its quotient field with the fraction field
-of the quotient and apply degree cancellation. On a principal neighborhood avoiding
-that ideal the complex is homotopy equivalent to a complex with zero middle term.
-Tensoring with an arbitrary localized module preserves the homotopy equations;
-its homology in that degree is therefore zero. Localization is exact and commutes
-with termwise tensor and homology. The principal neighborhoods cover the maximal
-spectrum, so exactness of the three-term sequence descends by localization.
-This argument uses only the three adjacent finite free terms, no boundedness.
-It includes the zero ring: exactness follows from the empty principal cover. -/
+complex implies exactness in that degree after tensoring with every module. -/
 theorem isZero_homology_tensor_of_residue
     {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{u} R) ℤ)
     (hfree : ∀ j : ℤ, Module.Free R (P.X j))

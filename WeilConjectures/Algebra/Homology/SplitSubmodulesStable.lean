@@ -10,6 +10,17 @@ public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.LinearAlgebra.Span.Basic
 
+/-!
+# Submodule terms stable under a split differential
+
+The kernel terms and the line terms attached to a split pair of functionals on a chain
+complex of modules are stable under the differential.
+
+## References
+
+* Stacks Project, Tag 00MT
+-/
+
 @[expose] public section
 
 universe u v
@@ -29,16 +40,8 @@ noncomputable def splitLineTerms
   if h : j = i then h ▸ (R ∙ z)
   else if h : j = i - 1 then h ▸ (R ∙ w) else ⊥
 
-/-- The kernel terms and the explicitly generated line terms are invariant under the differential.
-Source: Stacks Project, Algebra, Tag 00MT, proof, final three sentences.
-
-Proof: Off the chain shape the differential is zero, so its image belongs to every submodule.
-For a differential j → j - 1, the kernel condition is nontrivial only when its target is i
-or i - 1. In the first case hin applies, and in the second hd sends ker α into ker β.
-All other targets have top kernel term. For the line terms, an element at i is r • z and
-its image is r • w by hdz. An element at i - 1 is r • w and its image is zero by hout.
-At every other source the line term is bottom, so its image is zero. This proof works
-also for the zero ring; no claim of a nonzero generator is used. -/
+/-- The kernel terms and the explicitly generated line terms are invariant under the
+differential. -/
 theorem split_submodules_stable
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℤ)
     (i : ℤ) (α : C.X i →ₗ[R] R) (β : C.X (i - 1) →ₗ[R] R)

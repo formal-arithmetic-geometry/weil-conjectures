@@ -13,7 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 /-!
 # Internal Hom from a locally finitely presented module on a site
 
-Source: Stacks Project, Modules on Sites, Tag 0GMZ, restriction and the local reduction
+## References
+
+* Stacks Project, Modules on Sites, Tag 0GMZ
 -/
 
 @[expose] public section
@@ -156,20 +158,7 @@ private theorem hom_preserves_colimit_of_cover
 
 end CommRing
 
-/-- Internal Hom from a locally finitely presented sheaf preserves filtered colimits.
-
-Source: Stacks Project, Modules on Sites, Tag 0GMZ, first paragraph of the proof.
-
-Proof: Choose the covering family and finite presentations supplied by finite
-presentation. Slice restriction preserves colimits, and its comparison with internal
-Hom is natural in the target, via the equivalence between iterated slice categories.
-On each member of the family the assertion is the finite global presentation case.
-The colimit comparison is therefore an isomorphism on every member of the family.
-These restrictions jointly detect isomorphisms: any section of the target lifts on
-the covering sieve of objects mapping into the family, and equal images in the
-source agree there. Thus the underlying sheaf map is locally bijective and is an
-isomorphism. The module forgetful functor reflects this isomorphism.
--/
+/-- Internal Hom from a locally finitely presented sheaf preserves filtered colimits. -/
 theorem internalHom_preserves_filteredColimit_of_isFinitePresentation
     {C : Type (u + 1)} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})]

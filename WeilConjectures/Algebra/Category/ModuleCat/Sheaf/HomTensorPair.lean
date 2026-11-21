@@ -11,7 +11,9 @@ public import WeilConjectures.Algebra.Homology.KFlat
 /-!
 # Currying a pair of sheaf evaluations
 
-Source: Stacks Project, Modules on Sites, Lemma 03EO, and Cohomology on Sites, Tag 0A90.
+## References
+
+* Stacks Project, Modules on Sites, Lemma 03EO, and Cohomology on Sites, Tag 0A90
 -/
 
 @[expose] public section
@@ -210,8 +212,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 
 set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency false in
-/-- The sheafification extension agrees with its prescribed presheaf map on the unit.
-Source: the module sheafification adjunction and the tensor comparison inverse law. -/
+/-- The sheafification extension agrees with its prescribed presheaf map on the unit. -/
 private theorem tensorLift_unit (A B N : Mod) (q : A.val ⊗ B.val ⟶ N.val) :
     let := monoidalCategory R
     let adj := PresheafOfModules.sheafificationAdjunction
@@ -243,21 +244,7 @@ private theorem tensorLift_unit (A B N : Mod) (q : A.val ⊗ B.val ⟶ N.val) :
 
 set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency false in
-/-- Two sheaf evaluations factor through the tensor of their inputs.
-Source: Stacks Project, Modules on Sites, Lemma internal-hom-adjoint-tensor (Tag 03EO),
-and Cohomology on Sites, Lemma sites-cohomology-lemma-compose (Tag 0A90).
-
-Proof: Uncurry the underlying presheaf maps f and g by the balanced tensor
-universal property. Braiding and associativity order the three inputs as y, x, s;
-the resulting presheaf map sends s tensor (x tensor y) to g(f(s)(x))(y).
-Curry in s to obtain a presheaf tensor map A.val tensor B.val into homObj S D,
-which is a sheaf. Extend it uniquely through module sheafification and the tensor
-comparison to a sheaf map k from A tensor B into homObj S D. Transpose its local
-bilinear pairing to obtain b. The sheafification adjunction identifies k on the
-unit's pure tensors with the presheaf map. Naturality of f identifies its value
-on the restriction of s at the identity slice object with f(s) at W, giving the
-formula. The constructions use sectionwise linear maps in separate site universes;
-no complex, infinite product, or coproduct is involved. -/
+/-- Two sheaf evaluations factor through the tensor of their inputs. -/
 theorem homTensorPair_construct (S A H B D : Mod)
     (f : S ⟶ homObj (R := R) A H) (g : H ⟶ homObj (R := R) B D) :
     let := monoidalCategory R

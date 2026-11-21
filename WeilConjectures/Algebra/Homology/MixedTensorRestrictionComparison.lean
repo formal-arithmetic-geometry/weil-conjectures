@@ -18,7 +18,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 /-!
 # Restricting the mixed total tensor
 
-Source: Stacks Project, More on Algebra, Section 06Y5 and Lemma 06Y6.
+## References
+
+* Stacks Project, More on Algebra, Section 06Y5 and Lemma 06Y6
 -/
 
 @[expose] public section
@@ -195,17 +197,7 @@ private theorem totalComparison_naturality₂ {R A : Type u} [CommRing R] [CommR
 
 
 /-- Restricting the mixed total tensor gives the ordinary total tensor, naturally in
-both complexes. Source: Stacks Project, More on Algebra, Section 06Y5 and Lemma 06Y6.
-
-Proof: In bidegree `(p,q)`, identify the restriction of
-`N^q ⊗_A (A ⊗_R E^p)` with `E^p ⊗_R N^q` by
-`n ⊗ (a ⊗ e) ↦ e ⊗ a n`. The inverse sends `e ⊗ n` to
-`n ⊗ (1 ⊗ e)`. Balancing verifies that both maps are well-defined and inverse.
-They commute with maps in each factor. Restriction preserves coproducts, so taking
-coproducts over `p+q=k` gives inverse maps in each total degree. Both total complexes
-have differential `d_E ⊗ 1 + (-1)^p 1 ⊗ d_N`; the bidegree maps commute with
-these two summands separately. Thus they form a chain isomorphism, natural in both
-variables. No flatness of the ring map is needed. -/
+both complexes. -/
 theorem exists_mixedTensor_restriction_iso {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) :
     let S := (ModuleCat.restrictScalars f).mapHomologicalComplex (.up ℤ)

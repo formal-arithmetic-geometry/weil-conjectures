@@ -22,7 +22,10 @@ public import WeilConjectures.Algebra.Homology.SitePerfectModelRestriction
 
 /-! # Exact restriction and transport of strict-perfect packages
 
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 04IX.
+## References
+
+* Stacks Project, Tag 03DJ
+* Stacks Project, Tag 04IX
 -/
 
 @[expose] public noncomputable section
@@ -71,9 +74,7 @@ private theorem pushforward_finiteColimits
     { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
   exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
-/-- Further slice restriction is exact, at independent universes.
-Source: Stacks Project, Tag 04IX. Restriction commutes with kernels and sheafified
-cokernels through the same abelian-sheaf comparison. -/
+/-- Further slice restriction is exact, at independent universes. -/
 theorem overMap_exact_ofUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) {U V : C} (f : V ⟶ U)
@@ -87,7 +88,7 @@ theorem overMap_exact_ofUniverses
     pushforward_finiteColimits.{max u v, v, max u v, v, r, max u v r}
       (Sheaf.pushforwardOverMapIso _ f).inv⟩
 
-/-- Successive slice restrictions compose. Source: Stacks Project, Tag 04IX.
+/-- Successive slice restrictions compose.
 The comparison is induced by associativity of arrows in the slice. -/
 def sitePerfectOverMapComp
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
@@ -103,7 +104,7 @@ def sitePerfectOverMapComp
   rfl
 
 /-- The chosen representative definition of derived restriction agrees with the
-functor induced by exact module restriction. Source: Stacks Project, Tag 03DJ.
+functor induced by exact module restriction.
 The comparison first uses the localization comparison on the chosen representative,
 then applies the derived functor to the representative's canonical isomorphism. -/
 def overFunctor_derivedRestrictionIso
@@ -128,7 +129,7 @@ def overFunctor_derivedRestrictionIso
     F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso E)
 
 /-- An additive finite-limit-preserving functor that preserves the rank-one free module
-transports every displayed finite-free splitting. Source: Stacks Project, Tag 04IX.
+transports every displayed finite-free splitting.
 The comparison is the product comparison followed by the given rank-one isomorphisms. -/
 def StrictPerfectCoefficientPackageOnSite.map
     {C : Type u} [Category.{v} C] {D : Type u'} [Category.{v'} D]

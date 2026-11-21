@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorRingTransport
 
 /-! # Naturality of the localized tensor counit under ring isomorphisms
 
-Source: Stacks Project, Tag 06Y6, derived change of rings; Tag 0DJ7, equation-bc.
+## References
+
+* Stacks Project, Tag 06Y6, derived change of rings; Tag 0DJ7.
 -/
 
 @[expose] public section
@@ -76,19 +78,7 @@ private theorem forgetRestrictionHomology
   exact leftHomologyForgetRestriction eD S S.homologyData.left
 
 /-- Transport the localized tensor comparison through compatible ring isomorphisms.
-The target chain isomorphism is fixed on pure tensors, rather than chosen freely.
-
-Proof: the structural equations at a tensor 1 and 1 tensor b give the two
-coefficient maps into D. Forget the scalars of q and t to get additive chain
-isomorphisms; q's linearity supplies semilinearity of the first, and ht supplies
-the generator formula of the second. Apply exists_baseDerivedTensor_ring_transport.
-Forgetting after restriction has the same homology comparison as forgetting
-directly: compare the two mapped left homology data using identity maps on
-cycles and homology. Homology naturality at t then cancels the forgetful homology
-isomorphisms in the transport theorem and gives exactly the displayed square.
-No flatness, boundedness, or invertibility of either comparison is required.
-The proof also applies to zero rings and zero complexes.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ7, equation-bc. -/
+The target chain isomorphism is fixed on pure tensors, rather than chosen freely. -/
 theorem exists_baseDerivedTensor_ringIso_square
     {R A B D R0 A0 B0 D0 : Type u}
     [CommRing R] [CommRing A] [CommRing B] [CommRing D]

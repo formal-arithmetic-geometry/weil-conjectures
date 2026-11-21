@@ -47,7 +47,10 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Adjoint formula for the normalized regular quotient cone
 
-Source: Stacks 06YY and 07A6, normalized derived tensor adjunction.
+## References
+
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A6
 -/
 
 @[expose] public noncomputable section
@@ -100,18 +103,7 @@ private theorem ordinary_unit
 
 /-- The normalized cone augmentation is the restricted derived adjoint of a strict
 map to a quotient complex. The equation fixes the nullhomotopy to be zero.
-
-Source: Stacks 06YY and 07A6, normalization of derived tensor on resolutions
-
-Proof: use the normalized ordinary tensor adjunction to transpose f to g. Its unit
-is b.rho by the section formula. On a K-flat source, the universal counit followed
-by Q(g) is the derived adjoint of Q(f), by the unit normalization. The component
-formula for b.A identifies its restriction with the strict cone map whose shifted
-component is zero and whose unshifted component is f. For an arbitrary source,
-choose a K-flat resolution and precompose both sides by its invertible derived
-tensor image. Naturality of b.A, of the cone factor, and of the adjunction reduces
-the equation to that K-flat case. No boundedness or fullness of derived restriction
-is used. -/
+-/
 theorem augmentation_adjoint
     (P : CochainComplex (Modules R) ℤ) (N : CochainComplex (Modules S) ℤ)
     (f : P ⟶ ((restriction φ).mapHomologicalComplex (.up ℤ)).obj N)

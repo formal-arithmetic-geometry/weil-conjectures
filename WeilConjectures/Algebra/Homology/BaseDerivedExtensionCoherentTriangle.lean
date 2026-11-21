@@ -19,7 +19,10 @@ import WeilConjectures.CategoryTheory.LeftDerivedKanSourceTriangles
 
 /-! # Canonical completion of the derived tensor row
 
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1.
+## References
+
+* Stacks Project, Tag 06Y6, Lemma 15.61.1.
+* Stacks Project, Tag 05SE.
 -/
 
 @[expose] public section
@@ -30,21 +33,7 @@ open scoped TensorProduct ChangeOfRings
 namespace ModuleCat
 
 /-- Universal derived scalar extension preserves distinguished triangles for the
-shift structure compatible with its universal counit.
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1, and Tag 05SE.
-
-Proof: use exists_baseDerivedExtension_resolution to compute the universal
-functor on K-flat resolutions. Its counit-compatible shift is induced by
-shifting the resolutions. Extension of scalars preserves cone triangles on
-these resolutions, hence the induced functor preserves distinguished triangles.
-The right Kan universal property uniquely determines each shift comparison
-commuting with the counit. Thus the supplied CommShift structure is the
-resolution shift structure, transported through the unique universal functor
-isomorphism. Restriction A to R is exact and induces a triangulated functor
-D(A) to D(R). Compose it with this triangulated derived extension and apply it
-to the distinguished image of T. Its factorization through the homotopy
-quotient and Qh gives precisely the displayed triangle, including its third
-arrow. No flatness, boundedness or nonzero-ring hypothesis is needed. -/
+shift structure compatible with its universal counit. -/
 theorem baseDerivedExtension_coherent_triangle_distinguished
     (R A B : Type u) [CommRing R] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra R B]

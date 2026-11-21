@@ -42,7 +42,13 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # Descent of the principal-reduction comparison
 
 The flat-resolution comparison descends by the calculus of fractions, with no choice of
-unit normalization. -/
+unit normalization.
+
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 06YY
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -120,14 +126,7 @@ private theorem alpha_naturality_derived
     _ = (D.G ⋙ D.L).map (DerivedCategory.Q.map b) ≫ D.alpha P' hP' hf' := hb
     _ = _ := by rw [← Functor.map_comp_assoc, hab]
 
-/-- Exact sections commute with derived principal reduction over a domain when t is nonzero.
-
-Proof: choose a flat-term K-flat model for each derived object. Its alpha comparison is an
-isomorphism by the regular-complex quotient argument. Any derived morphism between two
-models is a roof of chain maps; resolving the roof's source by a flat-term K-flat complex
-lets resolution-independence naturality apply to both legs. Cancel the invertible denominator.
-Transport along the chosen models and assemble a natural isomorphism.
-Source: Stacks Tags 06Y6, 06YY; original blueprint steps 8--10. -/
+/-- Exact sections commute with derived principal reduction over a domain when t is nonzero. -/
 theorem comparison [IsDomain R] (ht : D.t ≠ 0) :
     Nonempty (D.G ⋙ D.L ≅ D.T ⋙ D.G') := by
   choose P hP hf he using D.good_model

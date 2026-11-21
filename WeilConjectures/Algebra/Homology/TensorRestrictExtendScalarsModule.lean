@@ -12,7 +12,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 /-!
 # Module tensor change of rings comparison
 
-Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
+## References
+
+* Stacks Project, More on Algebra, Tag 06Y1, proof.
 -/
 
 @[expose] public section
@@ -21,14 +23,8 @@ universe u
 open CategoryTheory MonoidalCategory
 
 namespace ModuleCat
-/-- Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
-
-Proof: use the balanced maps l tensor (b tensor k) to (b l) tensor k and
-l tensor k to l tensor (1 tensor k). The A-balancing uses the action through ρ;
-the B-balancing uses associativity. Tensor induction proves the inverse identities.
-For f and g the forward formula gives f(b l) tensor g(k) = b f(l) tensor g(k),
-so the comparison is natural in both factors. This requires no flatness and works
-for zero modules and zero rings. Mathlib cancelBaseChange gives the module equivalence. -/
+/-- Restriction of scalars along `ρ` of `M ⊗ (extendScalars ρ).obj N` is isomorphic to
+`(restrictScalars ρ).obj M ⊗ N`, naturally in both factors. -/
 theorem exists_tensorRestrictExtend_module_natural
     {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B) :
     ∃ e : ∀ (M : ModuleCat.{u} B) (N : ModuleCat.{u} A),

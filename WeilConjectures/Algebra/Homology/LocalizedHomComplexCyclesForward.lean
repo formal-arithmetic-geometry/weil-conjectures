@@ -11,6 +11,17 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Mathlib.Algebra.Homology.Functor
 
+/-!
+# Localized Hom-complex cycles: the forward map
+
+A localized degree-zero cycle of the sheaf Hom complex gives a chain map between the
+restrictions of the two complexes.
+
+## References
+
+* Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y
+-/
+
 @[expose] public section
 
 universe u v
@@ -20,21 +31,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The projection components of a localized degree-zero cycle form a chain map.
-Source: Stacks Project, Tag 0A8X, construction preceding Equation 0A8Y.
-
-Proof: for a cycle z, define the degree-p component by applying the chosen
-projection pi at U to iCycles z. An internal-Hom section is a linear natural
-transformation on the slice; equip it with the sheaf-morphism wrapper. The cycle
-inclusion followed by the differential is zero. Compose this equality with each
-degree-one product projection and use the differential formula in
-homComplex_exists at n = 0, m = 1. Since (-1)^0 = 1, it says that the component
-followed by d_I equals d_L followed by the next component. These are exactly the
-successive chain-map equations on the slice. Every other equation has both
-complex differentials zero by the shape condition and preservation of zero
-morphisms under restriction. Thus the components define a chain map for each z.
-The asserted formula holds by construction. This argument needs neither an
-inverse map nor preservation of the product by section evaluation. -/
+/-- The projection components of a localized degree-zero cycle form a chain map. -/
 theorem localizedHomComplex_cycles_forward
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{max u v}) (U : C)

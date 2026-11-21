@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.HomTensorSectionNaturality
 /-!
 # Pure-tensor evaluation of currying naturality
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90
 -/
 
 @[expose] public section
@@ -110,21 +112,7 @@ private theorem total_tensor_pure (K K' L L' : CochainComplex Mod ℤ)
 -- Localized Hom terms require extra elaboration of the two nested projection formulas.
 set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency true in
-/-- Naturality of the pure-tensor equation for two degreewise currying maps.
-Source: Stacks Project, Cohomology on Sites, Tag 0A90, functoriality,
-referring to More on Algebra, Lemma 15.73.1.
-
-Proof: Apply the currying condition for the primed complexes to the image of s
-under the iterated Hom map. The componentwise action specified by
-homComplex_exists first evaluates the outer map at f^i(x), then the inner map
-at g^j(y), and postcomposes the result with h^(i+j+n). Thus the left side is
-h^(i+j+n)(phi_i(f^i(x))_j(g^j(y))). For the right side use the same Hom-complex
-projection formula. Precomposition by the total tensor map restricts to the
-termwise tensor map on the (i,j) summand by ι_mapBifunctorMap. Naturality of
-the sheafification unit, its tensorator and the tensor comparison sends the
-image of x tensor y to the image of f^i(x) tensor g^j(y). Apply the unprimed
-currying condition to obtain the same value. This is an equality on one pure
-tensor; no coproduct, sheafification or internal-Hom extensionality is used. -/
+/-- Naturality of the pure-tensor equation for two degreewise currying maps. -/
 theorem homTensorCurry_natural_pure
     (K K' L L' M M' : CochainComplex Mod ℤ)
     (f : K' ⟶ K) (g : L' ⟶ L) (h : M ⟶ M') (n : ℤ) :

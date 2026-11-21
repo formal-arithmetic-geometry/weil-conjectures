@@ -13,11 +13,16 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 public import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 /-! # Canonical principal Koszul and quotient towers
 
-Source: Stacks Project, algebraization.tex Tag 0A0E and sites-cohomology.tex Tag 0941
-
 The principal Koszul complexes are represented by mapping cones of multiplication on the
 single complex. The transitions are the strict `t/id` and quotient maps,
 with their tensor augmentations.
+
+## References
+
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 06YN
+* Stacks Project, Tag 0941
+* Stacks Project, Tag 0A0E
 -/
 
 @[expose] public section
@@ -33,11 +38,7 @@ namespace CategoryTheory
 variable {C : Type uC} [Category.{vC} C]
 variable {J : GrothendieckTopology C}
 
-/-- Iterated composite of an endomorphism.
-
-Source: Stacks Project, algebraization.tex Tag 0A0E; this is the power of the regular
-section used in the principal Koszul complex.
--/
+/-- Iterated composite of an endomorphism. -/
 noncomputable def endoPow {D : Type ux} [Category.{vx, ux} D] {X : D} (f : X ⟶ X) :
     ℕ → (X ⟶ X)
   | 0 => 𝟙 X
@@ -59,29 +60,19 @@ attribute [local instance]
 attribute [local instance]
   SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 
-/-- Cache the existing sheaf-composition property on an essentially small site.
-Source: Mathlib, `CategoryTheory.Sites.Whiskering`.
-Proof: apply the existing instance. Naming this proof avoids repeated search when
-constructing the actual single-complex maps and their cones. -/
+/-- Cache the existing sheaf-composition property on an essentially small site. -/
 theorem principalKoszulHasSheafCompose :
     J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) := by infer_instance
 
 attribute [local instance 20000] principalKoszulHasSheafCompose
 
-/-- Multiplication by a global section on the unit module sheaf.
-
-Source: Stacks Project, algebraization.tex Tag 0A0E.
--/
+/-- Multiplication by a global section on the unit module sheaf. -/
 noncomputable def globalSectionMultiplication
     (t : (SheafOfModules.unit 𝓞).sections) :
     SheafOfModules.unit 𝓞 ⟶ SheafOfModules.unit 𝓞 :=
   (SheafOfModules.unit 𝓞).unitHomEquiv.symm t
 
-/-- The specified power multiplication map on the degree-zero ring complex.
-
-Source: Stacks Project, algebraization.tex Tag 0A0E.
-This named map shares the actual single-functor construction between the principal
-cone and its component API, without unfolding the single-functor coherence record. -/
+/-- The specified power multiplication map on the degree-zero ring complex. -/
 noncomputable def principalKoszulScalarComplex
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :=
   (CochainComplex.singleFunctor (𝒜) 0).map
@@ -89,7 +80,7 @@ noncomputable def principalKoszulScalarComplex
 
 /-- Tensor with the representative in the K-flat (second) variable. The canonical symmetry
 identifies this model with `P ⊗ Q_m`, including its maps and augmentations.
-Source: Stacks Tags 06YN and 0941 -/
+-/
 noncomputable def koszulTensorFunctor (P : CochainComplex 𝒜 ℤ) :
     CochainComplex 𝒜 ℤ ⥤ CochainComplex 𝒜 ℤ :=
   (MonoidalCategory.curriedTensor 𝒜).map₂CochainComplex.flip.obj P
@@ -143,38 +134,26 @@ set_option hygiene false in
 local notation "𝒜" => ringedSiteModules.{r} 𝓞
 
 
-/-- The two-term principal Koszul complex in degrees `-1,0`, as a mapping cone.
-
-Source: Stacks Project, algebraization.tex Tag 0A0E.
--/
+/-- The two-term principal Koszul complex in degrees `-1,0`, as a mapping cone. -/
 noncomputable def principalKoszul
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     CochainComplex (𝒜) ℤ :=
   CochainComplex.mappingCone (principalKoszulScalarComplex R t m)
 
-/-- The quotient sheaf `O/t^(m+1)O` as a categorical cokernel.
-
-Source: Stacks Project, algebraization.tex Tag 0A0E.
--/
+/-- The quotient sheaf `O/t^(m+1)O` as a categorical cokernel. -/
 noncomputable def principalQuotient
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     𝒜 :=
   cokernel (endoPow (globalSectionMultiplication R t) (m + 1))
 
-/-- The quotient complex concentrated in degree zero.
-
-Source: Stacks Project, algebraization.tex Tag 0A0E.
--/
+/-- The quotient complex concentrated in degree zero. -/
 noncomputable def principalReduction
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     CochainComplex (𝒜) ℤ :=
   (CochainComplex.singleFunctor (𝒜) 0).obj
     (principalQuotient R t m)
 
-/-- The square defining the strict `t/id` Koszul transition.
-Source: Stacks Tag 0A0E.
-Proof: powers of one endomorphism commute by induction, and the single functor preserves
-composition and identity. This is the transition calculation of the node's first proof step. -/
+/-- The square defining the strict `t/id` Koszul transition. -/
 theorem principalKoszul_transition_square
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     (CochainComplex.singleFunctor 𝒜 0).map
@@ -184,8 +163,7 @@ theorem principalKoszul_transition_square
           (endoPow (globalSectionMultiplication R t) (m + 1)) := by
   rw [Category.comp_id, ← Functor.map_comp, ← endoPow_succ_left]
 
-/-- The strict Koszul transition: multiplication by `t` in degree `-1`, identity in degree 0.
-Source: Stacks Tag 0A0E. -/
+/-- The strict Koszul transition: multiplication by `t` in degree `-1`, identity in degree 0. -/
 noncomputable def principalKoszulTransition
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     principalKoszul R t (m + 1) ⟶ principalKoszul R t m :=
@@ -193,10 +171,7 @@ noncomputable def principalKoszulTransition
     ((CochainComplex.singleFunctor 𝒜 0).map (globalSectionMultiplication R t))
     (𝟙 _) (principalKoszul_transition_square R t m)
 
-/-- The quotient map kills the next power.
-Source: Stacks Tag 0A0E.
-Proof: move one factor `t` to the left in `t^(m+2)` and use the cokernel equation for
-`t^(m+1)`. This is the quotient transition calculation of the node's first proof step. -/
+/-- The quotient map kills the next power. -/
 theorem principalQuotient_transition_zero
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     endoPow (globalSectionMultiplication R t) (m + 2) ≫
@@ -204,8 +179,7 @@ theorem principalQuotient_transition_zero
   rw [endoPow_succ_left _ (m + 1), Category.assoc,
     cokernel.condition, comp_zero]
 
-/-- The strict quotient transition induced by the identity of the ring sheaf.
-Source: Stacks Tag 0A0E. -/
+/-- The strict quotient transition induced by the identity of the ring sheaf. -/
 noncomputable def principalReductionTransition
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     principalReduction R t (m + 1) ⟶ principalReduction R t m :=
@@ -213,18 +187,15 @@ noncomputable def principalReductionTransition
     (cokernel.desc _ (cokernel.π (endoPow (globalSectionMultiplication R t) (m + 1)))
       (principalQuotient_transition_zero R t m))
 
-/-- The strict Koszul tower of complexes, indexed by `m+1`.
-Source: Stacks Tag 0A0E. -/
+/-- The strict Koszul tower of complexes, indexed by `m+1`. -/
 noncomputable def principalKoszulTower (t : (SheafOfModules.unit 𝓞).sections) :
     ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ := Functor.ofOpSequence (principalKoszulTransition R t)
 
-/-- The strict quotient tower of complexes, indexed by `m+1`.
-Source: Stacks Tag 0A0E. -/
+/-- The strict quotient tower of complexes, indexed by `m+1`. -/
 noncomputable def principalReductionTower (t : (SheafOfModules.unit 𝓞).sections) :
     ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ := Functor.ofOpSequence (principalReductionTransition R t)
 
-/-- Rearrange a tower of complexes as a complex in the abelian category of strict towers.
-Source: Stacks Tag 0941. -/
+/-- Rearrange a tower of complexes as a complex in the abelian category of strict towers. -/
 def koszulTowerComplex (X : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ) :
     CochainComplex (ℕᵒᵖ ⥤ 𝒜) ℤ where
   X i :=
@@ -236,8 +207,7 @@ def koszulTowerComplex (X : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ) :
   shape i j h := NatTrans.ext (by funext n; exact (X.obj n).shape i j h)
   d_comp_d' i j k _ _ := NatTrans.ext (by funext n; exact (X.obj n).d_comp_d i j k)
 
-/-- Degreewise inclusion of `1 ⊗ x` into the total tensor with the degree-zero unit.
-Source: Stacks Tags 03EK and 0941 -/
+/-- Degreewise inclusion of `1 ⊗ x` into the total tensor with the degree-zero unit. -/
 noncomputable def koszulTensorUnitComponent (P : CochainComplex 𝒜 ℤ) (i : ℤ) :
     P.X i ⟶ ((koszulTensorFunctor R P).obj
       ((CochainComplex.singleFunctor 𝒜 0).obj (SheafOfModules.unit 𝓞))).X i :=
@@ -291,10 +261,7 @@ private theorem tensorClosedUnitLeft_comm
     ← MonoidalCategory.leftUnitor_inv_naturality_assoc]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The unit inclusion commutes with the total tensor differential.
-Source: Stacks Tags 03EK and 0941
-Proof: on the `(0,i)` summand, the first differential is zero and the second is
-`1 ⊗ d_P` with sign `(-1)^0=1`. Naturality of the left unitor gives the equation. -/
+/-- The unit inclusion commutes with the total tensor differential. -/
 theorem koszulTensorUnitComponent_comm (P : CochainComplex 𝒜 ℤ) (i j : ℤ) :
     P.d i j ≫ koszulTensorUnitComponent R P j =
       koszulTensorUnitComponent R P i ≫
@@ -307,28 +274,24 @@ theorem koszulTensorUnitComponent_comm (P : CochainComplex 𝒜 ℤ) (i j : ℤ)
         (SheafOfModules.unit 𝓞)).inv (by simp) i j hij).symm
   · simp only [HomologicalComplex.shape _ _ _ hij, comp_zero, zero_comp]
 
-/-- The canonical chain map `P → O[0] ⊗ P` (inverse unit constraint).
-Source: Stacks Tags 03EK and 0941 -/
+/-- The canonical chain map `P → O[0] ⊗ P` (inverse unit constraint). -/
 noncomputable def koszulTensorUnitInclusion (P : CochainComplex 𝒜 ℤ) :
     P ⟶ (koszulTensorFunctor R P).obj
       ((CochainComplex.singleFunctor 𝒜 0).obj (SheafOfModules.unit 𝓞)) where
   f := koszulTensorUnitComponent R P
   comm' i j _ := (koszulTensorUnitComponent_comm R P i j).symm
 
-/-- The strict tensor Koszul tower.
-Source: Stacks Tags 0A0E and 0941 -/
+/-- The strict tensor Koszul tower. -/
 noncomputable def koszulTensorTower (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ :=
   principalKoszulTower R t ⋙ koszulTensorFunctor R P
 
-/-- The strict tensor quotient tower.
-Source: Stacks Tags 0A0E and 0941 -/
+/-- The strict tensor quotient tower. -/
 noncomputable def reductionTensorTower (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) : ℕᵒᵖ ⥤ CochainComplex 𝒜 ℤ :=
   principalReductionTower R t ⋙ koszulTensorFunctor R P
 
-/-- The canonical quotient map from the representative to a reduction level.
-Source: Stacks Tags 0A0E and 0941 -/
+/-- The canonical quotient map from the representative to a reduction level. -/
 noncomputable def koszulRepresentativeQuotient (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     P ⟶ (reductionTensorTower R P t).obj (op m) :=
@@ -336,8 +299,7 @@ noncomputable def koszulRepresentativeQuotient (P : CochainComplex 𝒜 ℤ)
     ((CochainComplex.singleFunctor 𝒜 0).map
       (cokernel.π (endoPow (globalSectionMultiplication R t) (m + 1))))
 
-/-- The canonical level map from `P` into its tensor Koszul tower.
-Source: Stacks Tags 0A0E and 0941 -/
+/-- The canonical level map from `P` into its tensor Koszul tower. -/
 noncomputable def koszulRepresentativeAugmentation (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     P ⟶ (koszulTensorTower R P t).obj (op m) :=
@@ -347,10 +309,7 @@ noncomputable def koszulRepresentativeAugmentation (P : CochainComplex 𝒜 ℤ)
         (endoPow (globalSectionMultiplication R t) (m + 1))))
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Compatibility of the canonical strict augmentation.
-Source: Stacks Tags 0A0E and 0941
-Proof: the cone transition is the identity on its degree-zero summand, so its composite
-with the cone inclusion equals the next cone inclusion. Tensor functoriality gives the claim. -/
+/-- Compatibility of the canonical strict augmentation. -/
 theorem koszulRepresentativeAugmentation_naturality (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) (m : ℕ) :
     koszulRepresentativeAugmentation R P t m =
@@ -362,8 +321,7 @@ theorem koszulRepresentativeAugmentation_naturality (P : CochainComplex 𝒜 ℤ
   dsimp only [principalKoszulTransition, principalKoszulScalarComplex]
   simp [CochainComplex.mappingCone.map]
 
-/-- The canonical strict augmentation from the constant representative tower.
-Source: Stacks Tags 0A0E and 0941 -/
+/-- The canonical strict augmentation from the constant representative tower. -/
 noncomputable def koszulStrictAugmentation (P : CochainComplex 𝒜 ℤ)
     (t : (SheafOfModules.unit 𝓞).sections) :
     (Functor.const ℕᵒᵖ).obj P ⟶ koszulTensorTower R P t :=

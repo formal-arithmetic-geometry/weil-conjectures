@@ -42,7 +42,9 @@ import Mathlib.LinearAlgebra.DirectSum.TensorProduct
 
 /-! # Generator-normalized tensor comparison on a ringed slice site
 
-Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03EK and 0GMW
+## References
+
+* Stacks Project, Tags 0E8I, 03DI, 03EK, 03EL and 0GMW (Modules on Sites)
 -/
 
 @[expose] public noncomputable section
@@ -65,8 +67,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
 
 open Classical in
 /-- The original extension summand, followed by the actual module sheafification unit.
-This is the section denoted `[x]_f`, rather than an arbitrary extension generator.
-Source: Stacks 03DI. -/
+This is the section denoted `[x]_f`, rather than an arbitrary extension generator. -/
 def ringedSliceExtensionSection
     (G : ringedSiteModules.{max c v r}
       (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A).over U))
@@ -82,8 +83,7 @@ def ringedSliceExtensionSection
 
 /-- The restriction comparison from the recorded dependency, selected with its prescribed
 pure-tensor normalization. That normalization determines the comparison on all sheaf maps
-by the tensor and sheafification universal properties, so this selects no arbitrary map.
-Source: Stacks 03EL. -/
+by the tensor and sheafification universal properties, so this selects no arbitrary map. -/
 def ringedSliceTensorRestriction
     [HasWeakSheafify (J.over U) AddCommGrpCat.{max c v r}]
     [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
@@ -455,33 +455,7 @@ end Slice
 
 /-- The tensor comparison is uniquely normalized on original extension sections, natural
 in both variables, and its inverse is the prescribed adjunction transpose. The two inverse
-identities are included in the `Iso` structure, as equalities of sheaf morphisms.
-Source: Stacks 0E8I, refined by Tags 03DI, 03EK and 0GMW
-
-Proof:
-1. The direct-sum Hom formula sends a slice map b to the presheaf map which on the
-f-summand is b at (W,f). Sheafification extends it uniquely. Conversely, compose a sheaf
-map with each original summand and the sheafification unit. The two formulas are inverse,
-including under restrictions with coinciding composite indices. Consequently the actual
-unit of localizedSystemAdjunction sends x to [x]_f, and these generators detect maps out
-of the extension (the recorded extension-presheaf and sheafification dependencies).
-2. On the extension presheaf paired with H, send a finite sum of x_f paired with a to
-sum_f [x_f tensor a]_f. This is bilinear and respects restrictions; indices which merge
-contribute additively in the same summand. Use
-lem-pc-sites-module-sheafification-bilinear-extension and
-lem-pc-sites-sheaf-tensor-bilinear-universal to obtain the unique map psi with the stated
-formula. This uses no global representatives for arbitrary sheaf sections.
-3. Tensor the actual unit at G with the identity on restricted H, then compose with the
-inverse of the pure-tensor restriction comparison of
-lem-sfb-localized-site-tensor-restriction. Transpose by the actual adjunction to obtain
-kappa. The direct-sum Hom formula gives kappa([x tensor a]_f) = [x]_f tensor a.
-4. The composite psi followed by kappa fixes every [x]_f tensor a. The bilinear-extension
-and sheaf-tensor uniqueness statements imply that it is the identity. For the other
-composite, take adjuncts: the maps agree with the unit at G tensor j*H on every slice pure
-tensor, so the slice tensor universal property and adjunction give the other identity.
-5. For g and h, both naturality composites send [x]_f tensor a to [g(x) tensor h(a)]_f.
-The same generator uniqueness proves naturality. Composing with the inverse identities
-also gives naturality of kappa. No flatness or constant-ring assumption enters. -/
+identities are included in the `Iso` structure, as equalities of sheaf morphisms. -/
 theorem exists_ringedSliceTensorGenerators
     [HasWeakSheafify (J.over U) AddCommGrpCat.{max c v r}]
     [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] :

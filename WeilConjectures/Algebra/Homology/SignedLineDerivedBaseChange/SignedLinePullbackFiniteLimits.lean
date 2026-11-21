@@ -18,7 +18,17 @@ import WeilConjectures.CategoryTheory.Sites.MonObj
 import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 import WeilConjectures.Mathlib.CategoryTheory.Functor.Flat
 
-/-! # Exactness of coefficient-identified pullback -/
+/-! # Exactness of coefficient-identified pullback
+
+## References
+
+* Stacks Project, Tag 00X6
+* Stacks Project, Tag 03D2
+* Stacks Project, Tag 03D3
+* Stacks Project, Tag 03DA
+* Stacks Project, Tag 03DB
+* Stacks Project, Tag 03EL
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -69,19 +79,7 @@ variable
   (P : KFlatFixedTensor.Modules R) (Q : KFlatFixedTensor.Modules S)
   (t : (pull a).obj P ≅ Q)
 
-/-- Pullback with invertible structural ring map preserves finite limits.
-Source: Stacks Project, Tags 00X6, 03DA, 03DB and 03EL; step 1 of the
-Powers and duals argument.
-Proof: construct the left exact abelian inverse image using filtered comma
-categories and left exact sheafification. The invertible adjunct of a identifies
-its transported ring with S. Transport scalar multiplication through the
-set inverse-image product comparisons. Unit tests establish the module laws
-and semilinear restrictions on the actual abelian inverse image. The resulting
-module adjunction identifies this construction with the specified module pullback,
-including its adjunction unit.
-The forgetful module functors preserve and reflect finite limits, so the underlying
-left exact comparison proves the assertion. No nonzero-ring or point hypothesis
-is used, and the argument includes the empty site. -/
+/-- Pullback with invertible structural ring map preserves finite limits. -/
 theorem identified_ring_pullback_presentations
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)
@@ -207,10 +205,7 @@ theorem identified_ring_pullback_presentations
     (CategoryTheory.SignedLinePullbackConstruction.sheafPullbackForgetIso_unit
       J K U (CategoryTheory.forget AddCommGrpCat.{max u v w}) ((toSheaf A).obj M))
 
-/-- Coefficient-identified module pullback preserves finite limits.
-Source: Stacks Project, Tags 03D2 and 03D3.
-Proof: use the unit-preserving abelian inverse-image presentation. The abelian
-inverse image preserves finite limits, while the module forgetful functor reflects them. -/
+/-- Coefficient-identified module pullback preserves finite limits. -/
 theorem identified_ring_pullback_finiteLimits
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (hcover : CoverPreserving J K U)

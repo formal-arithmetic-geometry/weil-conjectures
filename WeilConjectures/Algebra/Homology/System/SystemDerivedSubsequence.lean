@@ -11,7 +11,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Exact derived subsequence comparisons
 
-Source: Zheng, Construction 4.1; Stacks 015F.
+## References
+
+* Stacks Project, Tag 015F
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -26,18 +29,14 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- Derived subsequence restriction followed by evaluation is the actual selected evaluation.
-Source: Stacks 015F. -/
+/-- Derived subsequence restriction followed by evaluation is the actual selected evaluation. -/
 def systemDerivedSubsequenceEvaluation (r : ℕ ↪o ℕ) (n : ℕ) :
     derivedSystemSubsequence B r ⋙ derivedSystemEvaluation (selectedSystemRings B r) n ≅
       derivedSystemEvaluation B (r n) :=
   Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
     (systemEvaluation (selectedSystemRings B r) n)
 
-/-- The selected-evaluation comparison has the canonical cochain representative formula.
-Source: Stacks 015F.
-Proof: compose with the exact-functor compositor in the opposite direction, then apply
-its factorization equation. The compositor and its inverse cancel. -/
+/-- The selected-evaluation comparison has the canonical cochain representative formula. -/
 theorem systemDerivedSubsequenceEvaluation_rep (r : ℕ ↪o ℕ) (n : ℕ)
     (K : CochainComplex (StrictRingSystem B) ℤ) :
     (systemDerivedSubsequenceEvaluation B r n).hom.app (DerivedCategory.Q.obj K) ≫
@@ -54,19 +53,14 @@ theorem systemDerivedSubsequenceEvaluation_rep (r : ℕ ↪o ℕ) (n : ℕ)
   exact (Functor.mapDerivedCategoryCompIso_hom_app_factors
     (systemSubsequence B r) (systemEvaluation (selectedSystemRings B r) n) K).symm
 
-/-- Successive derived restrictions are the exact restriction along the composite selection.
-Source: Stacks 015F. -/
+/-- Successive derived restrictions are the exact restriction along the composite selection. -/
 def systemDerivedSubsequenceComposition (r s : ℕ ↪o ℕ) :
     derivedSystemSubsequence B r ⋙ derivedSystemSubsequence (selectedSystemRings B r) s ≅
       derivedSystemSubsequence B (s.trans r) :=
   Functor.mapDerivedCategoryCompIso (systemSubsequence B r)
     (systemSubsequence (selectedSystemRings B r) s)
 
-/-- The subsequence compositor has the canonical cochain representative formula.
-Source: Stacks 015F.
-Proof: the ordinary composite subsequence functor is definitionally the composite-index
-restriction. Cancel the exact-functor compositor against its inverse and apply its
-factorization identity. -/
+/-- The subsequence compositor has the canonical cochain representative formula. -/
 theorem systemDerivedSubsequenceComposition_rep (r s : ℕ ↪o ℕ)
     (K : CochainComplex (StrictRingSystem B) ℤ) :
     (systemDerivedSubsequenceComposition B r s).hom.app (DerivedCategory.Q.obj K) ≫

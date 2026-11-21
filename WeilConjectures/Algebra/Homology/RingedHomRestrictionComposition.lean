@@ -8,7 +8,11 @@ public import WeilConjectures.Algebra.Homology.RingedHomRestrictionComparison
 
 /-! # Composition of augmentation-normalized internal Hom comparisons
 
-Source: Stacks Project, Tags 08J7, 0A95 and 08JB.
+## References
+
+* [Stacks Project, Tag 08J7](https://stacks.math.columbia.edu/tag/08J7)
+* [Stacks Project, Tag 0A95](https://stacks.math.columbia.edu/tag/0A95)
+* [Stacks Project, Tag 08JB](https://stacks.math.columbia.edu/tag/08JB)
 -/
 
 @[expose] public section
@@ -127,21 +131,7 @@ end Pasting
 
 /-- Composing normalized Hom comparisons preserves their representative equation.
 This concerns specified ordinary and derived comparisons; it asserts neither their existence
-nor compatibility of an independently specified direct comparison.
-
-Source: Stacks Project, Tag 08JB, identity of successive restrictions, with the representative
-calculation of Tags 08J7 and 0A95.
-
-Proof: fix a complex L and a K-injective I. Normalize the first comparison on L,I and apply
-G to its equation. The complex F(I) is K-injective, so normalize the second comparison on
-F(L),F(I). Naturality of the second derived comparison moves the two F-localization
-factorizations through it. The composite exact-functor factorization identifies the resulting
-G(F(L)) and G(F(I)) terms with those for F composed with G. Finally use naturality of the
-augmentation for the complex isomorphism induced by c. The factorization equations for
-mapDerivedCategoryCompIso and mapDerivedCategoryNatIso identify precisely the composition
-comparison used in the statement. Cancel the invertible intermediate factorizations. What
-remains is the Normalized equation for the ordinary and derived composites. All equations
-are natural; no boundedness or extra resolution choice is involved. -/
+nor compatibility of an independently specified direct comparison. -/
 theorem composite_normalized
     {C D E : Type u} [SmallCategory C] [SmallCategory D] [SmallCategory E]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

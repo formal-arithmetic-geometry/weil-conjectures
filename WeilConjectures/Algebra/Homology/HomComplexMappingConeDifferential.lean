@@ -12,10 +12,13 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCofiber
 import Mathlib.Tactic.Abel
 
-/-! # Differential compatibility of the internal Hom mapping-cone comparison
+/-!
+# Differential compatibility of the internal Hom mapping-cone comparison
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, the displayed Hom
-differential, and Section 08J7, the proof of Lemma 21.35.4.
+## References
+
+* Stacks Project, Tag 0A8X (the displayed Hom differential)
+* Stacks Project, Tag 08J7 (proof of Lemma 21.35.4)
 -/
 
 @[expose] public section
@@ -68,30 +71,7 @@ private lemma cone_sum_identity {A : Type*} [AddCommGroup A] (a b c x y : A) :
 -- Inferring the additive Hom types unfolds the chosen Hom-complex product objects.
 set_option backward.isDefEq.respectTransparency true in
 /-- A degreewise cone comparison with the specified product components is a chain map.
-This assertion constructs no degreewise isomorphism.
-
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, the displayed Hom
-differential, and Section 08J7, the proof of Lemma 21.35.4.
-
-Proof: fix adjacent degrees `n` and `m = n+1`. Postcompose the proposed equality
-with each product projection in degree `m`. The projections are jointly monic.
-By the assumed component equation, this becomes an equality into the internal Hom
-from `E^p` to `G^(p+m+1) ⊞ I^(p+m)`. Postcompose further with internal Hom of
-the two cone projections. These are jointly monic: internal Hom preserves this
-binary product, as is checked sectionwise on local linear maps. The first projection
-of the degreewise comparison is the first cone projection followed by the degree
-`n+1` Hom-product projection; the second is the second cone projection followed
-by the degree `n` Hom-product projection. Expand the Hom differentials using
-`homComplex_projections_exists`, and the cone differential using its two projection
-formulas. The first component on either side is
-`-d_G a + (-1)^(n+1) a d_E`; the second is
-`f a + d_I b - (-1)^n b d_E`. The two expressions agree by
-`(-1)^(n+1) = -(-1)^n` and associativity of local linear-map composition.
-Composition distributes over addition, subtraction and the sign scalar.
-Hence equality holds after both cone projections and all product projections,
-which proves the chain-map equation. The argument applies to zero objects,
-zero maps, empty sites and unbounded complexes, and requires no exactness of
-infinite products. -/
+This assertion constructs no degreewise isomorphism. -/
 theorem homComplex_mappingCone_differential
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

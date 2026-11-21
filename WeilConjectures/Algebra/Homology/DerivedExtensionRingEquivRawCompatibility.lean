@@ -7,6 +7,15 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawCounitEquation
+
+/-!
+# Compatibility of transported derived counits
+
+## References
+
+* Stacks Project, Tag 06Y6
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w w'
@@ -14,10 +23,7 @@ open CategoryTheory
 open scoped TensorProduct ChangeOfRings
 namespace ModuleCat
 
-/-- Intermediate compatibility equation for transported derived counits.
-Source: Stacks Project, Tag 06Y6.
-Proof: this intermediate statement packages the corresponding derived-category
-localization transport step; the proof is deferred for independent parallel work. -/
+/-- Intermediate compatibility equation for transported derived counits. -/
 theorem raw_compatibility
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

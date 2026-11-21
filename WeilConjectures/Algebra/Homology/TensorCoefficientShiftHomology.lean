@@ -11,8 +11,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 
 /-! # Shift compatibility of the ordinary coefficient map
 
-Source: Stacks Project, Tags 06Y6 and 08IB; an explicit shift reduction
-for the tensor inheritance in Tag 0DJA(1).
+## References
+
+* Stacks Project, Tags 05G3, 06Y6, 08IB, 0DJA
 -/
 
 @[expose] public section
@@ -28,23 +29,7 @@ namespace ModuleCat
 
 variable {A E C : Type u} [CommRing A] [CommRing E] [CommRing C]
 
-/-- The pure-tensor coefficient maps commute with the prescribed homology shifts.
-Source: Stacks Project, Tag 05G3 (extension of scalars). This is an explicit
-coefficient-map compatibility for the base-change comparison of Tag 08IB, used
-in the tensor inheritance of Tag 0DJA(1).
-
-Proof: tensor induction and the two generator formulas show that tauL followed
-by restriction of F_C(e) equals F_E(e) followed by tauK shifted. The termwise
-extension shift maps have identity components, and restriction preserves these
-identities. Thus the same square holds after those shift maps. Apply the
-short-complex functor at degree i+n and then homology. The short-complex shift
-isomorphism has the identity in the middle and the common factor (-1)^n at
-both ends, so the square commutes after reindexing to i as well. Naturality of
-mapHomologyIso for restriction moves its components through that square and
-gives the displayed equality. Restriction is exact for every ring map g;
-extension need not be exact. For n=0 the signs are one, and zero complexes and
-zero rings present no exceptions. This uses no derived functor, model action,
-or localized comparison. -/
+/-- The pure-tensor coefficient maps commute with the prescribed homology shifts. -/
 theorem tensorCoefficient_shift_homology
     (f : A →+* E) (g : E →+* C)
     (K L : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ) (e : L ≅ K⟦-n⟧)

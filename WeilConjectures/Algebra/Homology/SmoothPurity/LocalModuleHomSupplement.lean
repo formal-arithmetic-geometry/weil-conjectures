@@ -12,7 +12,9 @@ public import WeilConjectures.CategoryTheory.LocalModuleHom
 
 /-! # Local morphisms of module sheaves
 
-Source: Stacks Project, Modules on Sites, Tag 093T, proof of (1).
+## References
+
+* Stacks Project, Modules on Sites, Tag 093T, proof of (1).
 -/
 
 @[expose] public noncomputable section

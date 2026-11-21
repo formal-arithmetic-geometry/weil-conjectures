@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Sites.LocallySurjective
 /-!
 # Functorial flat covers of module sheaves
 
-Source: Stacks Project, Modules on Sites, Lemma 03EW (3), (4)
+## References
+
+* Stacks Project, Modules on Sites, Lemma 03EW (3), (4)
 -/
 
 @[expose] public section
@@ -29,21 +31,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
-/-- Module sheaves admit a functorial epimorphism from a flat module sheaf.
-
-Source: Stacks Project, Modules on Sites, Lemma 03EW (3), (4)
-
-Proof: Forget a module sheaf to a presheaf, take the free module presheaf on
-its underlying presheaf of sets, and sheafify. Evaluation on a free generator
-is its indexing section, so the presheaf counit is sectionwise surjective.
-Sheafification preserves epimorphisms, and its counit on a sheaf is an
-isomorphism, so the composite augmentation is epic. Each section module
-of the free presheaf is free and hence flat. Evaluation preserves and
-jointly reflects limits, so sectionwise flatness shows its tensor functor
-preserves finite limits. Apply `isFlat_sheafification_obj` (Stacks 03ET)
-to obtain a flat sheaf. The free functor and sheafification are functors;
-their counits give the natural augmentation. This is the sheafification
-route allowed by the last sentence of the proof of 03EW. -/
+/-- Module sheaves admit a functorial epimorphism from a flat module sheaf. -/
 theorem exists_functorial_flat_cover
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) :

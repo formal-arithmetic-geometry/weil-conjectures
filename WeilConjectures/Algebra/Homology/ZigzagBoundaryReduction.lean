@@ -16,8 +16,9 @@ import WeilConjectures.Algebra.Homology.ZigzagToRowCokernel
 
 /-! # Removing the zeroth component of a row boundary
 
-Source: Stacks Project, Algebra, Tag 00M1 (`lemma-no-spectral-sequence`),
-injectivity argument.
+## References
+
+* [Stacks Project, Tag 00M1](https://stacks.math.columbia.edu/tag/00M1), injectivity argument
 -/
 
 @[expose] public section
@@ -27,22 +28,7 @@ namespace HomologicalComplex₂
 universe u v
 variable {R : Type u} [CommRing R]
 /-- The row-cokernel boundary hypothesis permits subtracting one trivial zig-zag
- to kill the `(0,n)` component.
-
-Source: Stacks Project, Algebra, Tag 00M1 (`lemma-no-spectral-sequence`),
-injectivity argument, lines 18488--18496.
-
-Let `π = A.pOpcycles 0`. Lift the witness `y` of `hboundary` through the
-surjective cokernel projection `π` in degree `n+1`, obtaining `c` in `A₀,ₙ₊₁`.
-The chain-map identity for `π` gives `πₙ(a₀,ₙ - δ c) = 0`. The kernel of this
-cokernel projection is the image of `d : A₁,ₙ → A₀,ₙ`, so choose `e` with
-`d e = a₀,ₙ - δ c`. Define `b` to be the sum of the direct-sum inclusions of
-`c` at `(0,n+1)` and `e` at `(1,n)`. Its boundary has zeroth component
-`δ c + d e = a₀,ₙ`. Boundaries are cycles by the first clause of
-`zigzagModule_functorial`; hence `a - zigzagBoundary A n b` is a cycle by
-submodule closure under subtraction, and its zeroth component is zero by
-linearity of the component projection. The construction also works for `n=0`;
-row exactness is not used in this initial reduction. -/
+to kill the `(0,n)` component. -/
 theorem zigzagBoundary_reduction
     (A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ)
       (ComplexShape.down ℕ))

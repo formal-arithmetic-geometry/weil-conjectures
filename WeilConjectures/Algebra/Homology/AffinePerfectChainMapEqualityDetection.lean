@@ -16,7 +16,10 @@ import Mathlib.Data.Int.Interval
 
 /-! # AffinePerfectChainMapEqualityDetection
 
-Source: Stacks Project, Tags 09RE and 05N7.
+## References
+
+* Stacks Project, Tag 09RE
+* Stacks Project, Tag 05N7
 -/
 
 @[expose] public section
@@ -142,22 +145,7 @@ private theorem scalarExtensionHom_comp
     scalarExtension_conjugation_assoc r s t (P.X n) (Q.X n) (f.f n)
 
 /-- Equality of chain maps from different stages is detected at a common later stage.
-This statement does not construct a homotopy or a graded family.
-
-Source: Stacks Project, Tag 09RE, affine case (1); Tag 05N7 (3).
-Proof: Choose a common stage above i and j by directedness, and extend both maps
-there using the canonical associativity isomorphisms. Their scalar extensions
-to the colimit agree by the hypothesis and associativity. Each source and target term is
-finitely presented, since scalar extension preserves finite presentation. Apply finite-presentation
-map equality detection separately in the finitely many source degrees. Choose a
-common upper stage for this finite list, and extend all equalities to it. Outside
-the source support both component maps are zero, since scalar extension preserves
-zero objects. Extensionality gives equality of the chain maps. Associativity
-identifies these maps with the displayed scalarExtensionHom expressions.
-For a preorder pass to its quotient by mutual comparability, choose representatives,
-apply the partial-order finite-presentation theorem to the equivalent diagram,
-and transport the equalities back. The chosen stage can be enlarged above the
-original indices. Empty support needs only directedness to choose a common stage. -/
+This statement does not construct a homotopy or a graded family. -/
 theorem affine_perfect_chainMap_equality_detection
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

@@ -10,7 +10,12 @@ import all WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenOperatio
 import all WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
 import all WeilConjectures.AlgebraicGeometry.ProEtale.Clopen.ProEtaleClopenRingedModuleGluing
 
-/-! # Existence of normalized clopen tensor data -/
+/-! # Existence of normalized clopen tensor data
+
+## References
+
+* Stacks Project, Tag 04TS (disjoint two-open module gluing)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -368,20 +373,7 @@ private def oppositeAdjunction
     rw [hv]
     simp
 
-/-- An exact open extension has a normalized reverse adjunction on a clopen piece.
-Source: Stacks 04TS, disjoint two-open module gluing.
-
-Proof: decompose the ambient scheme into the image of s and its complementary
-open. Ringed-module gluing identifies modules with pairs on those two pieces.
-Restriction to s is projection onto the first coordinate. Insert a module in
-that coordinate and zero in the second to construct extension. This is both
-left and right adjoint to restriction. The ordinary open unit and reverse
-counit have identity first coordinates, so their composite is identity.
-Transport the coordinate adjunctions back through the gluing equivalence.
-The insertion and projection maps commute with semilinear coefficient maps;
-therefore the same equivalence and adjunctions exist on the vertical ringed
-site in systems mode, before localization or evaluation. Exactness is
-componentwise in the product module category. -/
+/-- An exact open extension has a normalized reverse adjunction on a clopen piece. -/
 theorem clopen_reverse_module_adjunction (m : Mode) {A X : Scheme.{u}}
     (s : A ⟶ X) [IsOpenImmersion s] [IsClosedImmersion s]
     (R : Sheaf (topology m X) CommRingCat.{u + 1}) :

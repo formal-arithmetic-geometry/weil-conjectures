@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 /-!
 # Scalar-extension tensor comparison in independent universes
 
-Source: Stacks Project, Modules on Sites, Tag 05V4.
+## References
+
+* Stacks Project, Modules on Sites, Tag 05V4
 -/
 
 @[expose] public section
@@ -155,15 +157,7 @@ private noncomputable def rawTensorComparison :
     | tmul n x => rfl
 
 omit N in
-/-- Scalar-extension tensor associativity on underlying abelian sheaves.
-Source: Stacks Project, Modules on Sites, Tag 05V4 (lemma-flat-change-of-rings)
-Proof: before sheafification the comparison is `n ⊗ m ↦ n ⊗ (1 ⊗ m)`, with
-inverse `n ⊗ (s ⊗ m) ↦ (s • n) ⊗ m`. The standard base-change tensor equivalence
-supplies this isomorphism sectionwise, and its pure-tensor formula proves naturality.
-Next apply the sheafification unit of the scalar-extension presheaf in the second
-factor. This unit is locally bijective; tensor descent shows its sheafified tensor map
-is invertible. Compose these isomorphisms. They are natural in the module `N`, because
-both composites send `n ⊗ m` to `f(n) ⊗ η(1 ⊗ m)` before sheafification. -/
+/-- Scalar-extension tensor associativity on underlying abelian sheaves. -/
 theorem nonempty_scalarTensorComparisonOfUniverses :
     Nonempty (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map c) ⋙
       siteSheafTensorRight M ⋙

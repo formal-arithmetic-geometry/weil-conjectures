@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.BaseTensorUnitCohomologyModel
 
 /-! # Fractions before transport to tensor cohomology models
 
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8
 -/
 
 @[expose] public section
@@ -108,25 +110,7 @@ private theorem model_fractions (R A Aq B D : Type u)
 /-- The derived scalar-extension functor sends the localization unit to a map whose
 homology classes admit fractions. The denominator acts by the derived image of
 multiplication on the localized input complex, before any tensor-coefficient
-module structure or chosen cohomology model is introduced.
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-
-Proof in words: take a K-flat R-resolution F of B concentrated in degree zero.
-The balanced derived tensor calculation computes the functor on an A-complex Q
-by the total complex Q tensor_R F. It computes the localized input by the
-localization of this same total complex: localization commutes with tensor
-products and the direct sums defining totalization, and is exact. Each element
-of the localized total complex is a fraction z/s. A cycle represented by z/s
-has differential zero after localization, so a further denominator t kills dz.
-Then tz is a cycle and its cohomology class, with denominator ts, gives the
-required equation. The denominator endomorphism is multiplication by the image
-of ts on the localized input. The balanced calculation is natural for the unit
-and these scalar endomorphisms. The universal counit identifies any supplied
-left derived scalar-extension functor with this calculation, so applying
-homology and transporting the cycle equation proves the displayed assertion.
-This argument only clears finitely many denominators of an individual element,
-so no boundedness of Q is needed. When zero lies in S, the localized complex is
-zero and the zero denominator works; for S = {1} the unit is an isomorphism. -/
+module structure or chosen cohomology model is introduced. -/
 theorem derivedLocalization_fractions
     (R A Aq B : Type u) [CommRing R] [CommRing A] [CommRing Aq] [CommRing B]
     [Algebra R A] [Algebra R Aq] [Algebra R B] [Algebra A Aq]

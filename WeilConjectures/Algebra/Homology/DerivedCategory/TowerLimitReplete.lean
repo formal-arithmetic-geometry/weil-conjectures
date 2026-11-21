@@ -39,13 +39,9 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
   [HasLimitsOfShape (Discrete ℕ) C] [HasExactLimitsOfShape (Discrete ℕ) C]
   [HasLimitsOfShape ℕᵒᵖ C]
 
-/-- **Derived limits of towers of epimorphisms in a replete abelian category**: in an abelian
-category with exact countable products in which sequential limits of epimorphisms project
-epimorphically onto the first term, the image in the derived category of a limit cone `c` of a
-tower `T` of complexes whose transitions are degreewise epimorphisms is a homotopy limit cone:
-in each degree `1 - t` is an epimorphism on `∏ Tₙ`
-(`CategoryTheory.epi_one_sub_of_epiπAppZeroOfEpi`), so that
-`DerivedCategory.isHomotopyLimit_mapCone_Q_of_epi_one_sub` applies. -/
+/-- **Derived limits of towers of epimorphisms in a replete abelian category**: the image in the
+derived category of a limit cone `c` of a tower `T` of complexes with degreewise epimorphic
+transitions is a homotopy limit cone. -/
 theorem isHomotopyLimit_mapCone_Q_of_epiπAppZeroOfEpi (hC : EpiπAppZeroOfEpi C)
     {T : ℕᵒᵖ ⥤ CochainComplex C ℤ}
     (hT : ∀ (n : ℕ) (i : ℤ), Epi ((T.map (homOfLE n.le_succ).op).f i)) {c : Cone T}

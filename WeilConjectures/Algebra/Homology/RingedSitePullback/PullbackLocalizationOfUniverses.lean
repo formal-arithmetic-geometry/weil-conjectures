@@ -13,7 +13,9 @@ import Mathlib.CategoryTheory.Limits.Constructions.Over.Basic
 /-!
 # Localization of module pullback
 
-Source: Stacks Project, Modules on Sites, Tag 04J0.
+## References
+
+* Stacks Project, Modules on Sites, Tag 04J0
 -/
 
 @[expose] public section
@@ -164,14 +166,7 @@ lemma local_over_val_map_apply (M : SheafOfModules.{max u v w} S) (V : D)
     ((M.over V).val.map f.op).hom x = (M.val.map f.left.op).hom x := rfl
 
 -- Elaborate the comparison of composite adjunctions and their component units.
-/-- The canonical localization comparison agrees with the isomorphism of left adjoints.
-Source: Stacks Project, Modules on Sites, Tag 04J0.
-
-Proof: The right adjoints are identified using the product comparison
-U(V × X) ≅ U(V) × U(X). Uniqueness of left adjoints gives an isomorphism.
-Under the composite adjunctions, its mate is the restricted global unit:
-naturality along the second projection and the product comparison equation
-identify their components. Hence it is the canonical localization map. -/
+/-- The canonical localization comparison agrees with the isomorphism of left adjoints. -/
 lemma localComparison_eq (V : C)
     [(Over.post (X := V) U).IsContinuous (J.over V) (K.over (U.obj V))]
     [(pushforward.{max u v w} a).IsRightAdjoint]

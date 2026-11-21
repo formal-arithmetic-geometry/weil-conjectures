@@ -159,8 +159,11 @@ public import WeilConjectures.AlgebraicGeometry.Picard.DerivedAdjunctionCompatib
 public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 /-! # Singleton extension and arbitrary coefficient change
 
-Source: Stacks 0D6D, lemma-derived-pullback-composition, and Zheng, Construction 4.1.
-The singleton functor is an extension left adjoint, not a geometric inverse image.
+## References
+
+* Stacks Project, Tag 0D6D
+* Zheng Construction 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -309,33 +312,7 @@ private theorem singletonScalarOrdinary_tmul (n : ℕ) (P : systemLevel B n)
       (show N.val.obj (op (j, U.unop)) from _)) (mul_comm _ _))
 
 /-- Scalar extension commutes with derived singleton extension, including its specified
-Hom transposes, actual system-complex representatives, and lower-singleton maps.
-Source: Stacks 0D6D (lemma-derived-pullback-composition), with the agent singleton
-argument over Zheng Construction 4.1
-
-Proof: (1) Vertical coverings make sheafification, scalar restriction and evaluation
-levelwise, giving the identity right-adjoint square. (2) The ordinary comparison sends
-(b tensor q) tensor c to a_j(b)c tensor (q tensor 1); its inverse moves the second
-C_n scalar into C_j. Both maps respect balancing by naturality of a.
-(3) Naturality of a also proves compatibility with every system transition; above n
-both sides vanish, and at n tensor multiplication gives the normalization.
-(4) Extension of flat modules along any ring map is flat, and tensor exactness is
-detected levelwise, so singleton extension has flat terms on its sequence site.
-(5) For an acyclic system complex K, the jth tensor with the singleton is
-Res_{B_n to B_j}(K_j) tensor_{B_n} Q below n, and zero above n. Exact scalar
-restriction and K-flatness of Q prove whole-sequence-site K-flatness.
-(6) Ringed-topos K-flat pullback along coefficient change proves the same properties
-for both scalar-extended representatives; the universal comparisons are isomorphisms.
-(7) Compose the two normalized adjunctions on each side. Their ordinary units both
-insert two unit tensors, and the right comparisons are the identity square. The
-normalized adjunction-composition theorem identifies their conjugate with localization
-of the ordinary comparison. (8) Its Hom equation identifies the actual transposes;
-taking identity maps gives the corresponding unit and counit equations.
-(9) For m at least n, both lower-singleton routes on local generators give
- a_j(b rho_jn(t))c tensor (q tensor 1) =
- a_j(b)c rho_jn(a_n(t)) tensor (q tensor 1).
-These strict maps agree before localization and hence after the canonical scalar
-associators. No flat coefficient maps or bounded complexes are used. -/
+Hom transposes, actual system-complex representatives, and lower-singleton maps. -/
 theorem singletonScalarExtension :
     (∀ (n : ℕ) (P : DerivedCategory (systemLevel B n))
       (M : DerivedCategory (systemSequenceModules D))

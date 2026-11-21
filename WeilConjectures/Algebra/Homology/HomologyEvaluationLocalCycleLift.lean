@@ -10,6 +10,14 @@ public import WeilConjectures.Algebra.Homology.HomologyEvaluationDefinitions
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
+/-!
+# Local lifts of cycle representatives for homology evaluation
+
+## References
+
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -49,17 +57,7 @@ private lemma localCycleLift_differential_apply (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 -- The differential formula unfolds localized Hom and evaluated kernel structures.
-/-- Every pair of local cycle representatives has a representative in the target cycles.
-Source: Stacks Project, Tag 0A8X, Hom differential formula.
-
-Apply the differential projection formula in degree n to the Hom cocycle, at source
-index -n and target index 1. Evaluation on the given T-cycle kills the precomposition
-term, while the Hom cycle equation kills the differential term. Thus the evaluation
-in J-degree zero has differential zero. Evaluation of sheaves of modules at U preserves
-kernels. Applying this to the cycle inclusion identifies its image with the kernel
-of the evaluated J-differential, and supplies the required b. The argument also works
-on the empty open and when either cycle representative is zero.
--/
+/-- Every pair of local cycle representatives has a representative in the target cycles. -/
 theorem homologyEvaluation_local_cycle_lift (X : AlgebraicGeometry.Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ) :
     ∀ (U : X.Opens)

@@ -12,16 +12,21 @@ public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 /-!
 # Additive total tensor and mapping cones before localization
 
-Source: Stacks Project, derived.tex, Tag 0G6E,
-`remark-double-complex-as-tensor-product-of`, first exactness assertion;
-`WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone`, second-variable
-cone comparison, and `WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality`
+Total tensor with an arbitrary complex commutes with mapping cones naturally and preserves cone
+inclusions; localization sends the same chain isomorphisms to derived isomorphisms.
 
-The total tensor below is the binary signed direct-sum tensor from
-`def-sfb-preserves-kflat-quasi-iso`. The cone is Mathlib's `mappingCone`: its
+## Implementation details
+
+The total tensor is the binary signed direct-sum tensor. The cone is Mathlib's `mappingCone`: its
 coordinates are ordered as `X[n+1]` then `Y[n]`, rather than `Y[n]` then `X[n+1]`.
-Under the swap of these two coordinates it has exactly the matrix in the node.
-The map `mappingCone.inr` is the node's inclusion of `Y`.
+
+The chain comparison and its naturality are taken from
+`WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone` (second-variable cone
+comparison) and `WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality`.
+
+## References
+
+* Stacks Project, Tag 0G6E (first exactness assertion)
 -/
 
 @[expose] public section
@@ -35,35 +40,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace CochainComplex
 
 /-- Total tensor with an arbitrary complex commutes with cones naturally and preserves
-cone inclusions; localization sends the same chain isomorphisms to derived isomorphisms.
-Source: Stacks Project, derived.tex, Tag 0G6E, first exactness assertion, with the
-chain comparison and naturality in the two upstream modules cited above
-
-Proof:
-1. In total degree n, distribute P^p tensor (Y^q direct-sum X^(q+1)) by
-   additivity (`lem-sfb-left-resolution-additive-finite-coproducts`), then use
-   the countable coproduct universal property and reindex (p,q) to (p,q+1).
-   This identifies the source graded object with B^n direct-sum A^(n+1),
-   where A = Tot(P tensor X), B = Tot(P tensor Y).
-2. On the Y family take the identity, and on the shifted X family multiply
-   by (-1)^p. The inverse has the same signs, whose squares are one. This is
-   the existing `mapBifunctorMappingCone₂Iso P u (curriedTensor C)`.
-3. Check the differential on both families. On Y both maps have components
-   d_P tensor 1 and (-1)^p times 1 tensor d_Y. On X the three coefficients
-   after the comparison are (-1)^p, (-1)^(p+1), -1; on the target-cone side
-   they are (-1)^p, -(-1)^p, -1. They agree. Coproduct uniqueness gives the
-   chain identity and hence the chain isomorphism.
-4. For f : P to P' and a square (a,b) from u to u', the cone map is diagonal
-   (b,a[1]) in the node's coordinate order. Both naturality composites on Y
-   are f^p tensor b^q, and on X are (-1)^p times f^p tensor a^(q+1).
-   Thus coproduct uniqueness gives simultaneous naturality; the square for
-   the tensor maps is `mapBifunctorMap_comm`.
-5. The inclusion lands in the Y family, where the comparison is identity,
-   giving the inclusion equation. Apply `DerivedCategory.Q.mapIso` to the
-   same chain isomorphism to obtain the derived one with the stated hom.
-   This only applies localization to an existing isomorphism: no descent of
-   tensor with P, K-flatness, boundedness, or exactness of countable sums
-   is used. -/
+cone inclusions; localization sends the same chain isomorphisms to derived isomorphisms. -/
 theorem exists_totalTensorConeComparison (C : Type u) [Category.{v} C] [Abelian C]
     [MonoidalCategory C] [MonoidalPreadditive C] [HasCountableCoproducts C]
     [TensorPreservesCountableCoproducts C] [HasDerivedCategory.{w} C] :

@@ -25,13 +25,15 @@ Site object, morphism, and coefficient universes are independent. The site is es
 small relative to the coefficient universe, as required by the source. The statement retains
 every localization, representative-comparison, and transformation-extension clause.
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 0G7D, 06YT and 06YU;
-Categories, Tags 04VI, 04VJ and 04VK
-
 ## Main statements
 
 - `site_derived_tensor_descent_independentCoefficients`: localization, representative comparison,
   and unique extension of arbitrary natural transformations.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS, 0G7D, 06YT and 06YU
+* Stacks Project, Categories, Tags 04VI, 04VJ and 04VK
 -/
 
 @[expose] public section
@@ -251,8 +253,7 @@ set_option hygiene false in
 local notation "𝓜" => SheafOfModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
-/-- The derived-comparison predicate used in the recorded descent witness.
-Source: Stacks, Tag 06YU. -/
+/-- The derived-comparison predicate used in the recorded descent witness. -/
 noncomputable def SiteDerivedTensorDescentDerivedSpec
     (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ)))
     (B : HomotopyCategory 𝓜 (.up ℤ) × HomotopyCategory 𝓜 (.up ℤ) ⥤
@@ -261,8 +262,7 @@ noncomputable def SiteDerivedTensorDescentDerivedSpec
   Nonempty ((P.ι.prod P.ι) ⋙ B ⋙ DerivedCategory.Qh ≅
     ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) ⋙ T)
 
-/-- The homotopy-comparison predicate, with its derived witness named separately.
-Source: Stacks, Tag 06YU. -/
+/-- The homotopy-comparison predicate, with its derived witness named separately. -/
 noncomputable def SiteDerivedTensorDescentHomotopySpec
     (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ)))
     (B : HomotopyCategory 𝓜 (.up ℤ) × HomotopyCategory 𝓜 (.up ℤ) ⥤
@@ -276,8 +276,7 @@ noncomputable def SiteDerivedTensorDescentHomotopySpec
     SiteDerivedTensorDescentDerivedSpec J R P B T
 
 /-- The full descent predicate, transparently identical to the expanded statement.
-Naming its nested predicates keeps selected witnesses small during kernel checking.
-Source: Stacks, Tags 06YS, 06YU, 04VK -/
+Naming its nested predicates keeps selected witnesses small during kernel checking. -/
 noncomputable def SiteDerivedTensorDescentSpec
     (P : ObjectProperty (HomotopyCategory 𝓜 (.up ℤ))) : Prop :=
   (∀ X, P X ↔ CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) X.as ∧
@@ -300,38 +299,9 @@ set_option backward.isDefEq.respectTransparency false in
 /-- K-flat complexes with flat terms present the derived category and its tensor bifunctor.
 The existential predicate `P` specifies the full subcategory by its precise membership
 condition; `B` is total tensor on homotopy categories, specified by a natural comparison
-with total tensor on complexes. The comparison for `T` is natural in both homotopy variables.
-Naturality also gives the inverse-denominator equations by multiplying the naturality square
-by the inverses of the denominator images. The final bijection includes arbitrary natural
-transformations, without an invertibility assumption.
-
-Source: Stacks Project, Tags 06YS, 0G7D, 06YT, 06YU and Categories 04VK
-
-Proof plan:
-The recorded site flatness predicate is exactness of sheafified sectionwise tensor,
-which is the canonical monoidal sheaf tensor used in the comparisons below.
-1. Resolve the vertex of each Ore square and cancellation witness by a K-flat flat-term
-   resolution (`lem-pc-kflat-resolution`). The right calculus of fractions for the ambient
-   homotopy category (`lem-pc-quasi-isomorphisms-multiplicative-system`) restricts to `P`.
-2. The localization universal property induces the comparison functor. Refine every roof
-   by a K-flat flat-term resolution to prove fullness (`lem-pc-right-fraction-representation`).
-   Resolve common refinement vertices to prove faithfulness
-   (`lem-pc-right-fraction-common-refinement`). Resolutions give essential surjectivity.
-3. Total tensor descends through homotopy: a homotopy in the first variable is `h ⊗ 1`;
-   in the second variable its component in bidegree `(p,q)` is `(-1)^p 1 ⊗ k`.
-   The cross differential terms cancel, giving the natural comparison defining `B`.
-4. Tensoring a quasi-isomorphism with a K-flat complex preserves quasi-isomorphisms:
-   its cone is acyclic (`lem-pur-quasi-iso-cone-acyclic`), tensor preserves its acyclicity
-   (`def-pc-kflat-complex`), and total tensor commutes with the cone differential.
-   The symmetry with sign `(-1)^(pq)` gives the other variable.
-5. Localize the tensor bifunctor twice (`lem-weil-pbc-localization-universal-property`),
-   first into a functor category, then in the other variable. This gives `T` and its natural
-   representative comparison. Inverting the naturality equations gives compatibility with
-   inverse denominators.
-6. Extend a transformation uniquely in the first variable by the same localization property.
-   Uniqueness implies naturality in the second variable. Localize that variable to get the
-   extension on the product derived category. Two applications of uniqueness prove bijectivity.
--/
+with total tensor on complexes. The comparison for `T` is natural in both homotopy variables
+and compatible with inverse denominators. The final bijection includes arbitrary natural
+transformations, without an invertibility assumption. -/
 theorem site_derived_tensor_descent_independentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C)
@@ -396,8 +366,7 @@ theorem site_derived_tensor_descent_independentCoefficients
     exact (Localization.fullyFaithfulWhiskeringLeft (L.prod L) (V.prod V) E).map_bijective U V'
 
 /-- The original homotopy-tensor existence proof, with its predicate kept named.
-The quotient comparison determines this bifunctor up to compatible natural isomorphism.
-Source: Stacks, Tag 06YU. -/
+The quotient comparison determines this bifunctor up to compatible natural isomorphism. -/
 theorem siteHomotopyTensorExistsIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
@@ -415,8 +384,7 @@ theorem siteHomotopyTensorExistsIndependentCoefficients
     J R).choose_spec.2.2.1
 
 /-- The original derived-tensor existence proof, with its predicate kept named.
-This separates the proof from the selected data and retains the original witnesses.
-Source: Stacks, Tag 06YU. -/
+This separates the proof from the selected data and retains the original witnesses. -/
 theorem siteDerivedTensorExistsIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})
@@ -436,8 +404,7 @@ theorem siteDerivedTensorExistsIndependentCoefficients
 /-- The derived tensor supplied by the resolving-class localization, in independent universes.
 The natural representative comparison and unique-extension property of
 `site_derived_tensor_descent_independentCoefficients` determine this functor up to the
-unique compatible natural isomorphism. No functorial resolutions are chosen.
-Source: Stacks, Tags 06YS, 0G7D, 06YT, 06YU -/
+unique compatible natural isomorphism. No functorial resolutions are chosen. -/
 noncomputable def siteDerivedTensorIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{r})

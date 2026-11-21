@@ -11,8 +11,10 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Extending an ordinary homology comparison square
 
-Source: Stacks Project, Tag 05G3, scalar extension and its adjunction;
-Tag 06Y6, passage from ordinary tensor comparison to coefficient extension.
+## References
+
+* Stacks Project, Tag 05G3
+* Stacks Project, Tag 06Y6
 -/
 
 @[expose] public section
@@ -130,27 +132,7 @@ private theorem forgetHomologyMap
   simp only [F, Iso.inv_hom_id_assoc]
 
 /-- Scalar extension transports a homology square whenever its adjoint formulas
-and the intervening chain square commute. No derived category is involved.
-
-Proof: construct the extension isomorphism on pure tensors by
- d tensor p ↦ eD(d) tensor k(p). Compatibility of the structural maps and
-semilinearity of k prove balance; the inverse uses eD inverse and k inverse.
-Tensor induction proves both inverse identities and eD-semilinearity.
-Forget this isomorphism to obtain l. Transpose the desired square through the
-extension/restriction adjunction. The two specified equations for b0 and b
-replace their transposes by a0 and a followed by homology of delta0 and delta.
-Apply the ordinary square ha and the homology of the given additive chain
-square hdelta. Exact restriction and forgetting commute with homology; their
-comparison isomorphisms compose by comparing the twice-mapped left homology
-data with the directly mapped data, using identity maps on cycles and homology.
-Homology naturality then cancels these isomorphisms. Equality on unit tensors
-proves equality of the adjoints, and linearity proves it on all pure tensors.
-This proves the square. For identity coefficient isomorphisms this is ordinary
-naturality of adjunction. For zero modules or complexes it is the zero square.
-Nonflat structural maps are allowed: only restriction and forgetting, not
-extension, must preserve homology. Neither a nor b must be invertible.
-Source: Stacks Project, Tag 05G3, extension of scalars; Tag 06Y6,
-lemma-derived-base-change, ordinary comparison followed by coefficient extension. -/
+and the intervening chain square commute. No derived category is involved. -/
 theorem exists_scalarExtension_homology_square
     {S₀ S D₀ D : Type u}
     [CommRing S₀] [CommRing S] [CommRing D₀] [CommRing D]

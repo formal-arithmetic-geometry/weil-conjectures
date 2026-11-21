@@ -9,6 +9,14 @@ module
 public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 
+/-!
+# Shift transport of the ordinary tensor comparison
+
+## References
+
+* Stacks Project, Tag 0BYJ, and the first-variable tensor shift used in Tag 0DJA(1)
+-/
+
 @[expose] public section
 
 universe u
@@ -35,17 +43,7 @@ private lemma cochain_whiskerLeft {D : Type u} [CommRing D]
       (curriedTensor (ModuleCat.{u} D)) (.up ℤ) := by
   rfl
 
-/-- The ordinary tensor comparison commutes with the canonical first-variable shift maps.
-Source: Stacks Project, Tag 0BYJ, and the first-variable tensor shift used in Tag 0DJA(1).
-
-Proof: the scalar-extension shift map is the identity in each degree. On a summand
-U^p tensor Q^q, the first-variable tensor shift only reindexes p and has no sign.
-The inverse monoidal comparison sends c tensor (u tensor q) to
-(c tensor u) tensor (1 tensor q). Both paths send this generator to the same
-reindexed tensor, then apply t to its second factor. Tensor induction and the universal
-property of the total-complex coproduct give equality in every degree, hence equality
-of complex maps. The differentials commute because each constituent is a complex map.
-This also works for n=0, zero factors and t=0, and uses no derived model or flatness. -/
+/-- The ordinary tensor comparison commutes with the canonical first-variable shift maps. -/
 theorem localizedTensorComparison_shift_transport
     (U Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (N : CochainComplex (ModuleCat.{u} C) ℤ) (n : ℤ) :

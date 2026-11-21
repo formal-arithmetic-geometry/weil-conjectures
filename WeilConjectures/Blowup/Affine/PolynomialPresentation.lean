@@ -30,12 +30,6 @@ projective space `ℙ^σ_A`.
 - `AlgebraicGeometry.reesPresentation_mem_reesGrading` — a form of degree `n` is mapped into
   the degree-`n` piece of the Rees algebra;
 - `AlgebraicGeometry.reesPresentation_surjective` — if `f` generates `I`, the map is surjective.
-
-## Blueprint
-
-This file implements `def:nagata-rees-polynomial-map` and
-`lemma:nagata-rees-polynomial-surjection` of the Nagata compactification blueprint.
-
 -/
 
 @[expose] public section

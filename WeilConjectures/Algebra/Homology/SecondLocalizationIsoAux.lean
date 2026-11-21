@@ -10,8 +10,11 @@ public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
 import all WeilConjectures.Algebra.Homology.FirstLocalizationMap
 
-/-! Auxiliary interfaces for the second localization isomorphism.
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
+/-! # Auxiliary interfaces for the second localization isomorphism
+
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8
 -/
 
 @[expose] public section
@@ -361,17 +364,7 @@ private theorem secondLocalization_algebraMap_comp :
     rw [hl, hl', hr, hr', ← IsScalarTower.algebraMap_apply B Bp D]
 
 
-/-- The canonical characterized coefficient map exists before proving it invertible.
-Source: Stacks Project, Tag 0DJ8, affine localization identity; Tag 06Y6.
-
-Proof: naturality of the derived comparison and flat homology comparison,
-together with the model cohomology action compatibility, shows that the
-canonical cohomology map is semilinear for A tensor_R B to A tensor_R Bp.
-Take its scalar-extension adjoint and extend further to D. The scalar-tower
-hypotheses identify the two maps to D, so the scalar-extension associator
-gives the required source. Its formula on 1 tensor x and the adjunction
-generator formula give exactly `IsSecondLocalizationMap`.
--/
+/-- The canonical characterized coefficient map exists before proving it invertible. -/
 theorem exists_secondLocalization_hom
     (T : Submonoid B) [IsLocalization T Bp] (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
@@ -420,19 +413,7 @@ theorem exists_secondLocalization_hom
   exact congrArg (fun y ↦ (1 : D) ⊗ₜ[A ⊗[R] Bp,algebraMap (A ⊗[R] Bp) D] y) hg
 
 
-/-- A characterized second-localization map is invertible.
-Source: Stacks Project, Tag 0DJ8, affine localization identity; Tag 06Y6.
-
-Proof: take a common functorial K-flat resolution of the R-restriction of Q.
-The universal scalar-extension counits are invertible on that resolution.
-Their defining comparison equation proves the derived comparison invertible
-there, and naturality transports this to Q. Flat extension commutes with
-homology, giving the Bp-base-change universal property of the canonical map.
-Its A-semilinearity and the localized-module restriction theorem promote
-this to base change over A tensor_R Bp. Extend the resulting isomorphism
-further to D, using the tensor associator. The generator formula and
-`IsSecondLocalizationMap.ext` identify it with the chosen map.
--/
+/-- A characterized second-localization map is invertible. -/
 theorem secondLocalization_hom_isIso
     (T : Submonoid B) [IsLocalization T Bp] (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

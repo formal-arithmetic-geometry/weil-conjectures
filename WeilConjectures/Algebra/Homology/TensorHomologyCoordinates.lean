@@ -16,7 +16,9 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-!
 # Tensor homology coordinates
 
-Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -48,20 +50,7 @@ private theorem term_homology_projection {k : Type u} [Field k]
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-/-- Extract tensor homology coordinates from the total homology over a field.
-Source: Stacks Project, Varieties, Tag 0BED, `equation-kunneth-on-cech`,
-and the complement argument of `lem-sc-qcoh-cech-total-tensor-iso`, steps 1 and 2.
-
-Proof: Extend the quotient map from cycles to homology linearly to each full
-term of A and B, using complements to their cycle subspaces. These extensions
-kill boundaries, since on cycles they agree with the homology quotient.
-Tensor the two extensions on each bidegree and compose with the corresponding
-direct-sum inclusion. The universal property of the total direct sum assembles
-these maps into a linear map on the degree-n term. It kills the total
-differential: in each of its two terms one factor is a boundary and is
-annihilated by its extension. Restrict to total cycles and descend through
-boundaries. On a tensor of cycles, the extension equations give exactly the
-specified direct-sum element. No boundedness or dimension assumption is needed. -/
+/-- Extract tensor homology coordinates from the total homology over a field. -/
 theorem tensor_homology_coordinates {k : Type u} [Field k]
     (A B : CochainComplex (ModuleCat.{u} k) ℤ) (n : ℤ) :
     ∃ r : (mapBifunctor A B (curriedTensor (ModuleCat.{u} k))

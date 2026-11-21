@@ -17,7 +17,16 @@ import WeilConjectures.Algebra.Homology.SplitIdentityFromFunctionals
 /-!
 # Splitting off a unit entry in a finite free chain complex
 
-Source: Stacks Project, Algebra, Lemma 10.102.2, Tag 00MT
+## Implementation details
+
+The natural numbers `n j` are the sizes of the chosen bases. The unit coefficient is the entry
+`(q, p)` of the matrix `LinearMap.toMatrix (b i) (b (i - 1))` of `d_i`. The binary direct sum is
+`DirectSum` indexed by `Bool`: `false` selects the complementary complex and `true` selects
+the identity complex.
+
+## References
+
+* Stacks Project, Algebra, Lemma 10.102.2, Tag 00MT
 -/
 
 @[expose] public section
@@ -28,33 +37,7 @@ open scoped DirectSum
 
 namespace ChainComplex
 
-/-- A unit matrix entry splits off the identity complex in degrees `i` and `i - 1`.
-Source: Stacks Project, Algebra, Lemma 10.102.2, Tag 00MT
-
-The natural numbers `n j` are the sizes of the chosen bases, as in the source's `R^{n_j}`.
-The unit coefficient is the entry `(q, p)` of the matrix `LinearMap.toMatrix (b i) (b (i - 1))`
-of `d_i` in the bases `b i` and `b (i - 1)`.
-This formulation includes the zero ring. The binary direct sum is `DirectSum` indexed by
-`Bool`; `false` selects the complementary complex and `true` selects the identity complex.
-Its differential acts componentwise, and `ψ` intertwines these differentials on every pair
-of summand elements, hence on every element of the binary direct sum.
-The equivalences `e` and `f` identify the two nonzero terms of `T` with `R`; their compatibility
-says that the differential becomes the identity under those identifications.
-
-Proof: Put `z = b i p`, `w = d_i z`, and let `u` be the unit coefficient. Define `β` as
-`u⁻¹` times the `q`-coordinate functional on the target, and `α = β ∘ d_i`. Then
-`α z = β w = 1`, and `β` takes the unit value `u⁻¹` on the original target pivot vector.
-The kernels of `α` and `β` have bases with one fewer vector by
-`lem-weil-pbc-kernel-basis-unit-value` (proved by explicit coordinate elimination).
-The incoming map lands in `ker α` since `α d_{i+1} = β d_i d_{i+1} = 0`, and the outgoing
-map kills `w` since `d_{i-1} w = d_{i-1} d_i z = 0`.
-Apply `lem-weil-pbc-split-identity-from-functionals` to assemble the complementary complex
-and identity complex. Transfer the kernel bases to its two special terms using the
-provided linear equivalences; elsewhere transfer the original bases through the top
-submodule equivalence. Set `n' j` to `n j - 1` in the two special degrees and `n j`
-elsewhere. The indices `p`, `q` imply positivity, so the asserted rank equalities follow.
-This keeps the source's pivot elimination and restriction argument without requiring a
-general triangular-change-of-basis theorem. -/
+/-- A unit matrix entry splits off the identity complex in degrees `i` and `i - 1`. -/
 theorem exists_splitting_of_isUnit_entry
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℤ)
     (n : ℤ → ℕ) (b : ∀ j : ℤ, Module.Basis (Fin (n j)) R (C.X j))

@@ -18,9 +18,29 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 /-!
 # Data for normalized open extension, tensor and base change
 
-Source: Stacks 03DI, 0F6Z, 0E8I, 0GL1 and the open-factor sentence of
-`fix-prop-coherence`.
 All operation presentations below are conclusions of the theorem, not hypotheses.
+
+## References
+
+* Stacks Project, Tag 00YV
+* Stacks Project, Tag 00Z4
+* Stacks Project, Tag 00Z8
+* Stacks Project, Tag 015F
+* Stacks Project, Tag 03D7
+* Stacks Project, Tag 03DI
+* Stacks Project, Tag 03DJ
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 03S6
+* Stacks Project, Tag 04J0
+* Stacks Project, Tag 06YN
+* Stacks Project, Tag 06YU
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 09A5
+* Stacks Project, Tag 09AE
+* Stacks Project, Tag 0E8I
+* Stacks Project, Tag 0F6Z
+* Stacks Project, Tag 0GL1
+* Stacks Project, Tag 0H7J
 -/
 
 -- Owning definition node.
@@ -43,50 +63,46 @@ namespace SheafOfModules.OpenTensorNormalization
 
 /-- The ordinary site and the ringed diagram site of strict inverse systems.
 The latter has arbitrary ring sheaves, hence arbitrary, possibly nonflat,
-coefficient transitions. Source: Stacks 00Z4; blueprint open-factor refinement. -/
+coefficient transitions. -/
 inductive Mode | ordinary | systems
 
 /-- The diagram site uses the category of increasing natural numbers; a presheaf
-therefore has transitions from level `n+1` to level `n`.
-Source: Stacks 00Z4; blueprint open-factor refinement. -/
+therefore has transitions from level `n+1` to level `n`. -/
 def Site (m : Mode) (X : Scheme.{u}) : Type (u + 1) :=
   match m with
   | .ordinary => X.ProEt
   | .systems => ℕ × X.ProEt
 
-/-- The site category instance for ordinary and vertical sites.
-Source: the product-site construction. -/
+/-- The site category instance for ordinary and vertical sites. -/
 instance (m : Mode) (X : Scheme.{u}) : Category.{u} (Site m X) := by
   cases m <;> dsimp [Site] <;> infer_instance
 
 /-- Vertical covering families generate the diagram topology; no covering in
-the coefficient direction is imposed. Source: Stacks 00Z4, 00Z8. -/
+the coefficient direction is imposed. -/
 def verticalCoverage (X : Scheme.{u}) : Precoverage (ℕ × X.ProEt) where
   coverings W := {P | ∃ S : Sieve W.2, S ∈ ProEt.topology X W.2 ∧
     P = fun V a => V.1 = W.1 ∧ S a.2}
 
-/-- The original pro-etale topology, or its vertical diagram topology.
-Source: Stacks 00Z4 and 09A5; blueprint open-factor refinement. -/
+/-- The original pro-etale topology, or its vertical diagram topology. -/
 def topology (m : Mode) (X : Scheme.{u}) : GrothendieckTopology (Site m X) :=
   match m with
   | .ordinary => ProEt.topology X
   | .systems => (verticalCoverage X).toGrothendieck
 
-/-- Forget the coefficient index. Source: Stacks 00Z4. -/
+/-- Forget the coefficient index. -/
 def forgetIndex (m : Mode) (X : Scheme.{u}) : Site m X ⥤ X.ProEt :=
   match m with
   | .ordinary => 𝟭 _
   | .systems => CategoryTheory.Prod.snd _ _
 
-/-- Base change at every coefficient index. Source: Stacks 09A5, 00Z4. -/
+/-- Base change at every coefficient index. -/
 def baseChange (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Site m Y ⥤ Site m X :=
   match m with
   | .ordinary => proEtaleBaseChange f
   | .systems => (𝟭 ℕ).prod (proEtaleBaseChange f)
 
-/-- Postcomposition with an open immersion on the site, termwise for systems.
-Source: Stacks 0F6Z and 09A5. -/
+/-- Postcomposition with an open immersion on the site, termwise for systems. -/
 def openInclusion (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] : Site m U ⥤ Site m X :=
   match m with
@@ -228,8 +244,7 @@ private theorem system_continuous {X Y : Scheme.{u}} (F : X.ProEt ⥤ Y.ProEt)
   exact h
 
 /-- Continuity is tested on the vertical covering families and follows from
-continuity of pro-etale base change; the coefficient index is unchanged.
-Source: Stacks 09A5 and 00Z4. -/
+continuity of pro-etale base change; the coefficient index is unchanged. -/
 theorem baseChange_continuous (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (baseChange m f).IsContinuous (topology m Y) (topology m X) := by
   cases m with
@@ -237,8 +252,7 @@ theorem baseChange_continuous (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y) :
   | systems => exact system_continuous (proEtaleBaseChange f)
 
 /-- Open postcomposition preserves sheaves, since coverings and sections are
-those on the localized site. The same check is vertical for systems.
-Source: Stacks 0F6Z, 00Z4. -/
+those on the localized site. The same check is vertical for systems. -/
 theorem openInclusion_continuous (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] :
     (openInclusion m j).IsContinuous (topology m U) (topology m X) := by
@@ -251,21 +265,20 @@ theorem openInclusion_continuous (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
 attribute [instance] baseChange_continuous openInclusion_continuous
 
 /-- Restriction of rings is literal restriction of sections along the open.
-It canonically represents `j⁻¹ R`. Source: Stacks 0F6Z. -/
+It canonically represents `j⁻¹ R`. -/
 abbrev restrictRing (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology m X) CommRingCat.{u + 1}) :=
   ((openInclusion m j).sheafPushforwardContinuous CommRingCat.{u + 1}
     (topology m U) (topology m X)).obj R
 
 /-- Open restriction on modules keeps their section modules and restriction
-maps. Source: Stacks 0F6Z, 03DJ. -/
+maps. -/
 def restrict (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology m X) CommRingCat.{u + 1}) :
     Mod R ⥤ Mod (restrictRing m j R) :=
   SheafOfModules.pushforward.{u + 1} (F := openInclusion m j) (𝟙 _)
 
-/-- The sectionwise module direct image, with the prescribed ring map.
-Source: Stacks 03D7, 04J0. -/
+/-- The sectionwise module direct image, with the prescribed ring map. -/
 def direct (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y)
     (R : Sheaf (topology m Y) CommRingCat.{u + 1})
     (S : Sheaf (topology m X) CommRingCat.{u + 1})
@@ -277,7 +290,7 @@ def direct (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y)
 /-- A left adjoint to the specified sectionwise direct image, together with
 its total left derived functor. Universal properties determine these objects
 up to their unique compatible isomorphisms; no exactness of scalar extension
-is asserted. Source: Stacks 03D7, 07A4. -/
+is asserted. -/
 structure Pullback {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
     (R : Sheaf J CommRingCat.{u + 1}) (S : Sheaf K CommRingCat.{u + 1})
@@ -296,7 +309,7 @@ structure Pullback {C D : Type (u + 1)} [Category.{u} C] [Category.{u} D]
 attribute [instance] Pullback.additive
 
 /-- An exact open extension, specified as the left adjoint to the actual
-restriction of section modules. Source: Stacks 03DI, 03DJ. -/
+restriction of section modules. -/
 structure OpenExtension (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology m X) CommRingCat.{u + 1}) where
   ordinary : Mod (restrictRing m j R) ⥤ Mod R
@@ -315,7 +328,7 @@ structure OpenExtension (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
 attribute [instance] OpenExtension.additive OpenExtension.limits OpenExtension.colimits
 
 /-- Only the geometry and coefficient map are input. The displayed map is
-adjoint to `g⁻¹R ⟶ S`. Source: Stacks 03D7, 0GL1. -/
+adjoint to `g⁻¹R ⟶ S`. -/
 structure Input (m : Mode) where
   U : Scheme.{u}
   U' : Scheme.{u}
@@ -334,8 +347,7 @@ structure Input (m : Mode) where
     (topology m X) (topology m X')).obj S
 
 /-- Convert precisely the inverse-image ring map in the node into its
-adjoint sectionwise form, without assuming the ring map invertible or flat.
-Source: Stacks 03D7; the recorded pro-etale sheaf adjunction -/
+adjoint sectionwise form, without assuming the ring map invertible or flat. -/
 def ordinaryInput {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (g : X' ⟶ X) (sq : OpenImmersionSquare gU j' j g)
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
@@ -356,14 +368,12 @@ def ordinaryInput {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
   coefficient := (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit.app R ≫
     (proEtaleSheafDirectImage g CommRingCat.{u + 1}).map c
 
-/-- The open condition is inherited from the chosen square. Source: Stacks 03S6 -/
+/-- The open condition is inherited from the chosen square. -/
 instance {m : Mode} (d : Input.{u} m) : IsOpenImmersion d.j := d.j_open
-/-- The ambient open-immersion instance inherited from the chosen square.
-Source: `OpenImmersionSquare`. -/
+/-- The ambient open-immersion instance inherited from the chosen square. -/
 instance {m : Mode} (d : Input.{u} m) : IsOpenImmersion d.j' := d.j'_open
 
-/-- First fibre-product projection, with the coefficient index unchanged.
-Source: Stacks 09A5. -/
+/-- First fibre-product projection, with the coefficient index unchanged. -/
 def baseFirst (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y) (W : Site m Y) :
     ((forgetIndex m X).obj ((baseChange m f).obj W)).left ⟶
       ((forgetIndex m Y).obj W).left := by
@@ -372,8 +382,7 @@ def baseFirst (m : Mode) {X Y : Scheme.{u}} (f : X ⟶ Y) (W : Site m Y) :
   | systems => exact pullback.fst W.2.hom f
 
 /-- The site comparison is fixed by the first projection and by being a map
-over `X'` (the second projection). These characterize the fibre-product map.
-Source: Stacks 04J0, 03S6. -/
+over `X'` (the second projection). These characterize the fibre-product map. -/
 structure SiteSquare {m : Mode} (d : Input.{u} m) where
   iso : openInclusion m d.j ⋙ baseChange m d.g ≅
     baseChange m d.gU ⋙ openInclusion m d.j'
@@ -383,7 +392,7 @@ structure SiteSquare {m : Mode} (d : Input.{u} m) where
         (baseFirst m d.gU W)
 
 /-- The open-corner structural map is forced by restriction of the given
-ambient map and the specified geometric comparison. Source: Stacks 04J0. -/
+ambient map and the specified geometric comparison. -/
 def cornerCoefficient {m : Mode} {d : Input.{u} m} (t : SiteSquare d) :
     restrictRing m d.j d.R ⟶
       ((baseChange m d.gU).sheafPushforwardContinuous CommRingCat.{u + 1}
@@ -428,7 +437,7 @@ private def systemAdjunction {C D : Type (u + 1)} [Category.{u} C] [Category.{u}
 set_option backward.isDefEq.respectTransparency false in
 /-- Restriction is sectionwise and exact: kernels and finite limits are
 sectionwise; cokernels commute with restriction by slice sheafification.
-The same calculation is vertical for systems. Source: Stacks 03DJ, 0F6Z -/
+The same calculation is vertical for systems. -/
 theorem restriction_exact (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology m X) CommRingCat.{u + 1}) :
     (restrict m j R).Additive ∧ PreservesFiniteLimits (restrict m j R) ∧
@@ -460,56 +469,46 @@ theorem restriction_exact (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X)
     exact preservesFiniteLimits_of_reflects_of_preserves _ V
   exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
-/-- Restriction is additive because it is sectionwise pushforward.
-Source: Stacks 03DJ. -/
+/-- Restriction is additive because it is sectionwise pushforward. -/
 instance (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology m X) CommRingCat.{u + 1}) : (restrict m j R).Additive :=
   (restriction_exact m j R).1
-/-- Restriction preserves finite limits sectionwise.
-Source: Stacks 03DJ. -/
+/-- Restriction preserves finite limits sectionwise. -/
 instance (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology m X) CommRingCat.{u + 1}) : PreservesFiniteLimits (restrict m j R) :=
   (restriction_exact m j R).2.1
-/-- Restriction preserves finite colimits by localized sheafification.
-Source: Stacks 03DJ. -/
+/-- Restriction preserves finite colimits by localized sheafification. -/
 instance (m : Mode) {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (R : Sheaf (topology m X) CommRingCat.{u + 1}) : PreservesFiniteColimits (restrict m j R) :=
   (restriction_exact m j R).2.2
 
 /-- The two open extensions. All functors here are constructed conclusions,
-not assumptions on the geometric input. Source: Stacks 03DI. -/
+not assumptions on the geometric input. -/
 structure OpenDerived {m : Mode} (d : Input.{u} m) where
   extension : OpenExtension m d.j d.R
   extension' : OpenExtension m d.j' d.S
 
-/-- The derived extension by zero component of `OpenDerived`.
-Source: Stacks 015F. -/
+/-- The derived extension by zero component of `OpenDerived`. -/
 abbrev OpenDerived.jShriek {m : Mode} {d : Input.{u} m} (o : OpenDerived d) :=
   o.extension.ordinary.mapDerivedCategory
-/-- The derived extension by zero component for the base-changed open.
-Source: Stacks 015F. -/
+/-- The derived extension by zero component for the base-changed open. -/
 abbrev OpenDerived.jShriek' {m : Mode} {d : Input.{u} m} (o : OpenDerived d) :=
   o.extension'.ordinary.mapDerivedCategory
-/-- The derived restriction component of `OpenDerived`.
-Source: Stacks 0F6Z. -/
+/-- The derived restriction component of `OpenDerived`. -/
 abbrev OpenDerived.jStar {m : Mode} {d : Input.{u} m} (_o : OpenDerived d) :=
   (restrict m d.j d.R).mapDerivedCategory
-/-- The derived restriction component for the base-changed open.
-Source: Stacks 0F6Z. -/
+/-- The derived restriction component for the base-changed open. -/
 abbrev OpenDerived.jStar' {m : Mode} {d : Input.{u} m} (_o : OpenDerived d) :=
   (restrict m d.j' d.S).mapDerivedCategory
 
-/-- The derived extension/restriction adjunction on the ambient site.
-Source: Stacks 015F. -/
+/-- The derived extension/restriction adjunction on the ambient site. -/
 abbrev OpenDerived.adj {m : Mode} {d : Input.{u} m} (o : OpenDerived d) :=
   exactDerivedAdjunction o.extension.adjunction
-/-- The derived extension/restriction adjunction on the base-changed site.
-Source: Stacks 015F. -/
+/-- The derived extension/restriction adjunction on the base-changed site. -/
 abbrev OpenDerived.adj' {m : Mode} {d : Input.{u} m} (o : OpenDerived d) :=
   exactDerivedAdjunction o.extension'.adjunction
 
-/-- The exact restriction model uses the published exact-functor factorization.
-Source: Stacks 015F. -/
+/-- The exact restriction model uses the published exact-functor factorization. -/
 def restrictionModel {m : Mode} {U X : Scheme.{u}} (j : U ⟶ X)
     [IsOpenImmersion j] (R : Sheaf (topology m X) CommRingCat.{u + 1}) :
     ExactModel (restrict m j R) where
@@ -520,7 +519,7 @@ def restrictionModel {m : Mode} {U X : Scheme.{u}} (j : U ⟶ X)
 /-- Simultaneous canonical presentations. Both pullbacks are characterized by
 their adjunctions to the *specified* direct images and by left derivation.
 The geometric mate and the flat-representative equation fix theta, including
-its scalar normalization. Source: Stacks 04J0, 07A4, 0GL1. -/
+its scalar normalization. -/
 structure Operations {m : Mode} (d : Input.{u} m) (t : SiteSquare d) where
   opens : OpenDerived d
   gPull : Pullback d.R d.S (direct m d.g d.R d.S d.coefficient)
@@ -568,7 +567,7 @@ structure Operations {m : Mode} (d : Input.{u} m) (t : SiteSquare d) where
     tensorX tensorU restrictionTensor
 
 /-- Every normalization and every arrow of the assertion, for arbitrary
-unbounded derived objects. Source: Stacks 0F6Z, 0GL1, 0E8I. -/
+unbounded derived objects. -/
 structure Assertion {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
     (o : Operations d t) where
   unit : ∀ M, IsIso (o.opens.adj.unit.app M)
@@ -600,30 +599,25 @@ structure Assertion {m : Mode} {d : Input.{u} m} {t : SiteSquare d}
           (CategoryTheory.Prod.mkHom (@inv _ _ _ _ (o.opens.adj.unit.app M) (unit M)) (𝟙 _)) ≫
             o.opens.adj.unit.app (o.tensorU.functor.obj (M, o.opens.jStar.obj N))
 
-/-- Fixed finite scalars and their standard (uncompleted) derived category.
-Source: Stacks 09AE; the two recorded finite-coefficient dependencies. -/
+/-- Fixed finite scalars and their standard (uncompleted) derived category. -/
 abbrev FiniteModules (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :=
   Sheaf (ProEt.topology X) (ModuleCat.{u + 1} A)
-/-- The fixed-scalar ordinary derived category.
-Source: Stacks 09AE. -/
+/-- The fixed-scalar ordinary derived category. -/
 abbrev FiniteD (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :=
   DerivedCategory (FiniteModules A X)
 
-/-- The canonical fixed-scalar open extension and inverse image.
-Source: the recorded finite-coefficient open base-change declaration. -/
+/-- The canonical fixed-scalar open extension and inverse image. -/
 def finiteShriek (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] : FiniteD A U ⥤ FiniteD A X :=
   (ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory
-/-- The canonical finite-scalar derived pullback functor.
-Source: the recorded finite pullback declaration. -/
+/-- The canonical finite-scalar derived pullback functor. -/
 def finitePull (A : Type (u + 1)) [CommRing A] {X Y : Scheme.{u}}
     (f : X ⟶ Y) : FiniteD A Y ⥤ FiniteD A X :=
   (ProEtale.upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory
 
 /-- Intrinsic realization is pinned by its underlying sheaves and by the action
 of every constant scalar. Since constant sections locally generate the constant
-ring sheaf, these data fix the realization, including on morphisms.
-Source: Stacks 00YV, 03D7. -/
+ring sheaf, these data fix the realization, including on morphisms. -/
 structure FiniteRealization (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     (i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj) where
@@ -646,7 +640,7 @@ structure FiniteRealization (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
 attribute [instance] FiniteRealization.additive
 
 /-- Realization on the ordinary derived categories is exact termwise
-localization of this very section-preserving equivalence. Source: Stacks 015F. -/
+localization of this very section-preserving equivalence. -/
 def FiniteRealization.derived {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj}
@@ -654,8 +648,7 @@ def FiniteRealization.derived {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}}
   e.equivalence.functor.mapDerivedCategory
 
 /-- The constant finite specialization uses the canonical constant-section
-structural map, not an arbitrary endomorphism of the constant ring.
-Source: Stacks 0H7J, 09AE. -/
+structural map, not an arbitrary endomorphism of the constant ring. -/
 abbrev finiteInput (A : Type (u + 1)) [CommRing A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')
     (j : U ⟶ X) (g : X' ⟶ X) (sq : OpenImmersionSquare gU j' j g) : Input .ordinary where
@@ -674,8 +667,7 @@ abbrev finiteInput (A : Type (u + 1)) [CommRing A]
 
 /-- The published finite projection arrow in the direction of the node's gamma.
 This is its actual inverse projection map, with explicit endpoints to keep
-elaboration independent of the surrounding realization square.
-Source: Stacks 0GL1 and the recorded finite open projection formula -/
+elaboration independent of the surrounding realization square. -/
 def finiteGamma (A : Type (u + 1)) [CommRing A] [Finite A]
     {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
     (M : FiniteD A U) (N : FiniteD A X) :
@@ -689,7 +681,7 @@ def finiteGamma (A : Type (u + 1)) [CommRing A] [Finite A]
     (ModuleCat.{u + 1} A) j).inv.app M).app N
 
 /-- The exact-operation comparison is pinned on every complex by the ordinary
-comparison and the published exact localization factorizations. Source: Stacks 015F -/
+comparison and the published exact localization factorizations. -/
 def FiniteExactPin {A : Type (u + 1)} [CommRing A] {X Y : Scheme.{u}}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
@@ -712,8 +704,7 @@ def FiniteExactPin {A : Type (u + 1)} [CommRing A] {X Y : Scheme.{u}}
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex c.hom (.up ℤ)).app P)
 
 /-- Representative equation for the finite pullback comparison, using the
-stored additive structure of the specified module left adjoint.
-Source: Stacks 07A4 and 09AE. -/
+stored additive structure of the specified module left adjoint. -/
 def finitePullModel {A : Type (u + 1)} [CommRing A] {X Y : Scheme.{u}}
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -740,8 +731,7 @@ def finitePullModel {A : Type (u + 1)} [CommRing A] {X Y : Scheme.{u}}
       DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P)
 
 /-- Pullback comparisons are the mates of a section-preserving direct-image
-comparison, and their derived comparison has that same value on complexes.
-Source: Stacks 03D7, 07A4, 09AE. -/
+comparison, and their derived comparison has that same value on complexes. -/
 structure FinitePullPin {A : Type (u + 1)} [CommRing A] {X Y : Scheme.{u}}
     {R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}}
     {S : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
@@ -772,7 +762,7 @@ structure FinitePullPin {A : Type (u + 1)} [CommRing A] {X Y : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact derivation of the specified ordinary open extension, with its stored
-exactness instances. Source: Stacks 015F. -/
+exactness instances. -/
 def openExtensionDerived {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (o : OpenExtension .ordinary j R) :
     Der (restrictRing .ordinary j R) ⥤ Der R := by
@@ -786,7 +776,7 @@ def openExtensionDerived {U X : Scheme.{u}} {j : U ⟶ X} [IsOpenImmersion j]
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Both exact comparison pins use the given ordinary extension and restriction,
-with the standard localization factorizations. Source: Stacks 015F and 0F6Z -/
+with the standard localization factorizations. -/
 def finiteOpenModels {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     {i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj}
@@ -815,8 +805,7 @@ def finiteOpenModels {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
       (restrict .ordinary j R) star dr
 
 /-- Open comparisons preserve the actual section restriction and its adjunction unit;
-the extension and restriction comparisons descend these ordinary comparisons.
-Source: Stacks 03DI, 0F6Z, 015F. -/
+the extension and restriction comparisons descend these ordinary comparisons. -/
 structure FiniteOpenPin {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
     (j : U ⟶ X) [IsOpenImmersion j] (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     {i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj}
@@ -848,7 +837,7 @@ structure FiniteOpenPin {A : Type (u + 1)} [CommRing A] {U X : Scheme.{u}}
   models : finiteOpenModels j R eX eU o ds dr star shriek
 
 /-- A pure fixed-scalar tensor section is the image of the section tensor under
-the lax monoidal underlying-presheaf map. Source: Stacks 03EK -/
+the lax monoidal underlying-presheaf map. -/
 def finitePure {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}}
     (M N : FiniteModules A X) (W : X.ProEtᵒᵖ) (x : M.obj.obj W) (y : N.obj.obj W) :
     ((curriedTensor (FiniteModules A X)).obj M |>.obj N).obj.obj W :=
@@ -856,7 +845,7 @@ def finitePure {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}}
     M N).app W).hom (TensorProduct.tmul A x y)
 
 /-- Evaluation of the existing tensor representative comparison at a resolving
-pair, with its endpoints explicit. Source: Stacks 06YU -/
+pair, with its endpoints explicit. -/
 def tensorRepresentative {X : Scheme.{u}}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}} (t : TensorModel R)
     (P Q : CochainComplex (Mod R) ℤ) (hp : resolving R P) (hq : resolving R Q) :
@@ -864,14 +853,12 @@ def tensorRepresentative {X : Scheme.{u}}
       t.functor.obj (DerivedCategory.Q.obj P, DerivedCategory.Q.obj Q) :=
   t.representative.hom.app (⟨P, hp⟩, ⟨Q, hq⟩)
 
-/-- The fixed-scalar derived tensor bifunctor with explicit product endpoints.
-Source: Stacks 06YU. -/
+/-- The fixed-scalar derived tensor bifunctor with explicit product endpoints. -/
 def finiteTensor (A : Type (u + 1)) [CommRing A] [Finite A] (X : Scheme.{u}) :
     FiniteD A X × FiniteD A X ⥤ FiniteD A X :=
   Functor.uncurry.obj (ProEtale.derivedTensor (ModuleCat.{u + 1} A) X)
 
-/-- Termwise realization of fixed-scalar complexes, with explicit complex categories.
-Source: Stacks 015F. -/
+/-- Termwise realization of fixed-scalar complexes, with explicit complex categories. -/
 def finiteComplexRealization {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj}
@@ -879,14 +866,12 @@ def finiteComplexRealization {A : Type (u + 1)} [CommRing A] {X : Scheme.{u}}
     CochainComplex (FiniteModules A X) ℤ ⥤ CochainComplex (Mod R) ℤ :=
   e.equivalence.functor.mapHomologicalComplex (.up ℤ)
 
-/-- The fixed-scalar signed total complex, with its endpoints explicit.
-Source: Stacks 06YN. -/
+/-- The fixed-scalar signed total complex, with its endpoints explicit. -/
 def finiteTotal (A : Type (u + 1)) [CommRing A] (X : Scheme.{u})
     (P Q : CochainComplex (FiniteModules A X) ℤ) : CochainComplex (FiniteModules A X) ℤ :=
   HomologicalComplex.mapBifunctor P Q (curriedTensor (FiniteModules A X)) (.up ℤ)
 
-/-- The source and target of the finite signed-total comparison.
-Source: Stacks 06YN. -/
+/-- The source and target of the finite signed-total comparison. -/
 def FiniteTensorTotal {A : Type (u + 1)} [CommRing A] [Finite A] {X : Scheme.{u}}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj}
@@ -899,7 +884,7 @@ def FiniteTensorTotal {A : Type (u + 1)} [CommRing A] [Finite A] {X : Scheme.{u}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The total comparison carries every fixed-scalar pure bidegree summand to the
-same ring-sheaf pure summand. Source: Stacks 03EK and 06YN -/
+same ring-sheaf pure summand. -/
 def finiteTensorPure {A : Type (u + 1)} [CommRing A] [Finite A] {X : Scheme.{u}}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj}
@@ -922,7 +907,7 @@ def finiteTensorPure {A : Type (u + 1)} [CommRing A] [Finite A] {X : Scheme.{u}}
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The tensor comparison commutes with the finite localization map and the
-ring-sheaf representative comparison. Source: Stacks 06YU and 0GL1 -/
+ring-sheaf representative comparison. -/
 def finiteTensorModel {A : Type (u + 1)} [CommRing A] [Finite A] {X : Scheme.{u}}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj}
@@ -946,8 +931,7 @@ def finiteTensorModel {A : Type (u + 1)} [CommRing A] [Finite A] {X : Scheme.{u}
         (e.equivalence.functor.mapDerivedCategoryFactors.hom.app Q)))
 
 /-- Finite tensor transport is fixed on every total-complex pure summand and then
-on all flat K-flat representatives by the two published tensor factorizations.
-Source: Stacks 03EK, 06YU, 0GL1. -/
+on all flat K-flat representatives by the two published tensor factorizations. -/
 def FiniteTensorPin {A : Type (u + 1)} [CommRing A] [Finite A] {X : Scheme.{u}}
     {R : Sheaf (ProEt.topology X) CommRingCat.{u + 1}}
     {i : (Functor.const X.ProEtᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj}
@@ -965,22 +949,18 @@ variable {A : Type (u + 1)} [CommRing A] [Finite A] {X : Scheme.{u}}
     {e : FiniteRealization A X R i} {t : TensorModel R}
     {d : finiteTensor A X ⋙ e.derived ≅ (e.derived.prod e.derived) ⋙ t.functor}
 
-/-- The total-complex comparison retained in the finite tensor pin.
-Source: Stacks 06YU. -/
+/-- The total-complex comparison retained in the finite tensor pin. -/
 def totalIso (p : FiniteTensorPin e t d) : FiniteTensorTotal e := p.val
 
-/-- The retained comparison preserves every pure summand.
-Source: Stacks 03EK. -/
+/-- The retained comparison preserves every pure summand. -/
 theorem pure_summands (p : FiniteTensorPin e t d) : finiteTensorPure e p.totalIso :=
   p.property.1
 
-/-- The retained comparison agrees with the derived representative equation.
-Source: Stacks 06YU. -/
+/-- The retained comparison agrees with the derived representative equation. -/
 theorem model (p : FiniteTensorPin e t d) : finiteTensorModel e t d p.totalIso :=
   p.property.2
 
-/-- Assemble a finite tensor pin from the same three original fields.
-Source: Stacks 03EK and 06YU. -/
+/-- Assemble a finite tensor pin from the same three original fields. -/
 def mk (totalIso : FiniteTensorTotal e) (pure_summands : finiteTensorPure e totalIso)
     (model : finiteTensorModel e t d totalIso) : FiniteTensorPin e t d :=
   ⟨totalIso, pure_summands, model⟩
@@ -991,7 +971,7 @@ end FiniteTensorPin
 beta and gamma: constants and underlying sections fix the realizations;
 section equations, adjunction mates and total-complex equations pin the
 comparison isomorphisms. These records are conclusions, not coefficient
-hypotheses. Source: Stacks 03S6, 0GL1. -/
+hypotheses. -/
 structure FiniteComparisonsCore (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} {sq : OpenImmersionSquare gU j' j g}
@@ -1046,7 +1026,7 @@ structure FiniteComparisonsCore (A : Type (u + 1)) [CommRing A] [Finite A]
   tensorU_pin : FiniteTensorPin realizeU o.tensorU tensorU
 
 /-- Canonical finite comparisons with the open-immersion instances supplied by
-the chosen square. Source: Stacks 03S6, 0GL1. -/
+the chosen square. -/
 abbrev FiniteComparisons (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} {sq : OpenImmersionSquare gU j' j g}

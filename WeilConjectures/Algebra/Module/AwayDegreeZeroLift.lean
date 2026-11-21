@@ -14,7 +14,10 @@ import Mathlib.Algebra.DirectSum.Decomposition
 /-!
 # Homogeneous lifting in an away localization
 
-Source: Stacks Project, Algebra, Section 00JM; Constructions, Lemma 01M7.
+## References
+
+* [Stacks Project, Tag 00JM](https://stacks.math.columbia.edu/tag/00JM), homogeneous
+  localization; Stacks Project, Tag 01M7 (Constructions), final functoriality paragraph
 -/
 
 @[expose] public section
@@ -59,23 +62,7 @@ private theorem shift_component
   change Q (H a) = H (P a)
   simpa only [AddMonoidHom.comp_apply, hc] using hh
 
-/-- A degree-zero fraction in the image of a graded localized map has a degree-zero preimage.
-Source: Stacks Project, Algebra, Section 00JM, homogeneous localization; Constructions,
-Lemma 01M7, final functoriality paragraph.
-
-Proof: If f = 0, localization is the zero module and its zero fraction is a preimage.
-Otherwise a power f^m is nonzero and has degree m*d. The total degree of this nonzero
-polynomial makes every equal-degree fraction have numerator of degree m*d. Write an arbitrary
-preimage as a/f^r. Equality of fractions gives a power f^l such that
-f^(l+m) g(a) = f^(l+r) b. The additive map H(a) = f^(l+m) g(a) shifts each homogeneous
-degree by (l+m)*d. Projections onto components commute with this degree shift: prove the
-identity on each generator of the source direct sum, using independence in the target, then
-extend it additively. Apply it in degree r*d. The right side f^(l+r) b has degree
-(l+r)*d+m*d = r*d+(l+m)*d, so its projection is itself. Thus H(a_(r*d)) = f^(l+r) b.
-The same fraction equality criterion shows a_(r*d)/f^r maps to b/f^m, and it is an
-equal-degree fraction. Zero numerators and zero images cause no exception: zero belongs to
-every homogeneous component. No compatibility of scalar multiplication in the source grading
-is needed, and the argument also works when d=0. -/
+/-- A degree-zero fraction in the image of a graded localized map has a degree-zero preimage. -/
 theorem away_degreeZero_lift
     (k : Type u) [Field k]
     (M : Type v) (N : Type w) [AddCommGroup M] [AddCommGroup N]

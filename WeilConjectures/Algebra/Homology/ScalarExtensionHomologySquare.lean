@@ -11,7 +11,10 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Transposing an ordinary homology square by scalar extension
 
-Source: Stacks Project, Tags 05G3 and 06Y6. -/
+## References
+
+* Stacks Project, Tags 05G3 and 06Y6
+-/
 
 @[expose] public section
 
@@ -74,15 +77,7 @@ private theorem forget_restrict_homologyIso
   exact (map_homology_pi S (forget₂ (ModuleCat.{u} D) AddCommGrpCat.{u})).symm
 
 /-- An ordinary additive cohomology square and a coefficient-complex square imply
-its scalar-extended square. Source: Stacks Project, Tags 05G3 and 06Y6.
-
-Proof: equality of D-linear maps is tested on the generators 1 tensor m.
-The adjunction identities express both localized maps on these generators through
-ordinary homology. Apply homology to the coefficient-complex square and use
-naturality of the homology isomorphism for the exact forgetful functors. Substitute
-the ordinary cohomology square, then the generator formula for e. Faithfulness of
-forgetting the D-action gives equality. No flatness of D or invertibility of any
-map is needed; zero rings, zero modules and zero complexes satisfy the same argument. -/
+its scalar-extended square. -/
 theorem scalarExtension_homology_square
     (E F D : Type u) [CommRing E] [CommRing F] [CommRing D]
     (f : E →+* D) (g : F →+* D)

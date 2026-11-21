@@ -9,7 +9,12 @@ public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Localization.Equivalence
 
-/-! # Transport of derived scalar extension through ring equivalences -/
+/-! # Transport of derived scalar extension through ring equivalences
+
+## References
+
+* Stacks Project, Tag 06Y6
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -158,9 +163,7 @@ private theorem derived_equivalence
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option linter.unusedVariables false in
-/-- Existence of the transported derived-functor isomorphism, before its counit equation.
-Source: Stacks Project, Tag 06Y6.
-The proof uses uniqueness of left derived functors after transport through ring equivalences. -/
+/-- Existence of the transported derived-functor isomorphism, before its counit equation. -/
 theorem exists_raw_transport_iso
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

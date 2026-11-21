@@ -9,7 +9,11 @@ module
 public import WeilConjectures.Algebra.Homology.FirstLocalizationMap
 /-! # Naturality for characterized localization maps
 
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8. -/
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 0DJ8
+-/
 
 @[expose] public section
 
@@ -47,20 +51,7 @@ private theorem firstLocalizationUnit_naturality
       ((1 : Aq) ⊗ₜ[A,algebraMap A Aq] x)
   rw [ModuleCat.ExtendScalars.map_tmul]
 
-/-- Naturality for characterized localization maps.
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8, affine localization identity.
-
-Proof: naturality of the extension/restriction unit gives a commuting square
-of underlying R-complexes for f and its extension to Aq. Apply the derived
-functor and degree-i cohomology. The universal property of each derived functor
-identifies delta and epsilon with the unique counit-compatible model comparisons;
-its uniqueness also gives the cocycle equation for these comparisons. Substitute
-the characterizations of g and h and cancel the cohomology isomorphisms.
-This proves equality of the underlying B-linear maps. On a generator 1 tensor x,
-the defining formulas he and he' and extension-of-scalars map_tmul identify the
-two D-linear composites with this equality. Tensor induction, or hom_ext for
-extension of scalars, proves the displayed square. Identity and zero chain maps
-obey the same calculation, without flatness assumptions. -/
+/-- Naturality for characterized localization maps. -/
 theorem firstLocalization_naturality (i : ℤ)
     (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')
           (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

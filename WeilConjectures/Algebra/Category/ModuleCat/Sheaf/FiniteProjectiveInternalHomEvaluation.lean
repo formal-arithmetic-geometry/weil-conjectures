@@ -13,8 +13,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-! # Evaluation for a finite projective sheaf of modules
 
-Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of
-`lemma-dual-perfect-complex`, finite-free and direct-summand calculation.
+## References
+
+* Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of the dual of a perfect complex:
+  finite-free and direct-summand calculation
 -/
 
 @[expose] public section
@@ -46,8 +48,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat RingCat)]
   [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasWeakSheafify J AddCommGrpCat.{u}]
 
-/-- The canonical map sending `b tensor phi` to `e ↦ b * phi(e)`.
-Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`. -/
+/-- The canonical map sending `b tensor phi` to `e ↦ b * phi(e)`. -/
 def moduleDualEvaluation (R : Sheaf J CommRingCat.{u})
     (E B : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     B ⊗ homObj E (𝟙_ _) ⟶ homObj E B :=
@@ -176,21 +177,7 @@ private theorem free_evaluation (R : Sheaf J CommRingCat.{u})
     simp
   exact ⟨⟨q, h₁, h₂⟩⟩
 
-/-- Canonical tensor-dual evaluation is invertible for a retract of a finite free sheaf.
-Source: Stacks Project, Tag 08DQ, proof of `lemma-dual-perfect-complex`.
-
-Proof: for the free sheaf on `Fin m`, internal Hom is the finite product of `m`
-copies of the target, and the dual is the free sheaf on the same basis. Tensoring
-with that free sheaf is the finite coproduct of `m` copies of B. The finite
-product/coproduct identification sends the evaluation map to the identity on
-these copies: its j-th coordinate evaluates the j-th basis vector. For the
-retraction `i ≫ p = id`, precomposition induces retractions on both the dual
-and Hom. Naturality of evaluation gives a morphism of the resulting split
-idempotents. Its inverse for the free sheaf commutes with these idempotents,
-so restrict it by the inclusion and projection to obtain the inverse for E.
-The two inverse equations reduce to the free inverse equations and `i ≫ p = id`.
-For `m = 0` both free objects are zero; the same retraction argument applies.
--/
+/-- Canonical tensor-dual evaluation is invertible for a retract of a finite free sheaf. -/
 theorem isIso_moduleDualEvaluation_of_retract (R : Sheaf J CommRingCat.{u})
     (E B : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
     (hE : ∃ m : ℕ,

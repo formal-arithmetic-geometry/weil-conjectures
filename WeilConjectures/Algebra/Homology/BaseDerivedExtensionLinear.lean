@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Homology.BaseDerivedExtensionScalar
 /-!
 # Linear total derived extension of scalars
 
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change
+## References
+
+* Stacks Project, Tag 06Y6.
 -/
 
 @[expose] public section
@@ -35,20 +37,8 @@ variable (R : Type uR) (B : Type uB) [CommRing R] [CommRing B]
   [HasDerivedCategory.{w} (ModuleCat.{max uR uB v} B)]
 
 -- Derived scalar extension is expressed in a common module universe.
-/-- Source: Stacks Project, Tag 06Y6, lemma-derived-base-change
-
-Proof: Resolve R-complexes by K-flat complexes on the one-point site. Tensor with B
-in degree zero preserves quasi-isomorphisms between K-flat models. Apply the
-resolving-class construction on the homotopy category to obtain the total left derived
-functor and its universal counit. For unequal ring universes use the canonical module
-category equivalences with the rings lifted to the common carrier universe; these
-preserve ordinary extension and quasi-isomorphisms, and hence transport the universal
-pair. On K-flat models, tensor extension preserves addition of maps and sends
-multiplication by r to multiplication by its image in B. The resolution comparison
-isomorphisms and functoriality transport these identities to every derived object.
-The derived functor is therefore additive. Apply the additive B-linear homology
-functor to the scalar identity to obtain the displayed equality in every degree.
-No A-action or comparison to ordinary cohomology is constructed here. -/
+/-- The universal total left derived extension of scalars exists, is additive, and acts on
+homology by the scalar `algebraMap R B r` for multiplication by `r`. -/
 theorem exists_baseDerivedExtension_linear
     [(extendScalars.{_, _, max uR uB v} (algebraMap R B)).Additive] :
     ∃ (derived : DerivedCategory (ModuleCat.{max uR uB v} R) ⥤

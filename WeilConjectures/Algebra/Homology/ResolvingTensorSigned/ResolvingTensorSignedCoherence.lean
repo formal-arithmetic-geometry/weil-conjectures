@@ -17,13 +17,14 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 
 /-! # Transport and signed coherence of a normalized resolving tensor comparison
 
-Source: Stacks Project, sites-cohomology.tex, Tags 07A4, 06YU and 0FPT;
-more-algebra.tex, section-sign-rules, item-shift-tensor and item-flip-tensor-product.
-
-All tensors and representative comparisons are the published K-flat constructions.
+All tensors and representative comparisons are the K-flat constructions.
 The sole construction below conjugates the specified natural isomorphism by eta.
 In the shift equation the first shift is extracted before the second: the second
-shift therefore uses the original first-factor degree, as in the source node.
+shift therefore uses the original first-factor degree.
+
+## References
+
+* Stacks Project, Tags 07A4, 06YU and 0FPT
 -/
 
 @[expose] public noncomputable section

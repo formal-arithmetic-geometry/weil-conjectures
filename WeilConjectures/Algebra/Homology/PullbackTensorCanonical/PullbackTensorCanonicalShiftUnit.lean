@@ -101,11 +101,16 @@ import WeilConjectures.Algebra.Homology.PullbackTensorResolving.PullbackTensorRe
 
 /-! # Canonical shifts and action units of derived tensor pullback
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 07A4;
-more-algebra.tex, Tag 0FNH, item-shift-tensor; sites-modules.tex, Tag 03EL.
-
-The helper predicates spell out the normalizations in this node. All tensors,
+The helper predicates spell out the normalizations used below. All tensors,
 representative comparisons, cochain unitors and pullback maps are existing ones.
+
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 06YU
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -165,13 +170,13 @@ local notation "MS" => Modules (C := D) (J := K) S
 variable (R) in
 /-- The published derived tensor with a stable name for its presentation.
 The data is exactly `derivedTensor R`; no localization is reselected.
-Source: Stacks 06YU. -/
+-/
 def canonicalDerivedTensor : DerivedCategory (MR) ⥤ DerivedCategory (MR) ⥤
     DerivedCategory (MR) := derivedTensor R
 
 /-- The given published shift structure, in the stable derived-tensor presentation.
 This definition returns its input structure; it selects no new comparisons.
-Source: Stacks 06YU and 0FNH. -/
+-/
 @[instance_reducible]
 def canonicalDerivedTensorCommShift [(derivedTensor R).CommShift₂Int] :
     (canonicalDerivedTensor R).CommShift₂Int :=
@@ -187,8 +192,7 @@ local notation "DR" => derivedTensor (C := C) (J := J) R
 local notation "DS" => derivedTensor (C := D) (J := K) S
 
 variable (R) in
-/-- The published resolving isomorphism in the stable derived-tensor presentation.
-Source: Stacks 06YU. -/
+/-- The published resolving isomorphism in the stable derived-tensor presentation. -/
 def canonicalRepresentativeIso
     (P Q : CochainComplex (MR) ℤ) (hp : P.IsKFlatIndependentCoefficients)
     (hq : Q.IsKFlatIndependentCoefficients)
@@ -202,7 +206,7 @@ def canonicalRepresentativeIso
 The fixed-argument comparisons agree with the published resolving comparison.
 `CommShift` includes the zero and addition laws, and `CommShift₂Int` includes
 naturality in the other derived argument.
-Source: Stacks 06YU and 0FNH -/
+-/
 def HasCanonicalTensorShifts [(DR).CommShift₂Int] : Prop :=
   ∀ (P : CochainComplex (MR) ℤ) (hp : P.IsKFlatIndependentCoefficients)
     (hf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (P.X n)),
@@ -229,17 +233,15 @@ variable (epsilon : DerivedCategory.Q ⋙ L ⟶
 
 local notation "pullF" => pull (J := J) (K := K) (R := R) (S := S) f
 
-/-- The two derived bifunctors in the comparison.
-Source: Stacks 07A4 -/
+/-- The two derived bifunctors in the comparison. -/
 abbrev Phi := Functor.uncurry.obj (TR) ⋙ L
 
-/-- Pull back each input before taking the published derived tensor.
-Source: Stacks 07A4 -/
+/-- Pull back each input before taking the published derived tensor. -/
 abbrev Psi := (L.prod L) ⋙ Functor.uncurry.obj (TS)
 
 /-- The Tag 07A4 representative square, in an equivalent form avoiding inverses
 of computation maps. Its cochain comparison is the prescribed insertion-of-one map.
-Source: Stacks 07A4 -/
+-/
 def IsNormalized (tau : Phi L ⟶ Psi L) : Prop :=
   ∀ (P Q : CochainComplex (MR) ℤ) (hp : P.IsKFlatIndependentCoefficients)
     (hq : Q.IsKFlatIndependentCoefficients)

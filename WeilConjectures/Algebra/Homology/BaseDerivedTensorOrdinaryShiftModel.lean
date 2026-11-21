@@ -13,8 +13,11 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCounitShiftSquare
 
 /-! # Transport of the ordinary derived tensor comparison
 
-Source: Stacks Project, Tags 06Y6 and 08IB; an explicit shift reduction
-for the tensor inheritance in Tag 0DJA(1).
+## References
+
+* Stacks Project, Tags 06Y6 and 08IB; an explicit shift reduction
+  for the tensor inheritance in Tag 0DJA(1).
+* Stacks Project, Tags 05G3, 05SU.
 -/
 
 @[expose] public section
@@ -29,9 +32,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
   [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]
   [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} B)]
 
-/-- The coefficient map is the transpose of the extension unit for the composite.
-Source: Stacks Project, Tag 05G3; this is the proved construction already used
-in BaseDerivedTensorCohomologyModel, specialized to one universe. -/
+/-- The coefficient map is the transpose of the extension unit for the composite. -/
 private theorem exists_tensorExtensionMap {S : Type u} {T : Type u} {U : Type u}
     [CommRing S] [CommRing T] [CommRing U] (f : S →+* T) (g : T →+* U)
     (K : CochainComplex (ModuleCat.{u} S) ℤ) :
@@ -67,8 +68,7 @@ private theorem exists_tensorExtensionMap {S : Type u} {T : Type u} {U : Type u}
   rw [ExtendScalars.smul_tmul, mul_one]
 
 
-/-- Naturality of the derived and homology shift comparisons for scalar multiplication.
-Source: Stacks Project, Tag 05SU, and naturality of the supplied shift comparisons. -/
+/-- Naturality of the derived and homology shift comparisons for scalar multiplication. -/
 private theorem shiftHomologyIso_smul
     (D : CochainComplex (ModuleCat.{u} A) ℤ ⥤ DerivedCategory (ModuleCat.{u} B))
     [D.CommShift ℤ] (K L : CochainComplex (ModuleCat.{u} A) ℤ)
@@ -108,33 +108,7 @@ private theorem shiftHomologyIso_smul
     (D.map e.hom) ≫ (DerivedCategory.homologyFunctor (ModuleCat.{u} B) j).map
       ((D.commShiftIso (-n)).hom.app K) ≫ f) h3
 
-/-- Transport the derived model and its ordinary comparison over the tensor algebra.
-Source: Stacks Project, Tag 06Y6 (exact derived tensor functor) and Tag 08IB
-(base-change comparison). The following shift argument is an explicit
-algebraic ingredient for the tensor inheritance in Tag 0DJA(1).
-
-Proof: keep mK.derived, mK.counit and mK.universal. The coherent right Kan
-shift theorem supplies integer shifts on the derived functor and shift
-compatibility of its counit. Compose restriction to R, the homotopy quotient,
-Qh and the derived functor into D. For each j, applying D to e and composing
-with its shift comparison and the homology shift gives an isomorphism from
-derived B-cohomology of L in degree j to that of K in degree j-n.
-Set cohomology(j) to mK.cohomology(j-n), and compose mK.cohomologyIso with
-the inverse of that shift isomorphism. Naturality for a times identity and
-mK.cohomologyIso_smul prove its scalar-action equation. Use the proved ordinary
-tensor associativity isomorphism for L, fixed uniquely by its pure tensor formula.
-Define comparison(j) as mK.comparison(j-n) followed by the inverse ordinary
-homology shift. The B-linear counit shift square and mK.comparison_eq prove
-comparison_eq for L by cancellation of restriction homology and shift maps.
-Construct ordinaryToLocalized by transposing the extension unit for the composite
-coefficient map. Transpose comparison followed by its homology map and the
-restriction homology comparison to construct localizedComparison; the adjunction
-inverse identity proves localized_eq. These fill every field of mL explicitly.
-At j=i+n, reindexing by j-n=i gives eT. Cancel the ordinary shift isomorphism
-against its inverse to prove the displayed square. No localized shift square is
-asserted. Zero complexes, n=0, nonflat coefficient maps and arbitrary e are
-included: no invertibility of a comparison map and no arbitrary model witness
-is used. -/
+/-- Transport the derived model and its ordinary comparison over the tensor algebra. -/
 theorem exists_baseDerivedTensor_ordinary_shift_model
     (K L : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ) (e : L ≅ K⟦-n⟧)
     (mK : BaseDerivedTensorCohomologyModel R A B K C) (i : ℤ) :

@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 /-!
 # Acyclicity in a tensored cone sequence
 
-Source: Stacks Project, sites-cohomology.tex, Lemma 07A3, with the cone of Definition 06YN
+## References
+
+* Stacks Project, Lemma 07A3, with the cone of Definition 06YN
 -/
 
 @[expose] public section
@@ -35,11 +37,8 @@ abbrev moduleCategory :=
 
 noncomputable local instance : MonoidalCategory (moduleCategory R) := monoidalCategory R
 
-/-- Stacks Project, Lemma 07A3.
-The cone comparison for the total tensor complex identifies tensoring the cone of `f`
-with the cone of the induced tensor map. The cone triangle is distinguished in the
-homotopy category; since acyclic complexes form a triangulated subcategory, any two
-acyclic total tensor complexes force the third to be acyclic. -/
+/-- Tensoring the cone of `f` with `A` is identified with the cone of the induced tensor map,
+and any two of the three total tensor complexes being acyclic forces the third to be acyclic. -/
 theorem tensor_mappingCone_two_out_of_three :
     ∀ (A K₁ K₂ : CochainComplex (moduleCategory R) ℤ) (f : K₁ ⟶ K₂),
       A.Acyclic →

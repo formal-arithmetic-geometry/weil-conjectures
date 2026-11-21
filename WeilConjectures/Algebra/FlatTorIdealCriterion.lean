@@ -19,7 +19,11 @@ import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
 /-!
 # Flatness characterized by first Tor with ideal quotients
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00M5
+A module `C` is flat if and only if `Tor₁(C, R ⧸ I)` vanishes for every ideal `I`.
+
+## References
+
+* Stacks Project, Algebra, Tag 00M5
 -/
 
 @[expose] public section
@@ -31,11 +35,8 @@ open CategoryTheory.Limits
 
 namespace CategoryTheory
 
-/--
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00M5
-The proof uses the first-variable Tor exact sequence, Tor symmetry, and the
-finitely generated ideal criterion for flatness, as detailed in the node proof.
--/
+/-- A module `C` over a commutative ring `R` is flat if and only if `Tor₁(C, R ⧸ I)` vanishes for
+every ideal `I` of `R`. -/
 theorem flat_iff_tor_one_quotient_ideal
     (R : Type u) [CommRing R]
     (C : Type u) [AddCommGroup C] [Module R C] :

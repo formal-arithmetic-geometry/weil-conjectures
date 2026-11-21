@@ -122,7 +122,10 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Algebraic inverse image recovered from module-operation transport
 
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D7.
+## References
+
+* Stacks Project, Tag 03D2
+* Stacks Project, Tag 03D7
 -/
 
 @[expose] public section
@@ -133,19 +136,7 @@ namespace SheafOfModules
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
 
-/-- The explicit operation-transport witnesses determine an algebraic inverse-image lift.
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D7.
-Proof: evaluate the binary-operation transport equations on a generalized pair to obtain
-preservation of addition and scalar multiplication on all generalized sections. For the
-regular module R, the underlying set sheaf is R itself. Let v be the inverse image of its
-constant section 1 over a test sheaf Z. Product preservation lifts any pair consisting of
-an inverse-image section of Z and a section a of A. Apply the transported identity r * 1 = r:
-scalar multiplication a mapped to a • v is the composite of the two underlying set
-isomorphisms A to L(R) to I(R), hence is injective. Apply transported module addition to
-x + y and scalar multiplication to x * y in the regular module. Cancellation against v
-then proves that eR transports ring addition and multiplication. The identities z = z + z
-and 1 • v = v give preservation of zero and one. The same additive identity gives module
-zero. All remaining data are exactly I, eI and eR.symm; the displayed equalities fix them. -/
+/-- The explicit operation-transport witnesses determine an algebraic inverse-image lift. -/
 theorem algebraicInverseImage_of_module_transport
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     (J : GrothendieckTopology C) (K : GrothendieckTopology D)

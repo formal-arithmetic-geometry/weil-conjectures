@@ -16,7 +16,9 @@ import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 
 /-! # K-injective Hom complexes with independent coefficient universes
 
-Source: Stacks Project, Tag 0A96.
+## References
+
+* Stacks Project, Tag 0A96
 -/
 
 @[expose] public section
@@ -420,17 +422,8 @@ end WeilConjectures
 
 namespace CochainComplex
 
-/-- Hom from a K-flat complex into a K-injective complex is K-injective.
-Source: Stacks Project, Tag 0A96.
-
-Proof: for any acyclic Z, K-flatness makes Z tensor L acyclic. Symmetry makes
-L tensor Z acyclic too. Tensor-Hom adjunction identifies maps Z to Hom(L,I)
-with maps L tensor Z to I, and also transports homotopies. The latter maps
-are null-homotopic because I is K-injective. Equivalently, use the degreewise
-product isomorphism with the monoidal internal Hom: multiply the (p,n)
-factor by (-1)^(p*n) to reconcile the two differential conventions. All
-products, coproducts and sectionwise adjunctions take place in max c v u,
-which contains the object, arrow and coefficient universes of the site. -/
+/-- Hom from a K-flat complex into a K-injective complex is K-injective. All products,
+coproducts and sectionwise adjunctions take place in `max c v u`. -/
 theorem isKInjective_homComplex_of_isKFlatOfUniverses
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max c v u}]

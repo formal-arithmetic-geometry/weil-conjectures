@@ -12,7 +12,9 @@ import WeilConjectures.Algebra.Homology.BaseTensorDerivedComparisonModel
 
 /-! # Naturality of localized base-derived tensor comparison
 
-Source: Stacks Project, More on Algebra, Tag 06Y6; perfect.tex, equation-bc (Tag 0DJ7).
+## References
+
+* Stacks Project, More on Algebra, Tag 06Y6; perfect.tex.
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ variable {A D : Type u} [CommRing A] [CommRing D]
   [HasDerivedCategory.{w} (ModuleCat.{u} A)]
   [HasDerivedCategory.{w} (ModuleCat.{u} D)]
 
-/-- The homology identification supplied by an invertible scalar-extension counit.
-Source: Stacks Project, More on Algebra, Tag 06Y6. -/
+/-- The homology identification supplied by an invertible scalar-extension counit. -/
 def scalarExtensionHomologyIso (ρ : A →+* D)
     (L : DerivedCategory (ModuleCat.{u} A) ⥤ DerivedCategory (ModuleCat.{u} D))
     (ε : DerivedCategory.Qh ⋙ L ⟶
@@ -58,7 +59,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
   [HasDerivedCategory.{w} (ModuleCat.{u} D)]
 
 /-- Localization factors identify the input to a base tensor model with derived
-restriction of an A-complex. Source: Stacks Project, Tag 06Y6. -/
+restriction of an A-complex. -/
 def baseTensorInputIso (P : CochainComplex (ModuleCat.{u} A) ℤ) :
     DerivedCategory.Qh.obj ((HomotopyCategory.quotient _ (.up ℤ)).obj
       (((restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ)).obj P)) ≅
@@ -68,7 +69,7 @@ def baseTensorInputIso (P : CochainComplex (ModuleCat.{u} A) ℤ) :
     (restrictScalars.{u} (algebraMap R A)).mapDerivedCategoryFactors.symm.app P
 
 /-- Transport on model cohomology along a derived A-linear isomorphism, before
-lifting the transport from B to the tensor algebra. Source: Stacks Project, Tag 06Y6. -/
+lifting the transport from B to the tensor algebra. -/
 def baseTensorSourceIso
     {P Q : CochainComplex (ModuleCat.{u} A) ℤ}
     (M : BaseDerivedTensorCohomologyModel R A B P D)
@@ -89,29 +90,7 @@ def baseTensorSourceIso
 
 /-- The localized model comparison is natural into derived A-to-D scalar extension.
 This is an algebraic statement about arbitrary counit-compatible models, with no
-schemes or tensor-stalk identifications.
-
-Proof: the scalar-extension and tensor-associativity maps on complexes induce a
-transformation from base-derived tensor (after exact restriction from A to R) to
-derived extension from A to D, restricted to B. Derive the transformation using
-K-flat resolutions and localization; its naturality holds for every derived
-A-linear morphism. The universal property identifies the base-derived functors
-of M and N by their unique counit-compatible isomorphism. Apply degree-i homology.
-The equations comparison_eq for M and N identify the cohomology maps induced by
-these counits with their comparison maps. The generator equations for ordinaryIso
-and ordinaryToLocalized fix the tensor-associativity and coefficient-extension
-maps and ensure their compatibility with the derived transformation. The equations
-localized_eq identify localizedComparison with the adjoint transpose of this map.
-Naturality of extension/restriction adjunction therefore gives the asserted
-D-linear square. The hypothesis on e identifies its restriction with the model
-transport; faithful restriction to B then gives the same tensor-algebra morphism.
-The invertible scalar-extension counits identify the two target objects with
-ordinary scalar-extension homology, through scalarExtensionHomologyIso. No
-invertibility of localizedComparison, R-flatness, or flatness of D is used.
-The identity morphism, zero complexes and zero coefficient rings follow the same
-adjunction calculation.
-Source: Stacks Project, More on Algebra, Tag 06Y6, lemma-derived-base-change;
-perfect.tex, equation-bc (Tag 0DJ7). -/
+schemes or tensor-stalk identifications. -/
 theorem baseDerivedTensor_localized_naturality
     {P Q : CochainComplex (ModuleCat.{u} A) ℤ}
     (M : BaseDerivedTensorCohomologyModel R A B P D)

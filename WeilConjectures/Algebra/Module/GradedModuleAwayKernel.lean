@@ -10,9 +10,11 @@ public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
-# GradedModuleAwayKernel
+# Kernel detection for principal localization comparisons
 
-Source: Stacks Project, Constructions, Lemma 01M4.
+## References
+
+* [Stacks Project, Tag 01M4](https://stacks.math.columbia.edu/tag/01M4), parts (1)(e) and (1)(h)
 -/
 
 @[expose] public section
@@ -50,23 +52,7 @@ private theorem awayKernelFraction
     rw [Localization.mk_pow, mk_smul_mk, hdn, zero_mk]
 
 set_option linter.unusedVariables false in
-/-- Detection of the kernel by powers of the principal comparison denominator.
-Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(e),(h).
-
-Proof: Represent z in Z f by x/f^m and choose the homogeneous relation g^e = a*f.
-If rho(z) = 0, the lambda fraction formula gives a^m • x/g^(e*m) = 0.
-The ordinary localization zero criterion supplies N with g^N*a^m • x = 0.
-Multiplying this equality by f^m yields g^(N+e*m) • x = 0. Since d = deg f
-is positive, choose K with K*d >= N+e*m. Then g^(K*d) • x = 0, which
-says U^K • z = 0 in N f and hence in its submodule Z f. For the ring
-kernel the identical computation uses multiplication rather than scalar action,
-the given compatibility of rhoS with lambdaS, and localization's zero criterion.
-Indeed lambdaS preserves S and hence sends b/f^m to b*(a/g^e)^m, since it
-preserves inverses and the given inverse of f/1 is a/g^e. The formula for U
-identifies U^K*z with g^(K*d)*x/f^(K*deg g+m). The inclusions of Z f and R f
-in their ordinary localizations are injective, so vanishing there suffices.
-If a denominator is nilpotent the same zero criterion still applies; cancellation
-in the original ring is never used. -/
+/-- Detection of the kernel by powers of the principal comparison denominator. -/
 theorem gradedModuleAwayKernel
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]

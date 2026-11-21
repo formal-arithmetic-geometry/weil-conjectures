@@ -14,8 +14,10 @@ public import Mathlib.CategoryTheory.Abelian.Refinements
 /-!
 # The boundary of the kernel-to-mapping-fibre comparison
 
-Source: Stacks Project, Derived Categories, section Cones and termwise split sequences;
-Homology, lemma-long-exact-sequence-cochain (Tag 0117)
+## References
+
+* Stacks Project, Derived Categories, section Cones and termwise split sequences
+* Stacks Project, Homology, Tag 0117
 -/
 
 @[expose] public section
@@ -28,19 +30,7 @@ namespace CochainComplex
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The shifted cone inclusion induces the connecting map of the kernel sequence.
-Source: Stacks Project, Derived Categories, section Cones and termwise split sequences;
-Homology, lemma-long-exact-sequence-cochain (Tag 0117)
-
-Proof. Fix a cycle b of B in degree q-1 and lift it to a in A, using degreewise
-surjectivity. Its differential da lies in the kernel and represents the connecting
-class. In the cone shifted by -1, the differential of (a,0) is (da,-b).
-Consequently the classes of (0,b) and (da,0) agree. The two component identities
-for κ identify the latter with κ(da), proving the asserted equality on cycles.
-Cycles surject onto homology, so this proves equality of the morphisms. Equivalently,
-use an epimorphic refinement to lift a cycle and apply ShortExact.δ_eq; the argument
-includes q=0 and unbounded complexes, with no boundedness assumption.
--/
+/-- The shifted cone inclusion induces the connecting map of the kernel sequence. -/
 theorem kernelShiftedCone_boundary
     {C : Type*} [Category* C] [Abelian C]
     {A B : CochainComplex C ℤ} (r : A ⟶ B)

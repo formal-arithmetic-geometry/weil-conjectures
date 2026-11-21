@@ -14,7 +14,10 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 
 /-! # Principal quotient preserves quasi-isomorphisms on regular complexes
 
-Source: Stacks Project, Derived Categories, Tag 05RT; steps 4--7 of the original plan. -/
+## References
+
+* Stacks Project, Tag 05RT
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -105,13 +108,7 @@ private theorem sequence_shortExact (C : CochainComplex (ModuleCat.{u} R) ℤ)
 
 /-- A principal quotient preserves quasi-isomorphisms between termwise t-regular complexes.
 No boundedness or K-flatness is used, and the quotient ring may be any specified presentation.
-
-Proof: right exactness of tensor gives kernel tM for the surjection M to A tensor M.
-The unit maps give short exact sequences C --t--> C → C/tC and D --t--> D → D/tD.
-Naturality gives a map between them with the original quasi-isomorphism on the first two
-terms. The homology long exact sequence makes the third map a quasi-isomorphism, and
-faithful restriction of scalars reflects that property.
-Source: Stacks Tag 05RT; blueprint steps 5--7. -/
+-/
 theorem quasiIso_map {C D : CochainComplex (ModuleCat.{u} R) ℤ} (g : C ⟶ D)
     (hg : QuasiIso g)
     (hC : ∀ i : ℤ, Function.Injective (fun x : C.X i ↦ t • x))

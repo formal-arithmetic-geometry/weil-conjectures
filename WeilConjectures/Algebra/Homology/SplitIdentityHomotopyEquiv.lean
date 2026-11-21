@@ -12,7 +12,9 @@ public import Mathlib.Algebra.DirectSum.Module
 
 /-! # Contracting a split two-term identity complex
 
-Source: Stacks Project, Tag 00MT, the identity summand and its contraction.
+## References
+
+* Stacks Project, Tag 00MT
 -/
 
 @[expose] public section
@@ -91,20 +93,7 @@ private theorem contractIdentity {R : Type u} [CommRing R]
 
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Projection away from a differential-compatible split identity complex is a homotopy
- equivalence. Source: Stacks Project, Tag 00MT, the two-term identity summand.
-
-Proof: Use ψ to define the projection C → C' and the inclusion C' → C degreewise.
-The compatibility equation, first with t = 0 and then x = 0, proves these are chain
-maps. Their composite on C' is the identity. On T define h from degree i-1 to degree i
-as e.symm ∘ f and zero for all other pairs. The equation f(d t) = e t implies both
-inverse identities for d. Thus d h + h d is the identity at i and i-1. At every other
-degree T is subsingleton, so the identity and all relevant morphisms are zero.
-Transport minus this contraction along the T inclusion and projection through ψ.
-It is a homotopy from the C' projection-inclusion composite to the identity on C,
-since that composite equals identity minus the T projector. Together with the exact
-identity on C' this gives the asserted homotopy equivalence. No basis, rank, unit
-coefficient, or affine sheaf comparison is used in this lemma. The argument works
-in the zero ring and when C' is zero in either or both special degrees. -/
+ equivalence. -/
 theorem nonempty_homotopyEquiv_of_split_identity
     {R : Type u} [CommRing R] (C C' T : ChainComplex (ModuleCat.{u} R) ℤ)
     (i : ℤ) (hT : ∀ j : ℤ, j ≠ i → j ≠ i - 1 → Subsingleton (T.X j))

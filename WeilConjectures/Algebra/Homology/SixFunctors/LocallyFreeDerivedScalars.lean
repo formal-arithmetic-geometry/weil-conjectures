@@ -96,14 +96,16 @@ set_option linter.privateModule false
 
 /-! # Derived scalar extension of locally finite free module sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 0GN1 and 08FC; Cohomology on Sites,
-Tags 06YQ and 06YY.
-
 The ordinary functor and its universal derived comparison are those of
 `DerivedChangeOfRingsCochainModel`. Its object and map equations fix ordinary extension
 as sheafification of sectionwise scalar extension, with the new ring acting on the left.
 The degree-zero comparison below is its counit followed by the standard single-complex
 isomorphism. In particular it is not an arbitrarily selected isomorphism.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 0GN1 and 08FC
+* Stacks Project, Cohomology on Sites, Tags 06YQ and 06YY
 -/
 
 @[expose] public section

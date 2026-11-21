@@ -26,7 +26,9 @@ public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
 /-! # A common definition of sheafified pure tensor sections
 
-Source: Stacks Project, Modules on Sites, Tag 03EK.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK.
 -/
 
 @[expose] public noncomputable section
@@ -37,8 +39,7 @@ universe c v r
 open CategoryTheory CategoryTheory.MonoidalCategory
 namespace SheafOfModules
 
-/-- The sheafification image of a sectionwise pure tensor, in independent site sizes.
-Source: Stacks 03EK. -/
+/-- The sheafification image of a sectionwise pure tensor, in independent site sizes. -/
 def sheafTensorSection {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]

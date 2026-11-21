@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Homology.NatSplitFunctionalsHomotopy
 /-!
 # Natural-degree unit cancellation as a homotopy equivalence
 
-Source: Stacks Project, Algebra, Tag 00MT, the splitting of the trivial complex.
+## References
+
+* Stacks Project, Algebra, Tag 00MT
 -/
 
 @[expose] public section
@@ -23,23 +25,7 @@ universe u v
 open CategoryTheory
 namespace ChainComplex
 
-/-- Cancel a unit coefficient in a natural-degree finite free complex.
-Source: Stacks Project, Algebra, Tag 00MT, proof and its trivial two-term summand.
-
-Proof: Let `u` be the supplied unit coefficient, set `z=b_(j+1)(p)` and
-`w=d(z)`, and define `β=u⁻¹` times coordinate `q` on the target and `α=βd`.
-Then `α(z)=β(w)=1` and `β(b_j(q))=u⁻¹` is a unit. The kernel-basis theorem
-gives bases of `ker α` and `ker β` indexed by `Fin(n_(j+1)-1)` and
-`Fin(n_j-1)`. The complex relation gives `α d_(j+2)=0` and `d_j(w)=0`.
-Apply `exists_nat_homotopy_equiv_of_split_functionals` to obtain the
-complement, its homotopy equivalence with degreewise injective forward map,
-and the identifications of its special terms with these kernels. Transfer
-the kernel bases using those identifications; at every other degree transfer
-the original basis through the identification with the full submodule.
-Define `n'` to subtract one at `j+1` and `j`, and agree with `n` elsewhere.
-The indices `p` and `q` imply that both original sizes are positive, so the
-two asserted successor equations follow by natural-number arithmetic.
-This argument requires no augmentation, boundedness, or nontriviality. -/
+/-- Cancel a unit coefficient in a natural-degree finite free complex. -/
 theorem exists_nat_homotopy_cancellation_of_isUnit_entry
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℕ)
     (n : ℕ → ℕ) (b : ∀ i : ℕ, Module.Basis (Fin (n i)) R (C.X i))

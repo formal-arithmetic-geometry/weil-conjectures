@@ -11,7 +11,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # Scalar extension preserves all K-flat complexes
 
-Source: Stacks Project, Modules on Sites, Tag 05V4 and Cohomology on Sites, Tag 0G7E.
+## References
+
+* Stacks Project, Modules on Sites, Tag 05V4
+* Stacks Project, Cohomology on Sites, Tag 0G7E
 -/
 
 @[expose] public section
@@ -35,15 +38,7 @@ attribute [local instance] isMonoidal_W_independentCoefficients
   preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
 attribute [local irreducible] monoidalCategory
 
-/-- Scalar extension preserves K-flatness without any flat-term assumption.
-Source: Stacks 05V4 (tensor cancellation) and 0G7E (K-flat pullback)
-Proof: restriction is exact and reflects exactness on underlying abelian sheaves.
-For any acyclic S-complex Z, restriction of Tot(Z tensor_S E(P)) is naturally
-isomorphic to Tot(U(Z) tensor_R P), by the balanced tensor cancellation map
-z tensor (s tensor p) mapped to sz tensor p. Restriction commutes with the
-coproducts in the total complex; naturality of cancellation respects both signed
-differentials. Exactness of restriction makes U(Z) acyclic; K-flatness of P
-makes its tensor acyclic. Reflection of exactness proves the assertion. -/
+/-- Scalar extension preserves K-flatness without any flat-term assumption. -/
 private theorem kflatOfScalarExtensionIdentification
     (E : scalarModules J R ⥤ scalarModules J S) [E.Additive]
     (eo : ∀ M, E.obj M = changeOfRings a M)
@@ -134,15 +129,7 @@ private theorem kflatOfScalarExtensionIdentification
   exact ShortComplex.exact_of_iso
     ((HomologicalComplex.shortComplexFunctor _ _ i).mapIso hi.symm) hh
 
-/-- Scalar extension preserves K-flatness without any flat-term assumption.
-Source: Stacks 05V4 (tensor cancellation) and 0G7E (K-flat pullback)
-Proof: restriction is exact and reflects exactness on underlying abelian sheaves.
-For any acyclic S-complex Z, restriction of Tot(Z tensor_S E(P)) is naturally
-isomorphic to Tot(U(Z) tensor_R P), by the balanced tensor cancellation map
-z tensor (s tensor p) mapped to sz tensor p. Restriction commutes with the
-coproducts in the total complex; naturality of cancellation respects both signed
-differentials. Exactness of restriction makes U(Z) acyclic; K-flatness of P
-makes its tensor acyclic. Reflection of exactness proves the assertion. -/
+/-- Scalar extension preserves K-flatness without any flat-term assumption. -/
 theorem scalarExtension_preservesKFlat (s : ScalarDerivedPair a)
     (P : CochainComplex (scalarModules J R) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P) :

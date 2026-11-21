@@ -9,9 +9,12 @@ module
 public import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluation
 import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 
-/-! # HomComplexUnitEvaluationComm
+/-!
+# HomComplexUnitEvaluationComm
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
+## References
+
+* Stacks Project, Section 0A8X
 -/
 
 @[expose] public section
@@ -29,19 +32,7 @@ private lemma homMap_zero_left
     SheafOfModules.homObjMap (R := R) (0 : A' ⟶ A) g = 0 :=
   SheafOfModules.hom_ext (PresheafOfModules.homObjMap_zero_left g.val)
 
-/-- Evaluation at one commutes with the Hom-complex differential.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-
-Proof: apply the differential-projection identity in `homComplex_exists` at
-source index zero, with q=m, q'=n and p'=m-n. The precomposition term vanishes
-because every differential of the single complex is zero; internal Hom sends
-zero precomposition to zero. The remaining term is the projection in degree n
-followed by postcomposition with M.d n m. Transport along the zero-degree
-single-complex isomorphism commutes with postcomposition by associativity.
-Evaluation at one also commutes with postcomposition: both sides send a
-localized linear map a to (M.d n m)(a(1)). This is an equality of restrictions
-and linear maps, hence of sheaf morphisms. Reassociate these equalities to
-obtain the displayed identity. No degree except adjacent degrees is required. -/
+/-- Evaluation at one commutes with the Hom-complex differential. -/
 theorem homComplex_unit_evaluation_comm
     (M : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)

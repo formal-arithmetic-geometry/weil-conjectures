@@ -15,12 +15,22 @@ import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyAction
 /-!
 # Models of base-derived tensor cohomology and its localization comparison
 
-Source: Stacks Project, Tag 08IB, lemma-compare-base-change, and Tag 06Y6,
-lemma-derived-base-change.
-
 The model records a total left derived functor with its universal counit, actual
 cohomology objects with their tensor-algebra action, and the comparison maps.
 Commuting squares fix the maps; no isomorphism of comparison maps is assumed.
+
+## Implementation details
+
+The derived functor is characterized by its universal counit. `ordinaryIso` is the
+tensor-associativity identification, fixed on generators. `comparison_eq` identifies the
+comparison with the counit on cohomology. `cohomologyIso_smul` makes `a ⊗ 1` act as the derived
+functor applied to multiplication by `a` on `Q`, so the action is the canonical one.
+`localized_eq` fixes the localized comparison by scalar-extension adjunction and the map
+`e ⊗ q ↦ e ⊗ q` into the localized complex.
+
+## References
+
+* Stacks Project, Tags 05G3, 06Y6 and 08IB.
 -/
 
 @[expose] public section
@@ -34,10 +44,7 @@ open scoped TensorProduct ChangeOfRings
 
 namespace ModuleCat
 
-/-- Stacks, Tag 06Y6.
-Extension of scalars is additive. Proof: its maps send `s ⊗ x` to `s ⊗ f x`;
-the sum of two maps thus gives `s ⊗ (f x + g x)`, the sum of their two images.
-Tensor induction proves equality on all tensors. -/
+/-- Extension of scalars is additive. -/
 @[instance]
 theorem baseDerivedTensor_extendScalars_additive
     {S : Type uS} {T : Type uT} [CommRing S] [CommRing T]
@@ -51,8 +58,7 @@ theorem baseDerivedTensor_extendScalars_additive
       (extendScalars f).map h ((1 : T) ⊗ₜ[S, f] m)
   simp only [ExtendScalars.map_tmul, TensorProduct.tmul_add]
 
-/-- The scalar-extension unit transposes to the termwise coefficient map.
-Source: Stacks Project, Tag 05G3. -/
+/-- The scalar-extension unit transposes to the termwise coefficient map. -/
 private theorem exists_tensorExtensionMap {S : Type uS} {T : Type uT} {U : Type uD}
     [CommRing S] [CommRing T] [CommRing U] (f : S →+* T) (g : T →+* U)
     (K : CochainComplex (ModuleCat.{max uS uT uD v} S) ℤ) :
@@ -92,15 +98,8 @@ variable (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [Co
   [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB uD v} R)]
   [HasDerivedCategory.{w} (ModuleCat.{max uR uA uB uD v} B)]
 
-/-- Stacks, Tags 08IB and
-06Y6. A model of the cohomology of `Q ⊗ᴸ_R B`, its `A ⊗_R B`-action, and its
-canonical comparison after extension to `D`. The derived functor is characterized
-by its universal counit. `ordinaryIso` is the tensor-associativity identification,
-fixed on generators. `comparison_eq` identifies the comparison with the counit
-on cohomology. `cohomologyIso_smul` makes `a ⊗ 1` act as the derived functor
-applied to multiplication by `a` on `Q`, so the action is the canonical one.
-`localized_eq` fixes the localized comparison by scalar-extension
-adjunction and the map `e ⊗ q ↦ e ⊗ q` into the localized complex. -/
+/-- A model of the cohomology of `Q ⊗ᴸ_R B`, its `A ⊗_R B`-action, and its canonical
+comparison after extension to `D`. -/
 structure BaseDerivedTensorCohomologyModel
     (Q : CochainComplex (ModuleCat.{max uR uA uB uD v} A) ℤ)
     (D : Type uD) [CommRing D] [Algebra (A ⊗[R] B) D] where
@@ -189,24 +188,7 @@ structure BaseDerivedTensorCohomologyModel
         (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj Q).sc i
         |>.mapHomologyIso (restrictScalars.{max uR uA uB uD v} (algebraMap (A ⊗[R] B) D))).hom
 
-/-- Stacks, Tags 06Y6 and
-08IB: the model exists without flatness or Tor-independence assumptions.
-
-Proof: resolve complexes of R-modules by K-flat complexes and apply extension of
-scalars to B. The localization universal property supplies the total left derived
-functor and its counit. Apply its cohomology functors. Multiplication by A on Q
-and by B on the tensor factor induces commuting actions on this cohomology;
-the two R-actions agree, hence give the A-tensor-B action; this proves
-cohomologyIso_smul. The counit is compatible
-with these actions. The ordinary associativity identification sends b tensor q to
-(1 tensor b) tensor q and is an isomorphism, its inverse sending
-(a tensor b) tensor q to b tensor (a q). Both commute with the differentials.
-This constructs comparison and proves comparison_eq. The termwise map from the
-ordinary complex to its D-extension sends e tensor q to the image of e tensor q.
-Taking cohomology gives an E-linear map to the restriction of the D-cohomology.
-Composing it with comparison and transposing by extension/restriction adjunction
-constructs localizedComparison and proves localized_eq. None of these steps
-asserts that comparison or localizedComparison is an isomorphism. -/
+/-- The model exists without flatness or Tor-independence assumptions. -/
 theorem nonempty_baseDerivedTensorCohomologyModel
     (Q : CochainComplex (ModuleCat.{max uR uA uB uD v} A) ℤ)
     (D : Type uD) [CommRing D] [Algebra (A ⊗[R] B) D] :
@@ -246,8 +228,7 @@ theorem nonempty_baseDerivedTensorCohomologyModel
   intro i
   exact (adj.homEquiv _ _).apply_symm_apply _
 
-/-- Stacks, Tags 06Y6 and
-08IB. Choose a model of derived tensor cohomology and its canonical localization
+/-- Choose a model of derived tensor cohomology and its canonical localization
 comparison. Only the existence proof is deferred, in the named theorem
 `nonempty_baseDerivedTensorCohomologyModel`; the data are selected by choice. -/
 noncomputable def baseDerivedTensorCohomologyModel

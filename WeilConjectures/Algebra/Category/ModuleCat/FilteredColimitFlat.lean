@@ -15,7 +15,11 @@ import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
 /-!
 # Filtered colimits of flat modules
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 05UT
+A filtered colimit of flat modules over a commutative ring is flat.
+
+## References
+
+* Stacks Project, Algebra, Tag 05UT
 -/
 
 @[expose] public section
@@ -26,20 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- A filtered colimit of flat modules over a commutative ring is flat.
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 05UT.
-
-Proof:
-1. Lift modules to `Type (max u v)` with `ModuleCat.uliftFunctor`. This preserves
-   the filtered colimit: the composite with the forgetful functor to types preserves
-   it, and the module forgetful functor reflects colimits.
-2. Restrict scalars along `ULift.ringEquiv : ULift R ≃+* R`, an equivalence of
-   module categories, and reindex along `AsSmall.down`. The resulting colimit
-   presentation has its ring, modules and filtered index category in one universe.
-3. Each lifted stage is flat by `Module.Flat.ulift_left_iff` and flatness of
-   lifted modules. Apply the proved `ModuleCat.flat_of_colimitPresentation`, which uses
-   tensor-colimit compatibility and exactness of filtered colimits. Transfer its
-   conclusion back using `Module.Flat.ulift_left_iff` and `ulift_right_iff`. -/
+/-- A filtered colimit of flat modules over a commutative ring is flat. -/
 theorem filteredColimit_flat
     {R : Type u} [CommRing R]
     {I : Type v} [SmallCategory I] [IsFiltered I]

@@ -8,9 +8,12 @@ module
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
 import all WeilConjectures.CategoryTheory.Constant.ConstantScalarRestrictionTensorSupplement
 
-/-! Ordinary tensor transport for a prescribed section/scalar realization.
+/-! # Ordinary tensor transport for a prescribed section/scalar realization
 
-Source: Stacks, Modules on Sites, Tag 03EK. -/
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK
+-/
 
 -- After pruning, this module only keeps private declarations.
 set_option linter.privateModule false

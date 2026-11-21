@@ -8,19 +8,23 @@ module
 public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import Mathlib.CategoryTheory.Adjunction.Triple
 import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+
+/-!
+# The extension-by-zero unit is epic
+
+The unit of the extension-by-zero/restriction adjunction on module sheaves is an epimorphism.
+
+## References
+
+* Stacks Project, Sheaves, Tag 00A7 (4)
+-/
+
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
 noncomputable section
 namespace AlgebraicGeometry
-/-- The extension-by-zero/restriction unit is epic.
-Source: Stacks Project, Sheaves Lemma 00A7 (4).
-Proof: the forgetful functor from opens over W to opens of X is fully faithful,
-since the category of opens is thin. Hence its adjunction with intersection with W
-has invertible unit. The counit of the induced restriction/direct-image adjunction
-on modules is given by restriction along that unit, so it is invertible sectionwise.
-The adjoint-triple criterion makes the chosen extension-by-zero/restriction unit
-invertible as well. In particular each component is epic. -/
+/-- The extension-by-zero/restriction unit is epic. -/
 theorem moduleExtensionByZero_unit_epi (X : RingedSpace.{u}) (W : Opens X)
     (G : SheafOfModules.{u} ((moduleRings X).over W)) :
     Epi ((Classical.choice (open_restriction_adjunction_exact X W).2.2.2.2).unit.app G) := by

@@ -8,9 +8,12 @@ module
 
 public import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluation
 
-/-! # HomComplexUnitEvaluationNaturality
+/-!
+# HomComplexUnitEvaluationNaturality
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
+## References
+
+* Stacks Project, Section 0A8X
 -/
 
 @[expose] public section
@@ -22,10 +25,7 @@ namespace CategoryTheory
 variable {C : Type u} [SmallCategory C]
   (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})
 
-/-- Evaluation at one commutes with postcomposition.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-Proof: on each localized site both composites send a linear map φ to g(φ(1));
-extensionality of the underlying presheaf morphisms proves the equality. -/
+/-- Evaluation at one commutes with postcomposition. -/
 lemma evaluation_naturality
     {A B : SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)} (g : A ⟶ B) :
@@ -37,18 +37,7 @@ lemma evaluation_naturality
   rfl
 
 -- Dependent projection and sheaf types require extra elaboration steps.
-/-- Degreewise evaluation at one commutes with a chain map.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-
-Proof: specialize the componentwise map identity in `homComplex_exists` to
-the identity on the unit single complex, a chain map f in the target, and source
-degree zero. The identity functor map disappears. Thus projection after the
-Hom-complex map equals projection followed by internal Hom postcomposition
-with f.f n. Transport along the zero-degree single-complex isomorphism commutes
-with postcomposition by the internal-Hom composition law. Evaluation at one
-commutes with f.f n since both sides take a localized linear map a to
-(f.f n)(a(1)). Sectionwise extensionality and reassociation yield the equation.
-No invertibility or differential compatibility is needed for this identity. -/
+/-- Degreewise evaluation at one commutes with a chain map. -/
 theorem homComplex_unit_evaluation_naturality
     {M N : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ}

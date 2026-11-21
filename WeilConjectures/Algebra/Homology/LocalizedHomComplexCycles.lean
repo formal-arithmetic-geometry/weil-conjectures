@@ -17,7 +17,9 @@ import WeilConjectures.Algebra.Homology.LocalizedHomComplexCyclesBijective
 /-!
 # Canonical localized chain maps from section cocycles
 
-Source: Stacks Project, Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero)
+## References
+
+* Stacks Project, Tag 0A8X, Hom complexes; Equation 0A8Y (degree zero)
 -/
 
 @[expose] public section
@@ -28,25 +30,7 @@ open CategoryTheory Opposite
 
 namespace CategoryTheory
 
-/-- Degree-zero sections that are cocycles are exactly chain maps on the slice site.
-Source: Stacks Project, Tag 0A8X (Hom complexes), leading to Equation 0A8Y
-
-Proof: apply section evaluation at U to the product cone specified by
-`homComplex_exists`. The forgetful functor from sheaves of modules and evaluation
-of presheaves preserve products, as does the forgetful functor from modules to
-abelian groups. Sections of the internal Hom at U are natural linear maps of
-restricted modules on C/U. Thus a section of degree n is a family of maps
-L^p|U to I^(p+n)|U, with components given by the chosen projections. For n = 0,
-the differential formula is d_I f - f d_L. Its vanishing says precisely that the
-family is a chain map (the non-successive chain-map equations are zero by the
-complex shape). The cycle inclusion identifies cycles with the kernel of this
-differential. Send a cycle to the resulting chain map. Conversely, assemble the
-components of a chain map using the sectionwise product universal property; its
-chain-map equations put it in that kernel, hence yield a unique cycle. These
-constructions are inverse because the product projections are jointly injective
-and the cycle inclusion is injective. The definition of the forward construction
-gives the displayed component formula. All products are indexed by integers;
-no finite-support or boundedness condition enters. -/
+/-- Degree-zero sections that are cocycles are exactly chain maps on the slice site. -/
 theorem localizedHomComplex_cycles_aux
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{max u v}) (U : C)

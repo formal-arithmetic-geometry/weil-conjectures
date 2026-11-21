@@ -12,9 +12,13 @@ import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 
 /-! # Exact extension by zero and restriction on a ringed space
 
-Source: literature/stacks-project/cohomology.tex, Lemma 08BS (proof), citing
-literature/stacks-project/sheaves.tex, Lemma 00A7 and
-literature/stacks-project/modules.tex, Lemma 01AK
+Restriction to an open of a ringed space is exact and has an exact left adjoint, extension by
+zero.
+
+## References
+
+* [Stacks Project, Tag 08BS](https://stacks.math.columbia.edu/tag/08BS) (proof), citing
+  Tag 00A7 and Tag 01AK
 -/
 
 @[expose] public section
@@ -30,19 +34,7 @@ namespace AlgebraicGeometry
 `j⁻¹ = SheafOfModules.overFunctor (moduleRings X) U : Mod(O_X) ⥤ Mod(O_U)` is exact, and
 extension by zero `j_!` (the extension-by-zero presheaf followed by module
 sheafification) is exact and left adjoint to it: `j_! ⊣ j⁻¹`. Exactness is preservation
-of finite limits and finite colimits.
-
-Source: literature/stacks-project/cohomology.tex, Lemma 08BS, with
-Sheaves Lemma 00A7 and Modules Lemma 01AK
-
-Proof: (1) Exactness of `j⁻¹` is checked stalkwise
-(`lem-weil-pbc-module-stalk-exact` (5)): the stalk of a restriction at `x ∈ U` is the
-stalk at `x`. (2) The adjunction: a presheaf map from the extension-by-zero presheaf to
-`G` is a map on `U` (extend by zero outside `U`), and composing with the universal
-property of module sheafification (`def-weil-presheaf-modules-sheafification`) gives
-`j_! ⊣ j⁻¹`. (3) Exactness of `j_!`: its stalk at `x ∈ U` is the stalk of the input and
-at `x ∉ U` is zero (`lem-weil-pbc-stalk-sheafification-space`), so it is exact by
-`lem-weil-pbc-module-stalk-exact` (5). -/
+of finite limits and finite colimits. -/
 theorem open_restriction_adjunction_exact (X : RingedSpace.{u}) (U : Opens X) :
     PreservesFiniteLimits (SheafOfModules.overFunctor.{u} (moduleRings X) U) ∧
       PreservesFiniteColimits (SheafOfModules.overFunctor.{u} (moduleRings X) U) ∧

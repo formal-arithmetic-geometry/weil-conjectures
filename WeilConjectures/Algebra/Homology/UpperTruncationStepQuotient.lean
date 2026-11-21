@@ -11,7 +11,9 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 /-!
 # Coordinates of the quotient of successive upper truncations
 
-Source: Stacks Project, Tags 0118, 0114, and 08J5.
+## References
+
+* Stacks Project, Tags 0118, 0114, and 08J5.
 -/
 
 @[expose] public section
@@ -83,27 +85,7 @@ private lemma truncLE_inclusion_coordinates {C : Type u} [Category.{v} C] [Abeli
       congrArg Quiver.Hom.unop h
 
 /-- The cokernel of the inclusion of successive canonical upper truncations is
-supported in degrees `q - 1` and `q`, with its induced differential a monomorphism.
-Source: Stacks Project, [Tag 0118](https://stacks.math.columbia.edu/tag/0118),
-[Tag 0114](https://stacks.math.columbia.edu/tag/0114), and
-[Remark 08J5](https://stacks.math.columbia.edu/tag/08J5)
-
-Proof: the compatibility with the inclusions into `K` determines `i` uniquely,
-since the latter inclusion is mono. Below `q - 1`, identify both truncations
-with `K`; then `i` is the identity. At `q - 1`, it is the kernel inclusion
-`kernel.ι (K.d (q - 1) q)` after the canonical cycles identification. At `q`,
-its source is zero and its target is `K.cycles q`. Above `q` both objects are
-zero. Evaluation preserves cokernels in the abelian category of complexes.
-The degreewise cokernel universal properties therefore give zero objects away
-from the two named degrees and the isomorphisms `e₀` and `e₁`, with exactly the
-stated identities for the cokernel projection. The differential identity follows
-from the chain-map identity for that projection; cancel its epimorphic component
-in degree `q - 1`. The composite of the resulting differential with the cycles
-inclusion is the coimage factor of `K.d (q - 1) q`, which is mono in an abelian
-category (the coimage-to-image map is an isomorphism). Consequently the
-quotient differential itself is mono. This also covers zero differentials and
-the zero complex: the coimage is then zero.
--/
+supported in degrees `q - 1` and `q`, with its induced differential a monomorphism. -/
 theorem upperTruncationStep_quotientCoordinates
     {C : Type u} [Category.{v} C] [Abelian C]
     (K : CochainComplex C ℤ) (q : ℤ)

@@ -10,24 +10,23 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.CategoryTheory.Category.Preorder
 import Mathlib.CategoryTheory.NatIso
 import Mathlib.Data.Fintype.Basic
-/-! # Common stages for a finite family of module map equalities
+/-!
+# Common stages for a finite family of module map equalities
 
-Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1).
+A finite family of equalities of module maps, each holding at some stage of a directed system,
+holds at one common upper stage.
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0BC7 (proof of (1))
+* Stacks Project, Algebra, Tag 05N7, clause (3)
 -/
 
 @[expose] public section
 universe u v
 open CategoryTheory CategoryTheory.Limits
 namespace ModuleCat
-/-- A finite family of stage equalities admits one common upper stage.
-Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1).
-
-Proof: Induct on the finite index type. At each step directedness supplies an upper
-bound for the current stage and the previously obtained common stage; functoriality
-of extension of scalars transports all earlier equalities to that bound, using the
-natural composition isomorphism to identify iterated and direct extensions. In the
-empty case choose i, with no equalities to check. No finite presentation is needed.
-Source: Stacks Project, Algebra, Tag 05N7, clause (3). -/
+/-- A finite family of stage equalities admits one common upper stage. -/
 theorem exists_common_stage_of_stage_equalities
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

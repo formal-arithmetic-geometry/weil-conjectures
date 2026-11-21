@@ -90,13 +90,16 @@ import Mathlib.CategoryTheory.Monoidal.Preadditive
 
 /-! # Exact pullback and the normalized signed derived tensor comparison
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY, 06YS, 0G7E and 07A4;
-sites-modules.tex, Tags 05VD and 03EL; derived.tex, Tag 015F;
-more-algebra.tex, Tags 0FNG and 0FNH.
-
 The tensor and its representative isomorphisms are the published K-flat descent.
 The helper structure records just the normalized associativity and symmetry maps
 mentioned in the statement, on that same tensor; it does not choose another tensor.
+
+## References
+
+* Stacks Project, sites-cohomology.tex, Tags 06YY, 06YS, 0G7E, 07A4 and 06YU
+* Stacks Project, sites-modules.tex, Tags 05VD and 03EL
+* Stacks Project, derived.tex, Tag 015F
+* Stacks Project, more-algebra.tex, Tags 0FNG and 0FNH
 -/
 
 @[expose] public noncomputable section
@@ -127,12 +130,10 @@ variable {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
 local instance (priority := 20000) : J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r}) :=
   inferInstance
 
-/-- Evaluation of the existing K-flat-derived tensor, without changing its data.
-Source: Stacks 06YU. -/
+/-- Evaluation of the existing K-flat-derived tensor, without changing its data. -/
 abbrev tensor (A B : DerivedCategory (Modules R)) := ((derivedTensor R).obj A).obj B
 
-/-- The existing derived bifunctor applied to a pair of morphisms.
-Source: Stacks 06YU. -/
+/-- The existing derived bifunctor applied to a pair of morphisms. -/
 def tensorMap {A A' B B' : DerivedCategory (Modules R)} (a : A ⟶ A') (b : B ⟶ B') :
     tensor R A B ⟶ tensor R A' B' :=
   (Functor.uncurry.obj (derivedTensor R)).map (Prod.mkHom a b)

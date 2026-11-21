@@ -119,13 +119,15 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Derived reduction of an extension by a divisible sheaf
 
-Source: the Cartier unit proof, paragraphs 4 and 5, in blueprint main-20261015;
-Stacks Tags 06YU, 06YV, 06YY, 0152, 09T5 and 0FND
 Kernel and quotient objects are specified by their short exact sequences, including
 existence of their residue-coefficient structures. The normalized identifications are
 unique, so the definition of the reduced boundary makes no arbitrary choice of map.
 The normalized sheaf scalar adjunction is an item helper; the general internal-module
 derived extension of scalars remains the recorded dependency interface.
+
+## References
+
+* Stacks Project, Tags 06YU, 06YV, 06YY, 0152, 09T5 and 0FND
 -/
 
 @[expose] public section

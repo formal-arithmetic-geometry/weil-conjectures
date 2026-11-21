@@ -9,7 +9,9 @@ public import WeilConjectures.Algebra.Homology.KFlatIndependentCoefficients
 
 /-! # Cancellation of extension of scalars in sheaf tensor products
 
-Source: Stacks Project, Modules on Sites, Tag 05V4, displayed tensor identity.
+## References
+
+* Stacks Project, Modules on Sites, Tag 05V4 (displayed tensor identity)
 -/
 
 @[expose] public section
@@ -316,17 +318,7 @@ private theorem cancellationSheafIso_naturality (α : R ⟶ S)
   simp only [Category.assoc]
   rw [reassoc_of% hiU, reassoc_of% hj, reassoc_of% hk, ht]
 
-/-- Restriction cancels the extension of the second tensor factor, naturally in both factors.
-Source: Stacks Project, Modules on Sites, Tag 05V4, displayed tensor identity.
-
-Proof: before sheafification use the balanced linear equivalence
-`m ⊗ (s ⊗ n) ↦ (s • m) ⊗ n`, inverse `m ⊗ n ↦ m ⊗ (1 ⊗ n)`.
-Tensor induction proves compatibility with restrictions and with maps of both factors.
-Restriction of scalars commutes with sheafification because the underlying abelian
-sheafification is unchanged. Tensoring the extension-presheaf unit becomes invertible
-under sheafification by monoidal localization. Compose these identifications with the
-sheaf tensor comparison. All comparisons are natural, hence so is their composite.
-Zero modules and zero rings satisfy the same formulas; no flatness assumption is used. -/
+/-- Restriction cancels the extension of the second tensor factor, naturally in both factors. -/
 theorem exists_changeOfRings_tensorCancellation_independentCoefficients (α : R ⟶ S) :
     ∃ e : ∀ (M : SheafOfModules.{r} (𝓡 S))
         (N : SheafOfModules.{r} (𝓡 R)),
@@ -342,15 +334,7 @@ theorem exists_changeOfRings_tensorCancellation_independentCoefficients (α : R 
           (monoidalCategory R).tensorHom ((restrictScalars (𝓻 α)).map f) g := by
   exact ⟨cancellationSheafIso α, fun f g ↦ cancellationSheafIso_naturality α f g⟩
 
-/-- Tensor cancellation with its local-section normalization.
-Source: Stacks Project, Tag 05V4, displayed tensor identity.
-
-Proof: apply the two sheafification units to a local tensor m tensor (s tensor n).
-The tensor-sheafification comparison sends it to m tensor eta(s tensor n).
-Restriction of coefficients sends the same abelian sheafification unit to itself.
-Naturality of the other unit reduces the remaining map to sectionwise contraction,
-which sends m tensor (s tensor n) to (s m) tensor n. All maps are the components
-of the constructed natural cancellation isomorphism. -/
+/-- Tensor cancellation with its local-section normalization. -/
 theorem exists_changeOfRings_tensorCancellation_sections (α : R ⟶ S) :
     ∃ e : ∀ (M : SheafOfModules.{r} (𝓡 S)) (N : SheafOfModules.{r} (𝓡 R)),
       (restrictScalars (𝓻 α)).obj

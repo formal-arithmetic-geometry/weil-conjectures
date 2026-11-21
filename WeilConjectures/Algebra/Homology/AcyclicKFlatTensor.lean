@@ -17,7 +17,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # Total tensor with an acyclic K-flat complex
 
-Source: Stacks Project, Tags 06Y0 and 06YT.
+An acyclic K-flat complex has acyclic total tensor with every complex.
+
+## References
+
+* Stacks Project, Tags 06Y0 and 06YT
 -/
 
 @[expose] public section
@@ -55,18 +59,7 @@ private noncomputable def tensor_symmetry
   exact (HomologicalComplex₂.total.mapIso e (.up ℤ)) ≪≫
     HomologicalComplex.mapBifunctorFlipIso L K T (.up ℤ)
 
-/-- An acyclic K-flat complex has acyclic total tensor with every complex.
-Source: Stacks Project, Tags 06Y0 and 06YT, proof by a K-flat resolution.
-
-Proof: Choose a K-flat resolution r : P → F (Tag 06YS). The cone of r is acyclic.
-K-flatness of K makes Tot(Cone(r) ⊗ K) acyclic; the tensor-cone isomorphism
-and the cone criterion imply that Tot(r ⊗ id_K) is a quasi-isomorphism.
-K-flatness of P applied to the acyclic K makes Tot(K ⊗ P) acyclic.
-The signed symmetry sends the (p,q) summand by (-1)^(pq) times the module braiding
-and identifies this with Tot(P ⊗ K). It is a chain isomorphism because
-(p+1)q = pq+q and p+p(q+1) = pq modulo two. Thus the quasi-isomorphism
-Tot(P ⊗ K) → Tot(F ⊗ K) transports vanishing of every homology object.
-This also covers F = 0 and K = 0 without any nonzero hypothesis. -/
+/-- An acyclic K-flat complex has acyclic total tensor with every complex. -/
 theorem tensor_acyclic_of_isKFlat
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {O : Sheaf J CommRingCat.{u}}

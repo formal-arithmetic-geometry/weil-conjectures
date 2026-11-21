@@ -15,8 +15,10 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 /-!
 # The kernel of a degreewise epimorphism and its shifted mapping cone
 
-Source: Stacks Project, Derived Categories, Tags 070M and 014Q; the chain-level
-comparison implicit in the proof of Tag 070M
+## References
+
+* Stacks Project, Derived Categories, Tags 070M and 014Q; the chain-level
+  comparison implicit in the proof of Tag 070M
 -/
 
 @[expose] public section
@@ -225,25 +227,9 @@ private lemma comparison_quasiIso
     change Epi (homologyMap (comparison f) n) at he
     exact isIso_of_mono_of_epi _
 
-/-- Source: Stacks Project, Derived Categories, Tags 070M and 014Q
-The termwise kernel of a degreewise epimorphism maps quasi-isomorphically to the cone
+/-- The termwise kernel of a degreewise epimorphism maps quasi-isomorphically to the cone
 shifted by `-1`. Mathlib orders the cone summands as `P^(r+1) ⊞ Q^r`, so the two
-projection identities below specify the map written `(0, ι)` with the source's ordering.
-
-Proof: (1) The kernel inclusion commutes with differentials, since `f` does. The cone
-and shift differentials then show that `(0, ι)` is a chain map, using `ι ≫ f = 0`
-[def-sp-abelian, def-weil-abstract-derived-category].
-(2) Map the shifted cone to the shifted cone of `𝟙 Q` by `(y, x) ↦ (y, f x)`.
-Degreewise this is the direct sum of the identity of `Q^(p-1)` and the kernel exact
-sequence of `f^p`, giving a short exact sequence with kernel the displayed comparison.
-The shifted identity cone is contractible by `h(y, q) = (0, -y)`, hence has zero
-cohomology [def-sp-abelian, def-weil-abstract-derived-category].
-(3) The short exact sequence gives a distinguished triangle
-[lem-weil-pbc-complex-ses-triangle]. Compare it to the identity triangle on the kernel
-[def-weil-triangulated-category]; the first and third components are isomorphisms, so
-[lem-sf-triangle-morphism-iso] makes the localized comparison an isomorphism.
-Cohomology factors through the localization [def-weil-abstract-derived-category], so
-the comparison is a quasi-isomorphism and identifies these objects in the derived category. -/
+projection identities below specify the map written `(0, ι)` with the source's ordering. -/
 theorem exists_kernel_to_shifted_mappingCone_of_degreewise_epi
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     {P Q : CochainComplex C ℤ} (f : P ⟶ Q) (hf : ∀ p : ℤ, Epi (f.f p)) :

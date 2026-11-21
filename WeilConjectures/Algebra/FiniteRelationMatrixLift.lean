@@ -20,16 +20,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- Finite matrix coefficients over a ring colimit can be represented at one stage.
-
-Source: Stacks Project, Algebra, Tag 05N7, proof of (1).
-
-Proof: represent each entry q(e_k)_j at some stage using the concrete filtered
-colimit representation theorem. Filteredness gives a common receiving stage for
-this finite family, including the empty family since the indexing order is
-nonempty. Transport each representative along its map to that stage. Naturality
-of the coprojections preserves its image. Define qi by multiplication by the
-matrix of transported entries; applying qi to e_k retrieves column k. -/
+/-- Finite matrix coefficients over a ring colimit can be represented at one stage. -/
 theorem exists_stage_finite_relation_matrix
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat) (n m : ℕ)

@@ -17,8 +17,9 @@ import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-! # Exactness of internal Hom from finite free sheaves
 
-Source: literature/stacks-project/cohomology.tex, Tag 0GM8, finite locally free Hom
-calculation used in case (2).
+## References
+
+* Stacks Project, Tag 0GM8, finite locally free Hom calculation used in case (2)
 -/
 
 @[expose] public section
@@ -146,20 +147,7 @@ private theorem finiteSumShortExact
   exact ShortComplex.shortExact_of_iso eT.symm ht
 
 /-- Internal Hom from a finite free sheaf preserves a short exact sequence, with the
-canonical finite-sum identifications and the induced coordinatewise sequence maps.
-Source: literature/stacks-project/cohomology.tex, Tag 0GM8, finite locally free calculation
-
-Proof:
-1. On every localized site, precompose with the chosen isomorphism `hE.inv` and evaluate
-   on the `r` basis sections. This identifies each internal Hom with the corresponding
-   finite direct sum, compatibly with restriction (`def-pur-sheaf-hom`). The coordinate
-   equation below specifies exactly these identifications, for `N = ![A, B, C]`.
-2. Postcomposition by the sequence maps becomes their coordinatewise finite direct sums.
-   Finite direct sums preserve short exact sequences in the abelian category of sheaves
-   of modules (`situation-conventions`), also when `r = 0`.
-3. The two displayed commutative squares transport that exactness to the internal-Hom
-   sequence and provide the claimed canonical identifications.
--/
+canonical finite-sum identifications and the induced coordinatewise sequence maps. -/
 theorem finiteFreeInternalHomExact
     (r : ℕ)
     (E : SheafOfModules ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))

@@ -17,8 +17,10 @@ import WeilConjectures.Algebra.Homology.DerivedTensorSecondLocalizationModels
 import WeilConjectures.Algebra.Homology.DerivedTensorBaseLocalizationModels
 /-! # Localizing the base and second factor of a derived tensor
 
-Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
-second coefficient ring; More on Algebra, Tag 06Y6.
+## References
+
+* Stacks Project, Tag 0DJ8 (localization of the base and second coefficient ring)
+* Stacks Project, Tag 06Y6 (More on Algebra)
 -/
 
 @[expose] public section
@@ -76,26 +78,7 @@ variable (R A B Rp Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
 include tRpA tRB tRpB tAD tBD tApD tBpD tBBpD in
-/-- Change a localized base and localize the second algebra, keeping Q fixed.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, second localization identity.
-
-Proof: let F -> B[0] be a K-flat R-resolution. As Q is an Rp-complex after
-restriction from A, the tensor-localization formula identifies Q tensor_R F
-with Q tensor_Rp (Rp tensor_R F), termwise and naturally in Q. Localization is
-exact and preserves K-flatness, so Rp tensor_R F resolves Rp tensor_R B.
-The map Rp tensor_R B -> Bp is a flat localization: it is the base change of
-B -> Bp, and Rp tensor_R Bp = Bp because the R-elements in S are already
-units in Bp. Flat second-factor base change identifies the cohomology after
-extension to Bp with H(Q tensor-derived_Rp Bp). Both coefficient actions agree,
-so this is linear over A tensor_Rp Bp. Tensor associativity followed by
-extension to D gives the claimed isomorphism. The maps induced by F -> B[0]
-and its localization are the comparison maps; their square commutes on pure
-tensors d tensor x. Chain maps give naturality. Unique counit-compatible
-identifications of derived functors transport this construction to arbitrary
-models; cohomologyIso_smul identifies the A-action, and faithful restriction
-of scalars identifies the characterized g and h. Tau is uniquely fixed by its
-pure-tensor formula, so the comparison clause holds for every such tau.
-The argument applies to unbounded Q and does not require Q to be R-K-flat. -/
+/-- Change a localized base and localize the second algebra, keeping Q fixed. -/
 theorem derivedTensor_base_second_localization_models
     (S : Submonoid R) [IsLocalization S Rp]
     (T : Submonoid B) [IsLocalization T Bp] (i : ℤ) :

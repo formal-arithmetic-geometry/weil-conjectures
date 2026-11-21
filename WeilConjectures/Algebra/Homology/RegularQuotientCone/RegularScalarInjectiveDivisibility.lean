@@ -25,8 +25,13 @@ Every module sheaf is a quotient of a flat one; on a flat module the regular quo
 Lifting along the injective scalar on a flat cover shows that the scalar is an epimorphism on
 every injective module sheaf.
 
-Source: Stacks Tags 03D7, 06YS and 079P; the free lifted representable test for injectivity and the
-elementary divisibility property of injectives for a regular scalar. -/
+## References
+
+* Stacks Project, Tag 03D7
+* Stacks Project, Tags 06YP and 06YY (regular quotient sequence tensored with a flat module)
+* Stacks Project, Tag 06YS (flat resolutions)
+* Stacks Project, Tag 079P
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -43,9 +48,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : Grothendiec
 
 attribute [local instance] isMonoidal_W_independentCoefficients monoidalCategory
 
-/-- Every module sheaf is a quotient of a flat module sheaf.
-Source: Stacks Tag 06YS; degree zero of a K-flat resolution with flat terms and degreewise
-epimorphic augmentation. -/
+/-- Every module sheaf is a quotient of a flat module sheaf. -/
 theorem exists_flat_epi (M : Modules R) :
     ∃ (X : Modules R) (p : X ⟶ M), Epi p ∧ exactFunctor _ _ (tensorRight X) := by
   obtain ⟨K, f, -, hflat, -, hepi⟩ :=
@@ -59,9 +62,7 @@ variable [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules
   (φ : R ⟶ S) (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections)
 
 /-- On a flat module the regular scalar is followed by a cokernel map to a restricted module,
-through which every map to a restricted module factors.
-Source: Stacks Tags 06YP and 06YY; the regular quotient sequence tensored with a flat module
-and the normalized ordinary scalar-extension adjunction -/
+through which every map to a restricted module factors. -/
 theorem exists_scalar_shortExact_of_flat
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0)
@@ -96,12 +97,7 @@ theorem exists_scalar_shortExact_of_flat
     Category.id_comp]
   rw [← Adjunction.homEquiv_unit, Equiv.apply_symm_apply]
 
-/-- The regular scalar is an epimorphism on every injective module sheaf.
-Source: Stacks Tags 03D7 and 079P; a flat cover lifts along the injective scalar on the cover
-
-Proof: choose an epimorphism `p : X ⟶ M` from a flat module. The scalar on `X` is a
-monomorphism, so injectivity of `M` extends `p` along it. Naturality of the scalar then
-factors `p` through the scalar on `M`. -/
+/-- The regular scalar is an epimorphism on every injective module sheaf. -/
 theorem epi_scalar_of_injective
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
       ringMap φ = 0)

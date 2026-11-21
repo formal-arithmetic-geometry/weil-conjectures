@@ -34,13 +34,16 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.LocallySurjective
 
 /-! # Signed powers of lines: scalar, tensor and tower comparisons
 
-Source: blueprint main-20261015, prop-weil-twist-preserves.proof.md, tensor-power/internal-Hom
-and common-finite-stage sentences; Stacks Project, Tags 03EK, 04TT and 0GMX.
-
 The coefficient and module universe is `max uC vC u`, so slice internal Homs stay in that
 universe without equating the site's object and morphism universes. The scalar-extension
 API puts the scalar first: `scalarExtensionSection α M U s x` denotes `x tensor s` in the
-right-scalar convention of the node. Normalizations below refer to actual sheafified tensors.
+right-scalar convention. Normalizations below refer to actual sheafified tensors.
+
+## References
+
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 04TT
+* Stacks Project, Tag 0GMX
 -/
 
 @[expose] public section
@@ -675,8 +678,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
   [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]
 
-/-- The node's signed powers, with the existing tensor powers and slice sheaf Hom.
-Source: blueprint prop-weil-twist-preserves.proof.md; Stacks 03EK and 04TT. -/
+/-- Signed powers of a line, built from the existing tensor powers and the slice sheaf Hom. -/
 noncomputable def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
@@ -687,8 +689,7 @@ noncomputable def signedLinePower {R : Sheaf J CommRingCat.{max uC vC u}}
       (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
 
 /-- Local signed basis normalization: a genuine basis after every restriction, positive
-powers by tensors, and negative powers dual to the positive ones on every slice object.
-Source: Stacks 03EK and 04TT, local rank-one coordinates. -/
+powers by tensors, and negative powers dual to the positive ones on every slice object. -/
 def SignedLineBasisPowers {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) (U : Cᵒᵖ)
@@ -706,7 +707,7 @@ def SignedLineBasisPowers {R : Sheaf J CommRingCat.{max uC vC u}}
 
 /-- Normalization of the signed extension of the given exponent-one comparison.
 The negative formula is the actual dual map followed by precomposition with the inverse
-positive comparison. Source: Stacks 0GMX and 03EK. -/
+positive comparison. -/
 def SignedLineComparisonNormalized
     [∀ X : C, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
     {R S : Sheaf J CommRingCat.{max uC vC u}} (α : R ⟶ S)
@@ -734,8 +735,7 @@ def SignedLineComparisonNormalized
         (𝟙 (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))))
 
 /-- The canonical multiplication is specified by its normalization on every local basis.
-Its normalization determines the contraction map uniquely, including mixed signs.
-Source: Stacks 03EK and 04TT, tensor associativity, symmetry and evaluation. -/
+Its normalization determines the contraction map uniquely, including mixed signs. -/
 def SignedLineProductNormalized {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
@@ -907,12 +907,7 @@ private theorem normalized_on_basis
     rw [hn, he.2.2.2 n W, map_one, map_one, one_mul, one_mul] at hv
     exact hv.trans (hf.2.2.2 n W).symm
 
-/-- Every local basis has its uniquely normalized positive and dual powers.
-Source: Stacks 03EK and 04TT, node proof step 2.
-Proof: tensor the basis recursively, starting at 1 in degree zero. On each slice the
-negative basis functional sends r times the positive basis to r. These linear maps
-commute with restriction, hence are sections of the recorded slice Hom. A functional
-on a free line is determined by its value on the basis, proving uniqueness. -/
+/-- Every local basis has its uniquely normalized positive and dual powers. -/
 theorem existsUnique_signedLineBasisPowers [HasFiniteLimits C]
     {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}
@@ -957,13 +952,7 @@ theorem existsUnique_signedLineBasisPowers [HasFiniteLimits C]
     rw [hp] at h
     exact h.trans (dualBasis_eval.{uC, vC, max uC vC u} _ U _ _ W).symm
 
-/-- Dual scalar comparison on every positive power of a line is invertible.
-Source: Stacks 0GMX, specialized using 04TT and 03EK; node proof steps 1, 2 and 4.
-Proof: restrict to a trivializing cover using localized tensor restriction. The canonical
-dual map sends the dual tensor basis to the functional taking the extended basis to 1.
-Its inverse sends h to h(e tensor 1) times the extended dual basis. On overlaps inverses
-agree because v = v f w = w. Hom cover gluing yields a global inverse. This uses no
-flatness and no enough-points hypothesis. -/
+/-- Dual scalar comparison on every positive power of a line is invertible. -/
 theorem signedLineDual_isIso [HasFiniteLimits C]
     {R S : Sheaf J CommRingCat.{max uC vC u}} (α : R ⟶ S)
     (L : ringedSiteModules.{max uC vC u}
@@ -1046,13 +1035,7 @@ private theorem signedComparison_normalized [HasFiniteLimits C]
     rfl
 
 /-- Existence of all signed comparison isomorphisms, with the precise evaluation and
-local coordinate formulas. Source: Stacks 0GMX, 03EK and 04TT, node proof steps 1--5.
-Proof: start with the scalar unit and b. Iterate the normalized binary scalar comparison
-and tensor b to obtain the positive maps. For negative degrees compose the dual comparison,
-which is invertible by the preceding line argument, with precomposition by the inverse
-positive map. Evaluation cancels this inverse and gives alpha(phi(x)) s t. In compatible
-bases positive induction and the dual evaluation formula give alpha(r) s in every degree.
-All equalities descend from the cover by Hom gluing. -/
+local coordinate formulas. -/
 theorem exists_signedLineComparison [HasFiniteLimits C]
     {R S : Sheaf J CommRingCat.{max uC vC u}} (α : R ⟶ S)
     (L : ringedSiteModules.{max uC vC u}
@@ -1422,16 +1405,7 @@ private theorem exists_signedProductMap [HasFiniteLimits C]
     (fun m ↦ (signedLinePower.{uC, vC, u} L m).val.map k.op (F m))
     (signedBasis_restrict.{uC, vC, u} L U (op V) k.op F hF)
 
-/-- Canonical multiplication on all signed powers, characterized on every local basis.
-Source: Stacks 03EK and 04TT, node proof steps 1, 2, 6 and 7.
-Proof: locally send (r e^a) tensor (q e^b) to rq e^(a+b); its inverse sends c e^(a+b)
-to (c e^a) tensor e^b. Changing e to u e multiplies the degree m basis by u^m, including
-negative m since u is a unit. Thus both maps agree on overlaps and glue uniquely by Hom
-cover gluing. To identify this with associativity, symmetry and evaluation contractions,
-identify the tensor of n duals with the dual of the nth tensor power by the product of
-evaluations. In a mixed-sign product contract min(|a|,|b|) opposite pairs; every pairing
-of dual basis elements is 1. The resulting map has the same normalization, hence equals
-this unique multiplication. Zero exponents are the respective unitors. -/
+/-- Canonical multiplication on all signed powers, characterized on every local basis. -/
 theorem existsUnique_signedLineProduct [HasFiniteLimits C]
     {R : Sheaf J CommRingCat.{max uC vC u}}
     (L : ringedSiteModules.{max uC vC u}

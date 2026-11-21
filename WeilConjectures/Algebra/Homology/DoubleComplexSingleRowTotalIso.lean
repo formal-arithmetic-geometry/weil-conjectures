@@ -14,7 +14,11 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 /-!
 # Totalization of a single row
 
-Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 2.
+The identification of the totalization of a single row with the row itself.
+
+## References
+
+* Stacks Project, Homology, Lemma "ss-double-complex", item (5)
 -/
 
 @[expose] public section
@@ -132,20 +136,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
 /-- Totalization of a horizontal complex placed at vertical degree q is its
-extension by zero along the degree translation p ↦ p+q.
-Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 2;
-Stacks, Homology, lemma-ss-double-complex, item (5).
-
-Proof: in total degree n the summands are indexed by pairs (i,j) with i+j=n.
-Every summand with j different from q is zero. If n is in the image of i ↦ i+q,
-there is exactly one surviving summand, canonically L.X i; otherwise all summands
-are zero. The coproduct universal property gives mutually inverse maps between
-this diagonal and the degree-n term of the extension of L. The vertical
- differential vanishes since each column is a single-term complex. The horizontal
-sign is +1, and its component on the surviving summand is L.d i (i+1).
-Consequently these degreewise isomorphisms commute with the differentials and
-assemble into an isomorphism of cochain complexes. This also covers q=0 and
-n<q: translation is the identity for q=0, and both terms are zero for n<q. -/
+extension by zero along the degree translation `p ↦ p + q`. -/
 theorem singleRow_total_iso
     [∀ K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ),
       K.HasTotal (ComplexShape.up ℕ)]

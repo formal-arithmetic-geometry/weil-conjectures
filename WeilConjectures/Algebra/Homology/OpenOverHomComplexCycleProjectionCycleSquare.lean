@@ -10,7 +10,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
-/-! Cycle projection comparison square. -/
+/-! Cycle projection comparison square.
+
+## References
+
+* Stacks Project, Tags 0A8X and 08DL
+-/
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -74,17 +79,7 @@ private theorem factor_differential
     Preadditive.sub_comp, Preadditive.zsmul_comp, Category.assoc, hα, hβ]
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Restriction of a Hom complex has a chain isomorphism compatible with its projection.
-Source: Stacks Project, Tags 0A8X and 08DL, product construction of the Hom complex.
-Proof: Restriction to an open preserves products, computed sectionwise, and passing
-through the open-site equivalence preserves limits. Apply the universal properties
-of the limiting product fans of the fixed Hom projections to the isomorphisms e.
-This constructs mutually inverse degreewise maps, carrying every product projection
-to its e comparison. To check the chain-map equation, compose with every projection:
-the signed differential formula for Hom complexes reduces it to the two naturality
-equations he and additivity of restriction. Thus the maps form a chain isomorphism.
-Its projection identity at p = -n and q = 0 is the displayed equation. The same
-argument applies to empty opens and unbounded complexes. -/
+/-- Restriction of a Hom complex has a chain isomorphism compatible with its projection. -/
 theorem openOver_homComplex_chain_projection_iso (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)
     (e : ∀ M N : X.Modules,

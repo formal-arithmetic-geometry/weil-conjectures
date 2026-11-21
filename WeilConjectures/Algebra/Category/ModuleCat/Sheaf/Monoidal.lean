@@ -182,13 +182,8 @@ noncomputable instance :
     (W := 𝓦) (sheafificationObjUnitIso R)).Braided
 
 variable {R} in
-/-- The tensor product `M ⊗ N` of two sheaves of modules is the sheafification `a` of the tensor
-product of the underlying presheaves of modules. Writing `ε` for the counit of the
-sheafification adjunction and `μ` for the tensorator of the monoidal functor `a`:
-```
-  M ⊗ N ──ε⁻¹ ⊗ ε⁻¹──▶ a(M.val) ⊗ a(N.val) ──μ──▶ a(M.val ⊗ N.val)
-```
--/
+/-- The tensor product `M ⊗ N` of two sheaves of modules is isomorphic to the sheafification of
+the tensor product of the underlying presheaves of modules. -/
 noncomputable def tensorObjIsoSheafification (M N : SheafOfModules.{u} 𝓡) :
     M ⊗ N ≅ (𝓢).obj
       (M.val ⊗ N.val : PresheafOfModules.{u} (𝓡).obj) :=

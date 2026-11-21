@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.InternalHomOverNaturality
 /-!
 # Differential compatibility for the product comparison under open restriction
 
-Source: Stacks Project, Cohomology, Tag 08DL, and Cohomology on Sites, Tag 0A8X.
+## References
+
+* Stacks Project, Cohomology, Tag 08DL, and Cohomology on Sites, Tag 0A8X
 -/
 
 @[expose] public section
@@ -85,28 +87,7 @@ set_option backward.isDefEq.respectTransparency true in
 -- Specializing the projection families unfolds the chosen Hom-complex interfaces.
 /-- A degreewise comparison satisfying the factorwise product projection equations
 intertwines the Hom-complex differential. This statement supplies no degreewise
-isomorphisms: those must already have been constructed.
-
-Source: Stacks Project, Cohomology, Tag 08DL, construction of internal Hom;
-Cohomology on Sites, Tag 0A8X, the displayed Hom-complex differential.
-
-Proof: Fix adjacent degrees n and m and postcompose both sides with each chosen
-product projection in degree m on the localized site. These projections are jointly
-monic by the limit assertion in `homComplex_projections_exists`. Expand the localized
-differential using the second assertion of that theorem. Distribute composition over
-subtraction and multiplication by the integer unit n.negOnePow, and apply the assumed
-projection equation to both summands, with indices (p,p+n) and (p+m-n,p+m).
-On the other side use the projection equation in degree m, functoriality of
-restriction, and the global differential formula. Restriction is additive, so it
-preserves subtraction and this integer-unit multiplication. The two summands now
-agree by naturality of `SheafOfModules.overHomObjIso` in both arguments: on an object
-W over U, its forward map precomposes a local module morphism by
-`Over.iteratedSliceForward W`. Precomposition preserves identity and composition,
-so restricting the pre- and post-compositions gives precisely the pre- and
-post-compositions of the restricted maps. Thus both summands, with the same sign,
-agree after every product projection, proving the asserted equality. The argument
-uses all integer-indexed factors, and applies unchanged to zero complexes, the
-empty open, and unbounded complexes. -/
+isomorphisms: those must already have been constructed. -/
 theorem homComplex_restrict_open_differential (X : RingedSpace.{u}) (U : Opens X)
     (L M : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ) :
     let F := SheafOfModules.overFunctor.{u} (moduleRings X) U

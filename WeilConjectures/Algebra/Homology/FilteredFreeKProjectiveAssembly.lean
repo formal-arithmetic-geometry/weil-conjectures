@@ -36,21 +36,7 @@ private theorem isKProjective_of_degreewise_split
   exact (HomotopyCategory.distinguished_iff_iso_trianglehOfDegreewiseSplit _).2
     ⟨S, σ, ⟨Iso.refl _⟩⟩
 
-/-- The union of a degreewise split filtration by K-projective stages is K-projective.
-Source: Stacks Project, Tags 09KL--09KM.
-
-Proof: form the actual direct sum S of the stages and the maps a = identity minus
-successor and b = augmentation. Compatibility proves a followed by b is zero.
-The construction lemma supplies a splitting of this sequence in every degree,
-independently of K-projectivity. For a map S -> N with N acyclic, restrict to each
-summand and use its K-projectivity to choose a null homotopy. Evaluation preserves
-coproducts, so the homotopy components assemble; their support and homotopy identities
-hold on every summand. Thus S is K-projective. The degreewise split short complex
-gives a distinguished triangle S -> S -> P -> S[1] in the homotopy category.
-K-projectivity is left orthogonality to acyclic objects. This orthogonal is a
-triangulated subcategory, so its closure under third objects proves P K-projective
-from the two copies of S. The zero-stage hypothesis is unnecessary for this argument but is
-retained in the signature. -/
+/-- The union of a degreewise split filtration by K-projective stages is K-projective. -/
 theorem filtered_free_telescope_assembly
     {A : Type u} [CommRing A]
     (P : CochainComplex (ModuleCat.{max u v} A) ℤ)

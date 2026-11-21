@@ -12,8 +12,12 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
 
-/-! # Right shifts of the Hom complex
-Source: Stacks Project, Cohomology on Sites, Sections 21.34--21.35.
+/-!
+# Right shifts of the Hom complex
+
+## References
+
+* Stacks Project, Cohomology on Sites, Sections 21.34--21.35 (Tags 0A8X, 08JA, 0A95)
 -/
 
 @[expose] public section
@@ -23,20 +27,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 /-- Moving a shift across a functorial K-injective replacement does not change
-localized Hom complexes, naturally in both input complexes.
-Source: Stacks Project, sites-cohomology.tex, Sections 21.34 and 21.35
-(Tags 0A8X and 08JA), and Lemma 0A95.
-Proof: Put S = shift(n). For each M compare I(M)[n] and I(M[n]) through
-I(I(M)[n]). The first arrow is the resolution map of I(M)[n]. The second
-is I applied to the shifted resolution map M[n] -> I(M)[n]. Both arrows
-are quasi-isomorphisms by naturality of the resolution and two-out-of-three.
-All three target complexes are K-injective: shifts preserve K-injectivity
-because shifting an acyclic test complex backwards transports null-homotopies.
-Applying Hom(L,-) makes both arrows quasi-isomorphisms by Lemma 0A95.
-Their localizations are thus isomorphisms; compose the first with the inverse
-of the second. The resolution maps and shifted resolution maps are natural,
-so this zigzag yields a natural isomorphism, including in the contravariant L
-variable. Negative and zero shifts and zero complexes require no extra hypotheses. -/
+localized Hom complexes, naturally in both input complexes. -/
 theorem homComplex_resolution_shift_comparison
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u})

@@ -18,7 +18,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # The complex-level open-cover sequence with its canonical mate maps
 
-Source: Stacks Project, Tag 08BU, proof, and Tag 08BW.
+## References
+
+* Stacks Project, Tags 08BU and 08BW
 -/
 
 @[expose] public section
@@ -73,28 +75,7 @@ private lemma nestedMate_app
   simp [nestedMate]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The termwise open-cover short exact sequence, before localization.
-
-Source: Stacks Project, Tag 08BU, proof, and Tag 08BW (nested restriction maps).
-
-Proof: First use the actual extension-by-zero functors, namely the direct-sum
-extension presheaf followed by module sheafification. For W contained in U, the
-extension map from W to U is the unique map whose composite with the U counit is
-the W counit. On sections its transpose is restriction to W of the U unit,
-conjugated by `overFunctorMap`. These maps are natural in the module, hence commute
-with the differentials of K and give complex maps. Take their difference into the
-biproduct; the second map is the pair of counits. Their composite is zero since
-both component composites are the W counit. At a point in U intersection V the
-stalk sequence is diagonal difference followed by addition; in U minus V or V
-minus U it is the identity sequence with zero at one end. The cover excludes a
-fourth case. These sequences are short exact, so stalkwise reflection of exactness
-and of monomorphisms and epimorphisms proves short exactness in every degree.
-Degreewise short exactness is short exactness of complexes. Finally transport
-along the unique compatible isomorphisms from any chosen left adjoints to these
-extension-by-zero functors. These isomorphisms commute with units and counits,
-so they preserve the displayed mate formulas and the short exact sequence. Empty
-opens and equal opens satisfy the same stalk calculation. No derived objects or
-distinguished triangles occur in this statement. -/
+/-- The termwise open-cover short exact sequence, before localization. -/
 theorem open_cover_mate_complex_shortExact (X : AlgebraicGeometry.RingedSpace.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (hR : R = (sheafCompose (Opens.grothendieckTopology X)

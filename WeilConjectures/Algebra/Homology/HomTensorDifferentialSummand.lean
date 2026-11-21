@@ -13,7 +13,10 @@ import WeilConjectures.Algebra.Homology.HomTensorDifferentialSummandPure
 /-!
 # Three-term expansion of the iterated Hom differential
 
-Source: Stacks Project, Tag 0A90 and the calculation in Tag 0A5Y.
+## References
+
+* [Stacks Project, Tag 0A5Y](https://stacks.math.columbia.edu/tag/0A5Y)
+* [Stacks Project, Tag 0A90](https://stacks.math.columbia.edu/tag/0A90)
 -/
 
 @[expose] public section
@@ -33,24 +36,7 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 set_option synthInstance.maxSize 256 in
-/-- On one tensor summand the curried iterated Hom differential has three terms.
-Source: Stacks Project, Tag 0A90, using the sign calculation of Tag 0A5Y
-
-Proof: Restrict to K^p tensor L^q. On any localized site expand the outer Hom
-projection formula in homComplex_exists: its postcomposition term applies the
-inner Hom differential to f(x), and its precomposition term evaluates f(d_K x).
-Expand the inner differential to obtain d_M(f(x)(y)) minus
-(-1)^(p+n) f(x)(d_L y); the outer precomposition contributes
-minus (-1)^n f(d_K x)(y). Use homTensorDegreewiseMap_spec to identify
-all evaluations with the degreewise comparison. Mathlib's d1 summand map is
-x tensor y mapped to d_K x tensor y, while its d2 summand map is
-(-1)^p x tensor d_L y. The identity (-1)^(p+n)=(-1)^n*(-1)^p
-therefore gives the three displayed terms. Bilinearity extends from pure
-tensors in the presheaf tensor, and the sheafification adjunction gives the
-identity on the sheaf tensor summand. Localized evaluation identifies the
-resulting internal Hom maps. The argument applies to all integer degrees and
-also when any differential or complex vanishes. It does not assemble the
-summands or combine the two tensor differential terms. -/
+/-- On one tensor summand the curried iterated Hom differential has three terms. -/
 theorem homTensorDegreewiseMap_iteratedDifferential_summand
     (K L M : CochainComplex Mod ℤ) (n t p q : ℤ) (h : p + q = t) :
     letI := SheafOfModules.monoidalCategory R

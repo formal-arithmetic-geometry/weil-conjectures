@@ -14,7 +14,7 @@ public import WeilConjectures.Algebra.Homology.ExactCouple.EdgeCollapse
 We consider exact couples `X` indexed by `(p, n) ∈ ℤ × ℤ` (filtration degree `p`, total degree
 `n`) with `α` of degree `(-1, 0)` and `g` of degree `0`, as in
 `WeilConjectures/Algebra/Homology/ExactCouple/Convergence.lean`, and whose map `f` has a degree
-`b` with `1 ≤ b.1` (for the couples of blueprint `def-sp-exact-couple`, `b = (2, 1)`). Writing
+`b` with `1 ≤ b.1` (for example `b = (2, 1)`). Writing
 `q = n - p`, such a couple is a *half-plane couple* with bound `a` if `D^{p, n} = 0` for `q < a`
 and `E^{p, n} = 0` unless `p ≥ 0` and `q ≥ a` (`CategoryTheory.ExactCouple.IsHalfPlane`).
 

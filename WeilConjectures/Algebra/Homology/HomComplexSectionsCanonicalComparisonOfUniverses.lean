@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.HomComplexSectionsCochainsOfUniverses
 /-!
 # Canonical comparison for sections of a sheaf Hom complex
 
-Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
+## References
+
+* Stacks Project, Tag 0A8Y, Equation (21.34.0.1)
 -/
 
 @[expose] public section
@@ -23,20 +25,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical shifted section comparison, specified on cocycle representatives.
-Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-
-Proof: sections preserve the product cone specifying the sheaf Hom complex.
-Its projections therefore identify degree-n sections with all degree-n cochains
-between the restricted complexes. The differential projection formula identifies
-the kernel with Mathlib's cocycles, giving e with the component formula below.
-The same formula in degree n-1 identifies images of differentials with coboundaries.
-Thus e descends to a bijection of the quotients. Compose that bijection with
-Mathlib's equivalence from cohomology classes to shifted homotopy-category maps
-to obtain a. On cocycles this composite is the quotient of equivHomShift.symm,
-which proves the asserted representative formula. This construction works for
-unbounded complexes since it uses products. Zero complexes give singleton
-quotients; n=0 is the usual unshifted comparison. -/
+/-- The canonical shifted section comparison, specified on cocycle representatives. -/
 theorem homComplex_sections_canonical_comparisonOfUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max u v r}]

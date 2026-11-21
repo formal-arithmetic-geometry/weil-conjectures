@@ -18,7 +18,9 @@ import WeilConjectures.Algebra.Homology.TensorTotalExtendNaturalIso
 
 /-! # Tensor Kunneth in natural degrees
 
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -27,24 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct DirectSum
 namespace HomologicalComplex
 
-/-- Natural-indexed field tensor Kunneth, with its cocycle representative formula.
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech; the field tensor
-calculation underlying lem-sc-qcoh-cech-total-tensor-nat-iso.
-
-Proof: Split each term into boundaries, representatives for homology, and a
-complement of cycles. The differential identifies the last complement in degree
-p with the boundaries in degree p+1. Tensor the resulting decompositions in the
-finite diagonal p+q=n of the natural total. A contractible first factor is
-contracted by h tensor 1; a contractible second factor by (-1)^p times 1 tensor h.
-The mixed differential terms cancel. The remaining summands are precisely the
-tensors of homology representatives. A tensor of cycles is a total cycle by
-Leibniz. Changing either cycle by a boundary changes its tensor by a total
-boundary, so this pairing descends to homology and is the displayed equivalence.
-Its value on each summand is the class of the specified tensor cycle. Degree
-zero has one summand; zero complexes give zero groups. There is no boundedness
-hypothesis beyond natural indexing, since each total degree has finitely many
-summands. Alternatively extend the factors by zero, apply tensor_kunneth_nat,
-and use the coprojection-normalized comparison of extension and totalization. -/
+/-- Natural-indexed field tensor Kunneth, with its cocycle representative formula. -/
 theorem tensor_kunneth_natural_complexes {k : Type w} [Field k]
     (A B : CochainComplex (ModuleCat.{w} k) ℕ) (n : ℕ) :
     ∃ e : (⨁ i : {pq : ℕ × ℕ // pq.1 + pq.2 = n},

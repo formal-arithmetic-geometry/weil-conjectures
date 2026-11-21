@@ -17,7 +17,13 @@ import Mathlib.RingTheory.TensorProduct.Free
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 
-/-! # The invertible pivot in the residue rank-one kernel argument -/
+/-! # The invertible pivot in the residue rank-one kernel argument
+
+## References
+
+* Stacks Project, Tag 00O0 (proof (1): rank calculation and unit-minor argument)
+* Stacks Project, Tag 00NX (unit-minor argument)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,16 +31,8 @@ universe v
 open CategoryTheory
 namespace ModuleCat
 
-/-- Source: Stacks Project, Tag 00O0, proof (1), the rank calculation preceding
-selection of a unit minor.
-
-Proof: Base change the two finite bases from A to its residue field. Tensor
-associativity identifies the resulting map with direct extension of f from R
-to the residue field, and the matrix in these bases is obtained by applying
-residue to every entry. The assumed kernel equivalence makes the nullity one.
-Rank-nullity therefore gives the number of source basis vectors as the matrix
-rank plus one. In particular the source cannot have an empty basis. This
-argument does not select a minor, lift its determinant, or split coordinates. -/
+/-- If the kernel of the residue-field extension of `f` is one-dimensional, the number of source
+basis vectors is the rank of the residue matrix of `f` plus one. -/
 private theorem residue_kernel_matrix_rank_one
     (R : Type v) [CommRing R] (A : Type v) [CommRing A] [Algebra R A]
     [IsLocalRing A] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)
@@ -145,23 +143,7 @@ private theorem mulVec_splitCoordinates
   rfl
 
 /-- Finite free coordinates with an invertible leading block; the off-diagonal blocks
-are unrestricted. Source: Stacks Project, Tags 00O0 and 00NX, unit-minor argument.
-
-Proof: Choose finite bases for the two scalar extensions. Tensor associativity
-identifies reduction of their matrix modulo the maximal ideal of A with the given
-scalar extension to its residue field. Rank-nullity and the kernel equivalence
-show that the source dimension n is positive and the matrix rank is n - 1.
-Select n - 1 independent columns and n - 1 rows whose square minor has nonzero
-determinant. The lifted determinant is a unit of the local ring: its residue is
-nonzero. Reorder the selected columns first and the sole remaining column last;
-reorder the selected rows first and the complementary rows last. The coordinate
-spaces are U = A^(n-1) and C = A^(m-n+1). Take B to be multiplication by the
-selected square matrix, with inverse given by its adjugate divided by its unit
-determinant. These permutations give eX and eY, and evaluating the leading block
-on (u,0) proves the displayed equation. C is free in its coordinate basis. When
-n = 1 the leading block is empty, U is zero and B is its identity; no choice of a
-nonempty minor is required. The case m < n-1 is excluded by the residue rank.
-No elimination of the other three blocks is asserted. -/
+are unrestricted. -/
 theorem residue_kernel_unit_minor_pivot
     (R : Type v) [CommRing R] (A : Type v) [CommRing A] [Algebra R A]
     [IsLocalRing A] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)

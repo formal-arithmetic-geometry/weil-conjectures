@@ -10,7 +10,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-! # Quasi-isomorphisms of complexes in Roos coordinates
 
-Source: Stacks Project, Derived Categories, Tag 08TC, exact-product cone model.
+## References
+
+* Stacks Project, Derived Categories, Tag 08TC
 -/
 
 @[expose] public noncomputable section
@@ -108,18 +110,7 @@ private theorem coordinatesSequence_shortExact
     simp
 
 /-- A diagonal map of Roos coordinate complexes is a quasi-isomorphism whenever its
-map on the unshifted complexes is a quasi-isomorphism.
-
-Source: Stacks Project, Derived Categories, Tag 08TC, product-cone model, and the
-mapping-cone comparison for a commuting square
-
-Proof: Filter each displayed complex by its second coordinate. The subcomplex is the
-shift by minus one of V, with differential minus d, and the quotient is V. The
-coordinate inclusion and projection form a degreewise split short exact sequence.
-The diagonal map gives a morphism of these sequences whose outer maps are a shifted
-copy of a and a itself. Both are quasi-isomorphisms. The long exact homology sequences
-and the five lemma make the middle map a quasi-isomorphism. The argument applies to
-zero complexes and arbitrary endomorphisms s; it needs neither products nor a site. -/
+map on the unshifted complexes is a quasi-isomorphism. -/
 theorem quasiIso_of_roos_coordinates
     {A : Type u} [Category.{v} A] [Abelian A]
     (V V' L L' : CochainComplex A ℤ) (s : V ⟶ V) (s' : V' ⟶ V')

@@ -9,7 +9,9 @@ public import WeilConjectures.Algebra.Homology.System.SystemLevelLeftExtensionBa
 
 /-! # Scalar models as normalized derived adjunctions
 
-Source: Stacks 06YY and 0FND.
+## References
+
+* Stacks Project, Tags 06YY, 0FND
 -/
 
 @[expose] public noncomputable section
@@ -23,7 +25,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [EssentiallySmall.{w} C]
 
 /-- A scalar model already has all normalized extension data. Its resolving class
-is the class of K-flat complexes. Source: Stacks 06YY and 0FND -/
+is the class of K-flat complexes. -/
 def systemScalarModelExtension {R S : Sheaf J CommRingCat.{w}} {φ : R ⟶ S}
     (A : SystemScalarModel φ) :
     SystemDerivedLeftExtension

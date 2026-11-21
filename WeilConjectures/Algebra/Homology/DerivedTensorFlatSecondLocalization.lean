@@ -12,8 +12,9 @@ public import Mathlib.RingTheory.Localization.Basic
 /-!
 # Flat localization of the second derived tensor factor
 
-Source: Stacks Project, More on Algebra, Tag 06Y6, flat cohomology base change and
-comparison-map.
+## References
+
+* Stacks Project, More on Algebra, Tag 06Y6 (flat cohomology base change)
 -/
 
 @[expose] public section
@@ -53,27 +54,7 @@ private theorem baseChangeMap_naturality
     ((extendCompIso R B C).hom.naturality f)
 
 /-- Flat localization of the second factor, including naturality, both scalar actions,
-and compatibility with the comparison map of Stacks Tag 06Y6.
-
-The source and target use the models in `def-pc-ring-tensor-cohomology`. Extension of
-scalars is written with C on the left of the tensor product, using the canonical symmetry
-C tensor-over-B H = H tensor-over-B C. C-linearity is built into the morphism types;
-the third clause is A-linearity for the A-action induced by multiplication on M. Together
-these express linearity over A tensor-over-R C. The B-action is restriction of the C-action.
-
-Proof using the canonical flat cohomology map already defined in the models:
-1. Flatness makes extension of scalars exact, so `flatHomologyMap` is the inverse
-   of the canonical homology isomorphism. Composing with homology of `extendCompIso`
-   proves that `baseChangeMap` is an isomorphism for every R-complex.
-2. Naturality of the inverse homology isomorphism and of `extendCompIso` proves
-   naturality of `baseChangeMap` for every chain map. Apply it to the resolved
-   restriction of `f : M → N`; the A-action clause is the case `f = a • 𝟙 M`.
-3. Apply the same naturality to both arrows of the comparison span: the R-resolution
-   of the restricted A-augmentation, and the R-augmentation of the restricted
-   A-resolution. The left span arrow is invertible on cohomology by `spanLeft_isIso`.
-   Cancel its scalar extension, then cancel the left arrow over C. The two resulting
-   composites agree by naturality for the right span arrow.
-This proves the assertions for every flat B → C; the localization hypotheses are retained. -/
+and compatibility with the comparison map of Stacks Tag 06Y6. -/
 theorem derivedTensor_flat_second_localization
     (R A B C : Type v) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra R C] [Algebra B C] [IsScalarTower R B C]

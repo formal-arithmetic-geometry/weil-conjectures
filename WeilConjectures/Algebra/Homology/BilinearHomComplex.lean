@@ -10,7 +10,11 @@ public import Mathlib.CategoryTheory.Preadditive.Opposite
 import Mathlib.Algebra.Module.Basic
 import Mathlib.CategoryTheory.Linear.Basic
 /-! # Product Hom complexes for a separately additive coefficient bifunctor
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I
+
+## References
+
+* Stacks Project, Algebraization, Tag 099I
+* Stacks Project, sites-cohomology.tex, Section 0A8X
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -223,8 +227,7 @@ private noncomputable def homBifunctor :
     simp
 omit [Preadditive A] [Preadditive B] [HasProducts D]
     [H.Additive] [∀ a, (H.obj a).Additive] in
-/-- The projection data of a product Hom complex, with each law stored separately.
-Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X. -/
+/-- The projection data of a product Hom complex, with each law stored separately. -/
 structure ProductHomComplexData [HasZeroMorphisms A] [HasZeroMorphisms B]
     (F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ) where
   π : ∀ (L : CochainComplex A ℤ) (M : CochainComplex B ℤ) (n p q : ℤ), p + n = q →
@@ -251,27 +254,12 @@ structure ProductHomComplexData [HasZeroMorphisms A] [HasZeroMorphisms B]
 
 omit [Preadditive A] [Preadditive B] [HasProducts D]
     [H.Additive] [∀ a, (H.obj a).Additive] in
-/-- Product projections, differential, and functoriality specifying a product Hom complex.
-Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X
-This proposition packages the full formulas so coefficient specializations can use the
-abstract preadditive hom structures without re-elaborating them after substitution. -/
+/-- Product projections, differential, and functoriality specifying a product Hom complex. -/
 def ProductHomComplexSpecification [HasZeroMorphisms A] [HasZeroMorphisms B]
     (F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ) : Prop :=
   Nonempty (ProductHomComplexData H F)
 
-/-- Existence of the Hom-complex bifunctor with its product projections and exact sign.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X, and Algebraization, Tag 099I
-Proof: take in degree `n` the product of the internal sheaf Homs from `L^p` to
-`M^(p+n)`. Products are computed sectionwise, so sections are families of maps
-on the localized site. Define the differential on these families by
-`d_M f - (-1)^n f d_L`. Both composition maps are linear and commute with
-restriction. Expanding its square gives the two zero terms `d_M^2 f` and
-`f d_L^2`, while the mixed terms cancel because the signs in consecutive
-integer degrees are opposite. Thus these products form a cochain complex.
-Pre- and post-compose each component with chain maps. Their chain-map
-identities show this commutes with the differential; associativity and identity
-of composition give the bifunctor laws. Use the product universal property
-for the projections and their formulas below. No extra boundedness is used. -/
+/-- Existence of the Hom-complex bifunctor with its product projections and exact sign. -/
 theorem exists_bilinearHomComplexFunctor :
     ∃ F : (CochainComplex A ℤ)ᵒᵖ ⥤ CochainComplex B ℤ ⥤ CochainComplex D ℤ,
       ProductHomComplexSpecification H F := by

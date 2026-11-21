@@ -28,10 +28,12 @@ import WeilConjectures.SecSmoothPurity.ModuleTensorGenerators
 
 /-! # Components of the bounded ordinary sheaf dual
 
-Source: Stacks Project, sites-cohomology.tex, Tags 08JJ and 0A8X
-
 The abbreviations below only expand the recorded Hom constructions and the
 coefficient sheaf in degree zero. The component is the actual product projection.
+
+## References
+
+* Stacks Project, Tags 04TT, 08JJ and 0A8X
 -/
 
 @[expose] public noncomputable section
@@ -48,38 +50,31 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]
   (R : Sheaf J CommRingCat.{max c v r})
 
-/-- Module sheaves in the chosen ambient universe.
-Source: Stacks 08JJ, 0A8X. -/
+/-- Module sheaves in the chosen ambient universe. -/
 abbrev Modules := SheafOfModules.{max c v r}
   ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
 
-/-- The standard zero-object structure obtained from the terminal module sheaf.
-Source: Stacks 0A8X. -/
+/-- The standard zero-object structure obtained from the terminal module sheaf. -/
 instance modulesHasZeroObject : HasZeroObject (Modules.{c, v, r} R) :=
   hasZeroObject_of_hasTerminal_object
 
-/-- The coefficient sheaf as a module over itself.
-Source: Stacks 08JJ. -/
+/-- The coefficient sheaf as a module over itself. -/
 abbrev coefficient : Modules.{c, v, r} R := SheafOfModules.unit _
 
-/-- The standard complex R[0], with the standard single-complex construction.
-Source: Stacks 08JJ. -/
+/-- The standard complex R[0], with the standard single-complex construction. -/
 abbrev zeroComplex : CochainComplex (Modules.{c, v, r} R) ℤ :=
   (CochainComplex.singleFunctor (Modules.{c, v, r} R) 0).obj (coefficient.{c, v, r} R)
 
-/-- The recorded internal sheaf Hom into the coefficient sheaf.
-Source: Stacks 04TT, 08JJ. -/
+/-- The recorded internal sheaf Hom into the coefficient sheaf. -/
 abbrev dual (T : Modules.{c, v, r} R) : Modules.{c, v, r} R :=
   SheafOfModules.homObj T (coefficient.{c, v, r} R)
 
-/-- The recorded sheaf Hom complex into R[0].
-Source: Stacks 0A8X, 08JJ. -/
+/-- The recorded sheaf Hom complex into R[0]. -/
 abbrev complexDual (E : CochainComplex (Modules.{c, v, r} R) ℤ) :
     CochainComplex (Modules.{c, v, r} R) ℤ :=
   homComplex (R := R) E (zeroComplex.{c, v, r} R)
 
-/-- Projection to the sole possibly nonzero Hom factor, followed by O^0 = R.
-Source: Stacks 0A8X, 08JJ. -/
+/-- Projection to the sole possibly nonzero Hom factor, followed by O^0 = R. -/
 def component (E : CochainComplex (Modules.{c, v, r} R) ℤ) (p q : ℤ) (h : p + q = 0) :
     (complexDual.{c, v, r} R E).X q ⟶ dual.{c, v, r} R (E.X p) :=
   homComplexπ E (zeroComplex.{c, v, r} R) q p 0 h ≫

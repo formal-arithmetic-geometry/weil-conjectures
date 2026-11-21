@@ -8,7 +8,12 @@ public import WeilConjectures.CategoryTheory.Abelian.Flat.PreservesFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
-/-! Preservation of flat-term K-flat complexes by flat-preserving colimit functors. -/
+/-! Preservation of flat-term K-flat complexes by flat-preserving colimit functors.
+
+## References
+
+* Stacks Project, Tag 0G7E
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -115,14 +120,7 @@ private theorem kFlat_of_cone {D : Type*} [Category D] [Abelian D]
     ((HomotopyCategory.kFlat_quotient_obj_iff (CochainComplex.mappingCone f)).2 hc)
 
 /-- An additive functor preserving flat objects and integer-indexed colimits preserves
-K-flat complexes with flat terms.
-Source: Stacks Project, Tag 0G7E, the resolution and acyclic-cone argument
-Proof: choose the functorial flat resolution L of P. Its image is K-flat, since L is
-an integer-indexed colimit of bounded-above flat complexes. The cone of L → P is
-acyclic, K-flat, and termwise flat. Its cycles are flat by the Tor criterion. Thus
-its good upper truncations are bounded-above flat complexes; their images are K-flat
-and their colimit is the image of the cone. Cone compatibility and two-out-of-three
-in the K-flat homotopy subcategory now show that the image of P is K-flat. -/
+K-flat complexes with flat terms. -/
 theorem kFlat_map_of_flat_terms
     (P : CochainComplex A ℤ) (hP : (HomologicalComplex.quasiIso A (.up ℤ)).kFlat P)
     (hf : ∀ i, ObjectProperty.flat (P.X i)) :

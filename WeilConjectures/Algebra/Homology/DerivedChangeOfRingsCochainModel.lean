@@ -12,10 +12,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingCl
 /-!
 # Derived change of rings with separate localization universes
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YT, 06YY; derived.tex, Tag 06XN.
 This is the same universal pair on cochain complexes, allowing different morphism
 universes for the two derived categories. The ordinary functor is fixed on objects
 and maps; the derived pair is determined up to its unique counit-compatible isomorphism.
+
+## References
+
+* Stacks Project, Tags 06YT, 06YY and 06XN
 -/
 
 @[expose] public section
@@ -97,8 +100,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
 
 /-- A presentation of the derived change-of-rings universal pair, including its actual
 ordinary scalar-extension functor, pointwise (everywhere defined) existence and its
-canonical K-flat computations.
-Source: Stacks 06YY. -/
+canonical K-flat computations. -/
 structure DerivedChangeOfRingsCochainModel where
   /-- Ordinary sheafified extension of scalars. -/
   E : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J O) ⥤
@@ -139,21 +141,7 @@ structure DerivedChangeOfRingsCochainModel where
 attribute [instance] DerivedChangeOfRingsCochainModel.additive
 
 /-- Existence of derived extension with its natural K-flat model identifications, with
-independent source and target localization universes.
-Source: Stacks 06YT, 06YY and 06XN.
-Proof: construct E by sectionwise scalar extension followed by module sheafification.
-Its maps are the sheafifications of id tensor f, so E is additive. The cone of a
-quasi-isomorphism between K-flat complexes is acyclic and K-flat; tensoring its
-K-flat comparison with the new ring leaves it acyclic (06YT). Thus E preserves these
-quasi-isomorphisms. Resolve every complex by a K-flat complex (06YS), and apply the
-resolving-class construction (06XN), which gives the universal counit and its
-invertibility on K-flat representatives, and its pointwise existence at every complex
-(computed by a K-flat resolution, Stacks 05SV and 06XN). Precompose the homotopy-category
-counit with the homotopy quotient and its localization comparison to obtain the displayed
-cochain counit. This changes neither its universal property nor its K-flat components.
-Ordinary extension preserves shifts and cones, so the derived functor is triangulated.
-All constructions take place separately in the two selected localization categories;
-no equality between their Hom universes is used. -/
+independent source and target localization universes. -/
 theorem nonempty_derivedChangeOfRingsCochainModel :
     Nonempty (DerivedChangeOfRingsCochainModel.{u, v, r, wO, wS} φ) := by
   classical

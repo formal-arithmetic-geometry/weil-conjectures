@@ -34,7 +34,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
 
 /-! # Tensor compatibility on ordinary module sheaves
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48.
+## References
+
+* Stacks Project, Tags 07A4 and 0E48 (Cohomology on Sites)
 -/
 
 @[expose] public section
@@ -186,21 +188,7 @@ private theorem pairing_square {C : Type*} [Category C] [CartesianMonoidalCatego
   simp only [Category.assoc]
 
 -- The generator calculation compares four scalar-extension presentations.
-/-- Tensor compatibility of the linear square on two ordinary module sheaves.
-
-Proof: precompose with the iterated scalar-extension insertion on the inverse
-image of a generalized pure tensor m tensor n. The four canonical pure-tensor
-formulas identify each path with the tensor of the two iterated insertions.
-The insertion equation of s identifies these insertions on m and n. Naturality
-of s.sets with respect to the generalized pair of sections identifies the
-underlying inverse-image elements, since finite-limit preserving inverse image
-preserves their product. Consequently the two composites agree on these inserted
-pure tensors. The scalar-extension universal property extends this equality to
-scalar multiples, linearity extends it to sums, and the tensor and sheafification
-universal properties give equality of module-sheaf morphisms. Structural ring
-maps need not be flat; the same calculation works for zero rings and zero modules.
-Source: Stacks, Cohomology on Sites, Tag 07A4 (lemma-pullback-tensor-product),
-and the tensor part of Tag 0E48 (remark-compatible-with-diagram). -/
+/-- Tensor compatibility of the linear square on two ordinary module sheaves. -/
 theorem ringedSquareModuleTensorCompatibility
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (M N : SheafOfModules.{u}

@@ -75,13 +75,16 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUn
 /-!
 # Invariance of augmented scalar-extension Roos complexes
 
-Source: Stacks Project, Tags 06YS, 06YT, 06YY and 08TC
 The tower is indexed by n in N, corresponding to positive level n+1. Its algebra
 structure is the natural transformation from the constant ring sheaf R. All tensor
 objects use the recorded site tensor. The Roos complex has precisely the coordinates
 V^i plus V^(i-1), differential (dx, (1-s)x-dy), and augmentation (p tensor 1, 0).
 The helper existence statements uniquely determine maps on every section; no object
 is selected from an unnormalized existence assertion.
+
+## References
+
+* Stacks Project, Tags 03DA, 03EK, 06YS, 06YT, 06YY and 08TC
 -/
 
 @[expose] public noncomputable section
@@ -101,13 +104,11 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [HasSheafify J AddCommGrpCat.{r}]
   {R : Sheaf J CommRingCat.{r}}
 
-/-- The existing module category of the underlying ring sheaf.
-Source: Stacks Tag 03DA. -/
+/-- The existing module category of the underlying ring sheaf. -/
 abbrev Modules (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
-/-- An R-algebra sheaf as an R-module, by the existing restriction of scalars.
-Source: Stacks Tag 03EK. -/
+/-- An R-algebra sheaf as an R-module, by the existing restriction of scalars. -/
 def algebraModule {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) : Modules R :=
   (SheafOfModules.restrictScalars
     ((sheafCompose J (forget₂ CommRingCat RingCat)).map ι)).obj
@@ -115,11 +116,7 @@ def algebraModule {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) : Modules R :=
 
 -- Retain the existing instance binders in the public API.
 set_option linter.unusedSectionVars false in
-/-- The algebra map has a unique R-linear sheaf map with its original section values.
-Source: Stacks Tag 03EK.
-Proof: the equation on structure maps makes the sectionwise ring homomorphism
-R-linear. Ring-map naturality makes these linear maps a sheaf morphism. Conversely,
-the displayed value on every section determines every component, hence the map. -/
+/-- The algebra map has a unique R-linear sheaf map with its original section values. -/
 theorem algebraModuleMap_existsUnique {B B' : Sheaf J CommRingCat.{r}}
     (ι : R ⟶ B) (ι' : R ⟶ B') (f : B ⟶ B') (h : ι ≫ f = ι') :
     ∃! a : algebraModule ι ⟶ algebraModule ι',
@@ -147,18 +144,13 @@ theorem algebraModuleMap_existsUnique {B B' : Sheaf J CommRingCat.{r}}
   ext U b
   exact ha' U b
 
-/-- The uniquely normalized map of underlying algebra modules.
-Source: Stacks Tag 03EK. -/
+/-- The uniquely normalized map of underlying algebra modules. -/
 def algebraModuleMap {B B' : Sheaf J CommRingCat.{r}}
     (ι : R ⟶ B) (ι' : R ⟶ B') (f : B ⟶ B') (h : ι ≫ f = ι') :=
   (algebraModuleMap_existsUnique ι ι' f h).exists.choose
 
 set_option linter.unusedSectionVars false in
-/-- The unit of scalar extension, uniquely specified on all local sections.
-Source: Stacks Tag 03EK.
-Proof: p to p tensor 1 is additive, R-linear and commutes with restrictions;
-compose with the module-sheafification unit. It is natural in the input module.
-Every component is determined on every section, so this transformation is unique. -/
+/-- The unit of scalar extension, uniquely specified on all local sections. -/
 theorem tensorUnit_existsUnique {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :
     ∃! η : 𝟭 (Modules R) ⟶ siteSheafTensorRight (algebraModule ι),
       ∀ (M : Modules R) (U : Cᵒᵖ) (p : M.val.obj U),
@@ -205,8 +197,7 @@ theorem tensorUnit_existsUnique {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :
   ext M U p
   exact hη' M U p
 
-/-- The actual scalar-extension unit, with the prescribed pure-tensor formula.
-Source: Stacks Tag 03EK. -/
+/-- The actual scalar-extension unit, with the prescribed pure-tensor formula. -/
 def tensorUnit {B : Sheaf J CommRingCat.{r}} (ι : R ⟶ B) :=
   (tensorUnit_existsUnique ι).exists.choose
 
@@ -224,31 +215,25 @@ private theorem tensorSecondMap_tmul
 variable (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{r})
   (ι : (Functor.const ℕᵒᵖ).obj R ⟶ B)
 
-/-- The module sheaf B_n with its given R-action.
-Source: Stacks Tag 03EK. -/
+/-- The module sheaf B_n with its given R-action. -/
 def levelModule (n : ℕ) : Modules R := algebraModule (ι.app (op n))
 
 set_option linter.unusedSectionVars false in
-/-- Compatibility of the algebra structure with the consecutive transition.
-Source: Stacks Tag 03EK.
-Proof: naturality of ι at n+1 to n, followed by the identity law for the constant functor. -/
+/-- Compatibility of the algebra structure with the consecutive transition. -/
 theorem structure_compatible (n : ℕ) :
     ι.app (op (n + 1)) ≫ B.map (homOfLE (Nat.le_succ n)).op = ι.app (op n) := by
   simpa using (ι.naturality (homOfLE (Nat.le_succ n)).op).symm
 
-/-- The given transition, regarded as an R-module sheaf map.
-Source: Stacks Tag 03EK. -/
+/-- The given transition, regarded as an R-module sheaf map. -/
 def levelMap (n : ℕ) : levelModule B ι (n + 1) ⟶ levelModule B ι n :=
   algebraModuleMap (ι.app (op (n + 1))) (ι.app (op n))
     (B.map (homOfLE (Nat.le_succ n)).op) (structure_compatible B ι n)
 
-/-- Termwise scalar extension, restricted back to R-modules.
-Source: Stacks Tag 03EK. -/
+/-- Termwise scalar extension, restricted back to R-modules. -/
 def level (n : ℕ) : CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ :=
   (siteSheafTensorRight (levelModule B ι n)).mapHomologicalComplex (.up ℤ)
 
-/-- Strict tensor transition induced by the algebra transition.
-Source: Stacks Tag 03EK. -/
+/-- Strict tensor transition induced by the algebra transition. -/
 def transition (P : CochainComplex (Modules R) ℤ) (n : ℕ) :
     (level B ι (n + 1)).obj P ⟶ (level B ι n).obj P :=
   (NatTrans.mapHomologicalComplex (siteSheafTensorRightMap (levelMap B ι n)) (.up ℤ)).app P
@@ -275,24 +260,20 @@ private theorem tensorUnit_levelMap (n : ℕ) :
 
 variable [HasCountableProducts (Modules R)]
 
-/-- The termwise product V(P) of the scalar-extension tower.
-Source: Stacks Tag 08TC. -/
+/-- The termwise product V(P) of the scalar-extension tower. -/
 def product (P : CochainComplex (Modules R) ℤ) :=
   ∏ᶜ fun n : ℕ => (level B ι n).obj P
 
-/-- The endomorphism 1-s, whose nth coordinate is pr_n minus t_n pr_(n+1).
-Source: Stacks Tag 08TC. -/
+/-- The endomorphism 1-s, whose nth coordinate is pr_n minus t_n pr_(n+1). -/
 def oneSubShift (P : CochainComplex (Modules R) ℤ) : product B ι P ⟶ product B ι P :=
   Pi.lift (fun n => Pi.π (fun k : ℕ => (level B ι k).obj P) n -
     Pi.π (fun k : ℕ => (level B ι k).obj P) (n + 1) ≫ transition B ι P n)
 
-/-- The two coordinates of L(P) in degree i, in the order used in the node.
-Source: Stacks Tag 08TC. -/
+/-- The two coordinates of L(P) in degree i. -/
 def roosX (P : CochainComplex (Modules R) ℤ) (i : ℤ) :=
   (product B ι P).X i ⊞ (product B ι P).X (i - 1)
 
-/-- The differential (x,y) to (dx,(1-s)x-dy).
-Source: Stacks Tag 08TC. -/
+/-- The differential (x,y) to (dx,(1-s)x-dy). -/
 def roosD (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
     roosX B ι P i ⟶ roosX B ι P (i + 1) :=
   biprod.lift (biprod.fst ≫ (product B ι P).d i (i + 1))
@@ -301,10 +282,7 @@ def roosD (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
       biprod.snd ≫ (product B ι P).d (i - 1) ((i + 1) - 1))
 
 set_option linter.unusedSectionVars false in
-/-- The displayed Roos differential squares to zero.
-Source: Stacks Tag 08TC.
-Proof: the first coordinate is d squared, hence zero. The second is
-(1-s)dx-d(1-s)x+d squared y; 1-s is a chain map, so these terms cancel. -/
+/-- The displayed Roos differential squares to zero. -/
 theorem roosD_sq (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
     roosD B ι P i ≫ roosD B ι P (i + 1) = 0 := by
   apply biprod.hom_ext
@@ -322,13 +300,11 @@ theorem roosD_sq (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
       congrArg (fun f ↦ biprod.fst ≫ f ≫
         (oneSubShift B ι P).f (i + 1 + 1 - 1)) hd
 
-/-- The specified Roos complex, with real objects and differential.
-Source: Stacks Tag 08TC. -/
+/-- The specified Roos complex, with real objects and differential. -/
 def roos (P : CochainComplex (Modules R) ℤ) : CochainComplex (Modules R) ℤ :=
   CochainComplex.of (roosX B ι P) (roosD B ι P) (roosD_sq B ι P)
 
-/-- The product of the tensor units in degree i.
-Source: Stacks Tag 03EK. -/
+/-- The product of the tensor units in degree i. -/
 def unitProduct (P : CochainComplex (Modules R) ℤ) : P ⟶ product B ι P :=
   Pi.lift (fun n =>
     (NatTrans.mapHomologicalComplex (tensorUnit (ι.app (op n))) (.up ℤ)).app P)
@@ -346,10 +322,7 @@ private theorem unitProduct_oneSubShift (P : CochainComplex (Modules R) ℤ) :
     exact congrArg (fun η ↦ η.app (P.X j)) (tensorUnit_levelMap B ι n)
   simp [unitProduct, oneSubShift, Category.assoc, Preadditive.comp_sub, hunit]
 
-/-- The augmentation (unit,0) commutes with differentials.
-Source: Stacks Tags 03EK and 08TC
-Proof: tensor units commute with d. The algebra transitions preserve 1, so
-(1-s) composed with the product unit is zero, giving the second coordinate. -/
+/-- The augmentation (unit,0) commutes with differentials. -/
 theorem augmentation_comm (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
     biprod.lift ((unitProduct B ι P).f i) 0 ≫ (roos B ι P).d i (i + 1) =
       P.d i (i + 1) ≫ biprod.lift ((unitProduct B ι P).f (i + 1)) 0 := by
@@ -361,14 +334,12 @@ theorem augmentation_comm (P : CochainComplex (Modules R) ℤ) (i : ℤ) :
   · simp [roosD, Category.assoc]
   · simp [roosD, Category.assoc, hunit]
 
-/-- The actual augmentation p to ((p tensor 1)_n,0).
-Source: Stacks Tags 03EK and 08TC -/
+/-- The actual augmentation p to ((p tensor 1)_n,0). -/
 def augmentation (P : CochainComplex (Modules R) ℤ) : P ⟶ roos B ι P :=
   CochainComplex.ofHom (fun i => biprod.lift ((unitProduct B ι P).f i) 0)
     (augmentation_comm B ι P)
 
-/-- The product of a tensor B_n over all levels.
-Source: Stacks Tag 03EK. -/
+/-- The product of a tensor B_n over all levels. -/
 def productMap {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') :
     product B ι P ⟶ product B ι P' :=
   Limits.Pi.map (fun n => (level B ι n).map a)
@@ -387,10 +358,7 @@ private theorem productMap_oneSubShift {P P' : CochainComplex (Modules R) ℤ}
   simp [productMap, oneSubShift, Category.assoc, Preadditive.comp_sub,
     Preadditive.sub_comp, ht]
 
-/-- The diagonal product map commutes with the specified differential.
-Source: Stacks Tags 03EK and 08TC
-Proof: tensor naturality makes a tensor B_n commute with transition maps. Thus
-its product commutes with 1-s as well as d; multiply the two-by-two matrices. -/
+/-- The diagonal product map commutes with the specified differential. -/
 theorem roosMap_comm {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') (i : ℤ) :
     biprod.map ((productMap B ι a).f i) ((productMap B ι a).f (i - 1)) ≫
         (roos B ι P').d i (i + 1) =
@@ -408,8 +376,7 @@ theorem roosMap_comm {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') (i :
       biprod.map_snd, biprod.lift_snd_assoc, Preadditive.sub_comp, sub_left_inj]
     rw [hs (i + 1 - 1)]
 
-/-- L(a) applies the product of a tensor B_n to both coordinates.
-Source: Stacks Tags 03EK and 08TC -/
+/-- L(a) applies the product of a tensor B_n to both coordinates. -/
 def roosMap {P P' : CochainComplex (Modules R) ℤ} (a : P ⟶ P') :
     roos B ι P ⟶ roos B ι P' :=
   CochainComplex.ofHom

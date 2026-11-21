@@ -11,7 +11,6 @@ import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses
 
 /-! # Normalized internal-Hom shifts with independent site universes
 
-Source: Stacks Project, Cohomology on Sites, Tags 0A8X, 08JA and 08JC
 The existing restriction and signed small-site interfaces are reexported. The
 normalizations below use the very same Hom complex, its fixed product projections,
 and its fixed augmentation to the K-injective localization.
@@ -21,6 +20,13 @@ abstract product Hom complex. They then descend natural transformations through
 localization, specialize the fixed sheaf Hom data, and prove normalization and
 uniqueness. Keeping this algebra abstract avoids unfolding the concrete sheaf
 Hom construction in every chain and triangle identity.
+
+## References
+
+* [Stacks Project, Tag 08J7](https://stacks.math.columbia.edu/tag/08J7)
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+* [Stacks Project, Tag 08JA](https://stacks.math.columbia.edu/tag/08JA)
+* [Stacks Project, Tag 08JC](https://stacks.math.columbia.edu/tag/08JC)
 -/
 
 @[expose] public noncomputable section
@@ -38,22 +44,18 @@ variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [J.WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
   (R : Sheaf J CommRingCat.{max c v r})
 
-/-- The recorded modules, retaining both site universes.
-Source: Stacks 08J7. -/
+/-- The recorded modules, retaining both site universes. -/
 abbrev Modules := SheafOfModules.{max c v r}
   ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)
 
-/-- The recorded cochain category.
-Source: Stacks 0A8X. -/
+/-- The recorded cochain category. -/
 abbrev Complex := CochainComplex (Modules.{c, v, r} J R) ℤ
 
-/-- The recorded Hom complex, without a second construction.
-Source: Stacks 0A8X. -/
+/-- The recorded Hom complex, without a second construction. -/
 abbrev complexHom (L F : Complex.{c, v, r} J R) :=
   homComplex.{c, v, max c v r, max c v r} (R := R) L F
 
-/-- Unsigned target reindexing, specified on every Hom-product projection.
-Source: Stacks 0A8X. -/
+/-- Unsigned target reindexing, specified on every Hom-product projection. -/
 def RightFormula (L F : Complex.{c, v, r} J R) (s : ℤ)
     (e : (complexHom.{c, v, r} J R L F)⟦s⟧ ≅ complexHom.{c, v, r} J R L (F⟦s⟧)) : Prop :=
   ∀ (k p q : ℤ) (h : p + k = q),
@@ -62,7 +64,7 @@ def RightFormula (L F : Complex.{c, v, r} J R) (s : ℤ)
         (by omega)
 
 /-- Signed source reindexing: in Hom degree k multiply the reindexed family
-by (-1)^(s*k). Source: Stacks 0A8X -/
+by (-1)^(s*k). -/
 def LeftFormula (L F : Complex.{c, v, r} J R) (s : ℤ)
     (e : (complexHom.{c, v, r} J R L F)⟦-s⟧ ≅ complexHom.{c, v, r} J R (L⟦s⟧) F) : Prop :=
   ∀ (k p q : ℤ) (h : p + k = q),
@@ -352,12 +354,10 @@ variable [HasDerivedCategory.{w} (Modules.{c, v, r} J R)]
 
 set_option backward.isDefEq.respectTransparency true
 
-/-- The existing ambient derived category.
-Source: Stacks 08J7. -/
+/-- The existing ambient derived category. -/
 abbrev D := DerivedCategory (Modules.{c, v, r} J R)
 
-/-- The recorded derived internal Hom with its source fixed.
-Source: Stacks 08J7. -/
+/-- The recorded derived internal Hom with its source fixed. -/
 abbrev hom (M : D.{c, v, r, w} J R) : D.{c, v, r, w} J R ⥤ D.{c, v, r, w} J R :=
   (Functor.curry.obj (derivedInternalHomOfUniverses.{c, v, r, w} J R)).obj (op M)
 

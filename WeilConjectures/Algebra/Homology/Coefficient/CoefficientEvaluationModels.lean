@@ -128,12 +128,16 @@ import Mathlib.CategoryTheory.Functor.OfSequence
 import Mathlib.CategoryTheory.Abelian.Transfer
 /-!
 # Derived extension from a coefficient level
-Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;
-Stacks Project, Tags 03D7, 06XN and 09T5
-Indices in this module are Zheng's nonnegative indices: `n` denotes the paper node's
+
+Indices in this module are Zheng's nonnegative indices: `n` denotes the
 positive level `n + 1`. No normalization or cartesianness is imposed on a system.
 The auxiliary declarations construct the actual strict systems and their evaluations;
 the final package records the constructions, universal properties and all coherence laws.
+
+## References
+
+* Stacks Project, Tags 03CZ, 03D7, 03EK, 06XN, 06YY, 09T5
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -144,57 +148,48 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   [HasWeakSheafify J CommRingCat.{w}]
-/-- The constant quotient coefficient sheaf. Source: Zheng, Construction 4.1, p. 21 -/
+/-- The constant quotient coefficient sheaf. -/
 def coefficientQuotientSheaf (O : Type w) [CommRing O] (ell : O) (n : ℕ) :
     Sheaf J CommRingCat.{w} :=
   (constantSheaf J CommRingCat.{w}).obj
     (CommRingCat.of (O ⧸ (Ideal.span ({ell} : Set O)) ^ (n + 1)))
-/-- The quotient-induced map, with no arbitrary ring-sheaf map parameter.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- The quotient-induced map, with no arbitrary ring-sheaf map parameter. -/
 def coefficientQuotientMap (O : Type w) [CommRing O] (ell : O)
     {m n : ℕ} (h : n ≤ m) :
     coefficientQuotientSheaf (J := J) O ell m ⟶ coefficientQuotientSheaf (J := J) O ell n :=
   (constantSheaf J CommRingCat.{w}).map
     (CommRingCat.ofHom (Ideal.Quotient.factor
       (Ideal.pow_le_pow_right (Nat.add_le_add_right h 1))))
-/-- Modules at level `n+1`, using the recorded general ringed-site category.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- Modules at level `n+1`, using the recorded general ringed-site category. -/
 abbrev coefficientLevelModules (O : Type w) [CommRing O] (ell : O) (n : ℕ) :=
   ringedSiteModules.{w}
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj
       (coefficientQuotientSheaf (J := J) O ell n))
-/-- Scalar restriction along the actual coefficient quotient.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tag 03CZ -/
+/-- Scalar restriction along the actual coefficient quotient. -/
 abbrev coefficientRestriction (O : Type w) [CommRing O] (ell : O)
     {m n : ℕ} (h : n ≤ m) :
     coefficientLevelModules (J := J) O ell n ⥤ coefficientLevelModules (J := J) O ell m :=
   restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map
     (coefficientQuotientMap (J := J) O ell h))
-/-- Strict semilinear systems; only successive transitions are data.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- Strict semilinear systems; only successive transitions are data. -/
 structure CoefficientSystem (O : Type w) [CommRing O] (ell : O) where
   level : ∀ n : ℕ, coefficientLevelModules (J := J) O ell n
   transition : ∀ n : ℕ, level (n + 1) ⟶
     (coefficientRestriction (J := J) O ell (Nat.le_succ n)).obj (level n)
 variable {O : Type w} [CommRing O] {ell : O}
-/-- Componentwise morphisms commuting with all transitions.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- Componentwise morphisms commuting with all transitions. -/
 structure CoefficientSystem.Hom (M N : CoefficientSystem (J := J) O ell) where
   app : ∀ n : ℕ, M.level n ⟶ N.level n
   comm : ∀ n : ℕ, app (n + 1) ≫ N.transition n =
     M.transition n ≫ (coefficientRestriction (J := J) O ell (Nat.le_succ n)).map (app n)
-/-- Identity families commute with transitions. Source: Zheng, Construction 4.1, p. 21.
-Proof: the two composites are the same transition, by the identity laws and functoriality
-of scalar restriction. -/
+/-- Identity families commute with transitions. -/
 theorem coefficientSystem_id_comm (M : CoefficientSystem (J := J) O ell) (n : ℕ) :
     𝟙 (M.level (n + 1)) ≫ M.transition n =
       M.transition n ≫ (coefficientRestriction (J := J) O ell (Nat.le_succ n)).map (𝟙 _) := by
   have := ‹J.WEqualsLocallyBijective AddCommGrpCat.{w}›
   have := ‹HasSheafify J AddCommGrpCat.{w}›
   simp
-/-- Composable compatible families remain compatible. Source: Zheng, Construction 4.1, p. 21.
-Proof: substitute the two commuting squares, then use associativity and preservation
-of composition by restriction. -/
+/-- Composable compatible families remain compatible. -/
 theorem coefficientSystem_comp_comm {M N P : CoefficientSystem (J := J) O ell}
     (f : M.Hom N) (g : N.Hom P) (n : ℕ) :
     (f.app (n + 1) ≫ g.app (n + 1)) ≫ P.transition n =
@@ -204,17 +199,14 @@ theorem coefficientSystem_comp_comm {M N P : CoefficientSystem (J := J) O ell}
   have := ‹HasSheafify J AddCommGrpCat.{w}›
   rw [Category.assoc, g.comm, ← Category.assoc, f.comm]
   simp only [Category.assoc, Functor.map_comp]
-/-- Componentwise identity. Source: Zheng, Construction 4.1, p. 21 -/
+/-- Componentwise identity. -/
 def CoefficientSystem.identity (M : CoefficientSystem (J := J) O ell) : M.Hom M :=
   ⟨fun _n ↦ 𝟙 _, coefficientSystem_id_comm M⟩
-/-- Componentwise composition. Source: Zheng, Construction 4.1, p. 21 -/
+/-- Componentwise composition. -/
 def CoefficientSystem.Hom.compose {M N P : CoefficientSystem (J := J) O ell}
     (f : M.Hom N) (g : N.Hom P) : M.Hom P :=
   ⟨fun n ↦ f.app n ≫ g.app n, coefficientSystem_comp_comm f g⟩
-/-- Category laws for the displayed componentwise operations.
-Source: Zheng, Construction 4.1, p. 21.
-Proof: equality of these structures is equality of their components; identity and
-associativity hold in each module category. Proof fields are irrelevant -/
+/-- Category laws for the displayed componentwise operations. -/
 theorem coefficientSystem_category_laws :
     (∀ (M N : CoefficientSystem (J := J) O ell) (f : M.Hom N),
       M.identity.compose f = f ∧ f.compose N.identity = f) ∧
@@ -240,8 +232,7 @@ theorem coefficientSystem_category_laws :
     apply ext
     funext n
     exact Category.assoc (f.app n) (g.app n) (h.app n)
-/-- The category with precisely the declared objects and componentwise maps.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- The category with precisely the declared objects and componentwise maps. -/
 instance coefficientSystemCategory : Category (CoefficientSystem (J := J) O ell) where
   Hom := CoefficientSystem.Hom
   id := CoefficientSystem.identity
@@ -249,8 +240,7 @@ instance coefficientSystemCategory : Category (CoefficientSystem (J := J) O ell)
   id_comp := fun f ↦ (coefficientSystem_category_laws.1 _ _ f).1
   comp_id := fun f ↦ (coefficientSystem_category_laws.1 _ _ f).2
   assoc := fun f g h ↦ coefficientSystem_category_laws.2 _ _ _ _ f g h
-/-- Exact level evaluation, on its actual object and morphism data.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- Exact level evaluation, on its actual object and morphism data. -/
 def coefficientEvaluation (n : ℕ) :
     CoefficientSystem (J := J) O ell ⥤ coefficientLevelModules (J := J) O ell n where
   obj M := M.level n
@@ -516,21 +506,13 @@ private def coefficientSystemEquivalence : CoefficientSystem (J := J) O ell ≌
 
 end CoefficientSystemBridge
 
-/-- The additive structure is normalized by the jointly faithful evaluations.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- The additive structure is normalized by the jointly faithful evaluations. -/
 def CoefficientSystem.AbelianNormalized
     (a : Abelian (CoefficientSystem (J := J) O ell)) : Prop :=
   @id Prop (by
     letI := a
     exact ∀ n : ℕ, (coefficientEvaluation (J := J) (O := O) (ell := ell) n).Additive)
-/-- The unique componentwise abelian structure.
-Source: Zheng, Construction 4.1, p. 21.
-Proof: add morphisms componentwise; restriction is additive so compatibility is preserved.
-Take kernels and sheafified cokernels at each level; their universal properties induce
-successive transitions and the componentwise universal properties. Finite biproducts
-are componentwise, and monos and epis are normal at each level. This gives an abelian
-category. Joint faithfulness of evaluation fixes addition; all remaining abelian fields
-are properties, so the normalized structure is unique -/
+/-- The unique componentwise abelian structure. -/
 theorem coefficientSystem_abelian_exists :
     ∃! a : Abelian (CoefficientSystem (J := J) O ell),
       CoefficientSystem.AbelianNormalized a := by
@@ -553,19 +535,15 @@ theorem coefficientSystem_abelian_exists :
     cases a
     congr 1
     exact hsub.elim _ _
-/-- The uniquely determined componentwise abelian structure, not an unspecified object.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- The uniquely determined componentwise abelian structure, not an unspecified object. -/
 instance coefficientSystemAbelian : Abelian (CoefficientSystem (J := J) O ell) :=
   coefficientSystem_abelian_exists.exists.choose
-/-- Evaluation is additive. Source: Zheng, Construction 4.1, p. 21.
-Proof: apply the normalization in the unique abelian-structure theorem -/
+/-- Evaluation is additive. -/
 theorem coefficientEvaluation_additive (n : ℕ) :
     (coefficientEvaluation (J := J) (O := O) (ell := ell) n).Additive := by
   exact coefficientSystem_abelian_exists.exists.choose_spec n
 attribute [instance] coefficientEvaluation_additive
-/-- Evaluation is exact. Source: Zheng, Construction 4.1, p. 21.
-Proof: kernels and cokernels in the constructed abelian category are componentwise;
-finite biproducts and hence finite limits and colimits are componentwise as well -/
+/-- Evaluation is exact. -/
 theorem coefficientEvaluation_exact (n : ℕ) :
     PreservesFiniteLimits (coefficientEvaluation (J := J) (O := O) (ell := ell) n) ∧
       PreservesFiniteColimits (coefficientEvaluation (J := J) (O := O) (ell := ell) n) := by
@@ -579,9 +557,7 @@ variable [EssentiallySmall.{w} C]
 variable {R R' : Sheaf J CommRingCat.{w}}
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Scalar extension respects identities. Source: Stacks Tag 03EK.
-Proof: the sectionwise tensor map of the identity is the identity on every pure tensor;
-sheafification preserves identity maps -/
+/-- Scalar extension respects identities. -/
 theorem siteCoefficientTensor_map_id (φ : R ⟶ R')
     (F : SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :
     changeOfRingsHom (φ) F (𝟙 F) =
@@ -598,9 +574,7 @@ theorem siteCoefficientTensor_map_id (φ : R ⟶ R')
     ((ModuleCat.extendScalars (φ.hom.app U).hom).map_id (F.val.obj U)) x
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Scalar extension respects composition. Source: Stacks Tag 03EK.
-Proof: on a tensor generator both composites apply the two module maps successively;
-sheafify that equality. -/
+/-- Scalar extension respects composition. -/
 theorem siteCoefficientTensor_map_comp (φ : R ⟶ R')
     {F G H : SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)} (f
       : F ⟶ G) (g : G ⟶ H) :
@@ -616,8 +590,7 @@ theorem siteCoefficientTensor_map_comp (φ : R ⟶ R')
   exact ConcreteCategory.congr_hom
     ((ModuleCat.extendScalars (φ.hom.app U).hom).map_comp (f.val.app U) (g.val.app U)) x
 
-/-- The recorded sheafified sectionwise scalar extension, on objects and maps.
-Source: Stacks Tag 03EK; Zheng, Construction 4.1, p. 21 -/
+/-- The recorded sheafified sectionwise scalar extension, on objects and maps. -/
 def siteCoefficientTensor (φ : R ⟶ R') :
     SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ⥤
       SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R') where
@@ -627,9 +600,7 @@ def siteCoefficientTensor (φ : R ⟶ R') :
   map_comp := siteCoefficientTensor_map_comp φ
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The tensor functor is additive. Source: Stacks Tag 03EK.
-Proof: the tensor map is additive in the module-map variable before sheafification, and
-module sheafification is additive -/
+/-- The tensor functor is additive. -/
 theorem siteCoefficientTensor_additive (φ : R ⟶ R') :
     (siteCoefficientTensor (J := J) φ).Additive := by
   have := ‹HasWeakSheafify J CommRingCat.{w}›
@@ -651,7 +622,7 @@ theorem siteCoefficientTensor_additive (φ : R ⟶ R') :
 attribute [instance] siteCoefficientTensor_additive
 
 /-- The canonical tensor Hom correspondence is evaluated on the sheafification image of
-`1 tensor x`. Source: Stacks Tag 03D7 -/
+`1 tensor x`. -/
 def SiteCoefficientTensorAdjunctionNormalized (φ : R ⟶ R')
     (a : siteCoefficientTensor φ ⊣
       restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)) : Prop :=
@@ -668,12 +639,7 @@ def SiteCoefficientTensorAdjunctionNormalized (φ : R ⟶ R')
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The tensor adjunction, uniquely fixed by its action on local tensor generators.
-Source: Stacks Tag 03D7.
-Proof: take the ordinary sectionwise tensor/restriction Hom bijections and then the module
-sheafification Hom bijection. Their composite has exactly the displayed normalization.
-They are natural in both variables and mutually inverse. Pure tensors generate, and
-sheafification is universal, so this normalization determines the adjunction uniquely -/
+/-- The tensor adjunction, uniquely fixed by its action on local tensor generators. -/
 theorem siteCoefficientTensorAdj_exists (φ : R ⟶ R') :
     ∃! a : siteCoefficientTensor φ ⊣
       restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ),
@@ -704,34 +670,29 @@ theorem siteCoefficientTensorAdj_exists (φ : R ⟶ R') :
   simp only [Adjunction.homEquiv_unit, CategoryTheory.Functor.map_id] at he
   exact ConcreteCategory.congr_hom (congrArg (fun f ↦ f.val.app U) he) x
 
-/-- The specified tensor/restriction adjunction, not a choice of an arbitrary map.
-Source: Stacks Tag 03D7. -/
+/-- The specified tensor/restriction adjunction, not a choice of an arbitrary map. -/
 def siteCoefficientTensorAdj (φ : R ⟶ R') :
     siteCoefficientTensor φ ⊣
       restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ) :=
   (siteCoefficientTensorAdj_exists (J := J) φ).exists.choose
 
-/-- Specialize the canonical site tensor functor to the actual coefficient quotient map.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tag 03EK -/
+/-- Specialize the canonical site tensor functor to the actual coefficient quotient map. -/
 abbrev coefficientTensor {m n : ℕ} (h : n ≤ m) :=
   siteCoefficientTensor (coefficientQuotientMap (J := J) O ell h)
 
-/-- Specialize the normalized tensor adjunction to the coefficient quotient map.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tag 03D7 -/
+/-- Specialize the normalized tensor adjunction to the coefficient quotient map. -/
 abbrev coefficientTensorAdj {m n : ℕ} (h : n ≤ m) :=
   siteCoefficientTensorAdj (coefficientQuotientMap (J := J) O ell h)
 
 /-- Forgetting scalars after scalar restriction leaves the underlying additive sheaf
-literally unchanged. This uses Mathlib's existing `toSheaf` and `restrictScalars`.
-Source: Stacks Tag 03CZ. -/
+literally unchanged. This uses Mathlib's existing `toSheaf` and `restrictScalars`. -/
 def siteScalarUnderlyingIso (φ : R ⟶ R') :
     restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ) ⋙
       SheafOfModules.toSheaf ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R) ≅
     SheafOfModules.toSheaf ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R') :=
   Iso.refl _
 
-/-- The underlying additive-sheaf map of the canonical scalar-extension unit.
-Source: Stacks Tag 03D7. -/
+/-- The underlying additive-sheaf map of the canonical scalar-extension unit. -/
 def siteTensorUnitUnderlying (φ : R ⟶ R')
     (F : SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) :
     (SheafOfModules.toSheaf _).obj F ⟶
@@ -740,7 +701,7 @@ def siteTensorUnitUnderlying (φ : R ⟶ R')
     (siteScalarUnderlyingIso φ).hom.app ((siteCoefficientTensor φ).obj F)
 
 /-- A strict transition on the underlying additive sheaves, without coefficient-action
-casts. Source: Zheng, Construction 4.1, p. 21 -/
+casts. -/
 def coefficientTransitionUnderlying {m n : ℕ} (h : n ≤ m)
     (t : coefficientEvaluation (J := J) (O := O) (ell := ell) m ⟶
       coefficientEvaluation (J := J) (O := O) (ell := ell) n ⋙
@@ -752,8 +713,7 @@ def coefficientTransitionUnderlying {m n : ℕ} (h : n ≤ m)
     (siteScalarUnderlyingIso (coefficientQuotientMap (J := J) O ell h)).hom.app (M.level n)
 
 /-- Iterated transitions are fixed by the actual successor maps, identity and composition.
-The forgetful functors are faithful, so these are equations of the actual transitions.
-Source: Zheng, Construction 4.1, p. 21 -/
+The forgetful functors are faithful, so these are equations of the actual transitions. -/
 def CoefficientTransitionsNormalized
     (t : ∀ {m n : ℕ} (h : n ≤ m),
       coefficientEvaluation (J := J) (O := O) (ell := ell) m ⟶
@@ -767,7 +727,7 @@ def CoefficientTransitionsNormalized
       coefficientTransitionUnderlying h₁ (t h₁) M ≫ coefficientTransitionUnderlying h₂ (t h₂) M)
 
 /-- The tensor unit is the inverse of the canonical scalar-extension unit, on underlying
-additive sheaves (faithful forgetting). Source: Stacks Tag 03D7 -/
+additive sheaves (faithful forgetting). -/
 def CoefficientTensorUnitNormalized
     (tensorUnit : ∀ n, coefficientTensor (J := J) (O := O) (ell := ell) (Nat.le_refl n) ≅
       𝟭 (coefficientLevelModules (J := J) O ell n)) : Prop :=
@@ -776,8 +736,7 @@ def CoefficientTensorUnitNormalized
       (SheafOfModules.toSheaf _).map ((tensorUnit n).hom.app F) = 𝟙 _
 
 /-- The balanced associator is fixed on the generating scalar-extension units.
-The scalar-unit formula above identifies this equation with the tensor-generator formula.
-Source: Stacks Tags 03EK and 03D7 -/
+The scalar-unit formula above identifies this equation with the tensor-generator formula. -/
 def CoefficientTensorAssocNormalized
     (tensorAssoc : ∀ {l m n} (h₁ : m ≤ l) (h₂ : n ≤ m),
       coefficientTensor (J := J) (O := O) (ell := ell) h₁ ⋙
@@ -799,8 +758,7 @@ variable {A : Type a} {B : Type b} [Category.{a'} A] [Category.{b'} B]
 
 /-- Universal scalar extension and its normalized derived adjunction for fixed functors.
 The specialization below fixes these functors to the actual coefficient tensor and
-restriction, and fixes K-flatness to the recorded sheaf tensor predicate.
-Source: Stacks Tags 06YY and 09T5 -/
+restriction, and fixes K-flatness to the recorded sheaf tensor predicate. -/
 structure DerivedCoefficientScalarExtension (T : A ⥤ B) (R : B ⥤ A)
     [T.Additive] [R.Additive] (adj : T ⊣ R) (KFlat : CochainComplex A ℤ → Prop) where
   derived : DerivedCategory A ⥤ DerivedCategory B
@@ -834,8 +792,7 @@ variable {S : Type c} [Category.{c'} S] [Abelian S] [HasDerivedCategory.{d} S]
 
 /-- The complete extension, strict representative, index coherence and mate equations.
 The parameters are specialized to concrete coefficient systems in
-`CoefficientEvaluationDerivedPackage`; they are not hypotheses of the final theorem.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tags 06XN and 09T5 -/
+`CoefficientEvaluationDerivedPackage`; they are not hypotheses of the final theorem. -/
 structure CoefficientEvaluationExtensionData where
   strictTransition : ∀ {m n : ℕ} (h : n ≤ m),
     e m ⟶
@@ -1089,8 +1046,7 @@ private theorem coefficientOrdinaryExtension (n : ℕ) :
     exact hf
 
 /-- The strict part of extension from a coefficient level. The transitions are the
-actual iterates, and the Hom formula fixes the below-level comparisons by adjunction.
-Source: Zheng, Construction 4.1, printed p. 21, the formula for `e_n!` and its adjunction -/
+actual iterates, and the Hom formula fixes the below-level comparisons by adjunction. -/
 structure CoefficientOrdinaryEvaluationData where
   strictTransition : ∀ {m n : ℕ} (h : n ≤ m),
     coefficientEvaluation (J := J) (O := O) (ell := ell) m ⟶
@@ -1110,18 +1066,7 @@ structure CoefficientOrdinaryEvaluationData where
         (adj n).homEquiv F M f ≫ (strictTransition h).app M
 
 /-- Strict extension from a single coefficient level exists with its specified tensor
-components and ordinary adjunction.
-Source: Zheng, Construction 4.1, printed p. 21
-Proof: iterate the successor transitions by the functor on the opposite sequence.
-The equivalence with all-transition systems preserves each level and all component maps.
-Use the general strict-system extension, and transport it through this equivalence.
-Its scalar functor equals the prescribed sheafified change of rings on objects and maps.
-Both scalar Hom correspondences send a morphism to its value on the sheafification image
-of `1 tensor x`, so they agree. Transfer the general extension's below-level isomorphisms,
-zero components, and Hom formula across these equalities. The equivalence's unit has
-identity components, so no correction appears in that formula. Finally additivity follows
-from the ordinary adjunction between preadditive categories. The iteration functor fixes
-identity, successor, and composite transitions exactly as required. -/
+components and ordinary adjunction. -/
 theorem coefficientOrdinaryEvaluationExtension :
     Nonempty (CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell)) := by
   classical
@@ -1141,8 +1086,7 @@ variable [∀ n : ℕ, HasDerivedCategory.{d} (coefficientLevelModules (J := J) 
 
 /-- Specialize every ambient object and functor in the coherence interface to the
 actual constant quotient rings, strict systems, scalar functors and recorded flatness
-predicates. There are no arbitrary category, tensor or transition inputs.
-Source: Zheng, Construction 4.1, p. 21 -/
+predicates. There are no arbitrary category, tensor or transition inputs. -/
 abbrev CoefficientEvaluationDerivedPackage :=
   CoefficientEvaluationExtensionData
     (coefficientEvaluation (J := J) (O := O) (ell := ell))

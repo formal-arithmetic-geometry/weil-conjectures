@@ -12,7 +12,10 @@ import WeilConjectures.Algebra.Homology.DerivedRestrictionHomologyFactors
 
 /-! # Transporting universal derived counits along coefficient equivalences
 
-Source: Stacks Project, Tags 06Y6 and 05RR. -/
+## References
+
+* Stacks Project, Tags 06Y6 and 05RR
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -22,28 +25,7 @@ open scoped TensorProduct ChangeOfRings
 namespace ModuleCat
 
 /-- Once ordinary scalar extension has been identified, its universal derived
-functor and counit transport through coefficient equivalences.
-
-Proof: termwise restriction along eR and its inverse gives inverse exact
-homotopy equivalences. Exactness preserves quasi-isomorphisms, so localization
-extends them to inverse equivalences of the chosen derived categories. Do the
-same for eB. The generator condition identifies t with the termwise tensor
-transport, hence it descends to the homotopy categories and identifies the
-underived scalar-extension functors. Conjugate L0 and its counit by the derived
-equivalences. To check its right Kan extension universal property, transport
-a test functor and transformation through the inverse equivalences, apply h0,
-and transport the unique factorization back. Uniqueness of universal left
-derived functors then gives an isomorphism with L, commuting with the counits.
-Whisker with the complex localization functors and apply B-cohomology. Exact
-restriction commutes with cohomology, giving d with the displayed source and
-target. Counit compatibility, naturality of the derived and homotopy homology
-factorizations, and exact-restriction homology naturality give its square.
-Localization uniqueness handles the two possibly distinct morphism universes.
-Zero rings and complexes are allowed; no extra algebra action, cohomology model,
-or comparison invertibility occurs in the statement.
-Source: Stacks Project, Tag 06Y6, Lemma 15.61.1, independence of choices;
-Tag 05RR, localization of homotopy categories. This is steps 1--2 and the raw
-counit part of step 3 of lem-pc-base-derived-tensor-restricted-ring-comparison. -/
+functor and counit transport through coefficient equivalences. -/
 theorem exists_derivedExtension_ringEquiv_counit
     {R₀ B₀ R B : Type u}
     [CommRing R₀] [CommRing B₀] [CommRing R] [CommRing B]

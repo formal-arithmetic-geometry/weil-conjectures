@@ -52,12 +52,14 @@ import all Mathlib.Algebra.BigOperators.Ring.Finset
 
 /-! # Derived sections and total inverse limit of strict coefficient systems
 
-Source: Stacks Project, Cohomology on Sites, Tags 0941 and 0D6E; Injectives, Tag 079P
-
 The direct image of the specified ringed sequence projection is inverse limit after
 termwise restriction. Its cone and the abelian inverse-limit cone are normalized on
 complexes. The unit equation specifies the comparison, in addition to its finite projections.
 Index `n : ℕ` denotes positive level `n+1`.
+
+## References
+
+* Stacks Project, Tags 079P, 0941, 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -348,8 +350,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
-/-- Abelian inverse limit is additive.
-Source: Stacks 0941. -/
+/-- Abelian inverse limit is additive. -/
 instance sequenceAbLimitAdditive :
     (lim : (ℕᵒᵖ ⥤ AddCommGrpCat.{w}) ⥤ AddCommGrpCat.{w}).Additive :=
   Functor.additive_of_preserves_binary_products _

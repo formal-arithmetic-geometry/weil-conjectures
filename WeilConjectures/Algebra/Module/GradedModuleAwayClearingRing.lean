@@ -11,9 +11,11 @@ public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 import Mathlib.Tactic.Ring
 
 /-!
-# GradedModuleAwayClearingRing
+# Clearing denominators for degree-zero ring restriction maps
 
-Source: Stacks Project, Constructions, Lemma 01M4.
+## References
+
+* [Stacks Project, Tag 01M4](https://stacks.math.columbia.edu/tag/01M4), part (1)(e)
 -/
 
 @[expose] public section
@@ -23,21 +25,7 @@ universe u v
 namespace LocalizedModule
 
 set_option linter.unusedVariables false in
-/-- Clearing denominators for degree-zero ring restriction maps.
-Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(e).
-
-Proof: Mathlib's homogeneous fraction representation, including its nilpotent
-case, gives y = b/g^n with b of degree n*deg(g). Write deg(f) = d+1 and put
-B = g^(n*d)*b. Graded multiplication gives B degree n*deg(g)*deg(f), so the
-explicit fraction x = B/f^(n*deg(g)) lies in R_f. Applying lambdaS to the
-localization fraction equation gives lambdaS(c/f^m)*(f/1)^m = c/1, since
-lambdaS preserves S. Apply this to x and U and raise the latter equation to n.
-Together with y*(g/1)^n = b/1, commutative multiplication and
-(d+1)*n = n*d+n prove the desired ambient equality after multiplication by
-(f/1)^(n*deg(g)) and (g/1)^n. Both factors are units, so cancellation is valid
-also with zero divisors or nilpotent g. Compatibility with rhoS and injectivity
-of the value map give the equality in R_g. The witness is explicitly constructed;
-no arbitrary object is chosen from an unproved existence theorem. -/
+/-- Clearing denominators for degree-zero ring restriction maps. -/
 theorem gradedModuleAwayClearingRing
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]

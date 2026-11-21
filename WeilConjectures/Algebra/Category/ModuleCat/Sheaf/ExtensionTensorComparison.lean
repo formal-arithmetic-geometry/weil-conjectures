@@ -9,7 +9,12 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.CategoryTheory.RingedSiteModules
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
-/-! # Restricted scalar extension as a sheaf tensor product -/
+/-! # Restricted scalar extension as a sheaf tensor product
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EK
+-/
 
 @[expose] public noncomputable section
 
@@ -117,8 +122,7 @@ private theorem restrictionSheafificationComparison_unit
 
 end
 
-/-- The canonical map from the presheaf tensor to the underlying sheaf tensor.
-Source: Stacks Project, Modules on Sites, Tag 03EK. -/
+/-- The canonical map from the presheaf tensor to the underlying sheaf tensor. -/
 def tensorPresheafUnit
     (M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
@@ -127,17 +131,7 @@ def tensorPresheafUnit
       (tensorObjIsoSheafification M N).inv.val
 
 -- Mixed tensor coefficient structures require additional elaboration.
-/-- Restricted extension of scalars is tensoring with the restricted target ring.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-
-Proof: the presheaf tensor of the restricted target ring with M has exactly the
-same section modules as restricted sectionwise scalar extension. Both restriction
-maps send s tensor m to the tensor of the two restrictions, so the identity maps
-form an isomorphism. Sheafify it over R. Restriction commutes with sheafification:
-after forgetting to abelian sheaves the comparison is the identity of the same
-sheafification, and forgetting reflects isomorphisms. Compose with the canonical
-tensor-sheafification comparison. Naturality of the sheafification unit gives the
-pure-tensor formula. No flatness or localization assumption is used. -/
+/-- Restricted extension of scalars is tensoring with the restricted target ring. -/
 theorem exists_extensionTensorComparison (φ : R ⟶ S)
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     ∃ e : (monoidalCategory R).tensorObj

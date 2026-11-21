@@ -19,7 +19,10 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Evaluation for finite-free complexes with zero differentials
 
-Source: Stacks Project, Tag 0BQY, the finite-free Hom calculation. -/
+## References
+
+* Stacks Project, Tag 0BQY, the finite-free Hom calculation; Tag 0A8X
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -48,28 +51,7 @@ private theorem finiteFree_hom_preservesHomology
 
 /-- Evaluation for a bounded finite-free zero-differential complex is an isomorphism,
 with its action on cycles expressed by two factorization identities.
-
-Source: Stacks Project, Tag 0BQY, proof of Lemma 48.15.4, finite-free Hom calculation;
-Tag 0A8X, the product-component definition of the Hom complex.
-
-Proof: Put P = Hom(E,K), with the fixed product projections. Since E has zero
-differentials, P is the product over p of factor complexes
-with term Hom(E.X p,K.X(p+n)) in degree n and differential induced by d_K. Terms outside
-the finite support of E contribute zero factors, so this is a finite product of
-complexes. A chosen free basis of E.X p identifies its internal Hom functor with
-the finite product of r copies of the identity functor. This functor is exact;
-finite products are exact in an abelian category. Thus H^n(P) is the product of
-Hom(E.X p,H^(p+n)(K)). Concentration of K removes every factor except p=-n.
-The zero differential identifies E.cycles(-n), E.homology(-n), and E.X(-n).
-The surviving product projection therefore induces f, an isomorphism.
-The projection of a P-cycle evaluated on an E-cycle is a K-cycle: this follows
-from the Hom differential formula and the zero differential of E. The kernel
-property of K.iCycles gives c and the first identity. Passing to the homology
-quotient of K gives the second identity, by the construction of f.
-These identities determine f uniquely: homology class maps are locally surjective,
-and equality of internal-Hom sections is checked on locally lifted cycle sections.
-If -n is outside the support, the surviving factor is zero and both sides vanish.
-Rank zero, the zero ring, and empty site objects obey the same calculation. -/
+-/
 theorem finiteFreeZero_homologyEvaluation
     {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}
     (R : Sheaf S CommRingCat.{u})

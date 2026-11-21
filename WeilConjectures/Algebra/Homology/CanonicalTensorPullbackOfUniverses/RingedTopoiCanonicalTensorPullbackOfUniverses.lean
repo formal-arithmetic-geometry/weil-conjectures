@@ -94,16 +94,17 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-!
 # Canonical tensor pullback with independent site universes
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E;
-Modules on Sites, Tag 03EL
+This is the general canonical representative interface, with a site-object universe `s` and an
+independent site-morphism universe `h`. Rings and modules live in `max s h`, as in the
+published K-flat interface. Both sites retain their actual Hom universe. The ring map is
+arbitrary, including coefficient quotients, and the geometric morphism can be the
+etale-to-pro-etale comparison. The pure-tensor, unit and signed total-complex normalizations
+are retained verbatim. Public imports retain both earlier interfaces for existing callers.
 
-This is the general canonical representative interface, with a site-object universe s and an
-independent site-morphism universe h. Rings and modules live in max s h, as in the
-published K-flat interface. Both sites retain their actual Hom universe. The ring map is arbitrary,
-  including coefficient quotients, and
-the geometric morphism can be the etale-to-pro-etale comparison. The pure-tensor,
-unit and signed total-complex normalizations are retained verbatim. Public imports
-retain both earlier interfaces for existing callers.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0G7E
+* Stacks Project, Modules on Sites, Tag 03EL
 -/
 
 @[expose] public section
@@ -181,17 +182,7 @@ private theorem tensorPullbackTotal_naturality
 
 set_option synthInstance.maxSize 2048 in
 -- Elaborate the full two-variable representative square.
-/-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives.
-Source: Stacks 07A4 and 0G7E
-Proof: resolve both inputs by K-flat flat-term complexes; pullback preserves that class
-by 0G7E. Their total tensor is K-flat by reassociating an acyclic test tensor and applying
-K-flatness twice, and has flat terms by tensor-flatness and countable flat sums.
-The left-derived comparison computes pullback on these representatives. Compose it
-with the inverse image of the explicit chain comparison k.totalIso and rS. The displayed
-square records exactly this construction relative to rR. Naturality of the summand
-comparisons handles both differentials and their signs. Two-variable tensor descent
-extends the square to all derived objects and makes its extension unique. The ordinary
-unit normalization is canonicalRingedTensorComparison_unit, forced by k.pure. -/
+/-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives. -/
 theorem ringedTopoiCanonicalDerivedTensorPullback
     {C D : Type s} [Category.{h} C] [Category.{h} D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
@@ -388,9 +379,7 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
 
 set_option synthInstance.maxSize 2048 in
 -- Keep both tensor representative interfaces explicit.
-/-- The canonical derived comparison selected by its unique representative characterization.
-Source: Stacks 07A4.
-The theorem specifies the natural isomorphism uniquely, so only its proof is postponed. -/
+/-- The canonical derived comparison selected by its unique representative characterization. -/
 noncomputable def ringedTopoiCanonicalDerivedTensorComparison
     {C D : Type s} [Category.{h} C] [Category.{h} D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}

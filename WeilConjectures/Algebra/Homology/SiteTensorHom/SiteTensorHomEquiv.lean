@@ -10,8 +10,11 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Currying for the sectionwise tensor on a general site
 
-Source: Stacks Project, Modules on Sites, Tag 03EO. The two module universes agree,
-while the site and coefficient universes remain independent.
+The two module universes agree, while the site and coefficient universes remain independent.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EO
 -/
 
 @[expose] public section
@@ -29,8 +32,7 @@ local notation "PMod" => PresheafOfModules.{max a b m} (R ⋙ forget₂ CommRing
 
 variable {P M N : PMod}
 
-/-- Curry a bilinear map after restricting its first argument to each further slice.
-Source: Stacks 03EO. -/
+/-- Curry a bilinear map after restricting its first argument to each further slice. -/
 noncomputable def curryApp (φ : siteTensorPresheaf P M ⟶ N) {U : C}
     (p : P.obj (op U)) :
     (PresheafOfModules.restrictOver R U).obj M ⟶
@@ -52,8 +54,7 @@ noncomputable def curryApp (φ : siteTensorPresheaf P M ⟶ N) {U : C}
     congr 2
     rw [← P.map_comp_apply, ← op_comp, Over.w]
 
-/-- Currying is linear in the first section and commutes with restriction.
-Source: Stacks 03EO. -/
+/-- Currying is linear in the first section and commutes with restriction. -/
 noncomputable def curry (φ : siteTensorPresheaf P M ⟶ N) :
     P ⟶ PresheafOfModules.homObj M N where
   app U := ModuleCat.ofHom (X := P.obj U)
@@ -103,8 +104,7 @@ noncomputable def curry (φ : siteTensorPresheaf P M ⟶ N) :
     rw [← P.map_comp_apply]
     rfl
 
-/-- Evaluation on the identity slice is bilinear.
-Source: Stacks 03EO. -/
+/-- Evaluation on the identity slice is bilinear. -/
 noncomputable def evalId (M N : PMod) (U : C) :
     (PresheafOfModules.homObj M N).obj (op U) →ₗ[R.obj (op U)]
       M.obj (op U) →ₗ[R.obj (op U)] N.obj (op U) where
@@ -116,8 +116,7 @@ noncomputable def evalId (M N : PMod) (U : C) :
       PresheafOfModules.sectionsSMul_app_apply, PresheafOfModules.overSections_coe_apply]
     simp
 
-/-- Uncurry by evaluating a slice homomorphism on the identity slice.
-Source: Stacks 03EO. -/
+/-- Uncurry by evaluating a slice homomorphism on the identity slice. -/
 noncomputable def uncurry (ψ : P ⟶ PresheafOfModules.homObj M N) :
     siteTensorPresheaf P M ⟶ N where
   app U := ModuleCat.ofHom (TensorProduct.lift
@@ -134,10 +133,7 @@ noncomputable def uncurry (ψ : P ⟶ PresheafOfModules.homObj M N) :
         (PresheafOfModules.naturality_apply (ψ.app U p)
           (Over.homMk f.unop : Over.mk f.unop ⟶ Over.mk (𝟙 _)).op x)
 
-/-- The sectionwise tensor–slice-Hom bijection.
-Source: Stacks 03EO. Its inverse evaluates on the identity slice. Restriction
-naturality identifies evaluation on every other slice with the restriction of
-that evaluation, proving the second inverse identity. Pure tensors prove the first -/
+/-- The sectionwise tensor–slice-Hom bijection. -/
 noncomputable def presheafEquiv (P M N : PMod) :
     (siteTensorPresheaf P M ⟶ N) ≃ (P ⟶ PresheafOfModules.homObj M N) where
   toFun := curry
@@ -178,9 +174,7 @@ set_option hygiene false in
 local notation "SMod" => SheafOfModules.{max a b m}
   ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)
 
-/-- Sheafification followed by sectionwise currying.
-Source: Stacks 03EO. The sheafification adjunction and the presheaf currying
-bijection compose; forgetting sheaf descent is fully faithful -/
+/-- Sheafification followed by sectionwise currying. -/
 noncomputable def equiv (P M N : SMod) :
     ((siteSheafTensorRight M).obj P ⟶ N) ≃ (P ⟶ homObj M N) :=
   ((PresheafOfModules.sheafificationAdjunction (𝟙
@@ -192,9 +186,7 @@ noncomputable def equiv (P M N : SMod) :
         left_inv := fun _ ↦ rfl
         right_inv := fun _ ↦ rfl })
 
-/-- The curry formula on every further slice.
-Source: Stacks 03EO. The sheafification Hom bijection precomposes with its unit,
-which is exactly the definition of a local pure tensor -/
+/-- The curry formula on every further slice. -/
 theorem equiv_apply (P M N : SMod) (φ : (siteSheafTensorRight M).obj P ⟶ N)
     (U : Cᵒᵖ) (p : P.val.obj U) (W : Over U.unop) (x : M.val.obj (op W.left)) :
     (((equiv P M N φ).val.app U p).app (op W)) x =
@@ -202,9 +194,7 @@ theorem equiv_apply (P M N : SMod) (φ : (siteSheafTensorRight M).obj P ⟶ N)
         (siteSheafTensorTmul P M (op W.left) (P.val.map W.hom.op p) x) := by
   rfl
 
-/-- Currying commutes with precomposition in its first factor.
-Source: Stacks 03EO. Both sides restrict the first section, apply the given
-morphism, and evaluate the same bilinear map -/
+/-- Currying commutes with precomposition in its first factor. -/
 theorem equiv_naturality {P P' M N : SMod} (f : P' ⟶ P)
     (φ : (siteSheafTensorRight M).obj P ⟶ N) :
     equiv P' M N ((siteSheafTensorRight M).map f ≫ φ) = f ≫ equiv P M N φ := by

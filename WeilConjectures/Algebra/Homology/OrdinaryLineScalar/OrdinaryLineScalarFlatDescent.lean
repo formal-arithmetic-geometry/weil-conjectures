@@ -125,7 +125,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-! # Descent of the ordinary scalar and line comparison
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0G7E and 06YY.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4, 0G7E, 06YY, 06YS and 06YU
 -/
 
 @[expose] public noncomputable section
@@ -225,18 +227,7 @@ private theorem flat_restriction_fullyFaithful :
     (Functor.isoWhiskerLeft P.ι (DerivedCategory.quotientCompQhIso A)))⟩
 
 set_option linter.flexible false in
-/-- Descend a fixed ordinary comparison with exact signed-line tensors.
-Source: Stacks 06YY and 07A4, via resolving-class localization 06YS and 06YU.
-Proof: restrict both composite functors to flat-term K-flat complexes. The scalar
-computation maps are invertible there by the universal derived scalar computation;
-line tensors are computed termwise. Tensoring by a line preserves flat-term K-flat
-complexes and scalar extension preserves them even for a nonflat ring map. Conjugate
-the termwise ordinary comparison by these computation isomorphisms. Its naturality
-for chain maps gives naturality for homotopies and for roofs, since the backward
-quasi-isomorphism is inverted. The resolving-class localization equivalence therefore
-descends it and its inverse to a natural isomorphism on derived categories. The
-representative equation is precisely the conjugation defining this isomorphism.
-No evaluation compatibility or signed-power scalar normalization is used here. -/
+/-- Descend a fixed ordinary comparison with exact signed-line tensors. -/
 theorem ordinary_scalar_line_flat_descent
     (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
       (J := Scheme.ProEt.topology X) α)

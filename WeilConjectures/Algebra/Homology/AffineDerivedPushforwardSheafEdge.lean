@@ -27,7 +27,13 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCo
 
 /-! # The affine derived edge before choosing module coordinates
 
-Source: Stacks Project, Tags 0AVW and 08D4. -/
+## References
+
+* Stacks Project, Tag 01EO
+* Stacks Project, Tag 01XJ
+* Stacks Project, Tag 0AVW
+* Stacks Project, Tag 08D4
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -72,11 +78,7 @@ private theorem map_quotientCompQhIso_inv_comp {A E : Type*} [Category* A] [Abel
   change G.map (𝟙 (DerivedCategory.Q.obj K)) ≫ f = f
   rw [G.map_id, Category.id_comp]
 
-/-- Affine direct image is acyclic on quasi-coherent modules.
-Source: Stacks, Tags 01EO and 01XJ; the Čech dimension-shifting argument of
-WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism.
-The proof is kept here because that module's finite-complex import reaches
-this module in the current library. -/
+/-- Affine direct image is acyclic on quasi-coherent modules. -/
 private theorem affineDirectImage_rightAcyclic {X Y : Scheme.{u}}
     (f : X ⟶ Y) [IsAffineHom f] [HasInjectiveResolutions X.Modules]
     (M : X.Modules) [M.IsQuasicoherent] :
@@ -111,24 +113,7 @@ attribute [local irreducible] RingedSpace.moduleDirectImage
 
 /-- The sheaf-level affine edge is compatible with the actual derived unit on an
 exact family of quasi-coherent sheaves. No tilde/Gamma coordinates or ordinary
-comparison isomorphism occur here.
-Source: Stacks Project, Tag 0AVW, proof of lemma-affine-morphism-equivalence,
-and Tag 08D4, lemma-application-nice-K-injective with bound one.
-
-Proof: On the inverse image of an affine open, higher cohomology of a
-quasi-coherent module vanishes. Apply the bound-one truncation calculation of
-08D4 to a K-injective resolution, in degree i. Its cycle-class comparison
-identifies cohomology of derived sections with sections of the cohomology
-sheaf. These comparisons commute with restrictions and derived morphisms;
-sheafifying them gives the edge f_*H^i -> H^i Rf_* on D_QCoh. For an exact
-functor F with quasi-coherent values, compare the complex F(C) with its
-K-injective resolution. The comparison from termwise pushforward is the
-right-derived unit. Exactness of F and f_*F identifies its source cohomology
-with F(H^i C) and f_*F(H^i C), respectively. On cycles both resulting arrows
-send the same section to its class in the resolution; the cokernel universal
-property proves the displayed equality. Restriction-compatible equality on
-the affine basis proves equality of sheaf morphisms. This applies to unbounded
-C by 08D4; neither the zero ring nor zero complexes need to be excluded. -/
+comparison isomorphism occur here. -/
 theorem exists_affineDerivedPushforwardSheafEdge
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ) :
   ∃ ε : (schemeDerivedQCohProperty (Spec (.of A))).ι ⋙

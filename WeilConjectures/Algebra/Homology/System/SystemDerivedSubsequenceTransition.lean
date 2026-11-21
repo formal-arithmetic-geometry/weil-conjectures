@@ -11,7 +11,10 @@ public import WeilConjectures.Algebra.Homology.System.SystemDerivedSubsequence
 
 /-! # The actual derived transitions of strict systems
 
-Source: Zheng, Construction 4.1; Stacks 015F.
+## References
+
+* Stacks Project, Tag 015F
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -26,13 +29,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- Selected derived evaluations intertwine the actual derived transition maps.
-Source: Zheng 4.1; Stacks 015F
-Proof: localization detects equality. On each cochain representative, cancel the
-exact evaluation and restriction factorization isomorphisms. The selected-evaluation
-factorization and transition formulas reduce the result to the same strict transition
-at the selected levels. Naturality moves the subsequence factorization through the
-transition, and the strict selected transition is definitionally the original one. -/
+/-- Selected derived evaluations intertwine the actual derived transition maps. -/
 theorem systemDerivedSubsequenceTransition (r : ℕ ↪o ℕ) {a b : ℕ} (h : a ≤ b)
     (M : DerivedCategory (StrictRingSystem B)) :
     (systemDerivedSubsequenceEvaluation B r b).hom.app M ≫

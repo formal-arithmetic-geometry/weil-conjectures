@@ -26,24 +26,7 @@ open AlgebraicGeometry.Scheme.ProjectionRestriction
 namespace SheafOfModules.OpenTensorNormalization
 
 /-- The displayed restriction square on objects represented by resolving
-complexes.
-
-Source: the representative calculation in
-`literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/
-fix-prop-coherence.proof.md`.
-Proof: the site-square inverse is the canonical pullback comparison (first
-projection by `SiteSquare.first`, second because it is a map over `X'`).  By the
-open pins' and pull pins' section equations, `Operations.rightSections` and
-lem-sf-fixed-scalar-open-square-section-mate, the ordinary right-adjoint square
-holds sectionwise, hence as module morphisms.  The equivalence-square inverse
-mate lemma, `FinitePullPin.mate` and `Operations.ordinaryTheta_mate` give the
-ordinary identity `θ₀⁻¹ H(r⁰) (c_h J) = (I' c_g) (r'⁰ F_g) E_{U'}(b₀)`.  The
-derived square of the exact pullbacks is the localization of `b₀`.  On `Q P`,
-postcompose both sides with the invertible comparison
-`B_R = φ_{I'} D(I')(a_g R)` (`Operations.gPull.flat`); `theta_model`, the pull
-and open model equations and naturality of `a_h` reduce both sides to the
-localization of the two sides of the ordinary identity followed by the same
-exact factors; cancel `B_R`. -/
+complexes. -/
 theorem finite_base_change_restriction_representative
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

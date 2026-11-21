@@ -14,7 +14,9 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShiftSequence
 
 /-! # Inverting the transition on the fibre of a scalar tower
 
-Source: Stacks Project, Tags 0941 and 0A0E.
+## References
+
+* Stacks Project, Tags 0941 and 0A0E
 -/
 
 @[expose] public noncomputable section
@@ -51,15 +53,7 @@ private noncomputable def coneContract (P : CochainComplex A ℤ) (d c e h : P �
     abel
 
 /-- Multiplication by the transition on the Roos fibre of a constant-object scalar
-system is a quasi-isomorphism.
-
-Source: Stacks Project, Tags 0941 and 0A0E
-Proof: let a be the diagonal scalar on the product and b the index shift. They commute.
-The fibre is Cone(-(1-ba))[-1]. Both a and b induce diagonal cone maps. The identity
-minus their composite is nullhomotopic, with off-diagonal homotopy minus the identity
-of the product. Thus the two induced cone maps are homotopy inverses. Shifting their
-homotopy equivalence gives the assertion. No condition on the scalar is needed;
-in particular zero and invertible scalars are included. -/
+system is a quasi-isomorphism. -/
 private theorem scalarTowerProductFibre_quasiIso (P : CochainComplex A ℤ) (μ : End P) :
     let V := ∏ᶜ (fun _ : ℕ ↦ P)
     let a : V ⟶ V := Limits.Pi.map (fun _ : ℕ ↦ μ.asHom)
@@ -111,12 +105,7 @@ private theorem scalarTowerProductFibre_quasiIso (P : CochainComplex A ℤ) (μ 
   have hc : QuasiIso c := e.quasiIso_hom
   exact ⟨wa, (quasiIso_shift_iff c (-1)).2 hc⟩
 
-/-- The scalar acts invertibly on the fibre of its own inverse tower.
-Source: Stacks Project, Tags 0941 and 0A0E
-Proof: the diagonal scalar on the product is scalar multiplication of the identity.
-The induced diagonal cone map is scalar multiplication on the cone, since its two
-components have this value. Its shift is scalar multiplication on the fibre. Apply
-the product-shift homotopy equivalence proved above. -/
+/-- The scalar acts invertibly on the fibre of its own inverse tower. -/
 theorem scalarTowerProductFibre_scalar_quasiIso
     {R : Type*} [Ring R] [Linear R A] (P : CochainComplex A ℤ) (r : R) :
     let V := ∏ᶜ (fun _ : ℕ ↦ P)

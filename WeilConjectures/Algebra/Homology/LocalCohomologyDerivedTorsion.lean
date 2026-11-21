@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.Homology.QuotientHomComplexColimit
 
 /-! # Ext-colimit local cohomology and derived ideal-power torsion
 
-Source: Stacks Project, Tag 0954, Lemma 47.8.2.
+## References
+
+* Stacks Project, Tag 0954 (Lemma 47.8.2)
 -/
 
 @[expose] public section
@@ -26,26 +28,7 @@ open CategoryTheory
 
 namespace ModuleCat
 
-/-- The Ext-colimit computes the right derived functors of ideal-power torsion.
-Source: Stacks Project, Tag 0954, Lemma 47.8.2.
-
-Proof: Choose an injective resolution M → E. For each n, compute Mathlib's
-projectively defined Ext by a projective resolution P of R/J^n. The first-quadrant
-double complex Hom(P,E) compares Hom(P,M) with Hom(R/J^n,E): exactness of
-Hom(P^i,-) and Hom(-,E^j) makes both augmentations cohomology isomorphisms.
-Projective comparison maps lifting the quotient transitions, unique up to homotopy,
-show that these identifications are compatible with the directed system.
-Thus Ext^q(R/J^n,M) is naturally H^q(Hom(R/J^n,E)). Evaluation at 1 identifies
-Hom(R/J^n,E^k) with
-the submodule of E^k annihilated by J^n. The transition induced by
-R/J^(n+1) → R/J^n is the inclusion of these submodules, so their filtered
-colimit is precisely Ideal.primaryComponent E^k J. These identifications
-commute with the differential induced by E. Filtered colimits of modules
-are exact and therefore commute with cohomology. Thus the colimit of the
-Ext groups is the cohomology of the torsion subcomplex of E, which computes
-the displayed right derived functor. The exponent zero contributes the zero
-submodule and does not affect the colimit. This works also for J=0 and J=R,
-when the torsion functor is respectively the identity and zero. -/
+/-- The Ext-colimit computes the right derived functors of ideal-power torsion. -/
 theorem nonempty_localCohomology_iso_derived_torsion
     {R : Type u} [CommRing R] (J : Ideal R) (hJ : J.FG)
     (M : ModuleCat.{u} R) (q : ℕ) :

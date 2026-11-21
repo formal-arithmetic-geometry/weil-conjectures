@@ -15,8 +15,9 @@ import all WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 /-!
 # Endpoint calculation for the strict vertical cutoff comparison
 
-Source: Stacks Project, Homology Tag 0118 (homology-section-truncations),
-canonical truncations and the two-term kernel argument.
+## References
+
+* [Stacks Project, Tag 0118](https://stacks.math.columbia.edu/tag/0118)
 -/
 
 @[expose] public section
@@ -230,25 +231,7 @@ private lemma cutoff_kernel_isZero_away
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- The kernel of the strict cutoff comparison is a two-term complex
-with invertible differential.
-Source: Stacks Project, Homology Tag 0118 (homology-section-truncations),
-canonical truncations; the kernel identification is explicit.
-
-Proof: write E for L extended by zero and I for image of E.d (a - 1) a.
-Monicity of the upper cutoff inclusion identifies g with the nested inclusion.
-Evaluation preserves cokernels. Thus cokernel g is zero below a - 1, is I
-in degree a - 1, and agrees with the upper cutoff from degree a onward.
-By hq, the comparison is zero in degree a - 1. At degree a it is the
-opcycles quotient when a < b - 1, and the cycles-to-homology quotient when
-a = b - 1. Both have kernel I. Above a, q is invertible on the nonzero
-components; beyond the upper cutoff both sides are zero. Evaluation preserves
-kernels, so the kernel has I in degrees a - 1 and a and zero elsewhere.
-The chain map equation for the kernel inclusion identifies its differential
-with the identity on I, using the image factorization of E.d (a - 1) a.
-It is therefore invertible. Since 0 < a, both indices are nonnegative and
-restriction preserves them: they are a.toNat - 1 and a.toNat. For a = 1
-these are 0 and 1; for b = a + 1 the image lies in cycles because d squared
-is zero. Zero I gives the invertible zero-to-zero differential as required. -/
+with invertible differential. -/
 theorem verticalCutoff_comparison_kernel_twoTerm
     (L : CochainComplex C ℕ) (a b : ℤ) (hab : a < b) (ha : 0 < a)
     (g : (verticalCutoff a).obj L ⟶ (verticalCutoff b).obj L)

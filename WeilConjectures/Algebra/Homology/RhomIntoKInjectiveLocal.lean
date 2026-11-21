@@ -22,12 +22,15 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 /-!
 # Localized derived morphisms into a K-injective complex
 
-Source: Stacks Project, Lemma 21.34.6, Tag 0A94
-
 ## Main statements
 
 * `module_overFunctor_preservesZero`: the zero-morphism compatibility needed to restrict complexes.
 * `rhom_into_kinjective_local`: the canonical localized derived-morphism bijection.
+
+## References
+
+* Stacks Project, Lemma 21.34.6, Tag 0A94
+* Stacks Project, Lemma 21.20.1 (restriction of module sheaves, as used in Tag 0A94)
 -/
 
 @[expose] public section
@@ -39,11 +42,7 @@ open CategoryTheory Opposite
 namespace CategoryTheory
 
 
-/-- Restriction of module sheaves preserves zero morphisms.
-Source: Stacks Project, Lemma 21.20.1, as used in Tag 0A94
-
-Proof: restriction evaluates a morphism at objects of the localized site. The restriction
-of a zero morphism therefore has zero at every component, and is the zero morphism. -/
+/-- Restriction of module sheaves preserves zero morphisms. -/
 theorem module_overFunctor_preservesZero
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) (U : C) :
@@ -55,19 +54,7 @@ theorem module_overFunctor_preservesZero
 
 /-- Degree-zero cocycles of the sections of the sheaf Hom complex are precisely localized
 chain maps. The induced map on degree-zero cohomology sends a chain map to its image under
-localization and is bijective.
-Source: Stacks Project, Lemma 21.34.6, Tag 0A94
-
-Proof: restriction to `C/U` is right adjoint to exact extension by zero in module categories
-(lem-pur-site-restriction-module-adjunction-exact). Thus restriction preserves K-injective
-complexes (lem-weil-pbc-right-adjoint-preserves-kinjective). The product projections of
-`homComplex` identify degree-zero cocycles with chain maps; the differential in degree
-minus one identifies coboundaries with null-homotopies (def-pur-hom-complex). Consequently
-its zeroth cohomology is the Hom group in the localized homotopy category. The K-injective
-comparison (lem-weil-pbc-kinjective-hom-derived) identifies this Hom group with morphisms in
-the derived category, by the map induced by localization. This proves well-definedness and
-bijectivity. The component equation below specifies the cocycle identification, so the
-result concerns the canonical map, independently of choices of product or homology objects. -/
+localization and is bijective. -/
 theorem rhom_into_kinjective_local
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{max u v}) (U : C)

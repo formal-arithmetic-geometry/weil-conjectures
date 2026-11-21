@@ -17,7 +17,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 /-!
 # Quasi-isomorphisms for mixed total tensor
 
-Source: Stacks Project, More on Algebra, Tags 064L and 06Y0.
+## References
+
+* Stacks Project, More on Algebra, Tags 064L and 06Y0
 -/
 
 @[expose] public section
@@ -28,20 +30,7 @@ open CategoryTheory
 
 namespace CochainComplex
 
-/-- Mixed total tensor preserves quasi-isomorphisms in the two K-flat situations.
-Source: Stacks Project, Tags 064L and 06Y0.
-
-Proof: Restrict the A-complexes to R. The canonical associativity isomorphism
-N ⊗_A (A ⊗_R E) ≅ E ⊗_R N, applied in each bidegree of the flipped
-mixed tensor, identifies its restriction with the ordinary total tensor.
-Restriction of scalars is exact and reflects isomorphisms, so it detects
-quasi-isomorphisms. For the first clause choose an R-K-flat resolution K → N
-of the restricted complex. In the tensor square for a and this resolution,
-the two vertical arrows and the top arrow are quasi-isomorphisms by K-flatness;
-two-of-three gives the bottom arrow. For the second clause K-flatness of F
-applied to the restricted quasi-isomorphism u gives the result directly.
-The termwise identifications commute with the signed differentials and both
-variable maps. No flatness of A over R is required. -/
+/-- Mixed total tensor preserves quasi-isomorphisms in the two K-flat situations. -/
 theorem mixedTensor_kFlat_quasiIso {R A : Type u} [CommRing R] [CommRing A]
     (f : R →+* A) :
     let B := (ModuleCat.mixedTensor f).flip.map₂CochainComplex

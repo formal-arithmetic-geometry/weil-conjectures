@@ -43,12 +43,15 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 
 /-! # Total tensor and K-flatness for ringed slice extension
 
-Source: Stacks Project, Modules on Sites, Tag 0E8I (lemma-j-shriek-and-tensor),
-Homology, Tag 012Z, and Cohomology on Sites, Tags 06YN and 06YS
-
 The total tensor is Mathlib's direct-sum total cochain complex. Both module functors
 are the existing localized-system functors, applied termwise. The site object and
 morphism universes remain independent; coefficients live in a universe containing both.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI, 03DJ, 04IX, 0E8I and Section 03EK
+* Stacks Project, Homology, Tags 010N and 012Z
+* Stacks Project, Cohomology on Sites, Tags 06YN and 06YS
 -/
 
 @[expose] public noncomputable section
@@ -68,8 +71,7 @@ namespace SheafOfModules
 variable {S : Type c} [Category.{v} S] {J : GrothendieckTopology S}
   (R : Sheaf J CommRingCat.{max c v r}) (U : S)
 
-/-- The recorded ringed-slice functor, with canonical sheafification instances explicit.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I -/
+/-- The recorded ringed-slice functor, with canonical sheafification instances explicit. -/
 def ringedOpenExtension :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
     hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
@@ -81,8 +83,7 @@ def ringedOpenExtension :=
     wEqualsLocallyBijective_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)
   localizedSystemExtension.{c, v, r} R U
 
-/-- The recorded ringed-slice functor, with canonical sheafification instances explicit.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I -/
+/-- The recorded ringed-slice functor, with canonical sheafification instances explicit. -/
 def ringedOpenRestriction :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
     hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
@@ -94,8 +95,7 @@ def ringedOpenRestriction :=
     wEqualsLocallyBijective_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)
   localizedSystemRestriction.{c, v, r} R U
 
-/-- The recorded ringed-slice functor, with canonical sheafification instances explicit.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I -/
+/-- The recorded ringed-slice functor, with canonical sheafification instances explicit. -/
 def ringedOpenSheafTensorLeft :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
     hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
@@ -107,8 +107,7 @@ def ringedOpenSheafTensorLeft :=
     wEqualsLocallyBijective_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)
   ringedSliceTensorLeft.{c, max c r, v} J R U
 
-/-- The recorded ringed-slice functor, with canonical sheafification instances explicit.
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 0E8I -/
+/-- The recorded ringed-slice functor, with canonical sheafification instances explicit. -/
 def ringedOpenSheafTensorRight :=
   letI : HasSheafify J AddCommGrpCat.{max c v r} :=
     hasSheafify_coefficientUniverse.{c, v, max c v r} (J := J)
@@ -120,8 +119,7 @@ def ringedOpenSheafTensorRight :=
     wEqualsLocallyBijective_coefficientUniverse.{max c v, v, max c v r} (J := J.over U)
   ringedSliceTensorRight.{c, max c r, v} J R U
 
-/-- Termwise application of the actual direct-sum extension followed by sheafification.
-Source: Stacks Project, Modules on Sites, Tags 03DI--03DJ and 0E8I -/
+/-- Termwise application of the actual direct-sum extension followed by sheafification. -/
 abbrev ringedOpenExtensionOnComplexes :
     CochainComplex (SheafOfModules.{max c v r}
       (((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj
@@ -133,8 +131,7 @@ abbrev ringedOpenExtensionOnComplexes :
   letI := localizedSystemExtensionAdditive.{c, v, r} R U
   (localizedSystemExtension.{c, v, r} R U).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- Termwise restriction to the localized ringed site.
-Source: Stacks Project, Modules on Sites, Tags 04IX and 0E8I -/
+/-- Termwise restriction to the localized ringed site. -/
 abbrev ringedOpenRestrictionOnComplexes :
     CochainComplex (SheafOfModules.{max c v r}
       ((sheafCompose J (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj R)) ℤ ⥤
@@ -146,16 +143,14 @@ abbrev ringedOpenRestrictionOnComplexes :
   letI := localizedSystemRestrictionAdditive.{c, v, r} R U
   (localizedSystemRestriction.{c, v, r} R U).mapHomologicalComplex (ComplexShape.up ℤ)
 
-/-- The existing sheaf tensor with its coefficient ring specified explicitly.
-Source: Stacks Project, Modules on Sites, Section 03EK -/
+/-- The existing sheaf tensor with its coefficient ring specified explicitly. -/
 def ringedOpenTensor {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r}) :=
   @curriedTensor (SheafOfModules.{max c v r}
     ((sheafCompose K (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A)) _
     (cochainModulesMonoidal.{c, v, max c v r} A)
 
-/-- Zero-map preservation for the specified existing tensor.
-Source: Stacks Project, Modules on Sites, Section 03EK -/
+/-- Zero-map preservation for the specified existing tensor. -/
 instance ringedOpenTensorZero {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r}) :
     (ringedOpenTensor.{c, v, r} A).PreservesZeroMorphisms :=
@@ -165,8 +160,7 @@ instance ringedOpenTensorZero {T : Type c} [Category.{v} T] {K : GrothendieckTop
     ((sheafCompose K
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A))).PreservesZeroMorphisms)
 
-/-- Zero-map preservation in the second variable of the existing tensor.
-Source: Stacks Project, Modules on Sites, Section 03EK -/
+/-- Zero-map preservation in the second variable of the existing tensor. -/
 instance ringedOpenTensorObjZero {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r})
     (M : SheafOfModules.{max c v r}
@@ -178,8 +172,7 @@ instance ringedOpenTensorObjZero {T : Type c} [Category.{v} T] {K : Grothendieck
     ((sheafCompose K
       (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj A))).obj M).PreservesZeroMorphisms)
 
-/-- The existing total tensor has the required direct sums on this small ringed site.
-Source: Stacks Project, Homology, Tag 012Z -/
+/-- The existing total tensor has the required direct sums on this small ringed site. -/
 instance ringedOpenHasTotalTensor {T : Type c} [Category.{v} T]
     {K : GrothendieckTopology T} (A : Sheaf K CommRingCat.{max c v r})
     (P C : CochainComplex (SheafOfModules.{max c v r}
@@ -191,8 +184,7 @@ instance ringedOpenHasTotalTensor {T : Type c} [Category.{v} T]
     wEqualsLocallyBijective_coefficientUniverse.{c, v, max c v r} (J := K)
   inferInstance
 
-/-- The existing total tensor bifunctor, with its canonical instances supplied explicitly.
-Source: Stacks Project, Homology, Tag 012Z -/
+/-- The existing total tensor bifunctor, with its canonical instances supplied explicitly. -/
 def ringedOpenTotalTensor {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r}) :=
   letI := ringedOpenTensorZero.{c, v, r} A
@@ -200,8 +192,7 @@ def ringedOpenTotalTensor {T : Type c} [Category.{v} T] {K : GrothendieckTopolog
   letI := ringedOpenHasTotalTensor.{c, v, r} A
   (ringedOpenTensor.{c, v, r} A).map₂CochainComplex
 
-/-- The canonical insertion of one bidegree into the existing direct-sum total tensor.
-Source: Stacks Project, Homology, Tag 012Z -/
+/-- The canonical insertion of one bidegree into the existing direct-sum total tensor. -/
 def ringedOpenTensorι {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r})
     (P C : CochainComplex (SheafOfModules.{max c v r}
@@ -214,8 +205,7 @@ def ringedOpenTensorι {T : Type c} [Category.{v} T] {K : GrothendieckTopology T
   letI := ringedOpenHasTotalTensor.{c, v, r} A
   CochainComplex.ιMapBifunctor P C (ringedOpenTensor.{c, v, r} A) p q n h
 
-/-- The simultaneous map of the existing total tensor bifunctor on two chain maps.
-Source: Stacks Project, Homology, Tag 012Z -/
+/-- The simultaneous map of the existing total tensor bifunctor on two chain maps. -/
 def ringedOpenTotalTensorMap {T : Type c} [Category.{v} T] {K : GrothendieckTopology T}
     (A : Sheaf K CommRingCat.{max c v r})
     {P P' C C' : CochainComplex (SheafOfModules.{max c v r}
@@ -226,8 +216,7 @@ def ringedOpenTotalTensorMap {T : Type c} [Category.{v} T] {K : GrothendieckTopo
   (((ringedOpenTotalTensor.{c, v, r} A).map a).app C) ≫
     ((ringedOpenTotalTensor.{c, v, r} A).obj P').map b
 
-/-- The recorded sheaf comparison, expressed in the existing monoidal tensor.
-Source: Stacks Project, Modules on Sites, Tag 0E8I -/
+/-- The recorded sheaf comparison, expressed in the existing monoidal tensor. -/
 def ringedOpenSheafComparison
     (θ : ringedOpenSheafTensorLeft.{c, v, r} R U ≅
       ringedOpenSheafTensorRight.{c, v, r} R U)
@@ -921,37 +910,7 @@ set_option maxHeartbeats 200000 in
 -- The comparison simultaneously tracks the three independent universes.
 /-- The sheaf tensor comparison extends to unbounded direct-sum total tensor complexes,
 with its prescribed map on every summand and naturality in both chain maps. Extension
-also preserves K-flat complexes and K-flat resolutions.
-
-Source: Stacks Project, Modules on Sites, Tag 0E8I (lemma-j-shriek-and-tensor),
-Homology, Tags 012Z and 010N, and Cohomology on Sites, Tags 06YN and 06YS
-
-Proof:
-1. In each degree n use the extension/restriction adjunction
-   (lem-pur-site-restriction-module-adjunction-exact) and preservation of colimits by
-   a left adjoint (situation-conventions) to commute extension
-   with the sum over p+q=n. Compose the inverse coproduct comparison with the sum of
-   the sheaf tensor isomorphisms (lem-weil-pbc-ringed-slice-extension-tensor). This
-   gives precisely the displayed equation on each insertion of a tensor summand.
-2. Naturality of the sheaf comparison for (d_P,1) and (1,d_C) identifies the two
-   differential components. Additivity of extension preserves the sign (-1)^p.
-   Thus these degreewise isomorphisms commute with d_P tensor 1 + (-1)^p 1 tensor d_C
-   (def-pc-tensor-complex-sheaves). The same equations for arbitrary chain maps give
-   the displayed naturality. Each source summand has just these two differential
-   components, so no infinite sum into a fixed summand occurs.
-3. The tensor symmetry sends the (a,b) summand to (b,a), multiplying the ordinary
-   sheaf tensor interchange (def-pur-sheaf-tensor-product) by (-1)^(ab). For dy tensor x
-   the two differential coefficients are (-1)^(ab), and for y tensor dx they are
-   (-1)^(ab+b)=(-1)^((a+1)b). The composite of two interchanges is the identity.
-4. For acyclic C, exact restriction makes j^*C acyclic by the natural homology
-   comparison (lem-sp-exact-functor-preserves-homology). K-flatness of P makes
-   Tot(j^*C tensor P) acyclic (def-pc-kflat-complex). Apply the signed interchange,
-   exact extension, the total comparison, and the signed interchange again. This
-   proves Tot(C tensor j_!P) acyclic, the defining K-flatness test.
-5. For a K-flat resolution f:P -> H, exact extension preserves the quasi-isomorphism:
-   the homology comparison identifies H^n(j_!f) with j_!H^n(f), which is invertible.
-   Step 4 supplies K-flatness of its source. All sums are direct sums indexed by
-   integer pairs; neither boundedness nor constancy of R has been used. -/
+also preserves K-flat complexes and K-flat resolutions. -/
 theorem ringedOpen_totalTensor_kFlat :
     (∃ θ : ringedOpenSheafTensorLeft.{c, v, r} R U ≅
         ringedOpenSheafTensorRight.{c, v, r} R U,

@@ -272,14 +272,11 @@ lemma baseChangePairing_apply {K V W : Type*} [Field K] [Algebra ℤ_[p] K] [Add
     (b : B) : baseChangePairing hι hκ P (ι a) (κ b) = algebraMap ℤ_[p] K (P a b) := by
   simp [baseChangePairing, IsBaseChange.lift_eq]
 
-/-- **Transport of finite-level duality to `K`** (the linear algebra of blueprint
-`theorem-poincare-duality--6`). Let `A`, `B` be finitely generated `ℤ_p`-modules with
-endomorphisms `F_A`, `F_B`, and `V`, `W` their extensions of scalars to a field `K ⊇ ℤ_p` with
-endomorphisms `F_V`, `F_W` extending them. Suppose that for every `m` there are maps
-`ρ : A ⟶ Eₘ`, `σ : B ⟶ Fₘ` with kernels in `pᵐ A`, `pᵐ B` and images containing `pᵉ Eₘ`,
-`pᵉ Fₘ`, and a pairing `Qₘ : Eₘ × Fₘ ⟶ ℤ_p / pᵐ`, nondegenerate on both sides, whose
-restriction along `ρ`, `σ` is a `c`-similitude. Then there is a perfect pairing `V × W ⟶ K`
-which is a `c`-similitude for `F_V`, `F_W`. -/
+/-- **Transport of finite-level duality to `K`.** Let `A`, `B` be finitely generated
+`ℤ_p`-modules with endomorphisms `F_A`, `F_B`, and `V`, `W` their extensions of scalars to a
+field `K ⊇ ℤ_p`. If the finite-level data `ρ`, `σ`, `Qₘ` satisfy the stated kernel, image and
+similitude conditions, then there is a perfect pairing `V × W ⟶ K` which is a
+`c`-similitude for the induced endomorphisms. -/
 theorem exists_isPerfPair_of_finiteLevel
     (hkerA : ∀ m a, ρ m a = 0 → ∃ a', a = (p : ℤ_[p]) ^ m • a')
     (hkerB : ∀ m b, σ m b = 0 → ∃ b', b = (p : ℤ_[p]) ^ m • b')

@@ -12,8 +12,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Monoidal change of coefficients for module presheaves
 
-Source: Stacks Project, Modules on Sites, section Presheaves of modules and
-lemma-tensor-product-pullback, applied before sheafification.
+## References
+
+* Stacks Project, Modules on Sites, section Presheaves of modules
 -/
 
 @[expose] public noncomputable section
@@ -221,25 +222,7 @@ private def sectionMonoidal : (sectionExtension φ).Monoidal :=
 end
 
 /-- Change of coefficients on one category is strong monoidal, with coefficient
-homomorphism as the transpose of its inverse unit constraint.
-Source: Stacks Project, sites-modules.tex, section-presheaves-modules and
-lemma-tensor-product-pullback.
-
-Proof: construct extension sectionwise as S(X) tensor over R(X) with M(X).
-Its restriction sends s tensor m to S(f)(s) tensor M(f)(m); naturality of the
-coefficient homomorphism proves balancing. Sectionwise tensor adjunctions give
-an adjunction to restriction of coefficients, naturally in both presheaves.
-Uniqueness of left adjoints identifies this construction with the chosen pullback,
-compatibly with the adjunction. Its inverse unit constraint is multiplication
-s tensor r to s times phi(r), and its inverse tensor constraint sends
-s tensor (m tensor n) to (s tensor m) tensor (1 tensor n). The inverse map sends
-(s tensor m) tensor (t tensor n) to st tensor (m tensor n). The balancing relations
-prove these formulas well-defined and inverse on generators. Restricting each
-factor proves naturality. Associativity sends a triple pure tensor to the same
-triple with the same scalar coefficient; the unit laws are multiplication by one.
-Transport this strong monoidal structure along the adjunction comparison. The
-transpose of multiplication sends r to phi(r), as asserted. No flatness, topology,
-nonzero-ring, or nonempty-category hypothesis occurs in this calculation. -/
+homomorphism as the transpose of its inverse unit constraint. -/
 theorem exists_pullback_monoidal_normalized
     {C : Type u} [SmallCategory C]
     (R S : Cᵒᵖ ⥤ CommRingCat.{u})

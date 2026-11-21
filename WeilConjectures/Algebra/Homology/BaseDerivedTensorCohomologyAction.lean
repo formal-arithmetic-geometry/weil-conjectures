@@ -18,7 +18,9 @@ import Mathlib.Algebra.Homology.Linear
 /-!
 # Derived base tensor cohomology with its coefficient action
 
-Source: Stacks Project, Tags 06Y6 and 08IB
+## References
+
+* Stacks Project, Tags 06Y6 and 08IB.
 -/
 
 @[expose] public section
@@ -39,32 +41,8 @@ variable (R : Type uR) (A : Type uA) (B : Type uB) [CommRing R] [CommRing A] [Co
 
 set_option maxHeartbeats 800000 in
 -- The dependent existential includes both the derived and homology comparison equations.
-/-- Stacks Project, Tag 06Y6 (derived extension and its counit), and Tag 08IB
-
-Proof: K-flat resolutions over R compute the total left derived extension to B.
-Quasi-isomorphisms between K-flat complexes remain quasi-isomorphisms after
-tensoring with B. Resolving all complexes by K-flat ones therefore gives the
-derived functor and its universal counit on the homotopy localization; an
-augmentation to Q need not remain a quasi-isomorphism after ordinary tensoring.
-The resulting functor is additive and R-linear, as computed on K-flat models:
-ordinary extension preserves sums and sends multiplication by r to multiplication
-by its image in B, and these identities transport along the resolution isomorphisms.
-On the derived image of Q, multiplication by each a in A gives an
-endomorphism. Addition, composition and identity give an A-action, and these
-B-linear endomorphisms commute with the existing B-action. The actions agree on
-R: derived extension sends scalar multiplication by r to multiplication by its
-image in B. Thus the tensor-product universal property gives the E=A-tensor-B
-action on every cohomology object. Bundle these as E-modules, with the identity
-on carriers providing the stated B-linear cohomology isomorphisms. The action
-of a tensor 1 is the induced endomorphism, giving the scalar equation.
-The generator equation for the supplied ordinary isomorphism ensures that it
-intertwines multiplication by A: verify this on b tensor q and then use tensor
-induction. Naturality of the counit makes its cohomology map A-linear as well as B-linear,
-hence E-linear. Compose with the supplied ordinary associativity isomorphism
-and the homology comparison isomorphisms for restriction and localization to
-define comparison. Its construction gives exactly comparison_eq. This result
-does not construct an ordinary tensor isomorphism or any map to a further
-coefficient algebra. -/
+/-- The derived extension of scalars with its universal counit exists, together with a model of
+its cohomology carrying the `A ⊗[R] B`-action. -/
 theorem exists_baseDerivedTensorCohomologyAction
     (Q : CochainComplex (ModuleCat.{max uR uA uB v} A) ℤ)
     [(extendScalars.{_, _, max uR uA uB v} (algebraMap R B)).Additive]

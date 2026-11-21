@@ -17,6 +17,14 @@ import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonGenerators
 import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonClosure
 import WeilConjectures.CategoryTheory.DerivedModuleFreeGeneration
 
+/-!
+# Fixed-degree tensor inheritance for localized cohomology comparisons
+
+## References
+
+* Stacks Project, Tag 0DJA(1), local computation using Tag 0BYJ (perfect.tex)
+-/
+
 @[expose] public section
 universe u
 open CategoryTheory MonoidalCategory
@@ -26,16 +34,8 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace ModuleCat
 
--- STATEMENT-DISPUTED: the former single-degree hypothesis is false for shifted U.
--- For R=A=B=C=Z, Q=0, N=Z concentrated in degree 1, i=0 and U=Z
--- concentrated in degree -1, the hypothesis was 0 -> 0, but the conclusion is 0 -> Z.
--- The corrected helper requires the comparison for Q in every degree.
-/-- Fixed-degree local computation underlying tensor inheritance.
-
-Source: Stacks Project, perfect.tex, Tag 0DJA(1), local computation using Tag 0BYJ.
-The localizing-subcategory argument, mixed-ring associator, and flat scalar-extension
-comparison prove the asserted isomorphism in one cohomological degree.  This is the
-single-degree component assembled by `localizedTensorComparison_inheritance`. -/
+/-- Fixed-degree local computation underlying tensor inheritance: the single-degree component
+assembled by `localizedTensorComparison_inheritance`. -/
 theorem localizedTensorComparison_inheritance_fixed_degree
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

@@ -92,13 +92,18 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
 /-! # Restricted scalar-first K-flat tensor identifications
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YY and 06YT, and
-sites-modules.tex, Tags 03EK and 03CY.
-
 The scalar-last complex is specified by its underlying B-linear tensor complex and
 its S-linear swap from the existing scalar-first extension. The pure-tensor equation
 fixes the swap, including its inverse, and hence fixes the S-action on the last factor.
 No existence choice of an unspecified object or map is used in a definition.
+
+## References
+
+* Stacks Project, Tag 03CY
+* Stacks Project, Tag 03DA
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 06YT
+* Stacks Project, Tag 06YY
 -/
 
 @[expose] public section
@@ -114,13 +119,11 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
 
-/-- Ordinary scalar restriction on the given site.
-Source: Stacks 03DA. -/
+/-- Ordinary scalar restriction on the given site. -/
 noncomputable abbrev restrictedTensorScalars {A S : Sheaf J CommRingCat.{r}} (v : A ⟶ S) :=
   restrictScalars.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).map v)
 
-/-- The coefficient sheaf as a module over the source ring.
-Source: Stacks 03EK. -/
+/-- The coefficient sheaf as a module over the source ring. -/
 noncomputable abbrev restrictedTensorCoefficient
     {B S : Sheaf J CommRingCat.{r}} (φ : B ⟶ S) :=
   (restrictedTensorScalars φ).obj (unit (derivedChangeRingIndependentCoefficients J S))

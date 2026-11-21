@@ -20,8 +20,9 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 /-!
 # Closed support as a relative section complex
 
-Source: literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
-lem-amb-closed-support-hom.md.
+## References
+
+* Stacks Project, Tags 0A45, 095L and 03Q1
 -/
 
 @[expose] public section
@@ -39,8 +40,7 @@ universe w v u v' u'
 open CategoryTheory CategoryTheory.Limits Opposite HomologicalComplex
 
 namespace CochainComplex
-/-- The canonical closed-support construction and its normalization.
-Source: Stacks, Tags 0A45, 095L. -/
+/-- The canonical closed-support construction and its normalization. -/
 noncomputable def closedConeLift
     {C : Type u} [Category.{v} C] [Abelian C]
     {S P Q : CochainComplex C ℤ} (f : P ⟶ Q) (a : S ⟶ P) (ha : a ≫ f = 0) :
@@ -73,8 +73,7 @@ noncomputable def closedConeLift
     · congr! 10 <;> omega
     · congr! 10 <;> omega
 
-/-- The canonical closed-support construction and its normalization.
-Source: Stacks, Tags 0A45, 095L. -/
+/-- The canonical closed-support construction and its normalization. -/
 lemma closedConeLift_projections
     {C : Type u} [Category.{v} C] [Abelian C]
     {S P Q : CochainComplex C ℤ} (f : P ⟶ Q) (a : S ⟶ P) (ha : a ≫ f = 0)
@@ -89,8 +88,7 @@ lemma closedConeLift_projections
   dsimp only [closedConeLift, shiftFunctorObjXIso]
   simp
 
-/-- The canonical closed-support construction and its normalization.
-Source: Stacks, Tags 0A45, 095L. -/
+/-- The canonical closed-support construction and its normalization. -/
 lemma closedConeLift_quasiIso
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (S : ShortComplex (CochainComplex C ℤ)) (hS : S.ShortExact) :
@@ -129,8 +127,7 @@ end CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
 
-/-- The canonical closed-support construction and its normalization.
-Source: Stacks, Tags 0A45, 095L. -/
+/-- The canonical closed-support construction and its normalization. -/
 theorem closedSupportHom_globalSections_natural {A : Type (u + 1)} [CommRing A]
     {L K : Scheme.{u}} (m : K ⟶ L)
     {F F' : Sheaf L.smallEtaleTopology (ModuleCat.{u + 1} A)} (k : F ⟶ F') :
@@ -159,8 +156,7 @@ theorem closedSupportHom_globalSections_natural {A : Type (u + 1)} [CommRing A]
     (Sheaf.ΓNatIsoSheafSections K.smallEtaleTopology (ModuleCat.{u + 1} A)
       terminalIsTerminal).inv.app ((upperStar (ModuleCat.{u + 1} A) m).obj F')) hu.symm
 
-/-- Pullback of global sections as a natural transformation on sheaves.
-Source: Stacks, Tag 03Q1. -/
+/-- Pullback of global sections as a natural transformation on sheaves. -/
 noncomputable def closedSupportSectionsPullback (A : Type (u + 1)) [CommRing A]
     {V T : Scheme.{u}} (v : V ⟶ T) :
     Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A) ⟶

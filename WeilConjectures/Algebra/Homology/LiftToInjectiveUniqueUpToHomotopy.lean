@@ -13,8 +13,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-! # Uniqueness up to homotopy of lifts into an injective complex
 
-Source: Stacks Project, Derived Categories, Lemma 13.18.7 (Tag 013S),
-`lemma-morphisms-equal-up-to-homotopy`
+## References
+
+* Stacks Project, Derived Categories, Lemma 13.18.7 (Tag 013S)
 -/
 
 @[expose] public section
@@ -26,19 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- Maps into a bounded below complex of injectives are homotopic whenever their
-composites with a quasi-isomorphism are homotopic.
-Source: Stacks Project, Derived Categories, Lemma 13.18.7 (Tag 013S)
-
-Proof:
-1. Convert the lower bound to `IsStrictlyGE` and use Mathlib's
-   `isKInjective_of_injective` to make I K-injective.
-2. In the standard derived category, the given homotopy gives equality after
-   localization. The localized quasi-isomorphism alpha is an isomorphism, so
-   cancellation gives equality of the localized beta maps.
-3. `IsKInjective.Qh_map_bijective` reflects this equality to the homotopy category.
-   Its comparison isomorphism with the complex localization identifies the maps.
-   `HomotopyCategory.homotopyOfEq` supplies the required homotopy.
--/
+composites with a quasi-isomorphism are homotopic. -/
 theorem homotopy_of_comp_quasiIso_of_injective
     {C : Type u} [Category.{v} C] [Abelian C]
     {K L I : CochainComplex C ℤ}

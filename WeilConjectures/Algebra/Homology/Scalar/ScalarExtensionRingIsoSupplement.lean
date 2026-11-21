@@ -18,11 +18,13 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRi
 /-!
 # Scalar extension along an isomorphism of ring sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 03CZ, 03EK and 03CY
-
 The transported module functor is the existing restriction of scalars along the inverse.
 The tensor convention in the existing change-of-rings construction puts the scalar first:
-`s ⊗ x` represents the node's `x ⊗ s` under tensor symmetry.
+`s ⊗ x` represents `x ⊗ s` under tensor symmetry.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CZ, 03EK and 03CY
 -/
 
 @[expose] public section
@@ -189,24 +191,7 @@ private theorem scalarIsoSheaf_unit (c : R ≅ S)
           (scalarIsoPresheaf c M).hom
 
 /-- Scalar extension along a ring-sheaf isomorphism is naturally the original abelian
-sheaf with action transported along its inverse, with both specified section formulas.
-Source: Stacks, Tags 03CZ, 03EK and 03CY
-
-Proof: (1) restriction of scalars along `c.inv` retains the abelian sheaf and all maps;
-its action is `s • x = c.inv(s) • x`, compatible with restrictions by naturality of
-`c.inv` (situation-conventions). (2) The balanced map on local tensors
-sends `s ⊗ x` to `c.inv(s) • x`; the tensor universal property makes it linear
-(def-weil-pbc-module-tensor-product). (3) The maps commute with restrictions since
-`c.inv` is natural (def-pur-sheaf-tensor-product). (4) The inverse before sheafification
-sends `x` to `1 ⊗ x`; balancing and the inverse identities of `c` show that both
-composites are identities, first on pure tensors and then by tensor generation.
-(5) The module-sheafification universal property extends the forward map uniquely;
-compose the inverse with the unit. One inverse identity holds directly, and the other
-follows by uniqueness after precomposition with the unit
-(def-weil-presheaf-modules-sheafification). These give the two displayed formulas.
-(6) For `h : M ⟶ N`, both naturality composites take `s ⊗ x` to
-`c.inv(s) • h(x) = h(c.inv(s) • x)`. Tensor generation and the same sheafification
-uniqueness give naturality, without assuming sections of a sheafified tensor are pure. -/
+sheaf with action transported along its inverse, with both specified section formulas. -/
 theorem exists_scalarExtensionRingIso (c : R ≅ S) :
     ∃ theta : ∀ M : ringedSiteModules.{max r m}
         ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R),

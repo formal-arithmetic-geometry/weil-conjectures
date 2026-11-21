@@ -9,7 +9,11 @@ public import WeilConjectures.Algebra.Homology.System.SystemSelectedDerivedEvalu
 
 /-! # Derived evaluation of subsequence extension
 
-Source: Zheng, Construction 4.1; Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7, 03EK
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -28,8 +32,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ) (m : ℕ)
 
-/-- Reindex the evaluated derived extension along an equality of selected indices.
-Source: Zheng 4.1 -/
+/-- Reindex the evaluated derived extension along an equality of selected indices. -/
 def systemSelectedDerivedBelowIndex {i : ℕ} (hi : systemNextSelected r m = i)
     (h : m ≤ r i) :
     (systemSelectedDerivedExtension B r S T).derived ⋙ derivedSystemEvaluation B m ≅
@@ -37,10 +40,7 @@ def systemSelectedDerivedBelowIndex {i : ℕ} (hi : systemNextSelected r m = i)
   subst i
   exact systemSelectedDerivedBelow B r m S T
 
-/-- Reindexing preserves the normalized transpose formula.
-Source: Zheng 4.1
-Proof: substitute the index equality; the coefficient inequality proofs are equal by
-proof irrelevance, and the result is the original derived evaluation transpose. -/
+/-- Reindexing preserves the normalized transpose formula. -/
 theorem systemSelectedDerivedBelowIndex_transpose {i : ℕ}
     (hi : systemNextSelected r m = i) (h : m ≤ r i)
     (P : DerivedCategory (StrictRingSystem (selectedSystemRings B r)))
@@ -57,9 +57,7 @@ theorem systemSelectedDerivedBelowIndex_transpose {i : ℕ}
   exact systemSelectedDerivedTranspose S T B r m P M f
 
 /-- The reindexed comparison is the original comparison followed by the object
-transport. Source: equality transport
-Proof: substitute the index equality. Both coefficient inequalities coincide by proof
-irrelevance and the object equality becomes reflexivity; the transport is the identity. -/
+transport. -/
 theorem systemSelectedDerivedBelowIndex_hom {i : ℕ}
     (hi : systemNextSelected r m = i) (h : m ≤ r i)
     (P : DerivedCategory (StrictRingSystem (selectedSystemRings B r)))

@@ -170,12 +170,17 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Total-limit projections and the sequence-projection adjunction
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6E, 0941 and 07A6;
-Derived Categories, Tag 09T5.
 
 All functors act on the existing strict-system and module derived categories.
 The initial existential data are exactly the normalized presentation provided by
 `derivedAdjunction`. Index `n` denotes positive level `n+1`.
+
+## References
+
+* Stacks Project, Tag 07A6
+* Stacks Project, Tag 0941
+* Stacks Project, Tag 09T5
+* Stacks Project, Tag 0D6E
 -/
 
 -- After pruning, this module only keeps private declarations.

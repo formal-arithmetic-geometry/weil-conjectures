@@ -8,6 +8,14 @@ module
 
 public import WeilConjectures.Algebra.Homology.HomologyEvaluationDefinitions
 
+/-!
+# Uniqueness of homology evaluation from cycle formulas and local lifts
+
+## References
+
+* [Stacks Project, Tag 08DH](https://stacks.math.columbia.edu/tag/08DH)
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u
@@ -49,19 +57,7 @@ private lemma homObj_comp_naturality_apply (X : Scheme.{u})
 
 set_option backward.isDefEq.respectTransparency false in
 -- Restricting sections unfolds the localized internal-Hom module structures.
-/-- Cycle formulas determine a morphism once every local cycle has a target-cycle lift.
-Source: Stacks Project, Tag 08DH, separatedness of internal Hom.
-
-Cancel the epimorphism from Hom cycles to Hom homology. For a fixed cycle section
-on U, its two images are morphisms of module sheaves on the site over U. Restriction
-to that site preserves finite colimits, hence preserves the epimorphism from T-cycles
-to T-homology. Cancel this second epimorphism. At an arbitrary slice object V -> U,
-restrict the Hom cycle to V and use the assumed lift b. Both cycle formulas identify
-the evaluations with the same class of b. Naturality of the homology class map and
-of e and e' identifies these evaluations with their components on the slice object.
-Extensionality now concludes equality. No pointwise surjectivity is assumed; this
-also covers empty opens and zero homology sheaves.
--/
+/-- Cycle formulas determine a morphism once every local cycle has a target-cycle lift. -/
 theorem homologyEvaluation_unique_of_cycle_of_local_lifts
     (X : AlgebraicGeometry.Scheme.{u}) (T J : CochainComplex X.Modules ℤ) (n : ℤ)
     (e e' : (homComplex (R := X.sheaf) T J).homology n ⟶

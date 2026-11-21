@@ -100,12 +100,15 @@ import WeilConjectures.FromJoel.CategoryTheory.ObjectProperty.FiniteProducts
 /-!
 # Two-term scalar quotient resolutions after flat sheaf extension
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YQ and 06YU;
-Modules on Sites, Tags 03EI and 03ER
-
 The cone of scalar multiplication on the degree-zero ring complex is the displayed
 complex in degrees -1 and 0. Its quotient is the sheaf cokernel, and the augmentation
 is specified by its restriction to the degree-zero summand.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YQ and 06YU
+* Stacks Project, Modules on Sites, Tags 03EI, 03ER and 03CY
+* Stacks Project, Tag 093I
 -/
 
 @[expose] public section
@@ -123,28 +126,24 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   (J : GrothendieckTopology C) (A : Type r) [CommRing A]
   [HasWeakSheafify J CommRingCat.{r}]
 
-/-- The existing constant commutative ring sheaf.
-Source: Stacks Tag 093I. -/
+/-- The existing constant commutative ring sheaf. -/
 noncomputable abbrev scalarCyclicBase := (constantSheaf J CommRingCat.{r}).obj (CommRingCat.of A)
 
 variable {J}
 
-/-- Forget commutativity for the existing module-sheaf category.
-Source: Stacks Tag 03CY. -/
+/-- Forget commutativity for the existing module-sheaf category. -/
 noncomputable abbrev scalarCyclicRing (R : Sheaf J CommRingCat.{r}) :=
   (sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R
 
 variable {A} (R : Sheaf J CommRingCat.{r})
   (α : scalarCyclicBase J A ⟶ R)
 
-/-- The constant presheaf map adjoint to the given constant-sheaf algebra structure.
-Source: Stacks Tags 03CY, 093I. -/
+/-- The constant presheaf map adjoint to the given constant-sheaf algebra structure. -/
 noncomputable def scalarCyclicPresheafMap :
     (Functor.const Cᵒᵖ).obj (CommRingCat.of A) ⟶ R.obj :=
   (sheafificationAdjunction J CommRingCat.{r}).homEquiv _ _ α
 
-/-- Multiplication by the constant scalar, constructed from its compatible sections.
-Source: Stacks Tags 03CY, 03ER. -/
+/-- Multiplication by the constant scalar, constructed from its compatible sections. -/
 noncomputable def scalarCyclicMultiplication (a : A) :
     unit (scalarCyclicRing R) ⟶ unit (scalarCyclicRing R) :=
   (unit (scalarCyclicRing R)).unitHomEquiv.symm

@@ -10,6 +10,14 @@ public import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
 import WeilConjectures.Algebra.Homology.HomComplexSectionsCanonicalComparison
 import Mathlib.Algebra.Category.Grp.EpiMono
 
+/-!
+# Naturality of the shifted section comparison in the homotopy category
+
+## References
+
+* Stacks Project, Tag 0A8Y, Equation (21.34.0.1)
+-/
+
 @[expose] public section
 
 universe u v
@@ -30,22 +38,7 @@ private lemma homObjMap_section_component
   rfl
 
 -- Projection comparisons involve several composed functors and chosen product objects.
-/-- The shifted section Hom-complex comparison in the homotopy category is natural.
-Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1).
-
-Proof: evaluate the product projections of the sheaf Hom complex at U. Sections
-in degree n are families of maps L^p|U to I^(p+n)|U. The differential formula
-identifies cycles with chain maps into the shifted target, whose differential
-is (-1)^n times the original differential. Multiply a family in degree n-1
-by (-1)^n to identify its differential with a null-homotopy into that target.
-Quotienting gives a bijection between homology classes
-and homotopy classes, since both quotient projections are surjective. Apply
-this construction to (L,I') and (L',I), obtaining a and b. Componentwise
-composition sends a family f to s f t; the homotopy sign correction depends
-only on n and hence commutes with both maps. This proves the displayed equality
-on cycles and then on all homology classes. No K-injectivity or localization
-at quasi-isomorphisms is used. Degree zero recovers the unshifted comparison;
-zero complexes give singleton Hom sets; unbounded complexes use products. -/
+/-- The shifted section Hom-complex comparison in the homotopy category is natural. -/
 theorem homComplex_sections_homotopy_naturality
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max u v}) (U : C)

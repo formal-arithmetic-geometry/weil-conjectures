@@ -65,13 +65,15 @@ import Mathlib.LinearAlgebra.Basis.Basic
 
 /-! # The exact scalar periodic resolution
 
-Source: blueprint main-20261015, chap-The-pro-etale-site,
-sk-def-localizing-closure-ctf-equals-bc.proof.md, "The examples";
-Stacks Project, Tags 03ER, 06YN, 06YQ
-
 The complex and its augmentation are constructed from their prescribed components.
 The sheaf theorem uses categorical exactness, with no assertion of sectionwise
 surjectivity. The final theorem records the ordinary rank-one free resolution.
+
+## References
+
+* Stacks Project, Tag 03ER
+* Stacks Project, Tag 06YN
+* Stacks Project, Tag 06YQ
 -/
 
 @[expose] public noncomputable section

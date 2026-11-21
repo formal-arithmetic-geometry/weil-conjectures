@@ -14,7 +14,9 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-! # Exact restriction and transport of strict-perfect packages
 
-Source: Stacks Project, Modules on Sites, Tags 03DJ and 04IX.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DJ and 04IX.
 -/
 
 @[expose] public noncomputable section
@@ -63,9 +65,7 @@ private theorem pushforward_finiteColimits
     { reflects := fun _ _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
   exact preservesFiniteColimits_of_reflects_of_preserves _ T
 
-/-- Restriction of module sheaves to a slice is exact, at independent universes.
-Source: Stacks Project, Tag 03DJ. The forgetful comparison with abelian sheaf restriction
-preserves and reflects the finite limit and colimit universal properties. -/
+/-- Restriction of module sheaves to a slice is exact, at independent universes. -/
 theorem overFunctor_exact_ofUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max u v r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
@@ -76,13 +76,13 @@ theorem overFunctor_exact_ofUniverses
       PreservesFiniteColimits (overFunctor.{max u v r} R U) := by
   exact ⟨pushforward_finiteLimits (𝟙 _), pushforward_finiteColimits (𝟙 _)⟩
 
-/-- Slice restriction adds module maps componentwise. Source: Stacks Project, Tag 03DJ. -/
+/-- Slice restriction adds module maps componentwise. -/
 instance sitePerfectOverFunctor_additive
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) (U : C) : (overFunctor.{max u v r} R U).Additive :=
   ⟨fun {_ _} f g ↦ by ext W x; rfl⟩
 
-/-- Further restriction adds module maps componentwise. Source: Stacks Project, Tag 04IX. -/
+/-- Further restriction adds module maps componentwise. -/
 instance sitePerfectOverMap_additive
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J RingCat.{r}) {U V : C} (f : V ⟶ U) : (overMap.{max u v r} R f).Additive :=

@@ -10,7 +10,9 @@ public import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoher
 /-!
 # The explicit scalar-extension map on internal duals
 
-Source: Stacks Project, Tags 03EK, 03EM, 04TT.
+## References
+
+* Stacks Project, Tags 03EK, 03EM, 04TT
 -/
 
 @[expose] public section
@@ -30,10 +32,9 @@ local notation:max "Mod" R:arg =>
 set_option hygiene false in
 local notation:max "𝒪" R:arg => unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
 
-/-- scalarDual_section_ext: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- Two sections of the internal dual of a scalar extension agree if they agree on
+scalar-extension sections of every slice.
+-/
 theorem scalarDual_section_ext {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N : Mod R) (U : Cᵒᵖ)
     (φ ψ : (homObj (changeOfRingsOfUniverses α N) (𝒪 S)).val.obj U)
@@ -70,10 +71,7 @@ theorem scalarDual_section_ext {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     | tmul a x => exact h (op (Over.mk (i ≫ W.unop.hom))) a x
   exact hη
 
-/-- scalarDualRawSection: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The presheaf morphism on a slice induced by a section of the internal dual of `N`. -/
 noncomputable def scalarDualRawSection {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N : Mod R) (U : Cᵒᵖ) (φ : (homObj N (𝒪 R)).val.obj U) :
     (PresheafOfModules.restrictOver S.obj U.unop).obj
@@ -105,19 +103,13 @@ noncomputable def scalarDualRawSection {R S : Sheaf J CommRingCat.{u}} (α : R �
       exact congrArg (· * S.obj.map i.unop.left.op s)
         (ConcreteCategory.congr_hom (α.hom.naturality i.unop.left.op) _)
 
-/-- scalarDualSliceUnit: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The sheafification unit on a slice for the scalar extension presheaf of `N`. -/
 noncomputable def scalarDualSliceUnit {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N : Mod R) (U : Cᵒᵖ) :=
   (PresheafOfModules.restrictOver S.obj U.unop).map
     (scalarSheafificationUnit (changeOfRingsPresheafOfUniverses α N))
 
-/-- scalarDualSliceUnit_locallyInjective: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The slice sheafification unit is locally injective. -/
 instance scalarDualSliceUnit_locallyInjective {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N : Mod R) (U : Cᵒᵖ) :
     PresheafOfModules.IsLocallyInjective (J.over U.unop) (scalarDualSliceUnit α N U) :=
@@ -125,10 +117,7 @@ instance scalarDualSliceUnit_locallyInjective {R S : Sheaf J CommRingCat.{u}} (�
     ((PresheafOfModules.toPresheaf _).map
       (scalarSheafificationUnit (changeOfRingsPresheafOfUniverses α N)))
 
-/-- scalarDualSliceUnit_locallySurjective: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The slice sheafification unit is locally surjective. -/
 instance scalarDualSliceUnit_locallySurjective {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
     (N : Mod R) (U : Cᵒᵖ) :
     PresheafOfModules.IsLocallySurjective (J.over U.unop) (scalarDualSliceUnit α N U) :=
@@ -136,10 +125,9 @@ instance scalarDualSliceUnit_locallySurjective {R S : Sheaf J CommRingCat.{u}} (
     ((PresheafOfModules.toPresheaf _).map
       (scalarSheafificationUnit (changeOfRingsPresheafOfUniverses α N)))
 
-/-- scalarDualBaseSection: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The section of the internal dual of the scalar extension induced by a section of the
+internal dual of `N`.
+-/
 noncomputable def scalarDualBaseSection
     [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
     {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -148,10 +136,9 @@ noncomputable def scalarDualBaseSection
   (PresheafOfModules.homEquivOfIsLocallyBijective (f := scalarDualSliceUnit α N U)
     ((𝒪 S).over U.unop).isSheaf).symm (scalarDualRawSection α N U φ)
 
-/-- scalarDualBaseSection_tmul: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The induced section of the dual of the scalar extension evaluates on a scalar-extension
+section by the balanced formula.
+-/
 theorem scalarDualBaseSection_tmul
     [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
     {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S)
@@ -168,10 +155,9 @@ theorem scalarDualBaseSection_tmul
           (scalarDualRawSection α N U φ))
   exact h
 
-/-- scalarDualBaseMap: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The map from the internal dual of `N` to the internal dual of its scalar extension, before
+scalar extension of the source.
+-/
 noncomputable def scalarDualBaseMap
     [∀ X, (J.over X).WEqualsLocallyBijective AddCommGrpCat.{u}]
     {R S : Sheaf J CommRingCat.{u}} (α : R ⟶ S) (N : Mod R) :
@@ -236,10 +222,9 @@ noncomputable def scalarDualBaseMap
         exact (scalarDualBaseSection_tmul α N U φ
           (op ((Over.map i.unop).obj W.unop)) t x).symm }
 
-/-- scalarExtensionDualMap: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The scalar-extension map from the scalar extension of the internal dual of `N` to the
+internal dual of the scalar extension of `N`.
+-/
 noncomputable def scalarExtensionDualMap
     [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
     [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]
@@ -250,10 +235,7 @@ noncomputable def scalarExtensionDualMap
   scalarExtensionLift.{uC, vC, u, max uC vC u} α
     (homObj N (𝒪 R)) _ (scalarDualBaseMap α N)
 
-/-- scalarExtensionDualMap_tmul: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- The scalar-extension dual map is given on sections by its balanced formula. -/
 theorem scalarExtensionDualMap_tmul
     [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
     [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]
@@ -276,10 +258,9 @@ theorem scalarExtensionDualMap_tmul
   change s * (α.hom.app U (φ.app (op (Over.mk (𝟙 U.unop))) x) * t) = _
   ac_rfl
 
-/-- scalarExtensionDual_hom_ext: the scalar-extension evaluation construction.
-Source: Stacks Project, Tags 03EK and 04TT
-The balanced section formula descends through the locally bijective sheafification
-unit on each slice. Equality on pure tensors proves linearity and naturality. -/
+/-- Two morphisms from the scalar extension of a module into the internal dual of a scalar
+extension agree if they agree on scalar-extension sections.
+-/
 theorem scalarExtensionDual_hom_ext
     [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
     [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]
@@ -318,8 +299,7 @@ theorem scalarExtensionDual_hom_ext
         (g.val.app U (scalarExtensionSection α L U s φ))
         (Category.id_comp W.unop.hom) _))
 
-/-- The dual comparison evaluates by its balanced formula on every slice.
-Source: Stacks Project, Tag 04TT -/
+/-- The dual comparison evaluates by its balanced formula on every slice. -/
 theorem scalarExtensionDualMap_tmul_slice
     [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC u}]
     [HasWeakSheafify J AddCommGrpCat.{max uC vC u}]

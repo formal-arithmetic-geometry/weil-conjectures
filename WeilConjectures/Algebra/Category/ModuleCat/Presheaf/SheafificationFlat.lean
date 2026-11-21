@@ -14,7 +14,9 @@ import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-!
 # Sheafification preserves flatness of module presheaves
 
-Source: Stacks Project, Modules on Sites, Lemma 18.28.3, Tag 03ET
+## References
+
+* Stacks Project, Modules on Sites, Lemma 18.28.3 (Tag 03ET)
 -/
 
 @[expose] public section
@@ -31,21 +33,7 @@ variable {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
 
 /-- Sheafification of a flat presheaf of modules is flat. The locally bijective map `α`
 identifies the sheaf of rings underlying `R` with the associated sheaf of `O`; module
-sheafification equips the associated abelian sheaf with its induced module structure.
-Source: Stacks Project, Tag 03ET.
-
-Proof:
-1. Module sheafification `a` and restriction `ι` preserve finite limits, as can be checked
-on underlying abelian (pre)sheaves using the module sheafification interface
-[lem-pc-sites-module-sheafification-interface], sectionwise limits
-[situation-conventions], and exact abelian sheafification
-[situation-conventions]. Thus `ι ⋙ tensorRight F ⋙ a` preserves finite limits.
-2. The tensor/sheafification comparison [lem-pc-sites-module-sheafification-tensor]
-identifies this composite with tensoring sheaves with `a(F)`, using the sheaf tensor
-product [def-pur-sheaf-tensor-product].
-3. Consequently that tensor functor preserves finite limits. It also preserves finite
-colimits, being a left adjoint [lem-pc-sheaf-modules-tensor-closed]. Hence it is exact,
-which is flatness [def-pc-flat-sheaf-modules]. -/
+sheafification equips the associated abelian sheaf with its induced module structure. -/
 theorem isFlat_sheafification_obj
     (α : (O ⋙ forget₂ CommRingCat.{u} RingCat.{u}) ⟶
       ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R).obj)

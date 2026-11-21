@@ -60,8 +60,11 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
 /-!
 # Invertibility of the derived slice mate
 
-Source: Stacks Project, algebraization.tex, Tag 099J; Modules on Sites, Tag 04J0;
-Cohomology on Sites, Tag 07A6
+## References
+
+* Stacks Project, Tag 099J (algebraization)
+* Stacks Project, Tag 04J0 (Modules on Sites)
+* Stacks Project, Tag 07A6 (Cohomology on Sites)
 -/
 
 @[expose] public noncomputable section

@@ -14,9 +14,9 @@ import all WeilConjectures.Algebra.Homology.RingedInternalHomShiftOfUniverses
 
 /-! # Pullback of Hom complexes and signed source shifts
 
-Source: Stacks Project, sites-modules.tex, Tag 0GMX (remark-pullback-internal-hom),
-with sites-cohomology.tex, Tags 0A8X and 08JC; the signed calculation is the
-agent formulation in the blueprint.
+## References
+
+* Stacks Project, Tag 0GMX, with Tags 0A8X and 08JC
 -/
 
 @[expose] public noncomputable section
@@ -295,21 +295,18 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})]
   (R : Sheaf J CommRingCat.{max c v r})
 
-/-- The type of evaluation maps after each Hom-product projection.
-Source: Stacks 0A8X and 0GMX -/
+/-- The type of evaluation maps after each Hom-product projection. -/
 abbrev EvaluationFamily :=
   ∀ (E I : Complex R) (n p q : ℤ), p + n = q →
     ((homComplex (R := R) E I).X n ⊗ E.X p ⟶ I.X q)
 
-/-- Source-shift isomorphisms of the actual unbounded Hom complexes.
-Source: Stacks 0A8X and the signed calculation underlying 08JC -/
+/-- Source-shift isomorphisms of the actual unbounded Hom complexes. -/
 abbrev SourceShiftFamily :=
   ∀ (E I : Complex R) (m : ℤ),
     homComplex (R := R) (E⟦m⟧) I ≅ (homComplex (R := R) E I)⟦-m⟧
 
 /-- The forward source-shift map has component `(-1)^(m*n) f^(p-m)`.
-The equality of source terms uses the canonical `shiftFunctorObjXIso`.
-Source: Stacks 0A8X and the signed chain calculation underlying 08JC -/
+The equality of source terms uses the canonical `shiftFunctorObjXIso`. -/
 def IsSignedSourceShift (s : SourceShiftFamily.{c, v, r} R) : Prop :=
   ∀ (E I : Complex R) (m n p q : ℤ) (h : p + (n + -m) = q),
     (s E I m).hom.f n ≫ homComplexπ E I (n + -m) p q h =

@@ -14,7 +14,9 @@ import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
 /-!
 # The tensor change-of-rings adjunction on sheaves of modules
 
-Source: Stacks Project, Sheaves on Spaces, Lemma 6.20.2, Tag 008A
+## References
+
+* Stacks Project, Sheaves on Spaces, Lemma 6.20.2 (Tag 008A)
 -/
 
 @[expose] public section
@@ -44,19 +46,7 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Change of rings by the sheafified sectionwise tensor product is left adjoint to
 restriction of scalars. The hom correspondence first applies the sheafification unit
-to `1 ⊗ m`, then evaluates the map. Its naturality in both modules is part of `adj`.
-Source: Stacks Project, Tag 008A.
-
-Proof: (1) Apply the sectionwise tensor adjunction and compatibility with restrictions
-(`lem-pc-presheaf-change-of-rings-adjunction`, Tag 006R) to obtain the natural presheaf
-hom bijection. The right-hand homs are sheaf homs since both modules are sheaves
-(`situation-conventions`). (2) Apply the sheafification universal property
-(`def-weil-presheaf-modules-sheafification`, Tag 0089) to the presheaf of tensors
-(`def-pur-sheaf-tensor-product`). Since the target is a sheaf, precomposition with the
-sheafification unit is a bijection. (3) Compose these natural bijections. They send `u`
-to `m ↦ u(η(1 ⊗ m))`. Naturality defines the change-of-rings functor on morphisms and
-supplies the adjunction; its objects are the already defined `changeOfRings α M`.
-The equality `h` only transports between this functor's objects and those tensors. -/
+to `1 ⊗ m`, then evaluates the map. Its naturality in both modules is part of `adj`. -/
 theorem exists_changeOfRingsAdjunction :
     ∃ (E : SheafOfModules.{u} (𝓡 A) ⥤ SheafOfModules.{u} (𝓡 B))
       (h : ∀ M : SheafOfModules.{u} (𝓡 A), E.obj M = 𝓣 M)

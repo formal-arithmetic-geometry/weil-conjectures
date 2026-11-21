@@ -11,7 +11,10 @@ public import WeilConjectures.Algebra.Homology.System.SystemDerivedTransition
 
 /-! # The actual derived transitions of strict systems
 
-Source: Zheng, Construction 4.1; Stacks 015F.
+## References
+
+* Stacks Project, Tags 015F, 0FND
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -26,21 +29,14 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- The identity coefficient restriction and its canonical derived unit comparison.
-Source: Stacks 015F and 0FND -/
+/-- The identity coefficient restriction and its canonical derived unit comparison. -/
 def systemDerivedRestrictionUnit (n : ℕ) :
     (systemRestriction B (Nat.le_refl n)).mapDerivedCategory ≅
       𝟭 (DerivedCategory (systemLevel B n)) :=
   Functor.exactDerivedRestrictionUnit _
     (systemScalarRestrictionUnit (B.map (homOfLE (Nat.le_refl n)).op) (B.map_id (op n)))
 
-/-- The identity derived transition is the inverse identity-restriction comparison.
-Source: Zheng 4.1; Stacks 015F
-Proof: localization detects equality of natural transformations. On Q(K), postcompose
-with the two invertible exact evaluation factorizations. The transition representative
-formula and the inverse unit factorization identify both sides with Q of the strict
-identity transition. Its equality to the ordinary restriction unit is checked on each
-term and section using the strict system identity law. -/
+/-- The identity derived transition is the inverse identity-restriction comparison. -/
 theorem systemDerivedTransition_identity (n : ℕ)
     (M : DerivedCategory (StrictRingSystem B)) :
     (systemDerivedTransition B (Nat.le_refl n)).app M =
@@ -90,12 +86,7 @@ theorem systemDerivedTransition_identity (n : ℕ)
 
 variable [EssentiallySmall.{w} C]
 
-/-- The canonical derived tensor unit is the transpose of the actual identity transition.
-Source: Zheng 4.1; Stacks 0FND
-Proof: the canonical tensor unit is the left-adjoint uniqueness comparison with the
-identity adjunction. Its transpose becomes the identity after the restriction unit
-comparison, hence is the inverse of that comparison. The preceding theorem identifies
-this inverse with the actual strict identity transition. -/
+/-- The canonical derived tensor unit is the transpose of the actual identity transition. -/
 theorem systemDerivedTransition_tensorUnit
     (S : SystemScalarAssignment (J := J)) (n : ℕ)
     (M : DerivedCategory (StrictRingSystem B)) :

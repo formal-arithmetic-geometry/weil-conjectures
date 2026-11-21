@@ -19,6 +19,10 @@ Conrad's Theorem 2.4, Case 2: a separated quasi-affine target locally of finite 
 quasi-compact quasi-separated base
 (`AlgebraicGeometry.exists_isAdmissible_extend_of_isAffineOpen`,
 `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom`).
+
+## References
+
+* Stacks Project, Tag 080M
 -/
 
 @[expose] public section
@@ -39,12 +43,7 @@ extended to the whole base. Let `X` be qcqs, `U` a quasi-compact open of `X`, `V
 affine open of `X` and `q : Z ⟶ V` a morphism locally of finite type with `Z`
 quasi-affine, and let `fV : V ⊓ U ⟶ Z` be a morphism over `V`. Then there is a
 `U`-admissible center `C` on `X` whose blow-up restricts over `V` to the blow-up `Bl` of
-a center on `V` — as a cartesian square — carrying an extension of `fV` with closed graph.
-
-This is `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffine` (Case 1, applied
-over the affine base `V`) followed by
-`AlgebraicGeometry.IsAdmissible.exists_extend_of_disjoint` (Stacks Project Tag 080M),
-which extends the center found over `V` to a `U`-admissible center on `X`. -/
+a center on `V`, carrying an extension of `fV` with closed graph.. -/
 theorem exists_isAdmissible_extend_of_isAffineOpen
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] {U : X.Opens}
     (hU : IsCompact (U : Set X)) {V : X.Opens} (hV : IsAffineOpen V)
@@ -66,8 +65,7 @@ theorem exists_isAdmissible_extend_of_isAffineOpen
   exact ⟨C, _, _, h, hpb, W, hUW, g, hg, hagree, hclosed⟩
 
 /-- **Conrad's Theorem 2.4, Case 2: a quasi-affine target over a qcqs base** (Conrad,
-*Deligne's notes on Nagata compactifications*, proof of Theorem 2.4, Case 2, pp. 15–16;
-blueprint: `lemma:nagata-conrad-quasi-affine-equal-opens`). -/
+*Deligne's notes on Nagata compactifications*, proof of Theorem 2.4, Case 2, pp. 15–16). -/
 theorem exists_isAdmissible_extend_of_isQuasiAffineHom
     {X : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X]
     {U : X.Opens} (hU : IsCompact (U : Set X))

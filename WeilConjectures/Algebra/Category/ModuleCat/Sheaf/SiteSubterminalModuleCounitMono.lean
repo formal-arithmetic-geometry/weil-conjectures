@@ -9,7 +9,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.SiteNestedExtensi
 
 /-! # The extension counit of a subterminal object is monic
 
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -104,21 +106,7 @@ private theorem counit_transpose_mono
     intro b
     exact isEmptyElim b
 
-/-- Extension of restriction along a subterminal object has a monic counit.
-Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ
-
-Proof: transpose the extension counit through the module sheafification
-adjunction. The prescribed summand-inclusion formula for the localized unit,
-together with the right triangle identity, shows that this presheaf morphism
-sends every direct-sum generator to the original section. Terminality of X and
-cancellation against Z → X make Hom(T,Z) a subsingleton. If it is inhabited,
-direct-sum induction shows that inclusion at its unique index is a left inverse
-to the transposed counit. If it is empty, the direct sum is a subsingleton.
-Thus the transpose is injective on every object and is a presheaf monomorphism.
-Module sheafification preserves monomorphisms, and its counit at a sheaf is
-invertible. The inverse hom-equivalence formula expresses the extension
-counit as the composite of the sheafified transpose with this invertible
-counit. Consequently it is monic. -/
+/-- Extension of restriction along a subterminal object has a monic counit. -/
 theorem siteSubterminalModuleCounitMono
     {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{max c v r}) {X Z : C}

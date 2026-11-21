@@ -10,7 +10,9 @@ public import WeilConjectures.CategoryTheory.ConstantLocalModuleHom
 
 /-! # Constant sections of local module Hom and Isom presheaves
 
-Source: Stacks Project, Modules on Sites, Tag 093T.
+## References
+
+* Stacks Project, Modules on Sites, Tag 093T.
 -/
 
 @[expose] public noncomputable section

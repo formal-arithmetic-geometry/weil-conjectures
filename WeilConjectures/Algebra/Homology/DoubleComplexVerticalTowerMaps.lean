@@ -14,8 +14,11 @@ public import Mathlib.Order.WithBotTop
 /-!
 # The smart vertical truncation tower before taking cones
 
-Source: blueprint thm-sp-double-complex-spectral-sequences, construction in step 1;
-Stacks, Homology, Section 12.25 (tag 012X), and canonical smart truncations.
+The nested family of smart vertical truncations of a double complex.
+
+## References
+
+* Stacks Project, Homology, Section 12.25 (Tag 012X)
 -/
 
 @[expose] public section
@@ -201,20 +204,7 @@ private lemma towerFiniteFactor (K : HomologicalComplex₂ C (ComplexShape.up �
   rw [h]
   rfl
 
-/-- The cutoff inclusions are monomorphisms and nested.
-Source: blueprint thm-sp-double-complex-spectral-sequences, proof step 1, canonical
-smart truncations; Stacks tag 012X, filtration construction.
-
-Proof: each smart cutoff inclusion is degreewise a kernel inclusion in its boundary
-vertical degree, an identity below it, and the unique map from zero above it. Restriction
-and extension by zero preserve these monomorphisms. In each total degree there are only
-finitely many summands; finite biproducts in an abelian category preserve monomorphisms.
-For i <= j, the inclusion of the i-cutoff factors through the j-cutoff: below the
-j-boundary use the original inclusion, at that boundary use the kernel lift (the
-vertical differential vanishes), and above it use the zero map. Kernel uniqueness
-shows these maps commute with horizontal and vertical differentials. Totalize and
-extend. At bottom take the zero map, at top the inclusion, and for a top-to-top arrow
-use the identity. Monicity makes each factor unique. -/
+/-- The cutoff inclusions are monomorphisms and nested. -/
 theorem verticalTower_inclusion_mono_and_factors (i : EInt) :
     Mono (verticalTowerι K i) ∧
       ∀ (j : EInt) (_ : i ≤ j),

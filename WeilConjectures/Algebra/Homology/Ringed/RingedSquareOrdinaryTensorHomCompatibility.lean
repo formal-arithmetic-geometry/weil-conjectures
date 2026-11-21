@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedTensorTotalComponent
 
 /-! # The hom-oriented ordinary total tensor square
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48.
 -/
 
 @[expose] public section
@@ -70,14 +72,7 @@ private theorem total_map_eq {A : Type*} [Category A] [CategoryTheory.Abelian A]
     HomologicalComplex.mapBifunctorMap, ← HomologicalComplex₂.total.map_comp]
 
 -- Keep the four comparison endpoints explicit through the degreewise calculation.
-/-- The hom-oriented total tensor square commutes.
-
-Proof: test degreewise on every total-complex coproduct summand. The component
-formula reduces both paths to the inverse ordinary module tensor square followed
-by the pullback of the same inclusion. Naturality of the specified module square
-moves it past the inclusion. The inverse module square follows by conjugating the
-ordinary module tensor identity by the two canonical tensor isomorphisms.
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48. -/
+/-- The hom-oriented total tensor square commutes. -/
 theorem ringedSquareOrdinaryTensorHomCompatibility
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (P Q : CochainComplex (SheafOfModules.{u}

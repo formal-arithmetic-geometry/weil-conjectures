@@ -11,7 +11,10 @@ import WeilConjectures.Algebra.Homology.System.SystemOrdinarySingleExtension
 
 /-! # Ordinary extension from a selected subsequence
 
-Source: Zheng, Construction 4.1; Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03EK, 03D7
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -30,26 +33,18 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ)
 
-/-- First-selected indices are monotone for every inequality.
-Source: Zheng 4.1, subsequence extension
-Proof: the first selected level above m is also above l when l is at most m. -/
+/-- First-selected indices are monotone for every inequality. -/
 theorem systemNextSelected_monotone {l m : ℕ} (h : l ≤ m) :
     systemNextSelected r l ≤ systemNextSelected r m :=
   (systemNextSelected_spec r l).2 _ (h.trans (systemNextSelected_spec r m).1)
 
-/-- A selected level selects its own index.
-Source: Zheng 4.1, subsequence extension
-Proof: minimality gives t(r i) at most i, and order reflection gives the reverse
-inequality from r i at most r(t(r i)). -/
+/-- A selected level selects its own index. -/
 theorem systemNextSelected_at (i : ℕ) : systemNextSelected r (r i) = i := by
   apply Nat.le_antisymm
   · exact (systemNextSelected_spec r (r i)).2 i le_rfl
   · exact r.le_iff_le.mp (systemNextSelected_spec r (r i)).1
 
-/-- The inverse tensor associator inserts the unit of the middle coefficient ring.
-Source: Stacks 03EK.
-Proof: apply the injective forward associator. Its normalized formula multiplies
-by the image of one, giving the original tensor; the isomorphism inverse law finishes. -/
+/-- The inverse tensor associator inserts the unit of the middle coefficient ring. -/
 theorem systemTensorAssoc_inv_tmul {l m n : ℕ} (h : l ≤ m) (k : m ≤ n)
     (P : systemLevel B n) (U : Cᵒᵖ) (c : (B.obj (op l)).obj.obj U)
     (x : P.val.obj U) :
@@ -71,15 +66,13 @@ theorem systemTensorAssoc_inv_tmul {l m n : ℕ} (h : l ≤ m) (k : m ≤ n)
   rw [hi, T.assoc_normalized, map_one, mul_one]
   rfl
 
-/-- The tensor module at one level of selected extension.
-Source: Zheng 4.1. -/
+/-- The tensor module at one level of selected extension. -/
 abbrev systemSelectedLevel (P : StrictRingSystem (selectedSystemRings B r)) (m : ℕ) :=
   (systemTensor S B (systemNextSelected_spec r m).1).obj
     (P.level (systemNextSelected r m))
 
 /-- Selected extension transitions are the adjuncts of the scalar-extended strict
-transitions, with their actual tensor associators.
-Source: Zheng 4.1. -/
+transitions, with their actual tensor associators. -/
 def systemSelectedTransition (P : StrictRingSystem (selectedSystemRings B r))
     {l m : ℕ} (h : l ≤ m) : systemSelectedLevel S B r P m ⟶
       (systemRestriction B h).obj (systemSelectedLevel S B r P l) :=
@@ -93,10 +86,7 @@ def systemSelectedTransition (P : StrictRingSystem (selectedSystemRings B r))
             (P.transition (systemNextSelected_monotone r h))))
 
 /-- The selected transition sends c tensor x to the image of c tensor the actual
-selected transition of x. Source: Zheng 4.1; Stacks 03EK
-Proof: transpose using the unit tensor, apply the forward associator, insert one
-by the inverse associator, and apply the scalar adjunct to the strict transition.
-The resulting middle scalar is one and acts trivially. -/
+selected transition of x. -/
 theorem systemSelectedTransition_tmul (P : StrictRingSystem (selectedSystemRings B r))
     {l m : ℕ} (h : l ≤ m) (U : Cᵒᵖ) (c : (B.obj (op m)).obj.obj U)
     (x : (P.level (systemNextSelected r m)).val.obj U) :
@@ -130,10 +120,7 @@ theorem systemSelectedTransition_tmul (P : StrictRingSystem (selectedSystemRings
   rw [Equiv.apply_symm_apply, one_smul] at ht
   exact ht
 
-/-- The identity transition of selected extension is the identity on sections.
-Source: Zheng 4.1.
-Proof: compare with the identity-on-sections coefficient restriction unit. On unit
-tensors the transition formula reduces to the identity transition of P. -/
+/-- The identity transition of selected extension is the identity on sections. -/
 theorem systemSelectedTransition_identity (P : StrictRingSystem (selectedSystemRings B r))
     (m : ℕ) (U : Cᵒᵖ) (x : (systemSelectedLevel S B r P m).val.obj U) :
     (systemSelectedTransition S T B r P (Nat.le_refl m)).val.app U x = x := by
@@ -148,11 +135,7 @@ theorem systemSelectedTransition_identity (P : StrictRingSystem (selectedSystemR
     rfl
   exact congrArg (fun f ↦ f.val.app U x) he
 
-/-- Selected extension transitions compose, including repeated selected indices.
-Source: Zheng 4.1.
-Proof: compare the direct transition with the composite through the canonical
-identity-on-sections restriction compositor. On unit tensors both are the tensor of
-the corresponding composite transition of P; P's strict composition law identifies them. -/
+/-- Selected extension transitions compose, including repeated selected indices. -/
 theorem systemSelectedTransition_compose (P : StrictRingSystem (selectedSystemRings B r))
     {l m k : ℕ} (h : l ≤ m) (q : m ≤ k) (U : Cᵒᵖ)
     (x : (systemSelectedLevel S B r P k).val.obj U) :
@@ -180,8 +163,7 @@ theorem systemSelectedTransition_compose (P : StrictRingSystem (selectedSystemRi
     rw [P.compose]
   exact congrArg (fun f ↦ f.val.app U x) he
 
-/-- The strict system underlying selected extension.
-Source: Zheng 4.1. -/
+/-- The strict system underlying selected extension. -/
 def systemSelectedObject (P : StrictRingSystem (selectedSystemRings B r)) :
     StrictRingSystem B where
   level := systemSelectedLevel S B r P
@@ -189,15 +171,12 @@ def systemSelectedObject (P : StrictRingSystem (selectedSystemRings B r)) :
   identity := systemSelectedTransition_identity S T B r P
   compose := systemSelectedTransition_compose S T B r P
 
-/-- The component of selected extension on a strict morphism.
-Source: Zheng 4.1. -/
+/-- The component of selected extension on a strict morphism. -/
 def systemSelectedMapLevel {P Q : StrictRingSystem (selectedSystemRings B r)}
     (f : P ⟶ Q) (m : ℕ) : systemSelectedLevel S B r P m ⟶ systemSelectedLevel S B r Q m :=
   (systemTensor S B (systemNextSelected_spec r m).1).map (f.app (systemNextSelected r m))
 
-/-- Extended maps commute with the tensor transitions.
-Source: Zheng 4.1.
-Proof: test on unit tensors and use the original strict morphism's transition square. -/
+/-- Extended maps commute with the tensor transitions. -/
 theorem systemSelectedMap_comm {P Q : StrictRingSystem (selectedSystemRings B r)}
     (f : P ⟶ Q) {l m : ℕ} (h : l ≤ m) :
     systemSelectedMapLevel S B r f m ≫ systemSelectedTransition S T B r Q h =
@@ -220,8 +199,7 @@ theorem systemSelectedMap_comm {P Q : StrictRingSystem (selectedSystemRings B r)
       (Q.level (systemNextSelected r l)) U
         ((B.map (homOfLE h).op).hom.app U 1) y) he
 
-/-- Ordinary left extension from the selected-index system.
-Source: Zheng 4.1. -/
+/-- Ordinary left extension from the selected-index system. -/
 def systemSelectedFunctor : StrictRingSystem (selectedSystemRings B r) ⥤ StrictRingSystem B where
   obj := systemSelectedObject S T B r
   map f := { app := systemSelectedMapLevel S B r f
@@ -235,32 +213,26 @@ def systemSelectedFunctor : StrictRingSystem (selectedSystemRings B r) ⥤ Stric
     intro m
     exact (systemTensor S B (systemNextSelected_spec r m).1).map_comp _ _
 
-/-- Evaluating ordinary selected extension gives its prescribed single tensor term.
-Source: Zheng 4.1. -/
+/-- Evaluating ordinary selected extension gives its prescribed single tensor term. -/
 def systemSelectedBelow (m : ℕ) :
     systemSelectedFunctor S T B r ⋙ systemEvaluation B m ≅
       systemEvaluation (selectedSystemRings B r) (systemNextSelected r m) ⋙
         systemTensor S B (systemNextSelected_spec r m).1 := Iso.refl _
 
-/-- Transport between sections at equal selected indices.
-Source: Zheng 4.1. -/
+/-- Transport between sections at equal selected indices. -/
 def systemSelectedIndexCast (P : StrictRingSystem (selectedSystemRings B r))
     {a i : ℕ} (ha : a = i) (U : Cᵒᵖ) (x : (P.level a).val.obj U) :
     (P.level i).val.obj U :=
   Eq.mp (congrArg (fun j ↦ ((P.level j).val.obj U : Type w)) ha) x
 
-/-- At equal selected indices the tensor is the scalar unit, with explicit transport.
-Source: Zheng 4.1. -/
+/-- At equal selected indices the tensor is the scalar unit, with explicit transport. -/
 def systemSelectedEqualIndex (P : StrictRingSystem (selectedSystemRings B r))
     {a i : ℕ} (ha : a = i) (h : r i ≤ r a) :
     (systemTensor S B h).obj (P.level a) ≅ P.level i := by
   subst a
   exact (T.ordinaryUnit B (r i)).app (P.level i)
 
-/-- The inverse equal-index tensor unit inserts one tensor and transports the index.
-Source: Stacks 03EK.
-Proof: substitute the index equality. The transported section is then unchanged,
-and the assertion is the inverse scalar unit's tensor formula. -/
+/-- The inverse equal-index tensor unit inserts one tensor and transports the index. -/
 theorem systemSelectedEqualIndex_inv_tmul
     (P : StrictRingSystem (selectedSystemRings B r)) {a i : ℕ}
     (ha : a = i) (h : r i ≤ r a) (U : Cᵒᵖ) (x : (P.level i).val.obj U) :
@@ -271,16 +243,13 @@ theorem systemSelectedEqualIndex_inv_tmul
   dsimp only [systemSelectedEqualIndex, systemSelectedIndexCast]
   exact systemTensorUnit_inv_tmul S T B (r i) (P.level i) U x
 
-/-- The tensor identification at a selected level is the scalar unit.
-Source: Zheng 4.1. -/
+/-- The tensor identification at a selected level is the scalar unit. -/
 def systemSelectedAtSelected (P : StrictRingSystem (selectedSystemRings B r)) (i : ℕ) :
     systemSelectedLevel S B r P (r i) ≅ P.level i :=
   systemSelectedEqualIndex S T B r P (systemNextSelected_at r i)
     (systemNextSelected_spec r (r i)).1
 
-/-- In selected-level coordinates the inverse scalar unit inserts one tensor.
-Source: Zheng 4.1.
-Proof: apply the equal-index inverse unit formula to t(r i) equals i. -/
+/-- In selected-level coordinates the inverse scalar unit inserts one tensor. -/
 theorem systemSelectedAtSelected_inv_tmul
     (P : StrictRingSystem (selectedSystemRings B r)) (i : ℕ) (U : Cᵒᵖ)
     (x : (P.level i).val.obj U) :
@@ -290,9 +259,7 @@ theorem systemSelectedAtSelected_inv_tmul
           (systemSelectedIndexCast B r P (systemNextSelected_at r i).symm U x) :=
   systemSelectedEqualIndex_inv_tmul S T B r P (systemNextSelected_at r i) _ U x
 
-/-- Index transport commutes with strict transitions.
-Source: Zheng 4.1.
-Proof: substitute both index equalities; the inequality proofs then agree. -/
+/-- Index transport commutes with strict transitions. -/
 theorem systemSelectedIndexCast_transition (P : StrictRingSystem (selectedSystemRings B r))
     {a b a' b' : ℕ} (ha : a = a') (hb : b = b') (h : b ≤ a) (h' : b' ≤ a')
     (U : Cᵒᵖ) (x : (P.level a).val.obj U) :
@@ -302,19 +269,14 @@ theorem systemSelectedIndexCast_transition (P : StrictRingSystem (selectedSystem
   subst b'
   rfl
 
-/-- Transport across an equal-index transition cancels its index cast.
-Source: Zheng 4.1.
-Proof: substitute the equality and use the identity transition law. -/
+/-- Transport across an equal-index transition cancels its index cast. -/
 theorem systemSelectedIndexCast_identity (P : StrictRingSystem (selectedSystemRings B r))
     {a i : ℕ} (ha : a = i) (h : i ≤ a) (U : Cᵒᵖ) (x : (P.level i).val.obj U) :
     (P.transition h).val.app U (systemSelectedIndexCast B r P ha.symm U x) = x := by
   subst a
   exact P.identity i U x
 
-/-- At selected indices the inverse tensor units form the strict adjunction unit.
-Source: Zheng 4.1.
-Proof: on each section the unit inserts one. The selected transition maps that
-one to one, and its original transition commutes with the equal-index casts. -/
+/-- At selected indices the inverse tensor units form the strict adjunction unit. -/
 def systemSelectedUnit (P : StrictRingSystem (selectedSystemRings B r)) :
     P ⟶ (systemSubsequence B r).obj ((systemSelectedFunctor S T B r).obj P) where
   app i := (systemSelectedAtSelected S T B r P i).inv
@@ -334,17 +296,14 @@ def systemSelectedUnit (P : StrictRingSystem (selectedSystemRings B r)) :
     exact (systemSelectedIndexCast_transition B r P (systemNextSelected_at r j).symm
       (systemNextSelected_at r i).symm h _ U x).symm
 
-/-- Scalar transposition extends a map from the selected restriction at every level.
-Source: Zheng 4.1. -/
+/-- Scalar transposition extends a map from the selected restriction at every level. -/
 def systemSelectedAdjunctLevel (P : StrictRingSystem (selectedSystemRings B r))
     (M : StrictRingSystem B) (f : P ⟶ (systemSubsequence B r).obj M) (m : ℕ) :
     systemSelectedLevel S B r P m ⟶ M.level m :=
   ((systemTensorAdj S B (systemNextSelected_spec r m).1).homEquiv _ _).symm
     (f.app (systemNextSelected r m) ≫ M.transition (systemNextSelected_spec r m).1)
 
-/-- The selected adjunct sends c tensor x to c times the transition of f(x).
-Source: Zheng 4.1; Stacks 03D7
-Proof: apply scalar tensor transposition and the inverse law of its Hom bijection. -/
+/-- The selected adjunct sends c tensor x to c times the transition of f(x). -/
 theorem systemSelectedAdjunctLevel_tmul (P : StrictRingSystem (selectedSystemRings B r))
     (M : StrictRingSystem B) (f : P ⟶ (systemSubsequence B r).obj M) (m : ℕ)
     (U : Cᵒᵖ) (c : (B.obj (op m)).obj.obj U)
@@ -363,11 +322,7 @@ theorem systemSelectedAdjunctLevel_tmul (P : StrictRingSystem (selectedSystemRin
   rw [Equiv.apply_symm_apply] at ht
   exact ht
 
-/-- The extended maps commute with all strict transitions.
-Source: Zheng 4.1.
-Proof: on a unit tensor, the first path is the composite transition in M applied
-to f at the upper selected index. The other path first uses P's transition. The
-strict square for f identifies them, and composition of M's transitions finishes. -/
+/-- The extended maps commute with all strict transitions. -/
 theorem systemSelectedAdjunct_comm (P : StrictRingSystem (selectedSystemRings B r))
     (M : StrictRingSystem B) (f : P ⟶ (systemSubsequence B r).obj M)
     {l m : ℕ} (h : l ≤ m) :
@@ -390,17 +345,14 @@ theorem systemSelectedAdjunct_comm (P : StrictRingSystem (selectedSystemRings B 
       ((P.transition (systemNextSelected_monotone r h)).val.app U x) at he
   rw [← he, ← M.compose, ← M.compose]
 
-/-- The strict map supplied by selected scalar transposition.
-Source: Zheng 4.1. -/
+/-- The strict map supplied by selected scalar transposition. -/
 def systemSelectedAdjunct (P : StrictRingSystem (selectedSystemRings B r))
     (M : StrictRingSystem B) (f : P ⟶ (systemSubsequence B r).obj M) :
     (systemSelectedFunctor S T B r).obj P ⟶ M where
   app := systemSelectedAdjunctLevel S B r P M f
   comm := systemSelectedAdjunct_comm S T B r P M f
 
-/-- A selected restriction map and its equal-index transition cancel the index cast.
-Source: Zheng 4.1.
-Proof: substitute the index equality and use the identity transition in M. -/
+/-- A selected restriction map and its equal-index transition cancel the index cast. -/
 theorem systemSelectedAdjunct_selected
     (P : StrictRingSystem (selectedSystemRings B r)) (M : StrictRingSystem B)
     (f : P ⟶ (systemSubsequence B r).obj M) {a i : ℕ} (ha : a = i)
@@ -411,10 +363,7 @@ theorem systemSelectedAdjunct_selected
   rw [M.identity]
   rfl
 
-/-- Restricting the selected adjunct and composing its unit recovers the input map.
-Source: Zheng 4.1.
-Proof: the unit inserts one with its equal-index transport. The adjunct's scalar
-formula reduces to the equal-index cancellation lemma. -/
+/-- Restricting the selected adjunct and composing its unit recovers the input map. -/
 theorem systemSelectedAdjunct_right_inv
     (P : StrictRingSystem (selectedSystemRings B r)) (M : StrictRingSystem B)
     (f : P ⟶ (systemSubsequence B r).obj M) :
@@ -432,9 +381,7 @@ theorem systemSelectedAdjunct_right_inv
   exact systemSelectedAdjunct_selected B r P M f (systemNextSelected_at r i) _ U x
 
 /-- The transition from the selected level above m sends the selected unit of x to
-one tensor x at m. Source: Zheng 4.1
-Proof: use the transition's tensor formula. Its scalar is one. Its selected transition
-is between the equal indices t(r(t(m))) and t(m), so it cancels the index cast. -/
+one tensor x at m. -/
 theorem systemSelectedTransition_unit
     (P : StrictRingSystem (selectedSystemRings B r)) (m : ℕ) (U : Cᵒᵖ)
     (x : (P.level (systemNextSelected r m)).val.obj U) :
@@ -445,11 +392,7 @@ theorem systemSelectedTransition_unit
   rw [systemSelectedAtSelected_inv_tmul, systemSelectedTransition_tmul, map_one]
   rw [systemSelectedIndexCast_identity B r P (systemNextSelected_at r _) _ U x]
 
-/-- Adjunction transposition followed by restriction recovers the strict map.
-Source: Zheng 4.1.
-Proof: test at each level on unit tensors. The adjunct uses f at the selected level
-above m and then M's transition. The strict square for f moves the transition before
-f, where the preceding selected-unit transition formula identifies the tensor. -/
+/-- Adjunction transposition followed by restriction recovers the strict map. -/
 theorem systemSelectedAdjunct_left_inv
     (P : StrictRingSystem (selectedSystemRings B r)) (M : StrictRingSystem B)
     (f : (systemSelectedFunctor S T B r).obj P ⟶ M) :
@@ -472,12 +415,7 @@ theorem systemSelectedAdjunct_left_inv
   rw [systemSelectedTransition_unit] at he
   exact he
 
-/-- The selected extension is left adjoint to actual restriction to the subsequence.
-Source: Zheng 4.1; Stacks 03D7
-Proof: the forward map restricts f and precomposes with the selected scalar units.
-The inverse is the scalar adjunct construction. The preceding two lemmas show the
-inverse laws. Naturality on the left is scalar-extension naturality on unit tensors;
-naturality on the right is associativity and restriction functoriality. -/
+/-- The selected extension is left adjoint to actual restriction to the subsequence. -/
 def systemSelectedAdjunction : systemSelectedFunctor S T B r ⊣ systemSubsequence B r :=
   Adjunction.mkOfHomEquiv
     { homEquiv := fun P M ↦
@@ -507,8 +445,7 @@ def systemSelectedAdjunction : systemSelectedFunctor S T B r ⊣ systemSubsequen
             (systemSubsequence B r).map g
         exact (Category.assoc _ _ _).symm }
 
-/-- Ordinary selected extension is additive componentwise.
-Source: Zheng 4.1. -/
+/-- Ordinary selected extension is additive componentwise. -/
 instance systemSelectedFunctorAdditive : (systemSelectedFunctor S T B r).Additive where
   map_add := by
     intro P Q f g
@@ -525,11 +462,7 @@ instance systemSelectedFunctorAdditive : (systemSelectedFunctor S T B r).Additiv
       rfl
     · exact he.symm
 
-/-- The ordinary selected tensor formula intertwines actual transposes.
-Source: Zheng 4.1.
-Proof: evaluate scalar transposition on its unit tensor. Naturality of the strict
-map at the arrow from r(t(m)) to m moves the system transition before f. The selected
-unit transition formula identifies its value with one tensor x. -/
+/-- The ordinary selected tensor formula intertwines actual transposes. -/
 theorem systemSelectedTranspose (m : ℕ) (P : StrictRingSystem (selectedSystemRings B r))
     (M : StrictRingSystem B) (f : (systemSelectedFunctor S T B r).obj P ⟶ M) :
     (systemTensorAdj S B (systemNextSelected_spec r m).1).homEquiv

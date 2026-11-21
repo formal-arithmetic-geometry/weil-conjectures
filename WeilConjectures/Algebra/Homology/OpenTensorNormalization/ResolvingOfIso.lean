@@ -8,7 +8,12 @@ module
 public import WeilConjectures.Algebra.Homology.OpenTensorNormalization.OpenTensorNormalizationData
 import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 
-/-! # Resolving complexes are closed under isomorphism -/
+/-! # Resolving complexes are closed under isomorphism
+
+## References
+
+* Stacks Project, Tag 06YS
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -18,8 +23,7 @@ open AlgebraicGeometry AlgebraicGeometry.Scheme
 open AlgebraicGeometry.Scheme.ProjectionRestriction
 namespace SheafOfModules.OpenTensorNormalization
 
-/-- A complex isomorphic to a resolving (K-flat, termwise flat) complex is resolving.
-Source: Stacks 06YS. -/
+/-- A complex isomorphic to a resolving (K-flat, termwise flat) complex is resolving. -/
 theorem resolving_prop_of_iso {X : Scheme.{u}}
     (R : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
     {P Q : CochainComplex (Mod R) ℤ} (a : P ≅ Q) (hQ : resolving R Q) :

@@ -13,7 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Balanced contraction on sheaf tensors
 
-Source: Stacks Project, Cohomology, Tag 08DE, proof.
+## References
+
+* Stacks Project, Cohomology, Tag 08DE (proof); Modules on Sites, Tag 0GMW
 -/
 
 @[expose] public section
@@ -147,23 +149,7 @@ private noncomputable def contractionPresheaf
             ⊗ₜ[R.obj.obj V] (show N.val.obj V from N.val.map i n)) (M.val.map_smul i b m).symm
 
 -- The coefficient comparison and tensor sheafification require extra equality checks.
-/-- The sectionwise balanced contraction descends to the sheaf tensor.
-Source: Stacks Project, Cohomology, Tag 08DE, proof; Modules on Sites, Tag 0GMW.
-
-Proof: construct the sectionwise R-linear contraction by restricting Mathlib's
-cancelBaseChange equivalence. Its formula is `m ⊗ (b ⊗ n) ↦ (b • m) ⊗ n`.
-Two tensor inductions show compatibility with restrictions, since both factors restrict
-and M's restriction carries b • m to the restricted scalar acting on the restricted m.
-The canonical comparison from R-sheafification of a restricted B-presheaf to restriction
-of its B-sheafification extends the restricted B-unit. Forget to abelian sheaves: this
-comparison is the identity of the same abelian sheafification. Thus it is invertible.
-The extension presheaf unit is inverted by B-sheafification. W_whiskerLeft preserves
-this property after tensoring with M.val. Sheafify that tensor map and compose with
-tensorObjIsoSheafification.inv to obtain an isomorphism onto M tensor_B E. Restrict
-this isomorphism, invert it and the preceding coefficient comparison, and compose with
-R-sheafification of the presheaf contraction and tensorObjIsoSheafification.inv.
-Naturality of both units gives the claimed section formula. No inverse identity for
-the forward map is asserted here. Zero rings, zero modules and empty spaces are included. -/
+/-- The sectionwise balanced contraction descends to the sheaf tensor. -/
 theorem exists_balancedTensorContraction (α : R ⟶ B)
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R)) :
     ∃ ψ : (restrictScalars (𝓻 α)).obj

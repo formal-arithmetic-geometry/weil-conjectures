@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Completion and inverse systems with stable ranges
 
-Source: Stacks Project, Theorem 02OC, the inverse-limit argument in its proof.
+## References
+
+* Stacks Project, Tag 02OC, the inverse-limit argument in its proof (after Lemma 02OB)
 -/
 
 @[expose] public section
@@ -21,24 +23,9 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits Opposite
 
-/-- An inverse system whose stable images come from H and whose reduction kernels
-are cofinal with the I-adic filtration has the same limit as the completion of H.
-Source: Stacks Project, Theorem 02OC, proof after applying Lemma 02OB.
-
-Proof: Write K_n = ker rho_n and N_n = range rho_n. Compatibility makes N an
-inverse subsystem of M. A compatible family x in M has x_n in N_n because
-x_n is the transition of x_(n+c), and the range of that transition is N_n.
-Thus inclusion induces an isomorphism lim N -> lim M. The first isomorphism
-theorem identifies N_n with H/K_n compatibly with all transitions. Factoring
-rho_n through theta_n gives I^(n+1) H <= K_n. The kernel hypothesis gives
-K_(n+c) <= I^(n+1) H. The quotient maps H/I^(n+1) H -> H/K_n and
-H/K_(n+c) -> H/I^(n+1) H therefore induce inverse maps on limits: both
-composites evaluate to the transition by c levels, hence to the original
-compatible family. Level zero of the adic completion is a zero module, so
-omitting it changes nothing. Compose these isomorphisms to obtain the asserted
-isomorphism; its projections are theta_n followed by evaluation by construction.
-This argument also covers c=0 and the zero and unit ideals, without finiteness
-or surjectivity of rho_n. -/
+/-- An inverse system `M` whose stable images come from `H` and whose reduction kernels
+are cofinal with the `I`-adic filtration has the same limit as the `I`-adic completion
+of `H`. -/
 theorem adicCompletion_iso_of_stable_ranges {A : Type u} [CommRing A]
     (I : Ideal A) (H : ModuleCat.{u} A) (M : ℕᵒᵖ ⥤ ModuleCat.{u} A)
     (ρ : ∀ n : ℕ, H →ₗ[A] M.obj (op n))

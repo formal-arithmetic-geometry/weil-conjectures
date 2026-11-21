@@ -122,6 +122,13 @@ import Mathlib.CategoryTheory.Sites.CoverLifting
 /-! # Ordinary module pullback comparison on specified slices
 
 The geometric morphism and its structural-map equation are inputs to this step.
+
+## References
+
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 04IE
+* Stacks Project, Tag 04IF
 -/
 
 @[expose] public section
@@ -802,33 +809,7 @@ private theorem sliceTensorComparisonNaturality
 
 end SliceHelpers
 -- Elaborating the sliced presentations unfolds several layers of functors.
-/-- Ordinary module pullback commutes with localization once the sliced data are given.
-
-Source: Stacks Project, Modules on Sites, Tags 04IF, 04IE, 03EL and 03EK
-
-Proof: Put B = f.inverse.obj A. Restrict RI and I.modules to the element site of B.
-For the source restrictions, transport these objects through a and the underlying
-isomorphisms of I. This defines RIA and IA: transport the ring operations and module
-operations along those isomorphisms, and use naturality at each operation to verify
-the generalized-section graph equations. Define ca by sectionwise restriction of c.
-The underlying-map equation for ca follows from that for c and the hypothesis hr.
-For every M, the source ordinary pullback is the sheafification of the presheaf
-whose sections are RX tensor over RIA with IA of the restriction of M. The comparison
-on its generators sends r tensor m to r tensor the image of m under the composite
-IA.moduleUnderlying, a, and I.moduleUnderlying.inv. The structural-map equation hr
-shows that this pairing is balanced over RIA, and the module graph equations show
-additivity. The pairing is linear over the restricted RX. It therefore descends to
-the presheaf tensor and then to its sheafification. Equivalently, apply the inverse
-of the tensor comparison for the localization with coefficient ring RI and identity
-structural map, after changing coefficients through the ring component of a.
-Construct its inverse by the same recipe using the inverse underlying comparisons.
-The two composites fix every local pure tensor and hence are identities by the tensor
-and sheafification universal properties. For a module map h, both paths in the required
-naturality square agree on local pure tensors by naturality of a and I.moduleUnderlying;
-the same universal properties give the displayed equality. Evaluating the defining
-pairing at the element-site object (W,b) gives exactly the final normalization equation.
-This argument uses local generators before sheafification and does not assume that
-sections of a tensor sheaf are globally pure tensors. -/
+/-- Ordinary module pullback commutes with localization once the sliced data are given. -/
 theorem geometric_ringed_pullback_slice_modules
     {C D : Type u} [SmallCategory C] [SmallCategory D]
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}

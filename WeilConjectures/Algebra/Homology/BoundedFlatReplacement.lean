@@ -22,8 +22,11 @@ public import Mathlib.CategoryTheory.Abelian.Refinements
 /-!
 # Functorial bounded-above flat replacements on a ringed site
 
-Source: Stacks Project, Cohomology on Sites, Lemma 06YS, via Lemma 077J;
-Derived Categories, Lemma 05T7 (1); Modules on Sites, Lemma 03EW (3), (4)
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 06YS, via Lemma 077J and 06XX
+* Stacks Project, Derived Categories, Lemma 05T7 (1) (cycle-pullback construction)
+* Stacks Project, Modules on Sites, Lemma 03EW (3), (4) (canonical flat covers)
 -/
 
 @[expose] public section
@@ -37,24 +40,7 @@ namespace CochainComplex
 /-- Bounded-above complexes on a ringed site have functorial termwise epimorphic
 quasi-isomorphisms from flat complexes with the same upper bound.
 The full subcategory below consists of complexes whose terms vanish above `N`.
-Epimorphisms here are epimorphisms of sheaves, hence locally surjective maps.
-Source: Stacks Project, Lemma 06YS via 077J and 06XX, using the cycle-pullback
-construction of Lemma 05T7 (1) and the canonical flat covers of Lemma 03EW (3), (4)
-
-Proof: (1) Sheafify the free module presheaf on the underlying presheaf of sets.
-Its evaluation counit is epic, and sheafification preserves flatness and epimorphisms;
-this gives a functorial flat cover. Zero sheaves are flat by tensor closedness.
-Apply the generic descending cycle-pullback construction to obtain flat terms,
-the same bound, and local lifts of compatible pairs `(y,x)`, where `x` is a cycle
-in the next degree and its augmentation equals the differential of `y`.
-(2) To prove termwise epimorphy, first lift the cycle `d(y)` using the pair `(d(y),0)`
-in the next degree. Lift the resulting compatible pair in the current degree;
-the composite of the two epic refinements supplies a local lift of `y`.
-(3) Mathlib's homology-map refinement criteria prove the quasi-isomorphism.
-A source cycle whose image is a boundary lifts through the compatible pair in the
-preceding degree, showing injectivity on homology. A target cycle lifts through
-`(y,0)` in the current degree to a source cycle, showing surjectivity on homology.
-Functoriality is supplied by the generic construction from the fixed cover functor. -/
+Epimorphisms here are epimorphisms of sheaves, hence locally surjective maps. -/
 theorem exists_functorial_boundedAbove_flat_replacement
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) (N : ℤ) :

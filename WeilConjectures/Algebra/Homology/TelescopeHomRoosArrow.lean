@@ -14,7 +14,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-! # The telescope Hom arrow and the ordinary-limit Roos arrow
 
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A; derived.tex, Tag 0949.
+## References
+
+* Stacks Project, Tags 0949, 0A0A
 -/
 
 @[expose] public section
@@ -416,29 +418,7 @@ end TelescopeHomRoosProof
 -- The canonical sheaf limit instances require more than the default elaboration budget.
 /-- The algebraic telescope-Hom comparison identifies the actual arrow, using both
 canonical legs of the map from the telescope to the ordinary colimit. Neither
-K-injectivity nor a quasi-isomorphism hypothesis is part of this assertion.
-
-Source: Stacks Project, sites-cohomology.tex, Tag 0A0A,
-lemma-colim-and-lim-of-duals; derived.tex, Tag 0949, lemma-colim-hocolim.
-
-Proof: write S for the direct sum of the sequence E. Internal Hom of the colimit
-is the inverse limit of Hom(E_m,I): transpose a local bilinear pairing to use the
-colimit universal property in each source degree, then interchange the products
-over source degrees and sequence indices. This gives a chain isomorphism to the
-ordinary limit of X via the specified tower isomorphism e. The same universal
-property identifies Hom(S,I) with the product of X, and precomposition by
-1-shift becomes the Roos difference delta. A degree-n map from the telescope
-has coordinates (a,b) in Hom(S,I)^n and Hom(S,I)^(n-1), with differential
-(d a,d b+(-1)^(n+1)delta(a)). Sending (a,b) to (a,(-1)^n b) identifies this
-with mappingCocone(-delta), whose differential is (d a,delta(a)-d b).
-Both inverse equations follow from the product and binary biproduct identities.
-For precomposition by f, its first coordinate is the ordinary-limit inclusion:
-the unshifted restriction of f is the family of colimit legs. Its second
-coordinate is zero because the shifted cochain restriction of f is zero.
-Therefore these two chain isomorphisms intertwine Hom(f,I) with the specified
-zero-second-coordinate comparison. They form the asserted isomorphism of arrows.
-This works for constant sequences and zero objects and uses no exactness of
-products or injectivity. -/
+K-injectivity nor a quasi-isomorphism hypothesis is part of this assertion. -/
 theorem telescopeHom_roos_arrow_iso
     (O : Sheaf J CommRingCat.{u}) (E : ℕ ⥤ ringedSiteComplex O)
     (I : ringedSiteComplex O)

@@ -10,7 +10,12 @@ public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.CategoryTheory.Abelian.Basic
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
-/-! # Comparison squares and direct-sum totalization -/
+/-! # Comparison squares and direct-sum totalization
+
+## References
+
+* Stacks Project, Tag 07A4
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -42,16 +47,7 @@ variable {A B D : Type*} [Category* A] [Category* B] [Category* D]
   [FB.PreservesZeroMorphisms] [∀ M, (FB.obj M).PreservesZeroMorphisms]
   [FD.PreservesZeroMorphisms] [∀ M, (FD.obj M).PreservesZeroMorphisms]
 
-/-- An ordinary bifunctor square induces the corresponding square on total complexes.
-Source: Stacks, Cohomology on Sites, Tag 07A4, signed direct-sum totalization.
-
-Proof: cancel the two total-comparison isomorphisms. In each degree, U preserves
-the coproduct since it is an equivalence. Test on every bidegree injection. The
-summand formula for the first comparison and naturality of alpha reduce the left
-side to the ordinary square. The summand formula for sigma, the formula for mapping
-chain maps through a bifunctor, and the second comparison's summand formula give
-exactly the same composite on the right. Degreewise extensionality finishes.
-The argument works with zero objects and empty sums and requires no boundedness. -/
+/-- An ordinary bifunctor square induces the corresponding square on total complexes. -/
 theorem tensorTotalComparisonSquare
     (alpha : C ⋙ U ≅ I)
     (alphaC : C.mapHomologicalComplex (.up ℤ) ⋙ U.mapHomologicalComplex (.up ℤ) ≅

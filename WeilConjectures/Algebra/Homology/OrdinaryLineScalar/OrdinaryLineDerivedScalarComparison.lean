@@ -258,8 +258,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-! # Ordinary signed-line tensor and derived scalar extension
 
-Source: Stacks Project, Tags 07A4, 0G7E and 0D6D; blueprint main-20261015,
-Tate-twist local freeness, proof (3).
+## References
+
+* Stacks Project, Tags 07A4, 0G7E, 0D6D, 03EK, 06YY and 06YU
 -/
 
 @[expose] public noncomputable section
@@ -337,24 +338,7 @@ end OrdinaryCore
 end ScalarTowerProof
 
 /-- The ordinary derived scalar comparison, normalized on flat-term K-flat models,
-including its inverse, arbitrary-derived-morphism naturality and evaluation square.
-Source: Stacks 07A4, 0G7E and blueprint proof (3)
-Proof: (1) trivialize the lines and identify signed opposite powers by actual dual
- evaluation. (2) exact line tensor is termwise on unbounded complexes by the preceding
- theorem. (3) reassociate the total tensor and use exactness and preservation of sums
- to show P tensor M remains K-flat with flat terms. (4) ringed-topos K-flat pullback
- for the identity topos proves the same for P tensor S, even for nonflat R to S.
- (5) the displayed balanced formula defines a sheaf map, with inverse reassociation
- after B inverse. Balancing moves r to alpha(r); both composites fix generators.
- The same formula commutes with differentials and chain maps and with homotopies.
- (6) site derived tensor descent and localization's universal property descend this
- natural chain isomorphism and its inverse. Naturality for roofs follows by inverting
- the quasi-isomorphism leg, so the result is independent of representatives.
- (7) tower coherence is the signed-power tower identity on generators.
- (8) evaluation compatibility sends both paths to p tensor s alpha(ev(l,phi)).
- (9) identity multiplication sends both paths to sp tensor l. For an arbitrary line
- automorphism the normalized map is tensor by that automorphism, including negative
- and zero exponents. No completeness, boundedness or flat coefficient map is used. -/
+including its inverse, arbitrary-derived-morphism naturality and evaluation square. -/
 theorem ordinary_line_derived_scalar_comparison
     {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
@@ -564,15 +548,7 @@ private theorem ordinary_identity_normalized
     set_option backward.isDefEq.respectTransparency.types false in rfl
 
 /-- Over an identical coefficient ring an arbitrary line comparison remains its actual
-signed-power tensor map after scalar-unitor normalization; it need not be identity.
-Source: blueprint proof (3), Stacks 03EK and 07A4
-Proof: insert the inverse scalar multiplication at the source and multiplication at
-the target. On generators the comparison then sends p tensor l to p tensor a_m(l).
-It is therefore the termwise tensor natural transformation displayed below. Apply the
-representative and scalar-unitor equations on flat-term K-flat complexes and paste
-using naturality. For an arbitrary complex, naturality along a flat-term K-flat
-resolution and cancellation of its invertible derived image give the formula.
-No sign or bound is involved. -/
+signed-power tensor map after scalar-unitor normalization; it need not be identity. -/
 theorem comparison_identity_arbitrary
     (p : ∀ {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
       (α : R ⟶ S), SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
@@ -612,11 +588,7 @@ theorem comparison_identity_arbitrary
         (siteSheafTensorRightIso R (P'.X i)).symm (hf i)
     · exact (DerivedCategory.isIso_Q_map_iff_quasiIso (Modules.{t, a} X R) f).2 hq
 
-/-- The multiplication line datum gives the scalar-unitor equation on every derived object.
-Source: blueprint proof (3), Stacks 03EK and 06YY
-Proof: the signed-line identity theorem gives B_m(l tensor s) = sl for every sign.
-Both chain-level paths send (p tensor l) tensor s to sp tensor l. The balanced
-universal property and localization's faithfulness give the equation for all objects. -/
+/-- The multiplication line datum gives the scalar-unitor equation on every derived object. -/
 theorem comparison_identity
     (p : ∀ {R S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
       (α : R ⟶ S), SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}

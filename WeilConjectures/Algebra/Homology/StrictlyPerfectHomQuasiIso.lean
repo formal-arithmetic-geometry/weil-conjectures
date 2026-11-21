@@ -14,7 +14,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExa
 
 /-! # A bounded finite free Hom complex preserves quasi-isomorphisms
 
-Source: Stacks Project, Cohomology, Tag 08DM. -/
+## References
+
+* Stacks Project, Tag 08DM
+-/
 
 @[expose] public section
 
@@ -23,17 +26,7 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 /-- Hom out of a bounded finite free complex preserves every quasi-isomorphism,
-without a boundedness hypothesis on its target.
-Source: Stacks Project, Cohomology, Tag 08DM, finite locally free Hom computation.
-
-Proof: The cone of s is acyclic. Filter the total Hom from E into this cone by
-source degree. Both bounds on E make this a finite filtration. Each associated
-graded complex is a shift of internal Hom from one finite free term into the cone.
-Internal Hom from a finite free module is a finite direct sum, hence exact, so
-these graded complexes are acyclic. Induction on the finite filtration proves
-that the total Hom into the cone is acyclic. The Hom mapping-cone identification
-then implies that Hom(E,s) is a quasi-isomorphism. No boundedness of either target
-is used. Rank zero, E=0, and the empty ringed space are included. -/
+without a boundedness hypothesis on its target. -/
 theorem quasiIso_homComplex_map_of_bounded_finiteFree
     (X : RingedSpace.{u})
     (E : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)

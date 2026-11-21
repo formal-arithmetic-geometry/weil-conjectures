@@ -22,7 +22,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Opposite
 /-!
 # Finite-free chart calculation for the pulled dual
 
-Source: Stacks Project, Modules on Sites, Tags 03EL, 03EO and 0GMX.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EL, 03EO and 0GMX.
+* Stacks Project, Modules on Sites, Tags 04J0 and 0FNY
 -/
 
 @[expose] public section
@@ -447,18 +450,7 @@ end GlobalComparison
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.defeqAttrib.useBackward true in
-/-- On a finite free chart the comparison defined by evaluation is invertible.
-Source: Stacks Project, Modules on Sites, Tags 04J0, 0GMX and 0FNY.
-
-Restrict pullback to the slice using the canonical localization comparison.
-Restriction of internal Hom identifies the two duals on that slice. Pairing-transfer
-uniqueness identifies the transported map with the slice dual comparison. On the unit,
-this comparison is the canonical pullback-unit isomorphism, by evaluation at one.
-Both dual functors are additive, and pullback is additive as the left adjoint of an
-additive functor. Naturality therefore gives invertibility on finite biproducts of
-units. Transport along the supplied free trivialization and then back along the
-localization and internal-Hom restriction isomorphisms. The empty biproduct handles
-rank zero; no flatness or nonzero-ring hypothesis is needed. -/
+/-- On a finite free chart the comparison defined by evaluation is invertible. -/
 theorem isIso_over_pullback_dual_of_free
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)

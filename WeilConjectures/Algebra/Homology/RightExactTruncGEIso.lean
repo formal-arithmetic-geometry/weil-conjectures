@@ -10,7 +10,9 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 
 /-! # Right exact functors commute with lower truncation
 
-Source: Stacks Project, Tags 0118 and 0654, the explicit good truncation construction.
+## References
+
+* Stacks Project, Tags 0118 and 0654 (the explicit good truncation construction)
 -/
 
 @[expose] public section
@@ -58,19 +60,7 @@ private theorem isIso_projection_f
   rw [ComplexShape.Embedding.isIso_liftExtend_f_iff _ _ _ he]
   exact HomologicalComplex.isIso_restrictionToTruncGE' K _ _ hb
 
-/-- An additive functor preserving finite colimits commutes with good lower truncation.
-Source: Stacks Project, Tag 0118 (canonical truncation) and Tag 0654.
-
-Proof: In degrees below n both complexes are zero, since an additive functor
-preserves zero objects. Above n both terms are F.obj (K.X i), with the same
-mapped differentials. At n, the term on the left is F.obj (coker d^(n-1)), while
-the term on the right is coker (F.map d^(n-1)). Preservation of cokernels gives
-the term isomorphism. The differential leaving n is the unique map descending
-from F.map d^n; the cokernel universal property proves compatibility with that
-differential. All other differential squares are identities or zero squares.
-These component isomorphisms assemble to an isomorphism of complexes. This
-argument works for every integer n, arbitrary unbounded complexes, and zero
-categories, with no exactness assumption on K and no preservation of kernels. -/
+/-- An additive functor preserving finite colimits commutes with good lower truncation. -/
 theorem nonempty_map_truncGE_iso
     {A : Type u₁} {B : Type u₂} [Category.{v₁} A] [Category.{v₂} B]
     [Abelian A] [Abelian B] (F : A ⥤ B) [F.Additive] [PreservesFiniteColimits F]

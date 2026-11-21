@@ -8,9 +8,13 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomOver
 
-/-! # Naturality of internal Hom under restriction
+/-!
+# Naturality of internal Hom under restriction
 
-Source: Stacks Project, Modules on Sites, Sections 04TT and 04IX.
+## References
+
+* Stacks Project, Modules on Sites, Sections 04TT (internal Hom) and 04IX (localization); this is
+  the sectionwise comparison underlying Cohomology, Tag 08DL
 -/
 
 @[expose] public section
@@ -23,23 +27,7 @@ namespace CategoryTheory
 
 set_option backward.isDefEq.respectTransparency.types false in
 set_option backward.isDefEq.respectTransparency false in
-/-- Naturality of the internal Hom restriction isomorphism in both arguments.
-
-Source: Stacks Project, Modules on Sites, Section 04TT (internal Hom), and
-Definition 04IX (localization); this is the sectionwise comparison underlying
-Cohomology Tag 08DL.
-
-Proof: Forget to presheaves of modules and evaluate at W in the opposite of Over U.
-A section is a module morphism between restrictions to Over W.left. The forward
-comparison sends it to its precomposition with Over.iteratedSliceForward W.
-The left side first sends φ to f restricted to W.left composed with φ composed
-with g restricted to W.left, and then precomposes this composite. The right side
-first precomposes φ and then composes with the twice restricted f and g.
-On every object V over W, both expressions act by f at V.left.left, then φ at
-V.left.left, then g at V.left.left. Equality of the component linear maps gives
-equality of presheaf morphisms; the fully faithful forgetful functor gives equality
-of sheaf morphisms. No nonempty-open, finiteness, or boundedness hypothesis is used;
-identity maps and zero maps satisfy the same formula. -/
+/-- Naturality of the internal Hom restriction isomorphism in both arguments. -/
 theorem overHomObjIso_naturality
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat RingCat.{u})]

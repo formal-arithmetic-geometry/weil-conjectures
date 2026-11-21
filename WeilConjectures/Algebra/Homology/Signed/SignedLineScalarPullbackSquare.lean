@@ -16,8 +16,6 @@ import WeilConjectures.Algebra.Homology.SmoothPurity.PullbackPairingTransfer
 
 /-! # Pullback of the signed line scalar square
 
-Source: blueprint main-20261015, prop-weil-twist-preserves.proof.md, first and final
-sentences; Stacks Project, Modules on Sites, Tags 03EL, 0GMX and 04J0.
 
 The structural ring maps are written as adjuncts R → u_* R' and S → u_* S'.
 The pullbacks are Mathlib's actual module left adjoints, with existence supplied by
@@ -26,6 +24,13 @@ The square is tested on the adjunction-unit images of scalar tensors. These gene
 by the two adjunctions, so this is the morphism equality under canonical reassociation,
 not an equality restricted to bases or to global sections. The evaluation clause likewise
 specifies the transpose of pulled evaluation, precomposed by the inverse positive map.
+
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 04J0
+* Stacks Project, Tag 0FNY
+* Stacks Project, Tag 0GMX
 -/
 
 @[expose] public section
@@ -178,32 +183,7 @@ private theorem signedLinePullbackNormalized_unique
     exact (cancel_mono _).1 hcomp
 
 /-- Unique normalized signed pullbacks and compatibility with the scalar square in every
-integer degree. Source: blueprint prop-weil-twist-preserves.proof.md, first/final sentences;
-Stacks 03EL, 0GMX, 0FNY and 04J0.
-
-Proof:
-1. The inverse image and module tensor comparison give normalized tensor and unit maps.
-The unit multiplies the coefficient factors and its inverse inserts 1.
-2. Reassociate scalar extension across the commuting coefficient square. On generators
-(x tensor y) tensor t goes to (x tensor 1) tensor b(y)t. The reverse inserts 1 and
-multiplies by ι'(r'); balancing and b ι = ι' a prove they are mutual inverses.
-3. Starting with the unit and p (respectively q), iterate the tensor comparison. All
-positive powers remain locally free rank one by their tensor bases.
-4. Apply finite_free_dual_pullback to each positive power. Compose its evaluation-defined
-comparison with precomposition by the inverse positive map. The evaluation identity
-follows by cancelling the positive map. The same construction gives the q-family.
-5. Degree zero and one are fixed; tensor recursion forces all positive maps. Pulled
-evaluation and invertibility of the positive maps force every negative map, proving
-uniqueness. This is equality of sheaf Hom sections on every localized site.
-6. Pullback localization identifies local and global units and carries every trivializing
-cover to a trivializing cover. The slice continuity follows from cover preservation.
-7. Choose a local basis e for L and its image v = c(e tensor 1) for N. Their pulled images
-under p and q are compatible target bases by the assumed square. Positive recursion
-and dual evaluation carry every signed basis to its corresponding target basis.
-8. On these charts both scalar-square composites carry the signed generator to the same
-target signed basis. Linearity gives equality on every scalar multiple; sheaf uniqueness
-glues the equality. This includes zero and negative degrees and uses no flatness.
--/
+integer degree. -/
 theorem existsUnique_signedLineScalarPullbackSquare
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)

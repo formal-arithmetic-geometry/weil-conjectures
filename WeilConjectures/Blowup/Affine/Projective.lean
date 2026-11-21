@@ -40,20 +40,13 @@ Mathlib does not make the total-degree grading of `MvPolynomial σ A` a global i
 one may want to grade by another weight function; it is enabled here as a local instance, as
 it is in `WeilConjectures.AlgebraicGeometry.ProjectiveSpace`.
 
-## Blueprint
+Projectivity of `Bl_I(Spec A) ⟶ Spec A` is *not* formalized: this Mathlib has no morphism
+class `IsProjective` for schemes, so the statement cannot be phrased. What is needed of it is
+exactly the closed immersion and the factorization proved here; properness, which would follow
+from projectivity, is obtained directly in `WeilConjectures.Blowup.Affine.Proper`.
 
-This file implements `def:nagata-affine-blowup-projective-embedding` and
-`lemma:nagata-affine-blowup-projective-embedding` of the Nagata compactification blueprint.
-
-`prop:nagata-affine-blowup-projective` — projectivity of `Bl_I(Spec A) ⟶ Spec A` — is *not*
-formalized: this Mathlib has no morphism class `IsProjective` for schemes, so the statement
-cannot be phrased. What the blueprint's proof needs of it is exactly the closed immersion and
-the factorization proved here; properness, which is what the blueprint deduces from
-projectivity, is obtained directly in `WeilConjectures.Blowup.Affine.Proper`.
-
-The general input, that `Proj` of a surjective graded ring homomorphism is a closed immersion
-(the absolute case of (MLRP3) of `lemma:nagata-relative-proj-interface`), is missing from
-Mathlib and is proved in
+The general input, that `Proj` of a surjective graded ring homomorphism is a closed immersion,
+is missing from Mathlib and is proved in
 `WeilConjectures.Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor` as
 `AlgebraicGeometry.Proj.isClosedImmersion_map`.
 
@@ -113,9 +106,7 @@ theorem toProjectiveSpace_toSpec :
     gradeZeroRingHom_reesGradedPresentation_comp, toSpec]
 
 /-- **The affine blow-up along a finitely generated ideal factors through a projective
-space over `Spec A` by a closed immersion.** This is the content of the blueprint's
-projectivity statement that can be phrased in this Mathlib; see the module docstring for why
-projectivity itself cannot. -/
+space over `Spec A` by a closed immersion.** -/
 theorem exists_isClosedImmersion_comp_projectiveSpaceOverAffineToSpec (hI : I.FG) :
     ∃ (σ : Type u) (_ : Finite σ) (e : AffineBlowup I ⟶ Proj.projectiveSpaceOverAffine σ A),
       IsClosedImmersion e ∧ e ≫ Proj.projectiveSpaceOverAffineToSpec σ A = toSpec I := by

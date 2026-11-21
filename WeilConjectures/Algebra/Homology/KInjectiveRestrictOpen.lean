@@ -13,7 +13,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-!
 # Restriction to an open preserves K-injective complexes
 
-Source: literature/stacks-project/cohomology.tex, Lemma 08BS
+## References
+
+* Stacks Project, Lemma 08BS (Cohomology)
 -/
 
 @[expose] public section
@@ -26,16 +28,7 @@ universe u
 namespace AlgebraicGeometry
 
 /-- Restriction of a K-injective complex of modules on a ringed space to an open
-subspace is K-injective.
-
-Source: literature/stacks-project/cohomology.tex, Lemma 08BS.
-Proof: (1) Restriction is exact and right adjoint to the exact extension-by-zero
-functor by `AlgebraicGeometry.open_restriction_adjunction_exact`
-(lem-sc-derived-open-restriction-adjunction-exact), so the exact-left-adjoint
-hypothesis holds for the module categories on `U` and `X`.
-(2) Apply `CategoryTheory.Adjunction.preservesKInjectiveComplexes`
-(lem-weil-pbc-right-adjoint-preserves-kinjective) to this adjunction and the given
-K-injective `I`. Its termwise restriction is therefore K-injective on `U`. -/
+subspace is K-injective. -/
 theorem kInjective_of_restrict_open (X : RingedSpace.{u}) (U : Opens X)
     (I : CochainComplex (SheafOfModules.{u} (moduleRings X)) ℤ)
     [I.IsKInjective] :

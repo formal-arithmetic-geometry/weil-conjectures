@@ -16,9 +16,12 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
-/-! # Finiteness and reduction of an adic tower limit
+/-!
+# Finiteness and reduction of an adic tower limit
 
-Source: Stacks Project, Cohomology of Schemes, proof of Lemma 087W.
+## References
+
+* Stacks Project, Cohomology of Schemes, proof of Lemma 087W
 -/
 
 @[expose] public section
@@ -31,29 +34,7 @@ namespace ModuleCat
 
 /-- Finite generation and the projection kernel formula for an algebraic adic tower.
 This concerns one given completed module and one given limit comparison, and constructs
-neither modules, functors nor morphism lifts.
-
-Source: Stacks Project, Cohomology of Schemes, Lemma 087W, generator-lifting,
-Nakayama, Mittag-Leffler and the final cokernel calculation.
-
-Proof: Surjectivity of successive transitions implies surjectivity of every limit
-projection by recursive lifting. Lift a finite generating family at level zero to the
-limit. At level n the resulting map from a finite free A/I^(n+1)-module is surjective:
-its reduction modulo I generates level zero, and I/I^(n+1) is nilpotent, so apply
-nilpotent Nakayama. The kernels of these free presentations have surjective transitions.
-Indeed lift a kernel vector one level; its image is in I^(n+1) times the next module.
-Surjectivity of the presentation supplies a correction vector in I^(n+1) times the
-free module; subtract it without changing the preceding coordinate. The exactness
-lemma for towers with surjective kernels now gives a surjection from a finite free
-completed module onto the limit. The residue equation makes this surjection completed
-linear, so N is finite. Fix n. An element in the kernel of the nth projection lifts
-to the completed free module. Its nth coordinate lies in the presentation kernel;
-lift this coordinate through the kernel tower and subtract the resulting kernel
-sequence. The difference has zero nth coordinate in the completed free module, hence
-lies in I^(n+1) times that free module by the completion quotient formula (the ideal
-is finitely generated because A is Noetherian). Its image is the original element,
-so it lies in I^(n+1)N. Conversely I^(n+1)N maps to zero by annihilation of the nth
-term. This proves the kernel equality as an A-submodule. -/
+neither modules, functors nor morphism lifts. -/
 theorem adicTower_finiteLimit (A : Type u) [CommRing A] [IsNoetherianRing A]
     (I : Ideal A) (T : ℕᵒᵖ ⥤ ModuleCat.{u} A)
     (hfinite : ∀ n : ℕ, Module.Finite A (T.obj (op n)))

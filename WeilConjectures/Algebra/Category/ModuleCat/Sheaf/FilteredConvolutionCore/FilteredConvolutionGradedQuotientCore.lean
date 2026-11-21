@@ -32,25 +32,21 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   {R : Sheaf J CommRingCat.{w}}
 
-/-- The recorded general-site module category, with coefficient-sized modules.
-Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations -/
+/-- The recorded general-site module category, with coefficient-sized modules. -/
 abbrev Modules (R : Sheaf J CommRingCat.{w}) :=
   ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
 
-/-- Integer cochain complexes in the recorded category of module sheaves.
-Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations -/
+/-- Integer cochain complexes in the recorded category of module sheaves. -/
 abbrev Complex (R : Sheaf J CommRingCat.{w}) := CochainComplex (Modules R) ℤ
 
 /-- The actual sum of images of F^p P tensor F^(r-p) Q inside the total tensor complex.
-The integers p enumerate exactly the pairs (p,q) with p+q=r.
-Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations, tensor convolution -/
+The integers p enumerate exactly the pairs (p,q) with p+q=r. -/
 def level {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (r : ℤ) : Subobject (P ⊗ Q) :=
   imageSubobject (Sigma.desc (fun p : ℤ ↦
     (F.F p).arrow ⊗ₘ (G.F (r - p)).arrow))
 
-/-- The direct sum of tensor products of the existing graded quotient complexes.
-Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations, third graded identity -/
+/-- The direct sum of tensor products of the existing graded quotient complexes. -/
 abbrev gradedSource {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (r : ℤ) : Complex R :=
   ∐ (fun p : ℤ ↦ F.gradedPiece p ⊗ G.gradedPiece (r - p))
@@ -58,8 +54,7 @@ abbrev gradedSource {P Q : Complex R} (F : DecreasingFiltration P) (G : Decreasi
 /-- The canonical comparison is characterized on every filtered tensor summand.
 The lift lands in the r-th convolution step and its composite with the quotient is alpha
 after tensoring the two quotient projections. Thus this specifies the canonical map,
-independently of any splitting; the lift itself is unique by the subobject monomorphism.
-Source: latest blueprint, sk-i-additivity.proof.md, Filtered operations, third graded identity -/
+independently of any splitting; the lift itself is unique by the subobject monomorphism. -/
 def IsCanonical {P Q : Complex R} (F : DecreasingFiltration P) (G : DecreasingFiltration Q)
     (H : DecreasingFiltration (P ⊗ Q)) (r : ℤ)
     (α : gradedSource F G r ⟶ H.gradedPiece r) : Prop :=

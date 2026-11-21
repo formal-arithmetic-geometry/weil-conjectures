@@ -14,8 +14,10 @@ public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import WeilConjectures.Algebra.Homology.BaseLocalizationMap
 /-! # Localizing the base and second factor of a derived tensor
 
-Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
-second coefficient ring; More on Algebra, Tag 06Y6.
+## References
+
+* Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
+  second coefficient ring; More on Algebra, Tag 06Y6.
 -/
 
 @[expose] public section
@@ -42,28 +44,7 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
-/-- Naturality of the characterized base-localization map.
-Source: Stacks Project, Tag 06Y6.
-
-Proof: write T for exact restriction from Rp to R on derived categories, and
-eta and eta-prime for the universal lifts defining the two canonical maps.
-The defining counit equations and the assumed counit compatibility of delta
-and epsilon show that T whiskered with delta followed by eta-prime and eta
-followed by epsilon have the same counit composite. Uniqueness of the
-universal lift to Kprime therefore identifies these transformations.
-The input isomorphism is a composite of restriction composition and the
-homotopy and derived factorization isomorphisms. Naturality of each of these
-three isomorphisms gives FR(f) followed by v-prime equals v followed by
-T(FRp(f)). Apply L.derived, naturality of delta and eta, and the preceding
-cocycle equation. This identifies the two composites of derived morphisms.
-Apply degree-i B-linear homology and conjugate by the four cohomologyIso
-isomorphisms. The given equations for g and h identify this equality with
-naturality of baseLocalizationCohomologyMap. Finally evaluate the desired
-D-linear equality on 1 tensor x. The generator equations he and he-prime,
-and extendScalars.map_tmul, reduce it to that B-linear equality. The
-extension-of-scalars hom_ext lemma proves equality on all elements. Zero
-complexes, identity and zero chain maps, and zero D satisfy the same proof;
-no invertibility of localizedComparison or flatness of D is used. -/
+/-- Naturality of the characterized base-localization map. -/
 theorem baseLocalization_naturality (S : Submonoid R) [IsLocalization S Rp] (i : ℤ)
     (Q Q' : CochainComplex (ModuleCat.{u} A) ℤ) (f : Q ⟶ Q')
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

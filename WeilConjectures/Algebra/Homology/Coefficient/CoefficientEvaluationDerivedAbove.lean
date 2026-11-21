@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Zero
 /-!
 # The derived extension vanishes above its defining level
 
-Source: Zheng, Construction 4.1, p. 21, the zero components of `e_n!`.
+## References
+
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 
 @[expose] public noncomputable section
@@ -29,15 +31,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Above the defining level every evaluated derived extension is zero.
-Source: Zheng, Construction 4.1, p. 21
-Proof: represent the input by a complex and replace it by a K-flat resolution. The
-resolution augmentation becomes invertible in the derived category. The derived
-comparison is invertible on that resolution, so exact evaluation and its localization
-factor identify the evaluated extension with the localization of the ordinary evaluated
-complex. Above the chosen level all its terms are zero, hence its identity chain map
-is zero. Localization preserves zero morphisms, so it takes this zero complex to a zero
-object. Transport zero-ness back through the three displayed isomorphisms. -/
+/-- Above the defining level every evaluated derived extension is zero. -/
 theorem coefficientEvaluationDerivedAbove
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive]

@@ -10,7 +10,9 @@ public import Mathlib.AlgebraicTopology.SimplicialSet.Finite
 /-!
 # An inclusion of finite simplicial sets is a chain of one-simplex extensions
 
-Source: literature/stacks-project/simplicial.tex, Lemma 018S
+## References
+
+* Stacks Project, Tag 018S, with Tag 018R
 -/
 
 @[expose] public section
@@ -192,19 +194,7 @@ private theorem range_inclusion {S : SSet.{u}} (A : S.Subcomplex)
 
 set_option linter.unusedVariables false in
 /-- An inclusion of finite simplicial sets can be built by adjoining one simplex
-at a time. Source: literature/stacks-project/simplicial.tex, Lemma 018S, with
-Lemma 018R.
-The proof proceeds by induction on the finite set of nondegenerate simplices
-of `V` outside `U`. Every simplex is an iterated degeneracy of a
-nondegenerate one, so containing all such simplices forces equality. For the
-induction step choose a missing nondegenerate simplex `x` of least degree
-`n`; all lower-degree simplices already lie in `U`. Adjoin to `U` all
-degeneracies of `x`. The surjection-injection factorization in the simplex
-category and the simplicial identities show that this is a subcomplex, adds
-nothing below `n`, adds exactly `x` in degree `n`, and adds only degenerate
-simplices above `n`. It remains finite and nonempty in every degree, and has
-one fewer missing nondegenerate simplex. Applying the induction hypothesis
-and prepending this first extension gives the displayed chain. -/
+at a time. -/
 theorem add_simplices
     (S : SSet.{u})
     (U V : S.Subcomplex)

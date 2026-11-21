@@ -14,9 +14,13 @@ import WeilConjectures.Algebra.Homology.KFlatConeTrianglePresentation
 import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonConeRows
 import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare
 
-/-! # Exact five-term diagrams for localized tensor comparison
+/-!
+# Exact five-term diagrams for localized tensor comparison
 
-Source: Stacks Project, Tags 06Y6, 0BYJ and 0DJA(1).
+## References
+
+* Stacks Project, Tags 06Y6 (exactness of derived tensor), 0BYJ (functorial associativity)
+  and 0DJA(1) (the tensor comparison)
 -/
 
 @[expose] public section
@@ -51,40 +55,8 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- The comparison is a morphism of exact five-term cohomology sequences.
-No component is assumed or asserted to be invertible.
-
-Source: Stacks Project, Tag 06Y6 (exactness of derived tensor), Tag 0BYJ
-(functorial associativity), and Tag 0DJA(1) (the tensor comparison).
-
-Proof: use exists_kFlat_cone_triangle_presentation to present T as the
-localization of the actual cone of a chain map f between K-flat P₁ and P₂.
-This is a proved construction: apply a functorial flat resolution to a cone
-presentation of T, use naturality of its augmentation and the triangle axiom,
-and check K-flatness of the cone by tensor-cone acyclicity. Choose base-derived
-models of P₁ tensor Q, P₂ tensor Q and cone(f) tensor Q locally in this
-existential proof; no definition chooses data from mere existence.
-
-The intermediate exists_localizedTensorComparison_cone_rows supplies the
-exact localized source row and four comparison squares for this chain map.
-Its target connecting map is fixed to homologyδOfTriangle of the concrete
-triangle obtained by scalar extension and tensoring with N. The separate,
-proved tensorConeTriangle_five_term_exact supplies target exactness: scalar
-extension and tensor each identify the image of a cone with another cone;
-three Mathlib homology exactness lemmas give the five-term exact row. This
-argument needs no flatness or K-flatness on N. Combine the four squares using
-ComposableArrows.homMk₄, with the five specified comparisons as its components.
-
-Finally extract the three object isomorphisms from the cone-presentation
-triangle isomorphism, and compose with the prescribed representative
-isomorphisms. Apply exists_localizedTensorComparison_representative_square
-five times (the first two representatives occur in two degrees). Each source
-and target isomorphism and commuting square gives Arrow.isoMk. This theorem
-already accepts arbitrary prescribed models, so no separate model-independence
-step is needed in this transport. The rows remain those constructed for the
-actual cone; their component arrows are identified with the requested ones.
-No comparison-isomorphism hypothesis or five lemma is used. Zero rings, zero
-maps, split cones, unbounded complexes and arbitrary degrees are included. -/
+/-- The comparison is a morphism of exact five-term cohomology sequences. No component is
+assumed or asserted to be invertible. -/
 theorem exists_localizedTensorComparison_triangle_five_term_diagram
     (hC : Module.Flat (A ⊗[R] B) C)
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →

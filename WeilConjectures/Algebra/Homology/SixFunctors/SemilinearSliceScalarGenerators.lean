@@ -12,7 +12,10 @@ import WeilConjectures.Algebra.Homology.Slice.SliceScalarLevelComparison
 
 /-! # Assembly of the scalar comparison on strict systems and complexes
 
-Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
+## References
+
+* Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK
+* Stacks Project, Sites, Tag 00WK
 -/
 
 @[expose] public noncomputable section
@@ -79,39 +82,7 @@ variable
   [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
 
 /-- The normalized scalar comparison exists on strict semilinear systems and on
-arbitrary unbounded complexes, with no flatness, surjectivity or completeness assumption.
-Source: Stacks 0E8I, with Tags 03DI, 03CY, 03EK and Sites 00WK
-
-Proof:
-1. Extension over B_n and extension over O after scalar restriction have the same
-abelian direct-sum presheaf and the same O-action. Uniqueness of the action on its
-associated sheaf gives the unique summand-preserving scalarIdentification. The same
-calculation for q_{m,n} extends transitions by [x]_f ↦ [t_{m,n}(x)]_f; identity and
-composition follow on every summand. This constructs extension.F and its maps.
-2. By the underlying-set sheafification comparison and local-section theorem (00WK),
-every section of a sheafification is locally represented by a presheaf section. The
-extension presheaf sections are finite sums of original summands. Tensor sections are
-locally finite sums of pure tensors; refine the cover for their finitely many factors.
-Thus equality can be checked on [x]_f tensor b, even after successive sheafifications.
-3. Apply exists_ringedSliceTensorGenerators with H = B_n as an O-module and compose
-with the summand-preserving scalar identification. This gives component with the stated
-forward formula, inverse formula and uniqueness. No flatness is used.
-4. The formula sends c([x]_f tensor b) to [x tensor cb]_f, which equals
-c[x tensor b]_f because restriction preserves multiplication. The local generator test
-proves B_n-linearity; injectivity then proves linearity of the inverse.
-5. The two transition composites send a generator to [x tensor q_{m,n}(b)]_f;
-restriction and q commute by naturality of the ring-sheaf transition. This proves all
-transition squares; composing with inverses gives the inverse system morphism.
-6. A module map v acts on the first tensor factor, so both naturality composites send
-[x]_f tensor b to [v(x) tensor b]_f. The local generator test proves naturality in G.
-7. The scalar units insert one; q preserves one, so they define strict O-tower maps.
-Both augmentation composites send [x]_f to [x tensor 1]_f. Sheafification uniqueness
-gives the asserted square of sheaf maps; compose with the inverse for the inverse square.
-8. Apply comparison degreewise to a cochain complex. Naturality with each differential
-gives the chain equation; additivity gives complexes. The inverse chain equation follows
-by cancellation. The transition, generator and augmentation equations hold in every
-degree, and naturality with chain maps follows degreewise. There is no sum over degrees
-or totalization, so the result holds for unbounded complexes. -/
+arbitrary unbounded complexes, with no flatness, surjectivity or completeness assumption. -/
 theorem exists_semilinearSliceScalarGenerators (O : Sheaf J CommRingCat.{max c v r})
     (α : (Functor.const ℕᵒᵖ).obj O ⟶ B) :
     Nonempty (SemilinearSliceScalarGenerators.{c, v, r} B U O α) := by

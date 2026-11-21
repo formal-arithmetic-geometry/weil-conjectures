@@ -11,7 +11,10 @@ public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-! # Iterating an adjoint coefficient comparison through a flat extension
 
-Source: Stacks Project, Tags 00HD and 05G3. -/
+## References
+
+* Stacks Project, Tags 00HD and 05G3
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -205,26 +208,7 @@ private theorem forgetAdjunct
   have ht := congrArg (fun z ↦ z ≫ sy.inv) hax
   simpa only [Category.assoc, Iso.hom_inv_id, Category.comp_id] using ht
 
-/-- The coefficient adjunction and exact homology comparison commute with iteration.
-Source: Stacks Project, Tag 00HD (exact tensor by a flat module) and Tag 05G3
-(extension/restriction adjunction).
-
-Proof: transpose the desired equality twice, first through extension from E to D
-and then through extension from T to E. On 1 tensor (1 tensor x), the hypothesis
-on e changes the right hand side to aD(1 tensor s(x)). The formulas ha and hb
-express both sides in terms of a and b and homology of vE and vD. Exactness of
-extension along k identifies cohomology of extension with extension of cohomology;
-its inverse in the conclusion is the map induced on cycles and boundaries.
-Naturality of this comparison with the adjunction unit identifies the left hand
-side with homology of the coefficient chain map x -> tau(1 tensor vE(x)).
-Tensor induction using the generator equations for vE, vD and tau identifies that
-chain map with vD. Substitute s.hom followed by b equals a. The two restriction
-homology isomorphisms combine by naturality of homology of the composite exact
-restriction functor. Thus the two transposes agree, and adjunction injectivity
-proves the equation. Only k needs to be flat: the other homology maps are taken
-after coefficient extension, without commuting nonexact tensor with homology.
-For zero complexes and zero rings the same unit identities hold; for k the
-identity this is ordinary naturality. -/
+/-- The coefficient adjunction and exact homology comparison commute with iteration. -/
 theorem flatIteratedScalarExtension_homology_square
     (A T E D : Type u) [CommRing A] [CommRing T] [CommRing E] [CommRing D]
     (f : A →+* T) (c : T →+* E) (d : T →+* D) (k : E →+* D)

@@ -30,14 +30,6 @@ natural `ℕ`-grading, where the degree `n` piece consists of the monomials `a·
 - the `GradedRing (reesGrading I)` instance;
 - `AlgebraicGeometry.irrelevant_le_span_range_reesX` — the irrelevant ideal is contained in
   the ideal spanned by the degree-one elements `a·X`, `a ∈ I`.
-
-## Blueprint
-
-This file implements `def:nagata-rees-algebra`, `def:nagata-rees-piece`,
-`def:nagata-rees-components`, `lemma:nagata-rees-piece-membership`,
-`lemma:nagata-rees-component-finite-support`, `lemma:nagata-rees-sum-components` and
-`lemma:nagata-rees-degree-zero` of the Nagata compactification blueprint.
-
 -/
 
 @[expose] public section

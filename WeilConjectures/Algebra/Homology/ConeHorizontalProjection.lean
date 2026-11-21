@@ -15,7 +15,9 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 
 /-! # Explicit projections onto a horizontal column
 
-Source: Stacks Project, Homology, Tag 012X, the first filtration.
+## References
+
+* Stacks Project, Homology, Tag 012X (the first filtration)
 -/
 
 @[expose] public section
@@ -29,8 +31,7 @@ variable [∀ L : HomologicalComplex₂ C (ComplexShape.up ℕ)
   (ComplexShape.up ℕ), L.HasTotal (ComplexShape.up ℕ)]
 
 /-- Projection from a total degree onto its column `p`, before extension by zero.
-It selects that column in the coproduct and is zero on the other columns.
-Source: Stacks Project, Tag 012X, first-filtration summands. -/
+It selects that column in the coproduct and is zero on the other columns. -/
 noncomputable def horizontalTotalProjection
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))
     (p m : ℕ) : (K.total (ComplexShape.up ℕ)).X m ⟶ (K.X p).X (m - p) :=
@@ -40,8 +41,7 @@ noncomputable def horizontalTotalProjection
       omega)).hom else 0)
 
 /-- Projection from the integer-extended total object onto an extended column.
-When `m < p` the column object is zero and the projection is the zero map.
-Source: Stacks Project, Tag 012X, first-filtration summands extended by zero. -/
+When `m < p` the column object is zero and the projection is the zero map. -/
 noncomputable def horizontalExtendedProjection
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))
     (p : ℕ) (m : ℤ) :
@@ -58,9 +58,7 @@ noncomputable def horizontalExtendedProjection
 /-- The signed degreewise projection from the total-map cone to the shifted column cone.
 This is a morphism of objects, not asserted to commute with the full cone differential:
 the horizontal differential is killed only after restriction to the filtration tail.
-The source projection is multiplied by `(-1)^p`; the target projection is unchanged.
-Source: Stacks Project, Tag 012X, Lemma 12.25.1(1), and the parent node's
-column-cone sign calculation. -/
+The source projection is multiplied by `(-1)^p`; the target projection is unchanged. -/
 noncomputable def coneHorizontalProjection
     {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}
     (f : A ⟶ B) (p : ℕ) (n : ℤ) :

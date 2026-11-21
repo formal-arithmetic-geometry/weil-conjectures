@@ -10,7 +10,13 @@ public import WeilConjectures.Algebra.Homology.AffineTensorPullbackStalkCoordina
 
 /-! # AffineOrdinaryTensorStalkCoordinates
 
-Source: Stacks Project, Tag 0DJ8. -/
+## References
+
+* Stacks Project, Tag 01I9
+* Stacks Project, Tag 01AG
+* Stacks Project, Tag 01HV
+* Stacks Project, Tag 0DJ8
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -71,9 +77,7 @@ private theorem moduleIso_square_apply {D : Type u} [CommRing D]
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Localization of ordinary cohomology into the stalk complex of its tilde.
-Source: Stacks Project, Tags 01I9 and 01AG.
-Constructed from the tilde stalk localization, exact tilde homology and exact stalks. -/
+/-- Localization of ordinary cohomology into the stalk complex of its tilde. -/
 def affineTildeHomologyLocalization
     (D : Type u) [CommRing D] (C : CochainComplex (ModuleCat.{u} D) ℤ)
     (p : PrimeSpectrum D) (i : ℤ) :
@@ -136,20 +140,7 @@ private theorem affineTildeHomologyLocalization_apply
 
 set_option maxHeartbeats 200000 in
 -- Normalize the stalk, scalar-extension and homology functor identifications.
-/-- The ordinary tensor target has canonical stalk-complex coordinates.
-Source: Stacks Project, Tags 01I9, 01HV, 01AG and 0DJ8.
-
-Proof: exact tilde homology and exact stalks give affineTildeHomologyLocalization.
-The tensor-pullback/tilde natural isomorphism identifies T with tilde C. Take its
-inverse on stalk complexes and compose with the inverse tensorStalkIso to obtain
-τ. The unit equation of the tilde comparison and the pure-tensor equation of the
-pullback-stalk comparison show its displayed action on germs. Germs of pure tensors
-generate the localized modules, so these equations determine τ in each degree.
-Naturality of exact stalk homology, followed by the homologyFunctorFactors equation,
-identifies the resulting cohomology composite with the three factors in the
-constructed affineTensorPullbackHomologyStalkIso. This gives the second equation.
-The construction uses no derived source comparison or K-flatness and works for
-zero complexes and identity maps; zero rings have no primes. -/
+/-- The ordinary tensor target has canonical stalk-complex coordinates. -/
 theorem exists_affineOrdinaryTensorStalkCoordinates
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

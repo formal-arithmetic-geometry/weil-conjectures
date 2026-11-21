@@ -92,7 +92,9 @@ import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel.KFlatTotalTensorMo
 /-!
 # Tensor compatibility of a ringed square on flat K-flat representatives
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0D6D and 0E48
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4, 0D6D and 0E48
 -/
 
 @[expose] public section
@@ -280,46 +282,7 @@ private theorem two_edges_equation {A B C : RingedTensorCorner.{u, w}}
 
 -- Elaborate the four derived functors and their representative comparisons together.
 /-- The representative characterization of the derived square is compatible with
-canonical tensor comparisons on flat K-flat complexes.
-
-Proof: write each module pullback as inverse image followed by scalar extension.
-Its canonical tensor map sends s tensor (v tensor w) to
-(s tensor v) tensor (1 tensor w). The insertion equation for the square fixes its
-module comparison on 1 tensor (1 tensor v). By linearity and balancing it therefore
-commutes with the tensor map: both orders split the same two factors and multiply
-the same nested scalars. This checks equality on pure tensors, which locally generate the
-sheafified scalar extensions and their tensor products, and hence proves equality of module
-sheaf maps. Apply this equality in each bidegree of the total tensor complex.
-The maps preserve both degrees, so there is no interchange sign. Pullback preserves
-flat K-flat complexes. Their total tensor is K-flat: reassociate its tensor with
-an acyclic test complex and apply K-flatness of the two factors successively.
-Its terms are flat: tensoring with a tensor product is the composition of the two
-exact tensor functors, and each total degree is a direct sum of such flat products;
-these sums are flat by exactness of direct sums and preservation of sums by tensor.
-For the derived transport, write T for the ordinary total tensor, r_A(P,Q) for
-the model identification Q(T(P,Q)) ≅ A.tensor(Q(P),Q(Q)), C_e for the edge complex
-comparison, and d_e for the inverse of ordinaryTensor.totalIso. The defining
-representative equation for the edge tensor comparison is
-  e.left.map(r_A) ; t_e ; B.tensor.map(C_e(P),C_e(Q))
-    = C_e(T(P,Q)) ; Q.map(d_e) ; r_B(e*P,e*Q).
-Precompose the desired identity with (g.left ⋙ k.left).map(r_Y(P,Q).hom).
-Postcompose it with X'.tensor applied to the pair
-  h.left.map(C_f(P)) ; C_h(f*P), h.left.map(C_f(Q)) ; C_h(f*Q).
-These maps are isomorphisms on flat K-flat representatives, so cancellation is valid.
-Naturality of theta for r_Y, naturality of the edge tensor comparisons, and the
-four edge representative equations reduce the left side to the composite through
-C_h(f*T(P,Q)). Apply the assumed equation for theta at T(P,Q). On the right side,
-apply the assumed equations at P and Q, followed by the representative equations
-for g and k. Naturality of C_h and C_k for d_f and d_g, and naturality of r_X',
-reduce the remaining equality to Q applied to
-  gamma_T ; h*(d_f) ; d_h = k*(d_g) ; d_k ; T(gamma_P,gamma_Q),
-where gamma is the termwise module square. This is exactly the total-complex
-identity already established on pure tensors. Functoriality of Q proves the
-conjugated equality; cancellation proves the asserted derived equality.
-This is only the representative calculation: extension to arbitrary derived objects
-and the mate argument are separate steps.
-Source: Stacks, Cohomology on Sites, Tags 07A4 (pullback and tensor),
-0D6D (composition), and 0E48 (compatibility; verification omitted there) -/
+canonical tensor comparisons on flat K-flat complexes. -/
 theorem ringedSquareTensorCompatibility
     (s : RingedTensorSquare Y X Y' X' f g h k)
     (aY : RingedTensorModel Y) (aX : RingedTensorModel X)

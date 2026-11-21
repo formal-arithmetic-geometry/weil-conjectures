@@ -10,7 +10,11 @@ public import WeilConjectures.Algebra.Homology.FirstLocalizationMap
 
 /-! # Comparison square for the characterized localization map
 
-Source: Stacks Project, Tag 06Y6; Tag 0DJ8. -/
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 0DJ8
+-/
 
 @[expose] public section
 
@@ -178,19 +182,7 @@ private theorem ordinary_B_square (i : ℤ)
   exact hh.symm
 
 /-- Naturality of the ordinary comparison under the first-factor unit, after
-forgetting scalar actions. Source: Stacks Project, Tags 06Y6 and 0DJ8.
-
-Proof: install the universal derived-functor instances of L and K. Their unique
-comparison zeta intertwines the two counits. Apply counit naturality to
-firstLocalizationUnit and then degree-i homology. Naturality of the two homotopy
-and derived localization factorization isomorphisms identifies its ordinary side
-with homology of extension of scalars applied to the unit. Substitute comparison_eq
-for L and K, cancel cohomologyIso and ordinaryIso, and forget the B-action.
-The natural homology isomorphism for exact restriction and forgetting scalars
-identifies both resulting endpoints with the displayed additive homology objects.
-No flatness, localization assumption, D-action compatibility or invertibility of
-comparison is used. For identity units and zero complexes it is the same
-naturality equation. -/
+forgetting scalar actions. -/
 theorem firstLocalization_ordinary_square (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

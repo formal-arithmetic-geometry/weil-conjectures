@@ -19,14 +19,15 @@ import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 /-!
 # Surjectivity of the change-of-rings map on first Tor
 
-Source: Stacks Project, Algebra, Lemma Tag 00MN
-(`literature/stacks-project/algebra.tex`, lemma-surjective-on-tor-one-trivial).
-
-The first homology of a tensor product of a free resolution is the Tor module
-of `def-weil-pbc-tor-modules`, realized by Mathlib's `CategoryTheory.Tor'`.
+The first homology of a tensor product of a free resolution is the Tor module,
+realized by Mathlib's `CategoryTheory.Tor'`.
 Tensor associativity identifies `(A ⊗[R] F) ⊗[A] (A/J)` with
 `F ⊗[R] (A/J)`, with symmetry exchanging the tensor factors. Thus the
-homology map below is precisely the node's resolution-induced change-of-rings map.
+homology map below is precisely the resolution-induced change-of-rings map.
+
+## References
+
+* Stacks Project, Algebra, Tag 00MN
 -/
 
 @[expose] public section
@@ -110,29 +111,7 @@ private theorem epi_homology_one_of_right_exact
     infer_instance
   exact epi_of_epi (z ≫ L.homologyπ 1) (HomologicalComplex.homologyMap ψ 1)
 
-/-- The change-of-rings map on first Tor with coefficients in `A/IA` is surjective.
-
-Source: Stacks Project, Algebra, Lemma Tag 00MN
-(`literature/stacks-project/algebra.tex`, lines 23881--23919).
-
-Proof (a shorter comparison argument using the right-exact presentation of Stacks 00MN):
-Scalar extension is a left adjoint, hence preserves the exact augmented pair in
-resolution degrees one and zero and its epimorphic augmentation. For this
-base-changed complex `K`, lift the augmentation of `G` through that of `K` to
-obtain `b₀ : G₀ → K₀`. Exactness at `K₀` and projectivity of `G₁` give
-`b₁ : G₁ → K₁` satisfying `b₁ d_K = d_G b₀`.
-
-The augmentation condition on `φ` implies that `b₀ φ₀ - 1` lifts through `d_G`
-to `s₀ : G₀ → G₁`. The morphism `b₁ φ₁ - 1 - d_G s₀` is killed by `d_G`;
-exactness at `G₁` and projectivity of `G₁` lift it to `s₁ : G₁ → G₂`.
-Thus `b₁ φ₁ = 1 + d_G s₀ + s₁ d_G`. Apply the additive tensor functor.
-The map induced by `b₁` carries cycles of `G` to cycles of `K`. Its composite
-with the cycle map induced by `φ` is the identity plus a boundary; the term
-through the outgoing differential vanishes on cycles. After projecting to
-homology this composite is the surjective cycle projection of `G`. Consequently
-the map on first homology is an epimorphism, hence a surjective module map.
-No choice of an auxiliary resolution, nor comparison of derived functors, is needed.
--/
+/-- The change-of-rings map on first Tor with coefficients in `A/IA` is surjective. -/
 theorem tor_one_change_of_rings_surjective
     (R A : Type u) [CommRing R] [CommRing A]
     (f : R →+* A) (I : Ideal R) (M : ModuleCat.{u} R)

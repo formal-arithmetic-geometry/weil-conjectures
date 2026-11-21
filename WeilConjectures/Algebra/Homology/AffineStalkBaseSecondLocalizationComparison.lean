@@ -13,7 +13,11 @@ import WeilConjectures.Algebra.Homology.DerivedTensorBaseSecondLocalizationModel
 
 /-! # Base and second-factor localization after taking the affine input stalk
 
-Source: Stacks Project, Tags 0DJ8 and 06Y6. -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -213,32 +217,7 @@ private theorem equalCoefficientComplexIso_tmul
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Localize only the base and second factor of an already stalk-localized input.
-Source: Stacks Project, Tag 0DJ8, base and second-factor part of the localization
-identity; Tag 06Y6.
-
-Proof: the maps from R and R' to their spectrum stalks are prime localizations.
-Their maps into the A-stalk and D agree by stalk-map naturality and the cartesian
-square. The two restriction equations for psi identify its coefficient actions
-with those of the actual tensor-to-stalk map. Apply base and second-factor
-localization to Q, keeping the A-stalk unchanged. First compare m with a model
-over R and R' in the standard universe using
-exists_baseDerivedTensor_restricted_ring_comparison with identity ring equivalences.
-Its scalar-action clause and tensor induction upgrade the second-ring-linear
-isomorphism to Aq tensor_R R'-linearity. Its ordinary comparison clause,
-localized_eq and scalar-extension adjunction give the localized square. Now
-apply derivedTensor_base_second_localization_models in that standard universe.
-These comparisons preserve the A-stalk action by cohomologyIso_smul.
-Extend the resulting tensor-algebra-linear isomorphism to D. The augmentations
-of the common resolutions yield a commuting localizedComparison square.
-The ordinary targets have the same A-stalk-to-D map, so their canonical chain
-isomorphism sends d tensor q to d tensor q. For a compatible tau, set sigma to beta inverse
-followed by tau. The formula for beta and its inverse identity show that sigma
-agrees with the canonical map on 1 tensor germs of M. These generate C1: beta is an isomorphism, and
-1 tensor x generate C. ExtendScalars.hom_ext and D-linearity prove equality
-of the chain maps. Taking homology gives the equation for every such sigma.
-Zero complexes and identity localizations give the same comparison; a zero A'
-has no prime p. No first-factor localization is asserted or used here. -/
+/-- Localize only the base and second factor of an already stalk-localized input. -/
 theorem exists_affineStalkBaseSecondLocalizationComparison
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

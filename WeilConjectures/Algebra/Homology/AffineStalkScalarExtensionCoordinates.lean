@@ -12,7 +12,11 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Scalar extension coordinates for exact affine stalk homology
 
-Source: Stacks Project, Tags 01I9 and 01AG. -/
+## References
+
+* Stacks Project, Tag 01I9
+* Stacks Project, Tag 01AG
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -197,21 +201,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Exact affine stalk homology in scalar-extension coordinates, natural for every
-module map into ordinary cohomology. Source: Stacks Project, Tags 01I9 and 01AG.
-
-Proof: the structure-sheaf stalk D is the localization of A at p. For every
-A-module V, the map to the stalk of tilde V is a module localization. Its
-base-change universal property gives a D-linear isomorphism D tensor_A V to
-that stalk, sending 1 tensor v to the germ of v. Naturality on these generators
-proves naturality on all tensors. Apply this natural isomorphism termwise to C
-to obtain chi. The canonical localization of V also identifies with D tensor_A V;
-call this additive equivalence e(V). The two identifications agree on numerators,
-hence on all fractions. Exact scalar extension, exact tilde, and exact stalks
-commute with homology. Naturality of their homology isomorphisms identifies
-homology(chi) with the composite defining affineTildeHomologyLocalization.
-Naturality of e for a gives the displayed equation. No derived tensor source,
-K-flatness, or cartesian square is used. Zero modules and complexes obey the
-same argument; if A is zero there is no p. -/
+module map into ordinary cohomology. -/
 theorem exists_affineStalkScalarExtensionCoordinates
     (A : Type u) [CommRing A] (C : CochainComplex (ModuleCat.{u} A) ℤ)
     (p : PrimeSpectrum A) (i : ℤ) :

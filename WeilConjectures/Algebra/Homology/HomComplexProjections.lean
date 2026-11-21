@@ -8,9 +8,12 @@ module
 
 public import WeilConjectures.Algebra.Homology.HomComplex
 
-/-! # HomComplexProjections
+/-!
+# HomComplexProjections
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
+## References
+
+* Stacks Project, Section 0A8X
 -/
 
 @[expose] public section
@@ -22,11 +25,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   {R : Sheaf J CommRingCat.{r}}
 
 set_option backward.isDefEq.respectTransparency true in
-/-- The chosen Hom-complex functor admits the specified product projections.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-Proof: apply `Classical.choose_spec` to `homComplex_exists`; its chosen first
-component is precisely `homComplexFunctor`. This exposes the projection
-specification without repeatedly reducing the large bifunctor existence type. -/
+/-- The chosen Hom-complex functor admits the specified product projections. -/
 theorem homComplex_projections_exists :
     let F := homComplexFunctor.{u, v, w, r} (C := C) (J := J) (R := R);
     ∃ π : ∀ (L M : CochainComplex (SheafOfModules.{w}

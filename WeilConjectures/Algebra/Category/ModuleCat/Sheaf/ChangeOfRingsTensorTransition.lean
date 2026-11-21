@@ -19,7 +19,9 @@ the change of rings `S ⊗_R M`, regarded as an `R`-module, is the sheaf tensor 
 `M ⊗_R S`. Under this identification the transition `s ⊗ m ↦ β s ⊗ m` between changes of
 rings is the tensor product of `M` with the coefficient map.
 
-Source: Stacks Project, Tag 03EK.
+## References
+
+* Stacks Project, Tag 03EK
 -/
 
 public noncomputable section
@@ -63,7 +65,7 @@ private theorem presentation_hom
   exact congrArg Iso.hom (Iso.ext_inv hi)
 
 /-- The change of rings of `M`, as a module over the source ring, is the sheaf tensor product of
-`M` with the target ring. Source: Stacks Project, Tag 03EK. -/
+`M` with the target ring. -/
 def changeOfRingsTensorIso (φ : R ⟶ S)
     (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     M ⊗ restrictedTensorCoefficient φ ≅

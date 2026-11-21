@@ -14,7 +14,11 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomProduct
 /-!
 # Reverse degreewise currying construction
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
+## References
+
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
+* [Stacks Project, Tag 03EO](https://stacks.math.columbia.edu/tag/03EO)
+* [Stacks Project, Tag 0A90](https://stacks.math.columbia.edu/tag/0A90)
 -/
 
 @[expose] public section
@@ -43,21 +47,7 @@ attribute [local irreducible] homComplex homComplexFunctor homTensorCurryProject
 
 set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency true in
-/-- Reverse currying construction with its evaluation equation, without inverse laws.
-Source: Stacks Project, Cohomology on Sites, Tag 0A90, inverse construction;
-Modules on Sites, Tag 03EO and Section 03EK.
-
-Proof: Restrict a localized map out of the total tensor term to each (p,q)
-summand. Pull it back along the presheaf-to-sheaf tensor map. Curry the resulting
-bilinear map, first in y and then in x, on the localized site. These maps commute
-with further restriction because restriction of a bilinear map commutes with
-currying. Assemble the q components using the product cone of the inner Hom
-complex, then assemble the p components using the outer Hom product cone.
-Linearity in the initial localized map and restriction compatibility give a
-morphism of sheaves b. Evaluating the assembled components at x and y recovers
-the original bilinear map by the tensor-Hom evaluation identity. This proves
-the displayed equation. There are no inverse identities in this construction,
-no boundedness assumptions, and no assumption of global pure-tensor generation. -/
+/-- Reverse currying construction with its evaluation equation, without inverse laws. -/
 theorem homTensorDegreewise_reverse_construct (K L M : CochainComplex Mod ℤ) (n : ℤ) :
     letI := SheafOfModules.monoidalCategory R
     ∃ b : (homComplex (R := R)

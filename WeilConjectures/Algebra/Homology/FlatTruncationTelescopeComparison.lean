@@ -22,8 +22,10 @@ import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
 /-!
 # Telescope comparison for replacements of good truncations
 
-Source: Stacks Project, Cohomology on Sites, proof of Lemma 06YS and Lemma 077J;
-Derived Categories, Lemma 0949
+## References
+
+* Stacks Project, Cohomology on Sites, proof of Lemma 06YS and Lemma 077J
+* Stacks Project, Derived Categories, Lemma 0949
 -/
 
 @[expose] public section
@@ -86,27 +88,7 @@ private theorem quasiIso_of_cone_map_augmentation
   infer_instance
 
 /-- A canonical augmentation from the telescope of replacements of good truncations
-is a quasi-isomorphism. No flatness or boundedness of the replacements is needed.
-Source: Stacks Project, proof of Lemma 06YS via Lemma 077J; Derived Categories,
-Lemma 0949.
-
-Proof: Take the truncation transition maps and canonical telescope augmentation
-supplied by `quasiIso_hocolim_truncLE_and_filtered_colimit`. Truncation inclusions
-are monomorphisms, so the assumed compatibility after inclusion in G implies that
-q is a morphism of the two sequential systems. The sum of the maps q is a
-quasi-isomorphism: the sheaf-module category is Grothendieck abelian by
-`grothendieckAbelian_with_localized_generator`, hence its coproducts are exact.
-Apply `HomologicalComplex.isStableUnderColimitsOfShape_quasiIso` to the discrete
-natural transformation with components q. Compatibility gives
-a square between the two one-minus-shift endomorphisms. Its induced cone map is a
-quasi-isomorphism by the long exact cohomology sequences and the five lemma, because
-both maps between the sums are quasi-isomorphisms. Compose this cone map with the
-canonical truncation-telescope augmentation, which is a quasi-isomorphism by the
-same theorem. On the unshifted summand this composite is the sum of q followed by
-the truncation inclusions; on the shifted summand it is zero. The mapping-cone
-extensionality theorem shows that this composite equals f. Thus f is a
-quasi-isomorphism. This argument also covers the zero complex and towers without
-split transition maps. -/
+is a quasi-isomorphism. No flatness or boundedness of the replacements is needed. -/
 theorem quasiIso_flat_truncation_telescope
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}}

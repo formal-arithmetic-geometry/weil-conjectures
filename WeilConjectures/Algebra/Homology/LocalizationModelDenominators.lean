@@ -12,7 +12,9 @@ import WeilConjectures.Algebra.Homology.LocalizationDerivedFractions
 
 /-! # Denominators for localized derived tensor cohomology
 
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8
 -/
 
 @[expose] public section
@@ -36,21 +38,7 @@ variable (R A Aq B D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- Every localized cohomology class has a denominator and a pre-localization numerator.
-Source: Stacks Project, Tags 06Y6 and 0DJ8; exactness of localization.
-
-Proof: resolve B[0] by a K-flat R-complex F and compute with Q tensor_R F.
-Exact extension from A to Aq commutes with the total-complex direct sums and
-with cycles modulo boundaries. Thus every class of the localized complex is a
-fraction of a class of the original complex. Explicitly write a cycle as a
-fraction of a term, then multiply its numerator by a further denominator killing
-its differential; the resulting numerator is a cycle and the product denominator
-still belongs to S. The balanced derived bifunctor's naturality in B identifies
-the commuting B-action; naturality in Q and universal-counit comparison transport
-the fraction equation to L and K. Under cohomologyIso_smul the denominator acts
-by includeLeft (algebraMap A Aq s), and the numerator map is localizationModelMap.
-For zero in S the target is zero, and s=0 works; for identity localization the
-inverse model comparison supplies the numerator with denominator one. -/
+/-- Every localized cohomology class has a denominator and a pre-localization numerator. -/
 theorem localizationModelMap_denominators
     (S : Submonoid A) [IsLocalization S Aq] (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

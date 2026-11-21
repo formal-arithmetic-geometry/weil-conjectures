@@ -18,8 +18,11 @@ import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 /-!
 # Local equational criterion with independent universes
 
-Source: Stacks Project, Modules on Sites, Tag 08FC.
 The converse is proved by local finite matrix elimination and tensor vanishing.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 08FC
 -/
 
 @[expose] public section
@@ -406,14 +409,7 @@ end SheafOfModules
 
 namespace SheafOfModules
 
-/-- The local relation criterion implies flatness with an independent module universe.
-Source: Stacks Project, Modules on Sites, Tag 08FC, (2) implies (1)
-Proof: the finite-matrix argument below factors the coefficients of any tensor
-killed by a monomorphism. It makes this tensor locally zero, so tensoring
-preserves monomorphisms. The tensor functor preserves finite colimits by its
-sectionwise adjunction and module sheafification. In the abelian category of
-module sheaves, these two properties imply exactness. No free module on the
-coefficient ring is needed for this direction. -/
+/-- The local relation criterion implies flatness with an independent module universe. -/
 theorem isFlatOnSite_of_local_equationalCriterion
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -444,26 +440,7 @@ theorem isFlatOnSite_of_local_equationalCriterion
   have := hS.mono_f
   exact ⟨hS.exact.map_of_epi_of_preservesCokernel _ hS.epi_g inferInstance, inferInstance⟩
 
-/-- Flatness is equivalent to local finite relation factorization on a ringed site.
-Source: Stacks Project, Modules on Sites, Tag 08FC, (1) iff (2)
-
-Proof: The forward direction is the local relation theorem. For the converse,
-induct on the rows of a finite relation matrix, applying the one-row condition
-and composing its local factorization matrices on covering refinements.
-For a tensor killed by an injective module-presheaf map, choose finite coefficient
-identities witnessing its vanishing in the target. The matrix condition factors
-its module entries locally so that every auxiliary relation vanishes columnwise.
-Injectivity then makes each first-factor column zero, and the tensor is locally
-zero. Sheafification turns this into preservation of monomorphisms by tensor.
-
-Sectionwise tensor preserves colimits by the tensor–linear-Hom adjunction and
-joint reflection of colimits by evaluation. The natural isomorphism between
-associated presheaf tensor and tensor of associated sheaves transfers finite
-colimit preservation to module sheaves. Existing weak abelian sheafification is
-left exact under the stated local-bijectivity hypothesis, so module sheaves form
-an abelian category. Right exactness and preservation of monomorphisms make the
-tensor functor exact. All refinements use covering sieves; the site universes
-are unrestricted and empty relations are included. -/
+/-- Flatness is equivalent to local finite relation factorization on a ringed site. -/
 theorem isFlatOnSite_iff_local_equationalCriterion
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]

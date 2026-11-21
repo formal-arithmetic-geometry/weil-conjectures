@@ -12,7 +12,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
 
 /-! # Internal Hom transport squares for cycles and homology
 
-Source: Stacks Project, Tags 0A8X and 08DL. -/
+## References
+
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -40,23 +44,8 @@ private theorem openOver_comp_naturality
     (sq : f ≫ g = h ≫ i) (j : E ⟶ G) : f ≫ g ≫ j = h ≫ i ≫ j := by
   rw [← Category.assoc, sq, Category.assoc]
 
-/- Transport of source and target cycles and homology through internal Hom.
-Source: Stacks Project, Tag 08DL; step 2 of the parent restriction-diagram plan.
-
-Proof: Restriction is exact by the localization finite-limit and finite-colimit
- comparisons, the open-site equivalence and overFunctorEquiv. For L=T,J, take
- z_L:F(Z(L)) ≅ Z(F(L)) and d_L:F(H(L)) ≅ H(F(L)), the inverses of the
- ShortComplex mapCyclesIso and mapHomologyIso comparisons. They commute with cycle
- inclusions and homology quotients by their kernel and cokernel universal properties.
- Compose e with Hom(z_T inverse,z_J) to define s, with Hom(z_T inverse,identity)
- to define t, with Hom(z_T inverse,d_J) to define v, and with Hom(d_T inverse,d_J)
- to define b. Apply the naturality equation he to (T.iCycles,identity),
- (identity,J.iCycles), (identity,J.homologyπ), and (T.homologyπ,identity).
- Cancel the cycle and homology isomorphisms using their inclusion and quotient
- squares to obtain the four equations. This uses neither the Hom complex nor its
- products or differential. No finiteness or nonempty-open assumption is needed;
- zero and identity maps satisfy the same naturality equations. -/
-/-- -/
+/-- Restriction to an open commutes with internal Hom compatibly with the cycle and homology
+comparison isomorphisms, giving four commuting transport squares. -/
 theorem openOver_internalHom_cycle_homology_squares (X : Scheme.{u})
     (V : X.Opens) (W : V.toScheme.Opens)
     (e : ∀ M N : X.Modules,

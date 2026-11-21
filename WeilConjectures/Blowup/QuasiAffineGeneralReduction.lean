@@ -23,24 +23,27 @@ from a qcqs scheme and a section `f : U ⟶ Y` of `p` over `U` whose image is cl
 change of) `f` no longer meets the part lying over the closure of `V ∖ U`.
 
 The blow-up is produced by Deligne's disjointness lemma
-(`AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`, blueprint
-`lemma:nagata-conrad-disjointness-blowup`) applied to the two centres
+(`AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`) applied to the two centres
 
 * `I₁`, a finite-type quasi-coherent subideal of the vanishing ideal of the reduced closed
   subscheme `closure (V ∖ U)`, and
 * `I₂ = I₁ * I₁ ⊔ K ^ n`, where `K` is a finite-type ideal sheaf cutting out `X ∖ V` and
   `n` is large enough that `K ^ n` pulls back into `I₁ ^ 2 · 𝒪_Y + I_{closure f(U)}`.
 
-The exponent `n` comes from `Scheme.IdealSheafData.exists_pow_le`, and the passage from
-the vanishing ideal of `closure (V ∖ U)`, which need not be of finite type, to the
-finite-type subideal `I₁` is the compactness of a finite-type ideal sheaf against the
-directed supremum of the finite-type subideals
-(`Scheme.IdealSheafData.exists_le_of_ofFiniteType_le_iSup`).
-
 ## Main results
 
 - `AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le`: the disjointness
   blow-up.
+
+## Implementation details
+
+The exponent `n` comes from `Scheme.IdealSheafData.exists_pow_le`, and the passage from
+the vanishing ideal of `closure (V ∖ U)`, which need not be of finite type, to the
+finite-type subideal `I₁` uses `Scheme.IdealSheafData.exists_le_of_ofFiniteType_le_iSup`.
+
+## References
+
+* Brian Conrad, *Deligne's notes on Nagata compactifications*, Theorem 2.4, Case 3
 -/
 
 @[expose] public section
@@ -58,11 +61,7 @@ variable {X : Scheme.{u}}
 Let `X` be qcqs, let `U ≤ V` be quasi-compact opens of `X`, let `p : Y ⟶ X` be a morphism
 from a qcqs scheme and let `f : U ⟶ Y` be a section of `p` over `U` whose image is closed
 in `p ⁻¹ V`. There is a `V`-admissible blow-up of `X` after which the closure of the image
-of the base change of `f` is disjoint from the part lying over the closure of `V ∖ U`.
-
-The base change is left flexible: `Z'` is an arbitrary scheme over `Y` and over
-`(I₁ ⊔ I₂).blowup`, and `Y'` an arbitrary scheme over `U` and over `Z'`, fitting into the two
-commuting squares, exactly as in `AlgebraicGeometry.disjoint_closure_range_of_blowupMap_sup`. -/
+of the base change of `f` is disjoint from the part over the closure of `V ∖ U`. -/
 theorem exists_isAdmissible_disjoint_closure_range_of_le
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

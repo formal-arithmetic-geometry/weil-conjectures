@@ -12,7 +12,9 @@ import Mathlib.CategoryTheory.Localization.Predicate
 /-!
 # Localizing the transitions of coefficient systems
 
-Source: Zheng, Construction 4.1, p. 21, the transition morphisms of a complex of systems.
+## References
+
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 
 @[expose] public noncomputable section
@@ -40,14 +42,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Strict system transitions descend with their specified comparison equation.
-Source: Zheng, Construction 4.1, p. 21
-Proof: conjugate the termwise strict transition by the evaluation and scalar-restriction
-localization comparisons. This is a natural transformation between the composites of
-the required derived functors with localization. Precomposition with localization is
-fully faithful, so it uniquely descends to the derived category. Evaluate the defining
-preimage equation at a complex and cancel the two comparison isomorphisms; this gives
-the asserted representative formula. -/
+/-- Strict system transitions descend with their specified comparison equation. -/
 theorem coefficientEvaluationDerivedTransition
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive]

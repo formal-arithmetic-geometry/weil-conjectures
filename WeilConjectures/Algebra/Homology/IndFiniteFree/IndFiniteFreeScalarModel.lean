@@ -99,12 +99,15 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 
-/-! # The unbounded scalar model of an ind-finite-free algebra sheaf
+/-!
+# The unbounded scalar model of an ind-finite-free algebra sheaf
 
-Source: Stacks Project, sites-modules.tex, Tags 03EU (2), 03EP (2), and Section 03EK;
-sites-cohomology.tex, Tags 06YT and 06YY; derived.tex, Tag 015F.
 The auxiliary functors spell out the coefficient diagram and its termwise tensor colimit.
 All derived scalar extensions are the existing universal cochain models.
+
+## References
+
+* Stacks Project, Tags 03D2, 03EK, 03EP, 03CY, 03EU, 06YT, 06YY and 015F
 -/
 
 @[expose] public noncomputable section
@@ -123,20 +126,17 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   [HasSheafify J AddCommGrpCat.{r}]
 
-/-- The existing module category at the coefficient universe.
-Source: Stacks 03D2. -/
+/-- The existing module category at the coefficient universe. -/
 abbrev Modules (R : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)
 
-/-- Ordinary scalar restriction, with the same sections and restricted action.
-Source: Stacks 03D2. -/
+/-- Ordinary scalar restriction, with the same sections and restricted action. -/
 abbrev restriction {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) :
     Modules S ⥤ Modules R :=
   restrictScalars.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
 
 /-- Forget the algebra structure of an algebra sheaf, retaining its R-module structure.
-On morphisms this is the original section map, linear by the triangle over R.
-Source: Stacks 03EK. -/
+On morphisms this is the original section map, linear by the triangle over R. -/
 def algebraModules (R : Sheaf J CommRingCat.{r}) : Under R ⥤ Modules R where
   obj A := (restriction A.hom).obj
     (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A.right))
@@ -153,8 +153,7 @@ def algebraModules (R : Sheaf J CommRingCat.{r}) : Under R ⥤ Modules R where
           congr 1
           exact congrArg (fun t ↦ t.hom.app V x) (Under.w f)) }
 
-/-- Tensor a complex termwise with a coefficient module; coefficient maps act by tensor.
-Source: Stacks 03EK. -/
+/-- Tensor a complex termwise with a coefficient module; coefficient maps act by tensor. -/
 def tensorComplex (R : Sheaf J CommRingCat.{r}) :
     Modules R ⥤ (CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ) where
   obj M := (tensorLeft M).mapHomologicalComplex (.up ℤ)
@@ -162,23 +161,20 @@ def tensorComplex (R : Sheaf J CommRingCat.{r}) :
   map_id M := by simp
   map_comp f g := by simp
 
-/-- The diagram i ↦ S_i tensor A, with all differentials and transitions termwise.
-Source: Stacks 03EP. -/
+/-- The diagram i ↦ S_i tensor A, with all differentials and transitions termwise. -/
 def tensorDiagram {R : Sheaf J CommRingCat.{r}} {I : Type r} [SmallCategory I]
     (D : I ⥤ Under R) (A : CochainComplex (Modules R) ℤ) :
     I ⥤ CochainComplex (Modules R) ℤ :=
   (D ⋙ algebraModules R ⋙ tensorComplex R).flip.obj A
 
-/-- The actual colimit functor on these complexes. Colimits of complexes are termwise.
-Source: Stacks 03EP. -/
+/-- The actual colimit functor on these complexes. Colimits of complexes are termwise. -/
 def tensorColimit {R : Sheaf J CommRingCat.{r}} {I : Type r} [SmallCategory I]
     (D : I ⥤ Under R) :
     CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ :=
   (D ⋙ algebraModules R ⋙ tensorComplex R).flip ⋙ colim
 
 /-- A pure tensor in the sheaf tensor, using its presheaf-to-sheaf unit.
-The supplied factor is the actual underlying module, not a choice of basis.
-Source: Stacks 03EK, 03CY. -/
+The supplied factor is the actual underlying module, not a choice of basis. -/
 def pureTensor {R : Sheaf J CommRingCat.{r}} (M N : Modules R)
     (V : Cᵒᵖ) (x : M.val.obj V) (y : N.val.obj V) : (M ⊗ N).val.obj V :=
   ((PresheafOfModules.sheafificationAdjunction
@@ -412,8 +408,7 @@ private theorem restrictionSheafificationComparison_unit
 
 end
 
-/-- The canonical map from the presheaf tensor to the underlying sheaf tensor.
-Source: Stacks Project, Modules on Sites, Tag 03EK. -/
+/-- The canonical map from the presheaf tensor to the underlying sheaf tensor. -/
 private def tensorPresheafUnit
     (M N : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     M.val ⊗ N.val ⟶ ((monoidalCategory R).tensorObj M N).val :=
@@ -423,17 +418,7 @@ private def tensorPresheafUnit
 
 set_option maxHeartbeats 50000 in
 -- Mixed tensor coefficient structures require additional elaboration.
-/-- Restricted extension of scalars is tensoring with the restricted target ring.
-Source: Stacks Project, Modules on Sites, Tag 03EK.
-
-Proof: the presheaf tensor of the restricted target ring with M has exactly the
-same section modules as restricted sectionwise scalar extension. Both restriction
-maps send s tensor m to the tensor of the two restrictions, so the identity maps
-form an isomorphism. Sheafify it over R. Restriction commutes with sheafification:
-after forgetting to abelian sheaves the comparison is the identity of the same
-sheafification, and forgetting reflects isomorphisms. Compose with the canonical
-tensor-sheafification comparison. Naturality of the sheafification unit gives the
-pure-tensor formula. No flatness or localization assumption is used. -/
+/-- Restricted extension of scalars is tensoring with the restricted target ring. -/
 private theorem exists_extensionTensorComparison (φ : R ⟶ S)
     (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     ∃ e : (monoidalCategory R).tensorObj
@@ -504,8 +489,7 @@ end OrdinaryComparison
 variable {R S : Sheaf J CommRingCat.{r}} {φ : R ⟶ S}
   [HasDerivedCategory.{wR} (Modules R)] [HasDerivedCategory.{wS} (Modules S)]
 
-/-- The pure tensor in the ordinary functor of the existing derived scalar model.
-Source: Stacks 03EK, 06YY. -/
+/-- The pure tensor in the ordinary functor of the existing derived scalar model. -/
 def extensionPure (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ)
     (M : Modules R) (V : Cᵒᵖ) (s : S.obj.obj V) (a : M.val.obj V) :
     (m.E.obj M).val.obj V :=
@@ -575,8 +559,7 @@ private noncomputable def ordinaryComparison
       extensionPure_naturality])
 
 /-- Normalization of the chain comparison on the sheafification-unit images of local
-pure tensors. The coprojections are those of the supplied algebra colimit.
-Source: Stacks 03EP, 03CY. -/
+pure tensors. The coprojections are those of the supplied algebra colimit. -/
 def Normalized {I : Type r} [SmallCategory I] (D : I ⥤ Under R) (c : Cocone D)
     [HasDerivedCategory.{wS} (Modules c.pt.right)]
     (m : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} c.pt.hom)

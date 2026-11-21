@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.Homology.TensorKunneth
 
 /-! # Natural-degree indexing of the field-linear tensor Kunneth map
 
-Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech.
+## References
+
+* Stacks Project, Tag 0BED
 -/
 
 @[expose] public section
@@ -26,21 +28,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
 open scoped TensorProduct DirectSum
 namespace HomologicalComplex
 
-/-- Reindex the field-linear tensor Kunneth map for complexes supported in nonnegative degrees.
-Source: Stacks Project, Varieties, Tag 0BED, equation-kunneth-on-cech;
-the zero extension and reindexing in the proof of lem-sc-picard-kunneth-qcoh-iso-exists.
-
-Proof: Apply tensor_kunneth with lower bounds zero and integer degree n. A complex zero
-in negative degrees has zero homology there: its cycles are a subobject of its zero
-term, and its homology is a quotient of its cycles. Thus a tensor summand indexed by
-(p,q) with p<0 or q<0 is zero. The inclusion of the pairs of nonnegative integers is
-therefore an equivalence on direct sums: its inverse projects to those summands and
-reindexes by (p.toNat,q.toNat). The two composites are identities on each summand;
-on a discarded summand this follows from its being zero. Compose this equivalence
-with tensor_kunneth's equivalence. On a natural-degree summand the inclusion changes
-only the index; apply the integer-degree cycle formula to get the stated formula.
-The equation p+q=n casts to the required integer-degree equation. For n=0 only (0,0)
-survives. Zero complexes cause no exception, since their tensor summands are zero. -/
+/-- Reindex the field-linear tensor Kunneth map for complexes supported in nonnegative degrees. -/
 theorem tensor_kunneth_nat {k : Type w} [Field k]
     (A B : CochainComplex (ModuleCat.{w} k) ℤ)
     (hA : ∀ p : ℤ, p < 0 → IsZero (A.X p))

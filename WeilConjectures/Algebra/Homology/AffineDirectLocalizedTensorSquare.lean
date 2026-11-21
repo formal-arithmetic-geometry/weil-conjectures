@@ -12,7 +12,12 @@ import WeilConjectures.Algebra.Homology.AffineDirectLocalizedTensorSquareCore
 
 /-! # AffineDirectLocalizedTensorSquare
 
-Source: Stacks Project, Tag 0DJ8. -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 01I9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,30 +33,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Localize the input and the two base rings, with the final coefficient ring
-already the fourth stalk. Source: Stacks Project, Tag 0DJ8, displayed affine
-localization identity, and Tags 06Y6 and 01I9.
-
-Proof: the cartesian spectrum square identifies A' with A tensor_R R'. The
-canonical maps from A, R, R' to their stalks are localizations at the contracted
-primes; their composites to D agree by naturality of scheme stalk maps. The
-termwise tilde/stalk localization identifies localization of M with stalkComplex P,
-sending 1 tensor x to its germ. First localize the A-factor by
-derivedTensor_first_localization_models. Then localize the base and second factor
-by derivedTensor_base_second_localization_models. Use the same intermediate model
-and compose the resulting D-linear source isomorphisms. The fixed stalk model is
-transported from the localized module complex by the termwise tilde/stalk iso.
-The universal counit identifies its derived functor with the transported one;
-this also accommodates the standard local derived-category universes, since both
-localizations are computed from the same K-flat resolutions. The counit equations
-and cohomologyIso_smul retain the tensor-algebra scalar action. The two comparison
-squares compose, with tensor associativity identifying their ordinary targets.
-Their coefficient chain map sends 1 tensor x to 1 tensor its germ. D-linearity
-and ExtendScalars.hom_ext make any tau with the displayed formula equal to this
-map. Apply homology and compose the comparison squares to get the equation.
-There is no extension of ordinary cohomology from A' to D in this assertion:
-all its cohomology targets are already computed over D. No K-flatness of M over
-R is needed, and the construction works for zero complexes and identity
-localizations. A zero A' has no prime p. -/
+already the fourth stalk. -/
 theorem exists_affineDirectLocalizedTensorSquare
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

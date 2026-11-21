@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterionO
 /-!
 # Flatness over the constant field sheaf
 
-Source: Stacks Project, Modules on Sites, Tags 03ER and 08FC; Fields, Tag 09FN.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03ER and 08FC; Fields, Tag 09FN
 -/
 
 @[expose] public section
@@ -28,15 +30,7 @@ namespace SheafOfModules
 
 set_option backward.isDefEq.respectTransparency false
 
-/-- Every module sheaf over a constant field sheaf is flat.
-Source: Stacks Project, Tags 03ER, 08FC and 09FN
-Proof: intersect the finitely many covering image sieves of the coefficients of a relation.
-On each arrow of this covering sieve the coefficients lift to field elements. Restrict the
-module action along the field-to-sections ring map. This gives a vector space, hence a flat
-module. Its finite relation factors through finitely many vectors with zero coefficient
-relations. Map the factorization coefficients back to the ring sheaf; the ring-map identities
-give the same factorization there. The independent-universe local relation criterion proves
-sheaf flatness, including on objects with an empty covering sieve. -/
+/-- Every module sheaf over a constant field sheaf is flat. -/
 theorem isFlat_constantFieldModule
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [EssentiallySmall.{m} C] [HasWeakSheafify J CommRingCat.{r}]

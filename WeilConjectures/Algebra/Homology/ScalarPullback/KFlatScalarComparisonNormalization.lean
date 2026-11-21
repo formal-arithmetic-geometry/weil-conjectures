@@ -237,9 +237,6 @@ import WeilConjectures.Algebra.Homology.ProperBaseChange.ExtensionTensorComparis
 
 /-! # Normalization of scalar pullback on K-flat representatives
 
-Source: blueprint main-20261015, proposition-six-operations-change-coefficients (1); Stacks Project,
-Tags 03EL, 0G7E, 06YY, 07A6 and 0D6D
-
 ## Main statements
 
 - `kflat_scalar_comparison_normalization`: balanced comparison and specified derived mate.
@@ -249,6 +246,11 @@ The ordinary comparison is specified on generalized pure tensors, including its
 scalar-extension units. The derived comparison is the inverse mate of the action
 identification, rather than an unspecified isomorphism of functors. Its representative
 formula uses the counits of the existing universal derived-change-of-rings models.
+
+## References
+
+* Stacks Project, Tags 03EL, 0G7E, 06YY, 07A6 and 0D6D
+* Stacks Project, Tags 03D2 and 07A7
 -/
 
 @[expose] public section
@@ -259,21 +261,18 @@ open scoped ChangeOfRings
 
 namespace SheafOfModules.ScalarPullback
 
-/-- The module category already used by the scalar-change model.
-Source: Stacks 03D2. -/
+/-- The module category already used by the scalar-change model. -/
 abbrev Modules {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (A : Sheaf J CommRingCat.{u}) :=
   ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A)
 
-/-- Forget a module to its underlying sheaf of sets.
-Source: Stacks 03D2. -/
+/-- Forget a module to its underlying sheaf of sets. -/
 noncomputable abbrev underlying {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (A : Sheaf J CommRingCat.{u}) : Modules A ⥤ Sheaf J (Type u) :=
   toSheaf ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{u} ⋙ uliftFunctor.{u, u})
 
-/-- Restriction of scalars along the given sheaf ring map.
-Source: Stacks 03D2. -/
+/-- Restriction of scalars along the given sheaf ring map. -/
 noncomputable abbrev restriction {C : Type u} [Category.{u} C]
     {J : GrothendieckTopology C} {A B : Sheaf J CommRingCat.{u}} (φ : A ⟶ B) :
     Modules B ⥤ Modules A :=
@@ -284,8 +283,7 @@ section InverseImageAliases
 variable {C D : Type u} [Category.{u} C] [Category.{u} D]
   {J : GrothendieckTopology C} {K : GrothendieckTopology D}
 
-/-- The existing algebraic inverse-image presentation in the small-site universe.
-Source: Stacks 03D2 -/
+/-- The existing algebraic inverse-image presentation in the small-site universe. -/
 abbrev InverseImage (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
     (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u}) :=
   AlgebraicInverseImageOfUniverses.{u, u, u, u, u, u} L A B
@@ -293,20 +291,17 @@ abbrev InverseImage (L : Sheaf J (Type u) ⥤ Sheaf K (Type u))
 variable {L : Sheaf J (Type u) ⥤ Sheaf K (Type u)}
   {A : Sheaf J CommRingCat.{u}} {B : Sheaf K CommRingCat.{u}}
 
-/-- The existing module projection, with its sheaf-composition instances elaborated once.
-Source: Stacks 03D2 -/
+/-- The existing module projection, with its sheaf-composition instances elaborated once. -/
 abbrev inverseModules (I : InverseImage L A B) : Modules A ⥤ Modules B := I.modules
 
-/-- The existing ring identification of the algebraic inverse-image presentation.
-Source: Stacks 03D2 -/
+/-- The existing ring identification of the algebraic inverse-image presentation. -/
 abbrev inverseRing (I : InverseImage L A B) :
     L.obj ((sheafCompose J
       (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).obj A) ≅
       (sheafCompose K (CategoryTheory.forget CommRingCat.{u} ⋙ uliftFunctor.{u, u})).obj B :=
   I.ringUnderlying
 
-/-- The existing underlying-module identification of the inverse-image presentation.
-Source: Stacks 03D2 -/
+/-- The existing underlying-module identification of the inverse-image presentation. -/
 abbrev inverseUnderlying (I : InverseImage L A B) :
     inverseModules I ⋙ underlying B ≅ underlying A ⋙ L :=
   I.moduleUnderlying
@@ -314,8 +309,7 @@ abbrev inverseUnderlying (I : InverseImage L A B) :
 end InverseImageAliases
 
 /-- The image of a balanced pure tensor in the model's ordinary scalar extension.
-The equality transport only identifies the model's object with the existing sheafification.
-Source: Stacks 03EL. -/
+The equality transport only identifies the model's object with the existing sheafification. -/
 noncomputable def pure {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {A B : Sheaf J CommRingCat.{u}} {φ : A ⟶ B}
     [HasSheafify J AddCommGrpCat.{u}] [J.WEqualsLocallyBijective AddCommGrpCat.{u}]
@@ -326,8 +320,7 @@ noncomputable def pure {C : Type u} [Category.{u} C] {J : GrothendieckTopology C
     ((toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U
       (b ⊗ₜ[A.obj.obj U, (φ.hom.app U).hom] x))
 
-/-- The inverse scalar-adjunction mate of a restriction/action square.
-Source: Stacks 07A7. -/
+/-- The inverse scalar-adjunction mate of a restriction/action square. -/
 def mate {AY : Type u₁} {BY : Type u₂} {AX : Type u₃} {BX : Type u₄}
     [Category.{v₁} AY] [Category.{v₂} BY] [Category.{v₃} AX] [Category.{v₄} BX]
     {TY : AY ⥤ BY} {rY : BY ⥤ AY} {TX : AX ⥤ BX} {rX : BX ⥤ AX}

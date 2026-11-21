@@ -18,10 +18,15 @@ import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc
 public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
-/-! # Universal tensor acyclicity implies K-flatness
+/-!
+# Universal tensor acyclicity implies K-flatness
 
-Source: Stacks Project, More on Algebra, Tag 0E8F,
-`lemma-universally-acyclic-K-flat`, specialized to commutative rings
+If the total tensor product of a module complex with every finitely presented module in
+degree zero is acyclic, the complex is K-flat.
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0E8F, specialized to commutative rings
 -/
 
 @[expose] public section
@@ -103,40 +108,7 @@ private lemma acyclic_all_of_single
 
 /-- If tensoring an arbitrary module complex with every finitely presented module
 in degree zero is acyclic, the complex is K-flat. There is no boundedness or
-termwise flatness hypothesis.
-
-Source: Stacks Project, More on Algebra, Tag 0E8F,
-`lemma-universally-acyclic-K-flat`
-
-Proof:
-1. Filtered colimits of acyclic module complexes are acyclic: represent a cycle
-   at one stage, pass to a later stage where its differential vanishes, and use
-   acyclicity there to obtain a primitive. Use
-   lem-weil-pbc-filtered-colimit-modules-elementwise.
-2. Total tensor commutes with degreewise directed colimits. Tensor commutes with
-   colimits by lem-weil-pbc-tensor-commutes-with-colimits, and coproducts commute
-   with colimits. The comparison preserves both signed differential terms.
-3. Express any module as a directed colimit of finitely presented modules using
-   lem-trf-module-finitely-presented-directed-colimit. Steps 1 and 2 extend the
-   hypothesis to every module. Interchange the degree-zero module and the other
-   factor; this introduces no sign.
-4. A complex supported in one degree has acyclic total tensor by step 3: shifting
-   only multiplies the differential by a sign and reindexes the degrees. The
-   zero complex also has zero tensor.
-5. Induct on the length of a finite supporting interval. The brutal truncation
-   sequence separating its bottom degree is split degreewise, so remains exact
-   after tensoring and totalization. Apply the homology long exact sequence
-   lem-weil-pbc-complex-ses-homology-long-exact and the induction hypothesis.
-6. Any bounded-above complex is the degreewise directed colimit of its bounded
-   brutal lower truncations. Steps 1, 2 and 5 prove tensor acyclicity for it;
-   acyclicity of the brutal truncations themselves is unnecessary.
-7. Any complex is the degreewise directed colimit of its canonical upper
-   truncations: in the top degree use the kernel of the outgoing differential.
-   At each fixed degree the system is eventually constant. Steps 1, 2 and 6
-   give tensor acyclicity for an arbitrary complex.
-8. In particular the total tensor with every acyclic complex is acyclic, exactly
-   def-pc-module-kflat-complex. The recorded predicate expresses the equivalent
-   preservation of quasi-isomorphisms on both sides, by cones and symmetry. -/
+termwise flatness hypothesis. -/
 theorem kFlat_of_acyclic_tensor_finitePresentation
     {A : Type u} [CommRing A] (E : CochainComplex (ModuleCat.{u} A) ℤ)
     (hE : ∀ (M : ModuleCat.{u} A), Module.FinitePresentation A M →

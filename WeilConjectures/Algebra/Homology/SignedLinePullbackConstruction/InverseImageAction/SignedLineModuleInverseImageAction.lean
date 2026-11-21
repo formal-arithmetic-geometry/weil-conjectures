@@ -8,7 +8,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 /-! # Scalar actions on the constructed abelian inverse image
-Source: Stacks Project, Modules on Sites, Tags 03D2 and 03D3.
+
+## References
+
+* Stacks Project, Tag 03D2
+* Stacks Project, Tag 03D3
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -29,9 +33,7 @@ variable {C D : Type u} [Category.{v} C] [Category.{v} D]
   (φ : A ⟶ (F.sheafPushforwardContinuous RingCat.{max u v w} J K).obj B)
   (M : SheafOfModules.{max u v w} A)
 /-- An action on the actual abelian inverse image, with semilinear restrictions and unit.
-The carrier, additive operations and unit map are fixed, rather than chosen.
-Source: Stacks Project, Tags 03D2 and 03D3, lemma-pullback-module and
-lemma-adjoint-push-pull-modules. -/
+The carrier, additive operations and unit map are fixed, rather than chosen. -/
 structure InverseImageAction where
   module : ∀ U : Dᵒᵖ, Module (B.obj.obj U)
     (((sheafPullback F AddCommGrpCat.{max u v w} J K).obj ((toSheaf A).obj M)).obj.obj U)
@@ -51,15 +53,13 @@ structure InverseImageAction where
             ((toSheaf A).obj M)).obj.obj (F.op.obj U) from
             ((sheafAdjunctionContinuous F AddCommGrpCat.{max u v w} J K).unit.app
               ((toSheaf A).obj M)).hom.app U m)
-/-- Regard an action with semilinear restrictions as a sheaf of modules.
-Source: Stacks Project, Tag 03D2. -/
+/-- Regard an action with semilinear restrictions as a sheaf of modules. -/
 noncomputable def InverseImageAction.toModule (a : InverseImageAction φ M) :
     SheafOfModules.{max u v w} B := by
   let T := (sheafPullback F AddCommGrpCat.{max u v w} J K).obj ((toSheaf A).obj M)
   letI (U : Dᵒᵖ) : Module (B.obj.obj U) (T.obj.obj U) := a.module U
   exact ⟨PresheafOfModules.ofPresheaf T.obj (fun {_ _} i r m ↦ a.restriction i r m), T.property⟩
-/-- The abelian carrier of the action construction is unchanged.
-Source: Stacks Project, Tag 03D2. -/
+/-- The abelian carrier of the action construction is unchanged. -/
 noncomputable def InverseImageAction.underlyingIso (a : InverseImageAction φ M) :
     (toSheaf B).obj a.toModule ≅
       (sheafPullback F AddCommGrpCat.{max u v w} J K).obj ((toSheaf A).obj M) := Iso.refl _

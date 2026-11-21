@@ -13,8 +13,9 @@ import Mathlib.Algebra.Homology.Embedding.TruncLEHomology
 
 /-! # Removing the positive tail of a bounded projective complex
 
-Source: Stacks Project, More on Algebra, Tag 066Q; the explicit tail-splitting
-argument in lem-sc-strict-perfect-closed-pushforward-stalk-resolution, step 3.
+## References
+
+* Stacks Project, More on Algebra, Tag 066Q
 -/
 
 @[expose] public section
@@ -26,7 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- Cycles in nonnegative degrees of a bounded-above projective complex are projective
-when its positive homology vanishes. The descending split-epimorphism argument for, source Stacks Tag 066Q. -/
+when its positive homology vanishes. -/
 private theorem projective_cycles
     {C : Type u} [Category.{v} C] [Abelian C]
     (L : CochainComplex C ℤ) (hproj : ∀ j : ℤ, Projective (L.X j))
@@ -75,25 +76,7 @@ private theorem projective_cycles
     exact (⟨L.iCycles j, r, hir⟩ : Retract (L.cycles j) (L.X j)).projective
 
 /-- A bounded projective complex exact in positive degrees admits a bounded projective
-model with zero positive terms, together with a quasi-isomorphism to the original complex.
-
-Source: Stacks Project, More on Algebra, Tag 066Q; explicit tail splitting in
-lem-sc-strict-perfect-closed-pushforward-stalk-resolution, step 3.
-
-Proof. First show that the cycle object in degree j ≥ 0 is projective by downward
-induction from an upper bound. At the upper end the outgoing differential is zero,
-so cycles equal the term. For the inductive step, vanishing of homology in degree
-j+1 makes L^j → Z^(j+1) epic. Split this map using projectivity of Z^(j+1).
-The endomorphism 1-fs of L^j factors through Z^j and gives a retraction of its
-inclusion; hence Z^j is projective as a retract of the projective term L^j.
-Take the good truncation at zero. Its degree-zero term is Z^0, its negative terms
-are those of L and its positive terms are zero, so all its terms are projective.
-The lower bound min(a,0) works. The inclusion of this truncation into L is a
-quasi-isomorphism because the positive homology of L vanishes. This realizes the same
-successive split-epimorphism argument as positive-tail removal without constructing the
-contractible summands.
-It covers an empty support interval and the zero complex, uses only projectivity,
-and chooses no degree-zero target module. -/
+model with zero positive terms, together with a quasi-isomorphism to the original complex. -/
 theorem boundedProjective_nonpositiveModel
     {C : Type u} [Category.{v} C] [Abelian C]
     (L : CochainComplex C ℤ)

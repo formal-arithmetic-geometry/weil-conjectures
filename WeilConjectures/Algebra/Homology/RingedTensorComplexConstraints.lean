@@ -11,7 +11,9 @@ set_option linter.privateModule false
 
 /-! # Pure-section formulas for the tensor constraints of module-sheaf complexes
 
-Source: Stacks Project, Tag 0FPQ, and the sign rules of More on Algebra.
+## References
+
+* Stacks Project, Tag 0FPQ, and the sign rules of More on Algebra
 -/
 
 @[expose] public noncomputable section

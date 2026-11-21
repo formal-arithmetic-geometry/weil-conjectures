@@ -11,8 +11,10 @@ import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 
 /-! # The coefficient comparison commutes with a concrete cone boundary
 
-Source: Stacks Project, Tags 06Y6 and 0BYJ; cone summand calculation in the
-parent tensor-comparison argument. -/
+## References
+
+* Stacks Project, Tags 06Y6, 0BYJ
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -23,23 +25,7 @@ open CategoryTheory MonoidalCategory
 namespace ModuleCat
 
 /-- The tensorator followed by a coefficient map commutes with the actual homology
-boundary. This assertion contains no derived model or exactness assertion.
-
-Source: Stacks Project, Tags 06Y6 and 0BYJ, explicit cone expansion of the
-parent comparison argument.
-Proof: the chain maps a(V)=μ_F(V,Q)⁻¹ followed by F(V) tensor t form a morphism
-from F applied to the tensor-Q image of the cone triangle to the tensor-N image
-of its F-extension. Naturality of μ gives the f and cone-inclusion squares.
-For the third square, decompose the cone as P₂ plus P₁[1]. On each tensor
-summand scalar extension and the tensorator preserve the summand inclusions;
-a acts on the Q factor by t. The cone projection discards the P₂ summand and
-is the shifted identity on P₁. The first-variable tensor-shift identification has no
-extra sign on the homogeneous summands (ι_mapBifunctorShift₁Iso_hom_f). Both compositions are the
-same reindexing followed by t, so the projection square commutes.
-Apply homology to this triangle morphism and the naturality of the homology
-shift isomorphism: H(a(P₃)) followed by the target boundary equals the source
-boundary followed by H(a(P₁)) in degree i+1. No flatness, K-flatness or boundedness
-is needed; this also applies to zero maps and zero rings. -/
+boundary. This assertion contains no derived model or exactness assertion. -/
 theorem tensorCoefficient_cone_boundary
     (A C : Type u) [CommRing A] [CommRing C] (ρ : A →+* C)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

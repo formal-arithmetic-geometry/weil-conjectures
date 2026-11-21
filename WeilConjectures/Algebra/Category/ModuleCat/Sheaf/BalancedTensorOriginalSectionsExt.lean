@@ -13,7 +13,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Extensionality on original balanced tensor sections
 
-Source: Stacks Project, Cohomology, Tag 08DE, proof.
+## References
+
+* Stacks Project, Cohomology, Tag 08DE (proof); Modules on Sites, Tag 0GMW
 -/
 
 @[expose] public section
@@ -40,20 +42,7 @@ local notation "𝓻" a =>
   (sheafCompose (Opens.grothendieckTopology Z) (forget₂ CommRingCat.{u} RingCat.{u})).map a
 
 -- Mixed scalar structures require additional definitional equality checks.
-/-- Original extension sections generate the restricted sheaf tensor for testing maps.
-Source: Stacks Project, Modules on Sites, Tag 0GMW; Cohomology, Tag 08DE, proof.
-
-Proof: the module sheafification unit of the extension presheaf E is inverted by
-sheafification. The source library's W_whiskerLeft shows that tensoring this unit
-with M.val is still inverted. Sheafify this tensor map, compose with the inverse
-of tensorObjIsoSheafification, and restrict scalars: the resulting map q is an
-isomorphism onto the source of f and g. Precompose with q and forget to abelian
-sheaves. The abelian-sheafification adjunction reduces equality to the original
-presheaf sections. Induct on the outer B-tensor and then on the inner R-tensor.
-The zero and addition cases follow from additivity. On m tensor (b tensor n),
-naturality of the module sheafification unit identifies both evaluations with
-exactly the tests in h. No B-linearity of f or g is needed. The localization and
-tensor induction arguments include empty spaces and zero rings or modules. -/
+/-- Original extension sections generate the restricted sheaf tensor for testing maps. -/
 theorem balancedTensor_originalSections_hom_ext (α : R ⟶ B)
     (M : SheafOfModules.{u} (𝓡 B)) (N : SheafOfModules.{u} (𝓡 R))
     {H : SheafOfModules.{u} (𝓡 R)}

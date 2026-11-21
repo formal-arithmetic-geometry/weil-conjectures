@@ -16,9 +16,15 @@ import WeilConjectures.Algebra.Homology.AbelianVariety.ConnectiveUniversalH0Zero
 import Mathlib.RingTheory.Finiteness.Projective
 import Mathlib.CategoryTheory.Adjunction.Additive
 
-/-! # Global normalization of a universally rank-one projective complex
+/-!
+# Global normalization of a universally rank-one projective complex
 
-Source: Stacks Project, Tags 00O0, 0BCD and 0BF2 (projective affine adaptation).
+A bounded finite projective complex with universally connective rank-one homology has a global
+projective model starting in degree zero with zero differential out of degree zero.
+
+## References
+
+* Stacks Project, Tags 00O0, 0BCD and 0BF2 (projective affine adaptation)
 -/
 
 @[expose] public section
@@ -30,42 +36,7 @@ namespace CochainComplex
 
 /-- A bounded finite projective complex with universally connective rank-one
 homology has a global projective model starting in degree zero with d-zero zero.
-The output terms are exhibited as retracts of finite free modules.
-
-Source: Stacks Project, Tags 00O0 and 0BCD; the target-complex argument of 0BF2,
-with finite projective terms on a fixed affine instead of shrinking to free terms.
-
-Proof: Cancel negative terms from the bottom. Choose finite support bounds for P.
-If its bottom degree is negative, negative residue homology says that its outgoing
-differential is injective on every residue field. The finite-projective residue
-criterion gives principal neighbourhoods on which its cokernel is finite projective.
-That cokernel is finitely presented globally, so local projectivity makes it finite
-projective over R. Thus the injection splits globally. Remove the contractible
-pair consisting of the bottom term and its image in the next term. The complement
-is still bounded finite projective and starts one degree higher. The resulting
-homotopy equivalence remains a homotopy equivalence after every scalar extension,
-so it preserves hbase. Induct on the number of negative degrees between the
-chosen lower bound and zero, obtaining a connective finite projective model.
-On local affine charts take minimal finite free representatives as in 0BCD.
-Their zeroth terms have rank one and their negative terms vanish. For a chart
-A = R_f, hbase applied to A identifies the kernel of d0 : A -> A^m with A.
-The inclusion of this kernel is multiplication by an element a of A. Injectivity
-makes a a non-zero-divisor. Since d0(a) = 0, every coordinate of d0(1) is killed
-by a and is therefore zero. Thus d0 = 0, even when A has nilpotents. Bounded
-projective representatives of the same derived object are homotopy equivalent;
-these equivalences survive residue scalar extension. Their homology comparisons
-show that H0 of the connective complex commutes with residue base change. The
-identity base change identifies H0 with R. A generator therefore defines a cycle
-whose inclusion in the
-zeroth term is a split injection at every prime, with finite projective cokernel.
-Split off this R summand globally. On the complementary degree-zero summand the
-outgoing differential is residue-injective everywhere; its finitely presented
-cokernel is locally free, hence projective. Split and cancel that pair. The
-remaining bounded finite projective complex Q has no negative terms and has
-zero outgoing differential in degree zero. Each finite projective term is a
-retract of R^m, giving the displayed maps. All cancellations
-are homotopy equivalences, giving the derived isomorphism. Over the zero ring the
-zero complex satisfies every conclusion, and no prime or generator is needed. -/
+The output terms are exhibited as retracts of finite free modules. -/
 theorem universalH0_projective_normalization
     (R : Type v) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{v} R)]
     (P : CochainComplex (ModuleCat.{v} R) ℤ)

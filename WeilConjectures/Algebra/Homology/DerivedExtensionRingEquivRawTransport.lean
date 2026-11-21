@@ -7,6 +7,15 @@ Authors: Bin Wu
 module
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+
+/-!
+# Transport of derived scalar extension along a ring isomorphism
+
+## References
+
+* Stacks Project, Tag 06Y6
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe u w w'
@@ -16,10 +25,7 @@ namespace ModuleCat
 
 /-- Restriction of scalars along a ring isomorphism `eB : B₀ ≃+* B` descends to the derived
 categories: there is a functor `E : D(B) ⥤ D(B₀)` whose composite with the localization of
-cochain complexes is the termwise restriction followed by localization.
-Source: Stacks Project, Tag 06Y6.
-Proof: take `E` to be the derived functor of the exact functor `restrictScalars eB`; it is
-compatible with the localization functors by construction. -/
+cochain complexes is the termwise restriction followed by localization. -/
 theorem exists_raw_transport {B₀ B : Type u} [CommRing B₀] [CommRing B]
     [HasDerivedCategory.{w} (ModuleCat.{u} B₀)]
     [HasDerivedCategory.{w'} (ModuleCat.{u} B)]

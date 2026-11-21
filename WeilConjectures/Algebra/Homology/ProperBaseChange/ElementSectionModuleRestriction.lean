@@ -10,7 +10,14 @@ public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import all WeilConjectures.CategoryTheory.ProperBaseChange.ElementRestrictionHom
 
-/-! Restriction of modules along one generalized section. -/
+/-! Restriction of modules along one generalized section.
+
+## References
+
+* Stacks Project, Tag 04IE
+* Stacks Project, Tag 04IF
+* Stacks Project, Tag 0791
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -21,23 +28,7 @@ namespace SheafOfModules
 
 -- The module comparisons involve several nested element sites.
 set_option maxRecDepth 4000 in
-/-- Restriction along a generalized section preserves colimits and the rank-one module.
-
-Source: Stacks Project, Modules on Sites, Tags 04IE and 04IF; Sites, Tag 0791.
-
-Proof: The sheafification adjunction and Yoneda turn t into a map b:H to A,
-where H is the sheafified representable at V. Restrict along its element-site
-map. The flattening equivalence identifies this restriction followed by a
-module equivalence with localization at the fibre sheaf of b. Localization
-has the module direct image as right adjoint, so it preserves colimits.
-Transfer this property through the comparison and reflect it through the
-module equivalence. Then compose with the inverse module equivalence between
-the element site of H and C/V. Its unit comparison identifies the rank-one
-modules. Relocalization identifies the restriction of elementModulePullback
-R A Q with elementModulePullback R H Q; the represented-slice comparison and
-the equivalence unit identify this last module with Q.over V. At W to V all
-these comparisons evaluate Q at W with the same scalar action. Empty fibres,
-empty covers and zero rings satisfy the same formulas. -/
+/-- Restriction along a generalized section preserves colimits and the rank-one module. -/
 theorem elementSectionModuleRestriction_exists
     {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u}) (A : Sheaf J (Type u))

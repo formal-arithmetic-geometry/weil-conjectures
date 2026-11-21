@@ -14,10 +14,12 @@ public import WeilConjectures.Mathlib.Algebra.Homology.ComplexShapeSigns
 public import Mathlib.Algebra.Homology.Embedding.Extend
 import WeilConjectures.Algebra.Homology.TensorTotalExtendNat
 
-/-! # Normalized extension of natural tensor totals
+/-!
+# Normalized extension of natural tensor totals
 
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech; natural-degree
-zero extension in lem-sc-qcoh-cech-total-tensor-nat-iso.
+## References
+
+* Stacks Project, Tag 0BED, equation-kunneth-on-cech.
 -/
 
 @[expose] public section
@@ -27,23 +29,7 @@ open scoped TensorProduct
 namespace HomologicalComplex
 
 /-- Extension by zero commutes with tensor totalization, with the prescribed
-value on each natural bidegree summand. No homology assertion occurs here.
-Source: Stacks Project, Tag 0BED, equation-kunneth-on-cech;
-the zero-extension/reindexing step of lem-sc-qcoh-cech-total-tensor-nat-iso.
-
-Proof: In degree n>=0 the nonzero integer tensor summands have p,q>=0.
-Reindex these by natural pairs p+q=n. On each use the tensor of the two
-extendXIso maps followed by the natural total coprojection and the inverse
-extendXIso of the natural total. Negative-coordinate summands are zero and
-have the unique zero map. For negative total degree every summand is zero.
-Define the inverse in nonnegative degrees using the inverse factor extendXIso
-maps and the integer coprojections. On every summand the two composites are
-identities; on discarded summands both identities are zero. The maps commute
-with differentials because extension preserves the factor differentials and
-(-1)^p agrees with the integer sign at the image of p. At degree -1 to 0 the
-source is zero. This gives c; evaluating its definition on a natural pure tensor
-gives the displayed formula. This is a termwise reindexing and uses neither
-field Kunneth nor a geometric external cup. Zero complexes and n=0 are included. -/
+value on each natural bidegree summand. -/
 theorem tensorTotal_extend_natural_iso {k : Type w} [Field k]
     (A B : CochainComplex (ModuleCat.{w} k) ℕ) :
     let E := ComplexShape.embeddingUpNat

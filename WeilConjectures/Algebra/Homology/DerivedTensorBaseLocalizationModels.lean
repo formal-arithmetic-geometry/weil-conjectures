@@ -17,8 +17,10 @@ import WeilConjectures.Algebra.Homology.BaseLocalizationComparison
 import WeilConjectures.Algebra.Homology.BaseLocalizationNaturality
 /-! # Localizing the base and second factor of a derived tensor
 
-Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
-second coefficient ring; More on Algebra, Tag 06Y6.
+## References
+
+* Stacks Project, Tag 0DJ8 (localization of the base and second coefficient ring)
+* Stacks Project, Tag 06Y6 (More on Algebra)
 -/
 
 @[expose] public section
@@ -49,24 +51,7 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
 include tRpA tRpB tAD tBD tApD tBpD in
-/-- Localization with one factor fixed.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, affine localization identity;
-More on Algebra, Tag 06Y6.
-
-Proof: choose a K-flat R-resolution F of B[0]. Localization to Rp is exact
-and preserves K-flatness, so Rp tensor_R F resolves Rp tensor_R B. Since B is
-already an Rp-algebra, the localization multiplication Rp tensor_R B -> B is
-an isomorphism. Since Q is an Rp-complex, the termwise localization tensor
-identity identifies Q tensor_R F with Q tensor_Rp (Rp tensor_R F).
-This identifies the balanced derived tensors, preserves both scalar actions,
-and is natural for chain maps. Extend the resulting tensor-algebra homology
-isomorphism to D by tensor associativity. The localized augmentation is the
-original augmentation under multiplication; thus the comparison square agrees
-on pure tensors. Pure tensors generate, so its ordinary identification equals
-any tau with the given formula. Unique counit-compatible derived-functor
-identifications transport the construction to the models L and K; their
-cohomology action equations preserve the first scalar action. Restriction of
-scalars is faithful, so the characterized maps g and h satisfy naturality. -/
+/-- Localization with one factor fixed. -/
 theorem derivedTensor_base_localization_models
     (S : Submonoid R) [IsLocalization S Rp]
     (i : ℤ) :

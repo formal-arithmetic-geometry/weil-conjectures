@@ -8,6 +8,17 @@ module
 
 public import WeilConjectures.Algebra.Homology.DoubleComplexVerticalTowerMaps
 
+/-!
+# The nonpositive endpoint case of the strict cutoff comparison
+
+Reduction of the strict nested-cutoff comparison to the case where the lower endpoint is
+nonpositive.
+
+## References
+
+* Stacks Project, Homology, Section 12.15, Tag 0118 (canonical cochain truncations)
+-/
+
 @[expose] public section
 
 universe v u
@@ -15,16 +26,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace HomologicalComplex₂
 variable {C : Type u} [Category.{v} C] [Abelian C]
 
-/-- The nonpositive endpoint reduction for the strict cutoff comparison.
-Source: Stacks Project, Homology, Section 12.15, tag 0118.
-Proof: in every nonnegative degree n, the cutoff below a vanishes because
-n > a - 1. Its identity is therefore zero, and g is zero. The cokernel
-projection of g is an isomorphism. Extension of L by zero is strictly supported
-in degrees at least 0, hence at least a. Its projection to the lower smart
-truncation at a is an isomorphism. Applying upper truncation and restriction
-preserves that isomorphism. The equation hq identifies this isomorphism with
-the cokernel projection followed by q, so q itself is an isomorphism and in
-particular a quasi-isomorphism. -/
+/-- The nonpositive endpoint reduction for the strict cutoff comparison. -/
 theorem verticalCutoff_column_quasiIso_strict_nonpositive
     (L : CochainComplex C ℕ) (a b : ℤ) (_hab : a < b) (ha : a ≤ 0)
     (g : (verticalCutoff a).obj L ⟶ (verticalCutoff b).obj L)

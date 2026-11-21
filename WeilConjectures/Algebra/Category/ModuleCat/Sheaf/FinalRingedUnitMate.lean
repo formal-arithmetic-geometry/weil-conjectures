@@ -9,7 +9,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 /-! # The normalized regular-unit mate on final ringed sites
 
-Source: Stacks Project, Modules on Sites, Tag 03D7.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03D7
 -/
 
 @[expose] public noncomputable section
@@ -23,12 +25,7 @@ namespace SheafOfModules
 
 attribute [local instance] monoidalCategory symmetricCategory
 
-/-- The regular-unit mate of normalized direct image is invertible on final sites.
-Source: Stacks 03D7 and Mathlib's PullbackFree
-Proof: the unique normalized direct-image pairing has the coefficient-map unit.
-Under the uniqueness isomorphism between the specified left adjoint and Mathlib's
-pullback, its adjunct is that isomorphism followed by the canonical regular-unit
-map. The latter is invertible because the site functor is final. -/
+/-- The regular-unit mate of normalized direct image is invertible on final sites. -/
 theorem normalized_unit_mate_isIso
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{u + 1} C] [EssentiallySmall.{u + 1} D]

@@ -9,7 +9,13 @@ public import WeilConjectures.CategoryTheory.Sites.RGammaDerivedLimit
 import WeilConjectures.Algebra.Homology.HomComplexSectionsHomotopyNaturalityOfUniverses
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalizedOfUniverses
 
-/-! The shifted local derived comparison and its naturality. -/
+/-!
+The shifted local derived comparison and its naturality.
+
+## References
+
+* Stacks Project, Tag 0A8Y, Equation (21.34.0.1), and Tag 0A94
+-/
 
 @[expose] public section
 
@@ -33,24 +39,7 @@ private lemma map_homCongr_naturality_hcs
     congrArg (fun z ↦ z ≫ F.map f ≫ c.hom.app B ≫ Q.map s) ht.symm
 
 /-- The shifted comparison is natural for arbitrary maps of the two arguments.
-The maps `s` and `t` need not be quasi-isomorphisms.
-Source: Stacks Project, Tag 0A8Y, Equation (21.34.0.1), and Tag 0A94.
-
-Proof: a section of degree `n` is a family of localized maps `L^p → I^(p+n)`.
-The equation `d_I f - (-1)^n f d_L = 0` identifies cocycles with chain maps
-`L|U → (I|U)[n]`, since the differential of the shift is `(-1)^n d_I`.
-For a degree `n-1` family `h`, its differential is
-`d_I h + (-1)^n h d_L`; multiplying `h` by `(-1)^n` identifies this with
-null-homotopies into `(I|U)[n]`. The two quotients therefore identify homology
-with the homotopy-category Hom set. Restriction preserves K-injectivity and
-shifting does too, so the K-injective localization comparison is bijective.
-Compose these bijections to obtain `a` and `b`. On cocycle representatives the
-product-projection formula for the Hom bifunctor sends `f` to `s f t`.
-The shifted map has components `s^(p+n)`, so this agrees exactly with derived
-precomposition by `t|U` and postcomposition by `(s|U)[n]`. Homology projections
-are surjective, hence this equality on representatives proves the displayed
-naturality for every class. At `n = 0` this is the unshifted local comparison;
-for zero complexes all involved Hom sets are singleton. -/
+The maps `s` and `t` need not be quasi-isomorphisms. -/
 theorem homComplex_sections_derived_naturalityOfUniverses
     {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
     [HasSheafify J AddCommGrpCat.{max u v r}]

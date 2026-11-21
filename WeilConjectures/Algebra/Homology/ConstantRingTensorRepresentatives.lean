@@ -11,7 +11,9 @@ import all WeilConjectures.CategoryTheory.ConstantScalarRestrictionTensor
 
 /-! # Computing constant-ring derived tensors on flat representatives
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 06YT and 0G7E.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS, 06YT and 0G7E
 -/
 
 @[expose] public noncomputable section
@@ -41,18 +43,7 @@ private theorem flatRepresentative {C : Type w} [SmallCategory C]
     DerivedCategory.Q.objObjPreimageIso K⟩⟩
 
 /-- Both derived inputs have flat-term K-flat representatives computing their published
-unbounded derived tensor.
-
-Source: Stacks Project, Cohomology on Sites, Tags 06YS, 06YT and 0G7E.
-
-Proof: choose cochain preimages under Q and apply the independent-coefficient K-flat
-resolution theorem. Localize the quasi-isomorphisms and compose with the preimage
-isomorphisms. The site tensor comparison identifies degreewise flatness with the
-recorded site-flat predicate. Apply cochain tensor-model rigidity to the two flat
-representatives. Compose its inverse with the inverse image of the two representative
-isomorphisms under the published tensor. This gives the stated tensor comparison,
-while retaining both individual localization isomorphisms. No functor or geometric
-inverse image is involved, and neither derived input must be bounded or flat. -/
+unbounded derived tensor. -/
 theorem constantRingTensorRepresentatives {C : Type w} [SmallCategory C]
     (J : GrothendieckTopology C) (A : Type w) [CommRing A]
     [HasDerivedCategory (Modules J A)]

@@ -7,7 +7,11 @@ module
 public import WeilConjectures.Algebra.Homology.PrincipalConeTower
 import all WeilConjectures.AlgebraicGeometry.IntegralDerivedOperationsOnSlices
 /-! # Exact equivalences preserve principal cone completion and its unit
-Source: Stacks Tags 0941 and 0A0E. -/
+
+## References
+
+* Stacks Project, Tags 0941 and 0A0E
+-/
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -223,14 +227,7 @@ private theorem principalLevelIso_step {P : CochainComplex A ℤ} (μ : End P) (
   rw [← mappingCone.map_comp, ← mappingCone.map_comp]
   simp only [Iso.refl_hom, CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
 
-/-- An additive equivalence preserves the principal completion and its specified unit.
-Source: Stacks Tags 0941 and 0A0E.
-Proof: identify each finite mapping cone with the cone of the image endomorphism.
-The comparison preserves its two inclusions, hence the transition squares and the
-augmentation. The product comparison intertwines one minus the transition shift.
-Mapping the final cocone and using the shift comparison gives the completion
-isomorphism. Its equality on the normalized lift follows degree by degree from
-preservation of the cocone inclusion and the zero homotopy. -/
+/-- An additive equivalence preserves the principal completion and its specified unit. -/
 theorem principalCompletionMap [HasCountableProducts A] [HasCountableProducts B]
     [H.IsEquivalence] {P : CochainComplex A ℤ} (μ : End P) :
     ∃ i : (H.mapHomologicalComplex (.up ℤ)).obj (PrincipalCone.completion μ) ≅

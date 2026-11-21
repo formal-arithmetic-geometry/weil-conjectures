@@ -18,7 +18,11 @@ import WeilConjectures.Algebra.Homology.AcyclicLiftSplitCycles
 
 /-! # Lifting the next differential into the cycles of a finite tail
 
-Source: Stacks Project, Tag 0BC9, proof, first two paragraphs.
+Lifting a prescribed incoming differential into the cycles of an exact finite projective tail.
+
+## References
+
+* Stacks Project, Tag 0BC9 (proof, first two paragraphs)
 -/
 
 @[expose] public section
@@ -40,24 +44,7 @@ private theorem quotient_unit_surjective
   change Function.Surjective (TensorProduct.mk R (R ⧸ I) Z 1)
   exact TensorProduct.mk_surjective R Z (R ⧸ I) (Ideal.Quotient.mk_surjective)
 
-/-- Lift a prescribed next term's incoming differential into an exact finite projective tail.
-
-Source: Stacks Project, Tag 0BC9, proof, first two paragraphs
-
-Proof. Descend from the upper bound, splitting each epimorphism onto the next cycle
-module by projectivity. The summand condition first supplies zero and invariance under
-isomorphism, then puts every cycle module in P. These split exact sequences remain split
-under extension of scalars. Thus the comparison identifies the reduction of the degree-n
-cycle module with the cycles of E in degree n. Acyclicity of E makes its incoming
-map onto these cycles surjective. Compose the prescribed term isomorphism with this map.
-Under the extension/restriction adjunction it is an R-linear map from M into the reduction
-of the cycle module. The quotient map to that reduction is surjective, so projectivity of
-M lifts it. Its scalar extension is the prescribed surjection onto reduced cycles.
-The surjectivity hypothesis makes the lifted map onto the cycle module surjective.
-Compose with the cycle inclusion to obtain d. Its composite with the outgoing
-old differential is zero, its image is precisely the kernel of that differential,
-and its reduction obeys the required comparison equation. This argument also covers
-n = b+1: the old degree-n term and its cycle module are zero. -/
+/-- Lift a prescribed next term's incoming differential into an exact finite projective tail. -/
 theorem exists_acyclicLift_nextDifferential
     (R : Type u) [CommRing R] (I : Ideal R)
     (P : ModuleCat.{max u v} R → Prop)

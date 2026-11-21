@@ -10,9 +10,12 @@ public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonShiftSquareData
 import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonShiftSquareTransport
 
-/-! # Shift square for localized tensor comparison
+/-!
+# Shift square for localized tensor comparison
 
-Source: Stacks Project, Tag 0DJA(1), using Tag 0BYJ.
+## References
+
+* Stacks Project, Tag 0DJA(1), via Tag 0BYJ and the tensor shift maps
 -/
 
 @[expose] public section
@@ -38,29 +41,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
 -- Preserve the existing derived-category hypothesis even though this reduction does not use it.
 set_option linter.unusedSectionVars false in
 set_option backward.defeqAttrib.useBackward true in
-/-- The comparison arrows for U and its inverse shift are conjugate.
-Source: Stacks Project, Tag 0DJA(1), via Tag 0BYJ and the tensor shift maps.
-
-Proof: put V = U[-n]. Use the first-variable tensor shift isomorphism
-V tensor Q = (U tensor Q)[-n] and the scalar-extension shift isomorphism.
-Keep the derived functor and universal counit of mU. Its canonical shift
-comparison is obtained by uniqueness of the left-derived functor of the
-additive extension-of-scalars functor. Reindex cohomology by j -> j-n:
-transport the A tensor_R B action using the cohomology shift isomorphism.
-Naturality in multiplication by a in A proves cohomologyIso_smul. Transport
-ordinaryIso and ordinaryToLocalized through the termwise scalar-extension
-shift maps; on tensors their specified formulas are unchanged. Define the
-comparison by the counit formula comparison_eq and define its localization
-by the extension/restriction adjunction, proving localized_eq. This constructs
-mV without any choice of a witness of model existence. At degree i+n the
-cohomology shift map gives eS after scalar extension to C; the target shift
-map for F(U) tensor N gives eT. Naturality of the first-variable tensor shift
-map in Q -> N and monoidality of F identifies the ordinary comparison square.
-The counit shift compatibility gives its derived source square; transposing
-localized_eq through the scalar adjunction gives the displayed conjugacy.
-The first-variable tensor shift involves no extra signs. For n=0
-use identity reindexing; zero complexes and arbitrary t are included. Neither
-flatness of C nor K-flatness of U or Q is used by this transport statement. -/
+/-- The comparison arrows for `U` and its inverse shift are conjugate. -/
 theorem exists_localizedTensorComparison_shift_square
     (U : CochainComplex (ModuleCat.{u} A) ℤ) (n : ℤ)
     (mU : BaseDerivedTensorCohomologyModel R A B (U ⊗ Q) C) (i : ℤ) :

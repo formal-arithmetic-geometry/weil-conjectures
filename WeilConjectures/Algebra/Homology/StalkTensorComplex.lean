@@ -17,7 +17,9 @@ import Mathlib.Topology.Sheaves.Abelian
 /-!
 # Stalks commute with total tensor complexes
 
-Source: Stacks Project, Cohomology, Lemma 06YB, tensor-stalk identification
+## References
+
+* Stacks Project, Tag 06YB
 -/
 
 @[expose] public section
@@ -145,20 +147,8 @@ private instance stalk_additive : (RingedSpace.moduleStalkFunctor X x).Additive 
     rw [Functor.map_add, Functor.map_add]
     rfl
 
-/-- Stacks Project, Cohomology, Lemma 06YB:
-there is an isomorphism from the stalk of the total tensor complex to the total tensor
-complex of the stalks, natural in both complexes. Both total complexes use direct sums
-in degree `n` over `p + q = n` and differential `d_F ⊗ 1 + (-1)^p 1 ⊗ d_K`.
-
-Proof:
-1. By `def-pc-tensor-complex-sheaves`, the degree `n` term is the direct sum of `F^p ⊗ K^q`.
-   Apply `lem-pc-stalk-direct-sums` to move the stalk through this direct sum.
-2. Apply `lem-pc-ringed-space-module-stalk-tensor` to each summand. Its natural comparison
-   identifies the summands with `F_x^p ⊗ K_x^q`, giving the degreewise isomorphisms.
-3. Naturality of the module comparison carries the differentials on the two factors to
-   their stalk maps. Additivity preserves the sign `(-1)^p`. Thus the maps commute with
-   the total differential and form isomorphisms of complexes. The same naturality on each
-   summand gives the asserted square for every pair of morphisms of complexes. -/
+/-- The stalk of the total tensor complex is isomorphic to the total tensor complex of the
+stalks, naturally in both complexes. -/
 theorem exists_stalk_tensor_complex_iso :
     ∃ e : ∀ (F K : CochainComplex (SheafOfModules.{u₁} O) ℤ),
       (S).obj (mapBifunctor F K (curriedTensor _)) ≅

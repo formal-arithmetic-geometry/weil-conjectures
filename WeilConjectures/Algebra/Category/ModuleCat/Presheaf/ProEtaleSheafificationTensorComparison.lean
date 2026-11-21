@@ -21,8 +21,12 @@ import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinea
 /-!
 # Tensor and module sheafification in the pro-etale site universes
 
-Source: Stacks Project, Modules on Sites, Tag 0GMW. This is the existing tensor
-comparison argument with site object universe u+1 and Hom universe u.
+The comparison between the sheafified presheaf tensor product and the tensor product of
+sheaves of modules, for a site with object universe `u + 1` and Hom universe `u`.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 0GMW
 -/
 
 @[expose] public section
@@ -39,7 +43,7 @@ set_option autoImplicit false
 
 /-- Existence part of the sheaf tensor universal property.
 The sectionwise tensor maps are assembled into a presheaf morphism and uniquely factored
-through module sheafification; this is exactly the existence construction in the source proof. -/
+through module sheafification. -/
 private theorem tensor_bilinear_universal_exists {C : Type (u + 1)} [Category.{u} C]
     {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u + 1})
     [J.WEqualsLocallyBijective AddCommGrpCat.{u + 1}]
@@ -137,22 +141,9 @@ private theorem tensor_bilinear_universal_unique {C : Type (u + 1)} [Category.{u
 
 /-- Composition with the pure-tensor map `F × G → F ⊗_O G` is a bijection from
 `Hom_O(F ⊗_O G, H)` to the set of morphisms of sheaves of sets `F × G → H` that are
-`O(U)`-bilinear on sections over every `U`. A bilinear morphism is a family `β` of
-`O(U)`-bilinear maps (curried linear maps) compatible with the restriction maps; the
-pure-tensor map sends `(x, y)` over `U` to the image of `x ⊗ y` under the sheafification
-unit of the presheaf tensor product, identified with `F ⊗ G` by
-`tensorObjIsoSheafification`. The statement says that every such `β` is the composite of
-exactly one morphism `F ⊗ G ⟶ H` with the pure-tensor map (naturality in `H` holds by
-definition of the composite).
-Source: literature/stacks-project/sites-modules.tex, Section 03EK, display after Tag 0GMW
-Proof: sectionwise, `O(U)`-bilinear maps `F(U) × G(U) → H(U)` correspond to `O(U)`-linear
-maps `F(U) ⊗_{O(U)} G(U) → H(U)` (Tag 00CV), compatibly with restrictions, so restriction-
-compatible bilinear families correspond to morphisms from the presheaf tensor product
-[def-pur-presheaf-tensor-product] into `H`; since `H` is a sheaf, these factor uniquely
-through the sheafification [def-weil-presheaf-modules-sheafification], which is `F ⊗_O G`
-[def-pur-sheaf-tensor-product]. The resulting correspondence is composition with the
-pure-tensor map and is natural in `H`.
--/
+`O(U)`-bilinear on sections over every `U`. Here the pure-tensor map sends `(x, y)` over `U`
+to the image of `x ⊗ y` under the sheafification unit, identified with `F ⊗ G` by
+`tensorObjIsoSheafification`. -/
 private theorem tensor_bilinear_universal_residue {C : Type (u + 1)} [Category.{u} C]
     {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u + 1})
@@ -532,22 +523,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory sheafification
 
 /-- The canonical tensor comparison is an isomorphism, natural in both presheaf modules.
 The locally bijective ring map identifies `R` with the sheafification of `O`. The displayed
-pure-tensor identity specifies the canonical comparison, using the sheafification units.
-Source: Stacks Project, Tag 0GMW.
-
-Proof:
-1. Sectionwise pure tensors of the module sheafification maps define a balanced map from
-   the presheaf tensor to the tensor of the associated modules. The action and linearity
-   come from lem-pc-sites-module-sheafification-interface.
-2. Sheafify this map using the interface and def-pur-sheaf-tensor-product to obtain the
-   morphism from the sheafified presheaf tensor to the sheaf tensor.
-3. Extend the original pure-tensor pairing uniquely to the associated modules, using
-   lem-pc-sites-module-sheafification-bilinear-extension. The universal property in
-   lem-pc-sites-sheaf-tensor-bilinear-universal gives the inverse morphism.
-4. Precompose both composites with the sheafification units. They agree with identities
-   on pure tensors. Uniqueness of sheafification and of bilinear extension makes both
-   composites identities. The same characterization commutes with morphisms in both
-   factors, giving the natural isomorphism and the displayed pure-tensor identity. -/
+pure-tensor identity specifies the canonical comparison, using the sheafification units. -/
 theorem exists_sheafificationTensorIso_proEtaleUniverses
     (α : (O ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⟶
       ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).obj)

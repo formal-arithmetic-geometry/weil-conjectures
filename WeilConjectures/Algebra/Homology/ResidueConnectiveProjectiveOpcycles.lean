@@ -21,7 +21,9 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Projectivity of zeroth opcycles from connective residue homology
 
-Source: Stacks Project, Tag 00O0, negative-tail splitting argument.
+## References
+
+* Stacks Project, Tag 00O0 (negative-tail splitting argument)
 -/
 
 @[expose] public section
@@ -32,27 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- The last cokernel in a bounded finite projective negative tail is finite projective
-if every residue complex is exact in negative degrees.
-
-Source: Stacks Project, Tag 00O0; the negative-tail cancellation argument in
-lem-sc-universal-h0-projective-normalization.
-
-Proof: Choose a lower support bound a and induct on max(0,-a). If a is nonnegative,
-P^(-1) is zero, so opcycles in degree zero is P^0 and is finite projective.
-Otherwise the incoming term at a is zero. Negative residue homology vanishing
-makes d:P^a -> P^(a+1) residue-injective at every prime. Tag 00O0 makes this
-map injective with projective cokernel locally. Its cokernel is finitely presented
-as the cokernel of a map between finitely presented modules. The local-to-global
-criterion Module.projective_of_localization_maximal therefore makes it projective
-globally; it is finite as a quotient of P^(a+1). Split the map, remove P^a and
-its image, and replace P^(a+1) by its cokernel. The resulting complex has a higher
-lower bound and finite projective terms. The removed pair is contractible, so
-scalar extension preserves its homotopy equivalence and the residue vanishing.
-If a < -1, the degree-zero term and the image of its incoming differential are
-unchanged, hence so are zeroth opcycles. If a = -1, the new degree-zero term
-is exactly the original zeroth opcycles. Apply induction, transferring along
-these identifications. This is a statement about the canonical quotient P.opcycles 0,
-not a choice of a new complex. Empty support intervals and the zero ring are allowed. -/
+if every residue complex is exact in negative degrees. -/
 theorem residueConnective_projective_opcycles
     (R : Type v) [CommRing R]
     (P : CochainComplex (ModuleCat.{v} R) ℤ)

@@ -12,8 +12,8 @@ public import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 We consider exact couples indexed by `ℤ × ℤ` whose map `α` has degree `(-1, 0)` and whose map `g`
 has degree `0`. We think of an index `(p, n)` as a filtration degree `p` and a total degree `n`:
-the bigraded couples of the blueprint, indexed by `(p, q)` with `α` of degree `(-1, 1)`,
-correspond to these through `(p, q) ↦ (p, p + q)`.
+the bigraded couples indexed by `(p, q)` with `α` of degree `(-1, 1)` correspond to these
+through `(p, q) ↦ (p, p + q)`.
 
 The abutment of such a couple is given by structure maps `ι p n : D^{p, n} ⟶ Aⁿ`. When the
 objects `D^{p, n}` vanish for `p ≫ 0` and the maps `ι p n` are isomorphisms for `p ≪ 0`, the
@@ -91,14 +91,9 @@ def IsComplete : Prop :=
 /-- The data of the convergence of the spectral sequence of the couple `X` to the filtrations
 `F n` of objects `A n`, along the structure maps `ι p n : D^{p, n} ⟶ Aⁿ` of the abutment.
 
-For every index `(p, n)` (filtration degree `p`, total degree `n`), it consists of a page
-`stage p n` from which on the differentials leaving and arriving at `(p, n)` vanish (so that the
-entry has reached its stable value `E_∞^{p, n}`), and of isomorphisms `E_N^{p, n} ≅ grᵖ Aⁿ` on
-these pages, compatible with the structure maps: the composite of the map
-`g : D_N^{p - N, n} ⟶ E_N^{p, n}` of the `N`-th derived couple with the isomorphism is induced by
-`D_N^{p - N, n} ⊆ D^{p - N, n} ⟶ Aⁿ`, which factors through `Fᵖ Aⁿ`.
-
-This is the convention for a couple whose map `g` has degree `0`. -/
+For every index `(p, n)` it consists of a page `stage p n` from which on the differentials at
+`(p, n)` vanish, and of isomorphisms `E_N^{p, n} ≅ grᵖ Aⁿ` on these pages, compatible with the
+structure maps `ι`. -/
 structure ConvergenceData {A : ℤ → C} (ι : ∀ p n : ℤ, X.D (p, n) ⟶ A n)
     (F : ∀ n, DecreasingFiltration (A n)) where
   /-- The page from which on the entry at `(p, n)` is stable. -/

@@ -17,6 +17,15 @@ public import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeUnitCompatibili
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparisonCorePreBase
 public import WeilConjectures.Algebra.Homology.AffineTildeTensorSourceComparisonHelpers
 
+/-! # Pre-core affine derived tensor source comparison
+
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08DW
+* Stacks Project, Tag 0AVW
+-/
+
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -59,9 +68,7 @@ attribute [local irreducible] tilde tilde.functor Functor.mapDerivedCategory
   affineTildeTensorOrdinarySourceIso affineTildeTensorDerivedCounit
 
 -- Comparing affine tensor units and counits requires substantial reduction.
-/-- The source counit comparison before the affine pushforward unit and square transport.
-Source: Stacks Project, Tags 06Y6, 08DW and 0AVW.
-This is the strict precomparison used to construct the target source isomorphism. -/
+/-- The source counit comparison before the affine pushforward unit and square transport. -/
 theorem affineTildeTensorSourcePrecomparison
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]

@@ -34,7 +34,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Arbitrary coproducts of strict systems and their derived evaluations
 
-Source: Stacks 07D9; Zheng, Construction 4.1.
+## References
+
+* Stacks Project, Tags 07D9, 015F
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -50,19 +53,13 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
-/-- Coproducts of arbitrary coefficient-universe size exist in the derived system category.
-Source: Stacks 07D9.
-Proof: strict systems are Grothendieck abelian, hence have K-injective resolutions.
-Termwise coproducts represent derived coproducts by maps into those resolutions. -/
+/-- Coproducts of arbitrary coefficient-universe size exist in the derived system category. -/
 theorem strictRingSystem_derivedCoproducts :
     HasCoproducts.{w} (DerivedCategory (StrictRingSystem B)) := by
   have := strictRingSystem_isGrothendieckAbelian B
   exact derived_hasCoproducts
 
-/-- Each coefficient-level derived category has arbitrary small coproducts.
-Source: Stacks 07D9.
-Proof: module sheaves are Grothendieck abelian, so the K-injective coproduct construction
-applies to each coefficient ring. -/
+/-- Each coefficient-level derived category has arbitrary small coproducts. -/
 theorem systemLevel_derivedCoproducts (n : ℕ) :
     HasCoproducts.{w} (DerivedCategory (systemLevel B n)) := by
   have : HasCoproducts.{w} (systemLevel B n) := by
@@ -76,11 +73,7 @@ theorem systemLevel_derivedCoproducts (n : ℕ) :
     isGrothendieckAbelian_coefficientUniverse _
   exact derived_hasCoproducts
 
-/-- Exact derived evaluation preserves coproducts over every coefficient-universe index set.
-Source: Stacks 07D9 and 015F.
-Proof: ordinary evaluation preserves the componentwise colimits. Both source and target
-have K-injective resolutions. Apply exact derived coproduct preservation, using the
-specified exact derived evaluation and its canonical factorization. -/
+/-- Exact derived evaluation preserves coproducts over every coefficient-universe index set. -/
 theorem derivedSystemEvaluation_coproducts (n : ℕ) (I : Type w) :
     PreservesColimitsOfShape (Discrete I) (derivedSystemEvaluation B n) := by
   have (n : ℕ) : HasCoproducts.{w} (systemLevel B n) := by

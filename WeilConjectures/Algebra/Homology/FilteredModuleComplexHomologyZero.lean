@@ -18,7 +18,9 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 
 /-! # Eventual vanishing of a class in a filtered colimit of module complexes
 
-Source: Stacks Project, Tags 00DB and 08DC.
+## References
+
+* Stacks Project, Tags 00DB and 08DC
 -/
 
 @[expose] public section
@@ -68,18 +70,7 @@ private theorem shortComplexHomologyPreserves
   simp [a, e]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A cohomology class zero in the colimit is killed at a later stage.
-Source: Stacks Project, Tag 00DB (exactness) and Tag 08DC (Koszul application).
-
-Proof: Colimits of modules indexed by the natural numbers are exact. Apply their
-exact colimit functor to the three adjacent terms of a complex: it preserves
-kernels and cokernels and therefore homology. Evaluation at each index has the
-same property. The homology comparison is natural for the cocone legs, so these
-legs give a colimit cocone on the diagram of homology modules. The forgetful
-functor to types preserves this filtered colimit. Equality between the image of
-x and that of zero is witnessed at one common later stage; in the natural-number
-preorder both transition arrows to that stage coincide. Linearity preserves zero,
-giving the asserted equation. Zero complexes and zero classes are included. -/
+/-- A cohomology class zero in the colimit is killed at a later stage. -/
 theorem filteredModuleComplex_homology_eventually_zero
     (A : Type u) [CommRing A] (D : ℕ ⥤ CochainComplex (ModuleCat.{u} A) ℤ)
     (n : ℤ) (e : ℕ) (x : (D.obj e).homology n)

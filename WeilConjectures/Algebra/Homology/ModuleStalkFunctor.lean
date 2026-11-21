@@ -15,7 +15,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Stalk functor for modules on a ringed space
 
-Source: Stacks Project, Cohomology, Lemma 06YB, label `lemma-check-K-flat-stalks`
+## References
+
+* Stacks Project, Cohomology, Tag 06YB
 -/
 
 @[expose] public section

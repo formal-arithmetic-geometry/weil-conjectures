@@ -14,12 +14,12 @@ public import WeilConjectures.Blowup.Gluing
 The blow-up of a scheme `X` along a quasi-coherent ideal `I` is glued in
 `WeilConjectures.Blowup.Gluing` over the thin category of all affine opens, so no explicit
 overlap maps or cocycle conditions are needed there. This file recovers the classical gluing
-data of the blueprint from that construction.
+data from that construction.
 
 For affine opens `U ≤ V` the restriction map `r_{V,U} : B_U ⟶ B_V` of the local models
 (`I.blowupFunctor.map`) is an open immersion onto the preimage of `U` in `B_V`
-(`opensRange_blowupFunctor_map`). If `U ≤ V_i` and `U ≤ V_j` (in the blueprint `U = D(s)` is a
-basic open), the overlap isomorphism is `ω_{ij,U} = r_{j,U} ∘ r_{i,U}⁻¹`.
+(`opensRange_blowupFunctor_map`). If `U ≤ V_i` and `U ≤ V_j`, the overlap isomorphism is
+`ω_{ij,U} = r_{j,U} ∘ r_{i,U}⁻¹`.
 
 ## Main definitions
 
@@ -81,8 +81,7 @@ lemma blowupRestrictIso_inv_comp {U V : X.affineOpens} (hUV : U ≤ V) :
 
 /-- **The basic-overlap comparison isomorphism** `ω_{ij,U} = r_{j,U} ∘ r_{i,U}⁻¹` between the
 parts of the local blow-ups over `V_i` and over `V_j` lying over an affine open `U ⊆ V_i ∩ V_j`.
-The blueprint takes `U = D(s)` basic, where `r_{i,U}` is an isomorphism onto the preimage by
-`isPullback_blowupNatTrans_of_basicOpen`. Here `U` may be any affine open. -/
+Here `U` may be any affine open. -/
 noncomputable def blowupOverlapIso {U Vi Vj : X.affineOpens} (hi : U ≤ Vi) (hj : U ≤ Vj) :
     (I.blowupOverlapOpen hi : Scheme.{u}) ≅ I.blowupOverlapOpen hj :=
   (I.blowupRestrictIso hi).symm ≪≫ I.blowupRestrictIso hj

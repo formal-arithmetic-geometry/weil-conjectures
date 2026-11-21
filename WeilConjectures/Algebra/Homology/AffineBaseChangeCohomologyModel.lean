@@ -17,7 +17,12 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 /-! # Cohomology coordinates for affine derived base change
 
-Source: Stacks Project, Tag 0DJ8, affine proof and equation-bc.
+Cohomology coordinates for the affine derived base change comparison, with its prime
+localizations.
+
+## References
+
+* Stacks Project, Tag 0DJ8 (affine proof)
 -/
 
 @[expose] public section
@@ -100,28 +105,7 @@ private theorem affine_stalkComparison_normalized
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The degree-i affine module comparison and its prime localizations, without any
-invertibility hypothesis. Source: Stacks Project, perfect.tex, Tag 0DJ8, affine
-proof, equation-bc and the displayed localization identity.
-
-Proof: first apply exists_affineBaseChangeSourceModel to K and the supplied
-K-flat representative c.P, with target the canonical pullback Lg'^*K. This provides
-U, its map a0 to global sections of pullback cohomology, its source isomorphism,
-a natural affine direct-image cohomology isomorphism d, and the localized source
-square. Derived pullback preserves quasi-coherent cohomology. Set V to the actual
-global sections of H^i(K') and a to a0 followed by the map on global sections
-induced by phi. Set eV to d at K'. Naturality of d and functoriality of H give the
-global square. The canonical affineDerivedCohomologyStalkIso identifies V_p with
-the stalk of H^i(K'). Compose it with the stalk of H^i(c.e') inverse and the exact
-stalk/representative isomorphism to obtain lV. Localization of global sections is
-natural, as proved in affineDerivedCohomologyStalkIso_naturality. Exactness of
-stalks gives naturality of affineRepresentativeStalkIso for c.t. The represents
-equation for c and cancellation of its invertible counit prove
-stalkComparison followed by the target normalization equals the comparison into
-pullback followed by the stalk of H^i(phi). Apply this equation to lU(x), use the
-localized source square and localization of composition, and cancel the target
-normalization isomorphism. This proves the local equality for the supplied
-coordinates, without selecting different coordinates or assuming any comparison
-is invertible. -/
+invertibility hypothesis. -/
 theorem exists_affineBaseChangeCohomologyModel
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

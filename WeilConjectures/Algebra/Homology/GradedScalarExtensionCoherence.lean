@@ -14,8 +14,9 @@ import Mathlib.CategoryTheory.NatIso
 
 /-! # Coherence of scalar extension for a graded family
 
-Source: Stacks Project, Tag 09RE, affine base-change comparisons;
-Mathlib `ModuleCat.extendScalars_assoc`.
+## References
+
+* Stacks Project, Tag 09RE, affine base-change comparisons
 -/
 
 @[expose] public section
@@ -103,22 +104,7 @@ private theorem scalarExtension_comparison_coherence
   exact scalarExtension_conjugation_assoc f g t (P.X n) (Q.X n) (v n)
 
 /-- Transporting an arbitrary graded map to a fixed later stage does not change its
-further extension to the colimit. Neither finite presentation nor chain squares are needed.
-
-Source: Stacks Project, Tag 09RE, affine comparison; the associativity calculation is
-`ModuleCat.extendScalars_assoc` in Mathlib.
-Proof: The functoriality equality hc identifies extension directly from i₀ to j with
-extension through i. Conjugate the extension of v by the components of the natural
-isomorphism c. Extension to the colimit respects compositions and inverses. Apply
-scalar-extension associativity to the three maps i₀ → i → j → colimit: its two sides
-identify e j followed by extension of c with e i followed by the comparison from
-extension through j to direct extension from i. Naturality of this last comparison
-with respect to each v n cancels its source and target components. This gives the
-claimed conjugation identity degreewise. The eqToIso factors simply replace equal
-ring maps; their compatibility follows by equality induction. Equivalently, the two
-sides agree on each 1 tensor x because all associativity comparisons send it to the
-same iterated unit tensor; linearity and tensor-product induction prove equality.
-This works in every degree, including zero terms, and when i=j. -/
+further extension to the colimit. Neither finite presentation nor chain squares are needed. -/
 theorem graded_scalarExtension_colimit_coherence
     {I : Type u} [Preorder I] (F : I ⥤ CommRingCat.{u}) (i₀ : I)
     (P Q : CochainComplex (ModuleCat.{u} (F.obj i₀)) ℤ)

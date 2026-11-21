@@ -15,8 +15,10 @@ public import WeilConjectures.Algebra.Homology.BaseLocalizationMap
 import WeilConjectures.Algebra.Homology.BaseLocalizationComparisonAux
 /-! # Localizing the base and second factor of a derived tensor
 
-Source: Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
-second coefficient ring; More on Algebra, Tag 06Y6.
+## References
+
+* Stacks Project, perfect.tex, Tag 0DJ8, localization of the base and
+  second coefficient ring; More on Algebra, Tag 06Y6.
 -/
 
 @[expose] public section
@@ -47,22 +49,7 @@ variable (R A B Rp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
 
 include tRpA tRpB tAD tBD tApD tBpD in
-/-- Compatibility of the characterized map with localized augmentation.
-Source: Stacks Project, Tags 0DJ8 and 06Y6.
-
-Proof: the universal lift defining baseLocalizationDerivedMap satisfies its
-counit equation by leftDerived_fac. Apply it to the restricted complex Q and
-then cohomology. The ordinary tensor identification fixes b tensor x.
-Combine this identity with both comparison_eq equations to identify the
-ordinary comparison maps. Transpose by extension/restriction adjunction and
-use localized_eq on both models. On a generator 1 tensor x, the resulting
-D-linear square is exactly the formula defining IsBaseLocalizationMap.
-Every ordinary complex identification tau satisfying the specified formula
-coincides with the canonical identification: tensor induction proves equality
-of its degree-j maps, and complex extensionality proves equality of chain
-maps. Tensor induction likewise proves the D-linear square from its generators.
-This proof uses neither invertibility of the comparison maps nor flatness
-of D. Zero complexes and zero coefficient rings give the unique zero maps. -/
+/-- Compatibility of the characterized map with localized augmentation. -/
 theorem baseLocalization_comparison (S : Submonoid R) [IsLocalization S Rp] (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

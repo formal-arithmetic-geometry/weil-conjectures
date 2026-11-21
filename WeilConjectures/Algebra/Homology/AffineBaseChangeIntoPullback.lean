@@ -8,9 +8,12 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.AffineDerivedCohomologyPresentation
 public import WeilConjectures.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
-/-! # The source-only localized affine comparison
+/-!
+# The source-only localized affine comparison
 
-Source: Stacks Project, Tag 0DJ8, equation-bc.
+## References
+
+* Stacks Project, Tag 0DJ8
 -/
 
 @[expose] public section
@@ -27,7 +30,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The localized comparison ending in stalks of the pullback cohomology sheaf,
-before any morphism from that pullback is applied. Source: Stacks, Tag 0DJ8. -/
+before any morphism from that pullback is applied. -/
 def affineBaseChangeIntoPullback
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

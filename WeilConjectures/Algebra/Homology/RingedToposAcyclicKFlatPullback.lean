@@ -23,9 +23,14 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 
-/-! # RingedToposAcyclicKFlatPullback
+/-! # K-flat pullback of acyclic complexes along a morphism of ringed topoi
 
-Source: Stacks Project, Tag 0G7E (lemma-pullback-K-flat), acyclic case. -/
+The pullback of an acyclic K-flat complex of flat module sheaves is K-flat.
+
+## References
+
+* Stacks Project, Tag 0G7E, acyclic case, using Tag 0G7C for flatness of cycles
+-/
 
 @[expose] public section
 universe uC vC uD vD w
@@ -331,21 +336,8 @@ private noncomputable def inverseImageOfUniverses (I : AlgebraicInverseImage L R
 
 end InverseImage
 
-/-- The acyclic case of K-flat pullback along a morphism of ringed topoi.
-Source: Stacks Project, Cohomology on Sites, Tag 0G7E, the acyclic-case paragraph,
-using Tag 0G7C for flatness of cycles.
-
-Proof: because P is acyclic, K-flat, and flat in every degree, its cycles are flat
-by the acyclic K-flat cycles criterion. Its good truncation at n therefore has flat
-terms: the old terms below n, the flat cycle sheaf in degree n, and zero above n.
-Flat pullback makes the terms of its image flat; additivity sends zero to zero, so
-the image remains bounded above. Every such image is K-flat by the bounded-above
-flat criterion. The integer-indexed good truncations have degreewise colimit P,
-since in every degree they are eventually equal to P. The filtered-colimit
-preservation theorem for the specified module pullback implies that uStar preserves
-this colimit, including all transition maps and differentials. Filtered-colimit
-closure of K-flatness now proves that the
-image of P is K-flat. No exactness of uStar on arbitrary short exact sequences is used. -/
+/-- The acyclic case of K-flat pullback along a morphism of ringed topoi: the pullback of an
+acyclic, K-flat complex of flat sheaves is K-flat. -/
 theorem isKFlat_ringedToposPullback_of_acyclic
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]

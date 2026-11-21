@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.Embedding.HomEquiv
 /-!
 # Assembling an ascending cokernel and pushout system
 
-Source: Stacks Project, Tag 05T6(1), the ascending recursion dual to Tag 05T7(1).
+## References
+
+* Stacks Project, Tags 05T6, 05T7
 -/
 
 @[expose] public section
@@ -28,25 +30,7 @@ namespace CochainComplex
 /-- Assemble a supplied sequence of terms, cokernels, augmentation components and local
 pushout factorizations into an integer-indexed complex. This is only the assembly step:
 the sequence, all its monomorphisms, and its pushouts are inputs; no quasi-isomorphism
-is asserted. Source: Stacks Project, Tag 05T6(1), the recursion in the dual of Tag 05T7(1).
-
-Proof: Put `I.X (a + m) = X m` for `m : ℕ`, and put the chosen zero object in every
-smaller degree. Use the supplied `d m` as the differential in degree `a + m`; all other
-differentials are zero. Successive differentials compose to zero because `d m` factors
-through `p m` and `d (m - 1) ≫ p m = 0`; at the lower boundary the first map is zero.
-Set the augmentation equal to `α m` in degree `a + m`, and zero below `a`. The identity
-`K.pOpcycles ≫ β = α ≫ p` followed by the pushout identity proves commutation in each
-nonzero degree. Below `a`, commutation holds since the source term of `K` is zero.
-The initial `p 0` is an isomorphism, so it is a cokernel of the zero incoming differential.
-For later degrees, `hcoker` identifies `Q m` with the opcycles of `I`. Under these
-canonical identifications the induced map on opcycles is `β m`, by its characterization
-after precomposition with the epimorphism `K.pOpcycles`. Thus it is mono. Transport the
-supplied pushout squares along these identifications; the induced map out of opcycles
-is `v ≫ j` by the differential factorization and cancellation of `p m`. In degree
-`a - 1`, the opcycles on both sides are zero: take pushout object `K.X a`, maps the
-identity and zero, and embedding `α 0`. In smaller degrees take the zero pushout.
-Every augmentation component is mono, either by `hmono` or because its source is zero.
-Membership follows from `hmem` and `hzero`; the lower bound follows from the construction.
+is asserted.
 -/
 theorem exists_complex_of_cokernel_pushout_system
     (C : Type u) [Category.{v} C] [Abelian C]

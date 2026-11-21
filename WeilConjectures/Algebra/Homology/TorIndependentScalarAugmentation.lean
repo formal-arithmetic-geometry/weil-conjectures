@@ -17,9 +17,12 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.CategoryTheory.Adjunction.Additive
 
-/-! # Tor-independent scalar augmentation
+/-!
+# Tor-independent scalar augmentation
 
-Source: Stacks Project, Tag 08IB, final affine calculation; Tags 06Y6 and 06XY.
+## References
+
+* Stacks Project, Tag 08IB, final affine calculation; Tags 06Y6 and 06XY.
 -/
 
 @[expose] public section
@@ -29,24 +32,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace ModuleCat
 
 /-- Scalar extension of a K-flat resolution of B is an augmentation quasi-isomorphism
-when A and B are Tor independent over R.
-Source: Stacks Project, Tag 08IB, final affine calculation; Tag 06Y6 and Section 06XY.
-
-Proof: Take a functorial K-flat resolution p:P -> A[0]. Apply the existing
-one-term Tor-acyclic tensor lemma to p and B. Its hypothesis is exactly the
-positive Tor vanishing in the statement, transported along A[0].X 0 = A.
-Thus the termwise tensor of p with B is a quasi-isomorphism. The single-factor
-total tensor isomorphism identifies it with p tensor B[0]. The identity linear
-equivalence identifies the algebra R-module B with restriction of the B-module B.
-K-flatness of F
-makes p tensor F a quasi-isomorphism; K-flatness of P makes P tensor f a
-quasi-isomorphism. The tensor square commutes by whisker exchange. Its top
-and right sides are quasi-isomorphisms, as is its left side, so two-out-of-three
-makes A[0] tensor f a quasi-isomorphism. The single-factor comparison identifies
-this with termwise tensoring f with A. The composition comparison for functors
-identifies the latter with scalar extension to A followed by restriction to R.
-Restriction detects quasi-isomorphisms, proving the claim over A. The proof
-uses the same argument for unbounded F, zero rings and zero complexes. -/
+when A and B are Tor independent over R. -/
 theorem scalarAugmentation_quasiIso_of_torIndependent
     {R A B : Type u} [CommRing R] [CommRing A] [CommRing B]
     [Algebra R A] [Algebra R B]

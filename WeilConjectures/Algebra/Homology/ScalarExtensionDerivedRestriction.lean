@@ -14,7 +14,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
-/-! # Scalar-extension derived counits after exact restriction -/
+/-! # Scalar-extension derived counits after exact restriction
+
+## References
+
+* Stacks Project, Tags 06Y6 and 06XN
+-/
 
 @[expose] public section
 
@@ -26,18 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 noncomputable section
 namespace ModuleCat
 
-/-- Restriction of a universal derived scalar-extension pair is universal.
-Source: Stacks Project, Tags 06Y6 and 06XN, the K-flat derived-functor construction.
-
-Proof: resolve every source complex by a K-flat complex. Scalar extension inverts
-quasi-isomorphisms between such complexes. Restriction is exact and therefore
-preserves these quasi-isomorphisms and their images under localization. The
-restricted counit is invertible on each K-flat complex, since the original
-universal scalar-extension counit is invertible there. The left derivability
-structure of K-flat complexes characterizes the universal pair by precisely
-this condition, proving the assertion. The factorization isomorphism merely
-identifies exact restriction before and after localization. The proof works for
-unbounded complexes and zero rings and requires no flatness of either ring map. -/
+/-- Restriction of a universal derived scalar-extension pair is universal. -/
 theorem scalarExtensionDerivedRestriction
     {A D B : Type u} [CommRing A] [CommRing D] [CommRing B]
     [HasDerivedCategory.{w} (ModuleCat.{u} A)]

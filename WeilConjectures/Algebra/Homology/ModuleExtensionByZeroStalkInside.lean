@@ -13,6 +13,16 @@ import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkMorphism
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import Mathlib.Geometry.RingedSpace.Stalks
 
+/-!
+# Stalks of the extension by zero at points inside the open
+
+Stalk comparison for the sheafified extension by zero at a point of the open `W`.
+
+## References
+
+* Stacks Project, Sheaves, Tags 00A7 (2)-(3), 00A5 and 007Z
+-/
+
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
@@ -22,20 +32,7 @@ namespace AlgebraicGeometry
 stalk at x of G on W (with scalars restricted along the inverse restriction-stalk ring
 isomorphism) to the stalk of its sheafified extension by zero. It sends every germ of a section
 over V in W to the germ of its image under the unit of the chosen extension/restriction
-adjunction, over the image of V in X.
-
-Proof: Construct the canonical extension/restriction adjunction by direct-sum injections on opens
-contained in W and the module sheafification universal property. On neighborhoods contained in W,
-which are cofinal at x, the presheaf has exactly one summand and its restrictions are those of G.
-The resulting colimit comparison, followed by the sheafification stalk isomorphism, is an additive
-isomorphism. Represent a scalar and a section on a common neighborhood to show linearity over
-O_X,x, using the inverse restriction-stalk ring isomorphism for the source action. Naturality
-follows from naturality of injections and sheafification. To use the particular chosen adjunction,
-compare the canonical adjunction with it by the unique natural automorphism of their common left
-adjoint compatible with units. Compose the canonical stalk comparison with the stalk of that
-automorphism. It remains an isomorphism, and sends a germ to the germ of the chosen unit by the
-unit comparison formula. This proves the displayed germ identity on every V. Source: Stacks
-Project, Sheaves Lemma 00A7 (2)-(3), Lemma 00A5, and Lemma 007Z. -/
+adjunction, over the image of V in X. -/
 theorem moduleExtensionByZero_stalk_inside (X : RingedSpace.{u}) :
     (∀ (W : Opens X) (x : X) (hx : x ∈ W),
       ∃ e : (W.sheafOfModulesEquivOver (moduleRings X)).functor ⋙

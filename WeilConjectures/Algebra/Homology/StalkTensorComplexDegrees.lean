@@ -15,7 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 /-!
 # Degreewise stalk tensor comparison
 
-Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification
+## References
+
+* Stacks Project, Tag 06YB
 -/
 
 @[expose] public section
@@ -59,20 +61,8 @@ private theorem stalk_preserves_colimits (J : Type) [SmallCategory J] :
     (RingedSpace.moduleStalkFunctor X x)
     (forget₂ (ModuleCat.{u₁} (X.presheaf.stalk x)) AddCommGrpCat.{u₁})
 
-/-- Source: Stacks Project, Cohomology, Tag 06YB, tensor-stalk identification,
-first two steps.
-
-Proof: express the degree as the coproduct indexed by pairs `(p,q)` with `p+q=n`.
-The canonical stalk/direct-sum comparison of Tag 009E identifies its stalk with
-that coproduct of stalks. If its scalar ring is presented as a RingCat stalk,
-identify it with the CommRingCat stalk by the canonical ring map on germs. Represent
-scalars on a neighborhood to check that the two scalar actions agree, and transport
-the linear equivalence along this identification. For smaller-universe diagonal
-indices, lift the index type and reindex the coproduct along the lift equivalence.
-Identify the algebraic direct sum with the categorical coproduct using
-`ModuleCat.coprodIsoDirectSum`. Apply the tensor comparison to every summand and
-use the universal property of the coproduct to obtain an isomorphism. Its value
-on each injection is the displayed formula; no differential is involved. -/
+/-- The stalk of the degree-`n` term of the total tensor complex is isomorphic to the degree-`n`
+term of the total tensor complex of the stalks, compatibly with the summand inclusions. -/
 theorem exists_stalk_tensor_degree_iso
     (φ : ∀ A B : SheafOfModules.{u₁} O,
       (RingedSpace.moduleStalkFunctor X x).obj (A ⊗ B) ≅

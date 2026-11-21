@@ -19,7 +19,12 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 
-/-! # Signed finite-free dual tensor and algebraic Hom -/
+/-! # Signed finite-free dual tensor and algebraic Hom
+
+## References
+
+* Stacks Project, More on Algebra, Tags 0A6A and 0ATK, finite-projective Hom calculation
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -123,24 +128,7 @@ private noncomputable def modelIso {R : Type u} [CommRing R]
 
 set_option linter.style.haveILetI false in
 /-- A bounded finite-free complex has its signed dual tensor as its algebraic
-endomorphism complex.
-
-Source: Stacks Project, More on Algebra, Tags 0A6A and 0ATK, finite-projective
-Hom calculation; current blueprint `proposition-local-structure-integral-constructible-complexes`,
-uniform-bound paragraph.
-
-Proof: in dual degree r, projection to the only possibly nonzero target degree
-identifies Hom(P,A[0])^r with Hom(P^(-r),A). For each r,s use the finite dual-basis
-isomorphism Hom(P^(-r),A) tensor P^s = Hom(P^(-r),P^s). Multiply this map by the
-unit (-1)^(r*s). For total degree k, reindex r+s=k by p=-r. Boundedness of P makes
-only finitely many factors nonzero, so the direct sum of these isomorphisms is an
-isomorphism onto the product defining Hom(P,P)^k. The differential on the dual is
--(-1)^r precomposition with d_P. Its tensor differential is d_dual tensor 1 plus
-(-1)^r times 1 tensor d_P. Changing r to r+1 multiplies the evaluation sign by
-(-1)^s; changing s to s+1 multiplies it by (-1)^r. The resulting two terms are
-exactly d_P f - (-1)^k f d_P, so the degree isomorphisms commute with differentials
-and form a complex isomorphism. The zero ring, zero complex and empty support
-interval use the identical finite biproduct construction. -/
+endomorphism complex. -/
 theorem modulePerfectDualTensorHom_iso {R : Type u} [CommRing R]
     (P : CochainComplex (ModuleCat.{u} R) ℤ)
     (a b : ℤ) (_ha : P.IsStrictlyGE a) (_hb : P.IsStrictlyLE b)

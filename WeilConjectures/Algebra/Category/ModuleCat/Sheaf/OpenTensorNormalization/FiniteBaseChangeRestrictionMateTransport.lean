@@ -149,17 +149,7 @@ private theorem mate_transport_abstract
     P Q Pb Qb p q β.hom θ.inv bb.hom hγ h N
 
 -- The concrete finite specialization elaborates through four equivalence records.
-/-- Transport the right-adjoint square through the four finite comparison pins.
-Source: third step of `lem-sf-finite-base-change-restriction-ordinary-pin-mate`.
-Proof: apply the four finite pull-pin mate equations and
-`equivalenceAdjunctionComparison_inverseMate` to transport the supplied
-right-square identity. Rewrite the inverse mates as `upperStarCompIso.hom` and
-`ordinaryTheta.inv`, then cancel the comparison isomorphisms. This is strictly
-smaller than the parent because its right-square identity is supplied as a
-hypothesis. The categorical normalization and cancellation are an independent
-obstacle estimated at more than four hours from the currently published
-interfaces.
--/
+/-- Transport the right-adjoint square through the four finite comparison pins. -/
 theorem finite_base_change_restriction_mate_transport
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

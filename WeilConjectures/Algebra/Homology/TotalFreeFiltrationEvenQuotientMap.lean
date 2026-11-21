@@ -12,7 +12,9 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 /-!
 # The canonical degree maps into the even column quotient
 
-Source: Stacks Project, Tag 09KP, alternating column filtration.
+## References
+
+* Stacks Project, Tag 09KP, alternating column filtration.
 -/
 
 @[expose] public section
@@ -32,8 +34,7 @@ variable (S : ℕ → ShortComplex (CochainComplex (ModuleCat.{u} A) ℤ))
 variable (e : ∀ j : ℕ, (S j).X₂ ≅ K.X (-(j : ℤ)))
 variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
-/-- The lower column map has image in the odd filtration term.
-Source: Stacks Project, Tag 09KP, definition of the alternating filtration. -/
+/-- The lower column map has image in the odd filtration term. -/
 lemma lower_mem_odd (j : ℕ) (k : ℤ) (x : (S j).X₁.X (k + j)) :
     lower K S e j k x ∈ term K S e (2 * j + 1) k := by
   apply (le_iSup (fun a : ℕ ↦
@@ -44,16 +45,14 @@ lemma lower_mem_odd (j : ℕ) (k : ℤ) (x : (S j).X₁.X (k + j)) :
   simp only [le_refl, ite_true]
   exact ⟨x, rfl⟩
 
-/-- The explicit lower-column map, with its codomain restricted to the odd term.
-Source: Stacks Project, Tag 09KP, alternating column filtration. -/
+/-- The explicit lower-column map, with its codomain restricted to the odd term. -/
 noncomputable def lowerToOdd (j : ℕ) (k : ℤ) :
     (S j).X₁.X (k + j) ⟶ (complex K S e h_positive (2 * j + 1)).X k :=
   ModuleCat.ofHom ((lower K S e j k).hom.codRestrict
     (term K S e (2 * j + 1) k) (lower_mem_odd K S e j k))
 
 /-- The canonical degree map from the shifted first endpoint to the even quotient.
-It is a specified composite, with no choice of representatives or inverse.
-Source: Stacks Project, Tag 09KP, successive quotients of the column filtration. -/
+It is a specified composite, with no choice of representatives or inverse. -/
 noncomputable def evenQuotientComponent (j : ℕ) (k : ℤ) :
     ((CategoryTheory.shiftFunctor (CochainComplex (ModuleCat.{u} A) ℤ) (j : ℤ)).obj
       (S j).X₁).X k ⟶ (cokernel (step K S e h_positive (2 * j))).X k :=
@@ -111,22 +110,7 @@ private lemma vertical_eq (j : ℕ) (k l : ℤ)
     Int.negOnePow_neg, Linear.comp_units_smul]
   rw [(e j).hom.comm_assoc, (S j).f.comm_assoc]
 
-/-- The canonical degree maps commute with the shifted endpoint differential.
-Source: Stacks Project, Tag 09KP, proof, alternating column filtration.
-
-Proof. Compose with the inclusion of the odd filtration term into the total
-complex. The total differential of the lower-column map is the sum of a
-horizontal term and a vertical term. For j>0, the horizontal term lies in the
-full column -(j-1), which is already in stage 2j; for j=0 it is zero because
-column 1 is zero. The cokernel projection therefore kills this term. The
-vertical term is the lower-column map composed with the endpoint differential,
-by the chain-map equations for (S j).f and (e j).hom. The total sign on column
--j is (-1)^(-j)=(-1)^j, precisely the differential sign of the shift by j.
-Restriction to the filtration submodules preserves these equalities since
-submodule inclusions are injective. Apply the chain-map equation for the
-cokernel projection to obtain the displayed equality. No exactness or freeness
-is used, and this works for j=0 and for zero columns as well.
--/
+/-- The canonical degree maps commute with the shifted endpoint differential. -/
 theorem evenQuotientComponent_comm (j : ℕ) (k l : ℤ)
     (hkl : (ComplexShape.up ℤ).Rel k l) :
     evenQuotientComponent K S e h_positive j k ≫

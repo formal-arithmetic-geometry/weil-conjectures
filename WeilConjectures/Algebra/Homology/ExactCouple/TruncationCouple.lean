@@ -118,17 +118,10 @@ noncomputable abbrev truncationTower (M : DerivedCategory.Plus A) :
   (truncLETower M).map v.rightDerivedFunctorPlus
 
 /-- The **truncation couple** of an additive functor `v : A ⥤ B` (`A` with enough injectives)
-and of an object `M` of `D⁺(A)` (for instance a bounded below complex): the exact couple obtained
-from the triangles `τ_{≤ q - 1} M ⟶ τ_{≤ q} M ⟶ Hᵠ(M)[-q] ⟶` by applying `R⁺v` and cohomology.
-It is indexed by the filtration degree `p` and the total degree `n = p + q`, with
-
-`D^{p, n} = Hⁿ(R⁺v(τ_{≤ n - p} M))`, `E^{p, n} = Hⁿ(R⁺v(Hⁿ⁻ᵖ(M)[p - n]))`
-
-(`CategoryTheory.Functor.truncationCoupleEIso`), `α : D^{p + 1, n} ⟶ D^{p, n}` induced by the
-maps `τ_{≤ q} M ⟶ τ_{≤ q + 1} M`, `g : D^{p, n} ⟶ E^{p, n}` induced by the maps of the triangles
-and `f : E^{p, n} ⟶ D^{p + 2, n + 1}` the connecting maps. In the coordinates `(p, q)` the maps
-`α`, `f`, `g` have bidegrees `(-1, 1)`, `(2, -1)` and `(0, 0)`. This data is an exact couple
-(remark `rem-ptr-sp-truncation-couple-1`), by `TriangleTower.exactCoupleTotal`. -/
+and of an object `M` of `D⁺(A)`: the exact couple obtained from the triangles
+`τ_{≤ q - 1} M ⟶ τ_{≤ q} M ⟶ Hᵠ(M)[-q] ⟶` by applying `R⁺v` and cohomology, indexed by the
+filtration degree `p` and the total degree `n = p + q`, with `D^{p, n} = Hⁿ(R⁺v(τ_{≤ n - p} M))`
+and `E^{p, n} = Hⁿ(R⁺v(Hⁿ⁻ᵖ(M)[p - n]))`. -/
 noncomputable def truncationCouple (M : DerivedCategory.Plus A) :
     ExactCouple B ((-1, 0) : ℤ × ℤ) (2, 1) 0 :=
   (v.truncationTower M).exactCoupleTotal (DerivedCategory.Plus.homologyFunctor B 0)

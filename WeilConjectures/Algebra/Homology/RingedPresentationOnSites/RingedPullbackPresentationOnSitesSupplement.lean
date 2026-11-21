@@ -69,8 +69,11 @@ import all WeilConjectures.CategoryTheory.GeometricMorphism.GeometricInverseImag
 
 /-! # Tensor presentation of ringed pullback on independently sized sites
 
-Source: Stacks Project, Modules on Sites, Tag 03D7.
 The argument restricts the set-sheaf adjunction to linear maps.
+
+## References
+
+* [Stacks Project, Modules on Sites, Tag 03D7](https://stacks.math.columbia.edu/tag/03D7)
 -/
 
 @[expose] public noncomputable section
@@ -741,16 +744,7 @@ private noncomputable def siteContinuousRingedTopos
 
 end
 
-/-- Tensor presentation of the left adjoint to continuous module direct image.
-Source: Stacks Project, Modules on Sites, Tag 03D7
-Proof: transport the ring and its modules along the finite-limit-preserving set
-inverse image. Transpose the given coefficient map to obtain the structural map
-from the transported ring to the target ring. The geometric set adjunction
-restricts to linear maps by its compatibility with addition and scalar actions.
-Compose this restricted Hom equivalence with the sheafified tensor/restriction
-adjunction. This constructs the stated adjunction for inverse image followed by
-extension of scalars. Its left adjoint is additive, and its objects and maps are
-literally the sheafified scalar extension of the transported modules. -/
+/-- Tensor presentation of the left adjoint to continuous module direct image. -/
 theorem continuous_ringed_pullback_presentation
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{u} C] [EssentiallySmall.{u} D]

@@ -15,7 +15,12 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FlatAlgebraicInverseImag
 import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
-/-! # Flat module stalks at a topos point -/
+/-! # Flat module stalks at a topos point
+
+## References
+
+* [Stacks Project, Modules on Sites, Tag 05VD](https://stacks.math.columbia.edu/tag/05VD)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,15 +30,7 @@ universe u v w
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace CategoryTheory.RingedSitePoint
 
-/-- Geometric module inverse image preserves flat objects at a point.
-Source: Stacks Project, Modules on Sites, Tag 05VD.
-
-Proof: present the point as a morphism to the bottom-topology one-object site,
-using its prescribed ring and module operation graphs. The algebraic inverse-image
-flatness theorem applies to this presentation. Evaluation on the one-object site
-is an equivalence of module categories, compatible with tensor. Consequently its
-image of the exact tensor functor is the ordinary exact tensor functor with the
-stalk module, which is the categorical criterion for flatness over its ring. -/
+/-- Geometric module inverse image preserves flat objects at a point. -/
 theorem flat
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}}

@@ -12,7 +12,10 @@ import Mathlib.Algebra.Category.ModuleCat.Descent
 
 /-! # Cohomology of flat extension of coefficients
 
-Source: Stacks Project, Tags 00HD and 0A1D, lemma-base-change-tensor.
+## References
+
+* Stacks Project, Tag 00HD
+* Stacks Project, Tag 0A1D
 -/
 
 @[expose] public section
@@ -25,22 +28,7 @@ set_option backward.isDefEq.respectTransparency.types false
 namespace ModuleCat
 
 /-- The cohomology adjunct of the canonical coefficient map is an isomorphism
-when the final extension is flat. Source: Stacks Project, Tag 00HD (lemma-flat)
-and the coefficient associativity used in Tag 0A1D (lemma-base-change-tensor).
-
-Proof: Flatness makes extension E to D exact by tensoring exact sequences
-(Tag 00HD). Applying it to the cycle and boundary sequences gives the canonical
-isomorphism from D tensor E H(K) to H(D tensor E K). The transposition of the
-termwise unit K to restriction of D tensor E K induces precisely this
-isomorphism on cohomology, by naturality of the homology comparison with respect
-to the adjunction unit. Here K is E tensor A Q. Tensor associativity identifies
-D tensor E K with D tensor A Q; it sends d tensor (e tensor q) to d*g(e)
-tensor q, commuting with differentials. The specified pure-tensor formula
-uniquely fixes φ as the unit followed by this associativity isomorphism.
-Functoriality of homology and adjunction thus identify the stated adjunct with
-the composite of the exact homology isomorphism and homology of associativity.
-Both factors are invertible. This also covers zero rings and zero complexes,
-and does not require A to be flat over any ring. -/
+when the final extension is flat. -/
 theorem flatScalarExtensionHomologyAdjunct_isIso
     {A E D : Type u} [CommRing A] [CommRing E] [CommRing D]
     (f : A →+* E) (g : E →+* D) [Algebra E D]

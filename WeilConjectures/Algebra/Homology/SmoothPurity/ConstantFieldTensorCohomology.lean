@@ -47,8 +47,9 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 /-!
 # Cohomology and tensor product over a constant field sheaf
 
-Source: the blueprint, `lem-exc-residue-tor-test.proof.md`, second paragraph;
-Stacks Project, Tags 03CY, 03ET, 0GMW, 00WJ and 010N
+## References
+
+* Stacks Project, Tags 03CY, 03ET, 0GMW, 00WJ and 010N
 -/
 
 @[expose] public section
@@ -78,31 +79,7 @@ private theorem tensorMap_tmul
   exact hU.symm
 
 /-- Tensoring with any module sheaf over the constant field sheaf commutes with cohomology,
-naturally in both variables, and sends `[z] ⊗ y` to `[z ⊗ y]` on local sections.
-Source: blueprint `lem-exc-residue-tor-test.proof.md`, second paragraph, expanded by Stacks
-Tags 03CY, 03ET, 0GMW, 00WJ and 010N
-
-Proof:
-1. Restrict a module sheaf N along the map from the constant presheaf field to its
-sheafification. Its sections are vector spaces over the field; its associated module
-sheaf is N, by the module-sheafification interface [lem-pc-sites-module-sheafification-interface].
-This does not identify sections of the constant sheaf with the field itself.
-2. Vector spaces are free, hence projective [lem-weil-pbc-vector-space-projective] and flat
-[lem-weil-pbc-projective-module-flat]. Tensoring sections preserves kernels by
-[lem-weil-pbc-flat-tensor-exact], and preserves finite products by the usual two-factor
-sum of pure tensors. Equalizers are kernels of differences, so the presheaf tensor functor
-preserves finite limits, which are computed objectwise.
-3. By [lem-pc-sites-modules-sheafification-flat], sheafification gives flatness of N.
-Thus the sheaf tensor functor is exact [def-pc-flat-sheaf-modules] in the abelian module
-sheaf category [situation-conventions].
-4. Apply [lem-sp-exact-functor-preserves-homology] to the three terms in degrees i-1,i,i+1.
-Its kernel and image comparisons, compatible with the cycle and quotient maps, give
-the displayed isomorphisms and naturality in chain maps. No boundedness is required.
-5. The tensor of a cycle section with y is a cycle; changing the cycle by a boundary
-changes this tensor by a boundary. The quotient compatibility therefore sends `[z] ⊗ y`
-to `[z ⊗ y]`. Both composites for a morphism N → N' send this to `[z ⊗ g(y)]`.
-Pure tensors and cycle classes locally generate the sheafified tensor and quotient,
-so these equalities give naturality in N and the required local formula. -/
+naturally in both variables, and sends `[z] ⊗ y` to `[z ⊗ y]` on local sections. -/
 theorem exists_constantFieldTensorCohomology
     {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)
     [EssentiallySmall.{m} C] [HasWeakSheafify J CommRingCat.{r}]

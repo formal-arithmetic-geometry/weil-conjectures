@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.FinitePresentationColimit
 
 /-! # Finitely presented models over a directed preorder
 
-Source: Stacks Project, Algebra, Tag 05N7, object clause.
+## References
+
+* Stacks Project, Algebra, Tag 05N7, object clause
 -/
 
 @[expose] public section
@@ -26,22 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 open scoped TensorProduct
 namespace ModuleCat
 
-/-- The object clause of finite-presentation descent for a nonempty directed preorder.
-Source: Stacks Project, Algebra, Tag 05N7, label lemma-colimit-category-fp-modules, (1).
-
-Proof: Form the antisymmetrization of the preorder. It is a nonempty directed partial
-order. Choosing a representative of each equivalence class gives a monotone functor
-back to the preorder; the quotient functor is its quasi-inverse since equivalent
-indices are isomorphic in the thin category. Precompose the ring diagram with this
-representative functor. Its colimit is canonically isomorphic to the original colimit.
-Transport X along this ring isomorphism; finite presentation is preserved by this
-transport. Apply the object clause of finitePresentation_descent_directedColimit to
-obtain a finitely presented model at a quotient index. Take its representative in I.
-Compose the resulting module isomorphism with scalar extension along the colimit
-ring isomorphism. The colimit cocone compatibility identifies this iterated scalar
-extension with extension along the original canonical map, giving the claimed model.
-No antisymmetry of I itself is used. The zero module and one-object diagrams are
-included, and isomorphic indices yield equivalent models. -/
+/-- The object clause of finite-presentation descent for a nonempty directed preorder. -/
 theorem exists_finitePresentation_model_of_preorder_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

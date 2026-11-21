@@ -57,7 +57,8 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 set_option linter.unusedSectionVars false in
 set_option linter.overlappingInstances false in
-/-- -/
+/-- The counit-normalized comparison between the derived tensor source and the derived pullback
+of the derived direct image, compatible with the scheme-level derived base-change map. -/
 theorem exists_affineTildeTensorSourceComparison
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]

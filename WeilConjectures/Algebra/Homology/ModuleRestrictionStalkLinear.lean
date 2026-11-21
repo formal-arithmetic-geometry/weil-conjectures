@@ -15,8 +15,9 @@ public import Mathlib.Geometry.RingedSpace.Stalks
 
 /-! # Scalar compatibility of restriction on module stalks
 
-Source: Stacks Project, Sheaves Section 6.31, Lemma 6.31.1 (3),
-Definition 6.31.2 (4) (Tags 009Z, 00A1).
+## References
+
+* Stacks Project, Sheaves, Section 6.31, Lemma 6.31.1 (3), Definition 6.31.2 (4) (Tags 009Z, 00A1)
 -/
 
 @[expose] public section
@@ -25,24 +26,7 @@ universe u
 noncomputable section
 namespace AlgebraicGeometry
 
-/-- Restriction alone induces a natural linear stalk comparison, with its germ formula.
-Source: Stacks Project, Sheaves Section 6.31, Lemma 6.31.1 (3),
-Definition 6.31.2 (4) (Tags 009Z, 00A1).
-
-Proof: Forget F to its abelian sheaf S. The slice-site equivalence identifies the
-underlying presheaf of its restriction with S restricted to W. Use the additive
-restriction-stalk isomorphism, obtained from the final functor of neighborhoods
-in W to neighborhoods in X. Its germ formula is the displayed formula.
-Represent a scalar and a module element by germs on neighborhoods in W.
-Restrict both representatives to their intersection. The germ scalar multiplication
-formula identifies their product with the germ of the sectionwise product. The
-restriction-stalk comparison sends each such germ to the germ on its open image in X.
-Apply the same scalar multiplication formula there. The forward ring comparison
-cancels the inverse ring comparison used to transport scalars. This proves the
-identity for every scalar and every module element. Thus the additive comparison
-is linear after scalar transport. Naturality is checked on germs: both composites
-send the germ of a section to the germ of its image under the module morphism.
-These component maps therefore assemble to the required natural transformation. -/
+/-- Restriction alone induces a natural linear stalk comparison, with its germ formula. -/
 theorem exists_moduleRestrictionStalk_morphism (X : RingedSpace.{u}) (W : Opens X)
     (x : X) (hx : x ∈ W) :
     ∃ c : SheafOfModules.overFunctor.{u} (moduleRings X) W ⋙

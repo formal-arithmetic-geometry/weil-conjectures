@@ -103,7 +103,10 @@ import WeilConjectures.Algebra.Homology.Ringed.RingedTopoiDerivedPullbackIndepen
 
 This interface keeps the semilinear construction's instances private. In particular,
 `import all` of an immediate consumer does not expose those implementation instances.
-Source: Stacks Tag 06YY and the homotopy-to-cochain universal counit transport.
+
+## References
+
+* Stacks Project, Tag 06YY
 -/
 
 @[expose] public section
@@ -128,16 +131,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   {R : Sheaf JC CommRingCat.{r}} {S RI : Sheaf JD CommRingCat.{r}}
 
 /-- The cochain counit for derived ringed pullback is universal and invertible on
-flat-term K-flat representatives, with site and coefficient universes independent.
-
-Source: Stacks Tag 06YY, via the independent-universe ringed derived pullback theorem,
-and the universal cochain counit transport.
-
-Proof: apply the ringed derived pullback theorem to the specified algebraic inverse
-image and scalar-extension presentation. Its universal homotopy counit is invertible
-on the flat-term K-flat resolving class. Transport universality along the homotopy
-quotient and its comparison with cochain localization. The componentwise transport
-criterion preserves invertibility on precisely the same representatives. -/
+flat-term K-flat representatives, with site and coefficient universes independent. -/
 theorem ringedPullbackCochainPresentation
     (uInv : Sheaf JC (Type r) ⥤ Sheaf JD (Type r))
     (uPush : Sheaf JD (Type r) ⥤ Sheaf JC (Type r))

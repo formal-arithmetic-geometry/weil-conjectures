@@ -9,7 +9,11 @@ module
 public import WeilConjectures.Algebra.Homology.SecondLocalizationMap
 import WeilConjectures.Algebra.Homology.SecondLocalizationOrdinaryBSquare
 /-! # Ordinary comparison for second localization
-Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
+
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -102,27 +106,7 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
 include tRB in
-/-- The ordinary counit comparison commutes with flat change of the second coefficient.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ8.
-
-Proof: exact extension of scalars from B to Bp preserves homology. The defining
-leftDerivedLift factorization of secondLocalizationDerivedMap makes its composite
-with K.counit equal L.counit extended to Bp and followed by the ordinary scalar
-extension associator. Evaluate at the restriction of Q to R and apply degree-i
-homology. Naturality of flatDerivedHomologyIso, and of the homotopy and derived
-homology factorization isomorphisms, identifies this with the ordinary coefficient
-map b tensor x to image(b) tensor x. Transpose the B-to-Bp scalar extension
-adjunction: its unit evaluates at 1 tensor x, giving exactly
-secondLocalizationCohomologyMap. Substitute comparison_eq for both models and
-cancel cohomologyIso. The ordinaryIso_tmul equations identify the coefficient
-chain map with φ: precompose with L.ordinaryIso and use tensor induction in each
-degree. Exact restriction and forgetting scalars commute with homology, by
-naturality of mapHomologyIso and its composition identity (compare their maps on
-cycles and the surjective homology projection). This gives the displayed
-additive square. This argument precedes extension to D: it uses neither
-ordinaryToLocalized nor localizedComparison, and makes no invertibility claim
-about either comparison. Identity coefficient maps and zero complexes give the
-same counit identity; no flatness of D is required. -/
+/-- The ordinary counit comparison commutes with flat change of the second coefficient. -/
 theorem secondLocalization_ordinary_square (hflat : (algebraMap B Bp).Flat) (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)

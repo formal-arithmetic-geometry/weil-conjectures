@@ -15,7 +15,13 @@ import WeilConjectures.Algebra.Homology.AffineDirectLocalizedTensorSquare
 
 /-! # AffineScalarLocalizedTensorSquare
 
-Source: Stacks Project, Tag 0DJ8. -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 01HV
+* Stacks Project, Tag 01I9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -31,21 +37,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- Algebraic comparison after extension to the fourth stalk ring, before exact
-stalk homology coordinates. Source: Stacks Project, Tag 0DJ8, affine displayed
-localization identity; Tags 06Y6, 01HV and 01I9.
-
-Proof: first change only the final coefficient ring from A' to its flat stalk D.
-exists_flatFinalCoefficientModelComparison constructs the source isomorphism
-from universal derived-model uniqueness, tensor associativity, and the flat
-iterated scalar-extension homology square. Next apply
-exists_affineDirectLocalizedTensorSquare to the resulting model over D, which
-localizes the input, base and second factor. The inverse scalar-associativity
-chain isomorphism flattens 1 tensor (1 tensor x) to 1 tensor x. Factor each
-supplied tau through it, use the generator formula to apply the direct square,
-and compose the two equations by functoriality of homology. All source
-isomorphisms are composed explicitly. This reduction does not require hM;
-the original hypothesis and statement are retained unchanged. Zero complexes
-and identity localizations use the same maps; the zero fourth ring has no primes. -/
+stalk homology coordinates. -/
 theorem exists_affineScalarLocalizedTensorSquare
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

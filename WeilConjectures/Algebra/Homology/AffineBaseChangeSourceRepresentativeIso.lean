@@ -13,7 +13,11 @@ import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 
 /-! # Independence of the source-only stalk comparison from its representative
 
-Source: Stacks Project, Tags 06Y6, 08IB and 0DJ8, equation-bc.
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 08IB
+* Stacks Project, Tag 0DJ8
 -/
 
 @[expose] public section
@@ -63,23 +67,7 @@ private theorem exists_stalkCohomologyComparison (Y : Scheme.{u}) (p : Y) (i : �
   rfl
 
 -- The original 200000 budget times out at the final equivalence construction in 13s.
-/-- The source-only comparison is unchanged under K-flat representative change.
-Source: Stacks Project, Tags 06Y6, 08IB and perfect.tex, equation-bc before Tag 0DJ8.
-
-Proof: the exact stalk functor sends eQ followed by eP inverse to an isomorphism
-between the derived stalk complexes. The universal derived extension functors
-of the baseDerivedTensorCohomologyModel are uniquely isomorphic through their
-counits. Apply their cohomology functors to this isomorphism. The cohomologyIso_smul
-equations show that it respects both commuting scalar actions, hence the tensor
-algebra action. Extend to the fourth stalk ring and forget scalars to obtain t.
-Naturality of the universal counit makes the comparison_eq squares commute;
-transposition through the extension/restriction adjunction and localized_eq gives
-the same equation for localizedComparison. Naturality of tensorStalkIso and of
-the exact representative/stalk comparison identifies the target with the stalk
-of H(Lg'^*K). Finally cancel the invertible pullback counits and use their
-naturality with eQ and eP. The resulting equation is the one displayed here.
-No termwise quasi-coherence is assumed, and this argument applies on arbitrary
-schemes, to zero complexes and in every integer degree. -/
+/-- The source-only comparison is unchanged under K-flat representative change. -/
 theorem exists_affineBaseChangeIntoPullback_representativeIso
     {X S X' S' : Scheme.{u}}
     (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (g' : X' ⟶ X)

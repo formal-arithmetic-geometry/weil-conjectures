@@ -15,8 +15,9 @@ public import Mathlib.Topology.Sheaves.Module
 
 /-! # Stalks and maps for extension by zero of modules
 
-Source: literature/stacks-project/sheaves.tex, Tag 00A7, clauses (2)--(4),
-and the presheaf construction preceding it.
+## References
+
+* Stacks Project, Sheaves, Tag 00A7, clauses (2)--(4), and Tag 00A5
 -/
 
 @[expose] public section
@@ -29,38 +30,9 @@ noncomputable section
 
 namespace AlgebraicGeometry
 
-/-- The extension-by-zero stalk formula and the canonical maps for nested opens.
-Extension by zero is the landed `SheafOfModules.extensionByZeroPresheaf ⋙ sheafification`
-and its adjunction with restriction is the one of `open_restriction_adjunction_exact`
-(chosen by `Classical.choice`, as in `open_extension_mayer_vietoris_shortExact`).
-Inside an open, `G_x ≅ (j_{W,!} G)_x` is a natural isomorphism of `O_{X,x}`-modules
-(the stalk of `G` on the open subspace, its scalars restricted along Mathlib's
-`restrictStalkIso`), tied canonically by sending the germ of `s` to the germ of its
-image under the adjunction unit. For restrictions of a global module, `e` is the
-inverse of the counit's stalk map, so the last equation states that the transition
-maps are identities under the common `F_x` identification. At the top open, the counit
-identifies extension by zero with the identity; the top-open compatibility equation
-expresses `iota W X` as the counit in this encoding.
-
-Source: Stacks Project, Sheaves Tag 00A7, clauses (2)--(4), and Tag 00A5.
-
-Proof: (1) Form the presheaf equal to `G` on opens contained in `W` and zero otherwise.
-Its module sheafification has the adjunction universal property
-(`def-weil-presheaf-modules-sheafification`), identifying it with the left adjoint
-in `lem-sc-derived-open-restriction-adjunction-exact`. The underlying abelian
-presheaf is extension by zero, so `lem-sc-topological-extension-by-zero-stalks`
-gives zero stalks outside and the unit-induced stalk isomorphisms inside. They are
-linear on germs by `def-weil-pbc-module-stalk`, and natural by naturality of the unit.
-(2) Transpose the restriction of the unit on `W'` to define `iota W W'`.
-The unit at the same open transposes to the identity. Restricting the transpose
-identities twice and using uniqueness gives the composition law. At the top open
-extension by zero is identified with the identity and the transpose is the counit.
-(3) The counit's presheaf map is the identity on opens inside `W`, so its stalk
-map there is the inverse of the stalk isomorphism from (1), by the adjunction-map
-clause of `lem-sc-topological-extension-by-zero-stalks`. Apply stalk functoriality
-(`def-weil-pbc-module-stalk`) to `iota W W'` followed by the counit on `W'`.
-Both counit stalk maps are identities under these identifications; thus so is the
-transition stalk map. -/
+/-- The extension-by-zero stalk formula and the canonical maps for nested opens: stalks outside
+the open vanish, stalks inside the open are identified with those of the original sheaf, and the
+transition maps are compatible with the counits. -/
 theorem module_extensionByZero_stalk_maps (X : RingedSpace.{u}) :
     (∀ (W : Opens X) (G : SheafOfModules.{u} ((moduleRings X).over W)) (x : X),
       x ∉ W → IsZero ((RingedSpace.moduleStalkFunctor X x).obj

@@ -36,7 +36,11 @@ set_option linter.privateModule false
 
 /-! # The identity comparison on ordinary total tensor complexes
 
-Source: Stacks Project, Tags 03EL, 07A4 and 0FPI.
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 0FPI
 -/
 
 @[expose] public section

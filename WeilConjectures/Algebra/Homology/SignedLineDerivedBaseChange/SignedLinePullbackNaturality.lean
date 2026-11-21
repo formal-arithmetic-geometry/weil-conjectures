@@ -11,7 +11,14 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionDualLocalIso
 import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSupplement
 import WeilConjectures.Algebra.Homology.SmoothPurity.PullbackPairingTransfer
 
-/-! # Naturality of signed pullback comparisons -/
+/-! # Naturality of signed pullback comparisons
+
+## References
+
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 0FNY
+* Stacks Project, Tag 0GMX
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -142,22 +149,7 @@ private theorem positive_naturality
     rw [pullbackSection_natural] at hi h1
     exact congrArg₂ (siteSheafTensorTmul _ _ (op (U.obj V.unop))) hi h1
 
-/-- Naturality of any normalized signed line pullback family.
-Source: Stacks Project, Tags 03EL, 0GMX and 0FNY; Powers and duals,
-steps 5--7 of the signed-line base-change argument.
-Proof: the unit comparison is natural and degree one is the given compatible
-square. For positive degrees, induct on the tensor recursion; unit naturality
-and the bilinear pullback comparison identify both maps on pulled pure tensors,
-and adjunction plus tensor generation give equality. For a negative degree,
-postcompose by the dual of the positive comparison. Both composites transfer
-the same evaluation pairing, so evaluation uniqueness identifies them; cancel
-the dual isomorphism. For scalar extension, trivialize the source lines and use
-the induced bases after scalar extension, which is locally free even for a
-nonflat ring map. Apply the normalized signed scalar/pullback square theorem
-and uniqueness to identify its two families with T and T-prime. Balancing
-multiplies the scalar factors, hence proves the positive squares; the evaluation
-formula proves the negative ones. All identities are local and therefore also
-hold over the zero ring or an empty cover. -/
+/-- Naturality of any normalized signed line pullback family. -/
 theorem signed_line_pullback_scalar_naturality
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)
@@ -216,9 +208,7 @@ theorem signed_line_pullback_scalar_naturality
     _ _ t' PQ.2 T' hPQ.2.1 hT'
   simpa only [hfirst, hsecond] using hPQ.2.2
 
-/-- One normalized family commutes with both line isomorphisms and coefficient extension.
-Source: Stacks 03EL and 0FNY.
-Proof: combine the isomorphism square with the scalar-extension square proved above. -/
+/-- One normalized family commutes with both line isomorphisms and coefficient extension. -/
 theorem signed_line_pullback_naturality
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)

@@ -31,7 +31,9 @@ import Mathlib.Algebra.Category.Ring.Limits
 
 /-! # Regular constant scalars on flat module sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 03ER(3), 08FC and 03DA
+## References
+
+* Stacks Project, Modules on Sites, Tags 03ER(3), 08FC and 03DA
 -/
 
 -- After pruning, this module only keeps private declarations.

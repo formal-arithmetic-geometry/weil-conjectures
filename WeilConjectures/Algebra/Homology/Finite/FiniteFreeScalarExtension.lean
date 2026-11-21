@@ -24,8 +24,10 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Balanced
 
 /-! # Basis coordinates for finite free extension of sheaves
 
-Source: Stacks Project, Modules on Sites, Tags 03CY and 03EK;
-Bhatt--Scholze, Lemma 3.4.12.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03CY and 03EK
+* Bhatt--Scholze, Lemma 3.4.12
 -/
 
 -- After pruning, this module only keeps private declarations.

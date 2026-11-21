@@ -23,7 +23,18 @@ import Mathlib.Tactic.Choose
 /-!
 # Lifting bounded-above acyclic complexes modulo an ideal
 
-Source: Stacks Project, More on Algebra, Tag 0BC9, lemma-lift-acyclic-complex
+A bounded-above acyclic complex over `R ⧸ I` whose terms lift to a class `P` of modules lifts to
+a bounded-above acyclic complex over `R` with terms in `P`.
+
+## Implementation details
+
+Reduction modulo `I` is extension of scalars to `R ⧸ I`, canonically `P / IP`. The direct-sum
+condition on the class of modules is stated for any module isomorphic to the binary direct sum,
+as membership in a class of modules is understood up to isomorphism.
+
+## References
+
+* Stacks Project, More on Algebra, Tag 0BC9
 -/
 
 @[expose] public section
@@ -34,22 +45,8 @@ open CategoryTheory
 
 namespace CochainComplex
 
-/-- Stacks Project, Tag 0BC9.
-Reduction modulo `I` is extension of scalars to `R ⧸ I`, canonically `P / IP`.
-The direct-sum condition is stated for any module isomorphic to the binary direct sum,
-as membership in a class of modules is understood up to isomorphism.
-
-Proof: The summand condition gives zero membership and closure under isomorphism.
-Start with the zero tail above an upper bound b. Repeatedly apply the one-degree
-extension theorem to obtain a sequence of finite lift tails and compatible comparison
-maps. In each fixed degree the transition maps eventually become isomorphisms.
-Take the degreewise colimit. Eventual constancy identifies its terms with the terms
-of finite tails, proving class membership and vanishing above b. Choose a stage
-containing a degree and both its neighbors: its short complex is isomorphic to the
-colimit's short complex, which transfers exactness. Extension of scalars preserves
-the colimit, so the compatible reduction comparisons descend to a comparison with E.
-Every component of that comparison is an isomorphism, giving the required complex
-isomorphism. The finite extension is the only remaining proof dependency. -/
+/-- A bounded-above acyclic complex `E` over `R ⧸ I` whose terms are reductions of modules in `P`
+is the reduction of a bounded-above acyclic complex over `R` with all terms in `P`. -/
 theorem exists_acyclic_lift_mod_ideal
     (R : Type u) [CommRing R] (I : Ideal R)
     (P : ModuleCat.{max u v} R → Prop)

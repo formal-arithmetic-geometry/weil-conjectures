@@ -13,7 +13,14 @@ import WeilConjectures.Algebra.Homology.AffineStalkScalarExtensionCoordinates
 import WeilConjectures.Algebra.Homology.BaseDerivedTensorModelQuasiIsoComparison
 import WeilConjectures.Algebra.Homology.AffineStalkBaseSecondLocalizationComparison
 
-/-! Core derived localization and stalk comparison glue. -/
+/-! # Core derived localization and stalk comparison glue
+
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 01I9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -162,9 +169,7 @@ variable [∀ Y : Scheme.{u},
 /--
 For an explicitly supplied affine tilde complex `P`, the common localization model
 produces the comparison isomorphism and its universal characterization. This is the
-substantial derived localization and stalk glue step in the proof of the parent theorem.
-Source: Stacks Project, Tag 0DJ8, together with Tags 06Y6 and 01I9.
--/
+substantial derived localization and stalk glue step in the proof of the parent theorem. -/
 theorem affineDirectLocalizedTensorSquare_core
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

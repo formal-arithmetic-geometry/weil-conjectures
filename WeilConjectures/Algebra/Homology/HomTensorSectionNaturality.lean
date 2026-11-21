@@ -13,7 +13,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 /-!
 # Naturality of the canonical map to the sheaf tensor product
 
-Source: Stacks Project, Modules on Sites, Section 03EK.
+## References
+
+* [Stacks Project, Tag 03CY](https://stacks.math.columbia.edu/tag/03CY)
+* [Stacks Project, Tag 03EK](https://stacks.math.columbia.edu/tag/03EK)
 -/
 
 @[expose] public section
@@ -33,24 +36,7 @@ local notation "Mod" => SheafOfModules.{max u v}
   ((sheafCompose J (forget₂ CommRingCat.{max u v} RingCat.{max u v})).obj R)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- The canonical map from the presheaf tensor to the sheaf tensor is natural.
-Source: Stacks Project, Modules on Sites, Section 03EK (tensor product of sheaves),
-and the sheafification universal property of Lemma 03CY.
-
-Proof: Write S for module sheafification, eta for its unit and epsilon for its
-counit. The tensor comparison c(A,B) is the tensor of the inverses of the
-counit components followed by the tensorator of S. Naturality of epsilon
-and of the tensorator gives
-(f tensor g);c(A,B) = c(A',B');S(f.val tensor g.val).
-Multiply this equality by the inverses of both comparison isomorphisms to
-obtain c(A',B') inverse;(f tensor g) =
-S(f.val tensor g.val);c(A,B) inverse. Apply the forgetful functor to this
-identity. Precompose with eta at A'.val tensor B'.val, and use naturality
-of eta to move the presheaf tensor map to the left. Reassociating gives
-the displayed identity, since homTensorSectionMap is eta followed by the
-underlying inverse comparison. This argument applies to arbitrary morphisms,
-including zero morphisms and zero tensor factors; it uses no sectionwise
-surjectivity of sheafification or tensor decomposition of sheaf sections. -/
+/-- The canonical map from the presheaf tensor to the sheaf tensor is natural. -/
 theorem homTensorSectionMap_natural {A A' B B' : Mod}
     (f : A' ⟶ A) (g : B' ⟶ B) :
     letI := SheafOfModules.monoidalCategory R

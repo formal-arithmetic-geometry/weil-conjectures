@@ -36,12 +36,11 @@ over `X`, which we reduce to the localization theorem of
 - `AlgebraicGeometry.Scheme.IdealSheafData.isPullback_blowupι` — over an affine open `U`,
   the blow-up of `X` restricts to the affine blow-up of `U`
 
-## Implementation notes
+## Implementation details
 
-The blueprint's original roadmap glues over a chosen affine open cover with pairwise basic
-overlap comparisons and explicit cocycle checks. We instead glue over the thin category of
-all affine opens via `Scheme.Cover.RelativeGluingData`, which eliminates the cocycle
-conditions; the overlap content is carried by the functoriality (`AffineBlowup.hom_comp`) and the
+We glue over the thin category of all affine opens via `Scheme.Cover.RelativeGluingData`
+rather than over a chosen affine open cover, which eliminates the cocycle conditions; the
+overlap content is carried by the functoriality (`AffineBlowup.hom_comp`) and the
 equifiberedness of the structure maps.
 -/
 

@@ -19,7 +19,9 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 /-!
 # Injectivity of one minus shift on a sequential coproduct
 
-Source: Stacks Project, Derived Categories, Lemma 093W, used in Lemma 0949.
+## References
+
+* Stacks Project, Tags 093W, 0949
 -/
 
 @[expose] public section
@@ -30,15 +32,13 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-/-- The sum of the transition maps into a fixed term, extended by zero on later terms.
-Source: Stacks Project, Tag 093W, the transition-map sum in its proof -/
+/-- The sum of the transition maps into a fixed term, extended by zero on later terms. -/
 private noncomputable def telescopeProjection
     {A : Type*} [Category A] [Preadditive A] [HasCoproducts.{0} A]
     (E : ℕ ⥤ A) (j : ℕ) : (∐ fun n : ℕ ↦ E.obj n) ⟶ E.obj j :=
   Sigma.desc fun k ↦ if h : k ≤ j then E.map (homOfLE h) else 0
 
-/-- The transition-map sum cancels consecutive transitions, leaving a single diagonal entry.
-Source: Stacks Project, Tag 093W, the finite short exact sequence in its proof -/
+/-- The transition-map sum cancels consecutive transitions, leaving a single diagonal entry. -/
 private lemma telescopeProjection_formula
     {A : Type*} [Category A] [Preadditive A] [HasCoproducts.{0} A]
     (E : ℕ ⥤ A) (j k : ℕ) :
@@ -60,8 +60,7 @@ private lemma telescopeProjection_formula
       simp [hkj, hsj, h]
 
 /-- Restrict one minus shift to each finite subcoproduct, give an explicit retraction,
-then take the exact filtered colimit of these monomorphisms into the constant target.
-Source: Stacks Project, Tag 093W, proof by finite sums and exact colimits -/
+then take the exact filtered colimit of these monomorphisms into the constant target. -/
 private lemma sequentialCoproduct_mono
     {A : Type*} [Category A] [Preadditive A] [HasCoproducts.{0} A]
     [HasColimitsOfShape (Finset (Discrete ℕ)) A]
@@ -108,25 +107,7 @@ private lemma sequentialCoproduct_mono
     (isColimitConstCocone (Finset (Discrete ℕ)) _) u (by intro j; simp [φ, c])
 
 /-- One minus shift is monic on the coproduct of a sequential system of complexes
-of sheaves of modules. Source: Stacks Project, Derived Categories, Lemma 093W,
-proof, used in Lemma 0949.
-
-Proof: For each j, define q_j from the coproduct to E_j by the transition
-E_k → E_j when k ≤ j, and zero when k > j. Composing the k-th component of
-one minus shift with q_j gives the identity when k = j and zero otherwise:
-when k < j, the two terms cancel by functoriality of E.
-For a finite set S of indices, the sum of q_j followed by the j-th injection
-into the finite subcoproduct, over j in S, retracts the restriction of one
-minus shift to that subcoproduct. Thus each finite restriction is split monic,
-including S empty. These restrictions form a natural transformation from the
-finite-subcoproduct diagram into the constant countable coproduct.
-The category of sheaves of modules is Grothendieck abelian by the proved source
-library theorem SheafOfModules.isGrothendieckAbelian. Exact filtered colimits
-pass to complexes by Mathlib's degreewise evaluation instance. Mathlib also
-identifies the colimit of the finite subcoproducts with the countable coproduct.
-Applying colim.map_mono' with this colimit cocone and the constant colimit
-cocone proves that one minus shift is monic. No transition map is assumed
-monic; zero diagrams and zero transitions satisfy the same cancellation. -/
+of sheaves of modules. -/
 theorem telescopeShift_mono
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     (R : Sheaf J CommRingCat.{u})

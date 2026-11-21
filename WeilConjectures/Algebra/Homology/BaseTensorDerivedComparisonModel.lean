@@ -10,7 +10,9 @@ public import WeilConjectures.Algebra.Homology.BaseTensorDerivedComparison
 
 /-! # Evaluation of the derived coefficient comparison on a cohomology model
 
-Source: Stacks Project, Tags 06Y6 and 0DJ7.
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ7.
 -/
 
 @[expose] public section
@@ -33,23 +35,7 @@ variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
 
 /-- Identify the adjoint transpose of one model's comparison with the derived
 coefficient transformation. This is a computation at one complex, with no
-morphism between complexes or derived objects.
-
-Proof: form beta as ordinaryIso followed by restriction of ordinaryToLocalized.
-Their generator equations give the coefficient-map formula in
-IsBaseTensorDerivedComparison. Apply its representative equation. Substitute
-comparison_eq and localized_eq. The two successive
-restriction-of-scalars homology isomorphisms are written separately in the
-representative equation. Naturality of the B-restriction homology isomorphism
-identifies the homology of beta with restriction of the composite comparison
-and ordinaryToLocalized. The counit compatibility
-of zeta identifies the derived counit on the right with the model counit.
-Naturality of zeta with the input localization isomorphism moves its component
-to the derived restricted input. This gives the equation after composing both
-sides with restriction of s.hom. Cancel that invertible map to get the formula
-with s.inv. Tensor induction proves each chain-map identification, so there is
-no choice of associativity or coefficient maps and no flatness assumption.
-Source: Stacks Project, Tag 06Y6 and equation-bc (Tag 0DJ7). -/
+morphism between complexes or derived objects. -/
 theorem baseTensorDerivedComparison_model
     (F : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B))
     (δ : DerivedCategory.Qh ⋙ F ⟶

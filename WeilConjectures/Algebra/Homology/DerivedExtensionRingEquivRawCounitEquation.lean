@@ -10,7 +10,9 @@ import all WeilConjectures.Algebra.Homology.DerivedExtensionRingEquivRawTranspor
 
 /-! # Counit-compatible transport of derived scalar extension
 
-Source: Stacks Project, Tag 06Y6, and the right Kan extension universal property.
+## References
+
+* Stacks Project, Tag 06Y6
 -/
 
 @[expose] public section
@@ -61,15 +63,7 @@ private theorem complex_universal
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
--- The former arbitrary-isomorphism equation was STATEMENT-DISPUTED: replacing an
--- isomorphism by its negative changes the left side alone. The corrected result
--- constructs the comparison together with its counit equation.
-/-- Existence of a counit-compatible transported derived-functor isomorphism.
-Source: Stacks Project, Tag 06Y6.
-Proof: for additive functors between abelian categories, transport the two universal
-counits through additive equivalences and
-compare their right Kan extensions. The canonical comparison commutes with the
-counits by the defining factorization equation of a right Kan extension lift. -/
+/-- Existence of a counit-compatible transported derived-functor isomorphism. -/
 theorem raw_transport_counit_equation
     {C₀ D₀ C D : Type u}
     [Category.{v} C₀] [Category.{v} D₀] [Category.{v} C] [Category.{v} D]

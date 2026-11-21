@@ -14,8 +14,9 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 /-! # Replacing a tower complex by a complex with split terms
 
-Source: Stacks Project, Derived Categories, Tag 070M, and the split-envelope
-extension recorded in lem-weil-derived-limit-roos-complex.
+## References
+
+* Stacks Project, Derived Categories, Tag 070M
 -/
 
 @[expose] public section
@@ -58,18 +59,7 @@ private theorem tower_split_biprod
   exact congrArg (fun a : T ⊞ S ⟶ T ⊞ S ↦ a.app (Opposite.op n)) (biprod.total (X := T) (Y := S))
 
 /-- Every tower complex has a quasi-isomorphic replacement with split transitions.
-No K-injectivity assumption or choice of product and limit complexes is involved.
-
-Proof: Apply the additive split-envelope functor E and its natural monomorphism j
-termwise. Let q be the cokernel chain map of j. The sequence 0 → I → E(I) → coker(j)
-→ 0 is degreewise short exact, and both E(I) and coker(j) have split transitions.
-The degreewise-epi kernel/cone comparison applied to q, followed by the canonical
-isomorphism I ≅ ker(q), gives u : I → Cone(q)[-1], a quasi-isomorphism. Each term
-of this shifted cone is a binary biproduct of two split towers. Biproducts of
-sections are sections, so all transitions of this replacement split.
-
-Source: Stacks Project, Derived Categories, Tag 070M; the explicit extension
-in lem-weil-derived-limit-roos-complex. -/
+No K-injectivity assumption or choice of product and limit complexes is involved. -/
 theorem tower_split_complex_replacement
     (A : Type u) [Category.{v} A] [Abelian A]
     (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) :

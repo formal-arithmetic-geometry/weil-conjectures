@@ -16,7 +16,9 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 /-!
 # K-flat base change over commutative rings
 
-Source: Stacks Project, More on Algebra, Tag 06Y1.
+## References
+
+* Stacks Project, More on Algebra, Tag 06Y1
 -/
 
 @[expose] public section
@@ -27,10 +29,7 @@ open CategoryTheory MonoidalCategory
 
 namespace CochainComplex
 
-/-- Restriction of scalars reflects acyclicity of cochain complexes.
-Source: Stacks Project, More on Algebra, Tag 06Y1, proof.
-The underlying additive groups, kernels, and images are unchanged by restriction of scalars.
--/
+/-- Restriction of scalars reflects acyclicity of cochain complexes. -/
 private theorem acyclic_of_restrictScalars
     {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)
     (L : CochainComplex (ModuleCat.{u} B) ℤ)
@@ -48,20 +47,7 @@ private theorem acyclic_restrictScalars
   intro i
   exact (hL i).map (ModuleCat.restrictScalars ρ)
 
-/-- Extension of scalars preserves K-flatness without requiring the ring map to be flat.
-Source: Stacks Project, More on Algebra, Tag 06Y1.
-
-Proof: let `L` be an acyclic complex of `B`-modules. Restriction of scalars along `ρ`
-is exact: kernels and images have the same underlying additive groups. Thus the
-restricted `L` is acyclic over `A`. On pure tensors the maps
-`l ⊗ (b ⊗ k) ↦ (b • l) ⊗ k` and `l ⊗ k ↦ l ⊗ (1 ⊗ k)` give inverse
-isomorphisms between tensoring `L` over `B` with the extended `K` and tensoring
-restricted `L` over `A` with `K`. They commute with each differential. Applying them
-to every summand of total degree `n` gives inverse chain maps, including the sign
-on the second differential. K-flatness of `K` makes the latter total complex
-acyclic. The isomorphism and exactness of restriction of scalars give acyclicity
-of the former total complex. This also covers zero rings and unbounded complexes:
-there is no flatness hypothesis and each total degree uses a direct sum. -/
+/-- Extension of scalars preserves K-flatness without requiring the ring map to be flat. -/
 theorem acyclic_mapBifunctor_extendScalars_of_kFlat
     {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)
     (K : CochainComplex (ModuleCat.{u} A) ℤ)

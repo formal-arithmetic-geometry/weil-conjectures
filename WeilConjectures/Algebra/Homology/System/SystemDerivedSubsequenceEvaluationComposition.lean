@@ -10,7 +10,10 @@ public import WeilConjectures.Algebra.Homology.System.SystemDerivedSubsequence
 
 /-! # The actual derived transitions of strict systems
 
-Source: Zheng, Construction 4.1; Stacks 015F.
+## References
+
+* Stacks Project, Tag 015F
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -26,11 +29,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
 
 /-- The exact subsequence compositor commutes with the selected evaluation
-comparisons. Source: Stacks 015F
-Proof: localize and cancel the final evaluation factorization. On complexes the
-restriction compositor factorization and the two evaluation factorization equations
-reduce both sides to the same three successive factorization maps. Naturality of the
-second evaluation comparison moves the first restriction factorization past it. -/
+comparisons. -/
 theorem systemDerivedSubsequenceEvaluation_composition (r s : ℕ ↪o ℕ) (c : ℕ)
     (M : DerivedCategory (StrictRingSystem B)) :
     (derivedSystemEvaluation (selectedSystemRings B (s.trans r)) c).map

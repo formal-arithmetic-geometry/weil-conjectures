@@ -19,7 +19,10 @@ import WeilConjectures.Algebra.Homology.AffinePerfectChainMapEqualityDetection
 
 /-! # Descent of homotopies between affine perfect chain maps
 
-Source: Stacks Project, Tag 09RE, affine case (1).
+## References
+
+* Stacks Project, Tag 09RE
+* Stacks Project, Tag 05N7
 -/
 
 @[expose] public section
@@ -95,28 +98,7 @@ private theorem scalarExtensionHom_nullHomotopicMap'
     HomologicalComplex.comp_f, Category.assoc]
 
 /-- A homotopy between two stage chain maps after extension to the colimit
-exists already after extension to a sufficiently late stage.
-
-Source: Stacks Project, Tag 09RE, affine case (1); Tag 05N7 for finite-presentation descent.
-Proof: Choose the homotopy over the colimit. Its degree-minus-one components have
-source `E₀` after base change, and only finitely many source degrees are nonzero.
-Descend these components by finite presentation and take one common stage above `i`.
-At that stage form the degree-zero maps given by the differential of this graded
-family. Their equality to `f - g` holds over the colimit by the original homotopy
-identity. Detect each of these finitely many equalities at a later stage, and take
-one common upper bound. Set the remaining graded components to zero. The shape
-condition and homotopy identities then hold in every degree, giving the asserted
-homotopy. Canonical scalar-extension associativity identifies all extended maps
-with `scalarExtensionHom`; proof irrelevance identifies the composition witnesses.
-For a preorder, pass to its posetal reflection: identify mutually comparable
-indices and choose representatives. Between mutually comparable indices `F` gives
-inverse ring isomorphisms, since their composites are identities in the thin index
-category. Thus the representative diagram is equivalent to the original diagram,
-and their colimits and scalar extensions are canonically identified. Apply the
-partial-order finite-presentation descent theorem to this representative diagram,
-then transport back and choose an upper bound with the requested original index.
-Alternatively its presentation-matrix proof works verbatim with directedness alone,
-using the filtered-ring elementwise criterion, which requires no antisymmetry. -/
+exists already after extension to a sufficiently late stage. -/
 theorem affine_perfect_homotopy_descent
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I)

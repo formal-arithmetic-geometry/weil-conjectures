@@ -11,7 +11,9 @@ import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HomTensorPair
 
 /-! # Reverse currying for one pair of module sheaves
 
-Source: Stacks Project, Modules on Sites, Tag 03EO; Cohomology on Sites, Tag 0A90.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03EO; Cohomology on Sites, Tag 0A90
 -/
 
 @[expose] public section
@@ -32,19 +34,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 
 set_option synthInstance.maxSize 256 in
 set_option backward.isDefEq.respectTransparency false in
-/-- Curry a map from one tensor product, keeping the source parameter sheaf.
-Source: Stacks Project, Modules on Sites, Lemma internal-hom-adjoint-tensor (03EO).
-
-Proof: For a section s over U, precompose its localized tensor map with the
-presheaf-to-sheaf tensor map. For x over W/U, define the local map on B over W
-by sending y over V/W to the original map on V applied to x restricted to V
-tensor y. Its linearity follows from balanced bilinearity. Naturality follows
-from naturality of the original tensor map and the tensor sheafification unit.
-The construction is linear in x and s and commutes with restriction in U,
-so it gives a morphism into the two internal Homs. Evaluation at the identity
-object over W restricts x by the identity and hence gives the stated equation.
-Zero modules and zero input sections are covered by the same linear formulas;
-no global pure-tensor generation is used. -/
+/-- Curry a map from one tensor product, keeping the source parameter sheaf. -/
 theorem homTensorReversePair_construct (S A B D : Mod) :
     letI := monoidalCategory R
     ∀ f : S ⟶ homObj (R := R) (A ⊗ B) D,

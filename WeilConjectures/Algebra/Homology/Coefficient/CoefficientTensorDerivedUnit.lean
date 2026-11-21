@@ -11,7 +11,9 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-!
 # The derived unit tensor comparison
 
-Source: Stacks Tags 06XN and 03EK, uniqueness of the derived identity tensor.
+## References
+
+* Stacks Project, Tags 03EK, 06XN
 -/
 
 @[expose] public noncomputable section
@@ -30,12 +32,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- The ordinary unit tensor comparison induces the universal derived unit comparison,
-with its equation on every complex, without a flatness restriction.
-Source: Stacks Tags 06XN and 03EK
-Proof: map the ordinary unit comparison to complexes and then to the derived category.
-The identity functor is its own left derived functor. Uniqueness of universal left
-derived functors gives the isomorphism. The equation for its defining natural
-transformation is exactly the stated representative formula. -/
+with its equation on every complex, without a flatness restriction. -/
 theorem coefficientTensorDerivedUnit
     (scalar : CoefficientScalarDerivedAssignment (J := J) (O := O) (ell := ell))
     (n : ℕ) (unit : coefficientTensor (J := J) (O := O) (ell := ell) (Nat.le_refl n) ≅

@@ -13,9 +13,12 @@ import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationIsIso
 import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationComm
 import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 
-/-! # Hom complexes from the structure sheaf
+/-!
+# Hom complexes from the structure sheaf
 
-Source: Stacks Project, sites-cohomology.tex, Sections 0A8X and 08J7.
+## References
+
+* Stacks Project, Sections 0A8X and 08J7
 -/
 
 @[expose] public section
@@ -23,26 +26,7 @@ universe u
 open CategoryTheory Opposite
 namespace CategoryTheory
 
-/-- Hom from the unit concentrated in degree zero is naturally the identity on complexes.
-
-Source: Stacks Project, sites-cohomology.tex, Sections 0A8X and 08J7.
-
-Proof:
-1. In degree n, the product defining Hom has factors Hom(L^p, M^(p+n)). For
-   L = O[0], L^p is zero when p is nonzero, so these factors are zero. The
-   projection to p = 0 therefore identifies the product with Hom(O, M^n).
-2. Compose this projection with SheafOfModules.homObjUnitIso, evaluation at one.
-   Its inverse sends x to the family whose zero component is r -> r*x and
-   whose other components are zero. The product universal property and the
-   two inverse identities for evaluation prove both inverse identities.
-3. The differential formula in homComplex_exists has a zero precomposition
-   term because L has zero differential. Its remaining term is postcomposition
-   by the differential of M, which commutes with evaluation at one. Thus the
-   degreewise isomorphisms form a chain isomorphism.
-4. The map formula in homComplex_exists identifies the action of a chain map
-   with postcomposition in every degree. Evaluation commutes with this action,
-   giving the asserted natural isomorphism. This applies in every integer
-   degree, without any boundedness or injectivity hypothesis. -/
+/-- Hom from the unit concentrated in degree zero is naturally the identity on complexes. -/
 theorem homComplex_unit_iso
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) :

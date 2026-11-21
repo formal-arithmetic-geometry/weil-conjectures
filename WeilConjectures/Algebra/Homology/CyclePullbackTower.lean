@@ -14,8 +14,11 @@ public import Mathlib.CategoryTheory.Whiskering
 /-!
 # The actual descending cycle-pullback tower
 
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1). We perform its recursion in
-an abelian functor category. No object is selected from an unproved existence theorem.
+The recursion of the cycle-pullback construction is performed in an abelian functor category.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 05T7 (1)
 -/
 
 @[expose] public section

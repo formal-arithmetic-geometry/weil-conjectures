@@ -16,7 +16,9 @@ import WeilConjectures.Algebra.Homology.TotalFreeFiltrationQuotients
 /-!
 # A free filtration on a direct-sum total complex
 
-Source: Stacks Project, Tag 09KP, construction of the filtration of the total complex.
+## References
+
+* Stacks Project, Tag 09KP, construction of the filtration of the total complex.
 -/
 
 @[expose] public section
@@ -28,38 +30,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- The total complex of nonpositive columns with split free two-step filtrations
-has an exhaustive, degreewise split filtration with free zero-differential quotients.
-Source: Stacks Project, Differential Graded Algebra, Tag 09KP, proof, filtration
-construction, specialized to a ring in degree zero.
-
-Proof. Choose the split short exact sequence for column `-i` and transport its
-left term to a subcomplex `Uᵢ` of that column using the middle-object isomorphism.
-Both `Uᵢ` and the quotient have zero differential: each is isomorphic to a coproduct
-of single-degree copies of `A`. In total degree `k`, set `F₀ = 0`, let `F₂ᵢ₊₁`
-contain every full column `-j` with `j < i`, together with `Uᵢ` in column `-i`,
-and let `F₂ᵢ₊₂` contain every full column `-j` with `j ≤ i`. Use the vertical
-degree `k+j` in column `-j`.
-
-The total differential preserves these submodules. Horizontal differentials
-move column `-j` to `-(j-1)`, already included when `j > 0`; for `j = 0`
-the target is a zero positive column. On `Uᵢ` the vertical differential vanishes;
-on a full column the vertical differential stays in that column.
-Thus they define subcomplexes with their inclusion morphisms and compatible
-successive inclusion maps. Each inclusion is injective in every degree, hence
-monic. Every element of a direct sum has finite support; positive columns vanish,
-so it lies in `F₂ᵢ₊₂` for `i` at least every index in its support. This proves
-exhaustiveness, including zero (which already lies in `F₀`).
-
-The successive quotients are `Uᵢ` shifted in total degree by `-i`, and the
-quotient of column `-i` by `Uᵢ` shifted by `-i`. Horizontal differentials vanish
-in these quotients because their target columns occur earlier; their vertical
-differentials vanish by the chosen single-degree decompositions. A summand in
-vertical degree `d` therefore becomes a single summand in total degree `d-i`.
-The given degreewise splittings yield retractions for each successive inclusion:
-project away the new column part, using the splitting of `Uᵢ` inside its column
-for the second inclusion. The inclusion out of zero has the zero retraction.
-These descriptions identify the categorical cokernels with the stated coproducts.
--/
+has an exhaustive, degreewise split filtration with free zero-differential quotients. -/
 theorem exists_totalFreeFiltration {A : Type u} [CommRing A]
     (K : HomologicalComplex₂ (ModuleCat.{u} A) (ComplexShape.up ℤ) (ComplexShape.up ℤ))
     (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))

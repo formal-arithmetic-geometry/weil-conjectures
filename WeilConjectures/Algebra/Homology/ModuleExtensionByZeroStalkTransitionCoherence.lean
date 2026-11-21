@@ -12,6 +12,17 @@ public import Mathlib.Topology.Sheaves.Module
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import Mathlib.Geometry.RingedSpace.Stalks
 
+/-!
+# Coherence of the stalk transitions for extension by zero
+
+Identity, composition and counit compatibility of the transition maps between extensions by
+zero, and the induced compatible stalk isomorphisms.
+
+## References
+
+* Stacks Project, Sheaves, Tags 00A7 (2)-(4) and 00A5
+-/
+
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
@@ -19,34 +30,7 @@ noncomputable section
 namespace AlgebraicGeometry
 /-- The transitions explicitly transposed from the restricted units satisfy identity,
 composition and counit compatibility, and the inside-open counit stalks give compatible
-isomorphisms. Source: Stacks Project, Sheaves, Tag 00A7 (2)-(4) and Tag 00A5.
-
-Proof: Denote extension and restriction at W by L_W and R_W, with unit eta_W and counit eps_W.
-The displayed iota is defined by the inverse adjunction hom-equivalence, not by choosing an
-existence witness. For W = W', the restriction transport is the identity on every section and
-the transported unit is eta_W; the transpose of identity is eta_W, so injectivity of the
-hom-equivalence gives the identity equation. Transpose iota(W,W') followed by eps_W':
-naturality of the hom-equivalence, naturality of the restriction transport and the right
-triangle identities at W and W' reduce it to identity on R_W F, which is the transpose of
-eps_W. This proves counit compatibility for every W', including top.
-
-The existing moduleExtensionByZero_unit_isIso theorem makes eta_W invertible. The right
-triangle identity then makes R_W eps_W its inverse. For W contained in W', restriction
-transport identifies R_W eps_W' with a conjugate of the further restriction of R_W' eps_W',
-so it too is invertible. To prove composition for W <= W' <= W'', transpose both candidate
-maps at W and cancel R_W eps_W''. Naturality of transposition and the general counit
-compatibility equation reduce both sides to the transpose of eps_W.
-
-At x in W, forget R_W eps_W to abelian presheaves on W; its components are invertible.
-The usual restriction-stalk comparisons conjugate its stalk map to the underlying abelian
-stalk map of eps_W. Check this equality on germs using the restriction-stalk germ formulas
-and naturality of stalk maps. Thus the underlying stalk map is invertible, and the forgetful
-functor from modules to abelian groups reflects isomorphisms. Define e(W,x) as the inverse
-of asIso of the counit stalk map, which determines e uniquely and gives its inverse formula.
-Apply the stalk functor to general counit compatibility and cancel e(W',x).inv to obtain
-the final equation. All stalk maps are O_X,x-linear. The argument uses the units of the
-chosen adjunctions themselves and requires no agreement between separate choices. Empty W
-has no inside points; equal opens and the top open require no extra hypotheses. -/
+isomorphisms. -/
 theorem ModuleExtensionByZeroStalkTransitionCoherence (X : RingedSpace.{u})
     (F : SheafOfModules.{u} (moduleRings X)) :
     let iota := fun (W W' : Opens X) (h : W ≤ W') ↦

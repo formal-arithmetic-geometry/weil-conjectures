@@ -14,7 +14,14 @@ import WeilConjectures.Algebra.Homology.AffineTildeCoefficientPushforwardHomolog
 
 /-! # Homology coordinates of the raw affine tensor comparison
 
-Source: Stacks Project, Tags 0DJ8, 06Y6 and 08HY. -/
+## References
+
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 06Z0
+* Stacks Project, Tag 0AVW
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -175,24 +182,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- Applying homology to the raw tensor counit gives precisely the module
 comparison, coefficient homology map and normalized ordinary pushforward map.
-This statement contains no geometric base-change map or pullback representative.
-Source: Stacks Project, Tags 06Y6, 06Z0, 0AVW and 0DJ8, equation-bc.
-
-Proof: Expand affineTildeDerivedTensorSourceIso. Naturality of the exact-tilde
-homology isomorphism moves m.counit past this comparison. On the localized
-ordinary scalar-extension complex its comparison is the composite of the exact
-homology isomorphism and the Q/homology isomorphism. Substitute m.comparison_eq
-for the counit followed by m.ordinaryIso. Apply functoriality of homology to the
-remaining factors of affineTildeTensorCoefficientComplexMap. Naturality of exact
-restriction-of-scalars homology moves its isomorphism past ordinaryToLocalized;
-compatibility with composition of exact functors cancels the intermediate
-restriction comparisons. The homology of the identity-on-carriers scalar iso
-is rho.inv on homology, and that of the equality transport is z0. Naturality of
-exact tilde moves these maps past its homology comparison. The remaining
-Q/homology comparison, termwise affine pushforward comparison and derived unit
-are exactly affineTildePushforwardCohomologyMap. Reassociate to obtain the stated
-identity. This uses no K-flatness, quasi-coherence, boundedness or invertibility
-of the module comparison. The zero complex and zero rings are included. -/
+This statement contains no geometric base-change map or pullback representative. -/
 theorem affineTildeDerivedTensorToPushforward_homology
     (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]

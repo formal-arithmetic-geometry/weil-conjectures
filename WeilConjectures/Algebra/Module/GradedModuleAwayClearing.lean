@@ -12,9 +12,11 @@ import WeilConjectures.Algebra.Module.GradedModuleAwayClearingModule
 import WeilConjectures.Algebra.Module.GradedModuleAwayClearingRing
 
 /-!
-# GradedModuleAwayClearing
+# Clearing denominators for degree-zero restriction maps
 
-Source: Stacks Project, Constructions, Lemma 01M4.
+## References
+
+* [Stacks Project, Tag 01M4](https://stacks.math.columbia.edu/tag/01M4), parts (1)(e) and (1)(h)
 -/
 
 @[expose] public section
@@ -24,25 +26,7 @@ universe u v
 namespace LocalizedModule
 
 set_option linter.unusedVariables false in
-/-- Clearing denominators for degree-zero module and ring restriction maps.
-Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), (1)(e),(h).
-
-Proof: If g is nilpotent, the target localizations are zero and take n = 0, x = 0.
-Otherwise hZ represents a target module fraction as y/g^n with y and g^n of the
-same degree. Directness of the ring grading and g^n != 0 identify that degree
-with n*delta, so y is homogeneous of degree n*delta.
-Put d = deg f > 0 and Y = g^(n*(d-1)) • y. Then Y has degree n*d*delta,
-so Y/f^(n*delta) belongs to Z f. Multiplying y/g^n by rhoS(U)^n gives
-rho(Y/f^(n*delta)): apply the given lambda fraction formula and cancel f,
-which is invertible in the target localization. For a ring fraction use the
-same construction with multiplication in S. The homogeneous localization's
-fraction representation supplies homogeneous ring numerators. The ring map
-lambdaS sends b/f^m to b*(a/g^e)^m: it preserves the image of S and sends the
-inverse of f/1 to its inverse, which the hypotheses identify as a/g^e.
-Thus it sends U to g^d/f^delta in L g. Equality in the ordinary localizations
-implies equality in Z g and R g by injectivity of their inclusions. These identities
-hold also for nilpotent denominators, since localization and its submodules
-are then zero. No domain or nonzero numerator assumption is used. -/
+/-- Clearing denominators for degree-zero module and ring restriction maps. -/
 theorem gradedModuleAwayClearing
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]

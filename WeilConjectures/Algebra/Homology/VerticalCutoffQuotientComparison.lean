@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Homology.VerticalCutoffColumnQuasiIso
 
 /-! # Columnwise comparison of cutoff quotients and smart windows
 
-Source: the columnwise smart truncation argument in Stacks Project, Homology, Tag 012X.
+## References
+
+* [Stacks Project, Tag 012X](https://stacks.math.columbia.edu/tag/012X), smart truncations
 -/
 
 @[expose] public section
@@ -29,24 +31,7 @@ private noncomputable def windowProjection (a b : ℤ) :
         ((ComplexShape.embeddingUpIntLE (b - 1)).truncLEFunctor C))
       (ComplexShape.embeddingUpNat.restrictionFunctor C))
 
-/-- The quotient of nested cutoffs has a columnwise quasi-isomorphism to the window.
-Source: Stacks Project, Homology, Tag 012X, smart truncation filtration construction;
-Mathlib's complementary smart truncations.
-
-Proof: each column inclusion is the unique map between the smart cutoffs compatible
-with their inclusions into the original column. Compose the b-cutoff with the smart
-projection in degrees >= a and truncate above b-1. This annihilates the a-cutoff,
-so factors through its cokernel. These projections are natural in the column, and
-therefore give a bicomplex morphism from the cokernel to the smart window. For a < b,
-the quotient in degree a-1 is the image of the original differential from a-1 to a.
-The map to the window is zero there, the quotient projection in degree a, and an
-isomorphism in higher degrees. Its kernel is the two-term complex with this image
-in degrees a-1 and a and identity differential; it is acyclic. At b=a+1 the target
-in degree a is cycles modulo boundaries, with the same acyclic kernel. If a=b,
-both quotient and window are zero. Negative degrees of the original extended column
-are zero: when a=0 the image in degree -1 is zero, so restriction to the naturals
-preserves the comparison; when a<0 it is already an isomorphism. Hence every column
-map is a quasi-isomorphism, including all negative-endpoint cases. -/
+/-- The quotient of nested cutoffs has a columnwise quasi-isomorphism to the window. -/
 theorem verticalCutoff_cokernel_column_comparison
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))
     (a b : ℤ) (hab : a ≤ b)

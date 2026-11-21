@@ -14,7 +14,12 @@ import WeilConjectures.Algebra.Homology.OpenExtensionCounitStalk
 
 /-! # A concentrated approximation on an open support
 
-Source: Stacks Project, Cohomology, Tags 08BS and 08BT.
+Exact extension by zero of a restriction approximates a derived object by a concentrated one.
+
+## References
+
+* Stacks Project, Cohomology, Tags 08BS and 08BT (exact extension by zero and its adjunction)
+* Stacks Project, Modules, Tag 01AG (stalkwise detection)
 -/
 
 @[expose] public section
@@ -44,32 +49,7 @@ private theorem zero_of_stalks (X : RingedSpace.{u})
 set_option backward.isDefEq.respectTransparency false in
 /-- Exact extension by zero of the restriction of `K` gives a concentrated object
 mapping to `K`. Maps from `S` to degree-`n` homology factor through this counit.
-This is a statement about a local approximation, not an isomorphism with `K`.
-
-Source: Stacks Project, Cohomology, Tags 08BS and 08BT (exact extension by zero
-and its adjunction); Modules, Tag 01AG (stalkwise detection).
-
-Proof: Let j be the inclusion of U. Restriction R and extension by zero J
-are exact and additive, with sheaf adjunction counit epsilon : R followed by J
--> identity. Their composite F is an exact additive endofunctor of modules on
-X. Choose a complex P representing K and apply F termwise. Set L = Q(F(P));
-apply Q to the chain map whose components are epsilon(P^m), then compose with
-the representative isomorphism Q(P) -> K to obtain b : L -> K. Exactness gives
-H^m(L) isomorphic to F(H^m(K)). The homology map of this chain map is epsilon
-on homology: this follows from its commutation with cycles and the quotient
-from cycles to homology. Thus the comparisons identify H^m(b) with the
-sheaf counit. This construction uses only the given derived category on X.
-
-For m != n the sheaf F(H^m(K)) has zero stalks everywhere. Off U this is the
-extension-by-zero stalk formula. On U its counit stalk is an isomorphism to
-the zero stalk specified by hlocal. Stalkwise detection makes this sheaf zero.
-Similarly epsilon(S) : F(S) -> S is an isomorphism: on U its stalk is an
-isomorphism and off U its source and target have zero stalks by hsource.
-For a : S -> H^n(K), define c by epsilon(S)^{-1} followed by F(a), then the
-inverse of the homology comparison H^n(L) -> F(H^n(K)). Counit naturality
-and the homology comparison for b give c followed by H^n(b) equal to a.
-For empty U, S and L are zero. For U = X the counit is an isomorphism.
-No truncation or derived lift from a single object is asserted here. -/
+This is a statement about a local approximation, not an isomorphism with `K`. -/
 theorem open_supported_homology_approximation (X : RingedSpace.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X))]
     (U : Opens X) (S : SheafOfModules.{u} (moduleRings X))

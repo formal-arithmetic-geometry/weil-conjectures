@@ -20,12 +20,8 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-!
 # Derived change of rings on a ringed site
 
-Source: literature/stacks-project/sites-cohomology.tex, Tags 06YT, 06YY, and
-literature/stacks-project/derived.tex, Tag 06XN
-
-The change of rings `- ⊗_O O'` is the landed `SheafOfModules.changeOfRings φ` on objects
-and `SheafOfModules.changeOfRingsHom φ` on morphisms (def-pur-sheaf-tensor-product); the
-statement asserts an additive functor `E` with exactly these objects and maps, and uses
+The main theorem asserts an additive functor `E` given by `SheafOfModules.changeOfRings φ` on
+objects and `SheafOfModules.changeOfRingsHom φ` on morphisms (`- ⊗_O O'`), and uses
 `E.mapHomologicalComplex` (termwise change of rings of complexes) and
 `E.mapHomotopyCategory ⋙ DerivedCategory.Qh` (the functor `K(O) → D(O')`).
 
@@ -38,6 +34,10 @@ statement asserts an additive functor `E` with exactly these objects and maps, a
 
 - `derivedChangeOfRingsIndependentCoefficients`: the full derived-change-of-rings statement without
   identifying the object and morphism universes of the site.
+
+## References
+
+* Stacks Project, Tags 03EK, 06Y0, 06YT, 06YY and 06XN
 -/
 
 @[expose] public section
@@ -48,8 +48,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace SheafOfModules
 
-/-- Forget commutativity without identifying the two universes of the site.
-Source: Stacks Tag 06YY. -/
+/-- Forget commutativity without identifying the two universes of the site. -/
 noncomputable abbrev derivedChangeRingIndependentCoefficients {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C)
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -216,20 +215,8 @@ private lemma tensorComparison_naturality
       (Category.assoc _ _ _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Source: Stacks Project, Tag 03EK and Tag 06YY, degree-zero tensor comparison.
-
-Proof: Put U = restriction along φ and S = U(O'). Before sheafification the
-identity on pure tensors identifies the restricted sectionwise scalar extension
-O'(V) tensor over O(V) M(V) with the sectionwise tensor of S and M. It respects
-restrictions because both constructions restrict each tensor factor, and respects
-module morphisms because both apply id tensor a. The standard natural isomorphisms
-for forgetting scalar restriction and module sheafification identify their underlying
-abelian sheaves. Sheafifying the presheaf tensor comparison therefore gives the
-asserted isomorphisms of abelian sheaves, sufficient to detect acyclicity.
-The counit at the already-sheaf module S and the monoidal localization comparison
-identify the resulting sheafification with S tensor M. Naturality survives each
-comparison and sheafification, giving the displayed equation for every a.
-This uses no flatness; the identity on tensors also covers zero rings and modules. -/
+/-- The underlying abelian sheaf of the change of rings of `M` is isomorphic to that of `S ⊗ M`,
+where `S` is the restriction of the target ring `O'` along `φ`, naturally in `M`. -/
 private theorem exists_changeOfRings_tensor_comparison_independent
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C] {J : GrothendieckTopology C}
     [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
@@ -340,18 +327,7 @@ private noncomputable def tensor_symmetry
   exact (HomologicalComplex₂.total.mapIso e (.up ℤ)) ≪≫
     HomologicalComplex.mapBifunctorFlipIso L K T (.up ℤ)
 
-/-- An acyclic K-flat complex has acyclic total tensor with every complex.
-Source: Stacks Project, Tags 06Y0 and 06YT, proof by a K-flat resolution.
-
-Proof: Choose a K-flat resolution r : P → F (Tag 06YS). The cone of r is acyclic.
-K-flatness of K makes Tot(Cone(r) ⊗ K) acyclic; the tensor-cone isomorphism
-and the cone criterion imply that Tot(r ⊗ id_K) is a quasi-isomorphism.
-K-flatness of P applied to the acyclic K makes Tot(K ⊗ P) acyclic.
-The signed symmetry sends the (p,q) summand by (-1)^(pq) times the module braiding
-and identifies this with Tot(P ⊗ K). It is a chain isomorphism because
-(p+1)q = pq+q and p+p(q+1) = pq modulo two. Thus the quasi-isomorphism
-Tot(P ⊗ K) → Tot(F ⊗ K) transports vanishing of every homology object.
-This also covers F = 0 and K = 0 without any nonzero hypothesis. -/
+/-- An acyclic K-flat complex has acyclic total tensor with every complex. -/
 private theorem tensor_acyclic_of_isKFlat_independent
     (K : CochainComplex (SheafOfModules.{r} (𝓡 O)) ℤ)
     (hK : K.IsKFlatIndependentCoefficients) (hA : K.Acyclic)
@@ -391,14 +367,7 @@ private theorem isKFlat_mappingCone_independent
 
 end TensorAcyclicity
 
-/-- The K-flat invariance component needed by derived change of rings.
-Source: Stacks Project, Tag 06YT.
-Proof: the cone of the quasi-isomorphism is acyclic and K-flat. Resolve an arbitrary
-complex by a K-flat complex; the tensor-cone comparison and signed symmetry show that
-tensoring the acyclic K-flat cone with any complex is acyclic. Specialize to the target
-ring in degree zero. The natural comparison with restricted extension of scalars and
-faithful exact forgetting to abelian sheaves detect acyclicity of its extension. An
-additive functor preserves mapping cones, so the cone criterion gives the conclusion. -/
+/-- The K-flat invariance component needed by derived change of rings. -/
 private theorem derivedChangeOfRingsIndependentCoefficients_kflat_invariance
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}
@@ -465,36 +434,10 @@ private theorem derivedChangeOfRingsIndependentCoefficients_kflat_invariance
 end IndependentTensor
 
 /-- Derived change of rings along a morphism `φ : O ⟶ O'` of sheaves of commutative rings
-on a site. There is an additive functor `E : Mod(O) ⥤ Mod(O')` whose objects and maps are
-the change of rings `changeOfRings φ` / `changeOfRingsHom φ` (`- ⊗_O O'`), such that
-(1) termwise change of rings `E.mapHomologicalComplex` sends every quasi-isomorphism between
-K-flat complexes to a quasi-isomorphism, and (2) the functor
-`K(O) → D(O')`, `G ↦ Q(G ⊗_O O')`, has an everywhere defined (pointwise) left derived
-functor `Lφ^* : D(O) ⥤ D(O')` with counit `ε`, which is triangulated, and `ε` is an
-isomorphism at every K-flat complex. Hence for a K-flat resolution `s : P → G` the canonical
-map `Lφ^* G ≅ Lφ^* P → P ⊗_O O'` (inverse of `Lφ^*(s)` followed by `ε_P`) is an isomorphism,
-and the comparison isomorphisms between two resolutions are composites of these, so
-canonical and compatible with composition.
-Source: Stacks Project, Tags 06YT, 06YY, and 06XN.
-Proof:
-1. Form the sectionwise extension-of-scalars functor from changeOfRingsPresheaf and
-changeOfRingsHom_naturality (def-pur-sheaf-tensor-product), then compose with sheafification.
-Identities and composition hold sectionwise. Both functors are additive by their
-adjunctions to additive restriction or forgetful functors (Adjunction.left_adjoint_additive).
-This gives E with exactly the specified objects and maps.
-2. Apply lem-pur-change-of-rings-kflat-quasi-iso to E with these identifications to obtain
-preservation of quasi-isomorphisms between K-flat complexes.
-3. Let F be the induced homotopy functor followed by derived localization
-(def-weil-abstract-derived-category); it commutes with shifts and is triangulated.
-Use homotopy objects represented by K-flat complexes as the resolving class
-(def-pc-kflat-complex). Resolve every representative by lem-pc-kflat-resolution and apply
-quotient_map_mem_quasiIso_iff to its augmentation. For a quasi-isomorphism between objects
-of this class, lift through the full homotopy quotient on chosen K-flat representatives.
-Step 2 and localization make its F-image invertible. Apply
-lem-pur-left-derived-from-kflat-class to obtain pointwise existence, the universal derived
-pair, triangulatedness, and the counit isomorphism on every K-flat complex. The canonical
-resolution comparisons are composites of these counit maps and inverses of images of
-quasi-isomorphisms, hence are isomorphisms and compatible with a third resolution. -/
+on a site. There is an additive functor `E : Mod(O) ⥤ Mod(O')` given by `changeOfRings φ` and
+`changeOfRingsHom φ`, sending quasi-isomorphisms between K-flat complexes to
+quasi-isomorphisms, such that `G ↦ Q(G ⊗_O O')` has a pointwise triangulated left derived
+functor `Lφ^* : D(O) ⥤ D(O')` whose counit is an isomorphism at every K-flat complex. -/
 theorem derivedChangeOfRingsIndependentCoefficients
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}

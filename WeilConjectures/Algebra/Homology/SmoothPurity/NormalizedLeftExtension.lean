@@ -67,7 +67,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.CochainAdjunctionCompatibi
 
 /-! # Normalized derivation of an ordinary left extension
 
-Source: Stacks 06XN, 09T5 and 0FND.
+## References
+
+* Stacks 06XN, 09T5 and 0FND.
 -/
 
 @[expose] public noncomputable section
@@ -81,8 +83,7 @@ variable {A : Type a} [Category.{av} A] [Abelian A] [HasDerivedCategory.{dA} A]
   {D : Type b} [Category.{bv} D] [Abelian D] [HasDerivedCategory.{dB} D]
 
 /-- Derived data for a fixed ordinary adjunction. The universal property determines
-its functor and comparison up to unique isomorphism.
-Source: Stacks 06XN. -/
+its functor and comparison up to unique isomorphism. -/
 structure SystemLeftExtensionDerivation
     (R : D ⥤ A) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (E : A ⥤ D) [E.Additive] (adj : E ⊣ R) (p : CochainComplex A ℤ → Prop) where
@@ -104,8 +105,7 @@ structure SystemLeftExtensionDerivation
         DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).homEquiv P K f) ≫
           R.mapDerivedCategoryFactors.inv.app K
 
-/-- Include the fixed ordinary adjunction in its derived package.
-Source: Stacks 06XN. -/
+/-- Include the fixed ordinary adjunction in its derived package. -/
 def SystemLeftExtensionDerivation.toExtension
     {R : D ⥤ A} [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     {E : A ⥤ D} [E.Additive] {adj : E ⊣ R} {p : CochainComplex A ℤ → Prop}
@@ -123,16 +123,7 @@ def SystemLeftExtensionDerivation.toExtension
   transpose := d.transpose
 
 /-- Derive an additive left adjoint on any resolving class on which it preserves
-quasi-isomorphisms, retaining the representative-normalized derived transpose.
-Source: Stacks 06XN, 09T5 and 0FND
-Proof: pass the resolving class to the homotopy category. The resolving-class theorem
-constructs the pointwise universal left derived pair, triangulated and computing on
-the class. Transfer its pointwise Kan property through the full essentially surjective
-homotopy quotient to cochains. Exactness of the right adjoint makes its denominator
-ind-diagrams essentially constant at the identity stage. The resolving class makes
-the left denominator pro-diagrams essentially constant. Derived adjoint compatibility
-then supplies the adjunction and its normalized Hom formula on homotopy objects;
-the cochain compatibility lemma transfers that formula to every cochain map. -/
+quasi-isomorphisms, retaining the representative-normalized derived transpose. -/
 theorem nonempty_normalizedLeftExtension
     (R : D ⥤ A) [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
     (E : A ⥤ D) [E.Additive] (adj : E ⊣ R)

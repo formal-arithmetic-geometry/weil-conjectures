@@ -23,7 +23,9 @@ import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 
 /-! # Computing Tor from a flat resolution
 
-Source: Stacks Project, Algebra, Section Tag 00LY, especially Lemmas 00M1 and 00M3.
+## References
+
+* Stacks Project, Algebra, Section Tag 00LY, especially Lemmas 00M1 and 00M3
 -/
 
 @[expose] public section
@@ -163,19 +165,7 @@ namespace ModuleCat
 
 open HomologicalComplex₂
 
-/-- An augmented nonnegative chain complex of flat modules computes first-variable Tor.
-Source: Stacks Project, Algebra, Section 10.75 (Tag 00LY), the double-complex argument
-of Lemma 10.75.3 (Tag 00M1) and symmetry in Lemma 10.75.5 (Tag 00M3).
-
-Proof: choose a projective resolution Q of N and form the first-quadrant tensor
-bicomplex F tensor Q. Each column is exact in positive degrees since F_p is flat.
-Each row is exact in positive degrees since Q_q is projective, hence flat, and the
-augmentation of F is a quasi-isomorphism to M[0]. The column cokernel complex is
-F tensor N; the row cokernel complex is M tensor Q. Tag 00M1 identifies their
-homology. Computing Tor from Q and using Tag 00M3 identifies the latter homology
-with Tor'_j(M,N). All these are isomorphisms of R-modules. Degree zero is included:
-right exactness identifies both augmentations with the ordinary tensor product.
-The zero complex and zero modules satisfy the same argument. -/
+/-- An augmented nonnegative chain complex of flat modules computes first-variable Tor. -/
 theorem flatResolution_torComparison
     {R : Type u} [CommRing R] (M : ModuleCat.{u} R)
     (F : ChainComplex (ModuleCat.{u} R) ℕ)

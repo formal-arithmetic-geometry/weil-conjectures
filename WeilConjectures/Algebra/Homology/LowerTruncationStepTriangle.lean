@@ -13,7 +13,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 /-!
 # Successive lower truncation triangle
 
-Source: literature/stacks-project/perfect.tex, Tag 08D4 proof of part (2)
+## References
+
+* Stacks Project, Tag 08D4, proof of part (2); Tag 08J5
 -/
 
 @[expose] public section
@@ -25,20 +27,7 @@ open CategoryTheory CategoryTheory.Pretriangulated
 namespace DerivedCategory
 
 /-- The canonical transition between successive lower truncations lies in a
-triangle with the shifted cohomology object.
-Source: Stacks Project, Tag 08D4, proof of part (2)
-
-Choose a complex representative K. The canonical lower truncations represent
-these derived truncations: the quotient representatives are quasi-isomorphic to
-K.truncGE, compatibly with transitions (Tag 08J5).
-Apply lem-pc-derived-lower-truncation-step-ses at m = -n to obtain the short
-exact sequence with kernel C_m(K) and its quasi-isomorphism from H^m(K)[-m].
-Apply lem-weil-pbc-complex-ses-triangle to obtain the distinguished triangle
-whose middle arrow is the quotient transition. The quasi-isomorphism becomes
-an isomorphism in the derived category (def-weil-abstract-derived-category).
-Transport the triangle along this isomorphism using TR1
-(def-weil-triangulated-category). The naturality of the SES and its triangle
-identifies the transition with the canonical truncation-tower arrow. -/
+triangle with the shifted cohomology object. -/
 theorem exists_lowerTruncationStepTriangle
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
     (E : DerivedCategory C) (n : ℤ) :

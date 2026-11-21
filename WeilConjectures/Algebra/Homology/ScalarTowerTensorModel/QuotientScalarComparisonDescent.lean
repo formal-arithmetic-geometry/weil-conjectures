@@ -96,12 +96,14 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 /-! # Scalar augmentation and its derived descent
 
-Source: Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1, pp. 22,24;
-Stacks Project, Tags 03EK, 014E, 08TC, 06YS, 06YT, 06XN and 05S9.
-
 The tensor factors in the change-of-rings API are written scalar first. Natural index
 `n` denotes positive level `n + 1`. Presentation isomorphisms fix the actual sheafified
 tensors and their maps; they are not additional hypotheses in the existence theorem.
+
+## References
+
+* Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1
+* Stacks Project, Tags 03EK, 014E, 08TC, 06YS, 06YT, 06XN and 05S9
 -/
 
 @[expose] public noncomputable section
@@ -326,7 +328,6 @@ set_option hygiene false in
 local notation "𝓡" T => (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj T
 
 /-- Presentations of the two ordinary tensor functors, with their maps fixed on tensors.
-Source: Stacks 03EK and the strict tower construction of Stacks 08TC
 These fields package the specified functors, including their canonical transition maps. -/
 structure ScalarTowerTensorModel (φ : R ⟶ S) (c : ∀ n, S ⟶ B n)
     (b : ∀ n, B (n + 1) ⟶ B n) where
@@ -366,14 +367,12 @@ namespace ScalarTowerTensorModel
 variable {φ : R ⟶ S} {c : ∀ n, S ⟶ B n} {b : ∀ n, B (n + 1) ⟶ B n}
   (M : ScalarTowerTensorModel φ c b)
 
-/-- Ordinary extension of scalars, applied termwise to complexes.
-Source: Stacks 03EK. -/
+/-- Ordinary extension of scalars, applied termwise to complexes. -/
 abbrev F := M.E.mapHomologicalComplex (ComplexShape.up ℤ)
 
 variable [HasCountableProducts (ringedSiteModules.{u} (𝓡 S))]
 
-/-- The actual shifted product cone of the strict coefficient tensor tower.
-Source: Stacks 014E and 08TC. -/
+/-- The actual shifted product cone of the strict coefficient tensor tower. -/
 abbrev G := M.V.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ roosF
 
 variable [HasDerivedCategory.{w} (ringedSiteModules.{u} (𝓡 R))]

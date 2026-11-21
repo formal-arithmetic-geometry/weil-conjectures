@@ -9,20 +9,24 @@ public import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.LocallyInjective
+
+/-!
+# Faithfulness of extension by zero
+
+The extension-by-zero functor on module sheaves is faithful.
+
+## References
+
+* Stacks Project, Sheaves, Tag 00A7 (4)
+-/
+
 @[expose] public section
 open CategoryTheory CategoryTheory.Limits TopologicalSpace Opposite
 universe u
 noncomputable section
 namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
-/-- The extension-by-zero/sheafification functor is faithful.
-Source: Stacks Project, Sheaves Lemma 00A7 (4).
-Proof: the extension presheaf is separated. On an open admitting a map to W,
-there is only one summand, and separation is separation of the input sheaf;
-on any other open the direct sum is zero. The sheafification unit is locally
-injective, hence injective for this separated presheaf. Naturality of this unit
-therefore reflects equality of extended morphisms back to presheaf morphisms.
-Evaluating on the unique summand recovers the input morphism. -/
+/-- The extension-by-zero/sheafification functor is faithful. -/
 theorem extensionByZero_faithful (X : RingedSpace.{u}) (W : Opens X) :
     (SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) W ⋙
       PresheafOfModules.sheafification.{u} (𝟙 (moduleRings X).obj)).Faithful := by

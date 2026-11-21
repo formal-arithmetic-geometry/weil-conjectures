@@ -17,7 +17,10 @@ import Mathlib.Data.Int.Interval
 
 /-! # Descent of differentials on fixed bounded graded module models
 
-Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), descent of maps and relations.
+## References
+
+* Stacks Project, Tag 0BC7
+* Stacks Project, Tag 05N7
 -/
 
 @[expose] public section
@@ -29,24 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- On fixed bounded finitely presented term models, the differentials and their zero-composite
-relations descend after extending those models to a later stage.
-Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), via Algebra, Tag 05N7.
-
-Proof: Transport each differential of P across the given term isomorphisms. Only adjacent
-pairs with both degrees in [a,b] can have a nonzero differential. Descend this finite list
-by the map clause of finite-presentation colimit descent, and choose one common later stage.
-Use the canonical iterated extension-of-scalars isomorphisms to keep all the descended maps
-compatible with one common family of term isomorphisms. Each consecutive composite becomes
-zero after extension to the colimit, because it is conjugate to a composite in P. Apply the
-equality clause of finite-presentation colimit descent to these finitely many composites
-and the zero maps, and pass to a common later stage. Put zero in nonadjacent degrees and
-where either term is outside the interval; scalar extension preserves zero objects, so
-compatibility there is automatic. Composition of the retained adjacent maps is zero by
-the imposed relations; all other composites contain a zero map. Return the maps and the
-compatible term isomorphisms. No complex is constructed here. For a preorder, pass to its
-antisymmetrization as an indexing category to use the partial-order finite-presentation
-lemma and lift the later index back (equivalence preserves and reflects the order relation).
-For an empty interval all models are zero, so all returned maps are zero. -/
+relations descend after extending those models to a later stage. -/
 theorem exists_differentials_on_graded_model_of_directed_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

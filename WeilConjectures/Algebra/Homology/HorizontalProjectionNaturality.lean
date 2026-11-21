@@ -8,9 +8,12 @@ module
 
 public import WeilConjectures.Algebra.Homology.ConeHorizontalProjection
 
-/-! # Naturality of the extended column projection
+/-!
+# Naturality of the extended column projection
 
-Source: Stacks Project, Homology, Tag 012X, first horizontal filtration.
+## References
+
+* Stacks Project, Tag 012X (first horizontal filtration)
 -/
 
 @[expose] public section
@@ -60,16 +63,7 @@ private theorem extendedProjection_naturality
     erw [totalProjection_naturality_assoc]
   · simp [horizontalExtendedProjection, hm]
 
-/-- Projection onto a column commutes with a bicomplex morphism.
-Source: Stacks Project, Tag 012X, functorial first-filtration decomposition.
-
-Proof: if m < p, both extended column objects are zero and both projections
-are zero. Otherwise conjugate by the canonical extension isomorphisms and
-check the equality on each total summand. Total maps preserve its horizontal
-index. For an index different from p both projections are zero. For index p
-the two sides are the same component of f, transported by the degree-equality
-isomorphisms. The coproduct universal property gives the total-degree equation.
-Conjugating back proves the extended equation, including all negative degrees. -/
+/-- Projection onto a column commutes with a bicomplex morphism, after extension by zero. -/
 @[reassoc]
 theorem horizontalProjection_naturality
     {A B : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)}

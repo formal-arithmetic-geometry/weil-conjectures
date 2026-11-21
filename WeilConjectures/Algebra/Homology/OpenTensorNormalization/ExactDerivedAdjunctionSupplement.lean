@@ -12,12 +12,13 @@ public import WeilConjectures.CategoryTheory.ExactDerivedAdjunction
 
 /-! # The specified localization of an exact adjunction
 
-Source: Stacks Project, Derived Categories, Tag 015F, and the termwise
-exact-adjunction localization specified in `def-weil-exact-derived-adjunction`
-
 The categories have independent object, morphism, and derived morphism universes.
 The commutative squares are precisely the standard exact-functor factorizations;
 `Adjunction.localization` uses the localized original unit and counit.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 015F
 -/
 
 @[expose] public noncomputable section
@@ -35,7 +36,7 @@ end CategoryTheory.Adjunction
 namespace SheafOfModules.OpenTensorNormalization
 
 /-- Localize the actual termwise adjunction, with the standard exact-functor
-factorizations. Source: Stacks 015F. -/
+factorizations. -/
 def exactDerivedAdjunction {C D : Type v} [Category.{h} C] [Category.{h} D]
     [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]
     {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]

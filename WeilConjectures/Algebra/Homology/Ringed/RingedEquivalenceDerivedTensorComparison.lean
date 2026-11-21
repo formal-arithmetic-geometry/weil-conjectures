@@ -114,7 +114,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
 /-! # Derived tensor comparison for an exact tensor equivalence
 
-Source: Stacks Project, Tags 06YN, 06YS and 06YU.
+## References
+
+* Stacks Project, Tags 06YN, 06YS and 06YU
 -/
 
 @[expose] public noncomputable section
@@ -219,26 +221,7 @@ private theorem ringedEquivalence_kFlat_image
   exact (ht'' q).of_iso j
 
 /-- An additive equivalence preserving ordinary sheaf tensor preserves derived tensor
-against a module in degree zero. No Tor bound, scalar reduction or slice site is assumed.
-
-Source: Stacks Project, sites-cohomology.tex, definition-K-flat, lemma-K-flat-resolution
-and definition-derived-tor (Tags 06YN, 06YS and 06YU); the exact-equivalence paragraph
-of lem-sf-clopen-preserves-residue-tor.
-
-Proof: Apply the additive equivalence F termwise to cochain complexes. F and its
-inverse are exact and F preserves coproducts, so the ordinary tensor comparison
-induces an isomorphism between F of a signed total tensor and the total tensor of
-the images. For an acyclic target complex Z, the inverse image of Z is acyclic.
-If P is K-flat, its total tensor with that inverse image is acyclic. Apply F,
-the total comparison and the counit to deduce that Tot(Z,F(P)) is acyclic. Thus
-F(P) is K-flat. Choose a K-flat resolution P of a representative of X. The existing
-K-flat single-tensor comparison computes both X tensor N[0] and F(X) tensor F(N)[0]
-by the corresponding termwise tensor complexes. The components of the given ordinary
-tensor comparison form an isomorphism F(P tensor N) to F(P) tensor F(N): its chain-map
-equation is precisely naturality for (d_P,id_N). Localize this chain isomorphism and
-compose with the exact-functor factorization and the chosen representative isomorphism.
-This supplies the asserted isomorphism. No boundedness, nonzero-ring or inhabited-site
-hypothesis is needed; the same construction applies to zero complexes and empty sites. -/
+against a module in degree zero. No Tor bound, scalar reduction or slice site is assumed. -/
 theorem ringedEquivalence_derivedTensorComparison
     {C : Type c} [Category.{h} C] [EssentiallySmall.{r} C]
     {D : Type d} [Category.{k} D] [EssentiallySmall.{r} D]

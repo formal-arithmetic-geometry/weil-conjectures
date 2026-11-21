@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.ConstantModuleSectionProperties
 
 /-! # Mittag--Leffler cohomology of adic quotient complexes
 
-Source: Stacks Project, Tag 09C5; the Artin--Rees argument is Tag 00IN.
+Mittag--Leffler property for the cohomology of the adic quotients of a short complex.
+
+## References
+
+* Stacks Project, Tag 09C5 (final paragraph); the Artin--Rees argument is Tag 00IN
+* Stacks Project, Tags 093J and 093K (exactness of constant-module sections)
 -/
 
 @[expose] public noncomputable section
@@ -26,19 +31,16 @@ namespace AdicCohomology
 
 variable {R : Type u} [CommRing R] (I : Ideal R)
 
-/-- The actual ideal power submodule I^n M.
-Source: Stacks Project, Tag 09C5. -/
+/-- The actual ideal power submodule I^n M. -/
 abbrev power (M : ModuleCat.{u} R) (n : ℕ) : Submodule R M := I ^ n • ⊤
 
-/-- Linear maps preserve ideal-power submodules.
-Source: Stacks Project, Tag 09C5. -/
+/-- Linear maps preserve ideal-power submodules. -/
 theorem map_power {M N : ModuleCat.{u} R} (f : M ⟶ N) (n : ℕ) :
     power I M n ≤ (power I N n).comap f.hom := by
   rw [← Submodule.map_le_iff_le_comap, Submodule.map_smul'']
   exact smul_mono_right _ (by simp)
 
-/-- Termwise quotient by the actual ideal power, retaining the original scalar ring.
-Source: Stacks Project, Tag 09C5. -/
+/-- Termwise quotient by the actual ideal power, retaining the original scalar ring. -/
 def quotient (n : ℕ) : ModuleCat.{u} R ⥤ ModuleCat.{u} R where
   obj M := ModuleCat.of R (M ⧸ power I M n)
   map f := ModuleCat.ofHom ((power I _ n).mapQ (power I _ n) f.hom (map_power I f n))
@@ -51,8 +53,7 @@ instance adicShortComplexCohomologyMLInst1 (n : ℕ) : (quotient I n).Additive w
     ext x
     exact Submodule.Quotient.induction_on _ x (fun _ ↦ rfl)
 
-/-- The canonical quotient transition, including identities.
-Source: Stacks Project, Tag 09C5. -/
+/-- The canonical quotient transition, including identities. -/
 def transition {n m : ℕ} (h : n ≤ m) : quotient I m ⟶ quotient I n where
   app M := ModuleCat.ofHom (Submodule.factor
     (Submodule.smul_mono_left (Ideal.pow_le_pow_right h)))
@@ -61,21 +62,18 @@ def transition {n m : ℕ} (h : n ≤ m) : quotient I m ⟶ quotient I n where
     ext x
     exact Submodule.Quotient.induction_on _ x (fun _ ↦ rfl)
 
-/-- The transition at a repeated index is the identity.
-Source: Stacks Project, Tag 09C5. -/
+/-- The transition at a repeated index is the identity. -/
 theorem transition_refl (n : ℕ) : transition I (le_refl n) = 𝟙 _ := by
   ext M x
   exact Submodule.Quotient.induction_on _ x (fun _ ↦ rfl)
 
-/-- Quotient transitions compose with their actual quotient maps.
-Source: Stacks Project, Tag 09C5. -/
+/-- Quotient transitions compose with their actual quotient maps. -/
 theorem transition_comp {n m t : ℕ} (h : n ≤ m) (k : m ≤ t) :
     transition I (k.trans' h) = transition I k ≫ transition I h := by
   ext M x
   exact Submodule.Quotient.induction_on _ x (fun _ ↦ rfl)
 
-/-- The actual adic quotient diagram of a short complex, with exponent n+1 at level n.
-Source: Stacks Project, Tag 09C5. -/
+/-- The actual adic quotient diagram of a short complex, with exponent n+1 at level n. -/
 def shortComplexTower (S : ShortComplex (ModuleCat.{u} R)) :
     ℕᵒᵖ ⥤ ShortComplex (ModuleCat.{u} R) where
   obj n := S.map (quotient I (n.unop + 1))
@@ -89,8 +87,7 @@ def shortComplexTower (S : ShortComplex (ModuleCat.{u} R)) :
       (Nat.add_le_add_right (leOfHom g.unop) 1)
       (Nat.add_le_add_right (leOfHom f.unop) 1))
 
-/-- Cohomology of the actual adic quotient diagram.
-Source: Stacks Project, Tag 09C5. -/
+/-- Cohomology of the actual adic quotient diagram. -/
 def tower (S : ShortComplex (ModuleCat.{u} R)) : ℕᵒᵖ ⥤ ModuleCat.{u} R :=
   shortComplexTower I S ⋙ ShortComplex.homologyFunctor _
 
@@ -152,14 +149,7 @@ private theorem cl_naturality {S T : ShortComplex (ModuleCat.{u} R)} (f : S ⟶ 
     ModuleCat.comp_apply, hcyc]
 
 /-- Artin--Rees stabilizes the cohomology images of the actual adic quotients.
-Only the term following the cohomology degree needs to be finite.
-Source: Stacks Project, Tag 09C5, final paragraph, using Tag 00IN.
-
-Proof: apply Artin--Rees to the image of the outgoing differential in its finite
-codomain. A cycle modulo I^(n+c) lifts to z with dz in I^(n+c). Artin--Rees writes
-dz = dy for y in I^n. Thus z-y is a genuine cycle, with the same class modulo I^n,
-and reduces to a cycle at every later level. These cycles give preimages under
-all deeper transition maps, which is the Mittag--Leffler condition. -/
+Only the term following the cohomology degree needs to be finite. -/
 theorem isMittagLeffler [IsNoetherianRing R]
     (S : ShortComplex (ModuleCat.{u} R)) [Module.Finite R S.X₃] :
     (tower I S ⋙ forget _).IsMittagLeffler := by
@@ -217,8 +207,7 @@ private theorem map_range_le (F : ModuleCat.{u} R ⥤ ModuleCat.{u} S₀)
   simpa only [Functor.map_comp, Functor.map_zero, ModuleCat.comp_apply,
     ModuleCat.hom_zero, LinearMap.zero_apply] using hzero
 
-/-- Exact additive functors between module categories preserve stabilized transition images.
-Source: Stacks Project, Tag 09C5, exact sections argument. -/
+/-- Exact additive functors between module categories preserve stabilized transition images. -/
 theorem map_isMittagLeffler (T : ℕᵒᵖ ⥤ ModuleCat.{u} R)
     (F : ModuleCat.{u} R ⥤ ModuleCat.{u} S₀) [F.Additive] [F.PreservesHomology]
     (hT : (T ⋙ forget _).IsMittagLeffler) : (T ⋙ F ⋙ forget _).IsMittagLeffler := by
@@ -229,8 +218,7 @@ theorem map_isMittagLeffler (T : ℕᵒᵖ ⥤ ModuleCat.{u} R)
 
 variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
 
-/-- Sections of the actual constant module sheaf, retaining algebraic scalars.
-Source: Stacks Project, Tag 09C5. -/
+/-- Sections of the actual constant module sheaf, retaining algebraic scalars. -/
 def sections (U : C) : ModuleCat.{u} R ⥤ ModuleCat.{u} R :=
   constantSheaf J (ModuleCat.{u} R) ⋙ sheafToPresheaf J (ModuleCat.{u} R) ⋙
     (evaluation Cᵒᵖ (ModuleCat.{u} R)).obj (op U)
@@ -239,8 +227,7 @@ instance adicShortComplexCohomologyMLInst2 (U : C) : (sections (R := R) J U).Add
   dsimp [sections]
   infer_instance
 
-/-- Constant module sections are exact, by the constant-section exactness theorem.
-Source: Stacks Project, Tags 093J and 093K. -/
+/-- Constant module sections are exact, by the constant-section exactness theorem. -/
 theorem sections_preservesHomology [IsNoetherianRing R] (U : C) :
     (sections (R := R) J U).PreservesHomology := by
   let F := sections (R := R) J U

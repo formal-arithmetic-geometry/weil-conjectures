@@ -13,8 +13,11 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 /-! # Roos comparison for complexes with split transitions
 
-Source: Stacks Project, Derived Categories, Tag 070M, and the split-envelope
-extension recorded in lem-weil-derived-limit-roos-complex.
+The canonical Roos comparison is a quasi-isomorphism for complexes with split terms.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 070M
 -/
 
 @[expose] public section
@@ -95,26 +98,8 @@ private theorem cofiber_biprod_fst
       biprod.fst = HomologicalComplex.homotopyCofiber.fstX f p q h := rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A split-term complex has a product/kernel/signed-cone presentation whose
-canonical comparison is a quasi-isomorphism. This is the split case, with no
-K-injectivity hypothesis.
-
-Proof: Form PJ termwise by countable products and let sJ be one minus transition
-shift. Naturality of the transition shift gives a chain map. Define LJ as its
-kernel complex. Take CJ to be the Mathlib mapping cone of sJ shifted by -1.
-Compose its degree isomorphism with the biproduct swap to identify its terms
-with PJ^(p-1) ⊞ PJ^p. The shift changes the sign of the cone differential,
-and its two projection equations give (y,x) ↦ (-dy-sJ x, dx).
-Choose a section σ_n of each split transition in every degree. On the product
-recursively define a_n by a_0=0 and a_(n+1)=(a_n-pr_n)σ_n. Their product lift a
-satisfies a sJ = id by checking every projection, so sJ is degreewise epi.
-Apply the degreewise-epi kernel/shifted-cone comparison. Its projection
-equations, reindexed in degree p+1 and composed with the biproduct swap,
-identify it with (0,iJ). It is already a quasi-isomorphism into CJ. Evaluation
-functors preserve kernels, giving the required limiting kernel forks.
-
-Source: Stacks Project, Derived Categories, Tag 070M; the explicit extension
-in lem-weil-derived-limit-roos-complex. -/
+/-- A split-term complex has a product/kernel/signed-cone presentation whose canonical
+comparison is a quasi-isomorphism. This is the split case, with no K-injectivity hypothesis. -/
 theorem roos_split_comparison
     (A : Type u) [Category.{v} A] [Abelian A]
     [HasLimitsOfShape (Discrete ℕ) A]

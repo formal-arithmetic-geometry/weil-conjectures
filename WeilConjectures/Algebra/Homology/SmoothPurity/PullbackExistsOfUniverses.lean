@@ -16,8 +16,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Presheaf.EpiMono
 /-!
 # Existence of module pullback in a universe containing the sites
 
-Source: Stacks Project, Modules on Sites, Tag 03D7, and Mathlib's free-representable
-presentation construction in `ModuleCat.Presheaf.Pullback`.
+## References
+
+* Stacks Project, Modules on Sites, Tag 03D7
+* Mathlib's free-representable presentation construction in `ModuleCat.Presheaf.Pullback`
 -/
 
 @[expose] public section
@@ -114,9 +116,7 @@ private theorem presheaf_pushforward_isRightAdjoint
     intro x
     exact (repCorepresentable a _).isCorepresentable
 
-/-- Abelian sheafification exists in any universe in which the site is essentially small.
-Source: Mathlib `hasSheafifyEssentiallySmallSite` and
-`GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall`. -/
+/-- Abelian sheafification exists in any universe in which the site is essentially small. -/
 theorem coefficientSheafification {C : Type u} [Category.{v} C]
     [EssentiallySmall.{w} C] (J : GrothendieckTopology C) :
     HasSheafify J AddCommGrpCat.{w} ∧ J.WEqualsLocallyBijective AddCommGrpCat.{w} := by
@@ -135,22 +135,7 @@ theorem coefficientSheafification {C : Type u} [Category.{v} C]
       J (A := AddCommGrpCat.{w})
   exact ⟨inferInstance, inferInstance⟩
 
-/-- Module direct image has a left adjoint when the module universe contains the sites.
-Source: Stacks Project, Modules on Sites, Tag 03D7,
-`lemma-adjoint-pullback-pushforward-modules`; the free-representable presentation
-construction of Mathlib `PresheafOfModules.pullbackObjIsDefined_eq_top`.
-
-Proof: The free module presheaf on the lifted representable at X corepresents
-sections at X. Direct image therefore has a left adjoint on this free presheaf,
-with value the free presheaf at U(X). Every module presheaf is the quotient of
-the coproduct of these free presheaves indexed by its sections. Present its
-kernel in the same way to express it as a cokernel between two such coproducts.
-The domain of a partial left adjoint is closed under these colimits, which proves
-existence on all presheaves. All section and relation indices lie in max u v w.
-Abelian sheafification exists in that universe by passage to a small model of
-the site. Compose presheaf pullback with sheafification; Mathlib's
-`PullbackConstruction.adjunction` identifies its right adjoint with direct image.
-No preservation of finite limits or coverings by U is needed for existence. -/
+/-- Module direct image has a left adjoint when the module universe contains the sites. -/
 theorem module_pushforward_isRightAdjoint_of_universes
     {J : GrothendieckTopology C} {K : GrothendieckTopology D}
     {U : C ⥤ D} [U.IsContinuous J K]

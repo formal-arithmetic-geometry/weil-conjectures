@@ -17,7 +17,13 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 import Mathlib.Algebra.Category.ModuleCat.Kernels
 import Mathlib.LinearAlgebra.Finsupp.Pi
 
-/-! # Finitely presented point modules as retracts of global stalks -/
+/-! # Finitely presented point modules as retracts of global stalks
+
+## References
+
+* [Stacks Project, Cohomology on Sites, Tag 0DEN](https://stacks.math.columbia.edu/tag/0DEN)
+  (finite-presentation descent, with extension by zero of the local realization)
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -406,21 +412,7 @@ private theorem presentation_retract {ι κ : Type w} [Finite ι] [Finite κ]
 
 end Matrix
 
-/-- Any finitely presented stalk module is a retract of the stalk of a global module sheaf.
-Source: Stacks Project, Cohomology on Sites, Tag 0DEN, finite-presentation descent,
-with extension by zero of the local realization.
-
-Proof: choose a finite presentation of M. On the sheaf of all matrices of its fixed
-finite size, form the universal matrix cokernel: its rows and columns are copies
-of the free module sheaf on this parameter sheaf, and its entries multiply a
-parameter's generator by the corresponding coordinate. Finite-product preservation
-lifts the chosen matrix to a point of the parameter sheaf. Normalized inverse image
-of free modules identifies the stalk matrix with the direct sum of all matrices
-parametrized by points of that sheaf. Inclusion of the chosen summand and projection
-onto it commute with the presentation maps and compose to the identity. Apply
-cokernels, which commute with exact module inverse image, to obtain the retract.
-Empty row or column sets cause no exception: the parameter sheaf is terminal and
-its inverse image has one point. -/
+/-- Any finitely presented stalk module is a retract of the stalk of a global module sheaf. -/
 theorem finitePresentation_retract
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {J : GrothendieckTopology C} {R : Sheaf J CommRingCat.{w}}

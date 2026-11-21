@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Homology.TensorColimitsIndependentCoefficients
 
 /-! # The native localization tensor at independent ringed-site universes
 
-Source: Stacks Project, Tags 06YS, 06YT and 0FPT.
+## References
+
+* Stacks Project, Tags 06YS, 06YT and 0FPT
 -/
 
 @[expose] public noncomputable section
@@ -25,8 +27,7 @@ open WeilConjectures Opposite
 
 namespace CategoryTheory.RingedDerivedNative
 
-/-- Symmetry descends through the native derived-monoidal localization.
-Source: Stacks Project, Tag 0FPT; uniqueness of derived natural transformations. -/
+/-- Symmetry descends through the native derived-monoidal localization. -/
 @[instance_reducible]
 def localizedSymmetric {A B : Type*} [Category A] [Category B]
     [MonoidalCategory A] [SymmetricCategory A] (L : A ⥤ B) (W : MorphismProperty A)
@@ -262,8 +263,7 @@ local instance tensorRightColimits (M : Modules.{c, v, u} J R) :
 
 variable [HasDerivedCategory.{w} (Modules.{c, v, u} J R)]
 
-/-- The usual derived monoidal structure, obtained from functorial flat covers.
-Source: Stacks Project, Tags 06YS and 0FPT. -/
+/-- The usual derived monoidal structure, obtained from functorial flat covers. -/
 @[instance_reducible]
 def monoidal : MonoidalCategory (DerivedCategory (Modules.{c, v, u} J R)) := inferInstance
 
@@ -271,15 +271,13 @@ local instance ringedDerivedTensorNativeInst2
     : MonoidalCategory (DerivedCategory (Modules.{c, v, u} J R)) :=
   monoidal.{c, v, u, w} J R
 
-/-- The localization's canonical lax comparison, from derived tensor to total tensor.
-Source: Stacks Project, Tag 06YT. -/
+/-- The localization's canonical lax comparison, from derived tensor to total tensor. -/
 @[instance_reducible]
 def lax : (DerivedCategory.Q : CochainComplex (Modules.{c, v, u} J R) ℤ ⥤ _).LaxMonoidal :=
   inferInstance
 
 omit [HasDerivedCategory.{w} (Modules.{c, v, u} J R)] in
-/-- The acyclicity definition of K-flatness implies the native two-sided predicate.
-Source: Stacks Project, Tag 06YT. -/
+/-- The acyclicity definition of K-flatness implies the native two-sided predicate. -/
 theorem kFlat (P : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (hP : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P) :
     (HomotopyCategory.quasiIso (Modules.{c, v, u} J R) (.up ℤ)).kFlat
@@ -290,8 +288,7 @@ local instance ringedDerivedTensorNativeInst3
     : (DerivedCategory.Q : CochainComplex (Modules.{c, v, u} J R) ℤ ⥤
     DerivedCategory (Modules.{c, v, u} J R)).LaxMonoidal := lax.{c, v, u, w} J R
 
-/-- The native tensor comparison is invertible when either complex is K-flat.
-Source: Stacks Project, Tag 06YT. -/
+/-- The native tensor comparison is invertible when either complex is K-flat. -/
 theorem isIso_mu (P L : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (h : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P ∨
       CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) L) :
@@ -299,8 +296,7 @@ theorem isIso_mu (P L : CochainComplex (Modules.{c, v, u} J R) ℤ)
   exact localization_isIso_mu P L
     (h.imp (kFlat.{c, v, u} J R P) (kFlat.{c, v, u} J R L))
 
-/-- The inverse native lax comparison is the one-K-flat tensor model.
-Source: Stacks Project, Tag 06YT. -/
+/-- The inverse native lax comparison is the one-K-flat tensor model. -/
 def tensorIso (P L : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (h : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P ∨
       CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) L) :
@@ -311,8 +307,7 @@ def tensorIso (P L : CochainComplex (Modules.{c, v, u} J R) ℤ)
   have := isIso_mu.{c, v, u, w} J R P L h
   (asIso (Functor.LaxMonoidal.μ DerivedCategory.Q.{w} P L)).symm
 
-/-- Naturality of the one-K-flat comparison for all chain maps between allowed pairs.
-Source: Stacks Project, Tag 06YT. -/
+/-- Naturality of the one-K-flat comparison for all chain maps between allowed pairs. -/
 theorem tensorIso_naturality
     (P L P' L' : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (h : CochainComplex.IsKFlatIndependentCoefficients (J := J) (R := R) P ∨
@@ -333,8 +328,7 @@ theorem tensorIso_naturality
   rw [← tensorHom_def]
   exact inverse_naturality DerivedCategory.Q f g
 
-/-- The simultaneous K-flat representative comparison, natural in both variables.
-Source: Stacks Project, Tag 06YT. -/
+/-- The simultaneous K-flat representative comparison, natural in both variables. -/
 def comparison :
     ((coefficientKFlatInclusion.{u, c, v} J R).prod
       (coefficientKFlatInclusion.{u, c, v} J R)) ⋙ coefficientTotalTensor.{u, c, v} J R ⋙
@@ -346,8 +340,7 @@ def comparison :
     (fun X ↦ tensorIso.{c, v, u, w} J R X.1.obj X.2.obj (Or.inl X.1.property))
     (fun f ↦ tensorIso_naturality.{c, v, u, w} J R _ _ _ _ _ _ f.1.hom f.2.hom)
 
-/-- The Koszul symmetry is an involution after localization.
-Source: Stacks Project, Tag 0FPT. -/
+/-- The Koszul symmetry is an involution after localization. -/
 @[instance_reducible]
 def symmetric : SymmetricCategory (DerivedCategory (Modules.{c, v, u} J R)) := by
   exact derivedSymmetric (A := Modules.{c, v, u} J R)

@@ -14,8 +14,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Mapping cones of termwise natural transformations
 
-Source: Stacks Project, derived.tex, mapping cones and distinguished triangles;
-blueprint finite-extension proof, first paragraph.
+## References
+
+* Stacks Project, Derived Categories, mapping cones and distinguished triangles
 -/
 
 @[expose] public noncomputable section
@@ -145,27 +146,7 @@ attribute [local instance] TermwiseConeProof.additive_limits TermwiseConeProof.a
   TermwiseConeProof.additive_biproducts TermwiseConeProof.bundled_additive
 
 /-- The two-column totalization of a termwise natural transformation is exact on
-homotopy categories.
-Source: Stacks Project, derived.tex, definitions of cones and distinguished triangles;
-blueprint lem-coef-integral-finite-extension.proof.md, first paragraph
-
-Proof: on a degree-minus-one homotopy use the diagonal homotopy on the two cone
-summands, with a minus sign on the shifted F summand. Naturality of τ cancels the
-cross terms, so this defines a functor H on the homotopy quotient. The cone shift
-comparison multiplies the shifted summand by (-1)^n; its zero and addition laws
-follow from multiplication of these signs. For a chain map f, compare H(Cone f)
-with Cone(H f): interchange the two cone directions and negate their doubly shifted
-summand. The four block entries commute with the differentials by naturality of τ.
-The comparison is the identity on the first two vertices, intertwines the cone
-inclusion, and intertwines the boundary using the signed shift just specified.
-Consequently H sends every standard cone triangle to a distinguished triangle.
-Every distinguished homotopy triangle is isomorphic to a standard cone triangle,
-so H is triangulated. No exactness, flatness, boundedness, or abelian hypothesis
-on F or G is needed; zero functors and zero natural transformations are included.
-The Lean proof realizes this construction as evaluation of the cone of the map
-F[0] → G[0] in the category of additive functors. The existing totalized-bifunctor
-triangulation theorem supplies its exactness. The countable-coproduct hypothesis
-provides all totalizations required by that theorem's current interface. -/
+homotopy categories. -/
 theorem termwiseCone_homotopy_exact [HasZeroObject A] [HasBinaryBiproducts A]
     [HasZeroObject B] [HasCountableCoproducts B] (F G : A ⥤ B) [F.Additive] [G.Additive]
     (τ : F ⟶ G) :

@@ -19,8 +19,9 @@ import WeilConjectures.Algebra.Homology.MinimalComplex
 
 /-! # Cancelling a residue-exact degree of a finite free complex
 
-Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`,
-the direct matrix proof.
+## References
+
+* Stacks Project, More on Algebra, Tag 068U
 -/
 
 @[expose] public section
@@ -165,25 +166,7 @@ private theorem cancel_supported_idempotent
     exact hK.of_iso (e j)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- A residue-exact degree can be removed after one principal localization.
-
-Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`,
-the direct matrix proof.
-
-Proof: Residue homology vanishing says that the two adjacent maps are exact.
-Apply exists_localized_exact_pair_contraction to obtain a principal localization
-and maps s,t with AsA=A, tBt=t, and sA+Bt=1. Form q=dh+hd, where h is s in
-degree i and t in degree i+1, and zero elsewhere. Its only nonzero components
-are As, the identity, and tB. The displayed equations make q idempotent, and
-its defining formula makes it nullhomotopic. The proved kerSubcomplex API then
-gives a homotopy equivalence with ker q. Its middle term is zero, its neighboring
-terms are the two free kernels supplied by the pair lemma, and finiteness follows
-from their split projections. Replace the kernel terms outside the three degrees
-by the original terms through their canonical isomorphisms; conjugate the
-kernel differential by these degreewise isomorphisms. The resulting complex has
-literal equality of the untouched terms and heterogeneous equality of their
-differentials. Kernel inclusions and split projections give the two retractions.
-A submodule of a zero term is zero, proving the final support clause. -/
+/-- A residue-exact degree can be removed after one principal localization. -/
 theorem exists_localized_homotopyEquiv_zero_degree
     {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime] (i : ℤ)
     (P : CochainComplex (ModuleCat.{max u v} R) ℤ)

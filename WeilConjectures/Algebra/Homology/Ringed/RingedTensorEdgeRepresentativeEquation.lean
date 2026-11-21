@@ -9,7 +9,9 @@ public import WeilConjectures.Algebra.Homology.Ringed.RingedTensorSquarePresenta
 
 /-! # The canonical edge equation on flat K-flat representatives
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4.
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4.
 -/
 
 @[expose] public section
@@ -31,16 +33,7 @@ private abbrev Good {A : RingedTensorCorner.{u, w}} (P : Complexes A) : Prop :=
   P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat
 
 -- Elaborate the unique representative characterization with both models fixed.
-/-- The canonical tensor comparison satisfies its defining representative equation.
-
-Proof: the canonical derived tensor pullback theorem gives a unique natural
-comparison characterized by this equation on flat K-flat representatives. Its
-chosen comparison is the definition of `e.tensorComparison a b`. Apply its
-characterization to P and Q. The preservation proofs supplied by that theorem
-and the specified target proofs hp' and hq' are equal by proof irrelevance, so
-the resulting equation is exactly the asserted one.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, representative construction
-of pullback and tensor product; the canonical comparison's defining property. -/
+/-- The canonical tensor comparison satisfies its defining representative equation. -/
 theorem ringedTensorEdgeRepresentativeEquation {A B : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge A B) (a : RingedTensorModel A) (b : RingedTensorModel B)
     (P Q : CochainComplex (SheafOfModules.{u} ((sheafCompose A.topology (forget₂ CommRingCat.{u}

@@ -13,7 +13,17 @@ import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.SignedLinePu
 import WeilConjectures.Algebra.Homology.SignedLineDerivedBaseChange.SignedLineDerivedAction
 import Mathlib.CategoryTheory.Adjunction.Additive
 
-/-! # Signed line comparisons on unbounded derived categories -/
+/-! # Signed line comparisons on unbounded derived categories
+
+## References
+
+* Stacks Project, Tag 015F
+* Stacks Project, Tag 03EL
+* Stacks Project, Tag 06YQ
+* Stacks Project, Tag 07A4
+* Stacks Project, Tag 0FNY
+* Stacks Project, Tag 0GMX
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -44,13 +54,7 @@ variable
   (t : (pull a).obj P ≅ Q)
 
 /-- The unique normalized signed comparisons, their naturality, and their canonical
-unbounded derived tensor action.
-Source: Stacks 03EL, 0GMX, 0FNY, 06YQ, 07A4 and 015F; blueprint Powers and duals
-Proof: exactness and the adjunction give the exact module pullback. The identity
-scalar-extension square gives a normalized signed family. Tensor recursion and
-evaluation prove it unique. Apply ordinary naturality and the derived-action
-construction to this same family, then use normalized uniqueness once more for
-the final existential uniqueness. -/
+unbounded derived tensor action. -/
 theorem signed_line_derived_base_change
     [HasFiniteLimits C] [HasFiniteLimits D] [PreservesFiniteLimits U]
     (_hcover : CoverPreserving J K U)

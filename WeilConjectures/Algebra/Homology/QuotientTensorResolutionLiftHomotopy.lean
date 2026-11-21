@@ -14,7 +14,10 @@ import Mathlib.Algebra.Category.ModuleCat.Abelian
 
 /-! # Homotopy independence of quotient tensor resolution lifts
 
-Source: Stacks Project, Tag 00LS(2), projective lifting proof. -/
+## References
+
+* Stacks Project, Tag 00LS
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -103,24 +106,7 @@ private theorem quotientTensorLift_tmul
 
 /-- Two augmented lifts of the same quotient map induce homotopic quotient tensor maps,
 even when restriction of scalars does not preserve projective objects.
-Source: Stacks Project, Tag 00LS(2); its proof uses only the projective lifting property.
-
-Proof: Restriction of scalars is exact, so the augmented complex Res(R) is
-an exact resolution of Res(C/J); its terms need not be projective over A.
-Subtract a' from a. The common augmentation equation says the difference in
-degree zero lands in the augmentation kernel. Lift it through the differential
-from Res(R_1) using projectivity of P_0. Inductively, subtract the already
-constructed homotopy term from the difference in degree j. The chain-map
-identity says the result lands in the kernel of the next differential.
-Exactness of Res(R) and projectivity of P_j lift it to Res(R_{j+1}).
-This constructs an A-linear homotopy H between a and a'. For each component
-H_j define the A-linear tensor map x tensor y to H_j(x) tensor psi(y).
-The quotient compatibility equation makes this balanced over A, since H_j is
-A-linear into restriction of scalars. Extend by the tensor universal property.
-The differential and addition identities on pure tensors show that these maps
-form a homotopy between k and k', using their given pure tensor equations.
-Pure tensors generate, so the identities hold on all tensors. This argument
-also covers zero quotient rings and degree zero without additional assumptions. -/
+-/
 theorem quotient_tensor_resolution_lift_homotopy
     {A C : Type u} [CommRing A] [CommRing C]
     (I : Ideal A) (J : Ideal C) (φ : A →+* C)

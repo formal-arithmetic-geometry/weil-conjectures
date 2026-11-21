@@ -15,7 +15,10 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-! # Coproducts of universal base-derived tensor cohomology models
 
-Source: Stacks Project, Tags 06Y6, 07D9 and 0DJA(1). -/
+## References
+
+* Stacks Project, Tags 06Y6, 07D9 and 0DJA(1).
+-/
 
 @[expose] public section
 
@@ -25,8 +28,7 @@ open scoped TensorProduct
 set_option autoImplicit false
 namespace ModuleCat
 
-/-- Derived scalar extension preserves coproducts by its derived adjunction.
-Source: Stacks Project, Tag 06Y6, and the source library's derived adjunction. -/
+/-- Derived scalar extension preserves coproducts by its derived adjunction. -/
 private theorem derivedExtension_preservesCoproducts
     (R B : Type u) [CommRing R] [CommRing B] (f : R →+* B)
     [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} B)]
@@ -62,23 +64,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
   [HasDerivedCategory (ModuleCat.{u} R)] [HasDerivedCategory (ModuleCat.{u} B)]
 
 /-- Canonical model maps out of a complex coproduct give a cohomology coproduct
-before any further extension of scalars.
-Source: Stacks Project, Tags 06Y6, 07D9 and 0DJA(1).
-
-Proof: restriction preserves the given complex coproduct. The derived direct-sum
-lemma shows that Q preserves this coproduct, and quotientCompQhIso transports
-it to the quotient followed by Qh. Scalar extension preserves quasi-isomorphisms
-between K-flat complexes, by the existing mixed-tensor calculation with B in
-degree zero. The source library's derived adjunction makes its standard total
-left derived functor a left adjoint, hence coproduct-preserving. Uniqueness of
-universal left derived functors transfers preservation to mS.derived. Apply this
-functor to the restricted derived coproduct, then apply the derived homology
-coproduct theorem. Each counit-compatible δ_j is the canonical natural
-isomorphism by leftDerived_ext. Its naturality at s_j, followed by homology
-and the equations hg, identifies the legs after transport through cohomologyIso.
-This makes the B-module cofan colimiting. Restriction from A tensor_R B to B
-preserves colimits and reflects isomorphisms, so it reflects this colimit.
-No nonempty-index assumption, boundedness, or flatness of B is used. -/
+before any further extension of scalars. -/
 theorem baseDerivedTensorCohomology_canonical_cofan
     {I : Type u} (M : I → CochainComplex (ModuleCat.{u} A) ℤ)
     (S : CochainComplex (ModuleCat.{u} A) ℤ) (s : ∀ j, M j ⟶ S)

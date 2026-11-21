@@ -49,10 +49,12 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 
 /-! # Coherence of sheaf scalar extension
 
-Source: Stacks Project, Modules on Sites, Section 03EK, Tags 03CY and 0GMW.
-
 All section formulas explicitly apply the module sheafification unit. Pure tensors
 in a monoidal tensor object are transported by `tensorObjIsoSheafification`.
+
+## References
+
+* Stacks Project, Modules on Sites, Section 03EK, Tags 03CY and 0GMW
 -/
 
 @[expose] public section
@@ -77,8 +79,7 @@ attribute [local irreducible] tensorObjIsoSheafification
   PresheafOfModules.sheafificationAdjunction
 attribute [local irreducible] Localization.Monoidal.tensorBifunctor
 
-/-- Transparent notation for the existing modules on the ringed site.
-Source: Stacks Project, Modules on Sites, Tag 03DD. -/
+/-- Transparent notation for the existing modules on the ringed site. -/
 abbrev ScalarExtensionConstraintModules
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{w} C]
@@ -87,10 +88,9 @@ abbrev ScalarExtensionConstraintModules
   ringedSiteModules.{w, w, vC, uC}
     ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)
 
-/-- The image of a local pure tensor in the existing localization tensor.
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03CY.
-This helper only spells out the module-sheafification unit and its canonical
-comparison with the tensor object; it introduces no new tensor construction. -/
+/-- The image of a local pure tensor in the existing localization tensor. This helper only
+spells out the module-sheafification unit and its canonical comparison with the tensor
+object; it introduces no new tensor construction. -/
 noncomputable def scalarExtensionConstraintPureTensor
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{w} C]
@@ -104,10 +104,9 @@ noncomputable def scalarExtensionConstraintPureTensor
           R).obj)).unit.app
         (M.val ⊗ N.val)).app U (x ⊗ₜ[R.obj.obj U] y))
 
-/-- The image of `s tensor h` in the existing scalar extension sheaf.
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03CY.
-This only names the module sheafification unit of `changeOfRingsPresheaf`;
-it does not choose or reconstruct a module sheaf. -/
+/-- The image of `s tensor h` in the existing scalar extension sheaf. This only names the
+module sheafification unit of `changeOfRingsPresheaf`; it does not choose or reconstruct a
+module sheaf. -/
 noncomputable def scalarExtensionConstraintTmul
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{w} C]
@@ -126,8 +125,7 @@ attribute [local irreducible] changeOfRings changeOfRingsHom
   scalarExtensionConstraintTmul scalarExtensionConstraintPureTensor
 
 /-- The tensor and unit isomorphisms, with their prescribed section formulas and coherences.
-This is a package of the conclusions of the theorem, with no chosen comparison data.
-Source: Stacks Project, Modules on Sites, Section 03EK, Tags 03CY and 0GMW. -/
+This is a package of the conclusions of the theorem, with no chosen comparison data. -/
 structure ScalarExtensionConstraintData
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{w} C]
@@ -879,42 +877,7 @@ attribute [local semireducible] changeOfRings changeOfRingsHom
 
 /-- The insertion-normalized scalar extension constraints are unique natural
 isomorphisms, with the scalar-multiplication inverse formula, and satisfy the
-three oplax and three lax coherence equations.
-
-Source: Stacks Project, Modules on Sites, Section 03EK, Tags 03CY and 0GMW;
-explicit scalar-extension argument extracted in the DAG node.
-
-Proof:
-1. The sheafification adjunction and tensorObjIsoSheafification detect binary
-maps on canonical local pure tensors. The induced lax monoidal forgetful
-functor gives their naturality, associator and unitor formulas. Transport the
-proved trilinear equality criterion along the tensor presentation to detect
-maps on canonical local pure triples. No global generation of sheaf sections
-is assumed.
-2. Identity section maps identify the two scalar-extension presheaves, hence
-identify their sheafifications. The proved siteTensorRightIso and the canonical
-tensor presentation identify the explicit site tensor with the localization tensor.
-Both comparisons preserve the sheafification images of pure tensors.
-3. Transport scalarTensorBinaryIso along these comparisons. Its proved forward
-formula sends s tensor (x tensor y) to (s tensor x) tensor (1 tensor y), and
-its inverse multiplies the two scalar factors. The generator test proves
-uniqueness and naturality of the transported comparison.
-4. Transport scalarExtensionUnitIso by the scalar-extension identification.
-Its generator formula is s tensor a to s alpha(a). The inverse formula follows
-from the isomorphism identities by substituting a=1.
-5. On pure triples both oplax associativity composites have value
-q(x) tensor (q(y) tensor q(z)). The actual associator formula and the
-trilinear equality test prove the equation.
-6. The two unit diagrams reduce to alpha(a) q(x) = q(a x), by the actual
-unitor formulas and A-linearity of insertion.
-7. Cancel the invertible forward constraints in these three equations to
-obtain the three lax equations. No flatness or nonzero-ring hypothesis enters.
-
-Dependencies: def-weil-presheaf-modules-sheafification,
-def-weil-pbc-module-tensor-product, def-pc-sheaf-restrict-scalars,
-def-pur-sheaf-tensor-product, lem-sp-scalar-extension-binary-coherence,
-lem-weil-pbc-independent-sheaf-tensor-colimits,
-lem-pd-sheaf-trilinear-universal. -/
+three oplax and three lax coherence equations. -/
 theorem scalarExtension_constraint_coherence
     {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
     [EssentiallySmall.{w} C]

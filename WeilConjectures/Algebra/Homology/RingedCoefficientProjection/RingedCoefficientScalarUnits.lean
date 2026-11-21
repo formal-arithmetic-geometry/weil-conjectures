@@ -10,7 +10,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory
 
 /-! # Multiplication units for derived coefficient extension
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E and 07A6
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E and 07A6
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.HomotopyCategory.SingleFunctors
 /-!
 # The odd filtration quotient with a specified free endpoint
 
-Source: Stacks Project, Tag 09KP, proof of lemma-resolve.
+## References
+
+* Stacks Project, Tag 09KP.
 -/
 
 @[expose] public section
@@ -27,15 +29,7 @@ variable (S : ℕ → ShortComplex (CochainComplex (ModuleCat.{u} A) ℤ))
 variable (e : ∀ j : ℕ, (S j).X₂ ≅ K.X (-(j : ℤ)))
 variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
-/-- Core odd filtration quotient calculation, with a specified endpoint isomorphism.
-Source: Stacks Project, Tag 09KP, proof, alternating two-step column filtration.
-Proof. The canonical full-column map to the odd quotient kills the lower
-piece and commutes with the shifted differential. Descend it through the shifted
-short exact sequence to a map from the shifted third endpoint. This map is
-bijective in every degree, so is an isomorphism of complexes. Invert it, apply
-the shift functor to the specified endpoint isomorphism, distribute the shift
-across the coproduct, and apply the single-functor shift isomorphism to each
-summand. A summand in degree d becomes a summand in degree d-j. -/
+/-- Core odd filtration quotient calculation, with a specified endpoint isomorphism. -/
 theorem cokernel_odd_core
     (h_exact : ∀ j, (S j).ShortExact)
     (j : ℕ) (I : Type u) (degree : I → ℤ)

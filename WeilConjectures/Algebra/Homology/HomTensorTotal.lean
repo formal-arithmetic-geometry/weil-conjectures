@@ -14,7 +14,9 @@ import WeilConjectures.Algebra.Homology.HomTensorNaturality
 /-!
 # Hom complexes and the total tensor complex
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90)
+## References
+
+* [Stacks Project, Tag 0A90](https://stacks.math.columbia.edu/tag/0A90)
 -/
 
 @[expose] public section
@@ -37,25 +39,7 @@ local notation "Mod" => SheafOfModules.{max u v}
 -- `synthInstance.maxSize` of 128 (as for `CochainComplex.IsKFlatTensor`).
 set_option synthInstance.maxSize 256 in
 /-- The Hom-total-tensor isomorphism, natural contravariantly in `K` and `L` and
-covariantly in `M`. Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1
-(Tag 0A90).
-
-Proof:
-1. Expand the degree-`n` terms using `def-pur-hom-complex`. The left side is
-   the product, over `p,q`, of internal Homs from `K^p ⊗ L^q` to `M^(p+q+n)`.
-   On the right, maps out of the direct sum in `def-pc-tensor-complex-sheaves`
-   give the same product. Use `lem-pc-sheaf-modules-tensor-closed` on every
-   localized site to identify these internal Hom sheaves.
-2. Curry each component, sending `x ⊗ y` to `f(x)(y)`. Restriction to the
-   summands followed by uncurrying is the inverse, by the tensor-Hom adjunction.
-3. Check the differential on the `(p,q)` summand. The outer Hom differential
-   contributes `-(-1)^n f d_K`, the inner one `-(-1)^(p+n) f d_L`.
-   These agree with precomposition with `d_K ⊗ 1 + (-1)^p 1 ⊗ d_L` on the
-   total tensor, followed by the degree-`n` Hom differential. Thus the
-   degreewise inverse maps are chain maps.
-4. Componentwise pre- and post-composition commute with currying by naturality
-   of `lem-pc-sheaf-modules-tensor-closed`. This gives the displayed equation
-   for simultaneous maps in all three complexes. -/
+covariantly in `M`. -/
 theorem homComplex_tensorTotal_iso :
     letI := SheafOfModules.monoidalCategory R
     ∃ e : ∀ (K L M : CochainComplex Mod ℤ),

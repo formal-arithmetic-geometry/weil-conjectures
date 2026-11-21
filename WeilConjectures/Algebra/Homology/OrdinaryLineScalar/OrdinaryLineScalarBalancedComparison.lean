@@ -125,7 +125,9 @@ import WeilConjectures.Algebra.Homology.Scalar.ScalarExtensionBinaryCoherenceSup
 
 /-! # Balanced ordinary scalar and line tensor
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4, 0G7E and 06YY.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4, 0G7E, 06YY, 06YU and 03EK
 -/
 
 @[expose] public noncomputable section
@@ -366,16 +368,7 @@ private theorem balancedComponent_natural (α : R ⟶ S)
   rw [balancedComponent_hom α p c A D b M' U 1 (f.val.app U x) y,
     balancedComponent_hom α p c A D b M U 1 x y, hp, hn]
 
-/-- The balanced ordinary comparison, before passage to complexes or localization.
-Source: Stacks 07A4, proof of lemma-pullback-tensor-product; Modules on Sites 03EK.
-Proof: scalar extension is strong monoidal by its sheafified balanced tensor maps.
-Compose its binary tensor comparison with B_m on the second factor. The forward
-map sends s tensor (x tensor y) to (s tensor x) tensor B_m(1 tensor y).
-The inverse reassociates after B_m inverse and multiplies the two scalars.
-Balancing moves alpha(r) between the two factors, so these formulas respect every
-relation. Their composites fix pure tensors. The sheafification and tensor universal
-properties prove the inverse identities and naturality. These operations are on
-ordinary module sheaves; no derived comparison or evaluation square is asserted. -/
+/-- The balanced ordinary comparison, before passage to complexes or localization. -/
 theorem ordinary_scalar_line_balanced
     (α : R ⟶ S) (p : SuccessiveDerivedQuotient.Presentation.{t + 1, t, max a (t + 1), w}
       (J := Scheme.ProEt.topology X) α)

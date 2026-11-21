@@ -86,13 +86,14 @@ public import WeilConjectures.Algebra.Homology.KFlatTotalTensorModel
 /-!
 # Flat-term K-flat total tensor models
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A2 and 07A4;
-Modules on Sites, Tag 0G6Q.
-
 The helpers below only specialize existing category and tensor constructions.
 The derived tensor in the conclusion is exactly the localized bifunctor supplied by
 `site_derived_tensor_descent_independentCoefficients`, characterized by its natural
 representative comparison.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A2 and 07A4; Modules on Sites, Tag 0G6Q
 -/
 
 -- After pruning, this module only keeps private declarations.

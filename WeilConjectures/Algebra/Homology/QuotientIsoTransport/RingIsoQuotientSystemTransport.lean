@@ -107,13 +107,20 @@ import WeilConjectures.Algebra.Homology.System.SystemDerivedEvaluation
 
 /-! # Coherent transport of strict quotient systems
 
-Source: lemma-section-normal-bundle--1, finite-clopen expansion, steps 2--3 and 5;
-Stacks 03D7, 03EK, 015F, 06YY and 07A6
-
 The structures below spell out the normalization of the equivalence, its scalar
 comparisons and its whole-system derived reduction. They are interfaces for this
 single theorem. All module categories, restrictions, tensors, adjunctions and
 localizations are the recorded library constructions.
+
+## References
+
+* Stacks Project, Tag 015F
+* Stacks Project, Tag 03CZ
+* Stacks Project, Tag 03D7
+* Stacks Project, Tag 03DA
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A6
 -/
 
 @[expose] public noncomputable section
@@ -150,39 +157,33 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
-/-- Use the specified sheafification adjunction directly.
-Source: Stacks 03DA. -/
+/-- Use the specified sheafification adjunction directly. -/
 theorem moduleWeakSheafify : HasWeakSheafify J AddCommGrpCat.{w} :=
   HasSheafify.isRightAdjoint
 
 attribute [local instance 20000] moduleWeakSheafify
 
-/-- Module sheaves in the coefficient universe, using the recorded category.
-Source: Stacks 03DA. -/
+/-- Module sheaves in the coefficient universe, using the recorded category. -/
 abbrev Modules (R : Sheaf J CommRingCat.{w}) :=
   ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R)
 
-/-- Scalar transport is literally restriction along the inverse ring isomorphism.
-Source: Stacks 03CZ. -/
+/-- Scalar transport is literally restriction along the inverse ring isomorphism. -/
 def transport {R S : Sheaf J CommRingCat.{w}} (a : R ≅ S) : Modules R ⥤ Modules S :=
   restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map a.inv)
 
-/-- Additivity for inverse scalar restriction.
-Source: Stacks 03D7. -/
+/-- Additivity for inverse scalar restriction. -/
 instance transportAdditive {R S : Sheaf J CommRingCat.{w}} (a : R ≅ S) :
     (transport a).Additive := by
   unfold transport
   infer_instance
 
-/-- Preservation of finite limits for inverse scalar restriction.
-Source: Stacks 03D7. -/
+/-- Preservation of finite limits for inverse scalar restriction. -/
 instance transportLimits {R S : Sheaf J CommRingCat.{w}} (a : R ≅ S) :
     PreservesFiniteLimits (transport a) := by
   unfold transport
   infer_instance
 
-/-- Preservation of finite colimits for inverse scalar restriction.
-Source: Stacks 03D7. -/
+/-- Preservation of finite colimits for inverse scalar restriction. -/
 instance transportColimits {R S : Sheaf J CommRingCat.{w}} (a : R ≅ S) :
     PreservesFiniteColimits (transport a) := by
   unfold transport
@@ -190,8 +191,7 @@ instance transportColimits {R S : Sheaf J CommRingCat.{w}} (a : R ≅ S) :
 
 attribute [local instance 21000] transportAdditive transportLimits transportColimits
 
-/-- The canonical derived comparison for an exact commuting square.
-Source: Stacks 015F. -/
+/-- The canonical derived comparison for an exact commuting square. -/
 def derivedSquare {R R' S S' : Sheaf J CommRingCat.{w}}
     (a : R ⟶ R') (b : S ⟶ S') (e : R ≅ S) (e' : R' ≅ S')
     (rho : restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a) ⋙
@@ -205,8 +205,7 @@ def derivedSquare {R R' S S' : Sheaf J CommRingCat.{w}}
   Functor.mapDerivedCategoryCompIso _ _ ≪≫
     Functor.mapDerivedCategoryNatIso rho ≪≫ (Functor.mapDerivedCategoryCompIso _ _).symm
 
-/-- Abstract comparison data with its specified normalization predicate.
-Source: Stacks 03D7, 015F and 06YY -/
+/-- Abstract comparison data with its specified normalization predicate. -/
 structure ScalarComparisonData
     (X0 : Sort*)
     (X1 : Sort*)
@@ -219,7 +218,7 @@ structure ScalarComparisonData
 
 /-- Normalized scalar comparison for one commuting coefficient square. The Hom
 identities identify the entire adjunctions and therefore both their units and counits.
-Source: Stacks 03D7, 03EK, 06YY, 07A6 -/
+-/
 def ScalarSquareConditions {R R' S S' : Sheaf J CommRingCat.{w}}
     (a : R ⟶ R') (b : S ⟶ S') (e : R ≅ S) (e' : R' ≅ S')
     (A : SystemScalarModel a) (B : SystemScalarModel b)
@@ -253,7 +252,7 @@ def ScalarSquareConditions {R R' S S' : Sheaf J CommRingCat.{w}}
 
 /-- Normalized scalar comparison for one commuting coefficient square. The Hom
 identities identify the entire adjunctions and therefore both their units and counits.
-Source: Stacks 03D7, 03EK, 06YY, 07A6 -/
+-/
 abbrev ScalarSquare {R R' S S' : Sheaf J CommRingCat.{w}}
     (a : R ⟶ R') (b : S ⟶ S') (e : R ≅ S) (e' : R' ≅ S')
     (A : SystemScalarModel a) (B : SystemScalarModel b) :=
@@ -267,8 +266,7 @@ abbrev ScalarSquare {R R' S S' : Sheaf J CommRingCat.{w}}
     (fun restriction ordinary derived ↦
       ScalarSquareConditions a b e e' A B  restriction ordinary derived)
 
-/-- Abstract comparison data with its specified normalization predicate.
-Source: Stacks 03D7, 015F and 06YY -/
+/-- Abstract comparison data with its specified normalization predicate. -/
 structure ReductionComparisonData
     (X0 : Sort*)
     (X1 : ∀ (ordinary : X0), Sort*)
@@ -289,7 +287,7 @@ structure ReductionComparisonData
 
 /-- The actual strict reduction, with its sheafified pure tensors, all horizontal
 maps and the universal derived reduction into the ordinary derived system category.
-Source: Stacks 03EK, 06YY; sequence-site refinement of lemma-section-normal-bundle--1 -/
+-/
 def ReductionConditions (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
     (A : SystemScalarAssignment (J := J))
     (ordinary : Modules c.pt ⥤ StrictRingSystem B)
@@ -326,7 +324,7 @@ def ReductionConditions (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
 
 /-- The actual strict reduction, with its sheafified pure tensors, all horizontal
 maps and the universal derived reduction into the ordinary derived system category.
-Source: Stacks 03EK, 06YY; sequence-site refinement of lemma-section-normal-bundle--1 -/
+-/
 abbrev Reduction (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
     (A : SystemScalarAssignment (J := J)) :=
   ReductionComparisonData
@@ -346,8 +344,7 @@ abbrev Reduction (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
       ReductionConditions B c A (additive := additive) ordinary evaluation derived counit
         derivedEvaluation)
 
-/-- The reduction's recorded additive structure.
-Source: Stacks 03EK. -/
+/-- The reduction's recorded additive structure. -/
 instance Reduction.additive (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (c : Cone B)
     (A : SystemScalarAssignment (J := J)) (D : Reduction B c A) : D.ordinary.Additive :=
   ReductionComparisonData.additive D

@@ -12,7 +12,9 @@ import WeilConjectures.Algebra.Homology.TotalFreeFiltrationCokernelOddAux
 /-!
 # Splittings and free quotients of the alternating column filtration
 
-Source: Stacks Project, Tag 09KP, filtration construction.
+## References
+
+* Stacks Project, Tag 09KP, filtration construction.
 -/
 
 @[expose] public section
@@ -29,20 +31,7 @@ variable (S : ℕ → ShortComplex (CochainComplex (ModuleCat.{u} A) ℤ))
 variable (e : ∀ j : ℕ, (S j).X₂ ≅ K.X (-(j : ℤ)))
 variable (h_positive : ∀ p : ℤ, 0 < p → IsZero (K.X p))
 
-/-- The odd successive quotient has the prescribed endpoint basis in shifted degrees.
-Source: Stacks Project, Tag 09KP, successive quotients of the column filtration.
-
-Proof. In total degree k, remove the full columns with index less than j.
-The remaining inclusion is the image of the first arrow into the full column -j.
-Short exactness identifies its cokernel with (S j).X₃ in vertical degree k+j.
-The horizontal differential goes to a preceding full column, so vanishes in
-the quotient. The vertical differential vanishes on the endpoint, since its
-given coproduct decomposition has zero differential. Thus the degreewise
-identifications commute with differentials and define a complex isomorphism.
-Compose the endpoint decomposition with reindexing: a summand supported in
-vertical degree d is supported in total degree d-j. The induced quotient map
-has the cokernel universal property degreewise, hence in cochain complexes.
-The argument also covers j=0, empty bases, and the zero ring. -/
+/-- The odd successive quotient has the prescribed endpoint basis in shifted degrees. -/
 theorem cokernel_odd
     (h_exact : ∀ j, (S j).ShortExact)
     (j : ℕ) (I : Type u) (degree : I → ℤ)

@@ -12,7 +12,11 @@ import WeilConjectures.CategoryTheory.Normalized.NormalizedAdjunctionComposition
 
 /-! # Composition of derived subsequence extensions
 
-Source: Zheng, Construction 4.1; Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 0FND
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -32,7 +36,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r s : ℕ ↪o ℕ)
 
 /-- Composite extension is the canonical identification of the two left adjoints
-to composite restriction. Source: Zheng 4.1; Stacks 0FND -/
+to composite restriction. -/
 def systemSelectedDerivedComposition :
     (systemSelectedDerivedExtension (selectedSystemRings B r) s S T).derived ⋙
       (systemSelectedDerivedExtension B r S T).derived ≅
@@ -43,10 +47,7 @@ def systemSelectedDerivedComposition :
           (systemSelectedDerivedExtension B (s.trans r) S T).adjunction
 
 /-- Composition of extensions preserves every actual transpose, including its
-restriction compositor. Source: Stacks 0FND
-Proof: the inverse adjoint-uniqueness comparison is the forward comparison for the
-reversed adjunction pair. Its Hom normalization identifies the transpose with the
-composite adjunction. Expand the latter and its right-functor transport. -/
+restriction compositor. -/
 theorem systemSelectedDerivedComposition_mate
     (P : DerivedCategory (StrictRingSystem (selectedSystemRings B (s.trans r))))
     (M : DerivedCategory (StrictRingSystem B))

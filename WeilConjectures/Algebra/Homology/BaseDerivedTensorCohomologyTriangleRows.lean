@@ -15,7 +15,10 @@ import WeilConjectures.Algebra.Homology.ScalarCoefficientTriangleBoundary
 
 /-! # Universal base-change counits on distinguished triangles
 
-Source: Stacks Project, Tag 06Y6, exactness and independence of derived change of rings. -/
+## References
+
+* Stacks Project, Tag 06Y6, exactness and independence of derived change of rings.
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -141,23 +144,7 @@ private theorem localized_arrow_square
     congrArg (fun k ↦ HomologicalComplex.homologyMap M.ordinaryToLocalized i ≫ k) hn
 
 /-- Universal base-change models give an exact localized row and a morphism to the
-ordinary extended triangle's homology row. No tensor coefficient complex is involved.
-
-Source: Stacks Project, Tag 06Y6 (exact derived change of rings and universal counit).
-Proof: restrict T to R and apply the exact derived extension functor to B. Identify
-its three cohomology objects with the prescribed models by uniqueness of left derived
-functors, with the counit commuting under these identifications. Naturality at
-multiplication by each a in A identifies the A-actions. B-linearity and tensor
-induction therefore make all three sequence maps A tensor_R B-linear. Restriction
-of scalars is exact and reflects exactness, so the resulting five-term row is exact.
-Extend this row to C; flatness preserves exactness. The universal counit commutes
-with shifts and sends the third triangle map to the ordinary third triangle map.
-Its naturality gives the first, second and fourth squares; shift compatibility and
-naturality of the homology shift isomorphism give the boundary square. Transpose
-these squares under extension/restriction adjunction; comparison_eq and localized_eq
-identify their vertical arrows with the specified localizedComparison maps. This
-construction uses only a distinguished localized triangle, not termwise exactness
-of its scalar extension. Zero rings and unbounded or zero complexes are included. -/
+ordinary extended triangle's homology row. No tensor coefficient complex is involved. -/
 theorem exists_baseDerivedTensorCohomologyModel_triangle_rows
     (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) C]

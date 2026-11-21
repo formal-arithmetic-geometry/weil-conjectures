@@ -25,9 +25,14 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
-/-! # RingedToposAdaptedFlatResolution
+/-! # Adapted flat resolutions for pullback along a morphism of ringed topoi
 
-Source: Stacks Project, Tag 0G7E (lemma-pullback-K-flat), adapted resolution step. -/
+Every complex admits a K-flat resolution with flat terms whose termwise pullback is again K-flat.
+
+## References
+
+* Stacks Project, Tag 0G7E, with Tags 077J, 06YQ and 06YR
+-/
 
 @[expose] public section
 universe uC vC uD vD w
@@ -300,20 +305,7 @@ private theorem independent_of_categorical_adapted (K : CochainComplex A ℤ)
 
 end ResolutionHelpers
 
-/-- A flat K-flat resolution may be chosen with K-flat termwise pullback.
-Source: Stacks Project, Cohomology on Sites, Tag 0G7E, first paragraph of the proof
-of lemma-pullback-K-flat, using Tags 077J, 06YQ and 06YR.
-
-Proof: choose a strictly compatible tower E_n of bounded-above flat resolutions of
-P.truncLE n. Each augmentation is a quasi-isomorphism. Take its degreewise filtered
-colimit L, with the induced augmentation q to P. Exact filtered colimits commute
-with homology, while the good truncations stabilize in each fixed degree. Hence q
-is a quasi-isomorphism. Flat sheaves and K-flat complexes are closed under filtered
-colimits; bounded-above flat complexes are K-flat. Thus L has flat terms and is
-K-flat. The filtered-colimit preservation theorem for the specified module pullback makes
-uStar preserve the displayed degreewise colimit. Each uStar(E_n) is still bounded above
-and has flat terms by flat pullback, hence is K-flat. Their filtered colimit uStar(L)
-is K-flat. This construction makes no K-flatness or flat-term assumption on P. -/
+/-- A flat K-flat resolution may be chosen with K-flat termwise pullback. -/
 theorem exists_pullback_adapted_flat_resolution
     {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
     [EssentiallySmall.{w} C] [EssentiallySmall.{w} D]

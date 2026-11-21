@@ -14,7 +14,15 @@ import WeilConjectures.CategoryTheory.Triangulated.ProZeroMiddle
 /-!
 # Uniformly bounded derived towers with pro-zero cohomology
 
-Source: Stacks Project, Derived Categories, Tag 0G3B, specialized to zero-valued systems
+## Implementation details
+
+The index `n : ℕ` of a tower represents the paper's index `n + 1`; the functor laws encode
+identity and composition of all transition maps.
+
+## References
+
+* Stacks Project, Derived Categories, Tag 0G3B, specialized to zero-valued systems
+* Stacks Project, Derived Categories, Tag 0G3A (two-out-of-three for zero-valued systems)
 -/
 
 @[expose] public section
@@ -88,22 +96,7 @@ private lemma homology_truncGE_map_zero
   rw [comp_zero, ← Functor.map_comp, ← (TStructure.t.truncGEπ (a + 1)).naturality]
   simp only [Functor.map_comp, Functor.id_map, hf, zero_comp]
 
-/-- A uniformly bounded tower whose cohomology towers are pro-zero is itself pro-zero.
-The index `n : ℕ` represents the paper's index `n + 1`; the functor laws encode identity
-and composition of all transition maps.
-
-Source: Stacks Project, Derived Categories, Tag 0G3B
-
-Proof plan: for a fixed target index choose a later index dominating the finitely many
-indices killing the cohomology maps in degrees `[a, b]`; outside this interval cohomology
-is zero. Apply the functorial canonical truncation triangle at `a`
-(lem-sf-derived-truncation-triangle). Its lower term is `H^a(X)[-a]`, since lower
-cohomology vanishes, and its transitions are the shifted cohomology maps. The upper
-terms have cohomology in `[a + 1, b]`. Induct on `b - a`; for `a = b` use the
-single-degree identification (lem-sf-derived-concentrated-single). In the induction
-step both outer towers are pro-zero, so the zero-valued two-out-of-three lemma
-(lem-weil-pbc-essentially-constant-zero-triangle, Tag 0G3A) makes the middle tower
-pro-zero. -/
+/-- A uniformly bounded tower whose cohomology towers are pro-zero is itself pro-zero. -/
 theorem tower_proZero_of_bounded_homology_proZero
     {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A]
     (X : ℕᵒᵖ ⥤ DerivedCategory A) (a b : ℤ) (hab : a ≤ b)

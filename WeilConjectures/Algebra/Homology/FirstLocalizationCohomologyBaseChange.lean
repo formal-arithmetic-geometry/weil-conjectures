@@ -15,7 +15,10 @@ import Mathlib.RingTheory.Localization.BaseChange
 
 /-! # Cohomology under localization of the first coefficient ring
 
-Source: Stacks Project, More on Algebra, Tag 06Y6; perfect.tex, Tag 0DJ8.
+## References
+
+* Stacks Project, Tag 06Y6 (More on Algebra)
+* Stacks Project, Tag 0DJ8
 -/
 
 @[expose] public section
@@ -39,31 +42,7 @@ variable (R A Aq B D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- Cohomology localizes over the tensor coefficient ring, before further extension to D.
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
-
-Proof: take a K-flat R-resolution F of B[0] and compute the balanced derived tensor
-of Q with F. Since F is K-flat over R, it preserves quasi-isomorphisms in Q; no
-flatness of Q or A over R is required. Extension from A to Aq is exact, preserves
-the direct sums in totalization, and commutes with the differentials. Thus the
-localized balanced total complex is the balanced total complex of Aq tensor_A Q
-with F. Exact scalar extension commutes with cohomology. Tensor associativity
-identifies extension of its A-tensor_R-B cohomology to Aq-tensor_R-B with that
-localized cohomology. A resolution F over R need not have a strict B-action:
-use the balanced derived bifunctor to apply multiplication by b on B[0], then
-transport that endomorphism through the K-flat computation isomorphism. Naturality
-in the second derived variable makes the localization isomorphism commute with
-these B-endomorphisms. It also commutes with the A-action termwise. The balanced
-model and scalar-action naturality identify these commuting actions with the
-usual B-linear derived tensor model and its derived A-action. Thus the isomorphism
-is linear over Aq-tensor_R-B. Compare with L and K using the unique counit-compatible
-isomorphisms of left derived functors; cohomologyIso_smul identifies their A-actions,
-and B-linearity identifies their B-actions. The localization unit is uQ by its
-termwise generator formula. Naturality of these comparisons then gives the displayed
-formula. Equality on extension generators fixes the isomorphism uniquely. When S
-contains zero both sides are zero; identity localization gives just model comparison.
-D is only an index of the supplied models here: no compatibility of maps to D and
-no tensor extension to D is used in this assertion. -/
+/-- Cohomology localizes over the tensor coefficient ring, before further extension to D. -/
 theorem exists_firstLocalization_cohomology_baseChange
     (S : Submonoid A) [IsLocalization S Aq] (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

@@ -14,13 +14,19 @@ import Mathlib.CategoryTheory.Triangulated.Adjunction
 /-!
 # Exact K-injective replacement
 
-Source: Stacks Project, Tags 070K and 070Y; upstream KInjectives.Qh construction
 
 ## Main definitions and statements
 
 * `HomotopyCategory.KInjectives.inclusionCommShift`: inherited shifts for the inclusion.
 * `HomotopyCategory.KInjectives.localizationCommShift`: composite shifts for localization.
 * `HomotopyCategory.KInjectives.replacement_triangulated`: equivalence and exact replacement.
+
+## References
+
+* [Stacks Project, Tag 05QX](https://stacks.math.columbia.edu/tag/05QX)
+* [Stacks Project, Tag 070K](https://stacks.math.columbia.edu/tag/070K)
+* [Stacks Project, Tag 070Y](https://stacks.math.columbia.edu/tag/070Y)
+* [Stacks Project, Tag 0FXC](https://stacks.math.columbia.edu/tag/0FXC)
 -/
 
 @[expose] public section
@@ -32,14 +38,12 @@ universe w v u
 
 namespace HomotopyCategory.KInjectives
 
-/-- The inclusion uses the inherited integer shifts of the full right orthogonal.
-Source: Stacks Project, Tags 0FXC and 05QX -/
+/-- The inclusion uses the inherited integer shifts of the full right orthogonal. -/
 noncomputable instance inclusionCommShift (C : Type u) [Category.{v} C] [Abelian C] :
     (ι (C := C)).CommShift ℤ :=
   inferInstanceAs ((ObjectProperty.ι (subcategoryAcyclic C).rightOrthogonal).CommShift ℤ)
 
-/-- Localization on K-injectives uses the composite shift comparison of inclusion and Qh.
-Source: Stacks Project, Tags 070K and 05QX -/
+/-- Localization on K-injectives uses the composite shift comparison of inclusion and Qh. -/
 noncomputable instance localizationCommShift (C : Type u) [Category.{v} C] [Abelian C]
     [HasDerivedCategory.{w} C] : (Qh (C := C)).CommShift ℤ :=
   inferInstanceAs ((ι (C := C) ⋙ DerivedCategory.Qh).CommShift ℤ)
@@ -59,25 +63,7 @@ private theorem triangulated_inverse (C : Type u) [Category.{v} C] [Abelian C]
 
 set_option linter.unusedVariables false in
 /-- K-injective localization is a triangulated equivalence, and every quasi-inverse gives
-an exact replacement functor, also on opposite categories.
-Source: Stacks Project, Tags 070K and 070Y
-
-Proof plan: The cone triangulation of K(C) and exactness of Qh are supplied by
-lem-pur-homotopy-category-triangulated. K-injectivity is the right orthogonal of acyclics
-(CochainComplex.isKInjective_iff_rightOrthogonal). Acyclics are shift-stable, so
-lem-sf-shift-stable-right-orthogonal and def-weil-triangulated-subcategory give closure
-under shifts and cones, the inherited triangulation, and exact inclusion. The Hom computation
-lem-sc-kinjective-quasi-iso-comparison gives full faithfulness of Qh on K-injectives.
-By lem-trf-localization-essentially-surjective a derived object has a complex representative;
-resolve it by the assumed quasi-isomorphism and invert this map in D(C). This proves essential
-surjectivity; lem-trf-fully-faithful-ess-surj-equivalence gives the equivalence.
-For any quasi-inverse, lift the shift comparisons uniquely along fully faithful Qh so that
-the counit commutes with shifts. Faithfulness proves naturality and the zero/addition
-coherences; the triangle identities give compatibility of the unit. Then
-lem-trf-exact-equivalence-inverse gives exactness of the inverse. Composing with the inclusion
-gives exactness of replacement. Apply lem-sf-triangulated-functor-opposite for its opposite.
-Finally the inverse used in DerivedCategory.bifunctorRHomOfComplex is precisely the chosen
-inverse of this Qh followed by this inclusion, so it is covered by the universal clause. -/
+an exact replacement functor, also on opposite categories. -/
 theorem replacement_triangulated (C : Type u) [Category.{v} C] [Abelian C]
     [HasDerivedCategory.{w} C]
     (h : ∀ K : CochainComplex C ℤ, ∃ (I : CochainComplex C ℤ) (i : K ⟶ I),

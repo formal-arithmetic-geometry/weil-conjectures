@@ -95,13 +95,14 @@ import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Flat common-quotient reduction, with strict towers and quotient cones
 
-Source: Stacks Project, proetale.tex, Tag 099L, section-derived-completion-noetherian;
-sites-cohomology.tex, Tags 06YS, 06YT, 06YY; sites-modules.tex, Tag 03EK.
-
 The quotient ideals are the kernel ideal sheaves in the common-quotient presentation.
 Both derived scalar extensions are the existing universal cochain models. The ordinary
 comparisons, transitions and cones are characterized by their actual sheafified tensor
 sections. Scalar extension in the existing library writes the scalar first: `s ⊗ p`.
+
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 06YS, 06YT, 06YY, 099L
 -/
 
 @[expose] public noncomputable section
@@ -124,21 +125,18 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{r}] [HasSheafify J AddCommGrpCat.{r}]
 
-/-- The recorded module category, with no change of encoding or coefficient universe.
-Source: Stacks 03D7. -/
+/-- The recorded module category, with no change of encoding or coefficient universe. -/
 abbrev Modules (A : Sheaf J CommRingCat.{r}) :=
   ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J A)
 
-/-- Actual restriction of scalars, used also termwise on complexes.
-Source: Stacks 03D7. -/
+/-- Actual restriction of scalars, used also termwise on complexes. -/
 abbrev restriction {A T : Sheaf J CommRingCat.{r}} (a : A ⟶ T) :
     Modules T ⥤ Modules A :=
   restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map a)
 
 /-- A pure scalar-extension section in the prescribed ordinary presentation of a
 cochain derived-change-of-rings model. This is precisely the sheafification-unit
-image of the balanced tensor, transported along the model's object equality.
-Source: Stacks 03EK. -/
+image of the balanced tensor, transported along the model's object equality. -/
 def scalarSection {A T : Sheaf J CommRingCat.{r}} {a : A ⟶ T}
     [HasDerivedCategory.{wA} (Modules A)] [HasDerivedCategory.{wT} (Modules T)]
     (F : DerivedChangeOfRingsCochainModel a) (M : Modules A)
@@ -154,25 +152,21 @@ variable {R B : Sheaf J CommRingCat.{r}} {φ : R ⟶ B}
   (a : ∀ n : ℕ, DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} (D.projection n))
   (b : ∀ n : ℕ, DerivedChangeOfRingsCochainModel.{u, v, r, wB, wS} (D.extensionProjection n))
 
-/-- The actual `S_n`-linear complex obtained by reduction over `R`.
-Source: Stacks 06YY. -/
+/-- The actual `S_n`-linear complex obtained by reduction over `R`. -/
 abbrev leftComplex (n : ℕ) (P : CochainComplex (Modules B) ℤ) :=
   ((a n).E.mapHomologicalComplex (.up ℤ)).obj
     (((restriction φ).mapHomologicalComplex (.up ℤ)).obj P)
 
-/-- The actual `S_n`-linear complex obtained by reduction over `B`.
-Source: Stacks 06YY. -/
+/-- The actual `S_n`-linear complex obtained by reduction over `B`. -/
 abbrev rightComplex (n : ℕ) (P : CochainComplex (Modules B) ℤ) :=
   ((b n).E.mapHomologicalComplex (.up ℤ)).obj P
 
-/-- The levels of the first strict tower, restricted to `R`.
-Source: Stacks 099L. -/
+/-- The levels of the first strict tower, restricted to `R`. -/
 abbrev leftLevel (n : ℕ) (P : CochainComplex (Modules B) ℤ) :=
   ((restriction (D.projection n)).mapHomologicalComplex (.up ℤ)).obj
     (leftComplex D a n P)
 
-/-- The levels of the second strict tower, also restricted to `R` through `q_n`.
-Source: Stacks 099L. -/
+/-- The levels of the second strict tower, also restricted to `R` through `q_n`. -/
 abbrev rightLevel (n : ℕ) (P : CochainComplex (Modules B) ℤ) :=
   ((restriction (D.projection n)).mapHomologicalComplex (.up ℤ)).obj
     (rightComplex D b n P)
@@ -181,9 +175,7 @@ attribute [local irreducible] scalarSection
 
 /-- The full normalized comparison specification. All maps below are fixed by pure
 sections or by localization/counit compatibility; in particular the strict cones
-are the quotient cones, not arbitrary morphisms with the same vertices.
-
-Source: Stacks 099L, 03EK and 06YY -/
+are the quotient cones, not arbitrary morphisms with the same vertices. -/
 structure Comparison where
   /-- Restriction on derived categories. -/
   res : DerivedCategory (Modules B) ⥤ DerivedCategory (Modules R)

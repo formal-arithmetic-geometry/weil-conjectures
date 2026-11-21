@@ -15,8 +15,10 @@ import WeilConjectures.Algebra.Homology.CyclePullbackLifting
 /-!
 # Functorial cycle-pullback constructions
 
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1), and Cohomology on Sites,
-Lemma 06YS.
+## References
+
+* Stacks Project, Derived Categories, Tag 05T7 (1)
+* Stacks Project, Cohomology on Sites, Tag 06YS
 -/
 
 @[expose] public section
@@ -30,24 +32,7 @@ namespace CochainComplex
 /-- A functorial epimorphic cover by objects of `S` produces a bounded-above
 cycle-pullback construction. Its augmentation has the local lifting property for a
 cycle in the next degree and a compatible element of the target in the current degree.
-This statement concerns the recursive construction, not its homology.
-
-Source: Stacks Project, Derived Categories, Lemma 05T7 (1), and Cohomology on Sites,
-Lemma 06YS.
-
-Proof: Put zero in all degrees above `N`. Starting at `N` and descending, form
-`P^i = F^i ×_{F^{i+1}} ker(d_E^{i+1})` and put `E^i = T(P^i)`.
-The two projections, composed with `π`, define the augmentation and differential.
-The second projection lands in the kernel, so consecutive differentials compose to zero;
-the pullback equation gives the chain-map equation. Terms satisfy `S` by `hT`, or by
-`hzero` above the bound. A compatible pair `(y,x)` factors uniquely through `P^i`;
-pull back the epimorphism `π.app P^i` along this factorization. The pullback projection
-is an epimorphism and its other projection supplies the asserted lift `z`.
-For a map of bounded complexes, descending induction gives maps between the kernels
-and the pullbacks, and applying `T` gives the component maps. Naturality of `π` and
-the pullback equations give the chain-map and augmentation equations. Uniqueness in
-the kernel and pullback universal properties, and the functor laws of `T`, prove
-identity and composition laws. This defines `Q` and `ε`. -/
+This statement concerns the recursive construction, not its homology. -/
 theorem exists_functorial_cyclePullback_construction
     {A : Type u} [Category.{v} A] [Abelian A] (S : ObjectProperty A)
     (hzero : ∀ X : A, IsZero X → S X)

@@ -13,6 +13,14 @@ import Mathlib.RingTheory.Localization.BaseChange
 public import Mathlib.Algebra.Module.LocalizedModule.Submodule
 public import Mathlib.LinearAlgebra.Quotient.Basic
 
+/-! # Localized range and quotient versus scalar extension
+
+## References
+
+* `Mathlib.RingTheory.Localization.BaseChange`
+* `Mathlib.Algebra.Module.LocalizedModule.Submodule`
+-/
+
 @[expose] public section
 set_option autoImplicit false
 universe v
@@ -22,11 +30,6 @@ namespace ModuleCat
 /--
 There is an A-linear equivalence from the localization of Y to its scalar extension
 that carries the localized range of f to the range of the scalar-extended map.
-Use `LocalizedModule.equivTensorProduct` and
-`LinearMap.localized'_range_eq_range_localizedMap`, then compare the tensor
-product object with `ModuleCat.extendScalars`.
-Source: Mathlib.RingTheory.Localization.BaseChange and
-Mathlib.Algebra.Module.LocalizedModule.Submodule.
 -/
 theorem localized_range_quotient_extendScalars_aux
     (R : Type v) [CommRing R] (X Y : ModuleCat.{v} R) (f : X ⟶ Y)

@@ -9,6 +9,17 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Algebra.Exact.Basic
 
+/-!
+# Induced maps on inverse limits of towers of modules
+
+Levelwise linear maps of towers of modules commuting with the successor transitions induce
+linear maps on the inverse limits.
+
+## References
+
+* Stacks Project, Algebra Lemma 03CA (the componentwise construction)
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
@@ -120,9 +131,7 @@ lemma limit_π_towerLimitMap {R : Type u} [Ring R]
   limit.lift_π_apply _ _ _
 
 /-- Componentwise maps on inverse limits exist and are characterized by their
-coordinate projections, under the stated naturality hypotheses.
-Source: the componentwise construction in Stacks Project, Algebra Lemma 03CA.
--/
+coordinate projections, under the stated naturality hypotheses. -/
 theorem tower_limit_induced_maps
     (R : Type u) [CommRing R]
     (F : ℕᵒᵖ ⥤ ModuleCat.{v} R) (G : ℕᵒᵖ ⥤ ModuleCat.{w} R)

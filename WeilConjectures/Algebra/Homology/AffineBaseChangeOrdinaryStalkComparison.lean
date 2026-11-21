@@ -10,9 +10,17 @@ public import WeilConjectures.Algebra.Homology.AffineTensorPullbackStalkCoordina
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.Algebra.Homology.AffineLocalizedTensorStalkSquare
 
-/-! # AffineBaseChangeOrdinaryStalkComparison
+/-!
+# Localized ordinary tensor comparison for affine base change
 
-Source: Stacks Project, Tag 0DJ8. -/
+Localization of the tensor comparison at a prime, before passing through the derived pullback
+counit.
+
+## References
+
+* Stacks Project, Tag 0DJ8 (affine displayed localization identity)
+* Stacks Project, Tags 06Y6, 01HV and 01I9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -27,27 +35,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Localize the tensor comparison before passing through the derived pullback counit.
-Source: Stacks Project, Tag 0DJ8, affine displayed localization identity;
-Tags 06Y6, 01HV and 01I9.
-
-Proof: the cartesian spectrum square identifies A tensor_R R' with A'. Contract
-p to the other three rings. Their structure-sheaf stalk maps are localizations at
-the contracted primes. Localize a K-flat resolution of M over R; exactness of
-localization and tensor associativity identify its tensor cohomology localized
-at p with the cohomology model on the localized complex, extended to the fourth
-stalk ring. The universal counit and coefficient-action equations transport this
-identification to the supplied model m and the fixed stalk model. K-flatness of
-M over A identifies ordinary A'-tensor cohomology with the A-derived target.
-The localization theorem's comparison square and m.localized_eq identify the
-localized comparison with the local model's localizedComparison. Termwise tilde
-stalk localization, tensorStalkIso and exact stalk homology then identify its
-ordinary target with the stalk of the ordinary tensor pullback complex. The
-canonical target identification is affineTensorPullbackHomologyStalkIso, since
-its tilde, tensor-pullback and homology factors send the same germs to the same
-tensor generators. Thus the displayed square commutes. All steps are exact in
-all degrees; identity localizations and zero complexes require no change. There
-is no prime to consider when A' is the zero ring. -/
+/-- Localize the tensor comparison before passing through the derived pullback counit. -/
 theorem exists_affineBaseChangeOrdinaryStalkComparison
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

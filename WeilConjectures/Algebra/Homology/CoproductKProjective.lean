@@ -10,7 +10,13 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
 public import Mathlib.Algebra.Category.ModuleCat.Colimits
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 
-/-! Coproducts of K-projective complexes. -/
+/-!
+# Coproducts of K-projective complexes
+
+## References
+
+* Stacks Project, Tag 09KM
+-/
 
 @[expose] public section
 
@@ -22,13 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CochainComplex
 
-/-- Coproducts of K-projective complexes are K-projective.
-Source: Stacks Project, Tag 09KM, coproduct null-homotopy argument.
-
-Proof: restrict a map to each summand and choose a null homotopy by K-projectivity.
-Evaluation preserves coproducts, so the homotopy components assemble degreewise.
-The homotopy identity and support condition hold on every coproduct injection,
-and hence on the coproduct. No boundedness or nonempty-index assumption is used. -/
+/-- Coproducts of K-projective complexes are K-projective. -/
 theorem isKProjective_coproduct {A : Type u} [CommRing A] {I : Type}
     (F : I → CochainComplex (ModuleCat.{max u v} A) ℤ)
     (hF : ∀ n, (F n).IsKProjective) : (∐ F).IsKProjective := by

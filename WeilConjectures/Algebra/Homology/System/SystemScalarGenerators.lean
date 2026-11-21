@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarCoherence
 
 /-! # Local generators for normalized scalar extension
 
-Source: Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7, 03EK
 -/
 
 @[expose] public noncomputable section
@@ -27,11 +29,7 @@ variable {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
   {R S : Sheaf J CommRingCat.{w}} {φ : R ⟶ S} (A : SystemScalarModel φ)
 
-/-- Maps out of scalar extension agree if they agree on all local unit tensors.
-Source: Stacks 03D7 and 03EK.
-Proof: apply the injective scalar Hom correspondence. Its transpose evaluates a map
-on the normalized adjunction unit, namely one tensor x. Equality of these section maps
-is equality of the transposed module-sheaf morphisms. -/
+/-- Maps out of scalar extension agree if they agree on all local unit tensors. -/
 theorem systemScalarModel_hom_ext
     (P : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R))
     (M : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J S))
@@ -51,11 +49,7 @@ theorem systemScalarModel_hom_ext
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Scalar-extension maps send c tensor x to c tensor the image of x.
-Source: Stacks 03EK.
-Proof: naturality of the adjunction identifies the transpose of extension of f with
-f followed by the unit. Apply the normalized pure-tensor transpose formula and use
-linearity and the unit normalization. -/
+/-- Scalar-extension maps send c tensor x to c tensor the image of x. -/
 theorem systemScalarModel_map_tmul
     {P Q : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R)}
     (f : P ⟶ Q) (U : Cᵒᵖ) (c : S.obj.obj U) (x : P.val.obj U) :

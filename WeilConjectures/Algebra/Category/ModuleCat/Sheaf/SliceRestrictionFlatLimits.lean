@@ -14,12 +14,14 @@ import WeilConjectures.CategoryTheory.RingedSliceExtensionTensor
 /-!
 # Finite-limit part of flatness after restriction to a slice
 
-Source: Stacks Project, Modules on Sites, Tag 0E8J, Lemma `lemma-restriction-flat`
-
 This is the finite-limit component of the tensor exactness argument used for restriction
 of a flat module sheaf to a slice. The remaining colimit component follows from the
 closed monoidal structure, while this component requires transporting the exactness
 comparison through extension by zero.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 0E8J
 -/
 
 @[expose] public section
@@ -33,17 +35,7 @@ namespace SheafOfModules
 -- Comparing the two restriction presentations in the naturality square needs extra reduction.
 set_option backward.isDefEq.respectTransparency false in
 /-- If `F` is flat on a ringed site, tensoring by its restriction to a slice preserves
-finite limits. The proof extends a finite-limit diagram by zero, applies finite-limit
-preservation of tensoring by `F`, and transports the resulting cone comparison through
-the natural extension-by-zero tensor isomorphism and exactness/reflection for the
-slice extension.
-
-Proof: extend a finite-limit cone from the slice by the sheafified direct-sum extension.
-The extension exactness equivalence identifies exactness and monomorphisms after extension.
-Tensor the extended cone with the flat sheaf, then use the natural extension-by-zero tensor
-comparison to identify it with the extension of the restricted tensor cone. Reflect the
-resulting exactness and monomorphism statements back to the slice.
-Source: Stacks Project, Modules on Sites, Tag 0E8J -/
+finite limits. -/
 theorem isFlat_over_preservesFiniteLimits
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}}

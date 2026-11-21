@@ -12,7 +12,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Stalks of sectionwise extension of scalars
 
-Source: Stacks Project, Sheaves, Lemma 007K.
+## References
+
+* Stacks Project, Sheaves, Lemma 007K
 -/
 
 @[expose] public section
@@ -218,22 +220,7 @@ private theorem stalkChangeOfRingsMap_injective (X : TopCat.{u})
     | add t v ht hv => simp only [map_add, ht, hv]
   exact Function.LeftInverse.injective hleft
 
-/-- The stalk comparison before sheafification, with its germ formula.
-Source: Stacks Project, Sheaves, Lemma 007K (lemma-stalk-tensor-presheaf-modules).
-
-Proof: The section maps s ↦ 1 ⊗ s define an additive presheaf morphism. Its stalk
-map is semilinear along α_x: represent a scalar and vector on a common neighborhood
-and use the germ scalar-action formula. The extend/restrict scalars adjunction gives
-an R₂,x-linear comparison ψ with ψ(germ(a) ⊗ germ(s)) = germ(a ⊗ s).
-For injectivity, tensor the two semilinear germ maps on each neighborhood. These
-additive maps commute with restrictions, so the neighborhood colimit universal
-property gives an additive map Q in the reverse direction. Represent both factors of
-a pure stalk tensor on a common neighborhood to obtain Q(ψ(t)) = t; tensor induction
-extends this to every t. For surjectivity, represent a stalk element by a section
-tensor and induct on that tensor: zero, pure tensors and sums all lift through ψ.
-The resulting linear equivalence gives the module isomorphism and its germ formula.
-The formula determines the comparison uniquely, since pure tensors generate and
-pairs of germs can be represented on a common neighborhood. -/
+/-- The stalk comparison before sheafification, with its germ formula. -/
 theorem stalkChangeOfRingsPresheafIso (X : TopCat.{u})
     (R₁ R₂ : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (α : R₁ ⟶ R₂) (x : X) :

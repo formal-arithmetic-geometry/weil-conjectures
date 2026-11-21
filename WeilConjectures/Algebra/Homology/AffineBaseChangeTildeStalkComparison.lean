@@ -13,7 +13,13 @@ import WeilConjectures.Algebra.Homology.AffineTensorPullbackStalkCoordinates
 
 /-! # AffineBaseChangeTildeStalkComparison
 
-Source: Stacks Project, Tag 0DJ8. -/
+## References
+
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 06Y6
+* Stacks Project, Tag 01HV
+* Stacks Project, Tag 08IB
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -39,28 +45,7 @@ private theorem localizedModule_comp_apply
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- Localization of the explicit tensor cohomology arrow agrees with the stalk arrow.
-Source: Stacks Project, perfect.tex, Tag 0DJ8, last displayed localization identity;
-Tags 06Y6, 01HV and 08IB.
-
-Proof: identify A tensor_R R' with A' by the cartesian square and localize its source
-cohomology at p. Derived tensor localization identifies this module with the derived
-cohomology over the three stalk rings, extended to the fourth ring. This comparison
-is determined by the universal derived counits and the commuting A and R' actions,
-so it applies to the supplied model m, not only to a particular resolution.
-Localize the same K-flat span used for its comparison. Exact localization commutes
-with homology, and tilde stalks identify localized M with the stalk complex of its
-termwise tilde. Tensor associativity identifies the localized ordinary target with
-the stalk of tensor pullback. The equation m.localized_eq says that the localized
-arrow is induced by the same termwise coefficient map; m.comparison_eq identifies
-its derived counit with the one in the stalk model. Compose with tensorStalkIso,
-affineRepresentativeStalkIso and the inverse pullback counit followed by e. These
-are precisely the factors defining affineBaseChangeIntoPullback. On the target,
-the tilde/Gamma counit and exact tilde homology comparison give precisely
-affineDerivedCohomologyStalkIso (with its canonical localization map). Thus both
-paths are equal and the source identification is lU. All comparisons are natural
-and hold in every degree. Empty prime spectra give no obligations; zero complexes,
-identity localizations and zero rings need no exceptional hypotheses. -/
+/-- Localization of the explicit tensor cohomology arrow agrees with the stalk arrow. -/
 theorem affineBaseChangeTildeModuleMap_localized
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     [Algebra R A] [Algebra R R'] [Algebra (A ⊗[R] R') A']

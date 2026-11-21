@@ -12,7 +12,10 @@ import all WeilConjectures.CategoryTheory.GeometricModuleTransport
 import all WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainInverseComparison
 
 /-! # Module adjunction for an independently sized inverse image
-Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D3 and 03D7
 -/
 
 @[expose] public section
@@ -67,15 +70,7 @@ private theorem restrictHomEquiv_map
   Classical.choose_spec ((h (F.map f)).mp ⟨f, rfl⟩)
 
 
-/-- The specified algebraic inverse image has a module right adjoint.
-Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7.
-
-Proof: transport modules along the product-preserving right adjoint, with the
-coefficient action induced by the adjunct of the ring comparison. The graph equations
-for addition and scalar multiplication identify linear maps with the linear maps
-among their set-sheaf adjuncts. Restrict that bijection, whose inverse equations
-hold by faithfulness. Naturality follows from that of the set adjunction and the
-specified underlying comparisons. The natural Hom bijection gives the adjunction. -/
+/-- The specified algebraic inverse image has a module right adjoint. -/
 theorem inverseImageModuleAdjunction_exists
     (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
     (F : Sheaf J (Type u) ⥤ Sheaf K (Type u))

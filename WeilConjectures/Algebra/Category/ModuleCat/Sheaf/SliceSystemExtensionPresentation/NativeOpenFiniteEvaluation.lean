@@ -12,10 +12,13 @@ import WeilConjectures.Algebra.Homology.Slice.SliceSystemExtensionConstruction
 
 /-! # Finite evaluation of extension by zero on strict coefficient towers
 
-Source: current blueprint theorem-sp-qbar, proof (2), open factor.
 The coefficient diagram consists of actual ring sheaves. In particular it may be
 formed from the pulled-back continuous condensed ell-power quotient rings. No
 native-to-constant coefficient presentation or finiteOpenIso is used.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03DI and 03DJ
 -/
 
 @[expose] public noncomputable section
@@ -36,7 +39,7 @@ variable {C : Type c} [Category.{v} C] {J : GrothendieckTopology C}
   [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}]
 
 /-- The ordinary evaluation comparison is the identity on the prescribed level
-objects. Source: theorem-sp-qbar, proof (2), open evaluation -/
+objects. -/
 def SliceSystemExtensionPresentation.evaluationIso
     (P : SliceSystemExtensionPresentation.{c, v, r} B U) (n : ℕ) :
     P.F ⋙ systemEvaluation.{c, v, max c v r} B n ≅
@@ -69,13 +72,7 @@ private theorem sliceExtension_map_exact
   exact ShortComplex.exact_of_iso
     (S.mapNatIso (P.evaluationIso B U n)).symm h
 
-/-- Extension is exact on whole strict systems, as detected by ordinary evaluation.
-Source: theorem-sp-qbar, proof (2), exact open factor
-Proof: the evaluation comparison identifies each component with exact slice
-extension. Exact evaluation and the componentwise isomorphism criterion jointly
-detect exact short complexes. The abelian exactness criterion gives both finite
-limits and finite colimits. This uses ordinary evaluation, never faithfulness
-of evaluation in the derived category. -/
+/-- Extension is exact on whole strict systems, as detected by ordinary evaluation. -/
 theorem SliceSystemExtensionPresentation.exact
     (P : SliceSystemExtensionPresentation.{c, v, r} B U) :
     PreservesFiniteLimits P.F ∧ PreservesFiniteColimits P.F := by
@@ -85,23 +82,7 @@ theorem SliceSystemExtensionPresentation.exact
     Functor.preservesFiniteColimits_of_preservesHomology P.F⟩
 
 /-- Extension by zero on actual strict ring-sheaf towers commutes with each finite
-evaluation after exact localization, with its canonical localization normalization. The ordinary
-presentation fixes its action on every extension summand and every semilinear
-transition, including equal levels. Thus this is a map of whole derived systems.
-For the purity application B is the diagram of section rings of the pulled-back
-continuous condensed O_E/ell^(n+1), and U is the open object of a compactification.
-Source: current blueprint theorem-sp-qbar, proof (2), open factor;
-Stacks 03DI and 03DJ.
-
-Proof: construct ordinary strict extension by direct sums and sheafification.
-Its transitions extend the input transitions on each original summand, so their
-identity and composition hold before localization. The prescribed level-object
-and morphism equations give the ordinary evaluation isomorphism. It proves
-exactness of extension by the componentwise exactness criterion. Localize the
-ordinary square using the exact-functor comparison. Its canonical localization
-fixes the comparison on every complex representative. No assertion that derived
-evaluations detect equality is made. Empty opens, zero complexes and n=0 use the
-same construction, without division by a coefficient or a ramification bound. -/
+evaluation after exact localization, with its canonical localization normalization. -/
 theorem nativeOpen_finiteEvaluation :
     ∃ P : SliceSystemExtensionPresentation.{c, v, r} B U,
       ∃ (_ : PreservesFiniteLimits P.F) (_ : PreservesFiniteColimits P.F),

@@ -13,7 +13,9 @@ public import Mathlib.RingTheory.Flat.CategoryTheory
 /-!
 # Bounded flat models of complexes of modules of finite Tor amplitude
 
-Source: Stacks Project, More on Algebra, Lemma 15.59.3 (Tag 0654)
+## References
+
+* Stacks Project, More on Algebra, Lemma 15.59.3 (Tag 0654)
 -/
 
 @[expose] public section
@@ -26,21 +28,10 @@ namespace DerivedCategory
 
 -- The fixed interface includes `hab`; the generic equivalence needs no interval ordering.
 set_option linter.unusedVariables false in
-/-- Stacks Project, More on Algebra,
-Lemma 15.59.3 (Tag 0654): for a commutative ring `A`, a cochain complex `M` of `A`-modules and
-integers `a ≤ b`, the complex `M` has Tor amplitude in `[a, b]` (that is,
-`H^i(M ⊗ᴸ_A N) = 0` for every `A`-module `N` and every `i ∉ [a, b]`) if and only if there is a
-cochain complex `P` of flat `A`-modules with `P^i = 0` for `i ∉ [a, b]` and an isomorphism
-`M ≅ P` in `D(A)`.
-
-Proof: specialize the proved source theorem
-`DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat` to `ModuleCat A` and `Q.obj M`.
-The instance `ModuleCat.hasFunctorialFlatResolution` supplies its resolution hypothesis.
-Categorical flatness and module flatness both mean that `tensorLeft` preserves finite
-limits, by `ObjectProperty.flat_iff_preservesFiniteLimits` and
-`Module.Flat.iff_preservesFiniteLimits_tensorLeft`. Convert `IsStrictlyGE a` and
-`IsStrictlyLE b` to vanishing of the terms below `a` and above `b`, and reverse the
-isomorphism of derived objects. The generic equivalence does not need `a ≤ b`. -/
+/-- For a commutative ring `A`, a cochain complex `M` of `A`-modules and integers `a ≤ b`, the
+complex `M` has Tor amplitude in `[a, b]` (that is, `H^i(M ⊗ᴸ_A N) = 0` for every `A`-module `N`
+and every `i ∉ [a, b]`) if and only if there is a cochain complex `P` of flat `A`-modules with
+`P^i = 0` for `i ∉ [a, b]` and an isomorphism `M ≅ P` in `D(A)`. -/
 theorem module_torAmplitudeIn_iff_exists_flat_model {A : Type u} [CommRing A]
     [HasDerivedCategory.{w} (ModuleCat.{u} A)]
     (M : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ) (hab : a ≤ b) :

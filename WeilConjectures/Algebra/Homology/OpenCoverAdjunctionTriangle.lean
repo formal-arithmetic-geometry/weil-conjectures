@@ -20,7 +20,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Canonical adjunction maps in the geometric open-cover triangle
 
-Source: Stacks Project, Tags 08BU, 08BT and 08BW.
+## References
+
+* Stacks Project, Tags 08BU, 08BT and 08BW
 -/
 
 @[expose] public section
@@ -34,8 +36,7 @@ noncomputable section
 namespace SheafOfModules
 
 
-/-- The canonical comparison between nested derived restrictions.
-Source: Stacks Project, Tag 08BW -/
+/-- The canonical comparison between nested derived restrictions. -/
 def openRestrictionComparison {S : Type u} [TopologicalSpace S]
     (R : Sheaf (Opens.grothendieckTopology S) RingCat.{u})
     {W U : Opens S} (i : W ⟶ U)
@@ -93,28 +94,6 @@ private theorem openExtension_exact (X : AlgebraicGeometry.RingedSpace.{u})
 
 /-- The geometric Mayer–Vietoris triangle with its arrows defined as adjunction mates.
 No Hom identifications or shifted Hom groups are part of this statement.
-
-Source: Stacks Project, Tags 08BU (lower-shriek triangle), 08BT (derived adjunction),
-and 08BW (nested-open identifications).
-
-Proof: Represent E by a cochain complex K. For W = U ∩ V the exact extension by zero
-functors give the termwise short exact sequence
-0 → j_W! K|W → j_U! K|U ⊕ j_V! K|V → K → 0. Its maps are the canonical nested
-extension map and its negative, and the two counits. Check exactness on stalks:
-on W the maps are m ↦ (m,-m), (m,n) ↦ m+n; on only one open they are the identity
-on the sole nonzero summand. The cover ensures there is no remaining stalk.
-The short-exact-complex construction produces a distinguished triangle. Transport
-it along Q K ≅ E and the exact-functor localization comparison isomorphisms.
-For a nested inclusion W → U, transpose the canonical extension map under the W
-adjunction. Its sectionwise construction gives the unit of the U adjunction
-restricted to W, conjugated by the canonical nested restriction comparison.
-The same identity holds termwise on K and descends through localization. Thus its
-transpose is precisely c_U(E)⁻¹ ≫ R_WU(η_U(R_U E)) ≫ c_U(L_U R_U E), as displayed.
-The V component has the negative sign. The second arrow is the pair of counits.
-Any other chosen left adjoints and adjunctions are transported from these canonical
-ones by the unique isomorphisms compatible with their right adjoints; mates and
-counits commute with these isomorphisms. Distinguished triangles are invariant
-under that transport. The formulas also apply when an open is empty or when U=V.
 -/
 theorem open_cover_adjunction_triangle (X : AlgebraicGeometry.RingedSpace.{u})
     (R : Sheaf (Opens.grothendieckTopology X) RingCat.{u})

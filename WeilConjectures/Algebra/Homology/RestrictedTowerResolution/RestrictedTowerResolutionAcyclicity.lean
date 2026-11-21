@@ -139,11 +139,14 @@ import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
 /-! # Restricted varying-ring resolutions and their inverse-limit projections
 
-Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0D6E
-
 The ordinary functors below are constructed on sections. The direct image of the
 ringed sequence projection is the compatible-family limit after scalar restriction.
 The index `n : ℕ` denotes positive level `n+1`. All complexes are unbounded.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 0940 and 0D6E
+* Stacks Project, Tag 03CZ
 -/
 
 @[expose] public noncomputable section
@@ -164,26 +167,22 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (A : Sheaf J CommRingCat.{w}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
   (α : (Functor.const ℕᵒᵖ).obj A ⟶ B)
 
-/-- The existing category of modules over the base ring sheaf.
-Source: Stacks 03CZ. -/
+/-- The existing category of modules over the base ring sheaf. -/
 abbrev Modules := ringedSiteModules.{w}
   ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A)
 
-/-- Actual restriction of scalars at level `n+1`.
-Source: Stacks 03CZ. -/
+/-- Actual restriction of scalars at level `n+1`. -/
 abbrev restriction (n : ℕ) : systemLevel B n ⥤ Modules A :=
   restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map
     (α.app (op n)))
 
-/-- The canonical coefficient-composition identification, with identity section maps.
-Source: Stacks 03CZ. -/
+/-- The canonical coefficient-composition identification, with identity section maps. -/
 def restrictionComposition {m n : ℕ} (h : m ≤ n) :
     systemRestriction B h ⋙ restriction A B α n ≅ restriction A B α m :=
   systemScalarRestrictionComposition _ _ _ (by
     simpa using α.naturality (homOfLE h).op)
 
-/-- Restrict the actual system, retaining its given horizontal maps.
-Source: Stacks 0940. -/
+/-- Restrict the actual system, retaining its given horizontal maps. -/
 def tower (N : StrictRingSystem B) : ℕᵒᵖ ⥤ Modules A where
   obj n := (restriction A B α n.unop).obj (N.level n.unop)
   map {n m} h := (restriction A B α n.unop).map (N.transition (leOfHom h.unop)) ≫
@@ -195,8 +194,7 @@ def tower (N : StrictRingSystem B) : ℕᵒᵖ ⥤ Modules A where
     ext U x
     exact N.compose (leOfHom k.unop) (leOfHom h.unop) U x
 
-/-- The actual scalar-restriction functor U0, on both objects and morphisms.
-Source: Stacks 03CZ and 0940 -/
+/-- The actual scalar-restriction functor U0, on both objects and morphisms. -/
 def restrictionFunctor : StrictRingSystem B ⥤ (ℕᵒᵖ ⥤ Modules A) where
   obj := tower A B α
   map {N N'} f :=
@@ -208,8 +206,7 @@ def restrictionFunctor : StrictRingSystem B ⥤ (ℕᵒᵖ ⥤ Modules A) where
   map_id N := by ext n U x; rfl
   map_comp f g := by ext n U x; rfl
 
-/-- U0 is additive because its component maps are unchanged additive maps.
-Source: Stacks 03CZ. -/
+/-- U0 is additive because its component maps are unchanged additive maps. -/
 instance restrictionFunctorAdditive : (restrictionFunctor A B α).Additive where
   map_add := by
     intro X Y f g
@@ -220,12 +217,10 @@ instance restrictionFunctorAdditive : (restrictionFunctor A B α).Additive where
 
 /-- The ordinary sequence-projection direct image p_*: sections are the compatible
 families of underlying sections with the A-action induced by α. This is g_*r_*, with
-r_* the actual scalar restriction above and g_* the actual tower limit.
-Source: Stacks 0940. -/
+r_* the actual scalar restriction above and g_* the actual tower limit. -/
 abbrev directImage : StrictRingSystem B ⥤ Modules A := restrictionFunctor A B α ⋙ lim
 
-/-- Additivity of inverse limit, obtained from preservation of finite products.
-Source: Stacks 0940. -/
+/-- Additivity of inverse limit, obtained from preservation of finite products. -/
 instance limitAdditive : (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).Additive := by
   have : HasLimitsOfShape (Discrete WalkingPair) (Modules A) :=
     SheafOfModules.hasLimitsOfShape _ _
@@ -233,32 +228,25 @@ instance limitAdditive : (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).Additiv
     functorCategoryHasLimitsOfShape
   exact Functor.additive_of_preserves_binary_products _
 
-/-- The existing degreewise inverse-limit functor on complexes.
-Source: Stacks 0940. -/
+/-- The existing degreewise inverse-limit functor on complexes. -/
 abbrev limitComplex := (lim : (ℕᵒᵖ ⥤ Modules A) ⥤ Modules A).mapHomologicalComplex (.up ℤ)
 
-/-- Restriction applied in every degree of a complex.
-Source: Stacks 03CZ. -/
+/-- Restriction applied in every degree of a complex. -/
 abbrev restrictionComplex := (restrictionFunctor A B α).mapHomologicalComplex (.up ℤ)
 
-/-- The actual degreewise inverse-limit projection.
-Source: Stacks 0940. -/
+/-- The actual degreewise inverse-limit projection. -/
 def projection (T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ) (n : ℕ) :
     (limitComplex A).obj T ⟶ T.asFunctor.obj (op n) :=
   (NatTrans.mapHomologicalComplex (lim.π (op n)) (.up ℤ)).app T
 
-/-- The map of complexes obtained by exact evaluation of a tower at level `n+1`.
-Source: Stacks 0940. -/
+/-- The map of complexes obtained by exact evaluation of a tower at level `n+1`. -/
 def componentMap {S T : CochainComplex (ℕᵒᵖ ⥤ Modules A) ℤ} (f : S ⟶ T) (n : ℕ) :
     S.asFunctor.obj (op n) ⟶ T.asFunctor.obj (op n) :=
   (HomologicalComplex.complexOfFunctorsToFunctorToComplex.map f).app (op n)
 
 omit [EssentiallySmall.{w} C] in
-/-- Scalar restriction r_*=U0 is exact, with no flatness requirement.
-Source: Stacks 03CZ and 0940
-Proof: step 1 of the node. Restriction leaves underlying abelian sheaves and their
-maps unchanged. The componentwise kernels and sheafified cokernels are therefore
-unchanged; componentwise exactness of strict systems gives both preservation claims. -/
+/-- Scalar restriction `U0` preserves finite limits and finite colimits, with no flatness
+requirement. -/
 theorem restrictionFunctor_exact :
     PreservesFiniteLimits (restrictionFunctor A B α) ∧
       PreservesFiniteColimits (restrictionFunctor A B α) := by
@@ -642,20 +630,7 @@ set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
 
 /-- A restricted system resolution is acyclic for inverse limit, and its actual
-projections satisfy the two-resolution cancellation equation in D(A).
-Source: Stacks 0D6E and 0940
-
-Proof: steps 1--4 of the node. The constructed direct image is g_*r_*=lim U0.
-Use the resolving-adjunction comparison underlying the ringed-topos composition
-lemma. The left adjoint of restriction extends scalars levelwise, and constant
-towers are left adjoint to limit. Resolve towers on the constant-ring sequence site.
-Their components are K-flat, so scalar extension inverts quasi-isomorphisms between
-these representatives; constant towers preserve K-flatness. The K-injective Hom
-bijections then imply that lim j is a quasi-isomorphism. Evaluation and restriction
-are exact, so the components of U0a and j are quasi-isomorphisms. Localize the chain-map equality
-pr_n^T ∘ lim j = j_n ∘ pr_n^(U0I), then cancel j_n and U0a_n.
-The isomorphisms ea and ej have exactly these localized maps as their homs, so
-there is no choice of comparison hidden in their inverses. -/
+projections satisfy the two-resolution cancellation equation in `D(A)`. -/
 theorem acyclicity
     {N I : CochainComplex (StrictRingSystem B) ℤ} (a : N ⟶ I)
     [QuasiIso a] [I.IsKInjective]

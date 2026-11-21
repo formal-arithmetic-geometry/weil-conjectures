@@ -13,7 +13,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 
 /-! # Universal scalar extension computed by a fixed second-factor resolution
 
-Source: Stacks Project, Tags 064L and 06Y6.
+## References
+
+* Stacks Project, Tags 064L and 06Y6.
 -/
 
 @[expose] public section
@@ -117,23 +119,7 @@ private noncomputable def homologyRestrictionIso
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The resolved scalar-extension model and tensor with a K-flat second factor
-have naturally isomorphic additive homology functors.
-Source: Stacks Project, Tags 064L and 06Y6.
-
-Proof: Write P(X) for the functorial K-flat resolution of X, and s_X for its
-augmentation. Form the natural span P(X) tensor F -> X tensor F and
-P(X) tensor F -> P(X) tensor B[0]. The first arrow is tensor of s_X with F,
-and is a quasi-isomorphism by K-flatness of F. The second arrow is tensor
-of P(X) with f and is a quasi-isomorphism by K-flatness of P(X).
-The single-factor total tensor isomorphism identifies P(X) tensor B[0]
-with termwise P(X) tensor B. Tensor symmetry identifies this with the
-restriction of extendScalars(R -> B)(P(X)); on generators it sends x tensor b
-to b tensor x. Restriction of scalars is exact, so commutes naturally with
-homology. Forget to additive groups and compose these identifications with
-the homology map of the first span arrow and the inverse of the second.
-Functoriality of the resolution, tensor and homology gives a natural
-isomorphism. This works in every degree for unbounded complexes and arbitrary
-R-algebras B, including zero rings and zero complexes. -/
+have naturally isomorphic additive homology functors. -/
 private theorem exists_resolutionBalancedTensorIso
     (R B : Type u) [CommRing R] [CommRing B] [Algebra R B]
     (i : ℤ) (F : CochainComplex (ModuleCat.{u} R) ℤ)
@@ -249,22 +235,7 @@ private noncomputable def resolutionDerivedIso
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Natural additive comparisons for universal scalar extension and a fixed K-flat
-second factor. Source: Stacks Project, Tags 064L and 06Y6.
-
-Proof: use the functorial R-K-flat resolution P(X) -> X. Tensoring its augmentation
-with F is a quasi-isomorphism because F is K-flat. Tensoring F -> B[0] with P(X)
-is a quasi-isomorphism because P(X) is K-flat. Identify P(X) tensor B[0] with
-restriction of the ordinary extension of P(X) to B, on pure tensors by
-x tensor b -> b tensor x. The universal scalar-extension counit at P(X) is
-invertible by scalarExtensionCounit_isIso_of_kFlat. Its composite with the inverse
-of the derived image of P(X) -> X therefore compares the given universal functor
-with this span. Take homology and forget to additive groups to obtain e.
-Naturality of the resolution augmentation, tensoring, the counit and the homology
-comparison proves the first equation. The defining counit equation for the unique
-isomorphism between two universal left derived functors proves the second equation
-at P(X); naturality for P(X) -> X then proves it at X. The two quasi-isomorphism
-inverses cancel in both equations. There are no boundedness or flatness assumptions
-on B or X; zero complexes and zero rings are included. -/
+second factor. -/
 theorem exists_universalBalancedTensorComparison
     (R B : Type u) [CommRing R] [CommRing B] [Algebra R B]
     [HasDerivedCategory.{w} (ModuleCat.{u} R)]

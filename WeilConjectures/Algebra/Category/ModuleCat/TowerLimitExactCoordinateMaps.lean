@@ -10,6 +10,17 @@ public import Mathlib.Algebra.Category.ModuleCat.Limits
 public import Mathlib.Algebra.Exact.Basic
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitInducedMaps
 
+/-!
+# Exactness of inverse limits from coordinatewise exactness
+
+Coordinatewise exactness of levelwise maps of towers of modules implies exactness of the
+induced maps on inverse limits.
+
+## References
+
+* Stacks Project, Algebra Lemma 03CA and Homology Lemma 02N1
+-/
+
 @[expose] public section
 
 open CategoryTheory CategoryTheory.Limits
@@ -31,10 +42,7 @@ universe u v w t
 
 /-- Coordinatewise exactness implies exactness of the induced maps on inverse limits;
 with surjective kernel transitions the second induced map is surjective.
-The levelwise maps `α` and `β` are required to commute with the transition maps
-(hypotheses `hα` and `hβ`); without them the statement fails.
-Source: Stacks Project, Algebra Lemma 03CA and Homology Lemma 02N1.
--/
+The levelwise maps `α` and `β` commute with the transition maps (hypotheses `hα` and `hβ`). -/
 theorem tower_limit_exact_of_coordinate_maps
     (R : Type u) [CommRing R]
     (F : ℕᵒᵖ ⥤ ModuleCat.{v} R) (G : ℕᵒᵖ ⥤ ModuleCat.{w} R)

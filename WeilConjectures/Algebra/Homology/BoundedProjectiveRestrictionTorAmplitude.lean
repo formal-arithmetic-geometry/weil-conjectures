@@ -20,8 +20,10 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 
 /-! # Tor amplitude after restricting a bounded projective complex
 
-Source: Stacks Project, Tag 0B6G, lemma-perfect-proper-perfect-direct-image,
-condition (3); More on Algebra, Tags 066H, 066K and 0655.
+## References
+
+* Stacks Project, Tag 0B6G, condition (3) (perfect proper perfect direct image)
+* Stacks Project, More on Algebra, Tags 066H, 066K and 0655
 -/
 
 @[expose] public section
@@ -32,7 +34,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace CochainComplex
 
 /-- Projective resolutions calculate the amplitude of a module in a single degree
-from its Tor bound. Source: Stacks Project, Tag 0655. -/
+from its Tor bound. -/
 private theorem single_torAmplitude_of_Tor
     {R : Type u} [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)]
     (E : ModuleCat.{u} R) (d : ℕ)
@@ -94,22 +96,7 @@ private theorem single_torAmplitude_of_Tor
 
 
 /-- A bounded complex of projective B-modules acquires amplitude [r-d,s] over A
-when the regular B-module has Tor dimension at most d over A.
-
-Source: Stacks Project, Tag 0B6G, lemma-perfect-proper-perfect-direct-image,
-condition (3); More on Algebra, Tags 066H, 066K and 0655.
-
-Proof: each projective B-term, restricted to A, inherits B's Tor bound by
-projective_restriction_tor_bound. Reindex its projective A-resolution in degrees
-n-j. Its bounded-above flat terms make it K-flat. Tensoring this resolution with
-an A-module computes the derived tensor and its homology in degree n-j is Tor_j.
-Thus the term in degree n has amplitude [n-d,n], which lies in [r-d,s] whenever
-r ≤ n ≤ s. The finite stupid-truncation induction in
-bounded_torAmplitude_of_single_terms combines these termwise bounds. Tensoring
-the truncation triangles with a module preserves distinguished triangles, and
-both homology bounds are extension closed. The empty interval case is handled
-inside this induction: all terms, and hence the entire complex, are zero.
-No finite generation or ordering of r and s is required. -/
+when the regular B-module has Tor dimension at most d over A. -/
 theorem boundedProjective_restriction_torAmplitude
     {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)
     [HasDerivedCategory.{w} (ModuleCat.{u} A)]

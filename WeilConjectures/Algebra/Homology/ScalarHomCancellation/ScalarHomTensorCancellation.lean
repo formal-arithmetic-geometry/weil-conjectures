@@ -22,7 +22,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 
 /-! # Scalar tensor cancellation at independent coefficient universes
 
-Source: Stacks Project, Modules on Sites, Tag 05V4, displayed tensor identity.
+## References
+
+* Stacks Project, Modules on Sites, Tag 05V4 (displayed tensor identity)
 -/
 
 @[expose] public section
@@ -304,17 +306,7 @@ private theorem cancellation_inverse_naturality
   rw [← Category.assoc, ← h]
   simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id, Iso.hom_inv_id_assoc]
 
-/-- Restriction cancels the extension of the second tensor factor, naturally in both factors.
-Source: Stacks Project, Modules on Sites, Tag 05V4, displayed tensor identity.
-
-Proof: before sheafification use the balanced linear equivalence
-`m ⊗ (s ⊗ n) ↦ (s • m) ⊗ n`, inverse `m ⊗ n ↦ m ⊗ (1 ⊗ n)`.
-Tensor induction proves compatibility with restrictions and with maps of both factors.
-Restriction of scalars commutes with sheafification because the underlying abelian
-sheafification is unchanged. Tensoring the extension-presheaf unit becomes invertible
-under sheafification by monoidal localization. Compose these identifications with the
-sheaf tensor comparison. All comparisons are natural, hence so is their composite.
-Zero modules and zero rings satisfy the same formulas; no flatness assumption is used. -/
+/-- Restriction cancels the extension of the second tensor factor, naturally in both factors. -/
 theorem exists_changeOfRings_tensorCancellation (α : R ⟶ S) :
     ∃ e : ∀ (M : SheafOfModules.{r} (𝓡 S))
         (N : SheafOfModules.{r} (𝓡 R)),

@@ -8,7 +8,12 @@ module
 
 public import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel
 
-/-! # Natural coefficient extension on complexes -/
+/-! # Natural coefficient extension on complexes
+
+## References
+
+* Stacks Project, Tags 065Y and 065Z.
+-/
 
 @[expose] public section
 
@@ -24,16 +29,7 @@ namespace ModuleCat
 variable (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]
   [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]
 
-/-- Natural coefficient extension on complexes.
-Source: Stacks Project, Tag 065Y, equation-comparison-map (Tag 065Z).
-
-Proof: the scalar-extension adjunction transposes the A-to-D unit, restricted
-along R-to-A, to a B-linear map sending b tensor p to includeRight(b) tensor p.
-The two R-actions coincide by the tensor-algebra balancing relation. This map
-commutes with every A-linear map, by checking pure tensors and tensor induction.
-Apply it degreewise: the same identity for the differential proves it is a chain
-map, and the identity for a complex morphism proves naturality. This construction
-also works for zero complexes and zero rings; no flatness is required. -/
+/-- Natural coefficient extension on complexes. -/
 theorem exists_baseTensorCoefficientNaturalMap :
     ∃ γ : (restrictScalars.{u} (algebraMap R A)).mapHomologicalComplex (.up ℤ) ⋙
         (extendScalars.{u, u, u} (algebraMap R B)).mapHomologicalComplex (.up ℤ) ⟶

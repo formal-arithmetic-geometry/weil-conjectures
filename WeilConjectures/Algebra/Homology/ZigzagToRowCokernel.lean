@@ -15,7 +15,10 @@ import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 /-!
 # The canonical map from zig-zags to row-cokernel homology
 
-Source: Stacks Project, Algebra, Tag 00M1, proof and functoriality paragraph
+## References
+
+* [Stacks Project, Tag 00M1](https://stacks.math.columbia.edu/tag/00M1), proof and
+  functoriality paragraph
 -/
 
 @[expose] public section
@@ -150,33 +153,7 @@ private lemma endpoint_boundary_class_zero {R : Type u} [CommRing R]
 
 open Classical in
 /-- The endpoint of a zig-zag induces a natural linear map to row-cokernel homology.
-Source: Stacks Project, Algebra, Tag 00M1, proof, canonical homomorphisms and the
-right-hand square of the functoriality diagram
-
-Here `C A = A.opcycles 0` is formed in the abelian category of chain complexes:
-its degree `q` is the cokernel of `d : A₁,ᵩ → A₀,ᵩ`. The projection `π A` is a
-chain map, and `opcyclesMap Φ 0` is the induced row-cokernel chain map.
-The first three clauses record the cokernel and its differential and morphism formulas.
-The fourth clause is (a); the fifth is (b); the last two specify the induced map
-on representatives and its naturality (c). No exactness is assumed.
-
-Proof: (1) Commuting squares make `δ` descend through each horizontal cokernel;
-`δ² = 0` makes these cokernels a complex. Commutation of `Φ` with `d` makes it
-descend, and commutation with `δ` makes the descended maps a chain map. The
-projections are surjective with kernel the horizontal image.
-(2) For a zig-zag of positive degree, its last equation is
-`δ a₀,ₙ = d a₁,ₙ₋₁`; the cokernel projection kills the right side. At degree zero
-the outgoing differential vanishes. This uses the relations of
-`def-weil-pbc-double-complex-zigzag-module`.
-(3) For a trivial zig-zag `D b`, the endpoint is `d b₁,ₙ + δ b₀,ₙ₊₁`;
-its projection is the boundary `δʳᵗ π b₀,ₙ₊₁`. Thus its homology class is zero,
-using `def-weil-pbc-module-chain-complex-homology`.
-(4) The endpoint projection followed by the homology class map is linear on
-zig-zags, and kills their intersection with trivial zig-zags by (3). The quotient
-universal property gives the unique linear map `ρ`, with the stated formula.
-(5) On a representative `a`, both composites in the naturality square give the
-class of `π Φ₀,ₙ a₀,ₙ`, by the projection formula in (1). Representatives generate
-the quotient, so the linear maps agree. No row or column exactness is used. -/
+Here `C A = A.opcycles 0` is the row cokernel and `π A` the projection onto it. -/
 theorem exists_zigzagToRowCokernel
     {R : Type u} [CommRing R] (n : ℕ) :
     let C := fun A : HomologicalComplex₂ (ModuleCat.{v} R) (ComplexShape.down ℕ)

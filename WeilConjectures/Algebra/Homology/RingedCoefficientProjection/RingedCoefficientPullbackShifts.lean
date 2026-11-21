@@ -38,7 +38,10 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Shift compatibility of normalized inverse-image coefficient comparisons
-Source: Stacks Project, Tags 0D6D and 07A6
+
+## References
+
+* Stacks Project, Tags 0D6D and 07A6
 -/
 
 @[expose] public noncomputable section

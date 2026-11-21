@@ -10,7 +10,9 @@ public import WeilConjectures.Algebra.Homology.BaseLocalizationMap
 
 /-! # The A-action on the canonical base-localization cohomology map
 
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8.
 -/
 
 @[expose] public section
@@ -32,18 +34,7 @@ variable (R Rp B A D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- The canonical B-linear comparison also intertwines multiplication from A.
-Source: Stacks Project, Tag 06Y6, functoriality of lemma-derived-base-change; Tag 0DJ8.
-
-Proof: apply naturality of the input restriction isomorphism and of the universal
-left-derived lift to multiplication by a on Q. Their composite commutes with the
-endomorphism obtained by applying each derived functor to that multiplication.
-Apply B-homology and conjugate by the model cohomology isomorphisms. The equations
-cohomologyIso_smul on L and K identify these endomorphisms with multiplication by
-a tensor 1. Evaluating the resulting equality of B-linear maps at x yields the
-formula. This uses neither invertibility of the lift nor any scalar towers into D.
-For a = 0 and a = 1 the equations are respectively additivity and the identity;
-zero complexes and zero coefficient rings satisfy the same calculation. -/
+/-- The canonical B-linear comparison also intertwines multiplication from A. -/
 theorem baseLocalizationCohomologyMap_smul
     (S : Submonoid R) [IsLocalization S Rp]
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

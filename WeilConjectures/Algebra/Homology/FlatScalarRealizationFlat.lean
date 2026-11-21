@@ -11,7 +11,14 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ScalarTensorComparisonOf
 import WeilConjectures.CategoryTheory.ConstantModuleFlat
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 
-/-! # Flatness of scalar realization -/
+/-! # Flatness of scalar realization
+
+## References
+
+* Stacks Project, Tag 03ET
+* Stacks Project, Tag 08FC
+* Stacks Project, Tag 05VD
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -64,15 +71,7 @@ private theorem scalarExtension_flat (M : realizationModules J A)
   exact ⟨preservesFiniteLimits_of_reflects_of_preserves S (toSheaf R'),
     preservesFiniteColimits_of_reflects_of_preserves S (toSheaf R')⟩
 
-/-- Canonical scalar realization carries flat scalar modules to flat module sheaves.
-Source: Stacks Project, Tags 03ET, 08FC and 05VD
-Proof: the constant-module flatness theorem factors each finite scalar relation
-locally, and so makes the constant module sheaf flat. Scalar extension preserves
-this flatness: its tensor functor, after forgetting to abelian sheaves, is tensor
-with the constant module after exact restriction of coefficients. The existing
-sectionwise balanced tensor comparison supplies the natural isomorphism. The
-forgetful functor reflects exactness. No flatness of the target algebra itself
-is required; zero modules, the zero ring and empty sites are included. -/
+/-- Canonical scalar realization carries flat scalar modules to flat module sheaves. -/
 theorem flatScalarRealization_flat (M : ModuleCat.{max u v} A) (hM : Module.Flat A M) :
     IsFlatOnSite (J := J) (R := R) ((flatScalarRealization J α).obj M) := by
   exact scalarExtension_flat J α _ (isFlatOnSite_constantModule J A M hM)

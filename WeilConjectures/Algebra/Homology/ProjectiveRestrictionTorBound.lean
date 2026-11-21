@@ -15,7 +15,10 @@ import WeilConjectures.Algebra.Homology.FreeRestrictionTorBound
 
 /-! # Tor bounds for projective modules after scalar restriction
 
-Source: Stacks Project, Tags 066K and 0655, the one-module case.
+## References
+
+* Stacks Project, Tag 0655
+* Stacks Project, Tag 066K
 -/
 
 @[expose] public section
@@ -25,23 +28,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace ModuleCat
 
-/-- Projective B-modules inherit the Tor bound of B after restriction to A.
-
-Source: Stacks Project, Tags 066K and 0655, applied to a projective module in degree zero.
-
-Proof: a projective B-module E is a retract of the free module on its underlying set,
-via the split surjection sending the basis element indexed by x to x. After scalar
-restriction the splitting is still A-linear and the free module is a direct sum of
-copies of the restricted regular B-module. For fixed M, compute Tor by resolving M
-with free A-modules. Tensor commutes with arbitrary direct sums and direct sums of
-modules are exact. Thus Tor_j of the restricted free module with M is the direct sum
-of copies of Tor_j(B,M), which is zero for j>d. To identify this calculation with
-Tor' (which resolves the first argument), totalize the double complex of projective
-resolutions of both arguments. Tensoring with each free term is exact, so augmenting
-in either direction gives a quasi-isomorphism; the complexes are bounded above,
-which ensures convergence. The splitting of E makes its Tor a retract of the Tor
-of the free module. A retract of zero is zero. No finite generation is used.
-This includes infinite free modules, d=0, zero rings and zero modules. -/
+/-- Projective B-modules inherit the Tor bound of B after restriction to A. -/
 theorem projective_restriction_tor_bound
     {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)
     (E : ModuleCat.{u} B) (hE : Projective E) (d : ℕ)

@@ -10,7 +10,14 @@ public import WeilConjectures.Algebra.Homology.HomologyEvaluationDefinitions
 import WeilConjectures.Algebra.Homology.HomologyEvaluationRestrictionDiagrams
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
-/-! # Restriction of cycle evaluation -/
+/-!
+# Restriction of cycle evaluation
+
+## References
+
+* [Stacks Project, Tag 08DL](https://stacks.math.columbia.edu/tag/08DL)
+* [Stacks Project, Tag 0A8X](https://stacks.math.columbia.edu/tag/0A8X)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -216,27 +223,7 @@ private theorem transport_cycle_pairing
     simp only [Iso.hom_inv_id_assoc]
 
 set_option backward.isDefEq.respectTransparency true in
-/-- Restriction transports evaluation to a cycle-compatible evaluation on the over site.
-
-Source: Stacks Project, Tags 0A8X (Hom differential) and 08DL (open restriction).
-
-Proof: Write F for restriction to V followed by restriction to the site over W.
-Both restrictions are exact and preserve products. Construct the comparison
-F(Hom(T,J)) to Hom(F(T),F(J)) degreewise using the product universal property
-and the local internal-Hom identifications: each local map is sent to the same
-map on the smaller open. Checking each product projection proves differential
-compatibility and evaluation compatibility. Exactness gives comparisons on
-cycles and homology; internal Hom commutes with these restrictions by the same
-local-map identification. These give a and b. Define g by transporting F(e)
-along a and b. On Hom cycles, the differential identity says evaluation on a
-source cycle is a target cycle. The kernel property of target cycles therefore
-gives d. Its composite with target cycle inclusion is the first displayed
-identity. To prove the second, evaluate on sections of source cycles on every
-slice open. The hypothesis he identifies g on these representatives with the
-class of the target cycle just constructed. Extensionality of local linear
-maps and separatedness give the second morphism identity. The definition of g
-gives the last square. This uses neither K-injectivity nor a roof, and works
-for zero complexes and empty opens by the same universal properties. -/
+/-- Restriction transports evaluation to a cycle-compatible evaluation on the over site. -/
 theorem homologyEvaluation_restriction_comparison (X : Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ)
     (e : (homComplex (R := X.sheaf) T J).homology n ⟶

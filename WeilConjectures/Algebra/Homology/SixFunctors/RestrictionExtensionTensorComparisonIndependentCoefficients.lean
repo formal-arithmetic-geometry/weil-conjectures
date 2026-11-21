@@ -9,8 +9,10 @@ public import WeilConjectures.Algebra.Homology.SmoothPurity.ChangeOfRingsTensorC
 
 /-! # Ordinary restricted scalar extension as tensor
 
-Source: Stacks Project, Modules on Sites, Tag 05V4, and the scalar
-extension-restriction argument in `lem-coef-integral-hom-reduction.proof.md`.
+## References
+
+* Stacks Project, Modules on Sites, Tag 05V4
+* Stacks Project, Tag 07A4
 -/
 
 @[expose] public section
@@ -41,10 +43,7 @@ local notation "U" => SheafOfModules.restrictScalars
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.monoidalCategory SheafOfModules.symmetricCategory
 
-/-- Tensor cancellation at the quotient unit identifies restricted scalar extension.
-Source: Stacks Tag 07A4. The cancellation comparison is natural in both variables;
-take its first variable to be the quotient unit and compose its left unitor.
-The sheaf braiding puts the fixed coefficient in the second variable. -/
+/-- Tensor cancellation at the quotient unit identifies restricted scalar extension. -/
 theorem restrictionExtensionTensorComparisonIndependentCoefficients (F : A ⥤ B)
     (h : ∀ M, F.obj M = SheafOfModules.changeOfRings φ M)
     (hm : ∀ {M N} (f : M ⟶ N), F.map f = eqToHom (h M) ≫

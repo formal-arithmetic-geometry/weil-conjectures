@@ -15,7 +15,9 @@ import Mathlib.Algebra.Category.ModuleCat.AB
 
 /-! # B-linear invertibility of base localization
 
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8.
 -/
 
 @[expose] public section
@@ -37,19 +39,7 @@ variable (R Rp B A D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- The canonical base-localization map is an isomorphism on B-linear cohomology.
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change; Tag 0DJ8.
-
-Proof: choose a K-flat Rp-resolution P of the restricted input Q. Restriction to R
-preserves K-flatness: tensor an acyclic R-complex with Rp, use exactness of localization,
-and identify its tensor with P by associativity. Apply the K-flat counit theorem to
-both universal derived functors on P. The counit equation for the universal lift,
-and the ordinary localization tensor isomorphism, then make the lift on P invertible.
-The augmentation P to Q is a quasi-isomorphism over both bases; naturality transports
-invertibility to Q. Apply the B-homology functor and conjugate by the two model
-cohomology isomorphisms. This is exactly baseLocalizationCohomologyMap. Identity
-localization gives model transport; when S contains zero, both cohomologies are zero.
-No algebra structures on D over A or B, and no flatness of D, are needed. -/
+/-- The canonical base-localization map is an isomorphism on B-linear cohomology. -/
 theorem baseLocalizationCohomologyMap_isIso
     (S : Submonoid R) [IsLocalization S Rp]
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

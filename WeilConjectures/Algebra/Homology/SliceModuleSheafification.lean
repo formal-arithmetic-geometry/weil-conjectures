@@ -10,7 +10,9 @@ public import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Module sheafification under continuous cocontinuous restriction
 
-Source: Stacks Project, Tags 03CY, 03DH and 04IX.
+## References
+
+* Stacks Project, Tags 03CY, 03DH and 04IX.
 -/
 
 @[expose] public noncomputable section
@@ -33,18 +35,15 @@ set_option hygiene false in
 set_option quotPrecheck false in
 local notation "A" => (F.sheafPushforwardContinuous RingCat.{u} J K).obj R
 
-/-- Restriction of module presheaves along the given site functor.
-Source: Stacks 04IX. -/
+/-- Restriction of module presheaves along the given site functor. -/
 abbrev slicePresheafRestriction : PresheafOfModules.{u} R.obj ⥤ PresheafOfModules.{u} (A).obj :=
   PresheafOfModules.pushforward₀.{u} F R.obj
 
-/-- The corresponding restriction of sheaf modules.
-Source: Stacks 04IX. -/
+/-- The corresponding restriction of sheaf modules. -/
 abbrev sliceModuleRestriction : SheafOfModules.{u} R ⥤ SheafOfModules.{u} A :=
   pushforward.{u} (F := F) (𝟙 A)
 
-/-- Extend the restricted global sheafification unit by the local sheafification adjunction.
-Source: Stacks 03CY. -/
+/-- Extend the restricted global sheafification unit by the local sheafification adjunction. -/
 def sliceSheafificationComparison :
     slicePresheafRestriction (J := J) F R ⋙ PresheafOfModules.sheafification (𝟙 (A).obj) ⟶
       PresheafOfModules.sheafification (𝟙 R.obj) ⋙ sliceModuleRestriction (J := J) F R := by
@@ -69,13 +68,7 @@ def sliceSheafificationComparison :
         rw [← P.map_comp, ← P.map_comp]
         exact congrArg P.map (a.unit.naturality f) }
 
-/-- The comparison is an isomorphism for continuous cocontinuous restriction.
-Source: Stacks 03CY and 03DH
-Proof: The sheafification adjunction identifies the comparison composed with the
-local unit with the restricted global unit. The global unit is locally bijective,
-and cocontinuity preserves local injectivity and local surjectivity under restriction.
-Cancel the locally bijective local unit to see that the comparison is locally
-bijective. Its source and target are sheaves, so it is an isomorphism. -/
+/-- The comparison is an isomorphism for continuous cocontinuous restriction. -/
 theorem sliceSheafificationComparison_isIso :
     IsIso (sliceSheafificationComparison (J := J) F R) := by
   let P := slicePresheafRestriction (J := J) F R
@@ -113,8 +106,7 @@ theorem sliceSheafificationComparison_isIso :
   exact ⟨(Presheaf.comp_isLocallyInjective_iff _ _ _).mp h₁,
     (Presheaf.comp_isLocallySurjective_iff _ _ _).mp h₂⟩
 
-/-- The canonical sheafification/restriction isomorphism, with its fixed orientation.
-Source: Stacks 03CY, 03DH and 04IX -/
+/-- The canonical sheafification/restriction isomorphism, with its fixed orientation. -/
 def sliceSheafificationIso :
     PresheafOfModules.sheafification (𝟙 R.obj) ⋙ sliceModuleRestriction (J := J) F R ≅
       slicePresheafRestriction (J := J) F R ⋙ PresheafOfModules.sheafification (𝟙 (A).obj) :=

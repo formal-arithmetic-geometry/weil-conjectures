@@ -13,7 +13,14 @@ public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 
-/-! # Extension of scalars on K-flat complexes -/
+/-! # Extension of scalars on K-flat complexes
+
+Extension of scalars preserves quasi-isomorphisms between K-flat complexes.
+
+## References
+
+* Stacks Project, More on Algebra, Tags 064L and 06Y0
+-/
 
 @[expose] public section
 
@@ -25,14 +32,7 @@ namespace ModuleCat
 
 /-- Extension of scalars preserves quasi-isomorphisms between K-flat complexes,
 without a flatness assumption on the ring map.
-Source: Stacks Project, More on Algebra, Tags 064L and 06Y0.
-Proof: reuse scalarExtension_quasiIso_of_kFlat from KFlatScalarExtensionDerivedIso.
-It specializes mixedTensor_kFlat_quasiIso to the B-module tensor unit in degree
-zero. The single-complex comparison identifies this total tensor with termwise
-mixed tensor with B. The tensor left unitor identifies the latter functor with
-extendScalars. Naturality makes both identifications isomorphisms of arrows;
-quasi-isomorphism is invariant under these isomorphisms. This also covers zero
-rings, zero complexes, and non-flat ring maps. -/
+-/
 theorem extendScalars_preservesKFlatQuasiIso {R B : Type u} [CommRing R] [CommRing B]
     (ρ : R →+* B) [(ModuleCat.extendScalars.{u, u, u} ρ).Additive] :
     (ModuleCat.extendScalars.{u, u, u} ρ).PreservesKFlatQuasiIso := by

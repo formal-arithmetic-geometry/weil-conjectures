@@ -40,11 +40,12 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Tensor pullback and induced pushforward for an arbitrary geometric morphism
 
-Source: Stacks Project, Modules on Sites, Tags 03D1--03D3, 03CZ and 03D7,
-`lemma-adjoint-pullback-pushforward-modules`.
-
 The construction is stated existentially, with explicit underlying-sheaf and
 operation identifications. No module adjunction or module functor is assumed.
+
+## References
+
+* Stacks Project, Modules on Sites, Tags 03D1--03D3, 03CZ and 03D7
 -/
 
 -- After pruning, this module only keeps private declarations.

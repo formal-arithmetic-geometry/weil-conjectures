@@ -15,9 +15,12 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 import Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 
-/-! # Transport of tensor comparison squares between K-flat representatives
+/-!
+# Transport of tensor comparison squares between K-flat representatives
 
-Source: Stacks Project, Tags 0DJA(1), 064L, 06Y1 and 06Y6.
+## References
+
+* Stacks Project, Tags 0DJA(1), 0BYJ, 064L, 06Y1 and 06Y6
 -/
 
 @[expose] public section
@@ -102,26 +105,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
-/-- The localized tensor comparison square is invariant under a derived isomorphism.
-
-Source: Stacks Project, Tags 0DJA(1) and 0BYJ, invariance of derived tensor
-products under change of K-flat representative.
-
-Proof: represent the given derived isomorphism by a roof and replace its apex
-by an A-K-flat resolution. Both roof legs are quasi-isomorphisms between
-K-flat complexes. Tensor with Q preserves those quasi-isomorphisms. Apply
-universality of the R-to-B derived tensor counits and cohomology to obtain
-isomorphisms of the base-derived models. Naturality for multiplication by a
-in A makes these B-linear isomorphisms A tensor_R B-linear. Extending these
-isomorphisms to C gives the source isomorphism e. Extension of scalars sends
-K-flat complexes and their quasi-isomorphisms to K-flat complexes and
-quasi-isomorphisms over C. Their cones are acyclic and K-flat, so tensoring
-with arbitrary N preserves acyclicity, giving the target isomorphism d.
-Naturality of the monoidal tensorator and of the universal counit gives the
-comparison square for each roof leg, using comparison_eq and localized_eq.
-Compose one square with the inverse of the other to obtain the stated square.
-No flatness of C or N is required, since only isomorphisms are extended.
-The argument includes unbounded complexes and zero rings. -/
+/-- The localized tensor comparison square is invariant under a derived isomorphism. -/
 theorem exists_localizedTensorComparison_representative_square
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

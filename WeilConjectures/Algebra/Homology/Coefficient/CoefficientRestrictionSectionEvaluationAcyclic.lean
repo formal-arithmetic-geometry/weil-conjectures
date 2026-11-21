@@ -21,7 +21,9 @@ import Mathlib.CategoryTheory.Sites.GlobalSections
 
 /-! # Scalar-restriction acyclicity for sections on an arbitrary slice
 
-Source: Stacks Project, Tag 0D6E and Modules on Sites, Tags 03DI and 03DJ.
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 0D6E
 -/
 
 @[expose] public noncomputable section
@@ -120,17 +122,7 @@ private theorem commutativeRingLift (B : Sheaf J RingCat.{max a v r})
     exact B.property
   exact ⟨⟨Oc, hO⟩, rfl⟩
 
-/-- A scalar-restriction resolution is a quasi-isomorphism on sections over every object.
-Source: Stacks Project, Cohomology on Sites, Tag 0D6E, applied on the slice over U;
-Modules on Sites, Tags 03DI and 03DJ, for exact extension by zero and slice restriction.
-
-Proof: retain commutativity on B and D without changing the underlying ring sheaves.
-Restrict I, K and j to the slice over U. Exact slice restriction preserves the
-quasi-isomorphism, and its exact left adjoint shows that it preserves K-injectives.
-Apply scalar-restriction acyclicity for global sections on this slice. The identity
-of U is terminal in the slice, so its global-sections functor is naturally isomorphic
-to evaluation at that identity. This identifies the resulting map with sections of j
-on U. Zero coefficient rings and the empty site require no additional hypotheses. -/
+/-- A scalar-restriction resolution is a quasi-isomorphism on sections over every object. -/
 theorem coefficientRestrictionSectionsEvaluation_quasiIso
     (B D : Sheaf J RingCat.{max a v r})
     (hB : ∀ (U : Cᵒᵖ) (x y : B.obj.obj U), x * y = y * x)

@@ -17,7 +17,12 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # K-flatness under restriction to an open localized site
 
-Source: Stacks Project, Tags 06YB and 03DH.
+Restriction to an open of the localized site preserves K-flat complexes.
+
+## References
+
+* Stacks Project, Tag 06YB
+* Stacks Project, Tag 03DH
 -/
 
 @[expose] public section
@@ -32,7 +37,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Restriction preserves total tensors by naturality in both differentials and
-  preservation of coproducts. Source: Stacks, Tags 01CD and 03DH. -/
+preservation of coproducts. -/
 private theorem localized_totalTensor_iso
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X)
@@ -112,19 +117,7 @@ private theorem localized_totalTensor_iso
           (he (P.X p) (P.X p') (N.X q) (N.X q) (P.d p p') (𝟙 _)).symm)
   exact ⟨e₁ ≪≫ HomologicalComplex₂.total.mapIso e₂ (.up ℤ)⟩
 
-/-- Restriction of a K-flat complex to the localized open site is K-flat.
-Source: Stacks Project, Tag 06YB (`lemma-check-K-flat-stalks`), and Tag 03DH.
-
-Proof: for an acyclic localized test complex F, apply the exact extension-by-zero
-functor termwise to obtain an acyclic global complex G. The invertible adjunction unit
-identifies F with the restriction of G. K-flatness of P gives acyclicity of Tot(G ⊗ P),
-and exact restriction preserves it. The natural sheaf tensor comparison induces an
-isomorphism of bicomplexes; restriction preserves coproducts, hence this comparison
-commutes with totalization. Thus its restriction is Tot(V(G) ⊗ V(P)). Transport once
-more along the unit complex isomorphism to obtain acyclicity of Tot(F ⊗ V(P)).
-No bounds or termwise-flatness assumptions are used, and the construction also applies
-to the empty open and zero complexes. The zero-map witness only defines the termwise
-restriction and adds no mathematical hypothesis. -/
+/-- Restriction of a K-flat complex to the localized open site is K-flat. -/
 theorem open_localized_restriction_isKFlat
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X)

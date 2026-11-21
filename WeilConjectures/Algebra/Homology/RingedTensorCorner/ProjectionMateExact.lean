@@ -150,8 +150,10 @@ import WeilConjectures.Mathlib.CategoryTheory.Shift.Localization
 /-!
 # Exact projection mates for ringed topoi
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YU, 07A4, 07A6 and 0B56;
-Derived Categories, Tag 0A8D.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YS, 06YU, 07A4, 07A6 and 0B56
+* Stacks Project, Derived Categories, Tag 0A8D
 -/
 
 @[expose] public section
@@ -173,35 +175,29 @@ namespace SheafOfModules
 
 section
 
-/-- The module category of a recorded corner; this is a transparent interface abbreviation.
-Source: Stacks Tag 06YU. -/
+/-- The module category of a recorded corner; this is a transparent interface abbreviation. -/
 abbrev RingedTensorCorner.mateModules (A : RingedTensorCorner.{u, w}) :=
   ringedSiteModules.{u, u, u, u}
     ((sheafCompose A.topology (forget₂ CommRingCat.{u} RingCat.{u})).obj A.ring)
 
-/-- The existing derived category, with the size chosen in the corner.
-Source: Stacks Tag 06YU. -/
+/-- The existing derived category, with the size chosen in the corner. -/
 abbrev RingedTensorCorner.mateDerived (A : RingedTensorCorner.{u, w}) :=
   DerivedCategory A.mateModules
 
-/-- The degree-zero ring complex, the tensor unit before localization.
-Source: Stacks Tag 06YU. -/
+/-- The degree-zero ring complex, the tensor unit before localization. -/
 noncomputable abbrev RingedTensorCorner.mateUnitComplex (A : RingedTensorCorner.{u, w}) :=
   letI := monoidalCategory A.ring
   HomologicalComplex.tensorUnit A.mateModules (.up ℤ)
 
-/-- The degree-zero ring in the derived category, rather than an arbitrary unit object.
-Source: Stacks Tag 06YU. -/
+/-- The degree-zero ring in the derived category, rather than an arbitrary unit object. -/
 noncomputable abbrev RingedTensorCorner.mateUnit (A : RingedTensorCorner.{u, w}) :=
   DerivedCategory.Q.obj A.mateUnitComplex
 
-/-- The ordinary tensor bifunctor already used by the representative presentation.
-Source: Stacks Tag 06YU. -/
+/-- The ordinary tensor bifunctor already used by the representative presentation. -/
 noncomputable abbrev RingedTensorCorner.mateTensor (A : RingedTensorCorner.{u, w}) :=
   KFlatFixedTensor.ordinaryTensor A.ring
 
-/-- Flat-term K-flat representatives, with the same predicate as `RingedTensorModel`.
-Source: Stacks Tags 06YS, 06YU. -/
+/-- Flat-term K-flat representatives, with the same predicate as `RingedTensorModel`. -/
 abbrev RingedTensorCorner.mateFlat (A : RingedTensorCorner.{u, w}) :
     ObjectProperty (CochainComplex A.mateModules ℤ) :=
   fun P ↦ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat
@@ -210,8 +206,7 @@ attribute [local instance 4000] KFlatFixedTensor.tensorAdditive
   KFlatFixedTensor.tensorObjAdditive KFlatFixedTensor.tensorHasMapBifunctor
 
 /-- Canonical representative shift equations for a tensor localized from cochain complexes.
-This is the same unsigned first shift and signed second shift used by ringed tensor models.
-Source: Stacks, Tag 06YU. -/
+This is the same unsigned first shift and signed second shift used by ringed tensor models. -/
 def MateCanonicalShiftData
     {C D : Type*} [Category* C] [Category* D] [Preadditive C] [Preadditive D] [HasShift D ℤ]
     [∀ n : ℤ, (shiftFunctor D n).Additive]

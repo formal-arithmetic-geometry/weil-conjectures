@@ -15,7 +15,13 @@ public import WeilConjectures.Algebra.Homology.AffineTildePushforwardCohomologyN
 
 /-! # AffineBaseChangeTildeRepresentative
 
-Source: Stacks Project, Tag 0DJ8. -/
+## References
+
+* Stacks Project, Tag 01I9
+* Stacks Project, Tag 08DW
+* Stacks Project, Tag 0DJ8
+* Stacks Project, Tag 08HY
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -31,7 +37,7 @@ variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
 /-- The unit-normalized tensor/tilde comparison on complexes, shared by the
-pullback representative and calculations with it. Source: Stacks, Tags 01I9 and 08DW. -/
+pullback representative and calculations with it. -/
 def affineBaseChangeTildeComplexIso
     (A D : Type u) [CommRing A] [CommRing D] (φ : A →+* D)
     (M : CochainComplex (ModuleCat.{u} A) ℤ) :
@@ -60,9 +66,7 @@ def affineBaseChangeTildeComplexIso
     Classical.choose (Scheme.Modules.exists_tensorPullback_tilde_iso (CommRingCat.ofHom φ))
   exact (Functor.mapHomologicalComplexCompIso θ (.up ℤ)).app M
 
-/-- Degreewise formula for the complex comparison.
-Source: Stacks, Tag 01I9; this is the defining termwise action of the comparison.
--/
+/-- Degreewise formula for the complex comparison. -/
 theorem affineBaseChangeTildeComplexIso_hom_f
     (A D : Type u) [CommRing A] [CommRing D] (φ : A →+* D)
     (M : CochainComplex (ModuleCat.{u} A) ℤ) (i : ℤ) :
@@ -71,10 +75,7 @@ theorem affineBaseChangeTildeComplexIso_hom_f
         (CommRingCat.ofHom φ))).hom.app (M.X i) := by
   rfl
 
-/-- The actual tilde representative of affine derived pullback.
-Source: Stacks Project, Tags 01I9 and 08DW.
-The tensor-pullback comparison is unit-normalized. The other two factors are
-respectively the inverse of the supplied derived counit and the image of e. -/
+/-- The actual tilde representative of affine derived pullback. -/
 def affineBaseChangeTildeRepresentativeIso
     (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')
     (K : schemeDerivedCategory (Spec (.of A)))
@@ -99,10 +100,7 @@ def affineBaseChangeTildeRepresentativeIso
 
 
 /-- Cancelling the supplied pullback counit leaves exactly the inverse complex
-comparison. Source: Stacks, Tags 01I9 and 08HY. The representative has three factors:
-the inverse comparison, the inverse counit, and the image of the identity. Functoriality
-removes the last factor and the middle factor cancels against the counit.
--/
+comparison. -/
 theorem affineBaseChangeTildeRepresentativeIso_counit
     (A D : Type u) [CommRing A] [CommRing D] (φ : A →+* D)
     (M : CochainComplex (ModuleCat.{u} A) ℤ)
@@ -133,9 +131,7 @@ theorem affineBaseChangeTildeRepresentativeIso_counit
   simp only [Category.id_comp, IsIso.inv_hom_id, Category.comp_id]
 
 /-- The chosen pullback representative is compatible with transport from the identity
-representative. Source: Stacks Project, Tag 08HY. This follows directly from its
-three defining factors and functoriality of derived pullback.
--/
+representative. -/
 theorem affineBaseChangeTildeRepresentativeIso_identity_hom
     (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')
     (K : schemeDerivedCategory (Spec (.of A)))

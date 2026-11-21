@@ -10,9 +10,12 @@ public import WeilConjectures.Algebra.Module.DegreeZeroFractions
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 
 /-!
-# GradedModuleAwayMaps
+# Restriction maps for degree-zero graded module localizations
 
-Source: Stacks Project, Constructions, Lemma 01M4.
+## References
+
+* [Stacks Project, Tag 01M4](https://stacks.math.columbia.edu/tag/01M4), proof of (1)(a),
+  (1)(c), (1)(d) and (1)(g)
 -/
 
 @[expose] public section
@@ -263,21 +266,7 @@ private theorem homogeneousRingImage
   · exact (ringFractionFormula f g lS hlS e a h b m).symm
 
 set_option linter.unusedVariables false in
-/-- Construction of the ordinary and degree-zero restriction maps, before imposing coherence.
-Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), proof of
-(1)(a),(c),(d),(g).
-
-Proof: Equal-degree fractions form a submodule: put sums over a common denominator,
-and multiply homogeneous numerators and denominators to check scalar closure. If g is
-nilpotent the target localization is zero. Otherwise g^e = af is nonzero, so directness
-of the ring grading forces deg a + deg f = e * deg g. The image of f in S_g is a unit
-with inverse a/g^e. The module localization universal property therefore produces the
-unique lambda extending x/1, with formula x/f^m mapped to a^m*x/g^(e*m). The ring
-universal property produces lambdaS; checking on fractions gives semilinearity. The
-degree equation shows these maps preserve equal-degree fractions; restrict them to rho
-and rhoS. Define U by g^(deg f)/f^(deg g), whose numerator and denominator have equal
-degree. In the target its inverse is f^(deg g)/g^(deg f), again of degree zero.
-Multiplying these fractions proves that rhoS(U) is a unit, including the zero-ring case. -/
+/-- Construction of the ordinary and degree-zero restriction maps, before imposing coherence. -/
 theorem gradedModuleAwayMaps
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]

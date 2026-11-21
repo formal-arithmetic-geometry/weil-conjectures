@@ -160,12 +160,22 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Derived adjunction for the ringed sequence projection
 
-Source: Stacks Project, Cohomology on Sites, Tags 0940, 0941, 06YY, 07A6;
-Modules on Sites, Tag 03D7; Derived Categories, Tags 09T5 and 0FND.
 
 The ordinary functors are characterized by their tensor generators and limit
 projections. The derived adjunction is normalized on every chain map, so localization
 extends precisely this ordinary correspondence to fractions. Index `n` means level `n+1`.
+
+## References
+
+* Stacks Project, Tag 03CZ
+* Stacks Project, Tag 03D7
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 06YY
+* Stacks Project, Tag 07A6
+* Stacks Project, Tag 0940
+* Stacks Project, Tag 0941
+* Stacks Project, Tag 09T5
+* Stacks Project, Tag 0FND
 -/
 
 @[expose] public noncomputable section
@@ -187,22 +197,18 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
-/-- The existing module category over the base ring sheaf, with coefficient universe `w`.
-Source: Stacks 03CZ. -/
+/-- The existing module category over the base ring sheaf, with coefficient universe `w`. -/
 abbrev Modules (A : Sheaf J CommRingCat.{w}) :=
   ringedSiteModules.{w} ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj A)
 
-/-- The actual restriction from level `n+1` along its specified structural ring map.
-Source: Stacks 03D7. -/
+/-- The actual restriction from level `n+1` along its specified structural ring map. -/
 abbrev restriction (A : Sheaf J CommRingCat.{w})
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
     (α : (Functor.const ℕᵒᵖ).obj A ⟶ B) (n : ℕ) : systemLevel B n ⥤ Modules A :=
   restrictScalars ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map
     (α.app (op n)))
 
-/-- The image of the local tensor `b ⊗ x` in the existing sheafified scalar extension.
-Source: Stacks 03EK.
-The scalar-first convention is the symmetry of the node's notation `x ⊗ b`. -/
+/-- The image of the local tensor `b ⊗ x` in the existing sheafified scalar extension. -/
 def tensorSection {A S : Sheaf J CommRingCat.{w}} (φ : A ⟶ S)
     (M : Modules A) (U : Cᵒᵖ) (b : S.obj.obj U) (x : M.val.obj U) :
     (changeOfRings φ M).val.obj U :=
@@ -592,30 +598,7 @@ private theorem extensionIso_tensor (M : Modules A) (n : ℕ) (U : Cᵒᵖ)
   exact ((extensionIso A B α M n).inv.val.app U).hom.map_smul b _
 
 /-- The sequence projection has the canonical unbounded derived adjunction, its ordinary
-limit direct image, and its simultaneous flat-term K-flat tensor model.
-Source: Stacks 0940/0941, 06YY, 07A6, 03D7, 09T5 and 0FND
-
-Proof plan:
-1. Use `strictSystemSequenceEquivalence` (lem-pur-system-ringed-sequence-site).
-Vertical covers give componentwise kernels, sheafified cokernels and quasi-isomorphisms
-(situation-conventions).
-2. The compatible families of sections form an A-module sheaf. Componentwise gluing
-proves the limit universal property for the scalar restrictions (def-pc-sheaf-restrict-scalars).
-3. Apply lem-weil-pbc-ringed-topoi-module-adjunction. At each level the tensor is the
-sheafification of sectionwise scalar extension. The transpose of h sends b tensor x to
-b times pi_n(h(x)); the inverse evaluates at 1 tensor x. These formulas are balanced,
-natural, and compatible with the actual transitions of B.
-4. Apply prop-pur-kinjective-resolutions-exist on the sequence site, then
-lem-weil-pbc-kinjective-total-derived to obtain the universal right derived pair.
-5. Apply lem-weil-pbc-ringed-topoi-derived-pullback and lem-pc-kflat-resolution.
-One flat-term K-flat Q supplies every level, with transitions 1 tensor rho. The
-left comparison is invertible on Q; its naturality gives the comparison for any
-quasi-isomorphism Q to P and compatibility with all maps of representatives.
-6. Apply lem-sfb-resolving-derived-adjunction-normalization to these universal pairs,
-using lem-weil-pbc-termwise-adjunction-homotopy. Its chain-map normalization is the
-last equation below. Naturality and inversion of quasi-isomorphisms extend that equation
-to all derived fractions, including further denominators; no fixed representative is
-assumed to represent every derived morphism by a chain map. -/
+limit direct image, and its simultaneous flat-term K-flat tensor model. -/
 theorem derivedAdjunction
     (A : Sheaf J CommRingCat.{w}) (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w})
     (α : (Functor.const ℕᵒᵖ).obj A ⟶ B)

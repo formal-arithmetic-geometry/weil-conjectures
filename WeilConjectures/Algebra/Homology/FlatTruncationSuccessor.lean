@@ -18,8 +18,9 @@ import WeilConjectures.Algebra.Homology.FlatAugmentationEpicification
 /-!
 # One extension of a flat replacement of a good truncation
 
-Source: Stacks Project, Derived Categories, Lemma 06XX, induction step;
-Cohomology on Sites, Lemma 077J
+## References
+
+* Stacks Project, Derived Categories, Lemma 06XX, induction step; Cohomology on Sites, Lemma 077J
 -/
 
 @[expose] public section
@@ -34,18 +35,7 @@ namespace CochainComplex
 bounded-above flat replacement of the next good truncation, termwise epic, compatible with
 the given augmentation after including both truncations into `G`.
 This is a single extension step, with the previous complex and augmentation prescribed;
-it does not assert the existence of an infinite tower.
-
-Source: Stacks Project, Derived Categories, Lemma 06XX, induction step, specialized
-as in Cohomology on Sites, Lemma 077J
-
-Proof: Compose q with the inclusion j from the n-th to the (n+1)-st good truncation
-and form its mapping cone C. Both its source and target are bounded above, so C is
-bounded above. Resolve C by a bounded-above flat complex Q using the bounded flat
-replacement theorem. The relative flat extension along Q -> C gives a bounded-above
-flat complex F, a map t : E -> F and a quasi-isomorphism g : F -> G^{<= n+1} with
-t >> g = q >> j. Adding flat identity disks makes g termwise epic without changing F
-up to quasi-isomorphism. Composing with the inclusion into G gives the equality. -/
+it does not assert the existence of an infinite tower. -/
 theorem exists_flat_truncation_successor
     {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}
     {R : Sheaf J CommRingCat.{u}}

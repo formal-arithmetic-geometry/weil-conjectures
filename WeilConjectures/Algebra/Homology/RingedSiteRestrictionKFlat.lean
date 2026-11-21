@@ -11,8 +11,10 @@ import WeilConjectures.CategoryTheory.RingedSliceExtensionTensor
 /-!
 # Exact restriction and K-flat complexes on a localized ringed site
 
-Source: Stacks Project, Cohomology on Sites, Tag 0E8K, lemma-restriction-K-flat;
-Modules on Sites, Tags 03DJ and 0E8G
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 0E8K
+* Stacks Project, Modules on Sites, Tags 03DJ, 0E8G and 0E8I
 -/
 
 @[expose] public section
@@ -72,13 +74,7 @@ private theorem sheafification_single_injective
   exact (DirectSum.of_injective
     (β := fun ψ : B ⟶ U ↦ G.val.obj (Opposite.op (Over.mk ψ))) (b ≫ φ)) he
 
-/-- The sheafified direct-sum extension from a ringed slice is faithful.
-
-Source: Stacks Project, Modules on Sites, Tag 0E8G.
-Proof: include each section in its indexed summand and use naturality of the
-module sheafification unit. Equality of the extended maps gives equality of
-the sheafified sections in that summand. The preceding local-injectivity
-argument and separatedness of the original slice sheaf recover their equality. -/
+/-- The sheafified direct-sum extension from a ringed slice is faithful. -/
 private theorem ringedSliceExtension_faithful
     {C : Type u} [Category.{v} C]
     (J : GrothendieckTopology C)
@@ -285,37 +281,7 @@ private theorem tensor_acyclic_of_extension
   exact (ht i).of_iso (t ≪≫ HomologicalComplex₂.total.mapIso f (.up ℤ)).symm
 
 /-- Restriction to an arbitrary object of a ringed site is exact and preserves
-K-flatness of possibly unbounded complexes, without flatness of their terms.
-Source: Stacks Project, Cohomology on Sites, Tag 0E8K, lemma-restriction-K-flat;
-Modules on Sites, Tags 03DJ, 0E8G and 0E8I
-
-Proof plan:
-1. Use lem-pur-site-restriction-module-adjunction-exact for exact restriction
-and the exact extension left adjoint L = j_!. The restriction here is literally
-localizedSystemRestriction, hence overFunctor on J.over U with ring R.over U.
-2. Given an acyclic complex G on the slice, exactness of L preserves
-exactness of each consecutive triple. Thus LG is acyclic. K-flatness of K makes
-Tot(LG tensor K) acyclic, using
- def-pc-acyclic-complex-modules and def-pc-kflat-complex.
-3. The extension adjunction gives Hom(L(directSum G_i), H) =
-product_i Hom(G_i, j^*H) = product_i Hom(LG_i, H), naturally in H.
-The coproduct universal property therefore identifies L of a direct sum with
-the direct sum of the extensions. The diagonal subsets of Z squared indexing
- def-pc-tensor-complex-sheaves are small in the coefficient universe.
-4. Apply lem-weil-pbc-ringed-slice-extension-tensor in every bidegree and the
-coproduct comparison of step 3. This gives L Tot(G tensor K|U) isomorphic to
-Tot(LG tensor K). Naturality in G identifies the first differential components;
-naturality in K identifies the second. Additivity of L preserves their sum and
-the coefficient (-1)^p. Thus this is an isomorphism of the signed total complexes,
-including when both complexes are unbounded.
-5. Extension is faithful: equality after sheafification gives local equality
-on each direct-sum summand; projection and sheaf separatedness give equality
-of the original maps. Exact faithful functors reflect exactness. Apply this
-to every consecutive triple of Tot(G tensor K|U). Its extension is acyclic
-by steps 2 and 4, so it is itself acyclic. Quantifying over all acyclic G is
-precisely K-flatness on the slice.
-No enough-points, subterminal-object, boundedness or termwise-flatness hypothesis
-is used. -/
+K-flatness of possibly unbounded complexes, without flatness of their terms. -/
 theorem ringedSite_restriction_exact_kflat
     {C : Type u} [Category.{v} C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{max u v w}) (U : C) :

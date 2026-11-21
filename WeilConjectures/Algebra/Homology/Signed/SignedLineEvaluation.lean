@@ -12,7 +12,10 @@ import all WeilConjectures.Algebra.Homology.LineEvaluation.LineEvaluationInverse
 
 /-! # Native evaluation of the existing signed line powers
 
-Source: Stacks 03EO and 04TT; blueprint Proof (3), evaluation of signed powers.
+## References
+
+* Stacks Project, Tag 03EO
+* Stacks Project, Tag 04TT
 -/
 
 @[expose] public noncomputable section
@@ -33,8 +36,7 @@ variable {C : Type uC} [Category.{vC} C] {J : GrothendieckTopology C}
   (R : Sheaf J CommRingCat.{max uC vC r})
 attribute [local instance 2000] cochainModulesMonoidal
 
-/-- Multiplication in degree zero and the actual internal Hom evaluation otherwise.
-Source: Stacks 03EO and 04TT. -/
+/-- Multiplication in degree zero and the actual internal Hom evaluation otherwise. -/
 def signedLinePairing (L : LineEvaluation.Modules.{uC, vC, r} R) (m : ℤ) (U : Cᵒᵖ) :
     (signedLinePower.{uC, vC, r} L m).val.obj U →
       (signedLinePower.{uC, vC, r} L (-m)).val.obj U → R.obj.obj U :=
@@ -79,13 +81,7 @@ private theorem dualEvaluation (P : LineEvaluation.Modules.{uC, vC, r} R)
   exact ⟨asIso (LineEvaluation.evaluation.{uC, vC, r} R P),
     LineEvaluation.evaluation_pure.{uC, vC, r} R P⟩
 
-/-- The specified signed-power evaluation comes from an actual sheaf isomorphism.
-Source: Stacks 03EO and 04TT
-Proof: on a trivializing covering, each positive tensor power is the unit. Hence
-it is a line. Its Hom evaluation is invertible by local rank-one evaluation and
-gluing. Use this evaluation in positive degrees, precompose it with symmetry in
-negative degrees, and use multiplication in degree zero. The pure-section formulas
-for evaluation, symmetry and the unitor give exactly the stated pairing. -/
+/-- The specified signed-power evaluation comes from an actual sheaf isomorphism. -/
 theorem signedLineEvaluation_exists (L : LineEvaluation.Modules.{uC, vC, r} R)
     [L.IsFiniteLocallyFreeOfRank 1] (m : ℤ) :
     ∃ e : signedLinePower.{uC, vC, r} L m ⊗ signedLinePower.{uC, vC, r} L (-m) ≅ unit

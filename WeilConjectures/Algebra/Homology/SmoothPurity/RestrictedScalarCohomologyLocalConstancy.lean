@@ -79,12 +79,14 @@ import Mathlib.Algebra.Homology.SingleHomology
 
 /-! # Finite local models for restricted scalar-extension cohomology
 
-Source: Stacks Project, sites-cohomology.tex, Tag 094H,
-lemma-locally-constant-tensor-product; sites-modules.tex, Tag 093S,
-lemma-morphism-locally-constant; blueprint scalar-extension proof (2)
-
 The scalar-extension helper retains independent site and localization universes.
 The theorem gives finite B-module models separately in each cohomological degree.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 094H
+* Stacks Project, Modules on Sites, Tag 093S
+* Stacks Project, Tag 06YY
 -/
 
 @[expose] public section
@@ -94,11 +96,7 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace SheafOfModules
 
-/-- Constant-coefficient derived scalar extension, with the right-factor target action.
-Source: Stacks Project, Tag 06YY
-The universal left-derived pair determines the selected functor up to its canonical
-counit-compatible isomorphism. Its ordinary functor is sheafified scalar extension,
-and its counit computes the tensor on K-flat representatives. -/
+/-- Constant-coefficient derived scalar extension, with the right-factor target action. -/
 noncomputable def constantCoefficientScalarExtensionOfUniverses
     {C : Type uC} [Category.{vC} C] [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C)
@@ -131,33 +129,7 @@ attribute [-instance] WeilConjectures.integralCoefficientAbLocallyBijective
   WeilConjectures.integralCoefficientAbSheafify
   WeilConjectures.integralCoefficientRingSheafify in
 /-- Derived extension of finite coefficients has finite local target-module models
-in every degree after any restriction satisfying the stated input hypotheses.
-
-Source: Stacks Project, Tags 094H and 093S; blueprint scalar-extension proof (2)
-
-Proof:
-1. Choose a cochain representative of K and a K-flat resolution P. Localization
-and quasi-isomorphism give Q(P) ≅ K. Compare the cohomology in the chosen source
-localization universe with ordinary cochain homology of P.
-2. The restricted coefficient complex L = Res(B_T)[0] has finite locally constant
-cohomology after arbitrary pullback, by the constant coefficient calculation in
-lem-sp-restricted-scalar-coefficient-local-constancy. It vanishes above degree zero.
-Transport the hypotheses on K to P. Exact coefficient pullback transports the bounds.
-3. Apply lem-pur-proetale-restricted-tensor-finite-local-constancy to P, L and the
-identity K-flat resolution of P. This gives local constancy over A_X and finite stalks.
-4. The K-flat counit, the underlying ordinary tensor comparison, and exactness of
-forgetting to abelian sheaves identify scalar-extension and tensor cohomology.
-Both coefficient pullbacks have the same underlying set inverse image. This is
-lem-sp-restricted-scalar-tensor-cohomology-comparison, with independent localization
-universes retained. Compose with the image of Q(P) ≅ K.
-5. Apply lem-sp-proetale-finite-underlying-models to the tensor cohomology. Finite
-stalks give finite local models, with empty covering members included; base change
-gives covering presieves on every site object. Transport these set models by step 4.
-6. Apply lem-sp-proetale-finite-action-local-models. The finite-operation theorem
-refines the B-action to finite constant B-module models. The constant-scalar
-comparison identifies restricted global constants with the required localized
-module construction. Every argument is for fixed q, so no common cover or lower
-cohomological bound is imposed. -/
+in every degree after any restriction satisfying the stated input hypotheses. -/
 theorem restrictedScalarCohomology_finiteLocalModels
     {T X : Scheme.{u}} (a : X ⟶ T)
     {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (f : A →+* B)

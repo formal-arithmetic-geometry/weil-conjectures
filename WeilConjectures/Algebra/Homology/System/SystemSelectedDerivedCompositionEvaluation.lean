@@ -17,7 +17,11 @@ import WeilConjectures.Algebra.Homology.System.SystemDerivedSubsequenceEvaluatio
 
 /-! # Composition of derived subsequence extensions
 
-Source: Zheng, Construction 4.1; Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 0FND
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -37,14 +41,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r s : ℕ ↪o ℕ)
 
 /-- Evaluating composition of derived subsequence extensions gives the canonical
-scalar associator at the actual first composite selected index. Source: Zheng 4.1
-and its subsequence extension; Stacks 0FND
-Proof: reindex composite evaluation by t_(r∘s)(m)=t_s(t_r(m)). The right evaluation
-squares paste: selected evaluation respects restriction composition, selected transition
-commutes with restriction, and strict derived transitions compose. Apply evaluation
-composition for normalized adjunction mates. Its extension uniqueness comparison is
-the specified composition mate and its scalar comparison is the canonical associator.
-Reindexing the composite evaluation inserts exactly the displayed equality transport. -/
+scalar associator at the actual first composite selected index. -/
 theorem systemSelectedDerivedComposition_eval (m : ℕ)
     (P : DerivedCategory (StrictRingSystem (selectedSystemRings B (s.trans r)))) :
     (derivedSystemEvaluation B m).map

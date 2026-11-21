@@ -13,7 +13,9 @@ import Mathlib.Algebra.Homology.ShortComplex.Linear
 /-!
 # Scalar compatibility from a resolution counit
 
-Source: Stacks Project, Tag 06Y6, lemma-derived-base-change
+## References
+
+* Stacks Project, Tag 06Y6.
 -/
 
 @[expose] public section
@@ -58,23 +60,8 @@ private theorem homologyMap_smul_id
 
 set_option backward.isDefEq.respectTransparency false in
 -- Several localization and homology factorization functors occur in the scalar transport.
-/-- Source: Stacks Project, Tag 06Y6, lemma-derived-base-change.
-
-Proof: First compute the scalar identity for ordinary extension of a complex P.
-On a pure tensor b tensor p, extension of r times identity sends it to b tensor
-(r times p), which equals (algebraMap R B r times b) tensor p. Tensor induction
-proves equality of maps in each degree. The natural factorization isomorphisms
-for homology through the homotopy quotient and derived localization transport
-this equality to homology of Qh of ordinary extension. If the counit at P is
-invertible, its naturality for r times identity, followed by homology, transports
-the equality to H(L(Qh(P))). For arbitrary E choose P and s from hres.
-The quasi-isomorphism s becomes invertible under Qh, L and homology. The equality
-s composed with r times identity of E = r times identity of P composed with s
-follows from R-linearity of s. Apply the composite functor, substitute the scalar
-identity on P and cancel the image of s. Composition in ModuleCat B is B-linear,
-so this gives precisely the asserted equality. Neither additivity nor a universal
-property of L is needed. The proof works for r = 0 or 1, zero complexes and zero
-coefficient rings, and does not assume that tensoring s itself is a quasi-isomorphism. -/
+/-- A derived extension of scalars whose counit is invertible on resolutions of all complexes
+acts on homology of `r • 𝟙 E` by the scalar `algebraMap R B r`. -/
 theorem baseDerivedExtension_scalar
     [(extendScalars.{_, _, max uR uB v} (algebraMap R B)).Additive]
     (L : DerivedCategory (ModuleCat.{max uR uB v} R) ⥤

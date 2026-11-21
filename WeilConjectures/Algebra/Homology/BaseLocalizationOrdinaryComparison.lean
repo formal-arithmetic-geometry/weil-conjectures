@@ -14,7 +14,9 @@ public import WeilConjectures.Algebra.Homology.BaseLocalizationMap
 
 /-! Ordinary comparison square for base localization.
 
-Source: Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
+## References
+
+* Stacks Project, perfect.tex, Tags 0DJ8 and 06Y6.
 -/
 
 @[expose] public section
@@ -43,19 +45,7 @@ variable (R A B Rp D : Type u)
 
 omit [Algebra A D] [Algebra B D] tAD tBD tApD tBpD in
 include tRpA tRpB in
-/-- Ordinary comparison commutes with localization of the tensor base.
-Source: Stacks Project, perfect.tex, Tags 06Y6 and 0DJ8.
-
-Proof: compose restriction-of-scalars composition with the ordinary localization
-isomorphism `baseLocalizationTensorIso`, and conjugate by the two ordinaryIso
-isomorphisms. This constructs psi and fixes its values on b tensor q.
-The universal lift defining baseLocalizationDerivedMap satisfies leftDerived_fac.
-Evaluate that equation at the restricted complex Q. Naturality of the counit
-with respect to baseLocalizationInputIso gives the square before cohomology.
-Apply B-linear homology and its homotopy/derived factorization isomorphisms.
-The two comparison_eq equations and cancellation of cohomologyIso identify
-its sides with the displayed formula. No localizedComparison is used, and
-no flatness of D or invertibility of a comparison is required. -/
+/-- Ordinary comparison commutes with localization of the tensor base. -/
 theorem exists_baseLocalization_ordinaryComparison
     (S : Submonoid R) [IsLocalization S Rp] (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

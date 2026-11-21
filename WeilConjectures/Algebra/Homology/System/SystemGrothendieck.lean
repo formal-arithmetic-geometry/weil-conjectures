@@ -28,7 +28,10 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Grothendieck abelian strict coefficient systems
 
-Source: Zheng, Construction 4.1; Stacks 03DA, 03DB and 079Q.
+## References
+
+* Stacks Project, Tags 03DA, 03DB, 079Q
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -43,12 +46,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
   [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
 
-/-- Strict coefficient systems form a Grothendieck abelian category.
-Source: Zheng 4.1; Stacks 03DA, 03DB and 079Q
-Proof: the ringed sequence site is essentially small in the coefficient universe.
-Its module sheaves are Grothendieck abelian by the free-sheaf separator and exactness
-of filtered colimits. Transport this property across the explicit equivalence with
-strict systems. -/
+/-- Strict coefficient systems form a Grothendieck abelian category. -/
 theorem strictRingSystem_isGrothendieckAbelian
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) :
     IsGrothendieckAbelian.{w} (StrictRingSystem B) := by

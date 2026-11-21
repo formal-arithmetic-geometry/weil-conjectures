@@ -20,13 +20,13 @@ sequence
 
 `E₁^{r, s} = R^r v(K^s) ⟹ H^{r + s}(R⁺v(K))`
 
-of blueprint `thm-sp-if-e1`, whose differential `d₁ : E₁^{r, s} ⟶ E₁^{r, s + 1}` is
+whose differential `d₁ : E₁^{r, s} ⟶ E₁^{r, s + 1}` is
 `R^r v(d_K)`.
 
 ## The construction
 
-The blueprint constructs this spectral sequence from a Cartan–Eilenberg resolution of `K`,
-filtered by the second degree. We use the equivalent construction by the *stupid filtration*:
+We construct this spectral sequence by the *stupid filtration* (equivalently, from a
+Cartan–Eilenberg resolution of `K` filtered by the second degree):
 the stupid truncations `σ_{≥ s} K` give degreewise split short exact sequences of complexes
 
 `0 ⟶ σ_{≥ s + 1} K ⟶ σ_{≥ s} K ⟶ K^s[-s] ⟶ 0`,
@@ -49,9 +49,6 @@ the stupid filtration of `K`.) The spectral sequence of this couple, starting on
 cohomology `Hⁿ(R⁺v(K))` of the derived functor, filtered by the images of
 `Hⁿ(R⁺v(σ_{≥ s} K))` (`CategoryTheory.Functor.stupidFiltrationExactCouple_convergesTo`). The
 abutment `Hⁿ(R⁺v(K))` only depends on `K` (and not on any choice of resolutions).
-
-In the notation `E₁^{r, s}` of the blueprint, `r = n - s` is the degree of the derived functor
-and `s` is the degree in `K`.
 
 ## Main definitions
 
@@ -439,10 +436,7 @@ noncomputable def stupidFiltrationTower (K : CochainComplex A ℤ) :
 degree `s` and the total degree `n` with `D^{s, n} = Hⁿ(R⁺v(σ_{≥ s} K))` and
 `E^{s, n} = Hⁿ(R⁺v(K^s[-s])) ≅ R^{n - s} v(K^s)`, given by the long exact cohomology sequences of
 the distinguished triangles `R⁺v(σ_{≥ s + 1} K) ⟶ R⁺v(σ_{≥ s} K) ⟶ R⁺v(K^s[-s]) ⟶`.
-Its spectral sequence is `E₁^{r, s} = R^r v(K^s) ⟹ H^{r + s}(R⁺v(K))`.
-
-This replaces the Cartan–Eilenberg resolution filtered by the second degree of the blueprint by
-the stupid filtration of `K`, which gives the same exact couple (see the module docstring). -/
+Its spectral sequence is `E₁^{r, s} = R^r v(K^s) ⟹ H^{r + s}(R⁺v(K))`. -/
 noncomputable def stupidFiltrationExactCouple (K : CochainComplex A ℤ) :
     ExactCouple B ((-1, 0) : ℤ × ℤ) (1, 1) 0 :=
   (v.stupidFiltrationTower K).exactCoupleNeg (DerivedCategory.Plus.homologyFunctor B 0)

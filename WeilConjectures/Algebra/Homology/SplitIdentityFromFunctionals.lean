@@ -15,7 +15,9 @@ import WeilConjectures.Algebra.Homology.SplitSubmodulesStable
 /-!
 # Assembling cancellation from two split functionals
 
-Source: Stacks Project, Algebra, Tag 00MT, proof, final three sentences.
+## References
+
+* Stacks Project, Tag 00MT
 -/
 
 @[expose] public section
@@ -85,22 +87,7 @@ private theorem submoduleSumEquiv_apply {R M : Type*} [CommRing R]
   simp
 
 set_option linter.unusedVariables false in
-/-- Assemble the complement and identity complex once the neighboring maps respect the split.
-Source: Stacks Project, Algebra, Tag 00MT, proof, final three sentences.
-
-Proof: Let the complementary terms be `ker α`, `ker β` at `i`, `i - 1`, and the original
-terms elsewhere. The equality `β ∘ d = α` restricts the middle differential to these
-kernels; `hin` restricts the incoming differential; all other differentials restrict
-without a codomain change. The restricted differentials square to zero by the original
-complex relation and injectivity of submodule inclusions. Let `T` have a universe lift of
-`R` at `i`, `i - 1`, zero terms elsewhere and the identity as middle differential.
-The degreewise decompositions are `x = (x - α(x) • z) + α(x) • z` at `i` and
-`y = (y - β(y) • w) + β(y) • w` at `i - 1`; the kernel components are unique since
-`α(z) = β(w) = 1`. Use these decompositions to make the degreewise binary-direct-sum
-linear equivalences. In degree `i + 1` compatibility is `hin`; in degree `i` it follows
-from `hd` and `hdz`; in degree `i - 1` it is `hout`; in all other degrees it is the
-identity. No finiteness or freeness is required, and the construction includes the zero
-ring. The displayed equivalences `g` identify the complement with these exact submodules. -/
+/-- Assemble the complement and identity complex once the neighboring maps respect the split. -/
 theorem exists_splitting_of_split_functionals
     {R : Type u} [CommRing R] (C : ChainComplex (ModuleCat.{max u v} R) ℤ)
     (i : ℤ) (α : C.X i →ₗ[R] R) (β : C.X (i - 1) →ₗ[R] R)

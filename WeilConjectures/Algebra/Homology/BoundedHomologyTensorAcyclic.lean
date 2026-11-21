@@ -13,7 +13,11 @@ import WeilConjectures.CategoryTheory.Triangulated.BoundedPostnikovTower
 
 /-! # Vanishing of bounded tensor products detected on homology factors
 
-Source: Stacks Project, derived.tex, Tag 08J5, and sites-cohomology.tex, Tags 06YM and 06YU.
+## References
+
+* Stacks Project, derived.tex, Tag 08J5 (finite truncation triangles)
+* Stacks Project, sites-cohomology.tex, Tags 06YM and 06YU (exactness and definition of
+  derived tensor)
 -/
 
 @[expose] public noncomputable section
@@ -25,16 +29,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 namespace CategoryTheory
 
 /-- Tensor with a flat-term K-flat complex vanishes on a bounded complex if it vanishes
-on each of its homology sheaves placed in degree zero.
-
-Source: Stacks Project, derived.tex, Tag 08J5, finite truncation triangles;
-sites-cohomology.tex, Tags 06YM and 06YU, exactness and definition of derived tensor.
-
-Proof: descend the fixed K-flat tensor to an exact functor on the derived category.
-The finite ordered Postnikov tower of the bounded input has shifted homology sheaves
-as factors. The computation comparison and the assumed single-module vanishing kill
-those factors. Exactness kills each successive vertex, starting at zero. The final
-vertex is the input, and the computation comparison returns acyclicity of the total. -/
+on each of its homology sheaves placed in degree zero. -/
 theorem tensor_acyclic_of_bounded_homology
     {C : Type u} [SmallCategory C] {T : GrothendieckTopology C}
     (R : Sheaf T CommRingCat.{u}) (P K : ringedSiteComplex R)

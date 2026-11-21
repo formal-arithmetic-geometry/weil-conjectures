@@ -13,10 +13,13 @@ import WeilConjectures.Topology.InverseImageOperationExt
 /-!
 # Inverse image of sheaf modules and direct image
 
-Source: Stacks Project, Sheaves, Tags 008X and 008Y
-The inverse-image module is the landed `TopCat.Sheaf.inverseImageModule`
+The inverse-image module is the `TopCat.Sheaf.inverseImageModule`
 (the 008X structure on the explicit abelian inverse image), not Mathlib's
 abstract `SheafOfModules.pullback`.
+
+## References
+
+* Stacks Project, Sheaves, Tags 008X and 008Y
 -/
 
 @[expose] public section
@@ -32,8 +35,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 /-- The abelian inverse-image/direct-image adjunction bijection restricts to a natural
 bijection between linear morphisms `f⁻¹M ⟶ N` over `f⁻¹A` and linear morphisms
-`M ⟶ f_* N` over `A`, where `A` acts on `f_* N` through the unit `η_A`.
-Source: Stacks Project, Sheaves, Tags 008X and 008Y. -/
+`M ⟶ f_* N` over `A`, where `A` acts on `f_* N` through the unit `η_A`. -/
 def moduleInverseImageAdjunctionSpec {X Y : TopCat.{u}} (f : X ⟶ Y)
     (A : Y.Sheaf CommRingCat.{u}) : Prop :=
   let J := Opens.grothendieckTopology Y
@@ -64,17 +66,7 @@ def moduleInverseImageAdjunctionSpec {X Y : TopCat.{u}} (f : X ⟶ Y)
       φ M N' (ψ ≫ b) = φ M N ψ ≫ (SheafOfModules.pushforward.{u} η).map b)
 
 /-- The inverse-image module adjunction: the abelian adjunction restricts to linear maps,
-naturally in both modules. Source: Stacks Project, Sheaves, Tags 008X and 008Y.
-
-Proof: send a linear morphism to its abelian adjunct. The canonical unit is
-semilinear, so this adjunct is linear for the action through the ring unit.
-Conversely, take the inverse abelian adjunct of a linear map. Its two candidate
-scalar operations commute with restriction and agree on pairs of unit images,
-by semilinearity of the unit and linearity of the given map.
-`TopCat.Sheaf.inverseImageOperation_ext` extends this equality to all sections,
-so the inverse adjunct is linear. Faithfulness of `toSheaf` and the abelian Hom
-equivalence give bijectivity and naturality in both modules; the section formula
-is the defining formula of that equivalence. -/
+naturally in both modules. -/
 theorem moduleInverseImageAdjunction {X Y : TopCat.{u}} (f : X ⟶ Y)
     (A : Y.Sheaf CommRingCat.{u}) : moduleInverseImageAdjunctionSpec f A := by
   classical

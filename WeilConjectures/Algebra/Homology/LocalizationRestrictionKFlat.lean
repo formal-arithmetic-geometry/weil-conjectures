@@ -19,7 +19,9 @@ import Mathlib.RingTheory.Flat.Localization
 
 /-! # K-flatness after restricting a localized base
 
-Source: Stacks Project, Tags 06Y6 and 00CS.
+## References
+
+* Stacks Project, Tags 06Y6 and 00CS
 -/
 
 @[expose] public section
@@ -30,17 +32,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace ModuleCat
 
-/-- Restriction along a localization preserves K-flat complexes.
-Source: Stacks Project, Tag 06Y6, computation of derived base change; Tag 00CS.
-
-Proof: let F be any acyclic R-complex. Flatness of the localization makes
-Rp tensor_R F acyclic. Tensor associativity identifies the restriction of
-(Rp tensor_R F) tensor_Rp P with F tensor_R (restriction P), term by term
-and on differentials, and commutes with the direct sums in totalization.
-K-flatness of P makes the former tensor acyclic. Exact restriction preserves
-acyclicity, so the latter tensor is acyclic. Braiding gives the other tensor
-order, hence the K-flat predicate. This also works for identity localizations,
-unbounded complexes and the zero localization: no nonzero assumption is used. -/
+/-- Restriction along a localization preserves K-flat complexes. -/
 theorem kFlat_restrictScalars_of_isLocalization
     {R Rp : Type u} [CommRing R] [CommRing Rp] [Algebra R Rp]
     (S : Submonoid R) [IsLocalization S Rp]

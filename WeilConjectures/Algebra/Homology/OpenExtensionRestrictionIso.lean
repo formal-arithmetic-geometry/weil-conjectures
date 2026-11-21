@@ -11,7 +11,9 @@ import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkMaps
 
 /-! # Restriction of extension by zero on an open
 
-Source: Stacks Project, Tag 00A7 (4).
+## References
+
+* Stacks Project, Tag 00A7 (4); Modules on Sites, Tag 03DI
 -/
 
 @[expose] public section
@@ -22,21 +24,7 @@ open CategoryTheory TopologicalSpace
 
 namespace AlgebraicGeometry
 
-/-- Restricting extension by zero to the original open gives the identity functor.
-Source: Stacks Project, Tag 00A7 (4), and Modules on Sites, Tag 03DI.
-
-Proof: Choose the extension-by-zero/restriction adjunction from
-`open_restriction_adjunction_exact`. Transfer its unit to module sheaves on U through
-`sheafOfModulesEquivOver`, and forget to abelian sheaves. At each point of U, the
-interior stalk comparison in `module_extensionByZero_stalk_maps` is an isomorphism.
-Its germ formula identifies it with the stalk map of the unit followed by the
-canonical restriction-stalk isomorphism: apply stalk hom extensionality, rewrite the
-restriction-stalk germ formula, and use the given unit germ formula. Hence the stalk
-map of the unit is an isomorphism. Mathlib's stalk criterion makes the underlying
-abelian sheaf map an isomorphism. The module forgetful functor and the equivalence
-reflect isomorphisms, so each unit component is an isomorphism. Its inverse is the
-claimed natural isomorphism. The empty open has no stalks to check, and the total
-open uses exactly the same argument. -/
+/-- Restricting extension by zero to the original open gives the identity functor. -/
 theorem nonempty_openExtensionRestrictionIso (X : RingedSpace.{u}) (U : Opens X) :
     Nonempty
       ((SheafOfModules.extensionByZeroPresheaf.{u} (moduleRings X) U ⋙

@@ -17,8 +17,7 @@ This file proves the universal property of the chart-glued blow-up
 `Scheme.IdealSheafData.blowup`: a morphism `t : T ⟶ X` such that the inverse image
 ideal sheaf `I.comap t` is invertible factors uniquely through the
 blow-up of `I` (existence: `Scheme.IdealSheafData.exists_lift_blowup`; uniqueness:
-`Scheme.IdealSheafData.hom_ext_of_isInvertible_comap`; Stacks Project
-Tag 0806; blueprint `thm:nagata-blowup-universal-property`).
+`Scheme.IdealSheafData.hom_ext_of_isInvertible_comap`).
 
 The proof is chart-local, with the algebraic core the universal property of the
 `a`-chart ring `A[I/a]` of the affine blow-up:
@@ -51,6 +50,11 @@ Elaboration-performance conventions follow
 `WeilConjectures.Compactification.FiniteDegree`: chart probes keep their section
 ring abstract, no `rw`/`▸` on goals mentioning chart rings, and equalities of
 morphisms are assembled by `congrArg`/explicit `calc` steps.
+
+## References
+
+* Stacks Project, Tag 0806 (universal property of blowing up)
+* Stacks Project, Tag 080A (factors of an invertible product ideal)
 
 -/
 

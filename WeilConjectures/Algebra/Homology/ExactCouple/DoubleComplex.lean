@@ -358,12 +358,8 @@ lemma flipFirstSpectralSequenceAbutment_filtration (n p : ℕ) :
 
 /-- **The first spectral sequence of a first quadrant double complex.** For a first quadrant
 double complex `K` in an abelian category, the filtration of the total complex by the columns
-gives a first quadrant cohomological spectral sequence with
-`E₂^{p, q} ≅ H^p_I H^q_{II}(K)` — the `p`-th cohomology of the complex
-`p ↦ H^q(K^{p, •})` whose differential is induced by the horizontal differential of `K` —
-abutting to the cohomology `H^{p + q}(Tot K)` of the total complex.
-
-This is the first of the two spectral sequences of a double complex. -/
+gives a first quadrant cohomological spectral sequence with `E₂^{p, q} ≅ H^p_I H^q_{II}(K)`
+abutting to the cohomology `H^{p + q}(Tot K)` of the total complex. -/
 theorem exists_spectralSequence {C : Type*} [Category* C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)) :
     ∃ E : E₂CohomologicalSpectralSequenceNat C,
@@ -376,12 +372,8 @@ theorem exists_spectralSequence {C : Type*} [Category* C] [Abelian C]
 
 /-- **The second spectral sequence of a first quadrant double complex.** For a first quadrant
 double complex `K` in an abelian category, the filtration of the total complex by the rows
-gives a first quadrant cohomological spectral sequence with
-`E₂^{q, p} ≅ H^q_{II} H^p_I(K)` — the `q`-th cohomology of the complex
-`q ↦ H^p(K^{•, q})` whose differential is induced by the vertical differential of `K` —
-abutting to the cohomology `H^{p + q}(Tot K)` of the total complex. It is the first spectral
-sequence of the transposed double complex `K.flip`, whose total complex is isomorphic to that
-of `K`. -/
+gives a first quadrant cohomological spectral sequence with `E₂^{q, p} ≅ H^q_{II} H^p_I(K)`
+abutting to the cohomology `H^{p + q}(Tot K)` of the total complex. -/
 theorem exists_spectralSequence_flip {C : Type*} [Category* C] [Abelian C]
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)) :
     ∃ E : E₂CohomologicalSpectralSequenceNat C,

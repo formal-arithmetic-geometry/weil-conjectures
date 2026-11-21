@@ -10,8 +10,13 @@ public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 import WeilConjectures.Algebra.Homology.HomComplexProjections
 
-/-! # Right shifts of the Hom complex
-Source: Stacks Project, Cohomology on Sites, Sections 21.34--21.35.
+/-!
+# Right shifts of the Hom complex
+
+## References
+
+* Stacks Project, Cohomology on Sites, Sections 21.34--21.35
+* Stacks Project, Sections 21.34 and 21.35 (Tags 0A8X and 08JA)
 -/
 
 @[expose] public section
@@ -84,19 +89,7 @@ private lemma shiftSign_sub {A : Type*} [AddCommGroup A]
 
 -- The dependent product projections require elaborating the Hom-complex specification.
 set_option backward.isDefEq.respectTransparency true in
-/-- The Hom-complex bifunctor commutes with shifts in its second complex.
-Source: Stacks Project, sites-cohomology.tex, Sections 21.34 and 21.35
-(Tags 0A8X and 08JA).
-Proof: In degree k both sides are products indexed by p of internal Hom from
-L^p to M^(p+k+n). Use the product universal property and the shift degree
-isomorphisms to identify these products. The inverse uses the inverse degree
-isomorphisms. The shifted differential has postcomposition coefficient
-(-1)^n and precomposition coefficient -(-1)^(k+n+n) = -(-1)^k;
-the Hom differential with shifted target has precisely these coefficients.
-The product projections therefore verify the chain-map equation, and the
-inverse equations hold projectionwise. Precomposition in L and postcomposition
-in M commute with the degree identifications, giving naturality in both complexes.
-The formula works for all integer shifts, unbounded complexes, and zero objects. -/
+/-- The Hom-complex bifunctor commutes with shifts in its second complex. -/
 theorem homComplex_shift_right
     {C : Type u} [SmallCategory C]
     (J : GrothendieckTopology C) (R : Sheaf J CommRingCat.{u}) (n : ℤ) :

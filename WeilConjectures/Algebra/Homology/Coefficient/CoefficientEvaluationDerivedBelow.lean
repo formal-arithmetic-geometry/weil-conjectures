@@ -13,7 +13,10 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 /-!
 # Evaluation of a derived extension below its defining level
 
-Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tag 06XN.
+## References
+
+* Stacks Project, Tag 06XN
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 
 @[expose] public noncomputable section
@@ -38,15 +41,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
 /-- Evaluation of the derived extension below its level is derived scalar extension,
-with the comparison induced by the ordinary below-level formula on complexes.
-Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tag 06XN
-Proof: derived evaluation is a right adjoint, so it preserves the limits defining the
-pointwise right Kan extension of the ordinary extension functor. Postcompose that Kan
-extension by evaluation. The evaluation localization comparison and the ordinary
-below-level tensor isomorphism identify its input functor with termwise scalar extension
-followed by localization. Uniqueness of left derived functors gives the comparison
-isomorphism. Its defining counit equation, precomposed with its inverse, is exactly the
-stated equation on complex representatives. -/
+with the comparison induced by the ordinary below-level formula on complexes. -/
 theorem coefficientEvaluationDerivedBelow
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive]

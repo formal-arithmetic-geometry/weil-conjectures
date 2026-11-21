@@ -15,9 +15,12 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 
-/-! # Coproduct closure of the localized tensor comparison predicate
+/-!
+# Coproduct closure of the localized tensor comparison predicate
 
-Source: Stacks Project, Tags 0DJA(1), 0BYJ and 09PB.
+## References
+
+* Stacks Project, Tags 0DJA(1), 0BYJ and 09PB
 -/
 
 @[expose] public section
@@ -99,23 +102,7 @@ variable (R A B C : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing C]
     ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex
       (.up ℤ)).obj Q) ⟶ N)
 
-/-- The localized tensor comparison predicate is closed under coproducts.
-Source: Stacks Project, Tags 0DJA(1), 0BYJ and 09PB.
-
-Proof: Choose K-flat representatives U_j of the summands using the functorial
-flat resolution. Tensor commutes with sums; exactness of module sums shows that
-their sum is K-flat. The derived module direct-sum theorem identifies its image
-under Q with the specified coproduct S. Choose a base-derived model for each
-U_j tensor Q and one for their sum tensor Q. The direct-sum comparison square
-identifies the latter comparison, up to source and target isomorphisms, with
-the coproduct of the summand comparisons. Each summand comparison is invertible
-by the given predicate. Sigma.map preserves these isomorphisms, so cancellation
-of the source comparison isomorphism proves invertibility on the sum in every
-degree. For any K-flat representative V of S and any model, apply the existing
-representative-square theorem to V and the sum; its two isomorphisms transport
-invertibility to V. This gives exactly the all-representatives and all-models
-predicate. The constructions include an empty family: the coproduct of zero
-complexes and every coproduct comparison used above are zero-object maps. -/
+/-- The localized tensor comparison predicate is closed under coproducts. -/
 theorem localizedTensorComparisonProperty_closure_coproducts
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) :
@@ -163,10 +150,7 @@ theorem localizedTensorComparisonProperty_closure_coproducts
     infer_instance
   exact IsIso.of_isIso_comp_right _ d.hom
 
-/-- Fixed representative, model, and degree component of coproduct closure.
-Source: Stacks Project, Tag 0DJA(1), coproduct component of the localizing argument.
-Proof: apply the proved all-representatives coproduct closure theorem to the
-given cocone and summand predicates, then specialize to U, e, hU, mU and i. -/
+/-- Fixed representative, model, and degree component of coproduct closure. -/
 theorem localizedTensorComparisonProperty_closure_coproducts_fixed_degree
     (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →
       (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)

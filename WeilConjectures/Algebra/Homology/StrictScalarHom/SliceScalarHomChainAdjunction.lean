@@ -12,12 +12,13 @@ import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-! # Slice-normalized scalar adjunction for product Hom complexes
 
-Source: Stacks Project, sites-modules.tex, Tags 03CZ, 03CY, 03DH and 04IX;
-sites-cohomology.tex, Tag 0A8X
-
 The interfaces below reuse the existing scalar extension, tensor and actual Hom
 product projections. They specify the ordinary slice adjunctions and precisely
 the nu/theta portion of the scalar-Hom comparison, without its evaluation square.
+
+## References
+
+* Stacks Project, Tags 03CZ, 03CY, 03DH, 04IX
 -/
 
 -- After pruning, this module only keeps private declarations.

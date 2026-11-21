@@ -18,12 +18,14 @@ import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 /-!
 # Closure of K-flat complexes under countable sums and cones
 
-Source: Stacks Project, Cohomology on Sites, Lemmas 06YR and 07A3
-
 ## Main statements
 
 - `CochainComplex.isKFlat_coproduct_nat`: a countable direct sum of K-flat complexes is K-flat.
 - `CochainComplex.isKFlat_mappingCone`: the cone of a map of K-flat complexes is K-flat.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YR and 07A3
 -/
 
 @[expose] public section
@@ -65,13 +67,7 @@ private theorem acyclic_coproduct_nat
     ((HomologicalComplex.acyclic_of_isZero _ hz) i)).1 inferInstance
 
 set_option synthInstance.maxSize 512 in
-/-- Stacks, Cohomology on Sites, Lemma 06YR:
-the countable direct sum of K-flat complexes of sheaves of `R`-modules is K-flat.
-
-Proof: for every acyclic `F`, total tensor commutes with the coproduct. This coproduct is
-acyclic since countable coproducts of sheaves of modules are exact: express it as the filtered
-colimit of finite sums and use exactness of filtered colimits. Every tensor summand is acyclic
-by K-flatness, so the total tensor of the coproduct is acyclic. -/
+/-- The countable direct sum of K-flat complexes of sheaves of `R`-modules is K-flat. -/
 theorem isKFlat_coproduct_nat
     (K : ℕ → CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)
@@ -90,12 +86,7 @@ theorem isKFlat_coproduct_nat
   exact (hsum i).of_iso e.symm
 
 
-/-- Stacks, Cohomology on Sites, Lemma 07A3:
-the mapping cone of a morphism of K-flat complexes of sheaves of `R`-modules is K-flat.
-
-Proof: tensoring an acyclic complex with the cone triangle gives the cone triangle of the
-tensored morphism. The first two tensor complexes are acyclic by K-flatness; the
-tensor-triangle two-out-of-three property makes the third acyclic as well. -/
+/-- The mapping cone of a morphism of K-flat complexes of sheaves of `R`-modules is K-flat. -/
 theorem isKFlat_mappingCone
     {K₁ K₂ : CochainComplex
       (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ}

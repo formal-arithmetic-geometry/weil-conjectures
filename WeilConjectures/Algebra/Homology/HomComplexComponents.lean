@@ -15,7 +15,9 @@ The product projections `homComplexπ L M n p q : (homComplex L M)^n ⟶ 𝓗om(
 Hom complex of two complexes of sheaves of modules (`p + n = q`), with the formulas for its
 differential (`homComplex_d_π`) and for its functoriality (`homComplexFunctor_map_f_π`).
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
+## References
+
+* Stacks Project, Section 0A8X
 -/
 
 @[expose] public section
@@ -31,8 +33,7 @@ section API
 set_option backward.isDefEq.respectTransparency true
 
 /-- The product projections `(homComplex L M)^n ⟶ 𝓗om(L^p, M^q)`, for `p + n = q`, specified
-together with `homComplexFunctor` (`homComplex_projections_exists`).
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X. -/
+together with `homComplexFunctor` (`homComplex_projections_exists`). -/
 noncomputable def homComplexπ
     (L M : CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (n p q : ℤ)

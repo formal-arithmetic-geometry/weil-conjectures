@@ -12,7 +12,12 @@ public import Mathlib.Topology.Sheaves.Abelian
 
 /-! # Module sheafification and localization at an open
 
-Source: Stacks Project, Tag 03DH.
+Module sheafification commutes with restriction to the open localized site.
+
+## References
+
+* Stacks Project, Tag 03DH (localization of sites)
+* Stacks Project, Tag 03CY (module sheafification)
 -/
 
 @[expose] public section
@@ -26,17 +31,7 @@ set_option backward.isDefEq.respectTransparency.types false
 
 namespace SheafOfModules
 
-/-- Module sheafification commutes with restriction to the open localized site.
-
-Source: Stacks Project, Tag 03DH, localization of sites; Tag 03CY, module sheafification.
-Proof: restrict the sheafification unit to the slice. Every covering sieve of an object
-`W → U` is the pullback of a covering sieve of `W`, with the uniquely forced maps to `U`.
-The restricted unit is consequently locally injective and locally surjective, and its
-codomain is a sheaf on the localized site. Its extension from the sheafification of the
-restricted presheaf is an isomorphism. The extension is natural in the presheaf by the
-uniqueness clause of the sheafification universal property. Taking its inverse gives
-the displayed natural isomorphism. Empty opens and zero rings require no separate case:
-the same covering-sieve argument and universal property apply. -/
+/-- Module sheafification commutes with restriction to the open localized site. -/
 theorem exists_open_localized_sheafification
     {X : TopCat.{u}} (A : Sheaf (Opens.grothendieckTopology X) RingCat.{u})
     (U : TopologicalSpace.Opens X) :

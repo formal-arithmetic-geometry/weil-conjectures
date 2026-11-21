@@ -28,9 +28,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Local calculus of module sheaves on two covering subterminals
 
-Source: Stacks Project, Modules on Sites, Tags 03DI, 03DJ and 0F6Z; Sites,
-Tag 04B8.
-
 ## Main definitions
 
 * `Intersection`: the module-linear comparisons with their adjunction normalizations.
@@ -40,6 +37,10 @@ Tag 04B8.
 ## Main statements
 
 * `subterminal_module_local_calculus`: the full calculus for a binary subterminal cover.
+
+## References
+
+* Stacks Project, Tags 03DI, 03DJ, 0F6Z, 04B8
 -/
 
 @[expose] public noncomputable section
@@ -52,8 +53,7 @@ universe c v r a b ha hb wa wb w s
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace SheafOfModules.SubterminalLocal
 
-/-- The recorded module sheafification with identity coefficient map.
-Source: Stacks 03DI. -/
+/-- The recorded module sheafification with identity coefficient map. -/
 abbrev sheafify {D : Type a} [Category.{ha} D] {K : GrothendieckTopology D}
     [HasSheafify K AddCommGrpCat.{s}] [K.WEqualsLocallyBijective AddCommGrpCat.{s}]
     (S : Sheaf K RingCat.{s}) :=

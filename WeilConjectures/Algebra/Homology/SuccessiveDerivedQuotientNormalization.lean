@@ -14,12 +14,14 @@ import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 /-!
 # Normalized composition of derived coefficient extensions
 
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E, 06YY and 07A6
-
 The scalar-first tensor convention of `changeOfRings` writes the paper's
 `(x ⊗ s) ⊗ t` as `t ⊗ (s ⊗ x)`. All the comparison maps below refer to the
 existing sheafified extension, its universal left derived pair, and its
 localization counit. The auxiliary presentations only bundle these interfaces.
+
+## References
+
+* Stacks Project, Tags 0D6D, 0G7E, 06YS, 06YY, 07A6
 -/
 
 @[expose] public section
@@ -735,48 +737,12 @@ unit normalization, coefficient naturality and coherent finite iteration. This i
 family statement, so naturality concerns arbitrary derived morphisms as well as changing
 coefficient rings. No ring map is required to be flat or surjective, and no complex is
 required to be bounded. Ordinary rings are the specialization to the singleton category
-with the bottom (identity-cover) topology.
-
-Source: Stacks Project, Cohomology on Sites, Tags 0D6D, 0G7E, 06YS, 06YY and 07A6
-
-Proof:
-1. Use lem-pur-derived-change-of-rings to present each ordinary extension and its
-universal unbounded left-derived pair. Resolve each input by a flat-term K-flat complex
-using lem-pc-kflat-resolution (06YS), without assuming functorial resolutions.
-2. By lem-weil-pbc-ringed-topos-kflat-pullback (0G7E), applied to identity inverse image,
-the first and successive ordinary extensions remain flat-term K-flat; 06YY computes the
-derived extensions by these complexes and preserves quasi-isomorphisms between them.
-3. On sections define the two maps by the formulas in ordinary_hom and ordinary_inv.
-Balancing over R uses b(a(r)s)=b(a(r))b(s); balancing over S uses multiplicativity of b.
-The inverse moves the middle scalar across the outer tensor. Restrictions commute with
-these formulas. The section calculus of def-weil-pbc-ringed-tensor-section-calculus
-and the actual sheafification construction of def-pur-sheaf-tensor-product show that
-they are mutually inverse sheaf morphisms. They commute with the complex differential.
-4. These maps are natural for termwise morphisms, hence also homotopies. Apply the
-flat-term K-flat localization equivalence of lem-weil-pbc-site-derived-tensor-descent
-and clauses (2),(3) of lem-weil-pbc-localization-universal-property to descend the
-comparison and its inverse. The universal 06YY counits give representative exactly;
-uniqueness makes this independent of the resolution and all comparison choices.
-5. Use lem-pur-sheaf-ring-derived-coefficient-adjunction (07A6) to normalize ordinary
-and derived units. The composite sends x to 1 tensor (1 tensor x), which the comparison
-sends to 1 tensor x. Exact restriction leaves underlying sheaves unchanged. Descent and
-naturality give unit_comp at every derived input.
-6. On triple tensors both collapses multiply the images of all scalars in the final
-ring, in order. Multiplicativity and associativity give associative; induction on
-parenthesizations gives every finite iteration, including identity ring maps.
-7. In a commuting coefficient diagram the two formulas agree because b' beta=gamma b
-and all vertical maps preserve one. Compute derived coefficient change using the
-flat-term K-flat complex P tensor_R R'. Localization preserves these identities;
-associative gives the displayed coefficient_naturality pasting equation.
-8. On the singleton identity-cover site sheafification is identity and module sheaves
-are ordinary modules. Thus the same statement includes ordinary, possibly nonflat,
-quotient maps, zero coefficients and unbounded complexes. -/
+with the bottom (identity-cover) topology. -/
 theorem successive_derived_quotient_normalization :
     ∃ p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a,
       Nonempty (Normalization p) := by
   -- Construct comparisons by normalized adjoint uniqueness. The helpers above verify
   -- the tensor formulas, the universal-counit representative, and all coherence laws.
-  -- The accompanying DAG records this shorter route through the existing Hom comparison.
   classical
   let p : ∀ {R S : Sheaf J CommRingCat.{r}} (a : R ⟶ S), Presentation a :=
     fun a ↦ Classical.choice (presentation_exists a)

@@ -16,7 +16,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-!
 # Tensor products of K-flat complexes
 
-Source: Stacks Project, Cohomology, Lemma 079R
+## References
+
+* Stacks Project, Cohomology, Lemma 079R
 -/
 
 @[expose] public section
@@ -36,14 +38,8 @@ noncomputable local instance instMonoidalCategoryModulesOfKFlatTensorProduct : M
       (forget₂ CommRingCat.{u} RingCat.{u})).obj X.sheaf)) :=
   SheafOfModules.monoidalCategory X.sheaf
 
-/-- Stacks Project, Cohomology, Lemma 079R.
-Let `(X, O_X)` be a ringed space. The total tensor product `Tot(K ⊗_{O_X} L)` of two K-flat
-complexes of `O_X`-modules is K-flat.
-
-Proof: For any acyclic complex `M`, K-flatness of `K` makes `Tot(M ⊗ K)` acyclic.
-K-flatness of `L` then makes `Tot(Tot(M ⊗ K) ⊗ L)` acyclic. The canonical associativity
-isomorphism of total tensor complexes identifies this with `Tot(M ⊗ Tot(K ⊗ L))`, including
-the Koszul signs. Hence `Tot(K ⊗ L)` is K-flat. -/
+/-- Let `(X, O_X)` be a ringed space. The total tensor product `Tot(K ⊗_{O_X} L)` of two K-flat
+complexes of `O_X`-modules is K-flat. -/
 theorem IsKFlatTensor.mapBifunctor
     (K L : CochainComplex
       (SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology (X : Type u))

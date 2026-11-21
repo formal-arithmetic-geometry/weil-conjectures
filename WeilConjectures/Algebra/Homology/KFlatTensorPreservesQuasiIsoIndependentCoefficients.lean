@@ -11,7 +11,9 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # K-flat tensor transport at independent coefficient universes
 
-Source: Stacks Project, Cohomology on Sites, Tags 06YN and 06YP
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 06YN and 06YP
 -/
 
 @[expose] public section
@@ -87,20 +89,7 @@ private theorem tensorRight_additive_reconstruction (N : 𝒜) :
   rw [← Preadditive.comp_add, ← Functor.map_add, ← Functor.map_add]
   rfl
 
-/-- Tensor in the K-flat second variable preserves quasi-isomorphisms.
-
-Source: Stacks Project, Cohomology on Sites, Tags 06YN and 06YP,
-lemma-K-flat-quasi-isomorphism.
-
-Proof: the cone of a quasi-isomorphism is acyclic. By the stated K-flatness its
-termwise total tensor with P is acyclic. The additive tensor bifunctor identifies
-this total tensor with the cone of the tensored map, via
-`CochainComplex.mapBifunctorMappingCone₁Iso`. Thus the latter cone is acyclic and
-the tensored map is a quasi-isomorphism. Additivity of the sheaf tensor follows
-from its identification with sheafification of the presheaf tensor: the latter
-is sectionwise additive and sheafification is additive. No regular element,
-strict tower, derived-limit functor, or countable-product hypothesis is used.
--/
+/-- Tensor in the K-flat second variable preserves quasi-isomorphisms. -/
 theorem kFlatTensorPreservesQuasiIsoIndependentCoefficients
     (P : CochainComplex 𝒜 ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients P)
     {X Y : CochainComplex 𝒜 ℤ} (f : X ⟶ Y) (hf : QuasiIso f) :

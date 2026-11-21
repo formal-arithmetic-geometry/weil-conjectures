@@ -25,27 +25,14 @@ open `U` whose image is closed over a larger quasi-compact open `V`, there is a
   an affine open `Z` of `Y`.
 - `AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph`: the main result.
 
-## Proof sketch
+## Implementation details
 
-Cover `Y` by finitely many affine opens `Z`. For each of them `Z ⟶ Y ⟶ X` is quasi-affine
-as a morphism — the source is affine, hence quasi-affine, and the morphism is quasi-compact
-— so Case 3 applies to the restriction of `f` to `U_Z = f ⁻¹ Z`, and produces a
-`V`-admissible centre `I_Z` on `X` together with an open `W_Z` of `Bl_{I_Z}(X)` carrying an
-extension `g_Z` of `f|_{U_Z}` with closed graph in `Z ×[X] Bl_{I_Z}(X)`.
+Unlike Conrad we do **not** restrict to the scheme-theoretic image of `f ⁻¹ Z` in `X`: Case 3
+as proved here carries no density hypothesis, so that restriction is unnecessary.
 
-Unlike Conrad we do **not** restrict to the scheme-theoretic image `X_Z` of `U_Z` in `X`:
-Case 3 as proved here carries no density hypothesis, so the restriction — and with it the
-extension of the centre from `X_Z` back to `X` and the ambient closedness of the strict
-transform — is unnecessary.
+## References
 
-Let `I = ∏_Z I_Z` and `q : X̃ = Bl_I(X) ⟶ X`. Each `I_Z` pulls back to an invertible ideal
-on `X̃`, so the universal property of blowing up gives a comparison `c_Z : X̃ ⟶ Bl_{I_Z}(X)`
-over `X`, and the closed graph of `g_Z` pulls back to a closed subset of the open
-`(pr_Y) ⁻¹ Z` of `Y ×[X] X̃` which is a section over an open of `X̃`
-(`AlgebraicGeometry.isClosed_preimage_range_lift_of_comp`). Since these opens cover
-`Y ×[X] X̃` and the closure of the range of `F` meets each of them inside the corresponding
-section, the fibres of `F(U)‾ ⟶ X̃` are finite, whence
-`AlgebraicGeometry.LocallyQuasiFinite.of_finite_preimage_singleton` applies.
+* Brian Conrad, *Deligne's notes on Nagata compactifications*, Theorem 2.4
 -/
 
 @[expose] public section
@@ -62,11 +49,7 @@ namespace AlgebraicGeometry
 `q : X' ⟶ X` be two morphisms with `q = c ≫ π`, let `Z` be an open of `Y` and `W` an open
 of `Bl`, and let `g : W ⟶ Z` be a morphism over `X` whose graph is closed in `Z ×[X] Bl`.
 Then the graph of the induced morphism on `c ⁻¹ W` is closed in the open `(pr_Y) ⁻¹ Z` of
-`Y ×[X] X'`.
-
-This is the mechanism behind the finiteness of the fibres in
-`AlgebraicGeometry.exists_isAdmissible_locallyQuasiFinite_image_graph`: the base change of
-the graph section along `Y ×[X] X' ⟶ Y ×[X] Bl` has as range the preimage of its range. -/
+`Y ×[X] X'`. -/
 theorem isClosed_preimage_range_lift_of_comp {X Y X' Bl : Scheme.{u}}
     (p : Y ⟶ X) {q : X' ⟶ X} {π : Bl ⟶ X} (c : X' ⟶ Bl) (hc : c ≫ π = q)
     {Z : Y.Opens} {W : Bl.Opens} (g : W.toScheme ⟶ Z.toScheme)
@@ -148,16 +131,11 @@ theorem isClosed_preimage_range_lift_of_comp {X Y X' Bl : Scheme.{u}}
 
 variable {X : Scheme.{u}}
 
-/-- **Conrad's Theorem 2.4, general case, one affine piece.** Under the hypotheses of the
-general case, and for `Z` an affine open of `Y`, Case 3
-(`AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom_of_le`) applies to the
-restriction of `f` to `f ⁻¹ Z`, seen as a section of the quasi-affine morphism
-`Z ⟶ Y ⟶ X`: there is a `V`-admissible blow-up of `X`, an open `W` of it containing the
-preimage of `f ⁻¹ Z`, and a morphism `g : W ⟶ Z` over `X` extending `f` there and having
-closed graph in `Z ×[X] Bl`.
-
-The extension property is stated in the form actually used downstream: every morphism from
-`f ⁻¹ Z` into `W` lying over the inclusion `f ⁻¹ Z ↪ X` agrees with `f` after `g`. -/
+/-- **Conrad's Theorem 2.4, general case, one affine piece.** For `Z` an affine open of `Y`,
+there is a `V`-admissible blow-up of `X`, an open `W` of it containing the preimage of
+`f ⁻¹ Z`, and a morphism `g : W ⟶ Z` over `X` extending `f` there (every morphism from
+`f ⁻¹ Z` into `W` over the inclusion `f ⁻¹ Z ↪ X` agrees with `f` after `g`) and having
+closed graph in `Z ×[X] Bl`. -/
 theorem exists_isAdmissible_extend_of_isAffineOpen_of_le
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))
@@ -252,13 +230,9 @@ theorem exists_isAdmissible_extend_of_isAffineOpen_of_le
     _ = (f ⁻¹ᵁ Z).ι ≫ f := by rw [hid, Category.id_comp, morphismRestrict_ι]
 
 /-- **Conrad's Theorem 2.4, General Case: the closed graph is quasi-finite over the
-blow-up**.
-
-"Quasi-finite and separated over `X̃`" is spelled out as the four properties
+blow-up**. "Quasi-finite and separated over `X̃`" is spelled out as the four properties
 `LocallyQuasiFinite`, `LocallyOfFiniteType`, `IsSeparated` and `QuasiCompact` of
-`F(U)‾ ⟶ X̃`, which are exactly the hypotheses of
-`AlgebraicGeometry.Scheme.IsQuasiAffine.of_locallyQuasiFinite` and of
-`AlgebraicGeometry.IsQuasiAffineHom.of_locallyQuasiFinite`. -/
+`F(U)‾ ⟶ X̃`. -/
 theorem exists_isAdmissible_locallyQuasiFinite_image_graph
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

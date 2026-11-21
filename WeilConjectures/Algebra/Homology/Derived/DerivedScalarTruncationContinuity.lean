@@ -90,8 +90,12 @@ import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence
 
 /-! # Derived scalar extension and upper truncations
 
-Source: Stacks Project, Cohomology on Sites, Tag 077J, and Modules on Sites,
-Tags 03DB and 03EP. This is the colimit step of the cohomological-bounds argument.
+This is the colimit step of the cohomological-bounds argument.
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 077J
+* Stacks Project, Modules on Sites, Tags 03DB and 03EP
 -/
 
 @[expose] public section
@@ -131,24 +135,7 @@ private theorem lower_bound_colimit
     (fun j ↦ (c.ι.app j).comm _ _) (fun j ↦ (c.ι.app j).comm _ _)
 
 /-- A scalar-extension functor computed on K-flat complexes inherits a lower bound
-from all finite upper truncations of a complex.
-Source: Stacks Project, Cohomology on Sites, Tag 077J; Modules on Sites,
-Tags 03DB and 03EP. Agent consequence, not a verbatim assertion of those tags.
-
-Proof: use the reduced functorial flat resolution to resolve every good upper
-truncation of G compatibly. The integer-indexed degreewise colimit P of these
-bounded-above flat resolutions maps quasi-isomorphically to G: exact filtered
-colimits commute with cohomology, and in every degree the truncation cohomology
-is eventually that of G. Each stage is K-flat, and filtered colimits of K-flat
-complexes are K-flat because tensor commutes with them and exact colimits preserve
-acyclicity. The supplied computation isomorphisms identify F(Q(P)) with E(P), and
-likewise at each bounded stage. Scalar extension is left adjoint to restriction
-of scalars, so termwise E commutes with this colimit. Each E(stage) has vanishing
-cohomology below a by the hypothesis and the quasi-isomorphism to its truncation.
-Exact filtered colimits therefore give the same vanishing for E(P). Transport
-along Q(P) ≅ Q(G) gives the conclusion. The indexing integers are lifted to the
-coefficient universe when necessary. Zero complexes, zero rings, and arbitrary
-negative a are covered by the same argument; no upper bound on G is used. -/
+from all finite upper truncations of a complex. -/
 theorem derivedScalar_lower_bound_of_truncations
     {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
     {J : GrothendieckTopology C}

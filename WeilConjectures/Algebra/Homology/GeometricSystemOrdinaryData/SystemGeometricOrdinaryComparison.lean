@@ -73,7 +73,14 @@ public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorSheafificationOfUniverses
 public import Mathlib.CategoryTheory.Adjunction.FullyFaithfulLimits
 
-/-! # Ordinary geometric comparison on strict semilinear systems -/
+/-!
+# Ordinary geometric comparison on strict semilinear systems
+
+## References
+
+* Zheng, Construction 4.1 (printed p. 21) and the sentence before Lemma 4.10
+* Stacks Project, Tags 03D2, 03DA, 03DB, 03EL, 015F
+-/
 
 set_option Elab.async false
 
@@ -101,8 +108,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   (I : ∀ n : ℕ, AlgebraicInverseImage u.inverse (BY.obj (op n)) (BX.obj (op n)))
 
 /-- The ordinary underlying-set functor at a coefficient level, used only to express
-transport of the actual semilinear transition. Source: Zheng, Construction 4.1, p. 21;
-Stacks 03D2. -/
+transport of the actual semilinear transition. -/
 abbrev geometricSystemUnderlying (n : ℕ) :=
   toSheaf (derivedChangeRingIndependentCoefficients J (BY.obj (op n))) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w})
@@ -111,8 +117,7 @@ set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- An exact termwise inverse image with its specified underlying transition maps.
 The transition equation fixes the functor on systems, rather than merely specifying
-unrelated level objects. All exactness fields are conclusions of the existence theorem.
-Source: Zheng, Construction 4.1 and the sentence before Lemma 4.10; Stacks 03D2 -/
+unrelated level objects. All exactness fields are conclusions of the existence theorem. -/
 structure GeometricSystemOrdinaryData where
   functor : StrictRingSystem BY ⥤ StrictRingSystem BX
   [additive : functor.Additive]
@@ -136,28 +141,26 @@ attribute [instance] GeometricSystemOrdinaryData.additive
 
 variable {BY BX u I}
 
-/-- The specified level inverse image, retaining the exactness witness in its interface.
-Source: Stacks 03D2. -/
+/-- The specified level inverse image, retaining the exactness witness in its interface. -/
 def GeometricSystemOrdinaryData.levelInverseImage
     (_F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) := (I n).modules
 
-/-- Additivity of the level inverse image. Source: Stacks 03D2 -/
+/-- Additivity of the level inverse image. -/
 instance GeometricSystemOrdinaryData.levelInverseImageAdditive
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     (F.levelInverseImage n).Additive := F.levelAdditive n
 
-/-- Left exactness of the level inverse image. Source: Stacks 03DA -/
+/-- Left exactness of the level inverse image. -/
 instance GeometricSystemOrdinaryData.levelInverseImageLimits
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     PreservesFiniteLimits (F.levelInverseImage n) := F.levelLimits n
 
-/-- Right exactness of the level inverse image. Source: Stacks 03DB -/
+/-- Right exactness of the level inverse image. -/
 instance GeometricSystemOrdinaryData.levelInverseImageColimits
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     PreservesFiniteColimits (F.levelInverseImage n) := F.levelColimits n
 
-/-- The canonical localization of the termwise evaluation square.
-Source: Zheng, Construction 4.1; Stacks 015F -/
+/-- The canonical localization of the termwise evaluation square. -/
 def GeometricSystemOrdinaryData.derivedEvaluation
     (F : GeometricSystemOrdinaryData BY BX u I) (n : ℕ) :
     F.functor.mapDerivedCategory ⋙ derivedSystemEvaluation BX n ≅
@@ -169,22 +172,7 @@ def GeometricSystemOrdinaryData.derivedEvaluation
         systemEvaluation BY n ⋙ F.levelInverseImage n) ≪≫
     (Functor.mapDerivedCategoryCompIso (systemEvaluation BY n) (F.levelInverseImage n)).symm
 
-/-- Exact termwise inverse image and its ordinary singleton comparison.
-Source: Zheng, Construction 4.1, printed p. 21; Stacks 03D2 and 03EL.
-
-Proof: Conjugate each semilinear transition by the recorded underlying-sheaf
-isomorphisms. Test on the universal pairs of sections; the module addition and scalar
-operation diagrams imply additivity and semilinearity. The coefficient transition
-square supplies compatibility of scalars. Faithfulness of the underlying functors
-then proves identities, composition, and naturality. Finite limits and colimits are
-preserved levelwise, hence on strict systems by their componentwise universal properties.
-Use the balanced coefficient-square construction with identity structural coefficient
-maps, and remove identity scalar extensions by their tensor units. Its generator
-formula gives the scalar comparison. Take the mate of the exact evaluation square
-under the two ordinary singleton adjunctions. Below the selected index the scalar
-comparison makes this mate invertible, and above it both objects are zero. Its inverse
-is the ordinary comparison. The mate unit identity gives multiplication normalization;
-the scalar generator formula gives the specified generalized tensor equation. -/
+/-- Exact termwise inverse image and its ordinary singleton comparison. -/
 theorem geometricSystemOrdinaryComparison
     (BY : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (BX : ℕᵒᵖ ⥤ Sheaf K CommRingCat.{w})
     (u : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))

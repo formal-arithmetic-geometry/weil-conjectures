@@ -13,7 +13,9 @@ import WeilConjectures.Algebra.Homology.ComplexLocalizationUnitKernel
 
 /-! # Torsion kernel of the canonical localization cohomology map
 
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8
 -/
 
 @[expose] public section
@@ -37,21 +39,7 @@ variable (R A Aq B D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} R)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- A cohomology class killed by the localization unit is killed by a denominator.
-Source: Stacks Project, Tags 06Y6 and 0DJ8; exactness of localization.
-
-Proof: choose a K-flat R-resolution F of B[0]. Its tensor with Q computes the
-balanced derived tensor. Localization in A is exact and commutes with the direct
-sums of this total complex, so a class that becomes a boundary after localization
-has a representative whose multiple by some s in S is a boundary already before
-localization. This follows by clearing the finitely many denominators of the
-cycle representative and the boundary witness in the adjacent degrees; equivalently
-apply exactness of localized modules to cycles modulo boundaries. Compare the
-balanced computation with L and K using the unique universal-counit comparisons.
-Their naturality identifies the class map with localizationModelMap, and their
-scalar compatibility identifies multiplication by s with includeLeft s. Transport
-the torsion equation to L. If zero lies in S take s=0; for S={1} the map is the
-model-comparison isomorphism and its kernel is zero. -/
+/-- A cohomology class killed by the localization unit is killed by a denominator. -/
 theorem localizationModelMap_kernel
     (S : Submonoid A) [IsLocalization S Aq] (i : ℤ)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)

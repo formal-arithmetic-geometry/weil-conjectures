@@ -47,7 +47,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Localization
 
 /-! # Ordinary tensor transport through a ringed-site equivalence
 
-Source: Stacks Project, Modules on Sites, Tags 03D1, 03EK and 03EL; Sites, lemma-equivalence.
+## References
+
+* Stacks Project, Tags 03D1, 03EK and 03EL (Modules on Sites)
 -/
 
 @[expose] public section
@@ -59,22 +61,7 @@ namespace SheafOfModules
 
 /-- A site equivalence and an invertible coefficient comparison preserve the ordinary
 binary sheaf tensor product. Only existence is needed for transport of predicates;
-no tensor comparison is chosen as data by this theorem.
-
-Source: Stacks Project, Modules on Sites, Tags 03D1, 03EK and 03EL; Sites, lemma-equivalence.
-This is the ordinary tensor-transport substep of Step 1 of
-lem-sf-cbc-extension-zero-completion.
-
-Proof: precompose module presheaves with the opposite site equivalence, and restrict
-scalars along the given isomorphism of coefficient sheaves. On every object the
-balanced tensor comparison sends a pure tensor to the tensor of the same two sections.
-The inverse coefficient isomorphism gives its inverse; the balanced relations and
-naturality of the coefficient map prove linearity and compatibility with restrictions.
-Precomposition through an equivalence preserves sheaves and their sheafification:
-the sheafification adjunctions correspond under the inverse equivalence. Apply this
-sheafification comparison to the presheaf tensor isomorphism. The sheafified tensor
-presentation then gives the displayed isomorphism, natural in both module variables.
-The argument includes the zero ring and empty site, and requires no flatness of sections. -/
+no tensor comparison is chosen as data by this theorem. -/
 theorem pushforward_equivalence_tensor_iso
     {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C]
     {D : Type u'} [Category.{v'} D] [EssentiallySmall.{w} D]

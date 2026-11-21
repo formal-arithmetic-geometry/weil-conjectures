@@ -10,7 +10,9 @@ import WeilConjectures.Algebra.Homology.System.SystemScalarGenerators
 
 /-! # Scalar-extension towers
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03CZ.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 03CZ.
 -/
 
 @[expose] public noncomputable section
@@ -201,19 +203,7 @@ private theorem model_pure_inv {R S : Sheaf J CommRingCat.{max c v r}} {φ : R �
     ← SheafOfModules.comp_val, eqToHom_trans, eqToHom_refl, SheafOfModules.id_val,
     PresheafOfModules.id_app, ModuleCat.id_apply] using h.symm
 
-/-- Scalar extension along an algebra tower gives its prescribed additive strict tower.
-Source: Stacks Project, Modules on Sites, Tags 03EK and 03CZ
-
-Proof: At level n use sheafification of the presheaf B_n tensor_O H, and on a
-module map use sheafification of id tensor f. For m ≤ n, the presheaf map sends
-b tensor x to q(b) tensor x; it is semilinear since q is an O-algebra map, and
-therefore induces a map into the scalar restriction of the level-m sheafification.
-The sheafification universal property extends this map uniquely. The identity,
-composition and naturality equations hold on pure tensors by functoriality of q,
-and hence hold after sheafification. Tensor maps and sheafification are additive.
-The scalar-extension adjunction unit is x ↦ 1 tensor x before sheafification.
-The transition equation for these units follows from q(1)=1. These constructions
-supply every field, with the model's prescribed object and map identifications. -/
+/-- Scalar extension along an algebra tower gives its prescribed additive strict tower. -/
 theorem exists_sliceScalarTowerPresentation
     (O : Sheaf J CommRingCat.{max c v r})
     (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{max c v r})

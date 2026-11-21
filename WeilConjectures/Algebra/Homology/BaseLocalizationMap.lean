@@ -16,7 +16,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The canonical map for localization of the tensor base
 
-Source: Stacks Project, Tags 06Y6 and 0DJ8.
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8.
 -/
 
 @[expose] public section
@@ -32,8 +34,7 @@ namespace RingTensorCohomology
 variable (R Rp B : Type u) [CommRing R] [CommRing Rp] [CommRing B]
   [Algebra R Rp] [Algebra R B] [Algebra Rp B] [IsScalarTower R Rp B]
 
-/-- The ordinary tensor identification, fixed on pure tensors.
-Source: Stacks Project, Tag 06Y6. -/
+/-- The ordinary tensor identification, fixed on pure tensors. -/
 noncomputable def baseLocalizationTensorIso (S : Submonoid R) [IsLocalization S Rp] :
     ModuleCat.restrictScalars.{u} (algebraMap R Rp) ⋙
         ModuleCat.extendScalars (algebraMap R B) ≅
@@ -59,8 +60,7 @@ variable (A D : Type u) [CommRing A] [CommRing D]
   [HasDerivedCategory.{w} (ModuleCat.{u} Rp)]
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
 
-/-- The counit for the restricted derived model followed by ordinary localization.
-Source: Stacks Project, Tag 06Y6. -/
+/-- The counit for the restricted derived model followed by ordinary localization. -/
 noncomputable def baseLocalizationCounit (S : Submonoid R) [IsLocalization S Rp]
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D) :
@@ -81,8 +81,7 @@ noncomputable def baseLocalizationCounit (S : Submonoid R) [IsLocalization S Rp]
       (Functor.mapHomotopyCategoryCompIso (baseLocalizationTensorIso R Rp B S) (.up ℤ)).hom
       DerivedCategory.Qh
 
-/-- Universal lift of the localized counit. It involves no arbitrary existence witness.
-Source: Stacks Project, Tag 06Y6. -/
+/-- Universal lift of the localized counit. It involves no arbitrary existence witness. -/
 noncomputable def baseLocalizationDerivedMap (S : Submonoid R) [IsLocalization S Rp]
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
@@ -94,8 +93,7 @@ noncomputable def baseLocalizationDerivedMap (S : Submonoid R) [IsLocalization S
     (HomotopyCategory.quasiIso (ModuleCat.{u} Rp) (.up ℤ)) _
     (baseLocalizationCounit R Rp B A D S Q L)
 
-/-- The restriction input identification as a natural isomorphism.
-Source: Stacks Project, Tag 06Y6. -/
+/-- The restriction input identification as a natural isomorphism. -/
 noncomputable def baseLocalizationInputNatIso :
     restrict R A ⋙ HomotopyCategory.quotient (ModuleCat.{u} R) (.up ℤ) ⋙
         DerivedCategory.Qh ≅
@@ -118,8 +116,7 @@ noncomputable def baseLocalizationInputNatIso :
     isoWhiskerLeft (restrict Rp A) (Functor.associator _ _ _).symm ≪≫
     (Functor.associator _ _ _).symm
 
-/-- The identity of inputs in the chosen derived categories.
-Source: Stacks Project, Tag 06Y6. -/
+/-- The identity of inputs in the chosen derived categories. -/
 noncomputable def baseLocalizationInputIso
     (Q : CochainComplex (ModuleCat.{u} A) ℤ) :
     DerivedCategory.Qh.obj
@@ -130,8 +127,7 @@ noncomputable def baseLocalizationInputIso
             ((restrict Rp A).obj Q))) :=
   (baseLocalizationInputNatIso R Rp A).app Q
 
-/-- The canonical B-linear cohomology map used to characterize the D-linear map.
-Source: Stacks Project, Tag 06Y6. -/
+/-- The canonical B-linear cohomology map used to characterize the D-linear map. -/
 noncomputable def baseLocalizationCohomologyMap (S : Submonoid R) [IsLocalization S Rp]
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
@@ -151,8 +147,7 @@ noncomputable def baseLocalizationCohomologyMap (S : Submonoid R) [IsLocalizatio
               ((restrict Rp A).obj Q)))) ≫
     (K.cohomologyIso i).inv
 
-/-- A generator equation determining the localized map uniquely.
-Source: Stacks Project, Tag 06Y6. -/
+/-- A generator equation determining the localized map uniquely. -/
 def IsBaseLocalizationMap (S : Submonoid R) [IsLocalization S Rp]
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
     (L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D)
@@ -164,8 +159,7 @@ def IsBaseLocalizationMap (S : Submonoid R) [IsLocalization S Rp]
       (1 : D) ⊗ₜ[A ⊗[Rp] B,algebraMap (A ⊗[Rp] B) D]
         (baseLocalizationCohomologyMap R Rp B A D S Q L K i x)
 
-/-- Generator uniqueness, including the zero coefficient ring.
-Source: Stacks Project, Tag 06Y6. -/
+/-- Generator uniqueness, including the zero coefficient ring. -/
 theorem IsBaseLocalizationMap.ext (S : Submonoid R) [IsLocalization S Rp]
     {Q : CochainComplex (ModuleCat.{u} A) ℤ}
     {L : ModuleCat.BaseDerivedTensorCohomologyModel R A B Q D}

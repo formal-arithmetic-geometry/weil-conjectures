@@ -16,8 +16,10 @@ import Mathlib.CategoryTheory.Linear.Basic
 
 /-! # Module Hom homology as homotopy classes
 
-Source: Mathlib HomComplexCohomology, `homAddEquiv` and `leftHomologyData`;
-Stacks Project, Tag 0A8H.
+## References
+
+* Stacks Project, Tag 0A8H
+* Mathlib `HomComplexCohomology`, `homAddEquiv` and `leftHomologyData`
 -/
 
 @[expose] public section
@@ -27,20 +29,7 @@ open CategoryTheory
 namespace CochainComplex
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Homotopy classes of module-complex maps are degree-zero module Hom homology.
-Source: Stacks Project, Tag 0A8H; Mathlib HomComplexCohomology.
-
-Proof: Forget the module structure on the Hom complex. This gives Mathlib's
-abelian-group Hom complex, with the same cochains and differential. The forgetful
-functor preserves kernels and cokernels, hence its homology comparison identifies
-the underlying group of module homology with abelian-group homology. Apply
-the homology isomorphism of `HomComplex.leftHomologyData`, followed by
-`CohomologyClass.homAddEquiv` in degree zero,
-and the canonical zero-shift isomorphism. Invert this composite. For a chain map f,
-its cochain ofHom f is a cocycle, so it lifts uniquely to the module cycles via the
-kernel universal property. The quotient comparison carries its homotopy class to
-the homology projection of that lift. The construction applies without boundedness
-or projectivity; for zero complexes or the zero ring both quotients are zero. -/
+/-- Homotopy classes of module-complex maps are degree-zero module Hom homology. -/
 theorem moduleHomComplex_quotient (A : Type u) [CommRing A] :
     ∃ b : ∀ (L M : CochainComplex (ModuleCat.{u} A) ℤ),
         ((HomotopyCategory.quotient _ _).obj L ⟶

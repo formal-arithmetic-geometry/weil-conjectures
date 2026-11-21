@@ -41,13 +41,15 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 /-!
 # Direct image and evaluation of strict coefficient systems
 
-Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21,
-and Lemma 4.10, printed pp. 23--24
-
 The index `n` denotes the positive exponent `n+1`. All systems, evaluation functors,
 scalar extensions and adjoint transitions are the recorded coefficient-evaluation
 interface. The structures below specify the geometric lifts and the comparison,
 including their normalizations; they are conclusions, not hypotheses of the theorem.
+
+## References
+
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21) and
+  Lemma 4.10 (printed pp. 23--24)
 -/
 
 @[expose] public noncomputable section
@@ -185,68 +187,7 @@ private theorem coefficientEvaluation_detectsIso
 -- Instantiate both sites and all ordinary/derived coherence structures.
 /-- Derived direct image commutes canonically with every evaluation, with the specified
 unit, counit and coefficient-change compatibility; bounded-below objects of levelwise
-origin descend, and normalized ones stay normalized.
-Source: Zheng, Construction 4.1 and Lemma 4.10, printed pp. 21, 23--24
-
-Proof plan:
-1. Present strict systems as modules on the product sequence site. Kernels and cokernels
-are levelwise. Apply prop-pur-kinjective-resolutions-exist on this small ringed site.
-Transport algebraic operations through the geometric inverse image, which is exact;
-its adjunction on modules gives the system adjunction level by level. Apply
-situation-conventions and
-lem-weil-pbc-kinjective-total-derived to construct the derived functors.
-2. Use lem-weil-pbc-termwise-adjunction-homotopy and
-lem-pc-pre-derived-adjoint-functors-general to normalize the derived adjunctions.
-Their transpose on a strict complex map is the ordinary transpose followed by the
-universal right-derived comparison, exactly the equation in CoefficientDerivedImage.
-3. Resolve a coefficient-level complex by a flat-term K-flat complex, using
-lem-pc-kflat-resolution. Its extension E_n has zero components above n and quotient
-tensors below n. Exact inverse image preserves the cokernel of multiplication by
-ell^(q+1), so commutes with these quotient tensors and their reduction maps.
-Use lem-weil-pbc-ringed-topoi-derived-tensor-pullback for the canonical comparison.
-4. The same flat-term K-flat computation gives the derived coefficient-change
-comparison for every quotient, by lem-pur-derived-change-of-rings and
-lem-weil-pbc-ringed-pullback-preserves-kflat. No quotient map is assumed flat.
-5. Apply the LE_n/e_n adjunction of
-lem-pur-coefficient-evaluation-derived-left-adjoint on both sides, the derived
-system adjunction, and the comparison of step 3. The resulting natural chain of
-Hom bijections identifies e_n Ru_* with Ru_* e_n by Yoneda. Inverse image commutes
-with evaluation already on strict complexes.
-6. The n-component of the extension comparison is the identity. The normalized
-transposes therefore give the evaluated counit equation. Compose it with the
-system unit and use the triangle identity; uniqueness of transpose gives the unit
-equation. Thus these comparisons are adjunction mates, not unspecified isomorphisms.
-7. Tensor extension is left adjoint to exact scalar restriction. Apply
-lem-pc-derived-adjoint-functors and normalize as in step 2. Composition of ringed-topos
-direct images gives the restricted-direct-image comparison
-(lem-weil-pbc-ringed-topoi-derived-pushforward-composition). Its mate equation fixes it.
-8. The extension comparison commutes with the sigma maps of the evaluation dependency:
-on K-flat representatives their components below n are the same quotient tensor maps,
-and above n have zero source. Its explicit sigma-mate formula gives the transition
-squares. Naturality gives compatibility for every derived system morphism, including
-identity quotients and compositions, with no independent choice of levelwise lifts.
-9. For a uniformly bounded-below input choose a bounded-below injective resolution
-(lem-sc-bounded-below-injective-resolution), which is K-injective and computes the
-same total derived functor. Left exactness and
-lem-weil-pbc-derived-functor-negative-vanishing give a uniform lower bound.
-10. Full faithfulness on bounded-below level categories makes the level units
-invertible by Yoneda. Triangle identities and naturality make the counit invertible
-on the essential image. Step 6 identifies each evaluated system counit with it.
-Evaluations jointly detect derived isomorphisms because cohomology is levelwise.
-11. Apply naturality of the system counit to each adjoint transition. The tensor
-comparison identifies this square with epsilon_n u^*(t_N) = t_M C(epsilon_m).
-If M is normalized, all arrows but u^*(t_N) are invertible by step 10. Full
-faithfulness on bounded-below derived objects implies full faithfulness on module
-sheaves, using the fully faithful degree-zero single functors
-(lem-weil-pbc-derived-single-fully-faithful). Hence exact inverse image reflects zero
-module sheaves. It commutes with cohomology, so it reflects acyclicity of arbitrary
-complexes, and therefore reflects isomorphisms even for the possibly unbounded
-coefficient-change objects. Apply this to t_N to conclude normalization.
-12. For the pro-etale/etale morphism use the recorded
-Scheme.proEtaleSiteComparison and ProEtale.siteComparison_boundedBelow for finite
-quotient coefficients. Its inverse image satisfies exactly the required full
-faithfulness hypothesis. No constructibility of the individual sheaves is needed.
--/
+origin descend, and normalized ones stay normalized. -/
 theorem coefficientSystemDerivedComparison
     [PreservesFiniteLimits L]
     (hregular : ∀ x : O, ell * x = 0 → x = 0)

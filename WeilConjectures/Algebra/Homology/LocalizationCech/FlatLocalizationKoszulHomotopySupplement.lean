@@ -11,7 +11,9 @@ import Mathlib.Tactic.Ring
 
 /-! # Signed contraction of the sheaf Koszul complex
 
-Source: Stacks Project, Tags 0626, 0663, 0913 and 099H
+## References
+
+* Stacks Project, Tags 0626, 0663, 0913 and 099H
 -/
 
 -- After pruning, this module only keeps private declarations.

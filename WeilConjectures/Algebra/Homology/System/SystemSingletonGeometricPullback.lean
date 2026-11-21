@@ -158,12 +158,16 @@ public import WeilConjectures.AlgebraicGeometry.KFlatRingedToposPullback
 
 /-! # Geometric inverse image and derived singleton extension
 
-Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21,
-and the base-change sentence before Lemma 4.10, printed p. 23
+
 
 The comparison includes its common flat-term K-flat model, transported tensor generators,
 actual strict transitions, multiplication normalization and lower-singleton square.
 The index `n : ℕ` represents positive level `n + 1`.
+
+## References
+
+* Stacks Project, Tags 015F, 03D2, 03DA, 03DB, 03EL, 0G7E
+* Zheng, Construction 4.1
 -/
 
 set_option Elab.async false
@@ -190,8 +194,7 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
   (I : ∀ n : ℕ, AlgebraicInverseImage u.inverse (BY.obj (op n)) (BX.obj (op n)))
 
 /-- The ordinary underlying-set functor at a coefficient level, used only to express
-transport of the actual semilinear transition. Source: Zheng, Construction 4.1, p. 21;
-Stacks 03D2. -/
+transport of the actual semilinear transition. -/
 abbrev systemGeometricUnderlying (n : ℕ) :=
   toSheaf (derivedChangeRingIndependentCoefficients J (BY.obj (op n))) ⋙
     sheafCompose J (CategoryTheory.forget AddCommGrpCat.{w})
@@ -200,8 +203,7 @@ set_option genInjectivity false in
 set_option genSizeOfSpec false in
 /-- An exact termwise inverse image with its specified underlying transition maps.
 The transition equation fixes the functor on systems, rather than merely specifying
-unrelated level objects. All exactness fields are conclusions of the existence theorem.
-Source: Zheng, Construction 4.1 and the sentence before Lemma 4.10; Stacks 03D2 -/
+unrelated level objects. All exactness fields are conclusions of the existence theorem. -/
 structure SystemGeometricInverseImageData where
   functor : StrictRingSystem BY ⥤ StrictRingSystem BX
   [additive : functor.Additive]
@@ -225,28 +227,26 @@ attribute [instance] SystemGeometricInverseImageData.additive
 
 variable {BY BX u I}
 
-/-- The specified level inverse image, retaining the exactness witness in its interface.
-Source: Stacks 03D2. -/
+/-- The specified level inverse image, retaining the exactness witness in its interface. -/
 def SystemGeometricInverseImageData.levelFunctor
     (_F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) := (I n).modules
 
-/-- Additivity of the level inverse image. Source: Stacks 03D2 -/
+/-- Additivity of the level inverse image. -/
 instance SystemGeometricInverseImageData.levelFunctorAdditive
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     (F.levelFunctor n).Additive := F.levelAdditive n
 
-/-- Left exactness of the level inverse image. Source: Stacks 03DA -/
+/-- Left exactness of the level inverse image. -/
 instance SystemGeometricInverseImageData.levelFunctorLimits
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     PreservesFiniteLimits (F.levelFunctor n) := F.levelLimits n
 
-/-- Right exactness of the level inverse image. Source: Stacks 03DB -/
+/-- Right exactness of the level inverse image. -/
 instance SystemGeometricInverseImageData.levelFunctorColimits
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     PreservesFiniteColimits (F.levelFunctor n) := F.levelColimits n
 
-/-- The canonical localization of the termwise evaluation square.
-Source: Zheng, Construction 4.1; Stacks 015F -/
+/-- The canonical localization of the termwise evaluation square. -/
 def SystemGeometricInverseImageData.derivedEvaluation
     (F : SystemGeometricInverseImageData BY BX u I) (n : ℕ) :
     F.functor.mapDerivedCategory ⋙ derivedSystemEvaluation BX n ≅
@@ -264,22 +264,19 @@ variable (SY : SystemScalarAssignment (J := J)) (TY : SystemTensorCoherence SY)
 set_option linter.unusedVariables false
 set_option linter.unusedSectionVars false
 
-/-- Multiplication at the selected level of ordinary singleton extension.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- Multiplication at the selected level of ordinary singleton extension. -/
 def systemSingletonOrdinaryMultiplication (n : ℕ) :
     systemSingleFunctor SY TY BY n ⋙ systemEvaluation BY n ≅ 𝟭 (systemLevel BY n) :=
   systemSingleBelow SY TY BY n (Nat.le_refl n) ≪≫ TY.ordinaryUnit BY n
 
-/-- Multiplication at the selected level of derived singleton extension.
-Source: Zheng, Construction 4.1, p. 21 -/
+/-- Multiplication at the selected level of derived singleton extension. -/
 def systemSingletonDerivedMultiplication (n : ℕ) :
     (systemSingleDerivedExtension BY n SY TY).derived ⋙ derivedSystemEvaluation BY n ≅
       𝟭 (DerivedCategory (systemLevel BY n)) :=
   systemSingleDerivedBelow BY (Nat.le_refl n) SY TY ≪≫ TY.derivedUnit BY n
 
 /-- The canonical lower-singleton arrow is the transpose of the inverse below-level
-comparison. Its components are the tensor associators below `n`, and zero above `n`.
-Source: Zheng, Construction 4.1, p. 21 -/
+comparison. Its components are the tensor associators below `n`, and zero above `n`. -/
 def systemSingletonLowerMap {n m : ℕ} (h : n ≤ m)
     (P : DerivedCategory (systemLevel BY m)) :
     (systemSingleDerivedExtension BY n SY TY).derived.obj
@@ -291,9 +288,7 @@ def systemSingletonLowerMap {n m : ℕ} (h : n ≤ m)
 /-- The geometric singleton comparison, together with all its specified normalizations.
 This is the full conclusion of the node, including the ordinary representatives and the
 canonical scalar comparison used in the lower-singleton square. It is not an unnormalized
-existence assertion about an arbitrary isomorphism.
-Source: Zheng, Construction 4.1 and the sentence before Lemma 4.10, pp. 21 and 23;
-Stacks 03EL and 0G7E. -/
+existence assertion about an arbitrary isomorphism. -/
 def SystemSingletonGeometricComparisons
     (F : SystemGeometricInverseImageData BY BX u I) : Prop :=
   ∃ (ordinary : ∀ n : ℕ,
@@ -453,41 +448,7 @@ private theorem singletonFlatModels
 unbounded derived categories, with the common model and all normalization clauses.
 The ring equation says exactly that the target transitions are the pulled-back source
 transitions. The source and target sites are small relative to the module universe;
-coefficient transitions may be nonflat and the complexes may be unbounded.
-
-Source: Zheng, Construction 4.1, printed p. 21, and the base-change sentence before
-Lemma 4.10, printed p. 23.
-
-Proof:
-1. On the ringed sequence site covers are vertical. Tensor, exactness and coproducts
-therefore evaluate componentwise. A system complex with K-flat levels is K-flat:
-tensor with an acyclic system, evaluate the total tensor, and use exact evaluations
-to detect acyclicity. The analogous argument gives flatness of each term.
-2. The ordinary singleton has scalar-extension levels below n and zero above.
-Apply ringed-topos K-flat preservation (Stacks 0G7E) to the identity geometric
-morphism with coefficient map B_n to B_j. Apply it again to the geometric inverse
-image with identity structural map. This gives the two flat-term K-flat singleton
-models on the same Q, without a flatness hypothesis on the coefficients.
-3. The inverse-image tensor comparison of Stacks 03EL sends the transported
-b tensor q to the tensor of the transported b and q. Its naturality gives a
-cochain isomorphism. Above n use the unique isomorphism between zero objects.
-4. Check the actual transitions on balanced generators: both composites send
-b tensor q to the transported transition of b tensor the transported q. At the
-boundary the source is zero. At level n multiplication gives the identity.
-The inverse ordinary comparison satisfies the singleton-adjunction unit-mate equation.
-5. Geometric inverse image is exact. Localize its termwise evaluation square and
-apply lem-pur-extension-evaluation-comparison to the two normalized singleton derived
-extensions. Flat-term K-flat resolutions exist and Step 2 preserves the resolving
-class. The normalized mate representative is the ordinary comparison of Steps 3-4;
-it gives the representative equation and the derived multiplication normalization.
-6. For m at least n, scalar extension of a good B_m-complex is again good by 0G7E.
-The canonical lower-singleton map is adjoint to the inverse below-level comparison;
-its components below n are the scalar tensor associators, and above n are zero.
-Both paths send b tensor (a tensor q) to the transported product of b with the
-transition of a, tensor the transported q. Thus the square commutes as a whole
-system cochain square. Scalar-coherence identifies its localized associators and
-the universal comparison formulas descend this equality to every derived input.
-No assertion that derived evaluation detects equality of morphisms is used. -/
+coefficient transitions may be nonflat and the complexes may be unbounded. -/
 theorem systemSingletonGeometricPullback
     (BY : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (BX : ℕᵒᵖ ⥤ Sheaf K CommRingCat.{w})
     (u : GeometricMorphism (Sheaf K (Type w)) (Sheaf J (Type w)))

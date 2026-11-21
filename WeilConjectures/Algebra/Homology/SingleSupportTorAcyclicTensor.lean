@@ -20,8 +20,10 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 /-!
 # The one-term Tor-acyclic tensor comparison
 
-Source: Stacks Project, Tag 08IB, final affine calculation; More on Algebra,
-Section 15.60 (Tag 06XY), independence of K-flat resolutions.
+## References
+
+* Stacks Project, Tag 06XY
+* Stacks Project, Tag 08IB
 -/
 
 @[expose] public section
@@ -165,28 +167,7 @@ private theorem tensor_comparison_independent_of_resolution
   exact quasiIso_of_comp_left (F.map (ρ.app P.obj)) (F.map f)
 
 /-- For a complex supported in one degree, positive Tor vanishing suffices for
-any K-flat resolution to compute its ordinary tensor product.
-
-Source: Stacks Project, Tag 08IB, final affine Tor calculation, and Tag 06XY,
-Lemmas 15.60.7 and 15.60.12. The following fills in the one-term calculation
-of the parent node; it is not an assertion of the entire bounded-complex result.
-
-Proof:
-1. The support hypothesis identifies Q with the single complex on Q.X k in
-   degree k, using the identity in degree k and the unique maps between zero
-   objects in the other degrees. All its differentials are zero.
-2. Take a projective resolution of Q.X k, reindex it in cochain degrees k-i,
-   and augment it to Q. Its terms are flat and it is bounded above, hence K-flat
-   by the bounded-flat K-flat lemma. After tensoring with B its cohomology in
-   degree k-i is Tor_i(Q.X k,B). Its degree-k augmentation is an isomorphism by
-   right exactness of tensor and the Tor-zero comparison. In degrees above k
-   both complexes are zero. Thus its tensor augmentation is a quasi-isomorphism.
-3. This calculation applies to the given f, not just the projective resolution:
-   choose a common K-flat refinement of the two resolutions in the homotopy
-   category. The transition quasi-isomorphisms remain quasi-isomorphisms after
-   tensoring with B (Tag 06XY, Lemma 15.60.12); their augmentation square commutes
-   up to homotopy. Tensor preserves that homotopy, so two-out-of-three gives the
-   result for f. This also covers Q=0 and an unbounded K-flat source P. -/
+any K-flat resolution to compute its ordinary tensor product. -/
 theorem quasiIso_tensor_of_single_support_tor_acyclic
     {R : Type u} [CommRing R] {B : Type u} [CommRing B] [Algebra R B]
     (Q : CochainComplex (ModuleCat.{u} R) ℤ) (k : ℤ)

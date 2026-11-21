@@ -12,10 +12,12 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 import WeilConjectures.Algebra.Homology.HomotopyCategory.Braided
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 
-/-! # K-flat cone presentations of distinguished triangles
+/-!
+# K-flat cone presentations of distinguished triangles
 
-Source: Stacks Project, Tag 06Y4; Mathlib's cone presentation of
-triangles in the derived category.
+## References
+
+* Stacks Project, Tag 06Y4 (K-flat resolutions)
 -/
 
 @[expose] public section
@@ -27,22 +29,7 @@ set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 namespace ModuleCat
 
-/-- Every distinguished triangle of modules has a K-flat mapping-cone presentation.
-
-Source: Stacks Project, Tag 06Y4 (K-flat resolutions), and
-`DerivedCategory.mem_distTriang_iff`.
-
-Proof: write the triangle as the derived image of the cone of a chain map X to Y.
-Apply the functorial flat resolution to both complexes and to that map. The two
-resolution maps are quasi-isomorphisms and their naturality gives a commuting
-square. In the derived category they give isomorphisms on the first two vertices;
-the distinguished-triangle axiom extends these to an isomorphism of triangles.
-The resolved complexes are K-flat. Convert this to preservation of acyclic
-tensors. For an acyclic V, tensoring the cone with V identifies with the cone
-of the tensor map, whose first two objects are acyclic. The triangulated
-subcategory of acyclic complexes therefore contains that cone, proving the
-third displayed condition.
-No boundedness or nonzero-ring hypothesis is used. -/
+/-- Every distinguished triangle of modules has a K-flat mapping-cone presentation. -/
 theorem exists_kFlat_cone_triangle_presentation
     (A : Type u) [CommRing A] [HasDerivedCategory (ModuleCat.{u} A)]
     (T : Pretriangulated.Triangle (DerivedCategory (ModuleCat.{u} A)))

@@ -16,7 +16,14 @@ import Mathlib.CategoryTheory.PUnit
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.CochainModuleAdjunction
 import WeilConjectures.Mathlib.Algebra.Homology.Bifunctor
 
-/-! # Total tensor products and module stalks at a topos point -/
+/-!
+# Total tensor products and module stalks at a topos point
+
+## References
+
+* Stacks Project, Cohomology on Sites, Tag 07A4
+* Stacks Project, Cohomology on Sites, Tag 0DEN
+-/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -252,16 +259,7 @@ private theorem moduleTensor (s : RingedSitePoint R p) :
   exact congrArg (fun z ↦ z.app point)
     (tensorMap_natural (I.modules.map f) (I.modules.map g)).symm
 
-/-- Taking a module stalk commutes with the unbounded direct-sum total tensor.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4 and Tag 0DEN.
-
-Proof: encode modules over the stalk ring as constant module sheaves on the
-one-object site with bottom topology. The prescribed operation graphs give an
-algebraic inverse-image presentation on that site. Apply the ordinary inverse-image
-tensor comparison, then evaluate at its sole object; sheafification on the bottom
-topology is an equivalence. The module adjunction proves preservation of direct sums.
-The resulting natural module comparison therefore induces an isomorphism of total
-complexes, commuting with both signed differential components in every degree. -/
+/-- Taking a module stalk commutes with the unbounded direct-sum total tensor. -/
 theorem tensor (s : RingedSitePoint R p) :
     letI := SheafOfModules.isMonoidal_W_independentCoefficients R
     letI := SheafOfModules.monoidalCategory R

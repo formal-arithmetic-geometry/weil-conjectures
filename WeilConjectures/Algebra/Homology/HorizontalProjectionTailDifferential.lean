@@ -9,9 +9,12 @@ module
 public import WeilConjectures.Algebra.Homology.ConeHorizontalProjection
 public import WeilConjectures.Algebra.Homology.ConeHorizontalStepStable
 
-/-! # Differential equation for the extended column projection
+/-!
+# Differential equation for the extended column projection
 
-Source: Stacks Project, Homology, Tag 012X, first horizontal filtration.
+## References
+
+* Stacks Project, Tag 012X (first filtration, Lemma 12.25.1(1))
 -/
 
 @[expose] public section
@@ -76,19 +79,8 @@ private theorem extendIso_inv_transport
   subst b
   simp
 
-/-- On a horizontal tail, column projection intertwines the total differential
-with the signed vertical differential. Source: Stacks Project, Tag 012X,
-first filtration and Lemma 12.25.1(1).
-
-Proof: if the total degree is negative or the horizontal index exceeds it,
-the summand inclusion is zero. Otherwise write the total differential on the
-summand as its horizontal term, going to index h+1, plus (-1)^h times its
-vertical term, staying at index h. Since h ≥ p, projection kills the horizontal
-term. If h > p, it also kills the vertical term and the original summand.
-If h = p, projection identifies the summand with its column object and the
-vertical term has coefficient (-1)^p. The extension and degree-equality
-isomorphisms transport this equation. At total degree zero the same formula
-applies; below zero its source inclusion is zero, so no boundary term occurs. -/
+/-- On a horizontal tail, column projection intertwines the total differential with the signed
+vertical differential. -/
 @[reassoc]
 theorem horizontalProjection_tail_differential
     (K : HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ))

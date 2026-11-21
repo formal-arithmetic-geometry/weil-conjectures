@@ -34,7 +34,9 @@ differential: `d_M f - (-1)^n f d_L` for `homComplex` and `(-1)^p (d_M f - f d_L
 - `CategoryTheory.homComplexFunctorObjIsoInternalHom L`: the same isomorphism, natural in `M`,
   between `homComplexFunctor.obj (op L)` and `CochainComplex.internalHom L`.
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
+## References
+
+* Stacks Project, Section 0A8X
 -/
 
 @[expose] public section

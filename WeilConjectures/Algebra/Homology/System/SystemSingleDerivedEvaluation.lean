@@ -13,7 +13,11 @@ public import WeilConjectures.Algebra.Homology.System.SystemDerivedTransition
 
 /-! # Derived evaluation of singleton extension
 
-Source: Zheng, Construction 4.1; Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 06YT, 0FND
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -32,17 +36,13 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (S : SystemScalarAssignment (J := J)) (T : SystemTensorCoherence S)
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) {m n : ℕ} (h : m ≤ n)
 
-/-- Exact localization of the identity agrees with the identity cochain model.
-Source: functoriality of localization -/
+/-- Exact localization of the identity agrees with the identity cochain model. -/
 def systemSingleIdentityFactors :
     (DerivedCategory.Q (C := systemLevel B n)) ⋙ 𝟭 _ ≅
       (𝟭 (systemLevel B n)).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
   Iso.refl _
 
-/-- The singleton comparison's right square is the localized actual transition.
-Source: Zheng 4.1.
-Proof: the identity functor and its factorization have identity components, so this
-is precisely the representative formula for the strict derived transition. -/
+/-- The singleton comparison's right square is the localized actual transition. -/
 theorem systemSingleDerivedSquare_rep (K : CochainComplex (StrictRingSystem B) ℤ) :
     ((Functor.rightUnitor (derivedSystemEvaluation B n)).hom ≫
       systemDerivedTransition B h).app (DerivedCategory.Q.obj K) ≫
@@ -68,10 +68,7 @@ theorem systemSingleDerivedSquare_rep (K : CochainComplex (StrictRingSystem B) �
   erw [Category.id_comp, Category.id_comp, hu]
   exact systemDerivedTransition_rep B h K
 
-/-- The ordinary singleton comparison is the mate at the ordinary unit.
-Source: Zheng 4.1.
-Proof: use the ordinary transpose formula with the identity map; its transpose
-under the singleton adjunction is its unit. -/
+/-- The ordinary singleton comparison is the mate at the ordinary unit. -/
 theorem systemSingleOrdinaryUnitSquare (P : systemLevel B n) :
     (systemTensorAdj S B h).homEquiv _ _ ((systemSingleBelow S T B n h).inv.app P) =
       (systemSingleAdjunction S T B n).unit.app P ≫
@@ -84,8 +81,7 @@ theorem systemSingleOrdinaryUnitSquare (P : systemLevel B n) :
     (systemSingleAdjunction S T B n).homEquiv_id] at ht
   exact ht
 
-/-- Evaluating derived singleton extension below n is the derived scalar tensor.
-Source: Zheng 4.1; Stacks 06YT and 0FND -/
+/-- Evaluating derived singleton extension below n is the derived scalar tensor. -/
 def systemSingleDerivedBelow (S : SystemScalarAssignment (J := J))
     (T : SystemTensorCoherence S) :
     (systemSingleDerivedExtension B n S T).derived ⋙ derivedSystemEvaluation B m ≅
@@ -100,10 +96,7 @@ def systemSingleDerivedBelow (S : SystemScalarAssignment (J := J))
     (systemSingleOrdinaryUnitSquare S T B h)
     (systemLevel_kFlatResolution B n) (fun _ hP ↦ hP.1)
 
-/-- The below-level derived tensor comparison preserves the two actual Hom transposes.
-Source: Zheng 4.1; Stacks 0FND
-Proof: it is the inverse of the mate of the strict derived transition, so the general
-mate-transpose identity gives exactly the displayed equation. -/
+/-- The below-level derived tensor comparison preserves the two actual Hom transposes. -/
 theorem systemSingleDerivedTranspose (P : DerivedCategory (systemLevel B n))
     (M : DerivedCategory (StrictRingSystem B))
     (f : (systemSingleDerivedExtension B n S T).derived.obj P ⟶ M) :
@@ -128,11 +121,7 @@ theorem systemSingleDerivedTranspose (P : DerivedCategory (systemLevel B n))
     (Category.id_comp ((systemDerivedTransition B h).app M)))
 
 /-- Derived singleton extension vanishes above its input level, without boundedness
-conditions. Source: Zheng 4.1; Stacks 06YT
-Proof: represent P by a flat-term K-flat resolution. The derived extension is then
-its ordinary extension, whose terms at m are zero. Exact evaluation and localization
-preserve that zero complex. Transport vanishing back through the resolution and
-canonical comparison isomorphisms. -/
+conditions. -/
 theorem systemSingleDerivedAbove (m n : ℕ) (hm : n < m)
     (P : DerivedCategory (systemLevel B n)) :
     IsZero ((derivedSystemEvaluation B m).obj

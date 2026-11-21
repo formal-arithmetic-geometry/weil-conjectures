@@ -8,7 +8,11 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 /-! # Scalar extension along equal coefficient maps
-Source: Stacks Project, Tag 05G3, tensor associativity and scalar extension. -/
+
+## References
+
+* Stacks Project, Tag 05G3, tensor associativity and scalar extension.
+-/
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
@@ -24,17 +28,7 @@ private theorem extendScalars_eqToIso_one_tmul
         ((1 : F) ⊗ₜ[E,f] x) = (1 : F) ⊗ₜ[E,g] x := by
   subst g
   rfl
-/-- Transport an invertible semilinear map through a coefficient-ring isomorphism.
-Source: Stacks Project, Tag 05G3, tensor associativity.
-
-Proof: the ring isomorphism makes restriction of scalars an equivalence, so
-its scalar-extension counit is invertible. Extend g and compose with that
-counit to obtain an F-linear isomorphism from F tensor_E M to N. Extend this
-isomorphism along q to D. Tensor associativity identifies its source with
-D tensor_E M, since q composed with phi equals p. On 1 tensor x, the
-associator gives 1 tensor (1 tensor x), the extension of g gives
-1 tensor (1 tensor g(x)), and the counit gives 1 tensor g(x).
-This uses no flatness of D and applies to zero rings and zero modules. -/
+/-- Transport an invertible semilinear map through a coefficient-ring isomorphism. -/
 theorem exists_extendScalars_iso_of_ringEquiv
     {E F D : Type u} [CommRing E] [CommRing F] [CommRing D]
     (φ : E ≃+* F) (p : E →+* D) (q : F →+* D) (h : q.comp φ.toRingHom = p)

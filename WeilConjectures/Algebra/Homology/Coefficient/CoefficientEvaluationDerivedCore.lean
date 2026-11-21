@@ -33,7 +33,10 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 /-!
 # Deriving the coefficient evaluation adjunction
 
-Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tags 06XN and 09T5.
+## References
+
+* Stacks Project, Tags 06XN, 09T5
+* Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1 (printed p. 21)
 -/
 
 @[expose] public noncomputable section
@@ -171,8 +174,7 @@ private theorem coefficient_extension_preserves_quasiIso
     have := HomologicalComplex.Hom.isIso_of_components ef
     infer_instance
 
-/-- A derived evaluation adjunction and its comparison on complex representatives.
-Source: Zheng, Construction 4.1, p. 21; Stacks Tags 06XN and 09T5 -/
+/-- A derived evaluation adjunction and its comparison on complex representatives. -/
 structure CoefficientEvaluationDerivedCoreData
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive] where
@@ -200,15 +202,7 @@ structure CoefficientEvaluationDerivedCoreData
         DerivedCategory.Q.map (((ordinary.adj n).mapHomologicalComplex (.up ℤ)).homEquiv
           P K f) ≫ (evaluationFactors n).inv.app K
 
-/-- Derive the fixed strict extension adjunction using flat-term K-flat resolutions.
-Source: Zheng, Construction 4.1, p. 21; Stacks Project, Tags 06XN and 09T5
-Proof: exact componentwise evaluation jointly detects quasi-isomorphisms. Below the
-chosen level, extension is tensor scalar change and preserves quasi-isomorphisms between
-K-flat complexes; above that level, both complexes are zero. Thus extension preserves
-quasi-isomorphisms on the resolving class. K-flat resolutions exist at every level.
-Apply the normalized resolving-class adjunction theorem to each ordinary adjunction;
-exact evaluation is its right adjoint and descends termwise. Its transpose formula is
-valid on every complex representative, and its counit is invertible on K-flat complexes. -/
+/-- Derive the fixed strict extension adjunction using flat-term K-flat resolutions. -/
 theorem coefficientEvaluationDerivedCore
     (ordinary : CoefficientOrdinaryEvaluationData (J := J) (O := O) (ell := ell))
     [∀ n, (ordinary.extension n).Additive] :

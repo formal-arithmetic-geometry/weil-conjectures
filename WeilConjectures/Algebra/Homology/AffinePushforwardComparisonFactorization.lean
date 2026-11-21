@@ -10,7 +10,12 @@ public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordi
 public import Mathlib.Algebra.Homology.Localization
 import all Mathlib.Algebra.Homology.Localization
 
-/-! # Naturality of the ordinary affine comparison on cohomology -/
+/-! # Naturality of the ordinary affine comparison on cohomology
+
+## References
+
+* Stacks Project, Tag 0AVW
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -29,22 +34,7 @@ private lemma cancelComparison {D : Type*} [Category D]
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The ordinary comparison can be evaluated on cohomology before the derived unit.
-Source: Stacks Project, perfect.tex, Tag 0AVW, affine morphism equivalence proof;
-Mathlib `ShortComplex.homologyMap_mapNatTrans` and naturality of
-`DerivedCategory.homologyFunctorFactors`.
-
-Proof: Write F = res_phi followed by tilde_B and G = tilde_A followed by pushforward.
-Expand the defined comparison map as the exact homology comparison for F, the
-inverse Q/homology comparison, H(Q(sigma_C)), and the derived unit. Naturality of
-the inverse Q/homology comparison moves H(Q(sigma_C)) to the left as the ordinary
-homology map of sigma_C. The natural transformation homology formula identifies
-that map with the homology comparison for F, sigma evaluated at H^i(C), and the
-inverse homology comparison for G. Cancel the inverse and forward comparisons
-for F and associate the four remaining factors. This gives the displayed equation.
-This argument is purely naturality: it works in every degree, on unbounded and
-zero complexes, and over the zero ring. The preservation instances express
-exactness of G, which follows from the supplied sigma and exactness of F. -/
+/-- The ordinary comparison can be evaluated on cohomology before the derived unit. -/
 theorem affinePushforwardComparison_factorization
     (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)
     (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅

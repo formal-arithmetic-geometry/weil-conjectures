@@ -17,7 +17,10 @@ import Mathlib.Data.Int.Interval
 
 /-! # Descent of bounded graded finite projective modules
 
-Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), descent of terms.
+## References
+
+* Stacks Project, More on Algebra, Tag 0BC7, proof of (1)
+* Stacks Project, Algebra, Tags 05N7 and 00NX
 -/
 
 @[expose] public section
@@ -64,21 +67,7 @@ private noncomputable def model_baseChange_iso
   exact (extendScalarsComp (F.map (homOfLE hij)).hom (colimit.ι F j).hom).symm.app M ≪≫
     (eqToIso (congrArg (fun f ↦ (extendScalars f).obj M) h))
 
-/-- A bounded graded family of finite projective modules descends with the same support bounds.
-Source: Stacks Project, More on Algebra, Tag 0BC7, proof of (1), and Algebra, Tags 05N7, 00NX.
-
-Proof: Only the finitely many degrees in [a,b] need models. Each term is finitely presented,
-so descend a finite presentation by the object clause of finite-presentation colimit descent.
-Write each original term as a summand of a finite free module. Descend the inclusion and
-retraction by the map clause, then impose their retraction identity by the equality clause.
-The resulting stage model is a summand of a finite free module, hence finite and projective.
-Directedness gives a common stage for the finitely many terms. Extension of scalars preserves
-finite projectivity, so transport all models to that stage. In other degrees use the zero
-module; its base change is zero and is isomorphic to the given zero term. These models give
-the required graded isomorphisms, with no differentials involved. For a preorder, first pass
-to its antisymmetrization (equivalent as an indexing category), apply the partial-order
-finite-presentation lemma there, and lift the resulting stage back. If b < a the interval is
-empty: choose any stage and put zero in every degree. -/
+/-- A bounded graded family of finite projective modules descends with the same support bounds. -/
 theorem exists_finite_projective_graded_model_of_directed_colimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (F : I ⥤ CommRingCat.{u}) [HasColimit F]

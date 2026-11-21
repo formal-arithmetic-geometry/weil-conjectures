@@ -12,7 +12,10 @@ import WeilConjectures.Algebra.Homology.Slice.SliceScalarLevelAdjunction
 
 /-! # Coefficient-linear comparisons at each scalar level
 
-Source: Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
+## References
+
+* Stacks Project, Modules on Sites, Tags 0E8I, 03DI, 03CY and 03EK.
+* Stacks Project, Sites, Tag 00WK
 -/
 
 @[expose] public noncomputable section
@@ -304,24 +307,7 @@ private theorem comparison_naturality {G G'} (g : G ⟶ G') (n : ℕ) :
   exact (congrArg (fun y ↦ ringedSliceExtensionSection.{c, v, r}
     (B.obj (op n)) U ((AV.F.obj G').level n) W y) hm).symm.trans (hi _).symm
 
-/-- The scalar-linear level comparison exists for the prescribed tower presentations.
-Source: Stacks 0E8I, 03DI, 03CY, 03EK and Sites 00WK; coefficient refinement of
-lem-sf-semilinear-slice-scalar-generators, steps 1--6
-
-Proof: The normalized coefficient adjunction followed by the normalized slice-extension
-adjunction identifies maps from B_n tensor j_!G to N with maps from G to the slice of
-Res N. Applying these adjunctions in the opposite order gives the same Hom set for
-j_!(B_n|_U tensor G). The resulting natural Hom equivalence gives mutually inverse
-coefficient-linear comparison maps. Evaluating the transposes on an original summand
-proves the generator formula at coefficient 1; linearity gives every coefficient b.
-Injectivity of the Hom equivalence proves uniqueness. The already proved scalar/slice
-comparison, inverted, gives scalarIdentification and its generator equation; the
-slice-extension adjunction proves its uniqueness. For transition and naturality,
-cancel the prescribed object transports and use the injective Hom equivalence again.
-The presentation equations and naturality of both sheafification and slice-extension
-units give identical images of every unit tensor in every original summand. This
-argument uses arbitrary unital algebra maps and does not require global generation
-or flatness. -/
+/-- The scalar-linear level comparison exists for the prescribed tower presentations. -/
 theorem exists_sliceScalarLevelComparison :
     Nonempty (SliceScalarLevelComparison.{c, v, r} B U O α AX AV extension) := by
   classical

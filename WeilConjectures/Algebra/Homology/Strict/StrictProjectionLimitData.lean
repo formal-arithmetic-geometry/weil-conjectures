@@ -14,12 +14,15 @@ public import Mathlib.Algebra.Homology.Functor
 /-!
 # Strict derived-limit data and diagram postcomposition
 
-Source: Stacks Project, Cohomology on Sites, Tags 0940 and 0941
-
 The total right derived limit, K-injective computation, evaluation and natural Roos data
-are the supplied data of lem-weil-pbc-ringed-strict-tower-homotopy-limit for module sheaves.
+are the data supplied by `ringedStrictTowerHomotopyLimitIndependentCoefficients` for module
+sheaves.
 This record does not assert existence in an arbitrary abelian category.
 `projectionPost` is Mathlib's ordinary diagram postcomposition.
+
+## References
+
+* Stacks Project, Tags 0940, 0A07, 0941
 -/
 
 @[expose] public noncomputable section
@@ -30,17 +33,15 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 
 namespace SheafOfModules
 
-/-- Postcomposition on diagrams, retaining the original functor and natural transformations.
-Source: Stacks 0940. -/
+/-- Postcomposition on diagrams, retaining the original functor and natural transformations. -/
 abbrev projectionPost {I : Type uI} {B : Type uB} {D : Type uD}
     [Category.{vI} I] [Category.{vB} B] [Category.{vD} D] (F : B ⥤ D) :=
   (Functor.whiskeringRight I B D).obj F
 
 /-- The derived limit, evaluation, and Roos data for an abelian category of strict towers.
 For sheaves of modules these are the data supplied by
-`ringedStrictTowerHomotopyLimitIndependentCoefficients`
-(lem-weil-pbc-ringed-strict-tower-homotopy-limit). This record only packages supplied data.
-Source: Stacks 0A07, 0940, 0941 -/
+`ringedStrictTowerHomotopyLimitIndependentCoefficients`. This record only packages supplied
+data. -/
 structure StrictProjectionLimitData (B : Type uB) [Category.{vB} B] [Abelian B]
     [HasLimitsOfShape ℕᵒᵖ B]
     {DB DT : Type*} [Category* DB] [Category* DT]

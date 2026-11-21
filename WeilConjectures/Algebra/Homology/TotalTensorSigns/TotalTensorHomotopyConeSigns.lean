@@ -39,8 +39,18 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Signed tensor homotopies and mapping cones
 
-Source: Stacks Project, Tags 06YM, 06YP, 0G6E, 0FNH and 0GWR;
-derived.tex, definition-cone and definition-distinguished-triangle.
+Signed homotopy, mapping cone and interchange formulas for the total tensor product of complexes
+of sheaves of modules.
+
+## Implementation details
+
+All sheaf tensor maps used here are the localization tensor maps induced by balanced presheaf
+tensor maps, rather than arbitrary maps on the associated sheaves.
+
+## References
+
+* Stacks Project, Tags 06YM, 06YP, 0G6E, 0FNH and 0GWR
+* Stacks Project, Modules on Sites, Section 03DA, and Tag 03EK
 -/
 
 @[expose] public noncomputable section
@@ -62,11 +72,7 @@ attribute [local irreducible] SheafOfModules.monoidalCategory
 
 namespace SheafOfModules.TotalTensorSigns
 
-/-- Coefficient composition on an independently small site.
-Source: Mathlib's transport of sheaf composition along an equivalence of sites;
-Stacks, Modules on Sites, Section 03DA.
-Proof: use the equivalent small model in the coefficient universe, where forgetting
-commutative rings to rings preserves limits, and transport sheaf composition back. -/
+/-- Coefficient composition on an independently small site. -/
 local instance coefficientCompose {C : Type u} [Category.{v} C]
     [EssentiallySmall.{r} C]
     (J : GrothendieckTopology C) :
@@ -84,12 +90,11 @@ attribute [local instance 10000] coefficientCompose
   SheafOfModules.hasSheafify_coefficientUniverse
   SheafOfModules.wEqualsLocallyBijective_coefficientUniverse
 
-/-- The existing category of module sheaves. Source: Stacks, Modules on Sites, Section 03DA -/
+/-- The existing category of module sheaves. -/
 abbrev Modules := CategoryTheory.ringedSiteModules.{r}
   ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)
 
 /-- The existing Abelian structure with its pointwise additive field exposed.
-Source: Mathlib's Abelian module-sheaf category.
 The finite-product, kernel, cokernel and normality fields are the native ones; the
 additive field is the same pointwise structure, named directly for specialization. -/
 local instance modulesAbelian : Abelian (Modules R) := by
@@ -106,8 +111,7 @@ variable (D : Type d) [Category.{e} D] [Abelian D] [HasBinaryBiproducts D]
   [MonoidalCategory D] [MonoidalPreadditive D] [SymmetricCategory D]
   [HasCoproducts.{0} D]
 
-/-- Countable coproducts supply the generic total tensor.
-Source: Mathlib's totalization coproduct instance. -/
+/-- Countable coproducts supply the generic total tensor. -/
 local instance genericTotalExists (A B : CochainComplex D ℤ) :
     HomologicalComplex.HasMapBifunctor A B (curriedTensor D) (.up ℤ) := inferInstance
 
@@ -115,59 +119,50 @@ end Generic
 
 attribute [local instance] Generic.genericTotalExists
 
-/-- The existing sheafified balanced tensor. Source: Stacks, Tag 03EK -/
+/-- The existing sheafified balanced tensor. -/
 def tensor := curriedTensor (Modules R)
 
-/-- The sheaf tensor is additive in both variables.
-Source: the existing monoidal preadditive instance. -/
+/-- The sheaf tensor is additive in both variables. -/
 instance tensorAdditive : (tensor R).Additive := by
   unfold tensor
   infer_instance
 
-/-- Tensoring with one module sheaf is additive.
-Source: the existing monoidal preadditive instance. -/
+/-- Tensoring with one module sheaf is additive. -/
 instance tensorObjAdditive (M : Modules R) : ((tensor R).obj M).Additive := by
   unfold tensor
   infer_instance
 
-/-- Countable total tensor sums exist for these module sheaves.
-Source: the existing coproduct and tensor-colimit instances. -/
+/-- Countable total tensor sums exist for these module sheaves. -/
 instance totalExists (A B : CochainComplex (Modules R) ℤ) :
     HomologicalComplex.HasMapBifunctor A B (tensor R) (.up ℤ) := by
   unfold tensor
   exact Generic.genericTotalExists (Modules R) A B
 
-/-- The direct-sum total tensor bifunctor, with differential d tensor 1 + (-1)^p 1 tensor d.
-Source: Stacks, Tag 0G6E. -/
+/-- The direct-sum total tensor bifunctor, with differential d tensor 1 + (-1)^p 1 tensor d. -/
 def total := (tensor R).map₂CochainComplex
 
-/-- The total tensor is additive in its second argument.
-Source: the additive bifunctor API for cochain totalization. -/
+/-- The total tensor is additive in its second argument. -/
 instance totalObjAdditive (A : CochainComplex (Modules R) ℤ) :
     ((total R).obj A).Additive := by
   unfold total
   infer_instance
 
-/-- The total tensor is additive in its first argument.
-Source: the additive bifunctor API for cochain totalization. -/
+/-- The total tensor is additive in its first argument. -/
 instance totalFlipObjAdditive (A : CochainComplex (Modules R) ℤ) :
     ((total R).flip.obj A).Additive := by
   unfold total
   infer_instance
 
-/-- The same bifunctor modulo homotopies, with the inherited coherent integer shifts.
-Source: Stacks, Tag 06YM. -/
+/-- The same bifunctor modulo homotopies, with the inherited coherent integer shifts. -/
 abbrev homotopyTensor := (tensor R).bifunctorMapHomotopyCategory (.up ℤ) (.up ℤ) (.up ℤ)
 
-/-- The canonical signed comparison A tensor Cone(u) to Cone(A tensor u).
-Source: Stacks, Tag 0G6E. -/
+/-- The canonical signed comparison A tensor Cone(u) to Cone(A tensor u). -/
 def coneLeft (A : CochainComplex (Modules R) ℤ)
     {X Y : CochainComplex (Modules R) ℤ} (f : X ⟶ Y) :
     ((total R).obj A).obj (mappingCone f) ≅ mappingCone (((total R).obj A).map f) :=
   CochainComplex.mapBifunctorMappingCone₂Iso A f (tensor R)
 
-/-- The canonical unsigned comparison Cone(u) tensor A to Cone(u tensor A).
-Source: Stacks, Tag 0G6E. -/
+/-- The canonical unsigned comparison Cone(u) tensor A to Cone(u tensor A). -/
 def coneRight (A : CochainComplex (Modules R) ℤ)
     {X Y : CochainComplex (Modules R) ℤ} (f : X ⟶ Y) :
     ((total R).flip.obj A).obj (mappingCone f) ≅
@@ -175,41 +170,35 @@ def coneRight (A : CochainComplex (Modules R) ℤ)
   CochainComplex.mapBifunctorMappingCone₁Iso f A (tensor R)
 
 /-- The existing signed total flip after the presheaf-induced sheaf symmetry, without
-requesting the unused associativity data of the monoidal structure on all complexes.
-Source: Stacks, Tag 0GWR. -/
+requesting the unused associativity data of the monoidal structure on all complexes. -/
 def swap (B A : CochainComplex (Modules R) ℤ) :
     ((total R).obj B).obj A ≅ ((total R).obj A).obj B :=
   HomologicalComplex₂.total.mapIso (CochainComplex.Monoidal.braidingBicomplexIso B A)
     (.up ℤ) ≪≫ HomologicalComplex.mapBifunctorFlipIso A B (tensor R) (.up ℤ)
 
-/-- The existing inclusion of a total-tensor summand, with its endpoint type exposed.
-Source: Stacks, Tag 0G6E. -/
+/-- The existing inclusion of a total-tensor summand, with its endpoint type exposed. -/
 def ι (A B : CochainComplex (Modules R) ℤ) (p q n : ℤ) (hpq : p + q = n) :
     A.X p ⊗ B.X q ⟶ (((total R).obj A).obj B).X n :=
   CochainComplex.ιMapBifunctor A B (tensor R) p q n hpq
 
-/-- The existing second-variable tensor homotopy, with its endpoints exposed.
-Source: Stacks, Tag 0G6E. -/
+/-- The existing second-variable tensor homotopy, with its endpoints exposed. -/
 def homotopyLeft (A : CochainComplex (Modules R) ℤ)
     {X Y : CochainComplex (Modules R) ℤ} {f g : X ⟶ Y} (h : Homotopy f g) :
     Homotopy (((total R).obj A).map f) (((total R).obj A).map g) :=
   HomologicalComplex.mapBifunctorMapHomotopy₂ (𝟙 A) h (tensor R) (.up ℤ)
 
-/-- The existing first-variable tensor homotopy, with its endpoints exposed.
-Source: Stacks, Tag 0G6E. -/
+/-- The existing first-variable tensor homotopy, with its endpoints exposed. -/
 def homotopyRight (A : CochainComplex (Modules R) ℤ)
     {X Y : CochainComplex (Modules R) ℤ} {f g : X ⟶ Y} (h : Homotopy f g) :
     Homotopy (((total R).flip.obj A).map f) (((total R).flip.obj A).map g) :=
   HomologicalComplex.mapBifunctorMapHomotopy₁ h (𝟙 A) (tensor R) (.up ℤ)
 
-/-- The existing coherent second-factor shift, with its endpoints exposed.
-Source: Stacks, Tag 0FNH. -/
+/-- The existing coherent second-factor shift, with its endpoints exposed. -/
 def shiftLeft (A X : CochainComplex (Modules R) ℤ) (n : ℤ) :
     ((total R).obj A).obj (X⟦n⟧) ≅ (((total R).obj A).obj X)⟦n⟧ :=
   CochainComplex.mapBifunctorShift₂Iso A X (tensor R) n
 
-/-- The existing coherent first-factor shift, with its endpoints exposed.
-Source: Stacks, Tag 0FNH. -/
+/-- The existing coherent first-factor shift, with its endpoints exposed. -/
 def shiftRight (A X : CochainComplex (Modules R) ℤ) (n : ℤ) :
     ((total R).flip.obj A).obj (X⟦n⟧) ≅ (((total R).flip.obj A).obj X)⟦n⟧ :=
   CochainComplex.mapBifunctorShift₁Iso X A (tensor R) n
@@ -701,54 +690,8 @@ end Generic
 
 /-- The signed homotopy, cone and interchange formulas for total sheaf tensor, its exactness
 on K(R), preservation of arbitrary quasi-isomorphisms by K-flat factors, and shift stability.
-The two cone isomorphisms and the swap below are existing canonical constructions, so their
-existence, inverses and chain identities are included in their types. The inr equations
-specify the identity on the target summands, and the inl equations specify the source
-summands. In the projection equations, the negative of triangle.mor₃ is p; triangle.mor₃
-itself is -p. All sheaf tensor maps used here are the localization tensor maps induced by
-balanced presheaf tensor maps, rather than arbitrary maps on the associated sheaves.
-
-Source: Stacks Project, sites-cohomology.tex, Tags 06YM and 06YP; derived.tex,
-definition-cone, definition-distinguished-triangle and Tag 0G6E; more-algebra.tex,
-Tags 0FNH and 0GWR.
-
-Proof (the node's eleven steps):
-1. The existing independent-universe localization tensor is monoidal preadditive
-   (def-pur-sheaf-tensor-product). Specialize the additive bifunctor API to this tensor.
-   Its totalization, homotopy, cone and coherent shift constructions provide the maps;
-   they are specified on the summands of def-pc-tensor-complex-sheaves.
-2. For h:u~v, take (-1)^p 1 tensor h on A^p tensor X^q. Expanding dk+kd gives mixed
-   coefficients (-1)^p and (-1)^(p+1), which cancel, leaving 1 tensor (u-v).
-3. For X tensor A, take h tensor 1. Its mixed coefficients (-1)^(i-1) and (-1)^i
-   cancel, leaving (u-v) tensor 1. These homotopies give additive quotient functors
-   on the homotopy category of lem-pur-homotopy-category-triangulated.
-4. Use s²_n and s¹_n of lem-weil-pbc-total-tensor-integer-shifts; their zero, addition
-   and naturality equations pass to homotopy classes.
-5. On A tensor Cone(u), use identity on Y and (-1)^p on the X[1] summand. Its cone
-   differential has Y component (-1)^p a tensor ux and X components
-   (-1)^(p+1) da tensor x - a tensor dx. Both orders of applying the differential
-   and comparison give these expressions. The same signs give the inverse.
-6. For Cone(u) tensor A, distribution is unsigned. On x in X^(i+1), both differentials
-   give ux tensor a and -dx tensor a + (-1)^i x tensor da.
-7. Cone maps from commuting squares are diagonal, so these comparisons are natural.
-   Inclusions are unchanged. On source summands the projection signs are (-1)^p and
-   1, precisely s²_1 and s¹_1. Negating gives compatibility with the third arrow -p.
-8. Every distinguished triangle is isomorphic to a cone triangle. Identity on the
-   first two vertices and the cone comparison on the third identify its tensor image
-   with the cone triangle of the tensor map. Hence both quotient functors are exact
-   in the sense of def-weil-triangulated-category.
-9. Swap b in B^i and a in A^j with (-1)^(ij). The two differential coefficients are
-   (-1)^(ij+j) and (-1)^(ij) in either order. Swapping twice gives (-1)^(2ij)=1.
-   Degree-zero maps preserve the bidegrees, giving naturality.
-10. By lem-pur-quasi-iso-cone-acyclic, any quasi-isomorphism has acyclic cone.
-    For K-flat A, tensoring this cone on the right preserves acyclicity. The cone
-    comparison and the same criterion prove the tensor map a quasi-isomorphism.
-    Conjugate by the signed swap for tensoring on the left. Endpoints are arbitrary.
-11. The second shift comparison identifies F tensor A[n] with (F tensor A)[n].
-    Shifts preserve acyclicity, proving K-flat stability. Separately, every term
-    (A[n])^i is A^(i+n), proving flat-term stability without an unbounded-flat
-    implies K-flat assertion. No boundedness or flat-cohomology assumption is used.
--/
+The two cone isomorphisms and the swap are existing canonical constructions, so their
+existence, inverses and chain identities are included in their types. -/
 theorem totalTensorHomotopyConeSigns :
     (∀ A : CochainComplex (Modules R) ℤ,
       ((total R).obj A).Additive ∧ ((total R).flip.obj A).Additive ∧

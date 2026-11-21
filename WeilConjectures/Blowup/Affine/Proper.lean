@@ -33,13 +33,11 @@ which this is transported is `SetLike.GradeZero.isScalarTower` of
 The finite type and quasi-compactness of the same morphism are recorded alongside, since
 they come from the same hypothesis.
 
-## Blueprint
+## Implementation details
 
-This file implements `lemma:nagata-affine-blowup-proper` of the Nagata compactification
-blueprint. The blueprint derives properness from projectivity, through the closed immersion
-of the blow-up into a relative projective space. We instead read it off Mathlib's
-properness of `Proj.toSpecZero`, as suggested by the "Mathlib relation" paragraph of that
-statement; the projective embedding is not needed for it.
+Properness is read off Mathlib's properness of `Proj.toSpecZero`, rather than derived from
+projectivity through the closed immersion of the blow-up into a relative projective space;
+the projective embedding is not needed for it.
 
 -/
 

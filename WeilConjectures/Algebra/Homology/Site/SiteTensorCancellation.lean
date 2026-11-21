@@ -30,7 +30,10 @@ import all WeilConjectures.Algebra.Homology.PoincareDuality.TensorTrilinearUnive
 
 /-! # Cancellation in the explicit site tensor presentation
 
-Source: Stacks 03EK and 0B8N, tensor comparison and evaluation.
+## References
+
+* Stacks Project, Tag 03EK
+* Stacks Project, Tag 0B8N
 -/
 
 @[expose] public noncomputable section
@@ -131,12 +134,7 @@ private theorem siteCancel_pure (P Q M : LineEvaluation.Modules.{uC, vC, r} R)
             (LineEvaluation.cancellation_pure.{uC, vC, r} _ P Q M e U x p q)))
 
 attribute [local irreducible] tensorToSite siteCancel
-/-- A specified evaluation pairing gives the unique cancellation on pure site tensors.
-Source: Stacks 03EK and 0B8N
-Proof: compare the explicit site tensor with the monoidal sheaf tensor. Transport
-reassociation, the specified pairing and the unitor through that comparison. Its
-formula follows on pure sections from the comparison formulas. The trilinear
-universal property shows that this formula determines every component uniquely. -/
+/-- A specified evaluation pairing gives the unique cancellation on pure site tensors. -/
 theorem siteTensorCancellation (P Q : LineEvaluation.Modules.{uC, vC, r} R)
     (e : P ⊗ Q ≅ unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :
     ∃! c : siteSheafTensorRight P ⋙ siteSheafTensorRight Q ≅ 𝟭 _,

@@ -29,10 +29,12 @@ import all Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import all Mathlib.CategoryTheory.Adjunction.Limits
 /-! # Algebraic inverse image of a composite geometric morphism
 
-Source: Stacks Project, Modules on Sites, Tags 03D7 and 0D6D.
-
 Finite-product transport constructs the ring and module structures. The graph
 laws of the two coefficient maps construct the composite coefficient morphism.
+
+## References
+
+* Stacks Project, Tags 03D7, 0D6D
 -/
 
 -- After pruning, this module only keeps private declarations.

@@ -12,8 +12,9 @@ import all WeilConjectures.Algebra.Homology.LineUnbounded.LineUnboundedDerivedTe
 
 /-! # Ordinary signed-line tensor and derived scalar extension
 
-Source: Stacks Project, Tags 07A4, 0G7E and 0D6D; blueprint main-20261015,
-Tate-twist local freeness, proof (3).
+## References
+
+* Stacks Project, Tags 07A4, 0G7E, 0D6D, 0B8N, 06YN and 06YU
 -/
 
 @[expose] public noncomputable section
@@ -217,15 +218,7 @@ end
 attribute [local semireducible] monoidalCategory
 
 /-- All signed powers are lines and their unbounded derived tensors are the exact
-termwise tensors with inverse the opposite signed power and actual evaluation.
-Source: blueprint proof (3), Stacks 0B8N, 06YN and 06YU
-Proof: on a trivializing slice tensor the chosen basis to get positive powers, and
-use the dual basis for negative powers. The normalized signed contraction is actual
-evaluation. Apply line_unbounded_derived_tensor to each power. Its degree-zero total
-collapse and representative normalization give factors and epsilon_computed on all
-complexes. Exact tensor commutes with total sums; reassociation then proves K-flatness
-of P tensor the line. Composites of exact tensor functors prove flatness of its terms.
-The opposite evaluation gives the other inverse, including exponent zero. -/
+termwise tensors with inverse the opposite signed power and actual evaluation. -/
 theorem exists_lineData
     {R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max a (t + 1)}}
     (L : Modules.{t, a} X R) [L.IsFiniteLocallyFreeOfRank 1] : Nonempty (LineData L) := by

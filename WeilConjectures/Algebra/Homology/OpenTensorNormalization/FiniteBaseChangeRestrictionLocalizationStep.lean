@@ -430,45 +430,7 @@ private theorem localization_of_models
     funext n
     exact hOrd (P.X n)
 
-/-- Localize the ordinary θ₀/pin/mate identity to the derived representative.
-
-Source: the localization and model-equation part of
-`literature/blueprint/latest/blueprint/sec-six-functors/sk-thm-sf-compatibility/
-fix-prop-coherence.proof.md`.
-Proof: expand the two finite pull pins and the two finite open pins on `P` and on
-its fixed-scalar pullback along `g`. Use naturality of the realization factors to
-transport the complex pin identity through the three square compositors. Finally
-apply `Operations.theta_model` to the resolving complex. In detail, map the
-ordinary square degreewise to complexes, then through `DerivedCategory.Q`.
-Use the two pull pin model equations and the restriction parts of the two open
-pin model equations. Naturality moves the realization factor through the
-localized ordinary square. The exact-functor compositor factorization identifies
-the localized fixed-scalar square with the three derived compositors. The
-conclusion is the resulting identity after postcomposition with the model map;
-its invertibility and cancellation are proved by the caller.
-First apply complex-morphism extensionality to `hOrd` in every degree, using
-the definition of `NatTrans.mapHomologicalComplex`. This gives equality of the
-complete two pin-square cochain maps. More explicitly, write `F_j,F_h` for the
-ordinary finite pullbacks along `j,gU`,
-`E` for the U'-realization, `φ` for exact localization factors, and `a` for the
-pullback complex comparison. Append the invertible factor `φ_{I'}(G(P₀))` to
-both sides of the conclusion, where `P₀` is the X-realization of `P`. Naturality
-of `theta.inv` at `φ_{E_X}(P)` and the inverse form of `theta_model P₀ hP`
-replace the left theta tail by `D(H)(φ_I(P₀))`, then `a_H(I(P₀))`, then
-`Q(θ₀⁻¹(P₀))`. The open-pin model at `P`, the pullU-pin model at `F_j(P)`,
-and naturality of `a_H` then turn the entire left route into `C ≫ Q(α_P)`,
-where `α_P` is the complex map whose components are the left side of `hOrd`, and
-`C = D(E)(D(F_h)(φ_{F_j}(P)) ≫ φ_{F_h}(F_j(P))) ≫ φ_E(F_h(F_j(P)))`.
-For the right route, the pull-pin model at `P` followed by factor naturality
-moves `I'` through its ordinary comparison; the open'-pin model at `F_g(P)`
-then leaves the exact square compositor. Expand its definition and use
-`mapDerivedCategoryNatIso_fac` and
-`mapDerivedCategoryCompIso_hom_app_factors` on its two routes. They give the
-same prefix `C` followed by `Q(β_P)`, where `β_P` is the right complex map
-in the degreewise hypothesis. Applying `Q.map` to the cochain equality equates
-these tails. Finally cancel
-only the appended exact restriction factor. No flatness cancellation of `B`
-is performed in this lemma. -/
+/-- Localize the ordinary θ₀/pin/mate identity to the derived representative. -/
 theorem finite_base_change_restriction_localization_step
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

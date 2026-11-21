@@ -12,7 +12,13 @@ import WeilConjectures.Algebra.Homology.FiniteFreeZeroHomologyEvaluation
 import WeilConjectures.Algebra.Homology.HomologyEvaluationRoofComparison
 import WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris
 
-/-! Core finite-free roof calculation for local homology evaluation. -/
+/-!
+# Core finite-free roof calculation for local homology evaluation
+
+## References
+
+* [Stacks Project, Tag 0BQY](https://stacks.math.columbia.edu/tag/0BQY)
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -20,11 +26,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace CategoryTheory
 
-/-- The finite-free roof calculation proves local invertibility once its roof is exposed.
-Source: Stacks Project, Tag 0BQY, zero-differential Hom calculation.
-
-The proof is the explicit finite-free zero-differential calculation together with the
-quasi-isomorphism comparison square. -/
+/-- The finite-free roof calculation proves local invertibility once its roof is exposed. -/
 theorem homologyEvaluation_local_iso_of_roof (X : AlgebraicGeometry.Scheme.{u})
     (T J : CochainComplex X.Modules ℤ) (n : ℤ)
     (hJ : ∀ k : ℤ, k ≠ 0 → IsZero (J.homology k))

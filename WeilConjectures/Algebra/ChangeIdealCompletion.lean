@@ -8,8 +8,16 @@ module
 
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 
-/-! # Change of ideal for adic completion
-Source: literature/stacks-project/algebra.tex, Algebra Lemma Tag 0319 -/
+/-!
+# Change of ideal for adic completion
+
+If `J ^ d ⊆ I` and `I ^ c ⊆ J`, the `I`-adic and `J`-adic completions of a module are
+canonically isomorphic.
+
+## References
+
+* Stacks Project, Tag 0319
+-/
 
 @[expose] public section
 
@@ -17,9 +25,7 @@ open scoped Pointwise
 
 
 /-- `J ^ (d * k) M ⊆ I ^ k M` when `J ^ d ⊆ I`: the inclusion making the reduction
-`M/J^{dk}M → M/I^kM` of the comparison map well defined.
-Source: literature/stacks-project/algebra.tex, Algebra Lemma Tag 0319
-Proof: `J ^ (d * k) = (J ^ d) ^ k ≤ I ^ k`, and `• ⊤` is monotone in the ideal. -/
+`M/J^{dk}M → M/I^kM` of the comparison map well defined. -/
 theorem powerReductionJI {A : Type*} [CommRing A] (I J : Ideal A) (d k : ℕ)
     (M : Type*) [AddCommGroup M] [Module A M]
     (hJI : J ^ d ≤ I) :
@@ -29,9 +35,7 @@ theorem powerReductionJI {A : Type*} [CommRing A] (I J : Ideal A) (d k : ℕ)
     exact pow_le_pow_left' hJI k)
 
 /-- `I ^ (c * n) M ⊆ J ^ n M` when `I ^ c ⊆ J`: the inclusion making the reduction
-`M/I^{cn}M → M/J^nM` of the inverse comparison map well defined.
-Source: literature/stacks-project/algebra.tex, Algebra Lemma Tag 0319
-Proof: `I ^ (c * n) = (I ^ c) ^ n ≤ J ^ n`, and `• ⊤` is monotone in the ideal. -/
+`M/I^{cn}M → M/J^nM` of the inverse comparison map well defined. -/
 theorem powerReductionIJ {A : Type*} [CommRing A] (I J : Ideal A) (c n : ℕ)
     (M : Type*) [AddCommGroup M] [Module A M]
     (hIJ : I ^ c ≤ J) :
@@ -70,14 +74,7 @@ private theorem comparisonMap_inverse {A : Type*} [CommRing A] (I J : Ideal A)
     Submodule.factor_comp_apply, AdicCompletion.transitionMap, Submodule.factorPow]
     using x.property hn
 
-/-- Completions for two cofinal ideals are canonically isomorphic.
-Source: literature/stacks-project/algebra.tex, Algebra Lemma Tag 0319
-Proof: the systems of maps `M/J^{dk}M → M/I^kM` and `M/I^{cn}M → M/J^nM` are
-compatible with the transition maps and `A`-linear, so they give maps
-`θ : M^∧_J → M^∧_I` and `θ' : M^∧_I → M^∧_J`; both composites are computed
-componentwise to be the identity (`x_{cdk}` reduces to `x_k`), so `θ` is a linear
-equivalence. Both `θ ∘ ι_J` and `ι_I` send `x` to `(x mod I^kM)_k`, so they agree;
-hence `ι_I` is bijective iff `ι_J = θ⁻¹ ∘ ι_I` is. -/
+/-- Completions for two cofinal ideals are canonically isomorphic. -/
 theorem changeIdealCompletion
     {A : Type*} [CommRing A] (I J : Ideal A) (c d : ℕ)
     (hc : 1 ≤ c) (hd : 1 ≤ d) (hIJ : I ^ c ≤ J) (hJI : J ^ d ≤ I)
@@ -113,11 +110,7 @@ theorem changeIdealCompletion
 
 
 /-- For `M = A` the comparison `θ : A^∧_J → A^∧_I`, `(x_n)_n ↦ (x_{dk} mod I^k)_k`,
-is a ring equivalence.
-Source: literature/stacks-project/algebra.tex, Algebra Lemma Tag 0319
-Proof: `θ` is the linear equivalence of `changeIdealCompletion` for `M = A`; each
-reduction `A/J^{dk} → A/I^k` is a ring map and multiplication on both completions
-is componentwise, so `θ` preserves `1` and products. -/
+is a ring equivalence. -/
 theorem changeIdealCompletionRing
     {A : Type*} [CommRing A] (I J : Ideal A) (c d : ℕ)
     (hc : 1 ≤ c) (hd : 1 ≤ d) (hIJ : I ^ c ≤ J) (hJI : J ^ d ≤ I) :

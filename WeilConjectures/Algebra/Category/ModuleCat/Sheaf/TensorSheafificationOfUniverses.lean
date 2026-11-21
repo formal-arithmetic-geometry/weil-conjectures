@@ -9,7 +9,9 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUn
 /-!
 # Tensor descent through sheafification in independent universes
 
-Source: Stacks Project, Modules on Sites, Tags 03EK and 05V4.
+## References
+
+* Stacks Project, Modules on Sites, Tags 03EK and 05V4
 -/
 
 @[expose] public section
@@ -326,14 +328,7 @@ private theorem tensor_precomp_injective
     _ = _ := naturality_apply b i.op (q ⊗ₜ[R.obj U] n)
 
 omit hH g in
-/-- Tensoring a locally bijective module map becomes an isomorphism after sheafification.
-Source: Stacks Project, Modules on Sites, Tag 03EK and Tag 05V4
-Proof: a bilinear map out of the source tensor product descends uniquely to the target:
-locally lift the first operand, apply the original pairing, and glue in the target sheaf.
-Local injectivity makes this independent of the lifts. Additivity and homogeneity can
-be checked on the covering sieves where lifts exist. The tensor universal property and
-sheafification adjunction therefore give bijections on maps to every module sheaf.
-The sheafified tensor map is consequently an isomorphism. -/
+/-- Tensoring a locally bijective module map becomes an isomorphism after sheafification. -/
 theorem sheafification_tensorHom_isIso
     (hR : Presheaf.IsSheaf J (R ⋙ forget₂ CommRingCat RingCat))
     [J.WEqualsLocallyBijective AddCommGrpCat.{w}]

@@ -13,7 +13,10 @@ import WeilConjectures.Algebra.Homology.HomTensorSectionNaturality
 /-!
 # Localized pure-tensor differential calculation
 
-Source: Stacks Project, Tag 0A90 and the calculation in Tag 0A5Y.
+## References
+
+* [Stacks Project, Tag 0A5Y](https://stacks.math.columbia.edu/tag/0A5Y)
+* [Stacks Project, Tag 0A90](https://stacks.math.columbia.edu/tag/0A90)
 -/
 
 @[expose] public section
@@ -250,25 +253,7 @@ private theorem curry_apply (K L M : CochainComplex Mod ℤ)
 
 set_option synthInstance.maxSize 256 in
 /-- The iterated Hom differential agrees with the three tensor differential terms
-on one localized pure tensor.
-Source: Stacks Project, Tag 0A90 and the calculation in More on Algebra Tag 0A5Y.
-
-Proof: Apply the degree-(n+1) curry equation to the image of s under the outer
-Hom differential. Expand that differential using its product projection identity.
-Its postcomposition evaluates the inner differential on the outer evaluation of s;
-its precomposition contributes minus (-1)^n times the evaluation at d_K(x).
-Expand the inner differential: its postcomposition is d_M applied to f(x)(y),
-and its precomposition is minus (-1)^(p+n) times f(x)(d_L(y)).
-Apply the degree-n curry equation separately to the three terms on the right.
-The first tensor summand differential sends x tensor y to d_K(x) tensor y.
-The second sends it to (-1)^p times x tensor d_L(y), by the definition of d2.
-Naturality of the canonical presheaf-to-sheaf tensor map identifies these values
-before and after sheafification. The sign identity (p+n).negOnePow =
-p.negOnePow * n.negOnePow then identifies the second inner differential term
-with the signed d2 term. The two subtractions occur in opposite order, which
-commute in the target module. The argument works for all integer degrees and
-zero sections, tensor factors or differentials. This is only a scalar equality
-on pure tensors and does not assert extensionality on sheaf tensors. -/
+on one localized pure tensor. -/
 theorem homTensorDifferential_summand_pure
     (K L M : CochainComplex Mod ℤ) (n t p q : ℤ) (h : p + q = t) :
     letI := SheafOfModules.monoidalCategory R

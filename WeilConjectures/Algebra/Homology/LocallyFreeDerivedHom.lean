@@ -28,13 +28,21 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 
-/-! # Derived Hom from a locally finite free module on a ringed site
-
-Source: Stacks Project, Tag 08JJ, lemma-dual-perfect-complex, specialized to P[0]
+/-!
+# Derived Hom from a locally finite free module on a ringed site
 
 The degree-zero formulation below is applied to every shifted bounded-below complex.
-Thus H⁰ RΓ(P∨ ⊗ K[n]) is Hⁿ RΓ(P∨ ⊗ K), including negative n. The cycle normalization
-specifies evaluation, rather than only asserting the existence of abstract group isomorphisms.
+Thus H⁰ RΓ(P∨ ⊗ K[n]) is Hⁿ RΓ(P∨ ⊗ K), including negative n.
+
+## Implementation details
+
+The cycle normalization specifies evaluation, rather than only asserting the existence of
+abstract group isomorphisms.
+
+## References
+
+* Stacks Project, Tag 08JJ (dual of a perfect complex), specialized to `P[0]`
+* Stacks Project, Tags 0A8Z and 08JA
 -/
 
 @[expose] public section
@@ -47,8 +55,7 @@ open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 
 namespace CategoryTheory
 
-/-- The ordinary-to-derived zeroth-cohomology comparison for an additive functor.
-Source: Stacks, Tags 0A8Z and 08JA -/
+/-- The ordinary-to-derived zeroth-cohomology comparison for an additive functor. -/
 noncomputable def locallyFreeDerivedComparison
     {A B : Type*} [Category A] [Abelian A] [Category B] [Abelian B]
     [HasDerivedCategory A] [HasDerivedCategory B] [Abelian.HasKInjectiveResolutions A]

@@ -15,7 +15,9 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # Underlying additive homology of mixed total tensors
 
-Source: Stacks Project, Tag 06Y6, the ordinary balanced tensor identifications.
+## References
+
+* Stacks Project, Tag 06Y6
 -/
 
 @[expose] public section
@@ -430,23 +432,7 @@ private theorem homComp_scalar (R A : Type u)
   exact he'
 
 /-- The mixed total tensor has the ordinary underlying R-tensor homology, naturally
-for maps specified on diagonal pure tensors, and compatibly with first-factor scalars.
-Source: Stacks Project, Tag 06Y6, ordinary balanced tensor identifications.
-
-Proof: on modules the map x tensor_R y -> x tensor_A (1 tensor_R y)
-is an R-linear isomorphism to the restriction of M tensor_A (A tensor_R N).
-Its inverse sends x tensor_A (a tensor_R y) to (a x) tensor_R y. The balancing
-relations prove that both maps are well-defined and inverse. These maps are
-natural in both modules. Restriction of scalars preserves coproducts, so taking
-coproducts over p+q=n gives an isomorphism of the total R-complexes. The two
-summands of the signed total differential commute with this isomorphism by
-module naturality, with identical signs. Apply homology and the exact restriction
-homology isomorphism to obtain e. Multiplication by a on the first factor gives
-the scalar equation. For the second equation, the given generator formula for v
-identifies its underlying R-chain map with tensoring g by F under the chain
-isomorphisms: coproduct extensionality and tensor induction suffice. Take homology
-and use naturality of the restriction homology isomorphism. No K-flatness or
-resolution is used here. In particular F, Q, g and v can be zero. -/
+for maps specified on diagonal pure tensors, and compatibly with first-factor scalars. -/
 theorem exists_mixedTensorUnderlyingHomology
     (R : Type u) [CommRing R] (i : ℤ)
     (F : CochainComplex (ModuleCat.{u} R) ℤ) :

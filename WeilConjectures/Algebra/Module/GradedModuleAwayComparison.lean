@@ -13,9 +13,11 @@ import WeilConjectures.Algebra.Module.GradedModuleAwayClearing
 import WeilConjectures.Algebra.Module.GradedModuleAwayKernel
 
 /-!
-# GradedModuleAwayComparison
+# Principal localization comparisons for graded module restriction maps
 
-Source: Stacks Project, Constructions, Lemma 01M4.
+## References
+
+* [Stacks Project, Tag 01M4](https://stacks.math.columbia.edu/tag/01M4), proof of (1)(e) and (1)(h)
 -/
 
 @[expose] public section
@@ -101,20 +103,7 @@ private theorem comparisonOfClearing
         rw [smul_smul, ← htR s, ← map_mul, mul_comm, hab, htR]
 
 set_option linter.unusedVariables false in
-/-- Principal localization comparisons for a fixed family of restriction maps.
-Source: Stacks Project, Constructions, Lemma 01M4 (lemma-standard-open), proof of
-(1)(e),(h), and the fraction formulas in its proof.
-
-Proof: Restrict scalars on Z g along rhoS. The unit rhoS(U) makes multiplication by U
-invertible, so the module and ring universal properties give theta and thetaS with the
-stated formulas. Semilinearity follows by multiplying fractions. For surjectivity, if
-y/g^n has degree zero, put d = deg f and delta = deg g. Then
-Y = g^(n*(d-1))*y has degree n*d*delta, and z = Y/f^(n*delta) lies in Z f.
-The image of z/U^n is Y/g^(n*d) = y/g^n. For injectivity, a fraction z/U^k mapping to
-zero, with z = x/f^m, satisfies g^N*a^m*x = 0 for some N. Multiplication by f^m gives
-g^(N+e*m)*x = 0. Choose K with K*d at least N+e*m; then U^K*z = 0, so z/U^k = 0.
-The ring case is the same computation. These bijections give the two equivalences.
-Nilpotent denominators give zero modules throughout. -/
+/-- Principal localization comparisons for a fixed family of restriction maps. -/
 theorem gradedModuleAwayComparison
     {S : Type u} [CommRing S] {M : Type v} [AddCommGroup M] [Module S M]
     (𝒜 : ℕ → AddSubgroup S) [GradedRing 𝒜]

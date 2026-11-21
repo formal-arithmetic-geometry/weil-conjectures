@@ -13,46 +13,25 @@ public import WeilConjectures.Mathlib.Topology.Constructions
 
 # Conrad's Theorem 2.4, Case 3: a quasi-affine target and two nested opens
 
-This file proves Case 3 of Theorem 2.4 in Conrad's *Deligne's notes on Nagata compactifications*: the elimination of indeterminacy for a
-quasi-affine morphism `p : Y ⟶ X` over a qcqs base, for an arbitrary pair `U ≤ V` of
-quasi-compact opens of `X`, with the resulting blow-up centre disjoint from the *larger* open
-`V`.
+This file proves Case 3 of Theorem 2.4 in Conrad's *Deligne's notes on Nagata
+compactifications*: the elimination of indeterminacy for a quasi-affine morphism
+`p : Y ⟶ X` over a qcqs base, for an arbitrary pair `U ≤ V` of quasi-compact opens of `X`,
+with the resulting blow-up centre disjoint from the *larger* open `V`.
 
 ## Main results
 
 - `AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom_of_le`.
 
-## Proof sketch
-
-The two opening reductions are cited from `WeilConjectures.Blowup.QuasiAffineGeneralReduction`
-and `WeilConjectures.Mathlib.AlgebraicGeometry.Properties`:
-
-1. `AlgebraicGeometry.exists_isAdmissible_disjoint_closure_range_of_le` produces a
-   `V`-admissible blow-up `π₁ : X₁ ⟶ X` after which the closure of the image of the base change
-   of `f` no longer meets the part lying over `closure (V ∖ U)`;
-2. `AlgebraicGeometry.exists_isCompact_opens_inf_eq_of_disjoint_closure_sdiff` then produces a
-   quasi-compact open `X₀` of `X₁` containing that closure's image and meeting `π₁ ⁻¹ V`
-   exactly in `π₁ ⁻¹ U`.
-
-Over the smaller base `X₀` the two opens coincide, so Case 2
-(`AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom`) applies to the base change
-`p₁ ⁻¹ᵁ X₀ ⟶ X₀` of `p`. Its quasi-affineness is `AlgebraicGeometry.IsQuasiAffineHom.of_isPullback`
-followed by restriction to the open `X₀` of the base; **no scheme-theoretic image is needed**,
-because the closedness of the graph is a purely topological consequence of the closed set
-`closure (Set.range f₁)` lying inside `p₁ ⁻¹ X₀`.
-
-The centre found over `X₀` is extended to `X₁` by `IsAdmissible.exists_extend_of_disjoint`
-(Stacks Tag 080M), whose hypothesis is that the support of that centre avoids the overlap
-`X₀ ⊓ π₁ ⁻¹ V`; the centre is admissible over `X₀ ⊓ π₁ ⁻¹ U`, so it is step 2's equality
-`X₀ ⊓ π₁ ⁻¹ V = π₁ ⁻¹ U` that discharges it. The two admissible blow-ups are composed by
-`IsAdmissible.exists_comp` (Stacks Tag 080L). Transporting the local extension from the
-blow-up of `X₀` to the blow-up of `X₁` is Case 2's own
-`AlgebraicGeometry.exists_extend_of_lift`, used here with the open `X₀` of `X₁` in the role of
-its affine open.
+## Implementation details
 
 Density of `U` in `X` is **not** assumed: what the closedness argument needs is that the inverse
 image of `U` is topologically dense in the blow-up of `X₀`, and that is the scheme-theoretic
-dominance which Case 2 hands back as its third conclusion.
+dominance which Case 2 hands back as its third conclusion. No scheme-theoretic image is needed.
+
+## References
+
+* Brian Conrad, *Deligne's notes on Nagata compactifications*, Theorem 2.4, Case 3
+* Stacks Project, Tags 080M, 080L
 -/
 
 @[expose] public section
@@ -68,12 +47,9 @@ namespace AlgebraicGeometry
 variable {X : Scheme.{u}}
 
 /-- **Conrad's Theorem 2.4, Case 3**: elimination of indeterminacy for a quasi-affine
-morphism and two nested quasi-compact opens.
-
-The centre of the blow-up is disjoint from the *larger* open `V`; that is what makes this
-statement stronger than
-`AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom`, which is the case
-`U = V`. Neither `U` nor `V` is assumed dense in `X`. -/
+morphism and two nested quasi-compact opens, with the centre of the blow-up disjoint from the
+*larger* open `V`. The case `U = V` is
+`AlgebraicGeometry.exists_isAdmissible_extend_of_isQuasiAffineHom`. -/
 theorem exists_isAdmissible_extend_of_isQuasiAffineHom_of_le
     [CompactSpace X] [QuasiSeparatedSpace X] {U V : X.Opens} (hUV : U ≤ V)
     (hU : IsCompact (U : Set X)) (hV : IsCompact (V : Set X))

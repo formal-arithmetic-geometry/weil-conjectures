@@ -57,28 +57,7 @@ private theorem homObj_isZero_right
   rfl
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Invertibility of the cycle-compatible finite-free homology evaluation map.
-
-Source: Stacks Project, Tag 0BQY, finite-free Hom calculation in Lemma 48.15.4;
-Tag 0A8X, the product terms and differential of the Hom complex.
-
-Proof: The fixed projections identify the Hom complex with the product over p
-of complexes having terms Hom(E.X p,K.X(p+n)). Their differentials have only the
-K term, since the E differential vanishes. Remove the zero factors outside the
-finite interval specified by hsupp, leaving a finite product. For each remaining
-p, choose the given finite-free basis; internal Hom out of E.X p is thereby
-naturally a finite product of copies of the identity. It is exact by
-finiteFreeInternalHomExact, so its homology is Hom(E.X p,H^(p+n)(K)). Finite
-products in an abelian category preserve kernels and cokernels, hence homology.
-By hK all factors except p=-n are zero. The surviving projection thus induces
-an isomorphism g from H^n(Hom(E,K)) to Hom(E.X(-n),H^0(K)). Since E has zero
-differentials, both its cycle inclusion and class map are isomorphisms.
-The equation hc identifies c with the kernel lift of this same projection;
-the equation hf identifies f, after these E isomorphisms, with g. Cancel the
-P class epimorphism to obtain that equality. Consequently f is an isomorphism.
-If -n is outside the support all surviving objects are zero. Rank zero, a zero
-ring, and empty site objects give the same calculation. This proves only
-invertibility of a supplied compatible map, not existence or cycle descent. -/
+/-- Invertibility of the cycle-compatible finite-free homology evaluation map. -/
 theorem finiteFreeZero_homologyEvaluation_iso
     {C : Type u} [SmallCategory C] {S : GrothendieckTopology C}
     (R : Sheaf S CommRingCat.{u})

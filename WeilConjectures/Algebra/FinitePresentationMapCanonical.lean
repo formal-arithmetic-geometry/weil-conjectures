@@ -12,9 +12,14 @@ public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.CategoryTheory.Category.Preorder
 import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 
-/-! # Canonical descent of a single finitely presented module map
+/-!
+# Canonical descent of a single finitely presented module map
 
-Source: Stacks Project, Algebra Tag 05N7 (2), used in Perfect Tag 09RE (1).
+## References
+
+* Stacks Project, Algebra, Tag 05N7 (2)
+* Stacks Project, Algebra, Tag 05LI (3)
+* Stacks Project, Perfect Complexes, Tag 09RE (1), affine case
 -/
 
 @[expose] public section
@@ -27,8 +32,7 @@ namespace ModuleCat
 
 /-- Lift a map from a finitely presented module through a directed system with the
 representative and eventual-zero properties. Lift the finite generators together,
-then move to one stage killing the images of the finitely many kernel generators.
-Source: Stacks Project, Algebra Tag 05LI (3). -/
+then move to one stage killing the images of the finitely many kernel generators. -/
 private theorem fp_lift
     {R : Type u} [CommRing R] {J : Type u} [Preorder J] [Nonempty J]
     [IsDirected J (· ≤ ·)] (D : J → Type u)
@@ -128,22 +132,7 @@ private theorem comparison_one
   exact extendScalarsComp_hom_app_one_tmul r s X x
 
 /-- A single map over a directed ring colimit lifts at a stage above the initial one,
-with the canonical scalar-extension comparison.
-
-Source: Stacks Project, Algebra Tag 05N7 (2); Perfect Tag 09RE, affine case (1).
-Proof: Choose finite generators and finite relations for M and N. Express the images
-of the generators of M as finite linear combinations of the generators of N over the
-colimit ring. Lift all these coefficients to a common stage above i₀, using the
-filtered-ring elementwise criterion. Each relation of M maps to zero in N over the
-colimit, so express it as a finite combination of the defining relations of N and
-lift those coefficients too. The resulting finitely many coefficient equations
-hold at a common later stage by the same criterion. They define a map at that stage.
-The two canonical comparison maps send 1 tensor x to 1 tensor (1 tensor x), so the
-lift has the asserted conjugated extension, by linearity and generation by pure
-tensors. Only directedness and finite lists of coefficients and relations enter,
-so this argument works for a preorder, including mutually comparable distinct indices.
-If M or N is zero the same presentation argument applies, and the unique zero map
-also gives the result. -/
+with the canonical scalar-extension comparison. -/
 theorem finitePresentation_map_directedColimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat.{u}) (i₀ : I) (M N : ModuleCat.{u} (F.obj i₀))

@@ -13,7 +13,12 @@ import WeilConjectures.AlgebraicGeometry.DirectedColimitBaseChangeElementwise
 /-!
 # Eventual vanishing of finitely many tensor elements
 
-Source: Stacks Project, Algebra, Tag 05LI, proof of (1).
+Finitely many elements of a stage module that vanish after tensoring with the ring colimit vanish
+after tensoring with one later ring.
+
+## References
+
+* Stacks Project, Algebra, Tag 05LI (proof of (1))
 -/
 
 @[expose] public section
@@ -26,17 +31,7 @@ open scoped ChangeOfRings
 namespace ModuleCat
 
 /-- Finitely many elements of a stage module which vanish after tensoring with
-the ring colimit all vanish after tensoring with one later ring.
-
-Source: Stacks Project, Algebra, Tag 05LI, proof of (1),
-label algebra-lemma-module-map-property-in-colimit.
-
-Proof: apply the already-proved directed ring base-change elementwise theorem
-`TensorProduct.directedColimitBaseChangeElementwise` to the unit tensor at i.
-Its eventual-zero clause gives a later stage for each element. A linear tensor
-map induced by F(j to k) preserves zero and unit tensors, so vanishing persists
-under further transition. Induction on the finite set combines two stages using
-directedness. For the empty set take j=i. No finiteness condition on N is needed. -/
+the ring colimit all vanish after tensoring with one later ring. -/
 theorem exists_stage_finite_tensor_vanishing
     {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)]
     (F : I ⥤ CommRingCat) (i : I) (N : ModuleCat (F.obj i)) (s : Finset N)

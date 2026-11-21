@@ -11,7 +11,9 @@ import WeilConjectures.SecSmoothPurity.CochainCoefficientArrowsSupplement
 
 /-! # Pure-section formulas for the tensor constraints of module-sheaf complexes
 
-Source: Stacks Project, Tag 0FPQ, and the sign rules of More on Algebra.
+## References
+
+* Stacks Project, Tag 0FPQ, and the sign rules of More on Algebra.
 -/
 
 @[expose] public noncomputable section
@@ -165,8 +167,7 @@ private theorem pureTensor_rightUnitor (M : Modules.{c, v, u} J R) (U : Cᵒᵖ)
 
 end
 
-/-- The symmetry equation on homogeneous pure sections.
-Source: Stacks 0FPQ. -/
+/-- The symmetry equation on homogeneous pure sections. -/
 def symmetryPure : Prop :=
   ∀ (P Q : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (p q n : ℤ) (h : p + q = n) (h' : q + p = n) (U : Cᵒᵖ)
@@ -175,8 +176,7 @@ def symmetryPure : Prop :=
       (coefficientTensorGenerator.{u, c, v} J R P Q p q n h U x y) =
     (p * q).negOnePow • coefficientTensorGenerator.{u, c, v} J R Q P q p n h' U y x
 
-/-- The associator equation on homogeneous pure sections.
-Source: Stacks 0FPQ. -/
+/-- The associator equation on homogeneous pure sections. -/
 def associatorPure : Prop :=
   ∀ (P Q N : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (p q r pq qr n : ℤ) (hpq : p + q = pq) (hqr : q + r = qr)
@@ -188,8 +188,7 @@ def associatorPure : Prop :=
     coefficientTensorGenerator.{u, c, v} J R P (Q ⊗ N) p qr n hn' U x
       (coefficientTensorGenerator.{u, c, v} J R Q N q r qr hqr U y z)
 
-/-- The leftUnitor equation on homogeneous pure sections.
-Source: Stacks 0FPQ. -/
+/-- The leftUnitor equation on homogeneous pure sections. -/
 def leftUnitorPure : Prop :=
   ∀ (P : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (n : ℤ) (h : 0 + n = n) (U : Cᵒᵖ) (a : R.obj.obj U) (x : (P.X n).val.obj U),
@@ -198,8 +197,7 @@ def leftUnitorPure : Prop :=
         (((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
           (𝟙_ (Modules.{c, v, u} J R))).inv.val.app U) a) x) = a • x
 
-/-- The rightUnitor equation on homogeneous pure sections.
-Source: Stacks 0FPQ. -/
+/-- The rightUnitor equation on homogeneous pure sections. -/
 def rightUnitorPure : Prop :=
   ∀ (P : CochainComplex (Modules.{c, v, u} J R) ℤ)
     (n : ℤ) (h : n + 0 = n) (U : Cᵒᵖ) (a : R.obj.obj U) (x : (P.X n).val.obj U),
@@ -208,8 +206,7 @@ def rightUnitorPure : Prop :=
         (((HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (0 : ℤ)
           (𝟙_ (Modules.{c, v, u} J R))).inv.val.app U) a)) = a • x
 
-/-- Pure-section descriptions of the constructed complex constraints.
-Source: Stacks 0FPQ. -/
+/-- Pure-section descriptions of the constructed complex constraints. -/
 structure ComplexConstraints : Prop where
   symmetry : symmetryPure.{c, v, u} J R
   associator : associatorPure.{c, v, u} J R
@@ -288,27 +285,7 @@ private theorem rightUnitor_formula : rightUnitorPure.{c, v, u} J R := by
 
 end
 
-/-- The native complex constraints have the usual signed pure-section formulas.
-Source: Stacks Project, Tag 0FPQ, and More on Algebra, sign rules
-
-Proof: write a generator as the sheafification unit on a presheaf pure tensor,
-followed by the inverse tensor-sheafification comparison and the inclusion of its
-bidegree summand. The sheafification functor is braided monoidal. Its tensorator's
-naturality and the counit's naturality identify the sheaf symmetry on this generator
-with the presheaf swap. The complex braiding on the (p,q) summand is the sheaf swap
-multiplied by (-1)^(pq); apply the component formula for the Koszul braiding.
-For the associator, use its formula on the (p,q,r) summand of the iterated direct sum.
-Naturality of the sheafification unit in each tensor factor and the associativity
-identity of its monoidal tensorator reduce both sides to the image of
-(x tensor y) tensor z under the ordinary module associator, which is
-x tensor (y tensor z). There is no interchange of homogeneous factors and no sign.
-For the unitors, all summands except degree zero in the unit complex vanish.
-The surviving summand is the coefficient ring tensor P^n, respectively P^n tensor
-the coefficient ring. The single-complex degree-zero comparison identifies its
-specified section with a. The unitality identities of the sheafification tensorator
-reduce the maps to the ordinary module unitors, both sending the pure tensor to a*x.
-These equalities hold on every object U and every indicated section, independently
-of K-flatness, boundedness, the characteristic, and whether the coefficient ring is zero. -/
+/-- The native complex constraints have the usual signed pure-section formulas. -/
 theorem complexConstraints : ComplexConstraints.{c, v, u} J R := by
   exact ⟨symmetry_formula.{c, v, u} J R, associator_formula.{c, v, u} J R,
     leftUnitor_formula.{c, v, u} J R, rightUnitor_formula.{c, v, u} J R⟩

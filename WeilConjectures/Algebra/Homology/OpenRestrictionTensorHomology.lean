@@ -18,7 +18,12 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 /-! # Open restriction of ordinary tensor homology
 
-Source: Stacks Project, Tags 03DH and 01CD, and the local tensor calculation of Tag 0DJQ.
+Open restriction commutes with the homology of the tensor product with a degree-zero sheaf.
+
+## References
+
+* Stacks Project, Tags 03DH and 01CD
+* Stacks Project, Tag 0DJQ (local tensor calculation)
 -/
 
 @[expose] public section
@@ -35,7 +40,7 @@ set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
 
-/-- Additivity of the localized tensor; Stacks Project, Tag 01CD. -/
+/-- Additivity of the localized tensor. -/
 noncomputable local instance localizedTensorPreadditive
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X) :
@@ -45,21 +50,7 @@ noncomputable local instance localizedTensorPreadditive
       (forget₂ CommRingCat.{u} RingCat.{u})).obj (R.over U))) :=
   Classical.choice (SheafOfModules.tensorClosed (R.over U)).1
 
-/-- Exact open restriction commutes with the homology of tensor with a degree-zero sheaf.
-Source: Stacks Project, Tags 03DH and 01CD; Tag 0DJQ, local tensor calculation.
-
-Proof: restriction is additive sectionwise, preserves finite limits because the exact
-forgetful functor to abelian sheaves reflects limits, and preserves finite colimits as
-pushforward along the cocontinuous slice-forgetful functor with identity ring map.
-Thus it preserves homology. For fixed F the natural sheaf tensor comparison gives
-an isomorphism between tensorRight F followed by restriction, and restriction
-followed by tensorRight of the restricted F. Lift it to complexes using
-Functor.mapHomologicalComplexCompIso and NatIso.mapHomologicalComplex.
-The proved mapBifunctorSingle₂Iso identifies tensor with F[0] with termwise tensorRight F
-on both sites. Compose those chain isomorphisms, take homology, and prepend the inverse
-of ShortComplex.mapHomologyIso for the short complex computing homology in degree i.
-This works for every P, even non-K-flat P, and for empty opens and zero sheaves.
-No comparison of infinite coproducts is needed for this degree-zero second factor. -/
+/-- Exact open restriction commutes with the homology of tensor with a degree-zero sheaf. -/
 theorem open_localized_tensor_homology_iso
     {X : TopCat.{u}} (R : Sheaf (Opens.grothendieckTopology X) CommRingCat.{u})
     (U : TopologicalSpace.Opens X)

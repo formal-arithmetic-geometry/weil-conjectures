@@ -16,7 +16,11 @@ import WeilConjectures.Algebra.Homology.System.SystemDerivedSubsequenceTransitio
 
 /-! # Composition of derived subsequence extensions
 
-Source: Zheng, Construction 4.1; Stacks 03D7 and 03EK.
+## References
+
+* Stacks Project, Tags 03D7, 03EK, 0FND
+* Zheng 4.1
+* Zheng, Construction 4.1
 -/
 
 @[expose] public noncomputable section
@@ -36,14 +40,7 @@ variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (r : ℕ ↪o ℕ)
 
 /-- The derived selected extension has precisely the tensor-adjoint transition
-specified by its actual iterated transition. Source: Zheng 4.1; Stacks 0FND
-Proof: the selected evaluation comparisons are the normalized mates of evaluation
-followed by the actual strict transition. Derived transitions compose by localization
-of the strict composition law, and selected evaluations commute with transitions.
-These give the right-adjoint cocone composition square. Apply the general transition
-coherence calculation for mates. The two left-adjoint uniqueness comparisons are
-exactly the canonical tensor associators. No inequality is made strict, so this also
-covers equal successive next-selected indices. -/
+specified by its actual iterated transition. -/
 theorem systemSelectedDerivedTransition (m : ℕ)
     (N : DerivedCategory (StrictRingSystem (selectedSystemRings B r))) :
     ((systemDerivedTensorAdj S B (Nat.le_succ m)).homEquiv _ _).symm

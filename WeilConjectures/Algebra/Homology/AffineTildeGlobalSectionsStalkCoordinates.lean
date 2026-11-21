@@ -11,7 +11,11 @@ import all WeilConjectures.AlgebraicGeometry.AffineDerivedCohomologyPresentation
 
 /-! # Global sections and stalk coordinates for an affine tilde presentation
 
-Source: Stacks Project, Tags 01HV and 01I9. -/
+## References
+
+* Stacks Project, Tag 01HV
+* Stacks Project, Tag 01I9
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -25,15 +29,7 @@ namespace AlgebraicGeometry
 variable [∀ Y : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
 
-/-- The localization of global sections of a tilde presentation agrees with its stalk map.
-Source: Stacks Project, Tags 01HV and 01I9.
-Proof: the tilde stalk localization is natural for module maps: check on numerators
-using naturality of germs, then use the localization universal property. Apply it
-to the global-sections map composed with the tilde/global-sections unit. Naturality
-of the tilde/Gamma counit moves the presentation morphism past the counit, and the
-left adjunction triangle cancels the unit and counit on tilde V. The argument does
-not require the presentation morphism to be invertible. It also applies to zero
-modules; the zero ring has no prime to check. -/
+/-- The localization of global sections of a tilde presentation agrees with its stalk map. -/
 theorem affineTildeGlobalSectionsStalk_coordinates
     (A : Type u) [CommRing A] (i : ℤ) (p : PrimeSpectrum A)
     (L : schemeDerivedQCohCategory (Spec (.of A))) (V : ModuleCat.{u} A)

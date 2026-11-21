@@ -14,12 +14,13 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 /-!
 # Hom complexes of sheaves of modules
 
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X
-(section-hom-complexes).
-
 The chosen bifunctor has product terms, differential `d_M f - (-1)^n f d_L`,
 and componentwise pre- and post-composition. Its existence proof is postponed;
 its data are selected from that named theorem, constructed explicitly.
+
+## References
+
+* Stacks Project, Tag 0A8X (Hom complexes)
 -/
 
 @[expose] public section
@@ -231,21 +232,7 @@ private noncomputable def homBifunctor :
     rw [homComplexMap_comp]
     simp
 
-/-- Existence of the Hom-complex bifunctor with its product projections and exact sign.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X
-(section-hom-complexes).
-
-Proof: take in degree `n` the product of the internal sheaf Homs from `L^p` to
-`M^(p+n)`. Products are computed sectionwise, so sections are families of maps
-on the localized site. Define the differential on these families by
-`d_M f - (-1)^n f d_L`. Both composition maps are linear and commute with
-restriction. Expanding its square gives the two zero terms `d_M^2 f` and
-`f d_L^2`, while the mixed terms cancel because the signs in consecutive
-integer degrees are opposite. Thus these products form a cochain complex.
-Pre- and post-compose each component with chain maps. Their chain-map
-identities show this commutes with the differential; associativity and identity
-of composition give the bifunctor laws. Use the product universal property
-for the projections and their formulas below. No extra boundedness is used. -/
+/-- Existence of the Hom-complex bifunctor with its product projections and exact sign. -/
 theorem homComplex_exists :
     ∃ F : (CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)ᵒᵖ ⥤ CochainComplex
@@ -286,8 +273,6 @@ theorem homComplex_exists :
     simp
 
 /-- The sheaf-valued Hom-complex bifunctor, contravariant in the first complex.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X
-(section-hom-complexes).
 Its projections, differential and componentwise action are specified together
 by `homComplex_exists`, from which this definition selects its data. The comparison with the
 internal hom complex `CochainComplex.internalHomObj` is `homComplexIsoInternalHomObj`
@@ -302,8 +287,6 @@ noncomputable def homComplexFunctor :
   Classical.choose (homComplex_exists (C := C) (J := J) (R := R))
 
 /-- The Hom complex of two cochain complexes of sheaves of modules.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X
-(section-hom-complexes).
 In degree `n` its product projections identify sections with families of
 localized linear maps `L^p → M^(p+n)`, and its differential is
 `d_M f - (-1)^n f d_L`. Functoriality is supplied by `homComplexFunctor`. -/

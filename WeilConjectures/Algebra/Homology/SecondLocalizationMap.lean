@@ -14,7 +14,11 @@ public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # The characterized second-factor localization map
-Source: Stacks Project, Tags 06Y6 and 0DJ8. -/
+
+## References
+
+* Stacks Project, Tags 06Y6 and 0DJ8
+-/
 
 @[expose] public section
 set_option autoImplicit false
@@ -24,8 +28,7 @@ open scoped TensorProduct ChangeOfRings
 attribute [local instance] Algebra.TensorProduct.rightAlgebra
 namespace RingTensorCohomology
 
-/-- Exact scalar extension commutes with derived homology.
-Source: Stacks Project, Tag 06Y6. -/
+/-- Exact scalar extension commutes with derived homology. -/
 noncomputable def flatDerivedHomologyIso
     (B C : Type u) [CommRing B] [CommRing C] [Algebra B C]
     [HasDerivedCategory.{w} (ModuleCat.{u} B)]
@@ -70,8 +73,7 @@ variable (R A B Bp D : Type u)
   [HasDerivedCategory.{w} (ModuleCat.{u} B)]
   [HasDerivedCategory.{w} (ModuleCat.{u} Bp)]
 
-/-- Derive the ordinary scalar-extension associator using the target's universal counit.
-Source: Stacks Project, Tag 06Y6. -/
+/-- Derive the ordinary scalar-extension associator using the target's universal counit. -/
 noncomputable def secondLocalizationDerivedMap
     (hflat : (algebraMap B Bp).Flat)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
@@ -98,8 +100,7 @@ noncomputable def secondLocalizationDerivedMap
   exact K.derived.leftDerivedLift K.counit
     (HomotopyCategory.quasiIso (ModuleCat.{u} R) (.up ℤ)) _ β
 
-/-- The underlying coefficient map on model cohomology is a concrete adjoint transpose.
-Source: Stacks Project, Tag 06Y6. -/
+/-- The underlying coefficient map on model cohomology is a concrete adjoint transpose. -/
 noncomputable def secondLocalizationCohomologyMap
     (hflat : (algebraMap B Bp).Flat)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
@@ -123,8 +124,7 @@ noncomputable def secondLocalizationCohomologyMap
           (K.cohomologyIso i).inv
   exact (ModuleCat.extendRestrictScalarsAdj (algebraMap B Bp)).homEquiv _ _ β
 
-/-- This generator formula determines the D-linear map uniquely.
-Source: Stacks Project, Tag 06Y6. -/
+/-- This generator formula determines the D-linear map uniquely. -/
 def IsSecondLocalizationMap
     (hflat : (algebraMap B Bp).Flat)
     (Q : CochainComplex (ModuleCat.{u} A) ℤ)
@@ -139,8 +139,7 @@ def IsSecondLocalizationMap
           secondLocalizationCohomologyMap R A B Bp D hflat Q L K i x)
 
 include tRB in
-/-- Equality on extension generators proves uniqueness of the characterized map.
-Source: Stacks Project, Tag 06Y6. -/
+/-- Equality on extension generators proves uniqueness of the characterized map. -/
 theorem IsSecondLocalizationMap.ext
     {hflat : (algebraMap B Bp).Flat}
     {Q : CochainComplex (ModuleCat.{u} A) ℤ}

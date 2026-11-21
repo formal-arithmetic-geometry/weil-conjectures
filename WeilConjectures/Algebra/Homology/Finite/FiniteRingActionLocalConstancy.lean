@@ -27,8 +27,13 @@ import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 /-!
 # Local constancy of a finite ring action
 
-Source: Stacks Project, Modules on Sites, Tag 093S, finite-operation refinement;
-Sites, Tag 00WK.
+A module sheaf over a finite constant ring whose underlying set sheaf is finite locally constant
+is locally a finite constant module.
+
+## References
+
+* Stacks Project, Modules on Sites, Tag 093S
+* Stacks Project, Sites, Tag 00WK
 -/
 
 @[expose] public section
@@ -337,43 +342,7 @@ private theorem covering_refinement {C : Type uC} [Category.{vC} C]
 
 /-- A module sheaf over a finite constant ring is locally a finite constant module if
 its underlying set sheaf is finite locally constant.
-
-Source: Stacks Project, Modules on Sites, Tag 093S, finite-operation refinement, and
-Sites, Tag 00WK.
-
-Proof:
-1. Fix an object and a cover trivializing the underlying set sheaf by a finite set S.
-   Work on each slice. Constant sheaves restrict to slice constants compatibly with
-   their unit sections (lem-cbc-sieve-slice-sheafification). Let sigma_s be the sections
-   labelled by S; their restrictions retain these labels.
-2. Apply local representation (lem-weil-pbc-site-sheafification-sections-local) to zero,
-   all sums sigma_s + sigma_t, and all scalar multiples lambda sigma_s. The two sets
-   of labels and scalars are finite. Successive base changes and compositions of
-   covers give a common refinement on which each section has a label. Including zero
-   handles S empty: its representation can give an empty covering.
-3. On a member W, the actual image of S in F(W) is a finite Lambda-submodule M:
-   zero, addition and scalar multiplication are closed, and negatives use scalar -1.
-   Restrictions define a natural linear map from the constant module presheaf M
-   to F restricted to W. No injectivity of the labels in F(W) is required.
-4. Module sheafification extends this map to a map of module sheaves
-   (lem-pc-sites-module-sheafification-interface). Slice compatibility identifies the
-   coefficient sheaf with the restricted constant ring. Forgetting to sets identifies
-   this map with set sheafification (lem-pc-sites-sheafification-underlying-sets).
-5. The presheaf map is locally surjective by local representation of labels. It is
-   locally injective by local equality of labels in set sheafification, using
-   lem-weil-pbc-site-sheafification-sections-local. Distinct labels can become equal
-   on an empty-covered object; the resulting empty cover suffices. Thus the sheaf map
-   is an isomorphism by lem-cbc-set-presheaf-sheafification-local-bijection.
-6. The inverse is linear and natural by cancellation with the bijective linear map.
-   Compose with the initial covers and relocalize (def-pur-localized-ringed-site).
-   This proves the claim without points or nonempty objects, including the zero ring.
-
-The constant module on the slice is the restriction of the recorded
-`CategoryTheory.commutativeSiteConstantModuleFunctor`: module sheafification of the
-identity-restriction constant module presheaf along the constant commutative ring
-sheafification unit with commutativity forgotten. Constant sheafification commutes
-with localization by lem-cbc-sieve-slice-sheafification. Site objects and morphisms
-have independent universes; coefficient sets and modules lie in their maximum. -/
+-/
 theorem finite_ring_action_local_constancy
     {C : Type uC} [Category.{vC} C]
     (J : Precoverage C) (hJ : J.IsSiteForCoverings)

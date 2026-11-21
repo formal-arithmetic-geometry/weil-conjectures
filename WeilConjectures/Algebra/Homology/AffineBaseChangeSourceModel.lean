@@ -18,7 +18,12 @@ import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
 
 /-! # Source model for the affine derived base-change arrow
 
-Source: Stacks Project, Tag 0DJ8, affine proof and equation-bc.
+The source model of the affine derived base-change arrow: a cohomology module with a map to the
+canonical module of pullback cohomology.
+
+## References
+
+* Stacks Project, Tag 0DJ8 (affine proof)
 -/
 
 @[expose] public section
@@ -35,34 +40,7 @@ variable [∀ Y : Scheme.{u},
 
 /-- The affine base-change arrow has a cohomology module source and a map to the
 canonical module of pullback cohomology. No target K', map phi or target coordinates
-are involved.
-Source: Stacks, Tag 0DJ8, affine proof and its displayed localization identity.
-
-Proof: represent K by a complex of A-modules using the affine derived equivalence.
-Resolve over A and then over R. The comparison span of
-exists_affineDerivedBaseChangeComparison computes the canonical base-change mate:
-the affine tensor-pullback identification identifies the ordinary adjunction maps
-on the two resolutions, and the derived adjunction is pinned to these maps.
-For every quasi-coherent derived target, affine vanishing and exact tilde
-identify cohomology of its affine derived direct image with restriction of
-its global sections. Naturality of the tilde/Gamma counit and the direct-image
-resolution comparisons gives the natural isomorphism d. The tensor-algebra
-cohomology lift in exists_affineDerivedBaseChangeLocalization,
-transported across the cartesian identification A tensor_R R' = A', defines U and
-its map to H^i of the pulled-back complex. Exact tilde gives eU. Identify the target
-with the global sections of pullback cohomology using fromTildeΓ. The counit
-calculation gives the displayed global equality. Localize the comparison span at p.
-The source localization isomorphism in the same localization theorem identifies
-U_p with base-derived tensor cohomology over the three stalk rings extended to
-the fourth. Exact localization and tilde stalks identify the target with stalks
-of pullback cohomology, through affineDerivedCohomologyStalkIso. For the given
-representative P and e, use the unique counit-compatible isomorphism of derived
-scalar extensions on the stalks; its multiplication equations preserve the tensor
-algebra action. The localized_eq equation and the pullback counit give precisely
-affineBaseChangeIntoPullback. Its compatibility with the representative e follows
-from the counit naturality, without assuming P is termwise quasi-coherent. This
-proves the localized square. These computations hold in every degree without
-boundedness, flatness, or a Tor-independence assumption. -/
+are involved. -/
 theorem exists_affineBaseChangeSourceModel
     (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A']
     (φf : R →+* A) (φg : R →+* R') (φg' : A →+* A') (φf' : R' →+* A')

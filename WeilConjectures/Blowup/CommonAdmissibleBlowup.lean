@@ -18,8 +18,8 @@ factor of an invertible product ideal is invertible
 
 ## Main results
 
-- `AlgebraicGeometry.IsAdmissible.exists_common_blowup`: blueprint
-  `lemma-products-composites-u-admissible-blow--1`.
+- `AlgebraicGeometry.IsAdmissible.exists_common_blowup`: finitely many `U`-admissible
+  blow-ups admit a common `U`-admissible blow-up.
 -/
 
 @[expose] public section
@@ -30,9 +30,9 @@ open CategoryTheory
 
 namespace AlgebraicGeometry
 
-/-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**: for a finite family of `U`-admissible centers
-`B i` on `X`, there is a `U`-admissible center `B'` whose blow-up dominates each blow-up of
-`B i` over `X`. One takes for `B'` the product of the centers. -/
+/-- **Finitely many `U`-admissible blow-ups admit a common `U`-admissible blow-up**:
+for a finite family of `U`-admissible centers `B i` on `X`, there is a `U`-admissible
+center `B'` whose blow-up dominates each blow-up of `B i` over `X`. -/
 theorem IsAdmissible.exists_common_blowup {X : Scheme.{u}} {U : X.Opens} {ι : Type*} [Finite ι]
     (B : ι → IsAdmissible X U) :
     ∃ B' : IsAdmissible X U, ∀ i, ∃ f : B'.I.blowup ⟶ (B i).I.blowup,

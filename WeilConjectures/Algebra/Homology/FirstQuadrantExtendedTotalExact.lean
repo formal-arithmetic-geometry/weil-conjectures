@@ -15,7 +15,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 /-! # Exactness of finite-diagonal totalization and extension
 
-Source: Stacks Project, Homology, Tag 012X, finite-diagonal totalization.
+## References
+
+* Stacks Project, Homology, Tag 012X, finite-diagonal totalization
 -/
 
 @[expose] public section
@@ -70,14 +72,7 @@ private theorem shortExact_total_aux
   exact hS.map_of_exact F
 
 /-- Totalizing a short exact sequence in the first quadrant and extending by zero
-preserves short exactness.
-Source: Stacks Project, Homology, Tag 012X, total complex construction.
-
-Proof: evaluate the short exact sequence in both indices. In total degree n >= 0,
-its maps are the direct sums of these maps over p + q = n. This is a finite set;
-finite biproducts in an abelian category preserve kernels and cokernels, hence the
-result is short exact. In negative degrees extension by zero gives the zero sequence.
-Short exactness of complexes is detected degreewise. -/
+preserves short exactness. -/
 theorem shortExact_extended_total
     (S : ShortComplex (HomologicalComplex₂ C (ComplexShape.up ℕ) (ComplexShape.up ℕ)))
     (hS : S.ShortExact) :

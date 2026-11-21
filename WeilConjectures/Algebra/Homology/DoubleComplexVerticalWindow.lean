@@ -11,8 +11,8 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 /-!
 # Smart vertical interval truncations
 
-Source: the interval construction in blueprint thm-sp-double-complex-spectral-sequences,
-and Mathlib's canonical cochain-complex truncation functors.
+Smart interval truncation of cochain complexes, built from Mathlib's canonical
+truncation functors.
 -/
 
 @[expose] public section
@@ -53,7 +53,7 @@ end VerticalWindowAux
 
 /-- Smart truncation of a nonnegative cochain complex to the interval `[a,b)`.
 Extend by zero to the integers, truncate, and restrict back to nonnegative degrees.
-Source: Mathlib's canonical truncation functors -/
+-/
 noncomputable def verticalWindow (a b : ℤ) : CochainComplex C ℕ ⥤ CochainComplex C ℕ :=
   (ComplexShape.embeddingUpNat.extendFunctor C) ⋙
     (ComplexShape.embeddingUpIntGE a).truncGEFunctor C ⋙

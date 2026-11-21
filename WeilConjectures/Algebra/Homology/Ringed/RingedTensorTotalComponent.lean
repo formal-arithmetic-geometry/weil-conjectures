@@ -9,7 +9,9 @@ public import WeilConjectures.Algebra.Homology.Ringed.RingedTensorSquarePresenta
 
 /-! # Components of the canonical total tensor comparison
 
-Source: Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48.
+## References
+
+* Stacks Project, Cohomology on Sites, Tags 07A4 and 0E48.
 -/
 
 @[expose] public section
@@ -29,12 +31,7 @@ variable {Y X Y' X' : RingedTensorCorner.{u, w}}
   {f : RingedTensorEdge Y X} {g : RingedTensorEdge Y Y'}
   {h : RingedTensorEdge X X'} {k : RingedTensorEdge Y' X'}
 
-/-- The canonical total tensor comparison on a single coproduct summand.
-
-Proof: its total map is the coproduct descent of the inverse ordinary tensor
-comparison in each bidegree. Precomposition with the summand inclusion is the
-corresponding component by the coproduct descent equation.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, total-complex construction. -/
+/-- The canonical total tensor comparison on a single coproduct summand. -/
 theorem ringedTensorTotalComponent {A B : RingedTensorCorner.{u, w}}
     (e : RingedTensorEdge A B)
     (P Q : CochainComplex (SheafOfModules.{u}

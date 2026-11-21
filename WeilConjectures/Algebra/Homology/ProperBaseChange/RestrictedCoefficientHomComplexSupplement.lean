@@ -22,7 +22,9 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedCoefficientHomComplex
 
 /-! # Coefficient Hom complexes over a ring-sheaf extension
 
-Source: Stacks Project, Algebraization, Tag 099I
+## References
+
+* Stacks Project, Tag 099I
 -/
 
 -- After pruning, this module only keeps private declarations.

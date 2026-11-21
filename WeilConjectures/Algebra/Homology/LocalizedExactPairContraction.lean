@@ -19,9 +19,12 @@ import WeilConjectures.Algebra.Homology.PrincipalContractionSpreading
 
 /-! # Local contractions of a residue-exact pair of finite free maps
 
-Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`;
-the local minimal-complex proof uses the proved source library's
-`CochainComplex.exists_homotopyEquiv_isMinimal` and Nakayama.
+The local minimal-complex proof uses `CochainComplex.exists_homotopyEquiv_isMinimal`
+and Nakayama.
+
+## References
+
+* Stacks Project, More on Algebra, Tag 068U
 -/
 
 @[expose] public section
@@ -378,20 +381,7 @@ end CochainComplex
 
 namespace ModuleCat
 
-/-- A residue-exact pair admits complementary split identity blocks on a principal open.
-
-Source: Stacks Project, More on Algebra, Tag 068U, `lemma-cut-complex-in-two`.
-
-Proof: Localize at p and compare the residue field with FractionRing (R/p).
-Place the two maps in a complex in degrees -1, 0, 1. The proved minimal-complex
-theorem gives a bounded finite free minimal homotopy representative. Its residue
-differentials vanish, so residue exactness at zero makes its middle term vanish
-modulo the maximal ideal. Nakayama makes that term zero. The homotopy identity
-in degree zero therefore supplies s and t with sA+Bt=1. The relation BA=0 implies
-AsA=A and BtB=B; replacing t by tBt gives tBt=t while retaining sA+Bt=1.
-Spread this finite splitting data and its complementary summands to a principal
-neighborhood using exists_principal_contraction_of_atPrime. The zero-rank case
-is included in the minimal-complex theorem and Nakayama, without choosing a pivot. -/
+/-- A residue-exact pair admits complementary split identity blocks on a principal open. -/
 theorem exists_localized_exact_pair_contraction
     {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime]
     (X Y Z : ModuleCat.{max u v} R) (a : X ⟶ Y) (b : Y ⟶ Z)

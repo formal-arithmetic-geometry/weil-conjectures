@@ -11,6 +11,10 @@ import WeilConjectures.Algebra.Homology.OpenTensorNormalization.FiniteBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
 /-! # Finite base-change restriction coherence
+
+## References
+
+* Stacks Project, Tag 03S6
 -/
 
 @[expose] public noncomputable section
@@ -24,20 +28,7 @@ namespace SheafOfModules.OpenTensorNormalization
 
 /-- Restriction and pullback commute with the pinned finite realizations.
 This is a comparison of pullback squares only; it does not involve an extension
-by zero or an asserted base-change arrow.
-
-Source: Stacks 03S6 and the sectionwise square in the proof of
-lem-sf-finite-compatibility-transport.
-Proof: the first-projection condition on the site square identifies its inverse
-with the canonical pullback/map comparison, by the pullback universal property.
-Apply the underlying-section comparisons to the ordinary right-adjoint square.
-The two pull pins' right-section equations and the two open pins' section
-equations identify both routes sectionwise. Faithfulness identifies these
-ordinary transformations. Taking mates with the pinned pull adjunctions gives
-the corresponding square of ordinary left pullbacks. On a resolving complex,
-the pull model equations, the exact open model equations, and theta_model
-identify the localized square with the displayed one. Left-derived uniqueness
-and localization in the source identify the transformations on all objects. -/
+by zero or an asserted base-change arrow. -/
 theorem finite_base_change_restriction_coherence
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U' U X' X : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ X')

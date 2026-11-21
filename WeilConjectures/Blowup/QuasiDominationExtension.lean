@@ -41,18 +41,11 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-/-- Blueprint `theorem-extension-partial-section--1`: **extension of a partial section after an
-admissible blow-up** (Conrad's Theorem 2.4).
+/-- **Extension of a partial section after an admissible blow-up** (Conrad's Theorem 2.4).
 
-Let `X` be a quasi-compact, quasi-separated `S`-scheme and let `y : Y ⟶ S` be separated and of
-finite type. Let `U ≤ V` be quasi-compact opens of `X` with `U` dense (hence `V` dense), and let
-`f : U ⟶ Y` be an `S`-morphism which quasi-dominates `V` over `Y`: its graph
-`U ⟶ Y ×ₛ V` has closed range. Then there is a `V`-admissible blow-up `π : X' ⟶ X` and a
-quasi-domination of `X'` over `Y` extending `(π ∣_ U) ≫ f`.
-
-The proof replaces `Y` by `Y ×ₛ X` and applies the reduced form
-`AlgebraicGeometry.exists_admissibleBlowup_extend_partialSection`. The blueprint also assumes
-`Y` quasi-compact and quasi-separated; this is not needed. -/
+If `f : U ⟶ Y` is an `S`-morphism on a dense quasi-compact open `U ≤ V` whose graph
+`U ⟶ Y ×ₛ V` has closed range, then some `V`-admissible blow-up `π : X' ⟶ X` admits a
+quasi-domination over `Y` extending `(π ∣_ U) ≫ f`. -/
 theorem exists_admissibleBlowup_quasiDomination_extends {S X Y : Scheme.{u}} [CompactSpace X]
     [QuasiSeparatedSpace X] (x : X ⟶ S) (y : Y ⟶ S) [IsSeparated y] [LocallyOfFiniteType y]
     [QuasiCompact y] {U V : X.Opens} (hUV : U ≤ V) (hU : IsCompact (U : Set X))

@@ -11,7 +11,17 @@ import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # The injective edge of the resolution Hom double complex
 
-Source: Stacks Project, Tag 0954, proof of Lemma 47.8.2.
+The edge map from `Hom(X, E)` to the total complex of the double complex `Hom(P, E)` is a
+quasi-isomorphism, where `P` is a projective resolution of `X` and `E` an injective resolution.
+
+## Implementation details
+
+The proof compares the horizontal augmented complexes, which are exact because the terms of `E`
+are injective, with the total complex by eliminating components of a cocycle one at a time.
+
+## References
+
+* Stacks Project, Tag 0954, proof of Lemma 47.8.2
 -/
 
 @[expose] public section
@@ -38,21 +48,7 @@ private theorem yoneda_preservesHomology {R : Type u} [CommRing R]
     F (forget (ModuleCat.{u} R))
   apply Functor.preservesHomology_of_preservesEpis_and_kernels
 
-/-- The injective edge is a quasi-isomorphism.
-Source: Stacks Project, Tag 0954, injective-resolution computation of Ext.
-
-Proof: the horizontal augmented complex in vertical degree j is
-Hom(X,E^j) → Hom(P,E^j). Injectivity of E^j makes Hom(-,E^j) exact,
-so this augmentation is a quasi-isomorphism. Apply first-quadrant total
-comparison to these augmentations. Explicitly, in the augmented total
-complex a cocycle has finitely many components. Remove the component
-with smallest vertical degree using horizontal exactness and subtract
-the signed total boundary of a lift. Its replacement has higher vertical
-degree and lower horizontal degree. At horizontal degree -1 the monic
-augmentation forces the last component to vanish. Thus the cone is acyclic
-and the edge is a quasi-isomorphism. Its component is precomposition with
-P.π followed by the (0,n) summand inclusion, so it is precisely the
-constructed map. Degree zero and zero modules require no exception. -/
+/-- The injective edge is a quasi-isomorphism. -/
 theorem resolutionHomInjectiveEdge_quasiIso
     {R : Type u} [CommRing R] {X M : ModuleCat.{u} R}
     (P : ProjectiveResolution X) (E : InjectiveResolution M) :

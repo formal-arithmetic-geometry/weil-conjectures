@@ -14,7 +14,10 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 /-!
 # Degreewise currying for the Hom-total-tensor comparison
 
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90.
+## References
+
+* Stacks Project, Cohomology on Sites, Lemma 21.34.1, Tag 0A90
+* Stacks, Modules on Sites, Section 03EK
 -/
 
 @[expose] public section
@@ -41,8 +44,7 @@ noncomputable abbrev homTensorProjection (L M : CochainComplex Mod ℤ)
   homTensorCurryProjection R L M n p q h
 
 /-- Map from the sectionwise presheaf tensor to the underlying sheaf tensor.
-It is the sheafification unit followed by the inverse of the tensor comparison.
-Source: Stacks, Modules on Sites, Section 03EK. -/
+It is the sheafification unit followed by the inverse of the tensor comparison. -/
 noncomputable abbrev homTensorSectionMap (A B : Mod) :
     letI := SheafOfModules.monoidalCategory R
     A.val ⊗ B.val ⟶ (A ⊗ B).val :=
@@ -51,8 +53,7 @@ noncomputable abbrev homTensorSectionMap (A B : Mod) :
 set_option synthInstance.maxSize 256 in
 /-- The degreewise comparison sends `x ⊗ y` to `f(x)(y)` on every localized site.
 The equation uses pure tensors before sheafification; it therefore does not assert
-that every section of a sheaf tensor is a sum of global pure tensors.
-Source: Stacks, Tag 0A90, degreewise construction. -/
+that every section of a sheaf tensor is a sum of global pure tensors. -/
 abbrev HomTensorCurryCondition (K L M : CochainComplex Mod ℤ) (n : ℤ) :
     letI := SheafOfModules.monoidalCategory R
     ((homComplex (R := R) K (homComplex (R := R) L M)).X n ⟶
@@ -62,23 +63,7 @@ abbrev HomTensorCurryCondition (K L M : CochainComplex Mod ℤ) (n : ℤ) :
 
 set_option backward.isDefEq.respectTransparency true in
 set_option synthInstance.maxSize 256 in
-/-- There is a unique degreewise currying map, and it is invertible.
-Source: Stacks Project, Cohomology on Sites, Lemma 21.34.1 (Tag 0A90),
-degreewise construction and inverse.
-
-Proof: Expand both Hom terms by the product projections of `homComplex_exists`.
-A section of the iterated Hom is a family of localized maps indexed by `p,q`.
-Evaluate its outer map at `x` and its inner map at `y`. This is balanced bilinear
-and compatible with restriction. The presheaf tensor universal property and
-sheafification adjunction give a map on each `K^p ⊗ L^q`; the coproduct universal
-property combines them for fixed `p+q`. This constructs the displayed map.
-Conversely restrict a map out of the total-degree coproduct to each summand,
-then curry twice on every localized site. Tensor-Hom adjunction and the product
-and coproduct universal properties show both composites are identities.
-They also show that the pure-tensor equation determines the map uniquely:
-maps out of a sheafification are determined before sheafification, and maps
-out of the tensor presheaf are determined on pure tensors. This uses no
-boundedness and involves no differentials. -/
+/-- There is a unique degreewise currying map, and it is invertible. -/
 theorem homTensorDegreewise_exists (K L M : CochainComplex Mod ℤ) (n : ℤ) :
     letI := SheafOfModules.monoidalCategory R
     ∃! a : (homComplex (R := R) K (homComplex (R := R) L M)).X n ⟶
@@ -101,7 +86,7 @@ theorem homTensorDegreewise_exists (K L M : CochainComplex Mod ℤ) (n : ℤ) :
 set_option synthInstance.maxSize 256 in
 /-- The unique degreewise currying map, characterized on localized pure tensors.
 The existence theorem determines its data uniquely, rather than choosing an
-arbitrary witness. Source: Stacks, Tag 0A90. -/
+arbitrary witness. -/
 noncomputable def homTensorDegreewiseMap (K L M : CochainComplex Mod ℤ) (n : ℤ) :
     letI := SheafOfModules.monoidalCategory R
     (homComplex (R := R) K (homComplex (R := R) L M)).X n ⟶
