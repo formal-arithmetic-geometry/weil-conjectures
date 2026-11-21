@@ -16532,6 +16532,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.BinaryBiproductCone
 public import WeilConjectures.CategoryTheory.Triangulated.BocksteinTowerFinite
 public import WeilConjectures.CategoryTheory.Triangulated.BoundedPostnikovTower
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Basic
+public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Generation
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Localization
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.RightAdjoint
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Telescope
@@ -16578,6 +16579,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.IsoLocusContravariant
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureRepresentable
+public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureRightAdjoint
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingDetermination
 public import WeilConjectures.CategoryTheory.Triangulated.MateTriangle
 public import WeilConjectures.CategoryTheory.Triangulated.MilnorBoundaryFactorization
@@ -21199,6 +21201,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegral
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationIntegralClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRational
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationRationalWeil
+public import WeilConjectures.SixFunctors.Etale.Derived.LocalizingConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.LocallyConstantInvertible
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
@@ -22796,6 +22799,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Localization
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizationFiniteTor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizingComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizingLocallySmall
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizingLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
@@ -22850,6 +22854,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekComposition
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekLocalizingConstructible
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekPreservation
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarCompCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Comparison
@@ -23671,6 +23676,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekBoundedConstructibleAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingConstructibleAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingEllAdic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizingRestriction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekShift
