@@ -10,6 +10,7 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.FourierFirstFormula
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
+public import WeilConjectures.WeilSheaf.LisseDualExact
 
 /-!
 # The trivialization at zero of the Artin–Schreier sheaves
@@ -25,7 +26,6 @@ trivialization `x^* ℒ_{ψ,f} ≅ ℚ̄_ℓ` at a rational point `x` where the 
 (`AlgebraicGeometry.artinSchreierOfTrivialization`), together with the canonical comparison
 isomorphisms needed to read an isomorphism of tensor products and duals at a point:
 
-* `AlgebraicGeometry.WeilSheaf.upperStarTensorObjIso`: `φ^* (F ⊗ G) ≅ φ^* F ⊗ φ^* G`;
 * `AlgebraicGeometry.WeilSheaf.tensorObjIsoOfIso`: functoriality of `⊗` in isomorphisms;
 * `AlgebraicGeometry.WeilSheaf.adicConstantTensorObjIso`: `ℚ̄_ℓ ⊗ G ≅ G`.
 
@@ -130,22 +130,6 @@ noncomputable def WeilSheaf.adicConstantTensorObjIso (G : WeilSheaf k₀ l X) :
   ObjectProperty.isoMk _ (ProEtaleWeilSheaf.ihomMapIsoLeft
       ((ObjectProperty.ι _).mapIso WeilSheaf.dualAdicConstantIso).symm _ ≪≫
     ProEtaleWeilSheaf.ihomAdicConstantIso G.obj)
-
-/-- Pullback commutes with the tensor product with a lisse Weil sheaf:
-`φ^* (F ⊗ G) ≅ φ^* F ⊗ φ^* G`. -/
-noncomputable def WeilSheaf.upperStarTensorObjIso {Y : Scheme.{u}}
-    [Y.Over (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))] (φ : X ⟶ Y)
-    [φ.IsOver (Spec (CommRingCat.of k₀))] (F G : WeilSheaf k₀ l Y) (hF : F.IsLisse) :
-    (WeilSheaf.upperStar φ).obj (F.tensorObj G hF) ≅
-      ((WeilSheaf.upperStar φ).obj F).tensorObj ((WeilSheaf.upperStar φ).obj G)
-        (ProEtale.IsAdicLisseSheaf.upperStar _ hF) :=
-  ObjectProperty.isoMk _
-    (eqToIso (by rw [WeilSheaf.upperStar_obj_obj, WeilSheaf.tensorObj_obj, Functor.comp_obj,
-        ProEtaleWeilSheaf.ihomFunctor_obj]) ≪≫
-      (ProEtaleWeilSheaf.ihomFunctorDualCompUpperStarIso φ F hF).app G.obj ≪≫
-      eqToIso (by rw [Functor.comp_obj, WeilSheaf.tensorObj_obj, WeilSheaf.upperStar_obj_obj,
-        ProEtaleWeilSheaf.ihomFunctor_obj]))
 
 end Comparison
 
