@@ -22,11 +22,31 @@ public import WeilConjectures.WeilSheaf.UpperStarId
 /-!
 # Moving a lisse point to infinity
 
+Let `F` be a lisse Weil sheaf, pure of weight `w`, on a nonempty open `W₀` of `ℙ¹_{k₀}`. After a
+finite extension `K` of `k₀`, `W₀` has a `K`-rational point `s`; a translation of the affine line
+followed by the chart at infinity sends `s` to `∞`. Deleting `s` (and the points of `W_K` outside
+the affine chart) gives a dense open `V` of `𝔸¹_K` on which `F` restricts to a lisse sheaf
+unramified at infinity, and the localization sequence makes `H_c^1(V, F) → H_c^1(W, F)`
+surjective.
+
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.exists_surjective_compactlySupportedCohomology_one_of_finite_compl`:
-  for an open immersion `j : U ⟶ X` with finite complement, `H_c^1(U, j^*F) → H_c^1(X, F)` is
+- `AlgebraicGeometry.WeilSheaf.exists_surjective_compactlySupportedCohomology_one_of_finite_compl`
+  : for an open immersion `j : U ⟶ X` with finite complement, `H_c^1(U, j^*F) → H_c^1(X, F)` is
   surjective.
+- `AlgebraicGeometry.WeilSheaf.IsLisse.isUnramifiedAtInfinity_upperStar`: the restriction of a
+  lisse sheaf along a map extending over infinity is unramified at infinity.
+- `AlgebraicGeometry.ProjectiveLine.exists_isOpenImmersion_affineLine_baseChangeField`: the
+  geometric part, moving a rational point of `W_K` to infinity.
+- `AlgebraicGeometry.exists_surjective_compactlySupportedCohomology_one_of_projectiveLine`:
+  moving a lisse point to infinity.
+
+## Implementation details
+
+Comparing `(WeilSheaf.upperStar φ).obj G` for two lifts `φ` differing only in proof terms makes
+the kernel unfold `WeilSheaf.upperStar`. The proofs therefore go through
+`AlgebraicGeometry.WeilSheaf.upperStarCongr` and through a bundling lemma stated for an abstract
+lisse sheaf, so that no such comparison arises.
 -/
 
 @[expose] public section
@@ -206,7 +226,8 @@ theorem ProjectiveLine.exists_isOpenImmersion_affineLine_baseChangeField {W : Sc
   have hA := (AffineSpace.isPullback_map (n := PUnit.{u + 1})
     (Spec.map (CommRingCat.ofHom (algebraMap k₀ K)))).flip
   let ρ : O.toScheme ⟶ 𝔸(PUnit.{u + 1}; Spec (CommRingCat.of K)) :=
-    hA.lift (O.toScheme ↘ Spec (CommRingCat.of K)) ((π ∣_ WA) ≫ u) (by rw [Category.assoc, hu, hsq.w])
+    hA.lift (O.toScheme ↘ Spec (CommRingCat.of K)) ((π ∣_ WA) ≫ u)
+      (by rw [Category.assoc, hu, hsq.w])
   have hρ : ρ ≫ 𝔸(PUnit.{u + 1}; Spec (CommRingCat.of K)) ↘ Spec (CommRingCat.of K) =
       O.toScheme ↘ Spec (CommRingCat.of K) := hA.lift_fst _ _ _
   have hρsq : IsPullback ρ (π ∣_ WA) (AffineSpace.map PUnit.{u + 1}
@@ -215,7 +236,8 @@ theorem ProjectiveLine.exists_isOpenImmersion_affineLine_baseChangeField {W : Sc
   have : IsOpenImmersion ρ := MorphismProperty.IsStableUnderBaseChange.of_isPullback
     (P := @IsOpenImmersion) hρsq.flip inferInstance
   -- `ρ(s)` is a rational point `a`; translating by `-a` and inverting sends it to `∞`
-  let a : Γ(Spec (CommRingCat.of K), ⊤) := (s ≫ ρ).appTop (AffineSpace.coord (Spec (CommRingCat.of K)) PUnit.unit)
+  let a : Γ(Spec (CommRingCat.of K), ⊤) :=
+    (s ≫ ρ).appTop (AffineSpace.coord (Spec (CommRingCat.of K)) PUnit.unit)
   let v : PUnit.{u + 1} → Γ(Spec (CommRingCat.of K), ⊤) := fun _ ↦ a
   let τ := AffineSpace.translation (-v)
   have : IsIso τ := ⟨AffineSpace.translation v, by

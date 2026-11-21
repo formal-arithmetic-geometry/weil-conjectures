@@ -16990,6 +16990,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.FiniteMiddleExtension
 public import WeilConjectures.DeligneLaumon.Reduction.FormalSteps
 public import WeilConjectures.DeligneLaumon.Reduction.MixedDescent
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
+public import WeilConjectures.DeligneLaumon.Reduction.MoveToInfinity
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixedFieldCoefficient
@@ -26058,6 +26059,7 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrivialization
 public import WeilConjectures.WeilSheaf.BaseChangeField.Coherence
 public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
+public import WeilConjectures.WeilSheaf.BaseChangeField.CompactSupport
 public import WeilConjectures.WeilSheaf.BaseChangeField.Comparison
 public import WeilConjectures.WeilSheaf.BaseChangeField.Derived
 public import WeilConjectures.WeilSheaf.BaseChangeField.Geometric
