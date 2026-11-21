@@ -23,7 +23,7 @@ Let `C` be an abelian category with exact countable products, `P` a class of obj
 
 The first bijection holds for degree reasons. For the second, `Hom(s, L) = 0` for every `L`
 with cohomology in `P` concentrated in degrees `< -d`
-(`DerivedCategory.eq_zero_of_isLE_of_homologyProperty`): this sharpens
+(`DerivedCategory.eq_zero_of_isLE_self`): this sharpens
 `DerivedCategory.eq_zero_of_isLE` by one degree, using the truncation triangle
 `τ_{< -d - 1} L ⟶ L ⟶ τ_{≥ -d - 1} L ⟶`.
 -/
@@ -79,7 +79,7 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
 
 /-- If `Hom(s, B[-n]) = 0` for `B` in `P` and `n ≤ N`, then `Hom(s, L) = 0` for every `L` with
 cohomology in `P` in degrees `≤ N`. -/
-lemma eq_zero_of_isLE_of_homologyProperty {s : DerivedCategory C} (N : ℤ)
+lemma eq_zero_of_isLE_self {s : DerivedCategory C} (N : ℤ)
     (hvan : ∀ B, P B → ∀ n ≤ N, ∀ f : s ⟶ (singleFunctor C n).obj B, f = 0)
     (L : DerivedCategory C) (hL : homologyProperty P L) [L.IsLE N] (f : s ⟶ L) : f = 0 := by
   let T := (t.triangleLTGE N).obj L
@@ -127,8 +127,8 @@ theorem bijective_comp_truncLEι_shift_and_truncGEπ_shift {s : DerivedCategory 
       t.isLE_of_le _ (-d - 2) (-d - 1) (by lia)
     have hP₁ := (homologyProperty P).le_shift m _ hT₁
     exact bijective_comp_shift_map_mor₂ T (t.triangleLTGE_distinguished (m - d) K') m s
-      (eq_zero_of_isLE_of_homologyProperty (-d - 1) hvan' _ hP₁)
-      (eq_zero_of_isLE_of_homologyProperty (-d - 1) hvan' _
+      (eq_zero_of_isLE_self (-d - 1) hvan' _ hP₁)
+      (eq_zero_of_isLE_self (-d - 1) hvan' _
         ((homologyProperty P).le_shift 1 _ hP₁))
 
 end DerivedCategory

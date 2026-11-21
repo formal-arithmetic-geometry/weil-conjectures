@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
+public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Adjunction
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Condensed.CondensedClosedSupportAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LocallyFreeTensor
@@ -60,32 +61,20 @@ open DerivedCategory.TStructure (t)
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
-/-- A right adjoint to a functor preserving `≤ n - 1` objects preserves `≥ n` objects. -/
-private lemma isGE_obj_of_adjunction {C D : Type*} [Category C] [Category D] [Abelian C]
-    [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
-    {F : DerivedCategory D ⥤ DerivedCategory C} {G : DerivedCategory C ⥤ DerivedCategory D}
-    (adj : F ⊣ G) (n : ℤ) (hF : ∀ W : DerivedCategory D, W.IsLE (n - 1) → (F.obj W).IsLE (n - 1))
-    (K : DerivedCategory C) [K.IsGE n] : (G.obj K).IsGE n :=
-  (t.isGE_iff_orthogonal (n - 1) n (by lia) _).2 fun W f hW ↦ by
-    have := hF W hW
-    have := adj.isRightAdjoint
-    rw [← (adj.homEquiv W K).apply_symm_apply f,
-      t.zero ((adj.homEquiv W K).symm f) (n - 1) n (by lia), Adjunction.homEquiv_apply,
-      Functor.map_zero, Limits.comp_zero]
-
 section ClosedSupport
 
 variable {Z V X S : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j]
-  [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ)
+  [QuasiCompact j] (hij : Set.range j.base = (Set.range i.base)ᶜ)
 include hij
 
 omit [IsCommMonObj Λ] in
 /-- Sections with closed support `RΓ_Z : D(X_proét, Λ) ⥤ D(Z_proét, Λ)` are left t-exact. -/
 theorem isGE_rightDerivedFunctor_closedSupport_obj (K : DerivedCategory (supportModules Λ X))
-    (n : ℤ) [K.IsGE n] : ((closedSupport Λ i j).rightDerivedFunctor.obj K).IsGE n :=
-  letI := closedSupport_lowerStarExact Λ i j hij
-  isGE_obj_of_adjunction (closedSupportDerivedAdjunction Λ i j hij) n
-    (fun W _ ↦ (lowerStar Λ i).isLE_mapDerivedCategory_obj W (n - 1)) K
+    (n : ℤ) [K.IsGE n] : ((closedSupport Λ i j).rightDerivedFunctor.obj K).IsGE n := by
+  let := closedSupport_lowerStarExact Λ i j (by rw [hij, compl_compl])
+  simpa using t.isGE_rightAdjoint_obj t
+    (closedSupportDerivedAdjunction Λ i j (by rw [hij, compl_compl])) 0
+    (fun W m _ ↦ by simpa using (lowerStar Λ i).isLE_mapDerivedCategory_obj W m) K n
 
 omit [IsCommMonObj Λ] in
 /-- Sections with closed support `RΓ_Z : D(X_proét, Λ) ⥤ D(Z_proét, Λ)` send homotopy limits of
@@ -93,9 +82,9 @@ towers to homotopy limits. -/
 theorem isHomotopyLimit_mapCone_rightDerivedFunctor_closedSupport
     {F : ℕᵒᵖ ⥤ DerivedCategory (supportModules Λ X)} {c : Cone F} (hc : IsHomotopyLimit c) :
     IsHomotopyLimit ((closedSupport Λ i j).rightDerivedFunctor.mapCone c) :=
-  letI := closedSupport_lowerStarExact Λ i j hij
+  letI := closedSupport_lowerStarExact Λ i j (by rw [hij, compl_compl])
   have : PreservesLimitsOfSize.{0, 0} (closedSupport Λ i j).rightDerivedFunctor :=
-    (closedSupportDerivedAdjunction Λ i j hij).rightAdjoint_preservesLimits
+    (closedSupportDerivedAdjunction Λ i j (by rw [hij, compl_compl])).rightAdjoint_preservesLimits
   hc.map _
 
 /-- The restriction `u^* RΓ_Z : D(X_proét, Λ) ⥤ D(S_proét, Λ)` of the sections with closed
@@ -133,11 +122,11 @@ left t-exact. -/
 theorem isGE_tensorObj_singleFunctor_of_isLocallyFree (K : DerivedCategory (supportModules Λ S))
     (n : ℤ) [K.IsGE n] : (K ⊗ (DerivedCategory.singleFunctor _ 0).obj L).IsGE n := by
   obtain ⟨L', -, ⟨e⟩⟩ := hL.exists_exactPairing_singleFunctor 0
-  exact isGE_obj_of_adjunction (tensorRightAdjunction
-    ((DerivedCategory.singleFunctor _ (-0)).obj L') ((DerivedCategory.singleFunctor _ 0).obj L)) n
-    (fun W _ ↦ by
+  simpa using t.isGE_rightAdjoint_obj t (tensorRightAdjunction
+    ((DerivedCategory.singleFunctor _ (-0)).obj L') ((DerivedCategory.singleFunctor _ 0).obj L)) 0
+    (fun W m _ ↦ by
       simpa using DerivedCategory.isLE_tensor W
-        ((DerivedCategory.singleFunctor _ (-0)).obj L') (n - 1) (-0)) K
+        ((DerivedCategory.singleFunctor _ (-0)).obj L') m (-0)) K n
 
 /-- Tensoring `- ⊗ L : D(S_proét, Λ) ⥤ D(S_proét, Λ)` with a locally free `Λ_S`-module `L` sends
 homotopy limits of towers to homotopy limits. -/
@@ -161,7 +150,7 @@ homotopy limits. -/
 theorem closedSupport_upperStar_tensor_isGE_and_isHomotopyLimit
     {Z V X S : Scheme.{u}}
     (i : Z ⟶ X) (j : V ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j]
-    (hij : Set.range i.base = (Set.range j.base)ᶜ) (u : S ⟶ Z) [IsOpenImmersion u]
+    (hij : Set.range j.base = (Set.range i.base)ᶜ) (u : S ⟶ Z) [IsOpenImmersion u]
     (L : supportModules Λ S) (hL : IsLocallyFree (condensedRingObj Λ S) L) :
     (∀ (K : DerivedCategory (supportModules Λ X)) (n : ℤ), K.IsGE n →
       ((closedSupport Λ i j).rightDerivedFunctor.obj K).IsGE n) ∧
