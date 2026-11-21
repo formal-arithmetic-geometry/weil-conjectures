@@ -414,8 +414,7 @@ For a morphism of schemes `e : X' ⟶ X` and closed immersions `i : Z ⟶ X`, `i
 open complements satisfy `U' ⊆ e⁻¹(U)` (i.e. `e⁻¹(Z) ⊆ Z'`), the pullback maps
 `RΓ_Z(X, K) ⟶ RΓ_{Z'}(X', e^* K)`, `RΓ(X, K) ⟶ RΓ(X', e^* K)` and `RΓ(U, K) ⟶ RΓ(U', e^* K)`
 form a morphism of triangles from `sectionsWithSupportTriangle` of `(X, Z)` to that of
-`(X', Z')` applied to `e^* K`, natural in the bounded below complex `K` of pro-étale sheaves.
-Here the exact pullback `e^*` acts termwise on complexes. -/
+`(X', Z')` applied to `e^* K`, natural in the bounded below complex `K` of pro-étale sheaves. -/
 noncomputable def sectionsWithSupportTrianglePullback :
     sectionsWithSupportTriangle A i ⟶ D+((e)^*[A]) ⋙ sectionsWithSupportTriangle A i' :=
   ShortComplex.rightDerivedTrianglePullback (e)^*[A]

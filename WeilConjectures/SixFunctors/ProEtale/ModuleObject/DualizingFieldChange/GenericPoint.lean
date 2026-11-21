@@ -125,8 +125,7 @@ variable {Z P : Over (Spec (.of k₁))} [LocallyOfFiniteType Z.hom] [QuasiCompac
   {πZ' : Z''.left ⟶ Z'.left}
 
 /-- The horizontal pasting law on bounded constructible complexes, for arbitrary ambient
-transformations `χ₁`, `χ₂`, `χ` satisfying the ambient law; they are kept abstract so that the
-kernel never unfolds the base change morphisms. -/
+transformations `χ₁`, `χ₂`, `χ` satisfying the ambient law. -/
 private lemma liftExchange_paste_horiz_aux
     (χ₁ : R((f.left)_*⟦𝐐⟧) ⋙ L((πP)^*⟦𝐐⟧) ⟶ L((πZ)^*⟦𝐐⟧) ⋙ R((f'.left)_*⟦𝐐⟧))
     (χ₂ : R((f'.left)_*⟦𝐐⟧) ⋙ L((πP')^*⟦𝐐⟧) ⟶ L((πZ')^*⟦𝐐⟧) ⋙ R((f''.left)_*⟦𝐐⟧))
@@ -256,9 +255,9 @@ P'' --πP'--> P' --πP--> P
 ```
 of proper morphisms of schemes of finite type over fields `k₁`, `k₂`, `k₃`, the base change map
 `γ : (πZ' ≫ πZ)^* Rf^! ⟶ Rf''^! (πP' ≫ πP)^*` of the outer square
-(`ProEtale.CondensedRing.upperShriekBaseChangeOfMap`) is, through the composition isomorphisms of
-the pullbacks, `πZ'^*` of the base change map `γ₁` of the right square followed by the base
-change map `γ₂` of the left square at `πP^* K`. -/
+(`ProEtale.CondensedRing.upperShriekBaseChangeOfMap`) is `πZ'^*` of the base change map `γ₁` of the
+right square followed by the base change map `γ₂` of the left square at `πP^* K`, up to the
+composition isomorphisms of the pullbacks. -/
 theorem upperShriekBaseChangeOfMap_app_paste [IsProper f.left] [IsProper f'.left]
     [IsProper f''.left] (sq₁ : IsPullback πZ f'.left f.left πP)
     (sq₂ : IsPullback πZ' f''.left f'.left πP')
@@ -553,12 +552,10 @@ lemma isIso_upperShriekBaseChangeOfMap_congr {f : Z ⟶ P} [IsProper f.left]
 
 omit [IsClosedImmersion i₀.left] [IsProper p₀.left] in
 /-- **Base change of `Rb^!` for a projective morphism along a generic point followed by a field
-extension**, with the intermediate base change constructed: let `b = i ≫ p : Z ⟶ Y ⟶ P` be a
-closed immersion followed by a proper morphism `p` smooth of pure relative dimension `d`, and
-`g = πP ≫ η : P' ⟶ Spec K₀ ⟶ P` the base change `πP` of a field extension `L/K₀` (`P' ≅ Spec L`
-over `L`, `ProEtale.CondensedRing.isPullback_of_isIso_hom`) followed by a weakly étale `η` (for
-instance the inclusion of the generic point, `AlgebraicGeometry.affineLineGenericPoint` or
-`Scheme.fromSpecFunctionField`). Then for every cartesian square `π ≫ b = b' ≫ g` with `b'`
+extension**: let `b = i ≫ p : Z ⟶ Y ⟶ P` be a closed immersion followed by a proper morphism `p`
+smooth of pure relative dimension `d`, and `g = πP ≫ η : P' ⟶ Spec K₀ ⟶ P` the base change `πP`
+of a field extension `L/K₀` (`P' ≅ Spec L`) followed by a weakly étale `η` (for instance the
+inclusion of the generic point). Then for every cartesian square `π ≫ b = b' ≫ g` with `b'`
 proper, the base change map `π^* Rb^! ⟶ Rb'^! g^*` is an isomorphism. -/
 theorem isIso_upperShriekBaseChangeOfMap_of_projective_of_comp_eq (d : ℕ)
     [SmoothOfRelativeDimension d p.left] (η : Spec (.of K₀) ⟶ P.left) [WeaklyEtale η]

@@ -73,11 +73,7 @@ lemma isAddTorsion_uliftIntegersModPow (l : ℕ) [Fact l.Prime] (E : Type) [Fiel
 open PadicAlgCl in
 /-- **Boundedness of `Rg_* 𝒪_{E,T}`**: for `g : T ⟶ Y` quasi-compact and quasi-separated between
 schemes of finite type over a field with `dim T ≤ d`, the derived pushforward of the abelian
-sheaf `𝒪_{E,T}` on the pro-étale site lies in degrees `[0, 2d + 1]`. It is the derived limit of
-the `ν^* Rg_*^{ét}(𝒪_E ⧸ ℓⁿ)`
-(`isHomotopyLimit_comparisonUpperStar_rightDerivedLowerStar_constantSheafTower`),
-which lie in degrees `[0, 2d]`
-(`AlgebraicGeometry.Etale.isGE_and_isLE_rightDerivedLowerStar_constantSheaf_ab`). -/
+sheaf `𝒪_{E,T}` on the pro-étale site lies in degrees `[0, 2d + 1]`. -/
 theorem isGE_and_isLE_rightDerivedLowerStar_padicIntegersSheaf {k : Type u} [Field k]
     {T Y : Scheme.{u}} (g : T ⟶ Y) [QuasiCompact g] [QuasiSeparated g]
     (aT : T ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aT] [QuasiCompact aT]

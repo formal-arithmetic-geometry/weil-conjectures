@@ -50,8 +50,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Restrict the actual compactification composite to bounded constructible objects.
-The membership proof changes neither its objects nor its maps. -/
+/-- Restrict the compactification composite to bounded constructible objects. -/
 noncomputable def restrictionGlueLowerShriek (c : Compactification f)
     (hF : ∀ A, constantModelBoundedConstructible Λ X A →
       constantModelBoundedConstructible Λ Y
@@ -240,11 +239,10 @@ private theorem auxiliaryAdjoint
   exact ⟨h, G, ⟨adj⟩⟩
 
 /-- Finite open covers detect bounded constructibility, and the supplied exceptional
-adjunction restricts to Dbc. The final equality says that its natural Hom bijection is
-exactly the original one, after forgetting the full-subcategory membership proofs.
-The arguments `h`, `G`, and `adj` name the functor and adjunction of the exceptional inverse
-image existence theorem; no preservation of Dbc or inclusion in the localizing closure is
-assumed. The coefficient identification is an isomorphism of condensed ring objects. -/
+adjunction restricts to Dbc, with the same natural Hom bijection as the original one.
+The arguments `h`, `G`, and `adj` are the functor and adjunction of the exceptional inverse
+image existence theorem. The coefficient identification is an isomorphism of condensed ring
+objects. -/
 theorem rationalRestrictionGlue
     (ℓ : ℕ) [Fact ℓ.Prime]
     (E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) [FiniteDimensional ℚ_[ℓ] E]

@@ -70,21 +70,10 @@ variable {U' U Z' Z : Scheme.{u}} {g' : U' ⟶ U} {j' : U' ⟶ Z'} {j : U ⟶ Z}
   [IsOpenImmersion j] [IsOpenImmersion j']
 
 /-- The base change map for the pro-étale extension by zero: for a commutative square
-`g' ≫ j = j' ≫ g''` of schemes with `j` and `j'` open immersions
-
-```
-U' --j'--> Z'
-|          |
-g'         g''
-v          v
-U  --j-->  Z
-```
-
-the canonical natural transformation `g'^* ⋙ j'_! ⟶ j_! ⋙ g''^*`, i.e. `j'_! g'^* ⟶ g''^* j_!`,
-on sheaves for the small pro-étale sites. It is the conjugate of the base change map
-`ProEtale.baseChangeMap A sq : g''_* ⋙ j^* ⟶ j'^* ⋙ g'_*` under the adjunctions
-`j_! ⋙ g''^* ⊣ g''_* ⋙ j^*` and `g'^* ⋙ j'_! ⊣ j'^* ⋙ g'_*`. For a cartesian square it is an
-isomorphism (`AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekBaseChangeMap`). -/
+`g' ≫ j = j' ≫ g''` of schemes with `j` and `j'` open immersions, the canonical natural
+transformation `g'^* ⋙ j'_! ⟶ j_! ⋙ g''^*`, i.e. `j'_! g'^* ⟶ g''^* j_!`, on sheaves for the small
+pro-étale sites. For a cartesian square it is an isomorphism
+(`AlgebraicGeometry.ProEtale.isIso_openImmersionLowerShriekBaseChangeMap`). -/
 noncomputable def openImmersionLowerShriekBaseChangeMap (sq : CommSq g' j' j g'') :
     (g')^*[A] ⋙ (j')_!open[A] ⟶ (j)_!open[A] ⋙ (g'')^*[A] :=
   (conjugateEquiv ((openImmersionLowerShriekUpperStarAdjunction A j).comp

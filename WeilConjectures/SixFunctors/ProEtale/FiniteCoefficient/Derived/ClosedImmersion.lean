@@ -79,15 +79,9 @@ noncomputable def sectionsWithSupport :
 instance : (sectionsWithSupport A j).Additive where
   map_add := equalizer.hom_ext (by simp [sectionsWithSupport])
 
-/-- For a closed immersion `i : Z ⟶ X` with
-complementary open immersion `j`, the functor
-
-`i^!₀ N = i^* ker(N ⟶ j_* j^* N)`
-
-on pro-étale sheaves, the closed inverse image of the sheaf of sections with support in `Z`
-(`AlgebraicGeometry.ProEtale.sectionsWithSupport`). A morphism of sheaves acts through the
-induced map of kernels. One has `i_* i^!₀ ≅ Γ_Z`
-(`AlgebraicGeometry.ProEtale.closedUpperShriekCompLowerStarIso`). -/
+/-- For a closed immersion `i : Z ⟶ X` with complementary open immersion `j`, the functor
+`i^!₀ N = i^* ker(N ⟶ j_* j^* N)` on pro-étale sheaves, the closed inverse image of the sheaf of
+sections with support in `Z`. A morphism of sheaves acts through the induced map of kernels. -/
 noncomputable def closedUpperShriek :
     Sheaf (ProEt.topology X) A ⥤ Sheaf (ProEt.topology Z) A :=
   sectionsWithSupport A j ⋙ (i)^*[A]
@@ -256,18 +250,10 @@ noncomputable def lowerStarClosedUpperShriekAdjunction
       (Iso.refl _ : _ ≅ (i)_*[ModuleCat.{u + 1} R])).ofNatIsoRight
     (Iso.refl _ : _ ≅ closedUpperShriek (ModuleCat.{u + 1} R) i j)
 
-/-- Let `i : Z ⟶ X` be a closed immersion whose
-open complement `j : U ⟶ X` is quasi-compact (for instance, `X` noetherian). On the unbounded
-derived categories of pro-étale sheaves of modules, the direct image `Ri_*` has a right adjoint,
-the right derived functor of the sheaf-level `i^!₀` of
-`AlgebraicGeometry.ProEtale.closedUpperShriek`. No constructibility is assumed: the adjunction
-holds on the whole derived categories.
-
-The functor `i_*` is exact
-(`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isCompl`), so `Ri_*` is `i_*`
-applied termwise, and `i_*` is left adjoint to `i^!₀`
-(`AlgebraicGeometry.ProEtale.lowerStarClosedUpperShriekAdjunction`), so
-`CategoryTheory.Adjunction.mapDerivedCategoryRightDerivedAdjunction` applies. -/
+/-- Let `i : Z ⟶ X` be a closed immersion whose open complement `j : U ⟶ X` is quasi-compact
+(for instance, `X` noetherian). On the unbounded derived categories of pro-étale sheaves of
+modules, the direct image `Ri_*` has a right adjoint, the right derived functor of the
+sheaf-level `i^!₀`. No constructibility is assumed. -/
 noncomputable def derivedLowerStarClosedUpperShriekAdjunction
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) :
     ((i)_*[ModuleCat.{u + 1} R]).rightDerivedFunctor ⊣
@@ -296,15 +282,11 @@ instance faithful_rightDerivedFunctor_lowerStar :
     (upperStarLowerStarAdjunction (ModuleCat.{u + 1} R) i).preservesKInjectiveComplexes
   inferInstance
 
-/-- Let `i : Z ⟶ X` be a closed immersion whose
-open complement `j` is quasi-compact (for instance, `X` noetherian), and let `Ri^!` be the right
-adjoint of the direct image `Ri_*` on the unbounded derived categories of pro-étale sheaves of
-modules (`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`). For every
-`Q ∈ D(Z_proét)` the unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism. No boundedness or
-constructibility of `Q` is required.
-
-The unit of an adjunction whose left adjoint is fully faithful is an isomorphism, and `Ri_*` is
-fully faithful (`AlgebraicGeometry.ProEtale.full_rightDerivedFunctor_lowerStar`). -/
+/-- Let `i : Z ⟶ X` be a closed immersion whose open complement `j` is quasi-compact (for
+instance, `X` noetherian), and let `Ri^!` be the right adjoint of the direct image `Ri_*` on the
+unbounded derived categories of pro-étale sheaves of modules. For every `Q ∈ D(Z_proét)` the
+unit `Q ⟶ Ri^! Ri_* Q` is an isomorphism. No boundedness or constructibility of `Q` is
+required. -/
 theorem isIso_derivedLowerStarClosedUpperShriekAdjunction_unit_app
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (Q : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} R))) :

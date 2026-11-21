@@ -123,12 +123,7 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_iso_biprod
 weakly étale over `C` have integral local rings, `j : U ⟶ C` be a quasi-compact open immersion
 with dense image and `G` a sheaf on the pro-étale site of `C` whose restrictions to the members
 `V i` of a pro-étale cover are finite direct sums of copies of `ℚ̄_ℓ`. Then the unit
-`G ⟶ j_* j^* G` of the restriction adjunction is an isomorphism.
-
-By conservativity of the restrictions to a cover it suffices to check this over each `V i`.
-Over a weakly étale `T ⟶ V i`, the unit at `G` is the restriction of sections of `G` from `T` to
-`T ×_C U`, which is, up to the identification `T ×_C U ≅ T ×_{V i} (V i ×_C U)`, the unit over
-`V i` at the restriction of `G`, along the preimage `V i ×_C U ⟶ V i` of `U`. -/
+`G ⟶ j_* j^* G` of the restriction adjunction is an isomorphism. -/
 theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_cover
     {C U : Scheme.{u}}
     (hC : ∀ ⦃W : Scheme.{u}⦄ (f : W ⟶ C) [WeaklyEtale f] (w : W),

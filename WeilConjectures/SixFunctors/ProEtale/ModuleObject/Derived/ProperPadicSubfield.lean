@@ -68,11 +68,7 @@ theorem exists_derivedExtendScalars_iso_integralModel (X : Scheme.{u})
 square `g' ≫ p = p' ≫ g` of schemes with `p` proper, `Y` a noetherian `k`-scheme and `Y'` a
 noetherian `k₂`-scheme for fields `k` and `k₂` in which `ℓ` is invertible, the base change map
 `Lg^* Rp_* ⟶ Rp'_* Lg'^*` with coefficients `E` is invertible at every bounded constructible
-`E`-complex `K`. The complex `K` has an integral model `E ⊗ᴸ_{𝒪_E} K₀`
-(`exists_derivedExtendScalars_iso_integralModel`), at which the base change map is invertible
-since the integral one is at `K₀`
-(`isIso_baseChangeMap_app_padicIntegers_of_isProper_of_isNoetherian`,
-`isIso_baseChangeMap_app_padicSubfield_of_padicIntegers`). -/
+`E`-complex `K`. -/
 theorem isIso_baseChangeMap_app_padicSubfield_of_isProper
     {k k₂ : Type u} [Field k] [Field k₂] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k₂ ≠ ℓ)]
     {X Y X' Y' : Scheme.{u}} [IsNoetherian Y] [IsNoetherian Y'] (aY : Y ⟶ Spec (.of k))
@@ -98,13 +94,9 @@ variable {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
 
-/-- **The projection formula for `E`**: for a proper
-`p : X ⟶ Y` and bounded constructible `E`-complexes `K` on `X` and `M` on `Y`, the projection map
-`Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is an isomorphism. The complexes have integral models
-`E ⊗ᴸ_{𝒪_E} K₀` and `E ⊗ᴸ_{𝒪_E} M₀` (`exists_derivedExtendScalars_iso_integralModel`), at which the
-projection map is invertible since the integral one is at `(K₀, M₀)`
-(`isIso_projectionMap_padicIntegersRingObj_of_boundedConstructible`,
-`isIso_projectionMap_app_app_padicSubfield_of_padicIntegers`). -/
+/-- **The projection formula for `E`**: for a proper `p : X ⟶ Y` and bounded constructible
+`E`-complexes `K` on `X` and `M` on `Y`, the projection map `Rp_* K ⊗ᴸ M ⟶ Rp_*(K ⊗ᴸ Lp^* M)` is
+an isomorphism. -/
 theorem isIso_projectionMap_continuousMapRingObj_of_boundedConstructible
     (E : FiniteIntermediateField ℓ) (p : X ⟶ Y) [IsProper p.left]
     (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})

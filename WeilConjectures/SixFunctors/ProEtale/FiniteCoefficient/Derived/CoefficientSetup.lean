@@ -64,11 +64,7 @@ A family `P X ⊂ D(X_proét, Λ)` of subcategories, indexed by all schemes `X`,
 setup* over the field `k` if every `P X` is a triangulated subcategory of `D(X_proét, Λ)`,
 closed under isomorphisms, the family is stable under `Lf^*` for every morphism `f`, and stable
 under `Rf_!` for every compactifiable quasi-compact morphism `f : X ⟶ Y` whose target `Y` is
-locally of finite type and quasi-compact over `Spec k`.
-
-This predicate makes sense for any coefficient ring, and
-`AlgebraicGeometry.ProEtale.isCoefficientSetup_constructibleFiniteTor` proves it for
-`P = Dᵇctf(-, Λ)` with `Λ` finite of exponent invertible on `k`. -/
+locally of finite type and quasi-compact over `Spec k`. -/
 structure IsCoefficientSetup (k : Type u) [Field k]
     (P : ∀ X : Scheme.{u},
       ObjectProperty (_root_.DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} Λ)))) :

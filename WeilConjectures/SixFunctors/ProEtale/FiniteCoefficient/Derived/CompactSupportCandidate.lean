@@ -68,14 +68,9 @@ open Scheme
 
 variable (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Compact-support candidate attached
-to a compactification.
-
-For a compactification `c = (X ⟶[j] X̄ ⟶[f̄] Y)` of `f`, the functor `Rf^c_{!,n} = Rf̄_* j_!`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification`, defined on all of
-`D(X_proét, Λ)` with `j_!` exact and `Rf̄_*` computed by K-injective resolutions), restricted to
-the full subcategory `D⁺_et(X, Λ)` of complexes coming from the étale site, the bounded below
-objects of étale origin. -/
+/-- The compact-support candidate attached to a compactification `c = (X ⟶[j] X̄ ⟶[f̄] Y)` of
+`f`: the functor `Rf^c_{!,n} = Rf̄_* j_!`, restricted to the full subcategory `D⁺_et(X, Λ)` of
+bounded below complexes of étale origin. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationEtaleOrigin (c : Compactification f) :
     (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).FullSubcategory ⥤
       _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) :=
@@ -180,17 +175,10 @@ section Refinement
 
 variable [Finite Λ] [QuasiCompact f] {c d e : Compactification f}
 
-/-- Compactification-independent
-finite-level direct image.
-
-For a refinement `r : c.Refinement d` (a proper map `c.Z ⟶ d.Z` compatible with the open
-immersions and the proper maps), the comparison isomorphism `Rf^d_{!,n} ≅ Rf^c_{!,n}` on the
-complexes `D⁺_et(X, Λ)` coming from the étale site, induced by proper composition and extension
-by zero: the étale comparison
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso`,
-transported along `ν^*`. It is the identity for the identity refinement
-(`rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_id`) and transitive under
-composition (`rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_comp`). -/
+/-- The compactification-independent finite-level direct image: for a refinement
+`r : c.Refinement d`, the comparison isomorphism `Rf^d_{!,n} ≅ Rf^c_{!,n}` on the complexes
+`D⁺_et(X, Λ)` coming from the étale site. It is the identity for the identity refinement and
+transitive under composition. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso
     (r : c.Refinement d) :
     rightDerivedLowerShriekOfCompactificationEtaleOrigin Λ d ≅

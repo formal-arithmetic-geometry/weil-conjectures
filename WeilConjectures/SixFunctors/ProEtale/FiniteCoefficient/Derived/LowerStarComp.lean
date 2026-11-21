@@ -455,13 +455,9 @@ noncomputable def rightDerivedLowerStarFactor {a : Z ⟶ X} {b : Z ⟶ Y} {c : Y
     (e : b ≫ c = a) : R((b)_*[A]) ⋙ R((c)_*[A]) ≅ R((a)_*[A]) :=
   Functor.rightDerivedFunctorCompIso' (b)_*[A] (c)_*[A] (lowerStarFactor A e)
 
-/-- Composition of derived direct images,
-the finite-level clause on the pro-étale site. For `f : X ⟶ Y` and `g : Y ⟶ Z`, the canonical
-isomorphism `c_{g,f} : Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` of functors
-`D(X_proét) ⥤ D(Z_proét)`: `f_*` preserves K-injective complexes, being right adjoint to the
-exact `f^*`, so the composite of the derived functors is the derived functor of
-`f_* ⋙ g_* ≅ (f ≫ g)_*`. It is natural, unital (`rightDerivedLowerStarComp_id_left`,
-`rightDerivedLowerStarComp_id_right`) and associative (`rightDerivedLowerStarComp_assoc`). -/
+/-- Composition of derived direct images, the finite-level clause on the pro-étale site. For
+`f : X ⟶ Y` and `g : Y ⟶ Z`, the canonical isomorphism `c_{g,f} : Rf_* ⋙ Rg_* ≅ R(f ≫ g)_*` of
+functors `D(X_proét) ⥤ D(Z_proét)`. It is natural, unital and associative. -/
 noncomputable def rightDerivedLowerStarComp (f : X ⟶ Y) (g : Y ⟶ Z) :
     R((f)_*[A]) ⋙ R((g)_*[A]) ≅ R((f ≫ g)_*[A]) :=
   Functor.rightDerivedFunctorCompIso' (f)_*[A] (g)_*[A] (lowerStarComp A f g)

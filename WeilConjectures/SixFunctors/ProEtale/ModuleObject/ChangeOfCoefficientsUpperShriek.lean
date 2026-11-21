@@ -48,9 +48,8 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 separated `k`-schemes of finite type, the exchange `Rf^!_Λ ⋙ T ⟶ T ⋙ Rf^!_{Λ'}` for the
 extension of scalars `T` along `Λ ⟶ Λ'` is an isomorphism on bounded constructible complexes
 when `Λ ⟶ Λ'` is
-1. the reduction `Λ ⟶ Λ ⧸ J` of a finite coefficient ring (on the étale site, an isomorphism
-   `(Rf^! L) ⊗ᴸ Λ ⧸ J ≅ Rf^!(L ⊗ᴸ Λ ⧸ J)`),
-2. the reduction `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ` (read on the étale site),
+1. the reduction `Λ ⟶ Λ ⧸ J` of a finite coefficient ring,
+2. the reduction `𝒪_E ⟶ 𝒪_E ⧸ ℓⁿ`,
 3. the inclusion `E ⟶ F` of finite subextensions of `ℚ̄_ℓ / ℚ_ℓ`,
 4. the inclusion `𝒪_E ⟶ E`,
 5. the inclusion `E ⟶ ℚ̄_ℓ`,

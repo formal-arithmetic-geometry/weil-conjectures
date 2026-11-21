@@ -776,8 +776,7 @@ private theorem conjugate_transpose
   simp only [Category.assoc, Adjunction.homEquiv_counit]
 
 set_option backward.isDefEq.respectTransparency false in
-/-- Canonical tensor comparisons for three fixed functors, with their tensor structures
-stored once. This bundle prevents repeated proof abstraction inside concrete derived tensors. -/
+/-- Canonical tensor comparisons for three fixed functors, with their tensor structures. -/
 structure TraceComparisonData
     {C : Type u₁} {D : Type u₂} {V : Type u₃}
     [Category.{v₁} C] [Category.{v₂} D] [Category.{v₃} V]

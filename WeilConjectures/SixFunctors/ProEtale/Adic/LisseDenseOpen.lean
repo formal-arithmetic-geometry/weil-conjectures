@@ -82,11 +82,7 @@ lemma eq_zero_of_upperStar_map_eq_zero_of_specializes (k : W ⟶ Y) [h : WeaklyE
 
 /-- **Morphisms into a lisse sheaf are detected on a generizing open.** Let `k : W ⟶ Y` be
 weakly étale such that every point of `Y` specializes from a point in the image of `k`, and let
-`H` be a lisse `ℓ`-adic sheaf on `Y`. A morphism `φ : N ⟶ H` with `k^* φ = 0` vanishes: on a
-trivialising cover `f_i : V_i ⟶ Y` its components are morphisms into `ℚ̄_ℓ` whose pullbacks to
-`V_i ×_Y W` vanish, and `V_i ×_Y W ⟶ V_i` inherits the specialization property because the flat
-`f_i` lifts generizations
-(`AlgebraicGeometry.ProEtale.eq_zero_of_upperStar_map_eq_zero_of_specializes`). -/
+`H` be a lisse `ℓ`-adic sheaf on `Y`. A morphism `φ : N ⟶ H` with `k^* φ = 0` vanishes. -/
 theorem IsAdicLisseSheaf.eq_zero_of_adicUpperStar_map_eq_zero (k : W ⟶ Y) [WeaklyEtale k]
     (hk : ∀ y : Y, ∃ w : W, k.base w ⤳ y) {N H : AdicSheaf l Y} (hH : IsAdicLisseSheaf H)
     (φ : N ⟶ H) (hφ : (k)^*ᵃ[l].map φ = 0) : φ = 0 := by

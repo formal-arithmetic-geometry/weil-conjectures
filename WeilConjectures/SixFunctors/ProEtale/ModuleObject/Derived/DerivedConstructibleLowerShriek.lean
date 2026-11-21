@@ -50,11 +50,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   (H : PreservesBoundedConstructiblePushforwards Λ k)
 
 /-- The lower shriek attached to a compactification `c = (i, p)` is compatible with the ambient
-lower shriek `R(p_*) ∘ D(i_!)` for the same `c`: `ι_Y ∘ Rf_!^c ≅ R(p_*) ∘ D(i_!) ∘ ι_X`.
-Following the proof: with `F = i_!`, `G = Rp_*` the two restrictions, `a : ι_Z F ≅ D(i_!) ι_X`
-and `b : ι_Y G ≅ R(p_*) ι_Z` their inclusion compatibilities, the component at `K` is
-`R(p_*)(a_K) ∘ b_{F K}`; it is a natural isomorphism by pasting `b` (whiskered by `F`) and
-`a` (whiskered by `R(p_*)`), with inverse and naturality those of the pasted isomorphisms. -/
+lower shriek `R(p_*) ∘ D(i_!)` for the same `c`: `ι_Y ∘ Rf_!^c ≅ R(p_*) ∘ D(i_!) ∘ ι_X`. -/
 noncomputable def boundedConstructibleLowerShriekOfCompactificationOfPreservesCompatibility
     {f : X ⟶ Y} (c : Compactification.BoundaryCompactification f.left) :
     boundedConstructibleLowerShriekOfCompactificationOfPreserves Λ ℓ H c ⋙

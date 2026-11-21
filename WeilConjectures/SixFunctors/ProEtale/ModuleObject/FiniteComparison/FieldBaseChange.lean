@@ -105,9 +105,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 a finite discrete ring killed by an integer `n` invertible in `k`, `aX : X ⟶ Spec k`
 quasi-compact and quasi-separated, `aY : Y ⟶ Spec k` locally of finite type and quasi-compact,
 and `W = X ×_k Y`. For every complex `A` of module objects over `T̲_X` bounded below of étale
-origin, the base change morphism `Laᵧ^* Ra_{X*} A ⟶ Rp₂_* Lp₁^* A` is an isomorphism. This is
-`AlgebraicGeometry.ProEtale.isIso_derivedBaseChangeMap_app_of_field` read through the
-finite-coefficient comparison (`ProEtale.isIso_baseChangeMap_app_finiteCoefficient_iff`). -/
+origin, the base change morphism `Laᵧ^* Ra_{X*} A ⟶ Rp₂_* Lp₁^* A` is an isomorphism. -/
 theorem isIso_baseChangeMap_app_of_field_finiteCoefficient [LocallyOfFiniteType aY]
     [QuasiCompact aY] [QuasiCompact aX] [QuasiSeparated aX] (sq : IsPullback p₁ p₂ aX aY)
     (n : ℕ) (hn : IsUnit (n : k)) (hT : (n : T) = 0)

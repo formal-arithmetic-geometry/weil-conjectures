@@ -53,14 +53,7 @@ variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] [Dis
 coefficients). Let `k` be a separably closed field, `p : X ⟶ Spec k` locally of finite type and
 `C` a complex of `T̲`-modules on `X_proét` which is bounded below of étale origin. If for every
 non-closed point `x` some `h : W ⟶ X` through `x` has `Lh^* C = 0`, and `Rp_* C = 0`, then
-`C = 0`.
-
-Write `Φ C ≅ ν^* G` with `G` a bounded below étale complex. Then `Lh^* G = 0` (`ν^*` commutes
-with pullback and reflects zero objects), so the stalks of `ℋ^q(G)` at the geometric points over
-the non-closed points vanish, and `RΓ(X_ét, G) ≅ RΓ(Spec k, Rp_* G)` with
-`Rp_* G ≅ Rp_* Rν_* ν^* G ≅ Rν_* Rp_* Φ C ≅ Rν_* Φ (Rp_* C) = 0`; hence `G = 0` by
-`AlgebraicGeometry.Etale.isZero_iff_forall_isZero_homology_rightDerivedGlobalSections_of_isGE`.
--/
+`C = 0`. -/
 theorem isZero_of_isZero_leftDerivedUpperStar_of_not_isClosed {k : Type u} [Field k]
     [IsSepClosed k] {X : Scheme.{u}}
     (p : X ⟶ Spec (.of k)) [LocallyOfFiniteType p]

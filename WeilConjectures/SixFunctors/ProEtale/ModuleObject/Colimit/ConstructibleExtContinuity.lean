@@ -104,20 +104,15 @@ theorem homCommutesWithFilteredColimits_of_boundedConstructible_continuousMapRin
       (fun _ _ ↦ homCommutesWithFilteredColimits_singleFunctor_continuousMapRingObj ℓ E.1 _)
       X F hF) C.property
 
-/-- For the coefficient ring `E̲` of a finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. Let `X` be a
-topologically noetherian scheme, `C ∈ Dᵇc(X, E)`, and `K = colim_j K_j` a filtered colimit of
-complexes of `E_X`-modules all of which vanish below a fixed degree `a`. Then for every `q ∈ ℤ`, the
-natural map `colim_j Hom(C, K_j[q]) ⟶ Hom(C, K[q])` is bijective:
+/-- Continuity of `Hom` out of a bounded constructible complex, for the coefficient ring `E̲` of a
+finite subextension `E ⊆ ℚ̄_ℓ` of `ℚ_ℓ`. Let `X` be a topologically noetherian scheme,
+`C ∈ Dᵇc(X, E)`, and `K = colim_j K_j` a filtered colimit of complexes of `E_X`-modules all of
+which vanish below a fixed degree `a`. Then for every `q ∈ ℤ`, the natural map
+`colim_j Hom(C, K_j[q]) ⟶ Hom(C, K[q])` is bijective:
 
 * every morphism `C ⟶ K[q]` factors through some `K_j[q]`;
 * two morphisms `C ⟶ K_j[q]` with the same image in `Hom(C, K[q])` agree in some
-  `Hom(C, K_{j'}[q])`.
-
-The morphisms out of `C` commute with filtered colimits of sheaves
-(`homCommutesWithFilteredColimits_of_boundedConstructible_continuousMapRingObj`), hence with
-filtered colimits of uniformly bounded below complexes
-(`DerivedCategory.HomCommutesWithFilteredColimits.diagram`), since `C` is bounded above and
-filtered colimits of `E_X`-modules are exact. -/
+  `Hom(C, K_{j'}[q])`. -/
 theorem constructibleExtContinuity_continuousMapRingObj [TopologicalSpace.NoetherianSpace X]
     (C : Dᵇc(X)⟦Profinite.continuousMapRingObj E⟧) {J : Type} [SmallCategory J] [IsFiltered J]
     (K : J ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})

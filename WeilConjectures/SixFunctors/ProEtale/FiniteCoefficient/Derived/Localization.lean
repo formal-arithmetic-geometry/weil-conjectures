@@ -169,12 +169,7 @@ theorem isZero_of_isZero_mapDerivedCategoryUpperStar_of_isCompl [QuasiCompact j]
 
 /-- An object `E` of `D(X_proét)` with `D(j^*) E = 0` lies in the essential image of `Ri_*`,
 for a closed immersion `i` whose range is the complement of the range of the quasi-compact open
-immersion `j`.
-
-The unit `E ⟶ D(i_*) D(i^*) E` of the adjunction `D(i^*) ⊣ D(i_*)` (both functors are exact) is
-an isomorphism: its cone is killed by `D(i^*)`, which inverts the unit because the counit
-`i^* i_* ⟶ 𝟭` is invertible, and by `D(j^*)`, as both ends of the unit are killed by `D(j^*)`;
-so the cone vanishes (`isZero_of_isZero_mapDerivedCategoryUpperStar_of_isCompl`). -/
+immersion `j`. -/
 theorem rightDerivedFunctor_lowerStar_essImage_of_isZero [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     {E : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))}
@@ -204,16 +199,13 @@ theorem rightDerivedFunctor_lowerStar_essImage_of_isZero [QuasiCompact j]
       (asIso (adj.unit.app E)).symm⟩⟩
 
 /-- Let `i : Z ⟶ X` be a closed immersion whose range is the complement of the range of the
-quasi-compact open immersion `j : U ⟶ X` (for instance, `X` noetherian), and let
-`Ri^!` be the right adjoint of the direct image `Ri_*` on the unbounded derived categories of
-pro-étale sheaves of `R`-modules
-(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`). For every `K`, the
-counit of `Ri_* ⊣ Ri^!` and the unit of `Lj^* ⊣ Rj_*` extend to a distinguished triangle
-
+quasi-compact open immersion `j : U ⟶ X` (for instance, `X` noetherian), and let `Ri^!` be the
+right adjoint of the direct image `Ri_*` on the unbounded derived categories of pro-étale sheaves
+of `R`-modules. For every `K`, the counit of `Ri_* ⊣ Ri^!` and the unit of `Lj^* ⊣ Rj_*` extend
+to a distinguished triangle
 ```
-  Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1].
+Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1].
 ```
-
 No constructibility of `Ri^! K` is involved. -/
 theorem exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
@@ -239,14 +231,10 @@ theorem exists_distTriang_derivedLowerStarClosedUpperShriekAdjunction_counit [Qu
     (rightDerivedFunctor_lowerStar_essImage_of_isZero i j hij hK')
 
 /-- The *closed-support triangle* of `K` with connecting map `w`:
-
 ```
-  Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1]
+Ri_* Ri^! K --ε_K--> K --η_K--> Rj_* Lj^* K --w--> (Ri_* Ri^! K)[1]
 ```
-
-where `ε` is the counit of `Ri_* ⊣ Ri^!`
-(`AlgebraicGeometry.ProEtale.derivedLowerStarClosedUpperShriekAdjunction`) and `η` the unit of
-`Lj^* ⊣ Rj_*`. -/
+where `ε` is the counit of `Ri_* ⊣ Ri^!` and `η` the unit of `Lj^* ⊣ Rj_*`. -/
 noncomputable abbrev closedSupportTriangle [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base))
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R)))

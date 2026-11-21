@@ -82,8 +82,7 @@ attribute [local irreducible] upperStarFromPoint
   moduleObjectProjectionMap
   DerivedCategory HasDerivedCategory.standard CategoryTheory.Mod.monoidalCategory
 
-/-- The canonical push comparison for the coefficient inclusion O_E -> E. Its definition
-only supplies the flatness proof to the recorded `derivedPushHom`; it does not choose a map. -/
+/-- The canonical push comparison for the coefficient inclusion `O_E → E`. -/
 def rationalizationPushHom (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) {X Y : Scheme.{u}} (p : X ⟶ Y) :
     (lowerStar (Profinite.padicIntegersRingObj ℓ E.1) p).rightDerivedFunctor ⋙
@@ -96,15 +95,13 @@ def rationalizationPushHom (ℓ : ℕ) [Fact ℓ.Prime]
       Exists.elim hj.2 fun _ ht ↦ Exists.elim ht.2.2 fun _ hα ↦ hα.2.2.2
   derivedPushHom (padicIntegersRingObjToContinuousMapRingObj ℓ E) p
 
-/-- The existing finiteness preservation proof for `ℚ̄_ℓ`, named to avoid repeated expansion
-in the canonical restricted base-change map. This supplies a proof, never extra map data. -/
+/-- Preservation of finiteness for `ℚ̄_ℓ` coefficients. -/
 abbrev rationalFinitenessPushforwardPreservation (ℓ : ℕ) [Fact ℓ.Prime]
     {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
     PreservesBoundedConstructiblePushforwards (Profinite.padicAlgClRingObj ℓ) k :=
   fun f K ↦ boundedConstructible_rightDerivedLowerStar_obj ℓ f K
 
-/-- The existing finiteness preservation proof for a finite subextension `E`, named to avoid
-repeated expansion in the canonical restricted base-change map. -/
+/-- Preservation of finiteness for coefficients in a finite subextension `E`. -/
 abbrev ContinuousMapRingObj.rationalFinitenessPushforwardPreservation (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ)
     {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] :
@@ -119,8 +116,7 @@ attribute [local irreducible] rationalizationPushHom
   DerivedCategory.monoidalCategoryOfMonoidalClosedBraidedCategory
   Functor.mapDerivedCategory
 
-/-- The named preservation proof for precisely the two rational coefficient cases.
-The bundled ring equality fixes multiplication as well as the underlying coefficient sheaf. -/
+/-- Preservation of finiteness for the two rational coefficient cases. -/
 abbrev rationalCoefficientPushforwardPreservation
     (ℓ : ℕ) [Fact ℓ.Prime]
     (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}))

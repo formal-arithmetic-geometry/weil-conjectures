@@ -147,9 +147,8 @@ private theorem generators_detect_iso
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} {f : X ⟶ Y}
 
-/-- Restrict the existing `Rp_* D(j_!)` to the recorded localizing closures, once its
-preservation of these object properties is established. The proof argument supplies only
-membership; objects and maps are exactly those of the ambient compactification functor. -/
+/-- Restrict `Rp_* D(j_!)` to the localizing closures, given that it preserves the relevant
+object properties. -/
 noncomputable def localizingLowerShriek (c : Compactification f)
     (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y
       ((rightDerivedLowerShriekOfCompactification Λ c).obj K)) :
@@ -174,9 +173,7 @@ noncomputable instance localizingLowerShriekCommShift (c : Compactification f)
 set_option linter.unusedVariables false in
 /-- The compactification lower shriek on localizing closures has an exact right adjoint,
 unique up to the unique counit-compatible isomorphism, and that adjoint preserves all small
-coproducts. The existential triangulated structures are proofs that the recorded object
-properties are triangulated; the full subcategories inherit their ambient triangles.
-The base field has finite ℓ-cohomological dimension `hcd`. -/
+coproducts. The base field has finite ℓ-cohomological dimension `hcd`. -/
 theorem exists_localizingExceptionalAdjoint
     (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k]
     [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]

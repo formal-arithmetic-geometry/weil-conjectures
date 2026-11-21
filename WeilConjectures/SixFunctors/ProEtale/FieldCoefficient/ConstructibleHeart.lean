@@ -94,11 +94,8 @@ namespace DerivedCategory
 variable (Λ X) in
 /-- The constructible heart at the stage `Λ = E`: the heart `D^{≤ 0}_c(X, Λ) ∩ D^{≥ 0}_c(X, Λ)` of
 the standard `t`-structure on `D^b_c(X, Λ)`, as an object property of `D(X_proét, Λ)`: the
-bounded constructible complexes `K` with `τ^{≥ 1} K = 0` and `τ^{≤ -1} K = 0`. Its objects are the
-constructible `E`-adic sheaves placed in degree `0`
-(`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart_iff`), and it is equivalent to
-the abelian category of constructible `E`-adic sheaves
-(`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeartEquiv`). -/
+bounded constructible complexes `K` with `τ^{≥ 1} K = 0` and `τ^{≤ -1} K = 0`. It is equivalent
+to the abelian category of constructible `E`-adic sheaves. -/
 def fieldConstructibleHeart : ObjectProperty (_root_.DerivedCategory (FieldSheaf Λ X)) :=
   boundedFieldConstructible Λ X ⊓ _root_.DerivedCategory.TStructure.t.le 0 ⊓
     _root_.DerivedCategory.TStructure.t.ge 0

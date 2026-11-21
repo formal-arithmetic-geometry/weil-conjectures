@@ -194,8 +194,7 @@ square `g' ≫ f = f' ≫ g`, the comparisons `finiteEtaleReadingUpperStarIso` (
 `ρ ⋙ Lh^*_{ét} ⟶ Lh^* ⋙ ρ`) are compatible with the pullback square comparisons
 `Lf'^* Lg^* ≅ Lg'^* Lf^*` on bounded constructible condensed `𝒪_E ⧸ ℓⁿ`-complexes
 (`boundedConstructiblePullbackSquareComparison`) and on étale complexes
-(`Etale.derivedSquareUpperStarIso`). This is the hypothesis of the cube law of mates
-`CategoryTheory.mateEquiv_app_cube` for the étale reading. -/
+(`Etale.derivedSquareUpperStarIso`). -/
 theorem finiteEtaleReadingUpperStarIso_cube (sq : CommSq g' f' f g)
     (M : Dᵇc(Y.left)⟦Profinite.integersModPowRingObj ℓ E n⟧) :
     L(Etale.upperStar (ModuleCat.{u + 1} (integersModPowCoeff.{u} ℓ E n)) f'.left).map

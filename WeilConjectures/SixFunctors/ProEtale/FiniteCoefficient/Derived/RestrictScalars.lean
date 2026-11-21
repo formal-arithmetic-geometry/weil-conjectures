@@ -168,17 +168,7 @@ variable {A₀ A₁ A₂ B₀ B₁ B₂ : Type*} [Category A₀] [Category A₁]
 /-- The isomorphisms `Functor.mapDerivedCategorySquareIso` induced on derived categories are
 compatible with the pasting of squares of exact functors along composition isomorphisms
 `e : p₁₂ ≅ p₂ ⋙ p₁` and `e' : P₁₂ ≅ P₂ ⋙ P₁`: if the square `α₁₂` is the pasting of `α₂` and
-`α₁` (hypothesis `h`), then so is the induced square on derived categories.
-
-```
-        P₂        P₁                       P₁₂
-   A₀ ─────▶ A₁ ─────▶ A₂            A₀ ─────────▶ A₂
-   │r₀  α₂   │r₁  α₁   │r₂     =     │r₀    α₁₂    │r₂
-   ▼         ▼         ▼             ▼             ▼
-   B₀ ─────▶ B₁ ─────▶ B₂            B₀ ─────────▶ B₂
-        p₂        p₁                       p₁₂
-```
--/
+`α₁` (hypothesis `h`), then so is the induced square on derived categories. -/
 lemma mapDerivedCategorySquareIso_hom_app_comp (α₂ : r₀ ⋙ p₂ ≅ P₂ ⋙ r₁)
     (α₁ : r₁ ⋙ p₁ ≅ P₁ ⋙ r₂) (α₁₂ : r₀ ⋙ p₁₂ ≅ P₁₂ ⋙ r₂) (e : p₁₂ ≅ p₂ ⋙ p₁)
     (e' : P₁₂ ≅ P₂ ⋙ P₁)

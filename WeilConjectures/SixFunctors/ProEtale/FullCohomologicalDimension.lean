@@ -115,10 +115,7 @@ lemma etaleOrigin_upperStar_obj {X X' : Scheme.{u}} (q : X' ⟶ X)
 
 `FullCD_cls(p, A; c)` holds for `p : X ⟶ Y` if `H^r(Rp_* F) = 0` for every `r > c` and every
 pro-étale sheaf `F` of étale origin on `X`, and the same holds after every base change along an
-object `V` of `Y_proét`, for the restriction `g'^* F` of `F` to the base-changed source (which is
-again of étale origin, `AlgebraicGeometry.ProEtale.etaleOrigin_upperStar_obj`). This is
-`AlgebraicGeometry.ProEtale.HasUniformCohomologicalDimensionLE` with the quantifier over all
-sheaves restricted to the sheaves of étale origin. -/
+object `V` of `Y_proét`, for the restriction `g'^* F` of `F` to the base-changed source. -/
 def HasCohomologicalDimensionLEOnEtaleOrigin {X Y : Scheme.{u}} (p : X ⟶ Y) (c : ℕ) : Prop :=
   (∀ F : Sheaf (Scheme.ProEt.topology X) A, etaleOrigin A X F → ∀ r : ℤ, (c : ℤ) < r →
     IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
@@ -228,9 +225,7 @@ include hp hd in
 Let `k` be separably closed, `p : X ⟶ Y` a proper morphism of finite-type `k`-schemes with
 `dim X ≤ d`, and `F` a pro-étale sheaf of `Λ`-modules of étale origin on `X`. Then
 `H^r(Rp_* F) = 0` for `r > 2d`, and the same holds for the base change of `p` along every object
-`V` of `Y_proét`, applied to the restriction of `F`. The hypothesis `[HasInvertibleExponent Λ X]`
-is only there to apply
-`AlgebraicGeometry.ProEtale.isZero_homology_rightDerivedLowerStar_comparisonUpperStar`. -/
+`V` of `Y_proét`, applied to the restriction of `F`. -/
 theorem isZero_homology_rightDerivedLowerStar_of_etaleOrigin
     (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
     (hF : etaleOrigin (ModuleCat.{u + 1} Λ) X F) (r : ℤ) (hr : (2 * d : ℤ) < r) :
@@ -278,9 +273,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 
 `FullCD(p, Λ; c)` holds if and only if, for every base change `p'` of `p` along an object `V` of
 `Y_proét`, every pro-étale sheaf `F` of `Λ`-modules on the base-changed source and every `r > c`,
-the sections of `H^r(Rp'_* F)` over every affine weakly contractible object of `V_proét` vanish.
-No geometric-point stalks are used: the affine weakly contractible objects detect the vanishing
-of a pro-étale sheaf (`AlgebraicGeometry.ProEtale.isZero_iff_forall_isWeaklyContractible`). -/
+the sections of `H^r(Rp'_* F)` over every affine weakly contractible object of `V_proét` vanish. -/
 theorem hasUniformCohomologicalDimensionLE_iff_forall_isWeaklyContractible {X Y : Scheme.{u}}
     (p : X ⟶ Y) (c : ℕ) :
     HasUniformCohomologicalDimensionLE (ModuleCat.{u + 1} Λ) p c ↔

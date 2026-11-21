@@ -89,10 +89,8 @@ square `g' ≫ f = f' ≫ g` of schemes and `K` in `D(X_proét, R)`, the two com
 Lg^* Ψ Rf_* K ──α_g──▶ Ψ Lg^* Rf_* K ──Ψ(BC)──▶ Ψ Rf'_* Lg'^* K ──β_{f'}──▶ Rf'_* Ψ Lg'^* K
 Lg^* Ψ Rf_* K ──Lg^* β_f──▶ Lg^* Rf_* Ψ K ──BC──▶ Rf'_* Lg'^* Ψ K ──Rf'_* α_{g'}──▶ Rf'_* Ψ Lg'^* K
 ```
-agree, where `BC` is the derived base change map
-(`AlgebraicGeometry.ProEtale.derivedBaseChangeMap`), `α` the commutation of `Ψ` with the
-derived pullbacks and `β` the base change map of `Ψ` along `Rf_*`. This is an input for the
-compatibility of compact cohomology with the change of coefficients. -/
+agree, where `BC` is the derived base change map, `α` the commutation of `Ψ` with the derived
+pullbacks and `β` the base change map of `Ψ` along `Rf_*`. -/
 theorem derivedBaseChangeMap_extendScalars_app (sq : CommSq g' f' f g)
     (K : DerivedCategory (Sheaf (ProEt.topology X) (ModuleCat.{u + 1} R))) :
     (leftDerivedUpperStarExtendScalarsIso R S g).hom.app (R((f)_*[ModuleCat.{u + 1} R]).obj K) ≫

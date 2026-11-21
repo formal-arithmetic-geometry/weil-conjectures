@@ -104,14 +104,7 @@ variable [ProEtale.UpperStarPreservesFlat A]
 
 /-- The **projection map** `PF_c : Rf_!(c)K ⊗ᴸ L ⟶ Rf_!(c)(K ⊗ᴸ Lf^*L)` for a
 compactification `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, as a natural transformation of bifunctors
-`D(X_proét) ⥤ D(Y_proét) ⥤ D(Y_proét)`. It is the composite
-```
-Rg_*(i_!K) ⊗ᴸ L ⟶ Rg_*(i_!K ⊗ᴸ Lg^*L) ≅ Rg_*(i_!(K ⊗ᴸ Li^*Lg^*L)) ≅ Rg_*(i_!(K ⊗ᴸ Lf^*L))
-```
-of the projection map `AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap` of `g`, of
-`Rg_*` applied to the inverse of the projection formula
-`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionIso` for `i`, and of the
-isomorphism `AlgebraicGeometry.ProEtale.leftDerivedUpperStarCompactificationIso`. -/
+`D(X_proét) ⥤ D(Y_proét) ⥤ D(Y_proét)`. -/
 noncomputable def projectionMapOfCompactification :
     derivedTensorRightDerivedLowerShriek A c ⟶
       rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar A c :=

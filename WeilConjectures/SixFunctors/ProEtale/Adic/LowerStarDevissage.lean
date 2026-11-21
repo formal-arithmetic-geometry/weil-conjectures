@@ -187,9 +187,7 @@ lemma irreducibleSpace_of_isClosedImmersion_of_surjective {R W : Scheme.{u}} (r 
 between locally noetherian schemes, `F` a constructible sheaf on `Z` and `W` a nonempty open of
 `Z` such that `j^* F` has bounded constructible derived pushforward along `j : W ⟶ Z` (`hjZ`)
 and along `j ≫ g` (`hj`). If the finiteness theorem holds for constructible sheaves on the proper
-closed subschemes of `Z` (`ih`), then it holds for `F`: the cone `C` of the unit
-`F ⟶ Rj_* j^* F` is bounded with constructible cohomology sheaves and vanishes on `W`, so
-`C ≅ Ri_* i^* C` for the closed complement `i : Z₁ ⟶ Z` of `W`. -/
+closed subschemes of `Z` (`ih`), then it holds for `F`. -/
 lemma finiteLowerStar_singleFunctor_of_opens {Y Z : Scheme.{u}} [IsLocallyNoetherian Y]
     [IsLocallyNoetherian Z] (g : Z ⟶ Y)
     (ih : ∀ (Z' : Scheme.{u}) (i : Z' ⟶ Z) [IsClosedImmersion i], ¬ Function.Surjective i.base →

@@ -126,26 +126,11 @@ noncomputable def refinementCompositeIso (r : c.Refinement d) :
       (Functor.rightDerivedFunctorPlusCompIso' (Etale.lowerStar (ModuleCat.{u + 1} Λ) r.hom)
         (Etale.lowerStar (ModuleCat.{u + 1} Λ) d.g) (Etale.refinementLowerStarComp _ r))
 
-/-- Compactification coherence.
-
-For a refinement `r : c.Refinement d` of compactifications of `f` with underlying proper map
-`u = r.hom`, the canonical comparison `Rf^d_{!,n} ≅ Rf^c_{!,n}` between the compact-support
-candidates on the complexes `D⁺_et(X, Λ)` of étale origin
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso`)
-is, through the equivalence `ν^* : D⁺(X_ét, Λ) ≌ D⁺_et(X, Λ)`, the composite of `R(d.g)_*` of
-the isomorphism `α_u : (d.i)_! ≅ Ru_* (c.i)_!` with the proper composition isomorphism
-`R(d.g)_* Ru_* ≅ R(c.g)_*` (`AlgebraicGeometry.ProEtale.refinementCompositeIso`).
-
-The other clauses of the proposition are:
-* identity and transitivity:
-  `rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_id` and
-  `rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_comp`;
-* the comparison `Rf^{c}_{!,n} ≅ Rf^{d}_{!,n}` through a common refinement
-  (`rightDerivedLowerShriekOfCompactificationEtaleOriginIso`), its independence of the common
-  refinement (`rightDerivedLowerShriekOfCompactificationEtaleOriginIso_eq_refinementIso`,
-  `rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_trans_symm_eq`) and the
-  cocycle condition (`rightDerivedLowerShriekOfCompactificationEtaleOriginIso_refl`,
-  `rightDerivedLowerShriekOfCompactificationEtaleOriginIso_trans`). -/
+/-- Compactification coherence: for a refinement `r : c.Refinement d` of compactifications of
+`f` with underlying proper map `u = r.hom`, the canonical comparison `Rf^d_{!,n} ≅ Rf^c_{!,n}`
+between the compact-support candidates on `D⁺_et(X, Λ)` is, through `ν^* : D⁺(X_ét, Λ) ≌
+D⁺_et(X, Λ)`, the composite of `R(d.g)_*` of the isomorphism `α_u : (d.i)_! ≅ Ru_* (c.i)_!` with
+the proper composition isomorphism `R(d.g)_* Ru_* ≅ R(c.g)_*`. -/
 theorem rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_eq
     (r : c.Refinement d) :
     rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso Λ r =
@@ -155,16 +140,8 @@ theorem rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_eq
   ext : 1
   exact Etale.rightDerivedLowerShriekOfCompactificationPlusRefinementIso_hom_eq Λ r
 
-/-- For compactifications
-`X ⟶[j] X̄ ⟶[f̄] Y` of `f`, with `j_!` the extension by zero and `Rf̄_*` the derived direct image,
-the comparison maps along refinements (proper maps over `Y`) are natural isomorphisms
-(`rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_eq`); they are the identity
-for the identity refinement
-(`rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_id`), transitive
-(`rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_comp`), satisfy the cocycle
-condition (`rightDerivedLowerShriekOfCompactificationEtaleOriginIso_trans`), and the comparison
-between two compactifications obtained through a common refinement does not depend on that
-refinement: this lemma. -/
+/-- For compactifications `X ⟶[j] X̄ ⟶[f̄] Y` of `f`, the comparison between two
+compactifications obtained through a common refinement does not depend on that refinement. -/
 theorem rightDerivedLowerShriekOfCompactificationEtaleOriginRefinementIso_trans_symm_eq
     {c₁ c₂ e e' : Compactification f} (r : e.Refinement c₁) (s : e.Refinement c₂)
     (r' : e'.Refinement c₁) (s' : e'.Refinement c₂) :

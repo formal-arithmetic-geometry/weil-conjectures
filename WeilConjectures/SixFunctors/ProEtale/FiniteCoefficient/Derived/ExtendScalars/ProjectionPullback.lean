@@ -194,8 +194,7 @@ g^* (S ⊗_R (P ⊗ S_Y)) ──g^* π♯──▶ g^* (S ⊗_R P)
         ▼                                ▼
 S ⊗_R g^* (P ⊗ S_Y) ──▶ S ⊗_R (g^* P ⊗ S_Z) ──π♯──▶ S ⊗_R g^* P
 ```
-commutes. It is the transpose of `AlgebraicGeometry.ProEtale.sheafExtendScalarsProjection_upperStar`
-along the adjunction between extension and restriction of scalars. -/
+commutes. -/
 lemma sheafExtendScalarsProjectionTranspose_upperStar
     (P : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R)) :
     (ProEtale.upperStar (ModuleCat.{u + 1} S) g).map
@@ -365,9 +364,7 @@ Lg^* Ψ (K ⊗ᴸ S_Y) ──Lg^* ϑ♯──▶ Lg^* Ψ K
 Ψ Lg^* (K ⊗ᴸ S_Y) ──▶ Ψ (Lg^* K ⊗ᴸ S_Z) ──ϑ♯──▶ Ψ Lg^* K
 ```
 commutes, where `ϑ♯ : Ψ (K ⊗ᴸ S_Y) ⟶ Ψ K` is the transpose along `Ψ ⊣ Res` of the derived
-projection map `AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsProjection`, the vertical
-maps are `AlgebraicGeometry.ProEtale.leftDerivedUpperStarExtendScalarsIso` and the middle map is
-`Ψ` of `AlgebraicGeometry.ProEtale.leftDerivedTensorRestrictScalarsUnitUpperStarMap`. -/
+projection map. -/
 lemma leftDerivedSheafExtendScalarsProjection_transpose_upperStar
     (K : DerivedCategory (Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} R))) :
     (𝓖S).map ((Ψ[Y]).map ((leftDerivedSheafExtendScalarsProjection R S Y).app K) ≫

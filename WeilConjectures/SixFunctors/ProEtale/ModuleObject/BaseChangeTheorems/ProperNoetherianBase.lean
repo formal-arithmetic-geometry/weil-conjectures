@@ -73,12 +73,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
 /-- **Integral proper base change over noetherian bases**: for a cartesian square
 `g' ≫ p = p' ≫ g` with `p` proper, `X` noetherian, `Y` a noetherian `k`-scheme and `Y'` a
 noetherian `k₂`-scheme (`ℓ` invertible in `k` and `k₂`), the base change map with coefficients
-`𝒪_E` is invertible at every bounded constructible `𝒪_E`-complex `K₀`. Both sides are bounded
-constructible, so by derived Nakayama (`ProEtale.isIso_of_isIso_derivedReduction_map`) it
-suffices that the first derived reduction is invertible; this is the base change map with
-coefficients `𝔽_E` (`nonempty_arrowIso_derivedReduction_map_exchangeRight`) at a complex of
-étale origin, invertible by finite-level proper base change
-(`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`). -/
+`𝒪_E` is invertible at every bounded constructible `𝒪_E`-complex `K₀`. -/
 theorem isIso_baseChangeMap_app_padicIntegers_of_isProper_of_isNoetherian {k k₂ : Type u}
     [Field k] [Field k₂] [Fact (ringChar k ≠ ℓ)] [Fact (ringChar k₂ ≠ ℓ)]
     {X Y X' Y' : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] [IsNoetherian Y']

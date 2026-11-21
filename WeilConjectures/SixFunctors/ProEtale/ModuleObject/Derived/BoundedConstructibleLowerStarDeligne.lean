@@ -34,22 +34,22 @@ proper leg `Rp_*` of `Rf_!` is the proper-only functor
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleLowerStarOfIsProper`,
 not the general one of this file.
 
-## Proof of the finiteness theorem
-
-By dévissage (`AlgebraicGeometry.ProEtale.prop_of_boundedConstructibleModule`) it suffices that
-`Rf_*` carries a constructible sheaf `F` in degree `0` to a bounded constructible complex: it lies
-in degrees `≥ 0`, it is bounded above
-(`WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleBound`), and its cohomology
-sheaves are constructible
-(`WeilConjectures.AlgebraicGeometry.FiniteTypeDirectImageSingleConstructible`).
-
-## Why a separate file
+## Implementation details
 
 The finiteness theorem cannot be proved in `BoundedConstructible`: the finiteness of the direct
 image of a constructible sheaf goes through the comparison of `𝒪̲_E`-modules with `E̲`-modules,
 which imports `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization`, and that file
 imports `BoundedConstructible`. The declarations are therefore here, after
 `EllAdicRationalization` and the finiteness results, in the namespaces of `BoundedConstructible`.
+
+The finiteness theorem is false for a general condensed ring: for the constant discrete ring `𝔽_p`
+and the affine line over an algebraically closed field of characteristic `p`, Artin–Schreier gives
+`H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which is infinite.
+
+## References
+
+* SGA 4½, *Th. finitude*
+* Bhatt–Scholze, *The pro-étale topology for schemes*, Section 6.8
 
 -/
 
@@ -116,14 +116,9 @@ variable {X Y : Over (Spec (.of k))}
   (f : X ⟶ Y)
 
 omit [Fact (ringChar k).Prime] in
-/-- **Deligne's finiteness theorem** for `Rf_*` (the `Rf_*` clause of the six operations on
-`Dᵇc`): for `ℓ` invertible in `k`, the
-derived pushforward along a morphism of separated `k`-schemes of finite type carries bounded
-constructible complexes of `ℚ̄_ℓ`-sheaves to bounded constructible complexes (SGA 4½ [Th. finitude]
-for torsion coefficients; Bhatt–Scholze, Section 6.8, for `ℚ̲̄_ℓ`). It is false for a general
-condensed ring: for the constant discrete ring `𝔽_p` and the affine line over an algebraically
-closed field of characteristic `p`, Artin–Schreier gives `H¹(𝔸¹, 𝔽_p) = k[t] / (F - 1) k[t]`, which
-is infinite. -/
+/-- **Deligne's finiteness theorem** for `Rf_*`: for `ℓ` invertible in `k`, the derived pushforward
+along a morphism of separated `k`-schemes of finite type carries bounded constructible
+complexes of `ℚ̄_ℓ`-sheaves to bounded constructible complexes. -/
 lemma boundedConstructible_rightDerivedLowerStar_obj_of_ringChar_ne
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) Y.left)

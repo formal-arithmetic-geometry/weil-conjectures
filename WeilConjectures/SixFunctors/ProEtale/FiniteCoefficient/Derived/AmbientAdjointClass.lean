@@ -501,10 +501,8 @@ include aY
 finite-type `k`-schemes, `k` separably closed, with a compactification `c = (X ⟶[j] X̄ ⟶[p] Y)`
 with `dim X̄ ≤ d`, and a finite ring `Λ` whose exponent is invertible on `Y`, the class-restricted
 dimension datum `FullCD_cls(p, Λ; 2d)` holds, the functor `Rf^×(c) = ν_X^* f^× Rν_{Y,*}` is right
-adjoint to `Rf_!(c)` relative to the bounded below comparison class
-(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekOfAdjunctionHomEquiv`), and the compactification
-comparisons of these functors (`AlgebraicGeometry.ProEtale.classUpperShriekIso`) satisfy the cocycle
-condition. No adjunction on arbitrary unbounded pro-étale objects is asserted. -/
+adjoint to `Rf_!(c)` relative to the bounded below comparison class, and the compactification
+comparisons of these functors satisfy the cocycle condition. -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin_and_bijective_classAdjunction
     (c : Compactification f) (d : ℕ) (hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) :
     HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} Λ) c.g (2 * d) ∧
@@ -531,10 +529,7 @@ variable [QuasiCompact aY]
 /-- The ambient datum relative to the bounded comparison class: for the bounded constructible
 coefficient class at a finite stage `Λ`, the class-restricted datum `FullCD_cls(p, Λ; 2d)` holds
 and the exceptional adjoint relative to the class restricts to an adjunction `Rf_! ⊣ Rf^!` on the
-bounded constructible complexes of finite Tor amplitude
-(`AlgebraicGeometry.ProEtale.DerivedCategoryFiniteTor.rightDerivedLowerShriekAdjunction`). The
-unrestricted `AlgebraicGeometry.ProEtale.HasAmbientExceptionalRightAdjoint` is not asserted: it is
-false in general. -/
+bounded constructible complexes of finite Tor amplitude. -/
 theorem hasCohomologicalDimensionLEOnEtaleOrigin_and_nonempty_adjunction_constructibleFiniteTor
     (d : ℕ) (hd : topologicalKrullDim (HasCompactification.compactification f).Z ≤
       (d : WithBot ℕ∞)) :

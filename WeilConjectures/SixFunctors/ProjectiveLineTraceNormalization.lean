@@ -42,8 +42,7 @@ private meta def unfoldInstanceBoundary (e : Lean.Expr) : Lean.MetaM (Option Lea
       return some (← Lean.Meta.withTransparency .all (Lean.Meta.whnf e))
   return none
 
-/-- Construct a kernel-checked heterogeneous congruence, handling cached proof arguments
-by proof irrelevance instead of unfolding the derived-functor constructions. -/
+/-- A heterogeneous congruence, handling cached proof arguments by proof irrelevance. -/
 private meta def traceProofCongruence : Nat → Lean.Expr → Lean.Expr → Lean.MetaM Lean.Expr
   | 0, _, _ => throwError "trace congruence exhausted its structural depth"
   | fuel + 1, lhs, rhs => do

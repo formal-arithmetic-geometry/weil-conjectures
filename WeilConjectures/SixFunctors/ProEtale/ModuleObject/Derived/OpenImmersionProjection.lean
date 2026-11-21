@@ -93,13 +93,7 @@ instance isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_uni
   exact NatIso.isIso_of_isIso_app _
 
 /-- The projection map `q_{j,M,N} : Dj_! (M ⊗ᴸ Lj^* N) ⟶ Dj_! M ⊗ᴸ N` of the adjunction
-`Dj_! ⊣ Lj^*` along an open immersion `j`, as a natural transformation of bifunctors: the
-transpose of
-```
-M ⊗ᴸ Lj^* N --(η ⊗ᴸ 1)--> Lj^* Dj_! M ⊗ᴸ Lj^* N --μ--> Lj^* (Dj_! M ⊗ᴸ N),
-```
-where `η` is the unit of `Dj_! ⊣ Lj^*` and `μ` the lax monoidal structure of `Lj^*`
-(`CategoryTheory.Adjunction.projectionMap`). -/
+`Dj_! ⊣ Lj^*` along an open immersion `j`, as a natural transformation of bifunctors. -/
 noncomputable def openImmersionProjectionComparison' :
     (Functor.postcompose₂.obj D((j)_!open⟦Λ⟧)).obj
         ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((j)^*⟦Λ⟧)).obj (curriedTensor _)) ⟶

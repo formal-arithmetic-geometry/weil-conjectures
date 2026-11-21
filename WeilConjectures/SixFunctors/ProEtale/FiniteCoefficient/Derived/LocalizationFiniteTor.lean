@@ -181,11 +181,7 @@ variable [IsNoetherianRing Λ]
 
 /-- **Tor amplitude is detected on the closed and the open part.** Let `i` be a closed immersion
 whose range is the complement of the range of the quasi-compact open immersion `j`. If
-`D(i^*) K` and `D(j^*) K` have Tor amplitude in `[a, b]`, so has `K`: for a sheaf `M`, the
-pullbacks of `K ⊗ᴸ M` are `D(i^*) K ⊗ᴸ i^* M` and `D(j^*) K ⊗ᴸ j^* M`
-(`AlgebraicGeometry.ProEtale.mapDerivedCategoryUpperStarTensorSingleIso`), with homology in
-`[a, b]`, so `K ⊗ᴸ M` has homology in `[a, b]`
-(`AlgebraicGeometry.ProEtale.homologyConcentratedIn_of_mapDerivedCategory_upperStar`). -/
+`D(i^*) K` and `D(j^*) K` have Tor amplitude in `[a, b]`, so has `K`. -/
 theorem torAmplitudeIn_of_mapDerivedCategory_upperStar (i : Z ⟶ X) [IsClosedImmersion i]
     (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (hij : IsCompl (Set.range i.base) (Set.range j.base)) {a b : ℤ}

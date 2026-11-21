@@ -97,9 +97,7 @@ instance finiteDimensional_stalkSpace (t : Spec (.of (AlgebraicClosure Ω)) ⟶ 
 compatible with `f : Y' ⟶ Y`, which are equivalences at `t ≫ f` and `t`, and assume that every
 automorphism of `F_{t ≫ f}` is induced by one of `F_t` (`π₁(Y', t) → π₁(Y, t ≫ f)` is
 surjective). Let `N` be lisse on `Y` and `i : G' ⟶ f^* N` a morphism of lisse sheaves on `Y'`
-which is injective on stalks at `t`. Then `G'` is the pullback of a lisse sheaf on `Y`: the image
-of `G'_t` in `(f^* N)_t = N_{t ≫ f}` is `π₁(Y')`-stable, hence `π₁(Y)`-stable, hence the stalk
-of a lisse sheaf `G` on `Y`, and `f^* G ≅ G'` since both have the same `π₁(Y')`-representation. -/
+which is injective on stalks at `t`. Then `G'` is the pullback of a lisse sheaf on `Y`. -/
 theorem exists_upperStar_iso_of_injective {t : Spec (.of (AlgebraicClosure Ω)) ⟶ Y'}
     (hM : M.IsEquivalenceAt (t ≫ f)) (hM' : M'.IsEquivalenceAt t) (hc : IsCompatible f M M')
     (hsurj : ∀ σ : Aut (fiber (t ≫ f)), ∃ σ' : Aut (fiber t),

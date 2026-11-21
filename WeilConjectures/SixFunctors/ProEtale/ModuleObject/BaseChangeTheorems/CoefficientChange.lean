@@ -70,7 +70,7 @@ of schemes separated and of finite type over `k` and `K₀ ∈ Dᵇc(X)⟦𝒪_E
 comparisons identify the extension of scalars
 `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} BC_sq(K₀)` of the integral base-change morphism
 `BC_sq(K₀) : Lg^* Rf_* K₀ ⟶ Rf'_* Lg'^* K₀` with the base-change morphism
-`BC_sq(ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀)` of `Dᵇc(-)⟦ℚ̄_ℓ⟧`, as arrows. This holds for every commutative square. -/
+`BC_sq(ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀)` of `Dᵇc(-)⟦ℚ̄_ℓ⟧`, as arrows. -/
 theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl
     (sq : CommSq g' f' f g) (_hsq : IsPullback g'.left f'.left f.left g.left)
     (K₀ : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧) :
@@ -88,13 +88,8 @@ theorem nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl
         isIso_derivedPushHom_app_padicSubfieldRingObjToPadicAlgCl_of_isGE ℓ E p K n)
       sq _).some⟩
 
-/-- The invertibility of a `ℚ̄_ℓ`-base-change morphism reduces to the integral one: if the
-base-change morphism `BC_sq` of a cartesian square is invertible on `Dᵇc(-)⟦𝒪_E⟧` for every finite
-subextension `E ⊆ ℚ̄_ℓ`, it is invertible on `Dᵇc(-)⟦ℚ̄_ℓ⟧`. Every bounded constructible
-`ℚ̄_ℓ`-complex is `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` for some `E` and some `K₀ ∈ Dᵇc(X)⟦𝒪_E⟧`
-(`ProEtale.exists_padicAlgCl_iso_integralModel`), and the scalar comparisons identify the
-`ℚ̄_ℓ`-base-change morphism at `ℚ̄_ℓ ⊗ᴸ_{𝒪_E} K₀` with the extension of scalars of the integral one
-(`nonempty_arrowIso_boundedConstructibleBaseChange_integralToPadicAlgCl`). -/
+/-- If the base-change morphism `BC_sq` of a cartesian square is invertible on `Dᵇc(-)⟦𝒪_E⟧` for
+every finite subextension `E ⊆ ℚ̄_ℓ`, it is invertible on `Dᵇc(-)⟦ℚ̄_ℓ⟧`. -/
 theorem isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral
     [TopologicalSpace.NoetherianSpace X.left]
     (sq : CommSq g' f' f g) (hsq : IsPullback g'.left f'.left f.left g.left)

@@ -84,19 +84,11 @@ namespace ProEtale
 
 variable {f : X ⟶ Y} (c : Compactification f)
 
-/-- Compact-support candidate attached
-to a compactification, `Rf^c_{!,n} = Rf̄_* j_!` (restricted to the étale-origin complexes in
-`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationEtaleOrigin`).
-
-The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` attached to a compactification
+/-- The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` attached to a compactification
 `c = (X ⟶[i] Z ⟶[g] Y)` of `f`, on the unbounded derived categories of pro-étale sheaves:
-the functor `Di_!` induced on derived categories by the *exact* extension by zero `i_!`,
-followed by the total right derived pushforward `Rg_*`.
-
-Warning: It is deliberately *not* the total right derived functor of the composite
-`i_! ⋙ g_* = ProEtale.lowerShriek`. In general, `i_!` does not sends injective sheaves to
-`g_*`-acyclic ones, and `Rf_!` is not the derived functor of `f_!`, through its zeroth
-homology is `f_!`. Deligne made explicit calculations on $A^1$, see SGA. -/
+the functor `Di_!` induced on derived categories by the exact extension by zero `i_!`,
+followed by the total right derived pushforward `Rg_*`. It is deliberately not the total right
+derived functor of `i_! ⋙ g_* = ProEtale.lowerShriek`, although its zeroth homology is `f_!`. -/
 noncomputable abbrev rightDerivedLowerShriekOfCompactification :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
@@ -229,15 +221,8 @@ namespace ProEtale
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
 
-/-- The compactly supported derived global sections along a morphism `f : X ⟶ Y`
-admitting a compactification, *defined* as the composite
-
-`RΓc(X/Y, -) := RΓ(Y, Rf_! -) : D(X_proét) ⥤ D(A)`.
-
-The intermediate object `Rf_! K ∈ D(Y_proét)` and the coefficient complex
-`RΓc(X/Y, K) ∈ D(A)` are not definitionally the same. For the structure morphism of the
-geometric fiber of a scheme separated of finite type over a finite field this is the
-`RΓc(X, K) = RΓ(s, Ra_{X!} K)` of the trace-formula interface. -/
+/-- The compactly supported derived global sections along a morphism `f : X ⟶ Y` admitting a
+compactification, defined as the composite `RΓc(X/Y, -) := RΓ(Y, Rf_! -) : D(X_proét) ⥤ D(A)`. -/
 noncomputable def compactlySupportedGlobalSections :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤ DerivedCategory A :=
   R(f)_![A] ⋙ rightDerivedGlobalSections A Y

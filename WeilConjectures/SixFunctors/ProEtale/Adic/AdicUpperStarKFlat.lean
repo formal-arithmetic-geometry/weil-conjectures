@@ -150,13 +150,7 @@ end Scalars
 
 /-- Pullback of `ℓ`-adic sheaves along any morphism of schemes preserves ordinary K-flatness:
 if `P ⊗ N` is acyclic for every acyclic `N` on `Y`, then `f^* P ⊗ N` is acyclic for every
-acyclic `N` on `X`.
-
-Proof: forgetting ambient scalars and restricting along the coefficient realization is a
-monoidal equivalence with module objects over the condensed coefficient ring, compatible with
-pullback (`nativeScalarForgetting_pullbackIso`); there, pullback is `mapMod(f^*)`, which
-preserves K-flat complexes (`preservesKFlatComplexes_mapMod_proEtale`), followed by extension
-of scalars along an isomorphism of ring objects. -/
+acyclic `N` on `X`. -/
 theorem nativeOrdinaryKFlat_adicUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P : CochainComplex (AdicSheaf l Y) ℤ)
     (hP : ProEtaleWeilSheaf.NativeOrdinaryKFlat l Y P) :

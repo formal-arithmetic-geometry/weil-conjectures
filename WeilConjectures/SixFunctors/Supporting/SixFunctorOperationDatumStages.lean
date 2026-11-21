@@ -86,8 +86,8 @@ def sixFunctorStructure {D : FiniteFieldDatum.{u}} (X : SixFunctorSpace D) :
     X ⟶ sixFunctorPoint D :=
   ObjectProperty.homMk (Over.homMk X.obj.hom (by simp [sixFunctorPoint]))
 
-/-- Identity-proper compactification of an open immersion, with its supplied
-open-immersion proof. -/
+/-- Identity-proper compactification of an open immersion, with its supplied open-immersion
+proof. -/
 def sixFunctorOpenCompactification {D : FiniteFieldDatum.{u}}
     {X Y : SixFunctorSpace D} (j : X ⟶ Y) (hj : IsOpenImmersion j.hom.left) :
     Compactification j.hom.left :=

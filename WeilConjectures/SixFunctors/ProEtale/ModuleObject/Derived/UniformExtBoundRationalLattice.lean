@@ -138,11 +138,7 @@ theorem exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_l
 /-- Let `G₀` be a constructible `𝒪_{E,X}`-module on a scheme `X` locally of finite type over a
 perfect field, such that `Hom(G₀[0], -[q])` factors through filtered colimits and the morphisms
 `G₀[0] ⟶ B[n]` vanish for every constructible `𝒪_{E,X}`-module `B` and `n ≤ N`. Then the morphisms
-`(E ⊗ G₀)[0] ⟶ B[n]` vanish for every constructible `E_X`-module `B` and `n ≤ N`, by dévissage of
-`B` (`ProEtale.CondensedRing.prop_singleFunctor_of_isConstructibleModuleObject_of_perfectField`) to
-the generators `E ⊗ H₀`
-(`ProEtale.exists_iso_singleFunctor_extendScalars_padicIntegersToPadicSubfield_of_lowerShriek`),
-for which this is `ProEtale.eq_zero_of_extendScalars_padicIntegersToPadicSubfield`. -/
+`(E ⊗ G₀)[0] ⟶ B[n]` vanish for every constructible `E_X`-module `B` and `n ≤ N`. -/
 theorem eq_zero_of_extendScalars_padicIntegersToPadicSubfield_of_perfectField {k : Type u}
     [Field k] [PerfectField k] {X : Scheme.{u}} [TopologicalSpace.NoetherianSpace X]
     (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]

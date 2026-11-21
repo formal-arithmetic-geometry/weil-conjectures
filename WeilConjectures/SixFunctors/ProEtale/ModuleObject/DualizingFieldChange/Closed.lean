@@ -106,7 +106,7 @@ commuting with the shifts with `κ : H ⋙ ι' ≅ ι ⋙ Φ`. Let `Tr` be a dis
 with `Tr.obj₁ ≅ ι (L P)` and `Tr.obj₂ ≅ ι B`, whose image under `Φ` is distinguished, and such
 that `Tr.obj₃` (resp. `Φ Tr.obj₃`) and its shift by `-1` receive no nonzero maps from the
 `ι (L Q)` (resp. `ι' (L' Q)`). Then the mate `R B ⋙ G ⟶ R' (H B)` of `bc⁻¹` is an isomorphism at
-`B`: its transpose is the image under `Φ` of the first map of `Tr`. -/
+`B`. -/
 lemma isIso_mateEquiv_inv_app_of_triangle {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
     {L' : C' ⥤ D'} {R' : D' ⥤ C'} (adj' : L' ⊣ R') {G : C ⥤ C'} {H : D ⥤ D'}
     (bc : L ⋙ H ⟶ G ⋙ L') [IsIso bc] {ι : D ⥤ T} {ι' : D' ⥤ T'} (hι : ι.FullyFaithful)

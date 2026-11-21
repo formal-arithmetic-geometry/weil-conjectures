@@ -169,13 +169,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 variable {Λ} {P : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)} {r : ℕ}
 
 /-- A finite projective `Λ_X`-module `P`, that is, a direct summand of a finite free module
-`Λ_Xʳ` on the small pro-étale site, is `ν^*` of a finite locally constant étale sheaf.
-
-The free module `Λ_Xʳ` is `ν^*` of the finite locally constant étale sheaf `Λ_{X_ét}ʳ`, and the
-idempotent of `Λ_Xʳ` cutting out `P` comes from an endomorphism `e'` of `Λ_{X_ét}ʳ`, as `ν^*` is
-full (`AlgebraicGeometry.ProEtale.full_comparisonUpperStar`). Since `ν^*` is exact, `P` is `ν^*`
-of the kernel of `1 - e'`, which is finite locally constant
-(`AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.kernel`). -/
+`Λ_Xʳ` on the small pro-étale site, is `ν^*` of a finite locally constant étale sheaf. -/
 theorem exists_isFiniteLocallyConstantSheaf_iso_comparisonUpperStar_obj_of_retract
     (hP : Retract P (⨁ fun _ : Fin r ↦ 𝟙_ (Sheaf (Scheme.ProEt.topology X)
       (ModuleCat.{u + 1} Λ)))) :
@@ -497,14 +491,7 @@ theorem isFiniteLocallyConstant_homology_of_retract {W : Scheme.{u}}
     (HomologicalComplex.homologyFunctor _ _ n).mapIso eP
 
 omit [Finite Λ] in
-/-- A locally perfect complex on a quasi-compact quasi-separated scheme is bounded.
-
-Finitely many members `W_{k j}` of the trivialising cover, restricted to affine opens `V_j`,
-cover `X` (the cover is quasi-compact). The morphisms `V_j ⟶ X` are quasi-compact, so pullbacks
-along them detect zero sheaves
-(`AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero`).
-The pullback of `H^n(K)` to `W_i` is `H^n` of a bounded complex, which vanishes outside its
-bounds; so `H^n(K)` vanishes outside the finitely many bounds attached to the `W_{k j}`. -/
+/-- A locally perfect complex on a quasi-compact quasi-separated scheme is bounded. -/
 theorem bounded_of_isLocallyPerfect [CompactSpace X] [QuasiSeparatedSpace X]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : IsLocallyPerfect Λ K) : _root_.DerivedCategory.TStructure.t.bounded K := by

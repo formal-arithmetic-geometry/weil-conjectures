@@ -61,14 +61,8 @@ variable (R S : Type (u + 1)) [CommRing R] [CommRing S] [Algebra R S] [Finite R]
   {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] [CompactSpace Y]
 
 /-- The **comparison for the exceptional inverse image**
-`c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)`, for `Ψ = - ⊗ᴸ_R S`: the transpose for the exceptional
-adjunction `Rf_! ⊣ Rf^!` with `S`-coefficients of
-
-`Rf_! Ψ (Rf^! K) ≅ Ψ (Rf_! Rf^! K) ⟶ Ψ K`,
-
-the inverse of the comparison `b(Rf^! K)` for `Rf_!`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekExtendScalarsMap`, invertible since `Rf^! K`
-is in `Dᵇctf(X, R)`) followed by `Ψ` of the counit `ε_R(K)`. -/
+`c_{R,S}(K) : Ψ (Rf^! K) ⟶ Rf^! (Ψ K)`, for `Ψ = - ⊗ᴸ_R S`: the transpose, for the exceptional
+adjunction `Rf_! ⊣ Rf^!` with `S`-coefficients, of `Rf_! Ψ (Rf^! K) ≅ Ψ (Rf_! Rf^! K) ⟶ Ψ K`. -/
 noncomputable def rightDerivedUpperShriekExtendScalarsMap
     (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
     (hK : DerivedCategory.TStructure.t.plus K)

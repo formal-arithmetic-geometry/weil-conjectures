@@ -267,14 +267,9 @@ instance Etale.faithful_boundedConstructibleIntegral_ι_comp_rightDerivedLowerSt
         i).rightDerivedFunctor).Faithful :=
   inferInstance
 
-/-- Rationalization (scalar localization), the
-category `Dᵇc(Y, E) = Dᵇc(Y, 𝒪_E)[1/ϖ_E]` (as its full subcategory, with no Karoubi completion).
-
-The objects of `D_comp(X_ét, E)` coming from `Dᵇc(X, 𝒪_E)`: the rationalization of
-`Dᵇc(X, 𝒪_E)`, as a full subcategory of `D_comp(X_ét, E)`. Its `Hom` groups are those of
-`Dᵇc(X, 𝒪_E)` with the nonzero elements of `𝒪_E` inverted
-(`CategoryTheory.Rationalization.exists_smul_eq_map`,
-`CategoryTheory.Rationalization.map_eq_map_iff`). -/
+/-- Rationalization of `Dᵇc(X, 𝒪_E)`, as a full subcategory of `D_comp(X_ét, E)`: the category
+`Dᵇc(X, 𝒪_E)[1/ϖ_E]`, whose `Hom` groups are those of `Dᵇc(X, 𝒪_E)` with the nonzero elements
+of `𝒪_E` inverted. -/
 def Etale.DerivedCategory.boundedConstructibleRational (X : Scheme.{u}) :
     ObjectProperty (DerivedCategoryDerivedCompleteRational X.smallEtaleTopology l E) :=
   fun K ↦ ∃ L : DerivedCategoryDerivedCompleteIntegral X.smallEtaleTopology l E,

@@ -158,11 +158,8 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
 /-- The **completed direct-image exchange** `Ex_*^comp : Lg^*_comp Rf_* ⟶ Rf'_* Lg'^*_comp` of a
 commutative square `g' ≫ f = f' ≫ g`, as a natural transformation of functors
 `D(X_proét, R) ⥤ D_comp(Y'_proét, R)`: the derived completion of the exchange map
-`Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*` (`AlgebraicGeometry.ProEtale.derivedBaseChangeMap`) followed
-by `Rf'_*` of the completion map `Lg'^* ⟶ Lg'^*_comp`, extended to `(Lg^* Rf_* K)^` through the
-universal property of the completion, `Rf'_* Lg'^*_comp K` being derived complete. This is the
-map `Ex^comp_{□,K}`, an isomorphism for `f` proper and `K` derived complete with étale-origin
-reductions (proper base change on the pro-étale site). -/
+`Ex_* : Lg^* Rf_* ⟶ Rf'_* Lg'^*`, followed by `Rf'_*` of the completion map
+`Lg'^* ⟶ Lg'^*_comp`. -/
 noncomputable def completedDerivedBaseChangeMap (sq : CommSq g' f' f g) :
     R((f)_*[ModuleCat.{u + 1} R]) ⋙ completedUpperStar I hI g ⟶
       completedUpperStar I hI g' ⋙ completeRightDerivedLowerStar I hI f' :=
@@ -235,14 +232,10 @@ instance isIso_completionMapOpenImmersionLowerShriek :
 /-- The **completed extension-by-zero comparison** `j'_! Lg_U^*_comp ⟶ Lg^*_comp j_!` for a
 cartesian square `g' ≫ j = j' ≫ g''` with `j`, `j'` open immersions: at `K` it is the composite
 ```
-j'_!((Lg'^* K)^) ⟶ (j'_!((Lg'^* K)^))^ ≅ (j'_!(Lg'^* K))^ ≅ (Lg''^* j_! K)^
+j'_!((Lg'^* K)^) ⟶ (j'_!((Lg'^* K)^))^ ≅ (j'_!(Lg'^* K))^ ≅ (Lg''^* j_! K)^.
 ```
-of the completion map of `j'_!((Lg'^* K)^)`, the inverse of the completion of `j'_!` of the
-completion map of `Lg'^* K` (an isomorphism by
-`AlgebraicGeometry.ProEtale.isIso_completion_map_map_completionUnit_app`), and the completion of
-the base change isomorphism `Lg'^* ⋙ Dj'_! ≅ Dj_! ⋙ Lg''^*`
-(`AlgebraicGeometry.ProEtale.leftDerivedOpenImmersionLowerShriekBaseChangeIso`). Its inverse,
-on derived complete objects, is the comparison `Lg^*_comp j_! K ⟶ j'_! Lg_U^*_comp K`. -/
+Its inverse, on derived complete objects, is the comparison
+`Lg^*_comp j_! K ⟶ j'_! Lg_U^*_comp K`. -/
 noncomputable def completedOpenImmersionLowerShriekBaseChangeMap (hsq : IsPullback g' j' j g'') :
     completedUpperStar I hI g' ⋙
         (_root_.DerivedCategory.derivedComplete (Scheme.ProEt.topology U') I).ι ⋙
@@ -263,18 +256,11 @@ section LowerShriek
 
 variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y}
 
-/-- Completed compact-support exchange map (in its
-completed form).
-
-For a cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f` with base change
-`c ×_Y Y'`, the **completed compact-support exchange map**
-`Ex_!^comp(c) : Lg^*_comp Rf_!(c) K ⟶ (Rf'_!(c ×_Y Y') Lg'^* K)^` for `K ∈ D(X_proét, R)`
-derived complete: the derived completion of the compact-support exchange
-`Ex_! : Lg^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') Lg'^*`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChangeMap`).
-
-The target is completed, so that no inverse of the completed extension-by-zero comparison is
-needed. -/
+/-- The **completed compact-support exchange map**
+`Ex_!^comp(c) : Lg^*_comp Rf_!(c) K ⟶ (Rf'_!(c ×_Y Y') Lg'^* K)^` for `K ∈ D(X_proét, R)` derived
+complete, for a cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f` with base
+change `c ×_Y Y'`: the derived completion of the compact-support exchange
+`Ex_! : Lg^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') Lg'^*`. -/
 noncomputable def completedRightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     (_root_.DerivedCategory.derivedComplete (Scheme.ProEt.topology X) I).ι ⋙

@@ -57,15 +57,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- **Smooth base change** for bounded constructible `ℚ̄_ℓ`-complexes (at the coefficient
 ring `ℚ̄_ℓ`): for a cartesian square with `v` smooth, the base change map
-`Lv^* Rp_* K ⟶ Rp'_* Lu^* K` is an isomorphism for every bounded constructible `K`.
-
-The object `K` has an integral model `K₀` over some `𝒪_E`, the scalar comparisons
-reduce the claim to the integral base change morphism at `K₀`
-(`isIso_boundedConstructibleBaseChange_padicAlgCl_of_integral`), and derived Nakayama to its first
-derived reduction, the pro-étale base change morphism with coefficients `𝔽_E` at a complex of
-étale origin (`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`). The latter is
-finite-coefficient smooth base change (`ProEtale.isIso_derivedBaseChangeMap_app_of_smooth`), `𝔽_E`
-being killed by `ℓ`, which is invertible on `Y`. -/
+`Lv^* Rp_* K ⟶ Rp'_* Lu^* K` is an isomorphism for every bounded constructible `K`. -/
 theorem isIso_boundedConstructibleBaseChange_of_smooth (sq : IsPullback u p' p v)
     [Smooth v.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     IsIso ((boundedConstructibleBaseChange ℓ

@@ -118,17 +118,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 include hN hA s
 
-/-- Direct image preserves bounded
-constructibility on the pro-étale site.
-
-Let `Y` be of finite type over a field `k`, let `Λ` be a finite ring killed by an integer `N`
-invertible in `k`, and let `f : X ⟶ Y` be separated of finite type. If `K` is a bounded
-constructible complex on `X_proét`, then `Rf_* K` is bounded constructible on `Y_proét`.
-
-Write `K ≅ ν^* K'` for a bounded constructible étale complex `K'`. Then
-`Rf_* K ≅ ν^* Rf_* K'` (`AlgebraicGeometry.ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso`),
-and `Rf_* K'` is bounded constructible
-(`AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_finite`). -/
+/-- Direct image preserves bounded constructibility on the pro-étale site. Let `Y` be of finite
+type over a field `k`, let `Λ` be a finite ring killed by an integer `N` invertible in `k`, and
+let `f : X ⟶ Y` be separated of finite type. If `K` is a bounded constructible complex on
+`X_proét`, then `Rf_* K` is bounded constructible on `Y_proét`. -/
 theorem boundedConstructible_rightDerivedLowerStar
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hbc : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K) :
@@ -148,20 +141,11 @@ theorem boundedConstructible_rightDerivedLowerStar
     (DerivedCategory.boundedConstructible_comparisonUpperStar_mapDerivedCategory_obj
       (Etale.boundedConstructible_rightDerivedLowerStar_of_finite Λ (f ≫ s) s f rfl hK'))
 
-/-- The pro-étale direct image for objects of
-étale origin.
-
-Let `Y` be of finite type over a field `k`, let `Λ` be a finite ring killed by an integer `N`
-invertible in `k`, let `f : X ⟶ Y` be separated of finite type with `dim X ≤ d`, and let `K'`
-be a bounded constructible complex of étale sheaves of `Λ`-modules on `X` of Tor amplitude in
-`[a, b]`. Then the pro-étale direct image `Rf_* ν^* K'` is bounded constructible on `Y_proét`
-with Tor amplitude in `[a, b + 2d]`.
-
-Indeed `Rf_* ν^* K' ≅ ν^* Rf_* K'`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarMapDerivedCategoryObjIso`), where `Rf_* K'` is
-bounded constructible with Tor amplitude in `[a, b + 2d]` on the étale site
-(`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar`), and `ν^*` preserves both
-properties (`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff`). -/
+/-- The pro-étale direct image for objects of étale origin. Let `Y` be of finite type over a
+field `k`, let `Λ` be a finite ring killed by an integer `N` invertible in `k`, let `f : X ⟶ Y`
+be separated of finite type with `dim X ≤ d`, and let `K'` be a bounded constructible complex of
+étale sheaves of `Λ`-modules on `X` of Tor amplitude in `[a, b]`. Then the pro-étale direct image
+`Rf_* ν^* K'` is bounded constructible on `Y_proét` with Tor amplitude in `[a, b + 2d]`. -/
 theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerivedCategory
     (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
     {K' : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
@@ -187,18 +171,11 @@ theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar_mapDerived
       (_root_.DerivedCategory.nsmul_id_eq_zero_of_forall
         (Sheaf.nsmul_id_eq_zero_of_forall hA) K') hNY hbc hta)
 
-/-- The pro-étale direct image for all finite-Tor
-objects.
-
-Let `Y` be of finite type over a field `k`, let `Λ` be a finite ring killed by an integer `N`
-invertible in `k`, and let `f : X ⟶ Y` be separated of finite type with `dim X ≤ d`. If `K` is a
-bounded constructible complex on `X_proét` with Tor amplitude in `[a, b]`, then `Rf_* K` is
-bounded constructible on `Y_proét` with Tor amplitude in `[a, b + 2d]`.
-
-The complex `K` is `ν^* K'` for a bounded constructible étale complex `K'`, which has Tor
-amplitude in `[a, b]` since `ν^*` detects Tor amplitude
-(`AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff`); conclude by
-the case of objects of étale origin. -/
+/-- The pro-étale direct image for all finite-Tor objects. Let `Y` be of finite type over a
+field `k`, let `Λ` be a finite ring killed by an integer `N` invertible in `k`, and let
+`f : X ⟶ Y` be separated of finite type with `dim X ≤ d`. If `K` is a bounded constructible
+complex on `X_proét` with Tor amplitude in `[a, b]`, then `Rf_* K` is bounded constructible on
+`Y_proét` with Tor amplitude in `[a, b + 2d]`. -/
 theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar
     (d : ℕ) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
@@ -216,13 +193,10 @@ theorem boundedConstructible_and_torAmplitudeIn_rightDerivedLowerStar
   exact ⟨(DerivedCategory.boundedConstructible _ Y).prop_of_iso e' h.1,
     (DerivedCategory.torAmplitudeIn _ Y a (b + 2 * (d : ℤ))).prop_of_iso e' h.2⟩
 
-/-- Tor amplitude of the pro-étale
-direct image.
-
-In the situation of `AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`,
-for a finite ring `Λ`, if `dim X ≤ d` and `K` has Tor amplitude in `[a, b]`, then `Rf_* K` has
-Tor amplitude in `[a, b + 2d]`. The shift `2d` is the uniform vanishing of `Rᵖf_*` above twice
-the dimension of the source, for torsion coefficients of order invertible on the base. -/
+/-- Tor amplitude of the pro-étale direct image. In the situation of
+`AlgebraicGeometry.ProEtale.boundedConstructible_rightDerivedLowerStar`, for a finite ring `Λ`,
+if `dim X ≤ d` and `K` has Tor amplitude in `[a, b]`, then `Rf_* K` has Tor amplitude in
+`[a, b + 2d]`. -/
 theorem torAmplitudeIn_rightDerivedLowerStar (d : ℕ)
     (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (a b : ℤ)
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
@@ -240,27 +214,16 @@ section OpenImmersion
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {U X : Scheme.{u}} (j : U ⟶ X)
   [IsOpenImmersion j] [QuasiCompact j]
 
-/-- Scalar projection formula and the
-Tor bound for an open immersion.
-
-Let `Λ` be a finite ring and `j : U ⟶ X` a quasi-compact open immersion whose higher direct
-images `Rᵠj_* F` of étale sheaves of `Λ`-modules vanish for `q > d`, that is
-`d ≥ cd(j)`; for schemes of finite type over a separably closed field this holds with
-`d = 2 dim U` (`AlgebraicGeometry.Etale.isZero_higherDirectImage_of_two_mul_lt`, see
-`projection_torAmplitudeIn_rightDerivedLowerStar_of_isOpenImmersion_of_isSepClosed`). Let
-`K ∈ D(U_ét, Λ)` have Tor
+/-- Scalar projection formula and the Tor bound for an open immersion. Let `Λ` be a finite ring
+and `j : U ⟶ X` a quasi-compact open immersion whose higher direct images `Rᵠj_* F` of étale
+sheaves of `Λ`-modules vanish for `q > d`, that is `d ≥ cd(j)`. Let `K ∈ D(U_ét, Λ)` have Tor
 amplitude in `[a, b]`. Then:
 
 1. for every `Λ`-module `M`, the projection map `Rj_* K ⊗ᴸ M_X ⟶ Rj_*(K ⊗ᴸ Lj^* M_X)` is an
-   isomorphism
-   (`Etale.isIso_rightDerivedLowerStarProjectionMap_constantSingle_of_cohomologicalDimension`,
-   by generation of `D(Λ)` by `Λ` and commutation of
-   `Rj_*` with direct sums, instead of computing sections);
-2. `Rj_* K` has Tor amplitude in `[a, b + d]` on `X_ét`
-   (`AlgebraicGeometry.Etale.torAmplitudeIn_rightDerivedLowerStar_of_cohomologicalDimension`, by
-   the residue test applied to (1));
+   isomorphism;
+2. `Rj_* K` has Tor amplitude in `[a, b + d]` on `X_ét`;
 3. `Rj_{proét,*} ν_U^* K ≅ ν_X^* Rj_* K` has Tor amplitude in `[a, b + d]` against every
-   module sheaf on `X_proét` (comparison of direct images and of Tor amplitude under `ν^*`). -/
+   module sheaf on `X_proét`. -/
 theorem projection_torAmplitudeIn_rightDerivedLowerStar_of_isOpenImmersion (d : ℕ)
     (hd : ∀ (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
       IsZero (((Etale.lowerStar (ModuleCat.{u + 1} Λ) j).rightDerived q).obj F)) (a b : ℤ)

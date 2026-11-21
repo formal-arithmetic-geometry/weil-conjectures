@@ -181,8 +181,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
   [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
 
 /-- Transport the ambient tensor comparison back along the specified inverse-image
-identification. Its representative normalization is the remaining chain-level step
-in the proof of the published-system tensor identification. -/
+identification. -/
 noncomputable def publishedSystemTransportedTensor {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (pullbackTensorCalculus l E Y).systemClosed.tensor ⋙
         pullbackTensorSequenceDerived l E f ≅
@@ -500,11 +499,7 @@ theorem publishedSystemTransportedTensor_eq_of_flat_normalized {X Y : Scheme.{u}
   exact (pullbackTensorSystemComparison_existsUnique l E f).exists.choose_spec P Q hP hQ
 
 /-- On flat K-flat representatives, the transported ambient comparison has the
-same inverse representative rectangle as `pullbackTensorSystemComparison`.
-The proof identifies the ordinary pure-tensor map,
-its signed total complex map, and the exact-localization model maps on every
-summand; the `sequence_inverse_eq` transport removes the ambient presentation.
--/
+same inverse representative rectangle as `pullbackTensorSystemComparison`. -/
 theorem publishedSystemTransportedTensor_normalized {X Y : Scheme.{u}}
     (f : X ⟶ Y)
     (P Q : CochainComplex (coefficientSequenceModules l E Y) ℤ)

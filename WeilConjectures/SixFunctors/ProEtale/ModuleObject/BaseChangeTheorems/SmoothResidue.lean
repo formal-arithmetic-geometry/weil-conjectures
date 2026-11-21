@@ -58,11 +58,7 @@ variable {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} 
 /-- **The first derived reduction of the integral base change map**: for every commutative square
 and every bounded below `K ∈ D(𝒪_{E,X})`, the reduction `(Lg^* Rf_* K ⟶ Rf'_* Lg'^* K) ⊗ᴸ 𝔽_E` of
 the base change map with coefficients `𝒪_E` and the base change map with coefficients
-`𝔽̲_E = C(-, 𝔽_E)` at `K ⊗ᴸ 𝔽_E` are isomorphic arrows. It is the transfer of exchange morphisms
-along the non-flat coefficient change `𝒪_E ⟶ 𝔽_E`
-(`nonempty_arrowIso_map_exchangeRight_derivedExtendScalars_of_nonFlat'`), whose (Push)
-comparisons are invertible on bounded below complexes
-(`isIso_derivedUpperStarExtendScalarsPushHom_residueField_app`). -/
+`𝔽̲_E = C(-, 𝔽_E)` at `K ⊗ᴸ 𝔽_E` are isomorphic arrows. -/
 theorem nonempty_arrowIso_derivedExtendScalars_residueField_map_baseChangeMap
     (sq : CommSq g' f' f g)
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})

@@ -103,9 +103,8 @@ X' --g'--> X
 Y' --g---> Y
 ```
 with `f` proper and `g` arbitrary, and a complex `K` of pro-étale sheaves on `X` bounded below of
-étale origin (`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét, Λ)`, an étale-origin witness), the pro-étale exchange
-map `Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is an isomorphism. Being a statement about a component of a
-natural transformation, it does not depend on the choice of the witness. -/
+étale origin (`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét, Λ)`), the pro-étale exchange map
+`Lg^* Rf_* K ⟶ Rf'_* Lg'^* K` is an isomorphism. -/
 theorem isIso_derivedBaseChangeMap_app_of_isProper [Finite Λ] [IsProper f]
     (sq : IsPullback g' f' f g)
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
@@ -160,19 +159,7 @@ noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeIso
 cartesian square `g' ≫ f = f' ≫ g` and a compactification `c` of `f`, the natural
 transformation `Lg^* Rf_!(c) ⟶ Rf'_!(c ×_Y Y') Lg'^*` of functors
 `D(X_proét) ⥤ D(Y'_proét)`, where `c ×_Y Y' = c.ofIsPullback sq` is the base changed
-compactification of `f'`, with
-`h : c.Z ×_Y Y' ⟶ c.Z` the projection. It is the composite
-```
-Lg^* R(c.g)_* (c.i)_! ⟶ R(c'.g)_* Lh^* (c.i)_! ≅ R(c'.g)_* h^* (c.i)_!
-  ≅ R(c'.g)_* (c'.i)_! g'^*
-  ≅ R(c'.g)_* (c'.i)_! Lg'^*
-```
-of the derived base change map of the proper `c.g`
-(`AlgebraicGeometry.ProEtale.derivedBaseChangeMap`)
-and the inverse of the base change isomorphism of the extension by zero
-(`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekBaseChangeIso`), the derived
-pullbacks of the exact pullbacks being computed degreewise
-(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarIsoMapDerivedCategory`). -/
+compactification of `f'`. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c.ofIsPullback sq)[A] :=
@@ -241,20 +228,11 @@ lemma isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactificatio
   isIso_derivedBaseChangeMap_app_of_isProper Λ (c.isPullback_g_ofIsPullback sq).flip _
     (plusEtaleOrigin_mapDerivedCategory_openImmersionLowerShriek c.i hK)
 
-/-- For a finite coefficient ring `Λ`, a cartesian square
-```
-X' --g'--> X
-|f'        |f
-Y' --g---> Y
-```
-with `g` arbitrary, a compactification `c` of `f` (`f` separated of finite type) with base change
-`c ×_Y Y'`, and a complex `K` of pro-étale
-sheaves on `X` bounded below of étale origin (`K ≅ ν_X^* L` with `L ∈ D⁺(X_ét, Λ)`, an étale-origin
-witness), the pro-étale exchange
-map `Ex_!(c) : Lg^* Rf_!(c) K ⟶ Rf'_!(c ×_Y Y') Lg'^* K` of
-`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChangeMap` is an
-isomorphism. As the statement concerns a component of a natural transformation, it is
-independent of the witness. -/
+/-- For a finite coefficient ring `Λ`, a cartesian square `g' ≫ f = f' ≫ g` with `g` arbitrary,
+a compactification `c` of `f` (`f` separated of finite type) with base change `c ×_Y Y'`, and a
+complex `K` of pro-étale sheaves on `X` bounded below of étale origin (`K ≅ ν_X^* L` with
+`L ∈ D⁺(X_ét, Λ)`), the exchange map `Ex_!(c) : Lg^* Rf_!(c) K ⟶ Rf'_!(c ×_Y Y') Lg'^* K`
+is an isomorphism. -/
 theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (sq : IsPullback g' f' f g) (c : Compactification f)
     (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))

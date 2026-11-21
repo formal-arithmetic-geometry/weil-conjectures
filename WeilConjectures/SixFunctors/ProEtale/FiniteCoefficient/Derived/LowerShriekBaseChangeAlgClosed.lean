@@ -60,14 +60,11 @@ section Independence
 variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
   {S : StageSystem fun i ↦ 𝐃𝐐[i](X)} {S' : StageSystem fun i ↦ 𝐃𝐐[i](Y)}
 
-/-- Independence of the finite coefficient field.
-
-Let `F` be a descent datum for the rational compact-support direct images
-`Rf_{!,E} : D_comp(X_proét, E) ⥤ D_comp(Y_proét, E)` along a stage-system structure on the
-rational stages (the `ℚ̄_ℓ`-stage being its pair category). If an object `K_{ℚ̄_ℓ}` of the
-`ℚ̄_ℓ`-stage is represented at the finite stages `E` and `L` by `K_E` and `K_L`, then
-`Rf_! K_E ⊗_E ℚ̄_ℓ` and `Rf_! K_L ⊗_L ℚ̄_ℓ` are canonically isomorphic: both are isomorphic to the
-value of the descended functor on `K_{ℚ̄_ℓ}`. -/
+/-- Independence of the finite coefficient field. Let `F` be a descent datum for the rational
+compact-support direct images `Rf_{!,E} : D_comp(X_proét, E) ⥤ D_comp(Y_proét, E)` along a
+stage-system structure on the rational stages. If an object `K_{ℚ̄_ℓ}` of the `ℚ̄_ℓ`-stage is
+represented at the finite stages `E` and `L` by `K_E` and `K_L`, then `Rf_! K_E ⊗_E ℚ̄_ℓ` and
+`Rf_! K_L ⊗_L ℚ̄_ℓ` are canonically isomorphic. -/
 theorem nonempty_iso_ι_obj_rationalRightDerivedLowerShriek (F : S.Morphism S')
     (hF : ∀ i, F.Φ i = rationalRightDerivedLowerShriek l (E i) c) {i j : I}
     {KE : 𝐃𝐐[i](X)} {KL : 𝐃𝐐[j](X)} (e : (S.ι i).obj KE ≅ (S.ι j).obj KL) :
@@ -84,20 +81,13 @@ variable {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y}
   (sq : IsPullback g' f' f g) (c : Compactification f)
   {S : StageSystem fun i ↦ 𝐃𝐐[i](X)} {S' : StageSystem fun i ↦ 𝐃𝐐[i](Y')}
 
-/-- `ℚ̄_ℓ` compact-support base change.
-
-Let `F` and `G` be descent data, along stage-system structures on the rational stages, for the
-rational functors `Lg^* Rf_!(c)` and `Rf'_!(c') Lg'^*` (whose values at the finite stage `E_i`
-are the transports `Rationalization.map` of the integral operations), and let `τ` be a compatible
-family whose component at every finite stage is the rational compact-support exchange map
-(`AlgebraicGeometry.ProEtale.rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap`). Then
-the descended exchange transformation `Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` on the `ℚ̄_ℓ`-stage is an
-isomorphism at every object `K` represented at a finite stage `E_i` by (the rationalization of)
-an integral lattice `K_i ∈ D_comp(X_proét, 𝒪_{E_i})` whose reductions are of étale origin: there
-it is represented by the `E_i`-coefficient compact-support base change isomorphism
-(`isIso_rationalRightDerivedLowerShriekOfCompactificationBaseChangeMap_app`).
-It is independent of the finite stage and of the representative, being the component of a
-natural transformation of functors on the pair category. -/
+/-- `ℚ̄_ℓ` compact-support base change. Let `F` and `G` be descent data, along stage-system
+structures on the rational stages, for the rational functors `Lg^* Rf_!(c)` and
+`Rf'_!(c') Lg'^*`, and let `τ` be a compatible family whose component at every finite stage is
+the rational compact-support exchange map. Then the descended exchange transformation
+`Lg^* Rf_! K ⟶ Rf'_! Lg'^* K` on the `ℚ̄_ℓ`-stage is an isomorphism at every object `K`
+represented at a finite stage `E_i` by (the rationalization of) an integral lattice
+`K_i ∈ D_comp(X_proét, 𝒪_{E_i})` whose reductions are of étale origin. -/
 theorem isIso_descNatTrans_app_rationalExchange {F G : S.Morphism S'} (τ : F.Hom G)
     (hF : ∀ i, F.Φ i = Rationalization.map (nonZeroDivisors (Shrink.{u + 1}
       (PadicAlgCl.integers l (E i)))) (integralOperation l (E i)

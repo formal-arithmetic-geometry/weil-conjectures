@@ -576,8 +576,7 @@ variable (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ 
   [f'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))]
 
 /-- Close the main goal by the local hypothesis `name`, whose type is definitionally equal to the
-goal; elaborator unification of the two (through the bundled coefficient exchange arrows) is
-far too slow, so the proof term is `id (α := goal) h` and Lean's kernel checks it. -/
+goal, with the type check left to the kernel (elaborator unification is too slow here). -/
 private meta def exactLocalByKernel (name : Lean.Name) : Lean.Elab.Tactic.TacticM Unit := do
   let goal ← Lean.Elab.Tactic.getMainGoal
   goal.withContext do

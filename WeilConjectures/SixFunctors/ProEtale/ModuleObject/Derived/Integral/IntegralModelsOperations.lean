@@ -382,13 +382,7 @@ noncomputable def immersionLowerShriekProjectionIso
 
 /-- Inverse image, uncompleted relative derived tensor and locally closed extension by zero
 preserve bounded constructibility over the integral coefficient ring. The locally closed functor
-is written explicitly as open extension by zero followed by derived closed direct image; the
-latter is ordinary direct image on Noetherian schemes. Finite coefficient fields are represented
-inside the fixed algebraic closure, with their induced valuation and ring of integers.
-
-This theorem records clauses (1)--(3). Clause (4), the projection formula for arbitrary
-unbounded complexes, is the natural isomorphism `immersionLowerShriekProjectionIso` (applied
-with coefficient `Profinite.padicIntegersRingObj ℓ E.val`). -/
+is open extension by zero followed by derived closed direct image. -/
 theorem integralModels_operations (ℓ : ℕ) [Fact ℓ.Prime]
     (E : PadicAlgCl.FiniteIntermediateField ℓ) :
     (∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y)

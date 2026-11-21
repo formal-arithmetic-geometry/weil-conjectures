@@ -51,12 +51,7 @@ abbrev ModuleDerivedCategory (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] : 
   DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))
 
 /-- For a scheme `Y`, a commutative ring `A` and `r : ℤ`, the `r`-th cohomology sheaf functor
-`𝓗^r : D(Y_proét, A) ⥤ Sh(Y_proét, A)`, the homology functor of the standard t-structure
-(`DerivedCategory.homologyFunctor`). Being a functor on the derived category it is invariant
-under quasi-isomorphism (`AlgebraicGeometry.ProEtale.cohomologySheafQIso`); the nonpositive and
-nonnegative parts of the standard t-structure are described by
-`AlgebraicGeometry.ProEtale.isLE_iff_isZero_cohomologySheaf` and
-`AlgebraicGeometry.ProEtale.isGE_iff_isZero_cohomologySheaf`. -/
+`𝓗^r : D(Y_proét, A) ⥤ Sh(Y_proét, A)`, the homology functor of the standard t-structure. -/
 noncomputable abbrev cohomologySheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] (r : ℤ) :
     ModuleDerivedCategory Y A ⥤ Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A) :=
   DerivedCategory.homologyFunctor _ r

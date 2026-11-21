@@ -171,15 +171,7 @@ noncomputable def mapDerivedCategoryUpperStarDerivedTensorIso :
 /-- The **projection map** `j_!(K ⊗ᴸ Lj^*M) ⟶ j_!K ⊗ᴸ M` of bifunctors
 `D(U_proét) ⥤ D(X_proét) ⥤ D(X_proét)`, for an open immersion `j : U ⟶ X`: the projection map
 `Adjunction.projectionMap` of `D(j_!) ⊣ D(j^*)` with respect to
-`mapDerivedCategoryUpperStarDerivedTensorIso`. It is the composite
-```
-j_!(K ⊗ᴸ Lj^*M) --j_!(φ)--> j_! j^*(j_!K ⊗ᴸ M) --ε--> j_!K ⊗ᴸ M
-```
-where `ε` is the counit of `j_! ⊣ j^*` and `φ` is the composite
-```
-K ⊗ᴸ Lj^*M --(η ⊗ᴸ 1)--> j^*(j_!K) ⊗ᴸ Lj^*M ≅ j^*(j_!K ⊗ᴸ M).
-```
--/
+`mapDerivedCategoryUpperStarDerivedTensorIso`. -/
 noncomputable def derivedOpenImmersionLowerShriekProjectionMap :
     (Functor.postcompose₂.obj D((j)_!open[A])).obj
         (derivedTensorWhiskeringRightLeftDerivedUpperStar A j) ⟶

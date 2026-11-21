@@ -132,13 +132,9 @@ variable {X Y : Scheme.{u}}
 
 /-- Let `E ⊆ E'` be finite extensions of `ℚ_ℓ` inside `ℚ̄_ℓ`, and let `K ≅ ν^* K₀` and `L ≅ ν^* L₀`
 be the pro-étale realizations of bounded constructible, derived complete complexes `K₀`, `L₀` of
-étale sheaves of `𝒪_E`-modules of finite Tor amplitude, such that both sides of the étale projection
-map at `K₀` and `L₀` are derived complete. Then the projection map over `𝒪_{E'}` at the scalar
-extensions `𝒪_{E'} ⊗ᴸ_{𝒪_E} K` and `𝒪_{E'} ⊗ᴸ_{𝒪_E} L` is an isomorphism: it is the scalar extension
-of the projection map over `𝒪_E`
-(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_extendScalars`, `𝒪_{E'}` being
-finite free over `𝒪_E`), an isomorphism by the integral stage
-(`AlgebraicGeometry.ProEtale.hasProjectionFormula_of_derivedCompleteIntegral`). -/
+étale sheaves of `𝒪_E`-modules of finite Tor amplitude, such that both sides of the étale
+projection map at `K₀` and `L₀` are derived complete. Then the projection map over `𝒪_{E'}` at
+the scalar extensions `𝒪_{E'} ⊗ᴸ_{𝒪_E} K` and `𝒪_{E'} ⊗ᴸ_{𝒪_E} L` is an isomorphism. -/
 theorem hasProjectionFormula_extendScalars_of_derivedCompleteIntegral (f : X ⟶ Y)
     [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}

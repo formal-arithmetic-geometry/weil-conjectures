@@ -108,17 +108,7 @@ namespace StrictWeilComplex
 variable {A g}
 
 /-- A morphism of strict Weil complexes `(K, φ_K) ⟶ (L, φ_L)` is a morphism `u : K ⟶ L` of the
-underlying objects of `Dctf(X, A)` making the square
-
-```
-  Lg^* K --Lg^* u--> Lg^* L
-     |                  |
-    φ_K                φ_L
-     v                  v
-     K -------u------>  L
-```
-
-commute. -/
+underlying objects of `Dctf(X, A)` with `φ_K ≫ u = Lg^* u ≫ φ_L`. -/
 @[ext]
 structure Hom (K L : StrictWeilComplex A g) where
   /-- The underlying morphism of `Dctf(X, A)`. -/
@@ -168,14 +158,10 @@ end General
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X₀ ⟶ Spec (.of k₀))
 
-/-- Let `X₀` be a scheme over a finite field `k₀`, with structure morphism `f`, and let
-`X = X₀ ×_{k₀} k̄` be its geometric fiber. The category `D^b_{ctf,W}(X, A)` of strict Weil
-complexes on `X` at the coefficients `A`: pairs `(K, φ)` with
-`K ∈ Dctf(X, A)` on the small pro-étale site and `φ : Lg_γ^* K ≅ K`, where
-`g_γ = 𝟙 × Spec(γ)` is the geometric-Frobenius automorphism of `X`
-(`AlgebraicGeometry.Scheme.Hom.geometricGaloisFrobenius`); morphisms are the morphisms of the
-underlying complexes commuting with the `φ`s. It comes with the forgetful functor
-`AlgebraicGeometry.ProEtale.StrictWeilComplex.forget` to `Dctf(X, A)`. -/
+/-- Let `X₀` be a scheme over a finite field `k₀` and `X = X₀ ×_{k₀} k̄` its geometric fiber. The
+category `D^b_{ctf,W}(X, A)` of strict Weil complexes on `X` at the coefficients `A`: pairs `(K, φ)`
+with `K ∈ Dctf(X, A)` on the small pro-étale site and `φ : Lg_γ^* K ≅ K`, where `g_γ = 𝟙 × Spec(γ)`
+is the geometric-Frobenius automorphism of `X`. -/
 abbrev GeometricFiberStrictWeilComplex : Type _ :=
   StrictWeilComplex A (f.geometricGaloisFrobenius).asIso
 

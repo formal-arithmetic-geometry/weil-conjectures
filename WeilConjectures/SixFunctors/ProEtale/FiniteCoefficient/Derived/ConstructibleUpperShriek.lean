@@ -87,11 +87,9 @@ section Definition
 
 /-- The exceptional inverse image (at a finite stage `A = A_{E,n}`)
 `Rf^! := ν_X^* ∘ f^× ∘ Rν_{Y,*} : D(Y_proét) ⥤ D(X_proét)` along a morphism `f : X ⟶ Y`
-admitting a compactification, where `f^×` is the étale exceptional inverse image
-`AlgebraicGeometry.Etale.rightDerivedUpperShriek`, the right adjoint of the étale `Rf_!`. It is
-the constructible exceptional inverse image, meaningful on bounded below
-complexes, where it is right adjoint to `Rf_!` on objects of étale origin
-(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv`). -/
+admitting a compactification, where `f^×` is the étale exceptional inverse image, the right
+adjoint of the étale `Rf_!`. On bounded below complexes it is right adjoint to `Rf_!` on objects
+of étale origin. -/
 noncomputable def rightDerivedUpperShriek :
     DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :=
@@ -195,15 +193,12 @@ variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [Mon
 
 variable {A} {Λ}
 
-/-- The counit `ε_L : Rf_! Rf^! L ⟶ L`
-of the exceptional adjunction at a bounded below `L`: the composite
-
+/-- The counit `ε_L : Rf_! Rf^! L ⟶ L` of the exceptional adjunction at a bounded below `L`,
+the composite
 ```
-  Rf_! ν_X^* f^× Rν_* L ≅ ν_Y^* Rf^{ét}_! f^× Rν_* L ──ν^* ε^{ét}──▶ ν_Y^* Rν_* L ──ε^ν──▶ L
+Rf_! ν_X^* f^× Rν_* L ≅ ν_Y^* Rf^{ét}_! f^× Rν_* L ──ν^* ε^{ét}──▶ ν_Y^* Rν_* L ──ε^ν──▶ L
 ```
-
-of the compact-support comparison `AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`
-(at the bounded below `f^× Rν_* L`), the counit of the étale adjunction `Rf_! ⊣ f^×` and the
+of the compact-support comparison, the counit of the étale adjunction `Rf_! ⊣ f^×` and the
 counit of `ν^* ⊣ Rν_*`. -/
 noncomputable def rightDerivedUpperShriekCounit
     (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ)))

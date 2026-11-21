@@ -108,22 +108,19 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) {g : X ⟶ X}
 ```
 Lh^* Rf_!(c) K --Ex_!--> Rf_!(c) Lg^* K --Rf_!(c) φ--> Rf_!(c) K,
 ```
-with the compact-support exchange map
-`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactificationBaseChange`. -/
+with the compact-support exchange map `Ex_!`. -/
 noncomputable def lowerShriekWeilDatum (hi : IsPullback g c.i c.i gZ) (hg : CommSq gZ c.g c.g h)
     (φ : L((g)^*[A]).obj K ⟶ K) :
     L((h)^*[A]).obj (Rf_!(c)[A].obj K) ⟶ Rf_!(c)[A].obj K :=
   (rightDerivedLowerShriekOfCompactificationBaseChange A c c hi hg).app K ≫ Rf_!(c)[A].map φ
 
-/-- The *compact Frobenius* of a Weil datum
-`φ : Lg^* K ⟶ K`, for endomorphisms `g`, `gZ` compatible with the compactification `c` over the
-identity of `Y`, is the endomorphism
+/-- The *compact Frobenius* of a Weil datum `φ : Lg^* K ⟶ K`, for endomorphisms `g`, `gZ`
+compatible with the compactification `c` over the identity of `Y`, is the endomorphism
 ```
 Rf_!(c) K ≅ L(𝟙 Y)^* Rf_!(c) K --Ex_!--> Rf_!(c) Lg^* K --Rf_!(c) φ--> Rf_!(c) K
 ```
-of `Rf_!(c) K`. For the structure morphism `f = a_X : X ⟶ Spec k`, `g = g_γ^m` and the iterated
-datum `φ_m` (`AlgebraicGeometry.ProEtale.weilDatumIterate`), it is the global geometric
-Frobenius `F_{c,m} = RΓ_c(X, φ_m) ∘ g_{γ,c}^{m,*}` on `RΓ_c(X, K) = Ra_{X!} K`. -/
+of `Rf_!(c) K`. For `f = a_X : X ⟶ Spec k`, `g = g_γ^m` and the iterated datum `φ_m`, it is the
+global geometric Frobenius `F_{c,m} = RΓ_c(X, φ_m) ∘ g_{γ,c}^{m,*}` on `RΓ_c(X, K)`. -/
 noncomputable def compactFrobenius (hi : IsPullback g c.i c.i gZ)
     (hg : CommSq gZ c.g c.g (𝟙 Y)) (φ : L((g)^*[A]).obj K ⟶ K) :
     Rf_!(c)[A].obj K ⟶ Rf_!(c)[A].obj K :=

@@ -44,11 +44,7 @@ variable {R : Type (u + 1)} [CommRing R] (I : Ideal R)
 
 /-- Completed extension-by-zero base change. For a cartesian square `g' ≫ j = j' ≫ g''` with `j`,
 `j'` open immersions, the completed pullback of `j_! K` is the derived completion of `j'_!` of the
-completed pullback of `K`: `Lg''^*_comp (j_! K) ≅ (j'_! (Lg'^*_comp K))^`, naturally in `K`. It is
-the completion of the base change isomorphism `Lg'^* ⋙ j'_! ≅ j_! ⋙ Lg''^*`
-(`AlgebraicGeometry.ProEtale.leftDerivedOpenImmersionLowerShriekBaseChangeIso`), followed by the
-completion of `j'_!` of the completion map of `Lg'^* K`, an isomorphism after completion
-(`AlgebraicGeometry.ProEtale.isIso_completionMapOpenImmersionLowerShriek`). -/
+completed pullback of `K`: `Lg''^*_comp (j_! K) ≅ (j'_! (Lg'^*_comp K))^`, naturally in `K`. -/
 noncomputable def completedUpperStarOpenImmersionLowerShriekIso (hsq : IsPullback g' j' j g'') :
     D((j)_!open[ModuleCat.{u + 1} R]) ⋙ completedUpperStar I hI g'' ⋙
         (_root_.DerivedCategory.derivedComplete (Scheme.ProEt.topology Z') I).ι ≅

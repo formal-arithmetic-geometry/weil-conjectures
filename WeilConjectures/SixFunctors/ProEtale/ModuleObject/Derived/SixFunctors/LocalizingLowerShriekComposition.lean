@@ -110,11 +110,7 @@ private theorem transportComposition
 
 /-- There is a natural composition isomorphism on the ordinary localizing closures for
 rational condensed coefficients, compatible with change of compactification. The witnesses
-`hf`, `hg`, `hgf` only certify preservation by the actual ambient compactification functors;
-`localizingLowerShriek` uses those same objects and maps. The equation is an equality in the
-ambient derived category, hence also in its full localizing subcategory. Its refinement
-maps are exactly those used to normalize the comparisons in
-`compactification_coherence_cocycle`, rather than arbitrary isomorphisms of their endpoints. -/
+`hf`, `hg`, `hgf` only certify preservation by the ambient compactification functors. -/
 theorem exists_localizingLowerShriekComposition
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ]

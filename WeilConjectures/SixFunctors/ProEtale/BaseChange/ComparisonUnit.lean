@@ -93,10 +93,8 @@ theorem comparison_unit {U V : Scheme.{u}} (f : U ⟶ V) [QuasiCompact f] [Quasi
 /-- **The canonical comparison of direct images and the units**, on bounded below derived
 categories and for an arbitrary morphism `f : U ⟶ V`: `ν_V^*` of the étale unit
 `G ⟶ R⁺f_* f^* G`, followed by the canonical base change morphism
-`ν_V^* R⁺f_* f^* G ⟶ R⁺f_* ν_U^* f^* G` of right derived functors
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange`) and `R⁺f_*` of the
-pullback comparison `ν_U^* f^* G ≅ f^* ν_V^* G`, is the pro-étale unit
-`ν_V^* G ⟶ R⁺f_* f^* ν_V^* G`. -/
+`ν_V^* R⁺f_* f^* G ⟶ R⁺f_* ν_U^* f^* G` and `R⁺f_*` of the pullback comparison
+`ν_U^* f^* G ≅ f^* ν_V^* G`, is the pro-étale unit `ν_V^* G ⟶ R⁺f_* f^* ν_V^* G`. -/
 theorem comparison_unit_plus {U V : Scheme.{u}} (f : U ⟶ V)
     (G : DerivedCategory.Plus (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     let a := (Functor.mapDerivedCategoryPlusCompIso

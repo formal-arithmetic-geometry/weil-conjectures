@@ -108,11 +108,9 @@ lemma exists_affineCharts {k : Type u} [Field k] {X Y : Scheme.{u}}
   obtain ⟨y, hy, hx⟩ := Set.mem_iUnion₂.1 (ht (Set.mem_univ x))
   exact ⟨t.equivFin ⟨y, hy⟩, by simpa [pt] using hx⟩
 
-/-- Let `k` be a field, `Y` a `k`-scheme of finite type and `f : X ⟶ Y` separated of finite type
-(compactifiable and quasi-compact). There is `D : ℕ` (the maximal embedding dimension of a
-finite family of affine charts `U ↪ 𝔸^{d_U}_V` of `f`) such that for every finite coefficient
-ring `Λ` whose exponent is invertible in `k` and every
-`d_Y ≥ dim Y`, the pro-étale exceptional inverse image
+/-- Let `k` be a field, `Y` a `k`-scheme of finite type and `f : X ⟶ Y` separated of finite type.
+There is `D : ℕ` such that for every finite coefficient ring `Λ` whose exponent is invertible in
+`k` and every `d_Y ≥ dim Y`, the pro-étale exceptional inverse image
 `Rf^! = ν_X^* ∘ f^× ∘ Rν_{Y,*}` (`AlgebraicGeometry.ProEtale.rightDerivedUpperShriek`)
 
 1. carries `D_c^[a, b](Y_proét, Λ)` into `D_c^[a - 2D, b + 2d_Y + 1](X_proét, Λ)`; in particular

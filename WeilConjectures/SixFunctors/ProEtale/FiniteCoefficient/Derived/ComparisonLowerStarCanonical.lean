@@ -47,12 +47,8 @@ variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 
 /-- The canonical base change morphism `ν_Y^* ∘ R⁺f_* ⟶ R⁺f_* ∘ ν_X^*` of functors
-`D⁺(X_ét) ⥤ D⁺(Y_proét)`: the base change morphism of bounded below right derived functors
-induced by the underived base change morphism `ν_Y^* f_* ⟶ f_* ν_X^*`
-(`AlgebraicGeometry.ProEtale.lowerStarComparisonUpperStarBaseChange`), itself the mate of the
-identification `ν_{Y,*} f_* ≅ f_* ν_{X,*}`. It is characterized by its compatibility with the
-units of the derived functors
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarComparisonPlusBaseChange_fac`). -/
+`D⁺(X_ét) ⥤ D⁺(Y_proét)`, induced by the underived base change morphism `ν_Y^* f_* ⟶ f_* ν_X^*`.
+It is characterized by its compatibility with the units of the derived functors. -/
 noncomputable def rightDerivedLowerStarComparisonPlusBaseChange :
     R+(Etale.lowerStar A f) ⋙ D+(ν^*(Y)[A]) ⟶ D+(ν^*(X)[A]) ⋙ R+(ProEtale.lowerStar A f) :=
   Functor.rightDerivedFunctorPlusBaseChange (lowerStarComparisonUpperStarBaseChange f A)

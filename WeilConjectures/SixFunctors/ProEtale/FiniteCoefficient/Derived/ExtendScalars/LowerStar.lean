@@ -52,13 +52,9 @@ noncomputable def rightDerivedLowerStarExtendScalarsMap :
   mateEquiv (derivedUpperStarLowerStarAdjunction _ g) (derivedUpperStarLowerStarAdjunction _ g)
     (leftDerivedUpperStarExtendScalarsIso R S g).hom
 
-/-- **Reduction to the projection formula.** The base change map `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)` is
-an isomorphism at `M` as soon as the mate `L(- ⊗ S_Y) (Rg_* M) ⟶ Rg_* (L(- ⊗ S_Z) M)` of the
-comparison `Lg^* (K ⊗ᴸ S_Y) ⟶ Lg^* K ⊗ᴸ S_Z` is. Indeed, restricted back to `R`, `Ψ` is
-`L(- ⊗ S)` (`AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsProjection`), compatibly
-with the derived pullback
-(`AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsProjection_transpose_upperStar`), and
-restriction of scalars reflects isomorphisms. -/
+/-- The base change map `Ψ (Rg_* M) ⟶ Rg_* (Ψ M)` is an isomorphism at `M` as soon as the mate
+`L(- ⊗ S_Y) (Rg_* M) ⟶ Rg_* (L(- ⊗ S_Z) M)` of the comparison
+`Lg^* (K ⊗ᴸ S_Y) ⟶ Lg^* K ⊗ᴸ S_Z` is. -/
 theorem isIso_rightDerivedLowerStarExtendScalarsMap_app_of_isIso_mateEquiv
     (M : DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} R)))
     [IsIso ((mateEquiv (derivedUpperStarLowerStarAdjunction _ g)

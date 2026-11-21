@@ -99,22 +99,9 @@ variable (ℓ : ℕ) [Fact ℓ.Prime]
   {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
 
 /-- **The proper base change theorem** for bounded constructible `𝒪_E`-sheaves,
-`E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes
-
-```
-X' --g'--> X
-|          |
-f'         f
-v          v
-Y' --g---> Y
-```
-
-with `f` proper, the base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an
-isomorphism of functors `Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. By derived Nakayama it suffices that the
-first derived reduction `BC_sq(K₀) ⊗ᴸ_{𝒪_E} 𝔽_E` is invertible
-(`isIso_boundedConstructibleBaseChange_integral_app_of_reduction`); this is the pro-étale
-base-change morphism with coefficients `𝔽_E` at a complex of étale origin, invertible by the
-étale proper base change theorem (`ProEtale.isIso_derivedBaseChangeMap_app_of_isProper`). -/
+`E ⊆ ℚ̄_ℓ` a finite extension of `ℚ_ℓ`: for a cartesian square of schemes with `f` proper, the
+base-change morphism `BC_sq : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*` is an isomorphism of functors
+`Dᵇc(X)⟦𝒪̲_E⟧ ⥤ Dᵇc(Y')⟦𝒪̲_E⟧`. -/
 theorem isIso_boundedConstructibleBaseChange_of_isProper_padicIntegers
     (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
     [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E] [IsProper f.left]

@@ -127,12 +127,7 @@ noncomputable def upperStarFreeSheafIso {Y : Scheme.{u}} (h : Y ⟶ X) (U : X.Pr
 /-- **Leray collapse over a weakly contractible object.** Let `p' : X' ⟶ V'`, let `W` be a
 weakly contractible object of `V'_proét` and `F` a pro-étale sheaf of `Λ`-modules on `X'`. Then
 the cohomology `H^r(X' ×_{V'} W, F|) = Ext^r(Λ[X' ×_{V'} W], F)` vanishes if and only if the
-sections of `R^r p'_* F` over `W` vanish.
-
-Indeed `Λ[X' ×_{V'} W] ≅ p'^* Λ[W]`, so by the adjunction `Lp'^* ⊣ Rp'_*` the Ext group is
-`Hom(Λ[W][0], (Rp'_* F)[r])`; and `Λ[W]` is projective
-(`AlgebraicGeometry.ProEtale.projective_freeSheaf`), so this vanishes if and only if
-`Hom(Λ[W], R^r p'_* F)`, the sections of `R^r p'_* F` over `W`, does. -/
+sections of `R^r p'_* F` over `W` vanish. -/
 theorem subsingleton_ext_freeSheaf_pullback_iff {X' V' : Scheme.{u}} (p' : X' ⟶ V')
     (W : V'.ProEt) (hW : (Scheme.ProEt.topology V').IsWeaklyContractible.{u + 1} W)
     (F : Sheaf (Scheme.ProEt.topology X') (ModuleCat.{u + 1} Λ)) (r : ℕ) :

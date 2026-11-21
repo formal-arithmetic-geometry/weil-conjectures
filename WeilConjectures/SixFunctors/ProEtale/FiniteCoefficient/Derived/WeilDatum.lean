@@ -90,14 +90,8 @@ section Datum
 variable {X : Scheme.{u}} {g : X ⟶ X}
   {K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
 
-/-- The iterate
-`φ_m : Lg_m^* K ⟶ K` of a Weil datum `φ : Lg^* K ⟶ K`, for the iterate `g_m = g^m`
-(`AlgebraicGeometry.ProEtale.iterateHom`): `φ_0` is the identification `L(𝟙 X)^* K ≅ K` and
-`φ_{m+1}` is the composite
-```
-L(g_{m+1})^* K = L(g ≫ g_m)^* K ≅ Lg^* Lg_m^* K --Lg^* φ_m--> Lg^* K --φ--> K.
-```
--/
+/-- The iterate `φ_m : Lg_m^* K ⟶ K` of a Weil datum `φ : Lg^* K ⟶ K`, for the iterate `g_m = g^m`
+(`AlgebraicGeometry.ProEtale.iterateHom`). -/
 noncomputable def weilDatumIterate (φ : L((g)^*[A]).obj K ⟶ K) :
     (m : ℕ) → L((iterateHom g m)^*[A]).obj K ⟶ K
   | 0 => (leftDerivedUpperStarId A X).hom.app K
@@ -134,13 +128,9 @@ noncomputable def upperStarWeilDatum (h : e ≫ x = x ≫ g) (φ : L((g)^*[A]).o
 lemma id_comp_eq_comp_of_comp_eq (hx : x ≫ g = x) : 𝟙 P ≫ x = x ≫ g := by
   rw [Category.id_comp, hx]
 
-/-- The *local Frobenius*
-`F_x : K_x ⟶ K_x` of a Weil datum `φ : Lg^* K ⟶ K` at a point `x : P ⟶ X` fixed by `g`
-(`x ≫ g = x`), on the stalk complex `K_x = Lx^* K`:
-```
-Lx^* K ≅ L(𝟙 P)^* Lx^* K ≅ L(x ≫ g)^* K ≅ Lx^* Lg^* K --Lx^* φ--> Lx^* K,
-```
-the Weil datum `AlgebraicGeometry.ProEtale.upperStarWeilDatum` for the identity of `P`. -/
+/-- The *local Frobenius* `F_x : K_x ⟶ K_x` of a Weil datum `φ : Lg^* K ⟶ K` at a point
+`x : P ⟶ X` fixed by `g` (`x ≫ g = x`), on the stalk complex `K_x = Lx^* K`. It is the Weil datum
+`AlgebraicGeometry.ProEtale.upperStarWeilDatum` for the identity of `P`. -/
 noncomputable def stalkFrobenius (hx : x ≫ g = x) (φ : L((g)^*[A]).obj K ⟶ K) :
     L((x)^*[A]).obj K ⟶ L((x)^*[A]).obj K :=
   (leftDerivedUpperStarId A P).inv.app _ ≫ upperStarWeilDatum (id_comp_eq_comp_of_comp_eq hx) φ

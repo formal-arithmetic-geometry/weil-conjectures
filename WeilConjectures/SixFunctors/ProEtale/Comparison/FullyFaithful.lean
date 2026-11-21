@@ -63,11 +63,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The presheaf pullback (i.e., the left Kan extension) of a presheaf on the small étale
 site to the small pro-étale site sends cofiltered limits of affine étale `S`-schemes to
-colimits, when restricted to the small affine pro-étale site.
-
-The key input is `AlgebraicGeometry.Scheme.preservesColimit_yoneda`: maps out of a
-cofiltered limit of quasi-compact, quasi-separated schemes into a scheme locally of finite
-presentation over the base are a filtered colimit of hom sets. -/
+colimits, when restricted to the small affine pro-étale site. -/
 instance ProEt.preservesRelativeFilteredColimits_lan_toProEt (F : S.Etaleᵒᵖ ⥤ A) :
     Functor.PreservesRelativeFilteredColimits.{u} (AffineEtale.toAffineProEt S)
       ((AffineProEt.toProEt S).op ⋙ (Scheme.toProEt S).op.lan.obj F) := by

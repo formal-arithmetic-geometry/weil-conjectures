@@ -195,10 +195,7 @@ variable {A} in
 compactification of `f`, and let `K ≅ ν^* K₀`, `L ≅ ν^* L₀` be pro-étale complexes of étale
 origin, with `K₀` bounded and `i_! K₀ ⊗ᴸ Lg^* L₀` bounded below. If the étale projection map of
 `Rg_*` is an isomorphism at `(i_! K₀, L₀)`, the pro-étale projection formula holds for `c` at
-`(K, L)`: the projection map is the one of `Rg_*` at `(i_! K, L)` followed by isomorphisms,
-`i_! ν^* K₀ ≅ ν^* i_! K₀`, and `ν^*` carries the étale projection map of `Rg_*` to the
-pro-étale one
-(`AlgebraicGeometry.ProEtale.isIso_rightDerivedLowerStarProjectionMap_app_app_leftDerived`). -/
+`(K, L)`. -/
 theorem hasProjectionFormulaOfCompactification_of_comparison [Etale.UpperStarPreservesFlat A]
     [∀ X : Scheme.{u}, (ν^*(X)[A]).PreservesFlat] {f : X ⟶ Y} (c : Compactification f)
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)}
@@ -362,11 +359,9 @@ variable {X Y : Scheme.{u}}
 
 /-- Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the pro-étale realizations of bounded constructible,
 derived complete complexes `K₀`, `L₀` of étale sheaves of `𝒪_E`-modules of finite Tor amplitude,
-with the given étale-origin witnesses, and assume that both sides `Rf_! K₀ ⊗ᴸ L₀` and `Rf_!(K₀ ⊗ᴸ
-Lf^* L₀)` of the étale projection map are derived complete. Then the projection map `(Rf_! K) ⊗ᴸ L ⟶
-Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism. This is the étale projection formula at the integral stage
-transported along the comparison `ν^*`
-(`AlgebraicGeometry.ProEtale.hasProjectionFormulaOfCompactification_of_comparison`). -/
+with the given étale-origin witnesses, and assume that both sides `Rf_! K₀ ⊗ᴸ L₀` and
+`Rf_!(K₀ ⊗ᴸ Lf^* L₀)` of the étale projection map are derived complete. Then the projection map
+`(Rf_! K) ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism. -/
 theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompactification f]
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) 𝐌)}
     {L : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌)}

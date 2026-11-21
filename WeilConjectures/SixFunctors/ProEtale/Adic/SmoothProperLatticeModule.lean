@@ -189,9 +189,7 @@ noncomputable def forgetHomologyRightDerivedPadicIntModPushforwardLimitIso
 `ProEtale.isAdicLisseSheaf_adicSheafExtendScalars_limit_homology_rightDerivedLowerStar`, let
 `M` be the limit in `ℤ_ℓ,X`-modules of the transported tower `ν^* Gₙ` and `Mₙ` the transported
 tower of `Rʲf_*^{ét} Gₙ`. Then `Hʲ(Rf_* M[0])`, computed with the derived pushforward of
-`ℤ_ℓ`-modules, is isomorphic to `lim Mₙ`. The isomorphism of underlying abelian sheaves
-`ProEtale.forgetHomologyRightDerivedPadicIntModPushforwardLimitIso` is automatically linear,
-`lim Mₙ` being `ℓ`-adically separated. -/
+`ℤ_ℓ`-modules, is isomorphic to `lim Mₙ`. -/
 noncomputable def homologyRightDerivedPadicIntModPushforwardLimitIso
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
     [QuasiCompact aY] (f : X ⟶ Y) [Smooth f] [IsProper f]

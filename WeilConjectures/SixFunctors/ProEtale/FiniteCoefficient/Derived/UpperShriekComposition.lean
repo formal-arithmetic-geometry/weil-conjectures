@@ -139,12 +139,7 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f :
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
 
 /-- The composition law `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of the pro-étale derived lower shriek, as
-functors on the objects of `D(X_proét)` bounded below of étale origin, for finite coefficients. It
-is transported from the étale composition law
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp` along the compact-support
-comparison `Rf_! ν^* ≅ ν^* Rf^{ét}_!`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekComparisonIso`) and the equivalence
-`AlgebraicGeometry.ProEtale.comparisonUpperStarPlusEtaleOrigin`. -/
+functors on the objects of `D(X_proét)` bounded below of étale origin, for finite coefficients. -/
 theorem nonempty_iso_ι_comp_rightDerivedLowerShriek_comp :
     Nonempty ((DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} Λ) X).ι ⋙
         R(f ≫ g)_![ModuleCat.{u + 1} Λ] ≅
@@ -217,12 +212,10 @@ theorem nonempty_iso_lift_rightDerivedLowerShriek_comp :
 
 /-- The constructible form of the composition statement, on full subcategories: let `PX`, `PY` be
 full subcategories of objects bounded below of étale origin and `PZ` one of bounded below objects,
-preserved by `Rf_!`, `Rg_!`, `R(f ≫ g)_!` and by `Rf^!`, `Rg^!`, `R(f ≫ g)^!`, so that the
-exceptional adjunctions restrict to them
-(`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekAdjunction`). Then there is a composition
-isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of left adjoints whose mate `Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!`
-carries the adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` to the composite adjunction
-`Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`: the unit and counit of the composite adjunction are the pasted ones. -/
+preserved by `Rf_!`, `Rg_!`, `R(f ≫ g)_!` and by `Rf^!`, `Rg^!`, `R(f ≫ g)^!`. Then there is a
+composition isomorphism `e : R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of left adjoints whose mate
+`Rg^! ⋙ Rf^! ≅ R(f ≫ g)^!` carries the adjunction `R(f ≫ g)_! ⊣ R(f ≫ g)^!` to the composite
+adjunction `Rf_! ⋙ Rg_! ⊣ Rg^! ⋙ Rf^!`. -/
 theorem exists_rightDerivedUpperShriekAdjunction_comp_eq :
     ∃ e : PZ.lift (PX.ι ⋙ R(f ≫ g)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hfg₁ _ K.property) ≅
         PY.lift (PX.ι ⋙ R(f)_![ModuleCat.{u + 1} Λ]) (fun K ↦ hf₁ _ K.property) ⋙
@@ -467,14 +460,11 @@ theorem exists_bijective_comp_and_homEquiv_symm_comp_eq {f : X ⟶ Y} [HasCompac
 
 omit [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] in
-/-- If `f`, `g` and `f ≫ g`
-carry the ambient exceptional right adjoint datum, the mate of the composition isomorphism
-`R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the objects bounded below of étale origin
-(`nonempty_iso_ι_comp_rightDerivedLowerShriek_comp`) under the ambient adjunctions is a
-natural isomorphism `Hom(K, R(f ≫ g)^× L) ≅ Hom(K, Rf^× Rg^× L)`, natural in `L ∈ D(Z_proét)` and in
-`K` bounded below of étale origin. It is the composite of the adjunction bijection of
-`R(f ≫ g)_! ⊣ R(f ≫ g)^×`, the composition isomorphism, and the adjunction bijection of the pasted
-adjunction `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. -/
+/-- If `f`, `g` and `f ≫ g` carry the ambient exceptional right adjoint datum, the mate of the
+composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` on the objects bounded below of étale origin
+under the ambient adjunctions is a natural isomorphism
+`Hom(K, R(f ≫ g)^× L) ≅ Hom(K, Rf^× Rg^× L)`, natural in `L ∈ D(Z_proét)` and in `K` bounded
+below of étale origin. -/
 theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]

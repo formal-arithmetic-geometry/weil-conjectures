@@ -35,10 +35,7 @@ namespace AlgebraicGeometry.ProEtale.CondensedRing
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 /-- The inverse image of sheaves of modules over the continuous integral
-coefficients sends flat objects to flat objects. The proof uses the local
-relation criterion for flatness, invariance under extension along the
-coefficient pullback isomorphism, and preservation of colimits by inverse
-image. -/
+coefficients sends flat objects to flat objects. -/
 theorem integralResidue_pullback_preservesFlat {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat := by
   let G := (f)^*[Ab.{u + 1}]

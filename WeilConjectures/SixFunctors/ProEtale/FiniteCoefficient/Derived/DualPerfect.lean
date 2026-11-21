@@ -61,11 +61,7 @@ variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- For an identification `η : T ≅ ω_X` of the pro-étale dualizing complex with an invertible
 complex `T` (for smooth `X` of pure dimension `d`, `T = Λ_X(d)[2d]`), the natural isomorphism
-```
-  𝔻_X K = RHom(K, ω_X) ≅ RHom(K, T) ≅ K^∨ ⊗ᴸ T,
-```
-the composite of `RHom(K, η⁻¹)` and of the twist interchange
-(`CategoryTheory.MonoidalClosed.ihomIsoIhomUnitTensor`). -/
+`𝔻_X K = RHom(K, ω_X) ≅ RHom(K, T) ≅ K^∨ ⊗ᴸ T`. -/
 noncomputable def verdierDualIsoDerivedDualTensor :
     (RHom(X)[A]).flip.obj ω ≅ derivedDual A X ⋙ tensorRight T :=
   MonoidalClosed.ihomFlipIsoIhomUnitTensor η hT

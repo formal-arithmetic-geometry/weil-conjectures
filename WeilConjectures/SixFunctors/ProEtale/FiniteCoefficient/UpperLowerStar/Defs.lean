@@ -238,13 +238,7 @@ instance : (g)^*[A].IsLeftAdjoint :=
   (ProEtale.upperStarLowerStarAdjunction A g).isLeftAdjoint
 
 /-- The pullback `g^*` on pro-étale sheaves is left exact, hence exact, being also a left
-adjoint: `g^*` is the composite of the inclusion of sheaves into presheaves, which preserves
-finite limits, the left Kan extension along the opposite of base change, and sheafification,
-which is left exact by `HasSheafify`. The left exactness of the Kan extension is
-`ProEtale.preservesFiniteLimits_op_lan_overPullback` for a weakly étale `g`, and in general
-`ProEtale.preservesFiniteLimits_op_lan_overPullback_of_isGrothendieckAbelian`, the Kan
-extension being a filtered colimit and filtered colimits in the Grothendieck abelian `A`
-being exact. -/
+adjoint. -/
 instance ProEtale.preservesFiniteLimits_upperStar
     [PreservesFiniteLimits ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).op.lan :
       (Y.ProEtᵒᵖ ⥤ A) ⥤ Z.ProEtᵒᵖ ⥤ A)] :

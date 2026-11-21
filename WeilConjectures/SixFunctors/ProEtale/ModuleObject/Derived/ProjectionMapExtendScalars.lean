@@ -127,11 +127,7 @@ variable [∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coeffici
 
 /-- The derived (Pull) isomorphism `Lf^* ⋙ T ≅ T ⋙ Lf^*` is compatible with the tensor
 comparisons of the derived pullbacks (`leftDerivedUpperStarTensor`) and of the derived extensions
-of scalars (`derivedExtendScalarsTensorIso`): it is the isomorphism of composites of left derived
-functors induced by the underived (Pull) isomorphism
-(`derivedPullIso_eq_leftDerivedFunctorCompNatIso`), which is monoidal
-(`isMonoidal_pullIso_hom`), so this is
-`Functor.map_leftDerivedTensorComparison_comp_eq_of_iso`. -/
+of scalars (`derivedExtendScalarsTensorIso`). -/
 theorem comparisonCompatible_derivedPullIso :
     Adjunction.ComparisonCompatible (derivedPullIso a f).symm
       (leftDerivedUpperStarTensor Λ f) (leftDerivedUpperStarTensor Λ' f)

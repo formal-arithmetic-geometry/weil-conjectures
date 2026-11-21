@@ -376,17 +376,8 @@ lemma adicConstantSheafLowerStarIso_hom_hom_app {X Y : Scheme.{u}} (e : X ≅ Y)
 /-- Let `g : X ⟶ Y` be a morphism with automorphisms `a` of `X` and `b` of `Y` such that
 `g ≫ b⁻¹ = a⁻¹ ≫ g`, and let `σ` be an automorphism of `X` over `Y` commuting with `a`. Then
 the action of `σ` on `g_* ℚ̄_ℓ,X`, pulling back sections along `σ` and using `σ ≫ g = g`,
-
-`g_* ℚ̄_ℓ,X ⟶ g_* σ_* ℚ̄_ℓ,X ≅ (σ ≫ g)_* ℚ̄_ℓ,X = g_* ℚ̄_ℓ,X`,
-
-commutes with the isomorphism
-
-```
-str : (b⁻¹)_* g_* ℚ̄_ℓ,X ≅ (g ≫ b⁻¹)_* ℚ̄_ℓ,X = (a⁻¹ ≫ g)_* ℚ̄_ℓ,X
-        ≅ g_* (a⁻¹)_* ℚ̄_ℓ,X ≅ g_* ℚ̄_ℓ,X.
-```
-
-On sections over `V ⟶ Y` both composites pull functions back along `(v, x) ↦ (v, a σ x)`. -/
+`g_* ℚ̄_ℓ,X ⟶ g_* σ_* ℚ̄_ℓ,X ≅ (σ ≫ g)_* ℚ̄_ℓ,X = g_* ℚ̄_ℓ,X`, commutes with the isomorphism
+`(b⁻¹)_* g_* ℚ̄_ℓ,X ≅ (g ≫ b⁻¹)_* ℚ̄_ℓ,X = (a⁻¹ ≫ g)_* ℚ̄_ℓ,X ≅ g_* (a⁻¹)_* ℚ̄_ℓ,X ≅ g_* ℚ̄_ℓ,X`. -/
 lemma lowerStar_map_deckAction_comp_lowerStarExchange {X Y : Scheme.{u}} (g : X ⟶ Y)
     (a : X ≅ X) (b : Y ≅ Y) (σ : X ≅ X) (hg : g ≫ b.inv = a.inv ≫ g) (hσ : σ.hom ≫ g = g)
     (hσa : σ.hom ≫ a.hom = a.hom ≫ σ.hom)

@@ -123,10 +123,7 @@ variable (X) in
 /-- **The rationalisation of an `ℓ`-adic tower of rank `r` is lisse.** Let `(Gₙ)` be a tower of
 `ℤ_ℓ,X`-modules on `X_proét` whose transitions are cokernels of `ℓⁿ` (`Gₙ₊₁/ℓⁿ ≅ Gₙ`) and whose
 underlying abelian sheaves are each locally isomorphic to `(ℤ/ℓⁿ)_X^r`. Then the extension of
-scalars `ℚ̄_ℓ ⊗_{ℤ_ℓ} lim Gₙ` is a lisse `ℓ`-adic sheaf: the lattice `lim Gₙ` is locally
-`ℤ_ℓ,X^r`, as an abelian sheaf (`ProEtale.exists_cover_nonempty_iso_padicIntAbSheaf_pow`) hence
-as a module (`ProEtale.modIsoBiproductRegularOfIso`), and extension of scalars commutes with
-the pullback (`ProEtale.padicIntModUpperStarCompAdicSheafExtendScalarsIso`). -/
+scalars `ℚ̄_ℓ ⊗_{ℤ_ℓ} lim Gₙ` is a lisse `ℓ`-adic sheaf. -/
 theorem isAdicLisseSheaf_adicSheafExtendScalars_limit (r : ℕ)
     (G : ℕᵒᵖ ⥤ Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicIntAbSheaf X l))
     (hG : ∀ n : ℕ, ∃ w : (((l ^ n : ℕ) : ℤ) • 𝟙 _) ≫

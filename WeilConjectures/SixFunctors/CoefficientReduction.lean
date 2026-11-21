@@ -150,18 +150,12 @@ local notation "𝐑𝐞𝐬[" X ", " I ", " n "]" =>
   derivedRestrictScalars (Ideal.Quotient.mk (I ^ n)) X
 
 /-- The compatibility of the reduction `Λ → Λ ⧸ Iⁿ` with the basic operations of the étale
-derived categories (the étale part):
-every object has a reduction (a derived base change along `Λ → Λ ⧸ Iⁿ`); the derived pullback, the
-derived tensor product, the derived direct image, the compact-support direct image and the internal
-Hom of reductions are reductions of the corresponding operations; and the reduction of the
-projection map `PF_{f, K, L}` (its image under `- ⊗ᴸ (Λ ⧸ Iⁿ)_Y`) is isomorphic as an arrow to the
-restriction of scalars of the projection map `PF_{f, K_n, L_n}` over `Λ ⧸ Iⁿ`, which expresses
-that the comparisons preserve the units, counits and associativity maps out of which the
-projection map is built. The exceptional inverse image `Rf^!` (the right adjoint of `Rf_!`)
-commutes with reduction, and the reductions of the unit and counit of `Rf_! ⊣ Rf^!` are, as
-arrows, the restrictions of scalars of the unit and counit over `Λ ⧸ Iⁿ`; these are stated
-whenever `Rf_!` is a left adjoint over `Λ` and over `Λ ⧸ Iⁿ`, which is how `Rf^!` is defined
-(`AlgebraicGeometry.Etale.rightDerivedUpperShriek`). -/
+derived categories: every object has a reduction (a derived base change along `Λ → Λ ⧸ Iⁿ`);
+the derived pullback, tensor product, direct image, compact-support direct image, internal Hom
+and exceptional inverse image `Rf^!` of reductions are reductions of the corresponding
+operations; and the reductions of the projection map `PF_{f, K, L}` and of the unit and counit of
+`Rf_! ⊣ Rf^!` are, as arrows, the restrictions of scalars of the corresponding maps over
+`Λ ⧸ Iⁿ`. -/
 structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ) (n : ℕ) :
     Prop where
   /-- Every object has a reduction modulo `Iⁿ`. -/
@@ -246,12 +240,10 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
 
 /-- Compatibility of the derived base change along a ring morphism `φ : Λ →+* Λ'` with the basic
 operations of the étale derived categories, on the objects satisfying `P`: the derived pullback,
-the derived tensor product and the compact-support direct image of derived base changes are
-derived base changes of the corresponding operations, and the projection map `PF_{f, K', L'}` of
-the base changes is the base change of `PF_{f, K, L}`: there is a commutative square from
-`PF_{f, K, L}` to the restriction of scalars of `PF_{f, K', L'}` whose two sides exhibit derived
-base changes. This expresses that the comparisons preserve the units, counits and associativity
-maps out of which the projection map is built. -/
+tensor product and compact-support direct image of derived base changes are derived base changes
+of the corresponding operations, and the projection map `PF_{f, K', L'}` of the base changes is
+the base change of `PF_{f, K, L}`: there is a commutative square from `PF_{f, K, L}` to the
+restriction of scalars of `PF_{f, K', L'}` whose two sides exhibit derived base changes. -/
 structure BaseChangeCompatibility {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ']
     (φ : Λ →+* Λ') (P : ∀ X : Scheme.{u}, ObjectProperty 𝐃(X, Λ)) : Prop where
   /-- The derived pullback commutes with derived base change. -/
@@ -373,14 +365,12 @@ local notation "𝐑𝐞𝐬[" X ", " I ", " n "]" =>
   Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) (Ideal.Quotient.mk (I ^ n))
 
 /-- The compatibility of the reduction `Λ → Λ ⧸ Iⁿ` with the basic operations of the pro-étale
-derived categories (the pro-étale part): every object has a reduction (a derived base
-change along `Λ → Λ ⧸ Iⁿ`); the derived pullback, the derived tensor product, the derived direct
-image, the compact-support direct image, the internal Hom (with arbitrary first variable) and the
-exceptional inverse image of reductions are reductions of the corresponding operations; and
-the reduction of the compact-support exchange map `Ex_!(c) : Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*`
-at `K` (its image under `- ⊗ᴸ (Λ ⧸ Iⁿ)_{Y'}`) is isomorphic as an arrow to the restriction of
-scalars of the exchange map over `Λ ⧸ Iⁿ` at `K_n`, which expresses that the comparisons
-preserve the units and counits out of which the exchange map is built. -/
+derived categories: every object has a reduction (a derived base change along `Λ → Λ ⧸ Iⁿ`);
+the derived pullback, tensor product, direct image, compact-support direct image, internal Hom
+and exceptional inverse image of reductions are reductions of the corresponding operations; and
+the reduction of the compact-support exchange map `Ex_!(c) : Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` at
+`K` is isomorphic, as an arrow, to the restriction of scalars of the exchange map over `Λ ⧸ Iⁿ`
+at `K_n`. -/
 structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ) (n : ℕ) :
     Prop where
   /-- Every object has a reduction modulo `Iⁿ`. -/
@@ -446,11 +436,11 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
 
 /-- Compatibility of the derived base change along a ring morphism `φ : Λ →+* Λ'` with the basic
 operations of the pro-étale derived categories, on the objects satisfying `P`: the derived
-pullback, the derived tensor product and the compact-support direct image of derived base
-changes are derived base changes of the corresponding operations, and the compact-support
-exchange map `Ex_!(c)` at the base change `K'` is the base change of `Ex_!(c)` at `K`: there is
-a commutative square from `Ex_!(c)` at `K` to the restriction of scalars of `Ex_!(c)` at `K'`
-whose two sides exhibit derived base changes. -/
+pullback, tensor product and compact-support direct image of derived base changes are derived
+base changes of the corresponding operations, and the compact-support exchange map `Ex_!(c)` at
+`K'` is the base change of `Ex_!(c)` at `K`: there is a commutative square from `Ex_!(c)` at `K`
+to the restriction of scalars of `Ex_!(c)` at `K'` whose two sides exhibit derived base
+changes. -/
 structure BaseChangeCompatibility {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ']
     (φ : Λ →+* Λ') (P : ∀ X : Scheme.{u}, ObjectProperty 𝐃(X, Λ)) : Prop where
   /-- The derived pullback commutes with derived base change. -/
@@ -836,9 +826,7 @@ pullback, tensor, ordinary direct image and compact-support direct image; finite
 `A_{E,n} → A_{E,m}` commutes with pullback, tensor and compact-support direct image on the
 finite-Tor domains; internal Hom commutes with reduction for arbitrary first variables, and
 between finite quotients for site-perfect first variables; the same operations commute with
-rationalization and common-stage scalar extension, preserving the associativity maps, units and
-counits used to construct the projection and exchange transformations
-(`AlgebraicGeometry.CoefficientChangeCompatibility`). Here `𝒪_E` is generalised to a commutative
+rationalization and common-stage scalar extension. Here `𝒪_E` is generalised to a commutative
 ring `Λ` with a nonzerodivisor `ϖ`, and both the étale and the pro-étale model are covered. -/
 theorem coefficientChangeCompatibility : CoefficientChangeCompatibility.{u} :=
   sorry

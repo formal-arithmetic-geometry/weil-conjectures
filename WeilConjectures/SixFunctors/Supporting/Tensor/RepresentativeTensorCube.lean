@@ -349,8 +349,7 @@ private theorem scalarCurriedTensorSquare
   exact scalarCurriedSquare F G EY EX alpha TY TX TK' TH' phiF phiG tauY tauX
     (q.obj P) (q.obj Q) h
 
-/-- The two tensor presentations and their specified realization equation.
-All data are supplied explicitly; the last field is their compatibility proof. -/
+/-- The two tensor presentations and their specified realization equation. -/
 structure ScalarTensorRepresentativeData
     (K H D D' : Type*) [Category K] [Category H] [Category D] [Category D']
     extends TensorFixedRepresentativeData K D where

@@ -114,16 +114,12 @@ noncomputable def derivedExtendScalarsLowerShriekSingleIso
 variable (ℓ : ℕ) [Fact ℓ.Prime]
 
 open ZeroObject in
-/-- On a scheme `X` with noetherian underlying
-space, every `K ∈ Dᵇc(X, ℚ̄_ℓ)` is obtained by finitely many cones from the objects
-`(a_! L)[n]`, for `a = j ∘ i : S ⟶ U ⟶ X` a locally closed immersion (`i` a closed immersion,
-`j` an open immersion), `L` a lisse `ℚ̄_ℓ,S`-module and `n ∈ ℤ`, where
-`a_! L = j_! Ri_* L`. That is, `K` lies in every class `P` of objects of `D(ℚ̄_ℓ,X)` which is
-closed under isomorphisms and extensions in distinguished triangles and contains these
-objects.
-
-This states only one direction (the objects `(a_! L)[n]` generate
-`Dᵇc`; that they lie in `Dᵇc` is not restated), and only for `Λ = ℚ̄_ℓ`. -/
+/-- On a scheme `X` with noetherian underlying space, every `K ∈ Dᵇc(X, ℚ̄_ℓ)` is obtained by
+finitely many cones from the objects `(a_! L)[n]`, for `a = j ∘ i : S ⟶ U ⟶ X` a locally closed
+immersion (`i` a closed immersion, `j` an open immersion), `L` a lisse `ℚ̄_ℓ,S`-module and
+`n ∈ ℤ`, where `a_! L = j_! Ri_* L`. That is, `K` lies in every class `P` of objects of
+`D(ℚ̄_ℓ,X)` which is closed under isomorphisms and extensions in distinguished triangles and
+contains these objects. -/
 theorem boundedConstructible_le_of_lowerShriek_isLocallyFree (X : Scheme.{u})
     [TopologicalSpace.NoetherianSpace X]
     (P : ObjectProperty (DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1})

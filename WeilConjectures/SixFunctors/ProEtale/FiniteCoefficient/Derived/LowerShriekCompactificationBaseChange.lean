@@ -85,21 +85,11 @@ section Compactification
 variable {X' X Y' Y : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} (c : Compactification f)
   (c' : Compactification f') {g : Y' ⟶ Y} {g' : X' ⟶ X} {gZ : c'.Z ⟶ c.Z}
 
-/-- Compact-support exchange map
-along compactifications compatible with `g`.
-
-**The pro-étale compact-support exchange map along compatible compactifications**: for
+/-- **The pro-étale compact-support exchange map along compatible compactifications**: for
 compactifications `c` of `f : X ⟶ Y` and `c'` of `f' : X' ⟶ Y'` and morphisms `g : Y' ⟶ Y`,
 `g' : X' ⟶ X`, `gZ : c'.Z ⟶ c.Z` such that the square `g' ≫ c.i = c'.i ≫ gZ` is cartesian and
 the square `gZ ≫ c.g = c'.g ≫ g` commutes, the natural transformation
-`Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` of functors `D(X_proét) ⥤ D(Y'_proét)`, the composite
-```
-Lg^* R(c.g)_* (c.i)_! ⟶ R(c'.g)_* L(gZ)^* (c.i)_! ≅ R(c'.g)_* (c'.i)_! Lg'^*
-```
-of the derived base change map of the right square
-(`AlgebraicGeometry.ProEtale.derivedBaseChangeMap`) and of `R(c'.g)_*` applied to the base
-change isomorphism of the extension by zero
-(`AlgebraicGeometry.ProEtale.leftDerivedUpperStarOpenImmersionLowerShriekBaseChangeIso`). -/
+`Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` of functors `D(X_proét) ⥤ D(Y'_proét)`. -/
 noncomputable def rightDerivedLowerShriekOfCompactificationBaseChange
     (hi : IsPullback g' c'.i c.i gZ) (hg : CommSq gZ c'.g c.g g) :
     Rf_!(c)[A] ⋙ L((g)^*[A]) ⟶ L((g')^*[A]) ⋙ Rf_!(c')[A] :=

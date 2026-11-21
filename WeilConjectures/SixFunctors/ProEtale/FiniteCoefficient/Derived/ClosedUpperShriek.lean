@@ -79,18 +79,10 @@ instance faithful_rightDerivedLowerShriek_of_isClosedImmersion :
     (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) i).Faithful :=
   Functor.Faithful.of_iso (rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar _ i).symm
 
-/-- For a closed immersion
-`i : Z ⟶ X` admitting a compactification, `X` quasi-compact, and a bounded constructible
-`Q ∈ Dᵇc(Z_proét, Λ)`, `Λ` finite, the unit `Q ⟶ Ri^! Ri_! Q` of the constructible exceptional
-adjunction `Hom(Ri_! K, L) ≃ Hom(K, Ri^! L)` of
-`AlgebraicGeometry.ProEtale.rightDerivedUpperShriekHomEquiv` (the image of the identity of
-`Ri_! Q`) is an isomorphism. Here `Ri_! = Ri_*`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerShriekIsoRightDerivedFunctorLowerStar`).
-
-For `P` bounded below of étale origin, composition with the unit `η` followed by the adjunction
-bijection is `g ↦ Ri_! g`, which is bijective by full faithfulness of `Ri_!`; so `g ↦ g ≫ η` is
-bijective on `Hom(P, Q)`. Taking `P = Ri^! Ri_! Q`, which is bounded below of étale origin, gives
-a left inverse `r` of `η`, and taking `P = Q` shows that `η ≫ r = 𝟙`. -/
+/-- For a closed immersion `i : Z ⟶ X` admitting a compactification, `X` quasi-compact, and a
+bounded constructible `Q ∈ Dᵇc(Z_proét, Λ)`, `Λ` finite, the unit `Q ⟶ Ri^! Ri_! Q` of the
+constructible exceptional adjunction `Hom(Ri_! K, L) ≃ Hom(K, Ri^! L)` (the image of the
+identity of `Ri_! Q`) is an isomorphism. -/
 theorem isIso_rightDerivedUpperShriekHomEquiv_id_of_isClosedImmersion [CompactSpace X]
     {Q : DerivedCategory (Sheaf (ProEt.topology Z) (ModuleCat.{u + 1} Λ))}
     (hQ : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Z Q) :
