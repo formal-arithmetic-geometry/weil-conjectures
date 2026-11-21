@@ -1303,6 +1303,7 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.ConnectiveRankOne
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Cube
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Defs
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.FrobeniusPowFixed
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GaloisGroupLaw
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.GeometricPoints
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.IdentifiedBaseFibreIso
@@ -1317,7 +1318,9 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.RankOneResidueSta
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.RationalTateModule
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.StalkFreeResidueCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Symmetric
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModuleTorsion
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Torsion
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobeniusNatural
@@ -17566,6 +17569,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Triangulated.HomologicalFu
 public import WeilConjectures.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.GroupTheory.TateModuleDual
+public import WeilConjectures.GroupTheory.TateModuleQuotient
 public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.TorsionInverseLimit
 public import WeilConjectures.GroupTheory.WeilGroup
