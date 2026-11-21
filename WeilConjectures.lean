@@ -16993,6 +16993,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.MixedDescent
 public import WeilConjectures.DeligneLaumon.Reduction.MixedStalk
 public import WeilConjectures.DeligneLaumon.Reduction.OpenLine
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixed
+public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteMixedFieldCoefficient
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteStalk
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing
 public import WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteWeights
@@ -26152,6 +26153,7 @@ public import WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars
 public import WeilConjectures.WeilSheaf.FieldCoefficientForget
 public import WeilConjectures.WeilSheaf.FieldCoefficientFrobeniusTwist
 public import WeilConjectures.WeilSheaf.FieldCoefficientKaroubian
+public import WeilConjectures.WeilSheaf.FieldCoefficientSheafExtendScalars
 public import WeilConjectures.WeilSheaf.FieldCoefficientTateTwist
 public import WeilConjectures.WeilSheaf.FieldCoefficientTransition
 public import WeilConjectures.WeilSheaf.FieldCoefficientTriangulated
@@ -26224,6 +26226,7 @@ public import WeilConjectures.WeilSheaf.Karoubian
 public import WeilConjectures.WeilSheaf.KaroubianPointer
 public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.LSeries
+public import WeilConjectures.WeilSheaf.LSeriesWeilComplex
 public import WeilConjectures.WeilSheaf.LisseAbelian
 public import WeilConjectures.WeilSheaf.LisseDuality
 public import WeilConjectures.WeilSheaf.LisseExtension
