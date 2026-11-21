@@ -208,53 +208,6 @@ theorem mateEquiv_rightDerivedLowerShriekEtaleAdjunction {X Y X' Y' : Scheme.{u}
 
 end EtaleAdjunction
 
-section PasteVert
-
-/-- The composition isomorphism `R(f ≫ g)_! ≅ Rf_! ⋙ Rg_!` of
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso` is the inverse of
-`AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso` (by definition; compare
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekCompIso_eq_symm`, without Noetherian
-hypotheses). -/
-theorem rightDerivedLowerShriekCompIso_eq_unboundedEtaleLowerShriekCompIso_symm
-    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f]
-    [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact f]
-    [QuasiCompact (f ≫ g)] :
-    rightDerivedLowerShriekCompIso Λ f g = (unboundedEtaleLowerShriekCompIso Λ f g).symm := by
-  refine Iso.ext ?_
-  dsimp only [rightDerivedLowerShriekCompIso, unboundedEtaleLowerShriekCompIso, Iso.trans,
-    Iso.symm]
-  simp only [Category.assoc]
-  rfl
-
-variable {Λ} in
-/-- **Vertical pasting as `ExchangeCompCompatible`**, without Noetherian hypotheses (compare
-`AlgebraicGeometry.Etale.exchangeCompCompatible_of_paste_vert`). -/
-theorem exchangeCompCompatible_of_paste_vert_of_quasiCompact
-    {X X' Y Y' Z Z' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y ⟶ Z} {g' : Y' ⟶ Z'}
-    {vX : X' ⟶ X} {vY : Y' ⟶ Y} {vZ : Z' ⟶ Z}
-    [QuasiCompact f] [QuasiCompact (f ≫ g)]
-    [QuasiCompact f'] [QuasiCompact g'] [QuasiCompact (f' ≫ g')]
-    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
-    [HasCompactification f'] [HasCompactification g'] [HasCompactification (f' ≫ g')]
-    (sqf : IsPullback vX f' f vY) (sqg : IsPullback vY g' g vZ)
-    (sqgf : IsPullback vX (f' ≫ g') (f ≫ g) vZ) :
-    Adjunction.ExchangeCompCompatible (rightDerivedLowerShriekBaseChangeMap Λ sqf)
-      (rightDerivedLowerShriekBaseChangeMap Λ sqg) (rightDerivedLowerShriekBaseChangeMap Λ sqgf)
-      (rightDerivedLowerShriekCompIso Λ f g) (rightDerivedLowerShriekCompIso Λ f' g') where
-  comp M := by
-    rw [rightDerivedLowerShriekCompIso_eq_unboundedEtaleLowerShriekCompIso_symm,
-      rightDerivedLowerShriekCompIso_eq_unboundedEtaleLowerShriekCompIso_symm]
-    simp only [Iso.symm_hom]
-    have h := rightDerivedLowerShriekBaseChangeMap_paste_vert (Λ := Λ) sqf sqg sqgf M
-    rw [← cancel_mono ((unboundedEtaleLowerShriekCompIso Λ f' g').hom.app
-      ((L((vX)^*[ModuleCat.{u + 1} Λ])).obj M))]
-    simp only [Category.assoc, Iso.inv_hom_id_app]
-    rw [← h, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-      Category.id_comp]
-    erw [Category.comp_id]
-
-end PasteVert
-
 section BaseChange
 
 /-- **Base change of `Rg'^! ≅ Le^* Rg^!`**: for a cartesian square `v' ≫ e = e₁ ≫ v` of étale
@@ -285,7 +238,7 @@ theorem rightDerivedUpperShriekEtaleCompIso_baseChange {V' V B V₁' V₁ B₁ :
   have hEx := exchangeCompCompatible_of_eq (Λ := Λ) w w₁ sqe sq sq' sqgf (by
     let _ : HasCompactification (e ≫ g) := .of_eq w.symm
     let _ : HasCompactification (e₁ ≫ g₁) := .of_eq w₁.symm
-    exact exchangeCompCompatible_of_paste_vert_of_quasiCompact _ _ _)
+    exact exchangeCompCompatible_of_paste_vert _ _ _)
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sqe
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq
   have := isIso_rightDerivedLowerShriekBaseChangeMap Λ sq'
