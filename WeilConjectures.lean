@@ -10284,6 +10284,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanon
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalDerivedPullbackNormalization
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Canonical.ProEtaleCanonicalTensorPullback
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.GroupTorsor
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalBounds
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalDirectImagePreservation
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Classical.ProEtaleClassicalSheaves
@@ -16258,6 +16259,7 @@ public import WeilConjectures.CategoryTheory.Sites.GaloisDescentTrace
 public import WeilConjectures.CategoryTheory.Sites.GeometricFreeModuleHomEquivalence
 public import WeilConjectures.CategoryTheory.Sites.GeometricInverseImageExact
 public import WeilConjectures.CategoryTheory.Sites.GeometricMorphism
+public import WeilConjectures.CategoryTheory.Sites.GroupTorsor
 public import WeilConjectures.CategoryTheory.Sites.HomSheafAcyclic
 public import WeilConjectures.CategoryTheory.Sites.InjectiveCocycle
 public import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic

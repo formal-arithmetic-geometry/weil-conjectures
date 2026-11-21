@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSiteComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import Mathlib.CategoryTheory.Sites.CoversTop.Basic
 import WeilConjectures.AlgebraicGeometry.ProEtaleComparisonSections
-import WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
+public import WeilConjectures.AlgebraicGeometry.ComparisonPullbackCoherence
 import Mathlib.CategoryTheory.Sites.Precoverage.Generates
 import Mathlib.CategoryTheory.Sites.Finite
 import Mathlib.CategoryTheory.Sites.LocalProperties
@@ -268,7 +268,10 @@ end CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 set_option backward.isDefEq.respectTransparency.types false in
-private noncomputable def restrictionInverseImageIso (X : Scheme.{u}) (U : X.ProEt) :
+/-- For an object `U` of the small pro-étale site of `X`, the inverse image of sheaves of sets
+along the weakly étale morphism `U.hom` is isomorphic to restriction along the localization
+functor `U.left.ProEt ⥤ X.ProEt`. -/
+noncomputable def proEtaleComparisonPullbackIsoRestriction (X : Scheme.{u}) (U : X.ProEt) :
     ProEtale.proEtaleComparisonPullback (Type (u + 1)) U.hom ≅
       @Functor.sheafPushforwardContinuous U.left.ProEt _ X.ProEt _
         (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤ U.prop)
@@ -285,7 +288,10 @@ private noncomputable def restrictionInverseImageIso (X : Scheme.{u}) (U : X.Pro
     (@Adjunction.sheafPushforwardContinuous _ _ _ _ _ _ _ _ adj
       (ProEt.topology U.left) (ProEt.topology X) hMap' hPull)
 
-private noncomputable def classicalRestrictionIso (X : Scheme.{u}) (U : X.ProEt) :
+/-- Restricting the comparison pullback `ν_X^* G` of an étale sheaf of sets `G` to an object `U`
+of the small pro-étale site of `X` gives `ν_U^*` of the étale pullback of `G` along `U.hom`. -/
+noncomputable def comparisonCoefficientPullbackCompRestrictionIso (X : Scheme.{u})
+    (U : X.ProEt) :
     ProEtale.comparisonCoefficientPullback (Type (u + 1)) X ⋙
       @Functor.sheafPushforwardContinuous U.left.ProEt _ X.ProEt _
         (MorphismProperty.Over.map (P := @WeaklyEtale) ⊤ U.prop)
@@ -293,7 +299,7 @@ private noncomputable def classicalRestrictionIso (X : Scheme.{u}) (U : X.ProEt)
         (ProEt.isContinuous_overMap U.prop) ≅
     ProEtale.etaleComparisonPullback (Type (u + 1)) U.hom ⋙
       ProEtale.comparisonCoefficientPullback (Type (u + 1)) U.left :=
-  (Functor.isoWhiskerLeft _ (restrictionInverseImageIso X U)).symm ≪≫
+  (Functor.isoWhiskerLeft _ (proEtaleComparisonPullbackIsoRestriction X U)).symm ≪≫
     (ProEtale.comparisonCoefficientPullbackIso (Type (u + 1)) U.hom).symm
 
 
@@ -554,7 +560,7 @@ private theorem affineClassicalCover (X : Scheme.{u})
         inv_hom_id := by ext W; simp [← F.obj.map_comp, ← op_comp]; rfl }
     refine ⟨(ProEtale.etaleComparisonPullback (Type (u + 1)) g.left).obj G, ⟨?_⟩⟩
     exact eR ≪≫ (restriction (U i).left Zg).mapIso e ≪≫
-      (classicalRestrictionIso (U i).left Zg).app G
+      (comparisonCoefficientPullbackCompRestrictionIso (U i).left Zg).app G
 
 
 /-- Local etale presentations imply continuity on affine ind-etale presentations.

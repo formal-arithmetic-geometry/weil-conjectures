@@ -51,6 +51,15 @@ def IsProEtaleClassical (X : Scheme.{u}) (F : Sheaf (ProEt.topology X) (Type (u 
     Nonempty (F ≅ (Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
       (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)).obj G)
 
+/-- The restriction of a classical pro-étale sheaf of sets to an object `U` of the small pro-étale
+site of `X` is classical on `U`. -/
+theorem IsProEtaleClassical.restriction {X : Scheme.{u}}
+    {F : Sheaf (ProEt.topology X) (Type (u + 1))} (hF : IsProEtaleClassical X F) (U : X.ProEt) :
+    IsProEtaleClassical U.left ((proEtaleSetRestriction X U).obj F) := by
+  obtain ⟨G, ⟨e⟩⟩ := hF
+  exact ⟨_, ⟨(proEtaleSetRestriction X U).mapIso e ≪≫
+    (comparisonCoefficientPullbackCompRestrictionIso X U).app G⟩⟩
+
 /-- Local classicality uses a pro-etale cover and the sectionwise restriction to each
 member's small pro-etale site, with no compatibility imposed on the etale presentations.
 Source: Bhatt--Scholze, Lemma 5.1.4
