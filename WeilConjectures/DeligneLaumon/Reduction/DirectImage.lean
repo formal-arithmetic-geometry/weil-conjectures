@@ -36,8 +36,8 @@ that `Rf₀!K` is mixed of weights at most `w` whenever the bounded constructibl
 
 ## Main statements
 
-- `AlgebraicGeometry.hasDirectImageWeightBound_over_finiteField`: blueprint
-  `theorem-direct-image-mixed-sheaf--1` and `theorem-direct-image-mixed-sheaf--1`.
+- `AlgebraicGeometry.hasDirectImageWeightBound_over_finiteField`: `Rʳf₀!` of a sheaf mixed of
+  weights at most `w` is mixed of weights at most `w + r`.
 - `AlgebraicGeometry.exists_hasDirectImageWeightBound_opensι_comp`: the generic step of its
   Noetherian induction.
 - `AlgebraicGeometry.WeilComplex.IsMixedOfWeightsAtMost.derivedLowerShriek`: blueprint
@@ -257,8 +257,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
 
 /-- For a separated finite-type morphism `f : X ⟶ Y` of schemes of finite type over `k₀ = 𝔽_q` and
 a constructible Weil sheaf `F` on `X` mixed of weights at most `w`, the sheaf `Rʳf₀!F` is mixed of
-weights at most `w + r`, for every `r` (blueprint: `theorem-direct-image-mixed-sheaf--1`,
-`theorem-direct-image-mixed-sheaf--1`).
+weights at most `w + r`, for every `r`.
 
 Noetherian induction on the closed subsets of `X`: for a reduced closed subscheme `T` of `X`, the
 assertion holds for `T ⟶ Y` over a nonempty open `U` of `T`
