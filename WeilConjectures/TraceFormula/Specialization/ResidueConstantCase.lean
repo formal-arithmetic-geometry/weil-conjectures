@@ -335,9 +335,10 @@ theorem defectVanishesNear_unit_of_smooth_finiteCoefficient (hT : (ℓ : T) = 0)
     (hm : 0 < m)
     (hI : I.comap (overRestrictι X W).left = (polyAffineThickOrigin k m).comap f.left) :
     defectVanishesNear X I k' (Profinite.continuousMapRingObj.{u} T) (𝟙_ _) ζ := by
+  have hT₁ : (ℓ : T) ^ 1 = 0 := by rwa [pow_one]
   have h₀ := isZero_specializationDefect_unit_of_smooth_finiteCoefficient k' T f
-    (polyAffineThickOrigin k m) hT
-    (isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient T k' hT hm)
+    (polyAffineThickOrigin k m) hT₁
+    (isZero_specializationDefect_polyAffineThickOrigin_unit_finiteCoefficient T k' hT₁ hm)
   rw [← hI] at h₀
   obtain ⟨e⟩ := nonempty_specializationDefect_iso (overRestrict X W)
     (I.comap (overRestrictι X W).left) k' (Profinite.continuousMapRingObj.{u} T)
