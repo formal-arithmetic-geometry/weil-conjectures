@@ -26223,6 +26223,7 @@ public import WeilConjectures.WeilSheaf.Karoubian
 public import WeilConjectures.WeilSheaf.KaroubianPointer
 public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.LSeries
+public import WeilConjectures.WeilSheaf.LSeriesWeilComplex
 public import WeilConjectures.WeilSheaf.LisseAbelian
 public import WeilConjectures.WeilSheaf.LisseDuality
 public import WeilConjectures.WeilSheaf.LisseExtension
