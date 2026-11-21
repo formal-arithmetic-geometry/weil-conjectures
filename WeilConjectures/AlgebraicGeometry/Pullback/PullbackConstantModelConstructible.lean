@@ -202,7 +202,9 @@ private theorem coverModel_pullback
     (pullback.fst s g) (pullback.fst (U.f i) (pullback.fst s g)) (U.f i)
     (pullback.snd s g) s g pullback.condition.symm pullback.condition.symm M P hP e
 
-private theorem constantModelPullback
+/-- Inverse image preserves constructible modules and their specified constant models, for every
+commutative condensed coefficient ring `Λ`. -/
+theorem constantModelPullbackStatement
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj Λ] [IsCommMonObj Λ] : ConstantModelPullbackStatement Λ := by
   classical
@@ -222,6 +224,6 @@ theorem pullback_constantModelConstructible
     ConstantModelPullbackStatement ((sheafCompose (coherentTopology Profinite.{u})
       (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj L) := by
   intro Y Y' _ _ _ _ g M hM
-  exact constantModelPullback _ g M hM
+  exact constantModelPullbackStatement _ g M hM
 
 end AlgebraicGeometry.ProEtale
