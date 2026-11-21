@@ -174,4 +174,53 @@ theorem coefficient_connected_local_stalk_models
           max v (u + 1), max v (u + 1) + 1}
           (coefficientProEtaleModelTopology.{u, v} X) B).mapIso (ez ≪≫ ex.symm)) ≪≫ et⟩
 
+/-- On a connected scheme, a bounded complex with locally constant cohomology sheaves of finite
+type is étale locally isomorphic to the constant complex on any model `M` of one of its
+geometric stalks: there are étale charts `W x` through every point `x` such that, on every
+pro-étale object mapping to some chart, the comparison pullback of `K` is isomorphic to the
+constant realization of `M`. -/
+theorem exists_etale_charts_iso_constant_of_connectedSpace
+    (X : Scheme.{u}) [ConnectedSpace X]
+    (B : Type (max v (u + 1))) [CommRing B] [IsNoetherianRing B]
+    (K : ConstantCompletion.D
+      (ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, v} X) B))
+    (hbounded : ∃ c d : ℤ, ∀ q : ℤ, q < c ∨ d < q →
+      IsZero ((coefficientModelCohomology _ q).obj K))
+    (hlisse : ∀ q : ℤ, SheafOfModules.IsLocallyConstantFiniteTypeModules
+      (smallModelComparisonEtaleTopology.{u, v} X) B
+      ((coefficientModelCohomology _ q).obj K))
+    (z : X) (M : DerivedCategory (ModuleCat.{max v (u + 1)} B))
+    (eM : M ≅ (coefficientEtaleDerivedStalk X B (X.algClosurePoint z)).obj K) :
+    letI := HasDerivedCategory.standard (ConstantCompletion.Mod
+      (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B))
+    ∃ W : X → X.Etale, (∀ x : X, x ∈ Set.range (W x).hom.base) ∧
+      ∀ (i : X) (V : coefficientProEtaleSiteModel.{u, v} X),
+        ((AsSmall.down : coefficientProEtaleSiteModel.{u, v} X ⥤ X.ProEt).obj V ⟶
+          (toProEt X).obj (W i)) →
+        Nonempty ((adicResidueRestriction
+          (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B) V).obj
+            ((commutativeSiteDerivedConstantModuleFunctor.{max v (u + 1), max v (u + 1),
+              max v (u + 1), max v (u + 1) + 1}
+              (coefficientProEtaleModelTopology.{u, v} X) B).obj M) ≅
+          (adicResidueRestriction
+            (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B) V).obj
+              ((adicFinitePullback.{u, v} X B).obj K)) := by
+  let := HasDerivedCategory.standard (ConstantCompletion.Mod
+    (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B))
+  obtain ⟨W, N, hw, hstalk, hcomparison⟩ :=
+    coefficient_etale_derived_chart_atlas X B K hbounded hlisse
+  refine ⟨W, hw, fun i V f ↦ ?_⟩
+  obtain ⟨et⟩ := hcomparison i V f
+  obtain ⟨ez⟩ := stalks_agree_on_component (fun i ↦ Set.range (W i).hom.base)
+    (fun i ↦ (W i).hom.isOpenMap.isOpen_range) (fun x ↦ ⟨x, hw x⟩) N
+    (fun x ↦ (coefficientEtaleDerivedStalk X B (X.algClosurePoint x)).obj K) hstalk z i
+    (isPreconnected_univ.subset_connectedComponent (Set.mem_univ z) (Set.mem_univ i))
+  obtain ⟨ei⟩ := hstalk i i (hw i)
+  exact ⟨(adicResidueRestriction
+      (ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) B) V).mapIso
+        ((commutativeSiteDerivedConstantModuleFunctor.{max v (u + 1), max v (u + 1),
+          max v (u + 1), max v (u + 1) + 1}
+          (coefficientProEtaleModelTopology.{u, v} X) B).mapIso (eM ≪≫ ez ≪≫ ei.symm)) ≪≫
+      et⟩
+
 end AlgebraicGeometry.Scheme
