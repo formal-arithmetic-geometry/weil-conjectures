@@ -11,12 +11,44 @@ public import WeilConjectures.TraceFormula.ExternalProductExtendScalars
 public import WeilConjectures.TraceFormula.GraphPieces
 public import WeilConjectures.TraceFormula.IntegralCompactPullback
 public import WeilConjectures.TraceFormula.RationalModel
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.CoefficientChangeUpperStarComp
 
 /-!
 
 # Frobenius operators under the extension of scalars `𝒪_E ⟶ ℚ̄_ℓ`
 
-DOC
+Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`, and write
+`T_X = ℚ̄_ℓ ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧`
+(`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgCl`). For a Frobenius
+correspondence `θ : LΦ^* K ⟶ K` with `𝒪_E`-coefficients, this file compares the operators of `θ`
+(`ProEtale.CondensedRing.PadicIntegersRingObj.frobeniusCompactOperator`,
+`ProEtale.CondensedRing.PadicIntegersRingObj.graphStalkMap`) with those of its extension of
+scalars `ψ = σ⁻¹ ∘ T_X θ : LΦ^* T_X K ⟶ T_X K`
+(`ProEtale.CondensedRing.frobeniusCoefficientIntegersToPadicAlgCl`):
+
+* the iterates: `T_X θ_m = σ_m ∘ ψ_m` for `m ≥ 1`
+  (`ProEtale.CondensedRing.map_frobeniusCoefficientIterate_integersToPadicAlgCl`);
+* the operators on compactly supported cohomology: through the comparison
+  `T(RΓ_c(X, K)) ≅ RΓ_c(X, T_X K)`, `T(T_{c_m}(θ_m)) = T_{c_m}(ψ_m)`
+  (`ProEtale.CondensedRing.map_frobeniusCompactOperator_integersToPadicAlgCl`);
+* the stalk maps: through `T(K_x) ≅ (T_X K)_x`, `T(θ_{m,x}) = ψ_{m,x}`
+  (`ProEtale.CondensedRing.map_graphStalkMap_integersToPadicAlgCl`).
+
+These rest on the coherence of the pullback comparisons `σ_f : T_X (Lf^* K) ≅ Lf^* (T_Y K)` with
+the composition isomorphisms (`ProEtale.CondensedRing.upperStarIntegersToPadicAlgClObjIso_hom_comp`)
+and on the compatibility of the pullback on compactly supported cohomology `h^♯` with the
+coefficient change (`ProEtale.CondensedRing.map_compactPullback_app_integersToPadicAlgCl`).
+
+## Implementation details
+
+The last compatibility is stated but not proved here (it is a `sorry`): it unwinds to the
+compatibility of the comparison (Shriek) with the identification `Rh_! ≅ Rh_*` of a proper `h`
+and with the composition isomorphisms of the lower shriek, both of which are built from the
+independence of the lower shriek from the compactification.
+
+The comparisons are stated componentwise (`upperStarIntegersToPadicAlgClObjIso`,
+`lowerShriekIntegersToPadicAlgClObjIso`), with objects written as `G.obj (F.obj K)` rather than
+`(F ⋙ G).obj K`: unifying the two forms unfolds the derived pullbacks and is very slow.
 
 -/
 
@@ -81,15 +113,52 @@ noncomputable def lowerShriekIntegersToPadicAlgClObjIso (f : X ⟶ Y)
         ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj K) :=
   (boundedConstructibleLowerShriekIntegersToPadicAlgClIso E f).app K
 
-theorem upperStarIntegersToPadicAlgClObjIso_hom_id
-    (K : Dᵇc(X.left)⟦𝒪⟧) :
-    (upperStarIntegersToPadicAlgClObjIso E (𝟙 X) K).hom ≫
-        (boundedConstructibleUpperStarId ℚ̄ ℓ X).hom.app
-          ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj K) =
-      (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map
-        ((boundedConstructibleUpperStarId 𝒪 ℓ X).hom.app K) := by
-  sorry
+/-- The pullback comparison for `𝒪_E ⟶ ℚ̄_ℓ` is the one for `𝒪_E ⟶ E` followed by the one for
+`E ⟶ ℚ̄_ℓ`. -/
+lemma upperStarIntegersToPadicAlgClObjIso_hom_eq (f : X ⟶ Y) (K : Dᵇc(Y.left)⟦𝒪⟧) :
+    (upperStarIntegersToPadicAlgClObjIso E f K).hom =
+      (boundedConstructibleToPadicAlgCl X.left ℓ E).map
+          ((boundedConstructibleUpperStarExtendScalarsIso ℓ E f).hom.app K) ≫
+        (boundedConstructibleUpperStarToPadicAlgClIso ℓ E f).hom.app
+          ((boundedConstructibleExtendScalars Y.left ℓ E).obj K) := by
+  simp [upperStarIntegersToPadicAlgClObjIso, boundedConstructibleUpperStarIntegersToPadicAlgClIso]
+  rfl
 
+/-- The composite of the pullback comparisons for `𝒪_E ⟶ E` and `E ⟶ ℚ̄_ℓ` is compatible with the
+composition isomorphisms. -/
+lemma upperStarIntegersToPadicAlgCl_comp_aux (f : X ⟶ Y) (g : Y ⟶ Z) (K : Dᵇc(Z.left)⟦𝒪⟧) :
+    ((boundedConstructibleToPadicAlgCl X.left ℓ E).map
+          ((boundedConstructibleUpperStarExtendScalarsIso ℓ E (f ≫ g)).hom.app K) ≫
+        (boundedConstructibleUpperStarToPadicAlgClIso ℓ E (f ≫ g)).hom.app
+          ((boundedConstructibleExtendScalars Z.left ℓ E).obj K)) ≫
+      (boundedConstructibleUpperStarComp ℚ̄ ℓ f g).hom.app
+          ((boundedConstructibleToPadicAlgCl Z.left ℓ E).obj
+            ((boundedConstructibleExtendScalars Z.left ℓ E).obj K)) =
+      (boundedConstructibleToPadicAlgCl X.left ℓ E).map
+          ((boundedConstructibleExtendScalars X.left ℓ E).map
+            ((boundedConstructibleUpperStarComp 𝒪 ℓ f g).hom.app K)) ≫
+        ((boundedConstructibleToPadicAlgCl X.left ℓ E).map
+            ((boundedConstructibleUpperStarExtendScalarsIso ℓ E f).hom.app
+              ((boundedConstructibleUpperStar 𝒪 ℓ g).obj K)) ≫
+          (boundedConstructibleUpperStarToPadicAlgClIso ℓ E f).hom.app
+            ((boundedConstructibleExtendScalars Y.left ℓ E).obj
+              ((boundedConstructibleUpperStar 𝒪 ℓ g).obj K))) ≫
+        (boundedConstructibleUpperStar ℚ̄ ℓ f).map
+          ((boundedConstructibleToPadicAlgCl Y.left ℓ E).map
+              ((boundedConstructibleUpperStarExtendScalarsIso ℓ E g).hom.app K) ≫
+            (boundedConstructibleUpperStarToPadicAlgClIso ℓ E g).hom.app
+              ((boundedConstructibleExtendScalars Z.left ℓ E).obj K)) := by
+  have hn := (boundedConstructibleUpperStarToPadicAlgClIso ℓ E f).hom.naturality
+    ((boundedConstructibleUpperStarExtendScalarsIso ℓ E g).hom.app K)
+  simp only [Functor.comp_map] at hn
+  have hA := congrArg (boundedConstructibleToPadicAlgCl X.left ℓ E).map
+    (boundedConstructibleUpperStarExtendScalarsIso_hom_app_comp E f g K)
+  simp only [Functor.map_comp] at hA
+  simp only [Category.assoc, boundedConstructibleUpperStarToPadicAlgClIso_hom_app_comp,
+    reassoc_of% hA, Functor.map_comp, reassoc_of% hn]
+
+/-- The pullback comparisons for `𝒪_E ⟶ ℚ̄_ℓ` are compatible with the composition isomorphisms
+`L(f ≫ g)^* ≅ Lg^* ⋙ Lf^*`. -/
 theorem upperStarIntegersToPadicAlgClObjIso_hom_comp (f : X ⟶ Y)
     (g : Y ⟶ Z) (K : Dᵇc(Z.left)⟦𝒪⟧) :
     (upperStarIntegersToPadicAlgClObjIso E (f ≫ g) K).hom ≫
@@ -101,16 +170,10 @@ theorem upperStarIntegersToPadicAlgClObjIso_hom_comp (f : X ⟶ Y)
           ((boundedConstructibleUpperStar 𝒪 ℓ g).obj K)).hom ≫
         (boundedConstructibleUpperStar ℚ̄ ℓ f).map
           (upperStarIntegersToPadicAlgClObjIso E g K).hom := by
-  sorry
+  simp only [upperStarIntegersToPadicAlgClObjIso_hom_eq]
+  exact upperStarIntegersToPadicAlgCl_comp_aux E f g K
 
-lemma upperStarIntegersToPadicAlgClObjIso_hom_eqToHom {f g : X ⟶ Y}
-    (e : f = g) (K : Dᵇc(Y.left)⟦𝒪⟧) :
-    (upperStarIntegersToPadicAlgClObjIso E f K).hom ≫ eqToHom (by rw [e]) =
-      (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map (eqToHom (by rw [e])) ≫
-        (upperStarIntegersToPadicAlgClObjIso E g K).hom := by
-  subst e
-  simp
-
+/-- Naturality of the pullback comparison for `𝒪_E ⟶ ℚ̄_ℓ`. -/
 lemma upperStarIntegersToPadicAlgClObjIso_hom_naturality (f : X ⟶ Y)
     {K L : Dᵇc(Y.left)⟦𝒪⟧} (a : K ⟶ L) :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map
@@ -121,6 +184,7 @@ lemma upperStarIntegersToPadicAlgClObjIso_hom_naturality (f : X ⟶ Y)
           ((boundedConstructibleIntegersToPadicAlgCl ℓ E Y).map a) :=
   (boundedConstructibleUpperStarIntegersToPadicAlgClIso ℓ E f).hom.naturality a
 
+/-- Naturality of the lower shriek comparison for `𝒪_E ⟶ ℚ̄_ℓ`. -/
 lemma lowerShriekIntegersToPadicAlgClObjIso_hom_naturality (f : X ⟶ Y)
     {K L : Dᵇc(X.left)⟦𝒪⟧} (a : K ⟶ L) :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E Y).map
@@ -131,6 +195,10 @@ lemma lowerShriekIntegersToPadicAlgClObjIso_hom_naturality (f : X ⟶ Y)
           ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).map a) :=
   (boundedConstructibleLowerShriekIntegersToPadicAlgClIso E f).hom.naturality a
 
+/-- **The pullback on compactly supported cohomology commutes with `𝒪_E ⟶ ℚ̄_ℓ`**: for a proper
+`h : Y ⟶ X`, through the comparisons (Shriek) and (Pull), the extension of scalars of the
+pullback `h^♯ : RΓ_c(X, K) ⟶ RΓ_c(Y, Lh^* K)` with `𝒪_E`-coefficients is the pullback `h^♯` of
+`T_X K`. -/
 theorem map_compactPullback_app_integersToPadicAlgCl (h : Y ⟶ X) [IsProper h.left]
     (K : Dᵇc(X.left)⟦𝒪⟧) :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E (point k)).map
@@ -143,6 +211,7 @@ theorem map_compactPullback_app_integersToPadicAlgCl (h : Y ⟶ X) [IsProper h.l
         (compactPullback ℓ h).app ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj K) := by
   sorry
 
+/-- `upperStarIntegersToPadicAlgClObjIso_hom_comp`, composed with a morphism `q`. -/
 lemma upperStarIntegersToPadicAlgClObjIso_hom_comp_assoc (f : X ⟶ Y)
     (g : Y ⟶ Z) (K : Dᵇc(Z.left)⟦𝒪⟧) {W : Dᵇc(X.left)⟦ℚ̄⟧}
     (q : (boundedConstructibleUpperStar ℚ̄ ℓ f).obj
@@ -159,6 +228,7 @@ lemma upperStarIntegersToPadicAlgClObjIso_hom_comp_assoc (f : X ⟶ Y)
           (upperStarIntegersToPadicAlgClObjIso E g K).hom ≫ q := by
   simp only [← Category.assoc, upperStarIntegersToPadicAlgClObjIso_hom_comp]
 
+/-- The pullback comparisons along equal morphisms agree up to the casts. -/
 lemma upperStarIntegersToPadicAlgClObjIso_hom_eqToHom_assoc {f g : X ⟶ Y}
     (e : f = g) (K : Dᵇc(Y.left)⟦𝒪⟧)
     {W : Dᵇc(X.left)⟦ℚ̄⟧}
@@ -170,6 +240,7 @@ lemma upperStarIntegersToPadicAlgClObjIso_hom_eqToHom_assoc {f g : X ⟶ Y}
   subst e
   simp
 
+/-- `map_compactPullback_app_integersToPadicAlgCl`, composed with a morphism `q`. -/
 lemma map_compactPullback_app_integersToPadicAlgCl_assoc (h : Y ⟶ X) [IsProper h.left]
     (K : Dᵇc(X.left)⟦𝒪⟧)
     {W : Dᵇc((point k).left)⟦ℚ̄⟧}
@@ -195,6 +266,8 @@ section Frobenius
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] {Φ : X ⟶ X}
 
+/-- The extension of scalars `ψ = σ⁻¹ ∘ T_X θ : LΦ^* T_X K ⟶ T_X K` of a Frobenius correspondence
+`θ : LΦ^* K ⟶ K` with `𝒪_E`-coefficients. -/
 noncomputable def frobeniusCoefficientIntegersToPadicAlgCl
     {K : Dᵇc(X.left)⟦𝒪⟧}
     (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K ⟶ K) :
@@ -204,18 +277,18 @@ noncomputable def frobeniusCoefficientIntegersToPadicAlgCl
   (upperStarIntegersToPadicAlgClObjIso E Φ K).inv ≫
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map θ
 
-lemma map_eqToHom_comp_upperStarId_integersToPadicAlgCl {u : X ⟶ X} (e : u = 𝟙 X)
-    (K : Dᵇc(X.left)⟦𝒪⟧) :
-    (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map
-        (eqToHom (by rw [e]) ≫
-          (boundedConstructibleUpperStarId 𝒪 ℓ X).hom.app K) =
+/-- The first iterate step of `map_frobeniusCoefficientIterate_integersToPadicAlgCl`, for a
+morphism `u` equal to `Φ`. -/
+lemma map_eqToHom_comp_integersToPadicAlgCl {u : X ⟶ X} (e : u = Φ)
+    {K : Dᵇc(X.left)⟦𝒪⟧} (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K ⟶ K) :
+    (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map (eqToHom (by rw [e]) ≫ θ) =
       (upperStarIntegersToPadicAlgClObjIso E u K).hom ≫ eqToHom (by rw [e]) ≫
-          (boundedConstructibleUpperStarId ℚ̄ ℓ X).hom.app
-            ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj K) := by
+        frobeniusCoefficientIntegersToPadicAlgCl E θ := by
   subst e
-  simp only [eqToHom_refl, Category.id_comp]
-  exact (upperStarIntegersToPadicAlgClObjIso_hom_id E K).symm
+  simp [frobeniusCoefficientIntegersToPadicAlgCl]
 
+/-- The inductive step of `map_frobeniusCoefficientIterate_integersToPadicAlgCl`, for a morphism
+`u` equal to `Φ ≫ v`. -/
 lemma map_frobeniusCoefficientIterate_integersToPadicAlgCl_step {u v : X ⟶ X} (e : u = Φ ≫ v)
     {K : Dᵇc(X.left)⟦𝒪⟧}
     (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K ⟶ K)
@@ -244,30 +317,33 @@ lemma map_frobeniusCoefficientIterate_integersToPadicAlgCl_step {u v : X ⟶ X} 
   simp only [Category.assoc, Functor.map_comp, ← reassoc_of% hn, Iso.hom_inv_id_assoc]
   rfl
 
+/-- The iterates of the extension of scalars `ψ` of a Frobenius correspondence `θ` are the
+extensions of scalars of its iterates: `T_X θ_m = σ_m ∘ ψ_m` for `m ≥ 1`. -/
 theorem map_frobeniusCoefficientIterate_integersToPadicAlgCl
     {K : Dᵇc(X.left)⟦𝒪⟧}
     (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K ⟶ K)
-    (m : ℕ) :
+    {m : ℕ} (hm : 1 ≤ m) :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E X).map (frobeniusCoefficientIterate θ m) =
       (upperStarIntegersToPadicAlgClObjIso E (frobeniusIterate Φ m) K).hom ≫
         frobeniusCoefficientIterate (frobeniusCoefficientIntegersToPadicAlgCl E θ) m := by
-  induction m with
-  | zero =>
-    rw [frobeniusCoefficientIterate_zero, frobeniusCoefficientIterate_zero]
-    simp only [upperStarIterateZeroIso, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
-      eqToHom_app]
-    exact map_eqToHom_comp_upperStarId_integersToPadicAlgCl E (frobeniusIterate_zero Φ) K
-  | succ m ih =>
+  induction m, hm using Nat.le_induction with
+  | base =>
+    rw [frobeniusCoefficientIterate_one, frobeniusCoefficientIterate_one]
+    exact map_eqToHom_comp_integersToPadicAlgCl E (frobeniusIterate_one Φ) θ
+  | succ m _ ih =>
     rw [frobeniusCoefficientIterate_succ_eq, frobeniusCoefficientIterate_succ_eq]
     simp only [upperStarIterateSuccIso, Iso.trans_hom, NatTrans.comp_app, eqToIso.hom,
       eqToHom_app, Category.assoc]
     exact map_frobeniusCoefficientIterate_integersToPadicAlgCl_step E (frobeniusIterate_succ Φ m)
       θ _ _ ih
 
+/-- **The operators `T_{c_m}` commute with `𝒪_E ⟶ ℚ̄_ℓ`**: through (Shriek), the extension of
+scalars of `T_{c_m}(θ_m)` on `RΓ_c(X, K)` is the operator `T_{c_m}(ψ_m)` of the extension of
+scalars `ψ` of `θ` on `RΓ_c(X, T_X K)`, for `m ≥ 1`. -/
 theorem map_frobeniusCompactOperator_integersToPadicAlgCl [IsProper Φ.left]
     {K : Dᵇc(X.left)⟦𝒪⟧}
     (θ : (boundedConstructibleUpperStar 𝒪 ℓ Φ).obj K ⟶ K)
-    (m : ℕ) :
+    {m : ℕ} (hm : 1 ≤ m) :
     (boundedConstructibleIntegersToPadicAlgCl ℓ E (point k)).map
           (PadicIntegersRingObj.frobeniusCompactOperator θ m) ≫
         (lowerShriekIntegersToPadicAlgClObjIso E (toPoint X) K).hom =
@@ -275,9 +351,11 @@ theorem map_frobeniusCompactOperator_integersToPadicAlgCl [IsProper Φ.left]
         frobeniusCompactOperator ℓ (frobeniusCoefficientIntegersToPadicAlgCl E θ) m := by
   unfold PadicIntegersRingObj.frobeniusCompactOperator frobeniusCompactOperator
   simp only [Functor.map_comp, Category.assoc, lowerShriekIntegersToPadicAlgClObjIso_hom_naturality,
-    map_frobeniusCoefficientIterate_integersToPadicAlgCl,
+    map_frobeniusCoefficientIterate_integersToPadicAlgCl E θ hm,
     map_compactPullback_app_integersToPadicAlgCl_assoc]
 
+/-- **The stalk maps commute with `𝒪_E ⟶ ℚ̄_ℓ`**: through (Pull), the extension of scalars of the
+stalk map `v_x` is the stalk map at `x` of the extension of scalars `σ⁻¹ ∘ T_X v` of `v`. -/
 theorem map_graphStalkMap_integersToPadicAlgCl
     (K : Dᵇc(X.left)⟦𝒪⟧) (h : X ⟶ X)
     (v : (boundedConstructibleUpperStar 𝒪 ℓ h).obj K ⟶ K)

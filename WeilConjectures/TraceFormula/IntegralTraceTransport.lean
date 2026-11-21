@@ -21,6 +21,20 @@ public import WeilConjectures.TraceFormula.PointFiberFunctorIntegral
 
 # Traces under the extension of scalars `𝒪_E ⟶ ℚ̄_ℓ`
 
+Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`, and write
+`T_X = ℚ̄_ℓ ⊗ᴸ_{𝒪_E} - : Dᵇc(X)⟦𝒪_E⟧ ⥤ Dᵇc(X)⟦ℚ̄_ℓ⟧`
+(`ProEtale.CondensedRing.boundedConstructibleIntegersToPadicAlgCl`). This file proves:
+
+* `T_X` preserves categorical traces: `tr(T_X f) = T_X(tr f)`, up to the unit isomorphism of the
+  monoidal functor `T_X`
+  (`ProEtale.CondensedRing.trace_boundedConstructibleIntegersToPadicAlgCl_map`), `T_X` being
+  braided for the Koszul braidings;
+* over a separably closed field, every endomorphism of the unit of `Dᵇc(Spec k)⟦𝒪_E⟧` is a scalar
+  of `𝒪_E` (`ProEtale.CondensedRing.surjective_pointIntegersBoundedConstructibleUnitEndRingHom`),
+  and `T` is injective on these endomorphisms
+  (`ProEtale.CondensedRing.eq_zero_of_boundedConstructibleIntegersToPadicAlgCl_map_eq_zero`), since
+  a nonzero `r ∈ 𝒪_E` divides a power of `ℓ`, whose image in `ℚ̄_ℓ` is nonzero.
+
 -/
 
 @[expose] public section
@@ -41,8 +55,10 @@ attribute [local instance] boundedConstructibleBraiding
 variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)] (E : PadicAlgCl.FiniteIntermediateField ℓ)
   (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom]
 
+/-- **The extension of scalars `𝒪_E ⟶ ℚ̄_ℓ` preserves categorical traces**: for an endomorphism `f`
+of a dualizable bounded constructible `𝒪_E`-complex `A`, `tr(T_X f) = ε ≫ T_X(tr f) ≫ η`, where
+`ε : 𝟙 ⟶ T_X 𝟙` is the unit of the monoidal functor `T_X` and `η` its inverse. -/
 theorem trace_boundedConstructibleIntegersToPadicAlgCl_map
     {A : Dᵇc(X.left)⟦Profinite.padicIntegersRingObj ℓ E.1⟧} [hA : HasRightDual A]
     [hTA : HasRightDual ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj A)] (f : A ⟶ A) :
@@ -57,7 +73,8 @@ theorem trace_boundedConstructibleIntegersToPadicAlgCl_map
   let : (constructibleToPadicAlgCl X.left ℓ E).Braided :=
     { constructibleToPadicAlgClLaxBraided ℓ E X with }
   let : HasRightDual ((boundedConstructibleExtendScalars X.left ℓ E).obj A) :=
-    { rightDual := _, exact := ExactPairing.map (boundedConstructibleExtendScalars X.left ℓ E) A Aᘁ }
+    { rightDual := _
+      exact := ExactPairing.map (boundedConstructibleExtendScalars X.left ℓ E) A Aᘁ }
   let : HasRightDual ((constructibleToPadicAlgCl X.left ℓ E).obj
       ((boundedConstructibleExtendScalars X.left ℓ E).obj A)) :=
     inferInstanceAs (HasRightDual ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj A))
@@ -80,6 +97,7 @@ noncomputable abbrev pointIntegersSingleFunctor :
   HomologicalComplex.single (PointModIntegral ℓ k E) (ComplexShape.up ℤ) 0 ⋙
     HomotopyCategory.quotient _ (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh
 
+/-- The unit of the localization `Qh` is an isomorphism. -/
 instance : IsIso (ε (DerivedCategory.Qh (C := PointModIntegral ℓ k E))) :=
   inferInstanceAs (IsIso (𝟙 _))
 
@@ -108,6 +126,7 @@ noncomputable def pointIntegersBoundedConstructibleUnitEndRingHom :
 
 variable {ℓ k} [IsSepClosed k]
 
+omit [Fact (ringChar k).Prime] in
 /-- For `k` separably closed, every endomorphism of the unit of `Dᵇc(Spec k)⟦𝒪̲_E⟧` is a scalar
 of `𝒪_E`. -/
 theorem surjective_pointIntegersBoundedConstructibleUnitEndRingHom :

@@ -13,6 +13,28 @@ public import WeilConjectures.TraceFormula.IntegralTraceTransport
 
 # The trace formula with `𝒪_E`-coefficients
 
+Let `E ⊆ ℚ̄_ℓ` be a finite extension of `ℚ_ℓ` with ring of integers `𝒪_E`, `Φ` the model
+Frobenius of a separated model `X₀` of finite type over a finite field `k₀` of `X = X₀ ×_{k₀} k`,
+`K` a bounded constructible `𝒪_E`-complex on `X` and `θ : LΦ^* K ⟶ K` an arbitrary, not necessarily
+invertible, morphism (a Frobenius correspondence with integral coefficients). For every `m ≥ 1`,
+the trace formula
+```
+tr(T_{c_m}(θ_m) | RΓ_c(X, K)) = ∑_{x ∈ X₀(𝔽_{q^m})} tr(θ_{m,x} | K_x)
+```
+holds, both sides being categorical traces in `Dᵇc(Spec k)⟦𝒪_E⟧`
+(`ProEtale.CondensedRing.PadicIntegersRingObj.trace_frobeniusCompactOperator_eq_sum`).
+
+## Implementation details
+
+The proof extends the scalars along `𝒪_E ⟶ ℚ̄_ℓ` rather than reducing modulo the powers of the
+uniformizer: the extension of scalars `T` carries both sides to the two sides of the trace
+formula for the extension of scalars of `θ` with `ℚ̄_ℓ`-coefficients
+(`ProEtale.CondensedRing.trace_frobeniusCompactOperator_eq_sum`), the operators being compatible
+with `T` (`WeilConjectures.TraceFormula.IntegralCoefficientComparison`) and `T` preserving
+categorical traces (`ProEtale.CondensedRing.trace_boundedConstructibleIntegersToPadicAlgCl_map`).
+It concludes since `T` is injective on the endomorphisms of the unit
+(`ProEtale.CondensedRing.eq_zero_of_boundedConstructibleIntegersToPadicAlgCl_map_eq_zero`).
+
 -/
 
 @[expose] public section
@@ -36,13 +58,13 @@ variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- A right dual transported along an isomorphism. -/
 @[reducible]
-def hasRightDualOfIso {C : Type*} [Category C] [MonoidalCategory C] {A B : C} (e : A ≅ B)
+private def hasRightDualOfIso {C : Type*} [Category C] [MonoidalCategory C] {A B : C} (e : A ≅ B)
     [HasRightDual B] : HasRightDual A :=
   { rightDual := Bᘁ, exact := exactPairingCongrLeft e }
 
 /-- If an additive functor `F` is injective on `A ⟶ B` and `e ≫ F f ≫ e' = ∑ᵢ e ≫ F tᵢ ≫ e'` for an
 epimorphism `e` and a monomorphism `e'`, then `f = ∑ᵢ tᵢ`. -/
-lemma eq_sum_of_map_eq_sum {C D : Type*} [Category* C] [Preadditive C] [Category* D]
+private lemma eq_sum_of_map_eq_sum {C D : Type*} [Category* C] [Preadditive C] [Category* D]
     [Preadditive D] (F : C ⥤ D) [F.Additive] {A B : C} {A' B' : D} (e : A' ⟶ F.obj A)
     (e' : F.obj B ⟶ B') [Epi e] [Mono e'] (hF : ∀ g : A ⟶ B, F.map g = 0 → g = 0) {ι : Type*}
     (s : Finset ι) (f : A ⟶ B) (t : ι → (A ⟶ B))
@@ -54,6 +76,11 @@ lemma eq_sum_of_map_eq_sum {C D : Type*} [Category* C] [Preadditive C] [Category
 
 namespace PadicIntegersRingObj
 
+/-- **The trace formula with `𝒪_E`-coefficients**: for the model Frobenius `Φ` of a separated
+model `X₀` of finite type over a finite field `k₀`, a bounded constructible `𝒪_E`-complex `K`
+with an arbitrary, not necessarily invertible, map `θ : LΦ^* K ⟶ K` and `m ≥ 1`, the trace of
+the operator `T_{c_m}(θ_m)` on `RΓ_c(X, K)` is the sum over the rational points `x` fixed by
+`Φ_m` of the traces of the stalk maps `θ_{m,x}` on `K_x`. -/
 theorem trace_frobeniusCompactOperator_eq_sum [IsAlgClosed k] {k₀ : Type u} [Field k₀]
     [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)}
     [LocallyOfFiniteType f₀] {p : X.left ⟶ X₀} {Φ : X ⟶ X} (hΦ : IsModelFrobenius Φ f₀ p)
@@ -93,17 +120,18 @@ theorem trace_frobeniusCompactOperator_eq_sum [IsAlgClosed k] {k₀ : Type u} [F
       trace (CondensedRing.frobeniusCompactOperator ℓ
         (frobeniusCoefficientIntegersToPadicAlgCl E θ) m) :=
     trace_eq_of_iso (lowerShriekIntegersToPadicAlgClObjIso E (toPoint X) K) _ _
-      (map_frobeniusCompactOperator_integersToPadicAlgCl E θ m)
+      (map_frobeniusCompactOperator_integersToPadicAlgCl E θ hm)
   have hst : ∀ x : FixedPoint Φ m,
       trace ((boundedConstructibleIntegersToPadicAlgCl ℓ E (point k)).map
         (graphStalkMap K (frobeniusIterate Φ m) (frobeniusCoefficientIterate θ m) x.1 x.2)) =
       trace (Correspondence.graphStalkMap ((boundedConstructibleIntegersToPadicAlgCl ℓ E X).obj K)
         (frobeniusIterate Φ m)
-        (frobeniusCoefficientIterate (frobeniusCoefficientIntegersToPadicAlgCl E θ) m) x.1 x.2) := by
+        (frobeniusCoefficientIterate (frobeniusCoefficientIntegersToPadicAlgCl E θ) m)
+          x.1 x.2) := by
     intro x
     refine trace_eq_of_iso (upperStarIntegersToPadicAlgClObjIso E x.1 K) _ _ ?_
     rw [map_graphStalkMap_integersToPadicAlgCl,
-      map_frobeniusCoefficientIterate_integersToPadicAlgCl, Iso.inv_hom_id_assoc]
+      map_frobeniusCoefficientIterate_integersToPadicAlgCl E θ hm, Iso.inv_hom_id_assoc]
   have key := (trace_boundedConstructibleIntegersToPadicAlgCl_map E (point k) (hTA := hTop)
       (frobeniusCompactOperator θ m)).symm.trans ((hop.trans hQ).trans (Finset.sum_congr rfl
         fun x _ ↦ ((hst x).symm.trans (trace_boundedConstructibleIntegersToPadicAlgCl_map E
