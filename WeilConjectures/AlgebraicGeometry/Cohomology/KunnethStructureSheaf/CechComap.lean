@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.LerayNatural
+public import WeilConjectures.AlgebraicGeometry.Limits.AffineOverLimit
 
 /-!
 # Pulling back Čech cochains of a direct image along a retraction
@@ -87,13 +88,6 @@ lemma mem_iInf_fin_iff {k : ℕ} (V : Fin (k + 1) → Z.Opens) (z : Z) :
   rw [← SetLike.mem_coe, Opens.coe_iInf, Set.mem_iInter]
   rfl
 
-/-- For `f = 𝟙`, `f.appLE` is a restriction map. -/
-lemma Hom.appLE_eq_map_of_eq_id {f : X ⟶ X} (hf : f = 𝟙 X) (U V : X.Opens) (h : V ≤ f ⁻¹ᵁ U) :
-    f.appLE U V h = X.presheaf.map (homOfLE (h.trans (hf ▸ le_rfl))).op := by
-  subst hf
-  simp only [Hom.appLE, Hom.id_app]
-  exact Category.id_comp _
-
 /-- The map `Γ(V, i_* 𝒪_X) = Γ(X, i ⁻¹ᵁ V) → Γ(Z, V')` given by `π^♯`, for
 `V' ≤ π ⁻¹ᵁ i ⁻¹ᵁ V`. -/
 noncomputable def pushforwardUnitPresheafComap (i : X ⟶ Z) (π : Z ⟶ X) {V V' : Z.Opens}
@@ -125,16 +119,18 @@ lemma pushforwardUnitPresheafComap_unitToPushforwardObjUnit (i : X ⟶ Z) (π : 
       (pushforwardUnitPresheaf i).map (homOfLE h').op := by
   have key : π.appLE (i ⁻¹ᵁ V) V' h ≫ i.app V' =
       X.presheaf.map (homOfLE (i.preimage_mono h')).op := by
-    rw [Hom.app_eq_appLE, Hom.appLE_comp_appLE, Hom.appLE_eq_map_of_eq_id hiπ]
+    rw [Hom.app_eq_appLE, Hom.appLE_comp_appLE, AffineOverLimit.appLE_eq_map_of_eq_id _ hiπ]
   ext t
   exact ConcreteCategory.congr_hom key t
 
+/-- Elementwise form of `map_pushforwardUnitPresheafComap`. -/
 lemma map_pushforwardUnitPresheafComap_apply (i : X ⟶ Z) (π : Z ⟶ X) {V₁ V₂ V' : Z.Opens}
     (h₁ : V₂ ≤ V₁) (h₂ : V' ≤ π ⁻¹ᵁ i ⁻¹ᵁ V₂) (t : (pushforwardUnitPresheaf i).obj (op V₁)) :
     pushforwardUnitPresheafComap i π h₂ ((pushforwardUnitPresheaf i).map (homOfLE h₁).op t) =
       pushforwardUnitPresheafComap i π (h₂.trans (π.preimage_mono (i.preimage_mono h₁))) t := by
   rw [← ConcreteCategory.comp_apply, map_pushforwardUnitPresheafComap]
 
+/-- Elementwise form of `pushforwardUnitPresheafComap_map`. -/
 lemma pushforwardUnitPresheafComap_map_apply (i : X ⟶ Z) (π : Z ⟶ X) {V V'₁ V'₂ : Z.Opens}
     (h₁ : V'₁ ≤ π ⁻¹ᵁ i ⁻¹ᵁ V) (h₂ : V'₂ ≤ V'₁) (t : (pushforwardUnitPresheaf i).obj (op V)) :
     Z.unitPresheaf.map (homOfLE h₂).op (pushforwardUnitPresheafComap i π h₁ t) =

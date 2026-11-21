@@ -76,7 +76,7 @@ lemma isPullback_sliceRight (x : Spec (.of K) ⟶ X) (hx : x ≫ X ↘ Spec (.of
 `H⁰(X, 𝒪_X) = H⁰(Y, 𝒪_Y) = K`, and let `x`, `y` be `K`-points of `X`, `Y`. Then restriction to
 the slices `X × {y}` and `{x} × Y` is a bijection
 `H¹(X ×_K Y, 𝒪) → H¹(X ×_K Y, i_* 𝒪_X) × H¹(X ×_K Y, j_* 𝒪_Y)`, where `i`, `j` are the slice
-inclusions. -/
+inclusions. Since `i`, `j` are affine, the target is `H¹(X, 𝒪_X) × H¹(Y, 𝒪_Y)`. -/
 theorem bijective_H_one_unit_prod [IsProper (X ↘ Spec (.of K))] [IsProper (Y ↘ Spec (.of K))]
     [GlobalSectionsBijective K X] [GlobalSectionsBijective K Y]
     (x : Spec (.of K) ⟶ X) (hx : x ≫ X ↘ Spec (.of K) = 𝟙 _)
