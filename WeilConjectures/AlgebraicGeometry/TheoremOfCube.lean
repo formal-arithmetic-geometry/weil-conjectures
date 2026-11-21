@@ -37,6 +37,14 @@ isomorphic is open, closed (`AlgebraicGeometry.isClosed_setOf_exists_nonempty_is
 and contains `z` (`AlgebraicGeometry.exists_mem_nonempty_iso_preimageSnd`), hence is all of the
 connected scheme `Z`, and an isomorphism locally over `Z` globalises
 (`AlgebraicGeometry.nonempty_iso_of_forall_exists_nonempty_iso_preimageSnd`).
+
+## Implementation details
+
+Triviality on the fibres of `P ×_K T ⟶ T` is stated for an arbitrary `K`-scheme `T`; no finite
+type hypothesis is needed. The projection is proper, flat, of finite presentation and has
+geometrically integral fibres, so the statement is the seesaw principle
+`AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_fiber_iff` applied to `L ⊗ Lᵛ ≅ 𝒪`, together
+with `AlgebraicGeometry.Scheme.Modules.isClosed_setOf_nonempty_iso_fiber` applied to `L` and `𝒪`.
 -/
 
 @[expose] public section
@@ -146,18 +154,13 @@ theorem isClosed_setOf_nonempty_iso_fiber (X Y Z : Over (Spec (.of K)))
           (Limits.pullback.fst (snd (X ⊗ Y) Z).left (Z.left.fromSpecResidueField t))).obj N)} :=
   Scheme.Modules.isClosed_setOf_nonempty_iso_fiber (snd (X ⊗ Y) Z).left M N
 
-/-- Blueprint `lemma-triviality-fibres`: Triviality on fibres.
+/-- **Triviality on fibres.**
 
 Let `P` be proper and geometrically integral over a field `K`, let `T` be a `K`-scheme and let
 `L` be an invertible module on `P ×_K T`. For `t ∈ T` write `L_t` for the restriction of `L` to
 the fibre `P_t = P ×_K Spec κ(t)` of the projection `P ×_K T ⟶ T`. Then
 1. `L_t` is trivial if and only if `H⁰(P_t, L_t) ≠ 0` and `H⁰(P_t, L_t⁻¹) ≠ 0`;
-2. the set of `t ∈ T` such that `L_t` is trivial is closed.
-
-The blueprint assumes `T` of finite type over `K`; this is not needed. The projection is proper,
-flat, of finite presentation and has geometrically integral fibres, so (1) is
-`AlgebraicGeometry.Scheme.Modules.nonempty_iso_unit_fiber_iff` applied to `L ⊗ Lᵛ ≅ 𝒪` and (2)
-is `AlgebraicGeometry.Scheme.Modules.isClosed_setOf_nonempty_iso_fiber` applied to `L` and `𝒪`. -/
+2. the set of `t ∈ T` such that `L_t` is trivial is closed. -/
 theorem nonempty_iso_unit_fiber_snd_iff_and_isClosed (P T : Over (Spec (.of K)))
     [IsProper P.hom] [GeometricallyIntegral P.hom] (L : (P ⊗ T).left.Modules) [L.IsInvertible] :
     (∀ t : T.left,
@@ -173,7 +176,6 @@ theorem nonempty_iso_unit_fiber_snd_iff_and_isClosed (P T : Over (Spec (.of K)))
       (𝟙_ (P ⊗ T).left.Modules) using 1
     ext t
     exact ⟨fun ⟨e⟩ ↦ ⟨e ≪≫ (pullbackObjUnitIso _).symm⟩, fun ⟨e⟩ ↦ ⟨e ≪≫ pullbackObjUnitIso _⟩⟩
-
 
 /-- If `M ≅ N` over an open `U ⊆ Z`, then `M ≅ N` on the fibre over every field-valued point
 of `U`. -/
