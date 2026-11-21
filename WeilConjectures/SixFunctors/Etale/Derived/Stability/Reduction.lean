@@ -253,7 +253,7 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
       have hc' : IsIso (rightDerivedUpperShriekTensorMap c Mc
           ((L((p)^*[ModuleCat.{u + 1} Λ])).obj
             ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N))) := by
-        letI hclosed := isIso_rightDerivedUpperShriekTensorMap_constantSingle_of_isClosedImmersion
+        haveI hclosed := isIso_rightDerivedUpperShriekTensorMap_constantSingle_of_isClosedImmersion
           Λ (p ≫ v ≫ aY) c Mc b B
         exact isIso_lowerShriekRightAdjointTensorMap_of_iso_right
           (rightDerivedUpperShriekAdjunction Λ c)
@@ -268,27 +268,141 @@ theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}
         exact isIso_lowerShriekRightAdjointTensorMap_of_forall
           (rightDerivedUpperShriekAdjunction Λ p) (projectionMapAssociativity Λ p) hθ Mv _
       obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
-      exact isIso_lowerShriekRightAdjointTensorMap_comp hcp
-        (rightDerivedUpperShriekAdjunction Λ c) (rightDerivedUpperShriekAdjunction Λ p)
-        (rightDerivedUpperShriekAdjunction Λ g) (E c p g hcp) (hPF c p g hcp) Mv
-        ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N) hc' hp'
+      let adjc := rightDerivedUpperShriekAdjunction Λ c
+      let adjp := rightDerivedUpperShriekAdjunction Λ p
+      let adjg := rightDerivedUpperShriekAdjunction Λ g
+      let ρ : R(g)^![Λ] ≅ R(p)^![Λ] ⋙ R(c)^![Λ] := {
+        hom := conjugateEquiv (adjg.ofNatIsoLeft (E c p g hcp)) (adjc.comp adjp) (𝟙 _)
+        inv := conjugateEquiv (adjc.comp adjp) (adjg.ofNatIsoLeft (E c p g hcp)) (𝟙 _)
+        hom_inv_id := conjugateEquiv_comm _ _ (by simp)
+        inv_hom_id := conjugateEquiv_comm _ _ (by simp) }
+      have hρ : ∀ K, (R(p)_![ModuleCat.{u + 1} Λ]).map
+          ((R(c)_![ModuleCat.{u + 1} Λ]).map (ρ.hom.app K)) ≫
+          (R(p)_![ModuleCat.{u + 1} Λ]).map (adjc.counit.app _) ≫ adjp.counit.app K =
+          (E c p g hcp).inv.app _ ≫ adjg.counit.app K := by
+        intro K
+        have h := conjugateEquiv_counit (adjg.ofNatIsoLeft (E c p g hcp))
+          (adjc.comp adjp) (𝟙 _) K
+        simpa [ρ, adjc, adjp, adjg] using h
+      have hc := Adjunction.projectionTensorMap_comp adjc adjp adjg
+        (πf := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) c).app M).app N)
+        (πh := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g).app M).app N)
+        (πg := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) p).app M).app N)
+        (projectionMap_app_app_naturality_left c)
+        (projectionMap_app_app_naturality_left p)
+        (fun N ↦ (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) c p g hcp.symm).hom.app N)
+        (E c p g hcp) (hPF c p g hcp).comp ρ.hom hρ Mv
+        ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N)
+      have hiso : IsIso (rightDerivedUpperShriekTensorMap g Mv
+          ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N) ≫
+            ρ.hom.app (Mv ⊗ ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N))) := by
+        rw [hc]
+        infer_instance
+      letI := hiso
+      exact IsIso.of_isIso_comp_right _
+        (ρ.hom.app (Mv ⊗ ((L((v)^*[ModuleCat.{u + 1} Λ])).obj N)))
     have hgv : g ≫ v = u ≫ f := by rw [Scheme.Hom.resLE_comp_ι]
-    have hN_v : IsIso (rightDerivedUpperShriekTensorMap v L N) :=
-      isIso_rightDerivedUpperShriekTensorMap_of_etale Λ v L N
+    have hN_v : IsIso (rightDerivedUpperShriekTensorMap v L N) := by
+      have hθv := isIso_dualizingComplexTensorMap_of_isOpenImmersion Λ v
+      exact isIso_lowerShriekRightAdjointTensorMap_of_forall
+        (rightDerivedUpperShriekAdjunction Λ v) (projectionMapAssociativity Λ v) hθv L N
     obtain ⟨E, hPF, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
     have hcomp : IsIso (rightDerivedUpperShriekTensorMap (u ≫ f) L N) := by
-      exact isIso_lowerShriekRightAdjointTensorMap_comp hgv
-        (rightDerivedUpperShriekAdjunction Λ g) (rightDerivedUpperShriekAdjunction Λ v)
-        (rightDerivedUpperShriekAdjunction Λ (u ≫ f)) (E g v _ hgv) (hPF g v _ hgv) L N
-        hAffine hN_v
+      let adjg := rightDerivedUpperShriekAdjunction Λ g
+      let adjv := rightDerivedUpperShriekAdjunction Λ v
+      let adjh := rightDerivedUpperShriekAdjunction Λ (u ≫ f)
+      let ρ : R(u ≫ f)^![Λ] ≅ R(v)^![Λ] ⋙ R(g)^![Λ] := {
+        hom := conjugateEquiv (adjh.ofNatIsoLeft (E g v _ hgv)) (adjg.comp adjv) (𝟙 _)
+        inv := conjugateEquiv (adjg.comp adjv) (adjh.ofNatIsoLeft (E g v _ hgv)) (𝟙 _)
+        hom_inv_id := conjugateEquiv_comm _ _ (by simp)
+        inv_hom_id := conjugateEquiv_comm _ _ (by simp) }
+      have hρ : ∀ K, (R(v)_![ModuleCat.{u + 1} Λ]).map
+          ((R(g)_![ModuleCat.{u + 1} Λ]).map (ρ.hom.app K)) ≫
+          (R(v)_![ModuleCat.{u + 1} Λ]).map (adjg.counit.app _) ≫ adjv.counit.app K =
+          (E g v _ hgv).inv.app _ ≫ adjh.counit.app K := by
+        intro K
+        have h := conjugateEquiv_counit (adjh.ofNatIsoLeft (E g v _ hgv))
+          (adjg.comp adjv) (𝟙 _) K
+        simpa [ρ, adjg, adjv, adjh] using h
+      have hc := Adjunction.projectionTensorMap_comp adjg adjv adjh
+        (πf := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) g).app M).app N)
+        (πh := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) (u ≫ f)).app M).app N)
+        (πg := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) v).app M).app N)
+        (projectionMap_app_app_naturality_left g)
+        (projectionMap_app_app_naturality_left v)
+        (fun N ↦ (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) g v (u ≫ f) hgv.symm).hom.app N)
+        (E g v _ hgv) (hPF g v _ hgv).comp ρ.hom hρ L N
+      have hiso : IsIso (rightDerivedUpperShriekTensorMap (u ≫ f) L N ≫
+          ρ.hom.app (L ⊗ N)) := by
+        rw [hc]
+        infer_instance
+      letI := hiso
+      exact IsIso.of_isIso_comp_right (rightDerivedUpperShriekTensorMap (u ≫ f) L N)
+        (ρ.hom.app (L ⊗ N))
     have hθu := isIso_dualizingComplexTensorMap_of_isOpenImmersion Λ u
+    obtain ⟨Euf, hPFuf, -⟩ := exists_rightDerivedLowerShriekCompIso Λ
+    let adju := rightDerivedUpperShriekAdjunction Λ u
+    let adjf := rightDerivedUpperShriekAdjunction Λ f
+    let adjuf := rightDerivedUpperShriekAdjunction Λ (u ≫ f)
+    let ρuf : R(u ≫ f)^![Λ] ≅ R(f)^![Λ] ⋙ R(u)^![Λ] := {
+      hom := conjugateEquiv (adjuf.ofNatIsoLeft (Euf u f _ rfl)) (adju.comp adjf) (𝟙 _)
+      inv := conjugateEquiv (adju.comp adjf) (adjuf.ofNatIsoLeft (Euf u f _ rfl)) (𝟙 _)
+      hom_inv_id := conjugateEquiv_comm _ _ (by simp)
+      inv_hom_id := conjugateEquiv_comm _ _ (by simp) }
+    have hρuf : ∀ K, (R(f)_![ModuleCat.{u + 1} Λ]).map
+        ((R(u)_![ModuleCat.{u + 1} Λ]).map (ρuf.hom.app K)) ≫
+        (R(f)_![ModuleCat.{u + 1} Λ]).map (adju.counit.app _) ≫ adjf.counit.app K =
+        (Euf u f _ rfl).inv.app _ ≫ adjuf.counit.app K := by
+      intro K
+      have h := conjugateEquiv_counit (adjuf.ofNatIsoLeft (Euf u f _ rfl))
+        (adju.comp adjf) (𝟙 _) K
+      simpa [ρuf, adju, adjf, adjuf] using h
+    have huf := Adjunction.projectionTensorMap_comp adju adjf adjuf
+      (πf := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) u).app M).app N)
+      (πh := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) (u ≫ f)).app M).app N)
+      (πg := fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) f).app M).app N)
+      (projectionMap_app_app_naturality_left u)
+      (projectionMap_app_app_naturality_left f)
+      (fun N ↦ (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) u f (u ≫ f) rfl).hom.app N)
+      (Euf u f _ rfl) (hPFuf u f _ rfl).comp ρuf.hom hρuf L N
+    have huf' : IsIso (rightDerivedUpperShriekTensorMap (u ≫ f) L N ≫
+        ρuf.hom.app (L ⊗ N)) := by
+      letI := hcomp
+      infer_instance
+    letI := huf'
+    have hunit := isIso_lowerShriekRightAdjointTensorMap_of_forall adju
+      (projectionMapAssociativity Λ u) hθu (R(f)^![Λ].obj L)
+      ((L((f)^*[ModuleCat.{u + 1} Λ])).obj N)
+    letI := hunit
+    have hmap : IsIso ((R(u)^![Λ]).map
+        (rightDerivedUpperShriekTensorMap f L N)) := by
+      rw [huf] at huf'
+      have := (isIso_comp_left_iff _ _).1 huf'
+      have hmid : IsIso ((R(u)^![Λ].obj (R(f)^![Λ].obj L) ◁
+          (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) u f (u ≫ f) rfl).hom.app N) ≫
+        adju.projectionTensorMap
+          (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) u).app M).app N)
+          (R(f)^![Λ].obj L) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj N) ≫
+        (R(u)^![Λ]).map (lowerShriekRightAdjointTensorMap adjf L N)) := by
+        simpa [rightDerivedUpperShriekTensorMap, adju, adjf] using this
+      change IsIso ((R(u)^![Λ]).map
+        (lowerShriekRightAdjointTensorMap adjf L N))
+      have hmid' : IsIso ((R(u)^![Λ].obj (R(f)^![Λ].obj L) ◁
+          (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) u f (u ≫ f) rfl).hom.app N) ≫
+        (adju.projectionTensorMap
+          (fun M N ↦ ((projectionMap (ModuleCat.{u + 1} Λ) u).app M).app N)
+          (R(f)^![Λ].obj L) ((L((f)^*[ModuleCat.{u + 1} Λ])).obj N) ≫
+          (R(u)^![Λ]).map (lowerShriekRightAdjointTensorMap adjf L N))) := by
+        simpa [Category.assoc] using hmid
+      have hmid'' := (isIso_comp_left_iff
+        (R(u)^![Λ].obj (R(f)^![Λ].obj L) ◁
+          (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) u f (u ≫ f) rfl).hom.app N)
+        _).1 hmid'
+      exact (isIso_comp_left_iff _ _).1 hmid''
     exact isIso_leftDerivedUpperStar_map_of_isIso_rightAdjoint_map
-      (rightDerivedUpperShriekAdjunction Λ u) hθu
+      adju hθu
       (isInvertible_dualizingComplex_of_etale Λ u) _
-      (isIso_map_lowerShriekRightAdjointTensorMap_of_comp rfl
-        (rightDerivedUpperShriekAdjunction Λ u) (rightDerivedUpperShriekAdjunction Λ f)
-        (rightDerivedUpperShriekAdjunction Λ (u ≫ f)) (E u f _ rfl) (hPF u f _ rfl)
-        (projectionMapAssociativity Λ u) hθu L N hcomp)
+      (by simpa [rightDerivedUpperShriekTensorMap] using hmap)
   let t := rightDerivedUpperShriekTensorMap f L N
   let iT : IsIso t := by
     dsimp [t]
