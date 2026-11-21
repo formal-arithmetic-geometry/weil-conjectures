@@ -16863,6 +16863,7 @@ public import WeilConjectures.DeligneLaumon.AffineLine.BoundaryWeights
 public import WeilConjectures.DeligneLaumon.AffineLine.Concentration
 public import WeilConjectures.DeligneLaumon.AffineLine.ConstantTwist
 public import WeilConjectures.DeligneLaumon.AffineLine.Constituent
+public import WeilConjectures.DeligneLaumon.AffineLine.CurvePunctualPart
 public import WeilConjectures.DeligneLaumon.AffineLine.CurveTopBound
 public import WeilConjectures.DeligneLaumon.AffineLine.Defs
 public import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
@@ -16882,8 +16883,10 @@ public import WeilConjectures.DeligneLaumon.AffineLine.LinearCharacters
 public import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 public import WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension
 public import WeilConjectures.DeligneLaumon.AffineLine.Perverse
+public import WeilConjectures.DeligneLaumon.AffineLine.PerversePunctual
 public import WeilConjectures.DeligneLaumon.AffineLine.PerverseTStructure
 public import WeilConjectures.DeligneLaumon.AffineLine.Punctual
+public import WeilConjectures.DeligneLaumon.AffineLine.PunctualPart
 public import WeilConjectures.DeligneLaumon.AffineLine.PunctualSupport
 public import WeilConjectures.DeligneLaumon.AffineLine.PunctualTransform
 public import WeilConjectures.DeligneLaumon.AffineLine.Purity
@@ -17021,6 +17024,7 @@ public import WeilConjectures.DeligneLaumon.ZlFrobeniusCompactSupportComparison
 public import WeilConjectures.DeligneLaumon.ZlOpenUnit.ZlOpenWeilUnitEmptyFibre
 public import WeilConjectures.EtaleCohomology.EtaleSectionZeroOpen
 public import WeilConjectures.EtaleCohomology.PoincareDuality.AdicReconstruction
+public import WeilConjectures.EtaleCohomology.PoincareDuality.AffineSpaceTrace
 public import WeilConjectures.EtaleCohomology.PoincareDuality.CompactSupportPerfect
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Feeds
@@ -26041,6 +26045,7 @@ public import WeilConjectures.WeilObject.Sheaf.StalkUnit
 public import WeilConjectures.WeilSheaf.AffineLineBundle
 public import WeilConjectures.WeilSheaf.AffineLineCohomology
 public import WeilConjectures.WeilSheaf.AffineLineSmoothAdjunction
+public import WeilConjectures.WeilSheaf.AffineSpaceLinearCharacter
 public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.ArtinSchreierFrobenius
@@ -26050,6 +26055,7 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierIsotypic
 public import WeilConjectures.WeilSheaf.ArtinSchreierMul
 public import WeilConjectures.WeilSheaf.ArtinSchreierMulGeometric
 public import WeilConjectures.WeilSheaf.ArtinSchreierNeg
+public import WeilConjectures.WeilSheaf.ArtinSchreierNormalization
 public import WeilConjectures.WeilSheaf.ArtinSchreierPlane
 public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
