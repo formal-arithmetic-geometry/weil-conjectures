@@ -22577,6 +22577,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ModuleForgetAbRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
+public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersionSquare
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafComparison
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafRing
@@ -26101,8 +26102,11 @@ public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
 public import WeilConjectures.WeilSheaf.BaseChangeField.CompactSupport
 public import WeilConjectures.WeilSheaf.BaseChangeField.Comparison
 public import WeilConjectures.WeilSheaf.BaseChangeField.Derived
+public import WeilConjectures.WeilSheaf.BaseChangeField.ExtensionByZero
 public import WeilConjectures.WeilSheaf.BaseChangeField.Geometric
 public import WeilConjectures.WeilSheaf.BaseChangeField.GlobalSections
+public import WeilConjectures.WeilSheaf.BaseChangeField.Restriction
+public import WeilConjectures.WeilSheaf.BaseChangeField.Stalk
 public import WeilConjectures.WeilSheaf.BaseChangeField.Transport
 public import WeilConjectures.WeilSheaf.Bidual
 public import WeilConjectures.WeilSheaf.BifunctorHomShift
