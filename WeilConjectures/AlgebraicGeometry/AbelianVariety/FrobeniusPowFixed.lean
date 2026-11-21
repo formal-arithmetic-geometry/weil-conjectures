@@ -61,7 +61,7 @@ theorem finite_setOf_geometricFrobenius_pow_fixed {m : ℕ} (hm : m ≠ 0) :
   set S := {P | geometricPointsAddEquiv (A := A)
     (FiniteField.geometricFrobeniusAlgEquivOfAlgebraic K (AlgebraicClosure K) ^ m) P = P}
   have hfix (P : S) :
-      ((show End (Spec (.of (AlgebraicClosure K))) from (geometricFrobeniusField K).hom) ^ m) ≫
+      (End.of (geometricFrobeniusField K).hom ^ m).asHom ≫
         P.1.toMul.left = P.1.toMul.left := by
     have h := congrArg (fun Q ↦ Q.toMul.left) P.2
     simp only [geometricPointsAddEquiv_apply, toMul_ofMul, Over.comp_left,
