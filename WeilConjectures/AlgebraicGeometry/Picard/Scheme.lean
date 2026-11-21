@@ -273,6 +273,49 @@ theorem smoothOfRelativeDimension_of_representableBy_picardFunctor [IsSepClosed 
   have := smoothOfRelativeDimension_comp (n := 0) (m := arithmeticGenus k X) j H.hom
   rwa [zero_add] at this
 
+/-- **Representability of the Picard functor, with the structure of its proof.** Let `X` be a
+smooth projective geometrically integral curve of genus `g` over a separably closed field `k`.
+Then `Pic_{X/k}` is represented by a group scheme `A` over `k` whose group law is the tensor
+product of invertible modules (`AlgebraicGeometry.IsPicardMul`); `A` is smooth of relative
+dimension `g`, in particular locally of finite type; and for a rational point `σ` of `X`, the
+subfunctor `F ⊆ Pic_{X/k,σ}` of the classes with invertible direct image is represented by an open
+subscheme `W` of a scheme `H` smooth of relative dimension `g` (the Hilbert scheme `Hilb^g_{X/k}`),
+and `A` is covered by the open immersions `W ⟶ A` obtained from the translates of `W`. -/
+theorem representability_picardFunctor [IsSepClosed k] :
+    ∃ (A : Over (Spec (.of k))) (_ : GrpObj A)
+      (e : (picardFunctor (X ↘ Spec (.of k))).obj.RepresentableBy A),
+      IsPicardMul (X ↘ Spec (.of k)) e ∧
+      SmoothOfRelativeDimension (arithmeticGenus k X) A.hom ∧ LocallyOfFiniteType A.hom ∧
+      ∃ (σ : Spec (.of k) ⟶ X) (hσ : σ ≫ X ↘ Spec (.of k) = 𝟙 _)
+        (H : Over (Spec (.of k))) (W : Scheme.{u}) (j : W ⟶ H.left),
+        SmoothOfRelativeDimension (arithmeticGenus k X) H.hom ∧ IsOpenImmersion j ∧
+        Nonempty ((picardFunctorInvertibleDirectImage (X ↘ Spec (.of k)) σ hσ).toFunctor
+          |>.RepresentableBy (Over.mk (j ≫ H.hom))) ∧
+        ∀ a : A.left, ∃ ψ : Over.mk (j ≫ H.hom) ⟶ A,
+          IsOpenImmersion ψ.left ∧ a ∈ Set.range ψ.left.base := by
+  set f := X ↘ Spec (.of k)
+  have : ∀ T : Over (Spec (.of k)), HasInjectiveResolutions (pullback f T.hom).Modules :=
+    fun T ↦ have := Modules.isGrothendieckAbelian (pullback f T.hom); inferInstance
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  have : IsIntegral X := GeometricallyIntegral.isIntegral_of_subsingleton f
+  obtain ⟨p⟩ := Hom.nonempty_fieldPoints (k := k) f
+  let σ : Spec (.of k) ⟶ X := p.1
+  have hσ : σ ≫ f = 𝟙 _ := by
+    rw [p.2, Algebra.algebraMap_self, CommRingCat.ofHom_id, Spec.map_id]
+  obtain ⟨A, -, ⟨e⟩⟩ := isRepresentable_picardFunctor_aux (k := k) (X := X)
+  obtain ⟨_, he⟩ := exists_commGrpObj_isPicardMul f e
+  have hsm := smoothOfRelativeDimension_of_representableBy_picardFunctor A e
+  have : Smooth A.hom := SmoothOfRelativeDimension.smooth (arithmeticGenus k X) A.hom
+  obtain ⟨H, W, j, hH, hj, ⟨eF⟩⟩ := exists_representableBy_picardFunctorInvertibleDirectImage σ hσ
+  let e' : (picardFunctorNormalizedGrp f σ hσ ⋙ forget GrpCat.{u + 1}).RepresentableBy A :=
+    e.ofIso (nonempty_picardFunctorNormalized_iso_picardFunctor σ hσ).some.symm
+  refine ⟨A, inferInstance, e, he, hsm, inferInstance, σ, hσ, H, W, j, hH, hj, ⟨eF⟩,
+    fun a ↦ ?_⟩
+  obtain ⟨ψ, hψ, ha⟩ := exists_isOpenImmersion_of_representable_open_subfunctor _ _ eF
+    (isOpenImmersion_picardFunctorInvertibleDirectImage_ι f σ hσ)
+    (exists_mul_mem_picardFunctorInvertibleDirectImage σ hσ) e' a
+  exact ⟨ψ, hψ, ha⟩
+
 end Curve
 
 /-- **The Picard functor of a smooth projective curve over a separably closed field is

@@ -21,8 +21,8 @@ identifies the tensor–internal-hom adjoint of the derived Poincaré pairing
 
 (over `Y = Spec k`: `RΓ(X, K^∨(d))[2d] ⟶ RΓ_c(X, K)^∨`) with the composite of the purity
 identification `K^∨ ⊗ᴸ T[2d] ⟶ RHom(K, ω_X) = 𝔻_X K` and the inverse of the global
-Verdier-duality isomorphism `(Ra_! K)^∨ ≅ Ra_* 𝔻_X K`. This is blueprint
-`theorem-poincare-duality--7`. As in
+Verdier-duality isomorphism `(Ra_! K)^∨ ≅ Ra_* 𝔻_X K`. This is Poincaré
+duality. As in
 `WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing`, `Ra^!` enters only through the
 adjunction `Ra_! ⊣ Ra^!`, and the statements are made for an arbitrary right adjoint of `Ra_!`.
 
@@ -42,11 +42,10 @@ adjunction `Ra_! ⊣ Ra^!`, and the statements are made for an arbitrary right a
   the tensor–Hom exchange is the adjoint of `AlgebraicGeometry.Etale.exchangePairing`.
 - `AlgebraicGeometry.Etale.isIso_purityVerdierDualMap`: the purity identification is an
   isomorphism for perfect `K`.
-- `AlgebraicGeometry.Etale.curry_poincarePairing_eq` (`theorem-poincare-duality--7`):
+- `AlgebraicGeometry.Etale.curry_poincarePairing_eq`:
   `β_K^♯` is the purity identification followed by the inverse of global Verdier duality.
-- `AlgebraicGeometry.Etale.inv_curry_poincarePairing_eq`
-  (`theorem-poincare-duality--7`): the inverse of `β_K^♯` is global Verdier duality
-  followed by the inverse of the purity identification.
+- `AlgebraicGeometry.Etale.inv_curry_poincarePairing_eq`: the inverse of `β_K^♯` is global
+  Verdier duality followed by the inverse of the purity identification.
 -/
 
 @[expose] public section
@@ -208,6 +207,20 @@ theorem uncurry_derivedHomLowerShriekIsoOfAdjunction_hom_app_app [IsIso (project
   simp only [ParametrizedAdjunction.comp_adj, Adjunction.comp_counit_app, Category.assoc]
   rfl
 
+omit [HasSmallSiteSheafify A] in
+/-- **Global Verdier duality is the adjoint of the exchange pairing at the unit**: the component
+at `N = Λ_Y` of the tensor–Hom exchange, `Ra_* RHom(M, G Λ_Y) ⟶ RHom(Ra_! M, Λ_Y)`, is the
+tensor–internal-hom adjoint of the pairing `Ra_! M ⊗ᴸ Ra_* RHom(M, G Λ_Y) ⟶ Λ_Y`
+(`AlgebraicGeometry.Etale.exchangePairing` at `N = Λ_Y`). This is the identity behind the
+global Verdier-duality isomorphism `(Ra_! M)^∨ ≅ Ra_* 𝔻_X M`
+(`AlgebraicGeometry.Etale.coefficientDualRightDerivedLowerShriekIso`). -/
+theorem uncurry_derivedHomLowerShriekIsoOfAdjunction_hom_app_unit [IsIso (projectionMap A a)]
+    (M : 𝐃(X, A)) :
+    MonoidalClosed.uncurry
+        (((derivedHomLowerShriekIsoOfAdjunction A a adj).app (op M)).hom.app (𝟙_ _)) =
+      exchangePairing A a adj M (𝟙_ _) :=
+  uncurry_derivedHomLowerShriekIsoOfAdjunction_hom_app_app A a adj M (𝟙_ _)
+
 end Exchange
 
 section Purity
@@ -220,8 +233,8 @@ variable {A} {d : ℕ} {T : 𝐃(X, A)} {G : 𝐃(Y, A) ⥤ 𝐃(X, A)}
 ```
 K ⊗ᴸ (K^∨ ⊗ᴸ T)[2d] ≅ (K ⊗ᴸ (K^∨ ⊗ᴸ T))[2d] --(twisted evaluation)[2d]--> T[2d] --γ--> G Λ_Y.
 ```
-For `T = Λ_X(d)` it is the identification `K^∨(d)[2d] ⟶ 𝔻_X K` of blueprint
-`theorem-poincare-duality--2`; it is an isomorphism for perfect `K`
+For `T = Λ_X(d)` it is the identification `K^∨(d)[2d] ⟶ 𝔻_X K` of Poincaré
+duality; it is an isomorphism for perfect `K`
 (`AlgebraicGeometry.Etale.isIso_purityVerdierDualMap`). -/
 noncomputable def purityVerdierDualMap (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _)) (K : 𝐃(X, A)) :
     ((((derivedTensor A X).obj ((DerivedCategory.coefficientDual A X).obj (op K))).obj T)⟦
@@ -230,8 +243,7 @@ noncomputable def purityVerdierDualMap (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (�
     (twistedEvaluation T K)⟦(2 * d : ℤ)⟧' ≫ γ.hom)
 
 omit [HasSmallSiteSheafify A] [Etale.UpperStarPreservesFlat A] in
-/-- Blueprint `theorem-poincare-duality--2` (the identification used by
-`theorem-poincare-duality--7`): for a perfect `K`, the purity identification
+/-- For a perfect `K`, the purity identification
 `(K^∨ ⊗ᴸ T)[2d] ⟶ RHom(K, G Λ_Y)` is an isomorphism. -/
 theorem isIso_purityVerdierDualMap (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _)) {K : 𝐃(X, A)}
     (hK : IsDualizable K) : IsIso (purityVerdierDualMap γ K) := by
@@ -271,7 +283,7 @@ variable {A} {d : ℕ} {T : 𝐃(X, A)} [IsIso (projectionMap A a)] {a}
 
 omit [HasSmallSiteSheafify A]
 
-/-- Blueprint `theorem-poincare-duality--7`: Identification of the Poincaré pairing
+/-- Identification of the Poincaré pairing
 with Verdier duality.
 
 The tensor–internal-hom adjoint `β_K^♯ : (Ra_*(K^∨ ⊗ᴸ T))[2d] ⟶ (Ra_! K)^∨` of the derived
@@ -319,7 +331,7 @@ theorem curry_poincarePairing_eq (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ _))
   rw [Functor.commShiftIso_inv_naturality_assoc,
     reassoc_of% commShiftIso_hom_app_comp_mixedSupportCupProduct_shift]
 
-/-- Blueprint `theorem-poincare-duality--7`: Identification of the Poincaré pairing
+/-- Identification of the Poincaré pairing
 with Verdier duality.
 
 For `K` perfect over `Λ_X`, the tensor–internal-hom adjoint
@@ -333,7 +345,7 @@ theorem isIso_curry_poincarePairing (γ : T⟦(2 * d : ℤ)⟧ ≅ G.obj (𝟙_ 
   exact @IsIso.comp_isIso _ _ _ _ _ _ _ inferInstance
     (@IsIso.comp_isIso _ _ _ _ _ _ _ (Functor.map_isIso _ _) (Iso.isIso_inv _))
 
-/-- Blueprint `theorem-poincare-duality--7`: Identification of the Poincaré pairing
+/-- Identification of the Poincaré pairing
 with Verdier duality.
 
 For `K` perfect over `Λ_X`, the inverse of the isomorphism
