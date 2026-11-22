@@ -11,9 +11,15 @@ tables are superseded by this table.
 Shares are ordered M0 / M1 / M2 / Matched / Unclassified. `O/analyzed` is the
 counter-root call count / analyzed-root call count.
 
+Round-5 outcome rule: classify a valid root as C when exclusive-time M2 is
+below 5% and Matched is below 2%, unless a valid M0-preserving C control shows
+mixed amplification. Classify it as D when either share reaches its threshold
+or that valid C control shows mixed amplification. Root-changing or invalid
+alignments do not by themselves change C to D.
+
 | Case | O/analyzed calls | Counter / trace ms | Raw coverage | Call shares (%) | Exclusive-time shares (%) | C result | Outcome |
 |---|---:|---:|---:|---|---|---|---|
-| Derived-Completion Cone | 12,220,823 / 12,220,823 | 82,320.997 / 84,401.270 | 1,562 / 12,220,823 (0.013%) | 0.000 / 76.560 / 0.074 / 23.366 / 0.000 | 0.000 / 99.725 / 0.064 / 0.210 / 0.000 | dependent-field alignment changes the root telescope; restoration is diagnostic | D |
+| Derived-Completion Cone | 12,220,823 / 12,220,823 | 82,320.997 / 84,401.270 | 1,562 / 12,220,823 (0.013%) | 0.000 / 76.560 / 0.074 / 23.366 / 0.000 | 0.000 / 99.725 / 0.064 / 0.210 / 0.000 | dependent-field alignment changes the root telescope; restoration is diagnostic | C |
 | FiniteBaseChange | 239,340,712 / 239,340,712 | 681,687.160 / 1,082,179.217 | 3,828 / 239,340,712 (0.002%) | 0.000 / 54.398 / 16.920 / 28.682 / 0.000 | 0.000 / 74.113 / 24.473 / 1.414 / 0.000 | descendant alignment changes root; restoration diagnostic | D |
 | IntegralComparison | 9,426,198 / 9,426,198 | 83,768.275 / 224,445.716 | 3,913 / 9,426,198 (0.042%) | 0.000 / 70.875 / 0.267 / 28.857 / 0.000 | 0.000 / 99.839 / 0.052 / 0.109 / 0.000 | After changes root; Before restores O | C |
 | RealPurity | 17,310,168 / 17,310,168 | 52,925.953 / 85,908.939 | 3,222 / 17,310,168 (0.019%) | 0.000 / 46.148 / 25.171 / 28.681 / 0.000 | 0.000 / 63.672 / 35.139 / 1.189 / 0.000 | dependent witness telescope changes | D |
@@ -25,11 +31,10 @@ counter-root call count / analyzed-root call count.
 
 ## §11 answer
 
-The workload is mixed. Inherited M1 propagation dominates Cone, IntegralComparison,
-EtaleHom, F66Adj, and ImageHomCounit, while FiniteBaseChange, RealPurity,
-OrderedSpectralRawLattices, and RealPushforward expose material M2 time. The
-Cone is also M1-dominated after correcting the stale diagnostic root. Matched
-descendants are measurable but not time-dominant. All attempted selective
-alignments alter the dependent root or its M0 telescope; restored variants are
-diagnostic restorations rather than causal controls. Branch round4 base:
-`dataset/kernel-timeouts`.
+Under the uniform round-5 rule, Cone, IntegralComparison, EtaleHom, F66Adj,
+and ImageHomCounit are C because M2 is below 5% and Matched below 2%, with no
+valid root-preserving C amplification. FiniteBaseChange, RealPurity,
+OrderedSpectralRawLattices, and RealPushforward are D because M2 reaches the
+threshold. The Cone is M1-dominated after correcting the stale diagnostic root;
+all attempted selective alignments alter the dependent root or its M0
+telescope. Branch round5 base: `dataset/kernel-timeouts`.

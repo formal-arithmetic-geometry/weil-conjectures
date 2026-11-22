@@ -181,6 +181,7 @@ or C label change is claimed.
 
 The Cone is overwhelmingly inherited M1 work by exclusive time (99.725%),
 with a small M2 component (0.064%) and a measurable but non-dominant matched
-component (0.210%). The dependent proof/provider obstruction prevents a valid
-selective descendant alignment; outcome **D** (mixed workload, M1-dominant)
-is retained, with the C result reported as unavailable/type-invalid.
+component (0.210%). Under the round-5 rule (M2 < 5% and Matched < 2% means C
+when no valid M0-preserving C control shows amplification), this is outcome
+**C**. The dependent proof/provider obstruction prevents a valid selective
+descendant alignment.
