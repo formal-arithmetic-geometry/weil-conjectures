@@ -410,7 +410,7 @@ private theorem coversTop_of_epi
 /-- A cover of the terminal sheaf by sheafified representables whose slices have finite
 limits and finite covering refinements gives a conservative set of points.
 Source: Stacks Project, Sites, Lemma 0DW0, Section 00YN.
- -/
+-/
 theorem finitarySlice_enoughPoints
     {C : Type u} [Category.{v} C]
     (J : Precoverage C) (hJ : J.IsSiteForCoverings)

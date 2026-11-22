@@ -45,7 +45,7 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{w} C]
   (F : C ⥤ C) [F.Additive] [F.IsEquivalence]
 
-/--  Structural assertions for the free and forgetful functors. -/
+/-- Structural assertions for the free and forgetful functors. -/
 theorem freeWeil_heart_properties :
     IsGrothendieckAbelian.{w} (IsoAlgebra F) ∧
       PreservesFiniteLimits (forget F) ∧ PreservesFiniteColimits (forget F) ∧
@@ -612,7 +612,7 @@ theorem exists_freeDerivedWeilResolution :
     · exact ((freeWeilDerivedAdjunction F).counit.naturality a.inv).symm
     · exact (δ.naturality a.inv).symm
 
-/--  Underlying membership implies membership in the localizing hull of free images. -/
+/-- Underlying membership implies membership in the localizing hull of free images. -/
 theorem freeWeil_mem_localizingClosure
     (L : ObjectProperty (DerivedCategory C)) [L.IsLocalizing]
     (K : DerivedCategory (IsoAlgebra F))

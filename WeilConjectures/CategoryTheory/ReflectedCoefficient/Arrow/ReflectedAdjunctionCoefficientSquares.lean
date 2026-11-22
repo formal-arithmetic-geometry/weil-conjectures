@@ -113,7 +113,7 @@ structure Change (A : Context C₀) (B : Context C₁) where
   kappa_unit : ∀ X, F.map (A.unit.app X) ≫ kappa.hom.app X = B.unit.app (F.obj X)
 
 /-- Coefficient functors preserve local objects.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Change.preserves {A : Context C₀} {B : Context C₁} (c : Change A B)
     (X : C₀) (hX : A.localObjects X) : B.localObjects (c.F.obj X) := by
   have hη : IsIso (A.unit.app X) :=
@@ -147,7 +147,7 @@ abbrev Arrow.right {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
     (fun Y ↦ a.preserves Y.obj Y.property)
 
 /-- Existence of the reflected adjunction with its specified Hom bijection.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.adjunction_exists {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
     ∃ h : a.left ⊣ a.right, ∀ (X : A.localObjects.FullSubcategory)
       (Y : B.localObjects.FullSubcategory) (t : a.left.obj X ⟶ Y),
@@ -252,7 +252,7 @@ private theorem comparison_unit (s : Square a₀ a₁ cA cB) (X : C₀) :
   exact congrArg (s.delta.hom.app X ≫ ·) (kappa_unit_inv cB _)
 
 /-- Naturality needed to construct the local comparison from its ambient formula.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.comparison_naturality (s : Square a₀ a₁ cA cB)
     (X Y : A₀.localObjects.FullSubcategory) (f : X ⟶ Y) :
     (cA.restrict ⋙ a₁.left).map f ≫
@@ -271,7 +271,7 @@ def Square.localComparison (s : Square a₀ a₁ cA cB) :
     (fun {X Y} f ↦ s.comparison_naturality X Y f)
 
 /-- The reflected coefficient square has exactly the restricted ambient right mate.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.mate (s : Square a₀ a₁ cA cB)
     (Y : B₀.localObjects.FullSubcategory) :
     A₁.localObjects.ι.map
@@ -293,7 +293,7 @@ theorem Square.mate (s : Square a₀ a₁ cA cB)
     (reflected_counit a₀ Y)
 
 /-- The ambient γ/κ normalization equation, including nonlocal inputs.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.normalization (s : Square a₀ a₁ cA cB) (M : C₁) :
     cA.F.map (a₀.gamma.hom.app M) ≫ s.beta.app (B₀.completion.obj M) =
       cA.kappa.hom.app (a₀.G.obj M) ≫ A₁.completion.map (s.beta.app M) ≫
@@ -319,7 +319,7 @@ variable {A₂ : Context C₄} {B₂ : Context C₅}
   {a₂ : Arrow A₂ B₂} {dA : Change A₁ A₂} {dB : Change B₁ B₂}
 
 /-- The composite coefficient comparison is unit-normalized.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Change.comp_kappa_unit
     {A : Context C₀} {B : Context C₁} {D : Context C₂}
     (c : Change A B) (d : Change B D) (X : C₀) :
@@ -345,7 +345,7 @@ def Square.coefficientComp (s : Square a₀ a₁ cA cB)
   delta := isoWhiskerLeft cA.F t.delta ≪≫ isoWhiskerRight s.delta dB.F
 
 /-- The composite completion comparison has the required unit normalization.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.comp_gamma_unit {A : Context C₀} {B : Context C₁} {D : Context C₂}
     (a : Arrow A B) (h : Arrow B D) (M : C₂) :
     A.unit.app (a.G.obj (h.G.obj M)) ≫
@@ -375,7 +375,7 @@ def Arrow.compositionComparison {A : Context C₀} {B : Context C₁} {D : Conte
   whiskerRight (whiskerLeft a.F B.unit) (h.F ⋙ D.completion)
 
 /-- Repeated coefficient composition is associative with its specified κ.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Change.associativity
     {A : Context C₀} {B : Context C₁} {D : Context C₂} {E : Context C₃}
     (c : Change A B) (d : Change B D) (e : Change D E) (X : C₀) :
@@ -384,7 +384,7 @@ theorem Change.associativity
 
 /-- Repeated adjunction pasting gives the same normalized comparisons and
 Hom bijections for either parenthesization.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.associativity
     {A : Context C₀} {B : Context C₁} {D : Context C₂} {E : Context C₃}
     (a : Arrow A B) (h : Arrow B D) (k : Arrow D E)
@@ -423,7 +423,7 @@ def Square.id {A : Context C₀} {B : Context C₁} (a : Arrow A B) :
   delta := Iso.refl a.F
 
 /-- Identity coefficient squares give identity comparisons on both sides.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.identity {A : Context C₀} {B : Context C₁} (a : Arrow A B)
     (X : A.localObjects.FullSubcategory) (Y : C₁) :
     (Square.id a).comparison.hom.app X.obj = 𝟙 _ ∧
@@ -444,7 +444,7 @@ def Arrow.id (A : Context C₀) : Arrow A A where
   gamma_unit X := Category.comp_id (A.unit.app X)
 
 /-- The identity adjunction reflects to the identity under η_X⁻¹.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.identity {A : Context C₀} (X : A.localObjects.FullSubcategory) :
     IsIso (A.unit.app X.obj) ∧
     A.localObjects.ι.map ((Arrow.id A).reflectedAdjunction.unit.app X) =
@@ -457,7 +457,7 @@ theorem Arrow.identity {A : Context C₀} (X : A.localObjects.FullSubcategory) :
   · simpa [Arrow.id] using reflected_counit (Arrow.id A) X
 
 /-- Local objects are stable under all specified shifts.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Context.stableUnderShift (A : Context C₀) [HasShift C₀ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ] :
     A.localObjects.IsStableUnderShift ℤ := by
@@ -581,7 +581,7 @@ private def changeInclusion {A : Context C₀} {B : Context C₁} (c : Change A 
     (fun X ↦ c.preserves X.obj X.property)
 
 /-- The reflected adjunction respects the specified shifts.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Arrow.reflectedAdjunction_commShift {A : Context C₀} {B : Context C₁}
     (a : Arrow A B) [HasShift C₀ ℤ] [HasShift C₁ ℤ]
     [A.completion.CommShift ℤ] [NatTrans.CommShift A.unit ℤ]
@@ -632,7 +632,7 @@ private theorem mate_shift {L : C₀ ⥤ C₁} {R : C₁ ⥤ C₀}
   infer_instance
 
 /-- The reflected coefficient comparison and its right mate respect shifts.
-Source: Stacks Tags 0037, 07A7 and 0DV0.  -/
+Source: Stacks Tags 0037, 07A7 and 0DV0. -/
 theorem Square.commShift (s : Square a₀ a₁ cA cB)
     [HasShift C₀ ℤ] [HasShift C₁ ℤ] [HasShift C₂ ℤ] [HasShift C₃ ℤ]
     [A₀.completion.CommShift ℤ] [NatTrans.CommShift A₀.unit ℤ]

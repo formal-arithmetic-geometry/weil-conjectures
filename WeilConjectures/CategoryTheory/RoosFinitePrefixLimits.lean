@@ -24,7 +24,7 @@ namespace CategoryTheory
 
 open Limits
 
-/-- Evaluation on a finite prefix. 
+/-- Evaluation on a finite prefix.
 -/
 def roosPrefixEval (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (n i : ℕ)
     (h : i < n + s) : (roosPrefixTower s A).obj (Opposite.op n) ⟶
@@ -34,7 +34,7 @@ def roosPrefixEval (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) (n i : ℕ)
       map_zero' := rfl
       map_add' := fun _ _ ↦ rfl }
 
-/-- Restriction of an infinite tuple to a finite prefix. 
+/-- Restriction of an infinite tuple to a finite prefix.
 -/
 noncomputable def roosPrefixCone (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     Cone (roosPrefixTower s A) where

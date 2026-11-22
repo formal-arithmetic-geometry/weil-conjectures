@@ -247,7 +247,7 @@ def TotalTensorIntegerShiftFormula
 
 /-- Flat-term K-flat complexes remain so under all integer shifts, and the
 canonical natural chain shift comparisons exist.
-Source: Stacks Tags 0FNH, 06YU and 07A4.  -/
+Source: Stacks Tags 0FNH, 06YU and 07A4. -/
 theorem total_tensor_integer_shift_models :
     (∀ (P : CochainComplex (SheafOfModules.{max c v u} ((sheafCompose J
     (forget₂ CommRingCat.{max c v u} RingCat.{max c v u})).obj A)) ℤ),

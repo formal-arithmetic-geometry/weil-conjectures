@@ -26,7 +26,7 @@ variable {A B C : Type*} [Category A] [Category B] [Category C]
   [PreservesFiniteLimits R] [PreservesFiniteColimits R]
   [PreservesFiniteLimits U] [PreservesFiniteColimits U]
 
-/--  The exact derived identity comparison on a cochain representative. -/
+/-- The exact derived identity comparison on a cochain representative. -/
 theorem mapDerivedCategoryIdIso_hom_app_Q_obj (K : CochainComplex A ℤ) :
     (mapDerivedCategoryIdIso A).hom.app (DerivedCategory.Q.obj K) =
       (𝟭 A).mapDerivedCategoryFactors.hom.app K := by
@@ -41,7 +41,7 @@ def exactDerivedRestrictionUnit (R : A ⥤ A) [R.Additive]
     R.mapDerivedCategory ≅ 𝟭 (DerivedCategory A) :=
   mapDerivedCategoryNatIso η ≪≫ mapDerivedCategoryIdIso A
 
-/--  The inverse factorization formula for an identity restriction. -/
+/-- The inverse factorization formula for an identity restriction. -/
 theorem exactDerivedRestrictionUnit_inv_factors (R : A ⥤ A) [R.Additive]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R] (η : R ≅ 𝟭 A)
     (K : CochainComplex A ℤ) :
@@ -59,7 +59,7 @@ theorem exactDerivedRestrictionUnit_inv_factors (R : A ⥤ A) [R.Additive]
     NatIso.mapHomologicalComplex_hom_app_f, mapHomologicalComplexIdIso_hom_app_f]
   exact (Category.comp_id _).symm
 
-/--  The inverse unit comparison commutes with the forward localization factorization. -/
+/-- The inverse unit comparison commutes with the forward localization factorization. -/
 theorem exactDerivedRestrictionUnit_inv_fac (R : A ⥤ A) [R.Additive]
     [PreservesFiniteLimits R] [PreservesFiniteColimits R] (η : R ≅ 𝟭 A)
     (K : CochainComplex A ℤ) :

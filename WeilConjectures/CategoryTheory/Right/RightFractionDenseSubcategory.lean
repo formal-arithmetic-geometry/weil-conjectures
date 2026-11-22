@@ -30,7 +30,6 @@ of the ambient and restricted categories.  The conclusion records both the
 restricted right calculus and the equivalence induced by the inclusion.
 -/
 /--
-
 Let `C` be a category and `W` a class of arrows containing identities and closed
 under composition, satisfying the right-fraction Ore and cancellation axioms.
 Let `P` define a full subcategory, and suppose every object of `C` receives a

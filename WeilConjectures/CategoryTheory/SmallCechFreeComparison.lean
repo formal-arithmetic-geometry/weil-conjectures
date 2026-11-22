@@ -26,7 +26,7 @@ open CategoryTheory Limits Opposite
 variable {C : Type u} [Category.{v} C] (X : C)
 
 /-- Extend sections on summands by the free abelian group universal property.
-Source: Stacks 03AS. 
+Source: Stacks 03AS.
 -/
 noncomputable def freeDesc (Y : FormalCoproduct.{v} (Over X))
     (P : Cᵒᵖ ⥤ AddCommGrpCat.{v}) (b : ∀ i, P.obj (op (Y.obj i).left)) :
@@ -47,7 +47,7 @@ noncomputable def freeDesc (Y : FormalCoproduct.{v} (Over X))
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Free Yoneda identifies maps out of the representable sum with sections on its summands.
-Source: Stacks 03AS. 
+Source: Stacks 03AS.
 -/
 noncomputable def freeHomEquiv (Y : FormalCoproduct.{v} (Over X))
     (P : Cᵒᵖ ⥤ AddCommGrpCat.{v}) :
@@ -83,7 +83,7 @@ noncomputable def freeHomEquiv (Y : FormalCoproduct.{v} (Over X))
     rfl
 
 /-- The categorical product is the group of dependent functions.
-Source: the product universal property, as used in Stacks 03AS. 
+Source: the product universal property, as used in Stacks 03AS.
 -/
 noncomputable def productIso {J : Type v} (F : J → AddCommGrpCat.{v}) :
     (∏ᶜ F) ≅ AddCommGrpCat.of (∀ j, F j) :=
@@ -106,7 +106,7 @@ private theorem hom_zsmul_apply {A B : AddCommGrpCat.{v}} (r : ℤ)
     (f : A ⟶ B) (x : A) : (r • f) x = r • f x := rfl
 
 /-- Free Yoneda followed by the universal property of the categorical product.
-Source: Stacks 03AS. 
+Source: Stacks 03AS.
 -/
 noncomputable def sectionsEquiv (Y : FormalCoproduct.{v} (Over X))
     (P : Cᵒᵖ ⥤ AddCommGrpCat.{v}) :
@@ -130,7 +130,7 @@ variable [HasFiniteWidePullbacks C] {ι : Type v} (U : ι → C) (π : ∀ i, U 
   (P : Cᵒᵖ ⥤ AddCommGrpCat.{v})
 
 /-- The free Yoneda and product comparison in each Čech degree.
-Source: Stacks 03AS. 
+Source: Stacks 03AS.
 -/
 noncomputable def cochainEquiv (n : ℕ) :
     ((freeComplex X U π).X n ⟶ P) ≃+

@@ -113,7 +113,7 @@ variable {C₀ C₁ C₂ C₃ D₀ D₁ D₂ D₃ : Type*}
   [PreservesFiniteLimits G'] [PreservesFiniteColimits G']
   [PreservesFiniteLimits I'] [PreservesFiniteColimits I']
 
-/--  An exact functorial cube remains commutative on unbounded derived categories. -/
+/-- An exact functorial cube remains commutative on unbounded derived categories. -/
 theorem exactDerivedCube
     (qJ : R₀ ⋙ J ≅ J' ⋙ R₁) (qH : R₁ ⋙ H ≅ H' ⋙ R₃)
     (qG : R₀ ⋙ G ≅ G' ⋙ R₂) (qI : R₂ ⋙ I ≅ I' ⋙ R₃)

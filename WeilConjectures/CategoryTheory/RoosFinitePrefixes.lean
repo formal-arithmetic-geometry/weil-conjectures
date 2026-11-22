@@ -24,7 +24,7 @@ universe u
 
 namespace CategoryTheory
 
-/-- The tower whose level `n` is the product of the first `n + s` levels of `A`. 
+/-- The tower whose level `n` is the product of the first `n + s` levels of `A`.
 -/
 def roosPrefixTower (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     ℕᵒᵖ ⥤ AddCommGrpCat.{u} where
@@ -37,7 +37,7 @@ def roosPrefixTower (s : ℕ) (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
   map_id _ := rfl
   map_comp _ _ := rfl
 
-/-- Coordinatewise maps on finite-prefix towers. 
+/-- Coordinatewise maps on finite-prefix towers.
 -/
 def roosPrefixFunctor (s : ℕ) :
     (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) where
@@ -73,7 +73,7 @@ def roosPrefixInclusion :
     exact ConcreteCategory.congr_hom (φ.naturality
       (homOfLE (Nat.le_of_lt_succ i.isLt)).op).symm x
 
-/-- The finite-prefix difference map, with coordinate `xᵢ - fᵢ xᵢ₊₁`. 
+/-- The finite-prefix difference map, with coordinate `xᵢ - fᵢ xᵢ₊₁`.
 -/
 def roosPrefixProjection : roosPrefixFunctor 1 ⟶ roosPrefixFunctor 0 where
   app A :=
@@ -93,7 +93,7 @@ def roosPrefixProjection : roosPrefixFunctor 1 ⟶ roosPrefixFunctor 0 where
     exact ConcreteCategory.congr_hom (φ.naturality
       (homOfLE (Nat.le_succ i.val)).op) _
 
-/-- The finite-prefix difference vanishes on compatible tuples. 
+/-- The finite-prefix difference vanishes on compatible tuples.
 -/
 theorem roosPrefixInclusion_projection (A : ℕᵒᵖ ⥤ AddCommGrpCat.{u}) :
     roosPrefixInclusion.app A ≫ roosPrefixProjection.app A = 0 := by

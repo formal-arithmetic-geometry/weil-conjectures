@@ -28,7 +28,7 @@ namespace CategoryTheory
 
 open Limits
 
-/-- The product of all levels of a tower, with componentwise maps. 
+/-- The product of all levels of a tower, with componentwise maps.
 -/
 noncomputable def roosProductFunctor :
     (ℕᵒᵖ ⥤ AddCommGrpCat.{u}) ⥤ AddCommGrpCat.{u} where
@@ -43,7 +43,7 @@ noncomputable def roosProductFunctor :
     intro n
     simp
 
-/-- The natural endomorphism `1 - shift` of the levelwise product functor. 
+/-- The natural endomorphism `1 - shift` of the levelwise product functor.
 -/
 noncomputable def roosProductDifferential :
     roosProductFunctor.{u} ⟶ roosProductFunctor.{u} where

@@ -86,7 +86,7 @@ private theorem homotopy_unit_ext
   dsimp only [Functor.comp_map] at ha hb
   rw [← ha, ← hb, he I hI]
 
-/--  Canonical comparison, including its unit normalization. -/
+/-- Canonical comparison, including its unit normalization. -/
 theorem exists_fixedPairDerivedForgetComparison
     {C : Type uC} [Category.{vC} C] [Abelian C] [IsGrothendieckAbelian.{vC} C]
     {D : Type uD} [Category.{vD} D] [Abelian D] [IsGrothendieckAbelian.{vD} D]

@@ -323,7 +323,7 @@ theorem exists_quasiIso_projective_finite_of_isPerfect (K : CochainComplex (Modu
 `A`-modules concentrated in degrees `[a, b]` which is perfect in `D(A)`, and `p` a prime of `A`.
 Then there are `s ∉ p` and a complex `P` of free `A_s`-modules of finite rank, concentrated in
 degrees `[a, b]`, with a quasi-isomorphism `P ⟶ A_s ⊗[A] K`.
- -/
+-/
 theorem exists_quasiIso_free_away_of_isPerfect (K : CochainComplex (ModuleCat.{u} A) ℤ)
     (a b : ℤ) [K.IsStrictlyGE a] [K.IsStrictlyLE b] (hK : ∀ n, Module.Flat A (K.X n))
     (hKP : (Q.obj K).IsPerfect) (p : Ideal A) [p.IsPrime] :

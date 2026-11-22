@@ -67,7 +67,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   {P : C ⥤ C} [P.Monoidal] {Q : D ⥤ D} [Q.Monoidal]
   (B : C ⥤ D) [B.Monoidal] (c : B ⋙ Q ≅ P ⋙ B) [c.hom.IsMonoidal]
 
-/--  The cotensor square associated to a monoidal commuting comparison. -/
+/-- The cotensor square associated to a monoidal commuting comparison. -/
 lemma scalar_cotensor_square (K L : C) :
     Q.map (Functor.OplaxMonoidal.δ B K L) ≫
         Functor.OplaxMonoidal.δ Q (B.obj K) (B.obj L) ≫
@@ -141,7 +141,7 @@ variable {C : Type u} [Category.{v} C] [MonoidalCategory C]
   {D : Type u'} [Category.{v'} D] [MonoidalCategory D]
   {P : C ⥤ C} [P.Monoidal] {Q : D ⥤ D} [Q.Monoidal]
 
-/--  Existential monoidal and line data suffice to construct the strict comparison. -/
+/-- Existential monoidal and line data suffice to construct the strict comparison. -/
 theorem tensorRightScalarIso_nonempty (B : C ⥤ D) (c : B ⋙ Q ≅ P ⋙ B)
     {L : C} {M : D} (τ : P.obj L ≅ L) (σ : Q.obj M ≅ M)
     (h : ∃ hB : B.Monoidal, letI := hB

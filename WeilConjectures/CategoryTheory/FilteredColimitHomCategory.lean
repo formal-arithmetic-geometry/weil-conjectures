@@ -36,7 +36,7 @@ noncomputable def filteredColimitArrowSource :
             ext a
             exact ConcreteCategory.congr_hom (colimit.w (F ⋙ Cat.objects) f) a.left } }
 
-/-- Target map descended from the target maps of the stage categories. 
+/-- Target map descended from the target maps of the stage categories.
 -/
 noncomputable def filteredColimitArrowTarget :
     colimit (F ⋙ Cat.arrows) → colimit (F ⋙ Cat.objects) :=
@@ -65,13 +65,13 @@ target. -/
   unfold filteredColimitArrowTarget
   exact ConcreteCategory.congr_hom (colimit.ι_desc (F := F ⋙ Cat.arrows) _ j) a
 
-/-- The arrows in the set colimit with prescribed source and target. 
+/-- The arrows in the set colimit with prescribed source and target.
 -/
 def FilteredColimitHom (X Y : colimit (F ⋙ Cat.objects)) :=
   { a : colimit (F ⋙ Cat.arrows) //
     filteredColimitArrowSource F a = X ∧ filteredColimitArrowTarget F a = Y }
 
-/-- A stage morphism viewed in the corresponding fiber of the arrow colimit. 
+/-- A stage morphism viewed in the corresponding fiber of the arrow colimit.
 -/
 noncomputable def filteredColimitHomι (j : J) {X Y : F.obj j} (f : X ⟶ Y) :
     FilteredColimitHom F (colimit.ι (F ⋙ Cat.objects) j X)

@@ -193,7 +193,7 @@ private theorem action_apply (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ)
             ((forget F).mapDerivedCategory.obj N) ≫
           ((cyclicDerivedStructure F).hom.app N)⟦r⟧') := rfl
 
-/--  Exact equivariant transport commutes with the conjugation action in every degree. -/
+/-- Exact equivariant transport commutes with the conjugation action in every degree. -/
 theorem cyclicDerivedHomTransport_exact_action
     (M N : DerivedCategory (IsoAlgebra F)) (r : ℤ)
     (u : CyclicDerivedHom F M N r) :

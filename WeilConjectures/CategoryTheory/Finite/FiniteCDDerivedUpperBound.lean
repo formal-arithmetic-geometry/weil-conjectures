@@ -135,7 +135,7 @@ private theorem isLeftKanExtension_of_full_whiskering
     rw [← h]
     simp
 
-/-- 
+/--
 Finite cohomological dimension gives an unbounded total right derived functor and
 raises an upper cohomological bound by at most the dimension.  This is the statement of
 Stacks Project Tag 07K7, parts (1) and (4)(c), with the unbounded cochain derived

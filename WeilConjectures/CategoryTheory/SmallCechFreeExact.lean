@@ -33,7 +33,7 @@ namespace SmallCech
 variable {C : Type u} [Category.{v} C] (X : C)
 
 /-- The sum of representables of a formal family over X, using only v-small Hom sets.
-Source: Stacks 03AS and 03AT. 
+Source: Stacks 03AS and 03AT.
 -/
 def tupleRepresentables (Y : FormalCoproduct.{v} (Over X)) : Cᵒᵖ ⥤ Type v where
   obj Z := Σ i : Y.I, Z.unop ⟶ (Y.obj i).left
@@ -48,7 +48,7 @@ def tupleRepresentables (Y : FormalCoproduct.{v} (Over X)) : Cᵒᵖ ⥤ Type v 
     simp [Category.assoc]
 
 /-- A map of formal families induces a map between their representable sums.
-Source: Stacks 03AS and 03AT. 
+Source: Stacks 03AS and 03AT.
 -/
 def tupleRepresentablesMap {Y Y' : FormalCoproduct.{v} (Over X)} (f : Y ⟶ Y') :
     tupleRepresentables X Y ⟶ tupleRepresentables X Y' where
@@ -59,7 +59,7 @@ def tupleRepresentablesMap {Y Y' : FormalCoproduct.{v} (Over X)} (f : Y ⟶ Y') 
     simp [tupleRepresentables, Category.assoc]
 
 /-- The functor sending a formal family to its coproduct of free abelian representables.
-Source: Stacks 03AS and 03AT. 
+Source: Stacks 03AS and 03AT.
 -/
 noncomputable def freePresheaf :
     FormalCoproduct.{v} (Over X) ⥤ (Cᵒᵖ ⥤ AddCommGrpCat.{v}) where
@@ -90,7 +90,7 @@ attribute [local instance] Over.ConstructProducts.over_finiteProducts_of_finiteW
 variable [HasFiniteWidePullbacks C] {ι : Type v} (U : ι → C) (π : ∀ i, U i ⟶ X)
 
 /-- The alternating chains of the free abelian representable sums on categorical products.
-Source: Stacks 03AT. 
+Source: Stacks 03AT.
 -/
 noncomputable abbrev freeComplex : ChainComplex (Cᵒᵖ ⥤ AddCommGrpCat.{v}) ℕ :=
   (AlgebraicTopology.alternatingFaceMapComplex _).obj

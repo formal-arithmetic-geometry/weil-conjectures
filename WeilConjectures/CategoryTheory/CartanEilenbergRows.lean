@@ -69,7 +69,7 @@ noncomputable def complex (R : CartanEilenbergRows S) : CochainComplex C ℤ whe
     subst r
     simp [Category.assoc, reassoc_of% (R.uv (p + 1))]
 
-/-- In adjacent degrees the differential is the prescribed composite. 
+/-- In adjacent degrees the differential is the prescribed composite.
 -/
 @[simp] theorem complex_d (R : CartanEilenbergRows S) (p : ℤ) :
     R.complex.d p (p + 1) = R.v p ≫ R.w (p + 1) ≫ R.u (p + 1) := by

@@ -33,7 +33,7 @@ open CategoryTheory CategoryTheory.Limits DirectSum
 namespace CategoryTheory
 
 open Classical in
-/--  Let `C` be an additive category with arbitrary coproducts.
+/-- Let `C` be an additive category with arbitrary coproducts.
 An object `K` of `C` is *compact* if, for every set `I` and family `E : I → C`, the canonical map
 `⨁ᵢ Hom(K, E i) → Hom(K, ⨁ᵢ E i)`, sending `f` in the `i`-th summand to `f ≫ Sigma.ι E i`, is
 bijective (Stacks, Tag 09SM). The direct sum is taken with the classical decidable equality

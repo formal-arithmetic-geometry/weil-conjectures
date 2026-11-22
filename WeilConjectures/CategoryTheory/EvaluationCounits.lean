@@ -28,7 +28,7 @@ variable {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
       Fn.map (comparison K).hom ≫ finite.counit.app (evY.obj K))
 
 include adj finite support counit in
-/--  The counit equation forces naturality of the finite right-adjoint comparisons. -/
+/-- The counit equation forces naturality of the finite right-adjoint comparisons. -/
 theorem evaluationCounit_naturality {K L : D} (f : K ⟶ L) :
     evX.map (G.map f) ≫ (comparison L).hom =
       (comparison K).hom ≫ Gn.map (evY.map f) := by
@@ -54,7 +54,7 @@ def evaluationCounitComparison : G ⋙ evX ≅ evY ⋙ Gn :=
   NatIso.ofComponents comparison (fun f ↦
     evaluationCounit_naturality adj finite evX evY support comparison counit f)
 
-/--  Counit-preserving evaluation comparisons also preserve the unit. -/
+/-- Counit-preserving evaluation comparisons also preserve the unit. -/
 theorem evaluationCounitComparison_unit (M : C) :
     evX.map (adj.unit.app M) ≫
       (evaluationCounitComparison adj finite evX evY support comparison counit).hom.app

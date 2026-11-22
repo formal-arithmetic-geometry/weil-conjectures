@@ -57,7 +57,7 @@ private theorem homotopy_of_resolution
     · simp [(CochainComplex.exact_succ_of_quasiIso_single₀ ι (n + 1)).comp_descToInjective]
   exact ⟨Homotopy.equivSubZero.invFun hz0⟩
 
-/--  An exact functor `T` whose injective images
+/-- An exact functor `T` whose injective images
 are `U`-acyclic can be pulled inside every right derived functor of the left exact functor `U`.
 The isomorphism is canonical: for any injective resolutions `I` of `M` and `J` of `T(M)`,
 its forward map is the cohomology map of any lift `φ : T(I) ⟶ J` of the identity, transported

@@ -30,13 +30,13 @@ variable (S : Scheme.{u})
     {G G' : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}}
     (φ : G ⟶ G') (T : Torsor G)
 
-/-- The generators of the antidiagonal orbit relation. 
+/-- The generators of the antidiagonal orbit relation.
 -/
 def contractedOrbitRel (U : S.Etaleᵒᵖ)
     (a b : T.sheaf.obj.obj U × G'.obj.obj U) : Prop :=
   ∃ g : G.obj.obj U, b = (T.vadd U g a.1, a.2 - φ.hom.app U g)
 
-/-- Sectionwise orbits, with restriction induced from the two factors. 
+/-- Sectionwise orbits, with restriction induced from the two factors.
 -/
 def contractedOrbitPresheaf : S.Etaleᵒᵖ ⥤ Type (u + 1) where
   obj U := Quot (contractedOrbitRel S φ T U)
@@ -70,13 +70,13 @@ def contractedOrbitPresheaf : S.Etaleᵒᵖ ⥤ Type (u + 1) where
       simp only [Functor.map_comp]
       rfl
 
-/-- The actual sheafification of the orbit presheaf; no witness is chosen. 
+/-- The actual sheafification of the orbit presheaf; no witness is chosen.
 -/
 noncomputable def contractedOrbitSheaf : Sheaf S.smallEtaleTopology (Type (u + 1)) :=
   (presheafToSheaf S.smallEtaleTopology (Type (u + 1))).obj
     (contractedOrbitPresheaf S φ T)
 
-/-- The canonical map from pairs to the sheafified orbit presheaf. 
+/-- The canonical map from pairs to the sheafified orbit presheaf.
 -/
 noncomputable def contractedOrbitQuotient (U : S.Etaleᵒᵖ)
     (t : T.sheaf.obj.obj U) (h : G'.obj.obj U) :
@@ -102,7 +102,7 @@ lemma contractedOrbitQuotient_invariant (U : S.Etaleᵒᵖ) (g : G.obj.obj U)
     (contractedOrbitPresheaf S φ T)).app U)
   exact (Quot.sound ⟨g, rfl⟩).symm
 
-/-- Local nonemptiness passes from the original torsor to its orbit sheaf. 
+/-- Local nonemptiness passes from the original torsor to its orbit sheaf.
 -/
 lemma contractedOrbitSheaf_nonemptySieve_mem (U : S.Etale) :
     nonemptySieve (contractedOrbitSheaf S φ T).obj U ∈ S.smallEtaleTopology U := by
@@ -112,7 +112,7 @@ lemma contractedOrbitSheaf_nonemptySieve_mem (U : S.Etale) :
   exact ⟨contractedOrbitQuotient S φ T (Opposite.op V) t 0⟩
 
 /-- A section trivializes the sectionwise orbit quotient, with the expected second coordinate.
-This is the explicit local coordinate used in the local torsor argument. 
+This is the explicit local coordinate used in the local torsor argument.
 -/
 noncomputable def contractedOrbitEquiv (U : S.Etaleᵒᵖ) (t₀ : T.sheaf.obj.obj U) :
     Quot (contractedOrbitRel S φ T U) ≃ G'.obj.obj U := by

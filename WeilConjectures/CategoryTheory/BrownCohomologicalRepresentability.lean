@@ -58,7 +58,7 @@ theorem IsCompactlyGeneratedTriangulated.exists_compactGenerators
     hX (i, -n) ((adj.homEquiv _ _).symm (Sigma.ι E i ≫ f)), Adjunction.homEquiv_unit,
     Functor.map_zero, comp_zero]
 
-/--  Every cohomological
+/-- Every cohomological
 functor on a compactly generated triangulated category that
 converts coproducts to products is represented by an object. Set-indexed means
 indexed by `Type v`, the universe of the morphism sets of `C`.
