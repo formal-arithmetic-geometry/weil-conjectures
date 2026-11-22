@@ -23,3 +23,12 @@ from READY2. The only robust cross-case statement is that diagnostic matched
 children can be cheap while the full dependent root remains expensive; the
 remaining mechanism is unresolved between M1, M2, and expensive matched
 descendants.
+
+## READY3 historical update
+
+READY3 is now validated for both Lean releases and the historical
+Derived-Completion Cone. The current PerfIssues rows remain the READY2
+fallback: all selected recursive provenance is still Unclassified, and no
+selective M2 alignment preserves M0. The cross-case synthesis records the
+historical READY3 row separately and does not upgrade any current diagnostic
+baseline to A0/A1.
