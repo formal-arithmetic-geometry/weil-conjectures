@@ -68,7 +68,7 @@ but the READY2 trace cannot split it into M1 versus M2 or matched descendants.
 Outcome **E** (insufficient provenance), with a substantial known matched
 floor and an unclassified mismatch amplification.
 
-## MPRWE round 2
+## MPRWE round 2 (superseded historical table)
 
 ## MPRWE round 4 (READY3.2; supersedes earlier tables)
 

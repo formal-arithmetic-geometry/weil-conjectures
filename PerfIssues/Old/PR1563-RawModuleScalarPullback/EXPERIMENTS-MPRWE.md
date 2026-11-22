@@ -56,7 +56,7 @@ work. The residual aligned root shows a large intrinsic/context floor. Outcome
 source snapshot retains the original declaration context; no separate R timing
 is claimed.
 
-## MPRWE round 2
+## MPRWE round 2 (superseded historical table)
 
 ## MPRWE round 4 (READY3.2; supersedes earlier tables)
 

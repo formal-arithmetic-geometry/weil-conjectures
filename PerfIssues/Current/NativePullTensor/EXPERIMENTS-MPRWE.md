@@ -77,7 +77,7 @@ provider-sensitive comparison, which supports a mismatch-sensitive effect, but
 does not distinguish inherited from newly exposed work. Outcome **E** pending
 READY3 parent/path instrumentation; no claim of a mismatch cascade is made.
 
-## MPRWE round 2
+## MPRWE round 2 (superseded historical table)
 
 ## MPRWE round 4 (READY3.2; supersedes earlier tables)
 

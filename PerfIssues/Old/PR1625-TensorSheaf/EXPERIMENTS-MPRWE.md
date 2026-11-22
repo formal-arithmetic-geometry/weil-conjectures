@@ -63,7 +63,7 @@ M1/M2 split. All recursive provenance remains Unclassified under READY2.
 The restored source snapshot retains the declaration context; the R timing is
 the earlier direct pair restoration from the meta probe.
 
-## MPRWE round 2
+## MPRWE round 2 (superseded historical table)
 
 ## MPRWE round 4 (READY3.2; supersedes earlier tables)
 

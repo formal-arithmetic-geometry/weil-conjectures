@@ -57,7 +57,7 @@ intrinsic/mismatch interaction, Outcome **D/E**; provenance is unclassified.
 The restored source snapshot retains the original declaration context; no
 separate restored endpoint timing was available.
 
-## MPRWE round 2
+## MPRWE round 2 (superseded historical table)
 
 ## MPRWE round 4 (READY3.2; supersedes earlier tables)
 
