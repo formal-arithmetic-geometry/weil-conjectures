@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Abelian.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartClosure
 public import WeilConjectures.AlgebraicGeometry.Coefficient.CoefficientHeartCommonStratification
-public import WeilConjectures.AlgebraicGeometry.CoefficientHeartStatement
 
 /-!
 # Constructible coefficient sheaves over a general field
@@ -161,5 +160,39 @@ theorem coefficientHeartGeneralStatement (ℓ : ℕ) [Fact ℓ.Prime]
   exact ⟨R.domain a, R.immersion a, R.isImmersion a,
     (CondensedRing.upperStar (coefficientHeartRingObj L) (R.immersion a)).obj F.obj,
     (hquot a).2, (hquot a).1⟩
+
+/-- Constructible coefficient sheaves over a field of characteristic `p ≠ ℓ` form an exact
+essentially small abelian heart and admit finite filtrations by canonical locally closed
+extensions of lisse sheaves. -/
+theorem coefficientHeartStatement (ℓ : ℕ) [Fact ℓ.Prime]
+    (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1})
+    [IsCommMonObj (coefficientHeartRingObj Λ)]
+    (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ),
+      FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨
+      Λ = Profinite.padicAlgClCondensedRing ℓ)
+    (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ)
+    (X : Scheme.{u}) [X.Over (Spec (.of k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))]
+    [IsSeparated (X ↘ Spec (.of k))] :
+    ObjectProperty.IsClosedUnderKernels
+        (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧
+      ObjectProperty.IsClosedUnderCokernels
+        (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧
+      ObjectProperty.IsClosedUnderExtensions
+        (IsConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧
+      Nonempty (Abelian (ConstantModelConstructible (coefficientHeartRingObj Λ) X)) ∧
+      PreservesFiniteLimits
+        (ObjectProperty.ι (IsConstantModelConstructible
+          (coefficientHeartRingObj Λ) X)) ∧
+      PreservesFiniteColimits
+        (ObjectProperty.ι (IsConstantModelConstructible
+          (coefficientHeartRingObj Λ) X)) ∧
+      EssentiallySmall.{u + 1} (ConstantModelConstructible (coefficientHeartRingObj Λ) X) ∧
+      @CoefficientHeartFiltrationAssertions (coefficientHeartRingObj Λ) _ _ X
+        { toIsLocallyNoetherian :=
+            LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+          toCompactSpace :=
+            QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) } :=
+  coefficientHeartGeneralStatement ℓ Λ hΛ k (by rwa [ringChar.eq k p]) X
 
 end AlgebraicGeometry.ProEtale
