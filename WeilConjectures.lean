@@ -21557,7 +21557,6 @@ public import WeilConjectures.SixFunctors.Etale.StrictLocalizationStalkConstantZ
 public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyExact
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyHom
-public import WeilConjectures.SixFunctors.Etale.SupportCohomologyKFlatResolution
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestrictionNaturality
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTriangle
