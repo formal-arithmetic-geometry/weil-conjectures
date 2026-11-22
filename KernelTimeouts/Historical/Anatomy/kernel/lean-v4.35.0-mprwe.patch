@@ -1,6 +1,6 @@
 --- a/src/kernel/type_checker.cpp
 +++ b/src/kernel/type_checker.cpp
-@@ -9,6 +9,15 @@
+@@ -9,6 +9,16 @@
  #include <limits>
  #include <climits>
  #include <cstdlib>
@@ -11,12 +11,13 @@
 +#include <string>
 +#include <unordered_map>
 +#include <algorithm>
++#include <atomic>
 +#include <cstdint>
 +#include "lean/mimalloc.h"
  #include "runtime/interrupt.h"
  #include "runtime/sstream.h"
  #include "runtime/flet.h"
-@@ -24,6 +33,578 @@
+@@ -24,6 +34,579 @@
  #include "kernel/inductive.h"
  
  namespace lean {
@@ -137,7 +138,8 @@
 +static thread_local uint64_t * reduction_child_ns = nullptr;
 +static thread_local totals data;
 +static thread_local unsigned reduction_depth = 0;
-+static thread_local uint64_t root_serial = 0;
++static std::atomic<uint64_t> root_serial{0};
++static uint64_t root_id() { return root_serial.load(std::memory_order_relaxed); }
 +static thread_local uint64_t mprwe_global_events = 0;
 +static unsigned bucket(unsigned n) { return n < 64 ? n : 64 + (n / 64); }
 +static std::FILE * mprwe_stream() {
@@ -245,14 +247,14 @@
 +    for (auto const & item : data.mprwe_cost) {
 +        auto const & cost = item.second;
 +        std::fprintf(f, "{\"event\":\"aggregate\",\"root\":%llu,\"provenance\":\"%s\",\"path\":\"%s\",\"calls\":%llu,\"exclusive_ns\":%llu,\"reduction_ns\":%llu,\"traced_calls\":%llu,\"traced_exclusive_ns\":%llu,\"total_calls\":%llu,\"root_exclusive_ns\":%llu}\n",
-+            static_cast<unsigned long long>(root_serial), item.first.first.c_str(), item.first.second.c_str(),
++            static_cast<unsigned long long>(root_id()), item.first.first.c_str(), item.first.second.c_str(),
 +            static_cast<unsigned long long>(cost.calls), static_cast<unsigned long long>(cost.exclusive),
 +            static_cast<unsigned long long>(cost.reduction), static_cast<unsigned long long>(cost.traced_calls),
 +            static_cast<unsigned long long>(cost.traced_exclusive), static_cast<unsigned long long>(data.calls),
 +            static_cast<unsigned long long>(data.comparison_exclusive));
 +    }
 +    std::fprintf(f, "{\"event\":\"coverage\",\"root\":%llu,\"traced_calls\":%llu,\"total_calls\":%llu,\"traced_exclusive_ns\":%llu,\"root_exclusive_ns\":%llu,\"raw_events\":%llu}\n",
-+        static_cast<unsigned long long>(root_serial), static_cast<unsigned long long>(data.mprwe_trace_calls),
++        static_cast<unsigned long long>(root_id()), static_cast<unsigned long long>(data.mprwe_trace_calls),
 +        static_cast<unsigned long long>(data.calls), static_cast<unsigned long long>(data.mprwe_trace_exclusive),
 +        static_cast<unsigned long long>(data.comparison_exclusive), static_cast<unsigned long long>(data.mprwe_raw_events));
 +}
@@ -272,7 +274,7 @@
 +        "proposition_comparison_ms=%.3f proposition_reduction_ms=%.3f "
 +        "instantiations=%llu instantiation_ms=%.3f cpp_expr_created=%llu cpp_expr_bytes=%llu "
 +        "rss_delta_bytes=%lld commit_delta_bytes=%lld\n",
-+        static_cast<unsigned long long>(root_serial), mode() == 2 ? "trace" : "counters", ms(wall),
++        static_cast<unsigned long long>(root_id()), mode() == 2 ? "trace" : "counters", ms(wall),
 +        static_cast<unsigned long long>(data.calls), static_cast<unsigned long long>(data.successes),
 +        static_cast<unsigned long long>(data.failures), static_cast<unsigned long long>(data.max_depth),
 +        ms(data.comparison_exclusive), ms(data.reduction_exclusive),
@@ -379,7 +381,7 @@
 +        if (!mode()) return;
 +        enabled = true;
 +        if (!parent) {
-+            data = totals{}; ++root_serial;
++            data = totals{}; root_serial.fetch_add(1, std::memory_order_relaxed);
 +            memory_snapshot(data.start_rss, data.start_commit);
 +        }
 +        id = ++data.calls;
@@ -427,7 +429,7 @@
 +        current = this;
 +        if (mprwe_stream()) {
 +            uint64_t before = data.mprwe_raw_events;
-+            mprwe_event("enter", root_serial, id, parent ? parent->id : 0, depth, left, right, category,
++            mprwe_event("enter", root_id(), id, parent ? parent->id : 0, depth, left, right, category,
 +                        provenance.c_str(), divergence.present ? "first-divergence" :
 +                        (left_hash == right_hash ? "structurally-equal" : "none"), 0, 0, false, "",
 +                        left_hash, right_hash, divergence.left, divergence.right,
@@ -490,7 +492,7 @@
 +            }
 +        }
 +        if (mprwe_stream())
-+            mprwe_event("exit", root_serial, id, parent ? parent->id : 0, depth, left, right, category,
++            mprwe_event("exit", root_id(), id, parent ? parent->id : 0, depth, left, right, category,
 +                        provenance.c_str(), divergence.present ? "first-divergence" :
 +                        (left_hash == right_hash ? "structurally-equal" : "none"),
 +                        exclusive, reduce_ns, completed && result, "", left_hash, right_hash,
@@ -508,12 +510,12 @@
 +                            expr const & after_l, expr const & before_r, expr const & after_r) {
 +    if (!owner || !mprwe_stream()) return;
 +    owner->reduction_exposed = true;
-+    if (mprwe_root_filter() && root_serial != mprwe_root_filter()) return;
++    if (mprwe_root_filter() && root_id() != mprwe_root_filter()) return;
 +    if (mprwe_global_events >= mprwe_limit()) return;
 +    ++data.mprwe_raw_events;
 +    ++mprwe_global_events;
 +    std::fprintf(mprwe_stream(), "{\"event\":\"reduction\",\"root\":%llu,\"call\":%llu,\"parent\":%llu,\"depth\":%u,\"before_left\":\"%s\",\"after_left\":\"%s\",\"before_right\":\"%s\",\"after_right\":\"%s\",\"before_left_hash\":\"%llu\",\"after_left_hash\":\"%llu\",\"before_right_hash\":\"%llu\",\"after_right_hash\":\"%llu\",\"category\":%u,\"context\":\"%llu\",\"provenance\":\"Unclassified\",\"phase\":\"%s\"}\n",
-+        static_cast<unsigned long long>(root_serial), static_cast<unsigned long long>(owner->id),
++        static_cast<unsigned long long>(root_id()), static_cast<unsigned long long>(owner->id),
 +        static_cast<unsigned long long>(owner->parent ? owner->parent->id : 0), owner->depth,
 +        head(before_l).c_str(), head(after_l).c_str(), head(before_r).c_str(), head(after_r).c_str(),
 +        static_cast<unsigned long long>(mprwe_hash(before_l)), static_cast<unsigned long long>(mprwe_hash(after_l)),
@@ -595,7 +597,7 @@
  static name * g_kernel_fresh = nullptr;
  static expr * g_dont_care    = nullptr;
  static name * g_bool_true    = nullptr;
-@@ -466,6 +1047,7 @@
+@@ -466,6 +1049,7 @@
      If `cheap == true`, then we don't perform delta-reduction when reducing major premise of recursors and projections.
      We also do not cache results. */
  expr type_checker::whnf_core(expr const & e, bool cheap_rec, bool cheap_proj) {
@@ -603,7 +605,7 @@
      scope_rec_depth guard;
      check_system("type checker: whnf", /* do_check_interrupted */ true);
  
-@@ -502,9 +1084,10 @@
+@@ -502,9 +1086,10 @@
      case expr_kind::FVar:
          return whnf_fvar(e, cheap_rec, cheap_proj);
      case expr_kind::Proj: {
@@ -616,7 +618,7 @@
              r = e;
          break;
      }
-@@ -513,6 +1096,7 @@
+@@ -513,6 +1098,7 @@
          expr f0 = get_app_rev_args(e, args);
          expr f = whnf_core(f0, cheap_rec, cheap_proj);
          if (is_lambda(f)) {
@@ -624,7 +626,7 @@
              unsigned m = 1;
              unsigned num_args = args.size();
              while (is_lambda(binding_body(f)) && m < num_args) {
-@@ -524,6 +1108,7 @@
+@@ -524,6 +1110,7 @@
                            cheap_rec, cheap_proj);
          } else if (f == f0) {
              if (auto r = reduce_recursor(e, cheap_rec, cheap_proj)) {
@@ -632,7 +634,7 @@
                  if (m_diag) {
                      auto f = get_app_fn(e);
                      if (is_constant(f))
-@@ -540,6 +1125,7 @@
+@@ -540,6 +1127,7 @@
          break;
      }
      case expr_kind::Let:
@@ -640,7 +642,7 @@
          r = whnf_core(instantiate(let_body(e), let_value(e)), cheap_rec, cheap_proj);
          break;
      }
-@@ -565,6 +1151,18 @@
+@@ -565,6 +1153,18 @@
  optional<expr> type_checker::unfold_definition_core(expr const & e) {
      if (is_constant(e)) {
          if (auto d = is_delta(e)) {
@@ -659,7 +661,7 @@
              levels const & us = const_levels(e);
              unsigned len = length(us);
              if (m_diag) {
-@@ -572,13 +1170,18 @@
+@@ -572,13 +1172,18 @@
              }
              if (len > 0) {
                  auto it = m_st->m_unfold.find(e);
@@ -680,7 +682,7 @@
              }
          }
      }
-@@ -704,6 +1307,7 @@
+@@ -704,6 +1309,7 @@
  
  /** \brief Put expression \c t in weak head normal form */
  expr type_checker::whnf(expr const & e) {
@@ -688,7 +690,7 @@
      // Do not cache easy cases
      switch (e.kind()) {
      case expr_kind::BVar:  case expr_kind::Sort: case expr_kind::MVar: case expr_kind::Pi:
-@@ -758,10 +1362,18 @@
+@@ -758,10 +1364,18 @@
      do {
          optional<expr> var_s_type;
          if (binding_domain(t) != binding_domain(s)) {
@@ -709,7 +711,7 @@
          }
          if (has_loose_bvars(binding_body(t)) || has_loose_bvars(binding_body(s))) {
              // free variable is used inside t or s
-@@ -774,8 +1386,15 @@
+@@ -774,8 +1388,15 @@
          t = binding_body(t);
          s = binding_body(s);
      } while (t.kind() == k && s.kind() == k);
@@ -727,7 +729,7 @@
  }
  
  bool type_checker::is_def_eq(level const & l1, level const & l2) {
-@@ -828,9 +1447,12 @@
+@@ -828,9 +1449,12 @@
  /** \brief Return true if arguments of \c t are definitionally equal to arguments of \c s.
      This method is used to implement an optimization in the method \c is_def_eq. */
  bool type_checker::is_def_eq_args(expr t, expr s) {
@@ -742,7 +744,7 @@
          t = app_fn(t);
          s = app_fn(s);
      }
-@@ -866,6 +1488,7 @@
+@@ -866,6 +1490,7 @@
      get_app_args(s, s_args);
      for (unsigned i = f_val.get_nparams(); i < s_args.size(); i++) {
          expr proj = mk_proj(f_val.get_induct(), i - f_val.get_nparams(), t);
@@ -750,7 +752,7 @@
          if (!is_def_eq(proj, s_args[i])) return false;
      }
      return true;
-@@ -876,14 +1499,17 @@
+@@ -876,14 +1501,17 @@
      \c a_i and \c b_i are also definitionally equal for every 1 <= i <= n.
      Return false otherwise. */
  bool type_checker::is_def_eq_app(expr const & t, expr const & s) {
@@ -768,7 +770,7 @@
                  if (!is_def_eq(t_args[i], s_args[i]))
                      break;
              }
-@@ -897,24 +1523,36 @@
+@@ -897,24 +1525,36 @@
  /** \brief Return true if \c t and \c s are definitionally equal due to proof irrelevant.
      Return false otherwise. */
  lbool type_checker::is_def_eq_proof_irrel(expr const & t, expr const & s) {
@@ -809,7 +811,7 @@
  }
  
  void type_checker::cache_failure(expr const & t, expr const & s) {
-@@ -925,15 +1563,19 @@
+@@ -925,15 +1565,19 @@
  }
  
  bool type_checker::succeeded_before(expr const & t, expr const & s) const {
@@ -832,7 +834,7 @@
  }
  
  void type_checker::cache_success(expr const & t, expr const & s) {
-@@ -1130,10 +1772,12 @@
+@@ -1130,10 +1774,12 @@
  }
  
  bool type_checker::is_def_eq_core(expr const & t, expr const & s) {
@@ -846,7 +848,7 @@
  
      // Very basic support for proofs by reflection. If `t` has no free variables and `s` is `Bool.true`,
      // we fully reduce `t` and check whether result is `s`.
-@@ -1141,7 +1785,7 @@
+@@ -1141,7 +1787,7 @@
      // proof terms of the form `Eq.refl true : decide p = true`.
      if ((!has_fvar(t) || m_eager_reduce) && is_constant(s, *g_bool_true)) {
          if (is_constant(whnf(t), *g_bool_true)) {
@@ -855,7 +857,7 @@
          }
      }
  
-@@ -1154,56 +1798,58 @@
+@@ -1154,56 +1800,58 @@
      */
      expr t_n = whnf_core(t, false, true);
      expr s_n = whnf_core(s, false, true);

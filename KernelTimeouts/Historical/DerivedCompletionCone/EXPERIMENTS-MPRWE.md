@@ -88,3 +88,8 @@ fresh READY3.1 diagnostic is primarily M1 (76.7%), with measurable M2 (11.6%)
 and matched work (10.3%); Unclassified is 0.8%, well below 50%. The C
 intervention is unavailable for the dependent proof field, and R is a
 type-preserving restoration of the original mismatch.
+
+## MPRWE round 3 (READY3.2)
+
+The Cone diagnostic is re-read with the READY3.2 root identity. Its M1 76.7%,
+M2 11.6%, Matched 10.3%, and Unclassified 0.8% shares are unchanged.

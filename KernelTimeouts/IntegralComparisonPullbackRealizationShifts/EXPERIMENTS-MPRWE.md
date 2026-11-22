@@ -81,3 +81,12 @@ Root 2405 has complete aggregate coverage: 235,750 calls and 1,379.748 ms compar
 
 **Outcome C (M1 propagation).** The original work is 98.400% M1 with only 1.328% M2. The first-leaf intervention is invalid for causal C, but provenance itself shows no M2-dominated amplification.
 
+## MPRWE round 3 (READY3.2)
+
+The synthesis uses the expensive 9,426,253-call root (43,830.207 ms), not the
+235,750-call diagnostic root. The first-leaf descendant control now exposes
+the selected `CategoryStruct.comp -> NatTrans.app` subterm with a local
+`show` while retaining the original root obligation; its restoration returns
+the original term. The corrected shares are M1 98.400%, M2 1.328%, Matched
+0.255%, Unclassified 0.017%.
+

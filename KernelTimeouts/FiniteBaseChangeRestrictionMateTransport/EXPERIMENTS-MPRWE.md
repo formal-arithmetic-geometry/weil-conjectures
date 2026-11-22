@@ -83,3 +83,14 @@ The supplied whole-root alignment control completes in 2 calls (0.817 ms compari
 
 **Outcome D (mixed M1/M2 amplification).** READY3.1 resolves the former READY2 uncertainty: M1 dominates, but M2 accounts for 23.947% of exclusive comparison time. C's causal effect is not separately measurable because the available source control changes the root.
 
+## MPRWE round 3 (READY3.2)
+
+The selected M2 descendant is the `CategoryStruct.comp -> LinearMap.comp`
+branch under the right-square map. `C-descendant-alignment.lean` inserts a
+local `have`/`change` at that branch, preserving the outer dependent telescope
+and the original M0 pair. The control type-checks and the restored probe
+reinstates the original branch. This is a valid descendant-only C control;
+its purpose is provenance alignment, not a claim that the whole root becomes
+cheap. Shares are unchanged under the corrected root identity: M1 74.441%,
+M2 23.947%, Matched 1.614%, Unclassified 0.000%.
+

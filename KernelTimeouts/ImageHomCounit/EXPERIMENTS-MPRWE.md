@@ -81,3 +81,9 @@ Root 2129 has complete aggregate coverage: 6,359,958 calls and 42,708.813 ms com
 
 **Outcome C (M1 propagation).** M1 accounts for 99.761%; M2 is 0.007%. Raw representatives show ordinary downstream transport work, but no M2 cascade of material size.
 
+## MPRWE round 3 (READY3.2)
+
+Root identity and analysis are corrected; shares are M1 99.761%, M2 0.007%,
+Matched 0.232%, Unclassified 0.000%. The endpoint replacement remains
+root-changing.
+

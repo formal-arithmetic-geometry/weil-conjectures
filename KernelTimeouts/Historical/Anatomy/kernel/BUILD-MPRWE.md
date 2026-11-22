@@ -5,6 +5,16 @@ READY3 extends the READY2 type checker instrumentation for Lean 4.33.1
 (`eb6cafb7290e8bd5f2937522d8d804f58f02bafc`). The changes are observational:
 conversion order, transparency, caches, and shortcuts are unchanged.
 
+## READY3.2 correction
+
+Round 3 found that `root_serial` was thread-local even though the event stream
+was process-wide. Worker threads could therefore reuse a numeric root ID and
+mix aggregate rows. READY3.2 uses a process-wide relaxed atomic serial for
+both releases; the per-thread call tree and timing state remain unchanged.
+`mprwe_analyze.py` now prefers a root with actual raw coverage when selecting
+the default root. The old NativePullTensor 120-second validation partition is
+invalidated by this identity collision and is not used for shares.
+
 The patch adds bounded JSONL events selected by `LEAN_DEFEQ_MPRWE_EVENTS` and
 optionally `LEAN_DEFEQ_MPRWE_ROOT`: enter/exit records carry root, call,
 parent, depth, heads, stable whole-expression hashes, the first divergent

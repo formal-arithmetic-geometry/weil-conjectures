@@ -81,3 +81,10 @@ Root 5100 has complete aggregate coverage: 17,310,168 calls and 76,192.584 ms co
 
 **Outcome D (mixed M1/M2 amplification).** M2 is 36.568% of exclusive time, with raw representatives showing projection and coercion work. No type-correct M0-preserving descendant intervention was available, so the causal C effect is not separately estimated.
 
+## MPRWE round 3 (READY3.2)
+
+The prior restoration failure was a probe setup failure: the missing theorem
+import and unknown constant were repaired in the restoration snapshot. The
+restoration now reaches the recorded root; shares remain M1 62.046%, M2
+36.568%, Matched 1.389%, Unclassified 0.000%.
+

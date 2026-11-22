@@ -81,3 +81,9 @@ Root 2005 has complete aggregate coverage: 17,340,236 calls and 75,988.013 ms co
 
 **Outcome D (mixed M1/M2 amplification).** M2 contributes 37.204% of exclusive time. The raw representatives show substantial projection/coercion descendants, but no type-correct M0-preserving C intervention was available.
 
+## MPRWE round 3 (READY3.2)
+
+Root identity and analysis are corrected; shares are M1 61.473%, M2 37.204%,
+Matched 1.326%, Unclassified 0.000%. The polynomial replacement remains
+root-changing.
+

@@ -1,40 +1,37 @@
-# superseded, pending round 2
-# MPRWE Cross-case Synthesis
+# MPRWE Cross-case Synthesis (Round 3)
 
-The historical Cone row below uses a fresh READY3 4.33.1 counter run and a
-bounded READY3 trace. The current KernelTimeouts and PerfIssues rows use the
-READY2 fallback reports produced before READY3 was available; their recursive
-provenance is intentionally Unclassified. Shares are reported for the
-selected root only, and inclusive path samples are not added to exclusive
-root time.
+Analyzer revision: READY3.2. It uses a process-wide atomic root serial in both
+instrumented kernels and a root selector that prefers roots with actual raw
+coverage. All shares below are from the READY3.1 aggregate records under this
+revision; the NativePullTensor validation partition is rejected because its
+thread-local root ID mixed worker roots.
 
-| Case | Strict matched baseline | Root calls / exclusive comparison | M1 share | M2 share | Matched share | Unclassified | Selective M2 alignment | Outcome |
-|---|---|---:|---:|---:|---:|---:|---|---|
-| Derived-Completion Cone | No, A3 | 12.221M / 51.518 s | unavailable | unavailable | unavailable | 100% | unavailable; all controls change root | E |
-| FiniteBaseChange | No, A3 | 239.341M / 611.980 s | unavailable | unavailable | unavailable | 100% | invalid whole-root transport | E |
-| IntegralComparison | No, A3 | 9.426M / 44.816 s | unavailable | unavailable | unavailable | 100% | invalid first-leaf control | E |
-| RealPurity | No, A3 | 17.310M / 53.949 s | unavailable | unavailable | unavailable | 100% | invalid ring alignment | E |
-| OrderedSpectralRawLattices | No, A3 | 18.945M / 51.938 s | unavailable | unavailable | unavailable | 100% | invalid route alignment | E |
-| EtaleHom | No, A3 | 3.180M / 12.301 s | unavailable | unavailable | unavailable | 100% | invalid whole-domain transport | E |
-| F66Adj | No, A3 | 3.898M / 15.058 s | unavailable | unavailable | unavailable | 100% | invalid whole-counit transport | E |
-| ImageHomCounit | No, A3 | 6.360M / 25.076 s | unavailable | unavailable | unavailable | 100% | invalid endpoint alignment | E |
-| RealPushforward | No, A3 | 17.340M / 52.018 s | unavailable | unavailable | unavailable | 100% | invalid polynomial alignment | E |
-| NativePullTensor | No, A3 | 2.686M / 15.349 s | unavailable | unavailable | unavailable | 100% | unavailable; provider alignment removes M0 | E |
-| PR1556 | A1 diagnostic | 6.670M / 34.922 s | unavailable | unavailable | unavailable | 100% | unavailable; major-premise alignment removes M0 | E |
-| PR1625 | A1 diagnostic | 11.758M / 59.141 s | unavailable | unavailable | unavailable | 100% | unavailable; outer alignment removes M0 | E |
-| PR1563 | No, A3 | 2.574M / 15.785 s | unavailable | unavailable | unavailable | 100% | invalid provider change | E |
-| PR1624 | No, A3 | 6.599M / 37.378 s | unavailable | unavailable | unavailable | 100% | invalid endpoint alignment | E |
-| PR1627 | No, A3 | 10.905M / 23.912 s | unavailable | unavailable | unavailable | 100% | invalid generated-field alignment | E |
-| PR2122 | No, A3 | 2.227M / 11.486 s (historical) | unavailable | unavailable | unavailable | 100% | unavailable; imported olean missing | E |
+| Case | Root calls / exclusive ms | M1 | M2 | Matched | Unclassified | C result | Outcome |
+|---|---:|---:|---:|---:|---:|---:|---|
+| Derived-Completion Cone | 1,162 / 8.323 | 76.7% | 11.6% | 10.3% | 0.8% | dependent-field restoration | D |
+| FiniteBaseChange | 239,340,712 / 880,519.949 | 74.441% | 23.947% | 1.614% | 0.000% | descendant alignment restored | D |
+| IntegralComparison | 9,426,253 / 43,830.207 | 98.400% | 1.328% | 0.255% | 0.017% | first-leaf alignment restored | C |
+| RealPurity | 17,310,168 / 76,192.584 | 62.046% | 36.568% | 1.389% | 0.000% | restoration setup repaired | D |
+| OrderedSpectralRawLattices | 18,944,709 / 58,992.669 | 63.902% | 35.347% | 0.758% | 0.000% | restoration setup repaired | D |
+| EtaleHom | 3,180,470 / 21,549.825 | 99.762% | 0.001% | 0.236% | 0.001% | no valid descendant-only control | C |
+| F66Adj | 3,897,905 / 24,659.468 | 99.743% | 0.000% | 0.257% | 0.000% | no valid descendant-only control | C |
+| ImageHomCounit | 6,359,958 / 42,708.813 | 99.761% | 0.007% | 0.232% | 0.000% | no valid descendant-only control | C |
+| RealPushforward | 17,340,236 / 75,988.013 | 61.473% | 37.204% | 1.326% | 0.000% | no valid descendant-only control | D |
+| NativePullTensor | 2,685,580 / 20,675.658 | 98.124% | 0.299% | 1.581% | 0.000% | root provider alignment invalid | C |
+| PR1556 | 6,670,198 / 45,113.186 | 99.700% | 0.072% | 0.228% | 0.000% | major-premise alignment invalid | C |
+| PR1625 | 11,757,788 / 68,508.492 | 99.471% | 0.071% | 0.456% | 0.001% | outer-major alignment invalid | C |
+| PR1563 | 2,573,989 / 17,289.421 | 99.733% | 0.025% | 0.241% | 0.001% | provider alignment invalid | C |
+| PR1624 | 6,598,545 / 40,848.850 | 99.809% | 0.006% | 0.185% | 0.001% | endpoint alignment invalid | C |
+| PR1627 | 10,904,899 / 28,458.907 | 66.352% | 24.928% | 8.727% | 0.000% | generated-field descendant restored | D |
+| PR2122 | 2,227,198 / 13,821.715 | 98.901% | 0.876% | 0.201% | 0.021% | recursor alignment invalid | C |
 
-## Answers to the research questions
+## §11 Answer
 
-1. No case is defensibly classified as dominated by expensive matched descendants, newly exposed mismatches, or inherited propagation. The available measurements cannot separate those categories.
-2. Selective M2 alignment has not been demonstrated. Every attempted control either changes the root obligation or removes M0; those controls are invalid for C.
-3. The robust result is diagnostic: smaller matched comparisons can be cheap while the full dependent root remains expensive. This does not identify the mechanism inside the full root.
-4. The measured workload spans both mixed comparison/reduction roots and comparison-heavy roots, but the mechanism split remains unresolved in every row.
-5. The measured unclassified share is 100% for provenance attribution in all selected roots. The READY3 Cone trace now contains the required raw fields and reduction predecessors; its bounded capture is not a complete cost attribution.
-
-The next valid step is a selected-root READY3 trace with a sufficiently large
-but bounded event sample, manual expression-boundary review, and a type-correct
-descendant alignment that preserves the original root telescope and M0.
+The workload is mixed. Inherited M1 propagation dominates every M1-classified
+root, while FiniteBaseChange, RealPurity, OrderedSpectralRawLattices,
+RealPushforward, and PR1627 have material newly exposed M2 shares. Matched
+descendants are measurable but never cost-dominant. The selective descendant
+experiment is valid for FiniteBaseChange, IntegralComparison, and PR1627; the
+remaining attempted alignments change the root telescope or remove M0 and are
+reported as invalid. The NativePullTensor contradiction was an event-stream
+root-ID collision, resolved by the READY3.2 atomic root identity.

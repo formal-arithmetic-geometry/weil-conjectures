@@ -81,3 +81,10 @@ Root 4160 has complete aggregate coverage: 18,944,709 calls and 58,992.669 ms co
 
 **Outcome D (mixed M1/M2 amplification).** M2 contributes 35.347% of exclusive time. The available route controls alter M0, so no separate causal C effect is claimed.
 
+## MPRWE round 3 (READY3.2)
+
+The prior restoration failure was a probe setup failure: the missing import and
+unknown constant were repaired in the restoration snapshot. The restoration
+now reaches the recorded root; shares remain M1 63.902%, M2 35.347%, Matched
+0.758%, Unclassified 0.000%.
+

@@ -56,14 +56,20 @@ def classify(events, root=None):
     coverage = {e["root"]: e for e in events if e.get("event") == "coverage" and isinstance(e.get("root"), int)}
     aggregates = [e for e in events if e.get("event") == "aggregate" and e.get("provenance") in LABELS]
     if root is None:
-        candidates = collections.Counter()
-        for event in coverage.values():
-            candidates[event["root"]] += int(event.get("total_calls", 0))
-        for event in aggregates:
-            candidates[event["root"]] += int(event.get("calls", 0))
-        if not candidates:
-            candidates.update(roots)
-        root = candidates.most_common(1)[0][0]
+        # Prefer a root with raw coverage. Aggregates from different worker
+        # threads can share an old thread-local ID in pre-fix traces; do not
+        # let those mixed rows win root selection.
+        covered = [e for e in coverage.values() if int(e.get("total_calls", 0)) > 1]
+        if covered:
+            root = max(covered, key=lambda e: (int(e.get("traced_calls", 0)),
+                                                int(e.get("total_calls", 0))))["root"]
+        else:
+            candidates = collections.Counter()
+            for event in coverage.values():
+                candidates[event["root"]] += int(event.get("total_calls", 0))
+            if not candidates:
+                candidates.update(roots)
+            root = candidates.most_common(1)[0][0]
 
     enters = {(e["root"], e["call"]): e for e in events
               if e.get("event") == "enter" and isinstance(e.get("root"), int) and isinstance(e.get("call"), int)}

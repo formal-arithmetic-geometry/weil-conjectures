@@ -81,3 +81,8 @@ Root 2281 has complete aggregate coverage: 3,897,905 calls and 24,659.468 ms com
 
 **Outcome C (M1 propagation).** M1 accounts for 99.743% and M2 for 0.000% of exclusive time. The expensive original work is inherited propagation from the M0 hR representation.
 
+## MPRWE round 3 (READY3.2)
+
+Root identity and analysis are corrected; shares are M1 99.743%, M2 0.000%,
+Matched 0.257%, Unclassified 0.000%. The hR replacement remains root-changing.
+

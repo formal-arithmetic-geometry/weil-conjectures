@@ -1,4 +1,12 @@
-# MPRWE cross-case synthesis
+# MPRWE cross-case synthesis (round 3)
+
+Analyzer revision: READY3.2, consisting of the process-wide atomic root-ID
+patch and the root-selection fix in `mprwe_analyze.py`. All shares below are
+recomputed from READY3.1 aggregate records with corrected root selection.
+The old tables are historical context and are superseded by the round-3
+table.
+
+## Superseded historical tables
 
 Toolchain: Lean 4.35.0, current-case revision 2e92d5989ff, READY2-4.35.0. READY3 was not available, so provenance is reconstructed only from existing capped READY2 traces and source audits.
 
@@ -49,4 +57,36 @@ All figures below use the fixed READY3.1 stage1 analyzer at current-case revisio
 Selected raw traces reached the 10,000-event cap for RealPurity (3,222 traced calls), EtaleHom (4,124), F66Adj (3,685), ImageHomCounit (3,773), and RealPushforward (3,122); representative nodes are recorded in the case reports. FiniteBaseChange, IntegralComparison, and OrderedSpectralRawLattices retain complete aggregate partitions but had unstable root IDs in selected raw reruns. This is a run-control limitation, not a READY3 analyzer defect, so no Outcome E is required.
 
 The four C-class cases are M1-dominated (at least 98.400%); the four D-class cases have material M2 shares (23.947%--37.204%). Every supplied O1/aligned control either removes or changes M0, so none is treated as a causal selective descendant intervention.
+
+## MPRWE round 3 (READY3.2)
+
+The NativePullTensor contradiction was an instrumentation identity error. The
+root serial was thread-local but events were process-wide, so the 120 s
+validation mixed several worker roots under one numeric ID and produced
+2.3% M1 / 93.6% M2 / 1.7% Matched / 2.4% Unclassified. P's fresh unmixed
+root produced 98.124% / 0.299% / 1.581% / 0.000%, which manual review of the
+top exclusive nodes confirms. M1 leaders were `CategoryTheory.Adjunction.proj`,
+`CategoryTheory.Mod.X`, `CategoryTheory.Functor.proj`, and
+`CategoryTheory.NatTrans.proj`, carrying divergent hashes `3052377643/4045692675`
+along descendant paths. M2 leaders were `HomologicalComplex` and
+`HomologicalComplex.instCategory` (`3131881859/4045692675`) plus `Eq`
+(`3031824037/2927184002`); each had a preceding reduction event exposing the
+new heads. Matched leaders had equal entry hashes, including
+`CategoryTheory.Sheaf` and `AlgebraicGeometry.ProEtale.sheafMonoidalCategory`.
+The 98.124% partition is the accepted result.
+
+| Case | Root calls / exclusive ms | M1 | M2 | Matched | Unclassified | C result | Outcome |
+|---|---:|---:|---:|---:|---:|---:|---|
+| FiniteBaseChange | 239,340,712 / 880,519.949 | 74.441% | 23.947% | 1.614% | 0.000% | descendant alignment restored; M0 retained | D |
+| IntegralComparison | 9,426,253 / 43,830.207 | 98.400% | 1.328% | 0.255% | 0.017% | first-leaf descendant alignment restored | C |
+| RealPurity | 17,310,168 / 76,192.584 | 62.046% | 36.568% | 1.389% | 0.000% | restoration setup repaired and measured | D |
+| OrderedSpectralRawLattices | 18,944,709 / 58,992.669 | 63.902% | 35.347% | 0.758% | 0.000% | restoration setup repaired and measured | D |
+| EtaleHom | 3,180,470 / 21,549.825 | 99.762% | 0.001% | 0.236% | 0.001% | no valid descendant-only control | C |
+| F66Adj | 3,897,905 / 24,659.468 | 99.743% | 0.000% | 0.257% | 0.000% | no valid descendant-only control | C |
+| ImageHomCounit | 6,359,958 / 42,708.813 | 99.761% | 0.007% | 0.232% | 0.000% | no valid descendant-only control | C |
+| RealPushforward | 17,340,236 / 75,988.013 | 61.473% | 37.204% | 1.326% | 0.000% | no valid descendant-only control | D |
+| Derived-Completion Cone | 1,162 / 8.323 | 76.7% | 11.6% | 10.3% | 0.8% | dependent-field alignment restored | D |
+
+IntegralComparison uses the expensive 9.426M-call root in this synthesis;
+the 235,750-call root remains diagnostic only.
 
