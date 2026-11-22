@@ -7,15 +7,14 @@ module
 
 public import WeilConjectures.CategoryTheory.RingedSiteDg.RingedSiteDgModules
 
-/-! Derived restriction descends from the literal dg restriction and is exact.
+/-! Derived restriction descends from the literal dg restriction.
 
 Source: the restriction part of Stacks sdga, Tags 0FT4 and 0FT5
 (blueprint: lem-sfb-ringed-dg-restriction-descends-exact).
 
-Proof in words: restriction keeps the underlying complex, hence preserves
-quasi-isomorphisms, shifts and mapping-cone triangles.  The localization
-universal property supplies the functor and its factorization isomorphism;
-the cone characterization then supplies exactness.
+Restriction keeps the underlying complex, hence preserves quasi-isomorphisms.
+The localization universal property supplies the functor and its
+factorization isomorphism.
 -/
 
 @[expose] public noncomputable section
@@ -68,38 +67,5 @@ def derivedRestrictionIso
   Localization.fac (RingedSiteDg.restriction φ ⋙ Q A)
     (fun _ _ f hf ↦ Localization.inverts (Q A) (quasiIsomorphisms A) _
       (restriction_preserves_quasiisomorphisms φ f hf)) (Q B)
-
-/-- The descended literal restriction respects standard shifts and cone triangles.
-Source: Stacks sdga, 0FT5 and derived, 05R6
-(blueprint: lem-sfb-ringed-dg-restriction-localization-exact).
-
-Proof: restriction leaves the underlying complexes and the cone matrices
-unchanged and changes actions only by precomposition with the algebra map.
-It therefore carries a specified shift or cone comparison to the corresponding
-comparison over A.  Use the shift naturality fields to descend these comparisons
-and the localized-cone characterization of distinguished triangles to prove
-exactness of the constructed localization lift.
--/
-theorem restriction_localization_exact
-    {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
-    [DerivedStructure A] [DerivedStructure B] :
-    ∃ (_ : (derivedRestriction φ).CommShift ℤ),
-      (derivedRestriction φ).IsTriangulated := by
-  sorry
-
-/-- Package the constructed localization lift with its shift and exactness data.
-Source: Stacks sdga, 0FT5
-(blueprint: lem-sfb-ringed-dg-restriction-descends-exact). -/
-theorem restriction_descends_and_is_exact
-    {O : Sheaf J CommRingCat.{u}} {A B : Algebra.{c, v, u} O} (φ : A ⟶ B)
-    [DerivedStructure A] [DerivedStructure B] :
-    Nonempty (RestrictionDescentData φ) := by
-  obtain ⟨hshift, hexact⟩ := restriction_localization_exact φ
-  exact ⟨{
-    restriction := derivedRestriction φ
-    restrictionIso := derivedRestrictionIso φ
-    restrictionShift := hshift
-    restrictionExact := hexact
-  }⟩
 
 end CategoryTheory.RingedSiteDg
