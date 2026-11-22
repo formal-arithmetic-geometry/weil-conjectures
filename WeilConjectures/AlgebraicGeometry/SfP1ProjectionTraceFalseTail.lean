@@ -108,7 +108,6 @@ private theorem trace_tail_natural
 
 /-- The false projection chart tail equals the transported coordinate trace.
 Source: blueprint thm-amb-p1-adjunction.proof.md, first-coordinate calculation.
-(auxiliary; not a blueprint node).
 
 Proof: chart exchange and cancellation of the chart factor give projectionExchange.
 The middle exchange formula separates the inverse shifted-line comparison and the

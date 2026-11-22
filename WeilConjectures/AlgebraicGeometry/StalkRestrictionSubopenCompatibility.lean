@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.StalkRestrictionComplexIso
 
 Source: lem-pc-finite-free-stalk-degreewise-shrink, step 3, expanding
 lemma-coherent-base-change-invertible-sheaves--3's finite matrix calculation.
-(blueprint: lem-pc-stalk-restriction-subopen-compatibility)
 -/
 
 @[expose] public section
@@ -154,8 +153,7 @@ of restriction-to-pullback comparisons with composition follows from their
 adjunction units (equivalently uniqueness of left adjoints to the common
 pushforward). Apply naturality of D to f and cancel inverse/hom pairs. Taking
 the n-th component gives the displayed equation. This also covers U = V,
-zero objects, and arbitrary maps between the indicated terms.
-(blueprint: lem-pc-stalk-restriction-subopen-compatibility) -/
+zero objects, and arbitrary maps between the indicated terms. -/
 theorem stalkRestrictionComplexIso_map_subopen
     {Y : Scheme.{u}} (P Q : CochainComplex Y.Modules ℤ)
     (y : Y) (U V : Y.Opens) (hyU : y ∈ U) (hyV : y ∈ V) (hVU : V ≤ U)

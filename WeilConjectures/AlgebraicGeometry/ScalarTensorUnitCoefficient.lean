@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 /-! # ScalarTensorUnitCoefficient
 
 Source: Stacks Project, Cohomology, Tag 0FKU.
-(blueprint: lem-sc-scalar-tensor-unit-coefficient).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ private theorem scalarUnit_presheaf (f : X ⟶ Spec (CommRingCat.of k))
 
 /-- Scalar tensor coefficients and the scalar unit respect both module unitors.
 Source: Stacks Project, Modules, Tags 0096 and 01CA; Cohomology, Tag 0FKU.
-(blueprint: lem-sc-scalar-tensor-unit-coefficient).
 
 Proof: First identify the scalar unit on each open. Monoidal coherence for the
 sheafification adjunction identifies its composite with the presheaf unit with

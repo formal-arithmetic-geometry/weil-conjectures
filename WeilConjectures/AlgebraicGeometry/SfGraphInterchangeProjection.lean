@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.SfGraphCompactSupportCompositionBas
 
 Source: Stacks Tags 0F7B, 0GL1, 0B56 and 0E48; the Cartesian interchange part
 of `LowerShriekComposition.lean`, e3.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -156,7 +155,6 @@ attribute [-instance] CategoryTheory.catToReflQuiver in
 
 Source: Stacks more-etale.tex, Tag 0F7B; sites-cohomology.tex, Tags 0GL1 and
 0B56; the open and proper composition normalizations of Tag 0E48.
-(auxiliary; not a blueprint node).
 
 Proof: put f0=e r and use the compactifications c=(e,r) and ce=(e k,p).
 The Cartesian square supplies a compatible tower over the compactification

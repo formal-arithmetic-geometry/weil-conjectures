@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonEvalua
 /-! # Invertibility of the restricted derived-Hom evaluation map
 
 Source: Stacks Project, Tags 03Q8, 072W, 0BKV and 0D6F.
-(blueprint: lem-sbc-raw-restricted-cohomology-comparison-is-iso).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Evaluation at the represented identity induces an isomorphism in every degree.
 Source: Stacks Project, Tag 03Q8 and Cohomology on Sites, Tags 072W, 0BKV and 0D6F.
-(blueprint: lem-sbc-raw-restricted-cohomology-comparison-is-iso).
 
 Proof: Put V = U times_S Y and r : V -> Y. The free abelian Yoneda and
 sheafification adjunctions, followed by h^* adjoint to h_*, identify maps from

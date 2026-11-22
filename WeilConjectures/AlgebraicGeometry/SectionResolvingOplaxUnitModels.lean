@@ -196,8 +196,7 @@ and the normalized target modelTensor unitor equation. Composing these three
 squares is postponed to the consumer. Naturality of ε and the source
 modelTensor unitor equation give the opposite branch. Repeat with tensor factors
 reversed and the right unitor to obtain every right-unit edge clause. In both cases
-retain the specified scalar unit, regular comparison and binary model map throughout.
-(auxiliary; not a blueprint node). -/
+retain the specified scalar unit, regular comparison and binary model map throughout. -/
 theorem section_resolving_oplax_unit_models {X Y : Scheme.{u}} (f : X ⟶ Y)
     (μ : SectionTensorArrow Λ f)
     (v : (derivedPullback Λ f).obj

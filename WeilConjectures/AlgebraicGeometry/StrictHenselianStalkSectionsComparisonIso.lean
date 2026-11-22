@@ -23,7 +23,6 @@ open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 /-- Degree-zero continuity compares stalk sections with the inverse image specified
 by its adjunction to direct image, rather than with an arbitrary functor.
 Source: Stacks Project, Tag 03Q6, degree zero and proof steps (1)-(3).
-(blueprint: new-strict-henselian-stalk-sections-comparison-iso)
 
 Proof: The forgetful functor in hi_inclusion lands in Over X, not just Scheme.
 Its object equalities therefore identify both the underlying schemes and the structural

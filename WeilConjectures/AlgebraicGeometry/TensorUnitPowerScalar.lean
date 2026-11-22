@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 /-! # Tensor-unit powers and scalar multiplication
 
 Source: Stacks Project, Tag 09MR, tensor-unit specialization of numerator maps.
-(blueprint: lem-pc-tensor-unit-power-scalar).
 -/
 
 @[expose] public section
@@ -53,7 +52,6 @@ private theorem unitPowerIso_section (Y : Scheme.{u}) (b : Γ(Y, ⊤))
 /-- Tensor powers of the unit can be removed compatibly with the numerator transition.
 
 Source: Stacks Project, Tag 09MR, numerator maps specialized to the tensor unit.
-(blueprint: lem-pc-tensor-unit-power-scalar).
 
 Proof: Identify unit^0 with the unit by the identity, and identify unit^(n+1)
 with the unit by tensoring the preceding identification with the identity and

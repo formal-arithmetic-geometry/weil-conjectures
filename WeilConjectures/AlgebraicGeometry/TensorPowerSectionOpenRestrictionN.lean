@@ -21,8 +21,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 This characterization determines the inverse uniquely by the sheaf tensor universal property,
 and hence determines the isomorphism. Thus the choice here is of a uniquely specified map,
 not of arbitrary data from a mere existence statement.
-Source: Stacks Project, Modules, Tag 01CD.
-(blueprint: def-sc-tensor-power-open-restriction-comparisons). -/
+Source: Stacks Project, Modules, Tag 01CD. -/
 noncomputable def openRestrictionTensorIso {X Y : Scheme.{u}} (j : Y ⟶ X)
     [IsOpenImmersion j] (F G : X.Modules) :
     (F ⊗ G).restrict j ≅ F.restrict j ⊗ G.restrict j :=
@@ -37,8 +36,7 @@ private theorem openRestrictionTensorIso_inv_tmul {X Y : Scheme.{u}} (j : Y ⟶ 
   Classical.choose_spec (exists_restriction_tensor_comparison j F G) V z w
 
 /-- Restriction of tensor powers, constructed recursively from the unit and tensor comparisons.
-Source: Stacks Project, Modules, Tag 01CD, iterated over tensor powers.
-(blueprint: def-sc-tensor-power-open-restriction-comparisons). -/
+Source: Stacks Project, Modules, Tag 01CD, iterated over tensor powers. -/
 noncomputable def openRestrictionTensorPowIso {X Y : Scheme.{u}} (j : Y ⟶ X)
     [IsOpenImmersion j] (L : X.Modules) :
     (n : ℕ) → (L.tensorPow n).restrict j ≅ (L.restrict j).tensorPow n
@@ -47,8 +45,7 @@ noncomputable def openRestrictionTensorPowIso {X Y : Scheme.{u}} (j : Y ⟶ X)
       (Iso.refl (L.restrict j) ⊗ᵢ openRestrictionTensorPowIso j L n)
 
 /-- The numerator comparison as an isomorphism of module sheaves, so its components are
-compatible with every restriction map. Source: Stacks Project, Modules, Tag 01CD.
-(blueprint: def-sc-tensor-power-open-restriction-comparisons). -/
+compatible with every restriction map. Source: Stacks Project, Modules, Tag 01CD. -/
 noncomputable def openRestrictionNumeratorIso {X Y : Scheme.{u}} (j : Y ⟶ X)
     [IsOpenImmersion j] (F L : X.Modules) (n : ℕ) :
     (F ⊗ L.tensorPow n).restrict j ≅ F.restrict j ⊗ (L.restrict j).tensorPow n :=
@@ -58,7 +55,6 @@ noncomputable def openRestrictionNumeratorIso {X Y : Scheme.{u}} (j : Y ⟶ X)
 /-- The recursively constructed tensor-power comparison carries powers of the restricted
 section back to the ambient powers on every image open.
 Source: Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW, restriction paragraph.
-(blueprint: lem-sc-tensor-power-section-open-restriction-N).
 
 Proof: Induct on n. In degree zero, restrictUnitIso is the structure-ring isomorphism
 and its inverse sends 1 to 1. For the successor degree, expand tensorPowSectionOne_succ

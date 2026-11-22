@@ -23,8 +23,7 @@ open CategoryTheory CategoryTheory.Limits Topology
 namespace AlgebraicGeometry
 /-- The generic fibre is reduced because its affine ring is a localization of the
 reduced source ring. The residue field at the generic point identifies with the actual
-function field of the integral base. Source: Stacks Project, Tag 0559, second proof.
-(blueprint: lem-sbc-reduced-generic-fibre-field-embedding-core-map) -/
+function field of the integral base. Source: Stacks Project, Tag 0559, second proof. -/
 private theorem reduced_generic_fibre
     {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]
     (g : Z ⟶ S) (η : S) (hη : IsGenericPoint η Set.univ) :
@@ -93,8 +92,7 @@ field point precomposed with Spec E → Spec L, which is surjective. Since d is 
 homeomorphism, h has dense range. The generic fibre of the reduced pullback is
 reduced by localization at the integral base's generic point, as proved above.
 Mathlib then turns dominance into scheme-theoretic dominance. The identity
-extension and arbitrary characteristic are included; no lift is constructed here.
-(blueprint: lem-sbc-reduced-generic-fibre-field-embedding-core-map) -/
+extension and arbitrary characteristic are included; no lift is constructed here. -/
 private theorem reduced_generic_fibre_lift_dominant
     {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']
     (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)
@@ -222,8 +220,7 @@ Base change of the surjective reduction immersion is also a universal homeomorph
 Their composite transfers dominance of the original field point to h. The reduced
 pullback's generic fibre is reduced: its affine ring is a localization of the reduced
 source ring, since the base residue field is its fraction field. Dominance into this
-reduced fibre gives scheme-theoretic dominance. Source: Stacks Project, Tags 0559 and 030R.
-(blueprint: lem-sbc-reduced-generic-fibre-field-embedding-core-map) -/
+reduced fibre gives scheme-theoretic dominance. Source: Stacks Project, Tags 0559 and 030R. -/
 theorem exists_reduced_generic_fibre_map_core
     {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']
     (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)

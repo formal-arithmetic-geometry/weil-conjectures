@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectEvaluationComparisons
 /-! # The local ordinary model of canonical derived evaluation
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 08DL, 08DM and 08DQ.
-(blueprint: lem-pc-strictly-perfect-evaluation-model).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ This assertion does not say that the evaluation chain map is invertible.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of Lemma 20.50.5;
 Tag 08DM, Lemma 20.46.9; Tag 08DL, Lemma 20.42.3.
-(blueprint: lem-pc-strictly-perfect-evaluation-model).
 
 Proof:
 1. Represent N restricted to U by a complex F. Exact restriction commutes with

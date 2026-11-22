@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.Regular
 # Local rings and normalized valuations of a smooth connected curve
 
 Source: Stacks Project, Properties, Tags 033M and 02IZ; Algebra, Tag 00PD;
-the standing setting of Divisors, Tag 0BE9
-(blueprint: lem-sc-smooth-connected-curve-local-rings).
+the standing setting of Divisors, Tag 0BE9.
 -/
 
 @[expose] public section
@@ -121,25 +120,17 @@ private theorem normalized_dvr_valuation
 its nongeneric points are exactly its closed points, and its closed stalks are DVRs with
 fraction field the generic stalk. Their normalized valuations are independent of uniformizer.
 Source: Stacks Project, Properties, Tags 033M and 02IZ; Algebra, Tag 00PD; the standing
-hypotheses of Divisors, Tag 0BE9 (blueprint: lem-sc-smooth-connected-curve-local-rings).
+hypotheses of Divisors, Tag 0BE9.
 
 Proof:
-1. Finite type over the Noetherian field spectrum gives Noetherianity
-   (`lem-weil-pbc-finite-type-over-noetherian`). Smoothness gives regular local rings
-   (`lem-sc-smooth-regular`, `def-weil-regular-scheme`).
+1. Finite type over the Noetherian field spectrum gives Noetherianity. Smoothness gives regular local rings.
 2. Nonempty connected regular schemes are integral (`lem-sc-regular-connected-integral`,
-   the regular form of 033M). Integrality implies irreducibility
-   (`lem-pc-integral-scheme-irreducible`); sobriety gives the unique generic point
-   (`lem-sc-scheme-sober`). It belongs to every nonempty open. The generic stalk is a field
-   (`lem-sc-integral-function-field-affine-fraction`). Germ maps and specialization maps
-   to this field are injective, and each stalk has it as fraction field
-   (`lem-sc-integral-scheme-stalks-in-function-field`).
+   the regular form of 033M). Integrality implies irreducibility; sobriety gives the unique generic point. It belongs to every nonempty open. The generic stalk is a field. Germ maps and specialization maps
+   to this field are injective, and each stalk has it as fraction field.
 3. Sobriety makes distinct points have distinct closures. Every nonempty closed subset of
-   the quasi-compact underlying space contains a closed point
-   (`lem-sc-quasi-compact-kolmogorov-closed-point`). In particular closed points exist.
+   the quasi-compact underlying space contains a closed point. In particular closed points exist.
 4. A strict chain of two generalizations would give dimension at least two, excluded by
-   dimension one (`lem-sc-scheme-stalk-dimension-generalization-chains`,
-   `def-kun-topological-krull-dimension`, `def-pc-dimension`). A one-point scheme would
+   dimension one. A one-point scheme would
    have dimension zero, so the generic point is not closed.
 5. If a nongeneric point were not closed, a closed point in its closure, that point, and
    the generic point would form a forbidden length-two chain. Thus it is closed.
@@ -148,8 +139,7 @@ Proof:
    `lem-sc-scheme-stalk-dimension-generalization-chains`).
 7. Its regular local ring of dimension one is a DVR (`lem-sc-regular-dim1-dvr`, 00PD).
    Its fraction field is the generic stalk by step 2.
-8. Fix a uniformizer t. Each nonzero stalk element is a unit times a nonnegative power of t
-   (`lem-weil-pbc-dvr-unit-times-uniformizer-power`). Express a nonzero fraction a/b using
+8. Fix a uniformizer t. Each nonzero stalk element is a unit times a nonnegative power of t. Express a nonzero fraction a/b using
    these forms to obtain u times an integer power of t. Two different exponents would put
    a unit in the maximal ideal, so the exponent and then the unit are unique. A different
    uniformizer is a unit times t, so the exponent is unchanged. Multiplication adds

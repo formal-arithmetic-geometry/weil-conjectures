@@ -12,9 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyCompariso
 import WeilConjectures.AlgebraicGeometry.RawRestrictedResolutionEvaluation
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionAcyclic
 
-/-! # Evaluation part of the raw restricted comparison
-
-(blueprint: lem-sbc-raw-restricted-cohomology-comparison-evaluation-is-iso).
+/-! # Evaluation part of the raw restricted comparison.
 -/
 
 @[expose] public section
@@ -114,7 +112,6 @@ private theorem evaluation_isIso_on_injectives {S Y : Scheme.{v}}
 /-- The evaluation at the represented identity is invertible before the explicit
 shift identification.  This is the derived Yoneda and sections calculation.
 Source: Stacks Project, Tag 03Q8 and Cohomology on Sites, Tags 072W, 0BKV and 0D6F.
-(blueprint: lem-sbc-raw-restricted-cohomology-comparison-evaluation-is-iso).
 
 Proof: choose a bounded-below injective resolution of `F`.  Restriction to the
 etale pullback preserves injectives by exact extension by zero.  The derived

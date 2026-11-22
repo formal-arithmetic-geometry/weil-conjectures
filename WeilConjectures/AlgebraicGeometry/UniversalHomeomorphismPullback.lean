@@ -67,8 +67,7 @@ pullback adjunction are invertible. Perform the same construction for additive s
 Apply the composition clause of cohomologyPullbackFunctorial to both paths in the pullback square.
 Apply Sheaf.H.map of the respective inverse upperStarComp to cancel each forward compositor. The
 two results are pullback along the common composite, identified by pullback.condition, so they are
-equal as asserted.
-(blueprint: thm-weil-pbc-universalHomeomorphism_pullback) -/
+equal as asserted. -/
 theorem universalHomeomorphism_pullback {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     ∀ (Y : Scheme.{u}) (g : Y ⟶ X),

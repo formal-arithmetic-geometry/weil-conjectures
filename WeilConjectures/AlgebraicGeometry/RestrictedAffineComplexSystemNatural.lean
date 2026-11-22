@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RawAffineComplexSystemMapCoherence
 /-! # Geometric complex system for restricted cohomology
 
 Source: Stacks Project, Tag 09Z1 proof, and Tag 0EZM for the canonical maps.
-(blueprint: lem-sbc-restricted-affine-complex-system-natural).
 -/
 
 @[expose] public section
@@ -153,7 +152,6 @@ set_option backward.isDefEq.respectTransparency true in
 single complexes with a common lower bound, before any comparison with raw Hom.
 Source: Stacks Project, Tag 09Z1 proof, before applying cohomology continuity;
 Tag 0EZM for the cohomology cocone of complexes.
-(blueprint: lem-sbc-restricted-affine-complex-system-natural).
 
 Proof: Base change the underlying scheme diagram and cone along U.hom. Define
 the induced maps by the pullback universal property; uniqueness proves their

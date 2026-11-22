@@ -19,9 +19,8 @@ import WeilConjectures.RingTheory.ImprovePresentationSmoothConormalFree
 /-!
 # Smooth retract by a relative global complete intersection
 
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG (lemma-syntomic-complete-intersection),
-line 567 and proof lines 580--588 (blueprint:
-lem-weil-pbc-smooth-retract-relative-global-complete-intersection).
+Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG,
+line 567 and proof lines 580--588.
 -/
 
 @[expose] public section
@@ -89,7 +88,6 @@ private noncomputable def reindexCotangentEquiv
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, Algebra, Lemma 07CF.
-(blueprint: lem-weil-pbc-conormal-free-presentation-basis)
 
 Proof. Form the generators attached to the surjective polynomial map. Identify their
 cotangent module with the kernel cotangent module, transporting freeness through the
@@ -161,7 +159,6 @@ private theorem finite_conormal_basis_presentation
 
 /-- Source: Stacks Project, Smoothing Ring Maps, proof of Lemma 07CG, and the
 split conormal sequence in the proof of Lemma 07CH.
-(blueprint: lem-weil-pbc-smooth-retract-relative-global-complete-intersection)
 
 Proof. The conormal sequence of the polynomial quotient splits because the quotient
 is smooth. Its middle term has rank n, and the given equation basis makes its left
@@ -205,14 +202,13 @@ private theorem smooth_conormal_basis_fibre_dimension
   simp only [(hpoint _).2, ciSup_const]
 
 /-- A smooth algebra is a retract of a relative global complete intersection that is smooth over it.
-Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG
-(blueprint: lem-weil-pbc-smooth-retract-relative-global-complete-intersection).
+Source: Stacks Project, Smoothing Ring Maps, Lemma 07CG.
 
 Proof:
 1. Apply lem-weil-pbc-improve-presentation-smooth-conormal-free to obtain a smooth
    `A`-algebra `C₀` with an `A`-algebra retraction and a polynomial presentation with free
    conormal module. Composition of smooth maps makes `C₀` smooth, hence finitely presented,
-   over `R` (lem-weil-pbc-smooth-ring-map-base-change-composition).
+   over `R`.
 2. Apply lem-weil-pbc-conormal-free-presentation-basis (07CF) to get `n,c,f` and an
    `R`-algebra isomorphism `ψ : R[x]/(f) ≃ C₀` with equation classes a conormal basis.
    Transport smoothness over `R` across `ψ`.

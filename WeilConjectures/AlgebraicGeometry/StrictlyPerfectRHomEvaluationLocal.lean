@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 /-! # Strictly perfect local tensor--RHom evaluation
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ and 08DM.
-(blueprint: lem-pc-strictly-perfect-rhom-evaluation-local).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ boundedness assumption on the second argument.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of Lemma 20.50.5,
 and Tag 08DM, Lemma 20.46.9.
-(blueprint: lem-pc-strictly-perfect-rhom-evaluation-local).
 
 Proof:
 1. Restriction to U is exact, commutes with derived tensor, and commutes with

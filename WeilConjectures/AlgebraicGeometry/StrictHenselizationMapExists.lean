@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
 
 /-! # Existence of the local strict-henselization map
 
-Source: Stacks Project, Tags 03PS, 04GU and 08HR
-(blueprint: lem-weil-pbc-strict-henselization-map-exists).
+Source: Stacks Project, Tags 03PS, 04GU and 08HR.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
 /-- Existence of a local map over the base with the prescribed pointed residue map.
-Source: Stacks Project, paragraph after Tag 03PS, Tags 04GU and 08HR
-(blueprint: lem-weil-pbc-strict-henselization-map-exists).
+Source: Stacks Project, paragraph after Tag 03PS, Tags 04GU and 08HR.
 
 Proof: Put C = strictHenselization barT and let t : Spec Omega -> Spec C
 be the given residue embedding. Its factorizations imply t followed by the

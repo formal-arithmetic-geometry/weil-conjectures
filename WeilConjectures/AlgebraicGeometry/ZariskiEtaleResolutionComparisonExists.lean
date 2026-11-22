@@ -48,8 +48,7 @@ here, and the termwise evaluation identifications give the displayed formula.
 No arbitrary equivalences are asserted to satisfy this formula: e₁ and e₂ are the
 ones constructed from evaluation and Ext. Only existence of one comparison is used.
 
-Source: Stacks Project, Tags 01FB, 013P and 015B.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-comparison-exists) -/
+Source: Stacks Project, Tags 01FB, 013P and 015B. -/
 theorem zariski_etale_resolution_comparison_exists
     {X : Scheme.{u + 1}}
     (i : X.Opens ⥤ X.Etale)

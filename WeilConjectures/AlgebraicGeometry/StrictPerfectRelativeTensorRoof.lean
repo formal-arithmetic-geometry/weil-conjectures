@@ -16,7 +16,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # A relative tensor representative roof
 
 Source: Stacks Project, Tags 0DJQ and 08CI, local tensor calculation.
-(blueprint: lem-pc-strict-perfect-relative-tensor-roof).
 -/
 
 @[expose] public section
@@ -67,8 +66,7 @@ leg becomes an isomorphism after localization, hence is a quasi-isomorphism as
 well (homology reflects this). Choose actual chain maps representing both
 homotopy classes. Their homology maps are unchanged, so both are quasi-isomorphisms.
 Only an existential proposition uses this roof, not a definition of data.
-On the empty open all complexes have zero terms and the same comparison applies.
-(blueprint: lem-pc-strict-perfect-relative-tensor-roof). -/
+On the empty open all complexes have zero terms and the same comparison applies. -/
 theorem strictPerfect_relativeTensor_roof
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

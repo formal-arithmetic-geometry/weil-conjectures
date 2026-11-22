@@ -78,7 +78,6 @@ private lemma raw_identity {S Y : Scheme.{v}} (a : Y ⟶ Y)
 
 /-- Identity law for restricted single transitions.
 Source: Stacks Project, Tags 09Z1 and 03CB, inverse-image coherence in restriction.
-(blueprint: lem-sbc-restricted-affine-single-identity-law).
 
 Proof: Expand the transition as the single comparison followed by the image of the
 restricted coefficient. The pullback second-projection equation gives its commuting

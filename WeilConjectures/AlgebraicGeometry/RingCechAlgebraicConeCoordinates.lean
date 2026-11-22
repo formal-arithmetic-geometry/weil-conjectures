@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RingCechConeDifferential
 /-! # Ordered localization coordinates for an algebraic two-row cone
 
 Source: Stacks Project, more-algebra.tex, section-alternating-cech.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -24,7 +23,6 @@ This statement involves only modules, linear maps and localizations; it does not
 involve a site, a sheaf tensor product or a totalization.
 Source: Stacks Project, more-algebra.tex, section-alternating-cech, its differential
 formula and localization base change; algebraization.tex, Tag 0996.
-(auxiliary; not a blueprint node).
 
 Proof: partition increasing nonempty subsets by whether their first element is zero.
 Subsets avoiding zero give the first factor M(q+1). Subsets containing zero give

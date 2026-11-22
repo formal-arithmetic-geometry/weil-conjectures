@@ -11,7 +11,6 @@ import Mathlib.Topology.Sheaves.Stalks
 
 /-! # Vanishing of derived restriction away from cohomological support
 Source: Stacks Project, Tags 0A9A and 05RU.
-(blueprint: lem-pc-supported-derived-restriction-zero).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ private theorem module_restriction_zero
 
 /-- A derived object with cohomology supported on T restricts to zero outside T.
 Source: Stacks Project, Tag 0A9A, affine proof, and Tag 05RU.
-(blueprint: lem-pc-supported-derived-restriction-zero).
 
 Proof:
 1. Restriction of module sheaves to an open is exact and commutes with cohomology.

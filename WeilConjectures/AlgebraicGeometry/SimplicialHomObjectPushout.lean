@@ -11,7 +11,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-! # Hom objects and simplicial pushouts
 
-Source: Stacks Project, Lemma 017N (auxiliary; not a blueprint node).
+Source: Stacks Project, Lemma 017N.
 -/
 
 @[expose] public section
@@ -120,7 +120,7 @@ set_option linter.unusedVariables false in
 /-- Hom objects turn admissible simplicial pushouts into pullbacks.
 The representing pairs are arbitrary fixed choices from def-weil-pbc-simplicial-hom-object;
 the equations specify their unique induced morphisms, without another Hom-object definition.
-Source: Stacks Project, Lemma 017N (auxiliary; not a blueprint node).
+Source: Stacks Project, Lemma 017N.
 
 Proof: (1) Form the fibre product of the two restriction morphisms using
 lem-weil-pbc-semi-representable-finite-limits. (2) By the degreewise pushout of
@@ -200,14 +200,13 @@ theorem simplicialHomObject_pushout_isPullback {X : Scheme.{u₁}}
 set_option linter.unusedVariables false in
 /-- If the common simplicial set is empty, the Hom object of the pushout is a product.
 The equations specify the unique induced morphisms of the fixed representing pairs.
-Source: Stacks Project, Lemma 017N (auxiliary; not a blueprint node).
+Source: Stacks Project, Lemma 017N.
 
 Proof: (4) In the family bijection of Lemma 017N, agreement over the empty A is vacuous.
 The degreewise pushout is the coproduct, so D-families are arbitrary pairs of B- and
-C-families (def-weil-pbc-simplicial-set). Transport this through the representing
-bijections (def-weil-pbc-simplicial-hom-object and def-weil-pbc-representing-object).
-Finite limits give a product, equivalently a fibre product over the final object
-(lem-weil-pbc-semi-representable-finite-limits). Its universal property identifies HD
+C-families. Transport this through the representing
+bijections.
+Finite limits give a product, equivalently a fibre product over the final object. Its universal property identifies HD
 with that product, with the specified projections iStar and jStar. -/
 theorem simplicialHomObject_pushout_empty_isProduct {X : Scheme.{u₁}}
     {K : SimplicialObject (FormalCoproduct.{w₁} X.Etale)}

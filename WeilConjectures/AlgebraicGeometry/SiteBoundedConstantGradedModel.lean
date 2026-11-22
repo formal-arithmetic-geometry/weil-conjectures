@@ -33,7 +33,6 @@ namespace CategoryTheory
 /-- Realize a finite tower by successively taking mapping cocones.
 Source: Stacks Project, Tag 094G, construction of the final differential and
 rotation of the distinguished triangle.
-(auxiliary; not a blueprint node)
 
 Proof: Induct on the tower. At width zero use the single complex. For a step,
 realize the lower tower and represent its boundary to the top single object by
@@ -138,7 +137,6 @@ terms are constant finite modules. Its differentials are still sheaf morphisms.
 
 Source: Stacks Project, Cohomology on Sites, Tag 094G, proof of
 `lemma-locally-constant`, construction by induction on the cohomological interval.
-(auxiliary; not a blueprint node)
 
 Proof: The cohomological induction is isolated as the local finite constant
 extension tower theorem. Its triangles have a finite constant object in degree a

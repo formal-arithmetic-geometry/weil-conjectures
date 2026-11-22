@@ -188,7 +188,6 @@ private theorem cofan_killed (Y : Scheme.{u})
 /-- Preservation of support on bounded-below objects extends to every supported
 object when the right adjoint preserves all set-indexed sums.
 Source: Stacks Project, Tag 0E4G, proof of Lemma 48.4.3(3), using Tags 0A9A and 09SN.
-(blueprint: lem-sc-right-adjoint-open-support-of-bounded).
 
 Proof. Use nonempty_derivedOpenLocalization to supply the open-site derived
 localizations in the ambient Hom universe. Put T = Y \ V. The supported quasi-coherent

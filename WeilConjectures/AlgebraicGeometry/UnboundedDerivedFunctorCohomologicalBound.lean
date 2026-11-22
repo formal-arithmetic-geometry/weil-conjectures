@@ -20,7 +20,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 # An upper cohomological bound for an unbounded derived functor
 
 Source: Stacks Project, Derived Categories of Schemes, Tag 08D4, part (3), upper-bound
-clause (blueprint: lem-pc-unbounded-derived-functor-cohomological-bound).
+clause.
 -/
 
 @[expose] public section
@@ -35,8 +35,7 @@ namespace AlgebraicGeometry
 quasi-coherent modules for `p ≥ N` sends quasi-coherent derived objects supported in
 degrees at most `b` to objects supported in degrees at most `b + N - 1`.
 
-Source: Stacks Project, Tag 08D4, part (3), upper-bound clause
-(blueprint: lem-pc-unbounded-derived-functor-cohomological-bound).
+Source: Stacks Project, Tag 08D4, part (3), upper-bound clause.
 
 Proof:
 1. Put `E_n = τ_{≥ -n} E`. Use `lem-pc-qcoh-truncation-derived-limit` to

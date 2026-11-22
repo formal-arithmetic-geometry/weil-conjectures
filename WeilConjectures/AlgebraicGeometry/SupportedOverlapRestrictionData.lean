@@ -17,7 +17,6 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Supported perfect restriction in a compact-open overlap model
 
 Source: Stacks Project, Tags 08EK and 09IM.
-(blueprint: lem-sc-supported-overlap-restriction-data).
 -/
 
 @[expose] public section
@@ -80,7 +79,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Express restriction of a supported perfect complex to the overlap on a compact
 open of V. This is restriction data only; no extension to V is asserted.
 Source: Stacks Project, Tag 09IM, the overlap input to Tag 08EK.
-(blueprint: lem-sc-supported-overlap-restriction-data).
 
 Proof: Set U to the open range of the inclusion of W intersect V into V. The intersection
 is compact by quasi-separatedness and compactness of W and affine V, so U is compact.

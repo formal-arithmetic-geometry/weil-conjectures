@@ -13,7 +13,6 @@ import all WeilConjectures.SecSmoothPurity.CochainTensoratorExistence
 
 /-! # Module adjunction with its underlying topos transpose
 Source: Stacks Project, Modules on Sites, Tags 03D3 and 03D7.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ variable {C : Type uC} {D : Type uD} [Category.{vC} C] [Category.{vD} D]
 
 /-- The module adjunction for a specified algebraic inverse image, with the
 underlying transpose retained. Source: Stacks 03D3 and 03D7.
-(auxiliary; not a blueprint node).
 
 Proof: use the existing product-preserving right-module construction. Its addition
 and scalar diagrams identify linear maps among the set-sheaf adjuncts. Restrict the

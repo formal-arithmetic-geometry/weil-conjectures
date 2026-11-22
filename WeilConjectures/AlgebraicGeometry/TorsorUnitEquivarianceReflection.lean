@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.Sites.Torsor
 /-! # Reflection of equivariance through the inverse-image unit
 
 Source: Stacks Project Tag 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-torsor-unit-equivariance-reflection)
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry.Etale
 /-- A lifted map is equivariant if its transported map is equivariant.
 Source: Stacks Project Tag 0A5G, final paragraph, action compatibility in the
 finite étale interpretation of torsors.
-(blueprint: lem-weil-pbc-torsor-unit-equivariance-reflection)
 
 Proof: For each m in M, the constant section defines natural translation
 endomorphisms a₁(m) and a₂(m) of the two original torsor sheaves. Naturality

@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
 
 Source: Stacks Project, Tag 03Q9 (restriction complexes), Tag 03QO (closed-point germs),
 and the total-space restriction portion of Tag 095T.
-(blueprint: lem-weil-pbc-abelian-stalk-exchange-localization).
 -/
 
 @[expose] public section
@@ -41,7 +40,6 @@ of either exchange. The morphism f need only be quasi-compact and quasi-separate
 
 Source: Stacks Project, Tag 03Q9, proof of theorem-higher-direct-images, restriction
 complexes; Tag 03QO, exactness of closed-point germs; Tag 095T, final stalk calculation.
-(blueprint: lem-weil-pbc-abelian-stalk-exchange-localization).
 
 Proof:
 1. Enlarge the separably closed point fields along ν and ν ≫ ι. Lifts to an etale

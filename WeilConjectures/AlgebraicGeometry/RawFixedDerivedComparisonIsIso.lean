@@ -19,7 +19,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Fixed-coefficient raw evaluation is invertible, including empty charts.
 Source: Stacks Project, Tags 03Q8 and 0GIT.
-(blueprint: lem-sc-raw-fixed-derived-comparison-is-iso).
 
 Proof: The raw derived evaluation is an isomorphism. Its second factor is the
 image, under cohomology, of the inverse of the canonical derived composition

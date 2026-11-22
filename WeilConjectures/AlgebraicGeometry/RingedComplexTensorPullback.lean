@@ -31,7 +31,6 @@ import all WeilConjectures.AlgebraicGeometry.RingedTopoiCanonicalTensorPullback
 
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4, and
 sites-modules.tex, Tag 03EL.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -246,7 +245,6 @@ and the comparison respects the inverse right unitor.
 
 Source: Stacks Project, sites-cohomology.tex, Tag 07A4, proof by total complexes;
 sites-modules.tex, Tag 03EL, ordinary tensor and unit comparison.
-(auxiliary; not a blueprint node).
 
 Proof: use the canonical ordinary tensor comparison on module sheaves. Its inverse
 on each bidegree, followed by insertion into the pulled-back total tensor, defines

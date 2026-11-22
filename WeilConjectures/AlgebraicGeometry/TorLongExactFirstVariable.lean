@@ -22,7 +22,7 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 # Low-degree Tor exact sequence in the first variable
 
 Source: Stacks Project, Algebra, Tags 00M0 and 00M3; More on Algebra, proof of
-Tag 0912 (blueprint: lem-weil-pbc-tor-long-exact-first-variable).
+Tag 0912.
 -/
 
 @[expose] public section
@@ -214,7 +214,6 @@ with an `R`-linear connecting map natural in the second variable.
 
 Source: Stacks Project, Algebra, Tags 00M0 and 00M3; More on Algebra, proof of
 Tag 0912. The direct proof below uses Algebra 065P and Homology 0111.
-(blueprint: lem-weil-pbc-tor-long-exact-first-variable)
 
 1. By `theorem-finite-etale-covers-proper-henselian--2`, choose free resolutions `F`, `F'`,
    `F''` of `Q`, `Q'`, `Q''`, with augmentation-compatible lifts `α` of `u` and `β`

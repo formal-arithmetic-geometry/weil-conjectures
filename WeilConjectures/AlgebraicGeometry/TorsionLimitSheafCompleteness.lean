@@ -16,8 +16,7 @@ set_option linter.privateModule false
 
 /-! # Completeness of limits of power-torsion pro-etale sheaves
 
-Source: Stacks Project, Tags 099P and 099Q (1), (4), (5)
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 099P and 099Q (1), (4), (5).
 
 We use the existing coefficient-sized small model of the unchanged small pro-etale site.
 It is equivalent via AsSmall.down to X.ProEt; its topology is the induced topology.

@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Triangulated.Basic
 /-! # Binary descent for ringed coefficient towers
 
 Source: Stacks Project, Tag 08DG, lemma `glue` in `cohomology.tex`;
-the strict-system refinement in the smooth-purity blueprint
-(blueprint: lem-sp-ringed-tower-binary-descent).
+the strict-system refinement in the smooth-purity blueprint.
 
 Restriction and direct image are transported from the section-preserving
 `SpTowerShriek.Geometry` of the actual small pro-etale topoi. Its `pull_eq`,
@@ -59,8 +58,7 @@ def spHasFixedBounds
 
 /-- The actual restriction functor transported from the section-normalized
 semilinear tower calculus to the recorded coefficient-tower category.
-Source: semilinear derived sections and section-preserving tower realization
-(blueprint: lem-sp-ringed-tower-binary-descent). -/
+Source: semilinear derived sections and section-preserving tower realization. -/
 abbrev spActualRestriction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -75,8 +73,7 @@ abbrev spActualRestriction
     (spTowerShriekRealization l E b Y D_Y).inverse
 
 /-- The actual total right-derived direct image transported to the recorded
-coefficient-tower category. Source: semilinear geometric direct image
-(blueprint: lem-sp-ringed-tower-binary-descent). -/
+coefficient-tower category. Source: semilinear geometric direct image. -/
 abbrev spActualDirectImage
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -92,7 +89,7 @@ abbrev spActualDirectImage
 
 /-- The actual open inverse-image/right-derived-image adjunction after transport
 through the section-normalized coefficient equivalences. Source: the actual
-semilinear geometric adjunction (blueprint: lem-sp-ringed-tower-binary-descent). -/
+semilinear geometric adjunction. -/
 def spActualAdjunction
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -107,8 +104,7 @@ def spActualAdjunction
     (spTowerShriekRealization l E b Y D_Y).symm.toAdjunction
 
 /-- Composition of the actual restrictions, cancelling only the intermediate
-section-preserving presentation. Source: the semilinear composition calculus
-(blueprint: lem-sp-ringed-tower-binary-descent). -/
+section-preserving presentation. Source: the semilinear composition calculus. -/
 def spActualRestrictionComp
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -131,8 +127,7 @@ def spActualRestrictionComp
       Functor.isoWhiskerLeft e.functor (o.comp g f)) n.inverse
 
 /-- The canonical overlap comparison from restriction composition and the
-pullback equality. Source: Stacks 08DG
-(blueprint: lem-sp-ringed-tower-binary-descent). -/
+pullback equality. Source: Stacks 08DG. -/
 def spActualOverlap
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -153,8 +148,7 @@ def spActualOverlap
     (spActualRestrictionComp l E b o jV wV D_X D_V D_W).symm
 
 /-- The direct-image compositor is the unique right-adjoint comparison of the
-actual restriction compositor. Source: semilinear adjunction calculus
-(blueprint: lem-sp-ringed-tower-binary-descent). -/
+actual restriction compositor. Source: semilinear adjunction calculus. -/
 def spActualDirectComparison
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -172,7 +166,7 @@ def spActualDirectComparison
         (spActualAdjunction l E b o (g ≫ f) D_X D_Z)
 
 /-- The restriction-unit arrow into the image from a smaller open.
-Source: Stacks 08DG (blueprint: lem-sp-ringed-tower-binary-descent). -/
+Source: Stacks 08DG. -/
 def spActualRestrictionUnit
     (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -192,7 +186,7 @@ def spActualRestrictionUnit
 
 /-- Binary descent with the actual section-preserving semilinear operations.
 Source: Stacks Project, cohomology.tex, Tag 08DG, lemma-glue; latest smooth-purity
-blueprint, Gluing and Uniformity (blueprint: lem-sp-ringed-tower-binary-descent).
+blueprint, Gluing and Uniformity.
 
 Proof (the nine steps of the node):
 1. Put D=B|_W. Work in the ordinary derived categories of the entire strict systems, not in the

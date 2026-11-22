@@ -18,7 +18,6 @@ import Mathlib.RingTheory.RingHom.Flat
 /-! # Relative flatness on an open localized site
 
 Source: Stacks Project, Tags 01U2, 05NE and 0098.
-(blueprint: lem-pc-relative-flat-open-scalar-restriction).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Restricting an affine-locally base-flat module to an open site and restricting
 scalars along the inverse-image structure map yields a flat module over that ring.
 Source: Stacks Project, Tags 01U2, 05NE and 0098.
-(blueprint: lem-pc-relative-flat-open-scalar-restriction).
 
 Proof: for every point x of U, use relative_flat_module_stalk to obtain flatness of
 G_x over O_S,f(x). The stalk of the inverse-image ring is canonically O_S,f(x),

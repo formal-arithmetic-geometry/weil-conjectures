@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleAbelianUnderivedExchange
 /-!
 # Unbounded exchange and forgetting module coefficients
 
-Source: Stacks Project, Tags 0D6J(3), 0D6E and 07A7
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0D6J(3), 0D6E and 07A7.
 
 The inverse-image comparison is descended termwise. Its derived adjunction mate gives
 an actual canonical direct-image comparison; the theorem asserts its invertibility and
@@ -656,8 +655,7 @@ private lemma derived_mate_exact_inv_eq_square (adj : L ⊣ R) (adj' : L' ⊣ R'
 end DerivedMates
 
 /-- The termwise inverse-image coefficient comparison, transported to exact inverse image.
-Source: Stacks Project, Tags 03D3 and 07A7
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03D3 and 07A7. -/
 noncomputable def moduleAbelianUnboundedUpperStarIso
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     D((v)^*[ModuleCat.{u + 1} Λ]) ⋙ D(moduleAbelianForget Λ A) ≅
@@ -669,8 +667,7 @@ noncomputable def moduleAbelianUnboundedUpperStarIso
 /-- The adjunction mate of the termwise inverse-image comparison. Its right-derived-unit
 normalization below identifies it with the map computed by a module K-injective complex
 and an abelian K-injective replacement of its underlying complex.
-Source: Stacks Project, Tags 0D6J(3) and 07A7
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 0D6J(3) and 07A7. -/
 noncomputable def moduleAbelianUnboundedLowerStarComparison
     (Λ : Type (u + 1)) [CommRing Λ] {A B : Scheme.{u}} (v : A ⟶ B) :
     R((v)_*[ModuleCat.{u + 1} Λ]) ⋙ D(moduleAbelianForget Λ B) ⟶
@@ -734,8 +731,7 @@ The unit equation is stated on every homotopy complex: on a K-injective module c
 with `J` abelian K-injective. Both derived units at K-injectives are invertible, so the
 equation says exactly that the comparison is the class of `v_* UI → v_* J`.
 
-Source: Stacks Project, Tags 0D6J(3), 0D6E and 07A7
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 0D6J(3), 0D6E and 07A7.
 
 Proof:
 1. Forgetting preserves kernels and sheafified cokernels. The inverse of a bijective

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleCompactProjectionForward
 /-! # Projection compatibility of the fixed graph compositor
 
 Source: blueprint proposition-composition-base-change-rf-shriek--1, composition pentagon.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -129,7 +128,6 @@ private meta partial def graphProjectionCongrHEq (a b : Expr) : MetaM Expr := do
 
 Source: blueprint proposition-composition-base-change-rf-shriek--1, composition pentagon; steps 1--3
 of lem-route-exists-right-derived-lower-shriek-comp-iso.
-(auxiliary; not a blueprint node).
 
 Proof: apply sfEtaleCompactProjectionInverse_composition to the three chosen
 compactifications. All three projection components are invertible by

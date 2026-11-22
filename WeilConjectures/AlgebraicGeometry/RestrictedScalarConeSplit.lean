@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 
 /-! # A scalar cone splits after restriction
 
-Source: Stacks Project, Tags 08EK, 05QR, 05QS, and 05QT
-(blueprint: lem-sc-restricted-scalar-cone-split).
+Source: Stacks Project, Tags 08EK, 05QR, 05QS, and 05QT.
 -/
 
 @[expose] public section
@@ -131,8 +130,7 @@ private theorem scalar_zero_of_iso_biproduct_shifts (Y : Scheme.{u})
 
 /-- If a scalar kills F, a cone of that scalar on an object whose restriction is a
 finite sum of shifts of F restricts to the sum of its input and its shifted input.
-Source: Stacks Project, Tag 08EK, cone construction, and Tags 05QR, 05QS, 05QT
-(blueprint: lem-sc-restricted-scalar-cone-split).
+Source: Stacks Project, Tag 08EK, cone construction, and Tags 05QR, 05QS, 05QT.
 
 Proof: The restriction functor is exact and its derived functor is triangulated.
 Sectionwise multiplication commutes with restriction and the over-site equivalence.

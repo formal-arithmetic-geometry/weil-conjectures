@@ -27,7 +27,6 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 /-- Cancellation of the ordinary component equation under tensor-Hom uncurrying.
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DQ;
 ordinary evaluation chain calculation, step 3, cancellation portion.
-(blueprint: lem-pc-scheme-ordinary-uncurried-component).
 
 Proof: The equality n+r=k identifies k with r+n, so apply hf at p,q,n,r.
 Apply tensorHomEquiv.symm to the component equation and precompose with the

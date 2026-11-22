@@ -14,9 +14,7 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
-/-! # RelativeTensorGlobalLocalStalkDerivedIso
-
-(blueprint: lem-pc-relative-tensor-global-local-stalk-derived-iso).
+/-! # RelativeTensorGlobalLocalStalkDerivedIso.
 -/
 
 @[expose] public section
@@ -41,8 +39,7 @@ open stalk derived functor to eL and compose with the comparison at QK.
 Finally apply exact restriction of scalars along f.stalkMap y and its
 commutation isomorphism with Q. The result is the displayed isomorphism.
 The construction requires only y in V and is valid also for zero or acyclic
-complexes; there are no degree bounds.
-(blueprint: lem-pc-relative-tensor-global-local-stalk-derived-iso). -/
+complexes; there are no degree bounds. -/
 theorem relativeTensor_global_local_stalk_derived_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

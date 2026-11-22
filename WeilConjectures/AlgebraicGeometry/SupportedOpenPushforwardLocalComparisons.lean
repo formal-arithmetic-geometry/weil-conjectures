@@ -165,7 +165,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The supported adjunction unit is invertible after restriction to U and X minus T.
 Source: Stacks Project, Tag 08DF (1), using Tag 08FE.
-(blueprint: lem-pc-supported-open-pushforward-local-comparisons-first).
 
 Proof: Write L for restriction to U and R for its derived direct image. The
 open direct image is fully faithful, so the counit of any L ⊣ R is invertible.
@@ -292,7 +291,6 @@ private theorem left_adjoint_support
 
 /-- The supported left/right direct-image comparison is locally invertible.
 Source: Stacks Project, Tag 08DF (2), using Tags 08FE and 08BS.
-(blueprint: lem-pc-supported-open-pushforward-local-comparisons-second).
 
 Proof: Exact extension by zero gives a left adjoint to derived restriction L.
 Its unit is invertible, since restriction of extension by zero is the identity.
@@ -365,7 +363,6 @@ theorem supported_open_pushforward_local_comparisons_second (X : Scheme.{u}) (U 
 and to V = X minus T; this states local comparisons, not global invertibility.
 Source: Stacks Project, Tag 08DF, its restriction computations using Tags 08FE
 and 08BS (exact extension by zero).
-(blueprint: lem-pc-supported-open-pushforward-local-comparisons).
 
 Proof: For any G supported on T in U, G restricted to U intersect V is zero:
 its cohomology sheaves have zero stalks there, so vanish, and cohomology detects

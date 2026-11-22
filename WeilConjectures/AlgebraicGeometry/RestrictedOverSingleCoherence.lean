@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleComposition
 /-! # Coherence of restricted fixed-coefficient single complexes
 
 Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of fixed coefficients.
-(blueprint: lem-sbc-restricted-over-single-coherence).
 -/
 
 @[expose] public section
@@ -90,7 +89,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Identity, composition, and constant-diagram coherence of the explicit single complexes.
 Source: Stacks Project, Tag 09Z1, affine-object restriction in lemma-relative-colimit;
 Tag 0EZM, fixed-coefficient complexes in lemma-colimit-variant-complexes.
-(blueprint: lem-sbc-restricted-over-single-coherence).
 
 Proof: Substitute the equality identifying D and the heterogeneous equalities
 identifying c, K, phi, G, and eG with the displayed concrete constructions.

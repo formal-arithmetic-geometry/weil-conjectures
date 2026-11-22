@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.StalkDerivedExtensionComparisonIso
 /-! # Derived scalar extension and the stalk of derived pullback
 
 Source: Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison).
 -/
 
 @[expose] public section
@@ -82,8 +81,7 @@ the displayed equation after taking homology; scalarExtensionHomologyIso contain
 exactly the scalar-extension counit and its localization factors. Exactness of
 stalks gives comparisonStalkHomologyIso on the sheaf side. No base-flatness or
 invertibility of the base-derived cohomology comparison is involved.
-Source: Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6.
-(blueprint: lem-pc-stalk-derived-extension-comparison). -/
+Source: Stacks Project, Cohomology, Tags 06YB and 0D5S; More on Algebra, Tag 06Y6. -/
 theorem exists_stalkDerivedExtensionComparison (z : X') :
     letI := leftAlgebra f g' z
     letI := rightAlgebra f f' g g' sq z

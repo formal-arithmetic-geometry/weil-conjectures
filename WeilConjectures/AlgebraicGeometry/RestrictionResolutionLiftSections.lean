@@ -13,7 +13,6 @@ public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 /-! # Sections of a restriction-adjunction lift
 
 Source: Stacks Project, Cohomology, Tags 01FB and 01E4.
-(blueprint: lem-weil-restriction-resolution-lift-sections).
 -/
 
 @[expose] public section
@@ -122,7 +121,6 @@ and their prescribed restriction comparisons. This calculation involves one sche
 map only, and no base-change square or equality between composite inverse images.
 Source: Stacks Project, Tags 01FB and 01E4, the resolution and open-section
 calculation; Mathlib AlgebraicGeometry.Modules.Sheaf, restriction unit/counit.
-(blueprint: lem-weil-restriction-resolution-lift-sections).
 Proof: Work in each degree. Expand the adjoint as restriction of b followed by
 its counit. The counit is restriction along the equality U.ι⁻¹(U.ι(top))=top.
 The unit on J restricts from p⁻¹(U.ι(top)) to W.ι(W.ι⁻¹(p⁻¹(U.ι(top)))).

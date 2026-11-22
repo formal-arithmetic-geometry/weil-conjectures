@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.SectionPullNormalizationTransport
 /-! # Scalar extension and geometric exchange
 
 proof.md, (2),
-coefficient devissage; Stacks Project, sites-cohomology.tex, Tags 07A7 and 0E47
-(auxiliary; not a blueprint node).
+coefficient devissage; Stacks Project, sites-cohomology.tex, Tags 07A7 and 0E47.
 
 All functors are the existing ordinary unbounded internal-module derived functors.
 The balancing maps are specified by their universal computation-counit normalization.
@@ -54,7 +53,7 @@ attribute [local irreducible] CategoryTheory.mateEquiv
 namespace CategoryTheory
 
 /-- The left route in a square of mates, with endpoint types kept abstract.
-Source: Stacks 0E47 (auxiliary; not a blueprint node). -/
+Source: Stacks 0E47. -/
 def mateRouteLeft
     {A₀ A₁ A₃ B₀ B₁ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₃]
@@ -68,7 +67,7 @@ def mateRouteLeft
   cb.map (r.app J) ≫ eb.app (T₁.obj J) ≫ rgb.map (la.app J)
 
 /-- The right route in a square of mates, with endpoint types kept abstract.
-Source: Stacks 0E47 (auxiliary; not a blueprint node). -/
+Source: Stacks 0E47. -/
 def mateRouteRight
     {A₀ A₁ A₂ A₃ B₀ B₂ B₃ : Type*}
     [Category* A₀] [Category* A₁] [Category* A₂] [Category* A₃]
@@ -90,7 +89,7 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 
 /-- The existing ambient exchange with the named internal functor interfaces exposed.
 This changes only its type presentation, retaining the exact unit-square-counit map.
-Source: Stacks 07A7 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A7. -/
 def scalarAmbientExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
@@ -101,8 +100,7 @@ def scalarAmbientExchange (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}
 
 /-- The first route of the normalized rectangle: scalar/direct-image mate, exchange
 at the new coefficients, then the top-edge balancing map under direct image.
-Source: Stacks 07A7 and 0E47; blueprint coefficient devissage, (2)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A7 and 0E47; blueprint coefficient devissage, (2). -/
 def scalarExchangeLeft (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)
@@ -116,8 +114,7 @@ def scalarExchangeLeft (φ : Λ ⟶ Λ') [IsMonHom φ]
 
 /-- The second route: balancing along the bottom edge, scalar extension of exchange,
 then the left-edge scalar/direct-image mate.
-Source: Stacks 07A7 and 0E47; blueprint coefficient devissage, (2)
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A7 and 0E47; blueprint coefficient devissage, (2). -/
 def scalarExchangeRight (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)
@@ -134,7 +131,7 @@ variable
   [∀ T : Scheme.{u}, HasDerivedCategory.{u + 1} (ModuleRingedComparison.modules Λ' T)]
 
 /-- The geometric realization's forward map is the mate of its inverse pullback map.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 theorem scalarSectionPushMate_eq
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -155,7 +152,7 @@ theorem scalarSectionPushMate_eq
   exact ht
 
 /-- The fixed pushforward realization with the named internal interface exposed.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def scalarSectionPushComparison
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -183,7 +180,7 @@ def scalarSectionPushComparison
 /-- The section realization equation fixes the balancing isomorphism supplied by
 normalized pullback data. All other factors are invertible and realization is an
 equivalence, so the displayed property determines this isomorphism uniquely.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 theorem sectionRectangleLambda_witness (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (sU : SectionScalarComparison φ U) (sV : SectionScalarComparison φ V)
@@ -206,8 +203,7 @@ Its representative square uses the ordinary conjugate of the identity on section
 The final comparison equation uniquely determines this d: the section realization
 is essentially surjective and every other factor is invertible. Thus this choice
 selects the specified comparison, rather than an undetermined scalar isomorphism.
-Source: Stacks 03EK, 07A6, 0D6D
-(auxiliary; not a blueprint node). -/
+Source: Stacks 03EK, 07A6, 0D6D. -/
 def sectionRectangleLambda (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (sU : SectionScalarComparison φ U) (sV : SectionScalarComparison φ V)
@@ -219,7 +215,7 @@ def sectionRectangleLambda (φ : Λ ⟶ Λ') [IsMonHom φ]
 
 /-- Section rho is the actual mate of the normalized section lambda under the
 independently specified ringed derived geometric adjunctions.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def sectionRectangleRho (φ : Λ ⟶ Λ') [IsMonHom φ]
     {U V : Scheme.{u}} (h : U ⟶ V)
     (sU : SectionScalarComparison φ U) (sV : SectionScalarComparison φ V)
@@ -233,7 +229,7 @@ def sectionRectangleRho (φ : Λ ⟶ Λ') [IsMonHom φ]
 
 /-- Section exchange is the mate of the section geometric square compositor.
 This is the word in the last conjunct of GeometricAgreement, with g'=a and g=c.
-Source: Stacks 07A7, 0E47 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A7, 0E47. -/
 def sectionRectangleExchange
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -254,7 +250,7 @@ def sectionRectangleExchange
         ModuleRingedComparison.derivedPullbackComposition R a f).hom)).natTrans
 
 /-- Source comparison: geometric pullback, scalar comparison, then geometric pushforward.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def sectionRectangleSource (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X C Y : Scheme.{u}} (f : X ⟶ Y) (c : C ⟶ Y)
     (sY : SectionScalarComparison φ Y) (J : DerivedCategory (Modules Λ X)) :
@@ -269,7 +265,7 @@ def sectionRectangleSource (φ : Λ ⟶ Λ') [IsMonHom φ]
         sY.pair.derived.mapIso ((scalarSectionPushComparison Λ f).app J))
 
 /-- Target comparison: geometric pushforward, scalar comparison, then geometric pullback.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 def sectionRectangleTarget (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C : Scheme.{u}} (a : X' ⟶ X) (f' : X' ⟶ C)
     (sX' : SectionScalarComparison φ X') (J : DerivedCategory (Modules Λ X)) :
@@ -285,7 +281,7 @@ def sectionRectangleTarget (φ : Λ ⟶ Λ') [IsMonHom φ]
 
 /-- The normalized section rectangle's first route, using the actual section rho,
 section exchange at the new coefficients and section lambda along a.
-Source: Stacks 07A7, 0E47 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A7, 0E47. -/
 def sectionRectangleLeft (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)
@@ -307,7 +303,7 @@ def sectionRectangleLeft (φ : Λ ⟶ Λ') [IsMonHom φ]
 
 /-- The normalized section rectangle's second route: lambda along c, old-coefficient
 section exchange under scalar extension, and section rho along f'.
-Source: Stacks 07A7, 0E47 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A7, 0E47. -/
 def sectionRectangleRight (φ : Λ ⟶ Λ') [IsMonHom φ]
     {X' X C Y : Scheme.{u}} {a : X' ⟶ X} {c : C ⟶ Y}
     {f : X ⟶ Y} {f' : X' ⟶ C} (sq : ChosenCartesianSquare a f' f c)

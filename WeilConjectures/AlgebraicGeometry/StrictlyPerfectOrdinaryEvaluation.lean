@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.BoundedOrdinaryEvaluationAssembl
 /-! # Ordinary evaluation for a strictly perfect complex
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ and 08DM.
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 There is no bound on the second complex and the open need not be affine.
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of Lemma 20.50.5,
 and Tag 08DM, proof of Lemma 20.46.9.
-(blueprint: lem-pc-strictly-perfect-ordinary-evaluation).
 
 Proof: in degree q, the dual Hom complex has just the possibly nonzero factor
 Hom(P^(-q),O); all other target terms of O[0] are zero. The bounded support of P

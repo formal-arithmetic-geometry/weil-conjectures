@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 /-! # Base change preserves flat finitely presented modules with proper support
 
 Source: Stacks Project, Tags 01U8 (relative flatness), 056J (support), and 0CYS.
-(blueprint: lem-pc-tensor-pullback-flat-proper-support).
 -/
 
 @[expose] public section
@@ -79,7 +78,6 @@ Proof:
 Edge cases: the zero module has empty support and remains zero; an empty source
 causes no exception. No flatness of k or p is required: only the square is cartesian.
 Source: Stacks Project, Tags 01U8 (relative flatness), 056J (support), and 0CYS.
-(blueprint: lem-pc-tensor-pullback-flat-proper-support).
 -/
 theorem tensorPullback_flat_proper_support
     {Xi Xj Si Sj : Scheme.{u}}

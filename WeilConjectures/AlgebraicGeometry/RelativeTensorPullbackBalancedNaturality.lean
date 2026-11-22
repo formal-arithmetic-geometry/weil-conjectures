@@ -17,7 +17,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Naturality of the ordinary balanced tensor comparison
 
 Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
-(blueprint: lem-pc-relative-tensor-pullback-balanced-naturality)
 -/
 
 @[expose] public section
@@ -296,8 +295,7 @@ commutes with forming b tensor n. Transport the second factor along hG;
 hGmap identifies its morphisms with the tensor pullback morphisms. Thus the
 two displayed naturality equalities hold. This works for arbitrary modules,
 including zero modules, zero coefficient rings, and the empty scheme. No
-complex, differential, coproduct, flatness or derived category is involved.
-(blueprint: lem-pc-relative-tensor-pullback-balanced-naturality) -/
+complex, differential, coproduct, flatness or derived category is involved. -/
 theorem exists_relativeTensorPullback_balanced_natural
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤

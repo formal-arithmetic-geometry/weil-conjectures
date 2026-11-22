@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonNatura
 /-! # Raw derived Hom equals restricted single-complex cohomology
 
 Source: Stacks Project, Tag 03Q8 and its cited restriction lemmas.
-(blueprint: lem-sbc-raw-restricted-cohomology-natural-iso).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry.Etale
 scheme, for every structure morphism and coefficient sheaf.
 Source: Stacks Project, Tag 03Q8; Cohomology on Sites, the restriction arguments
 in Tags 072W and 0BKV (Lemmas 21.7.4 and 21.20.3).
-(blueprint: lem-sbc-raw-restricted-cohomology-natural-iso).
 
 Proof: For each h and U, the inverse image of the free abelian represented sheaf
 is the free sheaf of the etale Y-scheme U times_S Y. The free-sheaf sections

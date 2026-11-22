@@ -30,7 +30,6 @@ namespace AlgebraicGeometry
 module annihilated by the thickening's defining ideal.
 Source: Stacks Project, Tag 088A, second application of Remark 0888, using
 Tag 087T and the natural completion comparison (equation 0880).
-(blueprint: lem-weil-pbc-supported-coherent-completion-reflects-zero).
 
 Proof:
 1. The inclusion H to F is monic, so K^q annihilates H: ideal multiplication

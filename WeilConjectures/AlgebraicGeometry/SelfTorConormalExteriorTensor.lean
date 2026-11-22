@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.AffineConormalSections
 
 /-! # Algebraic conormal wedges after extension of scalars
 
-Source: Stacks Project, Tag 01R3(2), lemma-affine-conormal.
-(blueprint: new-v2-self-tor-conormal-exterior-tensor). -/
+Source: Stacks Project, Tag 01R3(2), lemma-affine-conormal. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -171,7 +170,6 @@ attribute [local instance] RingHomInvPair.of_ringEquiv RingHomInvPair.of_ringEqu
 
 /-- The conormal exterior section calculation before passing to associated sheaves.
 Source: Stacks Project, Tag 01R3(2), lemma-affine-conormal.
-(blueprint: new-v2-self-tor-conormal-exterior-tensor).
 Proof: Write A = Gamma(Y,U), I = ker(i)(U), B = Gamma(Z,i inverse-image U).
 The map A to B is surjective with kernel I; hence its quotient map q : A/I to B
 is an isomorphism. Apply affine_conormal_sections with R=A and r=id, obtaining

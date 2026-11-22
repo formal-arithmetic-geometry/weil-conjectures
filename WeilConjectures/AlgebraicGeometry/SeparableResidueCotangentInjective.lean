@@ -14,8 +14,7 @@ import Mathlib.RingTheory.Smooth.Field
 /-!
 # Separable residue field: the cotangent space injects into the differentials
 
-Source: Stacks Project, Algebra, Lemma Tag 00TU (blueprint:
-lem-weil-pbc-separable-residue-cotangent-injective).
+Source: Stacks Project, Algebra, Lemma Tag 00TU.
 -/
 
 @[expose] public section
@@ -29,8 +28,7 @@ namespace Algebra
 /-- For a Noetherian local `k`-algebra with residue field finitely generated as a field
 and separable over `k`,
 the cotangent space injects into the base-changed Kähler differentials.
-Source: Stacks Project, Algebra, Lemma Tag 00TU, lines 38687, 38702--38737
-(blueprint: lem-weil-pbc-separable-residue-cotangent-injective).
+Source: Stacks Project, Algebra, Lemma Tag 00TU, lines 38687, 38702--38737.
 
 The tensor factors are reversed relative to the source: tensor symmetry takes
 `1 ⊗ d a` to `d a ⊗ 1`, so injectivity is unchanged.

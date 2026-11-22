@@ -25,8 +25,7 @@ import WeilConjectures.AlgebraicGeometry.TensorCounitOneKFlatCoordinates
 
 /-! # Derived base change for a bounded relatively flat complex
 
-Source: Stacks Project, perfect.tex, Lemma 36.26.4, Tag 0A1D
-(blueprint: lem-pc-rf-base-change-complex).
+Source: Stacks Project, perfect.tex, Lemma 36.26.4, Tag 0A1D.
 -/
 
 @[expose] public section
@@ -138,8 +137,7 @@ does not depend on it, since it is precomposed after the derived functors). The 
 displayed is `Lg^*Rf_*(E ⊗^L G) ⟶ Rf_{T,*}L(g')^*Tot(P ⊗ G) ⟶ Rf_{T,*}(g')^*Tot(P ⊗ G)`:
 the recorded derived base-change map followed by the universal derived-to-ordinary
 pullback counit `SingleComplexBaseChange.counit` at `Tot(P ⊗ G)`. Its target is the node's
-`Rf_{T,*}(L(g')^*E ⊗^L (g')^*G)`: the termwise module pullback tensor isomorphism
-(lem-weil-pbc-module-pullback-tensor) identifies `(g')^*Tot(P ⊗ G)` with
+`Rf_{T,*}(L(g')^*E ⊗^L (g')^*G)`: the termwise module pullback tensor isomorphism identifies `(g')^*Tot(P ⊗ G)` with
 `Tot((g')^*P ⊗ (g')^*G)`, and `(g')^*P` is K-flat and represents `L(g')^*E`, so this
 complex represents `L(g')^*E ⊗^L (g')^*G`. Under these identifications and the
 derived pullback tensor comparison (lem-pc-derived-pullback-tensor-product, Stacks 079U)
@@ -155,8 +153,7 @@ Proof (the three steps of the node):
    computes derived tensor; the localization to the fibre-product stalk preserves it.
 3. Substitute this condition into the criterion. Its canonical base-change map,
    followed by the derived-to-ordinary pullback counit, is invertible; transporting
-   along `α` gives the displayed map.
-(blueprint: lem-pc-rf-base-change-complex). -/
+   along `α` gives the displayed map. -/
 theorem relativelyFlat_derivedBaseChange_complex
     {X S T : Scheme.{u}} (f : X ⟶ S) [QuasiCompact f] [QuasiSeparated f]
     (g : T ⟶ S)

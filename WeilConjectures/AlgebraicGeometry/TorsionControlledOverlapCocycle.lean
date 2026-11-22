@@ -34,7 +34,6 @@ All local objects and maps are supplied; only pairwise comparisons and their coc
 
 Source: Stacks Project, Tag 0889(1), uniqueness verification omitted at the end of the proof;
 Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-overlap-cocycle).
 
 Proof: On every common open obtain a map respecting the supplied b and q maps.
 No isomorphism or cocycle is assumed at this step. The Artin--Rees separation

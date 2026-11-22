@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 /-! # Uniform cohomological dimension of inverse images of affine opens
 
 Source: Stacks Project, Tags 01XJ and 01XK; Tag 08D5, proof of (2).
-(blueprint: lem-pc-uniform-inverse-affine-sections-bound).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry
 /-- A single positive bound works for ordinary module cohomology on the inverse image
 of every affine open of the target.
 Source: Stacks Project, Tags 01XJ and 01XK; Tag 08D5, proof of (2).
-(blueprint: lem-pc-uniform-inverse-affine-sections-bound).
 
 Proof:
 1. Each point s of S has an open neighbourhood V(s) and a bound n(s) for higher

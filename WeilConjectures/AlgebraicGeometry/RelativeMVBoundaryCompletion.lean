@@ -31,8 +31,7 @@ namespace AlgebraicGeometry
 /-- Complete the fixed relative restriction sequences by compatible boundaries.
 This asserts distinguishedness and only the connecting square; it does not assert
 commutativity of either restriction square.
-Source: Stacks Project, Cohomology, Tags 08BV and 08HZ; Tag 0DJ9, induction diagram
-(blueprint: lem-pc-relative-mv-boundary-completion).
+Source: Stacks Project, Cohomology, Tags 08BV and 08HZ; Tag 0DJ9, induction diagram.
 Proof: The qcqs morphisms f and its base change over the affine bases have qcqs
 sources. The base change g' of the affine morphism g is affine. Its inverse images
 of U, V and their overlap are quasi-compact. Use the functorial K-injective

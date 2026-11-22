@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectOrdinaryEvaluation
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ,
 proof of lemma-dual-perfect-complex; Tags 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-evaluation-local-retraction).
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ comparison square with a prescribed ordinary chain map is part of the statement.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ,
 proof of lemma-dual-perfect-complex; Tags 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-evaluation-local-retraction).
 
 Proof:
 1. Represent RN by a K-injective complex F. By 08DL and the representative

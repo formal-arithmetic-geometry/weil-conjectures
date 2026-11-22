@@ -153,7 +153,7 @@ between the corresponding normalized restrictions. This concerns arbitrary objec
 without a completeness, covering, stratification or perfectness hypothesis.
 
 Source: Stacks Tags 00YY, 03D2 and 06YY; Bhatt--Scholze, Lemma 6.5.8 and
-Remark 6.5.10 (auxiliary; not a blueprint node).
+Remark 6.5.10.
 
 Proof: first compare ordinary module functors. The transported original ring
 adjunction unit identifies the coefficient ring produced by F with the transported

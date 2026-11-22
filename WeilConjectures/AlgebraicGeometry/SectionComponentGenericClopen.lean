@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.GenericPointedClopenFibres
 # Generic clopenness of the component selected by a section
 
 Source: Stacks Project, Tag 055N, using Tag 055M.
-(blueprint: lem-sbc-section-component-generic-clopen)
 -/
 
 @[expose] public section
@@ -49,9 +48,7 @@ change are homeomorphisms onto their images, so the base-changed total space has
 subspace topology on the inverse image of the closure of y. Express the remaining open
 of the closure of y as the intersection with an ambient open V of T. Since y is the
 generic point of its closure, V contains y. Transport clopenness along the indicated
-homeomorphism to obtain the displayed subtype statement.
-
-(blueprint: lem-sbc-section-component-generic-clopen) -/
+homeomorphism to obtain the displayed subtype statement. -/
 theorem exists_open_section_component_clopen {P T : Scheme.{u}} (g : P ⟶ T)
     [LocallyOfFiniteType g] [QuasiCompact g]
     (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (y : T) :

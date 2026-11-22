@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 /-! # Adic conditions for the explicit pushforward system
 
 Source: Stacks Project, Cohomology of Schemes, Remark 088F, Lemma 087T, equation 0880.
-(blueprint: lem-weil-pbc-thickening-system-pushforward-adic).
 -/
 
 @[expose] public section
@@ -207,8 +206,7 @@ private theorem quotient_unit_power {Y Z : Scheme.{v}} (f : Z ⟶ Y)
 /-- The explicit pushed system satisfies coherence, annihilation, and the quotient
 transition condition. This is an object assertion, without full faithfulness or lifting.
 
-Source: Stacks, Remark 088F, Lemma 087T, equation 0880
-(blueprint: lem-weil-pbc-thickening-system-pushforward-adic).
+Source: Stacks, Remark 088F, Lemma 087T, equation 0880.
 Proof: Each `j n` is a closed immersion into a Noetherian scheme, so its source is
 locally Noetherian. Finite pushforward preserves coherence; closed pushforward is
 annihilated by its kernel `J^(n+1)`. On the affine basis the ideal-sheaf power and the

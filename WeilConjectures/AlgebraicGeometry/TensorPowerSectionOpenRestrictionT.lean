@@ -36,7 +36,6 @@ private theorem numerator_inv_tmul {X Y : Scheme.{u}} (j : Y ⟶ X)
 
 /-- The canonical numerator comparisons intertwine the transition morphisms as sheaf maps.
 Source: Stacks Project, Modules, Tag 01CD; Properties, Tag 01PW, restriction paragraph.
-(blueprint: lem-sc-tensor-power-section-open-restriction-T).
 
 Proof: The inverse tensor comparison is uniquely characterized on all pure tensor
 sections. Apply the sheaf tensor universal property to prove its naturality, associator

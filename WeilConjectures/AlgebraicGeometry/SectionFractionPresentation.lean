@@ -13,8 +13,7 @@ public import Mathlib.LinearAlgebra.Quotient.Defs
 
 /-! # Fractions of tensor-power sections
 
-Source: Stacks Project, Properties, Section 0B5K, equation module-invert-s (Tag 0B5L)
-(blueprint: def-sc-section-fraction-presentation).
+Source: Stacks Project, Properties, Section 0B5K, equation module-invert-s (Tag 0B5L).
 
 This is the generators-and-relations presentation of the degree-zero localization:
 `[n,t]` represents `t/s^n`, and `[n,t] = [n+b,t ⊗ s^b]`.
@@ -33,7 +32,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The relations identifying a fraction with the same fraction after multiplying numerator
 and denominator by a power of the global section `s` (as the morphism
 `homOfGlobalSection L s : 𝒪_X ⟶ L`). Source: Stacks Project, Properties, Section 0B5K,
-equation module-invert-s (blueprint: def-sc-section-fraction-presentation). -/
+equation module-invert-s. -/
 noncomputable def sectionFractionRelations {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) :
     Submodule Γ(X, ⊤) (⨁ n : ℕ, Γ(F ⊗ L.tensorPow n, ⊤)) :=
@@ -44,13 +43,13 @@ noncomputable def sectionFractionRelations {X : Scheme.{u}} (L F : X.Modules)
 
 /-- The module of degree-zero section fractions, presented as the direct sum of nonnegative
 numerator degrees modulo the fraction relations. Source: Stacks Project, Properties,
-Section 0B5K, equation module-invert-s (blueprint: def-sc-section-fraction-presentation). -/
+Section 0B5K, equation module-invert-s. -/
 noncomputable abbrev SectionFractionPresentation {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) : Type u :=
   (⨁ n : ℕ, Γ(F ⊗ L.tensorPow n, ⊤)) ⧸ sectionFractionRelations L F s
 
 /-- The fraction `t/s^n`. Source: Stacks Project, Properties, Section 0B5K,
-equation module-invert-s (blueprint: def-sc-section-fraction-presentation). -/
+equation module-invert-s. -/
 noncomputable def sectionFraction {X : Scheme.{u}} (L F : X.Modules)
     (s : Γ(L, ⊤)) (n : ℕ) (t : Γ(F ⊗ L.tensorPow n, ⊤)) :
     SectionFractionPresentation L F s :=

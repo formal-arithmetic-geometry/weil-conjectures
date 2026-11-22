@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 
 /-! # Local bounded finite-module models of a good lower truncation
 
-Source: Stacks Project, Cohomology on Sites, Tags 094G and 094H
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tags 094G and 094H.
 -/
 
 @[expose] public section
@@ -276,7 +275,6 @@ cohomology has local bounded finite-module models, in the ring-sheaf module enco
 The model is a genuine module complex, including its differentials.
 
 Source: Stacks Project, Cohomology on Sites, Tag 094G, applied on slices, and Tag 094H.
-(auxiliary; not a blueprint node).
 
 Proof: Choose an upper cohomological bound b. Exact slice restriction commutes with
 cohomology and good truncation, so the truncation has cohomology in [a,b]. Its retained

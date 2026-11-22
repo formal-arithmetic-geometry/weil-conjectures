@@ -12,7 +12,6 @@ public import Mathlib.RingTheory.TensorProduct.Maps
 /-! # Presentations of tensor maps
 
 Source: Stacks Project, Algebra, proof of Tag 07RI.
-(blueprint: lem-weil-pbc-tensor-map-polynomial-presentation).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace Algebra
 /-- Base change preserves the variables and coefficientwise relations of a presentation.
 
 Source: Stacks Project, Algebra, proof of Tag 07RI, lines 47640-47642.
-(blueprint: lem-weil-pbc-tensor-map-polynomial-presentation).
 
 Proof: base change the presentation along B → T tensor B. Its target is
 (T tensor B) tensor_B C. Commute the two tensor factors, commute T tensor B,

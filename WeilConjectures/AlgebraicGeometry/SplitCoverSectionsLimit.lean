@@ -15,8 +15,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 # Sectionwise gluing for a split cover
 
 Source: Stacks Project, etale-cohomology.tex, proof of Lemma 095B,
-and sites.tex, Definition 00VM
-(blueprint: lem-weil-pbc-split-cover-sections-limit).
+and sites.tex, Definition 00VM.
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry
 set_option backward.isDefEq.respectTransparency false in
 /-- Source: Stacks Project, etale-cohomology.tex, proof of Lemma 095B,
 lines 9982--9991, and sites.tex, Definition 00VM.
-(blueprint: lem-weil-pbc-split-cover-sections-limit).
 
 Proof: Base change the clopen coproduct Y by W → X. Its j-th piece is W,
 using the inverse t j to i j ≫ f; its inclusion is the displayed pullback lift.

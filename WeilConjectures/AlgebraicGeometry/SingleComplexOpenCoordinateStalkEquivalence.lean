@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenCoordinateStalkTranspo
 /-! # Stalkwise conjugacy for transported open coordinates.
 
 Source: Stacks Project, perfect.tex, Tag 0DJ9, localization calculation.
-(blueprint: lem-pc-single-complex-open-coordinate-stalk-equivalence)
 
 The proof is the termwise stalk calculation: open-immersion stalk isomorphisms
 identify the four local rings and complexes, and naturality of tensor extension,
@@ -131,8 +130,7 @@ uses no flatness over R. Empty opens have no z; top opens, zero complexes, zero
 rings and unbounded complexes obey the same identities.
 
 Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8 and
-Tag 0DJ9, first paragraph; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-coordinate-stalk-equivalence). -/
+Tag 0DJ9, first paragraph; cohomology.tex, Tags 08HY and 08FE. -/
 theorem nonempty_singleComplexOpen_stalk_arrow_iso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

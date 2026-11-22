@@ -20,7 +20,6 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 # Strictly henselian singleton neighbourhoods in dimension zero
 
 Source: Stacks Project, Algebra, Tags 00KH, 00FV and 06RS.
-(blueprint: lem-weil-pbc-zero-dimensional-singleton-neighbourhoods)
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A geometric point on a zero-dimensional finite-type scheme has a singleton open
 neighbourhood which is the spectrum of a strictly henselian local ring.
 Source: Stacks Project, Tags 00KH, 00FV and 06RS.
-(blueprint: lem-weil-pbc-zero-dimensional-singleton-neighbourhoods)
 
 Proof: The geometry theorem `zeroDimensional_baseChange_geometry` makes C discrete.
 Set U_c = {c} with its open subscheme structure. The unique-point source of s_c

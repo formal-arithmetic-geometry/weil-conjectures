@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.GlobalHomShiftedHypercohomology
 
 /-! # Shifted Hom as cohomology of restricted global derived Hom
 Source: Stacks Project, Cohomology on Sites, Tag 08JA; Cohomology, Tag 0B6A.
-(blueprint: lem-sc-restricted-global-hom-shifted-equiv).
 -/
 
 @[expose] public section
@@ -55,7 +54,6 @@ private theorem restrictionCohomologyEquiv_naturality
 in the second entry. Exact scalar restriction changes the ring action, not the
 underlying cohomology group.
 Source: Stacks Project, Cohomology on Sites, Tag 08JA; Cohomology, Tag 0B6A.
-(blueprint: lem-sc-restricted-global-hom-shifted-equiv).
 
 Proof: Choose a K-flat representative of P and a K-injective representative of Q.
 Their sheaf Hom complex represents internal RHom; its global sections compute global

@@ -14,7 +14,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 /-! # Structure algebra from compatible spectral charts
 
 Source: Stacks Project, Constructions, proof of Lemma 01LV.
-(blueprint: lem-weil-pbc-relative-spectrum-structure-algebra).
 -/
 
 @[expose] public section
@@ -36,7 +35,6 @@ set_option backward.isDefEq.respectTransparency false in
 of the structure algebra. No quasi-coherence hypothesis is needed once charts are given.
 Source: Stacks Project, Constructions, proof of Lemma 01LV, first paragraph,
 and Lemma 01LX (3); Sheaves, Lemma 009U.
-(blueprint: lem-weil-pbc-relative-spectrum-structure-algebra).
 
 Proof: Each chart is an open immersion by base change, with image the inverse image
 of U. Its sections map O_X(f⁻¹ U) → Γ(Spec A(U)) is therefore an isomorphism. Compose

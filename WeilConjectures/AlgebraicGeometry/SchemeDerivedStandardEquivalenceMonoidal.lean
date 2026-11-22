@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 /-! # Monoidal comparison with the standard derived localization
 
 Source: Stacks Project, Tags 079U and 05RU.
-(blueprint: lem-sc-standard-derived-equivalence-monoidal).
 -/
 
 @[expose] public section
@@ -119,7 +118,6 @@ namespace AlgebraicGeometry
 /-- The specified equivalence to the standard localization preserves the fixed
 K-flat derived tensor and its unit. Source: Stacks Project, Tags 079U and 05RU,
 with the identity morphism in 079U and the localization universal property.
-(blueprint: lem-sc-standard-derived-equivalence-monoidal).
 
 Proof: write E for schemeDerivedStandardEquivalence X. Its canonical comparison
 Qh ⋙ E.functor ≅ Qh_standard identifies localized representatives. For K-flat

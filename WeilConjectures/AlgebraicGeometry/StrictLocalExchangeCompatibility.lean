@@ -63,7 +63,6 @@ with restriction to a pointed fibre. This is a compatibility result, with no qcq
 properness, local-ring, closed-point or invertibility hypothesis.
 Source: Stacks Project, Tag 03Q1 (3), and Tag 0A3U, compatibility omitted there;
 expanded as step 3 of `lem-weil-pbc-qcqs-geometric-exchange-factorization`.
-(blueprint: lem-weil-pbc-strict-local-exchange-compatibility).
 
 Proof: the affine pointed neighbourhoods are initial among all pointed neighbourhoods,
 so their germs are jointly epimorphic. Precompose the equality with these germs after

@@ -19,7 +19,6 @@ import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 Source: Stacks Project, Tag 08DQ, proof of lemma-dual-perfect-complex;
 Tag 08DM, the bounded Hom calculation.
-(blueprint: lem-pc-strictly-perfect-local-hom-computations).
 -/
 
 @[expose] public section
@@ -106,7 +105,6 @@ private theorem exact_homObj_of_finiteFree_retract {C : Type u} [SmallCategory C
 is K-flat. Neither assertion involves a derived evaluation map.
 Source: Stacks Project, Tag 08DM, bounded Hom calculation, and Tag 08DQ,
 proof of lemma-dual-perfect-complex, termwise evaluation.
-(blueprint: lem-pc-strictly-perfect-local-hom-computations).
 
 Proof: internal Hom from each term of P is a retract of internal Hom from a
 finite free module. Precomposition with its projection and inclusion gives a

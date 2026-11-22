@@ -15,8 +15,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 
 /-! # Uniform upper cohomological bound for quasi-coherent derived direct image
 
-Source: Stacks Project, Tag 08D5, part (2)
-(blueprint: lem-pc-uniform-direct-image-bound-core).
+Source: Stacks Project, Tag 08D5, part (2).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Uniform vanishing for nonpositive quasi-coherent derived objects.
-Source: Stacks Project, Tag 08D5, part (2)
-(blueprint: lem-pc-uniform-direct-image-bound-core).
+Source: Stacks Project, Tag 08D5, part (2).
 
 Proof:
 1. Choose the uniform higher-direct-image bound n₀ from Tag 01XJ, valid after

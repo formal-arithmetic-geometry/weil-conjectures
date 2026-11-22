@@ -30,7 +30,6 @@ namespace AlgebraicGeometry.Scheme
 /-- The only point of the strict henselization over the underlying geometric point is
 its closed point, in any local affine presentation.
 Source: Stacks Project, Tags 04HX, 04GW and 04GP.
-(blueprint: lem-weil-pbc-strict-henselization-closed-fiber)
 
 Proof: choose an affine neighbourhood Spec R of the image p of s. The pointed etale
 coordinate-ring colimit is the strict henselization of R_p (Tag 04HX): localizing each

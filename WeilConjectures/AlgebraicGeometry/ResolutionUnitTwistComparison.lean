@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.TensorUnitPowerScalar
 /-! # Resolution sections and tensor powers of the unit
 
 Source: Stacks Project, Tags 01E1, 01E4 and 09MR.
-(blueprint: lem-pc-resolution-unit-twist-comparison).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ multiplication. This is a comparison assertion, with no localization or torsion 
 
 Source: Stacks Project, Tag 01E4, proof of Lemma 20.7.3; Tag 01E1,
 Lemma 20.7.1; Tag 09MR, tensor-unit specialization of the numerator maps.
-(blueprint: lem-pc-resolution-unit-twist-comparison).
 
 Proof: Write Y = f inverse W and G = F restricted to Y. Pull a back by the
 structure-sheaf map on W and restrict to the top open of Y, obtaining b.

@@ -20,7 +20,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # Transport of restricted section pullback through the shift comparison
 
 Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-sections-shift-transport).
 -/
 
 @[expose] public section
@@ -306,7 +305,6 @@ set_option synthInstance.maxSize 256 in
 set_option maxRecDepth 2048 in
 /-- Shifted restricted section pullback is the conjugate of its unshifted derived map.
 Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-sections-shift-transport).
 
 Proof: Write T and T' for restriction followed by derived global sections, L for
 D+(a^*), and tau for the derived pullback followed by the restriction-composition

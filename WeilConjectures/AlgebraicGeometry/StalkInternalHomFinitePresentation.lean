@@ -18,8 +18,8 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-!
 # Stalk of internal Hom with finitely presented source
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`),
-finitely presented case (blueprint: lem-weil-pbc-stalk-internal-hom-finite-presentation).
+Source: Stacks Project, Modules, Lemma 01CP,
+finitely presented case.
 -/
 
 @[expose] public section
@@ -35,16 +35,14 @@ set_option backward.isDefEq.respectTransparency false in
 an isomorphism when the source module is finitely presented. The formula on germs
 specifies the canonical map, including evaluation on every smaller neighbourhood.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`).
-(blueprint: lem-weil-pbc-stalk-internal-hom-finite-presentation)
+Source: Stacks Project, Modules, Lemma 01CP.
 
-The stalks are the module stalks `RingedSpace.moduleStalkFunctor` (def-pc-module-stalk-functor),
+The stalks are the module stalks `RingedSpace.moduleStalkFunctor`,
 whose carriers are the abelian-group stalks in which the germs below live.
 
 Proof:
 1. A local morphism induces a stalk map by applying it to representative sections.
-   Equality of germs makes this well defined; it is additive and stalk-ring linear
-   (`def-weil-pbc-module-stalk`, `def-pur-sheaf-hom`, `def-pur-localized-ringed-site`).
+   Equality of germs makes this well defined; it is additive and stalk-ring linear.
 2. Localize at the point to a finite free presentation of F, using
    `def-weil-pbc-module-finite-type-presentation`. Its cokernel presentation is exact
    by `lem-weil-pbc-module-stalk-exact`; restriction preserves the stalks and the map.

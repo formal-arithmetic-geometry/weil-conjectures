@@ -12,7 +12,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 /-! # Ordered coordinates of the tensor localization complex over a ring
 
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d).
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -24,16 +23,14 @@ open scoped BigOperators
 namespace CategoryTheory
 
 /-- An element of a ring as a section of its one-point ring sheaf.
-Source: Stacks Project, Tag 0996.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0996. -/
 def ringTensorCechSection (A : CommRingCat.{u}) (x : A) :
     ((CochainComplex.onePointRingSheaf A).obj ⋙ forget CommRingCat).sections :=
   ⟨fun _ ↦ x, fun _ ↦ rfl⟩
 
 /-- The actual ordered tensor of the two-term localization complexes on the ring site.
 This uses the existing tensor construction, with its existing augmentation.
-Source: Stacks Project, Tag 0996.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 0996. -/
 def ringTensorCech (A : CommRingCat.{u}) (r : ℕ) (f : Fin r → A) :
     Σ K : CochainComplex (RingSiteModules A) ℤ, K ⟶ ringComplexSingle A :=
   ringedExtendedCech (CochainComplex.onePointRingSheaf A) r
@@ -166,7 +163,6 @@ private theorem ringTensorCech_augmentation_zero_isIso (A : CommRingCat.{u})
 
 /-- The tensor complex over a ring has the ordered localization coordinates.
 Source: Stacks Project, algebraization.tex, Tags 0996 and 099D(d).
-(auxiliary; not a blueprint node).
 
 Proof: evaluation on the one-object bottom-topology site identifies module sheaves
 with A-modules, their tensor with module tensor, and sheafification with the identity.

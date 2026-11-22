@@ -90,7 +90,6 @@ private theorem property_of_shifted_filtration {C : Type*} [Category* C] [Abelia
 Source: Stacks Project, Tag 08D5, proof of part (1), bounded-below paragraph;
 Tag 015J supplies the bounded-below hypercohomology spectral sequence, and
 Tag 01XJ, part (1), supplies quasi-coherence of ordinary higher direct images.
-(blueprint: lem-pc-truncated-higher-image-quasi-coherent).
 
 Proof.
 1. Put K = tau_{>= a} E. Its cohomology agrees with that of E in degrees at

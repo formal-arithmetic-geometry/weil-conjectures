@@ -7,9 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.SfSupportedDiagonalData
 import all WeilConjectures.AlgebraicGeometry.ShriekTensorComposition
 
-/-! # Composition coherence of proper projection maps
-
-(auxiliary; not a blueprint node).
+/-! # Composition coherence of proper projection maps.
 -/
 
 @[expose] public noncomputable section
@@ -313,8 +311,7 @@ end SourceConvention
 
 /-- The canonical projection formula commutes with composition of proper maps.
 Source: Stacks Project, Tags 0B56 and 0DV0; the concrete compactification calculation in
-WeilConjectures.AlgebraicGeometry.ShriekTensorComposition, projectionMap_chosen_comp
-(auxiliary; not a blueprint node).
+WeilConjectures.AlgebraicGeometry.ShriekTensorComposition, projectionMap_chosen_comp.
 
 Proof: first take r = f ≫ g. The concrete chosen-compactification projection square says
 π_g; G(π_f); E = T(E); π_(fg); H(T(l)), where E is

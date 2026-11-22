@@ -11,8 +11,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
 
 /-! # Actual restricted resolutions with section comparison
 
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-restricted-resolution-sections-exist). -/
+Source: Stacks Project, Tags 01E1 and 01E4. -/
 
 @[expose] public section
 universe uBC
@@ -26,7 +25,6 @@ attribute [local instance] enoughInjectives
 
 /-- Termwise restriction gives an injective resolution and its actual section comparison.
 Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-restricted-resolution-sections-exist).
 
 Proof: Exact open restriction preserves injectives by its exact left adjoint.
 Apply restriction termwise, transport the single-complex augmentation along the

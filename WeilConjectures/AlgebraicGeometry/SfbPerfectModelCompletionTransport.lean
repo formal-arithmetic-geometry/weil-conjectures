@@ -118,7 +118,6 @@ boundedness, maximality or completeness assumption on the coefficient ring.
 
 Source: Bhatt--Scholze, Proposition 6.6.11, reverse implication, coefficient-model
 calculation; Stacks Tags 00YY, 03CY, 093J and 093M.
-(auxiliary; not a blueprint node).
 
 Proof: precomposition by AsSmall.down is an equivalence of sheaf categories. Its
 constant-sheaf comparison identifies the positive quotient diagrams, including every

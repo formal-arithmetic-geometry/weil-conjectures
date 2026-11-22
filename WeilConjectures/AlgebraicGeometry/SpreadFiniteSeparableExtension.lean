@@ -22,8 +22,7 @@ import Mathlib.RingTheory.Etale.StandardEtale
 # Spreading a finite separable extension
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`
-(blueprint: lem-weil-pbc-spread-finite-separable-extension).
+`lem-weil-pbc-finite-pushforward-generic-constructible`.
 -/
 
 @[expose] public section
@@ -145,8 +144,7 @@ private theorem fractionRing_adjoin_of_primitive
  is automatic (`B` is a subring of the field `L`), so it is not a separate conjunct.
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
-`lem-weil-pbc-finite-pushforward-generic-constructible`
-(blueprint: lem-weil-pbc-spread-finite-separable-extension).
+`lem-weil-pbc-finite-pushforward-generic-constructible`.
 
 Proof:
 1. Choose a primitive element alpha by `lem-weil-pbc-finite-separable-primitive-element`.

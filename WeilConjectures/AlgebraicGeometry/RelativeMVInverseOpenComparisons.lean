@@ -30,7 +30,6 @@ restrictions along one inclusion, and the pasted base-change map.
 
 Source: Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; Derived Categories
 of Schemes, Tag 0DJ9, the open vertices of the induction diagram.
-(blueprint: lem-pc-relative-mv-inverse-open-comparisons).
 
 Proof: For each W use pullbackRestrictIsoRestrict g' W to identify the chosen
 pullback with the inverse-image open, preserving both projections. Derive this

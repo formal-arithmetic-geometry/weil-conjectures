@@ -14,7 +14,6 @@ import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 /-! # A line bundle and two sections from reciprocal local functions
 
 Source: Stacks Project, Varieties Lemma 09NB, cocycle and two-section construction.
-(blueprint: lem-sc-reciprocal-cover-line-bundle)
 -/
 
 @[expose] public section
@@ -137,7 +136,6 @@ This construction requires neither dimension nor separatedness nor an affine ope
 
 Source: Stacks Project, Varieties Lemma 09NB (varieties-lemma-find-globally-generated),
 proof, cocycle construction and the two displayed sections.
-(blueprint: lem-sc-reciprocal-cover-line-bundle).
 
 Proof: On U intersect V, the restrictions of f and g multiply to 1. Use the unit g
 as the transition from the frame e_U to e_V, so e_U = g e_V. Use its inverse for

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.RightAdjointTensorComparisonComponents
 /-! # The pinned projection isomorphisms yield a natural right-adjoint tensor comparison.
 
 Source: Stacks Project, Tag 0A9U.
-(blueprint: lem-sc-right-adjoint-tensor-comparison-natural).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 /-- The pinned projection isomorphisms yield a natural right-adjoint tensor comparison.
 Source: Stacks Project, Duality for Schemes, Section 48.8, equation (48.8.0.1),
 and Tag 0A9U, first two sentences of proof.
-(blueprint: lem-sc-right-adjoint-tensor-comparison-natural).
 
 Proof. A proper map is quasi-compact and quasi-separated, so the unbounded
 quasi-coherent projection formula applies to K and c(O_Y). Its canonical map is

@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeTensorEvaluationLocalizationCoher
 
 /-! # Uncurried ordinary evaluation calculation
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-scheme-ordinary-evaluation-uncurry-calculation).
 -/
 
 @[expose] public section
@@ -34,7 +33,6 @@ This statement involves only constructed chain maps and the lax tensor compariso
 it does not mention the derived tensor-Hom equivalence or transport to other objects.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 representative calculation in localization proof step 2.
-(blueprint: lem-pc-scheme-ordinary-evaluation-uncurry-calculation).
 
 Proof: Write eta for the fixed K-injective augmentation, O for the single unit,
 and V for Hom(P,O). On the summand F^p tensor V^q tensor P^r, project the

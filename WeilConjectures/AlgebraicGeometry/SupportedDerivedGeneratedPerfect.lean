@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SupportedDerivedGeneratedPerfectCore
 /-! # Building supported derived objects from a perfect complex
 
 Source: Stacks Project, proof of Lemma 48.4.3(3) (Tag 0E4G), using Lemmas 36.15.4
-(Tag 0A9A) and 13.37.3 (Tag 09SN)
-(blueprint: lem-sc-supported-derived-generated-perfect).
+(Tag 0A9A) and 13.37.3 (Tag 09SN).
 
 Coproducts are specified by colimiting cofans, so the statement does not require a chosen
 coproduct instance. Distinguished triangles are taken in the ambient derived category;
@@ -34,8 +33,7 @@ namespace AlgebraicGeometry
 
 /-- Every quasi-coherent derived object supported off a quasi-compact open is built from
 one perfect supported complex by successive cones and a sequential homotopy colimit.
-Source: Stacks Project, proof of Lemma 48.4.3(3), Tags 0E4G, 0A9A and 09SN
-(blueprint: lem-sc-supported-derived-generated-perfect).
+Source: Stacks Project, proof of Lemma 48.4.3(3), Tags 0E4G, 0A9A and 09SN.
 
 Proof:
 1. Apply `lem-pc-supported-perfect-generator` to the closed complement of V to obtain E.

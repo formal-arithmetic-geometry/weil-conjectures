@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 /-! # Vanishing of open pushforward on the complement of closed support
 
 Source: Stacks Project, Tag 08DP, the computation on the complementary open using 08FE.
-(blueprint: lem-pc-supported-open-pushforward-complement-zero).
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ private theorem isZero_of_zero_stalks (Y : Scheme.{u})
 
 /-- Derived open pushforward vanishes on an open disjoint from the cohomological support.
 Source: Stacks Project, Tags 08DP and 08FE.
-(blueprint: lem-pc-supported-open-pushforward-complement-zero).
 
 Proof: Restrict F to the inverse image of V in U. Exact restriction commutes with
 cohomology, and its cohomology stalks are the original stalks of F. Every point maps

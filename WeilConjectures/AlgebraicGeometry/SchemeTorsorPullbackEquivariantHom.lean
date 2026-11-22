@@ -80,7 +80,6 @@ private theorem baseChange_smulHom
 
 /-- An equivariant map from the inverse-image sheaf to the represented torsor.
 Source: Stacks Project Tags 03Q1 (4), 03AG and 0A5G, final paragraph.
-(blueprint: lem-weil-pbc-scheme-torsor-pullback-equivariant-hom)
 
 Proof: The adjunction and Yoneda identify inverse image of the sheaf represented by
 `t` with the sheaf represented by its base change. Compose its canonical comparison

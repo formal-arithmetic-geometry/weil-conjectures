@@ -170,7 +170,6 @@ set_option backward.isDefEq.respectTransparency.types true in
 /-- A tensor-unit action has the canonical dual-projection component formula.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation chain calculation, coefficient cancellation and tensor action.
-(blueprint: lem-pc-scheme-canonical-tensor-unit-component).
 
 Proof: Restrict the assumed factorization to V^q tensor P^r. The component
 formula for schemeTensorHomUncurry and coefficient naturality of the Hom

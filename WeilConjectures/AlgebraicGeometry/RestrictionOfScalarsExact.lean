@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedScalarExtensionRestrictionAdjunc
 # Exactness of restriction from finite to completed integral coefficients
 
 Source: Weil conjectures blueprint, `chap-Smooth-purity`, `sk-def-sf-operations`, order 1456;
-Stacks Project, Tag 03DA (blueprint: lem-weil-restriction-of-scalars-exact).
+Stacks Project, Tag 03DA.
 
 The index `n : ℕ` denotes the positive exponent `n + 1`, following the coefficient
 construction. Exactness of an additive functor between abelian categories is expressed
@@ -31,8 +31,7 @@ namespace WeilConjectures
 /-- Restriction along the reduction from the completed coefficient sheaf to exponent
 `n + 1` is exact. The target is modules over the completed ring sheaf, rather than
 modules over the discrete constant valuation-ring sheaf.
-Source: blueprint order 1456; Stacks Project, Tag 03DA
-(blueprint: lem-weil-restriction-of-scalars-exact).
+Source: blueprint order 1456; Stacks Project, Tag 03DA.
 
 Proof:
 1. On the small pro-etale site, abelian sheafification is exact

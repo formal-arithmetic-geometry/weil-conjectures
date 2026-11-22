@@ -104,7 +104,6 @@ private theorem unitComparison (t : Y ⟶ X) :
 -- Normalize the inverse-image functor before applying monoidal coherence.
 /-- Compatibility of the first tensor transport with exact inverse image.
 Source: Stacks Project, Cohomology, Tags 01FD, 07MB and 0FKV.
-(blueprint: lem-sc-scalar-ext-cup-inverse-image-first).
 
 Proof: Put T = scalarInverseImage t, u = scalarInverseUnitIso t, and write δ for the canonical
 oplax tensor comparison. Consider the natural transformation from tensorRight 1_X followed by T

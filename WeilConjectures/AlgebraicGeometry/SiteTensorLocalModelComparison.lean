@@ -22,8 +22,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-! # Comparing tensor cohomology with local finite free models
 
-Source: Stacks Project, Cohomology on Sites, Tag 094H
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 094H.
 -/
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated MonoidalCategory
@@ -412,7 +411,6 @@ local constancy hypotheses: the models are given.
 
 Source: Stacks Project, Cohomology on Sites, Tag 094H, truncation and finite-free
 computation; Tags 06YS, 06YQ, and Modules on Sites, Tag 0E8J.
-(auxiliary; not a blueprint node).
 
 Proof: Replace the factors by bounded-above flat complexes with their cohomological
 upper bounds. K-flatness and the mapping-cone criterion show independence from the

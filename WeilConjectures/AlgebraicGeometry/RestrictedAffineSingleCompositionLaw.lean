@@ -231,7 +231,6 @@ private lemma single_transition_comp {A B C : Type*}
 
 /-- Composition law for restricted single transitions.
 Source: Stacks Project, Tags 09Z1 and 03CB, inverse-image coherence in restriction.
-(blueprint: lem-sbc-restricted-affine-single-composition-law).
 
 Proof: Expand all three transitions. Their pullback second-projection equations give
 two adjacent commuting squares and their outer rectangle. Substitute D.map_comp

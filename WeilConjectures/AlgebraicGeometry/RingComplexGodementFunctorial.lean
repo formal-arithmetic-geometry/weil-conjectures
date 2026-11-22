@@ -458,7 +458,7 @@ private theorem augmentationValue (A : CommRingCat.{u}) (I : Ideal A)
 
 /-- The Godement mapping fibres form a strictly functorial augmented family.
 Source: Stacks Project, Tag 099D(a),(b), via the concrete Godement construction,
-Tag 0FKS. (auxiliary; not a blueprint node)
+Tag 0FKS.
 
 Proof: a ring map induces a map between the open complements, since a prime
 contains the extended ideal precisely when its inverse image contains the original

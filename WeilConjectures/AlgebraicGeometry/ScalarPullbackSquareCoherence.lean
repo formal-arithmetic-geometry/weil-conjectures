@@ -114,7 +114,6 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarCohere
 /-! # Scalar pullback square coherence
 
 Source: Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -185,7 +184,7 @@ private instance extension_kflat (φ : Λ ⟶ Λ') [IsMonHom φ] (T : Scheme.{u}
   exact Mod.preservesKFlatQuasiIso (coefficientMap φ T)
 
 /-- The canonical geometric compositor with the scalar interface exposed.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 @[irreducible] def scalarPullbackComposition
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]
@@ -195,7 +194,7 @@ Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
   exact CondensedRing.leftDerivedUpperStarComp R h k
 
 /-- The canonical geometric pullback square with the scalar interface exposed.
-Source: Stacks 07A7 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A7. -/
 @[irreducible] def scalarPullbackSquare
     (R : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
     [MonObj R] [IsCommMonObj R]

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 Source: Stacks Project, Limits, Tag 01ZR (3), affine part of the first proof;
 Algebra, Tags 05N7 (3) and 05LI (1).
-(blueprint: lem-pc-section-base-change-zero-persists).
 -/
 
 @[expose] public section
@@ -66,7 +65,6 @@ private theorem unit_zero_comp {X Y Z : Scheme.{u}}
 
 /-- Zero pullback of a section remains zero under a further base change.
 Source: Stacks Project, Sheaves, Tags 0095 and 0096; Limits, Tag 01ZR (3).
-(blueprint: lem-pc-section-base-change-zero-persists).
 
 Proof: for l ≤ k the k-to-j base-change map is the composite of the k-to-l
 and l-to-j base-change maps, by pullback uniqueness and functoriality of R.

@@ -36,8 +36,7 @@ The inverse is the tensor of the inverse equivalences; TensorProduct.congr
 already verifies its inverse equations. No flatness or nonzero-ring assumption
 is used.
 Source: Mathlib `TensorProduct.congr`, `ModuleCat.ExtendScalars.map_tmul`, and
-`HomologicalComplex.Hom.isoOfComponents`.
-(blueprint: lem-pc-semilinear-tensor-complex-iso). -/
+`HomologicalComplex.Hom.isoOfComponents`. -/
 theorem exists_semilinearTensorComplexIso
     {A₀ A₁ C₀ C₁ : Type u}
     [CommRing A₀] [CommRing A₁] [CommRing C₀] [CommRing C₁]

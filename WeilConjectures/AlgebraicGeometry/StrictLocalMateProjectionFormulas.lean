@@ -29,8 +29,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Derived neighbourhood sections identify with stage hypercohomology, compatibly
 with transition pullbacks and with projection restriction for the derived mate.
 This does not assert that the canonical source cocone is colimiting.
-Source: Stacks, Tag 03Q9, final injective-complex paragraph; Tag 03Q8
-(blueprint: lem-weil-pbc-strict-local-mate-projection-formulas).
+Source: Stacks, Tag 03Q9, final injective-complex paragraph; Tag 03Q8.
 
 Proof: choose a bounded below injective representative J of K. Under derived adjunction,
 Hom(Z[V][0], (Rf_*K)[n]) is Hom(f^*Z[V][0], K[n]); the free sheaf f^*Z[V] corepresents

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 
 Source: Stacks Project, Properties, Section 01PR and Lemma 01PW;
 Modules, Lemma 01CY.
-(blueprint: lem-weil-pbc-section-nonvanishing-zero-locus).
 -/
 
 @[expose] public section
@@ -79,7 +78,6 @@ set_option backward.isDefEq.respectTransparency false in
 
 Source: Stacks Project, Properties, Section 01PR and Lemma 01PW, local calculation
 in its proof; Modules, Lemma 01CY.
-(blueprint: lem-weil-pbc-section-nonvanishing-zero-locus).
 
 Proof: Cover X by affine opens V on which M has a free generator e. Write the restriction
 of s as f • e. The germ of e is a basis of M_x for every x in V, so the germ of s lies

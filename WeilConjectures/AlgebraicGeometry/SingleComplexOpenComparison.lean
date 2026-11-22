@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 /-! # The canonical single-complex comparison on a source open
 
 Source: Stacks Project, Tag 0DJ9, source-open induction.
-(blueprint: def-pc-single-complex-open-comparison).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ namespace AlgebraicGeometry
 /-- The comparison for `U → S`, with the given coefficient map restricted to its
 cartesian inverse image. All data are constructed from the canonical pullback
 composition comparisons; there is no choice of a coefficient object or morphism.
-Source: Stacks Project, Tag 0DJ9, the comparison on a quasi-compact open.
-(blueprint: def-pc-single-complex-open-comparison). -/
+Source: Stacks Project, Tag 0DJ9, the comparison on a quasi-compact open. -/
 noncomputable def singleComplexOpenComparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

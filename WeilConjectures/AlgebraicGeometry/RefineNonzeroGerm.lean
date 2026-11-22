@@ -10,8 +10,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 /-! # RefineNonzeroGerm
 
-Source: blueprint `lem-weil-pbc-lisse-generic-kernel`, first proof step.
-(blueprint: lem-weil-pbc-refine-nonzero-germ) -/
+Source: blueprint `lem-weil-pbc-lisse-generic-kernel`, first proof step. -/
 
 @[expose] public section
 universe u
@@ -22,7 +21,6 @@ set_option backward.isDefEq.respectTransparency false in
 Source: blueprint `lem-weil-pbc-locally-constant-nonzero-germs`, proof steps 2--4.
 A trivialising etale cover and filtered-colimit equality refine the section so
 that its germ is nonzero at every geometric point of the refinement.
-(blueprint: lem-weil-pbc-refine-nonzero-germ)
 
 Proof:
 1. Choose a member of the trivialising etale cover through the marked geometric

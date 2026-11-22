@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Flat.Localization
 /-! # Recovering relative flatness from stalks
 
 Source: Stacks Project, Morphisms, Tag 01U4, implication (1) to (2).
-(blueprint: lem-pc-relative-flat-of-stalks).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- A quasi-coherent module with relatively flat stalks satisfies the affine-section
 relative-flatness criterion.
 Source: Stacks Project, Morphisms, Tag 01U4, implication (1) to (2).
-(blueprint: lem-pc-relative-flat-of-stalks).
 
 Proof: Fix affine opens V of S and U of X with U contained in f inverse V.
 Put R = O_S(V), A = O_X(U), and N = G(U), using the ring map f.appLE.

@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.DimensionPreservedFieldExtension
 /-!
 # Base change of a relative global complete intersection
 
-Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1)
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-base-change).
+Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1).
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace Algebra
 scalar extension of the original quotient, sending each variable to its pure tensor.
 Proof: use `Presentation.baseChange`, identify its relation ideal with its kernel, and apply
 `Presentation.quotientEquiv`. The variable formula is `aeval_X` for the base-changed generators.
-Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1)
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-base-change). -/
+Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1). -/
 private theorem polynomialQuotient_baseChange
     (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [Algebra R R']
     (n c : ℕ) (f : Fin c → MvPolynomial (Fin n) R) :
@@ -67,8 +65,7 @@ locus of the `f'ᵢ`), by right exactness of the tensor product. (b) By (a), the
 `R[x]/(f)` at `𝔭`; it is nonzero exactly when the latter is, and its dimension is the same
 because dimension of finite type algebras over a field is preserved under field extension
 (Tag 00P3).
-Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1)
-(blueprint: lem-weil-pbc-relative-global-complete-intersection-base-change).
+Source: Stacks Project, Algebra, Lemma Tag 00SS, part (1).
 -/
 theorem relativeGlobalCompleteIntersection_baseChange
     (R : Type u) (R' : Type v) [CommRing R] [CommRing R'] [Algebra R R']

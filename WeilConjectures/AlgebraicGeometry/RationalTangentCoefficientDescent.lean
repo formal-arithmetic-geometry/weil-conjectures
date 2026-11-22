@@ -13,8 +13,7 @@ public import Mathlib.RingTheory.Ideal.Cotangent
 /-!
 # Linear descent of tangent coefficients
 
-Source: Stacks Project, Tags 0B2D and 0B2E
-(blueprint: lem-sc-rational-tangent-coefficient-descent).
+Source: Stacks Project, Tags 0B2D and 0B2E.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open CategoryTheory
 namespace AlgebraicGeometry
 
 /-- The coefficient of each tangent vector descends to a cotangent functional.
-Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`
-(blueprint: lem-sc-rational-tangent-coefficient-descent).
+Source: Stacks Project, Tags 0B2D and 0B2E, with base `Spec k`.
 
 Proof:
 1. The closed-point restriction of a tangent vector gives the residue map upon reducing its

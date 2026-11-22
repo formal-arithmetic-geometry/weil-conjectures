@@ -36,7 +36,6 @@ namespace AlgebraicGeometry.Scheme
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, proof of
 `lem-weil-pbc-finite-pushforward-generic-constructible`, finite-algebra calculation.
-(blueprint: lem-weil-pbc-split-tensor-algebra-scheme-components).
 
 Proof: Identify the affine schemes with spectra of their global sections, compatibly
 with g. Identify the principal open with Spec of the localization away from c, and

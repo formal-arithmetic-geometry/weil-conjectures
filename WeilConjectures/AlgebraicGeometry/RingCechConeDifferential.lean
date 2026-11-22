@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.RingCechConeLinearEquiv
 
 Source: Stacks Project, more-algebra.tex, section-alternating-cech,
 its defining alternating differential.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -20,8 +19,7 @@ open scoped BigOperators TensorProduct
 namespace CategoryTheory
 
 /-- The canonical augmented alternating localization differential.
-Source: Stacks Project, more-algebra.tex, section-alternating-cech, formulas (1)--(3).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, more-algebra.tex, section-alternating-cech, formulas (1)--(3). -/
 def ringCechDifferential (A : CommRingCat.{u}) (r : ℕ) (g : Fin r → A) :
     ∀ n : ℕ, ringCechTailTerm A r g n →ₗ[A] ringCechTailTerm A r g (n + 1)
   | 0 => LinearMap.pi (fun _ ↦ (Algebra.ofId A _).toLinearMap)
@@ -30,8 +28,7 @@ def ringCechDifferential (A : CommRingCat.{u}) (r : ℕ) (g : Fin r → A) :
         (LinearMap.proj ((Fin.succAboveOrderEmb j).trans t))))
 
 /-- Evaluation of the positive-degree canonical differential.
-Source: Stacks Project, more-algebra.tex, section-alternating-cech, formula (3).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, more-algebra.tex, section-alternating-cech, formula (3). -/
 theorem ringCechDifferential_succ (A : CommRingCat.{u}) (r : ℕ) (g : Fin r → A)
     (q : ℕ) (x : ringCechTailTerm A r g (q + 1)) (t : Fin (q + 2) ↪o Fin r) :
     ringCechDifferential A r g (q + 1) x t =
@@ -274,8 +271,7 @@ Source: Stacks Project, more-algebra.tex, section-alternating-cech, formulas (2)
 Proof: subsets avoiding zero use the tail differential. On subsets containing zero,
 the first face contributes the localized first block. All remaining faces preserve zero;
 their indices increase by one, changing the signs. On pure tensors the localization maps
-commute by the universal property. Linearity extends the calculation to every tensor.
-(auxiliary; not a blueprint node). -/
+commute by the universal property. Linearity extends the calculation to every tensor. -/
 theorem ringCechConeEquiv_d (A : CommRingCat.{u}) (r q : ℕ)
     (f : Fin (r + 1) → A)
     (x : ringCechTailTerm A r (fun i ↦ f i.succ) (q + 1))
@@ -321,8 +317,7 @@ theorem ringCechConeEquiv_d (A : CommRingCat.{u}) (r q : ℕ)
   simp only [Prod.mk_add_mk, add_zero, zero_add]
 
 /-- The degree-zero map is the full diagonal localization.
-Source: Stacks Project, more-algebra.tex, section-alternating-cech, formula (1).
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, more-algebra.tex, section-alternating-cech, formula (1). -/
 theorem ringCechConeEquiv_d_zero (A : CommRingCat.{u}) (r : ℕ)
     (f : Fin (r + 1) → A) (x : A) :
     ringCechConeEquiv A r 0 f

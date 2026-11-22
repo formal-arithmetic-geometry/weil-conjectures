@@ -15,7 +15,6 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 
 Source: Stacks Project, Tag 09IR, isomorphism transport in the affine setup;
 Mathlib scheme-module restriction composition and localization uniqueness.
-(blueprint: lem-pc-scheme-iso-derived-restriction-square).
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The derived equivalence on corresponding open sites commutes with restriction.
 Source: Stacks Project, Tag 09IR; restriction-comparison part of step 1 of
 lem-pc-affine-derived-open-transport.
-(blueprint: lem-pc-scheme-iso-derived-restriction-square).
 
 Proof: Restrict s to the isomorphism s.hom.preimageIso U between the open subschemes.
 Pushforward along this isomorphism and its inverse gives an exact equivalence on

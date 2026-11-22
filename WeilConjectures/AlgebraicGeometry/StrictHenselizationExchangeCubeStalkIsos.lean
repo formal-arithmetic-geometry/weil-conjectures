@@ -23,7 +23,6 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationExchangeCubeTargetSt
 /-! # Invertibility of the canonical strict-local stalk comparisons
 
 Source: Stacks Project, Tags 03Q9 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ open Scheme Etale
 stalks. This says nothing about either exchange map or compatibility with exchange.
 Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images, and Tag 03QO,
 lemma-cohomology-strictly-henselian.
-(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos).
 
 Proof:
 1. Extend the point fields along ν and ν followed by ι. Precomposition is bijective

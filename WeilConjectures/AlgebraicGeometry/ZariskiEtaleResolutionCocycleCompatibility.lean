@@ -18,7 +18,6 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 Source: Stacks Project, Section 01FT, equation-cohomology-object-site;
 Tag 06XR (1), lemma-compute-ext-resolutions.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-compatibility)
 
 Proof: Injectivity of the inclusion of cycles and its naturality show that the
 cycles map takes the cycle of x to the cycle of y. Naturality of the homology

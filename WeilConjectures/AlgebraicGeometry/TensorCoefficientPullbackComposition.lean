@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.TensorCoefficientComparison
 
 Source: Stacks Project, Tags 0096 and 0D5S;
 Mathlib `Adjunction.leftAdjointCompIso_assoc`.
-(blueprint: lem-sc-tensor-coefficient-pullback-composition).
 -/
 
 @[expose] public section
@@ -57,7 +56,6 @@ private theorem coefficient_hom_comp {A B X : Scheme.{v}}
 /-- The ordinary coefficient comparisons respect a commuting triangle of pullbacks.
 Source: Stacks Project, Tags 0096 and 0D5S; step 2 of
 `lem-sc-tensor-single-pullback-composition`.
-(blueprint: lem-sc-tensor-coefficient-pullback-composition)
 
 Proof: Substitute a' = b ≫ a. Conjugation sends the ordinary-to-tensor
 uniqueness comparison to the identity, so each coefficient comparison is the

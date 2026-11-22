@@ -14,8 +14,7 @@ set_option linter.privateModule false
 
 /-! # Ringed-topos derived pullback with independent site universes
 
-Source: Stacks Project, sites-cohomology.tex, Tag 06YY (lemma-derived-base-change).
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tag 06YY.
 
 This generalizes the existing interface to sites small relative to the coefficient
 universe, keeping their object and morphism universes independent. The original

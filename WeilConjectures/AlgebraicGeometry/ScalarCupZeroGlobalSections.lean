@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ScalarTensorGlobalSectionsMorphism
 /-! # Internal cup in degree zero on global sections
 
 Source: Stacks Project, Cohomology, Tags 01DZ, 01F7, 0FKV.
-(blueprint: lem-sc-scalar-cup-zero-global-sections).
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ open scoped TensorProduct
 namespace AlgebraicGeometry.Scheme.Modules
 /-- The internal degree-zero cup evaluates to the tensor of the two global sections.
 Source: Stacks Project, Cohomology, Tags 01DZ, 01F7, 0FKV.
-(blueprint: lem-sc-scalar-cup-zero-global-sections).
 
 Proof: Choose an injective resolution of each coefficient sheaf. Evaluation at 1
 identifies its Hom complex from the structure sheaf with its global-section complex.

@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalSectionsStalks
 # Global sections under field extension in dimension zero
 
 Source: the degree-zero argument of blueprint lemma-sheaves-finite-support-finite-morphisms--2.
-(blueprint: lem-weil-pbc-zero-dimensional-pullback-global-sections).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry.Etale
  zero-dimensional finite-type scheme over an algebraically closed field.
  Source: blueprint lemma-sheaves-finite-support-finite-morphisms--2, proof steps 1 and 4;
  Stacks Project, Tags 03Q1 and 0GJA.
- (blueprint: lemma-sheaves-finite-support-finite-morphisms--2).
 
  Proof: The source has finitely many closed points with residue field k, and after
  extending k to k' the projection gives a bijection of these point sets, by

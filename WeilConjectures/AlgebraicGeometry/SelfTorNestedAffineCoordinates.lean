@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 
 /-! # Affine normalized self-Tor coordinates
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-e1-self-tor-nested-affine-coordinates). -/
+Source: Stacks Project, Tags 09PQ, 01R3 and 06YH. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -120,7 +119,6 @@ set_option backward.isDefEq.respectTransparency false in
 classes. The conjugated comparisons agree on the whole smaller affine chart's sections.
 No assertion on an arbitrary subopen, an incomparable overlap or a global map is made.
 Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-e1-self-tor-nested-affine-coordinates).
 
 Proof: On U = Spec A use the quotient presentation defined by i.ker.ideal U and a
 projective resolution P of A/I. Apply exists_affine_quotient_sheafified_resolution to its

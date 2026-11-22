@@ -23,8 +23,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- The inverse of the specified raw evaluation comparison, cached as a construction.
 The inverse is unique, and no raw representative is chosen from mere existence.
-Source: Stacks Project, Tags 03Q8 and 0EYM.
-(blueprint: def-sc-raw-restricted-cohomology-class). -/
+Source: Stacks Project, Tags 03Q8 and 0EYM. -/
 @[irreducible]
 noncomputable def rawRestrictedCohomologyClass {S Y : Scheme.{u}} (h : Y ⟶ S)
     (q : ℕ) (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (V : S.Etale)
@@ -35,7 +34,6 @@ noncomputable def rawRestrictedCohomologyClass {S Y : Scheme.{u}} (h : Y ⟶ S)
 
 /-- Evaluation recovers the given restricted cohomology class.
 Source: Stacks Project, Tag 03Q8.
-(blueprint: def-sc-raw-restricted-cohomology-class).
 
 Proof: The construction is the inverse of the evaluation isomorphism. Its
 inverse-hom identity, evaluated at x, is the asserted equation. -/
@@ -50,7 +48,6 @@ theorem rawRestrictedCohomologyClass_spec {S Y : Scheme.{u}} (h : Y ⟶ S)
 
 /-- Pulling back the specified raw class evaluates to the restricted cohomology map.
 Source: Stacks Project, Tags 03Q8 and 0EYM.
-(blueprint: def-sc-raw-restricted-cohomology-class).
 
 Proof: Apply naturality of raw evaluation to the inverse evaluation class.
 Evaluation of that class is the original input by the inverse-hom identity. -/
@@ -71,7 +68,6 @@ theorem rawRestrictedCohomologyClass_map {S Y Y' : Scheme.{u}}
 
 /-- The canonical raw class commutes with the specified restricted pullback.
 Source: Stacks Project, Tags 03Q8 and 0EYM.
-(blueprint: def-sc-raw-restricted-cohomology-class).
 
 Proof: Evaluation is injective. Evaluating the left side recovers the restricted
 cohomology map, and evaluating the right side gives the same map by naturality. -/

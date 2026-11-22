@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.Etale.Gabber
 # Torsion coefficient assembly for proper base change
 
 Source: Stacks Project, Tag 095T, and Tag 0A4B, proof paragraphs 1–3;
-blueprint `sec-proper-base-change/sk-thm-properbasechange`
-(blueprint: lemma-weil-pbc-torsion-assembly).
+blueprint `sec-proper-base-change/sk-thm-properbasechange`.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry.Etale
 exchange on a torsion abelian sheaf placed in degree zero is an isomorphism, as is its
 map on every cohomology sheaf. Exactness of inverse image identifies the latter map with
 `g⁻¹ Rᵖf_* F → Rᵖf'_* g'⁻¹ F`; higher direct images mean cohomology of derived direct image.
-Source: Stacks Project, Tag 095T; Tag 0A4B, proof paragraphs 1–3
-(blueprint: lemma-weil-pbc-torsion-assembly).
+Source: Stacks Project, Tag 095T; Tag 0A4B, proof paragraphs 1–3.
 
 Proof: The recorded prime-proper-base-change declaration
 `hasTorsionBaseChange_of_isProper` already proves the module-coefficient theorem for all

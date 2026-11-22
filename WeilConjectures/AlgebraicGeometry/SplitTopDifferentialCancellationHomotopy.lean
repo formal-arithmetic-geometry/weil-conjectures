@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 /-! # Split top differential and canonical truncation
 
 Source: Stacks Project, Tags 068V and 00MT, explicit split cancellation.
-(blueprint: lem-pc-split-top-differential-cancellation-homotopy)
 -/
 
 @[expose] public section
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Canonical truncation at a split top differential preserves homotopy type.
 
 Source: Stacks Project, Tags 068V and 00MT, split identity-pair cancellation.
-(blueprint: lem-pc-split-top-differential-cancellation-homotopy).
 
 Proof: Write δ for the differential from m to m+1 and σ for a section of δ.
 The canonical truncation has cycles (the kernel of δ) in degree m, the original

@@ -15,7 +15,6 @@ import WeilConjectures.CategoryTheory.ExtExactFunctorIdentityComparison
 /-! # ScalarExtCupDegreeZero
 
 Source: Stacks Project, Cohomology, Tag 0FKU.
-(blueprint: lem-sc-scalar-ext-cup-degree-zero).
 -/
 
 @[expose] public section
@@ -80,7 +79,6 @@ private theorem ext_iso_transport {C : Type*} [Category C] [Abelian C]
 
 /-- Tensoring a degree-one scalar Ext class with a degree-zero morphism is coefficient composition.
 Source: Stacks Project, Cohomology, Tag 0FKU, Lemma 20.31.1 and Remark 20.31.2.
-(blueprint: lem-sc-scalar-ext-cup-degree-zero).
 
 Proof: Expand scalarExtCup. Exact-functor transport sends mk₀ of a morphism
 u to mk₀ of its tensor whiskering. For the right formula the product is

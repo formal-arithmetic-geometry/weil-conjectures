@@ -34,7 +34,6 @@ private theorem map_id_coefficient
 scheme of the vertical morphism is replaced by an isomorphic scheme.
 Source: Stacks Project, Duality for Schemes, Tag 0ATR, Lemma 48.5.2,
 and Tag 0E9S, invariance under the cartesian restriction identification.
-(blueprint: lem-sc-right-adjoint-mate-scheme-iso-transport-base)
 
 Proof: The projection equations identify r with the pullback of e.hom, hence r is
 an isomorphism. Derived pullback along e.hom and along r are equivalences; their

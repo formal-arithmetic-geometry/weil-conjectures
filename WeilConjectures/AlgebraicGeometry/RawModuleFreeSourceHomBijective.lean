@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackCompariso
 /-! # Underived free-source scalar comparison
 
 Source: Stacks Project, Tags 03FD, 03D3 and 03D7.
-(blueprint: lem-sbc-raw-module-free-source-hom-bijective).
 -/
 
 @[expose] public section
@@ -78,7 +77,6 @@ private lemma scalar_unit (Λ : Type (u + 1)) [CommRing Λ]
 
 /-- The explicit generator comparison is bijective on underived Hom.
 Source: Stacks Project, Tag 03FD, equality of section complexes; Tags 03D3 and 03D7.
-(blueprint: lem-sbc-raw-module-free-source-hom-bijective).
 
 Proof: Apply the inverse-image/direct-image adjunction in modules and in
 abelian sheaves. Then apply sheafification adjunction, the free-module/free-group

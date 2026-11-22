@@ -51,8 +51,7 @@ Source: the second triangle calculation in the projective-line adjunction proof.
 The coefficient square first moves the inverse line comparison across exchange.
 Naturality moves the arbitrary trace across pullback composition. The unit
 square finishes the calculation, and forget-supports naturality identifies the
-recorded direct-image factorization.
-(auxiliary; not a blueprint node). -/
+recorded direct-image factorization. -/
 theorem traceTransportPasting
     {C D E W Z : Type*} [Category C] [Category D] [Category E]
     [Category W] [Category Z]

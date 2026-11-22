@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CanonicalDerivedTensorHom
 /-! # Tensor-model adjunction and restriction
 
 Source: Stacks Project, cohomology.tex, Tags 08DJ and 08DL.
-(blueprint: lem-sc-tensor-model-restriction-adjunction).
 -/
 
 @[expose] public section
@@ -110,7 +109,6 @@ second complex, without any K-flatness requirement on that complex.
 
 Source: Stacks Project, cohomology.tex, Tag 08DJ, equation-internal-hom and
 lemma-internal-hom; Tag 08DL, lemma-restriction-RHom-to-U.
-(blueprint: lem-sc-tensor-model-restriction-adjunction).
 
 Proof:
 1. Compute tensor with the fixed K-flat P by the total tensor complex, and

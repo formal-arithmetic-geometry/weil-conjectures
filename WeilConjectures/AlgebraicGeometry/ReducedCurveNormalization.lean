@@ -22,7 +22,7 @@ import WeilConjectures.AlgebraicGeometry.Regular
 # A finite smooth modification of a reduced curve
 
 Source: Stacks Project, Varieties, Tags 0BXR and 0B8Y, as used in the proof of
-Etale Cohomology, Tag 0A3Q (blueprint: lem-weil-pbc-reduced-curve-normalization).
+Etale Cohomology, Tag 0A3Q.
 -/
 
 @[expose] public section
@@ -173,7 +173,6 @@ private theorem integral_curve_modification
 closed field admits a finite modification from a smooth separated finite-type scheme of
 dimension at most one, which is an isomorphism over a dense open.
 Source: Stacks Project, Tags 0BXR, 0B8Y and the proof of 0A3Q.
-(blueprint: lem-weil-pbc-reduced-curve-normalization)
 
 Proof:
 1. Enumerate the irreducible components and put their reduced closed subscheme structures

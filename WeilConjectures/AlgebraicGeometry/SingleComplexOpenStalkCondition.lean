@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenStalkConjugacy
 /-! # Restriction of the single-complex stalk condition to a source open
 
 Source: Stacks Project, Tag 0DJ8, locality on X', and Tag 0DJ9, source-open induction.
-(blueprint: lem-pc-single-complex-open-stalk-condition).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry
 There is no affineness, quasi-coherence, quasi-compactness or boundedness assumption.
 Source: Stacks Project, Tag 0DJ8, proof that condition (1) is local on X';
 Tag 0DJ9, the similarly constructed comparison on U and its inverse image.
-(blueprint: lem-pc-single-complex-open-stalk-condition).
 
 Proof: The projection pullback.fst is the base change of the open immersion U.ι,
 hence is itself an open immersion. Take an original coordinate presentation c

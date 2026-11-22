@@ -23,7 +23,6 @@ import Mathlib.CategoryTheory.Adjunction.Additive
 
 Source: Stacks Project, duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G;
 derived.tex, lemma-write-as-colimit (Tag 09SN).
-(blueprint: lem-sc-supported-compact-detector-model).
 -/
 
 @[expose] public section
@@ -195,7 +194,6 @@ private theorem supported_closed_coproducts (Y : Scheme.{u})
 constructing any tower or telescope.
 Source: Stacks Project, duality.tex, lemma-when-sheafy, proof of (3), Section Tag 0E4G;
 derived.tex, lemma-write-as-colimit (Tag 09SN).
-(blueprint: lem-sc-supported-compact-detector-model).
 
 Proof: Form the full subcategory of ambient complexes with quasi-coherent cohomology
 and zero cohomology stalks on V. The hypothesis htri supplies its triangulated structure.

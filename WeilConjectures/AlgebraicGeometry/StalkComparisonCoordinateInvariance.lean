@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.StalkComparisonPullbackNaturality
 /-! # Coordinate invariance of the stalk comparison
 
 Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-(blueprint: lem-pc-stalk-comparison-coordinate-invariance).
 -/
 
 @[expose] public section
@@ -87,8 +86,7 @@ other; composition with isomorphisms preserves and reflects invertibility.
 This argument only uses derived isomorphisms; it does not assume a chain map
 between the two coordinate complexes, or that ordinary pullback preserves
 quasi-isomorphisms.
-Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8.
-(blueprint: lem-pc-stalk-comparison-coordinate-invariance). -/
+Source: Stacks Project, perfect.tex, equation-bc preceding Tag 0DJ8. -/
 theorem isIso_stalkComparison_iff_coordinates
     {K : schemeDerivedCategory X} {K' : schemeDerivedCategory X'}
     {φ : (derivedPullback g').obj K ⟶ K'}

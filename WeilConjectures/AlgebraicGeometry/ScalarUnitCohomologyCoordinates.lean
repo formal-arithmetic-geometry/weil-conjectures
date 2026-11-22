@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 /-! # Scalar coordinates on degree-zero unit cohomology
 
 Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED.
-(blueprint: lem-sc-scalar-unit-cohomology-coordinates).
 -/
 
 @[expose] public section
@@ -22,8 +21,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- The degree-zero cohomology class of the section 1, constructed using the canonical
 map from sections to their zeroth right derived functor.
-Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-scalar-unit-cohomology-coordinates). -/
+Source: Stacks Project, Cohomology, Tag 01DZ. -/
 noncomputable def scalarUnitCohomologyClass {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (CommRingCat.of k)) :
     scalarCohomology f (SheafOfModules.unit X.ringCatSheaf) 0 :=
@@ -34,7 +32,6 @@ noncomputable def scalarUnitCohomologyClass {k : Type u} [Field k] {X : Scheme.{
 
 /-- Bijective structure maps give normalized scalar coordinates on degree-zero cohomology.
 Source: Stacks Project, Cohomology, Tag 01DZ; Varieties, Tag 0BED.
-(blueprint: lem-sc-scalar-unit-cohomology-coordinates).
 
 Proof: Evaluation of module sheaves at the terminal open preserves finite limits.
 Its zeroth right derived functor is therefore canonically isomorphic to evaluation.

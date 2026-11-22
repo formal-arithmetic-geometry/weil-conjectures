@@ -15,7 +15,6 @@ import Mathlib.AlgebraicGeometry.Gluing
 
 Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
 paragraph beginning "Choose an affine open covering".
-(blueprint: lem-weil-pbc-universal-thickening-cartesian-atlas)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ No assertion about the global immersion's kernel or its universal property is ma
 
 Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
 paragraph beginning "Choose an affine open covering".
-(blueprint: lem-weil-pbc-universal-thickening-cartesian-atlas)
 
 Proof: For each pair of source charts, take their intersection as the pullback
 of their open immersions into `Z`. The first order immersions are homeomorphisms,

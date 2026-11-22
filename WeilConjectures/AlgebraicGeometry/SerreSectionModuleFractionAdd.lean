@@ -84,7 +84,6 @@ private lemma transport_phi
 
 /-- The relation between homogeneous fractions and sections preserves addition.
 Source: Stacks Project, Proposition 0BXD, final paragraph.
-(blueprint: lem-sc-p1-serre-section-module-fraction-add)
 
 Proof: Take witnesses y/f^m and z/f^n. The numerator f^n*y+f^m*z is homogeneous
 of degree (m+n)*d by graded scalar compatibility. LocalizedModule.mk_add_mk

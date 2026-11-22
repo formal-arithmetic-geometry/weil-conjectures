@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationMapExists
 
 /-! # Strict henselization functoriality
 
-Source: Stacks Project, Tags 04HX, 03PS, 04GU and 08HV
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
+Source: Stacks Project, Tags 04HX, 03PS, 04GU and 08HV.
 
 Clause (1) is stated for every scheme and geometric point in
 `strictHenselizationResidue`. The canonical map `j_Y` is the existing
@@ -43,8 +42,7 @@ set_option backward.isDefEq.respectTransparency false in
 identification of clause (1). The factorization condition forces the residue
 identification to respect the base residue field; using ring equivalences therefore
 also states uniqueness as an equivalence of base-residue-field algebras.
-Source: Stacks Project, Tag 04HX and Definition 03PS
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
+Source: Stacks Project, Tag 04HX and Definition 03PS.
 Proof steps for the node:
 1. *Two elementary facts used throughout.* (a) If $X=\operatorname{Spec}B$ with $B$ local and
 $\varphi:X\to Z$ is a morphism of schemes whose closed point maps into an open $Z'\subset Z$,
@@ -286,8 +284,7 @@ of the two ring maps to Ω is equivalent to the induced residue map being the in
 of the relative separable closures. Uniqueness is asserted with only the locality,
 base diagram and residue conditions; neighbourhood compatibility is a separate clause.
 Source: Stacks Project, paragraph following Tag 03PS, Tags 04GU, 08HV,
-and the proof of Tag 095T
-(blueprint: lem-weil-pbc-strict-henselization-functoriality).
+and the proof of Tag 095T.
 Proof steps for the node:
 1. *Two elementary facts used throughout.* (a) If $X=\operatorname{Spec}B$ with $B$ local and
 $\varphi:X\to Z$ is a morphism of schemes whose closed point maps into an open $Z'\subset Z$,

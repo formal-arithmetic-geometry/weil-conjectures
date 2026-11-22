@@ -20,7 +20,6 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 /-- The perfectness obligation for a supported open pushforward.
 Source: Stacks Project, Tag 08DP, using Tag 08FE and Definition 08CM.
-(blueprint: lem-pc-supported-open-pushforward-perfect-component).
 
 Proof: Put V = X minus T, which is open since T is closed. The opens U and V
 cover X because T is contained in U. On U the derived direct image restricts

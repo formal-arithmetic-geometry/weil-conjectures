@@ -53,9 +53,7 @@ map Spec F to the fibre. It is quasi-compact because both schemes are affine. It
 composite to Spec kappa(eta') is the spectrum map of the displayed field algebra.
 In characteristic zero use K'=K; nonemptiness excludes the zero ring in the field
 construction. Every scheme is a spectrum or canonical reduction, not arbitrary data
-chosen by a definition from an unproved existence statement.
-
-(blueprint: lem-sbc-radicial-separating-generic-field) -/
+chosen by a definition from an unproved existence statement. -/
 theorem exists_radicial_separating_generic_field
     {Z S : Scheme.{u}} [IsAffine Z] [IsReduced Z] [IsAffine S] [IsIntegral S]
     (g : Z ⟶ S) [Flat g] [LocallyOfFinitePresentation g]

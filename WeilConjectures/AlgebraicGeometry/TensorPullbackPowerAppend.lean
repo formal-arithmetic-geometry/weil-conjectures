@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 /-! # Pullback of tensor-power concatenation with one factor
 
 Source: Stacks Project, Tag 01CD, functorial pullback of tensor products.
-(blueprint: lem-sc-tensor-pullback-power-append).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ attribute [local irreducible] tensorPullback boundaryPullbackComparison
 This has no block size, coefficient object, section, ideal, or square-zero hypothesis.
 Source: Stacks Project, Tag 01CD, the functorial tensor comparison, with its
 associator and unit coherence; Tag 09MS, the tensor powers in coherent-equation-ses.
-(blueprint: lem-sc-tensor-pullback-power-append).
 Proof: Use the proved private pullback_power_add of BoundaryCoefficientDegreeSplit
 at exponents e and 1. Transport the monoidal structure across
 boundaryPullbackComparison and use pullback_monoidal_unit_comparison to identify

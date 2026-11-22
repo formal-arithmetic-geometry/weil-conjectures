@@ -633,7 +633,7 @@ private lemma chart_opposite (S : Scheme.{u}) (a : Bool) :
 /-- The ordinary exchange from a product projection, with its twist endpoint corrected.
 It is defined before, and independently of, any trace or decomposition.
 Source: blueprint thm-amb-p1-adjunction.proof.md, the proper base-change identification
-for either projection (auxiliary; not a blueprint node). -/
+for either projection. -/
 @[irreducible]
 def projectionExchange (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA)
@@ -714,7 +714,7 @@ Neither side contains a trace, a Chern class, or a splitting family.
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the paragraph identifying each projection with
-base change of q (auxiliary; not a blueprint node).
+base change of q.
 
 Proof: Let e be the canonical chart PP -> P times_S P, r:PP -> P and q:P -> S.
 The equations e followed by the selected projection equals r, and e followed by

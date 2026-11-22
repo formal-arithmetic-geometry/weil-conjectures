@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 /-!
 # Pullback of associated modules on affine schemes
 
-Source: Stacks Project, Schemes, Tag 01I9 (1), using Tags 01I7 and 01BJ
-(blueprint: lem-weil-pbc-tilde-pullback-base-change).
+Source: Stacks Project, Schemes, Tag 01I9 (1), using Tags 01I7 and 01BJ.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ set_option backward.isDefEq.respectTransparency.types false
 /-- Pullback of `M` tilde along `Spec φ` is naturally the tilde of `S ⊗[R] M`.
 The comparison takes the pullback-unit image of the canonical section of `m` to
 that of `1 ⊗ m`. The unit is the canonical tensor-formula adjunction unit.
-Source: Stacks Project, Schemes, Tag 01I9 (1), Tags 01I7 and 01BJ
-(blueprint: lem-weil-pbc-tilde-pullback-base-change).
+Source: Stacks Project, Schemes, Tag 01I9 (1), Tags 01I7 and 01BJ.
 Proof: compose the tilde-global-sections adjunction with the chosen tensor-pullback
 adjunction. Global sections of pushforward along `Spec φ` are restriction of scalars
 along `φ`, via `pushforwardSpecMapCompΓIso`. Thus this composite and extension of

@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RingPointTensorComparison
 /-! # Evaluated blocks of tensoring with one localization complex
 
 Source: Stacks Project, algebraization.tex, Tag 0996; the two-term tensor calculation.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -390,7 +389,6 @@ end LocalizationRows
 Source: Stacks Project, algebraization.tex, Tag 0996, tensor presentation of the
 extended complex, and the tensor differential convention of More on Algebra,
 section-alternating-cech.
-(auxiliary; not a blueprint node).
 
 Proof: on the one-object bottom-topology site every presheaf is a sheaf.
 The unit of sheafification and the sectionwise tensor comparison are therefore

@@ -14,8 +14,7 @@ import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 /-!
 # Sections over a strictly henselian local scheme and the geometric stalk
 
-Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03QO
-(blueprint: lem-weil-pbc-strictly-henselian-sections-stalk).
+Source: literature/stacks-project/etale-cohomology.tex, Lemma Tag 03QO.
 -/
 
 @[expose] public section
@@ -119,7 +118,6 @@ private theorem strictlyHenselianSections_pointedSection
 set_option backward.isDefEq.respectTransparency false in
 /-- For an abelian sheaf on a strictly henselian local scheme the global germ is an
 isomorphism, natural in the sheaf. Source: Stacks Project, Lemma Tag 03QO.
-(blueprint: lem-weil-pbc-strictly-henselian-sections-stalk)
 
 Proof:
 1. For each pointed etale neighbourhood, shrink around its marked point to an affine

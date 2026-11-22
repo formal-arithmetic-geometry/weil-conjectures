@@ -29,7 +29,6 @@ that exchange map with restriction along any strict-local neighbourhood cone.
 
 Source: Stacks Project, Tag 03Q9, final injective-complex paragraph, and the generic
 factorization of derived adjunction mates on complexes.
-(blueprint: lem-weil-pbc-strict-local-derived-mate-sections-factorization).
 
 Proof: put M = ιJ, L = f_*M. Pass first to the homotopy category. Apply
 Adjunction.derivedPlus_mateEquiv_app_fac to the two inverse/direct-image

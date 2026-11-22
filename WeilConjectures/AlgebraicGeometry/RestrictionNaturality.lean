@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.Ext
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 01F8 and Remark 01FB;
 Derived Categories, Tags 013P, 013S and 05TG.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-target-iso-naturality).
 -/
 
 @[expose] public section
@@ -252,7 +251,6 @@ private theorem data_target_naturality {X Y : Scheme.{u}} (h : X ⟶ Y)
 /-- Target naturality for an isomorphism of the target module.
 Source: Stacks Project, Cohomology of Sheaves, Lemma 01F8 and Remark 01FB;
 Derived Categories, Tags 013P, 013S and 05TG.
-(blueprint: lem-weil-pbc-module-cohomology-fmap-target-iso-naturality).
 
 Proof (resolution comparison, independent of functoriality of h-maps):
 1. Let D and E be the data chosen in the two occurrences of moduleCohomologyFMap.

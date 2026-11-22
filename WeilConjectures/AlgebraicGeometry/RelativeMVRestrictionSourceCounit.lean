@@ -123,7 +123,6 @@ private theorem baseChange_transpose
 
 /-- The source path has the explicit restricted-counit normal form.
 Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.
-(blueprint: new-relative-mv-restriction-source-counit).
 Proof: Transpose only the source path under L(W'→S') adjoint to R(W'→S').
 Functoriality of the Hom equivalence moves Lg(restriction) to the left of the
 base-change transpose and the coefficient comparison to its right. By 08HY,

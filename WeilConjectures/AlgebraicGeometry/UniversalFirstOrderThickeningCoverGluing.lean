@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.UniversalFirstOrderThickeningGluedAtlas
 
 Source: Stacks Project, More on Morphisms, Lemma 37.7.1 (Tag 04F3),
 last two paragraphs. This gluing assertion does not assume formal unramifiedness.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-cover-gluing)
 -/
 
 @[expose] public section
@@ -252,7 +251,6 @@ input data; no existence or formal unramifiedness assumption on `h` is used.
 
 Source: Stacks Project, More on Morphisms, proof of Lemma 37.7.1 (Tag 04F3),
 paragraphs beginning "Choose an affine open covering" and "It turns out".
-(blueprint: lem-weil-pbc-universal-first-order-thickening-cover-gluing)
 
 Proof:
 1. For each pair of charts of `C`, their fibre product is their open intersection.

@@ -25,7 +25,6 @@ namespace AlgebraicGeometry
 /-- The coefficient comparisons commute with the inclusion W ⊆ U, before any
 counit or base-change mate is applied.
 Source: Stacks Project, Tag 0D5S, canonical derived pullback composition.
-(blueprint: lem-pc-relative-mv-open-square-coefficient-coherence).
 
 Proof: Substitute the five defining equations hc, hc', hs, ht and hd to
 replace the explicit comparison arguments by their canonical formulas.

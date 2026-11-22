@@ -16,8 +16,7 @@ import all WeilConjectures.AlgebraicGeometry.UnboundedEtaleCompactSupportCompari
 /-! # Base change of the explicit graph compositor
 
 Source: Stacks Project, Tags 0F7F and 0F7J; the product-graph argument of
-`lem-route-exists-right-derived-lower-shriek-comp-iso`
-(auxiliary; not a blueprint node).
+`lem-route-exists-right-derived-lower-shriek-comp-iso`.
 
 The compositor is the constructed product-graph isomorphism. The assertion concerns
 its compatibility with the specified compactification exchange, rather than the
@@ -1144,7 +1143,6 @@ private theorem change_pullback_compositor
 Source: Stacks Project, More on Etale Cohomology, Tags 0F7F and 0F7J; blueprint
 `sec-six-functors-basics/sk-thm-sf-comp-composition`, composition and base change;
 steps 4--7 of `lem-route-exists-right-derived-lower-shriek-comp-iso`.
-(auxiliary; not a blueprint node).
 
 Proof: form the product of the proper parts of the compactifications of the composite
 and of g. Its open over X contains the proper graph of X; its open over Y is proper

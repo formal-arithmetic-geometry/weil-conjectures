@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ObjectCohomologyPresheafResolution
 
 Source: Stacks Project, Section 01FT, equation-cohomology-object-site;
 Tag 06XR (1), lemma-compute-ext-resolutions.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-equivalences)
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ set_option linter.unusedVariables false in
 
 The existence of the displayed additive equivalences is the termwise sheafification,
 free-abelian, and Yoneda calculation from Stacks Project, Section 01FT.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-cocycle-equivalences)
 
 Proof: evaluate objectCohomologyPresheaf_resolution at V and remove both universe
 lifts using AddEquiv.ulift. Exact evaluation identifies the resulting presheaf

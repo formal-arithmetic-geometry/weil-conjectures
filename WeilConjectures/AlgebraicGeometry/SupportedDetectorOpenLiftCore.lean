@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
 /-! # The detector on the localized smaller open
 
 Source: Stacks Project, Tag 0A9A, induction paragraphs.
-(blueprint: lem-pc-supported-detector-open-lift-core).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ attribute [local instance] Functor.additive_of_preserves_binary_products
 /-- A supported perfect global object whose derived restriction detects the supported
 quasi-coherent objects on the smaller open. No assertion of global detection is made.
 Source: Stacks Project, Tag 0A9A, induction paragraphs and retract argument.
-(blueprint: lem-pc-supported-detector-open-lift-core).
 
 Proof:
 1. Choose V in s and let U be the union of s.erase V. Each remaining chart lies in U,

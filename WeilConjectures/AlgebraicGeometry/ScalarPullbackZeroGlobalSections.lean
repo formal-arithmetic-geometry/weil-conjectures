@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.ScalarGlobalSectionsComparison
 /-! # Pullback in degree zero on global sections
 
 Source: Stacks Project, Cohomology, Tags 01DZ, 0FKV; Modules, Tag 0096.
-(blueprint: lem-sc-scalar-pullback-zero-global-sections).
 -/
 
 @[expose] public section
@@ -159,7 +158,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Degree-zero cohomology pullback evaluates to the tensor-pullback unit on sections.
 Source: Stacks Project, Cohomology, Tags 01DZ, 0FKV; Modules, Tag 0096.
-(blueprint: lem-sc-scalar-pullback-zero-global-sections).
 
 Proof: The cocycle formula specifying moduleExtEquiv in degree zero identifies
 the rightDerivedZeroIsoSelf global section with evaluation at 1 of the unique

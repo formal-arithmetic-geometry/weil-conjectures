@@ -263,7 +263,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- Transposing the fixed derived adjunction data needs a larger elaboration budget.
 /-- Base change commutes with the relative unit of one open.
 Source: Stacks Project, Cohomology, Tags 08HY and 08HZ.
-(blueprint: new-relative-mv-first).
 Proof: Transpose the two paths under the adjunction for the inverse-image open
 followed by f'. Expand base change as the transpose of the pulled-back counit.
 The unit of the composite adjunction and the right-adjoint mate defining

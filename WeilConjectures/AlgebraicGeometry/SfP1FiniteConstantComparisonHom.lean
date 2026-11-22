@@ -31,7 +31,6 @@ attribute [local implicit_reducible] ordinaryFiniteSingleFunctor ordinaryFiniteD
 
 /-- The single-degree constant comparison is the native finite constant comparison.
 Source: blueprint thm-amb-p1-adjunction.proof.md, constant-object comparison.
-(auxiliary; not a blueprint node).
 
 Proof: the single-degree left-derived comparison is the exact-derived comparison
 followed by the exact single-degree comparison. Adjoining the single image of

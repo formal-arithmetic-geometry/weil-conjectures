@@ -23,8 +23,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 /-- On an affine open in the degree-at-least-r locus, the degree-at-least-(r+1)
 locus is quasi-compact. The closed sublevel locus and the universal degree-r
 criterion are explicit hypotheses, so this is only the descent step of the argument.
-Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph
-(blueprint: lem-weil-pbc-qf-degree-successor-affine-compact).
+Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
 
 Proof: Since W lies in the degree-at-least-r locus, the closed sublevel locus
 restricted to W is precisely the degree-r locus. Write W as Spec A and that closed

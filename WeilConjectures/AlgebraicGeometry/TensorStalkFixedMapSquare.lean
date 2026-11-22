@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.TensorStalkChainCoordinates
 /-! # Tensor compatibility of a fixed stalk chain map
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-tensor-stalk-fixed-map-square).
 -/
 
 @[expose] public section
@@ -171,8 +170,7 @@ for derived isomorphisms yields the displayed square for arbitrary d.
 No horizontal comparison is assumed invertible. The construction uses unbounded
 K-flat representatives; zero complexes and zero rings cause no exception.
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), the tensor-transitivity computation
-of Tag 0BYJ, with equation-bc before Tag 0DJ8 and the canonical tensor equation.
-(blueprint: lem-pc-tensor-stalk-fixed-map-square). -/
+of Tag 0BYJ, with equation-bc before Tag 0DJ8 and the canonical tensor equation. -/
 theorem tensorStalkComparison_fixedMap_square
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

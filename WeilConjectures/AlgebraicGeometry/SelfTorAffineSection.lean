@@ -13,8 +13,7 @@ public import WeilConjectures.RingTheory.ConormalExteriorModule
 
 /-! # Constant affine sections followed by tensor pullback
 
-Source: Stacks Project, Tags 01I6 and 0096.
-(blueprint: new-t2-self-tor-affine-section). -/
+Source: Stacks Project, Tags 01I6 and 0096. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -28,8 +27,7 @@ set_option backward.isDefEq.respectTransparency.types false
 -- Explicit restriction and tensor-pullback objects require more elaboration fuel.
 /-- Send an algebraic element to the associated sheaf on its chart, extend it by
 pushforward, and apply the canonical tensor-pullback unit.
-Source: Stacks Project, Tags 01I6 and 0096.
-(blueprint: new-t2-self-tor-affine-section). -/
+Source: Stacks Project, Tags 01I6 and 0096. -/
 noncomputable def selfTorAffineSection {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (U : Y.affineOpens) (M : ModuleCat.{u} (Γ(Y, U.1) : Type u)) (m : M) :
     (((tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙
@@ -45,8 +43,7 @@ noncomputable def selfTorAffineSection {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     C).val.app (op U.1) ((Scheme.Modules.restrictAppIso U.2.isoSpec.hom L W).inv a)
 
 /-- The ideal element represented by a kernel section on an affine chart.
-Source: Stacks Project, Tag 01R3.
-(blueprint: new-t2-self-tor-affine-section). -/
+Source: Stacks Project, Tag 01R3. -/
 noncomputable def selfTorIdealSection {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (U : Y.affineOpens) (b : i.ker.toModules.val.obj (op U.1)) : i.ker.ideal U :=
   ⟨i.ker.toModulesι.app U.1 b, by
@@ -56,8 +53,7 @@ noncomputable def selfTorIdealSection {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     exact hm⟩
 
 /-- The pure conormal wedge of a tuple of actual ideal sections.
-Source: Stacks Project, Tags 01R3 and 09PQ.
-(blueprint: new-t2-self-tor-affine-section). -/
+Source: Stacks Project, Tags 01R3 and 09PQ. -/
 noncomputable def selfTorIdealWedge {Z Y : Scheme.{u}} (i : Z ⟶ Y)
     (U : Y.affineOpens) (n : ℕ) (b : Fin n → i.ker.toModules.val.obj (op U.1)) :
     conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n :=
@@ -67,7 +63,6 @@ noncomputable def selfTorIdealWedge {Z Y : Scheme.{u}} (i : Z ⟶ Y)
 /-- Applying an affine module map to its constant section gives the constant section
 of the image element.
 Source: Stacks Project, Tags 01I6 and 0096.
-(blueprint: new-t2-self-tor-affine-section).
 Proof: Naturality of the tilde adjunction unit, of the sheaf module map, and of the
 canonical tensor-pullback adjunction unit. -/
 theorem selfTorAffineSection_map {Z Y : Scheme.{u}} (i : Z ⟶ Y)

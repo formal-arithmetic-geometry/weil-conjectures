@@ -19,7 +19,6 @@ namespace AlgebraicGeometry.Scheme
 /-- The identity geometric stalk is computed by the global sections map in the
 algebraically closed case.
 Source: Stacks Project, Lemma 59.39.3 (Tag 0A3H).
-(blueprint: lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant-stalk).
 
 Proof: The marked lift of any pointed neighbourhood is a morphism from the
 identity neighbourhood. For injectivity, equality of germs is witnessed on a

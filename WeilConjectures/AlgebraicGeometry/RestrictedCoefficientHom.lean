@@ -9,8 +9,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # The coefficient action on an internal Hom
 
-Source: Stacks Project, Algebraization, Tag 099I
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I.
 -/
 
 @[expose] public noncomputable section
@@ -346,8 +345,7 @@ private def coefficientHomComparisonIso :
 
 /-- The internal Hom from a B-module to an R-module has a functorial B-module
 structure whose restriction to R is naturally the usual internal Hom.
-Source: Stacks Project, Algebraization, Tag 099I, the coefficient action on E prime
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I, the coefficient action on E prime.
 Proof: over U let b act on a local R-linear map by precomposing multiplication by
 b on the B-module source. The commuting source endomorphisms give the module
 laws. Restriction commutes with these actions, and the underlying additive

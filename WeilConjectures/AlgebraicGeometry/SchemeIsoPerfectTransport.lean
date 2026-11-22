@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SchemeIsoPerfectLocalTransport
 
 /-! # Perfect objects under scheme isomorphisms
 
-Source: Stacks Project, perfect.tex, Tag 08EB, transport along an affine isomorphism
-(blueprint: lem-pc-scheme-iso-perfect-transport).
+Source: Stacks Project, perfect.tex, Tag 08EB, transport along an affine isomorphism.
 -/
 
 @[expose] public section
@@ -26,8 +25,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- The inverse of a derived equivalence induced by an isomorphism of schemes preserves
 perfect objects.
-Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport
-(blueprint: lem-pc-scheme-iso-perfect-transport).
+Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport.
 
 Proof: The localization comparison identifies the forward functor with exact pushforward
 along s.hom. Its inverse is consequently isomorphic to exact pushforward along s.inv,

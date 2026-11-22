@@ -22,7 +22,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 Source: Stacks Project, Tag 01YH, `lemma-property-irreducible`, proof, the sentence
 "By (3)(c) we see that r = 1."
-(blueprint: lem-pc-r2-rank-one-generic-ideal-inclusion)
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ set_option linter.unusedVariables false in
 ideal pushforward inclusion with invertible generic stalk.
 Source: Stacks Project, Tag 01YH, `lemma-property-irreducible`, proof, the first
 ideal inclusion and the rank-one calculation using Tag 01YE.
-(blueprint: lem-pc-r2-rank-one-generic-ideal-inclusion)
 
 Proof: Apply the generic-point ideal inclusion of Tag 01YE to the coherent module
 G and its maximal-ideal-annihilated stalk. This gives a coherent ideal J, an integer

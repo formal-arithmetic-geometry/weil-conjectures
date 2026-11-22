@@ -26,7 +26,6 @@ set_option backward.isDefEq.respectTransparency false in
 compatibly with its evaluation counit.
 
 Source: Stacks Project, duality.tex, Tags 0BUZ, 0BV0, and 0AX3.
-(blueprint: lem-sc-underived-affine-hom-counit)
 
 Proof: The restriction of the unit of f_*O_X is definitionally equal to f_* of
 the unit of O_X: sections and restriction maps are identical, as are their

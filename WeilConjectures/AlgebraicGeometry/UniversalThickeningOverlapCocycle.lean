@@ -28,7 +28,6 @@ and satisfy the cocycle, without asserting the existence of a scheme glue datum.
 
 Source: Stacks Project, More on Morphisms, Tag 04F3, proof of Lemma 37.7.1,
 paragraph beginning "By the general remarks".
-(blueprint: lem-weil-pbc-universal-thickening-overlap-cocycle)
 
 Proof: The existing open-pieces theorem gives unique inverse-image opens for
 each s(k,l). Its closed image has open complement with empty preimage, so

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.SiteHypercoverFiniteExtensionBas
 
 Source: Stacks Project, Tag 0DAU, characterization by invertible degeneracy components,
 and Tag 0DAV, the new index set.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -138,7 +137,6 @@ private theorem top_label_cases
 
 /-- The explicit top degeneracies force splitness and identify the new nondegenerates.
 Source: Stacks Project, Tags 0DAV and 0DAU.
-(auxiliary; not a blueprint node).
 
 Proof: Restriction preserves nondegeneracy in every old degree: any degeneracy
 source has smaller degree and hence still belongs to the restriction. The labels

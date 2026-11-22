@@ -11,7 +11,6 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.TraceDiagonal
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the exchange and projection computations in both triangles.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -121,12 +120,12 @@ namespace AlgebraicGeometry.Etale.SupportedTrace
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- The existing compactly supported direct image, with its coefficient category explicit.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 abbrev push {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :=
   rightDerivedLowerShriek (ModuleCat.{u + 1} A) f
 
 /-- The kernel object before integration along the second coordinate.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 abbrev kernel {X Y : Scheme.{u}} (f : X ⟶ Y)
     (B M : DerivedCategoryModule A X) :=
   CoordinateTrace.tensor A (pullback f f)
@@ -134,7 +133,7 @@ abbrev kernel {X Y : Scheme.{u}} (f : X ⟶ Y)
     ((CoordinateTrace.pull A (pullback.snd f f)).obj B)
 
 /-- The canonical compact-support projection formula in outside-coefficient-first order.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 def orderedProjection {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
     (M : DerivedCategoryModule A Y) (E : DerivedCategoryModule A X) :
     CoordinateTrace.tensor A Y M ((push A f).obj E) ≅
@@ -145,7 +144,7 @@ def orderedProjection {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
       (push A f).mapIso (CoordinateTrace.swap A X E ((CoordinateTrace.pull A f).obj M))
 
 /-- Inverse projection and exchange, with the final symmetry putting the coefficient first.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 def comparisonIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (B : DerivedCategoryModule A X) :
     (CoordinateTrace.pull A (pullback.fst f f) ⋙
@@ -159,7 +158,7 @@ def comparisonIso {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
         ((derivedTensorSymmetry (ModuleCat.{u + 1} A) X).app B).symm)
 
 /-- The component of the canonical kernel comparison.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 def comparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
     (B M : DerivedCategoryModule A X) :
     (push A (pullback.snd f f)).obj (kernel A f B M) ≅
@@ -168,7 +167,7 @@ def comparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
   (comparisonIso A f B).app M
 
 /-- Interchange the coordinates under direct image, using the canonical compositors.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 def directComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
     push A (pullback.snd f f) ⋙ push A f ≅
       push A (pullback.fst f f) ⋙ push A f :=
@@ -177,7 +176,7 @@ def directComparison {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] :
       rightDerivedLowerShriekCompIso A (pullback.fst f f) f
 
 /-- Express the coefficient-first twisted pullback as the pullback of a tensor on the base.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 def coefficientPull {X Y : Scheme.{u}} (f : X ⟶ Y)
     {B : DerivedCategoryModule A X} (L K : DerivedCategoryModule A Y)
     (e : B ≅ (CoordinateTrace.pull A f).obj L) :
@@ -188,7 +187,7 @@ def coefficientPull {X Y : Scheme.{u}} (f : X ⟶ Y)
     (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) f L K).symm
 
 /-- The common-base comparison for the whole twisted pullback object.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 def coordinateTwisted {X Y : Scheme.{u}} (f : X ⟶ Y)
     {B : DerivedCategoryModule A X} (L K : DerivedCategoryModule A Y)
     (e : B ≅ (CoordinateTrace.pull A f).obj L) :
@@ -202,7 +201,7 @@ def coordinateTwisted {X Y : Scheme.{u}} (f : X ⟶ Y)
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
 
 /-- Insert the diagonal class and integrate along the second projection, before exchange.
-Source: thm-amb-p1-adjunction.proof.md (auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md. -/
 def insertion {B : DerivedCategoryModule A X}
     (δ : (push A (TraceDiagonalDatum.diagonal f)).obj
         (derivedTensorUnit (ModuleCat.{u + 1} A) X) ⟶
@@ -222,8 +221,7 @@ def insertion {B : DerivedCategoryModule A X}
       (push A (pullback.snd f f))
 
 /-- The insertion component with its target written as the pushed-forward kernel.
-Source: thm-amb-p1-adjunction.proof.md, insertion of the diagonal class
-(auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md, insertion of the diagonal class. -/
 def insertionApp {B : DerivedCategoryModule A X}
     (δ : (push A (TraceDiagonalDatum.diagonal f)).obj
         (derivedTensorUnit (ModuleCat.{u + 1} A) X) ⟶
@@ -240,8 +238,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [SymmetricCategory C] [MonoidalClosed C] [Abelian.HasFunctorialFlatResolution C]
 
 /-- The canonical right unitor with its unit object explicitly named.
-Source: the right-unitor cancellation in thm-amb-p1-adjunction.proof.md
-(auxiliary; not a blueprint node).
+Source: the right-unitor cancellation in thm-amb-p1-adjunction.proof.md.
 This is defined for general coefficients before specializing to modules. -/
 def unitRightUnitor (Z : Scheme.{u})
     (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology C)) :
@@ -282,8 +279,7 @@ attribute [local irreducible] DerivedCategory instCategoryDerivedCategory
 attribute [local implicit_reducible] rightDerivedLowerShriek derivedTensorRight
 
 /-- The component of the canonical unit is insertion followed by comparison.
-Source: thm-amb-p1-adjunction.proof.md, definition of the diagonal unit
-(auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md, definition of the diagonal unit. -/
 theorem unit_app_eq (M : DerivedCategoryModule A X) :
     (unit A d).app M =
       SupportedTrace.insertionApp A f d.diagonalClass M ≫

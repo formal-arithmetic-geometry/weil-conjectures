@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 /-! # Source and class coherence before coefficients
 
 Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-module-scalar-source-class-formula).
 -/
 
 @[expose] public section
@@ -95,7 +94,6 @@ private theorem single_source_class_attach
 set_option backward.isDefEq.respectTransparency false in
 /-- Commute the source and class factors before attaching any coefficient tail.
 Source: Stacks Project, Tags 03D7 and 03Q8, scalar inverse-image composition.
-(blueprint: lem-sbc-raw-module-scalar-source-class-formula).
 
 Proof: Apply rawModuleScalar_sheaf_composition to the free represented module
 sheaf. Naturality of upperStarComp on the free abelian generator attaches that

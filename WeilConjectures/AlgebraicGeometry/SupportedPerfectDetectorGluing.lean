@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SupportedKoszulUnitSummand
 /-! # Gluing supported perfect zero detectors
 
 Source: Stacks Project, Tag 0A9A, induction step.
-(blueprint: lem-pc-supported-perfect-detector-gluing).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 /-- The supported Koszul gluing step for a finite affine cover with at least two members.
 The hypothesis supplies zero detectors only for schemes with strictly smaller covers.
 Source: Stacks Project, Tag 0A9A, the open-cover induction paragraphs.
-(blueprint: lem-pc-supported-perfect-detector-gluing).
 
 Proof:
 1. Choose a member V of s and put U equal to the union of the remaining members.

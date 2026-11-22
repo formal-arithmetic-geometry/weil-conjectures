@@ -33,8 +33,7 @@ set_option backward.isDefEq.respectTransparency false in
 and identify its germ components with projection pullbacks to the limit.
 This supplies the input to derived continuity, without applying continuity and without
 asserting that either the target cocone is a colimit or the mate is invertible.
-Source: Stacks Project, Tag 03Q9, proof paragraphs 1 and 3; Tag 03Q8
-(blueprint: lem-weil-pbc-strict-local-mate-continuity-presentation).
+Source: Stacks Project, Tag 03Q9, proof paragraphs 1 and 3; Tag 03Q8.
 
 Proof: use the small representative category of affine pointed neighbourhoods of s.
 It is cofiltered by strictHenselizationAffineProperties. Base change its diagram along f,

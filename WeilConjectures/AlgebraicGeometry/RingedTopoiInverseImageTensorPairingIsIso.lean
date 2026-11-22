@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.RingedToposKFlatPullback
 
 /-! # Universality of the transported tensor pairing
 Source: Stacks Project, Modules on Sites, Tag 03EL.
-(blueprint: lem-weil-pbc-algebraic-inverse-image-pairing-isIso).
 -/
 
 @[expose] public section
@@ -519,7 +518,6 @@ private theorem transpose_bilinear
 -- The proof checks transported module structures in four bilinear identities and two inverses.
 /-- The map representing the transported pure pairing is invertible.
 Source: Stacks Project, Modules on Sites, Tag 03EL, the third equality of the Hom chain.
-(blueprint: lem-weil-pbc-algebraic-inverse-image-pairing-isIso).
 
 Proof: transport the product-preserving right adjoint on set sheaves to modules over R,
 using the adjoint of I.ringUnderlying as the structural ring map. The graph identities for

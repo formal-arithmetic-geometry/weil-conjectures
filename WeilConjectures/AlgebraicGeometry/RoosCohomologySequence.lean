@@ -24,8 +24,7 @@ namespace AlgebraicGeometry.Scheme.ProEt
 
 /-- The natural short exact sequence from the long exact sequence of Cone(1-T)[-1].
 
-proof.md, first paragraph
-(auxiliary; not a blueprint node).
+proof.md, first paragraph.
 
 Proof: Apply the cone long exact cohomology sequence to the transition endomorphism
 on the termwise product. Exact products identify its cohomology with the product

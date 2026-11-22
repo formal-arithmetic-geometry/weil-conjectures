@@ -32,7 +32,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Coherent transitions and cone comparisons for the concrete restricted single complexes.
 Source: Stacks Project, Tag 09Z1 proof (restriction to an affine etale object), and
 Tag 0EZM (canonical coefficient maps).
-(blueprint: lem-sbc-restricted-affine-single-coherence).
 
 Proof: First substitute hD' and the four heterogeneous data equalities to reduce to
 the concrete diagram, cone, K, G and L. Restrict each transition by

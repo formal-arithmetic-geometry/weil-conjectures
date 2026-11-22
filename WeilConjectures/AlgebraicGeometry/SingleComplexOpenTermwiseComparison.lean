@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTermwiseCounitCompatib
 
 Source: Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc
 preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-termwise-comparison).
 -/
 
 @[expose] public section
@@ -105,8 +104,7 @@ For empty opens there is no z; top opens, zero complexes and zero rings use
 exactly the same isomorphisms. No base flatness or bounds are needed.
 
 Source: Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc
-preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-termwise-comparison). -/
+preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE. -/
 theorem exists_singleComplexOpen_termwise_comparison
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

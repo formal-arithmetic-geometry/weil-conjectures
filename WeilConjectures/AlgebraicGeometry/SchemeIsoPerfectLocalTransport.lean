@@ -24,7 +24,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The derived equivalence on corresponding open sites commutes with restriction.
 Source: Stacks Project, Tag 09IR; restriction-comparison part of step 1 of
 lem-pc-affine-derived-open-transport.
-(blueprint: lem-pc-scheme-iso-derived-restriction-square).
 
 Proof: Restrict s to the isomorphism s.hom.preimageIso U between the open subschemes.
 Pushforward along this isomorphism and its inverse gives an exact equivalence on
@@ -132,8 +131,7 @@ private theorem localRestrictionSquare {X Y : Scheme.{u}} (s : X ≅ Y)
 set_option backward.isDefEq.respectTransparency true in
 /-- Local transport of a perfect model along a scheme isomorphism. The proof follows the
 localization comparison, restriction compatibility, and transport of strictly perfect
-complexes described in Stacks Project, perfect.tex, Tag 08EB.
-(blueprint: lem-pc-scheme-iso-perfect-local-transport) -/
+complexes described in Stacks Project, perfect.tex, Tag 08EB. -/
 theorem scheme_iso_local_perfect_transport {X Y : Scheme.{u}}
     (s : X ≅ Y)
     [HasDerivedCategory.{w₁} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

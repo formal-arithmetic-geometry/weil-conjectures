@@ -15,9 +15,8 @@ import Mathlib.RingTheory.Localization.Ideal
 
 /-! # Spreading a stalk nonzerodivisor generator to a Cartier equation
 
-Source: Stacks Project, divisors.tex, Tag 0AG8 (lemma-effective-Cartier-in-points),
-and Algebra, Tag 061L (lemma-regular-sequence-in-neighbourhood).
-(blueprint: lem-sfb-stalk-nonzerodivisor-cartier-spreading).
+Source: Stacks Project, divisors.tex, Tag 0AG8,
+and Algebra, Tag 061L.
 
 The two statements are the ring assertion and the scheme assertion of the node.
 The ideal stalk in the latter is expressed by extending the ideal on an affine
@@ -111,8 +110,7 @@ set_option backward.isDefEq.respectTransparency false in
 Cartier ideal. The affine germ presentation denotes the ideal stalk, not an equation on
 an open neighbourhood. The generator may be a unit at a point outside the closed subscheme.
 
-Source: Stacks Project, divisors.tex, Tag 0AG8 (lemma-effective-Cartier-in-points), (2).
-(blueprint: lem-sfb-stalk-nonzerodivisor-cartier-spreading).
+Source: Stacks Project, divisors.tex, Tag 0AG8, (2).
 
 Proof:
 5. Fix x and an affine neighbourhood Spec B. Local Noetherianity makes B Noetherian.

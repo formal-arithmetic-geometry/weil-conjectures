@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.IdealSheafFiniteType
 /-! # Extending a quasi-coherent section from an ideal power
 
 Source: Stacks Project, Tag 01YB, lemma-homs-over-open, structure-module case.
-(blueprint: lem-pc-quasicoherent-open-section-ideal-extension)
 -/
 
 @[expose] public section
@@ -59,7 +58,6 @@ private theorem power_factor {X : Scheme.{u}} {P : X.Modules}
 set_option backward.isDefEq.respectTransparency false in
 /-- A section on the complement of an ideal support extends from an ideal power.
 Source: Stacks Project, Tag 01YB, lemma-homs-over-open, first part of the proof.
-(blueprint: lem-pc-quasicoherent-open-section-ideal-extension)
 
 Proof: The image of the section map O_U -> E|U is quasi-coherent of finite type.
 Extend it to a finite-type quasi-coherent submodule G of E by 01PF. Since X is

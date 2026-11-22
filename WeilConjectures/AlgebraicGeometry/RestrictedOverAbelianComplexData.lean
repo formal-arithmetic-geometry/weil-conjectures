@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleCoherence
 /-! # Geometric complex data for restricted abelian cohomology
 
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-over-abelian-complex-data).
 -/
 
 @[expose] public section
@@ -23,15 +22,13 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
-/-- The abelian coefficient sheaf pulled back from the fixed scheme W. 
-(blueprint: lem-sbc-restricted-over-abelian-complex-data)
+/-- The abelian coefficient sheaf pulled back from the fixed scheme W.
 -/
 noncomputable def restrictedOverCoefficient {W : Scheme.{u}}
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (A : Over W) :=
   (upperStar AddCommGrpCat.{u + 1} A.hom).obj F
 
-/-- Integer-degree cohomology on the actual etale fibre product. 
-(blueprint: lem-sbc-restricted-over-abelian-complex-data)
+/-- Integer-degree cohomology on the actual etale fibre product.
 -/
 noncomputable def restrictedOverCohomology {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
@@ -42,8 +39,7 @@ noncomputable def restrictedOverCohomology {W S : Scheme.{u}} (k : W ⟶ S)
         (restrictedOverCoefficient F A))))
 
 /-- The canonical map is derived pullback followed by the coefficient identification.
-It is written explicitly and is not selected from an existence theorem. 
-(blueprint: lem-sbc-restricted-over-abelian-complex-data)
+It is written explicitly and is not selected from an existence theorem.
 -/
 noncomputable def restrictedOverCohomologyMap {W S : Scheme.{u}} (k : W ⟶ S)
     (F : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
@@ -67,7 +63,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- Geometric complex data for restricted abelian cohomology of fixed coefficients.
 Source: Stacks Project, Tag 09Z1, affine-object reduction in lemma-relative-colimit;
 Tag 0EZM, lemma-colimit-variant-complexes, before invoking continuity.
-(blueprint: lem-sbc-restricted-over-abelian-complex-data).
 
 Proof: Base change D and c to U using the pullbacks U times_S D(i). The universal
 property of each pullback defines the transition arrows and cone arrows, proves

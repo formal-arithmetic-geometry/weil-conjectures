@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalBaseChangeClosedStalk
 /-! # Invertibility of the canonical strict-local stalk comparisons
 
 Source: Stacks Project, Tags 03Q9 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos-source).
 -/
 
 @[expose] public section
@@ -63,7 +62,6 @@ set_option linter.unusedVariables false in
 stalk. This says nothing about either exchange map or compatibility with exchange.
 Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images, and Tag 03QO,
 lemma-cohomology-strictly-henselian.
-(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-stalk-isos-source).
 
 Proof:
 1. Enlarge the point fields along ν and ν followed by ι. Étale stalks are unchanged

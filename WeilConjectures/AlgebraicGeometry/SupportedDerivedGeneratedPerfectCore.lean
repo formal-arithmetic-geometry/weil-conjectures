@@ -17,7 +17,6 @@ import WeilConjectures.CategoryTheory.GeneratorTowerNormalize
 
 Source: Stacks Project, duality.tex, proof of Lemma 48.4.3(3), Section Tag 0E4G;
 derived.tex, lemma-write-as-colimit (Tag 09SN).
-(blueprint: lem-sc-supported-derived-generated-perfect-core).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry
 /-- A given compact supported detector builds each supported quasi-coherent object.
 Source: Stacks Project, duality.tex, proof of Lemma 48.4.3(3), Section Tag 0E4G;
 derived.tex, lemma-write-as-colimit (Tag 09SN).
-(blueprint: lem-sc-supported-derived-generated-perfect-core).
 
 Proof:
 1. Let P be the ambient object property of quasi-coherent cohomology with zero stalks

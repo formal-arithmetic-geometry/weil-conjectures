@@ -18,7 +18,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # Balanced tensor pullback for ordinary complexes
 
 Source: Stacks Project, Cohomology, Lemma 20.27.4 (Tag 08DE), proof.
-(blueprint: lem-pc-relative-tensor-pullback-complex-comparison)
 -/
 
 @[expose] public section
@@ -54,8 +53,7 @@ In total degree n both sides use the coproduct over p+q=n, and the second
 differential has the same sign (-1)^p. Forgetting scalars preserves these
 coproducts. Taking the coproduct of the summand isomorphisms in each degree
 therefore gives mutually inverse chain maps of abelian sheaves. No bound on
-A or L is needed; zero modules and empty schemes satisfy the same identities.
-(blueprint: lem-pc-relative-tensor-pullback-complex-comparison) -/
+A or L is needed; zero modules and empty schemes satisfy the same identities. -/
 theorem relativeTensorPullback_complex_comparison
     {X S : Scheme.{u}} (f : X ⟶ S)
     (G : SheafOfModules.{u} (moduleRings S.toRingedSpace) ⥤

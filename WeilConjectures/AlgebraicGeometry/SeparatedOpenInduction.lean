@@ -12,8 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 # Induction principle for separated quasi-compact opens
 
 Source: Stacks Project, Cohomology of Schemes, Lemma 08DR (coherent-lemma-induction-principle),
-proof, first induction for separated quasi-compact opens
-(blueprint: lem-sc-invert-s-cohomology-separated-induction).
+proof, first induction for separated quasi-compact opens.
 -/
 
 @[expose] public section
@@ -25,7 +24,7 @@ namespace AlgebraicGeometry
 /-- A property holding on affine opens and stable under gluing a quasi-compact open with an
 affine open holds on every separated quasi-compact open. Source: Stacks Project, Cohomology of
 Schemes, Lemma 08DR (coherent-lemma-induction-principle), proof, first induction for separated
-quasi-compact opens (blueprint: lem-sc-invert-s-cohomology-separated-induction).
+quasi-compact opens.
 
 Proof: choose a finite affine cover of `W` and induct on its cardinality; the empty open is
 affine. Adjoin the last affine `V` to the union `U` of the preceding charts. Each chart's

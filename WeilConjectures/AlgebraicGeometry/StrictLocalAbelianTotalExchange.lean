@@ -33,7 +33,6 @@ open Scheme Etale
 with cohomology computed in a category of modules.
 
 Source: Stacks Project, Tag 03QO and the map-on-stalks paragraph of Tag 095T.
-(blueprint: lem-weil-pbc-strict-local-abelian-total-exchange)
 
 Proof: by Tag 03QO, the closed-point germ on each strict local base identifies
 sections with the stalk and is exact. Locality of φ makes the image of the

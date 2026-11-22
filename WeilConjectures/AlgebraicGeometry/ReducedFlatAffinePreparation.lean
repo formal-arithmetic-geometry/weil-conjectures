@@ -46,9 +46,7 @@ obtaining affine reduced Z, flat and locally finitely presented over S.
 Restriction preserves the universal homeomorphism to the original pullback.
 The homeomorphism from S to U lifts eta to its generic point. No geometric
 irreducibility assumption or extension of the generic residue field is used.
-The generic-point hypothesis excludes an empty base; an empty source is allowed.
-
-(blueprint: lem-sbc-reduced-flat-affine-preparation) -/
+The generic-point hypothesis excludes an empty base; an empty source is allowed. -/
 theorem exists_reduced_flat_affine_preparation
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

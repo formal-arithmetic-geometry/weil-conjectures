@@ -33,7 +33,6 @@ namespace AlgebraicGeometry
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, both proof paragraphs;
 Stacks Project, Tags 00KH, 00FV, 054M, 03SI and 03QO.
-(blueprint: zero-dimensional-global-sections-exact).
 
 Proof: The finite-type dimension-zero theorem makes the underlying space finite and
  discrete. Pass to the reduction, a universal homeomorphism by Tag 054M; its étale

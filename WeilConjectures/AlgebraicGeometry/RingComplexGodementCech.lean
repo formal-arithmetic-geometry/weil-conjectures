@@ -115,7 +115,6 @@ private theorem godement_flasque (X : Scheme.{u}) (q : ℕ) :
 
 /-- The Godement mapping fibre has the augmented ordered localization model.
 Source: Stacks Project, Tags 099D(d), 0FKS, 01ET, 01EQ, 01FJ.
-(auxiliary; not a blueprint node)
 
 Proof: cover Spec A minus V(I) by D(f_i) for the supplied generating list. Its
 ordered intersections are the principal affine opens for the corresponding

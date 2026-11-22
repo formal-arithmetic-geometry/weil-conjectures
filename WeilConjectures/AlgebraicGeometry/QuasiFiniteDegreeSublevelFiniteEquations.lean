@@ -21,8 +21,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme.Hom
 
 /-- The closed degree-at-most-r locus on an affine open has finitely many equations.
-Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph
-(blueprint: lem-weil-pbc-qf-degree-sublevel-finite-equations).
+Source: Stacks Project, More on Morphisms, Tag 07RZ, proof, second paragraph.
 
 Proof: identify W with Spec A and write its closed sublevel locus as V(I). On W,
 the lower bound r identifies the sublevel locus with the degree-r locus. Thus the

@@ -21,7 +21,6 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 /-! # Dividing a section which vanishes on the closed fibre
 
 Source: Stacks Project, More on Morphisms, Tag 0EX8, general-case proof.
-(blueprint: new-valuation-closed-fibre-section-divisible)
 
 Proof: If A is a field, its closed fibre inclusion is an isomorphism, so the unit
 is an isomorphism and s = 0; choose pi = t = 0. Otherwise identify the quotient
@@ -167,7 +166,6 @@ set_option linter.unusedVariables false in
 /-- A section vanishing on the closed fibre is divisible by a maximal-ideal element,
 assuming the closed fibre is integral.
 Source: Stacks Project, More on Morphisms, Tag 0EX8.
-(blueprint: new-valuation-closed-fibre-section-divisible)
 
 Proof: If A is a field, its closed fibre inclusion is an isomorphism, so the unit
 is an isomorphism and s = 0; choose pi = t = 0. Otherwise identify the quotient

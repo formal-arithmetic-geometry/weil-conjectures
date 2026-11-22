@@ -10,7 +10,7 @@ import all WeilConjectures.AlgebraicGeometry.SectionOrdinaryOplaxNormalization
 /-! # The actual internal total oplax arrow in section modules
 
 Source: Stacks Project, Cohomology on Sites, Tag 07A4, displayed total comparison;
-Modules on Sites, Tag 03EL (auxiliary; not a blueprint node).
+Modules on Sites, Tag 03EL.
 
 All tensors are relative to the pulled-back coefficient ring. The totalization is the
 existing signed direct-sum total, including its infinite degreewise sums. The helpers
@@ -31,7 +31,7 @@ namespace AlgebraicGeometry.ProEtale.ModuleRingedComparison
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 /-- Equality of specified chain maps and of their homotopy and derived images.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 def TotalMapAgreement (X : Scheme.{u})
     [HasDerivedCategory.{u + 1} (modules Λ X)]
     {P Q : CochainComplex (modules Λ X) ℤ} (a b : P ⟶ Q) : Prop :=
@@ -48,7 +48,7 @@ equalities, both inverse laws, every summand, local scalar formulas, signed diff
 unit multiplication, naturality and the three constraint diagrams. All complex arguments
 are arbitrary integer-indexed complexes; flat-term K-flat subcategories introduced in
 the node are context for later derived-tensor computation and impose no restriction here.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 def SectionTotalNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{u + 1} (modules Λ X)] : Prop :=
   (∀ P Q : CochainComplex (internalModules Λ Y) ℤ,
@@ -478,7 +478,7 @@ private theorem internal_apply_eq_of_comp (X : Scheme.{u})
     (congrArg (fun z ↦ (c.hom.hom.app W) z) hb)
 
 -- The twelve dependent comparison clauses share the same signed tensor structures.
-/-- Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node).
+/-- Source: Stacks 07A4 and 03EL.
 Proof: preserve the full coproduct indexed by p+q=n using the specified left adjunctions.
 On each summand ordinary oplax normalization identifies the actual internal map with the
 ringed comparison, so coproduct uniqueness gives equality in every degree. Naturality

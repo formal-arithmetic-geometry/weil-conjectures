@@ -10,8 +10,7 @@ import WeilConjectures.AlgebraicGeometry.SfEtaleCompactProjectionCoherence
 
 /-! # Exceptional tensor maps under composition and etale restriction
 
-proof.md`, paragraph 3
-(auxiliary; not a blueprint node).
+proof.md`, paragraph 3.
 
 All categories are ordinary unbounded etale module derived categories. We use
 supplied compactifications and the graph-normalized compositor, with no qc or
@@ -278,8 +277,7 @@ attribute [local irreducible] sfEtaleAmbientTensorMap
 
 /-- The counit-preserving comparison c, the adjunction conjugate of the inverse
 graph-normalized compact-support compositor.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
 noncomputable def sfExceptionalCompComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
@@ -297,8 +295,7 @@ noncomputable def sfExceptionalCompComparison
 
 /-- The specified morphism delta = c at the coefficient unit followed by the
 inverse of theta_a at omega_b. Its data are the two specified maps.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
 noncomputable def sfExceptionalCompDelta
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
@@ -322,8 +319,7 @@ noncomputable def sfExceptionalCompDelta
 /-- The canonical reassociation from (W tensor a*V) tensor (ba)*K to
 W tensor a*(V tensor b*K), using pullback composition, tensor associativity
 and the inverse of the canonical oplax pullback tensor comparison.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
 noncomputable def sfExceptionalTensorReassociation
     (A : Type (u + 1)) [CommRing A]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
@@ -352,16 +348,15 @@ stated invertibility consequence.
 
 Proof plan (the eight steps of the node):
 1. Normalize compact support by the graph compositor. Its conjugate is c, so the
-   transported counit is the composite counit (def-weil-pbc-composite-adjunction).
-   Write phi_f = inverse projection followed by counit tensor identity and unitor
-   (lem-sf-etale-ambient-adjoint-projection, lem-kun-tensor-unit).
+   transported counit is the composite counit.
+   Write phi_f = inverse projection followed by counit tensor identity and unitor.
 2. Put M = omega_a tensor a*omega_b, s = theta_a(omega_b), d = c_A inverse s.
    The transpose of s is phi_a(omega_b). Consequently the scalar composite
    counit evaluated on d is epsilon_b followed after F_b(phi_a(omega_b)).
    Both c_A and s are invertible, proving delta is invertible.
 3. Naturality of theta_a follows by transposing and counit naturality. The
    iterated tensor map has composite transpose phi_b(K) F_b(phi_a(omega_b tensor b*K)).
-4. Projection associativity (lem-sf-etale-compact-projection-coherence) rewrites
+4. Projection associativity rewrites
    phi_a(omega_b tensor b*K) as (phi_a(omega_b) tensor identity) q_a(M,b*K).
    Naturality of q_b then combines its scalar counits.
 5. Projection/compositor coherence replaces the two inverse projections by q_h.
@@ -381,8 +376,7 @@ Proof plan (the eight steps of the node):
    compose with lambda_K and lambda_A tensor identity to obtain the restriction
    equation below. No boundedness, constructibility, qc or Noetherian input occurs.
 
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
 theorem sfExceptionalTensorTransitivity
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
@@ -551,8 +545,7 @@ theorem sfExceptionalTensorTransitivity
 
 /-- The normalized etale comparison to the left-derived model of exact pullback.
 The only instance used is the normalized theorem on the selected adjunction.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
 noncomputable def sfEtaleDerivedRightAdjointIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} (a : X ⟶ Y) [Etale a] [IsSeparated a]
@@ -602,8 +595,7 @@ private theorem etale_derived_normalization
 
 /-- The counit-preserving restriction comparison lambda, obtained by replacing
 G_a in c by normalized etale inverse image.
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
 noncomputable def sfExceptionalEtaleRestrictionComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)
@@ -625,16 +617,15 @@ comparison. Pullback is written on its canonically equivalent left-derived model
 
 Proof plan (the eight steps of the node):
 1. Normalize compact support by the graph compositor. Its conjugate is c, so the
-   transported counit is the composite counit (def-weil-pbc-composite-adjunction).
-   Write phi_f = inverse projection followed by counit tensor identity and unitor
-   (lem-sf-etale-ambient-adjoint-projection, lem-kun-tensor-unit).
+   transported counit is the composite counit.
+   Write phi_f = inverse projection followed by counit tensor identity and unitor.
 2. Put M = omega_a tensor a*omega_b, s = theta_a(omega_b), d = c_A inverse s.
    The transpose of s is phi_a(omega_b). Consequently the scalar composite
    counit evaluated on d is epsilon_b followed after F_b(phi_a(omega_b)).
    Both c_A and s are invertible, proving delta is invertible.
 3. Naturality of theta_a follows by transposing and counit naturality. The
    iterated tensor map has composite transpose phi_b(K) F_b(phi_a(omega_b tensor b*K)).
-4. Projection associativity (lem-sf-etale-compact-projection-coherence) rewrites
+4. Projection associativity rewrites
    phi_a(omega_b tensor b*K) as (phi_a(omega_b) tensor identity) q_a(M,b*K).
    Naturality of q_b then combines its scalar counits.
 5. Projection/compositor coherence replaces the two inverse projections by q_h.
@@ -654,8 +645,7 @@ Proof plan (the eight steps of the node):
    compose with lambda_K and lambda_A tensor identity to obtain the restriction
    equation below. No boundedness, constructibility, qc or Noetherian input occurs.
 
-Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3
-(auxiliary; not a blueprint node). -/
+Source: blueprint `thm-asd-smooth-tensor.proof.md`, paragraph 3. -/
 theorem sfExceptionalTensorEtaleRestriction
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (a : X ⟶ Y) (b : Y ⟶ Z)

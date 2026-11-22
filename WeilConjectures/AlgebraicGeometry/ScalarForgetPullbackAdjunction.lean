@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.ScalarForgetPullbackIntegerUnit
 /-! # Canonical scalar-forgetful inverse-image comparison with adjunction and unit coherence
 
 Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-forget-pullback-adjunction).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ attribute [local instance] Sheaf.monoidalCategory
 
 /-- Canonical scalar-forgetful inverse-image comparison with adjunction and unit coherence.
 Source: Stacks Project, Tags 0096 and 01F7.
-(blueprint: new-sc-scalar-forget-pullback-adjunction).
 
 Proof: Adjunct the forgotten scalar inverse-image unit to obtain a natural map
 from abelian inverse image to forgotten scalar inverse image. On every stalk this

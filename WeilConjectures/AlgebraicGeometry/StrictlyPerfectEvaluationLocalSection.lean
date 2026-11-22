@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryEvaluationDifferential
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ,
 proof of lemma-dual-perfect-complex; Tags 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-evaluation-local-section).
 -/
 
 @[expose] public section
@@ -47,7 +46,6 @@ comparison square with a prescribed ordinary chain map is part of the statement.
 
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ,
 proof of lemma-dual-perfect-complex; Tags 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-evaluation-local-section).
 
 Proof:
 1. Represent RN by the localization preimage F and its canonical isomorphism.

@@ -13,8 +13,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Linear
 
 /-! # Stalk vanishing for a scalar cone
 
-Source: Stacks Project, Tags 08EK and 05QR
-(blueprint: lem-sc-scalar-cone-stalk-vanishing).
+Source: Stacks Project, Tags 08EK and 05QR.
 -/
 
 @[expose] public section
@@ -89,8 +88,7 @@ private theorem stalk_scalar_apply (X : Scheme.{u}) (x : X)
 
 /-- A single scalar cone has zero cohomology stalks at a point where the scalar
 is invertible, or where its input already has zero cohomology stalks in every degree.
-Source: Stacks Project, Tag 08EK, cone construction, and Tag 05QR
-(blueprint: lem-sc-scalar-cone-stalk-vanishing).
+Source: Stacks Project, Tag 08EK, cone construction, and Tag 05QR.
 
 Proof: Take the exact sequence H^n(E) → H^n(K) → H^(n+1)(E) of
 Mathlib's distinguished-triangle homology sequence and apply the module stalk

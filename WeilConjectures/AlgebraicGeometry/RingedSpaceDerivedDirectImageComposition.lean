@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
 /-!
 # Composition of derived direct images of modules on ringed spaces
 
-Source: Stacks Project, Cohomology, Lemma 20.28.2 (Tag 0D5T)
-(blueprint: lem-pc-ringed-spaces-derived-direct-image-composition).
+Source: Stacks Project, Cohomology, Lemma 20.28.2 (Tag 0D5T).
 -/
 
 @[expose] public section
@@ -111,8 +110,7 @@ characterized by compatibility with the right-derived units: its composite with 
 unit for `(g ∘ f)_*` is the composite of the units for `g_*` and `f_*`. The underived
 identification `(g ∘ f)_* = g_* ∘ f_*` is the identity on sections of inverse-image opens.
 This specifies the canonical comparison rather than an arbitrary natural isomorphism.
-Source: Stacks Project, Cohomology, Lemma 20.28.2 (Tag 0D5T)
-(blueprint: lem-pc-ringed-spaces-derived-direct-image-composition).
+Source: Stacks Project, Cohomology, Lemma 20.28.2 (Tag 0D5T).
 
 Proof: by lem-pc-ringed-spaces-derived-adjoint-general (Tag 079W), derived pullback
 is left adjoint to derived direct image for each of `f`, `g`, and `f ≫ g`.

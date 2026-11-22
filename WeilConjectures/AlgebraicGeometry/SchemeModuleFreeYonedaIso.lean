@@ -12,7 +12,6 @@ public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 /-! # Free Yoneda and extension-by-zero module sheaves
 
 Source: Stacks Project, Modules on Sites, Tag 03DI.
-(blueprint: lem-pc-scheme-module-free-yoneda-iso).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ variable (X : Scheme.{u})
 /-- The sheafification of the free module on the representable of an open agrees
 with the sheafification of the explicit extension-by-zero presheaf of its unit.
 Source: Stacks Project, Modules on Sites, Tag 03DI, construction of j_U! O_U.
-(blueprint: lem-pc-scheme-module-free-yoneda-iso).
 
 Proof: at an open V, both presheaves have the free O_X(V)-module with basis the
 set of morphisms V to U. In the explicit extension-by-zero construction the

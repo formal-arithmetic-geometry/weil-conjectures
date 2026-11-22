@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 /-! # Degree-zero scalar Ext comparison
 
 Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-scalar-cohomology-ext-zero-global-sections).
 -/
 
 @[expose] public section
@@ -52,7 +51,6 @@ private theorem extMk_augmentation {C : Type*} [Category C] [Abelian C] [HasExt 
 
 /-- The canonical degree-zero comparison represents a section by its module morphism.
 Source: Stacks Project, Cohomology, Tag 01DZ.
-(blueprint: lem-sc-scalar-cohomology-ext-zero-global-sections).
 
 Proof: In an injective resolution I of F, the augmentation sends a section s to
 a degree-zero cocycle. Evaluation at one identifies this cocycle with

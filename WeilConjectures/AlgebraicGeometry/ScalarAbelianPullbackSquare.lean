@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ScalarStructureCoefficientAdjunct
 /-! # The underlying abelian square for scalar inverse image
 
 Source: Stacks Project, Tag 01F7; Modules, Tag 0096.
-(blueprint: new-sc-scalar-abelian-pullback-square).
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ attribute [local irreducible] scalarAbelianUnitClass scalarInverseImage
 attribute [local instance] instHasExtKSheaf
 
 /-- Abelian inverse image along a scheme morphism, as in structure-sheaf pullback.
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-sc-scalar-abelian-pullback-square). -/
+Source: Stacks Project, Tag 01F7. -/
 noncomputable abbrev scalarAbelianInverseImage {X Y : Scheme.{u}} (a : Y ⟶ X) :=
   (Opens.map a.base).sheafPullback AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
@@ -54,8 +52,7 @@ instance {X Y : Scheme.{u}} (a : Y ⟶ X) :
   exact Functor.additive_of_preservesBinaryBiproducts _
 
 /-- The abelian coefficient map adjoint to the structure-sheaf morphism.
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-sc-scalar-abelian-pullback-square). -/
+Source: Stacks Project, Tag 01F7. -/
 noncomputable abbrev scalarAbelianStructureCoefficient {X Y : Scheme.{u}} (a : Y ⟶ X) :=
   (((Opens.map a.base).sheafAdjunctionContinuous AddCommGrpCat.{u} _ _).homEquiv
     (structureSheafAb X) (structureSheafAb Y)).symm
@@ -63,16 +60,14 @@ noncomputable abbrev scalarAbelianStructureCoefficient {X Y : Scheme.{u}} (a : Y
         (forget₂ CommRingCat RingCat.{u} ⋙ forget₂ RingCat AddCommGrpCat.{u})⟩)
 
 /-- The comparison from the target integer sheaf to inverse image of the source integer sheaf.
-Source: Stacks Project, Tag 01F7; constant-sheaf adjunction.
-(blueprint: new-sc-scalar-abelian-pullback-square). -/
+Source: Stacks Project, Tag 01F7; constant-sheaf adjunction. -/
 noncomputable abbrev scalarAbelianIntegerIso {X Y : Scheme.{u}} (a : Y ⟶ X) :=
   ((Opens.map a.base).constantSheafsheafPullbackIso AddCommGrpCat.{u}
     (Opens.grothendieckTopology X) (Opens.grothendieckTopology Y)
     isTerminalTop isTerminalTop).symm.app (AddCommGrpCat.of (ULift ℤ))
 
 /-- The defining Ext formula for structure-sheaf pullback.
-Source: Stacks Project, Tag 01F7.
-(blueprint: new-sc-scalar-abelian-pullback-square). -/
+Source: Stacks Project, Tag 01F7. -/
 theorem scalarAbelianStructurePullback_apply {X Y : Scheme.{u}} (a : Y ⟶ X)
     (n : ℕ) (x : Sheaf.H (structureSheafAb X) n) :
     structureSheafCohomologyPullback a n x =
@@ -85,7 +80,6 @@ theorem scalarAbelianStructurePullback_apply {X Y : Scheme.{u}} (a : Y ⟶ X)
 integer-unit generator and the tensor-unit coefficient to their abelian counterparts.
 Source: Stacks Project, Tag 01F7, cohomology-equation-functorial;
 Modules, Tag 0096, inverse-image/direct-image adjunction.
-(blueprint: new-sc-scalar-abelian-pullback-square).
 
 Proof: Form the canonical comparison from abelian inverse image of the underlying
 scalar sheaf to the underlying sheaf of scalar inverse image. Its adjunct is the

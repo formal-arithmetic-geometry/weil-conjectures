@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.ThickeningSystemHomTransport
 /-! # Morphisms of completions as compatible restriction families
 
 Source: Stacks Project, Remark 088F, equation 0880 and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-completion-hom-dictionary).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace AlgebraicGeometry
 This identifies formal morphisms with compatible restriction families; it makes no
 assertion that either kind of morphism lifts to an uncompleted morphism.
 Source: Stacks, Remark 088F, equation 0880 and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-completion-hom-dictionary).
 
 Proof:
 1. Apply `thickeningSystems_dictionary` with the tensor-pullback adjunctions. It gives

@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.ModulePullbackPushforwardAdjunction
 /-! # Scalar extension and the normalized tensor comparison
 
 Source: Stacks Project, Modules on Sites, Tags 03EL and 0GMW.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -314,7 +313,6 @@ private theorem extendedTensor_hom_ext
 /-- Scalar extension preserves the sheaf tensor product and its normalized pairing.
 Source: Stacks Project, Modules on Sites, Tag 03EL, first and last equalities;
 Tag 0GMW for descent through module sheafification.
-(auxiliary; not a blueprint node).
 
 Proof: Extend the bilinear pairing of the two scalar-extension units to obtain the
 forward map. For the inverse use the sectionwise formula

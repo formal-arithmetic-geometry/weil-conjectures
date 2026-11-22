@@ -11,8 +11,7 @@ public import Mathlib.Topology.Sets.OpenCover
 
 /-! # Cofinal finite affine open coverings of a qcqs scheme
 
-Source: Stacks Project, Schemes, Tags 01IT and 01KO, and Algebra, Tag 00E8
-(blueprint: lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings).
+Source: Stacks Project, Schemes, Tags 01IT and 01KO, and Algebra, Tag 00E8.
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ namespace AlgebraicGeometry
 refinement with quasi-compact pairwise intersections. Thus these finite coverings are cofinal
 under refinement, as required in Stacks, Modules, Tag 01BS (3), and Sheaves, Tag 009F (4).
 
-Source: Stacks Project, Schemes, Tags 01IT and 01KO, and Algebra, Tag 00E8
-(blueprint: lem-weil-pbc-qcqs-scheme-cofinal-finite-coverings).
+Source: Stacks Project, Schemes, Tags 01IT and 01KO, and Algebra, Tag 00E8.
 
 Proof:
 1. For each point `x` of `X`, choose a member `V a` of the given covering containing `x`.

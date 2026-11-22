@@ -20,7 +20,6 @@ public import Mathlib.Algebra.Category.Grp.Zero
 /-! # Positive étale cohomology classes are Zariski locally zero
 
 Source: Stacks Project, Étale Cohomology, Tag 09AX, proof, Tags 03Q6 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselian-cohomology-locally-zero)
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ local rings are strictly henselian.
 
 Source: literature/stacks-project/etale-cohomology.tex, Tag 09AX, proof,
 third and fourth sentences; Tags 03Q6 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselian-cohomology-locally-zero)
 
 Proof: Compare the filtered colimit of object cohomology over neighbourhoods
 of x with homology of stalkwise sections of an injective resolution, using

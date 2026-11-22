@@ -17,7 +17,6 @@ import WeilConjectures.Algebra.Homology.KFlatPullback
 /-! # Derived identifications for a specified tensor chain map
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-tensor-coordinate-identifications).
 -/
 
 @[expose] public section
@@ -192,8 +191,7 @@ The second-factor counit followed by Q(c.t) and c.e' is replaced using c.represe
 Naturality hnat with eP and c.e finishes the identity, after canceling the
 invertible localization maps. No target K-flatness or stalk assertion is used.
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), Tag 0BYJ and
-equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB.
-(blueprint: lem-pc-tensor-coordinate-identifications). -/
+equation-bc before Tag 0DJ8; Cohomology, Tags 079R and 06YB. -/
 theorem exists_tensor_coordinate_identifications
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

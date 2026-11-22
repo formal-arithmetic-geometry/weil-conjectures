@@ -119,9 +119,7 @@ of pullback lifts give compatibility with τ. The affine base T₀ is noetherian
 because its ring is finite type over ℤ. Finite presentation of g₀ supplies quasi-compactness and
 quasi-separatedness. The base-change isomorphism supplies a and b and the second
 cartesian square, with τ≫a = b≫σ₀. The first square is cartesian by the construction
-W = g⁻¹(V). Every later increase of the index preserves these identities.
-
-(blueprint: lem-sbc-smooth-section-component-noetherian-model-data) -/
+W = g⁻¹(V). Every later increase of the index preserves these identities. -/
 theorem Smooth.exists_section_component_noetherian_model_data {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (x : P) :
     ∃ (W : P.Opens) (_ : x ∈ W) (V : T.Opens) (P₀ T₀ : Scheme.{u})

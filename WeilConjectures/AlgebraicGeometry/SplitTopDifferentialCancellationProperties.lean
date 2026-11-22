@@ -15,7 +15,6 @@ import Mathlib.RingTheory.Flat.EquationalCriterion
 /-! # Sheaf properties preserved by a retraction
 
 Source: Stacks Project, Tags 01PC and 00NX; affine direct summands.
-(blueprint: lem-pc-split-top-differential-cancellation-properties)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Retracts preserve the three termwise properties used in split cancellation.
 
 Source: Stacks Project, Tags 01PC and 00NX; affine direct summands.
-(blueprint: lem-pc-split-top-differential-cancellation-properties).
 
 Proof: Let i:M→N and r:N→M be the supplied retraction, so i ≫ r = id.
 Quasi-coherence of M follows by identifying it with the kernel of id_N - r ≫ i,

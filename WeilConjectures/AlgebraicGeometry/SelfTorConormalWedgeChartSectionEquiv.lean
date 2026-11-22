@@ -19,7 +19,6 @@ namespace AlgebraicGeometry
 /-- The affine section calculation underlying the conormal wedge chart.
 Source: Stacks Project, Tags 01R3 (conormal), 01I6 (exterior powers and
 affine pullback), and 0096 (canonical pullback unit).
-(blueprint: new-t2-self-tor-conormal-wedge-chart-section-equiv).
 Proof: Write A = Gamma(Y,U), I = i.ker.ideal U, and V = i inverse-image U.
 The closed immersion makes V affine, with section ring B = A/I. The theorem
 `affine_conormal_sections` identifies N(V) with I/I^2 and sends each ideal

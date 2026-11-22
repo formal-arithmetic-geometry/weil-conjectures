@@ -15,8 +15,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-! # Universal factorization before Stein connectedness
 
-Source: Stacks Project, More on Morphisms, Lemma 37.53.4 (Tag 03GY)
-(blueprint: `lem-weil-pbc-stein-universally-closed-factor`).
+Source: Stacks Project, More on Morphisms, Lemma 37.53.4 (Tag 03GY).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry
 
 /-- Universal-closed Stein factorization properties from Stacks, Tag 03GY.
-(blueprint: lem-weil-pbc-stein-universally-closed-factor)
 
 The structure-sheaf identity means that the canonical map `q.c` is invertible.
 The relative-spectrum clause is expressed by the canonical algebra identification

@@ -117,7 +117,6 @@ private theorem loc_kill {A : Type*} [CommRing A] (s a : A) (n : ℕ)
 /-- The transition relations are exactly the kernel of the explicitly constructed fraction map.
 Source: Stacks Project, Properties, equation module-invert-s (Tag 0B5L),
 Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1.
-(blueprint: lem-sc-section-ring-veronese-fraction-kernel)
 
 Proof: write `T_n` for `sectionRingVeroneseNumeratorIso` on global sections and `ι_n`
 for the direct-sum injection in the numerator presentation. The inverse identification

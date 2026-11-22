@@ -25,8 +25,7 @@ open AlgebraicGeometry
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical strict-local source cocone is colimiting.
-Source: Stacks, Tags 03Q8 and 03Q9, first proof paragraph
-(blueprint: lem-weil-pbc-strict-local-cohomology-source-colimit).
+Source: Stacks, Tags 03Q8 and 03Q9, first proof paragraph.
 
 Proof: initiality of the small affine pointed representatives makes the restricted
 presheaf germ cocone colimiting. The derived-sections-to-homology-sheaf map induces

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
 /-! # The explicit inverse system obtained by termwise pushforward
 
 Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-thickening-system-pushforward-functor).
 -/
 
 @[expose] public section
@@ -30,7 +29,7 @@ variable {X : Scheme.{v}} {T : ℕ → Scheme.{v}} {i : ∀ n, T n ⟶ T (n + 1)
   (ai : ∀ n, Scheme.Modules.tensorPullback (i n) ⊣ Scheme.Modules.pushforward (i n))
 
 /-- The canonical comparison of the two ways to push a module from level `n` to `X`.
-Source: Stacks, Remark 088F (blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Remark 088F. -/
 def thickeningPushforwardComparison (n : ℕ) :
     Scheme.Modules.pushforward (i n) ⋙ Scheme.Modules.pushforward (j (n + 1)) ≅
       Scheme.Modules.pushforward (j n) :=
@@ -38,7 +37,7 @@ def thickeningPushforwardComparison (n : ℕ) :
     Scheme.Modules.pushforwardCongr (hi n)
 
 /-- Push the adjoint of the pullback comparison forward to obtain an adjacent transition.
-Source: Stacks, Remark 088F (blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Remark 088F. -/
 def thickeningPushforwardTransition (M : CoherentThickeningSystem T i) (n : ℕ) :
     (Scheme.Modules.pushforward (j (n + 1))).obj (M.term (n + 1)) ⟶
       (Scheme.Modules.pushforward (j n)).obj (M.term n) :=
@@ -47,7 +46,7 @@ def thickeningPushforwardTransition (M : CoherentThickeningSystem T i) (n : ℕ)
     (thickeningPushforwardComparison j hi n).hom.app (M.term n)
 
 /-- Naturality follows by applying the adjunction hom equivalence to compatibility.
-Source: Stacks, Remark 088F (blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Remark 088F. -/
 theorem thickeningPushforwardTransition_naturality
     {M N : CoherentThickeningSystem T i} (u : M ⟶ N) (n : ℕ) :
     thickeningPushforwardTransition j hi ai M n ≫
@@ -62,7 +61,7 @@ theorem thickeningPushforwardTransition_naturality
   rw [h]
 
 /-- Termwise pushforward of a compatible family.
-Source: Stacks, Remark 088F (blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Remark 088F. -/
 def thickeningSystemPushforwardMap {M N : CoherentThickeningSystem T i} (u : M ⟶ N) :
     Functor.ofOpSequence
       (X := fun n ↦ (Scheme.Modules.pushforward (j n)).obj (M.term n))
@@ -78,7 +77,7 @@ def thickeningSystemPushforwardMap {M N : CoherentThickeningSystem T i} (u : M �
 
 /-- The explicit pushforward functor, with transitions composed from the adjacent maps.
 No module data are selected from an existence theorem.
-Source: Stacks, Remark 088F (blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Remark 088F. -/
 def thickeningSystemPushforward : CoherentThickeningSystem T i ⥤ (ℕᵒᵖ ⥤ X.Modules) where
   obj M := Functor.ofOpSequence
       (X := fun n ↦ (Scheme.Modules.pushforward (j n)).obj (M.term n))
@@ -94,7 +93,7 @@ def thickeningSystemPushforward : CoherentThickeningSystem T i ⥤ (ℕᵒᵖ �
     exact (Scheme.Modules.pushforward (j n.unop)).map_comp _ _
 
 /-- Evaluation of the explicit functor is termwise pushforward.
-Source: Stacks, Remark 088F (blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Remark 088F. -/
 def thickeningSystemPushforwardEvaluation (n : ℕ) :
     thickeningSystemPushforward j hi ai ⋙
         (CategoryTheory.evaluation ℕᵒᵖ X.Modules).obj (op n) ≅
@@ -102,7 +101,7 @@ def thickeningSystemPushforwardEvaluation (n : ℕ) :
   Iso.refl _
 
 /-- The explicit functor has the specified adjacent transition.
-Source: Stacks, Remark 088F (blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Remark 088F. -/
 theorem thickeningSystemPushforward_transition (M : CoherentThickeningSystem T i) (n : ℕ) :
     ((thickeningSystemPushforward j hi ai).obj M).map (homOfLE (Nat.le_succ n)).op =
       (Scheme.Modules.pushforward (j (n + 1))).map
@@ -116,8 +115,7 @@ theorem thickeningSystemPushforward_transition (M : CoherentThickeningSystem T i
   rfl
 
 /-- Termwise closed pushforward detects the compatibility of a family.
-Source: Stacks, Lemma 087T and Remark 088F
-(blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Lemma 087T and Remark 088F. -/
 theorem thickeningPushforward_compatibility [∀ n, IsClosedImmersion (j n)]
     {M N : CoherentThickeningSystem T i} (u : ∀ n, M.term n ⟶ N.term n)
     (h : ∀ n, thickeningPushforwardTransition j hi ai M n ≫
@@ -137,8 +135,7 @@ theorem thickeningPushforward_compatibility [∀ n, IsClosedImmersion (j n)]
 
 /-- Full faithfulness is proved by uniquely lifting each component and detecting its
 compatibility with the adjunction hom equivalence. No object lifting is used here.
-Source: Stacks, Lemma 087T and Remark 088F
-(blueprint: lem-weil-pbc-thickening-system-pushforward-functor). -/
+Source: Stacks, Lemma 087T and Remark 088F. -/
 theorem thickeningSystemPushforward_fullyFaithful [∀ n, IsClosedImmersion (j n)] :
     (thickeningSystemPushforward j hi ai).Full ∧
       (thickeningSystemPushforward j hi ai).Faithful := by

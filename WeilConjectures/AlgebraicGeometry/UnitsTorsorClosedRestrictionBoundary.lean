@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.ZariskiUnitsRestriction
 # Boundary comparison for a pulled-back direct-image extension
 
 Source: Stacks Project, Tags 02UV and 02FQ.
-(blueprint: lem-sc-units-extension-pullback-boundary-comparison).
 -/
 
 @[expose] public section
@@ -50,7 +49,6 @@ of a direct-image extension to the boundary of one in the original extension.
 
 Source: Stacks Project, Cohomology of Sheaves, Lemma 02UV and the naturality of
 connecting homomorphisms used in Lemma 02FQ.
-(blueprint: lem-sc-units-extension-pullback-boundary-comparison).
 
 Proof: Apply exact inverse image to the short exact pullback extension. Compose its
 map to the inverse image of the direct-image extension with the counit. Naturality

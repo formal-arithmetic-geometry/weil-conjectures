@@ -22,8 +22,7 @@ namespace AlgebraicGeometry
 /-- The exact adjunction family already used by `schemeDerivedBaseChangeMap`.
 Its Hom equivalence is pinned to the same left-derived counit and right-derived unit.
 This name shares the existing expression and makes no new adjunction choice.
-Source: Stacks Project, Tag 08HY, and `exists_schemeDerivedAdjunction`.
-(blueprint: def-pc-t2-open-pinned-adjunction). -/
+Source: Stacks Project, Tag 08HY, and `exists_schemeDerivedAdjunction`. -/
 noncomputable abbrev singleComplexOpenPinnedAdjunction
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] :

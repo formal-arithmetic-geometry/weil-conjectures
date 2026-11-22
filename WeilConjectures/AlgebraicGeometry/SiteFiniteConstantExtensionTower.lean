@@ -245,7 +245,6 @@ induction: it produces no complex and no chain representatives for boundaries.
 
 Source: Stacks Project, Cohomology on Sites, Tag 094G, proof of
 `lemma-locally-constant`, through the induction applied to the cone L.
-(auxiliary; not a blueprint node)
 
 Proof: Induct on the nonnegative width b-a, simultaneously on slices. In width
 zero, the canonical t-structure identifies K with H^a(K) in degree a; locally

@@ -62,7 +62,6 @@ identity. No boundary, distinguishedness, or morphism of triangles is asserted.
 
 Source: Stacks Project, Cohomology, Tags 08BV, 08HZ and 08HY; Derived Categories
 of Schemes, Tag 0DJ9, the induction diagram.
-(blueprint: lem-pc-relative-mv-pinned-vertex-comparisons).
 
 Proof: For each open W, compare derived exact restriction with derived pullback
 using leftAdjointUniq for mvOpenRestrictionAdjunction and relativeMVAdj. Apply

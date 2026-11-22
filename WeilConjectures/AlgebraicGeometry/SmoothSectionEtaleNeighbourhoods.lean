@@ -20,7 +20,6 @@ import WeilConjectures.RingTheory.SectionDifferentialBasisQuotient
 
 Source: Stacks Project, More on Algebra, Tag 07M7, proof up to the final
 idempotent localization.
-(blueprint: lem-weil-pbc-smooth-section-etale-neighbourhoods).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ namespace AlgebraicGeometry
 the section kernel. No global étale localization or quotient equivalence is asserted.
 Source: Stacks Project, Tag 07M7, first paragraph and second paragraph up to
 `C_f/JC_f = A/I` (with the source's kernel ideal denoted `N` here).
-(blueprint: lem-weil-pbc-smooth-section-etale-neighbourhoods)
 
 Proof:
 1. Set `N = ker σ`. Every element of `A/J` comes from `A`, so `σ` is surjective
@@ -49,7 +47,7 @@ is smooth by Tag 07M6, base change and composition. The augmentation retracts it
 onto the base-changed original algebra. The new conormal module is `P ⊕ Kbar`:
 the augmentation ideal modulo its square is the degree-one part `K`, and tensoring
 with the quotient gives `Kbar`. Thus the new conormal module is finite free.
-3. Lift its basis to `f₁,...,fₙ` in the section kernel and quotient by their generated
+3. Lift its basis to `f₁,..,fₙ` in the section kernel and quotient by their generated
 ideal to obtain a finitely presented algebra `E`. The section factors through `E`.
 The smooth Jacobi-Zariski sequence identifies the kernel and cokernel of the conormal
 map with `H₁(L_{E/A₁})` and `Ω[E/A₁]`. At primes containing the section kernel, the

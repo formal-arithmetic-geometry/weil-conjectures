@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, second triangle, common coefficient extraction.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -181,8 +180,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
   [UpperStarPreservesFlat C]
 
 /-- Reassociate and swap the two base coefficients, then undo tensor pullback.
-Source: thm-amb-p1-adjunction.proof.md, second triangle before the scalar trace
-(auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md, second triangle before the scalar trace. -/
 def extractionShuffle {X Y : Scheme.{u}} (f : X ⟶ Y)
     (B : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
     (N K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology C)) :
@@ -504,7 +502,7 @@ private theorem comparison_hom {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f]
 
 /-- The second-coordinate isomorphism calculation before a scalar trace is applied.
 Source: thm-amb-p1-adjunction.proof.md, second triangle, extraction of the common
-coefficient and the even self-symmetry (auxiliary; not a blueprint node).
+coefficient and the even self-symmetry.
 
 Proof: use exchange/projection compatibility for the canonical self-product square
 and invert the resulting square. Tensor with B and apply projection associativity.

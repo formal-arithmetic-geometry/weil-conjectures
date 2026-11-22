@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FibreCohenMacaulayLocus
 /-! # Openness of the fibre Cohen-Macaulay locus over a base open
 
 Source: Stacks Project, Tag 045U.
-(blueprint: lem-sbc-restricted-fibre-cohen-macaulay-locus-open)
 -/
 
 @[expose] public section
@@ -105,8 +104,7 @@ finite type over fields, hence locally Noetherian. For these rings equality of d
 and Krull dimension is exactly Cohen-Macaulayness. Tag 045U (1), (2) says that this
 locus in the restricted source is open. The source restriction inclusion is an open
 immersion, and its image is precisely the set displayed below. Its image is open in X.
-For an empty U or X this set is empty, which is open.
-(blueprint: lem-sbc-restricted-fibre-cohen-macaulay-locus-open) -/
+For an empty U or X this set is empty, which is open. -/
 theorem isOpen_fibre_depth_eq_ringKrullDim_over_restrict
     {X T : Scheme.{u}} (f : X ⟶ T) (U : T.Opens)
     [Flat (f ∣_ U)] [LocallyOfFinitePresentation (f ∣_ U)] :

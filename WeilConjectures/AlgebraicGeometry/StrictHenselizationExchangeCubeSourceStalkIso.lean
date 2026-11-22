@@ -23,7 +23,6 @@ open Scheme Etale
 set_option linter.unusedVariables false in
 /-- Component theorem: the source strict-local cube stalk comparison is invertible.
 Source: Stacks Project, Tags 03Q9 and 03QO.
-(blueprint: lem-weil-pbc-strict-henselization-exchange-cube-source-stalk-iso).
 
 Proof: apply the existing source component theorem
 `isIso_strictHenselization_exchangeCube_stalkComparisons_source`, whose hypotheses and

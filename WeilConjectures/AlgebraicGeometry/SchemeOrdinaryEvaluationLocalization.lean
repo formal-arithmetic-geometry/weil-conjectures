@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationUncurryCalculat
 
 /-! # Localization of the ordinary evaluation equation
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-scheme-ordinary-evaluation-localization).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 
 /-- The ordinary-to-derived Hom map obtained from the fixed resolution augmentation.
 This constructs a morphism without choosing any comparison witness.
-Source: Stacks Project, Tag 08DJ.
-(blueprint: lem-pc-scheme-ordinary-evaluation-localization). -/
+Source: Stacks Project, Tag 08DJ. -/
 def schemeOrdinaryHomComparison (Y : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
     (P M : CochainComplex (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) ℤ) :
@@ -49,7 +47,6 @@ def schemeOrdinaryHomComparison (Y : Scheme.{u})
 
 /-- Three-variable naturality of the canonical derived tensor-Hom family.
 Source: Stacks Project, cohomology.tex, Tag 08DJ.
-(blueprint: lem-pc-scheme-derived-tensor-hom-naturality).
 Proof: unfold the chosen family and apply the naturality conjunct of its
 characterizing predicate. -/
 theorem schemeDerivedTensorHomEquiv_naturality (Y : Scheme.{u})
@@ -136,7 +133,6 @@ private theorem evaluation_transport {C : Type*} [Category* C] [MonoidalCategory
 /-- Localizing the componentwise ordinary evaluation gives its uncurried derived map.
 No Hom-exactness, K-flatness, or invertibility of the comparison maps is asserted.
 Source: Stacks Project, Tags 08DJ, 08DM and 08DQ; representative calculation.
-(blueprint: lem-pc-scheme-ordinary-evaluation-localization).
 
 Proof: resolve both tensor inputs by K-flat complexes and the coefficient by the
 fixed K-injective functor. Apply the canonical tensor-Hom representative equation.

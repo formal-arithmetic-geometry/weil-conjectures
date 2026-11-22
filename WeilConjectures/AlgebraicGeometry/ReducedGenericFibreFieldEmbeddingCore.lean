@@ -35,8 +35,7 @@ identifies the reduced pullback's generic fibre ring with (C tensor_k k')_red.
 Take the spectrum of the constructed injection. It is scheme-theoretically
 dominant; the scalar-map identity and the compatibility with e follow from the
 chosen algebra map and the tensor-product construction. This also proves the
-identity-extension case, and requires no separability hypothesis on E.
-(blueprint: lem-sbc-reduced-generic-fibre-field-embedding-core) -/
+identity-extension case, and requires no separability hypothesis on E. -/
 theorem exists_reduced_generic_fibre_field_embedding_core
     {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']
     (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)

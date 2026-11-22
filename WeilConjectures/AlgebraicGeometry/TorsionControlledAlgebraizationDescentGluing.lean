@@ -148,7 +148,6 @@ private theorem system_iso_glue {X : Scheme.{u}}
 kernel and cokernel retain local annihilation bounds.
 
 Source: Stacks Project, Tag 0889(1), uniqueness argument; Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-algebraization-descent-gluing).
 
 Proof: Choose supplied triples on each open. On each overlap use the normalized
 quotient comparisons to identify completions. Lift the comparison and its inverse

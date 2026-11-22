@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionShiftComparison
 /-! # The derived evaluation square before choosing a generator
 
 Source: Stacks Project, Tags 0D6F, 07A6 and 03Q8.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
 /-- Restricted derived sections followed by zeroth homology.
-Source: Stacks Project, Tag 0BKV.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback). -/
+Source: Stacks Project, Tag 0BKV. -/
 noncomputable abbrev Hzero {S Y : Scheme.{v}} (h : Y ⟶ S) (U : S.Etale) :=
   sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U) ⋙
     DerivedCategory.homologyFunctor AddCommGrpCat.{v + 1} 0
@@ -33,8 +31,7 @@ noncomputable abbrev Hzero {S Y : Scheme.{v}} (h : Y ⟶ S) (U : S.Etale) :=
 /-- Transport zeroth derived sections of a single sheaf by ordinary section pullback.
 All maps are constructed: the zero comparison, the adjunction unit on sections,
 the restricted coefficient map, and the inverse zero comparison.
-Source: Stacks Project, Tags 0D6F and 07A6.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback). -/
+Source: Stacks Project, Tags 0D6F and 07A6. -/
 noncomputable def transportZero {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h')
     (G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1})
@@ -50,8 +47,7 @@ noncomputable def transportZero {S Y Y' : Scheme.{v}} (a : Y' ⟶ Y)
     (zeroIso ((MorphismProperty.Over.pullback @Etale ⊤ h').obj U) G').inv
 
 /-- Pullback of a derived morphism with an arbitrary source sheaf identification.
-Source: Stacks Project, Tag 07A6.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback). -/
+Source: Stacks Project, Tag 07A6. -/
 noncomputable def pullbackHom {Y Y' : Scheme.{v}} (a : Y' ⟶ Y) (p : ℕ)
     {G : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}}
     {G' : Sheaf Y'.smallEtaleTopology AddCommGrpCat.{v + 1}}
@@ -76,7 +72,6 @@ noncomputable def pullbackHom {Y Y' : Scheme.{v}} (a : Y' ⟶ Y) (p : ℕ)
 No represented sheaf, identity generator, or evaluation at a chosen element occurs.
 Source: Stacks Project, Cohomology on Sites, Tags 0D6F and 07A6; the natural
 restriction calculation in Tag 03Q8.
-(blueprint: lem-sbc-restricted-derived-evaluation-pullback).
 
 Proof: Put r = pr_Y, r' = pr_Y' and q = U times_S a. The pullback identities
 imply r' followed by a equals q followed by r. Use inverse-image composition

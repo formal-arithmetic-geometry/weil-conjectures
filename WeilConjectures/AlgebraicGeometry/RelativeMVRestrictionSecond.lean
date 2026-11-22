@@ -87,7 +87,6 @@ private theorem localArrow_factor
 
 /-- Base change commutes with relative restriction along one inclusion of opens.
 Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.
-(blueprint: new-relative-mv-second).
 Proof: Expand relativeMVRestriction as the mate of the restricted counit and
 cancel the right-adjoint composition comparisons on both paths. Transpose under
 the adjunction for W and its inverse-image open. The resulting maps are

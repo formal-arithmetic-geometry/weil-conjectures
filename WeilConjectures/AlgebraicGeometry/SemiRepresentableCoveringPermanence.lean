@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SemiRepresentableObject
 /-!
 # Permanence of coverings of semi-representable étale objects
 
-Source: Stacks Project, Tag 01G4, Lemma 25.3.2
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 01G4, Lemma 25.3.2.
 -/
 
 @[expose] public section
@@ -50,8 +49,7 @@ private theorem componentSieve_mem_iff {X : Scheme.{u}}
       (((FormalCoproduct.hom_ext_iff _ _).mp ht).2 PUnit.unit).symm
 
 /-- Coverings of semi-representable objects are stable under composition and base change.
-Source: Stacks Project, Tag 01G4, Lemma 25.3.2
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tag 01G4, Lemma 25.3.2.
 
 Proof: by def-weil-pbc-semi-representable-object, a covering is a covering family over each
 index of its target. For (1), fix an index of M. Compose the family of b-components over

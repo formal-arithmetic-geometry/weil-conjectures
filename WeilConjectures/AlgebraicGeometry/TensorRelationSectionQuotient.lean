@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 /-! # Sections of a tensor relation cokernel
 
 Source: Stacks Project, Morphisms, proof of Lemma 01SB; Sheaves, Lemma 0089.
-(blueprint: lem-weil-pbc-tensor-relation-section-quotient).
 -/
 
 @[expose] public section
@@ -112,7 +111,6 @@ private theorem sectionQuotientAux
 set_option backward.isDefEq.respectTransparency false in
 /-- A section cokernel of the balancing relation is the tensor product over B.
 Source: Stacks Project, Schemes, Lemma 01I8 (1); Modules, Section 01CA.
-(blueprint: lem-weil-pbc-tensor-relation-section-quotient).
 
 Proof: the additive bilinear map (c,p) ↦ q(tmulSection c p) is B-balanced:
 apply q to the displayed relation and use range δ = ker q. The tensor universal

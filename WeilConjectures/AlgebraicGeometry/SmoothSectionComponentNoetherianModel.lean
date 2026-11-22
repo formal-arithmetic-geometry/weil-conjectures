@@ -38,9 +38,7 @@ projection a from the base change W to P₀ is a scheme morphism. Restricting th
 has not changed any fibre or its section point. Tag 055M identifies the component locus
 on the base change with the inverse image of the locus on P₀. Therefore the displayed
 equivalence holds for every w, independently of any specialization or membership
-assumption on x.
-
-(blueprint: lem-sbc-smooth-section-component-noetherian-model) -/
+assumption on x. -/
 theorem Smooth.exists_section_component_noetherian_model {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T)
     (x : P) :

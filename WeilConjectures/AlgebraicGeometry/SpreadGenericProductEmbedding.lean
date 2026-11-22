@@ -22,7 +22,6 @@ import WeilConjectures.AlgebraicGeometry.DescendModelLocalization
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
 `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-spread-generic-product-embedding)
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ coordinate denominator clearing. This does not construct any domain factors.
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
 `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9; the torsion,
 idempotent and denominator arguments of `lem-weil-pbc-spread-generic-product-domains`.
-(blueprint: lem-weil-pbc-spread-generic-product-embedding)
 
 Proof: Set C to the reduction of B tensor A0. Its generic fibre is the specified product
 of fields: tensor associativity identifies the unreduced generic fibres, and localization

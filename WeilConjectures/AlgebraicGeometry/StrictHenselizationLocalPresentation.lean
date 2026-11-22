@@ -17,8 +17,7 @@ import WeilConjectures.RingTheory.EtaleResidueTriplesLocalizedStrictHenselizatio
 
 /-! # Geometric strict henselization as a local-base algebra
 
-Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring).
-(blueprint: lem-sbc-geometric-strict-henselization-local-presentation)
+Source: Stacks Project, Tag 04HX.
 -/
 
 @[expose] public section
@@ -33,7 +32,7 @@ set_option backward.isDefEq.respectTransparency false in
 `xR ≫ i`, the strict henselization of `S` at `xR ≫ i` is an algebraic strict henselization of
 `R` localized at the image `xR(*)` of the geometric point, compatibly with a ring map
 `b : R ⟶ 𝒪^{sh}` whose spectrum followed by `i` is the structure morphism.
-Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring), using Tag 04GW. -/
+Source: Stacks Project, Tag 04HX, using Tag 04GW. -/
 theorem strictHenselization_chart_isStrictHenselization
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (R : CommRingCat.{u}) (i : Spec R ⟶ S) [IsOpenImmersion i]
@@ -173,8 +172,7 @@ theorem strictHenselization_chart_isStrictHenselization
 
 /-- The geometric strict henselization is an algebraic strict henselization of a prime
 localization, compatibly with the given structural ring map. There is no divisor here.
-Source: Stacks Project, Tag 04HX (lemma-describe-etale-local-ring), using Tag 04GW.
-(blueprint: lem-sbc-geometric-strict-henselization-local-presentation)
+Source: Stacks Project, Tag 04HX, using Tag 04GW.
 
 Proof: Let q be the image of the geometric point, and put A = R_q. Its residue field is
 canonically the residue field at q. Inside the geometric field take the relative separable

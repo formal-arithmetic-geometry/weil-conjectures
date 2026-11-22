@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 /-! # Target locality of the single-complex criterion
 
 Source: Stacks Project, Tag 0DJ9, reduction to affine bases.
-(blueprint: lem-pc-single-complex-target-locality).
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ set_option linter.unusedVariables false in
 The extra premise supplies only the affine-base case, to be proved separately by
 source-open induction; it does not assume the original conclusion.
 Source: Stacks Project, Tag 0DJ9, first paragraph of the proof.
-(blueprint: lem-pc-single-complex-target-locality).
 
 Proof: For a point of S' choose an affine neighbourhood V of its image in S, and an
 affine neighbourhood V' of the point contained in g inverse-image V. Restrict f to

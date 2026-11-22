@@ -18,7 +18,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Flat
 /-! # Ring coordinates for tensor stalk comparisons
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1).
-(blueprint: lem-pc-tensor-stalk-comparison-squares).
 -/
 
 @[expose] public section
@@ -145,8 +144,7 @@ Use cohomologyModel(c.P) for m and the canonical model for U tensor Q for mU.
 The first square uses identity vertical isomorphisms and homologyMap_comp.
 The tensor square is the remaining fixed-map obligation
  tensorStalkComparison_fixedMap_square, applied to e.P, e.e and e.isKFlat.
-No invertibility of a horizontal comparison is asserted.
-(blueprint: lem-pc-tensor-stalk-comparison-squares). -/
+No invertibility of a horizontal comparison is asserted. -/
 theorem exists_tensorStalkComparison_squares
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

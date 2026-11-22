@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.ProperOpenFactorProjection
 /-! # Projection compatibility across the graph intersection
 
 Source: `LowerShriekComposition.lean`, eC, and Stacks Tags 0B56, 0GL1 and 0F7B.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -735,7 +734,7 @@ private theorem word_middle_projection_generic
 /-- Projection compatibility across the graph intersection.
 
 Source: `LowerShriekComposition.lean`, eC; the tensor calculation uses Stacks
-Tags 0B56, 0GL1 and 0F7B (auxiliary; not a blueprint node).
+Tags 0B56, 0GL1 and 0F7B.
 
 Proof in words. Let O12 be the intersection of the two supporting opens b1:O1 -> T and
 b2:O2 -> T, with projections u1,u2 and proper graph s12. Since u1 and u2 are

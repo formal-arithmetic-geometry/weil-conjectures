@@ -14,7 +14,6 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
 /-! # Coefficient and symmetry transport for strict-local sections
 Source: Stacks Project, Tags 03D3, 03D7, and 03Q9.
-(blueprint: lem-weil-pbc-strict-local-module-sections-set-transport)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The canonical equivalence of strict-local terminal sections after forgetting module
 coefficients and interchanging the two pullback factors.
 Source: Stacks Project, Tags 03D3, 03D7, and 03Q9.
-(blueprint: def-weil-pbc-strict-local-module-sections-set-equiv).
 The coefficient comparison, composition of inverse images, restriction along the
 pullback symmetry, and terminal/global section comparisons are all actual isomorphisms.
 The composition comparison is determined by its unit identity and fixed-sheaf uniqueness.
@@ -253,7 +251,6 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Forgetting coefficients and interchanging the two pullback factors identifies terminal
 sections, compatibly with restriction of a section from any affine pointed neighbourhood.
 Source: Stacks Project, Tags 03D3 and 03D7 (inverse images), and Tag 03Q9 (degree zero).
-(blueprint: lem-weil-pbc-strict-local-module-sections-set-transport).
 
 Proof: Put S = Spec of the strict henselization, A = X ×_Y S, B = S ×_Y X,
 g = A → X, h = B → X, and σ : A → B the pullback symmetry, so σ ≫ h = g.

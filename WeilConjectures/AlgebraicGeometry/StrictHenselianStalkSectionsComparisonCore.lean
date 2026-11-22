@@ -22,7 +22,6 @@ open CategoryTheory AlgebraicGeometry
 without increasing the universe of the coefficient groups.
 Source: Stacks Project, Sites and Sheaves, Proposition 7.44.3, and Modules on Sites,
 Tag 03D3, the abelian-sheaf adjunction in its proof.
-(blueprint: new-strict-henselian-stalk-sections-comparison-functor)
 
 Proof: For each scheme choose the site of affine etale schemes of finite presentation,
 encoded by finite presentations over the coordinate rings of an affine open cover.

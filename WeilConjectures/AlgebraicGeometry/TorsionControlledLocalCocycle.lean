@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 
 Source: Stacks Project, Tag 0889(1), first sentence and uniqueness verification;
 Sheaves, Tags 00AL and 00AM.
-(blueprint: new-stage3-torsion-controlled-local-cocycle).
 
 Proof: Transfer each supplied Fi to Li on the over-site by the inverse of overEquiv;
 li is its counit. Transfer ai through hHlocal to obtain bi. Define qi by transferring

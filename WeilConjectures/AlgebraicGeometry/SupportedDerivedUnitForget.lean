@@ -11,8 +11,7 @@ import WeilConjectures.CategoryTheory.DerivedSingleUnitExact
 /-!
 # Integral evaluation of the exact derived closed unit
 
-Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45
-(auxiliary; not a blueprint node).
+Source: blueprint lemma-cycle-class-cartier-divisor; Stacks 03PL and 0A45.
 -/
 
 @[expose] public noncomputable section
@@ -238,7 +237,7 @@ private theorem coefficient_unit (A : Type (u + 1)) [CommRing A]
 /-- Evaluation on the integral generator commutes with the derived closed unit
 and its exact degree-zero direct-image comparison.
 Source: Stacks 0A45, derived support-Hom unit normalization; blueprint
-lemma-cycle-class-cartier-divisor, paragraph 4 (auxiliary; not a blueprint node).
+lemma-cycle-class-cartier-divisor, paragraph 4.
 
 Proof: exactness of closed direct image identifies its right-derived functor on
 single objects with the single of direct image. The factorization formula for the

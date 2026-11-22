@@ -12,7 +12,6 @@ import WeilConjectures.AlgebraicGeometry.EtaleObjectSections
 /-! # Pullback of the represented identity section
 
 Source: Stacks Project, Tag 03Q8 and Cohomology on Sites, Tag 0BKV.
-(blueprint: lem-sbc-restricted-comparison-generator-pullback).
 -/
 
 @[expose] public section
@@ -94,7 +93,6 @@ set_option backward.defeqAttrib.useBackward true in
 /-- Pullback transports the represented identity generator in zeroth derived sections.
 This has no degree p, target coefficient sheaf, or raw derived-Hom class.
 Source: Stacks Project, Tag 03Q8; Cohomology on Sites, Tag 0BKV.
-(blueprint: lem-sbc-restricted-comparison-generator-pullback).
 
 Proof: Write A = the sheafification of the free abelian presheaf represented by U,
 G = h^* A and G' = h'^* A. Cancel the zeroIso at the source of transportZero

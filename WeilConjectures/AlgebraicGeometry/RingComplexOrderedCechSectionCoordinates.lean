@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.RingComplexOrderedCechConstructi
 /-! # Principal-localization coordinates before taking the Čech mapping fibre
 
 Source: Stacks Project, Tag 099D(d), and Cohomology, Tags 01EQ and 01FJ.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -184,7 +183,6 @@ by
 /-- Sections on ordered intersections, before adjoining the augmentation term, have
 localization coordinates compatible with restriction and with the map from A.
 Source: Stacks Project, Tag 099D(d), and Cohomology, Tags 01EQ and 01FJ.
-(auxiliary; not a blueprint node)
 
 Proof: each f_i belongs to I, so D(f_i) is contained in Spec A minus V(I).
 Each ordered intersection in the complement maps isomorphically onto D(product f_i).

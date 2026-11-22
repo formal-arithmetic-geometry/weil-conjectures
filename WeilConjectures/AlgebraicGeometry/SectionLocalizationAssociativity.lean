@@ -257,8 +257,7 @@ the transferred lax tensorator with qTensor on termwise internal images.
 Naturality along the cochain equivalence counit and cancellation of its
 invertible tensor components extend this equality to all pairs. Apply lax monoidal
 associativity. No modelTensor component
-is inverted, and no resolving or pullback hypothesis is used.
-(auxiliary; not a blueprint node). -/
+is inverted, and no resolving or pullback hypothesis is used. -/
 theorem section_localization_associativity (T : Scheme.{u})
     (P Q H : CochainComplex (modules Λ T) ℤ) :
     letI := derivedMonoidal Λ T

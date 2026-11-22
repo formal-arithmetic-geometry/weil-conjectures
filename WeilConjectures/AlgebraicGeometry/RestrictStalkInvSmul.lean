@@ -80,8 +80,7 @@ The two private germ lemmas reuse the proved arguments in
 WeilConjectures.AlgebraicGeometry.OpenSemilinearInputComplexIso (also in
 WeilConjectures.AlgebraicGeometry.Modules.RestrictionStalkExtensionIso).
 Source: Stacks Project, Tag 0098, restriction of stalks; Mathlib
-Scheme.Modules.germ_restrictStalkNatIso_hom_app and PresheafOfModules.germ_smul.
-(blueprint: lem-pc-restrict-stalk-inv-smul). -/
+Scheme.Modules.germ_restrictStalkNatIso_hom_app and PresheafOfModules.germ_smul. -/
 theorem restrictStalkNatIso_inv_smul
     {Y Z : Scheme.{u}} (j : Y ⟶ Z) [IsOpenImmersion j] (z : Y)
     (M : Z.Modules) (d : Z.presheaf.stalk (j z))

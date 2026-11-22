@@ -27,8 +27,7 @@ namespace AlgebraicGeometry
 set_option linter.unusedVariables false in
 /-- The presheaf extension by zero and its sheafification give an additive left adjoint
 from abelian sheaves on an open Zariski subspace to abelian sheaves on the ambient scheme.
-Source: Stacks Project, Modules on Sites, Lemma 03DI
-(blueprint: lem-weil-pbc-zariski-extension-by-zero-adjunction).
+Source: Stacks Project, Modules on Sites, Lemma 03DI.
 
 The presheaf `P F` is sectionwise `F W` on opens `W ≤ U` and zero otherwise.  The
 maps `θ F` satisfy the universal property of sheafification, and the displayed

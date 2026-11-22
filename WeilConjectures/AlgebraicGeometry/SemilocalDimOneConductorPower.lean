@@ -20,7 +20,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteConductorMul
 /-! # Conductor powers in a semilocal normalization
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2.
-(blueprint: semilocal-dim-one-conductor-power)
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ universe u v
 /-- Conductor-power conclusion for the normalization in Varieties Lemma 09N2.
 
 Source: literature/stacks-project/varieties.tex, Varieties Lemma 09N2.
-(blueprint: semilocal-dim-one-conductor-power)
 
 Proof: identify `B` with its image in `K` using the injective fraction-ring map,
 put `B' = integralClosure B K`, and let `A = B[x,y]` inside `K`. Both generators

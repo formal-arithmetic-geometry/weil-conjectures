@@ -25,7 +25,6 @@ namespace AlgebraicGeometry.Etale
 /-- Stage continuity makes every certified comparison bijective.
 
 Source: Stacks Project, Tag 09YQ, universal property of its comparison.
-(blueprint: lem-weil-pbc-stage-cohomology-comparison-bijective).
 
 Proof: For the system constructor apply continuity at its specified stage.
 The colimit universal property identifies the comparison with an isomorphism.

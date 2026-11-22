@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShiftRightUnitor
 /-! # Exactness and unitality of canonical tensor shifts
 Source: Stacks Project, Tag 06YH and the Koszul unitor identity.
-(blueprint: lem-sc-scheme-canonical-tensor-shift-properties).
 -/
 @[expose] public section
 set_option autoImplicit false
@@ -62,7 +61,6 @@ end DerivedCategory
 namespace AlgebraicGeometry
 /-- Canonical tensor shifts are exact and their degree-one right-unitor squares hold.
 Source: Stacks Tag 06YH; total-complex shift/unitor calculation used in Tag 08EU.
-(blueprint: lem-sc-scheme-canonical-tensor-shift-properties).
 
 Proof. For a fixed K-flat complex the canonical shift comparison agrees with the
 comparison descended from tensoring mapping-cone triangles on the homotopy category.

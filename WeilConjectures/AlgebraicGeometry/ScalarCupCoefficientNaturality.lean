@@ -158,7 +158,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Cup products are natural in two coefficient morphisms on a fixed scheme.
 Source: Stacks Project, Cohomology, Tags 07MB and 0FKV; Tag 01F7 for coefficient maps.
-(blueprint: lem-sc-scalar-cup-coefficient-naturality).
 
 Proof: Choose injective resolutions of the four coefficient modules and comparison
 chain maps lifting phi and psi. Evaluation at 1 intertwines a comparison chain map

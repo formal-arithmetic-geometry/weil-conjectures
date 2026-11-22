@@ -183,7 +183,6 @@ constant sheaf complex of an actual bounded complex of finite modules.
 
 Source: Stacks Project, Cohomology on Sites, Tag 094G, proof of
 `lemma-locally-constant`, descent of the finitely many differentials.
-(auxiliary; not a blueprint node)
 
 Proof: Conjugate each differential by the given term isomorphisms. Finite generation
 makes each of these maps locally induced by a module map. Intersect the covering

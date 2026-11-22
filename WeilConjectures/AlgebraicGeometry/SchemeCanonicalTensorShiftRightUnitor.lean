@@ -13,7 +13,6 @@ import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 /-! # The canonical tensor shift and the right unitor
 
 Source: Stacks Project, Tag 06YH, total tensor localization and the Koszul unitor identity.
-(blueprint: lem-sc-scheme-canonical-tensor-shift-right-unitor).
 -/
 
 @[expose] public section
@@ -182,7 +181,6 @@ CochainComplex.mapBifunctorShift₁Iso_hom_rightUnitor_hom;
 WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.ShiftUnitor,
 DerivedCategory.rightUnitor_commShift (the same representative argument,
 with an arbitrary K-flat first factor and independent universes).
-(blueprint: lem-sc-scheme-canonical-tensor-shift-right-unitor).
 
 Proof. Let U be the unit complex, concentrated in degree zero. For a K-flat P,
 the tensor localization comparison Q(P) tensor Q(U) to Q(P tensor U) is invertible.

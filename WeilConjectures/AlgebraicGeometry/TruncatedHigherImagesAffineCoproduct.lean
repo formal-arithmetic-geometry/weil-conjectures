@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Affine evaluation of coproducts of lower-truncated higher images
 
-Source: Stacks Project, Tags 08D5 and 015J, with Schemes, Tag 01I7
-(blueprint: lem-pc-truncated-higher-images-affine-coproduct).
+Source: Stacks Project, Tags 08D5 and 015J, with Schemes, Tag 01I7.
 -/
 
 @[expose] public section
@@ -32,8 +31,7 @@ namespace AlgebraicGeometry
 /-- The sheaf coproduct of lower-truncated higher images is a coproduct on affine sections.
 This assertion concerns only the family of higher-image sheaves; no ambient derived
 coproduct or its higher direct image occurs in its statement.
-Source: Stacks Project, Tag 08D5, bounded-below paragraph, and Tag 015J; Tag 01I7
-(blueprint: lem-pc-truncated-higher-images-affine-coproduct).
+Source: Stacks Project, Tag 08D5, bounded-below paragraph, and Tag 015J; Tag 01I7.
 
 Proof.
 1. Canonical lower truncation preserves quasi-coherent cohomology: the cohomology is

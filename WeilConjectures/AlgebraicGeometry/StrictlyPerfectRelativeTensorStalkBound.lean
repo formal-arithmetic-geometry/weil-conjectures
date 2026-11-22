@@ -27,7 +27,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 
 Source: Stacks Project, Tag 0B6G, verification of condition (3), and
 Cohomology of Sheaves, Tags 08CG, 09U9, and 06YB.
-(blueprint: lem-pc-strictly-perfect-relative-tensor-stalk-bound).
 -/
 
 @[expose] public section
@@ -61,8 +60,7 @@ of the local model makes their derived tensors equal, by invariance under
 quasi-isomorphisms between K-flat complexes. Stalks commute with total tensor
 and with homology, so the underlying abelian-group stalk of the displayed tensor
 homology vanishes outside [r-d,s], for every test sheaf F. This argument is
-pointwise and needs no finite-type, Noetherian, or perfect-morphism hypothesis.
-(blueprint: lem-pc-strictly-perfect-relative-tensor-stalk-bound). -/
+pointwise and needs no finite-type, Noetherian, or perfect-morphism hypothesis. -/
 theorem strictlyPerfect_relativeTensor_stalk_bound
     {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

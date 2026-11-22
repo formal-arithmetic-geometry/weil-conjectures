@@ -10,7 +10,6 @@ public import WeilConjectures.AlgebraicGeometry.Finite.Coefficient.FiniteCoeffic
 # Finite source coefficient models for rational Ext
 
 Source: latest blueprint, rational Ext proof, beginning of the algebraic-closure case.
-(blueprint: lem-rational-ext-finite-source-model).
 -/
 
 @[expose] public noncomputable section
@@ -22,7 +21,6 @@ namespace AlgebraicGeometry.ProEtale
 
 /-- A lisse source has a finite coefficient model with the specified coefficient map.
 Source: latest blueprint, rational Ext proof, fixed-source model paragraph.
-(blueprint: lem-rational-ext-finite-source-model).
 
 Proof: For a finite coefficient field use that field and the original module, with
 identity scalar extension. For the algebraic closure use the lisse finite-coefficient

@@ -24,7 +24,6 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 /-- Ordinary evaluation factors through the single coefficient unit, independently of F.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation chain calculation, steps 1 and 2.
-(blueprint: lem-pc-scheme-ordinary-evaluation-chain-map-exists).
 
 Proof: Put O equal to the single unit and V=Hom(P,O). For every total degree n,
 extend over the coproduct the maps V^q tensor P^r to O^n, q+r=n, given by

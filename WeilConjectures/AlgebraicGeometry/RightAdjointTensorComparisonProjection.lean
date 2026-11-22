@@ -26,7 +26,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedPullbackTensorQCoh
 
 Source: Stacks Project, Tag 08EU, with perfect generation (Tag 09IS) and
 perfect tensor-Hom duality (Tags 0B54 and 0A9T).
-(blueprint: lem-sc-right-adjoint-tensor-comparison-projection).
 -/
 
 @[expose] public section
@@ -48,8 +47,7 @@ maps use those components transported by the functors' exact shift structures;
 no shift compatibility of the mate is required. Perfect objects are closed
 under every translate, so perfect generation proves the predicate for all K.
 Its value at shift zero gives the required invertibility. Invert the canonical
-component to obtain pf; its inverse is the specified mate by construction.
-(blueprint: lem-sc-right-adjoint-tensor-comparison-projection) -/
+component to obtain pf; its inverse is the specified mate by construction. -/
 theorem exists_rightAdjointTensorComparison_projection
     {Z Y : Scheme.{u}} [IsNoetherian Z] [IsNoetherian Y] (f : Z ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

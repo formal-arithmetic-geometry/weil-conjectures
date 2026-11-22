@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleSheafLeftExact
 # The inclusion of the Zariski site into the small étale site
 
 Source: literature/stacks-project/sites.tex, Proposition Tag 00X6 and
-Lemma Tag 00X5 (blueprint: lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites)
+Lemma Tag 00X5
 
 ## Main statements
 
@@ -38,31 +38,27 @@ namespace AlgebraicGeometry
 /-- The inclusion of the Zariski site into the small étale site is a morphism of sites.
 
 Source: literature/stacks-project/sites.tex, Proposition Tag 00X6 and
-Lemma Tag 00X5 (blueprint: lem-weil-pbc-zariski-etale-inclusion-morphism-of-sites).
+Lemma Tag 00X5.
 Proof (the seven steps of the node):
-1. Open immersions are étale (`lem-weil-pbc-open-immersion-etale`), so send an
+1. Open immersions are étale, so send an
    open to its inclusion and an inclusion to the corresponding morphism over `X`.
    Identities and composition are those of inclusions.
-2. The top open is terminal, and intersections are pullbacks in the poset of opens
-   (`lemma-uniform-bounds-pro-etale-affines`).
+2. The top open is terminal, and intersections are pullbacks in the poset of opens.
 3. The identity of `X` is terminal in the small étale site, and its pullbacks are
    scheme pullbacks (`situation-conventions`). Intersections
    compute these pullbacks by `lem-weil-pbc-open-preimage-fibre-product`; uniqueness
    of limits gives the canonical comparison isomorphisms.
 4. A jointly surjective open family remains jointly surjective and étale. Together
-   with step 3 this gives Stacks continuity (`def-weil-pbc-sites-and-cohomology`).
-5. Precomposition sends sheaves to sheaves
-   (`lem-weil-pbc-site-continuous-pushforward-sheaf`). Sheafified presheaf pullback
-   is its left adjoint (`lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction`),
+   with step 3 this gives Stacks continuity.
+5. Precomposition sends sheaves to sheaves. Sheafified presheaf pullback
+   is its left adjoint,
    hence preserves colimits (`situation-conventions`).
-6. The inclusion of sheaves preserves finite limits
-   (`lem-weil-pbc-site-sheaf-sets-limits-sectionwise`); presheaf pullback does too,
+6. The inclusion of sheaves preserves finite limits; presheaf pullback does too,
    by steps 2 and 3 (`situation-conventions`), as does
    sheafification (`situation-conventions`). Their composite is
    the left adjoint, so it preserves finite limits.
 7. This exact left adjoint and sectionwise precomposition give the required
-   morphism of sites, inverse image, direct image and adjunction
-   (`def-weil-pbc-sites-and-cohomology`).
+   morphism of sites, inverse image, direct image and adjunction.
 -/
 theorem zariski_to_etale_is_morphism (X : Scheme.{u}) :
     ∃ (i : X.Opens ⥤ X.Etale),

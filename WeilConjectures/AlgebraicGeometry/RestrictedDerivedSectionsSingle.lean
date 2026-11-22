@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionZeroComp
 /-! # Unshifted single comparison before restricted section homology
 
 Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-sections-single).
 -/
 
 @[expose] public section
@@ -301,7 +300,6 @@ end SingleCompatibility
 /-- On unshifted singles, the restriction and single comparisons give the explicit
 complex pullback and coefficient map, before applying any homology functor.
 Source: Stacks Project, Tags 07A6, 0D6F and 03Q8.
-(blueprint: lem-sbc-restricted-derived-sections-single).
 
 Proof: Factor the exact inverse-image single comparisons through localization Q.
 Check compatibility with composition and natural isomorphisms on the actual single

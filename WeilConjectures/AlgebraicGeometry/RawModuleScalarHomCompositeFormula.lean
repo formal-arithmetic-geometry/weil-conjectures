@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarHomEvaluation
 /-! # The bundled scalar Hom composite
 
 Source: Stacks Project, Tags 03FD and 03Q8, the explicit scalar map.
-(blueprint: lem-sbc-raw-module-scalar-hom-composite-formula).
 -/
 
 @[expose] public section
@@ -37,7 +36,6 @@ private theorem map_three_factors
 set_option backward.isDefEq.respectTransparency true in
 /-- Expand the scalar map on a raw module pullback, retaining all module factors.
 Source: Stacks Project, Tags 03FD and 03Q8, raw-map expansion.
-(blueprint: lem-sbc-raw-module-scalar-hom-composite-formula).
 
 Proof: Evaluate rawModuleAbelianHomMap as its defining additive composite:
 derived scalar forgetting on Hom groups, right composition by its coefficient

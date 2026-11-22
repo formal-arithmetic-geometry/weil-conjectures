@@ -15,8 +15,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 # Isomorphisms of quasi-coherent modules detected on an affine open cover
 
 Source: Stacks Project, Schemes, Tags 01IA and 01IB, and Sheaves, Tag 04TN;
-used in Morphisms, Tag 01SB
-(blueprint: lem-weil-pbc-quasi-coherent-iso-on-affine-cover).
+used in Morphisms, Tag 01SB.
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 arbitrary affine open cover are bijective.
 
 Source: Stacks Project, Schemes, Tags 01IA and 01IB, Sheaves, Tag 04TN;
-used in Morphisms, Tag 01SB
-(blueprint: lem-weil-pbc-quasi-coherent-iso-on-affine-cover).
+used in Morphisms, Tag 01SB.
 
 Proof (the node's four steps):
 1. For each affine open `W a`, put `R = Γ(Y, W a)`. Choose an isomorphism

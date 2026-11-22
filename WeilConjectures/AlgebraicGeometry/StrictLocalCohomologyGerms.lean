@@ -32,8 +32,7 @@ variable {C : Type (v + 1)} [Category.{v} C]
 
 /-- The free sheaf `ℤ[W]` of abelian groups on an étale `X`-scheme `W`: the sheafification of the
 presheaf `V ↦ ℤ^{(Hom_X(V, W))}`. It corepresents sections over `W`, and
-`Ext^q(ℤ[W], F)` is the étale cohomology `H^q(W, F|_W)`.
-(blueprint: def-weil-pbc-canonical-derived-cohomology-germs). -/
+`Ext^q(ℤ[W], F)` is the étale cohomology `H^q(W, F|_W)`. -/
 noncomputable def strictLocalFreeSheaf (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{v + 1}] :
     C ⥤ Sheaf J (AddCommGrpCat.{v + 1}) :=
@@ -42,8 +41,7 @@ noncomputable def strictLocalFreeSheaf (J : GrothendieckTopology C)
 
 /-- Evaluation at the generator: for a sheaf `G` of abelian groups on `X_ét`, the natural map
 `Hom(ℤ[W], G) ⟶ G(W)` sending `f` to the image under `f` of the section of `ℤ[W]` given by
-the identity of `W`.
-(blueprint: def-weil-pbc-canonical-derived-cohomology-germs). -/
+the identity of `W`. -/
 noncomputable def strictLocalFreeSheafSections
     (G : Sheaf J (AddCommGrpCat.{v + 1})) :
     (strictLocalFreeSheaf J).op ⋙ preadditiveYoneda.obj G ⟶
@@ -81,8 +79,7 @@ noncomputable def strictLocalFreeSheafSections
 variable [HasDerivedCategory.{v + 1} (Sheaf J AddCommGrpCat.{v + 1})]
 
 /-- For `L ∈ D⁺(X_ét)`, the map `Hom(ℤ[W][0], L) ⟶ Hom(ℤ[W], H⁰(L))` induced by the degree-`0`
-homology, natural in `W`.
-(blueprint: def-weil-pbc-canonical-derived-cohomology-germs). -/
+homology, natural in `W`. -/
 noncomputable def strictLocalDerivedHomToHomology
     (L : DerivedCategory.Plus (Sheaf J (AddCommGrpCat.{v + 1}))) :
     (strictLocalFreeSheaf J ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙
@@ -116,8 +113,7 @@ noncomputable def strictLocalDerivedHomToHomology
 end DerivedSections
 
 /-- The degree-n derived-sections presheaf of a bounded below derived sheaf.
-Source: Stacks, Tag 03Q8
-(blueprint: def-weil-pbc-canonical-derived-cohomology-germs). -/
+Source: Stacks, Tag 03Q8. -/
 noncomputable def strictLocalCohomologyPresheaf {S : Scheme.{v}}
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (n : ℤ) : S.Etaleᵒᵖ ⥤ AddCommGrpCat.{v + 1} :=
@@ -127,8 +123,7 @@ noncomputable def strictLocalCohomologyPresheaf {S : Scheme.{v}}
 /-- The canonical map from derived sections to sections of the cohomology sheaf.
 It takes a derived morphism to its degree-zero homology, evaluates the free generator,
 and uses the homology shift isomorphism. No sheafification isomorphism is chosen.
-Source: Stacks, Tag 03Q8
-(blueprint: def-weil-pbc-canonical-derived-cohomology-germs). -/
+Source: Stacks, Tag 03Q8. -/
 noncomputable def strictLocalCohomologyGermMap {S : Scheme.{v}}
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
     (n : ℤ) : strictLocalCohomologyPresheaf L n ⟶
@@ -139,8 +134,7 @@ noncomputable def strictLocalCohomologyGermMap {S : Scheme.{v}}
 
 /-- The stalk-to-source isomorphism for the strict-local mate, using the unique germ
 restriction and commutation of exact inverse image with homology.
-Source: Stacks, Tags 03Q9 and 03QO
-(blueprint: def-weil-pbc-canonical-derived-cohomology-germs). -/
+Source: Stacks, Tags 03Q9 and 03QO. -/
 noncomputable def strictLocalCohomologySourceIso {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -165,8 +159,7 @@ noncomputable def strictLocalCohomologySourceIso {S : Scheme.{v}}
           (Scheme.strictLocalizationToBase s)) n).app L)
 
 /-- Restrict the derived-sections presheaf to the small pointed affine representatives.
-Source: Stacks, Tag 03Q9, first proof paragraph
-(blueprint: def-weil-pbc-canonical-derived-cohomology-germs). -/
+Source: Stacks, Tag 03Q9, first proof paragraph. -/
 noncomputable def strictLocalCohomologyNeighbourhoodFunctor {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))
@@ -177,8 +170,7 @@ noncomputable def strictLocalCohomologyNeighbourhoodFunctor {S : Scheme.{v}}
 
 /-- Canonical source legs: a presheaf germ, the canonical map to the cohomology-sheaf
 stalk, and the unique strict-local germ restriction transported through exact inverse image.
-Source: Stacks, Tags 03Q8 and 03Q9
-(blueprint: def-weil-pbc-canonical-derived-cohomology-germs). -/
+Source: Stacks, Tags 03Q8 and 03Q9. -/
 noncomputable def strictLocalCohomologySourceLegs {S : Scheme.{v}}
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)
     (L : DerivedCategory.Plus (Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}))

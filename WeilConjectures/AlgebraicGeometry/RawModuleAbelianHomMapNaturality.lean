@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomTargetFormula
 /-! # Naturality of the fixed raw scalar comparison
 
 Source: Stacks Project, Tags 03FD, 03Q8 and 03D7.
-(blueprint: lem-sbc-raw-module-abelian-hom-map-naturality).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry.Etale
 set_option backward.isDefEq.respectTransparency true in
 /-- The concrete scalar comparison commutes with the five-factor raw pullback.
 Source: Stacks Project, Tags 03FD and 03Q8, with the inverse-image adjunction of 03D7.
-(blueprint: lem-sbc-raw-module-abelian-hom-map-naturality).
 
 Proof: Expand rawModuleAbelianHomMap and both raw pullbacks. The Kan-extension and
 sheafification comparisons commute with their units. Under the inverse-image

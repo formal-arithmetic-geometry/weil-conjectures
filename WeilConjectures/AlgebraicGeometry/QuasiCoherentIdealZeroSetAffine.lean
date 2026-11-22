@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-! # Zero sets of quasi-coherent ideal sheaves on affine opens
 
-Source: Stacks Project, Schemes, Example 01HM and Lemma 01IN
-(blueprint: lem-weil-pbc-quasi-coherent-ideal-zero-set-affine).
+Source: Stacks Project, Schemes, Example 01HM and Lemma 01IN.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ Lift the germ of `1` and shrink the equality to an affine neighborhood for the f
 implication. For the reverse implication, restrict each representative to an affine
 neighborhood disjoint from the support, where the ideal of sections is the unit ideal.
 Source: Stacks Project, Schemes, Example 01HM and Lemma 01IN; the germ argument is
-written directly using Mathlib's representation and equality lemmas for stalks.
-(blueprint: lem-weil-pbc-quasi-coherent-ideal-zero-set-affine). -/
+written directly using Mathlib's representation and equality lemmas for stalks. -/
 private theorem stalk_surjective_iff_not_mem_support (X : Scheme.{u})
     (K : X.IdealSheafData) (x : X) :
     Function.Surjective
@@ -92,8 +90,7 @@ ideal sheaf, whose actual submodule sheaf and inclusion are `K.toModules` and `K
 Surjectivity means that the image ideal is the whole stalk ring, without choosing an
 identification of the module stalk of the structure sheaf with its ring stalk.
 
-Source: Stacks Project, Schemes, Example 01HM, Lemmas 01HP and 01IN
-(blueprint: lem-weil-pbc-quasi-coherent-ideal-zero-set-affine).
+Source: Stacks Project, Schemes, Example 01HM, Lemmas 01HP and 01IN.
 
 Proof:
 1. The underlying map is Mathlib's abelian-group stalk map. Sectionwise injectivity of

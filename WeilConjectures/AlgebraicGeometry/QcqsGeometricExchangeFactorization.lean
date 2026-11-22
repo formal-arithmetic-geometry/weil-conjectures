@@ -34,8 +34,7 @@ namespace AlgebraicGeometry.Etale
 
 /-- Global sections to the identity geometric stalk on the spectrum of a closed field.
 This is the global-section identification followed by the identity-neighbourhood germ.
-Source: Stacks Project, Tag 03QO.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tag 03QO. -/
 noncomputable def geometricPointGlobalGerm
     (Λ : Type (u + 1)) [CommRing Λ] (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
     (G : Sheaf (Spec (.of Ω)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
@@ -56,8 +55,7 @@ set_option backward.defeqAttrib.useBackward true in
 /-- For a qcqs morphism, exchange on the identity geometric stalk factors through
 sections over the strict henselization and restriction to the given geometric fibre.
 There is no properness hypothesis and no invertibility claim for the fibre restriction.
-Source: Stacks Project, Tags 03Q9, 03Q1 and 0A3U
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Tags 03Q9, 03Q1 and 0A3U.
 
 Proof: the pointed affine-neighbourhood colimit constructs the strict-local ring and
 its distinguished map from Spec Ω. Its maximal ideal is the kernel of the residue map,

@@ -139,8 +139,7 @@ n - 1, n, n + 1: discarded factors have zero target. The product universal prope
 make the comparison an isomorphism in these three degrees, hence on H^n. The truncated
 source is a bounded finite-free complex, so finiteFree_homComplex_qc_cohomology applies.
 The K-injective RHom computation and restriction comparison identify this with the
-restriction of the desired cohomology sheaf. Quasi-coherence glues along the chosen cover.
-(blueprint: new-lem-sc-rhom-supported-qcoherent-pseudo-part-qc-cohomology). -/
+restriction of the desired cohomology sheaf. Quasi-coherence glues along the chosen cover. -/
 theorem rhom_supported_quasiCoherent_pseudo_part_qc_cohomology
     (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

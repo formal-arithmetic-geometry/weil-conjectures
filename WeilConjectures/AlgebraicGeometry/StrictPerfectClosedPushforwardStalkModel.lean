@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.OpenModuleStalkClosedPushforwardHomolog
 /-! # Bounded projective models of closed-pushforward stalks
 
 Source: Stacks Project, Tags 00AE, 01AG, 08C4 and 08CM.
-(blueprint: lem-sc-strict-perfect-closed-pushforward-stalk-model).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ with the homology of the restricted source stalk in degree zero.
 
 Source: Stacks Project, Sheaves Tag 00AE, Modules Tag 01AG, and Cohomology of Sheaves
 Tags 08C4 and 08CM; steps 1 and 2 of the stalk-resolution argument.
-(blueprint: lem-sc-strict-perfect-closed-pushforward-stalk-model).
 
 Proof. Regard the site over U as the open-subspace site and take the stalk at i(x).
 The cofinality of neighbourhoods contained in U identifies the stalk rings and the

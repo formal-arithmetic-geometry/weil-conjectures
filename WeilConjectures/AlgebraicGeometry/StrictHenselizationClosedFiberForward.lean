@@ -18,7 +18,6 @@ set_option autoImplicit false
 /-- The strict henselization structural fibre over the distinguished point contains no
 point other than the closed point. This is the forward half of the singleton-fibre theorem.
 Source: Stacks Project, Tags 04GW and 04GP.
-(blueprint: lem-weil-pbc-strict-henselization-closed-fiber-forward)
 Proof: choose an affine chart Spec R around p = s(closedPoint Ω) and factor s
 through it. The initial chart restriction and the pointed etale residue-triple equivalence
 identify the coordinate-ring colimit C defining the strict henselization with the triple

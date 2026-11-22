@@ -31,8 +31,7 @@ variable [d : ∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
 
 /-- The comparison on one open, constructed by uniqueness of left adjoints and
-composition of direct images. Source: Stacks, Tags 08BV and 08HZ
-(blueprint: lem-pc-relative-mv-exact-open-comparison). -/
+composition of direct images. Source: Stacks, Tags 08BV and 08HZ. -/
 def relativeMVExactOpenIso {X S : Scheme.{u}} (f : X ⟶ S) (W : X.Opens)
     (K : schemeDerivedCategory X) :
     (schemeDerivedDirectImage f).obj ((schemeDerivedDirectImage W.ι).obj
@@ -43,8 +42,7 @@ def relativeMVExactOpenIso {X S : Scheme.{u}} (f : X ⟶ S) (W : X.Opens)
       (relativeMVImageComp W.ι f).app ((derivedPullback W.ι).obj K)
 
 /-- The exact-open comparison carries the restriction unit to the pinned relative
-unit. Source: Stacks, Tag 08HZ; uniqueness of left adjoints
-(blueprint: lem-pc-relative-mv-exact-open-comparison). -/
+unit. Source: Stacks, Tag 08HZ; uniqueness of left adjoints. -/
 theorem relativeMVExactOpenIso_unit {X S : Scheme.{u}} (f : X ⟶ S) (W : X.Opens)
     (K : schemeDerivedCategory X) :
     (schemeDerivedDirectImage f).map ((mvOpenRestrictionAdjunction X W).unit.app K) ≫
@@ -115,7 +113,6 @@ private theorem exact_nested_map_unit_isIso (X : Scheme.{u}) {W U : X.Opens}
 
 Source: Stacks Project, Cohomology, Tags 08BV and 08HZ, the restricted-counit
 construction of the second Mayer--Vietoris arrow.
-(blueprint: lem-pc-relative-mv-exact-open-comparison).
 
 Proof: For any two adjunctions and a comparison L_U followed by H to L_W,
 the map defined as the transpose of the restricted U counit has composite with

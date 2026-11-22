@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.SectionRingCoefficientData
 /-! # Coefficients in a homogeneous localization of a section ring
 
 Source: Stacks Project, Constructions, Tag 01N8, local quotient construction.
-(blueprint: lem-sc-section-ring-coefficient-hom).
 -/
 
 @[expose] public section
@@ -25,7 +24,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- A section generating its tensor power on an open defines the coefficient ring map.
 Source: Stacks Project, Constructions, Tag 01N8, proof, local quotient construction.
-(blueprint: lem-sc-section-ring-coefficient-hom).
 
 Proof: Tensoring the free generator s on U gives a free generator s^n of L^{tensor nd}.
 For a homogeneous numerator a in degree nd, let its coefficient be the unique scalar c

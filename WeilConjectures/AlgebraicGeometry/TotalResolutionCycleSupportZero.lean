@@ -23,7 +23,6 @@ variable {R : Type u} [Ring R]
 
 /-- A total cycle lying in column zero comes from a vertical cycle in that column.
 Source: Stacks Project, Homology, Tag 09IZ, proof, final column-zero representative.
-(blueprint: aux-total-resolution-cycle-support-zero)
 
 Proof. Each component j.f is the injection of the column-zero summand into a
 coproduct, and is therefore a split monomorphism. Write iCycles(z)=j.f(n)(x).

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Supported gluing relative to an ambient scheme
 
 Source: Stacks Project, Tag 08DG; Tag 08CM for local perfectness.
-(blueprint: lem-sc-supported-relative-open-gluing).
 -/
 
 @[expose] public section
@@ -170,7 +169,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Glue arbitrary supported perfect local objects and compatible maps on W union V.
 Neither affineness nor a stabilization of either source is assumed.
 Source: Stacks Project, Tags 08DG and 08CM, used in Tag 09IM.
-(blueprint: lem-sc-supported-relative-open-gluing).
 
 Proof: Set Y=W union V and pull W and V back to opens of Y. They cover Y and are
 canonically isomorphic as open subschemes to W and V. Transport A and B through these

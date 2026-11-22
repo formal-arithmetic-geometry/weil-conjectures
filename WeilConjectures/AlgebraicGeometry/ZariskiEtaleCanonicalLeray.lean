@@ -23,7 +23,6 @@ import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 /-! # Canonical Leray comparison for the Zariski-to-étale morphism
 
 Source: Stacks Project, Cohomology on Sites, Tags 072W and 0733(1).
-(blueprint: lem-weil-pbc-zariski-etale-canonical-leray)
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ There is no strict-henselian hypothesis here.
 
 Source: literature/stacks-project/sites-cohomology.tex, Tags 072W and 0733(1);
 etale-cohomology.tex, Tag 09AX, proof, first, second and last sentences.
-(blueprint: lem-weil-pbc-zariski-etale-canonical-leray)
 
 Proof: For the usual inclusion the inverse image on abelian sheaves is exact.
 For the functor `i` specified here, first restrict to the etale object `i(⊤)`.

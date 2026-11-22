@@ -18,7 +18,6 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 # Small finite-subsum presentations of existing module-sheaf coproducts
 
 Source: Stacks Project, Modules, Tag 01AH; Cohomology, Tag 09J7.
-(blueprint: lem-weil-pbc-module-coproduct-small-subsum-diagram).
 -/
 
 @[expose] public section
@@ -57,7 +56,6 @@ by finite biproducts of its summands, with the original inclusions as component 
 Source: Stacks Project, Modules, Tag 01AH; Cohomology, Tag 09J7, the finite-subsum
 presentation used in the proof. The universe reduction is the smallness argument in
 `lem-weil-pbc-qcqs-cohomology-finite-subsum-representatives`.
-(blueprint: lem-weil-pbc-module-coproduct-small-subsum-diagram).
 
 Proof: Let N be the subtype of indices of nonzero summands. For each summand,
 the coproduct universal property supplies a projection which is the identity on

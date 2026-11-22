@@ -104,9 +104,8 @@ set_option backward.isDefEq.respectTransparency.types false in
 by a local morphism on a neighborhood. This only asserts existence of a lift;
 it asserts neither uniqueness nor a comparison isomorphism.
 
-Source: Stacks Project, Modules, Lemma 01CP (`lemma-stalk-internal-hom`), third
+Source: Stacks Project, Modules, Lemma 01CP, third
 paragraph, lifting an element of the displayed finite-coordinate kernel.
-(blueprint: lem-weil-pbc-stalk-linear-map-local-lift-finite-presentation)
 
 Proof: Choose a finite free presentation of F near x. Represent the images under
 χ of its finitely many generator germs by sections of G on a common smaller

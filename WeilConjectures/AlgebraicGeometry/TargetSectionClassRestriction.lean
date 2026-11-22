@@ -141,7 +141,6 @@ set_option backward.defeqAttrib.useBackward true in
 /-- The top-open germ of the class computed with a fixed global resolution equals
 the germ of its target section class after restriction to the inverse-image open.
 Source: Stacks Project, Lemma 20.7.3 (Tag 01E4) and Remark 20.14.2 (Tag 01FB).
-(blueprint: lem-weil-pbc-target-section-class-restriction)
 
 Proof: Put G = (tensorPullback (pullback.snd g f)).obj F and
 W = (pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V). Restrict the resolution K to W and

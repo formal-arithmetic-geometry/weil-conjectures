@@ -108,7 +108,6 @@ representative calculation: apply the K-flat total-tensor model theorem to the
 two binary pairs and then to the two outer pairs, and apply preservation of
 K-flatness and flat terms by ringed-topos pullback.
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0G7E.
-(auxiliary; not a blueprint node).
 -/
 theorem section_resolving_oplax_closure {X Y : Scheme.{u}} (f : X ⟶ Y)
     (P Q H : CochainComplex (modules Λ Y) ℤ)

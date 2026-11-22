@@ -21,7 +21,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The canonical Veronese fraction equivalence, constructed by the quotient map.
 Source: Stacks Project, Properties, equation module-invert-s (Tag 0B5L),
 Lemma 01PW(2), and the proof of Lemma 01Q1.
-(blueprint: lem-sc-section-ring-veronese-fractions-formula)
 
 The explicit direct-sum map sends `t` in numerator degree `n` to
 `of_(nd)(T_n⁻¹(t))/s^n`. Its surjectivity is proved in
@@ -43,7 +42,6 @@ noncomputable def sectionRingVeroneseFractionEquiv
 
 /-- Formula for the Veronese fraction equivalence on homogeneous generators.
 Source: Stacks Project, Properties, Tag 0B5L and Lemma 01PW(2).
-(blueprint: lem-sc-section-ring-veronese-fractions-formula)
 Proof: apply the inverse of the constructed equivalence to both sides. The quotient
 map sends the displayed section-fraction generator to the fraction whose numerator
 is obtained by first applying `T_n` and then `T_n⁻¹`. These cancel. Membership of `ξ`

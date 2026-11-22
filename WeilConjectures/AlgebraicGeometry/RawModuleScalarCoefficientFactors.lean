@@ -13,7 +13,6 @@ public import
 /-! # Coefficient factors of the derived scalar pullback square
 
 Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: def-sbc-raw-scalar-coefficient-factors).
 -/
 
 @[expose] public section
@@ -24,8 +23,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
 /-- The last two module pullback factors.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: def-sbc-raw-scalar-coefficient-factors). -/
+Source: Stacks Project, Tag 03Q8. -/
 noncomputable def moduleCoefficientFactor
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -40,8 +38,7 @@ noncomputable def moduleCoefficientFactor
     (shiftFunctor _ q).map (higherDirectImageRawOverCoefficient Λ G f)
 
 /-- The last two abelian pullback factors.
-Source: Stacks Project, Tag 03Q8.
-(blueprint: def-sbc-raw-scalar-coefficient-factors). -/
+Source: Stacks Project, Tag 03Q8. -/
 noncomputable def abelianCoefficientFactor
     {W : Scheme.{u}} (G : Sheaf W.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℤ)
     (A B : Over W) (f : A ⟶ B) :

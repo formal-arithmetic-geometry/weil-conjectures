@@ -15,8 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-!
 # Quasi-coherence of pushforward along a qcqs morphism
 
-Source: Stacks Project, Schemes, Lemma 26.24.1, Tag 01LC
-(blueprint: pqf-lem-pushforward-qcoh).
+Source: Stacks Project, Schemes, Lemma 26.24.1, Tag 01LC.
 -/
 
 @[expose] public section
@@ -47,8 +46,7 @@ private lemma section_torsion_of_basicOpen_eq
   exact exists_pow_smul_eq_zero_of_isCompact F hW a t ht
 
 /-- Pushforward along a quasi-compact, quasi-separated morphism preserves quasi-coherence.
-Source: Stacks Project, Schemes, Lemma 26.24.1, Tag 01LC
-(blueprint: pqf-lem-pushforward-qcoh).
+Source: Stacks Project, Schemes, Lemma 26.24.1, Tag 01LC.
 
 Proof:
 1. Work over an affine open `S₀ = Spec A` and set `X₀ = f⁻¹(S₀)`. Quasi-compactness

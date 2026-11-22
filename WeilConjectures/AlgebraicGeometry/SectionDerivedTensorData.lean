@@ -35,8 +35,7 @@ import all WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 /-! # Canonical derived section-module tensor data
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
-03D7, 03DI and 03DJ; Cohomology on Sites, Tags 07A4, 07A6 and 0B56
-(auxiliary; not a blueprint node).
+03D7, 03DI and 03DJ; Cohomology on Sites, Tags 07A4, 07A6 and 0B56.
 
 ## Main definitions
 
@@ -45,7 +44,6 @@ Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,
 - `tensor`, `tensorUnit`, `tensorComparison`: normalized conjugate K-flat tensor data.
 - `totalTensor`: the signed direct-sum total of the ordinary relative tensor.
 - `localizedTotalComparison`: the specified total comparison after localization.
-
 -/
 
 @[expose] public noncomputable section
@@ -70,22 +68,19 @@ variable {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C]
   {D : Type u₂} [Category.{v₂} D]
 
 /-- A transported tensor vertex, shared before projecting any functor data.
-Source: Stacks 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, fixed equivalence transport. -/
 def tensorObject (e : C ≌ D) (X Y : D) : D :=
   e.functor.obj (e.inverse.obj X ⊗ e.inverse.obj Y)
 
 /-- A transported tensor morphism, with its shared tensor vertices in the signature.
-Source: Stacks 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, fixed equivalence transport. -/
 def tensorMorphism (e : C ≌ D) {X Y X' Y' : D} (f : X ⟶ X') (g : Y ⟶ Y') :
     tensorObject e X Y ⟶ tensorObject e X' Y' :=
   e.functor.map ((e.inverse.map f ▷ e.inverse.obj Y) ≫
     (e.inverse.obj X' ◁ e.inverse.map g))
 
 /-- The conjugated uncurried tensor, shared by the functor and monoidal data.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
 def tensorFunctor (e : C ≌ D) : D × D ⥤ D :=
   let B := (e.inverse.prod e.inverse) ⋙ Functor.uncurry.obj (curriedTensor C) ⋙ e.functor
   { obj := fun XY ↦ tensorObject e XY.1 XY.2
@@ -94,35 +89,30 @@ def tensorFunctor (e : C ≌ D) : D × D ⥤ D :=
     map_comp := fun f g ↦ B.map_comp f g }
 
 /-- The transported unit object, shared with the section unit definition.
-Source: Stacks 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, fixed equivalence transport. -/
 def unitObject (e : C ≌ D) : D := e.functor.obj (𝟙_ C)
 
 /-- The transported associator, with vertices expressed by the shared tensor functor.
-Source: Stacks 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, fixed equivalence transport. -/
 def associator (e : C ≌ D) (X Y Z : D) :
     (tensorFunctor e).obj ((tensorFunctor e).obj (X, Y), Z) ≅
       (tensorFunctor e).obj (X, (tensorFunctor e).obj (Y, Z)) :=
   @MonoidalCategoryStruct.associator _ _ (Monoidal.transportStruct e) X Y Z
 
 /-- The transported left unitor at the shared unit and tensor vertices.
-Source: Stacks 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, fixed equivalence transport. -/
 def leftUnitor (e : C ≌ D) (X : D) :
     (tensorFunctor e).obj (unitObject e, X) ≅ X :=
   @MonoidalCategoryStruct.leftUnitor _ _ (Monoidal.transportStruct e) X
 
 /-- The transported right unitor at the shared unit and tensor vertices.
-Source: Stacks 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, fixed equivalence transport. -/
 def rightUnitor (e : C ≌ D) (X : D) :
     (tensorFunctor e).obj (X, unitObject e) ≅ X :=
   @MonoidalCategoryStruct.rightUnitor _ _ (Monoidal.transportStruct e) X
 
 /-- The transported tensor, using the existing uncurried tensor map formula.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
 @[instance_reducible]
 def struct (e : C ≌ D) : MonoidalCategoryStruct D :=
   { (Monoidal.transportStruct e) with
@@ -135,8 +125,7 @@ def struct (e : C ≌ D) : MonoidalCategoryStruct D :=
       (tensorFunctor e).map (Prod.mkHom f g) }
 
 /-- The functor map formula equals the canonical tensor, by tensorHom_def.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
 theorem struct_eq (e : C ≌ D) : struct e = Monoidal.transportStruct e := by
   dsimp only [struct, tensorFunctor, tensorObject, tensorMorphism, unitObject,
     associator, leftUnitor, rightUnitor,
@@ -147,8 +136,7 @@ theorem struct_eq (e : C ≌ D) : struct e = Monoidal.transportStruct e := by
   exact congrArg e.functor.map (MonoidalCategory.tensorHom_def _ _).symm
 
 /-- The four laws involving tensorHom transfer through the proved equality of data.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
 theorem laws (e : C ≌ D) :
     letI := struct e
     (∀ {X₁ Y₁ X₂ Y₂ : D} (f : X₁ ⟶ Y₁) (g : X₂ ⟶ Y₂),
@@ -166,8 +154,7 @@ theorem laws (e : C ≌ D) :
     MonoidalCategory.tensorHom_comp_tensorHom, MonoidalCategory.associator_naturality⟩
 
 /-- The canonical transported monoidal category with the functor map formula exposed.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
 @[instance_reducible]
 def monoidal (e : C ≌ D) : MonoidalCategory D :=
   { (Monoidal.transport e) with
@@ -178,8 +165,7 @@ def monoidal (e : C ≌ D) : MonoidalCategory D :=
     associator_naturality := (laws e).2.2.2 }
 
 /-- The tensor functor of the shared full structure is the shared conjugate functor.
-Source: Stacks 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, fixed equivalence transport. -/
 private theorem monoidal_ext (m n : MonoidalCategory D)
     (h : m.toMonoidalCategoryStruct = n.toMonoidalCategoryStruct) : m = n := by
   cases m
@@ -188,8 +174,7 @@ private theorem monoidal_ext (m n : MonoidalCategory D)
   rfl
 
 /-- The full structure equals the canonical transport; its law fields are proofs.
-Source: Stacks 07A4 and 06YU, fixed equivalence transport
-(auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 06YU, fixed equivalence transport. -/
 theorem monoidal_eq (e : C ≌ D) : monoidal e = Monoidal.transport e :=
   monoidal_ext _ _ (struct_eq e)
 
@@ -205,13 +190,13 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 
 /-- Read the source functor of the specified comparison without re-inferring its
 large derived-functor instance arguments. This returns the actual source itself.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 @[implicit_reducible]
 def comparisonSource {C : Type u₁} [Category.{v₁} C]
     {D : Type u₂} [Category.{v₂} D] {F G : C ⥤ D} (_e : F ≅ G) : C ⥤ D := F
 
 /-- Countable coproducts supply the internal graded tensor in every degree.
-Source: Stacks 06YN (auxiliary; not a blueprint node).
+Source: Stacks 06YN.
 Proof: the degree-n index consists of pairs of integers with sum n, hence is
 countable. The internal Grothendieck module category has this coproduct. -/
 @[instance] theorem internal_hasGradedTensor (X : Scheme.{u})
@@ -220,7 +205,7 @@ countable. The internal Grothendieck module category has this coproduct. -/
   infer_instance
 
 /-- Countable coproducts supply the section-module graded tensor in every degree.
-Source: Stacks 06YN (auxiliary; not a blueprint node).
+Source: Stacks 06YN.
 Proof: use the coproduct over integer pairs of fixed total degree, whose existence
 transfers through the fixed section-module equivalence. -/
 @[instance] theorem section_hasGradedTensor (X : Scheme.{u})
@@ -229,7 +214,7 @@ transfers through the fixed section-module equivalence. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
-Source: Stacks 03EK and 06YN (auxiliary; not a blueprint node).
+Source: Stacks 03EK and 06YN.
 Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
 maps from its summands. Hence tensoring preserves each coproduct over integer
 indices of fixed sum. Iterating this property gives the triple and quadruple
@@ -241,7 +226,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
-Source: Stacks 03EK and 06YN (auxiliary; not a blueprint node).
+Source: Stacks 03EK and 06YN.
 Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
 maps from its summands. Hence tensoring preserves each coproduct over integer
 indices of fixed sum. Iterating this property gives the triple and quadruple
@@ -253,7 +238,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the internal graded tensor.
-Source: Stacks 03EK and 06YN (auxiliary; not a blueprint node).
+Source: Stacks 03EK and 06YN.
 Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
 maps from its summands. Hence tensoring preserves each coproduct over integer
 indices of fixed sum. Iterating this property gives the triple and quadruple
@@ -265,7 +250,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
-Source: Stacks 03EK and 06YN (auxiliary; not a blueprint node).
+Source: Stacks 03EK and 06YN.
 Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
 maps from its summands. Hence tensoring preserves each coproduct over integer
 indices of fixed sum. Iterating this property gives the triple and quadruple
@@ -277,7 +262,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
-Source: Stacks 03EK and 06YN (auxiliary; not a blueprint node).
+Source: Stacks 03EK and 06YN.
 Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
 maps from its summands. Hence tensoring preserves each coproduct over integer
 indices of fixed sum. Iterating this property gives the triple and quadruple
@@ -289,7 +274,7 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- Relative tensor commutes with the countable sums defining the section graded tensor.
-Source: Stacks 03EK and 06YN (auxiliary; not a blueprint node).
+Source: Stacks 03EK and 06YN.
 Proof: a balanced bilinear map from a coproduct is a family of balanced bilinear
 maps from its summands. Hence tensoring preserves each coproduct over integer
 indices of fixed sum. Iterating this property gives the triple and quadruple
@@ -301,14 +286,14 @@ comparison universal properties of the existing graded tensor construction. -/
   infer_instance
 
 /-- The existing internal total derived pullback, with its category arguments fixed.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 @[implicit_reducible]
 def internalDerivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (internalModules Λ Y) ⥤ DerivedCategory (internalModules Λ X) :=
   comparisonSource (CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory Λ f)
 
 /-- The existing internal total derived pushforward, with its category arguments fixed.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 @[implicit_reducible]
 def internalDerivedPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (internalModules Λ X) ⥤ DerivedCategory (internalModules Λ Y) :=
@@ -316,7 +301,7 @@ def internalDerivedPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 set_option linter.unusedSectionVars false in
 /-- The fixed section equivalence functor is additive.
-Source: Stacks 00YV (auxiliary; not a blueprint node).
+Source: Stacks 00YV.
 Proof: an equivalence preserves binary products, hence is additive between preadditive
 categories. -/
 theorem sectionFunctorAdditive (X : Scheme.{u}) :
@@ -324,14 +309,14 @@ theorem sectionFunctorAdditive (X : Scheme.{u}) :
   Functor.additive_of_preserves_binary_products (equivalence Λ X).functor
 
 /-- The localization of the fixed termwise sectionwise functor.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks 05RU. -/
 @[implicit_reducible]
 def derivedFunctor (X : Scheme.{u}) :
     DerivedCategory (internalModules Λ X) ⥤ DerivedCategory (modules Λ X) :=
   (equivalence Λ X).functor.mapDerivedCategory
 
 /-- Localizing the termwise equivalence again gives an equivalence.
-Source: Stacks 05RU (auxiliary; not a blueprint node).
+Source: Stacks 05RU.
 Proof: an equivalence preserves and reflects quasi-isomorphisms; its localization
 is an equivalence. -/
 @[instance] theorem derivedFunctor_isEquivalence (X : Scheme.{u}) :
@@ -340,27 +325,27 @@ is an equivalence. -/
   infer_instance
 
 /-- The induced derived equivalence, with the fixed localization functor as forward functor.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks 05RU. -/
 @[implicit_reducible]
 def derivedEquivalence (X : Scheme.{u}) :
     DerivedCategory (internalModules Λ X) ≌ DerivedCategory (modules Λ X) :=
   (derivedFunctor Λ X).asEquivalence
 
 /-- The forward functor of the derived equivalence is the fixed localization.
-Source: Stacks 05RU (auxiliary; not a blueprint node).
+Source: Stacks 05RU.
 Proof: this is the forward field of the localized equivalence. -/
 theorem derivedEquivalence_functor (X : Scheme.{u}) :
     (derivedEquivalence Λ X).functor = (equivalence Λ X).functor.mapDerivedCategory := rfl
 
 /-- Ringed-topos derived pullback, levelwise since these coefficients pull back exactly.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 @[implicit_reducible]
 def derivedPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (modules Λ Y) ⥤ DerivedCategory (modules Λ X) :=
   (pullback Λ f).mapDerivedCategory
 
 /-- K-injective resolutions transfer through the sectionwise exact equivalence.
-Source: Stacks 070H (auxiliary; not a blueprint node).
+Source: Stacks 070H.
 Proof: a chain map from an acyclic complex is null-homotopic on one side exactly
 when its underlying linear maps give that same null-homotopy on the other. Transfer
 the functorial internal K-injective resolution through the equivalence. -/
@@ -370,7 +355,7 @@ the functorial internal K-injective resolution through the equivalence. -/
   infer_instance
 
 /-- Functorial flat resolutions transfer through the fixed exact tensor equivalence.
-Source: Stacks 03EK and 06YU (auxiliary; not a blueprint node).
+Source: Stacks 03EK and 06YU.
 Proof: conjugate the existing internal functorial flat-resolution functor by the
 section equivalence, and transfer its augmentation using the counit. The existing
 internal_section_tensor_comparison preserves flat objects and exactness, hence
@@ -413,14 +398,14 @@ preserves the flatness and epimorphism requirements of this resolution. -/
   infer_instance
 
 /-- Actual K-injective derived ringed-site direct image.
-Source: Stacks 07A6 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A6. -/
 @[implicit_reducible]
 def derivedPushforward {X Y : Scheme.{u}} (f : X ⟶ Y) :
     DerivedCategory (modules Λ X) ⥤ DerivedCategory (modules Λ Y) :=
   (pushforward Λ f).rightDerivedFunctor
 
 /-- The usual uncurried signed-total functor with its object field written directly.
-Source: Stacks 06YN (auxiliary; not a blueprint node).
+Source: Stacks 06YN.
 The maps and both functor laws are those of the existing uncurried construction.
 This record is definitionally equal to it, while its objects avoid reducing through
 both curried functor categories. -/
@@ -437,7 +422,7 @@ def cochainTotalFunctor
 
 set_option linter.overlappingInstances false in
 /-- The native signed total tensor of internal cochain complexes.
-Source: Stacks 06YN (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN. -/
 def internalTotalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
     (X : Scheme.{u}) :
     CochainComplex (internalModules Λ X) ℤ × CochainComplex (internalModules Λ X) ℤ ⥤
@@ -445,7 +430,7 @@ def internalTotalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules
   cochainTotalFunctor (curriedTensor (internalModules Λ X))
 
 /-- The existing lax localization tensor map, with its two functors fixed.
-Source: Stacks 06YU (auxiliary; not a blueprint node).
+Source: Stacks 06YU.
 Naturality is the naturality axiom of the actual localization tensorator. -/
 @[irreducible] def internalLocalizationTensorMap (X : Scheme.{u}) :
     ((DerivedCategory.Q (C := internalModules Λ X)).prod DerivedCategory.Q) ⋙
@@ -467,7 +452,7 @@ Naturality is the naturality axiom of the actual localization tensorator. -/
 
 set_option linter.unusedSectionVars false in
 /-- The cached map has exactly the existing native localization components.
-Source: Stacks 06YU (auxiliary; not a blueprint node).
+Source: Stacks 06YU.
 Proof: project the displayed transformation's component. -/
 theorem internalLocalizationTensorMap_app (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
@@ -477,7 +462,7 @@ theorem internalLocalizationTensorMap_app (X : Scheme.{u})
   rfl
 
 /-- The fixed monoidal transport, shared by the tensor and its constraint diagrams.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 @[instance_reducible]
 def transportedDerivedMonoidal (X : Scheme.{u}) :
     MonoidalCategory (DerivedCategory (modules Λ X)) :=
@@ -486,20 +471,20 @@ def transportedDerivedMonoidal (X : Scheme.{u}) :
 /-- The canonical sectionwise derived tensor, constructed by exact equivalence transport.
 Its K-flat representative characterization is stated below, so this construction uses
 precisely the ordinary sectionwise derived tensor, with no arbitrary bifunctor choice.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def tensor (X : Scheme.{u}) :
     DerivedCategory (modules Λ X) × DerivedCategory (modules Λ X) ⥤
       DerivedCategory (modules Λ X) :=
   ResolvingOplaxConstraints.TensorFunctorTransport.tensorFunctor (derivedEquivalence Λ X)
 
 /-- The tensor unit in the transported K-flat tensor model.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def tensorUnit (X : Scheme.{u}) : DerivedCategory (modules Λ X) :=
   ((derivedEquivalence Λ X).functor).obj
     ((DerivedCategory.singleFunctor (internalModules Λ X) 0).obj (𝟙_ (internalModules Λ X)))
 
 /-- The tensor comparison is uniquely specified by the equivalence unit.
-Source: Stacks 06YU (auxiliary; not a blueprint node).
+Source: Stacks 06YU.
 Proof: apply the derived equivalence to the tensor of its unit isomorphisms.
 Naturality is the tensor of the two unit naturality equations. -/
 theorem tensorComparison_existsUnique (X : Scheme.{u}) :
@@ -528,7 +513,7 @@ theorem tensorComparison_existsUnique (X : Scheme.{u}) :
     exact hs M N
 
 /-- The tensor comparison selected by its unique equivalence-unit normalization.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def tensorComparison (X : Scheme.{u}) :
     Functor.uncurry.obj (CondensedRing.derivedTensor Λ X) ⋙ (derivedEquivalence Λ X).functor ≅
       ((derivedEquivalence Λ X).functor.prod (derivedEquivalence Λ X).functor) ⋙ tensor Λ X :=
@@ -536,7 +521,7 @@ def tensorComparison (X : Scheme.{u}) :
 
 set_option linter.overlappingInstances false in
 /-- The sectionwise tensor of cochain complexes is the signed direct-sum total.
-Source: Stacks 06YN (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN. -/
 def totalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
     (X : Scheme.{u}) :
     CochainComplex (modules Λ X) ℤ × CochainComplex (modules Λ X) ℤ ⥤
@@ -545,7 +530,7 @@ def totalTensor [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 
 set_option linter.unusedSectionVars false in
 /-- Naturality of the fixed ordinary tensor comparison.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
+Source: Stacks 03EK.
 Proof: use the existing pure-tensor naturality calculation. -/
 theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})
     (M M' N N' : internalModules Λ X) (f : M ⟶ M') (g : N ⟶ N') :
@@ -555,7 +540,7 @@ theorem sectionOrdinaryTensorNaturality (X : Scheme.{u})
   exact ordinaryTensorComparison_natural Λ X M M' N N' f g
 
 /-- The actual ordinary tensor comparison as a curried natural transformation.
-Source: Stacks 03EK (auxiliary; not a blueprint node). -/
+Source: Stacks 03EK. -/
 @[irreducible] def sectionOrdinaryTensorMap (X : Scheme.{u}) :
     (Functor.postcompose₂.obj (equivalence Λ X).functor).obj
         (curriedTensor (internalModules Λ X)) ⟶
@@ -571,7 +556,7 @@ Source: Stacks 03EK (auxiliary; not a blueprint node). -/
       simpa using sectionOrdinaryTensorNaturality Λ X M M' N N f (𝟙 N) }
 
 /-- Each ordinary comparison component is invertible.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
+Source: Stacks 03EK.
 Proof: each component is the hom of ordinaryTensorComparison. -/
 theorem sectionOrdinaryTensorMap_isIso (X : Scheme.{u})
     (M N : internalModules Λ X) : IsIso (((sectionOrdinaryTensorMap Λ X).app M).app N) := by
@@ -579,7 +564,7 @@ theorem sectionOrdinaryTensorMap_isIso (X : Scheme.{u})
   infer_instance
 
 /-- The curried comparison has the prescribed ordinary components.
-Source: Stacks 03EK (auxiliary; not a blueprint node).
+Source: Stacks 03EK.
 Proof: unfold the natural transformation and read its component. -/
 theorem sectionOrdinaryTensorMap_app (X : Scheme.{u})
     (M N : internalModules Λ X) :
@@ -591,7 +576,7 @@ theorem sectionOrdinaryTensorMap_app (X : Scheme.{u})
 attribute [local instance] sectionFunctorAdditive sectionOrdinaryTensorMap_isIso
 
 /-- The specified total comparison, with the actual total functors fixed.
-Source: Stacks 06YN (auxiliary; not a blueprint node).
+Source: Stacks 06YN.
 This is the canonical signed map induced by the ordinary natural comparison. -/
 @[irreducible] def sectionTotalComparison (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
@@ -604,7 +589,7 @@ This is the canonical signed map induced by the ordinary natural comparison. -/
   HomologicalComplex.mapBifunctorComparison (sectionOrdinaryTensorMap Λ X) (.up ℤ) P Q
 
 /-- The canonical total map equals the existing uniquely normalized comparison.
-Source: Stacks 06YN (auxiliary; not a blueprint node).
+Source: Stacks 06YN.
 Proof: the mapBifunctor comparison is invertible because its ordinary components are
 isomorphisms and the equivalence preserves coproducts. Its summand formula is exactly
 the defining normalization, so uniqueness identifies the two isomorphisms. -/
@@ -634,14 +619,14 @@ theorem sectionTotalComparison_eq (X : Scheme.{u})
     (totalComparison_existsUnique Λ X P Q).exists.choose_spec)
 
 /-- The specified exact-functor localization factor, before taking a component.
-Source: Stacks 05RU (auxiliary; not a blueprint node). -/
+Source: Stacks 05RU. -/
 def sectionLocalizationIso (X : Scheme.{u}) :
     DerivedCategory.Q ⋙ (derivedEquivalence Λ X).functor ≅
       (equivalence Λ X).functor.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
   (equivalence Λ X).functor.mapDerivedCategoryFactors
 
 /-- The specified localization comparison of the fixed termwise section equivalence.
-Source: Stacks 05RU and 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 05RU and 06YU. -/
 def sectionLocalizationComparison (X : Scheme.{u})
     (P : CochainComplex (internalModules Λ X) ℤ) :
     (derivedEquivalence Λ X).functor.obj (DerivedCategory.Q.obj P) ≅
@@ -650,7 +635,7 @@ def sectionLocalizationComparison (X : Scheme.{u})
   (equivalence Λ X).functor.mapDerivedCategoryFactors.app P
 
 /-- The fixed ordinary total comparison localized after the section factor map.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def localizedTotalComparison (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
     (derivedEquivalence Λ X).functor.obj

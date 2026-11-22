@@ -48,8 +48,7 @@ commuted with cohomology, the derived base-change mate `g⁻¹ Rf_* ⟶ Rf'_* p�
 global sections and Leray isomorphism `strictHenselizationLerayHomologyIso`, i.e. the
 construction of `strictHenselizationCohomologyComparison` applied to `K`) is an isomorphism.
 
-Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images
-(blueprint: prop-weil-pbc-strict-henselization-stalk-formula).
+Source: Stacks Project, Tag 03Q9, theorem-higher-direct-images.
 The proof uses the sheafified higher-direct-image formula, geometric stalks and their
 sheafification invariance, cofinal affine pointed neighborhoods, the strict-henselization
 limit and fibre-product limit, and étale cohomology continuity. For the derived clause it

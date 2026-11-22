@@ -15,7 +15,6 @@ import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 /-! # Localization of Hom into successive module direct images
 
 Source: Stacks Project, Cohomology, Tags 079W, 0D5S, and 0D5T.
-(blueprint: lem-pc-ringed-space-kflat-direct-image-hom-localization).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ image of a K-injective complex, without requiring that direct image be K-injecti
 Source: Stacks Project, Cohomology, lemma-adjoint (079W),
 lemma-derived-pullback-composition (0D5S), and
 lemma-derived-pushforward-composition (0D5T).
-(blueprint: lem-pc-ringed-space-kflat-direct-image-hom-localization).
 
 Proof: denote successive tensor pullback by P and its right adjoint by F.
 A derived map QK to QFI is a roof K ←s K' →a FI in the homotopy category.

@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.AlternatingCechTotalComplex
 /-! # The singleton Čech augmentation
 
 Source: Stacks Project, Tag 08C2, singleton-cover specialization of the alternating total.
-(blueprint: lem-sc-singleton-cech-augmentation-iso).
 -/
 
 @[expose] public section
@@ -23,7 +22,6 @@ namespace AlgebraicGeometry
 /-- For the cover consisting of the whole scheme, the section-to-total augmentation
 is already an isomorphism of complexes, without any acyclicity or boundedness assumption.
 Source: Stacks Project, Tag 08C2, equation-global-sections-to-alternating-cech.
-(blueprint: lem-sc-singleton-cech-augmentation-iso).
 
 Proof: In Čech degree zero there is exactly one increasing tuple into Fin 1. Its
 intersection is the whole scheme and the restriction is the identity. In every

@@ -207,7 +207,6 @@ private theorem comparison_q_hom_ext
 /--
 The proof constructs the unit map from pure tensors and scalar extension.
 Source: Stacks Project, Modules on Sites, Tag 03EL.
-(auxiliary; not a blueprint node).
 Proof in words: The proof constructs the unit map from pure tensors and scalar extension. -/
 theorem canonicalRingedTensorComparison_unit_exists
     (hmap : ∀ {M N : (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.CechDifferentialRepeated
 # Signed extension of ordered Čech cochains
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 01FI, 01FJ and 01FK.
-(blueprint: lem-pc-signed-cech-extension-differential)
 -/
 
 @[expose] public section
@@ -36,8 +35,7 @@ variable (X : Scheme.{u}) {I : Type v} [LinearOrder I]
 
 /-- Extend by the sorting sign and restriction from the sorted chosen intersection.
 Repeated tuples are sent to zero; no witness of a postponed existence theorem is used.
-Source: Stacks 01FG, the formula for c following Definition 01FI.
-(blueprint: lem-pc-signed-cech-extension-differential) -/
+Source: Stacks 01FG, the formula for c following Definition 01FI. -/
 noncomputable def signedCechExtensionValue (p : ℕ)
     (s : ∀ t : {t : Fin (p + 1) → I // StrictMono t}, F.obj (op (S.W p t.1))) :
     S.cochains F p := by
@@ -52,8 +50,7 @@ noncomputable def signedCechExtensionValue (p : ℕ)
 /-- The signed extension is additive.
 Source: Stacks 01FG, the formula for c following Definition 01FI. Each branch is a
 restriction homomorphism followed by integer multiplication, or zero, so it preserves
-zero and addition componentwise.
-(blueprint: lem-pc-signed-cech-extension-differential) -/
+zero and addition componentwise. -/
 noncomputable def signedCechExtension (p : ℕ) :
     AddCommGrpCat.of
       (∀ t : {t : Fin (p + 1) → I // StrictMono t}, F.obj (op (S.W p t.1))) ⟶
@@ -73,8 +70,7 @@ noncomputable def signedCechExtension (p : ℕ) :
 
 /-- On increasing tuples signed extension is the identity.
 Source: Stacks 01FK. The sorting permutation is the identity, its sign is one, and
-restriction along the identity index map is the identity.
-(blueprint: lem-pc-signed-cech-extension-differential) -/
+restriction along the identity index map is the identity. -/
 theorem signedCechExtension_increasing (p : ℕ)
     (s : ∀ t : {t : Fin (p + 1) → I // StrictMono t}, F.obj (op (S.W p t.1)))
     (t : {t : Fin (p + 1) → I // StrictMono t}) :
@@ -142,7 +138,6 @@ private theorem signedCechExtension_permutation (p : ℕ)
 coordinates.
 
 Source: Stacks 01FJ, with the explicit signed extension of Definition 01FI.
-(blueprint: lem-pc-signed-cech-extension-differential)
 
 Proof: Evaluate on a tuple t. If its entries are distinct, let sigma sort t and
 reindex the differential sum by the position of the deleted entry in the sorted tuple.

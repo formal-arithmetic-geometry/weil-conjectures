@@ -9,8 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.StrictPerfectCoefficientPackage
 /-! # Locally constant finite type modules on a small site
 
 Source: Stacks Project, Modules on Sites, Definition 093Q;
-Cohomology on Sites, Tag 094H
-(auxiliary; not a blueprint node).
+Cohomology on Sites, Tag 094H.
 -/
 
 @[expose] public section
@@ -22,8 +21,7 @@ open CategoryTheory
 namespace SheafOfModules
 
 /-- The constant commutative-ring sheafification unit remains locally injective after
-forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H
-(auxiliary; not a blueprint node).
+forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H.
 Proof: equality after the unit is locally equality before it by sheafification; forgetting
 commutativity changes neither sections nor their equality. -/
 theorem constantCommRingUnit_locallyInjective
@@ -41,8 +39,7 @@ theorem constantCommRingUnit_locallyInjective
 attribute [instance] constantCommRingUnit_locallyInjective
 
 /-- The constant commutative-ring sheafification unit remains locally surjective after
-forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H
-(auxiliary; not a blueprint node).
+forgetting to rings. Source: Stacks, sheafification, Tags 00W1 and 094H.
 Proof: sections of a sheafification locally come from presheaf sections, and forgetting
 commutativity leaves those same sections and local lifts. -/
 theorem constantCommRingUnit_locallySurjective
@@ -65,8 +62,7 @@ The constant module is the sheafification of the existing constant module preshe
 the constant-ring sheafification unit. Restriction to the slice is `overFunctor`.
 
 Source: Stacks Project, Modules on Sites, Definition 093Q;
-Cohomology on Sites, Tag 094H
-(auxiliary; not a blueprint node). -/
+Cohomology on Sites, Tag 094H. -/
 noncomputable def IsLocallyConstantFiniteType
     {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
     (B : Type u) [CommRing B]

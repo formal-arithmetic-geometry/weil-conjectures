@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.ObjectSectionsNaturality
 /-! # Restriction of the underived stage sections comparison
 
 Source: Stacks Project, Tags 03Q9 and 03S2, restriction of an injective complex.
-(blueprint: lem-weil-pbc-source-stage-sections-naturality).
 -/
 
 @[expose] public section
@@ -53,7 +52,6 @@ set_option backward.defeqAttrib.useBackward true in
 /-- The stage comparison intertwines restriction already at the chain level.
 Source: Stacks Project, Tag 03Q9, final paragraph, and Tag 03S2,
 etale restriction and its left adjoint.
-(blueprint: lem-weil-pbc-source-stage-sections-naturality).
 
 Proof: In degree k, direct-image sections at W_i are sections of M.X k on
 W_i times_S X, with restriction along the pullback of the neighbourhood arrow.

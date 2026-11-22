@@ -65,7 +65,7 @@ on Ext, and the degree-n Ext map induced by a specified scalar unit η is biject
 transporting its source and target by specified isomorphisms, the corresponding V-scalar-unit map on
 Ext is also bijective [def-weil-abstract-derived-category].
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
+06YY and 0GLZ.
 Proof: Naturality of exact-functor Ext maps for the square isomorphism makes the two maps a
 commuting square after the endpoint isomorphisms. Those isomorphisms induce bijections by Yoneda
 composition, as do F and G by assumption. Express the lower map as a composite of these bijections

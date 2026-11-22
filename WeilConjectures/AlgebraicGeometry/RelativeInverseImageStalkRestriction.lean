@@ -13,9 +13,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Functor
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeForgetCommRingCat
 
-/-! # Stalk of restriction along the relative inverse-image ring map
-
-(blueprint: lem-pc-relative-inverse-image-stalk-restriction).
+/-! # Stalk of restriction along the relative inverse-image ring map.
 -/
 
 @[expose] public section
@@ -117,8 +115,7 @@ formula for the module action then shows that the identity on the additive stalk
 is linear for the two A-actions. These identities are natural in every sheaf morphism,
 so their termwise identity isomorphisms commute with the differentials of K and
 assemble into the displayed complex isomorphism. No K-flatness, boundedness or
-quasi-isomorphism assumption is used. This includes zero modules and all degrees.
-(blueprint: lem-pc-relative-inverse-image-stalk-restriction). -/
+quasi-isomorphism assumption is used. This includes zero modules and all degrees. -/
 theorem relative_inverseImage_stalk_restriction_iso
     {X Y : Scheme.{u}} (f : X ⟶ Y) (y : X)
     (K : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) :

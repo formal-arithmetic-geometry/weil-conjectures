@@ -45,8 +45,7 @@ into E. Its spectrum
 map is scheme-theoretically dominant and respects the base algebra maps by construction.
 Transport the E/k' transcendence basis and separability across e to obtain separable
 generation over kappa(eta'). This construction works also for identity base extension;
-it imposes no reducedness or finite presentation assumption on the original family.
-(blueprint: lem-sbc-reduced-generic-fibre-field-embedding) -/
+it imposes no reducedness or finite presentation assumption on the original family. -/
 theorem exists_reduced_generic_fibre_field_embedding
     {Z S S' : Scheme.{u}} [IsAffine Z] [IsAffine S] [IsAffine S'] [IsIntegral S']
     (g : Z ⟶ S) (q : S' ⟶ S) (η : S) (η' : S') (hq : q η' = η)

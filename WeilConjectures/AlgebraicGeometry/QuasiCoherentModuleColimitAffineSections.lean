@@ -17,8 +17,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Directed colimits of quasi-coherent modules
 
-Source: Stacks Project, Schemes, Lemma 01ID and Section 26.24, item (4)
-(blueprint: lem-weil-pbc-quasi-coherent-module-colimit-affine-sections).
+Source: Stacks Project, Schemes, Lemma 01ID and Section 26.24, item (4).
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 set_option backward.isDefEq.respectTransparency false in
 /-- A directed colimit of quasi-coherent modules is quasi-coherent, and its sections
 on an affine open have the expected elementwise description. Source: Stacks Project,
-Schemes, Lemma 01ID and Section 26.24, item (4)
-(blueprint: lem-weil-pbc-quasi-coherent-module-colimit-affine-sections).
+Schemes, Lemma 01ID and Section 26.24, item (4).
 
 Proof: for an affine open `U` with `R = Γ(X, U)`, restrict to `Spec R ≅ U`; there the
 restricted system is `M_i~` with `M_i = F_i(U)` and the restricted colimit is `M~` for

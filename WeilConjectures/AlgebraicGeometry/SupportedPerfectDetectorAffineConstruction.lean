@@ -18,7 +18,6 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-! # Affine Koszul construction with its open restriction unit
 Source: Stacks Project, Tags 0A9A and 09IR.
-(blueprint: lem-pc-supported-perfect-detector-affine-construction).
 -/
 
 @[expose] public section
@@ -46,7 +45,6 @@ private theorem qcoh_of_qcoh_terms (Y : Scheme.{u})
 
 /-- Construct the supported Koszul object and its orthogonality comparison with the open unit.
 Source: Stacks Project, Tags 0A9A and 09IR.
-(blueprint: lem-pc-supported-perfect-detector-affine-construction).
 
 Proof:
 1. Present X as Spec A. The quasi-compact complement U is covered by finitely many D(f_i).

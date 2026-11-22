@@ -15,7 +15,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FormallyUnrami
 /-! # Image of pointed evaluation
 
 Source: Stacks Project, Tags 04GW and 04HX.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-image).
 -/
 
 @[expose] public section
@@ -84,7 +83,6 @@ private theorem affine_eval_mem
 
 
 /-- Pointed evaluation lands in the relative separable closure.
-(blueprint: lem-weil-pbc-strict-henselization-point-evaluation-image).
 Source: Stacks Project, Tag 04HX. Represent a colimit element by an affine pointed
 étale neighbourhood; its residue extension is finite separable over the base residue
 field, so its chosen embedding into Ω lands in the relative separable closure. -/

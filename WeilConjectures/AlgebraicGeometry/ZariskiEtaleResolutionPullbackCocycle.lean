@@ -19,7 +19,6 @@ import WeilConjectures.CategoryTheory.ExactFunctorResolutionCocycle
 
 Source: Stacks Project, Cohomology, Tags 01F8 and 01FB;
 Derived Categories, Tags 013P and 015B (4).
-(blueprint: lem-weil-pbc-zariski-etale-resolution-pullback-cocycle)
 -/
 
 @[expose] public section
@@ -43,7 +42,6 @@ section cocycle obtained by an augmented comparison.
 
 Source: Stacks Project, Cohomology, Tag 01FB; Derived Categories, Tags 013P
 and 015B (4); Cohomology on Sites, Section 01FT and Tag 0730.
-(blueprint: lem-weil-pbc-zariski-etale-resolution-pullback-cocycle)
 
 Proof: Construct t from the adjunction-unit section using the inverse of the
 sheafification, free-abelian and Yoneda adjunction equivalences. In degree zero,

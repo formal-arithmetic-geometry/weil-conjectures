@@ -77,7 +77,6 @@ private theorem mapHomotopyCategory_leftAdjointCompIso_assoc
 /-- The tensor pullback composition mates are associative after passage to homotopy.
 Source: Mathlib `Adjunction.leftAdjointCompIso_assoc` and
 the component formulas for `Scheme.Modules.pushforwardComp`; Stacks Project, Cohomology, Tag 0D5S.
-(blueprint: lem-pc-tensor-pullback-homotopy-comp-assoc).
 Proof: For each scheme morphism choose the adjunction pinned by
 `exists_tensorPullbackAdjunction`. Its composition comparison is exactly the inverse
 mate of `pushforwardComp`. Apply `Adjunction.leftAdjointCompIso_assoc` to the six

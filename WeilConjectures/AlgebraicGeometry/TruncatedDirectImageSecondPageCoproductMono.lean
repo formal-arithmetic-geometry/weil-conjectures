@@ -147,7 +147,6 @@ private theorem td_sheaf_sum_mono (Y : Scheme.{u}) (I : Type u)
 /-- The second-page coproduct comparison is a monomorphism.
 Source: Stacks Project, Tag 08DZ, second-page direct-sum reduction; Tag 009E (5),
 identification of stalks of direct sums. This is the injectivity half only.
-(blueprint: lem-pc-truncated-direct-image-second-page-coproduct-mono).
 
 Proof: Let F be the composite of lower truncation at a, cohomology in degree r,
 and the higher-direct-image functor in degree p. These functors are additive:

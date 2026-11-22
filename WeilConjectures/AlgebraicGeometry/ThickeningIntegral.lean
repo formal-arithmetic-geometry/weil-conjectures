@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ThickeningAffineScheme
 /-!
 # Integrality is insensitive to thickenings
 
-Source: Stacks Project, More on Morphisms, Lemma 37.3.1 (Tag 09ZV), part (5)
-(blueprint: lem-weil-pbc-thickening-integral).
+Source: Stacks Project, More on Morphisms, Lemma 37.3.1 (Tag 09ZV), part (5).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ namespace AlgebraicGeometry
 or finite order assumption is needed.
 
 Source: Stacks Project, More on Morphisms, Tag 09ZV, part (5).
-(blueprint: lem-weil-pbc-thickening-integral).
 
 Proof:
 1. Both thickening maps are closed immersions surjective on points, hence universal
@@ -37,8 +35,7 @@ Proof:
    (def-sbc-first-order-thickening; lem-weil-pbc-closed-immersion-integral-separated-uc).
    The square identifies the composites `i_X ≫ f'` and `f ≫ i_S`.
 2. If `f'` is integral, its composite with `i_X` is integral. Since `i_S` is separated,
-   integrality of `f ≫ i_S` implies integrality of `f` by Morphisms Tag 035D (2)
-   (lem-weil-pbc-integral-of-comp-separated).
+   integrality of `f ≫ i_S` implies integrality of `f` by Morphisms Tag 035D (2).
 3. Conversely, if `f` is integral, it is affine and universally closed by Morphisms
    Tag 01WM (pqf-lem-integral-univclosed).
 4. The composite `f ≫ i_S` is universally closed. It equals `i_X ≫ f'`, and `i_X`
@@ -48,7 +45,7 @@ Proof:
    `i_S` is affine. Then `f` inverse image of `V` is affine. By the square this is
    the inverse image under `i_X` of `f'` inverse image of `V'`. Restricting `i_X`
    gives a thickening of that affine scheme. Tag 06AD makes `f'` inverse image
-   of `V'` affine (lem-weil-pbc-thickening-affine-scheme), proving `f'` affine.
+   of `V'` affine, proving `f'` affine.
 6. An affine universally closed morphism is integral by Tag 01WM. Together with
    step 2 this proves the equivalence. -/
 theorem isIntegralHom_iff_of_thickenings {S S' X X' : Scheme.{u}}

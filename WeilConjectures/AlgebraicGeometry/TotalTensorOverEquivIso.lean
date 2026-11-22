@@ -13,8 +13,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 /-! # Total tensor comparison for the open-site equivalence
 
 Source: Stacks Project, Tags 06YN and 08DJ, ordinary tensor totalization;
-Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-total-tensor-over-equiv-iso). -/
+Mathlib `Scheme.Modules.overEquiv`. -/
 
 @[expose] public section
 
@@ -44,7 +43,6 @@ noncomputable local instance totalTensorSchemePreadditive (X : Scheme.{u}) :
 
 /-- The degreewise open-site equivalence commutes with the actual total tensor.
 Source: Stacks Project, Tags 06YN and 08DJ; Mathlib `Scheme.Modules.overEquiv`.
-(blueprint: lem-pc-total-tensor-over-equiv-iso).
 
 Proof: use `exists_localizedOpen_tensor_equivalence` for the natural comparison
 L(A tensor B) -> L(A) tensor L(B) on sheaves. Apply it in each bidegree of the

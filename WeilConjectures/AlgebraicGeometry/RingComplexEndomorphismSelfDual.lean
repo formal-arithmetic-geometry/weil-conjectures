@@ -29,7 +29,6 @@ import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
 /-! # Self-duality of endomorphisms of the ring complex
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -96,7 +95,6 @@ private theorem rankOneEndomorphismSelfDual
 
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X (internal Hom complexes),
 and sites-modules.tex, internal Hom evaluated on the rank-one ring module.
-(auxiliary; not a blueprint node).
 
 Proof: a linear endomorphism of the ring module is multiplication by its value
 at one. Two such multiplication maps commute over a commutative ring, so

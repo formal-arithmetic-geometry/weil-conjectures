@@ -104,7 +104,6 @@ Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the canonical identification
 M = Rp2_* Delta_* M and the paragraph on substituting the exchange counits;
 lem-amb-p1-diagonal-integrals.proof.md, the diagonal is a section for either projection.
-(auxiliary; not a blueprint node).
 
 Proof: For either projection p, the square induced by i and i times i is
 Cartesian, as is the diagonal square. Paste these squares. Their vertical

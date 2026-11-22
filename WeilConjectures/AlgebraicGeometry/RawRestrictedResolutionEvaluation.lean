@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.RawRestrictedSectionsUnitZero
 /-! # Compatibility of derived evaluation with a resolution
 
 Source: Stacks Project, Cohomology on Sites, Tags 072W, 0BKV and 0D6F.
-(blueprint: lem-sbc-raw-restricted-resolution-evaluation).
 -/
 
 @[expose] public section
@@ -25,8 +24,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
 /-- The canonical computation of restricted derived sections on a K-injective restriction.
-Source: Stacks Project, Tags 072W and 0BKV.
-(blueprint: lem-sbc-raw-restricted-resolution-evaluation). -/
+Source: Stacks Project, Tags 072W and 0BKV. -/
 noncomputable def resolutionSectionsIso {Y : Scheme.{v}} (W : Y.Etale)
     (I : CochainComplex.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}))
     [CochainComplex.IsKInjective
@@ -116,7 +114,6 @@ private theorem sectionsUnit_resolution {Y : Scheme.{v}} (W : Y.Etale)
 set_option backward.isDefEq.respectTransparency false in
 /-- On a chain map, derived evaluation agrees with termwise evaluation in the resolution.
 Source: Stacks Project, Cohomology on Sites, Tags 072W, 0BKV and 0D6F.
-(blueprint: lem-sbc-raw-restricted-resolution-evaluation).
 
 Proof: let L be etale restriction and R be sections. The comparison defining
 `resolutionSectionsIso` first uses the exact-functor localization comparison for L,

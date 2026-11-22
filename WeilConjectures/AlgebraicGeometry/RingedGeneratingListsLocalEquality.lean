@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.FiniteGeneratorsLocalSpan
 /-! # Equality of section ideals on common slice refinements
 
 Source: Stacks Project, algebraization.tex, Tag 099E.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -83,7 +82,6 @@ private theorem exists_cover_mem_span_generatingList
 /-- Two finite lists generating one ideal sheaf generate equal section ideals locally
 on every common test span. The cover lies on the original site, without fibre products.
 Source: Stacks Project, Tag 099E, independence of generating ideals.
-(auxiliary; not a blueprint node).
 
 Proof: choose the generating sections witnessing both lists. On a test span, lift the
 finitely many sections of either family through the other family's free epimorphism.

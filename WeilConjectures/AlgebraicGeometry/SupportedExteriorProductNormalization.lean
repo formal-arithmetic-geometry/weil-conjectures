@@ -20,7 +20,7 @@ public import WeilConjectures.AlgebraicGeometry.Supported.SupportedExteriorProdu
 
 Source: literature/blueprint/latest/blueprint/part-duality-trace-formula/
 sec-smooth-purity/sec-the-trace-map-of-affine-space/sk-prop-an/
-def-pur-supported-exterior-product.md (blueprint: proposition-purity-vector-bundles).
+def-pur-supported-exterior-product.md.
 
 First pull back and tensor ordinary supported sections. Totalize this pairing with the
 cochain sign convention, then derive it using K-flat tensor and the injective-resolution
@@ -48,8 +48,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
 
 omit [MonoidalPreadditive C] [Abelian.HasFunctorialFlatResolution C] [HasSmallSiteSheafify C] in
 /-- Naturality of the pointwise tensor of two sections.
-Source: the supported-section pairing of the nested blueprint unit cited above
-(blueprint: proposition-purity-vector-bundles).
+Source: the supported-section pairing of the nested blueprint unit cited above.
 Proof: restrictions of the two global sections commute with every site morphism;
 tensor those two identities and use naturality of the sheafification tensor map. -/
 theorem exteriorSections_naturality (T : Scheme.{u})
@@ -70,8 +69,7 @@ theorem exteriorSections_naturality (T : Scheme.{u})
   exact congrArg (_ ≫ ·) h3
 
 /-- Tensor two global sections, using the actual pointwise tensor followed by
-sheafification. Source: the nested blueprint unit cited above
-(blueprint: proposition-purity-vector-bundles). -/
+sheafification. Source: the nested blueprint unit cited above. -/
 noncomputable def exteriorSectionsTensor (T : Scheme.{u})
     (F G : Sheaf T.smallEtaleTopology C) :
     (Sheaf.Γ T.smallEtaleTopology C).obj F ⊗
@@ -87,7 +85,7 @@ variable {B X Y Z W : Scheme.{u}}
   [IsClosedImmersion i] [IsClosedImmersion j]
 
 /-- Pull back and tensor ordinary sections from the two factors.
-Source: the nested blueprint unit cited above (blueprint: proposition-purity-vector-bundles). -/
+Source: the nested blueprint unit cited above. -/
 noncomputable def exteriorSectionsMap
     (F : Sheaf X.smallEtaleTopology C) (G : Sheaf Y.smallEtaleTopology C) :
     (Sheaf.Γ X.smallEtaleTopology C).obj F ⊗
@@ -187,7 +185,7 @@ private lemma exists_etale_arrow_range_subset {P : Scheme.{u}} (V : P.Etale) (O 
     inferInstance⟩
 
 /-- The tensor of pulled-back supported sections vanishes off the product support.
-Source: the nested blueprint unit cited above (blueprint: proposition-purity-vector-bundles).
+Source: the nested blueprint unit cited above.
 Proof: the complement of the product support is covered by the inverse images of the
 two complements. On the first open the first factor restricts to zero, and on the
 second the second factor does. Tensoring a zero morphism gives zero; the sheaf axiom
@@ -278,8 +276,7 @@ theorem exteriorSections_support (F : Sheaf X.smallEtaleTopology C)
     rw [h0, MonoidalPreadditive.tensor_zero, zero_comp]
 
 /-- The ordinary supported exterior product is the kernel lift of the pullback and
-tensor of sections. Source: the nested blueprint unit cited above
-(blueprint: proposition-purity-vector-bundles). -/
+tensor of sections. Source: the nested blueprint unit cited above. -/
 noncomputable def exteriorSupportedSections
     (F : Sheaf X.smallEtaleTopology C) (G : Sheaf Y.smallEtaleTopology C) :
     (globalSectionsWithSupport C i).obj F ⊗ (globalSectionsWithSupport C j).obj G ⟶
@@ -380,8 +377,7 @@ theorem exteriorSupportedSections_naturality
   rw [← tensorHom_comp_tensorHom_assoc, exteriorSectionsMap_naturality]
 
 /-- The ordinary exterior product of two cochain complexes, with the signed total
-tensor differential. Source: the nested blueprint unit cited above
-(blueprint: proposition-purity-vector-bundles). -/
+tensor differential. Source: the nested blueprint unit cited above. -/
 noncomputable def exteriorSectionsComplexTarget
     (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
     (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ) :
@@ -470,7 +466,7 @@ private lemma exteriorSupportedSections_naturality_right'
   simpa using exteriorSupportedSections_naturality C f g i j (𝟙 F) b
 
 /-- The degreewise supported pairings extend uniquely to the signed total complexes.
-Source: the nested blueprint unit cited above (blueprint: proposition-purity-vector-bundles).
+Source: the nested blueprint unit cited above.
 Proof: in degree n use the coproduct of the pairings in bidegrees r+s=n, followed by
 the inclusion of that bidegree in the sheaf tensor total. Naturality of pullback,
 tensor and the support kernel makes this commute with both differentials. The second
@@ -523,7 +519,7 @@ theorem existsUnique_exteriorSupportedSectionsComplex
 
 /-- The totalized pairing of supported sections. It is the unique chain map whose
 bidegree maps are the explicit kernel lifts above; no object is chosen by bare existence.
-Source: the nested blueprint unit cited above (blueprint: proposition-purity-vector-bundles). -/
+Source: the nested blueprint unit cited above. -/
 noncomputable def exteriorSupportedSectionsComplex
     (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
     (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ) :
@@ -535,7 +531,7 @@ noncomputable def exteriorSupportedSectionsComplex
 
 /-- The canonical comparison from the derived exterior product to the localized
 ordinary exterior complex: the two pullback counits followed by the tensor localization map.
-Source: the nested blueprint unit cited above (blueprint: proposition-purity-vector-bundles). -/
+Source: the nested blueprint unit cited above. -/
 noncomputable def exteriorProductResolutionComparison
     (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
     (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ) :
@@ -574,7 +570,7 @@ theorem kFlat_upperStar_mapHomologicalComplex_obj_of_kFlat {S T : Scheme.{u}} (h
   sorry
 
 /-- K-flat representatives compute the derived exterior product.
-Source: the nested blueprint unit cited above (blueprint: proposition-purity-vector-bundles).
+Source: the nested blueprint unit cited above.
 Proof: inverse image is exact and monoidal, so preserves K-flat complexes. Its derived
 counit is invertible on K-flat representatives. Tensor localization is invertible on
 a pair of K-flat complexes. Thus every factor in the displayed comparison is invertible. -/
@@ -604,7 +600,7 @@ theorem isIso_exteriorProductResolutionComparison
   infer_instance
 
 /-- The canonical exterior-product comparison, inverted on K-flat representatives.
-Source: the nested blueprint unit cited above (blueprint: proposition-purity-vector-bundles). -/
+Source: the nested blueprint unit cited above. -/
 noncomputable def exteriorProductResolutionIso
     (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ)
     (Q : CochainComplex (Sheaf Y.smallEtaleTopology C) ℤ)
@@ -617,8 +613,7 @@ noncomputable def exteriorProductResolutionIso
 
 /-- The comparison from termwise supported sections to their injective right derivation.
 It is the actual unit of the recorded support functor, and is invertible on injective
-support resolutions. Source: the nested blueprint unit cited above
-(blueprint: proposition-purity-vector-bundles). -/
+support resolutions. Source: the nested blueprint unit cited above. -/
 noncomputable def exteriorSupportResolutionUnit
     (P : CochainComplex (Sheaf X.smallEtaleTopology C) ℤ) :
     DerivedCategory.Q.obj
@@ -630,7 +625,7 @@ noncomputable def exteriorSupportResolutionUnit
 /-- Resolution normalization of the supported exterior product. On every pair of
 K-flat representatives, compare termwise support sections to injective support
 resolutions, and totalize the explicit pullback-and-tensor pairing above.
-Source: the nested blueprint unit cited above (blueprint: proposition-purity-vector-bundles). -/
+Source: the nested blueprint unit cited above. -/
 def IsResolutionSupportedExteriorProduct
     (K : DerivedCategory (Sheaf X.smallEtaleTopology C))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology C))

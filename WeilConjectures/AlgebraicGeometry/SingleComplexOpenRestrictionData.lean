@@ -14,7 +14,6 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 /-! # Canonical open pullback and restricted coefficient data
 
 Source: Stacks Project, Tag 0DJ9, first paragraph; Tag 08HY, counit description.
-(blueprint: def-pc-single-complex-open-restriction-data).
 
 These are the unchanged constructions formerly in SingleComplexOpenRestrictionComparison.
 They are isolated here so independent compatibility calculations can import them without a cycle.
@@ -31,8 +30,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The comparison from pullback along an open immersion to exact restriction,
 constructed using the pinned tensor-pullback adjunction and left-derived counit.
 Source: Stacks Project, Tag 08DW, restriction of derived pullback.
-(blueprint: lem-pc-single-complex-open-restriction-comparison).
-(blueprint: def-pc-single-complex-open-restriction-data)
 -/
 noncomputable def singleComplexOpenPullbackIso
     [∀ Y : Scheme.{u},
@@ -70,8 +67,6 @@ noncomputable def singleComplexOpenPullbackIso
 comparisons and the constructed open-pullback comparisons. Both objects and the
 morphism are constructed; no existence theorem supplies arbitrary coefficient data.
 Source: Stacks Project, Tag 0DJ9, first paragraph.
-(blueprint: lem-pc-single-complex-open-restriction-comparison).
-(blueprint: def-pc-single-complex-open-restriction-data)
 -/
 noncomputable def singleComplexRestrictedCoefficient
     [∀ Y : Scheme.{u},

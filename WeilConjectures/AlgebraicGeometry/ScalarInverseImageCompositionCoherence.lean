@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 /-! # Normalized scalar inverse-image composition
 
 Source: Stacks Project, Sheaves, Tags 008I and 0097.
-(blueprint: lem-sc-scalar-inverse-image-composition-coherence).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 
 /-- Composition of inverse images, normalized by their adjunction units.
-Source: Stacks Project, Tag 008I, lemma-pullback-composition.
-(blueprint: lem-sc-scalar-inverse-image-composition-coherence). -/
+Source: Stacks Project, Tag 008I, lemma-pullback-composition. -/
 def scalarInverseImageCompIso (k : Type w) [Field k]
     {A B C : Scheme.{w}} (a : A ⟶ B) (b : B ⟶ C) :
     scalarInverseImage (k := k) (a ≫ b) ≅
@@ -208,7 +206,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 -- The two coherence computations unfold several composed sheaf adjunctions.
 /-- The normalized inverse-image comparison respects constant units and module coefficients.
 Source: Stacks Project, Tags 008I and 0097, composition of pullback adjunctions.
-(blueprint: lem-sc-scalar-inverse-image-composition-coherence).
 
 Proof: The comparison of left adjoints identifies the composite adjunction unit with the
 successive units. For the first equality, use the constant-sheaf adjunction: each side

@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOpenRestrictionConor
 /-!
 # Universal thickenings and conormal sheaves on open subschemes
 
-Source: Stacks Project, More on Morphisms, Lemma 04FA and Lemma 02HC
-(blueprint: lem-weil-pbc-universal-thickening-open-restriction).
+Source: Stacks Project, More on Morphisms, Lemma 04FA and Lemma 02HC.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry
 
 /-- Universal first order thickenings, formal unramifiedness, and conormal sheaves
 restrict to compatible open subschemes.
-Source: Stacks Project, More on Morphisms, Lemma 04FA and Lemma 02HC
-(blueprint: lem-weil-pbc-universal-thickening-open-restriction).
+Source: Stacks Project, More on Morphisms, Lemma 04FA and Lemma 02HC.
 Proof:
 1. Factor `V.ι ≫ h` through `U.ι` using
    lem-weil-pbc-morphism-factors-through-open-subscheme. Two lifts into `V` give

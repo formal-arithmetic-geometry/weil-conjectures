@@ -14,7 +14,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, common coefficient in the second triangle.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -64,8 +63,7 @@ variable (C : Type v) [Category.{u + 1} C] [Abelian C]
 /-- Split a first-coordinate pullback of a tensor, moving its base coefficient to
 its second-coordinate presentation. This is the tensor comparison in the native
 exchange/projection square, with no direct image involved.
-Source: thm-amb-p1-adjunction.proof.md, extracting the common coefficient
-(auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md, extracting the common coefficient. -/
 def coefficientSplit {X Y : Scheme.{u}} (f : X ⟶ Y)
     (B : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C))
     (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology C)) :
@@ -82,8 +80,7 @@ def coefficientSplit {X Y : Scheme.{u}} (f : X ⟶ Y)
         ((derivedSquareUpperStarIso C (IsPullback.of_hasPullback f f).toCommSq).app K).symm
 
 /-- The cyclic permutation used when two coefficients are extracted in opposite orders.
-Source: thm-amb-p1-adjunction.proof.md, tensor rearrangement in the second triangle
-(auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md, tensor rearrangement in the second triangle. -/
 def cyclicShuffle {Z X : Scheme.{u}} (g : Z ⟶ X)
     (E : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology C))
     (N Q : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)) :
@@ -102,8 +99,7 @@ def cyclicShuffle {Z X : Scheme.{u}} (g : Z ⟶ X)
       ((upperStar C g).leftDerivedFunctor.obj (((derivedTensor C X).obj N).obj Q)))
 
 /-- Compare the two coordinate pullbacks by transporting the canonical square comparison.
-Source: thm-amb-p1-adjunction.proof.md, common coefficient
-(auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md, common coefficient. -/
 def coefficientCoordinate {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology C))
     {B : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)}
@@ -115,8 +111,7 @@ def coefficientCoordinate {X Y : Scheme.{u}} (f : X ⟶ Y)
     (upperStar C (pullback.snd f f)).leftDerivedFunctor.mapIso e.symm
 
 /-- Apply the coordinate comparison to the whole common-base tensor coefficient.
-Source: thm-amb-p1-adjunction.proof.md, common coefficient
-(auxiliary; not a blueprint node). -/
+Source: thm-amb-p1-adjunction.proof.md, common coefficient. -/
 def tensorCoordinate {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology C))
     {B : _root_.DerivedCategory (Sheaf X.smallEtaleTopology C)}
@@ -130,8 +125,7 @@ def tensorCoordinate {X Y : Scheme.{u}} (f : X ⟶ Y)
       (leftDerivedUpperStarTensorIso C f L K).symm)
 
 /-- The coordinate comparison on a common-base tensor is the tensor of the comparisons.
-Source: thm-amb-p1-adjunction.proof.md, common coefficient in the second triangle
-(auxiliary; not a blueprint node).
+Source: thm-amb-p1-adjunction.proof.md, common coefficient in the second triangle.
 
 Proof: the canonical square comparison is monoidal. Apply its tensor compatibility
 on L and K, precompose by the inverse tensor comparison for f*, and cancel its image

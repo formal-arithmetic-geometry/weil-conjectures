@@ -10,7 +10,6 @@ import WeilConjectures.CategoryTheory.EquivalenceAdjunctionComparison
 /-! # Ordinary scalar pullback compatibility
 
 Source: Stacks Project, Tags 03EK, 0D6D and 07A6.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -202,7 +201,6 @@ private theorem scalar_mate (a : Λ ⟶ Λ') [IsMonHom a] (T : Scheme.{u})
 -- Compare the specified composite adjunctions and all four section functors explicitly.
 /-- The ordinary scalar and geometric comparisons preserve the balanced pullback square.
 Source: Stacks Project, Tags 03EK, 0D6D and 07A6.
-(auxiliary; not a blueprint node)
 
 Proof: the scalar generator equations identify the specified scalar adjunctions:
 the units send m to 1 tensor m. This identifies each inverse mate with the

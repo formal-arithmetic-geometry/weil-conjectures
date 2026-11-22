@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ValuationClosedFibreSectionDivisible
 /-! # Vanishing on the closed fibre implies divisibility
 
 Source: Stacks Project, More on Morphisms, Tag 0EX8, general-case proof, second paragraph.
-(blueprint: lem-sc-valuation-closed-fibre-divisibility)
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 Source: Stacks Project, More on Morphisms, Tag 0EX8, proof of divisibility of the
 chosen section, general valuation-ring case, second paragraph.
-(blueprint: lem-sc-valuation-closed-fibre-divisibility)
 
 Proof: The residue field of Spec A at its closed point is canonically A/m. The
 pullback isomorphism therefore transports the integral quotient fibre to f.fiber

@@ -73,7 +73,6 @@ private theorem isIso_abelian_derivedExchange_single_of_smooth
 /-- Relative derived exchange passes to a cofiltered limit of smooth qcqs schemes
 with affine transitions, for coefficients killed by an integer invertible in the field.
 Source: Stacks Project, Lemma 59.89.3, Tag 0F09; limit comparison Tag 0EZT.
-(blueprint: lem-sc-smooth-limit-derived-direct-image-exchange)
 
 Proof: For each stage, form X_i = X times_{Spec k} D_i. Smooth base change identifies
 the inverse image of Rf_* F with Rf_{i,*} of the inverse image of F. The n-torsion

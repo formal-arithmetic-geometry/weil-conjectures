@@ -46,8 +46,7 @@ the corresponding localized base ring. By the affine local criterion of Tag 01U4
 N is flat over the coordinate ring of V. This is precisely the conclusion IsFlatOver.
 The assertion is vacuous on an empty fibre product.
 No finite presentation, proper support, or flatness of the base-change morphism is used.
-Quasi-coherence is needed to recover the affine-section condition from stalks.
-(blueprint: lem-pc-relatively-flat-module-pullback). -/
+Quasi-coherence is needed to recover the affine-section condition from stalks. -/
 theorem relativelyFlat_module_pullback
     {X S T : Scheme.{u}} (f : X ⟶ S) (p : T ⟶ S) (F : X.Modules) [F.IsQuasicoherent]
     (hflat : F.IsFlatOver f) :

@@ -15,7 +15,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaCoherence
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the exchange and projection computations in both triangles.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -240,7 +239,7 @@ private theorem supported_projection_trace {X Y : Scheme.{u}}
 /-- Coordinate contractions for compact support, without using the diagonal class or its integrals.
 
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the two exchange/projection
-computations before inserting delta (auxiliary; not a blueprint node).
+computations before inserting delta.
 
 Proof: Apply firstExtraction, the coordinate Kunneth identity before a trace is chosen.
 Postcompose with the trace and the left unitor. Naturality of symmetry moves the trace

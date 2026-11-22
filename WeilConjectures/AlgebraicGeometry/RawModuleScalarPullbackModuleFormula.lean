@@ -67,7 +67,6 @@ private theorem higherDirectImageRawOverPullback_eq_moduleFactors
 /-- The module raw map is the composite of its source, class, and coefficient factors.
 Source: Stacks Project, Tags 03FD and 03Q8, explicit-map expansion in the proof of
 lem-sbc-raw-module-abelian-hom-map-naturality.
-(blueprint: lem-sbc-raw-scalar-pullback-module-formula).
 
 Proof: The object and map fields of higherDirectImageRawOverFunctor give the raw
 presheaf value and higherDirectImageRawOverPullbackHom. Evaluate the latter using

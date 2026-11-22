@@ -282,8 +282,7 @@ isomorphisms (by cohomology). The product comparison identifies the two product
 shifts. Exact slice restriction commutes with scalar restriction through the
 componentwise identity isomorphism; its multiplication square commutes by
 naturality of the ring map. Conjugating the product shifts proves the equivalence.
-This works for every section without an ideal, finite generation or boundedness.
-(auxiliary; not a blueprint node). -/
+This works for every section without an ideal, finite generation or boundedness. -/
 theorem restrictScalars_completeElement_iff
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R B : Sheaf J CommRingCat.{u}) (φ : R ⟶ B)

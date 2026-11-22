@@ -24,7 +24,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyF
 /-! # Supported-open comparisons before the projection formula
 
 Source: Stacks Project, Tags 08EV, 08DF, 08DX and 08DW.
-(blueprint: lem-pc-supported-open-tensor-direct-image-comparisons).
 -/
 
 @[expose] public section
@@ -250,7 +249,6 @@ private theorem supportedTensor_supported_unit_iso (X : Scheme.{u}) (U : X.Opens
 /-- Restrict supported direct images, including a derived tensor input, to an open.
 Source: Stacks Project, Tag 08EV, support reduction; Tag 08DF, supported-open unit;
 Tags 08DX and 08DW, compatibility of tensor and pullback with restriction.
-(blueprint: lem-pc-supported-open-tensor-direct-image-comparisons).
 
 Proof: put V = X minus T. The supported-open adjunction unit E -> Rj_*(E|_U)
 restricts to an isomorphism on U and to a map between zero objects on V, hence

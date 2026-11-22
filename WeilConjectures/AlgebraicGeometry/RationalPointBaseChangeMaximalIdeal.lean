@@ -17,7 +17,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Affine
 
 Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit quotient paragraph;
 Stacks Algebra, Tag 00E6.
-(blueprint: lem-sc-rational-point-base-change-maximal-ideal).
 -/
 
 @[expose] public section
@@ -45,8 +44,7 @@ private theorem ker_stalkMap_field (F : Type u) [Field F] {Z : Scheme.{u}}
 set_option backward.isDefEq.respectTransparency false in
 /-- At a rational point, scalar extension extends the maximal ideal of the stalk exactly.
 Source: blueprint proposition-cohomology-smooth-affine-curve, affine-case unit quotient paragraph;
-Stacks Algebra, Tag 00E6
-(blueprint: lem-sc-rational-point-base-change-maximal-ideal).
+Stacks Algebra, Tag 00E6.
 
 Proof: let x' be the base-changed rational point. The fibre over x is Spec K,
 so y = x'. Pullback pasting shows that the square formed by x, x', the projection,

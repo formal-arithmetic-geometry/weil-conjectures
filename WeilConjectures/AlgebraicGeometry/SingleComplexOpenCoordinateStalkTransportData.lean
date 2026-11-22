@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenTermwiseComparison
 
 Source: Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc
 preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-normalized-transport).
 -/
 
 @[expose] public section
@@ -165,8 +164,7 @@ source isomorphism is d then l. Empty opens have no z; the argument uses neither
 base flatness nor boundedness and applies to zero complexes and zero rings.
 
 Source: Stacks Project, perfect.tex, Tag 0DJ9 first paragraph and equation-bc
-preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE.
-(blueprint: lem-pc-single-complex-open-normalized-transport). -/
+preceding Tag 0DJ8; cohomology.tex, Tags 08HY and 08FE. -/
 theorem exists_singleComplexOpen_normalized_transport
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

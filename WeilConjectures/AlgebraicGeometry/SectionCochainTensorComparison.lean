@@ -8,8 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtaleSectionModuleFunctors
 
 /-! # The normalized comparison with fixed cochain tensor types
 
-Source: Stacks Project, Cohomology on Sites, Tag 07A4 and Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 07A4 and Modules on Sites, Tag 03EL.
 
 This interface retains the existing summand-normalized totalComparison. Its explicit
 source and target use the canonical tensor of cochain complexes. No new tensor or
@@ -32,7 +31,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
 
 /-- The existing ordinary section tensor with its instance arguments retained.
-Source: Stacks 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 03EL. -/
 instance totalSectionOrdinaryMonoidal (X : Scheme.{u}) :
     MonoidalCategory (modules Λ X) := inferInstance
 
@@ -40,52 +39,52 @@ instance totalSectionOrdinaryMonoidal (X : Scheme.{u}) :
 attribute [-instance] totalSectionOrdinaryMonoidal
 
 /-- The existing graded tensor availability, retained as a compact instance.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 instance totalInternalGraded (X : Scheme.{u})
     (P Q : GradedObject ℤ (internalModules Λ X)) : GradedObject.HasTensor P Q := inferInstance
 
 /-- The existing graded tensor availability for section modules.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 instance totalSectionGraded (X : Scheme.{u})
     (P Q : GradedObject ℤ (modules Λ X)) : GradedObject.HasTensor P Q := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
 instance totalInternalGoodLeft (X : Scheme.{u})
     (P Q H : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q H := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
 instance totalInternalGoodRight (X : Scheme.{u})
     (P Q H : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q H := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
 instance totalInternalTensorFour (X : Scheme.{u})
     (P Q H K : GradedObject ℤ (internalModules Λ X)) :
     GradedObject.HasTensor₄ObjExt P Q H K := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
 instance totalSectionGoodLeft (X : Scheme.{u})
     (P Q H : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasGoodTensor₁₂Tensor P Q H := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
 instance totalSectionGoodRight (X : Scheme.{u})
     (P Q H : GradedObject ℤ (modules Λ X)) :
     GradedObject.HasGoodTensorTensor₂₃ P Q H := inferInstance
 
 /-- The existing canonical iterated tensor property, cached for termwise comparisons.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: the ordinary tensor preserves the coproducts defining every graded tensor. -/
 instance totalSectionTensorFour (X : Scheme.{u})
     (P Q H K : GradedObject ℤ (modules Λ X)) :
@@ -93,21 +92,21 @@ instance totalSectionTensorFour (X : Scheme.{u})
 
 /-- The existing canonical cochain tensor availability, retained without repeating
 instance search through the termwise functors.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: the graded coproducts defining the cochain tensor already exist. -/
 instance (priority := 4000) totalInternalHasTensor (X : Scheme.{u})
     (P Q : CochainComplex (internalModules Λ X) ℤ) :
     HomologicalComplex.HasTensor P Q := inferInstance
 
 /-- The existing canonical cochain tensor availability for section modules.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: the graded coproducts defining the cochain tensor already exist. -/
 instance (priority := 4000) totalSectionHasTensor (X : Scheme.{u})
     (P Q : CochainComplex (modules Λ X) ℤ) :
     HomologicalComplex.HasTensor P Q := inferInstance
 
 /-- The existing signed cochain tensor structure on internal modules.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[reducible] def totalInternalMonoidal (X : Scheme.{u}) :
     MonoidalCategory (CochainComplex (internalModules Λ X) ℤ) :=
   HomologicalComplex.monoidalCategory (internalModules Λ X) (.up ℤ)
@@ -115,7 +114,7 @@ Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
 attribute [instance] totalInternalMonoidal
 
 /-- The existing signed cochain tensor structure on section modules.
-Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4 and 03EL. -/
 @[reducible] def totalSectionMonoidal (X : Scheme.{u}) :
     MonoidalCategory (CochainComplex (modules Λ X) ℤ) :=
   HomologicalComplex.monoidalCategory (modules Λ X) (.up ℤ)
@@ -123,7 +122,7 @@ Source: Stacks 07A4 and 03EL (auxiliary; not a blueprint node). -/
 attribute [instance] totalSectionMonoidal
 
 /-- The existing internal cochain tensor data, with the same chosen structure.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 @[reducible] def totalInternalMonoidalStruct
     (X : Scheme.{u}) : MonoidalCategoryStruct (CochainComplex (internalModules Λ X) ℤ) :=
   HomologicalComplex.monoidalCategoryStruct (internalModules Λ X) (.up ℤ)
@@ -131,7 +130,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
 attribute [instance 3000] totalInternalMonoidalStruct
 
 /-- The existing section cochain tensor data, with the same chosen structure.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 @[reducible] def totalSectionMonoidalStruct
     (X : Scheme.{u}) : MonoidalCategoryStruct (CochainComplex (modules Λ X) ℤ) :=
   HomologicalComplex.monoidalCategoryStruct (modules Λ X) (.up ℤ)
@@ -139,24 +138,24 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
 attribute [instance 3000] totalSectionMonoidalStruct
 
 /-- The canonical internal cochain unit, retaining its fixed tensor structure.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 @[implicit_reducible] def internalCochainUnit (T : Scheme.{u}) :
     CochainComplex (internalModules Λ T) ℤ := 𝟙_ _
 
 /-- The canonical section cochain unit, retaining its fixed tensor structure.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 @[implicit_reducible] def sectionCochainUnit (T : Scheme.{u}) :
     CochainComplex (modules Λ T) ℤ := 𝟙_ _
 
 /-- The object map of a termwise functor, with its cochain value retained.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 @[reducible] def retainedCochainObject
     {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D]
     (F : C ⥤ D) [F.PreservesZeroMorphisms] (P : CochainComplex C ℤ) :
     CochainComplex D ℤ := (F.mapHomologicalComplex (.up ℤ)).obj P
 
 /-- The morphism map of a termwise functor, with its source and target retained.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 @[reducible] def retainedCochainMap
     {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D]
     (F : C ⥤ D) [F.PreservesZeroMorphisms] {P Q : CochainComplex C ℤ} (a : P ⟶ Q) :
@@ -164,7 +163,7 @@ Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
   (F.mapHomologicalComplex (.up ℤ)).map a
 
 /-- The original termwise functor, retaining its two data fields separately.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 The data maps and both functor laws are those of mapHomologicalComplex. -/
 @[reducible] def retainedCochainFunctor
     {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D]
@@ -175,7 +174,7 @@ The data maps and both functor laws are those of mapHomologicalComplex. -/
   map_comp a b := (F.mapHomologicalComplex (.up ℤ)).map_comp a b
 
 /-- Retaining the data fields gives exactly the original termwise functor.
-Source: Stacks 07A4 (auxiliary; not a blueprint node).
+Source: Stacks 07A4.
 Proof: both functors have identical object and morphism maps; their laws are proofs. -/
 theorem retainedCochainFunctor_eq
     {C D : Type*} [Category* C] [Category* D] [HasZeroMorphisms C] [HasZeroMorphisms D]
@@ -183,14 +182,13 @@ theorem retainedCochainFunctor_eq
     retainedCochainFunctor F = F.mapHomologicalComplex (.up ℤ) := rfl
 
 /-- The fixed section equivalence on cochain complexes, with its functor data cached.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 @[implicit_reducible] def cochainSectionEquivalence (X : Scheme.{u}) :
     CochainComplex (internalModules Λ X) ℤ ⥤ CochainComplex (modules Λ X) ℤ :=
   retainedCochainFunctor (equivalence Λ X).functor
 
 /-- The normalized total comparison with canonical cochain tensor types.
-Source: Stacks 07A4 and 03EL
-(auxiliary; not a blueprint node).
+Source: Stacks 07A4 and 03EL.
 The underlying isomorphism is the existing totalComparison, characterized uniquely
 on every direct-sum summand by ordinaryTensorComparison. -/
 @[irreducible] def cochainTensorComparison (X : Scheme.{u})
@@ -259,8 +257,7 @@ private theorem ordinary_naturality (T : Scheme.{u})
   simpa only [he] using data.2.2.1 M M' N N' a b
 
 /-- Naturality of the existing signed-total comparison in its canonical types.
-Source: Stacks 06YN and 07A4
-(auxiliary; not a blueprint node).
+Source: Stacks 06YN and 07A4.
 Proof: ordinaryTensorComparison is the natural comparison supplied by the fixed
 internal-section tensor equivalence, by uniqueness of its pure-tensor normalization.
 Precompose the desired total equality with each direct-sum inclusion. The defining

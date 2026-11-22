@@ -14,7 +14,6 @@ import all Mathlib.Algebra.Homology.Localization
 /-! # Compatibility of open restriction with the pinned pullback counits
 
 Source: Stacks Project, cohomology.tex, Tags 08HY, 08FE and 0D5S.
-(blueprint: lem-pc-single-complex-open-counit-compatibility).
 -/
 
 @[expose] public section
@@ -195,8 +194,7 @@ before stalks or cohomology, with no inversion of a pullback counit. Empty and
 top opens and zero complexes use the same natural-transformation identities.
 
 Source: Stacks Project, cohomology.tex, Tags 08HY, 08FE and 0D5S;
-perfect.tex, Tag 0DJ9, first paragraph.
-(blueprint: lem-pc-single-complex-open-counit-compatibility). -/
+perfect.tex, Tag 0DJ9, first paragraph. -/
 theorem singleComplexOpen_termwise_counit_compatibility
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

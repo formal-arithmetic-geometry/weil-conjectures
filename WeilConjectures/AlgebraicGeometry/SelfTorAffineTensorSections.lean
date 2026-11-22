@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.LocallyQuasicoherentAffinePullbackSecti
 /-! # Affine sections of the chart model after tensor pullback
 
 Source: Stacks Project, Tags 01I9, lemma-widetilde-pullback, and 0096,
-lemma-pullback-modules.
-(blueprint: new-v2-self-tor-affine-tensor-sections). -/
+lemma-pullback-modules. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -32,7 +31,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- Tensor extension of an arbitrary affine module computes the chart model sections.
 Source: Stacks Project, Tag 01I9(1), lemma-widetilde-pullback; Tag 01I7,
 lemma-compare-constructions; Tag 0096, lemma-pullback-modules.
-(blueprint: new-v2-self-tor-affine-tensor-sections).
 Proof: Put V=i inverse-image U, A=Gamma(Y,U), B=Gamma(Z,V), and j:U to Y.
 Because i is affine, V is affine. Restrict j_* of the associated M back to U.
 The open-immersion restriction comparison identifies this restriction with

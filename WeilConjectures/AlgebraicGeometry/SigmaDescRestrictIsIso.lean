@@ -58,8 +58,7 @@ restriction of q is the coproduct of the restrictions of ν i. Each is an
 isomorphism by hypothesis, so their coproduct is an isomorphism. Compose with
 the given isomorphism p restricted to U, using morphismRestrict_comp.
 This works for an empty family as well, since the coproduct of an empty family
-of isomorphisms is the identity of an initial object.
-(blueprint: lem-weil-pbc-sigma-desc-restrict-iso) -/
+of isomorphisms is the identity of an initial object. -/
 theorem isIso_sigmaDesc_comp_restrict
     (X : Scheme.{u}) (n : ℕ) (C Y : Fin n → Scheme.{u})
     (ι : ∀ i, C i ⟶ X) (ν : ∀ i, Y i ⟶ C i) (U : X.Opens)

@@ -13,7 +13,6 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 /-! # Transport of chosen derived localizations along a scheme isomorphism
 
 Source: Stacks Project, Tags 05RU and 09IR.
-(blueprint: lem-pc-scheme-iso-derived-localizations).
 -/
 
 @[expose] public section
@@ -65,7 +64,6 @@ set_option backward.isDefEq.respectTransparency false in
 including the localized open sites, without increasing the morphism universe.
 Source: Stacks Project, Tags 05RU and 09IR; the localization-existence part of
 step 1 of lem-pc-affine-derived-open-transport.
-(blueprint: lem-pc-scheme-iso-derived-localizations).
 
 Proof: Pushforward along s.hom and s.inv gives inverse exact equivalences of
 module-sheaf categories. Apply these functors degreewise to cochain complexes;

@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.StrictLocalModuleSectionsSetTransport
 
 /-! # Bijectivity of strict-local restriction maps
 Source: Stacks Project, Tag 03Q9.
-(blueprint: lem-weil-pbc-strict-local-module-restriction-bijective)
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ namespace AlgebraicGeometry.Etale
 /-- The underlying function of a linear map satisfying the representative formula is bijective.
 This asserts only invertibility of an already constructed map, not its existence.
 Source: Stacks Project, Tag 03Q9, degree zero; Tags 03D3 and 03D7 for inverse images.
-(blueprint: lem-weil-pbc-strict-local-module-restriction-bijective).
 
 Proof: Forget modules. The forgetful functor preserves filtered colimits, hence identifies
 this map's source with the set stalk, with the same germ maps. The canonical module/set

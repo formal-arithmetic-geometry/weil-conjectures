@@ -115,8 +115,7 @@ The conclusion consists only of coefficient pullback and two degree-zero integra
 identities, with no unit, counit, adjunction, or claim about arbitrary complexes.
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
-thm-amb-p1-adjunction.proof.md, trace base-change normalization and diagonal integrals
-(auxiliary; not a blueprint node).
+thm-amb-p1-adjunction.proof.md, trace base-change normalization and diagonal integrals.
 
 Proof: The stalkwise invertibility hypothesis implies invertibility of N in the
 global sections of S, since invertibility is local on the Zariski site. Apply

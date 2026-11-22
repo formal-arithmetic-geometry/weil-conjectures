@@ -15,7 +15,6 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 /-! # Tensor compatibility of the universal pullback counit
 
 Source: Stacks Project, cohomology.tex, Tag 079U; perfect.tex, Tag 0DJA(1).
-(blueprint: lem-pc-tensor-counit-coordinate-equation).
 -/
 
 @[expose] public section
@@ -36,13 +35,13 @@ attribute [local instance] pullbackDescentModuleTensor moduleSymmetric modulePre
 attribute [local instance] Scheme.Modules.globalPullbackMatesColimits
 
 /-- Use the cached small-colimit structure directly for each diagram.
-Source: Stacks, Tag 079U (blueprint: lem-pc-tensor-counit-coordinate-equation). -/
+Source: Stacks, Tag 079U. -/
 local instance tensorCounit_colimit (S : Scheme.{u}) (J : Type) [Category.{0} J]
     (F : J ⥤ SheafOfModules.{u} (moduleRings S.toRingedSpace)) : HasColimit F :=
   ((Scheme.Modules.globalPullbackMatesColimits S).has_colimits_of_shape J).has_colimit F
 
 /-- Tensor total complexes have their defining coproducts.
-Source: Stacks, Tag 079U (blueprint: lem-pc-tensor-counit-coordinate-equation). -/
+Source: Stacks, Tag 079U. -/
 local instance tensorCounit_hasMapBifunctor (S : Scheme.{u})
     (P G : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ) :
     HomologicalComplex.HasMapBifunctor P G
@@ -51,7 +50,7 @@ local instance tensorCounit_hasMapBifunctor (S : Scheme.{u})
   exact tensorCounit_colimit S _ _
 
 /-- The cochain-complex presentation uses the same total coproducts.
-Source: Stacks, Tag 079U (blueprint: lem-pc-tensor-counit-coordinate-equation). -/
+Source: Stacks, Tag 079U. -/
 local instance tensorCounit_cochainHasMapBifunctor (S : Scheme.{u})
     (P G : CochainComplex (SheafOfModules.{u} (moduleRings S.toRingedSpace)) ℤ) :
     CochainComplex.HasMapBifunctor P G
@@ -252,8 +251,7 @@ Naturality of tau, the two factor counits, and the target localization map gives
     = tau(QP0,QG0);(epsilon(P0) tensor epsilon(G0));mu(k*P0,k*G0);Q(v).
 The right sides agree by the K-flat equation. Since Qr and Qs are isomorphisms,
 d is an isomorphism and cancels. No quasi-isomorphism assumption on either ordinary
-pulled-back resolution map is used. This gives the displayed equation.
-(blueprint: lem-pc-tensor-counit-coordinate-equation). -/
+pulled-back resolution map is used. This gives the displayed equation. -/
 theorem tensorCounit_coordinateEquation
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

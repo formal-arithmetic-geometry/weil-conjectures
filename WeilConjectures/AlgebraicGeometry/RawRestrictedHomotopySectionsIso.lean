@@ -13,7 +13,6 @@ import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexSingle
 /-! # Represented evaluation on homotopy classes
 
 Source: Stacks Project, Tags 03Q8, 072W and 0BKV.
-(blueprint: lem-sbc-raw-restricted-homotopy-sections-iso).
 -/
 
 @[expose] public section
@@ -24,15 +23,13 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
-/-- Underived restricted sections, applied termwise below.
-(blueprint: lem-sbc-raw-restricted-homotopy-sections-iso). -/
+/-- Underived restricted sections, applied termwise below. -/
 noncomputable abbrev underivedSections {Y : Scheme.{v}} (W : Y.Etale) :
     Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1} ⥤ AddCommGrpCat.{v + 1} :=
   upperStar AddCommGrpCat.{v + 1} W.hom ⋙
     Sheaf.Γ W.left.smallEtaleTopology AddCommGrpCat.{v + 1}
 
-/-- Zeroth homology of the sections complex of a single sheaf.
-(blueprint: lem-sbc-raw-restricted-homotopy-sections-iso). -/
+/-- Zeroth homology of the sections complex of a single sheaf. -/
 noncomputable def underivedSingleIso {Y : Scheme.{v}} (W : Y.Etale)
     (A : Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) :
     (((underivedSections W).mapHomologicalComplex (.up ℤ)).obj
@@ -43,8 +40,7 @@ noncomputable def underivedSingleIso {Y : Scheme.{v}} (W : Y.Etale)
         (underivedSections W) (.up ℤ) 0).app A) ≪≫
     HomologicalComplex.singleObjHomologySelfIso (.up ℤ) 0 _
 
-/-- Evaluate a chain map at the represented identity and then pass to homology.
-(blueprint: lem-sbc-raw-restricted-homotopy-sections-iso). -/
+/-- Evaluate a chain map at the represented identity and then pass to homology. -/
 noncomputable def chainEvaluation {S Y : Scheme.{v}} (h : Y ⟶ S) (U : S.Etale)
     (I : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ)
     (f : (CochainComplex.singleFunctor _ 0).obj
@@ -295,7 +291,6 @@ private lemma sectionsComplexIso_evaluation {S Y : Scheme.{v}} (h : Y ⟶ S)
 
 /-- The free represented sheaf identifies homotopy classes with section cohomology.
 Source: Stacks Project, Tag 03Q8; Cohomology on Sites, Tags 072W and 0BKV.
-(blueprint: lem-sbc-raw-restricted-homotopy-sections-iso).
 
 Proof: the inverse-image/direct-image adjunction, the sheafification adjunction,
 free-abelian adjunction and Yoneda identify maps from the pulled-back free represented

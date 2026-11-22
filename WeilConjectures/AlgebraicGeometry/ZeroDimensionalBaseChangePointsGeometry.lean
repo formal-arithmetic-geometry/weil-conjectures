@@ -17,7 +17,6 @@ import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 
 /-! Intermediate geometric facts for zero-dimensional base change.
 Source: Stacks Project, algebra.tex, Lemmas 00KH and 00FV.
-(blueprint: new-zdbp-geometry)
 -/
 
 set_option linter.style.haveILetI false
@@ -39,7 +38,7 @@ namespace AlgebraicGeometry
  Quasi-compactness then makes its point set finite. Every singleton is closed. Nullstellensatz
  makes each closed-point residue field a finite extension of k; algebraic closedness makes the
  induced field map an isomorphism. The empty scheme has a finite discrete space and the pointwise
- claims are vacuous. (blueprint: new-zdbp-geometry) -/
+ claims are vacuous. -/
 theorem zeroDimensional_baseChange_geometry
     (k : Type v) [Field k] [IsAlgClosed k]
     (C : Scheme.{v}) [C.Over (Spec (.of k))]

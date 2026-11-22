@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullbackCompositionIso
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 
 /-! # Associativity of the canonical tensor pullback comparisons
-Source: Stacks Project, Sheaves of Modules, Tags 0095 and 0096.
-(blueprint: lem-pc-tensor-pullback-composition-associativity). -/
+Source: Stacks Project, Sheaves of Modules, Tags 0095 and 0096. -/
 
 @[expose] public section
 set_option backward.isDefEq.respectTransparency false
@@ -23,7 +22,6 @@ attribute [local irreducible] tensorPullback
 
 /-- The two routes from a triple composite to its three tensor pullbacks agree.
 Source: Stacks Project, Tags 0095 and 0096, composition of module pullbacks.
-(blueprint: lem-pc-tensor-pullback-composition-associativity).
 Proof: Substitute the four factorization equalities. Apply the conjugate
 natural-transformation equivalence for the adjunction of the total pullback
 and the composite of the three chosen tensor pullback adjunctions. Conjugation

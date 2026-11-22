@@ -157,7 +157,7 @@ private theorem ordinaryIntegralResidueSequence (T : Scheme.{u}) (n : ℕ) (hn :
 integral generator i_*Z_D→forget(i_*(ULift(Z/n))_D) form a short exact sequence of abelian etale
 sheaves [def-weil-pbc-direct-image, def-asd-ordinary-finite-p1-kummer-class].
 Source: blueprint Cartier derived reduction and comparison paragraphs; Stacks 0152,
-06YY and 0GLZ (auxiliary; not a blueprint node).
+06YY and 0GLZ.
 Proof: The constant integer-to-residue sequence is exact: sheafification is exact and the elementary
 integer sequence has kernel nZ. A closed immersion is finite, so its etale direct image is exact.
 Apply this direct image to the constant sequence. The constant-sections adjunction identifies its

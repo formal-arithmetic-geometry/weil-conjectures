@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ConormalWedgeLocalSpan
 
 /-! # Local Koszul agreement on wedges in affine self-Tor coordinates
 
-Source: Stacks Project, Tags 09PQ, 01R3 and 06YH.
-(blueprint: new-h3-self-tor-local-wedge-coordinates). -/
+Source: Stacks Project, Tags 09PQ, 01R3 and 06YH. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -163,7 +162,6 @@ set_option linter.unusedVariables false in
 provides neither equality on general exterior sections nor equality of module maps.
 Source: Stacks Project, Tag 09PQ (Koszul normalization and resolution independence),
 Tag 01R3 (conormal classes), and Tag 06YH (K-flat computation).
-(blueprint: new-h3-self-tor-local-wedge-coordinates).
 
 Proof: On each affine chart U, identify the closed chart with Spec(A/I). Sheafify a
 projective resolution of A/I by exists_affine_quotient_sheafified_resolution. Its

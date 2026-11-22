@@ -27,7 +27,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 /-! # Closure of the affine projection-mate locus
 
 Source: Stacks Project, Tag 08EU.
-(blueprint: lem-pc-qcqs-projection-mate-affine-locus).
 -/
 
 @[expose] public section
@@ -243,8 +242,7 @@ Naturality transports an isomorphism component along an object isomorphism
 and along a retract. The predicate quantifies over all object isomorphisms,
 so it is invariant under isomorphism by composition. The zero object and
 empty coproduct are included.
-Source: Stacks Project, Tag 08EU.
-(blueprint: lem-pc-qcqs-projection-mate-affine-locus). -/
+Source: Stacks Project, Tag 08EU. -/
 theorem qcqsProjectionMate_affineLocus_closed
     (htri : ∃ (_h : (e.functor ⋙
       (schemeDerivedQCohProperty (Spec (.of A))).ι).CommShift ℤ),

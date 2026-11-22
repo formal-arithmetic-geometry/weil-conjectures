@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedModulePushforwardHomology
 
 /-! # Closed-immersion self-Ext on fixed resolution representatives
 
-Source: Stacks Project, Tags 08DH, 08I3, 06YS, 079P and 08KS.
-(blueprint: lem-pc-self-ext-pushforward-homology). -/
+Source: Stacks Project, Tags 08DH, 08I3, 06YS, 079P and 08KS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -31,7 +30,6 @@ resolution of the structure sheaf on the closed subscheme.
 
 Source: Stacks Project, cohomology.tex, Tags 08DH and 08I3; modules.tex,
 Tag 08KS; Tags 06YS and 079P for the resolution representatives.
-(blueprint: lem-pc-self-ext-pushforward-homology).
 
 Proof: Work first in standard derived localizations on Z and Y. The augmentation a
 identifies Q(P) with B[0]. The K-flat representative comparison for derived pullback

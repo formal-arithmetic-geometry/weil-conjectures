@@ -55,8 +55,7 @@ set_option linter.privateModule false
 /-!
 # A fixed Tor interval across constructible strata
 
-proof.md`, Strata paragraph
-(auxiliary; not a blueprint node).
+proof.md`, Strata paragraph.
 
 The coefficient list uses the finite-subextension-valued algebraic closure.
 All modules in the Tor conditions are placed in degree zero. Constructibility uses

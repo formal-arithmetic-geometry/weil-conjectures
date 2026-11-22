@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 /-! # Structure and restriction comparisons for a spectrum presentation
 
 Source: Stacks Project, Tag 08DC; Mathlib exact functors and scheme-module restriction.
-(blueprint: lem-sc-spectrum-structure-restriction-comparison).
 -/
 
 @[expose] public section
@@ -107,7 +106,6 @@ restriction functor, including transport from localized sites to open subschemes
 Source: Stacks Project, Tag 08DC (equation-comparison, structure object);
 Mathlib Algebra.Homology.DerivedCategory.ExactFunctor and
 AlgebraicGeometry.Modules.Sheaf (formal isomorphism transport).
-(blueprint: lem-sc-spectrum-structure-restriction-comparison).
 
 Proof:
 1. The exact equivalence Modules.overEquiv on the spectrum open transfers its chosen

@@ -13,7 +13,7 @@ import WeilConjectures.AlgebraicTopology.SimplicialIndexFiniteInitial
 # Objects of compatible simplicial maps in semi-representable objects
 
 Source: Stacks Project, Tags 017J and 017K, applied to the category of formal étale
-families using Tag 01G2 (auxiliary; not a blueprint node).
+families using Tag 01G2.
 -/
 
 @[expose] public section
@@ -25,8 +25,7 @@ open CategoryTheory CategoryTheory.Limits Opposite Simplicial
 namespace AlgebraicGeometry.Scheme
 
 /-- The compatible families indexed by a finite simplicial set are represented by a
-semi-representable object. Source: Stacks Project, Tags 017J, 017K and 01G2
-(auxiliary; not a blueprint node).
+semi-representable object. Source: Stacks Project, Tags 017J, 017K and 01G2.
 
 Proof:
 1. Form the category of simplices `(n, s)` of `S`, with arrows `(m, t) → (n, s)`

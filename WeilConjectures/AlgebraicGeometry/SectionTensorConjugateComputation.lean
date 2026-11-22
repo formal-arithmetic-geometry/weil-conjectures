@@ -8,8 +8,6 @@ public import WeilConjectures.AlgebraicGeometry.InternalScalarPullbackNormalizat
 import WeilConjectures.AlgebraicGeometry.SectionScalarComputationTransport
 
 /-! # K-flat computation of conjugated scalar tensor comparisons
-
-(auxiliary; not a blueprint node)
 -/
 @[expose] public noncomputable section
 set_option autoImplicit false
@@ -232,7 +230,6 @@ attribute [local irreducible] scalarComputation restrictedScalarComputation
 /-- Conjugated normalized scalar tensor maps have the section K-flat computation equation.
 Source: Stacks Project, Tags 03EK, 06YY, 0G7E and 07A6; blueprint integral proper-base-change
 proof paragraph (1); second step of lem-sfb-section-tensor-normalization-transport.
-(auxiliary; not a blueprint node).
 
 Proof: first take a section complex which is the termwise image of an internal complex.
 Substitute the supplied conjugation equation for e. The scalar normalization identifies

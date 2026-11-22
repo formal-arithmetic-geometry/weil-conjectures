@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceSquareCore
 import WeilConjectures.AlgebraicGeometry.RawModuleScalarSheafComposition
 
 /-! Unshifted coefficient identity used by the shifted scalar square.
-Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-scalar-coefficient-unshifted). -/
+Source: Stacks Project, Tags 03D7 and 03Q8. -/
 
 @[expose] public section
 
@@ -130,8 +129,7 @@ end RawModuleScalarComparison
 Source: Stacks Project, Tags 03D7 and 03Q8. Expand the defining composite
 into its three comparison isomorphisms and apply `NatTrans.shift_app_comm`
 to each factor; compatibility of composition and associativity then give
-the inverse composite's `CommShift` instance for every integer shift.
-(blueprint: lem-sbc-raw-scalar-derived-pullback-shift) -/
+the inverse composite's `CommShift` instance for every integer shift. -/
 theorem rawModuleScalar_derivedPullbackIso_commShift
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
     NatTrans.CommShift (moduleAbelianDerivedUpperStarIso Λ f).hom ℤ := by
@@ -163,8 +161,7 @@ the coefficient sheaf and identity map, use invertibility of its source
 factors, and rewrite with `Functor.map_inv` and associativity. Cancellation
 of the derived scalar comparison yields the displayed equality. This applies
 to identity arrows, zero coefficients, and arbitrary schemes in the stated
-universes.
-(blueprint: lem-sbc-raw-scalar-coefficient-unshifted) -/
+universes. -/
 theorem rawModuleScalar_coefficient_unshifted
     (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))

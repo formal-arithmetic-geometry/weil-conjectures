@@ -10,8 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShr
 
 /-! # Constructible compact-support exceptional adjoint
 
-Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and Proposition 6.8.14
-(blueprint: lem-per-condensed-structural-exceptional-adjoint).
+Source: Bhatt--Scholze, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and Proposition 6.8.14.
 
 For a morphism `f : X ⟶ Y` of separated `k`-schemes of finite type, the blueprint lemma asserts
 that the bounded constructible compact-support functor `Rf_!` is computed by `i_! ⋙ Rp_*` for
@@ -46,7 +45,7 @@ compactification: for every compactification `c` of `f`, it is the restriction t
 derived lower shriek `Rf_!(c)⟦ℚ̲̄_ℓ⟧ = i_! ⋙ Rp_*` attached to `c`.
 
 Source: Bhatt--Scholze, Definition 6.7.6, Lemmas 6.7.7 and 6.7.19, Remark 6.8.15 and
-Proposition 6.8.14; (blueprint: lem-per-condensed-structural-exceptional-adjoint).
+Proposition 6.8.14;.
 
 Construction: the independence isomorphism
 `boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl` from the chosen

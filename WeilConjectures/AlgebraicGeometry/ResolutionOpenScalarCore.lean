@@ -13,8 +13,7 @@ import Mathlib.Algebra.Homology.ShortComplex.Linear
 import Mathlib.Algebra.Homology.Linear
 
 /-! # The fixed comparison intertwines the scalar endomorphisms.
-Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-resolution-open-scalar-core). -/
+Source: Stacks Project, Tags 01E1 and 01E4. -/
 
 @[expose] public section
 universe u
@@ -31,7 +30,6 @@ private lemma moduleCat_smul_asHom_apply {R : Type u} [Ring R]
 
 /-- The fixed comparison intertwines the scalar endomorphisms.
 Source: Stacks Project, Tags 01E1 and 01E4.
-(blueprint: lem-pc-resolution-open-scalar-core).
 
 Proof: Multiplication by b on each term of the restricted resolution lifts G.smulHom b by naturality
 of smulHom and the augmentation. Naturality of isoRightDerivedObj identifies its induced

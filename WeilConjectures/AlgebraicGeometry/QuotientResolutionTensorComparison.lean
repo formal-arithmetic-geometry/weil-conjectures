@@ -15,8 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Augmented tensor comparisons for quotient resolutions
-Source: Stacks Project, Tag 00LS.
-(blueprint: new-p4-quotient-resolution-tensor-comparison). -/
+Source: Stacks Project, Tag 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -68,7 +67,6 @@ private theorem restricted_resolution_lift
 /-- A ring homomorphism carrying one ideal into another admits an augmented
 comparison of the chosen quotient resolutions and the induced tensor complexes.
 Source: Stacks Project, Tag 00LS, comparison of resolutions.
-(blueprint: new-p4-quotient-resolution-tensor-comparison).
 
 Proof: The ideal containment gives the quotient homomorphism ψ. Restrict the
 augmented target resolution to A; restriction of scalars is exact, so it is

@@ -19,8 +19,7 @@ import WeilConjectures.RingTheory.SelfTorConormalRegularIso
 
 /-! # The dual exterior-to-self-Tor comparison
 
-Source: Stacks Project, Tags 09PQ, 062I, 0BQY and 06YH.
-(blueprint: lem-sc-self-tor-conormal-dual-chart). -/
+Source: Stacks Project, Tags 09PQ, 062I, 0BQY and 06YH. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,7 +32,7 @@ namespace AlgebraicGeometry
 Source: Stacks Project, more-algebra.tex, lemma-H1-regular-quasi-regular (062I),
 dpa.tex, lemma-divided-powers-on-tor (09PQ), and duality.tex,
 lemma-regular-ideal-ext (0BQY), the augmented Koszul dg algebra;
-06YH for derived tensor. (blueprint: lem-sc-self-tor-conormal-dual-chart).
+06YH for derived tensor.
 
 Proof: For B = i_*O_Z, the derived tensor B tensor^L B is a derived B-algebra.
 Its degree-minus-one cohomology is the conormal module: tensor the exact sequence

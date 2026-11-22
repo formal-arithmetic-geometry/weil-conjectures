@@ -12,7 +12,6 @@ import all WeilConjectures.CategoryTheory.InternalSectionScalarAdjunction
 /-! # Transport of normalized scalar pullback comparisons
 
 Source: Stacks Project, Tags 03EK, 0D6D, 07A6 and 0E47.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -270,7 +269,6 @@ private theorem sectionDerivedPull_realization (φ : Λ ⟶ Λ') [IsMonHom φ]
 /-- A supplied universally normalized internal scalar/pullback comparison is
 section-normalized with respect to any two normalized endpoint realizations.
 Source: Stacks 03EK, 0D6D and 07A6; internal scalar/pullback normalization, step 8.
-(auxiliary; not a blueprint node)
 
 Proof: the identity restriction/direct-image map is conjugated by the endpoint
 restriction comparisons to give the ordinary section square r. Both endpoint

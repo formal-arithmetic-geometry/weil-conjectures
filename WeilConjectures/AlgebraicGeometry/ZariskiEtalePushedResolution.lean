@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtalePushedResolutionQuasiIso
 /-! # Injective resolutions for the Zariski-etale comparison
 
 Source: Stacks Project, Tags 072W and 0733(1).
-(blueprint: lem-weil-pbc-zariski-etale-pushed-resolution)
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 Source: Stacks Project, Tags 072W and 0733(1); Etale Cohomology, Tag 09AX;
 Modules on Sites, Tag 03DJ.
-(blueprint: lem-weil-pbc-zariski-etale-pushed-resolution)
 
 Proof: factor the
 given open-restriction functor through the etale object i(top).

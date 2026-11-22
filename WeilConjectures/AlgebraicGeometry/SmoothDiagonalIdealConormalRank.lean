@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank
 
 /-! # The ideal-sheaf conormal and its rank for a smooth closed diagonal
 
-Source: Stacks Project, Tags 08S2 and 02G1
-(blueprint: lem-sc-smooth-diagonal-ideal-conormal-rank).
+Source: Stacks Project, Tags 08S2 and 02G1.
 -/
 
 @[expose] public section
@@ -95,8 +94,7 @@ private theorem ideal_kernel_iso {Y Z : Scheme.{u}} (i : Z ⟶ Y)
 /-- The conormal used by Koszul duality agrees with relative differentials and has
 stalk rank equal to the pure relative dimension. This concerns only module sheaves,
 without derived categories or a duality adjunction.
-Source: Stacks Project, Tags 08S2 and 02G1
-(blueprint: lem-sc-smooth-diagonal-ideal-conormal-rank).
+Source: Stacks Project, Tags 08S2 and 02G1.
 
 Proof: write i for the closed diagonal. The canonical isomorphism from X to the
 closed subscheme defined by i.ker commutes with the maps to the fibre product.

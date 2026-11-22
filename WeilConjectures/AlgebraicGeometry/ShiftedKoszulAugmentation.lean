@@ -15,8 +15,7 @@ public import Mathlib.LinearAlgebra.ExteriorPower.Basic
 
 /-! # Shifted Koszul complexes and their augmentations
 
-Source: Stacks Project, Tag 08CX, Section 36.9
-(blueprint: def-pc-shifted-koszul-augmentation).
+Source: Stacks Project, Tag 08CX, Section 36.9.
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ namespace AlgebraicGeometry
 noncomputable section
 
 /-- Square zero for the negative differential after deleting degree zero of the
-Koszul chain complex. Source: Stacks, Tag 08CX
-(blueprint: def-pc-shifted-koszul-augmentation).
+Koszul chain complex. Source: Stacks, Tag 08CX.
 Proof: the two minus signs cancel and `koszulBoundary_comp` gives zero. -/
 theorem shiftedKoszul_square (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)
     (n : ℕ) :
@@ -41,7 +39,7 @@ theorem shiftedKoszul_square (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → 
     ExteriorAlgebra.koszulBoundary_comp A r f (n + 1)
 
 /-- The chain version of `I`, with term `K_(n+1)` and negative differential.
-Source: Stacks, Tag 08CX (blueprint: def-pc-shifted-koszul-augmentation). -/
+Source: Stacks, Tag 08CX. -/
 def shiftedKoszulChain (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :
     ChainComplex (ModuleCat.{u} A) ℕ :=
   ChainComplex.of (fun n ↦ (ExteriorAlgebra.koszulComplex A r f).X (n + 1))
@@ -49,14 +47,13 @@ def shiftedKoszulChain (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :
     (shiftedKoszul_square A r f)
 
 /-- The cochain complex `I^i = K^(i-1)` for `i ≤ 0`, zero for `i > 0`,
-with the negative Koszul differential. Source: Stacks, Tag 08CX
-(blueprint: def-pc-shifted-koszul-augmentation). -/
+with the negative Koszul differential. Source: Stacks, Tag 08CX. -/
 def shiftedKoszulComplex (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :
     CochainComplex (ModuleCat.{u} A) ℤ :=
   (shiftedKoszulChain A r f).extend ComplexShape.embeddingDownNat
 
 /-- The augmentation's degree-zero component kills the preceding differential.
-Source: Stacks, Tag 08CX (blueprint: def-pc-shifted-koszul-augmentation).
+Source: Stacks, Tag 08CX.
 Proof: contraction squared is zero, and composition with the degree-zero
 exterior-power identification preserves zero. The sign does not affect vanishing. -/
 theorem shiftedKoszul_augmentation_comp (A : Type u) [CommRing A] (r : ℕ)
@@ -72,7 +69,7 @@ theorem shiftedKoszul_augmentation_comp (A : Type u) [CommRing A] (r : ℕ)
 
 /-- The canonical augmentation of the chain version of `I` to `A` in degree zero.
 Its component in degree zero sends the standard basis vector `i` to `f i`.
-Source: Stacks, Tag 08CX (blueprint: def-pc-shifted-koszul-augmentation). -/
+Source: Stacks, Tag 08CX. -/
 def shiftedKoszulChainAugmentation (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :
     shiftedKoszulChain A r f ⟶ (ChainComplex.single₀ (ModuleCat.{u} A)).obj
       (ModuleCat.of A A) :=
@@ -81,7 +78,7 @@ def shiftedKoszulChainAugmentation (A : Type u) [CommRing A] (r : ℕ) (f : Fin 
       (ExteriorAlgebra.koszulBoundary A r f 0)), shiftedKoszul_augmentation_comp A r f⟩
 
 /-- The augmentation `I → A`, viewed as an integer-indexed cochain map.
-Source: Stacks, Tag 08CX (blueprint: def-pc-shifted-koszul-augmentation). -/
+Source: Stacks, Tag 08CX. -/
 def shiftedKoszulAugmentation (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A) :
     shiftedKoszulComplex A r f ⟶
       ((ChainComplex.single₀ (ModuleCat.{u} A)).obj (ModuleCat.of A A)).extend
@@ -93,7 +90,7 @@ def shiftedKoszulAugmentation (A : Type u) [CommRing A] (r : ℕ) (f : Fin r →
 Its source is `I` and its target is the structure sheaf in degree zero. Associated
 sheaves are Mathlib's `tilde.functor` applied termwise, in the form of the landed
 lem-pc-koszul-affine-detection and lemma-coherent-base-change-invertible-sheaves--1 citers.
-Source: Stacks, Tag 08CX; Tag 01I6 (blueprint: def-pc-shifted-koszul-augmentation). -/
+Source: Stacks, Tag 08CX; Tag 01I6. -/
 def affineKoszulAugmentation (A : Type u) [CommRing A]
     [HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace))]

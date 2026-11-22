@@ -23,8 +23,7 @@ import WeilConjectures.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.KFlatPullback
 /-! # Object comparison for relatively flat tensor base change
 
-Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor
-(blueprint: lem-pc-relatively-flat-tensor-base-change-iso).
+Source: Stacks Project, Tag 0A1D, lemma-base-change-tensor.
 -/
 
 @[expose] public section
@@ -68,8 +67,7 @@ complex with Tot(g'*P tensor g'*G). Pullback of P is K-flat, so this total compl
 represents Lg'*E tensor Q(g'*G). Compose the comparison with this identification
 under the direct-image functor. This requires no properness or finite presentation.
 Zero complexes and empty schemes are included; bounded-above G need not be K-flat
-over O_X and is not replaced by its derived pullback.
-(blueprint: lem-pc-relatively-flat-tensor-base-change-iso). -/
+over O_X and is not replaced by its derived pullback. -/
 theorem relativelyFlat_tensor_baseChange_iso
     [∀ Z : Scheme.{u}, HasDerivedCategory.{w}
       (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]

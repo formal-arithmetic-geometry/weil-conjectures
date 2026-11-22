@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.SplitTopDifferentialCancellationHomotop
 
 Source: Stacks Project, Tag 068V, explicit split cancellation in the bounded
 finite-projective specialization; the identity-pair argument of Tag 00MT.
-(blueprint: lem-pc-split-top-differential-cancellation)
 -/
 
 @[expose] public section
@@ -54,7 +53,6 @@ private theorem truncLE_term_retract (S : Scheme.{u}) (B : CochainComplex S.Modu
 
 Source: Stacks Project, Tag 068V, explicit split cancellation; Tag 00MT,
 contractible identity-pair argument.
-(blueprint: lem-pc-split-top-differential-cancellation).
 
 Proof: Let δ = B.d m (m+1) and choose a section σ with σ ≫ δ = 𝟙. Replace the term
 in degree m by ker δ, retain the terms below m, and put zero in every degree above

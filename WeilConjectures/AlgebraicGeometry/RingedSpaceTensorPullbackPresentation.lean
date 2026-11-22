@@ -14,7 +14,6 @@ import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 /-! # Tensor pullback of a presentation on a specified open
 
 Source: Stacks Project, Modules, Tag 01BG, Lemma 17.10.4.
-(blueprint: lem-pc-ringed-space-tensor-pullback-presentation-over)
 
 The restriction comparison follows by comparing right adjoints: inverse image of opens
 commutes with intersection, and naturality of the structure map identifies the scalar maps.
@@ -145,7 +144,6 @@ private theorem tensorPullbackOverComparison
 
 /-- Tensor pullback transports a global presentation over an open subset.
 Source: Stacks Project, Modules, Tag 01BG, Lemma 17.10.4, global presentation step.
-(blueprint: lem-pc-ringed-space-tensor-pullback-presentation-over)
 
 Proof: Put U = g⁻¹(V) and restrict g to the morphism of ringed spaces U → V.
 Restriction commutes with inverse image and with sheafified extension of scalars:

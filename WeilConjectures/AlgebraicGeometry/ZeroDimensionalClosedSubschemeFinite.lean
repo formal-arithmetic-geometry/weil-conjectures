@@ -17,8 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Dimension
 # Zero-dimensional closed subschemes are finite over the base field
 
 Source: Stacks Project, Varieties, Tag 06LH (Lemma algebraic-scheme-dim-0), algebraic case;
-Morphisms, Tag 03J3, opening paragraph
-(blueprint: lem-pc-zero-dimensional-closed-subscheme-finite).
+Morphisms, Tag 03J3, opening paragraph.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry
 at most zero, is finite over the field and affine, with finite-dimensional global sections.
 
 Source: Stacks Project, Varieties, Tag 06LH (Lemma algebraic-scheme-dim-0), algebraic case;
-Morphisms, Tag 03J3, opening paragraph
-(blueprint: lem-pc-zero-dimensional-closed-subscheme-finite).
+Morphisms, Tag 03J3, opening paragraph.
 
 Proof: (1) Mathlib's closed-immersion instances give that `i` is finite, hence locally
 of finite type and quasi-compact. Composition with `f` makes `Z` finite type over `k`.

@@ -36,9 +36,7 @@ one inclusion. The continuous image of the new component is connected and contai
 old section point, proving the other inclusion. Work directly in the given cartesian
 square: restrict its first projection to the open representing the old fibre component,
 then compare residue-field fibres. The section compatibility identifies the distinguished
-points without a canonical-pullback or homeomorphism-transport lemma.
-
-(blueprint: lem-sbc-section-component-cartesian) -/
+points without a canonical-pullback or homeomorphism-transport lemma. -/
 theorem section_component_preimage_of_isPullback {X Y X' Y' : Scheme.{u}}
     (f : X ⟶ Y) [LocallyOfFiniteType f] (σ : Y ⟶ X) (hσ : σ ≫ f = 𝟙 Y)
     (a : X' ⟶ X) (f' : X' ⟶ Y') (b : Y' ⟶ Y) (h : IsPullback a f' f b)

@@ -23,8 +23,7 @@ import WeilConjectures.AlgebraicGeometry.SelfTorAmbientSectionCoordinates
 
 /-! # Ambient affine self-Tor comparison
 
-Source: Stacks Project, Tags 08DX, 06YG and 00LS.
-(blueprint: lem-pc-self-tor-ambient-resolution-charts). -/
+Source: Stacks Project, Tags 08DX, 06YG and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -161,7 +160,6 @@ private theorem affine_iso_of_chart_coordinates {Y : Scheme.{u}} (U : Y.affineOp
 /-- The affine quotient tensor resolutions compute the ambient homology sheaf,
 before any pullback to the closed subscheme.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG, and Tag 00LS.
-(blueprint: lem-pc-self-tor-ambient-resolution-charts).
 
 Proof: Use the natural affine section coordinates provided by
 exists_selfTor_ambient_section_coordinates. The pushed-forward closed structure

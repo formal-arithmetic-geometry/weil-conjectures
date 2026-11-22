@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.SchemeOrdinaryEvaluationChainAction
 
 /-! # Ordinary evaluation before localization
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ.
-(blueprint: lem-pc-scheme-ordinary-evaluation-chain-calculation).
 -/
 
 @[expose] public section
@@ -33,7 +32,6 @@ attribute [local instance] SheafOfModules.monoidalCategory SheafOfModules.symmet
 /-- Ordinary evaluation is tensoring the chain evaluation into the single unit.
 Source: Stacks Project, cohomology.tex, Tags 08DJ, 08DM and 08DQ;
 ordinary evaluation localization proof step 2.
-(blueprint: lem-pc-scheme-ordinary-evaluation-chain-calculation).
 
 Proof: Construct e degreewise by extending evaluation of Hom(P,O)^q on P^r
 across the coproduct defining Tot(V,P). Its target is O^(q+r). The Hom

@@ -39,7 +39,6 @@ private theorem restriction_glue {C D : Type*} [Category C] [Category D]
 
 /-- The target path has the explicit restricted-counit normal form.
 Source: Stacks Project, Cohomology, Tags 08HY, 08BV and 08HZ.
-(blueprint: new-relative-mv-restriction-target-counit).
 Proof: Transpose only the target path under L(W'→S') adjoint to R(W'→S').
 Expand its relative restriction and remove the right-adjoint composition
 comparisons by their defining mate equations. Transpose the U base-change

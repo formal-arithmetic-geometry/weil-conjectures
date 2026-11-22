@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.SfDiagonalSectionForgetSupportsUnit
 
 This normalization involves only one self-product, with no change of coordinates.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the diagonal section
-identification (auxiliary; not a blueprint node).
+identification.
 -/
 
 @[expose] public section
@@ -128,7 +128,6 @@ the tensor unit to any coefficient object on the original scheme.
 Source: blueprint latest, thm-amb-p1-adjunction.proof.md, the identification
 M = Rp2_* Delta_* M, and lem-amb-p1-diagonal-integrals.proof.md, the diagonal
 is a section for either projection.
-(auxiliary; not a blueprint node).
 
 Proof: put d = Delta and p = p_a, so d followed by p is identity.
 Expand rightDerivedLowerShriekCompIso in its specified compatible tower:

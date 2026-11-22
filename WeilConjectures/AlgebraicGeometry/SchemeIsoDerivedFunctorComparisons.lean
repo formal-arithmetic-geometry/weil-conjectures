@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 
 Source: Stacks Project, Tag 08EU, affine-local reduction, expanded by the
 K-flat and K-injective constructions of Tags 06YI and 079V.
-(blueprint: lem-pc-scheme-iso-derived-functor-comparisons).
 -/
 
 @[expose] public section
@@ -111,7 +110,6 @@ scheme isomorphisms. No adjunction or projection mate is part of this assertion.
 
 Source: Stacks Project, Tag 08EU, first sentence of the proof, expanded using
 Tags 06YI and 079V; step 1 of lem-pc-projection-mate-scheme-iso-transport.
-(blueprint: lem-pc-scheme-iso-derived-functor-comparisons).
 
 Proof: Pushforward along each scheme isomorphism and its inverse are exact
 inverse equivalences of module categories. The supplied localization comparisons

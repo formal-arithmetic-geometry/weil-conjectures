@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 
 /-! # Lifting quasi-coherent derived objects from a quasi-compact open
 
-Source: Stacks Project, Tag 08EE, proof invoking Tag 08ED, lemma-lift-quasi-coherent
-(blueprint: lem-sc-qc-open-derived-lift).
+Source: Stacks Project, Tag 08EE, proof invoking Tag 08ED, lemma-lift-quasi-coherent.
 -/
 
 @[expose] public section
@@ -34,8 +33,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Every quasi-coherent derived object on a quasi-compact open of an affine scheme
 lifts to a quasi-coherent derived object on the scheme. Restriction is first to the
 localized site and then transported by the canonical equivalence with the open's site.
-Source: Stacks Project, Tag 08EE, proof invoking Tag 08ED, lemma-lift-quasi-coherent
-(blueprint: lem-sc-qc-open-derived-lift).
+Source: Stacks Project, Tag 08EE, proof invoking Tag 08ED, lemma-lift-quasi-coherent.
 
 Proof:
 1. Write j : U → X for the open inclusion. A finite affine cover of U shows that j

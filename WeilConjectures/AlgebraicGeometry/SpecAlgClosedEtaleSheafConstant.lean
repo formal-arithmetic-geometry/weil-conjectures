@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstantStalk
 # Etale sheaves on an algebraically closed spectrum are constant
 
 Source: literature/stacks-project/etale-cohomology.tex, Remark 59.23.2 (Tag 03P5),
-together with Lemma 59.39.3 (Tag 0A3H)
-(blueprint: lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant).
+together with Lemma 59.39.3 (Tag 0A3H).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry.Scheme
 /-- Every set-valued sheaf on the small etale site of an algebraically closed field
 is canonically constant, and its global sections identify with its identity geometric stalk.
 Source: Stacks Project, Remark 59.23.2 (Tag 03P5), together with Lemma 59.39.3 (Tag 0A3H).
-(blueprint: lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant).
 
 Proof:
 1. Every etale object over `Spec Ω` is a coproduct of copies of `Spec Ω`, by

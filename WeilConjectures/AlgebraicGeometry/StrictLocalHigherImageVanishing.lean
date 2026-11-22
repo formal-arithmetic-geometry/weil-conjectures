@@ -40,8 +40,6 @@ one direction. Conversely, subsingleton Ext groups make all geometric stalks zer
 conservative family of algebraic-closure points then makes the identity of the higher
 direct image equal to zero. Transport back through the derived-functor comparison.
 This includes degree zero, an empty source or target, and arbitrary coefficient rings.
-
-(blueprint: lem-per-qe-open-residue-strict-local-vanishing-criterion)
 -/
 theorem isZero_rightDerived_lowerStar_iff_strict_local_ext
     (B : Type (u + 1)) [CommRing B] {Y S : Scheme.{u}} (f : Y ⟶ S)

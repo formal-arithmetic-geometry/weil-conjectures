@@ -11,7 +11,6 @@ import all WeilConjectures.AlgebraicGeometry.SfGraphProjectionWord
 /-! # Projection compatibility of the second graph side
 
 Source: `LowerShriekComposition.lean`, eB, and Stacks Tags 0B56, 0GL1 and 0F7B.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -441,7 +440,7 @@ private theorem wordProjection_graph
 /-- Projection compatibility of the second graph side.
 
 Source: `LowerShriekComposition.lean`, eB; the tensor calculation uses Stacks
-Tags 0B56, 0GL1 and 0F7B (auxiliary; not a blueprint node).
+Tags 0B56, 0GL1 and 0F7B.
 
 Proof in words. Expand B2 into the inverse direct-image compositor for s2 q2 = a, the
 Cartesian proper/open exchange over e, and the direct-image compositor for p1 p.

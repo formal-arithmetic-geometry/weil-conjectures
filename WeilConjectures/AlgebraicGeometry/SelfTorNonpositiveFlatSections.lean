@@ -22,8 +22,7 @@ import WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Affine coordinates for nonpositive flat resolutions
 
-Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS.
-(blueprint: new-n4-self-tor-nonpositive-flat-sections). -/
+Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9 and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -39,7 +38,6 @@ compare an unbounded K-flat resolution with a bounded one.
 Source: Stacks Project, Tag 08DX(2), affine calculation; Tags 06YG and 06YB,
 K-flat tensor comparison; Tag 01I9, affine sections; Tag 00LS(1), comparison
 of augmented resolutions.
-(blueprint: new-n4-self-tor-nonpositive-flat-sections).
 
 Proof: On each affine chart U identify B restricted to U with tilde(A/I),
 using the closed-immersion quotient presentation and its quotient section map.

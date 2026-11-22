@@ -26,7 +26,6 @@ variable {R : Type u} [Ring R]
 
 /-- Finite-support reduction for the left half-plane total complex.
 Source: Stacks Project, Homology, Tag 09IZ, proof, finite-support induction.
-(blueprint: lem-pc-derived-total-resolution-column-zero-cycle-reduction)
 
 Proof. Put A_i = K.X (-i). For the given cycle z in degree n, let
 x = iCycles(z), an element of the kernel of the total differential. The coproduct of

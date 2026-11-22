@@ -10,8 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.SectionFractionPresentation
 
 /-! # Restriction and division of section fractions
 
-Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), canonical map.
-(blueprint: lem-sc-p1-section-fraction-restriction-map)
+Source: Stacks Project, Properties, Lemma 01PW, canonical map.
 -/
 
 @[expose] public section
@@ -23,8 +22,8 @@ open CategoryTheory MonoidalCategory Opposite DirectSum
 namespace AlgebraicGeometry.Scheme.Modules
 
 /-- Restriction followed by division by a free generator descends to the fraction quotient.
-Source: Stacks Project, Properties, Lemma 01PW (lemma-invert-s-sections), the canonical
-map in part (2). (blueprint: lem-sc-p1-section-fraction-restriction-map)
+Source: Stacks Project, Properties, Lemma 01PW, the canonical
+map in part (2).
 
 Proof: On `U`, each tensor power of `s` is a free generator. Tensoring with it is a
 bijection on sections for every module `F`. Its inverse is additive and linear over

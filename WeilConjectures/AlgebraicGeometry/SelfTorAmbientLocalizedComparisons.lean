@@ -21,8 +21,7 @@ import WeilConjectures.AlgebraicGeometry.KFlatDerivedTensorComparison
 
 /-! # Ambient self-Tor coordinates on affine sections
 
-Source: Stacks Project, Tags 08DX(2), 06YG and 00LS.
-(blueprint: new-h2-self-tor-ambient-localized-comparisons). -/
+Source: Stacks Project, Tags 08DX(2), 06YG and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -38,7 +37,6 @@ set_option synthInstance.maxSize 2048 in
 /-- Ambient affine coordinates compatible with one localized resolution comparison for each
 basic inclusion. This asserts existence of comparison lifts, not compatibility with all lifts.
 Source: Stacks Project, Tag 08DX(2), with Tags 06YG and 00LS(1).
-(blueprint: new-h2-self-tor-ambient-localized-comparisons).
 
 Proof: For each affine U, identify the closed structure sheaf with tilde(A/I).
 Sheafify its chosen projective resolution and augmentation using
@@ -55,7 +53,7 @@ Localize the chosen U-resolution, obtaining a projective resolution over C.
 Lift its augmentation to the chosen V-resolution by the projective lifting
 argument of 00LS(1). Precompose with localization to obtain a and tensor with
 psi to obtain k, so the three displayed equations hold. Naturality of the
-K-flat comparison (lem-pc-kflat-derived-tensor-comparison), exact restriction
+K-flat comparison, exact restriction
 of scalars, and the affine section unit gives the displayed equality for this
 one lift. No uniqueness or homotopy independence is asserted here.
 For n=0 the same homology comparison applies. For I=top or an empty basic

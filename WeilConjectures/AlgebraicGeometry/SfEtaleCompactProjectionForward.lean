@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.SfGraphWordProjectionSquare
 /-! # Forward projection square for the specified graph compositor
 
 Source: the graph-pasting steps of `LowerShriekComposition.lean`.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -41,8 +40,6 @@ attribute [local implicit_reducible] EtaleGraphPresentation.functor
   rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar
 
 /-- The specified graph compositor intertwines the forward compactification projections.
-
-(auxiliary; not a blueprint node).
 
 Proof source: paste the graph-model and composition-tail squares, expand the explicit
 factorization of `sfGraphCompactSupportCompIso`, and use functoriality. This is the

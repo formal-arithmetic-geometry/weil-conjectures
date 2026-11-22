@@ -29,7 +29,6 @@ namespace AlgebraicGeometry
 /-- The canonical upper pullback comparison and equivalence for an iterated fiber product.
 No quasi-compactness or ordinary base-change invertibility is needed here.
 Source: Stacks Project, Tag 0D5S; the pullback universal property.
-(blueprint: lem-sc-rectangle-ordinary-geometric-pullback)
 
 Proof: Restrict the pinned derived pullback composition and identity comparisons
 through the fully faithful quasi-coherent inclusion. The two projection equations

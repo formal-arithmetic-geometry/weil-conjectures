@@ -17,7 +17,6 @@ namespace AlgebraicGeometry.Etale
 /-- The nonnegative-degree scalar-forgetting comparison is natural for the fixed
 five-factor pullback, with no affineness, qcqs, or limit hypotheses.
 Source: Stacks Project, Tags 03FD, 03Q8 and 09Z1.
-(blueprint: lem-sbc-raw-module-restricted-abelian-nonnegative).
 
 Proof: For each A, resolve A.hom^*G by injective module sheaves. The free module
 sheaf/sections adjunction on U identifies the raw derived-Hom complex with sections

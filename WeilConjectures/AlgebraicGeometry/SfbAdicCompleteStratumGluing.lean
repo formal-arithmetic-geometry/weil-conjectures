@@ -59,7 +59,6 @@ not be perfect, bounded or constructible.
 
 Source: Bhatt--Scholze, Lemma 6.5.8 and Remark 6.5.10; Proposition 6.6.11,
 reverse implication; Stacks proetale.tex Tags 099L and 099M.
-(auxiliary; not a blueprint node).
 
 Proof: choose a finite generating list for I by Noetherianity. Forget constructibility
 in s to obtain its finite locally closed stratification, retaining exactly its scheme

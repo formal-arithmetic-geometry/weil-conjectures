@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Derived transport along an isomorphism of schemes
 
-Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport
-(blueprint: lem-pc-scheme-iso-derived-equivalence).
+Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport.
 -/
 
 @[expose] public section
@@ -38,8 +37,7 @@ private noncomputable def moduleIsoEquivalence {X Y : Scheme.{u}} (s : X ≅ Y) 
 set_option backward.isDefEq.respectTransparency false in
 /-- Pushforward along a scheme isomorphism induces an equivalence on any chosen derived
 categories, compatible with localization of its explicit termwise pushforward.
-Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport
-(blueprint: lem-pc-scheme-iso-derived-equivalence).
+Source: Stacks Project, perfect.tex, Tag 08EB, affine isomorphism transport.
 
 Proof: Pushforwards along the isomorphism and its inverse form an equivalence: compose the
 pushforward composition comparison, the equality of the composite with the identity, and

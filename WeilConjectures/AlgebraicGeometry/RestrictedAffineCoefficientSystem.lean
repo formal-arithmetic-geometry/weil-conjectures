@@ -11,7 +11,6 @@ import WeilConjectures.AlgebraicGeometry.RestrictedAffineSingleCoherence
 /-! # Base change and the restricted coefficient complex system
 
 Source: Stacks Project, Tag 09Z1 proof and Tag 0EZM.
-(blueprint: lem-sbc-restricted-affine-coefficient-system).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ set_option linter.unusedVariables false in
 including the coefficient colimit and its restriction comparisons.
 Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object;
 Tag 0EZM, canonical pullback maps.
-(blueprint: lem-sbc-restricted-affine-coefficient-system).
 
 Proof: Use the schemes U ×_S D(i) with transition maps induced by the pullback
 universal property, and the cone U ×_S c.pt. The universal property gives a

@@ -73,8 +73,7 @@ because all its components equal the normalized ordinary tensor comparison. Appl
 mapBifunctorComparison to this equality and use sectionTotalComparison_eq to identify
 its totalization with cochainTensorComparison. The cochain oplax unit is the inverse
 of mapCochainComplexεIso. Its explicit single-complex formula, with the normalized
-ordinary unit substituted, is exactly totalUnitComparison. No flatness is needed.
-(auxiliary; not a blueprint node). -/
+ordinary unit substituted, is exactly totalUnitComparison. No flatness is needed. -/
 theorem section_cochain_monoidal_constraints (T : Scheme.{u})
     [(equivalence Λ T).functor.Monoidal]
     (hd : ∀ M N : internalModules Λ T,

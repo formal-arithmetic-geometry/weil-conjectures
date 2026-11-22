@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalEtaleCohomologyRest
 /-! # Étale cohomology in dimension zero
 
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
-lem-weil-pbc-zero-dimensional-cohomology.md
-(blueprint: lemma-sheaves-finite-support-finite-morphisms--1).
+lem-weil-pbc-zero-dimensional-cohomology.md.
 -/
 
 @[expose] public section
@@ -38,7 +37,7 @@ over an algebraically closed field is finite.
 
 Source: literature/blueprint/master/blueprint/sec-curve-estimates/lem-sc-arbitrary-curve-cd/
 lem-weil-pbc-zero-dimensional-cohomology.md, finiteness clause;
-Stacks Project, Tag 00KH (blueprint: zero-dimensional-etale-finite).
+Stacks Project, Tag 00KH.
 
 Proof: By LocallyOfFiniteType.isLocallyNoetherian f, C is locally Noetherian. By
 QuasiCompact.compactSpace_of_compactSpace f, C is compact.

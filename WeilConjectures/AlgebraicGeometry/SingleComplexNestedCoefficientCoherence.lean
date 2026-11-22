@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.CoefficientSquareCoordinateChange
 /-! # Coherence of twice-restricted coefficients
 
 Source: Stacks Project, Tags 0D5S and 0DJ9.
-(blueprint: lem-pc-single-complex-nested-coefficient-coherence).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ map in the canonical smaller-open and pullback-pasting coordinates. No direct im
 base scheme or base-change comparison occurs in this statement.
 Source: Stacks Project, cohomology.tex, Tag 0D5S (associativity of derived pullback),
 and perfect.tex, Tag 0DJ9 (source-open restriction in the induction).
-(blueprint: lem-pc-single-complex-nested-coefficient-coherence).
 
 Proof: Expand phiW, phiZ and phiA using the coherent pullback comparisons c.
 Naturality of c at phi moves its pullback through the target comparisons. Apply

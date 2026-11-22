@@ -13,8 +13,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeMVCanonicalTriangles
 
 /-! # Relative Mayer--Vietoris gluing for one complex
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.26.2 (Tag 0DJ9)
-(blueprint: lem-pc-rf-single-complex-relative-mayer-vietoris).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.26.2 (Tag 0DJ9).
 -/
 
 @[expose] public section
@@ -40,8 +39,7 @@ private theorem isIso_of_eq
     (h : a = b) (hb : IsIso b) : IsIso a := h.symm ▸ hb
 
 /-- Relative Mayer--Vietoris gluing for the single-complex base-change map.
-Source: Stacks Project, Tag 0DJ9, induction step
-(blueprint: lem-pc-rf-single-complex-relative-mayer-vietoris).
+Source: Stacks Project, Tag 0DJ9, induction step.
 
 Proof:
 1. Since the bases are affine and `f` is quasi-compact and quasi-separated, `X`

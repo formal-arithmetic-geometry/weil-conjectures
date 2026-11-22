@@ -215,7 +215,6 @@ private lemma single_naturality {A B C : Type*} [Category A] [Category B] [Categ
 /-- The explicit cone comparison intertwines the restricted diagram transitions.
 Source: Stacks Project, Tag 09Z1 proof (restriction to an affine etale object),
 and Tag 03CB inverse-image composition comparisons.
-(blueprint: lem-sbc-restricted-affine-single-cone-naturality).
 
 Proof: Expand the explicit cone isomorphisms and restricted transitions, and substitute
 hH for the coefficient diagram arrow. Write q_i for a restricted cone leg, r_i for

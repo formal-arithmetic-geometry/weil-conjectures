@@ -25,8 +25,7 @@ namespace AlgebraicGeometry.Etale
 
 set_option backward.isDefEq.respectTransparency true in
 /-- Canonical cohomology transition on the restricted stage opens.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-tail-open-cohomology-arrow-laws). -/
+Source: Stacks Project, Tags 09YQ and 01F7. -/
 noncomputable def tailOpenCohomologyArrow {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -151,7 +150,6 @@ private theorem coefficientCohomology_composition {A B C : Scheme.{u}}
 
 /-- Restricted cohomology transitions preserve identities and composition.
 Source: Stacks Project, Tags 09YQ (coherent systems) and 01F7 (functoriality).
-(blueprint: lem-weil-pbc-tail-open-cohomology-arrow-laws).
 
 Proof: Cancel the monomorphic stage-open inclusions to prove that tailStageOpenMap
 preserves identities and reverses composites. Substitute hidentity in the identity

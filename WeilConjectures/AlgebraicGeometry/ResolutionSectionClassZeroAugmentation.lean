@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
 /-! # Degree-zero restricted resolution section classes
 
 Source: Stacks Project, Cohomology, Tag 01E4.
-(blueprint: lem-weil-pbc-resolution-section-class-zero-augmentation).
 -/
 
 @[expose] public section
@@ -270,8 +269,7 @@ set_option backward.isDefEq.respectTransparency.types false in
 set_option synthInstance.maxSize 2048 in
 /-- The class of an augmented restricted section is the direct-image augmentation
 of the same section on the original open.
-Source: Stacks Project, Cohomology, Tag 01E4 (lemma-describe-higher-direct-images).
-(blueprint: lem-weil-pbc-resolution-section-class-zero-augmentation).
+Source: Stacks Project, Cohomology, Tag 01E4.
 
 Proof: Expand the two canonical augmentations using
 InjectiveResolution.toRightDerivedZero_eq. Cancel the inverse derived-resolution

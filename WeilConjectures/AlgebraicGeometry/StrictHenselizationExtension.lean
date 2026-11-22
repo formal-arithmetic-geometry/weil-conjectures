@@ -18,7 +18,7 @@ import Mathlib.CategoryTheory.Filtered.Final
 # Strict henselization from affine pointed neighbourhoods
 
 Source: Weil conjectures blueprint, `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition
-`def-weil-pbc-strict-henselization-limit` (blueprint: def-weil-pbc-strict-henselization-limit).
+`def-weil-pbc-strict-henselization-limit`.
 -/
 
 @[expose] public section
@@ -76,7 +76,7 @@ noncomputable def isColimitSmallStrictHenselizationCocone
 /-- The canonical cone has vertex the strict henselization scheme; its legs are
 `Spec.map` of the coordinate-ring colimit coprojections.
 Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict
-henselization (blueprint: def-weil-pbc-strict-henselization-limit). -/
+henselization. -/
 noncomputable def strictHenselizationAffineCone
     {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ S) :
@@ -85,7 +85,7 @@ noncomputable def strictHenselizationAffineCone
 
 /-- Cofilteredness and the inverse-limit interpretation of the canonical cone.
 Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict
-henselization (blueprint: def-weil-pbc-strict-henselization-limit).
+henselization.
 
 Proof: the affine pointed category is equivalent to the full affine subcategory of
 pointed neighbourhoods, using the affine scheme--ring anti-equivalence. That full
@@ -95,8 +95,7 @@ category is cofiltered by `definition-torsion-sheaves--3`;
 subcategory and then to the small representative model.
 The opposite of the ring colimit cocone is a limit cone. The spectrum functor is a
 right adjoint (`Spec.reflective`), hence carries this cone to a limit cone of schemes.
-Its legs are exactly the spectra of the colimit coprojections
-(`lem-weil-pbc-spec-small-colimit-limit`). The affine scheme--ring equivalence identifies
+Its legs are exactly the spectra of the colimit coprojections. The affine scheme--ring equivalence identifies
 each spectrum of global sections with its original affine neighbourhood; transport
 along the representative functor `(equivSmallModel _).inverse ⋙
 strictHenselizationAffineInclusion s`, an equivalence by
@@ -131,7 +130,7 @@ theorem strictHenselizationAffineProperties
 Here `e` describes a replacement of the chosen representative category and `w`
 identifies its coordinate-ring diagram with the transported chosen diagram.
 Source: blueprint `sec-curve-estimates/lem-sc-second-kummer-divisors`, definition of strict
-henselization (blueprint: def-weil-pbc-strict-henselization-limit).
+henselization.
 The equivalence-colimit isomorphism has coprojection formula
 `ι k ≫ iso.hom = D.map (e.unit.app k) ≫ w.inv.app _ ≫ ι _`
 (`HasColimit.ι_isoOfEquivalence_hom`), so this is the canonical comparison.

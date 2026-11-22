@@ -161,7 +161,6 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The recursive power comparison intertwines addition of exponents on pure tensors
 of arbitrary sections of the two powers. No section of L is fixed.
 Source: Stacks Project, Modules, Tag 01CD, tensor-pullback comparison.
-(blueprint: lem-sc-tensor-power-open-restriction-addition).
 
 Proof: First use the pure-tensor characterization of openRestrictionTensorIso and
 uniqueness in the sheaf tensor universal property to establish naturality and

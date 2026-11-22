@@ -19,8 +19,7 @@ import WeilConjectures.AlgebraicGeometry.SelfExtTorResolutionModel
 
 /-! # Evaluation between self Ext and self Tor
 
-Source: Stacks Project, Tags 0BQY, 08DH and 068G.
-(blueprint: lem-sc-self-ext-tor-dual-chart). -/
+Source: Stacks Project, Tags 0BQY, 08DH and 068G. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -41,7 +40,6 @@ is used downstream, to glue the chartwise inverses.
 Source: Stacks Project, duality.tex, lemma-regular-ideal-ext (0BQY), its
 zero-differential Hom calculation; cohomology.tex, derived evaluation (08DH);
 more-algebra.tex, equation-simple-tor-product (068G).
-(blueprint: lem-sc-self-ext-tor-dual-chart).
 
 Proof: Choose a common complex T and an injective representative J of O_Z
 using exists_selfExt_tor_resolution_model. Its isomorphisms identify pulled-back

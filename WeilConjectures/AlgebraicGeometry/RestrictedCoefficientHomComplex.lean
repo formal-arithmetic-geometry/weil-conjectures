@@ -13,8 +13,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 
 /-! # Coefficient Hom complexes over a ring-sheaf extension
 
-Source: Stacks Project, Algebraization, Tag 099I
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Algebraization, Tag 099I.
 -/
 
 @[expose] public section
@@ -295,8 +294,7 @@ section NormalizedComparison
 variable [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
 
 /-- The actual coefficient comparison map with explicit internal-Hom endpoints.
-Source: Stacks Project, Algebraization, Tag 099I.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Algebraization, Tag 099I. -/
 noncomputable def coefficientHomObjComparisonHom
     (H : (SheafOfModules.{u}
         ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))ᵒᵖ ×
@@ -317,7 +315,6 @@ noncomputable def coefficientHomObjComparisonHom
 
 /-- The uncurried Hom bifunctor acts by the ordinary internal-Hom map.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node).
 Proof: uncurrying first precomposes and then postcomposes; the composition law for
 internal-Hom maps identifies their composite with simultaneous pre- and postcomposition. -/
 theorem comparisonHomMap
@@ -329,8 +326,7 @@ theorem comparisonHomMap
   rw [homObjMap_comp_homObjMap, Category.id_comp, Category.id_comp]
 
 /-- The actual Hom projection, from the named complex bifunctor to the native internal Hom.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, sites-cohomology.tex, Section 0A8X. -/
 noncomputable def complexHomProjection
     (L M : CochainComplex (SheafOfModules.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ℤ)
@@ -388,7 +384,6 @@ private theorem complexHomProjection_map
 
 /-- A map in the contravariant input precomposes each product component.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node).
 Proof: specialize the two-variable induced-map formula to the identity in the second
 variable and identify the underived bifunctor map with the internal-Hom map. -/
 theorem complexHomProjection_map_left
@@ -409,7 +404,6 @@ attribute [irreducible] complexHomProjection
 -- Checking the concrete Hom-component types needs this heartbeat budget.
 /-- Restriction of the coefficient product complex has the normalized comparison.
 Source: Stacks Project, Algebraization, Tag 099I; sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node).
 Proof: restriction preserves products. Compose their projections with the underived
 comparison and compare the two limiting product cones. Their projection equations
 identify the differentials and the induced maps, giving a natural chain isomorphism
@@ -462,7 +456,6 @@ end NormalizedComparison
 
 /-- Separate additivity supplies the product Hom-complex extension.
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X.
-(auxiliary; not a blueprint node).
 Proof: pointwise additivity in the contravariant variable gives additivity into the
 functor category. Apply the existing bilinear product Hom-complex construction. -/
 theorem extendProductFromSeparateAdditivity

@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 /-! # Free denominators on inverse images of section-ring charts
 
 Source: Stacks Project, Tags 01N8 and 01NK, uniqueness arguments, and Tag 01CY.
-(blueprint: lem-sc-section-ring-chart-denominator-generator).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 
 /-- On an inverse homogeneous chart, each power of the denominator is a free generator.
 Source: Stacks Project, Tags 01N8 and 01NK, uniqueness proofs; Tag 01CY.
-(blueprint: lem-sc-section-ring-chart-denominator-generator).
 
 Proof: At a point of Q, s is nonvanishing because Q lies in U. Apply the fraction
 identity with denominator a, exponent d and numerator s^r, and take its value in the

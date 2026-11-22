@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.SmoothCompactDualModel
 # Generic direct images from a smooth source
 
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
-`lem-asd-smooth-generic-direct-image.md`, statement and proof
-(blueprint: lemma-smooth-morphisms-locally-constant-sheaves).
+`lem-asd-smooth-generic-direct-image.md`, statement and proof.
 -/
 
 @[expose] public section
@@ -82,13 +81,12 @@ private theorem exists_dense_open_lisse_homology
 has bounded finite locally constant ordinary derived direct image on a nonempty base open,
 where its canonical ordinary exchange is invertible for every Noetherian test scheme.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/`
-`lem-asd-smooth-generic-direct-image.md`
-(blueprint: lemma-smooth-morphisms-locally-constant-sheaves).
+`lem-asd-smooth-generic-direct-image.md`.
 
 Proof:
 1. The schemes are Noetherian by lemma-smooth-morphisms-locally-constant-sheaves--1. The locally
 constant relative
-   dimension (lemma-smooth-morphisms-locally-constant-sheaves) and quasi-compactness
+   dimension and quasi-compactness
    split X into finitely many open-and-closed pure-dimensional pieces. Compactify each
    by theorem-nagata-s-compactification-theorem--1.
 2. On one piece put omega = f^times lambda and N = L^dual tensor omega.

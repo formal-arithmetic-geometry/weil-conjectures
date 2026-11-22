@@ -13,7 +13,6 @@ import all WeilConjectures.AlgebraicGeometry.SectionRingProjPreimageForward
 /-! # Free generation on a second section-ring chart
 
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
-(blueprint: lem-sc-section-ring-second-chart-generator).
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ private theorem generatesAt_of_unit_smul {X : Scheme.{v}} (M : X.Modules)
 /-- The second section freely generates its tensor power on its chart preimage.
 Source: Stacks Project, Constructions, Tag 01N8, comparison of chart preimages;
 Tag 01NK, comparison of different positive degrees.
-(blueprint: lem-sc-section-ring-second-chart-generator).
 
 Proof: On a local trivialization z of L in U, write s=b z^d and t=c z^e.
 The hypothesis on s says b is invertible. Apply hρ with exponent e and

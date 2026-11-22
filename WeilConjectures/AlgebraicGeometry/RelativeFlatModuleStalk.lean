@@ -16,7 +16,6 @@ import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 /-! # Relative flatness on stalks
 
 Source: Stacks Project, Morphisms, Tag 01U2, and Algebra, Tags 00H9 and 00HT.
-(blueprint: lem-pc-relative-flat-module-stalk).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry
 
 /-- Affine-local relative flatness implies flatness of the module stalk over the base stalk.
 Source: Stacks Project, Morphisms Tag 01U2; Algebra Tags 00H9 and 00HT.
-(blueprint: lem-pc-relative-flat-module-stalk).
 
 Proof: Choose an affine neighbourhood V of f(x). Affine neighbourhoods U of x inside
 f⁻¹(V) form a filtered neighbourhood basis. The hypothesis makes every G(U) flat

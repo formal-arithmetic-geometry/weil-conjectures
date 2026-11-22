@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-! # Quasi-coherent cohomology under a scheme isomorphism
 
-Source: Stacks Project, Tag 08EB, and exact isomorphism pushforward
-(blueprint: lem-pc-scheme-iso-derived-qcoh).
+Source: Stacks Project, Tag 08EB, and exact isomorphism pushforward.
 -/
 
 @[expose] public section
@@ -38,7 +37,6 @@ private noncomputable def moduleIsoEquivalence {X Y : Scheme.{u}} (s : X ≅ Y) 
 set_option backward.isDefEq.respectTransparency false in
 /-- The inverse of an isomorphism-induced derived equivalence preserves quasi-coherent
 cohomology. Source: Stacks Project, Tag 08EB, affine isomorphism transport.
-(blueprint: lem-pc-scheme-iso-derived-qcoh).
 
 Proof: Represent the inverse image by a complex P. The localization comparison and
 counit identify E with the localization of s_* P. Exactness of isomorphism pushforward

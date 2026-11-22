@@ -25,7 +25,6 @@ set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false in
 /-- A lifted adjacent transition becomes invertible after tensor pullback.
 Source: Stacks, Remark 088F, Lemma 087T and equation 0880.
-(blueprint: lem-weil-pbc-thickening-system-pushforward-lifting-termwise).
 
 Proof: The morphism i_n is a closed immersion because its composite with j_(n+1)
 is the closed immersion j_n and j_(n+1) is a monomorphism. Its kernel is the

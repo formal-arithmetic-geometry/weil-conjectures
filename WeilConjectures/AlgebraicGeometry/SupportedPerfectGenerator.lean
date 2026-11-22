@@ -16,13 +16,12 @@ import WeilConjectures.AlgebraicGeometry.SupportedQCohTriangulated
 
 /-! # Perfect generators with support
 
-Source: Stacks Project, Derived Categories of Schemes, Lemma 36.15.4 (Tag 0A9A)
-(blueprint: lem-pc-supported-perfect-generator).
+Source: Stacks Project, Derived Categories of Schemes, Lemma 36.15.4 (Tag 0A9A).
 
 Support on `T` is the stalkwise form of the existing support statements: every cohomology
 sheaf has zero stalk at every point outside `T`. `D_QCoh,T(O_X)` is the full subcategory
 of `D(O_X)` on objects with quasi-coherent cohomology supported on `T`. The weak generator
-condition (`def-pc-generators`) is expressed by the shifted-Hom vanishing criterion, as in
+condition is expressed by the shifted-Hom vanishing criterion, as in
 `AlgebraicGeometry.perfect_generator_pullback`; Hom groups and shifts of the full
 subcategory are those of the ambient derived category.
 -/
@@ -39,12 +38,11 @@ namespace AlgebraicGeometry
 with quasi-compact complement is triangulated and has a single perfect weak generator
 supported on that subset.
 Source: Stacks Project, Lemma 36.15.4 (Tag 0A9A).
-(blueprint: lem-pc-supported-perfect-generator).
 
 Proof:
 1. If X is affine, its quasi-compact open complement of T is a finite union of principal
 opens D(fᵢ). The Koszul complex on the fᵢ is perfect and supported on T, since each fᵢ acts
-null-homotopically. Koszul orthogonality (lem-pc-perfect-generation-koszul-orthogonal)
+null-homotopically. Koszul orthogonality
 identifies an object orthogonal to its shifts with the derived pushforward of its zero
 restriction to the complement. Thus it generates the supported category.
 2. Induct on a finite affine open cover. Write X = U ∪ V, with V affine and U the union

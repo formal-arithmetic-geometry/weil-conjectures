@@ -10,7 +10,6 @@ import WeilConjectures.AlgebraicGeometry.RingComplexOrderedCechSectionCoordinate
 /-! # Localization coordinates of the ordered Čech fibre
 
 Source: Stacks Project, Tag 099D(d), Cohomology, ordered Čech complexes.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public section
@@ -176,7 +175,6 @@ private theorem signs_apply (A : CommRingCat.{u}) (M : ModuleCat.{u} A) (q : ℕ
 /-- The explicitly constructed ordered Čech fibre has the localization coordinates
 and augmentation of the extended ordered complex.
 Source: Stacks Project, Tag 099D(d), and Cohomology, Tags 01EQ and 01FJ.
-(auxiliary; not a blueprint node)
 
 Proof: every generator belongs to I, so each principal open D(f_i) lies in the
 ideal complement. An ordered intersection is D(product f(t i)). The sections of

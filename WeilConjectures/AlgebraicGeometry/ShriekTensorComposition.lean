@@ -17,7 +17,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange
 /-! # Tensor projection maps and compact-support composition
 
 Source: Stacks Project, `more-etale.tex`, Tags 0F7B and 0F7J, and
-`sites-cohomology.tex`, Tag 0E48 (auxiliary; not a blueprint node).
+`sites-cohomology.tex`, Tag 0E48.
 
 The projection map is the existing proper/open compactification construction with both
 factors exchanged by the canonical signed derived tensor symmetry. Exact termwise inverse

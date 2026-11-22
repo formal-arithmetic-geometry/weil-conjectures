@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 
 /-- Geometric comparisons for the ordinary rectangle, before introducing right adjoints.
 Source: Stacks Project, Tags 0ATR, 08HY, 0ATM and 0D5S.
-(blueprint: lem-sc-rectangle-ordinary-geometric-comparisons)
 
 Proof: The pullback universal property identifies k with the canonical iterated
 pullback isomorphism. Derived pullback along this isomorphism is an equivalence,

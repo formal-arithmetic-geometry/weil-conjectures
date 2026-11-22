@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.SingleComplexOpenBaseChangeIdentity
 /-! # Restriction of the single-complex base-change arrow
 
 Source: Stacks Project, Tag 0DJ9, first paragraph; Tag 08HY, counit description.
-(blueprint: lem-pc-single-complex-open-restriction-comparison).
 -/
 
 @[expose] public section
@@ -35,7 +34,6 @@ stalk condition. No affineness, quasi-compactness, or invertibility is assumed.
 The two restricted complexes are explicitly given by exact restriction.
 Source: Stacks Project, perfect.tex, Tag 0DJ9, first paragraph; cohomology.tex,
 Tag 08HY (derived base-change counit), and Tag 08FE (direct-image restriction).
-(blueprint: lem-pc-single-complex-open-restriction-comparison).
 
 Proof: Put U = f inverse-image V and U' = f' inverse-image V'. Choose a
 coordinate presentation of phi using nonempty_coordinates. The open-coordinate

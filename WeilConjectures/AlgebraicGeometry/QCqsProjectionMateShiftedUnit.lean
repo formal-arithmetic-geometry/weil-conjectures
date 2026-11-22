@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 /-! # Projection mates on shifted structure sheaves
 
 Source: Stacks Project, Tag 08EU, final sentence of the proof.
-(blueprint: lem-pc-qcqs-projection-mate-shifted-unit).
 -/
 
 @[expose] public section
@@ -171,7 +170,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The supplied projection mate is invertible when the first factor is a shifted
 structure sheaf. No quasi-compactness or quasi-coherence hypothesis is needed.
 Source: Stacks Project, Tag 08EU, final sentence of the proof.
-(blueprint: lem-pc-qcqs-projection-mate-shifted-unit).
 
 Proof: derived pullback takes the structure sheaf to the structure sheaf and
 commutes with shifts. Tensoring with O[k] identifies naturally with translation

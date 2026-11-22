@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Abelian.Injective.Ext
 /-! # The explicit Ext-to-resolution-sections comparison
 
 Source: Stacks Project, Tag 06XR and evaluation at 1 in the constant integer sheaf.
-(blueprint: def-weil-pbc-ext-resolution-sections-iso)
 -/
 
 @[expose] public section
@@ -21,12 +20,12 @@ universe u
 open CategoryTheory CochainComplex HomComplex Limits Opposite
 namespace AlgebraicGeometry.SheafPullbackResolution
 
-/-- (blueprint: def-weil-pbc-ext-resolution-sections-iso) -/
+/-- -/
 noncomputable abbrev ZSheaf (X : Scheme.{u}) :=
   (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
     (AddCommGrpCat.of (ULift.{u + 1} ℤ))
 
-/-- (blueprint: def-weil-pbc-ext-resolution-sections-iso) -/
+/-- -/
 noncomputable def sectionsEquiv (X : Scheme.{u})
     (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) :
     (ZSheaf X ⟶ F) ≃+ (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj F :=
@@ -34,7 +33,7 @@ noncomputable def sectionsEquiv (X : Scheme.{u})
     (AddCommGrpCat.uliftZMultiplesAddEquiv _)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- (blueprint: def-weil-pbc-ext-resolution-sections-iso) -/
+/-- -/
 noncomputable def complexSectionsIso (X : Scheme.{u})
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) :
     HomComplex ((CochainComplex.singleFunctor _ 0).obj (ZSheaf X)) K ≅
@@ -54,7 +53,7 @@ noncomputable def complexSectionsIso (X : Scheme.{u})
         simpa [HomComplex, Cochain.δ_fromSingleMk,
           Cochain.fromSingleEquiv_fromSingleMk] using! h.symm)
 
-/-- (blueprint: def-weil-pbc-ext-resolution-sections-iso) -/
+/-- -/
 noncomputable def classSectionsIso (X : Scheme.{u})
     (K : CochainComplex (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ℤ) (n : ℤ) :
     AddCommGrpCat.of
@@ -66,7 +65,6 @@ noncomputable def classSectionsIso (X : Scheme.{u})
 
 /-- The canonical comparison of Ext cohomology with sections of the chosen resolution.
 Source: Stacks Project, Tag 06XR; Tag 01F8, equations 01F9 and 01FA.
-(blueprint: def-weil-pbc-ext-resolution-sections-iso)
 
 The Ext/resolution equivalence sends an Ext class to its cocycle in the chosen resolution.
 Evaluation at 1 identifies Hom from the constant integer sheaf with global sections in

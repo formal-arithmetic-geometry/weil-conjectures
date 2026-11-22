@@ -148,7 +148,6 @@ private noncomputable def restrictedCocone
 /-- Fixed coefficients on an inverse scheme system have a canonical restricted
 cohomology diagram and cocone, with a complex-continuity presentation.
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sc-restricted-over-abelian-cohomology-presentation).
 
 Proof: Form restrictedOverDiagram and restrictedOverCone. Restrict the fixed
 coefficient sheaf and put it in degree zero, using restrictedOverSingle. Its

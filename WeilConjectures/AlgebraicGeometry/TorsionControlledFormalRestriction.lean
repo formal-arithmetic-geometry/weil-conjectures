@@ -161,7 +161,6 @@ annihilation bound transported to the restricted map. The projection equations
 specify the comparison, rather than allowing an arbitrary completion automorphism.
 
 Source: Stacks Project, Tags 087X, 0887 and Remark 0888; Modules, Tags 01AG and 01CB.
-(blueprint: lem-weil-pbc-torsion-controlled-formal-restriction).
 
 Proof: Restriction to an open is exact and commutes with ideal products and powers.
 For each n restrict the cokernel presentation H/J^(n+1)H. Identify the restricted

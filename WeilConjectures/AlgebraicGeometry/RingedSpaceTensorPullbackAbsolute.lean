@@ -32,7 +32,6 @@ namespace AlgebraicGeometry.RingedSpace
 complexes, and this comparison remains left derived after postcomposition.
 
 Source: Stacks Project, Cohomology, Tags 06YJ and 079W; Derived Categories, Tag 06XN.
-(blueprint: lem-pc-ringed-space-tensor-pullback-absolute)
 
 Proof: every source complex admits a K-flat resolution. Exact inverse image sends
 its quasi-isomorphism to a quasi-isomorphism and preserves K-flatness over the

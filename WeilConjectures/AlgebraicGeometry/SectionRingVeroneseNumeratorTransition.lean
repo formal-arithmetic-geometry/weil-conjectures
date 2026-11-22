@@ -120,7 +120,6 @@ private theorem transition_unitor {X : Scheme.{u}} {M : X.Modules}
 by the corresponding power of the homogeneous section.
 Source: Stacks Project, Properties, equation module-invert-s (Tag 0B5L),
 Lemma 01PW(2), and the Veronese localization in the proof of Lemma 01Q1.
-(blueprint: lem-sc-section-ring-veronese-numerator-transition)
 
 Proof: cover X by opens on which L has a free generator e. Its tensor powers have generators
 obtained by repeatedly tensoring e, with the zeroth generator the unit section. Induction on

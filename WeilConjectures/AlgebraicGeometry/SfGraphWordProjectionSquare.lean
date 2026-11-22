@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SfGraphSecondProjectionSquare
 /-! # The graph-model projection square
 
 Source: `LowerShriekComposition.lean`, graph construction, and Stacks Tags
-0B56, 0GL1 and 0F7B. (auxiliary; not a blueprint node).
+0B56, 0GL1 and 0F7B.
 -/
 
 @[expose] public section
@@ -56,7 +56,6 @@ projection on the proper/open/proper word.
 
 Source: node lem-sf-etale-compact-projection-coherence, steps 4--5;
 `LowerShriekComposition.lean`, eA/eC/eB; Stacks Tags 0B56, 0GL1 and 0F7B.
-(auxiliary; not a blueprint node).
 
 Proof: expand the comparison as B1, the proper direct image of B12, and inverse B2.
 For B1 insert the direct-image identity comparison, and split the identity direct

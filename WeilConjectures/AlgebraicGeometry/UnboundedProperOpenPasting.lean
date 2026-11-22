@@ -66,8 +66,7 @@ private theorem exact_identity_fac
 
 /-- For an open immersion, extension by zero embeds into direct image.
 Source: Stacks Project, More on Etale Cohomology, Tags 0F4X and 0F50:
-the proper-support inclusion is sectionwise injective and identifies with this comparison
-(auxiliary; not a blueprint node). -/
+the proper-support inclusion is sectionwise injective and identifies with this comparison. -/
 theorem mono_openImmersionLowerShriekToLowerStar_app
     (Λ : Type (u + 1)) [CommRing Λ] {X Y : Scheme.{u}}
     (k : X ⟶ Y) [IsOpenImmersion k]

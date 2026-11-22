@@ -28,7 +28,6 @@ coefficient). The direct-image comparison is natural on all target coefficients;
 no stalk condition, target coefficient K', or arbitrary coefficient map is assumed.
 Source: Stacks Project, cohomology.tex, Tags 08HY and 08FE; perfect.tex, Tag 0DJ9,
 first paragraph.
-(blueprint: lem-pc-single-complex-open-base-change-identity).
 
 Proof: The source comparison a is pullback-open compatibility for g followed by
 open restriction of the derived direct image of f. Let b be the natural

@@ -27,9 +27,8 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- Two morphisms satisfying the homogeneous fraction equations agree on the overlap
 of their nonvanishing source opens. This is a comparison theorem for given morphisms;
 it asserts no existence of quotient charts.
-Source: Stacks Project, Constructions, Tags 01N8 (lemma-converse-construction),
-01NK (lemma-invertible-map-into-proj), overlap and uniqueness arguments.
-(blueprint: lem-sc-section-ring-quotient-chart-overlap).
+Source: Stacks Project, Constructions, Tags 01N8,
+01NK, overlap and uniqueness arguments.
 
 Proof: First show that g sends U into D_+(s). At x in U choose a positive-degree
 chart D_+(a) through g(x), say a has degree r. Apply hg with denominator a,

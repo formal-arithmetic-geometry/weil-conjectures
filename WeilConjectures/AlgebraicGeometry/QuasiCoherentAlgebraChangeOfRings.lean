@@ -19,7 +19,7 @@ import WeilConjectures.AlgebraicGeometry.TensorRelationSectionQuotient
 /-! # Change of rings between quasi-coherent algebras
 
 Source: Stacks Project, Morphisms, proof of Lemma 01SB; Schemes, Lemma 01I8 (1)
-and Section 01LA (blueprint: lem-weil-pbc-quasi-coherent-algebra-change-of-rings).
+and Section 01LA.
 
 The quasi-coherent `𝒪_Y`-algebras are the shared form `B C : Y.CommAlgebraSheaf`
 (`= Under Y.sheaf`, def-weil-pbc-comm-algebra-sheaf) with `B.toModule.IsQuasicoherent`;
@@ -61,8 +61,7 @@ private theorem tensor_bijective_of_tmul
 set_option backward.isDefEq.respectTransparency false in
 /-- Change of rings between quasi-coherent algebras preserves quasi-coherence of the
 underlying structure-sheaf module, and the sheafification map is bijective on affine opens.
-Source: Stacks Project, Morphisms, proof of Lemma 01SB; Schemes, Lemma 01I8 (1), Section 01LA
-(blueprint: lem-weil-pbc-quasi-coherent-algebra-change-of-rings).
+Source: Stacks Project, Morphisms, proof of Lemma 01SB; Schemes, Lemma 01I8 (1), Section 01LA.
 
 Proof:
 1. The underlying `O_Y`-module of the change of rings is the `O_Y`-module sheafification

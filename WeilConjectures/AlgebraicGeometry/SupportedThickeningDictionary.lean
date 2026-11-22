@@ -16,7 +16,6 @@ import Mathlib.CategoryTheory.Whiskering
 
 /-! # Supported thickening systems and completion isomorphisms
 Source: Stacks Project, Remark 088F and Lemma 087T.
-(blueprint: lem-weil-pbc-supported-thickening-dictionary).
 -/
 
 @[expose] public section
@@ -51,7 +50,6 @@ private theorem restriction_iso_equation
 compatibly with the transition maps, the system of a coherent formal module `M` supported on
 `Z`; any algebraisation `G` of `M` restricts to the given system.
 Source: Stacks Project, Remark 088F, Lemma 087T, and equation 0880.
-(blueprint: lem-weil-pbc-supported-thickening-dictionary).
 Proof: Apply the thickening-systems dictionary with the given adjunctions to the coherent system
 `(F, φ)`. Its evaluation isomorphisms `β n` give the termwise isomorphisms and their transition
 compatibility. At level zero, its kernel formula and the closed-immersion kernel identity

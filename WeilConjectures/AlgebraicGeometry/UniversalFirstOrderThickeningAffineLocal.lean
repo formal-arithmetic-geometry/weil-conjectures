@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOpenPieces
 
 The affine-open construction in Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3),
 first produces a thickening with the lifting property for affine test schemes.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-affine-local)
 -/
 
 @[expose] public section
@@ -104,7 +103,6 @@ private theorem exists_affine_thickening {Z X : Scheme.{u}}
 /-- The affine pieces of the square-zero construction and their gluing produce a
 first-order thickening which has the universal lifting property for affine tests.
 Source: Stacks, More on Morphisms, Lemma 37.7.1 (Tag 04F3), affine construction.
-(blueprint: lem-weil-pbc-universal-first-order-thickening-affine-local)
 Proof: choose an affine open cover, apply the affine square-zero construction, glue
 the pieces using uniqueness on overlaps, and verify the lifting property whenever
 both the test schemes are affine. -/

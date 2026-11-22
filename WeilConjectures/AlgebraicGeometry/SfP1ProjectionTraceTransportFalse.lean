@@ -34,7 +34,6 @@ coordinate; the arbitrary arrow `τ` is carried by naturality through every
 factor.  The calculation uses proper exchange and the composite adjunction
 counit, and the inverse-image/direct-image cancellation for the chosen
 isomorphism.  It is valid for empty bases and zero coefficient rings.
-(auxiliary; not a blueprint node)
 -/
 theorem projectionTraceTransport_false
     (A : Type (u + 1)) [CommRing A] [Finite A]

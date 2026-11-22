@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionUnitIso
 /-! # Coefficient comparison for an inverse-image open
 
 Source: Stacks Project, Cohomology, Tags 08HY and 0D5S.
-(blueprint: lem-pc-relative-mv-open-coefficient-transport).
 -/
 
 @[expose] public section
@@ -95,7 +94,6 @@ private theorem mate_unit
 This is an identity on X', before any further direct image to a base scheme.
 Source: Stacks Project, Cohomology, Remark 08HY and Lemma 08HZ;
 Schemes, Tag 01JR.
-(blueprint: lem-pc-relative-mv-open-coefficient-transport).
 
 Proof: Precompose both sides with Lg' of the exact-open unit. This
 precomposition is injective on maps into Rp: exact restriction to the inverse

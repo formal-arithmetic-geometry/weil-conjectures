@@ -29,7 +29,6 @@ set_option backward.isDefEq.respectTransparency false in
 Only a map is asserted: invertibility and all cocycle identities are consequences
 of section separation, proved in the parent module.
 Source: Stacks Project, Tag 0889(1), Zariski locality by uniqueness.
-(blueprint: lem-weil-pbc-torsion-common-open-comparison-map).
 
 Proof: Transfer Li and Lj through overEquiv and restrict Fi, Fj and H to W.
 Coherence, kernels, cokernels and their ideal-power annihilation bounds restrict

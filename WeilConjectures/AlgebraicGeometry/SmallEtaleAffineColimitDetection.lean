@@ -13,7 +13,6 @@ import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 /-! # Detection of filtered colimits on the affine etale basis
 
 Source: Stacks Project, Tag 09Z1 and Tag 03Q8.
-(blueprint: sbc-lem-small-etale-affine-colimit-detection).
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Etale
 /-- Affine etale evaluation detects a colimit cocone of module sheaves.
 Source: Stacks Project, Tag 09Z1, final affine-basis sheafification step, and
 Sites, comparison lemma for a dense subsite (Tag 03A0).
-(blueprint: sbc-lem-small-etale-affine-colimit-detection).
 
 Proof: Restrict the cocone to the dense affine etale site. For each affine etale
 object, the hypothesis says that its evaluation is a colimit. Evaluation jointly

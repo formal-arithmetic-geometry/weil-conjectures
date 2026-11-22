@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOpera
 /-! # Canonical degree-zero and external global-section maps
 
 Source: Stacks Project, Tags 01DZ, 0BED.
-(blueprint: def-sc-scalar-global-sections-comparison).
 -/
 
 @[expose] public section
@@ -98,8 +97,7 @@ def externalGlobalSectionsBilinear
       rfl)
 
 /-- The canonical linear map induced by the external product of sections.
-Source: Stacks Project, Varieties, Tag 0BED.
-(blueprint: def-sc-scalar-global-sections-comparison). -/
+Source: Stacks Project, Varieties, Tag 0BED. -/
 def externalGlobalSectionsTensor
     (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k))
     (F : X.Modules) (G : Y.Modules) :

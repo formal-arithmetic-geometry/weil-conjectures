@@ -11,7 +11,6 @@ public import WeilConjectures.AlgebraicGeometry.RestrictedOverSingleData
 /-! # Unit law for restricted fixed-coefficient single complexes
 
 Source: Stacks Project, Tags 09Z1 and 0EZM, restriction of fixed coefficients.
-(blueprint: lem-sbc-restricted-over-single-unit).
 -/
 
 @[expose] public section
@@ -143,7 +142,6 @@ private theorem restricted_identity_heq {W S : Scheme.{u}} (k : W ⟶ S)
 
 /-- Unit law for a fixed-coefficient restricted single complex at one diagram object.
 Source: Stacks Project, Tags 09Z1 and 0EZM, canonical fixed-coefficient comparisons.
-(blueprint: lem-sbc-restricted-over-single-unit).
 
 Proof: Substitute D₀.map_id. The induced pullback map is identity by its two projection
 identities. Expand restrictedOverSingleIso.hom and rawAffineRestrictedCoefficient.

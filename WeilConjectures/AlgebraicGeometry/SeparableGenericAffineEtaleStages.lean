@@ -41,7 +41,6 @@ canonical map in the strict-henselization diagram.
 
 Source: Stacks Project, Tags 04HX and 0032; the library declarations
 `strictHenselizationAffineProperties` and `exists_directed_reindexing`.
-(blueprint: new-lem-pd-separable-generic-affine-etale-stages)
 
 The proof first applies the directed-reindexing theorem to the opposite of the
 small affine pointed-neighbourhood category.  It then transports the affine

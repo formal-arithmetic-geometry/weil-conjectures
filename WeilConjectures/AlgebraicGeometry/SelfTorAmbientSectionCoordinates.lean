@@ -20,8 +20,7 @@ import WeilConjectures.Algebra.Homology.QuotientTensorResolutionLiftHomotopy
 
 /-! # Ambient self-Tor coordinates on affine sections
 
-Source: Stacks Project, Tags 08DX(2), 06YG and 00LS.
-(blueprint: new-a3-self-tor-ambient-section-coordinates). -/
+Source: Stacks Project, Tags 08DX(2), 06YG and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -33,7 +32,6 @@ namespace AlgebraicGeometry
 /-- Algebraic self-Tor gives linear coordinates on the affine sections of the
 ambient tensor homology, compatible with augmented resolution comparisons.
 Source: Stacks Project, Tag 08DX(2), Tag 06YG and Tag 00LS.
-(blueprint: new-a3-self-tor-ambient-section-coordinates).
 
 Proof: On U = Spec A, identify the closed structure sheaf with tilde(A/I).
 Sheafify the chosen projective resolution of A/I and its augmentation using

@@ -9,7 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.InternalScalarPullbackNormalizat
 /-! # Universal scalar computation under section reconstruction
 
 Source: Stacks Project, Tags 03EK, 06YS, 06YY, 0D6D and 07A6.
-(auxiliary; not a blueprint node)
 -/
 
 @[expose] public noncomputable section
@@ -102,7 +101,6 @@ variable {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
 /-- The normalized scalar comparison intertwines the universal computation maps on
 all complexes, without flatness hypotheses on their terms.
 Source: Stacks Project, Tags 06YS, 06YY and 07A6.
-(auxiliary; not a blueprint node)
 
 Proof: both displayed paths are components of natural transformations on internal
 cochain complexes. Resolve the section image of an arbitrary complex by a flat-term

@@ -22,7 +22,6 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.HasSheafComposeFo
 /-! # A bounded base-ring model on a strict-perfect tensor chart
 
 Source: Stacks Project, Tags 0DJQ and 08CI, the local relative Tor calculation.
-(blueprint: lem-pc-strict-perfect-relative-tensor-model).
 -/
 
 @[expose] public section
@@ -101,8 +100,7 @@ along the base ring map; they identify T with the scalar restriction of K on U.
 Represent this derived isomorphism by a roof H with two quasi-isomorphisms, oriented
 from H to the two complexes, using the calculus of fractions for quasi-isomorphisms.
 Empty U and reversed intervals give the same construction with zero total terms.
-No witness is used to define data outside this existential proposition.
-(blueprint: lem-pc-strict-perfect-relative-tensor-model). -/
+No witness is used to define data outside this existential proposition. -/
 theorem strictPerfect_relativeTensor_model
     {X S : Scheme.{u}} (f : X ⟶ S)
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

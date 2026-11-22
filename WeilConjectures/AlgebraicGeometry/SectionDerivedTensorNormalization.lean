@@ -20,8 +20,7 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.MonoidalTensorC
 /-! # Derived tensor normalization under the section equivalence
 
 Source: Stacks Project, Cohomology on Sites, Tag 07A4,
-`lemma-pullback-tensor-product`; Tags 06YU and 0G7E; Modules on Sites, Tag 03EL
-(auxiliary; not a blueprint node).
+`lemma-pullback-tensor-product`; Tags 06YU and 0G7E; Modules on Sites, Tag 03EL.
 
 The statement compares the specified localization, tensor, unit and pullback maps.
 Its helper definitions expose existing transported constraints and the localized
@@ -54,7 +53,7 @@ attribute [local instance] AlgebraicGeometry.ProEtale.CondensedRing.projectionDe
 
 namespace AlgebraicGeometry.ProEtale.ModuleRingedComparison
 /-- Associator and unitor compatibility for a specified tensor comparison.
-Source: Stacks 06YU and 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU and 07A4. -/
 def TensorConstraintCondition
     {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D]
     (F : C ⥤ D) (B : C × C ⥤ C) (T : D × D ⥤ D) (I : C) (J : D)
@@ -77,7 +76,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   [MonObj Λ] [IsCommMonObj Λ]
   [∀ X : Scheme.{u}, HasDerivedCategory.{u + 1} (modules Λ X)]
 /-- The associator of the existing conjugate tensor, with the equivalence fixed.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def normalizationDerivedAssociator (T : Scheme.{u})
     (M N P : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj ((tensor Λ T).obj (M, N), P) ≅
@@ -86,21 +85,21 @@ def normalizationDerivedAssociator (T : Scheme.{u})
     (Monoidal.transportStruct (derivedEquivalence Λ T)) M N P
 
 /-- The left unitor of the existing conjugate tensor.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def normalizationDerivedLeftUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (tensorUnit Λ T, M) ≅ M :=
   cast (by rfl) (@MonoidalCategoryStruct.leftUnitor _ _
     (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
 
 /-- The right unitor of the existing conjugate tensor.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def normalizationDerivedRightUnitor (T : Scheme.{u}) (M : DerivedCategory (modules Λ T)) :
     (tensor Λ T).obj (M, tensorUnit Λ T) ≅ M :=
   cast (by rfl) (@MonoidalCategoryStruct.rightUnitor _ _
     (Monoidal.transportStruct (derivedEquivalence Λ T)) M)
 
 /-- The regular-module unit comparison, obtained from localization and the ordinary unit.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def normalizationDerivedRegularUnit (T : Scheme.{u}) :
     tensorUnit Λ T ≅ (DerivedCategory.singleFunctor (modules Λ T) 0).obj
       (𝟙_ (modules Λ T)) :=
@@ -108,7 +107,7 @@ def normalizationDerivedRegularUnit (T : Scheme.{u}) :
     DerivedCategory.Q.mapIso (totalUnitComparison Λ T)
 
 /-- The ringed derived unit map, localizing the actual scalar-multiplication unit.
-Source: Stacks 03EL and 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 03EL and 07A4. -/
 def normalizationDerivedSectionUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (derivedPullback Λ f).obj (tensorUnit Λ Y) ⟶ tensorUnit Λ X :=
   (derivedPullback Λ f).map (normalizationDerivedRegularUnit Λ Y).hom ≫
@@ -119,7 +118,7 @@ def normalizationDerivedSectionUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
 
 set_option backward.isDefEq.respectTransparency false in
 /-- The inverse of the actual localized internal oplax transformation.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def normalizationDerivedInternalMu {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ((((Functor.whiskeringLeft₂ _).obj (internalDerivedPullback Λ f)).obj
       (internalDerivedPullback Λ f)).obj (CondensedRing.derivedTensor Λ X)) ⟶
@@ -128,7 +127,7 @@ def normalizationDerivedInternalMu {X Y : Scheme.{u}} (f : X ⟶ Y) :
   inv ((CondensedRing.upperStar Λ f).leftDerivedTensorComparison)
 
 /-- The actual internal derived unit comparison, with its functor fixed explicitly.
-Source: Stacks 07A4 (auxiliary; not a blueprint node). -/
+Source: Stacks 07A4. -/
 def normalizationDerivedInternalUnit {X Y : Scheme.{u}} (f : X ⟶ Y) :
     (internalDerivedPullback Λ f).obj (𝟙_ (DerivedCategory (internalModules Λ Y))) ≅
       𝟙_ (DerivedCategory (internalModules Λ X)) :=
@@ -957,8 +956,7 @@ private theorem equivalence_constraints (T : Scheme.{u}) :
   exact equivalenceConstraintsGeneric (derivedEquivalence Λ T) (tensorComparison Λ T) o hη hδ
 
 /-- The derived section equivalence identifies the specified tensor and actual pullback maps.
-Source: Stacks Project, Cohomology on Sites, Tag 07A4, lemma-pullback-tensor-product
-(auxiliary; not a blueprint node).
+Source: Stacks Project, Cohomology on Sites, Tag 07A4, lemma-pullback-tensor-product.
 
 Proof.
 1. Use the chosen K-flat representative comparison for the tensor equation and

@@ -19,8 +19,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleDisjointCover
 /-!
 # Sections on a zero-dimensional scheme and geometric stalks
 
-Source: Stacks Project, Étale Cohomology, Tag 03QO; Algebra, Tags 00KH and 06RS
-(blueprint: lem-weil-pbc-zero-dimensional-sections-stalks).
+Source: Stacks Project, Étale Cohomology, Tag 03QO; Algebra, Tags 00KH and 06RS.
 -/
 
 @[expose] public section
@@ -35,8 +34,7 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
 /-- Sections are naturally the product of the geometric stalks on a zero-dimensional
 separated finite-type scheme over an algebraically closed field.
-Source: Stacks Project, Tags 03QO, 00KH, 06RS and 040R
-(blueprint: lem-weil-pbc-zero-dimensional-sections-stalks).
+Source: Stacks Project, Tags 03QO, 00KH, 06RS and 040R.
 
 Proof:
 1. `lem-weil-pbc-zero-dimensional-base-change-points` gives a finite discrete set of

@@ -85,7 +85,6 @@ private theorem moduleExtEquiv_map_aux
 
 /-- The recorded cohomology-to-Ext comparison respects coefficient maps.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7.
-(blueprint: lem-sc-scalar-cohomology-ext-coefficient-naturality).
 
 Proof: Lift a coefficient morphism to a comparison map of injective resolutions.
 The right-derived-functor coefficient map is induced by the global-sections map

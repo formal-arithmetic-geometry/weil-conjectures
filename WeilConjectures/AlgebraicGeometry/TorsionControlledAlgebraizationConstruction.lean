@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.Coherent
 /-! # Construction of a torsion-controlled algebraization
 
 Source: Stacks Project, Tag 0889(1), construction from affine limit maps.
-(blueprint: lem-weil-pbc-torsion-controlled-algebraization-construction).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ This statement has no uniqueness conclusion and does not assert that an arbitrar
 algebraization has torsion kernel and cokernel before completion.
 
 Source: Stacks Project, Tag 0889(1), construction, using Tags 0ALK and 05EU.
-(blueprint: lem-weil-pbc-torsion-controlled-algebraization-construction).
 
 Proof:
 Choose a finite affine cover of the Noetherian scheme. Restrict the formal system,

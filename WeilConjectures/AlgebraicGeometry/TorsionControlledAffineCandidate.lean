@@ -18,7 +18,6 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 /-! # Quasi-coherent candidate from affine formal gluing
 
 Source: Stacks Project, Tags 0889(1), 0ALK(1) and 0888.
-(blueprint: lem-weil-pbc-torsion-controlled-affine-candidate).
 -/
 
 @[expose] public section
@@ -62,7 +61,6 @@ private theorem completion_quotientMap_bijective {A : Type u} [CommRing A]
 /-- Formal gluing constructs a quasi-coherent candidate, without a finiteness assertion.
 
 Source: Stacks Project, Tag 0889(1), affine construction using 0ALK(1), 087W and 0888.
-(blueprint: lem-weil-pbc-torsion-controlled-affine-candidate).
 
 Proof: identify X with Spec A by its canonical affine isomorphism and let I be J's
 ideal of global sections. Under 087W, N corresponds to a finite completed module Q,

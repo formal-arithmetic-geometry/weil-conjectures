@@ -18,8 +18,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedFunctorDerivedLimit
 
 /-! # Reconstruction of quasi-coherent complexes by lower truncations
 
-Source: Stacks Project, Tags 08D3, 08D4 and 08U1
-(blueprint: lem-pc-qcoh-truncation-derived-limit).
+Source: Stacks Project, Tags 08D3, 08D4 and 08U1.
 
 Both conclusions use specified Roos triangles: the map to the product is fixed to be
 induced by the canonical truncation projections. Products are in the ambient derived
@@ -35,15 +34,14 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- The canonical projections exhibit a quasi-coherent complex as the derived limit
-of its lower truncations. Source: Stacks Project, Tag 08D3
-(blueprint: lem-pc-qcoh-truncation-derived-limit).
+of its lower truncations. Source: Stacks Project, Tag 08D3.
 
 Proof: On the basis of affine opens, all positive cohomology of every cohomology
 sheaf vanishes by pqf-lem-affine-vanishing, since schemeDerivedQCohProperty says these
-sheaves are quasi-coherent (lemma-coherent-base-change-invertible-sheaves). Apply
+sheaves are quasi-coherent. Apply
 lem-pc-ringed-space-truncation-derived-limit with bound zero. Its Roos triangle uses
-exactly the standard truncation projections (def-sbc-standard-tstructure-derived-category)
-and the product in D(O_X) (def-weil-derived-limit). This gives the displayed triangle,
+exactly the standard truncation projections
+and the product in D(O_X). This gives the displayed triangle,
 which expresses that the canonical reconstruction map is an isomorphism. -/
 theorem qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
@@ -70,7 +68,7 @@ theorem qcoh_truncation_isDerivedLimitTriangle (X : Scheme.{u})
 -- unfolding their category and derived-functor instances during equality transport.
 /-- Applying a countable-product-preserving additive functor's right derived functor
 preserves the canonical reconstruction. Source: Stacks Project, Tag 08U1, and
-Tag 08D4, proof of (2) (blueprint: lem-pc-qcoh-truncation-derived-limit).
+Tag 08D4, proof of (2).
 
 Proof: First use qcoh_truncation_isDerivedLimitTriangle, proved by affine vanishing
 and lem-pc-ringed-space-truncation-derived-limit. Apply

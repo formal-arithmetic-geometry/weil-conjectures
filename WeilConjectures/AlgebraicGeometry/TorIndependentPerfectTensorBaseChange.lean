@@ -25,8 +25,7 @@ import WeilConjectures.CategoryTheory.Monoidal.DerivedBraided
 /-! # Tor-independent base change for a perfect tensor factor
 
 Source: Stacks Project, perfect.tex, single-complex base change (Tags 0DJ9, 0DJA)
-and the Tor-independent comparison (Tag 08IB)
-(blueprint: lem-pc-tor-independent-perfect-tensor-base-change).
+and the Tor-independent comparison (Tag 08IB).
 -/
 
 @[expose] public section
@@ -184,8 +183,7 @@ The target is written as Rf'_* Lg_X^*(P ⊗ K). Under the canonical tensor-pullb
 isomorphism of lem-pc-derived-pullback-tensor-product (Stacks, 079U), this is exactly
 Rf'_*(Lg_X^*P ⊗ Lg_X^*K). Postcomposing the fixed base-change map with that
 isomorphism does not change IsIso.
-Source: Stacks, perfect.tex, Tags 08IB, 0DJA and 0DJ9
-(blueprint: lem-pc-tor-independent-perfect-tensor-base-change).
+Source: Stacks, perfect.tex, Tags 08IB, 0DJA and 0DJ9.
 Proof (the node's four steps):
 1. Apply lem-pc-tor-independent-perfect-pullback-comparison to P: Tor independence
    gives the stalkwise condition for the identity of Lg_X^*P.

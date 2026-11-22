@@ -36,7 +36,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
 /-- The fixed second projection gives the same compact-support functor.
 Source: the definition of projection.
 Proof: reduce the true branch; the compactification existence proofs agree by
-proof irrelevance. (auxiliary; not a blueprint node). -/
+proof irrelevance. -/
 theorem secondProjectionShriek_eq
     (A : Type (u + 1)) [CommRing A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f] :
@@ -51,8 +51,7 @@ attribute [local implicit_reducible] projection
 /-- The fixed-projection functor transport is the identity on every complex.
 Source: secondProjectionShriek_eq and projection.
 Proof: the functors become identical in the true branch, so eqToHom is the
-identity natural transformation, whose components are identity morphisms.
-(auxiliary; not a blueprint node). -/
+identity natural transformation, whose components are identity morphisms. -/
 theorem secondProjectionShriek_hom_app
     (A : Type (u + 1)) [CommRing A]
     {S X : Scheme.{u}} (f : X ⟶ S) [IsProper f]
@@ -64,7 +63,7 @@ theorem secondProjectionShriek_hom_app
   rfl
 
 /-- The second projection comparison with a fixed, reduced source functor.
-Source: projectionComparison (auxiliary; not a blueprint node). -/
+Source: projectionComparison. -/
 @[irreducible]
 def secondProjectionComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
@@ -643,7 +642,6 @@ comparison or trace.
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the paragraph identifying the second coordinate
 integral using composition of direct images and the same pullback counits.
-(auxiliary; not a blueprint node)
 
 Proof: replace the compact-support projection by ordinary direct image using
 proper forget-supports. This comparison intertwines exchange: evaluate the

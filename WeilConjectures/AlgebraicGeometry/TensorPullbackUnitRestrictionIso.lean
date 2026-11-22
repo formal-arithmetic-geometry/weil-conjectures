@@ -33,7 +33,6 @@ an open over which the scheme morphism is an isomorphism.
 
 Source: Stacks Project, Tag 0095 (pullback adjunction), and Tag 088B, proof,
 the adjunction morphism over the complement of the exceptional locus.
-(blueprint: lem-weil-pbc-tensor-pullback-unit-restriction-iso)
 
 Proof: Let j be the open inclusion and let p' be the base change of p to that
 open. Restriction commutes with pushforward and with pullback, and transports

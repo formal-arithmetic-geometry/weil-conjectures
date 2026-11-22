@@ -19,7 +19,6 @@ import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
 Source: `LowerShriekComposition.lean`, the graph construction of
 `nonempty_iso_rightDerivedLowerShriek_comp`, and Stacks Tags 0B56, 0GL1 and 0F7B.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section
@@ -36,8 +35,7 @@ namespace AlgebraicGeometry.Etale
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- Successive proper, open and proper projection, with the canonical composite
 pullback comparison. Source: Stacks Tags 0B56, 0GL1 and 0F7B;
-node lem-sf-etale-compact-projection-coherence, steps 4--5
-(auxiliary; not a blueprint node). -/
+node lem-sf-etale-compact-projection-coherence, steps 4--5. -/
 def sfGraphWordProjection
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (t : EtaleGraphPresentation f)
@@ -50,8 +48,7 @@ def sfGraphWordProjection
 
 attribute [-instance] CategoryTheory.catToReflQuiver in
 /-- The compactification projection with its tensor endpoints displayed once.
-Source: `LowerShriekProjection.lean`, projectionMapOfCompactification
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekProjection.lean`, projectionMapOfCompactification. -/
 def sfCompactProjection
     (A : Type (u + 1)) [CommRing A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -79,8 +76,7 @@ instance sfCompactProjection_isIso
   exact (sfEtaleAmbientAdjointProjection A c).2 M K
 
 /-- The original graph comparison, with the presentation functor as its target.
-Source: `SfGraphCompactSupportComposition.lean`, explicit graph comparison
-(auxiliary; not a blueprint node). -/
+Source: `SfGraphCompactSupportComposition.lean`, explicit graph comparison. -/
 def sfGraphPresentationComparison
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
@@ -89,8 +85,7 @@ def sfGraphPresentationComparison
   sfGraphCompactificationComparison A c t.p t.e t.a t.fac
 
 /-- The first graph word used by the specified composition comparison.
-Source: `LowerShriekComposition.lean`, graph construction, first side e1
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, graph construction, first side e1. -/
 def sfCompositionGraphPresentation
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (cg : Compactification g) (ch : Compactification (f ≫ g)) :
@@ -123,8 +118,7 @@ def sfCompositionGraphPresentation
 
 /-- The remaining graph word: lift the proper graph through the further open,
 compose open extensions, interchange proper and open, and undo the comparison for f.
-Source: `LowerShriekComposition.lean`, graph construction, e3 followed by inverse e2
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, graph construction, e3 followed by inverse e2. -/
 def sfGraphCompositionTailIso
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
@@ -189,8 +183,7 @@ def sfGraphCompositionTailIso
   exact e₃ ≪≫ Functor.isoWhiskerRight e₂.symm _
 
 /-- The specified graph compositor factors through its first graph word.
-Source: `SfGraphCompactSupportComposition.lean`, defining equation
-(auxiliary; not a blueprint node). -/
+Source: `SfGraphCompactSupportComposition.lean`, defining equation. -/
 theorem sfGraphCompactSupportCompIso_factor
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)

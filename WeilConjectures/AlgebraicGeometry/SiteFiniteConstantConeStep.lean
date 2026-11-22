@@ -353,7 +353,6 @@ recorded after rotation; no extension tower is part of this assertion.
 Source: Stacks Project, Tag 094G, proof of `lemma-locally-constant`, from the
 choice of top-cohomology generators through the short exact sequence for the
 cohomology of the cone.
-(auxiliary; not a blueprint node)
 
 Proof: Work on C/U. Trivialize the finite top cohomology on a covering, choose
 finitely many module generators, and take the corresponding finite free module

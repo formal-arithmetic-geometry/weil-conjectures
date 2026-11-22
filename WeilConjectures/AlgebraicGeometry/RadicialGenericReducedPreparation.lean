@@ -45,9 +45,7 @@ since the quotient map is a closed immersion of affine schemes. Reduction and th
 radicial base change preserve geometric irreducibility of each fibre, including empty
 fibres. The composite base universal homeomorphism uniquely lifts the generic point.
 No final flatness or finite presentation of this reduced base change is asserted.
-In characteristic zero use K'=K. No arbitrary witness is used to define an object.
-
-(blueprint: lem-sbc-radicial-generic-reduced-preparation) -/
+In characteristic zero use K'=K. No arbitrary witness is used to define an object. -/
 theorem exists_radicial_generic_reduced_preparation
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

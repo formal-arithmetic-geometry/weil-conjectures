@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Etale
 /-- The explicit restricted transitions satisfy the unit and composition laws.
 Source: Stacks Project, Tag 09Z1 proof (restriction to an affine etale object),
 and the inverse-image composition comparisons of Tag 03CB.
-(blueprint: lem-sbc-restricted-affine-single-transition-laws).
 
 Proof: The pullback projection identity identifies the composite of the restricted
 map with the stage second projection with the limit second projection followed by

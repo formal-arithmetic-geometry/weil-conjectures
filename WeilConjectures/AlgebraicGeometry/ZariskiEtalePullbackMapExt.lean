@@ -19,7 +19,6 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 /-! # Identification of normalized pullback with exact-functor transport
 
 Source: Stacks Project, Derived Categories, Tag 015B (4).
-(blueprint: lem-weil-pbc-zariski-etale-pullback-map-ext)
 -/
 
 @[expose] public section
@@ -44,7 +43,6 @@ precomposed with a free-representable map whose generator is the adjunction unit
 
 Source: Stacks Project, Derived Categories, Tag 015B (4), lemma-higher-derived-functors;
 Cohomology on Sites, Tag 0730; Homology, Tag 010T.
-(blueprint: lem-weil-pbc-zariski-etale-pullback-map-ext)
 
 Proof: For the fixed open V and map t, precomposition by Ext.mk₀ t after exact-functor
 transport defines an additive family on Ext. Exact-functor transport preserves Yoneda

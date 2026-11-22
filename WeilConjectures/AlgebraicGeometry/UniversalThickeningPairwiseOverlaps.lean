@@ -43,7 +43,6 @@ private theorem universalThickening_iso_source
 Source: Stacks Project, More on Morphisms, Tag 04F3, proof of Lemma 37.7.1,
 the general remarks on restriction to opens and the paragraph beginning
 "Choose an affine open covering".
-(blueprint: lem-weil-pbc-universal-thickening-pairwise-overlaps)
 
 Proof: For k,l let W be the inverse image under C.f k of the open image of C.f l.
 The square-zero closed immersion i k is a homeomorphism, so W has a unique

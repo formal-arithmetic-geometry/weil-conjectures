@@ -12,7 +12,6 @@ public import Mathlib.CategoryTheory.Sites.Precoverage
 # A family isomorphic to a covering is a covering
 
 Source: literature/stacks-project/sites.tex, Definition 00VH and Definition 00VU
-(blueprint: lem-weil-pbc-site-covering-isomorphic-family)
 -/
 
 @[expose] public section
@@ -26,7 +25,7 @@ namespace CategoryTheory
 /-- A family of arrows isomorphic over its target to a covering family is covering
 up to a bijective reindexing, and hence is covering after reindexing.
 
-Proof (blueprint: lem-weil-pbc-site-covering-isomorphic-family):
+Proof:
 1. Base change the covering `g` along `φ` using
    `Precoverage.IsStableUnderBaseChange` and the chosen pullbacks supplied by
    `Precoverage.HasPullbacks`.

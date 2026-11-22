@@ -16,7 +16,7 @@ import WeilConjectures.AlgebraicGeometry.QuasiFiniteAtPointIsolated
 
 Source: literature/blueprint/master/blueprint/sec-nagata-compactification/
 lemma-nagata-zmt-open-immersion-affine-factorization/pqf-lem-qf-locqf-qc.md, node
-pqf-lem-qf-locqf-qc, order 200 (blueprint: pqf-lem-qf-locqf-qc).
+pqf-lem-qf-locqf-qc, order 200.
 -/
 
 @[expose] public section
@@ -30,8 +30,7 @@ namespace AlgebraicGeometry.Scheme.Hom
 /-- A morphism is quasi-finite exactly when it is locally quasi-finite and
 quasi-compact, in the sense of Stacks Tag 01TD.
 
-Source: Stacks Project, Morphisms of Schemes, Tag 01TJ
-(blueprint: pqf-lem-qf-locqf-qc).
+Source: Stacks Project, Morphisms of Schemes, Tag 01TJ.
 
 Proof:
 1. Suppose `f` is quasi-finite. By `pqf-def-quasifinite` and

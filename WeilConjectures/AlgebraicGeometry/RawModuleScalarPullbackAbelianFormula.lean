@@ -25,7 +25,6 @@ set_option backward.isDefEq.respectTransparency true in
 /-- The abelian raw map factors independently of any module cohomology class.
 Source: Stacks Project, Tags 03FD and 03Q8, explicit-map expansion in the proof of
 lem-sbc-raw-module-abelian-hom-map-naturality.
-(blueprint: lem-sbc-raw-scalar-pullback-abelian-formula).
 
 Proof: Fix x and unfold abelianHigherDirectImageRawPullback. Its source free abelian
 sheaf is RawModuleScalarComparison.freeAbelian S U, since evaluation of whiskering

@@ -15,8 +15,7 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 public import Mathlib.Algebra.Category.ModuleCat.Products
 
 /-! Derived universal properties of normalized supported scalar maps.
-Source: Stacks Project, Tags 03QP, 03Q1 and 06YY
-(auxiliary; not a blueprint node). -/
+Source: Stacks Project, Tags 03QP, 03Q1 and 06YY. -/
 @[expose] public noncomputable section
 set_option autoImplicit false
 universe u
@@ -113,7 +112,6 @@ private theorem finite_constant_flat
 /-- The normalized coefficient maps give the three derived scalar-extension units.
 Source: Stacks Project, etale-cohomology Tag 03QP (finite stalk formula),
 sites-cohomology Tags 06YQ, 06YY and 07A6 (flat-source derived scalar adjunction).
-(auxiliary; not a blueprint node).
 
 Proof: Constant R-module sheaves are the monoidal units, hence flat. A closed immersion
 is finite. By the finite-stalk formula, every geometric stalk of i_*R_D is a finite

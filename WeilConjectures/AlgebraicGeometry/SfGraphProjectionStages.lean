@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.SfGraphProjectionData
 /-! # The constituent words of the graph projection square
 
 Source: `LowerShriekComposition.lean`, eA/eC/eB, and the explicit constructions in
-`EtaleLocallyClosedGraphModel.lean` (auxiliary; not a blueprint node).
+`EtaleLocallyClosedGraphModel.lean`.
 -/
 
 @[expose] public noncomputable section
@@ -27,8 +27,7 @@ variable {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)
   (t : EtaleGraphPresentation f)
 
 /-- The first graph is proper because its composite with a separated projection is
-identity. Source: `LowerShriekComposition.lean`, graph Gamma1
-(auxiliary; not a blueprint node). -/
+identity. Source: `LowerShriekComposition.lean`, graph Gamma1. -/
 theorem sfGraphFirst_proper :
     IsProper (locallyClosedGraphS₁ t.a t.e t.p c.i c.g
       ((Category.assoc _ _ _).trans (t.fac.trans c.comm))) := by
@@ -43,8 +42,7 @@ theorem sfGraphFirst_proper :
   exact IsProper.of_comp s (pullback.snd (pullback.snd t.p c.g) c.i)
 
 /-- The second graph is proper because its composite with a separated projection is a.
-Source: `LowerShriekComposition.lean`, graph h2
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, graph h2. -/
 theorem sfGraphSecond_proper :
     IsProper (locallyClosedGraphS₂ t.a t.e t.p c.i c.g
       ((Category.assoc _ _ _).trans (t.fac.trans c.comm))) := by
@@ -59,8 +57,7 @@ theorem sfGraphSecond_proper :
   exact IsProper.of_comp s (pullback.snd (pullback.fst t.p c.g) t.e)
 
 /-- The proper/open/proper presentation through the first graph neighborhood.
-Source: `LowerShriekComposition.lean`, target of eA
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, target of eA. -/
 def sfGraphFirstPresentation : EtaleGraphPresentation f where
   U := pullback (pullback.snd t.p c.g) c.i
   P := pullback t.p c.g
@@ -75,8 +72,7 @@ def sfGraphFirstPresentation : EtaleGraphPresentation f where
     exact t.fac
 
 /-- The proper/open/proper presentation through the second graph neighborhood.
-Source: `LowerShriekComposition.lean`, target of eB
-(auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, target of eB. -/
 def sfGraphSecondPresentation : EtaleGraphPresentation f where
   U := pullback (pullback.fst t.p c.g) t.e
   P := pullback t.p c.g
@@ -93,7 +89,7 @@ def sfGraphSecondPresentation : EtaleGraphPresentation f where
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
 /-- B1, with precisely the endpoints used by the word projection.
-Source: `LowerShriekComposition.lean`, eA (auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, eA. -/
 def sfGraphFirstSideIso :
     rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ≅
       (sfGraphFirstPresentation c t).functor A :=
@@ -101,14 +97,14 @@ def sfGraphFirstSideIso :
     ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) A
 
 /-- B2, with precisely the endpoints used by the word projection.
-Source: `LowerShriekComposition.lean`, eB (auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, eB. -/
 def sfGraphSecondSideIso :
     t.functor A ≅ (sfGraphSecondPresentation c t).functor A :=
   locallyClosedGraphSide₂ t.a t.e t.p c.i c.g
     ((Category.assoc _ _ _).trans (t.fac.trans c.comm)) A
 
 /-- R(p1 p)(B12), including the two functor associators.
-Source: `LowerShriekComposition.lean`, eC (auxiliary; not a blueprint node). -/
+Source: `LowerShriekComposition.lean`, eC. -/
 def sfGraphMiddleIso :
     (sfGraphFirstPresentation c t).functor A ≅
       (sfGraphSecondPresentation c t).functor A :=
@@ -121,7 +117,7 @@ def sfGraphMiddleIso :
     Functor.associator _ _ _
 
 /-- The specified comparison is the composite of its three graph constituents.
-Source: the defining graph formula (auxiliary; not a blueprint node). -/
+Source: the defining graph formula. -/
 theorem sfGraphPresentationComparison_stages :
     sfGraphPresentationComparison A c t =
       sfGraphFirstSideIso c t A ≪≫ sfGraphMiddleIso c t A ≪≫

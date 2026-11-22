@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.RawModuleScalarPullbackCompariso
 
 Source: Stacks Project, Tag 03D7; Mathlib canonical Kan-extension and
 sheafification comparison unit equations.
-(blueprint: lem-sbc-raw-scalar-sheaf-composition).
 -/
 
 @[expose] public section
@@ -42,7 +41,6 @@ private lemma scalar_unit (Λ : Type (u + 1)) [CommRing Λ]
 /-- Scalar forgetting commutes with inverse-image composition before deriving.
 Source: Stacks Project, Tag 03D7; Mathlib canonical Kan-extension and
 sheafification comparison unit equations.
-(blueprint: lem-sbc-raw-scalar-sheaf-composition).
 
 Proof: The scalar comparison is constructed from the canonical comparison for
 left Kan extension and the canonical comparison for sheafification. Their

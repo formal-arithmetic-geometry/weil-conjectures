@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 /-! # Cup with one on one scheme is the identity on structure-sheaf H1
 
 Source: Stacks Project, Cohomology, Tags 0FKU and 01F7.
-(blueprint: lem-sc-scalar-cup-unit-identities).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ noncomputable local instance instScalarCupUnitIdentitiesMonoidal (X : Scheme.{u}
 
 /-- Cup with the canonical class of one is the identity on structure-sheaf H¹.
 Source: Stacks Project, Cohomology, section-cup-product, Lemma 20.31.1 (Tag 0FKU).
-(blueprint: lem-sc-scalar-cup-unit-identities).
 
 Proof: Evaluate morphisms from the structure sheaf at one in an injective resolution.
 The augmentation representing the canonical degree-zero class corresponds to the

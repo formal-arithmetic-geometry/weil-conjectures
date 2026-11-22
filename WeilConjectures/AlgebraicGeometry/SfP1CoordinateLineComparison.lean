@@ -27,7 +27,7 @@ attribute [local irreducible] DerivedCategory HasDerivedCategory.ofIsGrothendiec
   Functor.leftDerivedFunctor Functor.mapDerivedCategory AlgebraicGeometry.ProjectiveSpace
 
 /-- The first projection square, with its morphisms reduced to pullback projections.
-Source: the product-map construction (auxiliary; not a blueprint node). -/
+Source: the product-map construction. -/
 theorem firstProjectionSquare
     {S X : Scheme.{u}} (f : X ⟶ S)
     (i : X ≅ ProjectiveLine S) (hi : i.hom ≫ (ProjectiveLine S ↘ S) = f) :
@@ -419,7 +419,6 @@ direct image, exchange map, or trace.
 
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the equality p1* q*=p2* q* in the second triangle.
-(auxiliary; not a blueprint node)
 
 Proof: expand coefficientComparison and SfDiagonalKernel.coordinate. The roots
 inclusion and pure coefficient generators uniquely characterize normalized line

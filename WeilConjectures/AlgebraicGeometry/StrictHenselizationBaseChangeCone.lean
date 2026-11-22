@@ -12,7 +12,6 @@ import Mathlib.CategoryTheory.Filtered.Connected
 /-! # The strict-henselization fibre-product limit cone
 
 Source: Stacks Project, Tag 03Q9, proof: fibre products commute with limits.
-(blueprint: lem-weil-pbc-strict-henselization-base-change-cone).
 -/
 
 @[expose] public section
@@ -23,8 +22,7 @@ namespace AlgebraicGeometry.Scheme
 set_option backward.isDefEq.respectTransparency false
 
 /-- The small diagram of ring-written pointed neighbourhoods, forgetting their points.
-Source: Stacks Project, Tag 03Q9, affine-neighbourhood limit diagram.
-(blueprint: lem-weil-pbc-strict-henselization-base-change-cone). -/
+Source: Stacks Project, Tag 03Q9, affine-neighbourhood limit diagram. -/
 noncomputable def strictHenselizationEtaleDiagram
     {Y : Scheme.{v}} {Ω : Type v} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) :
@@ -35,7 +33,6 @@ noncomputable def strictHenselizationEtaleDiagram
 /-- Base change of the affine pointed-neighbourhood diagram has a limiting cone with
 vertex the strict-henselization fibre product and the two specified projections.
 Source: Stacks Project, Tag 03Q9, proof: fibre products commute with limits.
-(blueprint: lem-weil-pbc-strict-henselization-base-change-cone).
 
 Proof: reindex the canonical spectrum cone across the double-opposite equivalence.
 The Gamma-Spec unit identifies its diagram with the original affine neighbourhoods.

@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.RawModuleAbelianHomMap
 
 /-! # Concrete formulas for raw scalar comparison
 Source: Stacks Project, Tags 03FD, 03Q8 and 03D7.
-(blueprint: lem-sbc-raw-scalar-hom-evaluation).
 -/
 
 @[expose] public section
@@ -28,7 +27,6 @@ attribute [local instance] moduleSheafCategory moduleSheafPreadditive moduleShea
 /-- Evaluation of the explicit additive scalar Hom map.
 Source: Stacks Project, Tags 03FD and 03Q8, formula-expansion step of
 lem-sbc-raw-module-abelian-hom-map-naturality.
-(blueprint: lem-sbc-raw-scalar-hom-evaluation).
 
 Proof: Expand the definition of rawModuleAbelianHomMap. Its additive map is the composite of
 derived forgetting, right composition by the coefficient factor, and left composition by the

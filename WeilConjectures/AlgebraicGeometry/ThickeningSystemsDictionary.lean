@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ThickeningSystemsCompletionComparison
 
 /-! # The dictionary for coherent systems on infinitesimal thickenings
 
-Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T
-(blueprint: lem-weil-pbc-thickening-systems-dictionary).
+Source: Stacks Project, Cohomology of Schemes, Remark 088F and Lemma 087T.
 
 The natural evaluation isomorphisms specify the dictionary on both objects and morphisms.
 The unit equations specify its transitions and the canonical restriction comparisons.
@@ -103,8 +102,7 @@ private lemma support_proper_closed_square {Y X S₀ S : Scheme.{v}}
     exact ⟨Z, hZ, IsProper.of_comp (t ≫ g) q⟩
 
 /-- The dictionary, including its naturality and proper-support restriction.
-Source: Stacks, Remark 088F, Lemma 087T, equation 0880 and Lemma 0CYL
-(blueprint: lem-weil-pbc-thickening-systems-dictionary).
+Source: Stacks, Remark 088F, Lemma 087T, equation 0880 and Lemma 0CYL.
 
 Proof, in the node's twelve steps:
 1. A finite-type scheme over a Noetherian affine scheme is Noetherian (01T6).

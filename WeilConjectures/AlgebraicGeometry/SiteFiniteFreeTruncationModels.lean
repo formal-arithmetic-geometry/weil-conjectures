@@ -15,7 +15,7 @@ import WeilConjectures.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 /-! # Local finite free models of a good lower truncation
 
 Source: Stacks Project, Cohomology on Sites, Tags 094G and 094H; More on Algebra,
-Tag 066E (auxiliary; not a blueprint node).
+Tag 066E.
 -/
 
 @[expose] public section
@@ -114,7 +114,6 @@ localization or points of the site is required.
 
 Source: Stacks Project, Tags 094G and 094H, the bounded-model and finite-free replacement
 steps; More on Algebra, Tag 066E.
-(auxiliary; not a blueprint node).
 
 Proof: Fix the lower cutoff a and an upper cohomological bound b. Exact restriction
 commutes with good truncation. The truncated object has finite locally constant

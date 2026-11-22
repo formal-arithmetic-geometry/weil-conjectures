@@ -14,8 +14,7 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 /-!
 # A quasi-finite affine morphism embeds in a finite affine morphism
 
-Source: Stacks Project, Morphisms of Schemes, Lemma Tag 03GU, via Algebra, Lemma Tag 00QB
-(blueprint: lem-weil-pbc-quasi-finite-affine-open-in-finite).
+Source: Stacks Project, Morphisms of Schemes, Lemma Tag 03GU, via Algebra, Lemma Tag 00QB.
 -/
 
 @[expose] public section
@@ -28,7 +27,7 @@ namespace AlgebraicGeometry
 
 /-- A quasi-finite morphism between affine schemes factors as an open immersion into an
  affine scheme finite over the target. Source: Stacks Project, Morphisms of Schemes,
- Lemma Tag 03GU (blueprint: lem-weil-pbc-quasi-finite-affine-open-in-finite).
+ Lemma Tag 03GU.
 
 Proof (the node's five steps):
 1. Set R = Γ(X, ⊤), S = Γ(Y, ⊤), and let φ : R → S be induced by f. The affine-chart

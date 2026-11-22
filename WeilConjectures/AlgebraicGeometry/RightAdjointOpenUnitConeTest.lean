@@ -107,7 +107,6 @@ private instance qcoh_iso (Z : Scheme.{u})
 
 /-- The unit at one object is tested by the restricted image of its supported cone.
 Source: Stacks Project, Tag 0E4G, proof of Lemma 48.4.3(1)--(2).
-(blueprint: lem-sc-right-adjoint-open-unit-cone-test).
 
 Proof. Complete the specified unit K → Rj_*j^*K to a distinguished triangle
 in the quasi-coherent derived category. The open-restriction support triangle

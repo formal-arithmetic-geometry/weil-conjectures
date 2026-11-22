@@ -11,7 +11,6 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 
 Source: sk-thm-regular.proof.md, Step 4(iv): classes with supports are sections of
 H^0, and equality on a covering family of frames implies equality globally.
-(blueprint: lem-pur-regular-comparison-frame-descent).
 -/
 
 @[expose] public noncomputable section
@@ -39,8 +38,7 @@ Proof: transpose the comparison through the bijection between supported classes 
 exceptional morphisms. The framewise equalities identify this supported class with the
 fundamental class by the already proved sheaf uniqueness theorem. Transpose back, using
 the inverse laws of that same bijection. No global trivialization or scalar is chosen.
-Source: sk-thm-regular.proof.md, Step 4(iv)
-(blueprint: lem-pur-regular-comparison-frame-descent). -/
+Source: sk-thm-regular.proof.md, Step 4(iv). -/
 theorem regularImmersion_comparison_of_frameRestriction
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]
@@ -75,8 +73,7 @@ formula. Frame uniqueness identifies the transposed comparison with the signed
 fundamental class, using additivity of exact pullback and composition. Transpose
 back and use (-1)^(2c)=1 to reverse the signed equality. This is the final gluing
 and sign inversion in Step 4(iv); no local purity comparison is assumed here.
-Source: sk-thm-regular.proof.md, Step 4(iv)
-(blueprint: lem-pur-regular-comparison-frame-descent). -/
+Source: sk-thm-regular.proof.md, Step 4(iv). -/
 theorem regularImmersion_signed_comparison_of_frameRestriction
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     [HasKummerClass Λ] [HasKummerClass.IsNormalized Λ]

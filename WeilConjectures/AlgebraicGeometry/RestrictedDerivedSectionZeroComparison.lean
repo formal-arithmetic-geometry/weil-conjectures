@@ -16,7 +16,6 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-! # The zero comparison for restricted derived section pullback
 
 Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison).
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
 /-- Derived section pullback is the derived adjunction unit followed by Leray.
-Source: Stacks Project, Tag 07A6.
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison). -/
+Source: Stacks Project, Tag 07A6. -/
 noncomputable def derivedSectionPullback {X Y : Scheme.{v}} (f : X ⟶ Y) :
     rightDerivedGlobalSections AddCommGrpCat.{v + 1} Y ⟶
       D(upperStar AddCommGrpCat.{v + 1} f) ⋙
@@ -49,8 +47,7 @@ noncomputable def derivedSectionPullback {X Y : Scheme.{v}} (f : X ⟶ Y) :
             terminalIsTerminal).symm)).hom
 
 /-- The comparison of the two restrictions in a pullback triangle, on derived objects.
-Source: Stacks Project, Tag 0D6F.
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison). -/
+Source: Stacks Project, Tag 0D6F. -/
 noncomputable def derivedRestrictionIso {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (U : S.Etale) :
     D(upperStar AddCommGrpCat.{v + 1} (Limits.pullback.snd U.hom h)) ⋙
@@ -67,8 +64,7 @@ noncomputable def derivedRestrictionIso {S Y Y' : Scheme.{v}}
     (Functor.mapDerivedCategoryCompIso _ _).symm
 
 /-- Natural pullback on zeroth homology of restricted derived sections.
-Source: Stacks Project, Tags 07A6 and 0D6F.
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison). -/
+Source: Stacks Project, Tags 07A6 and 0D6F. -/
 noncomputable def restrictedSectionPullback {S Y Y' : Scheme.{v}}
     (a : Y' ⟶ Y) (h : Y ⟶ S) (h' : Y' ⟶ S) (w : a ≫ h = h') (U : S.Etale) :
     sectionsFunctor ((MorphismProperty.Over.pullback @Etale ⊤ h).obj U) ⋙
@@ -90,7 +86,6 @@ noncomputable def restrictedSectionPullback {S Y Y' : Scheme.{v}}
 /-- On a single sheaf in degree zero, the constructed derived section pullback is
 ordinary section pullback, followed by the restricted coefficient map.
 Source: Stacks Project, Tags 07A6 (derived adjunction) and 0D6F (restriction).
-(blueprint: lem-sbc-restricted-derived-section-zero-comparison).
 
 Proof: Write q = U times_S a and r,r' for the two projections. The comparison
 of restrictions is the derived image of q^* r^* = r'^* a^*, and on singles its

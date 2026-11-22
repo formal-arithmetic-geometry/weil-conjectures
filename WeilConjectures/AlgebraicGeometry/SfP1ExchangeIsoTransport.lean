@@ -391,7 +391,6 @@ private theorem comparison_naturality
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the composition isomorphism and canonical pullback
 counits in the first-coordinate calculation.
-(auxiliary; not a blueprint node).
 
 Proof: Write q:P -> S, W = P times_S P, V = X times_S X and w = i times_S i.
 The two projection squares for w commute. Expand projectionComparison as proper

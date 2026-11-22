@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackStalkSquare
 /-! # Tensor coordinates and the chain-level stalk square
 
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), using Tag 0BYJ.
-(blueprint: lem-pc-tensor-stalk-chain-coordinates).
 -/
 
 @[expose] public section
@@ -60,8 +59,7 @@ it requires neither boundedness nor invertibility of any cohomology comparison.
 For a zero ring or a zero factor these are the unique maps between zero modules.
 Source: Stacks Project, perfect.tex, Tag 0DJA(1), the tensor-transitivity
 calculation of Tag 0BYJ and equation-bc before Tag 0DJ8; Cohomology, Tags 079R
-and 06YB for K-flat tensor products and stalk tensor identification.
-(blueprint: lem-pc-tensor-stalk-chain-coordinates). -/
+and 06YB for K-flat tensor products and stalk tensor identification. -/
 theorem exists_tensorStalk_chain_coordinates
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]

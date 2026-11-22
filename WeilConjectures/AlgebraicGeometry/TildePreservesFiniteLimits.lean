@@ -12,8 +12,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 
 /-! # Finite-limit preservation by affine associated sheafification
 
-Source: Stacks Project, Tag 01HV.
-(blueprint: lem-sc-tilde-preserves-finite-limits). -/
+Source: Stacks Project, Tag 01HV. -/
 
 @[expose] public section
 
@@ -24,7 +23,6 @@ namespace AlgebraicGeometry
 /-- Associated sheafification on an affine scheme preserves all finite limits.
 
 Source: Stacks Project, Tag 01HV, exactness of associated sheafification.
-(blueprint: lem-sc-tilde-preserves-finite-limits).
 
 Proof: A kernel of a morphism between associated sheaves is quasi-coherent, so
 its affine counit is invertible. Lift its kernel inclusion using full faithfulness

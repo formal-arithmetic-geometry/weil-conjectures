@@ -18,7 +18,6 @@ import WeilConjectures.AlgebraicGeometry.StrictlyPerfectKInjectiveEvaluationComp
 /-! # Compatible comparison isomorphisms for an ordinary evaluation map
 
 Source: Stacks Project, Cohomology of Sheaves, Tags 08DQ, 08DM and 08DL.
-(blueprint: lem-pc-strictly-perfect-evaluation-comparisons).
 -/
 
 @[expose] public section
@@ -160,7 +159,6 @@ quantified; the square is not asserted for arbitrary isomorphisms.
 Source: Stacks Project, Cohomology of Sheaves, Tag 08DQ, proof of
 lemma-dual-perfect-complex; Tag 08DM, lemma-Rhom-strictly-perfect;
 Tag 08DL, lemma-restriction-RHom-to-U.
-(blueprint: lem-pc-strictly-perfect-evaluation-comparisons).
 
 Proof:
 1. A finite-projective term is a retract of a finite free sheaf. Internal Hom

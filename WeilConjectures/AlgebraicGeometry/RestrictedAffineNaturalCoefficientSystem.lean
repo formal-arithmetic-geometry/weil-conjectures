@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.RawAffineRestrictedCohomologyMapFormula
 /-! # Base change and the restricted coefficient complex system
 
 Source: Stacks Project, Tag 09Z1 proof and Tag 0EZM.
-(blueprint: lem-sbc-restricted-affine-natural-coefficient-system).
 -/
 
 @[expose] public section
@@ -54,7 +53,6 @@ set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency true in
 /-- Stage-arrow naturality for the actual restricted single-complex transition.
 Source: Stacks Project, Tags 09Z1 and 0EZM.
-(blueprint: lem-sbc-restricted-affine-natural-coefficient-system-stage).
 
 Proof: The stage scheme map is rawAffineRestrictedMap, and the transition is the
 single-complex comparison followed by singleFunctor applied to
@@ -363,7 +361,6 @@ set_option linter.unusedVariables false in
 including the coefficient colimit and its restriction comparisons.
 Source: Stacks Project, Tag 09Z1 proof, base change to an affine etale object;
 Tag 0EZM, canonical pullback maps.
-(blueprint: lem-sbc-restricted-affine-natural-coefficient-system).
 
 Proof: Use the schemes U ×_S D(i) with transition maps induced by the pullback
 universal property, and the cone U ×_S c.pt. The universal property gives a

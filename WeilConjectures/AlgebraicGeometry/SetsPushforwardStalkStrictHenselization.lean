@@ -18,8 +18,7 @@ import WeilConjectures.AlgebraicGeometry.StrictHenselizationCanonicalBaseChangeC
 
 /-! # Stalk of a direct image over the strict henselization
 
-Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization).
+Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU.
 -/
 
 @[expose] public section
@@ -33,8 +32,7 @@ namespace AlgebraicGeometry.Scheme
 /-- The compatibility needed to map the base-changed strict henselization to V ×_Y X, for a
 representative affine pointed neighbourhood `j` with leg `c_V` (the limit leg followed by
 `Spec Γ(V, ⊤) ≅ V`).
-Source: Stacks Project, Tag 03Q9, fibre products commuting with limits
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization).
+Source: Stacks Project, Tag 03Q9, fibre products commuting with limits.
 Proof: by `exists_strictHenselizationAffineStructuralMap`, `c_V` followed by `V ⟶ Y` is
 `strictLocalizationToBase y`; then use `pullback.condition`. -/
 theorem strictHenselizationBaseChange_condition
@@ -55,8 +53,7 @@ theorem strictHenselizationBaseChange_condition
 
 /-- The map X^sh → V ×_Y X with components c_V ∘ f^sh and p, for a representative affine
 pointed neighbourhood `j`.
-Source: Stacks Project, Tag 03Q9, fibre products commuting with limits
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization). -/
+Source: Stacks Project, Tag 03Q9, fibre products commuting with limits. -/
 noncomputable def strictHenselizationBaseChangeMap
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -74,8 +71,7 @@ noncomputable def strictHenselizationBaseChangeMap
     (strictHenselizationBaseChange_condition f y j)
 
 /-- The site morphism σ_V from the final object to the iterated fibre product.
-Source: Stacks Project, Tag 03Q9, canonical section restriction
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization). -/
+Source: Stacks Project, Tag 03Q9, canonical section restriction. -/
 noncomputable def strictHenselizationSectionMap
     {X Y : Scheme.{v}} (f : X ⟶ Y)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
@@ -100,8 +96,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- Every direct-image germ has an affine representative, and the canonical comparison
 with sections on the strict henselization pullback is the unique map with the unit and
 restriction formula, and is bijective.
-Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU
-(blueprint: lem-weil-pbc-sets-pushforward-stalk-strict-henselization).
+Source: Stacks Project, Tag 03Q9, degree zero for sets, with Tags 09YQ and 09YU.
 
 Proof:
 1. Use `def-weil-pbc-strict-henselization-limit` and `def-pc-fibre-product` for the

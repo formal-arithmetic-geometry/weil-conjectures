@@ -218,7 +218,6 @@ its compatibility with restriction to the given geometric fibre. This assertion
 uses no integral or proper hypothesis.
 
 Source: Stacks Project, Tags 03Q9, 03Q1 and 04HX.
-(blueprint: lem-sbc-strict-henselization-module-fibre-factorization).
 
 Proof: The marked maps from Spec Omega to all affine pointed neighbourhoods form
 a cone. Its unique lift t to their limit is compatible with the structural map.

@@ -14,7 +14,6 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 
 Source: finite matrix extension argument, comparison step, in
 lem-pc-finite-free-stalk-chain-map-pair-lift.
-(blueprint: def-pc-stalk-restriction-complex-iso)
 -/
 
 @[expose] public section
@@ -30,8 +29,7 @@ Source: lem-pc-finite-free-stalk-chain-map-pair-lift, proof step 3; Mathlib's
 `restrictFunctorIsoPullback`, `pullbackComp`, and `Opens.fromSpecStalkOfMem_ι`.
 First replace restriction by pullback along the open inclusion, then compose the
 pullbacks, and finally use the equality of the composite scheme morphism with
-`Y.fromSpecStalk y`. Apply this natural isomorphism termwise to complexes.
-(blueprint: def-pc-stalk-restriction-complex-iso) -/
+`Y.fromSpecStalk y`. Apply this natural isomorphism termwise to complexes. -/
 noncomputable def stalkRestrictionComplexIso {Y : Scheme.{u}} (V : Y.Opens)
     (y : Y) (hyV : y ∈ V) :
     (restrictFunctor V.ι).mapHomologicalComplex (ComplexShape.up ℤ) ⋙

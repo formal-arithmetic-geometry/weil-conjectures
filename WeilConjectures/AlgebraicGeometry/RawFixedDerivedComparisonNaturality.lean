@@ -300,7 +300,6 @@ private theorem fixed_cohomology_square {B T Y Y' : Scheme.{u}}
 
 /-- Raw evaluation intertwines triangle pullback with canonical cohomology pullback.
 Source: Stacks Project, Tag 03Q8, restriction in Tag 0D6F, and the canonical maps of 0GIT.
-(blueprint: lem-sc-raw-fixed-derived-comparison-naturality).
 
 Proof: Apply rawRestrictedDerivedComparison_pullback to the coefficient morphism
 which is the inverse derived inverse-image composition comparison. The restricted

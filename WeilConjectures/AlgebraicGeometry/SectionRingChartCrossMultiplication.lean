@@ -13,7 +13,6 @@ import WeilConjectures.AlgebraicGeometry.ProjChartPullbackFractionRelation
 /-! # Clearing denominators between section-ring charts
 
 Source: Stacks Project, Constructions, Tags 01N8 and 01NK.
-(blueprint: lem-sc-section-ring-chart-cross-multiplication).
 -/
 
 @[expose] public section
@@ -26,7 +25,6 @@ namespace AlgebraicGeometry.Scheme.Modules
 /-- The numerator identity after clearing the second-chart denominator.
 Source: Stacks Project, Constructions, Tag 01N8, comparison on overlapping charts;
 Tag 01NK, passage between different positive degrees.
-(blueprint: lem-sc-section-ring-chart-cross-multiplication).
 
 Proof: Put k=n*(d-1), i=n*e and j=k*e. Then i+j=n*e*d.
 On the chart intersection let r=t^d/s^e and η=ξ*t^k, so η has degree n*e*d.

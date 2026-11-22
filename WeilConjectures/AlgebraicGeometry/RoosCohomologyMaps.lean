@@ -127,8 +127,7 @@ def milnorProjection [HasExactLimitsOfShape (Discrete ℕ) A]
 set_option backward.isDefEq.respectTransparency false in
 /-- The explicit Roos boundary and projection form a short exact sequence.
 
-proof.md, first paragraph
-(auxiliary; not a blueprint node).
+proof.md, first paragraph.
 
 Proof: The mapping-cocone triangle gives three adjacent exact pairs. Factoring
 its boundary through the preceding cokernel gives a monomorphism; factoring its

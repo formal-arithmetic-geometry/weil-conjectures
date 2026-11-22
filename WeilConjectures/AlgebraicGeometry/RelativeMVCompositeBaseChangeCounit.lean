@@ -36,7 +36,6 @@ private theorem prefix_glue {D : Type*} [Category D]
 /-- The first part of the target transpose: compute the composite base change and
 its f-counit, leaving the single open-square base change and target open counit intact.
 Source: Stacks Project, Cohomology, Tags 08HY, 08HZ and 0D5S.
-(blueprint: new-relative-mv-composite-base-change-counit).
 Proof: Expand relativeMVLocalArrow and relativeMVRestriction. Naturality of the
 composite-adjunction Hom equivalence and the defining mate equation of
 relativeMVImageComp remove the target direct-image comparisons. The transpose

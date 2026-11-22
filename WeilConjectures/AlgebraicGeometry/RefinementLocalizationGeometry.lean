@@ -20,7 +20,6 @@ import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`,
 `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-refinement-localization-geometry)
 -/
 
 @[expose] public section
@@ -119,7 +118,6 @@ private theorem localized_factor_homeomorph
 
 /-- Source: smooth purity blueprint, sk-prop-sf-cbc,
 lem-weil-pbc-finite-pushforward-generic-constructible, steps 4--9.
-(blueprint: lem-weil-pbc-refinement-localization-geometry)
 
 Proof: The product t of the nonzero s_j is nonzero in the domain S. Surjectivity
 of Spec(C) -> Spec(S) makes S -> C injective: an element of the kernel belongs to

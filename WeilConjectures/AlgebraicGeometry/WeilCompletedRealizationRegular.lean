@@ -15,7 +15,6 @@ set_option linter.privateModule false
 
 Source: Stacks Project, Modules on Sites, Tags 03D8 and 03EK,
 lemma-adjointness-tensor-restrict, and Tag 0GMW, lemma-sheafification-tensor.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public noncomputable section

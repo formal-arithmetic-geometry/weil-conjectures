@@ -26,7 +26,6 @@ namespace AlgebraicGeometry.Etale
 
 /-- Unit-equivariant maps from an inverse-image torsor sheaf are invertible.
 Source: Stacks Project Section 03AG (morphisms of torsors), and Tag 03Q1 (4).
-(blueprint: lem-weil-pbc-scheme-torsor-pullback-equivariant-hom-is-iso)
 
 Proof: Inverse image preserves the torsor action and local nonemptiness, since it
 preserves finite limits and covering epimorphisms. The displayed equation on units

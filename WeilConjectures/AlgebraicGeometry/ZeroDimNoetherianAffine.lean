@@ -16,8 +16,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 
 /-! # Affineness and ampleness in dimension zero
 
-Source: Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS
-(blueprint: lem-sc-zero-dim-noetherian-affine).
+Source: Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS.
 -/
 
 @[expose] public section
@@ -65,8 +64,7 @@ private noncomputable def unitStalkToRing (Y : Scheme.{u}) (y : Y) :
 
 /-- The tensor unit is ample on a compact affine scheme. The proof unfolds `IsAmple`,
 chooses the global section `1` in tensor power one, and identifies its nonvanishing locus
-with the top open using the stalk germ of `1`. Source: Stacks Project, Definition 01PS
-(blueprint: def-weil-pbc-ample-invertible-module). -/
+with the top open using the stalk germ of `1`. Source: Stacks Project, Definition 01PS. -/
 private theorem isAmple_tensorUnit_of_affine (Y : Scheme.{u}) [CompactSpace Y]
     (h_aff : IsAffine Y) : IsAmple Y (𝟙_ Y.Modules) := by
   have : IsAffine Y := h_aff
@@ -109,8 +107,7 @@ private theorem isAmple_tensorUnit_of_affine (Y : Scheme.{u}) [CompactSpace Y]
 
 /-- A Noetherian separated scheme of topological Krull dimension at most zero is affine,
 and its trivial invertible module is ample. The empty scheme is included.
-Source: Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS
-(blueprint: lem-sc-zero-dim-noetherian-affine).
+Source: Stacks Project, Properties, Lemmas 0AAX and 0CKV, and Definition 01PS.
 
 Proof:
 1. The dimension bound makes `Y` locally Artinian

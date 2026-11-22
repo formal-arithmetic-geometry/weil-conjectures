@@ -19,7 +19,6 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleCanonicalLeray
 # Étale and Zariski cohomology over strictly henselian schemes
 
 Source: literature/stacks-project/etale-cohomology.tex, Lemma 09AX
-(blueprint: lem-weil-pbc-gabber-strict-henselian-zariski-comparison)
 -/
 
 @[expose] public section
@@ -31,8 +30,7 @@ open CategoryTheory.Functor.sheafPullbackConstruction
 
 /-- The comparison from Zariski to étale cohomology is an isomorphism when all
 local rings of the scheme are strictly henselian.
-Source: literature/stacks-project/etale-cohomology.tex, Lemma 09AX
-(blueprint: lem-weil-pbc-gabber-strict-henselian-zariski-comparison).
+Source: literature/stacks-project/etale-cohomology.tex, Lemma 09AX.
 The functor `i` is the inclusion of the small Zariski site into the small étale
 site. Its continuous direct image is `ε_* F`; `c` is the pullback followed by
 its counit, and is the identity in degree zero.

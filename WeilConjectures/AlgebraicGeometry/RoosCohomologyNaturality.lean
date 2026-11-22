@@ -194,7 +194,7 @@ set_option backward.isDefEq.respectTransparency false in
 /-- The maps obtained by factoring the cone boundary and projection are natural.
 
 proof.md, first paragraph;
-the expanded proof's naturality step (auxiliary; not a blueprint node).
+the expanded proof's naturality step.
 
 Proof: A strict tower map induces the diagonal product map on both summands of
 Cone(1-T)[-1]. The equation for the transition endomorphisms makes it a chain map.

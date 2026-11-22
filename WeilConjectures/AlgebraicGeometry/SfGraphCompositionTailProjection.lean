@@ -12,7 +12,7 @@ import WeilConjectures.AlgebraicGeometry.SfGraphWordProjectionSquare
 /-! # Projection along the remaining graph-composition word
 
 Source: `LowerShriekComposition.lean`, graph construction, and Stacks Tags
-0B56, 0GL1 and 0F7B. (auxiliary; not a blueprint node).
+0B56, 0GL1 and 0F7B.
 -/
 
 @[expose] public section
@@ -219,7 +219,7 @@ private theorem diagram_projection
 
 Source: node lem-sf-etale-compact-projection-coherence, steps 6--7;
 `LowerShriekComposition.lean`, e3 followed by inverse e2; Stacks Tags 0B56,
-0GL1 and 0F7B. (auxiliary; not a blueprint node).
+0GL1 and 0F7B.
 
 Proof: apply the Cartesian graph-interchange projection square to the explicit
 product graph diagram. Normalize the actual compact-support compositor as the

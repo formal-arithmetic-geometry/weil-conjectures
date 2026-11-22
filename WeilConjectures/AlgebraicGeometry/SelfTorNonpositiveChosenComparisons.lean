@@ -24,8 +24,7 @@ import WeilConjectures.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 import WeilConjectures.AlgebraicGeometry.QuotientResolutionTensorComparison
 
 /-! # Chosen affine comparison for nonpositive flat resolutions
-Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9, and 00LS(1).
-(blueprint: new-h3-self-tor-nonpositive-chosen-comparisons). -/
+Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9, and 00LS(1). -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -43,7 +42,6 @@ augmented quotient-resolution lift on each basic inclusion. Compatibility with
 arbitrary supplied lifts is a separate algebraic homotopy argument.
 
 Source: Stacks Project, Tags 08DX(2), 06YG, 06YB, 01I9, and 00LS(1).
-(blueprint: new-h3-self-tor-nonpositive-chosen-comparisons).
 
 Proof: Bounded-above termwise flatness makes K K-flat. Apply the natural
 K-flat derived tensor comparison to the constant families K and B[0]. The

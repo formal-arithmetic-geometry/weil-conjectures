@@ -26,7 +26,6 @@ noncomputable section
 /-- Rewrite the ambient normalization with a supplied lifted direct-image comparison.
 This concerns only one vertical map and its exceptional adjunction, not a square.
 Source: Stacks Project, Tag 0ATR, compatibility of the transported counit.
-(blueprint: lem-sc-scheme-iso-lifted-comparison-counit)
 
 Proof: The supplied component identity identifies the ambient hom of k at a(K),
 after any two postcompositions, with the direct image of the pinned isomorphism

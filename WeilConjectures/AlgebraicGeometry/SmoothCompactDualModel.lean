@@ -40,8 +40,7 @@ attribute [local irreducible] CategoryTheory.Functor.leftDerivedFunctor
   CategoryTheory.Functor.rightDerivedFunctor
 
 /-- The total derived inverse image, with coefficient parameters kept generic.
-This is definitionally `L(upperStar A v)`.
-(auxiliary; not a blueprint node). -/
+This is definitionally `L(upperStar A v)`. -/
 noncomputable abbrev smoothCompactPullback
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
@@ -61,7 +60,7 @@ noncomputable abbrev smoothCompactSingle
 
 /-- Data of a compact coefficient-dual presentation, including its exchange identity.
 Source: blueprint lemma-smooth-morphisms-locally-constant-sheaves, compact-dual construction and
-comparison of pairings (auxiliary; not a blueprint node). -/
+comparison of pairings. -/
 structure SmoothCompactDualModel (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {S X : Scheme.{u}} (f : X ⟶ S)
     (L : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) where
@@ -994,7 +993,6 @@ This assertion makes no generic shrinking and asserts no local constancy of a di
 
 Source: blueprint sec-six-functors-basics/sk-lem-geo-smooth-generic/
 lem-asd-smooth-generic-direct-image.proof.md, relative dual construction and exchange.
-(auxiliary; not a blueprint node).
 
 Proof: Cover the smooth source by charts of constant relative dimension. Smooth duality
 makes the relative dualizing complex invertible and bounded constructible of finite Tor

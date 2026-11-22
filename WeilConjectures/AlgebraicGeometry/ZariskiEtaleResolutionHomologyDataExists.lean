@@ -53,7 +53,6 @@ private lemma resolutionSectionEquiv_zero
 
 Source: Stacks Project, Cohomology, Tag 01FB; Derived Categories, Tags 013P and
 015B (4); Cohomology on Sites, Tags 0730 and 0733 (1).
-(blueprint: lem-zariski-etale-resolution-homology-data-exists)
 
 Proof: Let P(V) be the sheafification of the free abelian presheaf on yoneda(V).
 The sheafification adjunction, the free abelian group adjunction and additive Yoneda

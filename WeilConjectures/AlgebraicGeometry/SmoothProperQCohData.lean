@@ -25,8 +25,7 @@ Sources: Stacks Project, Tags 08D5, 08DW, 08DX and 09M1.
 Proof: properness supplies quasi-compactness and quasi-separatedness, so derived direct
 image preserves quasi-coherent cohomology. Transport quasi-coherence along the existing
 tensor-unit isomorphism. Derived pullback preserves quasi-coherent cohomology, and
-canonical derived tensor preserves it; apply these successively to K and E.
-(blueprint: lem-sc-smooth-proper-qcoh-data). -/
+canonical derived tensor preserves it; apply these successively to K and E. -/
 theorem smoothProper_qcoh_data
     {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) [IsProper f]
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]

@@ -101,8 +101,7 @@ private theorem cohomologyMap_transported_comp {X Y Z : Scheme.{u}}
 
 
 /-- Canonical cohomology leg from a stage open to the limit open.
-Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-tail-open-cohomology-leg-naturality). -/
+Source: Stacks Project, Tags 09YQ and 01F7. -/
 noncomputable def tailOpenCohomologyCoconeLeg {I : Type u} [Preorder I]
     (D : Iᵒᵖ ⥤ Scheme.{u}) (c : Cone D) {X : Scheme.{u}} {i₀ : I}
     (g₀ : D.obj (op i₀) ⟶ X) (W : X.Opens)
@@ -126,7 +125,6 @@ noncomputable def tailOpenCohomologyCoconeLeg {I : Type u} [Preorder I]
 set_option backward.isDefEq.respectTransparency false in
 /-- The restricted cohomology legs commute with the restricted transitions.
 Source: Stacks Project, Tags 09YQ and 01F7.
-(blueprint: lem-weil-pbc-tail-open-cohomology-leg-naturality).
 
 Proof: Precompose the cocone equation G.map f; L_k = L_j by eG_j.inv and substitute hG.
 Cancel the inverse isomorphisms to obtain the original coefficient leg equation.

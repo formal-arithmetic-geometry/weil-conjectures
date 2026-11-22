@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.OrdinaryOpenCounitSquare
 /-! # The underived mate for restriction to an inverse-image open
 
 Source: Stacks Project, Tags 08FE and 08HY; Mathlib's mates correspondence.
-(blueprint: lem-pc-m3-open-underived-tensor-mate).
 -/
 
 @[expose] public section
@@ -153,7 +152,6 @@ restriction comparison. No complexes, derived categories, or additivity assumpti
 
 Source: Stacks Project, Tag 08FE, the sectionwise identity in its proof; Tag 08HY,
 the adjoint construction of the base-change map; Tag 0D5S, composition of pullbacks.
-(blueprint: lem-pc-m3-open-underived-tensor-mate).
 
 Proof: First apply schemeMVOrdinaryOpenCounit_square to the two exact open
 restriction adjunctions. Its restriction comparison is definitionally the same

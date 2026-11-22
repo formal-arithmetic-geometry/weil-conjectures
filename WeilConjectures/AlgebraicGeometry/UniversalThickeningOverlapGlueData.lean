@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.UniversalThickeningOverlapCocycle
 
 Source: Stacks Project, More on Morphisms, Tag 04F3, the overlap construction
 in the proof of Lemma 37.7.1.
-(blueprint: lem-weil-pbc-universal-thickening-overlap-glue-data)
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ This only constructs local overlaps and transitions, not a glued scheme.
 
 Source: Stacks Project, More on Morphisms, Tag 04F3, proof of Lemma 37.7.1,
 paragraphs beginning "Choose an affine open covering" and "By the general remarks".
-(blueprint: lem-weil-pbc-universal-thickening-overlap-glue-data)
 
 Proof: The square-zero kernel of each thickening has full support, so the
 closed immersion is a homeomorphism. For each ordered pair of charts, take the

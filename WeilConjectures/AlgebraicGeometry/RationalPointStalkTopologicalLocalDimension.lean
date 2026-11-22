@@ -61,7 +61,6 @@ stalk isomorphism and Spec.stalkIso identify the stalk at x with R localized at 
 Ring equivalences preserve ring Krull dimension. The open immersion a also preserves
 local topological dimension by cofinality of open neighbourhoods. Combining these
 identifications proves the equality.
-(blueprint: lem-ag-rational-point-stalk-topological-local-dimension)
 -/
 theorem ringKrullDim_stalk_rationalPoint_eq_topologicalKrullDimAt
     {k : Type u} [Field k] {X : Scheme.{u}}

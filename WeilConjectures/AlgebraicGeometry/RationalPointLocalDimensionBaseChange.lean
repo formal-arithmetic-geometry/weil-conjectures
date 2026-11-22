@@ -16,7 +16,6 @@ import WeilConjectures.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimen
 
 Source: blueprint `lem-ag-group-identity-local-dimension`, first proof paragraph;
 Stacks Project, Tags 00P4 and 00OU.
-(blueprint: lem-ag-rational-point-local-dimension-base-change)
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry
 
 Source: blueprint `lem-ag-group-identity-local-dimension`, first proof paragraph;
 Stacks Project, Tags 00P4 and 00OU.
-(blueprint: lem-ag-rational-point-local-dimension-base-change)
 
 Proof: Choose an affine neighbourhood Spec A of the image of p. The structure map makes
 A a finite type k-algebra. Its inverse image in the pullback is Spec (A tensor_k K).

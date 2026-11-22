@@ -30,7 +30,6 @@ No coherence or finiteness is asserted.
 
 Source: Stacks Project, Section 30.14, the graded module in Lemma 01YS(5), and Lemma
 0AG6(4); https://stacks.math.columbia.edu/tag/01YS.
-(blueprint: lem-sc-p1-section-module-construction).
 Proof: take the additive direct sum of the groups Γ(G ⊗ O(n), P), indexed by n ≥ 0.
 A homogeneous polynomial a of degree e sends the n-th summand to the (n+e)-th by
 G ◁ Proj.twistMul n a. Define the action of an arbitrary polynomial by adding the actions

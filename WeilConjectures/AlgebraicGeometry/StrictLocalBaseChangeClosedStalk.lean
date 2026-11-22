@@ -75,9 +75,8 @@ private theorem closedStalk_isIso_of_sections
 /-- On the closed stalk of any chosen strict-henselization model, homology of the
 base-change mate is invertible. This concerns only the single lower cartesian square;
 it does not involve a cube or any further inverse image.
-Source: Stacks Project, Tag 03Q9 (theorem-higher-direct-images), restriction of injective
-section complexes, and Tag 03QO (lemma-cohomology-strictly-henselian).
-(blueprint: lem-weil-pbc-strict-local-base-change-closed-stalk).
+Source: Stacks Project, Tag 03Q9, restriction of injective
+section complexes, and Tag 03QO.
 
 Proof:
 1. Apply `isIso_strictHenselization_baseChange_globalHomology` to f, s, G[0], and q.

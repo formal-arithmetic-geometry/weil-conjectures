@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 /-! # Lifting maps between torsion-controlled coherent arrows
 
 Source: Stacks Project, Tags 0889(1) and 05EK.
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift).
 -/
 
 @[expose] public section
@@ -32,7 +31,6 @@ namespace AlgebraicGeometry
 There is no claim that completion alone is fully faithful.
 
 Source: Stacks Project, Tag 0889(1), omitted uniqueness verification, using Tag 05EK.
-(blueprint: lem-weil-pbc-torsion-controlled-completion-hom-lift).
 
 Proof:
 Work on an affine open Spec A and write I for the ideal of J. Coherence identifies

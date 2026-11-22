@@ -72,7 +72,6 @@ private theorem tmul_twist_heq
 localization scalars.
 Source: Stacks Project, Proposition 0BXD, final paragraph; step 2 of
 lem-sc-p1-serre-section-module-charts.
-(blueprint: lem-sc-p1-serre-section-module-chart-scalar)
 
 Proof: the numerator y and scalar numerator a have degrees m*d and l*d. By hsmul,
 a*y has degree (l+m)*d. Compatibility hphi identifies phi(a*y) with multiplication

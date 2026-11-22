@@ -21,7 +21,6 @@ import WeilConjectures.AlgebraicGeometry.ReducedProductLocalization
 
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
 `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9.
-(blueprint: lem-weil-pbc-refine-finite-domain-splitting)
 -/
 
 @[expose] public section
@@ -40,7 +39,6 @@ the existence of those opens, and the product decomposition, are hypotheses.
 Source: smooth purity blueprint, `sk-prop-sf-cbc`, finite-algebra calculation in
 `lem-weil-pbc-finite-pushforward-generic-constructible`, steps 4--9, taking a common
 localization for the finitely many purely inseparable factors.
-(blueprint: lem-weil-pbc-refine-finite-domain-splitting)
 
 Proof:
 1. Put `t = prod j, s j` in `S = A[1/c]` (the empty product is one). It is nonzero since

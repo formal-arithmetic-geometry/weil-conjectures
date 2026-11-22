@@ -14,8 +14,7 @@ import Mathlib.Data.Finset.Max
 /-! # Global Tor bounds on a quasi-compact scheme
 
 Source: Stacks Project, Cohomology of Sheaves, Definition 08CG and
-Lemma 09U9 (lemma-tor-amplitude-stalk), applied to a finite subcover.
-(blueprint: lem-pc-quasi-compact-finite-tor-dimension).
+Lemma 09U9, applied to a finite subcover.
 -/
 
 @[expose] public section
@@ -28,8 +27,7 @@ namespace AlgebraicGeometry.Scheme
 
 /-- On a quasi-compact scheme, local finite Tor dimension has a global finite bound.
 Source: Stacks Project, Cohomology of Sheaves, Definition 08CG and
-Lemma 09U9 (lemma-tor-amplitude-stalk), finite-subcover consequence.
-(blueprint: lem-pc-quasi-compact-finite-tor-dimension).
+Lemma 09U9, finite-subcover consequence.
 
 Proof: Choose the neighbourhood U_x and interval [a_x,b_x] supplied at every point.
 Quasi-compactness gives a finite subcover. Insert 0 into each finite set of endpoints,
@@ -37,7 +35,7 @@ and let lo be the minimum of the lower endpoints and hi the maximum of the upper
 Then lo <= 0 <= hi, lo <= a_x and b_x <= hi for each selected neighbourhood.
 At any point choose a member of the finite subcover. Outside [lo,hi] its local
 vanishing hypothesis applies, because the degree is also outside [a_x,b_x].
-Apply torAmplitude_of_open_neighbourhoods (lem-pc-tor-amplitude-open-local).
+Apply torAmplitude_of_open_neighbourhoods.
 For the empty space the finite cover may be empty; the inserted endpoints make both
 bounds 0 and the local hypothesis is vacuous. No quasi-separatedness is used.
 -/

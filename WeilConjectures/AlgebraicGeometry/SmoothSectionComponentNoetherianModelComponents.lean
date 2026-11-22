@@ -54,9 +54,7 @@ the continuous projection maps the component of σ'(t') to a connected subset co
 σ(t), hence into C. These inclusions give equality of the component and the inverse
 image of C. Finally the underlying space of a scheme fibre maps homeomorphically onto
 the topological fibre; under this identification the equality is the displayed iff.
-This argument applies at each p', without a noetherian assumption on the bases.
-
-(blueprint: lem-sbc-smooth-section-component-noetherian-model-components) -/
+This argument applies at each p', without a noetherian assumption on the bases. -/
 theorem Smooth.section_component_iff_of_isPullback {P T P' T' : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T)
     (g' : P' ⟶ T') (σ' : T' ⟶ P') (a : P' ⟶ P) (b : T' ⟶ T)

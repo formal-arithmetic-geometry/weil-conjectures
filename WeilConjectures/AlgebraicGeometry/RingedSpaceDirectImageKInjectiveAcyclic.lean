@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.RingedSpacePastedUnitKFlatHom
 # Acyclicity of a direct image of a K-injective complex
 
 Source: Stacks Project, Cohomology, Tags 079W, 0D5S and 0D5T.
-(blueprint: lem-pc-ringed-space-direct-image-kinjective-acyclic).
 -/
 
 @[expose] public section
@@ -31,7 +30,6 @@ namespace AlgebraicGeometry.RingedSpace
 This asserts invertibility only on these particular complexes; it does not assert
 that module direct image preserves K-injectivity.
 Source: Stacks Project, Cohomology, Tags 079W, 0D5S and 0D5T.
-(blueprint: lem-pc-ringed-space-direct-image-kinjective-acyclic).
 
 Proof: test the pasted units on localized K-flat complexes using
 `moduleDirectImage_pastedUnit_kFlat_hom_bijective`. Every derived object is

@@ -13,8 +13,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 /-! # Specified K-flat tensor comparison under the section equivalence
 
 Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT;
-internal/section model identification, Steps 1–7 of the blueprint proof
-(auxiliary; not a blueprint node).
+internal/section model identification, Steps 1–7 of the blueprint proof.
 
 The helper predicates spell out resolving membership, the prescribed representative
 square, native localization normalization, and the three constraint diagrams.
@@ -41,13 +40,13 @@ attribute [local irreducible] tensorComparison qTensor totalComparison
 namespace KFlatSectionComparison
 
 /-- The termwise functor of the fixed section equivalence.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 @[implicit_reducible]
 def complexes (T : Scheme.{u}) :=
   (equivalence Λ T).functor.mapHomologicalComplex (.up ℤ)
 
 /-- Internal resolving membership: the acyclic total test and flatness of every term.
-Source: Stacks 06YN, 06YS (auxiliary; not a blueprint node). -/
+Source: Stacks 06YN, 06YS. -/
 def internalResolving (T : Scheme.{u}) :
     ObjectProperty (CochainComplex (internalModules Λ T) ℤ) :=
   fun P ↦ (∀ A : CochainComplex (internalModules Λ T) ℤ, A.Acyclic →
@@ -55,7 +54,7 @@ def internalResolving (T : Scheme.{u}) :
       ∀ n : ℤ, exactFunctor _ _ (tensorRight (P.X n))
 
 /-- The existing section resolving property, specialized without changing universes.
-Source: Stacks 06YS (auxiliary; not a blueprint node). -/
+Source: Stacks 06YS. -/
 @[implicit_reducible]
 def sectionResolving (T : Scheme.{u}) :
     ObjectProperty (CochainComplex (modules Λ T) ℤ) :=
@@ -63,14 +62,14 @@ def sectionResolving (T : Scheme.{u}) :
     (J := Scheme.ProEt.topology T) (R := ring Λ T)
 
 /-- The independently constructed ringed derived tensor, not the conjugate bifunctor.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 @[implicit_reducible]
 def nativeTensor (T : Scheme.{u}) :=
   SheafOfModules.siteDerivedTensorIndependentCoefficients.{u + 1, u, u + 1, u + 1}
     (Scheme.ProEt.topology T) (ring Λ T)
 
 /-- The native localization map is inverse to its given representative comparison.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def NativeLocalizationCondition (T : Scheme.{u})
     (q : ((DerivedCategory.Q (C := modules Λ T)).prod
         (DerivedCategory.Q (C := modules Λ T))) ⋙
@@ -84,7 +83,7 @@ def NativeLocalizationCondition (T : Scheme.{u})
 The internal lax map goes from the derived tensor to the localized total; the
 section qTensor has the same orientation. Thus this is the node's equation after
 multiplication by the two invertible resolution comparisons.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def RepresentativeCondition (T : Scheme.{u})
     (θ : Functor.uncurry.obj (CondensedRing.derivedTensor Λ T) ⋙
         (derivedEquivalence Λ T).functor ≅
@@ -105,7 +104,7 @@ Mathlib's OplaxMonoidal structure is exactly these three equations together with
 naturality. Its unit is the identity into the transported unit; identifying that
 unit with the section regular module by the explicitly localized e below gives
 precisely the diagrams with e as unit comparison.
-Source: Stacks 0FPT (auxiliary; not a blueprint node). -/
+Source: Stacks 0FPT. -/
 def ConstraintCondition (T : Scheme.{u}) : Prop :=
   ∃ o : @Functor.OplaxMonoidal (DerivedCategory (internalModules Λ T)) _ _
       (DerivedCategory (modules Λ T)) _
@@ -114,8 +113,7 @@ def ConstraintCondition (T : Scheme.{u}) : Prop :=
       o.δ M N = (tensorComparison Λ T).hom.app (M, N)
 
 /-- Equivalence localization and arbitrary-target descent on internal resolving pairs.
-Source: Stacks 06YS, 06YU, 04VK
-(auxiliary; not a blueprint node). -/
+Source: Stacks 06YS, 06YU, 04VK. -/
 def ResolvingLocalizationCondition (T : Scheme.{u}) : Prop :=
   ∃ P : ObjectProperty (HomotopyCategory (internalModules Λ T) (.up ℤ)),
       (∀ K, P K ↔ internalResolving Λ T K.as) ∧
@@ -131,7 +129,7 @@ def ResolvingLocalizationCondition (T : Scheme.{u}) : Prop :=
           ((P.ι ⋙ DerivedCategory.Qh).prod (P.ι ⋙ DerivedCategory.Qh)) τ))
 
 /-- The conjugate and independent tensors agree with their localization maps on all complexes.
-Source: Stacks 06YU (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU. -/
 def NativeComparisonCondition (T : Scheme.{u}) : Prop :=
   ∃ q : ((DerivedCategory.Q (C := modules Λ T)).prod
           (DerivedCategory.Q (C := modules Λ T))) ⋙
@@ -143,7 +141,7 @@ def NativeComparisonCondition (T : Scheme.{u}) : Prop :=
 
 /-- The regular-unit identification is the localized specified ordinary comparison;
 the fixed comparison satisfies the derived constraints.
-Source: Stacks 06YU, 0FPT (auxiliary; not a blueprint node). -/
+Source: Stacks 06YU, 0FPT. -/
 def UnitCondition (T : Scheme.{u}) : Prop :=
   ∃ e₀ : tensorUnit Λ T ≅
         (DerivedCategory.singleFunctor (modules Λ T) 0).obj (𝟙_ (modules Λ T)),
@@ -329,8 +327,7 @@ private theorem native_model_data (T : Scheme.{u}) :
       (hf (DerivedCategory (modules Λ T)) inferInstance)
 
 /-- The specified internal/section comparison, including native model identification.
-Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT
-(auxiliary; not a blueprint node).
+Source: Stacks Project, sites-cohomology.tex, Tags 06YU and 0FPT.
 
 Proof.
 1. Exactness and reflection of isomorphisms give the quasi-isomorphism equivalence.

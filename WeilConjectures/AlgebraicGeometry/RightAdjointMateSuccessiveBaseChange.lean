@@ -26,7 +26,6 @@ namespace AlgebraicGeometry
 on the genuine iterated pullback. This assertion concerns only successive base
 changes, before identifying either pullback with an open restriction.
 Source: Stacks Project, Duality for Schemes, Tag 0ATR, Lemma 48.5.2.
-(blueprint: lem-sc-right-adjoint-mate-successive-base-change)
 
 Proof: Derived pullback composition and the displayed projection equations give
 source comparisons. Derived direct-image composition, and uniqueness of right

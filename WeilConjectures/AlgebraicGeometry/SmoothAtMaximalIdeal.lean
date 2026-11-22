@@ -21,8 +21,7 @@ public import Mathlib.Algebra.Module.SpanRankOperations
 /-!
 # Smoothness at a maximal ideal from a differential dimension bound
 
-Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00TS
-(blueprint: lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound).
+Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 00TS.
 -/
 
 @[expose] public section
@@ -33,7 +32,7 @@ namespace Algebra
 
 /-- Over an algebraically closed field, the differential dimension bound at a maximal ideal
 implies smoothness there. Source: Stacks Project, Algebra, Lemma Tag 00TS, implication
-(2) => (4) (blueprint: lem-weil-pbc-smooth-at-maximal-ideal-alg-closed-differentials-bound).
+(2) => (4).
 
 Proof:
 1. The closed-point cotangent comparison identifies the differential fibre dimension

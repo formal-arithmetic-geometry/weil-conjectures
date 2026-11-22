@@ -24,7 +24,6 @@ namespace AlgebraicGeometry
 /-- Canonical ordinary rectangle comparisons on the quasi-coherent subcategories.
 Source: Stacks Project, Tags 0D5S (pullback composition), 0ATM (pasting), and
 08HY (adjunctions defining the mate).
-(blueprint: lem-sc-rectangle-qcoh-comparison-lifts)
 
 Proof: The two projection equations identify k with pullbackLeftPullbackSndIso.hom,
 by the uniqueness clause for the outer pullback. Pullback along k is an equivalence:

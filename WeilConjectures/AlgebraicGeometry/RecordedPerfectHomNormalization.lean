@@ -15,7 +15,6 @@ public import WeilConjectures.AlgebraicGeometry.PerfectHomTransportExtension
 /-! # Change of the counit normalization in perfect Hom transport
 
 Source: Stacks Project, Cohomology, Tags 06YJ and 0D5S.
-(blueprint: lem-pc-recorded-perfect-hom-normalization).
 -/
 
 @[expose] public section
@@ -225,7 +224,6 @@ with the universal change-of-counit automorphisms of the direct pullbacks.
 No perfectness, finite presentation or filtered diagram is involved.
 Source: Stacks Project, Cohomology, Tags 06YJ and 0D5S; uniqueness of the
 left-derived universal functor and its composition comparison.
-(blueprint: lem-pc-recorded-perfect-hom-normalization).
 
 Proof: write ε₀ for the counits selected with the old composition family and ε₁
 for the retained original counits. For every arrow p use leftDerivedUnique to

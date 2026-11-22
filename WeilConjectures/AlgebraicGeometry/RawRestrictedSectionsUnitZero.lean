@@ -14,7 +14,6 @@ import WeilConjectures.CategoryTheory.RightDerivedSingleUnitHomologyComparison
 /-! # Degree-zero normalization of the restricted sections unit
 
 Source: Stacks Project, Cohomology on Sites, Tags 072W and 0BKV.
-(blueprint: lem-sbc-raw-restricted-sections-unit-zero).
 -/
 
 @[expose] public section
@@ -126,8 +125,7 @@ private theorem unit_zero_comparison {C D : Type*}
 namespace AlgebraicGeometry.Etale.RawRestrictedComparison
 
 /-- The derived-sections unit transported through the localization comparisons.
-Source: Stacks Project, Tags 072W and 0BKV.
-(blueprint: lem-sbc-raw-restricted-sections-unit-zero). -/
+Source: Stacks Project, Tags 072W and 0BKV. -/
 noncomputable def sectionsUnit {Y : Scheme.{v}} (W : Y.Etale)
     (K : CochainComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{v + 1}) ℤ) :
     DerivedCategory.Q.obj (((underivedSections W).mapHomologicalComplex (.up ℤ)).obj K) ⟶
@@ -255,7 +253,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- On a single sheaf the homology of the transported unit is the inverse of
 `zeroIso`, after identifying single-complex homology with underived sections.
 Source: Stacks Project, Tags 072W and 0BKV (degree-zero derived sections).
-(blueprint: lem-sbc-raw-restricted-sections-unit-zero).
 
 Proof: expand `zeroIso` into the exact-restriction single comparison, the
 unbounded-to-bounded-below derived comparison, the injective-resolution homology

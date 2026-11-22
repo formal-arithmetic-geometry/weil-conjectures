@@ -12,7 +12,6 @@ import all WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonNor
 /-! # ScalarUnitExtClass
 
 Source: Stacks Project, Cohomology, Tag 0FKU.
-(blueprint: lem-sc-scalar-unit-ext-class).
 -/
 
 @[expose] public section
@@ -29,7 +28,6 @@ attribute [local instance] Sheaf.monoidalCategory HasExt.standard
 
 /-- The cohomology class of one corresponds to the degree-zero scalar-unit morphism.
 Source: Stacks Project, Cohomology, Tags 01DZ and 0FKU (Lemma 20.31.1).
-(blueprint: lem-sc-scalar-unit-ext-class).
 
 Proof: Choose an injective resolution I of the structure sheaf. The canonical
 map to the zeroth right derived functor sends one to the homology class of its

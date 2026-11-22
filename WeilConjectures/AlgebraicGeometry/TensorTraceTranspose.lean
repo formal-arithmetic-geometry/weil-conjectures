@@ -15,8 +15,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 # Tensoring a trace transpose and the exceptional tensor arrow
 
 Source: blueprint main-20261015, proposition-exceptional-inverse-image-smooth-morphism, clause 2,
-and lem-pur-tensor-trace-transpose, the naturality calculation for the projection map
-(blueprint: lem-pur-tensor-trace-transpose).
+and lem-pur-tensor-trace-transpose, the naturality calculation for the projection map.
 
 As in the recorded cohomological-smoothness definition, maps are written in canonical
 etale comparison coordinates. Both arbitrary original pro-etale objects and their
@@ -35,8 +34,7 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 namespace AlgebraicGeometry.Etale
 
 /-- The canonical Koszul symmetry, with its type expressed using derivedTensor.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, tensor ordering
-(blueprint: lem-pur-tensor-trace-transpose). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, tensor ordering. -/
 noncomputable def tensorTraceSymmetry
     (A : Type uA) [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A]
@@ -50,7 +48,7 @@ noncomputable def tensorTraceSymmetry
 /-- The inverse projection map with both tensor symmetries inserted, followed by
 1 tensor the trace and the right unit constraint. Its source is f^*K tensor L.
 Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 2; projection
-naturality calculation (blueprint: lem-pur-tensor-trace-transpose). -/
+naturality calculation. -/
 noncomputable def tensorTraceProjection
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V S : Scheme.{u}} (f : V ⟶ S) [HasCompactification f]
@@ -69,8 +67,7 @@ noncomputable def tensorTraceProjection
 
 /-- Theta with the source ordering f^*K tensor omega, using the canonical tensor
 mate of the recorded cohomological-smoothness interface and the Koszul symmetry.
-Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 2
-(blueprint: lem-pur-tensor-trace-transpose). -/
+Source: blueprint proposition-exceptional-inverse-image-smooth-morphism, clause 2. -/
 noncomputable def tensorTraceTheta
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V S : Scheme.{u}} (f : V ⟶ S) [HasCompactification f]
@@ -83,8 +80,7 @@ noncomputable def tensorTraceTheta
     dualizingComplexTensorMap Λ f K
 
 /-- The exceptional transpose of coefficient integration, before comparison pullback.
-Source: blueprint projection naturality calculation and exceptional Hom bijection
-(blueprint: lem-pur-tensor-trace-transpose). -/
+Source: blueprint projection naturality calculation and exceptional Hom bijection. -/
 noncomputable def tensorTraceIntegrated
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {V S : Scheme.{u}} (f : V ⟶ S) [HasCompactification f]
@@ -225,8 +221,7 @@ end AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.ProEtale
 
 /-- The canonical coefficient realization, with quotient finiteness supplied internally.
-Source: finite purity conventions and prose-03-02
-(blueprint: lem-pur-tensor-trace-transpose). -/
+Source: finite purity conventions and prose-03-02. -/
 noncomputable def tensorTraceRealization
     (P : WeilConjectures.PurityFiniteSetting.{u}) (T : Scheme.{u}) :
     _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology T)
@@ -241,8 +236,7 @@ noncomputable def tensorTraceRealization
 /-- Exactly the two projection-invertibility assumptions of the node, in canonical
 fixed-scalar coordinates. The dualizing object is the unit-normalized comparison
 model already used by the recorded cohomological-smoothness definition.
-Source: blueprint def-exchange-projection and proposition-exceptional-inverse-image-smooth-morphism
-(blueprint: lem-pur-tensor-trace-transpose). -/
+Source: blueprint def-exchange-projection and proposition-exceptional-inverse-image-smooth-morphism. -/
 noncomputable def tensorTraceProjectionDomain
     (P : WeilConjectures.PurityFiniteSetting.{u}) {V S : Scheme.{u}}
     (f : V ⟶ S) (c : Compactification f)
@@ -261,19 +255,16 @@ proposition-exceptional-inverse-image-smooth-morphism. Here L and K are the orig
 pro-etale objects; eL and eK retain arbitrary etale representatives. No smoothness, orientation,
 invertibility of the transpose, or finite Tor amplitude of L is imposed.
 Source: blueprint main-20261015, proposition-exceptional-inverse-image-smooth-morphism clause 2 and
-the naturality calculation in lem-pur-tensor-trace-transpose
-(blueprint: lem-pur-tensor-trace-transpose).
+the naturality calculation in lem-pur-tensor-trace-transpose.
 
 Proof:
 1. The exceptional Hom bijection identifies the transpose Q of t by the equation
-Rf_!(Q) followed by the counit at the unit equals t (theorem-f-shriek-finite-coefficients).
+Rf_!(Q) followed by the counit at the unit equals t.
 2. Expand theta as the transpose of the inverse projection map, with the two tensor
-symmetries, followed by 1 tensor the unit counit and the unit constraint
-(proposition-exceptional-inverse-image-smooth-morphism). Inverse-transposing (1 tensor Q) followed
+symmetries, followed by 1 tensor the unit counit and the unit constraint. Inverse-transposing (1 tensor Q) followed
 by theta gives Rf_!(1 tensor Q) followed by this counit composite.
 3. Naturality of projection in its source coefficient, and invertibility of its
-components at (L,K) and (omega,K), move Q through the inverse projection map
-(def-exchange-projection). Substitute Rf_!(Q) followed by the counit equals t.
+components at (L,K) and (omega,K), move Q through the inverse projection map. Substitute Rf_!(Q) followed by the counit equals t.
 The result is precisely tensorTraceProjection, including both symmetries and the unit.
 4. Injectivity of the exceptional Hom bijection gives the equality. All factors are
 natural in K. Apply the exact comparison pullback and the canonical intrinsic

@@ -12,8 +12,7 @@ import Mathlib.CategoryTheory.Localization.Equivalence
 
 /-! # Gluing derived complexes and compatible morphisms on two opens
 
-Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1)
-(blueprint: lem-sc-scheme-derived-hom-gluing).
+Source: literature/stacks-project/cohomology.tex, Tag 08DG (Lemma 20.45.1).
 -/
 
 @[expose] public section
@@ -73,8 +72,7 @@ set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 500000 in
 -- Elaborating the restriction functors and their comparison isomorphisms needs this budget.
 /-- Compatible local morphisms between two fixed global derived objects lift globally.
-Source: Stacks Project, Cohomology, Tag 08BW, exactness at the local Hom pair
-(blueprint: lem-sc-scheme-derived-hom-gluing).
+Source: Stacks Project, Cohomology, Tag 08BW, exactness at the local Hom pair.
 Proof: transport a and b backwards through the derived equivalences induced by
 Scheme.Modules.overEquiv U and V. Their transported restrictions to the localized
 overlap site coincide: the two displayed comparisons are obtained by cancelling

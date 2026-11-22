@@ -34,8 +34,7 @@ Use lowerStarComp for the Type-valued and additive pushforward compositors and u
 the additive inverse-image compositor. The composition clause of cohomologyPullbackFunctorial
 expresses successive pullback as Sheaf.H.map of the forward compositor applied to pullback along v
 ≫ u. Apply Sheaf.H.map of the inverse compositor; functoriality of Sheaf.H.map and the inverse-hom
-identity cancel these maps and give the displayed equality.
-(blueprint: thm-weil-pbc-universalHomeomorphism_composition) -/
+identity cancel these maps and give the displayed equality. -/
 theorem universalHomeomorphism_composition {X X' : Scheme.{u}} (u : X' ⟶ X)
     [IsUniversalHomeomorphism u] :
     ∀ (X'' : Scheme.{u}) (v : X'' ⟶ X'), IsUniversalHomeomorphism v →

@@ -17,7 +17,6 @@ import WeilConjectures.AlgebraicGeometry.RawModuleScalarSourceClassFormula
 /-! # The source and class factors of the raw scalar comparison
 
 Source: Stacks Project, Tags 03D7 and 03Q8.
-(blueprint: lem-sbc-raw-module-abelian-hom-source-formula).
 -/
 
 @[expose] public section
@@ -30,7 +29,6 @@ namespace AlgebraicGeometry.Etale
 The coefficient comparison is deliberately retained as the module coefficient tail.
 Source: Stacks Project, Tags 03D7 and 03Q8, source-generator part of the scalar
 naturality calculation.
-(blueprint: lem-sbc-raw-module-abelian-hom-source-formula).
 
 Proof: Evaluate the additive composite defining rawModuleAbelianHomMap. Use the module
 raw pullback formula to expose its source, class and coefficient factors. Functoriality of

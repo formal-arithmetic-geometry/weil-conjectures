@@ -10,7 +10,6 @@ public import WeilConjectures.CategoryTheory.ExactDegreeZero
 /-! # The scalar-unit universal property in the exact-functor interface
 
 Source: Stacks 07A6 and the canonical exact degree-zero interface.
-(auxiliary; not a blueprint node).
 -/
 
 @[expose] public section
@@ -22,8 +21,7 @@ namespace SheafExactDegreeZero
 attribute [local instance 10000] scalarWeakSheafify
 
 /-- The canonical scalar universal property gives the same unbounded Hom bijections
-as the exact-functor predicate. Source: Stacks 07A6; the exact single-functor comparison
-(auxiliary; not a blueprint node).
+as the exact-functor predicate. Source: Stacks 07A6; the exact single-functor comparison.
 Proof: scalarUniversal_iff expresses the named canonical scalar unit as the map
 single(eta) followed by the inverse exact-functor comparison, tested against every
 unbounded complex. This is precisely the formula defining Functor.DerivedUnit. Apply

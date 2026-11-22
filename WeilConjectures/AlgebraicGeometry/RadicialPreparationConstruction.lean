@@ -58,9 +58,7 @@ remains injective, proving geometric reducedness of the generic fibre of Y.
 The homeomorphism q uniquely lifts η to the generic point of S. No second flat
 shrinking is made. Empty special fibres cause no problem. Every scheme here has
 an explicit spectrum, pullback, or reduction construction; no definition chooses
-an arbitrary object from this unproved existence theorem.
-
-(blueprint: lem-sbc-radicial-preparation-construction) -/
+an arbitrary object from this unproved existence theorem. -/
 theorem exists_radicial_preparation_construction
     {X T : Scheme.{u}} [IsAffine X] (f : X ⟶ T) [LocallyOfFiniteType f]
     (V : T.Opens) (hV : IsAffineOpen V) (himage : Set.range f ⊆ V)

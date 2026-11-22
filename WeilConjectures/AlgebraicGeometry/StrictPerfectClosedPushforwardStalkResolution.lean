@@ -20,9 +20,7 @@ import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 /-! # Bounded projective resolutions of closed-pushforward stalks
 
 Source: Stacks Project, Duality for Schemes, Tag 0A9U, hypothesis translation;
-Cohomology of Sheaves, Tags 08C4 and 08CM; More on Algebra, Tag 066Q
-(lemma-perfect-module).
-(blueprint: lem-sc-strict-perfect-closed-pushforward-stalk-resolution).
+Cohomology of Sheaves, Tags 08C4 and 08CM; More on Algebra, Tag 066Q.
 -/
 
 @[expose] public section
@@ -34,8 +32,7 @@ open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry
 
 /-- Reverse the nonpositive indices and augment by degree-zero homology.
-Source: Stacks Project, Tag 066Q, and the index-reversal portion of
-(blueprint: lem-sc-strict-perfect-closed-pushforward-stalk-resolution). -/
+Source: Stacks Project, Tag 066Q, and the index-reversal portion of. -/
 private theorem nonpositiveProjective_resolution
     {C : Type*} [Category C] [Abelian C]
     (Q : CochainComplex C ℤ) (M : C) (a : ℤ)
@@ -94,9 +91,7 @@ private theorem nonpositiveProjective_resolution
 along a closed immersion gives a bounded projective resolution of the source stalk
 restricted to the target stalk. No Tor assertion or tensor test module is involved.
 
-Source: Stacks Project, Tags 08C4 and 08CM, and More on Algebra, Tag 066Q
-(lemma-perfect-module); hypothesis translation for Duality, Tag 0A9U.
-(blueprint: lem-sc-strict-perfect-closed-pushforward-stalk-resolution).
+Source: Stacks Project, Tags 08C4 and 08CM, and More on Algebra, Tag 066Q; hypothesis translation for Duality, Tag 0A9U.
 
 Proof. Closed-pushforward stalks identify the ordinary pushforward at i(x) with
 restriction of scalars of the source stalk. Restriction to a neighbourhood preserves

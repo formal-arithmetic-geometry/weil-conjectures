@@ -51,8 +51,7 @@ private theorem normalized_comparison
 
 /-- Counit normalization specifying the comparison uniquely. It is the counit equation
 for transport by the inverse of the isomorphism pullback adjunction.
-Source: Stacks Project, Tag 0ATR, uniqueness of right adjoints. 
-(blueprint: lem-sc-scheme-iso-right-adjoint-normalized)
+Source: Stacks Project, Tag 0ATR, uniqueness of right adjoints.
 -/
 def SchemeIsoRightAdjointNormalized
     [∀ Z : Scheme.{u},
@@ -97,7 +96,6 @@ def SchemeIsoRightAdjointNormalized
 /-- A normalized natural isomorphism of right adjoints under an isomorphism of sources.
 This statement concerns one vertical morphism, with no base-change square or second mate.
 Source: Stacks Project, Tag 0ATR, composite adjunction comparison, and Tag 0D5S.
-(blueprint: lem-sc-scheme-iso-right-adjoint-normalized)
 
 Proof: Pullback along e.hom is an equivalence, with inverse pullback along e.inv,
 by the identity and composition comparisons. Its pinned adjunction therefore has

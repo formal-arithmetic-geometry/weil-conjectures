@@ -20,8 +20,7 @@ import WeilConjectures.AlgebraicGeometry.TensorPullbackOverIsoUnit
 
 /-! # Affine derived-Tor charts from chosen resolution comparisons
 
-Source: Stacks Project, Tags 06YH, 06YG and 00LS.
-(blueprint: new-q1-self-tor-chosen-resolution-charts). -/
+Source: Stacks Project, Tags 06YH, 06YG and 00LS. -/
 
 @[expose] public section
 set_option autoImplicit false
@@ -36,7 +35,6 @@ set_option backward.isDefEq.respectTransparency.types false in
 /-- The augmentation comparisons defining the affine derived-Tor charts commute
 with every augmented tensor chain comparison between the chosen resolutions.
 Source: Stacks Project, Tags 06YH, 06YG, 00LS and 01I6.
-(blueprint: new-p4-self-tor-augmented-resolution-charts).
 
 Proof: Sheafify the chosen projective quotient resolution on each affine chart.
 Projective modules are summands of free modules, so their associated sheaves

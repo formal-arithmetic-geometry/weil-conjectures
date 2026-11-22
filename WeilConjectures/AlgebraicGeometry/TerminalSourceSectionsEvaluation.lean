@@ -13,7 +13,6 @@ public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNat
 
 /-! # Evaluation of the fixed terminal-source comparison
 Source: Stacks Project, Tags 06XR and 01F7.
-(blueprint: new-terminal-source-sections-evaluation)
 -/
 
 @[expose] public section
@@ -27,7 +26,6 @@ namespace AlgebraicGeometry.Scheme.Modules.ExtEdgeResolution
 
 /-- Evaluation through the terminal-source comparison agrees with the integer generator.
 Source: Stacks Project, Tag 06XR; the constant-sheaf and free-abelian adjunctions.
-(blueprint: new-terminal-source-sections-evaluation)
 
 Proof: The free singleton generator maps to the integer 1. Expand the two
 adjunctions, commute the singleton isomorphism through sheafification using

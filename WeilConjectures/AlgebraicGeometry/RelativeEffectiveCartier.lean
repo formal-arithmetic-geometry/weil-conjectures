@@ -46,23 +46,19 @@ We state the criteria that the Picard framework needs:
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.IdealSheafData.IsRelativeEffectiveCartier`
-  (blueprint `def-pc-relative-effective-cartier`).
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsRelativeEffectiveCartier`.
 
 ## Main statements
 
-- `AlgebraicGeometry.Scheme.IdealSheafData.IsLocallyPrincipal.isInvertible_and_flat`
-  (blueprint `proposition-divisors-degree-g-open-chart--1`).
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsLocallyPrincipal.isInvertible_and_flat`.
 - `AlgebraicGeometry.Scheme.IdealSheafData.IsInvertible.isFinite_and_locallyOfFinitePresentation`
   (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, `(2) ⇒ (1)` for proper `X/S`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.isInvertible_of_isFinite_of_flat`
   (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, `(1) ⇒ (2)`).
 - `AlgebraicGeometry.Scheme.IdealSheafData.isRelativeEffectiveCartier_of_isFinite`,
   `AlgebraicGeometry.Scheme.IdealSheafData.isRelativeEffectiveCartier_iff_locallyQuasiFinite`,
-  `AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation_of_locallyQuasiFinite`
-  (blueprint `theorem-hilbert-schemes-points-smooth-curve--1`, the remaining implications).
-- `AlgebraicGeometry.Scheme.IdealSheafData.IsRelativeEffectiveCartier.comap_of_isPullback`
-  (blueprint `lem-pc-recd-pullback`).
+  `AlgebraicGeometry.Scheme.IdealSheafData.locallyOfFinitePresentation_of_locallyQuasiFinite`.
+- `AlgebraicGeometry.Scheme.IdealSheafData.IsRelativeEffectiveCartier.comap_of_isPullback`.
 
 ## Implementation notes
 

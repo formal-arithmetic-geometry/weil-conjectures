@@ -38,9 +38,7 @@ it contains the whole special fibre. Tag 055J makes its generic fibre connected,
 the family is flat and the special fibre is geometrically reduced. The trait's second
 section through x and x' consequently has its generic point in the component selected
 by the original section. Its image x' is in the required locus. Base-change compatibility
-returns the conclusion on the original scheme.
-
-(blueprint: lem-sbc-smooth-section-component-generalization) -/
+returns the conclusion on the original scheme. -/
 theorem Smooth.stableUnderGeneralization_section_component {P T : Scheme.{u}} (g : P ⟶ T)
     [Smooth g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) :
     StableUnderGeneralization

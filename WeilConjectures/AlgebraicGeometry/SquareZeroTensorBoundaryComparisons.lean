@@ -21,7 +21,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 /-! # Canonical comparison maps for square-zero tensor boundaries
 
 Source: Stacks Project, Tags 09MS, 08KS, and 01XC.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit).
 -/
 
 @[expose] public section
@@ -34,15 +33,14 @@ universe u
 attribute [local irreducible] RingedSpace.moduleCohomology
 noncomputable section
 
-/-- The adjunction comparison with Mathlib pullback. Source: Stacks Tag 0096.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- The adjunction comparison with Mathlib pullback. Source: Stacks Tag 0096. -/
 def boundaryPullbackComparison {X Z : Scheme.{u}} (j : Z ⟶ X) :
     tensorPullback j ≅ pullback j :=
   (Classical.choose (exists_tensorPullbackAdjunction j)).leftAdjointUniq
     (pullbackPushforwardAdjunction j)
 
 /-- The tensor comparison induced by the monoidal Mathlib pullback.
-Source: Stacks Tag 01CD. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+Source: Stacks Tag 01CD. -/
 def boundaryPullbackTensorIso {X Z : Scheme.{u}} (j : Z ⟶ X) (A B : X.Modules) :
     (tensorPullback j).obj (A ⊗ B) ≅
       (tensorPullback j).obj A ⊗ (tensorPullback j).obj B :=
@@ -52,14 +50,14 @@ def boundaryPullbackTensorIso {X Z : Scheme.{u}} (j : Z ⟶ X) (A B : X.Modules)
       ((boundaryPullbackComparison j).app B).symm)
 
 /-- Tensor powers of an isomorphism, including exponent zero.
-Source: Stacks Tag 01CD. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+Source: Stacks Tag 01CD. -/
 def boundaryTensorPowIso {Z : Scheme.{u}} {A B : Z.Modules} (t : A ≅ B) :
     ∀ d : ℕ, A.tensorPow d ≅ B.tensorPow d
   | 0 => Iso.refl _
   | d + 1 => t ⊗ᵢ boundaryTensorPowIso t d
 
 /-- The degreewise pullback comparison, with the canonical unit comparison in degree zero.
-Source: Stacks Tag 01CD. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+Source: Stacks Tag 01CD. -/
 def boundaryPullbackPowIso {X Z : Scheme.{u}} (j : Z ⟶ X) (L : X.Modules) :
     ∀ d : ℕ, (tensorPullback j).obj (L.tensorPow d) ≅
       ((tensorPullback j).obj L).tensorPow d
@@ -67,8 +65,7 @@ def boundaryPullbackPowIso {X Z : Scheme.{u}} (j : Z ⟶ X) (L : X.Modules) :
   | d + 1 => boundaryPullbackTensorIso j L (L.tensorPow d) ≪≫
       (Iso.refl _ ⊗ᵢ boundaryPullbackPowIso j L d)
 
-/-- The section-degree comparison. Source: Stacks Tag 09MS, graded ideal sequences.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+/-- The section-degree comparison. Source: Stacks Tag 09MS, graded ideal sequences. -/
 def boundarySectionDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) (n e : ℕ) :
     (tensorPullback j).obj (L.tensorPow (n * (e + 1))) ≅
@@ -77,8 +74,7 @@ def boundarySectionDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     ((tensorPullback j).obj L).tensorPowMulIso n (e + 1)
 
 /-- The coefficient-degree comparison uses the generic tensor comparison, since the ideal
-need not be invertible. Source: Stacks Tags 01CD and 09MS.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+need not be invertible. Source: Stacks Tags 01CD and 09MS. -/
 def boundaryCoefficientDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     (L : X.Modules) (n e : ℕ) :
     (tensorPullback j).obj (j.ker.toModules ⊗ L.tensorPow (n * (e + 1))) ≅
@@ -92,7 +88,7 @@ def boundaryCoefficientDegreeIso {X Z : Scheme.{u}} (j : Z ⟶ X)
       boundaryTensorPowIso (boundaryPullbackPowIso j L n) e))
 
 /-- The multiplication inclusion is the kernel, with its canonical inclusion equation.
-Source: Stacks Tags 08KS and 09MS. (blueprint: lem-sc-square-zero-ideal-tensor-unit).
+Source: Stacks Tags 08KS and 09MS.
 Proof: the unit quotient theorem identifies its kernel with the image of multiplication.
 Twisting the ideal inclusion by an invertible module is mono, so multiplication equals
 its image up to the unique image isomorphism. Transport the limiting kernel fork along
@@ -123,7 +119,7 @@ theorem boundaryIdealKernelIso_exists {X Z : Scheme.{u}} (j : Z ⟶ X)
     (kernelIsKernel (adj'.unit.app M)) WalkingParallelPair.zero
 
 /-- The kernel comparison is determined by its inclusion equation; no unspecified object
-is selected. Source: Stacks Tag 09MS. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+is selected. Source: Stacks Tag 09MS. -/
 def boundaryIdealKernelIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (M : X.Modules) [M.IsInvertible] :
     j.ker.toModules ⊗ M ≅
@@ -134,7 +130,6 @@ def boundaryIdealKernelIso {X Z : Scheme.{u}} (j : Z ⟶ X)
 This statement concerns modules only, with no cohomology, section, or derivation assertion.
 
 Source: Stacks Project, Tags 09MS and 08KS.
-(blueprint: lem-sc-square-zero-ideal-tensor-unit).
 Proof: on an affine open where L is free of rank one, identify I tensor L^d with I.
 Multiplication by I is then zero because I squared is zero. This local calculation glues,
 so I annihilates I tensor L^d on every open. The ideal is quasi-coherent, and twisting
@@ -205,7 +200,7 @@ theorem square_zero_ideal_tensor_unit_isIso {X Z : Scheme.{u}} (j : Z ⟶ X)
 
 /-- The cohomology comparison is constructed from the coefficient isomorphism, the inverse
 closed-immersion edge, the inverse annihilated-module unit, and the kernel inclusion.
-Source: Stacks Tags 09MS and 01XC. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+Source: Stacks Tags 09MS and 01XC. -/
 def boundaryCoefficientCohomologyIso {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n e : ℕ) :
@@ -244,7 +239,7 @@ def boundaryCoefficientCohomologyIso {X Z : Scheme.{u}} (j : Z ⟶ X)
   exact k
 
 /-- A package of the section and coefficient comparison maps, including degree zero.
-Source: Stacks Tag 09MS. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+Source: Stacks Tag 09MS. -/
 structure TensorBoundaryComparisonData {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) (n : ℕ) where
   a : ∀ e : ℕ, (tensorPullback j).obj (L.tensorPow (n * (e + 1))) ≅
@@ -258,7 +253,7 @@ structure TensorBoundaryComparisonData {X Z : Scheme.{u}} (j : Z ⟶ X)
         (L.tensorPow (n * (e + 1))))))
 
 /-- The package is built from the explicit comparison constructions.
-Source: Stacks Tag 09MS. (blueprint: lem-sc-square-zero-ideal-tensor-unit). -/
+Source: Stacks Tag 09MS. -/
 def canonicalTensorBoundaryComparisons {X Z : Scheme.{u}} (j : Z ⟶ X)
     [IsClosedImmersion j] (L : X.Modules) [L.IsInvertible] (hI : j.ker ^ 2 = ⊥)
     (n : ℕ) : TensorBoundaryComparisonData j L n where

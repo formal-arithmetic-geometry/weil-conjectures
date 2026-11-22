@@ -62,7 +62,6 @@ private theorem reflector_endomorphism_naturality
 
 /-- Comparison isomorphisms induce the same compatible-family subtype.
 Source: Stacks Project, Lemma 087T and Remark 088F.
-(blueprint: lem-weil-pbc-thickening-system-comparison-transport).
 -/
 theorem compatible_family_comparison_equiv
     {X : Scheme.{u}} {T : ℕ → Scheme.{u}} {i : ∀ n, T n ⟶ T (n + 1)}

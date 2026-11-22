@@ -110,7 +110,6 @@ private theorem comp_congr (A : Type (u + 1)) [CommRing A]
 Source: blueprint latest, sec-six-functors-basics/sk-prop-geo-p1-adjunction/
 thm-amb-p1-adjunction.proof.md, the composite-adjunction counit in the
 identification of each projection with base change of q.
-(auxiliary; not a blueprint node).
 
 Proof: write e for the chart, p for its selected projection, and r for the
 projective projection, so r=e followed by p. Expand the chart-map definition.

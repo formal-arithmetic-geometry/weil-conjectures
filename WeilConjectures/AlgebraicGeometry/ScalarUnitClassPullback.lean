@@ -14,7 +14,6 @@ import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 /-! # Structure-sheaf pullback preserves the degree-zero class of one
 
 Source: Stacks Project, Cohomology, Tags 0FKU and 01F7.
-(blueprint: lem-sc-scalar-unit-class-pullback).
 -/
 
 @[expose] public section
@@ -62,7 +61,6 @@ private theorem augmentation_extMk {C : Type*} [Category C] [Abelian C] [HasExt 
 
 /-- The augmented section one corresponds to the scalar-unit morphism in degree-zero Ext.
 Source: Stacks Project, Cohomology, Tags 01DZ and 01F7.
-(blueprint: lem-sc-scalar-unit-class-pullback).
 
 Proof: Choose an injective resolution I of the structure sheaf. Its augmentation sends
 one to a degree-zero cocycle. The definition of the map to the zeroth right derived
@@ -122,7 +120,6 @@ private theorem homEquiv_unique {C D : Type*} [Category C] [Category D]
 /-- The scalar-unit coefficient morphism commutes with inverse image and the
 structure-sheaf coefficient map.
 Source: Stacks Project, Modules, Tags 0096 and 01CA; Cohomology, Tag 01F7.
-(blueprint: lem-sc-scalar-unit-class-pullback).
 
 Proof: Precompose by the constant-sheaf unit isomorphism and apply the constant-sheaf
 adjunction at the terminal open. The inverse-image comparison for constant sheaves
@@ -222,7 +219,6 @@ end
 
 /-- Pullback followed by the structure-sheaf coefficient map preserves the class of one.
 Source: Stacks Project, Cohomology, Tag 01F7, and Modules, Tags 0096 and 01CA.
-(blueprint: lem-sc-scalar-unit-class-pullback).
 
 Proof: In degree zero the injective-resolution comparison is the usual identification
 of derived global sections with sections. Evaluation at one identifies the image of

@@ -16,7 +16,6 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjec
 /-! # Open pullback squares and restricted counits
 
 Source: Stacks Project, Tags 08FE, 08HY and 0D5S.
-(blueprint: lem-pc-t2-open-counit-compatibility).
 -/
 
 @[expose] public section
@@ -41,8 +40,7 @@ private theorem counit_square_of_unit
   rw [← Category.assoc (L.map u), hp]
 
 /-- The canonical pullback comparison across a commuting square of open inclusions.
-Source: Stacks Project, Tag 0D5S, applied to the constructed open pullback comparisons.
-(blueprint: def-pc-t2-open-pullback-square-iso). -/
+Source: Stacks Project, Tag 0D5S, applied to the constructed open pullback comparisons. -/
 noncomputable def singleComplexOpenPullbackSquareIso
     [∀ Y : Scheme.{u},
       HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]
@@ -73,7 +71,6 @@ set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The sectionwise direct-image comparison is the mate of the open pullback square.
 Source: Stacks Project, cohomology.tex, Tags 08FE, 08BS and 08HY.
-(blueprint: lem-pc-t2-open-counit-compatibility).
 
 Proof: Compute direct image on a K-injective complex. Open restriction preserves
 K-injectivity, since exact extension by zero is its left adjoint. The underived
