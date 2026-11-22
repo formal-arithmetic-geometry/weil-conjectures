@@ -37,7 +37,7 @@ import Mathlib.CategoryTheory.Sites.LeftExact
 /-!
 # The oriented product of topoi
 
-171–174.
+Source: ILO, Exposé XI §§1.1–1.7, printed pp. 171–174.
 
 The comma category is the actual category of triples. The precoverage includes the
 isomorphic versions of the three displayed generators, which generate the same topology.
@@ -54,11 +54,13 @@ namespace CategoryTheory.OrientedProduct
 variable {C₁ C₂ D : Type u} [SmallCategory C₁] [SmallCategory C₂] [SmallCategory D]
   [HasFiniteLimits C₁] [HasFiniteLimits C₂] [HasFiniteLimits D]
 
-/-- The category of triples, using Mathlib's comma and product categories. -/
+/-- The category of triples, using Mathlib's comma and product categories.
+Source: ILO XI §1.1(i). -/
 abbrev Triples (F : D ⥤ C₁) (G : D ⥤ C₂) := Comma (𝟭 (C₁ × C₂)) (F.prod' G)
 
 /-- The three generating covering types. Unchanged components are allowed to be isomorphisms;
-this is the isomorphism closure of the literal generators in XI §1.1(ii)(a)–(c). -/
+this is the isomorphism closure of the literal generators in XI §1.1(ii)(a)–(c).
+Source: ILO XI §1.1(ii). -/
 def generators (J₁ : Pretopology C₁) (J₂ : Pretopology C₂)
     (F : D ⥤ C₁) (G : D ⥤ C₂) : Precoverage (Triples F G) where
   coverings Z := {R |
@@ -71,16 +73,19 @@ def generators (J₁ : Pretopology C₁) (J₂ : Pretopology C₂)
     (∃ (Z' : Triples F G) (r : Z' ⟶ Z), R = Presieve.singleton r ∧
       IsIso r.left.1 ∧ IsPullback r.left.2 Z'.hom.2 Z.hom.2 (G.map r.right))}
 
-/-- The generated Grothendieck topology, with no unproved data. -/
+/-- The generated Grothendieck topology, with no unproved data.
+Source: ILO XI §1.1(ii). -/
 def topology (J₁ : Pretopology C₁) (J₂ : Pretopology C₂)
     (F : D ⥤ C₁) (G : D ⥤ C₂) : GrothendieckTopology (Triples F G) :=
   (generators J₁ J₂ F G).toGrothendieck
 
-/-- Associated representables, including on sites that are not subcanonical. -/
+/-- Associated representables, including on sites that are not subcanonical.
+Source: ILO XI §§1.2–1.3. -/
 noncomputable def associated {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) :
     C ⥤ Sheaf J (Type u) := yoneda ⋙ presheafToSheaf J (Type u)
 
-/-- The first site projection on objects, using final objects. -/
+/-- The first site projection on objects, using final objects.
+Source: ILO XI §1.3. -/
 noncomputable def firstTriple (F : D ⥤ C₁) (G : D ⥤ C₂)
     [PreservesFiniteLimits F] [PreservesFiniteLimits G]
     (U : C₁) : Triples F G where
@@ -88,7 +93,8 @@ noncomputable def firstTriple (F : D ⥤ C₁) (G : D ⥤ C₂)
   right := ⊤_ D
   hom := (terminal.from U ≫ inv (terminalComparison F), inv (terminalComparison G))
 
-/-- The second site projection on objects. -/
+/-- The second site projection on objects.
+Source: ILO XI §1.3. -/
 noncomputable def secondTriple (F : D ⥤ C₁) (G : D ⥤ C₂)
     [PreservesFiniteLimits F] [PreservesFiniteLimits G]
     (W : C₂) : Triples F G where
@@ -99,21 +105,21 @@ noncomputable def secondTriple (F : D ⥤ C₁) (G : D ⥤ C₂)
 variable (F : D ⥤ C₁) (G : D ⥤ C₂)
   [PreservesFiniteLimits F] [PreservesFiniteLimits G]
 
-/-- The first projection site functor. -/
+/-- The first projection site functor. Source: ILO XI §1.3. -/
 noncomputable def first : C₁ ⥤ Triples F G where
   obj := firstTriple F G
   map r := ⟨(r, 𝟙 _), 𝟙 _, by
     apply Prod.ext <;> simp [firstTriple]⟩
   map_comp _ _ := by ext <;> simp [firstTriple]
 
-/-- The second projection site functor. -/
+/-- The second projection site functor. Source: ILO XI §1.3. -/
 noncomputable def second : C₂ ⥤ Triples F G where
   obj := secondTriple F G
   map r := ⟨(𝟙 _, r), 𝟙 _, by
     apply Prod.ext <;> simp [secondTriple]⟩
   map_comp _ _ := by ext <;> simp [secondTriple]
 
-/-- Structural arrow to the first projection triple. -/
+/-- Structural arrow to the first projection triple. Source: ILO XI Lemma 1.5. -/
 noncomputable def toFirst (Z : Triples F G) : Z ⟶ (first F G).obj Z.left.1 where
   left := (𝟙 _, terminal.from _)
   right := terminal.from _
@@ -121,7 +127,7 @@ noncomputable def toFirst (Z : Triples F G) : Z ⟶ (first F G).obj Z.left.1 whe
     ((terminalIsTerminal.isTerminalObj F _).hom_ext _ _)
     ((terminalIsTerminal.isTerminalObj G _).hom_ext _ _)
 
-/-- Structural arrow to the second projection triple. -/
+/-- Structural arrow to the second projection triple. Source: ILO XI Lemma 1.5. -/
 noncomputable def toSecond (Z : Triples F G) : Z ⟶ (second F G).obj Z.left.2 where
   left := (terminal.from _, 𝟙 _)
   right := terminal.from _
@@ -129,10 +135,11 @@ noncomputable def toSecond (Z : Triples F G) : Z ⟶ (second F G).obj Z.left.2 w
     ((terminalIsTerminal.isTerminalObj F _).hom_ext _ _)
     ((terminalIsTerminal.isTerminalObj G _).hom_ext _ _)
 
-/-- The middle triple defining the orientation. -/
+/-- The middle triple defining the orientation. Source: ILO XI §1.3. -/
 def middle (V : D) : Triples F G := ⟨(F.obj V, G.obj V), V, (𝟙 _, 𝟙 _)⟩
 
-/-- Transport a cone's 2-morphism along its two projection isomorphisms. -/
+/-- Transport a cone's 2-morphism along its two projection isomorphisms.
+Source: ILO XI Theorem 1.4. -/
 def paste {X : Type x} {Y : Type y} {S : Type s} {P : Type p} {E : Type z}
     [Category.{vx} X] [Category.{vy} Y] [Category.{vs} S]
     [Category.{vp} P] [Category.{vz} E]
@@ -150,7 +157,8 @@ def paste {X : Type x} {Y : Type y} {S : Type s} {P : Type p} {E : Type z}
     (Functor.isoWhiskerRight α f.direct).hom
 
 /-- The universal compatible lift, including uniqueness of its isomorphism.
-All topoi of the indicated universes are tested, without a choice of presentation. -/
+All topoi of the indicated universes are tested, without a choice of presentation.
+Source: ILO XI Theorem 1.4. -/
 def IsUniversal {X Y S P : Type (u + 1)} [Category.{u} X] [Category.{u} Y]
     [Category.{u} S] [Category.{u} P]
     (f : GeometricMorphism X S) (g : GeometricMorphism Y S)
@@ -170,7 +178,8 @@ def IsUniversal {X Y S P : Type (u + 1)} [Category.{u} X] [Category.{u} Y]
           Functor.isoWhiskerRight γ p₂.direct ≪≫ β' = β
 
 /-- The defining pullback formula, with its actual structural maps; it is required for
-all compatible lifts, hence in particular for the universal lift. -/
+all compatible lifts, hence in particular for the universal lift.
+Source: ILO XI §1.6, formula (1.a). -/
 def HasLiftFormula (J₁ : Pretopology C₁) (J₂ : Pretopology C₂) (K : Pretopology D)
     (f : GeometricMorphism (Sheaf J₁.toGrothendieck (Type u))
       (Sheaf K.toGrothendieck (Type u)))
@@ -204,52 +213,5 @@ def HasLiftFormula (J₁ : Pretopology C₁) (J₂ : Pretopology C₂) (K : Pret
         (a.inverse.map ((associated J₁.toGrothendieck).map Z.hom.1 ≫ ηF.inv.app Z.right) ≫
           (GeometricMorphism.inverseMate t).app ((associated K.toGrothendieck).obj Z.right))
         (b.inverse.map ((associated J₂.toGrothendieck).map Z.hom.2 ≫ ηG.inv.app Z.right))
-
-/-- The triple-site construction has its stated projections, canonical orientation,
-universal compatible lift, and inverse-image pullback formula. -/
-theorem universal (J₁ : Pretopology C₁) (J₂ : Pretopology C₂) (K : Pretopology D)
-    [F.IsContinuous K.toGrothendieck J₁.toGrothendieck]
-    [G.IsContinuous K.toGrothendieck J₂.toGrothendieck]
-    (f : GeometricMorphism (Sheaf J₁.toGrothendieck (Type u))
-      (Sheaf K.toGrothendieck (Type u)))
-    (g : GeometricMorphism (Sheaf J₂.toGrothendieck (Type u))
-      (Sheaf K.toGrothendieck (Type u)))
-    (ηF : associated K.toGrothendieck ⋙ f.inverse ≅ F ⋙ associated J₁.toGrothendieck)
-    (ηG : associated K.toGrothendieck ⋙ g.inverse ≅ G ⋙ associated J₂.toGrothendieck) :
-    ∃ (p₁ : GeometricMorphism (Sheaf (topology J₁ J₂ F G) (Type u))
-        (Sheaf J₁.toGrothendieck (Type u)))
-      (p₂ : GeometricMorphism (Sheaf (topology J₁ J₂ F G) (Type u))
-        (Sheaf J₂.toGrothendieck (Type u)))
-      (π₁ : associated J₁.toGrothendieck ⋙ p₁.inverse ≅
-        first F G ⋙ associated (topology J₁ J₂ F G))
-      (π₂ : associated J₂.toGrothendieck ⋙ p₂.inverse ≅
-        second F G ⋙ associated (topology J₁ J₂ F G))
-      (τ : (p₂.comp g).direct ⟶ (p₁.comp f).direct),
-      IsUniversal.{u, e, ve} f g p₁ p₂ τ ∧
-      HasLiftFormula.{u, e, ve} F G J₁ J₂ K f g ηF ηG p₁ p₂ π₁ π₂ τ ∧
-      (∀ (Q : Type (u + 1)) [Category.{u} Q], IsGrothendieckTopos.{u} Q →
-        ∀ (q₁ : GeometricMorphism Q (Sheaf J₁.toGrothendieck (Type u)))
-          (q₂ : GeometricMorphism Q (Sheaf J₂.toGrothendieck (Type u)))
-          (σ : (q₂.comp g).direct ⟶ (q₁.comp f).direct),
-          IsUniversal.{u, u + 1, u} f g q₁ q₂ σ →
-          ∃ (h : GeometricMorphism Q (Sheaf (topology J₁ J₂ F G) (Type u)))
-            (α : (h.comp p₁).direct ≅ q₁.direct) (β : (h.comp p₂).direct ≅ q₂.direct),
-            paste f g p₁ p₂ τ h q₁ q₂ α β = σ ∧ h.direct.IsEquivalence ∧
-            ∀ (h' : GeometricMorphism Q (Sheaf (topology J₁ J₂ F G) (Type u)))
-              (α' : (h'.comp p₁).direct ≅ q₁.direct)
-              (β' : (h'.comp p₂).direct ≅ q₂.direct),
-              paste f g p₁ p₂ τ h' q₁ q₂ α' β' = σ →
-              ∃! γ : h.direct ≅ h'.direct,
-                Functor.isoWhiskerRight γ p₁.direct ≪≫ α' = α ∧
-                Functor.isoWhiskerRight γ p₂.direct ≪≫ β' = β) ∧
-      ∀ V : D,
-        ∃ (_ : IsIso ((associated (topology J₁ J₂ F G)).map
-          (toFirst F G (middle F G V)))),
-        (GeometricMorphism.inverseMate τ).app ((associated K.toGrothendieck).obj V) =
-          p₁.inverse.map (ηF.hom.app V) ≫ π₁.hom.app (F.obj V) ≫
-          inv ((associated (topology J₁ J₂ F G)).map (toFirst F G (middle F G V))) ≫
-          (associated (topology J₁ J₂ F G)).map (toSecond F G (middle F G V)) ≫
-          π₂.inv.app (G.obj V) ≫ p₂.inverse.map (ηG.inv.app V) := by
-  sorry
 
 end CategoryTheory.OrientedProduct

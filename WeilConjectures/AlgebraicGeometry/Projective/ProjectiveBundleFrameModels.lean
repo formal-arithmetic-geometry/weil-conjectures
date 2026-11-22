@@ -52,9 +52,4 @@ structure ProjectiveBundleFrameModels (n : ℕ) where
     (U : B.Opens) (e : B.ModuleFrame F U (n + 1)),
       ProjectiveBundleFrameChart (bundle B F hF) n U e
 
-/-- Existence of the frame models, without the properness or coherence conclusions. -/
-theorem exists_projectiveBundleFrameModels (n : ℕ) :
-    Nonempty (ProjectiveBundleFrameModels.{u} n) := by
-  sorry
-
 end AlgebraicGeometry

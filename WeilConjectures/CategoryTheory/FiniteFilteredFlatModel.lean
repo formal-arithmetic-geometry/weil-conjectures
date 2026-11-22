@@ -26,7 +26,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.Algebra.Homology.HomotopyCategory.MappingCocone
 
-/-! # Split flat models with a fixed finite filtration
+/-! # Split flat filtered complexes and the convolution filtration
 -/
 
 @[expose] public section
@@ -107,39 +107,5 @@ def finiteFilteredConvolutionStep
   imageSubobject (Sigma.desc (fun p : ℤ =>
     HomologicalComplex.tensorHom (P.filtration.F p).arrow
       (Q.filtration.F (r - p)).arrow))
-
-/--
-Every bounded-above fixed-interval filtered complex admits a split-flat model,
-the corresponding localized filtered homotopy categories are equivalent, and
-ordinary total tensor with the model preserves graded quasi-isomorphisms for any
-uniformly finite filtration on the right. -/
-theorem finiteFilteredFlatModel
-    (a b : ℤ) (hab : a ≤ b)
-    (M : UniformFilteredComplexes (finiteFilteredModules J R) (some (a, b))
-      (CochainComplex.minus (finiteFilteredModules J R))) :
-    (∃ K : UniformFilteredComplexes (finiteFilteredModules J R) (some (a, b))
-        (CochainComplex.minus (finiteFilteredModules J R)),
-      IsSplitFlatFiltered (J := J) R K.obj ∧
-      ∃ f : K.obj ⟶ M.obj,
-        (∀ p : ℤ, QuasiIso (WeilFilteredObject.gradedMapSteps f p))) ∧
-    (finiteFilteredLocalizationComparison (J := J) R a b).IsEquivalence ∧
-    (∀ (P : UniformFilteredComplexes (finiteFilteredModules J R) (some (a, b))
-          (CochainComplex.minus (finiteFilteredModules J R))),
-      IsSplitFlatFiltered (J := J) R P.obj →
-      ∀ {Q Q' : WeilFilteredObject (finiteFilteredComplex J R)},
-        Q.filtration.IsFinite → Q'.filtration.IsFinite →
-        ∀ g : Q ⟶ Q',
-          (∀ p : ℤ, QuasiIso (WeilFilteredObject.gradedMapSteps g p)) →
-          ∃ (FT : DecreasingFiltration (HomologicalComplex.tensorObj P.obj.obj Q.obj))
-            (FT' : DecreasingFiltration (HomologicalComplex.tensorObj P.obj.obj Q'.obj))
-            (t : (⟨HomologicalComplex.tensorObj P.obj.obj Q.obj, FT⟩ :
-                WeilFilteredObject (finiteFilteredComplex J R)) ⟶
-              ⟨HomologicalComplex.tensorObj P.obj.obj Q'.obj, FT'⟩),
-            (∀ r : ℤ, FT.F r = finiteFilteredConvolutionStep (J := J) R P.obj Q r) ∧
-            (∀ r : ℤ, FT'.F r = finiteFilteredConvolutionStep (J := J) R P.obj Q' r) ∧
-            FT.IsFinite ∧ FT'.IsFinite ∧
-            t.hom = HomologicalComplex.tensorHom (𝟙 P.obj.obj) g.hom ∧
-            (∀ r : ℤ, QuasiIso (WeilFilteredObject.gradedMapSteps t r))) := by
-  sorry
 
 end CategoryTheory
