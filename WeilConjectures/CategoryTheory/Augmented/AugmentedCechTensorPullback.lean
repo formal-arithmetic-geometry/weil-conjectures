@@ -181,7 +181,6 @@ import WeilConjectures.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.Algebra.Homology.DerivedInternalHom
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
-import WeilConjectures.CategoryTheory.Augmented.AugmentedCechObjectPullback
 import WeilConjectures.CategoryTheory.Ringed.Tensor.RingedTensorComparisonIndependent
 
 /-! # Pullback of augmented extended Cech tensor actions
