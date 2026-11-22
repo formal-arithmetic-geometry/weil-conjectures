@@ -57,3 +57,27 @@ Newly exposed M2 cost: unclassified; no causal M2 intervention is valid.
 Unclassified share: 100% of the O recursive-call and exclusive-time attribution for this phase.
 Remaining uncertainty: a READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## MPRWE round 2 (READY3.1)
+
+At revision `2e92d5989ff`, the non-identity A3 matched probe used 54 calls, 0.141 ms comparison-exclusive and 0.540 ms reduction-exclusive (0.681 ms wall).
+
+### B. Original provenance
+
+Root 2405 has complete aggregate coverage: 235,750 calls and 1,379.748 ms comparison-exclusive time. Selected raw reruns did not retain this root ID; no raw subtree is claimed.
+
+| Category | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.050 | 0.004% |
+| M1 | 177,218 | 1,357.675 | 98.400% |
+| M2 | 1,285 | 18.319 | 1.328% |
+| Matched | 57,236 | 3.520 | 0.255% |
+| Unclassified | 10 | 0.184 | 0.013% |
+
+### C. Intervention and restoration
+
+`O1-prefix-aligned` changes the first visible root and still runs to 9,426,253 calls / 43,830.207 ms comparison-exclusive; it is a negative, root-changing control, not a valid selective C intervention. The supplied restoration probe fails before the target proof with unknown module `HeadAuditTools`.
+
+### 9. Outcome
+
+**Outcome C (M1 propagation).** The original work is 98.400% M1 with only 1.328% M2. The first-leaf intervention is invalid for causal C, but provenance itself shows no M2-dominated amplification.
+

@@ -57,3 +57,27 @@ Newly exposed M2 cost: unclassified; no causal M2 intervention is valid.
 Unclassified share: 100% of the O recursive-call and exclusive-time attribution for this phase.
 Remaining uncertainty: a READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## MPRWE round 2 (READY3.1)
+
+The non-identity A3 matched probe used 10 calls, 0.058 ms comparison-exclusive and 0.001 ms reduction-exclusive (0.060 ms wall).
+
+### B. Original provenance
+
+Root 1633 has complete aggregate coverage: 3,180,470 calls and 21,549.825 ms comparison-exclusive time. A selected raw rerun captured 4,124 traced calls and 10,000 raw events; representative M1 nodes include `DerivedCategory.isRightDerivedFunctor_internalHomQhObj_comp_tensorLeft`, `DerivedCategory.tensorLeftQhObjCounit`, `EquivLike.coe`, and `HomotopyCategory.tensorHomAdjunction`.
+
+| Category | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.146 | 0.001% |
+| M1 | 2,390,795 | 21,498.522 | 99.762% |
+| M2 | 22 | 0.295 | 0.001% |
+| Matched | 789,652 | 50.862 | 0.236% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+### C. Intervention and restoration
+
+`O1-hv-aligned` changes the root; the aligned control completes in 2 calls / 0.141 ms comparison-exclusive. It is invalid as selective C. The supplied restoration is a 2-call / 0.206 ms comparison control and does not reproduce O.
+
+### 9. Outcome
+
+**Outcome C (M1 propagation).** 99.762% of original exclusive time is M1 and M2 is negligible. READY3.1 resolves the former provenance uncertainty without relying on the invalid whole-root ablation.
+

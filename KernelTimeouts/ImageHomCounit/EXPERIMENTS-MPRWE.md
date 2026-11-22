@@ -57,3 +57,27 @@ Newly exposed M2 cost: unclassified; no causal M2 intervention is valid.
 Unclassified share: 100% of the O recursive-call and exclusive-time attribution for this phase.
 Remaining uncertainty: a READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## MPRWE round 2 (READY3.1)
+
+The non-identity A3 matched probe used 28 calls, 0.102 ms comparison-exclusive and 0.088 ms reduction-exclusive (0.190 ms wall).
+
+### B. Original provenance
+
+Root 2129 has complete aggregate coverage: 6,359,958 calls and 42,708.813 ms comparison-exclusive time. A selected raw rerun captured 3,773 traced calls and 10,000 raw events; representatives include `DerivedCategory.tensorHomAdjunctionQhObj`, `DerivedCategory.instMonoidalCategory._aux_5`, and `CategoryTheory.Functor.proj`.
+
+| Category | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.302 | 0.001% |
+| M1 | 4,781,271 | 42,606.571 | 99.761% |
+| M2 | 276 | 2.863 | 0.007% |
+| Matched | 1,578,409 | 99.064 | 0.232% |
+| Unclassified | 1 | 0.013 | 0.000% |
+
+### C. Intervention and restoration
+
+`O1-endpoint-aligned` removes the root and completes in 1 call / 0.083 ms comparison-exclusive; it is invalid as selective C. The supplied restoration completes at 9,539,325 calls, 37,162.499 ms comparison-exclusive and 38,321.502 ms reduction-exclusive, but is a distinct restoration source snapshot rather than a strict identity baseline.
+
+### 9. Outcome
+
+**Outcome C (M1 propagation).** M1 accounts for 99.761%; M2 is 0.007%. Raw representatives show ordinary downstream transport work, but no M2 cascade of material size.
+

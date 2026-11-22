@@ -57,3 +57,29 @@ Newly exposed M2 cost: unclassified; no causal M2 intervention is valid.
 Unclassified share: 100% of the O recursive-call and exclusive-time attribution for this phase.
 Remaining uncertainty: a READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## MPRWE round 2 (READY3.1)
+
+The fixed READY3.1 stage1 analyzer was run at current-case revision `2e92d5989ff` with one Lean thread. The matched probe is a non-identity A3 diagnostic: 640 calls, 3.570 ms comparison-exclusive, 0.880 ms reduction-exclusive (4.450 ms wall). It is not a strict A0/A1 baseline.
+
+### B. Original provenance
+
+The original root was 9759. Aggregate coverage is complete: 239,340,712 calls and 880,519.949 ms comparison-exclusive time (raw selected reruns had unstable root IDs, so no selected raw subtree is claimed).
+
+| Category | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.026 | 0.000% |
+| M1 | 130,197,227 | 655,462.866 | 74.441% |
+| M2 | 40,495,866 | 210,843.925 | 23.947% |
+| Matched | 68,647,618 | 14,213.132 | 1.614% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+The root M0 is followed by both a large dependent M1 continuation and a substantial M2 reduction cascade; the aggregate partition is the evidence for the M2 classification.
+
+### C. Intervention and restoration
+
+The supplied whole-root alignment control completes in 2 calls (0.817 ms comparison-exclusive) and therefore changes/removes M0; it is invalid as a selective descendant-only C intervention. No type-correct M0-preserving descendant alignment was available. The supplied `Restored.lean` is a 6-call, 0.024 ms comparison control and does not reproduce the original root.
+
+### 9. Outcome
+
+**Outcome D (mixed M1/M2 amplification).** READY3.1 resolves the former READY2 uncertainty: M1 dominates, but M2 accounts for 23.947% of exclusive comparison time. C's causal effect is not separately measurable because the available source control changes the root.
+

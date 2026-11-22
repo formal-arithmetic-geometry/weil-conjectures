@@ -57,3 +57,27 @@ Newly exposed M2 cost: unclassified; no causal M2 intervention is valid.
 Unclassified share: 100% of the O recursive-call and exclusive-time attribution for this phase.
 Remaining uncertainty: a READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## MPRWE round 2 (READY3.1)
+
+The non-identity A3 matched probe used 15 calls, 0.027 ms comparison-exclusive and 0.003 ms reduction-exclusive (0.030 ms wall).
+
+### B. Original provenance
+
+Root 5100 has complete aggregate coverage: 17,310,168 calls and 76,192.584 ms comparison-exclusive time. A selected raw rerun captured 3,222 traced calls and 10,000 raw events; its top representatives were `AlgebraicGeometry.Scheme.Hom.toLRSHom` (M1), `CategoryTheory.Limits.IsLimit.proj` versus `CategoryTheory.Iso.proj` (M2), `LinearEquiv.proj`, `AlgebraicGeometry.PresheafedSpace.comp`, and `DFunLike.coe`.
+
+| Category | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.008 | 0.000% |
+| M1 | 7,988,264 | 47,271.645 | 62.046% |
+| M2 | 4,357,093 | 27,862.546 | 36.568% |
+| Matched | 4,964,810 | 1,058.386 | 1.389% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+### C. Intervention and restoration
+
+`O1-left-ring-restored` reaches the deterministic timeout and then the unknown constant `AlgebraicGeometry.WeilSheaf.IsReal.exists_isPunctuallyPureOfWeight_cokernel_detWeight`; ring alignment therefore moves/fails the root and is invalid as selective C. The supplied restoration has the same timeout/unknown-constant failure.
+
+### 9. Outcome
+
+**Outcome D (mixed M1/M2 amplification).** M2 is 36.568% of exclusive time, with raw representatives showing projection and coercion work. No type-correct M0-preserving descendant intervention was available, so the causal C effect is not separately estimated.
+

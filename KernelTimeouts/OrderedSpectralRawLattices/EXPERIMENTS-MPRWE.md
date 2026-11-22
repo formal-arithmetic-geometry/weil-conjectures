@@ -57,3 +57,27 @@ Newly exposed M2 cost: unclassified; no causal M2 intervention is valid.
 Unclassified share: 100% of the O recursive-call and exclusive-time attribution for this phase.
 Remaining uncertainty: a READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## MPRWE round 2 (READY3.1)
+
+The non-identity A3 matched probe used 84 calls, 0.157 ms comparison-exclusive and 0.149 ms reduction-exclusive (0.307 ms wall).
+
+### B. Original provenance
+
+Root 4160 has complete aggregate coverage: 18,944,709 calls and 58,992.669 ms comparison-exclusive time. Selected raw reruns had unstable root IDs, so no selected raw subtree is claimed.
+
+| Category | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.285 | 0.000% |
+| M1 | 8,320,909 | 37,694.410 | 63.902% |
+| M2 | 3,499,646 | 20,850.695 | 35.347% |
+| Matched | 7,124,151 | 447.211 | 0.758% |
+| Unclassified | 2 | 0.067 | 0.000% |
+
+### C. Intervention and restoration
+
+`O1-domain-disabled` changes the root and reaches the deterministic timeout/unknown constant `AlgebraicGeometry.ProEtale.small_spectral_raw_lattices`; it is invalid as selective C. The supplied restoration has the same failure. The complete aligned control changes the root and is likewise negative evidence only.
+
+### 9. Outcome
+
+**Outcome D (mixed M1/M2 amplification).** M2 contributes 35.347% of exclusive time. The available route controls alter M0, so no separate causal C effect is claimed.
+

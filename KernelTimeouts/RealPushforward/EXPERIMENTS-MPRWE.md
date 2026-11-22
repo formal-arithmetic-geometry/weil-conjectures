@@ -57,3 +57,27 @@ Newly exposed M2 cost: unclassified; no causal M2 intervention is valid.
 Unclassified share: 100% of the O recursive-call and exclusive-time attribution for this phase.
 Remaining uncertainty: a READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## MPRWE round 2 (READY3.1)
+
+The non-identity A3 matched probe used 15 calls, 0.027 ms comparison-exclusive and 0.003 ms reduction-exclusive (0.030 ms wall).
+
+### B. Original provenance
+
+Root 2005 has complete aggregate coverage: 17,340,236 calls and 75,988.013 ms comparison-exclusive time. A selected raw rerun captured 3,122 traced calls and 10,000 raw events; representatives include `Scheme.Hom.toLRSHom`, `Scheme.Hom.proj`, `ContinuousMap.comp`, and `CategoryTheory.Limits.IsLimit.proj` versus `CategoryTheory.Iso.proj`.
+
+| Category | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.014 | 0.000% |
+| M1 | 8,002,209 | 46,710.171 | 61.473% |
+| M2 | 4,364,762 | 28,270.299 | 37.204% |
+| Matched | 4,973,262 | 1,007.514 | 1.326% |
+| Unclassified | 2 | 0.014 | 0.000% |
+
+### C. Intervention and restoration
+
+`O1-polynomial-aligned` removes the root and completes in 1 call / 0.014 ms comparison-exclusive; it is invalid as selective C. The supplied restoration is a 3-call / 0.075 ms comparison control and does not reproduce O.
+
+### 9. Outcome
+
+**Outcome D (mixed M1/M2 amplification).** M2 contributes 37.204% of exclusive time. The raw representatives show substantial projection/coercion descendants, but no type-correct M0-preserving C intervention was available.
+

@@ -57,3 +57,27 @@ Newly exposed M2 cost: unclassified; no causal M2 intervention is valid.
 Unclassified share: 100% of the O recursive-call and exclusive-time attribution for this phase.
 Remaining uncertainty: a READY3 trace with parent-child IDs, reduction predecessors, paths, and exclusive category timers is required before deciding between intrinsic matched work, M1 propagation, and M2 cascade.
 
+## MPRWE round 2 (READY3.1)
+
+The non-identity A3 matched probe used 881 calls, 2.879 ms comparison-exclusive and 2.662 ms reduction-exclusive (5.541 ms wall).
+
+### B. Original provenance
+
+Root 2281 has complete aggregate coverage: 3,897,905 calls and 24,659.468 ms comparison-exclusive time. A selected raw rerun captured 3,685 traced calls and 10,000 raw events; representative M1 nodes include `DFunLike.coe`, `CategoryTheory.Functor.proj`, `LinearMap.instAdd._proof_2`, and `LinearMap.proj`.
+
+| Category | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.015 | 0.000% |
+| M1 | 2,961,163 | 24,596.022 | 99.743% |
+| M2 | 9 | 0.045 | 0.000% |
+| Matched | 936,732 | 63.385 | 0.257% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+### C. Intervention and restoration
+
+`O1-hR-aligned` removes the root bundle and completes in 2 calls / 0.476 ms comparison-exclusive; it is invalid as selective C. The supplied restoration is also a 2-call / 0.354 ms control, not O.
+
+### 9. Outcome
+
+**Outcome C (M1 propagation).** M1 accounts for 99.743% and M2 for 0.000% of exclusive time. The expensive original work is inherited propagation from the M0 hR representation.
+
