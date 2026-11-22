@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.ToPadicAlgClLowerStarHom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.IntegralToPadicAlgClUpperShriekCompatibility
 public import WeilConjectures.TraceFormula.ExternalProductExtendScalars
+public import WeilConjectures.TraceFormula.IntegersToPadicAlgClLowerShriek
 public import WeilConjectures.TraceFormula.IntegersToPadicAlgClLowerStar
 public import WeilConjectures.TraceFormula.IntegralCompactPullback
 
@@ -391,17 +392,6 @@ theorem integersToPadicAlgCl_map_unit_app (h : Y ⟶ X) (K : Dᵇc(X.left)⟦�
   simp only [Functor.comp_obj, Functor.comp_map, boundedConstructibleToPadicAlgCl_eq] at hn
   simp only [← hn, reassoc_of% h₁]
   exact h₂
-
-/-- **`Rh_! ≅ Rh_*` commutes with the coefficient comparisons** for a proper `h`: the
-comparison `T Rh_! ≅ Rh_! T` corresponds to the comparison `T Rh_* ≅ Rh_* T` under the
-identifications `Rh_! ≅ Rh_*` over `𝒪_E` and over `ℚ̄_ℓ`. -/
-theorem integersToPadicAlgCl_map_lowerShriekIsoLowerStar_inv_app (h : Y ⟶ X) [IsProper h.left]
-    (M : Dᵇc(Y.left)⟦𝒪⟧) :
-    (𝐓 X).map ((boundedConstructibleLowerShriekIsoLowerStar_padicIntegers ℓ E.1 h).inv.app M) ≫
-        (boundedConstructibleLowerShriekIntegersToPadicAlgClIso ℓ E h).inv.app M =
-      (boundedConstructibleLowerStarIntegersToPadicAlgClIso ℓ E h).hom.app M ≫
-        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ h).inv.app ((𝐓 Y).obj M) := by
-  sorry
 
 /-- **The compactly supported comparison commutes with composition** (for `𝒪_E ⟶ ℚ̄_ℓ`):
 for `f : Y ⟶ X` and `g : X ⟶ Z`, the comparison `T R(f ≫ g)_! ≅ R(f ≫ g)_! T` followed by the
