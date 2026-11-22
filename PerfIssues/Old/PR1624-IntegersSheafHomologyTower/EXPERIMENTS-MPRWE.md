@@ -59,6 +59,14 @@ separate restored endpoint timing was available.
 
 ## MPRWE round 2
 
+## MPRWE round 4 (READY3.2; supersedes earlier tables)
+
+The fresh O probe failed before the intended expensive root: the source
+reported unknown free variable _fvar.17433 and “final iso argument did not
+Kernel-check”. The only roots were small setup roots (285,192 and 285,229
+calls), so no valid O root, analyzed shares, or C comparison is reported.
+Analyzer READY3.2. Outcome: E (type-level source obstruction).
+
 READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
 root had 6,598,545 calls, depth 88, and 40,848.850 ms aggregate
 comparison-exclusive time. Aggregate records are complete; raw selected-root

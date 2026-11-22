@@ -70,6 +70,26 @@ floor and an unclassified mismatch amplification.
 
 ## MPRWE round 2
 
+## MPRWE round 4 (READY3.2; supersedes earlier tables)
+
+Fresh O root 6006 matched between counters and trace: 6,670,198 calls.
+Counter/trace comparison-exclusive times were 29,691.693 / 53,056.120 ms;
+trace reduction was 41,315.381 ms. Analyzer READY3.2; aggregate records are
+complete. Raw coverage was 179,920/6,670,198 calls (2.7%; 1,956.786 ms).
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.024 | 0.000% |
+| M1 | 5,006,059 | 52,855.754 | 99.622% |
+| M2 | 9,121 | 38.120 | 0.072% |
+| Matched | 1,655,017 | 162.222 | 0.306% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+Manual top-five aggregate exclusive times: M1 43878.933, 8976.006, 0.146,
+0.123, 0.074 ms; M2 20.904, 17.160, 0.029, 0.024, 0.002 ms; Matched
+143.931, 18.254, 0.019, 0.009, 0.003 ms. M0 is the root entry. C is invalid:
+major-premise alignment changes the root and removes M0. Outcome: C.
+
 READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
 root had 6,670,198 calls, depth 213, and 45,113.186 ms aggregate
 comparison-exclusive time. The raw stream covered 609 calls (5.460 ms); the

@@ -58,6 +58,27 @@ is claimed.
 
 ## MPRWE round 2
 
+## MPRWE round 4 (READY3.2; supersedes earlier tables)
+
+Fresh O root 7269 matched between counters and trace: 2,563,145 calls.
+Counter/trace comparison-exclusive times were 10,590.442 / 28,045.607 ms;
+trace reduction was 22,927.540 ms. Analyzer READY3.2; aggregate records are
+complete. Raw coverage was 180,953/2,563,145 calls (7.1%; 2,487.607 ms).
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.022 | 0.000% |
+| M1 | 1,924,504 | 27,919.967 | 99.553% |
+| M2 | 1,029 | 11.945 | 0.043% |
+| Matched | 637,607 | 113.574 | 0.405% |
+| Unclassified | 4 | 0.098 | 0.000% |
+
+Manual top-five aggregate exclusive times: M1 5898.245, 3304.450, 3289.837,
+3215.088, 3208.461 ms; M2 1.607, 1.275, 1.255, 1.255, 0.968 ms; Matched
+57.089, 19.038, 9.164, 5.224, 4.548 ms; Unclassified 0.064, 0.035 ms.
+M0 is the root entry. C is invalid because provider alignment changes the
+dependent root. Outcome: C.
+
 READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
 root had 2,573,989 calls, depth 95, and 17,289.421 ms aggregate
 comparison-exclusive time. Aggregate records are complete; the raw cap was

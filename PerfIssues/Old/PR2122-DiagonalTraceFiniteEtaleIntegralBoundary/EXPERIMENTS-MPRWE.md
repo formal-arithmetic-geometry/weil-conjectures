@@ -58,6 +58,28 @@ fresh R timing is claimed.
 
 ## MPRWE round 2
 
+## MPRWE round 4 (READY3.2; supersedes earlier tables)
+
+Fresh O root 35261 matched between counters and trace: 2,257,184 calls.
+Counter/trace comparison-exclusive times were 13,239.259 / 16,827.104 ms;
+trace reduction was 14,915.670 ms. Analyzer READY3.2; aggregate records are
+complete. Raw coverage was 177,324/2,257,184 calls (7.9%; 1,911.359 ms).
+Final source diagnostics occurred after the selected root.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.037 | 0.000% |
+| M1 | 1,797,805 | 16,389.296 | 97.397% |
+| M2 | 51,859 | 366.278 | 2.177% |
+| Matched | 406,401 | 60.616 | 0.360% |
+| Unclassified | 1,118 | 10.876 | 0.065% |
+
+Manual top-five aggregate exclusive times: M1 6818.808, 1822.520, 1281.151,
+1224.870, 1185.153 ms; M2 359.044, 2.088, 1.957, 1.229, 1.116 ms; Matched
+38.903, 9.336, 2.614, 1.667, 1.642 ms; Unclassified 10.876 ms. M0 is the
+root entry. C is invalid because recursor branch extraction changes the
+dependent root. Outcome: C.
+
 The dependency is present in the current olean tree. Fresh READY3.1 counter
 and trace runs completed with the exact `Before.lean`/`OriginalRecursor`
 source. The selected root had 2,227,198 calls, depth 93, and 13,821.715 ms

@@ -65,6 +65,28 @@ the earlier direct pair restoration from the meta probe.
 
 ## MPRWE round 2
 
+## MPRWE round 4 (READY3.2; supersedes earlier tables)
+
+Fresh O root 65966 matched between counters and trace: 11,757,788 calls.
+Counter/trace comparison-exclusive times were 48,799.297 / 76,455.101 ms;
+trace reduction was 49,845.243 ms. Analyzer READY3.2; aggregate records are
+complete. Raw coverage was 186,547/11,757,788 calls (1.6%; 2,039.599 ms).
+Source diagnostics occurred after the selected root, which itself completed.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.777 | 0.001% |
+| M1 | 8,111,028 | 76,000.328 | 99.406% |
+| M2 | 4,686 | 51.939 | 0.068% |
+| Matched | 3,642,041 | 401.341 | 0.525% |
+| Unclassified | 32 | 0.716 | 0.001% |
+
+Manual top-five aggregate exclusive times: M1 75363.545, 356.147, 278.869,
+0.273, 0.218 ms; M2 50.855, 0.442, 0.419, 0.100, 0.038 ms; Matched
+398.809, 1.335, 0.912, 0.057, 0.053 ms; Unclassified 0.477, 0.122, 0.118
+ms. M0 is the root entry. C is invalid because outer-major alignment changes
+the root and removes M0. Outcome: C.
+
 READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
 root had 11,757,788 calls, depth 125, and 68,508.492 ms aggregate
 comparison-exclusive time. No raw calls from this root survived the cap, but
