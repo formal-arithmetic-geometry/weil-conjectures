@@ -58,3 +58,30 @@ work, Outcome **D/E**, with no defensible M1/M2 split under READY2.
 The restored source snapshot retains the original declaration context; the R
 source is included for replay, but no separate selective restoration timing was
 available.
+
+## MPRWE round 2
+
+READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
+root had 10,904,899 calls, depth 61, and 28,458.907 ms aggregate
+comparison-exclusive time. Aggregate records are complete; raw selected-root
+coverage was 0 because earlier roots consumed the cap.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.032 | 0.000% |
+| M1 | 2,619,482 | 18,883.772 | 66.352% |
+| M2 | 1,512,663 | 7,091.522 | 24.928% |
+| Matched | 6,772,753 | 2,483.581 | 8.727% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+The top M2 groups are the generated-field paths under
+`binder_body[2]/argument[2]/argument[6]/argument[5]`, with the largest group
+1,807.321 ms. The corresponding generated-field Matched groups are larger in
+calls but total 2,483.581 ms. This is a mixed mechanism: M1 is largest, but
+M2 is a material quarter of exclusive time and Matched work is measurable.
+
+The generated-field replacement changes the generated provider/domain and
+removes M0, so it is invalid for C. No type-correct descendant-only
+alignment was found; the existing restoration source is byte-identical to O
+and restores the original field. Outcome: **D** (M1 plus a substantial M2
+contribution, with a smaller intrinsic Matched component).

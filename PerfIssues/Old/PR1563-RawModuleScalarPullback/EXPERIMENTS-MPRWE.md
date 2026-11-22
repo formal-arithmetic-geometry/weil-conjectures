@@ -55,3 +55,29 @@ work. The residual aligned root shows a large intrinsic/context floor. Outcome
 **D/E**: mixed evidence with all recursive provenance Unclassified. The restored
 source snapshot retains the original declaration context; no separate R timing
 is claimed.
+
+## MPRWE round 2
+
+READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
+root had 2,573,989 calls, depth 95, and 17,289.421 ms aggregate
+comparison-exclusive time. Aggregate records are complete; the raw cap was
+spent on earlier roots.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.017 | 0.000% |
+| M1 | 1,954,860 | 17,243 | 99.733% |
+| M2 | 687 | 4.341 | 0.025% |
+| Matched | 618,436 | 41.688 | 0.241% |
+| Unclassified | 5 | 0.108 | 0.001% |
+
+The residual root is overwhelmingly M1. The reviewed M2 paths are nested
+composition/provider arguments (the largest is argument 5 under the second
+composition); they are tiny compared with inherited work. Matched groups in
+the same paths total only 0.241%, so the earlier 20.699 s aligned residual is
+not evidence of a large M2 cascade.
+
+The provider replacement in the existing aligned probe changes the dependent
+root and removes M0, so it is invalid for C. No child-only M2 alignment
+type-checks under the original telescope. O and R snapshots are byte-identical;
+the earlier aligned residual was 20.699 s. Outcome: **C**.

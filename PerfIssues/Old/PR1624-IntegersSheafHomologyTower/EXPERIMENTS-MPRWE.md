@@ -56,3 +56,29 @@ expensive and alignment removes most work. The endpoint context is a mixed
 intrinsic/mismatch interaction, Outcome **D/E**; provenance is unclassified.
 The restored source snapshot retains the original declaration context; no
 separate restored endpoint timing was available.
+
+## MPRWE round 2
+
+READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
+root had 6,598,545 calls, depth 88, and 40,848.850 ms aggregate
+comparison-exclusive time. Aggregate records are complete; raw selected-root
+coverage was 0 because earlier roots consumed the cap.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.022 | 0.000% |
+| M1 | 5,215,138 | 40,770.605 | 99.809% |
+| M2 | 287 | 2.587 | 0.006% |
+| Matched | 1,383,111 | 75.410 | 0.185% |
+| Unclassified | 8 | 0.227 | 0.001% |
+
+The endpoint's large descendant groups are M1 continuations. The largest M2
+groups are isolated endpoint/proposition paths (the largest single group is
+0.645 ms); the corresponding matched paths are also small. This answers the
+endpoint question: the residual work is inherited, not a newly exposed
+mismatch cascade.
+
+The broad aligned endpoint changes the dependent telescope and removes M0, so
+it is invalid for C. No descendant-only M2 alignment type-checks under the
+original endpoint. O and R snapshots are byte-identical; the earlier aligned
+measurement was 5.256 s / 456,393 calls. Outcome: **C**.

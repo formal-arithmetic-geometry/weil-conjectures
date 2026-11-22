@@ -55,3 +55,30 @@ This case is Outcome **E** (insufficient provenance), blocked by the missing
 `GmRelativeKummer.olean` dependency and invalid standalone branch controls.
 The restored source snapshot is retained as a historical artifact only; no
 fresh R timing is claimed.
+
+## MPRWE round 2
+
+The dependency is present in the current olean tree. Fresh READY3.1 counter
+and trace runs completed with the exact `Before.lean`/`OriginalRecursor`
+source. The selected root had 2,227,198 calls, depth 93, and 13,821.715 ms
+aggregate comparison-exclusive time; aggregate records partition the complete
+root and the raw cap was consumed by earlier roots.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.041 | 0.000% |
+| M1 | 1,749,276 | 13,669.989 | 98.901% |
+| M2 | 12,631 | 121.003 | 0.876% |
+| Matched | 464,966 | 27.748 | 0.201% |
+| Unclassified | 324 | 2.933 | 0.021% |
+
+The dominant M2 path is the nested `argument[6]/argument[0]/argument[0]`
+branch (118.381 ms, including 12,529 calls); matched descendants on the same
+branch are only 1.740 ms. The other top matched groups are proposition-type
+paths in the recursor telescope. The root is therefore inherited M1 work with
+a small, measurable M2 contribution.
+
+The recursor branch extraction changes the motive and is invalid for C; no
+descendant-only M2 alignment type-checks under the original recursor. The
+restored source remains a historical artifact with no fresh R timing. Outcome:
+**C** (M1 dominates; M2 is below 1%).

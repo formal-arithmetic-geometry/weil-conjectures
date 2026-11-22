@@ -76,3 +76,34 @@ shares are Unclassified. The restored endpoint reproduces the expensive
 provider-sensitive comparison, which supports a mismatch-sensitive effect, but
 does not distinguish inherited from newly exposed work. Outcome **E** pending
 READY3 parent/path instrumentation; no claim of a mismatch cascade is made.
+
+## MPRWE round 2
+
+READY3.1-4.35.0 fresh counter and trace runs completed with the original
+probe. The selected root had 2,685,580 calls, depth 81, and 20,675.658 ms
+aggregate comparison-exclusive time. Aggregate records partition that full
+time; the 4,000 raw-event cap was consumed by earlier roots, so this selected
+root has 0 raw calls, but its aggregate path records are complete.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.011 | 0.000% |
+| M1 | 1,120,689 | 20,287.000 | 98.124% |
+| M2 | 12,041 | 61.836 | 0.299% |
+| Matched | 1,552,849 | 326.811 | 1.581% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+The two `Exists.choose` domains have the same high-cost M2 paths at
+`binder_domain[0]/argument[2]/argument[6]` and
+`binder_domain[0]/argument[3]/argument[7]`; the corresponding matched paths
+are much larger in calls but remain only 1.6% of exclusive time. This answers
+the domain question: the M2 paths are structurally parallel, while the cost
+is inherited M1 work. The top M2 and Matched aggregate groups were manually
+reviewed by path; no distinct high-cost M2 subtree was found.
+
+The only available C source replacement changes the provider at the root and
+removes M0, so it is invalid for C1. No type-correct descendant-only M2
+alignment was found. O and R source snapshots are byte-identical; the earlier
+R endpoint timing was 11,363 ms. Thus no causal C speedup is claimed and the
+restoration is consistent with the original mismatch. Outcome: **C** (M1
+dominates; M2 and Matched are measured and small).

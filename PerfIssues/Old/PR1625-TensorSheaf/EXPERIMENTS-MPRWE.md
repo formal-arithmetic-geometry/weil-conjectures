@@ -62,3 +62,30 @@ so the evidence supports mixed interaction (Outcome **D**) but not a measured
 M1/M2 split. All recursive provenance remains Unclassified under READY2.
 The restored source snapshot retains the declaration context; the R timing is
 the earlier direct pair restoration from the meta probe.
+
+## MPRWE round 2
+
+READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
+root had 11,757,788 calls, depth 125, and 68,508.492 ms aggregate
+comparison-exclusive time. No raw calls from this root survived the cap, but
+aggregate records partition the complete time.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.615 | 0.001% |
+| M1 | 8,111,028 | 68,146.125 | 99.471% |
+| M2 | 4,686 | 48.891 | 0.071% |
+| Matched | 3,642,041 | 312.109 | 0.456% |
+| Unclassified | 32 | 0.753 | 0.001% |
+
+The outer `.app` entry is cheap; the large descendant groups are M1
+continuations through the nested `.app`/projection telescope. The largest M2
+path is `binder_body[15]/argument[1]/argument[0]/argument[6]/argument[0]`,
+with 48.009 ms, while the corresponding matched group is 309.686 ms. This
+is a small M2 contribution and a small intrinsic matched contribution beside
+the M1 workload; no additional mismatch layer is cost-dominant.
+
+The outer-major replacement changes the root telescope and removes M0, so it
+is invalid for C. No descendant-only M2 alignment type-checks under the same
+dependent obligation. O and R snapshots are byte-identical; the earlier R
+timing was 109,892 ms. Outcome: **C**.

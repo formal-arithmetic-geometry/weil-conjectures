@@ -67,3 +67,31 @@ The matched application itself costs about 2.07 s, while O/R cost about
 but the READY2 trace cannot split it into M1 versus M2 or matched descendants.
 Outcome **E** (insufficient provenance), with a substantial known matched
 floor and an unclassified mismatch amplification.
+
+## MPRWE round 2
+
+READY3.1-4.35.0 fresh counter and trace runs completed. The selected original
+root had 6,670,198 calls, depth 213, and 45,113.186 ms aggregate
+comparison-exclusive time. The raw stream covered 609 calls (5.460 ms); the
+aggregate records cover the complete root.
+
+| Provenance | Calls | Exclusive ms | Share |
+|---|---:|---:|---:|
+| M0 | 1 | 0.015 | 0.000% |
+| M1 | 5,006,059 | 44,977.803 | 99.700% |
+| M2 | 9,121 | 32.504 | 0.072% |
+| Matched | 1,655,017 | 102.864 | 0.228% |
+| Unclassified | 0 | 0.000 | 0.000% |
+
+The `.app` entry is cheap relative to its descendants. The largest M1 paths
+are the `Functor.proj`, `HomologicalComplex.proj`, `Functor.whiskerLeft`, and
+`Functor.comp` continuations under arguments 6 and 7. The largest M2 groups
+are the parallel argument-6/argument-7 descendants and account for only
+0.072%; the expensive work is inherited M1, not a new mismatch cascade.
+Matched descendants are also small, so the A1 matched application control is
+only a diagnostic floor.
+
+The major-premise replacement changes the root and removes M0, so it is an
+invalid C control. No type-correct descendant-only M2 alignment was found.
+O and R snapshots are byte-identical; the earlier R direct timing was
+70,107 ms. Outcome: **C**.
